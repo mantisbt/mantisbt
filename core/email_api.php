@@ -1249,7 +1249,7 @@ function email_format_bug_message( $p_visible_bug_data ) {
 	# custom fields formatting
 	foreach( $p_visible_bug_data['custom_fields'] as $t_custom_field_name => $t_custom_field_data ) {
 		$t_message .= utf8_str_pad( lang_get_defaulted( $t_custom_field_name, null ) . ': ', $t_email_padding_length, ' ', STR_PAD_RIGHT );
-		$t_message .= string_custom_field_value_for_email( $t_custom_field_data['value'], $t_custom_field_data['type'] );
+		$t_message .= string_custom_field_value_for_email( $t_custom_field_data['value'], $t_custom_field_data );
 		$t_message .= " \n";
 	}
 
