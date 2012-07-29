@@ -1161,8 +1161,12 @@ function custom_field_validate( $p_field_id, $p_value ) {
 	$t_length = utf8_strlen( $p_value );
 	switch ($t_type) {
 		case CUSTOM_FIELD_TYPE_STRING:
+			# Empty fields are valid
+			if( $t_length == 0 ) {
+				break;
+			}
 			# Regular expression string validation
-			if( !is_blank( $t_valid_regexp ) && !is_blank( $p_value ) ) {
+			if( !is_blank( $t_valid_regexp ) ) {
 				$t_valid &= preg_match( "/$t_valid_regexp/", $p_value );
 			}
 			# Check the length of the string
@@ -1170,7 +1174,11 @@ function custom_field_validate( $p_field_id, $p_value ) {
 			$t_valid &= ( 0 == $t_length_max ) || ( $t_length <= $t_length_max );
 			break;
 		case CUSTOM_FIELD_TYPE_NUMERIC:
-			$t_valid &= ( $t_length == 0 ) || is_numeric( $p_value );
+			# Empty fields are valid
+			if( $t_length == 0 ) {
+				break;
+			}
+			$t_valid &= is_numeric( $p_value );
 			
 			# Check the length of the number
 			$t_valid &= ( 0 == $t_length_min ) || ( $t_length >= $t_length_min );
@@ -1178,8 +1186,12 @@ function custom_field_validate( $p_field_id, $p_value ) {
 			
 			break;
 		case CUSTOM_FIELD_TYPE_FLOAT:
+			# Empty fields are valid
+			if( $t_length == 0 ) {
+				break;
+			}
 			# Allow both integer and float numbers
-			$t_valid &= ( $t_length == 0 ) || is_numeric( $p_value ) || is_float( $p_value );
+			$t_valid &= is_numeric( $p_value ) || is_float( $p_value );
 			
 			# Check the length of the number
 			$t_valid &= ( 0 == $t_length_min ) || ( $t_length >= $t_length_min );
