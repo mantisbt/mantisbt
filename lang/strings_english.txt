@@ -1568,6 +1568,7 @@ If you requested this verification, visit the following URL to change your passw
 	ERROR_CATEGORY_NO_ACTION => 'No copy action was specified.',
 	ERROR_CATEGORY_NOT_FOUND => 'Category not found.',
 	ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT => 'Category "%1$s" not found for project "%2$s".',
+	ERROR_CATEGORY_CANNOT_DELETE_DEFAULT => 'This Category cannot be deleted, because it is defined as "Default Category For Moves".',
 	ERROR_VERSION_DUPLICATE => 'A version with that name already exists.',
 	ERROR_VERSION_NOT_FOUND => 'Version "%1$s" not found.',
 	ERROR_USER_NAME_INVALID => 'The username is invalid. Usernames may only contain Latin letters, numbers, spaces, hyphens, dots, plus signs and underscores.',
