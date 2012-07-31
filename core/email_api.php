@@ -948,6 +948,7 @@ function email_send( $p_email_data ) {
 	$mail->Sender = config_get( 'return_path_email' );
 	$mail->FromName = config_get( 'from_name' );
 	$mail->AddCustomHeader('Auto-Submitted:auto-generated');
+	$mail->AddCustomHeader('X-Auto-Response-Suppress: All');
 
 	if( OFF !== $t_debug_email ) {
 		$t_message = 'To: ' . $t_recipient . "\n\n" . $t_message;
