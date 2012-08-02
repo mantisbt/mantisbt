@@ -494,8 +494,8 @@ function user_create( $p_username, $p_password, $p_email = '',
 
 	# Users are added with protected set to FALSE in order to be able to update
 	# preferences.  Now set the real value of protected.
-	if( $c_protected ) {
-		user_set_field( $t_user_id, 'protected', 1 );
+	if( $p_protected ) {
+		user_set_field( $t_user_id, 'protected', $c_protected );
 	}
 
 	# Send notification email
