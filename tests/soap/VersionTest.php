@@ -27,6 +27,8 @@ require_once 'SoapBase.php';
  * Test fixture for version methods
  */
 class VersionTest extends SoapBase {
+	
+	const DATE_ORDER = '2015-10-29T12:59:14+00:00';
 
     private function getTestVersion() {
 
@@ -36,7 +38,8 @@ class VersionTest extends SoapBase {
 			'released' => true,
 			'description' => 'Test version',
 			'date_order' => '',
-            'obsolete' => false
+            'obsolete' => false,
+        	'date_order'=> self::DATE_ORDER
 		);
     }
 
@@ -63,7 +66,7 @@ class VersionTest extends SoapBase {
         $this->assertEquals(true, $version->released);
         $this->assertEquals('Test version', $version->description);
         $this->assertEquals($this->getProjectId(), $version->project_id);
-        $this->assertNotNull($version->date_order);
+        $this->assertEquals(self::DATE_ORDER, $version->date_order);
         $this->assertEquals(false, $version->obsolete);
     }
 
@@ -93,6 +96,7 @@ class VersionTest extends SoapBase {
         foreach ( $versions as $version ) {
         	if ( $version->id == $versionId ) { 
         		$this->assertEquals('1.1', $version->name);
+        		$this->assertEquals(self::DATE_ORDER, $version->date_order);
          		return;
         	}
         }
