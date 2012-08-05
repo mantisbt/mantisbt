@@ -37,7 +37,6 @@ class VersionTest extends SoapBase {
 			'name' => '1.0',
 			'released' => true,
 			'description' => 'Test version',
-			'date_order' => '',
             'obsolete' => false,
         	'date_order'=> self::DATE_ORDER
 		);
