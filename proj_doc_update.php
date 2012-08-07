@@ -74,9 +74,9 @@
 		$c_file_type = db_prepare_string( $v_type );
 		$t_file_size = filesize( $v_tmp_name );
 		$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
-        if ( $t_file_size > $t_max_file_size ) {
-            trigger_error( ERROR_FILE_TOO_BIG, ERROR );
-        }
+		if( $t_file_size > $t_max_file_size ) {
+			trigger_error( ERROR_FILE_TOO_BIG, ERROR );
+		}
 		$c_file_size = db_prepare_int( $t_file_size );
 
 		$t_method = config_get( 'file_upload_method' );
