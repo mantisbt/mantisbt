@@ -324,7 +324,7 @@ if ( ( $f_new_status >= $t_resolved ) ) {
 	}
 }
 ?>
-<?php event_signal( 'EVENT_BUG_CHANGE_STATUS_FORM', array( $f_bug_id ) ); ?>
+<?php event_signal( 'EVENT_UPDATE_BUG_STATUS_FORM', array( $f_bug_id ) ); ?>
 <?php
 if ( ON == $f_reopen_flag ) {
 ?>

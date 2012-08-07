@@ -179,8 +179,8 @@
 			</blockquote>
 		</blockquote>
 
-		<blockquote id="dev.eventref.bug.action.bugchangestatusform">
-			<title>EVENT_BUG_CHANGE_STATUS_FORM (Execute)</title>
+		<blockquote id="dev.eventref.bug.action.bugupdatestatusform">
+			<title>EVENT_UPDATE_BUG_STATUS_FORM (Execute)</title>
 
 			<blockquote>
 				<para>
