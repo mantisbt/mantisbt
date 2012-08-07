@@ -243,13 +243,15 @@ if( isset( $ADODB_vers ) ) {
 	# ADOConnection::Version() is broken as it treats v5.1 the same as v5.10
 	# Therefore we must extract the correct version ourselves
 	# Upstream bug report: http://phplens.com/lens/lensforum/msgs.php?id=18320
+	# This bug has been fixed in ADOdb 5.11 (May 5, 2010) but we still
+	# need to use the backwards compatible approach to detect ADOdb <5.11.
 	if( preg_match( '/^[Vv]([0-9\.]+)/', $ADODB_vers, $t_matches ) == 1 ) {
 		$t_adodb_version_check_ok = version_compare( $t_matches[1], '5.10', '>=' );
 	}
 }
-print_test_warn_row( 'Checking adodb version...', $t_adodb_version_check_ok, $ADODB_vers );
+print_test_warn_row( 'Checking ADOdb version...', $t_adodb_version_check_ok, $ADODB_vers );
 
-print_test_row('Checking using bundled adodb with some drivers...', !(db_is_pgsql() || db_is_mssql() || db_is_db2()) || strstr($ADODB_vers, 'MantisBT Version') !== false );
+print_test_row( 'Checking using bundled ADOdb with some drivers...', !(db_is_pgsql() || db_is_mssql() || db_is_db2()) || strstr($ADODB_vers, 'MantisBT Version') !== false );
 $t_serverinfo = $g_db->ServerInfo();
 
 print_info_row( 'Database Type (adodb)', $g_db->databaseType );
