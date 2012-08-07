@@ -197,6 +197,22 @@
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.bug.action.updatebugstatusform">
+			<title>EVENT_UPDATE_BUG_STATUS_FORM (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to ask the user for (mandatory) input
+					upon using the 'change status' action
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: Bug ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
 		<blockquote id="dev.eventref.bug.action.bugaction">
 			<title>EVENT_BUG_ACTION (Execute)</title>
 

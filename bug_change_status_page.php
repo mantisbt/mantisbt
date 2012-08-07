@@ -304,6 +304,8 @@ if ( ( $f_new_status >= $t_resolved ) && ( $t_closed > $f_new_status ) ) { ?>
 <?php
 		printf("	<input type=\"hidden\" name=\"resolution\" value=\"%s\" />\n",  config_get( 'bug_reopen_resolution' ) );
 	}
+
+	event_signal( 'EVENT_UPDATE_BUG_STATUS_FORM', array( $f_bug_id ) );
 ?>
 
 <!-- Bugnote -->
