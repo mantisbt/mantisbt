@@ -251,6 +251,13 @@ if( isset( $ADODB_vers ) ) {
 }
 print_test_warn_row( 'Checking ADOdb version...', $t_adodb_version_check_ok, $ADODB_vers );
 
+# Making sure we're not using the ADOdb extension (see #14552)
+print_test_row(
+	'Checking use of the <a href="http://adodb.sourceforge.net/#extension">ADOdb extension</a>',
+	!extension_loaded( 'ADOdb' ),
+	"The 'ADOdb' extension is not supported and must be disabled"
+);
+
 print_test_row( 'Checking using bundled ADOdb with some drivers...', !(db_is_pgsql() || db_is_mssql() || db_is_db2()) || strstr($ADODB_vers, 'MantisBT Version') !== false );
 $t_serverinfo = $g_db->ServerInfo();
 
