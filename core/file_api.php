@@ -1057,19 +1057,19 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
  */
 function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 
-    $t_mantis_bug_file_table = db_get_table( 'bug_file' );
+	$t_mantis_bug_file_table = db_get_table( 'bug_file' );
 
-    $query = 'SELECT * FROM ' . $t_mantis_bug_file_table . ' WHERE bug_id = ' . db_param();
-    $result = db_query_bound( $query, Array( $p_source_bug_id ) );
-    $t_count = db_num_rows( $result );
+	$query = 'SELECT * FROM ' . $t_mantis_bug_file_table . ' WHERE bug_id = ' . db_param();
+	$result = db_query_bound( $query, Array( $p_source_bug_id ) );
+	$t_count = db_num_rows( $result );
 
 	$t_project_id = bug_get_field( $p_source_bug_id, 'project_id' );
 
-    $t_bug_file = array();
-    for( $i = 0;$i < $t_count;$i++ ) {
-        $t_bug_file = db_fetch_array( $result );
+	$t_bug_file = array();
+	for( $i = 0;$i < $t_count;$i++ ) {
+		$t_bug_file = db_fetch_array( $result );
 
-        # prepare the new diskfile name and then copy the file
+		# prepare the new diskfile name and then copy the file
 		$t_source_file = $t_bug_file['folder'] . $t_bug_file['diskfile'];
 		if(( config_get( 'file_upload_method' ) == DISK ) ) {
 			$t_source_file = file_normalize_attachment_path( $t_source_file, $t_project_id );
@@ -1077,44 +1077,44 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 		} else {
 			$t_file_path = $t_bug_file['folder'];
 		}
-        $t_new_diskfile_name = file_generate_unique_name( 'bug-' . $t_bug_file['filename'], $t_file_path );
-        $t_new_diskfile_location = $t_file_path . $t_new_diskfile_name;
-        $t_new_file_name = file_get_display_name( $t_bug_file['filename'] );
-        if(( config_get( 'file_upload_method' ) == DISK ) ) {
+		$t_new_diskfile_name = file_generate_unique_name( 'bug-' . $t_bug_file['filename'], $t_file_path );
+		$t_new_diskfile_location = $t_file_path . $t_new_diskfile_name;
+		$t_new_file_name = file_get_display_name( $t_bug_file['filename'] );
+		if(( config_get( 'file_upload_method' ) == DISK ) ) {
 			# Skip copy operation if file does not exist (i.e. target bug will have missing attachment)
 			# @todo maybe we should trigger an error instead in this case ?
 			if( file_exists( $t_source_file ) ) {
 				copy( $t_source_file, $t_new_diskfile_location );
 				chmod( $t_new_diskfile_location, config_get( 'attachments_file_permissions' ) );
 			}
-        }
+		}
 
-        $query = "INSERT INTO $t_mantis_bug_file_table
-    						( bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content )
-    						VALUES ( " . db_param() . ",
-    								 " . db_param() . ",
-    								 " . db_param() . ",
-    								 " . db_param() . ",
-    								 " . db_param() . ",
-    								 " . db_param() . ",
-    								 " . db_param() . ",
-    								 " . db_param() . ",
-    								 " . db_param() . ",
-    								 " . db_param() . ");";
+		$query = "INSERT INTO $t_mantis_bug_file_table
+							( bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content )
+							VALUES ( " . db_param() . ",
+									 " . db_param() . ",
+									 " . db_param() . ",
+									 " . db_param() . ",
+									 " . db_param() . ",
+									 " . db_param() . ",
+									 " . db_param() . ",
+									 " . db_param() . ",
+									 " . db_param() . ",
+									 " . db_param() . ");";
 		db_query_bound( $query, Array( $p_dest_bug_id, $t_bug_file['title'], $t_bug_file['description'], $t_new_diskfile_name, $t_new_file_name, $t_file_path, $t_bug_file['filesize'], $t_bug_file['file_type'], $t_bug_file['date_added'], $t_bug_file['content'] ) );
-    }
+	}
 }
 
 /**
  * Returns a possibly override content type for a file name
- * 
+ *
  * @param string $p_filename the filename of the file which will be downloaded
  * @return string the content type, or empty if it should not be overriden
  */
 function file_get_content_type_override( $p_filename ) {
-	
+
 	global $g_file_download_content_type_overrides;
-	
+
 	$t_extension = pathinfo( $p_filename, PATHINFO_EXTENSION );
 
 	if ( isset ( $g_file_download_content_type_overrides[$t_extension] ) ) {
