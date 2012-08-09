@@ -671,24 +671,21 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 
 	if( 'bug' == $p_table ) {
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+		$t_id = (int)$p_bug_id;
 		$t_bug_id = bug_format_id( $p_bug_id );
 	} else {
 		$t_project_id = helper_get_current_project();
+		$t_id = $t_project_id;
 		$t_bug_id = 0;
 	}
 
 	if( $p_user_id === null ) {
-		$c_user_id = auth_get_current_user_id();
-	} else {
-		$c_user_id = (int)$p_user_id;
+		$p_user_id = auth_get_current_user_id();
 	}
 
-	# prepare variables for insertion
-	$c_bug_id = db_prepare_int( $p_bug_id );
-	$c_project_id = db_prepare_int( $t_project_id );
-	$c_file_type = db_prepare_string( $p_file['type'] );
-	$c_title = db_prepare_string( $p_title );
-	$c_desc = db_prepare_string( $p_desc );
+	if( $p_date_added <= 0 ) {
+		$p_date_added = db_now();
+	}
 
 	if( $t_project_id == ALL_PROJECTS ) {
 		$t_file_path = config_get( 'absolute_path_default_upload_folder' );
@@ -698,13 +695,10 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 			$t_file_path = config_get( 'absolute_path_default_upload_folder' );
 		}
 	}
-	$c_file_path = db_prepare_string( $t_file_path );
-	$c_new_file_name = db_prepare_string( $t_file_name );
 
 	$t_file_hash = ( 'bug' == $p_table ) ? $t_bug_id : config_get( 'document_files_prefix' ) . '-' . $t_project_id;
 	$t_unique_name = file_generate_unique_name( $t_file_hash . '-' . $t_file_name, $t_file_path );
 	$t_disk_file_name = $t_file_path . $t_unique_name;
-	$c_unique_name = db_prepare_string( $t_unique_name );
 
 	$t_file_size = filesize( $t_tmp_file );
 	if( 0 == $t_file_size ) {
@@ -714,7 +708,6 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 	if( $t_file_size > $t_max_file_size ) {
 		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
 	}
-	$c_file_size = db_prepare_int( $t_file_size );
 
 	$t_method = config_get( 'file_upload_method' );
 
@@ -749,22 +742,36 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 	}
 
 	$t_file_table = db_get_table( $p_table . '_file' );
-	$c_id = ( 'bug' == $p_table ) ? $c_bug_id : $c_project_id;
+	$t_id_col = $p_table . "_id";
 
 	$query = "INSERT INTO $t_file_table
-						(" . $p_table . "_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content, user_id)
+				( $t_id_col, title, description, diskfile, filename, folder, filesize, file_type, date_added, content, user_id )
 					  VALUES
-						($c_id, '$c_title', '$c_desc', '$c_unique_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', '" . $c_date_added . "', $c_content, $c_user_id)";
-	db_query( $query );
+				( " . db_param() . ", " . db_param() . ", " . db_param() . ", "
+				    . db_param() . ", " . db_param() . ", " . db_param() . ", "
+				    . db_param() . ", " . db_param() . ", " . db_param() . ", "
+				    . db_param() . ", " . db_param() . " )";
+	db_query_bound( $query, Array(
+		$t_id,
+		$p_title,
+		$p_desc,
+		$t_unique_name,
+		$t_file_name,
+		$t_file_path,
+		$t_file_size,
+		$p_file['type'],
+		$p_date_added,
+		$c_content,
+		(int)$p_user_id,
+	) );
 
 	if( 'bug' == $p_table ) {
-
-		# updated the last_updated date
+		# bump the last_updated date
 		if ( !$p_skip_bug_update ) {
 			$result = bug_update_date( $p_bug_id );
 		}
 
-		# log new bug
+		# add history entry
 		history_log_event_special( $p_bug_id, FILE_ADDED, $t_file_name );
 	}
 }
