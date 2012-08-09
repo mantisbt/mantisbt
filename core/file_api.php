@@ -610,12 +610,15 @@ function file_is_name_unique( $p_name, $p_bug_id ) {
  * @param string $p_title file title
  * @param string $p_desc file description
  * @param string $p_user_id user id (defaults to current user)
+ * @param int $p_date_added date added
+ * @param bool $p_skip_bug_update skip bug last modification update (useful when importing bug attachments)
  */
-function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc = '', $p_user_id = null ) {
+function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc = '', $p_user_id = null, $p_date_added = 0, $p_skip_bug_update = false ) {
 
 	file_ensure_uploaded( $p_file );
 	$t_file_name = $p_file['name'];
 	$t_tmp_file = $p_file['tmp_name'];
+	$c_date_added = $p_date_added <= 0 ? db_now() : db_prepare_int( $p_date_added );
 
 	if( !file_type_check( $t_file_name ) ) {
 		trigger_error( ERROR_FILE_NOT_ALLOWED, ERROR );
@@ -711,13 +714,15 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 	$query = "INSERT INTO $t_file_table
 						(" . $p_table . "_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content, user_id)
 					  VALUES
-						($c_id, '$c_title', '$c_desc', '$c_unique_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', '" . db_now() . "', $c_content, $c_user_id)";
+						($c_id, '$c_title', '$c_desc', '$c_unique_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', '" . $c_date_added . "', $c_content, $c_user_id)";
 	db_query( $query );
 
 	if( 'bug' == $p_table ) {
 
 		# updated the last_updated date
-		$result = bug_update_date( $p_bug_id );
+		if ( !$p_skip_bug_update ) {
+			$result = bug_update_date( $p_bug_id );
+		}
 
 		# log new bug
 		history_log_event_special( $p_bug_id, FILE_ADDED, $t_file_name );
