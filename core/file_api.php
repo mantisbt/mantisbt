@@ -669,6 +669,15 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 		trigger_error( ERROR_FILE_DUPLICATE, ERROR );
 	}
 
+	$t_file_size = filesize( $t_tmp_file );
+	if( 0 == $t_file_size ) {
+		trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
+	}
+	$t_max_file_size = (int) min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+	if( $t_file_size > $t_max_file_size ) {
+		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
+	}
+
 	if( 'bug' == $p_table ) {
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 		$t_id = (int)$p_bug_id;
@@ -699,15 +708,6 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 	$t_file_hash = ( 'bug' == $p_table ) ? $t_bug_id : config_get( 'document_files_prefix' ) . '-' . $t_project_id;
 	$t_unique_name = file_generate_unique_name( $t_file_hash . '-' . $t_file_name, $t_file_path );
 	$t_disk_file_name = $t_file_path . $t_unique_name;
-
-	$t_file_size = filesize( $t_tmp_file );
-	if( 0 == $t_file_size ) {
-		trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
-	}
-	$t_max_file_size = (int) min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
-	if( $t_file_size > $t_max_file_size ) {
-		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
-	}
 
 	$t_method = config_get( 'file_upload_method' );
 
