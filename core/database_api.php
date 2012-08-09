@@ -702,10 +702,11 @@ function db_prepare_string( $p_string ) {
 }
 
 /**
- * prepare a binary string before DB insertion
- * @param string $p_string unprepared binary data
+ * Prepare a binary string before DB insertion
+ * Use of this function is required for some DB types, to properly encode
+ * BLOB fields prior to calling db_query_bound() or db_query()
+ * @param string $p_string raw binary data
  * @return string prepared database query string
- * @todo Use/Behaviour of this function should be reviewed before 1.2.0 final
  */
 function db_prepare_binary_string( $p_string ) {
 	global $g_db;
@@ -723,10 +724,10 @@ function db_prepare_binary_string( $p_string ) {
 		case 'postgres64':
 		case 'postgres7':
 		case 'pgsql':
-			return '\'' . pg_escape_bytea( $p_string ) . '\'';
+			return $g_db->BlobEncode( $p_string );
 			break;
 		default:
-			return '\'' . db_prepare_string( $p_string ) . '\'';
+			return $p_string;
 			break;
 	}
 }
