@@ -1129,7 +1129,7 @@ function mc_issue_note_update( $p_username, $p_password, $p_note ) {
 	if ( isset( $p_note['view_state'] ) ) {
 		$t_view_state = $p_note['view_state'];
 		$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
-		bugnote_set_view_state( $t_issue_note_id, $t_view_state_id );
+		bugnote_set_view_state( $t_issue_note_id, $t_view_state_id == VS_PRIVATE );
 	}
 
 	bugnote_set_text( $t_issue_note_id, $p_note['text'] );
