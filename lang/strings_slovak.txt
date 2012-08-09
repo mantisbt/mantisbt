@@ -29,6 +29,7 @@
  * @author Helix84
  * @author Lubos Magat <lubos@magat.sk>
  * @author Rudko
+ * @author Teslaton
  * @author Wizzard
  */
 
@@ -554,9 +555,9 @@ $s_click_to_login = 'Prihlásenie';
 $s_warning_plain_password_authentication = '<strong>Varovanie:</strong> Používa sa autentizácia pomocou hesla v čitateľnej podobe, Vaše heslá sa zobrazia administrátorom.';
 $s_warning_default_administrator_account_present = '<strong>Varovanie:</strong> Základný účet \'administrator\' by mal byť deaktivovaný alebo jeho heslo by malo byť zmenené.';
 $s_warning_admin_directory_present = '<strong>Varovanie:</strong> Adresár administrátora by mal byť vymazaný.';
-$s_error_database_version_out_of_date_1 = '<strong>Chyba:</strong> Databázová štruktúra se zdá byť zastaralá (config(databaseversion) je 0 a existujú staré aktualizačné tabuľky). Verzia MantisBT 1.x predstavuje nový systém aktualizácie. Zdá se, že se snažíte o aktualizáciu z 0.XX verzie. Najprv, prosím aktualizujte MantisBT na verziu 1.0.8 alebo 1.1.X, až potom na 1.2.';
-$s_error_database_no_schema_version = '<strong>Chyba:</strong> Databázová štruktúra se zdá byť zastaralá (config(databaseversion) je 0 a  staré aktualizačné tabuľky neexistujú). Skontrolujte prosím, či Vaša databáza beží - nedokážeme zistiť verziu databázovej schémy. Tabuľka Config nevrátila platnú verziu databázovej schémy - pokiaľ to bude potrebné, môžete požiadať o pomoc na mantis-help mailing liste.';
-$s_error_database_version_out_of_date_2 = '<strong>Varovanie:</strong> Štruktúra databázy môže byť zastaralá. Pred prihlásením ju prosím, aktualizujte <a href="admin/install.php">tu</a>.';
+$s_error_database_version_out_of_date_1 = '<strong>Chyba:</strong> Databázová štruktúra se zdá byť zastaraná (config(databaseversion) je 0 a existujú staré aktualizačné tabuľky). Verzia MantisBT 1.x predstavuje nový systém aktualizácie. Zdá se, že se snažíte o aktualizáciu z 0.XX verzie. Najprv, prosím aktualizujte MantisBT na verziu 1.0.8 alebo 1.1.X, až potom na 1.2.';
+$s_error_database_no_schema_version = '<strong>Chyba:</strong> Databázová štruktúra se zdá byť zastaraná (config(databaseversion) je 0 a staré aktualizačné tabuľky neexistujú). Skontrolujte prosím, či Vaša databáza beží - nedokážeme zistiť verziu databázovej schémy. Tabuľka Config nevrátila platnú verziu databázovej schémy - pokiaľ to bude potrebné, môžete požiadať o pomoc na mantis-help mailing liste.';
+$s_error_database_version_out_of_date_2 = '<strong>Varovanie:</strong> Štruktúra databázy môže byť zastaraná. Pred prihlásením ju prosím, aktualizujte <a href="admin/install.php">tu</a>.';
 $s_error_code_version_out_of_date = '<strong>Varovanie:</strong> Štruktúra databázy je novšia než nainštalovaný kód, aktualizujte ho, prosím.';
 $s_login_page_info = 'Vitajte v programe na sledovanie problémov.';
 $s_login_title = 'Prihlásenie';
@@ -703,7 +704,7 @@ $s_plugin_uninstall_message = 'Ste si istý, že chcete odinštalovať zásuvný
 $s_plugin_key = 'Kľúč';
 $s_plugin_key_met = 'zásuvný modul pripravený';
 $s_plugin_key_unmet = 'nesplnené závislosti';
-$s_plugin_key_dated = 'zastaralé závislosti';
+$s_plugin_key_dated = 'zastarané závislosti';
 $s_plugin_key_upgrade = 'vyžadovaný upgrade';
 $s_project_added_msg = 'Projekt bol úspešne pridaný...';
 $s_category_added_msg = 'Kategória bola úspešne pridaná...';
@@ -758,7 +759,7 @@ $s_update_version_button = 'Aktualizovať verziu';
 $s_released = 'Zverejnené';
 $s_not_released = 'Doteraz Nezverejnené';
 $s_scheduled_release = 'Naplánované Na Zverejnenie';
-$s_obsolete = 'Zastaralé';
+$s_obsolete = 'Zastarané';
 $s_version_updated_msg = 'Verzia bola úspešne upravená...';
 $s_account_delete_protected_msg = 'Účet je chránený. Nie je možné zmazať tento účet.';
 $s_account_deleted_msg = 'Účet zmazaný...';
