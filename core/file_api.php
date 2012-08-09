@@ -645,12 +645,12 @@ function file_is_name_unique( $p_name, $p_bug_id, $p_table  = 'bug' ) {
 /**
  * Add a file to the system using the configured storage method
  *
- * @param integer $p_bug_id the bug id
+ * @param integer $p_bug_id the bug id (should be 0 when adding project doc)
  * @param array $p_file the uploaded file info, as retrieved from gpc_get_file()
- * @param string $p_table table ('bug' or 'doc')
+ * @param string $p_table 'bug' or 'project' depending on attachment type
  * @param string $p_title file title
  * @param string $p_desc file description
- * @param int $p_user_id user id
+ * @param int $p_user_id user id (defaults to current user)
  * @param int $p_date_added date added
  * @param bool $p_skip_bug_update skip bug last modification update (useful when importing bug attachments)
  */
