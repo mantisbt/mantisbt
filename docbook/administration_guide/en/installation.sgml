@@ -249,8 +249,8 @@
 							</row>
 							<row>
 								<entry>MS SQL Server</entry>
-								<entry></entry>
-								<entry></entry>
+								<entry>2005</entry>
+								<entry>2005 or above</entry>
 								<entry>PHP extension: mssql or sqlsrv</entry>
 							</row>
 							<row>

@@ -375,9 +375,13 @@ if( 2 == $t_install_state ) {
 					$t_error = 'MySQL 4.1.0 or later is required for installation.';
 				}
 				break;
-			case 'pgsql':
 			case 'mssql':
 			case 'mssqlnative':
+				if( version_compare( $t_version_info['version'], '9.0.0', '<' ) ) {
+					$t_error = 'SQL Server 2005 or later is required for installation.';
+				}
+				break;
+			case 'pgsql':
 			case 'db2':
 			default:
 				break;
