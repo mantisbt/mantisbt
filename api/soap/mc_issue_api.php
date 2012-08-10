@@ -341,20 +341,23 @@ function mci_issue_get_notes( $p_issue_id ) {
  * @param array $p_monitors An array of arrays with the <em>id</em> field set to the id
  *  of the users which should monitor this issue.
  */
-function mci_issue_set_monitors( $p_issue_id , $p_user_id, $p_monitors ) {
+function mci_issue_set_monitors( $p_issue_id , $p_requesting_user_id, $p_monitors ) {
 	if ( bug_is_readonly( $p_issue_id ) ) {
-		return mci_soap_fault_access_denied( $p_user_id, "Issue '$p_issue_id' is readonly" );
+		return mci_soap_fault_access_denied( $p_requesting_user_id, "Issue '$p_issue_id' is readonly" );
 	}
 
-	$t_existing_monitors = bug_get_monitors( $p_issue_id );
+	// 1. get existing monitor ids
+	$t_existing_monitor_ids = bug_get_monitors( $p_issue_id );
 
-	$t_monitors = array();
+	// 2. build new monitors ids
+	$t_new_monitor_ids = array();
 	foreach ( $p_monitors as $t_monitor )
-		$t_monitors[] = $t_monitor['id'];
+		$t_new_monitor_ids[] = $t_monitor['id'];
 
-	foreach ( $t_monitors as $t_user_id ) {
+	// 3. for each of the new monitor ids, add it if it does not already exist
+	foreach ( $t_new_monitor_ids as $t_user_id ) {
 
-		if ( $p_user_id == $t_user_id ) {
+		if ( $p_requesting_user_id == $t_user_id ) {
 			if ( ! access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_issue_id ) )
 				continue;
 		} else {
@@ -362,15 +365,16 @@ function mci_issue_set_monitors( $p_issue_id , $p_user_id, $p_monitors ) {
 				continue;
 		}
 
-		if ( in_array( $p_user_id, $t_existing_monitors) )
+		if ( in_array( $t_user_id, $t_existing_monitor_ids) )
 			continue;
 
 		bug_monitor( $p_issue_id, $t_user_id);
 	}
 
-	foreach ( $t_existing_monitors as $t_user_id ) {
+	// 4. for each of the existing monitor ids, remove it if it is not found in the new monitor ids
+	foreach ( $t_existing_monitor_ids as $t_user_id ) {
 
-		if ( $p_user_id == $t_user_id ) {
+		if ( $p_requesting_user_id == $t_user_id ) {
 			if ( ! access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_issue_id ) )
 				continue;
 		} else {
@@ -378,7 +382,7 @@ function mci_issue_set_monitors( $p_issue_id , $p_user_id, $p_monitors ) {
 				continue;
 		}
 
-		if ( in_array( $p_user_id, $t_monitors) )
+		if ( in_array( $t_user_id, $t_new_monitor_ids) )
 			continue;
 
 		bug_unmonitor( $p_issue_id, $t_user_id);
