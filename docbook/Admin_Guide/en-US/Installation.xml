@@ -213,12 +213,17 @@
 				<listitem>
 					<para>Database</para>
 					<para>MantisBT requires a database to store its data.
-						The supported RDBMS are
-							MySQL,
+						The supported RDBMS are:
+							MySQL (recommended),
 							PostgreSQL,
 							DB2,
-							MS SQL and
+							Microsoft SQL Server and
 							Oracle (experimental).
+					</para>
+					<para>Note: There are known issues with all of the above
+						platforms except MySQL, and to a lesser extend PostgreSQL;
+						moreover, you should be aware that support for DB2, SQL
+						server and Oracle is limited.
 					</para>
 				</listitem>
 
