@@ -346,15 +346,15 @@ function mci_issue_set_monitors( $p_issue_id , $p_requesting_user_id, $p_monitor
 		return mci_soap_fault_access_denied( $p_requesting_user_id, "Issue '$p_issue_id' is readonly" );
 	}
 
-	// 1. get existing monitor ids
+	# 1. get existing monitor ids
 	$t_existing_monitor_ids = bug_get_monitors( $p_issue_id );
 
-	// 2. build new monitors ids
+	# 2. build new monitors ids
 	$t_new_monitor_ids = array();
 	foreach ( $p_monitors as $t_monitor )
 		$t_new_monitor_ids[] = $t_monitor['id'];
 
-	// 3. for each of the new monitor ids, add it if it does not already exist
+	# 3. for each of the new monitor ids, add it if it does not already exist
 	foreach ( $t_new_monitor_ids as $t_user_id ) {
 
 		if ( $p_requesting_user_id == $t_user_id ) {
@@ -371,7 +371,7 @@ function mci_issue_set_monitors( $p_issue_id , $p_requesting_user_id, $p_monitor
 		bug_monitor( $p_issue_id, $t_user_id);
 	}
 
-	// 4. for each of the existing monitor ids, remove it if it is not found in the new monitor ids
+	# 4. for each of the existing monitor ids, remove it if it is not found in the new monitor ids
 	foreach ( $t_existing_monitor_ids as $t_user_id ) {
 
 		if ( $p_requesting_user_id == $t_user_id ) {
