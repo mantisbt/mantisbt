@@ -422,7 +422,7 @@ function custom_function_default_enum_categories() {
 
 	$t_enum = array();
 	foreach( $t_categories as $t_category ) {
-		$t_enum[] = $t_category['category'];
+		$t_enum[] = $t_category['name'];
 	}
 
 	$t_possible_values = implode( '|', $t_enum );
