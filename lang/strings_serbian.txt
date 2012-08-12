@@ -31,6 +31,7 @@
  * @author Rancher
  * @author Жељко Тодоровић
  * @author Милан Јелисавчић
+ * @author Михајло Анђелковић
  */
 
 $s_directionality = 'ltr';
@@ -881,10 +882,10 @@ $s_signup_title = 'Упис';
 $s_signup_button = 'Отвори налог';
 $s_no_password_request = 'Вашом лозинком управља други систем. Обратите се системском администратору.';
 $s_edit_site_settings_title = 'Уређивање поставки мрежног места';
-$s_save_settings_button = 'Сачувај поставке';
-$s_site_settings_title = 'Поставке мрежног места';
+$s_save_settings_button = 'Сними подешавања';
+$s_site_settings_title = 'Подешавања сајта';
 $s_system_info_link = 'Системски подаци';
-$s_site_settings_link = 'Поставке мрежног места';
+$s_site_settings_link = 'Подешавања сајта';
 $s_site_settings_updated_msg = 'Поставке сајта су ажурирана.';
 $s_summary_title = 'Кратак опис';
 $s_summary_advanced_link = 'Проширени опис';
