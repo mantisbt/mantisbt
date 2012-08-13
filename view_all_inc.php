@@ -57,6 +57,10 @@ if( $t_filter === false ) {
 	$t_filter = filter_get_default();
 }
 
+$t_project_id = gpc_get_int( 'project_id', helper_get_current_project() );
+if( project_exists( $t_project_id ) ) {
+	helper_set_current_project( $t_project_id );
+}
 list( $t_sort, ) = explode( ',', $t_filter['sort'] );
 list( $t_dir, ) = explode( ',', $t_filter['dir'] );
 
