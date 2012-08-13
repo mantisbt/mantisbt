@@ -89,11 +89,133 @@
 	}
 
 	$t_config_table = db_get_table( 'mantis_config_table' );
-	$query = "SELECT config_id, user_id, project_id, type, value, access_reqd FROM $t_config_table ORDER BY user_id, project_id, config_id";
+
+	$t_user_table = db_get_table( 'mantis_user_table' );
+	$t_project_table = db_get_table( 'mantis_project_table' );
+		# Get users in db with specific configs
+		$query = "SELECT DISTINCT user_id, ut.realname as username, ut.username as idrh
+			  FROM $t_config_table as ct
+			  JOIN $t_user_table as ut
+			  	ON ut.id=ct.user_id
+			  ORDER BY username";
+		$t_result = db_query_bound($query);
+		$t_users_list = array();
+		$t_users_list[-1] = '<i>'.lang_get("none_filter").'</i>';
+		$t_users_list[ALL_USERS] = lang_get("all_users");
+		while ( $row = db_fetch_array( $t_result ) ) {
+			extract( $row, EXTR_PREFIX_ALL, 'v' );
+			$t_users_list[$v_user_id] = "$v_username ($v_idrh)";
+		}
+
+		# Get projects in db with specific configs
+		$query = "SELECT DISTINCT project_id, pt.name as project_name
+			  FROM $t_config_table as ct
+			  JOIN $t_project_table as pt
+			  	ON pt.id=ct.project_id
+			  WHERE project_id!=0
+			  ORDER BY project_name";
+		$t_result = db_query_bound($query);
+		$t_projects_list = array();
+		$t_projects_list[-1] = '<i>'.lang_get("none_filter").'</i>';
+		$t_projects_list[ALL_PROJECTS] = lang_get("all_projects");
+		while ( $row = db_fetch_array( $t_result ) ) {
+			extract( $row, EXTR_PREFIX_ALL, 'v' );
+			$t_projects_list[$v_project_id] = $v_project_name;
+		}
+
+		# Get config listused in db
+		$query = "SELECT DISTINCT config_id
+			  FROM $t_config_table
+			  ORDER BY config_id";
+		$t_result = db_query_bound($query);
+		$t_configs_list = array();
+		$t_configs_list[-1] = '<i>'.lang_get("none_filter").'</i>';
+		while ( $row = db_fetch_array( $t_result ) ) {
+			extract( $row, EXTR_PREFIX_ALL, 'v' );
+			$t_configs_list[$v_config_id] = $v_config_id;
+		}
+
+	function print_option_list_from_array($array,$filter_value){
+			foreach ($array as $key => $value){
+				if($filter_value == $key){
+				$selected = " selected='selected' "	;
+				}else{
+					$selected ="";
+				}
+				echo "<option value='$key' $selected>$value</option>\n";
+			}
+
+		}
+
+	$t_filter_user_value 	= gpc_get_int('filter_user_id',-1);
+	$t_filter_project_value = gpc_get_int('filter_project_id',-1);
+	$t_filter_config_value 	= gpc_get_string('filter_config_id',-1);	
+
+	$where = '';
+	if($t_filter_user_value != -1){
+		$where .= " AND user_id=$t_filter_user_value ";
+	}
+	if($t_filter_project_value != -1){
+		$where .= " AND project_id=$t_filter_project_value ";
+	}
+	if($t_filter_config_value != -1){
+		$where .= " AND config_id='$t_filter_config_value' ";
+	}
+	if($where!=''){
+		$where = " WHERE 1=1 ".$where;
+	}
+
+	$query = "SELECT config_id, user_id, project_id, type, value, access_reqd FROM $t_config_table $where ORDER BY user_id, project_id, config_id ";
 	$result = db_query_bound( $query );
 ?>
+
 <br />
 <div align="center">
+<form action="" name="form_filter">
+<table class="width100" cellspacing="1">
+	<!-- Title -->
+	<tr>
+		<td class="form-title" colspan="7">
+			<?php echo lang_get( 'filters' ) ?>
+		</td>
+	</tr>
+
+	<tr class="row-category" style="width:30%;">
+		<td class="center">
+			<?php echo lang_get( 'username' );?> : <br />
+			<select name="filter_user_id" style="width:200px;">
+			<?php
+			print_option_list_from_array($t_users_list, $t_filter_user_value);
+			?>
+			</select>
+		</td>
+		<td class="center" style="width:30%;">
+			<?php echo lang_get( 'project_name' );?> : <br />
+			<select name="filter_project_id" style="width:200px;">
+			<?php
+			print_option_list_from_array($t_projects_list, $t_filter_project_value);
+			?>
+			</select>
+		</td>
+		<td class="center" style="width:40%;">
+			<?php echo lang_get( 'configuration_option' );?> : <br />
+			<select name="filter_config_id" style="width:200px;">
+			<?php
+			print_option_list_from_array($t_configs_list, $t_filter_config_value);
+			?>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<input type="submit" value="<?php echo lang_get('filter_button');?>"/>
+		</td>
+	</tr>
+</table>
+</form>
+
+<br />
+
 <table class="width100" cellspacing="1">
 
 <!-- Title -->
