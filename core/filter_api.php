@@ -683,10 +683,10 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 					$t_filter_value = META_FILTER_NONE;
 				}
 				if( 'string' == $t_multi_field_type ) {
-					$t_checked_array[] = db_prepare_string( $t_filter_value );
+					$t_checked_array[] = $t_filter_value;
 				}
 				else if( 'int' == $t_multi_field_type ) {
-					$t_checked_array[] = db_prepare_int( $t_filter_value );
+					$t_checked_array[] = (int)$t_filter_value;
 				}
 				else if( 'array' == $t_multi_field_type ) {
 					$t_checked_array[] = $t_filter_value;
@@ -714,7 +714,7 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 					if(( $t_filter_value === 'any' ) || ( $t_filter_value === '[any]' ) ) {
 						$t_filter_value = META_FILTER_ANY;
 					}
-					$t_checked_array[] = db_prepare_string( $t_filter_value );
+					$t_checked_array[] = $t_filter_value;
 				}
 				$p_filter_arr['custom_fields'][$t_cfid] = $t_checked_array;
 			}
