@@ -32,6 +32,10 @@
 	auth_ensure_user_authenticated();
 
 	$f_page_number		= gpc_get_int( 'page_number', 1 );
+	$t_project_id = gpc_get_int('project_id',helper_get_current_project());
+	if(project_exists($t_project_id)){
+		helper_set_current_project($t_project_id);
+	}
 
 	$t_per_page = null;
 	$t_bug_count = null;

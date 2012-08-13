@@ -37,6 +37,10 @@
 	require_once( 'collapse_api.php' );
 
 	$f_master_bug_id = gpc_get_int( 'm_id', 0 );
+	$t_project_id = gpc_get_int('project_id',helper_get_current_project());
+	if(project_exists($t_project_id)){
+		helper_set_current_project($t_project_id);
+	}
 
 	# this page is invalid for the 'All Project' selection except if this is a clone
 	if ( ( ALL_PROJECTS == helper_get_current_project() ) && ( 0 == $f_master_bug_id ) ) {
