@@ -1248,3 +1248,4 @@ $s_month_september = 'septembre';
 $s_month_october = 'octobre';
 $s_month_november = 'novembre';
 $s_month_december = 'décembre';
+$s_none_filter = 'Aucun filtre';
