@@ -81,15 +81,6 @@ require_api( 'version_api.php' );
 $g_allow_browser_cache = 1;
 
 $f_master_bug_id = gpc_get_int( 'm_id', 0 );
-$t_project_id = gpc_get_int( 'project_id', helper_get_current_project() );
-if( project_exists( $t_project_id ) ) {
-	helper_set_current_project( $t_project_id );
-}
-
-# this page is invalid for the 'All Project' selection except if this is a clone
-if ( ( ALL_PROJECTS == helper_get_current_project() ) && ( 0 == $f_master_bug_id ) ) {
-	print_header_redirect( 'login_select_proj_page.php?ref=bug_report_page.php' );
-}
 
 if ( $f_master_bug_id > 0 ) {
 	# master bug exists...
@@ -142,6 +133,22 @@ if ( $f_master_bug_id > 0 ) {
 
 	$t_project_id			= $t_bug->project_id;
 } else {
+	# Get Project Id and set it as current
+	$t_project_id = gpc_get_int( 'project_id', helper_get_current_project() );
+	if( ( ALL_PROJECTS == $t_project_id || project_exists( $t_project_id ) )
+	 && $t_project_id != helper_get_current_project()
+	) {
+		helper_set_current_project( $t_project_id );
+		# Reloading the page is required so that the project browser
+		# reflects the new current project
+		print_header_redirect( $_SERVER['REQUEST_URI'], true, false, true );
+	}
+
+	# New issues cannot be reported for the 'All Project' selection
+	if ( ( ALL_PROJECTS == helper_get_current_project() ) ) {
+		print_header_redirect( 'login_select_proj_page.php?ref=bug_report_page.php' );
+	}
+
 	access_ensure_project_level( config_get( 'report_bug_threshold' ) );
 
 	$f_build				= gpc_get_string( 'build', '' );
@@ -168,8 +175,6 @@ if ( $f_master_bug_id > 0 ) {
 	if ( $f_due_date == '' ) {
 		$f_due_date = date_get_null();
 	}
-
-	$t_project_id			= helper_get_current_project();
 
 	$t_changed_project		= false;
 }
