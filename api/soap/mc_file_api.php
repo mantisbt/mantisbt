@@ -70,7 +70,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	}
 
 	$t_file_hash = ( 'bug' == $p_table ) ? $t_issue_id : config_get( 'document_files_prefix' ) . '-' . $t_project_id;
-	$t_unique_name = file_generate_unique_name( $t_file_hash . '-' . $t_file_name, $t_file_path );
+	$t_unique_name = file_generate_unique_name( $t_file_hash . '-' . $p_name, $t_file_path );
 	$t_disk_file_name = $t_file_path . $t_unique_name;
 
 	$t_method = config_get( 'file_upload_method' );
