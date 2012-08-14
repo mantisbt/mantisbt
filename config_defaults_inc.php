@@ -233,8 +233,10 @@
 	 ****************************/
 
 	/**
-	 * allow users to signup for their own accounts.
-	 * Mail settings must be correctly configured in order for this to work
+	 * Allow users to signup for their own accounts.
+	 * If ON, then $g_send_reset_password must be ON as well, and mail settings
+	 * must be correctly configured
+	 * @see $g_send_reset_password
 	 * @global int $g_allow_signup
 	 */
 	$g_allow_signup			= ON;
@@ -255,9 +257,10 @@
 	$g_notify_new_user_created_threshold_min = ADMINISTRATOR;
 
 	/**
-	 * if ON users will be sent their password when reset.
-	 * if OFF the password will be set to blank. If set to ON, mail settings must be
-	 * correctly configured.
+	 * If ON, users will be sent their password when their account is created
+	 * or password reset (this requires mail settings to be correctly configured).
+	 * If OFF, then the Administrator will have to provide a password when
+	 * creating new accounts, and the password will be set to blank when reset.
 	 * @global int $g_send_reset_password
 	 */
 	$g_send_reset_password	= ON;

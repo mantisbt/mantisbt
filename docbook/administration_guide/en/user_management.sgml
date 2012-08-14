@@ -137,9 +137,13 @@
 	$g_default_new_account_access_level configuration option).  The signup
 	process can be enabled / disabled using the $g_allow_signup
 	configuration option, which is enabled by default.</para>
-
-        <para>If email notifications ($g_enable_email_notification) is
-        set to ON, users with access level about
+	<para>If user signup is enabled, then it is required that
+	$g_send_reset_password is ON as well, and the e-mail settings properly
+	configured
+	(see <link linkend="admin.config.email">Email Configuration</link>).
+	</para>
+	<para>If email notifications ($g_enable_email_notification) is
+	set to ON, users with access level about
 	$g_notify_new_user_created_threshold_min will get a
 	notification that a user account has been created.  Information
 	about the user like user name, email address, IP address are included in
