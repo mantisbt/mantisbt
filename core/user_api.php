@@ -794,28 +794,29 @@ function user_get_name( $p_user_id ) {
 * @return array|bool an array( URL, width, height ) or false when the given user has no avatar
 */
 function user_get_avatar( $p_user_id, $p_size = 80 ) {
-	$t_email = utf8_strtolower( trim( user_get_email( $p_user_id ) ) );
-	if( is_blank( $t_email ) ) {
-		$t_result = false;
-	} else {
-		$t_size = $p_size;
+	$t_default_avatar = config_get( 'show_avatar' );
 
-		if( http_is_protocol_https() ) {
-			$t_gravatar_domain = 'https://secure.gravatar.com/';
-		} else {
-			$t_gravatar_domain = 'http://www.gravatar.com/';
-		}
-
-		$t_avatar_url = $t_gravatar_domain . 'avatar/' . md5( $t_email ) . '?d=identicon&r=G&s=' . $t_size;
-
-		$t_result = array(
-			$t_avatar_url,
-			$t_size,
-			$t_size,
-		);
+	if( OFF === $t_default_avatar ) {
+		# Avatars are not used
+		return false;
 	}
 
-	return $t_result;
+	# Default avatar is either one of Gravatar's options, or
+	# assumed to be an URL to a default avatar image
+	$t_default_avatar = urlencode( $t_default_avatar );
+	$t_rating = 'G';
+
+	$t_email_hash = md5( utf8_strtolower( trim( user_get_email( $p_user_id ) ) ) );
+
+	# Build Gravatar URL
+	if( http_is_protocol_https() ) {
+		$t_avatar_url = 'https://secure.gravatar.com/';
+	} else {
+		$t_avatar_url = 'http://www.gravatar.com/';
+	}
+	$t_avatar_url .= "avatar/$t_email_hash?d=$t_default_avatar&r=$t_rating&s=$p_size";
+
+	return array( $t_avatar_url, $p_size, $p_size );
 }
 
 # --------------------

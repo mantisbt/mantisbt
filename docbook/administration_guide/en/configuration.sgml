@@ -896,10 +896,38 @@
             <varlistentry>
                 <term>$g_show_avatar</term>
                 <listitem>
-                    <para>Show user avatar (default OFF); the current implementation is based on http://www.gravatar.com,
-                    users will need to register there with the same email address used in
-                    this MantisBT installation to have their avatar shown.</para>
-                    <note><para>Upon registration or avatar change, it takes some time for the updated gravatar images to show on sites.</para></note>
+					<para>Show the user's avatar
+					</para>
+					<para>The current implementation is based on
+						<ulink url="http://www.gravatar.com">Gravatar</ulink>;
+						Users will need to register there the same email address
+						used in this MantisBT installation to have their avatar
+						shown.
+						Please note: upon registration or avatar change, it may
+						take some time for the updated gravatar images to show
+						on sites
+					</para>
+					<para>The config can be either set to OFF (avatars disabled),
+						or to a string defining the default avatar to be used
+						when none is associated with the user's email.
+						Valid values are:
+						<itemizedlist>
+							<listitem><para>OFF (default)</para>
+							</listitem>
+							<listitem><para>One of Gravatar's defaults
+								(mm, identicon, monsterid, wavatar, retro);
+								refer to
+								<ulink url="http://en.gravatar.com/site/implement/images/">
+									Image Requests documentation
+								</ulink>
+								for further details.
+							</para></listitem>
+							<listitem><para>An URL to the default image to be used
+								(for example, "http:/path/to/unknown.jpg"
+								or "%path%images/no_avatar.png").
+							</para></listitem>
+						</itemizedlist>
+					</para>
                 </listitem>
             </varlistentry>
             <varlistentry>
