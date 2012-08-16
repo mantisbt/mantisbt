@@ -959,6 +959,8 @@
 						<itemizedlist>
 							<listitem><para>OFF (default)</para>
 							</listitem>
+							<listitem><para>ON (equivalent to 'identicon')
+							</para></listitem>
 							<listitem><para>One of Gravatar's defaults
 								(mm, identicon, monsterid, wavatar, retro);
 								refer to

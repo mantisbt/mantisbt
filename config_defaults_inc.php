@@ -1012,6 +1012,7 @@ $g_sort_by_last_name = OFF;
  * defining the default avatar to be used when none is associated with the
  * user's email. Valid values:
  * - OFF (default)
+ * - ON (equivalent to 'identicon')
  * - One of Gravatar's defaults (mm, identicon, monsterid, wavatar, retro)
  *   @link http://en.gravatar.com/site/implement/images/
  * - An URL to the default image to be used (for example,
