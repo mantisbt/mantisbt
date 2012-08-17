@@ -46,6 +46,8 @@
  * @uses user_api.php
  * @uses user_pref_api.php
  * @uses utility_api.php
+ *
+ * @uses class.phpmailer.php PHPMailer library
  */
 
 require_api( 'access_api.php' );
@@ -71,6 +73,8 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
+
+require_lib( 'phpmailer' . DIRECTORY_SEPARATOR . 'class.phpmailer.php' );
 
 /**
  * reusable object of class SMTP
@@ -117,11 +121,9 @@ function email_is_valid( $p_email ) {
 		return true;
 	}
 
-	# Use a regular expression to check to see if the email is in valid format
-	#  x-xx.xxx@yyy.zzz.abc etc.
-	if( preg_match( email_regex_simple(), $p_email, $t_check ) ) {
-		$t_local = $t_check[1];
-		$t_domain = $t_check[2];
+	# Delegate email validation to PHPMailer
+	if( PHPMailer::ValidateAddress( $p_email ) ) {
+		$t_domain = end( explode( '@', $p_email ) );
 
 		# see if we're limited to one domain
 		$t_limit_email_domain = config_get( 'limit_email_domain' );
@@ -912,10 +914,8 @@ function email_send( $p_email_data ) {
 	$t_mailer_method = config_get( 'phpMailer_method' );
 
 	if( is_null( $g_phpMailer ) ) {
-		if ( $t_mailer_method == PHPMAILER_METHOD_SMTP )
+		if ( $t_mailer_method == PHPMAILER_METHOD_SMTP ) {
 			register_shutdown_function( 'email_smtp_close' );
-		if( !class_exists( 'PHPMailer' ) ) {
-			require_lib( 'phpmailer' . DIRECTORY_SEPARATOR . 'class.phpmailer.php' );
 		}
 		$mail = new PHPMailer(true);
 	} else {
