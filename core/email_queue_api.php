@@ -21,7 +21,7 @@
  * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
- 
+
  /**
  * EmailData Structure Definition
  * @package MantisBT
@@ -163,6 +163,8 @@ function email_queue_delete( $p_email_id ) {
 
 	$query = 'DELETE FROM ' . $t_email_table . ' WHERE email_id=' . db_param();
 	db_query_bound( $query, Array( $c_email_id ) );
+
+	log_event( LOG_EMAIL, "message #$p_email_id deleted from queue" );
 }
 
 /**

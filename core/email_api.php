@@ -844,8 +844,13 @@ function email_send_all($p_delete_on_failure = false) {
 
 	$t_emails_recipients_failed = array();
 	$t_start = microtime(true);
+	log_event( LOG_EMAIL, "Processing " . count( $t_ids ) . " queued messages" );
 	foreach( $t_ids as $t_id ) {
 		$t_email_data = email_queue_get( $t_id );
+		log_event( LOG_EMAIL,
+			"Sending message #$t_id queued on " .
+			date( config_get( 'complete_date_format' ), $t_email_data->submitted )
+		);
 
 		# check if email was not found.  This can happen if another request picks up the email first and sends it.
 		if( $t_email_data === false ) {
@@ -952,27 +957,19 @@ function email_send( $p_email_data ) {
 
 	if( OFF !== $t_debug_email ) {
 		$t_message = 'To: ' . $t_recipient . "\n\n" . $t_message;
-		try {
-			$mail->AddAddress( $t_debug_email, '' );
-		} catch ( phpmailerException $e ) {
-			$t_success = false;
-			$mail->ClearAllRecipients();
-			$mail->ClearAttachments();
-			$mail->ClearReplyTos();
-			$mail->ClearCustomHeaders();
-			return $t_success;
-		}
-	} else {
-		try {
-			$mail->AddAddress( $t_recipient, '' );
-		} catch ( phpmailerException $e ) {
-			$t_success = false;
-			$mail->ClearAllRecipients();
-			$mail->ClearAttachments();
-			$mail->ClearReplyTos();
-			$mail->ClearCustomHeaders();
-			return $t_success;
-		}
+		$t_recipient = $t_debug_email;
+	}
+
+	try {
+		$mail->AddAddress( $t_recipient, '' );
+	} catch ( phpmailerException $e ) {
+		log_event( LOG_EMAIL, "ERROR: Message could not be sent - " . $e->getMessage() );
+		$t_success = false;
+		$mail->ClearAllRecipients();
+		$mail->ClearAttachments();
+		$mail->ClearReplyTos();
+		$mail->ClearCustomHeaders();
+		return $t_success;
 	}
 
 	$mail->Subject = $t_subject;
@@ -1138,7 +1135,8 @@ function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
 		$t_contents = $t_header . string_get_bug_view_url_with_fqdn( $p_bug_id, $t_recipient ) . " \n\n$p_message";
 
 		if( ON == config_get( 'enable_email_notification' ) ) {
-			email_store( $t_email, $t_subject, $t_contents );
+			$t_id = email_store( $t_email, $t_subject, $t_contents );
+			log_event( LOG_EMAIL, "queued reminder email #$t_id for U$t_recipient" );
 		}
 
 		lang_pop();

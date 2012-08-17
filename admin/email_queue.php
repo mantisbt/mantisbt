@@ -38,7 +38,7 @@ if ( $f_to !== null ) {
 		echo "Sending or deleting emails...<br />";
 		email_send_all(true);
 		echo "Done";
-		
+
 	} else {
 		$t_email_data = email_queue_get( (int) $f_to );
 
@@ -65,7 +65,12 @@ if( count( $t_ids ) > 0 ) {
 	foreach( $t_ids as $t_id ) {
 		$row = email_queue_get( $t_id );
 
-		echo '<tr><td>' . $row->email_id . '</td><td>' . $row->email . '</td><td>' . $row->submitted . '</td><td>' , html_button( 'email_queue.php', 'Send Or Delete', array( 'send' => $row->email_id ) ) , '</td></tr>';
+		echo '<tr><td>'
+			. $row->email_id . '</td><td>'
+			. $row->email . '</td><td>'
+			. date( config_get( 'complete_date_format' ), $row->submitted ) . '</td><td>'
+			, html_button( 'email_queue.php', 'Send Or Delete', array( 'send' => $row->email_id ) )
+			, '</td></tr>';
 	}
 	echo '</table>';
 } else {
