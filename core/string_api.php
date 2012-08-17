@@ -401,35 +401,54 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 
 	if( !isset( $string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] ) ) {
 		if( $p_include_anchor ) {
-			$string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function( '$p_array', '
-										if ( bugnote_exists( (int)$p_array[2] ) ) {
-											$t_bug_id = bugnote_get_field( (int)$p_array[2], \'bug_id\' );
-											$g_project_override = bug_get_field( $t_bug_id, \'project_id\' );
-											if ( bug_exists( $t_bug_id ) && ( access_compare_level( user_get_access_level( auth_get_current_user_id(), bug_get_field( $t_bug_id, \'project_id\' ) ), config_get( \'private_bugnote_threshold\' ) ) || ( bugnote_get_field( (int)$p_array[2], \'reporter_id\' ) == auth_get_current_user_id() ) || bugnote_get_field( (int)$p_array[2], \'view_state\' ) == VS_PUBLIC ) ) {
-												$g_project_override = null;
-												return $p_array[1] . string_get_bugnote_view_link( $t_bug_id, (int)$p_array[2], null, ' . ( $p_detail_info ? 'true' : 'false' ) . ', ' . ( $p_fqdn ? 'true' : 'false' ) . ' );
-											} else {
-												$g_project_override = null;
-												return $p_array[0];
-											}
-										} else {
-											return $p_array[0];
-										}
-										' );
+			$string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
+				create_function( '$p_array',
+					'
+					if ( bugnote_exists( (int)$p_array[2] ) ) {
+						$t_bug_id = bugnote_get_field( (int)$p_array[2], \'bug_id\' );
+						if ( bug_exists( $t_bug_id ) ) {
+							$g_project_override = bug_get_field( $t_bug_id, \'project_id\' );
+							if (   access_compare_level(
+										user_get_access_level( auth_get_current_user_id(),
+										bug_get_field( $t_bug_id, \'project_id\' ) ),
+										config_get( \'private_bugnote_threshold\' )
+								   )
+								|| bugnote_get_field( (int)$p_array[2], \'reporter_id\' ) == auth_get_current_user_id()
+								|| bugnote_get_field( (int)$p_array[2], \'view_state\' ) == VS_PUBLIC
+							) {
+								$g_project_override = null;
+								return $p_array[1] .
+									string_get_bugnote_view_link(
+										$t_bug_id,
+										(int)$p_array[2],
+										null,
+										' . ( $p_detail_info ? 'true' : 'false' ) . ', ' . ( $p_fqdn ? 'true' : 'false' ) . '
+									);
+							}
+							$g_project_override = null;
+						}
+					}
+					return $p_array[0];
+					'
+				);
 		} else {
-			$string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function( '$p_array', '
-										# We might as well create the link here even if the bug
-										#  doesnt exist.  In the case above we dont want to do
-										#  the summary lookup on a non-existant bug.  But here, we
-										#  can create the link and by the time it is clicked on, the
-										#  bug may exist.
-										$t_bug_id = bugnote_get_field( (int)$p_array[2], \'bug_id\' );
-										if ( bug_exists( $t_bug_id ) ) {
-											return $p_array[1] . string_get_bugnote_view_url_with_fqdn( $t_bug_id, (int)$p_array[2], null );
-										} else {
-											return $p_array[0];
-										}
-										' );
+			$string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
+				create_function(
+					'$p_array',
+					'
+					# We might as well create the link here even if the bug
+					#  doesnt exist.  In the case above we dont want to do
+					#  the summary lookup on a non-existant bug.  But here, we
+					#  can create the link and by the time it is clicked on, the
+					#  bug may exist.
+					$t_bug_id = bugnote_get_field( (int)$p_array[2], \'bug_id\' );
+					if ( bug_exists( $t_bug_id ) ) {
+						return $p_array[1] . string_get_bugnote_view_url_with_fqdn( $t_bug_id, (int)$p_array[2], null );
+					} else {
+						return $p_array[0];
+					}
+					'
+				);
 		}
 	}
 	$p_string = preg_replace_callback( '/(^|[^\w])' . preg_quote( $t_tag, '/' ) . '(\d+)\b/', $string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn], $p_string );
