@@ -83,7 +83,7 @@ $s_old_value = 'قيمة قديمة';
 $s_new_value = 'قيمة جديدة';
 $s_date_modified = 'تاريخ التعديل';
 $s_bugnote = 'ملاحظة';
-$s_change = 'غيّر';
+$s_change = 'تغيير';
 $s_bugnote_view_state = 'ملاحظة حالة العرض';
 $s_bug_monitor = 'القضية المراقبة';
 $s_bug_end_monitor = 'مراقبة نهاية القضية';
@@ -550,7 +550,7 @@ $s_total_queries_executed = '%1$d استعلامات إجمالية تم تنف�
 $s_unique_queries_executed = '%1$d استعلامات منفردة تم تنفيذها.';
 $s_memory_usage_in_kb = 'استخدام الذاكرة: %1$s كيلوبايت';
 $s_please_report = 'من فضلك أبلغ هذا إلى %1$.';
-$s_click_to_login = 'لُج';
+$s_click_to_login = 'تسجيل الدخول';
 $s_warning_plain_password_authentication = '<strong>تحذير:</strong> تحقيق كلمة السر الصافي مستخدم، هذا سيكشف كلمات سرك للإداريين.';
 $s_warning_default_administrator_account_present = '<strong>تحذير:</strong> ينبغي عليك تعطيل حساب \'administrator\' الافتراضي أو تغيير كلمة سره.';
 $s_warning_admin_directory_present = '<strong>تحذير:</strong> مجلد الإدارة ينبغي إزالته.';
@@ -796,7 +796,7 @@ $s_users_link = 'مستخدمون';
 $s_manage_link = 'تحكم';
 $s_edit_news_link = 'عدل الأخبار';
 $s_docs_link = 'وثائق';
-$s_logout_link = 'اخرج';
+$s_logout_link = 'تسجيل الخروج';
 $s_my_view_link = 'عرضي';
 $s_my_view_title_unassigned = 'غير موكولة';
 $s_my_view_title_recent_mod = 'معدلة حديثا';
@@ -923,7 +923,7 @@ $s_changed = 'تغيرت(ساعات)';
 $s_viewing_bugs_title = 'عرض القضايا';
 $s_updated = 'تم التحديث';
 $s_sticky = 'عرض القضايا اللاصقة';
-$s_sort = 'رتب حسب';
+$s_sort = 'الترتيب حسب';
 $s_issue_id = 'القضية #';
 $s_recently_visited = 'المزارة حديثا';
 $s_priority_abbreviation = 'بي';
