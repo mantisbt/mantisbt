@@ -228,7 +228,7 @@ function tag_get_all( $p_name_filter, $p_count, $p_offset) {
 	$t_where = '';
 	$t_where_params = array();
 	
-	if ( $p_name_filter ) {
+	if ( !is_blank( $p_name_filter ) ) {
 		$t_where = 'WHERE '.db_helper_like('name');
 		$t_where_params[] = $p_name_filter.'%';
 	}
