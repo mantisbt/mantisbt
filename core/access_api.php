@@ -519,6 +519,7 @@ function access_can_close_bug( $p_bug, $p_user_id = null ) {
 	# if they are in resolved status
 	if(    ON == config_get( 'allow_reporter_close', null, null, $p_bug->project_id )
 		&& bug_is_user_reporter( $p_bug->id, $p_user_id )
+		&& access_has_bug_level( config_get( 'report_bug_threshold' ), $p_bug->id, $p_user_id )
 		&& bug_is_resolved( $p_bug->id )
 	) {
 		return true;
@@ -560,8 +561,10 @@ function access_can_reopen_bug( $p_bug, $p_user_id = null ) {
 	}
 
 	# If allow_reporter_reopen is enabled, then reporters can always reopen their own bugs
+	# as long as their access level is reporter or above
 	if(    ON == config_get( 'allow_reporter_reopen', null, null, $p_bug->project_id )
 		&& bug_is_user_reporter( $p_bug->id, $p_user_id )
+		&& access_has_bug_level( config_get( 'report_bug_threshold' ), $p_bug->id, $p_user_id )
 	) {
 		return true;
 	}

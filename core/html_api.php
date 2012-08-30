@@ -1386,7 +1386,10 @@ function html_button_bug_change_status( $p_bug ) {
 		$t_current_access,
 		$p_bug->status,
 		false,
-		bug_is_user_reporter( $p_bug->id, auth_get_current_user_id() ) && ( ON == config_get( 'allow_reporter_close' ) ),
+		(  bug_is_user_reporter( $p_bug->id, auth_get_current_user_id() )
+		&& access_has_bug_level( config_get( 'report_bug_threshold' ), $p_bug->id )
+		&& ON == config_get( 'allow_reporter_close' )
+		),
 		$p_bug->project_id );
 
 	if( count( $t_enum_list ) > 0 ) {

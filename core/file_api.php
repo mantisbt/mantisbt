@@ -762,30 +762,29 @@ function file_allow_bug_upload( $p_bug_id = null, $p_user_id = null ) {
 	}
 
 	if( null === $p_bug_id ) {
-
 		# new bug
 		$t_project_id = helper_get_current_project();
 
-		# the user must be the reporter if they're reporting a new bug
-		$t_reporter = true;
+		# If reporting a new bug, the user is the reporter by definition
+		$t_is_reporter = true;
 	} else {
-
 		# existing bug
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 
 		# check if the user is the reporter of the bug
-		$t_reporter = bug_is_user_reporter( $p_bug_id, $p_user_id );
-	}
-
-	# *** If we ever wanted to have a per-project setting enabling file
-	#     uploads, we'd want to check it here before exempting the reporter
-
-	if( $t_reporter && ( ON == config_get( 'allow_reporter_upload' ) ) ) {
-		return true;
+		# and still has reporter access to it
+		$t_is_reporter = (
+			   bug_is_user_reporter( $p_bug_id, $p_user_id )
+			&& access_has_bug_level( config_get( 'report_bug_threshold' ), $p_bug_id, $p_user_id )
+		);
 	}
 
 	# Check the access level against the config setting
-	return access_has_project_level( config_get( 'upload_bug_file_threshold' ), $t_project_id, $p_user_id );
+	$t_can_upload = (
+		   ( $t_is_reporter && ON == config_get( 'allow_reporter_upload' ) )
+		|| access_has_project_level( config_get( 'upload_bug_file_threshold' ), $t_project_id, $p_user_id )
+	);
+	return $t_can_upload;
 }
 
 # --------------------

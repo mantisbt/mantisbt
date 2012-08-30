@@ -45,10 +45,12 @@
 		$g_project_override = $t_bug_data->project_id;
 	}
 
+	$t_user = auth_get_current_user_id();
 	if ( !(
 			   access_has_bug_level( access_get_status_threshold( $f_new_status, bug_get_field( $f_bug_id, 'project_id' ) ), $f_bug_id )
 			|| access_has_bug_level( config_get( 'update_bug_threshold' ) , $f_bug_id )
-			|| (   bug_is_user_reporter( $f_bug_id, auth_get_current_user_id() )
+			|| (   bug_is_user_reporter( $f_bug_id, $t_user )
+				&& access_has_bug_level( config_get( 'report_bug_threshold' ), $f_bug_id, $t_user )
 				&& (   ON == config_get( 'allow_reporter_reopen' )
 					|| ON == config_get( 'allow_reporter_close' )
 				   )
