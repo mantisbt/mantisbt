@@ -30,8 +30,8 @@ class ADODB2_postgres extends ADODB_DataDict {
 			$t = $fieldobj->type;
 			$len = $fieldobj->max_length;
 		}
-		$is_serial = is_object($fieldobj) && $fieldobj->primary_key && $fieldobj->unique &&
-			$fieldobj->has_default && substr($fieldobj->default_value,0,8) == 'nextval(';
+		$is_serial = is_object($fieldobj) && !empty($fieldobj->primary_key) && !empty($fieldobj->unique) &&
+			!empty($fieldobj->has_default) && substr($fieldobj->default_value,0,8) == 'nextval(';
 
 		switch (strtoupper($t)) {
 			case 'INTERVAL':
@@ -130,6 +130,7 @@ class ADODB2_postgres extends ADODB_DataDict {
 	{
 		$tabname = $this->TableName ($tabname);
 		$sql = array();
+		$not_null = false;
 		list($lines,$pkey) = $this->_GenFields($flds);
 		$alter = 'ALTER TABLE ' . $tabname . $this->addCol . ' ';
 		foreach($lines as $v) {
@@ -181,7 +182,7 @@ class ADODB2_postgres extends ADODB_DataDict {
 
 	function AlterColumnSQL($tabname, $flds, $tableflds='',$tableoptions='')
 	{
-	   // Check if alter single column datatype available - works with 8.0+
+	   // Check if alter single column datatype available - works with 8.
 	   $has_alter_column = 8.0 <= (float) @$this->serverInfo['version'];
 
 	   if ($has_alter_column) {
@@ -191,20 +192,21 @@ class ADODB2_postgres extends ADODB_DataDict {
 		  $set_null = false;
 	      $alter = 'ALTER TABLE ' . $tabname . $this->alterCol . ' ';
 	      foreach($lines as $v) {
-	         if ($not_null = preg_match('/NOT NULL/i',$v)) {
+	        if ($not_null = preg_match('/NOT NULL/i',$v)) {
 	            $v = preg_replace('/NOT NULL/i','',$v);
-	         }
+	        }
 	         // this next block doesn't work - there is no way that I can see to
 	         // explicitly ask a column to be null using $flds
-	         else if ($set_null = preg_match('/NULL/i',$v)) {
+	        else if ($set_null = preg_match('/NULL/i',$v)) {
 	            // if they didn't specify not null, see if they explicitely asked for null
 	            $v = preg_replace('/\sNULL/i','',$v);
-	         }
+	        }
 
 			if (preg_match('/^([^ ]+) .*DEFAULT (\'[^\']+\'|\"[^\"]+\"|[^ ]+)/',$v,$matches)) {
 				$existing = $this->MetaColumns($tabname);
 				list(,$colname,$default) = $matches;
-				$old_coltype = $this->connection->MetaType($existing[strtoupper($colname)]);
+				if ($this->connection) $old_coltype = $this->connection->MetaType($existing[strtoupper($colname)]);
+				else $old_coltype = $t;
 				$v = preg_replace('/^' . preg_quote($colname) . '\s/', '', $v);
 				$t = trim(str_replace('DEFAULT '.$default,'',$v));
 
@@ -225,6 +227,8 @@ class ADODB2_postgres extends ADODB_DataDict {
 					$sql[] = $alter . $colname . " TYPE $t";
 					$sql[] = $alter . $colname . " SET DEFAULT $default";
 				}
+
+
 	         }
 	         else {
 	            // drop default?
@@ -233,6 +237,7 @@ class ADODB2_postgres extends ADODB_DataDict {
 	            $sql[] = $alter . $colname . ' TYPE ' . $rest;
 	         }
 
+#	         list($colname) = explode(' ',$v);
 	         if ($not_null) {
 	            // this does not error out if the column is already not null
 				$sql[] = $alter . $colname . ' SET NOT NULL';
