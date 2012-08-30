@@ -369,17 +369,18 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 		$t_user_id = user_get_id_by_name( $p_username );
 
 		if ( false !== $t_user_id ) {
-			user_set_field( $t_user_id, 'password', md5( $p_password ) );
-
+			
+			$t_fields_to_update = array('password' => md5( $p_password ));
+			
 			if ( ON == config_get( 'use_ldap_realname' ) ) {
-				$t_realname = ldap_realname( $t_user_id );
-				user_set_field( $t_user_id, 'realname', $t_realname );
+				$t_fields_to_update['realname'] = ldap_realname( $t_user_id );
 			}
 
 			if ( ON == config_get( 'use_ldap_email' ) ) {
-				$t_email = ldap_email_from_username( $p_username );
-				user_set_field( $t_user_id, 'email', $t_email );
+				$t_fields_to_update['email'] = ldap_email_from_username( $p_username );
 			}
+			
+			user_set_fields( $t_user_id, $t_fields_to_update );
 		}
 		log_event( LOG_LDAP, "User '$p_username' authenticated" );
 	} else {
