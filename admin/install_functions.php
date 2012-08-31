@@ -24,22 +24,37 @@
  */
 
 /**
+ * Set the value of $g_db_log_queries as specified
+ * This is used by install callback functions to ensure that only the relevant
+ * queries are logged
+ * @global int $g_db_log_queries
+ * @param int $p_new_state new value to set $g_db_log_queries to (defaults to OFF)
+ * @return int old value of $g_db_log_queries
+ */
+function install_set_log_queries( $p_new_state = OFF ) {
+	global $g_db_log_queries;
+
+	$t_log_queries = $g_db_log_queries;
+
+	if ( $g_db_log_queries !== $p_new_state ) {
+		$g_db_log_queries = $p_new_state;
+	}
+
+	# Return the old value of $g_db_log_queries
+	return $t_log_queries;
+}
+
+/**
  * Migrate the legacy category data to the new category_id-based schema.
  */
 function install_category_migrate() {
-	global $g_db_log_queries;
 	
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
 	$t_category_table = db_get_table( 'mantis_category_table' );
 	$t_project_category_table = db_get_table( 'mantis_project_category_table' );
 
-	// disable query logging (even if it's enabled in config for this)
-	if ( $g_db_log_queries !== 0 ) {
-		$t_log_queries = $g_db_log_queries;
-		$g_db_log_queries = 0;
-	} else {
-		$t_log_queries = null;
-	}
+	# Disable query logging even if enabled in config, due to possibility of mass spam
+	$t_log_queries = install_set_log_queries();
 
 	$query = "SELECT project_id, category, user_id FROM $t_project_category_table ORDER BY project_id, category";
 	$t_category_result = db_query_bound( $query );
@@ -87,10 +102,8 @@ function install_category_migrate() {
 		}
 	}
 
-	// re-enabled query logging if we disabled it
-	if ( $t_log_queries !== null ) {
-		$g_db_log_queries = $t_log_queries;
-	}
+	# Re-enable query logging if we disabled it
+	install_set_log_queries( $t_log_queries );
 
 	# return 2 because that's what ADOdb/DataDict does when things happen properly
 	return 2;
@@ -98,15 +111,9 @@ function install_category_migrate() {
 
 function install_date_migrate( $p_data) {
 	// $p_data[0] = tablename, [1] id column, [2] = old column, [3] = new column
-	global $g_db_log_queries;
 	
-	// disable query logging (even if it's enabled in config for this)
-	if ( $g_db_log_queries !== 0 ) {
-		$t_log_queries = $g_db_log_queries;
-		$g_db_log_queries = 0;
-	} else {
-		$t_log_queries = null;
-	}
+	# Disable query logging even if enabled in config, due to possibility of mass spam
+	$t_log_queries = install_set_log_queries();
 
 	$t_table = db_get_table( $p_data[0] );
 	$t_id_column = $p_data[1];
@@ -179,10 +186,8 @@ function install_date_migrate( $p_data) {
 		db_query_bound( $query, $t_values );
 	}
 
-	// re-enabled query logging if we disabled it
-	if ( $t_log_queries !== null ) {
-		$g_db_log_queries = $t_log_queries;
-	}
+	# Re-enable query logging if we disabled it
+	install_set_log_queries( $t_log_queries );
 
 	# return 2 because that's what ADOdb/DataDict does when things happen properly
 	return 2;	
@@ -198,15 +203,8 @@ function install_date_migrate( $p_data) {
  * one possible value that can be assigned to a radio field.
  */
 function install_correct_multiselect_custom_fields_db_format() {
-	global $g_db_log_queries;
-
-	# Disable query logging due to possibility of mass spam.
-	if ( $g_db_log_queries !== 0 ) {
-		$t_log_queries = $g_db_log_queries;
-		$g_db_log_queries = 0;
-	} else {
-		$t_log_queries = null;
-	}
+	# Disable query logging even if enabled in config, due to possibility of mass spam
+	$t_log_queries = install_set_log_queries();
 
 	$t_value_table = db_get_table( 'mantis_custom_field_string_table' );
 	$t_field_table = db_get_table( 'mantis_custom_field_table' );
@@ -252,10 +250,8 @@ function install_correct_multiselect_custom_fields_db_format() {
 		$t_update_result = db_query_bound( $t_update_query );
 	}
 
-	# Re-enable query logging if we disabled it.
-	if ( $t_log_queries !== null ) {
-		$g_db_log_queries = $t_log_queries;
-	}
+	# Re-enable query logging if we disabled it
+	install_set_log_queries( $t_log_queries );
 
 	# Return 2 because that's what ADOdb/DataDict does when things happen properly
 	return 2;
