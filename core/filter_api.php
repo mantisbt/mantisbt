@@ -930,7 +930,7 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 
 	$t_count = count( $t_sort_fields );
 	for( $i = 0;$i < $t_count;$i++ ) {
-		$c_sort = db_prepare_string( $t_sort_fields[$i] );
+		$c_sort = $t_sort_fields[$i];
 		$c_dir = 'DESC' == $t_dir_fields[$i] ? 'DESC' : 'ASC';
 
 		if( !in_array( $t_sort_fields[$i], array_slice( $t_sort_fields, $i + 1 ) ) ) {

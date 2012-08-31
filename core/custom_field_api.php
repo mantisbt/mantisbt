@@ -787,9 +787,8 @@ function custom_field_get_id_from_name( $p_field_name ) {
 
 	$t_custom_field_table = db_get_table( 'custom_field' );
 
-	$c_field_name = db_prepare_string( $p_field_name );
-	$query = "SELECT id FROM $t_custom_field_table WHERE name = '$c_field_name'";
-	$t_result = db_query( $query, 1 );
+	$query = "SELECT id FROM $t_custom_field_table WHERE name = " . db_param();
+	$t_result = db_query_bound( $query, $p_field_name );
 
 	if( db_num_rows( $t_result ) == 0 ) {
 		return false;
