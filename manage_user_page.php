@@ -173,15 +173,11 @@ foreach ( $t_prefix_array as $t_prefix => $t_caption ) {
 		$c_filter = $f_filter;
 		echo '<span class="current-filter">' . $t_caption . '</span>';
 	} else {
-		echo '<a' . $t_title . ' href="manage_user_page.php?sort=' . $c_sort . '&amp;dir=' . $c_dir . '&amp;save=1' . $t_hide_filter . '&amp;filter=' . $t_prefix . '">' . $t_caption . '</a>';
-/*
- *
 		print_manage_user_sort_link( 'manage_user_page.php',
 			$t_caption,
 			$c_sort,
 			$c_dir, null, $c_hide_inactive, $t_prefix, $c_show_disabled
 		);
-*/
 	}
 	echo '</li>';
 }
