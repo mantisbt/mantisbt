@@ -74,8 +74,10 @@ function columns_filter_disabled( $p_columns ) {
 
 /**
  * Get a list of standard columns.
+ * @param bool $p_enabled_columns_only default true, if false returns all columns regardless of config settings
+ * @return array of column names
  */
-function columns_get_standard() {
+function columns_get_standard( $p_enabled_columns_only = true ) {
 	$t_reflection = new ReflectionClass('BugData');
 	$t_columns = $t_reflection->getDefaultProperties();
 
@@ -85,21 +87,21 @@ function columns_get_standard() {
 	# Overdue icon column (icons appears if an issue is beyond due_date)
 	$t_columns['overdue'] = null;
 
-	if( OFF == config_get( 'enable_profiles' ) ) {
+	if( $p_enabled_columns_only && OFF == config_get( 'enable_profiles' ) ) {
 		unset( $t_columns['os'] );
 		unset( $t_columns['os_build'] );
 		unset( $t_columns['platform'] );
 	}
 
-	if( config_get( 'enable_eta' ) == OFF ) {
+	if( $p_enabled_columns_only && config_get( 'enable_eta' ) == OFF ) {
 		unset( $t_columns['eta'] );
 	}
 
-	if( config_get( 'enable_projection' ) == OFF ) {
+	if( $p_enabled_columns_only && config_get( 'enable_projection' ) == OFF ) {
 		unset( $t_columns['projection'] );
 	}
 
-	if( config_get( 'enable_product_build' ) == OFF ) {
+	if( $p_enabled_columns_only && config_get( 'enable_product_build' ) == OFF ) {
 		unset( $t_columns['build'] );
 	}
 
@@ -109,7 +111,7 @@ function columns_get_standard() {
 	unset( $t_columns['sticky'] );
 	unset( $t_columns['loading'] );
 
-	return array_keys($t_columns);
+	return array_keys( $t_columns );
 }
 
 /**
