@@ -777,10 +777,9 @@ function custom_field_get_id_from_name( $p_field_name, $p_truncated_length = nul
 
 	$t_custom_field_table = db_get_table( 'mantis_custom_field_table' );
 
-	$c_field_name = db_prepare_string( $p_field_name );
-
-	if(( null === $p_truncated_length ) || ( utf8_strlen( $c_field_name ) != $p_truncated_length ) ) {
-		$query = "SELECT id FROM $t_custom_field_table WHERE name = '$c_field_name'";
+	if(( null === $p_truncated_length ) || ( utf8_strlen( $p_field_name ) != $p_truncated_length ) ) {
+		$query = "SELECT id FROM $t_custom_field_table WHERE name = " . db_param();
+		$c_field_name = $p_field_name;
 	} else {
 		# This is to handle the case where we potentially only have a
 		# truncated part of the custom field name.  This happens when we
@@ -789,10 +788,11 @@ function custom_field_get_id_from_name( $p_field_name, $p_truncated_length = nul
 		# This is needed to handle legacy database entries, as any
 		# history record created after 1.1.0a4 has the correct field
 		# size (see #8002)
-		$query = "SELECT id FROM $t_custom_field_table WHERE name LIKE '$c_field_name%'";
+		$query = "SELECT id FROM $t_custom_field_table WHERE name LIKE " . db_param();
+		$c_field_name = $p_field_name . '%';
 	}
 
-	$t_result = db_query( $query, 1 );
+	$t_result = db_query_bound( $query, $c_field_name );
 
 	if( db_num_rows( $t_result ) == 0 ) {
 		return false;
