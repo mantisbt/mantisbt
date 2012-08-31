@@ -371,6 +371,76 @@ function install_stored_filter_migrate() {
 	return 2;
 }
 
+/**
+ * History table's field name column used to be 32 chars long (before 1.1.0a4),
+ * while custom field names can be up to 64. This function updates history
+ * records related to long custom fields to store the complete field name
+ * instead of the truncated version
+ *
+ *
+ * @return int 2, because that's what ADOdb/DataDict does when things happen properly
+ */
+function install_update_history_long_custom_fields() {
+	# Disable query logging even if enabled in config, due to possibility of mass spam
+	$t_log_queries = install_set_log_queries();
+
+	# Build list of custom field names longer than 32 chars for reference
+	$t_custom_field_table = db_get_table( 'custom_field' );
+	$t_query = "SELECT name FROM $t_custom_field_table";
+	$t_result = db_query_bound( $t_query );
+	while( $t_field = db_fetch_array( $t_result ) ) {
+		if( utf8_strlen( $t_field[0] ) > 32 ) {
+			$t_custom_fields[utf8_substr( $t_field[0], 0, 32 )] = $t_field[0];
+		}
+	}
+	if( !isset( $t_custom_fields ) ) {
+		# There are no custom fields longer than 32, nothing to do
+
+		# Re-enable query logging if we disabled it
+		install_set_log_queries( $t_log_queries );
+		return 2;
+	}
+
+	# Build list of standard fields to filter out from history
+	# Fields mapping: category_id is actually logged in history as 'category'
+	$t_standard_fields = array_replace(
+		columns_get_standard( false ), # all columns
+		array( 'category_id' ),
+		array('category' )
+	);
+	$t_field_list = "";
+	foreach( $t_standard_fields as $t_field ) {
+		$t_field_list .= "'$t_field', ";
+	}
+	$t_field_list = rtrim( $t_field_list, ', ' );
+
+	# Get the list of custom fields from the history table
+	$t_history_table = db_get_table( 'bug_history' );
+	$t_query = "SELECT DISTINCT field_name
+		FROM $t_history_table
+		WHERE type = " . NORMAL_TYPE . "
+		AND   field_name NOT IN ( $t_field_list )";
+	$t_result = db_query_bound( $t_query );
+
+	# For each entry, update the truncated custom field name with its full name
+	# if a matching custom field exists
+	while( $t_field = db_fetch_array( $t_result ) ) {
+		# If field name's length is 32, then likely it was truncated so we try to match
+		if( utf8_strlen( $t_field[0] ) == 32 && array_key_exists( $t_field[0], $t_custom_fields ) ) {
+			# Match found, update all history records with this field name
+			$t_update_query = "UPDATE $t_history_table
+				SET field_name = " . db_param() . "
+				WHERE field_name = " . db_param();
+			db_query_bound( $t_update_query, array( $t_custom_fields[$t_field[0]], $t_field[0] ) );
+		}
+	}
+
+	# Re-enable query logging if we disabled it
+	install_set_log_queries( $t_log_queries );
+
+	return 2;
+}
+
 function install_do_nothing() {
 	# return 2 because that's what ADOdb/DataDict does when things happen properly
 	return 2;

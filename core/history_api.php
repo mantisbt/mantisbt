@@ -212,10 +212,8 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 
 		if ( $v_type == NORMAL_TYPE ) {
 			if ( !in_array( $v_field_name, $t_standard_fields ) ) {
-
-				// check that the item should be visible to the user
-				// custom fields - we are passing 32 here to notify the API that the custom field name is truncated by the history column from 64 to 32 characters.
-				$t_field_id = custom_field_get_id_from_name( $v_field_name, 32 );
+				# check that the item should be visible to the user
+				$t_field_id = custom_field_get_id_from_name( $v_field_name );
 				if( false !== $t_field_id && !custom_field_has_read_access( $t_field_id, $p_bug_id, $t_user_id ) ) {
 					continue;
 				}

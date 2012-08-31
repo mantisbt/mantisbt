@@ -771,11 +771,10 @@ function custom_field_delete_all_values( $p_bug_id ) {
  * Get the id of the custom field with the specified name.
  * false is returned if no custom field found with the specified name.
  * @param string $p_field_name custom field name
- * @param int $p_truncated_length
  * @return bool|int false or custom field id
  * @access public
  */
-function custom_field_get_id_from_name( $p_field_name, $p_truncated_length = null ) {
+function custom_field_get_id_from_name( $p_field_name ) {
 	global $g_cache_name_to_id_map;
 
 	if ( is_blank( $p_field_name ) ) {
@@ -789,17 +788,7 @@ function custom_field_get_id_from_name( $p_field_name, $p_truncated_length = nul
 	$t_custom_field_table = db_get_table( 'custom_field' );
 
 	$c_field_name = db_prepare_string( $p_field_name );
-
-	if(( null === $p_truncated_length ) || ( utf8_strlen( $c_field_name ) != $p_truncated_length ) ) {
-		$query = "SELECT id FROM $t_custom_field_table WHERE name = '$c_field_name'";
-	} else {
-		/** @todo This is to handle the case where we only have a truncated part of the name.  This happens in the case where
-		 * we are getting the custom field name from the history logs, since history is 32 and custom field name is 64.
-		 * This fix will handle entries already in the database, future entries should be handled by making the field name max lengths match.
-		 */
-		$query = "SELECT id FROM $t_custom_field_table WHERE name LIKE '$c_field_name%'";
-	}
-
+	$query = "SELECT id FROM $t_custom_field_table WHERE name = '$c_field_name'";
 	$t_result = db_query( $query, 1 );
 
 	if( db_num_rows( $t_result ) == 0 ) {
