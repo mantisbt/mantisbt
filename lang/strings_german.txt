@@ -43,6 +43,7 @@
  * @author Martin Fuchs, martin-fuchs@gmx.net
  * @author Matthias Bauer, mantis-de@moeffju.de
  * @author Melancholie
+ * @author Metalhead64
  * @author MichaelFrey
  * @author Pill
  * @author Purodha
@@ -203,11 +204,11 @@ $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Dieser Benutzername ist schon verge
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfigurationsoption „%1$s“ nicht gefunden.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Die Konfigurationsoption „%1$s“ wurde nicht in der Datenbank gefunden. Sie muss in config_inc.php definiert werden.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Zeichenkette „%1$s“ nicht gefunden.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Problemnotiz nicht gefunden.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Eintragsnotiz nicht gefunden.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projekt „%1$d“ nicht gefunden.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Datenbankfeld „%1$s“ nicht gefunden.';
 $MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Keine Verbindung zum FTP-Server.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Der Problembearbeiter hat keine ausreichenden Rechte, um ein Problem mit diesem Status zu bearbeiten.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Der Bearbeiter hat keine ausreichenden Rechte, um einen Eintrag mit diesem Status zu bearbeiten.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Ein Projekt mit diesem Namen ist bereits vorhanden. Gehen Sie zurück und wählen Sie einen anderen Namen.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Ungültiger Projektname. Projektnamen können nicht leer sein.';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Benutzer mit Namen „%1$s“ nicht gefunden.';
@@ -219,7 +220,7 @@ $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Eingegebene Passwörter st
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'Ein Feld wurde für %1$s erwartet, aber eine Zeichenkette übergeben.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Eine Zeichenkette wurde erwartet, aber ein Feld wurde für %1$s übergeben.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Eine Zahl wurde für %1$s erwartet.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Problem %1$d nicht gefunden.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Eintrag %1$d nicht gefunden.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filter %1$s nicht gefunden.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Der Filter, den Sie verwenden wollen, ist zu alt für eine Überarbeitung. Bitte neu erstellen.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Ungültige E-Mail-Adresse.';
@@ -230,8 +231,8 @@ $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Dies ist eine doppelte Datei. Löschen Si
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Ungültiger Pfad, die Dateiübertragung war nicht erfolgreich. Das Verzeichnis existiert nicht oder konnte nicht beschrieben werden.';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Keine Datei übertragen. Gehen Sie zurück und wählen Sie eine Datei aus, bevor Sie auf Datei übertragen drücken';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Übertragene Datei konnte nicht in das Speicherverzeichnis verschoben werden. Verzeichnis nicht vorhanden oder vom Webserver nicht beschreibbar.';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Sie können kein Problem als Duplikat von sich selbst anlegen.';
-$MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Überarbeitung des Problems nicht gefunden';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Sie können keinen Eintrag als Duplikat von sich selbst anlegen.';
+$MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Überarbeitung des Eintrags nicht gefunden';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Benutzerdefiniertes Feld nicht gefunden.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Name doppelt vorhanden.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Mindestens ein Projekt benutzt noch dieses Feld.';
@@ -249,6 +250,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Eine Kategorie mit diesem Namen exist
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Kein Kopiervorgang angegeben.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorie nicht gefunden.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Die Kategorie „%1$s“ wurde für das Projekt „%2$s“ nicht gefunden.';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Diese Kategorie kann nicht gelöscht werden, da sie als „Standardkategorie für Verschiebungen“ definiert ist.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Eine Version mit diesem Namen existiert bereits.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version „%1$s“ nicht gefunden.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Der Benutzername ist ungültig. Erlaubt sind nur lateinische Buchstaben, Ziffern, Leerzeichen, Bindestriche, Punkte, Pluszeichen und Unterstriche.';
@@ -258,15 +260,15 @@ $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Der eingegebene „Vollständige Na
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsor-Unterstützung nicht aktiviert.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsor %1$d nicht gefunden.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorschaft (%1$s) liegt unter dem Mindestbetrag (%2$s).';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Bearbeiter hat nicht die benötigten Zugangsrechte für gesponserte Probleme.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Zugang verweigert: Zuweisung gesponserter Probleme erfordert höhere Benutzerrechte.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Bearbeiter hat nicht die benötigten Zugangsrechte für gesponserte Einträge.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Zugang verweigert: Zuweisung gesponserter Einträge erfordert höhere Benutzerrechte.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor hat keine E-Mail-Adresse angegeben. Bitte aktualisieren Sie Ihr Konto.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Einstellung „%1$s“ enthält ungültigen Wert „%2$s“.';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Aktion nicht ausführbar, weil Problem „%1$d“ schreibgeschützt ist.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Es besteht bereits eine Beziehung zwischen diesen zwei Problemen.';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Aktion nicht ausführbar da Eintrag „%1$d“ schreibgeschützt ist.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Es besteht bereits eine Beziehung zwischen diesen beiden Einträgen.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Beziehung nicht gefunden.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Zugang verweigert: Das Problem %1$d benötigt höhere Zugriffsrechte.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Ein Problem kann nicht mit sich selbst in Beziehung gesetzt werden.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Zugang verweigert: Der Eintrag %1$d benötigt höhere Zugriffsrechte.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Ein Eintrag kann nicht mit sich selbst in Beziehung gesetzt werden.';
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Bestätigungsschlüssel nicht korrekt. Bitte versuchen Sie es noch einmal.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Die „Passwort vergessen“-Funktion ist nicht verfügbar.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Sie müssen eine E-Mail-Adresse angeben, um Ihr Passwort zurücksetzen zu können.';
