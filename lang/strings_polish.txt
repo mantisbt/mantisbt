@@ -237,6 +237,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Podana kategoria już istnieje.';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Nie zdefiniowano możliwości kopiowania.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Nie znaleziono kategorii.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Brak kategorii „%1$s” dla projektu „%2$s”.';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Nie można usunąć tej kategorii, ponieważ jest ona zdefiniowana jako "Domyślna kategoria do Przenoszenia".';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Podana wersja już istnieje.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Nie znaleziono wersji „%1$s”.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Nieprawidłowa nazwa użytkownika. Nazwa użytkownika może zawierać tyko litery alfabetu łacińskiego, liczby, spacje, myślniki, kropki, znaki dodawania i podkreślenia.';

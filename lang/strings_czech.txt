@@ -26,6 +26,7 @@
  * @file
  *
  * @author Adam Zivner
+ * @author Chmee2
  * @author Jezevec
  * @author Jirí Kuchta, kuchta@feec.vutbr.cz
  * @author Kuvaly
@@ -236,6 +237,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Kategorie tohoto jména již existuje
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Nebylo specifikováno kopírování.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorie nenalezena.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Kategorie \'%1$s\' nebyla pro projekt \'%2$s\' nalezena.';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Tuto kategorii nelze odstranit, protože je definována jako "Výchozí kategorie pro přesuny".';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Verze tohoto jména již existuje.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Verze "%1$s" nebyla nalezena.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Neplatné uživatelské jméno. Uživatelská jména mohou obsahovat pouze písmena z latinky, čísla, mezery, spojovníky, tečky, znaménka plus a podtržítka.';
