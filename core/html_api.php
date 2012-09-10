@@ -515,11 +515,11 @@ function html_login_info() {
 	echo "<span class=\"italic\">$t_now</span>";
 	echo '</td>';
 	echo '<td class="login-info-right">';
-	$t_show_project_selector = true;
-	if( count( current_user_get_accessible_projects() ) == 1 ) {
 
-		// >1
-		$t_project_ids = current_user_get_accessible_projects();
+	# Project Selector hidden if only one project visisble to user
+	$t_show_project_selector = true;
+	$t_project_ids = current_user_get_accessible_projects();
+	if( count( $t_project_ids ) == 1 ) {
 		$t_project_id = (int) $t_project_ids[0];
 		if( count( current_user_get_accessible_subprojects( $t_project_id ) ) == 0 ) {
 			$t_show_project_selector = false;
@@ -544,7 +544,17 @@ function html_login_info() {
 		}
 		echo '<input type="submit" class="button-small" value="' . lang_get( 'switch' ) . '" />';
 		echo '</form>';
+	} else {
+		# User has only one project, set it as both current and default
+		if( ALL_PROJECTS == helper_get_current_project() ) {
+			helper_set_current_project( $t_project_id );
+			current_user_set_default_project( $t_project_id );
+			# Force reload of current page
+			$t_redirect_url = str_replace( config_get( 'short_path' ), '', $_SERVER['REQUEST_URI'] );
+			html_meta_redirect( $t_redirect_url, 0, false );
+		}
 	}
+
 	if( OFF != config_get( 'rss_enabled' ) ) {
 
 		# Link to RSS issues feed for the selected project, including authentication details.
