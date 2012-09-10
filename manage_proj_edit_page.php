@@ -36,6 +36,7 @@
 	$f_show_global_users = gpc_get_bool( 'show_global_users' );
 
 	project_ensure_exists( $f_project_id );
+	$g_project_override = $f_project_id;
 	access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
 	$row = project_get_row( $f_project_id );
