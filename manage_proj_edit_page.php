@@ -116,7 +116,7 @@
 </tr>
 
 <!-- File upload path (if uploading is enabled) -->
-<?php if ( file_is_uploading_enabled() ) { ?>
+<?php if ( file_is_uploading_enabled() && config_get('file_upload_method') != DATABASE ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'upload_file_path' ) ?>
