@@ -544,12 +544,10 @@ function html_login_info() {
 	}
 	echo '</div>';
 
-
+	# Project Selector hidden if only one project visisble to user
 	$t_show_project_selector = true;
-	if( count( current_user_get_accessible_projects() ) == 1 ) {
-
-		// >1
-		$t_project_ids = current_user_get_accessible_projects();
+	$t_project_ids = current_user_get_accessible_projects();
+	if( count( $t_project_ids ) == 1 ) {
 		$t_project_id = (int) $t_project_ids[0];
 		if( count( current_user_get_accessible_subprojects( $t_project_id ) ) == 0 ) {
 			$t_show_project_selector = false;
@@ -579,6 +577,14 @@ function html_login_info() {
 		echo '</form>';
 		echo '<div id="current-time">' . $t_now . '</div>';
 	} else {
+		# User has only one project, set it as both current and default
+		if( ALL_PROJECTS == helper_get_current_project() ) {
+			helper_set_current_project( $t_project_id );
+			current_user_set_default_project( $t_project_id );
+			# Force reload of current page
+			$t_redirect_url = str_replace( config_get( 'short_path' ), '', $_SERVER['REQUEST_URI'] );
+			html_meta_redirect( $t_redirect_url, 0, false );
+		}
 		echo '<div id="current-time-centered">' . $t_now . '</div>';
 	}
 }
