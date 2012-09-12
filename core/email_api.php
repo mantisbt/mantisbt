@@ -383,12 +383,13 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 			}
 		}
 
-		# check that user can see bugnotes if the last update included a bugnote
-		if( $t_bug_date == $t_bugnote_date ) {
-			if( !access_has_bugnote_level( VIEWER, $t_bugnote_id, $t_id ) ) {
-				log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, drop @U%d (access level)', $p_bug_id, $t_id ) );
-				continue;
-			}
+		# exclude users who don't have at least viewer access to the bug,
+		# or who can't see bugnotes if the last update included a bugnote
+		if( !access_has_bug_level( VIEWER, $p_bug_id, $t_id )
+		 || $t_bug_date == $t_bugnote_date && !access_has_bugnote_level( VIEWER, $t_bugnote_id, $t_id )
+		) {
+			log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, drop @U%d (access level)', $p_bug_id, $t_id ) );
+			continue;
 		}
 
 		# check to exclude users as specified by plugins
