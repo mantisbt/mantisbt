@@ -774,93 +774,225 @@ $g_status_enum_workflow[CLOSED]       ='20:feedback,50:assigned';
 		</para>
 	</section>
 
-        <section id="admin.customize.customfuncs">
-            <title>Custom Functions</title>
+	<section id="admin.customize.customfuncs">
+		<title>Custom Functions</title>
 
-            <para>Custom functions are used to extend the functionality of
-                MantisBT by integrating user writtenfunctions into the issue
-                processing at strategic places. This allows the system
-                administrator to changethe functionality without re-writing parts
-                of the internals of the code.
-            </para>
-            <para>User versions of these functions are
-                placed in a file called custom_functions_inc.php in the
-                root directory of MantisBT. This is the same place that the
-                "config_inc.php" file modifying MantisBT defaults is placed. In normal
-                processing, MantisBT will look for override functions and execute
-                them instead of the provided default functions.</para>
-            <para>Custom functions have
-                    names like custom_function_override_descriptive_name where
-                    descriptive namedescribed the particular function. The specific
-                    functions are described below. The simplest way tocreate a custom
-                    function is to copy the default function, named
-                    custom_function_default_descriptive_namefrom the
-                    core/custom_function_api.php file to your override file
-                    (custom_functions_inc.php), andrename it. The specific
-                    functionality you need can then be coded into the override
-                    function.
-            </para>
+		<para>Custom functions are used to extend the functionality of
+			MantisBT by integrating user-written functions into the issue
+			processing at strategic places. This allows the system
+			administrator to change the functionality without touching
+			MantisBT's core.
+		</para>
+		<para>Default Custom Functions are defined in the API file
+			<filename>core/custom_function_api.php</filename>
+			, and are named
+			<emphasis>custom_function_default_descriptive_name</emphasis>,
+			where <emphasis>descriptive_name</emphasis> describes the
+			particular function.
+			<link linkend="admin.customize.customfuncs.defined">See below</link>
+			for a description of the specific functions.
+		</para>
+		<para>User versions of these functions (overrides) are named like
+			<emphasis>custom_function_override_descriptive_name</emphasis>,
+			and placed in a file called
+			<filename>custom_constants_inc.php</filename> that must be saved in
+			MantisBT's root directory (This is the same place where the
+			<filename>config_inc.php</filename> file resides).
+			In normal processing, the system will look for override functions
+			and execute them instead of the provided default functions.
+		</para>
+		<para>The simplest way to create a custom function is to copy the
+			default one from the api to your override file
+			(<filename>custom_constants_inc.php</filename>), and rename it
+			(i.e. replacing 'default' by 'override').
+			The specific functionality you need can then be coded into the
+			override function.
+		</para>
 
-            <section id="admin.customize.customfuncs.defined">
-                <title>Defined Functions</title>
+		<section id="admin.customize.customfuncs.defined">
+			<title>Default Custom Functions</title>
 
-                <para>custom_function_default_changelog_include_issue( $p_issue_id
-                    ) returns true or false if the issue if to be included in the
-                    Changelog. custom_function_default_changelog_print_issue( $p_issue_id
-                    ) returns a formatted string to be included for the issue in the
-                    Changelog. custom_function_default_issue_update_validate( $p_issue_id,
-                    $p_file, $p_new_version ) registers a checkin in source control in
-                    MantisBT custom_function_default_issue_update_validate( $p_issue_id,
-                    $p_new_bug, $p_bug_note_text ) validate issue field settings before
-                    an update occurs. It returns true or fails with an
-                    error.custom_function_default_issue_update_notify( $p_issue_id )
-                    notify after an issue has been
-                    updated. custom_function_default_issue_create_validate( $p_new_bug )
-                    validate issue field settings before an issue is created. It returns
-                    true or fails with an
-                    error.custom_function_default_issue_create_notify( $p_issue_id )
-                    notify after an issue has been
-                    opened. custom_function_default_issue_delete_validate( $p_issue_id )
-                    validate issue field settings before an issue can be deleted. It
-                    returns true or fails with an
-                    error.custom_function_default_issue_delete_notify( $p_issue_id )
-                    notify after an issue has been deleted
-                </para>
-            </section>
+			<para>Refer to <filename>core/custom_functions_api.php</filename>
+				for further details.
+			</para>
 
-            <section id="admin.customize.customfuncs.example">
-                <title>Example Custom Function</title>
+			<informaltable>
+				<tgroup cols="3">
+					<thead>
+						<row>
+							<entry>Custom Function Name</entry>
+							<entry>Description</entry>
+							<entry>Return value</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row>
+							<entry>custom_function_default_auth_can_change_password()</entry>
+							<entry>Determines whether MantisBT can update the password</entry>
+							<entry>True if yes, False if not</entry>
+						</row>
+						<row>
+							<entry>custom_function_default_changelog_include_issue( $p_issue_id )</entry>
+							<entry>Determines whether the specified issue should be included in the Changelog or not.</entry>
+							<entry>True to include, False to exclude</entry>
+						</row>
+						<row>
+							<entry>custom_function_default_changelog_print_issue( $p_issue_id, $p_issue_level = 0 )</entry>
+							<entry>Prints one entry in the Changelog</entry>
+							<entry>None</entry>
+						</row>
+						<row>
+							<entry>custom_function_default_checkin( $p_issue_id, $p_comment, $p_file, $p_new_version, $p_fixed )</entry>
+							<entry>Register a checkin in source control by adding a history entry and a note</entry>
+							<entry>None</entry>
+						</row>
+						<row>
+							<entry>custom_function_default_enum_categories()</entry>
+							<entry>Build a list of all categories for the current project</entry>
+							<entry>Enumeration, delimited by "|"</entry>
+						</row>
+						<row>
+							<entry>custom_function_default_enum_future_versions()</entry>
+							<entry>Build a list of all future versions for the current project</entry>
+							<entry>Enumeration, delimited by "|"</entry>
+						</row>
+						<row>
+							<entry>custom_function_default_enum_released_versions()</entry>
+							<entry>Build a list of all released versions for the current project</entry>
+							<entry>Enumeration, delimited by "|"</entry>
+						</row>
+						<row>
+							<entry>custom_function_default_enum_versions()</entry>
+							<entry>Build a list of all versions for the current project</entry>
+							<entry>Enumeration, delimited by "|"</entry>
+						</row>
+						<row>
+							<entry>custom_function_default_format_issue_summary( $p_issue_id, $p_context = 0 )</entry>
+							<entry>Format the bug summary</entry>
+							<entry>Formatted string</entry>
+						</row>
+						<row>
+							<entry>custom_function_default_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAGE, $p_user_id = null )</entry>
+							<entry>Defines which columsn should be displayed</entry>
+							<entry>Array of the column names</entry>
+						</row>
+						<row>
+							<entry>custom_function_default_issue_create_notify( $p_issue_id )</entry>
+							<entry>Notify after an issue has been created</entry>
+							<entry>In case of invalid data, this function should call trigger_error()</entry>
+						</row>
+						<row>
+							<entry>custom_function_default_issue_create_validate( $p_new_issue_data )</entry>
+							<entry>Validate field settings before creating an issue</entry>
+							<entry>In case of invalid data, this function should call trigger_error()</entry>
+						</row>
+						<row>
+							<entry>custom_function_default_issue_delete_notify( $p_issue_data )</entry>
+							<entry>Notify after an issue has been deleted</entry>
+							<entry>In case of invalid data, this function should call trigger_error()</entry>
+						</row>
+						<row>
+							<entry>custom_function_default_issue_delete_validate( $p_issue_id )</entry>
+							<entry>Validate field settings before deleting an issue</entry>
+							<entry>In case of invalid data, this function should call trigger_error()</entry>
+						</row>
+						<row>
+							<entry>custom_function_default_issue_update_notify( $p_issue_id )</entry>
+							<entry>Notify after an issue has been updated</entry>
+							<entry>In case of invalid data, this function should call trigger_error()</entry>
+						</row>
+						<row>
+							<entry>custom_function_default_issue_update_validate( $p_issue_id, $p_new_issue_data, $p_bugnote_text )</entry>
+							<entry>Validate field issue data before updating</entry>
+							<entry>In case of invalid data, this function should call trigger_error()</entry>
+						</row>
+						<row>
+							<entry>custom_function_default_print_bug_view_page_custom_buttons( $p_bug_id )</entry>
+							<entry>Prints the custom buttons on the current view page</entry>
+							<entry>None</entry>
+						</row>
+						<row>
+							<entry>custom_function_default_print_column_title( $p_column, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE )</entry>
+							<entry>Print a column's title based on its name</entry>
+							<entry>None</entry>
+						</row>
+						<row>
+							<entry>custom_function_default_print_column_value( $p_column, $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE )</entry>
+							<entry>Print a column's value based on its name</entry>
+							<entry>None</entry>
+						</row>
+						<row>
+							<entry>custom_function_default_roadmap_include_issue( $p_issue_id )</entry>
+							<entry>Determines whether the specified issue should be included in the Roadmap or not.</entry>
+							<entry>True to include, False to exclude</entry>
+						</row>
+						<row>
+							<entry>custom_function_default_roadmap_print_issue( $p_issue_id, $p_issue_level = 0 )</entry>
+							<entry>Prints one entry in the Roadmap</entry>
+							<entry>None</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</informaltable>
 
-                <para>The following function is used to validate an issue before
-                    it is resolved.
-                    <programlisting width="102"><![CDATA[<?php
-# --------------------
-# Hook to validate Validate field settings before resolving
-# verify that the resolution is not set to OPEN
-# verify that the fixed in version is set (if versions of the product exist)
+		</section>
 
+		<section id="admin.customize.customfuncs.example">
+			<title>Example Custom Function Override</title>
+
+			<para>The following function is used to validate an issue before
+				it is resolved.
+			</para>
+
+			<programlisting width="102"><![CDATA[<?php
+
+/**
+ * Hook to validate Validate field settings before resolving
+ * verify that the resolution is not set to OPEN
+ * verify that the fixed in version is set (if versions of the product exist)
+ */
 function custom_function_override_issue_update_validate( $p_issue_id, $p_bug_data, $p_bugnote_text ) {
-if ( $p_bug_data->status == RESOLVED ) {
-if ( $p_bug_data->resolution == OPEN ) {
-error_parameters( 'the resolution cannot be open to resolve the issue' );
-trigger_error( ERROR_BUG_VALIDATE_FAILURE, ERROR );
+	if( $p_bug_data->status == RESOLVED ) {
+		if ( $p_bug_data->resolution == OPEN ) {
+			error_parameters( 'the resolution cannot be open to resolve the issue' );
+			trigger_error( ERROR_BUG_VALIDATE_FAILURE, ERROR );
+		}
+		$t_version_count = count( version_get_all_rows( $p_bug_data-&gt;project_id ) );
+		if( ( $t_version_count > 0 ) && ( $p_bug_data->fixed_in_version == '' ) ) {
+			error_parameters( 'fixed in version must be set to resolve the issue' );
+			trigger_error( ERROR_BUG_VALIDATE_FAILURE, ERROR );
+		}
+	}
 }
-$t_version_count = count( version_get_all_rows( $p_bug_data-&gt;project_id ) );
-if ( ( $t_version_count > 0 ) && ( $p_bug_data->fixed_in_version == '' ) ) {
-error_parameters( 'fixed in version must be set to resolve the issue' );
-trigger_error( ERROR_BUG_VALIDATE_FAILURE, ERROR );
-}
-}
-}
+
 ?>]]>
-                    </programlisting>
-                    The errors will also need to be defined by adding the following to <filename>custom_constants_inc.php</filename>
-                    <programlisting>
-                        define ( 'ERROR_VALIDATE_FAILURE', 2000 );
-                        To custom_strings_inc.php
-                        $MANTIS_ERROR['ERROR_VALIDATE_FAILURE'] = 'This change cannot be made because %s';
-                    </programlisting>
-                </para>
-            </section>
-        </section>
+</programlisting>
+
+			<para>The errors will also need to be defined, by modifying the
+				following files
+			</para>
+
+			<itemizedlist>
+				<listitem>
+					<para><filename>custom_constants_inc.php</filename>
+					</para>
+
+					<programlisting>
+define( 'ERROR_VALIDATE_FAILURE', 2000 );
+</programlisting>
+				</listitem>
+
+				<listitem>
+					<para><filename>custom_strings_inc.php</filename>
+					</para>
+
+					<programlisting>
+$MANTIS_ERROR['ERROR_VALIDATE_FAILURE'] = 'This change cannot be made because %s';
+</programlisting>
+				</listitem>
+			</itemizedlist>
+
+		</section>
+	</section>
+
 </chapter>
