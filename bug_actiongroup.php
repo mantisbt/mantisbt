@@ -278,6 +278,7 @@
 			$t_form_var = "custom_field_$f_custom_field_id";
 			$t_custom_field_value = gpc_get_custom_field( $t_form_var, $t_custom_field_def['type'], null );
 			custom_field_set_value( $f_custom_field_id, $t_bug_id, $t_custom_field_value );
+			bug_update_date( $t_bug_id );
 			helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 			break;
 
