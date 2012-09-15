@@ -430,6 +430,10 @@ define( 'FILTER_TYPE_BOOLEAN', 2 );
 define( 'FILTER_TYPE_MULTI_STRING', 3 );
 define( 'FILTER_TYPE_MULTI_INT', 4 );
 
+# Filter match types
+define( 'FILTER_MATCH_ALL', 0);
+define( 'FILTER_MATCH_ANY', 1);
+
 # Versions
 define( 'VERSION_ALL', null );
 define( 'VERSION_FUTURE', 0 );

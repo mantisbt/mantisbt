@@ -540,6 +540,9 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_TAG_SELECT] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_TAG_SELECT] = gpc_get_string( FILTER_PROPERTY_TAG_SELECT, '' );
 	}
+	if( !isset( $p_filter_arr[FILTER_PROPERTY_MATCH_TYPE] ) ) {
+		$p_filter_arr[FILTER_PROPERTY_MATCH_TYPE] = gpc_get_int( FILTER_PROPERTY_MATCH_TYPE, FILTER_MATCH_ALL );
+	}
 
 	# initialize plugin filters
 	$t_plugin_filters = filter_get_plugin_filters();
@@ -773,6 +776,7 @@ function filter_get_default() {
 		FILTER_PROPERTY_SORT_FIELD_NAME => 'last_updated',
 		FILTER_PROPERTY_SORT_DIRECTION => 'DESC',
 		FILTER_PROPERTY_ISSUES_PER_PAGE => config_get( 'default_limit_view' ),
+		FILTER_PROPERTY_MATCH_TYPE => FILTER_MATCH_ALL
 	);
 
 	return filter_ensure_valid_filter( $t_filter );
@@ -994,7 +998,12 @@ function filter_get_bug_count( $p_query_clauses ) {
 	$t_select_string = "SELECT Count( DISTINCT $t_bug_table.id ) as idcnt ";
 	$t_from_string = " FROM " . implode( ', ', $p_query_clauses['from'] );
 	$t_join_string = (( count( $p_query_clauses['join'] ) > 0 ) ? implode( ' ', $p_query_clauses['join'] ) : '' );
-	$t_where_string = (( count( $p_query_clauses['where'] ) > 0 ) ? 'WHERE ' . implode( ' AND ', $p_query_clauses['where'] ) : '' );
+	$t_where_string = count( $p_query_clauses['project_where']) > 0 ? 'WHERE '. implode( ' AND ', $p_query_clauses['project_where'] ) : '';
+	if ( count( $p_query_clauses['where'] ) > 0 ) {
+		$t_where_string .= ' AND ( ';
+		$t_where_string .= implode( $p_query_clauses['operator'], $p_query_clauses['where'] );
+		$t_where_string .= ' ) ';
+	}
 	$t_result = db_query_bound( "$t_select_string $t_from_string $t_join_string $t_where_string", $p_query_clauses['where_values'] );
 	return db_result( $t_result );
 }
@@ -1074,7 +1083,12 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	}
 
 	$t_view_type = $t_filter['_view_type'];
-	$t_where_clauses = array(
+	
+	// project query clauses must be AND-ed always, irrespective of how the filter
+	// clauses are requested by the user ( all matching -> AND, any matching -> OR )
+	$t_where_clauses = array();
+	
+	$t_project_where_clauses =  array(
 		"$t_project_table.enabled = " . db_param(),
 		"$t_project_table.id = $t_bug_table.project_id",
 	);
@@ -1221,7 +1235,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		}
 
 		log_event( LOG_FILTERING, 'project query = ' . $t_project_query );
-		array_push( $t_where_clauses, $t_project_query );
+		array_push( $t_project_where_clauses, $t_project_query );
 	}
 
 	# view state
@@ -1989,6 +2003,14 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	}
 
 	# End text search
+	
+	# Determine join operator
+	if ( $t_filter[FILTER_PROPERTY_MATCH_TYPE] == FILTER_MATCH_ANY )
+		$t_join_operator = ' OR ';
+	else
+		$t_join_operator = ' AND ';
+	
+	log_event(LOG_FILTERING, 'Join operator : ' . $t_join_operator);
 
 	$t_from_clauses[] = $t_project_table;
 	$t_from_clauses[] = $t_bug_table;
@@ -1998,6 +2020,8 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	$t_query_clauses['join'] = $t_join_clauses;
 	$t_query_clauses['where'] = $t_where_clauses;
 	$t_query_clauses['where_values'] = $t_where_params;
+	$t_query_clauses['project_where'] = $t_project_where_clauses;
+	$t_query_clauses['operator'] = $t_join_operator;
 	$t_query_clauses = filter_get_query_sort_data( $t_filter, $p_show_sticky, $t_query_clauses );
 
 	# assigning to $p_* for this function writes the values back in case the caller wants to know
@@ -2015,7 +2039,14 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	$t_from_string = " FROM " . implode( ', ', $t_query_clauses['from'] );
 	$t_order_string = " ORDER BY " . implode( ', ', $t_query_clauses['order'] );
 	$t_join_string = count( $t_query_clauses['join'] ) > 0 ? implode( ' ', $t_query_clauses['join'] ) : '';
-	$t_where_string = count( $t_query_clauses['where'] ) > 0 ? 'WHERE ' . implode( ' AND ', $t_query_clauses['where'] ) : '';
+	$t_where_string = 'WHERE '. implode( ' AND ', $t_query_clauses['project_where'] );
+	if ( count( $t_query_clauses['where'] ) > 0 ) {
+		$t_where_string .= ' AND ( ';
+		$t_where_string .= implode( $t_join_operator, $t_query_clauses['where'] );
+		$t_where_string .= ' ) ';
+	}
+	
+	
 	$t_result = db_query_bound( "$t_select_string $t_from_string $t_join_string $t_where_string $t_order_string", $t_query_clauses['where_values'], $p_per_page, $t_offset );
 	$t_row_count = db_num_rows( $t_result );
 
@@ -3358,6 +3389,20 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		}
 		?>
 		</tr>
+		<tr class="row-1">
+			<td class="small-caption" valign="top"><a href="<?php echo $t_filters_url . FILTER_PROPERTY_MATCH_TYPE;?>" id="match_type_filter"><?php echo lang_get( 'filter_match_type' )?>:</a></td>
+			<td class="small-caption" valign="top" id="match_type_filter_target">
+			<?php 
+				if ( $t_filter[FILTER_PROPERTY_MATCH_TYPE] == FILTER_MATCH_ANY ) {
+					echo lang_get ('filter_match_any');
+				} else if ( $t_filter[FILTER_PROPERTY_MATCH_TYPE] == FILTER_MATCH_ALL ) {
+					echo lang_get ('filter_match_all');
+				}
+			?>
+			<input type="hidden" name="match_type" value="<?php echo $t_filter[FILTER_PROPERTY_MATCH_TYPE]?>"/>
+			</td>
+			<td colspan="6">&#160;</td>
+		</tr>
 		<?php
 	}
 
@@ -4265,6 +4310,17 @@ function print_filter_project_id() {
 		<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_PROJECT_ID;?>[]">
 			<option value="<?php echo META_FILTER_CURRENT?>" <?php check_selected( $t_filter[FILTER_PROPERTY_PROJECT_ID], META_FILTER_CURRENT );?>>[<?php echo lang_get( 'current' )?>]</option>
 			<?php print_project_option_list( $t_filter[FILTER_PROPERTY_PROJECT_ID] )?>
+		</select>
+		<?php
+}
+
+function print_filter_match_type() {
+	global $t_select_modifier, $t_filter, $f_view_type;
+?>
+		<!-- Project -->
+		<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_MATCH_TYPE;?>">
+			<option value="<?php echo FILTER_MATCH_ALL?>" <?php check_selected( $t_filter[FILTER_PROPERTY_MATCH_TYPE], FILTER_MATCH_ALL );?>>[<?php echo lang_get( 'filter_match_all' )?>]</option>
+			<option value="<?php echo FILTER_MATCH_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_MATCH_TYPE], FILTER_MATCH_ANY );?>>[<?php echo lang_get( 'filter_match_any' )?>]</option>
 		</select>
 		<?php
 }

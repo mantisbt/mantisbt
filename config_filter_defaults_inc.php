@@ -63,6 +63,7 @@
     define( 'FILTER_PROPERTY_RELATIONSHIP_BUG', 'relationship_bug' );
     define( 'FILTER_PROPERTY_TAG_STRING', 'tag_string' );
     define( 'FILTER_PROPERTY_TAG_SELECT', 'tag_select' );
+    define( 'FILTER_PROPERTY_MATCH_TYPE', 'match_type');
 
     ###########################################################################
     # Filter Query Parameter Names
