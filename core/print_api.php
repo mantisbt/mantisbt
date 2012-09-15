@@ -458,6 +458,15 @@ function print_assign_to_option_list( $p_user_id = '', $p_project_id = null, $p_
 	print_user_option_list( $p_user_id, $p_project_id, $p_threshold );
 }
 
+
+function print_note_option_list( $p_user_id = '', $p_project_id = null, $p_threshold = null ) {
+	if ( null === $p_threshold ) {
+		$p_threshold = config_get( 'add_bugnote_threshold' );
+	}
+	
+	print_user_option_list( $p_user_id, $p_project_id, $p_threshold );
+}
+
 /**
  * List projects that the current user has access to.
  *
@@ -860,7 +869,7 @@ function print_enum_string_option_list( $p_enum_name, $p_val = 0 ) {
 	}
 }
 
-/*
+/**
  * Returns a list of valid status options based on workflow
  * @param int $p_user_auth User's access level
  * @param int $p_current_value Current issue's status
