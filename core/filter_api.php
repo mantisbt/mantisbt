@@ -3922,7 +3922,7 @@ function print_filter_note_user_id() {
 					echo '>[' . lang_get( 'myself' ) . ']</option>';
 				}
 
-				print_assign_to_option_list( $t_filter[FILTER_PROPERTY_NOTE_USER_ID] );
+				print_note_option_list( $t_filter[FILTER_PROPERTY_NOTE_USER_ID] );
 			}
 		?>
         </select>
