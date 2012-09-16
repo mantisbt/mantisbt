@@ -76,7 +76,7 @@ $s_field = 'Väld';
 $s_old_value = 'Dä ahle Wäät';
 $s_new_value = 'Dä neue Wäät';
 $s_date_modified = 'Et Dattum vun dä Änderung';
-$s_bugnote = 'Notiz';
+$s_bugnote = 'Notez';
 $s_change = 'Änderung';
 $s_bugnote_view_state = 'Notizze ier Seeshbakeit';
 $s_bug_monitor = 'Aanjelääjeheit en de Oppaßleß';
@@ -375,7 +375,7 @@ $s_email_bugnote_limit = 'Scheck en <i lang="en">e-mail</i> wann nit mieh Notize
 $s_language = 'Schprooch';
 $s_update_prefs_button = 'Lohß Jonn!';
 $s_reset_prefs_button = 'Enshtellunge retuur säze';
-$s_timezone = 'Zickzohn';
+$s_timezone = 'Ziggzohn';
 $s_prefs_reset_msg = 'De Enshtellunge sin zeröck jesaz&nbsp;…';
 $s_prefs_updated_msg = 'De Enshtellunge sin om neue Shtand&nbsp;…';
 $s_profile_added_msg = 'Et Profil es dobei jedonn ...';

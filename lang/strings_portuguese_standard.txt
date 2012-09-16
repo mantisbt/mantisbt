@@ -28,6 +28,7 @@
  * @author Crazymadlover
  * @author Giro720
  * @author Hamilton Abreu
+ * @author Luckas Blade
  * @author Luís Martins, lmar@ualg.pt
  * @author M42
  * @author Malafaya
@@ -232,6 +233,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Já existe uma categoria com esse nom
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Nenhuma acção de cópia foi especificada.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Categoria não encontrada.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Categoria "%1$s" não encontrada para o projecto "%2$s".';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Esta categoria não pode ser eliminada, porque está definida como "categoria padrão para movimentos".';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Já existe uma versão com esse nome.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versão "%1$s" não encontrada.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'O nome de utilizador é inválido. Nomes de utilizador só podem conter letras, números, espaços, hífenes (-), pontos (.), sinais de mais (+) e sublinhados (_).';

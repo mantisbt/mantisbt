@@ -232,6 +232,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = '카테고리 중복.';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = '복사 실행이 명시되지 않음.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = '카테고리를 찾을 수 없습니다.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = '"%1$s" 분류가 "%2$s" 프로젝트에 없습니다.';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = '"이동을 위한 기본 카테고리"로 정의되어 있기 때문에 이 카테고리를 삭제할 수 없습니다.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = '버전 중복.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = '"%1$s" 버전이 없습니다.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = '사용자 이름이 잘못되었습니다. 사용자 이름은 라틴 문자, 숫자, 공백, 하이픈, 점, 더하기 기호, 밑줄만 쓸 수 있습니다.';
