@@ -32,7 +32,7 @@ interface ImportXml_Interface {
 	  * Import Classes for items not needing this info can use an
 	  * empty implementation
 	  *
-	  * @param Mapper $mapper
+	  * @param ImportXml_Mapper $mapper
 	  */
 	public function update_map( ImportXml_Mapper $mapper );
 }
