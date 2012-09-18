@@ -68,8 +68,6 @@ class ImportXml_Issue implements ImportXml_Interface {
 					case 'category':
 						$this->newbug_->category_id = $this->defaultCategory_;
 
-						// TODO: if we port the import/export code to 1.1.x, this needs to be
-						//       improved to cope with the different cases (1.1 => 1.2, 1.2 => 1.1 etc)
 						if( version_compare( MANTIS_VERSION, '1.2', '>' ) === true ) {
 							$reader->read( );
 
