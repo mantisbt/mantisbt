@@ -100,7 +100,7 @@ class BugData {
 
 	# omitted:
 	# var $bug_text_id
-	protected $profile_id;
+	protected $profile_id = 0;
 
 	# extended info
 	protected $description = '';
