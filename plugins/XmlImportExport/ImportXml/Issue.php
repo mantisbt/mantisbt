@@ -74,9 +74,15 @@ class ImportXml_Issue implements ImportXml_Interface {
 							$reader->read( );
 
 							if( $this->keepCategory_ ) {
-								$t_category_id = category_get_id_by_name( $reader->value, $t_project_id );
-								if( $t_category_id !== false ) {
-									$this->newbug_->category_id = $t_category_id;
+								# Check for the category's existence in the current project
+								# well as its parents (if any)
+								$t_projects_hierarchy = project_hierarchy_inheritance( $t_project_id );
+								foreach( $t_projects_hierarchy as $t_project ) {
+									$t_category_id = category_get_id_by_name( $reader->value, $t_project, false );
+									if( $t_category_id !== false ) {
+										$this->newbug_->category_id = $t_category_id;
+										break;
+									}
 								}
 							}
 
