@@ -22,7 +22,7 @@ interface ImportXml_Interface {
 	  *
 	  * @param XMLreader $reader
 	  */
-	public function process( XMLreader$reader );
+	public function process( XMLreader $reader );
 
 	/**
 	  * Update the old_id => new_id conversion map
@@ -34,5 +34,5 @@ interface ImportXml_Interface {
 	  *
 	  * @param Mapper $mapper
 	  */
-	public function update_map( Mapper$mapper );
+	public function update_map( ImportXml_Mapper $mapper );
 }

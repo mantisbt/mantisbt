@@ -241,7 +241,7 @@ class ImportXml_Issue implements ImportXml_Interface {
 		//echo "\nnew bug: $this->new_id_\n";
 	}
 
-	public function update_map( Mapper $mapper ) {
+	public function update_map( ImportXml_Mapper $mapper ) {
 		$mapper->add( 'issue', $this->old_id_, $this->new_id_ );
 	}
 
