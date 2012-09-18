@@ -37,7 +37,7 @@ class ImportXml_Issue implements ImportXml_Interface {
 
 	// Read stream until current item finishes, processing
 	// the data found
-	public function process( XMLreader$reader ) {
+	public function process( XMLreader $reader ) {
 
 		//print "\nImportIssue process()\n";
 		$t_project_id = helper_get_current_project(); // TODO: category_get_id_by_name could work by default on current project
@@ -128,7 +128,7 @@ class ImportXml_Issue implements ImportXml_Interface {
 		//echo "\nnew bug: $this->new_id_\n";
 	}
 
-	public function update_map( Mapper$mapper ) {
+	public function update_map( ImportXml_Mapper $mapper ) {
 		$mapper->add( 'issue', $this->old_id_, $this->new_id_ );
 	}
 
