@@ -865,18 +865,30 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
     $result = db_query_bound( $query, Array( $p_source_bug_id ) );
     $t_count = db_num_rows( $result );
 
+	$t_project_id = bug_get_field( $p_source_bug_id, 'project_id' );
+
     $t_bug_file = array();
     for( $i = 0;$i < $t_count;$i++ ) {
         $t_bug_file = db_fetch_array( $result );
 
         # prepare the new diskfile name and then copy the file
-        $t_file_path = $t_bug_file['folder'];
+		$t_source_file = $t_bug_file['folder'] . $t_bug_file['diskfile'];
+		if(( config_get( 'file_upload_method' ) == DISK ) ) {
+			$t_source_file = file_normalize_attachment_path( $t_source_file, $t_project_id );
+			$t_file_path = dirname( $t_source_file ) . DIRECTORY_SEPARATOR;
+		} else {
+			$t_file_path = $t_bug_file['folder'];
+		}
         $t_new_diskfile_name = file_generate_unique_name( 'bug-' . $t_bug_file['filename'], $t_file_path );
         $t_new_diskfile_location = $t_file_path . $t_new_diskfile_name;
         $t_new_file_name = file_get_display_name( $t_bug_file['filename'] );
         if(( config_get( 'file_upload_method' ) == DISK ) ) {
-            copy( $t_file_path.$t_bug_file['diskfile'], $t_new_diskfile_location );
-            chmod( $t_new_diskfile_location, config_get( 'attachments_file_permissions' ) );
+			# Skip copy operation if file does not exist (i.e. target bug will have missing attachment)
+			# @todo maybe we should trigger an error instead in this case ?
+			if( file_exists( $t_source_file ) ) {
+				copy( $t_source_file, $t_new_diskfile_location );
+				chmod( $t_new_diskfile_location, config_get( 'attachments_file_permissions' ) );
+			}
         }
 
         $query = "INSERT INTO $t_mantis_bug_file_table
@@ -891,7 +903,7 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
     								 " . db_param() . ",
     								 " . db_param() . ",
     								 " . db_param() . ");";
-        db_query_bound( $query, Array( $p_dest_bug_id, $t_bug_file['title'], $t_bug_file['description'], $t_new_diskfile_name, $t_new_file_name, $t_bug_file['folder'], $t_bug_file['filesize'], $t_bug_file['file_type'], $t_bug_file['date_added'], $t_bug_file['content'] ) );
+		db_query_bound( $query, Array( $p_dest_bug_id, $t_bug_file['title'], $t_bug_file['description'], $t_new_diskfile_name, $t_new_file_name, $t_file_path, $t_bug_file['filesize'], $t_bug_file['file_type'], $t_bug_file['date_added'], $t_bug_file['content'] ) );
     }
 }
 
