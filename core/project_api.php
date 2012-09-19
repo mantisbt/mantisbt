@@ -301,7 +301,10 @@ function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_
 
 	project_ensure_name_unique( $p_name );
 
-	$p_file_path = validate_project_file_path( $p_file_path );
+	# Project does not exist yet, so we get global config
+	if( DATABASE !== config_get( 'file_upload_method', null, null, ALL_PROJECTS ) ) {
+		$p_file_path = validate_project_file_path( $p_file_path );
+	}
 
 	$t_project_table = db_get_table( 'mantis_project_table' );
 
@@ -395,7 +398,9 @@ function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_v
 		project_ensure_name_unique( $p_name );
 	}
 
-	$p_file_path = validate_project_file_path( $p_file_path );
+	if( DATABASE !== config_get( 'file_upload_method', null, null, $p_project_id ) ) {
+		$p_file_path = validate_project_file_path( $p_file_path );
+	}
 
 	$t_project_table = db_get_table( 'mantis_project_table' );
 
