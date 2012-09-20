@@ -110,7 +110,7 @@ $f_parent_id = gpc_get( 'parent_id', null );
 			</div><?php
 			}
 
-			if ( config_get( 'allow_file_upload' ) ) {
+			if ( file_is_uploading_enabled() && DATABASE !== config_get( 'file_upload_method' ) ) {
 				$t_default_upload_path = '';
 				# Don't reveal the absolute path to non-administrators for security reasons
 				if ( current_user_is_administrator() ) {

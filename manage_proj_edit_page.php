@@ -131,7 +131,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 				<span class="label-style"></span>
 			</div>
 			<?php
-			if ( file_is_uploading_enabled() && DATABASE !== config_get( 'file_upload_method' ) ) { ?>
+			if( file_is_uploading_enabled() && DATABASE !== config_get( 'file_upload_method' ) ) { ?>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="project-file-path"><span><?php echo lang_get( 'upload_file_path' ) ?></span></label>
 				<?php
