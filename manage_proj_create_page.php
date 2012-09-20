@@ -110,6 +110,7 @@ $f_parent_id = gpc_get( 'parent_id', null );
 			</div><?php
 			}
 
+			$g_project_override = ALL_PROJECTS;
 			if ( file_is_uploading_enabled() && DATABASE !== config_get( 'file_upload_method' ) ) {
 				$t_default_upload_path = '';
 				# Don't reveal the absolute path to non-administrators for security reasons
