@@ -117,7 +117,10 @@
 </tr>
 
 <!-- File upload path (if uploading is enabled and uploading to disk) -->
-<?php if ( file_is_uploading_enabled() && DATABASE !== config_get( 'file_upload_method' ) ) { ?>
+<?php
+	$g_project_override = $f_project_id;
+	if( file_is_uploading_enabled() && DATABASE !== config_get( 'file_upload_method' ) ) {
+?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'upload_file_path' ) ?>
