@@ -118,4 +118,7 @@ event_declare_many( array(
 
 	# Logging (tracing) events
 	'EVENT_LOG' => EVENT_TYPE_EXECUTE,
+
+	# Attachment
+	'EVENT_VIEW_BUG_ATTACHMENT' => EVENT_TYPE_OUTPUT,
 ) );
