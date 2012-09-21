@@ -106,16 +106,18 @@ $t_page_count = null;
 
 $result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
 $t_row_count = count( $result );
-?>
 
-<html xmlns:o="urn:schemas-microsoft-com:office:office"
-xmlns:w="urn:schemas-microsoft-com:office:word"
-xmlns="http://www.w3.org/TR/REC-html40">
-
-<?php
-html_page_top1();
-html_head_end();
-html_body_begin();
+# Headers depending on intended output
+if ( $f_type_page == 'html' ) {
+	html_page_top1();
+	html_head_end();
+	html_body_begin();
+} else {
+	echo '<html xmlns:o="urn:schemas-microsoft-com:office:office"
+		xmlns:w="urn:schemas-microsoft-com:office:word"
+		xmlns="http://www.w3.org/TR/REC-html40">';
+	html_body_begin();
+}
 
 $f_bug_arr = explode( ',', $f_export );
 $t_count_exported = 0;
@@ -170,7 +172,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 	# display the available and selected bugs
 	if ( in_array( $t_id, $f_bug_arr ) || !$f_show_flag ) {
 		if ( $t_count_exported > 0 ) {
-			echo '<br style="mso-special-character: line-break; page-break-before: always">';
+			echo '<br style="mso-special-character: line-break; page-break-before: always" />';
 		}
 
 		$t_count_exported++;
@@ -483,12 +485,15 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 		?>
 	</td>
 </tr>
+
+<tr><td colspan="6" class="print">&nbsp;</td></tr>
+
 <?php
 	$t_user_bugnote_limit = 0;
 
 	$t_bugnotes = bugnote_get_all_visible_bugnotes( $t_id, $t_user_bugnote_order, $t_user_bugnote_limit );
 ?>
-<br />
+<tr><td class="print" colspan="6">
 <table class="width100" cellspacing="1">
 <?php
 	# no bugnotes
@@ -543,7 +548,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 		</tr>
 		</table>
 	</td>
-	<td class="nopad" width="85%">
+	<td class="nopad">
 		<table class="hide" cellspacing="1">
 		<tr>
 			<td class="print">
@@ -572,11 +577,15 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 ?>
 
 </table>
+</td></tr>
 <?php # Bugnotes END ?>
 </table>
 
 
+<br /><br />
 <?php
-echo '<br /><br />';
 	} # end in_array
 }  # end main loop
+
+html_body_end();
+html_end();
