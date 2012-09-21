@@ -408,7 +408,7 @@
 		</blockquote>
 
 		<blockquote id="dev.eventref.output.layout.bodyend">
-			<title>EVENT_PRINT_ATTACHMENT (Output)</title>
+			<title>EVENT_VIEW_BUG_ATTACHMENT (Output)</title>
 			<blockquote>
 				<para>
 					This event allows plugins to output HTML code immediately after the line of an attachment.
@@ -420,6 +420,5 @@
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
-
 	</sect2>
 </sect1>
