@@ -391,7 +391,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 ?>
 <tr class="print">
 	<td class="print-category">
-		<?php echo sprintf( lang_get( 'label' ), lang_get_defaulted( $t_def['name'] ) ) ?>
+		<?php echo string_display_line( sprintf( lang_get( 'label' ), lang_get_defaulted( $t_def['name'] ) ) ) ?>
 	</td>
 	<td class="print" colspan="5">
 		<?php print_custom_field_value( $t_def, $t_custom_field_id, $t_id ); ?>
