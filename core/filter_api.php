@@ -3278,7 +3278,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			if( true == $t_any_found ) {
 				echo lang_get( 'any' );
 			} else {
-				$t_output;
+				echo $t_output;
 			}
 		}
 		?>
