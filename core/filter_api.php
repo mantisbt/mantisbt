@@ -1824,8 +1824,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	if( !filter_field_is_any( $t_filter[FILTER_PROPERTY_NOTE_USER_ID] ) ) {
 		$t_bugnote_table_alias = 'mbnt';
 		$t_clauses = array();
-		array_push( $t_from_clauses, "$t_bugnote_table  $t_bugnote_table_alias" );
-		array_push( $t_where_clauses, "( $t_bug_table.id = $t_bugnote_table_alias.bug_id )" );
+		array_push( $t_join_clauses, "LEFT JOIN $t_bugnote_table  $t_bugnote_table_alias ON $t_bug_table.id = $t_bugnote_table_alias.bug_id" );
 
 		foreach( $t_filter[FILTER_PROPERTY_NOTE_USER_ID] as $t_filter_member ) {
 			$c_note_user_id = db_prepare_int( $t_filter_member );
