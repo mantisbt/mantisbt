@@ -54,7 +54,7 @@ require_api( 'utility_api.php' );
 
 function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p_total ) {
 	printf( '<tr %s>', helper_alternate_class() );
-	printf( '<td width="50%%">%s</td>', string_display_line( $p_label ) );
+	printf( '<td width="50%%">%s</td>', $p_label );
 	printf( '<td width="12%%" class="right">%s</td>', $p_open );
 	printf( '<td width="12%%" class="right">%s</td>', $p_resolved );
 	printf( '<td width="12%%" class="right">%s</td>', $p_closed );
@@ -473,7 +473,7 @@ function summary_print_by_developer() {
 		$v_bugcount = $row['bugcount'];
 
 		if(( $v_handler_id != $t_last_handler ) && ( -1 != $t_last_handler ) ) {
-			$t_user = string_display_line( user_get_name( $t_last_handler ) );
+			$t_user = summary_helper_get_developer_label( $t_last_handler );
 
 			$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_HANDLER_ID . '=' . $t_last_handler;
 			if( 0 < $t_bugs_open ) {
@@ -510,7 +510,7 @@ function summary_print_by_developer() {
 	}
 
 	if( 0 < $t_bugs_total ) {
-		$t_user = string_display_line( user_get_name( $t_last_handler ) );
+		$t_user = summary_helper_get_developer_label( $t_last_handler );
 
 		$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_HANDLER_ID . '=' . $t_last_handler;
 		if( 0 < $t_bugs_open ) {
