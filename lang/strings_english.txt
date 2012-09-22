@@ -1131,6 +1131,9 @@ If you requested this verification, visit the following URL to change your passw
 	'recently_visited' => 'Recently Visited',
 	'priority_abbreviation' => 'P',
 	'note_user_id_label' => 'Note By:',
+	'filter_match_type' => 'Match Type',
+	'filter_match_all' => 'All Conditions',
+	'filter_match_any' => 'Any Condition',
 
 	# view_all_inc.php
 	'none' => 'none',
