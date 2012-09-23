@@ -478,11 +478,13 @@ print_recently_visited();
 			<select <?php echo helper_get_tab_index() ?> name="status">
 			<?php 
 			$resolution_options = get_status_option_list(access_get_project_level( $t_project_id), 
-					config_get('default_bug_resolution'), true, 
+					config_get('bug_submit_status'), true, 
 					ON == config_get( 'allow_reporter_close' ), $t_project_id );
 			foreach ( $resolution_options as $key => $value ) {
 			?>
-				<option value="<?php echo $key ?>"><?php echo $value ?></option>
+				<option value="<?php echo $key ?>" <?php check_selected($key, config_get('bug_submit_status')); ?> >
+					<?php echo $value ?>
+				</option>
 			<?php } ?>
 			</select>
 		</td>
@@ -497,7 +499,7 @@ print_recently_visited();
 		<td>
 			<select <?php echo helper_get_tab_index() ?> name="resolution">
 				<?php 
-				print_enum_string_option_list('resolution', config_get('bug_submit_status'));
+				print_enum_string_option_list('resolution', config_get('default_bug_resolution'));
 				?>
 			</select>
 		</td>
