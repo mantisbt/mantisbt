@@ -197,6 +197,8 @@ $tpl_show_profiles = config_get( 'enable_profiles' );
 $tpl_show_platform = $tpl_show_profiles && in_array( 'platform', $t_fields );
 $tpl_show_os = $tpl_show_profiles && in_array( 'os', $t_fields );
 $tpl_show_os_version = $tpl_show_profiles && in_array( 'os_version', $t_fields );
+$tpl_show_resolution = in_array( 'resolution', $t_fields );
+$tpl_show_status = in_array( 'status', $t_fields );
 
 $tpl_show_versions = version_should_show_product_version( $t_project_id );
 $tpl_show_product_version = $tpl_show_versions && in_array( 'product_version', $t_fields );
@@ -462,6 +464,41 @@ print_recently_visited();
 			<select <?php echo helper_get_tab_index() ?> id="handler_id" name="handler_id">
 				<option value="0" selected="selected"></option>
 				<?php print_assign_to_option_list( $f_handler_id ) ?>
+			</select>
+		</td>
+	</tr>
+<?php } ?>
+
+<?php if ( $tpl_show_status ) { ?>
+	<tr <?php echo helper_alternate_class() ?>>
+		<th class="category">
+			<label for="status"><?php echo lang_get( 'status' ) ?></label>
+		</th>
+		<td>
+			<select <?php echo helper_get_tab_index() ?> name="status">
+			<?php 
+			$resolution_options = get_status_option_list(access_get_project_level( $t_project_id), 
+					config_get('default_bug_resolution'), true, 
+					ON == config_get( 'allow_reporter_close' ), $t_project_id );
+			foreach ( $resolution_options as $key => $value ) {
+			?>
+				<option value="<?php echo $key ?>"><?php echo $value ?></option>
+			<?php } ?>
+			</select>
+		</td>
+	</tr>
+<?php } ?>
+
+<?php if ( $tpl_show_resolution ) { ?>
+	<tr <?php echo helper_alternate_class() ?>>
+		<th class="category">
+			<label for="resolution"><?php echo lang_get( 'resolution' ) ?></label>
+		</th>
+		<td>
+			<select <?php echo helper_get_tab_index() ?> name="resolution">
+				<?php 
+				print_enum_string_option_list('resolution', config_get('bug_submit_status'));
+				?>
 			</select>
 		</td>
 	</tr>
