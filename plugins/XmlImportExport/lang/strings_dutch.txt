@@ -45,3 +45,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Verwijzging uitschakelen';
 $s_plugin_XmlImportExport_fallback = 'Terugvalstrategie (als "Hernummeren" niet werkt):';
 $s_plugin_XmlImportExport_fallback_category = 'Terugvalcategorie:';
 $s_plugin_XmlImportExport_keep_same_category = 'Proberen dezelfde categorie te houden';
+$s_plugin_XmlImportExport_error_no_xml = 'de extensies xmlreader en xmlwriter zijn niet aangetroffen';
