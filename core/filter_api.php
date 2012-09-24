@@ -253,6 +253,8 @@ function filter_get_url( $p_custom_filter ) {
 		$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_TAG_SELECT, $p_custom_filter[FILTER_PROPERTY_TAG_SELECT] );
 	}
 
+	$t_query[] = filter_encode_field_and_value( FILTER_SEARCH_MATCH_TYPE, $p_custom_filter[FILTER_PROPERTY_MATCH_TYPE] );
+
 	if( isset( $p_custom_filter['custom_fields'] ) ) {
 		foreach( $p_custom_filter['custom_fields'] as $t_custom_field_id => $t_custom_field_values ) {
 			if( !filter_field_is_any( $t_custom_field_values ) ) {

@@ -107,4 +107,5 @@
     define( 'FILTER_SEARCH_RELATIONSHIP_BUG', 'relationship_bug' );
     define( 'FILTER_SEARCH_TAG_STRING', 'tag_string' );
     define( 'FILTER_SEARCH_TAG_SELECT', 'tag_select' );
+    define( 'FILTER_SEARCH_MATCH_TYPE', 'match_type');
 
