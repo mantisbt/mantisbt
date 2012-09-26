@@ -80,8 +80,9 @@
 	 * MantisBT Path Settings *
 	 **************************/
 
+	$t_protocol = 'http';
+	$t_host = 'localhost';
 	if ( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
-		$t_protocol = 'http';
 		if ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
 			$t_protocol= $_SERVER['HTTP_X_FORWARDED_PROTO'];
 		} else if ( !empty( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
@@ -108,26 +109,27 @@
 			$t_host = $_SERVER['SERVER_NAME'] . $t_port;
 		} else if ( isset( $_SERVER['SERVER_ADDR'] ) ) {
 			$t_host = $_SERVER['SERVER_ADDR'] . $t_port;
-		} else {
-			$t_host = 'localhost';
 		}
 
-		$t_self = $_SERVER['SCRIPT_NAME'];
-		$t_self = trim( str_replace( "\0", '', $t_self ) );
+		$t_self = trim( str_replace( "\0", '', $_SERVER['SCRIPT_NAME'] ) );
 		$t_path = str_replace( basename( $t_self ), '', $t_self );
-		$t_path = basename( $t_path ) == "admin" ? rtrim( dirname( $t_path ), '/\\' ) . '/' : $t_path;
-		$t_path = basename( $t_path ) == "soap" ? rtrim( dirname( dirname( $t_path ) ), '/\\' ) . '/' : $t_path;
+		switch( basename( $t_path ) ) {
+			case 'admin':
+				$t_path = rtrim( dirname( $t_path ), '/\\' ) . '/';
+				break;
+			case 'soap':
+				$t_path = rtrim( dirname( dirname( $t_path ) ), '/\\' ) . '/';
+				break;
+			case '':
+				$t_path = '/';
+				break;
+		}
 		if ( strpos( $t_path, '&#' ) ) {
 			echo 'Can not safely determine $g_path. Please set $g_path manually in config_inc.php';
 			die;
 		}
-
-		$t_url	= $t_protocol . '://' . $t_host . $t_path;
-
 	} else {
-		$t_path = '';
-		$t_host = '';
-		$t_protocol = '';
+		$t_path = 'mantisbt/';
 	}
 
 	/**
@@ -135,7 +137,7 @@
 	 * requires trailing /
 	 * @global string $g_path
 	 */
-	$g_path	= isset( $t_url ) ? $t_url : 'http://localhost/mantisbt/';
+	$g_path	= $t_protocol . '://' . $t_host . $t_path;
 
 	/**
 	 * path to your images directory (for icons)
