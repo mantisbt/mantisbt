@@ -473,13 +473,15 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 				}
 
 				$c_filename = string_display_line( $t_attachment['display_name'] );
-				$c_download_url = $t_path . htmlspecialchars( $t_attachment['download_url'] );
+				$c_download_url = htmlspecialchars( $t_attachment['download_url'] );
 				$c_filesize = number_format( $t_attachment['size'] );
 				$c_date_added = date( $t_date_format, $t_attachment['date_added'] );
-				echo "$c_filename ($c_filesize) <span class=\"italic\">$c_date_added</span><br />$c_download_url";
+				echo "$c_filename ($c_filesize " . lang_get( 'bytes' ) . ') '
+					. '<span class="italic-small">' . $c_date_added . '</span><br />'
+					. string_display_links( $t_path . $c_download_url );
 
 				if ( $t_attachment['preview'] && $t_attachment['type'] == 'image' && $f_type_page == 'html' ) {
-					echo '<br /><img src="', $t_attachment['download_url'], '" alt="', $t_attachment['alt'], '" /><br />';
+					echo '<br /><img src="', $c_download_url, '" alt="', $t_attachment['alt'], '" /><br />';
 				}
 			}
 		?>
