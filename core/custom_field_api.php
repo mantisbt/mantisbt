@@ -846,7 +846,7 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
                     FROM $t_custom_field_table as cft, $t_user_table ut, $t_project_table pt, $t_custom_field_project_table cfpt
                         LEFT JOIN $t_project_user_list_table pult
                             on cfpt.project_id = pult.project_id and pult.user_id = $t_user_id
-                    WHERE cft.id = cfpt.field_id AND cfpt.project_id = pt.id AND ut.id = $t_user_id AND
+                    WHERE cft.id = cfpt.field_id AND cfpt.project_id = pt.id AND ut.id = $t_user_id AND pt.enabled = 1 AND
                         ( pt.view_state = $t_pub OR
                         ( pt.view_state = $t_priv and pult.user_id = $t_user_id ) OR
                         ( pult.user_id is null and ut.access_level $t_access_clause ) )";
