@@ -425,201 +425,47 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_DEFINITION, ERROR );
 	}
 
-	$c_field_id = db_prepare_int( $p_field_id );
-	$c_name = db_prepare_string( trim( $p_def_array['name'] ) );
-	$c_type = db_prepare_int( $p_def_array['type'] );
-	$c_possible_values = db_prepare_string( $p_def_array['possible_values'] );
-	$c_default_value = db_prepare_string( $p_def_array['default_value'] );
-	$c_valid_regexp = db_prepare_string( $p_def_array['valid_regexp'] );
-	$c_access_level_r = db_prepare_int( $p_def_array['access_level_r'] );
-	$c_access_level_rw = db_prepare_int( $p_def_array['access_level_rw'] );
-	$c_length_min = db_prepare_int( $p_def_array['length_min'] );
-	$c_length_max = db_prepare_int( $p_def_array['length_max'] );
-	$c_filter_by = db_prepare_bool( $p_def_array['filter_by'] );
-	$c_display_report = db_prepare_bool( $p_def_array['display_report'] );
-	$c_display_update = db_prepare_bool( $p_def_array['display_update'] );
-	$c_display_resolved = db_prepare_bool( $p_def_array['display_resolved'] );
-	$c_display_closed = db_prepare_bool( $p_def_array['display_closed'] );
-	$c_require_report = db_prepare_bool( $p_def_array['require_report'] );
-	$c_require_update = db_prepare_bool( $p_def_array['require_update'] );
-	$c_require_resolved = db_prepare_bool( $p_def_array['require_resolved'] );
-	$c_require_closed = db_prepare_bool( $p_def_array['require_closed'] );
-
-	if( is_blank( $c_name ) ) {
+	if( is_blank( $p_def_array['name'] ) ) {
 		error_parameters( 'name' );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	if(( $c_access_level_rw < $c_access_level_r ) || ( $c_length_min < 0 ) || (( $c_length_max != 0 ) && ( $c_length_min > $c_length_max ) ) ) {
+	if(    $p_def_array['access_level_rw'] < $p_def_array['access_level_r']
+		|| $p_def_array['length_min'] < 0
+		|| ( $p_def_array['length_max'] != 0 && $p_def_array['length_min'] > $p_def_array['length_max'] )
+	) {
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_DEFINITION, ERROR );
 	}
 
-	if( !custom_field_is_name_unique( $c_name, $c_field_id ) ) {
+	if( !custom_field_is_name_unique( $p_def_array['name'], $p_field_id ) ) {
 		trigger_error( ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE, ERROR );
 	}
 
-	$t_update_something = false;
-	$t_mantis_custom_field_table = db_get_table( 'mantis_custom_field_table' );
-	$query = "UPDATE $t_mantis_custom_field_table
-				  SET ";
-	if( array_key_exists( 'name', $p_def_array ) ) {
-		if( !$t_update_something ) {
-			$t_update_something = true;
-		} else {
-			$query .= ', ';
-		}
-		$query .= "name='$c_name'";
-	}
-	if( array_key_exists( 'type', $p_def_array ) ) {
-		if( !$t_update_something ) {
-			$t_update_something = true;
-		} else {
-			$query .= ', ';
-		}
-		$query .= "type='$c_type'";
-	}
-	if( array_key_exists( 'possible_values', $p_def_array ) ) {
-		if( !$t_update_something ) {
-			$t_update_something = true;
-		} else {
-			$query .= ', ';
-		}
-		$query .= "possible_values='$c_possible_values'";
-	}
-	if( array_key_exists( 'default_value', $p_def_array ) ) {
-		if( !$t_update_something ) {
-			$t_update_something = true;
-		} else {
-			$query .= ', ';
-		}
-		$query .= "default_value='$c_default_value'";
-	}
-	if( array_key_exists( 'valid_regexp', $p_def_array ) ) {
-		if( !$t_update_something ) {
-			$t_update_something = true;
-		} else {
-			$query .= ', ';
-		}
-		$query .= "valid_regexp='$c_valid_regexp'";
-	}
-	if( array_key_exists( 'access_level_r', $p_def_array ) ) {
-		if( !$t_update_something ) {
-			$t_update_something = true;
-		} else {
-			$query .= ', ';
-		}
-		$query .= "access_level_r='$c_access_level_r'";
-	}
-	if( array_key_exists( 'access_level_rw', $p_def_array ) ) {
-		if( !$t_update_something ) {
-			$t_update_something = true;
-		} else {
-			$query .= ', ';
-		}
-		$query .= "access_level_rw='$c_access_level_rw'";
-	}
-	if( array_key_exists( 'length_min', $p_def_array ) ) {
-		if( !$t_update_something ) {
-			$t_update_something = true;
-		} else {
-			$query .= ', ';
-		}
-		$query .= "length_min='$c_length_min'";
-	}
-	if( array_key_exists( 'length_max', $p_def_array ) ) {
-		if( !$t_update_something ) {
-			$t_update_something = true;
-		} else {
-			$query .= ', ';
-		}
-		$query .= "length_max='$c_length_max'";
-	}
-	if( array_key_exists( 'filter_by', $p_def_array ) ) {
-		if( !$t_update_something ) {
-			$t_update_something = true;
-		} else {
-			$query .= ', ';
-		}
-		$query .= "filter_by='$c_filter_by'";
-	}
-	if( array_key_exists( 'display_report', $p_def_array ) ) {
-		if( !$t_update_something ) {
-			$t_update_something = true;
-		} else {
-			$query .= ', ';
-		}
-		$query .= "display_report='$c_display_report'";
-	}
-	if( array_key_exists( 'display_update', $p_def_array ) ) {
-		if( !$t_update_something ) {
-			$t_update_something = true;
-		} else {
-			$query .= ', ';
-		}
-		$query .= "display_update='$c_display_update'";
-	}
-	if( array_key_exists( 'display_resolved', $p_def_array ) ) {
-		if( !$t_update_something ) {
-			$t_update_something = true;
-		} else {
-			$query .= ', ';
-		}
-		$query .= "display_resolved='$c_display_resolved'";
-	}
-	if( array_key_exists( 'display_closed', $p_def_array ) ) {
-		if( !$t_update_something ) {
-			$t_update_something = true;
-		} else {
-			$query .= ', ';
-		}
-		$query .= "display_closed='$c_display_closed'";
-	}
-	if( array_key_exists( 'require_report', $p_def_array ) ) {
-		if( !$t_update_something ) {
-			$t_update_something = true;
-		} else {
-			$query .= ', ';
-		}
-		$query .= "require_report='$c_require_report'";
-	}
-	if( array_key_exists( 'require_update', $p_def_array ) ) {
-		if( !$t_update_something ) {
-			$t_update_something = true;
-		} else {
-			$query .= ', ';
-		}
-		$query .= "require_update='$c_require_update'";
-	}
-	if( array_key_exists( 'require_resolved', $p_def_array ) ) {
-		if( !$t_update_something ) {
-			$t_update_something = true;
-		} else {
-			$query .= ', ';
-		}
-		$query .= "require_resolved='$c_require_resolved'";
-	}
-	if( array_key_exists( 'require_closed', $p_def_array ) ) {
-		if( !$t_update_something ) {
-			$t_update_something = true;
-		} else {
-			$query .= ', ';
-		}
-		$query .= "require_closed='$c_require_closed'";
+	# Build fields update statement
+	$t_update = '';
+	foreach( $p_def_array as $field => $value ) {
+		$t_update .= "$field = " . db_param() . ', ';
+		$t_params[] = is_bool( $value ) ? db_prepare_bool( $value ) : $value;
 	}
 
-	$query .= " WHERE id='$c_field_id'";
+	# If there are fields to update, execute SQL
+	if( $t_update !== '' ) {
+		$t_mantis_custom_field_table = db_get_table( 'mantis_custom_field_table' );
 
-	if( $t_update_something ) {
-		db_query( $query );
+		$t_query = "
+			UPDATE $t_mantis_custom_field_table
+			SET " . rtrim( $t_update, ', ' ) . "
+			WHERE id = " . db_param();
+		$t_params[] = $p_field_id;
+		db_query_bound( $t_query, $t_params );
+
 		custom_field_clear_cache( $p_field_id );
-	} else {
-		return false;
 
-		# there is nothing to update...
+		# db_query errors on failure so:
+		return true;
 	}
 
-	# db_query errors on failure so:
-	return true;
+	return false;
 }
 
 /**
@@ -825,48 +671,71 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 			$t_project_table = db_get_table( 'mantis_project_table' );
 			$t_user_table = db_get_table( 'mantis_user_table' );
 			$t_user_id = auth_get_current_user_id();
-			$t_pub = VS_PUBLIC;
-			$t_priv = VS_PRIVATE;
 
+			# Select only the ids of custom fields in projects the user has access to
+			#  - all custom fields in public projects,
+			#  - those in private projects where the user is listed
+			#  - in private projects where the user is implicitly listed
+			$t_query = "
+				SELECT DISTINCT cft.id
+				FROM $t_custom_field_table cft
+					JOIN $t_custom_field_project_table cfpt ON cfpt.field_id = cft.id
+					JOIN $t_project_table pt
+						ON pt.id = cfpt.project_id
+					LEFT JOIN $t_project_user_list_table pult
+						ON pult.project_id = cfpt.project_id AND pult.user_id = " . db_param() . "
+					, $t_user_table ut
+				WHERE ut.id = " . db_param() . "
+					AND (  pt.view_state = " . VS_PUBLIC . "
+						OR pult.user_id = ut.id
+						";
+			$t_params = array( $t_user_id, $t_user_id );
+
+			# Add private access clause and related parameter
 			$t_private_access = config_get( 'private_project_threshold' );
 			if( is_array( $t_private_access ) ) {
 				if( 1 == count( $t_private_access ) ) {
-					$t_access_clause = '= ' . array_shift( $t_private_access ) . ' ';
+					$t_access_clause = '= ' . db_param();
+					$t_params[] = array_shift( $t_private_access );
 				} else {
-					$t_access_clause = 'IN (' . implode( ',', $t_private_access ) . ')';
+					$t_access_clause = 'IN (';
+					foreach( $t_private_access as $t_elem ) {
+						$t_access_clause .= db_param() . ',';
+						$t_params[] = $t_elem;
+					}
+					$t_access_clause = rtrim( $t_access_clause, ',') . ')';
 				}
 			} else {
-				$t_access_clause = ">= $t_private_access ";
+				$t_access_clause = '>=' . db_param();
+				$t_params[] = $t_private_access;
 			}
-
-			# select only the ids that the user has some access to
-			#  e.g., all fields in public projects, or private projects where the user is listed
-			#    or private projects where the user is implicitly listed
-			$query = "SELECT DISTINCT cft.id
-                    FROM $t_custom_field_table as cft, $t_user_table ut, $t_project_table pt, $t_custom_field_project_table cfpt
-                        LEFT JOIN $t_project_user_list_table pult
-                            on cfpt.project_id = pult.project_id and pult.user_id = $t_user_id
-                    WHERE cft.id = cfpt.field_id AND cfpt.project_id = pt.id AND ut.id = $t_user_id AND
-                        ( pt.view_state = $t_pub OR
-                        ( pt.view_state = $t_priv and pult.user_id = $t_user_id ) OR
-                        ( pult.user_id is null and ut.access_level $t_access_clause ) )";
+			$t_query .= "OR ( pult.user_id IS NULL AND ut.access_level $t_access_clause ) )";
 		} else {
 			if( is_array( $p_project_id ) ) {
 				if( 1 == count( $p_project_id ) ) {
-					$t_project_clause = '= ' . array_shift( $p_project_id ) . ' ';
+					$t_project_clause = '= ' . db_param();
+					$t_params[] = array_shift( $p_project_id );
 				} else {
-					$t_project_clause = 'IN (' . implode( ',', $p_project_id ) . ')';
+					$t_project_clause = 'IN (';
+					foreach( $p_project_id as $t_project ) {
+						$t_project_clause .= db_param() . ',';
+						$t_params[] = $t_project;
+					}
+					$t_project_clause = rtrim( $t_project_clause, ',') . ')';
 				}
 			} else {
-				$t_project_clause = '= ' . $p_project_id;
+				$t_project_clause = '= ' . db_param();
+				$t_params[] = $p_project_id;
 			}
-			$query = "SELECT cft.id
-					  FROM $t_custom_field_table cft, $t_custom_field_project_table cfpt
-					  WHERE cfpt.project_id $t_project_clause AND
-							cft.id = cfpt.field_id
-					  ORDER BY sequence ASC, name ASC";
+			$t_query = "
+				SELECT cft.id
+				FROM $t_custom_field_table cft
+					JOIN $t_custom_field_project_table cfpt ON cfpt.field_id = cft.id
+				WHERE cfpt.project_id $t_project_clause
+				ORDER BY sequence ASC, name ASC";
 		}
-		$result = db_query( $query );
+
+		$result = db_query_bound( $t_query, $t_params );
 		$t_row_count = db_num_rows( $result );
 		$t_ids = array();
 
@@ -1047,23 +916,25 @@ function custom_field_get_all_linked_fields( $p_bug_id ) {
 
 	# is the list in cache ?
 	if( !array_key_exists( $p_bug_id, $g_cached_custom_field_lists ) ) {
-		$c_bug_id = db_prepare_int( $p_bug_id );
-		$c_project_id = db_prepare_int( bug_get_field( $p_bug_id, 'project_id' ) );
-
 		$t_custom_field_project_table = db_get_table( 'mantis_custom_field_project_table' );
 		$t_custom_field_table = db_get_table( 'mantis_custom_field_table' );
 		$t_custom_field_string_table = db_get_table( 'mantis_custom_field_string_table' );
 
-		$query = "SELECT f.name, f.type, f.access_level_r, f.default_value, f.type, s.value
-					FROM $t_custom_field_project_table p INNER JOIN $t_custom_field_table f
-						ON p.field_id = f.id
-					LEFT JOIN $t_custom_field_string_table s
-						ON  p.field_id=s.field_id AND s.bug_id='$c_bug_id'
-					WHERE   p.project_id = '$c_project_id'
-					ORDER BY p.sequence ASC, f.name ASC";
+		$query = "
+			SELECT f.name, f.type, f.access_level_r, f.default_value, f.type, s.value
+			FROM $t_custom_field_project_table p
+				INNER JOIN $t_custom_field_table f ON f.id = p.field_id
+				LEFT JOIN $t_custom_field_string_table s
+					ON s.field_id = p.field_id AND s.bug_id = " . db_param() . "
+			WHERE p.project_id = " . db_param() . "
+			ORDER BY p.sequence ASC, f.name ASC";
 
-		$result = db_query( $query );
+		$t_params = array(
+			(int)$p_bug_id,
+			bug_get_field( $p_bug_id, 'project_id' )
+		);
 
+		$result = db_query_bound( $query, $t_params );
 		$t_row_count = db_num_rows( $result );
 
 		$t_custom_fields = array();
@@ -1257,8 +1128,6 @@ function custom_field_prepare_possible_values( $p_possible_values ) {
  */
 function custom_field_distinct_values( $p_field_def, $p_project_id = ALL_PROJECTS ) {
 	global $g_custom_field_type_definition;
-	$c_field_id = $p_field_def['id'];
-	$c_project_id = db_prepare_int( $p_project_id );
 	$t_custom_field_string_table = db_get_table( 'mantis_custom_field_string_table' );
 	$t_mantis_bug_table = db_get_table( 'mantis_bug_table' );
 	$t_return_arr = array();
@@ -1267,24 +1136,30 @@ function custom_field_distinct_values( $p_field_def, $p_project_id = ALL_PROJECT
 	if( isset( $g_custom_field_type_definition[$p_field_def['type']]['#function_return_distinct_values'] ) ) {
 		return call_user_func( $g_custom_field_type_definition[$p_field_def['type']]['#function_return_distinct_values'], $p_field_def );
 	} else {
-		$t_where = '';
-		$t_from = $t_custom_field_string_table;
+		$t_from = "$t_custom_field_string_table cfst";
+		$t_where1 = 'cfst.field_id = ' . db_param();
+		$t_params[] = $p_field_def['id'];
+
 		if( ALL_PROJECTS != $p_project_id ) {
-			$t_where = " AND $t_mantis_bug_table.id = $t_custom_field_string_table.bug_id AND
-							$t_mantis_bug_table.project_id = '$p_project_id'";
-			$t_from = $t_from . ", $t_mantis_bug_table";
+			$t_from .= " JOIN $t_mantis_bug_table bt ON bt.id = cfst.bug_id";
+			$t_where2 = 'AND bt.project_id = ' . db_param();
+			$t_params[] = $p_project_id;
+		} else {
+			$t_where2 = '';
 		}
-		$query2 = "SELECT $t_custom_field_string_table.value FROM $t_from
-						WHERE $t_custom_field_string_table.field_id='$c_field_id' $t_where
-						GROUP BY $t_custom_field_string_table.value";
-		$result2 = db_query( $query2 );
-		$t_row_count = db_num_rows( $result2 );
+		$t_query = "
+			SELECT DISTINCT cfst.value
+			FROM $t_from
+			WHERE $t_where1 $t_where2";
+
+		$t_result = db_query_bound( $t_query, $t_params );
+		$t_row_count = db_num_rows( $t_result );
 		if( 0 == $t_row_count ) {
 			return false;
 		}
 
 		for( $i = 0;$i < $t_row_count;$i++ ) {
-			$row = db_fetch_array( $result2 );
+			$row = db_fetch_array( $t_result );
 			if( !is_blank( trim( $row['value'] ) ) ) {
 				array_push( $t_return_arr, $row['value'] );
 			}
