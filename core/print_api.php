@@ -471,7 +471,7 @@ function print_note_option_list( $p_user_id = '', $p_project_id = null, $p_thres
 	if ( null === $p_threshold ) {
 		$p_threshold = config_get( 'add_bugnote_threshold' );
 	}
-	
+
 	print_user_option_list( $p_user_id, $p_project_id, $p_threshold );
 }
 
@@ -1177,8 +1177,8 @@ function print_bracket_link_prepared( $p_link ) {
 function print_bracket_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' ) {
 	echo '<span class="bracket-link';
 	if ($p_class !== '') {
-	    echo ' bracket-link-',$p_class; # prefix on a container allows styling of whole link, including brackets
-    }
+		echo ' bracket-link-',$p_class; # prefix on a container allows styling of whole link, including brackets
+	}
 	echo '">[&#160;';
 	print_link( $p_link, $p_url_text, $p_new_window, $p_class );
 	echo '&#160;]</span> ';
@@ -1372,8 +1372,8 @@ function print_documentation_link( $p_a_name = '' ) {
 # prints the signup link
 function print_signup_link() {
 	if ( ( ON == config_get_global( 'allow_signup' ) ) &&
-	     ( LDAP != config_get_global( 'login_method' ) ) &&
-	     ( ON == config_get( 'enable_email_notification' ) )
+		 ( LDAP != config_get_global( 'login_method' ) ) &&
+		 ( ON == config_get( 'enable_email_notification' ) )
 	   ) {
 		print_bracket_link( 'signup_page.php', lang_get( 'signup_link' ) );
 	}
@@ -1388,9 +1388,9 @@ function print_login_link() {
 function print_lost_password_link() {
 	# lost password feature disabled or reset password via email disabled -> stop here!
 	if ( ( LDAP != config_get_global( 'login_method' ) ) &&
-	     ( ON == config_get( 'lost_password_feature' ) ) &&
-	     ( ON == config_get( 'send_reset_password' ) ) &&
-	     ( ON == config_get( 'enable_email_notification' ) ) ) {
+		 ( ON == config_get( 'lost_password_feature' ) ) &&
+		 ( ON == config_get( 'send_reset_password' ) ) &&
+		 ( ON == config_get( 'enable_email_notification' ) ) ) {
 		print_bracket_link( 'lost_pwd_page.php', lang_get( 'lost_password_link' ) );
 	}
 }
@@ -1634,12 +1634,11 @@ function print_timezone_option_list( $p_timezone ) {
 
 	$t_identifiers = timezone_identifiers_list();
 
-	foreach ( $t_identifiers as $t_identifier )
-	{
-	    $t_zone = explode( '/', $t_identifier );
+	foreach ( $t_identifiers as $t_identifier ) {
+		$t_zone = explode( '/', $t_identifier );
 
-	    // Only use "friendly" continent names - http://us.php.net/manual/en/timezones.others.php
-		if ($t_zone[0] == 'Africa' ||
+		// Only use "friendly" continent names - http://us.php.net/manual/en/timezones.others.php
+		if( $t_zone[0] == 'Africa' ||
 			$t_zone[0] == 'America' ||
 			$t_zone[0] == 'Antarctica' ||
 			$t_zone[0] == 'Arctic' ||
@@ -1648,12 +1647,11 @@ function print_timezone_option_list( $p_timezone ) {
 			$t_zone[0] == 'Australia' ||
 			$t_zone[0] == 'Europe' ||
 			$t_zone[0] == 'Indian' ||
-			$t_zone[0] == 'Pacific' )
-		{
-	        if ( isset( $t_zone[1] ) != '' )
-	        {
-	            $t_locations[$t_zone[0]][$t_zone[0] . '/' . $t_zone[1]] = array( str_replace( '_', ' ', $t_zone[1] ), $t_identifier );
-	        }
+			$t_zone[0] == 'Pacific'
+		) {
+			if( isset( $t_zone[1] ) != '' ) {
+				$t_locations[$t_zone[0]][$t_zone[0] . '/' . $t_zone[1]] = array( str_replace( '_', ' ', $t_zone[1] ), $t_identifier );
+			}
 		}
 	}
 
