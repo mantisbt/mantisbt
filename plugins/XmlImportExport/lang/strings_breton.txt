@@ -45,3 +45,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Diweredekaat al liamm';
 $s_plugin_XmlImportExport_fallback = 'Strategiezh sikour (pa ne c\'haller ket adniverennañ) :';
 $s_plugin_XmlImportExport_fallback_category = 'Rummad sikour :';
 $s_plugin_XmlImportExport_keep_same_category = 'Klask derc\'hel ar memes rummad';
+$s_plugin_XmlImportExport_error_no_xml = 'Ne c\'haller ket kavout an astennoù xmlreader hag xmlwriter';

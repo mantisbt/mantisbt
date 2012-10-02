@@ -270,6 +270,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'De gebeurtenis "%1$s" is nog niet aange
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'De uitbreiding is niet geregistreerd bij MantisBT.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'De uitbreiding is al geïnstalleerd.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'De pagina voor de uitbreiding is niet aangetroffen.';
+$MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Het installeren van de plugin is mislukt: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Het bijwerken van het uitbreidingsschema is mislukt in blok #%1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Er is een onbekende fout opgetreden ("%1$s") bij het uitvoeren van de uitbreiding "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Het veld "%1$s" bevat een dubbele kolom "%2$s".';

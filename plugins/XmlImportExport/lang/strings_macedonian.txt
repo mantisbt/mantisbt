@@ -45,3 +45,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Оневозможи ја врскат
 $s_plugin_XmlImportExport_fallback = 'Резервна стратегија (кога „Пренумерирај“ не важи):';
 $s_plugin_XmlImportExport_fallback_category = 'Резервна категорија:';
 $s_plugin_XmlImportExport_keep_same_category = 'Обиди се да ја задржиш истата категорија';
+$s_plugin_XmlImportExport_error_no_xml = 'не можам да ги најдам додатоците xmlreader и xmlwriter';

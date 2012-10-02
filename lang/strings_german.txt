@@ -30,6 +30,7 @@
  * @author Atrol
  * @author Ayonik
  * @author Campmaster
+ * @author Das Schäfchen
  * @author Diebuche
  * @author Dr. Jürgen Kehrel, jkehrel@kehrel.de
  * @author Erdemaslancan
@@ -335,7 +336,7 @@ $s_new_account_IP = 'Von IP-Adresse:';
 $s_new_account_signup_msg = 'Das folgende Konto wurde angelegt:';
 $s_reset_request_msg = 'Jemand (vermutlich Sie) hat einen Passwortwechsel durch E-Mail-Bestätigung angefordert. Wenn Sie es nicht waren, ignorieren Sie diese Nachricht, es wird nichts passieren.
 
-Wenn Sie die Bestätigung angefordert haben, besuchen Sie die folgende URL, um ihr Passwort zu ändern:';
+Wenn Sie die Bestätigung angefordert haben, besuchen Sie die folgende URL, um Ihr Passwort zu ändern:';
 $s_reset_request_in_progress_msg = 'Wenn Sie Benutzernamen und E-Mail-Adresse für Ihr Konto richtig angegeben haben, senden wir Ihnen jetzt eine Bestätigungsmail an diese Adresse. Nach dem Erhalt der Meldung befolgen Sie bitte die Anweisungen, um das Passwort Ihres Kontos zu ändern.';
 $s_email_notification_title_for_status_bug_new = 'Der folgende Eintrag hat (erneut) den Status NEU';
 $s_email_notification_title_for_status_bug_feedback = 'Der folgende Eintrag benötigt Ihre Rückmeldung.';
@@ -950,6 +951,9 @@ $s_sort = 'Sortieren nach';
 $s_issue_id = 'Eintrag #';
 $s_recently_visited = 'Kürzlich geöffnet';
 $s_note_user_id = 'Notiz von';
+$s_filter_match_type = 'Treffertyp';
+$s_filter_match_all = 'Alle Bedingungen';
+$s_filter_match_any = 'Keine Bedingung';
 $s_none = 'keine';
 $s_current = 'aktuelle';
 $s_search = 'Suche';

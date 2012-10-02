@@ -45,3 +45,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Deshabilitar a ligazón';
 $s_plugin_XmlImportExport_fallback = 'Estratexia do modo de emerxencia (cando "Renumerar" non é aplicable):';
 $s_plugin_XmlImportExport_fallback_category = 'Categoría do modo de emerxencia:';
 $s_plugin_XmlImportExport_keep_same_category = 'Intentar manter a mesma categoría';
+$s_plugin_XmlImportExport_error_no_xml = 'non se poden atopar as extensións xmlreader e xmlwriter';

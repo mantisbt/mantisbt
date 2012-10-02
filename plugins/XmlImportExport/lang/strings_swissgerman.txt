@@ -47,3 +47,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Link deaktiviere';
 $s_plugin_XmlImportExport_fallback = 'Fallback-Strategii (wänn ohni Renummerierig):';
 $s_plugin_XmlImportExport_fallback_category = '!!Fuzzy!!Fallback-Strategii:';
 $s_plugin_XmlImportExport_keep_same_category = 'Versuech, di glych Kategorii byyzbhalte';
+$s_plugin_XmlImportExport_error_no_xml = 'xmlreader- un xmlwriter-Erwyterige hän nit chenne gfunde wäre';

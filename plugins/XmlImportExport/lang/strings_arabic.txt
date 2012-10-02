@@ -47,3 +47,4 @@ $s_plugin_XmlImportExport_disable_desc = 'عطّل الوصلة';
 $s_plugin_XmlImportExport_fallback = 'الإستراتيجية الاحتياطية (عندما لا يمكن تطبيق "إعادة الترقيم"):';
 $s_plugin_XmlImportExport_fallback_category = 'الفئة البديلة:';
 $s_plugin_XmlImportExport_keep_same_category = 'حاول إبقاء نفس التصنيف';
+$s_plugin_XmlImportExport_error_no_xml = 'لا يمكن العثور على ملحقات xmlreader و xmlwriter';

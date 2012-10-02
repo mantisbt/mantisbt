@@ -29,11 +29,11 @@
  * @author Shirayuki
  */
 
-$s_plugin_XmlImportExport_title = 'チケットのインポートとエクスポート';
+$s_plugin_XmlImportExport_title = '課題のインポート/エクスポート';
 $s_plugin_XmlImportExport_description = 'MantisBT に XML ベースのインポートおよびエクスポート機能を加える。';
-$s_plugin_XmlImportExport_import = 'チケットのインポート';
+$s_plugin_XmlImportExport_import = '課題をインポート';
 $s_plugin_XmlImportExport_export = 'XMLエクスポート';
-$s_plugin_XmlImportExport_importing_in_project = '次のプロジェクト内のチケットをインポート:';
+$s_plugin_XmlImportExport_importing_in_project = '以下のプロジェクト内の課題をインポート:';
 $s_plugin_XmlImportExport_import_options = 'インポートのオプション';
 $s_plugin_XmlImportExport_cross_references = '相互参照';
 $s_plugin_XmlImportExport_default_strategy = '既定の変換戦略:';
@@ -46,3 +46,4 @@ $s_plugin_XmlImportExport_disable_desc = 'リンクを無効化する';
 $s_plugin_XmlImportExport_fallback = '代替戦略 (「再番号割当」を適用しない場合):';
 $s_plugin_XmlImportExport_fallback_category = '代替戦略:';
 $s_plugin_XmlImportExport_keep_same_category = '同じカテゴリを保つよう試みる';
+$s_plugin_XmlImportExport_error_no_xml = 'xmlreader 拡張機能および xmlwriter 拡張機能が見つかりません';

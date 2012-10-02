@@ -26,6 +26,7 @@
  * @file
  *
  * @author Atrol
+ * @author Metalhead64
  * @author Umherirrender
  */
 
@@ -46,3 +47,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Link deaktivieren';
 $s_plugin_XmlImportExport_fallback = 'Fallback-Strategie (wenn ohne Renummerierung):';
 $s_plugin_XmlImportExport_fallback_category = 'Ersatz-Kategorie:';
 $s_plugin_XmlImportExport_keep_same_category = 'Versuche, die gleich Kategorie beizubehalten';
+$s_plugin_XmlImportExport_error_no_xml = 'xmlreader- und xmlwriter-Erweiterungen konnten nicht gefunden werden';

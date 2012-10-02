@@ -46,3 +46,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Zablokuj link';
 $s_plugin_XmlImportExport_fallback = 'Strategia wycofania (gdy "Zmiana numeracji" nie zadziała):';
 $s_plugin_XmlImportExport_fallback_category = 'Kategoria wycofania:';
 $s_plugin_XmlImportExport_keep_same_category = 'Próbuj utrzymać tą samą kategorię';
+$s_plugin_XmlImportExport_error_no_xml = 'nie udało się znaleźć rozszerzenia xmlreader i xmlwriter';

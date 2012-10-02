@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Dregad
  * @author IAlex
  */
 
@@ -45,3 +46,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Désactiver le lien';
 $s_plugin_XmlImportExport_fallback = 'Stratégie de secours (quand la renumérotation ne s\'applique pas) :';
 $s_plugin_XmlImportExport_fallback_category = 'Catégorie de secours :';
 $s_plugin_XmlImportExport_keep_same_category = 'Essayer de garder les mêmes catégories';
+$s_plugin_XmlImportExport_error_no_xml = 'Impossible de trouver les extensions xmlreader et xmlwriter';

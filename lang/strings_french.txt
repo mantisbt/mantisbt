@@ -41,6 +41,7 @@
  * @author Jean-Frédéric
  * @author Kropotkine 113
  * @author Langis Gagnon, gagnon.langis@ic.gc.ca
+ * @author Lapinkiller
  * @author Laurent LABAT, wizzz@apinc.org
  * @author Maurice A. LeBlanc, leblancma@cooptel.qc.ca
  * @author McDutchie
@@ -95,7 +96,7 @@ $s_view_submitted_bug_link = 'Voir le bogue soumis %1$s';
 $s_assigned_projects = 'Projets assignés';
 $s_unassigned_projects = 'Projets non assignés';
 $s_print = 'Imprimer';
-$s_jump = 'Chercher';
+$s_jump = 'Aller';
 $s_copy_users = 'Copier les utilisateurs';
 $s_copy_categories_from = 'Copier les catégories à partir de';
 $s_copy_categories_to = 'Copier les catégories vers';
@@ -611,7 +612,7 @@ $s_mantis_version = 'Version de MantisBT';
 $s_schema_version = 'Version du schéma';
 $s_site_path = 'Chemin du site';
 $s_core_path = 'Chemin du répertoire principal';
-$s_plugin_path = 'Chemin du plugin';
+$s_plugin_path = 'Chemin des plugins';
 $s_created_user_part1 = 'Utilisateur créé';
 $s_created_user_part2 = 'avec une accréditation';
 $s_create_new_account_title = 'Créer un nouveau compte';
@@ -955,6 +956,9 @@ $s_issue_id = 'Bogue #';
 $s_recently_visited = 'Visité récemment';
 $s_priority_abbreviation = 'P';
 $s_note_user_id = 'Note par';
+$s_filter_match_type = 'Type de correspondance';
+$s_filter_match_all = 'Toutes les conditions';
+$s_filter_match_any = 'N\'importe quelle condition';
 $s_none = 'aucun';
 $s_current = 'actuelle';
 $s_search = 'Chercher';

@@ -26,6 +26,7 @@
  * @file
  *
  * @author Hamilton Abreu
+ * @author Waldir
  */
 
 $s_plugin_XmlImportExport_title = 'Importar/Exportar incidências';
@@ -45,3 +46,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Desactivar a ligação';
 $s_plugin_XmlImportExport_fallback = 'Estratégia de recurso (quando "Renumerar" não é aplicável):';
 $s_plugin_XmlImportExport_fallback_category = 'Categoria de recurso:';
 $s_plugin_XmlImportExport_keep_same_category = 'Tentar manter a categoria';
+$s_plugin_XmlImportExport_error_no_xml = 'não foi possível encontrar as extensões xmlreader e xmlwriter';

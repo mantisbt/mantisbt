@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Beta16
  * @author Massimo itaca
  */
 
@@ -45,3 +46,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Disabilita il collegamento';
 $s_plugin_XmlImportExport_fallback = 'Strategia Fallback (non si applica quando "Rinumera"):';
 $s_plugin_XmlImportExport_fallback_category = 'Categoria Fallback:';
 $s_plugin_XmlImportExport_keep_same_category = 'Prova a mantenere la stessa categoria';
+$s_plugin_XmlImportExport_error_no_xml = 'impossibile trovare le estensioni xmlreader e xmlwriter';
