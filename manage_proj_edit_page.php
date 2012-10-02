@@ -261,7 +261,12 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 			<span class="submit-button"><input type="submit" value="<?php echo lang_get( 'update_subproject_inheritance' ) ?>" /></span>
 		</fieldset>
 	</form><?php
-	} # End of hiding subproject listing if there are no subprojects ?>
+		# End of subprojects listing / update form
+	} else {
+		# If there are no subprojects, clear floats to h2 overlap on div border
+	?>
+		<div class="br"></div>
+	<?php } ?>
 
 </div>
 
