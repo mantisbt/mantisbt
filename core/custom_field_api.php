@@ -681,7 +681,7 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 				FROM $t_custom_field_table cft
 					JOIN $t_custom_field_project_table cfpt ON cfpt.field_id = cft.id
 					JOIN $t_project_table pt
-						ON pt.id = cfpt.project_id
+						ON pt.id = cfpt.project_id AND pt.enabled = " . db_prepare_bool( true ) . "
 					LEFT JOIN $t_project_user_list_table pult
 						ON pult.project_id = cfpt.project_id AND pult.user_id = " . db_param() . "
 					, $t_user_table ut
