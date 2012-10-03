@@ -1558,6 +1558,7 @@ If you requested this verification, visit the following URL to change your passw
 	ERROR_CUSTOM_FIELD_IN_USE => 'At least one project still uses this field.',
 	ERROR_CUSTOM_FIELD_INVALID_VALUE => 'Invalid value for field "%1$s".',
 	ERROR_CUSTOM_FIELD_INVALID_DEFINITION => 'Invalid custom field definition.',
+	ERROR_CUSTOM_FIELD_INVALID_PROPERTY => 'Invalid custom field property (%1$s).',
 	ERROR_CUSTOM_FIELD_NOT_LINKED_TO_PROJECT => 'Custom field "%1$s" (id %2$s) not linked to currently active project.',
 	ERROR_LDAP_AUTH_FAILED => 'LDAP Authentication Failed.',
 	ERROR_LDAP_SERVER_CONNECT_FAILED => 'LDAP Server Connection Failed.',

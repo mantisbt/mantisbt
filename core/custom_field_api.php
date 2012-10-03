@@ -441,11 +441,19 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	if(    $p_def_array['access_level_rw'] < $p_def_array['access_level_r']
-		|| $p_def_array['length_min'] < 0
+	if( $p_def_array['access_level_rw'] < $p_def_array['access_level_r'] ) {
+		error_parameters(
+			lang_get( 'custom_field_access_level_r' ) . ', ' .
+			lang_get( 'custom_field_access_level_rw' )
+		);
+		trigger_error( ERROR_CUSTOM_FIELD_INVALID_PROPERTY, ERROR );
+	}
+
+	if (   $p_def_array['length_min'] < 0
 		|| ( $p_def_array['length_max'] != 0 && $p_def_array['length_min'] > $p_def_array['length_max'] )
 	) {
-		trigger_error( ERROR_CUSTOM_FIELD_INVALID_DEFINITION, ERROR );
+		error_parameters( lang_get( 'custom_field_length_min' ) . ', ' . lang_get( 'custom_field_length_max' ));
+		trigger_error( ERROR_CUSTOM_FIELD_INVALID_PROPERTY, ERROR );
 	}
 
 	if( !custom_field_is_name_unique( $p_def_array['name'], $p_field_id ) ) {
