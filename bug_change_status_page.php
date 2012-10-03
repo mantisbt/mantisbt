@@ -71,7 +71,7 @@
 
 	$t_can_update_due_date = access_has_bug_level( config_get( 'due_date_update_threshold' ), $f_bug_id );
 	# get new issue handler if set, otherwise default to original handler
-	$f_handler_id = gpc_get_int( 'handler_id', bug_get_field( $f_bug_id, 'handler_id' ) );
+	$f_handler_id = gpc_get_int( 'handler_id', $t_bug->handler_id );
 
 	if ( config_get( 'bug_assigned_status' ) == $f_new_status ) {
 		$t_bug_sponsored = sponsorship_get_amount( sponsorship_get_all_ids( $f_bug_id ) ) > 0;
@@ -216,7 +216,7 @@ if ( $t_closed == $f_new_status ) {
 	$t_custom_status_label = "closed";
 }
 
-$t_related_custom_field_ids = custom_field_get_linked_ids( bug_get_field( $f_bug_id, 'project_id' ) );
+$t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug->project_id );
 
 foreach( $t_related_custom_field_ids as $t_id ) {
 	$t_def = custom_field_get_definition( $t_id );
@@ -285,7 +285,7 @@ if ( ( $f_new_status >= $t_resolved ) ) {
 if ( ( $f_new_status >= $t_resolved ) && ( $t_closed > $f_new_status ) ) { ?>
 <!-- Close Immediately (if enabled) -->
 <?php if ( ( ON == config_get( 'allow_close_immediately' ) )
-				&& ( access_has_bug_level( access_get_status_threshold( $t_closed, bug_get_field( $f_bug_id, 'project_id' ) ), $f_bug_id ) ) ) { ?>
+				&& ( access_has_bug_level( access_get_status_threshold( $t_closed, $t_bug->project_id ), $f_bug_id ) ) ) { ?>
 <tr <?php echo helper_alternate_class() ?>>
 	<td class="category">
 		<?php echo lang_get( 'close_immediately' ) ?>
