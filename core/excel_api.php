@@ -47,18 +47,18 @@ function excel_get_header( $p_worksheet_title, $p_styles = array() ) {
  */
 function excel_get_styles( $p_styles ) {
 
-    if ( count ( $p_styles ) == 0 ) {
-        return;
-    }
+	if ( count ( $p_styles ) == 0 ) {
+		return;
+	}
 
-    $t_styles_string = '<ss:Styles>';
+	$t_styles_string = '<ss:Styles>';
 
-    foreach ( $p_styles as $t_style ) {
-        $t_styles_string .= $t_style->asXml();
-    }
-    $t_styles_string .= '</ss:Styles>';
+	foreach ( $p_styles as $t_style ) {
+		$t_styles_string .= $t_style->asXml();
+	}
+	$t_styles_string .= '</ss:Styles>';
 
-    return $t_styles_string;
+	return $t_styles_string;
 }
 
 /**
@@ -84,11 +84,11 @@ function excel_format_column_title( $p_column_title ) {
  * @returns The Row tag.
  */
 function excel_get_start_row( $p_style_id = '') {
-    if ( $p_style_id != '' ) {
-        return '<Row ss:StyleID="' . $p_style_id . '">';
-    } else {
-	    return '<Row>';
-    }
+	if ( $p_style_id != '' ) {
+		return '<Row ss:StyleID="' . $p_style_id . '">';
+	} else {
+		return '<Row>';
+	}
 }
 
 /**
@@ -166,17 +166,17 @@ function excel_prepare_string( $p_value ) {
  * @return string
  */
 function excel_get_cell( $p_value, $p_type, $p_attributes = array() ) {
-    $t_ret = "<Cell ";
+	$t_ret = "<Cell ";
 
-    foreach ( $p_attributes as $t_attribute_name => $t_attribute_value ) {
-        $t_ret .= $t_attribute_name. '="' . $t_attribute_value . '" ';
-    }
+	foreach ( $p_attributes as $t_attribute_name => $t_attribute_value ) {
+		$t_ret .= $t_attribute_name. '="' . $t_attribute_value . '" ';
+	}
 
-    $t_ret .= ">";
+	$t_ret .= ">";
 
-    $t_ret .= "<Data ss:Type=\"$p_type\">" . $p_value . "</Data></Cell>\n";
+	$t_ret .= "<Data ss:Type=\"$p_type\">" . $p_value . "</Data></Cell>\n";
 
-    return $t_ret;
+	return $t_ret;
 }
 
 /**
@@ -522,266 +522,266 @@ function excel_format_sponsorship_total( $p_bug ) {
  */
 class ExcelStyle {
 
-    private $id;
-    private $parent_id;
+	private $id;
+	private $parent_id;
 
-    private $interior;
-    private $font;
-    private $border;
-    private $alignment;
+	private $interior;
+	private $font;
+	private $border;
+	private $alignment;
 
-    /**
-     * @param string $p_id The unique style id
-     * @param string $p_parent_id The parent style id
-     */
-    function __construct( $p_id , $p_parent_id  = '') {
+	/**
+	 * @param string $p_id The unique style id
+	 * @param string $p_parent_id The parent style id
+	 */
+	function __construct( $p_id , $p_parent_id  = '') {
 
-        $this->id = $p_id;
-        $this->parent_id = $p_parent_id;
-    }
+		$this->id = $p_id;
+		$this->parent_id = $p_parent_id;
+	}
 
-    function getId() {
+	function getId() {
 
-        return $this->id;
-    }
+		return $this->id;
+	}
 
-    /**
-     * @param string $p_color the color in #rrggbb format or a named color
-     * @param string $p_pattern
-     */
-    function setBackgroundColor( $p_color, $p_pattern = 'Solid' ) {
+	/**
+	 * @param string $p_color the color in #rrggbb format or a named color
+	 * @param string $p_pattern
+	 */
+	function setBackgroundColor( $p_color, $p_pattern = 'Solid' ) {
 
-        if ( ! isset ( $this->interior ) ) {
-            $this->interior = new Interior();
-        }
+		if ( ! isset ( $this->interior ) ) {
+			$this->interior = new Interior();
+		}
 
-        $this->interior->color = $p_color;
-        $this->interior->pattern = $p_pattern;
-    }
+		$this->interior->color = $p_color;
+		$this->interior->pattern = $p_pattern;
+	}
 
-    /**
-     *
-     * @param int $p_bold 1 for bold, 0 for not bold
-     * @param string $p_color the color in #rrggbb format or a named color
-     * @param string $p_name the name of the font
-     * @param int $p_italic 1 for italic, 0 for not italic
-     */
+	/**
+	 *
+	 * @param int $p_bold 1 for bold, 0 for not bold
+	 * @param string $p_color the color in #rrggbb format or a named color
+	 * @param string $p_name the name of the font
+	 * @param int $p_italic 1 for italic, 0 for not italic
+	 */
 
-    function setFont( $p_bold, $p_color = '', $p_name = '', $p_italic = -1 ) {
+	function setFont( $p_bold, $p_color = '', $p_name = '', $p_italic = -1 ) {
 
-        if ( ! isset ( $this->font ) ) {
-            $this->font = new Font();
-        }
+		if ( ! isset ( $this->font ) ) {
+			$this->font = new Font();
+		}
 
-        if ( $p_bold != -1 ) {
-            $this->font->bold = $p_bold;
-        }
-        if ( $p_color != '' ) {
-            $this->font->color = $p_color;
-        }
-        if ( $p_name != '' ) {
-            $this->font->fontName = $p_name;
-        }
-        if ( $p_italic != -1 ) {
-            $this->font->italic = $p_italic;
-        }
-    }
+		if ( $p_bold != -1 ) {
+			$this->font->bold = $p_bold;
+		}
+		if ( $p_color != '' ) {
+			$this->font->color = $p_color;
+		}
+		if ( $p_name != '' ) {
+			$this->font->fontName = $p_name;
+		}
+		if ( $p_italic != -1 ) {
+			$this->font->italic = $p_italic;
+		}
+	}
 
 
-    /**
-     * Sets the border values for the style
-     *
-     * <p>The values are set for the following positions: Left, Top, Right, Bottom. There is no
-     * support for setting individual values.</p>
-     *
-     * @param string $p_color the color in #rrggbb format or a named color
-     * @param string $p_line_style None, Continuous, Dash, Dot, DashDot, DashDotDot, SlantDashDot, or Double
-     * @param string $p_weight Thickness in points
-     */
-    function setBorder( $p_color, $p_line_style = 'Continuous', $p_weight = 1) {
+	/**
+	 * Sets the border values for the style
+	 *
+	 * <p>The values are set for the following positions: Left, Top, Right, Bottom. There is no
+	 * support for setting individual values.</p>
+	 *
+	 * @param string $p_color the color in #rrggbb format or a named color
+	 * @param string $p_line_style None, Continuous, Dash, Dot, DashDot, DashDotDot, SlantDashDot, or Double
+	 * @param string $p_weight Thickness in points
+	 */
+	function setBorder( $p_color, $p_line_style = 'Continuous', $p_weight = 1) {
 
-        if ( ! isset ( $this->border ) ) {
-            $this->border = new Border();
-        }
+		if ( ! isset ( $this->border ) ) {
+			$this->border = new Border();
+		}
 
-        if ( $p_color != '' ) {
-            $this->border->color = $p_color;
-        }
+		if ( $p_color != '' ) {
+			$this->border->color = $p_color;
+		}
 
-        if ( $p_line_style != '' ) {
-            $this->border->lineStyle = $p_line_style;
-        }
+		if ( $p_line_style != '' ) {
+			$this->border->lineStyle = $p_line_style;
+		}
 
-        if ( $p_weight != -1 ) {
-            $this->border->weight = $p_weight;
-        }
-    }
+		if ( $p_weight != -1 ) {
+			$this->border->weight = $p_weight;
+		}
+	}
 
-    /**
-     * Sets the aligment for the style
-     *
-     * @param int $p_wrap_text 1 to wrap, 0 to not wrap
-     * @param string $p_horizontal Automatic, Left, Center, Right, Fill, Justify, CenterAcrossSelection, Distributed, and JustifyDistributed
-     * @param string $p_vertical Automatic, Top, Bottom, Center, Justify, Distributed, and JustifyDistributed
-     */
-    function setAlignment( $p_wrap_text, $p_horizontal = '', $p_vertical = '') {
+	/**
+	 * Sets the aligment for the style
+	 *
+	 * @param int $p_wrap_text 1 to wrap, 0 to not wrap
+	 * @param string $p_horizontal Automatic, Left, Center, Right, Fill, Justify, CenterAcrossSelection, Distributed, and JustifyDistributed
+	 * @param string $p_vertical Automatic, Top, Bottom, Center, Justify, Distributed, and JustifyDistributed
+	 */
+	function setAlignment( $p_wrap_text, $p_horizontal = '', $p_vertical = '') {
 
-        if ( ! isset ( $this->alignment ) ) {
-            $this->alignment = new Alignment();
-        }
+		if ( ! isset ( $this->alignment ) ) {
+			$this->alignment = new Alignment();
+		}
 
-        if ( $p_wrap_text != '' ) {
-            $this->alignment->wrapText = $p_wrap_text;
-        }
+		if ( $p_wrap_text != '' ) {
+			$this->alignment->wrapText = $p_wrap_text;
+		}
 
-        if ( $p_horizontal != '' ) {
-            $this->alignment->horizontal = $p_horizontal;
-        }
+		if ( $p_horizontal != '' ) {
+			$this->alignment->horizontal = $p_horizontal;
+		}
 
-        if ( $p_vertical != '' ) {
-            $this->alignment->vertical = $p_vertical;
-        }
+		if ( $p_vertical != '' ) {
+			$this->alignment->vertical = $p_vertical;
+		}
 
-    }
+	}
 
-    function asXml() {
+	function asXml() {
 
-        $xml = '<ss:Style ss:ID="' . $this->id.'" ss:Name="'.$this->id.'" ';
-        if ( $this->parent_id != '' ) {
-            $xml .= 'ss:Parent="' . $this->parent_id .'" ';
-        }
-        $xml .= '>';
-        if ( $this->interior ) {
-            $xml .= $this->interior->asXml();
-        }
-        if ( $this->font ) {
-            $xml .= $this->font->asXml();
-        }
-        if ( $this->border ) {
-            $xml .= $this->border->asXml();
-        }
-        if ( $this->alignment ) {
-            $xml .= $this->alignment->asXml();
-        }
-        $xml .= '</ss:Style>'."\n";
+		$xml = '<ss:Style ss:ID="' . $this->id.'" ss:Name="'.$this->id.'" ';
+		if ( $this->parent_id != '' ) {
+			$xml .= 'ss:Parent="' . $this->parent_id .'" ';
+		}
+		$xml .= '>';
+		if ( $this->interior ) {
+			$xml .= $this->interior->asXml();
+		}
+		if ( $this->font ) {
+			$xml .= $this->font->asXml();
+		}
+		if ( $this->border ) {
+			$xml .= $this->border->asXml();
+		}
+		if ( $this->alignment ) {
+			$xml .= $this->alignment->asXml();
+		}
+		$xml .= '</ss:Style>'."\n";
 
-        return $xml;
-    }
+		return $xml;
+	}
 }
 
 class Interior {
 
-    public $color;
-    public $pattern;
+	public $color;
+	public $pattern;
 
-    function asXml() {
+	function asXml() {
 
-        $xml = '<ss:Interior ';
+		$xml = '<ss:Interior ';
 
-        if ( $this->color ) {
-           $xml .= 'ss:Color="' . $this->color .'" ss:Pattern="'. $this->pattern . '" ';
-        }
+		if ( $this->color ) {
+		   $xml .= 'ss:Color="' . $this->color .'" ss:Pattern="'. $this->pattern . '" ';
+		}
 
-        $xml .= '/>';
+		$xml .= '/>';
 
-        return $xml;
-    }
+		return $xml;
+	}
 }
 
 class Font {
 
-    public $bold;
-    public $color;
-    public $fontName;
-    public $italic;
+	public $bold;
+	public $color;
+	public $fontName;
+	public $italic;
 
-    function asXml() {
+	function asXml() {
 
-        $xml = '<ss:Font ';
+		$xml = '<ss:Font ';
 
-        if ( $this->bold ) {
-            $xml .= 'ss:Bold="' . $this->bold .'" ';
-        }
+		if ( $this->bold ) {
+			$xml .= 'ss:Bold="' . $this->bold .'" ';
+		}
 
-        if ( $this->color ) {
-            $xml .= 'ss:Color="' . $this->color .'" ';
-        }
+		if ( $this->color ) {
+			$xml .= 'ss:Color="' . $this->color .'" ';
+		}
 
-        if ( $this->fontName) {
-            $xml .= 'ss:FontName="' . $this->fontName .'" ';
-        }
+		if ( $this->fontName) {
+			$xml .= 'ss:FontName="' . $this->fontName .'" ';
+		}
 
-        if ( $this->italic ) {
-            $xml .= 'ss:Italic="' . $this->italic .'" ';
-        }
+		if ( $this->italic ) {
+			$xml .= 'ss:Italic="' . $this->italic .'" ';
+		}
 
-        $xml .= '/>';
+		$xml .= '/>';
 
-        return $xml;
-    }
+		return $xml;
+	}
 }
 
 class Border {
 
-    private $positions = array('Left', 'Top', 'Right', 'Bottom');
+	private $positions = array('Left', 'Top', 'Right', 'Bottom');
 
-    public $color;
-    public $lineStyle;
-    public $weight;
+	public $color;
+	public $lineStyle;
+	public $weight;
 
-    function asXml() {
+	function asXml() {
 
-        $xml = '<ss:Borders>';
+		$xml = '<ss:Borders>';
 
-        foreach ( $this->positions as $p_position ) {
+		foreach ( $this->positions as $p_position ) {
 
-            $xml.= '<ss:Border ss:Position="' . $p_position .'" ';
+			$xml.= '<ss:Border ss:Position="' . $p_position .'" ';
 
-            if ( $this->lineStyle ) {
-                $xml .= 'ss:LineStyle="' . $this->lineStyle .'" ';
-            }
+			if ( $this->lineStyle ) {
+				$xml .= 'ss:LineStyle="' . $this->lineStyle .'" ';
+			}
 
-            if ( $this->color ) {
-                $xml .= 'ss:Color="' . $this->color .'" ';
-            }
+			if ( $this->color ) {
+				$xml .= 'ss:Color="' . $this->color .'" ';
+			}
 
-            if ( $this->weight) {
-                $xml .= 'ss:Weight="' . $this->weight .'" ';
-            }
+			if ( $this->weight) {
+				$xml .= 'ss:Weight="' . $this->weight .'" ';
+			}
 
-            $xml.= '/>';
-        }
+			$xml.= '/>';
+		}
 
-        $xml .= '</ss:Borders>';
+		$xml .= '</ss:Borders>';
 
-        return $xml;
-    }
+		return $xml;
+	}
 }
 
 class Alignment {
 
-    public $wrapText;
-    public $horizontal;
-    public $vertical;
+	public $wrapText;
+	public $horizontal;
+	public $vertical;
 
-    function asXml() {
+	function asXml() {
 
-        $xml = '<ss:Alignment ';
+		$xml = '<ss:Alignment ';
 
-        if ( $this->wrapText ) {
-            $xml .= 'ss:WrapText="' . $this->wrapText.'" ';
-        }
+		if ( $this->wrapText ) {
+			$xml .= 'ss:WrapText="' . $this->wrapText.'" ';
+		}
 
-        if ( $this->horizontal ) {
-            $xml .= 'ss:Horizontal="' . $this->horizontal.'" ';
-        }
+		if ( $this->horizontal ) {
+			$xml .= 'ss:Horizontal="' . $this->horizontal.'" ';
+		}
 
-        if ( $this->vertical ) {
-            $xml .= 'ss:Vertical="' . $this->vertical.'" ';
-        }
+		if ( $this->vertical ) {
+			$xml .= 'ss:Vertical="' . $this->vertical.'" ';
+		}
 
-        $xml .= '/>';
+		$xml .= '/>';
 
-        return $xml;
-    }
+		return $xml;
+	}
 }
