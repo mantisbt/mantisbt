@@ -153,7 +153,9 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 
 <tr>
 	<td colspan="3"></td>
-	<td colspan="2" class="center"><input type="submit" value="<?php echo lang_get( 'plugin_update' ) ?>"/></td>
+	<td colspan="2" class="center">
+		<input type="submit" class="button" value="<?php echo lang_get( 'plugin_update' ) ?>"/>
+	</td>
 	<td></td>
 </tr>
 

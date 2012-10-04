@@ -525,7 +525,7 @@ if( !$g_database_upgrade ) {?>
 		Attempt Installation
 	</td>
 	<td>
-		<input name="go" type="submit" value="Install/Upgrade Database"></input>
+		<input name="go" type="submit" class="button" value="Install/Upgrade Database"></input>
 	</td>
 </tr>
 <input name="install" type="hidden" value="2"></input>
@@ -1002,8 +1002,8 @@ if( $g_failed ) {
 		<input name="admin_username" type="hidden" value="<?php echo $f_admin_username?>"></input>
 		<input name="admin_password" type="hidden" value="<?php echo $f_admin_password?>"></input>
 		<input name="log_queries" type="hidden" value="<?php echo( $f_log_queries ? 1 : 0 )?>"></input>
-		<input name="retry" type="submit" value="Retry"></input>
 		<input name="db_exists" type="hidden" value="<?php echo( $f_db_exists ? 1 : 0 )?>"></input>
+		<input name="retry" type="submit" class="button" value="Retry"></input>
 	</td>
 </tr>
 </table>

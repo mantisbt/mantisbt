@@ -271,7 +271,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 
 <tr>
 	<td colspan="6">
-	<input type="submit" value="<?php echo lang_get( 'update_subproject_inheritance' ) ?>" />
+	<input type="submit" class="button" value="<?php echo lang_get( 'update_subproject_inheritance' ) ?>" />
 		</form>
 	</td>
 </tr>
@@ -304,7 +304,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 	} # End looping over projects
 ?>
 			</select>
-			<input type="submit" value="<?php echo lang_get('add_subproject'); ?>">
+			<input type="submit" class="button" value="<?php echo lang_get( 'add_subproject' ); ?>">
 		</form>
 	</td>
 </tr>
