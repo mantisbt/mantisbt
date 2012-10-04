@@ -232,30 +232,30 @@ function tag_parse_filters( $p_string ) {
 
 /**
  * Returns all available tags
- * 
+ *
  * @param integer A string to match the beginning of the tag name
  * @param integer the number of tags to return
  * @param integer the offset of the result
- * 
+ *
  * @return array Tag rows, sorted by name
  */
 function tag_get_all( $p_name_filter, $p_count, $p_offset) {
-	
+
 	$t_tag_table = db_get_table( 'tag' );
-	
+
 	$t_where = '';
 	$t_where_params = array();
-	
+
 	if ( !is_blank( $p_name_filter ) ) {
 		$t_where = 'WHERE '.db_helper_like('name');
 		$t_where_params[] = $p_name_filter.'%';
 	}
-	
+
 	$t_query = "SELECT * FROM $t_tag_table
 		$t_where ORDER BY name";
-	
+
 	$t_result = db_query_bound( $t_query, $t_where_params, $p_count, $p_offset);
-	
+
 	return $t_result;
 }
 
@@ -264,23 +264,23 @@ function tag_get_all( $p_name_filter, $p_count, $p_offset) {
  * @param integer A string to match the beginning of the tag name
  */
 function tag_count ( $p_name_filter ) {
-	
+
 	$t_tag_table = db_get_table( 'tag' );
-	
+
 	$t_where = '';
 	$t_where_params = array();
-	
+
 	if ( $p_name_filter ) {
 		$t_where = 'WHERE '.db_helper_like('name');
 		$t_where_params[] = $p_name_filter.'%';
 	}
-	
+
 	$t_query = "SELECT count(*) FROM $t_tag_table $t_where";
-	
+
 	$t_result = db_query_bound( $t_query, $t_where_params );
 	$t_row = db_fetch_array( $t_result );
 	return (int)db_result( $t_result );
-	
+
 }
 
 /**
@@ -493,11 +493,11 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 			while( $row = db_fetch_array( $result ) ) {
 				$t_subquery_results[] = (int)$row['id'];
 			}
-			
+
 			if ( count ( $t_subquery_results ) == 0 ) {
 			    return array();
 			}
-			
+
 			$query = "SELECT id, name, description FROM $t_tag_table WHERE id IN ( " . implode( ', ', $t_subquery_results ) . ')';
 		} else {
 			$query = "SELECT id, name, description FROM $t_tag_table WHERE id IN (
