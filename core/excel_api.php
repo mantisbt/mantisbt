@@ -134,13 +134,7 @@ function excel_get_titles_row( $p_style_id = '') {
 	$t_ret = excel_get_start_row( $p_style_id );
 
 	foreach( $t_columns as $t_column ) {
-		$t_custom_field = column_get_custom_field_name( $t_column );
-		if( $t_custom_field !== null ) {
-			$t_ret .= excel_format_column_title( lang_get_defaulted( $t_custom_field ) );
-		} else {
-			$t_column_title = column_get_title( $t_column );
-			$t_ret .= excel_format_column_title( $t_column_title );
-		}
+		$t_ret .= excel_format_column_title( column_get_title( $t_column ) );
 	}
 
 	$t_ret .= '</Row>';
