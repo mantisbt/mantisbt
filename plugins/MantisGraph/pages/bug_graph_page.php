@@ -84,7 +84,7 @@ $t_show = array(
 						<?php echo get_dropdown( $t_show, 'show_table', $f_show_as_table ? 1 : 0 ); ?>
 					</td>
 					<td>
-						<input type="submit" name="show" value="<?php echo plugin_lang_get( 'show_graph' ); ?>" />
+						<input type="submit" class="button" name="show" value="<?php echo plugin_lang_get( 'show_graph' ); ?>"/>
 					</td>
 				</tr>
 			</table>
