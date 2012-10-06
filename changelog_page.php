@@ -172,7 +172,7 @@ foreach( $t_project_ids as $t_project_id ) {
 			continue;
 		}
 
-		$query = "SELECT sbt.*, dbt.target_version AS parent_version, rt.source_bug_id
+		$query = "SELECT sbt.*, dbt.fixed_in_version AS parent_version, rt.source_bug_id
 			FROM $t_bug_table AS sbt
 			LEFT JOIN $t_relation_table AS rt
 				ON sbt.id=rt.destination_bug_id AND rt.relationship_type=" . BUG_DEPENDANT . "
