@@ -213,8 +213,6 @@ foreach( $t_project_ids as $t_project_id ) {
 				continue;
 			}
 
-			$t_issues_resolved++;
-
 			if ( 0 === strcasecmp( $t_parent_version, $t_version ) ) {
 				$t_issue_ids[] = $t_issue_id;
 				$t_issue_parents[] = $t_issue_parent;
@@ -227,6 +225,8 @@ foreach( $t_project_ids as $t_project_id ) {
 		}
 
 		user_cache_array_rows( array_unique( $t_issue_handlers ) );
+
+		$t_issues_resolved = count( array_unique( $t_issue_ids ) );
 
 		if ( $t_issues_resolved > 0 ) {
 			if ( !$t_project_header_printed ) {
