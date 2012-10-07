@@ -273,6 +273,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'イベント「%1$s」はまだ定義�
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'MantisBT にプラグインが登録されていません。';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'プラグインはインストール済みです。';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'プラグインのページが見つかりません。';
+$MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'プラグインのインストールに失敗しました: %1$s';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'ブロック #%1$s でプラグインのスキーマのアップグレードに失敗しました。';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = '「%2$s」プラグインの実行中に不明なエラー「%1$s」が発生しました。';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = '項目「%1$s」の列「%2$s」が重複しています。';

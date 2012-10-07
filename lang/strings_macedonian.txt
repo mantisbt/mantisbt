@@ -265,6 +265,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Настанот „%1$s“ сè ушт
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Приклучокот не е регистриран во MantisBT.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Приклучокот е веќе инсталиран.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Страницата на приклучокот не е пронајдена.';
+$MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Инсталацијата на приклучокот не успеа: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Надградувањето на шемата на приклучокот не успеа во блокот #%1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'За време на извршувањето на приклучокот „%2$s“ се појави непозната грешка „%1$s“.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Полето „%1$s“ содржи дуплирана колона „%2$s“.';

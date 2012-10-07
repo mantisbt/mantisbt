@@ -294,6 +294,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'L\'événement « %1$s » est indéfini
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Le plugiciel n\'est pas enrégisté avec MantisBT.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Le plugiciel est déjà installé.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'La page du plugiciel est introuvable.';
+$MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Échec de l\'installation du plugin: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'La mise à jour du schéma pour le plugiciel a échoué en bloc #%1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Une erreur inconnue « %1$s » s\'est produite durant l\'exécution du plugiciel « %2$s ».';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Le champ « %1$s » possède plus d\'une colonne « %2$s ».';

@@ -219,6 +219,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Deze naam komt al voor.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Tenminste één project gebruikt dit veld nog.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Ongeldige waarde voor veld %1$s.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Ongeldige definitie gebruikersveld.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Ongeldige eigenschap voor aangepast veld (%1$s).';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP-authenticatie mislukt.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP serververbinding mislukt.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Het bijwerken van het LDAP-record is mislukt.';
