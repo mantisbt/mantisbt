@@ -1,4 +1,3 @@
-
 <?php
 /** MantisBT - a php based bugtracking system
  *
