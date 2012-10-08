@@ -196,7 +196,7 @@ function plugin_table( $p_name, $p_basename = null ) {
 	}
 
 	$t_table_name = config_get_global( 'db_table_prefix' );
-	if( !isempty( $t_table_name ) ) {
+	if( !empty( $t_table_name ) ) {
 		$t_table_name .= '_';
 	}
 	$t_table_name .=
