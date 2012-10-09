@@ -641,28 +641,32 @@ function plugin_upgrade( $p_plugin ) {
 
 		$t_target = $t_schema[$i][1][0];
 
-		if( $t_schema[$i][0] == 'InsertData' ) {
-			$t_sqlarray = array(
-				'INSERT INTO ' . $t_schema[$i][1][0] . $t_schema[$i][1][1],
-			);
-		} else if( $t_schema[$i][0] == 'UpdateSQL' ) {
-			$t_sqlarray = array(
-				'UPDATE ' . $t_schema[$i][1][0] . $t_schema[$i][1][1],
-			);
-		} else {
-			$t_sqlarray = call_user_func_array( Array( $t_dict, $t_schema[$i][0] ), $t_schema[$i][1] );
-		}
-		$t_status = $t_dict->ExecuteSQLArray( $t_sqlarray );
+        if ( $t_schema[$i][0] == "UpdateFunction" ) {
+            call_user_func_array( $t_schema[$i][1], $t_schema[$i][2] );
+        } else {
+            if ( $t_schema[$i][0] == 'InsertData' ) {
+                $t_sqlarray = array(
+                    'INSERT INTO ' . $t_schema[$i][1][0] . $t_schema[$i][1][1],
+                );
+            } else if ( $t_schema[$i][0] == 'UpdateSQL' ) {
+                $t_sqlarray = array(
+                    'UPDATE ' . $t_schema[$i][1][0] . $t_schema[$i][1][1],
+                );
+            } else {
+                $t_sqlarray = call_user_func_array( Array( $t_dict, $t_schema[$i][0] ), $t_schema[$i][1] );
+            }
 
-		if( 2 == $t_status ) {
-			plugin_config_set( 'schema', $i );
-		} else {
-			error_parameters( $i );
-			trigger_error( ERROR_PLUGIN_UPGRADE_FAILED, ERROR );
-			return null;
-		}
+            $t_status = $t_dict->ExecuteSQLArray( $t_sqlarray, /* continue_on_error */ false );
 
-		$i++;
+            if ( 2 != $t_status ) {
+                error_parameters( $i );
+                trigger_error( ERROR_PLUGIN_UPGRADE_FAILED, ERROR );
+                return null;
+            }
+        }
+
+        plugin_config_set( 'schema', $i );
+        $i++;
 	}
 
 	plugin_pop_current();
