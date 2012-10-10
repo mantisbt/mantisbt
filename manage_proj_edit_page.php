@@ -205,7 +205,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 					<option value="<?php echo $t_project['id'] ?>"><?php echo string_attribute( $t_project['name'] ) ?></option><?php
 				} # End looping over projects ?>
 				</select>
-				<input type="submit" class="button" value="<?php echo lang_get( 'add_subproject' ); ?>">
+				<input type="submit" class="button" value="<?php echo lang_get( 'add_subproject' ); ?>" />
 			</fieldset>
 		</form>
 	<?php
