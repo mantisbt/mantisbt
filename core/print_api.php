@@ -226,14 +226,14 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 	}
 
 	if( $p_project_id === ALL_PROJECTS ) {
-		$t_projects = user_get_accessible_projects(auth_get_current_user_id());
-		foreach($t_projects as $t_project_id){
-			$t_project_users_list = project_get_all_user_rows($t_project_id,$p_access);
-			$t_users_temp = array_merge($t_users_temp,$t_project_users_list);
+		$t_projects = user_get_accessible_projects( auth_get_current_user_id() );
+		foreach( $t_projects as $t_project_id ){
+			$t_project_users_list = project_get_all_user_rows( $t_project_id, $p_access );
+			$t_users_temp = array_merge( $t_users_temp,$t_project_users_list );
 		}
 		
 		$t_users_id_list = array();
-		# Remove user from list (there is a "myself" value)
+		# Remove current user from list (there is a "myself" value)
 		$t_users_id_list[] = auth_get_current_user_id();
 		
 		# Deleting duplicate
