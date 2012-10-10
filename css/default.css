@@ -76,6 +76,7 @@ tr.row-category td  {  text-align:center; }
 tr.row-category2	{ background-color: #c8c8e8; color: #000000; }
 tr.row-category-history { background-color: #c8c8e8; color: #000000; font-weight: bold;}
 tr.row-category-history td {  text-align: left; }
+tr.vtop			{ vertical-align: top; }
 tr.vcenter			{ vertical-align: middle; }
 tr.print			{ vertical-align: top; }
 tr.print-category	{ color: #000000; font-weight: bold; }

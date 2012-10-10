@@ -138,7 +138,7 @@ print_summary_submenu(); ?>
 		<?php echo lang_get( 'summary_title' ) ?>
 	</td>
 </tr>
-<tr>
+<tr class="vtop">
 	<td width="50%">
 		<?php # PROJECT #
 			if ( 1 < count( $t_project_ids ) ) { ?>
