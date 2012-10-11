@@ -169,7 +169,7 @@ function user_exists( $p_user_id ) {
 }
 
 # --------------------
-# check to see if project exists by id
+# check to see if user exists by id
 # if it doesn't exist then error
 #  otherwise let execution continue undisturbed
 function user_ensure_exists( $p_user_id ) {
@@ -1230,47 +1230,47 @@ function user_increment_lost_password_in_progress_count( $p_user_id ) {
 
 /**
  * Sets multiple fields on a user
- * 
+ *
  * @param int $p_user_id
  * @param array $p_fields keys are the field names and the values are the field values
  */
 function user_set_fields( $p_user_id, $p_fields ) {
 
 	$c_user_id = db_prepare_int( $p_user_id );
-	
+
 	if ( !array_key_exists('protected', $p_fields) ) {
 		user_ensure_unprotected( $p_user_id );
 	}
-	
+
 	$t_user_table = db_get_table( 'mantis_user_table' );
-	
+
 	$t_query = 'UPDATE ' . $t_user_table;
 	$t_parameters = Array();
-	
+
 	foreach ( $p_fields as $t_field_name => $t_field_value ) {
-		
+
 		$c_field_name = db_prepare_string( $t_field_name );
-		
+
 		if ( count ( $t_parameters) == 0 )
 			$t_query .= ' SET '. $c_field_name. '=' . db_param();
 		else
 			$t_query .= ' , ' . $c_field_name. '=' . db_param();
-		
+
 		array_push( $t_parameters, $t_field_value );
 	}
-	
+
 	$t_query .= ' WHERE id=' . db_param();
 	array_push ( $t_parameters, $c_user_id );
 
 	db_query_bound( $t_query, $t_parameters );
-	
+
 	user_clear_cache( $p_user_id );
 }
 
 # --------------------
 # Set a user field
 function user_set_field( $p_user_id, $p_field_name, $p_field_value ) {
-	
+
 	user_set_fields($p_user_id, array ( $p_field_name => $p_field_value ) );
 
 	# db_query errors on failure so:
