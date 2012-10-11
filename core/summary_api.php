@@ -680,7 +680,10 @@ function summary_print_by_category() {
 				$t_bugs_total = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=">' . $t_bugs_total . '</a>';
 			}
 
-			summary_helper_print_row( $label, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
+			summary_helper_print_row(
+				string_display_line( $label ),
+				$t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total
+			);
 
 			$t_bugs_open = 0;
 			$t_bugs_resolved = 0;
@@ -727,7 +730,10 @@ function summary_print_by_category() {
 			}
 		}
 
-		summary_helper_print_row( $label, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
+		summary_helper_print_row(
+			string_display_line( $label ),
+			$t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total
+		);
 	}
 }
 
@@ -797,7 +803,10 @@ function summary_print_by_project( $p_projects = null, $p_level = 0, $p_cache = 
 		$t_bugs_closed = isset( $t_pdata['closed'] ) ? $t_pdata['closed'] : 0;
 		$t_bugs_total = $t_bugs_open + $t_bugs_resolved + $t_bugs_closed;
 
-		summary_helper_print_row( $t_name, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
+		summary_helper_print_row(
+			string_display_line( $t_name ),
+			$t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total
+		);
 
 		if ( count( project_hierarchy_get_subprojects ( $t_project ) ) > 0 ) {
 			$t_subprojects = current_user_get_accessible_subprojects( $t_project );
