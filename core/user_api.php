@@ -733,7 +733,8 @@ function user_get_row( $p_user_id ) {
 # return the specified user field for the user id
 function user_get_field( $p_user_id, $p_field_name ) {
 	if( NO_USER == $p_user_id ) {
-		trigger_error( 'user_get_field() for NO_USER', WARNING );
+		error_parameters( NO_USER );
+		trigger_error( ERROR_USER_BY_ID_NOT_FOUND, WARNING );
 		return '@null@';
 	}
 
