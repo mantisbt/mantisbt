@@ -66,10 +66,10 @@ $t_can_change_flags = $t_can_change_workflow;
 $t_overrides = array();
 
 function set_overrides( $p_config ) {
-   global $t_overrides;
-   if ( !in_array( $p_config, $t_overrides ) ) {
-	   $t_overrides[] = $p_config;
-   }
+	global $t_overrides;
+	if( !in_array( $p_config, $t_overrides ) ) {
+		$t_overrides[] = $p_config;
+	}
 }
 
 # Get the value associated with the specific action and flag.
