@@ -287,9 +287,10 @@ function access_row() {
 				}
 			}
 		} else {
-			$t_level = ( isset( $t_project_set[$t_status] ) ? $t_project_set[$t_status] : 0 );
-			$t_level_global = ( isset( $t_global_set[$t_status] ) ? $t_global_set[$t_status] : 0 );
-			$t_level_file = ( isset( $t_file_set[$t_status] ) ? $t_file_set[$t_status] : 0 );
+			$t_level_file = ( isset( $t_file_set[$t_status] ) ? $t_file_set[$t_status] : false );
+			$t_level_global = ( isset( $t_global_set[$t_status] ) ? $t_global_set[$t_status] : $t_level_file );
+			$t_level = ( isset( $t_project_set[$t_status] ) ? $t_project_set[$t_status] : $t_level_global );
+
 			$t_can_change = ( $t_access >= config_get_access( 'set_status_threshold' ) );
 			$t_colour = '';
 			if ( $t_level_global != $t_level_file ) {
