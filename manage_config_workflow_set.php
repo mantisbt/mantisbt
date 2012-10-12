@@ -64,8 +64,8 @@
 			list( $t_from, $t_to ) = explode( ':', $t_transition );
 			$t_matrix[$t_from][$t_to] = '';
 		}
-		$t_statuses = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
-		foreach( $t_statuses as $t_state => $t_label) {
+		$t_enum_status = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
+		foreach( $t_enum_status as $t_state => $t_label) {
 			$t_workflow_row = '';
 			$t_default = gpc_get_int( 'default_' . $t_state );
 			if ( isset( $t_matrix[$t_state] ) && isset( $t_matrix[$t_state][$t_default] ) ) {
@@ -101,22 +101,38 @@
 		# get changes to access level to change these values
 		$f_access = gpc_get( 'status_access' );
 
+		# Build default
+		$t_file_set = config_get_global( 'set_status_threshold' );
+		$t_bug_submit_status = config_get( 'bug_submit_status' );
+		foreach ( $t_enum_status as $t_status => $t_status_label) {
+			if ( !isset( $t_file_set[$t_status] ) ) {
+				if ( $t_bug_submit_status == $t_status ) {
+					$t_file_set[$t_status] = config_get_global('report_bug_threshold');
+				} else {
+					$t_file_set[$t_status] = config_get_global('update_bug_status_threshold');
+				}
+			}
+		}
+
 		# walk through the status labels to set the status threshold
-		$t_enum_status = explode( ',', config_get( 'status_enum_string' ) );
 		$t_set_status = array();
-		foreach( $t_statuses as $t_status_id => $t_status_label) {
+		foreach( $t_enum_status as $t_status_id => $t_status_label) {
 			$f_level = gpc_get( 'access_change_' . $t_status_id );
 			if ( config_get( 'bug_submit_status' ) == $t_status_id ) {
 				if ( (int)$f_level != config_get( 'report_bug_threshold' ) ) {
 					config_set( 'report_bug_threshold', (int)$f_level, ALL_USERS, $t_project, $f_access );
 				}
+				unset( $t_file_set[$t_status_id] );
 			} else {
 				$t_set_status[$t_status_id] = (int)$f_level;
 			}
 		}
 
-		if ( ( $t_set_status != config_get( 'set_status_threshold' ) )
-				|| ( $f_access != config_get_access( 'status_enum_workflow' ) ) ) {
+		if( (  $t_set_status != $t_file_set
+			&& $t_set_status != config_get( 'set_status_threshold' )
+			)
+		|| $f_access != config_get_access( 'status_enum_workflow' )
+		) {
 			config_set( 'set_status_threshold', $t_set_status, ALL_USERS, $t_project, $f_access );
 		}
 	}
