@@ -229,6 +229,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Ese nombre está duplicado.
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Al menos un proyecto tiene ese campo en uso.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Valor no válido para el campo "%1$s".';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Definición de campo personalizado no válida';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Propiedad de campo personalizado no válida (%1$s).';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Ha fallado la autenticación LDAP';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Falló la conexión al servidor LDAP';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Ha fallado la actualización del registro LDAP.';

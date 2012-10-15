@@ -214,6 +214,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Name dopplet vorhande.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Zmindesch ei Projäkt brucht des Fäld no.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Nit giltige Wärt fir Fäld „%1$s“.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Nit giltigi Definition fir benutzerdefiniert Fäld';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Uugiltig benutzerdefiniert Fäldattribut (%1$s).';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP-Authentifizierig fähl gschlaa.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Verbindig zum LDAP-Server fähl gschlaa.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Aktualisierig vum LDAP-Yytrag fähl gschlaa.';

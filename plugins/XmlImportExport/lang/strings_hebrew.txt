@@ -45,3 +45,4 @@ $s_plugin_XmlImportExport_disable_desc = 'לבטל את הקישור';
 $s_plugin_XmlImportExport_fallback = 'אסטרטגיית מחדל (כאשר „מספור חדש” אינו חל):';
 $s_plugin_XmlImportExport_fallback_category = 'קטגוריה לבררת מחדל:';
 $s_plugin_XmlImportExport_keep_same_category = 'להשתדל להשאיר אותה קטגוריה';
+$s_plugin_XmlImportExport_error_no_xml = 'לא נמצאו ההרחבות xmlreader ו־xmlwriter';

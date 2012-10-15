@@ -243,6 +243,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Ceci est un nom dupliqué.'
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Au moins un projet utilise encore ce champ.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Valeur non valide pour le champ « %1$s ».';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Définition de champ personnalisé non valide';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Propriété de champ personnalisé non valide (%1$s).';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Échec d\'indentification par LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Échec de connexion au serveur LDAP';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Échec de mise à jour de l\'enregistrement LDAP.';
