@@ -724,7 +724,7 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 
 		$t_version = string_attribute( $version['version'] );
 
-		if ( !in_array( $t_version, $t_listed ) ) {
+		if ( !in_array( $t_version, $t_listed, true ) ) {
 			$t_listed[] = $t_version;
 			echo '<option value="' . $t_version . '"';
 			check_selected( $p_version, $version['version'] );
