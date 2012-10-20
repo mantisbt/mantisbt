@@ -216,6 +216,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'هذا اسم مكرر.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'على الأقل مشروع واحد مازال يستخدم هذا الحقل.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'قيمة غير صحيحة للحقل "%1$s".';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'تعريف حقل مخصص غير صحيح.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'خاصية حقل مخصص غير صحيحة (%1$s).';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'تحقق LDAP فشل.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'الاتصال بخادم LDAP فشل.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'تحديث سجل LDAP فشل.';
@@ -267,6 +268,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'الحدث "%1$s" لم يتم إعلا�
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'الإضافة غير مسجلة مع مانتيس بي تي.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'الإضافة منصبة بالفعل.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'صفحة الإضافة لم يتم العثور عليها.';
+$MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'فشل تثبيت البرنامج المساعد: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'ترقية سكيما الإضافة فشلت في القطعة #%1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'كان هناك خطأ غير معروف "%1$s" خلال تنفيذ الإضافة "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'الحقل "%1$s" يحتوي على العامود المكرر "%2$s".';

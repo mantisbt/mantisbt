@@ -45,3 +45,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Onemogući vezu';
 $s_plugin_XmlImportExport_fallback = 'Rezervna strategija (kada „Prenumeriši“ ne važi):';
 $s_plugin_XmlImportExport_fallback_category = 'Rezervna kategorija:';
 $s_plugin_XmlImportExport_keep_same_category = 'Probaj da zadržiš istu kategoriju';
+$s_plugin_XmlImportExport_error_no_xml = 'ne mogu da pronađem proširenja xmlreader i xmlwriter';
