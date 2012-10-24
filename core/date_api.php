@@ -207,50 +207,61 @@ function print_year_range_option_list( $p_year = 0, $p_start = 0, $p_end = 0 ) {
  * @access public
  */
 function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_disable = false, $p_allow_blank = false, $p_year_start = 0, $p_year_end = 0 ) {
-	$t_chars = preg_split( '//', $p_format, -1, PREG_SPLIT_NO_EMPTY );
-	if( $p_date != 0 ) {
+	if (ON == config_get( 'use_date_picker_javascript' )
+		&& "/return_dynamic_filters.php" != $_SERVER["SCRIPT_NAME"]
+	) {
+		$p_date = is_numeric( $p_date ) ? $p_date : time();
 		$t_date = preg_split( '/-/', date( 'Y-m-d', $p_date ), -1, PREG_SPLIT_NO_EMPTY );
+		$t_date_to_display = $t_date ? $t_date[0] . "-". $t_date[1] . "-". $t_date[2] : '';
+		print "<input ".helper_get_tab_index()." type=\"text\" size=\"14\" id=\"$p_name\" name=\"$p_name\" size=\"20\" maxlength=\"12\" value=\"".$t_date_to_display."\" />";
+		date_print_calendar("trigger".$p_name);
+		date_finish_calendar( $p_name, "trigger".$p_name, false );
 	} else {
-		$t_date = array(
-			0,
-			0,
-			0,
-		);
-	}
+		$t_chars = preg_split( '//', $p_format, -1, PREG_SPLIT_NO_EMPTY );
+		if( $p_date != 0 ) {
+			$t_date = preg_split( '/-/', date( 'Y-m-d', $p_date ), -1, PREG_SPLIT_NO_EMPTY );
+		} else {
+			$t_date = array(
+				0,
+				0,
+				0,
+			);
+		}
 
-	$t_disable = '';
-	if( $p_default_disable == true ) {
-		$t_disable = ' disabled="disabled"';
-	}
-	$t_blank_line = '';
-	if( $p_allow_blank == true ) {
-		$t_blank_line = "<option value=\"0\"></option>";
-	}
+		$t_disable = '';
+		if( $p_default_disable == true ) {
+			$t_disable = ' disabled="disabled"';
+		}
+		$t_blank_line = '';
+		if( $p_allow_blank == true ) {
+			$t_blank_line = "<option value=\"0\"></option>";
+		}
 
-	foreach( $t_chars as $t_char ) {
-		if( strcmp( $t_char, "M" ) == 0 ) {
-			echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_month\"$t_disable>";
-			echo $t_blank_line;
-			print_month_option_list( $t_date[1] );
-			echo "</select>\n";
-		}
-		if( strcmp( $t_char, "m" ) == 0 ) {
-			echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_month\"$t_disable>";
-			echo $t_blank_line;
-			print_numeric_month_option_list( $t_date[1] );
-			echo "</select>\n";
-		}
-		if( strcasecmp( $t_char, "D" ) == 0 ) {
-			echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_day\"$t_disable>";
-			echo $t_blank_line;
-			print_day_option_list( $t_date[2] );
-			echo "</select>\n";
-		}
-		if( strcasecmp( $t_char, "Y" ) == 0 ) {
-			echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_year\"$t_disable>";
-			echo $t_blank_line;
-			print_year_range_option_list( $t_date[0], $p_year_start, $p_year_end );
-			echo "</select>\n";
+		foreach( $t_chars as $t_char ) {
+			if( strcmp( $t_char, "M" ) == 0 ) {
+				echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_month\"$t_disable>";
+				echo $t_blank_line;
+				print_month_option_list( $t_date[1] );
+				echo "</select>\n";
+			}
+			if( strcmp( $t_char, "m" ) == 0 ) {
+				echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_month\"$t_disable>";
+				echo $t_blank_line;
+				print_numeric_month_option_list( $t_date[1] );
+				echo "</select>\n";
+			}
+			if( strcasecmp( $t_char, "D" ) == 0 ) {
+				echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_day\"$t_disable>";
+				echo $t_blank_line;
+				print_day_option_list( $t_date[2] );
+				echo "</select>\n";
+			}
+			if( strcasecmp( $t_char, "Y" ) == 0 ) {
+				echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_year\"$t_disable>";
+				echo $t_blank_line;
+				print_year_range_option_list( $t_date[0], $p_year_start, $p_year_end );
+				echo "</select>\n";
+			}
 		}
 	}
 }
@@ -267,7 +278,10 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
  */
 function date_print_calendar( $p_button_name = 'trigger' ) {
 	global $g_calendar_already_imported;
-	if(( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ) {
+	if ( ( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ) {
+		$t_icon_path = config_get( 'icon_path' );
+		$t_cal_icon = $t_icon_path . "calendar-img.gif";
+		echo "<input type=\"image\" class=\"button\" id=\"" . $p_button_name . "\" src=\"" . $t_cal_icon . "\" />";
 		if ( !$g_calendar_already_imported ) {
 			echo "<style type=\"text/css\">@import url(" . config_get( 'short_path' ) . "css/calendar-blue.css);</style>\n";
 			html_javascript_link( 'jscalendar/calendar.js' );
@@ -275,33 +289,31 @@ function date_print_calendar( $p_button_name = 'trigger' ) {
 			html_javascript_link( 'jscalendar/calendar-setup.js' );
 			$g_calendar_already_imported = true;
 		}
-		$t_icon_path = config_get( 'icon_path' );
-		$t_cal_icon = $t_icon_path . "calendar-img.gif";
-		echo "<input type=\"image\" class=\"button\" id=\"" . $p_button_name . "\" src=\"" . $t_cal_icon . "\" />";
 	}
 }
 
 /**
  * creates javascript calendar objects, point to input element ($p_field_name) that
- * diaplays date, and connects it with calendar button ($p_button_name) created with
+ * displays date, and connects it with the calendar button ($p_button_name) created with
  * date_print_calendar.
  * @todo (thraxisp) this may want a browser check  ( MS IE >= 5.0, Mozilla >= 1.0, Safari >=1.2, ...)
- * @param string $p_field_name
- * @param string $p_button_name
+ * @param string $p_field_name the input element
+ * @param string $p_button_name the calendar button name
+ * @param boolean $p_show_time should the calendar allow choosing a time (optional, default is true)
  * @return null
  * @access public
  */
-function date_finish_calendar( $p_field_name, $p_button_name ) {
+function date_finish_calendar( $p_field_name, $p_button_name, $p_show_time = true ) {
 	if(( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ) {
-		$t_format = config_get( 'calendar_js_date_format' );
+		$t_format = $p_show_time ? config_get( 'calendar_js_datetime_format' ) : config_get( 'calendar_js_date_format' );
 		echo "<script type=\"text/javascript\">\n";
 		echo "Calendar.setup (\n";
 		echo "{\n";
-		echo "inputField 	: \"" . $p_field_name . "\",\n";
-		echo "timeFormat     :    \"24\",\n";
-		echo "showsTime : true,\n";
-		echo "ifFormat 	: \"" . $t_format . "\", \n";
-		echo "button		: \"" . $p_button_name . "\"\n";
+		echo "inputField : \"" . $p_field_name . "\",\n";
+		echo "timeFormat : \"24\",\n";
+		echo "showsTime : " . ( $p_show_time ? "true" : "false" ) . ",\n";
+		echo "ifFormat : \"" . $t_format . "\", \n";
+		echo "button : \"" . $p_button_name . "\"\n";
 		echo "}\n";
 		echo ");\n";
 		echo "</script>\n";

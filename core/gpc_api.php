@@ -173,14 +173,18 @@ function gpc_isset_custom_field( $p_var_name, $p_custom_field_type ) {
 
 	switch ($p_custom_field_type ) {
 		case CUSTOM_FIELD_TYPE_DATE:
-			// date field is three dropdowns that default to 0
-			// Dropdowns are always present, so check if they are set
-			return gpc_isset( $t_field_name . '_day' ) &&
-				gpc_get_int( $t_field_name . '_day', 0 ) != 0 &&
-				gpc_isset( $t_field_name . '_month' ) &&
-				gpc_get_int( $t_field_name . '_month', 0 ) != 0 &&
-				gpc_isset( $t_field_name . '_year' ) &&
-				gpc_get_int( $t_field_name . '_year', 0 ) != 0 ;
+			if (ON == config_get( 'use_date_picker_javascript' )) {
+				return gpc_isset( $t_field_name ) ;
+			} else {
+				// date field is three dropdowns that default to 0
+				// Dropdowns are always present, so check if they are set
+				return gpc_isset( $t_field_name . '_day' ) &&
+					gpc_get_int( $t_field_name . '_day', 0 ) != 0 &&
+					gpc_isset( $t_field_name . '_month' ) &&
+					gpc_get_int( $t_field_name . '_month', 0 ) != 0 &&
+					gpc_isset( $t_field_name . '_year' ) &&
+					gpc_get_int( $t_field_name . '_year', 0 ) != 0 ;
+			}
 		case CUSTOM_FIELD_TYPE_STRING:
 		case CUSTOM_FIELD_TYPE_NUMERIC:
 		case CUSTOM_FIELD_TYPE_FLOAT:
@@ -205,10 +209,10 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 	switch( $p_custom_field_type ) {
 		case CUSTOM_FIELD_TYPE_MULTILIST:
 		case CUSTOM_FIELD_TYPE_CHECKBOX:
-		    // ensure that the default is an array, if set
-		    if ( ($p_default !== null) && !is_array($p_default) ) {
-		        $p_default = array( $p_default );
-		    }
+			// ensure that the default is an array, if set
+			if ( ($p_default !== null) && !is_array($p_default) ) {
+				$p_default = array( $p_default );
+			}
 			$t_values = gpc_get_string_array( $p_var_name, $p_default );
 			if( is_array( $t_values ) ) {
 				return implode( '|', $t_values );
@@ -217,17 +221,21 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 			}
 			break;
 		case CUSTOM_FIELD_TYPE_DATE:
-			$t_day = gpc_get_int( $p_var_name . '_day', 0 );
-			$t_month = gpc_get_int( $p_var_name . '_month', 0 );
-			$t_year = gpc_get_int( $p_var_name . '_year', 0 );
-			if(( $t_year == 0 ) || ( $t_month == 0 ) || ( $t_day == 0 ) ) {
-				if( $p_default == null ) {
-					return '';
-				} else {
-					return $p_default;
-				}
+			if (ON == config_get( 'use_date_picker_javascript' )) {
+				return strtotime( gpc_get_string( $p_var_name, time() ));
 			} else {
-				return strtotime( $t_year . '-' . $t_month . '-' . $t_day );
+				$t_day = gpc_get_int( $p_var_name . '_day', 0 );
+				$t_month = gpc_get_int( $p_var_name . '_month', 0 );
+				$t_year = gpc_get_int( $p_var_name . '_year', 0 );
+				if(( $t_year == 0 ) || ( $t_month == 0 ) || ( $t_day == 0 ) ) {
+					if( $p_default == null ) {
+						return '';
+					} else {
+						return $p_default;
+					}
+				} else {
+					return strtotime( $t_year . '-' . $t_month . '-' . $t_day );
+				}
 			}
 			break;
 		default:
