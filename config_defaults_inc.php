@@ -1017,6 +1017,16 @@
 	 **************************/
 
 	/**
+	 * Enables JavaScript based calendar for
+	 * custom date fields. If set to ON, instead of three
+	 * select fields there will be a single text field
+	 * and a calendar icon. Clicking the icon will show
+	 * a datepicker which populates the text field.
+	 * @global int $g_use_date_picker_javascript
+	 */
+	$g_use_date_picker_javascript = OFF;
+
+	/**
 	 * date format strings defaults to ISO 8601 formatting
 	 * go to http://www.php.net/manual/en/function.date.php
 	 * for detailed instructions on date formatting
