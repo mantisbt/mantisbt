@@ -1051,24 +1051,24 @@
 	$g_complete_date_format = 'Y-m-d H:i T';
 
 	/**
+	 * jscalendar date and time format string
+	 * This is used for calendar selections where a date and
+	 * a time may be chosen.
+	 * go to http://www.php.net/manual/en/function.date.php
+	 * for detailed instructions on date formatting
+	 * @global string $g_calendar_js_date_format
+	 */
+	$g_calendar_js_date_format   = '\%Y-\%m-\%d \%H:\%M';
+
+	/**
 	 * jscalendar date format string
 	 * This is used for calendar selections where just a date
 	 * without a time may be chosen.
 	 * go to http://www.php.net/manual/en/function.date.php
 	 * for detailed instructions on date formatting
-	 * @global string $g_calendar_js_date_format
+	 * @global string $g_calendar_js_date_no_time_format
 	 */
-	$g_calendar_js_date_format   = '\%Y-\%m-\%d';
-
-	/**
-	 * jscalendar datetime format string
-	 * This is used for calendar selections where a date and
-	 * a time may be chosen.
-	 * go to http://www.php.net/manual/en/function.date.php
-	 * for detailed instructions on date formatting
-	 * @global string $g_calendar_js_datetime_format
-	 */
-	$g_calendar_js_datetime_format   = '\%Y-\%m-\%d \%H:\%M';
+	$g_calendar_js_date_no_time_format   = '\%Y-\%m-\%d';
 
 	/**
 	 * jscalendar date format string

@@ -305,7 +305,9 @@ function date_print_calendar( $p_button_name = 'trigger' ) {
  */
 function date_finish_calendar( $p_field_name, $p_button_name, $p_show_time = true ) {
 	if(( ON == config_get( 'dhtml_filters' ) ) && ( ON == config_get( 'use_javascript' ) ) ) {
-		$t_format = $p_show_time ? config_get( 'calendar_js_datetime_format' ) : config_get( 'calendar_js_date_format' );
+		$t_format = $p_show_time
+			? config_get( 'calendar_js_date_format' )
+			: config_get( 'calendar_js_date_no_time_format' );
 		echo "<script type=\"text/javascript\">\n";
 		echo "Calendar.setup (\n";
 		echo "{\n";
