@@ -27,6 +27,7 @@
  *
  * @author Emperyan
  * @author Erdemaslancan
+ * @author Hedda Gabler
  * @author Incelemeelemani
  * @author Joseph
  * @author Karduelis
@@ -269,6 +270,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = '"%1$s" henüz belirtilmedi.';
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Eklenti MantisBT ile kayıtlı değildir.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Eklenti zaten yüklü.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Eklenti sayfası bulunamadı.';
+$MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Eklenti kurulumu başarısız oldu: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = '#%1$s bloğundaki eklenti şeması yükseltmesi başarısız.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = '"%2$s" çalıştırılması sonucu bilinmeyen bir %1$s hatası oluştu.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = '"%1$s" alanı birden fazla "%2$s" sütunu içeriyor.';
@@ -930,6 +932,8 @@ $s_sort = 'Sıralama';
 $s_issue_id = 'Konu #';
 $s_recently_visited = 'Son Ziyaret Edilenler';
 $s_note_user_id = 'Not Gönderen';
+$s_filter_match_type = 'Eşleme Türü';
+$s_filter_match_all = 'Tüm Koşullar';
 $s_none = 'hiçbiri';
 $s_current = 'şimdiki';
 $s_search = 'Ara';

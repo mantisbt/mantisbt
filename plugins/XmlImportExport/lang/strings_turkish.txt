@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Hedda Gabler
  * @author Khutuck
  * @author Korayal
  */
@@ -46,3 +47,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Bağlantıyı devre dışı bırak';
 $s_plugin_XmlImportExport_fallback = 'Dönüş stratejisi ("Yeniden Numaralandırma" uygulanamadığında)';
 $s_plugin_XmlImportExport_fallback_category = 'Geri dönüş kategorisi';
 $s_plugin_XmlImportExport_keep_same_category = 'Aynı kategoride tutmayı deneyin';
+$s_plugin_XmlImportExport_error_no_xml = 'xmlreader ile xmlwriter uzantıları bulunamadı';

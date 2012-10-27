@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Eleferen
  * @author Kirill
  */
 
@@ -45,3 +46,4 @@ $s_plugin_XmlImportExport_disable_desc = 'отключить связь';
 $s_plugin_XmlImportExport_fallback = 'Запасная стратегия (когда "перенумерация" не сработала):';
 $s_plugin_XmlImportExport_fallback_category = 'Запасная категория:';
 $s_plugin_XmlImportExport_keep_same_category = 'Пытаться сохранить такую же категорию';
+$s_plugin_XmlImportExport_error_no_xml = 'невозможно найти расширения: xmlreader и xmlwriter';
