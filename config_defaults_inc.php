@@ -2826,7 +2826,7 @@ $g_development_team_threshold = DEVELOPER;
  * );
  * @global array $g_set_status_threshold
  */
-$g_set_status_threshold = array();
+$g_set_status_threshold = array( NEW_ => REPORTER );
 
 /**
  * Threshold at which a user can edit his/her own bugnotes.
