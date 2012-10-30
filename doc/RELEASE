@@ -1,5 +1,26 @@
 MantisBT Release Notes
 
+1.2.12 Maintenance Release (2012-11-10)
+-------------------------------------------------
+
+MantisBT 1.2.12 resolves over 70 issues mainly in the following categories:
+security, MS SQL and PostgreSQL databases support, Change Log page, custom
+fields, installation, attachments, SOAP API, XML import/export plugin,
+e-mail (including update of the PHPMailer library to version 5.2.1) and others.
+
+In addition, it also brings several enhancements:
+ - filter page now allows 'OR' logic and to query by notes' authors
+ - improved e-mail logging (see #14630)
+ - new 'EVENT_UPDATE_BUG_STATUS_FORM' plugin event
+ - updated Admin Guide
+ - translations in many languages
+
+All installations that are currently running any 1.2.x or older version are
+advised to upgrade to this release.
+
+A full changelog for the 1.2.x series can be found on the official site. [1]
+
+
 1.2.11 Maintenance Release (2012-06-08)
 -------------------------------------------------
 
@@ -238,6 +259,7 @@ There have also been many improvements to the codebase beyond adding features:
 
 [1] The changelog is split between multiple releases:
 
+	1.2.12     http://www.mantisbt.org/bugs/changelog_page.php?version_id=150
 	1.2.11     http://www.mantisbt.org/bugs/changelog_page.php?version_id=148
 	1.2.10     http://www.mantisbt.org/bugs/changelog_page.php?version_id=146
 	1.2.9      http://www.mantisbt.org/bugs/changelog_page.php?version_id=140

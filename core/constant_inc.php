@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-define( 'MANTIS_VERSION', '1.2.12-dev' );
+define( 'MANTIS_VERSION', '1.2.12' );
 
 # --- constants -------------------
 # magic numbers
