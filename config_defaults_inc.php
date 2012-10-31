@@ -1017,6 +1017,16 @@
 	 **************************/
 
 	/**
+	 * Enables JavaScript based calendar for
+	 * custom date fields. If set to ON, instead of three
+	 * select fields there will be a single text field
+	 * and a calendar icon. Clicking the icon will show
+	 * a datepicker which populates the text field.
+	 * @global int $g_use_date_picker_javascript
+	 */
+	$g_use_date_picker_javascript = OFF;
+
+	/**
 	 * date format strings defaults to ISO 8601 formatting
 	 * go to http://www.php.net/manual/en/function.date.php
 	 * for detailed instructions on date formatting
@@ -1041,12 +1051,24 @@
 	$g_complete_date_format = 'Y-m-d H:i T';
 
 	/**
-	 * jscalendar date format string
+	 * jscalendar date and time format string
+	 * This is used for calendar selections where a date and
+	 * a time may be chosen.
 	 * go to http://www.php.net/manual/en/function.date.php
 	 * for detailed instructions on date formatting
 	 * @global string $g_calendar_js_date_format
 	 */
 	$g_calendar_js_date_format   = '\%Y-\%m-\%d \%H:\%M';
+
+	/**
+	 * jscalendar date format string
+	 * This is used for calendar selections where just a date
+	 * without a time may be chosen.
+	 * go to http://www.php.net/manual/en/function.date.php
+	 * for detailed instructions on date formatting
+	 * @global string $g_calendar_js_date_no_time_format
+	 */
+	$g_calendar_js_date_no_time_format   = '\%Y-\%m-\%d';
 
 	/**
 	 * jscalendar date format string
