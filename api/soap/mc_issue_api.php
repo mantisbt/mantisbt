@@ -104,9 +104,9 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['target_version'] = mci_null_if_empty( $t_bug->target_version );
 	$t_issue_data['due_date'] = mci_issue_get_due_date( $t_bug );
 
-	$t_issue_data['description'] = $t_bug->description;
-	$t_issue_data['steps_to_reproduce'] = mci_null_if_empty( $t_bug->steps_to_reproduce );
-	$t_issue_data['additional_information'] = mci_null_if_empty( $t_bug->additional_information );
+	$t_issue_data['description'] = mci_sanitize_xml_string($t_bug->description);
+	$t_issue_data['steps_to_reproduce'] = mci_null_if_empty( mci_sanitize_xml_string($t_bug->steps_to_reproduce) );
+	$t_issue_data['additional_information'] = mci_null_if_empty( mci_sanitize_xml_string($t_bug->additional_information) );
 
 	$t_issue_data['attachments'] = mci_issue_get_attachments( $p_issue_id );
 	$t_issue_data['relationships'] = mci_issue_get_relationships( $p_issue_id, $t_user_id );
@@ -318,7 +318,7 @@ function mci_issue_get_notes( $p_issue_id ) {
 		$t_bugnote['reporter'] = mci_account_get_array_by_id( $t_value->reporter_id );
 		$t_bugnote['date_submitted'] = timestamp_to_iso8601( $t_value->date_submitted, false );
 		$t_bugnote['last_modified'] = timestamp_to_iso8601( $t_value->last_modified, false );
-		$t_bugnote['text'] = $t_value->note;
+		$t_bugnote['text'] = mci_sanitize_xml_string( $t_value->note );
 		$t_bugnote['view_state'] = mci_enum_get_array_by_id( $t_value->view_state, 'view_state', $t_lang );
 		$t_bugnote['time_tracking'] = $t_has_time_tracking_access ? $t_value->time_tracking : 0;
 		$t_bugnote['note_type'] = $t_value->note_type;
