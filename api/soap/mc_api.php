@@ -193,6 +193,17 @@ function mci_null_if_empty( $p_value ) {
 }
 
 /**
+ * Removes any invalid character from the string per XML 1.0 specification
+ * 
+ * @param string $p_input
+ * @return string the sanitized XML
+ */
+function mci_sanitize_xml_string ( $p_input ) {
+	
+	return preg_replace( '/[^\x9\xA\xD\x20-\xD7FF\xE000-\xFFFD\x{10000}-\x{10FFFF}]/u', '', $p_input);
+}
+
+/**
  * Gets the url for MantisBT.
  *
  * @return MantisBT URL terminated by a /.
