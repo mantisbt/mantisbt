@@ -1359,7 +1359,7 @@ function mci_issue_data_as_array( $p_issue_data, $p_user_id, $p_lang ) {
 		$t_issue['status'] = mci_enum_get_array_by_id( $p_issue_data->status, 'status', $p_lang );
 
 		$t_issue['reporter'] = mci_account_get_array_by_id( $p_issue_data->reporter_id );
-		$t_issue['summary'] = $p_issue_data->summary;
+		$t_issue['summary'] = mci_sanitize_xml_string( $p_issue_data->summary );
 		$t_issue['version'] = mci_null_if_empty( $p_issue_data->version );
 		$t_issue['build'] = mci_null_if_empty( $p_issue_data->build );
 		$t_issue['profile_id'] = mci_null_if_empty( $p_issue_data->profile_id );
@@ -1382,13 +1382,13 @@ function mci_issue_data_as_array( $p_issue_data, $p_user_id, $p_lang ) {
 		$t_issue['fixed_in_version'] = mci_null_if_empty( $p_issue_data->fixed_in_version );
 		$t_issue['target_version'] = mci_null_if_empty( $p_issue_data->target_version );
 
-		$t_issue['description'] = bug_get_text_field( $t_id, 'description' );
+		$t_issue['description'] = mci_sanitize_xml_string( bug_get_text_field( $t_id, 'description' ) );
 
 		$t_steps_to_reproduce = bug_get_text_field( $t_id, 'steps_to_reproduce' );
-		$t_issue['steps_to_reproduce'] = mci_null_if_empty( $t_steps_to_reproduce );
+		$t_issue['steps_to_reproduce'] = mci_null_if_empty( mci_sanitize_xml_string ($t_steps_to_reproduce) );
 
 		$t_additional_information = bug_get_text_field( $t_id, 'additional_information' );
-		$t_issue['additional_information'] = mci_null_if_empty( $t_additional_information );
+		$t_issue['additional_information'] = mci_null_if_empty( mci_sanitize_xml_string( $t_additional_information ) );
 
 		$t_issue['attachments'] = mci_issue_get_attachments( $p_issue_data->id );
 		$t_issue['relationships'] = mci_issue_get_relationships( $p_issue_data->id, $p_user_id );
@@ -1440,7 +1440,7 @@ function mci_issue_data_as_header_array( $p_issue_data ) {
 		$t_issue['status'] = $p_issue_data->status;
 
 		$t_issue['reporter'] = $p_issue_data->reporter_id;
-		$t_issue['summary'] = $p_issue_data->summary;
+		$t_issue['summary'] = mci_sanitize_xml_string( $p_issue_data->summary );
 		if( !empty( $p_issue_data->handler_id ) ) {
 			$t_issue['handler'] = $p_issue_data->handler_id;
 		}
