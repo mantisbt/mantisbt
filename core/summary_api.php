@@ -40,20 +40,20 @@ function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p
 /**
  * Returns a string representation of the user, together with a link to the issues
  * acted on by the user ( reported, handled or commented on )
- * 
+ *
  * @param int $p_user_id
  * @return string
  */
 function summary_helper_get_developer_label ( $p_user_id ) {
-	
+
 	$t_user = string_display_line( user_get_name( $p_user_id ) );
-	
+
 	return "<a class='subtle' href='view_all_set.php?type=1&amp;temporary=y
 			&amp;".FILTER_PROPERTY_REPORTER_ID."=$p_user_id
 			&amp;".FILTER_PROPERTY_HANDLER_ID."=$p_user_id
 			&amp;".FILTER_PROPERTY_NOTE_USER_ID."=$p_user_id
 			&amp;".FILTER_PROPERTY_MATCH_TYPE."=".FILTER_MATCH_ANY."'>$t_user</a>";
-	
+
 }
 
 # Used in summary reports
