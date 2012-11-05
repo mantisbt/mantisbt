@@ -640,8 +640,8 @@ function summary_print_by_category() {
 				FROM $t_mantis_bug_table b
 				JOIN $t_mantis_category_table c ON b.category_id=c.id
 				WHERE b.$specific_where
-				GROUP BY $t_project_query category_id, c.name, b.status
-				ORDER BY $t_project_query category_id, c.name, b.status";
+				GROUP BY $t_project_query c.name, b.status
+				ORDER BY $t_project_query c.name";
 
 	$result = db_query( $query );
 
@@ -660,7 +660,7 @@ function summary_print_by_category() {
 		$v_category_id = $row['category_id'];
 		$v_category_name = $row['category_name'];
 
-		if(( $v_category_id != $last_category_id ) && ( $last_category_id != -1 ) ) {
+		if(( $v_category_name != $last_category_name ) && ( $last_category_name != -1 ) ) {
 			$label = $last_category_name;
 			if(( ON == $t_summary_category_include_project ) && ( ALL_PROJECTS == $t_project_id ) ) {
 				$label = sprintf( '[%s] %s', project_get_name( $last_project ), $label );
