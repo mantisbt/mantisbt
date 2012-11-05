@@ -565,6 +565,22 @@ tar -xf <emphasis>filename.tar</emphasis>
 
 		</orderedlist>
 
+		<note>
+			<title>Upgrading large databases</title>
+
+			<para>When processing large databases from versions older than 1.2,
+				the upgrade script may fail during the conversion of date fields,
+				leaving the system in an inconsistent (i.e. partially updated)
+				state.
+			</para>
+			<para>In this case, you should simply restart the upgrade process,
+				which will resume where it left off. Note that you may have to
+				repeat this several times, until normal completion.
+			</para>
+			<para>Reference: MantisBT issue
+				<ulink url="http://www.mantisbt.org/bugs/view.php?id=12735">12735</ulink>.
+			</para>
+		</note>
 	</section>
 
 
