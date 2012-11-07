@@ -42,6 +42,7 @@
  * @author XanaduNWH
  * @author Xiaomingyan
  * @author Yanmiao liu
+ * @author Yfdyh000
  * @author liaobin@jite.net
  * @author rerbin@lonmo.com
  * @author zoomq@itcase.com
@@ -231,6 +232,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = '名称重复。';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = '最少还有一个项目仍然在使用该字段。';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = '该数值对字段"%1$s" 无效。';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = '自定义字段定义无效';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = '无效的自定义字段属性 (%1$s)。';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP 验证失败';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = '连接至 LDAP 服务器失败';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = '更新 LDAP 记录失败。';
@@ -282,6 +284,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = '事件"%1$s"未声明';
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = '插件未在MantisBT中注册';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = '插件已安装';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = '插件页面未找到';
+$MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = '插件安装失败：%1$s。';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = '升级插件方案失败于块 #%1$s。';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = '在执行插件"%2$s"过程中出现未知错误"%1$s"';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = '字段 "%1$s" 包含重复字段 "%2$s"。';
@@ -940,6 +943,9 @@ $s_sort = '排序字段';
 $s_issue_id = '问题 #';
 $s_recently_visited = '最近浏览的';
 $s_note_user_id = '注释人';
+$s_filter_match_type = '匹配类型';
+$s_filter_match_all = '所有情况';
+$s_filter_match_any = '任何情况';
 $s_none = '无';
 $s_current = '当前';
 $s_search = '搜索';

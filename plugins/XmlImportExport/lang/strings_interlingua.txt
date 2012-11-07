@@ -45,3 +45,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Disactivar le ligamine';
 $s_plugin_XmlImportExport_fallback = 'Strategia alternative (quando "Renumerar" non es applicabile):';
 $s_plugin_XmlImportExport_fallback_category = 'Categoria alternative:';
 $s_plugin_XmlImportExport_keep_same_category = 'Tenta mantener le mesme categoria';
+$s_plugin_XmlImportExport_error_no_xml = 'impossibile trovar le extensiones xmlreader e xmlwriter';

@@ -27,6 +27,7 @@
  *
  * @author Hydra
  * @author Kenzaburo Ito, kenito@300baud.org
+ * @author Yfdyh000
  */
 
 $s_plugin_XmlImportExport_title = '导入/导出问题';
@@ -46,3 +47,4 @@ $s_plugin_XmlImportExport_disable_desc = '禁用链接';
 $s_plugin_XmlImportExport_fallback = '备选策略 (当不使用"重新编号"时):';
 $s_plugin_XmlImportExport_fallback_category = '备选分类:';
 $s_plugin_XmlImportExport_keep_same_category = '尝试保持相同的目录';
+$s_plugin_XmlImportExport_error_no_xml = '找不到 xmlreader 和 xmlwriter 扩展';
