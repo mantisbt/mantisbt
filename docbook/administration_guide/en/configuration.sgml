@@ -2782,7 +2782,9 @@
 
     <section id="admin.config.sourcecontrol">
         <title>Source Control Integration</title>
-
+		<para>Note that the script expects to be invoked with UTF-8 input. If you have a 
+			program which outputs text in a different encoding the results may be
+			incorrect.</para>
 
         <variablelist>
             <varlistentry>
