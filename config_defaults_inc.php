@@ -2528,6 +2528,7 @@
 	 * @global array $g_set_status_threshold
 	 */
 	$g_set_status_threshold = array();
+	$g_set_status_threshold = array( NEW_ => REPORTER );
 
 	/**
 	 * Allow a bug to have no category

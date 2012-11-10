@@ -196,6 +196,7 @@ function bug_group_action_get_commands( $p_project_ids = null ) {
 		if( !isset( $t_commands['CLOSE'] ) &&
 			access_has_project_level( config_get( 'update_bug_status_threshold', null, null, $t_project_id ), $t_project_id ) &&
 			( access_has_project_level( access_get_status_threshold( config_get( 'bug_closed_status_threshold', null, null, $t_project_id ), $t_project_id ), $t_project_id ) ||
+				access_has_project_level( config_get( 'report_bug_threshold', null, null, $t_project_id ), $t_project_id ) &&
 				access_has_project_level( config_get( 'allow_reporter_close', null, null, $t_project_id ), $t_project_id ) ) ) {
 			$t_commands['CLOSE'] = lang_get( 'actiongroup_menu_close' );
 		}
