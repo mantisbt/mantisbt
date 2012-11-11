@@ -548,7 +548,11 @@ function html_login_info() {
 		# User has only one project, set it as both current and default
 		if( ALL_PROJECTS == helper_get_current_project() ) {
 			helper_set_current_project( $t_project_id );
-			current_user_set_default_project( $t_project_id );
+
+			if ( !current_user_is_protected() ) {
+				current_user_set_default_project( $t_project_id );
+			}
+
 			# Force reload of current page
 			$t_redirect_url = str_replace( config_get( 'short_path' ), '', $_SERVER['REQUEST_URI'] );
 			html_meta_redirect( $t_redirect_url, 0, false );
