@@ -640,7 +640,7 @@ function summary_print_by_category() {
 				FROM $t_mantis_bug_table b
 				JOIN $t_mantis_category_table c ON b.category_id=c.id
 				WHERE b.$specific_where
-				GROUP BY $t_project_query c.name, b.status
+				GROUP BY $t_project_query c.name, b.category_id, b.status
 				ORDER BY $t_project_query c.name";
 
 	$result = db_query( $query );
