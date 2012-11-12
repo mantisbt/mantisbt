@@ -45,6 +45,7 @@ function mc_issue_exists( $p_username, $p_password, $p_issue_id ) {
  * @return Array that represents an IssueData structure
  */
 function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
+	
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
@@ -53,7 +54,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_lang = mci_get_user_lang( $t_user_id );
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return new soap_fault( 'Client', '', 'Issue does not exist.' );
+		return SoapObjectsFactory::newSoapFault('Client', 'Issue does not exist');
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
@@ -70,7 +71,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 
 	$t_issue_data['id'] = $p_issue_id;
 	$t_issue_data['view_state'] = mci_enum_get_array_by_id( $t_bug->view_state, 'view_state', $t_lang );
-	$t_issue_data['last_updated'] = timestamp_to_iso8601( $t_bug->last_updated, false );
+	$t_issue_data['last_updated'] = SoapObjectsFactory::newDateTimeVar($t_bug->last_updated);
 
 	$t_issue_data['project'] = mci_project_as_array_by_id( $t_bug->project_id );
 	$t_issue_data['category'] = mci_get_category( $t_bug->category_id );
@@ -87,7 +88,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['os'] = mci_null_if_empty( $t_bug->os );
 	$t_issue_data['os_build'] = mci_null_if_empty( $t_bug->os_build );
 	$t_issue_data['reproducibility'] = mci_enum_get_array_by_id( $t_bug->reproducibility, 'reproducibility', $t_lang );
-	$t_issue_data['date_submitted'] = timestamp_to_iso8601( $t_bug->date_submitted, false );
+	$t_issue_data['date_submitted'] = SoapObjectsFactory::newDateTimeVar($t_bug->date_submitted);
 	$t_issue_data['sticky'] = $t_bug->sticky;
 
 	$t_issue_data['sponsorship_total'] = $t_bug->sponsorship_total;
@@ -133,16 +134,18 @@ function mci_get_category( $p_category_id ) {
 
 /**
  *
- * @param BugData $bug
+ * @param BugData $p_bug
  * @return soapval the value to be encoded as the due date
  */
 function mci_issue_get_due_date( $p_bug ) {
+	
+	$t_value = null;
+	
 	if ( access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id )  && !date_is_null( $p_bug->due_date ) ) {
-		return new soapval( 'due_date', 'xsd:dateTime', timestamp_to_iso8601( $p_bug->due_date, false ) );
-	} else {
-		return new soapval( 'due_date','xsd:dateTime', null );
+		$t_value = $p_bug->due_date;
 	}
-
+	
+	return SoapObjectsFactory::newDateTimeVar( $t_value) ;
 }
 
 /**
@@ -156,11 +159,14 @@ function mci_issue_set_custom_fields( $p_issue_id, &$p_custom_fields, $p_log_ins
 	# set custom field values on the submitted issue
 	if( isset( $p_custom_fields ) && is_array( $p_custom_fields ) ) {
 		foreach( $p_custom_fields as $t_custom_field ) {
+			
+			$t_custom_field = SoapObjectsFactory::unwrapObject( $t_custom_field );
+			
 			# get custom field id from object ref
 			$t_custom_field_id = mci_get_custom_field_id_from_objectref( $t_custom_field['field'] );
 
 			if( $t_custom_field_id == 0 ) {
-				return new soap_fault( 'Client', '', 'Custom field ' . $t_custom_field['field']['name'] . ' not found.' );
+				return SoapObjectsFactory::newSoapFault('Client', 'Custom field ' . $t_custom_field['field']['name'] . ' not found.');
 			}
 
 			# skip if current user doesn't have login access.
@@ -171,11 +177,11 @@ function mci_issue_set_custom_fields( $p_issue_id, &$p_custom_fields, $p_log_ins
 			$t_value = $t_custom_field['value'];
 
 			if( !custom_field_validate( $t_custom_field_id, $t_value ) ) {
-				return new soap_fault( 'Client', '', 'Invalid custom field value for field id ' . $t_custom_field_id . ' .');
+				return SoapObjectsFactory::newSoapFault('Client', 'Invalid custom field value for field id ' . $t_custom_field_id . ' .');
 			}
 
 			if( !custom_field_set_value( $t_custom_field_id, $p_issue_id, $t_value, $p_log_insert  ) ) {
-				return new soap_fault( 'Server', '', 'Unable to set custom field value for field id ' . $t_custom_field_id . ' to issue ' . $p_issue_id. ' .' );
+				return SoapObjectsFactory::newSoapFault('Server', 'Unable to set custom field value for field id ' . $t_custom_field_id . ' to issue ' . $p_issue_id. ' .');
 			}
 		}
 	}
@@ -249,7 +255,7 @@ function mci_issue_get_attachments( $p_issue_id ) {
 		$t_attachment['filename'] = $t_attachment_row['filename'];
 		$t_attachment['size'] = $t_attachment_row['filesize'];
 		$t_attachment['content_type'] = $t_attachment_row['file_type'];
-		$t_attachment['date_submitted'] = timestamp_to_iso8601( $t_attachment_row['date_added'], false );
+		$t_attachment['date_submitted'] = SoapObjectsFactory::newDateTimeVar( $t_attachment_row['date_added'] );
 		$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $t_attachment_row['id'] . '&amp;type=bug';
 		$t_attachment['user_id'] = $t_attachment_row['user_id'];
 		$t_result[] = $t_attachment;
@@ -316,8 +322,8 @@ function mci_issue_get_notes( $p_issue_id ) {
 		$t_bugnote = array();
 		$t_bugnote['id'] = $t_value->id;
 		$t_bugnote['reporter'] = mci_account_get_array_by_id( $t_value->reporter_id );
-		$t_bugnote['date_submitted'] = timestamp_to_iso8601( $t_value->date_submitted, false );
-		$t_bugnote['last_modified'] = timestamp_to_iso8601( $t_value->last_modified, false );
+		$t_bugnote['date_submitted'] = SoapObjectsFactory::newDateTimeString( $t_value->date_submitted );
+		$t_bugnote['last_modified'] = SoapObjectsFactory::newDateTimeString( $t_value->last_modified );
 		$t_bugnote['text'] = mci_sanitize_xml_string( $t_value->note );
 		$t_bugnote['view_state'] = mci_enum_get_array_by_id( $t_value->view_state, 'view_state', $t_lang );
 		$t_bugnote['time_tracking'] = $t_has_time_tracking_access ? $t_value->time_tracking : 0;
@@ -351,8 +357,10 @@ function mci_issue_set_monitors( $p_issue_id , $p_requesting_user_id, $p_monitor
 
 	# 2. build new monitors ids
 	$t_new_monitor_ids = array();
-	foreach ( $p_monitors as $t_monitor )
+	foreach ( $p_monitors as $t_monitor ) {
+		$t_monitor = SoapObjectsFactory::unwrapObject( $t_monitor ); 
 		$t_new_monitor_ids[] = $t_monitor['id'];
+	}
 
 	# 3. for each of the new monitor ids, add it if it does not already exist
 	foreach ( $t_new_monitor_ids as $t_user_id ) {
@@ -455,7 +463,7 @@ function mc_issue_get_biggest_id( $p_username, $p_password, $p_project_id ) {
 	}
 
 	if(( $t_project_id > 0 ) && !project_exists( $t_project_id ) ) {
-		return new soap_fault( 'Client', '', "Project '$t_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$t_project_id' does not exist." );
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $t_project_id ) ) {
@@ -527,6 +535,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 		return mci_soap_fault_login_failed();
 	}
 
+	$p_issue = SoapObjectsFactory::unwrapObject( $p_issue );
 	$t_project = $p_issue['project'];
 
 	$t_project_id = mci_get_project_id( $t_project );
@@ -565,9 +574,9 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 
 	if(( $t_project_id == 0 ) || !project_exists( $t_project_id ) ) {
 		if( $t_project_id == 0 ) {
-			return new soap_fault( 'Client', '', "Project '" . $t_project['name'] . "' does not exist." );
+			return SoapObjectsFactory::newSoapFault('Client', "Project '" . $t_project['name'] . "' does not exist.");
 		} else {
-			return new soap_fault( 'Client', '', "Project with id '" . $t_project_id . "' does not exist." );
+			return SoapObjectsFactory::newSoapFault('Client', "Project with id '" . $t_project_id . "' does not exist.");
 		}
 	}
 
@@ -577,11 +586,11 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 
 	#if ( !access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id ) ||
 	#	!access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $v_reporter ) ) {
-	#	return new soap_fault( 'Client', '', "User does not have access right to report issues." );
+	#	return SoapObjectsFactory::newSoapFault( 'Client', '', "User does not have access right to report issues." );
 	#}
 
 	if(( $t_handler_id != 0 ) && !user_exists( $t_handler_id ) ) {
-		return new soap_fault( 'Client', '', "User '$t_handler_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault('Client', "User '$t_handler_id' does not exist.");
 	}
 
 	$t_category = isset ( $p_issue['category'] ) ? $p_issue['category'] : null;
@@ -589,9 +598,9 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$t_category_id = translate_category_name_to_id( $t_category, $t_project_id );
 	if ( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
 		if ( !isset( $p_issue['category'] ) || is_blank( $p_issue['category'] ) ) {
-			return new soap_fault( 'Client', '', "Category field must be supplied." );
+			return SoapObjectsFactory::newSoapFault('Client', "Category field must be supplied.");
 		} else {
-			return new soap_fault( 'Client', '', "Category '" . $p_issue['category'] . "' not found for project '$t_project_id'." );
+			return SoapObjectsFactory::newSoapFault('Client', "Category '" . $p_issue['category'] . "' not found for project '$t_project_id'.");
 		}
 	}
 
@@ -601,7 +610,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 		$t_error_when_version_not_found = config_get( 'mc_error_when_version_not_found' );
 		if( $t_error_when_version_not_found == ON ) {
 			$t_project_name = project_get_name( $t_project_id );
-			return new soap_fault( 'Client', '', "Version '$t_version' does not exist in project '$t_project_name'." );
+			return SoapObjectsFactory::newSoapFault('Client', "Version '$t_version' does not exist in project '$t_project_name'.");
 		} else {
 			$t_version_when_not_found = config_get( 'mc_version_when_not_found' );
 			$t_version = $t_version_when_not_found;
@@ -609,11 +618,11 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	}
 
 	if ( is_blank( $t_summary ) ) {
-		return new soap_fault( 'Client', '', "Mandatory field 'summary' is missing." );
+		return SoapObjectsFactory::newSoapFault('Client', "Mandatory field 'summary' is missing.");
 	}
 
 	if ( is_blank( $t_description ) ) {
-		return new soap_fault( 'Client', '', "Mandatory field 'description' is missing." );
+		return SoapObjectsFactory::newSoapFault('Client', "Mandatory field 'description' is missing.");
 	}
 
 	$t_bug_data = new BugData;
@@ -647,7 +656,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	}
 
 	if ( isset( $p_issue['due_date'] ) && access_has_global_level( config_get( 'due_date_update_threshold' ) ) ) {
-		$t_bug_data->due_date = mci_iso8601_to_timestamp( $p_issue['due_date'] );
+		$t_bug_data->due_date = SoapObjectsFactory::parseDateTimeString( $p_issue['due_date'] );
 	} else {
 		$t_bug_data->due_date = date_get_null();
 	}
@@ -673,6 +682,9 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 
 	if( isset( $t_notes ) && is_array( $t_notes ) ) {
 		foreach( $t_notes as $t_note ) {
+			
+			$t_note = SoapObjectsFactory::unwrapObject( $t_note );
+			
 			if( isset( $t_note['view_state'] ) ) {
 				$t_view_state = $t_note['view_state'];
 			} else {
@@ -714,11 +726,11 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return new soap_fault( 'Client', '', "Issue '$p_issue_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault('Client', "Issue '$p_issue_id' does not exist.");
 	}
 
 	if( bug_is_readonly( $p_issue_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, "Issue '$p_issue_id' is readonly" );
+		return SoapObjectsFactory::newSoapFault('Client', "Issue '$p_issue_id' is readonly");
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
@@ -728,6 +740,8 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	}
 
 	$g_project_override = $t_project_id; // ensure that helper_get_current_project() calls resolve to this project id
+	
+	$p_issue = SoapObjectsFactory::unwrapObject( $p_issue );
 
 	$t_project_id = mci_get_project_id( $p_issue['project'] );
 	$t_reporter_id = isset( $p_issue['reporter'] ) ? mci_get_user_id( $p_issue['reporter'] )  : $t_user_id ;
@@ -739,9 +753,9 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 
 	if(( $t_project_id == 0 ) || !project_exists( $t_project_id ) ) {
 		if( $t_project_id == 0 ) {
-			return new soap_fault( 'Client', '', "Project '" . $t_project['name'] . "' does not exist." );
+			return SoapObjectsFactory::newSoapFault( 'Client', "Project '" . $t_project['name'] . "' does not exist." );
 		}
-		return new soap_fault( 'Client', '', "Project '$t_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$t_project_id' does not exist." );
 	}
 
 	if( !access_has_bug_level( config_get( 'update_bug_threshold' ), $p_issue_id, $t_user_id ) ) {
@@ -749,7 +763,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	}
 
 	if(( $t_handler_id != 0 ) && !user_exists( $t_handler_id ) ) {
-		return new soap_fault( 'Client', '', "User '$t_handler_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "User '$t_handler_id' does not exist." );
 	}
 
 	$t_category = isset ( $p_issue['category'] ) ? $p_issue['category'] : null;
@@ -757,10 +771,10 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	$t_category_id = translate_category_name_to_id( $t_category, $t_project_id );
 	if ( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
 		if ( isset( $p_issue['category'] ) && !is_blank( $p_issue['category'] ) ) {
-			return new soap_fault( 'Client', '', "Category field must be supplied." );
+			return SoapObjectsFactory::newSoapFault( 'Client', "Category field must be supplied." );
 		} else {
 			$t_project_name = project_get_name( $t_project_id );
-			return new soap_fault( 'Client', '', "Category '" . $p_issue['category'] . "' not found for project '$t_project_name'." );
+			return SoapObjectsFactory::newSoapFault( 'Client', "Category '" . $p_issue['category'] . "' not found for project '$t_project_name'." );
 		}
 	}
 
@@ -768,7 +782,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 		$t_error_when_version_not_found = config_get( 'mc_error_when_version_not_found' );
 		if( $t_error_when_version_not_found == ON ) {
 			$t_project_name = project_get_name( $t_project_id );
-			return new soap_fault( 'Client', '', "Version '" . $p_issue['version'] . "' does not exist in project '$t_project_name'." );
+			return SoapObjectsFactory::newSoapFault( 'Client', "Version '" . $p_issue['version'] . "' does not exist in project '$t_project_name'." );
 		} else {
 			$t_version_when_not_found = config_get( 'mc_version_when_not_found' );
 			$p_issue['version'] = $t_version_when_not_found;
@@ -776,11 +790,11 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	}
 
 	if ( is_blank( $t_summary ) ) {
-		return new soap_fault( 'Client', '', "Mandatory field 'summary' is missing." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Mandatory field 'summary' is missing." );
 	}
 
 	if ( is_blank( $t_description ) ) {
-		return new soap_fault( 'Client', '', "Mandatory field 'description' is missing." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Mandatory field 'description' is missing." );
 	}
 
 	// fields which we expect to always be set
@@ -836,7 +850,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	}
 
 	if ( isset( $p_issue['due_date'] ) && access_has_global_level( config_get( 'due_date_update_threshold' ) ) ) {
-		$t_bug_data->due_date = mci_iso8601_to_timestamp( $p_issue['due_date'] );
+		$t_bug_data->due_date = SoapObjectsFactory::parseDateTimeString( $p_issue['due_date'] );
 	} else {
 		$t_bug_data->due_date = date_get_null();
 	}
@@ -858,6 +872,9 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 		}
 
 		foreach ( $p_issue['notes'] as $t_note ) {
+			
+			$t_note = SoapObjectsFactory::unwrapObject( $t_note );
+			
 			if ( isset( $t_note['view_state'] ) ) {
 				$t_view_state = $t_note['view_state'];
 			} else {
@@ -920,7 +937,7 @@ function mc_issue_set_tags ( $p_username, $p_password, $p_issue_id, $p_tags ) {
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return new soap_fault( 'Client', '', "Issue '$p_issue_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Issue '$p_issue_id' does not exist." );
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
@@ -953,7 +970,7 @@ function mc_issue_delete( $p_username, $p_password, $p_issue_id ) {
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return new soap_fault( 'Client', '', "Issue '$p_issue_id' does not exist.");
+		return SoapObjectsFactory::newSoapFault( 'Client', "Issue '$p_issue_id' does not exist.");
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
@@ -984,15 +1001,17 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, $p_note ) {
 	}
 
 	if( (integer) $p_issue_id < 1 ) {
-		return new soap_fault( 'Client', '', "Invalid issue id '$p_issue_id'" );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Invalid issue id '$p_issue_id'" );
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return new soap_fault( 'Client', '', "Issue '$p_issue_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Issue '$p_issue_id' does not exist." );
 	}
+	
+	$p_note = SoapObjectsFactory::unwrapObject( $p_note );
 
 	if ( !isset( $p_note['text'] ) || is_blank( $p_note['text'] ) ) {
-		return new soap_fault( 'Client', '', "Issue note text must not be blank." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Issue note text must not be blank." );
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
@@ -1039,11 +1058,11 @@ function mc_issue_note_delete( $p_username, $p_password, $p_issue_note_id ) {
 	}
 
 	if( (integer) $p_issue_note_id < 1 ) {
-		return new soap_fault( 'Client', '', "Invalid issue note id '$p_issue_note_id'.");
+		return SoapObjectsFactory::newSoapFault( 'Client', "Invalid issue note id '$p_issue_note_id'.");
 	}
 
 	if( !bugnote_exists( $p_issue_note_id ) ) {
-		return new soap_fault( 'Client', '', "Issue note '$p_issue_note_id' does not exist.");
+		return SoapObjectsFactory::newSoapFault( 'Client', "Issue note '$p_issue_note_id' does not exist.");
 	}
 
 	$t_issue_id = bugnote_get_field( $p_issue_note_id, 'bug_id' );
@@ -1083,18 +1102,20 @@ function mc_issue_note_update( $p_username, $p_password, $p_note ) {
 		return mci_soap_fault_login_failed();
 	}
 
+	$p_note = SoapObjectsFactory::unwrapObject( $p_note );
+	
 	if ( !isset( $p_note['id'] ) || is_blank( $p_note['id'] ) ) {
-		return new soap_fault( 'Client', '', "Issue note id must not be blank." );
+		return SoapObjectsFactory::newSoapFault('Client', "Issue note id must not be blank." );
 	}
 
 	if ( !isset( $p_note['text'] ) || is_blank( $p_note['text'] ) ) {
-		return new soap_fault( 'Client', '', "Issue note text must not be blank." );
+		return SoapObjectsFactory::newSoapFault('Client', "Issue note text must not be blank." );
 	}
 
 	$t_issue_note_id = $p_note['id'];
 
 	if ( !bugnote_exists( $t_issue_note_id ) ) {
-		return new soap_fault( 'Server', '', "Issue note '$t_issue_note_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault('Client', "Issue note '$t_issue_note_id' does not exist." );
 	}
 
 	$t_issue_id = bugnote_get_field( $t_issue_note_id, 'bug_id' );
@@ -1148,8 +1169,11 @@ function mc_issue_note_update( $p_username, $p_password, $p_note ) {
  */
 function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, $p_relationship ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
+	
+	$p_relationship = SoapObjectsFactory::unwrapObject( $p_relationship );
+	
 	$t_dest_issue_id = $p_relationship['target_id'];
-	$t_rel_type = $p_relationship['type'];
+	$t_rel_type = SoapObjectsFactory::unwrapObject( $p_relationship['type'] );
 
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
@@ -1167,12 +1191,12 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, $p_re
 
 	# source and destination bugs are the same bug...
 	if( $p_issue_id == $t_dest_issue_id ) {
-		return new soap_fault( 'Client', '', "An issue can't be related to itself." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "An issue can't be related to itself." );
 	}
 
 	# the related bug exists...
 	if( !bug_exists( $t_dest_issue_id ) ) {
-		return new soap_fault( 'Client', '', "Issue '$t_dest_issue_id' not found." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Issue '$t_dest_issue_id' not found." );
 	}
 
 	# bug is not read-only...
@@ -1208,7 +1232,7 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, $p_re
 
 		return $t_relationship_id;
 	} else {
-		return new soap_fault( 'Client', '', "Relationship already exists." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Relationship already exists." );
 	}
 }
 
@@ -1303,7 +1327,7 @@ function mc_issue_checkin( $p_username, $p_password, $p_issue_id, $p_comment, $p
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return new soap_fault( 'Client', '', "Issue '$p_issue_id' not found." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Issue '$p_issue_id' not found." );
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
@@ -1314,25 +1338,6 @@ function mc_issue_checkin( $p_username, $p_password, $p_issue_id, $p_comment, $p
 	helper_call_custom_function( 'checkin', array( $p_issue_id, $p_comment, '', '', $p_fixed ) );
 
 	return true;
-}
-
-/**
- * Returns the date in iso8601 format, with proper timezone offset applied
- *
- * @param string $p_date the date in iso8601 format
- * @return int the timestamp
- */
-function mci_iso8601_to_timestamp( $p_date ) {
-
-	// retrieve the offset, seems to be lost by nusoap
-	$t_utc_date = new DateTime( $p_date, new DateTimeZone( 'UTC' ) );
-	$t_timezone = new DateTimeZone( date_default_timezone_get() );
-	$t_offset = $t_timezone->getOffset( $t_utc_date );
-
-	$t_raw_timestamp = iso8601_to_timestamp( $p_date );
-
-	return $t_raw_timestamp - $t_offset;
-
 }
 
 /**
@@ -1350,7 +1355,7 @@ function mci_issue_data_as_array( $p_issue_data, $p_user_id, $p_lang ) {
 		$t_issue = array();
 		$t_issue['id'] = $t_id;
 		$t_issue['view_state'] = mci_enum_get_array_by_id( $p_issue_data->view_state, 'view_state', $p_lang );
-		$t_issue['last_updated'] = timestamp_to_iso8601( $p_issue_data->last_updated, false );
+		$t_issue['last_updated'] = SoapObjectsFactory::newDateTimeVar( $p_issue_data->last_updated );
 
 		$t_issue['project'] = mci_project_as_array_by_id( $p_issue_data->project_id );
 		$t_issue['category'] = mci_get_category( $p_issue_data->category_id );
@@ -1367,7 +1372,7 @@ function mci_issue_data_as_array( $p_issue_data, $p_user_id, $p_lang ) {
 		$t_issue['os'] = mci_null_if_empty( $p_issue_data->os );
 		$t_issue['os_build'] = mci_null_if_empty( $p_issue_data->os_build );
 		$t_issue['reproducibility'] = mci_enum_get_array_by_id( $p_issue_data->reproducibility, 'reproducibility', $p_lang );
-		$t_issue['date_submitted'] = timestamp_to_iso8601( $p_issue_data->date_submitted, false );
+		$t_issue['date_submitted'] = SoapObjectsFactory::newDateTimeVar( $p_issue_data->date_submitted );
 		$t_issue['sticky'] = $p_issue_data->sticky;
 
 		$t_issue['sponsorship_total'] = $p_issue_data->sponsorship_total;
@@ -1431,7 +1436,7 @@ function mci_issue_data_as_header_array( $p_issue_data ) {
 
 		$t_issue['id'] = $t_id;
 		$t_issue['view_state'] = $p_issue_data->view_state;
-		$t_issue['last_updated'] = timestamp_to_iso8601( $p_issue_data->last_updated, false );
+		$t_issue['last_updated'] = SoapObjectsFactory::newDateTimeVar( $p_issue_data->last_updated );
 
 		$t_issue['project'] = $p_issue_data->project_id;
 		$t_issue['category'] = mci_get_category( $p_issue_data->category_id );
@@ -1443,6 +1448,8 @@ function mci_issue_data_as_header_array( $p_issue_data ) {
 		$t_issue['summary'] = mci_sanitize_xml_string( $p_issue_data->summary );
 		if( !empty( $p_issue_data->handler_id ) ) {
 			$t_issue['handler'] = $p_issue_data->handler_id;
+		} else {
+			$t_issue['handler'] = null;
 		}
 		$t_issue['resolution'] = $p_issue_data->resolution;
 
