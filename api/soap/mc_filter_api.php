@@ -64,7 +64,7 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 	$t_filter = filter_db_get_filter( $p_filter_id );
 	$t_filter_detail = explode( '#', $t_filter, 2 );
 	if( !isset( $t_filter_detail[1] ) ) {
-		return new soap_fault( 'Server', '', 'Invalid Filter' );
+		return SoapObjectsFactory::newSoapFault( 'Server',  'Invalid Filter' );
 	}
 	$t_filter = unserialize( $t_filter_detail[1] );
 	$t_filter = filter_ensure_valid_filter( $t_filter );
@@ -108,7 +108,7 @@ function mc_filter_get_issue_headers( $p_username, $p_password, $p_project_id, $
 	$t_filter = filter_db_get_filter( $p_filter_id );
 	$t_filter_detail = explode( '#', $t_filter, 2 );
 	if( !isset( $t_filter_detail[1] ) ) {
-		return new soap_fault( 'Server', '', 'Invalid Filter' );
+		return SoapObjectsFactory::newSoapFault( 'Server', 'Invalid Filter' );
 	}
 	$t_filter = unserialize( $t_filter_detail[1] );
 	$t_filter = filter_ensure_valid_filter( $t_filter );
@@ -121,31 +121,7 @@ function mc_filter_get_issue_headers( $p_username, $p_password, $p_project_id, $
 	    return $t_result;	
 
 	foreach( $t_rows as $t_issue_data ) {
-		$t_id = $t_issue_data->id;
-
-		$t_issue = array();
-
-		$t_issue['id'] = $t_id;
-		$t_issue['view_state'] = $t_issue_data->view_state;
-		$t_issue['last_updated'] = timestamp_to_iso8601( $t_issue_data->last_updated, false );
-
-		$t_issue['project'] = $t_issue_data->project_id;
-		$t_issue['category'] = mci_get_category( $t_issue_data->category_id );
-		$t_issue['priority'] = $t_issue_data->priority;
-		$t_issue['severity'] = $t_issue_data->severity;
-		$t_issue['status'] = $t_issue_data->status;
-
-		$t_issue['reporter'] = $t_issue_data->reporter_id;
-		$t_issue['summary'] = $t_issue_data->summary;
-		if( !empty( $t_issue_data->handler_id ) ) {
-			$t_issue['handler'] = $t_issue_data->handler_id;
-		}
-		$t_issue['resolution'] = $t_issue_data->resolution;
-
-		$t_issue['attachments_count'] = count( mci_issue_get_attachments( $t_issue_data->id ) );
-		$t_issue['notes_count'] = count( mci_issue_get_notes( $t_issue_data->id ) );
-
-		$t_result[] = $t_issue;
+		$t_result[] = mci_issue_data_as_header_array($t_issue_data);
 	}
 
 	return $t_result;

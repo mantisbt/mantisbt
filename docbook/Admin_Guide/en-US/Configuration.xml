@@ -3476,6 +3476,20 @@
 
 			</variablelist>
     </section>
+    
+    <section id="admin.config.soap">
+		<title>SOAP API</title>
+		<para>These options are used to control the behaviour of the MantisBT SOAP API and are usually configured in <literal>api/soap/mc_config_inc.php</literal>.</para>
+        <variablelist>
+            <varlistentry>
+                <term>$g_mc_use_nusoap</term>
+                <listitem>
+                    <para>
+			Flag controlling the library to use for SOAP communication. When the native PHP extension is available this flag default to OFF, which means that nusoap will not used. The native extension has the advantage of being faster, more memory efficient and maintained to work with recent versions on PHP. When the extension is not available MantisBT falls back to using nusoap.</para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>    
 
     <section id="admin.config.mantistouch">
         <title>MantisTouch</title>
