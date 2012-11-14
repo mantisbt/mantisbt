@@ -1056,20 +1056,19 @@
 	 */
 	$g_calendar_date_format   = 'Y-m-d H:i';
 
-	/**************************
+	/******************************
 	 * MantisBT TimeZone Settings *
-	 **************************/
+	 ******************************/
 
 	/**
-	 * Default timezone to use in mantis.
-	 * See http://us.php.net/manual/en/timezones.php
-	 * for a list of valid timezones.
-	 * Note: if this is left blank, we use the result of
-	 * date_default_timezone_get() i.e. in order:
-	 * 1. Reading the TZ environment variable (if non empty)
-	 * 2. Reading the value of the date.timezone php.ini option (if set)
-	 * 3. Querying the host operating system (if supported and allowed by the OS)
-	 * 4. If none of the above succeed, will return a default timezone of UTC.
+	 * Default timezone to use in MantisBT
+	 *
+	 * If this config is left blank, it will be initialized by calling function
+	 * {@link http://php.net/date-default-timezone-get date_default_timezone_get()}
+	 * to determine the default timezone.
+	 * Note that this function's behavior was modified in PHP 5.4.0.
+	 *
+	 * @link http://php.net/timezones List of Supported Timezones
 	 * @global string $g_default_timezone
 	 */
 	$g_default_timezone = '';
