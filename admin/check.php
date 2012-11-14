@@ -364,13 +364,37 @@ print_test_row( 'Checking if ctype is enabled in php (required for rss feeds)...
 print_test_row( 'Checking for mysql is at least version 4.1...', !(db_is_mysql() && version_compare( $t_serverinfo['version'], '4.1.0', '<' ) ) );
 print_test_row( 'Checking for broken mysql version ( bug 10250)...', !(db_is_mysql() && $t_serverinfo['version'] == '4.1.21') );
 
-if ( !is_blank ( config_get_global( 'default_timezone' ) ) ) {
-	if ( print_test_row( 'Checking if a timezone is set in config.inc.php....', !is_blank ( config_get_global( 'default_timezone' ) ), config_get_global( 'default_timezone' ) ) ) {
-		print_test_row( 'Checking if timezone is valid from config.inc.php....', in_array( config_get_global( 'default_timezone' ), timezone_identifiers_list() ), config_get_global( 'default_timezone' ) );
-	}
+# Timezone checks
+$t_timezone = config_get_global( 'default_timezone' );
+$t_timezone_set = !is_blank( $t_timezone );
+if( $t_timezone_set ) {
+	$t_timezone_set_in = 'config_inc.php';
 } else {
-	if( print_test_row( 'Checking if timezone is set in php.ini....', ini_get( 'date.timezone' ) !== '' ) ) {
-		print_test_row( 'Checking if timezone is valid in php.ini....', in_array( ini_get( 'date.timezone' ), timezone_identifiers_list() ), ini_get( 'date.timezone' ) );
+	$t_timezone = ini_get( 'date.timezone' );
+	$t_timezone_set = !is_blank( $t_timezone );
+	if( $t_timezone_set ) {
+		$t_timezone_set_in = 'php.ini';
+	}
+}
+print_test_row(
+	'Checking if a timezone is set',
+	$t_timezone_set,
+	$t_timezone_set ?
+		"Defined in $t_timezone_set_in" :
+		'The default timezone must be defined either in config_inc.php '
+		. '($g_default_timezone) or php.ini (date.timezone)'
+);
+if( $t_timezone_set ) {
+	$t_timezone_valid = in_array( $t_timezone, timezone_identifiers_list() );
+	$t_msg = "Checking if the specified timezone is valid";
+	if( function_exists( 'timezone_identifiers_list' ) ) {
+		if( !$t_timezone_valid ) {
+			$t_timezone = "'$t_timezone' is not in the "
+				. ' <a href="http://php.net/timezones">List of Supported Timezones</a>';
+		}
+		print_test_row( $t_msg, $t_timezone_valid, $t_timezone );
+	} else {
+		print_test_warn_row( $t_msg, false, 'Cannot check timezone validity on PHP < 5.2.0');
 	}
 }
 

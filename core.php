@@ -248,7 +248,11 @@ if ( function_exists( 'timezone_identifiers_list' ) ) {
 		// having a timezone set avoids a php warning
 		date_default_timezone_set( config_get_global( 'default_timezone' ) );
 	} else {
-		config_set_global( 'default_timezone', date_default_timezone_get(), true );
+		# To ensure proper detection of timezone settings issues, we must not
+		# initialize the default timezone when executing admin checks
+		if( basename( $_SERVER['SCRIPT_NAME'] ) != 'check.php' ) {
+			config_set_global( 'default_timezone', date_default_timezone_get(), true );
+		}
 	}
 	if ( auth_is_user_authenticated() ) {
 		date_default_timezone_set( user_pref_get_pref( auth_get_current_user_id(), 'timezone' ) );
