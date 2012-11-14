@@ -604,13 +604,18 @@ function mci_soap_fault_login_failed() {
  * Returns a soap_fault signalling that the user does not have
  * access rights for the specific action.
  *
- * @param int $p_user_id a valid user id
+ * @param int $p_user_id a user id, optional
  * @param string $p_detail The optional details to append to the error message
  * @return soap_fault
  */
-function mci_soap_fault_access_denied( $p_user_id, $p_detail = '' ) {
-	$t_user_name = user_get_name( $p_user_id );
-	$t_reason = 'Access denied for user '. $t_user_name . '.';
+function mci_soap_fault_access_denied( $p_user_id = 0, $p_detail = '' ) {
+	if ( $p_user_id ) {
+		$t_user_name = user_get_name( $p_user_id );
+		$t_reason = 'Access denied for user '. $t_user_name . '.';
+	} else {
+		$t_reason = 'Access denied';
+	}
+	
 	if ( !is_blank( $p_detail ))
 		$t_reason .= ' Reason: ' . $p_detail . '.';
 
