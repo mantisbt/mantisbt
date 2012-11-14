@@ -1078,6 +1078,34 @@
 
     </section>
 
+	<section id="admin.config.timezone">
+		<title>Time Zone</title>
+
+		<variablelist>
+			<varlistentry>
+				<term>$g_default_timezone</term>
+				<listitem>
+					<para>Default timezone to use in MantisBT.
+						This must be set to one of the values specified in the
+						<ulink url="http://php.net/timezones ">
+							List of Supported Timezones</ulink>.
+					</para>
+					<para>If this config is left blank (default), it will be
+						initialized by calling function
+						<ulink url="http://php.net/date-default-timezone-get">
+							date_default_timezone_get()</ulink>
+						to determine the default timezone.
+						With PHP >= 5.3, this will result in a system warning if
+						the timezone has not been defined in
+						<ulink url="http://php.net/date.timezone">php.ini</ulink>.
+						Note that this function's behavior was modified in PHP 5.4.0.
+					</para>
+					<para>
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
 
     <section id="admin.config.news">
         <title>News</title>
