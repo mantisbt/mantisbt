@@ -252,6 +252,12 @@ if ( function_exists( 'timezone_identifiers_list' ) ) {
 		// if a default timezone is set in config, set it here, else we use php.ini's value
 		// having a timezone set avoids a php warning
 		date_default_timezone_set( config_get_global( 'default_timezone' ) );
+	} else {
+		# To ensure proper detection of timezone settings issues, we must not
+		# initialize the default timezone when executing admin checks
+		if( basename( $g_short_path ) != 'check' ) {
+			config_set_global( 'default_timezone', date_default_timezone_get(), true );
+		}
 	}
 
 	require_api( 'authentication_api.php' );
