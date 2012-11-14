@@ -80,7 +80,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['status'] = mci_enum_get_array_by_id( $t_bug->status, 'status', $t_lang );
 
 	$t_issue_data['reporter'] = mci_account_get_array_by_id( $t_bug->reporter_id );
-	$t_issue_data['summary'] = $t_bug->summary;
+	$t_issue_data['summary'] = mci_sanitize_xml_string($t_bug->summary);
 	$t_issue_data['version'] = mci_null_if_empty( $t_bug->version );
 	$t_issue_data['build'] = mci_null_if_empty( $t_bug->build );
 	$t_issue_data['profile_id'] = mci_null_if_empty( $t_bug->profile_id );
