@@ -29,6 +29,7 @@
  * @author Andrew971218
  * @author Cwlin0416
  * @author Firesueprtom
+ * @author Frankou
  * @author Jonathan Tsai, tryweb@ichiayi.com
  * @author Lauhenry
  * @author Mark85296341
@@ -219,6 +220,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = '這是一個重複的名稱
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = '最少有一個以上的專案仍在使用這欄位。';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = '"%1$s" 欄位值無效。';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = '無效的自訂欄位定義';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = '不正確自訂欄位屬性 （ %1$s ）。';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP 認證失敗';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = '連線至 LDAP 伺服器失敗';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = '更新 LDAP 記錄失敗。';
@@ -231,6 +233,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = '相同名稱的類別已經存在。'
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = '沒有指定的複製作業。';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = '類別找不到。';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = '"%2$s" 專案並沒有 "%1$s" 類別。';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = '此類別不能刪除，因為它被定義為"在移動為預設類別"。';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = '相同名稱的版本已經存在.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = '查無 "%1$s" 版本。';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = '使用者名稱無效。使用者名稱僅能包含英文、數字、空格、 “-” 或 “_” 。';
@@ -269,6 +272,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = '事件 "%1$s" 尚未被宣告。';
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = '此套件未向 MantisBT 註冊。';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = '套件已安裝。';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = '查無套件頁面。';
+$MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = '外掛程式安裝失敗：%1$s 。';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = '升級套件資料庫結構失敗於區塊 #%1$s。';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = '在執行 "%2$s" 套件時發生了未知的錯誤 "%1$s"。';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = '欄位 "%1$s" 內包含重複的資料 "%2$s"。';
@@ -929,6 +933,9 @@ $s_sort = '排序方式';
 $s_issue_id = '問題編號 #';
 $s_recently_visited = '近期瀏覽';
 $s_note_user_id = '說明由';
+$s_filter_match_type = '匹配類型';
+$s_filter_match_all = '所有條件';
+$s_filter_match_any = '任何條件';
 $s_none = '無';
 $s_current = '目前';
 $s_search = '搜尋';
