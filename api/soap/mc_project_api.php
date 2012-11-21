@@ -164,12 +164,8 @@ function mc_project_delete_category ($p_username, $p_password, $p_project_id, $p
         // find the id of the category
         $p_category_id = category_get_id_by_name( $p_category_name, $p_project_id );
 
-        // delete the category and link all the issue to the general category if available
-        $t_dest_category_id = 1;
-        if ( !category_exists(  $t_dest_category_id ) ) {
-        	$t_dest_category_id = 0;
-        }
-        return category_remove( $p_category_id, $t_dest_category_id );
+        // delete the category and link all the issue to the default category
+        return category_remove( $p_category_id, config_get('default_category_for_moves') );
 }
 
 /**
