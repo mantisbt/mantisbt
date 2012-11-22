@@ -60,6 +60,8 @@ function json_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 		}
 	}
 
+	$t_error_code = ERROR_GENERIC; // default
+	
 	# build an appropriate error string
 	switch( $p_type ) {
 		case E_WARNING:
@@ -72,10 +74,12 @@ function json_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 			break;
 		case E_USER_ERROR:
 			$t_error_type = "APPLICATION ERROR #$p_error";
+			$t_error_code = $p_error;
 			$t_error_description = error_string( $p_error );
 			break;
 		case E_USER_WARNING:
 			$t_error_type = "APPLICATION WARNING #$p_error";
+			$t_error_code = $p_error;
 			$t_error_description = error_string( $p_error );
 			break;
 		case E_USER_NOTICE:
@@ -91,7 +95,11 @@ function json_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 
 	json_output_raw(array(
 		'status' => 'ERROR',
-		'type' => $t_error_type,
+		'error' => array(
+			'code' => $t_error_code,
+			'type' => $t_error_type,
+			'message' => $t_error_description
+		),
 		'contents' => $t_error_description 
 	));
 }
