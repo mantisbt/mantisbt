@@ -39,6 +39,7 @@
  * @author Oleg Gashev gashev@zahav.net.il
  * @author Prima klasy4na
  * @author Sabbah
+ * @author Volkov
  * @author Yuri Volokhov <volohovy@niiri.kharkov.com>
  * @author Александр Сигачёв
  */
@@ -227,6 +228,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Это дублирующе
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Это поле еще используется как минимум в одном проекте.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Недопустимое значение поля "%1$s".';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Недопустимое определение настраиваемого поля.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Недопустимое свойство настраиваемого поля (%1$s).';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP авторизация не удалась.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Не удалось соединиться с LDAP-сервером.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Обновление записи в LDAP не удалось.';
@@ -239,6 +241,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Категория с этим наз
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Действие по копированию не определено.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Категория не найдена.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'В проекте "%2$s" категория "%1$s" не обнаружена.';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Эту категорию нельзя удалить, так как она определена как "Категория для перемещений по умолчанию".';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Версия с таким названием уже существует.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Версия \'%1$s\' не найдена.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Недопустимое регистрационное имя пользователя. В именах могут содержаться только латинские буквы, цифры, пробелы, дефисы, точки, знаки плюса и подчеркивания.';

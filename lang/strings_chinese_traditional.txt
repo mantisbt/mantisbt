@@ -34,6 +34,7 @@
  * @author Lauhenry
  * @author Mark85296341
  * @author Oapbtommy
+ * @author Simon Shek
  */
 
 $s_actiongroup_menu_move = '移動';
@@ -311,10 +312,10 @@ $s_sponsorship_enum_string = '0:未付款,1:已請求支付,2:已付款';
 $s_new_account_subject = '新帳號註冊通知';
 $s_new_account_greeting = '謝謝您的註冊. 您的帳號為 \'%1$s\'. 請點選下面的網址來完成註冊程序, 點選後會自動開啟瀏覽器連入讓你設定密碼的畫面:';
 $s_new_account_greeting_admincreated = '使用者 %1$s 已為您建立了一個帳號為 "%2$s"。請參觀下列網址(請確認該網址為單行)並設定密碼來完成您的註冊程序:';
-$s_new_account_username = '帳號:';
+$s_new_account_username = '用戶名：';
 $s_new_account_message = '如果你沒有在本網站註冊，請不要理這封註冊確認信件，就當成沒發生過好了。';
 $s_new_account_do_not_reply = '請不要直接回覆這封註冊確認信件';
-$s_new_account_email = '電子郵件:';
+$s_new_account_email = '電子郵件：';
 $s_new_account_IP = '遠端 IP 位址：';
 $s_new_account_signup_msg = '這個帳號已經建立完成：';
 $s_reset_request_msg = '有人 (或許是你自己) 提出更改密碼的需求. 如果你沒有提出更改密碼的需求, 請不要理這封註冊確認信件, 就當成沒發生過好了.
@@ -376,7 +377,7 @@ $s_delete_account_button = '刪除帳號';
 $s_manage_profiles_link = '基本資料';
 $s_change_preferences_link = '偏好設定';
 $s_edit_account_title = '編輯帳號';
-$s_username = '帳號';
+$s_username = '用戶名';
 $s_realname = '真實姓名';
 $s_email = 'E-Mail';
 $s_password = '密碼';
