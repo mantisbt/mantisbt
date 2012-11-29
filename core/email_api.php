@@ -866,7 +866,7 @@ function email_store( $p_recipient, $p_subject, $p_message, $p_headers = null ) 
  * @return null
  */
 function email_send_all($p_delete_on_failure = false) {
-	$t_ids = email_queue_get_ids();
+	$t_ids = email_queue_get_ids('ASC');
 
 	$t_emails_recipients_failed = array();
 	$t_start = microtime(true);
