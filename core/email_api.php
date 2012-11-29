@@ -835,9 +835,11 @@ function email_store( $p_recipient, $p_subject, $p_message, $p_headers = null ) 
 }
 
 /**
- * This function sends all the emails that are stored in the queue.  If a failure occurs, then the
- * function exists.  This function will be called after storing emails in case of synchronous
- * emails, or will be called from a cronjob in case of asynchronous emails.
+ * This function sends all the emails that are stored in the queue.
+ * It will be called
+ * - immediately after queueing messages in case of synchronous emails
+ * - from a cronjob in case of asynchronous emails
+ * If a failure occurs, then the function exits.
  * @todo In case of synchronous email sending, we may get a race condition where two requests send the same email.
  * @param bool $p_delete_on_failure indicates whether to remove email from queue on failure (default false)
  * @return null
