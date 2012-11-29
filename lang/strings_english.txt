@@ -916,7 +916,7 @@ If you requested this verification, visit the following URL to change your passw
 	'account_unlock_msg' => 'The account has been unlocked.',
 
 	# manage_user_update.php
-	'manage_user_protected_msg' => 'Account protected. Access level and enabled protected. Otherwise, account has been updated...',
+	'manage_user_protected_msg' => 'Account protected; the \'Access Level\' and \'Enabled\' fields cannot be modified. Other fields were successfully updated.',
 	'manage_user_updated_msg' => 'Account successfully updated...',
 	'email_user_updated_subject' => 'Account updated',
 	'email_user_updated_msg' => 'Your account has been updated by an administrator. A list of these changes is provided below. You can update your account details and preferences at any time by visiting the following URL:',
