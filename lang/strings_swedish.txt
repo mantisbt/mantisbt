@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Fader
  * @author Lokal Profil
  * @author McDutchie
  * @author Najami
@@ -934,6 +935,7 @@ $s_issue_id = 'Ärende #';
 $s_recently_visited = 'Senast besökta';
 $s_priority_abbreviation = 'P';
 $s_note_user_id = 'Meddelande av';
+$s_filter_match_type = 'Matchningstyp';
 $s_none = 'ingen';
 $s_current = 'nuvarande';
 $s_search = 'Sök';

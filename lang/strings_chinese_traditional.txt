@@ -27,6 +27,7 @@
  *
  * @author Anakmalaysia
  * @author Andrew971218
+ * @author Barlos
  * @author Cwlin0416
  * @author Firesueprtom
  * @author Frankou
@@ -185,7 +186,7 @@ $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = '檔案上傳失敗. 這很有可能是因�
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = '缺少這個頁面 \"%1$s\" 所必要的參數.';
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = '這個使用者帳號已經存在. 請返回上ㄧ頁選擇其他的帳號.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = '缺少 \'%1$s\' 這個參數設定選項.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%1$s\' can not be set in the database.  It must be set in config_inc.php.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = '設定選項 \'%1$s\' 不能在資料庫內設置, 它必須設在 config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = '缺少 \'%1$s\' 這個字串.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = '查無說明。';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = '專案 \"%1$d\" 找不到.';
