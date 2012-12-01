@@ -2526,7 +2526,6 @@
 	 * example: $g_set_status_threshold = array( ACKNOWLEDGED => MANAGER, CONFIRMED => DEVELOPER, CLOSED => MANAGER );
 	 * @global array $g_set_status_threshold
 	 */
-	$g_set_status_threshold = array();
 	$g_set_status_threshold = array( NEW_ => REPORTER );
 
 	/**
