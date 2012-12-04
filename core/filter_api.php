@@ -3879,7 +3879,14 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 		</td></tr>
 		<?php
 	}
-	$t_menu_disabled = ( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) ? '' : ' disabled ';
+
+	# Make sure the date selection controls are enabled by default
+	# if we do not use javascript
+	$t_menu_disabled =
+		   !config_get( 'use_javascript' )
+		|| 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE]
+		? ''
+		: ' disabled ';
 	?>
 
 		<!-- Start date -->
@@ -4203,6 +4210,8 @@ function print_filter_custom_field_date( $p_field_num, $p_field_id ) {
 		array_multisort( $t_accessible_custom_fields_values[$p_field_num], SORT_NUMERIC, SORT_ASC );
 	}
 
+	$t_sel_start_year = null;
+	$t_sel_end_year = null;
 	if( isset( $t_accessible_custom_fields_values[$p_field_num][0] ) ) {
 		$t_sel_start_year = date( 'Y', $t_accessible_custom_fields_values[$p_field_num][0] );
 	}
@@ -4228,41 +4237,47 @@ function print_filter_custom_field_date( $p_field_num, $p_field_id ) {
 		$t_end_time = 0;
 	}
 
-	$t_start_disable = true;
-	$t_end_disable = true;
+	if( OFF == config_get( 'use_javascript' ) ) {
+		$t_start_disable = false;
+		$t_end_disable = false;
+	} else {
+		$t_start_disable = true;
+		$t_end_disable = true;
 
-	// if $t_filter['custom_fields'][$p_field_id][0] is not set (ie no filter), we will drop through the
-	// following switch and use the default values above, so no need to check if stuff is set or not.
-	switch( $t_filter['custom_fields'][$p_field_id][0] ) {
-		case CUSTOM_FIELD_DATE_ANY:
-		case CUSTOM_FIELD_DATE_NONE:
-			break;
-		case CUSTOM_FIELD_DATE_BETWEEN:
-			$t_start_disable = false;
-			$t_end_disable = false;
-			$t_start = $t_start_time;
-			$t_end = $t_end_time;
-			break;
-		case CUSTOM_FIELD_DATE_ONORBEFORE:
-			$t_start_disable = false;
-			$t_start = $t_end_time;
-			break;
-		case CUSTOM_FIELD_DATE_BEFORE:
-			$t_start_disable = false;
-			$t_start = $t_end_time;
-			break;
-		case CUSTOM_FIELD_DATE_ON:
-			$t_start_disable = false;
-			$t_start = $t_start_time;
-			break;
-		case CUSTOM_FIELD_DATE_AFTER:
-			$t_start_disable = false;
-			$t_start = $t_start_time;
-			break;
-		case CUSTOM_FIELD_DATE_ONORAFTER:
-			$t_start_disable = false;
-			$t_start = $t_start_time;
-			break;
+		# if $t_filter['custom_fields'][$p_field_id][0] is not set (ie no filter),
+		# we will drop through the following switch and use the default values
+		# above, so no need to check if stuff is set or not.
+		switch( $t_filter['custom_fields'][$p_field_id][0] ) {
+			case CUSTOM_FIELD_DATE_ANY:
+			case CUSTOM_FIELD_DATE_NONE:
+				break;
+			case CUSTOM_FIELD_DATE_BETWEEN:
+				$t_start_disable = false;
+				$t_end_disable = false;
+				$t_start = $t_start_time;
+				$t_end = $t_end_time;
+				break;
+			case CUSTOM_FIELD_DATE_ONORBEFORE:
+				$t_start_disable = false;
+				$t_start = $t_end_time;
+				break;
+			case CUSTOM_FIELD_DATE_BEFORE:
+				$t_start_disable = false;
+				$t_start = $t_end_time;
+				break;
+			case CUSTOM_FIELD_DATE_ON:
+				$t_start_disable = false;
+				$t_start = $t_start_time;
+				break;
+			case CUSTOM_FIELD_DATE_AFTER:
+				$t_start_disable = false;
+				$t_start = $t_start_time;
+				break;
+			case CUSTOM_FIELD_DATE_ONORAFTER:
+				$t_start_disable = false;
+				$t_start = $t_start_time;
+				break;
+		}
 	}
 
 	echo "\n<table cellspacing=\"0\" cellpadding=\"0\"><tr><td>\n";
