@@ -1386,10 +1386,18 @@ function html_button_bug_update( $p_bug_id ) {
 function html_button_bug_change_status( $p_bug ) {
 	$t_current_access = access_get_project_level( $p_bug->project_id );
 
+	# User must have updater access to use the change status button
+	if( !access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug->id ) ) {
+		return;
+	}
+
 	$t_enum_list = get_status_option_list(
 		$t_current_access,
 		$p_bug->status,
 		false,
+		# Add close if user is bug's reporter, still has rights to report issues
+		# (to prevent users downgraded to viewers from updating issues) and
+		# reporters are allowed to close their own issues
 		(  bug_is_user_reporter( $p_bug->id, auth_get_current_user_id() )
 		&& access_has_bug_level( config_get( 'report_bug_threshold' ), $p_bug->id )
 		&& ON == config_get( 'allow_reporter_close' )
