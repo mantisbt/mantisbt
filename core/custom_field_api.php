@@ -642,7 +642,7 @@ function custom_field_get_id_from_name( $p_field_name ) {
 	$t_custom_field_table = db_get_table( 'custom_field' );
 
 	$query = "SELECT id FROM $t_custom_field_table WHERE name = " . db_param();
-	$t_result = db_query_bound( $query, $p_field_name );
+	$t_result = db_query_bound( $query, array( $p_field_name ) );
 
 	if( db_num_rows( $t_result ) == 0 ) {
 		return false;
