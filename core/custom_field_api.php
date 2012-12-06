@@ -651,6 +651,7 @@ function custom_field_get_id_from_name( $p_field_name, $p_truncated_length = nul
 	$t_result = db_query_bound( $query, array( $c_field_name ) );
 
 	if( db_num_rows( $t_result ) == 0 ) {
+		$g_cache_name_to_id_map[$p_field_name] = false;
 		return false;
 	}
 
