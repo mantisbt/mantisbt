@@ -635,6 +635,10 @@ function access_get_status_threshold( $p_status, $p_project_id = ALL_PROJECTS ) 
 	if( isset( $t_thresh_array[(int)$p_status] ) ) {
 		return (int)$t_thresh_array[(int)$p_status];
 	} else {
-		return config_get( 'update_bug_status_threshold', null, null, $p_project_id );
+		if( $p_status == config_get( 'bug_submit_status', null, null, $p_project_id ) ) {
+			return config_get( 'report_bug_threshold', null, null, $p_project_id );
+		} else {
+			return config_get( 'update_bug_status_threshold', null, null, $p_project_id );
+		}
 	}
 }
