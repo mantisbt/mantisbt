@@ -648,7 +648,7 @@ function custom_field_get_id_from_name( $p_field_name, $p_truncated_length = nul
 		$c_field_name = $p_field_name . '%';
 	}
 
-	$t_result = db_query_bound( $query, $c_field_name );
+	$t_result = db_query_bound( $query, array( $c_field_name ) );
 
 	if( db_num_rows( $t_result ) == 0 ) {
 		return false;
