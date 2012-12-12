@@ -774,7 +774,9 @@ if ( $t_can_manage_users ) {
 ?>
 		<tr <?php echo helper_alternate_class() ?>>
 			<td>
-				<?php echo $t_display[$i] ?>
+				<a href="manage_user_edit_page.php?user_id=<?php echo $t_user['id'] ?>">
+					<?php echo $t_display[$i] ?>
+				</a>
 			</td>
 			<td>
 			<?php
