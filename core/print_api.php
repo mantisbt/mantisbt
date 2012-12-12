@@ -244,34 +244,33 @@ function print_captcha_input( $p_field_name ) {
 #
 # @todo from print_reporter_option_list
 function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = ANYBODY ) {
-	$t_users = array();
-	$t_users_temp = array();
+
 	if( null === $p_project_id ) {
 		$p_project_id = helper_get_current_project();
 	}
 
 	if( $p_project_id === ALL_PROJECTS ) {
 		$t_projects = user_get_accessible_projects( auth_get_current_user_id() );
-		foreach( $t_projects as $t_project_id ){
+
+		# Get list of users having access level for all accessible projects
+		$t_users_temp = array();
+		foreach( $t_projects as $t_project_id ) {
 			$t_project_users_list = project_get_all_user_rows( $t_project_id, $p_access );
-			$t_users_temp = array_merge( $t_users_temp,$t_project_users_list );
+			$t_users_temp = array_merge( $t_users_temp, $t_project_users_list );
 		}
 
-		$t_users_id_list = array();
-		# Remove current user from list (there is a "myself" value)
-		$t_users_id_list[] = auth_get_current_user_id();
-
-		# Deleting duplicate
+		# Build list of users as an associative array (to remove duplicates)
 		foreach( $t_users_temp as $t_user ) {
-			if( !in_array($t_user['id'],$t_users_id_list ) ) {
-				$t_users_id_list[] = $t_user['id'];
-				$t_users[] = $t_user;
-			}
+			$t_users[$t_user['id']] = $t_user;
+		}
+
+		# Remove current user from list (there is a "myself" value)
+		if( array_key_exists( auth_get_current_user_id(), $t_users ) ) {
+			unset( $t_users[auth_get_current_user_id()] );
 		}
 	} else {
 		$t_users = project_get_all_user_rows( $p_project_id, $p_access );
 	}
-
 
 	$t_display = array();
 	$t_sort = array();
