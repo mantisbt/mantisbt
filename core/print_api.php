@@ -244,13 +244,14 @@ function print_captcha_input( $p_field_name ) {
 #
 # @todo from print_reporter_option_list
 function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = ANYBODY ) {
+	$t_current_user = auth_get_current_user_id();
 
 	if( null === $p_project_id ) {
 		$p_project_id = helper_get_current_project();
 	}
 
 	if( $p_project_id === ALL_PROJECTS ) {
-		$t_projects = user_get_accessible_projects( auth_get_current_user_id() );
+		$t_projects = user_get_accessible_projects( $t_current_user );
 
 		# Get list of users having access level for all accessible projects
 		$t_users_temp = array();
@@ -263,11 +264,6 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 		foreach( $t_users_temp as $t_user ) {
 			$t_users[$t_user['id']] = $t_user;
 		}
-
-		# Remove current user from list (there is a "myself" value)
-		if( array_key_exists( auth_get_current_user_id(), $t_users ) ) {
-			unset( $t_users[auth_get_current_user_id()] );
-		}
 	} else {
 		$t_users = project_get_all_user_rows( $p_project_id, $p_access );
 	}
@@ -276,7 +272,13 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 	$t_sort = array();
 	$t_show_realname = ( ON == config_get( 'show_realname' ) );
 	$t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
-	foreach( $t_users as $t_user ) {
+	foreach( $t_users as $t_key => $t_user ) {
+		# Remove current user from the list (there is a "myself" value)
+		if( $t_user['id'] == $t_current_user ) {
+			unset( $t_users[$t_key] );
+			continue;
+		}
+
 		$t_user_name = string_attribute( $t_user['username'] );
 		$t_sort_name = utf8_strtolower( $t_user_name );
 		if( $t_show_realname && ( $t_user['realname'] <> '' ) ) {
