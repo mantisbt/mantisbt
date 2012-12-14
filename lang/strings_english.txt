@@ -851,7 +851,6 @@ $s_all_users = 'All Users';
 $s_set_configuration_option = 'Set Configuration Option';
 $s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
 $s_configuration_corrupted = 'The configuration in the database is corrupted.';
-$s_none_filter = 'No filter';
 
 # manage_plugin_page.php
 $s_plugin = 'Plugin';
