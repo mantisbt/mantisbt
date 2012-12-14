@@ -273,12 +273,6 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 	$t_show_realname = ( ON == config_get( 'show_realname' ) );
 	$t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
 	foreach( $t_users as $t_key => $t_user ) {
-		# Remove current user from the list (there is a "myself" value)
-		if( $t_user['id'] == $t_current_user ) {
-			unset( $t_users[$t_key] );
-			continue;
-		}
-
 		$t_user_name = string_attribute( $t_user['username'] );
 		$t_sort_name = utf8_strtolower( $t_user_name );
 		if( $t_show_realname && ( $t_user['realname'] <> '' ) ) {
