@@ -1311,7 +1311,8 @@ function print_button( $p_action_page, $p_label, $p_args_to_post = null ) {
 
 	if( $p_args_to_post !== null ) {
 		foreach( $p_args_to_post as $t_var => $t_value ) {
-			echo "<input type=\"hidden\" name=\"$t_var\" value=\"$t_value\" />";
+			echo '<input type="hidden" name="' . $t_var .
+				'" value="' . htmlentities( $t_value ) . '" />';
 		}
 	}
 

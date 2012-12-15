@@ -29,11 +29,11 @@
 
 	form_security_validate( 'adm_config_set' );
 
-	$f_user_id = gpc_get_int( 'user_id' );
-	$f_project_id = gpc_get_int( 'project_id' );
+	$f_user_id       = gpc_get_int( 'user_id' );
+	$f_project_id    = gpc_get_int( 'project_id' );
 	$f_config_option = gpc_get_string( 'config_option' );
-	$f_type = gpc_get_string( 'type' );
-	$f_value = gpc_get_string( 'value' );
+	$f_type          = gpc_get_string( 'type' );
+	$f_value         = gpc_get_string( 'value' );
 
 	if ( is_blank( $f_config_option ) ) {
 		error_parameters( 'config_option' );
@@ -60,53 +60,66 @@
 		trigger_error( ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB, ERROR );
 	}
 
-	if ( $f_type === 'default' ) {
+	# For 'default', behavior is based on the global variable's type
+	if( $f_type == CONFIG_TYPE_DEFAULT ) {
 		$t_config_global_value = config_get_global( $f_config_option );
-		if ( is_string( $t_config_global_value ) ) {
-			$t_type = 'string';
-		} else if ( is_int( $t_config_global_value ) ) {
-			$t_type = 'integer';
-		} else { # note that we consider bool and float as complex.  We use ON/OFF for bools which map to numeric.
-			$t_type = 'complex';
+		if( is_string( $t_config_global_value ) ) {
+			$t_type = CONFIG_TYPE_STRING;
+		} else if( is_int( $t_config_global_value ) ) {
+			$t_type = CONFIG_TYPE_INT;
+		} else if( is_float( $t_config_global_value ) ) {
+			$t_type = CONFIG_TYPE_FLOAT;
+		} else {
+			# note that we consider bool and float as complex.
+			# We use ON/OFF for bools which map to numeric.
+			$t_type = CONFIG_TYPE_COMPLEX;
 		}
 	} else {
 		$t_type = $f_type;
 	}
 
-	if ( $t_type === 'string' ) {
-		$t_value = $f_value;
-	} else if ( $t_type === 'integer' ) {
-		$t_value = (integer)$f_value;
-	} else {
-		# We support these kind of variables here:
-		# 1. constant values (like the ON/OFF switches): they are defined as constants mapping to numeric values
-		# 2. simple arrays with the form: array( a, b, c, d )
-		# 3. associative arrays with the form: array( a=>1, b=>2, c=>3, d=>4 )
-		# TODO: allow multi-dimensional arrays, allow commas and => within strings
-		$t_full_string = trim( $f_value );
-		if ( preg_match('/array[\s]*\((.*)\)/s', $t_full_string, $t_match ) === 1 ) {
-			// we have an array here
-			$t_values = explode( ',', trim( $t_match[1] ) );
-			foreach ( $t_values as $key => $value ) {
-				if ( !trim( $value ) ) {
-					continue;
+	switch( $t_type ) {
+		case CONFIG_TYPE_STRING:
+			$t_value = $f_value;
+			break;
+		case CONFIG_TYPE_INT:
+			$t_value = (integer) constant_replace( trim( $f_value ) );
+			break;
+		case CONFIG_TYPE_FLOAT:
+			$t_value = (float) constant_replace( trim( $f_value ) );
+			break;
+		case CONFIG_TYPE_COMPLEX:
+		default:
+			# We support these kind of variables here:
+			# 1. constant values (like the ON/OFF switches): they are
+			#    defined as constants mapping to numeric values
+			# 2. simple arrays with the form: array( a, b, c )
+			# 3. associative arrays with the form: array( a=>1, b=>2, c=>3 )
+			# @TODO: allow multi-dimensional arrays, allow commas and => within strings (see #13298)
+			$t_full_string = trim( $f_value );
+			if( preg_match( '/array[\s]*\((.*)\)/s', $t_full_string, $t_match ) === 1 ) {
+				# we have an array here
+				$t_values = explode( ',', trim( $t_match[1] ) );
+				foreach( $t_values as $key => $value ) {
+					if( !trim( $value ) ) {
+						continue;
+					}
+					$t_split = explode( '=>', $value, 2 );
+					if( count( $t_split ) == 2 ) {
+						# associative array
+						$t_new_key = constant_replace( trim( $t_split[0], " \t\n\r\0\x0B\"'" ) );
+						$t_new_value = constant_replace( trim( $t_split[1], " \t\n\r\0\x0B\"'" ) );
+						$t_value[ $t_new_key ] = $t_new_value;
+					} else {
+						# regular array
+						$t_value[ $key ] = constant_replace( trim( $value, " \t\n\r\0\x0B\"'" ) );
+					}
 				}
-				$t_split = explode( '=>', $value, 2 );
-				if ( count( $t_split ) == 2 ) {
-					// associative array
-					$t_new_key = constant_replace( trim( $t_split[0], " \t\n\r\0\x0B\"'" ) );
-					$t_new_value = constant_replace( trim( $t_split[1], " \t\n\r\0\x0B\"'" ) );
-					$t_value[ $t_new_key ] = $t_new_value;
-				} else {
-					// regular array
-					$t_value[ $key ] = constant_replace( trim( $value, " \t\n\r\0\x0B\"'" ) );
-				}
+			} else {
+				# scalar value
+				$t_value = constant_replace( $t_full_string );
 			}
-		} else {
-			// scalar value
-			$t_value = constant_replace( trim( $t_full_string ) );
 		}
-	}
 
 	config_set( $f_config_option, $t_value, $f_user_id, $f_project_id );
 
@@ -116,13 +129,15 @@
 
 
 	/**
-	 * Check if the passed string is a constant and return its value
+	 * Check if the passed string is a constant and returns its value
+	 * if yes, or the string itself if not
+	 * @param $p_name string to check
+	 * @return mixed|string value of constant $p_name, or $p_name itself
 	 */
 	function constant_replace( $p_name ) {
-		$t_result = $p_name;
-		if ( is_string( $p_name ) && defined( $p_name ) ) {
-			// we have a constant
-			$t_result = constant( $p_name );
+		if( is_string( $p_name ) && defined( $p_name ) ) {
+			# we have a constant
+			return constant( $p_name );
 		}
-		return $t_result;
+		return $p_name;
 	}
