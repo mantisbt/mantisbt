@@ -26,6 +26,7 @@
  * @file
  *
  * @author Luk
+ * @author Quinn
  */
 
 $s_plugin_XmlImportExport_title = 'Importovat/exportovat problémy';
@@ -45,3 +46,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Deaktivovat odkaz';
 $s_plugin_XmlImportExport_fallback = 'Záložní strategie (když se nepoužije "Přečíslovat"):';
 $s_plugin_XmlImportExport_fallback_category = 'Záložní kategorie:';
 $s_plugin_XmlImportExport_keep_same_category = 'Zkusit zachovat stejnou kategorii';
+$s_plugin_XmlImportExport_error_no_xml = 'Nelze najít rozšíření xmlreader a xmlwriter';

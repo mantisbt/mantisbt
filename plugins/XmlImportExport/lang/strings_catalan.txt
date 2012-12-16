@@ -27,6 +27,7 @@
  *
  * @author Bernat
  * @author Paucabot
+ * @author Pitort
  */
 
 $s_plugin_XmlImportExport_title = 'Importa/Exporta incidències';
@@ -46,3 +47,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Deshabilita l\'enllaç';
 $s_plugin_XmlImportExport_fallback = 'Estratègia alternativa (quan "Renumerar" no s\'aplica):';
 $s_plugin_XmlImportExport_fallback_category = 'Categoria alternativa:';
 $s_plugin_XmlImportExport_keep_same_category = 'Intenta conservar la mateixa categoria';
+$s_plugin_XmlImportExport_error_no_xml = 'no ha estat possible de trobar les extensions xmlreader i xmlwriter';

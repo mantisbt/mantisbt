@@ -1,0 +1,58 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Ukrainian (українська)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Steve.rusyn
+ */
+
+$s_plugin_MantisGraph_config = 'Налаштування';
+$s_plugin_MantisGraph_font = 'Шрифт';
+$s_plugin_MantisGraph_enabled = 'вкл';
+$s_plugin_MantisGraph_disabled = 'викл';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Діаграми за статусами';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Діаграми пріоритетів';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Діаграми серйозності';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Діаграми категорій';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Діаграми резолюцій';
+$s_plugin_MantisGraph_by_status_pct = 'Статуси у відсотках';
+$s_plugin_MantisGraph_by_priority_pct = 'Пріоритети у відсотках';
+$s_plugin_MantisGraph_by_severity_pct = 'Серйозність у відсотках';
+$s_plugin_MantisGraph_by_category_pct = 'Категорії у відсотках';
+$s_plugin_MantisGraph_by_resolution_pct = 'Резолюції у відсотках';
+$s_plugin_MantisGraph_by_severity_mix = 'Серйозність та статуси';
+$s_plugin_MantisGraph_by_priority_mix = 'Пріоритети і статуси';
+$s_plugin_MantisGraph_by_resolution_mix = 'Резолюції та статуси';
+$s_plugin_MantisGraph_legend_still_open = 'Ще відкриті';
+$s_plugin_MantisGraph_legend_resolved = 'Вирішені';
+$s_plugin_MantisGraph_legend_assigned = 'Призначені';
+$s_plugin_MantisGraph_legend_total = 'Загалом';
+$s_plugin_MantisGraph_legend_opened = 'Відкриті';
+$s_plugin_MantisGraph_legend_closed = 'Закриті';
+$s_plugin_MantisGraph_legend_reported = 'Повідомлені';
+$s_plugin_MantisGraph_cumulative = 'Накопичувальні';
+$s_plugin_MantisGraph_not_enough_data = 'Не вистачає даних для діаграми';
+$s_plugin_MantisGraph_period_last_week = 'Останній тиждень';
+$s_plugin_MantisGraph_period_two_weeks = 'Останні два тижні';

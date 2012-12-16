@@ -30,6 +30,7 @@
  * @author BroOk
  * @author Martorell
  * @author Paucabot
+ * @author Pitort
  * @author SMP
  * @author Solde
  * @author Ssola
@@ -220,6 +221,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Aquest nom està duplicat.'
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Al menys un projecte té aquest camp en ús.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Valor incorrecte pel camp %1$s.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Definició de camp personalitzat no vàlida';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Propietat de camp personalitzat no vàlida ( %1$s ).';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Ha fallat la validació LDAP';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Ha Fallat la connexió al servidor LDAP';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Ha fallat l\'actualització del registre LDAP.';
@@ -232,6 +234,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Aquesta és una categoria duplicada.'
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No s\'ha especificat cap acció de còpia.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Categoria no trobada.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Category "%1$s" no trobada pel projecte "%2$s".';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Aquesta categoria no es pot ser suprimida perquè ha estat definida com a "Categoria predefinida pels desplaçaments".';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Aquesta és una versió duplicada.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'No s\'ha trobat la versió "%1$s".';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'El nom d\'usuari és invàlid. Els noms d\'usuari només poden tenir lletres llatines, números, espais, guions, punts, el signe més i subrallats.';
@@ -270,6 +273,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'L\'event "%1$s" encara no s\'ha declara
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'El plugin no està registrat en el MantisBT.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'El plugin ja està instal·lat.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'No s\'ha trobat la pàgina del plugin.';
+$MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Ha fallat la instal·lació del connector:  %1$s .';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'L\'actualització de l\'esquema del plugin ha fallat en el bloc #%1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Hi ha hagut un error desconegut "%1$s" en l\'execució del plugin "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'El camp "%1$s" conté duplicats a la columna "%2$s".';
@@ -785,7 +789,7 @@ $s_account_reset_protected_msg = 'Compte Protegit. No és possible restablir la 
 $s_account_reset_msg = 'S\'ha enviat un correu de confirmació a l\'adreça de correu electrònic...';
 $s_account_reset_msg2 = 'La contrasenya s\'ha establert en blanc...';
 $s_account_unlock_msg = 'El compta ha estat desbloquejat.';
-$s_manage_user_protected_msg = 'Compte Protegit. Nivell d\'accés i activació protegits. Per la resta, el compte ha estat actualitzat...';
+$s_manage_user_protected_msg = 'Compte Protegit; els camps \'Nivell d\'accés\' i \'Activat\' no poden ser modificats. La resta dels camps han estat actualitzats.';
 $s_manage_user_updated_msg = 'El compte ha estat actualitzat...';
 $s_email_user_updated_subject = 'Compte actualitzat';
 $s_email_user_updated_msg = 'El vostre compte ha estat actualitzat per l\'administrador. La llista dels canvis es mostra a sota. Pot actualitzar els detalls i preferències del compte en qualsevol moment visitant la següent URL:';
@@ -932,6 +936,9 @@ $s_issue_id = 'Incidència #';
 $s_recently_visited = 'Visitades Recentment';
 $s_priority_abbreviation = 'P';
 $s_note_user_id = 'Nota De';
+$s_filter_match_type = 'Tipus de correspondència';
+$s_filter_match_all = 'Totes les condicions';
+$s_filter_match_any = 'Qualsevol condició';
 $s_none = 'cap';
 $s_current = 'actual';
 $s_search = 'Cerca';

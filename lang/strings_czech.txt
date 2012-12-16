@@ -37,6 +37,7 @@
  * @author Pavel Loupal, Pavel.Loupal@seznam.cz
  * @author Petr Švec, petr.svec@pak.izscr.cz
  * @author Přemek Brada, brada@kiv.zcu.cz
+ * @author Quinn
  * @author Utar
  * @author Vít Jurásek, vit.jurasek@vegateam.cz
  */
@@ -225,6 +226,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Duplicitní jméno.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Toto pole stále ještě používá alespoň jeden projekt.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Nepřípustná hodnota pro pole "%1$s".';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Nepřípustná definice uživatelského pole';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Neplatné vlastní zadání pole (%1$s)';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP Autentizace se nezdařila';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Nezdařila se komunikace s LDAP serverem';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP Chyba při úpravě záznamu.';
@@ -276,6 +278,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Událost \'%1$s\' nebyla dosud deklarov
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Plugin není v MantisBT registrován.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Plugin je už nainstalován.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Stránka pluginu nebyla nalezena.';
+$MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Instalace zásuvného modulu selhala: %1$s';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Aktualizace schema pluginu selhalo na bloku #%1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Při běhu pluginu "%2$s" se vyskytla neznámá chyba "%1$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Pole \'%1$s\' obsahuje duplicitní sloupec \'%2$s\'.';
@@ -791,7 +794,7 @@ $s_account_reset_protected_msg = 'Účet je chráněn. Není možné změnit hes
 $s_account_reset_msg = 'Potvrzovací dopis byl odeslán na vaši elektronickou adresu...';
 $s_account_reset_msg2 = 'Heslo k účtu bylo nastaveno na prázdné...';
 $s_account_unlock_msg = 'Účet byl odemčen.';
-$s_manage_user_protected_msg = 'Účet je chráněn. Úroveň přístupu a příznak jsou chráněny. Pokud ne, účet byl aktualizován...';
+$s_manage_user_protected_msg = 'Účet je chráněn; „Přístupová úroveň“ a „Povolení“ nemohou být upraveny. Ostatní pole byla úspěšně aktualizována.';
 $s_manage_user_updated_msg = 'Účet byl úspěšně aktualizován...';
 $s_email_user_updated_subject = 'Účet aktualizován';
 $s_email_user_updated_msg = 'Váš účet byl aktualizován správcem. Seznam provedených změn je níže. Kdykoliv můžete aktualizovat podrobnosti o vašem účtu a nastavení navštívením této adresy:';
@@ -937,6 +940,9 @@ $s_sort = 'Řadit podle';
 $s_issue_id = 'Problém číslo';
 $s_recently_visited = 'Posledně navštívené';
 $s_note_user_id = 'Poznámka od';
+$s_filter_match_type = 'Typ shody';
+$s_filter_match_all = 'Všechny podmínky';
+$s_filter_match_any = 'Jakékoliv podmínky';
 $s_none = 'žádný';
 $s_current = 'nynější';
 $s_search = 'Hledat';
