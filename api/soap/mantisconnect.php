@@ -31,14 +31,8 @@ if( file_exists( $t_user_configs ) ) {
 /**
  * Checks if the request for the webservice is a documentation request (eg:
  * WSDL) or an actual webservice call.
- *
- * The implementation of this method is based on soap_server::service() and
- * adapted to work independent of the usage of nusoap
- *
- * @param $p_service    The webservice class instance.
- * @param $p_data       The input that is based on the post data.
  */
-function mci_is_webservice_call( $p_service, $p_data )
+function mci_is_webservice_call()
 {
 	global $QUERY_STRING;
 	global $_SERVER;
@@ -53,14 +47,12 @@ function mci_is_webservice_call( $p_service, $p_data )
 
 	if ( isset( $t_qs ) && preg_match( '/wsdl/', $t_qs ) ){
 		return false;
-	} else if ( $p_data == '' && isset ( $p_service) && $p_service->wsdl ) {
-		return false;
 	} else {
 		return true;
 	}
 }
 
-if ( !mci_is_webservice_call( $l_oServer, $t_input ) ) {
+if ( !mci_is_webservice_call() ) {
 	# if we have a documentation request, do some tidy up to prevent lame bot loops e.g. /mantisconnect.php/mc_enum_etas/mc_project_get_versions/
 	$parts = explode ( 'mantisconnect.php/', strtolower($_SERVER['SCRIPT_NAME'] ), 2 );
 	if (isset( $parts[1] ) && (strlen ( $parts[1] ) > 0 ) ) {
@@ -107,7 +99,7 @@ if ( config_get('mc_use_nusoap') ) {
 	# only include the MantisBT / MantisConnect related files, if the current
 	# request is a webservice call (rather than webservice documentation request,
 	# eg: WSDL).
-	if ( mci_is_webservice_call( $l_oServer, $t_input ) ) {
+	if ( mci_is_webservice_call() ) {
 		require_once( 'mc_core.php' );
 	} else {
 		# if we have a documentation request, do some tidy up to prevent lame bot loops e.g. /mantisconnect.php/mc_enum_etas/mc_project_get_versions/
