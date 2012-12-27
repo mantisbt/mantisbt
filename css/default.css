@@ -127,7 +127,6 @@ td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space:
 .main-menu ul li a { padding-right: .9em; border-right: 1px solid #000; text-decoration: underline; }
 .main-menu ul li > a#logout-link { padding-right: 0; border-right: none; }
 
-
 /* sub-menus */
 
 #manage-menu,
@@ -153,7 +152,7 @@ td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space:
 #summary-submenu ul li,
 #manage-user-filter-menu ul li,
 #manage-tags-filter-menu ul li
-	 { display:block; float: left; list-style: none; margin: .5em 0; padding: 0; position: relative; right: 50%; }
+	 { display:block; float: left; list-style: none; margin: .5em 0; padding: 0 .25em; position: relative; right: 50%; }
 
 #manage-menu ul a,
 #manage-config-menu ul a,
@@ -164,6 +163,16 @@ td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space:
 #manage-user-filter-menu ul a,
 #manage-tags-filter-menu ul a
 	{ text-decoration: underline; padding: 0 .25em; }
+
+#manage-menu ul span,
+#manage-config-menu ul span,
+#summary-menu ul span,
+#summary-submenu ul span,
+#account-menu ul span,
+#doc-menu ul span,
+#manage-user-filter-menu ul span,
+#manage-tags-filter-menu ul span
+	{ padding: 0 .25em; }
 
 #account-menu, #doc-menu { top: 0; }
 #account-menu ul, #doc-menu ul { margin: 0 auto; padding: .25em; float: right; text-align: center; }

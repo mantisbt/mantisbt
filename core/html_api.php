@@ -1175,7 +1175,7 @@ function print_account_menu( $p_page = '' ) {
 	echo '<ul class="menu">';
 	foreach ( $t_pages as $t_page ) {
 		if( $t_page['url'] == '' ) {
-			echo '<li>', lang_get( $t_page['label'] ), '</li>';
+			echo '<li><span>', lang_get( $t_page['label'] ), '</span></li>';
 		} else {
 			echo '<li><a href="'. helper_mantis_url( $t_page['url'] ) .'">' . lang_get( $t_page['label'] ) . '</a></li>';
 		}
