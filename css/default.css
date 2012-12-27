@@ -127,10 +127,43 @@ td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space:
 .main-menu ul li a { padding-right: .9em; border-right: 1px solid #000; text-decoration: underline; }
 .main-menu ul li > a#logout-link { padding-right: 0; border-right: none; }
 
-#manage-menu, #account-menu, #summary-menu , #summary-submenu, #manage-config-menu, #manage-user-filter-menu, #manage-tags-filter-menu { float: left; width: 100%; margin: 0; padding: 0; overflow: hidden; font-size: 1em; position: relative; top: -1.5em; }
-#manage-menu ul, #manage-config-menu ul, #summary-menu ul, #summary-submenu ul, #manage-user-filter-menu ul, #manage-tags-filter-menu ul { clear: left; float: left; list-style: none; position: relative; left: 50%; padding: 0; margin: 0; text-align: center; }
-#manage-menu ul li, #manage-config-menu ul li, #summary-menu ul li, #summary-submenu ul li, #manage-user-filter-menu ul li, #manage-tags-filter-menu ul li { display:block; float: left; list-style: none; margin: .5em 0; padding: 0; position: relative; right: 50%; }
-#manage-menu ul a, #manage-config-menu ul a, #summary-menu ul a, #summary-submenu ul a, #account-menu ul a, #doc-menu ul a, #manage-user-filter-menu ul a, #manage-tags-filter-menu ul a { text-decoration: underline; padding: 0 .25em; }
+
+/* sub-menus */
+
+#manage-menu,
+#account-menu,
+#summary-menu,
+#summary-submenu,
+#manage-config-menu,
+#manage-user-filter-menu,
+#manage-tags-filter-menu
+	{ float: left; width: 100%; margin: 0; padding: 0; overflow: hidden; font-size: 1em; position: relative; top: -1.5em; }
+
+#manage-menu ul,
+#manage-config-menu ul,
+#summary-menu ul,
+#summary-submenu ul,
+#manage-user-filter-menu ul,
+#manage-tags-filter-menu ul
+	{ clear: left; float: left; list-style: none; position: relative; left: 50%; padding: 0; margin: 0; text-align: center; }
+
+#manage-menu ul li,
+#manage-config-menu ul li,
+#summary-menu ul li,
+#summary-submenu ul li,
+#manage-user-filter-menu ul li,
+#manage-tags-filter-menu ul li
+	 { display:block; float: left; list-style: none; margin: .5em 0; padding: 0; position: relative; right: 50%; }
+
+#manage-menu ul a,
+#manage-config-menu ul a,
+#summary-menu ul a,
+#summary-submenu ul a,
+#account-menu ul a,
+#doc-menu ul a,
+#manage-user-filter-menu ul a,
+#manage-tags-filter-menu ul a
+	{ text-decoration: underline; padding: 0 .25em; }
 
 #account-menu, #doc-menu { top: 0; }
 #account-menu ul, #doc-menu ul { margin: 0 auto; padding: .25em; float: right; text-align: center; }
@@ -145,7 +178,8 @@ td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space:
 #account-menu ul li:before,
 #doc-menu ul li:before,
 span.permalink:before,
-span.switch-view:before { content: "[" }
+span.switch-view:before
+	{ content: "[" }
 
 #manage-user-link:after,
 #manage-menu ul li:after,
@@ -155,7 +189,8 @@ span.switch-view:before { content: "[" }
 #account-menu ul li:after,
 #doc-menu ul li:after,
 span.permalink:after,
-span.switch-view:after { content: "]" }
+span.switch-view:after
+	{ content: "]" }
 
 #content { clear: both; position: relative; top: 0; margin: 0; padding: .5em; }
 .recently-visited { position: relative; top: -2.5em; float: right; text-align: right; font-size: x-small; }
