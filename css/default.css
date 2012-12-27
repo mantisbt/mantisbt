@@ -134,7 +134,8 @@ td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space:
 #summary-submenu,
 #manage-config-menu,
 #manage-user-filter-menu,
-#manage-tags-filter-menu
+#manage-tags-filter-menu,
+#admin-menu
 	{ float: left; width: 100%; margin: 0; padding: 0; overflow: hidden; font-size: 1em; position: relative; top: -1.5em; }
 
 #manage-menu ul,
@@ -142,7 +143,8 @@ td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space:
 #summary-menu ul,
 #summary-submenu ul,
 #manage-user-filter-menu ul,
-#manage-tags-filter-menu ul
+#manage-tags-filter-menu ul,
+#admin-menu ul
 	{ clear: left; float: left; list-style: none; position: relative; left: 50%; padding: 0; margin: 0; text-align: center; }
 
 #manage-menu ul li,
@@ -150,7 +152,8 @@ td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space:
 #summary-menu ul li,
 #summary-submenu ul li,
 #manage-user-filter-menu ul li,
-#manage-tags-filter-menu ul li
+#manage-tags-filter-menu ul li,
+#admin-menu ul li
 	 { display:block; float: left; list-style: none; margin: .5em 0; padding: 0 .25em; position: relative; right: 50%; }
 
 #manage-menu ul a,
@@ -160,7 +163,8 @@ td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space:
 #account-menu ul a,
 #doc-menu ul a,
 #manage-user-filter-menu ul a,
-#manage-tags-filter-menu ul a
+#manage-tags-filter-menu ul a,
+#admin-menu ul a
 	{ text-decoration: underline; padding: 0 .25em; }
 
 #manage-menu ul span,
@@ -170,7 +174,8 @@ td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space:
 #account-menu ul span,
 #doc-menu ul span,
 #manage-user-filter-menu ul span,
-#manage-tags-filter-menu ul span
+#manage-tags-filter-menu ul span,
+#admin-menu ul span
 	{ padding: 0 .25em; }
 
 #account-menu, #doc-menu { top: 0; }
@@ -185,6 +190,7 @@ td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space:
 #summary-submenu ul li:before,
 #account-menu ul li:before,
 #doc-menu ul li:before,
+#admin-menu ul li:before,
 span.permalink:before,
 span.switch-view:before
 	{ content: "[" }
@@ -196,6 +202,7 @@ span.switch-view:before
 #summary-submenu ul li:after,
 #account-menu ul li:after,
 #doc-menu ul li:after,
+#admin-menu ul li:after,
 span.permalink:after,
 span.switch-view:after
 	{ content: "]" }

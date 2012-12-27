@@ -39,16 +39,18 @@ function print_info_row( $p_description, $p_value ) {
 ?>
 <br />
 
-<div>
-		<p>[ <a href="check/index.php">Check your installation</a> ]</p>
+<div id="admin-menu">
+	<ul class="menu">
+		<li><a href="check/index.php">Check your installation</a></li>
 	<?php if ( count($upgrade) - 1 != config_get( 'database_version' ) ) { ?>
-		<p>[ <a href="upgrade_warning.php"><strong>Upgrade your installation</strong></a> ]</p>
+		<li><a href="upgrade_warning.php"><span class="bold">Upgrade your installation</span></a></li>
 	<?php } ?>
-		<p>[ <a href="system_utils.php">System Utilities</a> ]</p>
-		<p>[ <a href="test_icons.php">Test Icons</a> ]</p>
-		<p>[ <a href="test_langs.php">Test Langs</a> ]</p>
-		<p>[ <a href="test_email.php">Test Email</a> ]</p>
-		<p>[ <a href="email_queue.php">Email Queue</a> ]</p>
+		<li><a href="system_utils.php">System Utilities</a></li>
+		<li><a href="test_icons.php">Test Icons</a></li>
+		<li><a href="test_langs.php">Test Langs</a></li>
+		<li><a href="test_email.php">Test Email</a></li>
+		<li><a href="email_queue.php">Email Queue</a></li>
+	</ul>
 </div>
 
 <table class="width75" cellspacing="1">
