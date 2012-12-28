@@ -67,23 +67,50 @@
 </tr>
 <?php
 	$t_allow_passwd = helper_call_custom_function( 'auth_can_change_password', array() );
-	if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 && ( true == $t_allow_passwd ) ) {
-		# captcha image requires GD library and related option to ON
-?>
-<tr class="row-1">
-	<td class="category">
-		<?php echo lang_get( 'signup_captcha_request' ) ?>:
-	</td>
-	<td>
-		<?php print_captcha_input( 'captcha', '' ) ?>
-	</td>
-	<td>
-		<img src="make_captcha_img.php?public_key=<?php echo $t_key ?>" alt="visual captcha" />
-		<input type="hidden" name="public_key" value="<?php echo $t_key ?>" />
-	</td>
-</tr>
-<?php
+	if( ON == config_get( 'signup_use_captcha' ) && ( true == $t_allow_passwd ) ){
+		
+		# gd captcha image requires GD library and related option to ON
+		if( GD_CAPTCHA == config_get( 'signup_captcha_type' ) && get_gd_version() > 0 ) {
+			
+				?>
+				<tr class="row-1">
+					<td class="category">
+						<?php echo lang_get( 'signup_captcha_request' ) ?>:
+					</td>
+					<td>
+						<?php print_captcha_input( 'captcha', '' ) ?>
+					</td>
+					<td>
+					<?php 
+					# We check open_basedir & cie to have readable error here, else errors and warning will be in the img
+					if(is_readable(get_font_path())){
+					?>
+						<img src="make_captcha_img.php?public_key=<?php echo $t_key ?>" alt="visual captcha" />
+						<input type="hidden" name="public_key" value="<?php echo $t_key ?>" />
+					<?php } ?>
+					</td>
+				</tr>				
+				<?php
+		}		
+		
+		if( RECAPTCHA == config_get( 'signup_captcha_type' ) ) {
+			?>	
+			<tr class="row-1">
+				<td class="category">
+					<?php echo lang_get( 'signup_captcha_request' ) ?>:
+				</td>
+				<td colspan="2">
+				<?php 
+				require_once('library/recaptcha/recaptchalib.php');
+				echo recaptcha_get_html( config_get('recaptcha_publickey') )
+				?>
+				</td>
+			</tr>
+			<?php 
+		}
 	}
+
+	
 	if( false == $t_allow_passwd ) {
 ?>
 <tr class="row-1">

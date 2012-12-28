@@ -280,6 +280,13 @@
 	 * @global int $g_signup_use_captcha
 	 */
 	$g_signup_use_captcha	= ON;
+	
+	/**
+	 * Type of captcha : GD_CAPTCHA or RECAPTCHA
+	 * WARNING : To use RECAPTCHA, mantis server needs access to internet
+	 * @global int $g_signup_captcha_type
+	 */
+	$g_signup_captcha_type	= GD_CAPTCHA;
 
 	/**
 	 * absolute path (with trailing slash!) to folder which contains your TrueType-Font files
@@ -294,6 +301,19 @@
 	 * @global string $g_font_per_captcha
 	 */
 	$g_font_per_captcha	= 'arial.ttf';
+	
+	/**
+	 * ReCaptcha default Public Key
+	 * @global string $g_recaptcha_publickey
+	 */
+	$g_recaptcha_publickey = '6Lf4ztoSAAAAANAKxXRfcFO68S7I-8Oe0vjN8dhT';
+	
+	/**
+	 * ReCaptcha default Private Key
+	 * @global string $g_recaptcha_privatekey
+	 */
+	$g_recaptcha_privatekey = '6Lf4ztoSAAAAAJynlCF8trpFxG0Hg73rzC-eyie_';
+
 
 	/**
 	 * Setting to disable the 'lost your password' feature.

@@ -538,3 +538,7 @@ define( 'DB_FIELD_SIZE_PASSWORD', 32);
 define( 'PASSWORD_MAX_SIZE_BEFORE_HASH', 1024 );
 
 define( 'SECONDS_PER_DAY', 86400 );
+
+# Captcha type
+define( 'GD_CAPTCHA', 1);
+define( 'RECAPTCHA', 2);

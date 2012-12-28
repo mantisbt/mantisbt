@@ -12,6 +12,7 @@ phpmailer       | PHPMailer       | 5.2.1    | unpatched
 projax          | projax          |          | unpatched
 rssbuilder      | RSSBuilder      | 2.2.1    | patched: removed __autoload function
 utf8            | phputf8         | 0.5      | unpatched
+recaptcha       | recaptcha       | 1.11     | unpatched
 
 Upstream projects
 ==================
@@ -23,3 +24,4 @@ phpmailer  -  http://code.google.com/a/apache-extras.org/p/phpmailer/
 projax     -  http://script.aculo.us/downloads / http://www.ngcoders.com/projax/
 rssbuilder -  http://code.google.com/p/flaimo-php/
 utf8       -  http://sourceforge.net/projects/phputf8
+recaptcha  -  http://code.google.com/p/recaptcha/
