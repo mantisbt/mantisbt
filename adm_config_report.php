@@ -115,22 +115,25 @@
 
 	# Apply filters
 	$t_config_table  = db_get_table( 'mantis_config_table' );
-	$t_user_table    = db_get_table( 'mantis_user_table' );
 	$t_project_table = db_get_table( 'mantis_project_table' );
 
-		# Get users in db with specific configs
-		$query = "SELECT DISTINCT user_id, ut.realname as username, ut.username as idrh
-			FROM $t_config_table as ct
-			JOIN $t_user_table as ut ON ut.id = ct.user_id
-			ORDER BY username";
-		$t_result = db_query_bound( $query );
+		# Get users in db having specific configs
+		$query = "SELECT DISTINCT user_id
+			FROM $t_config_table
+			WHERE user_id <> " . db_param() ;
+		$t_result = db_query_bound( $query, array( ALL_USERS ) );
 		$t_users_list = array();
-		$t_users_list[META_FILTER_NONE] = '[' . lang_get( 'any' ) . ']';
-		$t_users_list[ALL_USERS] = lang_get( 'all_users' );
 		while ( $row = db_fetch_array( $t_result ) ) {
-			extract( $row, EXTR_PREFIX_ALL, 'v' );
-			$t_users_list[$v_user_id] = "$v_username ($v_idrh)";
+			$t_user_id = $row['user_id'];
+			$t_users_list[$t_user_id] = user_get_name( $t_user_id );
 		}
+		asort( $t_users_list );
+		# Prepend '[any]' and 'All Users' to the list
+		$t_users_list = array(
+				META_FILTER_NONE => '[' . lang_get( 'any' ) . ']',
+				ALL_USERS        => lang_get( 'all_users' ),
+			)
+			+ $t_users_list;
 
 		# Get projects in db with specific configs
 		$query = "SELECT DISTINCT project_id, pt.name as project_name
