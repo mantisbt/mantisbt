@@ -2580,6 +2580,12 @@
 							<para>$g_manage_cookie</para>
 						</listitem>
 						<listitem>
+							<para>$g_manage_config_cookie</para>
+							<para>Stores the filter criteria for the
+								Manage Config Report page
+							</para>
+						</listitem>
+						<listitem>
 							<para>$g_logout_cookie</para>
 						</listitem>
 						<listitem>

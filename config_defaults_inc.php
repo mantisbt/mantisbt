@@ -2862,6 +2862,12 @@
 	$g_manage_cookie		= '%cookie_prefix%_MANAGE_COOKIE';
 
 	/**
+	 * Stores the filter criteria for the Manage Config Report page
+	 * @global string $g_manage_config_cookie
+	 */
+	$g_manage_config_cookie		= '%cookie_prefix%_MANAGE_CONFIG_COOKIE';
+
+	/**
 	 *
 	 * @global string $g_logout_cookie
 	 */
@@ -3923,8 +3929,9 @@
 		'absolute_path_default_upload_folder', 'ldap_simulation_file_path', 'cookie_path',
 		'plugin_path', 'db_table_prefix', 'db_table_suffix', 'db_table', 'allow_permanent_cookie',
 		'cookie_time_length', 'cookie_domain', 'cookie_version', 'cookie_prefix',
-		'string_cookie', 'project_cookie', 'view_all_cookie', 'manage_cookie', 'logout_cookie',
-		'bug_list_cookie', 'db_username', 'db_password', 'db_schema', 'db_type', 'hostname',
+		'string_cookie', 'project_cookie', 'view_all_cookie', 'manage_cookie',
+		'manage_config_cookie', 'logout_cookie', 'bug_list_cookie',
+		'db_username', 'db_password', 'db_schema', 'db_type', 'hostname',
 		'allow_signup', 'database_name', 'show_queries_count', 'show_queries_threshold',
 		'show_queries_list', 'admin_checks', 'version_suffix', 'global_settings', 'use_iis',
 		'default_language', 'language_choices_arr', 'language_auto_map', 'fallback_language',

@@ -102,6 +102,7 @@
 	}
 
 	# Get filter values
+	$t_filter_save          = gpc_get_bool( 'save' );
 	$t_filter_user_value    = gpc_get_int( 'filter_user_id', ALL_USERS );
 	$t_filter_project_value = gpc_get_int( 'filter_project_id', ALL_PROJECTS );
 	$t_filter_config_value  = gpc_get_string( 'filter_config_id', META_FILTER_NONE );
@@ -112,6 +113,32 @@
 	$t_edit_option          = gpc_get_string( 'config_option', '' );
 	$t_edit_type            = gpc_get_string( 'type', CONFIG_TYPE_DEFAULT );
 	$t_edit_value           = gpc_get_string( 'value', '' );
+
+	# Manage filter's persistency through cookie
+	$t_cookie_name = config_get( 'manage_config_cookie' );
+	if( $t_filter_save ) {
+		# Save user's filter to the cookie
+		$t_cookie_string = implode(
+			':',
+			array(
+				$t_filter_user_value,
+				$t_filter_project_value,
+				$t_filter_config_value,
+			)
+		);
+		gpc_set_cookie( $t_cookie_name, $t_cookie_string, true );
+	} else {
+		# Retrieve the filter from the cookie if it exists
+		$t_cookie_string = gpc_get_cookie( $t_cookie_name, null );
+		if( null !== $t_cookie_string ) {
+			$t_cookie_contents = explode( ':', $t_cookie_string );
+
+			$t_filter_user_value    = $t_cookie_contents[0];
+			$t_filter_project_value = $t_cookie_contents[1];
+			$t_filter_config_value  = $t_cookie_contents[2];
+		}
+
+	}
 
 	# Apply filters
 	$t_config_table  = db_get_table( 'mantis_config_table' );
@@ -189,6 +216,7 @@
 <!-- FILTER FORM -->
 <form id="filter_form" method="post">
 <?php # CSRF protection not required here - form does not result in modifications ?>
+	<input type="hidden" name="save" value="1" />
 
 <table class="width100" cellspacing="1">
 	<!-- Title -->
@@ -311,9 +339,6 @@
 							'#config_set_form',
 							lang_get( 'edit_link' ),
 							array(
-								'filter_user_id'    => $t_filter_user_value,
-								'filter_project_id' => $t_filter_project_value,
-								'filter_config_id'  => $t_filter_config_value,
 								'user_id'           => $v_user_id,
 								'project_id'        => $v_project_id,
 								'config_option'     => $v_config_id,
