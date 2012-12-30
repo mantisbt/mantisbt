@@ -36,6 +36,7 @@
  * @author Mark85296341
  * @author Oapbtommy
  * @author Simon Shek
+ * @author Waihorace
  */
 
 $s_actiongroup_menu_move = '移動';
@@ -789,7 +790,7 @@ $s_account_reset_protected_msg = '帳號受保護。不可以重設密碼。';
 $s_account_reset_msg = '確認訊息已經被寄送到你的 E-Mail 信箱...';
 $s_account_reset_msg2 = '這帳號的密碼已經被設為空白...';
 $s_account_unlock_msg = '這個帳戶已經解鎖。';
-$s_manage_user_protected_msg = '帳號受保護。存取權限且保護功能已啟動。否則，帳號將會被更新...';
+$s_manage_user_protected_msg = '帳號受保護。存取權限且保護功能已啟動，存取程度及啟用項目不能被更新。其他項目已經成功更改。';
 $s_manage_user_updated_msg = '帳號成功更新...';
 $s_email_user_updated_subject = '帳號已更新';
 $s_email_user_updated_msg = '管理者已更新您的帳號資訊，更改的項目如下，您可以使用此網址隨時自行修改您的帳號資訊:';
