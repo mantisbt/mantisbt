@@ -2856,10 +2856,10 @@
 	$g_view_all_cookie		= '%cookie_prefix%_VIEW_ALL_COOKIE';
 
 	/**
-	 *
-	 * @global string $g_manage_cookie
+	 * Stores the filter criteria for the Manage User page
+	 * @global string $g_manage_users_cookie
 	 */
-	$g_manage_cookie		= '%cookie_prefix%_MANAGE_COOKIE';
+	$g_manage_users_cookie		= '%cookie_prefix%_MANAGE_USERS_COOKIE';
 
 	/**
 	 * Stores the filter criteria for the Manage Config Report page
@@ -3929,7 +3929,7 @@
 		'absolute_path_default_upload_folder', 'ldap_simulation_file_path', 'cookie_path',
 		'plugin_path', 'db_table_prefix', 'db_table_suffix', 'db_table', 'allow_permanent_cookie',
 		'cookie_time_length', 'cookie_domain', 'cookie_version', 'cookie_prefix',
-		'string_cookie', 'project_cookie', 'view_all_cookie', 'manage_cookie',
+		'string_cookie', 'project_cookie', 'view_all_cookie', 'manage_users_cookie',
 		'manage_config_cookie', 'logout_cookie', 'bug_list_cookie',
 		'db_username', 'db_password', 'db_schema', 'db_type', 'hostname',
 		'allow_signup', 'database_name', 'show_queries_count', 'show_queries_threshold',

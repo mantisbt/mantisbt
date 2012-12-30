@@ -142,3 +142,6 @@ config_obsolete( 'graph_colors', '' );
 # changes in 1.2.8
 config_obsolete( 'show_attachment_indicator' );
 config_obsolete( 'default_avatar', '' );
+
+# changes in 1.2.13
+config_obsolete( 'manage_cookie', 'manage_users_cookie' );

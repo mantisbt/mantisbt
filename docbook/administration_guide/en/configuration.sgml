@@ -2577,7 +2577,10 @@
 							<para>$g_view_all_cookie</para>
 						</listitem>
 						<listitem>
-							<para>$g_manage_cookie</para>
+							<para>$g_manage_users_cookie</para>
+							<para>Stores the filter criteria for the
+								Manage Users page
+							</para>
 						</listitem>
 						<listitem>
 							<para>$g_manage_config_cookie</para>
