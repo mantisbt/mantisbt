@@ -669,7 +669,15 @@ function html_footer( $p_file = null ) {
 		$t_version_suffix = htmlentities( ' ' . MANTIS_VERSION . config_get_global( 'version_suffix' ) );
 		$t_copyright_years = ' 2000 - ' . date('Y');
 	}
-	echo "\t<address id=\"mantisbt-copyright\">Powered by <a href=\"http://www.mantisbt.org\" title=\"Mantis Bug Tracker: a free and open source web based bug tracking system.\">Mantis Bug Tracker</a> (MantisBT)$t_version_suffix. Copyright &copy;$t_copyright_years MantisBT contributors. Licensed under the terms of the <a href=\"http://www.gnu.org/licenses/old-licenses/gpl-2.0.html\" title=\"GNU General Public License (GPL) version 2\">GNU General Public License (GPL) version 2</a> or a later version.</address>\n";
+	echo "\t",
+		'<address id="mantisbt-copyright">Powered by ',
+		'<a href="http://www.mantisbt.org/" title="Mantis Bug Tracker: a free and open source web based bug tracking system.">',
+		"Mantis Bug Tracker</a> (MantisBT)$t_version_suffix. ",
+		"Copyright &copy;$t_copyright_years MantisBT contributors. ",
+		'Licensed under the terms of the ',
+		'<a href="http://www.gnu.org/licenses/old-licenses/gpl-2.0.html" title="GNU General Public License (GPL) version 2">',
+		'GNU General Public License (GPL) version 2</a> or a later version.',
+		"</address>\n";
 
 	# Show contact information
 	$t_webmaster_contact_information = sprintf( lang_get( 'webmaster_contact_information' ), string_html_specialchars( config_get( 'webmaster_email' ) ) );
