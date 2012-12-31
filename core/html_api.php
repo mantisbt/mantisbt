@@ -611,7 +611,7 @@ function html_footer( $p_file = null ) {
 		$t_version_suffix = config_get_global( 'version_suffix' );
 		echo "\t", '<span class="timer"><a href="http://www.mantisbt.org/" title="Free Web Based Bug Tracker">MantisBT ', MANTIS_VERSION, ( $t_version_suffix ? " $t_version_suffix" : '' ), '</a>', '[<a href="http://www.mantisbt.org/"  title="Free Web Based Bug Tracker" target="_blank">^</a>]</span>', "\n";
 	}
-	echo "\t", '<address>Copyright &copy; 2000 - 2013 MantisBT Team</address>', "\n";
+	echo "\t<address>Copyright &copy; 2000 - ", date( 'Y' ), " MantisBT Team</address>\n";
 
 	# only display webmaster email is current user is not the anonymous user
 	if( !is_page_name( 'login_page.php' ) && auth_is_user_authenticated() && !current_user_is_anonymous() ) {
