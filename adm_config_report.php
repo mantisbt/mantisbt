@@ -107,13 +107,6 @@
 	$t_filter_project_value = gpc_get_int( 'filter_project_id', ALL_PROJECTS );
 	$t_filter_config_value  = gpc_get_string( 'filter_config_id', META_FILTER_NONE );
 
-	# Get config edit values
-	$t_edit_user_id         = gpc_get_int( 'user_id', ALL_USERS );
-	$t_edit_project_id      = gpc_get_int( 'project_id', ALL_PROJECTS );
-	$t_edit_option          = gpc_get_string( 'config_option', '' );
-	$t_edit_type            = gpc_get_string( 'type', CONFIG_TYPE_DEFAULT );
-	$t_edit_value           = gpc_get_string( 'value', '' );
-
 	# Manage filter's persistency through cookie
 	$t_cookie_name = config_get( 'manage_config_cookie' );
 	if( $t_filter_save ) {
@@ -142,6 +135,13 @@
 			}
 		}
 	}
+
+	# Get config edit values
+	$t_edit_user_id         = gpc_get_int( 'user_id', $t_filter_user_value == META_FILTER_NONE ? ALL_USERS : $t_filter_user_value );
+	$t_edit_project_id      = gpc_get_int( 'project_id', $t_filter_project_value == META_FILTER_NONE ? ALL_PROJECTS : $t_filter_project_value );
+	$t_edit_option          = gpc_get_string( 'config_option', $t_filter_config_value == META_FILTER_NONE ? '' : $t_filter_config_value );
+	$t_edit_type            = gpc_get_string( 'type', CONFIG_TYPE_DEFAULT );
+	$t_edit_value           = gpc_get_string( 'value', '' );
 
 	# Apply filters
 	$t_config_table  = db_get_table( 'mantis_config_table' );
