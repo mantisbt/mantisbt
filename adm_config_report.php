@@ -144,51 +144,52 @@
 	$t_config_table  = db_get_table( 'mantis_config_table' );
 	$t_project_table = db_get_table( 'mantis_project_table' );
 
-		# Get users in db having specific configs
-		$query = "SELECT DISTINCT user_id
-			FROM $t_config_table
-			WHERE user_id <> " . db_param() ;
-		$t_result = db_query_bound( $query, array( ALL_USERS ) );
-		$t_users_list = array();
-		while ( $row = db_fetch_array( $t_result ) ) {
-			$t_user_id = $row['user_id'];
-			$t_users_list[$t_user_id] = user_get_name( $t_user_id );
-		}
-		asort( $t_users_list );
-		# Prepend '[any]' and 'All Users' to the list
-		$t_users_list = array(
-				META_FILTER_NONE => '[' . lang_get( 'any' ) . ']',
-				ALL_USERS        => lang_get( 'all_users' ),
-			)
-			+ $t_users_list;
+	# Get users in db having specific configs
+	$query = "SELECT DISTINCT user_id
+		FROM $t_config_table
+		WHERE user_id <> " . db_param() ;
+	$t_result = db_query_bound( $query, array( ALL_USERS ) );
+	$t_users_list = array();
+	while ( $row = db_fetch_array( $t_result ) ) {
+		$t_user_id = $row['user_id'];
+		$t_users_list[$t_user_id] = user_get_name( $t_user_id );
+	}
+	asort( $t_users_list );
+	# Prepend '[any]' and 'All Users' to the list
+	$t_users_list = array(
+			META_FILTER_NONE => '[' . lang_get( 'any' ) . ']',
+			ALL_USERS        => lang_get( 'all_users' ),
+		)
+		+ $t_users_list;
 
-		# Get projects in db with specific configs
-		$query = "SELECT DISTINCT project_id, pt.name as project_name
-			FROM $t_config_table as ct
-			JOIN $t_project_table as pt ON pt.id = ct.project_id
-			WHERE project_id!=0
-			ORDER BY project_name";
-		$t_result = db_query_bound( $query );
-		$t_projects_list = array();
-		$t_projects_list[META_FILTER_NONE] = '[' . lang_get( 'any' ) . ']';
-		$t_projects_list[ALL_PROJECTS] = lang_get( 'all_projects' );
-		while ( $row = db_fetch_array( $t_result ) ) {
-			extract( $row, EXTR_PREFIX_ALL, 'v' );
-			$t_projects_list[$v_project_id] = $v_project_name;
-		}
+	# Get projects in db with specific configs
+	$query = "SELECT DISTINCT project_id, pt.name as project_name
+		FROM $t_config_table as ct
+		JOIN $t_project_table as pt ON pt.id = ct.project_id
+		WHERE project_id!=0
+		ORDER BY project_name";
+	$t_result = db_query_bound( $query );
+	$t_projects_list = array();
+	$t_projects_list[META_FILTER_NONE] = '[' . lang_get( 'any' ) . ']';
+	$t_projects_list[ALL_PROJECTS] = lang_get( 'all_projects' );
+	while ( $row = db_fetch_array( $t_result ) ) {
+		extract( $row, EXTR_PREFIX_ALL, 'v' );
+		$t_projects_list[$v_project_id] = $v_project_name;
+	}
 
-		# Get config list used in db
-		$query = "SELECT DISTINCT config_id
-			FROM $t_config_table
-			ORDER BY config_id";
-		$t_result = db_query_bound( $query );
-		$t_configs_list = array();
-		$t_configs_list[META_FILTER_NONE] = '[' . lang_get( 'any' ) . ']';
-		while ( $row = db_fetch_array( $t_result ) ) {
-			extract( $row, EXTR_PREFIX_ALL, 'v' );
-			$t_configs_list[$v_config_id] = $v_config_id;
-		}
+	# Get config list used in db
+	$query = "SELECT DISTINCT config_id
+		FROM $t_config_table
+		ORDER BY config_id";
+	$t_result = db_query_bound( $query );
+	$t_configs_list = array();
+	$t_configs_list[META_FILTER_NONE] = '[' . lang_get( 'any' ) . ']';
+	while ( $row = db_fetch_array( $t_result ) ) {
+		extract( $row, EXTR_PREFIX_ALL, 'v' );
+		$t_configs_list[$v_config_id] = $v_config_id;
+	}
 
+	# Build filter's where clause
 	$t_where = '';
 	if( $t_filter_user_value != META_FILTER_NONE ) {
 		$t_where .= " AND user_id = $t_filter_user_value ";
