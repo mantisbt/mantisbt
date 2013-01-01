@@ -136,8 +136,11 @@
 			$t_filter_user_value    = $t_cookie_contents[0];
 			$t_filter_project_value = $t_cookie_contents[1];
 			$t_filter_config_value  = $t_cookie_contents[2];
-		}
 
+			if( $t_filter_project_value != META_FILTER_NONE && project_exists( $t_filter_project_value ) ) {
+				$t_filter_project_value = ALL_PROJECTS;
+			}
+		}
 	}
 
 	# Apply filters
@@ -149,7 +152,12 @@
 		FROM $t_config_table
 		WHERE user_id <> " . db_param() ;
 	$t_result = db_query_bound( $query, array( ALL_USERS ) );
-	$t_users_list = array();
+	if( $t_filter_user_value != META_FILTER_NONE && $t_filter_user_value != ALL_USERS ) {
+		# Make sure the filter value exists in the list
+		$t_users_list[$t_filter_user_value] = user_get_name( $t_filter_user_value );
+	} else {
+		$t_users_list = array();
+	}
 	while ( $row = db_fetch_array( $t_result ) ) {
 		$t_user_id = $row['user_id'];
 		$t_users_list[$t_user_id] = user_get_name( $t_user_id );
@@ -169,7 +177,6 @@
 		WHERE project_id!=0
 		ORDER BY project_name";
 	$t_result = db_query_bound( $query );
-	$t_projects_list = array();
 	$t_projects_list[META_FILTER_NONE] = '[' . lang_get( 'any' ) . ']';
 	$t_projects_list[ALL_PROJECTS] = lang_get( 'all_projects' );
 	while ( $row = db_fetch_array( $t_result ) ) {
@@ -182,8 +189,11 @@
 		FROM $t_config_table
 		ORDER BY config_id";
 	$t_result = db_query_bound( $query );
-	$t_configs_list = array();
 	$t_configs_list[META_FILTER_NONE] = '[' . lang_get( 'any' ) . ']';
+	if( $t_filter_config_value != META_FILTER_NONE ) {
+		# Make sure the filter value exists in the list
+		$t_configs_list[$t_filter_config_value] = $t_filter_config_value;
+	}
 	while ( $row = db_fetch_array( $t_result ) ) {
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 		$t_configs_list[$v_config_id] = $v_config_id;
