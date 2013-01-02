@@ -103,9 +103,21 @@
 
 	# Get filter values
 	$t_filter_save          = gpc_get_bool( 'save' );
-	$t_filter_user_value    = gpc_get_int( 'filter_user_id', ALL_USERS );
-	$t_filter_project_value = gpc_get_int( 'filter_project_id', ALL_PROJECTS );
-	$t_filter_config_value  = gpc_get_string( 'filter_config_id', META_FILTER_NONE );
+	$t_filter_default       = gpc_get_bool( 'default_filter_button', false );
+	$t_filter_reset         = gpc_get_bool( 'reset_filter_button', false );
+	if( $t_filter_default ) {
+		$t_filter_user_value    = ALL_USERS;
+		$t_filter_project_value = ALL_PROJECTS;
+		$t_filter_config_value  = META_FILTER_NONE;
+	} else if( $t_filter_reset ) {
+		$t_filter_user_value    = META_FILTER_NONE;
+		$t_filter_project_value = META_FILTER_NONE;
+		$t_filter_config_value  = META_FILTER_NONE;
+	} else {
+		$t_filter_user_value    = gpc_get_int( 'filter_user_id', ALL_USERS );
+		$t_filter_project_value = gpc_get_int( 'filter_project_id', ALL_PROJECTS );
+		$t_filter_config_value  = gpc_get_string( 'filter_config_id', META_FILTER_NONE );
+	}
 
 	# Manage filter's persistency through cookie
 	$t_cookie_name = config_get( 'manage_config_cookie' );
@@ -274,7 +286,9 @@
 	</tr>
 	<tr>
 		<td colspan="3">
-			<input type="submit" class="button-small" value="<?php echo lang_get( 'filter_button' )?>" />
+			<input name="apply_filter_button" type="submit" class="button-small" value="<?php echo lang_get( 'filter_button' )?>" />
+			<input name="default_filter_button" type="submit" class="button-small" value="<?php echo lang_get( 'default_filter' )?>" />
+			<input name="reset_filter_button" type="submit" class="button-small" value="<?php echo lang_get( 'reset_query' )?>" />
 		</td>
 	</tr>
 </table>
