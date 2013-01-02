@@ -32,6 +32,7 @@ plugins/*
 .settings
 .idea/
 *.kdev4
+nbproject/
 
 # IIS7 
 web.config
