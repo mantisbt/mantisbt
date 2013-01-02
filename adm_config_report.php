@@ -329,6 +329,10 @@
 			</td>
 		</tr>
 <?php
+	# Pre-generate a form security token to avoid performance issues when the
+	# db contains a large number of configurations
+	$t_form_security_token = form_security_token( 'adm_config_delete' );
+
 	while ( $row = db_fetch_array( $result ) ) {
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
@@ -369,7 +373,8 @@
 								'config_option'     => $v_config_id,
 								'type'              => $v_type,
 								'value'             => $v_value,
-							)
+							),
+							OFF
 						);
 
 						# Delete button
@@ -380,7 +385,8 @@
 								'user_id'       => $v_user_id,
 								'project_id'    => $v_project_id,
 								'config_option' => $v_config_id,
-							)
+							),
+							$t_form_security_token
 						);
 					} else {
 						echo '&#160;';
