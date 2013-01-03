@@ -142,7 +142,7 @@ function http_security_headers() {
 				$t_avatar_img_allow = "; img-src 'self' http://www.gravatar.com:80";
 			}
 		}
-		header( "X-Content-Security-Policy: allow 'self'; options inline-script eval-script$t_avatar_img_allow; frame-ancestors 'none'" );
+				header( "X-Content-Security-Policy: allow 'self' www.google.com; options inline-script eval-script$t_avatar_img_allow; frame-ancestors 'none'" );
 	}
 }
 
