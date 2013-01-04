@@ -1263,6 +1263,17 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		log_event( LOG_FILTERING, 'project query = ' . $t_project_query );
 		array_push( $t_project_where_clauses, $t_project_query );
 	}
+	
+	# date filter
+	if(( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_YEAR] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_YEAR] ) ) {
+	
+		$t_start_string = $t_filter[FILTER_PROPERTY_START_YEAR] . "-" . $t_filter[FILTER_PROPERTY_START_MONTH] . "-" . $t_filter[FILTER_PROPERTY_START_DAY] . " 00:00:00";
+		$t_end_string = $t_filter[FILTER_PROPERTY_END_YEAR] . "-" . $t_filter[FILTER_PROPERTY_END_MONTH] . "-" . $t_filter[FILTER_PROPERTY_END_DAY] . " 23:59:59";
+	
+		$t_where_params[] = strtotime( $t_start_string );
+		$t_where_params[] = strtotime( $t_end_string );
+		array_push( $t_project_where_clauses, "($t_bug_table.date_submitted BETWEEN " . db_param() . " AND " . db_param() . " )" );
+	}
 
 	# view state
 	$t_view_state = db_prepare_int( $t_filter[FILTER_PROPERTY_VIEW_STATE] );
@@ -1640,17 +1651,6 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			$t_where_params[] = $t_clauses[0];
 			array_push( $t_where_clauses, "( $t_bug_table.os_build = " . db_param() . " )" );
 		}
-	}
-
-	# date filter
-	if(( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_YEAR] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_YEAR] ) ) {
-
-		$t_start_string = $t_filter[FILTER_PROPERTY_START_YEAR] . "-" . $t_filter[FILTER_PROPERTY_START_MONTH] . "-" . $t_filter[FILTER_PROPERTY_START_DAY] . " 00:00:00";
-		$t_end_string = $t_filter[FILTER_PROPERTY_END_YEAR] . "-" . $t_filter[FILTER_PROPERTY_END_MONTH] . "-" . $t_filter[FILTER_PROPERTY_END_DAY] . " 23:59:59";
-
-		$t_where_params[] = strtotime( $t_start_string );
-		$t_where_params[] = strtotime( $t_end_string );
-		array_push( $t_project_where_clauses, "($t_bug_table.date_submitted BETWEEN " . db_param() . " AND " . db_param() . " )" );
 	}
 
 	# fixed in version
