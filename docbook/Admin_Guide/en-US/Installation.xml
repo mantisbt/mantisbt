@@ -590,7 +590,7 @@ tar -xf <emphasis>filename.tar</emphasis>
 		<para>There are many settings that you can adjust to configure
 			and customize MantisBT.
 			Refer to <xref linkend="admin.config" />, as well as the
-			<emphasis>config_default_inc.php</emphasis> file
+			<emphasis>config_defaults_inc.php</emphasis> file
 			for in depth explanations of the available options.
 			Check out also
 			<xref linkend="admin.customize" />
@@ -613,7 +613,7 @@ tar -xf <emphasis>filename.tar</emphasis>
 		</para>
 
 		<para>WARNING: you should never edit the
-			<emphasis>config_default_inc.php</emphasis> file
+			<emphasis>config_defaults_inc.php</emphasis> file
 			directly, as it could cause issues with future upgrades.
 		</para>
 
