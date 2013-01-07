@@ -470,7 +470,7 @@ $s_product_version = 'Väsjohn vum Produk
 ';
 $s_fixed_in_version = 'Jedonn en dä Version';
 $s_target_version = 'Jeplaant för de Version';
-$s_votes = 'Shtemme';
+$s_votes = 'Schtemme';
 $s_summary = 'Zosammefaßong';
 $s_update_information_button = 'Lohß Jonn!';
 $s_profile = 'Profil';

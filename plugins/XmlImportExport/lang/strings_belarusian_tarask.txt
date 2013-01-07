@@ -46,3 +46,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Адключыць спасылку';
 $s_plugin_XmlImportExport_fallback = 'Запасная стратэгія (калі «Перанумарацыя» не спрацавала):';
 $s_plugin_XmlImportExport_fallback_category = 'Запасная катэгорыя:';
 $s_plugin_XmlImportExport_keep_same_category = 'Спрабаваць захаваць тую ж катэгорыю';
+$s_plugin_XmlImportExport_error_no_xml = 'немагчыма знайсьці пашырэньні xmlreader і xmlwriter';

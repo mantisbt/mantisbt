@@ -35,6 +35,7 @@
  * @author Kacper Kruszewski <kacper@netcetera.pl>
  * @author Leinad
  * @author Marcin Ulanecki <marcin dot ulanecki at vm dot pl> 2005/09/17
+ * @author Rezonansowy
  * @author Sp5uhe
  * @author Tomasz Czerniejewski <tomc at artifexmundi com> 2005/04/06
  * @author Woytecr
@@ -225,6 +226,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Ta nazwa jest już używana
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Przynajmniej jeden projekt używa jeszcze tego pola.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Błędna wartość pola „%1$s”.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Błędna definicja pola dodatkowego.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Podana własna wartość pola jest nieprawidłowa (%1$s).';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Autentykacja LDAP nie powiodła się.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Komunikacja z serwerem LDAP nie powiodła się.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Nie udało się uaktualnić rekordu LDAP .';
@@ -276,6 +278,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Zdarzenie „%1$s” nie zostało jeszc
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Wtyczka nie została zarejestrowana w MantisBT.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Wtyczka już jest zainstalowana.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Brak strony wtyczki.';
+$MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Instalacja wtyczki nie powiodła się: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Błąd aktualizacji schematu wtyczki w bloku %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Wystąpił nieznany błąd „%1$s” w trakcie wykonywania kodu wtyczki „%2$s”.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Pole „%1$s” zawiera dwa razy kolumnę „%2$s”.';
@@ -791,7 +794,7 @@ $s_account_reset_protected_msg = 'Konto zostało zabezpieczone. Nie można przyp
 $s_account_reset_msg = 'Wiadomość potwierdzającą wysłano na adres e-mail wybranego użytkownika. Postępując zgodnie z jej zawartością użytkownik będzie mógł zmienić swoje hasło.';
 $s_account_reset_msg2 = 'Konto nie wymaga podawania hasła...';
 $s_account_unlock_msg = 'Konto zostało odblokowane.';
-$s_manage_user_protected_msg = 'Konto zostało zabezpieczone. Za wyjątkiem Poziomu dostępu i Włączenia dane zostały zatualizowane...';
+$s_manage_user_protected_msg = 'Konto zostało zabezpieczone; pola \'Poziomu dostępu\' i \'Włączenia\' nie mogą być zmienione. Inne pola zostały pomyślnie zaktualizowane.';
 $s_manage_user_updated_msg = 'Konto zostało zaktualizowane...';
 $s_email_user_updated_subject = 'Konto zaktualizowane';
 $s_email_user_updated_msg = 'Konto zostało zaktualizowane przez administratora. Lista zmian znajduje się poniżej. Możesz zmienić dane i preferencje swojego konta w dowolnym momencie, wchodząc na adres URL:';
