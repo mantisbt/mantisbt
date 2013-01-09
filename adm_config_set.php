@@ -134,27 +134,61 @@ print_successful_redirect( 'adm_config_report.php' );
  * @return parsed variable
  */
 function process_complex_value( $p_value, $p_trimquotes = false ) {
+	static $s_regex_array = null;
+	static $s_regex_string = null;
+	static $s_regex_element = null;
+
 	$t_value = trim( $p_value );
 
-	if( preg_match('/^array[\s]*\((.*)\)$/s', $t_value, $t_match ) === 1 ) {
+	# Parsing regex initialization
+	if( is_null( $s_regex_array ) ) {
+		$s_regex_array = '^array[\s]*\((.*)\)$';
+		$s_regex_string =
+			# unquoted string (word)
+			'[\w]+' . '|' .
+			# single-quoted string
+			"'(?:[^'\\\\]|\\\\.)*'" . '|' .
+			# double-quoted string
+			'"(?:[^"\\\\]|\\\\.)*"';
+		# The following complex regex will parse individual array elements,
+		# taking into consideration sub-arrays, associative arrays and single,
+		# double and un-quoted strings
+		# @TODO dregad reverse pattern logic for sub-array to avoid match on array(xxx)=>array(xxx)
+		$s_regex_element = '('
+			# Main sub-pattern - match one of
+			. '(' .
+					# sub-array: ungreedy, no-case match ignoring nested parenthesis
+					'(?:(?iU:array\s*(?:\\((?:(?>[^()]+)|(?1))*\\))))' . '|' .
+					$s_regex_string
+			. ')'
+			# Optional pattern for associative array, back-referencing the
+			# above main pattern
+			. '(?:\s*=>\s*(?2))?' .
+			')';
+	}
+
+	if( preg_match( "/$s_regex_array/s", $t_value, $t_match ) === 1 ) {
 		# It's an array - process each element
-		$t_elements = special_split( $t_match[1] );
 		$t_processed = array();
-		foreach( $t_elements as $key => $element ) {
-			if ( !trim( $element ) ) {
-				continue;
-			}
-			# Check if element is associative array
-			$t_split = preg_split("/\(.*\)|'.*'|=>/", $element, 2, PREG_SPLIT_NO_EMPTY);
-			if ( count( $t_split ) == 2 ) {
-				# associative array
-				$t_new_key = constant_replace( trim( $t_split[0], " \t\n\r\0\x0B\"'" ) );
-				$t_new_value = process_complex_value( $t_split[1], true );
-				$t_processed[$t_new_key] = $t_new_value;
-			} else {
-				# regular array
-				$t_new_value = process_complex_value( $element );
-				$t_processed[$key] = $t_new_value;
+
+		if( preg_match_all( "/$s_regex_element/", $t_match[1], $t_elements ) ) {
+			foreach( $t_elements[0] as $key => $element ) {
+				if ( !trim( $element ) ) {
+					# Empty element - skip it
+					continue;
+				}
+				# Check if element is associative array
+				preg_match_all( "/($s_regex_string)\s*=>\s*(.*)/", $element, $t_split );
+				if( !empty( $t_split[0] ) ) {
+					# associative array
+					$t_new_key = constant_replace( trim( $t_split[1][0], " \t\n\r\0\x0B\"'" ) );
+					$t_new_value = process_complex_value( $t_split[2][0], true );
+					$t_processed[$t_new_key] = $t_new_value;
+				} else {
+					# regular array
+					$t_new_value = process_complex_value( $element );
+					$t_processed[$key] = $t_new_value;
+				}
 			}
 		}
 		return $t_processed;
@@ -162,7 +196,7 @@ function process_complex_value( $p_value, $p_trimquotes = false ) {
 		# Scalar value
 		if( $p_trimquotes ) {
 			$t_value = trim( $t_value, " \t\n\r\0\x0B\"'" );
-	}
+		}
 		return constant_replace( $t_value );
 	}
 }
@@ -195,9 +229,9 @@ function special_split ( $p_string ) {
 			} else if( $character == "'" ) {
 				$t_inside_quote = !$t_inside_quote;
 			} else if( $character == "\\" ) {
-				// escape character
+				# escape character
 				$t_escape_next = true;
-				// keep the escape if the string will be going through another recursion
+				# keep the escape if the string will be going through another recursion
 				if( $t_paren_level > 0 ) {
 					$t_array_element .= $character;
 				}
