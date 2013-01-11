@@ -676,7 +676,9 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	# submit the issue
 	$t_issue_id = $t_bug_data->create();
 
-	mci_issue_set_custom_fields( $t_issue_id, $p_issue['custom_fields'], false );
+	$t_set_custom_field_error = mci_issue_set_custom_fields( $t_issue_id, $p_issue['custom_fields'], false );
+	if ( $t_set_custom_field_error != null ) return $t_set_custom_field_error;
+	
 	if ( isset ( $p_issue['monitors'] ) )
 		mci_issue_set_monitors( $t_issue_id , $t_user_id, $p_issue['monitors'] );
 
@@ -859,7 +861,9 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 		$t_bug_data->target_version = isset( $p_issue['target_version'] ) ? $p_issue['target_version'] : '';
 	}
 
-	mci_issue_set_custom_fields( $p_issue_id, $p_issue['custom_fields'], true );
+	$t_set_custom_field_error = mci_issue_set_custom_fields( $p_issue_id, $p_issue['custom_fields'], true );
+	if ( $t_set_custom_field_error != null ) return $t_set_custom_field_error;
+	
 	if ( isset ( $p_issue['monitors'] ) )
 		mci_issue_set_monitors( $p_issue_id , $t_user_id, $p_issue['monitors'] );
 
