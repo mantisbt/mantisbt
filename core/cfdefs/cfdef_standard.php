@@ -167,6 +167,7 @@ $g_custom_field_type_definition[ CUSTOM_FIELD_TYPE_TEMPLATE ] = array (
 	'#function_return_distinct_values' => null,
 	'#function_value_to_database' => null,
 	'#function_database_to_value' => null,
+    '#function_default_to_value' => 'cfdef_prepare_template_default',
 	'#function_print_input' => 'cfdef_input_textbox',
 	'#function_string_value' => 'cfdef_prepare_template_value',
 	'#function_string_value_for_email' => 'cfdef_prepare_template_value_for_email',
@@ -267,6 +268,15 @@ function cfdef_prepare_template_value_for_email($p_value, $p_field_def) {
 	}
 
 	return str_replace('{0}', $p_value, $t_template);
+}
+
+/**
+ * Since the 'template' custom field type uses the 'default' value
+ * to define the template, a real default value is not supported. Simply
+ * always return an empty string.
+ */
+function cfdef_prepare_template_default( $p_value ) {
+    return '';
 }
 
 #print_custom_field_input
