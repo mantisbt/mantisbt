@@ -158,6 +158,20 @@ $g_custom_field_type_definition[ CUSTOM_FIELD_TYPE_DATE ] = array (
 	'#function_string_value_for_email' => 'cfdef_prepare_date_value_for_email',
 );
 
+$g_custom_field_type_definition[ CUSTOM_FIELD_TYPE_TEMPLATE ] = array (
+	'#display_possible_values' => FALSE,
+	'#display_valid_regexp' => TRUE,
+	'#display_length_min' => TRUE,
+	'#display_length_max' => TRUE,
+	'#display_default_value' => TRUE,
+	'#function_return_distinct_values' => null,
+	'#function_value_to_database' => null,
+	'#function_database_to_value' => null,
+	'#function_print_input' => 'cfdef_input_textbox',
+	'#function_string_value' => 'cfdef_prepare_template_value',
+	'#function_string_value_for_email' => 'cfdef_prepare_template_value_for_email',
+);
+
 function cfdef_prepare_list_database_to_value($p_value) {
 	return rtrim( ltrim( $p_value, '|' ), '|' );
 }
@@ -224,6 +238,36 @@ function cfdef_prepare_date_value($p_value) {
 	}
 }
 
+/**
+ * Replaces the wildcard '{0}' from the field's 'default value' with the specified $p_value.
+ * Also converts the resulting string to a link if applicable.
+ * @param $p_value The value to be inserted in the template
+ * @return string replaces the wildcard '{0}' from the 'default value' with the specified $p_value
+ */
+function cfdef_prepare_template_value($p_value, $p_field_def) {
+	$t_template = $p_field_def['default_value'];
+
+	if ( empty( $p_value ) ) {
+		return '';
+	}
+
+	return string_display_line_links(str_replace('{0}', $p_value, $t_template));
+}
+
+/**
+ * Replaces the wildcard '{0}' from the field's 'default value' with the specified $p_value
+ * @param $p_value The value to be inserted in the template
+ * @return string replaces the wildcard '{0}' from the 'default value' with the specified $p_value
+ */
+function cfdef_prepare_template_value_for_email($p_value, $p_field_def) {
+	$t_template = $p_field_def['default_value'];
+
+	if ( empty( $p_value ) ) {
+		return '';
+	}
+
+	return str_replace('{0}', $p_value, $t_template);
+}
 
 #print_custom_field_input
 

@@ -53,6 +53,7 @@ $g_custom_field_types[CUSTOM_FIELD_TYPE_CHECKBOX] = 'standard';
 $g_custom_field_types[CUSTOM_FIELD_TYPE_LIST] = 'standard';
 $g_custom_field_types[CUSTOM_FIELD_TYPE_MULTILIST] = 'standard';
 $g_custom_field_types[CUSTOM_FIELD_TYPE_DATE] = 'standard';
+$g_custom_field_types[CUSTOM_FIELD_TYPE_TEMPLATE] = 'standard';
 
 foreach( $g_custom_field_types as $type ) {
 	require_once( 'cfdefs' . DIRECTORY_SEPARATOR . 'cfdef_' . $type . '.php' );
@@ -380,9 +381,9 @@ function custom_field_has_write_access( $p_field_id, $p_bug_id, $p_user_id = nul
 }
 
 /**
- * create a new custom field with the name $p_name
- * the definition are the default values and can be changes later
- * return the ID of the new definition
+ * create a new custom field with the name $p_name.
+ * the definition are the default values and can be changed later.
+ * return the ID of the new definition.
  * @param string $p_name custom field name
  * @return int custom field id
  * @access public
@@ -414,7 +415,7 @@ function custom_field_create( $p_name ) {
 }
 
 /**
- * Update the field definition
+ * Update the field definition.
  * return true on success, false on failure
  * @param int $p_field_id custom field id
  * @param array custom field definition
@@ -867,9 +868,6 @@ function custom_field_get_value( $p_field_id, $p_bug_id ) {
 
 	$row = custom_field_cache_row( $p_field_id );
 
-	$t_access_level_r = $row['access_level_r'];
-	$t_default_value = $row['default_value'];
-
 	if( !custom_field_has_read_access( $p_field_id, $p_bug_id, auth_get_current_user_id() ) ) {
 		return false;
 	}
@@ -1033,6 +1031,7 @@ function custom_field_validate( $p_field_id, $p_value ) {
 	$t_length = utf8_strlen( $p_value );
 	switch ($t_type) {
 		case CUSTOM_FIELD_TYPE_STRING:
+		case CUSTOM_FIELD_TYPE_TEMPLATE:
 			# Empty fields are valid
 			if( $t_length == 0 ) {
 				break;
@@ -1139,6 +1138,8 @@ function custom_field_prepare_possible_values( $p_possible_values ) {
  */
 function custom_field_distinct_values( $p_field_def, $p_project_id = ALL_PROJECTS ) {
 	global $g_custom_field_type_definition;
+	$c_field_id = $p_field_def['id'];
+	$c_project_id = db_prepare_int( $p_project_id );
 	$t_custom_field_string_table = db_get_table( 'mantis_custom_field_string_table' );
 	$t_mantis_bug_table = db_get_table( 'mantis_bug_table' );
 	$t_return_arr = array();
@@ -1315,10 +1316,10 @@ function custom_field_set_sequence( $p_field_id, $p_project_id, $p_sequence ) {
 
 /**
  * Print an input field
- * $p_field_def contains the definition of the custom field (including it's field id
+ * $p_field_def contains the definition of the custom field (including its field id)
  * $p_bug_id    contains the bug where this field belongs to. If it's left
- * away, it'll default to 0 and thus belongs to a new (i.e. non-existant) bug
- * NOTE: This probably belongs in the print_api.php
+ * away, it'll default to 0 and thus belong to a new (i.e. non-existant) bug
+ * @todo This probably belongs in the print_api.php
  * @param array $p_field_def custom field definition
  * @param int $p_bug_id bug id
  * @access public
@@ -1362,14 +1363,14 @@ function string_custom_field_value( $p_def, $p_field_id, $p_bug_id ) {
 	}
 	global $g_custom_field_type_definition;
 	if( isset( $g_custom_field_type_definition[$p_def['type']]['#function_string_value'] ) ) {
-		return call_user_func( $g_custom_field_type_definition[$p_def['type']]['#function_string_value'], $t_custom_field_value );
+		return call_user_func( $g_custom_field_type_definition[$p_def['type']]['#function_string_value'], $t_custom_field_value , $p_def );
 	}
 	return string_display_links( $t_custom_field_value );
 }
 
 /**
  * Print a custom field value for display
- * NOTE: This probably belongs in the print_api.php
+ * @todo This probably belongs in the print_api.php
  * @param array  $p_def contains the definition of the custom field
  * @param int $p_field_id contains the id of the field
  * @param int $p_bug_id contains the bug id to display the custom field value for
@@ -1382,16 +1383,16 @@ function print_custom_field_value( $p_def, $p_field_id, $p_bug_id ) {
 
 /**
  * Prepare a string containing a custom field value for email
- * NOTE: This probably belongs in the string_api.php
+ * @todo This probably belongs in the string_api.php
  * @param string $p_value value of custom field
  * @param int $p_type	type of custom field
  * @return string value ready for sending via email
  * @access public
  */
-function string_custom_field_value_for_email( $p_value, $p_type ) {
+function string_custom_field_value_for_email( $p_value, $p_def ) {
 	global $g_custom_field_type_definition;
-	if( isset( $g_custom_field_type_definition[$p_type]['#function_string_value_for_email'] ) ) {
-		return call_user_func( $g_custom_field_type_definition[$p_type]['#function_string_value_for_email'], $p_value );
+	if( isset( $g_custom_field_type_definition[$p_def['type']]['#function_string_value_for_email'] ) ) {
+		return call_user_func( $g_custom_field_type_definition[$p_def['type']]['#function_string_value_for_email'], $p_value, $p_def );
 	}
 	return $p_value;
 }
