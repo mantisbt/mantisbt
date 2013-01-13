@@ -1,0 +1,48 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Korean (한국어)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Changwoo
+ */
+
+$s_plugin_XmlImportExport_title = '이슈 가져오기/내보내기';
+$s_plugin_XmlImportExport_description = '맨티스에 XML을 사용하는 가져오기 및 내보내기 기능을 추가합니다.';
+$s_plugin_XmlImportExport_import = '이슈 가져오기';
+$s_plugin_XmlImportExport_export = 'XML 내보내기';
+$s_plugin_XmlImportExport_importing_in_project = '프로젝트의 이슈 가져오기:';
+$s_plugin_XmlImportExport_import_options = '옵션 가져오기';
+$s_plugin_XmlImportExport_cross_references = '상호 참조';
+$s_plugin_XmlImportExport_default_strategy = '기본 변환 방식:';
+$s_plugin_XmlImportExport_renumber = '번호 재구성';
+$s_plugin_XmlImportExport_renumber_desc = '상호 참조를 새로운 이슈 번호에 맞게 변환';
+$s_plugin_XmlImportExport_link = '링크';
+$s_plugin_XmlImportExport_link_desc = '링크를 원래 항목으로 변환';
+$s_plugin_XmlImportExport_disable = '사용 않기';
+$s_plugin_XmlImportExport_disable_desc = '링크 사용하지 않기';
+$s_plugin_XmlImportExport_fallback = '대체 방식("번호 재구성"이 동작하지 않을 때)';
+$s_plugin_XmlImportExport_fallback_category = '대체 방식';
+$s_plugin_XmlImportExport_keep_same_category = '같은 방식 유지 시도';
+$s_plugin_XmlImportExport_error_no_xml = 'xmlreader 및 xmlwriter 확장을 찾을 수 없습니다';

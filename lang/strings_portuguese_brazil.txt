@@ -36,6 +36,7 @@
  * @author Luckas Blade
  * @author Luigipiccoli
  * @author Pedroca cerebral
+ * @author Tuliouel
  * @author 555
  */
 
@@ -223,6 +224,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Este é um nome duplicado.'
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Pelo menos um projeto ainda usa este campo.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Valor inválido para o campo %1$s.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Definição de campo personalizado inválida';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Propriedade inválida para o campo personalizado (%1$s).';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Autenticação LDAP Authentication Falhou';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Conexão ao Servidor LDAP Falhou';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Atualização de Registro LDAP falhou.';
@@ -235,6 +237,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Uma categoria com este nome já exist
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Não foi especificada uma ação de cópia.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Categoria não encontrada.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Categoria "%1$s" não foi encontrada para o projeto "%2$s".';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Esta Categoria não pode ser eliminada, pois é definida como "Categoria Padrão para Movimentos".';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Uma versão com este nome já existe.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versão \'%1$s\' não encontrada.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'O nome de usuário não é inválido. Nomes de usuário podem conter apenas letras, números, espaços, hífens, pontos, sinais de mais e sublinhados.';
@@ -273,6 +276,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Evento "%1$s" ainda não foi declarado.
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'O Plugin não está registrado com o MantisBT.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'O Plugin já está instalado.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'A página do Plugin não foi encontrada.';
+$MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Falha na instalação do complemento: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'A atualização do schema do plugin falhou no bloco #%1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Ocorreu um erro desconhecido "%1$s" durante a execução do plugin "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Campo "%1$s" contém uma duplicação da coluna "%2$s".';
@@ -280,7 +284,7 @@ $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Campo "%1$s" contém o campo "%2$s" inv�
 $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Manipulador de sessão inválido.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'A variável de sessão "%1$s" não foi encontrada.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Sua sessão foi invalidada.';
-$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Token de segurança do formulário inválido. Você enviou o formulário duas vezes por acidente?';
+$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Token de segurança do formulário inválido. Isso pode ter sido provocado por esgotamento do tempo da seção, ou acidentamente, por enviar o formulário duas vezes.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Esta página não pode ser acessada através do uso deste método.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Campo para ordenação inválido.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Formato de data inválido.';
@@ -788,7 +792,7 @@ $s_account_reset_protected_msg = 'Conta protegida. Não se pode limpar a senha.'
 $s_account_reset_msg = 'Uma solicitação de confirmação foi enviada ao endereço de e-mail do usuário selecionado. Através deste, o usuário será capaz de alterar sua senha.';
 $s_account_reset_msg2 = 'A senha da conta foi deixada em branco...';
 $s_account_unlock_msg = 'A conta foi desbloqueada.';
-$s_manage_user_protected_msg = 'Conta protegida. Nível de acesso e proteção ativada. Caso contrário, a conta foi atualizada...';
+$s_manage_user_protected_msg = 'Conta protegida. Os campos "Nível de acesso" e "ativado" não podem ser modificados. Os demais campos foram atualizados com sucesso.';
 $s_manage_user_updated_msg = 'Conta atualizada com sucesso...';
 $s_email_user_updated_subject = 'Conta atualizada';
 $s_email_user_updated_msg = 'Sua conta foi atualizada por um administrador. Uma lista das alterações realizadas está disponível abaixo. Você pode atualizar os detalhes de sua conta e suas preferências a qualquer momento acessando a seguinte URL:';
@@ -934,6 +938,9 @@ $s_sort = 'Ordenar por';
 $s_issue_id = 'Caso #';
 $s_recently_visited = 'Recentemente Visitado';
 $s_note_user_id = 'Nota Por';
+$s_filter_match_type = 'Tipo de correspondência';
+$s_filter_match_all = 'Todas as condições';
+$s_filter_match_any = 'Qualquer Condição';
 $s_none = 'nenhum';
 $s_current = 'atual';
 $s_search = 'Procurar';

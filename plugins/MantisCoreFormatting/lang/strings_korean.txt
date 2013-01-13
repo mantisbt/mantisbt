@@ -1,0 +1,40 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Korean (한국어)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Changwoo
+ */
+
+$s_plugin_format_title = '맨티스 서식';
+$s_plugin_format_description = '공식 텍스트 처리 및 서식 플러그인.';
+$s_plugin_format_config = '설정';
+$s_plugin_format_process_text = '텍스트 처리';
+$s_plugin_format_process_text_warning_notice = '잘 모르면 사용 중지하지 마십시오. 사용 중지 상태에서는 크로스 사이트 스크립팅(XSS) 공격을 받을 수 있습니다.';
+$s_plugin_format_process_urls = 'URL 처리';
+$s_plugin_format_process_buglinks = '맨티스 링크(이슈/이슈노트)';
+$s_plugin_format_process_vcslinks = '버전 컨트롤 링크';
+$s_plugin_format_enabled = '사용';
+$s_plugin_format_disabled = '사용 않음';
