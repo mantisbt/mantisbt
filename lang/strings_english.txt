@@ -1370,6 +1370,7 @@ If you requested this verification, visit the following URL to change your passw
 	'others' => 'Others',
 	'see_email_addresses_of_other_users' => 'See e-mail addresses of other users',
 	'send_reminders' => 'Send reminders',
+	'receive_reminders' => 'Receive reminders',
 	'add_profiles' => 'Add profiles',
 	'notify_of_new_user_created' => 'Notify of new user created',
 	'email_notification' => 'E-mail notification',
