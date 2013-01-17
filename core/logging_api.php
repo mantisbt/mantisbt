@@ -50,7 +50,7 @@ $g_log_levels = array(
  * Log an event
  * @param int $p_level Valid debug log level
  * @param string|array $p_msg Either a string, or an array structured as (string,execution time)
- * @param object $p_backtrace [Optional] debug_backtrace() stack to use 
+ * @param object $p_backtrace [Optional] debug_backtrace() stack to use
  * @return null
  */
 function log_event( $p_level, $p_msg, $p_backtrace = null ) {
@@ -99,14 +99,16 @@ function log_event( $p_level, $p_msg, $p_backtrace = null ) {
 	if ( is_blank( $t_log_destination ) ) {
 		$t_destination = '';
 	} else {
+		# Use @ to avoid error when there is no delimiter in log destination
 		@list( $t_destination, $t_modifiers ) = explode( ':', $t_log_destination, 2 );
 	}
+
+	$t_php_event = $t_now . ' ' . $t_level . ' ' . $s_msg;
 
 	switch( $t_destination ) {
 		case 'none':
 			break;
 		case 'file':
-			$t_php_event = $t_now . ' ' . $t_level . ' ' . $s_msg;
 			error_log( $t_php_event . PHP_EOL, 3, $t_modifiers );
 			break;
 		case 'page':
@@ -124,16 +126,19 @@ function log_event( $p_level, $p_msg, $p_backtrace = null ) {
 				if( $firephp === null ) {
 					$firephp = FirePHP::getInstance(true);
 				}
-				$t_php_event = $t_now . ' ' . $t_level . ' ' . $s_msg;
 				$firephp->log( $p_msg, $t_php_event );
 				return;
 			}
 			// if firebug is not available, fall through
 		default:
 			# use default PHP error log settings
-			$t_php_event = $t_now . ' ' . $t_level . ' ' . $s_msg;
 			error_log( $t_php_event . PHP_EOL );
 			break;
+	}
+
+	# If running from command line, echo log event to stdout
+	if( $t_destination != 'none' && php_sapi_name() == 'cli' ) {
+		echo $t_php_event . PHP_EOL;
 	}
 }
 
