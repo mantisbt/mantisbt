@@ -312,6 +312,7 @@
 	get_capability_row( lang_get( 'view' ) . ' ' . lang_get( 'assigned_to' ), 'view_handler_threshold' );
 	get_capability_row( lang_get( 'view' ) . ' ' . lang_get( 'bug_history' ), 'view_history_threshold' );
 	get_capability_row( lang_get( 'send_reminders' ), 'bug_reminder_threshold' );
+	get_capability_row( lang_get( 'receive_reminders' ), 'reminder_receive_threshold' );
 	get_section_end();
 
 

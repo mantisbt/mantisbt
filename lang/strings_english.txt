@@ -1455,6 +1455,7 @@ $s_handle_sponsored_issue = 'Handle sponsored issue';
 $s_others = 'Others';
 $s_see_email_addresses_of_other_users = 'See e-mail addresses of other users';
 $s_send_reminders = 'Send reminders';
+$s_receive_reminders = 'Receive reminders';
 $s_add_profiles = 'Add profiles';
 $s_notify_of_new_user_created = 'Notify of new user created';
 $s_email_notification = 'E-mail notification';
