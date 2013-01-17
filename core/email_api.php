@@ -867,34 +867,43 @@ function email_store( $p_recipient, $p_subject, $p_message, $p_headers = null ) 
  */
 function email_send_all($p_delete_on_failure = false) {
 	$t_ids = email_queue_get_ids('ASC');
+	$t_date_format = config_get( 'complete_date_format' );
 
-	$t_emails_recipients_failed = array();
-	$t_start = microtime(true);
-	log_event( LOG_EMAIL, "Processing " . count( $t_ids ) . " queued messages" );
+	log_event( LOG_EMAIL, "Processing e-mail queue (" . count( $t_ids ) . " messages)" );
+
 	foreach( $t_ids as $t_id ) {
 		$t_email_data = email_queue_get( $t_id );
+		$t_start = microtime(true);
+
 		log_event( LOG_EMAIL,
 			"Sending message #$t_id queued on " .
-			date( config_get( 'complete_date_format' ), $t_email_data->submitted )
+			date( $t_date_format, $t_email_data->submitted )
 		);
 
-		# check if email was not found.  This can happen if another request picks up the email first and sends it.
+		# check if email was not found.  This can happen if another request
+		# picks up the email first and sends it.
 		if( $t_email_data === false ) {
-			continue;
+			$t_email_sent = true;
+			log_event( LOG_EMAIL, 'message has already been sent' );
+		} else {
+			$t_email_sent = email_send( $t_email_data );
 		}
 
-		# if unable to place the email in the email server queue, then the connection to the server is down,
-		# and hence no point to continue trying with the rest of the emails.
-		if( !email_send( $t_email_data ) ) {
+		if( !$t_email_sent ) {
 			if ($p_delete_on_failure) {
 				email_queue_delete( $t_email_data->email_id );
 			}
+
+			# If unable to place the email in the email server queue and more
+			# than 5 seconds have elapsed, then we assume that the server
+			# connection is down, hence no point to continue trying with the
+			# rest of the emails.
 			if( microtime(true) - $t_start > 5 ) {
+				log_event( LOG_EMAIL, 'Server not responding for 5 seconds, aborting' );
 				break;
-			} else {
-				continue;
 			}
 		}
+
 	}
 }
 
@@ -915,6 +924,8 @@ function email_send( $p_email_data ) {
 
 	$t_debug_email = config_get( 'debug_email' );
 	$t_mailer_method = config_get( 'phpMailer_method' );
+
+	$t_log_msg = 'ERROR: Message could not be sent - ';
 
 	if( is_null( $g_phpMailer ) ) {
 		if ( $t_mailer_method == PHPMAILER_METHOD_SMTP ) {
@@ -986,8 +997,9 @@ function email_send( $p_email_data ) {
 
 	try {
 		$mail->AddAddress( $t_recipient, '' );
-	} catch ( phpmailerException $e ) {
-		log_event( LOG_EMAIL, "ERROR: Message could not be sent - " . $e->getMessage() );
+	}
+	catch ( phpmailerException $e ) {
+		log_event( LOG_EMAIL, $t_log_msg . $mail->ErrorInfo );
 		$t_success = false;
 		$mail->ClearAllRecipients();
 		$mail->ClearAttachments();
@@ -1020,20 +1032,22 @@ function email_send( $p_email_data ) {
 		}
 	}
 
-	try
-	{
-		if ( !$mail->Send() ) {
-			$t_success = false;
-		} else {
+	try {
+		$t_success = $mail->Send();
+		if ( $t_success ) {
 			$t_success = true;
 
 			if ( $t_email_data->email_id > 0 ) {
 				email_queue_delete( $t_email_data->email_id );
 			}
+		} else {
+			# We should never get here, as an exception is thrown after failures
+			log_event( LOG_EMAIL, $t_log_msg . $mail->ErrorInfo );
+			$t_success = false;
 		}
 	}
-	catch ( phpmailerException $e )
-	{
+	catch ( phpmailerException $e ) {
+		log_event( LOG_EMAIL, $t_log_msg . $mail->ErrorInfo );
 		$t_success = false;
 	}
 
