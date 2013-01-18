@@ -67,7 +67,7 @@ $f_filter        = utf8_strtoupper( gpc_get_string( 'filter', config_get( 'defau
 $f_page_number   = gpc_get_int( 'page_number', 1 );
 
 $t_user_table = db_get_table( 'user' );
-$t_cookie_name = config_get( 'manage_cookie' );
+$t_cookie_name = config_get( 'manage_users_cookie' );
 $t_lock_image = '<img src="' . config_get( 'icon_path' ) . 'protected.gif" width="8" height="15" alt="' . lang_get( 'protected' ) . '" />';
 $c_filter = '';
 

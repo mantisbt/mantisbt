@@ -143,6 +143,9 @@ config_obsolete( 'graph_colors', '' );
 config_obsolete( 'show_attachment_indicator' );
 config_obsolete( 'default_avatar', '' );
 
+# changes in 1.2.13
+config_obsolete( 'manage_cookie', 'manage_users_cookie' );
+
 # changes in 1.3.0dev
 config_obsolete( 'bugnote_allow_user_edit_delete', '' );
 config_obsolete( 'password_confirm_hash_magic_string', 'crypto_master_salt' );

@@ -3068,28 +3068,36 @@ $g_colour_global = 'LightBlue';
  *****************************/
 
 /**
- * --- cookie path ---------------
- * set this to something more restrictive if needed
- * http://www.php.net/manual/en/function.setcookie.php
+ * Specifies the path under which a cookie is visible
+ * All scripts in this directory and its sub-directories will be able
+ * to access MantisBT cookies.
+ * It is recommended to set this to the actual MantisBT path.
+ * @link http://php.net/function.setcookie
  * @global string $g_cookie_path
  */
 $g_cookie_path = '/';
 
 /**
- *
+ * The domain that the MantisBT cookies are available to
  * @global string $g_cookie_domain
  */
 $g_cookie_domain = '';
 
 /**
- * cookie version for view_all_page
+ * Version of the view_all_page cookie
+ * It is not expected for the user to need to change this setting
+ * @see $g_view_all_cookie
  * @global string $g_cookie_version
  */
 $g_cookie_version = 'v8';
 
 /**
- * --- cookie prefix ---------------
- * set this to a unique identifier.  No spaces or periods.
+ * Prefix for all MantisBT cookies
+ * This should be an identifier which does not include spaces or periods,
+ * and should be unique per MantisBT installation, especially if
+ * $g_cookie_path is not restricting the cookies' scope to the actual
+ * MantisBT directory.
+ * @see $g_cookie_path
  * @global string $g_cookie_prefix
  */
 $g_cookie_prefix = 'MANTIS';
@@ -3113,10 +3121,16 @@ $g_project_cookie = '%cookie_prefix%_PROJECT_COOKIE';
 $g_view_all_cookie = '%cookie_prefix%_VIEW_ALL_COOKIE';
 
 /**
- *
- * @global string $g_manage_cookie
+ * Stores the filter criteria for the Manage User page
+ * @global string $g_manage_users_cookie
  */
-$g_manage_cookie = '%cookie_prefix%_MANAGE_COOKIE';
+$g_manage_users_cookie		= '%cookie_prefix%_MANAGE_USERS_COOKIE';
+
+/**
+ * Stores the filter criteria for the Manage Config Report page
+ * @global string $g_manage_config_cookie
+ */
+$g_manage_config_cookie		= '%cookie_prefix%_MANAGE_CONFIG_COOKIE';
 
 /**
  *
@@ -4144,8 +4158,9 @@ $g_global_settings = array(
 	'anonymous_account', 'compress_html', 'content_expire', 'allow_permanent_cookie',
 	'cookie_time_length', 'cookie_path', 'cookie_domain', 'cookie_version',
 	'cookie_prefix', 'string_cookie', 'project_cookie', 'view_all_cookie',
-	'manage_cookie', 'logout_cookie', 'bug_list_cookie', 'crypto_master_salt',
-	'custom_headers', 'database_name', 'db_username', 'db_password', 'db_schema', 'db_type',
+	'manage_config_cookie', 'manage_user_cookie', 'logout_cookie',
+	'bug_list_cookie', 'crypto_master_salt', 'custom_headers',
+	'database_name', 'db_username', 'db_password', 'db_schema', 'db_type',
 	'db_table_prefix','db_table_suffix', 'display_errors', 'form_security_validation',
 	'hostname','html_valid_tags', 'html_valid_tags_single_line', 'default_language',
 	'language_auto_map', 'fallback_language', 'login_method', 'plugins_enabled', 'session_handler',

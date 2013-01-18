@@ -454,7 +454,16 @@ div#account-profile-update-div {
 	width: 65%;
 }
 div#adm-config-div {
-	width: 95%;
+	max-width: 95%;
+	display: table;
+}
+p#adm-config-value {
+	max-width: 400px;
+	word-wrap: break-word;
+}
+pre#adm-config-value {
+	max-width: 400px;
+	overflow: auto
 }
 div#project-delete-div {
 	text-align: center;
