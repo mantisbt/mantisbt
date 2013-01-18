@@ -3395,7 +3395,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					echo lang_get ('filter_match_all');
 				}
 			?>
-			<input type="hidden" name="match_type" value="<?php echo $t_filter[FILTER_PROPERTY_MATCH_TYPE]?>"/>
+			<input type="hidden" name="match_type" value="<?php echo string_attribute( $t_filter[FILTER_PROPERTY_MATCH_TYPE] )?>"/>
 			</td>
 			<td colspan="6">&#160;</td>
 		</tr>		
