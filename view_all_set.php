@@ -233,7 +233,7 @@ if ( is_array( gpc_get( FILTER_PROPERTY_NOTE_USER_ID, null ) ) ) {
 	$f_note_user_id = array( $f_note_user_id );
 }
 
-$f_match_type = gpc_get_int ( FILTER_PROPERTY_MATCH_TYPE, FILTER_MATCH_ALL );
+$f_match_type = gpc_get_string ( FILTER_PROPERTY_MATCH_TYPE, FILTER_MATCH_ALL );
 
 # these are only single values, even when doing advanced filtering
 $f_per_page				= gpc_get_int( FILTER_PROPERTY_ISSUES_PER_PAGE, -1 );
