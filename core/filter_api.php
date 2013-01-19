@@ -3389,10 +3389,14 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<td class="small-caption"><a href="<?php echo $t_filters_url . FILTER_PROPERTY_MATCH_TYPE;?>" id="match_type_filter"><?php echo lang_get( 'filter_match_type' )?>:</a></td>
 			<td class="small-caption" id="match_type_filter_target">
 			<?php
-				if ( $t_filter[FILTER_PROPERTY_MATCH_TYPE] == FILTER_MATCH_ANY ) {
-					echo lang_get ('filter_match_any');
-				} else if ( $t_filter[FILTER_PROPERTY_MATCH_TYPE] == FILTER_MATCH_ALL ) {
-					echo lang_get ('filter_match_all');
+				switch( $t_filter[FILTER_PROPERTY_MATCH_TYPE] ) {
+					case FILTER_MATCH_ANY:
+						echo lang_get ('filter_match_any');
+						break;
+					case FILTER_MATCH_ALL:
+					default:
+						echo lang_get ('filter_match_all');
+						break;
 				}
 			?>
 			<input type="hidden" name="match_type" value="<?php echo $t_filter[FILTER_PROPERTY_MATCH_TYPE] ?>"/>
