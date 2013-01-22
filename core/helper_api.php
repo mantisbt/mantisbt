@@ -281,7 +281,8 @@ function helper_set_current_project( $p_project_id ) {
  */
 function helper_clear_pref_cookies() {
 	gpc_clear_cookie( config_get( 'project_cookie' ) );
-	gpc_clear_cookie( config_get( 'manage_cookie' ) );
+	gpc_clear_cookie( config_get( 'manage_users_cookie' ) );
+	gpc_clear_cookie( config_get( 'manage_config_cookie' ) );
 }
 
 /**

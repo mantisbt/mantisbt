@@ -77,20 +77,26 @@ function form_security_token( $p_form_name ) {
 
 /**
  * Get a hidden form element containing a generated form security token.
- * @param string Form name
+ * @param string $p_form_name Form name
+ * @param string $p_security_token Optional security token, previously generated for the same form
  * @return string Hidden form element to output
  */
-function form_security_field( $p_form_name ) {
+function form_security_field( $p_form_name, $p_security_token = null ) {
 	if ( PHP_CLI == php_mode() || OFF == config_get_global( 'form_security_validation' ) ) {
 		return '';
 	}
 
-	$t_string = form_security_token( $p_form_name );
+	if( is_null( $p_security_token ) ) {
+		$p_security_token = form_security_token( $p_form_name );
+	}
 
 	# Create the form element HTML string for the security token
 	$t_form_token = $p_form_name . '_token';
-	$t_element = '<input type="hidden" name="%s" value="%s"/>';
-	$t_element = sprintf( $t_element, $t_form_token, $t_string );
+	$t_element = sprintf(
+		'<input type="hidden" name="%s" value="%s"/>',
+		$t_form_token,
+		$p_security_token
+	);
 
 	return $t_element;
 }

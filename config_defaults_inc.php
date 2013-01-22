@@ -2803,28 +2803,36 @@
 	 *****************************/
 
 	/**
-	 * --- cookie path ---------------
-	 * set this to something more restrictive if needed
-	 * http://www.php.net/manual/en/function.setcookie.php
+	 * Specifies the path under which a cookie is visible
+	 * All scripts in this directory and its sub-directories will be able
+	 * to access MantisBT cookies.
+	 * It is recommended to set this to the actual MantisBT path.
+	 * @link http://php.net/function.setcookie
 	 * @global string $g_cookie_path
 	 */
 	$g_cookie_path			= '/';
 
 	/**
-	 *
+	 * The domain that the MantisBT cookies are available to
 	 * @global string $g_cookie_domain
 	 */
 	$g_cookie_domain		= '';
 
 	/**
-	 * cookie version for view_all_page
+	 * Version of the view_all_page cookie
+	 * It is not expected for the user to need to change this setting
+	 * @see $g_view_all_cookie
 	 * @global string $g_cookie_version
 	 */
 	$g_cookie_version		= 'v8';
 
 	/**
-	 * --- cookie prefix ---------------
-	 * set this to a unique identifier.  No spaces or periods.
+	 * Prefix for all MantisBT cookies
+	 * This should be an identifier which does not include spaces or periods,
+	 * and should be unique per MantisBT installation, especially if
+	 * $g_cookie_path is not restricting the cookies' scope to the actual
+	 * MantisBT directory.
+	 * @see $g_cookie_path
 	 * @global string $g_cookie_prefix
 	 */
 	$g_cookie_prefix		= 'MANTIS';
@@ -2848,10 +2856,16 @@
 	$g_view_all_cookie		= '%cookie_prefix%_VIEW_ALL_COOKIE';
 
 	/**
-	 *
-	 * @global string $g_manage_cookie
+	 * Stores the filter criteria for the Manage User page
+	 * @global string $g_manage_users_cookie
 	 */
-	$g_manage_cookie		= '%cookie_prefix%_MANAGE_COOKIE';
+	$g_manage_users_cookie		= '%cookie_prefix%_MANAGE_USERS_COOKIE';
+
+	/**
+	 * Stores the filter criteria for the Manage Config Report page
+	 * @global string $g_manage_config_cookie
+	 */
+	$g_manage_config_cookie		= '%cookie_prefix%_MANAGE_CONFIG_COOKIE';
 
 	/**
 	 *
@@ -3915,8 +3929,9 @@
 		'absolute_path_default_upload_folder', 'ldap_simulation_file_path', 'cookie_path',
 		'plugin_path', 'db_table_prefix', 'db_table_suffix', 'db_table', 'allow_permanent_cookie',
 		'cookie_time_length', 'cookie_domain', 'cookie_version', 'cookie_prefix',
-		'string_cookie', 'project_cookie', 'view_all_cookie', 'manage_cookie', 'logout_cookie',
-		'bug_list_cookie', 'db_username', 'db_password', 'db_schema', 'db_type', 'hostname',
+		'string_cookie', 'project_cookie', 'view_all_cookie', 'manage_users_cookie',
+		'manage_config_cookie', 'logout_cookie', 'bug_list_cookie',
+		'db_username', 'db_password', 'db_schema', 'db_type', 'hostname',
 		'allow_signup', 'database_name', 'show_queries_count', 'show_queries_threshold',
 		'show_queries_list', 'admin_checks', 'version_suffix', 'global_settings', 'use_iis',
 		'default_language', 'language_choices_arr', 'language_auto_map', 'fallback_language',

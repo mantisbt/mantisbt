@@ -748,6 +748,7 @@ $s_create_user_button = 'Create User';
 # manage_page.php
 $s_hide_disabled = 'Hide Disabled';
 $s_filter_button = 'Apply Filter';
+$s_default_filter = 'Default Filter';
 $s_create_filter_link = 'Create Permalink'; # Permalink = Permanent Link
 $s_create_short_link = 'Create Short Link';
 $s_filter_permalink = 'Following is a permanent link to the currently configured filter:';
@@ -1433,7 +1434,7 @@ $s_delete_attachments = 'Delete attachments';
 $s_delete_attachment_button = 'Delete';
 $s_delete_attachment_sure_msg = 'Are you sure you wish to delete this attachment?';
 $s_upload_issue_attachments = 'Upload issue attachments';
-$s_filters = 'filters';
+$s_filters = 'Filters';
 $s_save_filters = 'Save filters';
 $s_save_filters_as_shared = 'Save filters as shared';
 $s_use_saved_filters = 'Use saved filters';
