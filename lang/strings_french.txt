@@ -1159,6 +1159,7 @@ $s_handle_sponsored_issue = 'Traiter un bogue commandité';
 $s_others = 'Autres';
 $s_see_email_addresses_of_other_users = 'Voir les adresses de courriel des autres utilisateurs';
 $s_send_reminders = 'Envoyer des rappels';
+$s_receive_reminders = 'Recevoir des rappels';
 $s_add_profiles = 'Ajouter des profils';
 $s_notify_of_new_user_created = 'Signaler de la création d\'un nouvel utilisateur';
 $s_email_notification = 'Notification pour courriel';

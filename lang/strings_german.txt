@@ -1154,6 +1154,7 @@ $s_handle_sponsored_issue = 'Gesponsorten Eintrag bearbeiten';
 $s_others = 'SONSTIGES';
 $s_see_email_addresses_of_other_users = 'E-Mail-Adressen von Benutzern ansehen';
 $s_send_reminders = 'Erinnerungen senden';
+$s_receive_reminders = 'Erinnerungen erhalten';
 $s_add_profiles = 'Profile hinzufügen';
 $s_notify_of_new_user_created = 'Benachrichtigung über neu angelegte Benutzer';
 $s_email_notification = 'E-Mail-Benachrichtigung';

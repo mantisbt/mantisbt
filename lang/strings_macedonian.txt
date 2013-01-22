@@ -1130,6 +1130,7 @@ $s_handle_sponsored_issue = 'Работи на спонзориран пробл
 $s_others = 'Други';
 $s_see_email_addresses_of_other_users = 'Преглед на е-поштенските адреси на другите корисници';
 $s_send_reminders = 'Испрати потсетници';
+$s_receive_reminders = 'Испраќај на потсетници';
 $s_add_profiles = 'Додај профили';
 $s_notify_of_new_user_created = 'Известување при создавање на нов корисник';
 $s_email_notification = 'Известување по е-пошта';

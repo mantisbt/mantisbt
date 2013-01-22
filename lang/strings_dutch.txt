@@ -1135,6 +1135,7 @@ $s_handle_sponsored_issue = 'Gesponsorde melding behandelen';
 $s_others = 'Overige';
 $s_see_email_addresses_of_other_users = 'E-mailadressen van andere gebruikers zichtbaar maken';
 $s_send_reminders = 'Herinneringen verzenden';
+$s_receive_reminders = 'Herinneringen ontvangen';
 $s_add_profiles = 'Profielen toevoegen';
 $s_notify_of_new_user_created = 'Melding bij aanmaken nieuwe gebruiker';
 $s_email_notification = 'E-mailmeldingen';

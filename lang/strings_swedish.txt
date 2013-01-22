@@ -1139,6 +1139,7 @@ $s_handle_sponsored_issue = 'Hantera sponsrat ärende';
 $s_others = 'ANNAT';
 $s_see_email_addresses_of_other_users = 'Se e-postadresser till andra användare';
 $s_send_reminders = 'Skicka påminnelser';
+$s_receive_reminders = 'Få påminnelser';
 $s_add_profiles = 'Lägg till profiler';
 $s_notify_of_new_user_created = 'Meddela nyskapade användare';
 $s_email_notification = 'E-postpåminnelse';
