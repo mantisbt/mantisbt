@@ -1,4 +1,47 @@
 MantisBT Release Notes
+======================
+
+1.2.13 Security Release (2012-01-22)
+-------------------------------------------------
+
+MantisBT 1.2.13 is a security update for the stable 1.2.x branch. All
+installations that are currently running any 1.2.x version are strongly advised
+to upgrade to this release.
+
+Two cross site scripting (XSS) vulnerability issues affecting MantisBT 1.2.12
+only (earlier versions are not impacted) were discovered:
+
+ - A malicious person could trick a target user's browser into executing
+   arbitrary JavaScript code (CVE-2013-0197). This vulnerability is
+   critical, due to the affected page (search.php) being usable anonymously
+   on public-facing installations (i.e. without the need for a user login).
+   Refer to issue #15373 for detailed information.
+
+ - A user holding manager/administrator permissions could create a
+   category or project name containing JavaScript code; from that point on,
+   visitors to the Summary page (summary.php) are exposed to having the
+   JavaScript execute within their browser environment. The severity of this
+   issue is mitigated by the need to have a privileged account to modify
+   category and project names.
+   Refer to issue #15384 for detailed information.
+
+A workflow-related security issue was also fixed:
+
+ - A user with "Reporter" permissions can modify the workflow status of any
+   issue to "New" even if they do not have the necessary privileges to make
+   this change.
+   Refer to issue #15258 for detailed information.
+
+In addition to the corrections for the above-mentioned security issues, this
+release also includes several bug fixes and enhancements:
+
+ - improved Manage Configuration page (better performance, ability to filter
+   and edit config options)
+ - support for the built-in SOAP extension in addition to nusoap
+ - updated translations in many languages
+
+A full changelog for the 1.2.x series can be found on the official site. [1]
+
 
 1.2.12 Maintenance Release (2012-11-10)
 -------------------------------------------------
@@ -259,6 +302,7 @@ There have also been many improvements to the codebase beyond adding features:
 
 [1] The changelog is split between multiple releases:
 
+	1.2.13     http://www.mantisbt.org/bugs/changelog_page.php?version_id=180
 	1.2.12     http://www.mantisbt.org/bugs/changelog_page.php?version_id=150
 	1.2.11     http://www.mantisbt.org/bugs/changelog_page.php?version_id=148
 	1.2.10     http://www.mantisbt.org/bugs/changelog_page.php?version_id=146
