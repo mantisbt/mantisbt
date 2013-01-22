@@ -1,29 +1,36 @@
 MantisBT Release Notes
 ======================
 
-1.2.13 Security Release (2012-01-22)
+1.2.14 Security Release (2012-01-29)
 -------------------------------------------------
 
-MantisBT 1.2.13 is a security update for the stable 1.2.x branch. All
+MantisBT 1.2.14 is a security update for the stable 1.2.x branch. All
 installations that are currently running any 1.2.x version are strongly advised
 to upgrade to this release.
 
-Two cross site scripting (XSS) vulnerability issues affecting MantisBT 1.2.12
-only (earlier versions are not impacted) were discovered:
+Three cross site scripting (XSS) vulnerability issues were discovered and
+resolved:
 
  - A malicious person could trick a target user's browser into executing
-   arbitrary JavaScript code (CVE-2013-0197). This vulnerability is
-   critical, due to the affected page (search.php) being usable anonymously
-   on public-facing installations (i.e. without the need for a user login).
+   arbitrary JavaScript code (CVE-2013-0197). This vulnerability iscritical,
+   due to the affected page (search.php) being usable anonymously on public-
+   facing installations (i.e. without the need for a user login).
+   Affects MantisBT 1.2.12 only (earlier versions are not impacted)
    Refer to issue #15373 for detailed information.
 
- - A user holding manager/administrator permissions could create a
-   category or project name containing JavaScript code; from that point on,
-   visitors to the Summary page (summary.php) are exposed to having the
-   JavaScript execute within their browser environment. The severity of this
-   issue is mitigated by the need to have a privileged account to modify
-   category and project names.
+ - A user holding manager/administrator permissions could create a category or
+   project name containing JavaScript code; from that point on,visitors to the
+   Summary page (summary.php) are exposed to having the JavaScript execute
+   within their browser environment. The severity of this issue is mitigated by
+   the need to have a privileged account to modify category and project names.
+   Affects MantisBT 1.2.12 only (earlier versions are not impacted).
    Refer to issue #15384 for detailed information.
+
+ - An administrator could enter a configuration option containing javascript
+   code, which would then be executed when displaying the Configuration Report
+   page (adm_config_report.php). The severity of this issue is mitigated by the
+   need to have a privileged account. Affects all MantisBT 1.2.x versions.
+   Refer to issue #15416 for detailed information.
 
 A workflow-related security issue was also fixed:
 
@@ -41,6 +48,16 @@ release also includes several bug fixes and enhancements:
  - updated translations in many languages
 
 A full changelog for the 1.2.x series can be found on the official site. [1]
+
+
+1.2.13 Security Release (2012-01-22)
+-------------------------------------------------
+
+This version had to be withdrawn shortly after release, as it introduced a bug
+causing the View Issues page to consume significantly more memory for instances
+with large numbers of users (order 10k+), leading to system crashes.
+
+We recommend not to use 1.2.13, and deploy version 1.2.14 instead.
 
 
 1.2.12 Maintenance Release (2012-11-10)
@@ -302,6 +319,7 @@ There have also been many improvements to the codebase beyond adding features:
 
 [1] The changelog is split between multiple releases:
 
+	1.2.14     http://www.mantisbt.org/bugs/changelog_page.php?version_id=181
 	1.2.13     http://www.mantisbt.org/bugs/changelog_page.php?version_id=180
 	1.2.12     http://www.mantisbt.org/bugs/changelog_page.php?version_id=150
 	1.2.11     http://www.mantisbt.org/bugs/changelog_page.php?version_id=148
