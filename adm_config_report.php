@@ -97,7 +97,7 @@
 		foreach( $p_array as $t_key => $t_value ) {
 			echo "<option value='$t_key'";
 			check_selected( $p_filter_value, $t_key );
-			echo ">$t_value</option>\n";
+			echo ">" . string_attribute( $t_value ) . "</option>\n";
 		}
 	}
 
