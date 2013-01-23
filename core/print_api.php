@@ -254,16 +254,20 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 		$t_projects = user_get_accessible_projects( $t_current_user );
 
 		# Get list of users having access level for all accessible projects
-		$t_users_temp = array();
+		$t_users = array();
 		foreach( $t_projects as $t_project_id ) {
 			$t_project_users_list = project_get_all_user_rows( $t_project_id, $p_access );
-			$t_users_temp = array_merge( $t_users_temp, $t_project_users_list );
+			# Do a 'smart' merge of the project's user list, into an
+			# associative array (to remove duplicates)
+			# Use a while loop for better performance
+			$i = 0;
+			while( isset( $t_project_users_list[$i] ) ) {
+				$t_users[ $t_project_users_list[$i]['id'] ] = $t_project_users_list[$i];
+				$i++;
 		}
-
-		# Build list of users as an associative array (to remove duplicates)
-		foreach( $t_users_temp as $t_user ) {
-			$t_users[$t_user['id']] = $t_user;
+			unset( $t_project_users_list );
 		}
+		unset( $t_projects );
 	} else {
 		$t_users = project_get_all_user_rows( $p_project_id, $p_access );
 	}
@@ -288,7 +292,8 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 		$t_sort[] = $t_sort_name;
 	}
 	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
-	$t_count = count( $t_sort );
+	unset( $t_sort );
+	$t_count = count( $t_users );
 	for( $i = 0;$i < $t_count;$i++ ) {
 		$t_row = $t_users[$i];
 		echo '<option value="' . $t_row['id'] . '" ';
