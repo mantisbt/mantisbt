@@ -87,7 +87,7 @@
 		}
 
 		if( $p_for_display ) {
-			echo "<pre>$t_output</pre>";
+			echo '<pre>' . string_attribute( $t_output ) . '</pre>';
 		} else {
 			echo $t_output;
 		}
