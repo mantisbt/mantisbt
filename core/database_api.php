@@ -247,18 +247,13 @@ function db_is_db2() {
 }
 
 /**
- * Checks if the database driver is Oracle
+ * Checks if the database driver is Oracle (oci8)
  * @return bool true if oracle
  */
 function db_is_oracle() {
 	$t_db_type = config_get_global( 'db_type' );
 
-	switch( $t_db_type ) {
-		case 'oci8':
-			return true;
-	}
-
-	return false;
+	return ( $t_db_type == 'oci8' );
 }
 
 /**
