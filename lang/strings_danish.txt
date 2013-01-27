@@ -1132,6 +1132,7 @@ $s_handle_sponsored_issue = 'Håndter sponsoreret rapport';
 $s_others = 'Andre';
 $s_see_email_addresses_of_other_users = 'Se e-mail-adresse på andre brugere';
 $s_send_reminders = 'Send påmindelser';
+$s_receive_reminders = 'Modtag påmindelser';
 $s_add_profiles = 'Tilføj profiler';
 $s_notify_of_new_user_created = 'Gør opmærksom på at der er tilføjet ny bruger';
 $s_email_notification = 'E-mail påmindelse';

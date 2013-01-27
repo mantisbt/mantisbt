@@ -1129,6 +1129,7 @@ $s_handle_sponsored_issue = 'Upravljaj sponzorisanim problemom';
 $s_others = 'Drugo';
 $s_see_email_addresses_of_other_users = 'Pogledaj e-adrese drugih korisnika';
 $s_send_reminders = 'Pošalji podsetnike';
+$s_receive_reminders = 'Primaj podsetnike';
 $s_add_profiles = 'Dodaj profile';
 $s_notify_of_new_user_created = 'Obaveštavanje pri otvaranju novog naloga';
 $s_email_notification = 'Obaveštenja putem e-pošte';

@@ -1144,6 +1144,7 @@ $s_handle_sponsored_issue = '管理有资助的问题';
 $s_others = '其他';
 $s_see_email_addresses_of_other_users = '查看其它用户的Email地址';
 $s_send_reminders = '发送提醒';
+$s_receive_reminders = '接收提醒';
 $s_add_profiles = '添加配置';
 $s_notify_of_new_user_created = '创建新用户时提醒';
 $s_email_notification = '电子邮件通知';

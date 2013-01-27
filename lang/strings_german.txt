@@ -620,6 +620,7 @@ $s_protected = 'Änderungsgeschützt';
 $s_create_user_button = 'Benutzer anlegen';
 $s_hide_disabled = 'inaktive ausblenden';
 $s_filter_button = 'Filter';
+$s_default_filter = 'Standardfilter';
 $s_create_filter_link = 'Permalink erzeugen';
 $s_create_short_link = 'Kurzen Link erzeugen';
 $s_filter_permalink = 'Dies ist ein permanenter Link zum derzeit aktiven Filter:';

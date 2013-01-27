@@ -1138,6 +1138,7 @@ $s_handle_sponsored_issue = 'Modifica incidència patrocinada';
 $s_others = 'ALTRES';
 $s_see_email_addresses_of_other_users = 'examina les adreces de correu d\'altres usuaris';
 $s_send_reminders = 'Envia recordatoris';
+$s_receive_reminders = 'Rebre notificacions';
 $s_add_profiles = 'Afegeix perfils';
 $s_notify_of_new_user_created = 'Notifica la creació d\'un nou usuari';
 $s_email_notification = 'Avís per correu eletrònic';

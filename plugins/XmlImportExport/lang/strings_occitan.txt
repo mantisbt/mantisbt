@@ -45,3 +45,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Desactivar lo ligam';
 $s_plugin_XmlImportExport_fallback = 'Estrategia de secors (quand la renumerotacion s\'aplica pas) :';
 $s_plugin_XmlImportExport_fallback_category = 'Categoria de secors :';
 $s_plugin_XmlImportExport_keep_same_category = 'Ensajar de gardar las meteissas categorias';
+$s_plugin_XmlImportExport_error_no_xml = 'Impossible de trobar las extensions xmlreader e xmlwriter';

@@ -1139,6 +1139,7 @@ $s_handle_sponsored_issue = 'Tratar caso patrocinado';
 $s_others = 'OUTROS';
 $s_see_email_addresses_of_other_users = 'Ver endereços de e-mail de outros usuários';
 $s_send_reminders = 'Enviar lembretes';
+$s_receive_reminders = 'Receber lembretes';
 $s_add_profiles = 'Adicionar perfís';
 $s_notify_of_new_user_created = 'Notificar criação de novo usuário';
 $s_email_notification = 'Notificação via email';

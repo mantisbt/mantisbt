@@ -1139,6 +1139,7 @@ $s_handle_sponsored_issue = 'Gestisce anomalia sponsorizzata';
 $s_others = 'ALTRI';
 $s_see_email_addresses_of_other_users = 'Visualizza indirizzi email altri utenti';
 $s_send_reminders = 'Invia memorandum';
+$s_receive_reminders = 'Ricevi promemoria';
 $s_add_profiles = 'Aggiunge nuovi profili';
 $s_notify_of_new_user_created = 'Notifica creazione nuovi utenti';
 $s_email_notification = 'Notifica via e-mail';
