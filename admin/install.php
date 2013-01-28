@@ -315,15 +315,11 @@ if( 2 == $t_install_state ) {
 	</td>
 	<?php
 		if( '' !== $f_admin_password ) {
-		print_test_result( GOOD );
-	} else {
-		if( '' != $f_db_password ) {
+			print_test_result( GOOD );
+		} else {
 			print_test_result( BAD, false, 'admin user password is blank, using database user password instead' );
 			$f_admin_password = $f_db_password;
-		} else {
-			print_test_result( GOOD );
 		}
-	}
 	?>
 </tr>
 
