@@ -633,7 +633,13 @@ if( 3 == $t_install_state ) {
 					$t_db_open = true;
 				} else {
 					$t_error = db_error_msg();
-					if( strstr( $t_error, 'atabase exists' ) ) {
+					if( $f_db_type == 'oci8' ) {
+						$t_db_exists = preg_match( '/ORA-01920/', $t_error );
+					} else {
+						$t_db_exists = strstr( $t_error, 'atabase exists' );
+					}
+
+					if( $t_db_exists ) {
 						print_test_result( BAD, false, 'Database already exists? ( ' . db_error_msg() . ' )' );
 					} else {
 						print_test_result( BAD, true, 'Does administrative user have access to create the database? ( ' . db_error_msg() . ' )' );
