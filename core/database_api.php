@@ -63,8 +63,11 @@ $g_db_log_queries = ( 0 != ( config_get_global( 'log_level' ) & LOG_DATABASE ) )
  * @global bool $ADODB_FETCH_MODE
  */
 if( db_is_oracle() ) {
-	# To get non-empty field values in case of oci8 from GetRowAssoc() indexed result returning must be enabled
-	$ADODB_FETCH_MODE = ADODB_FETCH_BOTH;
+	# Due to oci8 returning column names in uppercase, the MantisBT
+	# default fetch mode (ADODB_FETCH_ASSOC) does not work properly
+	# in the current version of ADOdb (5.18) so we override it.
+	# See #15426
+	$ADODB_FETCH_MODE = ADODB_FETCH_NUM;
 } else {
 	$ADODB_FETCH_MODE = ADODB_FETCH_ASSOC;
 }
