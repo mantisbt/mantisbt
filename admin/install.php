@@ -651,7 +651,9 @@ if( 3 == $t_install_state ) {
 		?>
 </tr>
 <?php
+	# Close the connection and clear the ADOdb object to free memory
 	$g_db->Close();
+	$g_db = null;
 ?>
 <tr>
 	<td bgcolor="#ffffff">
