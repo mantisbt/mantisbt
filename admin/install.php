@@ -149,7 +149,6 @@ switch( $t_install_state ) {
 </table>
 <br /><br />
 
-<form method='POST'>
 <?php
 if( 0 == $t_install_state ) {
 	?>
@@ -432,10 +431,18 @@ if( 2 == $t_install_state ) {
 if( 1 == $t_install_state ) {
 	?>
 
+<form method='POST'>
+
 <table width="100%" cellpadding="10" cellspacing="1">
+
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title"><?php echo $g_database_upgrade ? 'Upgrade Options' : 'Installation Options'?></span>
+		<span class="title">
+			<?php echo
+				( $g_database_upgrade ? 'Upgrade Options' : 'Installation Options' ),
+				( $g_failed ? ': Checks Failed... ' : '' )
+			?>
+		</span>
 	</td>
 </tr>
 
@@ -549,7 +556,10 @@ if( !$g_database_upgrade ) {
 
 <tr>
 	<td>
-		Attempt Installation
+		<?php echo ( $g_failed
+			? 'Please correct failed checks and try again'
+			: 'Attempt Installation' );
+		?>
 	</td>
 	<td>
 		<input name="go" type="submit" class="button" value="Install/Upgrade Database"></input>
@@ -1070,10 +1080,13 @@ if( 7 == $t_install_state ) {
 <?php
 	}
 }
+?>
+</form>
+<?php
 
 # end install_state == 7
 
-if( $g_failed ) {
+if( $g_failed && $t_install_state != 1 ) {
 	?>
 <table width="100%" bgcolor="#222222" cellpadding="10" cellspacing="1">
 <tr>
@@ -1084,6 +1097,7 @@ if( $g_failed ) {
 <tr>
 	<td bgcolor="#ffffff">Please correct failed checks</td>
 	<td bgcolor="#ffffff">
+<form method='POST'>
 		<input name="install" type="hidden" value="<?php echo $t_install_state?>"></input>
 		<input name="hostname" type="hidden" value="<?php echo $f_hostname?>"></input>
 		<input name="db_type" type="hidden" value="<?php echo $f_db_type?>"></input>
@@ -1100,12 +1114,12 @@ if( $g_failed ) {
 		<input name="log_queries" type="hidden" value="<?php echo( $f_log_queries ? 1 : 0 )?>"></input>
 		<input name="db_exists" type="hidden" value="<?php echo( $f_db_exists ? 1 : 0 )?>"></input>
 		<input name="retry" type="submit" class="button" value="Retry"></input>
+</form>
 	</td>
 </tr>
 </table>
 <?php
 }
 ?>
-</form>
 </body>
 </html>
