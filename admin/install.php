@@ -438,7 +438,11 @@ if( 1 == $t_install_state ) {
 		<span class="title"><?php echo $g_database_upgrade ? 'Upgrade Options' : 'Installation Options'?></span>
 	</td>
 </tr>
-<?php if( !$g_database_upgrade ) {?>
+
+<?php
+# install-only fields: when upgrading, only display admin username and password
+if( !$g_database_upgrade ) {
+?>
 <tr>
 	<td>
 		Type of Database
@@ -471,10 +475,7 @@ if( 1 == $t_install_state ) {
 		</select>
 	</td>
 </tr>
-<?php
-}
 
-if( !$g_database_upgrade ) {?>
 <tr>
 	<td>
 		Hostname (for Database Server)
@@ -483,10 +484,7 @@ if( !$g_database_upgrade ) {?>
 		<input name="hostname" type="textbox" value="<?php echo $f_hostname?>"></input>
 	</td>
 </tr>
-<?php
-}
 
-if( !$g_database_upgrade ) {?>
 <tr>
 	<td>
 		Username (for Database)
@@ -495,10 +493,7 @@ if( !$g_database_upgrade ) {?>
 		<input name="db_username" type="textbox" value="<?php echo $f_db_username?>"></input>
 	</td>
 </tr>
-<?php
-}
 
-if( !$g_database_upgrade ) {?>
 <tr>
 	<td>
 		Password (for Database)
@@ -507,10 +502,7 @@ if( !$g_database_upgrade ) {?>
 		<input name="db_password" type="password" value="<?php echo( !is_blank( $f_db_password ) ? CONFIGURED_PASSWORD : "" )?>"></input>
 	</td>
 </tr>
-<?php
-}
 
-if( !$g_database_upgrade ) {?>
 <tr>
 	<td>
 		Database name (for Database)
@@ -520,7 +512,8 @@ if( !$g_database_upgrade ) {?>
 	</td>
 </tr>
 <?php
-}?>
+} # end install-only fields
+?>
 
 <tr>
 	<td>
