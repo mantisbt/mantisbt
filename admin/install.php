@@ -499,7 +499,12 @@ if( !$g_database_upgrade ) {
 		Password (for Database)
 	</td>
 	<td>
-		<input name="db_password" type="password" value="<?php echo( !is_blank( $f_db_password ) ? CONFIGURED_PASSWORD : "" )?>"></input>
+		<input name="db_password" type="password"
+			value="<?php
+				echo( !is_blank( $f_db_password ) && $t_config_exists
+					? CONFIGURED_PASSWORD
+					: $f_db_password )?>">
+		</input>
 	</td>
 </tr>
 
@@ -1084,7 +1089,12 @@ if( $g_failed ) {
 		<input name="db_type" type="hidden" value="<?php echo $f_db_type?>"></input>
 		<input name="database_name" type="hidden" value="<?php echo $f_database_name?>"></input>
 		<input name="db_username" type="hidden" value="<?php echo $f_db_username?>"></input>
-		<input name="db_password" type="hidden" value="<?php echo $f_db_password?>"></input>
+		<input name="db_password" type="hidden"
+			value="<?php
+				echo( !is_blank( $f_db_password ) && $t_config_exists
+					? CONFIGURED_PASSWORD
+					: $f_db_password )?>">
+		</input>
 		<input name="admin_username" type="hidden" value="<?php echo $f_admin_username?>"></input>
 		<input name="admin_password" type="hidden" value="<?php echo $f_admin_password?>"></input>
 		<input name="log_queries" type="hidden" value="<?php echo( $f_log_queries ? 1 : 0 )?>"></input>
