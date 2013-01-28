@@ -278,16 +278,14 @@ if( 2 == $t_install_state ) {
 	?>
 
 <table width="100%" cellpadding="10" cellspacing="1">
-<!-- Setting config variables -->
-<?php print_test( 'Setting Database Hostname', '' !== $f_hostname, true, 'host name is blank' )?>
-
-<!-- Setting config variables -->
-<?php print_test( 'Setting Database Type', '' !== $f_db_type, true, 'database type is blank?' )?>
 
 <!-- Checking DB support-->
 <?php
+	print_test( 'Setting Database Type', '' !== $f_db_type, true, 'database type is blank?' );
+
 	print_test( 'Checking PHP support for database type', db_check_database_support( $f_db_type ), true, 'database is not supported by PHP. Check that it has been compiled into your server.' );
 
+	print_test( 'Setting Database Hostname', '' !== $f_hostname, true, 'host name is blank' );
 	print_test( 'Setting Database Username', '' !== $f_db_username, true, 'database username is blank' );
 	print_test( 'Setting Database Password', '' !== $f_db_password, false, 'database password is blank' );
 	print_test( 'Setting Database Name', '' !== $f_database_name || $f_db_type == 'oci8' , true, 'database name is blank' );
