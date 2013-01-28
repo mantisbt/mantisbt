@@ -397,7 +397,7 @@ if( 2 == $t_install_state ) {
 		# due to a bug in ADODB, this call prompts warnings, hence the @
 		# the check only works on mysql if the database is open
 		$t_version_info = @$g_db->ServerInfo();
-		echo '<br /> Running ' . $f_db_type . ' version ' . $t_version_info['description'];
+		echo '<br /> Running ' . $f_db_type . ' version ' . nl2br( $t_version_info['description'] );
 		?>
 	</td>
 	<?php
