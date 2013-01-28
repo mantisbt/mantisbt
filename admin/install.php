@@ -164,28 +164,41 @@ if( 0 == $t_install_state ) {
 
 $t_config_filename = $g_absolute_path . 'config_inc.php';
 $t_config_exists = file_exists( $t_config_filename );
-$f_hostname = null;
-$f_db_type = null;
-$f_database_name = null;
-$f_db_username = null;
-$f_db_password = null;
+
+if( $t_config_exists && $t_install_state <= 1 ) {
+	# config already exists - probably an upgrade
+	$f_dsn           = config_get( 'dsn', '' );
+	$f_hostname      = config_get( 'hostname', '' );
+	$f_db_type       = config_get( 'db_type', '' );
+	$f_database_name = config_get( 'database_name', '' );
+	$f_db_schema     = config_get( 'db_schema', '' );
+	$f_db_username   = config_get( 'db_username', '' );
+	$f_db_password   = config_get( 'db_password', '' );
+} else {
+	# read control variables with defaults
+	$f_dsn           = gpc_get( 'dsn', config_get( 'dsn', '' ) );
+	$f_hostname      = gpc_get( 'hostname', config_get( 'hostname', 'localhost' ) );
+	$f_db_type       = gpc_get( 'db_type', config_get( 'db_type', '' ) );
+	$f_database_name = gpc_get( 'database_name', config_get( 'database_name', 'bugtracker' ) );
+	$f_db_schema     = gpc_get( 'db_schema', config_get( 'db_schema', '' ) );
+	$f_db_username   = gpc_get( 'db_username', config_get( 'db_username', '' ) );
+	$f_db_password   = gpc_get( 'db_password', config_get( 'db_password', '' ) );
+	if( CONFIGURED_PASSWORD == $f_db_password ) {
+		$f_db_password = config_get( 'db_password' );
+	}
+}
+$f_admin_username = gpc_get( 'admin_username', '' );
+$f_admin_password = gpc_get( 'admin_password', '' );
+$f_log_queries    = gpc_get_bool( 'log_queries', false );
+$f_db_exists      = gpc_get_bool( 'db_exists', false );
+
 if( $t_config_exists ) {
 	if( 0 == $t_install_state ) {
 		print_test( "Config File Exists - Upgrade", true );
-	}
 
-	# config already exists - probably an upgrade
-
-	$f_dsn = config_get( 'dsn', '' );
-	$f_hostname = config_get( 'hostname', '' );
-	$f_db_type = config_get( 'db_type', '' );
-	$f_database_name = config_get( 'database_name', '' );
-	$f_db_username = config_get( 'db_username', '' );
-	$f_db_password = config_get( 'db_password', '' );
-
-	if( 0 == $t_install_state ) {
 		print_test( 'Setting Database Type', '' !== $f_db_type, true, 'database type is blank?' );
 
+		# @TODO: dsn config seems to be undefined, remove ?
 		$t_db_conn_exists = ( $f_dsn !== '' || ( $f_database_name !== '' && $f_db_username !== '' && $f_hostname !== '' ) );
 		# Oracle supports binding in two ways:
 		#  - hostname, username/password and database name
@@ -227,23 +240,8 @@ if( $t_config_exists ) {
 			print_test( 'Config File Exists but Database does not', false, false, 'Bad config_inc.php?' );
 		}
 	}
-} else {
-	# read control variables with defaults
-	$f_hostname = gpc_get( 'hostname', config_get( 'hostname', 'localhost' ) );
-	$f_db_type = gpc_get( 'db_type', config_get( 'db_type', '' ) );
-	$f_database_name = gpc_get( 'database_name', config_get( 'database_name', 'bugtrack' ) );
-	$f_db_username = gpc_get( 'db_username', config_get( 'db_username', '' ) );
-	$f_db_password = gpc_get( 'db_password', config_get( 'db_password', '' ) );
-	if( CONFIGURED_PASSWORD == $f_db_password ) {
-		$f_db_password = config_get( 'db_password' );
-	}
 }
-$f_admin_username = gpc_get( 'admin_username', '' );
-$f_admin_password = gpc_get( 'admin_password', '' );
-$f_log_queries = gpc_get_bool( 'log_queries', false );
-$f_db_exists = gpc_get_bool( 'db_exists', false );
 
-$f_db_schema = '';
 if( $f_db_type == 'db2' ) {
 
 	# If schema name is supplied, then separate it from database name.
