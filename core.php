@@ -87,13 +87,13 @@ $g_core_path = $t_core_path;
 /*
  * Set include paths
  */
-define ( 'BASE_PATH' , realpath( dirname(__FILE__) ) );
+define ( 'BASE_PATH' , dirname( __FILE__ ) );
 $mantisLibrary = BASE_PATH . DIRECTORY_SEPARATOR . 'library';
 $mantisCore = $g_core_path;
 
 /*
  * Prepend the application/ and tests/ directories to the
- * include_path.  
+ * include_path.
  */
 $path = array(
     $mantisCore,
