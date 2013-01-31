@@ -183,7 +183,7 @@ function mc_project_rename_category_by_name( $p_username, $p_password, $p_projec
         $t_user_id = mci_check_login( $p_username, $p_password );
 
         if ( null === $p_assigned_to ) {
-                return SoapObjectsFactory::newSoapFault( 'Client', '', 'p_assigned_to needed' );
+                return SoapObjectsFactory::newSoapFault( 'Client', 'p_assigned_to needed' );
         }
 
         if( $t_user_id === false ) {
@@ -221,7 +221,7 @@ function mc_project_get_versions( $p_username, $p_password, $p_project_id ) {
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', '', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
@@ -554,7 +554,7 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', '', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
@@ -700,7 +700,7 @@ function mc_project_add( $p_username, $p_password, $p_project ) {
 	
 
 	if ( !isset( $p_project['name'] ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', '', 'Required field "name" is missing' );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Required field "name" is missing' );
 	} else {
 		$t_name = $p_project['name'];
 	}

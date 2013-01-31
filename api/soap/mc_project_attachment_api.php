@@ -56,7 +56,7 @@ function mc_project_attachment_add( $p_username, $p_password, $p_project_id, $p_
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 	if( is_blank( $p_title ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', '', 'Title must not be empty.' );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Title must not be empty.' );
 	}
 	return mci_file_add( $p_project_id, $p_name, $p_content, $p_file_type, 'project', $p_title, $p_description, $t_user_id );
 }
