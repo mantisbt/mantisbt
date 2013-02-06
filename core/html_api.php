@@ -1577,12 +1577,15 @@ function html_button_bug_reopen( $p_bug ) {
 
 /**
  * Print a button to close the given bug
+ * Only if user can close bugs and workflow allows moving them to that status
  * @param BugData $p_bug Bug object
  * @return null
  */
 function html_button_bug_close( $p_bug ) {
-	if( access_can_close_bug( $p_bug ) ) {
-		$t_closed_status = config_get( 'bug_closed_status_threshold', null, null, $p_bug->project_id );
+	$t_closed_status = config_get( 'bug_closed_status_threshold', null, null, $p_bug->project_id );
+	if(    access_can_close_bug( $p_bug )
+		&& bug_check_workflow( $p_bug->status, $t_closed_status )
+	) {
 		html_button(
 			'bug_change_status_page.php',
 			lang_get( 'close_bug_button' ),
