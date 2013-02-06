@@ -124,7 +124,7 @@
 				<?php
 					switch ( $v3_note_type ) {
 						case REMINDER:
-							echo '<div class="italic">' . lang_get( 'reminder_sent_to' ) . lang_get( 'word_separator' );
+							echo '<div class="italic">' . lang_get( 'reminder_sent_to' ) . ': ';
 							$v3_note_attr = utf8_substr( $v3_note_attr, 1, utf8_strlen( $v3_note_attr ) - 2 );
 							$t_to = array();
 							foreach ( explode( '|', $v3_note_attr ) as $t_recipient ) {
