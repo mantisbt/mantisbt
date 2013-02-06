@@ -189,6 +189,7 @@ define( 'TAG_DETACHED', 26 );
 define( 'TAG_RENAMED', 27 );
 define( 'BUG_REVISION_DROPPED', 28 );
 define( 'BUGNOTE_REVISION_DROPPED', 29 );
+define( 'BUG_REMINDER_SENT', 30 );
 define( 'PLUGIN_HISTORY', 100 );
 
 # bug revisions

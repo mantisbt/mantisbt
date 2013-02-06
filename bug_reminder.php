@@ -105,6 +105,11 @@ if ( ON == config_get( 'store_reminders' ) ) {
 	bugnote_add( $f_bug_id, $f_body, 0, config_get( 'default_reminder_view_status' ) == VS_PRIVATE, REMINDER, $t_attr, NULL, FALSE );
 }
 
+# Add history entries for all sent reminders
+foreach ( $f_to as $t_recipient ) {
+	history_log_event_special( $f_bug_id, BUG_REMINDER_SENT, $t_recipient );
+}
+
 form_security_purge( 'bug_reminder' );
 
 html_page_top( null, string_get_bug_view_url( $f_bug_id ) );
