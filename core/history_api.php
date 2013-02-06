@@ -477,6 +477,10 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 					$p_old_value = user_get_name( $p_old_value );
 					$t_note = lang_get( 'bug_monitor' ) . ': ' . $p_old_value;
 					break;
+				case BUG_REMINDER_SENT:
+					$p_old_value = user_get_name( $p_old_value );
+					$t_note = lang_get( 'reminder_sent_to' ) . ': ' . $p_old_value;
+					break;
 				case BUG_UNMONITOR:
 					$p_old_value = user_get_name( $p_old_value );
 					$t_note = lang_get( 'bug_end_monitor' ) . ': ' . $p_old_value;

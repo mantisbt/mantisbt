@@ -55,6 +55,7 @@
 	# threshold, option is enabled, and not reporter or handler.
 	foreach ( $f_to as $t_recipient )
 	{
+
 		if ( ON == config_get( 'reminder_recipients_monitor_bug' ) &&
 			access_has_bug_level( config_get( 'monitor_bug_threshold' ), $f_bug_id ) &&
 			!bug_is_user_handler( $f_bug_id, $t_recipient ) &&
@@ -76,6 +77,11 @@
 		}
 		$t_attr = '|' . implode( '|', $f_to ) . '|';
 		bugnote_add( $f_bug_id, $f_body, 0, config_get( 'default_reminder_view_status' ) == VS_PRIVATE, REMINDER, $t_attr, NULL, FALSE );
+	}
+
+	# Add history entries for all sent reminders
+	foreach ( $f_to as $t_recipient ) {
+		history_log_event_special( $f_bug_id, BUG_REMINDER_SENT, $t_recipient );
 	}
 
 	form_security_purge( 'bug_reminder' );
