@@ -470,7 +470,7 @@ If you requested this verification, visit the following URL to change your passw
 	'to' => 'To',
 	'sent_you_this_reminder_about' => 'sent you this reminder about',
 	'bug_reminder' => 'Send a reminder',
-	'reminder_sent_to' => 'Reminder sent to:',
+	'reminder_sent_to' => 'Reminder sent to',
 	'bug_send_button' => 'Send',
 	'reminder' => 'Reminder',
 	'reminder_explain' => 'This note will be sent to the recipients listed requesting feedback on this issue.',
