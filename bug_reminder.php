@@ -51,15 +51,18 @@
 
 	access_ensure_bug_level( config_get( 'bug_reminder_threshold' ), $f_bug_id );
 
-	# Automically add recipients to monitor list if they are above the monitor
+	# Automatically add recipients to monitor list if they are above the monitor
 	# threshold, option is enabled, and not reporter or handler.
-	foreach ( $f_to as $t_recipient )
-	{
-
-		if ( ON == config_get( 'reminder_recipients_monitor_bug' ) &&
-			access_has_bug_level( config_get( 'monitor_bug_threshold' ), $f_bug_id ) &&
-			!bug_is_user_handler( $f_bug_id, $t_recipient ) &&
-			!bug_is_user_reporter( $f_bug_id, $t_recipient ) ) {
+	$t_reminder_recipients_monitor_bug = config_get( 'reminder_recipients_monitor_bug' );
+	$t_monitor_bug_threshold = config_get( 'monitor_bug_threshold' );
+	$t_handler = bug_get_field( $f_bug_id, 'handler_id' );
+	$t_reporter = bug_get_field( $f_bug_id, 'reporter_id' );
+	foreach ( $f_to as $t_recipient ) {
+		if (   ON == $t_reminder_recipients_monitor_bug
+			&& access_has_bug_level( $t_monitor_bug_threshold, $f_bug_id )
+			&& $t_recipient != $t_handler
+			&& $t_recipient != $t_reporter
+		) {
 			bug_monitor( $f_bug_id, $t_recipient );
 		}
 	}
