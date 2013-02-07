@@ -179,14 +179,31 @@ $num_notes = count( $t_bugnotes );
 		<?php
 			switch ( $t_bugnote->note_type ) {
 				case REMINDER:
-					echo '<em>' . lang_get( 'reminder_sent_to' ) . ': ';
-					$t_note_attr = utf8_substr( $t_bugnote->note_attr, 1, utf8_strlen( $t_bugnote->note_attr ) - 2 );
-					$t_to = array();
-					foreach ( explode( '|', $t_note_attr ) as $t_recipient ) {
-						$t_to[] = prepare_user_name( $t_recipient );
+					echo '<em>';
+
+					# List of recipients; remove surrounding delimiters
+					$t_recipients = trim( $t_bugnote->note_attr, '|' );
+
+					if( empty( $t_recipients ) ) {
+						echo lang_get( 'reminder_sent_none' );
+					} else {
+						# If recipients list's last char is not a delimiter, it was truncated
+						$t_truncated = ( '|' != utf8_substr( $t_bugnote->note_attr, utf8_strlen( $t_bugnote->note_attr ) - 1 ) );
+
+						# Build recipients list for display
+						$t_to = array();
+						foreach ( explode( '|', $t_recipients ) as $t_recipient ) {
+							$t_to[] = prepare_user_name( $t_recipient );
+						}
+
+						echo lang_get( 'reminder_sent_to' ) . ': '
+							. implode( ', ', $t_to )
+							. ( $t_truncated ? ' (' . lang_get( 'reminder_list_truncated' ) . ')' : '' );
 					}
-					echo implode( ', ', $t_to ) . '</em><br /><br />';
+
+					echo '</em><br /><br />';
 					break;
+
 				case TIME_TRACKING:
 					if ( access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id ) ) {
 						echo '<b>', lang_get( 'time_tracking_time_spent' ) . ' ' . $t_time_tracking_hhmm, '</b><br /><br />';

@@ -68,14 +68,19 @@
 
 	# Add reminder as bugnote if store reminders option is ON.
 	if ( ON == config_get( 'store_reminders' ) ) {
-		if ( count( $f_to ) > 50 ) {		# too many recipients to log, truncate the list
-			$t_to = array();
-			for ( $i=0; $i<50; $i++ ) {
-				$t_to[] = $f_to[$i];
+		# Build list of recipients, truncated to note_attr fields's length
+		$t_attr = '|';
+		$t_length = 0;
+		foreach( $f_to as $t_id ) {
+			$t_recipient = $t_id . '|';
+			$t_length += strlen( $t_recipient );
+			if( $t_length > 250 ) {
+				# Remove trailing delimiter to indicate truncation
+				$t_attr = rtrim( $t_attr, '|' );
+				break;
 			}
-			$f_to = $t_to;
+			$t_attr .= $t_recipient;
 		}
-		$t_attr = '|' . implode( '|', $f_to ) . '|';
 		bugnote_add( $f_bug_id, $f_body, 0, config_get( 'default_reminder_view_status' ) == VS_PRIVATE, REMINDER, $t_attr, NULL, FALSE );
 	}
 
