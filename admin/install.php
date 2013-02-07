@@ -188,6 +188,9 @@ if( $t_config_exists && $t_install_state <= 1 ) {
 }
 $f_admin_username = gpc_get( 'admin_username', '' );
 $f_admin_password = gpc_get( 'admin_password', '' );
+if( CONFIGURED_PASSWORD == $f_admin_password ) {
+	$f_admin_password = '';
+}
 $f_log_queries    = gpc_get_bool( 'log_queries', false );
 $f_db_exists      = gpc_get_bool( 'db_exists', false );
 
@@ -541,7 +544,12 @@ if( !$g_database_upgrade ) {
 		Admin Password (to <?php echo( !$g_database_upgrade ) ? 'create Database' : 'update Database'?> if required)
 	</td>
 	<td>
-		<input name="admin_password" type="password" value="<?php echo $f_admin_password?>"></input>
+		<input name="admin_password" type="password"
+			value="<?php
+				echo !is_blank( $f_admin_password) && $f_admin_password == $f_db_password
+					? CONFIGURED_PASSWORD
+					: $f_admin_password; ?>">
+		</input>
 	</td>
 </tr>
 
@@ -1110,7 +1118,12 @@ if( $g_failed && $t_install_state != 1 ) {
 					: $f_db_password )?>">
 		</input>
 		<input name="admin_username" type="hidden" value="<?php echo $f_admin_username?>"></input>
-		<input name="admin_password" type="hidden" value="<?php echo $f_admin_password?>"></input>
+		<input name="admin_password" type="hidden"
+			value="<?php
+				echo !is_blank( $f_admin_password ) && $f_admin_password == $f_db_password
+					? CONFIGURED_PASSWORD
+					: $f_admin_password; ?>">
+		</input>
 		<input name="log_queries" type="hidden" value="<?php echo( $f_log_queries ? 1 : 0 )?>"></input>
 		<input name="db_exists" type="hidden" value="<?php echo( $f_db_exists ? 1 : 0 )?>"></input>
 		<input name="retry" type="submit" class="button" value="Retry"></input>
