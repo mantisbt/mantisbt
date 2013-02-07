@@ -74,7 +74,7 @@
 		# Build list of recipients, truncated to note_attr fields's length
 		$t_attr = '|';
 		$t_length = 0;
-		foreach( $f_to as $t_id ) {
+		foreach( $result as $t_id ) {
 			$t_recipient = $t_id . '|';
 			$t_length += strlen( $t_recipient );
 			if( $t_length > 250 ) {
@@ -88,7 +88,7 @@
 	}
 
 	# Add history entries for all sent reminders
-	foreach ( $f_to as $t_recipient ) {
+	foreach ( $result as $t_recipient ) {
 		history_log_event_special( $f_bug_id, BUG_REMINDER_SENT, $t_recipient );
 	}
 
