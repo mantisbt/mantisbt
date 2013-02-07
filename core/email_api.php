@@ -791,7 +791,7 @@ function email_bug_deleted( $p_bug_id ) {
  * @param string $p_subject
  * @param string $p_message
  * @param array $p_headers
- * @return int
+ * @return int e-mail queue id, or NULL if e-mail was not stored
  */
 function email_store( $p_recipient, $p_subject, $p_message, $p_headers = null ) {
 	$t_recipient = trim( $p_recipient );
@@ -1113,14 +1113,12 @@ function email_append_domain( $p_email ) {
 }
 
 /**
- * Send a bug reminder to each of the given user, or to each user if the first parameter is an array
- * return an array of usernames to which the reminder was successfully sent
+ * Send a bug reminder to the given user(s), or to each user if the first parameter is an array
  *
- * @todo I'm not sure this shouldn't return an array of user ids... more work for the caller but cleaner from an API point of view.
- * @param array $p_recipients
- * @param int $p_bug_id
- * @param string $p_message
- * @return null
+ * @param int|array $p_recipients user id or list of user ids array to send reminder to
+ * @param int $p_bug_id Issue for which the reminder is sent
+ * @param string $p_message Optional message to add to the e-mail
+ * @return array List of users ids to whom the reminder e-mail was actually sent
  */
 function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
 	if( !is_array( $p_recipients ) ) {
@@ -1141,10 +1139,9 @@ function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
 		lang_push( user_pref_get_language( $t_recipient, $t_project_id ) );
 
 		$t_email = user_get_email( $t_recipient );
-		$result[] = user_get_name( $t_recipient );
 
 		if( access_has_project_level( config_get( 'show_user_email_threshold' ), $t_project_id, $t_recipient ) ) {
-			$t_sender_email = ' <' . current_user_get_field( 'email' ) . '>';
+			$t_sender_email = ' <' . user_get_email( $t_sender_id ) . '>';
 		} else {
 			$t_sender_email = '';
 		}
@@ -1153,6 +1150,9 @@ function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
 
 		if( ON == config_get( 'enable_email_notification' ) ) {
 			$t_id = email_store( $t_email, $t_subject, $t_contents );
+			if( $t_id !== null ) {
+				$result[] = $t_recipient;
+			}
 			log_event( LOG_EMAIL, "queued reminder email #$t_id for U$t_recipient" );
 		}
 
