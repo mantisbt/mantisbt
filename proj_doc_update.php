@@ -49,10 +49,6 @@
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	$c_file_id = db_prepare_int( $f_file_id );
-	$c_title = db_prepare_string( $f_title );
-	$c_description = db_prepare_string( $f_description );
-
 	$t_project_file_table = db_get_table( 'mantis_project_file_table' );
 
 	/** @todo (thraxisp) this code should probably be integrated into file_api to share methods used to store files */
@@ -70,14 +66,11 @@
 		$t_file_path = dirname( $t_disk_file_name );
 
 		# prepare variables for insertion
-		$c_file_name = db_prepare_string( $v_name );
-		$c_file_type = db_prepare_string( $v_type );
 		$t_file_size = filesize( $v_tmp_name );
 		$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
         if ( $t_file_size > $t_max_file_size ) {
             trigger_error( ERROR_FILE_TOO_BIG, ERROR );
         }
-		$c_file_size = db_prepare_int( $t_file_size );
 
 		$t_method = config_get( 'file_upload_method' );
 		switch ( $t_method ) {
@@ -112,12 +105,12 @@
 			SET title=" . db_param() . ", description=" . db_param() . ", date_added=" . db_param() . ",
 				filename=" . db_param() . ", filesize=" . db_param() . ", file_type=" .db_param() . ", content=" .db_param() . "
 				WHERE id=" . db_param();
-		$result = db_query_bound( $query, Array( $c_title, $c_description, db_now(), $c_file_name, $c_file_size, $c_file_type, $c_content, $c_file_id ) );
+		$result = db_query_bound( $query, Array( $f_title, $f_description, db_now(), $v_name, $t_file_size, $v_type, $c_content, $f_file_id ) );
 	} else {
 		$query = "UPDATE $t_project_file_table
 				SET title=" . db_param() . ", description=" . db_param() . "
 				WHERE id=" . db_param();
-		$result = db_query_bound( $query, Array( $c_title, $c_description, $c_file_id ) );
+		$result = db_query_bound( $query, Array( $f_title, $f_description, $f_file_id ) );
 	}
 
 	if ( !$result ) {
