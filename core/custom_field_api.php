@@ -1161,7 +1161,8 @@ function custom_field_distinct_values( $p_field_def, $p_project_id = ALL_PROJECT
 		$t_query = "
 			SELECT DISTINCT cfst.value
 			FROM $t_from
-			WHERE $t_where1 $t_where2";
+			WHERE $t_where1 $t_where2
+			ORDER BY cfst.value";
 
 		$t_result = db_query_bound( $t_query, $t_params );
 		$t_row_count = db_num_rows( $t_result );
