@@ -26,6 +26,7 @@
  * @file
  *
  * @author Changwoo
+ * @author 아라
  */
 
 $s_plugin_graph_title = '맨티스 그래프';
@@ -50,8 +51,8 @@ $s_plugin_MantisGraph_jpgraph_path = 'JpGraph 라이브러리 시스템 경로';
 $s_plugin_MantisGraph_jpgraph_path_default = '기본값을 사용하려면 비워 놓으십시오: {mantisroot}/library/jpgraph';
 $s_plugin_MantisGraph_jpgraph_antialias = 'JpGraph 안티알리아싱';
 $s_plugin_MantisGraph_jpgraph_antialias_info = '안티앨리어싱을 사용하면 성능이 떨어지는 대신(최대 8배까지 느림) 일부 그래프는 보기 좋아집니다.';
-$s_plugin_MantisGraph_enabled = '사용';
-$s_plugin_MantisGraph_disabled = '사용 않음';
+$s_plugin_MantisGraph_enabled = '켜기';
+$s_plugin_MantisGraph_disabled = '끄기';
 $s_plugin_MantisGraph_graph_imp_status_title = '상태 종합 그래프';
 $s_plugin_MantisGraph_graph_imp_priority_title = '우선순위 종합 그래프';
 $s_plugin_MantisGraph_graph_imp_severity_title = '심각성 종합 그래프';

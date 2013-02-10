@@ -33,6 +33,7 @@
  * @author Ciencia Al Poder
  * @author Crazymadlover
  * @author Dalton2
+ * @author Dtamajon
  * @author Fitoschido
  * @author Javier Poveda - javierpoveda@arsystel.com
  * @author Jorge Andrés Brugger - jbrugger@gmx.net
@@ -609,6 +610,7 @@ $s_protected = 'Protegida';
 $s_create_user_button = 'Crear usuario';
 $s_hide_disabled = 'Ocultar Desactivados';
 $s_filter_button = 'Filtrar';
+$s_default_filter = 'Filtro predeterminado';
 $s_create_filter_link = 'Crear Enlace Permanente';
 $s_create_short_link = 'Crear enlace corto';
 $s_filter_permalink = 'El siguiente es un enlace permanente para el filtro actualmente definido:';

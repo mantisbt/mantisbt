@@ -28,6 +28,7 @@
  * @author Christian List
  * @author Fejl
  * @author Gunner Poulsen, gp@lyngbjerggaardskolen.dk
+ * @author Peter Alberti
  * @author Qaqqalik
  * @author Søren Mortensen, sm@artmus.dk
  * @author Tjernobyl
@@ -598,6 +599,7 @@ $s_protected = 'Beskyttet';
 $s_create_user_button = 'Opret bruger';
 $s_hide_disabled = 'Skjul deaktiverede';
 $s_filter_button = 'Filtrer';
+$s_default_filter = 'Standardfilter';
 $s_create_filter_link = 'Opret permanent link';
 $s_create_short_link = 'Opret kort Link';
 $s_filter_permalink = 'Følgende er et permanent link til det konfigurerede filter:';
@@ -1110,7 +1112,7 @@ $s_delete_attachments = 'Slet vedhæftede filer';
 $s_delete_attachment_button = 'Slet';
 $s_delete_attachment_sure_msg = 'Er du sikker på at du vil slette denne vedhæftning?';
 $s_upload_issue_attachments = 'Overfør rapportens vedhæftede filer';
-$s_filters = 'filtre';
+$s_filters = 'Filtre';
 $s_save_filters = 'Gem filtre';
 $s_save_filters_as_shared = 'Gem filtrene som delte';
 $s_use_saved_filters = 'Brug gemte filtre';

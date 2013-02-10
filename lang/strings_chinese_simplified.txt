@@ -46,6 +46,7 @@
  * @author liaobin@jite.net
  * @author rerbin@lonmo.com
  * @author zoomq@itcase.com
+ * @author 乌拉跨氪
  */
 
 $s_actiongroup_menu_move = '移动';
@@ -577,7 +578,7 @@ $s_error_database_version_out_of_date_2 = '<strong>警告：</strong>数据库�
 $s_error_code_version_out_of_date = '<strong>警告：</strong>更多最新安装的代码比数据库结构。请升级代码。';
 $s_login_page_info = '欢迎访问问题跟踪系统';
 $s_login_title = '登录';
-$s_save_login = '在此浏览器上保留我的登录信息';
+$s_save_login = '在该浏览器保存我的登录状态';
 $s_secure_session = '安全会话';
 $s_secure_session_long = '仅允许通过本IP使用你的会话。';
 $s_choose_project = '选择项目';
@@ -611,6 +612,7 @@ $s_protected = '保护';
 $s_create_user_button = '创建用户';
 $s_hide_disabled = '隐藏未启用的账号';
 $s_filter_button = '筛选';
+$s_default_filter = '默认筛选器';
 $s_create_filter_link = '创建固定链接';
 $s_create_short_link = '创建短网址';
 $s_filter_permalink = '以下是当前设置的过滤器的固顶链接:';
