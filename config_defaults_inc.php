@@ -734,6 +734,12 @@
 	$g_page_title			= '';
 
 	/**
+	 * browser search title
+	 * @global string $g_search_title
+	 */
+	$g_search_title			= 'MantisBT';
+
+	/**
 	 * Check for admin directory, database upgrades, etc.
 	 * @global int $g_admin_checks
 	 */

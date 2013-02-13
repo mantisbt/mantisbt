@@ -1589,3 +1589,9 @@ $s_month_september = 'September';
 $s_month_october = 'October';
 $s_month_november = 'November';
 $s_month_december = 'December';
+
+# browser search plug-in
+$s_browser_search_id_shortname = '%1$s IssueId';
+$s_browser_search_id_description = '%1$s Issue Id';
+$s_browser_search_text_shortname = '%1$s Search';
+$s_browser_search_text_description = '%1$s Text Search';

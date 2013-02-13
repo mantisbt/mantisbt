@@ -745,6 +745,12 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
+                <term>$g_search_title</term>
+                <listitem>
+                    <para>This is the browser search plug-in title.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
                 <term>$g_favicon_image</term>
                 <listitem>
                     <para>Path to the favorites icon relative to MantisBT root folder (default 'images/favicon.ico').
