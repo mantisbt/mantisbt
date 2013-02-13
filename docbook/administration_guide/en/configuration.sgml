@@ -747,7 +747,15 @@
             <varlistentry>
                 <term>$g_favicon_image</term>
                 <listitem>
-                    <para>Path to the favorites icon relative to MantisBT root folder (default 'images/favicon.ico').</para>
+                    <para>Path to the favorites icon relative to MantisBT root folder (default 'images/favicon.ico').
+                        The icon should be in a 16px by 16px size.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_favicon_image_type</term>
+                <listitem>
+                    <para>MIME type of the favorites icon. Should be either 'image/x-icon' (the default value)
+                        or 'image/png'.</para>
                 </listitem>
             </varlistentry>
             <varlistentry>

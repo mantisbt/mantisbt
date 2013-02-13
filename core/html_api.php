@@ -187,8 +187,9 @@ function html_page_top1( $p_page_title = null ) {
 	html_rss_link();
 
 	$t_favicon_image = config_get( 'favicon_image' );
+	$t_favicon_image_type = config_get( 'favicon_image_type' );
 	if( !is_blank( $t_favicon_image ) ) {
-		echo "\t", '<link rel="shortcut icon" href="', helper_mantis_url( $t_favicon_image ), '" type="image/x-icon" />', "\n";
+		echo "\t", '<link rel="shortcut icon" href="', helper_mantis_url( $t_favicon_image ), '" type="', $t_favicon_image_type, '" />', "\n";
 	}
 
 	// Advertise the availability of the browser search plug-ins.
