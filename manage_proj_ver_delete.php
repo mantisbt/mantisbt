@@ -40,7 +40,7 @@
 
 	# Confirm with the user
 	helper_ensure_confirmed( lang_get( 'version_delete_sure' ) .
-		'<br />' . lang_get( 'version' ) . ': ' . $t_version_info->version,
+		'<br />' . lang_get( 'version' ) . ': ' . string_display_line( $t_version_info->version ),
 		lang_get( 'delete_version_button' ) );
 
 	version_remove( $f_version_id );
