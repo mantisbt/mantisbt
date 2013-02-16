@@ -34,6 +34,7 @@
  * @author Skalman
  * @author Thomas Sjogren <thomas.sjogren@multicomsecurity.se>
  * @author Thosjo
+ * @author Tor.klingberg
  * @author Warrakkk
  * @author WikiPhoenix
  */
@@ -490,7 +491,9 @@ $s_from = 'Från';
 $s_to = 'Till';
 $s_sent_you_this_reminder_about = 'har skickat denna påminnelse till dig angående';
 $s_bug_reminder = 'Skicka en påminnelse';
-$s_reminder_sent_to = 'Påminnelse skickad till:';
+$s_reminder_sent_to = 'Påminnelse skickad till';
+$s_reminder_sent_none = 'Inga påminnelser kunde skickas';
+$s_reminder_list_truncated = 'mottagarlistan trunkerad, se Ärendehistorik för fullständig lista';
 $s_bug_send_button = 'Skicka';
 $s_reminder = 'Påminnelse';
 $s_reminder_explain = 'Meddelandet kommer att skickas till mottagare som begärt återkoppling till detta ärende.';
@@ -603,6 +606,7 @@ $s_protected = 'Skyddad';
 $s_create_user_button = 'Skapa konto';
 $s_hide_disabled = 'Göm avaktiverade';
 $s_filter_button = 'Filtrera';
+$s_default_filter = 'Standardfilter';
 $s_create_filter_link = 'Skapa permalänk';
 $s_create_short_link = 'Skapa kort länk';
 $s_filter_permalink = 'Följande är en permanent länk till följande konfigurerade filter:';
@@ -1117,7 +1121,7 @@ $s_delete_attachments = 'Ta bort bilagor';
 $s_delete_attachment_button = 'Ta bort';
 $s_delete_attachment_sure_msg = 'Är du säker på att du vill ta bort denna bilaga?';
 $s_upload_issue_attachments = 'Skicka bilaga till ärende';
-$s_filters = 'filter';
+$s_filters = 'Filter';
 $s_save_filters = 'Spara filter';
 $s_save_filters_as_shared = 'Spara filter som delade';
 $s_use_saved_filters = 'Använda sparade filter';
