@@ -45,7 +45,7 @@ function mc_issue_exists( $p_username, $p_password, $p_issue_id ) {
  * @return Array that represents an IssueData structure
  */
 function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
-	
+
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
@@ -138,13 +138,13 @@ function mci_get_category( $p_category_id ) {
  * @return soapval the value to be encoded as the due date
  */
 function mci_issue_get_due_date( $p_bug ) {
-	
+
 	$t_value = null;
-	
+
 	if ( access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id )  && !date_is_null( $p_bug->due_date ) ) {
 		$t_value = $p_bug->due_date;
 	}
-	
+
 	return SoapObjectsFactory::newDateTimeVar( $t_value) ;
 }
 
@@ -159,9 +159,9 @@ function mci_issue_set_custom_fields( $p_issue_id, &$p_custom_fields, $p_log_ins
 	# set custom field values on the submitted issue
 	if( isset( $p_custom_fields ) && is_array( $p_custom_fields ) ) {
 		foreach( $p_custom_fields as $t_custom_field ) {
-			
+
 			$t_custom_field = SoapObjectsFactory::unwrapObject( $t_custom_field );
-			
+
 			# get custom field id from object ref
 			$t_custom_field_id = mci_get_custom_field_id_from_objectref( $t_custom_field['field'] );
 
@@ -358,7 +358,7 @@ function mci_issue_set_monitors( $p_issue_id , $p_requesting_user_id, $p_monitor
 	# 2. build new monitors ids
 	$t_new_monitor_ids = array();
 	foreach ( $p_monitors as $t_monitor ) {
-		$t_monitor = SoapObjectsFactory::unwrapObject( $t_monitor ); 
+		$t_monitor = SoapObjectsFactory::unwrapObject( $t_monitor );
 		$t_new_monitor_ids[] = $t_monitor['id'];
 	}
 
@@ -678,15 +678,15 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 
 	$t_set_custom_field_error = mci_issue_set_custom_fields( $t_issue_id, $p_issue['custom_fields'], false );
 	if ( $t_set_custom_field_error != null ) return $t_set_custom_field_error;
-	
+
 	if ( isset ( $p_issue['monitors'] ) )
 		mci_issue_set_monitors( $t_issue_id , $t_user_id, $p_issue['monitors'] );
 
 	if( isset( $t_notes ) && is_array( $t_notes ) ) {
 		foreach( $t_notes as $t_note ) {
-			
+
 			$t_note = SoapObjectsFactory::unwrapObject( $t_note );
-			
+
 			if( isset( $t_note['view_state'] ) ) {
 				$t_view_state = $t_note['view_state'];
 			} else {
@@ -742,7 +742,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	}
 
 	$g_project_override = $t_project_id; // ensure that helper_get_current_project() calls resolve to this project id
-	
+
 	$p_issue = SoapObjectsFactory::unwrapObject( $p_issue );
 
 	$t_project_id = mci_get_project_id( $p_issue['project'] );
@@ -863,7 +863,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 
 	$t_set_custom_field_error = mci_issue_set_custom_fields( $p_issue_id, $p_issue['custom_fields'], true );
 	if ( $t_set_custom_field_error != null ) return $t_set_custom_field_error;
-	
+
 	if ( isset ( $p_issue['monitors'] ) )
 		mci_issue_set_monitors( $p_issue_id , $t_user_id, $p_issue['monitors'] );
 
@@ -876,9 +876,9 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 		}
 
 		foreach ( $p_issue['notes'] as $t_note ) {
-			
+
 			$t_note = SoapObjectsFactory::unwrapObject( $t_note );
-			
+
 			if ( isset( $t_note['view_state'] ) ) {
 				$t_view_state = $t_note['view_state'];
 			} else {
@@ -1011,7 +1011,7 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, $p_note ) {
 	if( !bug_exists( $p_issue_id ) ) {
 		return SoapObjectsFactory::newSoapFault( 'Client', "Issue '$p_issue_id' does not exist." );
 	}
-	
+
 	$p_note = SoapObjectsFactory::unwrapObject( $p_note );
 
 	if ( !isset( $p_note['text'] ) || is_blank( $p_note['text'] ) ) {
@@ -1107,7 +1107,7 @@ function mc_issue_note_update( $p_username, $p_password, $p_note ) {
 	}
 
 	$p_note = SoapObjectsFactory::unwrapObject( $p_note );
-	
+
 	if ( !isset( $p_note['id'] ) || is_blank( $p_note['id'] ) ) {
 		return SoapObjectsFactory::newSoapFault('Client', "Issue note id must not be blank." );
 	}
@@ -1173,9 +1173,9 @@ function mc_issue_note_update( $p_username, $p_password, $p_note ) {
  */
 function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, $p_relationship ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
-	
+
 	$p_relationship = SoapObjectsFactory::unwrapObject( $p_relationship );
-	
+
 	$t_dest_issue_id = $p_relationship['target_id'];
 	$t_rel_type = SoapObjectsFactory::unwrapObject( $p_relationship['type'] );
 
@@ -1398,6 +1398,8 @@ function mci_issue_data_as_array( $p_issue_data, $p_user_id, $p_lang ) {
 
 		$t_additional_information = bug_get_text_field( $t_id, 'additional_information' );
 		$t_issue['additional_information'] = mci_null_if_empty( mci_sanitize_xml_string( $t_additional_information ) );
+
+		$t_issue['due_date'] = SoapObjectsFactory::newDateTimeVar( $p_issue_data->due_date );
 
 		$t_issue['attachments'] = mci_issue_get_attachments( $p_issue_data->id );
 		$t_issue['relationships'] = mci_issue_get_relationships( $p_issue_data->id, $p_user_id );
