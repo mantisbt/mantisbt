@@ -38,7 +38,7 @@ class SoapObjectsFactory {
 		if ( class_exists('soapval') )
 			return new soapval( 'due_date', 'xsd:dateTime', $string_value );
 		else
-			return new SoapVar( $string_value, XSD_DATETIME, 'dateTime');
+			return new SoapVar( $string_value, XSD_DATETIME, 'xsd:dateTime');
 	}
 	
 	static function newDateTimeString ( $p_timestamp ) {
