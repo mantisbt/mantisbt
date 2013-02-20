@@ -1399,6 +1399,8 @@ function mci_issue_data_as_array( $p_issue_data, $p_user_id, $p_lang ) {
 		$t_additional_information = bug_get_text_field( $t_id, 'additional_information' );
 		$t_issue['additional_information'] = mci_null_if_empty( mci_sanitize_xml_string( $t_additional_information ) );
 
+		$t_issue['due_date'] = SoapObjectsFactory::newDateTimeVar( $p_issue_data->due_date ) ;
+		
 		$t_issue['attachments'] = mci_issue_get_attachments( $p_issue_data->id );
 		$t_issue['relationships'] = mci_issue_get_relationships( $p_issue_data->id, $p_user_id );
 		$t_issue['notes'] = mci_issue_get_notes( $p_issue_data->id );
