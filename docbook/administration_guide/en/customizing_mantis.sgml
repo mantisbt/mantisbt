@@ -773,7 +773,7 @@ switch( $g_active_language ) {
 		$s_testing_bug_button = 'A tester';
 
 		$s_email_notification_title_for_status_bug_testing = 'Le bogue suivant est pr&ecirc;t &agrave; &ecirc;tre TESTE.';
-		;;
+		break;
 
 	default: # english
 		$s_status_enum_string = '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,60:testing,80:resolved,90:closed';
@@ -782,6 +782,7 @@ switch( $g_active_language ) {
 		$s_testing_bug_button = 'Ready for Testing';
 
 		$s_email_notification_title_for_status_bug_testing = 'The following issue is ready for TESTING.';
+		break;
 }
 </programlisting>
 						<warning><para>Do NOT call
