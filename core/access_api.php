@@ -422,8 +422,20 @@ function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 	# reporters can view just issues they reported
 	$t_limit_reporters = config_get( 'limit_reporters', null, $p_user_id, $t_project_id );
 	$t_report_bug_threshold = config_get( 'report_bug_threshold', null, $p_user_id, $t_project_id );
-	if ( $t_limit_reporters && !bug_is_user_reporter( $p_bug_id, $p_user_id ) && !access_has_project_level( $t_report_bug_threshold + 1, $t_project_id, $p_user_id ) ) {
-		return false;
+	if( !is_array( $t_report_bug_threshold ) ) {
+		$t_report_bug_threshold = array( $t_report_bug_threshold );
+	}
+	if( $t_limit_reporters && !bug_is_user_reporter( $p_bug_id, $p_user_id ) ) {
+		$t_has_access = false;
+		foreach( $t_report_bug_threshold as $t_threshold ) {
+			if( access_has_project_level( $t_threshold + 1, $t_project_id, $p_user_id ) ) {
+				$t_has_access = true;
+				break;
+			}
+		}
+		if( !$t_has_access ) {
+			return false;
+		}
 	}
 
 	# If the bug is private and the user is not the reporter, then
