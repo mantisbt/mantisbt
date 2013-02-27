@@ -435,7 +435,6 @@ function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 				$s_thresholds[$t_project_id] = $t_report_bug_threshold[0];
 			}
 		}
-
 		if( !access_compare_level( $s_thresholds[$t_project_id], $t_access_level ) ) {
 			return false;
 		}
@@ -449,7 +448,7 @@ function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 			&& access_compare_level( $t_access_level, $p_access_level );
 	}
 
-	return access_compare_level( $p_access_level, $t_access_level );
+	return access_compare_level( $t_access_level, $p_access_level );
 }
 
 /**
