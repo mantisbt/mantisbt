@@ -819,8 +819,31 @@ $g_status_enum_workflow[CLOSED]       ='20:feedback,50:assigned';
 </programlisting>
 					</para>
 				</listitem>
+
+				<listitem>
+					<para>Check and update existing workflow configurations</para>
+					<para>If you do not perform this step and have existing
+						workflow definitions, it will not be possible to
+						transition to and from your new status.
+					</para>
+					<para>Go to the Workflow Transitions page
+						(manage_config_workflow_page.php), and update the
+						workflow as appropriate. Make sure that you have picked
+						the correct Project in the selection list).
+					</para>
+					<para>Hint: to identify whether you have any workflows that
+						should be updated, open the Manage Configuration Report
+						page (adm_config_report.php) and filter on 'All Users',
+						[any] project and config option = 'status_enum_workflow'.
+						All of the listed projects should be reviewed to
+						eventually include transitions to and from the newly
+						added states.
+					</para>
+				</listitem>
+
 			</orderedlist>
 		</para>
+
 	</section>
 
 	<section id="admin.customize.customfuncs">
