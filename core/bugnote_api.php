@@ -127,7 +127,6 @@ function bugnote_is_user_reporter( $p_bugnote_id, $p_user_id ) {
 function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_private = false, $p_type = 0, $p_attr = '', $p_user_id = null, $p_send_email = TRUE, $p_log_history = TRUE) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
 	$c_time_tracking = helper_duration_to_minutes( $p_time_tracking );
-	$c_private = db_prepare_bool( $p_private );
 	$c_type = db_prepare_int( $p_type );
 
 	$t_bugnote_text_table = db_get_table( 'mantis_bugnote_text_table' );
