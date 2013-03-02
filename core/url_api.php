@@ -26,27 +26,38 @@
 
 /**
  * Retrieve the contents of a remote URL.
- * First tries using built-in PHP modules, then
- * attempts system calls as last resort.
+ * First tries using built-in PHP modules (OpenSSL and cURL), then attempts 
+ * system call as last resort.
  * @param string URL
- * @return string URL contents
+ * @return null|string URL contents (NULL in case of errors)
  */
 function url_get( $p_url ) {
 
 	# Generic PHP call
 	if( ini_get_bool( 'allow_url_fopen' ) ) {
-		return @file_get_contents( $p_url );
+		$t_data = @file_get_contents( $p_url );
+
+		if( $t_data !== false ) {
+			return $t_data;
+		}
+		# If the call failed (e.g. due to lack of https wrapper)
+		# we fall through to attempt retrieving URL with another method
 	}
 
 	# Use the PHP cURL extension
 	if( function_exists( 'curl_init' ) ) {
 		$t_curl = curl_init( $p_url );
 		curl_setopt( $t_curl, CURLOPT_RETURNTRANSFER, true );
+		# @todo It may be useful to provide users a way to define additional 
+		# custom options for curl module, e.g. proxy settings and authentication.
+		# This could be stored in a global config option.
 
 		$t_data = curl_exec( $t_curl );
 		curl_close( $t_curl );
 
-		return $t_data;
+		if( $t_data !== false ) {
+			return $t_data;
+		}
 	}
 
 	# Last resort system call
