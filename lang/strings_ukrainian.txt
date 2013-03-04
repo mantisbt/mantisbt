@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Base
  * @author Igorko
  * @author Olvin
  * @author Prima klasy4na
@@ -832,7 +833,7 @@ $s_email_notification = 'Повідомлення електронною пош�
 $s_email_on_deleted = 'Email on Deleted';
 $s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
 $s_email_on_relationship_changed = 'Email on Relationship changed';
-$s_loading = 'Завантаження...';
+$s_loading = 'Завантаження…';
 $s_from_date = 'Від кого';
 $s_to_date = 'Кому';
 $s_on_date = 'Коли';
