@@ -405,6 +405,11 @@
 
 	$t_related_custom_field_ids = custom_field_get_linked_ids( $tpl_bug->project_id );
 	foreach( $t_related_custom_field_ids as $t_id ) {
+		# Don't display the field if user does not have read access to it
+		if ( !custom_field_has_read_access_by_project_id( $t_id, $tpl_bug->project_id ) ) {
+			continue;
+		}
+
 		$t_def = custom_field_get_definition( $t_id );
 
 		echo '<tr class="print">';
@@ -509,7 +514,7 @@
 		echo '</tr>';
 
 		$t_history = history_get_events_array( $f_bug_id );
-		
+
 		foreach ( $t_history as $t_item ) {
 			echo '<tr class="print">';
 			echo '<td class="print">', $t_item['date'], '</td>';
@@ -521,7 +526,7 @@
 			echo '</tr>';
 		}
 	}
-	
+
 	echo '</table>';
 
 	include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'print_bugnote_inc.php' ) ;
