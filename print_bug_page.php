@@ -450,6 +450,11 @@ if ( $tpl_show_target_version || $tpl_show_fixed_in_version ) {
 
 $t_related_custom_field_ids = custom_field_get_linked_ids( $tpl_bug->project_id );
 foreach( $t_related_custom_field_ids as $t_id ) {
+	# Don't display the field if user does not have read access to it
+	if ( !custom_field_has_read_access_by_project_id( $t_id, $tpl_bug->project_id ) ) {
+		continue;
+	}
+
 	$t_def = custom_field_get_definition( $t_id );
 
 	echo '<tr class="print">';
