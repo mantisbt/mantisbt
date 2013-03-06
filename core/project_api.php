@@ -806,21 +806,3 @@ function project_format_id( $p_project_id ) {
 	$t_padding = config_get( 'display_project_padding' );
 	return( utf8_str_pad( $p_project_id, $t_padding, '0', STR_PAD_LEFT ) );
 }
-
-
-# Return true if the file name identifier is unique, false otherwise
-function project_file_is_name_unique( $p_name ) {
-	$t_file_table = db_get_table( 'mantis_project_file_table' );
-
-	$query = "SELECT COUNT(*)
-				  FROM $t_file_table
-				  WHERE filename=" . db_param();
-	$result = db_query_bound( $query, Array( $p_name ) );
-	$t_count = db_result( $result );
-
-	if( $t_count > 0 ) {
-		return false;
-	} else {
-		return true;
-	}
-}
