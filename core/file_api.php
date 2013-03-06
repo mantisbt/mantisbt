@@ -562,15 +562,22 @@ function file_clean_name( $p_filename ) {
 	return preg_replace( '/[\/*?"<>|\\ :&]/', "_", $p_filename );
 }
 
-# Generate a string to use as the identifier for the file
-# It is not guaranteed to be unique and should be checked
-# The string returned should be 32 characters in length
+/**
+ * Generate a string to use as the identifier for the file
+ * It is not guaranteed to be unique and should be checked
+ * @param string $p_seed
+ * @return string MD5 hash to use as filename
+ */
 function file_generate_name( $p_seed ) {
 	return md5( $p_seed . time() );
 }
 
-# Generate a UNIQUE string to use as the identifier for the file
-# The string returned should be 64 characters in length
+/**
+ * Generate a UNIQUE string to use as the identifier for the file
+ * @param string $p_seed Seed to generate the filename
+ * @param string $p_filepath File path
+ * @return string unique file name
+ */
 function file_generate_unique_name( $p_seed, $p_filepath ) {
 	do {
 		$t_string = file_generate_name( $p_seed );
