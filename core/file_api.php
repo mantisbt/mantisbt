@@ -599,21 +599,30 @@ function diskfile_is_name_unique( $p_name, $p_filepath ) {
 	}
 }
 
-# Return true if the file name identifier is unique, false otherwise
-function file_is_name_unique( $p_name, $p_bug_id ) {
-	$t_file_table = db_get_table( 'bug_file' );
+/**
+ * Validates that the given file name is unique in the given context (we don't
+ * allow multiple attachments with the same name for a given bug or project)
+ * @param string $p_name File name
+ * @param int $p_bug_id Bug ID (not used for project files)
+ * @param string $p_table optional file table to check: 'project' or 'bug' (default)
+ * @return bool true if unique
+ */
+function file_is_name_unique( $p_name, $p_bug_id, $p_table  = 'bug' ) {
+	$t_file_table = db_get_table( '${p_table}_file' );
 
-	$query = "SELECT COUNT(*)
-				  FROM $t_file_table
-				  WHERE filename=" . db_param() . " AND bug_id=" . db_param();
-	$result = db_query_bound( $query, Array( $p_name, $p_bug_id ) );
-	$t_count = db_result( $result );
-
-	if( $t_count > 0 ) {
-		return false;
-	} else {
-		return true;
+	$t_query = "SELECT COUNT(*)
+		FROM $t_file_table
+		WHERE filename=" . db_param();
+	$t_param = array( $p_name );
+	if( $p_table == 'bug' ) {
+		$t_query .= " AND bug_id=" . db_param();
+		$t_param[] = $p_bug_id;
 	}
+
+	$t_result = db_query_bound( $t_query, $t_param );
+	$t_count = db_result( $t_result );
+
+	return ( $t_count == 0 );
 }
 
 /**
