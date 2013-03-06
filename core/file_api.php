@@ -565,23 +565,33 @@ function file_generate_unique_name( $p_seed, $p_filepath ) {
 	return $t_string;
 }
 
-# Return true if the diskfile name identifier is unique, false otherwise
+/**
+ * Validates that the given disk file name identifier is unique, checking both
+ * in the DB tables (bug and project) and on disk.
+ * This ensures that in case a file has been deleted from disk but its record
+ * remains in the DB, we never get in a situation where the DB points to a file
+ * which is not the originally uploaded one.
+ * @param string $p_name File name
+ * @param string $p_filepath File path
+ * @return bool true if unique
+ */
 function diskfile_is_name_unique( $p_name, $p_filepath ) {
-	$t_file_table = db_get_table( 'mantis_bug_file_table' );
+	$t_bug_file_table = db_get_table( 'mantis_bug_file_table' );
+	$t_project_file_table = db_get_table( 'mantis_project_file_table' );
 
 	$c_name = $p_filepath . $p_name;
 
-	$query = "SELECT COUNT(*)
-				  FROM $t_file_table
-				  WHERE diskfile=" . db_param();
-	$result = db_query_bound( $query, Array( $c_name ) );
-	$t_count = db_result( $result );
+	$t_query = "SELECT count(*)
+		FROM (
+			SELECT diskfile FROM $t_bug_file_table
+			UNION
+			SELECT diskfile FROM $t_project_file_table
+			) f
+		WHERE diskfile=" . db_param();
+	$t_result = db_query_bound( $t_query, array( $c_name ) );
+	$t_count = db_result( $t_result );
 
-	if( $t_count > 0 ) {
-		return false;
-	} else {
-		return true;
-	}
+	return ( $t_count == 0 ) && !file_exists( $c_name );
 }
 
 /**
