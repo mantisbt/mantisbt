@@ -957,6 +957,8 @@ function file_get_content_type_override( $p_filename ) {
  * @param int $p_bug_id ID of bug containing attachments to be moved
  * @param int $p_project_id_to destination project ID for the bug
  * @return null
+ *
+ * @todo: this function can't cope with source or target storing attachments in DB
  */
 function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 	$t_project_id_from = bug_get_field( $p_bug_id, 'project_id' );
