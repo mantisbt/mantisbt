@@ -63,37 +63,41 @@ html_page_top( lang_get( 'configuration_report' ) );
 print_manage_menu( 'adm_config_report.php' );
 print_manage_config_menu( 'adm_config_report.php' );
 
+$t_config_types = array(
+	CONFIG_TYPE_DEFAULT => 'default',
+	CONFIG_TYPE_INT     => 'integer',
+	CONFIG_TYPE_FLOAT   => 'float',
+	CONFIG_TYPE_COMPLEX => 'complex',
+	CONFIG_TYPE_STRING  => 'string',
+);
+
 function get_config_type( $p_type ) {
-	switch( $p_type ) {
-		case CONFIG_TYPE_INT:
-			return "integer";
-		case CONFIG_TYPE_FLOAT:
-			return "float";
-		case CONFIG_TYPE_COMPLEX:
-			return "complex";
-		case CONFIG_TYPE_STRING:
-		default:
-			return "string";
+	global $t_config_types;
+	if( array_key_exists( $p_type, $t_config_types ) ) {
+		return $t_config_types[$p_type];
+	} else {
+		return $t_config_types[CONFIG_TYPE_DEFAULT];
 	}
 }
 
-function print_config_value_as_string( $p_type, $p_value ) {
+function print_config_value_as_string( $p_type, $p_value, $p_for_display = true ) {
 	$t_corrupted = false;
 
 	switch( $p_type ) {
+		case CONFIG_TYPE_DEFAULT:
+			return;
 		case CONFIG_TYPE_FLOAT:
-			$t_value = (float)$p_value;
-			echo $t_value;
+			echo (float)$p_value;
 			return;
 		case CONFIG_TYPE_INT:
-			$t_value = (integer)$p_value;
-			echo $t_value;
+			echo (integer)$p_value;
 			return;
 		case CONFIG_TYPE_STRING:
-			$t_value = config_eval( $p_value );
-	echo '<p id="adm-config-value">';
-			echo string_nl2br( string_html_specialchars( "'$t_value'" ) );
-	echo '</p>';
+			$t_value = string_nl2br( string_html_specialchars( config_eval( $p_value ) ) );
+			if( $p_for_display ) {
+				$t_value = '<p id="adm-config-value">' . "'$t_value'" . '</p>';
+			}
+			echo $t_value;
 			return;
 		case CONFIG_TYPE_COMPLEX:
 			$t_value = @unserialize( $p_value );
@@ -106,18 +110,17 @@ function print_config_value_as_string( $p_type, $p_value ) {
 			break;
 	}
 
-	echo '<pre id="adm-config-value">';
-
 	if ( $t_corrupted ) {
+		$t_output = $p_for_display ? lang_get( 'configuration_corrupted' ) : '';
 	} else {
-		if ( function_exists( 'var_export' ) ) {
-			var_export( $t_value );
-		} else {
-			print_r( $t_value );
-		}
+		$t_output = var_export( $t_value, true );
 	}
 
-	echo '</pre>';
+	if( $p_for_display ) {
+		echo '<pre id="adm-config-value">' . string_attribute( $t_output ) . '</pre>';
+	} else {
+		echo $t_output;
+	}
 }
 
 function print_option_list_from_array( $p_array, $p_filter_value ) {
@@ -174,6 +177,13 @@ if( $t_filter_save ) {
 		}
 	}
 }
+
+# Get config edit values
+$t_edit_user_id         = gpc_get_int( 'user_id', $t_filter_user_value == META_FILTER_NONE ? ALL_USERS : $t_filter_user_value );
+$t_edit_project_id      = gpc_get_int( 'project_id', $t_filter_project_value == META_FILTER_NONE ? ALL_PROJECTS : $t_filter_project_value );
+$t_edit_option          = gpc_get_string( 'config_option', $t_filter_config_value == META_FILTER_NONE ? '' : $t_filter_config_value );
+$t_edit_type            = gpc_get_string( 'type', CONFIG_TYPE_DEFAULT );
+$t_edit_value           = gpc_get_string( 'value', '' );
 
 # Apply filters
 $t_config_table  = db_get_table( 'config' );
@@ -344,24 +354,56 @@ $result = db_query_bound( $query );
 			<?php if ( $t_read_write_access ): ?>
 			<td >
 				<?php
-					if( config_can_delete( $v_config_id ) ) {
-						print_button( "adm_config_delete.php?user_id=$v_user_id&project_id=$v_project_id&config_option=$v_config_id", lang_get( 'delete_link' ) );
+					if (
+					   config_can_delete( $v_config_id )
+					&& access_has_global_level( config_get( 'set_configuration_threshold' ) )
+					) {
+						# Update button (will populate edit form at page bottom)
+						print_button(
+							'#config_set_form',
+							lang_get( 'edit_link' ),
+							array(
+								'filter_user_id'    => $t_filter_user_value,
+								'filter_project_id' => $t_filter_project_value,
+								'filter_config_id'  => $t_filter_config_value,
+								'user_id'           => $v_user_id,
+								'project_id'        => $v_project_id,
+								'config_option'     => $v_config_id,
+								'type'              => $v_type,
+								'value'             => $v_value,
+							)
+						);
+
+						# Delete button
+						print_button(
+							'adm_config_delete.php',
+							lang_get( 'delete_link' ),
+							array(
+								'user_id'       => $v_user_id,
+								'project_id'    => $v_project_id,
+								'config_option' => $v_config_id,
+							)
+						);
 					} else {
 						echo '&#160;';
 					}
 				?>
 			</td>
 			<?php endif; ?>
-		</tr><?php
-		} # end for loop ?>
+		</tr>
+<?php
+		} # end for loop
+?>
 	</table>
 </div>
 </div>
+
 <?php
 # Only display the edit form if user is authorized to change configuration
 if ( $t_read_write_access ) { ?>
 <div id="config-edit-div" class="form-container">
-	<form method="post" action="adm_config_set.php">
+	<!-- Config Set Form -->
+	<form id="config_set_form" method="post" action="adm_config_set.php">
 		<fieldset>
 			<legend><span><?php echo lang_get( 'set_configuration_option' ) ?></span></legend>
 			<?php echo form_security_field( 'adm_config_set' ) ?>
@@ -371,7 +413,10 @@ if ( $t_read_write_access ) { ?>
 				<label for="config-user-id"><span><?php echo lang_get( 'username' ) ?></span></label>
 				<span class="select">
 					<select id="config-user-id" name="user_id">
-						<option value="0" selected="selected"><?php echo lang_get( 'all_users' ); ?></option>
+						<option value="<?php echo ALL_USERS; ?>"
+							<?php check_selected( $t_edit_user_id, ALL_USERS ) ?>>
+							<?php echo lang_get( 'all_users' ); ?>
+						</option>
 						<?php print_user_option_list( 0 ) ?>
 					</select>
 				</span>
@@ -383,7 +428,10 @@ if ( $t_read_write_access ) { ?>
 				<label for="config-project-id"><span><?php echo lang_get( 'project_name' ) ?></span></label>
 				<span class="select">
 					<select id="config-project-id" name="project_id">
-						<option value="0" selected="selected"><?php echo lang_get( 'all_projects' ); ?></option>
+						<option value="<?php echo ALL_PROJECTS; ?>"
+							<?php check_selected( $t_edit_project_id, ALL_PROJECTS ); ?>>
+							<?php echo lang_get( 'all_projects' ); ?>
+						</option>
 						<?php print_project_option_list( ALL_PROJECTS, false ) ?>
 					</select>
 				</span>
@@ -393,7 +441,11 @@ if ( $t_read_write_access ) { ?>
 			<!-- Config option name -->
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="config-option"><span><?php echo lang_get( 'configuration_option' ) ?></span></label>
-				<span class="input"><input type="text" id="config-option" name="config_option" value="" size="64" maxlength="64" /></span>
+				<span class="input">
+					<input type="text" name="config_option"
+						value="<?php echo $t_edit_option; ?>"
+						size="64" maxlength="64" />
+				</span>
 				<span class="label-style"></span>
 			</div>
 
@@ -402,10 +454,13 @@ if ( $t_read_write_access ) { ?>
 				<label for="config-type"><span><?php echo lang_get( 'configuration_option_type' ) ?></span></label>
 				<span class="select">
 					<select id="config-type" name="type">
-						<option value="default" selected="selected">default</option>
-						<option value="string">string</option>
-						<option value="integer">integer</option>
-						<option value="complex">complex</option>
+						<?php
+							foreach( $t_config_types as $t_key => $t_type ) {
+								echo '<option value="' . $t_key . '" ';
+								check_selected( $t_key, $t_edit_type );
+								echo ">$t_type</option>";
+							}
+						?>
 					</select>
 				</span>
 				<span class="label-style"></span>
@@ -415,7 +470,9 @@ if ( $t_read_write_access ) { ?>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="config-value"><span><?php echo lang_get( 'configuration_option_value' ) ?></span></label>
 				<span class="textarea">
-					<textarea id="config-value" name="value" cols="80" rows="10"></textarea>
+					<textarea name="value" cols="80" rows="10"><?php
+						echo print_config_value_as_string( $t_edit_type, $t_edit_value, false );
+					?></textarea>
 				</span>
 				<span class="label-style"></span>
 			</div>

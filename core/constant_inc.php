@@ -475,6 +475,7 @@ define( 'TOKEN_EXPIRY_AUTHENTICATED', 5 * 60 );
 define( 'TOKEN_EXPIRY_COLLAPSE', 365 * 24 * 60 * 60 );
 
 # config types
+define( 'CONFIG_TYPE_DEFAULT', 0 );
 define( 'CONFIG_TYPE_INT', 1 );
 define( 'CONFIG_TYPE_STRING', 2 );
 define( 'CONFIG_TYPE_COMPLEX', 3 );
