@@ -652,6 +652,30 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 	return array_values( $t_users );
 }
 
+/**
+ * Returns the upload path for the specified project, empty string if
+ * file_upload_method is DATABASE
+ * @param int $p_project_id
+ * @return string upload path
+ */
+function project_get_upload_path( $p_project_id ) {
+
+	if( DATABASE == config_get( 'file_upload_method', null, ALL_USERS, $p_project_id ) ) {
+		return '';
+	}
+
+	if( $p_project_id == ALL_PROJECTS ) {
+		$t_path = config_get( 'absolute_path_default_upload_folder', '', ALL_USERS, ALL_PROJECTS );
+	} else {
+		$t_path = project_get_field( $p_project_id, 'file_path' );
+		if( is_blank( $t_path ) ) {
+			$t_path = config_get( 'absolute_path_default_upload_folder', '', ALL_USERS, $p_project_id );
+		}
+	}
+
+	return $t_path;
+}
+
 # ===================================
 # Data Modification
 # ===================================
