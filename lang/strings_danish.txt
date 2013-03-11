@@ -28,6 +28,7 @@
  * @author Christian List
  * @author Fejl
  * @author Gunner Poulsen, gp@lyngbjerggaardskolen.dk
+ * @author Kaare
  * @author Peter Alberti
  * @author Qaqqalik
  * @author Søren Mortensen, sm@artmus.dk
@@ -486,7 +487,7 @@ $s_from = 'Fra';
 $s_to = 'Til';
 $s_sent_you_this_reminder_about = 'sendte dig denne påmindelse om';
 $s_bug_reminder = 'Afsend en påmindelse';
-$s_reminder_sent_to = 'Påmindelse afsendt til';
+$s_reminder_sent_to = 'Påmindelse sendt til';
 $s_reminder_sent_none = 'Ingen påmindelser kunne sendes';
 $s_bug_send_button = 'Send';
 $s_reminder = 'Påmindelse';
