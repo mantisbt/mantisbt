@@ -464,13 +464,7 @@ if ( $t_read_write_access ) { ?>
 				<label for="config-type"><span><?php echo lang_get( 'configuration_option_type' ) ?></span></label>
 				<span class="select">
 					<select id="config-type" name="type">
-						<?php
-							foreach( $t_config_types as $t_key => $t_type ) {
-								echo '<option value="' . $t_key . '" ';
-								check_selected( $t_key, $t_edit_type );
-								echo ">$t_type</option>";
-							}
-						?>
+						<?php print_option_list_from_array( $t_config_types, $t_edit_type ); ?>
 					</select>
 				</span>
 				<span class="label-style"></span>
