@@ -1064,6 +1064,8 @@ function email_smtp_close() {
  * @return null
  */
 function email_build_subject( $p_bug_id ) {
+	$t_bug_id = $p_bug_id;
+
 	# grab the project name
 	$p_project_name = project_get_field( bug_get_field( $p_bug_id, 'project_id' ), 'name' );
 
@@ -1071,9 +1073,14 @@ function email_build_subject( $p_bug_id ) {
 	$p_subject = bug_get_field( $p_bug_id, 'summary' );
 
 	# padd the bug id with zeros
-	$p_bug_id = bug_format_id( $p_bug_id );
+	$p_bug_id = bug_format_id( $t_bug_id );
 
-	return '[' . $p_project_name . ' ' . $p_bug_id . ']: ' . $p_subject;
+	$t_email_subject = '[' . $p_project_name . ' ' . $p_bug_id . ']: ' . $p_subject;
+
+	#update subject as defined by plugins
+	$t_email_subject = event_signal('EVENT_DISPLAY_EMAIL_BUILD_SUBJECT', $t_email_subject, array('bug_id' => $t_bug_id));
+
+	return $t_email_subject;
 }
 
 /**
