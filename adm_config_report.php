@@ -174,7 +174,7 @@ if( $t_filter_save ) {
 		$t_filter_project_value = $t_cookie_contents[1];
 		$t_filter_config_value  = $t_cookie_contents[2];
 
-		if( $t_filter_project_value != META_FILTER_NONE && project_exists( $t_filter_project_value ) ) {
+		if( $t_filter_project_value != META_FILTER_NONE && !project_exists( $t_filter_project_value ) ) {
 			$t_filter_project_value = ALL_PROJECTS;
 		}
 	}
