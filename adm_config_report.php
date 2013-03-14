@@ -73,6 +73,7 @@ $t_config_types = array(
 
 function get_config_type( $p_type ) {
 	global $t_config_types;
+
 	if( array_key_exists( $p_type, $t_config_types ) ) {
 		return $t_config_types[$p_type];
 	} else {
@@ -101,7 +102,7 @@ function print_config_value_as_string( $p_type, $p_value, $p_for_display = true 
 			return;
 		case CONFIG_TYPE_COMPLEX:
 			$t_value = @unserialize( $p_value );
-			if ( $t_value === false ) {
+			if( $t_value === false ) {
 				$t_corrupted = true;
 			}
 			break;
@@ -110,7 +111,7 @@ function print_config_value_as_string( $p_type, $p_value, $p_for_display = true 
 			break;
 	}
 
-	if ( $t_corrupted ) {
+	if( $t_corrupted ) {
 		$t_output = $p_for_display ? lang_get( 'configuration_corrupted' ) : '';
 	} else {
 		$t_output = var_export( $t_value, true );
@@ -130,6 +131,7 @@ function print_option_list_from_array( $p_array, $p_filter_value ) {
 		echo '>' . string_attribute( $t_value ) . "</option>\n";
 	}
 }
+
 
 # Get filter values
 $t_filter_save          = gpc_get_bool( 'save' );
@@ -200,7 +202,7 @@ if( $t_filter_user_value != META_FILTER_NONE && $t_filter_user_value != ALL_USER
 } else {
 	$t_users_list = array();
 }
-while ( $row = db_fetch_array( $t_result ) ) {
+while( $row = db_fetch_array( $t_result ) ) {
 	$t_user_id = $row['user_id'];
 	$t_users_list[$t_user_id] = user_get_name( $t_user_id );
 }
@@ -221,7 +223,7 @@ $query = "SELECT DISTINCT project_id, pt.name as project_name
 $t_result = db_query_bound( $query );
 $t_projects_list[META_FILTER_NONE] = '[' . lang_get( 'any' ) . ']';
 $t_projects_list[ALL_PROJECTS] = lang_get( 'all_projects' );
-while ( $row = db_fetch_array( $t_result ) ) {
+while( $row = db_fetch_array( $t_result ) ) {
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 	$t_projects_list[$v_project_id] = $v_project_name;
 }
@@ -236,7 +238,7 @@ if( $t_filter_config_value != META_FILTER_NONE ) {
 	# Make sure the filter value exists in the list
 	$t_configs_list[$t_filter_config_value] = $t_filter_config_value;
 }
-while ( $row = db_fetch_array( $t_result ) ) {
+while( $row = db_fetch_array( $t_result ) ) {
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 	$t_configs_list[$v_config_id] = $v_config_id;
 }
@@ -266,7 +268,7 @@ $result = db_query_bound( $query );
 <!-- FILTER FORM -->
 <div id="config-filter-div" class="table-container">
 
-	<form name="filter_form" method="post">
+<form id="filter_form" method="post">
 	<?php # CSRF protection not required here - form does not result in modifications ?>
 		<input type="hidden" name="save" value="1" />
 
@@ -324,6 +326,7 @@ $result = db_query_bound( $query );
 	</form>
 </div>
 
+<!-- CONFIGURATIONS LIST -->
 <div>
 <div id="adm-config-div" class="table-container" style="display: table">
 	<h2><?php echo lang_get( 'database_configuration' ) ?></h2>
@@ -336,17 +339,18 @@ $result = db_query_bound( $query );
 			<th><?php echo lang_get( 'configuration_option_type' ) ?></th>
 			<th><?php echo lang_get( 'configuration_option_value' ) ?></th>
 			<th><?php echo lang_get( 'access_level' ) ?></th>
-			<?php if ( $t_read_write_access ): ?>
+			<?php if( $t_read_write_access ) { ?>
 			<th><?php echo lang_get( 'actions' ) ?></th>
-			<?php endif; ?>
+			<?php } ?>
 		</tr>
-<?php
-	# Pre-generate a form security token to avoid performance issues when the
-	# db contains a large number of configurations
-	$t_form_security_token = form_security_token( 'adm_config_delete' );
 
-		while ( $row = db_fetch_array( $result ) ) {
-			extract( $row, EXTR_PREFIX_ALL, 'v' );
+<?php
+# Pre-generate a form security token to avoid performance issues when the
+# db contains a large number of configurations
+$t_form_security_token = form_security_token( 'adm_config_delete' );
+
+while( $row = db_fetch_array( $result ) ) {
+	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 ?>
 <!-- Repeated Info Rows -->
@@ -359,47 +363,48 @@ $result = db_query_bound( $query );
 			<td ><?php echo string_display_line( get_config_type( $v_type ) ) ?></td>
 			<td style="overflow-x:auto;"><?php print_config_value_as_string( $v_type, $v_value ) ?></td>
 			<td ><?php echo get_enum_element( 'access_levels', $v_access_reqd ) ?></td>
-			<?php if ( $t_read_write_access ): ?>
-			<td >
-				<?php
-					if (
-					   config_can_delete( $v_config_id )
-					&& access_has_global_level( config_get( 'set_configuration_threshold' ) )
-					) {
-						# Update button (will populate edit form at page bottom)
-						print_button(
-							'#config_set_form',
-							lang_get( 'edit_link' ),
-							array(
-								'user_id'           => $v_user_id,
-								'project_id'        => $v_project_id,
-								'config_option'     => $v_config_id,
-								'type'              => $v_type,
-								'value'             => $v_value,
-							),
-							OFF
-						);
+<?php
+	if( $t_read_write_access ) {
+?>
+			<td class="center">
+<?php
+		if( config_can_delete( $v_config_id ) ) {
+			# Update button (will populate edit form at page bottom)
+			print_button(
+				'#config_set_form',
+				lang_get( 'edit_link' ),
+				array(
+					'user_id'       => $v_user_id,
+					'project_id'    => $v_project_id,
+					'config_option' => $v_config_id,
+					'type'          => $v_type,
+					'value'         => $v_value,
+				),
+				OFF
+			);
 
-						# Delete button
-						print_button(
-							'adm_config_delete.php',
-							lang_get( 'delete_link' ),
-							array(
-								'user_id'       => $v_user_id,
-								'project_id'    => $v_project_id,
-								'config_option' => $v_config_id,
-							),
-							$t_form_security_token
-						);
-					} else {
-						echo '&#160;';
-					}
-				?>
+			# Delete button
+			print_button(
+				'adm_config_delete.php',
+				lang_get( 'delete_link' ),
+				array(
+					'user_id'       => $v_user_id,
+					'project_id'    => $v_project_id,
+					'config_option' => $v_config_id,
+				),
+				$t_form_security_token
+			);
+		} else {
+			echo '&#160;';
+		}
+?>
 			</td>
-			<?php endif; ?>
+<?php
+	} # end if config_can_delete
+?>
 		</tr>
 <?php
-		} # end for loop
+} # end while loop
 ?>
 	</table>
 </div>
@@ -407,28 +412,35 @@ $result = db_query_bound( $query );
 
 <?php
 # Only display the edit form if user is authorized to change configuration
-if ( $t_read_write_access ) { ?>
-<div id="config-edit-div" class="form-container">
-	<!-- Config Set Form -->
-	<form id="config_set_form" method="post" action="adm_config_set.php">
-		<fieldset>
-			<legend><span><?php echo lang_get( 'set_configuration_option' ) ?></span></legend>
-			<?php echo form_security_field( 'adm_config_set' ) ?>
+if( $t_read_write_access ) {
+?>
 
-			<!-- Username -->
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
-				<label for="config-user-id"><span><?php echo lang_get( 'username' ) ?></span></label>
-				<span class="select">
-					<select id="config-user-id" name="user_id">
-						<option value="<?php echo ALL_USERS; ?>"
-							<?php check_selected( $t_edit_user_id, ALL_USERS ) ?>>
-							<?php echo lang_get( 'all_users' ); ?>
-						</option>
-						<?php print_user_option_list( 0 ) ?>
-					</select>
-				</span>
-				<span class="label-style"></span>
-			</div>
+<!-- Config Set Form -->
+
+<div id="config-edit-div" class="form-container">
+<form id="config_set_form" method="post" action="adm_config_set.php">
+	<fieldset>
+		<?php echo form_security_field( 'adm_config_set' ) ?>
+
+		<!-- Title -->
+		<legend><span>
+			<?php echo lang_get( 'set_configuration_option' ) ?>
+		</span></legend>
+
+		<!-- Username -->
+		<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<label for="config-user-id"><span><?php echo lang_get( 'username' ) ?></span></label>
+			<span class="select">
+				<select id="config-user-id" name="user_id">
+					<option value="<?php echo ALL_USERS; ?>"
+						<?php check_selected( $t_edit_user_id, ALL_USERS ) ?>>
+						<?php echo lang_get( 'all_users' ); ?>
+					</option>
+					<?php print_user_option_list( $t_edit_user_id ) ?>
+				</select>
+			</span>
+			<span class="label-style"></span>
+		</div>
 
 			<!-- Project -->
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
@@ -439,7 +451,7 @@ if ( $t_read_write_access ) { ?>
 							<?php check_selected( $t_edit_project_id, ALL_PROJECTS ); ?>>
 							<?php echo lang_get( 'all_projects' ); ?>
 						</option>
-						<?php print_project_option_list( ALL_PROJECTS, false ) ?>
+						<?php print_project_option_list( $t_edit_project_id, false ) ?>
 					</select>
 				</span>
 				<span class="label-style"></span>
@@ -482,7 +494,9 @@ if ( $t_read_write_access ) { ?>
 			<span class="submit-button"><input type="submit" name="config_set" class="button" value="<?php echo lang_get( 'set_configuration_option' ) ?>" /></span>
 		</fieldset>
 	</form>
-</div><?php
+</div>
+
+<?php
 } # end user can change config
 
 html_page_bottom();
