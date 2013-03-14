@@ -371,9 +371,6 @@ $result = db_query_bound( $query );
 							'#config_set_form',
 							lang_get( 'edit_link' ),
 							array(
-								'filter_user_id'    => $t_filter_user_value,
-								'filter_project_id' => $t_filter_project_value,
-								'filter_config_id'  => $t_filter_config_value,
 								'user_id'           => $v_user_id,
 								'project_id'        => $v_project_id,
 								'config_option'     => $v_config_id,
