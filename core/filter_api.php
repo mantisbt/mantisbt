@@ -1092,7 +1092,6 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 	$t_project_where_clauses =  array(
 		"$t_project_table.enabled = " . db_param(),
-		"$t_project_table.id = $t_bug_table.project_id",
 	);
 	$t_where_params = array(
 		1,
@@ -1101,8 +1100,13 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		"$t_bug_table.*",
 	);
 
-	$t_join_clauses = array();
-	$t_from_clauses = array();
+	$t_from_clauses = array(
+		$t_bug_table,
+	);
+
+	$t_join_clauses = array(
+		"JOIN $t_project_table ON $t_project_table.id = $t_bug_table.project_id",
+	);
 
 	// normalize the project filtering into an array $t_project_ids
 	if( 'simple' == $t_view_type ) {
@@ -1997,7 +2001,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		if ( !$t_first ) {
 			$t_join_clauses[] = "JOIN $t_bug_text_table ON $t_bug_table.bug_text_id = $t_bug_text_table.id";
 			$t_join_clauses[] = "LEFT JOIN $t_bugnote_table ON $t_bug_table.id = $t_bugnote_table.bug_id";
-			$t_join_clauses[] = "LEFT JOIN $t_bugnote_text_table ON $t_bugnote_table.bugnote_text_id = $t_bugnote_text_table.id";
+			$t_join_clauses[] = "JOIN $t_bugnote_text_table ON $t_bugnote_table.bugnote_text_id = $t_bugnote_text_table.id";
 			$t_where_clauses[] = $t_textsearch_where_clause;
 		}
 	}
@@ -2011,9 +2015,6 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		$t_join_operator = ' AND ';
 
 	log_event(LOG_FILTERING, 'Join operator : ' . $t_join_operator);
-
-	$t_from_clauses[] = $t_project_table;
-	$t_from_clauses[] = $t_bug_table;
 
 	$t_query_clauses['select'] = $t_select_clauses;
 	$t_query_clauses['from'] = $t_from_clauses;
