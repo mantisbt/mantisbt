@@ -28,6 +28,7 @@
  * @author Crt
  * @author Jani Reinikainen, devel@reinikainen.net
  * @author Juha, jomustaj@iki.fi
+ * @author Lliehu
  * @author Nike
  * @author Silvonen
  * @author Str4nd
@@ -1094,7 +1095,7 @@ $s_delete_attachments = 'Poista liitetiedostoja';
 $s_delete_attachment_button = 'Poista';
 $s_delete_attachment_sure_msg = 'Oletko varma, että haluat poistaa tämän liitetiedoston?';
 $s_upload_issue_attachments = 'Päivitä tapahtuman liitetiedostoja';
-$s_filters = 'suotimet';
+$s_filters = 'Suotimet';
 $s_save_filters = 'Tallenna suotimet';
 $s_save_filters_as_shared = 'Tallenna suotimet jaettuina';
 $s_use_saved_filters = 'Käytä talletettuja suotimia';
@@ -1167,7 +1168,7 @@ $s_tag_related_issues = 'Jaetut tapahtumat (%1$s)';
 $s_tag_stats_attached = 'Liitetyt tapahtumat: %1$s';
 $s_tag_create = 'Luo tägi';
 $s_show_all_tags = 'Kaikki';
-$s_time_tracking_billing_link = 'Laskutus';
+$s_time_tracking_billing_link = 'Ajanseuranta';
 $s_time_tracking = 'Ajanseuranta';
 $s_time_tracking_get_info_button = 'Nouda ajanseurantatietoa';
 $s_time_tracking_cost_per_hour = 'Kustannus / tunti';
