@@ -27,6 +27,8 @@
 
 	access_ensure_project_level( config_get( 'view_configuration_threshold' ) );
 
+	$t_read_write_access = access_has_global_level( config_get('set_configuration_threshold' ) );
+
 	html_page_top( lang_get( 'configuration_report' ) );
 
 	print_manage_menu( 'adm_config_report.php' );
@@ -63,11 +65,11 @@
 				echo (integer)$p_value;
 				return;
 			case CONFIG_TYPE_STRING:
-				$t_value = config_eval( $p_value );
+				$t_value = string_nl2br( string_html_specialchars( config_eval( $p_value ) ) );
 				if( $p_for_display ) {
 					$t_value = "'$t_value'";
 				}
-				echo string_nl2br( string_html_specialchars( $t_value ) );
+				echo $t_value;
 				return;
 			case CONFIG_TYPE_COMPLEX:
 				$t_value = @unserialize( $p_value );
@@ -97,9 +99,10 @@
 		foreach( $p_array as $t_key => $t_value ) {
 			echo "<option value='$t_key'";
 			check_selected( $p_filter_value, $t_key );
-			echo ">" . string_attribute( $t_value ) . "</option>\n";
+			echo '>' . string_attribute( $t_value ) . "</option>\n";
 		}
 	}
+
 
 	# Get filter values
 	$t_filter_save          = gpc_get_bool( 'save' );
@@ -234,9 +237,10 @@
 ?>
 
 <br />
-<div align="center">
 
 <!-- FILTER FORM -->
+<div align="center">
+
 <form id="filter_form" method="post">
 <?php # CSRF protection not required here - form does not result in modifications ?>
 	<input type="hidden" name="save" value="1" />
@@ -324,10 +328,13 @@
 			<td class="center">
 				<?php echo lang_get( 'access_level' ) ?>
 			</td>
+			<?php if( $t_read_write_access ) { ?>
 			<td class="center">
 				<?php echo lang_get( 'actions' ) ?>
 			</td>
+			<?php } ?>
 		</tr>
+
 <?php
 	# Pre-generate a form security token to avoid performance issues when the
 	# db contains a large number of configurations
@@ -357,52 +364,55 @@
 			<td class="center">
 				<?php echo get_enum_element( 'access_levels', $v_access_reqd ) ?>
 			</td>
+<?php
+		if( $t_read_write_access ) {
+?>
 			<td class="center">
-				<?php
-					if (
-					   config_can_delete( $v_config_id )
-					&& access_has_global_level( config_get( 'set_configuration_threshold' ) )
-					) {
-						# Update button (will populate edit form at page bottom)
-						print_button(
-							'#config_set_form',
-							lang_get( 'edit_link' ),
-							array(
-								'user_id'           => $v_user_id,
-								'project_id'        => $v_project_id,
-								'config_option'     => $v_config_id,
-								'type'              => $v_type,
-								'value'             => $v_value,
-							),
-							OFF
-						);
+<?php
+			if( config_can_delete( $v_config_id ) ) {
+				# Update button (will populate edit form at page bottom)
+				print_button(
+					'#config_set_form',
+					lang_get( 'edit_link' ),
+					array(
+						'user_id'           => $v_user_id,
+						'project_id'        => $v_project_id,
+						'config_option'     => $v_config_id,
+						'type'              => $v_type,
+						'value'             => $v_value,
+					),
+					OFF
+				);
 
-						# Delete button
-						print_button(
-							'adm_config_delete.php',
-							lang_get( 'delete_link' ),
-							array(
-								'user_id'       => $v_user_id,
-								'project_id'    => $v_project_id,
-								'config_option' => $v_config_id,
-							),
-							$t_form_security_token
-						);
-					} else {
-						echo '&#160;';
-					}
-				?>
+				# Delete button
+				print_button(
+					'adm_config_delete.php',
+					lang_get( 'delete_link' ),
+					array(
+						'user_id'       => $v_user_id,
+						'project_id'    => $v_project_id,
+						'config_option' => $v_config_id,
+					),
+					$t_form_security_token
+				);
+			} else {
+				echo '&#160;';
+			}
+?>
 			</td>
+<?php
+		} # end if config_can_delete
+?>
 		</tr>
 <?php
-	} # end for loop
+	} # end while loop
 ?>
 </table>
 
 
 <?php
 	# Only display the edit form if user is authorized to change configuration
-	if ( access_has_global_level( config_get( 'set_configuration_threshold' ) ) ) {
+if( $t_read_write_access ) {
 ?>
 <br />
 
@@ -470,13 +480,7 @@
 	</td>
 	<td>
 		<select name="type">
-			<?php
-				foreach( $t_config_types as $t_key => $t_type ) {
-					echo '<option value="' . $t_key . '" ';
-					check_selected( $t_key, $t_edit_type );
-					echo ">$t_type</option>";
-				}
-			?>
+			<?php print_option_list_from_array( $t_config_types, $t_edit_type ); ?>
 		</select>
 	</td>
 </tr>
@@ -493,6 +497,7 @@
 	</td>
 </tr>
 
+<!-- Submit button -->
 <tr>
 	<td colspan="2">
 		<input type="submit" name="config_set" class="button" value="<?php echo lang_get( 'set_configuration_option' ) ?>" />
