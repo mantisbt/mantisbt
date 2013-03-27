@@ -90,7 +90,7 @@ function log_event( $p_level, $p_msg, $p_backtrace = null ) {
 	$t_now = date( config_get_global( 'complete_date_format' ) );
 	$t_level = $g_log_levels[$p_level];
 
-	$t_plugin_event = '[' . $t_level . '] ' . $p_msg;
+	$t_plugin_event = '[' . $t_level . '] ' . $s_msg;
 	if( function_exists( 'event_signal' ) )
 		event_signal( 'EVENT_LOG', array( $t_plugin_event ) );
 
