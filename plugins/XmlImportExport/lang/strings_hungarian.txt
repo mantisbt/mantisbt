@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Dj
  * @author Glanthor Reviol
  */
 
@@ -45,3 +46,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Hivatkozás letiltása';
 $s_plugin_XmlImportExport_fallback = 'Fallback stratégia (ha az „újraszámozás” nem alkalmazható):';
 $s_plugin_XmlImportExport_fallback_category = 'Fallback kategória:';
 $s_plugin_XmlImportExport_keep_same_category = 'Próbáld ugyanazon kategóriában tartani';
+$s_plugin_XmlImportExport_error_no_xml = 'nem találhatók az xmlreader és xmlwriter bővítmények';

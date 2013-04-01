@@ -45,3 +45,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Deaktiver lenken';
 $s_plugin_XmlImportExport_fallback = 'Tilbakefallsstrategi (når «Omnummerer» ikke passer):';
 $s_plugin_XmlImportExport_fallback_category = 'Tilbakefallskategori:';
 $s_plugin_XmlImportExport_keep_same_category = 'Forsøk å beholde samme kategori';
+$s_plugin_XmlImportExport_error_no_xml = 'finner ikke utvidelsene xmlreader og xmlwriter';

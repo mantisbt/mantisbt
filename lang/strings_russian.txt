@@ -37,6 +37,7 @@
  * @author KPu3uC B Poccuu
  * @author Kirill
  * @author Mikhail Oleynik (MiTo Team), m.oleynik@gmail.com
+ * @author Ole Yves
  * @author Oleg Gashev gashev@zahav.net.il
  * @author Prima klasy4na
  * @author Sabbah
@@ -45,12 +46,12 @@
  * @author Александр Сигачёв
  */
 
-$s_actiongroup_menu_move = 'переместить';
-$s_actiongroup_menu_copy = 'копировать';
-$s_actiongroup_menu_assign = 'назначить';
-$s_actiongroup_menu_close = 'закрыть';
-$s_actiongroup_menu_delete = 'удалить';
-$s_actiongroup_menu_resolve = 'отработать';
+$s_actiongroup_menu_move = 'Переименовать';
+$s_actiongroup_menu_copy = 'Копировать';
+$s_actiongroup_menu_assign = 'Назначить';
+$s_actiongroup_menu_close = 'Закрыть';
+$s_actiongroup_menu_delete = 'Удалить';
+$s_actiongroup_menu_resolve = 'Отработать';
 $s_actiongroup_menu_update_priority = 'изменить приоритет';
 $s_actiongroup_menu_update_status = 'изменить состояние';
 $s_actiongroup_menu_update_severity = 'Настройка Серьезности';
