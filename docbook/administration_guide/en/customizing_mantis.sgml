@@ -867,7 +867,7 @@ $g_status_enum_workflow[CLOSED]       ='20:feedback,50:assigned';
 		<para>User versions of these functions (overrides) are named like
 			<emphasis>custom_function_override_descriptive_name</emphasis>,
 			and placed in a file called
-			<filename>custom_constants_inc.php</filename> that must be saved in
+			<filename>custom_functions_inc.php</filename> that must be saved in
 			MantisBT's root directory (This is the same place where the
 			<filename>config_inc.php</filename> file resides).
 			In normal processing, the system will look for override functions
@@ -875,7 +875,7 @@ $g_status_enum_workflow[CLOSED]       ='20:feedback,50:assigned';
 		</para>
 		<para>The simplest way to create a custom function is to copy the
 			default one from the api to your override file
-			(<filename>custom_constants_inc.php</filename>), and rename it
+			(<filename>custom_functions_inc.php</filename>), and rename it
 			(i.e. replacing 'default' by 'override').
 			The specific functionality you need can then be coded into the
 			override function.
