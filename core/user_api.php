@@ -770,6 +770,13 @@ function user_get_realname( $p_user_id ) {
 function user_get_name( $p_user_id ) {
 	$row = user_cache_row( $p_user_id, false );
 
+	if (config_get('login_method') == LDAP && config_get('use_ldap_realname')) {
+		$tmp_realname = ldap_realname($p_user_id);
+		if (!empty($tmp_realname)) {
+			$row['realname'] = $tmp_realname;
+		}
+	}	
+	
 	if( false == $row ) {
 		return lang_get( 'prefix_for_deleted_users' ) . (int) $p_user_id;
 	} else {
