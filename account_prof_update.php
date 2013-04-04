@@ -60,10 +60,18 @@ auth_ensure_user_authenticated();
 current_user_ensure_unprotected();
 
 $f_action = gpc_get_string('action');
+if( $f_action != 'add') {
+	$f_profile_id = gpc_get_int( 'profile_id' );
+
+	# Make sure user did select an existing profile from the list
+	if( $f_profile_id == 0 ) {
+		error_parameters( lang_get( 'select_profile' ) );
+		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	}
+}
 
 switch ( $f_action ) {
 	case 'edit':
-		$f_profile_id = gpc_get_int( 'profile_id' );
 		form_security_purge('profile_update');
 		print_header_redirect( 'account_prof_edit_page.php?profile_id=' . $f_profile_id );
 		break;
@@ -96,7 +104,6 @@ switch ( $f_action ) {
 		break;
 
 	case 'update':
-		$f_profile_id = gpc_get_int( 'profile_id' );
 		$f_platform = gpc_get_string( 'platform' );
 		$f_os = gpc_get_string( 'os' );
 		$f_os_build = gpc_get_string( 'os_build' );
@@ -116,7 +123,6 @@ switch ( $f_action ) {
 		break;
 
 	case 'delete':
-		$f_profile_id = gpc_get_int( 'profile_id' );
 		if ( profile_is_global( $f_profile_id ) ) {
 			access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
 
@@ -131,7 +137,6 @@ switch ( $f_action ) {
 		break;
 
 	case 'make_default':
-		$f_profile_id = gpc_get_int( 'profile_id' );
 		current_user_set_pref( 'default_profile', $f_profile_id );
 		form_security_purge('profile_update');
 		print_header_redirect( 'account_prof_menu_page.php' );
