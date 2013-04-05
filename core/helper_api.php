@@ -197,36 +197,41 @@ function get_enum_element( $p_enum_name, $p_val, $p_user = null, $p_project = nu
  * This helper function is used by {@link check_checked()} and {@link check_selected()}
  * @param mixed $p_var1
  * @param mixed $p_var2
+ * @param boolean $p_strict Set to true for strict type checking, false for loose
  * @return boolean
  */
-function helper_check_variables_equal( $p_var1, $p_var2 ) {
+function helper_check_variables_equal( $p_var1, $p_var2, $p_strict ) {
 
-	if ( gettype( $p_var1 ) !== gettype( $p_var2 ) ) {
-		# Reaching this point is a a sign that you need to check the types
-		# of the parameters passed to this function. They should match.
-		trigger_error( ERROR_GENERIC, ERROR );
+	if( $p_strict ) {
+		if ( gettype( $p_var1 ) !== gettype( $p_var2 ) ) {
+			# Reaching this point is a a sign that you need to check the types
+			# of the parameters passed to this function. They should match.
+			trigger_error( ERROR_GENERIC, ERROR );
+		}
+
+		# We need to be careful when comparing an array of
+		# version number strings (["1.0", "1.1", "1.10"]) to
+		# a selected version number of "1.10". If a ==
+		# comparison were to be used, PHP would treat
+		# "1.1" and "1.10" as being the same as the strings
+		# would be converted to numerals before being compared
+		# as numerals.
+		#
+		# This is further complicated by filter dropdowns
+		# containing a mixture of string and integer values.
+		# The following "meta filter values" exist as integer
+		# values in dropdowns:
+		#   META_FILTER_MYSELF = -1
+		#   META_FILTER_NONE = -2
+		#   META_FILTER_CURRENT = -3
+		#   META_FILTER_ANY = 0
+		#
+		# For these reasons, a === comparison is required.
+
+		return $p_var1 === $p_var2;
+	} else {
+		return $p_var1 == $p_var2;
 	}
-
-	# We need to be careful when comparing an array of
-	# version number strings (["1.0", "1.1", "1.10"]) to
-	# a selected version number of "1.10". If a ==
-	# comparison were to be used, PHP would treat
-	# "1.1" and "1.10" as being the same as the strings
-	# would be converted to numerals before being compared
-	# as numerals.
-	#
-	# This is further complicated by filter dropdowns
-	# containing a mixture of string and integer values.
-	# The following "meta filter values" exist as integer
-	# values in dropdowns:
-	#   META_FILTER_MYSELF = -1
-	#   META_FILTER_NONE = -2
-	#   META_FILTER_CURRENT = -3
-	#   META_FILTER_ANY = 0
-	#
-	# For these reasons, a === comparison is required.
-
-	return $p_var1 === $p_var2;
 }
 
 /**
@@ -238,18 +243,19 @@ function helper_check_variables_equal( $p_var1, $p_var2 ) {
  *
  * @param mixed $p_var
  * @param mixed $p_val
+ * @param boolean $p_strict Set to false to bypass strict type checking (defaults to true)
  * @return null
  */
-function check_checked( $p_var, $p_val = true ) {
+function check_checked( $p_var, $p_val = true, $p_strict = true ) {
 	if( is_array( $p_var ) ) {
 		foreach( $p_var as $t_this_var ) {
-			if( helper_check_variables_equal( $t_this_var, $p_val ) ) {
+			if( helper_check_variables_equal( $t_this_var, $p_val, $p_strict ) ) {
 				echo ' checked="checked"';
 				return;
 			}
 		}
 	} else {
-		if( helper_check_variables_equal( $p_var, $p_val ) ) {
+		if( helper_check_variables_equal( $p_var, $p_val, $p_strict ) ) {
 			echo ' checked="checked"';
 			return;
 		}
@@ -265,18 +271,19 @@ function check_checked( $p_var, $p_val = true ) {
  *
  * @param mixed $p_var the variable to compare
  * @param mixed $p_val the value to compare $p_var with
+ * @param boolean $p_strict Set to false to bypass strict type checking (defaults to true)
  * @return null
  */
-function check_selected( $p_var, $p_val = true ) {
+function check_selected( $p_var, $p_val = true, $p_strict = true ) {
 	if ( is_array( $p_var ) ) {
 		foreach ( $p_var as $t_this_var ) {
-			if( helper_check_variables_equal( $t_this_var, $p_val ) ) {
+			if( helper_check_variables_equal( $t_this_var, $p_val, $p_strict ) ) {
 				echo ' selected="selected"';
 				return;
 			}
 		}
 	} else {
-		if( helper_check_variables_equal( $p_var, $p_val ) ) {
+		if( helper_check_variables_equal( $p_var, $p_val, $p_strict ) ) {
 			echo ' selected="selected"';
 		}
 	}
