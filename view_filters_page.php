@@ -313,7 +313,13 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'sticky' ) ?></td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'changed' ) ?></td>
 	<td class="small-caption" colspan="<?php echo ( 3 * $t_custom_cols ); ?>">
-		<label><input type="checkbox" id="use_date_filters" name="<?php echo FILTER_PROPERTY_FILTER_BY_DATE ?>" <?php check_checked( $t_filter['filter_by_date'], 'on' ) ?> /><?php echo lang_get( 'use_date_filters' )?></label>
+		<label>
+			<input type="checkbox" id="use_date_filters"
+				name="<?php echo FILTER_PROPERTY_FILTER_BY_DATE ?>"
+				<?php check_checked( $t_filter['filter_by_date'], true ) ?>
+			/>
+			<?php echo lang_get( 'use_date_filters' )?>
+		</label>
 	</td>
 	<td class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php echo lang_get( 'bug_relationships' ) ?>

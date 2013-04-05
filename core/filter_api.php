@@ -4301,8 +4301,11 @@ function print_filter_project_id() {
 	global $t_select_modifier, $t_filter, $f_view_type;
 	?>
 		<!-- Project -->
-		<select<?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_PROJECT_ID;?>[]">
-			<option value="<?php echo META_FILTER_CURRENT?>"<?php check_selected( $t_filter[FILTER_PROPERTY_PROJECT_ID], META_FILTER_CURRENT );?>>[<?php echo lang_get( 'current' )?>]</option>
+		<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_PROJECT_ID;?>[]">
+			<option value="<?php echo META_FILTER_CURRENT ?>"
+				<?php check_selected( $t_filter[FILTER_PROPERTY_PROJECT_ID], META_FILTER_CURRENT, false );?>>
+				[<?php echo lang_get( 'current' )?>]
+			</option>
 			<?php print_project_option_list( $t_filter[FILTER_PROPERTY_PROJECT_ID] )?>
 		</select>
 		<?php
