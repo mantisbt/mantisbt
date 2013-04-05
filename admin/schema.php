@@ -612,3 +612,4 @@ $upgrade[] = Array( 'UpdateFunction', "stored_filter_migrate" );
 $upgrade[] = Array( 'AddColumnSQL', Array( db_get_table( 'custom_field_string' ), "
 	text		XL  			NULL DEFAULT NULL " ) );
 $upgrade[] = Array( 'UpdateFunction', 'update_history_long_custom_fields' );
+$upgrade[] = Array( 'CreateIndexSQL', Array( 'idx_bug_id', db_get_table( 'bug_monitor' ), 'bug_id' ) );
