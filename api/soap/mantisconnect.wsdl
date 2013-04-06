@@ -165,6 +165,25 @@
    </xsd:restriction>
   </xsd:complexContent>
  </xsd:complexType>
+ <xsd:complexType name="HistoryData">
+  <xsd:all>
+   <xsd:element name="date" type="xsd:integer"/>
+   <xsd:element name="userid" type="xsd:integer"/>
+   <xsd:element name="username" type="xsd:string"/>
+   <xsd:element name="field" type="xsd:string"/>
+   <xsd:element name="type" type="xsd:integer"/>
+   <xsd:element name="old_value" type="xsd:string"/>
+   <xsd:element name="new_value" type="xsd:string"
+   />
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="HistoryDataArray">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:HistoryData[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
  <xsd:complexType name="IssueHeaderData">
   <xsd:all>
    <xsd:element name="id" type="xsd:integer"/>
@@ -436,6 +455,12 @@
   <part name="issue_id" type="xsd:integer" /></message>
 <message name="mc_issue_getResponse">
   <part name="return" type="tns:IssueData" /></message>
+<message name="mc_issue_get_historyRequest">
+  <part name="username" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="issue_id" type="xsd:integer" /></message>
+<message name="mc_issue_get_historyResponse">
+  <part name="return" type="tns:HistoryDataArray" /></message>
 <message name="mc_issue_get_biggest_idRequest">
   <part name="username" type="xsd:string" />
   <part name="password" type="xsd:string" />
@@ -854,6 +879,11 @@
     <input message="tns:mc_issue_getRequest"/>
     <output message="tns:mc_issue_getResponse"/>
   </operation>
+  <operation name="mc_issue_get_history">
+    <documentation>Get the history of the issue with the specified id.</documentation>
+    <input message="tns:mc_issue_get_historyRequest"/>
+    <output message="tns:mc_issue_get_historyResponse"/>
+  </operation>
   <operation name="mc_issue_get_biggest_id">
     <documentation>Get the latest submitted issue in the specified project.</documentation>
     <input message="tns:mc_issue_get_biggest_idRequest"/>
@@ -1184,6 +1214,11 @@
   </operation>
   <operation name="mc_issue_get">
     <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_issue_get" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="mc_issue_get_history">
+    <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_issue_get_history" style="rpc"/>
     <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
     <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
   </operation>
