@@ -122,6 +122,48 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 }
 
 /**
+* Get history details about an issue.
+*
+* @param string $p_username  The name of the user trying to access the issue.
+* @param string $p_password  The password of the user.
+* @param integer $p_issue_id  The id of the issue to retrieve.
+* @return Array that represents a HistoryDataArray structure
+*/
+function mc_issue_get_history( $p_username, $p_password, $p_issue_id ) {
+    global $g_project_override;
+
+	$t_user_id = mci_check_login( $p_username, $p_password );
+	if( $t_user_id === false ) {
+		return mci_soap_fault_login_failed();
+	}
+
+	$t_lang = mci_get_user_lang( $t_user_id );
+
+	if( !bug_exists( $p_issue_id ) ) {
+		return SoapObjectsFactory::newSoapFault('Client', 'Issue does not exist');
+	}
+
+	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
+	if( !mci_has_readonly_access( $t_user_id, $t_project_id ) ) {
+		return mci_soap_fault_access_denied( $t_user_id );
+	}
+	$g_project_override = $t_project_id;
+
+	if( !access_has_bug_level( VIEWER, $p_issue_id, $t_user_id ) ){
+		return mci_soap_fault_access_denied( $t_user_id );
+	}
+	
+	$t_user_access_level = user_get_access_level( $t_user_id, $t_project_id );
+	if( !access_compare_level( $t_user_access_level, config_get( 'view_history_threshold' ) ) ){
+		return mci_soap_fault_access_denied( $t_user_id );
+	}
+
+	$t_bug_history = history_get_raw_events_array($p_issue_id, $t_user_id);
+
+	return $t_bug_history;
+}
+
+/**
  * Returns the category name, possibly null if no category is assigned
  *
  * @param int $p_category_id
