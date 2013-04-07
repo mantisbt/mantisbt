@@ -30,6 +30,7 @@
  * @author Felipe Tonioli, tonioli@easyline.com.br
  * @author Fernando Machado, fm-nospam@fmachado.com
  * @author Giro720
+ * @author Gusta
  * @author Jeferson Oliveira, jefersonfoliveira@gmail.com
  * @author Jefersonfoliveira
  * @author Juliano F. Ravasi, dev at juliano info
@@ -493,7 +494,8 @@ $s_from = 'De';
 $s_to = 'Para';
 $s_sent_you_this_reminder_about = 'lhe enviou este lembrete sobre';
 $s_bug_reminder = 'Enviar um lembrete';
-$s_reminder_sent_to = 'Lembrete enviado para:';
+$s_reminder_sent_to = 'Lembrete mandado para';
+$s_reminder_sent_none = 'Nenhum lembrete pôde ser mandado';
 $s_bug_send_button = 'Enviar';
 $s_reminder = 'Lembrete';
 $s_reminder_explain = 'Esta anotação será enviada aos destinatários listados, solicitando retorno sobre este caso.';

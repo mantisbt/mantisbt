@@ -28,6 +28,7 @@
  * @author Adam Bienias <adam@fireworks.atomnet.pl>
  * @author Arkadiusz Hutta <hutta@poczta.onet.pl> 2005/08/10
  * @author BeginaFelicysym
+ * @author Chrumps
  * @author Cysioland
  * @author Derbeth
  * @author Hubert Kario <hka@qbs.com.pl>
@@ -494,7 +495,7 @@ $s_from = 'Od';
 $s_to = 'Do';
 $s_sent_you_this_reminder_about = 'wysłał ci przypomnienie o';
 $s_bug_reminder = 'Wyślij przypomnienie';
-$s_reminder_sent_to = 'Przypomnienie wysłano do:';
+$s_reminder_sent_to = 'Przypomnienie wysłano do';
 $s_bug_send_button = 'Wyślij';
 $s_reminder = 'Przypomnienie';
 $s_reminder_explain = 'Ten komentarz zostanie wysłany do osób obserwujących zgłoszenie.';
@@ -607,6 +608,7 @@ $s_protected = 'Zabezpieczone';
 $s_create_user_button = 'Stwórz użytkownika';
 $s_hide_disabled = 'Ukryj wyłączone';
 $s_filter_button = 'Filtruj';
+$s_default_filter = 'Domyślny filtr';
 $s_create_filter_link = 'Utwórz stałe łącze';
 $s_create_short_link = 'Utórz krótkie łącze';
 $s_filter_permalink = 'To jest stałe łącze do aktualnie skonfigurowanego filtru:';
@@ -1120,7 +1122,7 @@ $s_delete_attachments = 'Usuń załączniki';
 $s_delete_attachment_button = 'Usuń';
 $s_delete_attachment_sure_msg = 'Czy na pewno chcesz usunąć ten załącznik?';
 $s_upload_issue_attachments = 'Załaduj załącznik';
-$s_filters = 'filtry';
+$s_filters = 'Filtry';
 $s_save_filters = 'Zapisz filtry';
 $s_save_filters_as_shared = 'Zapisz filtry jako współdzielone';
 $s_use_saved_filters = 'Użyj zapisanych filtrów';
