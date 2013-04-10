@@ -1186,7 +1186,7 @@ function email_bug_info_to_one_user( $p_visible_bug_data, $p_message_id, $p_proj
 	}
 
 	# build subject
-	$t_subject = '[' . $p_visible_bug_data['email_project'] . ' ' . bug_format_id( $p_visible_bug_data['email_bug'] ) . ']: ' . $p_visible_bug_data['email_summary'];
+	$t_subject = email_build_subject($p_visible_bug_data['email_bug']);
 
 	# build message
 
