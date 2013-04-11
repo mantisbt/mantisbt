@@ -1,7 +1,36 @@
 MantisBT Release Notes
 ======================
 
-1.2.14 Security Release (2012-01-29)
+1.2.15 Security Release (2013-04-12)
+-------------------------------------------------
+
+MantisBT 1.2.15 is a security update for the stable 1.2.x branch. All
+installations that are currently running any 1.2.x version are strongly advised
+to upgrade to this release.
+
+The following security issues were resolved:
+
+ - Any malicious user could use the view issues page (search.php) to execute a
+   filter that could bring down the site by overloading the database server
+   (CVE-2013-1883). Affects MantisBT 1.2.12 and later.
+   Refer to issue #15573 for detailed information.
+
+ - A cross site scripting (XSS) vulnerability allowed execution of arbitrary
+   JavaScript code when deleting a version. Affects MantisBT 1.2.14 and later.
+   Refer to issue #15511 for detailed information.
+
+ - In some cases, the 'Close' button would be available to unauthorized users,
+   allowing them to close issues at will, bypassing the workflow settings.
+   Affects MantisBT 1.2.12 and later.
+   Refer to issue #15453 for detailed information.
+
+This release also includes several bug fixes and enhancements to the tracker
+and the SOAP api, as well as updated translations in many languages.
+
+A full changelog for the 1.2.x series can be found on the official site. [1]
+
+
+1.2.14 Security Release (2013-01-29)
 -------------------------------------------------
 
 MantisBT 1.2.14 is a security update for the stable 1.2.x branch. All
@@ -12,7 +41,7 @@ Four cross site scripting (XSS) vulnerability issues were discovered and
 resolved:
 
  - A malicious person could trick a target user's browser into executing
-   arbitrary JavaScript code (CVE-2013-0197). This vulnerability iscritical,
+   arbitrary JavaScript code (CVE-2013-0197). This vulnerability is critical,
    due to the affected page (search.php) being usable anonymously on public-
    facing installations (i.e. without the need for a user login).
    Affects MantisBT 1.2.12 only (earlier versions are not impacted)
@@ -52,7 +81,7 @@ release also includes several bug fixes and enhancements:
 A full changelog for the 1.2.x series can be found on the official site. [1]
 
 
-1.2.13 Security Release (2012-01-22)
+1.2.13 Security Release (2013-01-22)
 -------------------------------------------------
 
 This version had to be withdrawn shortly after release, as it introduced a bug
@@ -322,6 +351,7 @@ There have also been many improvements to the codebase beyond adding features:
 
 [1] The changelog is split between multiple releases:
 
+	1.2.15     http://www.mantisbt.org/bugs/changelog_page.php?version_id=182
 	1.2.14     http://www.mantisbt.org/bugs/changelog_page.php?version_id=181
 	1.2.13     http://www.mantisbt.org/bugs/changelog_page.php?version_id=180
 	1.2.12     http://www.mantisbt.org/bugs/changelog_page.php?version_id=150
