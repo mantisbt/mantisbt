@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author KlaudiuMihaila
  * @author Saturnian
  */
 
@@ -45,3 +46,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Dezactivează legătura';
 $s_plugin_XmlImportExport_fallback = 'Strategia fallback (când „Renumerotare” nu se aplică):';
 $s_plugin_XmlImportExport_fallback_category = 'Categoria Fallback:';
 $s_plugin_XmlImportExport_keep_same_category = 'Încearcă să menții aceiași categorie';
+$s_plugin_XmlImportExport_error_no_xml = 'imposibil de găsit extensiile xmlreader și xmlwriter';

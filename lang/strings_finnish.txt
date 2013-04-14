@@ -1059,6 +1059,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>Huom:</b> Tällä tap
 $s_create_child_bug_button = 'Kloonaa';
 $s_bug_cloned_to = 'Tapahtuma kloonattu';
 $s_bug_created_from = 'Tapahtuma luotu tapahtumasta';
+$s_copy_attachments_from_parent = 'Kopioi liitteet';
 $s_viewing_bug_relationship_graph_title = 'Relaatiograafi';
 $s_viewing_bug_dependency_graph_title = 'Riippuvuusgraafi';
 $s_relation_graph = 'Relaatiograafi';

@@ -27,6 +27,7 @@
  *
  * @author Crazymadlover
  * @author Giro720
+ * @author Gusta
  * @author Hamilton Abreu
  * @author Luckas Blade
  * @author Luís Martins, lmar@ualg.pt
@@ -221,6 +222,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Este é um nome duplicado.'
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Pelo menos um projecto ainda utiliza este campo.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Valor inválido para o campo "%1$s".';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Definição de campo personalizado inválida.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Propriedade de campo personalizado inválido ( %1$s ).';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Falha na Autenticação LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Falha na ligação ao servidor LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Actualização de Registo LDAP falhou.';
@@ -272,6 +274,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Evento "%1$s" ainda não foi declarado.
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Plugin não está registado no MantisBT.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Plugin já está instalado.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Não foi encontrada a página de plugin.';
+$MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Instalação do plugin falhada:  %1$s .';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'A actualização do schema do plugin falhou no bloco #%1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Houve um erro desconhecido "%1$s" durante a execução do plugin "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Campo "%1$s" contém coluna duplicada "%2$s".';
@@ -488,6 +491,8 @@ $s_to = 'Para';
 $s_sent_you_this_reminder_about = 'enviou-lhe este aviso acerca de';
 $s_bug_reminder = 'Enviar um aviso';
 $s_reminder_sent_to = 'Aviso enviado a';
+$s_reminder_sent_none = 'Nenhum lembrete pôde ser mandado';
+$s_reminder_list_truncated = 'lista de destinatários corrompida, olhe o histórico para lista completa';
 $s_bug_send_button = 'Enviar';
 $s_reminder = 'Aviso';
 $s_reminder_explain = 'Esta nota será enviada aos destinatários indicados solicitando comentários a este problema.';
@@ -600,6 +605,7 @@ $s_protected = 'Protegido';
 $s_create_user_button = 'Criar Utilizador';
 $s_hide_disabled = 'Esconder desativados';
 $s_filter_button = 'Aplicar Filtro';
+$s_default_filter = 'Filtro padrão';
 $s_create_filter_link = 'Criar Permalink';
 $s_create_short_link = 'Criar link curto';
 $s_filter_permalink = 'Em seguida está uma ligação permanente para o filtro configurado actualmente:';
@@ -1133,6 +1139,7 @@ $s_handle_sponsored_issue = 'Tratar de problema patrocinado';
 $s_others = 'Outros';
 $s_see_email_addresses_of_other_users = 'Ver os endereços de email dos outros utilizadores';
 $s_send_reminders = 'Enviar lembretes';
+$s_receive_reminders = 'Receber lembretes';
 $s_add_profiles = 'Adicionar perfis';
 $s_notify_of_new_user_created = 'Notifique quando for criado um novo utilizador';
 $s_email_notification = 'Notificação por email';

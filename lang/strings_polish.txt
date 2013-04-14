@@ -39,6 +39,7 @@
  * @author Rezonansowy
  * @author Sp5uhe
  * @author Tomasz Czerniejewski <tomc at artifexmundi com> 2005/04/06
+ * @author Ty221
  * @author Woytecr
  */
 
@@ -496,6 +497,8 @@ $s_to = 'Do';
 $s_sent_you_this_reminder_about = 'wysłał ci przypomnienie o';
 $s_bug_reminder = 'Wyślij przypomnienie';
 $s_reminder_sent_to = 'Przypomnienie wysłano do';
+$s_reminder_sent_none = 'Przypomnienia nie mogły zostać wysłane';
+$s_reminder_list_truncated = 'Adresaci usunięci, wejdź do historii błędów aby zobaczyć pełną listę';
 $s_bug_send_button = 'Wyślij';
 $s_reminder = 'Przypomnienie';
 $s_reminder_explain = 'Ten komentarz zostanie wysłany do osób obserwujących zgłoszenie.';
@@ -1144,6 +1147,7 @@ $s_handle_sponsored_issue = 'Obsłuż sponsorowane zgłoszenie';
 $s_others = 'INNE';
 $s_see_email_addresses_of_other_users = 'Pokazuj adresy email innych użytkowników';
 $s_send_reminders = 'Wysyłaj przypomnienia';
+$s_receive_reminders = 'Otrzymuj przypomnienia';
 $s_add_profiles = 'Dodawaj profile';
 $s_notify_of_new_user_created = 'Informuj o nowych użytkownikach';
 $s_email_notification = 'Powiadomienia e-mail';
