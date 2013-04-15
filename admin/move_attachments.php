@@ -158,7 +158,7 @@ $t_moved = move_attachments_to_disk( $f_file_type, $f_projects_to_disk );
 
 form_security_purge( 'move_attachments_project_select' );
 
-$t_redirect_url = 'system_utils.php';
+$t_redirect_url = 'admin/system_utils.php';
 
 # Page header, menu
 html_page_top(
