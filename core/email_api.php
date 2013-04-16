@@ -76,7 +76,7 @@ function email_regex_simple() {
 		$t_subdomain = "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)";
 		$t_domain    = "(${t_subdomain}(?:\.${t_subdomain})*)";
 
-		$s_email_regex = "/${t_recipient}\@${t_domain}/";
+		$s_email_regex = "/${t_recipient}\@${t_domain}/i";
 	}
 	return $s_email_regex;
 }
