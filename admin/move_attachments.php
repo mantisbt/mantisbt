@@ -124,7 +124,7 @@ function move_attachments_to_disk( $p_type, $p_projects ) {
 						$t_status = "Moved to '$t_filename'";
 					}
 				} else {
-					$t_status = "Copy to '$t_file_name' failed";
+					$t_status = "Copy to '$t_filename' failed";
 					$t_failures++;
 				}
 
