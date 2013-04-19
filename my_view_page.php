@@ -106,20 +106,27 @@
 		# display the box
 		else {
 			$t_counter++;
-
+			
+			# load custom my_view_inc file if exists
+			if ( file_exists( 'custom_my_view_inc.php' ) ) {
+				$t_my_view_inc = 'custom_my_view_inc.php';
+			} else {	
+				$t_my_view_inc = 'my_view_inc.php';
+			}
+			
 			# check the style of displaying boxes - fixed (ie. each box in a separate table cell) or not
 			if ( ON == $t_boxes_position ) {
 				# for even box number start new row and column
 				if ( 1 == $t_counter%2 ) {
 					echo '<tr><td valign="top" width="50%">';
-					include 'my_view_inc.php';
+					include $t_my_view_inc;
 					echo '</td>';
 				}
 
 				# for odd box number only start new column
 				else if ( 0 == $t_counter%2 ) {
 					echo '<td valign="top" width="50%">';
-					include 'my_view_inc.php';
+					include $t_my_view_inc;
 					echo '</td></tr>';
 				}
 			}
@@ -135,7 +142,7 @@
 				}
 
 				# display the required box
-				include 'my_view_inc.php';
+				include $t_my_view_inc;
 				echo '<br />';
 
 				# close the first column for first half of boxes
