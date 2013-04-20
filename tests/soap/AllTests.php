@@ -31,6 +31,7 @@ require_once 'IssueAddTest.php';
 require_once 'IssueMonitorTest.php';
 require_once 'IssueNoteTest.php';
 require_once 'IssueUpdateTest.php';
+require_once 'IssueHistoryTest.php';
 require_once 'FilterTest.php';
 require_once 'AttachmentTest.php';
 require_once 'LoginTest.php';
