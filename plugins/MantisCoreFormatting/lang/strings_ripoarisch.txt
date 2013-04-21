@@ -30,7 +30,7 @@
 
 $s_plugin_format_title = 'MantisBT Fommatteeerung';
 $s_plugin_format_description = 'Dat offizjälle Zohsatzprojramm zom enshtöpselle för de Täx ze beärbeide un ze fommatteeere';
-$s_plugin_format_config = 'Enshtellunge';
+$s_plugin_format_config = 'Enschtällunge';
 $s_plugin_format_process_text = 'Et Täx Beärrbeejde';
 $s_plugin_format_process_text_warning_notice = 'Donn dat nit affschallde, ußer De weijß jenou, wat De määß.
 Wann dat ußjeschalldt es, wääde och Anjreffe met <i lang="en" title="cross site scripting - Skrepte vun främbe Rääschner ungerschiebe">XSS</i> müjjelesch, di mer nommaal op keijne Fall hann well.';
