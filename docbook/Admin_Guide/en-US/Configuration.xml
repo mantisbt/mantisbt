@@ -3542,8 +3542,12 @@
     </section>
     
     <section id="admin.config.soap">
-		<title>SOAP API</title>
-		<para>These options are used to control the behaviour of the MantisBT SOAP API and are usually configured in <literal>api/soap/mc_config_inc.php</literal>.</para>
+	<title>SOAP API</title>
+
+	<para>MantisBT exposes a SOAP API which allows remote clients to interact with MantisBT and perform many of the usual tasks, such as reporting issues, running filtered searches and retrieving attachments. The SOAP API is enabled by default and available at <literal>/api/soap/mantisconnect.php</literal> below your installation root.</para>
+	<para>A WSDL file which describes the web service is available at <literal>/api/soap/mantisconnect.php?wsdl</literal> below your installation root.</para>
+
+	<para>The following options are used to control the behaviour of the MantisBT SOAP API and are usually configured in <literal>api/soap/mc_config_inc.php</literal>.</para>
         <variablelist>
             <varlistentry>
                 <term>$g_mc_use_nusoap</term>
@@ -3552,8 +3556,33 @@
 			Flag controlling the library to use for SOAP communication. When the native PHP extension is available this flag default to OFF, which means that nusoap will not used. The native extension has the advantage of being faster, more memory efficient and maintained to work with recent versions on PHP. When the extension is not available MantisBT falls back to using nusoap.</para>
                 </listitem>
             </varlistentry>
+            <varlistentry>
+                <term>$g_mc_readonly_access_level_threshold</term>
+                <listitem>
+                    <para>Minimum global access level required to access webservice for readonly operations.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_mc_readwrite_access_level_threshold</term>
+                <listitem>
+                    <para>Minimum global access level required to access webservice for read/write operations.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_mc_admin_access_level_threshold</term>
+                <listitem>
+                    <para>Minimum global access level required to access the administrator webservices.</para>
+                </listitem>
+            </varlistentry>
         </variablelist>
-    </section>    
+
+	<section id="admin.config.soap.disable">
+		<title>Disabling the SOAP API</title>
+		<para>If you wish to temporarily disable the SOAP API it is sufficient to set the specific access thresholds to NOBODY in <literal>api/soap/mc_config_inc.php</literal>:</para>
+		<para><literal>$g_mc_readonly_access_level_threshold = $g_mc_readwrite_access_level_threshold = $g_mc_admin_access_level_threshold = NOBODY;</literal></para>
+		<para>While the SOAP API will still be accessible, it will not allow users to retrieve or modify data.</para>
+	</section>
+    </section>
 
     <section id="admin.config.mantistouch">
         <title>MantisTouch</title>
