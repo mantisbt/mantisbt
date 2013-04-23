@@ -197,14 +197,9 @@ $t_bug_id = $t_bug_data->create();
 last_visited_issue( $t_bug_id );
 
 # Handle the file upload
-for( $i = 0; $i < count( $f_files ); $i++ ) {
-	if( !empty( $f_files['name'][$i] ) ) {
-		$t_file['name']     = $f_files['name'][$i];
-		$t_file['tmp_name'] = $f_files['tmp_name'][$i];
-		$t_file['type']     = $f_files['type'][$i];
-		$t_file['error']    = $f_files['error'][$i];
-		$t_file['size']     = $f_files['size'][$i];
-
+$t_files = helper_array_transpose( $f_files );
+foreach( $t_files as $t_file ) {
+	if( !empty( $t_file['name'] ) ) {
 		file_add( $t_bug_id, $t_file, 'bug' );
 	}
 }
