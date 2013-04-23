@@ -134,7 +134,7 @@
 
 	# Allow plugins to pre-process bug data
 	$t_bug_data = event_signal( 'EVENT_REPORT_BUG_DATA', $t_bug_data );
-	
+
 	# Ensure that resolved bugs have a handler
 	if ( $t_bug_data->handler_id == NO_USER && $t_bug_data->status >= config_get( 'bug_resolved_status_threshold' ) ) {
 		$t_bug_data->handler_id = auth_get_current_user_id();
@@ -147,14 +147,9 @@
 	last_visited_issue( $t_bug_id );
 
 	# Handle the file upload
-	for( $i = 0; $i < count( $f_files ); $i++ ) {
-		if( !empty( $f_files['name'][$i] ) ) {
-			$t_file['name']     = $f_files['name'][$i];
-			$t_file['tmp_name'] = $f_files['tmp_name'][$i];
-			$t_file['type']     = $f_files['type'][$i];
-			$t_file['error']    = $f_files['error'][$i];
-			$t_file['size']     = $f_files['size'][$i];
-
+	$t_files = helper_array_transpose( $f_files );
+	foreach( $t_files as $t_file ) {
+		if( !empty( $t_file['name'] ) ) {
 			file_add( $t_bug_id, $t_file, 'bug' );
 		}
 	}
@@ -228,11 +223,11 @@
 	event_signal( 'EVENT_REPORT_BUG', array( $t_bug_data, $t_bug_id ) );
 
 	email_new_bug( $t_bug_id );
-	
+
 	// log status and resolution changes if they differ from the default
 	if ( $t_bug_data->status != config_get('bug_submit_status') )
 		history_log_event($t_bug_id, 'status', config_get('bug_submit_status') );
-	
+
 	if ( $t_bug_data->resolution != config_get('default_bug_resolution') )
 		history_log_event($t_bug_id, 'resolution', config_get('default_bug_resolution') );
 
