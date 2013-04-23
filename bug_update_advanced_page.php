@@ -214,13 +214,22 @@ if ( $tpl_show_reporter ) {
 		echo '<td class="category">', lang_get( 'reporter' ), '</td>';
 		echo '<td>';
 
-		if ( ON == config_get( 'use_javascript' ) ) {
-			$t_username = prepare_user_name( $tpl_bug->reporter_id );
-			echo ajax_click_to_edit( $t_username, 'reporter_id', 'entrypoint=issue_reporter_combobox&issue_id=' . $tpl_bug_id );
+		# Do not allow the bug's reporter to edit the Reporter field
+		# when limit_reporters is ON
+		if( ON === config_get( 'limit_reporters' )
+		&&  !access_has_project_level( REPORTER + 1, $tpl_bug->project_id )
+		) {
+			echo string_attribute( user_get_name( $tpl_bug->reporter_id ) );
 		} else {
-			echo '<select ', helper_get_tab_index(), ' name="reporter_id">';
-			print_reporter_option_list( $tpl_bug->reporter_id, $tpl_bug->project_id );
-			echo '</select>';
+
+			if ( ON == config_get( 'use_javascript' ) ) {
+				$t_username = prepare_user_name( $tpl_bug->reporter_id );
+				echo ajax_click_to_edit( $t_username, 'reporter_id', 'entrypoint=issue_reporter_combobox&issue_id=' . $tpl_bug_id );
+			} else {
+				echo '<select ', helper_get_tab_index(), ' name="reporter_id">';
+				print_reporter_option_list( $tpl_bug->reporter_id, $tpl_bug->project_id );
+				echo '</select>';
+			}
 		}
 
 		echo '</td>';
