@@ -953,6 +953,8 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 
 	$t_bug_data->project_id = $t_target_project_id;
 	$t_bug_data->reporter_id = auth_get_current_user_id();
+	$t_bug_data->date_submitted = db_now();
+	$t_bug_data->last_updated = db_now();
 
 	$t_new_bug_id = $t_bug_data->create();
 
@@ -965,8 +967,6 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 	bug_set_field( $t_new_bug_id, 'status', $t_bug_data->status );
 	bug_set_field( $t_new_bug_id, 'resolution', $t_bug_data->resolution );
 	bug_set_field( $t_new_bug_id, 'projection', $t_bug_data->projection );
-	bug_set_field( $t_new_bug_id, 'date_submitted', $t_bug_data->date_submitted );
-	bug_set_field( $t_new_bug_id, 'last_updated', $t_bug_data->last_updated );
 	bug_set_field( $t_new_bug_id, 'eta', $t_bug_data->eta );
 	bug_set_field( $t_new_bug_id, 'fixed_in_version', $t_bug_data->fixed_in_version );
 	bug_set_field( $t_new_bug_id, 'target_version', $t_bug_data->target_version );
