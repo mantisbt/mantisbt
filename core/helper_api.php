@@ -97,6 +97,31 @@ function helper_alternate_class( $p_index = null, $p_odd_class = 'row-1', $p_eve
 		return "class=\"$p_even_class\"";
 	}
 }
+/**
+ * Transpose a bidimensional array
+ *
+ * e.g. array('a'=>array('k1'=>1,'k2'=>2),'b'=>array('k1'=>3,'k2'=>4))
+ * becomes array('k1'=>array('a'=>1,'b'=>3),'k2'=>array('a'=>2,'b'=>4))
+ *
+ * @param array $p_array
+ * @return array|mixed transposed array or $p_array if not 2-dimensional array
+ */
+function helper_array_transpose( $p_array ) {
+	if( !is_array( $p_array ) ) {
+		return $p_array;
+	}
+	$t_out = array();
+	foreach( $p_array as $key => $sub ) {
+		if( !is_array( $sub ) ) {
+			return $p_array;
+		}
+
+		foreach( $sub as $subkey => $value ) {
+			$t_out[$subkey][$key] = $value;
+		}
+	}
+	return $t_out;
+}
 
 /**
  * return alternate classes for rows, no attribute
