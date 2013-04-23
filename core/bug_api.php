@@ -937,6 +937,7 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 	}
 
 	$t_bug_data->project_id = $t_target_project_id;
+	$t_bug_data->reporter_id = auth_get_current_user_id();
 
 	$t_new_bug_id = $t_bug_data->create();
 
