@@ -18,6 +18,6 @@ adodb      -  http://adodb.sourceforge.net/
 disposable -  http://github.com/vboctor/disposable_email_checker/tree/master
 ezc        -  http://ezcomponents.org/
 nusoap     -  http://sourceforge.net/projects/nusoap/
-phpmailer  -  http://code.google.com/a/apache-extras.org/p/phpmailer/
+phpmailer  -  https://github.com/PHPMailer/PHPMailer
 rssbuilder -  http://code.google.com/p/flaimo-php/
 utf8       -  http://sourceforge.net/projects/phputf8
