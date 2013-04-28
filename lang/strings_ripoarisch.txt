@@ -695,7 +695,7 @@ $s_custom_field_project_count = 'Aanzahl Projäkte';
 $s_custom_field_type = 'Zoot';
 $s_custom_field_possible_values = 'Müjjelesche Wääte';
 $s_custom_field_default_value = 'Dä Shtandatt_Wäät';
-$s_custom_field_valid_regexp = '<i lang="en">Regular expression</i>';
+$s_custom_field_valid_regexp = 'Ene rejolähre Ußdrok';
 $s_custom_field_access_level_r = 'Zohjang zom Lässe';
 $s_custom_field_access_level_rw = 'Zohjang zom Schriive';
 $s_custom_field_length_min = 'De köözeste Läng';

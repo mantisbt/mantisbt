@@ -27,6 +27,7 @@
  *
  * @author Charmed94
  * @author Dragan Matic, dragan@panforma.co.yu
+ * @author Milicevic01
  * @author Nikola Smolenski
  * @author Rancher
  * @author Жељко Тодоровић
@@ -487,7 +488,9 @@ $s_from = 'Од';
 $s_to = 'До';
 $s_sent_you_this_reminder_about = 'вам је послао подсетник о';
 $s_bug_reminder = 'Пошаљи подсетник';
-$s_reminder_sent_to = 'Подсетник је послат на:';
+$s_reminder_sent_to = 'Подсетник је послат на';
+$s_reminder_sent_none = 'Ниједан подстеник није послат';
+$s_reminder_list_truncated = 'листа прималаца је скраћена (truncated)';
 $s_bug_send_button = 'Пошаљи';
 $s_reminder = 'Подсетник';
 $s_reminder_explain = 'Ова порука ће бити послата примаоцима који су пријављени на овај проблем.';
