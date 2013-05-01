@@ -1019,12 +1019,18 @@ function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
 
 function user_get_all_accessible_projects( $p_user_id, $p_project_id ) {
 	if( ALL_PROJECTS == $p_project_id ) {
-		$t_topprojects = $t_project_ids = user_get_accessible_projects( $p_user_id );
-		foreach( $t_topprojects as $t_project ) {
-			$t_project_ids = array_merge( $t_project_ids, user_get_all_accessible_subprojects( $p_user_id, $t_project ) );
-		}
+		$t_topprojects = user_get_accessible_projects( $p_user_id );
 
-		$t_project_ids = array_unique( $t_project_ids );
+		# Create a combined array where key = value
+		$t_project_ids = array_combine( $t_topprojects, $t_topprojects );
+
+		# Add all subprojects user has access to
+		foreach( $t_topprojects as $t_project ) {
+			$t_subprojects_ids = user_get_all_accessible_subprojects( $p_user_id, $t_project );
+			foreach( $t_subprojects_ids as $t_id ) {
+				$t_project_ids[$t_id] = $t_id;
+			}
+		}
 	} else {
 		access_ensure_project_level( VIEWER, $p_project_id );
 		$t_project_ids = user_get_all_accessible_subprojects( $p_user_id, $p_project_id );
