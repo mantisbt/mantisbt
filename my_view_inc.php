@@ -56,39 +56,8 @@ $t_bug_resolved_status_threshold = config_get( 'bug_resolved_status_threshold' )
 $t_hide_status_default = config_get( 'hide_status_default' );
 $t_default_show_changed = config_get( 'default_show_changed' );
 
-$c_filter['assigned'] = array(
-	FILTER_PROPERTY_CATEGORY => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_SEVERITY_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_STATUS_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
-	FILTER_PROPERTY_REPORTER_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_HANDLER_ID => Array(
-		'0' => $t_current_user_id,
-	),
-	FILTER_PROPERTY_RESOLUTION_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_PRODUCT_BUILD => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_PRODUCT_VERSION => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_HIDE_STATUS_ID => Array(
-		'0' => $t_bug_resolved_status_threshold,
-	),
-	FILTER_PROPERTY_MONITOR_USER_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-);
+$c_filter['assigned'] = filter_create_assigned_to( helper_get_current_project(), $t_current_user_id );
+
 $url_link_parameters['assigned'] = FILTER_PROPERTY_HANDLER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_bug_resolved_status_threshold;
 
 $c_filter['recent_mod'] = array(

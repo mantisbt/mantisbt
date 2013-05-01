@@ -4774,3 +4774,14 @@ function filter_name_valid_length( $p_name ) {
 		return true;
 	}
 }
+
+function filter_create_assigned_to( $p_project_id, $p_user_id ) {
+	$t_filter = filter_get_default();
+	$t_filter[FILTER_PROPERTY_HANDLER_ID] = array( '0' => $p_user_id );
+
+	if ( $p_project_id != ALL_PROJECTS ) {
+		$t_filter[FILTER_PROPERTY_PROJECT_ID] = array( '0' => $p_project_id );
+	}
+
+	return filter_ensure_valid_filter( $t_filter );
+}
