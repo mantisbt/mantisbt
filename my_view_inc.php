@@ -132,7 +132,7 @@ $c_filter['resolved'] = array(
 );
 $url_link_parameters['resolved'] = FILTER_PROPERTY_STATUS_ID . '=' . $t_bug_resolved_status_threshold . '&' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_bug_resolved_status_threshold;
 
-$c_filter['unassigned'] = filter_create_assigned_to( helper_get_current_project(), 0 );
+$c_filter['unassigned'] = filter_create_assigned_to_unresolved( helper_get_current_project(), 0 );
 $url_link_parameters['unassigned'] = FILTER_PROPERTY_HANDLER_ID . '=[none]' . '&' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_hide_status_default;
 
 # TODO: check. handler value looks wrong
