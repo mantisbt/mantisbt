@@ -13,7 +13,10 @@
  * @param $p_username logged in user name.
  * @param $p_password login password.
  * @param $p_project_id id of project to filter on, or ALL_PROJECTS.
- * @param $p_filter_type The name of the filter to apply ("assigned", "reported", "monitored").
+ * @param $p_filter_type The name of the filter to apply
+ *        "assigned" - unresolved issues that are assigned to user or unassigned issues (user id 0).
+ *        "reported" - issues that are reported by user.
+ *        "monitored" - issues monitored by user.
  * @param $p_target_user ObjectRef for target user, can include id, name, or both.
  * @param $p_page_number the page to return (1 based).
  * @param $p_per_page number of issues per page.
@@ -21,7 +24,7 @@
  */
 function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id, $p_filter_type, $p_target_user, $p_page_number, $p_per_page ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
-	if( $t_user_id === false ) {
+	if ( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
 	}
 	
@@ -41,11 +44,11 @@ function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id
 	$t_target_user_id = mci_get_user_id( $p_target_user );
 	$t_show_sticky = true;
 
-	if ( $p_filter_type == 'assigned' ) {
-		$t_filter = filter_create_assigned_to( $p_project_id, $t_target_user_id );
-	} else if ( $p_filter_type == 'reported') {
+	if ( strcasecmp( $p_filter_type, 'assigned' ) == 0 ) {
+		$t_filter = filter_create_assigned_to_unresolved( $p_project_id, $t_target_user_id );
+	} else if ( strcasecmp( $p_filter_type, 'reported' ) == 0 ) {
 		$t_filter = filter_create_reported_by( $p_project_id, $t_target_user_id );
-	} else if ( $p_filter_type == 'monitored' ) {
+	} else if ( strcasecmp( $p_filter_type, 'monitored' ) == 0 ) {
 		$t_filter = filter_create_monitored_by( $p_project_id, $t_target_user_id );
 	} else {
 		return SoapObjectsFactory::newSoapFault( 'Client', "Unknown filter type '$p_filter_type'." );

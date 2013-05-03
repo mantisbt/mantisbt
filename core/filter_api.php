@@ -4776,12 +4776,14 @@ function filter_name_valid_length( $p_name ) {
 }
 
 /**
- * Create a filter for getting issues assigned to the specified project and user.
+ * Create a filter for getting issues assigned to the specified project and user that
+ * are not yet resolved.
+ *
  * @param $p_project_id the project id or ALL_PROJECTS.
  * @param $p_user_id the user id or 0 to get unassigned issues.
  * @return a valid filter.
  */
-function filter_create_assigned_to( $p_project_id, $p_user_id ) {
+function filter_create_assigned_to_unresolved( $p_project_id, $p_user_id ) {
 	$t_filter = filter_get_default();
 
 	if ( $p_user_id == 0 ) {
@@ -4789,6 +4791,9 @@ function filter_create_assigned_to( $p_project_id, $p_user_id ) {
 	} else {
 		$t_filter[FILTER_PROPERTY_HANDLER_ID] = array( '0' => $p_user_id );
 	}
+
+	$t_bug_resolved_status_threshold = config_get( 'bug_resolved_status_threshold' );
+	$t_filter[FILTER_PROPERTY_HIDE_STATUS_ID] = array( '0' => $t_bug_resolved_status_threshold );
 
 	if ( $p_project_id != ALL_PROJECTS ) {
 		$t_filter[FILTER_PROPERTY_PROJECT_ID] = array( '0' => $p_project_id );
