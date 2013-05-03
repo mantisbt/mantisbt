@@ -30,7 +30,7 @@ class FilterTest extends SoapBase {
 	
 	const ISSUES_TO_RETRIEVE = 50;
 
-	// TODO: Add test case for mc_project_get_issues_assigned_to()
+	// TODO: Add test case for mc_project_get_issues_for_user()
 
 	/**
 	 * A test case that tests the following:

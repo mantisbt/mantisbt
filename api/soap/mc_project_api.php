@@ -8,17 +8,18 @@
 
 
 /**
- * Use a standard filter to get issues assigned to the specified user.
+ * Use a standard filter to get issues associated with the specified user.
  *
  * @param $p_username logged in user name.
  * @param $p_password login password.
  * @param $p_project_id id of project to filter on, or ALL_PROJECTS.
+ * @param $p_filter_type The name of the filter to apply ("assigned", "reported", "monitored").
  * @param $p_target_user ObjectRef for target user, can include id, name, or both.
  * @param $p_page_number the page to return (1 based).
  * @param $p_per_page number of issues per page.
  * @return IssueDataArray a page of matching issues.
  */
-function mc_project_get_issues_assigned_to( $p_username, $p_password, $p_project_id, $p_target_user, $p_page_number, $p_per_page ) {
+function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id, $p_filter_type, $p_target_user, $p_page_number, $p_per_page ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
@@ -40,8 +41,16 @@ function mc_project_get_issues_assigned_to( $p_username, $p_password, $p_project
 	$t_target_user_id = mci_get_user_id( $p_target_user );
 	$t_show_sticky = true;
 
-	$t_filter = filter_create_assigned_to( $p_project_id, $t_target_user_id );
-	
+	if ( $p_filter_type == 'assigned' ) {
+		$t_filter = filter_create_assigned_to( $p_project_id, $t_target_user_id );
+	} else if ( $p_filter_type == 'reported') {
+		$t_filter = filter_create_reported_by( $p_project_id, $t_target_user_id );
+	} else if ( $p_filter_type == 'monitored' ) {
+		$t_filter = filter_create_monitored_by( $p_project_id, $t_target_user_id );
+	} else {
+		return SoapObjectsFactory::newSoapFault( 'Client', "Unknown filter type '$p_filter_type'." );
+	}
+
 	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter, $p_project_id, $t_target_user_id, $t_show_sticky );
 	
 	$t_result = array();
