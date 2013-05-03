@@ -4792,7 +4792,7 @@ function filter_create_assigned_to_unresolved( $p_project_id, $p_user_id ) {
 		$t_filter[FILTER_PROPERTY_HANDLER_ID] = array( '0' => $p_user_id );
 	}
 
-	$t_bug_resolved_status_threshold = config_get( 'bug_resolved_status_threshold' );
+	$t_bug_resolved_status_threshold = config_get( 'bug_resolved_status_threshold', /* default */ null, $p_user_id, $p_project_id );
 	$t_filter[FILTER_PROPERTY_HIDE_STATUS_ID] = array( '0' => $t_bug_resolved_status_threshold );
 
 	if ( $p_project_id != ALL_PROJECTS ) {
