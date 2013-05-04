@@ -1046,7 +1046,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 	$t_current_user_id = auth_get_current_user_id();
 
-	if( null === $p_user_id ) {
+	if ( $p_user_id === null || $p_user_id === 0 ) {
 		$t_user_id = $t_current_user_id;
 	} else {
 		$t_user_id = $p_user_id;
@@ -4827,7 +4827,12 @@ function filter_create_reported_by( $p_project_id, $p_user_id ) {
  */
 function filter_create_monitored_by( $p_project_id, $p_user_id ) {
 	$t_filter = filter_get_default();
-	$t_filter[FILTER_PROPERTY_MONITOR_USER_ID] = array( '0' => $p_user_id );
+
+	if ( $p_user_id == 0 ) {
+		$t_filter[FILTER_PROPERTY_MONITOR_USER_ID] = array( '0' => META_FILTER_NONE );
+	} else {
+		$t_filter[FILTER_PROPERTY_MONITOR_USER_ID] = array( '0' => $p_user_id );
+	}
 
 	if ( $p_project_id != ALL_PROJECTS ) {
 		$t_filter[FILTER_PROPERTY_PROJECT_ID] = array( '0' => $p_project_id );

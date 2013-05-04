@@ -14,9 +14,12 @@
  * @param $p_password login password.
  * @param $p_project_id id of project to filter on, or ALL_PROJECTS.
  * @param $p_filter_type The name of the filter to apply
- *        "assigned" - unresolved issues that are assigned to user or unassigned issues (user id 0).
- *        "reported" - issues that are reported by user.
- *        "monitored" - issues monitored by user.
+ *        "assigned" - target user specified - issues assigned to target user.
+ *        "assigned" - target user 0 - unassigned issues.
+ *        "reported" - target user specified - issues reported by user.
+ *        "reported" - target user 0 - will throw.
+ *        "monitored" - target user specified - issues monitored by user.
+ *        "monitored" - target user 0 - issues not monitored.
  * @param $p_target_user ObjectRef for target user, can include id, name, or both.
  * @param $p_page_number the page to return (1 based).
  * @param $p_per_page number of issues per page.
@@ -47,6 +50,11 @@ function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id
 	if ( strcasecmp( $p_filter_type, 'assigned' ) == 0 ) {
 		$t_filter = filter_create_assigned_to_unresolved( $p_project_id, $t_target_user_id );
 	} else if ( strcasecmp( $p_filter_type, 'reported' ) == 0 ) {
+		// target id 0 for reporter doesn't make sense.
+		if ( $t_target_user_id == 0 ) {
+			return SoapObjectsFactory::newSoapFault( 'Client', "Target user id must be specified for 'reported' filter." );
+		}
+
 		$t_filter = filter_create_reported_by( $p_project_id, $t_target_user_id );
 	} else if ( strcasecmp( $p_filter_type, 'monitored' ) == 0 ) {
 		$t_filter = filter_create_monitored_by( $p_project_id, $t_target_user_id );
