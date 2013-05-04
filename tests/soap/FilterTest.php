@@ -123,6 +123,40 @@ class FilterTest extends SoapBase {
 	}
 
 	/**
+	 * Test the "assigned" filter type for assigned issues with target user specified.
+	 * Make sure resolved issues are not returned.
+	 */
+	public function testGetIssuesForUserForAssignedWithTargetUserNoResolved() {
+		$targetUser = array( 'name' => $this->userName );
+		$initialIssuesCount = $this->getIssuesForUser( 'assigned', $targetUser );
+
+		$issueToAdd = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserForAssignedWithTargetUserNoResolved' );
+
+		// Assign the issue to the reporter.
+		$issueToAdd['handler'] = $targetUser;
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+
+		$this->deleteAfterRun( $issueId );
+
+		$issue = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);		
+
+		$issue->status = array( 'name' => 'resolved' );
+
+        $this->client->mc_issue_update( $this->userName, $this->password, $issueId, $issue );
+
+		$issuesCount = $this->getIssuesForUser( 'assigned', $targetUser );
+
+		$this->assertEquals( 0, count( $issuesCount ) - count( $initialIssuesCount ), "count(issuesCount) - count(initialIssuesCount)");
+	}
+
+	/**
 	 * Test the "reported" filter type with no target user.
 	 * @expectedException SoapFault
 	 */

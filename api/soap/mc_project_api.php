@@ -14,8 +14,8 @@
  * @param $p_password login password.
  * @param $p_project_id id of project to filter on, or ALL_PROJECTS.
  * @param $p_filter_type The name of the filter to apply
- *        "assigned" - target user specified - issues assigned to target user.
- *        "assigned" - target user 0 - unassigned issues.
+ *        "assigned" - target user specified - issues assigned to target user that are not resolved.
+ *        "assigned" - target user 0 - unassigned issues that are not resolved.
  *        "reported" - target user specified - issues reported by user.
  *        "reported" - target user 0 - will throw.
  *        "monitored" - target user specified - issues monitored by user.
