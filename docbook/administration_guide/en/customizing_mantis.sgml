@@ -1027,12 +1027,12 @@ function custom_function_override_issue_update_validate( $p_issue_id, $p_bug_dat
 	if( $p_bug_data->status == RESOLVED ) {
 		if ( $p_bug_data->resolution == OPEN ) {
 			error_parameters( 'the resolution cannot be open to resolve the issue' );
-			trigger_error( ERROR_BUG_VALIDATE_FAILURE, ERROR );
+			trigger_error( ERROR_VALIDATE_FAILURE, ERROR );
 		}
-		$t_version_count = count( version_get_all_rows( $p_bug_data-&gt;project_id ) );
+		$t_version_count = count( version_get_all_rows( $p_bug_data->project_id ) );
 		if( ( $t_version_count > 0 ) && ( $p_bug_data->fixed_in_version == '' ) ) {
 			error_parameters( 'fixed in version must be set to resolve the issue' );
-			trigger_error( ERROR_BUG_VALIDATE_FAILURE, ERROR );
+			trigger_error( ERROR_VALIDATE_FAILURE, ERROR );
 		}
 	}
 }
