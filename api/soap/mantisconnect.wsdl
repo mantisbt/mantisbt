@@ -557,7 +557,7 @@
   <part name="password" type="xsd:string" />
   <part name="project_id" type="xsd:integer" />
   <part name="filter_type" type="xsd:string" />
-  <part name="target_user" type="tns:ObjectRef" />
+  <part name="target_user" type="tns:AccountData" />
   <part name="page_number" type="xsd:integer" />
   <part name="per_page" type="xsd:integer" /></message>
 <message name="mc_project_get_issues_for_userResponse">

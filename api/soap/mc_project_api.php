@@ -20,7 +20,7 @@
  *        "reported" - target user 0 - will throw.
  *        "monitored" - target user specified - issues monitored by user.
  *        "monitored" - target user 0 - issues not monitored.
- * @param $p_target_user ObjectRef for target user, can include id, name, or both.
+ * @param $p_target_user AccountData for target user, can include id, name, or both.
  * @param $p_page_number the page to return (1 based).
  * @param $p_per_page number of issues per page.
  * @return IssueDataArray a page of matching issues.

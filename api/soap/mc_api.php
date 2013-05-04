@@ -227,7 +227,6 @@ function mci_get_project_view_state_id( $p_view_state ) {
 }
 
 function mci_get_user_id( $p_user ) {
-
 	$p_user = SoapObjectsFactory::unwrapObject( $p_user );
 	
 	$t_user_id = 0;
