@@ -43,6 +43,17 @@ class VersionTest extends SoapBase {
 	}
 
 	/**
+	 * Converts date to UTC
+	 * @param $p_date date string
+	 * @return DateTime object
+	 * Tests creating a new version
+	 */
+	private function dateToUTC($p_date) {
+		$convDate = new DateTime($p_date);
+		return $convDate->setTimeZone(new DateTimeZone('UTC'));
+	}
+
+	/**
 	 * Tests creating a new version
 	 */
 	public function testAddVersion() {
@@ -60,12 +71,13 @@ class VersionTest extends SoapBase {
 		$this->assertEquals(1, count($versions) - $initialVersions);
 
 		$version = $versions[0];
+		$versDate = $this->dateToUTC($version->date_order);
 
 		$this->assertEquals('1.0', $version->name);
 		$this->assertEquals(true, $version->released);
 		$this->assertEquals('Test version', $version->description);
 		$this->assertEquals($this->getProjectId(), $version->project_id);
-		$this->assertEquals(self::DATE_ORDER, $version->date_order);
+		$this->assertEquals($this->dateToUTC(self::DATE_ORDER), $versDate);
 		$this->assertEquals(false, $version->obsolete);
 	}
 
@@ -94,8 +106,10 @@ class VersionTest extends SoapBase {
 
 		foreach ( $versions as $version ) {
 			if ( $version->id == $versionId ) {
+				$versDate = $this->dateToUTC($version->date_order);
+
 				$this->assertEquals('1.1', $version->name);
-				$this->assertEquals(self::DATE_ORDER, $version->date_order);
+				$this->assertEquals($this->dateToUTC(self::DATE_ORDER), $versDate);
 				return;
 			}
 		}
