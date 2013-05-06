@@ -126,12 +126,12 @@ class AttachmentTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$attachmentId);
-		
+
 		$this->assertEquals( $attachmentContents, base64_decode( $attachment ), '$attachmentContents' );
-		
+
 		$attachments = $this->client->mc_project_get_attachments( $this->userName, $this->password, $this->getProjectId() );
 		$this->assertEquals( 1, count( $attachments ) );
-		
+
 		$attachment = $attachments[0];
 		$this->assertEquals($this->userId, $attachment->user_id);
 		$this->assertEquals('description', $attachment->description);
