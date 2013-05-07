@@ -73,7 +73,10 @@ class AttachmentTest extends SoapBase {
 
 		$this->assertEquals( 1, count( $issue->attachments ), 'count($issue->attachments)' );
 		$this->assertEquals( $attachmentContents, base64_decode( $attachment ), '$attachmentContents' );
-		$this->assertEquals( $this->mantisPath.'file_download.php?file_id='.$issue->attachments[0]->id.'&type=bug', $issue->attachments[0]->download_url);
+		$this->assertEquals(
+			$this->mantisPath.'file_download.php?file_id='.$issue->attachments[0]->id.'&type=bug',
+			html_entity_decode( $issue->attachments[0]->download_url)
+		);
 		$this->assertEquals( $this->userId, $issue->attachments[0]->user_id);
 	}
 
