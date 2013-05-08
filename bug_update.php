@@ -166,6 +166,13 @@
 			trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
 		}
 	}
+	
+
+	# Plugin support
+	$t_new_bug_data = event_signal( 'EVENT_UPDATE_BUG', $t_bug_data, $f_bug_id );
+	if ( !is_null( $t_new_bug_data ) ) {
+		$t_bug_data = $t_new_bug_data;
+	}
 
 	$t_notify = true;
 	$t_bug_note_set = false;
@@ -213,12 +220,6 @@
 			$t_bug_data->status = bug_get_field( $f_bug_id, 'status' );
 			$t_bug_data->resolution = bug_get_field( $f_bug_id, 'resolution' );
 		}
-	}
-
-	# Plugin support
-	$t_new_bug_data = event_signal( 'EVENT_UPDATE_BUG', $t_bug_data, $f_bug_id );
-	if ( !is_null( $t_new_bug_data ) ) {
-		$t_bug_data = $t_new_bug_data;
 	}
 
 	# Add a bugnote if there is one
