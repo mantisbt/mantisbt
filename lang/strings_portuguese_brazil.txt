@@ -34,9 +34,11 @@
  * @author Jeferson Oliveira, jefersonfoliveira@gmail.com
  * @author Jefersonfoliveira
  * @author Juliano F. Ravasi, dev at juliano info
+ * @author Luckas
  * @author Luckas Blade
  * @author Luigipiccoli
  * @author Pedroca cerebral
+ * @author TheGabrielZaum
  * @author Tuliouel
  * @author 555
  */
@@ -496,7 +498,7 @@ $s_sent_you_this_reminder_about = 'lhe enviou este lembrete sobre';
 $s_bug_reminder = 'Enviar um lembrete';
 $s_reminder_sent_to = 'Lembrete mandado para';
 $s_reminder_sent_none = 'Nenhum lembrete pôde ser mandado';
-$s_reminder_list_truncated = 'lista de destinatários corrompida, olhe o histórico para lista completa';
+$s_reminder_list_truncated = 'lista de recipientes truncado';
 $s_bug_send_button = 'Enviar';
 $s_reminder = 'Lembrete';
 $s_reminder_explain = 'Esta anotação será enviada aos destinatários listados, solicitando retorno sobre este caso.';

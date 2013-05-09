@@ -26,6 +26,7 @@
  * @file
  *
  * @author Hamilton Abreu
+ * @author Luckas
  * @author Waldir
  */
 
@@ -41,7 +42,7 @@ $s_plugin_XmlImportExport_renumber = 'Renumerar';
 $s_plugin_XmlImportExport_renumber_desc = 'Tentar converter referências para a nova numeração';
 $s_plugin_XmlImportExport_link = 'Ligação';
 $s_plugin_XmlImportExport_link_desc = 'Converter numa ligação ao elemento original';
-$s_plugin_XmlImportExport_disable = 'Desactivar';
+$s_plugin_XmlImportExport_disable = 'Desativar';
 $s_plugin_XmlImportExport_disable_desc = 'Desactivar a ligação';
 $s_plugin_XmlImportExport_fallback = 'Estratégia de recurso (quando "Renumerar" não é aplicável):';
 $s_plugin_XmlImportExport_fallback_category = 'Categoria de recurso:';

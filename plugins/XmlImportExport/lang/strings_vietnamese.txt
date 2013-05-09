@@ -26,6 +26,7 @@
  * @file
  *
  * @author Duongnvm
+ * @author Tuankiet65
  */
 
 $s_plugin_XmlImportExport_title = 'Xuất/nhập khẩu các issue';
@@ -45,3 +46,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Vô hiệu hóa các liên kết';
 $s_plugin_XmlImportExport_fallback = 'Chiến lược dự phòng (khi "Ghi số lại" không áp dụng):';
 $s_plugin_XmlImportExport_fallback_category = 'Chuyên mục dự phòng';
 $s_plugin_XmlImportExport_keep_same_category = 'Cố gắng giữ cùng chuyên mục';
+$s_plugin_XmlImportExport_error_no_xml = 'không thể tìm thấy phần mở rộng xmlreader và xmlwriter';
