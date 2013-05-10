@@ -56,39 +56,7 @@ $t_bug_resolved_status_threshold = config_get( 'bug_resolved_status_threshold' )
 $t_hide_status_default = config_get( 'hide_status_default' );
 $t_default_show_changed = config_get( 'default_show_changed' );
 
-$c_filter['assigned'] = array(
-	FILTER_PROPERTY_CATEGORY => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_SEVERITY_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_STATUS_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
-	FILTER_PROPERTY_REPORTER_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_HANDLER_ID => Array(
-		'0' => $t_current_user_id,
-	),
-	FILTER_PROPERTY_RESOLUTION_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_PRODUCT_BUILD => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_PRODUCT_VERSION => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_HIDE_STATUS_ID => Array(
-		'0' => $t_bug_resolved_status_threshold,
-	),
-	FILTER_PROPERTY_MONITOR_USER_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-);
+$c_filter['assigned'] = filter_create_assigned_to_unresolved( helper_get_current_project(), $t_current_user_id );
 $url_link_parameters['assigned'] = FILTER_PROPERTY_HANDLER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_bug_resolved_status_threshold;
 
 $c_filter['recent_mod'] = array(
@@ -126,40 +94,7 @@ $c_filter['recent_mod'] = array(
 );
 $url_link_parameters['recent_mod'] = FILTER_PROPERTY_HIDE_STATUS_ID . '=none';
 
-$c_filter['reported'] = array(
-	FILTER_PROPERTY_CATEGORY => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_SEVERITY_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_STATUS_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
-	FILTER_PROPERTY_REPORTER_ID => Array(
-		'0' => $t_current_user_id,
-	),
-	FILTER_PROPERTY_HANDLER_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_SORT_FIELD_NAME => 'last_updated',
-	FILTER_PROPERTY_RESOLUTION_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_PRODUCT_BUILD => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_PRODUCT_VERSION => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_HIDE_STATUS_ID => Array(
-		'0' => $t_hide_status_default,
-	),
-	FILTER_PROPERTY_MONITOR_USER_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-);
+$c_filter['reported'] = filter_create_reported_by( helper_get_current_project(), $t_current_user_id );
 $url_link_parameters['reported'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_hide_status_default;
 
 $c_filter['resolved'] = array(
@@ -197,78 +132,13 @@ $c_filter['resolved'] = array(
 );
 $url_link_parameters['resolved'] = FILTER_PROPERTY_STATUS_ID . '=' . $t_bug_resolved_status_threshold . '&' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_bug_resolved_status_threshold;
 
-$c_filter['unassigned'] = array(
-	FILTER_PROPERTY_CATEGORY => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_SEVERITY_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_STATUS_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
-	FILTER_PROPERTY_REPORTER_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_HANDLER_ID => Array(
-		'0' => META_FILTER_NONE,
-	),
-	FILTER_PROPERTY_RESOLUTION_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_PRODUCT_BUILD => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_PRODUCT_VERSION => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_HIDE_STATUS_ID => Array(
-		'0' => $t_hide_status_default,
-	),
-	FILTER_PROPERTY_MONITOR_USER_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-);
+$c_filter['unassigned'] = filter_create_assigned_to_unresolved( helper_get_current_project(), 0 );
 $url_link_parameters['unassigned'] = FILTER_PROPERTY_HANDLER_ID . '=[none]' . '&' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_hide_status_default;
 
 # TODO: check. handler value looks wrong
 
-$c_filter['monitored'] = array(
-	FILTER_PROPERTY_CATEGORY => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_SEVERITY_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_STATUS_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
-	FILTER_PROPERTY_REPORTER_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_HANDLER_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_RESOLUTION_ID => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_PRODUCT_BUILD => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_PRODUCT_VERSION => Array(
-		'0' => META_FILTER_ANY,
-	),
-	FILTER_PROPERTY_HIDE_STATUS_ID => Array(
-		'0' => $t_hide_status_default,
-	),
-	FILTER_PROPERTY_MONITOR_USER_ID => Array(
-		'0' => $t_current_user_id,
-	),
-);
+$c_filter['monitored'] = filter_create_monitored_by( helper_get_current_project(), $t_current_user_id );
 $url_link_parameters['monitored'] = FILTER_PROPERTY_MONITOR_USER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_HIDE_STATUS_ID . '=' . $t_hide_status_default;
-
 
 $c_filter['feedback'] = array(
 	FILTER_PROPERTY_CATEGORY => Array(
