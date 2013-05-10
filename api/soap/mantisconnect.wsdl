@@ -552,6 +552,16 @@
   <part name="project_name" type="xsd:string" /></message>
 <message name="mc_project_get_id_from_nameResponse">
   <part name="return" type="xsd:integer" /></message>
+<message name="mc_project_get_issues_for_userRequest">
+  <part name="username" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="project_id" type="xsd:integer" />
+  <part name="filter_type" type="xsd:string" />
+  <part name="target_user" type="tns:AccountData" />
+  <part name="page_number" type="xsd:integer" />
+  <part name="per_page" type="xsd:integer" /></message>
+<message name="mc_project_get_issues_for_userResponse">
+  <part name="return" type="tns:IssueDataArray" /></message>
 <message name="mc_project_get_issuesRequest">
   <part name="username" type="xsd:string" />
   <part name="password" type="xsd:string" />
@@ -933,6 +943,11 @@
     <input message="tns:mc_project_get_id_from_nameRequest"/>
     <output message="tns:mc_project_get_id_from_nameResponse"/>
   </operation>
+  <operation name="mc_project_get_issues_for_user">
+    <documentation>Get the issues filtered by the specified user within the specified project. Supported types include "assigned", "monitored", "reported".  Pass &quot;-1&quot; for the per_page parameter to get all issues.  Use project id &quot;0&quot; for all projects.</documentation>
+    <input message="tns:mc_project_get_issues_for_userRequest"/>
+    <output message="tns:mc_project_get_issues_for_userResponse"/>
+  </operation>
   <operation name="mc_project_get_issues">
     <documentation>Get the issues that match the specified project id and paging details. Pass &quot;-1&quot; for the per_page parameter to get all issues.</documentation>
     <input message="tns:mc_project_get_issuesRequest"/>
@@ -1258,6 +1273,11 @@
   </operation>
   <operation name="mc_project_get_id_from_name">
     <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_project_get_id_from_name" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="mc_project_get_issues_for_user">
+    <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_project_get_issues_for_user" style="rpc"/>
     <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
     <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
   </operation>

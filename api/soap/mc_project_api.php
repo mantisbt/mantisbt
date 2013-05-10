@@ -6,6 +6,78 @@
 # change the license of future releases.
 # See docs/ folder for more details
 
+
+/**
+ * Use a standard filter to get issues associated with the specified user.
+ *
+ * @param $p_username logged in user name.
+ * @param $p_password login password.
+ * @param $p_project_id id of project to filter on, or ALL_PROJECTS.
+ * @param $p_filter_type The name of the filter to apply
+ *        "assigned" - target user specified - issues assigned to target user that are not resolved.
+ *        "assigned" - target user 0 - unassigned issues that are not resolved.
+ *        "reported" - target user specified - issues reported by user.
+ *        "reported" - target user 0 - will throw.
+ *        "monitored" - target user specified - issues monitored by user.
+ *        "monitored" - target user 0 - issues not monitored.
+ * @param $p_target_user AccountData for target user, can include id, name, or both.
+ * @param $p_page_number the page to return (1 based).
+ * @param $p_per_page number of issues per page.
+ * @return IssueDataArray a page of matching issues.
+ */
+function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id, $p_filter_type, $p_target_user, $p_page_number, $p_per_page ) {
+	$t_user_id = mci_check_login( $p_username, $p_password );
+	if ( $t_user_id === false ) {
+		return mci_soap_fault_login_failed();
+	}
+	
+	if ( $p_project_id != ALL_PROJECTS && !project_exists( $p_project_id ) ) {
+		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
+	}
+
+	if ( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
+		return mci_soap_fault_access_denied( $t_user_id );
+	}
+
+	$t_lang = mci_get_user_lang( $t_user_id );
+
+	$t_orig_page_number = $p_page_number < 1 ? 1 : $p_page_number;
+	$t_page_count = 0;
+	$t_bug_count = 0;
+	$t_target_user_id = mci_get_user_id( $p_target_user );
+	$t_show_sticky = true;
+
+	if ( strcasecmp( $p_filter_type, 'assigned' ) == 0 ) {
+		$t_filter = filter_create_assigned_to_unresolved( $p_project_id, $t_target_user_id );
+	} else if ( strcasecmp( $p_filter_type, 'reported' ) == 0 ) {
+		// target id 0 for reporter doesn't make sense.
+		if ( $t_target_user_id == 0 ) {
+			return SoapObjectsFactory::newSoapFault( 'Client', "Target user id must be specified for 'reported' filter." );
+		}
+
+		$t_filter = filter_create_reported_by( $p_project_id, $t_target_user_id );
+	} else if ( strcasecmp( $p_filter_type, 'monitored' ) == 0 ) {
+		$t_filter = filter_create_monitored_by( $p_project_id, $t_target_user_id );
+	} else {
+		return SoapObjectsFactory::newSoapFault( 'Client', "Unknown filter type '$p_filter_type'." );
+	}
+
+	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter, $p_project_id, $t_target_user_id, $t_show_sticky );
+	
+	$t_result = array();
+	
+	// the page number was moved back, so we have exceeded the actual page number, see bug #12991
+	if ( $t_orig_page_number > $p_page_number ) {
+	    return $t_result;	
+	}
+
+	foreach( $t_rows as $t_issue_data ) {
+		$t_result[] = mci_issue_data_as_array( $t_issue_data, $t_user_id, $t_lang );
+	}
+
+	return $t_result;
+}
+
 function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page_number, $p_per_page ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {

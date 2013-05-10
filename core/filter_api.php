@@ -1070,7 +1070,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 	$t_current_user_id = auth_get_current_user_id();
 
-	if( null === $p_user_id ) {
+	if ( $p_user_id === null || $p_user_id === 0 ) {
 		$t_user_id = $t_current_user_id;
 	} else {
 		$t_user_id = $p_user_id;
@@ -4750,4 +4750,70 @@ function filter_name_valid_length( $p_name ) {
 	} else {
 		return true;
 	}
+}
+
+/**
+ * Create a filter for getting issues assigned to the specified project and user that
+ * are not yet resolved.
+ *
+ * @param $p_project_id the project id or ALL_PROJECTS.
+ * @param $p_user_id the user id or 0 to get unassigned issues.
+ * @return a valid filter.
+ */
+function filter_create_assigned_to_unresolved( $p_project_id, $p_user_id ) {
+	$t_filter = filter_get_default();
+
+	if ( $p_user_id == 0 ) {
+		$t_filter[FILTER_PROPERTY_HANDLER_ID] = array( '0' => META_FILTER_NONE );
+	} else {
+		$t_filter[FILTER_PROPERTY_HANDLER_ID] = array( '0' => $p_user_id );
+	}
+
+	$t_bug_resolved_status_threshold = config_get( 'bug_resolved_status_threshold', /* default */ null, $p_user_id, $p_project_id );
+	$t_filter[FILTER_PROPERTY_HIDE_STATUS] = array( '0' => $t_bug_resolved_status_threshold );
+
+	if ( $p_project_id != ALL_PROJECTS ) {
+		$t_filter[FILTER_PROPERTY_PROJECT_ID] = array( '0' => $p_project_id );
+	}
+
+	return filter_ensure_valid_filter( $t_filter );
+}
+
+/**
+ * Create a filter for getting issues reported by the specified project and user.
+ * @param $p_project_id the project id or ALL_PROJECTS.
+ * @param $p_user_id the user id.
+ * @return a valid filter.
+ */
+function filter_create_reported_by( $p_project_id, $p_user_id ) {
+	$t_filter = filter_get_default();
+	$t_filter[FILTER_PROPERTY_REPORTER_ID] = array( '0' => $p_user_id );
+
+	if ( $p_project_id != ALL_PROJECTS ) {
+		$t_filter[FILTER_PROPERTY_PROJECT_ID] = array( '0' => $p_project_id );
+	}
+
+	return filter_ensure_valid_filter( $t_filter );
+}
+
+/**
+ * Create a filter for getting issues monitored by the specified project and user.
+ * @param $p_project_id the project id or ALL_PROJECTS.
+ * @param $p_user_id the user id.
+ * @return a valid filter.
+ */
+function filter_create_monitored_by( $p_project_id, $p_user_id ) {
+	$t_filter = filter_get_default();
+
+	if ( $p_user_id == 0 ) {
+		$t_filter[FILTER_PROPERTY_MONITOR_USER_ID] = array( '0' => META_FILTER_NONE );
+	} else {
+		$t_filter[FILTER_PROPERTY_MONITOR_USER_ID] = array( '0' => $p_user_id );
+	}
+
+	if ( $p_project_id != ALL_PROJECTS ) {
+		$t_filter[FILTER_PROPERTY_PROJECT_ID] = array( '0' => $p_project_id );
+	}
+
+	return filter_ensure_valid_filter( $t_filter );
 }
