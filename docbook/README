@@ -3,7 +3,7 @@ Building the DocBook Manuals
 
 Go to the directory containing manual to build, e.g. :
 
-    $ cd adminguide/en
+    $ cd administration_guide/en
 
 Build the guide in the desired format, e.g. :
 
