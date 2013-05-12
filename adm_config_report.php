@@ -491,7 +491,7 @@ if( $t_read_write_access ) {
 				<label for="config-value"><span><?php echo lang_get( 'configuration_option_value' ) ?></span></label>
 				<span class="textarea">
 					<textarea name="value" cols="80" rows="10"><?php
-						echo print_config_value_as_string( $t_edit_type, $t_edit_value, false );
+						print_config_value_as_string( $t_edit_type, $t_edit_value, false );
 					?></textarea>
 				</span>
 				<span class="label-style"></span>
