@@ -64,7 +64,7 @@ abstract class RSSBase {
 			return (boolean) (!ctype_space($string)) ? TRUE : FALSE;
 		} // end if
 
-		return (boolean) (strlen(trim($var)) > $min_length) ? TRUE : FALSE;
+		return (boolean) (strlen(trim($string)) > $min_length) ? TRUE : FALSE;
 	} // end function
 
 } // end class
