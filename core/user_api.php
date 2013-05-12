@@ -477,7 +477,7 @@ function user_get_logged_in_user_ids( $p_session_duration_in_minutes ) {
 
 	# Execute query
 	$query = 'SELECT id FROM ' . $t_user_table . ' WHERE last_visit > ' . db_param();
-	$result = db_query_bound( $query, array( $c_last_timestamp_threshold ), 1 );
+	$result = db_query_bound( $query, array( $t_last_timestamp_threshold ), 1 );
 
 	# Get the list of connected users
 	$t_users_connected = array();
