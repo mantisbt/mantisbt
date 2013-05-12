@@ -67,6 +67,7 @@ function print_status_icon( $p_icon ) {
 function print_sort_icon( $p_dir, $p_sort_by, $p_field ) {
 	$t_icon_path = config_get( 'icon_path' );
 	$t_sort_icon_arr = config_get( 'sort_icon_arr' );
+	$t_status_icon_arr = config_get( 'status_icon_arr' );
 
 	if( $p_sort_by != $p_field ) {
 		return;
