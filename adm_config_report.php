@@ -492,7 +492,7 @@ if( $t_read_write_access ) {
 	</td>
 	<td>
 		<textarea name="value" cols="80" rows="10"><?php
-			echo print_config_value_as_string( $t_edit_type, $t_edit_value, false );
+			print_config_value_as_string( $t_edit_type, $t_edit_value, false );
 		?></textarea>
 	</td>
 </tr>
