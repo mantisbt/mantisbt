@@ -75,7 +75,7 @@
 		<?php echo lang_get( 'signup_captcha_request' ) ?>:
 	</td>
 	<td>
-		<?php print_captcha_input( 'captcha', '' ) ?>
+		<?php print_captcha_input( 'captcha' ) ?>
 	</td>
 	<td>
 		<img src="make_captcha_img.php?public_key=<?php echo $t_key ?>" alt="visual captcha" />
