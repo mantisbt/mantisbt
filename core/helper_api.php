@@ -203,7 +203,7 @@ function helper_get_current_project() {
 		$t_project_id = gpc_get_cookie( $t_cookie_name, null );
 
 		if( null === $t_project_id ) {
-			$t_pref = user_pref_get( auth_get_current_user_id(), ALL_PROJECTS, false );
+			$t_pref = user_pref_get( auth_get_current_user_id(), ALL_PROJECTS );
 			$t_project_id = $t_pref->default_project;
 		} else {
 			$t_project_id = explode( ';', $t_project_id );
