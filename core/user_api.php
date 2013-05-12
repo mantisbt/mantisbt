@@ -427,7 +427,7 @@ function user_get_logged_in_user_ids( $p_session_duration_in_minutes ) {
 
 	# Execute query
 	$query = 'SELECT id FROM ' . $t_user_table . ' WHERE last_visit > ' . db_param();
-	$result = db_query_bound( $query, array( $c_last_timestamp_threshold ), 1 );
+	$result = db_query_bound( $query, array( $t_last_timestamp_threshold ), 1 );
 
 	# Get the list of connected users
 	$t_users_connected = array();
@@ -463,8 +463,7 @@ function user_create( $p_username, $p_password, $p_email = '',
 	user_ensure_realname_unique( $p_username, $p_realname );
 	email_ensure_valid( $p_email );
 
-	$t_seed = $p_email . $p_username;
-	$t_cookie_string = auth_generate_unique_cookie_string( $t_seed );
+	$t_cookie_string = auth_generate_unique_cookie_string();
 	$t_user_table = db_get_table( 'mantis_user_table' );
 
 	$query = "INSERT INTO $t_user_table
@@ -1302,8 +1301,7 @@ function user_set_password( $p_user_id, $p_password, $p_allow_protected = false 
 
 	# When the password is changed, invalidate the cookie to expire sessions that
 	# may be active on all browsers.
-	$t_seed = $t_email . $t_username;
-	$c_cookie_string = auth_generate_unique_cookie_string( $t_seed );
+	$c_cookie_string = auth_generate_unique_cookie_string();
 
 	$c_user_id = db_prepare_int( $p_user_id );
 	$c_password = auth_process_plain_password( $p_password );
