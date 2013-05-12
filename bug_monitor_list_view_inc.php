@@ -54,7 +54,7 @@ if ( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_i
 			$t_can_delete_others = access_has_bug_level( config_get( 'monitor_delete_others_bug_threshold' ), $f_bug_id ); 
 	 		for ( $i = 0; $i < $num_users; $i++ ) {
 				echo ($i > 0) ? ', ' : '';
-				echo print_user( $t_users[$i] );
+				print_user( $t_users[$i] );
 				if ( $t_can_delete_others ) {
 					echo ' [<a class="small" href="' . helper_mantis_url( 'bug_monitor_delete.php' ) . '?bug_id=' . $f_bug_id . '&user_id=' . $t_users[$i] . form_security_param( 'bug_monitor_delete' ) . '">' . lang_get( 'delete_link' ) . '</a>]';
 				}
