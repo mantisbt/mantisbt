@@ -4088,7 +4088,7 @@ function print_filter_custom_field( $p_field_id ) {
 		# Note: Prior to PHP 4.2.0, array_search() returns NULL on failure instead of FALSE.
 		?>
 			<span style="color:red;weight:bold;">
-				unknown custom filter (custom <?php $p_field_id;?>)
+				unknown custom filter (custom <?php echo $p_field_id;?>)
 			</span>
 			<?php
 	} else if( isset( $t_accessible_custom_fields_names[$j] ) ) {
@@ -4691,7 +4691,7 @@ function filter_db_delete_filter( $p_filter_id ) {
 	$query = 'DELETE FROM ' . $t_filters_table . ' WHERE id=' . db_param();
 	$result = db_query_bound( $query, Array( $c_filter_id ) );
 
-	if( db_affected_rows( $result ) > 0 ) {
+	if( db_affected_rows() > 0 ) {
 		return true;
 	}
 
