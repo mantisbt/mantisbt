@@ -590,13 +590,13 @@ function print_extended_project_browser( $p_trace = Array(), $p_project_id = nul
 	echo '// --></script>' . "\n";
 	echo '<select name="top_id" onChange="setProject(this.value); document.form_set_project.submit()" class="small">' . "\n";
 	echo '<option value="' . ALL_PROJECTS . '"';
-	echo check_selected( $p_project_id, ALL_PROJECTS );
+	check_selected( $p_project_id, ALL_PROJECTS );
 	echo '>' . lang_get( 'all_projects' ) . '</option>' . "\n";
 
 	foreach( $t_projects as $t_id => $t_name ) {
 		$c_name = string_attribute( $t_name );
 		echo '<option value="' . $t_id . '"';
-		echo check_selected( $p_project_id, $t_id );
+		check_selected( $p_project_id, $t_id );
 		echo '>' . $c_name . '</option>' . "\n";
 	}
 
@@ -1646,6 +1646,7 @@ function get_dropdown( $p_control_array, $p_control_name, $p_match = '', $p_add_
 	$t_script = ( $p_change_script == '' ? '' : ' onchange="' . $p_change_script . '"' );
 	$t_info = sprintf( "<select %s name=\"%s\" id=\"%s\"%s%s>", $t_multiple, $p_control_name, $p_control_name, $t_size, $t_script );
 	if( $p_add_any ) {
+		// FIXME: array_unshift_assoc() and lang_trans() don't exist
 		array_unshift_assoc( $t_control_array, META_FILTER_ANY, lang_trans( '[any]' ) );
 	}
 	while( list( $t_name, $t_desc ) = each( $t_control_array ) ) {
