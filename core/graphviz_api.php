@@ -360,7 +360,7 @@ class Graph {
 					ob_end_flush();
 				} else {
 					# No need for headers, send output directly.
-					echo base64_decode( $ret->ToBase64String() );
+					echo base64_decode( $t_dot_output->ToBase64String() );
 				}
 			} else {
 				# Text formats
