@@ -95,7 +95,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 				echo '<div class="field-container">';
 				echo '<label for="captcha-field"><span>' . lang_get( 'signup_captcha_request_label' ) . '</span></label>';
 				echo '<span id="captcha-input" class="input">';
-				print_captcha_input( 'captcha', '' );
+				print_captcha_input( 'captcha' );
 				echo '<span class="captcha-image"><img src="library/securimage/securimage_show.php" alt="visual captcha" /></span>';
 				echo ' <object type="application/x-shockwave-flash" data="library/securimage/securimage_play.swf?audio_file=library/securimage/securimage_play.php&amp;bgColor1=#fff&amp;bgColor2=#fff&amp;iconColor=#777&amp;borderWidth=1&amp;borderColor=#000" width="19" height="19">
 				<param name="movie" value="library/securimage/securimage_play.swf?audio_file=library/securimage/securimage_play.php&amp;bgColor1=#fff&amp;bgColor2=#fff&amp;iconColor=#777&amp;borderWidth=1&amp;borderColor=#000" />
