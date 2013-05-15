@@ -359,8 +359,14 @@ function auth_get_password_max_size() {
 function auth_does_password_match( $p_user_id, $p_test_password ) {
 	$t_configured_login_method = config_get( 'login_method' );
 
-	if( LDAP == $t_configured_login_method ) {
-		return ldap_authenticate( $p_user_id, $p_test_password );
+	switch( $t_configured_login_method ) {
+		case LDAP:
+			return ldap_authenticate( $p_user_id, $p_test_password );
+			break;
+
+		case HTTP_AUTH:
+			return true;
+			break;
 	}
 
 	$t_password = user_get_field( $p_user_id, 'password' );
