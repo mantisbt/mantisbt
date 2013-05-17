@@ -17,7 +17,7 @@
 
 		<para>
 			Here we show an example event definition.  For each event, the event identifier will be listed
-			along with the <link linkend="dev.events.types">event type</link> in parentheses.  Below that
+			along with the event types (see <xref linkend="dev.events.types" />) in parentheses.  Below that
 			should be a concise but thorough description of how the event is called and how to use it.
 			Following that should be a list of event parameters (if any), as well as the expected return
 			value (if any).

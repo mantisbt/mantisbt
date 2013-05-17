@@ -100,8 +100,8 @@ event_hook( $events, [$plugin] );
 
 			<para>
 				Each type of event (and individual events themselves) will use different
-				combinations of parameters and return values, so use of the
-				<link linkend="dev.eventref">Event Reference</link> is recommended for
+				combinations of parameters and return values, so perusing
+				<xref linkend="dev.eventref" /> is recommended for
 				determining the unique needs of each event when signalling and hooking them.
 			</para>
 		</blockquote>
@@ -120,8 +120,8 @@ event_hook( $events, [$plugin] );
 
 		<para>
 			Each type of event (and individual events themselves) will use different
-			combinations of parameters and return values, so use of the
-			<link linkend="dev.eventref">Event Reference</link> is recommended for
+			combinations of parameters and return values, so perusing
+			<xref linkend="dev.eventref" /> is recommended for
 			determining the unique needs of each event when signalling and hooking them.
 		</para>
 

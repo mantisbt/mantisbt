@@ -9,8 +9,8 @@
 	<para>
 		MantisBT uses the source control tool <ulink url="http://git.or.cz">Git</ulink>
 		for tracking development of the project.  If you are new to Git, you can
-		find some good resources for learning and installing Git in the
-		<link linkend="dev.appendix.git">Appendix</link>.
+		find some good resources for learning and installing Git in
+		<xref linkend="dev.appendix.git" />.
 	</para>
 
 	<section id="dev.contrib.setup">
@@ -142,8 +142,8 @@ $ git pull --rebase
 			need to keep it up to date with the appropriate master branch.  There are
 			multiple methods for doing this, each better suited to a different type of
 			feature branch.  <emphasis>Both methods assume that you have already
-			performed the previous step, to <link linkend="dev.contrib.branch">update
-			your local tracking branches</link>.</emphasis>
+			performed the previous step, to update your local tracking branches
+			(see <xref linkend="dev.contrib.branch" />).</emphasis>
 		</para>
 
 		<section id="dev.contrib.prepare.local">
@@ -194,7 +194,7 @@ $ git rebase remote/feature
 				history where your branch started and joining at the merge.  These merge
 				commits are generally disliked, because they can crowd commit history, and
 				because the history is no longer linear.  They will be dealt with during
-				the <link linkend="dev.contrib.submit.repo">submission process</link>.
+				the submission process (see <xref linkend="dev.contrib.submit.repo" />).
 			</para>
 
 			<programlisting>
@@ -224,15 +224,15 @@ $ git merge master
 
 		<para>
 			In order to run the tests, you will need to have the PHP Soap extension
-			, <ulink url="http://www.phpunit.de">PHPUnit 3.4 or newer</ulink> and 
+			, <ulink url="http://www.phpunit.de">PHPUnit 3.4 or newer</ulink> and
 			<ulink url="http://phing.info">Phing 2.4 or newer</ulink> installed.
-			The tests are configured using a <literal>bootstrap.php</literal> file. The 
+			The tests are configured using a <literal>bootstrap.php</literal> file. The
 			<literal>boostrap.php.sample</literal> file contains the settings you will
-			need to adjust to run all the tests. 
+			need to adjust to run all the tests.
 		</para>
 
 		<para>
-			Running the unit tests is done from root directory using the following 
+			Running the unit tests is done from root directory using the following
 			command:
 		</para>
 
@@ -251,7 +251,7 @@ $ phing test
 			<itemizedlist>
         	                <listitem><para>Install MantisBT locally and configure a project
 				and a category.</para></listitem>
-				<listitem><para>Adjust the <literal>bootstrap.php</literal> file 
+				<listitem><para>Adjust the <literal>bootstrap.php</literal> file
 				to point to your local installation.</para></listitem>
 				<listitem><para>Customize the <literal>config_inc.php</literal>
 				to enable all the features tested using the SOAP tests. The
@@ -297,12 +297,12 @@ $ phing test
 		</para>
 
 		<section id="dev.contrib.submit.patch">
-			<title>Via Formatted Patches</title>
+			<title>Submission Via Formatted Patches</title>
 
 			<para>
 				Assuming that you have an existing local branch that you've kept up to date
 				with <literal>master</literal> as described in
-				<link linkend="dev.contrib.prepare">Preparing Feature Branches</link>,
+				<xref linkend="dev.contrib.prepare" />,
 				generating a formatted patch set should be relatively straightforward,
 				using an appropriate filename as the target of the patch set:
 			</para>
@@ -326,7 +326,7 @@ $ git am --signoff feature_branch.patch
 		</section>
 
 		<section id="dev.contrib.submit.repo">
-			<title>Via Public Repository</title>
+			<title>Submission Via Public Repository</title>
 
 			<para>
 				We'll assume that you've already set up a public repository, either on a

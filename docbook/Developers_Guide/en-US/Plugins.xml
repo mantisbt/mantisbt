@@ -13,7 +13,7 @@
 			The plugin system for MantisBT is designed as a lightweight extension to the
 			standard MantisBT API, allowing for simple and flexible addition of new
 			features and customization of core operations.  It takes advantage of the new
-			<link linkend="dev.events">Event System</link> to offer developers rapid
+			Event System (see <xref linkend="dev.events" />) to offer developers rapid
 			creation and testing of extensions, without the need to modify core files.
 		</para>
 

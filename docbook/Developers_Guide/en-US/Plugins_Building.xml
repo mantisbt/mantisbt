@@ -17,8 +17,8 @@
 
 		<para>
 			This walkthrough will be working towards building a single end result: the
-			"Example" plugin as listed in the <link linkend="dev.plugins.building.source">
-			next section</link>.  You may refer to the final source code along the way,
+			"Example" plugin as listed in <xref linkend="dev.plugins.building.source" />.
+			You may refer to the final source code along the way,
 			although every part of it will be built up in steps throughout this section.
 		</para>
 
