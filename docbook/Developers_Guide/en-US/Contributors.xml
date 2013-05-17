@@ -13,7 +13,7 @@
 		<link linkend="dev.appendix.git">Appendix</link>.
 	</para>
 
-	<sect1 id="dev.contrib.setup">
+	<section id="dev.contrib.setup">
 		<title>Initial Setup</title>
 
 		<para>
@@ -50,9 +50,9 @@ $ git config --global alias.co "checkout"
 $ git config --global alias.ci "commit"
 		</programlisting>
 
-	</sect1>
+	</section>
 
-	<sect1 id="dev.contrib.clone">
+	<section id="dev.contrib.clone">
 		<title>Cloning the Repository</title>
 
 		<para>
@@ -94,9 +94,9 @@ $ git clone git@github.com:mantisbt/mantisbt.git
 $ git checkout -b master-1.2.x origin/master-1.2.x
 		</programlisting>
 
-	</sect1>
+	</section>
 
-	<sect1 id="dev.contrib.branch">
+	<section id="dev.contrib.branch">
 		<title>Maintaining Tracking Branches</title>
 
 		<para>
@@ -132,9 +132,9 @@ $ git rebase origin/master
 $ git checkout master
 $ git pull --rebase
 		</programlisting>
-	</sect1>
+	</section>
 
-	<sect1 id="dev.contrib.prepare">
+	<section id="dev.contrib.prepare">
 		<title>Preparing Feature Branches</title>
 
 		<para>
@@ -146,7 +146,7 @@ $ git pull --rebase
 			your local tracking branches</link>.</emphasis>
 		</para>
 
-		<sect2 id="dev.contrib.prepare.local">
+		<section id="dev.contrib.prepare.local">
 			<title>Private Branches</title>
 
 			<para>
@@ -175,9 +175,9 @@ $ git checkout feature
 $ git fetch remote/feature
 $ git rebase remote/feature
 			</programlisting>
-		</sect2>
+		</section>
 
-		<sect2 id="dev.contrib.prepare.public">
+		<section id="dev.contrib.prepare.public">
 			<title>Public Branches</title>
 
 			<para>
@@ -208,11 +208,11 @@ $ git merge master
 				local branch, either with another merge, or with a rebase, as necessitated
 				by the public or private status of their own changes.
 			</para>
-		</sect2>
+		</section>
 
-	</sect1>
+	</section>
 
-	<sect1 id="dev.contrib.test">
+	<section id="dev.contrib.test">
 		<title>Running PHPUnit tests</title>
 
 		<para>
@@ -240,7 +240,7 @@ $ git merge master
 $ phing test
 		</programlisting>
 
-		<sect2 id="dev.contrib.test.soap">
+		<section id="dev.contrib.test.soap">
 			<title>Running the SOAP tests</title>
 
 			<para>
@@ -259,11 +259,11 @@ $ phing test
 				based on the skipped tests.</para></listitem>
 			</itemizedlist>
 
-		</sect2>
+		</section>
 
-	</sect1>
+	</section>
 
-	<sect1 id="dev.contrib.submit">
+	<section id="dev.contrib.submit">
 		<title>Submitting Changes</title>
 
 		<para>
@@ -296,7 +296,7 @@ $ phing test
 			<ulink url="http://gitorious.com">Gitorious</ulink>.
 		</para>
 
-		<sect2 id="dev.contrib.submit.patch">
+		<section id="dev.contrib.submit.patch">
 			<title>Via Formatted Patches</title>
 
 			<para>
@@ -323,9 +323,9 @@ $ git format-patch --binary --stdout origin/master..HEAD > feature_branch.patch
 $ git am --signoff feature_branch.patch
 			</programlisting>
 
-		</sect2>
+		</section>
 
-		<sect2 id="dev.contrib.submit.repo">
+		<section id="dev.contrib.submit.repo">
 			<title>Via Public Repository</title>
 
 			<para>
@@ -406,9 +406,9 @@ $ git format-patch --binary --stdout master..HEAD > feature_branch.patch
 $ git am --signoff feature_branch.patch
 			</programlisting>
 
-		</sect2>
+		</section>
 
-	</sect1>
+	</section>
 
 </chapter>
 

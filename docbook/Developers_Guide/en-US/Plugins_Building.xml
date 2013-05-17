@@ -4,7 +4,7 @@
 %BOOK_ENTITIES;
 ]>
 
-<sect1 id="dev.plugins.building">
+<section id="dev.plugins.building">
 		<title>Building a Plugin</title>
 
 		<para>
@@ -22,7 +22,7 @@
 			although every part of it will be built up in steps throughout this section.
 		</para>
 
-		<sect2 id="dev.plugins.building.basics">
+		<section id="dev.plugins.building.basics">
 			<title>The Basics</title>
 
 			<para>
@@ -32,7 +32,7 @@
 				get the development process rolling.
 			</para>
 
-			<sect3 id="dev.plugins.building.basics.structure">
+			<section id="dev.plugins.building.basics.structure">
 				<title>Plugin Structure</title>
 
 				<para>
@@ -106,10 +106,10 @@ class ExamplePlugin extends MantisPlugin {
 					is the foundation of any plugin.  More of the plugin development process
 					will be continued in the next sections.
 				</para>
-			</sect3>
-		</sect2>
+			</section>
+		</section>
 
-		<sect2 id="dev.plugins.building.pages">
+		<section id="dev.plugins.building.pages">
 			<title>Pages and Files</title>
 
 			<para>
@@ -180,9 +180,9 @@ Example/
 		foo.css
 			</programlisting>
 
-		</sect2>
+		</section>
 
-		<sect2 id="dev.plugins.building.events">
+		<section id="dev.plugins.building.events">
 			<title>Events</title>
 
 			<para>
@@ -310,9 +310,9 @@ echo $t_new_string, '&lt;/p&gt;';
 				Example plugin, or vice versa, depending on the loading order of plugins.  The
 				page then echos the modified string that was returned from the event.
 			</para>
-		</sect2>
+		</section>
 
-		<sect2 id="dev.plugins.building.config">
+		<section id="dev.plugins.building.config">
 			<title>Configuration</title>
 
 			<para>
@@ -392,9 +392,9 @@ print_successful_redirect( plugin_page( 'foo', true ) );
 				Note that the <function>form_security_*()</function> functions are part of the
 				form API, and prevent CSRF attacks against forms that make changes to the system.
 			</para>
-		</sect2>
+		</section>
 
-		<sect2 id="dev.plugins.building.language">
+		<section id="dev.plugins.building.language">
 			<title>Language and Localization</title>
 
 			<para>
@@ -481,6 +481,6 @@ html_page_bottom();
 				generates the CSS classes for alternating row colors in the table.  The rest of the
 				HTML and CSS follows the "standard" MantisBT markup styles for content and layout.
 			</para>
-		</sect2>
+		</section>
 
-	</sect1>
+	</section>

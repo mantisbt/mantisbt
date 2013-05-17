@@ -3,10 +3,10 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "Developers_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<sect1 id="dev.eventref.output">
+<section id="dev.eventref.output">
 	<title>Output Modifier Events</title>
 
-	<sect2 id="dev.eventref.output.display">
+	<section id="dev.eventref.output.display">
 		<title>String Display</title>
 
 		<para>
@@ -130,9 +130,9 @@
 			</blockquote>
 		</blockquote>
 
-	</sect2>
+	</section>
 
-	<sect2 id="dev.eventref.output.menu">
+	<section id="dev.eventref.output.menu">
 		<title>Menu Items</title>
 
 		<para>
@@ -285,9 +285,9 @@
 			</blockquote>
 		</blockquote>
 
-	</sect2>
+	</section>
 
-	<sect2 id="dev.eventref.output.layout">
+	<section id="dev.eventref.output.layout">
 		<title>Page Layout</title>
 
 		<para>
@@ -420,5 +420,5 @@
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
-	</sect2>
-</sect1>
+	</section>
+</section>

@@ -6,7 +6,7 @@
 <chapter id="dev.events">
 	<title>Event System</title>
 
-	<sect1 id="dev.events.concepts">
+	<section id="dev.events.concepts">
 		<title>General Concepts</title>
 
 		<para>
@@ -22,9 +22,9 @@
 			values from hooked functions will be handled in different ways to make
 			certain types of common communication simplified.
 		</para>
-	</sect1>
+	</section>
 
-	<sect1 id="dev.events.api">
+	<section id="dev.events.api">
 		<title>API Usage</title>
 
 		<para>
@@ -105,9 +105,9 @@ event_hook( $events, [$plugin] );
 				determining the unique needs of each event when signalling and hooking them.
 			</para>
 		</blockquote>
-	</sect1>
+	</section>
 
-	<sect1 id="dev.events.types">
+	<section id="dev.events.types">
 		<title>Event Types</title>
 
 		<para>
@@ -227,5 +227,5 @@ event_hook( $events, [$plugin] );
 
 			<programlisting>$values = event_signal( $event_name, [ array( $param, ... ) ] );</programlisting>
 		</blockquote>
-	</sect1>
+	</section>
 </chapter>

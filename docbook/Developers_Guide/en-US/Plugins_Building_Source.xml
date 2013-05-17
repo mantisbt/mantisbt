@@ -3,7 +3,7 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "Developers_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<sect1 id="dev.plugins.building.source">
+<section id="dev.plugins.building.source">
 	<title>Example Plugin Source Listing</title>
 
 	<para>
@@ -25,7 +25,7 @@ Example/
         foo.php
 	</programlisting>
 
-	<sect2 id="dev.plugins.building.source.Example.php">
+	<section id="dev.plugins.building.source.Example.php">
 		<title>Example/Example.php</title>
 
 		<programlisting><filename>Example/Example.php</filename>
@@ -76,9 +76,9 @@ class ExamplePlugin extends MantisPlugin {
 
 }
 		</programlisting>
-	</sect2>
+	</section>
 
-	<sect2 id="dev.plugins.building.source.foo.css">
+	<section id="dev.plugins.building.source.foo.css">
 		<title>Example/files/foo.css</title>
 
 		<programlisting><filename>Example/files/foo.css</filename>
@@ -86,9 +86,9 @@ p.foo {
     color: red;
 }
 		</programlisting>
-	</sect2>
+	</section>
 
-	<sect2 id="dev.plugins.building.source.stringsenglish.txt">
+	<section id="dev.plugins.building.source.stringsenglish.txt">
 		<title>Example/lang/strings_english.txt</title>
 
 		<programlisting><filename>Example/lang/strings_english.txt</filename>
@@ -98,9 +98,9 @@ $s_plugin_Example_configuration = "Configuration";
 $s_plugin_Example_foo_or_bar = "Foo or Bar?";
 $s_plugin_Example_reset = "Reset Value";
 		</programlisting>
-	</sect2>
+	</section>
 
-	<sect2 id="dev.plugins.building.source.configpage.php">
+	<section id="dev.plugins.building.source.configpage.php">
 		<title>Example/page/config_page.php</title>
 
 		<programlisting><filename>Example/pages/config_page.php</filename>
@@ -142,9 +142,9 @@ $t_foo_or_bar = plugin_config_get( 'foo_or_bar' );
 
 html_page_bottom();
 		</programlisting>
-	</sect2>
+	</section>
 
-	<sect2 id="dev.plugins.building.source.configupdate.php">
+	<section id="dev.plugins.building.source.configupdate.php">
 		<title>Example/pages/config_update.php</title>
 
 		<programlisting><filename>Example/pages/config_update.php</filename>
@@ -165,9 +165,9 @@ if ( $f_reset ) {
 form_security_purge( 'plugin_Example_config_update' );
 print_successful_redirect( plugin_page( 'foo', true ) );
 		</programlisting>
-	</sect2>
+	</section>
 
-	<sect2 id="dev.plugins.building.source.foo.php">
+	<section id="dev.plugins.building.source.foo.php">
 		<title>Example/page/foo.php</title>
 
 		<programlisting><filename>Example/pages/foo.php</filename>
@@ -183,5 +183,5 @@ $t_new_string = event_signal( 'EVENT_EXAMPLE_BAR', array( $t_string ) );
 
 echo $t_new_string, '&lt;/p&gt;';
 		</programlisting>
-	</sect2>
-</sect1>
+	</section>
+</section>

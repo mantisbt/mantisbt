@@ -6,7 +6,7 @@
 <chapter id="dev.eventref">
 	<title>Events Reference</title>
 
-	<sect1 id="dev.eventref.intro">
+	<section id="dev.eventref.intro">
 		<title>Introduction</title>
 
 		<para>
@@ -44,9 +44,9 @@
 			</blockquote>
 		</blockquote>
 
-	</sect1>
+	</section>
 
-	<sect1 id="dev.eventref.system">
+	<section id="dev.eventref.system">
 		<title>System Events</title>
 
 		<para>
@@ -116,7 +116,7 @@
 			</blockquote>
 		</blockquote>
 
-	</sect1>
+	</section>
 
 	<xi:include href="Events_Reference_Output.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="Events_Reference_Filter.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />

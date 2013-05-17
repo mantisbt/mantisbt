@@ -6,7 +6,7 @@
 <chapter id="dev.appendix">
 	<title>Appendix</title>
 
-	<sect1 id="dev.appendix.git">
+	<section id="dev.appendix.git">
 		<title>Git References</title>
 
 		<itemizedlist>
@@ -36,5 +36,5 @@
 			</para></listitem>
 
 		</itemizedlist>
-	</sect1>
+	</section>
 </chapter>
