@@ -45,9 +45,10 @@
                        recommended that you use a ready-made bundle, such as the Axis
                        bundle available from <ulink url="http://download.eclipse.org/tools/orbit/downloads/">
                        Eclipse Orbit</ulink>
+                       </para>
                </sect2>
        </sect1>
-       
+
        <sect1 id="integrators.compatibility">
                <title>Compatibility between releases</title>
 
@@ -55,9 +56,9 @@
                </para>
                <para>Some of these changes might require a refresh of the client libraries generated, for instance Apache Axis 1 SOAP stubs must be
                regenerated if a complex type receives a new property. Such changes will be announced before the release of the new MantisBT version
-               on the <ulink url="http://lists.sourceforge.net/mailman/listinfo/mantisbt-soap-dev"> mantisbt-soap-dev mailing list</ulink> . 
+               on the <ulink url="http://lists.sourceforge.net/mailman/listinfo/mantisbt-soap-dev"> mantisbt-soap-dev mailing list</ulink> .
                Typically there will be two weeks time to integrate the new SOAP stubs.</para>
-       	
+
        </sect1>
 
        <sect1 id="integrators.support">
