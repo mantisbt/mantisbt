@@ -1,6 +1,32 @@
 <chapter id="dev.database">
 	<title>Database Schema Management</title>
 
+	<sect1 id="dev.database.erd">
+		<title>The MantisBT schema</title>
+
+		<para>The MantisBT database schema (excluding plugins) is described in
+			the Entity-Relationship diagram (ERD) below. There is also a
+			<ulink url="http://mantisbt.org/docs/erd/">
+				PDF version available for download</ulink>.
+		</para>
+
+		<figure id="erd">
+			<title>MantisBT Entity-Relationship Diagram</title>
+			<ulink url="images/erd.png">
+				<inlinemediaobject>
+					<!-- DRE 20130517 - This is supposed to scale the image to page width
+						(ref. http://www.sagehill.net/docbookxsl/ImageSizing.html)
+						but it doesn't work
+					-->
+					<imageobject role=html>
+						<imagedata fileref="images/erd.png" scalefit="1" width="100%">
+					</imageobject>
+				</inlinemediaobject>
+			</ulink>
+		</figure>
+
+	</sect1>
+
 	<sect1 id="dev.database.schema">
 		<title>Schema Definition</title>
 
