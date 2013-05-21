@@ -1107,8 +1107,6 @@
 						<ulink url="http://php.net/date.timezone">php.ini</ulink>.
 						Note that this function's behavior was modified in PHP 5.4.0.
 					</para>
-					<para>
-					</para>
 				</listitem>
 			</varlistentry>
 		</variablelist>
@@ -3287,13 +3285,13 @@
                             <varlistentry>
                                 <term>LOG_AJAX</term>
                                 <listitem>
-                                    <para></para>
+                                    <para>logs AJAX events</para>
                                 </listitem>
                             </varlistentry>
                             <varlistentry>
                                 <term>LOG_DATABASE</term>
                                 <listitem>
-                                    <para></para>
+                                    <para>logs database events and executed queries</para>
                                 </listitem>
                             </varlistentry>
                             <varlistentry>
@@ -3316,7 +3314,7 @@
                             <varlistentry>
                                 <term>LOG_FILTERING</term>
                                 <listitem>
-                                    <para></para>
+                                    <para>logs filter operations</para>
                                 </listitem>
                             </varlistentry>
                             <varlistentry>
