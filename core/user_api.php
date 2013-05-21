@@ -1458,6 +1458,11 @@ function user_reset_password( $p_user_id, $p_send_email = true ) {
 	#     and user_reset_password() )?
 	if(( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 
+		$t_email = user_get_field( $p_user_id, 'email' );
+		if( is_blank( $t_email ) ) {
+			trigger_error( ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED, ERROR );
+		}
+
 		# Create random password
 		$t_password = auth_generate_random_password();
 		$t_password2 = auth_process_plain_password( $t_password );
