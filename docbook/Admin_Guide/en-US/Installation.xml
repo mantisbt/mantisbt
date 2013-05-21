@@ -168,10 +168,10 @@
 						<itemizedlist>
 							<listitem><para><emphasis>mandatory</emphasis>:
 								the extension for the RDBMS being used (
-									mysqli,
+									mysql/mysqli,
 									pgsql,
 									oci8,
-									mssql/sqlsrv,
+									sqlsrv,
 									ibm-db2
 								)
 							</para></listitem>
@@ -258,7 +258,7 @@
 								<entry>MySQL</entry>
 								<entry>4.1.x</entry>
 								<entry>5.5.x or above</entry>
-								<entry>PHP extension: mysqli</entry>
+								<entry>PHP extension: mysql/mysqli</entry>
 							</row>
 							<row>
 								<entry>PostgreSQL</entry>
