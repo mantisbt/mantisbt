@@ -49,11 +49,63 @@
             <varlistentry>
                 <term>$g_db_type</term>
                 <listitem>
-                    <para>The supported database types include: 'mysql' or 'mysqli' for MySQL,
-		    'pgsql' for PostgreSQL, 'mssql' for MS SQL Server, 'oci8' for Oracle,
-		    and 'db2' for DB2.  It is important to make sure that the PHP extension
-		    corresponding to the database type is enabled.
-                    </para>
+					<para>The supported database types are listed in the table
+						below.
+					</para>
+					<para>The PHP extension corresponding to the selected type
+						must be enabled.
+					</para>
+
+					<informaltable>
+						<tgroup cols="4">
+							<thead>
+								<row>
+									<entry>RDBMS</entry>
+									<entry>db_type</entry>
+									<entry>PHP extension</entry>
+									<entry>Comments</entry>
+								</row>
+							</thead>
+							<tbody>
+								<row>
+									<entry morerows='1' valign='middle'>MySQL</entry>
+									<entry>mysql</entry>
+									<entry>mysql</entry>
+									<entry>default</entry>
+								</row>
+								<row>
+									<entry>mysqli</entry>
+									<entry>mysqli</entry>
+									<entry></entry>
+								</row>
+								<row>
+									<entry>PostgreSQL</entry>
+									<entry>pgsql</entry>
+									<entry>pgsql</entry>
+									<entry></entry>
+								</row>
+								<row>
+									<entry>IBM DB2</entry>
+									<entry>db2</entry>
+									<entry>db2</entry>
+									<entry>experimental</entry>
+								</row>
+								<row>
+									<entry>MS SQL Server</entry>
+									<entry>mssqlnative</entry>
+									<entry>sqlsrv</entry>
+									<entry>experimental</entry>
+								</row>
+								<row>
+									<entry>Oracle</entry>
+									<entry>oci8</entry>
+									<entry>oci8</entry>
+									<entry>experimental</entry>
+								</row>
+							</tbody>
+						</tgroup>
+					</informaltable>
+
                 </listitem>
             </varlistentry>
         </variablelist>
