@@ -517,7 +517,7 @@ function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
 	# or else users won't be able to receive their reset pws
 	if( !is_blank( $t_email ) ) {
 		email_store( $t_email, $t_subject, $t_message );
-		log_event( LOG_EMAIL, sprintf( 'Password reset for user %s sent to %s', $p_user_id, $t_email ) );
+		log_event( LOG_EMAIL, sprintf( 'Password reset for user @U%d sent to %s', $p_user_id, $t_email ) );
 
 		if( OFF == config_get( 'email_send_using_cronjob' ) ) {
 			email_send_all();
