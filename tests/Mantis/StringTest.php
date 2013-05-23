@@ -56,15 +56,15 @@ class Mantis_StringTest extends PHPUnit_Framework_TestCase {
 			array( 'abc.php#a', 'abc.php#a'),
 			array( 'abc.php?abc=def', 'abc.php?abc=def'),
 			array( 'abc.php?abc=def#a', 'abc.php?abc=def#a'),
-			array( 'abc.php?abc=def&z=xyz', 'abc.php?abc=def&amp;z=xyz'),
-			array( 'abc.php?abc=def&amp;z=xyz', 'abc.php?abc=def&amp;z=xyz'),
-			array( 'abc.php?abc=def&z=xyz#a', 'abc.php?abc=def&amp;z=xyz#a'),
-			array( 'abc.php?abc=def&amp;z=xyz#a', 'abc.php?abc=def&amp;z=xyz#a'),
-# @FIXME	array( 'abc.php?abc=def&z=<script>alert("foo")</script>z#a', 'abc.php?abc=def&amp;z=alert%28%22foo%29%22%3cz#a'),
-# @FIXME	array( 'abc.php?abc=def&z=z#<script>alert("foo")</script>a', 'abc.php?abc=def&amp;z=z#alert%28%22foo%22%3ca'),
+			array( 'abc.php?abc=def&z=xyz', 'abc.php?abc=def&z=xyz'),
+			array( 'abc.php?abc=def&amp;z=xyz', 'abc.php?abc=def&z=xyz'),
+			array( 'abc.php?abc=def&z=xyz#a', 'abc.php?abc=def&z=xyz#a'),
+			array( 'abc.php?abc=def&amp;z=xyz#a', 'abc.php?abc=def&z=xyz#a'),
+# @FIXME	array( 'abc.php?abc=def&z=<script>alert("foo")</script>z#a', 'abc.php?abc=def&z=alert%28%22foo%29%22%3cz#a'),
+# @FIXME	array( 'abc.php?abc=def&z=z#<script>alert("foo")</script>a', 'abc.php?abc=def&z=z#alert%28%22foo%22%3ca'),
 			array( 'plugin.php?page=Source/index', 'plugin.php?page=Source%2Findex'),
-			array( 'plugin.php?page=Source/list&id=1', 'plugin.php?page=Source%2Flist&amp;id=1'),
-			array( 'plugin.php?page=Source/list&id=1#abc', 'plugin.php?page=Source%2Flist&amp;id=1#abc'),
+			array( 'plugin.php?page=Source/list&id=1', 'plugin.php?page=Source%2Flist&id=1'),
+			array( 'plugin.php?page=Source/list&id=1#abc', 'plugin.php?page=Source%2Flist&id=1#abc'),
 		);
 
 		/* @FIXME
