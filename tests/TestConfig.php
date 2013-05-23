@@ -47,6 +47,7 @@ $mantisTests = "$mantisRoot/tests";
 
 # Prepend the application/ and tests/ directories to the include_path.
 $path = array(
+	$mantisRoot,
 	$mantisCore,
 	$mantisLibrary,
 	$mantisClasses,
