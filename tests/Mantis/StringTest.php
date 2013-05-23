@@ -26,6 +26,9 @@
  */
 require_once dirname( dirname(__FILE__) ) . DIRECTORY_SEPARATOR . 'TestConfig.php';
 
+require_once( 'constant_inc.php' );
+require_once( 'config_defaults_inc.php' );
+require_once( 'string_api.php' );
 
 /**
  * String API tests
@@ -40,7 +43,7 @@ class Mantis_StringTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testStringSanitize( $in, $out )
 	{
-		$a = string_do_sanitize_url($in, false);
+		$a = string_sanitize_url($in, false);
 		$this->assertEquals( $out, $a );
 	}
 
@@ -84,65 +87,4 @@ class Mantis_StringTest extends PHPUnit_Framework_TestCase {
 		return $testStrings;
 	}
 
-}
-
-
-# @FIXME: hardcoced here to avoid external dependencies, should use code in string_api.php
-function string_do_sanitize_url( $p_url, $p_return_absolute = false ) {
-	$t_url = strip_tags( urldecode( $p_url ) );
-
-	$t_path = '/';
-	$t_short_path = '/';
-
-	$t_pattern = '(?:/*(?P<script>[^\?#]*))(?:\?(?P<query>[^#]*))?(?:#(?P<anchor>[^#]*))?';
-
-	# Break the given URL into pieces for path, script, query, and anchor
-	$t_type = 0;
-	if ( preg_match( "@^(?P<path>$t_path)$t_pattern\$@", $t_url, $t_matches ) ) {
-		$t_type = 1;
-	} else if ( preg_match( "@^(?P<path>$t_short_path)$t_pattern\$@", $t_url, $t_matches ) ) {
-		$t_type = 2;
-	} else if ( preg_match( "@^(?P<path>)$t_pattern\$@", $t_url, $t_matches ) ) {
-		$t_type = 3;
-	}
-
-	# Check for URL's pointing to other domains
-	if ( 0 == $t_type || empty( $t_matches['script'] ) ||
-		3 == $t_type && preg_match( '@(?:[^:]*)?://@', $t_url ) > 0 ) {
-
-		return ( $p_return_absolute ? $t_path . '/' : '' ) . 'index.php';
-	}
-
-	# Start extracting regex matches
-	$t_script = $t_matches['script'];
-	$t_script_path = $t_matches['path'];
-
-	# Clean/encode query params
-	$t_query = '';
-	if ( isset( $t_matches['query'] ) ) {
-		$t_pairs = array();
-		parse_str( html_entity_decode( $t_matches['query'] ), $t_pairs );
-
-		$t_clean_pairs = array();
-		foreach( $t_pairs as $t_key => $t_value ) {
-			$t_clean_pairs[] = rawurlencode( $t_key ) . '=' . rawurlencode( $t_value );
-		}
-
-		if ( !empty( $t_clean_pairs ) ) {
-			$t_query = '?' . join( '&amp;', $t_clean_pairs );
-		}
-	}
-
-	# encode link anchor
-	$t_anchor = '';
-	if ( isset( $t_matches['anchor'] ) ) {
-		$t_anchor = '#' . rawurlencode( $t_matches['anchor'] );
-	}
-
-	# Return an appropriate re-combined URL string
-	if ( $p_return_absolute ) {
-		return $t_path . '/' . $t_script . $t_query . $t_anchor;
-	} else {
-		return ( !empty( $t_script_path ) ? $t_script_path . '/' : '' ) . $t_script . $t_query . $t_anchor;
-	}
 }
