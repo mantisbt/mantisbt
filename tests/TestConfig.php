@@ -27,40 +27,32 @@
  */
 ob_start();
 
-/*
- * Include PHPUnit dependencies ; insure compatibility with 3.5 and 3.6
+/**
+ * Include PHPUnit dependencies ; ensure compatibility with 3.5 and 3.6
  */
 @include_once 'PHPUnit/Framework.php';
-/*
- * Set error reporting to the level to which Zend Framework code must comply.
- */
+
+
+# Set error reporting to the level to which Zend Framework code must comply.
 error_reporting( E_ALL | E_STRICT );
 
-/*
- * Determine the root, library, and tests directories of the framework
- * distribution.
- */
-$mantisRoot = dirname(__FILE__) . '/..';
+# Determine the root, library, and tests directories of the framework
+# distribution.
+$mantisRoot = dirname( dirname(__FILE__) );
 $mantisCore = "$mantisRoot/core";
 $mantisLibrary = "$mantisRoot/library";
 $mantisClasses = "$mantisRoot/core/classes";
 $mantisTests = "$mantisRoot/tests";
 
 
-/*
- * Prepend the application/ and tests/ directories to the
- * include_path.  
- */
+# Prepend the application/ and tests/ directories to the include_path.
 $path = array(
-    $mantisCore,
-    $mantisLibrary,
-    $mantisClasses,
-    get_include_path()
-    );
+	$mantisCore,
+	$mantisLibrary,
+	$mantisClasses,
+	get_include_path()
+);
 set_include_path( implode( PATH_SEPARATOR, $path ) );
 
-
-/*
- * Unset global variables that are no longer needed.
- */
+# Unset global variables that are no longer needed.
 unset($mantisRoot, $mantisLibrary, $mantisTests, $path);
