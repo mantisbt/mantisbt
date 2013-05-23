@@ -15,47 +15,51 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package Tests
+ * @package    Tests
  * @subpackage String
  * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
+
+/**
+ * String API tests
+ * @package    Tests
+ * @subpackage String
+ */
 class Mantis_StringTest extends PHPUnit_Framework_TestCase {
 
-    /**
-      * Tests string_sanitize_url()
-      *
-      * @dataProvider provider
-      */
-    public function testStringSanitize( $in, $out )
-    {
-        $a = string_do_sanitize_url($in, false);
-        $this->assertEquals( $out, $a );
-    }
+	/**
+	 * Tests string_sanitize_url()
+	 * @dataProvider provider
+	 */
+	public function testStringSanitize( $in, $out )
+	{
+		$a = string_do_sanitize_url($in, false);
+		$this->assertEquals( $out, $a );
+	}
 
-    public function provider()
-    {
-        $testStrings = array(
-            array( '', 'index.php' ),
-            array( 'abc.php', 'abc.php' ),
-            array( 'abc.php?','abc.php'),
-			array( 'abc.php#a','abc.php#a'),
-			array( 'abc.php?abc=def','abc.php?abc=def'),
-			array( 'abc.php?abc=def#a','abc.php?abc=def#a'),
-			array( 'abc.php?abc=def&z=xyz','abc.php?abc=def&amp;z=xyz'),
-			array( 'abc.php?abc=def&amp;z=xyz','abc.php?abc=def&amp;z=xyz'),
-			array( 'abc.php?abc=def&z=xyz#a','abc.php?abc=def&amp;z=xyz#a'),
-			array( 'abc.php?abc=def&amp;z=xyz#a','abc.php?abc=def&amp;z=xyz#a'),
-/*	FIXME	array( 'abc.php?abc=def&z=<script>alert("foo")</script>z#a','abc.php?abc=def&amp;z=alert%28%22foo%29%22%3cz#a'), */
-/* FIXME	array( 'abc.php?abc=def&z=z#<script>alert("foo")</script>a','abc.php?abc=def&amp;z=z#alert%28%22foo%22%3ca'), */
-			array( 'plugin.php?page=Source/index','plugin.php?page=Source%2Findex'),
-			array( 'plugin.php?page=Source/list&id=1','plugin.php?page=Source%2Flist&amp;id=1'),
-			array( 'plugin.php?page=Source/list&id=1#abc','plugin.php?page=Source%2Flist&amp;id=1#abc'),
-           );
+	public function provider()
+	{
+		$testStrings = array(
+			array( '', 'index.php' ),
+			array( 'abc.php', 'abc.php' ),
+			array( 'abc.php?', 'abc.php'),
+			array( 'abc.php#a', 'abc.php#a'),
+			array( 'abc.php?abc=def', 'abc.php?abc=def'),
+			array( 'abc.php?abc=def#a', 'abc.php?abc=def#a'),
+			array( 'abc.php?abc=def&z=xyz', 'abc.php?abc=def&amp;z=xyz'),
+			array( 'abc.php?abc=def&amp;z=xyz', 'abc.php?abc=def&amp;z=xyz'),
+			array( 'abc.php?abc=def&z=xyz#a', 'abc.php?abc=def&amp;z=xyz#a'),
+			array( 'abc.php?abc=def&amp;z=xyz#a', 'abc.php?abc=def&amp;z=xyz#a'),
+# @FIXME	array( 'abc.php?abc=def&z=<script>alert("foo")</script>z#a', 'abc.php?abc=def&amp;z=alert%28%22foo%29%22%3cz#a'),
+# @FIXME	array( 'abc.php?abc=def&z=z#<script>alert("foo")</script>a', 'abc.php?abc=def&amp;z=z#alert%28%22foo%22%3ca'),
+			array( 'plugin.php?page=Source/index', 'plugin.php?page=Source%2Findex'),
+			array( 'plugin.php?page=Source/list&id=1', 'plugin.php?page=Source%2Flist&amp;id=1'),
+			array( 'plugin.php?page=Source/list&id=1#abc', 'plugin.php?page=Source%2Flist&amp;id=1#abc'),
+		);
 
-		/*
-		   FIXME
+		/* @FIXME
 			array( $my_path.'abc.php',
 			array( $my_path.'abc.php?',
 			array( $my_path.'abc.php#a',
@@ -72,13 +76,13 @@ class Mantis_StringTest extends PHPUnit_Framework_TestCase {
 			array( $my_path.'plugin.php?page=Source/list&id=1#abc',
 			array( 'http://www.test.my.url/'),
 		*/
-           return $testStrings;
- }
+		return $testStrings;
+	}
 
 }
 
 
-// FIXME: hardcoced here to avoid external dependencies, should use code in string_api.php
+# @FIXME: hardcoced here to avoid external dependencies, should use code in string_api.php
 function string_do_sanitize_url( $p_url, $p_return_absolute = false ) {
 	$t_url = strip_tags( urldecode( $p_url ) );
 
@@ -137,4 +141,3 @@ function string_do_sanitize_url( $p_url, $p_return_absolute = false ) {
 		return ( !empty( $t_script_path ) ? $t_script_path . '/' : '' ) . $t_script . $t_query . $t_anchor;
 	}
 }
-

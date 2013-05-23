@@ -15,35 +15,37 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package Tests
+ * MantisBT Core Unit Tests
+ * @package    Tests
  * @subpackage UnitTests
- * @copyright Copyright (C) 2002 - 2013  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
+
 /**
- * Test config
+ * Includes
  */
 require_once dirname(__FILE__) . '/../TestConfig.php';
 
 require_once 'EnumTest.php';
 require_once 'StringTest.php';
 
+
 /**
+ * All Test Cases
  * @package    Tests
  * @subpackage UnitTests
- * @copyright Copyright (C) 2002 - 2013  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
  */
 class Mantis_AllTests extends PHPUnit_Framework_TestSuite
 {
-    public static function suite()
-    {
-        $suite = new Mantis_AllTests('Main Code');
+	public static function suite()
+	{
+		$suite = new Mantis_AllTests('Main Code');
 
-        $suite->addTestSuite('MantisEnumTest');
-        $suite->addTestSuite('Mantis_StringTest');
+		$suite->addTestSuite('MantisEnumTest');
+		$suite->addTestSuite('Mantis_StringTest');
 
-        return $suite;
-    }
+		return $suite;
+	}
 }
