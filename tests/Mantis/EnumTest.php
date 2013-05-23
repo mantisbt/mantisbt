@@ -24,6 +24,8 @@
 /**
  * Includes
  */
+require_once dirname( dirname(__FILE__) ) . DIRECTORY_SEPARATOR . 'TestConfig.php';
+
 require_once 'MantisEnum.class.php';
 
 

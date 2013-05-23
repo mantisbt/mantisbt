@@ -21,6 +21,11 @@
  * @link http://www.mantisbt.org
  */
 
+/**
+ * Includes
+ */
+require_once dirname( dirname(__FILE__) ) . DIRECTORY_SEPARATOR . 'TestConfig.php';
+
 
 /**
  * String API tests
