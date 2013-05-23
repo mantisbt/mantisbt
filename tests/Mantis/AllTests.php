@@ -29,6 +29,7 @@
 require_once dirname( dirname(__FILE__) ) . DIRECTORY_SEPARATOR . 'TestConfig.php';
 
 require_once 'EnumTest.php';
+require_once 'HelperTest.php';
 require_once 'StringTest.php';
 
 
@@ -44,6 +45,7 @@ class Mantis_AllTests extends PHPUnit_Framework_TestSuite
 		$suite = new Mantis_AllTests('Main Code');
 
 		$suite->addTestSuite('MantisEnumTest');
+		$suite->addTestSuite('Mantis_HelperTest');
 		$suite->addTestSuite('Mantis_StringTest');
 
 		return $suite;
