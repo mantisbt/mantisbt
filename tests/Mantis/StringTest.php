@@ -26,9 +26,11 @@
  */
 require_once dirname( dirname(__FILE__) ) . DIRECTORY_SEPARATOR . 'TestConfig.php';
 
-require_once( 'constant_inc.php' );
-require_once( 'config_defaults_inc.php' );
-require_once( 'string_api.php' );
+/**
+ * MantisBT Core API
+ */
+eval( require_mantis_core() );
+
 
 /**
  * String API tests

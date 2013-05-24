@@ -33,6 +33,53 @@ ob_start();
 @include_once 'PHPUnit/Framework.php';
 
 
+/**
+ * Initializes MantisBT core and bypasses the http headers for PHPUnit tests
+ *
+ * When the Mantis Core is needed for Unit Tests, this function's return value
+ * should be passed to eval() to define the variables in the global scope and
+ * include core.php, like this:
+ *
+ *    eval( require_mantis_core() );
+ *
+ * This is required because when running PHPUnit, config_defaults_inc.php is
+ * not in the global scope, therefore 'global' variables are not properly
+ * initialized.
+ *
+ * @return string
+ */
+function require_mantis_core() {
+	# Parse config to retrieve all distinct T_VARIABLE tokens with 'g_' prefix
+	$t_tokens = token_get_all(
+		file_get_contents( 'config_defaults_inc.php', true )
+	);
+	$t_var_list = array();
+	foreach( $t_tokens as $t ) {
+		if( is_array($t) && $t[0] == T_VARIABLE ) {
+			$t_var_list[$t[1]] = $t[1];
+		}
+	}
+	$t_var_list = array_filter(
+		$t_var_list,
+		function($v) { return substr( $v, 0, 3 ) == '$g_'; }
+	);
+
+	# Add the http headers bypass
+	$t_bypass = '$g_bypass_headers';
+	$t_var_list[] = $t_bypass;
+
+	# Build global declaration
+	$t_decl = '';
+	foreach( $t_var_list as $v ) {
+		$t_decl .= "global $v;\n";
+	}
+	$t_decl .= "$t_bypass = true;\n"
+		. "require_once( 'core.php' );\n";
+
+	return $t_decl;
+}
+
+
 # Set error reporting to the level to which Zend Framework code must comply.
 error_reporting( E_ALL | E_STRICT );
 
