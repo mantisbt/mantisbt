@@ -169,6 +169,11 @@ require_once( 'compress_api.php' );
 compress_start_handler();
 
 if ( false === $t_config_inc_found ) {
+	if( php_sapi_name() == 'cli' ) {
+		echo "Error: config_inc.php file not found; ensure MantisBT is properly setup.\n";
+		exit(1);
+	}
+
 	# if not found, redirect to the admin page to install the system
 	# this needs to be long form and not replaced by is_page_name as that function isn't loaded yet
 	if ( !( isset( $_SERVER['SCRIPT_NAME'] ) && ( 0 < strpos( $_SERVER['SCRIPT_NAME'], 'admin' ) ) ) ) {
