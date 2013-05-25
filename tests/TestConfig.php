@@ -34,49 +34,63 @@ ob_start();
 
 
 /**
+ * Parse file and retrieve distinct T_VARIABLE tokens with 'g_' prefix
+ * @param string $p_file
+ * @param array $p_var_list
+ * @return bool false if file can't be parsed
+ */
+function parse_config_global_vars( $p_file, &$p_var_list ) {
+	# Parse the file
+	$t_contents = file_get_contents( $p_file, true );
+	if( false === $t_contents ) {
+		return false;
+	}
+	$t_tokens = token_get_all( $t_contents );
+
+	if( !is_array( $p_var_list ) ) {
+		$p_var_list = array();
+	}
+
+	# Store all distinct T_VARIABLE tokens with 'g_' prefix
+	foreach( $t_tokens as $t ) {
+		if( is_array($t) && $t[0] == T_VARIABLE ) {
+			$t_var = ltrim( $t[1], '$' );
+			if( substr( $t_var, 0, 2 ) == 'g_' ) {
+				$p_var_list[$t_var] = $t_var;
+			}
+		}
+	}
+
+	return true;
+}
+
+/**
  * Initializes MantisBT core and bypasses the http headers for PHPUnit tests
  *
- * When the Mantis Core is needed for Unit Tests, this function's return value
- * should be passed to eval() to define the variables in the global scope and
- * include core.php, like this:
- *
- *    eval( require_mantis_core() );
+ * When the Mantis Core is needed for Unit Tests, this function should
+ * be called instead of a standard "require_once( 'core.php' );"
  *
  * This is required because when running PHPUnit, config_defaults_inc.php is
  * not in the global scope, therefore 'global' variables are not properly
  * initialized.
- *
- * @return string
  */
 function require_mantis_core() {
-	# Parse config to retrieve all distinct T_VARIABLE tokens with 'g_' prefix
-	$t_tokens = token_get_all(
-		file_get_contents( 'config_defaults_inc.php', true )
-	);
-	$t_var_list = array();
-	foreach( $t_tokens as $t ) {
-		if( is_array($t) && $t[0] == T_VARIABLE ) {
-			$t_var_list[$t[1]] = $t[1];
-		}
-	}
-	$t_var_list = array_filter(
-		$t_var_list,
-		function($v) { return substr( $v, 0, 3 ) == '$g_'; }
-	);
+	parse_config_global_vars( 'config_defaults_inc.php', $t_var_list );
+	parse_config_global_vars( 'config_inc.php', $t_var_list );
 
-	# Add the http headers bypass
-	$t_bypass = '$g_bypass_headers';
-	$t_var_list[] = $t_bypass;
+	# HTTP headers bypass
+	$t_bypass_headers = 'g_bypass_headers';
+	$t_var_list[] = $t_bypass_headers;
 
-	# Build global declaration
+	# Global declaration for all variables
 	$t_decl = '';
 	foreach( $t_var_list as $v ) {
+		global $$v;
 		$t_decl .= "global $v;\n";
 	}
-	$t_decl .= "$t_bypass = true;\n"
-		. "require_once( 'core.php' );\n";
 
-	return $t_decl;
+	$$t_bypass_headers = true;
+	require_once( 'core.php' );
 }
 
 

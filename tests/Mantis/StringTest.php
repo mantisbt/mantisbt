@@ -29,7 +29,7 @@ require_once dirname( dirname(__FILE__) ) . DIRECTORY_SEPARATOR . 'TestConfig.ph
 /**
  * MantisBT Core API
  */
-eval( require_mantis_core() );
+require_mantis_core();
 
 
 /**
