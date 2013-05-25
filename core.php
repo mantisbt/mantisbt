@@ -207,6 +207,11 @@ compress_start_handler();
 # If no configuration file exists, redirect the user to the admin page so
 # they can complete installation and configuration of MantisBT
 if ( false === $t_config_inc_found ) {
+	if( php_sapi_name() == 'cli' ) {
+		echo "Error: config_inc.php file not found; ensure MantisBT is properly setup.\n";
+		exit(1);
+	}
+
 	if ( !( isset( $_SERVER['SCRIPT_NAME'] ) && ( 0 < strpos( $_SERVER['SCRIPT_NAME'], 'admin' ) ) ) ) {
 		header( 'Content-Type: text/html' );
 		header( "Location: admin/install.php" );
