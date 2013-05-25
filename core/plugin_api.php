@@ -32,6 +32,8 @@ $t_class_path = config_get_global( 'class_path' );
  */
 require_once( $t_class_path . 'MantisPlugin.class.php' );
 
+unset( $t_class_path );
+
 # Cache variables #####
 
 $g_plugin_cache = array();
@@ -123,9 +125,9 @@ function plugin_file( $p_file, $p_redirect = false, $p_basename = null ) {
  * @param string Plugin basename
  */
 function plugin_file_include( $p_filename, $p_basename = null ) {
-    
+
     global $g_plugin_mime_types;
-    
+
 	if( is_null( $p_basename ) ) {
 		$t_current = plugin_get_current();
 	} else {
@@ -136,17 +138,17 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
 	if( false === $t_file_path ) {
 		trigger_error( ERROR_GENERIC, ERROR );
 	}
-	
+
 	$t_content_type = '';
 	$finfo = finfo_get_if_available();
-	
+
 	if ( $finfo ) {
 		$t_file_info_type = $finfo->file( $t_file_path );
 		if ( $t_file_info_type !== false ) {
 			$t_content_type = $t_file_info_type;
 		}
 	}
-	
+
 	// allow overriding the content type for specific text and image extensions
 	// see bug #13193 for details
 	if ( strpos($t_content_type, 'text/') === 0 || strpos( $t_content_type, 'image/') === 0 ) {
@@ -158,7 +160,7 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
 
 	if ( $t_content_type )
     	header('Content-Type: ' . $t_content_type );
-	
+
 	readfile( $t_file_path );
 }
 

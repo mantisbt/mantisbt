@@ -74,7 +74,7 @@ if ( $t_local_config && file_exists( $t_local_config ) ){
 	require_once( $t_local_config );
 	$t_config_inc_found = true;
 }
-
+unset( $t_local_config );
 
 # Attempt to find the location of the core files.
 $t_core_path = dirname(__FILE__).DIRECTORY_SEPARATOR.'core'.DIRECTORY_SEPARATOR;
@@ -83,6 +83,7 @@ if (isset($GLOBALS['g_core_path']) && !isset( $HTTP_GET_VARS['g_core_path'] ) &&
 }
 
 $g_core_path = $t_core_path;
+unset( $t_core_path );
 
 /*
  * Set include paths
@@ -160,6 +161,7 @@ if ( ($t_output = ob_get_contents()) != '') {
 	echo var_dump($t_output);
 	die;
 }
+unset( $t_output );
 
 require_once( 'utility_api.php' );
 require_once( 'compress_api.php' );
@@ -270,6 +272,7 @@ $t_overrides = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'custom_functions_inc
 if ( file_exists( $t_overrides ) ) {
 	require_once( $t_overrides );
 }
+unset( $t_overrides );
 
 // set HTTP response headers
 http_all_headers();

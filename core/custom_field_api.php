@@ -57,6 +57,7 @@ $g_custom_field_types[CUSTOM_FIELD_TYPE_DATE] = 'standard';
 foreach( $g_custom_field_types as $type ) {
 	require_once( 'cfdefs' . DIRECTORY_SEPARATOR . 'cfdef_' . $type . '.php' );
 }
+unset( $type );
 
 function custom_field_allow_manage_display( $p_type, $p_display ) {
 	global $g_custom_field_type_definition;
