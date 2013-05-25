@@ -93,6 +93,7 @@ if ( $t_local_config && file_exists( $t_local_config ) ){
 	require_once( $t_local_config );
 	$t_config_inc_found = true;
 }
+unset( $t_local_config );
 
 # Remember (globally) which API files have already been loaded
 $g_api_included = array();
@@ -197,6 +198,7 @@ if ( ( $t_output = ob_get_contents() ) != '' ) {
 	echo var_dump( $t_output );
 	die;
 }
+unset( $t_output );
 
 # Start HTML compression handler (if enabled)
 require_api( 'compress_api.php' );

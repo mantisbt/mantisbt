@@ -4198,3 +4198,6 @@ $g_global_settings = array(
  */
 $g_mantistouch_url = '';
 
+
+# Temporary variables should not remain defined in global scope
+unset( $t_protocol, $t_host, $t_port, $t_self, $t_path, $t_use_iis );
