@@ -8,7 +8,7 @@ adodb           | adodb           | 5.11     | unpatched
 disposable      | disposable      | 1.1.0    | unpatched
 ezc             | ez Components   | 2009.2.1 | unpatched
 nusoap          | nusoap          | 0.9.5    | patched: XSS vulnerabilities as per #12312
-phpmailer       | PHPMailer       | 5.2.1    | unpatched
+phpmailer       | PHPMailer       | 5.2.6    | unpatched
 rssbuilder      | RSSBuilder      | 2.2.1    | patched: removed __autoload function
 utf8            | phputf8         | 0.5      | unpatched
 
