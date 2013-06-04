@@ -92,7 +92,7 @@ function email_is_valid( $p_email ) {
 		return true;
 	}
 
-	if ( LDAP == config_get( 'login_method' ) && ON == config_get( 'use_ldap_email' ) ) {
+	if ( ( LDAP == config_get( 'login_method' ) || HTTP_LDAP == config_get( 'login_method' ) ) && ON == config_get( 'use_ldap_email' ) ) {
 		return true;
 	}
 

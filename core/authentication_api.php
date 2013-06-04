@@ -111,6 +111,7 @@ function auth_prepare_username( $p_username ) {
 			$f_username = $_SERVER['REMOTE_USER'];
 			break;
 		case HTTP_AUTH:
+		case HTTP_LDAP:
 			if( !auth_http_is_logout_pending() ) {
 				if( isset( $_SERVER['PHP_AUTH_USER'] ) ) {
 					$f_username = $_SERVER['PHP_AUTH_USER'];
@@ -142,6 +143,7 @@ function auth_prepare_password( $p_password ) {
 		case BASIC_AUTH:
 			$f_password = $_SERVER['PHP_AUTH_PW'];
 			break;
+		case HTTP_LDAP:
 		case HTTP_AUTH:
 			if( !auth_http_is_logout_pending() ) {
 
@@ -183,6 +185,8 @@ function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
 
 	if ( false === $t_user_id ) {
 		if ( BASIC_AUTH == $t_login_method ) {
+			$t_auto_create = true;
+		} else if ( HTTP_LDAP == $t_login_method ) {
 			$t_auto_create = true;
 		} else if ( LDAP == $t_login_method && ldap_authenticate_by_username( $p_username, $p_password ) ) {
 			$t_auto_create = true;
@@ -308,7 +312,9 @@ function auth_logout() {
 		helper_clear_pref_cookies();
 	}
 
-	if( HTTP_AUTH == config_get( 'login_method' ) ) {
+	if( HTTP_AUTH == config_get( 'login_method' ) ||
+		HTTP_LDAP == config_get( 'login_method' )
+	) {
 		auth_http_set_logout_pending( true );
 	}
 
@@ -322,6 +328,7 @@ function auth_logout() {
  */
 function auth_automatic_logon_bypass_form() {
 	switch( config_get( 'login_method' ) ) {
+		case HTTP_LDAP:
 		case HTTP_AUTH:
 			return true;
 	}
@@ -359,7 +366,7 @@ function auth_get_password_max_size() {
 function auth_does_password_match( $p_user_id, $p_test_password ) {
 	$t_configured_login_method = config_get( 'login_method' );
 
-	if( LDAP == $t_configured_login_method ) {
+	if( LDAP == $t_configured_login_method || HTTP_LDAP == $t_configured_login_method ) {
 		return ldap_authenticate( $p_user_id, $p_test_password );
 	}
 
@@ -637,7 +644,9 @@ function auth_set_tokens( $p_user_id ) {
  * @access public
  */
 function auth_reauthenticate() {
-	if( config_get_global( 'reauthentication' ) == OFF || BASIC_AUTH == config_get( 'login_method' ) || HTTP_AUTH == config_get( 'login_method' ) ) {
+	if( config_get_global( 'reauthentication' ) == OFF || BASIC_AUTH == config_get( 'login_method' ) || HTTP_AUTH == config_get( 'login_method' )
+		|| HTTP_AUTH == config_get( 'login_method' ) 
+	) {
 		return true;
 	}
 
