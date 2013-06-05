@@ -168,7 +168,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	}
 
 	$t_bugnote_text_table = db_get_table( 'bugnote_text' );
-	$t_bugnote_table = db_get_table( 'bugnotE' );
+	$t_bugnote_table = db_get_table( 'bugnote' );
 
 	# Event integration
 	$t_bugnote_text = event_signal( 'EVENT_BUGNOTE_DATA', $p_bugnote_text, $c_bug_id );
