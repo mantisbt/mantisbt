@@ -188,7 +188,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	}
 
 	# Check for private bugnotes.
-	if( $c_private && access_has_bug_level( config_get( 'set_view_status_threshold' ), $p_bug_id, $c_user_id ) ) {
+	if( $p_private && access_has_bug_level( config_get( 'set_view_status_threshold' ), $p_bug_id, $c_user_id ) ) {
 		$t_view_state = VS_PRIVATE;
 	} else {
 		$t_view_state = VS_PUBLIC;
