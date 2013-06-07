@@ -272,6 +272,18 @@ function check_selected( $p_var, $p_val = true, $p_strict = true ) {
 }
 
 /**
+ * If $p_val is true then we PRINT DISABLED to prevent selection of the
+ * current option list item
+ *
+ * @param bool $p_val
+ */
+function check_disabled( $p_val = true ) {
+	if( $p_val ) {
+		echo ' disabled="disabled" ';
+	}
+}
+
+/**
  * Set up PHP for a long process execution
  * The script timeout is set based on the value of the long_process_timeout config option.
  * $p_ignore_abort specified whether to ignore user aborts by hitting
