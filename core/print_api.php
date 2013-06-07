@@ -510,7 +510,7 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
 	$t_can_report = true;
 	project_cache_array_rows( $t_project_ids );
 
-	if( $p_include_all_projects ) {
+	if( $p_include_all_projects && $p_filter_project_id !== ALL_PROJECTS ) {
 		echo '<option value="' . ALL_PROJECTS . '"';
 		if ( $p_project_id !== null ) {
 			check_selected( (int)$p_project_id, ALL_PROJECTS, false );
@@ -524,15 +524,11 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
 			$t_can_report = access_has_project_level( $t_report_bug_threshold, $t_id, $t_user_id );
 		}
 
-		if( $t_id != $p_filter_project_id ) {
-			echo '<option value="' . $t_id . '"';
-			if ( $p_project_id !== null ) {
-				check_selected( (int)$p_project_id, $t_id, false );
-				check_disabled( !$t_can_report );
-			}
-			echo '>' . string_attribute( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
-			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only );
-		}
+		echo '<option value="' . $t_id . '"';
+		check_selected( (int)$p_project_id, $t_id );
+		check_disabled( $t_id == $p_filter_project_id || !$t_can_report );
+		echo '>' . string_attribute( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
+		print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only );
 	}
 }
 
@@ -550,24 +546,21 @@ function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_fi
 			$t_can_report = access_has_project_level( $t_report_bug_threshold, $t_id, $t_user_id );
 		}
 
-		if( $t_id != $p_filter_project_id ) {
-			if( $p_trace ) {
-				$t_full_id = join( $p_parents, ";" ) . ';' . $t_id;
-			} else {
-				$t_full_id = $t_id;
-			}
-			echo '<option value="' . $t_full_id . '"';
-			if ( $p_project_id !== null ) {
-				check_selected( $p_project_id, $t_full_id, false );
-				check_disabled( !$t_can_report );
-			}
-			echo '>'
-				. str_repeat( '&#160;', count( $p_parents ) )
-				. str_repeat( '&#187;', count( $p_parents ) ) . ' '
-				. string_attribute( project_get_field( $t_id, 'name' ) )
-				. '</option>' . "\n";
-			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_parents );
+		if( $p_trace ) {
+			$t_full_id = join( $p_parents, ";" ) . ';' . $t_id;
+		} else {
+			$t_full_id = $t_id;
 		}
+
+		echo '<option value="' . $t_full_id . '"';
+		check_selected( $p_project_id, $t_full_id );
+		check_disabled( $t_id == $p_filter_project_id || !$t_can_report );
+		echo '>'
+			. str_repeat( '&#160;', count( $p_parents ) )
+			. str_repeat( '&raquo;', count( $p_parents ) ) . ' '
+			. string_attribute( project_get_field( $t_id, 'name' ) )
+			. '</option>' . "\n";
+		print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only, $p_parents );
 	}
 }
 
