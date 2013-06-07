@@ -134,9 +134,17 @@ if ( $f_master_bug_id > 0 ) {
 	$t_project_id			= $t_bug->project_id;
 } else {
 	# Get Project Id and set it as current
-	$t_project_id = gpc_get_int( 'project_id', helper_get_current_project() );
+	$t_current_project = helper_get_current_project();
+	$t_project_id = gpc_get_int( 'project_id', $t_current_project );
+
+	# If all projects, use default project if set
+	$t_default_project = user_pref_get_pref( auth_get_current_user_id(), 'default_project' );
+	if( ALL_PROJECTS == $t_project_id && ALL_PROJECTS != $t_default_project ) {
+		$t_project_id = $t_default_project;
+	}
+
 	if( ( ALL_PROJECTS == $t_project_id || project_exists( $t_project_id ) )
-	 && $t_project_id != helper_get_current_project()
+	 && $t_project_id != $t_current_project
 	) {
 		helper_set_current_project( $t_project_id );
 		# Reloading the page is required so that the project browser
@@ -145,7 +153,7 @@ if ( $f_master_bug_id > 0 ) {
 	}
 
 	# New issues cannot be reported for the 'All Project' selection
-	if ( ( ALL_PROJECTS == helper_get_current_project() ) ) {
+	if( ALL_PROJECTS == $t_current_project ) {
 		print_header_redirect( 'login_select_proj_page.php?ref=bug_report_page.php' );
 	}
 
