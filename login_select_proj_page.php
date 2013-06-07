@@ -74,7 +74,7 @@ html_page_top( lang_get( 'select_project_button' ) );
 				<label for="select-project-id"><span><?php echo lang_get( 'select_project_button' ) ?></span></label>
 				<span class="select">
 					<select id="select-project-id" name="project_id">
-						<?php print_project_option_list( ALL_PROJECTS, false, null, true ) ?>
+						<?php print_project_option_list( ALL_PROJECTS, false, null, true, true ) ?>
 					</select>
 				</span>
 				<span class="label-style"></span>
