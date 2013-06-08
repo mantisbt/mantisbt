@@ -156,7 +156,9 @@ check_print_test_row(
 $t_disabled_functions = explode( ',', ini_get( 'disable_functions' ) );
 foreach( $t_disabled_functions as $t_disabled_function ) {
 	$t_disabled_function = trim( $t_disabled_function );
-	if( $t_disabled_function ) {
+	if( $t_disabled_function
+		&& substr( $t_disabled_function, 0, 6 ) != 'pcntl_'
+	) {
 		check_print_test_warn_row(
 			'<em>' . $t_disabled_function . '</em> function is enabled',
 			false,
