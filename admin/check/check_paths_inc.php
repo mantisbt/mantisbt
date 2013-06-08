@@ -151,7 +151,6 @@ foreach( $t_removeable_directories as $t_removeable_directory ) {
 $t_developer_directories = array(
 	'docbook',
 	'packages',
-	'scripts',
 	'tests',
 );
 
