@@ -1631,5 +1631,6 @@ If you requested this verification, visit the following URL to change your passw
 	ERROR_INVALID_SORT_FIELD => 'Invalid sort field.',
 	ERROR_INVALID_DATE_FORMAT => 'Invalid date format.',
 	ERROR_UPDATING_TIMEZONE => 'Unable to update timezone.',
+	ERROR_DEPRECATED_SUPERSEDED => 'Deprecated functionality: "%1$s", use "%2$s" instead.',
 );
 
