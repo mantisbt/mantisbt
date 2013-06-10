@@ -882,8 +882,8 @@ function db_time_queries() {
  * @return string containing full database table name (with prefix and suffix)
  */
 function db_get_table( $p_name ) {
-	if( 1 == preg_match( '/^mantis_(.*)_table$/', $p_name, $t_table ) ) {
-		$t_table = $t_table[1];
+	if( strpos( $p_name, 'mantis_') === 0 ) {
+		$t_table = substr( $p_name, 7, strpos( $p_name, '_table' ) - 7 );
 		error_parameters(
 			"db_get_table( '$p_name' )",
 			"db_get_table( '$t_table' )"
