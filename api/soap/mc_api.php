@@ -352,6 +352,20 @@ function mci_user_get_accessible_subprojects( $p_user_id, $p_parent_project_id, 
 	return $t_result;
 }
 
+# Gets the name/id of all sub-projects that are accessible to the specified user / project.
+function mci_user_get_names_accessible_subprojects( $p_user_id, $p_parent_project_id ) {
+	$t_result = array();
+	foreach( user_get_accessible_subprojects( $p_user_id, $p_parent_project_id ) as $t_subproject_id ) {
+		$t_subproject_row = project_cache_row( $t_subproject_id );
+		$t_subproject = array();
+		$t_subproject['id'] = $t_subproject_id;
+		$t_subproject['name'] = $t_subproject_row['name'];
+		$t_subproject['subprojects'] = mci_user_get_names_accessible_subprojects( $p_user_id, $t_subproject_id );
+		$t_result[] = $t_subproject;
+	}
+	return $t_result;
+}
+
 function translate_category_name_to_id( $p_category_name, $p_project_id ) {
 	if ( !isset( $p_category_name ) ) {
 		return 0;

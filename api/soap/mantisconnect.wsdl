@@ -31,6 +31,7 @@
    <xsd:element name="name" type="xsd:string" minOccurs="0"/>
    <xsd:element name="real_name" type="xsd:string" minOccurs="0"/>
    <xsd:element name="email" type="xsd:string" minOccurs="0"/>
+   <xsd:element name="access" type="xsd:integer" minOccurs="0"/>
   </xsd:all>
  </xsd:complexType>
  <xsd:complexType name="UserData">
@@ -212,6 +213,7 @@
  <xsd:complexType name="ProjectData">
   <xsd:all>
    <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
+   <xsd:element name="parent_id" type="xsd:integer" minOccurs="0"/>
    <xsd:element name="name" type="xsd:string" minOccurs="0"/>
    <xsd:element name="status" type="tns:ObjectRef" minOccurs="0"/>
    <xsd:element name="enabled" type="xsd:boolean" minOccurs="0"/>
@@ -794,6 +796,26 @@
   <part name="tag_id" type="xsd:integer" /></message>
 <message name="mc_tag_deleteResponse">
   <part name="return" type="xsd:boolean" /></message>
+<message name="mc_account_addRequest">
+  <part name="username" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="account" type="tns:AccountData" />
+  <part name="account_password" type="xsd:string" /></message>
+<message name="mc_account_addResponse">
+  <part name="return" type="xsd:integer" /></message>
+<message name="mc_project_add_userRequest">
+  <part name="username" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="project_id" type="xsd:integer" />
+  <part name="user_id" type="xsd:integer" />
+  <part name="access" type="xsd:integer" /></message>
+<message name="mc_project_add_userResponse">
+  <part name="return" type="xsd:integer" /></message>
+<message name="mc_projects_get_names_user_accessibleRequest">
+  <part name="username" type="xsd:string" />
+  <part name="password" type="xsd:string" /></message>
+<message name="mc_projects_get_names_user_accessibleResponse">
+  <part name="return" type="tns:ProjectDataArray" /></message>
 <portType name="MantisConnectPortType">
   <operation name="mc_version">
     <input message="tns:mc_versionRequest"/>
@@ -1128,6 +1150,21 @@
     <documentation>Deletes a tag.</documentation>
     <input message="tns:mc_tag_deleteRequest"/>
     <output message="tns:mc_tag_deleteResponse"/>
+  </operation>
+  <operation name="mc_account_add">
+    <documentation>Add a new user to the tracker (must have admin privileges).</documentation>
+    <input message="tns:mc_account_addRequest"/>
+    <output message="tns:mc_account_addResponse"/>
+  </operation>
+  <operation name="mc_project_add_user">
+    <documentation>Add a user to a project with access level.</documentation>
+    <input message="tns:mc_project_add_userRequest"/>
+    <output message="tns:mc_project_add_userResponse"/>
+  </operation>
+  <operation name="mc_projects_get_names_user_accessible">
+    <documentation>Get the list of name/id of projects that are accessible to the logged in user.</documentation>
+    <input message="tns:mc_projects_get_names_user_accessibleRequest"/>
+    <output message="tns:mc_projects_get_names_user_accessibleResponse"/>
   </operation>
 </portType>
 <binding name="MantisConnectBinding" type="tns:MantisConnectPortType">
@@ -1464,6 +1501,21 @@
   </operation>
   <operation name="mc_tag_delete">
     <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_tag_delete" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="mc_account_add">
+    <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_account_add" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="mc_project_add_user">
+    <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_project_add_user" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="mc_projects_get_names_user_accessible">
+    <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_projects_get_names_user_accessible" style="rpc"/>
     <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
     <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
   </operation>

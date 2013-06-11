@@ -155,6 +155,38 @@ function mc_projects_get_user_accessible( $p_username, $p_password ) {
 }
 
 /**
+ * Get (only) the id and name for all projects accessible by the given user.
+ *
+ * @param string $p_username  The name of the user trying to access the project list.
+ * @param string $p_password  The password of the user.
+ * @return Array  suitable to be converted into a ProjectDataArray
+ */
+function mc_projects_get_names_user_accessible( $p_username, $p_password ) {
+	$t_user_id = mci_check_login( $p_username, $p_password );
+	if( $t_user_id === false ) {
+		return mci_soap_fault_login_failed();
+	}
+
+	if( !mci_has_readonly_access( $t_user_id ) ) {
+		return mci_soap_fault_access_denied( $t_user_id );
+	}
+
+	$t_lang = mci_get_user_lang( $t_user_id );
+
+	$t_result = array();
+	foreach( user_get_accessible_projects( $t_user_id ) as $t_project_id ) {
+		$t_project_row = project_cache_row( $t_project_id );
+		$t_project = array();
+		$t_project['id'] = $t_project_id;
+		$t_project['name'] = $t_project_row['name'];
+		$t_project['subprojects'] = mci_user_get_names_accessible_subprojects( $t_user_id, $t_project_id, $t_lang );
+		$t_result[] = $t_project;
+	}
+
+	return $t_result;
+}
+
+/**
  * Get all categories of a project.
  *
  * @param string $p_username  The name of the user trying to access the categories.
@@ -855,6 +887,15 @@ function mc_project_add( $p_username, $p_password, $p_project ) {
 		$t_inherit_global = true;
 	}
 	
+	if ( isset( $p_project['parent_id'] ) ) {
+		$t_parent_id = $p_project['parent_id'];
+		if ( !project_exists( $t_parent_id ) ) {
+			return SoapObjectsFactory::newSoapFault( 'Client', 'Parent project does not exist');
+		}
+	} else {
+		$t_parent_id = false;
+	}
+
 	// check to make sure project doesn't already exist
 	if( !project_is_name_unique( $t_name ) ) {
 		return SoapObjectsFactory::newSoapFault( 'Client', 'Project name exists');
@@ -864,7 +905,19 @@ function mc_project_add( $p_username, $p_password, $p_project ) {
 	$t_project_view_state = mci_get_project_view_state_id( $t_view_state );
 
 	// project_create returns the new project's id, spit that out to webservice caller
-	return project_create( $t_name, $t_description, $t_project_status, $t_project_view_state, $t_file_path, $t_enabled, $t_inherit_global );
+	$t_project_id = project_create( $t_name, $t_description, $t_project_status, $t_project_view_state, $t_file_path, $t_enabled, $t_inherit_global );
+
+	// link new project to a parent project, if one has been specified
+	if ( $t_parent_id ) {
+		// link to parent
+		project_hierarchy_add($t_project_id, $t_parent_id);
+
+		// copy custom fields from parent
+		project_copy_custom_fields($t_project_id, $t_parent_id);
+	}
+
+	// return id of new project back to caller
+	return $t_project_id;
 }
 
 /**
@@ -1013,6 +1066,39 @@ function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, 
 	}
 
 	return $t_result;
+}
+
+/**
+ * Link a user to a project with a specified access level.
+ *
+ * @param string $p_username  The name of the user trying to add the user (must be administrator)
+ * @param string $p_password  The password of the user.
+ * @param integer $p_project_id  The id of the project to link user to.
+ * @param integer $p_user_id  The id of the user to link to the project.
+ * @param integer $p_access access level.
+ * @return bool returns true or false depending on the success of the action
+ */
+function mc_project_add_user( $p_username, $p_password, $p_project_id, $p_user_id, $p_access ) {
+	$t_user_id = mci_check_login( $p_username, $p_password );
+	if( $t_user_id === false ) {
+		return mci_soap_fault_login_failed();
+	}
+
+	if( !mci_has_administrator_access( $t_user_id ) ) {
+		return mci_soap_fault_access_denied( $t_user_id );
+	}
+
+	if ( !project_exists( $p_project_id ) ) {
+		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
+	}
+	if ( !user_exists( $p_user_id ) ) {
+		return SoapObjectsFactory::newSoapFault( 'Client', "User '$p_user_id' does not exist." );
+	}
+
+	// add the user to the project
+	$t_status = project_set_user_access( $p_project_id, $p_user_id, $p_access );
+
+	return $t_status;
 }
 
 /**
