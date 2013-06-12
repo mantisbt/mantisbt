@@ -201,6 +201,21 @@
                     </para>
                 </listitem>
             </varlistentry>
+			<varlistentry>
+				<term>$g_custom_strings_file</term>
+				<listitem>
+					<para>This is the path to the
+						<emphasis>Custom Strings File</emphasis>
+						(see <xref linkend="admin.customize.strings"/>).
+					</para>
+					<para>It allows overriding of strings declared in
+						language files, including plugin-specific ones.
+					</para>
+					<para>Defaults to <filename>custom_strings_inc.php</filename>
+						in the MantisBT root directory.
+					</para>
+				</listitem>
+			</varlistentry>
             <varlistentry>
                 <term>$g_manual_url</term>
                 <listitem>
@@ -1825,13 +1840,19 @@ $g_language_choices_arr = array( 'english', 'french', 'german' );
                     <para>This option will add custom options to the main menu. It is
                         an array of arrays listing the caption, access level required, and
                         the link to be executed. For example:
-                        $g_main_menu_custom_options = array( array( "My Link", MANAGER,
-                        'my_link.php' ), array( "My Link2", ADMINISTRATOR, 'my_link2.php' )
-                        );
-                        Note that if the caption is found in custom_strings_inc.php, then
-                        it will be replaced by the translated string. Options will only be
-                        added to the menu if the current logged in user has the appropriate
-                        access level.
+<programlisting>
+$g_main_menu_custom_options = array(
+	array( 'My Link', MANAGER, 'my_link.php' ),
+	array( 'My Link2', ADMINISTRATOR, 'my_link2.php' ),
+);
+</programlisting>
+						Note that if the caption is found in the
+						<emphasis>Custom Strings File</emphasis>
+						(see <xref linkend="admin.customize.strings"/>)
+						it will be replaced by the corresponding translated
+						string. Options will only be added to the menu if
+						the current logged in user has the appropriate
+						access level.
                     </para>
                 </listitem>
             </varlistentry>

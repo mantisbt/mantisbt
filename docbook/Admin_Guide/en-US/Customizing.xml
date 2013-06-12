@@ -1,6 +1,82 @@
 <chapter id="admin.customize">
     <title>Customizing MantisBT</title>
 
+	<section id="admin.customize.strings">
+		<title>Strings / Translations</title>
+
+		<para>All strings used in MantisBT, including those defined in
+			plugins, can be customized or translated differently.
+			This is achieved by overriding them in the
+			<filename>Custom Strings File</filename>
+			(see <emphasis>$g_custom_strings_file</emphasis>
+			in <xref linkend="admin.config.path"/>),
+			which is automatically detected and included by MantisBT code.
+		</para>
+
+		<para>Defining custom strings here provides a simple upgrade path,
+			and avoids having to re-do the changes when upgrading to the
+			next release.
+		</para>
+
+		<para>Two formats are supported within this file:
+		</para>
+
+		<variablelist>
+			<varlistentry>
+				<term>New Format</term>
+				<listitem>
+					<para>Define a
+						<emphasis>$s_custom_messages</emphasis>
+						array as follows:
+<programlisting>
+$s_custom_messages = array( LANG => array( CODE => STRING, ... ) );
+</programlisting>
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Legacy Format</term>
+				<listitem>
+					<para>One variable per string
+<programlisting>
+$s_CODE = STRING;
+</programlisting>
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+
+		<para>Where
+			<itemizedlist>
+				<listitem>
+					<para>LANG = language code, as defined in
+						<emphasis>$g_language_choices_arr</emphasis>
+						(see <xref linkend="admin.config.language" />)
+					</para>
+				</listitem>
+				<listitem>
+					<para>CODE = string code, as called by
+						lang_get() function.
+					</para>
+				</listitem>
+				<listitem>
+					<para>STRING = string value / translation
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+		<note><para>Mixing old and new formats within the file is not supported.
+		</para></note>
+		<warning><para>NEVER call <emphasis>lang_get_current()</emphasis>
+			from the <emphasis>Custom Strings File</emphasis>, as doing so
+			will reset the active_language, causing the code to return
+			incorrect translations if the default language is different
+			from English.
+			Always use the <emphasis>$g_active_language</emphasis>
+			global variable instead.
+		</para></warning>
+	</section>
+
     <section id="admin.customize.customfields">
         <title>Custom Fields</title>
 
@@ -79,8 +155,10 @@
 						(see <xref linkend="admin.customize.customfields.localize" />).
 					</para>
 					<note><para>If the specified variable is not found in the
-						language files or in custom strings, then it will be
-						displayed as-is.
+						language files or in the
+						<emphasis>Custom Strings File</emphasis>
+						(see <xref linkend="admin.customize.strings"/>),
+						then it will be displayed as-is.
 					</para></note>
                 </listitem>
                 <listitem>
@@ -305,9 +383,11 @@
 				<listitem>
 					<para>Set the localization strings
 						<itemizedlist>
-							<listitem><para>In the main MantisBT directory, locate and
-								edit file <emphasis>custom_strings_inc.php</emphasis>
-								(create it if it does not exist)
+							<listitem><para>In the main MantisBT directory,
+								locate and edit the
+								<emphasis>Custom Strings File</emphasis>
+								(see <xref linkend="admin.customize.strings"/>),
+								create it if it does not exist.
 							</para></listitem>
 							<listitem><para>Localize the custom field's label
 								<emphasis>my_start_date</emphasis> by adding
@@ -326,15 +406,6 @@ switch( $g_active_language ) {
 		break;
 }
 </programlisting>
-								<warning><para>Do NOT call
-									<emphasis>lang_get_current()</emphasis>
-									from custom_strings_inc.php, as doing so
-									will reset the active_language, causing the
-									code to return incorrect translations if the
-									default language is different from English.
-									Always use the <emphasis>$g_active_language</emphasis>
-									global variable instead.
-								</para></warning>
 							</para></listitem>
 						</itemizedlist>
 					</para>
@@ -343,10 +414,13 @@ switch( $g_active_language ) {
 		</para>
 
 		<note><para>Had we decided to use <emphasis>start_date</emphasis>
-			as the custom field's name, then it would not have been necessary to
-			modify custom_strings_inc.php, since MantisBT would have used the
+			as the custom field's name, then it would not have been necessary
+			to modify the <emphasis>Custom Strings File</emphasis>
+			(see <xref linkend="admin.customize.strings"/>),
+			since MantisBT would have used the
 			existing, already localized string from the standard language files.
-			To check for standard strings, inspect lang/strings_english.txt.
+			To check for standard strings, inspect
+			<filename>lang/strings_english.txt</filename>.
 		</para></note>
 	</section>
 
@@ -537,21 +611,24 @@ define( 'ADMINISTRATOR', 90 );
             <filename>config_defaults_inc.php</filename> includes the defaults for the
             enumerations. The configuration options that are defaulted here are
             used in specifying which enumerations are active and should be used
-            in MantisBT.  However, the strings included in the enumerations here
-            are just for documentation purpose, they are not shown to the user
-            (due to the need for localisation). Hence, if an entry in this
-            enumeration is not found in the corresponding localised enumeration
-            (i.e. 70:manager), then it will be printed to the user as @70@.
+			in MantisBT.
 
-            <programlisting>
-                $g_access_levels_enum_string =
-                '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator';
-            </programlisting>
+<programlisting>
+$g_access_levels_enum_string =
+	'10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator';
+</programlisting>
+			<note><para>The strings included in the enumerations here are just for
+				documentation purposes, they are not actually shown to the user
+				(due to the need for localisation). Hence, if an entry in this
+				enumeration is not found in the corresponding localised string
+				(i.e. 70:manager), then it will be printed to the user as @70@.
+			</para></note>
         </para>
         <para>
-            <filename>lang/strings_german.txt</filename> provide the
-            localised strings (in this case, in german) for enumerations. But again, the master list is
-            the enumeration in the configs, the ones in the language files are
+			The Language Files (e.g. <filename>lang/strings_german.txt</filename>)
+			provide the localised strings (German in this case) for enumerations.
+			But again, the <emphasis>master list</emphasis> is
+			the enumeration in the configs themselves, the ones in the language files are
             just used for finding the localised equivalent for an entry. Hence,
             if a user changes the config to have only two types of users
             developers and administrators, then only those will be prompted to
@@ -596,20 +673,16 @@ $g_manage_custom_fields_threshold = SENIOR_DEVELOPER;
         </para>
 
         <para>
-            The file <filename>custom_strings_inc.php</filename> is introduced for a similar reason
-            to that of custom_constants_inc.php, which is to define custom
-            strings. The advantage of defining them here is to provide a simple
-            upgrade path, and avoid having to re-do the changes when upgrading
-            to the next MantisBT release. Note that you will need to create this
-            file if you need such customisation. The file is automatically
-            detected and included by MantisBT code.
-            <programlisting>
-                # Note that we don't have to remove the Updater entry from the
-                localisation file if the current language is 'english' ) {
-                $s_access_levels_enum_string =
-                '10:Betrachter,25:Reporter,40:Updater,55:Entwickler,60:Senior
-                Developer,70:Manager,90:Administrator'; }
-            </programlisting>
+			Update the <emphasis>Custom Strings File</emphasis>
+			(see <xref linkend="admin.customize.strings"/>)
+<programlisting>
+$s_access_levels_enum_string =
+	'10:Betrachter,25:Reporter,40:Updater,55:Entwickler,60:Senior Developer,70:Manager,90:Administrator';
+</programlisting>
+			<note><para>We don't need to remove the <emphasis>Updater</emphasis>
+				entry from the localisation file if the current language
+				is 'English'.
+			</para></note>
         </para>
 
         <formalpara>
@@ -781,8 +854,9 @@ $g_status_colors['<emphasis>testing</emphasis>'] = '#ACE7AE';
 				</listitem>
 
 				<listitem>
-					<para>Define the required translation strings for the new
-						status, for each language used in the installation.
+					<para>Define the required translation strings for
+						the new status, for each language used in
+						the installation.
 						<itemizedlist>
 							<listitem><para><emphasis>s_status_enum_string</emphasis>:
 								status codes translation (refer to the original
@@ -804,9 +878,10 @@ $g_status_colors['<emphasis>testing</emphasis>'] = '#ACE7AE';
 						underscores in the language strings names (e.g.
 						for '35:pending user', use '$s_pending_user_bug_button')
 					</para>
-					<para>In the main mantisbt directory, locate and edit file
-						<emphasis>custom_strings_inc.php</emphasis>;
-						(create it if it does not exist)
+					<para>In the main mantisbt directory, locate and edit
+						the <emphasis>Custom Strings File</emphasis>
+						(see <xref linkend="admin.customize.strings"/>),
+						create it if it does not exist
 <programlisting>
 &lt;?php
 # Translation for Custom Status Code: <emphasis>testing</emphasis>
@@ -831,15 +906,6 @@ switch( $g_active_language ) {
 		break;
 }
 </programlisting>
-						<warning><para>Do NOT call
-							<emphasis>lang_get_current()</emphasis>
-							from custom_strings_inc.php, as doing so
-							will reset the active_language, causing the
-							code to return incorrect translations if the
-							default language is different from English.
-							Always use the <emphasis>$g_active_language</emphasis>
-							global variable instead.
-						</para></warning>
 					</para>
 				</listitem>
 
@@ -1095,7 +1161,8 @@ define( 'ERROR_VALIDATE_FAILURE', 2000 );
 				</listitem>
 
 				<listitem>
-					<para><filename>custom_strings_inc.php</filename>
+					<para><emphasis>Custom Strings File</emphasis>
+						(see <xref linkend="admin.customize.strings"/>)
 					</para>
 
 					<programlisting>
