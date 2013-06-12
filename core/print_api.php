@@ -798,7 +798,7 @@ function print_enum_string_option_list( $p_enum_name, $p_val = 0 ) {
 		$t_elem2 = get_enum_element( $p_enum_name, $t_key );
 
 		echo '<option value="' . $t_key . '"';
-		check_selected( $p_val, $t_key );
+		check_selected( (int)$p_val, $t_key );
 		echo '>' . string_html_specialchars( $t_elem2 ) . '</option>';
 	}
 }
