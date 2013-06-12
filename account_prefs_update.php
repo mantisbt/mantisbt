@@ -56,8 +56,8 @@
 
 	$t_prefs->redirect_delay	= gpc_get_int( 'redirect_delay' );
 	$t_prefs->refresh_delay		= gpc_get_int( 'refresh_delay' );
-	$t_prefs->default_project	= gpc_get_int( 'default_project' );
-
+	$t_prefs->default_project	= gpc_get_int( 'default_project', 0 );
+	
 	$t_lang = gpc_get_string( 'language' );
 	if ( lang_language_exists( $t_lang ) ) {
 		$t_prefs->language = $t_lang;
