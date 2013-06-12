@@ -395,15 +395,16 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 function error_string( $p_error ) {
 	global $g_error_parameters;
 
+	$t_err_msg = lang_get( 'MANTIS_ERROR' );
+	if( array_key_exists( $p_error, $t_err_msg) ) {
+		$t_error = $t_err_msg[$p_error];
+	} else {
+		return lang_get( 'missing_error_string' ) . $p_error;
+	}
+
 	# We pad the parameter array to make sure that we don't get errors if
 	#  the caller didn't give enough parameters for the error string
 	$t_padding = array_pad( array(), 10, '' );
-
-	$t_error = lang_get( $p_error, null, false );
-
-	if( $t_error == '' ) {
-		return lang_get( 'missing_error_string' ) . $p_error;
-	}
 
 	# ripped from string_api
 	$t_string = call_user_func_array( 'sprintf', array_merge( array( $t_error ), $g_error_parameters, $t_padding ) );
