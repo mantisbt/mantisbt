@@ -527,12 +527,13 @@ tar -xf <emphasis>filename.tar</emphasis>
 					files listed below to the new directory, as well as any other
 					custom files such as logo, favicon, css, etc.
 				</para>
-				<para><emphasis>
-					config_inc.php
-					custom_strings_inc.php
-					custom_constants_inc.php
-					custom_functions_inc.php
-					</emphasis>
+				<para>
+					<filename>config_inc.php</filename>,
+					the <emphasis>Custom Strings File</emphasis>
+					(<filename>custom_strings_inc.php</filename> by default,
+					see <xref linkend="admin.customize.strings"/>),
+					<filename>custom_constants_inc.php</filename> and
+					<filename>custom_functions_inc.php</filename>
 				</para>
 			</listitem>
 
