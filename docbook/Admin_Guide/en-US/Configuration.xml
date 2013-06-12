@@ -791,8 +791,11 @@
                         languages supported by MantisBT. The administrator can limit the
                         languages available for users to choose from by overriding this
                         value. For example, to support English, French and German include
-                        the following code: array( 'english', 'french', 'german'
-                        ); Of course, administrators can also add their own languages
+						the following code:
+<programlisting>
+$g_language_choices_arr = array( 'english', 'french', 'german' );
+</programlisting>
+						Of course, administrators can also add their own languages
                         by translating the strings and creating their own language files.
                         You are encouraged to share any translation work that you do with
                         the MantisBT team. This will ensure that the newly created language

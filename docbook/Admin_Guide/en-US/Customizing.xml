@@ -356,7 +356,25 @@ switch( $g_active_language ) {
             <section id="admin.customize.customfields.defaults.date">
                 <title>Dynamic defaults for Date fields</title>
 
-                <para>Custom fields of type date can be defaulted to a specific dates or to relative dates.  Typically relative dates is the scenario that makes sense in most of the cases.  The format for specific dates is an integer which indicates the number of seconds since the Unix Epoch (January 1 1970 00:00:00 GMT), which is the format consumed by the PHP <ulink url="http://www.php.net/date">date()</ulink> method.  The relative scenario expects default values like {tomorrow}, {yesterday}, {+2 days}, {-3 days}, {next week}, etc.  The curly brackets indicate that this is a logical value which is then evaluated using the PHP <ulink url="http://www.php.net/strtotime">strtotime()</ulink> function.</para>
+				<para>Custom fields of type date can be defaulted to
+					either specific or relative dates.
+					Typically, relative dates is the scenario that makes
+					sense in most of the cases.
+				</para>
+				<para>The format for specific dates is an integer which
+					indicates the number of seconds since the
+					<ulink url="http://en.wikipedia.org/wiki/Unix_time">
+						Unix Epoch</ulink> (January 1 1970 00:00:00 UTC),
+					which is the format consumed by the PHP
+					<ulink url="http://www.php.net/date">date()</ulink> method.
+				</para>
+				<para>The relative scenario expects default values like
+					{tomorrow}, {yesterday}, {+2 days}, {-3 days}, {next week}, etc.
+					The curly brackets indicate that this is a logical value
+					which is then evaluated using the PHP
+					<ulink url="http://www.php.net/strtotime">strtotime()</ulink>
+					function.
+				</para>
             </section>
         </section>
 
@@ -483,6 +501,7 @@ functions section.</para>
         </section>
 
     </section>
+
     <section id="admin.customize.enums">
         <title>Enumerations</title>
 
@@ -497,20 +516,20 @@ functions section.</para>
         </para>
 
         <formalpara>
-            <title>How enumerations work?</title>
+			<title>How do enumerations work?</title>
 
             <para>
                 <filename>core/constant_inc.php</filename> defines the
                 constants that correspond to those in the enumeration. These are
                 useful to refer to these enumerations in the configs and the code.
-                <programlisting>
-                    define( 'VIEWER', 10 )
-                    define( 'REPORTER', 25 )
-                    define( 'UPDATER',  40 )
-                    define( 'DEVELOPER', 55 )
-                    define( 'MANAGER', 70 )
-                    define( 'ADMINISTRATOR', 90 )
-                </programlisting>
+<programlisting>
+define( 'VIEWER', 10 );
+define( 'REPORTER', 25 );
+define( 'UPDATER',  40 );
+define( 'DEVELOPER', 55 );
+define( 'MANAGER', 70 );
+define( 'ADMINISTRATOR', 90 );
+</programlisting>
             </para>
         </formalpara>
 
@@ -538,18 +557,18 @@ functions section.</para>
             developers and administrators, then only those will be prompted to
             the users even if the enumerations in the language files still
             includes the full list.
-            <programlisting>
-
-                $s_access_levels_enum_string =
-                '10:Betrachter,25:Reporter,40:Updater,55:Entwickler,70:Manager,90:Administrator';
-            </programlisting>
+<programlisting>
+$s_access_levels_enum_string =
+	'10:Betrachter,25:Reporter,40:Updater,55:Entwickler,70:Manager,90:Administrator';
+</programlisting>
         </para>
 
         <formalpara>
-            <title>How can they be customised?</title> <para>Let say we want to remove access level
-                "Updater" and add access level "Senior
-                Developer".
-            </para>
+			<title>How can they be customised?</title>
+			<para>Let say we want to remove access level
+				"Updater" and add access level "Senior
+				Developer".
+			</para>
         </formalpara>
         <para>
             The file <filename>custom_constants_inc.php</filename> is supported for the
@@ -559,20 +578,21 @@ functions section.</para>
             MantisBT and you will need to create it if you need such
             customisation. In our example, we need to define a constant for the
             new access level.
-            <programlisting>
-                define ( 'SENIOR_DEVELOPER', 60 );
-            </programlisting>
+<programlisting>
+define( 'SENIOR_DEVELOPER', 60 );
+</programlisting>
         </para>
 
         <para>
             In <filename>config_inc.php</filename>
-            <programlisting>
-                // Remove Updater and add Senior Developer
-                $g_access_levels_enum_string =
-                '10:viewer,25:reporter,55:developer,60:senior_developer,70:manager,90:administrator';
-                // Give access to Senior developers to create/delete custom field.
-                $g_manage_custom_fields_threshold = SENIOR_DEVELOPER;
-            </programlisting>
+<programlisting>
+// Remove Updater and add Senior Developer
+$g_access_levels_enum_string =
+	'10:viewer,25:reporter,55:developer,60:senior_developer,70:manager,90:administrator';
+
+// Give access to Senior developers to create/delete custom field.
+$g_manage_custom_fields_threshold = SENIOR_DEVELOPER;
+</programlisting>
         </para>
 
         <para>
@@ -593,15 +613,14 @@ functions section.</para>
         </para>
 
         <formalpara>
-            <title>Conclusion</title><para>We have covered how enumerations work in general, and how
-                to customise one of them. If you are interested in customising
-                other enumerations, a good starting point would be to go to "MantisBT
-                Enum Strings" section in config_defaults_inc.php. This section
-                defines all enumerations that are used by MantisBT.
-                For versions that are older than 0.18.0, custom_*_inc.php files are
-                not supported, and hence you will need to change in the actual
-                constants / language files directly.
-            </para>
+			<title>Conclusion</title>
+			<para>We have covered how enumerations work in general, and how
+				to customise one of them. If you are interested in customising
+				other enumerations, a good starting point would be to go to
+				<emphasis>MantisBT Enum Strings</emphasis> section in
+				<filename>config_defaults_inc.php</filename>. This section
+				defines all enumerations that are used by MantisBT.
+			</para>
         </formalpara>
 
     </section>
@@ -616,55 +635,75 @@ functions section.</para>
             <itemizedlist>
                 <listitem>
                     <para>Notify only managers of new issues.
-                        <programlisting>
-                            $g_notify_flags['new']['threshold_min'] = MANAGER;
-                            $g_notify_flags['new']['threshold_max'] = MANAGER;
-                        </programlisting>
+<programlisting>
+$g_notify_flags['new'] = array(
+	'threshold_min' => MANAGER,
+	'threshold_max' => MANAGER,
+);
+</programlisting>
                     </para>
                 </listitem>
                 <listitem>
                     <para>Notify Developers and managers of all project events,
                         except, exclude developers from the 'closed' events.
-                        <programlisting>$g_default_notify_flags['threshold_min'] = DEVELOPER;
-                            $g_default_notify_flags['threshold_max'] = MANAGER;
-                            $g_notify_flags['closed']['threshold_max'] = MANAGER;
-                            $g_notify_flags['closed']['threshold_max'] = MANAGER;
-                        </programlisting>
+<programlisting>
+$g_default_notify_flags = array(
+	'threshold_min' => DEVELOPER,
+	'threshold_max' => MANAGER,
+);
+$g_notify_flags['closed'] = array(
+	'threshold_min' => MANAGER,
+	'threshold_max' => MANAGER,
+);
+</programlisting>
                     </para>
                 </listitem>
                 <listitem>
                     <para>Exclude those who contributed issue notes from getting
                         messages about other changes in the issue.
-                        <programlisting>$g_default_notify_flags['bugnotes'] = OFF;</programlisting>
+<programlisting>
+$g_default_notify_flags['bugnotes'] = OFF;
+</programlisting>
                     </para>
                 </listitem>
                 <listitem>
                     <para>Exclude those monitoring issues from seeing the 'closed'
                         message
-                        <programlisting>$g_notify_flags['closed']['monitor'] = OFF;</programlisting>
+<programlisting>
+$g_notify_flags['closed']['monitor'] = OFF;
+</programlisting>
                     </para>
                 </listitem>
                 <listitem>
                     <para>Only notify developers when issue notes are added.
-                        <programlisting>$g_notify_flags['bugnote']['threshold_min'] = DEVELOPER;
-                            $g_notify_flags['bugnote']['threshold_max'] = DEVELOPER;
-                        </programlisting>
+<programlisting>
+$g_notify_flags['bugnote'] = array(
+	'threshold_min' => DEVELOPER,
+	'threshold_max' => DEVELOPER,
+);
+</programlisting>
                     </para>
                 </listitem>
                 <listitem>
                     <para>Notify managers of changes in sponsorship.
-                        <programlisting>$g_notify_flags['sponsor']['threshold_max'] = MANAGER;
-                            $g_notify_flags['sponsor']['threshold_max'] = MANAGER;
-                        </programlisting>
+<programlisting>
+$g_notify_flags['sponsor'] = array(
+	'threshold_min' => MANAGER,
+	'threshold_max' => MANAGER,
+);
+</programlisting>
                     </para>
                 </listitem>
                 <listitem>
                     <para>Notify originator and managers of changes in ownership
                         ("Assigned To:").
-                        <programlisting>$g_notify_flags['owner']['threshold_max'] = MANAGER;
-                            $g_notify_flags['owner']['threshold_max'] = MANAGER;
-                            $g_notify_flags['owner']['reporter'] = ON;
-                        </programlisting>
+<programlisting>
+$g_notify_flags['owner'] = array(
+	'threshold_min' => MANAGER,
+	'threshold_max' => MANAGER,
+	'reporter'      => ON,
+);
+</programlisting>
                     </para>
                 </listitem>
                 <listitem>
@@ -672,14 +711,21 @@ functions section.</para>
                         to those involved in them. Don't send mail people already know
                         about. Also send new issue notifications to managers so they can
                         screen them.
-                        <programlisting>$g_mail_receive_own = OFF;
-                            $g_default_notify_flags =
-                            array('reporter' =&gt; ON, 'handler' =&gt; ON, 'monitor' =&gt; ON,
-                            'bugnotes' =&gt; ON, 'threshold_min' =&gt; NOBODY, 'threshold_max'
-                            =&gt; NOBODY);
-                            $g_notify_flags['new']['threshold_min'] = MANAGER;
-                            $g_notify_flags['new']['threshold_max'] = MANAGER;
-                        </programlisting>
+<programlisting>
+$g_mail_receive_own = OFF;
+$g_default_notify_flags = array(
+	'reporter'      => ON,
+	'handler'       => ON,
+	'monitor'       => ON,
+	'bugnotes'      => ON,
+	'threshold_min' => NOBODY,
+	'threshold_max' => NOBODY
+);
+$g_notify_flags['new'] = array(
+	'threshold_min' => MANAGER,
+	'threshold_max' => MANAGER,
+);
+</programlisting>
                     </para>
                 </listitem>
                 <listitem>
