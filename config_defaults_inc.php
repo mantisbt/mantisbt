@@ -214,12 +214,22 @@ $g_language_path = $g_absolute_path . 'lang' . DIRECTORY_SEPARATOR;
 
 /**
  * absolute path to custom strings file.
- * This file allows overriding of strings declared in the language file, or in plugin language files
+ * This file allows overriding of strings declared in language files,
+ * including plugin-specific ones.
+ *
  * Two formats are supported:
- * Legacy format: $s_*
- * New format: define a $s_custom_messages array as follows:
- * $s_custom_messages = array( 'en' => array( string => string ) ) ;
- * NOTE: you can not mix/merge old/new formats within this file.
+ * - New format: define a $s_custom_messages array as follows:
+ *   $s_custom_messages = array( LANG => array( CODE => STRING, ... ) );
+ * - Legacy format: one variable per string
+ *   $s_CODE = STRING;
+ *
+ * Where
+ * - LANG   = language code, as defined in {@link $g_language_choices_arr}
+ * - CODE   = string code, as called by {@link lang_get()}
+ * - STRING = string value / translation
+ *
+ * NOTE: mixing old and new formats within the file is not supported
+ *
  * @global string $g_custom_strings_file
  */
 $g_custom_strings_file = $g_absolute_path . 'custom_strings_inc.php';
