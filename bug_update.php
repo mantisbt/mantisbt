@@ -214,8 +214,11 @@ if ( $t_existing_bug->category_id !== $t_updated_bug->category_id ) {
 if ( $t_existing_bug->resolution !== $t_updated_bug->resolution &&
      $t_updated_bug->resolution >= config_get( 'bug_resolution_fixed_threshold' ) &&
      $t_updated_bug->status < $t_resolved_status ) {
-	error_parameters( lang_get( 'resolution' ) );
-	trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
+	error_parameters(
+		get_enum_element( 'resolution', $t_updated_bug->resolution ),
+		get_enum_element( 'status', $t_updated_bug->status )
+	);
+	trigger_error( ERROR_INVALID_RESOLUTION, ERROR );
 }
 
 # Ensure that the user has permission to change the target version of the issue.
