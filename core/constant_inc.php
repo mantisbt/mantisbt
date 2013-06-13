@@ -66,7 +66,7 @@ define( 'CLOSED', 90 );
 define( 'OPEN', 10 );
 define( 'FIXED', 20 );
 define( 'REOPENED', 30 );
-define( 'UNABLE_TO_DUPLICATE', 40 );
+define( 'UNABLE_TO_REPRODUCE', 40 );
 define( 'NOT_FIXABLE', 50 );
 define( 'DUPLICATE', 60 );
 define( 'NOT_A_BUG', 70 );
@@ -545,3 +545,6 @@ define( 'DB_FIELD_SIZE_PASSWORD', 32);
 define( 'PASSWORD_MAX_SIZE_BEFORE_HASH', 1024 );
 
 define( 'SECONDS_PER_DAY', 86400 );
+
+# Obsolete / deprecated constants
+define( 'UNABLE_TO_DUPLICATE', 40 );
