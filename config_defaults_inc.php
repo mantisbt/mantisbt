@@ -4099,20 +4099,20 @@ $g_show_detailed_errors = OFF;
  *  'none' - no error displayed
  * A developer might set this in config_inc.php as:
  *	$g_display_errors = array(
- *		E_WARNING => 'halt',
- *		E_NOTICE => 'halt',
- *		E_USER_ERROR => 'halt',
- *		E_USER_WARNING => 'none',
- *		E_USER_NOTICE => 'none'
+ *		E_WARNING      => 'halt',
+ *		E_NOTICE       => 'inline',
+ *		E_USER_ERROR   => 'halt',
+ *		E_USER_WARNING => 'inline',
+ *		E_USER_NOTICE  => 'inline'
  *	);
  * @global array $g_display_errors
  */
 $g_display_errors = array(
-	E_WARNING => 'inline',
-	E_NOTICE => 'none',
-	E_USER_ERROR => 'halt',
+	E_WARNING      => 'inline',
+	E_NOTICE       => 'none',
+	E_USER_ERROR   => 'halt',
 	E_USER_WARNING => 'inline',
-	E_USER_NOTICE => 'none'
+	E_USER_NOTICE  => 'none'
 );
 
 /**
