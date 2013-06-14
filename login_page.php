@@ -210,12 +210,31 @@ if( $f_error || $f_cookie_error ) {
 if ( config_get_global( 'admin_checks' ) == ON ) {
 	$t_warnings = array();
 
-	# Generate a warning if administrator/root is valid.
+	# Generate a warning if default user administrator/root is valid.
 	$t_admin_user_id = user_get_id_by_name( 'administrator' );
 	if ( $t_admin_user_id !== false ) {
 		if ( user_is_enabled( $t_admin_user_id ) && auth_does_password_match( $t_admin_user_id, 'root' ) ) {
 			$t_warnings[] = lang_get( 'warning_default_administrator_account_present' );
 		}
+	}
+
+	# Warnings for enabled debugging / developer settings
+	function debug_setting_message ( $p_type, $p_setting, $p_value ) {
+		return sprintf( lang_get( 'warning_change_setting' ), $p_setting, $p_value )
+			. sprintf( lang_get( "warning_${p_type}_hazard" ) );
+	}
+
+	$t_config = 'show_detailed_errors';
+	if( config_get( $t_config ) != OFF ) {
+		$t_warnings[] = debug_setting_message( 'security', $t_config, 'OFF' );
+	}
+	$t_config = 'display_errors';
+	if( config_get_global( $t_config )[E_USER_ERROR] != 'halt' ) {
+		$t_warnings[] = debug_setting_message( 'integrity', $t_config . '[E_USER_ERROR]', 'halt' );
+	}
+	$t_debug_email = config_get( 'debug_email' );
+	if( $t_debug_email !==  OFF ) {
+		$t_warnings[] = sprintf( lang_get( 'warning_debug_email' ), $t_debug_email );
 	}
 
 	# Check if the admin directory is available and is readable.
