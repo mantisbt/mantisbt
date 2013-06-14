@@ -499,7 +499,8 @@ define( 'CUSTOM_FIELD_TYPE_PROJECT', 3 );
 define( 'CUSTOM_FIELD_TYPE_FILE', 4 );
 
 # system logging
-#  logging levels, can be OR'd together
+# The logging levels can be combined using bitwise operators
+define( 'LOG_ALL',                     ~0 );  # All possible log levels
 define( 'LOG_NONE',                     0 );  # no logging
 define( 'LOG_EMAIL',                    1 );  # all emails sent
 define( 'LOG_EMAIL_RECIPIENT',          2 );  # details of email recipient determination
