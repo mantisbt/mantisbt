@@ -74,7 +74,11 @@ http_content_headers();
 <p class="notice">Verbosity: <?php echo $t_show_all_mode_link ?> | <?php echo $t_show_errors_mode_link ?></p>
 <table id="check-results">
 	<thead>
-		<td colspan="2" class="thead1"><strong>Checking your MantisBT installation...</strong></td>
+		<tr>
+			<th colspan="2" class="thead1">
+				<strong>Checking your MantisBT installation...</strong>
+			</th>
+		</tr>
 	</thead>
 <?php
 

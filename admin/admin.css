@@ -4,7 +4,7 @@ table {
 	margin-right: auto;
 }
 
-td {
+td, th {
 	border-style: solid;
 	border-width: 1px;
 	border-color: black;
@@ -12,6 +12,10 @@ td {
 	padding-right: 0.5em;
 	padding-top: 0.5ex;
 	padding-bottom: 0.5ex;
+}
+
+th {
+	text-align: left;
 }
 
 .thead1 {
