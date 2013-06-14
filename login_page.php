@@ -204,7 +204,6 @@ if( $f_error || $f_cookie_error ) {
 <?php
 #
 # Do some checks to warn administrators of possible security holes.
-# Since this is considered part of the admin-checks, the strings are not translated.
 #
 
 if ( config_get_global( 'admin_checks' ) == ON ) {
