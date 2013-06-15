@@ -124,7 +124,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 		case E_USER_ERROR:
 			$t_error_type = "APPLICATION ERROR #$p_error";
 			$t_error_description = error_string( $p_error );
-			if( $t_method == 'inline' ) {
+			if( $t_method == DISPLAY_ERROR_INLINE ) {
 				$t_error_description .= "\n" . error_string( ERROR_DISPLAY_USER_ERROR_INLINE );
 			}
 			break;
@@ -148,7 +148,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 	$t_error_description = nl2br( $t_error_description );
 
 	switch( $t_method ) {
-		case 'halt':
+		case DISPLAY_ERROR_HALT:
 			# disable any further event callbacks
 			if ( function_exists( 'event_clear_callbacks' ) ) {
 				event_clear_callbacks();
@@ -234,7 +234,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 				echo '</body></html>', "\n";
 			}
 			exit();
-		case 'inline':
+		case DISPLAY_ERROR_INLINE:
 			echo '<div class="error-inline">', $t_error_type, ': ', $t_error_description, '</div>';
 			$g_error_handled = true;
 			break;

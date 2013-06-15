@@ -4089,38 +4089,41 @@ $g_show_queries_count = OFF;
 /**
  * Errors Display method
  * Defines what errors are displayed and how. Available options are:
- * - 'halt'    stop and display error message (including variables and
- *             backtrace if {@link $g_show_detailed_errors} is ON)
- * - 'inline'  display 1 line error and continue execution
- * - 'none'    no error displayed
+ * - DISPLAY_ERROR_HALT    stop and display error message (including
+ *                         variables and backtrace if
+ *                         {@link $g_show_detailed_errors} is ON)
+ * - DISPLAY_ERROR_INLINE  display 1 line error and continue execution
+ * - DISPLAY_ERROR_NONE    no error displayed
  *
- * WARNING: E_USER_ERROR should always be set to 'halt'. Using another value
- * will cause program execution to continue, which may lead to data integrity
- * issues and/or cause MantisBT to function incorrectly.
+ * WARNING: E_USER_ERROR should always be set to DISPLAY_ERROR_HALT. Using
+ * another value will cause program execution to continue, which may lead to
+ * data integrity issues and/or cause MantisBT to function incorrectly.
  *
  * A developer might set this in config_inc.php as:
  *	$g_display_errors = array(
- *		E_WARNING      => 'halt',
- *		E_NOTICE       => 'inline',
- *		E_USER_ERROR   => 'halt',
- *		E_USER_WARNING => 'inline',
- *		E_USER_NOTICE  => 'inline'
+ *		E_WARNING      => DISPLAY_ERROR_HALT,
+ *		E_NOTICE       => DISPLAY_ERROR_INLINE,
+ *		E_USER_ERROR   => DISPLAY_ERROR_HALT,
+ *		E_USER_WARNING => DISPLAY_ERROR_INLINE,
+ *		E_USER_NOTICE  => DISPLAY_ERROR_INLINE
  *	);
  *
  * @global array $g_display_errors
  */
 $g_display_errors = array(
-	E_WARNING      => 'inline',
-	E_NOTICE       => 'none',
-	E_USER_ERROR   => 'halt',
-	E_USER_WARNING => 'inline',
-	E_USER_NOTICE  => 'none'
+	E_WARNING      => DISPLAY_ERROR_INLINE,
+	E_NOTICE       => DISPLAY_ERROR_NONE,
+	E_USER_ERROR   => DISPLAY_ERROR_HALT,
+	E_USER_WARNING => DISPLAY_ERROR_INLINE,
+	E_USER_NOTICE  => DISPLAY_ERROR_NONE
 );
 
 /**
  * Detailed error messages
  * Shows a list of variables and their values when an error is triggered.
- * Only applies to error types configured to 'halt' in {@link $g_display_errors}
+ * Only applies to error types configured to DISPLAY_ERROR_HALT in
+ * {@link $g_display_errors}
+ *
  * WARNING: Potential security hazard.  Only turn this on when you really
  * need it for debugging
  *

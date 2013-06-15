@@ -498,6 +498,11 @@ define( 'CUSTOM_FIELD_TYPE_BUGNOTE', 2 );
 define( 'CUSTOM_FIELD_TYPE_PROJECT', 3 );
 define( 'CUSTOM_FIELD_TYPE_FILE', 4 );
 
+# display types for $g_display_errors
+define( 'DISPLAY_ERROR_HALT', 'halt' );
+define( 'DISPLAY_ERROR_INLINE', 'inline' );
+define( 'DISPLAY_ERROR_NONE', 'none' );
+
 # system logging
 # The logging levels can be combined using bitwise operators
 define( 'LOG_ALL',                     ~0 );  # All possible log levels

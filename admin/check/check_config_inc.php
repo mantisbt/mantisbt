@@ -56,7 +56,7 @@ check_print_test_warn_row( 'Detailed errors should be OFF',
 );
 
 check_print_test_warn_row( 'MantisBT Application Errors should halt execution',
-	$g_display_errors[E_USER_ERROR] == 'halt',
+	$g_display_errors[E_USER_ERROR] == DISPLAY_ERROR_HALT,
 	array( false => 'Continuing after an error may lead to system and/or data integrity issues. Set $g_display_errors[E_USER_ERROR] = \'halt\';' )
 );
 

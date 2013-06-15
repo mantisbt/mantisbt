@@ -3511,7 +3511,7 @@ $g_main_menu_custom_options = array(
 
 					<variablelist>
 						<varlistentry>
-							<term>halt</term>
+							<term>DISPLAY_ERROR_HALT</term>
 							<listitem>
 								<para>stop and display error message
 									(including variables and backtrace if
@@ -3521,7 +3521,7 @@ $g_main_menu_custom_options = array(
 							</listitem>
 						</varlistentry>
 						<varlistentry>
-							<term>inline</term>
+							<term>DISPLAY_ERROR_INLINE</term>
 							<listitem>
 								<para>display 1 line error and continue
 									execution
@@ -3529,7 +3529,7 @@ $g_main_menu_custom_options = array(
 							</listitem>
 						</varlistentry>
 						<varlistentry>
-							<term>none</term>
+							<term>DISPLAY_ERROR_NONE</term>
 							<listitem>
 								<para>no error displayed</para>
 							</listitem>
@@ -3539,27 +3539,28 @@ $g_main_menu_custom_options = array(
 					<para>Default is</para>
 <programlisting>
 $g_display_errors = array(
-	E_WARNING      => 'inline',
-	E_NOTICE       => 'none',
-	E_USER_ERROR   => 'halt',
-	E_USER_WARNING => 'inline',
-	E_USER_NOTICE  => 'none'
+	E_WARNING      => DISPLAY_ERROR_INLINE,
+	E_NOTICE       => DISPLAY_ERROR_NONE,
+	E_USER_ERROR   => DISPLAY_ERROR_HALT,
+	E_USER_WARNING => DISPLAY_ERROR_INLINE,
+	E_USER_NOTICE  => DISPLAY_ERROR_NONE
 );
 </programlisting>
 					<para>A developer might set this in their
 						<filename>config_inc.php</filename> as:
 <programlisting>
 $g_display_errors = array(
-	E_WARNING      => 'halt',
-	E_NOTICE       => 'inline',
-	E_USER_ERROR   => 'halt',
-	E_USER_WARNING => 'inline',
-	E_USER_NOTICE  => 'inline'
+	E_WARNING      => DISPLAY_ERROR_HALT,
+	E_NOTICE       => DISPLAY_ERROR_INLINE,
+	E_USER_ERROR   => DISPLAY_ERROR_HALT,
+	E_USER_WARNING => DISPLAY_ERROR_INLINE,
+	E_USER_NOTICE  => DISPLAY_ERROR_INLINE
 );
 </programlisting>
 					</para>
 					<warning><para><emphasis>E_USER_ERROR</emphasis>
-						should always be set to <literal>'halt'</literal>.
+						should always be set to
+						<literal>DISPLAY_ERROR_HALT</literal>.
 						Using any other value will cause program execution
 						to continue despite the error, which may lead to data
 						integrity issues and/or cause MantisBT to function
@@ -3573,7 +3574,8 @@ $g_display_errors = array(
 				<listitem>
 					<para>Shows a list of variables and their values
 						whenever an error is triggered.
-						Only applies to error types configured to 'halt'
+						Only applies to error types configured to
+						<literal>DISPLAY_ERROR_HALT</literal>
 						in <emphasis>$g_display_errors</emphasis>.
 					</para>
 					<para>Default is OFF.</para>

@@ -228,8 +228,12 @@ if ( config_get_global( 'admin_checks' ) == ON ) {
 		$t_warnings[] = debug_setting_message( 'security', $t_config, 'OFF' );
 	}
 	$t_config = 'display_errors';
-	if( config_get_global( $t_config )[E_USER_ERROR] != 'halt' ) {
-		$t_warnings[] = debug_setting_message( 'integrity', $t_config . '[E_USER_ERROR]', 'halt' );
+	if( config_get_global( $t_config )[E_USER_ERROR] != DISPLAY_ERROR_HALT ) {
+		$t_warnings[] = debug_setting_message(
+			'integrity',
+			$t_config . '[E_USER_ERROR]',
+			DISPLAY_ERROR_HALT
+		);
 	}
 	$t_debug_email = config_get( 'debug_email' );
 	if( $t_debug_email !==  OFF ) {
