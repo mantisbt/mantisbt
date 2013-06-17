@@ -45,3 +45,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Deaktivovať odkaz';
 $s_plugin_XmlImportExport_fallback = 'Stratégia Fallback (keď bez prečíslovania):';
 $s_plugin_XmlImportExport_fallback_category = 'Náhradná kategória:';
 $s_plugin_XmlImportExport_keep_same_category = 'Skúsiť ponechanie rovnakej kategórie';
+$s_plugin_XmlImportExport_error_no_xml = 'Nepodarilo sa nájsť rozšírenia xmlreader a xmlwriter';

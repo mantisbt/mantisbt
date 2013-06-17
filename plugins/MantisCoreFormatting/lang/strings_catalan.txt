@@ -26,13 +26,14 @@
  * @file
  *
  * @author Bernat
+ * @author Dtamajon
  * @author Paucabot
  */
 
 $s_plugin_format_title = 'Formatació de MantisBT';
 $s_plugin_format_description = 'Processament de text i formatació de plugins oficials.';
 $s_plugin_format_config = 'Configuració';
-$s_plugin_format_process_text = 'Processament de Text';
+$s_plugin_format_process_text = 'Processament de text';
 $s_plugin_format_process_text_warning_notice = 'No ho deshabiliti si no està realment segur del què està fent. En estat deshabilitat hi poden haver atacs cross site scripting (XSS).';
 $s_plugin_format_process_urls = 'Processament de la URL';
 $s_plugin_format_process_buglinks = 'Enllaços MantisBT (Incidències/Notes d\'Incidències)';
