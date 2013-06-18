@@ -118,4 +118,7 @@ event_declare_many( array(
 
 	# Logging (tracing) events
 	'EVENT_LOG' => EVENT_TYPE_EXECUTE,
+	
+	# News events
+	'EVENT_NEWS_UPDATE' => EVENT_TYPE_EXECUTE,
 ) );
