@@ -1073,12 +1073,12 @@ function custom_field_validate( $p_field_id, $p_value ) {
 			$t_valid &= ( $p_value == null ) || ( ( $p_value !== false ) && ( $p_value > 0 ) );
 			break;
 		case CUSTOM_FIELD_TYPE_CHECKBOX:
+		case CUSTOM_FIELD_TYPE_MULTILIST:
 			# Checkbox fields can hold a null value (when no checkboxes are ticked)
 			if( $p_value === '' ) {
 				break;
 			}
-			# If checkbox field value is not null then we need to validate it... (note: no "break" statement here!)
-		case CUSTOM_FIELD_TYPE_MULTILIST:
+			# If checkbox field value is not null then we need to validate it
 			$t_values = explode( '|', $p_value );
 			$t_possible_values = custom_field_prepare_possible_values( $row['possible_values'] );
 			$t_possible_values = explode( '|', $t_possible_values );
@@ -1088,6 +1088,13 @@ function custom_field_validate( $p_field_id, $p_value ) {
 		case CUSTOM_FIELD_TYPE_ENUM:
 		case CUSTOM_FIELD_TYPE_LIST:
 		case CUSTOM_FIELD_TYPE_RADIO:
+			# List fields can be empty (when they are not shown on the
+			# form, or shown with no default values and never clicked)
+			if( is_blank( $p_value ) ) {
+				break;
+			}
+
+			# If list field value is not empty then we need to validate it
 			$t_possible_values = custom_field_prepare_possible_values( $row['possible_values'] );
 			$t_values_arr = explode( '|', $t_possible_values );
 			$t_valid &= in_array( $p_value, $t_values_arr );
