@@ -1,6 +1,6 @@
 <?php
 /*
-V5.17 17 May 2012  (c) 2000-2012 John Lim (jlim#natsoft.com). All rights reserved.
+V5.18 3 Sep 2012  (c) 2000-2012 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence. See License.txt.
@@ -192,7 +192,7 @@ FROM v\$parameter v1, v\$parameter v2 WHERE v1.name='log_archive_dest' AND v2.na
 		'Recent RMAN Jobs' => array('BACKUP', "select '-' from dual", "=RMAN"),
 
 		//		'Control File Keep Time' => array('BACKUP', "select value from v\$parameter where name='control_file_record_keep_time'",'No of days to keep RMAN info in control file. I recommend it be set to x2 or x3 times the frequency of your full backup.'),
-
+      'Storage', 'Tablespaces' => array('TABLESPACE', "select '-' from dual", "=TableSpace"),
 		false
 
 	);
@@ -270,6 +270,22 @@ order by 3 desc) where rownum <=10");
 
 	}
 
+	function TableSpace()
+	{
+
+		$rs = $this->conn->Execute(
+	"select tablespace_name,round(sum(bytes)/1024/1024) as Used_MB,round(sum(maxbytes)/1024/1024) as Max_MB, round(sum(bytes)/sum(maxbytes),4) * 100 as PCT
+	from dba_data_files
+   group by tablespace_name order by 2 desc");
+
+		$ret = "<p><b>Tablespace</b>".rs2html($rs,false,false,false,false);
+
+		$rs = $this->conn->Execute("select * from dba_data_files order by tablespace_name, 1");
+		$ret .= "<p><b>Datafile</b>".rs2html($rs,false,false,false,false);
+
+		return "&nbsp;<p>".$ret."&nbsp;</p>";
+	}
+
 	function RMAN()
 	{
 		$rs = $this->conn->Execute("select * from (select start_time, end_time, operation, status, mbytes_processed, output_device_type
@@ -279,6 +295,7 @@ order by 3 desc) where rownum <=10");
 		return "&nbsp;<p>".$ret."&nbsp;</p>";
 
 	}
+
 	function DynMemoryUsage()
 	{
 		if (@$this->version['version'] >= 11) {
@@ -322,6 +339,7 @@ order by 3 desc) where rownum <=10");
 
 		//if ($this->version['version'] < 9) return 'Oracle 9i or later required';
 	}
+
 	function PGA_Advice()
 	{
 		$t = "<h3>PGA Advice Estimate</h3>";
@@ -427,7 +445,6 @@ CONNECT BY prior id=parent_id and statement_id='$id'");
 		$s .= $this->Tracer($sql,$partial);
 		return $s;
 	}
-
 
 	function CheckMemory()
 	{

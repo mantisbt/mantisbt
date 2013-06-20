@@ -1,7 +1,7 @@
 <?php
 
 /**
-  V5.17 17 May 2012  (c) 2000-2012 John Lim (jlim#natsoft.com). All rights reserved.
+  V5.18 3 Sep 2012  (c) 2000-2012 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence.
@@ -182,7 +182,7 @@ class ADODB2_postgres extends ADODB_DataDict {
 
 	function AlterColumnSQL($tabname, $flds, $tableflds='',$tableoptions='')
 	{
-	   // Check if alter single column datatype available - works with 8.
+	   // Check if alter single column datatype available - works with 8.0+
 	   $has_alter_column = 8.0 <= (float) @$this->serverInfo['version'];
 
 	   if ($has_alter_column) {
@@ -240,11 +240,11 @@ class ADODB2_postgres extends ADODB_DataDict {
 #	         list($colname) = explode(' ',$v);
 	         if ($not_null) {
 	            // this does not error out if the column is already not null
-	            $sql[] = 'ALTER TABLE '.$tabname.' ALTER COLUMN '.$colname.' SET NOT NULL';
+				$sql[] = $alter . $colname . ' SET NOT NULL';
 	         }
 	         if ($set_null) {
 	            // this does not error out if the column is already null
-	            $sql[] = 'ALTER TABLE '.$tabname.' ALTER COLUMN '.$colname.' DROP NOT NULL';
+	            $sql[] = $alter . $colname . ' DROP NOT NULL';
 	         }
 	      }
 	      return $sql;

@@ -2,7 +2,7 @@
 
 
 /*
-V5.17 17 May 2012  (c) 2000-2012 John Lim (jlim#natsoft.com). All rights reserved.
+V5.18 3 Sep 2012  (c) 2000-2012 John Lim (jlim#natsoft.com). All rights reserved.
          Contributed by Ross Smith (adodb@netebb.com).
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
@@ -690,7 +690,7 @@ class ADODB_Session {
 
 		// crc32 optimization since adodb 2.1
 		// now we only update expiry date, thx to sebastian thom in adodb 2.32
-		if ($crc !== false && $crc == (strlen($oval) . crc32($oval))) {
+		if ($crc !== '00' && $crc !== false && $crc == (strlen($oval) . crc32($oval))) {
 			if ($debug) {
 				echo '<p>Session: Only updating date - crc32 not changed</p>';
 			}
