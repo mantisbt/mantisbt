@@ -30,6 +30,7 @@
  * @author Eitvys200
  * @author Garas
  * @author Ignas693
+ * @author Mantak111
  * @author Vilius Šumskas, vilius@lnk.lt (for Mantis 0.19.0-RC1)
  * @author Virginija Baliukiene, tygra@one.lt (for Mantis 0.18.2)
  */
@@ -463,8 +464,11 @@ $s_monitor_bug_button = 'Stebėti klaidą';
 $s_unmonitor_bug_button = 'Baigti stebėjimą';
 $s_file_upload_msg = 'Failas sėkmingai įkeltas';
 $s_upload_file = 'Failo įkėlimas';
+$s_upload_files = 'Įkelti failus';
 $s_select_file = 'Pasirinkite failą';
+$s_select_files = 'Pasirinkite failus';
 $s_upload_file_button = 'Įkelti failą';
+$s_upload_files_button = 'Įkelti failus';
 $s_max_file_size = 'Maksimalus dydis';
 $s_bug_reopened_msg = 'Klaida atidaryta dar kartą...';
 $s_reopen_add_bugnote_title = 'Atidarymo priežasties komentaras';
@@ -478,7 +482,7 @@ $s_from = 'Nuo';
 $s_to = 'Kam';
 $s_sent_you_this_reminder_about = 'siunčia Jums šį priminimą apie';
 $s_bug_reminder = 'Siųsti priminimą';
-$s_reminder_sent_to = 'Priminimas išsiųstas:';
+$s_reminder_sent_to = 'Priminimas išsiųstas';
 $s_bug_send_button = 'Siųsti';
 $s_reminder = 'Priminimas';
 $s_reminder_explain = 'Ši žinutė bus nusiųsta rodomiems gavėjams, kurie laukia šios klaidos atsakymo.';
@@ -765,6 +769,7 @@ $s_accounts_pruned_msg = 'Visi vartotojų vardai, kurie senesni negu savaitė ir
 $s_prune_accounts_button = 'Valyti';
 $s_confirm_account_pruning = 'Ar tikrai norite ištrinti senus niekada nepanaudotus vartotojų vardus?';
 $s_edit_user_title = 'Vartotojo redagavimas';
+$s_account_unlock_button = 'Atrakinti paskyrą';
 $s_reset_password_button = 'Keisti slaptažodį';
 $s_delete_user_button = 'Ištrinti vartotoją';
 $s_reset_password_msg = 'Ši galimybė el. laišku nusiunčia patvirtinimo kodą.';
@@ -775,6 +780,7 @@ $s_users_new = 'Naujas';
 $s_account_reset_protected_msg = 'Vartotojo vardas apsaugotas. Slaptažodžio pakeisti negalima.';
 $s_account_reset_msg = 'Patvirtinimo kodas nusiųstas į jūsų el. pašto dėžutę...';
 $s_account_reset_msg2 = 'Slaptažodis pakeistas į tuščią...';
+$s_account_unlock_msg = 'Paskyra atrakinta.';
 $s_manage_user_protected_msg = 'Vartotojo vardas apsaugotas. Priėjimo lygis ir aktyvumas taip pat apsaugoti. Kiti vartotojo parametrai bus atnaujinti...';
 $s_manage_user_updated_msg = 'Vartotojo duomenys sėkmingai atnaujinti...';
 $s_email_user_updated_subject = 'Anketa atnaujinta';
@@ -960,6 +966,7 @@ $s_update_bug_button = 'Redaguoti';
 $s_bug_assign_to_button = 'Priskirti:';
 $s_bug_status_to_button = 'Keisti būseną į:';
 $s_reopen_bug_button = 'Atnaujinti';
+$s_close_bug_button = 'Uždaryti';
 $s_move_bug_button = 'Perkelti';
 $s_attached_files = 'Prikabinti failai';
 $s_publish = 'Publikuoti';
@@ -1082,7 +1089,7 @@ $s_download_attachments = 'Parsisiųsti priedus';
 $s_delete_attachments = 'Ištrinti priedus';
 $s_delete_attachment_button = 'Ištrinti';
 $s_delete_attachment_sure_msg = 'Ar tikrai norite ištrinti šį priedą?';
-$s_filters = 'filtrai';
+$s_filters = 'Filtrai';
 $s_save_filters = 'Išsaugoti filtrą';
 $s_save_filters_as_shared = 'Įrašyti filtrus kaip bendro naudojimo';
 $s_use_saved_filters = 'Naudoti išsaugotus filtrus';
@@ -1094,6 +1101,7 @@ $s_automatically_included_in_private_projects = 'Automatiškai įtraukti į priv
 $s_project_documents = 'Projekto dokumentai';
 $s_view_project_documents = 'Peržiūrėti projekto dokumentus';
 $s_upload_project_documents = 'Įkelti projekto dokumentus';
+$s_sponsorships = 'Rėmėjai';
 $s_sponsor_issue = 'Rėmėjo problema';
 $s_others = 'Kiti';
 $s_see_email_addresses_of_other_users = 'See email addresses of other users';
@@ -1144,6 +1152,7 @@ $s_tag_create = 'Sukurti žymę';
 $s_show_all_tags = 'Visi';
 $s_time_tracking_billing_link = 'Atsiskaitymas';
 $s_time_tracking = 'Laiko sekimas';
+$s_time_tracking_time_spent = 'Laiko praleista:';
 $s_time_tracking_cost_per_hour = 'Kaina / val.';
 $s_time_tracking_cost = 'Kaina';
 $s_total_time_for_issue = 'Iš viso klaidų laikas = %1$s';
