@@ -45,6 +45,7 @@ function mc_issue_exists( $p_username, $p_password, $p_issue_id ) {
  * @return Array that represents an IssueData structure
  */
 function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
+	global $g_project_override;
 
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
@@ -58,6 +59,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
+	$g_project_override = $t_project_id;
 	if( !mci_has_readonly_access( $t_user_id, $t_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
@@ -407,6 +409,8 @@ function mci_issue_set_monitors( $p_issue_id , $p_requesting_user_id, $p_monitor
  * @return integer  The biggest used issue id.
  */
 function mc_issue_get_biggest_id( $p_username, $p_password, $p_project_id ) {
+	global $g_project_override;
+	
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
@@ -461,6 +465,7 @@ function mc_issue_get_biggest_id( $p_username, $p_password, $p_project_id ) {
 	if( $t_project_id == -1 ) {
 		$t_project_id = helper_get_current_project();
 	}
+	$g_project_override = $t_project_id;
 
 	if(( $t_project_id > 0 ) && !project_exists( $t_project_id ) ) {
 		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$t_project_id' does not exist." );
@@ -487,6 +492,8 @@ function mc_issue_get_biggest_id( $p_username, $p_password, $p_project_id ) {
  * @return integer  The id of the issue with the given summary, 0 if there is no such issue.
  */
 function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
+	global $g_project_override;
+	
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
@@ -506,6 +513,7 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 		while(( $row = db_fetch_array( $result ) ) !== false ) {
 			$t_issue_id = (int) $row['id'];
 			$t_project_id = bug_get_field( $t_issue_id, 'project_id' );
+			$g_project_override = $t_project_id;
 
 			if( mci_has_readonly_access( $t_user_id, $t_project_id ) &&
 				access_has_bug_level( VIEWER, $t_issue_id, $t_user_id ) ) {
@@ -934,7 +942,8 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 }
 
 function mc_issue_set_tags ( $p_username, $p_password, $p_issue_id, $p_tags ) {
-
+	global $g_project_override;
+	
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
@@ -945,6 +954,7 @@ function mc_issue_set_tags ( $p_username, $p_password, $p_issue_id, $p_tags ) {
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
+	$g_project_override = $t_project_id;
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
@@ -968,6 +978,8 @@ function mc_issue_set_tags ( $p_username, $p_password, $p_issue_id, $p_tags ) {
  * @return boolean  True if the issue has been deleted successfully, false otherwise.
  */
 function mc_issue_delete( $p_username, $p_password, $p_issue_id ) {
+	global $g_project_override;
+	
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
@@ -978,6 +990,8 @@ function mc_issue_delete( $p_username, $p_password, $p_issue_id ) {
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
+	$g_project_override = $t_project_id;
+	
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
@@ -999,6 +1013,8 @@ function mc_issue_delete( $p_username, $p_password, $p_issue_id ) {
  * @return integer The id of the added note.
  */
 function mc_issue_note_add( $p_username, $p_password, $p_issue_id, $p_note ) {
+	global $g_project_override;
+	
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
@@ -1019,6 +1035,8 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, $p_note ) {
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
+	$g_project_override = $t_project_id;
+
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
@@ -1056,6 +1074,8 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, $p_note ) {
  * @return true: success, false: failure
  */
 function mc_issue_note_delete( $p_username, $p_password, $p_issue_note_id ) {
+	global $g_project_override;
+
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
@@ -1071,6 +1091,7 @@ function mc_issue_note_delete( $p_username, $p_password, $p_issue_note_id ) {
 
 	$t_issue_id = bugnote_get_field( $p_issue_note_id, 'bug_id' );
 	$t_project_id = bug_get_field( $t_issue_id, 'project_id' );
+	$g_project_override = $t_project_id;
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
@@ -1100,6 +1121,8 @@ function mc_issue_note_delete( $p_username, $p_password, $p_issue_note_id ) {
  * @return true on success, false on failure
  */
 function mc_issue_note_update( $p_username, $p_password, $p_note ) {
+	global $g_project_override;
+
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if ( $t_user_id === false ) {
@@ -1124,6 +1147,7 @@ function mc_issue_note_update( $p_username, $p_password, $p_note ) {
 
 	$t_issue_id = bugnote_get_field( $t_issue_note_id, 'bug_id' );
 	$t_project_id = bug_get_field( $t_issue_id, 'project_id' );
+	$g_project_override = $t_project_id;
 
 	if ( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
@@ -1172,7 +1196,8 @@ function mc_issue_note_update( $p_username, $p_password, $p_note ) {
  * @return integer The id of the added relationship.
  */
 function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, $p_relationship ) {
-	$t_user_id = mci_check_login( $p_username, $p_password );
+    global $g_project_override;
+    $t_user_id = mci_check_login( $p_username, $p_password );
 
 	$p_relationship = SoapObjectsFactory::unwrapObject( $p_relationship );
 
@@ -1184,6 +1209,7 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, $p_re
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
+	$g_project_override = $t_project_id;
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
@@ -1250,13 +1276,16 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, $p_re
  * @return true: success, false: failure
  */
 function mc_issue_relationship_delete( $p_username, $p_password, $p_issue_id, $p_relationship_id ) {
-	$t_user_id = mci_check_login( $p_username, $p_password );
+	global $g_project_override;
+
+    $t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
+	$g_project_override = $t_project_id;
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
@@ -1325,6 +1354,8 @@ function mc_issue_relationship_delete( $p_username, $p_password, $p_issue_id, $p
  * @return boolean  true success, false otherwise.
  */
 function mc_issue_checkin( $p_username, $p_password, $p_issue_id, $p_comment, $p_fixed ) {
+    global $g_project_override;
+
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
@@ -1335,6 +1366,7 @@ function mc_issue_checkin( $p_username, $p_password, $p_issue_id, $p_comment, $p
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
+	$g_project_override = $t_project_id;
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
