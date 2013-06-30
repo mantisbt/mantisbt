@@ -1,0 +1,12 @@
+language: php
+
+php:
+  - 5.4
+
+before_script: ./scripts/travis_before_script.sh
+
+env:
+  - DB=mysql
+  - DB=pgsql
+
+script: phpunit --bootstrap ./tests/bootstrap.php ./tests/AllTests.php
