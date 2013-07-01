@@ -154,6 +154,7 @@
 	set_capability_row( 'view_handler_threshold' );
 	set_capability_row( 'view_history_threshold' );
 	set_capability_row( 'bug_reminder_threshold' );
+	set_capability_row( 'reminder_receive_threshold' );
 
 	form_security_purge( 'manage_config_work_threshold_set' );
 ?>
