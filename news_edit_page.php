@@ -142,6 +142,7 @@
 	</td>
 </tr>
 </table>
+<?php event_signal( 'EVENT_NEWS_UPDATE' ); ?>
 </form>
 </div>
 <?php

@@ -713,7 +713,7 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 		$t_category_id = $t_category_row['id'];
 		echo "<option value=\"$t_category_id\"";
 		check_selected( $p_category_id, $t_category_id );
-		echo '>' . string_attribute( category_full_name( $t_category_id, $t_category_row['project_id'] != $t_project_id ) ) . '</option>';
+		echo '>' . string_attribute( category_full_name( $t_category_id, $t_category_row['project_id'] != $t_project_id, config_get( 'print_category_option_list_include_project' ) == ON ) ) . '</option>';
 	}
 }
 

@@ -1399,6 +1399,13 @@
 	$g_summary_category_include_project	= OFF;
 
 	/**
+	 * shows project '[project] category' on category selection list
+	 * otherwise only 'category name'
+	 * @global boolean $g_print_category_option_list_include_project
+	 */
+	$g_print_category_option_list_include_project	= ON;
+	
+	/**
 	 * threshold for viewing summary
 	 * @global int $g_view_summary_threshold
 	 */
