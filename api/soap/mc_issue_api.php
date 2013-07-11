@@ -137,8 +137,6 @@ function mc_issue_get_history( $p_username, $p_password, $p_issue_id ) {
 		return mci_soap_fault_login_failed();
 	}
 
-	$t_lang = mci_get_user_lang( $t_user_id );
-
 	if( !bug_exists( $p_issue_id ) ) {
 		return SoapObjectsFactory::newSoapFault('Client', 'Issue does not exist');
 	}
