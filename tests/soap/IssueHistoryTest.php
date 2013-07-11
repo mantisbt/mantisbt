@@ -99,17 +99,45 @@ class IssueHistoryTest extends SoapBase {
 		$this->assertEquals(2, count($issueHistory) );
 		
 		// validate the format of the history entry following the update
-		$historyData = $issueHistory[1];
+		$this->assertPropertyHistoryEntry($issueHistory[1], 'summary', $t_summary_update, $issueToAdd['summary']);
+	}
+	
+	/**
+	 * A test case that tests the following:
+	 * 1. Creates a new issue with non-default status and resolution
+	 * 2. Validates that history entries are created for the status and resolution
+	 */	
+	function testCreatedIssueWithNonDefaultStatusAndResolutionHasHistoryEntries() {
+	    
+	    $issueToAdd = $this->getIssueToAdd( 'IssueHistoryTest.testCreatedIssueWithNonDefaultStatusAndResolutionHasHistoryEntries' );
+	    $issueToAdd['status'] = array( 'id' => 40 ); // confirmed
+	    $issueToAdd['resolution'] = array ( 'id' => 30); // reopened
+	    
+	    $issueId = $this->client->mc_issue_add(
+	            $this->userName,
+	            $this->password,
+	            $issueToAdd);
+	    	
+	    $this->deleteAfterRun( $issueId );
+	    
+	    $issueHistory = $this->client->mc_issue_get_history( $this->userName, $this->password, $issueId );
+	    
+	    $this->assertEquals(3, count($issueHistory) );
 
-		$this->assertNotEmpty($historyData->date);
-		
-		$this->assertEquals($this->userId, $historyData->userid);
-		$this->assertEquals($this->userName, $historyData->username);
-		
-		$this->assertEquals(0, $historyData->type);
-
-		$this->assertEquals('summary', $historyData->field);
-		$this->assertEquals($issueToAdd['summary'], $historyData->old_value);
-		$this->assertEquals($t_summary_update, $historyData->new_value);
+	    $this->assertPropertyHistoryEntry($issueHistory[1], 'status', $issueToAdd['status']['id'], 10); // old value = new
+	    $this->assertPropertyHistoryEntry($issueHistory[2], 'resolution', $issueToAdd['resolution']['id'], 10); // old value = open
+	}
+	
+	private function assertPropertyHistoryEntry( $historyEntry, $fieldName, $fieldValue, $oldValue) {
+	    $this->assertNotEmpty($historyEntry->date);
+	     
+	    $this->assertEquals($this->userId, $historyEntry->userid);
+	    $this->assertEquals($this->userName, $historyEntry->username);
+	     
+	    $this->assertEquals(0, $historyEntry->type);
+	    
+	    $this->assertEquals($fieldName, $historyEntry->field);
+	    $this->assertEquals($fieldValue, $historyEntry->new_value);
+        $this->assertEquals($oldValue, $historyEntry->old_value);
 	}
 }
