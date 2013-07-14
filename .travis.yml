@@ -12,6 +12,3 @@ env:
 #  - DB=pgsql
 
 script: phpunit --bootstrap ./tests/bootstrap.php ./tests/AllTests.php
-
-notifications:
-  irc: "chat.freenode.net#mantisbt-help"
