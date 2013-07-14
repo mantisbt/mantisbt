@@ -7,6 +7,7 @@ before_script: ./scripts/travis_before_script.sh
 
 env:
   - DB=mysql
-  - DB=pgsql
+# dregad 20130714 PostgreSQL builds disabled temporarily (until #14398 is fixed)
+#  - DB=pgsql
 
 script: phpunit --bootstrap ./tests/bootstrap.php ./tests/AllTests.php
