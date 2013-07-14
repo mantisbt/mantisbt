@@ -26,6 +26,7 @@
  * @file
  *
  * @author Steve.rusyn
+ * @author SteveR
  */
 
 $s_plugin_MantisGraph_config = 'Налаштування';

@@ -30,6 +30,7 @@
  * @author Olvin
  * @author Prima klasy4na
  * @author Steve.rusyn
+ * @author SteveR
  * @author Yuri Kirghisov, yuri@apple.com.ua
  * @author Тест
  */
