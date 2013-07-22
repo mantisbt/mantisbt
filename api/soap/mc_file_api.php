@@ -48,44 +48,30 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 
 	if( 'bug' == $p_table ) {
 		$t_project_id = bug_get_field( $p_id, 'project_id' );
+		$t_id = (int)$p_id;
 		$t_issue_id = bug_format_id( $p_id );
 	} else {
 		$t_project_id = $p_id;
+		$t_id = $t_project_id;
 		$t_issue_id = 0;
 	}
 
-	# prepare variables for insertion
-	$c_issue_id = db_prepare_int( $t_issue_id );
-	$c_project_id = db_prepare_int( $t_project_id );
-	$c_file_type = db_prepare_string( $p_file_type );
-	$c_title = db_prepare_string( $p_title );
-	$c_desc = db_prepare_string( $p_desc );
-	
 	if( $p_user_id === null ) {
-		$c_user_id = auth_get_current_user_id();
-	} else {
-		$c_user_id = (int)$p_user_id;
+		$p_user_id = auth_get_current_user_id();
 	}
-	
 
 	if( $t_project_id == ALL_PROJECTS ) {
 		$t_file_path = config_get( 'absolute_path_default_upload_folder' );
 	} else {
 		$t_file_path = project_get_field( $t_project_id, 'file_path' );
-		if( $t_file_path == '' ) {
+		if( is_blank( $t_file_path ) ) {
 			$t_file_path = config_get( 'absolute_path_default_upload_folder' );
 		}
 	}
 
-	$c_file_path = db_prepare_string( $t_file_path );
-	$c_new_file_name = db_prepare_string( $p_name );
-
-	$t_file_hash = $t_issue_id;
-	$t_disk_file_name = $t_file_path . file_generate_unique_name( $t_file_hash . '-' . $p_name, $t_file_path );
-	$c_disk_file_name = db_prepare_string( $t_disk_file_name );
-
-	$t_file_size = strlen( $p_content );
-	$c_file_size = db_prepare_int( $t_file_size );
+	$t_file_hash = ( 'bug' == $p_table ) ? $t_issue_id : config_get( 'document_files_prefix' ) . '-' . $t_project_id;
+	$t_unique_name = file_generate_unique_name( $t_file_hash . '-' . $p_name, $t_file_path );
+	$t_disk_file_name = $t_file_path . $t_unique_name;
 
 	$t_method = config_get( 'file_upload_method' );
 
@@ -119,33 +105,49 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	}
 
 	$t_file_table = db_get_table( 'mantis_' . $p_table . '_file_table' );
-	$c_id = ( 'bug' == $p_table ) ? $c_issue_id : $c_project_id;
+	$t_id_col = $p_table . "_id";
+
 	$query = "INSERT INTO $t_file_table
-			(" . $p_table . "_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content, user_id)
+				( $t_id_col, title, description, diskfile, filename, folder, filesize, file_type, date_added, content, user_id )
 		VALUES
-			($c_id, '$c_title', '$c_desc', '$c_disk_file_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', '" . db_now() . "', $c_content, $c_user_id)";
-	db_query( $query );
+				( " . db_param() . ", " . db_param() . ", " . db_param() . ", "
+				    . db_param() . ", " . db_param() . ", " . db_param() . ", "
+				    . db_param() . ", " . db_param() . ", " . db_param() . ", "
+				    . db_param() . ", " . db_param() . " )";
+	db_query_bound( $query, Array(
+		$t_id,
+		$p_title,
+		$p_desc,
+		$t_unique_name,
+		$p_name,
+		$t_file_path,
+		$t_file_size,
+		$p_file_type,
+		db_now(),
+		$c_content,
+		(int)$p_user_id,
+	) );
 
 	# get attachment id
 	$t_attachment_id = db_insert_id( $t_file_table );
 
 	if( 'bug' == $p_table ) {
+		# bump the last_updated date
+		$result = bug_update_date( $t_issue_id );
 
-		# updated the last_updated date
-		$result = bug_update_date( $c_issue_id );
-
-		# log new bug
-		history_log_event_special( $c_issue_id, FILE_ADDED, $c_new_file_name );
+		# add history entry
+		history_log_event_special( $t_issue_id, FILE_ADDED, $p_name );
 	}
 
 	return $t_attachment_id;
 }
+
 /**
  * Returns the attachment contents
- *  
- * @param int $p_file_id 
+ *
+ * @param int $p_file_id
  * @param string $p_type The file type, bug or doc
- * @param int $p_user_id 
+ * @param int $p_user_id
  * @return string|soap_fault the string contents, or a soap_fault
  */
 function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
@@ -171,11 +173,11 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 	}
 
 	$result = db_query( $query );
-	
+
 	if ( $result->EOF ) {
 		return SoapObjectsFactory::newSoapFault( 'Client', 'Unable to find an attachment with type ' . $p_type. ' and id ' . $p_file_id . ' .' );
 	}
-	
+
 	$row = db_fetch_array( $result );
 
 	if ( $p_type == 'doc' ) {

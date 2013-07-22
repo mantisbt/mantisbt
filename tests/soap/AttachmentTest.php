@@ -111,6 +111,7 @@ class AttachmentTest extends SoapBase {
 		$this->skipIfProjectDocumentationIsNotEnabled();
 
 		$attachmentContents = 'Attachment contents.';
+		$attachmentsCount = count( $this->client->mc_project_get_attachments( $this->userName, $this->password, $this->getProjectId() ) );
 
 		$attachmentId = $this->client->mc_project_attachment_add(
 			$this->userName,
@@ -133,10 +134,11 @@ class AttachmentTest extends SoapBase {
 		$this->assertEquals( $attachmentContents, base64_decode( $attachment ), '$attachmentContents' );
 
 		$attachments = $this->client->mc_project_get_attachments( $this->userName, $this->password, $this->getProjectId() );
-		$this->assertEquals( 1, count( $attachments ) );
+		$this->assertEquals( $attachmentsCount + 1, count( $attachments ), "Check if we have 1 additional attachment" );
 
-		$attachment = $attachments[0];
-		$this->assertEquals($this->userId, $attachment->user_id);
+		# The attachment we just uploaded should be the last one
+		$attachment = end( $attachments );
+		$this->assertEquals($this->userId, $attachment->user_id, "Attachment's User Id should match current user" );
 		$this->assertEquals('description', $attachment->description);
 	}
 

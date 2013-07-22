@@ -630,14 +630,21 @@ function file_is_name_unique( $p_name, $p_bug_id, $p_table  = 'bug' ) {
 /**
  * Add a file to the system using the configured storage method
  *
- * @param integer $p_bug_id the bug id
+ * @param integer $p_bug_id the bug id (should be 0 when adding project doc)
  * @param array $p_file the uploaded file info, as retrieved from gpc_get_file()
+ * @param string $p_table 'bug' or 'project' depending on attachment type
+ * @param string $p_title file title
+ * @param string $p_desc file description
+ * @param string $p_user_id user id (defaults to current user)
+ * @param int $p_date_added date added
+ * @param bool $p_skip_bug_update skip bug last modification update (useful when importing bug attachments)
  */
-function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc = '', $p_user_id = null ) {
+function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc = '', $p_user_id = null, $p_date_added = 0, $p_skip_bug_update = false ) {
 
 	file_ensure_uploaded( $p_file );
 	$t_file_name = $p_file['name'];
 	$t_tmp_file = $p_file['tmp_name'];
+	$c_date_added = $p_date_added <= 0 ? db_now() : db_prepare_int( $p_date_added );
 
 	if( !file_type_check( $t_file_name ) ) {
 		trigger_error( ERROR_FILE_NOT_ALLOWED, ERROR );
@@ -647,26 +654,32 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 		trigger_error( ERROR_FILE_DUPLICATE, ERROR );
 	}
 
+	$t_file_size = filesize( $t_tmp_file );
+	if( 0 == $t_file_size ) {
+		trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
+	}
+	$t_max_file_size = (int) min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+	if( $t_file_size > $t_max_file_size ) {
+		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
+	}
+
 	if( 'bug' == $p_table ) {
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+		$t_id = (int)$p_bug_id;
 		$t_bug_id = bug_format_id( $p_bug_id );
 	} else {
 		$t_project_id = helper_get_current_project();
+		$t_id = $t_project_id;
 		$t_bug_id = 0;
 	}
 
 	if( $p_user_id === null ) {
-		$c_user_id = auth_get_current_user_id();
-	} else {
-		$c_user_id = (int)$p_user_id;
+		$p_user_id = auth_get_current_user_id();
 	}
 
-	# prepare variables for insertion
-	$c_bug_id = db_prepare_int( $p_bug_id );
-	$c_project_id = db_prepare_int( $t_project_id );
-	$c_file_type = db_prepare_string( $p_file['type'] );
-	$c_title = db_prepare_string( $p_title );
-	$c_desc = db_prepare_string( $p_desc );
+	if( $p_date_added <= 0 ) {
+		$p_date_added = db_now();
+	}
 
 	if( $t_project_id == ALL_PROJECTS ) {
 		$t_file_path = config_get( 'absolute_path_default_upload_folder' );
@@ -677,23 +690,9 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 		}
 	}
 
-	$c_file_path = db_prepare_string( $t_file_path );
-	$c_new_file_name = db_prepare_string( $t_file_name );
-
 	$t_file_hash = ( 'bug' == $p_table ) ? $t_bug_id : config_get( 'document_files_prefix' ) . '-' . $t_project_id;
 	$t_unique_name = file_generate_unique_name( $t_file_hash . '-' . $t_file_name, $t_file_path );
 	$t_disk_file_name = $t_file_path . $t_unique_name;
-	$c_unique_name = db_prepare_string( $t_unique_name );
-
-	$t_file_size = filesize( $t_tmp_file );
-	if( 0 == $t_file_size ) {
-		trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
-	}
-	$t_max_file_size = (int) min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
-	if( $t_file_size > $t_max_file_size ) {
-		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
-	}
-	$c_file_size = db_prepare_int( $t_file_size );
 
 	$t_method = config_get( 'file_upload_method' );
 
@@ -728,20 +727,36 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 	}
 
 	$t_file_table = db_get_table( 'mantis_' . $p_table . '_file_table' );
-	$c_id = ( 'bug' == $p_table ) ? $c_bug_id : $c_project_id;
+	$t_id_col = $p_table . "_id";
 
 	$query = "INSERT INTO $t_file_table
-						(" . $p_table . "_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content, user_id)
-					  VALUES
-						($c_id, '$c_title', '$c_desc', '$c_unique_name', '$c_new_file_name', '$c_file_path', $c_file_size, '$c_file_type', '" . db_now() . "', $c_content, $c_user_id)";
-	db_query( $query );
+				( $t_id_col, title, description, diskfile, filename, folder, filesize, file_type, date_added, content, user_id )
+			  VALUES
+				( " . db_param() . ", " . db_param() . ", " . db_param() . ", "
+				    . db_param() . ", " . db_param() . ", " . db_param() . ", "
+				    . db_param() . ", " . db_param() . ", " . db_param() . ", "
+				    . db_param() . ", " . db_param() . " )";
+	db_query_bound( $query, Array(
+		$t_id,
+		$p_title,
+		$p_desc,
+		$t_unique_name,
+		$t_file_name,
+		$t_file_path,
+		$t_file_size,
+		$p_file['type'],
+		$p_date_added,
+		$c_content,
+		(int)$p_user_id,
+	) );
 
 	if( 'bug' == $p_table ) {
+		# bump the last_updated date
+		if ( !$p_skip_bug_update ) {
+			$result = bug_update_date( $p_bug_id );
+		}
 
-		# updated the last_updated date
-		$result = bug_update_date( $p_bug_id );
-
-		# log new bug
+		# add history entry
 		history_log_event_special( $p_bug_id, FILE_ADDED, $t_file_name );
 	}
 }
@@ -884,19 +899,19 @@ function file_get_extension( $p_filename ) {
  */
 function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 
-    $t_mantis_bug_file_table = db_get_table( 'mantis_bug_file_table' );
+	$t_mantis_bug_file_table = db_get_table( 'mantis_bug_file_table' );
 
-    $query = 'SELECT * FROM ' . $t_mantis_bug_file_table . ' WHERE bug_id = ' . db_param();
-    $result = db_query_bound( $query, Array( $p_source_bug_id ) );
-    $t_count = db_num_rows( $result );
+	$query = 'SELECT * FROM ' . $t_mantis_bug_file_table . ' WHERE bug_id = ' . db_param();
+	$result = db_query_bound( $query, Array( $p_source_bug_id ) );
+	$t_count = db_num_rows( $result );
 
 	$t_project_id = bug_get_field( $p_source_bug_id, 'project_id' );
 
-    $t_bug_file = array();
-    for( $i = 0;$i < $t_count;$i++ ) {
-        $t_bug_file = db_fetch_array( $result );
+	$t_bug_file = array();
+	for( $i = 0;$i < $t_count;$i++ ) {
+		$t_bug_file = db_fetch_array( $result );
 
-        # prepare the new diskfile name and then copy the file
+		# prepare the new diskfile name and then copy the file
 		$t_source_file = $t_bug_file['folder'] . $t_bug_file['diskfile'];
 		if(( config_get( 'file_upload_method' ) == DISK ) ) {
 			$t_source_file = file_normalize_attachment_path( $t_source_file, $t_project_id );
@@ -904,32 +919,32 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 		} else {
 			$t_file_path = $t_bug_file['folder'];
 		}
-        $t_new_diskfile_name = file_generate_unique_name( 'bug-' . $t_bug_file['filename'], $t_file_path );
-        $t_new_diskfile_location = $t_file_path . $t_new_diskfile_name;
-        $t_new_file_name = file_get_display_name( $t_bug_file['filename'] );
-        if(( config_get( 'file_upload_method' ) == DISK ) ) {
+		$t_new_diskfile_name = file_generate_unique_name( 'bug-' . $t_bug_file['filename'], $t_file_path );
+		$t_new_diskfile_location = $t_file_path . $t_new_diskfile_name;
+		$t_new_file_name = file_get_display_name( $t_bug_file['filename'] );
+		if(( config_get( 'file_upload_method' ) == DISK ) ) {
 			# Skip copy operation if file does not exist (i.e. target bug will have missing attachment)
 			# @todo maybe we should trigger an error instead in this case ?
 			if( file_exists( $t_source_file ) ) {
 				copy( $t_source_file, $t_new_diskfile_location );
 				chmod( $t_new_diskfile_location, config_get( 'attachments_file_permissions' ) );
 			}
-        }
+		}
 
-        $query = "INSERT INTO $t_mantis_bug_file_table
-    						( bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content )
-    						VALUES ( " . db_param() . ",
-    								 " . db_param() . ",
-    								 " . db_param() . ",
-    								 " . db_param() . ",
-    								 " . db_param() . ",
-    								 " . db_param() . ",
-    								 " . db_param() . ",
-    								 " . db_param() . ",
-    								 " . db_param() . ",
-    								 " . db_param() . ");";
+		$query = "INSERT INTO $t_mantis_bug_file_table
+							( bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content )
+							VALUES ( " . db_param() . ",
+									 " . db_param() . ",
+									 " . db_param() . ",
+									 " . db_param() . ",
+									 " . db_param() . ",
+									 " . db_param() . ",
+									 " . db_param() . ",
+									 " . db_param() . ",
+									 " . db_param() . ",
+									 " . db_param() . ");";
 		db_query_bound( $query, Array( $p_dest_bug_id, $t_bug_file['title'], $t_bug_file['description'], $t_new_diskfile_name, $t_new_file_name, $t_file_path, $t_bug_file['filesize'], $t_bug_file['file_type'], $t_bug_file['date_added'], $t_bug_file['content'] ) );
-    }
+	}
 }
 
 /**
