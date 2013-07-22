@@ -48,7 +48,7 @@ class IssueHistoryTest extends SoapBase {
 
 		$this->deleteAfterRun( $issueId );
 
-		$issueHistory = $this->client->mc_issue_get_history( $this->userName, $this->password, $issueId );
+		$issueHistory = $this->getIssueHistory( $issueId );
 
 		$this->assertEquals(1, count($issueHistory) );
 		// validate the format of the initial history entry
@@ -93,18 +93,26 @@ class IssueHistoryTest extends SoapBase {
 		$issueToUpdate = $createdIssue;
 		$issueToUpdate->summary = $t_summary_update;
 
+		# Wait a sec before updating the issue to ensure that the
+		# history entries are in the correct sequence
+		sleep(1);
 		$this->client->mc_issue_update(
 				$this->userName,
 				$this->password,
 				$issueId,
 				$issueToUpdate);
 
-		$issueHistory = $this->client->mc_issue_get_history( $this->userName, $this->password, $issueId );
+		$issueHistory = $this->getIssueHistory( $issueId );
 
 		$this->assertEquals(2, count($issueHistory) );
 
 		// validate the format of the history entry following the update
-		$this->assertPropertyHistoryEntry($issueHistory[1], 'summary', $t_summary_update, $issueToAdd['summary']);
+		$this->assertPropertyHistoryEntry(
+			$issueHistory[1],
+			'summary',
+			$t_summary_update,
+			$issueToAdd['summary']
+		);
 	}
 
 	/**
@@ -125,12 +133,29 @@ class IssueHistoryTest extends SoapBase {
 
 		$this->deleteAfterRun( $issueId );
 
-		$issueHistory = $this->client->mc_issue_get_history( $this->userName, $this->password, $issueId );
+		$issueHistory = $this->getIssueHistory( $issueId );
 
 		$this->assertEquals(3, count($issueHistory) );
 
 		$this->assertPropertyHistoryEntry($issueHistory[1], 'status', $issueToAdd['status']['id'], NEW_); // old value = new
 		$this->assertPropertyHistoryEntry($issueHistory[2], 'resolution', $issueToAdd['resolution']['id'], OPEN); // old value = open
+	}
+
+	/**
+	 * Returns the issue's history in ascending order, regardless of the
+	 * default history sort order
+	 */
+	private function getIssueHistory( $issueId ) {
+		$issueHistory = $this->client->mc_issue_get_history( $this->userName, $this->password, $issueId );
+
+		# Get default order for history entries
+		$t_order = $this->client->mc_config_get_string( $this->userName, $this->password, 'history_order' );
+
+		if( $t_order == 'ASC' ) {
+			return $issueHistory;
+		} else {
+			return array_reverse( $issueHistory );
+		}
 	}
 
 	private function assertPropertyHistoryEntry( $historyEntry, $fieldName, $fieldValue, $oldValue) {
