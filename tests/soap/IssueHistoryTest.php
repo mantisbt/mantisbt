@@ -24,11 +24,6 @@
 require_once 'SoapBase.php';
 
 /**
- * MantisBT constants
- */
-require_once ( $t_root_path . DIRECTORY_SEPARATOR . 'core/constant_inc.php' );
-
-/**
  * Test fixture for issue history
  */
 class IssueHistoryTest extends SoapBase {
