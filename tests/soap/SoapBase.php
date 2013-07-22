@@ -26,6 +26,11 @@
 $t_root_path = dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR;
 
 /**
+ * MantisBT constants
+ */
+require_once ( $t_root_path . DIRECTORY_SEPARATOR . 'core/constant_inc.php' );
+
+/**
  * Test cases for SoapEnum class.
  */
 class SoapBase extends PHPUnit_Framework_TestCase {
@@ -34,7 +39,7 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	protected $password = 'root';
 	protected $email = 'root@localhost';
 	protected $userId = '1';
-	
+
 	protected $mantisPath;
 	private   $issueIdsToDelete = array();
 	private   $versionIdsToDelete = array();
@@ -51,27 +56,27 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 			!$GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED']) {
 			$this->markTestSkipped( 'The Soap tests are disabled.' );
 		}
-   
+
 		$this->client = new
 		    SoapClient(
 		       $GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'],
 		       	array_merge($this->defaultSoapClientOptions, $this->extraSoapClientFlags()
-				)		     
+				)
 		    );
-	    
+
 	    $this->mantisPath = substr($GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'], 0, -strlen('api/soap/mantisconnect.php?wsdl'));
     }
-    
+
     /**
      * @return an array of extra options to be passed to the SoapClient constructor
      */
     protected function extraSoapClientFlags() {
-    	
+
     	return array();
     }
-    
+
     protected function tearDown() {
-    	
+
     	foreach ( $this->versionIdsToDelete as $versionIdToDelete ) {
     		$this->client->mc_project_version_delete($this->userName, $this->password, $versionIdToDelete);
     	}
@@ -82,22 +87,22 @@ class SoapBase extends PHPUnit_Framework_TestCase {
     			$this->password,
     			$issueIdToDelete);
     	}
-    	
+
     	foreach ( $this->tagIdsToDelete as $tagIdToDelete ) {
     		$this->client->mc_tag_delete ( $this->userName, $this->password, $tagIdToDelete );
     	}
     }
 
     protected function getProjectId() {
-    	return 1;	
+    	return 1;
     }
 
     protected function getCategory() {
- 		return 'General';   	
+ 		return 'General';
     }
-   
+
     protected function skipIfTimeTrackingIsNotEnabled() {
-    	
+
     	$timeTrackingEnabled = $this->client->mc_config_get_string($this->userName, $this->password, 'time_tracking_enabled');
 		if ( !$timeTrackingEnabled ) {
 			$this->markTestSkipped('Time tracking is not enabled');
@@ -111,18 +116,18 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 				'project' => array( 'id' => $this->getProjectId() ),
 				'category' => $this->getCategory() );
 	}
-	
+
 	/**
 	 * Registers an issue for deletion after the test method has run
-	 * 
+	 *
 	 * @param int $issueId
 	 * @return void
 	 */
 	protected function deleteAfterRun( $issueId ) {
-		
+
 		$this->issueIdsToDelete[] = $issueId;
 	}
-	
+
 	/**
 	 * Registers an version for deletion after the test method has run
 	 *
@@ -130,18 +135,18 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	 * @return void
 	 */
 	protected function deleteVersionAfterRun( $versionId ) {
-		
+
 		$this->versionIdsToDelete[] = $versionId;
 	}
-	
+
 	/**
 	 * Registers a tag for deletion after the test method has run
-	 * 
+	 *
 	 * @param int $tagId
 	 * @return void
 	 */
 	protected function deleteTagAfterRun ( $tagId ) {
-		
+
 		$this->tagIdsToDelete[] = $tagId;
 	}
 
@@ -152,16 +157,16 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 			 	$this->markTestSkipped('Due date thresholds are too high.');
 			 }
 	}
-	
+
 	protected function skipIfAllowNoCategoryIsDisabled() {
 		if ( $this->client->mc_config_get_string($this->userName, $this->password, 'allow_no_category' ) != true ) {
 			$this->markTestSkipped( 'g_allow_no_category is not ON.' );
 		}
 	}
-	
+
 	protected function skipIsZlibIsNotAvailable() {
 		if( !extension_loaded( 'zlib' ) ) {
-			$this->markTestSkipped('zlib extension not found.');	
-		}	
+			$this->markTestSkipped('zlib extension not found.');
+		}
 	}
 }
