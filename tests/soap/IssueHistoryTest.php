@@ -24,6 +24,11 @@
 require_once 'SoapBase.php';
 
 /**
+ * MantisBT constants
+ */
+require_once ( $t_root_path . DIRECTORY_SEPARATOR . 'core/constant_inc.php' );
+
+/**
  * Test fixture for issue history
  */
 class IssueHistoryTest extends SoapBase {
@@ -54,7 +59,7 @@ class IssueHistoryTest extends SoapBase {
 		$this->assertEquals($this->userId, $historyData->userid);
 		$this->assertEquals($this->userName, $historyData->username);
 
-		$this->assertEquals(1, $historyData->type);
+		$this->assertEquals(NEW_BUG, $historyData->type);
 
 		$this->assertEmpty($historyData->field);
 		$this->assertEmpty($historyData->old_value);
@@ -110,8 +115,8 @@ class IssueHistoryTest extends SoapBase {
 	function testCreatedIssueWithNonDefaultStatusAndResolutionHasHistoryEntries() {
 
 		$issueToAdd = $this->getIssueToAdd( 'IssueHistoryTest.testCreatedIssueWithNonDefaultStatusAndResolutionHasHistoryEntries' );
-		$issueToAdd['status'] = array( 'id' => 40 ); // confirmed
-		$issueToAdd['resolution'] = array ( 'id' => 30); // reopened
+		$issueToAdd['status'] = array( 'id' => CONFIRMED ); // confirmed
+		$issueToAdd['resolution'] = array ( 'id' => REOPENED ); // reopened
 
 		$issueId = $this->client->mc_issue_add(
 				$this->userName,
@@ -124,8 +129,8 @@ class IssueHistoryTest extends SoapBase {
 
 		$this->assertEquals(3, count($issueHistory) );
 
-		$this->assertPropertyHistoryEntry($issueHistory[1], 'status', $issueToAdd['status']['id'], 10); // old value = new
-		$this->assertPropertyHistoryEntry($issueHistory[2], 'resolution', $issueToAdd['resolution']['id'], 10); // old value = open
+		$this->assertPropertyHistoryEntry($issueHistory[1], 'status', $issueToAdd['status']['id'], NEW_); // old value = new
+		$this->assertPropertyHistoryEntry($issueHistory[2], 'resolution', $issueToAdd['resolution']['id'], OPEN); // old value = open
 	}
 
 	private function assertPropertyHistoryEntry( $historyEntry, $fieldName, $fieldValue, $oldValue) {
