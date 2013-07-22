@@ -17,7 +17,7 @@
 /**
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses check_api.php
@@ -70,7 +70,7 @@ echo '<?xml version="1.0" encoding="utf-8"?>';
 </head>
 <body>
 <div id="mantisbt-header-logo">
-	<img src="../../images/mantis_logo_232x80.png" alt="MantisBT Logo" />
+	<img src="../../images/mantis_logo.png" alt="MantisBT Logo" />
 </div>
 <p class="notice">Verbosity: <?php echo $t_show_all_mode_link ?> | <?php echo $t_show_errors_mode_link ?></p>
 <table id="check-results">

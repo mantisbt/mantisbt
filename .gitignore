@@ -5,6 +5,7 @@ custom_functions_inc.php
 custom_relationships_inc.php
 custom_strings_inc.php
 mantis_offline.php
+api/soap/mc_config_inc.php
 
 # Docbook builds
 docbook/*/*/builddate
@@ -31,6 +32,7 @@ plugins/*
 .settings
 .idea/
 *.kdev4
+nbproject/
 
 # IIS7 
 web.config

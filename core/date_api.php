@@ -20,7 +20,7 @@
  * @package CoreAPI
  * @subpackage DateAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses config_api.php
@@ -251,7 +251,7 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
 		if( strcmp( $t_char, "m" ) == 0 ) {
 			echo "<select ", helper_get_tab_index(), " name=\"" . $p_name . "_month\"$t_disable>";
 			echo $t_blank_line;
-			print_numeric_month_option_list( $t_date[1] );
+			print_month_option_list( $t_date[1] );
 			echo "</select>\n";
 		}
 		if( strcasecmp( $t_char, "D" ) == 0 ) {

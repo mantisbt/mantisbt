@@ -17,7 +17,7 @@
 /**
  * @package Tests
  * @subpackage UnitTests
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
@@ -189,7 +189,8 @@ class IssueNoteTest extends SoapBase {
 		
         $noteDataNew = array(
             'id' => $issueNoteId,
-            'text' => "some new note"
+            'text' => "some new note",
+        	'view_state' => array ( 'id' => 10 /* public */)
         );
 
         $this->client->mc_issue_note_update(
@@ -202,7 +203,9 @@ class IssueNoteTest extends SoapBase {
             $this->password,
             $issueId);
 
-        $this->assertEquals( 1, count( $issueWithNote->notes ) );		
+        $this->assertEquals( 1, count( $issueWithNote->notes ) );
+        $this->assertEquals( $noteDataNew['text'], $issueWithNewNote->notes[0]->text );
+        $this->assertEquals( 'public', $issueWithNewNote->notes[0]->view_state->name );
 
 		$this->client->mc_issue_note_delete(
 			$this->userName,

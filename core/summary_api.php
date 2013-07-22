@@ -20,7 +20,7 @@
  * @package CoreAPI
  * @subpackage SummaryAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses access_api.php
@@ -52,14 +52,43 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
+/**
+ * Print a summary row
+ *
+ * @param string p_label
+ * @param int $p_label,
+ * @param int $p_open Number of open issues
+ * @param int $p_resolved Number of resolved issues
+ * @param int $p_closed Number of closed issues
+ * @param int $p_total Total number of issues
+ */
 function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p_total ) {
 	printf( '<tr %s>', helper_alternate_class() );
-	printf( '<td width="50%%">%s</td>', string_display_line( $p_label ) );
+	printf( '<td width="50%%">%s</td>', $p_label );
 	printf( '<td width="12%%" class="right">%s</td>', $p_open );
 	printf( '<td width="12%%" class="right">%s</td>', $p_resolved );
 	printf( '<td width="12%%" class="right">%s</td>', $p_closed );
 	printf( '<td width="12%%" class="right">%s</td>', $p_total );
 	print( '</tr>' );
+}
+
+/**
+ * Returns a string representation of the user, together with a link to the issues
+ * acted on by the user ( reported, handled or commented on )
+ *
+ * @param int $p_user_id
+ * @return string
+ */
+function summary_helper_get_developer_label ( $p_user_id ) {
+
+	$t_user = string_display_line( user_get_name( $p_user_id ) );
+
+	return "<a class='subtle' href='view_all_set.php?type=1&amp;temporary=y
+			&amp;".FILTER_PROPERTY_REPORTER_ID."=$p_user_id
+			&amp;".FILTER_PROPERTY_HANDLER_ID."=$p_user_id
+			&amp;".FILTER_PROPERTY_NOTE_USER_ID."=$p_user_id
+			&amp;".FILTER_PROPERTY_MATCH_TYPE."=".FILTER_MATCH_ANY."'>$t_user</a>";
+
 }
 
 # Used in summary reports
@@ -454,7 +483,7 @@ function summary_print_by_developer() {
 		$v_bugcount = $row['bugcount'];
 
 		if(( $v_handler_id != $t_last_handler ) && ( -1 != $t_last_handler ) ) {
-			$t_user = string_display_line( user_get_name( $t_last_handler ) );
+			$t_user = summary_helper_get_developer_label( $t_last_handler );
 
 			$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_HANDLER_ID . '=' . $t_last_handler;
 			if( 0 < $t_bugs_open ) {
@@ -491,7 +520,7 @@ function summary_print_by_developer() {
 	}
 
 	if( 0 < $t_bugs_total ) {
-		$t_user = string_display_line( user_get_name( $t_last_handler ) );
+		$t_user = summary_helper_get_developer_label( $t_last_handler );
 
 		$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_HANDLER_ID . '=' . $t_last_handler;
 		if( 0 < $t_bugs_open ) {
@@ -611,8 +640,8 @@ function summary_print_by_category() {
 				FROM $t_mantis_bug_table b
 				JOIN $t_mantis_category_table c ON b.category_id=c.id
 				WHERE b.$specific_where
-				GROUP BY $t_project_query category_id, c.name, b.status
-				ORDER BY $t_project_query category_id, c.name, b.status";
+				GROUP BY $t_project_query c.name, b.category_id, b.status
+				ORDER BY $t_project_query c.name";
 
 	$result = db_query( $query );
 
@@ -631,7 +660,7 @@ function summary_print_by_category() {
 		$v_category_id = $row['category_id'];
 		$v_category_name = $row['category_name'];
 
-		if(( $v_category_id != $last_category_id ) && ( $last_category_id != -1 ) ) {
+		if(( $v_category_name != $last_category_name ) && ( $last_category_name != -1 ) ) {
 			$label = $last_category_name;
 			if(( ON == $t_summary_category_include_project ) && ( ALL_PROJECTS == $t_project_id ) ) {
 				$label = sprintf( '[%s] %s', project_get_name( $last_project ), $label );
@@ -651,7 +680,10 @@ function summary_print_by_category() {
 				$t_bugs_total = $t_bug_link . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=">' . $t_bugs_total . '</a>';
 			}
 
-			summary_helper_print_row( $label, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
+			summary_helper_print_row(
+				string_display_line( $label ),
+				$t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total
+			);
 
 			$t_bugs_open = 0;
 			$t_bugs_resolved = 0;
@@ -698,7 +730,10 @@ function summary_print_by_category() {
 			}
 		}
 
-		summary_helper_print_row( $label, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
+		summary_helper_print_row(
+			string_display_line( $label ),
+			$t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total
+		);
 	}
 }
 
@@ -768,7 +803,10 @@ function summary_print_by_project( $p_projects = null, $p_level = 0, $p_cache = 
 		$t_bugs_closed = isset( $t_pdata['closed'] ) ? $t_pdata['closed'] : 0;
 		$t_bugs_total = $t_bugs_open + $t_bugs_resolved + $t_bugs_closed;
 
-		summary_helper_print_row( $t_name, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
+		summary_helper_print_row(
+			string_display_line( $t_name ),
+			$t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total
+		);
 
 		if ( count( project_hierarchy_get_subprojects ( $t_project ) ) > 0 ) {
 			$t_subprojects = current_user_get_accessible_subprojects( $t_project );
@@ -837,7 +875,7 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 			echo '<tr ' . helper_alternate_class( $t_row_count ) . '>';
 			$t_row_count++;
 			echo '<td>';
-			echo string_display_line( user_get_name( $t_handler_id ) );
+			echo summary_helper_get_developer_label( $t_handler_id );
 			echo '</td>';
 
 			# We need to track the percentage of bugs that are considered fixed, as well as

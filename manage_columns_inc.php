@@ -17,7 +17,7 @@
 /**
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses access_api.php
@@ -78,7 +78,7 @@ $t_excel = implode( ', ', $t_columns );
 ?>
 
 <div id="manage-columns-div" class="form-container">
-	<form id="manage-columns-form" method="post" <?php if ( file_allow_bug_upload() ) { echo 'enctype="multipart/form-data"'; } ?> action="manage_config_columns_set.php">
+	<form id="manage-columns-form" method="post" action="manage_config_columns_set.php">
 		<fieldset class="has-required">
 			<legend><span><?php echo lang_get( 'manage_columns_config' ) ?></span></legend>
 			<?php

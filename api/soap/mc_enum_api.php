@@ -1,6 +1,6 @@
 <?php
 # MantisConnect - A webservice interface to Mantis Bug Tracker
-# Copyright (C) 2004-2012  Victor Boctor - vboctor@users.sourceforge.net
+# Copyright (C) 2004-2013  Victor Boctor - vboctor@users.sourceforge.net
 # This program is distributed under dual licensing.  These include
 # GPL and a commercial licenses.  Victor Boctor reserves the right to
 # change the license of future releases.
@@ -15,7 +15,7 @@
  */
 function mc_enum_status( $p_username, $p_password ) {
 	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	return mci_explode_to_objectref( 'status' );
@@ -30,7 +30,7 @@ function mc_enum_status( $p_username, $p_password ) {
  */
 function mc_enum_priorities( $p_username, $p_password ) {
 	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	return mci_explode_to_objectref( 'priority' );
@@ -45,7 +45,7 @@ function mc_enum_priorities( $p_username, $p_password ) {
  */
 function mc_enum_severities( $p_username, $p_password ) {
 	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	return mci_explode_to_objectref( 'severity' );
@@ -60,7 +60,7 @@ function mc_enum_severities( $p_username, $p_password ) {
  */
 function mc_enum_reproducibilities( $p_username, $p_password ) {
 	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	return mci_explode_to_objectref( 'reproducibility' );
@@ -75,7 +75,7 @@ function mc_enum_reproducibilities( $p_username, $p_password ) {
  */
 function mc_enum_projections( $p_username, $p_password ) {
 	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	return mci_explode_to_objectref( 'projection' );
@@ -90,7 +90,7 @@ function mc_enum_projections( $p_username, $p_password ) {
  */
 function mc_enum_etas( $p_username, $p_password ) {
 	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	return mci_explode_to_objectref( 'eta' );
@@ -105,7 +105,7 @@ function mc_enum_etas( $p_username, $p_password ) {
  */
 function mc_enum_resolutions( $p_username, $p_password ) {
 	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	return mci_explode_to_objectref( 'resolution' );
@@ -120,7 +120,7 @@ function mc_enum_resolutions( $p_username, $p_password ) {
  */
 function mc_enum_access_levels( $p_username, $p_password ) {
 	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	return mci_explode_to_objectref( 'access_levels' );
@@ -135,7 +135,7 @@ function mc_enum_access_levels( $p_username, $p_password ) {
  */
 function mc_enum_project_status( $p_username, $p_password ) {
 	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	return mci_explode_to_objectref( 'project_status' );
@@ -150,7 +150,7 @@ function mc_enum_project_status( $p_username, $p_password ) {
  */
 function mc_enum_project_view_states( $p_username, $p_password ) {
 	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	return mci_explode_to_objectref( 'project_view_state' );
@@ -165,7 +165,7 @@ function mc_enum_project_view_states( $p_username, $p_password ) {
  */
 function mc_enum_view_states( $p_username, $p_password ) {
 	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	return mci_explode_to_objectref( 'view_state' );
@@ -180,7 +180,7 @@ function mc_enum_view_states( $p_username, $p_password ) {
  */
 function mc_enum_custom_field_types( $p_username, $p_password ) {
 	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 
 	return mci_explode_to_objectref( 'custom_field_type' );
@@ -196,7 +196,7 @@ function mc_enum_custom_field_types( $p_username, $p_password ) {
  */
 function mc_enum_get( $p_username, $p_password, $p_enumeration ) {
 	if ( ! mci_validate_enum_access($p_username, $p_password)) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_login_failed();
 	}
 	
 	// safe to call directly after login checks
@@ -298,6 +298,9 @@ function mci_get_enum_value_from_label( $p_enum_string, $p_label ) {
  * @return enum id
  */
 function mci_get_enum_id_from_objectref( $p_enum, $p_object_ref ) {
+	
+	$p_object_ref = SoapObjectsFactory::unwrapObject( $p_object_ref );
+	
 	if( !is_null( $p_object_ref ) && isset( $p_object_ref['id'] ) && (int) $p_object_ref['id'] != 0 ) {
 		$t_id = (int) $p_object_ref['id'];
 	} else {

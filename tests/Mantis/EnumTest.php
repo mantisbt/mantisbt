@@ -15,16 +15,24 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package Tests
- * @subpackage UnitTests
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @package    Tests
+ * @subpackage Enum
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
+/**
+ * Includes
+ */
+require_once dirname( dirname(__FILE__) ) . DIRECTORY_SEPARATOR . 'TestConfig.php';
+
 require_once 'MantisEnum.class.php';
+
 
 /**
  * Test cases for MantisEnum class.
+ * @package    Tests
+ * @subpackage Enum
  */
 class MantisEnumTest extends PHPUnit_Framework_TestCase {
 	const ACCESS_LEVELS_ENUM = '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator';
@@ -48,7 +56,7 @@ class MantisEnumTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( 'administrator', MantisEnum::getLabel( MantisEnumTest::ACCESS_LEVELS_ENUM, 90 ) );
 		$this->assertEquals( '@100@', MantisEnum::getLabel( MantisEnumTest::ACCESS_LEVELS_ENUM, 100 ) );
 		$this->assertEquals( '@-1@', MantisEnum::getLabel( MantisEnumTest::ACCESS_LEVELS_ENUM, -1 ) );
-        $this->assertEquals( '@10@', MantisEnum::getLabel( MantisEnumTest::EMPTY_ENUM, 10 ) );
+		$this->assertEquals( '@10@', MantisEnum::getLabel( MantisEnumTest::EMPTY_ENUM, 10 ) );
 	}
 
 	/**

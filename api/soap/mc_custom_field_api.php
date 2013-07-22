@@ -1,6 +1,6 @@
 <?php
 # MantisConnect - A webservice interface to Mantis Bug Tracker
-# Copyright (C) 2004-2012  Victor Boctor - vboctor@users.sourceforge.net
+# Copyright (C) 2004-2013  Victor Boctor - vboctor@users.sourceforge.net
 # This program is distributed under dual licensing.  These include
 # GPL and a commercial licenses.  Victor Boctor reserves the right to
 # change the license of future releases.
@@ -15,6 +15,9 @@
  * @param ObjectRef  $p_object_ref   An associate array with "id" and "name" keys.
  */
 function mci_get_custom_field_id_from_objectref( $p_object_ref ) {
+	
+	$p_object_ref = SoapObjectsFactory::unwrapObject( $p_object_ref );
+	
 	if( (int) $p_object_ref['id'] != 0 ) {
 		$t_id = (int) $p_object_ref['id'];
 	} else {

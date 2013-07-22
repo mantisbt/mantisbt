@@ -26,7 +26,7 @@
  * **********************************************************************
  *
  * @ingroup Language
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
 */
 
@@ -470,7 +470,9 @@ If you requested this verification, visit the following URL to change your passw
 	'to' => 'To',
 	'sent_you_this_reminder_about' => 'sent you this reminder about',
 	'bug_reminder' => 'Send a reminder',
-	'reminder_sent_to' => 'Reminder sent to:',
+	'reminder_sent_to' => 'Reminder sent to',
+	'reminder_sent_none' => 'No reminders could be sent',
+	'reminder_list_truncated' => 'recipients list truncated',
 	'bug_send_button' => 'Send',
 	'reminder' => 'Reminder',
 	'reminder_explain' => 'This note will be sent to the recipients listed requesting feedback on this issue.',
@@ -658,6 +660,7 @@ If you requested this verification, visit the following URL to change your passw
 	# manage_page.php
 	'hide_disabled' => 'Hide Disabled',
 	'filter_button' => 'Apply Filter',
+	'default_filter' => 'Default Filter',
 	'create_filter_link' => 'Create Permalink',
 	'create_short_link' => 'Create Short Link',
 	'filter_permalink' => 'Following is a permanent link to the currently configured filter:',
@@ -916,7 +919,7 @@ If you requested this verification, visit the following URL to change your passw
 	'account_unlock_msg' => 'The account has been unlocked.',
 
 	# manage_user_update.php
-	'manage_user_protected_msg' => 'Account protected. Access level and enabled protected. Otherwise, account has been updated...',
+	'manage_user_protected_msg' => 'Account protected; the \'Access Level\' and \'Enabled\' fields cannot be modified. Other fields were successfully updated.',
 	'manage_user_updated_msg' => 'Account successfully updated...',
 	'email_user_updated_subject' => 'Account updated',
 	'email_user_updated_msg' => 'Your account has been updated by an administrator. A list of these changes is provided below. You can update your account details and preferences at any time by visiting the following URL:',
@@ -1131,6 +1134,9 @@ If you requested this verification, visit the following URL to change your passw
 	'recently_visited' => 'Recently Visited',
 	'priority_abbreviation' => 'P',
 	'note_user_id_label' => 'Note By:',
+	'filter_match_type' => 'Match Type',
+	'filter_match_all' => 'All Conditions',
+	'filter_match_any' => 'Any Condition',
 
 	# view_all_inc.php
 	'none' => 'none',
@@ -1345,7 +1351,7 @@ If you requested this verification, visit the following URL to change your passw
 	'delete_attachment_button' => 'Delete',
 	'delete_attachment_sure_msg' => 'Are you sure you wish to delete this attachment?',
 	'upload_issue_attachments' => 'Upload issue attachments',
-	'filters' => 'filters',
+	'filters' => 'Filters',
 	'save_filters' => 'Save filters',
 	'save_filters_as_shared' => 'Save filters as shared',
 	'use_saved_filters' => 'Use saved filters',
@@ -1367,6 +1373,7 @@ If you requested this verification, visit the following URL to change your passw
 	'others' => 'Others',
 	'see_email_addresses_of_other_users' => 'See e-mail addresses of other users',
 	'send_reminders' => 'Send reminders',
+	'receive_reminders' => 'Receive reminders',
 	'add_profiles' => 'Add profiles',
 	'notify_of_new_user_created' => 'Notify of new user created',
 	'email_notification' => 'E-mail notification',
@@ -1555,6 +1562,7 @@ If you requested this verification, visit the following URL to change your passw
 	ERROR_CUSTOM_FIELD_IN_USE => 'At least one project still uses this field.',
 	ERROR_CUSTOM_FIELD_INVALID_VALUE => 'Invalid value for field "%1$s".',
 	ERROR_CUSTOM_FIELD_INVALID_DEFINITION => 'Invalid custom field definition.',
+	ERROR_CUSTOM_FIELD_INVALID_PROPERTY => 'Invalid custom field property (%1$s).',
 	ERROR_CUSTOM_FIELD_NOT_LINKED_TO_PROJECT => 'Custom field "%1$s" (id %2$s) not linked to currently active project.',
 	ERROR_LDAP_AUTH_FAILED => 'LDAP Authentication Failed.',
 	ERROR_LDAP_SERVER_CONNECT_FAILED => 'LDAP Server Connection Failed.',
@@ -1568,6 +1576,7 @@ If you requested this verification, visit the following URL to change your passw
 	ERROR_CATEGORY_NO_ACTION => 'No copy action was specified.',
 	ERROR_CATEGORY_NOT_FOUND => 'Category not found.',
 	ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT => 'Category "%1$s" not found for project "%2$s".',
+	ERROR_CATEGORY_CANNOT_DELETE_DEFAULT => 'This Category cannot be deleted, because it is defined as "Default Category For Moves".',
 	ERROR_VERSION_DUPLICATE => 'A version with that name already exists.',
 	ERROR_VERSION_NOT_FOUND => 'Version "%1$s" not found.',
 	ERROR_USER_NAME_INVALID => 'The username is invalid. Usernames may only contain Latin letters, numbers, spaces, hyphens, dots, plus signs and underscores.',

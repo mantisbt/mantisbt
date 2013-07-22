@@ -1,11 +1,17 @@
-Description of PHPMailer import into mantis.
+Description of PHPMailer 5.2.1 import into mantis.
 
-See ../readme.libs for summary of all libraries
+See ../README.libs for summary of all libraries
 
 Removed:
-	test/
+	composer.json
 	docs/
 	examples/
+	extras/
+	.git/
+	.gitignore
+	test/
+	test_script/
+	.travis.yml
 
 Added:
 	readme_mantis.txt - this file ;-)
@@ -13,4 +19,3 @@ Added:
 
 Changes:
 	none
-

@@ -16,7 +16,7 @@
 
 /**
  * @package MantisBT
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
@@ -183,7 +183,9 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 
 <tr>
 	<td colspan="3"></td>
-	<td colspan="2" class="center"><input type="submit" value="<?php echo lang_get( 'plugin_update' ) ?>"/></td>
+	<td colspan="2" class="center">
+		<input type="submit" class="button" value="<?php echo lang_get( 'plugin_update' ) ?>"/>
+	</td>
 	<td></td>
 </tr>
 

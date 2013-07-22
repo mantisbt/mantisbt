@@ -19,7 +19,7 @@
  *
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
@@ -120,8 +120,8 @@ $t_bug_data->severity               = gpc_get_int( 'severity', config_get( 'defa
 $t_bug_data->priority               = gpc_get_int( 'priority', config_get( 'default_bug_priority' ) );
 $t_bug_data->projection             = gpc_get_int( 'projection', config_get( 'default_bug_projection' ) );
 $t_bug_data->eta                    = gpc_get_int( 'eta', config_get( 'default_bug_eta' ) );
-$t_bug_data->resolution             = config_get( 'default_bug_resolution' );
-$t_bug_data->status                 = config_get( 'bug_submit_status' );
+$t_bug_data->resolution             = gpc_get_string('resolution', config_get( 'default_bug_resolution' ) );
+$t_bug_data->status                 = gpc_get_string( 'status', config_get( 'bug_submit_status' ) );
 $t_bug_data->summary                = trim( gpc_get_string( 'summary' ) );
 $t_bug_data->description            = gpc_get_string( 'description' );
 $t_bug_data->steps_to_reproduce     = gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
@@ -184,6 +184,12 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 # Allow plugins to pre-process bug data
 $t_bug_data = event_signal( 'EVENT_REPORT_BUG_DATA', $t_bug_data );
 
+# Ensure that resolved bugs have a handler
+if ( $t_bug_data->handler_id == NO_USER && $t_bug_data->status >= config_get( 'bug_resolved_status_threshold' ) ) {
+	$t_bug_data->handler_id = auth_get_current_user_id();
+}
+
+
 # Create the bug
 $t_bug_id = $t_bug_data->create();
 
@@ -191,14 +197,9 @@ $t_bug_id = $t_bug_data->create();
 last_visited_issue( $t_bug_id );
 
 # Handle the file upload
-for( $i = 0; $i < count( $f_files ); $i++ ) {
-	if( !empty( $f_files['name'][$i] ) ) {
-		$t_file['name']     = $f_files['name'][$i];
-		$t_file['tmp_name'] = $f_files['tmp_name'][$i];
-		$t_file['type']     = $f_files['type'][$i];
-		$t_file['error']    = $f_files['error'][$i];
-		$t_file['size']     = $f_files['size'][$i];
-
+$t_files = helper_array_transpose( $f_files );
+foreach( $t_files as $t_file ) {
+	if( !empty( $t_file['name'] ) ) {
 		file_add( $t_bug_id, $t_file, 'bug' );
 	}
 }
@@ -273,6 +274,14 @@ helper_call_custom_function( 'issue_create_notify', array( $t_bug_id ) );
 event_signal( 'EVENT_REPORT_BUG', array( $t_bug_data, $t_bug_id ) );
 
 email_new_bug( $t_bug_id );
+
+// log status and resolution changes if they differ from the default
+if ( $t_bug_data->status != config_get('bug_submit_status') )
+	history_log_event($t_bug_id, 'status', config_get('bug_submit_status') );
+	
+if ( $t_bug_data->resolution != config_get('default_bug_resolution') )
+	history_log_event($t_bug_id, 'resolution', config_get('default_bug_resolution') );
+
 
 form_security_purge( 'bug_report' );
 

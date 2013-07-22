@@ -19,7 +19,7 @@
  *
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
@@ -77,15 +77,10 @@ if ( !file_allow_bug_upload( $f_bug_id ) ) {
 
 access_ensure_bug_level( config_get( 'upload_bug_file_threshold' ), $f_bug_id );
 
-// Process array of files to upload
-for( $i = 0; $i < count( $f_files ); $i++ ) {
-	if( !empty( $f_files['name'][$i] ) ) {
-		$t_file['name']     = $f_files['name'][$i];
-		$t_file['tmp_name'] = $f_files['tmp_name'][$i];
-		$t_file['type']     = $f_files['type'][$i];
-		$t_file['error']    = $f_files['error'][$i];
-		$t_file['size']     = $f_files['size'][$i];
-
+# Process array of files to upload
+$t_files = helper_array_transpose( $f_files );
+foreach( $t_files as $t_file ) {
+	if( !empty( $t_file['name'] ) ) {
 		file_add( $f_bug_id, $t_file, 'bug' );
 	}
 }

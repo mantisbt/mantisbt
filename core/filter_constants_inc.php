@@ -16,7 +16,7 @@
 
 	/**
 	 * @package MantisBT
-	 * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+	 * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org
 	 */
 
@@ -42,6 +42,7 @@
     define( 'FILTER_PROPERTY_RELATIONSHIP_BUG', 'relationship_bug' );
     define( 'FILTER_PROPERTY_TAG_STRING', 'tag_string' );
     define( 'FILTER_PROPERTY_TAG_SELECT', 'tag_select' );
+    define( 'FILTER_PROPERTY_MATCH_TYPE', 'match_type');
 
     define( 'FILTER_PROPERTY_NOTE_USER_ID', 'note_user_id' );
     define( 'FILTER_PROPERTY_MONITOR_USER_ID', 'monitor_user_id' ); # user_monitor

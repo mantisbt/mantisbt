@@ -17,7 +17,7 @@
 /**
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
@@ -56,6 +56,16 @@ require_css( 'status_config.php' );
 auth_ensure_user_authenticated();
 
 $f_page_number		= gpc_get_int( 'page_number', 1 );
+# Get Project Id and set it as current
+$t_project_id = gpc_get_int( 'project_id', helper_get_current_project() );
+if( ( ALL_PROJECTS == $t_project_id || project_exists( $t_project_id ) )
+ && $t_project_id != helper_get_current_project()
+) {
+	helper_set_current_project( $t_project_id );
+	# Reloading the page is required so that the project browser
+	# reflects the new current project
+	print_header_redirect( $_SERVER['REQUEST_URI'], true, false, true );
+}
 
 $t_per_page = null;
 $t_bug_count = null;

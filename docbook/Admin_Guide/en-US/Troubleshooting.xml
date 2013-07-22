@@ -25,17 +25,88 @@
 		<section id="admin.troubleshooting.errors.1502">
 			<title>Error 1502 - Category not found</title>
 
-			<para>This error generally occurs when the Category specified by
-			$g_default_category_for_moves (see <xref linkend="admin.config.defaults" />)
-			has been deleted from the database.
+			<para>This error occurs whenever MantisBT tries to access an
+				issue having a Category which has been deleted from the
+				database.
+			</para>
+			<para>It will most likely happen when the Category specified by
+				$g_default_category_for_moves
+				(see <xref linkend="admin.config.defaults" />)
+				has been deleted, and an issue is subsequently moved to another
+				project where its current category does not exist.
 			</para>
 
-			<para>To resolve this issue, you need to set this parameter to a valid Category Id.
-			This can be done either globally in config_inc.php, or via the Manage Configuration
-			page (globally or per project).
+			<para>There are two ways to resolve this issue:
+				<orderedlist>
+					<listitem><para>Recreate the missing category
+						</para>
+						<itemizedlist>
+							<listitem><para>Find the missing Category's Id</para>
+								<para>This can be done by checking the value of
+									<emphasis>default_category_for_moves</emphasis>
+									in config_inc.php and/or in Manage Configuration.
+									Alternatively, the following SQL can be executed
+									<programlisting>SELECT DISTINCT category_id
+FROM mantis_bug_table b
+LEFT OUTER JOIN mantis_category_table c ON category_id = c.id
+WHERE category_id &lt;&gt; 0
+AND c.id IS NULL
+</programlisting>
+								</para>
+							</listitem>
+
+							<listitem><para>Recreate the missing Category</para>
+								<para>The category's id must be manually set to
+									reflect the value retrieved above (e.g. using SQL
+									or your favorite DB admin tool)
+								</para>
+							</listitem>
+						</itemizedlist>
+					</listitem>
+
+					<listitem><para>Assign a new category to the issues
+						referencing the missing one
+						</para>
+						<itemizedlist>
+							<listitem><para>Identify the corrupted issues
+								and corresponding missing categories
+								</para>
+								<programlisting>SELECT b.id, category_id
+FROM mantis_bug_table b
+LEFT OUTER JOIN mantis_category_table c ON category_id = c.id
+WHERE category_id &lt;&gt; 0
+AND c.id IS NULL
+</programlisting>
+							</listitem>
+
+							<listitem><para>Determine which Category id to use
+								instead of the deleted one</para>
+							</listitem>
+
+							<listitem><para>Update the issues</para>
+								<para>This can either be done manually using
+									your favorite DB admin tool or with SQL, e.g.
+									<programlisting>UPDATE mantis_bug_table
+SET category_id = (NewCategoryId)
+WHERE category_id = (OldCategoryId)
+</programlisting>
+								</para>
+							</listitem>
+						</itemizedlist>
+					</listitem>
+				</orderedlist>
 			</para>
 
-			<para>Note: to retrieve the category ID, you can either
+			<para>Finally, to avoid future occurences, you need to set
+				$g_default_category_for_moves
+				(see <xref linkend="admin.config.defaults" />)
+				to a valid Category Id.
+				This must be done as appropriate, either globally in
+				config_inc.php, or via the Manage Configuration page,
+				for all occurences of the parameter.
+			</para>
+
+			<para>Note: to retrieve a category's ID, you can either
 				<itemizedlist>
 					<listitem><para>Look up the value directly in the database:
 						mantis_category_table, column 'id'

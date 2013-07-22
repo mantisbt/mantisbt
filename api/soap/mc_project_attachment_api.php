@@ -1,6 +1,6 @@
 <?php
 # MantisConnect - A webservice interface to Mantis Bug Tracker
-# Copyright (C) 2004-2012  Victor Boctor - vboctor@users.sourceforge.net
+# Copyright (C) 2004-2013  Victor Boctor - vboctor@users.sourceforge.net
 # This program is distributed under dual licensing.  These include
 # GPL and a commercial licenses.  Victor Boctor reserves the right to
 # change the license of future releases.
@@ -23,10 +23,10 @@ function mc_project_attachment_get( $p_username, $p_password, $p_project_attachm
 	}
 
 	$t_file = mci_file_get( $p_project_attachment_id, 'doc', $t_user_id );
-	if ( get_class( (object) $t_file ) == 'soap_fault' ) {
+	if ( SoapObjectsFactory::isSoapFault( $t_file ) ) {
 		return $t_file;
 	}
-	return base64_encode( $t_file );
+	return SoapObjectsFactory::encodeBinary( $t_file );
 }
 
 /**
@@ -56,7 +56,7 @@ function mc_project_attachment_add( $p_username, $p_password, $p_project_id, $p_
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 	if( is_blank( $p_title ) ) {
-		return new soap_fault( 'Client', '', 'Title must not be empty.' );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Title must not be empty.' );
 	}
 	return mci_file_add( $p_project_id, $p_name, $p_content, $p_file_type, 'project', $p_title, $p_description, $t_user_id );
 }

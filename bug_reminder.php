@@ -19,7 +19,7 @@
  *
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
@@ -78,14 +78,18 @@ if ( bug_is_readonly( $f_bug_id ) ) {
 
 access_ensure_bug_level( config_get( 'bug_reminder_threshold' ), $f_bug_id );
 
-# Automically add recipients to monitor list if they are above the monitor
+# Automatically add recipients to monitor list if they are above the monitor
 # threshold, option is enabled, and not reporter or handler.
-foreach ( $f_to as $t_recipient )
-{
-	if ( ON == config_get( 'reminder_recipients_monitor_bug' ) &&
-		access_has_bug_level( config_get( 'monitor_bug_threshold' ), $f_bug_id ) &&
-		!bug_is_user_handler( $f_bug_id, $t_recipient ) &&
-		!bug_is_user_reporter( $f_bug_id, $t_recipient ) ) {
+$t_reminder_recipients_monitor_bug = config_get( 'reminder_recipients_monitor_bug' );
+$t_monitor_bug_threshold = config_get( 'monitor_bug_threshold' );
+$t_handler = bug_get_field( $f_bug_id, 'handler_id' );
+$t_reporter = bug_get_field( $f_bug_id, 'reporter_id' );
+foreach ( $f_to as $t_recipient ) {
+	if (   ON == $t_reminder_recipients_monitor_bug
+		&& access_has_bug_level( $t_monitor_bug_threshold, $f_bug_id )
+		&& $t_recipient != $t_handler
+		&& $t_recipient != $t_reporter
+	) {
 		bug_monitor( $f_bug_id, $t_recipient );
 	}
 }
@@ -94,14 +98,19 @@ $result = email_bug_reminder( $f_to, $f_bug_id, $f_body );
 
 # Add reminder as bugnote if store reminders option is ON.
 if ( ON == config_get( 'store_reminders' ) ) {
-	if ( count( $f_to ) > 50 ) {		# too many recipients to log, truncate the list
-		$t_to = array();
-		for ( $i=0; $i<50; $i++ ) {
-			$t_to[] = $f_to[$i];
+	# Build list of recipients, truncated to note_attr fields's length
+	$t_attr = '|';
+	$t_length = 0;
+	foreach( $result as $t_id ) {
+		$t_recipient = $t_id . '|';
+		$t_length += strlen( $t_recipient );
+		if( $t_length > 250 ) {
+			# Remove trailing delimiter to indicate truncation
+			$t_attr = rtrim( $t_attr, '|' );
+			break;
 		}
-		$f_to = $t_to;
+		$t_attr .= $t_recipient;
 	}
-	$t_attr = '|' . implode( '|', $f_to ) . '|';
 	bugnote_add( $f_bug_id, $f_body, 0, config_get( 'default_reminder_view_status' ) == VS_PRIVATE, REMINDER, $t_attr, NULL, FALSE );
 }
 

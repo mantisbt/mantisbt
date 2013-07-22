@@ -20,7 +20,7 @@
  * @package CoreAPI
  * @subpackage StringProcessingAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses access_api.php
@@ -401,35 +401,54 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 
 	if( !isset( $string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] ) ) {
 		if( $p_include_anchor ) {
-			$string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function( '$p_array', '
-										if ( bugnote_exists( (int)$p_array[2] ) ) {
-											$t_bug_id = bugnote_get_field( (int)$p_array[2], \'bug_id\' );
-											$g_project_override = bug_get_field( $t_bug_id, \'project_id\' );
-											if ( bug_exists( $t_bug_id ) && ( access_compare_level( user_get_access_level( auth_get_current_user_id(), bug_get_field( $t_bug_id, \'project_id\' ) ), config_get( \'private_bugnote_threshold\' ) ) || ( bugnote_get_field( (int)$p_array[2], \'reporter_id\' ) == auth_get_current_user_id() ) || bugnote_get_field( (int)$p_array[2], \'view_state\' ) == VS_PUBLIC ) ) {
-												$g_project_override = null;
-												return $p_array[1] . string_get_bugnote_view_link( $t_bug_id, (int)$p_array[2], null, ' . ( $p_detail_info ? 'true' : 'false' ) . ', ' . ( $p_fqdn ? 'true' : 'false' ) . ' );
-											} else {
-												$g_project_override = null;
-												return $p_array[0];
-											}
-										} else {
-											return $p_array[0];
-										}
-										' );
+			$string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
+				create_function( '$p_array',
+					'
+					if ( bugnote_exists( (int)$p_array[2] ) ) {
+						$t_bug_id = bugnote_get_field( (int)$p_array[2], \'bug_id\' );
+						if ( bug_exists( $t_bug_id ) ) {
+							$g_project_override = bug_get_field( $t_bug_id, \'project_id\' );
+							if (   access_compare_level(
+										user_get_access_level( auth_get_current_user_id(),
+										bug_get_field( $t_bug_id, \'project_id\' ) ),
+										config_get( \'private_bugnote_threshold\' )
+								   )
+								|| bugnote_get_field( (int)$p_array[2], \'reporter_id\' ) == auth_get_current_user_id()
+								|| bugnote_get_field( (int)$p_array[2], \'view_state\' ) == VS_PUBLIC
+							) {
+								$g_project_override = null;
+								return $p_array[1] .
+									string_get_bugnote_view_link(
+										$t_bug_id,
+										(int)$p_array[2],
+										null,
+										' . ( $p_detail_info ? 'true' : 'false' ) . ', ' . ( $p_fqdn ? 'true' : 'false' ) . '
+									);
+							}
+							$g_project_override = null;
+						}
+					}
+					return $p_array[0];
+					'
+				);
 		} else {
-			$string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function( '$p_array', '
-										# We might as well create the link here even if the bug
-										#  doesnt exist.  In the case above we dont want to do
-										#  the summary lookup on a non-existant bug.  But here, we
-										#  can create the link and by the time it is clicked on, the
-										#  bug may exist.
-										$t_bug_id = bugnote_get_field( (int)$p_array[2], \'bug_id\' );
-										if ( bug_exists( $t_bug_id ) ) {
-											return $p_array[1] . string_get_bugnote_view_url_with_fqdn( $t_bug_id, (int)$p_array[2], null );
-										} else {
-											return $p_array[0];
-										}
-										' );
+			$string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
+				create_function(
+					'$p_array',
+					'
+					# We might as well create the link here even if the bug
+					#  doesnt exist.  In the case above we dont want to do
+					#  the summary lookup on a non-existant bug.  But here, we
+					#  can create the link and by the time it is clicked on, the
+					#  bug may exist.
+					$t_bug_id = bugnote_get_field( (int)$p_array[2], \'bug_id\' );
+					if ( bug_exists( $t_bug_id ) ) {
+						return $p_array[1] . string_get_bugnote_view_url_with_fqdn( $t_bug_id, (int)$p_array[2], null );
+					} else {
+						return $p_array[0];
+					}
+					'
+				);
 		}
 	}
 	$p_string = preg_replace_callback( '/(^|[^\w])' . preg_quote( $t_tag, '/' ) . '(\d+)\b/', $string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn], $p_string );
@@ -443,7 +462,9 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
  */
 function string_insert_hrefs( $p_string ) {
 	static $s_url_regex = null;
+	static $s_url_replace = null;
 	static $s_email_regex = null;
+	static $s_anchor_regex = '/(<a[^>]*>.*?<\/a>)/is';
 
 	if( !config_get( 'html_make_links' ) ) {
 		return $p_string;
@@ -455,52 +476,53 @@ function string_insert_hrefs( $p_string ) {
 		ini_set( 'magic_quotes_sybase', false );
 	}
 
-	# Find any URL in a string and replace it by a clickable link
-	$t_url_protocol = '([[:alpha:]][-+.[:alnum:]]*):\/\/';
+	# Initialize static variables
 	if ( is_null( $s_url_regex ) ) {
+		# URL regex
+		$t_url_protocol = '(?:[[:alpha:]][-+.[:alnum:]]*):\/\/';
+
 		# %2A notation in url's
 		$t_url_hex = '%[[:digit:]A-Fa-f]{2}';
 
 		# valid set of characters that may occur in url scheme. Note: - should be first (A-F != -AF).
-		$t_url_valid_chars = '-_.,!~*\';\/?%^\\\\:@&={\|}+$#[:alnum:]\pL';
-
-		$t_url_chars = "(?:${t_url_hex}|[${t_url_valid_chars}\(\)\[\]])";
-		$t_url_chars2 = "(?:${t_url_hex}|[${t_url_valid_chars}])";
+		$t_url_valid_chars       = '-_.,!~*\';\/?%^\\\\:@&={\|}+$#[:alnum:]\pL';
+		$t_url_chars             = "(?:${t_url_hex}|[${t_url_valid_chars}\(\)\[\]])";
+		$t_url_chars2            = "(?:${t_url_hex}|[${t_url_valid_chars}])";
 		$t_url_chars_in_brackets = "(?:${t_url_hex}|[${t_url_valid_chars}\(\)])";
-		$t_url_chars_in_parens    = "(?:${t_url_hex}|[${t_url_valid_chars}\[\]])";
+		$t_url_chars_in_parens   = "(?:${t_url_hex}|[${t_url_valid_chars}\[\]])";
 
 		$t_url_part1 = "${t_url_chars}";
 		$t_url_part2 = "(?:\(${t_url_chars_in_parens}*\)|\[${t_url_chars_in_brackets}*\]|${t_url_chars2})";
 
 		$s_url_regex = "/(${t_url_protocol}(${t_url_part1}*?${t_url_part2}+))/sue";
+
+		# URL replacement
+		$t_url_href    = "href=\"'.rtrim('\\1','.').'\"";
+		$s_url_replace = "'<a ${t_url_href}>\\1</a> [<a ${t_url_href} target=\"_blank\">^</a>]'";
+
+		# e-mail regex
+		$s_email_regex = substr_replace( email_regex_simple(), '(?:mailto:)?', 1, 0 );
 	}
 
-	$p_string = preg_replace( $s_url_regex, "'<a href=\"'.rtrim('\\1','.').'\">\\1</a>'", $p_string );
+	# Find any URL in a string and replace it by a clickable link
+	$p_string = preg_replace( $s_url_regex, $s_url_replace, $p_string );
 	if( $t_change_quotes ) {
 		ini_set( 'magic_quotes_sybase', true );
 	}
 
 	# Find any email addresses in the string and replace them with a clickable
-	# mailto: link, making sure that URLs such as http://user@example.com/ or
-	# http://user:password@example.com/ are not processed as an email
-	if( is_null( $s_email_regex ) ) {
-		$s_email_regex = email_regex_simple();
-		$s_email_regex =
-			substr( $s_email_regex, 0, 1 ) .
-			'(' . $t_url_protocol . '.*?)?' .
-			substr( $s_email_regex, 1 );
-	}
-
-	$p_string = preg_replace_callback(
-		$s_email_regex,
-		function( $p_match ) use ( $t_url_protocol ) {
-			if( 0 === preg_match( "/$t_url_protocol/", $p_match[0] ) ) {
-				return '<a href="mailto:' . $p_match[0] . '">' . $p_match[0] . '</a>';
+	# mailto: link, making sure that we skip processing of any existing anchor
+	# tags, to avoid parts of URLs such as https://user@example.com/ or
+	# http://user:password@example.com/ to be not treated as an email.
+	$t_pieces = preg_split( $s_anchor_regex, $p_string, null, PREG_SPLIT_DELIM_CAPTURE );
+	$p_string = '';
+	foreach( $t_pieces as $piece ) {
+		if( preg_match( $s_anchor_regex, $piece ) ) {
+			$p_string .= $piece;
 			} else {
-				return $p_match[0];
+			$p_string .= preg_replace( $s_email_regex, '<a href="mailto:\0">\0</a>', $piece );
 			}
-		},
-		$p_string );
+	}
 
 	return $p_string;
 }
@@ -888,6 +910,10 @@ function string_html_entities( $p_string ) {
  * @return string
  */
 function string_html_specialchars( $p_string ) {
+	# Remove any invalid character from the string per XML 1.0 specification
+	# http://www.w3.org/TR/2008/REC-xml-20081126/#NT-Char
+	$p_string = preg_replace( '/[^\x9\xA\xD\x20-\x{D7FF}\x{E000}-\x{FFFD}\x{10000}-\x{10FFFF}]+/u', '', $p_string );
+
 	# achumakov: @ added to avoid warning output in unsupported codepages
 	# e.g. 8859-2, windows-1257, Korean, which are treated as 8859-1.
 	# This is VERY important for Eastern European, Baltic and Korean languages

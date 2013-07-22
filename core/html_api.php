@@ -53,7 +53,7 @@
  * @package CoreAPI
  * @subpackage HTMLAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses access_api.php
@@ -498,7 +498,8 @@ function html_top_banner() {
 		if( $t_show_url ) {
 			echo '<a id="logo-link" href="', config_get( 'logo_url' ), '">';
 		}
-		echo '<img id="logo-image" alt="Mantis Bug Tracker" src="' . helper_mantis_url( $t_logo_image ) . '" />';
+		$t_alternate_text = string_html_specialchars( config_get( 'window_title' ) );
+		echo '<img id="logo-image" alt="', $t_alternate_text, '" src="' . helper_mantis_url( $t_logo_image ) . '" />';
 		if( $t_show_url ) {
 			echo '</a>';
 		}
@@ -543,12 +544,10 @@ function html_login_info() {
 	}
 	echo '</div>';
 
-
+	# Project Selector hidden if only one project visisble to user
 	$t_show_project_selector = true;
-	if( count( current_user_get_accessible_projects() ) == 1 ) {
-
-		// >1
-		$t_project_ids = current_user_get_accessible_projects();
+	$t_project_ids = current_user_get_accessible_projects();
+	if( count( $t_project_ids ) == 1 ) {
 		$t_project_id = (int) $t_project_ids[0];
 		if( count( current_user_get_accessible_subprojects( $t_project_id ) ) == 0 ) {
 			$t_show_project_selector = false;
@@ -578,6 +577,18 @@ function html_login_info() {
 		echo '</form>';
 		echo '<div id="current-time">' . $t_now . '</div>';
 	} else {
+		# User has only one project, set it as both current and default
+		if( ALL_PROJECTS == helper_get_current_project() ) {
+			helper_set_current_project( $t_project_id );
+
+			if ( !current_user_is_protected() ) {
+				current_user_set_default_project( $t_project_id );
+			}
+
+			# Force reload of current page
+			$t_redirect_url = str_replace( config_get( 'short_path' ), '', $_SERVER['REQUEST_URI'] );
+			html_meta_redirect( $t_redirect_url, 0, false );
+		}
 		echo '<div id="current-time-centered">' . $t_now . '</div>';
 	}
 }
@@ -656,9 +667,17 @@ function html_footer( $p_file = null ) {
 	$t_copyright_years = '';
 	if ( config_get( 'show_version' ) ) {
 		$t_version_suffix = htmlentities( ' ' . MANTIS_VERSION . config_get_global( 'version_suffix' ) );
-		$t_copyright_years = ' 2000 - 2012';
+		$t_copyright_years = ' 2000 - ' . date('Y');
 	}
-	echo "\t<address id=\"mantisbt-copyright\">Powered by <a href=\"http://www.mantisbt.org\" title=\"Mantis Bug Tracker: a free and open source web based bug tracking system.\">Mantis Bug Tracker</a> (MantisBT)$t_version_suffix. Copyright &copy;$t_copyright_years MantisBT contributors. Licensed under the terms of the <a href=\"http://www.gnu.org/licenses/old-licenses/gpl-2.0.html\" title=\"GNU General Public License (GPL) version 2\">GNU General Public License (GPL) version 2</a> or a later version.</address>\n";
+	echo "\t",
+		'<address id="mantisbt-copyright">Powered by ',
+		'<a href="http://www.mantisbt.org/" title="Mantis Bug Tracker: a free and open source web based bug tracking system.">',
+		"Mantis Bug Tracker</a> (MantisBT)$t_version_suffix. ",
+		"Copyright &copy;$t_copyright_years MantisBT contributors. ",
+		'Licensed under the terms of the ',
+		'<a href="http://www.gnu.org/licenses/old-licenses/gpl-2.0.html" title="GNU General Public License (GPL) version 2">',
+		'GNU General Public License (GPL) version 2</a> or a later version.',
+		"</address>\n";
 
 	# Show contact information
 	$t_webmaster_contact_information = sprintf( lang_get( 'webmaster_contact_information' ), string_html_specialchars( config_get( 'webmaster_email' ) ) );
@@ -1164,7 +1183,7 @@ function print_account_menu( $p_page = '' ) {
 	echo '<ul class="menu">';
 	foreach ( $t_pages as $t_page ) {
 		if( $t_page['url'] == '' ) {
-			echo '<li>', lang_get( $t_page['label'] ), '</li>';
+			echo '<li><span>', lang_get( $t_page['label'] ), '</span></li>';
 		} else {
 			echo '<li><a href="'. helper_mantis_url( $t_page['url'] ) .'">' . lang_get( $t_page['label'] ) . '</a></li>';
 		}
@@ -1320,7 +1339,7 @@ function html_status_legend() {
 	$width = (int)( 100 / count( $t_status_array ) );
 	$t_status_enum_string = config_get('status_enum_string' );
 	foreach( $t_status_array as $t_status => $t_name ) {
-		$t_val = $t_status_names[$t_status];
+		$t_val = isset( $t_status_names[$t_status] ) ? $t_status_names[$t_status] : $t_status_array[$t_status];
 		$t_status_label = MantisEnum::getLabel( $t_status_enum_string, $t_status );
 
 		echo "<td class=\"small-caption $t_status_label-color\">$t_val</td>";
@@ -1430,11 +1449,22 @@ function html_button_bug_update( $p_bug_id ) {
 function html_button_bug_change_status( $p_bug ) {
 	$t_current_access = access_get_project_level( $p_bug->project_id );
 
+	# User must have updater access to use the change status button
+	if( !access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug->id ) ) {
+		return;
+	}
+
 	$t_enum_list = get_status_option_list(
 		$t_current_access,
 		$p_bug->status,
 		false,
-		bug_is_user_reporter( $p_bug->id, auth_get_current_user_id() ) && ( ON == config_get( 'allow_reporter_close' ) ),
+		# Add close if user is bug's reporter, still has rights to report issues
+		# (to prevent users downgraded to viewers from updating issues) and
+		# reporters are allowed to close their own issues
+		(  bug_is_user_reporter( $p_bug->id, auth_get_current_user_id() )
+		&& access_has_bug_level( config_get( 'report_bug_threshold' ), $p_bug->id )
+		&& ON == config_get( 'allow_reporter_close' )
+		),
 		$p_bug->project_id );
 
 	if( count( $t_enum_list ) > 0 ) {
@@ -1604,12 +1634,15 @@ function html_button_bug_reopen( $p_bug ) {
 
 /**
  * Print a button to close the given bug
+ * Only if user can close bugs and workflow allows moving them to that status
  * @param BugData $p_bug Bug object
  * @return null
  */
 function html_button_bug_close( $p_bug ) {
-	if( access_can_close_bug( $p_bug ) ) {
-		$t_closed_status = config_get( 'bug_closed_status_threshold', null, null, $p_bug->project_id );
+	$t_closed_status = config_get( 'bug_closed_status_threshold', null, null, $p_bug->project_id );
+	if(    access_can_close_bug( $p_bug )
+		&& bug_check_workflow( $p_bug->status, $t_closed_status )
+	) {
 		html_button(
 			'bug_change_status_page.php',
 			lang_get( 'close_bug_button' ),

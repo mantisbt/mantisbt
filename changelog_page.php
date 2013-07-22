@@ -17,7 +17,7 @@
 /**
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
@@ -200,13 +200,9 @@ foreach( $t_project_ids as $t_project_id ) {
 	$t_project_header_printed = false;
 
 	foreach( $t_version_rows as $t_version_row ) {
-		$t_issues_planned = 0;
-		$t_issues_resolved = 0;
-
 		$t_version_header_printed = false;
 
 		$t_version = $t_version_row['version'];
-
 		$t_version_id = $t_version_row['id'];
 
 		# Skip all versions except the specified one (if any).
@@ -214,10 +210,14 @@ foreach( $t_project_ids as $t_project_id ) {
 			continue;
 		}
 
-		$query = "SELECT sbt.*, dbt.target_version AS parent_version, $t_relation_table.source_bug_id FROM $t_bug_table sbt
-				LEFT JOIN $t_relation_table ON sbt.id=$t_relation_table.destination_bug_id AND $t_relation_table.relationship_type=2
-				LEFT JOIN $t_bug_table dbt ON dbt.id=$t_relation_table.source_bug_id
-				WHERE sbt.project_id=" . db_param() . " AND sbt.fixed_in_version=" . db_param() . " ORDER BY sbt.status ASC, sbt.last_updated DESC";
+		$query = "SELECT sbt.*, dbt.fixed_in_version AS parent_version, rt.source_bug_id
+			FROM $t_bug_table AS sbt
+			LEFT JOIN $t_relation_table AS rt
+				ON sbt.id=rt.destination_bug_id AND rt.relationship_type=" . BUG_DEPENDANT . "
+			LEFT JOIN $t_bug_table AS dbt ON dbt.id=rt.source_bug_id
+			WHERE sbt.project_id=" . db_param() . "
+			  AND sbt.fixed_in_version=" . db_param() . "
+			ORDER BY sbt.status ASC, sbt.last_updated DESC";
 
 		$t_description = version_get_field( $t_version_id, 'description' );
 
@@ -251,8 +251,6 @@ foreach( $t_project_ids as $t_project_id ) {
 				continue;
 			}
 
-			$t_issues_resolved++;
-
 			if ( 0 === strcasecmp( $t_parent_version, $t_version ) ) {
 				$t_issue_ids[] = $t_issue_id;
 				$t_issue_parents[] = $t_issue_parent;
@@ -265,6 +263,8 @@ foreach( $t_project_ids as $t_project_id ) {
 		}
 
 		user_cache_array_rows( array_unique( $t_issue_handlers ) );
+
+		$t_issues_resolved = count( array_unique( $t_issue_ids ) );
 
 		if ( $t_issues_resolved > 0 ) {
 			if ( !$t_project_header_printed ) {
@@ -280,6 +280,8 @@ foreach( $t_project_ids as $t_project_id ) {
 			if ( !is_blank( $t_description ) ) {
 				echo string_display( "<br />$t_description<br /><br />" );
 			}
+		} else {
+			continue;
 		}
 
 		$t_issue_set_ids = array();
@@ -335,13 +337,8 @@ foreach( $t_project_ids as $t_project_id ) {
 			helper_call_custom_function( 'changelog_print_issue', array( $t_issue_set_id, $t_issue_set_level ) );
 		}
 
-		if ( $t_issues_resolved == 1 ) {
-			echo "[{$t_issues_resolved} " . lang_get( 'bug' ) . ']';
-			echo "<br />";
-		} else if ( $t_issues_resolved > 1 ) {
-			echo "[{$t_issues_resolved} " . lang_get( 'bugs' ) . ']';
-			echo "<br />";
-		}
+		$t_bug_string = $t_issues_resolved == 1 ? 'bug' : 'bugs';
+		echo "<br />[$t_issues_resolved " . lang_get( $t_bug_string ) . ']<br />';
 
 	}
 	if ( $t_project_header_printed ) {

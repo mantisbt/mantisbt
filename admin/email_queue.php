@@ -17,7 +17,7 @@
 /**
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 /**
@@ -65,7 +65,12 @@ if( count( $t_ids ) > 0 ) {
 	foreach( $t_ids as $t_id ) {
 		$row = email_queue_get( $t_id );
 
-		echo '<tr><td>' . $row->email_id . '</td><td>' . $row->email . '</td><td>' . $row->submitted . '</td><td>' , html_button( 'email_queue.php', 'Send Or Delete', array( 'send' => $row->email_id ) ) , '</td></tr>';
+		echo '<tr><td>'
+			. $row->email_id . '</td><td>'
+			. $row->email . '</td><td>'
+			. date( config_get( 'complete_date_format' ), $row->submitted ) . '</td><td>'
+			, html_button( 'email_queue.php', 'Send Or Delete', array( 'send' => $row->email_id ) )
+			, '</td></tr>';
 	}
 	echo '</table>';
 } else {

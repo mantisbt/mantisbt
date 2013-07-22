@@ -17,7 +17,7 @@
 /**
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
@@ -65,6 +65,16 @@ $t_name = category_full_name( $f_category_id );
 $t_project_id = $t_row['project_id'];
 
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_project_id );
+
+# Protect the 'default category for moves' from deletion
+$t_default_cat = 'default_category_for_moves';
+$t_config_table = db_get_table( 'config' );
+$t_query = "SELECT count(config_id) FROM $t_config_table "
+	. "WHERE config_id = " . db_param() . " AND value = " . db_param();
+$t_default_cat_count = db_result( db_query_bound( $t_query, array( $t_default_cat, $f_category_id ) ) );
+if( $t_default_cat_count > 0 || $f_category_id == config_get_global( $t_default_cat ) ) {
+	trigger_error( ERROR_CATEGORY_CANNOT_DELETE_DEFAULT, ERROR );
+}
 
 # Get a bug count
 $t_bug_table = db_get_table( 'bug' );

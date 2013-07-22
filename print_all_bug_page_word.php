@@ -21,7 +21,7 @@
  *
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
@@ -106,16 +106,18 @@ $t_page_count = null;
 
 $result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
 $t_row_count = count( $result );
-?>
 
-<html xmlns:o="urn:schemas-microsoft-com:office:office"
-xmlns:w="urn:schemas-microsoft-com:office:word"
-xmlns="http://www.w3.org/TR/REC-html40">
-
-<?php
-html_page_top1();
-html_head_end();
-html_body_begin();
+# Headers depending on intended output
+if ( $f_type_page == 'html' ) {
+	html_page_top1();
+	html_head_end();
+	html_body_begin();
+} else {
+	echo '<html xmlns:o="urn:schemas-microsoft-com:office:office"
+		xmlns:w="urn:schemas-microsoft-com:office:word"
+		xmlns="http://www.w3.org/TR/REC-html40">';
+	html_body_begin();
+}
 
 $f_bug_arr = explode( ',', $f_export );
 $t_count_exported = 0;
@@ -170,7 +172,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 	# display the available and selected bugs
 	if ( in_array( $t_id, $f_bug_arr ) || !$f_show_flag ) {
 		if ( $t_count_exported > 0 ) {
-			echo '<br style="mso-special-character: line-break; page-break-before: always">';
+			echo '<br style="mso-special-character: line-break; page-break-before: always" />';
 		}
 
 		$t_count_exported++;
@@ -385,11 +387,16 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 <?php
 $t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug->project_id );
 foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
+	# Don't display the field if user does not have read access to it
+	if ( !custom_field_has_read_access_by_project_id( $t_custom_field_id, $t_bug->project_id ) ) {
+		continue;
+	}
+
 	$t_def = custom_field_get_definition( $t_custom_field_id );
 ?>
 <tr class="print">
 	<td class="print-category">
-		<?php echo sprintf( lang_get( 'label' ), lang_get_defaulted( $t_def['name'] ) ) ?>
+		<?php echo string_display_line( sprintf( lang_get( 'label' ), lang_get_defaulted( $t_def['name'] ) ) ) ?>
 	</td>
 	<td class="print" colspan="5">
 		<?php print_custom_field_value( $t_def, $t_custom_field_id, $t_id ); ?>
@@ -471,24 +478,29 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 				}
 
 				$c_filename = string_display_line( $t_attachment['display_name'] );
-				$c_download_url = $t_path . htmlspecialchars( $t_attachment['download_url'] );
+				$c_download_url = htmlspecialchars( $t_attachment['download_url'] );
 				$c_filesize = number_format( $t_attachment['size'] );
 				$c_date_added = date( $t_date_format, $t_attachment['date_added'] );
-				echo "$c_filename ($c_filesize) <span class=\"italic\">$c_date_added</span><br />$c_download_url";
+				echo "$c_filename ($c_filesize " . lang_get( 'bytes' ) . ') '
+					. '<span class="italic-small">' . $c_date_added . '</span><br />'
+					. string_display_links( $t_path . $c_download_url );
 
 				if ( $t_attachment['preview'] && $t_attachment['type'] == 'image' && $f_type_page == 'html' ) {
-					echo '<br /><img src="', $t_attachment['download_url'], '" alt="', $t_attachment['alt'], '" /><br />';
+					echo '<br /><img src="', $c_download_url, '" alt="', $t_attachment['alt'], '" /><br />';
 				}
 			}
 		?>
 	</td>
 </tr>
+
+<tr><td colspan="6" class="print">&nbsp;</td></tr>
+
 <?php
 	$t_user_bugnote_limit = 0;
 
 	$t_bugnotes = bugnote_get_all_visible_bugnotes( $t_id, $t_user_bugnote_order, $t_user_bugnote_limit );
 ?>
-<br />
+<tr><td class="print" colspan="6">
 <table class="width100" cellspacing="1">
 <?php
 	# no bugnotes
@@ -543,14 +555,14 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 		</tr>
 		</table>
 	</td>
-	<td class="nopad" width="85%">
+	<td class="nopad">
 		<table class="hide" cellspacing="1">
 		<tr>
 			<td class="print">
 				<?php
 					switch ( $t_bugnote->note_type ) {
 						case REMINDER:
-							echo lang_get( 'reminder_sent_to' ) . ' ';
+							echo lang_get( 'reminder_sent_to' ) . ': ';
 							$t_note_attr = utf8_substr( $t_bugnote->note_attr, 1, utf8_strlen( $t_bugnote->note_attr ) - 2 );
 							$t_to = array();
 							foreach ( explode( '|', $t_note_attr ) as $t_recipient ) {
@@ -572,11 +584,15 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 ?>
 
 </table>
+</td></tr>
 <?php # Bugnotes END ?>
 </table>
 
 
+<br /><br />
 <?php
-echo '<br /><br />';
 	} # end in_array
 }  # end main loop
+
+html_body_end();
+html_end();

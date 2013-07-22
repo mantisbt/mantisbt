@@ -17,7 +17,7 @@
 /**
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
@@ -175,6 +175,7 @@ set_capability_row( 'view_changelog_threshold' );
 set_capability_row( 'view_handler_threshold' );
 set_capability_row( 'view_history_threshold' );
 set_capability_row( 'bug_reminder_threshold' );
+set_capability_row( 'reminder_receive_threshold' );
 
 form_security_purge( 'manage_config_work_threshold_set' );
 

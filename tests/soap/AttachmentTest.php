@@ -17,7 +17,7 @@
 /**
  * @package Tests
  * @subpackage UnitTests
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
@@ -73,7 +73,10 @@ class AttachmentTest extends SoapBase {
 
 		$this->assertEquals( 1, count( $issue->attachments ), 'count($issue->attachments)' );
 		$this->assertEquals( $attachmentContents, base64_decode( $attachment ), '$attachmentContents' );
-		$this->assertEquals( $this->mantisPath.'file_download.php?file_id='.$issue->attachments[0]->id.'&type=bug', $issue->attachments[0]->download_url);
+		$this->assertEquals(
+			$this->mantisPath.'file_download.php?file_id='.$issue->attachments[0]->id.'&type=bug',
+			html_entity_decode( $issue->attachments[0]->download_url)
+		);
 		$this->assertEquals( $this->userId, $issue->attachments[0]->user_id);
 	}
 
@@ -126,12 +129,12 @@ class AttachmentTest extends SoapBase {
 			$this->userName,
 			$this->password,
 			$attachmentId);
-		
+
 		$this->assertEquals( $attachmentContents, base64_decode( $attachment ), '$attachmentContents' );
-		
+
 		$attachments = $this->client->mc_project_get_attachments( $this->userName, $this->password, $this->getProjectId() );
 		$this->assertEquals( 1, count( $attachments ) );
-		
+
 		$attachment = $attachments[0];
 		$this->assertEquals($this->userId, $attachment->user_id);
 		$this->assertEquals('description', $attachment->description);

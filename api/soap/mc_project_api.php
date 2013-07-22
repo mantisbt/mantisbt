@@ -1,12 +1,86 @@
 <?php
 # MantisConnect - A webservice interface to Mantis Bug Tracker
-# Copyright (C) 2004-2012  Victor Boctor - vboctor@users.sourceforge.net
+# Copyright (C) 2004-2013  Victor Boctor - vboctor@users.sourceforge.net
 # This program is distributed under dual licensing.  These include
 # GPL and a commercial licenses.  Victor Boctor reserves the right to
 # change the license of future releases.
 # See docs/ folder for more details
 
+
+/**
+ * Use a standard filter to get issues associated with the specified user.
+ *
+ * @param $p_username logged in user name.
+ * @param $p_password login password.
+ * @param $p_project_id id of project to filter on, or ALL_PROJECTS.
+ * @param $p_filter_type The name of the filter to apply
+ *        "assigned" - target user specified - issues assigned to target user that are not resolved.
+ *        "assigned" - target user 0 - unassigned issues that are not resolved.
+ *        "reported" - target user specified - issues reported by user.
+ *        "reported" - target user 0 - will throw.
+ *        "monitored" - target user specified - issues monitored by user.
+ *        "monitored" - target user 0 - issues not monitored.
+ * @param $p_target_user AccountData for target user, can include id, name, or both.
+ * @param $p_page_number the page to return (1 based).
+ * @param $p_per_page number of issues per page.
+ * @return IssueDataArray a page of matching issues.
+ */
+function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id, $p_filter_type, $p_target_user, $p_page_number, $p_per_page ) {
+	$t_user_id = mci_check_login( $p_username, $p_password );
+	if ( $t_user_id === false ) {
+		return mci_soap_fault_login_failed();
+	}
+	
+	if ( $p_project_id != ALL_PROJECTS && !project_exists( $p_project_id ) ) {
+		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
+	}
+
+	if ( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
+		return mci_soap_fault_access_denied( $t_user_id );
+	}
+
+	$t_lang = mci_get_user_lang( $t_user_id );
+
+	$t_orig_page_number = $p_page_number < 1 ? 1 : $p_page_number;
+	$t_page_count = 0;
+	$t_bug_count = 0;
+	$t_target_user_id = mci_get_user_id( $p_target_user );
+	$t_show_sticky = true;
+
+	if ( strcasecmp( $p_filter_type, 'assigned' ) == 0 ) {
+		$t_filter = filter_create_assigned_to_unresolved( $p_project_id, $t_target_user_id );
+	} else if ( strcasecmp( $p_filter_type, 'reported' ) == 0 ) {
+		// target id 0 for reporter doesn't make sense.
+		if ( $t_target_user_id == 0 ) {
+			return SoapObjectsFactory::newSoapFault( 'Client', "Target user id must be specified for 'reported' filter." );
+		}
+
+		$t_filter = filter_create_reported_by( $p_project_id, $t_target_user_id );
+	} else if ( strcasecmp( $p_filter_type, 'monitored' ) == 0 ) {
+		$t_filter = filter_create_monitored_by( $p_project_id, $t_target_user_id );
+	} else {
+		return SoapObjectsFactory::newSoapFault( 'Client', "Unknown filter type '$p_filter_type'." );
+	}
+
+	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter, $p_project_id, $t_target_user_id, $t_show_sticky );
+	
+	$t_result = array();
+	
+	// the page number was moved back, so we have exceeded the actual page number, see bug #12991
+	if ( $t_orig_page_number > $p_page_number ) {
+	    return $t_result;	
+	}
+
+	foreach( $t_rows as $t_issue_data ) {
+		$t_result[] = mci_issue_data_as_array( $t_issue_data, $t_user_id, $t_lang );
+	}
+
+	return $t_result;
+}
+
 function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page_number, $p_per_page ) {
+    global $g_project_override;
+
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
@@ -14,7 +88,7 @@ function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page
 
 	$t_lang = mci_get_user_lang( $t_user_id );
 	if( $p_project_id != ALL_PROJECTS && !project_exists( $p_project_id ) ) {
-		return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
@@ -24,6 +98,7 @@ function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page
 	$t_orig_page_number = $p_page_number < 1 ? 1 : $p_page_number;
 	$t_page_count = 0;
 	$t_bug_count = 0;
+	$g_project_override = $p_project_id;
 
 	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, null, $p_project_id );
 	
@@ -87,6 +162,7 @@ function mc_projects_get_user_accessible( $p_username, $p_password ) {
  * @return Array  of categorie names
  */
 function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
+    global $g_project_override;
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
@@ -94,8 +170,9 @@ function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
 	}
+	$g_project_override = $p_project_id;
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
@@ -119,18 +196,20 @@ function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
  */
 
 function mc_project_add_category($p_username, $p_password, $p_project_id, $p_category_name ) {
+        global $g_project_override;
         $t_user_id = mci_check_login( $p_username, $p_password );
 
         if( $t_user_id === false ) {
-                return new soap_fault( 'Client', '', 'Access Denied' );
+                return mci_soap_fault_access_denied();
         }
 
         if( !project_exists( $p_project_id ) ) {
-                return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
+                return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
         }
+        $g_project_override = $p_project_id;
 
         if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $p_project_id ) ) {
-                return new soap_fault( 'Client', '', 'Access Denied' );
+                return mci_soap_fault_access_denied();
         }
 
         return category_add( $p_project_id, $p_category_name );
@@ -146,25 +225,28 @@ function mc_project_add_category($p_username, $p_password, $p_project_id, $p_cat
  */
 
 function mc_project_delete_category ($p_username, $p_password, $p_project_id, $p_category_name) {
+        global $g_project_override;
         $t_user_id = mci_check_login( $p_username, $p_password );
 
         if( $t_user_id === false ) {
-                return new soap_fault( 'Client', '', 'Access Denied' );
+                return mci_soap_fault_access_denied();
         }
 
         if( !project_exists( $p_project_id ) ) {
-                return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
+                return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
         }
 
+        $g_project_override = $p_project_id;
+
         if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $p_project_id ) ) {
-                return new soap_fault( 'Client', '', 'Access Denied' );
+                return mci_soap_fault_access_denied();
         }
 
         // find the id of the category
         $p_category_id = category_get_id_by_name( $p_category_name, $p_project_id );
 
-        // delete the category and link all the issue to the general category by default
-        return category_remove( $p_category_id, 1 );
+        // delete the category and link all the issue to the default category
+        return category_remove( $p_category_id, config_get('default_category_for_moves') );
 }
 
 /**
@@ -179,22 +261,25 @@ function mc_project_delete_category ($p_username, $p_password, $p_project_id, $p
  */
 
 function mc_project_rename_category_by_name( $p_username, $p_password, $p_project_id, $p_category_name, $p_category_name_new, $p_assigned_to ) {
+        global $g_project_override;
         $t_user_id = mci_check_login( $p_username, $p_password );
 
         if ( null === $p_assigned_to ) {
-                return new soap_fault( 'Client', '', 'p_assigned_to needed' );
+                return SoapObjectsFactory::newSoapFault( 'Client', 'p_assigned_to needed' );
         }
 
         if( $t_user_id === false ) {
-                return new soap_fault( 'Client', '', 'Access Denied' );
+                return mci_soap_fault_access_denied();
         }
 
         if( !project_exists( $p_project_id ) ) {
-                return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
+                return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
         }
 
+        $g_project_override = $p_project_id;
+
         if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $p_project_id ) ) {
-                return new soap_fault( 'Client', '', 'Access Denied' );
+                return mci_soap_fault_access_denied();
         }
 
         // find the id of the category
@@ -213,6 +298,7 @@ function mc_project_rename_category_by_name( $p_username, $p_password, $p_projec
  * @return Array  representing a ProjectVersionDataArray structure.
  */
 function mc_project_get_versions( $p_username, $p_password, $p_project_id ) {
+    global $g_project_override;
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
@@ -220,8 +306,9 @@ function mc_project_get_versions( $p_username, $p_password, $p_project_id ) {
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
 	}
+	$g_project_override = $p_project_id;
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
@@ -244,16 +331,18 @@ function mc_project_get_versions( $p_username, $p_password, $p_project_id ) {
  * @return Array  representing a ProjectVersionDataArray structure.
  */
 function mc_project_get_released_versions( $p_username, $p_password, $p_project_id ) {
-	$t_user_id = mci_check_login( $p_username, $p_password );
+	global $g_project_override;
+    $t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
 	}
-
+	
+	$g_project_override = $p_project_id;
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
@@ -276,6 +365,8 @@ function mc_project_get_released_versions( $p_username, $p_password, $p_project_
  * @return Array  representing a ProjectVersionDataArray structure.
  */
 function mc_project_get_unreleased_versions( $p_username, $p_password, $p_project_id ) {
+    global $g_project_override;
+
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
@@ -283,8 +374,9 @@ function mc_project_get_unreleased_versions( $p_username, $p_password, $p_projec
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
 	}
+	$g_project_override = $p_project_id;
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
@@ -307,13 +399,18 @@ function mc_project_get_unreleased_versions( $p_username, $p_password, $p_projec
  * @return integer  The id of the created version.
  */
 function mc_project_version_add( $p_username, $p_password, $p_version ) {
+    global $g_project_override;
+
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
 	}
+	
+	$p_version = SoapObjectsFactory::unwrapObject( $p_version );
 
 	$t_project_id = $p_version['project_id'];
+	$g_project_override = $t_project_id;
 	$t_name = $p_version['name'];
 	$t_released = $p_version['released'];
 	$t_description = $p_version['description'];
@@ -321,16 +418,16 @@ function mc_project_version_add( $p_username, $p_password, $p_version ) {
 	if ( is_blank( $t_date_order ) ) 
 	    $t_date_order = null;
 	else 
-	    $t_date_order = date( "Y-m-d H:i:s", strtotime( $t_date_order ) );
+		$t_date_order = SoapObjectsFactory::parseDateTimeString($t_date_order);
 	
 	$t_obsolete = isset ( $p_version['obsolete'] ) ? $p_version['obsolete'] : false;
 	
 	if ( is_blank( $t_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Mandatory field "project_id" was missing' );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Mandatory field "project_id" was missing' );
 	}
 
 	if ( !project_exists( $t_project_id ) ) {
-		return new soap_fault( 'Client', '', "Project '$t_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault('Client', "Project '$t_project_id' does not exist." );
 	}
 
 	if ( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
@@ -342,11 +439,11 @@ function mc_project_version_add( $p_username, $p_password, $p_version ) {
 	}
 
 	if ( is_blank( $t_name ) ) {
-		return new soap_fault( 'Client', '', 'Mandatory field "name" was missing' );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Mandatory field "name" was missing' );
 	}
 
 	if ( !version_is_unique( $t_name, $t_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Version exists for project', 'The version you attempted to add already exists for this project' );
+		return SoapObjectsFactory::newSoapFault( 'Client',  'Version exists for project');
 	}
 
 	if ( $t_released === false ) {
@@ -371,6 +468,8 @@ function mc_project_version_add( $p_username, $p_password, $p_version ) {
  * @return bool returns true or false depending on the success of the update action
  */
 function mc_project_version_update( $p_username, $p_password, $p_version_id, $p_version ) {
+    global $g_project_override;
+
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
@@ -378,26 +477,29 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, $p_
 	}
 
 	if( is_blank( $p_version_id ) ) {
-		return new soap_fault( 'Client', '', 'Mandatory field "version_id" was missing' );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Mandatory field "version_id" was missing' );
 	}
 
 	if( !version_exists( $p_version_id ) ) {
-		return new soap_fault( 'Client', '', "Version '$p_version_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Version '$p_version_id' does not exist." );
 	}
+	
+	$p_version = SoapObjectsFactory::unwrapObject( $p_version );
 
 	$t_project_id = $p_version['project_id'];
+	$g_project_override = $t_project_id;
 	$t_name = $p_version['name'];
 	$t_released = $p_version['released'];
 	$t_description = $p_version['description'];
-	$t_date_order = $p_version['date_order'];
+	$t_date_order = isset ( $p_version['date_order']) ? SoapObjectsFactory::parseDateTimeString($p_version['date_order']) : null;
 	$t_obsolete = isset ( $p_version['obsolete'] ) ? $p_version['obsolete'] : false;
 
 	if ( is_blank( $t_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Mandatory field "project_id" was missing' );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Mandatory field "project_id" was missing' );
 	}
 
 	if ( !project_exists( $t_project_id ) ) {
-		return new soap_fault( 'Client', '', "Project '$t_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$t_project_id' does not exist." );
 	}
 
 	if ( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
@@ -409,13 +511,13 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, $p_
 	}
 
 	if ( is_blank( $t_name ) ) {
-		return new soap_fault( 'Client', '', 'Mandatory field "name" was missing' );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Mandatory field "name" was missing' );
 	}
 
 	# check for duplicates
 	$t_old_version_name = version_get_field( $p_version_id, 'version' );
 	if ( ( strtolower( $t_old_version_name ) != strtolower( $t_name ) ) && !version_is_unique( $t_name, $t_project_id ) ) {
-		return new soap_fault( 'Client', '', 'Version exists for project', 'The version you attempted to update already exists for this project' );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Version exists for project' );
 	}
 
 	if ( $t_released === false ) {
@@ -430,7 +532,7 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, $p_
 	$t_version_data->version = $t_name;
 	$t_version_data->description = $t_description;
 	$t_version_data->released = $t_released;
-	$t_version_data->date_order = date( "Y-m-d H:i:s", strtotime( $t_date_order ) );
+	$t_version_data->date_order = $t_date_order;
 	$t_version_data->obsolete = $t_obsolete;
 
 	return version_update( $t_version_data );
@@ -445,6 +547,8 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, $p_
  * @return bool returns true or false depending on the success of the delete action
  */
 function mc_project_version_delete( $p_username, $p_password, $p_version_id ) {
+    global $g_project_override;
+
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
@@ -452,14 +556,15 @@ function mc_project_version_delete( $p_username, $p_password, $p_version_id ) {
 	}
 
 	if( is_blank( $p_version_id ) ) {
-		return new soap_fault( 'Client', '', 'Mandatory field "version_id" was missing' );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Mandatory field "version_id" was missing' );
 	}
 
 	if( !version_exists( $p_version_id ) ) {
-		return new soap_fault( 'Client', '', "Version '$p_version_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Version '$p_version_id' does not exist." );
 	}
 
 	$t_project_id = version_get_field( $p_version_id, 'project_id' );
+	$g_project_override = $t_project_id;
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
@@ -481,15 +586,19 @@ function mc_project_version_delete( $p_username, $p_password, $p_version_id ) {
  * @return Array  representing a CustomFieldDefinitionDataArray structure.
  */
 function mc_project_get_custom_fields( $p_username, $p_password, $p_project_id ) {
-	$t_user_id = mci_check_login( $p_username, $p_password );
+	global $g_project_override;
+
+    $t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
 	}
+
+	$g_project_override = $p_project_id;
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
@@ -538,10 +647,14 @@ function mc_project_get_custom_fields( $p_username, $p_password, $p_project_id )
  * @return Array  representing a ProjectAttachmentDataArray structure.
  */
 function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
-	$t_user_id = mci_check_login( $p_username, $p_password );
+    global $g_project_override;
+
+    $t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
 	}
+
+	$g_project_override = $p_project_id;
 
 	# Check if project documentation feature is enabled.
 	if( OFF == config_get( 'enable_project_documentation' ) || !file_is_uploading_enabled() ) {
@@ -549,7 +662,7 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
@@ -613,7 +726,7 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		$t_attachment['description'] = $row['description'];
 		$t_attachment['size'] = $row['filesize'];
 		$t_attachment['content_type'] = $row['file_type'];
-		$t_attachment['date_submitted'] = timestamp_to_iso8601( $row['date_added'], false );
+		$t_attachment['date_submitted'] = SoapObjectsFactory::newDateTimeVar( $row['date_added'] );
 		$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $row['id'] . '&amp;type=doc';
 		$t_attachment['user_id'] = $row['user_id'];
 		$t_result[] = $t_attachment;
@@ -623,15 +736,19 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 }
 
 function mc_project_get_all_subprojects( $p_username, $p_password, $p_project_id ) {
+    global $g_project_override;
+
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
-		return new soap_fault( 'Client', '', 'Access Denied' );
+		return mci_soap_fault_access_denied();
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
 	}
+
+	$g_project_override = $p_project_id;
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
@@ -690,9 +807,12 @@ function mc_project_add( $p_username, $p_password, $p_project ) {
 	if( !mci_has_administrator_access( $t_user_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
+	
+	$p_project = SoapObjectsFactory::unwrapObject( $p_project );
+	
 
 	if ( !isset( $p_project['name'] ) ) {
-		return new soap_fault( 'Client', '', 'Missing Field', 'Required Field Missing' );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Required field "name" is missing' );
 	} else {
 		$t_name = $p_project['name'];
 	}
@@ -735,7 +855,7 @@ function mc_project_add( $p_username, $p_password, $p_project ) {
 
 	// check to make sure project doesn't already exist
 	if( !project_is_name_unique( $t_name ) ) {
-		return new soap_fault( 'Client', '', 'Project name exists', 'The project name you attempted to add exists already' );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Project name exists');
 	}
 
 	$t_project_status = mci_get_project_status_id( $t_status );
@@ -755,21 +875,27 @@ function mc_project_add( $p_username, $p_password, $p_project ) {
  * @return bool returns true or false depending on the success of the update action
  */
 function mc_project_update( $p_username, $p_password, $p_project_id, $p_project ) {
+    global $g_project_override;
+
     $t_user_id = mci_check_login( $p_username, $p_password );
     if( $t_user_id === false ) {
-        return new soap_fault( 'Client', '', 'Access Denied', 'Username/password combination was incorrect' );
+        return mci_soap_fault_access_denied();
     }
 
     if( !mci_has_administrator_access( $t_user_id, $p_project_id ) ) {
-        return new soap_fault( 'Client', '', 'Access Denied', 'User does not have administrator access' );
+        return mci_soap_fault_access_denied( $t_user_id );
     }
 
     if( !project_exists( $p_project_id ) ) {
-        return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
+        return SoapObjectsFactory::newSoapFault("Client", "Project '$p_project_id' does not exist." );
     }
 
+    $g_project_override = $p_project_id;
+
+    $p_project = SoapObjectsFactory::unwrapObject( $p_project );
+
     if ( !isset( $p_project['name'] ) ) {
-        return new soap_fault( 'Client', '', 'Missing Field', 'Required Field Missing' );
+        return SoapObjectsFactory::newSoapFault( 'Client', 'Missing required field \'name\'.');
     } else {
         $t_name = $p_project['name'];
     }
@@ -777,7 +903,7 @@ function mc_project_update( $p_username, $p_password, $p_project_id, $p_project 
     // check to make sure project doesn't already exist
     if ( $t_name != project_get_name( $p_project_id ) ) {
         if( !project_is_name_unique( $t_name ) ) {
-            return new soap_fault( 'Client', '', 'Project name exists', 'The project name you attempted to add exists already' );
+            return SoapObjectsFactory::newSoapFault('Client', 'Project name exists');
         }
     }
 
@@ -832,14 +958,18 @@ function mc_project_update( $p_username, $p_password, $p_project_id, $p_project 
  * @return bool returns true or false depending on the success of the delete action
  */
 function mc_project_delete( $p_username, $p_password, $p_project_id ) {
+    global $g_project_override;
+
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
 	}
+
+	$g_project_override = $p_project_id;
 
 	if( !mci_has_administrator_access( $t_user_id, $p_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
@@ -849,13 +979,17 @@ function mc_project_delete( $p_username, $p_password, $p_project_id ) {
 }
 
 function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, $p_page_number, $p_per_page ) {
-	$t_user_id = mci_check_login( $p_username, $p_password );
+    global $g_project_override;
+
+    $t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
 	}
 	if( $p_project_id != ALL_PROJECTS && !project_exists( $p_project_id ) ) {
-		return new soap_fault( 'Client', '', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
 	}
+
+	$g_project_override = $p_project_id;;
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
@@ -873,31 +1007,7 @@ function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, 
 	    return $t_result;
 
 	foreach( $t_rows as $t_issue_data ) {
-		$t_id = $t_issue_data->id;
-
-		$t_issue = array();
-
-		$t_issue['id'] = $t_id;
-		$t_issue['view_state'] = $t_issue_data->view_state;
-		$t_issue['last_updated'] = timestamp_to_iso8601( $t_issue_data->last_updated, false );
-
-		$t_issue['project'] = $t_issue_data->project_id;
-		$t_issue['category'] = mci_get_category( $t_issue_data->category_id );
-		$t_issue['priority'] = $t_issue_data->priority;
-		$t_issue['severity'] = $t_issue_data->severity;
-		$t_issue['status'] = $t_issue_data->status;
-
-		$t_issue['reporter'] = $t_issue_data->reporter_id;
-		$t_issue['summary'] = $t_issue_data->summary;
-		if( !empty( $t_issue_data->handler_id ) ) {
-			$t_issue['handler'] = $t_issue_data->handler_id;
-		}
-		$t_issue['resolution'] = $t_issue_data->resolution;
-
-		$t_issue['attachments_count'] = count( mci_issue_get_attachments( $t_issue_data->id ) );
-		$t_issue['notes_count'] = count( mci_issue_get_notes( $t_issue_data->id ) );
-
-		$t_result[] = $t_issue;
+		$t_result[] = mci_issue_data_as_header_array( $t_issue_data);
 	}
 
 	return $t_result;
@@ -913,6 +1023,8 @@ function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, 
  * @return Array  representing a ProjectAttachmentDataArray structure.
  */
 function mc_project_get_users( $p_username, $p_password, $p_project_id, $p_access ) {
+    global $g_project_override;
+
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
 	if( $t_user_id === false ) {
@@ -920,6 +1032,8 @@ function mc_project_get_users( $p_username, $p_password, $p_project_id, $p_acces
 	}
 
 	$t_users = array();
+
+	$g_project_override = $p_project_id;
 
 	$t_users = project_get_all_user_rows( $p_project_id, $p_access ); # handles ALL_PROJECTS case
 

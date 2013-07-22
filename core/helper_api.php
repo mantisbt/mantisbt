@@ -20,7 +20,7 @@
  * @package CoreAPI
  * @subpackage HelperAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses access_api.php
@@ -96,6 +96,31 @@ function helper_alternate_class( $p_index = null, $p_odd_class = 'row-1', $p_eve
 	} else {
 		return "class=\"$p_even_class\"";
 	}
+}
+/**
+ * Transpose a bidimensional array
+ *
+ * e.g. array('a'=>array('k1'=>1,'k2'=>2),'b'=>array('k1'=>3,'k2'=>4))
+ * becomes array('k1'=>array('a'=>1,'b'=>3),'k2'=>array('a'=>2,'b'=>4))
+ *
+ * @param array $p_array
+ * @return array|mixed transposed array or $p_array if not 2-dimensional array
+ */
+function helper_array_transpose( $p_array ) {
+	if( !is_array( $p_array ) ) {
+		return $p_array;
+	}
+	$t_out = array();
+	foreach( $p_array as $key => $sub ) {
+		if( !is_array( $sub ) ) {
+			return $p_array;
+		}
+
+		foreach( $sub as $subkey => $value ) {
+			$t_out[$subkey][$key] = $value;
+		}
+	}
+	return $t_out;
 }
 
 /**
@@ -191,6 +216,50 @@ function get_enum_element( $p_enum_name, $p_val, $p_user = null, $p_project = nu
 }
 
 /**
+ * Compares the 2 specified variables, returns true if equal, false if not.
+ * With strict type checking, will trigger an error if the types of the compared
+ * variables don't match.
+ * This helper function is used by {@link check_checked()} and {@link check_selected()}
+ * @param mixed $p_var1
+ * @param mixed $p_var2
+ * @param boolean $p_strict Set to true for strict type checking, false for loose
+ * @return boolean
+ */
+function helper_check_variables_equal( $p_var1, $p_var2, $p_strict ) {
+
+	if( $p_strict ) {
+		if ( gettype( $p_var1 ) !== gettype( $p_var2 ) ) {
+			# Reaching this point is a a sign that you need to check the types
+			# of the parameters passed to this function. They should match.
+			trigger_error( ERROR_GENERIC, ERROR );
+		}
+
+		# We need to be careful when comparing an array of
+		# version number strings (["1.0", "1.1", "1.10"]) to
+		# a selected version number of "1.10". If a ==
+		# comparison were to be used, PHP would treat
+		# "1.1" and "1.10" as being the same as the strings
+		# would be converted to numerals before being compared
+		# as numerals.
+		#
+		# This is further complicated by filter dropdowns
+		# containing a mixture of string and integer values.
+		# The following "meta filter values" exist as integer
+		# values in dropdowns:
+		#   META_FILTER_MYSELF = -1
+		#   META_FILTER_NONE = -2
+		#   META_FILTER_CURRENT = -3
+		#   META_FILTER_ANY = 0
+		#
+		# For these reasons, a === comparison is required.
+
+		return $p_var1 === $p_var2;
+	} else {
+		return $p_var1 == $p_var2;
+	}
+}
+
+/**
  * Attach a "checked" attribute to a HTML element if $p_var === $p_val or
  * a {value within an array passed via $p_var} === $p_val.
  *
@@ -199,50 +268,19 @@ function get_enum_element( $p_enum_name, $p_val, $p_user = null, $p_project = nu
  *
  * @param mixed $p_var
  * @param mixed $p_val
+ * @param boolean $p_strict Set to false to bypass strict type checking (defaults to true)
  * @return null
  */
-function check_checked( $p_var, $p_val = true ) {
+function check_checked( $p_var, $p_val = true, $p_strict = true ) {
 	if( is_array( $p_var ) ) {
 		foreach( $p_var as $t_this_var ) {
-			if ( gettype( $t_this_var ) !== gettype( $p_val ) ) {
-				# Reaching this point is a a sign that you need to
-				# check the types of the parameters passed to this
-				# function. They should match.
-				trigger_error( ERROR_GENERIC, ERROR );
-			}
-			# We need to be careful when comparing an array of
-			# version number strings (["1.0", "1.1", "1.10"]) to
-			# a selected version number of "1.10". If a ==
-			# comparison were to be used, PHP would treat
-			# "1.1" and "1.10" as being the same as the strings
-			# would be converted to numerals before being compared
-			# as numerals.
-			#
-			# This is further complicated by filter dropdowns
-			# containing a mixture of string and integer values.
-			# The following "meta filter values" exist as integer
-			# values in dropdowns:
-			#   META_FILTER_MYSELF = -1
-			#   META_FILTER_NONE = -2
-			#   META_FILTER_CURRENT = -3
-			#   META_FILTER_ANY = 0
-			#
-			# For these reasons, a === comparison is required.
-			if( $t_this_var === $p_val ) {
+			if( helper_check_variables_equal( $t_this_var, $p_val, $p_strict ) ) {
 				echo ' checked="checked"';
 				return;
 			}
 		}
 	} else {
-		if ( gettype( $p_var ) !== gettype( $p_val ) ) {
-			# Reaching this point is a a sign that you need to
-			# check the types of the parameters passed to this
-			# function. They should match.
-			trigger_error( ERROR_GENERIC, ERROR );
-		}
-		# Refer to the comment above for the is_array($p_var)===true
-		# case. The same reasoning applies here too!
-		if( $p_var === $p_val ) {
+		if( helper_check_variables_equal( $p_var, $p_val, $p_strict ) ) {
 			echo ' checked="checked"';
 			return;
 		}
@@ -256,39 +294,22 @@ function check_checked( $p_var, $p_val = true ) {
  * If the second parameter is not given, the first parameter is compared to
  * the boolean value true.
  *
- * @param mixed $p_var
- * @param mixed $p_val
+ * @param mixed $p_var the variable to compare
+ * @param mixed $p_val the value to compare $p_var with
+ * @param boolean $p_strict Set to false to bypass strict type checking (defaults to true)
  * @return null
  */
-function check_selected( $p_var, $p_val = true ) {
+function check_selected( $p_var, $p_val = true, $p_strict = true ) {
 	if ( is_array( $p_var ) ) {
 		foreach ( $p_var as $t_this_var ) {
-			if ( gettype( $t_this_var ) !== gettype( $p_val ) ) {
-				# Reaching this point is a a sign that you need to
-				# check the types of the parameters passed to this
-				# function. They should match.
-				trigger_error( ERROR_GENERIC, ERROR );
-			}
-			# Refer to the comment in this same place within the
-			# check_checked function. The same reasoning applies
-			# here too!
-			if ( $t_this_var === $p_val ) {
+			if( helper_check_variables_equal( $t_this_var, $p_val, $p_strict ) ) {
 				echo ' selected="selected"';
 				return;
 			}
 		}
 	} else {
-		if ( gettype( $p_var ) !== gettype( $p_val ) ) {
-			# Reaching this point is a a sign that you need to
-			# check the types of the parameters passed to this
-			# function. They should match.
-			trigger_error( ERROR_GENERIC, ERROR );
-		}
-		#Refer to the comment in this same place within the
-		# check_checked function. The same reasoning applies here too!
-		if ( $p_var === $p_val ) {
+		if( helper_check_variables_equal( $p_var, $p_val, $p_strict ) ) {
 			echo ' selected="selected"';
-			return;
 		}
 	}
 }
@@ -397,8 +418,11 @@ function helper_get_current_project_trace() {
  * @return bool always true
  */
 function helper_set_current_project( $p_project_id ) {
+	global $g_cache_current_project;
+
 	$t_project_cookie_name = config_get( 'project_cookie' );
 
+	$g_cache_current_project = $p_project_id;
 	gpc_set_cookie( $t_project_cookie_name, $p_project_id, true );
 
 	return true;
@@ -410,7 +434,8 @@ function helper_set_current_project( $p_project_id ) {
  */
 function helper_clear_pref_cookies() {
 	gpc_clear_cookie( config_get( 'project_cookie' ) );
-	gpc_clear_cookie( config_get( 'manage_cookie' ) );
+	gpc_clear_cookie( config_get( 'manage_users_cookie' ) );
+	gpc_clear_cookie( config_get( 'manage_config_cookie' ) );
 }
 
 /**

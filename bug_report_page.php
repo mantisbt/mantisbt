@@ -19,7 +19,7 @@
  *
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
@@ -82,11 +82,6 @@ $g_allow_browser_cache = 1;
 
 $f_master_bug_id = gpc_get_int( 'm_id', 0 );
 
-# this page is invalid for the 'All Project' selection except if this is a clone
-if ( ( ALL_PROJECTS == helper_get_current_project() ) && ( 0 == $f_master_bug_id ) ) {
-	print_header_redirect( 'login_select_proj_page.php?ref=bug_report_page.php' );
-}
-
 if ( $f_master_bug_id > 0 ) {
 	# master bug exists...
 	bug_ensure_exists( $f_master_bug_id );
@@ -138,6 +133,22 @@ if ( $f_master_bug_id > 0 ) {
 
 	$t_project_id			= $t_bug->project_id;
 } else {
+	# Get Project Id and set it as current
+	$t_project_id = gpc_get_int( 'project_id', helper_get_current_project() );
+	if( ( ALL_PROJECTS == $t_project_id || project_exists( $t_project_id ) )
+	 && $t_project_id != helper_get_current_project()
+	) {
+		helper_set_current_project( $t_project_id );
+		# Reloading the page is required so that the project browser
+		# reflects the new current project
+		print_header_redirect( $_SERVER['REQUEST_URI'], true, false, true );
+	}
+
+	# New issues cannot be reported for the 'All Project' selection
+	if ( ( ALL_PROJECTS == helper_get_current_project() ) ) {
+		print_header_redirect( 'login_select_proj_page.php?ref=bug_report_page.php' );
+	}
+
 	access_ensure_project_level( config_get( 'report_bug_threshold' ) );
 
 	$f_build				= gpc_get_string( 'build', '' );
@@ -165,8 +176,6 @@ if ( $f_master_bug_id > 0 ) {
 		$f_due_date = date_get_null();
 	}
 
-	$t_project_id			= helper_get_current_project();
-
 	$t_changed_project		= false;
 }
 
@@ -188,6 +197,8 @@ $tpl_show_profiles = config_get( 'enable_profiles' );
 $tpl_show_platform = $tpl_show_profiles && in_array( 'platform', $t_fields );
 $tpl_show_os = $tpl_show_profiles && in_array( 'os', $t_fields );
 $tpl_show_os_version = $tpl_show_profiles && in_array( 'os_version', $t_fields );
+$tpl_show_resolution = in_array( 'resolution', $t_fields );
+$tpl_show_status = in_array( 'status', $t_fields );
 
 $tpl_show_versions = version_should_show_product_version( $t_project_id );
 $tpl_show_product_version = $tpl_show_versions && in_array( 'product_version', $t_fields );
@@ -453,6 +464,43 @@ print_recently_visited();
 			<select <?php echo helper_get_tab_index() ?> id="handler_id" name="handler_id">
 				<option value="0" selected="selected"></option>
 				<?php print_assign_to_option_list( $f_handler_id ) ?>
+			</select>
+		</td>
+	</tr>
+<?php } ?>
+
+<?php if ( $tpl_show_status ) { ?>
+	<tr <?php echo helper_alternate_class() ?>>
+		<th class="category">
+			<label for="status"><?php echo lang_get( 'status' ) ?></label>
+		</th>
+		<td>
+			<select <?php echo helper_get_tab_index() ?> name="status">
+			<?php 
+			$resolution_options = get_status_option_list(access_get_project_level( $t_project_id), 
+					config_get('bug_submit_status'), true, 
+					ON == config_get( 'allow_reporter_close' ), $t_project_id );
+			foreach ( $resolution_options as $key => $value ) {
+			?>
+				<option value="<?php echo $key ?>" <?php check_selected($key, config_get('bug_submit_status')); ?> >
+					<?php echo $value ?>
+				</option>
+			<?php } ?>
+			</select>
+		</td>
+	</tr>
+<?php } ?>
+
+<?php if ( $tpl_show_resolution ) { ?>
+	<tr <?php echo helper_alternate_class() ?>>
+		<th class="category">
+			<label for="resolution"><?php echo lang_get( 'resolution' ) ?></label>
+		</th>
+		<td>
+			<select <?php echo helper_get_tab_index() ?> name="resolution">
+				<?php 
+				print_enum_string_option_list('resolution', config_get('default_bug_resolution'));
+				?>
 			</select>
 		</td>
 	</tr>

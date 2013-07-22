@@ -54,11 +54,63 @@
             <varlistentry>
                 <term>$g_db_type</term>
                 <listitem>
-                    <para>The supported database types include: 'mysql' or 'mysqli' for MySQL,
-		    'pgsql' for PostgreSQL, 'mssql' for MS SQL Server, 'oci8' for Oracle,
-		    and 'db2' for DB2.  It is important to make sure that the PHP extension
-		    corresponding to the database type is enabled.
-                    </para>
+					<para>The supported database types are listed in the table
+						below.
+					</para>
+					<para>The PHP extension corresponding to the selected type
+						must be enabled.
+					</para>
+
+					<informaltable>
+						<tgroup cols="4">
+							<thead>
+								<row>
+									<entry>RDBMS</entry>
+									<entry>db_type</entry>
+									<entry>PHP extension</entry>
+									<entry>Comments</entry>
+								</row>
+							</thead>
+							<tbody>
+								<row>
+									<entry morerows='1' valign='middle'>MySQL</entry>
+									<entry>mysql</entry>
+									<entry>mysql</entry>
+									<entry>default</entry>
+								</row>
+								<row>
+									<entry>mysqli</entry>
+									<entry>mysqli</entry>
+									<entry></entry>
+								</row>
+								<row>
+									<entry>PostgreSQL</entry>
+									<entry>pgsql</entry>
+									<entry>pgsql</entry>
+									<entry></entry>
+								</row>
+								<row>
+									<entry>IBM DB2</entry>
+									<entry>db2</entry>
+									<entry>db2</entry>
+									<entry>experimental</entry>
+								</row>
+								<row>
+									<entry>MS SQL Server</entry>
+									<entry>mssqlnative</entry>
+									<entry>sqlsrv</entry>
+									<entry>experimental</entry>
+								</row>
+								<row>
+									<entry>Oracle</entry>
+									<entry>oci8</entry>
+									<entry>oci8</entry>
+									<entry>experimental</entry>
+								</row>
+							</tbody>
+						</tgroup>
+					</informaltable>
+
                 </listitem>
             </varlistentry>
         </variablelist>
@@ -280,8 +332,12 @@
             <varlistentry>
                 <term>$g_allow_signup</term>
                 <listitem>
-                    <para>Allow users to signup for their own accounts. Default is ON.
-                    </para>
+					<para>Allow users to signup for their own accounts.
+					</para>
+					<para>If ON (default), then $g_send_reset_password must be ON
+						as well, and mail settings must be correctly configured
+						(see <xref linkend="admin.config.email" />).
+					</para>
                 </listitem>
             </varlistentry>
 
@@ -306,11 +362,14 @@
             <varlistentry>
                 <term>$g_send_reset_password</term>
                 <listitem>
-                    <para>When set to ON, MantisBT will email the users their new
-                        passwords when their accounts are reset. If set to OFF, the
-                        password will be reset to blank and no e-mail will be sent. Default
-                        is ON.
-                    </para>
+					<para>If ON (default), users will be sent their password when
+						their account is created or password reset (this requires
+						mail settings to be correctly configured).
+					</para>
+					<para>If OFF, then the Administrator will have to provide
+						a password when creating new accounts, and the password
+						will be set to blank when reset.
+					</para>
                 </listitem>
             </varlistentry>
 
@@ -596,11 +655,11 @@
                 <term>$g_email_send_using_cronjob</term>
                 <listitem>
                     <para>Disables sending of emails as soon as an action is performed.
-			Emails are instead queued and must be sent by running 
+			Emails are instead queued and must be sent by running
 			scripts/send_emails.php periodically. This script can only be
 			executed from the CLI, not from the web interface, for security
 			reasons.</para>
-		    <para>Enabling this option can help with performance problems if large 
+			<para>Enabling this option can help with performance problems if large
 			numbers of emails are generated or mail delivery is slow by not
 			delaying page execution when sending emails.</para>
                 </listitem>
@@ -934,10 +993,40 @@
             <varlistentry>
                 <term>$g_show_avatar</term>
                 <listitem>
-                    <para>Show user avatar (default OFF); the current implementation is based on http://www.gravatar.com,
-                    users will need to register there with the same email address used in
-                    this MantisBT installation to have their avatar shown.</para>
-                    <note><para>Upon registration or avatar change, it takes some time for the updated gravatar images to show on sites.</para></note>
+					<para>Show the user's avatar
+					</para>
+					<para>The current implementation is based on
+						<ulink url="http://www.gravatar.com">Gravatar</ulink>;
+						Users will need to register there the same email address
+						used in this MantisBT installation to have their avatar
+						shown.
+						Please note: upon registration or avatar change, it may
+						take some time for the updated gravatar images to show
+						on sites
+					</para>
+					<para>The config can be either set to OFF (avatars disabled),
+						or to a string defining the default avatar to be used
+						when none is associated with the user's email.
+						Valid values are:
+						<itemizedlist>
+							<listitem><para>OFF (default)</para>
+							</listitem>
+							<listitem><para>ON (equivalent to 'identicon')
+							</para></listitem>
+							<listitem><para>One of Gravatar's defaults
+								(mm, identicon, monsterid, wavatar, retro);
+								refer to
+								<ulink url="http://en.gravatar.com/site/implement/images/">
+									Image Requests documentation
+								</ulink>
+								for further details.
+							</para></listitem>
+							<listitem><para>An URL to the default image to be used
+								(for example, "http:/path/to/unknown.jpg"
+								or "%path%images/no_avatar.png").
+							</para></listitem>
+						</itemizedlist>
+					</para>
                 </listitem>
             </varlistentry>
             <varlistentry>
@@ -1041,6 +1130,32 @@
 
     </section>
 
+	<section id="admin.config.timezone">
+		<title>Time Zone</title>
+
+		<variablelist>
+			<varlistentry>
+				<term>$g_default_timezone</term>
+				<listitem>
+					<para>Default timezone to use in MantisBT.
+						This must be set to one of the values specified in the
+						<ulink url="http://php.net/timezones ">
+							List of Supported Timezones</ulink>.
+					</para>
+					<para>If this config is left blank (default), it will be
+						initialized by calling function
+						<ulink url="http://php.net/date-default-timezone-get">
+							date_default_timezone_get()</ulink>
+						to determine the default timezone.
+						With PHP >= 5.3, this will result in a system warning if
+						the timezone has not been defined in
+						<ulink url="http://php.net/date.timezone">php.ini</ulink>.
+						Note that this function's behavior was modified in PHP 5.4.0.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
 
     <section id="admin.config.news">
         <title>News</title>
@@ -2530,38 +2645,38 @@
 
     <section id="admin.config.cookies">
         <title>Cookies</title>
-        <para>The configuration variables $g_string_cookie,
-            $g_project_cookie, $g_view_all_cookie, $g_manage_cookie are
-            calculated based on $g_cookie_prefix. When you change the cookie
-            prefix in config_inc.php, you need to follow it with a copy of the
-            four lines that calculate the names for these cookies.
-        </para>
 
         <variablelist>
             <varlistentry>
                 <term>$g_cookie_path</term>
                 <listitem>
-                    <para>This is specifies to the path under which a cookie is
-                        visible. All scripts in this directory and its sub-directories will
-                        be able to access MantisBT cookies. Default value is '/'. It is
-                        recommended to set this to the actual MantisBT path.
+					<para>Specifies the path under which a cookie is visible.
+					</para>
+					<para>All scripts in this directory and its sub-directories
+						will be able to access MantisBT cookies.
+					</para>
+					<para>Default value is '/'.
+						It is recommended to set this to the actual MantisBT path.
                     </para>
                 </listitem>
             </varlistentry>
             <varlistentry>
                 <term>$g_cookie_domain</term>
                 <listitem>
-                    <para>Unused</para>
+					<para>The domain that the MantisBT cookies are available to.</para>
                 </listitem>
             </varlistentry>
             <varlistentry>
                 <term>$g_cookie_version</term>
                 <listitem>
-                    <para>Cookie version is used as a prefix for cookies that should
-                        be expire when the code is changed in a certain way. The developers
-                        would increase this version when necessary, which in effect will
-                        cause the creation of new cookies that are compatible with the new
-                        code. It is not expected for the user to need to change this
+					<para>Version of the view_all_page cookie.</para>
+					<para>This is used as a prefix for cookies that should
+						be expired when the code is changed in a certain way.
+						The developers would increase this version when necessary,
+						which in effect will cause the creation of new cookies
+						that are compatible with the new code.
+					</para>
+					<para>It is not expected for the user to need to change this
                         setting.
                     </para>
                 </listitem>
@@ -2569,12 +2684,48 @@
             <varlistentry>
                 <term>$g_cookie_prefix</term>
                 <listitem>
-                    <para>This should be set to a unique identifier which does not
-                        include spaces or periods. Again, this should be unique per
-                        MantisBT installation, especially if $g_cookie_path is not
-                        restricting the cookies scope to the actual MantisBT
-                        directory.
+					<para>Prefix for all MantisBT cookies</para>
+					<para>This should be an identifier which does not include
+						spaces or periods, and should be unique per MantisBT
+						installation, especially if $g_cookie_path is not
+						restricting the cookies' scope to the actual
+						MantisBT directory.
                     </para>
+					<para>It applies to the cookies listed below. Their actual
+						names are calculated by prepending the prefix, and
+						it is not expected for the user to need to change these.
+					</para>
+
+					<itemizedlist>
+						<listitem>
+							<para>$g_string_cookie</para>
+						</listitem>
+						<listitem>
+							<para>$g_project_cookie</para>
+						</listitem>
+						<listitem>
+							<para>$g_view_all_cookie</para>
+						</listitem>
+						<listitem>
+							<para>$g_manage_users_cookie</para>
+							<para>Stores the filter criteria for the
+								Manage Users page
+							</para>
+						</listitem>
+						<listitem>
+							<para>$g_manage_config_cookie</para>
+							<para>Stores the filter criteria for the
+								Manage Config Report page
+							</para>
+						</listitem>
+						<listitem>
+							<para>$g_logout_cookie</para>
+						</listitem>
+						<listitem>
+							<para>$g_bug_list_cookie</para>
+						</listitem>
+					</itemizedlist>
+
                 </listitem>
             </varlistentry>
         </variablelist>
@@ -3310,13 +3461,13 @@
                             <varlistentry>
                                 <term>LOG_AJAX</term>
                                 <listitem>
-                                    <para></para>
+                                    <para>logs AJAX events</para>
                                 </listitem>
                             </varlistentry>
                             <varlistentry>
                                 <term>LOG_DATABASE</term>
                                 <listitem>
-                                    <para></para>
+                                    <para>logs database events and executed queries</para>
                                 </listitem>
                             </varlistentry>
                             <varlistentry>
@@ -3339,7 +3490,7 @@
                             <varlistentry>
                                 <term>LOG_FILTERING</term>
                                 <listitem>
-                                    <para></para>
+                                    <para>logs filter operations</para>
                                 </listitem>
                             </varlistentry>
                             <varlistentry>
@@ -3438,6 +3589,49 @@
 				</varlistentry>
 
 			</variablelist>
+    </section>
+
+    <section id="admin.config.soap">
+	<title>SOAP API</title>
+
+	<para>MantisBT exposes a SOAP API which allows remote clients to interact with MantisBT and perform many of the usual tasks, such as reporting issues, running filtered searches and retrieving attachments. The SOAP API is enabled by default and available at <literal>/api/soap/mantisconnect.php</literal> below your installation root.</para>
+	<para>A WSDL file which describes the web service is available at <literal>/api/soap/mantisconnect.php?wsdl</literal> below your installation root.</para>
+
+	<para>The following options are used to control the behaviour of the MantisBT SOAP API and are usually configured in <literal>api/soap/mc_config_inc.php</literal>.</para>
+        <variablelist>
+            <varlistentry>
+                <term>$g_mc_use_nusoap</term>
+                <listitem>
+                    <para>
+			Flag controlling the library to use for SOAP communication. When the native PHP extension is available this flag default to OFF, which means that nusoap will not used. The native extension has the advantage of being faster, more memory efficient and maintained to work with recent versions on PHP. When the extension is not available MantisBT falls back to using nusoap.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_mc_readonly_access_level_threshold</term>
+                <listitem>
+                    <para>Minimum global access level required to access webservice for readonly operations.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_mc_readwrite_access_level_threshold</term>
+                <listitem>
+                    <para>Minimum global access level required to access webservice for read/write operations.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_mc_admin_access_level_threshold</term>
+                <listitem>
+                    <para>Minimum global access level required to access the administrator webservices.</para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+
+	<section id="admin.config.soap.disable">
+		<title>Disabling the SOAP API</title>
+		<para>If you wish to temporarily disable the SOAP API it is sufficient to set the specific access thresholds to NOBODY in <literal>api/soap/mc_config_inc.php</literal>:</para>
+		<para><literal>$g_mc_readonly_access_level_threshold = $g_mc_readwrite_access_level_threshold = $g_mc_admin_access_level_threshold = NOBODY;</literal></para>
+		<para>While the SOAP API will still be accessible, it will not allow users to retrieve or modify data.</para>
+	</section>
     </section>
 
     <section id="admin.config.mantistouch">

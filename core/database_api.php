@@ -20,7 +20,7 @@
  * @package CoreAPI
  * @subpackage DatabaseAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses config_api.php
@@ -367,8 +367,9 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 				$i++;
 			}
 		}
-		log_event( LOG_DATABASE, array( $p_query, $t_elapsed), debug_backtrace() );
-		array_push( $g_queries_array, array( $p_query, $t_elapsed ) );
+		$t_log_msg = array( $p_query, $t_elapsed );
+		log_event( LOG_DATABASE, $t_log_msg, debug_backtrace() );
+		array_push( $g_queries_array, $t_log_msg );
 	} else {
 		array_push( $g_queries_array, array( '', $t_elapsed ) );
 	}

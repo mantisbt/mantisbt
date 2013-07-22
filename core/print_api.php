@@ -20,7 +20,7 @@
  * @package CoreAPI
  * @subpackage PrintAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses access_api.php
@@ -169,7 +169,7 @@ function print_successful_redirect( $p_redirect_to ) {
 
 # Print avatar image for the given user ID
 function print_avatar( $p_user_id, $p_size = 80 ) {
-	if ( OFF == config_get( 'show_avatar' ) ) {
+	if ( OFF === config_get( 'show_avatar' ) ) {
 		return;
 	}
 
@@ -244,21 +244,39 @@ function print_captcha_input( $p_field_name ) {
 #
 # @todo from print_reporter_option_list
 function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = ANYBODY ) {
-	$t_users = array();
+	$t_current_user = auth_get_current_user_id();
 
 	if( null === $p_project_id ) {
 		$p_project_id = helper_get_current_project();
 	}
 
-	$t_users = project_get_all_user_rows( $p_project_id, $p_access );
+	if( $p_project_id === ALL_PROJECTS ) {
+		$t_projects = user_get_accessible_projects( $t_current_user );
 
-	# handles ALL_PROJECTS case
+		# Get list of users having access level for all accessible projects
+		$t_users = array();
+		foreach( $t_projects as $t_project_id ) {
+			$t_project_users_list = project_get_all_user_rows( $t_project_id, $p_access );
+			# Do a 'smart' merge of the project's user list, into an
+			# associative array (to remove duplicates)
+			# Use a while loop for better performance
+			$i = 0;
+			while( isset( $t_project_users_list[$i] ) ) {
+				$t_users[ $t_project_users_list[$i]['id'] ] = $t_project_users_list[$i];
+				$i++;
+		}
+			unset( $t_project_users_list );
+		}
+		unset( $t_projects );
+	} else {
+		$t_users = project_get_all_user_rows( $p_project_id, $p_access );
+	}
 
 	$t_display = array();
 	$t_sort = array();
 	$t_show_realname = ( ON == config_get( 'show_realname' ) );
 	$t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
-	foreach( $t_users as $t_user ) {
+	foreach( $t_users as $t_key => $t_user ) {
 		$t_user_name = string_attribute( $t_user['username'] );
 		$t_sort_name = utf8_strtolower( $t_user_name );
 		if( $t_show_realname && ( $t_user['realname'] <> '' ) ) {
@@ -274,7 +292,8 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 		$t_sort[] = $t_sort_name;
 	}
 	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
-	$t_count = count( $t_sort );
+	unset( $t_sort );
+	$t_count = count( $t_users );
 	for( $i = 0;$i < $t_count;$i++ ) {
 		$t_row = $t_users[$i];
 		echo '<option value="' . $t_row['id'] . '" ';
@@ -466,6 +485,15 @@ function print_assign_to_option_list( $p_user_id = '', $p_project_id = null, $p_
 	print_user_option_list( $p_user_id, $p_project_id, $p_threshold );
 }
 
+
+function print_note_option_list( $p_user_id = '', $p_project_id = null, $p_threshold = null ) {
+	if ( null === $p_threshold ) {
+		$p_threshold = config_get( 'add_bugnote_threshold' );
+	}
+
+	print_user_option_list( $p_user_id, $p_project_id, $p_threshold );
+}
+
 /**
  * List projects that the current user has access to.
  *
@@ -482,7 +510,7 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
 	if( $p_include_all_projects ) {
 		echo '<option value="' . ALL_PROJECTS . '"';
 		if ( $p_project_id !== null ) {
-			check_selected( (int)$p_project_id, ALL_PROJECTS );
+			check_selected( $p_project_id, ALL_PROJECTS, false );
 		}
 		echo '>' . lang_get( 'all_projects' ) . '</option>' . "\n";
 	}
@@ -493,7 +521,7 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
 		if( $t_id != $p_filter_project_id ) {
 			echo '<option value="' . $t_id . '"';
 			if ( $p_project_id !== null ) {
-				check_selected( (int)$p_project_id, $t_id );
+				check_selected( $p_project_id, $t_id, false );
 			}
 			echo '>' . string_attribute( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
 			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, Array() );
@@ -510,13 +538,12 @@ function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_fi
 	for( $i = 0;$i < $t_project_count;$i++ ) {
 		$t_full_id = $t_id = $t_project_ids[$i];
 		if( $t_id != $p_filter_project_id ) {
-			echo "<option value=\"";
 			if( $p_trace ) {
 				$t_full_id = join( $p_parents, ";" ) . ';' . $t_id;
 			}
-			echo $t_full_id . '"';
+			echo '<option value="' . $t_full_id . '"';
 			if ( $p_project_id !== null ) {
-				check_selected( $p_project_id, $t_full_id );
+				check_selected( $p_project_id, $t_full_id, false );
 			}
 			echo '>' . str_repeat( '&#160;', count( $p_parents ) ) . str_repeat( '&#187;', count( $p_parents ) ) . ' ' . string_attribute( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
 			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_parents );
@@ -715,7 +742,7 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 
 		$t_version = string_attribute( $version['version'] );
 
-		if ( !in_array( $t_version, $t_listed ) ) {
+		if ( !in_array( $t_version, $t_listed, true ) ) {
 			$t_listed[] = $t_version;
 			echo '<option value="' . $t_version . '"';
 			check_selected( $p_version, $version['version'] );
@@ -776,7 +803,7 @@ function print_enum_string_option_list( $p_enum_name, $p_val = 0 ) {
 	}
 }
 
-/*
+/**
  * Returns a list of valid status options based on workflow
  * @param int $p_user_auth User's access level
  * @param int $p_current_value Current issue's status
@@ -1133,23 +1160,37 @@ function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $
 	print_link( "$p_page?sort=$t_field&dir=$t_dir", $p_string );
 }
 
-# print a button which presents a standalone form.
-# $p_action_page - The action page
-# $p_label - The button label
-# $p_args_to_post - An associative array with key => value to be posted, can be null.
-function print_button( $p_action_page, $p_label, $p_args_to_post = null ) {
+/**
+ * Print a button which presents a standalone form.
+ * If $p_security_token is OFF, the button's form will not contain a security
+ * field; this is useful when form does not result in modifications (CSRF is not
+ * needed). If otherwise specified (i.e. not null), the parameter must contain
+ * a valid security token, previously generated by form_security_token().
+ * Use this to avoid performance issues when loading pages having many calls to
+ * this function, such as adm_config_report.php.
+ * @param string $p_action_page The action page
+ * @param string $p_label The button label
+ * @param array $p_args_to_post Associative array of arguments to be posted, with
+ *                              arg name => value, defaults to null (no args)
+ * @param mixed $p_security_token Optional; null (default), OFF or security token string
+ * @see form_security_token()
+ */
+function print_button( $p_action_page, $p_label, $p_args_to_post = null, $p_security_token = null ) {
 	$t_form_name = explode( '.php', $p_action_page, 2 );
 	# TODO: ensure all uses of print_button supply arguments via $p_args_to_post (POST)
 	# instead of via $p_action_page (GET). Then only add the CSRF form token if
 	# arguments are being sent via the POST method.
 	echo '<form method="post" action="', htmlspecialchars( $p_action_page ), '" class="action-button">';
 	echo '<fieldset>';
-	echo form_security_field( $t_form_name[0] );
+	if( $p_security_token !== OFF ) {
+		echo form_security_field( $t_form_name[0], $p_security_token );
+	}
 	echo '<input type="submit" class="button-small" value="', $p_label, '" />';
 
 	if( $p_args_to_post !== null ) {
 		foreach( $p_args_to_post as $t_var => $t_value ) {
-			echo "<input type=\"hidden\" name=\"$t_var\" value=\"$t_value\" />";
+			echo '<input type="hidden" name="' . $t_var .
+				'" value="' . htmlentities( $t_value ) . '" />';
 		}
 	}
 
@@ -1168,8 +1209,8 @@ function print_bracket_link_prepared( $p_link ) {
 function print_bracket_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' ) {
 	echo '<span class="bracket-link';
 	if ($p_class !== '') {
-	    echo ' bracket-link-',$p_class; # prefix on a container allows styling of whole link, including brackets
-    }
+		echo ' bracket-link-',$p_class; # prefix on a container allows styling of whole link, including brackets
+	}
 	echo '">[&#160;';
 	print_link( $p_link, $p_url_text, $p_new_window, $p_class );
 	echo '&#160;]</span> ';
@@ -1363,8 +1404,8 @@ function print_documentation_link( $p_a_name = '' ) {
 # prints the signup link
 function print_signup_link() {
 	if ( ( ON == config_get_global( 'allow_signup' ) ) &&
-	     ( LDAP != config_get_global( 'login_method' ) ) &&
-	     ( ON == config_get( 'enable_email_notification' ) )
+		 ( LDAP != config_get_global( 'login_method' ) ) &&
+		 ( ON == config_get( 'enable_email_notification' ) )
 	   ) {
 		print_bracket_link( 'signup_page.php', lang_get( 'signup_link' ) );
 	}
@@ -1379,9 +1420,9 @@ function print_login_link() {
 function print_lost_password_link() {
 	# lost password feature disabled or reset password via email disabled -> stop here!
 	if ( ( LDAP != config_get_global( 'login_method' ) ) &&
-	     ( ON == config_get( 'lost_password_feature' ) ) &&
-	     ( ON == config_get( 'send_reset_password' ) ) &&
-	     ( ON == config_get( 'enable_email_notification' ) ) ) {
+		 ( ON == config_get( 'lost_password_feature' ) ) &&
+		 ( ON == config_get( 'send_reset_password' ) ) &&
+		 ( ON == config_get( 'enable_email_notification' ) ) ) {
 		print_bracket_link( 'lost_pwd_page.php', lang_get( 'lost_password_link' ) );
 	}
 }
@@ -1532,6 +1573,7 @@ function print_bug_attachment_header( $p_attachment ) {
 		}
 		echo lang_get( 'word_separator' ) . '(' . number_format( $p_attachment['size'] ) . lang_get( 'word_separator' ) . lang_get( 'bytes' ) . ')';
 		echo lang_get( 'word_separator' ) . '<span class="italic">' . date( config_get( 'normal_date_format' ), $p_attachment['date_added'] ) . '</span>';
+		event_signal('EVENT_VIEW_BUG_ATTACHMENT', array($p_attachment));
 	} else {
 		print_file_icon( $p_attachment['display_name'] );
 		echo lang_get( 'word_separator' ) . '<span class="strike">' . string_display_line( $p_attachment['display_name'] ) . '</span>' . lang_get( 'word_separator' ) . '(' . lang_get( 'attachment_missing' ) . ')';
@@ -1624,12 +1666,11 @@ function print_timezone_option_list( $p_timezone ) {
 
 	$t_identifiers = timezone_identifiers_list();
 
-	foreach ( $t_identifiers as $t_identifier )
-	{
-	    $t_zone = explode( '/', $t_identifier );
+	foreach ( $t_identifiers as $t_identifier ) {
+		$t_zone = explode( '/', $t_identifier );
 
-	    // Only use "friendly" continent names - http://us.php.net/manual/en/timezones.others.php
-		if ($t_zone[0] == 'Africa' ||
+		// Only use "friendly" continent names - http://us.php.net/manual/en/timezones.others.php
+		if( $t_zone[0] == 'Africa' ||
 			$t_zone[0] == 'America' ||
 			$t_zone[0] == 'Antarctica' ||
 			$t_zone[0] == 'Arctic' ||
@@ -1638,12 +1679,11 @@ function print_timezone_option_list( $p_timezone ) {
 			$t_zone[0] == 'Australia' ||
 			$t_zone[0] == 'Europe' ||
 			$t_zone[0] == 'Indian' ||
-			$t_zone[0] == 'Pacific' )
-		{
-	        if ( isset( $t_zone[1] ) != '' )
-	        {
-	            $t_locations[$t_zone[0]][$t_zone[0] . '/' . $t_zone[1]] = array( str_replace( '_', ' ', $t_zone[1] ), $t_identifier );
-	        }
+			$t_zone[0] == 'Pacific'
+		) {
+			if( isset( $t_zone[1] ) != '' ) {
+				$t_locations[$t_zone[0]][$t_zone[0] . '/' . $t_zone[1]] = array( str_replace( '_', ' ', $t_zone[1] ), $t_identifier );
+			}
 		}
 	}
 

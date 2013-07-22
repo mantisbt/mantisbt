@@ -17,7 +17,7 @@
 /**
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 /**
@@ -64,7 +64,7 @@ html_page_top();
 ?>
 		<form method="post" action="<?php echo $_SERVER['SCRIPT_NAME']?>#email">
 		Email Address: <?php echo config_get_global( 'webmaster_email' );?><br />
-		<input type="submit" value="Send Mail" name="mail_test" />
+		<input type="submit" class="button" value="Send Mail" name="mail_test" />
 		</form>
 	</td>
 </tr>

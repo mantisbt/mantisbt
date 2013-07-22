@@ -17,7 +17,7 @@
 /**
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
@@ -61,7 +61,7 @@ access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_versio
 
 # Confirm with the user
 helper_ensure_confirmed( lang_get( 'version_delete_sure' ) .
-	'<br/>' . lang_get( 'version_label' ) . lang_get( 'word_separator' ) . $t_version_info->version,
+	'<br/>' . lang_get( 'version_label' ) . lang_get( 'word_separator' ) . string_display_line( $t_version_info->version ),
 	lang_get( 'delete_version_button' ) );
 
 version_remove( $f_version_id );

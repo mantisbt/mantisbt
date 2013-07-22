@@ -22,7 +22,7 @@
  * @package CoreAPI
  * @subpackage LoggingAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses config_api.php
@@ -50,7 +50,7 @@ $g_log_levels = array(
  * Log an event
  * @param int $p_level Valid debug log level
  * @param string|array $p_msg Either a string, or an array structured as (string,execution time)
- * @param object $p_backtrace [Optional] debug_backtrace() stack to use 
+ * @param object $p_backtrace [Optional] debug_backtrace() stack to use
  * @return null
  */
 function log_event( $p_level, $p_msg, $p_backtrace = null ) {
@@ -90,7 +90,7 @@ function log_event( $p_level, $p_msg, $p_backtrace = null ) {
 	$t_now = date( config_get_global( 'complete_date_format' ) );
 	$t_level = $g_log_levels[$p_level];
 
-	$t_plugin_event = '[' . $t_level . '] ' . $p_msg;
+	$t_plugin_event = '[' . $t_level . '] ' . $s_msg;
 	if( function_exists( 'event_signal' ) )
 		event_signal( 'EVENT_LOG', array( $t_plugin_event ) );
 
@@ -99,14 +99,16 @@ function log_event( $p_level, $p_msg, $p_backtrace = null ) {
 	if ( is_blank( $t_log_destination ) ) {
 		$t_destination = '';
 	} else {
+		# Use @ to avoid error when there is no delimiter in log destination
 		@list( $t_destination, $t_modifiers ) = explode( ':', $t_log_destination, 2 );
 	}
+
+	$t_php_event = $t_now . ' ' . $t_level . ' ' . $s_msg;
 
 	switch( $t_destination ) {
 		case 'none':
 			break;
 		case 'file':
-			$t_php_event = $t_now . ' ' . $t_level . ' ' . $s_msg;
 			error_log( $t_php_event . PHP_EOL, 3, $t_modifiers );
 			break;
 		case 'page':
@@ -124,16 +126,19 @@ function log_event( $p_level, $p_msg, $p_backtrace = null ) {
 				if( $firephp === null ) {
 					$firephp = FirePHP::getInstance(true);
 				}
-				$t_php_event = $t_now . ' ' . $t_level . ' ' . $s_msg;
 				$firephp->log( $p_msg, $t_php_event );
 				return;
 			}
 			// if firebug is not available, fall through
 		default:
 			# use default PHP error log settings
-			$t_php_event = $t_now . ' ' . $t_level . ' ' . $s_msg;
 			error_log( $t_php_event . PHP_EOL );
 			break;
+	}
+
+	# If running from command line, echo log event to stdout
+	if( $t_destination != 'none' && php_sapi_name() == 'cli' ) {
+		echo $t_php_event . PHP_EOL;
 	}
 }
 

@@ -17,7 +17,7 @@
 /**
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
@@ -232,6 +232,8 @@ if ( is_array( gpc_get( FILTER_PROPERTY_NOTE_USER_ID, null ) ) ) {
 	$f_note_user_id = gpc_get_string( FILTER_PROPERTY_NOTE_USER_ID, META_FILTER_ANY );
 	$f_note_user_id = array( $f_note_user_id );
 }
+
+$f_match_type = gpc_get_int( FILTER_PROPERTY_MATCH_TYPE, FILTER_MATCH_ALL );
 
 # these are only single values, even when doing advanced filtering
 $f_per_page				= gpc_get_int( FILTER_PROPERTY_ISSUES_PER_PAGE, -1 );
@@ -498,6 +500,7 @@ switch ( $f_type ) {
 			$t_setting_arr[ FILTER_PROPERTY_TAG_STRING ] 			= $f_tag_string;
 			$t_setting_arr[ FILTER_PROPERTY_TAG_SELECT ] 			= $f_tag_select;
 			$t_setting_arr[ FILTER_PROPERTY_NOTE_USER_ID ] 			= $f_note_user_id;
+			$t_setting_arr[ FILTER_PROPERTY_MATCH_TYPE ] 			= $f_match_type;			
 			$t_setting_arr = array_merge( $t_setting_arr, $f_filter_input );
 			break;
 	# Set the sort order and direction

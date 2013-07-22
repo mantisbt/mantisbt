@@ -17,7 +17,7 @@
 /**
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
@@ -74,9 +74,9 @@ $f_parent_id = gpc_get( 'parent_id', null );
 				echo lang_get( 'add_project_title' );
 			} ?></span></legend>
 
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container <?php echo helper_alternate_class_no_attribute() ?>">
 				<label for="project-name" class="required"><span><?php echo lang_get( 'project_name' )?></span></label>
-				<span class="input"><input type="text" id="project-name" name="name" size="64" maxlength="128" /></span>
+				<span class="input"><input type="text" id="project-name" name="name" size="60" maxlength="128" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
@@ -84,15 +84,6 @@ $f_parent_id = gpc_get( 'parent_id', null );
 				<span class="select">
 					<select id="project-status" name="status">
 						<?php print_enum_string_option_list( 'project_status' ) ?>
-					</select>
-				</span>
-				<span class="label-style"></span>
-			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
-				<label for="project-view-state"><span><?php echo lang_get( 'view_status' ) ?></span></label>
-				<span class="select">
-					<select id="project-view-state" name="view_state">
-						<?php print_enum_string_option_list( 'view_state' ) ?>
 					</select>
 				</span>
 				<span class="label-style"></span>
@@ -108,24 +99,36 @@ $f_parent_id = gpc_get( 'parent_id', null );
 				<span class="checkbox"><input type="checkbox" id="project-inherit-parent" name="inherit_parent" checked="checked" /></span>
 				<span class="label-style"></span>
 			</div><?php
-			}
+			} ?>
 
-			if ( config_get( 'allow_file_upload' ) ) {
-				$t_default_upload_path = '';
+			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<label for="project-view-state"><span><?php echo lang_get( 'view_status' ) ?></span></label>
+				<span class="select">
+					<select id="project-view-state" name="view_state">
+						<?php print_enum_string_option_list( 'view_state' ) ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</div>
+			<?php
+
+			$g_project_override = ALL_PROJECTS;
+			if( file_is_uploading_enabled() && DATABASE !== config_get( 'file_upload_method' ) ) {
+				$t_file_path = '';
 				# Don't reveal the absolute path to non-administrators for security reasons
 				if ( current_user_is_administrator() ) {
-					$t_default_upload_path = config_get( 'absolute_path_default_upload_folder' );
+					$t_file_path = config_get( 'absolute_path_default_upload_folder' );
 				}
-			?>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
-				<label for="project-file-path"><span><?php echo lang_get( 'upload_file_path' ) ?></span></label>
-				<span class="input"><input type="text" id="project-file-path" name="file_path" size="70" maxlength="250" value="<?php echo $t_default_upload_path ?>" /></span>
-				<span class="label-style"></span>
-			</div><?php
+				?>
+				<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+					<label for="project-file-path"><span><?php echo lang_get( 'upload_file_path' ) ?></span></label>
+					<span class="input"><input type="text" id="project-file-path" name="file_path" size="60" maxlength="250" value="<?php echo $t_file_path ?>" /></span>
+					<span class="label-style"></span>
+				</div><?php
 			} ?>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="project-description"><span><?php echo lang_get( 'description' ) ?></span></label>
-				<span class="textarea"><textarea id="project-description" name="description" cols="60" rows="5"></textarea></span>
+				<span class="textarea"><textarea id="project-description" name="description" cols="70" rows="5"></textarea></span>
 				<span class="label-style"></span>
 			</div>
 

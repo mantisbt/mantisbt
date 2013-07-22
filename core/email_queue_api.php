@@ -20,7 +20,7 @@
  * @package CoreAPI
  * @subpackage EmailQueueAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses constant_api.php
@@ -113,8 +113,11 @@ function email_queue_add( $p_email_data ) {
 					  " . db_param() . "
 					)";
 	db_query_bound( $query, Array( $c_email, $c_subject, $c_body, db_now(), $c_metadata ) );
+	$t_id = db_insert_id( $t_email_table, 'email_id' );
 
-	return db_insert_id( $t_email_table, 'email_id' );
+	log_event( LOG_EMAIL, "message #$t_id queued" );
+
+	return $t_id;
 }
 
 /**
@@ -177,16 +180,19 @@ function email_queue_delete( $p_email_id ) {
 
 	$query = 'DELETE FROM ' . $t_email_table . ' WHERE email_id=' . db_param();
 	db_query_bound( $query, Array( $c_email_id ) );
+
+	log_event( LOG_EMAIL, "message #$p_email_id deleted from queue" );
 }
 
 /**
  * Get array of email queue id's
+ * @param string $p_sort_order 'ASC' or 'DESC' (defaults to DESC)
  * @return array
  */
-function email_queue_get_ids() {
+function email_queue_get_ids( $p_sort_order = 'DESC' ) {
 	$t_email_table = db_get_table( 'email' );
 
-	$query = 'SELECT email_id FROM ' . $t_email_table . ' ORDER BY email_id DESC';
+	$query = "SELECT email_id FROM $t_email_table ORDER BY email_id $p_sort_order";
 	$result = db_query_bound( $query );
 
 	$t_ids = array();

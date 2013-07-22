@@ -20,7 +20,7 @@
  * @package CoreAPI
  * @subpackage ConfigurationAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses authentication_api.php
@@ -74,7 +74,7 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 	# @@ debug @@ if ($t_bypass_lookup) { echo "bp=$p_option match=$t_match_pattern <br />"; }
 
 	if( !$t_bypass_lookup ) {
-		if( $g_project_override != null && $p_project == null ) {
+		if( $g_project_override !== null && $p_project === null ) {
 			$p_project = $g_project_override;
 		}
 		# @@ debug @@ if ( ! db_is_connected() ) { echo "no db "; }

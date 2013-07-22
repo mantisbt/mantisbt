@@ -17,7 +17,7 @@
 /**
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
@@ -31,7 +31,7 @@ error_reporting( E_ALL );
 # and plugins will not be loaded.
 define( 'MANTIS_MAINTENANCE_MODE', true );
 
-@require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 require_api( 'install_helper_functions_api.php' );
 require_api( 'crypto_api.php' );
 $g_error_send_page_header = false; # bypass page headers in error handler
@@ -379,9 +379,13 @@ if( 2 == $t_install_state ) {
 					$t_error = 'MySQL 4.1.0 or later is required for installation.';
 				}
 				break;
-			case 'pgsql':
 			case 'mssql':
 			case 'mssqlnative':
+				if( version_compare( $t_version_info['version'], '9.0.0', '<' ) ) {
+					$t_error = 'SQL Server 2005 or later is required for installation.';
+				}
+				break;
+			case 'pgsql':
 			case 'db2':
 			default:
 				break;
@@ -527,7 +531,7 @@ if( !$g_database_upgrade ) {?>
 		Attempt Installation
 	</td>
 	<td>
-		<input name="go" type="submit" value="Install/Upgrade Database"></input>
+		<input name="go" type="submit" class="button" value="Install/Upgrade Database"></input>
 	</td>
 </tr>
 <input name="install" type="hidden" value="2"></input>
@@ -1016,8 +1020,8 @@ if( $g_failed ) {
 		<input name="admin_username" type="hidden" value="<?php echo $f_admin_username?>"></input>
 		<input name="admin_password" type="hidden" value="<?php echo $f_admin_password?>"></input>
 		<input name="log_queries" type="hidden" value="<?php echo( $f_log_queries ? 1 : 0 )?>"></input>
-		<input name="retry" type="submit" value="Retry"></input>
 		<input name="db_exists" type="hidden" value="<?php echo( $f_db_exists ? 1 : 0 )?>"></input>
+		<input name="retry" type="submit" class="button" value="Retry"></input>
 	</td>
 </tr>
 </table>

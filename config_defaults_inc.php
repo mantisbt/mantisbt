@@ -28,7 +28,7 @@
  *
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
@@ -69,10 +69,18 @@ $g_database_name		= 'bugtracker';
 $g_db_schema			= '';
 
 /**
- * Defines the database type. The supported default is 'mysql'.
- * Supported types: 'mysql' or 'mysqli' for MySQL, 'pgsql' for PostgreSQL,
- * 'odbc_mssql', 'mssql' for MS SQL Server, 'oci8' for Oracle, and 'db2' for
- * DB2.
+ * Defines the database type. Supported types are listed below;
+ * the corresponding PHP extension must be enabled.
+ *
+ * RDBMS           db_type       PHP ext   Comments
+ * -----           -------       -------   --------
+ * MySQL           mysql         mysql     default
+ *                 mysqli        mysqli
+ * PostgreSQL      pgsql         pgsql
+ * MS SQL Server   mssqlnative   sqlsrv    experimental
+ * Oracle          oci8          oci8      experimental
+ * DB2             db2           ibm-db2   experimental
+ *
  * @global string $g_db_type
  */
 $g_db_type				= 'mysql';
@@ -94,8 +102,9 @@ $g_dsn = '';
  * MantisBT Path Settings *
  **************************/
 
+$t_protocol = 'http';
+$t_host = 'localhost';
 if ( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
-	$t_protocol = 'http';
 	if ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
 		$t_protocol= $_SERVER['HTTP_X_FORWARDED_PROTO'];
 	} else if ( !empty( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
@@ -122,8 +131,6 @@ if ( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
 		$t_host = $_SERVER['SERVER_NAME'] . $t_port;
 	} else if ( isset( $_SERVER['SERVER_ADDR'] ) ) {
 		$t_host = $_SERVER['SERVER_ADDR'] . $t_port;
-	} else {
-		$t_host = 'localhost';
 	}
 
 	if ( !isset( $_SERVER['SCRIPT_NAME'] )) {
@@ -132,21 +139,25 @@ if ( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
 			echo ' Please try to add "fastcgi_param SCRIPT_NAME $fastcgi_script_name;" to the nginx server configuration.';
 		die;
     }
-	$t_self = $_SERVER['SCRIPT_NAME'];
-	$t_self = filter_var($t_self, FILTER_SANITIZE_STRING);
+	$t_self = filter_var( $_SERVER['SCRIPT_NAME'], FILTER_SANITIZE_STRING );
 	$t_path = str_replace( basename( $t_self ), '', $t_self );
-	$t_path = basename( $t_path ) == "admin" ? rtrim( dirname( $t_path ), '/\\' ) . '/' : $t_path;
-	$t_path = basename( $t_path ) == "soap" ? rtrim( dirname( dirname( $t_path ) ), '/\\' ) . '/' : $t_path;
+	switch( basename( $t_path ) ) {
+		case 'admin':
+			$t_path = rtrim( dirname( $t_path ), '/\\' ) . '/';
+			break;
+		case 'soap':
+			$t_path = rtrim( dirname( dirname( $t_path ) ), '/\\' ) . '/';
+			break;
+		case '':
+			$t_path = '/';
+			break;
+	}
 	if( strpos( $t_path, '&#' ) ) {
 		echo 'Can not safely determine $g_path. Please set $g_path manually in config_inc.php';
 		die;
 	}
-	$t_url	= $t_protocol . '://' . $t_host . $t_path;
-
 } else {
-	$t_path = '';
-	$t_host = '';
-	$t_protocol = '';
+	$t_path = 'mantisbt/';
 }
 
 /**
@@ -154,7 +165,7 @@ if ( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
  * requires trailing /
  * @global string $g_path
  */
-$g_path	= isset( $t_url ) ? $t_url : 'http://localhost/mantisbt/';
+$g_path	= $t_protocol . '://' . $t_host . $t_path;
 
 /**
  * path to your images directory (for icons)
@@ -292,8 +303,10 @@ $g_crypto_master_salt = '';
  ****************************/
 
 /**
- * allow users to signup for their own accounts.
- * Mail settings must be correctly configured in order for this to work
+ * Allow users to signup for their own accounts.
+ * If ON, then $g_send_reset_password must be ON as well, and mail settings
+ * must be correctly configured
+ * @see $g_send_reset_password
  * @global int $g_allow_signup
  */
 $g_allow_signup			= ON;
@@ -315,9 +328,10 @@ $g_max_failed_login_count = OFF;
 $g_notify_new_user_created_threshold_min = ADMINISTRATOR;
 
 /**
- * if ON users will be sent their password when reset.
- * if OFF the password will be set to blank. If set to ON, mail settings must be
- * correctly configured.
+ * If ON, users will be sent their password when their account is created
+ * or password reset (this requires mail settings to be correctly configured).
+ * If OFF, then the Administrator will have to provide a password when
+ * creating new accounts, and the password will be set to blank when reset.
  * @global int $g_send_reset_password
  */
 $g_send_reset_password	= ON;
@@ -997,12 +1011,26 @@ $g_differentiate_duplicates = OFF;
 $g_sort_by_last_name = OFF;
 
 /**
- * Show user avatar. The current implementation is based on
- * http://www.gravatar.com. Users will need to register there the same address
- * used in this MantisBT installation to have their avatar shown. Please note:
- * upon registration or avatar change, it takes some time for the updated
- * gravatar images to show on sites
- * @global int $g_show_avatar
+ * Show user avatar
+ *
+ * The current implementation is based on http://www.gravatar.com
+ * Users will need to register there the same email address used in this
+ * MantisBT installation to have their avatar shown.
+ * Please note: upon registration or avatar change, it takes some time for
+ * the updated gravatar images to show on sites
+ *
+ * The config can be either set to OFF (avatars disabled) or set to a string
+ * defining the default avatar to be used when none is associated with the
+ * user's email. Valid values:
+ * - OFF (default)
+ * - ON (equivalent to 'identicon')
+ * - One of Gravatar's defaults (mm, identicon, monsterid, wavatar, retro)
+ *   @link http://en.gravatar.com/site/implement/images/
+ * - An URL to the default image to be used (for example,
+ *   "http:/path/to/unknown.jpg" or "%path%images/no_avatar.png")
+ *
+ * @global int|string $g_show_avatar
+ * @see $g_show_avatar_threshold
  */
 $g_show_avatar = OFF;
 
@@ -1102,23 +1130,22 @@ $g_calendar_js_date_format = '\%Y-\%m-\%d \%H:\%M';
  */
 $g_calendar_date_format = 'Y-m-d H:i';
 
-/**************************
+/******************************
  * MantisBT TimeZone Settings *
- **************************/
+ ******************************/
 
 /**
- * Default timezone to use in MantisBT.
- * See http://us.php.net/manual/en/timezones.php
- * for a list of valid timezones.
+ * Default timezone to use in MantisBT
  *
- * The date_default_timezone_get() calculates timezone based on the following:
- * 1. Reading the TZ environment variable (if non empty)
- * 2. Reading the value of the date.timezone php.ini option (if set)
- * 3. Querying the host operating system (if supported and allowed by the OS)
- * 4. If none of the above succeed, will return a default timezone of UTC.
+ * If this config is left blank, it will be initialized by calling function
+ * {@link http://php.net/date-default-timezone-get date_default_timezone_get()}
+ * to determine the default timezone.
+ * Note that this function's behavior was modified in PHP 5.4.0.
+ *
+ * @link http://php.net/timezones List of Supported Timezones
  * @global string $g_default_timezone
  */
-$g_default_timezone = date_default_timezone_get();
+$g_default_timezone = '';
 
 /**************************
  * MantisBT News Settings *
@@ -2807,7 +2834,7 @@ $g_development_team_threshold = DEVELOPER;
  * );
  * @global array $g_set_status_threshold
  */
-$g_set_status_threshold = array();
+$g_set_status_threshold = array( NEW_ => REPORTER );
 
 /**
  * Threshold at which a user can edit his/her own bugnotes.
@@ -3049,28 +3076,36 @@ $g_colour_global = 'LightBlue';
  *****************************/
 
 /**
- * --- cookie path ---------------
- * set this to something more restrictive if needed
- * http://www.php.net/manual/en/function.setcookie.php
+ * Specifies the path under which a cookie is visible
+ * All scripts in this directory and its sub-directories will be able
+ * to access MantisBT cookies.
+ * It is recommended to set this to the actual MantisBT path.
+ * @link http://php.net/function.setcookie
  * @global string $g_cookie_path
  */
 $g_cookie_path = '/';
 
 /**
- *
+ * The domain that the MantisBT cookies are available to
  * @global string $g_cookie_domain
  */
 $g_cookie_domain = '';
 
 /**
- * cookie version for view_all_page
+ * Version of the view_all_page cookie
+ * It is not expected for the user to need to change this setting
+ * @see $g_view_all_cookie
  * @global string $g_cookie_version
  */
 $g_cookie_version = 'v8';
 
 /**
- * --- cookie prefix ---------------
- * set this to a unique identifier.  No spaces or periods.
+ * Prefix for all MantisBT cookies
+ * This should be an identifier which does not include spaces or periods,
+ * and should be unique per MantisBT installation, especially if
+ * $g_cookie_path is not restricting the cookies' scope to the actual
+ * MantisBT directory.
+ * @see $g_cookie_path
  * @global string $g_cookie_prefix
  */
 $g_cookie_prefix = 'MANTIS';
@@ -3094,10 +3129,16 @@ $g_project_cookie = '%cookie_prefix%_PROJECT_COOKIE';
 $g_view_all_cookie = '%cookie_prefix%_VIEW_ALL_COOKIE';
 
 /**
- *
- * @global string $g_manage_cookie
+ * Stores the filter criteria for the Manage User page
+ * @global string $g_manage_users_cookie
  */
-$g_manage_cookie = '%cookie_prefix%_MANAGE_COOKIE';
+$g_manage_users_cookie		= '%cookie_prefix%_MANAGE_USERS_COOKIE';
+
+/**
+ * Stores the filter criteria for the Manage Config Report page
+ * @global string $g_manage_config_cookie
+ */
+$g_manage_config_cookie		= '%cookie_prefix%_MANAGE_CONFIG_COOKIE';
 
 /**
  *
@@ -4125,8 +4166,9 @@ $g_global_settings = array(
 	'anonymous_account', 'compress_html', 'content_expire', 'allow_permanent_cookie',
 	'cookie_time_length', 'cookie_path', 'cookie_domain', 'cookie_version',
 	'cookie_prefix', 'string_cookie', 'project_cookie', 'view_all_cookie',
-	'manage_cookie', 'logout_cookie', 'bug_list_cookie', 'crypto_master_salt',
-	'custom_headers', 'database_name', 'db_username', 'db_password', 'db_schema', 'db_type',
+	'manage_config_cookie', 'manage_user_cookie', 'logout_cookie',
+	'bug_list_cookie', 'crypto_master_salt', 'custom_headers',
+	'database_name', 'db_username', 'db_password', 'db_schema', 'db_type',
 	'db_table_prefix','db_table_suffix', 'display_errors', 'form_security_validation',
 	'hostname','html_valid_tags', 'html_valid_tags_single_line', 'default_language',
 	'language_auto_map', 'fallback_language', 'login_method', 'plugins_enabled', 'session_handler',
@@ -4156,3 +4198,6 @@ $g_global_settings = array(
  */
 $g_mantistouch_url = '';
 
+
+# Temporary variables should not remain defined in global scope
+unset( $t_protocol, $t_host, $t_hosts, $t_port, $t_self, $t_path, $t_use_iis );

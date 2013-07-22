@@ -20,7 +20,7 @@
  * @package CoreAPI
  * @subpackage UserPreferencesAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses authentication_api.php
@@ -567,9 +567,10 @@ function user_pref_get_language( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 function user_pref_set_pref( $p_user_id, $p_pref_name, $p_pref_value, $p_project_id = ALL_PROJECTS ) {
 	$t_prefs = user_pref_get( $p_user_id, $p_project_id );
 
-	$t_prefs->$p_pref_name = $p_pref_value;
-
-	user_pref_set( $p_user_id, $t_prefs, $p_project_id );
+	if ( $t_prefs->$p_pref_name != $p_pref_value ) {
+		$t_prefs->$p_pref_name = $p_pref_value;
+		user_pref_set( $p_user_id, $t_prefs, $p_project_id );
+	}
 
 	return true;
 }

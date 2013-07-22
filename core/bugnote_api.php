@@ -20,7 +20,7 @@
  * @package CoreAPI
  * @subpackage BugnoteAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses access_api.php
@@ -143,34 +143,35 @@ function bugnote_is_user_reporter( $p_bugnote_id, $p_user_id ) {
  * @return false|int false or indicating bugnote id added
  * @access public
  */
-function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_private = false, $p_type = 0, $p_attr = '', $p_user_id = null, $p_send_email = TRUE, $p_date_submitted = 0, $p_last_modified = 0, $p_skip_bug_update = FALSE, $p_log_history = TRUE ) {
+function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_private = false, $p_type = BUGNOTE, $p_attr = '', $p_user_id = null, $p_send_email = TRUE, $p_date_submitted = 0, $p_last_modified = 0, $p_skip_bug_update = FALSE, $p_log_history = TRUE ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
 	$c_time_tracking = helper_duration_to_minutes( $p_time_tracking );
-	$c_private = db_prepare_bool( $p_private );
 	$c_type = db_prepare_int( $p_type );
 	$c_date_submitted = $p_date_submitted <= 0 ? db_now() : db_prepare_int( $p_date_submitted );
 	$c_last_modified = $p_last_modified <= 0 ? db_now() : db_prepare_int( $p_last_modified );
 
+	if( REMINDER !== $p_type ) {
+		# Check if this is a time-tracking note
+		$t_time_tracking_enabled = config_get( 'time_tracking_enabled' );
+		if( ON == $t_time_tracking_enabled && $c_time_tracking > 0 ) {
+			$t_time_tracking_without_note = config_get( 'time_tracking_without_note' );
+			if( is_blank( $p_bugnote_text ) && OFF == $t_time_tracking_without_note ) {
+				error_parameters( lang_get( 'bugnote' ) );
+				trigger_error( ERROR_EMPTY_FIELD, ERROR );
+			}
+			$c_type = TIME_TRACKING;
+		} else if( is_blank( $p_bugnote_text ) ) {
+			# This is not time tracking (i.e. it's a normal bugnote)
+			# @todo should we not trigger an error in this case ?
+			return false;
+		}
+	}
+
 	$t_bugnote_text_table = db_get_table( 'bugnote_text' );
 	$t_bugnote_table = db_get_table( 'bugnote' );
 
-	$t_time_tracking_enabled = config_get( 'time_tracking_enabled' );
-	$t_time_tracking_without_note = config_get( 'time_tracking_without_note' );
-
-	if( ON == $t_time_tracking_enabled && $c_time_tracking > 0 ) {
-		if( is_blank( $p_bugnote_text ) && OFF == $t_time_tracking_without_note ) {
-			error_parameters( lang_get( 'bugnote' ) );
-			trigger_error( ERROR_EMPTY_FIELD, ERROR );
-		}
-		$c_type = TIME_TRACKING;
-	} else if( is_blank( $p_bugnote_text ) ) {
-		return false;
-	}
-
-	$t_bugnote_text = $p_bugnote_text;
-
 	# Event integration
-	$t_bugnote_text = event_signal( 'EVENT_BUGNOTE_DATA', $t_bugnote_text, $c_bug_id );
+	$t_bugnote_text = event_signal( 'EVENT_BUGNOTE_DATA', $p_bugnote_text, $c_bug_id );
 
 	# insert bugnote text
 	$query = 'INSERT INTO ' . $t_bugnote_text_table . ' ( note ) VALUES ( ' . db_param() . ' )';
@@ -187,7 +188,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	}
 
 	# Check for private bugnotes.
-	if( $c_private && access_has_bug_level( config_get( 'set_view_status_threshold' ), $p_bug_id, $c_user_id ) ) {
+	if( $p_private && access_has_bug_level( config_get( 'set_view_status_threshold' ), $p_bug_id, $c_user_id ) ) {
 		$t_view_state = VS_PRIVATE;
 	} else {
 		$t_view_state = VS_PUBLIC;

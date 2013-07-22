@@ -23,7 +23,7 @@
  * @package CoreAPI
  * @subpackage PluginAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses access_api.php
@@ -138,9 +138,9 @@ function plugin_file( $p_file, $p_redirect = false, $p_basename = null ) {
  * @param string Plugin basename
  */
 function plugin_file_include( $p_filename, $p_basename = null ) {
-    
+
     global $g_plugin_mime_types;
-    
+
 	if( is_null( $p_basename ) ) {
 		$t_current = plugin_get_current();
 	} else {
@@ -151,17 +151,17 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
 	if( false === $t_file_path ) {
 		trigger_error( ERROR_GENERIC, ERROR );
 	}
-	
+
 	$t_content_type = '';
 	$finfo = finfo_get_if_available();
-	
+
 	if ( $finfo ) {
 		$t_file_info_type = $finfo->file( $t_file_path );
 		if ( $t_file_info_type !== false ) {
 			$t_content_type = $t_file_info_type;
 		}
 	}
-	
+
 	// allow overriding the content type for specific text and image extensions
 	// see bug #13193 for details
 	if ( strpos($t_content_type, 'text/') === 0 || strpos( $t_content_type, 'image/') === 0 ) {
@@ -173,7 +173,7 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
 
 	if ( $t_content_type )
     	header('Content-Type: ' . $t_content_type );
-	
+
 	readfile( $t_file_path );
 }
 

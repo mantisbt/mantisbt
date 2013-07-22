@@ -23,7 +23,7 @@
  *
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses authentication_api.php
@@ -93,6 +93,7 @@ if ( $t_local_config && file_exists( $t_local_config ) ){
 	require_once( $t_local_config );
 	$t_config_inc_found = true;
 }
+unset( $t_local_config );
 
 # Remember (globally) which API files have already been loaded
 $g_api_included = array();
@@ -155,7 +156,7 @@ function __autoload( $className ) {
 # Register the autoload function to make it effective immediately
 spl_autoload_register( '__autoload' );
 
-require_once( 'core/mobile_api.php' );
+require_api( 'mobile_api.php' );
 
 if ( strlen( $GLOBALS['g_mantistouch_url'] ) > 0 && mobile_is_mobile_browser() ) {
 	$t_url = sprintf( $GLOBALS['g_mantistouch_url'], $GLOBALS['g_path'] );
@@ -197,6 +198,7 @@ if ( ( $t_output = ob_get_contents() ) != '' ) {
 	echo var_dump( $t_output );
 	die;
 }
+unset( $t_output );
 
 # Start HTML compression handler (if enabled)
 require_api( 'compress_api.php' );
@@ -205,6 +207,11 @@ compress_start_handler();
 # If no configuration file exists, redirect the user to the admin page so
 # they can complete installation and configuration of MantisBT
 if ( false === $t_config_inc_found ) {
+	if( php_sapi_name() == 'cli' ) {
+		echo "Error: config_inc.php file not found; ensure MantisBT is properly setup.\n";
+		exit(1);
+	}
+
 	if ( !( isset( $_SERVER['SCRIPT_NAME'] ) && ( 0 < strpos( $_SERVER['SCRIPT_NAME'], 'admin' ) ) ) ) {
 		header( 'Content-Type: text/html' );
 		header( "Location: admin/install.php" );
@@ -252,6 +259,12 @@ if ( function_exists( 'timezone_identifiers_list' ) ) {
 		// if a default timezone is set in config, set it here, else we use php.ini's value
 		// having a timezone set avoids a php warning
 		date_default_timezone_set( config_get_global( 'default_timezone' ) );
+	} else {
+		# To ensure proper detection of timezone settings issues, we must not
+		# initialize the default timezone when executing admin checks
+		if( basename( $g_short_path ) != 'check' ) {
+			config_set_global( 'default_timezone', date_default_timezone_get(), true );
+		}
 	}
 
 	require_api( 'authentication_api.php' );

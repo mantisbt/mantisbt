@@ -17,7 +17,7 @@
 /**
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
@@ -138,7 +138,7 @@ print_summary_submenu(); ?>
 		<?php echo lang_get( 'summary_title' ) ?>
 	</td>
 </tr>
-<tr>
+<tr class="vtop">
 	<td width="50%">
 		<?php # PROJECT #
 			if ( 1 < count( $t_project_ids ) ) { ?>

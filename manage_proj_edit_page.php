@@ -17,7 +17,7 @@
 /**
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
@@ -78,6 +78,7 @@ $f_project_id = gpc_get_int( 'project_id' );
 $f_show_global_users = gpc_get_bool( 'show_global_users' );
 
 project_ensure_exists( $f_project_id );
+$g_project_override = $f_project_id;
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
 $row = project_get_row( $f_project_id );
@@ -97,8 +98,8 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			<?php echo form_security_field( 'manage_proj_update' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<div class="field-container <?php echo helper_alternate_class_no_attribute() ?>">
-				<label for="project-name"><span><?php echo lang_get( 'project_name' ) ?></span></label>
-				<span class="input"><input type="text" id="project-name" name="name" size="50" maxlength="128" value="<?php echo string_attribute( $row['name'] ) ?>" /></span>
+				<label for="project-name" class="required"><span><?php echo lang_get( 'project_name' ) ?></span></label>
+				<span class="input"><input type="text" id="project-name" name="name" size="60" maxlength="128" value="<?php echo string_attribute( $row['name'] ) ?>" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
@@ -130,23 +131,23 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 				<span class="label-style"></span>
 			</div>
 			<?php
-			if ( file_is_uploading_enabled() ) { ?>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
-				<label for="project-file-path"><span><?php echo lang_get( 'upload_file_path' ) ?></span></label>
-				<?php
-					$t_file_path = $row['file_path'];
-					# Don't reveal the absolute path to non-administrators for security reasons
-					if ( is_blank( $t_file_path ) && current_user_is_administrator() ) {
-						$t_file_path = config_get( 'absolute_path_default_upload_folder' );
-					}
+			$g_project_override = $f_project_id;
+			if( file_is_uploading_enabled() && DATABASE !== config_get( 'file_upload_method' ) ) {
+				$t_file_path = $row['file_path'];
+				# Don't reveal the absolute path to non-administrators for security reasons
+				if ( is_blank( $t_file_path ) && current_user_is_administrator() ) {
+					$t_file_path = config_get( 'absolute_path_default_upload_folder' );
+				}
 				?>
-				<span class="input"><input type="text" id="project-file-path" name="file_path" size="50" maxlength="250" value="<?php echo string_attribute( $t_file_path ) ?>" /></span>
-				<span class="label-style"></span>
-			</div><?php
+				<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+					<label for="project-file-path"><span><?php echo lang_get( 'upload_file_path' ) ?></span></label>
+					<span class="input"><input type="text" id="project-file-path" name="file_path" size="60" maxlength="250" value="<?php echo string_attribute( $t_file_path ) ?>" /></span>
+					<span class="label-style"></span>
+				</div><?php
 			} ?>
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="project-description"><span><?php echo lang_get( 'description' ) ?></span></label>
-				<span class="textarea"><textarea id="project-description" name="description" cols="60" rows="5"><?php echo string_textarea( $row['description'] ) ?></textarea></span>
+				<span class="textarea"><textarea id="project-description" name="description" cols="70" rows="5"><?php echo string_textarea( $row['description'] ) ?></textarea></span>
 				<span class="label-style"></span>
 			</div>
 
@@ -204,7 +205,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 					<option value="<?php echo $t_project['id'] ?>"><?php echo string_attribute( $t_project['name'] ) ?></option><?php
 				} # End looping over projects ?>
 				</select>
-				<input type="submit" value="<?php echo lang_get('add_subproject'); ?>" />
+				<input type="submit" class="button" value="<?php echo lang_get( 'add_subproject' ); ?>" />
 			</fieldset>
 		</form>
 	<?php
@@ -257,10 +258,17 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 				</tr><?php
 				} # End of foreach loop over subprojects ?>
 			</table>
-			<span class="submit-button"><input type="submit" value="<?php echo lang_get( 'update_subproject_inheritance' ) ?>" /></span>
+			<span class="submit-button">
+				<input type="submit" class="button" value="<?php echo lang_get( 'update_subproject_inheritance' ) ?>" />
+			</span>
 		</fieldset>
 	</form><?php
-	} # End of hiding subproject listing if there are no subprojects ?>
+		# End of subprojects listing / update form
+	} else {
+		# If there are no subprojects, clear floats to h2 overlap on div border
+	?>
+		<div class="br"></div>
+	<?php } ?>
 
 </div>
 
@@ -536,7 +544,11 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 		$t_user = $t_users[$i];
 ?>
 		<tr <?php echo helper_alternate_class() ?>>
-			<td><?php echo $t_display[$i] ?></td>
+			<td>
+				<a href="manage_user_edit_page.php?user_id=<?php echo $t_user['id'] ?>">
+					<?php echo $t_display[$i] ?>
+				</a>
+			</td>
 			<td>
 			<?php
 				$t_email = user_get_email( $t_user['id'] );

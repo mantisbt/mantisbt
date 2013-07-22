@@ -21,7 +21,7 @@
  * @subpackage TagAPI
  * @author John Reese
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses access_api.php
@@ -232,30 +232,30 @@ function tag_parse_filters( $p_string ) {
 
 /**
  * Returns all available tags
- * 
+ *
  * @param integer A string to match the beginning of the tag name
  * @param integer the number of tags to return
  * @param integer the offset of the result
- * 
+ *
  * @return array Tag rows, sorted by name
  */
 function tag_get_all( $p_name_filter, $p_count, $p_offset) {
-	
+
 	$t_tag_table = db_get_table( 'tag' );
-	
+
 	$t_where = '';
 	$t_where_params = array();
-	
-	if ( $p_name_filter ) {
+
+	if ( !is_blank( $p_name_filter ) ) {
 		$t_where = 'WHERE '.db_helper_like('name');
 		$t_where_params[] = $p_name_filter.'%';
 	}
-	
+
 	$t_query = "SELECT * FROM $t_tag_table
 		$t_where ORDER BY name";
-	
+
 	$t_result = db_query_bound( $t_query, $t_where_params, $p_count, $p_offset);
-	
+
 	return $t_result;
 }
 
@@ -264,23 +264,23 @@ function tag_get_all( $p_name_filter, $p_count, $p_offset) {
  * @param integer A string to match the beginning of the tag name
  */
 function tag_count ( $p_name_filter ) {
-	
+
 	$t_tag_table = db_get_table( 'tag' );
-	
+
 	$t_where = '';
 	$t_where_params = array();
-	
+
 	if ( $p_name_filter ) {
 		$t_where = 'WHERE '.db_helper_like('name');
 		$t_where_params[] = $p_name_filter.'%';
 	}
-	
+
 	$t_query = "SELECT count(*) FROM $t_tag_table $t_where";
-	
+
 	$t_result = db_query_bound( $t_query, $t_where_params );
 	$t_row = db_fetch_array( $t_result );
 	return (int)db_result( $t_result );
-	
+
 }
 
 /**
@@ -481,23 +481,26 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 	if ( 0 != $p_bug_id ) {
 		$t_bug_tag_table = db_get_table( 'bug_tag' );
 
-		if ( db_is_mssql() ) {
-			$t_params[] = $p_bug_id;
+		$t_params[] = $p_bug_id;
+
+		if ( config_get_global( 'db_type' ) == 'odbc_mssql' ) {
 			$query = "SELECT t.id FROM $t_tag_table t
 					LEFT JOIN $t_bug_tag_table b ON t.id=b.tag_id
 					WHERE b.bug_id IS NULL OR b.bug_id != " . db_param();
 			$result = db_query_bound( $query, $t_params );
+
+			$t_params = null;
 
 			$t_subquery_results = array();
 
 			while( $row = db_fetch_array( $result ) ) {
 				$t_subquery_results[] = (int)$row['id'];
 			}
-			
+
 			if ( count ( $t_subquery_results ) == 0 ) {
 			    return array();
 			}
-			
+
 			$query = "SELECT id, name, description FROM $t_tag_table WHERE id IN ( " . implode( ', ', $t_subquery_results ) . ')';
 		} else {
 			$query = "SELECT id, name, description FROM $t_tag_table WHERE id IN (
@@ -506,7 +509,6 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 					WHERE b.bug_id IS NULL OR b.bug_id != " . db_param() .
 				')';
 		}
-		$t_params[] = $p_bug_id;
 	} else {
 		$query = 'SELECT id, name, description FROM ' . $t_tag_table;
 	}

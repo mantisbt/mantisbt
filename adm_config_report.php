@@ -17,7 +17,7 @@
 /**
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
@@ -63,39 +63,46 @@ html_page_top( lang_get( 'configuration_report' ) );
 print_manage_menu( 'adm_config_report.php' );
 print_manage_config_menu( 'adm_config_report.php' );
 
+$t_config_types = array(
+	CONFIG_TYPE_DEFAULT => 'default',
+	CONFIG_TYPE_INT     => 'integer',
+	CONFIG_TYPE_FLOAT   => 'float',
+	CONFIG_TYPE_COMPLEX => 'complex',
+	CONFIG_TYPE_STRING  => 'string',
+);
+
 function get_config_type( $p_type ) {
-	switch( $p_type ) {
-		case CONFIG_TYPE_INT:
-			return "integer";
-		case CONFIG_TYPE_FLOAT:
-			return "float";
-		case CONFIG_TYPE_COMPLEX:
-			return "complex";
-		case CONFIG_TYPE_STRING:
-		default:
-			return "string";
+	global $t_config_types;
+
+	if( array_key_exists( $p_type, $t_config_types ) ) {
+		return $t_config_types[$p_type];
+	} else {
+		return $t_config_types[CONFIG_TYPE_DEFAULT];
 	}
 }
 
-function print_config_value_as_string( $p_type, $p_value ) {
+function print_config_value_as_string( $p_type, $p_value, $p_for_display = true ) {
 	$t_corrupted = false;
 
 	switch( $p_type ) {
+		case CONFIG_TYPE_DEFAULT:
+			return;
 		case CONFIG_TYPE_FLOAT:
-			$t_value = (float)$p_value;
-			echo $t_value;
+			echo (float)$p_value;
 			return;
 		case CONFIG_TYPE_INT:
-			$t_value = (integer)$p_value;
-			echo $t_value;
+			echo (integer)$p_value;
 			return;
 		case CONFIG_TYPE_STRING:
-			$t_value = config_eval( $p_value );
-			echo string_nl2br( string_html_specialchars( $t_value ) );
+			$t_value = string_nl2br( string_html_specialchars( config_eval( $p_value ) ) );
+			if( $p_for_display ) {
+				$t_value = '<p id="adm-config-value">' . "'$t_value'" . '</p>';
+			}
+			echo $t_value;
 			return;
 		case CONFIG_TYPE_COMPLEX:
 			$t_value = @unserialize( $p_value );
-			if ( $t_value === false ) {
+			if( $t_value === false ) {
 				$t_corrupted = true;
 			}
 			break;
@@ -104,118 +111,392 @@ function print_config_value_as_string( $p_type, $p_value ) {
 			break;
 	}
 
-	echo '<pre>';
-
-	if ( $t_corrupted ) {
-		echo lang_get( 'configuration_corrupted' );
+	if( $t_corrupted ) {
+		$t_output = $p_for_display ? lang_get( 'configuration_corrupted' ) : '';
 	} else {
-		if ( function_exists( 'var_export' ) ) {
-			var_export( $t_value );
-		} else {
-			print_r( $t_value );
-		}
+		$t_output = var_export( $t_value, true );
 	}
 
-	echo '</pre>';
+	if( $p_for_display ) {
+		echo '<pre id="adm-config-value">' . string_attribute( $t_output ) . '</pre>';
+	} else {
+		echo $t_output;
+	}
 }
 
-$t_config_table = db_get_table( 'config' );
-$query = "SELECT config_id, user_id, project_id, type, value, access_reqd FROM $t_config_table ORDER BY user_id, project_id, config_id";
+function print_option_list_from_array( $p_array, $p_filter_value ) {
+	foreach( $p_array as $t_key => $t_value ) {
+		echo "<option value='$t_key'";
+		check_selected( (string)$p_filter_value, (string)$t_key );
+		echo '>' . string_attribute( $t_value ) . "</option>\n";
+	}
+}
+
+
+# Get filter values
+$t_filter_save          = gpc_get_bool( 'save' );
+$t_filter_default       = gpc_get_bool( 'default_filter_button', false );
+$t_filter_reset         = gpc_get_bool( 'reset_filter_button', false );
+if( $t_filter_default ) {
+	$t_filter_user_value    = ALL_USERS;
+	$t_filter_project_value = ALL_PROJECTS;
+	$t_filter_config_value  = META_FILTER_NONE;
+} else if( $t_filter_reset ) {
+	$t_filter_user_value    = META_FILTER_NONE;
+	$t_filter_project_value = META_FILTER_NONE;
+	$t_filter_config_value  = META_FILTER_NONE;
+} else {
+	$t_filter_user_value    = gpc_get_int( 'filter_user_id', ALL_USERS );
+	$t_filter_project_value = gpc_get_int( 'filter_project_id', ALL_PROJECTS );
+	$t_filter_config_value  = gpc_get_string( 'filter_config_id', META_FILTER_NONE );
+}
+
+# Manage filter's persistency through cookie
+$t_cookie_name = config_get( 'manage_config_cookie' );
+if( $t_filter_save ) {
+	# Save user's filter to the cookie
+	$t_cookie_string = implode(
+		':',
+		array(
+			$t_filter_user_value,
+			$t_filter_project_value,
+			$t_filter_config_value,
+		)
+	);
+	gpc_set_cookie( $t_cookie_name, $t_cookie_string, true );
+} else {
+	# Retrieve the filter from the cookie if it exists
+	$t_cookie_string = gpc_get_cookie( $t_cookie_name, null );
+	if( null !== $t_cookie_string ) {
+		$t_cookie_contents = explode( ':', $t_cookie_string );
+
+		$t_filter_user_value    = $t_cookie_contents[0];
+		$t_filter_project_value = $t_cookie_contents[1];
+		$t_filter_config_value  = $t_cookie_contents[2];
+
+		if( $t_filter_project_value != META_FILTER_NONE && !project_exists( $t_filter_project_value ) ) {
+			$t_filter_project_value = ALL_PROJECTS;
+		}
+	}
+}
+
+# Get config edit values
+$t_edit_user_id         = gpc_get_int( 'user_id', $t_filter_user_value == META_FILTER_NONE ? ALL_USERS : $t_filter_user_value );
+$t_edit_project_id      = gpc_get_int( 'project_id', $t_filter_project_value == META_FILTER_NONE ? ALL_PROJECTS : $t_filter_project_value );
+$t_edit_option          = gpc_get_string( 'config_option', $t_filter_config_value == META_FILTER_NONE ? '' : $t_filter_config_value );
+$t_edit_type            = gpc_get_string( 'type', CONFIG_TYPE_DEFAULT );
+$t_edit_value           = gpc_get_string( 'value', '' );
+
+# Apply filters
+$t_config_table  = db_get_table( 'config' );
+$t_project_table = db_get_table( 'project' );
+
+# Get users in db having specific configs
+$query = "SELECT DISTINCT user_id
+	FROM $t_config_table
+	WHERE user_id <> " . db_param() ;
+$t_result = db_query_bound( $query, array( ALL_USERS ) );
+if( $t_filter_user_value != META_FILTER_NONE && $t_filter_user_value != ALL_USERS ) {
+	# Make sure the filter value exists in the list
+	$t_users_list[$t_filter_user_value] = user_get_name( $t_filter_user_value );
+} else {
+	$t_users_list = array();
+}
+while( $row = db_fetch_array( $t_result ) ) {
+	$t_user_id = $row['user_id'];
+	$t_users_list[$t_user_id] = user_get_name( $t_user_id );
+}
+asort( $t_users_list );
+# Prepend '[any]' and 'All Users' to the list
+$t_users_list = array(
+		META_FILTER_NONE => '[' . lang_get( 'any' ) . ']',
+		ALL_USERS        => lang_get( 'all_users' ),
+	)
+	+ $t_users_list;
+
+# Get projects in db with specific configs
+$query = "SELECT DISTINCT project_id, pt.name as project_name
+	FROM $t_config_table as ct
+	JOIN $t_project_table as pt ON pt.id = ct.project_id
+	WHERE project_id!=0
+	ORDER BY project_name";
+$t_result = db_query_bound( $query );
+$t_projects_list[META_FILTER_NONE] = '[' . lang_get( 'any' ) . ']';
+$t_projects_list[ALL_PROJECTS] = lang_get( 'all_projects' );
+while( $row = db_fetch_array( $t_result ) ) {
+	extract( $row, EXTR_PREFIX_ALL, 'v' );
+	$t_projects_list[$v_project_id] = $v_project_name;
+}
+
+# Get config list used in db
+$query = "SELECT DISTINCT config_id
+	FROM $t_config_table
+	ORDER BY config_id";
+$t_result = db_query_bound( $query );
+$t_configs_list[META_FILTER_NONE] = '[' . lang_get( 'any' ) . ']';
+if( $t_filter_config_value != META_FILTER_NONE ) {
+	# Make sure the filter value exists in the list
+	$t_configs_list[$t_filter_config_value] = $t_filter_config_value;
+}
+while( $row = db_fetch_array( $t_result ) ) {
+	extract( $row, EXTR_PREFIX_ALL, 'v' );
+	$t_configs_list[$v_config_id] = $v_config_id;
+}
+
+# Build filter's where clause
+$t_where = '';
+if( $t_filter_user_value != META_FILTER_NONE ) {
+	$t_where .= " AND user_id = $t_filter_user_value ";
+}
+if( $t_filter_project_value != META_FILTER_NONE ) {
+	$t_where .= " AND project_id = $t_filter_project_value ";
+}
+if( $t_filter_config_value != META_FILTER_NONE ) {
+	$t_where .= " AND config_id = '$t_filter_config_value' ";
+}
+if( $t_where != '' ) {
+	$t_where = " WHERE 1=1 " . $t_where;
+}
+
+$query = "SELECT config_id, user_id, project_id, type, value, access_reqd
+	FROM $t_config_table
+	$t_where
+	ORDER BY user_id, project_id, config_id ";
 $result = db_query_bound( $query );
 ?>
-<div id="adm-config-div" class="table-container">
+
+<!-- FILTER FORM -->
+<div id="config-filter-div" class="table-container">
+
+<form id="filter_form" method="post">
+	<?php # CSRF protection not required here - form does not result in modifications ?>
+		<input type="hidden" name="save" value="1" />
+
+	<table cellspacing="1">
+		<!-- Title -->
+		<tr>
+			<td class="form-title" colspan="7">
+				<?php echo lang_get( 'filters' ) ?>
+			</td>
+		</tr>
+
+		<tr class="row-category2">
+			<td class="small-caption">
+				<?php echo lang_get( 'username' ); ?>: <br />
+			</td>
+			<td class="small-caption">
+				<?php echo lang_get( 'project_name' ); ?>: <br />
+			</td>
+			<td class="small-caption">
+				<?php echo lang_get( 'configuration_option' ); ?>: <br />
+			</td>
+		</tr>
+
+		<tr class="row-1">
+			<td>
+				<select name="filter_user_id">
+				<?php
+				print_option_list_from_array( $t_users_list, $t_filter_user_value );
+				?>
+				</select>
+			</td>
+			<td>
+				<select name="filter_project_id">
+				<?php
+				print_option_list_from_array( $t_projects_list, $t_filter_project_value );
+				?>
+				</select>
+			</td>
+			<td>
+				<select name="filter_config_id">
+				<?php
+				print_option_list_from_array( $t_configs_list, $t_filter_config_value );
+				?>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<input name="apply_filter_button" type="submit" class="button-small" value="<?php echo lang_get( 'filter_button' )?>" />
+				<input name="default_filter_button" type="submit" class="button-small" value="<?php echo lang_get( 'default_filter' )?>" />
+				<input name="reset_filter_button" type="submit" class="button-small" value="<?php echo lang_get( 'reset_query' )?>" />
+			</td>
+		</tr>
+	</table>
+	</form>
+</div>
+
+<!-- CONFIGURATIONS LIST -->
+<div>
+<div id="adm-config-div" class="table-container" style="display: table">
 	<h2><?php echo lang_get( 'database_configuration' ) ?></h2>
-	<table cellspacing="1" cellpadding="5" border="1">
+<!--	<table cellspacing="1" cellpadding="5" border="1"> -->
+	<table cellspacing="1" width="100%">
 		<tr class="row-category">
-			<th class="center"><?php echo lang_get( 'username' ) ?></th>
-			<th class="center"><?php echo lang_get( 'project_name' ) ?></th>
+			<th><?php echo lang_get( 'username' ) ?></th>
+			<th><?php echo lang_get( 'project_name' ) ?></th>
 			<th><?php echo lang_get( 'configuration_option' ) ?></th>
-			<th class="center"><?php echo lang_get( 'configuration_option_type' ) ?></th>
-			<th class="center"><?php echo lang_get( 'configuration_option_value' ) ?></th>
-			<th class="center"><?php echo lang_get( 'access_level' ) ?></th>
-			<?php if ( $t_read_write_access ): ?>
-			<th class="center"><?php echo lang_get( 'actions' ) ?></th>
-			<?php endif; ?>
-		</tr><?php
-		while ( $row = db_fetch_array( $result ) ) {
-			extract( $row, EXTR_PREFIX_ALL, 'v' ); ?>
-		<tr <?php echo helper_alternate_class() ?>>
-			<td class="center">
+			<th><?php echo lang_get( 'configuration_option_type' ) ?></th>
+			<th><?php echo lang_get( 'configuration_option_value' ) ?></th>
+			<th><?php echo lang_get( 'access_level' ) ?></th>
+			<?php if( $t_read_write_access ) { ?>
+			<th><?php echo lang_get( 'actions' ) ?></th>
+			<?php } ?>
+		</tr>
+
+<?php
+# Pre-generate a form security token to avoid performance issues when the
+# db contains a large number of configurations
+$t_form_security_token = form_security_token( 'adm_config_delete' );
+
+while( $row = db_fetch_array( $result ) ) {
+	extract( $row, EXTR_PREFIX_ALL, 'v' );
+
+?>
+<!-- Repeated Info Rows -->
+		<tr <?php echo helper_alternate_class() ?> width="100%">
+			<td >
 				<?php echo ($v_user_id == 0) ? lang_get( 'all_users' ) : string_display_line( user_get_name( $v_user_id ) ) ?>
 			</td>
-			<td class="center"><?php echo string_display_line( project_get_name( $v_project_id, false ) ) ?></td>
+			<td ><?php echo string_display_line( project_get_name( $v_project_id, false ) ) ?></td>
 			<td><?php echo string_display_line( $v_config_id ) ?></td>
-			<td class="center"><?php echo string_display_line( get_config_type( $v_type ) ) ?></td>
-			<td class="left"><?php print_config_value_as_string( $v_type, $v_value ) ?></td>
-			<td class="center"><?php echo get_enum_element( 'access_levels', $v_access_reqd ) ?></td>
-			<?php if ( $t_read_write_access ): ?>
+			<td ><?php echo string_display_line( get_config_type( $v_type ) ) ?></td>
+			<td style="overflow-x:auto;"><?php print_config_value_as_string( $v_type, $v_value ) ?></td>
+			<td ><?php echo get_enum_element( 'access_levels', $v_access_reqd ) ?></td>
+<?php
+	if( $t_read_write_access ) {
+?>
 			<td class="center">
-				<?php
-					if ( config_can_delete( $v_config_id ) ) {
-						print_button( "adm_config_delete.php?user_id=$v_user_id&project_id=$v_project_id&config_option=$v_config_id", lang_get( 'delete_link' ) );
-					} else {
-						echo '&#160;';
-					}
-				?>
-			</td>
-			<?php endif; ?>
-		</tr><?php
-		} # end for loop ?>
-	</table>
-</div><?php
+<?php
+		if( config_can_delete( $v_config_id ) ) {
+			# Update button (will populate edit form at page bottom)
+			print_button(
+				'#config_set_form',
+				lang_get( 'edit_link' ),
+				array(
+					'user_id'       => $v_user_id,
+					'project_id'    => $v_project_id,
+					'config_option' => $v_config_id,
+					'type'          => $v_type,
+					'value'         => $v_value,
+				),
+				OFF
+			);
 
-if ( $t_read_write_access ) { ?>
-<div class="form-container">
-	<form method="post" action="adm_config_set.php">
-		<fieldset>
-			<legend><span><?php echo lang_get( 'set_configuration_option' ) ?></span></legend>
-			<?php echo form_security_field( 'adm_config_set' ) ?>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
-				<label for="config-user-id"><span><?php echo lang_get( 'username' ) ?></span></label>
-				<span class="select">
-					<select id="config-user-id" name="user_id">
-						<option value="0" selected="selected"><?php echo lang_get( 'all_users' ); ?></option>
-						<?php print_user_option_list( 0 ) ?>
-					</select>
-				</span>
-				<span class="label-style"></span>
-			</div>
+			# Delete button
+			print_button(
+				'adm_config_delete.php',
+				lang_get( 'delete_link' ),
+				array(
+					'user_id'       => $v_user_id,
+					'project_id'    => $v_project_id,
+					'config_option' => $v_config_id,
+				),
+				$t_form_security_token
+			);
+		} else {
+			echo '&#160;';
+		}
+?>
+			</td>
+<?php
+	} # end if config_can_delete
+?>
+		</tr>
+<?php
+} # end while loop
+?>
+	</table>
+</div>
+</div>
+
+<?php
+# Only display the edit form if user is authorized to change configuration
+if( $t_read_write_access ) {
+?>
+
+<!-- Config Set Form -->
+
+<div id="config-edit-div" class="form-container">
+<form id="config_set_form" method="post" action="adm_config_set.php">
+	<fieldset>
+		<?php echo form_security_field( 'adm_config_set' ) ?>
+
+		<!-- Title -->
+		<legend><span>
+			<?php echo lang_get( 'set_configuration_option' ) ?>
+		</span></legend>
+
+		<!-- Username -->
+		<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<label for="config-user-id"><span><?php echo lang_get( 'username' ) ?></span></label>
+			<span class="select">
+				<select id="config-user-id" name="user_id">
+					<option value="<?php echo ALL_USERS; ?>"
+						<?php check_selected( $t_edit_user_id, ALL_USERS ) ?>>
+						<?php echo lang_get( 'all_users' ); ?>
+					</option>
+					<?php print_user_option_list( $t_edit_user_id ) ?>
+				</select>
+			</span>
+			<span class="label-style"></span>
+		</div>
+
+			<!-- Project -->
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="config-project-id"><span><?php echo lang_get( 'project_name' ) ?></span></label>
 				<span class="select">
 					<select id="config-project-id" name="project_id">
-						<option value="0" selected="selected"><?php echo lang_get( 'all_projects' ); ?></option>
-						<?php print_project_option_list( ALL_PROJECTS, false ) ?>
+						<option value="<?php echo ALL_PROJECTS; ?>"
+							<?php check_selected( $t_edit_project_id, ALL_PROJECTS ); ?>>
+							<?php echo lang_get( 'all_projects' ); ?>
+						</option>
+						<?php print_project_option_list( $t_edit_project_id, false ) ?>
 					</select>
 				</span>
 				<span class="label-style"></span>
 			</div>
+
+			<!-- Config option name -->
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="config-option"><span><?php echo lang_get( 'configuration_option' ) ?></span></label>
-				<span class="input"><input type="text" id="config-option" name="config_option" value="" size="64" maxlength="64" /></span>
+				<span class="input">
+					<input type="text" name="config_option"
+						value="<?php echo $t_edit_option; ?>"
+						size="64" maxlength="64" />
+				</span>
 				<span class="label-style"></span>
 			</div>
+
+			<!-- Option type -->
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="config-type"><span><?php echo lang_get( 'configuration_option_type' ) ?></span></label>
 				<span class="select">
 					<select id="config-type" name="type">
-						<option value="default" selected="selected">default</option>
-						<option value="string">string</option>
-						<option value="integer">integer</option>
-						<option value="complex">complex</option>
+						<?php print_option_list_from_array( $t_config_types, $t_edit_type ); ?>
 					</select>
 				</span>
 				<span class="label-style"></span>
 			</div>
+
+			<!-- Option Value -->
 			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
 				<label for="config-value"><span><?php echo lang_get( 'configuration_option_value' ) ?></span></label>
-				<span class="textarea"><textarea id="config-value" name="value" cols="80" rows="10"></textarea></span>
+				<span class="textarea">
+					<textarea name="value" cols="80" rows="10"><?php
+						echo print_config_value_as_string( $t_edit_type, $t_edit_value, false );
+					?></textarea>
+				</span>
 				<span class="label-style"></span>
 			</div>
+
+			<!-- Submit button -->
 			<span class="submit-button"><input type="submit" name="config_set" class="button" value="<?php echo lang_get( 'set_configuration_option' ) ?>" /></span>
 		</fieldset>
 	</form>
-</div><?php
+</div>
+
+<?php
 } # end user can change config
 
 html_page_bottom();

@@ -1,6 +1,6 @@
 <?php
 # MantisConnect - A webservice interface to Mantis Bug Tracker
-# Copyright (C) 2004-2012  Victor Boctor - vboctor@users.sourceforge.net
+# Copyright (C) 2004-2013  Victor Boctor - vboctor@users.sourceforge.net
 # This program is distributed under dual licensing.  These include
 # GPL and a commercial licenses.  Victor Boctor reserves the right to
 # change the license of future releases.
@@ -45,3 +45,13 @@ $g_mc_error_when_version_not_found = ON;
 # Default version to be used if the specified version is not found and $g_mc_error_when_version_not_found == OFF.
 # (at the moment this value does not depend on the project).
 $g_mc_version_when_not_found = '';
+
+/**
+ * MantisConnect - use nusoap for SOAP handling
+ * 
+ * <p>When the native PHP extension is available this flag default to OFF, which means that nusoap 
+ * will not used. The native extension has the advantage of being faster, more memory efficient and 
+ * maintained to work with recent versions on PHP. When the extension is not available 
+ * MantisBT falls back to using nusoap.</p>
+ */
+$g_mc_use_nusoap = extension_loaded('soap') ? OFF : ON;

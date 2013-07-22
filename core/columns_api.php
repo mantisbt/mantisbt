@@ -20,7 +20,7 @@
  * @package CoreAPI
  * @subpackage ColumnsAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses access_api.php
@@ -115,8 +115,10 @@ function columns_filter_disabled( $p_columns ) {
 
 /**
  * Get a list of standard columns.
+ * @param bool $p_enabled_columns_only default true, if false returns all columns regardless of config settings
+ * @return array of column names
  */
-function columns_get_standard() {
+function columns_get_standard( $p_enabled_columns_only = true ) {
 	$t_reflection = new ReflectionClass('BugData');
 	$t_columns = $t_reflection->getDefaultProperties();
 
@@ -126,25 +128,25 @@ function columns_get_standard() {
 	# Overdue icon column (icons appears if an issue is beyond due_date)
 	$t_columns['overdue'] = null;
 
-	if( OFF == config_get( 'enable_profiles' ) ) {
+	if( $p_enabled_columns_only && OFF == config_get( 'enable_profiles' ) ) {
 		unset( $t_columns['os'] );
 		unset( $t_columns['os_build'] );
 		unset( $t_columns['platform'] );
 	}
 
-	if( config_get( 'enable_eta' ) == OFF ) {
+	if( $p_enabled_columns_only && config_get( 'enable_eta' ) == OFF ) {
 		unset( $t_columns['eta'] );
 	}
 
-	if( config_get( 'enable_projection' ) == OFF ) {
+	if( $p_enabled_columns_only && config_get( 'enable_projection' ) == OFF ) {
 		unset( $t_columns['projection'] );
 	}
 
-	if( config_get( 'enable_product_build' ) == OFF ) {
+	if( $p_enabled_columns_only && config_get( 'enable_product_build' ) == OFF ) {
 		unset( $t_columns['build'] );
 	}
 
-	if( config_get( 'enable_sponsorship' ) == OFF ) {
+	if( $p_enabled_columns_only && config_get( 'enable_sponsorship' ) == OFF ) {
 		unset( $t_columns['sponsorship_total'] );
 	}
 
@@ -157,7 +159,7 @@ function columns_get_standard() {
 	# legacy field
 	unset( $t_columns['duplicate_id'] );
 
-	return array_keys($t_columns);
+	return array_keys( $t_columns );
 }
 
 /**

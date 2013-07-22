@@ -17,7 +17,7 @@
 /**
  * @package Tests
  * @subpackage UnitTests
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
@@ -29,7 +29,246 @@ require_once 'SoapBase.php';
 class FilterTest extends SoapBase {
 	
 	const ISSUES_TO_RETRIEVE = 50;
-	
+
+	/**
+	 * Test the "assigned" filter type when issue is not assigned and no target user provided.
+	 */
+	public function testGetIssuesForUserForUnassignedNoTargetUser() {
+		$targetUser = array();
+		$initialIssuesCount = $this->getIssuesForUser( 'assigned', $targetUser );
+
+		$issueToAdd = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserForUnassignedNoTargetUser' );
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+
+		$this->deleteAfterRun( $issueId );
+
+		$issuesCount = $this->getIssuesForUser( 'assigned', $targetUser );
+
+		$this->assertEquals( 1, count( $issuesCount ) - count( $initialIssuesCount ), "count(issuesCount) - count(initialIssuesCount)");
+		$this->assertEquals( $issueId, $issuesCount[0]->id, "issueId");
+	}
+
+	/**
+	 * Test the "assigned" filter type for unassigned issues with target user specified.
+	 */
+	public function testGetIssuesForUserForUnassignedWithTargetUser() {
+		$targetUser = array( 'name' => $this->userName );
+		$initialIssuesCount = $this->getIssuesForUser( 'assigned', $targetUser );
+
+		$issueToAdd = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserForUnassignedWithTargetUser' );
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+
+		$this->deleteAfterRun( $issueId );
+
+		$issuesCount = $this->getIssuesForUser( 'assigned', $targetUser );
+
+		$this->assertEquals( 0, count( $issuesCount ) - count( $initialIssuesCount ), "count(issuesCount) - count(initialIssuesCount)");
+	}
+
+	/**
+	 * Test the "assigned" filter type for assigned issues with no target user.
+	 */
+	public function testGetIssuesForUserForAssignedWithNoTargetUser() {
+		$targetUser = array();
+		$initialIssuesCount = $this->getIssuesForUser( 'assigned', $targetUser );
+
+		$issueToAdd = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserForAssignedWithNoTargetUser' );
+
+		// Assign the issue to the reporter.
+		$issueToAdd['handler'] = array( 'name' => $this->userName );
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+
+		$this->deleteAfterRun( $issueId );
+
+		$issuesCount = $this->getIssuesForUser( 'assigned', $targetUser );
+
+		$this->assertEquals( 0, count( $issuesCount ) - count( $initialIssuesCount ), "count(issuesCount) - count(initialIssuesCount)");
+	}
+
+	/**
+	 * Test the "assigned" filter type for assigned issues with target user specified.
+	 */
+	public function testGetIssuesForUserForAssignedWithTargetUser() {
+		$targetUser = array( 'name' => $this->userName );
+		$initialIssuesCount = $this->getIssuesForUser( 'assigned', $targetUser );
+
+		$issueToAdd = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserForAssignedWithTargetUser' );
+
+		// Assign the issue to the reporter.
+		$issueToAdd['handler'] = $targetUser;
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+
+		$this->deleteAfterRun( $issueId );
+
+		$issuesCount = $this->getIssuesForUser( 'assigned', $targetUser );
+
+		$this->assertEquals( 1, count( $issuesCount ) - count( $initialIssuesCount ), "count(issuesCount) - count(initialIssuesCount)");
+		$this->assertEquals( $issueId, $issuesCount[0]->id, "issueId");
+	}
+
+	/**
+	 * Test the "assigned" filter type for assigned issues with target user specified.
+	 * Make sure resolved issues are not returned.
+	 */
+	public function testGetIssuesForUserForAssignedWithTargetUserNoResolved() {
+		$targetUser = array( 'name' => $this->userName );
+		$initialIssuesCount = $this->getIssuesForUser( 'assigned', $targetUser );
+
+		$issueToAdd = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserForAssignedWithTargetUserNoResolved' );
+
+		// Assign the issue to the reporter.
+		$issueToAdd['handler'] = $targetUser;
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+
+		$this->deleteAfterRun( $issueId );
+
+		$issue = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);		
+
+		$issue->status = array( 'name' => 'resolved' );
+
+        $this->client->mc_issue_update( $this->userName, $this->password, $issueId, $issue );
+
+		$issuesCount = $this->getIssuesForUser( 'assigned', $targetUser );
+
+		$this->assertEquals( 0, count( $issuesCount ) - count( $initialIssuesCount ), "count(issuesCount) - count(initialIssuesCount)");
+	}
+
+	/**
+	 * Test the "reported" filter type with no target user.
+	 * @expectedException SoapFault
+	 */
+	public function testGetIssuesForUserReportedNoTargetUser() {
+		$targetUser = array();
+		$initialIssuesCount = $this->getIssuesForUser( 'reported', $targetUser );
+	}
+
+	/**
+	 * Test the "reported" filter type with target user.
+	 */
+	public function testGetIssuesForUserReportedWithTargetUser() {
+		$targetUser = array( 'name' => $this->userName );
+		$initialIssuesCount = $this->getIssuesForUser( 'reported', $targetUser );
+
+		$issueToAdd = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserReportedWithTargetUser' );
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+
+		$this->deleteAfterRun( $issueId );
+
+		$issuesCount = $this->getIssuesForUser( 'reported', $targetUser );
+
+		$this->assertEquals( 1, count( $issuesCount ) - count( $initialIssuesCount ), "count(issuesCount) - count(initialIssuesCount)");
+		$this->assertEquals( $issueId, $issuesCount[0]->id, "issueId");
+	}
+
+	/**
+	 * Test the "monitored" filter type with no target user.
+	 */
+	public function testGetIssuesForUserMonitoredNoTargetUser() {
+		$targetUser = array();
+		$initialIssuesCount = $this->getIssuesForUser( 'monitored', $targetUser );
+
+		$issueToAdd = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserMonitoredNoTargetUser' );
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+
+		$this->deleteAfterRun( $issueId );
+
+		$issuesCount = $this->getIssuesForUser( 'monitored', $targetUser );
+
+		$this->assertEquals( 0, count( $issuesCount ) - count( $initialIssuesCount ), "count(issuesCount) - count(initialIssuesCount)");
+	}
+
+	/**
+	 * Test the "monitored" filter type with target user.
+	 */
+	public function testGetIssuesForUserMonitoredWithTargetUser() {
+		$targetUser = array( 'name' => $this->userName );
+		$initialIssuesCount = $this->getIssuesForUser( 'monitored', $targetUser );
+
+		$issueToAdd = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserMonitoredWithTargetUser' );
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+
+		$this->deleteAfterRun( $issueId );
+
+		$issuesCount = $this->getIssuesForUser( 'monitored', $targetUser );
+
+		$this->assertEquals( 0, count( $issuesCount ) - count( $initialIssuesCount ), "count(issuesCount) - count(initialIssuesCount)");
+	}
+
+	/**
+	 * Test the "monitored" filter type with target user and a monitored issue.
+	 */
+	public function testGetIssuesForUserForMonitoredWithTargetUserAndMatch() {
+		$targetUser = array( 'name' => $this->userName );
+		$initialIssuesCount = $this->getIssuesForUser( 'monitored', $targetUser );
+
+		$issueToAdd = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserForMonitoredWithTargetUserAndMatch' );
+
+		$issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+
+		$this->deleteAfterRun( $issueId );
+
+		$issue = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);		
+
+		// Monitor the issue so it matches the file.		
+        $issue->monitors = array( array( 'id' => $this->userId ) );
+        $this->client->mc_issue_update( $this->userName, $this->password, $issueId, $issue );
+
+		$issuesCount = $this->getIssuesForUser( 'monitored', $targetUser );
+
+		$this->assertEquals( 1, count( $issuesCount ) - count( $initialIssuesCount ), "count(issuesCount) - count(initialIssuesCount)");
+		$this->assertEquals( $issueId, $issuesCount[0]->id, "issueId");
+	}
+
+	/**
+	 * Test the "monitored" filter type with target user.
+	 * @expectedException SoapFault
+	 */
+	public function testGetIssuesForUserInvalidFilter() {
+		$targetUser = array( 'name' => $this->userName );
+		$initialIssuesCount = $this->getIssuesForUser( 'unknown', $targetUser );
+	}
+
 	/**
 	 * A test case that tests the following:
 	 * 1. Retrieving all the project's issues
@@ -284,6 +523,24 @@ class FilterTest extends SoapBase {
 			$this->password,
 			$this->getProjectId(),
 			0,
+			self::ISSUES_TO_RETRIEVE);
+	}
+
+	/**
+	 * Gets the issues for the specified user.
+	 * @param $filterType The filter type ('assigned', 'monitored', 'reported')
+	 * @param $targetUser The target user object reference.
+	 * @return Array Matching issues
+	 */
+	private function getIssuesForUser( $filterType, $targetUser ) {
+		// mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id, $filterType, $p_target_user, $p_page_number, $p_per_page )
+		return $this->client->mc_project_get_issues_for_user(
+			$this->userName,
+			$this->password,
+			0,
+			$filterType,
+			$targetUser,
+			1, // page number
 			self::ISSUES_TO_RETRIEVE);
 	}
 

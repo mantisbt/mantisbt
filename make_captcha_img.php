@@ -18,7 +18,7 @@
  * @package MantisBT
  * @author Marcello Scata' <marcelloscata at users.sourceforge.net> ITALY
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
@@ -256,7 +256,7 @@ class masc_captcha
 				$x += (int)($size + ($this->minsize / 5));
 			}
 			header('Content-type: image/jpeg');
-			@ImageJPEG($image, '', $this->jpegquality);
+			@ImageJPEG($image, null, $this->jpegquality);
 			@ImageDestroy($image);
 			if($this->debug) echo "\n<br />-Captcha-Debug: Destroy Imagestream.";
 		}

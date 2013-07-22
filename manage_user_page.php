@@ -17,7 +17,7 @@
 /**
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
@@ -67,7 +67,7 @@ $f_filter        = utf8_strtoupper( gpc_get_string( 'filter', config_get( 'defau
 $f_page_number   = gpc_get_int( 'page_number', 1 );
 
 $t_user_table = db_get_table( 'user' );
-$t_cookie_name = config_get( 'manage_cookie' );
+$t_cookie_name = config_get( 'manage_users_cookie' );
 $t_lock_image = '<img src="' . config_get( 'icon_path' ) . 'protected.gif" width="8" height="15" alt="' . lang_get( 'protected' ) . '" />';
 $c_filter = '';
 
@@ -173,15 +173,11 @@ foreach ( $t_prefix_array as $t_prefix => $t_caption ) {
 		$c_filter = $f_filter;
 		echo '<span class="current-filter">' . $t_caption . '</span>';
 	} else {
-		echo '<a' . $t_title . ' href="manage_user_page.php?sort=' . $c_sort . '&amp;dir=' . $c_dir . '&amp;save=1' . $t_hide_filter . '&amp;filter=' . $t_prefix . '">' . $t_caption . '</a>';
-/*
- *
 		print_manage_user_sort_link( 'manage_user_page.php',
 			$t_caption,
 			$c_sort,
 			$c_dir, null, $c_hide_inactive, $t_prefix, $c_show_disabled
 		);
-*/
 	}
 	echo '</li>';
 }

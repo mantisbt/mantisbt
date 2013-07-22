@@ -1,6 +1,6 @@
 <?php
 # MantisConnect - A webservice interface to Mantis Bug Tracker
-# Copyright (C) 2004-2012  Victor Boctor - vboctor@users.sourceforge.net
+# Copyright (C) 2004-2013  Victor Boctor - vboctor@users.sourceforge.net
 # This program is distributed under dual licensing.  These include
 # GPL and a commercial licenses.  Victor Boctor reserves the right to
 # change the license of future releases.
@@ -9,6 +9,105 @@
 # set up error_handler() as the new default error handling function
 set_error_handler( 'mc_error_handler' );
 
+/**
+ * Abstract the differences in creating SOAP objects between the php5 soap extension and nusoap
+ * 
+ * <p>As long as we decide to support both implementations we should add all non-generic
+ * factory code to this class.</p>
+ */
+class SoapObjectsFactory {
+
+	static function newSoapFault( $p_fault_code, $p_fault_string) {
+		if ( class_exists('soap_fault') )
+			return new soap_fault( $p_fault_code, '', $p_fault_string );
+		else
+			return new SoapFault( $p_fault_code, $p_fault_string );
+	}
+
+	static function unwrapObject( $p_object ) {
+		if ( is_object( $p_object ) )
+			return get_object_vars( $p_object );
+
+		return $p_object;
+	}
+	
+	static function newDateTimeVar( $p_value ) {
+		
+		$string_value = self::newDateTimeString( $p_value );
+		
+		if ( class_exists('soapval') )
+			return new soapval( 'due_date', 'xsd:dateTime', $string_value );
+		else
+			return new SoapVar( $string_value, XSD_DATETIME, 'xsd:dateTime');
+	}
+	
+	static function newDateTimeString ( $p_timestamp ) {
+
+		if ( $p_timestamp == null || date_is_null( $p_timestamp) )
+			return null;
+		else if ( function_exists('timestamp_to_iso8601') )
+			return timestamp_to_iso8601( $p_timestamp, false);
+		else {
+			return date('c', (int) $p_timestamp);
+		}
+	}
+	
+	static function parseDateTimeString ( $p_string ) {
+		
+		if ( function_exists('iso8601_to_timestamp') ) {
+			return iso8601_to_timestamp( $p_string );
+		} else {
+			return strtotime( $p_string );
+		}
+	}
+	
+	static function encodeBinary ( $p_binary ) {
+		if ( class_exists('soap_fault') )
+			return base64_encode( $p_binary );
+		else 
+			return $p_binary;
+	}
+	
+	static function isSoapFault ( $p_maybe_fault ) {
+		if ( ! is_object( $p_maybe_fault ) )
+			return false;
+		
+		if ( class_exists('soap_fault') ) {
+			return get_class($p_maybe_fault ) == 'soap_fault';
+		} else {
+			return get_class($p_maybe_fault ) == 'SoapFault';
+		}
+	}
+}
+
+/**
+ * Abstract the differences in common actions between the php5 soap extension and nusoap
+ *
+ * <p>As long as we decide to support both implementations we should add all non-generic
+ * action code to this class.</p>
+ */
+class SoapActions {
+	
+	/**
+	 * Sends a fault to the user and immediately terminates processing
+	 * 
+	 * @param string $p_error_type
+	 * @param string $p_error_message
+	 * @throws SoapFault
+	 */
+	static function sendSoapFault ( $p_error_type, $p_error_message) {
+		
+		global $l_oServer;
+		
+		if ( $l_oServer ) {
+			$l_oServer->fault( $p_error_type,  $p_error_message);
+			$l_oServer->send_response();
+			exit();
+		} else {
+			throw new SoapFault($p_error_type,  $p_error_message);
+		}	
+	}
+}
 /**
  * Get the MantisConnect webservice version.
  */
@@ -105,6 +204,9 @@ function mci_has_administrator_access( $p_user_id, $p_project_id = ALL_PROJECTS 
 }
 
 function mci_get_project_id( $p_project ) {
+	if ( is_object( $p_project ) )
+		$p_project = get_object_vars( $p_project );
+	
 	if ( isset( $p_project['id'] ) && (int) $p_project['id'] != 0 ) {
 		$t_project_id = (int) $p_project['id'];
 	} else if ( isset( $p_project['name'] ) && !is_blank( $p_project['name'] ) ) {
@@ -125,6 +227,8 @@ function mci_get_project_view_state_id( $p_view_state ) {
 }
 
 function mci_get_user_id( $p_user ) {
+	$p_user = SoapObjectsFactory::unwrapObject( $p_user );
+	
 	$t_user_id = 0;
 
 	if ( isset( $p_user['id'] ) && (int) $p_user['id'] != 0 ) {
@@ -190,6 +294,17 @@ function mci_null_if_empty( $p_value ) {
 	}
 
 	return null;
+}
+
+/**
+ * Removes any invalid character from the string per XML 1.0 specification
+ * 
+ * @param string $p_input
+ * @return string the sanitized XML
+ */
+function mci_sanitize_xml_string ( $p_input ) {
+	
+	return preg_replace( '/[^\x9\xA\xD\x20-\x{D7FF}\x{E000}-\x{FFFD}\x{10000}-\x{10FFFF}]+/u', '', $p_input);
 }
 
 /**
@@ -330,7 +445,7 @@ function mci_project_version_as_array( $p_version ) {
 			'id' => $p_version['id'],
 			'name' => $p_version['version'],
 			'project_id' => $p_version['project_id'],
-			'date_order' => timestamp_to_iso8601( $p_version['date_order'], false ),
+			'date_order' => SoapObjectsFactory::newDateTimeVar( $p_version['date_order'] ),
 			'description' => mci_null_if_empty( $p_version['description'] ),
 			'released' => $p_version['released'],
 		    'obsolete' => $p_version['obsolete']
@@ -365,7 +480,6 @@ function mci_get_time_tracking_from_note( $p_issue_id, $p_note) {
 # The others, being system errors, will come with a string in $p_error
 #
 function mc_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
-	global $l_oServer;
 
 	# check if errors were disabled with @ somewhere in this call chain
 	# also suppress php 5 strict warnings
@@ -413,9 +527,7 @@ function mc_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 	
 	error_log("[mantisconnect.php] Error Type: $t_error_type,\nError Description: $t_error_description\nStack Trace:\n$t_error_stack");
 
-	$l_oServer->fault( 'Server', "Error Type: $t_error_type,\nError Description: $t_error_description" );
-	$l_oServer->send_response();
-	exit();
+	SoapActions::sendSoapFault('Server', "Error Type: $t_error_type,\nError Description: $t_error_description");
 }
 
 # Get a stack trace if PHP provides the facility or xdebug is present
@@ -484,22 +596,27 @@ function error_get_stack_trace() {
  * @return soap_fault
  */
 function mci_soap_fault_login_failed() {
-	return new soap_fault('Client', '', 'Access denied.');
+	return SoapObjectsFactory::newSoapFault('Client', 'Access denied');
 }
 
 /**
  * Returns a soap_fault signalling that the user does not have
  * access rights for the specific action.
  *
- * @param int $p_user_id a valid user id
+ * @param int $p_user_id a user id, optional
  * @param string $p_detail The optional details to append to the error message
  * @return soap_fault
  */
-function mci_soap_fault_access_denied( $p_user_id, $p_detail = '' ) {
-	$t_user_name = user_get_name( $p_user_id );
-	$t_reason = 'Access denied for user '. $t_user_name . '.';
+function mci_soap_fault_access_denied( $p_user_id = 0, $p_detail = '' ) {
+	if ( $p_user_id ) {
+		$t_user_name = user_get_name( $p_user_id );
+		$t_reason = 'Access denied for user '. $t_user_name . '.';
+	} else {
+		$t_reason = 'Access denied';
+	}
+	
 	if ( !is_blank( $p_detail ))
 		$t_reason .= ' Reason: ' . $p_detail . '.';
 
-	return new soap_fault( 'Client', '',  $t_reason );
+	return SoapObjectsFactory::newSoapFault('Client', $t_reason);
 }

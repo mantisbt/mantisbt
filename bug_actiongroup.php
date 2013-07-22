@@ -19,7 +19,7 @@
  *
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
@@ -316,6 +316,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 		$t_form_var = "custom_field_$f_custom_field_id";
 		$t_custom_field_value = gpc_get_custom_field( $t_form_var, $t_custom_field_def['type'], null );
 		custom_field_set_value( $f_custom_field_id, $t_bug_id, $t_custom_field_value );
+		bug_update_date( $t_bug_id );
 		helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 		break;
 

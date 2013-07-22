@@ -20,7 +20,7 @@
  * @package CoreAPI
  * @subpackage EmailAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses access_api.php
@@ -46,6 +46,8 @@
  * @uses user_api.php
  * @uses user_pref_api.php
  * @uses utility_api.php
+ *
+ * @uses class.phpmailer.php PHPMailer library
  */
 
 require_api( 'access_api.php' );
@@ -72,21 +74,32 @@ require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
+require_lib( 'phpmailer' . DIRECTORY_SEPARATOR . 'class.phpmailer.php' );
+
 /**
  * reusable object of class SMTP
  */
  $g_phpMailer = null;
 
 /**
- *
  * Use a simple perl regex for valid email addresses.  This is not a complete regex,
  * as it does not cover quoted addresses or domain literals, but it is simple and
  * covers the vast majority of all email addresses without being overly complex.
  * @return string
  */
 function email_regex_simple() {
-	return "/([a-z0-9!#*+\/=?^_{|}~-]+(?:\.[a-z0-9!#*+\/=?^_{|}~-]+)*)" . 				# recipient
-			"\@((?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)/i";	# @domain
+	static $s_email_regex = null;
+
+	if( is_null( $s_email_regex ) ) {
+		$t_recipient = "([a-z0-9!#*+\/=?^_{|}~-]+(?:\.[a-z0-9!#*+\/=?^_{|}~-]+)*)";
+
+		# a domain is one or more subdomains
+		$t_subdomain = "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)";
+		$t_domain    = "(${t_subdomain}(?:\.${t_subdomain})*)";
+
+		$s_email_regex = "/${t_recipient}\@${t_domain}/i";
+	}
+	return $s_email_regex;
 }
 
 /**
@@ -100,7 +113,7 @@ function email_is_valid( $p_email ) {
 		return true;
 	}
 
-	if ( ON == config_get( 'use_ldap_email' ) ) {
+	if ( LDAP == config_get( 'login_method' ) && ON == config_get( 'use_ldap_email' ) ) {
 		return true;
 	}
 
@@ -108,11 +121,9 @@ function email_is_valid( $p_email ) {
 		return true;
 	}
 
-	# Use a regular expression to check to see if the email is in valid format
-	#  x-xx.xxx@yyy.zzz.abc etc.
-	if( preg_match( email_regex_simple(), $p_email, $t_check ) ) {
-		$t_local = $t_check[1];
-		$t_domain = $t_check[2];
+	# Delegate email validation to PHPMailer
+	if( PHPMailer::ValidateAddress( $p_email ) ) {
+		$t_domain = end( explode( '@', $p_email ) );
 
 		# see if we're limited to one domain
 		$t_limit_email_domain = config_get( 'limit_email_domain' );
@@ -393,12 +404,13 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 			}
 		}
 
-		# check that user can see bugnotes if the last update included a bugnote
-		if( $t_bug_date == $t_bugnote_date ) {
-			if( !access_has_bugnote_level( VIEWER, $t_bugnote_id, $t_id ) ) {
-				log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, drop @U%d (access level)', $p_bug_id, $t_id ) );
-				continue;
-			}
+		# exclude users who don't have at least viewer access to the bug,
+		# or who can't see bugnotes if the last update included a bugnote
+		if( !access_has_bug_level( VIEWER, $p_bug_id, $t_id )
+		 || $t_bug_date == $t_bugnote_date && !access_has_bugnote_level( VIEWER, $t_bugnote_id, $t_id )
+		) {
+			log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, drop @U%d (access level)', $p_bug_id, $t_id ) );
+			continue;
 		}
 
 		# check to exclude users as specified by plugins
@@ -505,7 +517,7 @@ function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
 	# or else users won't be able to receive their reset pws
 	if( !is_blank( $t_email ) ) {
 		email_store( $t_email, $t_subject, $t_message );
-		log_event( LOG_EMAIL, sprintf( 'Password reset for email = %s', $t_email ) );
+		log_event( LOG_EMAIL, sprintf( 'Password reset for user @U%d sent to %s', $p_user_id, $t_email ) );
 
 		if( OFF == config_get( 'email_send_using_cronjob' ) ) {
 			email_send_all();
@@ -800,7 +812,7 @@ function email_bug_deleted( $p_bug_id ) {
  * @param string $p_subject
  * @param string $p_message
  * @param array $p_headers
- * @return int
+ * @return int e-mail queue id, or NULL if e-mail was not stored
  */
 function email_store( $p_recipient, $p_subject, $p_message, $p_headers = null ) {
 	$t_recipient = trim( $p_recipient );
@@ -844,38 +856,54 @@ function email_store( $p_recipient, $p_subject, $p_message, $p_headers = null ) 
 }
 
 /**
- * This function sends all the emails that are stored in the queue.  If a failure occurs, then the
- * function exists.  This function will be called after storing emails in case of synchronous
- * emails, or will be called from a cronjob in case of asynchronous emails.
+ * This function sends all the emails that are stored in the queue.
+ * It will be called
+ * - immediately after queueing messages in case of synchronous emails
+ * - from a cronjob in case of asynchronous emails
+ * If a failure occurs, then the function exits.
  * @todo In case of synchronous email sending, we may get a race condition where two requests send the same email.
  * @param bool $p_delete_on_failure indicates whether to remove email from queue on failure (default false)
  * @return null
  */
 function email_send_all($p_delete_on_failure = false) {
-	$t_ids = email_queue_get_ids();
+	$t_ids = email_queue_get_ids('ASC');
+	$t_date_format = config_get( 'complete_date_format' );
 
-	$t_emails_recipients_failed = array();
-	$t_start = microtime(true);
+	log_event( LOG_EMAIL, "Processing e-mail queue (" . count( $t_ids ) . " messages)" );
+
 	foreach( $t_ids as $t_id ) {
 		$t_email_data = email_queue_get( $t_id );
+		$t_start = microtime(true);
 
-		# check if email was not found.  This can happen if another request picks up the email first and sends it.
+		log_event( LOG_EMAIL,
+			"Sending message #$t_id queued on " .
+			date( $t_date_format, $t_email_data->submitted )
+		);
+
+		# check if email was not found.  This can happen if another request
+		# picks up the email first and sends it.
 		if( $t_email_data === false ) {
-			continue;
+			$t_email_sent = true;
+			log_event( LOG_EMAIL, 'message has already been sent' );
+		} else {
+			$t_email_sent = email_send( $t_email_data );
 		}
 
-		# if unable to place the email in the email server queue, then the connection to the server is down,
-		# and hence no point to continue trying with the rest of the emails.
-		if( !email_send( $t_email_data ) ) {
+		if( !$t_email_sent ) {
 			if ($p_delete_on_failure) {
 				email_queue_delete( $t_email_data->email_id );
 			}
+
+			# If unable to place the email in the email server queue and more
+			# than 5 seconds have elapsed, then we assume that the server
+			# connection is down, hence no point to continue trying with the
+			# rest of the emails.
 			if( microtime(true) - $t_start > 5 ) {
+				log_event( LOG_EMAIL, 'Server not responding for 5 seconds, aborting' );
 				break;
-			} else {
-				continue;
 			}
 		}
+
 	}
 }
 
@@ -897,11 +925,11 @@ function email_send( $p_email_data ) {
 	$t_debug_email = config_get( 'debug_email' );
 	$t_mailer_method = config_get( 'phpMailer_method' );
 
+	$t_log_msg = 'ERROR: Message could not be sent - ';
+
 	if( is_null( $g_phpMailer ) ) {
-		if ( $t_mailer_method == PHPMAILER_METHOD_SMTP )
+		if ( $t_mailer_method == PHPMAILER_METHOD_SMTP ) {
 			register_shutdown_function( 'email_smtp_close' );
-		if( !class_exists( 'PHPMailer' ) ) {
-			require_lib( 'phpmailer' . DIRECTORY_SEPARATOR . 'class.phpmailer.php' );
 		}
 		$mail = new PHPMailer(true);
 	} else {
@@ -960,30 +988,24 @@ function email_send( $p_email_data ) {
 	$mail->Sender = config_get( 'return_path_email' );
 	$mail->FromName = config_get( 'from_name' );
 	$mail->AddCustomHeader('Auto-Submitted:auto-generated');
+	$mail->AddCustomHeader('X-Auto-Response-Suppress: All');
 
 	if( OFF !== $t_debug_email ) {
 		$t_message = 'To: ' . $t_recipient . "\n\n" . $t_message;
-		try {
-			$mail->AddAddress( $t_debug_email, '' );
-		} catch ( phpmailerException $e ) {
-			$t_success = false;
-			$mail->ClearAllRecipients();
-			$mail->ClearAttachments();
-			$mail->ClearReplyTos();
-			$mail->ClearCustomHeaders();
-			return $t_success;
-		}
-	} else {
-		try {
-			$mail->AddAddress( $t_recipient, '' );
-		} catch ( phpmailerException $e ) {
-			$t_success = false;
-			$mail->ClearAllRecipients();
-			$mail->ClearAttachments();
-			$mail->ClearReplyTos();
-			$mail->ClearCustomHeaders();
-			return $t_success;
-		}
+		$t_recipient = $t_debug_email;
+	}
+
+	try {
+		$mail->AddAddress( $t_recipient, '' );
+	}
+	catch ( phpmailerException $e ) {
+		log_event( LOG_EMAIL, $t_log_msg . $mail->ErrorInfo );
+		$t_success = false;
+		$mail->ClearAllRecipients();
+		$mail->ClearAttachments();
+		$mail->ClearReplyTos();
+		$mail->ClearCustomHeaders();
+		return $t_success;
 	}
 
 	$mail->Subject = $t_subject;
@@ -1010,20 +1032,22 @@ function email_send( $p_email_data ) {
 		}
 	}
 
-	try
-	{
-		if ( !$mail->Send() ) {
-			$t_success = false;
-		} else {
+	try {
+		$t_success = $mail->Send();
+		if ( $t_success ) {
 			$t_success = true;
 
 			if ( $t_email_data->email_id > 0 ) {
 				email_queue_delete( $t_email_data->email_id );
 			}
+		} else {
+			# We should never get here, as an exception is thrown after failures
+			log_event( LOG_EMAIL, $t_log_msg . $mail->ErrorInfo );
+			$t_success = false;
 		}
 	}
-	catch ( phpmailerException $e )
-	{
+	catch ( phpmailerException $e ) {
+		log_event( LOG_EMAIL, $t_log_msg . $mail->ErrorInfo );
 		$t_success = false;
 	}
 
@@ -1067,10 +1091,16 @@ function email_build_subject( $p_bug_id ) {
 	# grab the subject (summary)
 	$p_subject = bug_get_field( $p_bug_id, 'summary' );
 
-	# padd the bug id with zeros
-	$p_bug_id = bug_format_id( $p_bug_id );
+	# pad the bug id with zeros
+	$t_bug_id = bug_format_id( $p_bug_id );
 
-	return '[' . $p_project_name . ' ' . $p_bug_id . ']: ' . $p_subject;
+	# build standard subject string
+	$t_email_subject = "[$p_project_name $t_bug_id]: $p_subject";
+
+	# update subject as defined by plugins
+	$t_email_subject = event_signal( 'EVENT_DISPLAY_EMAIL_BUILD_SUBJECT', $t_email_subject, array( 'bug_id' => $p_bug_id ) );
+
+	return $t_email_subject;
 }
 
 /**
@@ -1110,14 +1140,12 @@ function email_append_domain( $p_email ) {
 }
 
 /**
- * Send a bug reminder to each of the given user, or to each user if the first parameter is an array
- * return an array of usernames to which the reminder was successfully sent
+ * Send a bug reminder to the given user(s), or to each user if the first parameter is an array
  *
- * @todo I'm not sure this shouldn't return an array of user ids... more work for the caller but cleaner from an API point of view.
- * @param array $p_recipients
- * @param int $p_bug_id
- * @param string $p_message
- * @return null
+ * @param int|array $p_recipients user id or list of user ids array to send reminder to
+ * @param int $p_bug_id Issue for which the reminder is sent
+ * @param string $p_message Optional message to add to the e-mail
+ * @return array List of users ids to whom the reminder e-mail was actually sent
  */
 function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
 	if( !is_array( $p_recipients ) ) {
@@ -1138,10 +1166,9 @@ function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
 		lang_push( user_pref_get_language( $t_recipient, $t_project_id ) );
 
 		$t_email = user_get_email( $t_recipient );
-		$result[] = user_get_name( $t_recipient );
 
 		if( access_has_project_level( config_get( 'show_user_email_threshold' ), $t_project_id, $t_recipient ) ) {
-			$t_sender_email = ' <' . current_user_get_field( 'email' ) . '>';
+			$t_sender_email = ' <' . user_get_email( $t_sender_id ) . '>';
 		} else {
 			$t_sender_email = '';
 		}
@@ -1149,7 +1176,11 @@ function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
 		$t_contents = $t_header . string_get_bug_view_url_with_fqdn( $p_bug_id, $t_recipient ) . " \n\n$p_message";
 
 		if( ON == config_get( 'enable_email_notification' ) ) {
-			email_store( $t_email, $t_subject, $t_contents );
+			$t_id = email_store( $t_email, $t_subject, $t_contents );
+			if( $t_id !== null ) {
+				$result[] = $t_recipient;
+			}
+			log_event( LOG_EMAIL, "queued reminder email #$t_id for U$t_recipient" );
 		}
 
 		lang_pop();
@@ -1182,7 +1213,7 @@ function email_bug_info_to_one_user( $p_visible_bug_data, $p_message_id, $p_proj
 	}
 
 	# build subject
-	$t_subject = '[' . $p_visible_bug_data['email_project'] . ' ' . bug_format_id( $p_visible_bug_data['email_bug'] ) . ']: ' . $p_visible_bug_data['email_summary'];
+	$t_subject = email_build_subject($p_visible_bug_data['email_bug']);
 
 	# build message
 

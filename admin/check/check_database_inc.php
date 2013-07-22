@@ -17,7 +17,7 @@
 /**
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses check_api.php
@@ -52,6 +52,13 @@ if( isset( $ADODB_vers ) ) {
 		$t_adodb_version_check_ok = version_compare( $t_matches[1], '5.10', '>=' );
 		$t_adodb_version_info = 'ADOdb version ' . htmlentities( $t_matches[1] ) . ' was found.';
 	}
+
+	# Making sure we're not using the ADOdb extension (see #14552)
+	check_print_test_row(
+		'Checking use of the <a href="http://adodb.sourceforge.net/#extension">ADOdb extension</a>',
+		!extension_loaded( 'ADOdb' ),
+		"The 'ADOdb' extension is not supported and must be disabled"
+	);
 }
 check_print_test_row(
 	'Version of <a href="http://en.wikipedia.org/wiki/ADOdb">ADOdb</a> available is at least 5.11',

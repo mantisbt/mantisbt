@@ -20,7 +20,7 @@
  * @package CoreAPI
  * @subpackage AuthenticationAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses access_api.php
@@ -477,7 +477,7 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
  * @return string 16 character random password
  * @access public
  */
-function auth_generate_random_password( $p_email ) {
+function auth_generate_random_password() {
 	# !TODO: create memorable passwords?
 	return crypto_generate_uri_safe_nonce( 16 );
 }

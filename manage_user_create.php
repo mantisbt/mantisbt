@@ -17,7 +17,7 @@
 /**
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses core.php
@@ -94,8 +94,7 @@ email_ensure_not_disposable( $f_email );
 if ( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 	# Check code will be sent to the user directly via email. Dummy password set to random
 	# Create random password
-	$t_seed = $f_email . $f_username;
-	$f_password	= auth_generate_random_password( $t_seed );
+	$f_password	= auth_generate_random_password();
 } else {
 	# Password won't to be sent by email. It entered by the admin
 	# Now, if the password is empty, confirm that that is what we wanted

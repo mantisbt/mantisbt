@@ -44,8 +44,8 @@ function mc_tag_get_all( $p_username, $p_password, $p_page_number, $p_per_page) 
 			'name' => $t_tag_row['name'],
 			'description' => $t_tag_row['description'],
 			'user_id' => mci_account_get_array_by_id ( $t_tag_row['user_id'] ),
-			'date_created' => timestamp_to_iso8601($t_tag_row['date_created'], false),
-			'date_updated' => timestamp_to_iso8601($t_tag_row['date_updated'], false)
+			'date_created' => SoapObjectsFactory::newDateTimeVar($t_tag_row['date_created']),
+			'date_updated' => SoapObjectsFactory::newDateTimeVar($t_tag_row['date_updated'])
 			
 		);
 	}
@@ -77,15 +77,17 @@ function mc_tag_add( $p_username, $p_password, $p_tag ) {
 	
 	$t_valid_matches = array();
 	
+	$p_tag = SoapObjectsFactory::unwrapObject( $p_tag );
+	
 	$t_tag_name = $p_tag['name'];
 	$t_tag_description = array_key_exists('description', $p_tag) ? $p_tag['description'] : '';
 	
 	if ( !tag_name_is_valid($t_tag_name, $t_valid_matches))
-		return new soap_fault('client', '', 'Invalid tag name : "' . $t_tag_name .'"' );
+		return SoapObjectsFactory::newSoapFault('Client', 'Invalid tag name : "' . $t_tag_name .'"' );
 	
 	$t_matching_by_name = tag_get_by_name( $t_tag_name);
 	if ( $t_matching_by_name != false )
-		return new soap_fault('client', '', 'A tag with the same name already exists , id: ' . $t_matching_by_name['id']);
+		return SoapObjectsFactory::newSoapFault('Client', 'A tag with the same name already exists , id: ' . $t_matching_by_name['id']);
 	
 	return tag_create($t_tag_name, $t_user_id, $t_tag_description);
 }
@@ -111,7 +113,7 @@ function mc_tag_delete( $p_username, $p_password, $p_tag_id ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	
 	if ( ! tag_exists( $p_tag_id ) )
-		return new soap_fault('Client', '', 'No tag with id ' . $p_tag_id);
+		return SoapObjectsFactory::newSoapFault('Client', 'No tag with id ' . $p_tag_id);
 
 	return tag_delete( $p_tag_id );
 }
@@ -128,6 +130,8 @@ function mci_tag_set_for_issue ( $p_issue_id, $p_tags, $p_user_id ) {
 		$t_attached_tag_ids[] = $t_attached_tag['id'];
 	
 	foreach ( $p_tags as $t_tag ) {
+		
+		$t_tag = SoapObjectsFactory::unwrapObject( $t_tag );
 			
 		$t_submitted_tag_ids[] = $t_tag['id'];
 			

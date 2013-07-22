@@ -18,7 +18,7 @@
  * @todo FIXME: Looks like "From", "to", and "Copy" need i18n. Possibly more in this file.
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 /**
@@ -52,12 +52,12 @@ html_page_top( 'MantisBT Administration - System Utilities' );
 	<!-- each row links to an upgrade
 		move database bug attachments to disk -->
 	<tr bgcolor="#ffffff"><td>Move attachments stored in database schema to disk files.</td><td class="center">
-	<?php html_button( 'move_db2disk.php', 'Move Attachments to Disk', array( 'doc' => 'attachment' ) );?>
+	<?php html_button( 'move_attachments_page.php', 'Move Attachments to Disk', array( 'type' => 'bug' ) );?>
 	</td></tr>
 
 	<!-- move database project files to disk -->
 	<tr bgcolor="#ffffff"><td>Move project files stored in database schema to disk.</td><td class="center">
-	<?php html_button( 'move_db2disk.php', 'Move Project Files to Disk', array( 'doc' => 'project' ) );?>
+	<?php html_button( 'move_attachments_page.php', 'Move Project Files to Disk', array( 'type' => 'project' ) );?>
 	</td></tr>
 
 	<!-- move custom field content to standard field -->

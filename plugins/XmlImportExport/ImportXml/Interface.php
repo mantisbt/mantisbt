@@ -1,6 +1,6 @@
 <?php
 # MantisBT - A PHP based bugtracking system
-# Copyright (C) 2002 - 2012  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+# Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
 # MantisBT is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -22,7 +22,7 @@ interface ImportXml_Interface {
 	  *
 	  * @param XMLreader $reader
 	  */
-	public function process( XMLreader$reader );
+	public function process( XMLreader $reader );
 
 	/**
 	  * Update the old_id => new_id conversion map
@@ -32,7 +32,7 @@ interface ImportXml_Interface {
 	  * Import Classes for items not needing this info can use an
 	  * empty implementation
 	  *
-	  * @param Mapper $mapper
+	  * @param ImportXml_Mapper $mapper
 	  */
-	public function update_map( Mapper$mapper );
+	public function update_map( ImportXml_Mapper $mapper );
 }
