@@ -625,7 +625,7 @@ function diskfile_is_name_unique( $p_name, $p_filepath ) {
  * @return bool true if unique
  */
 function file_is_name_unique( $p_name, $p_bug_id, $p_table  = 'bug' ) {
-	$t_file_table = db_get_table( '${p_table}_file' );
+	$t_file_table = db_get_table( "${p_table}_file" );
 
 	$t_query = "SELECT COUNT(*)
 		FROM $t_file_table
