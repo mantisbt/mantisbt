@@ -137,8 +137,32 @@ class IssueHistoryTest extends SoapBase {
 
 		$this->assertEquals(3, count($issueHistory) );
 
-		$this->assertPropertyHistoryEntry($issueHistory[1], 'status', $issueToAdd['status']['id'], NEW_); // old value = new
-		$this->assertPropertyHistoryEntry($issueHistory[2], 'resolution', $issueToAdd['resolution']['id'], OPEN); // old value = open
+		# History entries logged simultaneously may not be returned in
+		# the same order, so we need to individually check for each one
+		foreach( $issueHistory as $t_entry ) {
+			if( $t_entry->type != NORMAL_TYPE ) {
+				# Ignore unwanted history types
+				continue;
+			}
+			$t_field = $t_entry->field;
+			switch( $t_field ) {
+				case 'status':
+					$t_old_value = NEW_;
+					break;
+				case 'resolution':
+					$t_old_value = OPEN;
+					break;
+				default:
+					# We shouldn't get there, but just in case...
+					continue 2;
+			}
+			$this->assertPropertyHistoryEntry(
+				$t_entry,
+				$t_field,
+				$issueToAdd[$t_field]['id'],
+				$t_old_value
+			);
+		}
 	}
 
 	/**
