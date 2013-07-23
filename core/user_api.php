@@ -1010,6 +1010,12 @@ function user_get_all_accessible_projects( $p_user_id, $p_project_id ) {
 	if( ALL_PROJECTS == $p_project_id ) {
 		$t_topprojects = user_get_accessible_projects( $p_user_id );
 
+		# Cover the case for PHP < 5.4 where array_combine() returns
+		# false and triggers warning if arrays are empty (see #16187)
+		if( empty( $t_topprojects ) ) {
+			return array();
+		}
+
 		# Create a combined array where key = value
 		$t_project_ids = array_combine( $t_topprojects, $t_topprojects );
 
