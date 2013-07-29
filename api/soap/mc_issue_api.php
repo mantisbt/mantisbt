@@ -1486,6 +1486,7 @@ function mci_issue_data_as_array( $p_issue_data, $p_user_id, $p_lang ) {
 		$t_issue['notes'] = mci_issue_get_notes( $p_issue_data->id );
 		$t_issue['custom_fields'] = mci_issue_get_custom_fields( $p_issue_data->id );
 		$t_issue['tags'] = mci_issue_get_tags_for_bug_id( $p_issue_data->id, $p_user_id );
+		$t_issue['monitors'] = mci_account_get_array_by_ids( bug_get_monitors ( $p_issue_data->id ) );
 
 		return $t_issue;
 }
