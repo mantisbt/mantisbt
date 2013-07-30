@@ -37,6 +37,7 @@
  * @author Mmyangfl
  * @author NetCobra, netcobra@gmail.com
  * @author PhiLiP
+ * @author Qiyue2001
  * @author Riceball LEE riceballl@hotmail.com
  * @author Singoo, singoo@163.com
  * @author XanaduNWH
@@ -501,7 +502,7 @@ $s_sent_you_this_reminder_about = '向您发送这个提醒，关于';
 $s_bug_reminder = '发送提醒';
 $s_reminder_sent_to = '提醒发送至';
 $s_reminder_sent_none = '无法发送任何提醒';
-$s_reminder_list_truncated = '收件人列表被缩短，请查阅问题历史以获取完整列表';
+$s_reminder_list_truncated = '收件人列表已被缩短';
 $s_bug_send_button = '发送';
 $s_reminder = '提醒';
 $s_reminder_explain = '该提醒将发送给被要求接收该问题反馈的所有收件人。';
