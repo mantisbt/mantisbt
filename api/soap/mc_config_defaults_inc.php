@@ -54,4 +54,4 @@ $g_mc_version_when_not_found = '';
  * maintained to work with recent versions on PHP. When the extension is not available 
  * MantisBT falls back to using nusoap.</p>
  */
-$g_mc_use_nusoap = extension_loaded('soap') ? OFF : ON;
+$g_mc_use_nusoap = extension_loaded('soap') && defined('SOAP_USE_XSI_ARRAY_TYPE') ? OFF : ON;
