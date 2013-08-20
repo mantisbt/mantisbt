@@ -982,7 +982,9 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 
 				# when sorting by due_date, always display undefined dates last
 				if( 'due_date' == $c_sort && 'ASC' == $c_dir ) {
-					$t_sort_col = "$t_sort_col = 1, $t_sort_col";
+					$t_sort_due_date = "$t_sort_col = 1";
+					$p_query_clauses['select'][] = $t_sort_due_date;
+					$t_sort_col = "$t_sort_due_date, $t_sort_col";
 				}
 
 				$p_query_clauses['order'][] = "$t_sort_col $c_dir";
