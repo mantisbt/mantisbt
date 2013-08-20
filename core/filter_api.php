@@ -954,9 +954,6 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 
 			# standard column
 			} else {
-				if ( 'last_updated' == $c_sort ) {
-					$c_sort = "last_updated";
-				}
 				$p_query_clauses['order'][] = "$t_bug_table.$c_sort $c_dir";
 			}
 		}
