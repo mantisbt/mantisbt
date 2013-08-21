@@ -1,0 +1,42 @@
+The MantisBT Entity-Relationship Diagram
+========================================
+
+The diagram was built using MySQL Workbench [1] version 5.2.40. The MantisBT
+schema was reverse-engineered based on a freshly installed database, then the
+relationships between tables and corresponding cardinalities were manually
+added.
+
+[1] http://dev.mysql.com/downloads/tools/workbench/
+
+
+Editing Recommendations
+-----------------------
+
+* Make sure that the tables are big enough to display all columns
+* Position the tables to minimize the number of intersections between the
+  relationships lines (not always easy as the software does not offer much
+  flexibility for positioning the connectors).
+* Prior to saving the file, update the MantisBT and Schema version numbers in
+  the 'Title' note (top-left corner); particularly, do not forget to bump the
+  revision number.
+
+
+Exporting
+---------
+
+To save the diagram in a more widely readable format:
+
+  * Start MySQL Workbench and open mantisbt.mwb
+  * Go to File / Export
+  * Select Export as PNG, SVG or Single Page PDF
+
+Recommended naming convention for exported files:
+
+    mantisbt_VVV_SSS_erd_rR.XXX
+
+where
+
+  * VVV is the MantisBT version (e.g. 1.2)
+  * SSS is the corresponding schema version (e.g. 183)
+  * R indicates the diagram's revision number
+  * XXX is the file's extension (e.g. pdf, png)
