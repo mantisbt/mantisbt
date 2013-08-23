@@ -1,0 +1,3 @@
+[submodule "library/adodb"]
+	path = library/adodb
+	url = https://github.com/mantisbt/ADOdb.git
