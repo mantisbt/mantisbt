@@ -7,7 +7,7 @@
 	<title>Contributing to MantisBT</title>
 
 	<para>
-		MantisBT uses the source control tool <ulink url="http://git.or.cz">Git</ulink>
+		MantisBT uses the source control tool <ulink url="http://git-scm.com/">Git</ulink>
 		for tracking development of the project.  If you are new to Git, you can
 		find some good resources for learning and installing Git in
 		<xref linkend="dev.appendix.git" />.
