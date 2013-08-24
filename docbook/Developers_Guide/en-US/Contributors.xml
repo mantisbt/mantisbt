@@ -192,6 +192,65 @@ git remote add --tags upstream git://github.com/mantisbt/mantisbt.git
 git checkout -b master-1.2.x origin/master-1.2.x
 </programlisting>
 			</para>
+
+			<note>
+				<para>
+					With the introduction of submodules for some of the
+					third-party libraries, you may encounter
+					issues when switching to an older branch which
+					still has code from those libraries in a subdirectory
+					of <filename>/library</filename> rather than a submodule:
+				</para>
+				<para>
+<programlisting>
+$ git checkout old_branch
+error: The following untracked working tree files would be overwritten by checkout
+	(list of files)
+Aborting
+</programlisting>
+				</para>
+				<para>
+					To resolve this, you first have to get rid of the
+					submodules directories before you can checkout the branch.
+					The command below will move all submodules to
+					<filename>/tmp</filename>:
+<programlisting>
+sed -rn "s/^.*path\s*=\s*(.*)$/\1/p" .gitmodules |xargs -I{} mv -v {} /tmp
+git checkout old_branch
+</programlisting>
+				</para>
+				<para>
+					When switching back from the older branch, the submodules
+					directories will be empty.
+					At that point you can either
+					<itemizedlist>
+						<listitem>
+							<para>
+								Update the submodules to reclone them
+<programlisting>
+git submodule update
+</programlisting>
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Restore the directories previously moved
+								to <filename>/tmp</filename> back into
+								the empty directories, e.g.
+<programlisting>
+sed -rn "s/^.*path\s*=\s*(.*)$/\1/p" .gitmodules |xargs -n 1 basename |xargs -I{} mv -v /tmp/{} library
+</programlisting>
+							</para>
+						</listitem>
+					</itemizedlist>
+				</para>
+				<para>
+					For further reference:
+					<ulink url="http://git-scm.com/book/en/Git-Tools-Submodules#Issues-with-Submodules">
+						Pro Git book
+					</ulink>
+				</para>
+			</note>
 		</section>
 
 	</section>
