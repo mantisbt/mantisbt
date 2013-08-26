@@ -26,6 +26,11 @@
 $t_root_path = dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR;
 
 /**
+ * MantisBT constants
+ */
+require_once ( $t_root_path . DIRECTORY_SEPARATOR . 'core/constant_inc.php' );
+
+/**
  * Test cases for SoapEnum class.
  */
 class SoapBase extends PHPUnit_Framework_TestCase {
@@ -34,7 +39,7 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	protected $password = 'root';
 	protected $email = 'root@localhost';
 	protected $userId = '1';
-	
+
 	protected $mantisPath;
 	private   $issueIdsToDelete = array();
 	private   $versionIdsToDelete = array();
@@ -56,22 +61,22 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 		    SoapClient(
 		       $GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'],
 		       	array_merge($this->defaultSoapClientOptions, $this->extraSoapClientFlags()
-				)		     
+				)
 		    );
-	    
+
 	    $this->mantisPath = substr($GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'], 0, -strlen('api/soap/mantisconnect.php?wsdl'));
     }
-    
+
     /**
      * @return an array of extra options to be passed to the SoapClient constructor
      */
     protected function extraSoapClientFlags() {
-    	
+
     	return array();
     }
-    
+
     protected function tearDown() {
-    	
+
     	foreach ( $this->versionIdsToDelete as $versionIdToDelete ) {
     		$this->client->mc_project_version_delete($this->userName, $this->password, $versionIdToDelete);
     	}
@@ -82,7 +87,7 @@ class SoapBase extends PHPUnit_Framework_TestCase {
     			$this->password,
     			$issueIdToDelete);
     	}
-    	
+
     	foreach ( $this->tagIdsToDelete as $tagIdToDelete ) {
     		$this->client->mc_tag_delete ( $this->userName, $this->password, $tagIdToDelete );
     	}
@@ -122,7 +127,7 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 
 		$this->issueIdsToDelete[] = $issueId;
 	}
-	
+
 	/**
 	 * Registers an version for deletion after the test method has run
 	 *
@@ -130,18 +135,18 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	 * @return void
 	 */
 	protected function deleteVersionAfterRun( $versionId ) {
-		
+
 		$this->versionIdsToDelete[] = $versionId;
 	}
-	
+
 	/**
 	 * Registers a tag for deletion after the test method has run
-	 * 
+	 *
 	 * @param int $tagId
 	 * @return void
 	 */
 	protected function deleteTagAfterRun ( $tagId ) {
-		
+
 		$this->tagIdsToDelete[] = $tagId;
 	}
 
@@ -158,10 +163,10 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 			$this->markTestSkipped( 'g_allow_no_category is not ON.' );
 		}
 	}
-	
+
 	protected function skipIsZlibIsNotAvailable() {
 		if( !extension_loaded( 'zlib' ) ) {
-			$this->markTestSkipped('zlib extension not found.');	
-		}	
+			$this->markTestSkipped('zlib extension not found.');
+		}
 	}
 }

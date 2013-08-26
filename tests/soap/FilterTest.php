@@ -511,6 +511,34 @@ class FilterTest extends SoapBase {
 		$this->assertEquals( 1, count( $projectIssues ) - count( $initialIssues ), "count(projectIssues) - count(initialIssues)" );
 		$this->assertEquals( $issueId, $projectIssues[0]->id, "issueId" );
 	}
+	
+	public function testFilterGetIssuesReturnsIssueMonitors() {
+	    
+	    $issueToAdd = $this->getIssueToAdd( 'FilterTest.testFilterGetIssuesReturnsIssueMonitors' );
+	    $issueToAdd['monitors'] = array(
+	    	array ( 'id' => $this->userId )
+	    );
+	    
+	    $issueId = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$issueToAdd);
+	    
+	    $this->deleteAfterRun($issueId);
+	    
+	    $issues = $this->getAllProjectsIssues();
+	    $createdIssue = null;
+	    foreach ( $issues as $issue ) {
+	        if ( $issue->id == $issueId ) {
+	            $createdIssue = $issue;
+	            break;
+	        }
+	    }
+	    
+	    self::assertNotNull($createdIssue, 'Created issue with id '. $issueId. ' was not found.');
+	    self::assertObjectHasAttribute('monitors', $createdIssue, 'Created issue with id ' . $issueId . ' does not have a "monitors" attribute');
+        self::assertEquals($this->userId, $createdIssue->monitors[0]->id);
+	}
 
 	/**
 	 *
