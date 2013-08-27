@@ -46,15 +46,12 @@ function installer_db_now() {
 # Special handling for Oracle (oci8):
 # - Field cannot be null with oci because empty string equals NULL
 # - Oci uses a different date literal syntax
-switch( $GLOBALS['g_db_type'] ) {
-	case 'oci8':
-		$t_notnull = "";
-		$t_timestamp = "timestamp" . installer_db_now();
-		break;
-	default:
-		$t_notnull = 'NOTNULL';
-		$t_timestamp = "'" . installer_db_now() . "'";
-		break;
+if( db_is_oracle() ) {
+	$t_notnull = "";
+	$t_timestamp = "timestamp" . installer_db_now();
+} else {
+	$t_notnull = 'NOTNULL';
+	$t_timestamp = "'" . installer_db_now() . "'";
 }
 
 $upgrade[] = array('CreateTableSQL',array(db_get_table( 'config' ),"
@@ -249,11 +246,11 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('project'),"
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
 
 # Index autocreated when oci used
-if( 'oci8' != $GLOBALS['g_db_type'] ) {
-	$upgrade[] = array('CreateIndexSQL',array('idx_project_id',db_get_table('project'),'id'));
-} else {
+if( db_is_oracle() ) {
 	# No-op - required to ensure schema version consistency
 	$upgrade[] = NULL;
+} else {
+	$upgrade[] = Array('CreateIndexSQL',Array('idx_project_id',db_get_table('project'),'id'));
 }
 
 $upgrade[] = array('CreateIndexSQL',array('idx_project_name',db_get_table('project'),'name',array('UNIQUE')));
@@ -378,17 +375,17 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('email'),"
   ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
 
 # Index autocreated when oci used
-if( 'oci8' != $GLOBALS['g_db_type'] ) {
-	$upgrade[] = array('CreateIndexSQL',array('idx_email_id',db_get_table('email'),'email_id'));
-} else {
+if( db_is_oracle() ) {
 	# No-op - required to ensure schema version consistency
 	$upgrade[] = NULL;
+} else {
+	$upgrade[] = Array('CreateIndexSQL',Array('idx_email_id',db_get_table('email'),'email_id'));
 }
 
 $upgrade[] = array('AddColumnSQL',array(db_get_table('bug'), "target_version C(64) NOTNULL DEFAULT \" '' \""));
 $upgrade[] = array('AddColumnSQL',array(db_get_table('bugnote'), "time_tracking I UNSIGNED NOTNULL DEFAULT \" 0 \""));
 $upgrade[] = array('CreateIndexSQL',array('idx_diskfile',db_get_table('bug_file'),'diskfile'));
-$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'user_print_pref' ), "print_pref C(64) NOTNULL" ) );
+$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'user_print_pref' ), "print_pref C(64) $t_notnull" ) );
 /* 60 */
 $upgrade[] = array('AlterColumnSQL', array( db_get_table( 'bug_history' ), "field_name C(64) $t_notnull" ) );
 
@@ -636,10 +633,10 @@ $upgrade[] = array( 'DropColumnSQL', array( db_get_table( 'user_pref'), "advance
 $upgrade[] = array( 'CreateIndexSQL', array( 'idx_project_hierarchy_child_id', db_get_table( 'project_hierarchy' ), 'child_id' ) );
 
 # Decrease index name length for oci8 (30 chars max)
-if( 'oci8' != $GLOBALS['g_db_type'] ) {
-	$t_index_name = 'idx_project_hierarchy_parent_id';
-} else {
+if( db_is_oracle() ) {
 	$t_index_name = 'idx_prj_hier_parent_id';
+} else {
+	$t_index_name = 'idx_project_hierarchy_parent_id';
 }
 $upgrade[] = array( 'CreateIndexSQL', array( $t_index_name, db_get_table( 'project_hierarchy' ), 'parent_id' ) );
 
