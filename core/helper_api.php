@@ -133,7 +133,7 @@ function get_percentage_by_status() {
 	# checking if it's a per project statistic or all projects
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
-	$query = "SELECT status, COUNT(*) AS number
+	$query = "SELECT status, COUNT(*) AS num
 				FROM $t_mantis_bug_table
 				WHERE $t_specific_where";
 	if ( !access_has_project_level( config_get( 'private_bug_threshold' ) ) ) {
@@ -146,7 +146,7 @@ function get_percentage_by_status() {
 	$t_status_count_array = array();
 
 	while( $row = db_fetch_array( $result ) ) {
-		$t_status_count_array[$row['status']] = $row['number'];
+		$t_status_count_array[$row['status']] = $row['num'];
 	}
 	$t_bug_count = array_sum( $t_status_count_array );
 	foreach( $t_status_count_array AS $t_status=>$t_value ) {
