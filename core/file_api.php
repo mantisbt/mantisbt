@@ -812,7 +812,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 
 				chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
 
-				$c_content = "''";
+				$c_content = '';
 			} else {
 				trigger_error( ERROR_FILE_DUPLICATE, ERROR );
 			}

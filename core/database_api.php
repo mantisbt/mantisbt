@@ -789,7 +789,7 @@ function db_prepare_binary_string( $p_string ) {
 			break;
 		case 'oci8':
 			$content = unpack( "H*hex", $p_string );
-			return '\'' . $content['hex'] . '\'';
+			return $content['hex'];
 		default:
 			return $p_string;
 			break;
