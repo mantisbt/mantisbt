@@ -989,6 +989,68 @@ function db_get_table_list() {
 }
 
 /**
+ * Updates a BLOB column
+ *
+ * This function is only needed for oci8; it will do nothing and return
+ * false if used with another RDBMS.
+ *
+ * @param string $p_table
+ * @param string $p_column The BLOB column to update
+ * @param string $p_val Data to store into the BLOB
+ * @param string $p_where Where clause to identify which record to update
+ *                        if null, defaults to the last record inserted in $p_table
+ * @return bool
+ */
+function db_update_blob( $p_table, $p_column, $p_val, $p_where = null ) {
+	global $g_db, $g_db_log_queries, $g_queries_array;
+
+	if( !db_is_oracle() ) {
+		return false;
+	}
+
+	if( null == $p_where ) {
+		$p_where = 'id=' . db_insert_id( $p_table );
+	}
+
+	if( ON == $g_db_log_queries ) {
+		$t_start = microtime(true);
+
+		$t_backtrace = debug_backtrace();
+		$t_caller = basename( $t_backtrace[0]['file'] );
+		$t_caller .= ":" . $t_backtrace[0]['line'];
+
+		# Is this called from another function?
+		if( isset( $t_backtrace[1] ) ) {
+			$t_caller .= ' ' . $t_backtrace[1]['function'] . '()';
+		} else {
+			# or from a script directly?
+			$t_caller .= ' ' . $_SERVER['SCRIPT_NAME'];
+		}
+	}
+
+	$t_result = $g_db->UpdateBlob( $p_table, $p_column, $p_val, $p_where );
+
+	if( $g_db_log_queries ) {
+		$t_elapsed = number_format( microtime(true) - $t_start, 4 );
+		$t_log_data = array(
+			"Update BLOB in $p_table.$p_column where $p_where",
+			$t_elapsed,
+			$t_caller
+		);
+		log_event( LOG_DATABASE, var_export( $t_log_data, true ) );
+		array_push( $g_queries_array, $t_log_data );
+	}
+
+	if( !$t_result ) {
+		db_error();
+		trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
+		return false;
+	}
+
+	return $t_result;
+}
+
+/**
  * Sorts bind variable numbers and puts them in sequential order
  * e.g. input:  "... WHERE F1=:12 and F2=:97 ",
  *      output: "... WHERE F1=:0 and F2=:1 ".
