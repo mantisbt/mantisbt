@@ -788,8 +788,7 @@ function db_prepare_binary_string( $p_string ) {
 			return $g_db->BlobEncode( $p_string );
 			break;
 		case 'oci8':
-			$content = unpack( "H*hex", $p_string );
-			return $content['hex'];
+			# Fall through, oci8 stores raw data in BLOB
 		default:
 			return $p_string;
 			break;
