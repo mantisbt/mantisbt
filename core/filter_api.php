@@ -951,7 +951,13 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 						}
 					}
 				}
-
+			# if sorting in due_date always displayed definded first
+			} else if ( 'due_date' == $c_sort ){
+				if ( 'ASC' == $c_dir ){
+					$p_query_clauses['order'][] = "($t_bug_table.$c_sort = 1), $t_bug_table.$c_sort $c_dir";
+				} else {
+					$p_query_clauses['order'][] = "$t_bug_table.$c_sort $c_dir";
+				}
 			# standard column
 			} else {
 				$t_sort_col = "$t_bug_table.$c_sort";
