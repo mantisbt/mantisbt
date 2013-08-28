@@ -564,7 +564,7 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 	?>
 			<tr <?php echo helper_alternate_class() ?>>
 				<td>
-					<?php echo string_display( $t_desc['name'] ) ?>
+					<?php echo string_display( lang_get_defaulted( $t_desc['name'] ) ) ?>
 				</td>
 				<td>
 <form method="post" action="manage_proj_custom_field_update.php">
@@ -602,7 +602,7 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 					{
 						if( !custom_field_is_linked( $t_field_id, $f_project_id ) ) {
 							$t_desc = custom_field_get_definition( $t_field_id );
-							echo "<option value=\"$t_field_id\">" . string_attribute( $t_desc['name'] ) . '</option>' ;
+							echo "<option value=\"$t_field_id\">" . string_attribute( lang_get_defaulted( $t_desc['name'] ) ) . '</option>' ;
 						}
 					}
 				?>

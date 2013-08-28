@@ -407,6 +407,7 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 					$p_old_value = string_custom_field_value_for_email( $p_old_value, $t_cf_type );
 				}
 				$p_new_value = string_custom_field_value_for_email( $p_new_value, $t_cf_type );
+				$t_field_localized = lang_get_defaulted( $p_field_name );
 			}
 		}
 
