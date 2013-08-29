@@ -564,7 +564,7 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 	?>
 			<tr <?php echo helper_alternate_class() ?>>
 				<td>
-					<?php echo string_display( lang_get_defaulted( $t_desc['name'] ) ) ?>
+					<?php echo custom_field_get_display_name( $t_desc['name'] ) ?>
 				</td>
 				<td>
 <form method="post" action="manage_proj_custom_field_update.php">

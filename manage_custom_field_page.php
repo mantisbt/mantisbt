@@ -69,7 +69,7 @@
 	?>
 		<tr <?php echo helper_alternate_class() ?>>
 			<td>
-				<a href="manage_custom_field_edit_page.php?field_id=<?php echo $t_field_id ?>"><?php echo string_display( $t_desc['name'] ) ?></a>
+				<a href="manage_custom_field_edit_page.php?field_id=<?php echo $t_field_id ?>"><?php echo custom_field_get_display_name( $t_desc['name'] ) ?></a>
 			</td>
 			<td>
 				<?php echo count( custom_field_get_project_ids( $t_field_id ) ) ?>
