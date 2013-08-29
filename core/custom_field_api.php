@@ -848,6 +848,22 @@ function custom_field_get_field( $p_field_id, $p_field_name ) {
 }
 
 /**
+ * Return custom field name including localized name (if available)
+ *
+ * @param string $p_name Custom field's name
+ * @return string CustomFieldName [(LocalizedName)]
+ * @access public
+ */
+function custom_field_get_display_name( $p_name ) {
+	$t_local_name = lang_get_defaulted( $p_name );
+	if( $t_local_name != $p_name ) {
+		$p_name .= " ($t_local_name)";
+	}
+
+	return string_display( $p_name );
+}
+
+/**
  * Get the value of a custom field for the given bug
  * @todo return values are unclear... should we error when access is denied
  * and provide an api to check whether it will be?
