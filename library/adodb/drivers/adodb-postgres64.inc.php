@@ -699,6 +699,15 @@ WHERE (c2.relname=\'%s\' or c2.relname=lower(\'%s\'))';
 		if ($this->pgVersion >= 7.1) { // good till version 999
 			$this->_nestedSQL = true;
 		}
+
+		# PostgreSQL 9.0 changed the default output for bytea from 'escape' to 'hex'
+		# PHP does not handle 'hex' properly ('x74657374' is returned as 't657374')
+		# https://bugs.php.net/bug.php?id=59831 states this is in fact not a bug,
+		# so we manually set bytea_output
+		if (version_compare($info['version'], '9.0', '>=')) {
+			$this->Execute('set bytea_output=escape');
+		}
+
 		return true;
 	}
 	
