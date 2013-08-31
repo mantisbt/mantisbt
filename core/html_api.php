@@ -584,9 +584,12 @@ function html_login_info() {
 				current_user_set_default_project( $t_project_id );
 			}
 
-			# Force reload of current page
+			# Force reload of current page, except if we got here after
+			# creating the first project
 			$t_redirect_url = str_replace( config_get( 'short_path' ), '', $_SERVER['REQUEST_URI'] );
-			html_meta_redirect( $t_redirect_url, 0, false );
+			if( 'manage_proj_create.php' != $t_redirect_url ) {
+				html_meta_redirect( $t_redirect_url, 0, false );
+			}
 		}
 		echo '<div id="current-time-centered">' . $t_now . '</div>';
 	}

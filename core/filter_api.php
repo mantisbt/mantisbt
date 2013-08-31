@@ -978,10 +978,14 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 
 			# standard column
 			} else {
-				if ( 'last_updated' == $c_sort ) {
-					$c_sort = "last_updated";
+				$t_sort_col = "$t_bug_table.$c_sort";
+
+				# when sorting by due_date, always display undefined dates last
+				if( 'due_date' == $c_sort && 'ASC' == $c_dir ) {
+					$t_sort_col = "$t_sort_col = 1, $t_sort_col";
 				}
-				$p_query_clauses['order'][] = "$t_bug_table.$c_sort $c_dir";
+
+				$p_query_clauses['order'][] = "$t_sort_col $c_dir";
 			}
 		}
 	}
@@ -2062,7 +2066,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	$p_page_number = filter_valid_page_number( $p_page_number, $p_page_count );
 	$t_offset = filter_offset( $p_page_number, $p_per_page );
 	$t_query_clauses = filter_unique_query_clauses( $t_query_clauses );
-	$t_select_string = "SELECT DISTINCT " . implode( ', ', $t_query_clauses['select'] );
+	$t_select_string = "SELECT " . implode( ', ', $t_query_clauses['select'] );
 	$t_from_string = " FROM " . implode( ', ', $t_query_clauses['from'] );
 	$t_order_string = " ORDER BY " . implode( ', ', $t_query_clauses['order'] );
 	$t_join_string = count( $t_query_clauses['join'] ) > 0 ? implode( ' ', $t_query_clauses['join'] ) : '';
