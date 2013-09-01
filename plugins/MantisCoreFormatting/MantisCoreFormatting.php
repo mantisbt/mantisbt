@@ -99,8 +99,6 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 	function formatted( $p_event, $p_string, $p_multiline = true ) {
 		static $s_urls, $s_buglinks, $s_vcslinks;
 
-		$t_string = $p_string;
-
 		# Text processing
 		$t_string = $this->text( $p_event, $p_string, $p_multiline );
 
