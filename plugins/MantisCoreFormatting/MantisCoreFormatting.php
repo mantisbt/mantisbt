@@ -19,7 +19,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 	/**
 	 *  A method that populates the plugin information and minimum requirements.
 	 */
-	function register( ) {
+	function register() {
 		$this->name = lang_get( 'plugin_format_title' );
 		$this->description = lang_get( 'plugin_format_description' );
 		$this->page = 'config';
@@ -47,10 +47,16 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 
 	/**
 	 * Plain text processing.
-	 * @param string Event name
-	 * @param string Unformatted text
-	 * @param boolean Multiline text
-	 * @return multi Array with formatted text and multiline paramater
+	 *
+	 * @param string  $p_event     Event name
+	 * @param string  $p_string    Raw text to process
+	 * @param boolean $p_multiline True for multiline text (default), false for single-line.
+	 *                             Determines which html tags are used.
+	 *
+	 * @return string Formatted text
+	 *
+	 * @see $g_html_valid_tags
+	 * @see $g_html_valid_tags_single_line
 	 */
 	function text( $p_event, $p_string, $p_multiline = true ) {
 		static $s_text;
@@ -77,10 +83,15 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 
 	/**
 	 * Formatted text processing.
-	 * @param string Event name
-	 * @param string Unformatted text
-	 * @param boolean Multiline text
-	 * @return multi Array with formatted text and multiline paramater
+	 *
+	 * Performs plain text, URLs and bug links processing
+	 *
+	 * @param string  $p_event     Event name
+	 * @param string  $p_string    Raw text to process
+	 * @param boolean $p_multiline True for multiline text (default), false for single-line.
+	 *                             Determines which html tags are used.
+	 *
+	 * @return string Formatted text
 	 */
 	function formatted( $p_event, $p_string, $p_multiline = true ) {
 		static $s_text, $s_urls, $s_buglinks;
