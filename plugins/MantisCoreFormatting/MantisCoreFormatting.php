@@ -24,7 +24,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 		$this->description = lang_get( 'plugin_format_description' );
 		$this->page = 'config';
 
-		$this->version = '1.0a';
+		$this->version = '1.0b';
 		$this->requires = array(
 			'MantisCore' => '1.2.0',
 		);
@@ -94,25 +94,16 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 	 * @return string Formatted text
 	 */
 	function formatted( $p_event, $p_string, $p_multiline = true ) {
-		static $s_text, $s_urls, $s_buglinks;
+		static $s_urls, $s_buglinks;
 
 		$t_string = $p_string;
 
-		if( null === $s_text ) {
-			$s_text = plugin_config_get( 'process_text' );
+		# Text processing
+		$t_string = $this->text( $p_event, $p_string, $p_multiline );
+
+		if( null === $s_urls ) {
 			$s_urls = plugin_config_get( 'process_urls' );
 			$s_buglinks = plugin_config_get( 'process_buglinks' );
-		}
-
-		if( ON == $s_text ) {
-			$t_string = string_strip_hrefs( $t_string );
-			$t_string = string_html_specialchars( $t_string );
-			$t_string = string_restore_valid_html_tags( $t_string, $p_multiline );
-
-			if( $p_multiline ) {
-				$t_string = string_preserve_spaces_at_bol( $t_string );
-				$t_string = string_nl2br( $t_string );
-			}
 		}
 
 		if( ON == $s_urls ) {
