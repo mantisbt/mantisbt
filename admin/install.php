@@ -317,6 +317,26 @@ if( 2 == $t_install_state ) {
 
 	print_test( 'Checking PHP support for database type', db_check_database_support( $f_db_type ), true, 'database is not supported by PHP. Check that it has been compiled into your server.' );
 
+	# ADOdb library version check
+	# PostgreSQL, Oracle and MSSQL require at least 5.18.
+	# @TODO dregad 20131001 req is 5.19 actually, but must wait until official release
+	# MySQL should be fine with 5.10
+	$t_adodb_version = substr( $ADODB_vers, 1, strpos( $ADODB_vers, ' ' ) - 1 );
+	switch( $f_db_type ) {
+		case 'mssqlnative':
+		case 'oci8' :
+		case 'pgsql' :
+			$t_adodb_min = '5.18';
+			break;
+		default:
+			$t_adodb_min = '5.10';
+	}
+	print_test( "Checking ADOdb Library version is at least $t_adodb_min",
+		version_compare( $t_adodb_version, $t_adodb_min, '>=' ),
+		true,
+		'Current version: ' . $ADODB_vers
+	);
+
 	print_test( 'Setting Database Hostname', '' !== $f_hostname, true, 'host name is blank' );
 	print_test( 'Setting Database Username', '' !== $f_db_username, true, 'database username is blank' );
 	print_test( 'Setting Database Password', '' !== $f_db_password, false, 'database password is blank' );
