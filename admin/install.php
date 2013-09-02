@@ -789,7 +789,7 @@ if( 3 == $t_install_state ) {
 					}
 				}
 			} else {
-				echo 'Schema ' . $upgrade[$i][0] . ' ( ' . $t_target . ' )</td>';
+				echo "Schema step $i " . $upgrade[$i][0] . " ( $t_target )</td>";
 				if( $t_sql ) {
 					$ret = $dict->ExecuteSQLArray( $sqlarray, false );
 				} else {
