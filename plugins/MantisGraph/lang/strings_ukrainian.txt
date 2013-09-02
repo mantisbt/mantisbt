@@ -25,12 +25,33 @@
  * @ingroup Language
  * @file
  *
+ * @author Andriykopanytsia
  * @author Steve.rusyn
  * @author SteveR
  */
 
+$s_plugin_graph_title = 'Mantis графіки';
+$s_plugin_graph_description = 'Офіційний модуль для графіків.';
+$s_plugin_MantisGraph_title = 'Mantis графіки';
+$s_plugin_MantisGraph_menu_advanced_summary = 'Розширений підсумок';
 $s_plugin_MantisGraph_config = 'Налаштування';
+$s_plugin_MantisGraph_synthesis_link = 'Синтез';
+$s_plugin_MantisGraph_status_link = 'На статус';
+$s_plugin_MantisGraph_priority_link = 'За пріоритетом';
+$s_plugin_MantisGraph_severity_link = 'За серйозністю';
+$s_plugin_MantisGraph_category_link = 'За категорією';
+$s_plugin_MantisGraph_resolution_link = 'За рішенням';
+$s_plugin_MantisGraph_graph_bug_page_link = 'графік';
+$s_plugin_MantisGraph_library = 'Графічна бібліотека для використання';
+$s_plugin_MantisGraph_bundled = 'В комплекті';
+$s_plugin_MantisGraph_window_width = 'Ширина графіку (в пікселях)';
+$s_plugin_MantisGraph_bar_aspect = 'співвідношення сторін стовпчикової діаграми (висота / ширина)';
+$s_plugin_MantisGraph_summary_graphs_per_row = 'Число графіків у рядку на розширеній сторінці підсумку';
 $s_plugin_MantisGraph_font = 'Шрифт';
+$s_plugin_MantisGraph_jpgraph_path = 'Системний шлях до бібліотеки JpGraph';
+$s_plugin_MantisGraph_jpgraph_path_default = 'Залиште поле порожнім для типового значення: {mantisroot}/library/jpgraph';
+$s_plugin_MantisGraph_jpgraph_antialias = 'Згладжування JpGraph';
+$s_plugin_MantisGraph_jpgraph_antialias_info = 'Згладжування покращує зовнішній вигляд деяких графіків за рахунок швидкодії (у 8 раз повільніше)';
 $s_plugin_MantisGraph_enabled = 'вкл';
 $s_plugin_MantisGraph_disabled = 'викл';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Діаграми за статусами';
@@ -55,5 +76,23 @@ $s_plugin_MantisGraph_legend_closed = 'Закриті';
 $s_plugin_MantisGraph_legend_reported = 'Повідомлені';
 $s_plugin_MantisGraph_cumulative = 'Накопичувальні';
 $s_plugin_MantisGraph_not_enough_data = 'Не вистачає даних для діаграми';
+$s_plugin_MantisGraph_period_none = 'Ні';
+$s_plugin_MantisGraph_period_this_week = 'Цього тижня';
 $s_plugin_MantisGraph_period_last_week = 'Останній тиждень';
 $s_plugin_MantisGraph_period_two_weeks = 'Останні два тижні';
+$s_plugin_MantisGraph_period_this_month = 'Цього місяця';
+$s_plugin_MantisGraph_period_last_month = 'Минулого місяця';
+$s_plugin_MantisGraph_period_this_quarter = 'Цього кварталу';
+$s_plugin_MantisGraph_period_last_quarter = 'Минулого кварталу';
+$s_plugin_MantisGraph_period_year_to_date = 'Рік до дати';
+$s_plugin_MantisGraph_period_select = 'Довільні дати';
+$s_plugin_MantisGraph_period_last_year = 'Минулого року';
+$s_plugin_MantisGraph_select = 'Будь ласка, виберіть';
+$s_plugin_MantisGraph_select_bystatus = 'за Статусом';
+$s_plugin_MantisGraph_select_summbystatus = 'Підсумок за статусом';
+$s_plugin_MantisGraph_select_bycat = 'Підсумок за категорією';
+$s_plugin_MantisGraph_select_both = 'Підсумок за статусом і категорією';
+$s_plugin_MantisGraph_show_as_graph = 'Показати як графік';
+$s_plugin_MantisGraph_show_as_table = 'Показати як таблицю';
+$s_plugin_MantisGraph_show_graph = 'Показати графік';
+$s_plugin_MantisGraph_graph_page = 'Графік історії проблем';

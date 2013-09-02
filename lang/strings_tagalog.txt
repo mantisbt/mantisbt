@@ -27,6 +27,7 @@
  *
  * @author AnakngAraw
  * @author Mirzali
+ * @author Sky Harbor
  */
 
 $s_actiongroup_menu_move = 'Ilipat';
@@ -300,7 +301,7 @@ $s_projection_enum_string = '10:wala,30:baguhin ng kaunti,50:maliit na pagkukump
 $s_eta_enum_string = '10:wala,20:< 1 araw,30:2-3 mga araw,40:< 1 linggo,50:< 1 buwan,60:> 1 buwan';
 $s_sponsorship_enum_string = '0:Hindi pa bayad,1:Hiniling,2:Bayad na';
 $s_new_account_subject = 'Pagpapatala/rehistrasyon ng kuwenta';
-$s_new_account_greeting = 'Salamat sa iyong pagpapatala.  Mayroon kang akawnt na may pangalan ng tagagamit na "%1$s". Upang makumpleto ang pagpapatala mo, dalawin ang sumusunod na URL (tiyaking naipasok ito bilang isahang guhit) at itakda ang sarili mong hudyat na pampasok:';
+$s_new_account_greeting = 'Salamat sa iyong pagpapatala.  Mayroon kang kuwenta na may pangalan ng tagagamit na "%1$s". Upang makumpleto ang pagpapatala mo, dalawin ang sumusunod na URL (tiyaking naipasok ito bilang isahang guhit) at itakda ang sarili mong hudyat na pampasok:';
 $s_new_account_greeting_admincreated = 'Lumikha ang tagagamit na si %1$s ng isang akawnt para sa iyo na may pangalan ng tagagamit na "%2$s".  Upang makumpleto ang iyong pagtatala, dalawin ang sumusuno na URL (tiyaking nakapasok ito bilang isang isahang guhit) at itakda ang iyong hudyat ng pagpunta:';
 $s_new_account_username = 'Pangalan ng tagagamit:';
 $s_new_account_message = 'Kung hindi mo hiniling ang anumang pagpapatala, balewalain ang mensaheng ito at walang mangyayari.';

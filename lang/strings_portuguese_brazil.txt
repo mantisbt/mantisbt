@@ -26,6 +26,7 @@
  * @file
  *
  * @author André Sencioles, andre spiritlinux com br
+ * @author Dianakc
  * @author Eduardo.mps
  * @author Felipe Tonioli, tonioli@easyline.com.br
  * @author Fernando Machado, fm-nospam@fmachado.com
@@ -422,7 +423,7 @@ $s_prefs_reset_msg = 'As preferências foram redefinidas...';
 $s_prefs_updated_msg = 'As preferências foram atualizadas...';
 $s_profile_added_msg = 'Perfil adicionado...';
 $s_profile_deleted_msg = 'Perfil apagado...';
-$s_edit_profile_title = 'Alterar Perfil';
+$s_edit_profile_title = 'Editar perfil';
 $s_platform = 'Plataforma';
 $s_operating_system = 'Sistema Operacional';
 $s_additional_description = 'Descrição Adicional';
@@ -431,7 +432,7 @@ $s_profile_defaulted_msg = 'Perfil padrão atualizado...';
 $s_add_profile_title = 'Adicionar Perfil';
 $s_add_profile_button = 'Adicionar Perfil';
 $s_edit_or_delete_profiles_title = 'Alterar ou Apagar Perfís';
-$s_edit_profile = 'Alterar Perfil';
+$s_edit_profile = 'Editar perfil';
 $s_make_default = 'Tornar Padrão';
 $s_delete_profile = 'Apagar Perfil';
 $s_select_profile = 'Selecionar Perfil';
@@ -477,11 +478,11 @@ $s_delete_bug_button = 'Apagar';
 $s_monitor_bug_button = 'Monitorar';
 $s_unmonitor_bug_button = 'Parar de Monitorar';
 $s_file_upload_msg = 'Arquivo carregado com sucesso';
-$s_upload_file = 'Carregar Arquivo';
+$s_upload_file = 'Enviar arquivo';
 $s_upload_files = 'Enviar arquivos';
 $s_select_file = 'Selecionar Arquivo';
 $s_select_files = 'Selecionar arquivos';
-$s_upload_file_button = 'Carregar Arquivo';
+$s_upload_file_button = 'Enviar arquivo';
 $s_upload_files_button = 'Enviar arquivos';
 $s_max_file_size = 'Tamanho máximo';
 $s_bug_reopened_msg = 'O caso foi reaberto...';
@@ -604,7 +605,7 @@ $s_core_path = 'Caminho do Core';
 $s_plugin_path = 'Caminho do Plugin';
 $s_created_user_part1 = 'Usuário';
 $s_created_user_part2 = 'criado com um nível de acesso de';
-$s_create_new_account_title = 'Criar Nova Conta';
+$s_create_new_account_title = 'Criar nova conta';
 $s_verify_password = 'Redigitar Senha';
 $s_enabled = 'Habilitado';
 $s_protected = 'Protegido';
@@ -626,7 +627,7 @@ $s_manage_threshold_config = 'Limiares do Fluxo de Trabalho';
 $s_manage_email_config = 'Notificações por E-Mail';
 $s_manage_workflow_config = 'Transições de Fluxo de Trabalho';
 $s_manage_tags_link = 'Gerenciar Marcadores';
-$s_create_new_account_link = 'Criar Nova Conta';
+$s_create_new_account_link = 'Criar nova conta';
 $s_projects_link = 'Projetos';
 $s_documentation_link = 'Documentação';
 $s_new_accounts_title = 'Contas Novas';
@@ -842,7 +843,7 @@ $s_select_post = 'Selecionar Notícia';
 $s_news_updated_msg = 'Notícia atualizada...';
 $s_back_link = 'Voltar';
 $s_file_uploaded_msg = 'Arquivo carregado com sucesso';
-$s_upload_file_title = 'Carregar Arquivo';
+$s_upload_file_title = 'Enviar arquivo';
 $s_title = 'Título';
 $s_project_file_deleted_msg = 'Arquivo do projeto apagado';
 $s_confirm_file_delete_msg = 'Você tem certeza que deseja apagar este arquivo?';

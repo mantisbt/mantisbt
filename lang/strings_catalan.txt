@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Alvaro Vidal-Abarca
  * @author Bernat
  * @author Bernat Pegueroles - bpf@pegueroles.com
  * @author BroOk
@@ -493,7 +494,7 @@ $s_sent_you_this_reminder_about = 'li ha enviat aquest recordatori sobre';
 $s_bug_reminder = 'Envia un recordatori';
 $s_reminder_sent_to = 'Recordatori enviat a';
 $s_reminder_sent_none = 'Cap recordatori ha pogut ser enviat';
-$s_reminder_list_truncated = 'la llista de destinataris està truncada, mireu l\'historial de problemes per tenir una llista completa';
+$s_reminder_list_truncated = 'llista de destinataris truncada';
 $s_bug_send_button = 'Envia';
 $s_reminder = 'Recordatori';
 $s_reminder_explain = 'Aquesta nota serà enviada als destinataris que han sol·licitat més informació sobre aquesta incidència.';
