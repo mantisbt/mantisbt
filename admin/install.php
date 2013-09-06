@@ -758,7 +758,6 @@ if( 3 == $t_install_state ) {
 
 				case NULL:
 					// No-op upgrade step - required for oci8
-					$sqlarray = array();
 					break;
 
 				default:
@@ -789,16 +788,23 @@ if( 3 == $t_install_state ) {
 					}
 				}
 			} else {
-				echo "Schema step $i " . $upgrade[$i][0] . " ( $t_target )</td>";
-				if( $t_sql ) {
-					$ret = $dict->ExecuteSQLArray( $sqlarray, false );
+				echo "Schema step $i: ";
+				if( is_null( $upgrade[$i][0]) ) {
+					echo 'No operation';
+					$ret = 2;
 				} else {
-					if( isset( $sqlarray[1] ) ) {
-						$ret = call_user_func( 'install_' . $sqlarray[0], $sqlarray[1] );
+					echo $upgrade[$i][0] . " ( $t_target )";
+					if( $t_sql ) {
+						$ret = $dict->ExecuteSQLArray( $sqlarray, false );
 					} else {
-						$ret = call_user_func( 'install_' . $sqlarray[0] );
+						if( isset( $sqlarray[1] ) ) {
+							$ret = call_user_func( 'install_' . $sqlarray[0], $sqlarray[1] );
+						} else {
+							$ret = call_user_func( 'install_' . $sqlarray[0] );
+						}
 					}
 				}
+				echo '</td>';
 				if( $ret == 2 ) {
 					print_test_result( GOOD );
 					config_set( 'database_version', $i );
