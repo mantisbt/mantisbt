@@ -219,7 +219,7 @@ function tag_parse_filters( $p_string ) {
  * @param integer the number of tags to return
  * @param integer the offset of the result
  *
- * @return array Tag rows, sorted by name
+ * @return ADORecordSet|bool Tags sorted by name, or false if the query failed.
  */
 function tag_get_all( $p_name_filter, $p_count, $p_offset) {
 
@@ -236,9 +236,7 @@ function tag_get_all( $p_name_filter, $p_count, $p_offset) {
 	$t_query = "SELECT * FROM $t_tag_table
 		$t_where ORDER BY name";
 
-	$t_result = db_query_bound( $t_query, $t_where_params, $p_count, $p_offset);
-
-	return $t_result;
+	return db_query_bound( $t_query, $t_where_params, $p_count, $p_offset);
 }
 
 /**

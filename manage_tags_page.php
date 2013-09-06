@@ -107,7 +107,8 @@ if ( $f_page_number < 1 ) {
 	$f_page_number = 1;
 }
 
-$t_tags = tag_get_all($t_name_filter, $t_per_page, $t_offset);
+# Retrieve Tags from table
+$t_result = tag_get_all($t_name_filter, $t_per_page, $t_offset);
 ?>
 
 <br />
@@ -130,11 +131,14 @@ $t_tags = tag_get_all($t_name_filter, $t_per_page, $t_offset);
 		<td width="20%"><?php echo lang_get( 'tag_created' ) ?></td>
 		<td width="20%"><?php echo lang_get( 'tag_updated' ) ?></td>
 	</tr>
+
 <?php
-foreach ( $t_tags as $t_tag_row ) {
+# Display all tags
+while( $t_tag_row = db_fetch_array( $t_tags ) ) {
 	$t_tag_name = string_display_line( $t_tag_row['name'] );
 	$t_tag_description = string_display( $t_tag_row['description'] );
 ?>
+
 	<tr <?php echo helper_alternate_class() ?>>
 		<?php if ( $t_can_edit ) { ?>
 		<td><a href="tag_view_page.php?tag_id=<?php echo $t_tag_row['id'] ?>" ><?php echo $t_tag_name ?></a></td>
@@ -145,7 +149,10 @@ foreach ( $t_tags as $t_tag_row ) {
 		<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></td>
 		<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></td>
 	</tr>
-<?php } ?>
+
+<?php
+} # end while loop on tags
+?>
 
 	<tr>
 		<td class="right" colspan="8">
