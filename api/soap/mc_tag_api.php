@@ -37,17 +37,13 @@ function mc_tag_get_all( $p_username, $p_password, $p_page_number, $p_per_page) 
 
 	$t_results = array();
 	$t_total_results = tag_count( '' );
+	$t_tags = tag_get_all('', $p_per_page, $p_per_page *  ( $p_page_number - 1 ) );
 
-	foreach ( tag_get_all('', $p_per_page, $p_per_page *  ( $p_page_number - 1 ) ) as $t_tag_row ) {
-		$t_results[] =  array (
-			'id' => $t_tag_row['id'],
-			'name' => $t_tag_row['name'],
-			'description' => $t_tag_row['description'],
-			'user_id' => mci_account_get_array_by_id ( $t_tag_row['user_id'] ),
-			'date_created' => SoapObjectsFactory::newDateTimeVar($t_tag_row['date_created']),
-			'date_updated' => SoapObjectsFactory::newDateTimeVar($t_tag_row['date_updated'])
-
-		);
+	while( $t_tag = db_fetch_array( $t_tags ) ) {
+		$t_tag['user_id'] = mci_account_get_array_by_id ( $t_tag['user_id'] );
+		$t_tag['date_created'] = SoapObjectsFactory::newDateTimeVar($t_tag['date_created']);
+		$t_tag['date_updated'] = SoapObjectsFactory::newDateTimeVar($t_tag['date_updated']);
+		$t_results[] = $t_tag;
 	}
 
 	return array(

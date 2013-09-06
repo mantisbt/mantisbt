@@ -100,7 +100,7 @@ if ( $f_page_number < 1 ) {
 	$f_page_number = 1;
 }
 
-# Retrive Tags from tag table
+# Retrieve Tags from table
 $t_result = tag_get_all( $t_name_filter, $t_per_page, $t_offset ) ;
 
 html_page_top( lang_get( 'manage_tags_link' ) );
@@ -132,7 +132,8 @@ print_manage_menu( 'manage_tags_page.php' ); ?>
 			<td><?php echo lang_get( 'tag_created' ) ?></td>
 			<td><?php echo lang_get( 'tag_updated' ) ?></td>
 		</tr><?php
-		foreach ( $t_result as $t_tag_row ) {
+		# Display all tags
+		while( $t_tag_row = db_fetch_array( $t_result ) ) {
 			$t_tag_name = string_display_line( $t_tag_row['name'] );
 			$t_tag_description = string_display( $t_tag_row['description'] ); ?>
 		<tr <?php echo helper_alternate_class() ?>><?php
@@ -145,7 +146,7 @@ print_manage_menu( 'manage_tags_page.php' ); ?>
 			<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></td>
 			<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></td>
 		</tr><?php
-		} ?>
+		} # end while loop on tags ?>
 	</table>
 	<div class="pager-links"><?php
 		/* @todo hack - pass in the hide inactive filter via cheating the actual filter value */
