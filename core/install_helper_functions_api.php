@@ -82,6 +82,65 @@ function db_unixtimestamp( $p_date = null, $p_gmt = false ) {
 }
 
 /**
+ * Check PostgreSQL boolean columns' type in the DB
+ * Verifies that columns defined as type "L" (logical) in the Mantis schema
+ * have the correct type in the underlying database.
+ * The ADOdb library bundled with MantisBT releases prior to 1.1.0 (schema
+ * version 51) created type "L" columns in PostgreSQL as SMALLINT, whereas later
+ * versions created them as BOOLEAN.
+ * @return mixed true if columns check OK
+ *               error message string if errors occured
+ *               array of invalid columns otherwise (empty if all columns check OK)
+ */
+function check_pgsql_bool_columns() {
+	global $f_db_type, $f_database_name;
+	global $g_db;
+
+	# Only applies to PostgreSQL
+	if( $f_db_type != 'pgsql' ) {
+		return true;
+	}
+
+	# Build the list of "L" type columns as of schema version 51
+	$t_bool_columns = array(
+		'bug'             => array( 'sticky' ),
+		'custom_field'    => array( 'advanced', 'require_report', 'require_update', 'display_report', 'display_update', 'require_resolved', 'display_resolved', 'display_closed', 'require_closed' ),
+		'filters'         => array( 'is_public' ),
+		'news'            => array( 'announcement' ),
+		'project'         => array( 'enabled' ),
+		'project_version' => array( 'released' ),
+		'sponsorship'     => array( 'paid' ),
+		'user_pref'       => array( 'advanced_report', 'advanced_view', 'advanced_update', 'redirect_delay', 'email_on_new', 'email_on_assigned', 'email_on_feedback', 'email_on_resolved', 'email_on_closed', 'email_on_reopened', 'email_on_bugnote', 'email_on_status', 'email_on_priority' ),
+		'user'            => array( 'enabled', 'protected' ),
+	);
+
+	# Generate SQL to check columns against schema
+	$t_where = '';
+	foreach( $t_bool_columns as $t_table_name => $t_columns ) {
+		$t_table = db_get_table( $t_table_name );
+		$t_where .= "table_name = '$t_table' AND column_name IN ( '"
+			. implode($t_columns, "', '")
+			. "' ) OR\n";
+	}
+	$sql = "SELECT table_name, column_name, data_type, column_default
+		FROM information_schema.columns
+		WHERE
+			table_catalog = '$f_database_name' AND
+			data_type <> 'boolean' AND
+			(\n" . rtrim( $t_where, " OR\n" ) . "\n)";
+
+	$t_result = @$g_db->Execute( $sql );
+	if( $t_result === false ) {
+		return 'Unable to check information_schema';
+	} else if( $t_result->RecordCount() == 0 ) {
+		return array();
+	}
+
+	# Some columns are not BOOLEAN type, return the list
+	return $t_result->GetArray();
+}
+
+/**
  * Set the value of $g_db_log_queries as specified
  * This is used by install callback functions to ensure that only the relevant
  * queries are logged
