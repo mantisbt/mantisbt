@@ -868,11 +868,12 @@ if( 3 == $t_install_state ) {
 				# Convert the columns
 				foreach( $ret as $row ) {
 					extract( $row );
+					$t_null = $is_nullable ? 'NULL' : 'NOT NULL';
+					$t_default = is_null( $column_default ) ? 'NULL' : $column_default;
 					$sqlarray = $dict->AlterColumnSQL(
 						$table_name,
-						"$column_name L NOTNULL DEFAULT '$column_default'"
+						"$column_name L $t_null DEFAULT $t_default"
 					);
-
 					print_test(
 						"Converting column $table_name.$column_name to BOOLEAN",
 						2 == $dict->ExecuteSQLArray( $sqlarray, false ),

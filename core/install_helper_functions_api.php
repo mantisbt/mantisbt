@@ -122,7 +122,7 @@ function check_pgsql_bool_columns() {
 			. implode($t_columns, "', '")
 			. "' ) OR\n";
 	}
-	$sql = "SELECT table_name, column_name, data_type, column_default
+	$sql = "SELECT table_name, column_name, data_type, column_default, is_nullable
 		FROM information_schema.columns
 		WHERE
 			table_catalog = '$f_database_name' AND
