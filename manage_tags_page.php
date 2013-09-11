@@ -134,7 +134,7 @@ $t_result = tag_get_all($t_name_filter, $t_per_page, $t_offset);
 
 <?php
 # Display all tags
-while( $t_tag_row = db_fetch_array( $t_tags ) ) {
+while( $t_tag_row = db_fetch_array( $t_result ) ) {
 	$t_tag_name = string_display_line( $t_tag_row['name'] );
 	$t_tag_description = string_display( $t_tag_row['description'] );
 ?>
