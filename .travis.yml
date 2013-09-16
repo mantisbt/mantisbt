@@ -13,6 +13,11 @@ env:
 
 script: phpunit --bootstrap ./tests/bootstrap.php ./tests/AllTests.php
 
+branches:
+  only:
+    - master
+    - master-1.2.x
+
 matrix:
   # Until #14398 is fixed, PostgreSQL should not cause entire build to fail
   allow_failures:
