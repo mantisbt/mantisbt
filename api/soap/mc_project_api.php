@@ -1015,6 +1015,59 @@ function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, 
 }
 
 /**
+ * Get the issue headers that match the specified project id,version and paging details. 
+ * 
+ * @param string $p_username
+ * @param string $p_password
+ * @param integer $p_project_id
+ * @param string $p_version
+ * @param integer $p_page_number
+ * @param integer $p_per_page : pass -1 to retrieve all issue headers
+ */
+function mc_project_get_issue_headers_for_version( $p_username, $p_password, $p_project_id, $p_version,$p_page_number, $p_per_page  ) {
+    global $g_project_override;
+
+    $t_user_id = mci_check_login( $p_username, $p_password );
+    if( $t_user_id === false ) {
+        return mci_soap_fault_login_failed();
+    }
+    if( $p_project_id != ALL_PROJECTS && !project_exists( $p_project_id ) ) {
+        return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
+    }
+
+    $g_project_override = $p_project_id;;
+
+    if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
+        return mci_soap_fault_access_denied( $t_user_id );
+    }
+
+    $t_filter = array(
+        'show_version' => Array(
+			'0' => $p_version,
+		),
+        'dir' => 'DESC',
+        'sort' => 'id',
+    );
+
+    $t_orig_page_number = $p_page_number < 1 ? 1 : $p_page_number;
+    $t_page_count = 0;
+    $t_bug_count = 0;
+
+    $t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter, $p_project_id );
+    $t_result = array();
+
+    // the page number was moved back, so we have exceeded the actual page number, see bug #12991
+    if ( $t_orig_page_number > $p_page_number )
+        return $t_result;
+
+    foreach( $t_rows as $t_issue_data ) {
+        $t_result[] = mci_issue_data_as_header_array( $t_issue_data);
+    }
+
+    return $t_result;
+}
+
+/**
  * Get appropriate users assigned to a project by access level.
  *
  * @param string $p_username  The name of the user trying to access the versions.
