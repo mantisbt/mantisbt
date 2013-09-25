@@ -513,7 +513,7 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
 	if( $p_include_all_projects && $p_filter_project_id !== ALL_PROJECTS ) {
 		echo '<option value="' . ALL_PROJECTS . '"';
 		if ( $p_project_id !== null ) {
-			check_selected( $p_project_id, ALL_PROJECTS, false );
+			check_selected( (int)$p_project_id, ALL_PROJECTS, false );
 		}
 		echo '>' . lang_get( 'all_projects' ) . '</option>' . "\n";
 	}
@@ -525,7 +525,7 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
 		}
 
 		echo '<option value="' . $t_id . '"';
-		check_selected( $p_project_id, $t_id );
+		check_selected( (int)$p_project_id, $t_id );
 		check_disabled( $t_id == $p_filter_project_id || !$t_can_report );
 		echo '>' . string_attribute( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
 		print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only );
