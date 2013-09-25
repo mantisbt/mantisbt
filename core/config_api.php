@@ -592,6 +592,16 @@ function config_eval( $p_value, $p_global = false ) {
 				} else {
 					$t_repl = config_get( $t_matches[2][$i] );
 				}
+
+				// Handle the simple case where there is no need to do string replace.
+				// This will resolve the case where the $t_repl value is of non-string
+				// type, e.g. array of access levels.
+				if ( $t_count == 1 && $p_value == '%' . $t_matches[2][$i] . '%' )
+				{
+					$t_value = $t_repl;
+					break;
+				}
+
 				$t_value = str_replace( $t_matches[1][$i], $t_repl, $t_value );
 			}
 		}
