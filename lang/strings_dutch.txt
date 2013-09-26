@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author HanV
  * @author Hans van Zijst, hzi@syncera.nl
  * @author Jan-Bart de Vreede, jvreede@outdare.nl
  * @author Jeroen Latour, jlatour@calaquendi.net
@@ -880,10 +881,10 @@ $s_report_stay = 'Doorgaan met aanmelden';
 $s_selected_project = 'Geselecteerd project';
 $s_valid_project_msg = 'U moet een geldig project kiezen';
 $s_signup_done_title = 'Gebruikersregistratie verwerkt.';
-$s_password_emailed_msg = 'Gefeliciteerd. Uw registratie is succesvol verwerkt. U ontvangt nu een bevestigingse-mail om uw e-mailadres te controleren. In dit bericht vindt u instructies om uw account te activeren.';
+$s_password_emailed_msg = 'Gefeliciteerd. Uw registratie is succesvol verwerkt. U ontvangt nu een e-mail om uw e-mailadres te controleren. In dit bericht vindt u instructies om uw account te activeren.';
 $s_no_reponse_msg = 'U hebt zeven dagen om het registratieproces af te ronden. Wanneer u dit niet doet binnen deze tijd, kan de nieuwe gebruiker verwijderd worden.';
 $s_signup_captcha_request = 'Vul de code in zoals deze rechts in beeld weergegeven wordt.';
-$s_signup_info = 'Wanneer dit formulier is ingevuld en opgestuurd, wordt een bevestigingse-mail naar het door u opgegeven e-mailadres verzonden.<br />Door de instructies in deze e-mail te volgen, kunt u uw gebruiker activeren. U hebt zeven dagen om de registratie af te ronden. Wanneer u dit niet doet binnen deze tijd, kan de nieuwe gebruiker verwijderd worden.<br />U moet een geldig e-mailadres opgeven om de bevestiging te kunnen ontvangen.';
+$s_signup_info = 'Wanneer dit formulier is ingevuld en opgestuurd, wordt een bevestiging naar het door u opgegeven e-mailadres verzonden.<br />Door de instructies in deze e-mail te volgen, kunt u uw gebruiker activeren. U hebt zeven dagen de tijd om de registratie af te ronden. Wanneer u dit niet doet, kan de nieuwe gebruiker verwijderd worden.<br />U moet een geldig e-mailadres opgeven om de bevestiging te kunnen ontvangen.';
 $s_signup_title = 'Registreren';
 $s_signup_button = 'Registreren';
 $s_no_password_request = 'Uw wachtwoord wordt door een ander systeem beheerd. Neem contact op met de systeembeheerder.';
