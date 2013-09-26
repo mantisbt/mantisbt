@@ -168,11 +168,14 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only=fals
 	$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project_id, $t_user )
 			  && ( ( ALL_PROJECTS == $t_project_id ) || !$p_all_projects_only );
 
-	echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
+	echo '<tr ' . helper_alternate_class() . ">\n";
+
+	# Access levels
+	echo "\t<td>" . string_display( $p_caption ) . "</td>\n";
 	foreach( $t_access_levels as $t_access_level => $t_access_label ) {
 		$t_file = in_array( $t_access_level, $t_file_exp );
 		$t_global = in_array( $t_access_level, $t_global_exp );
-		$t_project = in_array( $t_access_level, $t_project_exp ) ;
+		$t_project = in_array( $t_access_level, $t_project_exp );
 
 		$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
 
@@ -187,7 +190,7 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only=fals
 				$t_value = '&#160;';
 			}
 		}
-		echo '<td class="center"' . $t_color . '>' . $t_value . '</td>';
+		echo "\t" . '<td class="center"' . $t_color . '>' . $t_value . "</td>\n";
 	}
 	if ( $t_can_change ) {
 		echo '<td> <select name="access_' . $p_threshold . '">';
@@ -197,7 +200,7 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only=fals
 		echo '<td>' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), config_get_access( $p_threshold ) ) . '&#160;</td>';
 	}
 
-	echo '</tr>' . "\n";
+	echo "</tr>\n";
 }
 
 function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only=false ) {
@@ -210,9 +213,10 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only=
 	$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project_id, $t_user )
 			  && ( ( ALL_PROJECTS == $t_project_id ) || !$p_all_projects_only );
 
-	$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
+	echo '<tr ' . helper_alternate_class() . ">\n\t<td>" . string_display( $p_caption ) . "</td>\n";
 
-	echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
+	# Value
+	$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
 	if ( $t_can_change ) {
 		$t_checked = ( ON == config_get( $p_threshold ) ) ? "checked=\"checked\"" : "";
 		$t_value = "<input type=\"checkbox\" name=\"flag_" . $p_threshold . "\" value=\"1\" $t_checked />";
@@ -224,7 +228,8 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only=
 			$t_value = '&#160;';
 		}
 	}
-	echo '<td' . $t_color . '>' . $t_value . '</td><td class="left" colspan="' . ( count( $t_access_levels ) - 1 ). '"></td>';
+	echo "\t<td $t_color>" . $t_value . "</td>\n\t"
+		. '<td class="left" colspan="' . ( count( $t_access_levels ) - 1 ). '"></td>';
 
 	if ( $t_can_change ) {
 		echo '<td><select name="access_' . $p_threshold . '">';
@@ -234,7 +239,7 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only=
 		echo '<td>' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), config_get_access( $p_threshold ) ) . '&#160;</td>';
 	}
 
-	echo '</tr>' . "\n";
+	echo "</tr>\n";
 }
 
 function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects_only=false ) {
@@ -247,18 +252,21 @@ function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects
 	$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project_id, $t_user )
 			  && ( ( ALL_PROJECTS == $t_project_id ) || !$p_all_projects_only );
 
-	$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
+	echo '<tr ' . helper_alternate_class() . ">\n\t<td>" . string_display( $p_caption ) . "</td>\n";
 
-	echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
+	# Value
+	$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
+	echo "\t" . '<td class="left" colspan="3"' . $t_color . '>';
 	if ( $t_can_change ) {
-		echo '<td class="left" colspan="3"' . $t_color . '><select name="flag_' . $p_threshold . '">';
+		echo '<select name="flag_' . $p_threshold . '">';
 		print_enum_string_option_list( $p_enum, config_get( $p_threshold ) );
-		echo '</select></td><td colspan="' . ( count( $t_access_levels ) - 3 ) . '"></td>';
+		echo '</select>';
 		$t_show_submit = true;
 	} else {
 		$t_value = MantisEnum::getLabel( lang_get( $p_enum . '_enum_string' ), config_get( $p_threshold ) ) . '&#160;';
-		echo '<td class="left" colspan="3"' . $t_color . '>' . $t_value . '</td><td colspan="' . ( count( $t_access_levels ) - 3 ) . '"></td>';
+		echo $t_value;
 	}
+	echo "</td>\n\t" . '<td colspan="' . ( count( $t_access_levels ) - 3 ) . '"></td>' . "\n";
 
 	if ( $t_can_change ) {
 		echo '<td><select name="access_' . $p_threshold . '">';
@@ -268,7 +276,7 @@ function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects
 		echo '<td>' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), config_get_access( $p_threshold ) ) . '&#160;</td>';
 	}
 
-	echo '</tr>' . "\n";
+	echo "</tr>\n";
 }
 
 function get_section_end() {
