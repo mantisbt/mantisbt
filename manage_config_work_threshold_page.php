@@ -88,8 +88,46 @@ function get_section_begin_mcwt( $p_section_name ) {
 	echo '</tr>' . "\n";
 }
 
+/**
+ * Defines the cell's background color and sets the overrides
+ * @param string $p_threshold  Config option
+ * @param string $p_file       System default value
+ * @param string $p_global     All projects value
+ * @param string $p_project    Current project value
+ * @param bool $p_set_override If true, will define an override if needed
+ * @return string HTML tag attribute for background color override
+ */
+function set_color( $p_threshold, $p_file, $p_global, $p_project, $p_set_override ) {
+	global $t_color_project, $t_color_global;
+
+	$t_color = false;
+
+	# all projects override
+	if ( $p_global != $p_file ) {
+		$t_color = $t_color_global;
+		if ( $p_set_override ) {
+			set_overrides( $p_threshold );
+		}
+	}
+
+	# project overrides
+	if ( $p_project != $p_global ) {
+		$t_color = $t_color_project;
+		if ( $p_set_override ) {
+			set_overrides( $p_threshold );
+		}
+
+	}
+
+	if( false === $t_color ) {
+		return '';
+	}
+
+	return ' bgcolor="' . $t_color . '" ';
+}
+
 function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only=false ) {
-	global $t_user, $t_project_id, $t_show_submit, $t_access_levels, $t_colour_project, $t_colour_global;
+	global $t_user, $t_project_id, $t_show_submit, $t_access_levels;
 
 	$t_file = config_get_global( $p_threshold );
 	if ( !is_array( $t_file ) ) {
@@ -136,19 +174,7 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only=fals
 		$t_global = in_array( $t_access_level, $t_global_exp );
 		$t_project = in_array( $t_access_level, $t_project_exp ) ;
 
-		$t_colour = '';
-		if ( $t_global != $t_file ) {
-			$t_colour = ' bgcolor="' . $t_colour_global . '" '; # all projects override
-			if ( $t_can_change ) {
-				set_overrides( $p_threshold );
-			}
-		}
-		if ( $t_project != $t_global ) {
-			$t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
-			if ( $t_can_change ) {
-				set_overrides( $p_threshold );
-			}
-		}
+		$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
 
 		if ( $t_can_change ) {
 			$t_checked = $t_project ? "checked=\"checked\"" : "";
@@ -161,7 +187,7 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only=fals
 				$t_value = '&#160;';
 			}
 		}
-		echo '<td class="center"' . $t_colour . '>' . $t_value . '</td>';
+		echo '<td class="center"' . $t_color . '>' . $t_value . '</td>';
 	}
 	if ( $t_can_change ) {
 		echo '<td> <select name="access_' . $p_threshold . '">';
@@ -175,7 +201,7 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only=fals
 }
 
 function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only=false ) {
-	global $t_user, $t_project_id, $t_show_submit, $t_access_levels, $t_colour_project, $t_colour_global;
+	global $t_user, $t_project_id, $t_show_submit, $t_access_levels;
 
 	$t_file = config_get_global( $p_threshold );
 	$t_global = config_get( $p_threshold, null, null, ALL_PROJECTS );
@@ -184,19 +210,7 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only=
 	$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project_id, $t_user )
 			  && ( ( ALL_PROJECTS == $t_project_id ) || !$p_all_projects_only );
 
-	$t_colour = '';
-	if ( $t_global != $t_file ) {
-		$t_colour = ' bgcolor="' . $t_colour_global . '" '; # all projects override
-		if ( $t_can_change ) {
-			set_overrides( $p_threshold );
-		}
-	}
-	if ( $t_project != $t_global ) {
-		$t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
-		if ( $t_can_change ) {
-			set_overrides( $p_threshold );
-		}
-	}
+	$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
 
 	echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
 	if ( $t_can_change ) {
@@ -210,7 +224,7 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only=
 			$t_value = '&#160;';
 		}
 	}
-	echo '<td' . $t_colour . '>' . $t_value . '</td><td class="left" colspan="' . ( count( $t_access_levels ) - 1 ). '"></td>';
+	echo '<td' . $t_color . '>' . $t_value . '</td><td class="left" colspan="' . ( count( $t_access_levels ) - 1 ). '"></td>';
 
 	if ( $t_can_change ) {
 		echo '<td><select name="access_' . $p_threshold . '">';
@@ -224,7 +238,7 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only=
 }
 
 function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects_only=false ) {
-	global $t_user, $t_project_id, $t_show_submit, $t_access_levels, $t_colour_project, $t_colour_global;
+	global $t_user, $t_project_id, $t_show_submit, $t_access_levels;
 
 	$t_file = config_get_global( $p_threshold );
 	$t_global = config_get( $p_threshold, null, null, ALL_PROJECTS );
@@ -233,29 +247,17 @@ function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects
 	$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project_id, $t_user )
 			  && ( ( ALL_PROJECTS == $t_project_id ) || !$p_all_projects_only );
 
-	$t_colour = '';
-	if ( $t_global != $t_file ) {
-		$t_colour = ' bgcolor="' . $t_colour_global . '" '; # all projects override
-		if ( $t_can_change ) {
-			set_overrides( $p_threshold );
-		}
-	}
-	if ( $t_project != $t_global ) {
-		$t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
-		if ( $t_can_change ) {
-			set_overrides( $p_threshold );
-		}
-	}
+	$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
 
 	echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
 	if ( $t_can_change ) {
-		echo '<td class="left" colspan="3"' . $t_colour . '><select name="flag_' . $p_threshold . '">';
+		echo '<td class="left" colspan="3"' . $t_color . '><select name="flag_' . $p_threshold . '">';
 		print_enum_string_option_list( $p_enum, config_get( $p_threshold ) );
 		echo '</select></td><td colspan="' . ( count( $t_access_levels ) - 3 ) . '"></td>';
 		$t_show_submit = true;
 	} else {
 		$t_value = MantisEnum::getLabel( lang_get( $p_enum . '_enum_string' ), config_get( $p_threshold ) ) . '&#160;';
-		echo '<td class="left" colspan="3"' . $t_colour . '>' . $t_value . '</td><td colspan="' . ( count( $t_access_levels ) - 3 ) . '"></td>';
+		echo '<td class="left" colspan="3"' . $t_color . '>' . $t_value . '</td><td colspan="' . ( count( $t_access_levels ) - 3 ) . '"></td>';
 	}
 
 	if ( $t_can_change ) {
@@ -273,8 +275,9 @@ function get_section_end() {
 	echo '</table><br />' . "\n";
 }
 
-$t_colour_project = config_get( 'colour_project');
-$t_colour_global = config_get( 'colour_global');
+
+$t_color_project = config_get( 'colour_project' );
+$t_color_global = config_get( 'colour_global' );
 
 echo "<br /><br />\n";
 
@@ -286,9 +289,9 @@ if ( ALL_PROJECTS == $t_project_id ) {
 echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
 echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 if ( ALL_PROJECTS <> $t_project_id ) {
-	echo '<span style="background-color:' . $t_colour_project . '">' . lang_get( 'colour_project' ) .'</span><br />';
+	echo '<span style="background-color:' . $t_color_project . '">' . lang_get( 'colour_project' ) .'</span><br />';
 }
-echo '<span style="background-color:' . $t_colour_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
+echo '<span style="background-color:' . $t_color_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
 
 echo "<form name=\"mail_config_action\" method=\"post\" action=\"manage_config_work_threshold_set.php\">\n";
 echo form_security_field( 'manage_config_work_threshold_set' );
