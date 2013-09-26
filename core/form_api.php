@@ -43,6 +43,17 @@ require_api( 'php_api.php' );
 require_api( 'session_api.php' );
 
 /**
+ * Helper function to generate a form action value when forms are designed
+ * to be submitted to the same url that's is currently being used, such as
+ * helper_ensure_confirmed() or auth_reauthenticate().
+ * @return string Form action value
+ */
+function form_action_self() {
+	$t_self = trim( str_replace( "\0", '', $_SERVER['SCRIPT_NAME'] ) );
+	return basename( $t_self );
+}
+
+/**
  * Generate a random security token, prefixed by date, store it in the
  * user's session, and then return the string to be used as a form element
  * element with the security token as the value.

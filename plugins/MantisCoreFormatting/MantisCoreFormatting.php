@@ -19,12 +19,12 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 	/**
 	 *  A method that populates the plugin information and minimum requirements.
 	 */
-	function register( ) {
+	function register() {
 		$this->name = lang_get( 'plugin_format_title' );
 		$this->description = lang_get( 'plugin_format_description' );
 		$this->page = 'config';
 
-		$this->version = '1.0a';
+		$this->version = '1.0b';
 		$this->requires = array(
 			'MantisCore' => '1.2.0',
 		);
@@ -47,10 +47,16 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 
 	/**
 	 * Plain text processing.
-	 * @param string Event name
-	 * @param string Unformatted text
-	 * @param boolean Multiline text
-	 * @return multi Array with formatted text and multiline paramater
+	 *
+	 * @param string  $p_event     Event name
+	 * @param string  $p_string    Raw text to process
+	 * @param boolean $p_multiline True for multiline text (default), false for single-line.
+	 *                             Determines which html tags are used.
+	 *
+	 * @return string Formatted text
+	 *
+	 * @see $g_html_valid_tags
+	 * @see $g_html_valid_tags_single_line
 	 */
 	function text( $p_event, $p_string, $p_multiline = true ) {
 		static $s_text;
@@ -64,7 +70,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 		if( ON == $s_text ) {
 			$t_string = string_strip_hrefs( $t_string );
 			$t_string = string_html_specialchars( $t_string );
-			$t_string = string_restore_valid_html_tags( $t_string, /* multiline = */ true );
+			$t_string = string_restore_valid_html_tags( $t_string, $p_multiline );
 
 			if( $p_multiline ) {
 				$t_string = string_preserve_spaces_at_bol( $t_string );
@@ -77,31 +83,25 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 
 	/**
 	 * Formatted text processing.
-	 * @param string Event name
-	 * @param string Unformatted text
-	 * @param boolean Multiline text
-	 * @return multi Array with formatted text and multiline paramater
+	 *
+	 * Performs plain text, URLs and bug links processing
+	 *
+	 * @param string  $p_event     Event name
+	 * @param string  $p_string    Raw text to process
+	 * @param boolean $p_multiline True for multiline text (default), false for single-line.
+	 *                             Determines which html tags are used.
+	 *
+	 * @return string Formatted text
 	 */
 	function formatted( $p_event, $p_string, $p_multiline = true ) {
-		static $s_text, $s_urls, $s_buglinks;
+		static $s_urls, $s_buglinks;
 
-		$t_string = $p_string;
+		# Text processing
+		$t_string = $this->text( $p_event, $p_string, $p_multiline );
 
-		if( null === $s_text ) {
-			$s_text = plugin_config_get( 'process_text' );
+		if( null === $s_urls ) {
 			$s_urls = plugin_config_get( 'process_urls' );
 			$s_buglinks = plugin_config_get( 'process_buglinks' );
-		}
-
-		if( ON == $s_text ) {
-			$t_string = string_strip_hrefs( $t_string );
-			$t_string = string_html_specialchars( $t_string );
-			$t_string = string_restore_valid_html_tags( $t_string, /* multiline = */ true );
-
-			if( $p_multiline ) {
-				$t_string = string_preserve_spaces_at_bol( $t_string );
-				$t_string = string_nl2br( $t_string );
-			}
 		}
 
 		if( ON == $s_urls ) {

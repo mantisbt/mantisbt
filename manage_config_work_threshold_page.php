@@ -68,10 +68,10 @@ $t_access_levels = MantisEnum::getAssocArrayIndexedByValues( config_get( 'access
 
 $t_overrides = array();
 function set_overrides( $p_config ) {
-   global $t_overrides;
-   if ( !in_array( $p_config, $t_overrides ) ) {
-	   $t_overrides[] = $p_config;
-   }
+	global $t_overrides;
+	if ( !in_array( $p_config, $t_overrides ) ) {
+		$t_overrides[] = $p_config;
+	}
 }
 
 function get_section_begin_mcwt( $p_section_name ) {
@@ -88,8 +88,73 @@ function get_section_begin_mcwt( $p_section_name ) {
 	echo '</tr>' . "\n";
 }
 
+/**
+ * Defines the cell's background color and sets the overrides
+ * @param string $p_threshold  Config option
+ * @param string $p_file       System default value
+ * @param string $p_global     All projects value
+ * @param string $p_project    Current project value
+ * @param bool $p_set_override If true, will define an override if needed
+ * @return string HTML tag attribute for background color override
+ */
+function set_color( $p_threshold, $p_file, $p_global, $p_project, $p_set_override ) {
+	global $t_color_project, $t_color_global, $t_project_id;
+
+	$t_color = false;
+
+	# all projects override
+	if ( $p_global != $p_file ) {
+		$t_color = $t_color_global;
+		if ( $p_set_override && ALL_PROJECTS == $t_project_id ) {
+			set_overrides( $p_threshold );
+		}
+	}
+
+	# project overrides
+	if ( $p_project != $p_global ) {
+		$t_color = $t_color_project;
+		if ( $p_set_override && ALL_PROJECTS != $t_project_id ) {
+			set_overrides( $p_threshold );
+		}
+
+	}
+
+	if( false === $t_color ) {
+		return '';
+	}
+
+	return ' bgcolor="' . $t_color . '" ';
+}
+
+/**
+ * Prints selection list or value of who is allowed to change the capability
+ * @param string $p_threshold  Capability
+ * @param bool   $p_can_change If true, prints a selection list otherwise just display value
+ */
+function print_who_can_change( $p_threshold, $p_can_change ) {
+	static $s_file_access = null;
+
+	if( is_null( $s_file_access ) ) {
+		$t_file_access = config_get_global( 'admin_site_threshold' );
+	}
+	$t_global_access = config_get_access( $p_threshold, null, ALL_PROJECTS );
+	$t_project_access = config_get_access( $p_threshold );
+
+	$t_color = set_color( $p_threshold, $t_file_access, $t_global_access, $t_project_access, $p_can_change );
+
+	echo "\t<td $t_color>";
+	if ( $p_can_change ) {
+		echo '<select name="access_' . $p_threshold . '">';
+		print_enum_string_option_list( 'access_levels', $t_project_access );
+		echo '</select>';
+	} else {
+		echo MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_project_access ) . '&#160;';
+	}
+	echo "</td>\n";
+}
+
 function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only=false ) {
-	global $t_user, $t_project_id, $t_show_submit, $t_access_levels, $t_colour_project, $t_colour_global;
+	global $t_user, $t_project_id, $t_show_submit, $t_access_levels;
 
 	$t_file = config_get_global( $p_threshold );
 	if ( !is_array( $t_file ) ) {
@@ -130,25 +195,16 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only=fals
 	$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project_id, $t_user )
 			  && ( ( ALL_PROJECTS == $t_project_id ) || !$p_all_projects_only );
 
-	echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
+	echo '<tr ' . helper_alternate_class() . ">\n";
+
+	# Access levels
+	echo "\t<td>" . string_display( $p_caption ) . "</td>\n";
 	foreach( $t_access_levels as $t_access_level => $t_access_label ) {
 		$t_file = in_array( $t_access_level, $t_file_exp );
 		$t_global = in_array( $t_access_level, $t_global_exp );
-		$t_project = in_array( $t_access_level, $t_project_exp ) ;
+		$t_project = in_array( $t_access_level, $t_project_exp );
 
-		$t_colour = '';
-		if ( $t_global != $t_file ) {
-			$t_colour = ' bgcolor="' . $t_colour_global . '" '; # all projects override
-			if ( $t_can_change ) {
-				set_overrides( $p_threshold );
-			}
-		}
-		if ( $t_project != $t_global ) {
-			$t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
-			if ( $t_can_change ) {
-				set_overrides( $p_threshold );
-			}
-		}
+		$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
 
 		if ( $t_can_change ) {
 			$t_checked = $t_project ? "checked=\"checked\"" : "";
@@ -161,21 +217,16 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only=fals
 				$t_value = '&#160;';
 			}
 		}
-		echo '<td class="center"' . $t_colour . '>' . $t_value . '</td>';
-	}
-	if ( $t_can_change ) {
-		echo '<td> <select name="access_' . $p_threshold . '">';
-		print_enum_string_option_list( 'access_levels', config_get_access( $p_threshold ) );
-		echo '</select> </td>';
-	} else {
-		echo '<td>' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), config_get_access( $p_threshold ) ) . '&#160;</td>';
+		echo "\t" . '<td class="center"' . $t_color . '>' . $t_value . "</td>\n";
 	}
 
-	echo '</tr>' . "\n";
+	print_who_can_change( $p_threshold, $t_can_change );
+
+	echo "</tr>\n";
 }
 
 function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only=false ) {
-	global $t_user, $t_project_id, $t_show_submit, $t_access_levels, $t_colour_project, $t_colour_global;
+	global $t_user, $t_project_id, $t_show_submit, $t_access_levels;
 
 	$t_file = config_get_global( $p_threshold );
 	$t_global = config_get( $p_threshold, null, null, ALL_PROJECTS );
@@ -184,21 +235,10 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only=
 	$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project_id, $t_user )
 			  && ( ( ALL_PROJECTS == $t_project_id ) || !$p_all_projects_only );
 
-	$t_colour = '';
-	if ( $t_global != $t_file ) {
-		$t_colour = ' bgcolor="' . $t_colour_global . '" '; # all projects override
-		if ( $t_can_change ) {
-			set_overrides( $p_threshold );
-		}
-	}
-	if ( $t_project != $t_global ) {
-		$t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
-		if ( $t_can_change ) {
-			set_overrides( $p_threshold );
-		}
-	}
+	echo '<tr ' . helper_alternate_class() . ">\n\t<td>" . string_display( $p_caption ) . "</td>\n";
 
-	echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
+	# Value
+	$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
 	if ( $t_can_change ) {
 		$t_checked = ( ON == config_get( $p_threshold ) ) ? "checked=\"checked\"" : "";
 		$t_value = "<input type=\"checkbox\" name=\"flag_" . $p_threshold . "\" value=\"1\" $t_checked />";
@@ -210,21 +250,16 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only=
 			$t_value = '&#160;';
 		}
 	}
-	echo '<td' . $t_colour . '>' . $t_value . '</td><td class="left" colspan="' . ( count( $t_access_levels ) - 1 ). '"></td>';
+	echo "\t<td $t_color>" . $t_value . "</td>\n\t"
+		. '<td class="left" colspan="' . ( count( $t_access_levels ) - 1 ). '"></td>';
 
-	if ( $t_can_change ) {
-		echo '<td><select name="access_' . $p_threshold . '">';
-		print_enum_string_option_list( 'access_levels', config_get_access( $p_threshold ) );
-		echo '</select> </td>';
-	} else {
-		echo '<td>' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), config_get_access( $p_threshold ) ) . '&#160;</td>';
-	}
+	print_who_can_change( $p_threshold, $t_can_change );
 
-	echo '</tr>' . "\n";
+	echo "</tr>\n";
 }
 
 function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects_only=false ) {
-	global $t_user, $t_project_id, $t_show_submit, $t_access_levels, $t_colour_project, $t_colour_global;
+	global $t_user, $t_project_id, $t_show_submit, $t_access_levels;
 
 	$t_file = config_get_global( $p_threshold );
 	$t_global = config_get( $p_threshold, null, null, ALL_PROJECTS );
@@ -233,48 +268,34 @@ function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects
 	$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project_id, $t_user )
 			  && ( ( ALL_PROJECTS == $t_project_id ) || !$p_all_projects_only );
 
-	$t_colour = '';
-	if ( $t_global != $t_file ) {
-		$t_colour = ' bgcolor="' . $t_colour_global . '" '; # all projects override
-		if ( $t_can_change ) {
-			set_overrides( $p_threshold );
-		}
-	}
-	if ( $t_project != $t_global ) {
-		$t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
-		if ( $t_can_change ) {
-			set_overrides( $p_threshold );
-		}
-	}
+	echo '<tr ' . helper_alternate_class() . ">\n\t<td>" . string_display( $p_caption ) . "</td>\n";
 
-	echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
+	# Value
+	$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
+	echo "\t" . '<td class="left" colspan="3"' . $t_color . '>';
 	if ( $t_can_change ) {
-		echo '<td class="left" colspan="3"' . $t_colour . '><select name="flag_' . $p_threshold . '">';
+		echo '<select name="flag_' . $p_threshold . '">';
 		print_enum_string_option_list( $p_enum, config_get( $p_threshold ) );
-		echo '</select></td><td colspan="' . ( count( $t_access_levels ) - 3 ) . '"></td>';
+		echo '</select>';
 		$t_show_submit = true;
 	} else {
 		$t_value = MantisEnum::getLabel( lang_get( $p_enum . '_enum_string' ), config_get( $p_threshold ) ) . '&#160;';
-		echo '<td class="left" colspan="3"' . $t_colour . '>' . $t_value . '</td><td colspan="' . ( count( $t_access_levels ) - 3 ) . '"></td>';
+		echo $t_value;
 	}
+	echo "</td>\n\t" . '<td colspan="' . ( count( $t_access_levels ) - 3 ) . '"></td>' . "\n";
 
-	if ( $t_can_change ) {
-		echo '<td><select name="access_' . $p_threshold . '">';
-		print_enum_string_option_list( 'access_levels', config_get_access( $p_threshold ) );
-		echo '</select> </td>';
-	} else {
-		echo '<td>' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), config_get_access( $p_threshold ) ) . '&#160;</td>';
-	}
+	print_who_can_change( $p_threshold, $t_can_change );
 
-	echo '</tr>' . "\n";
+	echo "</tr>\n";
 }
 
 function get_section_end() {
 	echo '</table><br />' . "\n";
 }
 
-$t_colour_project = config_get( 'colour_project');
-$t_colour_global = config_get( 'colour_global');
+
+$t_color_project = config_get( 'colour_project' );
+$t_color_global = config_get( 'colour_global' );
 
 echo "<br /><br />\n";
 
@@ -286,9 +307,9 @@ if ( ALL_PROJECTS == $t_project_id ) {
 echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
 echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 if ( ALL_PROJECTS <> $t_project_id ) {
-	echo '<span style="background-color:' . $t_colour_project . '">' . lang_get( 'colour_project' ) .'</span><br />';
+	echo '<span style="background-color:' . $t_color_project . '">' . lang_get( 'colour_project' ) .'</span><br />';
 }
-echo '<span style="background-color:' . $t_colour_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
+echo '<span style="background-color:' . $t_color_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
 
 echo "<form name=\"mail_config_action\" method=\"post\" action=\"manage_config_work_threshold_set.php\">\n";
 echo form_security_field( 'manage_config_work_threshold_set' );
@@ -353,7 +374,7 @@ if ( $t_show_submit && ( 0 < count( $t_overrides ) ) ) {
 	echo form_security_field( 'manage_config_revert' );
 	echo "<input name=\"revert\" type=\"hidden\" value=\"" . implode( ',', $t_overrides ) . "\"></input>";
 	echo "<input name=\"project\" type=\"hidden\" value=\"$t_project_id\"></input>";
-	echo "<input name=\"return\" type=\"hidden\" value=\"\"></input>";
+	echo "<input name=\"return\" type=\"hidden\" value=\"" . string_attribute( form_action_self() ) ."\"></input>";
 	echo "<input type=\"submit\" class=\"button\" value=\"";
 	if ( ALL_PROJECTS == $t_project_id ) {
 		echo lang_get( 'revert_to_system' );

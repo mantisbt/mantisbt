@@ -1451,8 +1451,8 @@ function html_button_bug_update( $p_bug_id ) {
 function html_button_bug_change_status( $p_bug ) {
 	$t_current_access = access_get_project_level( $p_bug->project_id );
 
-	# User must have updater access to use the change status button
-	if( !access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug->id ) ) {
+	# User must have rights to change status to use this button
+	if( !access_has_bug_level( config_get( 'update_bug_status_threshold' ), $p_bug->id ) ) {
 		return;
 	}
 
