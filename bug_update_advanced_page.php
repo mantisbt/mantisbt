@@ -100,7 +100,11 @@ $tpl_show_additional_information = in_array( 'additional_info', $t_fields );
 $tpl_additional_information_textarea = $tpl_show_additional_information ? string_textarea( $tpl_bug->additional_information ) : '';
 $tpl_show_steps_to_reproduce = in_array( 'steps_to_reproduce', $t_fields );
 $tpl_steps_to_reproduce_textarea = $tpl_show_steps_to_reproduce ? string_textarea( $tpl_bug->steps_to_reproduce ) : '';
-$tpl_handler_name = string_display_line( user_get_name( $tpl_bug->handler_id ) );
+if( NO_USER == $tpl_bug->handler_id ) {
+	$tpl_handler_name =  '';
+} else {
+	$tpl_handler_name = string_display_line( user_get_name( $tpl_bug->handler_id ) );
+}
 
 $tpl_can_change_view_state = $tpl_show_view_state && access_has_project_level( config_get( 'change_view_status_threshold' ) );
 
