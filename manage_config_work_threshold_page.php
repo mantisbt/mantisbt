@@ -68,10 +68,10 @@ $t_access_levels = MantisEnum::getAssocArrayIndexedByValues( config_get( 'access
 
 $t_overrides = array();
 function set_overrides( $p_config ) {
-   global $t_overrides;
-   if ( !in_array( $p_config, $t_overrides ) ) {
-	   $t_overrides[] = $p_config;
-   }
+	global $t_overrides;
+	if ( !in_array( $p_config, $t_overrides ) ) {
+		$t_overrides[] = $p_config;
+	}
 }
 
 function get_section_begin_mcwt( $p_section_name ) {
