@@ -220,8 +220,9 @@ function config_get_access( $p_option, $p_user = null, $p_project = null ) {
 	$t_projects = array();
 	if(( null === $p_project ) && ( auth_is_user_authenticated() ) ) {
 		$t_selected_project = helper_get_current_project();
+		$t_projects[] = $t_selected_project;
 		if( ALL_PROJECTS <> $t_selected_project ) {
-			$t_projects[] = $t_selected_project;
+			$t_projects[] = ALL_PROJECTS;
 		}
 	}
 	else if( !in_array( $p_project, $t_projects ) ) {
