@@ -98,14 +98,14 @@ function get_section_begin_mcwt( $p_section_name ) {
  * @return string HTML tag attribute for background color override
  */
 function set_color( $p_threshold, $p_file, $p_global, $p_project, $p_set_override ) {
-	global $t_color_project, $t_color_global;
+	global $t_color_project, $t_color_global, $t_project_id;
 
 	$t_color = false;
 
 	# all projects override
 	if ( $p_global != $p_file ) {
 		$t_color = $t_color_global;
-		if ( $p_set_override ) {
+		if ( $p_set_override && ALL_PROJECTS == $t_project_id ) {
 			set_overrides( $p_threshold );
 		}
 	}
@@ -113,7 +113,7 @@ function set_color( $p_threshold, $p_file, $p_global, $p_project, $p_set_overrid
 	# project overrides
 	if ( $p_project != $p_global ) {
 		$t_color = $t_color_project;
-		if ( $p_set_override ) {
+		if ( $p_set_override && ALL_PROJECTS != $t_project_id ) {
 			set_overrides( $p_threshold );
 		}
 
