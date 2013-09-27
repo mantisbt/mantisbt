@@ -139,18 +139,18 @@ function history_log_event_special( $p_bug_id, $p_type, $p_optional = '', $p_opt
 function history_get_events_array( $p_bug_id, $p_user_id = null ) {
 	$t_normal_date_format = config_get( 'normal_date_format' );
 
-	$raw_history = history_get_raw_events_array( $p_bug_id, $p_user_id );
-	$raw_history_count = count( $raw_history );
-	$history = array();
+	$t_raw_history = history_get_raw_events_array( $p_bug_id, $p_user_id );
+	$t_history = array();
 
-	for( $i = 0;$i < $raw_history_count;$i++ ) {
-		$history[$i] = history_localize_item( $raw_history[$i]['field'], $raw_history[$i]['type'], $raw_history[$i]['old_value'], $raw_history[$i]['new_value'] );
-		$history[$i]['date'] = date( $t_normal_date_format, $raw_history[$i]['date'] );
-		$history[$i]['userid'] = $raw_history[$i]['userid'];
-		$history[$i]['username'] = $raw_history[$i]['username'];
+	foreach( $t_raw_history as $k => $t_item ) {
+		extract( $t_item, EXTR_PREFIX_ALL, 'v' );
+		$t_history[$k] = history_localize_item( $v_field, $v_type, $v_old_value, $v_new_value );
+		$t_history[$k]['date'] = date( $t_normal_date_format, $v_date );
+		$t_history[$k]['userid'] = $v_userid;
+		$t_history[$k]['username'] = $v_username;
 	}
 
-	return( $history );
+	return( $t_history );
 }
 
 /**
@@ -192,12 +192,7 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 	$t_standard_fields = columns_get_standard();
 	$j = 0;
 	while( $t_row = db_fetch_array( $result ) ) {
-		$v_type = $t_row['type'];
-		$v_field_name = $t_row['field_name'];
-		$v_user_id = $t_row['user_id'];
-		$v_new_value = $t_row['new_value'];
-		$v_old_value = $t_row['old_value'];
-		$v_date_modified = $t_row['date_modified'];
+		extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
 		if ( $v_type == NORMAL_TYPE ) {
 			if ( !in_array( $v_field_name, $t_standard_fields ) ) {
