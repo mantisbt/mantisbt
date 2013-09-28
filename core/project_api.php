@@ -56,6 +56,24 @@ $g_cache_project_missing = array();
 $g_cache_project_all = false;
 
 # --------------------
+# Checks if there exists at least one project.
+function project_any() {
+	global $g_cache_project;
+
+	# If projects already cached, use the cache.
+	if ( isset( $g_cache_project ) && count( $g_cache_project ) > 0 ) {
+		return true;
+	}
+
+	# Otherwise, check if the projects table contains at least one project.
+	$t_project_table = db_get_table( 'mantis_project_table' );
+	$query = "SELECT * FROM $t_project_table";
+	$result = db_query_bound( $query, array(), /* limit */ 1 );
+
+	return db_num_rows( $result ) > 0;
+}
+
+# --------------------
 # Cache a project row if necessary and return the cached copy
 #  If the second parameter is true (default), trigger an error
 #  if the project can't be found.  If the second parameter is
