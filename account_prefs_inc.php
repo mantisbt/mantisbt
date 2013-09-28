@@ -82,8 +82,8 @@
 	if( $t_num_proj == 1 ) {
 		$t_num_proj += count( current_user_get_accessible_subprojects( $t_projects[0] ) );
 	}
-	# Don't display "All projects" in selection list if there is only 1
-	print_project_option_list( $t_pref->default_project, $t_num_proj != 1 );
+	# Only display "All projects" in selection list if there is more than 1
+	print_project_option_list( $t_pref->default_project, $t_num_proj > 1 );
 ?>
 		</select>
 	</td>
