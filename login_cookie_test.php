@@ -40,11 +40,18 @@ require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 
-$f_return = gpc_get_string( 'return', config_get( 'default_home_page' ) );
-
-$c_return = string_prepare_header( $f_return );
-
 if ( auth_is_user_authenticated() ) {
+	$f_return = gpc_get_string( 'return' );
+	$c_return = string_prepare_header( $f_return );
+
+	# If this is the first login for an instance, then redirect to create project page.
+	# Use lack of projects as a hint for such scenario.
+	if ( is_blank( $f_return ) || $f_return == 'index.php' ) {
+		if ( current_user_is_administrator() && project_table_empty() ) {
+			$c_return = 'manage_proj_create_page.php';
+		}
+	}
+
 	$t_redirect_url = $c_return;
 } else {
 	$t_redirect_url = 'login_page.php?cookie_error=1';

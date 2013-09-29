@@ -992,7 +992,7 @@ if( 7 == $t_install_state ) {
 <p><a href="../login_page.php">Continue</a> to log into Mantis</p>
 <?php
 	} else {?>
-<p>Please log in as the administrator and <a href="../manage_proj_create_page.php">create</a> your first project.</p>
+<p>Please log in as the administrator and <a href="../login_page.php">create</a> your first project.</p>
 
 <?php
 	}
