@@ -604,11 +604,13 @@ function db_index_exists( $p_table_name, $p_index_name ) {
 
 	$t_indexes = $g_db->MetaIndexes( $p_table_name );
 
-	# Can't use in_array() since it is case sensitive
-	$t_index_name = utf8_strtolower( $p_index_name );
-	foreach( $t_indexes as $t_current_index_name => $t_current_index_obj ) {
-		if( utf8_strtolower( $t_current_index_name ) == $t_index_name ) {
-			return true;
+	if( !empty( $t_indexes ) ) {
+		# Can't use in_array() since it is case sensitive
+		$t_index_name = utf8_strtolower( $p_index_name );
+		foreach( $t_indexes as $t_current_index_name => $t_current_index_obj ) {
+			if( utf8_strtolower( $t_current_index_name ) == $t_index_name ) {
+				return true;
+			}
 		}
 	}
 	return false;
