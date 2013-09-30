@@ -39,7 +39,7 @@ require_api( 'utility_api.php' );
 
 $f_public_key = gpc_get_string( 'public_key' );
 
-$t_private_key = substr( hash( 'whirlpool', 'captcha' . config_get_global( 'crypto_master_salt' ) . $f_public_key, false ), 0, 5 );
+$t_private_key = substr( hash_hmac( 'sha512', 'captcha' . $f_public_key, config_get_global( 'crypto_master_salt' ), false ), 0, 5 );
 $t_system_font_folder = get_font_path();
 $t_font_per_captcha = config_get( 'font_per_captcha' );
 
