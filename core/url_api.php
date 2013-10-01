@@ -57,9 +57,10 @@ function url_get( $p_url ) {
 		# custom options for curl module, e.g. proxy settings and authentication.
 		# This could be stored in a global config option.
 
-		# Default User Agent (matching cmdline curl's behavior)
+		# Default User Agent (Mantis version + php curl extension version)
 		$t_vers = curl_version();
-		$t_curl_opt[CURLOPT_USERAGENT] = 'curl/' . $t_vers['version'];
+		$t_curl_opt[CURLOPT_USERAGENT] =
+			'mantisbt' . MANTIS_VERSION . ' php-curl/' . $t_vers['version'];
 
 		# Set the options
 		curl_setopt_array( $t_curl, $t_curl_opt );
