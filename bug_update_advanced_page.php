@@ -269,7 +269,7 @@ if ( $tpl_show_reporter ) {
 
 		# Do not allow the bug's reporter to edit the Reporter field
 		# when limit_reporters is ON
-		if( ON === config_get( 'limit_reporters' )
+		if( ON == config_get( 'limit_reporters' )
 		&&  !access_has_project_level( REPORTER + 1, $tpl_bug->project_id )
 		) {
 			echo string_attribute( user_get_name( $tpl_bug->reporter_id ) );
