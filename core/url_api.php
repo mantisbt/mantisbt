@@ -58,7 +58,7 @@ function url_get( $p_url ) {
 		# Default User Agent (Mantis version + php curl extension version)
 		$t_vers = curl_version();
 		$t_curl_opt[CURLOPT_USERAGENT] =
-			'mantisbt' . MANTIS_VERSION . ' php-curl/' . $t_vers['version'];
+			'mantisbt/' . MANTIS_VERSION . ' php-curl/' . $t_vers['version'];
 
 		# Set the options
 		curl_setopt_array( $t_curl, $t_curl_opt );
