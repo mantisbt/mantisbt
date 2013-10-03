@@ -51,7 +51,7 @@ check_print_test_warn_row(
 
 check_print_test_warn_row(
 	'SOAP Extension Enabled',
-	!(extension_loaded('soap') && defined('SOAP_USE_XSI_ARRAY_TYPE')),
+	extension_loaded('soap') && defined('SOAP_USE_XSI_ARRAY_TYPE'),
 	array( false => 'Enable the PHP SOAP extension.' )
 );
 
