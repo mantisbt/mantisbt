@@ -505,8 +505,8 @@ define( 'LOG_EMAIL_RECIPIENT',          2 );  # details of email recipient deter
 define( 'LOG_FILTERING',                4 );  # logging for filtering.
 define( 'LOG_AJAX',                     8 );  # logging for AJAX / XmlHttpRequests
 define( 'LOG_LDAP',                     16 );  # logging for ldap
-define( 'LOG_DATABASE',                 32 );  # logging for ldap
-define( 'LOG_SOAP',                     64 );  # logging for SOAP
+define( 'LOG_DATABASE',                 32 );  # logging for Database
+define( 'LOG_WEBSERVICE',              64 );  # logging for Web Service Requests
 
 # COLUMNS_TARGET_*
 define( 'COLUMNS_TARGET_VIEW_PAGE', 1 );
