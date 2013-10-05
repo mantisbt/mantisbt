@@ -47,4 +47,4 @@ $s_plugin_XmlImportExport_disable_desc = '關閉連結';
 $s_plugin_XmlImportExport_fallback = '還原方式 (當 重新編號 無法使用時):';
 $s_plugin_XmlImportExport_fallback_category = '還原類別:';
 $s_plugin_XmlImportExport_keep_same_category = '嘗試保留在相同類別';
-$s_plugin_XmlImportExport_error_no_xml = '找不到 xmlreader 和 xmlwriter 擴展';
+$s_plugin_XmlImportExport_error_no_xml = '找不到 xmlreader 與 xmlwriter 擴充套件';

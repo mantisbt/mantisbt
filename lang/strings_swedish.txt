@@ -26,6 +26,7 @@
  * @file
  *
  * @author Fader
+ * @author Jopparn
  * @author Lokal Profil
  * @author McDutchie
  * @author Najami
@@ -888,8 +889,8 @@ $s_password_emailed_msg = 'Grattis. Du blivit registrerad. Du kommer nu att bli 
 $s_no_reponse_msg = 'Du har sju dagar på dig att bekräfta ditt konto; om så inte skulle vara fallet kan konton komma att tas bort.';
 $s_signup_captcha_request = 'Mata in koden som den visas i rutan till höger';
 $s_signup_info = 'När du kompletterat detta formulär och dina svar kontrollerats, kommer du att bli tillsänd en bekräftelse via e-post till e-postadressen du angett.<br />Med detta e-postmeddelande kan du aktivera ditt konto. Om du inte bekräftar ditt konto inom sju dagar, så kan konton komma att tas bort.<br />Du måste alltså ange en giltig e-postadress för att kunna få bekräftelsemeddelandet.';
-$s_signup_title = 'Skapa ett användarkonto';
-$s_signup_button = 'Skapa kontot';
+$s_signup_title = 'Skapa ett konto';
+$s_signup_button = 'Skapa ett konto';
 $s_no_password_request = 'Ditt lösenord hanteras i ett annat system. Kontakta systemadministratören.';
 $s_edit_site_settings_title = 'Redigera globala inställningar';
 $s_save_settings_button = 'Spara inställningar';
