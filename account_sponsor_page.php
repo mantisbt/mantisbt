@@ -125,7 +125,7 @@ $query = "SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_in_
 	AND $t_project_clause
 	ORDER BY s.paid ASC, b.project_id ASC, b.fixed_in_version ASC, b.status ASC, b.id DESC";
 
-$result = db_query_bound( $query, $t_show_all ? Array( $t_user ) : Array( $t_user , $t_resolved ) );
+$result = db_query_bound( $query, $t_show_all ? array( $t_user ) : array( $t_user , $t_resolved ) );
 
 $t_sponsors = db_num_rows( $result );
 if ( 0 == $t_sponsors ) {
@@ -236,7 +236,7 @@ $query = "SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_in_
 	AND $t_project_clause
 	ORDER BY s.paid ASC, b.project_id ASC, b.fixed_in_version ASC, b.status ASC, b.id DESC";
 
-$result = db_query_bound( $query, $t_show_all ? Array( $t_user ) : Array( $t_user , $t_resolved ) );
+$result = db_query_bound( $query, $t_show_all ? array( $t_user ) : array( $t_user , $t_resolved ) );
 $t_sponsors = db_num_rows( $result );
 if ( 0 == $t_sponsors ) {
 	echo '<p>' . lang_get( 'no_sponsored' ) . '</p>';

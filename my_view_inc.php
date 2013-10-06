@@ -75,35 +75,35 @@ $c_filter['assigned'] = filter_create_assigned_to_unresolved( helper_get_current
 $url_link_parameters['assigned'] = FILTER_PROPERTY_HANDLER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_bug_resolved_status_threshold;
 
 $c_filter['recent_mod'] = array(
-	FILTER_PROPERTY_CATEGORY_ID => Array(
+	FILTER_PROPERTY_CATEGORY_ID => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_SEVERITY => Array(
+	FILTER_PROPERTY_SEVERITY => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_STATUS => Array(
+	FILTER_PROPERTY_STATUS => array(
 		'0' => META_FILTER_ANY,
 	),
 	FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
-	FILTER_PROPERTY_REPORTER_ID => Array(
+	FILTER_PROPERTY_REPORTER_ID => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_HANDLER_ID => Array(
+	FILTER_PROPERTY_HANDLER_ID => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_RESOLUTION => Array(
+	FILTER_PROPERTY_RESOLUTION => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_BUILD => Array(
+	FILTER_PROPERTY_BUILD => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_VERSION => Array(
+	FILTER_PROPERTY_VERSION => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_HIDE_STATUS => Array(
+	FILTER_PROPERTY_HIDE_STATUS => array(
 		'0' => META_FILTER_NONE,
 	),
-	FILTER_PROPERTY_MONITOR_USER_ID => Array(
+	FILTER_PROPERTY_MONITOR_USER_ID => array(
 		'0' => META_FILTER_ANY,
 	),
 );
@@ -157,108 +157,108 @@ $c_filter['monitored'] = filter_create_monitored_by( helper_get_current_project(
 $url_link_parameters['monitored'] = FILTER_PROPERTY_MONITOR_USER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
 
 $c_filter['feedback'] = array(
-	FILTER_PROPERTY_CATEGORY_ID => Array(
+	FILTER_PROPERTY_CATEGORY_ID => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_SEVERITY => Array(
+	FILTER_PROPERTY_SEVERITY => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_STATUS => Array(
+	FILTER_PROPERTY_STATUS => array(
 		'0' => config_get( 'bug_feedback_status' ),
 	),
 	FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
-	FILTER_PROPERTY_REPORTER_ID => Array(
+	FILTER_PROPERTY_REPORTER_ID => array(
 		'0' => $t_current_user_id,
 	),
-	FILTER_PROPERTY_HANDLER_ID => Array(
+	FILTER_PROPERTY_HANDLER_ID => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_RESOLUTION => Array(
+	FILTER_PROPERTY_RESOLUTION => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_BUILD => Array(
+	FILTER_PROPERTY_BUILD => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_VERSION => Array(
+	FILTER_PROPERTY_VERSION => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_HIDE_STATUS => Array(
+	FILTER_PROPERTY_HIDE_STATUS => array(
 		'0' => $t_hide_status_default,
 	),
-	FILTER_PROPERTY_MONITOR_USER_ID => Array(
+	FILTER_PROPERTY_MONITOR_USER_ID => array(
 		'0' => META_FILTER_ANY,
 	),
 );
 $url_link_parameters['feedback'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_STATUS . '=' . config_get( 'bug_feedback_status' ) . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
 
 $c_filter['verify'] = array(
-	FILTER_PROPERTY_CATEGORY_ID => Array(
+	FILTER_PROPERTY_CATEGORY_ID => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_SEVERITY => Array(
+	FILTER_PROPERTY_SEVERITY => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_STATUS => Array(
+	FILTER_PROPERTY_STATUS => array(
 		'0' => $t_bug_resolved_status_threshold,
 	),
 	FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
-	FILTER_PROPERTY_REPORTER_ID => Array(
+	FILTER_PROPERTY_REPORTER_ID => array(
 		'0' => $t_current_user_id,
 	),
-	FILTER_PROPERTY_HANDLER_ID => Array(
+	FILTER_PROPERTY_HANDLER_ID => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_RESOLUTION => Array(
+	FILTER_PROPERTY_RESOLUTION => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_BUILD => Array(
+	FILTER_PROPERTY_BUILD => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_VERSION => Array(
+	FILTER_PROPERTY_VERSION => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_HIDE_STATUS => Array(
+	FILTER_PROPERTY_HIDE_STATUS => array(
 		'0' => $t_hide_status_default,
 	),
-	FILTER_PROPERTY_MONITOR_USER_ID => Array(
+	FILTER_PROPERTY_MONITOR_USER_ID => array(
 		'0' => META_FILTER_ANY,
 	),
 );
 $url_link_parameters['verify'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_STATUS . '=' . $t_bug_resolved_status_threshold;
 
 $c_filter['my_comments'] = array(
-	FILTER_PROPERTY_CATEGORY_ID => Array(
+	FILTER_PROPERTY_CATEGORY_ID => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_SEVERITY => Array(
+	FILTER_PROPERTY_SEVERITY => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_STATUS => Array(
+	FILTER_PROPERTY_STATUS => array(
 		'0' => META_FILTER_ANY,
 	),
 	FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
-	FILTER_PROPERTY_REPORTER_ID => Array(
+	FILTER_PROPERTY_REPORTER_ID => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_HANDLER_ID => Array(
+	FILTER_PROPERTY_HANDLER_ID => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_RESOLUTION => Array(
+	FILTER_PROPERTY_RESOLUTION => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_BUILD => Array(
+	FILTER_PROPERTY_BUILD => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_VERSION => Array(
+	FILTER_PROPERTY_VERSION => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_HIDE_STATUS => Array(
+	FILTER_PROPERTY_HIDE_STATUS => array(
 		'0' => $t_hide_status_default,
 	),
-	FILTER_PROPERTY_MONITOR_USER_ID => Array(
+	FILTER_PROPERTY_MONITOR_USER_ID => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_NOTE_USER_ID=> Array(
+	FILTER_PROPERTY_NOTE_USER_ID=> array(
 		'0' => META_FILTER_MYSELF,
 	),
 );

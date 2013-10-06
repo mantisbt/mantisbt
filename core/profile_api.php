@@ -83,7 +83,7 @@ function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_descrip
 				    ( user_id, platform, os, os_build, description )
 				  VALUES
 				    ( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-	db_query_bound( $query, Array( $p_user_id, $p_platform, $p_os, $p_os_build, $p_description ) );
+	db_query_bound( $query, array( $p_user_id, $p_platform, $p_os, $p_os_build, $p_description ) );
 
 	return db_insert_id( $t_user_profile_table );
 }
@@ -111,7 +111,7 @@ function profile_delete( $p_user_id, $p_profile_id ) {
 	# Delete the profile
 	$query = "DELETE FROM $t_user_profile_table
 				  WHERE id=" . db_param() . " AND user_id=" . db_param();
-	db_query_bound( $query, Array( $c_profile_id, $c_user_id ) );
+	db_query_bound( $query, array( $c_profile_id, $c_user_id ) );
 
 	# db_query errors on failure so:
 	return true;
@@ -162,7 +162,7 @@ function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_bu
 					  os_build=" . db_param() . ",
 					  description=" . db_param() . "
 				  WHERE id=" . db_param() . " AND user_id=" . db_param();
-	$result = db_query_bound( $query, Array( $p_platform, $p_os, $p_os_build, $p_description, $c_profile_id, $c_user_id ) );
+	$result = db_query_bound( $query, array( $p_platform, $p_os, $p_os_build, $p_description, $c_profile_id, $c_user_id ) );
 
 	# db_query errors on failure so:
 	return true;
@@ -183,7 +183,7 @@ function profile_get_row( $p_user_id, $p_profile_id ) {
 	$query = "SELECT *
 				  FROM $t_user_profile_table
 				  WHERE id=" . db_param() . " AND user_id=" . db_param();
-	$result = db_query_bound( $query, Array( $c_profile_id, $c_user_id ) );
+	$result = db_query_bound( $query, array( $c_profile_id, $c_user_id ) );
 
 	return db_fetch_array( $result );
 }
@@ -202,7 +202,7 @@ function profile_get_row_direct( $p_profile_id ) {
 	$query = "SELECT *
 				  FROM $t_user_profile_table
 				  WHERE id=" . db_param();
-	$result = db_query_bound( $query, Array( $c_profile_id ) );
+	$result = db_query_bound( $query, array( $c_profile_id ) );
 
 	return db_fetch_array( $result );
 }
@@ -279,7 +279,7 @@ function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
 				  FROM $t_user_profile_table
 				  WHERE ( user_id=" . db_param() . " ) OR ( user_id = 0 )
 				  ORDER BY $c_field";
-	$result = db_query_bound( $query, Array( $c_user_id ) );
+	$result = db_query_bound( $query, array( $c_user_id ) );
 
 	$t_rows = array();
 
@@ -334,7 +334,7 @@ function profile_get_default( $p_user_id ) {
 	$query = "SELECT default_profile
 			FROM $t_mantis_user_pref_table
 			WHERE user_id=" . db_param();
-	$result = db_query_bound( $query, Array( $c_user_id ) );
+	$result = db_query_bound( $query, array( $c_user_id ) );
 
 	$t_default_profile = (int)db_result( $result, 0, 0 );
 

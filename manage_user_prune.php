@@ -62,7 +62,7 @@ $days_old = (int)7 * SECONDS_PER_DAY;
 $query = "SELECT id, access_level
 		FROM $t_user_table
 		WHERE ( login_count = 0 ) AND ( date_created = last_visit ) AND " . db_helper_compare_days( 0, "date_created", "> $days_old" );
-$result = db_query_bound($query, Array( db_now() ) );
+$result = db_query_bound($query, array( db_now() ) );
 
 if ( !$result ) {
 	trigger_error( ERROR_GENERIC, ERROR );

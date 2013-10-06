@@ -39,7 +39,7 @@ class ProjectTest extends SoapBase {
                $projectName = $this->getOriginalNameProject();
                $projectNewName = $this->getNewNameProject();
 
-               $projectDataStructure = $this->newProjectAsArray($projectName);
+               $projectDataStructure = $this->newProjectAsarray($projectName);
 
                $projectId = $this->client->mc_project_add(
                        $this->userName,
@@ -88,7 +88,7 @@ class ProjectTest extends SoapBase {
 
                $projectName = 'TestProjectForIdFromName';
         
-               $projectDataStructure = $this->newProjectAsArray($projectName);
+               $projectDataStructure = $this->newProjectAsarray($projectName);
 
                $projectId = $this->client->mc_project_add(
                        $this->userName,
@@ -114,7 +114,7 @@ class ProjectTest extends SoapBase {
         */
        public function testGetSubprojects() {
                $projectName = $this->getOriginalNameProject();
-               $projectDataStructure = $this->newProjectAsArray($projectName);
+               $projectDataStructure = $this->newProjectAsarray($projectName);
 
                $projectId = $this->client->mc_project_add(
                        $this->userName,
@@ -131,7 +131,7 @@ class ProjectTest extends SoapBase {
                 $this->assertEquals(0, count($projectsArray));
        }
 
-       private function newProjectAsArray($projectName) {
+       private function newProjectAsarray($projectName) {
        	
        	       $projectDataStructure = array();
                $projectDataStructure['name'] = $projectName;

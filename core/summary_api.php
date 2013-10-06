@@ -289,7 +289,7 @@ function summary_resolved_bug_count_by_date( $p_time_length = 1 ) {
 				AND h.new_value >= " . db_param() . "
 				AND " . db_helper_compare_days( "" . db_now() . "", "date_modified", "<= $c_time_length" ) . "
 				AND $specific_where";
-	$result = db_query_bound( $query, Array( $t_resolved, $t_resolved, $t_resolved ) );
+	$result = db_query_bound( $query, array( $t_resolved, $t_resolved, $t_resolved ) );
 	return db_result( $result, 0 );
 }
 
@@ -358,12 +358,12 @@ function summary_print_by_activity() {
 				AND $specific_where
 				GROUP BY h.bug_id, b.id, b.summary, b.last_updated, b.view_state
 				ORDER BY count DESC, b.last_updated DESC";
-	$result = db_query_bound( $query, Array( $t_resolved ) );
+	$result = db_query_bound( $query, array( $t_resolved ) );
 
 	$t_count = 0;
 	$t_private_bug_threshold = config_get( 'private_bug_threshold' );
-	$t_summarydata = Array();
-	$t_summarybugs = Array();
+	$t_summarydata = array();
+	$t_summarybugs = array();
 	while( $row = db_fetch_array( $result ) ) {
 
 		// Skip private bugs unless user has proper permissions
@@ -748,7 +748,7 @@ function summary_print_by_project( $p_projects = null, $p_level = 0, $p_cache = 
 		if( ALL_PROJECTS == $t_project_id ) {
 			$p_projects = current_user_get_accessible_projects();
 		} else {
-			$p_projects = Array(
+			$p_projects = array(
 				$t_project_id,
 			);
 		}
@@ -761,7 +761,7 @@ function summary_print_by_project( $p_projects = null, $p_level = 0, $p_cache = 
 					GROUP BY project_id, status";
 
 		$result = db_query_bound( $query );
-		$p_cache = Array();
+		$p_cache = array();
 
 		$t_resolved_val = config_get( 'bug_resolved_status_threshold' );
 		$t_closed_val = config_get( 'bug_closed_status_threshold' );

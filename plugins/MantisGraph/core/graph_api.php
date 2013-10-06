@@ -765,7 +765,7 @@ function create_category_summary() {
 		$query = "SELECT COUNT(*)
 					FROM $t_bug_table
 					WHERE category_id=" . db_param() . " AND $specific_where";
-		$result2 = db_query_bound( $query, Array( $t_cat_id ) );
+		$result2 = db_query_bound( $query, array( $t_cat_id ) );
 		if ( isset($t_metrics[$t_cat_name]) ) {
 			$t_metrics[$t_cat_name] = $t_metrics[$t_cat_name] + db_result( $result2, 0, 0 );
 		} else {

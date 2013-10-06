@@ -112,7 +112,7 @@ function email_queue_add( $p_email_data ) {
 					  " . db_param() . ",
 					  " . db_param() . "
 					)";
-	db_query_bound( $query, Array( $c_email, $c_subject, $c_body, db_now(), $c_metadata ) );
+	db_query_bound( $query, array( $c_email, $c_subject, $c_body, db_now(), $c_metadata ) );
 	$t_id = db_insert_id( $t_email_table, 'email_id' );
 
 	log_event( LOG_EMAIL, "message #$t_id queued" );
@@ -162,7 +162,7 @@ function email_queue_get( $p_email_id ) {
 	$t_email_table = db_get_table( 'email' );
 
 	$query = 'SELECT * FROM ' . $t_email_table . ' WHERE email_id=' . db_param();
-	$result = db_query_bound( $query, Array( $c_email_id ) );
+	$result = db_query_bound( $query, array( $c_email_id ) );
 
 	$t_row = db_fetch_array( $result );
 
@@ -179,7 +179,7 @@ function email_queue_delete( $p_email_id ) {
 	$t_email_table = db_get_table( 'email' );
 
 	$query = 'DELETE FROM ' . $t_email_table . ' WHERE email_id=' . db_param();
-	db_query_bound( $query, Array( $c_email_id ) );
+	db_query_bound( $query, array( $c_email_id ) );
 
 	log_event( LOG_EMAIL, "message #$p_email_id deleted from queue" );
 }

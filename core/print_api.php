@@ -389,7 +389,7 @@ function print_news_item_option_list() {
 				WHERE project_id=" . db_param() . "
 				ORDER BY date_posted DESC";
 	}
-	$result = db_query_bound( $query, ($t_global == true ? Array() : Array( $t_project_id ) ) );
+	$result = db_query_bound( $query, ($t_global == true ? array() : array( $t_project_id ) ) );
 	$news_count = db_num_rows( $result );
 
 	for( $i = 0;$i < $news_count;$i++ ) {
@@ -524,14 +524,14 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
 				check_selected( (int)$p_project_id, $t_id, false );
 			}
 			echo '>' . string_attribute( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
-			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, Array() );
+			print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, array() );
 		}
 	}
 }
 
 # --------------------
 # List projects that the current user has access to
-function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_parents = Array() ) {
+function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_parents = array() ) {
 	array_push( $p_parents, $p_parent_id );
 	$t_project_ids = current_user_get_accessible_subprojects( $p_parent_id );
 	$t_project_count = count( $t_project_ids );
@@ -951,7 +951,7 @@ function print_project_user_list_option_list2( $p_user_id ) {
 				WHERE p.enabled = " . db_param() . " AND
 					u.user_id IS NULL
 				ORDER BY p.name";
-	$result = db_query_bound( $query, Array( $c_user_id, true ) );
+	$result = db_query_bound( $query, array( $c_user_id, true ) );
 	$category_count = db_num_rows( $result );
 	for( $i = 0;$i < $category_count;$i++ ) {
 		$row = db_fetch_array( $result );
@@ -1623,7 +1623,7 @@ function print_bug_attachment_preview_text( $p_attachment ) {
 			$t_bug_file_table = db_get_table( 'bug_file' );
 			$c_attachment_id = db_prepare_int( $p_attachment['id'] );
 			$t_query = "SELECT * FROM $t_bug_file_table WHERE id=" . db_param();
-			$t_result = db_query_bound( $t_query, Array( $c_attachment_id ) );
+			$t_result = db_query_bound( $t_query, array( $c_attachment_id ) );
 			$t_row = db_fetch_array( $t_result );
 			$t_content = $t_row['content'];
 	}

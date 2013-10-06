@@ -135,10 +135,10 @@ while(( $i <= $lastid ) && !$g_failed ) {
 	if( $upgrade[$i][0] == 'InsertData' ) {
 		$sqlarray = call_user_func_array( $upgrade[$i][0], $upgrade[$i][1] );
 	} else {
-		$sqlarray = call_user_func_array( Array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
+		$sqlarray = call_user_func_array( array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
 	}
 
-	$ret = $dict->ExecuteSQLArray( $sqlarray );
+	$ret = $dict->ExecuteSQLarray( $sqlarray );
 	if( $ret == 2 ) {
 		print_test_result( GOOD );
 		config_set( 'database_version', $i );

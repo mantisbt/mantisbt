@@ -459,35 +459,35 @@ function mc_issue_get_biggest_id( $p_username, $p_password, $p_project_id ) {
 	$t_none = defined( 'META_FILTER_NONE' ) ? META_FILTER_NONE : 'none';
 
 	$t_filter = array(
-		'category_id' => Array(
+		'category_id' => array(
 			'0' => $t_any,
 		),
-		'severity' => Array(
+		'severity' => array(
 			'0' => $t_any,
 		),
-		'status' => Array(
+		'status' => array(
 			'0' => $t_any,
 		),
 		'highlight_changed' => 0,
-		'reporter_id' => Array(
+		'reporter_id' => array(
 			'0' => $t_any,
 		),
-		'handler_id' => Array(
+		'handler_id' => array(
 			'0' => $t_any,
 		),
-		'resolution' => Array(
+		'resolution' => array(
 			'0' => $t_any,
 		),
-		'build' => Array(
+		'build' => array(
 			'0' => $t_any,
 		),
-		'version' => Array(
+		'version' => array(
 			'0' => $t_any,
 		),
-		'hide_status' => Array(
+		'hide_status' => array(
 			'0' => $t_none,
 		),
-		'monitor_user_id' => Array(
+		'monitor_user_id' => array(
 			'0' => $t_any,
 		),
 		'dir' => 'DESC',
@@ -544,7 +544,7 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 		FROM $t_bug_table
 		WHERE summary = " . db_param();
 
-	$result = db_query_bound( $query, Array( $p_summary ), 1 );
+	$result = db_query_bound( $query, array( $p_summary ), 1 );
 
 	if( db_num_rows( $result ) == 0 ) {
 		return 0;

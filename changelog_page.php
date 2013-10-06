@@ -226,7 +226,7 @@ foreach( $t_project_ids as $t_project_id ) {
 		$t_issue_parents = array();
 		$t_issue_handlers = array();
 
-		$t_result = db_query_bound( $query, Array( $t_project_id, $t_version ) );
+		$t_result = db_query_bound( $query, array( $t_project_id, $t_version ) );
 
 		while ( $t_row = db_fetch_array( $t_result ) ) {
 			# hide private bugs if user doesn't have access to view them.

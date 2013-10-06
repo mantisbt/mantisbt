@@ -263,7 +263,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 		$query = "SELECT DISTINCT user_id
 					  FROM $t_bug_monitor_table
 					  WHERE bug_id=" . db_param();
-		$result = db_query_bound( $query, Array( $c_bug_id ) );
+		$result = db_query_bound( $query, array( $c_bug_id ) );
 
 		$count = db_num_rows( $result );
 		for( $i = 0;$i < $count;$i++ ) {
@@ -285,7 +285,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 		$query = "SELECT DISTINCT reporter_id
 					  FROM $t_bugnote_table
 					  WHERE bug_id = " . db_param();
-		$result = db_query_bound( $query, Array( $c_bug_id ) );
+		$result = db_query_bound( $query, array( $c_bug_id ) );
 
 		$count = db_num_rows( $result );
 		for( $i = 0;$i < $count;$i++ ) {
