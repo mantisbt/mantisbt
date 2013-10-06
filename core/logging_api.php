@@ -99,8 +99,11 @@ function log_event( $p_level, $p_msg, $p_backtrace = null ) {
 	if ( is_blank( $t_log_destination ) ) {
 		$t_destination = '';
 	} else {
-		# Use @ to avoid error when there is no delimiter in log destination
-		@list( $t_destination, $t_modifiers ) = explode( ':', $t_log_destination, 2 );
+		$t_result = explode( ':', $t_log_destination, 2 );
+		$t_destination = $t_result[0];
+		if ( isset( $t_result[1] ) ) {
+			$t_modifiers = $t_result[1];
+		}
 	}
 
 	$t_php_event = $t_now . ' ' . $t_level . ' ' . $s_msg;
@@ -186,7 +189,11 @@ function log_print_to_page() {
 		$t_count = array();
 		foreach( $g_log_events as $t_log_event ) {
 			$t_level = $g_log_levels[$t_log_event[1]];
-			$t_count[$t_log_event[1]]++;
+			if( isset( $t_count[$t_log_event[1]] ) ) {
+				$t_count[$t_log_event[1]]++;
+			} else {
+				$t_count[$t_log_event[1]] = 1;
+			}
 			switch ( $t_log_event[1] ) {
 				case LOG_DATABASE:
 					$t_total_queries_count++;
