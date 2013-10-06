@@ -100,7 +100,6 @@ class MantisPHPSession extends MantisSession {
 	 */
 	function __construct( $p_session_id=null ) {
 		global $g_cookie_secure_flag_enabled;
-		global $g_cookie_httponly_flag_enabled;
 
 		$this->key = hash( 'whirlpool', 'session_key' . config_get_global( 'crypto_master_salt' ), false );
 
@@ -112,12 +111,7 @@ class MantisPHPSession extends MantisSession {
 
 		# Handle session cookie and caching
 		session_cache_limiter( 'private_no_expire' );
-		if ( $g_cookie_httponly_flag_enabled ) {
-			# The HttpOnly cookie flag is only supported in PHP >= 5.2.0
-			session_set_cookie_params( 0, config_get( 'cookie_path' ), config_get( 'cookie_domain' ), $g_cookie_secure_flag_enabled, $g_cookie_httponly_flag_enabled );
-		} else {
-			session_set_cookie_params( 0, config_get( 'cookie_path' ), config_get( 'cookie_domain' ), $g_cookie_secure_flag_enabled );
-		}
+		session_set_cookie_params( 0, config_get( 'cookie_path' ), config_get( 'cookie_domain' ), $g_cookie_secure_flag_enabled, true );
 
 		# Handle existent session ID
 		if ( !is_null( $p_session_id ) ) {
