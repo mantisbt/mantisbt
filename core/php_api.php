@@ -87,18 +87,6 @@ function php_version_at_least( $p_version_string ) {
 	return true;
 }
 
-# Check for function because it is deprecated in PHP 5.3 and removed in PHP 6
-if ( function_exists( 'set_magic_quotes_runtime' ) ) {
-	@set_magic_quotes_runtime( false );
-}
-
-# Added in PHP 5.2.0
-if ( !function_exists( 'memory_get_peak_usage') ) {
-	function memory_get_peak_usage() {
-		return memory_get_usage();
-	}
-}
-
 # If mb_* not defined, define it to map to standard methods.
 if ( !function_exists( 'mb_substr' ) ) {
 	function mb_substr( $p_text, $p_index, $p_size ) {
