@@ -54,7 +54,7 @@ class MantisCoreDokuwikiPlugin extends MantisCoreWikiPlugin {
 		$this->name = 'MantisBT Dokuwiki Integration';
 		$this->version = '0.1';
 		$this->requires = array(
-			'MantisCore' => '1.2.0',
+			'MantisCore' => '1.3.0',
 		);
 	}
 
@@ -92,7 +92,7 @@ class MantisCoreMediaWikiPlugin extends MantisCoreWikiPlugin {
 		$this->name = 'MantisBT MediaWiki Integration';
 		$this->version = '0.1';
 		$this->requires = array(
-			'MantisCore' => '1.2.0',
+			'MantisCore' => '1.3.0',
 		);
 	}
 
@@ -126,7 +126,7 @@ class MantisCoreTwikiPlugin extends MantisCoreWikiPlugin {
 		$this->name = 'MantisBT Twiki Integration';
 		$this->version = '0.1';
 		$this->requires = array(
-			'MantisCore' => '1.2.0',
+			'MantisCore' => '1.3.0',
 		);
 	}
 
@@ -164,7 +164,7 @@ class MantisCoreWikkaWikiPlugin extends MantisCoreWikiPlugin {
 		$this->name = 'MantisBT WikkaWiki Integration';
 		$this->version = '0.1';
 		$this->requires = array(
-			'MantisCore' => '1.2.0',
+			'MantisCore' => '1.3.0',
 		);
 	}
 
@@ -202,7 +202,7 @@ class MantisCoreXwikiPlugin extends MantisCoreWikiPlugin {
 		$this->name = 'MantisBT Xwiki Integration';
 		$this->version = '0.1';
 		$this->requires = array(
-			'MantisCore' => '1.2.0',
+			'MantisCore' => '1.3.0',
 		);
 	}
 
