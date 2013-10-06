@@ -629,7 +629,5 @@ if ( $f_print ) {
 if ( $f_temp_filter ) {
 	$t_token_id = token_set( TOKEN_FILTER, $t_settings_serialized );
 	$t_redirect_url = $t_redirect_url . '?filter=' . $t_token_id;
-	html_meta_redirect( $t_redirect_url, 0 );
-} else {
-	print_header_redirect( $t_redirect_url );
 }
+print_header_redirect( $t_redirect_url );
