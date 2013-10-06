@@ -15,8 +15,8 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  * @package MantisBT
  *
@@ -113,35 +113,35 @@ $c_filter['reported'] = filter_create_reported_by( helper_get_current_project(),
 $url_link_parameters['reported'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
 
 $c_filter['resolved'] = array(
-	FILTER_PROPERTY_CATEGORY_ID => Array(
+	FILTER_PROPERTY_CATEGORY_ID => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_SEVERITY => Array(
+	FILTER_PROPERTY_SEVERITY => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_STATUS => Array(
+	FILTER_PROPERTY_STATUS => array(
 		'0' => $t_bug_resolved_status_threshold,
 	),
 	FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
-	FILTER_PROPERTY_REPORTER_ID => Array(
+	FILTER_PROPERTY_REPORTER_ID => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_HANDLER_ID => Array(
+	FILTER_PROPERTY_HANDLER_ID => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_RESOLUTION => Array(
+	FILTER_PROPERTY_RESOLUTION => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_BUILD => Array(
+	FILTER_PROPERTY_BUILD => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_VERSION => Array(
+	FILTER_PROPERTY_VERSION => array(
 		'0' => META_FILTER_ANY,
 	),
-	FILTER_PROPERTY_HIDE_STATUS => Array(
+	FILTER_PROPERTY_HIDE_STATUS => array(
 		'0' => $t_hide_status_default,
 	),
-	FILTER_PROPERTY_MONITOR_USER_ID => Array(
+	FILTER_PROPERTY_MONITOR_USER_ID => array(
 		'0' => META_FILTER_ANY,
 	),
 );

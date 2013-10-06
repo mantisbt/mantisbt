@@ -1,8 +1,8 @@
 <?php
 # MantisBT - A PHP based bugtracking system
 
-# Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-# Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+# Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+# Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
 
 # MantisBT is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
