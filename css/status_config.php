@@ -55,7 +55,9 @@ header( 'X-Content-Type-Options: nosniff' );
  *	eg. status colors are only necessary on a few pages.(my view, view all bugs, bug view, etc. )
  *	other pages may need to include dynamic css styles as well
  */
-$t_referer_page = basename( parse_url( $_SERVER['HTTP_REFERER'], PHP_URL_PATH ) );
+$t_referer_page = array_key_exists( 'HTTP_REFERER', $_SERVER )
+	? basename( parse_url( $_SERVER['HTTP_REFERER'], PHP_URL_PATH ) )
+	: basename( __FILE__ );
 switch( $t_referer_page ) {
 	case 'login_page.php':
 	case 'signup_page.php':
