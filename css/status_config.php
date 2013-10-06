@@ -73,7 +73,8 @@ $t_statuses = MantisEnum::getAssocArrayIndexedByValues( $t_status_string );
 $t_colors = config_get( 'status_colors' );
 $t_color_count = count( $t_colors );
 $t_color_width = ( $t_color_count > 0 ? ( round( 100/$t_color_count ) ) : 0 );
-$t_status_percents = get_percentage_by_status();
+$t_status_percents = auth_is_user_authenticated() ? get_percentage_by_status() : array();
+
 foreach( $t_statuses AS $t_id=>$t_label ) {
 	if( array_key_exists( $t_label, $t_colors ) ) {
 		echo ".$t_label-color { background-color: {$t_colors[$t_label]}; width: $t_color_width%; }\n";
