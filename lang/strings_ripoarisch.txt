@@ -1,563 +1,160 @@
 <?php
-# MantisBT - A PHP based bugtracking system
-
-# MantisBT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# MantisBT is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * Language File
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Colognian (Ripoarisch)
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * **********************************************************************
- * ** This file is generated from translations stored in translatewiki **
- * ** Information on Copyright/License for translatewiki translations  **
- * ** is available at http://translatewiki.net/wiki/Project:About      **
- * **********************************************************************
- * ** To improve a translation please visit http://translatewiki.net   **
- * **********************************************************************
+ * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
- * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
-*/
+ * @file
+ *
+ * @author Purodha
+ */
 
-$s_messages = array(
-	'directionality' => 'ltr',
-	'actiongroup_menu_move' => 'Ömtrecke',
-	'actiongroup_menu_copy' => 'Kopeere',
-	'actiongroup_menu_assign' => 'Zohdeile',
-	'actiongroup_menu_close' => 'Zohmaache',
-	'actiongroup_menu_delete' => 'Fottschmieße',
-	'actiongroup_menu_resolve' => 'Fädesch maache',
-	'actiongroup_menu_update_priority' => 'Vörrang ändere',
-	'actiongroup_menu_update_status' => 'Shtattus ändere',
-	'actiongroup_menu_update_severity' => 'Jeweesch ändere',
-	'actiongroup_menu_update_category' => 'Kattejorie ändere',
-	'actiongroup_menu_update_field' => '%1$s ändere',
-	'actiongroup_menu_update_target_version' => 'De Ziilversion ändere',
-	'actiongroup_menu_update_fixed_in_version' => 'De Version ändere, woh et mit jedonn sin sull',
-	'actiongroup_menu_update_product_build' => 'Bräng, op der neuste Shtand, wann dat Produk et läz als e Projramm jebout wood',
-	'actiongroup_menu_add_note' => 'En Notiz dobei donn',
-	'actiongroup_bugs' => 'De ußjesöhk Aanjelääjeheite',
-	'actiongroup_error_issue_is_readonly' => 'He di Aanjelääjeheit kanns De bloß lässe.',
-	'all_projects' => 'All Projäkte',
-	'move_bugs' => 'De Aanjelääjeheit woh_anders hen donn',
-	'operation_successful' => 'Dä Vörjang es jelonge.',
-	'date_order' => 'Nohm Dattum zotteere',
-	'print_all_bug_page_link' => 'Bereeschte dröcke',
-	'csv_export' => 'Expoteere em <i lang="en">CSV</i>-Fommaat',
-	'excel_export' => 'Expoteere em <i lang="en">Excel</i>-Fommaat',
-	'login_anonymously' => 'Als Nameloser enloggge',
-	'anonymous' => 'Namelos',
-	'jump_to_bugnotes' => 'Op de Notizze rövver wähßelle',
-	'public_project_msg' => 'Dat Projäk es <span style="text-transform:uppercase">öffentlesch</span>. Jeede Metmaacher kann doh draan.',
-	'private_project_msg' => 'Dat Projäk es <span style="text-transform:uppercase">nit öffentlesch</span>. Bloß de Köbesse un de vun Hand zojelohße Metmaachere könne doh draan.',
-	'access_level_project' => 'Et Zohjangsnivoh för dat Projäk',
-	'view_submitted_bug_link' => 'Zeisch de ennjedraare Aanjelääjeheit %1$s',
-	'assigned_projects' => 'Zohjedeijlte Projäkte',
-	'print' => 'Dröcke',
-	'jump' => 'Jangk noh de Aanjelääjeheit',
-	'copy_users' => 'Metmaacher kopeere',
-	'copy_categories_from' => 'Saachjroppe kopeere vun',
-	'copy_categories_to' => 'Saachjroppe kopeere noh',
-	'copy_versions_from' => 'Versione kopeere vun',
-	'copy_versions_to' => 'Versione kopeere noh',
-	'copy_users_from' => 'Metmaacher kopeere noh',
-	'copy_users_to' => 'Metmaacher kopeere noh',
-	'bug_history' => 'Dä Aanjelääjeheit iere Verlouf',
-	'field' => 'Väld',
-	'old_value' => 'Dä ahle Wäät',
-	'new_value' => 'Dä neue Wäät',
-	'date_modified' => 'Et Dattum vun dä Änderung',
-	'bugnote' => 'Notiz',
-	'change' => 'Änderung',
-	'bugnote_view_state' => 'Notizze ier Seeshbakeit',
-	'bug_monitor' => 'Aanjelääjeheit en de Oppaßleß',
-	'bug_end_monitor' => 'Aanjelääjeheit nit mieh en de Opaßleß',
-	'announcement' => 'Aanköndijung',
-	'stays_on_top' => 'Bliev emmer fürre',
-	'bugnote_link_title' => 'Diräkte Lengk op di Notiz',
-	'delete_bugnote_button' => 'Notiz fottschmiiße',
-	'delete_bugnote_sure_msg' => 'Wells De he di Notiz werklesh fott schmiiße?',
-	'bug_relationships' => 'Bezöch',
-	'empty_password_sure_msg' => 'En dämm Metmaacher singem Paßwoot shteiht nix dren. Trotzdämm wigger maache?',
-	'empty_password_button' => 'Dat Paßwoot sull keine Enhallt han, leddisch sinn, nix dren',
-	'reauthenticate_title' => 'Enlogge',
-	'reauthenticate_message' => 'Do bes en seschere Sigg aam aanlooere, un Din jesescherte Setzung es ald eröm. Donn Desch wider neu enlogge, öm föran ze maache.',
-	'no_category' => '(Keij Saachjropp)',
-	'global_categories' => 'Jemeinsam Saachjroppe',
-	'inherit' => 'Saachjroppe „erbe“',
-	'inherit_global' => 'Jemeinsam Saachjroppe „erbe“',
-	'inherit_parent' => 'Övverjeoodenete Saachjroppe „erbe“',
-	'duplicate_of' => 'es dubbelt met',
-	'has_duplicate' => 'hät e Dubbel',
-	'related_to' => 'hät ene Bezoch zoh',
-	'dependant_on' => 'Hängk aff vun',
-	'blocks' => 'hällt op',
-	'new_bug' => 'En neu Aanjelääjeheit',
-	'bugnote_added' => 'Notiz dobei jedonn',
-	'bugnote_edited' => 'Notiz jeändert',
-	'bugnote_deleted' => 'Notiz fott jeschmeße',
-	'summary_updated' => 'Zosammefassung op der neue Shtand jebraat',
-	'description_updated' => 'Jäz om neue Shtand beschrevve',
-	'additional_information_updated' => 'Zohsäzlejje Daate op der neue Shtand jebraat',
-	'steps_to_reproduce_updated' => 'De Schredde för et Noh_vollträke sin op der neue Shtand jebraat',
-	'file_added' => 'Datei dobei jedonn',
-	'file_deleted' => 'Datei fott jemaat',
-	'bug_deleted' => 'Aanjelääjeheit fott jeschmeße',
-	'make_private' => 'Päsöhnlesch maache',
-	'make_public' => 'Öffentlesch maache',
-	'create_new_project_link' => 'E neu Projäk aanlääje',
-	'login_link' => 'Enlogge',
-	'select_option' => '(Ußwähle)',
-	'bug_actiongroup_access' => 'För dat ze donn, häß De nit de nüüdejje Rääschde.',
-	'bug_actiongroup_status' => 'Dä Aanjelääjeheit iere Shtattus kam_mer nit esu wi jewönsch ändere',
-	'bug_actiongroup_category' => 'Dä Aanjelääjeheit iere Zoot kam_mer nit wi jewönsch ändere',
-	'close_bugs_conf_msg' => 'Bes De Der sescher, dat De di Aanjelääjeheite zoh_maache wells?',
-	'delete_bugs_conf_msg' => 'Bes De Der sescher, dat De di Aanjelääjeheite fott_schmiiße wells?',
-	'move_bugs_conf_msg' => 'Donn di Aanjelääjeheite en dat Projäk',
-	'copy_bugs_conf_msg' => 'Donn di Aanjelääjeheite koppeere noh',
-	'assign_bugs_conf_msg' => 'Donn di Aanjelääjeheite zohwiise aan',
-	'resolve_bugs_conf_msg' => 'Donn dä Jrond ußwähle, woröm di Aanjelääjeheite jez jedonn sin',
-	'priority_bugs_conf_msg' => 'Donn dä Aanjelääjeheite ier neue Weeschteschkeit ußwähle',
-	'status_bugs_conf_msg' => 'Donn dä Aanjelääjeheite iere neue Shtattus ußwähle',
-	'view_status_bugs_conf_msg' => 'Donn dä Aanjelääjeheite ier neue Seeschbakeit ußwähle',
-	'category_bugs_conf_msg' => 'Donn dä Aanjelääjeheite ier neue Zoot ußwähle',
-	'fixed_in_version_bugs_conf_msg' => 'Donn de Projramm-Version ändere, woh di Aanjelääjeheit dren jedonn wohr',
-	'target_version_bugs_conf_msg' => 'Donn de aanjpeilte Projramm-Version ändere op',
-	'close_group_bugs_button' => 'Aanjelääjeheit zohmaache',
-	'delete_group_bugs_button' => 'Aanjelääjeheite fott schmiiße',
-	'move_group_bugs_button' => 'Aanjelääjeheite woh anders henn donn',
-	'copy_group_bugs_button' => 'Aanjelääjeheite koppeere',
-	'assign_group_bugs_button' => 'Aanjelääjeheite zohdeijle',
-	'resolve_group_bugs_button' => 'Aanjelääjeheite jedonn melde',
-	'priority_group_bugs_button' => 'De Weeschteschkeit ändere',
-	'status_group_bugs_button' => 'De Zohshtand ändere',
-	'category_group_bugs_button' => 'De Saachjropp ändere',
-	'view_status_group_bugs_button' => 'De Seeshbakeit ändere',
-	'fixed_in_version_group_bugs_button' => 'De Version ändere, wo et jedonn wohr',
-	'target_version_group_bugs_button' => 'De aanjepeilte Version ändere',
-	'update_severity_msg' => 'Donn dä Aanjelääjeheit ier Jeweesch ußwähle',
-	'update_severity_button' => 'Jeweesch ändere',
-	'hide_button' => 'Donn bloß de ußjesohte aanzeije',
-	'printing_preferences_title' => 'Donn de Felder för zom Dröcke ußwähle',
-	'printing_options_link' => 'Enshtellunge för et Dröcke',
-	'bugnote_title' => 'Beärbeider vun dä Notiz',
-	'bugnote_date' => 'Dattum vun dä Notiz',
-	'bugnote_description' => 'Wi di Notiz beschrevve es',
-	'error_no_proceed' => 'Nämm dä „Retuur“-Knopp vun Dingem Brauser un jang en Sigg zerök.
-Doh kanns De repareeere, wat jraadt verkeht woor, udder en annder Akßjuhn nämme. Natöörlesch kanns De och över et Mennü janz jet andersch donn jonn.',
-	'login_error' => 'Dinge Zohjang heh künnt afjeschalldt sin, udder jeshperrt, udder Dinge Name als Medmaacher, udder Ding Paßwoot es verkeeht ennjejovve.',
-	'login_cookies_disabled' => 'Dinge Web_Brauser kann udder well met <i lang="en">cookies</i> net ömjonn.',
-	'go_back' => 'Jangk retuur',
-	'proceed' => 'Wiggerjonn!',
-	'switch' => 'Wääßelle',
-	'logged_in_as' => 'Enjelogg als',
-	'prefix_for_deleted_users' => 'Metmaacher',
-	'administrator' => 'Administrator',
-	'myself' => 'Esch sellver',
-	'default_access_level' => 'Et jewööhnlejje Nivoh',
-	'issue_status_percentage' => 'Dä Aanjelääjeheit iere Shtattuß en Prozänt',
-	'access_levels_enum_string' => '10:Bedraachter,25:Bereeschter,40:Änderer/Prööfer,55:Äntweckler,70:Verwallder,90:Administrator',
-	'project_status_enum_string' => '10:Äntwecklong,30:Frejejovve,50:Stabiel,70:Övverhollt',
-	'project_view_state_enum_string' => '10:öffentlesh,50:prevaat',
-	'view_state_enum_string' => '10:öffentlesh,50:prevaat',
-	'priority_enum_string' => '10:kei,20:winnisch,30:nommaal,40:huh,50:präßeet,60:tiräk',
-	'severity_enum_string' => '10:en Verbeßerong,20:ene Fuz,30:ene Täx_Fähler,40:eijfach Jefummel,50:ene kleine Fähler,60:ene schlemme Fähler,70:shtööz af,80:nix jeiht mieh',
-	'reproducibility_enum_string' => '10:emmer,30:manshmohl,50:zohfällesh,70:nit versöhk,90:löht sesh nit widerholle,100:-',
-	'status_enum_string' => '10:neu,20:Röckmäldung,30:aanjenumme,40:beshtätesh,50:zohjedeijlt,80:jedonn,90:zohjemaat',
-	'resolution_enum_string' => '10:unjedonn,20:jemaat,30:wider unjedonn,40:löht sesch nit widerholle,50:jeiht nit,60:dubbel,70:es keine Fähler,80:shpääder aanpacke,90:weed nit jemaat',
-	'projection_enum_string' => '10:kei,30:ene Fuz,50:klein Änderung,70:en jruuße Änderung,90:janz neu maache',
-	'eta_enum_string' => '10:nix,20:< 1 Daach,30:2-3 Dääsch,40:< 1 Woch,50:< 1 Mohndt,60:> 1 Mohndt',
-	'sponsorship_enum_string' => '0:unbezahlt,1:well jet han,2:bezahlt',
-	'new_account_subject' => 'Metmaacher neu aanmellde',
-	'new_account_greeting' => 'Märßi för et Aanmellde. Do häß jez ene Zohjang met däm Metmaacher_Nahme „%1$s“. Öm Ding Aanmeldung fäädesch ze maache, jangk op dä URL hee dronger (Paß drop op, dat dä en eine Reih shteiht) un donn dann Ding eije Paßwoot faßlääje:',
-	'new_account_greeting_admincreated' => 'Dä Metmaacher „%1$s“ hät ene Zohjang met däm Metmaacher_Nahme „%2$s“ för Desch ennjereschdt. Öm Ding Aanmeldung fäädesch ze maache, jangk op dä URL hee dronger (Paß drop op, dat dä en eine Reih shteiht) un donn dann Ding eije Paßwoot faßlääje:',
-	'new_account_username' => 'Metmaacher Name:',
-	'new_account_message' => 'Wann De kein Aanmeldung hann wells, dann verjeß heh di Nohreesch un et paßeet eijfach nix.',
-	'new_account_do_not_reply' => 'Donn nit op hee di Nohreesch antwoote!',
-	'new_account_email' => '<i lang="en">e-mail</i>:',
-	'new_account_IP' => 'Vun dä <code lang="en">IP-</code>Addräß:',
-	'new_account_signup_msg' => 'Heh dä Zohjang es ennjereschdt woode:',
-	'email_notification_title_for_status_bug_new' => 'De Aanjelääjeheit heh henger es jäz wider retuur op der Shtattus „neu“ jesaz',
-	'email_notification_title_for_status_bug_feedback' => 'Di Aanjelääjeheit heh noh bruch Ühr Rökmeldunge.',
-	'email_notification_title_for_status_bug_acknowledged' => 'Di Aanjelääjeheit heh noh es aanjenumme.',
-	'email_notification_title_for_status_bug_confirmed' => 'Di Aanjelääjeheit heh noh es beshtäätesch.',
-	'email_notification_title_for_status_bug_assigned' => 'Di Aanjelääjeheit heh noh es zohjedeilt.',
-	'email_notification_title_for_status_bug_resolved' => 'Di Aanjelääjeheit heh noh es jedonn.',
-	'email_notification_title_for_status_bug_closed' => 'Di Aanjelääjeheit heh noh es zoh jemaat.',
-	'email_notification_title_for_action_bug_submitted' => 'Di Aanjelääjeheit heh noh es ennjereish.',
-	'email_notification_title_for_action_bug_assigned' => 'Di Aanjelääjeheit heh noh es zohjedeilt.',
-	'email_notification_title_for_action_bug_reopened' => 'Di Aanjelääjeheit heh noh es widder opjemaat woode.',
-	'email_notification_title_for_action_bug_deleted' => 'Di Aanjelääjeheit heh noh es fottjeschmeße.',
-	'email_notification_title_for_action_bug_updated' => 'Di Aanjelääjeheit heh noh es op ene neue Shtand jebraat woode.',
-	'email_notification_title_for_action_sponsorship_added' => 'Di Aanjelääjeheit heh noh hät ene Shponso jefonge.',
-	'email_notification_title_for_action_sponsorship_updated' => 'En Shponsoschaff fö di Aanjelääjeheit heh noh wood jeändert.',
-	'email_notification_title_for_action_sponsorship_deleted' => 'En Shponsoschaff fö di Aanjelääjeheit heh noh es zeröck jetrocke woode.',
-	'email_notification_title_for_action_bugnote_submitted' => 'En Notiz es bei di Aanjelääjeheit heh dobei jedonn woode.',
-	'email_notification_title_for_action_duplicate_of_relationship_added' => 'Di Aanjelääjeheit heh es dubbel met dä Aanjelääjeheit %1$s.',
-	'email_notification_title_for_action_has_duplicate_relationship_added' => 'Di Aanjelääjeheit %1$s es dubbel met heh dä Aanjelääjeheit.',
-	'email_notification_title_for_action_related_to_relationship_added' => 'Di Aanjelääjeheit heh es verwandt met dä Aanjelääjeheit %1$s.',
-	'email_notification_title_for_action_dependant_on_relationship_added' => 'Di Aanjelääjeheit heh noh hängk aff vun dä Aanjelääjeheit %1$s.',
-	'email_notification_title_for_action_blocks_relationship_added' => 'Di Aanjelääjeheit heh noh muß et ehz jedonn sinn, domet de Aanjelääjeheit %1$s fäädesch jemaat wääde kann.',
-	'email_notification_title_for_action_duplicate_of_relationship_deleted' => 'Di Aanjelääjeheit heh noh es jäz nit mieh dubbel met dä Aanjelääjeheit %1$s.',
-	'email_notification_title_for_action_has_duplicate_relationship_deleted' => 'Di Aanjelääjeheit %1$s es jäz nit mieh dubbel met dä Aanjelääjeheit heh noh.',
-	'email_notification_title_for_action_related_to_relationship_deleted' => 'Di Aanjelääjeheit heh noh es jäz nit mieh verwandt met dä Aanjelääjeheit %1$s.',
-	'email_notification_title_for_action_dependant_on_relationship_deleted' => 'Di Aanjelääjeheit heh noh hängk jäz nit mieh aff vun dä Aanjelääjeheit %1$s.',
-	'email_notification_title_for_action_blocks_relationship_deleted' => 'Di Aanjelääjeheit heh noh es jäz nit mieh nüüdesch, öm de Aanjelääjeheit %1$s jedonn ze krijje.',
-	'email_notification_title_for_action_relationship_child_resolved' => 'De verwandte Aanjelääjeheit %1$s es jäz jedonn.',
-	'email_notification_title_for_action_relationship_child_closed' => 'De verwandte Aanjelääjeheit %1$s es jäz zohjemaat.',
-	'email_notification_title_for_action_monitor' => 'Di Aanjelääjeheit %1$s es jäz op däm Metmaacher %2$s singe Oppaßleß.',
-	'email_reporter' => 'Jemeldt vum',
-	'email_handler' => 'Zohjedeijlt aan',
-	'email_project' => 'Projäk',
-	'email_bug' => 'Aanjelääjeheit',
-	'email_category' => 'Zoot',
-	'email_reproducibility' => 'Widerhollbaakeijt',
-	'email_severity' => 'Jeweesch',
-	'email_status' => 'Schtattus',
-	'email_resolution' => 'Lösung',
-	'email_duplicate' => 'Dubbel',
-	'email_fixed_in_version' => 'Jedonn en Version',
-	'email_target_version' => 'Zielversion',
-	'email_date_submitted' => 'Övvermeddelungsdattum',
-	'email_last_modified' => 'Zoläz up ene neue Shtand jebraat',
-	'email_summary' => 'Zosammefassung',
-	'email_description' => 'Beschrevve',
-	'email_additional_information' => 'Zohsäzlijje Enfommazjuhne',
-	'email_steps_to_reproduce' => 'Schredde för et Nohvollträke',
-	'account_protected_msg' => 'Zohjang jeschöz. Mer künne kei Enshtellunge ändere{{int:ellipsis}}',
-	'account_removed_msg' => 'Dinge Zohjang es Der fott jenumme{{int:ellipsis}}',
-	'confirm_delete_msg' => 'Bes De sescher, dat De Dinge Zohjang quit han wells?',
-	'delete_account_button' => 'Donn dä Zohjang ophävve',
-	'change_preferences_link' => 'Enshtellunge ändere',
-	'edit_account_title' => 'Zohjang ändere',
-	'username' => 'Metmaacher-Name',
-	'realname' => 'Dinge reeschtijje Name',
-	'email' => 'Adräß för de <i lang="en">e-mail</i>',
-	'password' => 'Et Paßwoot',
-	'no_password_change' => 'Dat Paßwoot weet op ene andere Süßteem jehallde, un dröm kam_mer dat hee nit ändere.',
-	'confirm_password' => 'Noch ens dat Paßwoot',
-	'access_level' => 'Et Nivoh vum Zohjang',
-	'update_user_button' => 'Däm Metmaacher sing Daate op der neuste Shtand bränge',
-	'minutes' => 'Menutte',
-	'seconds' => 'Sekunde',
-	'email_on_new' => 'Scheck en <i lang="en">e-mail</i> bei neu Aanjelääjeheite',
-	'email_on_assigned' => 'Scheck en <i lang="en">e-mail</i> beim Zohdeijle',
-	'email_on_feedback' => 'Scheck en <i lang="en">e-mail</i> bei Röckmäldunge',
-	'email_on_resolved' => 'Scheck en <i lang="en">e-mail</i> wan en Aanjelääjeheit jedonn es',
-	'email_on_closed' => 'Scheck en <i lang="en">e-mail</i> wann en Aanjelääjeheit zohjemaat weed',
-	'email_on_reopened' => 'Scheck en <i lang="en">e-mail</i> wann en Aanjelääjeheit wider opjemaat weed',
-	'email_on_bugnote_added' => 'Scheck en <i lang="en">e-mail</i> bei neuje Notize',
-	'email_on_status_change' => 'Scheck en <i lang="en">e-mail</i> wann ene Shtattus jeändert wood',
-	'email_on_priority_change' => 'Scheck en <i lang="en">e-mail</i> wann ene Rang jeändert wood',
-	'email_bugnote_limit' => 'Scheck en <i lang="en">e-mail</i> wann nit mieh Notize zohjelohße sin',
-	'language' => 'Shprooch',
-	'update_prefs_button' => 'Lohß Jonn!',
-	'reset_prefs_button' => 'Enshtellunge retuur säze',
-	'timezone' => 'Zickzohn',
-	'operating_system' => 'Bedriefsüsteem',
-	'additional_description' => 'Zohsäzlejje Enfommazjuhne',
-	'sponsor' => 'Schponser',
-	'sponsor_verb' => 'Schponser',
-	'amount' => 'Bedraach',
-	'total_owing' => 'Inßjesamp noch ze krijje',
-	'total_paid' => 'Insjesamp bezahlt',
-	'sponsor_hide' => 'Donn Äleedisch un Bezahlt verschteische',
-	'sponsor_show' => 'Alle aanzeije',
-	'payment_updated' => 'Date för et Bezahle jeändert.',
-	'account_updated_msg' => 'Ding Aanmelde-Daate sin jeändert&#160;…',
-	'email_updated' => 'De Addräß för de <i lang="en">e-mail</i> es jeändert',
-	'realname_duplicated' => 'Dä reschtejje Name hät ald ene andere Metmaacher',
-	'realname_updated' => 'Dä reschtejje Name es jeändert',
-	'password_updated' => 'Paßwoot jeändert',
-	'login_button' => 'Enlogge',
-	'signup_link' => 'För ene neuje Zohjang aanmälde',
-	'lost_password_link' => 'Häß De Ding Paßwoot verjäße?',
-	'select_project_button' => 'Projäk ußwähle',
-	'lost_password_title' => 'E neu Paßwoot verjäve',
-	'lost_password_done_title' => 'Nohreesch för e neu Paßwoot en de <i lang="en">e-mail</i>',
-	'lost_password_subject' => 'Neu Paßwoot',
-	'lost_password_info' => 'Öm Ding verjäße Paßwoot jäje e neu Paßwoot ze tuusche, jif Dinge Name als ene Metmaacher un Ding Addräß vun de <i lang="en">e-mail</i> aan.<br /><br />Wann di Daate zoh enem jöltijje Zohjang paße donn, dann kriß De ene extra URL met de <i lang="en">e-mail</i> zohjescheck. Doh es ene Beschtäätejungskood dre, för Dinge Zohjang. Jangk op dä Lengk fun dä URL, un donn doh Ding Paßwoot neu aanjävve.',
-	'lost_password_confirm_hash_OK' => 'Ding Beschtäätejung es aanjenumme. Donn Ding Paßwoot jez ändere.',
-	'newer_news_link' => 'Neuer Nohreeschte',
-	'older_news_link' => 'Ähler Nohreeschte',
-	'archives' => 'Aschiive',
-	'rss' => 'RSS',
-	'mantis_version' => 'MantisBT sing Version',
-	'created_user_part1' => 'Metmaacher aanjelaat',
-	'created_user_part2' => 'met däm Rääsch för der Zohjreff op däm Nivoh',
-	'create_new_account_title' => 'Ene neue Zohjang för ene Metmaacher aanlääje',
-	'verify_password' => 'Dat Paßwoot prööfe',
-	'enabled' => 'Enjeschalldt',
-	'protected' => 'Jeschöz jääje et Ändere',
-	'create_user_button' => 'Ene Metmaacher aanlääje',
-	'hide_disabled' => 'afjeschalldte nit aanzeije',
-	'filter_button' => 'Donn da Fellter bruche',
-	'create_filter_link' => 'Ene Permalengk aanlääje',
-	'create_short_link' => 'Ene koote Lenk aanlääje',
-	'filter_permalink' => 'He kütt ene Permalengk op de Felltere, di em Momang enjereschdt sin:',
-	'manage_users_link' => 'Metmaachere verwallde',
-	'manage_projects_link' => 'Projäkte verwallde',
-	'p' => 'Jeschöz',
-	'select_severity' => 'Soöhk et Jeweesch uß',
-	'or_fill_in' => 'Udder ußfölle',
-	'assign_to' => 'Zohdeijle aan',
-	'additional_information' => 'Zohsäzlejje Enfommazjuhne',
-	'submit_report_button' => 'Lohß Jonn!',
-	'check_report_more_bugs' => 'Maach e Höhksche heh, öm noch mieh Saache ze mällde',
-	'report_stay' => 'Donn beim Enjävve blieve',
-	'selected_project' => 'Ußjewählt Projäk',
-	'valid_project_msg' => 'Do moß e jöltesh Projäk ußwähle.',
-	'signup_done_title' => 'De Aanmeldung als Metmaacher es jemaat.',
-	'password_emailed_msg' => 'Mer jrattoleere. Do häs Desch jäz aanjemelldt als ene Metmaacher. Do kriß jäz en <i lang="en">e-mail</i> zohjescheck, öm ze sinn, dat Ding <i lang="en">e-mail</i>-Addräß reschtesch jetipp es un et deiht. Doh shteiht ene Lengk dren. Dämm nohzejonn, schalldt Ding Aanmeldung endjöltesch frei.',
-	'no_reponse_msg' => 'Do häs sibbe Dääch, öm Ding Aanmeldung endjöltesch ze beschtääteje. Wann De dat nit deihs, künnt Ding neu Aanmeldung widder opjehovve wääde.',
-	'signup_info' => 'Wann De dat Fommulaa heh kumplätt ußjeföllt has, un Ding Antwoote jeprööf sin, kriß De en <i lang="en">e-mail</i> jescheck, zom Beschtäätejje, aan di <i lang="en">e-mail</i>-Addräß, di De aanjejovve häs.<br />Met dä <i lang="en">e-mail</i> kanns De Ding Aanmeldung endjöltesch maache. Wann De dat nit ennerhallef vun sibbe Dääsch deihs, weed se widder fott jemaat.<br />Do moß en jöltejje Adräß för Ding <i lang="en">e-mail</i> aanjävve, domet dat all fluppe kann.',
-	'signup_title' => 'Aanmällde',
-	'signup_button' => 'Aanmälde',
-	'no_password_request' => 'Ding Paßwoot weed vun enem andere Süßteem verwalldt. Donn Desch aan Dinge Verwallder vun däm Süßteem wende.',
-	'edit_site_settings_title' => 'Enschtellunge för di Websait Ändere',
-	'save_settings_button' => 'Enschtellunge faßhallde',
-	'site_settings_title' => 'Enschtellunge för di Webßait',
-	'system_info_link' => 'Enfommazjuhne övver et Süßteem',
-	'site_settings_link' => 'Enschtellunge för di Webßait',
-	'site_settings_updated_msg' => 'De Enschtellunge för di Webßait sin jäz aanjepaß',
-	'summary_title' => 'Zosammefaßung',
-	'summary_advanced_link' => 'Fottjeschredde Zosammefaßung',
-	'by_project' => 'Zoteer noh\'m Projäk',
-	'by_status' => 'Zoteer noh\'m Schtattus',
-	'by_date' => 'Zotteer noh\'m Dattum (Daach)',
-	'by_severity' => 'Zotteer noh\'m Jeweesch',
-	'by_resolution' => 'Zotteer noh de Lösung',
-	'by_category' => 'Zotteer noh Zoot',
-	'by_developer' => 'Zotteer noh\'m Projrameerer',
-	'by_reporter' => 'Zotteer noh\'m Ennreisher',
-	'percentage_fixed' => '% jedonn',
-	'percentage_errors' => '% verkeht',
-	'errors' => 'Verkeht',
-	'total' => 'Jesamp',
-	'score' => 'Punkte',
-	'days' => 'Dääsch',
-	'time_stats' => 'Shtatistik övver de Zick för äleedesch Saache (Dääsch)',
-	'priority_abbreviation' => 'W',
-	'search' => 'Söhke',
-	'view_prev_link' => 'Vörijje beloore',
-	'view_next_link' => 'Näkßte beloore',
-	'prev' => 'Retuur',
-	'next' => 'Vöran',
-	'first' => 'Eezte',
-	'last' => 'Läz',
-	'use_date_filters' => 'Dattumsfellter',
-	'yes' => 'Joo',
-	'no' => 'Nää',
-	'open_filters' => 'Fellter ändere',
-	'or_unassigned' => 'Udder nit zohjedeilt',
-	'ok' => '<span style="text-transform:uppercase">joot</span>',
-	'select_all' => 'Alle Ußwähle',
-	'use_query' => 'Fellter bruche',
-	'delete_query' => 'Felter fottschmiiße',
-	'query_deleted' => 'Felter fottjeschmeße',
-	'save_query' => 'Donn hee dä Felter faßhallde',
-	'query_name' => 'Dä Name fun däm Felter',
-	'query_exists' => 'Dä beschtemmpte Felter singk ald doh ze sin.',
-	'query_dupe_name' => 'Ene Felter met däm Name es ald doh. Sök ene andere Name uß för dä Felter.',
-	'query_blank_name' => 'Do kann keine Felter oohne Name afshpeischere. Jif däm Felter ene Name, ih dat De der afshpeichere deihß.',
-	'query_name_too_long' => 'Do kanns keine Felter afshpeischere, däm singe Name övver 64 Zeijsche lang es. Sök Der ene köötere Name för dä Felter uß.',
-	'query_store_error' => 'Beim Felter Afshpeischere es ene Fähler opjetrodde.',
-	'open_queries' => 'Fellter verwallde',
-	'query_delete_msg' => 'Beß De sescher, dat de di Dattei fotjeschmeße han wells?',
-	'update_bug_button' => 'Ändere!',
-	'bug_assign_to_button' => 'Zohwiise aan:',
-	'bug_status_to_button' => 'Shtattuß ändere op:',
-	'reopen_bug_button' => 'Wider opmaaache',
-	'move_bug_button' => 'Ömtrecke',
-	'attached_files' => 'Aanjehange Dateije',
-	'publish' => 'Öffentlesch maache',
-	'cached' => 'Zweschejescheischert',
-	'add_user_to_monitor' => 'Dobei donn',
-	'no_users_monitoring_bug' => 'Kein Metmaacher han heh di Aanjelääjeheit op ier Oppaßleß',
-	'users_monitoring_bug' => 'Metmaacher, di heh di Aanjelääjeheit op der Oppaßleß han',
-	'monitoring_user_list' => 'Leß met Metmaacher',
-	'no_users_sponsoring_bug' => 'Keine es heh di Aanjelääjeheit aam shponserre.',
-	'users_sponsoring_bug' => 'Metmaacher, di heh di Aanjelääjeheit shponsere donn',
-	'sponsors_list' => 'Leß met Shponsere',
-	'total_sponsorship_amount' => 'Shponserschaff kumplät = %1$s',
-	'add_custom_field_button' => 'Neu selvs enjereschdt Feld',
-	'delete_custom_field_button' => 'Selvs enjereschdt Feld fott schmiiße',
-	'delete_custom_field_everywhere' => 'Donn dat selvs enjereschdt Feld övverall fott nämme',
-	'update_custom_field_button' => 'Selvs enjereschdt Feld ändere',
-	'add_existing_custom_field' => 'Donn heh dat selvs enjerescht Feld derbei',
-	'edit_custom_field_title' => 'Selvs enjereschdt Feld ändere',
-	'custom_field' => 'Feld',
-	'custom_fields_setup' => 'Selvs enjereschdt Felder',
-	'custom_field_name' => 'Name',
-	'custom_field_project_count' => 'Aanzahl Projäkte',
-	'custom_field_type' => 'Zoot',
-	'custom_field_possible_values' => 'Müjjelesche Wääte',
-	'custom_field_default_value' => 'Dä Shtandatt_Wäät',
-	'custom_field_valid_regexp' => '<i lang="en">Regular expression</i>',
-	'custom_field_access_level_r' => 'Zohjang zom Lässe',
-	'custom_field_access_level_rw' => 'Zohjang zom Schriive',
-	'custom_field_length_min' => 'De köözeste Läng',
-	'custom_field_length_max' => 'De hühßte Läng',
-	'custom_field_filter_by' => 'Bei dä Fellter dobei donn',
-	'custom_field_display_report' => 'Aanzeije, wann en Aanjelääjeheit bereesch weed',
-	'custom_field_display_update' => 'Aanzeije, wann en Aanjelääjeheit äjänz weed',
-	'custom_field_display_resolved' => 'Aanzeije, wann en Aanjelääjeheit äleedesch weed',
-	'custom_field_display_closed' => 'Aanzeije, wann en Aanjelääjeheit zohjemaat weed',
-	'custom_field_require_report' => 'Nühdesch beim Bereeschte',
-	'custom_field_require_update' => 'Nühdesch beim Ändere',
-	'custom_field_require_resolved' => 'Nühdesch beim Fähdeschmaache',
-	'custom_field_require_closed' => 'Nühdesch beim Zohmaache',
-	'custom_field_sequence' => 'Reijefollsch',
-	'custom_field_type_enum_string' => '0:Zeijschekett,1:Zahl,2:Kommazahl,3:Opzällung,4:e-mail,5:Käßje met Höhksche,6:Leß,7:Leß un mieh wie ein Ußwahl,8:Dattum,9:Ein Ußwahl uß diverse',
-	'confirm_used_custom_field_deletion' => 'Dat Feld es em Momang en winnischßdens einem Projäk em Jebruch. Wann De wigger jeihß, dann wääde all de Wääte för dat Feld fottjeschmeße, un De kanns se och nit widder zeröck holle. Wann De dat Feld jäz nit fottschmiiße wellß, donn dä Knopp „Retuur“ en Dingem Brauser nämme. Sönß, öm wigger ze jon, sonn op dä Knopp hee dronger klecke.',
-	'confirm_custom_field_deletion' => 'Bes De sescher, dat De dat selvs-aanjelaate Feld un all de Wääte, di doför en de Datebangk sin, fott schmiiße wells?',
-	'field_delete_button' => 'Feld fottschmiiße',
-	'confirm_custom_field_unlinking' => 'Bes De sescher, dat De dat selvs-aanjelaate Feld uß däm Projäk eruß nämme un all de Wääte, di doför en de Datebangk sin, fott schmiiße wells?',
-	'field_remove_button' => 'Feld fottnämme',
-	'hide_status' => 'Shtattus nit aanzeije',
-	'filter_closed' => 'Zohjemaat',
-	'filter_resolved' => 'Jedonn',
-	'hide_closed' => 'Zohjemaate Sache nit aanzeije',
-	'hide_resolved' => 'Jedonn Saache nit aanzeije',
-	'and_above' => 'un mieh',
-	'advanced_filters' => 'Opjemoz Feltere',
-	'simple_filters' => 'Eijfach Feltere',
-	'monitored_by' => 'Op dä Oppaßleß vum',
-	'attachments' => 'aanjehange Dattei(je)',
-	'phpmailer_language' => 'ksh',
-	'sponsors' => '%1$d Shponser(e)',
-	'sponsorship_added' => 'Shponserschaff dobei jedonn',
-	'sponsorship_updated' => 'Shponserschaff jeändert',
-	'sponsorship_deleted' => 'Shponserschaff fottjeschmeße',
-	'sponsorship_paid' => 'De Shponserschaff es bezahlt',
-	'sponsorship_more_info' => 'Mieh övver de Shponserschaff',
-	'sponsorship_total' => 'Jesamp för de Shponserschaff',
-	'sponsorship_process_url' => '',
-	'changelog' => 'Et Logbooch vun de Änderunge',
-	'changelog_empty' => 'Mer han kein Date övver de verjange Änderunge',
-	'resolved_progress' => '%1$d vun %2$d Endrääsch sin jedonn. Vüraan jekumme öm %3$d%%.',
-	'http_auth_realm' => 'Sesch bei MantisBT enlogge',
-	'bug' => 'Aanjelääjeheit',
-	'add_new_relationship' => 'Ene neue Bezoch',
-	'add_new_relationship_button' => 'Dobei donn',
-	'relationship_added' => 'Bezoch dobei jedonn',
-	'relationship_deleted' => 'Bezoch fottjeschmeße',
-	'no_relationship' => 'keine Bezoch',
-	'relationship_replaced' => 'Bezoch ußjetuusch',
-	'replace_relationship_button' => 'Ußtuusche',
-	'delete_relationship_button' => 'Schmiiß Fott!',
-	'view' => 'Beloore',
-	'news' => '<span style="text-transform:uppercase">Nohreeschte</span>',
-	'view_private_news' => 'Päsöhnlesch Nohreeschte aanloore',
-	'manage_news' => 'Nohreschte verwallde',
-	'view_list_of_attachments' => 'Leß met de Aanhäng aanloore',
-	'download_attachments' => 'Aanhäng eronger laade',
-	'delete_attachments' => 'Aanhäng fottschmiiße',
-	'delete_attachment_button' => 'Fottschmiiße',
-	'delete_attachment_sure_msg' => 'Wells De werklesch dä Aanhang fottschmiiße?',
-	'filters' => 'Felltere',
-	'save_filters' => 'Felltere faßhallde',
-	'save_filters_as_shared' => 'Donn de Felltere för jeder_ein faßhallde',
-	'use_saved_filters' => 'Nämm de faßjehallde Felltere',
-	'create_project' => 'Projäk aanlääje',
-	'delete_project' => 'Projäk fottschmiiße',
-	'manage_project' => 'Projäk verwallde',
-	'manage_user_access_to_project' => 'De Metmaacher iere Zohjang op e Projäk verwallde',
-	'project_documents' => '<span style="text-transform:uppercase">Dokemänte för et Projäk</span>',
-	'view_project_documents' => 'Dokemänte för et Projäk aanloore',
-	'upload_project_documents' => 'Dokemänte för et Projäk huhlaade',
-	'sponsorships' => '<span style="text-transform:uppercase">Shponserschaffte</span>',
-	'view_sponsorship_details' => 'Einzelheijte för di Shponserschaff beloore',
-	'view_sponsorship_total' => 'Aanloore, wat insjesamp för de Shponserschaff em Pott es',
-	'sponsor_issue' => 'Shponsor för di Saach',
-	'others' => '<span style="text-transform:uppercase">Sönß</span>',
-	'see_email_addresses_of_other_users' => 'Anderlücks Addräße vun de <i lang="en">e-mail</i> sinn',
-	'add_profiles' => 'Profile dobei donn',
-	'notify_of_new_user_created' => 'Nohreesch övver neu aanjelaate Metmaacher',
-	'email_notification' => 'Nohreesch als <i lang="en">e-mail</i>',
-	'status_changed_to' => 'Änderung vum Shtattus op',
-	'email_on_deleted' => '<i lang="en">e-mail</i> övver et Fottschmiiße',
-	'email_on_sponsorship_changed' => '<i lang="en">e-mail</i> övver en jänderte Shponsorschaff',
-	'email_on_relationship_changed' => '<i lang="en">e-mail</i> övver ene jänderte Bezoch',
-	'loading' => 'Ben aam Laade&#160;…',
-	'between_date' => 'Zwesche',
-	'on_or_before_date' => 'Bes',
-	'before_date' => 'Vör',
-	'after_date' => 'Noh',
-	'on_or_after_date' => 'Aff',
-	'from_date' => 'Vun',
-	'to_date' => 'Bes',
-	'on_date' => 'Aam',
-	'on' => 'Aanjeschalldt',
-	'off' => 'Ußjeschaldt',
-	'wiki' => 'Wiki',
-	'tags' => 'Makeerunge',
-	'tag_details' => 'Einzelheite för de Makeerung: %1$s',
-	'tag_id' => 'Kännong',
-	'tag_name' => 'Name',
-	'tag_creator' => 'aanjelaat vun',
-	'tag_created' => 'Aanjelaat aam',
-	'tag_updated' => 'Zoläz jeändert',
-	'tag_statistics' => 'Shatistike övver der Jebruch',
-	'tag_update' => 'Makeerung aanpasse: %1$s',
-	'tag_update_return' => 'Zoröck op Makeerung',
-	'tag_update_button' => 'Makeerung aanpasse',
-	'tag_delete_button' => 'Makeerung fottschmiiße',
-	'tag_delete_message' => 'Bes De sescher, dat De hee di Makeerung fottschmiiße wells?',
-	'tag_existing' => 'Makeerung, di mer han',
-	'tag_none_attached' => 'Kei Makeerung es öhnzwoh aanjhange.',
-	'tag_attach' => 'Aanhänge',
-	'tag_attach_long' => 'Makeerunge aanhänge',
-	'tag_attach_failed' => 'Mer kunnte de Makeerung nit do draanhange.',
-	'tag_detach' => 'Makeerung „%1$s“ fott nämme',
-	'tag_separate_by' => '(Afdränne met „%1$s“)',
-	'tag_invalid_name' => 'Dä Makeerung iere Name es nit jöltesch.',
-	'tag_create_denied' => 'Dat Rääsch för en Makeerung aanzelääje häs De nit.',
-	'tag_history_attached' => 'Makeerung draanjehange',
-	'tag_history_detached' => 'Makeerung fott jenumme',
-	'tag_history_renamed' => 'Makeerung ömjenannt',
-	'tag_related' => 'Makeerunge, di domet zosamme hange donn',
-	'tag_create' => 'Makeerung aanlääje',
-	'show_all_tags' => '<span style="text-transform:uppercase">all</span>',
-	'time_tracking_billing_link' => 'Et Afräschne',
-	'time_tracking_cost_per_hour' => 'Koste pro Shtund',
-	'time_tracking_cost' => 'Koste',
-	'total_time_for_issue' => 'De jesampte Zick för di Saach = %1$s',
-	'twitter_resolved' => '%1$d: [%2$s] %3$s (äleedesch vum %4$s en %5$s)',
-	'twitter_resolved_no_version' => '%1$d: [%2$s] %3$s (äleedesch vum %4$s)',
-	'development_team' => 'Dä Entweckler-Schmolz',
-	'manage_columns_config' => 'Shpallde verwallde',
-	'all_columns_title' => 'All de Shpallde, di mer han',
-	'csv_columns_title' => '<i lang="en">CSV</i> Shpallde',
-	'view_issues_columns_title' => 'Shpallde för wann mer en Saach aanzezeije',
-	'print_issues_columns_title' => 'Shpallde för zom Dröcke',
-	'excel_columns_title' => '<i lang="en">Excel</i> Shpallde',
-	'update_columns_as_global_default' => 'De Enshtällung fun de Shpallde als alljemeine Shtandat för all de Projäkte säze',
-	'update_columns_for_current_project' => 'De Enshtällunge för de Shpallde för hee dat Projäk säze',
-	'update_columns_as_my_default' => 'De Enshtällung fun de Shpallde för all de Projäkte als Shtandat säze',
-	'reset_columns_configuration' => 'Enshtällonge för de Shpalle op der Shtandat retuur säze',
-	'copy_columns_from' => 'Shpallde kopeere vun',
-	'copy_columns_to' => 'Shpallde kopeere noh',
-	'view_account_title' => 'Metmaacher-Daate',
-	'manage_user' => 'De Metmaacher verwallde',
-	'label' => '%1$s:',
-	'install_information' => 'MantisBT sing Enshtellunge',
-	'database_information' => 'MantisBT sing Datebangk-Enshtellunge',
-	'path_information' => 'MantisBT sing Pahde',
-);
-
-
+$s_directionality = 'ltr';
+$s_actiongroup_menu_move = 'Ömtrecke';
+$s_actiongroup_menu_copy = 'Kopeere';
+$s_actiongroup_menu_assign = 'Zohdeile';
+$s_actiongroup_menu_close = 'Zohmaache';
+$s_actiongroup_menu_delete = 'Fottschmiiße';
+$s_actiongroup_menu_resolve = 'Fädesch maache';
+$s_actiongroup_menu_update_priority = 'Vörrang ändere';
+$s_actiongroup_menu_update_status = 'Shtattus ändere';
+$s_actiongroup_menu_update_severity = 'Jeweesch ändere';
+$s_actiongroup_menu_update_category = 'Saachjropp ändere';
+$s_actiongroup_menu_update_field = '%1$s ändere';
+$s_actiongroup_menu_update_target_version = 'De Ziilversion ändere';
+$s_actiongroup_menu_update_fixed_in_version = 'De Version ändere, woh et mit jedonn sin sull';
+$s_actiongroup_menu_update_product_build = 'Bräng, op der neuste Shtand, wann dat Produk et läz als e Projramm jebout wood';
+$s_actiongroup_menu_add_note = 'En Notiz dobei donn';
+$s_actiongroup_bugs = 'De ußjesöhk Aanjelääjeheite';
+$s_actiongroup_error_issue_is_readonly = 'He di Aanjelääjeheit kanns De bloß lässe.';
+$s_all_projects = 'All Projäkte';
+$s_move_bugs = 'De Aanjelääjeheit woh_anders hen donn';
+$s_operation_successful = 'Dä Vörjang es jelonge.';
+$s_date_order = 'Nohm Dattum zotteere';
+$s_print_all_bug_page_link = 'Bereeschte dröcke';
+$s_csv_export = 'Expoteere em <i lang="en">CSV</i>-Fommaat';
+$s_excel_export = 'Expoteere em <i lang="en">Excel</i>-Fommaat';
+$s_login_anonymously = 'Als Nameloser enloggge';
+$s_anonymous = 'Namelos';
+$s_jump_to_bugnotes = 'Op de Notizze rövver wähßelle';
+$s_public_project_msg = 'Dat Projäk es <span style="text-transform:uppercase">öffentlesch</span>. Jeede Metmaacher kann doh draan.';
+$s_private_project_msg = 'Dat Projäk es <span style="text-transform:uppercase">nit öffentlesch</span>. Bloß de Köbesse un de vun Hand zojelohße Metmaachere könne doh draan.';
+$s_access_level_project = 'Et Zohjangsnivoh för dat Projäk';
+$s_view_submitted_bug_link = 'Zeisch de ennjedraare Aanjelääjeheit %1$s';
+$s_assigned_projects = 'Zohjedeijlte Projäkte';
+$s_unassigned_projects = 'Nit zohjedeijlte Projäkte';
+$s_print = 'Dröcke';
+$s_jump = 'Jangk noh de Aanjelääjeheit';
+$s_copy_users = 'Metmaacher kopeere';
+$s_copy_categories_from = 'Saachjroppe kopeere vun';
+$s_copy_categories_to = 'Saachjroppe kopeere noh';
+$s_copy_versions_from = 'Versione kopeere vun';
+$s_copy_versions_to = 'Versione kopeere noh';
+$s_copy_users_from = 'Metmaacher kopeere noh';
+$s_copy_users_to = 'Metmaacher kopeere noh';
+$s_bug_history = 'Dä Aanjelääjeheit iere Verlouf';
+$s_field = 'Väld';
+$s_old_value = 'Dä ahle Wäät';
+$s_new_value = 'Dä neue Wäät';
+$s_date_modified = 'Et Dattum vun dä Änderung';
+$s_bugnote = 'Notez';
+$s_change = 'Änderung';
+$s_bugnote_view_state = 'Notizze ier Seeshbakeit';
+$s_bug_monitor = 'Aanjelääjeheit en de Oppaßleß';
+$s_bug_end_monitor = 'Aanjelääjeheit nit mieh en de Opaßleß';
+$s_announcement = 'Aanköndijung';
+$s_stays_on_top = 'Bliev emmer fürre';
+$s_bugnote_link_title = 'Diräkte Lengk op di Notiz';
+$s_delete_bugnote_button = 'Notiz fottschmiiße';
+$s_delete_bugnote_sure_msg = 'Wells De heh di Notiz verhaftesh fott schmiiße?';
+$s_bug_relationships = 'Bezöch';
+$s_empty_password_sure_msg = 'En dämm Metmaacher singem Paßwoot shteiht nix dren. Trotzdämm wigger maache?';
+$s_empty_password_button = 'Dat Paßwoot sull keine Enhallt han, leddisch sinn, nix dren';
+$s_reauthenticate_title = 'Enlogge';
+$s_reauthenticate_message = 'Do bes en seschere Sigg aam aanlooere, un Din jesescherte Setzung es ald eröm. Donn Desch wider neu enlogge, öm föran ze maache.';
+$s_no_category = '(Keij Saachjropp)';
+$s_global_categories = 'Jemeinsam Saachjroppe';
+$s_inherit = 'Saachjroppe „erbe“';
+$s_inherit_global = 'Jemeinsam Saachjroppe „erbe“';
+$s_inherit_parent = 'Övverjeoodenete Saachjroppe „erbe“';
+$s_duplicate_of = 'es dubbelt met';
+$s_has_duplicate = 'hät e Dubbel';
+$s_related_to = 'hät ene Bezoch zoh';
+$s_dependant_on = 'Hängk aff vun';
+$s_blocks = 'hällt op';
+$s_new_bug = 'En neu Aanjelääjeheit';
+$s_bugnote_added = 'Notiz dobei jedonn';
+$s_bugnote_edited = 'Notiz jeändert';
+$s_bugnote_deleted = 'Notiz fott jeschmeße';
+$s_summary_updated = 'Zosammefassung op der neue Shtand jebraat';
+$s_description_updated = 'Jäz om neue Shtand beschrevve';
+$s_additional_information_updated = 'Zohsäzlejje Daate op der neue Shtand jebraat';
+$s_steps_to_reproduce_updated = 'De Schredde för et Noh_vollträke sin op der neue Shtand jebraat';
+$s_file_added = 'Datei dobei jedonn';
+$s_file_deleted = 'Datei fott jemaat';
+$s_bug_deleted = 'Aanjelääjeheit fott jeschmeße';
+$s_make_private = 'Päsöhnlesch maache';
+$s_make_public = 'Öffentlesch maache';
+$s_create_new_project_link = 'E neu Projäk aanlääje';
+$s_login_link = 'Enlogge';
+$s_select_option = '(Ußwähle)';
+$s_bug_actiongroup_access = 'För dat ze donn, häß De nit de nüüdejje Rääschde.';
+$s_bug_actiongroup_status = 'Dä Aanjelääjeheit iere Shtattus kam_mer nit esu wi jewönsch ändere';
+$s_bug_actiongroup_category = 'Dä Aanjelääjeheit iere Zoot kam_mer nit wi jewönsch ändere';
+$s_close_bugs_conf_msg = 'Bes De Der sescher, dat De di Aanjelääjeheite zoh_maache wells?';
+$s_delete_bugs_conf_msg = 'Bes De Der jeweß, dat De di Aanjelääjeheite fott_schmiiße wells?';
+$s_move_bugs_conf_msg = 'Donn di Aanjelääjeheite en dat Projäk';
+$s_copy_bugs_conf_msg = 'Donn di Aanjelääjeheite koppeere noh';
+$s_assign_bugs_conf_msg = 'Donn di Aanjelääjeheite zohwiise aan';
+$s_resolve_bugs_conf_msg = 'Donn dä Jrond ußwähle, woröm di Aanjelääjeheite jez jedonn sin';
+$s_priority_bugs_conf_msg = 'Donn dä Aanjelääjeheite ier neue Weeschteschkeit ußwähle';
+$s_status_bugs_conf_msg = 'Donn dä Aanjelääjeheite iere neue Shtattus ußwähle';
+$s_view_status_bugs_conf_msg = 'Donn dä Aanjelääjeheite ier neue Seeschbakeit ußwähle';
+$s_category_bugs_conf_msg = 'Donn dä Aanjelääjeheite ier neue Saachjropp ußwähle';
+$s_fixed_in_version_bugs_conf_msg = 'Donn de Projramm-Version ändere, woh di Aanjelääjeheit dren jedonn wohr';
+$s_target_version_bugs_conf_msg = 'Donn de aanjpeilte Projramm-Version ändere op';
+$s_close_group_bugs_button = 'De Aanjelääjeheite zohmaache';
+$s_delete_group_bugs_button = 'Aanjelääjeheite fott schmiiße';
+$s_move_group_bugs_button = 'Aanjelääjeheite woh anders henn donn';
+$s_copy_group_bugs_button = 'Aanjelääjeheite koppeere';
+$s_assign_group_bugs_button = 'Aanjelääjeheite zohdeijle';
+$s_resolve_group_bugs_button = 'Aanjelääjeheite jedonn melde';
+$s_priority_group_bugs_button = 'De Weeschteschkeit ändere';
+$s_status_group_bugs_button = 'De Zohshtand ändere';
+$s_category_group_bugs_button = 'De Saachjropp ändere';
+$s_view_status_group_bugs_button = 'De Seeshbakeit ändere';
+$s_fixed_in_version_group_bugs_button = 'De Version ändere, wo et jedonn wohr';
+$s_target_version_group_bugs_button = 'De aanjepeilte Version ändere';
+$s_update_severity_title = 'Et Jeweesch ändere';
+$s_update_severity_msg = 'Donn dä Aanjelääjeheit ier Jeweesch ußwähle';
+$s_update_severity_button = 'Jeweesch ändere';
+$s_hide_button = 'Donn bloß de ußjesohte aanzeije';
+$s_printing_preferences_title = 'Donn de Felder för zom Dröcke ußwähle';
+$s_printing_options_link = 'Enshtellunge för et Dröcke';
+$s_bugnote_title = 'Beärbeider vun dä Notiz';
+$s_bugnote_date = 'Dattum vun dä Notiz';
+$s_bugnote_description = 'Wi di Notiz beschrevve es';
+$s_error_no_proceed = 'Nämm dä „Retuur“-Knopp vun Dingem Brauser un jang en Sigg zerök.
+Doh kanns De repareeere, wat jraadt verkeht woor, udder en annder Akßjuhn nämme. Natöörlesch kanns De och över et Mennü janz jet andersch donn jonn.';
 $MANTIS_ERROR[ERROR_GENERIC] = 'Bei dä Akßjuhn es ene Fähler opjetrodde.
 Dä künnß De aan Dinge Administrator heh wigger jävve.';
 $MANTIS_ERROR[ERROR_SQL] = 'Ene SQL-Fähler es opjefalle.';
@@ -565,7 +162,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'En Dingem Bereesch es ene Fähler opjetrodde.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Kein Dattei aanjejovve.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Di Zoot Dattei es nit zohjelohße.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Dat Verzeijshneß jidd_et nit. Loor donoh en de Enshtellunge för et Projäk.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Dat es en dubbelte Datei. Donn eets de eezte dovun fottschmiiße.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'E Projäk met däm Name jidd_et ald.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'De nüüdejje Aanjab „%1$s“ es nit jemaat. Donn ens Ding Enjaabe nohloore.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Heh dä Zohjang es extra jeschöz. Do kanns De nix met maache, bes dat dä Schoz wider opjehovve es.';
@@ -580,7 +176,8 @@ $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'De Zeijshereih „%1$s“ woodt ni
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Notiz nit jefonge';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Dat Projäk „%1$d“ kunnt mer nit fenge.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'E Feld „%1$s“ en de Daatebangk ham_mer nit jefonge.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Mer han kei Verbendung noh däm <i lang="en">FTP</i>-ßööver krääje.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Mer han kei Verbendung noh däm ftp-ẞööver krääje.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Wä et maache mööt es ävver nit berääschtesh, öm di Aanjelääjeheit met däm Shtattus ze beärbeide.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'E Projäk met däm Name jit et ald. Jangk retuur un jif ene andere Name aan.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Dat es ene onjöltijje Name för e Projäk. Dä Name kann nit fottjelohße wääde.';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Ene Metmaacher met däm Name „%1$s“ kunnt mer nit fenge.';
@@ -589,6 +186,9 @@ $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'De Login-Daate, di Dinge Brauser fa�
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Enshtällunge för hee dä Metmaacher kunnte mer nit fenge.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Di Neujeschkeijt kunnt mer nit fenge.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'De aanjejovve Paßwööter sin nit ejaal.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'E Feld sullt för %1$s aanjejovve sin, ävver mer han e Täxshtöcksche krääje.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'E Täxshtöcksche sullt för %1$s aanjejovve sin, ävver mer han e Feld krääje.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'En Zahl sullt för %1$s aanjejovve sin.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Aanjelääjeheit %1$d nit jefonge.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Ene Felter %1$s ham_mer nit jefonge.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Dä Felter, dä De bruche wells, es täschnesch övverhollt un kann nit mieh op ene neue Shtand jebraat wääde. Bes esu joot, un donn dä eijfaach neu aanlääje.';
@@ -602,18 +202,35 @@ $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Kein Dattei wohd huhjelaade, jang
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'De huhjelaade Dattei kunnt nit en et Verzeijschneß för se op Duur dren ze shpeijschere jeschovve wääde. Dat Verzeijschneß fäählt, udder uns Webßööver kunnt nit dren schriive.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Do kanns en Aanjelääjeheit nit als e Dubbel vun sesh sellver enndraare';
 $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Dä Shtand vun dä Aanjelääjeheit ham_mer nit jefonge.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Dat selfsjemaate Daate_Feld ham_mer nit jefonge.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Dat es ene dubbelte Name.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Winnishßdens ei Projäk bruch dat Daate_Feld heh noch.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Ene onjöltije Wäät för dat Daate_Feld „%1$s“.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'En onjöltijje Faßlääjung för e selfsjemaat Daate_Feld.';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'De Zohjangspröövung per <i lang="en">LDAP</i> es donevve jejange.';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'De Verbendung zom <i lang="en">LDAP</i> ßööver hät nit jeklapp.';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'De Verbendung nohm <i lang="en">ldap</i>-ẞööver hät nit jeklapp.';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Dä ldap-Enndraach op der neuste Shtand ze bränge hät nit jeflupp.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Dä Metmaacher_Enndraach em LDAP wood nit jefonge.';
+$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Dat Zohsazprojramm för LDAP es nit jelaade.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'En Verbendung met de Datebangk hät nit jeflupp. Se mäldt dä Fähler: #%1$d: %2$s.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'En Aanfrooch aan de Datebangk hät nit jeflupp. Se mäldt dä Fähler: #%1$d: %2$s för di Aanfrooch: %3$s.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'De Ußwahl vun de Datebangk hät nit jeflupp. Se mäldt dä Fähler: #%1$d: %2$s.';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'En Saachjropp met dämm Name jidd_et ald.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Et es kein Kopeer_Aufjab aanjejovve.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Di Saachjropp wood nit jefonde.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'En Saachjropp „%1$s“ för dat Projäk „%2$s“ wood nit jefonge.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'En Version met däm Name jidd_et ald.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'De Version „%1$s“ ham_mer nit jefonge.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Dä Metmaacher-Name es nit jöltesch. Zohjelohße sen bloß lateinesche Bochstabe, de Zeffere, Zweschreräum, dä Bendeshtresh, der Pungk, et „plus“-Zeijsche, un dä Ungershtresh.';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'Dä „reschtejje Name“ es onjöltesch udder Kappes.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Dä Metmaacher hät nit et nüüdeje Zohjangsrääsch.';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Dä „reschtejje Name“ es dersellve, wi enem andere Metmaacher singe Metmaacher_Name för et Enlogge. Söhk Der ene andere uß.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'De Öngershtözung för Schponsore es nit ennjeschalldt.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Schponsorschaff %1$d nit jefonge.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Schponsorschaff (%1$s) es onger dämm kleinste müjjelesche Bedraach (%2$s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Wä et maache mööt es ävver nit berääschtesh, öm jeshponserte Aanjelääjeheite ze beärbeide.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Zohjang nit zohjelohße, weil mer, öm jeshponserte Aanjelääjeheite zohzewiese, e hüüter Zohjangsrääsch bruch.
+';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Dä Shponser hät kei Addräß för sing <i lang="en">e-mail</i> aanjejovve. Beß esu joot un donn Ding Profil aanpaße.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'För di Enshtellung „%1$s“ es dä onjöltijje Wäät „%2$s“ ußjesöhk.';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Di Aanjelääjeheit „%1$d“ es bloß för ze Lässe, dröm jeiht dat nit ze maache.';
@@ -621,11 +238,632 @@ $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Di zwei Aanjelääjeheite ha
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Dä Bezoch wood nit jefonge.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Keine Zohjang: Di Aanjelääjeheit bruch e hüüter Nivoh för der Zohjang.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'En Aanjelääjeheit kam_mer nit op sech sellver betrecke.';
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Dä Kood_Schlößel för et Beschtääteje paß nit. Versöhk et norr_ens.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Dat Verfahre för verjäße Paßwööt es em Momang nit ze han.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Do moß en Adräß för de <i lang="en">e-mail</i> aanjävve, öm dat Paßwoot neu ze säze.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Di Aanjaabe paße op keine Metmaacher!';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Dä <i lang="en">URL</i> för zom Beschtäätejje es verkeht udder wohd ald jebruch. Donn widder enlogge.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'De jrühßte zohjelohße Aanzahl unjedonne Aanfroore es jez ungerwähß. Bes esu joht un donn med enem Administrator Kuntak opnämme.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '!FUZZY!!Dat wööd ene Krengel en dä subprojecte ier hierarchy erenn bränge.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Ene Fähler mem Ömleide es opjetrodde. Donn drop aachte, dat kein Zwescheräum ußerhallef vun däm <i lang="en">PHP</i>-Projramm_Block (<span class="plainlinks">&lt;?php ?&gt;</span>) en dä Datteije <code lang="en">config_inc.php</code> udder <code lang="en">custom_*.php</code> es.';
+$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'För <i lang="en">Twitter</i> enzebenge, moß dat Zohsazprojramm <code lang="en">cURL</code> em PHP enjesaz wääde, wat ävver em Momang nit enshtalleet es.';
+$MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Dat Zohsazprojramm es ald enshtalleet.';
+$MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'En däm Feld "%1$s" es en Shpallde dubbelt dren: "%2$s"';
+$MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'En däm Feld "%1$s" es en onjöltesch Feld "%2$s" dren.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Ding Setzung es opjehovve woode';
-$MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Dat Fommaat för et Dattum es kappott';
+$MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Op di Sigg kamm_mer met dä Metood nit zohjriefe.';
+$MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Dat Feld zom Zoteere es nit jöltesch.';
+$MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Dat Fommaat för et Dattum es kappott.';
 $MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Kunnt de Zickzohn nit ändere';
+$s_login_error = 'Dinge Zohjang heh künnt afjeschalldt sin, udder jeshperrt, udder Dinge Name als Medmaacher, udder Ding Paßwoot es verkeeht ennjejovve.';
+$s_login_cookies_disabled = 'Dinge Web_Brauser kann udder well met <i lang="en">cookies</i> net ömjonn.';
+$s_go_back = 'Jangk retuur';
+$s_proceed = 'Wiggerjonn!';
+$s_switch = 'Wääßelle';
+$s_logged_in_as = 'Enjelogg als';
+$s_prefix_for_deleted_users = 'Metmaacher';
+$s_administrator = 'Administrator';
+$s_myself = 'Esch sellver';
+$s_default_access_level = 'Et jewööhnlejje Nivoh';
+$s_issue_status_percentage = 'Dä Aanjelääjeheit iere Shtattuß en Prozänt';
+$s_access_levels_enum_string = '10:Bedraachter,25:Bereeschter,40:Änderer/Prööfer,55:Äntweckler,70:Verwallder,90:Administrator';
+$s_project_status_enum_string = '10:Äntwecklong,30:Frejejovve,50:Stabiel,70:Övverhollt';
+$s_project_view_state_enum_string = '10:öffentlesh,50:prevaat';
+$s_view_state_enum_string = '10:öffentlesh,50:prevaat';
+$s_priority_enum_string = '10:kei,20:winnisch,30:nommaal,40:huh,50:präßeet,60:tiräk';
+$s_severity_enum_string = '10:en Verbeßerong,20:ene Fuz,30:ene Täx_Fähler,40:eijfach Jefummel,50:ene kleine Fähler,60:ene schlemme Fähler,70:shtööz af,80:nix jeiht mieh';
+$s_reproducibility_enum_string = '10:emmer,30:manshmohl,50:zohfällesh,70:nit versöhk,90:löht sesh nit widerholle,100:-';
+$s_status_enum_string = '10:neu,20:Röckmäldung,30:aanjenumme,40:beshtätesh,50:zohjedeijlt,80:jedonn,90:zohjemaat';
+$s_resolution_enum_string = '10:unjedonn,20:jemaat,30:wider unjedonn,40:löht sesch nit widerholle,50:jeiht nit,60:dubbel,70:es keine Fähler,80:shpääder aanpacke,90:weed nit jemaat';
+$s_projection_enum_string = '10:kei,30:ene Fuz,50:klein Änderung,70:en jruuße Änderung,90:janz neu maache';
+$s_eta_enum_string = '10:nix,20:< 1 Daach,30:2-3 Dääsch,40:< 1 Woch,50:< 1 Mohndt,60:> 1 Mohndt';
+$s_sponsorship_enum_string = '0:unbezahlt,1:well jet han,2:bezahlt';
+$s_new_account_subject = 'Metmaacher neu aanmellde';
+$s_new_account_greeting = 'Märßi för et Aanmellde. Do häß jez ene Zohjang met däm Metmaacher_Nahme „%1$s“. Öm Ding Aanmeldung fäädesch ze maache, jangk op dä URL hee dronger (Paß drop op, dat dä en eine Reih shteiht) un donn dann Ding eije Paßwoot faßlääje:';
+$s_new_account_greeting_admincreated = 'Dä Metmaacher „%1$s“ hät ene Zohjang met däm Metmaacher_Nahme „%2$s“ för Desch ennjereschdt. Öm Ding Aanmeldung fäädesch ze maache, jangk op dä URL hee dronger (Paß drop op, dat dä en eine Reih shteiht) un donn dann Ding eije Paßwoot faßlääje:';
+$s_new_account_username = 'Metmaacher Name:';
+$s_new_account_message = 'Wann De kein Aanmeldung hann wells, dann verjeß heh di Nohreesch un et paßeet eijfach nix.';
+$s_new_account_do_not_reply = 'Donn nit op hee di Nohreesch antwoote!';
+$s_new_account_email = '<i lang="en">e-mail</i>:';
+$s_new_account_IP = 'Vun dä <code lang="en">IP-</code>Addräß:';
+$s_new_account_signup_msg = 'Heh dä Zohjang es ennjereschdt woode:';
+$s_email_notification_title_for_status_bug_new = 'De Aanjelääjeheit heh henger es jäz wider retuur op der Shtattus „neu“ jesaz';
+$s_email_notification_title_for_status_bug_feedback = 'Di Aanjelääjeheit heh noh bruch Ühr Rökmeldunge.';
+$s_email_notification_title_for_status_bug_acknowledged = 'Di Aanjelääjeheit heh noh es aanjenumme.';
+$s_email_notification_title_for_status_bug_confirmed = 'Di Aanjelääjeheit heh noh es beshtäätesch.';
+$s_email_notification_title_for_status_bug_assigned = 'Di Aanjelääjeheit heh noh es zohjedeilt.';
+$s_email_notification_title_for_status_bug_resolved = 'Di Aanjelääjeheit heh noh es jedonn.';
+$s_email_notification_title_for_status_bug_closed = 'Di Aanjelääjeheit heh noh es zoh jemaat.';
+$s_email_notification_title_for_action_bug_submitted = 'Di Aanjelääjeheit heh noh es ennjereish.';
+$s_email_notification_title_for_action_bug_assigned = 'Di Aanjelääjeheit heh noh es zohjedeilt.';
+$s_email_notification_title_for_action_bug_reopened = 'Di Aanjelääjeheit heh noh es widder opjemaat woode.';
+$s_email_notification_title_for_action_bug_deleted = 'Di Aanjelääjeheit heh noh es fottjeschmeße.';
+$s_email_notification_title_for_action_bug_updated = 'Di Aanjelääjeheit heh noh es op ene neue Shtand jebraat woode.';
+$s_email_notification_title_for_action_sponsorship_added = 'Di Aanjelääjeheit heh noh hät ene Shponso jefonge.';
+$s_email_notification_title_for_action_sponsorship_updated = 'En Shponsoschaff fö di Aanjelääjeheit heh noh wood jeändert.';
+$s_email_notification_title_for_action_sponsorship_deleted = 'En Shponsoschaff fö di Aanjelääjeheit heh noh es zeröck jetrocke woode.';
+$s_email_notification_title_for_action_bugnote_submitted = 'En Notiz es bei di Aanjelääjeheit heh dobei jedonn woode.';
+$s_email_notification_title_for_action_duplicate_of_relationship_added = 'Di Aanjelääjeheit heh es dubbel met dä Aanjelääjeheit %1$s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_added = 'Di Aanjelääjeheit %1$s es dubbel met heh dä Aanjelääjeheit.';
+$s_email_notification_title_for_action_related_to_relationship_added = 'Di Aanjelääjeheit heh es verwandt met dä Aanjelääjeheit %1$s.';
+$s_email_notification_title_for_action_dependant_on_relationship_added = 'Di Aanjelääjeheit heh noh hängk aff vun dä Aanjelääjeheit %1$s.';
+$s_email_notification_title_for_action_blocks_relationship_added = 'Di Aanjelääjeheit heh noh muß et ehz jedonn sinn, domet de Aanjelääjeheit %1$s fäädesch jemaat wääde kann.';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = 'Di Aanjelääjeheit heh noh es jäz nit mieh dubbel met dä Aanjelääjeheit %1$s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = 'Di Aanjelääjeheit %1$s es jäz nit mieh dubbel met dä Aanjelääjeheit heh noh.';
+$s_email_notification_title_for_action_related_to_relationship_deleted = 'Di Aanjelääjeheit heh noh es jäz nit mieh verwandt met dä Aanjelääjeheit %1$s.';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = 'Di Aanjelääjeheit heh noh hängk jäz nit mieh aff vun dä Aanjelääjeheit %1$s.';
+$s_email_notification_title_for_action_blocks_relationship_deleted = 'Di Aanjelääjeheit heh noh es jäz nit mieh nüüdesch, öm de Aanjelääjeheit %1$s jedonn ze krijje.';
+$s_email_notification_title_for_action_relationship_child_resolved = 'De verwandte Aanjelääjeheit %1$s es jäz jedonn.';
+$s_email_notification_title_for_action_relationship_child_closed = 'De verwandte Aanjelääjeheit %1$s es jäz zohjemaat.';
+$s_email_notification_title_for_action_monitor = 'Di Aanjelääjeheit %1$s es jäz op däm Metmaacher %2$s singe Oppaßleß.';
+$s_email_reporter = 'Jemeldt vum';
+$s_email_handler = 'Zohjedeijlt aan';
+$s_email_project = 'Projäk';
+$s_email_bug = 'Aanjelääjeheit';
+$s_email_category = 'Saachjropp';
+$s_email_reproducibility = 'Widerhollbaakeijt';
+$s_email_severity = 'Jeweesch';
+$s_email_priority = 'Vörrang';
+$s_email_status = 'Schtattus';
+$s_email_resolution = 'Lösung';
+$s_email_duplicate = 'Dubbel';
+$s_email_fixed_in_version = 'Jedonn en Version';
+$s_email_target_version = 'Zielversion';
+$s_email_date_submitted = 'Övvermeddelungsdattum';
+$s_email_last_modified = 'Zoläz up ene neue Shtand jebraat';
+$s_email_summary = 'Zosammefaßong';
+$s_email_description = 'Beschrevve';
+$s_email_additional_information = 'Zohsäzlijje Enfommazjuhne';
+$s_email_steps_to_reproduce = 'Schredde för et Nohvollträke';
+$s_account_protected_msg = 'Zohjang jeschöz. Mer künne kei Enshtellunge ändere{{int:ellipsis}}';
+$s_account_removed_msg = 'Dinge Zohjang es Der fott jenumme{{int:ellipsis}}';
+$s_confirm_delete_msg = 'Bes De sescher, dat De Dinge Zohjang quit han wells?';
+$s_delete_account_button = 'Donn dä Zohjang ophävve';
+$s_manage_profiles_link = 'Profile';
+$s_change_preferences_link = 'Enshtellunge ändere';
+$s_edit_account_title = 'Zohjang ändere';
+$s_username = 'Metmaacher-Name';
+$s_realname = 'Dinge reeschtijje Name';
+$s_email = 'Adräß för de <i lang="en">e-mail</i>';
+$s_password = 'Et Paßwoot';
+$s_no_password_change = 'Dat Paßwoot weet op ene andere Süßteem jehallde, un dröm kam_mer dat hee nit ändere.';
+$s_confirm_password = 'Noch ens dat Paßwoot';
+$s_access_level = 'Et Nivoh vum Zohjang';
+$s_update_user_button = 'Däm Metmaacher sing Daate op der neuste Shtand bränge';
+$s_verify_warning = 'De Daate för der Zohjang sen jäz beshtäätesch. De Nohreesch zum Beshtääteje, di De krääje häs, es jäz övverhollt un jelt nit mieh.';
+$s_verify_change_password = 'Mer moß heh e Paßwoot faßlääje, öm wider enlogge ze künne.';
+$s_default_account_preferences_title = 'Metmaacher_Enshtellunge';
+$s_default_project = 'Et Shtandatt_Projäk';
+$s_refresh_delay = 'Zick ze waade för_em Neu_Aanzeije';
+$s_minutes = 'Menutte';
+$s_redirect_delay = 'Zick ze waade för_em Ömleide';
+$s_seconds = 'Sekunde';
+$s_with_minimum_severity = 'Mem kleinste Jeweesch vun';
+$s_bugnote_order = 'De Reijefollsch för Notize ze zoteere';
+$s_bugnote_order_asc = 'Opwääts';
+$s_bugnote_order_desc = 'Röckwääts';
+$s_email_on_new = 'Scheck en <i lang="en">e-mail</i> bei neu Aanjelääjeheite';
+$s_email_on_assigned = 'Scheck en <i lang="en">e-mail</i> beim Zohdeijle';
+$s_email_on_feedback = 'Scheck en <i lang="en">e-mail</i> bei Röckmäldunge';
+$s_email_on_resolved = 'Scheck en <i lang="en">e-mail</i> wan en Aanjelääjeheit jedonn es';
+$s_email_on_closed = 'Scheck en <i lang="en">e-mail</i> wann en Aanjelääjeheit zohjemaat weed';
+$s_email_on_reopened = 'Scheck en <i lang="en">e-mail</i> wann en Aanjelääjeheit wider opjemaat weed';
+$s_email_on_bugnote_added = 'Scheck en <i lang="en">e-mail</i> bei neuje Notize';
+$s_email_on_status_change = 'Scheck en <i lang="en">e-mail</i> wann ene Shtattus jeändert wood';
+$s_email_on_priority_change = 'Scheck en <i lang="en">e-mail</i> wann ene Rang jeändert wood';
+$s_email_bugnote_limit = 'Scheck en <i lang="en">e-mail</i> wann nit mieh Notize zohjelohße sin';
+$s_language = 'Schprooch';
+$s_update_prefs_button = 'Lohß Jonn!';
+$s_reset_prefs_button = 'Enshtellunge retuur säze';
+$s_timezone = 'Ziggzohn';
+$s_prefs_reset_msg = 'De Enshtellunge sin zeröck jesaz&nbsp;…';
+$s_prefs_updated_msg = 'De Enshtellunge sin om neue Shtand&nbsp;…';
+$s_profile_added_msg = 'Et Profil es dobei jedonn ...';
+$s_profile_deleted_msg = 'Dat Profil es fott ...';
+$s_edit_profile_title = 'Et Profil ändere';
+$s_platform = 'Rääschnerzoot';
+$s_operating_system = 'Bedriefsüsteem';
+$s_additional_description = 'Zohsäzlejje Enfommazjuhne';
+$s_update_profile_button = 'Donn dat Profil op der neue Shtand bränge';
+$s_profile_defaulted_msg = 'Et Shtandatt_Profil is om neue Shtand ...';
+$s_add_profile_title = 'E Profil dobei donn';
+$s_add_profile_button = 'Profil dobei donn';
+$s_edit_or_delete_profiles_title = 'E Profil ändere udder fott schmiiße';
+$s_edit_profile = 'Et Profil ändere';
+$s_make_default = 'Zom Shtandatt maache';
+$s_delete_profile = 'Dat Profil fott schmiiße';
+$s_select_profile = 'Dat Profil ußsöhke';
+$s_submit_button = 'Lohß Jonn!';
+$s_profile_updated_msg = 'Dat Profil es op der neue Shtand jebraat&nbsp;...';
+$s_my_sponsorship = 'Ming eije Shponserschaffte';
+$s_update_sponsorship_button = 'Et Bezahle Ändere';
+$s_no_sponsored = 'Nix jefonge, wat jeshponsert wöhr un aan Üsch zohjedeilt.';
+$s_own_sponsored = 'Aanjelääjeheite, di De jeshponsert häß:';
+$s_issues_handled = 'Jeshponserte Aanjelääjeheite, woh De för enjedeilt bes:';
+$s_no_own_sponsored = 'Do häß kein Aanjelääjeheite jeshponsert.';
+$s_sponsor = 'Schponser';
+$s_sponsor_verb = 'Schponser';
+$s_amount = 'Bedraach';
+$s_total_owing = 'Inßjesamp noch ze krijje';
+$s_total_paid = 'Insjesamp bezahlt';
+$s_sponsor_hide = 'Donn Äleedisch un Bezahlt verschteische';
+$s_sponsor_show = 'Alle aanzeije';
+$s_payment_updated = 'Date för et Bezahle jeändert.';
+$s_account_updated_msg = 'Ding Aanmelde-Daate sin jeändert&nbsp;…';
+$s_email_updated = 'De Addräß för de <i lang="en">e-mail</i> es jeändert';
+$s_realname_duplicated = 'Dä reschtejje Name hät ald ene andere Metmaacher';
+$s_realname_updated = 'Dä reschtejje Name es jeändert';
+$s_password_updated = 'Paßwoot jeändert';
+$s_bug_assign_msg = 'De Aanjelääjeheit es zohjedeilt';
+$s_new_bug_title = 'En neu Aanjelääjeheit';
+$s_feedback_bug_title = 'Öm en Röckmäldong för di Aanjelääjeheit bedde';
+$s_acknowledged_bug_title = 'De Aanjelääjeheit aannämme';
+$s_confirmed_bug_title = 'De Aanjelääjeheit beshtääteje';
+$s_assigned_bug_title = 'De Aanjelääjeheit zohdeile';
+$s_new_bug_button = 'En neu Aanjelääjeheit';
+$s_feedback_bug_button = 'En Röckmäldong jävve';
+$s_acknowledged_bug_button = 'De Aanjelääjeheit aannämme';
+$s_confirmed_bug_button = 'De Aanjelääjeheit beshtääteje';
+$s_assigned_bug_button = 'De Aanjelääjeheit zohdeile';
+$s_bug_close_msg = 'De Aanjelääjeheit es perdü (zohjemaat)&nbsp;…';
+$s_close_immediately = 'Tiräk zohmaache';
+$s_closed_bug_title = 'De Aanjelääjeheit zohmaache';
+$s_bug_deleted_msg = 'De Aanjelääjeheit es fottjeschmeße.';
+$s_delete_bug_sure_msg = 'Wells De di Aanjelääjeheit verhaftesch fottschmiiße?';
+$s_delete_bug_button = 'Fottschmiiße!';
+$s_monitor_bug_button = 'Drop oppasse!';
+$s_unmonitor_bug_button = 'Nimmieh drop oppasse!';
+$s_file_upload_msg = 'Di Datei es huhjelaade.';
+$s_upload_file = 'Dattei huhlaade';
+$s_select_file = 'Dattei ußwähle';
+$s_upload_file_button = 'Lohß Jonn!';
+$s_max_file_size = 'Der jüüßde Ömfang';
+$s_bug_reopened_msg = 'De Aanjelääjeheit es widder opjemaat&nbsp;…';
+$s_reopen_add_bugnote_title = 'Donn en Notiz dobei mem Jrond för et wider neu Opmaache.';
+$s_bugnote_add_reopen_button = 'Donn en Notiz dobi un maach di Aanjelääjeheit wider op';
+$s_resolved_bug_title = 'Di Aanjelääjeheit es jedonn';
+$s_resolved_bug_button = 'Di Aanjelääjeheit es jedonn';
+$s_bug_resolved_msg = 'Di Aanjelääjeheit es jedonn. Donn onge en Notiz enjävve&nbsp;…';
+$s_resolve_add_bugnote_title = 'Donn en Notiz dobei mem Jrond doför, woröm di Di Aanjelääjeheit jedonn es.';
+$s_bugnote_add_resolve_button = 'Donn en Notiz dobei';
+$s_from = 'Vun';
+$s_to = 'Aan';
+$s_sent_you_this_reminder_about = 'hät Der heh di Ä\'ennerong jescheck övver';
+$s_bug_reminder = 'Donn en Ä\'ennerong schecke';
+$s_reminder_sent_to = 'En Ä\'ennerong wood jescheck aan:';
+$s_bug_send_button = 'Loßschecke';
+$s_reminder = 'Ä\'ennerong';
+$s_category = 'Saachjropp';
+$s_severity = 'Jeweesch';
+$s_date_submitted = 'Övvermeddelungsdattum';
+$s_last_update = 'Zoläz jeändert';
+$s_reporter = 'Jemeldt vum';
+$s_assigned_to = 'Zohjedeilt aan';
+$s_priority = 'Vörrang';
+$s_resolution = 'Lösung';
+$s_status = 'Stattus';
+$s_duplicate_id = 'Dubbelte Kännong';
+$s_os = 'Bedrievßsystem';
+$s_os_version = 'Version vum Bedrievßsystem';
+$s_eta = 'Opwand';
+$s_product_version = 'Väsjohn vum Produk 
+';
+$s_fixed_in_version = 'Jedonn en dä Version';
+$s_target_version = 'Jeplaant för de Version';
+$s_votes = 'Schtemme';
+$s_summary = 'Zosammefaßong';
+$s_update_information_button = 'Lohß Jonn!';
+$s_profile = 'Profil';
+$s_updating_bug_simple_title = 'Aanjaabe övver di Aanjelääjheit op ene neue Shtand bränge';
+$s_view_revisions = 'Versione aankike';
+$s_revision = 'Version';
+$s_revision_by = 'vum %2$s aam %1$s';
+$s_revision_drop = 'Falle lohße';
+$s_bug_revision_dropped_history = 'Di Version vun däm bug es fott.';
+$s_bugnote_revision_dropped_history = 'Di Version vun dä Notiz es fott.';
+$s_all_revisions = 'All Versione';
+$s_back_to_issue = 'Retuur noh dä Aanjelääjeheit';
+$s_confirm_revision_drop = 'Wells De verhaftesch heh di Version vun dä Aanjelääjeheit falle lohße?';
+$s_vote_added_msg = 'Di Shtemm es dobei jekumme.';
+$s_bugnote_added_msg = 'En Notiz es dobei jedonn.';
+$s_bugnote_deleted_msg = 'Di Notiz es fottjeschmeße.';
+$s_bug_notes_title = 'Notize';
+$s_edit_bugnote_title = 'Notiz ändere';
+$s_no_bugnotes_msg = 'Dä Enndraach hät kein Notize.';
+$s_delete_link = 'Fottschmieße';
+$s_add_bugnote_title = 'En Notiz dobei donn';
+$s_add_bugnote_button = 'Notiz dobei donn';
+$s_bugnote_edit_link = 'Ändere';
+$s_closed_bug_button = 'Di Aanjelääjeheit zohmaache';
+$s_bugnote_updated_msg = 'Di Notiz es jeändert.';
+$s_edited_on = 'jeändert aam:';
+$s_click_to_login = 'Enlogge';
+$s_warning_plain_password_authentication = '<strong>Opjepaß:</strong> Do bruchs e Paßwoot em Klohtäx, doh künne ävver de verantwootlesche Administratoore Ding Passwoot lässe.';
+$s_login_title = 'Enlogge';
+$s_choose_project = 'Projäk ußwähle';
+$s_login_button = 'Enlogge';
+$s_signup_link = 'För ene neuje Zohjang aanmälde';
+$s_lost_password_link = 'Häß De Ding Paßwoot verjäße?';
+$s_select_project_button = 'Projäk ußwähle';
+$s_lost_password_title = 'E neu Paßwoot verjäve';
+$s_lost_password_done_title = 'Nohreesch för e neu Paßwoot en de <i lang="en">e-mail</i>';
+$s_lost_password_subject = 'Neu Paßwoot';
+$s_lost_password_info = 'Öm Ding verjäße Paßwoot jäje e neu Paßwoot ze tuusche, jif Dinge Name als ene Metmaacher un Ding Addräß vun de <i lang="en">e-mail</i> aan.<br /><br />Wann di Daate zoh enem jöltijje Zohjang paße donn, dann kriß De ene extra URL met de <i lang="en">e-mail</i> zohjescheck. Doh es ene Beschtäätejungskood dre, för Dinge Zohjang. Jangk op dä Lengk fun dä URL, un donn doh Ding Paßwoot neu aanjävve.';
+$s_lost_password_confirm_hash_OK = 'Ding Beschtäätejung es aanjenumme. Donn Ding Paßwoot jez ändere.';
+$s_open_and_assigned_to_me = 'Unjedonn un aan mesch sellver zohjedeilt';
+$s_open_and_reported_to_me = 'Unjedonn un vun mir sellver enjedraare';
+$s_newer_news_link = 'Neuer Nohreeschte';
+$s_older_news_link = 'Ähler Nohreeschte';
+$s_archives = 'Aschiive';
+$s_rss = 'RSS';
+$s_mantis_version = 'MantisBT sing Version';
+$s_created_user_part1 = 'Metmaacher aanjelaat';
+$s_created_user_part2 = 'met däm Rääsch för der Zohjreff op däm Nivoh';
+$s_create_new_account_title = 'Ene neue Zohjang för ene Metmaacher aanlääje';
+$s_verify_password = 'Dat Paßwoot prööfe';
+$s_enabled = 'Enjeschalldt';
+$s_protected = 'Jeschöz jääje et Ändere';
+$s_create_user_button = 'Ene Metmaacher aanlääje';
+$s_hide_disabled = 'afjeschalldte nit aanzeije';
+$s_filter_button = 'Donn da Fellter bruche';
+$s_create_filter_link = 'Ene Permalengk aanlääje';
+$s_create_short_link = 'Ene koote Lenk aanlääje';
+$s_filter_permalink = 'He kütt ene Permalengk op de Felltere, di em Momang enjereschdt sin:';
+$s_manage_users_link = 'Metmaachere verwallde';
+$s_manage_projects_link = 'Projäkte verwallde';
+$s_create_new_account_link = 'Donn ene neue Zohjang för ene Metmaacher aanlääje';
+$s_projects_link = 'Projäkte';
+$s_documentation_link = 'Dokkemäntazjuhn';
+$s_new_accounts_title = 'Neu Zohjäng';
+$s_1_week_title = '1 Woch';
+$s_never_logged_in_title = 'Noch nie enjelogg';
+$s_manage_accounts_title = 'Zohjäng verwallde';
+$s_p = 'Jeschöz';
+$s_date_created = 'Aanjelaat aam';
+$s_edit_user_link = 'Ene Zohjang ändere';
+$s_message = 'Nohreesch';
+$s_default_notify = 'Mer säze et Schtandatt-Kännzeische för Nohreeschte ze schecke op';
+$s_action_notify = 'Mer säze et Kännzeische för Nohreeschte wääje Aktjuhne ze schecke op';
+$s_notify_defaults_change_access = 'Wä der Schtandatt för Nohreeschte ze schecke ändere kann';
+$s_notify_actions_change_access = 'Wä der Nohreeschte ändere kann:';
+$s_in_project = 'em Projäk';
+$s_configuration_option_type = 'Zoot';
+$s_project_added_msg = 'Dat Projäk wood derbei jedonn...';
+$s_category_added_msg = 'Di Saachjropp wood derbei jedonn...';
+$s_category_deleted_msg = 'Di Saachjropp wood fott jeschmeße...';
+$s_category_delete_sure_msg = 'Wells De di Saachjropp „%1$s“ verhaftesh fott schmiiße? <br /> Do sin %2$d Aanjelääjeheite dren.';
+$s_categories = 'Saachjroppe';
+$s_add_category_button = 'Donn en Saachjrupp derbei';
+$s_versions = 'Väsjohne';
+$s_version = 'Väsjohn';
+$s_add_project_button = 'Donn e Projäk derbei';
+$s_projects_title = 'Projäkte';
+$s_version_delete_sure = 'Wells De heh di Version verhaftesch fottschmiiße?';
+$s_delete_version_button = 'Lohß Jonn!';
+$s_update_version_button = 'Lohß Jonn!';
+$s_obsolete = 'Övverhollt';
+$s_prune_accounts_button = 'Lohß Jonn!';
+$s_reset_password_button = 'Lohß Jonn!';
+$s_delete_user_button = 'Lohß Jonn!';
+$s_show_all_users = 'All';
+$s_users_unused = 'nit jebruch';
+$s_users_new = 'Neu';
+$s_view_bugs_link = 'Aanjelääjeheite aanzeije';
+$s_report_bug_link = 'En Aanjelääjeheit enjävve';
+$s_changelog_link = 'Et Logbooch vun de Änderunge';
+$s_roadmap_link = 'En Övverseesch';
+$s_summary_link = 'Zosammefaßong';
+$s_account_link = 'Der Zohjang';
+$s_users_link = 'Metmaacher';
+$s_logout_link = 'Ußlogge';
+$s_upload_file_title = 'Dattei huhlaade';
+$s_title = 'Tittel';
+$s_filename = 'Dä Name vun dä Datei';
+$s_must_enter_severity = 'Do moß e Jeweesch ußwähle.';
+$s_required = 'nüüdesch';
+$s_select_severity = 'Soöhk et Jeweesch uß';
+$s_or_fill_in = 'Udder ußfölle';
+$s_assign_to = 'Zohdeijle aan';
+$s_additional_information = 'Zohsäzlejje Enfommazjuhne';
+$s_submit_report_button = 'Lohß Jonn!';
+$s_check_report_more_bugs = 'Maach e Höhksche heh, öm noch mieh Saache ze mällde';
+$s_report_stay = 'Donn beim Enjävve blieve';
+$s_selected_project = 'Ußjewählt Projäk';
+$s_valid_project_msg = 'Do moß e jöltesh Projäk ußwähle.';
+$s_signup_done_title = 'De Aanmeldung als Metmaacher es jemaat.';
+$s_password_emailed_msg = 'Mer jrattoleere. Do häs Desch jäz aanjemelldt als ene Metmaacher. Do kriß jäz en <i lang="en">e-mail</i> zohjescheck, öm ze sinn, dat Ding <i lang="en">e-mail</i>-Addräß reschtesch jetipp es un et deiht. Doh shteiht ene Lengk dren. Dämm nohzejonn, schalldt Ding Aanmeldung endjöltesch frei.';
+$s_no_reponse_msg = 'Do häs sibbe Dääch, öm Ding Aanmeldung endjöltesch ze beschtääteje. Wann De dat nit deihs, künnt Ding neu Aanmeldung widder opjehovve wääde.';
+$s_signup_captcha_request = 'Jif dä Kood en, dä en däm Kaste heh räähß schteiht.';
+$s_signup_info = 'Wann De dat Fommulaa heh kumplätt ußjeföllt has, un Ding Antwoote jeprööf sin, kriß De en <i lang="en">e-mail</i> jescheck, zom Beschtäätejje, aan di <i lang="en">e-mail</i>-Addräß, di De aanjejovve häs.<br />Met dä <i lang="en">e-mail</i> kanns De Ding Aanmeldung endjöltesch maache. Wann De dat nit ennerhallef vun sibbe Dääsch deihs, weed se widder fott jemaat.<br />Do moß en jöltejje Adräß för Ding <i lang="en">e-mail</i> aanjävve, domet dat all fluppe kann.';
+$s_signup_title = 'Aanmälde';
+$s_signup_button = 'Aanmälde';
+$s_no_password_request = 'Ding Paßwoot weed vun enem andere Süßteem verwalldt. Donn Desch aan Dinge Verwallder vun däm Süßteem wende.';
+$s_edit_site_settings_title = 'Enschtellunge för di Websait Ändere';
+$s_save_settings_button = 'Enschtällonge faßhallde';
+$s_site_settings_title = 'Enschtällonge för di Webßait';
+$s_system_info_link = 'Enfommazjuhne övver et Süßteem';
+$s_site_settings_link = 'Enschtällonge för di Webßait';
+$s_site_settings_updated_msg = 'De Enschtellunge för di Webßait sin jäz aanjepaß';
+$s_summary_title = 'Zosammefaßong';
+$s_summary_advanced_link = 'Fottjeschredde Zosammefaßung';
+$s_by_project = 'Zoteer noh\'m Projäk';
+$s_by_status = 'Zoteer noh\'m Schtattus';
+$s_by_date = 'Zotteer noh\'m Dattum (Daach)';
+$s_by_severity = 'Zotteer noh\'m Jeweesch';
+$s_by_resolution = 'Zotteer noh de Lösung';
+$s_by_category = 'Zotteer noh Zoot';
+$s_by_developer = 'Zotteer noh\'m Projrameerer';
+$s_by_reporter = 'Zotteer noh\'m Ennreisher';
+$s_percentage_fixed = '% jedonn';
+$s_percentage_errors = '% verkeht';
+$s_errors = 'Verkeht';
+$s_opened = 'Opjemaat';
+$s_resolved = 'Jedonn';
+$s_total = 'Jesamp';
+$s_most_active = 'Aam aktiivste';
+$s_score = 'Punkte';
+$s_days = 'Dääsch';
+$s_time_stats = 'Schtatistik övver de Zick un Door för äleedeschte Saache (Dääsch)';
+$s_longest_open = 'Aam längste unjedonn';
+$s_total_time = 'Jesampzigg';
+$s_any = 'jeede';
+$s_all = 'all';
+$s_show = 'Zeisch';
+$s_viewing_bugs_title = 'Aanjelääjeheite';
+$s_updated = 'Om neuste Shtand';
+$s_sort = 'Zoteere noh';
+$s_issue_id = 'Aanjelääjeheit&nbsp;';
+$s_recently_visited = 'Köözlesch beloort';
+$s_priority_abbreviation = 'W';
+$s_none = 'keine';
+$s_search = 'Söhke';
+$s_view_prev_link = 'Vörijje beloore';
+$s_view_next_link = 'Näkßte beloore';
+$s_prev = 'Retuur';
+$s_next = 'Vöran';
+$s_first = 'Eezte';
+$s_last = 'Läz';
+$s_start_date = 'Vun';
+$s_end_date = 'Bes';
+$s_use_date_filters = 'Dattumsfellter';
+$s_yes = 'Joh';
+$s_no = 'Nää';
+$s_open_filters = 'Fellter ändere';
+$s_or_unassigned = 'Udder nit zohjedeilt';
+$s_ok = '<span style="text-transform:uppercase">joot</span>';
+$s_select_all = 'Alle Ußwähle';
+$s_use_query = 'Fellter bruche';
+$s_delete_query = 'Felter fottschmiiße';
+$s_query_deleted = 'Felter fottjeschmeße';
+$s_save_query = 'Donn hee dä Felter faßhallde';
+$s_reset_query = 'De Ußwahl ophävve';
+$s_query_name = 'Dä Name fun däm Felter';
+$s_query_exists = 'Dä beschtemmpte Felter singk ald doh ze sin.';
+$s_query_dupe_name = 'Ene Felter met däm Name es ald doh. Sök ene andere Name uß för dä Felter.';
+$s_query_blank_name = 'Do kann keine Felter oohne Name afshpeischere. Jif däm Felter ene Name, ih dat De der afshpeichere deihß.';
+$s_query_name_too_long = 'Do kanns keine Felter afshpeischere, däm singe Name övver 64 Zeijsche lang es. Sök Der ene köötere Name för dä Felter uß.';
+$s_query_store_error = 'Beim Felter Afshpeischere es ene Fähler opjetrodde.';
+$s_open_queries = 'Fellter verwallde';
+$s_query_delete_msg = 'Beß De Der jeweß, dat de di Dattei fotjeschmeße han wells?';
+$s_update_bug_button = 'Ändere!';
+$s_bug_assign_to_button = 'Zohwiise aan:';
+$s_bug_status_to_button = 'Shtattuß ändere op:';
+$s_reopen_bug_button = 'Wider opmaaache';
+$s_move_bug_button = 'Ömtrecke';
+$s_attached_files = 'Aanjehange Dateije';
+$s_publish = 'Öffentlesch maache';
+$s_cached = 'Zweschejescheischert';
+$s_add_user_to_monitor = 'Dobei donn';
+$s_bug_view_title = 'Einzelheite vun dä Aanjelääjeheit belooere';
+$s_no_users_monitoring_bug = 'Kein Metmaacher han heh di Aanjelääjeheit op ier Oppaßleß';
+$s_users_monitoring_bug = 'Metmaacher, di heh di Aanjelääjeheit op der Oppaßleß han';
+$s_monitoring_user_list = 'Leß met Metmaacher';
+$s_no_users_sponsoring_bug = 'Keine es heh di Aanjelääjeheit aam shponserre.';
+$s_users_sponsoring_bug = 'Metmaacher, di heh di Aanjelääjeheit shponsere donn';
+$s_sponsors_list = 'Leß met Shponsere';
+$s_total_sponsorship_amount = 'Shponserschaff kumplät = %1$s';
+$s_add_custom_field_button = 'Neu selvs enjereschdt Feld';
+$s_delete_custom_field_button = 'Selvs enjereschdt Feld fott schmiiße';
+$s_delete_custom_field_everywhere = 'Donn dat selvs enjereschdt Feld övverall fott nämme';
+$s_update_custom_field_button = 'Selvs enjereschdt Feld ändere';
+$s_add_existing_custom_field = 'Donn heh dat selvs enjerescht Feld derbei';
+$s_edit_custom_field_title = 'Selvs enjereschdt Feld ändere';
+$s_custom_field = 'Feld';
+$s_custom_fields_setup = 'Selvs enjereschdt Felder';
+$s_custom_field_name = 'Name';
+$s_custom_field_project_count = 'Aanzahl Projäkte';
+$s_custom_field_type = 'Zoot';
+$s_custom_field_possible_values = 'Müjjelesche Wääte';
+$s_custom_field_default_value = 'Dä Shtandatt_Wäät';
+$s_custom_field_valid_regexp = 'Ene rejolähre Ußdrok';
+$s_custom_field_access_level_r = 'Zohjang zom Lässe';
+$s_custom_field_access_level_rw = 'Zohjang zom Schriive';
+$s_custom_field_length_min = 'De köözeste Läng';
+$s_custom_field_length_max = 'De hühßte Läng';
+$s_custom_field_filter_by = 'Bei dä Fellter dobei donn';
+$s_custom_field_display_report = 'Aanzeije, wann en Aanjelääjeheit bereesch weed';
+$s_custom_field_display_update = 'Aanzeije, wann en Aanjelääjeheit äjänz weed';
+$s_custom_field_display_resolved = 'Aanzeije, wann en Aanjelääjeheit äleedesch weed';
+$s_custom_field_display_closed = 'Aanzeije, wann en Aanjelääjeheit zohjemaat weed';
+$s_custom_field_require_report = 'Nühdesch beim Bereeschte';
+$s_custom_field_require_update = 'Nühdesch beim Ändere';
+$s_custom_field_require_resolved = 'Nühdesch beim Fähdeschmaache';
+$s_custom_field_require_closed = 'Nühdesch beim Zohmaache';
+$s_linked_projects = 'Verlengk Projäkte';
+$s_custom_field_sequence = 'Reijefollsch';
+$s_custom_field_type_enum_string = '0:Zeijschekett,1:Zahl,2:Kommazahl,3:Opzällung,4:e-mail,5:Käßje met Höhksche,6:Leß,7:Leß un mieh wie ein Ußwahl,8:Dattum,9:Ein Ußwahl uß diverse';
+$s_confirm_used_custom_field_deletion = 'Dat Feld es em Momang en winnischßdens einem Projäk em Jebruch. Wann De wigger jeihß, dann wääde all de Wääte för dat Feld fottjeschmeße, un De kanns se och nit widder zeröck holle. Wann De dat Feld jäz nit fottschmiiße wellß, donn dä Knopp „Retuur“ en Dingem Brauser nämme. Sönß, öm wigger ze jon, sonn op dä Knopp hee dronger klecke.';
+$s_confirm_custom_field_deletion = 'Bes De sescher, dat De dat selvs-aanjelaate Feld un all de Wääte, di doför en de Datebangk sin, fott schmiiße wells?';
+$s_field_delete_button = 'Feld fottschmiiße';
+$s_confirm_custom_field_unlinking = 'Bes De sescher, dat De dat selvs-aanjelaate Feld uß däm Projäk eruß nämme un all de Wääte, di doför en de Datebangk sin, fott schmiiße wells?';
+$s_field_remove_button = 'Feld fottnämme';
+$s_hide_status = 'Shtattus nit aanzeije';
+$s_filter_closed = 'Zohjemaat';
+$s_filter_resolved = 'Jedonn';
+$s_hide_closed = 'Zohjemaate Sache nit aanzeije';
+$s_hide_resolved = 'Jedonn Saache nit aanzeije';
+$s_and_above = 'un mieh';
+$s_advanced_filters = 'Opjemoz Feltere';
+$s_simple_filters = 'Eijfach Feltere';
+$s_monitored_by = 'Op dä Oppaßleß vum';
+$s_attachments = 'aanjehange Dattei(je)';
+$s_bytes = '<i lang="en">Bytes</i>';
+$s_attachment_missing = 'De aanhange Dattei fählt.';
+$s_attachment_count = 'De Aanzahl aanhange Datteije';
+$s_view_attachments_for_issue = 'Donn de %1$d  aanhange Dattei(je) för de Aanjelääjeheit #%2$d aanzeije';
+$s_phpmailer_language = 'ksh';
+$s_sponsors = '%1$d Shponser(e)';
+$s_sponsorship_added = 'Shponserschaff dobei jedonn';
+$s_sponsorship_updated = 'Shponserschaff jeändert';
+$s_sponsorship_deleted = 'Shponserschaff fottjeschmeße';
+$s_sponsorship_paid = 'De Shponserschaff es bezahlt';
+$s_sponsorship_more_info = 'Mieh övver de Shponserschaff';
+$s_sponsorship_total = 'Jesamp för de Shponserschaff';
+$s_sponsorship_process_url = '';
+$s_changelog = 'Et Logbooch vun de Änderunge';
+$s_changelog_empty = 'Mer han kein Date övver de verjange Änderunge';
+$s_roadmap = 'Övverssesch udder Faaplan';
+$s_resolved_progress = '%1$d vun %2$d Endrääsch sin jedonn. Vüraan jekumme öm %3$d%%.';
+$s_http_auth_realm = 'Sesch bei MantisBT enlogge';
+$s_bug = 'Aanjelääjeheit';
+$s_bugs = 'Aanjelääjeheite';
+$s_add_new_relationship = 'Ene neue Bezoch';
+$s_add_new_relationship_button = 'Dobei donn';
+$s_relationship_added = 'Bezoch dobei jedonn';
+$s_relationship_deleted = 'Bezoch fottjeschmeße';
+$s_no_relationship = 'keine Bezoch';
+$s_relationship_replaced = 'Bezoch ußjetuusch';
+$s_replace_relationship_button = 'Ußtuusche';
+$s_delete_relationship_button = 'Schmiiß Fott!';
+$s_view_issue = 'Aanjelääjeheit aanzeije';
+$s_view = 'Beloore';
+$s_add_notes = 'Notize dobei donn';
+$s_news = '<span style="text-transform:uppercase">Nohreeschte</span>';
+$s_view_private_news = 'Päsöhnlesch Nohreeschte aanloore';
+$s_manage_news = 'Nohreschte verwallde';
+$s_view_list_of_attachments = 'Leß met de Aanhäng aanloore';
+$s_download_attachments = 'Aanhäng eronger laade';
+$s_delete_attachments = 'Aanhäng fottschmiiße';
+$s_delete_attachment_button = 'Fottschmiiße';
+$s_delete_attachment_sure_msg = 'Wells De heh dä Aanhang verhaftesh fottschmiiße?';
+$s_filters = 'Felltere';
+$s_save_filters = 'Felltere faßhallde';
+$s_save_filters_as_shared = 'Donn de Felltere för jeder_ein faßhallde';
+$s_use_saved_filters = 'Nämm de faßjehallde Felltere';
+$s_create_project = 'Projäk aanlääje';
+$s_delete_project = 'Projäk fottschmiiße';
+$s_manage_project = 'Projäk verwallde';
+$s_manage_user_access_to_project = 'De Metmaacher iere Zohjang op e Projäk verwallde';
+$s_project_documents = '<span style="text-transform:uppercase">Dokemänte för et Projäk</span>';
+$s_view_project_documents = 'Dokemänte för et Projäk aanloore';
+$s_upload_project_documents = 'Dokemänte för et Projäk huhlaade';
+$s_sponsorships = '<span style="text-transform:uppercase">Shponserschaffte</span>';
+$s_view_sponsorship_details = 'Einzelheijte för di Shponserschaff beloore';
+$s_view_sponsorship_total = 'Aanloore, wat insjesamp för de Shponserschaff em Pott es';
+$s_sponsor_issue = 'Shponsor för di Saach';
+$s_others = '<span style="text-transform:uppercase">Sönß</span>';
+$s_see_email_addresses_of_other_users = 'Anderlücks Addräße vun de <i lang="en">e-mail</i> sinn';
+$s_add_profiles = 'Profile dobei donn';
+$s_notify_of_new_user_created = 'Nohreesch övver neu aanjelaate Metmaacher';
+$s_email_notification = 'Nohreesch als <i lang="en">e-mail</i>';
+$s_status_changed_to = 'Änderung vum Shtattus op';
+$s_email_on_deleted = '<i lang="en">e-mail</i> övver et Fottschmiiße';
+$s_email_on_sponsorship_changed = '<i lang="en">e-mail</i> övver en jänderte Shponsorschaff';
+$s_email_on_relationship_changed = '<i lang="en">e-mail</i> övver ene jänderte Bezoch';
+$s_loading = 'Ben aam Laade&nbsp;&hellip;';
+$s_between_date = 'Zwesche';
+$s_on_or_before_date = 'Bes';
+$s_before_date = 'Vör';
+$s_after_date = 'Noh';
+$s_on_or_after_date = 'Aff';
+$s_from_date = 'Vun';
+$s_to_date = 'Bes';
+$s_on_date = 'Aam';
+$s_on = 'Aanjeschalldt';
+$s_off = 'Ußjeschaldt';
+$s_wiki = 'Wiki';
+$s_tags = 'Makeeronge';
+$s_tag_details = 'Einzelheite för de Makeerung: %1$s';
+$s_tag_id = 'Kännong';
+$s_tag_name = 'Name';
+$s_tag_creator = 'aanjelaat vun';
+$s_tag_created = 'Aanjelaat aam';
+$s_tag_updated = 'Zoläz jeändert';
+$s_tag_statistics = 'Shatistike övver der Jebruch';
+$s_tag_update = 'Makeerung aanpasse: %1$s';
+$s_tag_update_return = 'Zoröck op Makeerung';
+$s_tag_update_button = 'Makeerung aanpasse';
+$s_tag_delete_button = 'Makeerung fottschmiiße';
+$s_tag_delete_message = 'Bes De sescher, dat De heh di Makeerung fottschmiiße wells?';
+$s_tag_existing = 'Makeerung, di mer han';
+$s_tag_none_attached = 'Kei Makeerung es öhnzwoh aanjhange.';
+$s_tag_attach = 'Aanhänge';
+$s_tag_attach_long = 'Makeerunge aanhänge';
+$s_tag_attach_failed = 'Mer kunnte de Makeerung nit do draanhange.';
+$s_tag_detach = 'Makeerung „%1$s“ fott nämme';
+$s_tag_separate_by = '(Afdränne met „%1$s“)';
+$s_tag_invalid_name = 'Dä Makeerung iere Name es nit jöltesch.';
+$s_tag_create_denied = 'Dat Rääsch för en Makeerung aanzelääje häs De nit.';
+$s_tag_history_attached = 'Makeerung draanjehange';
+$s_tag_history_detached = 'Makeerung fott jenumme';
+$s_tag_history_renamed = 'Makeerung ömjenannt';
+$s_tag_related = 'Makeerunge, di domet zosamme hange donn';
+$s_tag_create = 'Makeerung aanlääje';
+$s_show_all_tags = '<span style="text-transform:uppercase">all</span>';
+$s_time_tracking_billing_link = 'Et Afräschne';
+$s_time_tracking_cost_per_hour = 'Koste pro Shtund';
+$s_time_tracking_cost = 'Koste';
+$s_total_time_for_issue = 'De jesampte Zick för di Saach = %1$s';
+$s_twitter_resolved = '%1$d: [%2$s] %3$s (äleedesch vum %4$s en %5$s)';
+$s_twitter_resolved_no_version = '%1$d: [%2$s] %3$s (äleedesch vum %4$s)';
+$s_development_team = 'Dä Entweckler-Schmolz';
+$s_manage_columns_config = 'Shpallde verwallde';
+$s_all_columns_title = 'All de Shpallde, di mer han';
+$s_csv_columns_title = '<i lang="en">CSV</i> Shpallde';
+$s_view_issues_columns_title = 'Shpallde för wann mer en Saach aanzezeije';
+$s_print_issues_columns_title = 'Shpallde för zom Dröcke';
+$s_excel_columns_title = '<i lang="en">Excel</i> Shpallde';
+$s_update_columns_as_global_default = 'De Enshtällung fun de Shpallde als alljemeine Shtandat för all de Projäkte säze';
+$s_update_columns_for_current_project = 'De Enshtällunge för de Shpallde för hee dat Projäk säze';
+$s_update_columns_as_my_default = 'De Enshtällung fun de Shpallde för all de Projäkte als Shtandat säze';
+$s_reset_columns_configuration = 'Enshtällonge för de Shpalle op der Shtandat retuur säze';
+$s_copy_columns_from = 'Shpallde kopeere vun';
+$s_copy_columns_to = 'Shpallde kopeere noh';
+$s_overdue = 'Övverfäälesch';
+$s_view_account_title = 'Metmaacher-Daate';
+$s_manage_user = 'De Metmaacher verwallde';
+$s_install_information = 'MantisBT sing Enshtellunge';
+$s_database_information = 'MantisBT sing Datebangk-Enshtellunge';
+$s_path_information = 'MantisBT sing Pahde';
+$s_month_january = 'Janewar';
+$s_month_february = 'Fäbrowaa';
+$s_month_march = 'Määz';
+$s_month_april = 'Apprell';
+$s_month_may = 'Mäj';
+$s_month_june = 'Juuni';
+$s_month_july = 'Juuli';
+$s_month_august = 'Aujuß';
+$s_month_september = 'Säptämber';
+$s_month_october = 'Oktoober';
+$s_month_november = 'Novämber';
+$s_month_december = 'Dezämber';

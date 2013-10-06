@@ -20,7 +20,7 @@
  * @package CoreAPI
  * @subpackage LanguageAPI
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
  * @uses authentication_api.php
@@ -66,8 +66,6 @@ function lang_load( $p_lang, $p_dir = null ) {
 		return;
 	}
 
-	// Step 1 - Load Requested Language file
-	// @@ and if file doesn't exist???
 	if( $p_dir === null ) {
 		include_once( config_get( 'language_path' ) . 'strings_' . $p_lang . '.txt' );
 	} else {
@@ -76,67 +74,30 @@ function lang_load( $p_lang, $p_dir = null ) {
 		}
 	}
 
-	// Step 2 - Allow overriding strings declared in the language file.
-	//          custom_strings_inc.php can use $g_active_language
-	// 2 formats:
-	// $s_* - old format
-	// $s_custom_strings array - new format
-	// NOTE: it's not expected that you'd mix/merge old/new formats within this file.
-	$t_custom_strings = config_get( 'custom_strings_file' ) ;
+	# Allow overriding strings declared in the language file.
+	# custom_strings_inc.php can use $g_active_language
+	$t_custom_strings = config_get( 'absolute_path' ) . 'custom_strings_inc.php';
 	if( file_exists( $t_custom_strings ) ) {
-		# this may be loaded multiple times, once per language
 		require( $t_custom_strings );
+
+		# this may be loaded multiple times, once per language
 	}
 
-	// Step 3  - New Language file format
-	// Language file consists of an array
-	if( isset( $s_messages ) ) {
-		// lang strings array entry can only be set if $p_dir is not null - i.e. in a plugin
-		if( isset( $g_lang_strings[$p_lang] ) ) {
-			if( isset( $s_custom_messages[$p_lang] ) ) {
-				// Step 4 - handle merging in custom strings:
-				// Possible states:
-				// 4.a - new string format + new custom string format
-				$g_lang_strings[$p_lang] = array_replace( ((array)$g_lang_strings[$p_lang]), (array)$s_messages, (array)$s_custom_messages[$p_lang]);
-				return;
-			} else {
-				$g_lang_strings[$p_lang] = array_replace( ((array)$g_lang_strings[$p_lang]), (array)$s_messages);
-			}
-		} else {
-			// new language loaded
-			$g_lang_strings[$p_lang] = $s_messages;
-			if( isset( $s_custom_messages[$p_lang] ) ) {
-				// 4.a - new string format + new custom string format
-				$g_lang_strings[$p_lang] = array_replace( ((array)$g_lang_strings[$p_lang]), (array)$s_custom_messages[$p_lang]);
-				return;
-			}
+	$t_vars = get_defined_vars();
+
+	foreach( array_keys( $t_vars ) as $t_var ) {
+		$t_lang_var = preg_replace( '/^s_/', '', $t_var );
+		if( $t_lang_var != $t_var ) {
+			$g_lang_strings[$p_lang][$t_lang_var] = $$t_var;
 		}
-	}
-
-	// 4.b new string format + old custom string format
-	// 4.c - old string format + old custom string format
-	if( !isset( $s_messages ) || file_exists( $t_custom_strings ) ) {
-		$t_vars = get_defined_vars();
-
-		foreach( array_keys( $t_vars ) as $t_var ) {
-			$t_lang_var = preg_replace( '/^s_/', '', $t_var );
-			if( $t_lang_var != $t_var ) {
- 				$g_lang_strings[$p_lang][$t_lang_var] = $$t_var;
- 			}
-			else if( 'MANTIS_ERROR' == $t_var ) {
-				if( isset( $g_lang_strings[$p_lang][$t_lang_var] ) ) {
-					foreach( $$t_var as $key => $val ) {
-						$g_lang_strings[$p_lang][$t_lang_var][$key] = $val;
-					}
-				} else {
-					$g_lang_strings[$p_lang][$t_lang_var] = $$t_var;
+		else if( 'MANTIS_ERROR' == $t_var ) {
+			if( isset( $g_lang_strings[$p_lang][$t_lang_var] ) ) {
+				foreach( $$t_var as $key => $val ) {
+					$g_lang_strings[$p_lang][$t_lang_var][$key] = $val;
 				}
+			} else {
+				$g_lang_strings[$p_lang][$t_lang_var] = $$t_var;
 			}
-		}
-		// 4.d old string format + new custom string format
-		// merge new custom strings into array in same way we merge in 4.a
-		if( isset( $s_custom_messages[$p_lang] ) ) {
-			$g_lang_strings[$p_lang] = array_replace( ((array)$g_lang_strings[$p_lang]), (array)$s_custom_messages[$p_lang]);
 		}
 	}
 }
@@ -231,7 +192,7 @@ function lang_ensure_loaded( $p_lang ) {
 */
 function lang_language_exists( $p_lang ) {
 	$t_valid_langs = config_get( 'language_choices_arr' );
-	$t_valid = ( 'english' == $p_lang || in_array( $p_lang, $t_valid_langs, true ) );
+	$t_valid = in_array( $p_lang, $t_valid_langs, true );
 	return $t_valid;
 }
 
@@ -305,10 +266,9 @@ function lang_get_current() {
  *  2. The string in English
  * @param string $p_string
  * @param string $p_lang
- * @param bool $p_error default: true - error if string not found
  * @return string
  */
-function lang_get( $p_string, $p_lang = null, $p_error = true ) {
+function lang_get( $p_string, $p_lang = null ) {
 	global $g_lang_strings;
 
 	# If no specific language is requested, we'll
@@ -324,37 +284,31 @@ function lang_get( $p_string, $p_lang = null, $p_error = true ) {
 	// Now we'll make sure that the requested language is loaded
 	lang_ensure_loaded( $t_lang );
 
-	// Step 1 - see if language string exists in requested language
+	# note in the current implementation we always return the same value
+	#  because we don't have a concept of falling back on a language.  The
+	#  language files actually *contain* English strings if none has been
+	#  defined in the correct language
+	# @todo thraxisp - not sure if this is still true. Strings from last language loaded
+	#      may still be in memeory if a new language is loaded.
+
 	if( lang_exists( $p_string, $t_lang ) ) {
 		return $g_lang_strings[$t_lang][$p_string];
 	} else {
-		// Language string doesn't exist in requested language
-
-		// Step 2 - See if language string exists in current plugin
 		$t_plugin_current = plugin_get_current();
 		if( !is_null( $t_plugin_current ) ) {
-			// Step 3 - Plugin exists: load language file
 			lang_load( $t_lang, config_get( 'plugin_path' ) . $t_plugin_current . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR );
-			if( lang_exists( $p_string, $t_lang ) ) {
-				return $g_lang_strings[$t_lang][$p_string];
-			}
-
-			// Step 4 - Localised language entry didn't exist - fallback to english for plugin
-			lang_load( 'english', config_get( 'plugin_path' ) . $t_plugin_current . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR );
 			if( lang_exists( $p_string, $t_lang ) ) {
 				return $g_lang_strings[$t_lang][$p_string];
 			}
 		}
 
-		// Step 5 - string didn't exist, try fall back to english:
 		if( $t_lang == 'english' ) {
-			if( $p_error ) {
-				error_parameters( $p_string );
-				trigger_error( ERROR_LANG_STRING_NOT_FOUND, WARNING );
-			}
+			error_parameters( $p_string );
+			trigger_error( ERROR_LANG_STRING_NOT_FOUND, WARNING );
 			return '';
 		} else {
-			// if string is not found in a language other than english, then retry using the english language.
+
+			# if string is not found in a language other than english, then retry using the english language.
 			return lang_get( $p_string, 'english' );
 		}
 	}
