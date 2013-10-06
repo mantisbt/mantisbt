@@ -1825,6 +1825,11 @@ function html_buttons_view_bug_page( $p_bug_id ) {
  * @param null $p_user
  * @param null $p_project
  * @return string
+ *
+ * @todo This does not work properly when displaying issues from a project other
+ * than then current one, if the other project has custom status or colors.
+ * This is due to the dynamic css for color coding (css/status_config.php).
+ * Build CSS including project or even user-specific colors ?
  */
 function html_get_status_css_class( $p_status, $p_user = null, $p_project = null ) {
 	return string_attribute( MantisEnum::getLabel( config_get('status_enum_string', null, $p_user, $p_project ), $p_status ) . '-color' );
