@@ -35,6 +35,7 @@
  * @author Korayal
  * @author Oktay Altunergil - oktay@bellatlantic.net
  * @author Thinkfast
+ * @author Trockya
  */
 
 $s_actiongroup_menu_move = 'Taşı';
@@ -93,13 +94,13 @@ $s_bugnote_view_state = 'Not Görünüm Durumu';
 $s_bug_monitor = 'Sorun İzleniyor';
 $s_bug_end_monitor = 'Sorun İzleme İptal Edildi';
 $s_announcement = 'Duyuru';
-$s_stays_on_top = 'Üstte Kalır.';
+$s_stays_on_top = 'Üstte Kalır';
 $s_bugnote_link_title = 'Nota doğrudan bağlantı';
 $s_delete_bugnote_button = 'Notu Sil';
 $s_delete_bugnote_sure_msg = 'Bu notu silmek istediğinizden emin misiniz?';
 $s_bug_relationships = 'İlişkiler';
 $s_empty_password_sure_msg = 'Kullanıcı, boş bir parolaya sahip. Bunu istediğinizden emin misiniz?';
-$s_empty_password_button = 'Boş parola kullan';
+$s_empty_password_button = 'Boş Parola Kullan';
 $s_reauthenticate_title = 'Kimlik doğrulaması';
 $s_reauthenticate_message = 'Güvenli bir sayfa ziyaret ediyorsunuz, ve güvenli oturumunuz sona erdi. Lütfen devam etmek için kimlik doğrulamanızı yapınız.';
 $s_no_category = '(Kategori Yok)';
@@ -491,7 +492,7 @@ $s_sent_you_this_reminder_about = 'Bu hatırlatmanın gönderilme sebebi';
 $s_bug_reminder = 'Hatırlatma gönder';
 $s_reminder_sent_to = 'Hatırlatıcı gönderildi';
 $s_reminder_sent_none = 'Hiç bir hatırlatıcı gönderilemedi.';
-$s_reminder_list_truncated = 'alıcı listesi boş, tam liste için Sorun Geçmişine bakınız.';
+$s_reminder_list_truncated = 'alıcılar listesi kısaltıldı';
 $s_bug_send_button = 'Gönder';
 $s_reminder = 'Hatırlatma';
 $s_reminder_explain = 'Bu not, bu sorunda geribildirim isteyerek listelenen alıcılara gönderilecektir.';
