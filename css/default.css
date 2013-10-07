@@ -117,10 +117,6 @@ tr.bugnote .time-tracked,
 
 #current-time{ width: 20%; margin: 0 auto; text-align: center; }
 
-td.login-info-left		{ width: 33%; padding: 0px; text-align: left; }
-td.login-info-middle	{ width: 33%; padding: 0px; text-align: center; }
-td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space: nowrap; }
-
 .bug-jump { clear: both; display:block; float: right; padding: .25em; margin: 0; position: relative; top: .3em; z-index: 100; border: none; }
 .main-menu { float: right; width:100%; margin: 0; padding: 0; overflow: hidden; font-size: 1em; position: relative; top: -2em; border: 1px solid #999; background-color: #e8e8e8; z-index: 99; }
 .main-menu div { width: 93.75%; }
