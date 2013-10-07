@@ -106,15 +106,16 @@ tr.bugnote .time-tracked,
 #logged-in:after { content: ')' ; }
 #logged-in-realname:after { content: ' - ' ; }
 
+#rss-feed { float: right; width: 16px; z-index: 0; padding: .5em 0; margin: 0; }
+
 #current-time-centered{ position: absolute; width: 100%; text-align: center; }
 #current-time{ margin-right: -2em; float: right; text-align: center; width: 17%; padding: .5em .25em; z-index: 0; line-height: 1em; }
-#project-selector { border: none; float: right; z-index: 100; width: 42%; text-align: right; font-size: small; padding: .1em 0 .05em 0; line-height: 1em; margin: 0 .5em 0 1em; }
+#project-selector { border: none; float: right; z-index: 100; text-align: right; font-size: small; line-height: 1em; margin: 0 .5em 0 1em; }
 #project-selector label { padding: .5em; }
 #project-selector label:after { content: ':' }
 #project-selector select{ font-size: small; line-height: 1em; }
 #project-selector select{ font-size: small; line-height: 1em; }
 #project-selector .button { font-size: small; line-height: 1em; padding: 0; margin: 0; }
-#rss-feed { float: right; width: 16px; z-index: 0; padding: .5em 0; margin: 0; }
 
 td.login-info-left		{ width: 33%; padding: 0px; text-align: left; }
 td.login-info-middle	{ width: 33%; padding: 0px; text-align: center; }

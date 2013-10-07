@@ -521,6 +521,7 @@ function html_login_info() {
 	$t_now = date( config_get( 'complete_date_format' ) );
 	$t_realname = current_user_get_field( 'realname' );
 
+	# Login information
 	echo '<div id="login-info">';
 	if( current_user_is_anonymous() ) {
 		$t_return_page = $_SERVER['SCRIPT_NAME'];
@@ -545,16 +546,7 @@ function html_login_info() {
 	}
 	echo '</div>';
 
-	# Project Selector hidden if only one project visisble to user
-	$t_show_project_selector = true;
-	$t_project_ids = current_user_get_accessible_projects();
-	if( count( $t_project_ids ) == 1 ) {
-		$t_project_id = (int) $t_project_ids[0];
-		if( count( current_user_get_accessible_subprojects( $t_project_id ) ) == 0 ) {
-			$t_show_project_selector = false;
-		}
-	}
-
+	# RSS feed
 	if( OFF != config_get( 'rss_enabled' ) ) {
 		echo '<div id="rss-feed">';
 		# Link to RSS issues feed for the selected project, including authentication details.
@@ -564,7 +556,18 @@ function html_login_info() {
 		echo '</div>';
 	}
 
+	# Project Selector (hidden if only one project visisble to user)
+	$t_show_project_selector = true;
+	$t_project_ids = current_user_get_accessible_projects();
+	if( count( $t_project_ids ) == 1 ) {
+		$t_project_id = (int) $t_project_ids[0];
+		if( count( current_user_get_accessible_subprojects( $t_project_id ) ) == 0 ) {
+			$t_show_project_selector = false;
+		}
+	}
+
 	if( $t_show_project_selector ) {
+		echo '<div id="project-selector">';
 		echo '<form method="post" id="form-set-project" action="' . helper_mantis_url( 'set_project.php' ) . '">';
 		echo '<fieldset id="project-selector">';
 		# CSRF protection not required here - form does not result in modifications
@@ -576,6 +579,7 @@ function html_login_info() {
 		echo '<input type="submit" class="button" value="' . lang_get( 'switch' ) . '" />';
 		echo '</fieldset>';
 		echo '</form>';
+		echo '</div>';
 		echo '<div id="current-time">' . $t_now . '</div>';
 	} else {
 		# User has only one project, set it as both current and default
