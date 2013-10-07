@@ -224,6 +224,7 @@ function html_page_top2() {
 			echo '<br />';
 		}
 	}
+
 	print_menu();
 	echo '<div id="content">', "\n";
 	event_signal( 'EVENT_LAYOUT_CONTENT_BEGIN' );
@@ -467,7 +468,7 @@ function html_body_begin() {
 function html_header() {
 	$t_title = config_get( 'page_title' );
 	if( !is_blank( $t_title ) ) {
-		echo '<div class="center"><span class="pagetitle">', string_display( $t_title ), '</span></div>', "\n";
+		echo '<div id="page-title">' . string_display( $t_title ) . "</div>\n";
 	}
 }
 

@@ -31,7 +31,6 @@ span				{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt; }
 span.print			{ font-size: 8pt; }
 span.required 		{ font-size: 8pt; color: #bb0000; }
 span.small 			{ font-size: 8pt; font-weight: normal; }
-span.pagetitle		{ font-size: 12pt; font-weight: bold; text-align: center }
 span.bracket-link	{ white-space: nowrap; }
 
 span.dependency_dated		{ color: maroon; }
@@ -88,6 +87,8 @@ tr.bugnote .bugnote-note { background-color: #e8e8e8; color: #000000; width: 75%
 tr.bugnote .time-tracked,
 .time-tracking-total .time-tracked { font-weight:bold; margin: 0 0 1em; padding:0; }
 .time-tracking-total { text-align:right; }
+
+#page-title { font-size: 12pt; font-weight: bold; text-align: center }
 
 #login-info { clear: both; position: relative; display: block; float: left; padding: .5em 0; z-index: 100; line-height: 1em; }
 
