@@ -364,7 +364,7 @@ select.tainted { background-color: #ffffff; color: red; }
 #filter_open, #filter_closed { position: relative; border: 1px solid #000; padding: 0; margin: 0; }
 #filter_open_link, #filter_closed_link { float: left; position: relative; top: 1em; padding: 0 .5em; margin: 0; }
 .search-box { float: left; position: relative; padding: 0; margin: 0; }
-.search-box, .save-query, .submit-query, .stored-queries, .manage-queries { top: .3em; }
+.search-box, .save-query, .submit-query, .reset-query, .stored-queries, .manage-queries { top: .3em; }
 .submit-query, .save-query {  float: left; position: relative; padding: 0 .5em; margin: 0; font-size: 1em; }
 .filter-links, .stored-queries, .manage-queries, .reset-query { float: right; position: relative; padding: 0 .5em; margin: 0; z-index: 100; }
 .save-query {  float: right; }
