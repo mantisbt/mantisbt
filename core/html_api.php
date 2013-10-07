@@ -913,26 +913,28 @@ function print_menu() {
 		if( !current_user_is_anonymous() ) {
 			$t_menu_options[] = '<a id="logout-link" href="' . helper_mantis_url( 'logout_page.php">' ) . lang_get( 'logout_link' ) . '</a>';
 		}
-		echo '<form method="post" action="' . helper_mantis_url( 'jump_to_bug.php" class="bug-jump-form">' );
+
+		# Display main menu
+		echo "\n" . '<div class="main-menu">'. "\n";
+
+		# Menu items
+		echo '<ul id="menu-items">' . "\n";
+		echo "\t<li>" . implode( $t_menu_options, "</li>\n\t<li>" ) . "</li>\n";
+		echo "</ul>\n";
+
+		# Bug Jump form
+		echo '<div id="bug-jump" >';
+		echo '<form method="post" class="bug-jump-form" action="' . helper_mantis_url( 'jump_to_bug.php' ) . '">';
 		echo '<fieldset class="bug-jump">';
 		# CSRF protection not required here - form does not result in modifications
-
-		$t_bug_label = lang_get( 'issue_id' );
-		echo '<input type="hidden" name="bug_label" value="', $t_bug_label, '" />';
-		echo '<input type="text" name="bug_id" size="10" class="small" />&#160;';
-
+		echo '<input type="hidden" name="bug_label" value="' . lang_get( 'issue_id' ) . '" />';
+		echo '<input type="text" name="bug_id" size="4" class="small" />&#160;';
 		echo '<input type="submit" class="button-small" value="' . lang_get( 'jump' ) . '" />&#160;';
 		echo '</fieldset>';
 		echo '</form>';
-		echo '<div class="main-menu">';
-		echo '<div>';
-		echo '<ul class="menu">';
-		echo '<li>';
-		echo implode( $t_menu_options, "</li>\n<li>" );
-		echo '</li>';
-		echo '</ul>';
-		echo '</div>';
-		echo '</div>';
+		echo "</div>\n";
+
+		echo "</div>\n";
 	}
 }
 
@@ -1056,7 +1058,7 @@ function print_manage_menu( $p_page = '' ) {
 		}
 	}
 
-	echo '<div id="manage-menu">';
+	echo "\n" . '<div id="manage-menu">' . "\n";
 	echo '<ul class="menu">';
 	foreach( $t_pages AS $t_page ) {
 		if( $t_page['url'] == '' ) {
@@ -1132,7 +1134,7 @@ function print_manage_config_menu( $p_page = '' ) {
 		}
 	}
 
-	echo '<br /><div id="manage-config-menu">';
+	echo '<div id="manage-config-menu">';
 	echo '<ul class="menu">';
 	foreach ( $t_pages as $t_page ) {
 		if( $t_page['url'] == '' ) {

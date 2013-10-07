@@ -117,13 +117,12 @@ tr.bugnote .time-tracked,
 
 #current-time{ width: 20%; margin: 0 auto; text-align: center; }
 
-.bug-jump { clear: both; display:block; float: right; padding: .25em; margin: 0; position: relative; top: .3em; z-index: 100; border: none; }
-.main-menu { float: right; width:100%; margin: 0; padding: 0; overflow: hidden; font-size: 1em; position: relative; top: -2em; border: 1px solid #999; background-color: #e8e8e8; z-index: 99; }
-.main-menu div { width: 93.75%; }
-.main-menu ul { clear: left; float: left; list-style: none; position: relative; left: 50%; margin: 0 0 0 -3.75em; padding: .25em; width: 90%; }
-.main-menu ul li { display:block; float: left; list-style: none; padding: .15em .5em; margin: 0; position: relative; right: 50%; }
+.main-menu { float: left; width: 100%; padding: 0; border: 1px solid #999; background-color: #e8e8e8; z-index: 99; }
+.main-menu ul { clear: left; float: left; list-style: none; position: relative; margin: 0; padding: .25em; }
+.main-menu ul li { display:block; float: left; list-style: none; padding: .15em .5em; margin: 0; position: relative; }
 .main-menu ul li a { padding-right: .9em; border-right: 1px solid #000; text-decoration: underline; }
 .main-menu ul li > a#logout-link { padding-right: 0; border-right: none; }
+.main-menu div#bug-jump { float: right; margin: 0; padding: 2px 0; position: relative; z-index: 100; border: none; }
 
 /* sub-menus */
 
@@ -134,7 +133,10 @@ tr.bugnote .time-tracked,
 #manage-user-filter-menu,
 #manage-tags-filter-menu,
 #admin-menu
-	{ float: left; width: 100%; margin: 0; padding: 0; overflow: hidden; font-size: 1em; position: relative; top: -1.5em; }
+	{ float: left; width: 100%; padding: 0; overflow: hidden; font-size: 1em; position: relative; margin-bottom: 0.5em }
+
+#manage-menu { margin-top: 0.5em; }
+
 
 #manage-menu ul,
 #manage-config-menu ul,
@@ -206,7 +208,7 @@ span.switch-view:after
 	{ content: "]" }
 
 #content { clear: both; position: relative; top: 0; margin: 0; padding: .5em; }
-.recently-visited { position: relative; top: -2.5em; float: right; text-align: right; font-size: x-small; }
+.recently-visited { position: relative; text-align: right; font-size: x-small; }
 
 br { clear:both; }
 
