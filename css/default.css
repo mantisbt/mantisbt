@@ -116,6 +116,7 @@ tr.bugnote .time-tracked,
 .main-menu ul li a { padding-right: .9em; border-right: 1px solid #000; text-decoration: underline; }
 .main-menu ul li > a#logout-link { padding-right: 0; border-right: none; }
 .main-menu div#bug-jump { float: right; margin: 0; padding: 2px 0; position: relative; z-index: 100; border: none; }
+.main-menu input { font-size: 9pt; }
 
 /* sub-menus */
 
