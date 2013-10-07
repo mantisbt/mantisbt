@@ -101,15 +101,14 @@ tr.bugnote .time-tracked,
 
 #rss-feed { float: right; width: 16px; z-index: 0; padding: .5em 0; margin: 0; }
 
-#current-time-centered{ position: absolute; width: 100%; text-align: center; }
-#current-time{ margin-right: -2em; float: right; text-align: center; width: 17%; padding: .5em .25em; z-index: 0; line-height: 1em; }
 #project-selector { border: none; float: right; z-index: 100; text-align: right; font-size: small; line-height: 1em; margin: 0 .5em 0 1em; }
 #project-selector label { padding: .5em; }
 #project-selector label:after { content: ':' }
 #project-selector select{ font-size: small; line-height: 1em; }
 #project-selector select{ font-size: small; line-height: 1em; }
 #project-selector .button { font-size: small; line-height: 1em; padding: 0; margin: 0; }
-#rss-feed { float: right; width: 16px; z-index: 0; margin: 0; }
+
+#current-time{ width: 20%; margin: 0 auto; text-align: center; }
 
 .bug-jump { clear: both; display:block; float: right; padding: .25em; margin: 0; position: relative; top: .3em; z-index: 100; border: none; }
 .main-menu { float: right; width:100%; margin: 0; padding: 0; overflow: hidden; font-size: 1em; position: relative; top: -2em; border: 1px solid #999; background-color: #e8e8e8; z-index: 99; }

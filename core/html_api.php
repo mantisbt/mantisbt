@@ -565,7 +565,6 @@ function html_login_info() {
 		echo '</fieldset>';
 		echo '</form>';
 		echo '</div>';
-		echo '<div id="current-time">' . $t_now . '</div>';
 	} else {
 		# User has only one project, set it as both current and default
 		if( ALL_PROJECTS == helper_get_current_project() ) {
@@ -582,8 +581,10 @@ function html_login_info() {
 				html_meta_redirect( $t_redirect_url, 0, false );
 			}
 		}
-		echo '<div id="current-time-centered">' . $t_now . '</div>';
 	}
+
+	# Current time
+	echo '<div id="current-time">' . $t_now . '</div>';
 }
 
 /**
