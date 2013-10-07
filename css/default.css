@@ -139,6 +139,7 @@ tr.bugnote .time-tracked,
 #manage-menu { margin-top: 0.5em; }
 
 
+#filter-links ul,
 #manage-menu ul,
 #manage-config-menu ul,
 #summary-menu ul,
@@ -147,7 +148,9 @@ tr.bugnote .time-tracked,
 #manage-tags-filter-menu ul,
 #admin-menu ul
 	{ clear: left; float: left; list-style: none; position: relative; left: 50%; padding: 0; margin: 0; text-align: center; }
+#filter-links ul { left: 0; }
 
+#filter-links ul li,
 #manage-menu ul li,
 #manage-config-menu ul li,
 #summary-menu ul li,
@@ -156,7 +159,9 @@ tr.bugnote .time-tracked,
 #manage-tags-filter-menu ul li,
 #admin-menu ul li
 	 { display:block; float: left; list-style: none; margin: .5em 0; padding: 0 .25em; position: relative; right: 50%; }
+#filter-links ul li { right: 0; }
 
+#filter-links ul a,
 #manage-menu ul a,
 #manage-config-menu ul a,
 #summary-menu ul a,
@@ -168,6 +173,7 @@ tr.bugnote .time-tracked,
 #admin-menu ul a
 	{ text-decoration: underline; padding: 0 .25em; }
 
+#filter-links ul span,
 #manage-menu ul span,
 #manage-config-menu ul span,
 #summary-menu ul span,
@@ -184,6 +190,7 @@ tr.bugnote .time-tracked,
 #account-menu ul li, #doc-menu ul li { display: block; float: left; padding: 0; margin: 0; }
 
 /* bracket links */
+#filter-links ul li:before,
 #manage-user-link:before,
 #manage-menu ul li:before,
 #manage-config-menu ul li:before,
@@ -196,6 +203,7 @@ span.permalink:before,
 span.switch-view:before
 	{ content: "[" }
 
+#filter-links ul li:after,
 #manage-user-link:after,
 #manage-menu ul li:after,
 #manage-config-menu ul li:after,

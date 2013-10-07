@@ -3471,21 +3471,27 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	</div><?php
 	}
 	?>
-	<div class="filter-links"><?php
+
+	<div id="filter-links" class="filter-links">
+		<ul>
+		<?php
 		$f_switch_view_link = ( config_get( 'use_javascript' ) && config_get( 'use_dynamic_filters' ) ) ? 'view_all_set.php?type=6&amp;view_type=' : 'view_filters_page.php?view_type=';
 		$t_view_filters = config_get( 'view_filters' );
 		if(( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) {
 			if( 'advanced' == $t_view_type ) {
-				echo '<span class="switch-view"><a href="', $f_switch_view_link, 'simple">', lang_get('simple_filters'), '</a></span>';
+				echo '<li><a href="', $f_switch_view_link, 'simple">', lang_get('simple_filters'), '</a></li>';
 			} else {
-				echo '<span class="switch-view"><a href="', $f_switch_view_link, 'advanced">', lang_get('advanced_filters'), '</a></span>';
+				echo '<li><a href="', $f_switch_view_link, 'advanced">', lang_get('advanced_filters'), '</a></li>';
 			}
 		}
 
 		if( access_has_project_level( config_get( 'create_permalink_threshold' ) ) ) {
-			echo '<span class="permalink"><a href="permalink_page.php?url=', urlencode( filter_get_url( $t_filter ) ), '">', lang_get( 'create_filter_link' ), '</a></span>';
-		} ?>
+			echo '<li><a href="permalink_page.php?url=', urlencode( filter_get_url( $t_filter ) ), '">', lang_get( 'create_filter_link' ), '</a></li>';
+		}
+		?>
+		</ul>
 	</div>
+
 	</div>
 	<br />
 <?php
