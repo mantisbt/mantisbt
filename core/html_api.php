@@ -928,8 +928,8 @@ function print_menu() {
 		echo '<fieldset class="bug-jump">';
 		# CSRF protection not required here - form does not result in modifications
 		echo '<input type="hidden" name="bug_label" value="' . lang_get( 'issue_id' ) . '" />';
-		echo '<input type="text" name="bug_id" size="4" class="small" />&#160;';
-		echo '<input type="submit" class="button-small" value="' . lang_get( 'jump' ) . '" />&#160;';
+		echo '<input type="text" name="bug_id" size="4" />&#160;';
+		echo '<input type="submit" value="' . lang_get( 'jump' ) . '" />&#160;';
 		echo '</fieldset>';
 		echo '</form>';
 		echo "</div>\n";
