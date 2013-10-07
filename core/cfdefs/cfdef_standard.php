@@ -252,7 +252,7 @@ function cfdef_prepare_template_value($p_value, $p_field_def) {
 		return '';
 	}
 
-	return string_display_line_links(str_replace('{0}', $p_value, $t_template));
+	return string_display_line( cfdef_prepare_template_base( $p_value, $t_template ) );
 }
 
 /**
@@ -267,7 +267,17 @@ function cfdef_prepare_template_value_for_email($p_value, $p_field_def) {
 		return '';
 	}
 
-	return str_replace('{0}', $p_value, $t_template);
+	return cfdef_prepare_template_base( $p_value, $t_template );
+}
+
+function cfdef_prepare_template_base($p_value, $t_template) {
+    $t_split_values = explode( '|', $p_value );
+    $t_tmpl  = '';
+
+    for ($i = 0; $i < count( $t_split_values ); $i++ ) {
+        $t_tmpl .= str_replace( '{0}', $t_split_values[$i], $t_template . ' ' );
+    }
+    return rtrim( $t_tmpl );
 }
 
 /**
