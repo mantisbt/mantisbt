@@ -224,6 +224,7 @@ function html_page_top2() {
 			echo '<br />';
 		}
 	}
+
 	print_menu();
 	echo '<div id="content">', "\n";
 	event_signal( 'EVENT_LAYOUT_CONTENT_BEGIN' );
@@ -466,7 +467,7 @@ function html_body_begin() {
 function html_header() {
 	$t_title = config_get( 'page_title' );
 	if( !is_blank( $t_title ) ) {
-		echo '<div class="center"><span class="pagetitle">', string_display( $t_title ), '</span></div>', "\n";
+		echo '<div id="page-title">' . string_display( $t_title ) . "</div>\n";
 	}
 }
 
@@ -519,6 +520,7 @@ function html_login_info() {
 	$t_now = date( config_get( 'complete_date_format' ) );
 	$t_realname = current_user_get_field( 'realname' );
 
+	# Login information
 	echo '<div id="login-info">';
 	if( current_user_is_anonymous() ) {
 		$t_return_page = $_SERVER['SCRIPT_NAME'];
@@ -543,16 +545,7 @@ function html_login_info() {
 	}
 	echo '</div>';
 
-	# Project Selector hidden if only one project visisble to user
-	$t_show_project_selector = true;
-	$t_project_ids = current_user_get_accessible_projects();
-	if( count( $t_project_ids ) == 1 ) {
-		$t_project_id = (int) $t_project_ids[0];
-		if( count( current_user_get_accessible_subprojects( $t_project_id ) ) == 0 ) {
-			$t_show_project_selector = false;
-		}
-	}
-
+	# RSS feed
 	if( OFF != config_get( 'rss_enabled' ) ) {
 		echo '<div id="rss-feed">';
 		# Link to RSS issues feed for the selected project, including authentication details.
@@ -562,7 +555,18 @@ function html_login_info() {
 		echo '</div>';
 	}
 
+	# Project Selector (hidden if only one project visisble to user)
+	$t_show_project_selector = true;
+	$t_project_ids = current_user_get_accessible_projects();
+	if( count( $t_project_ids ) == 1 ) {
+		$t_project_id = (int) $t_project_ids[0];
+		if( count( current_user_get_accessible_subprojects( $t_project_id ) ) == 0 ) {
+			$t_show_project_selector = false;
+		}
+	}
+
 	if( $t_show_project_selector ) {
+		echo '<div id="project-selector">';
 		echo '<form method="post" id="form-set-project" action="' . helper_mantis_url( 'set_project.php' ) . '">';
 		echo '<fieldset id="project-selector">';
 		# CSRF protection not required here - form does not result in modifications
@@ -574,7 +578,7 @@ function html_login_info() {
 		echo '<input type="submit" class="button" value="' . lang_get( 'switch' ) . '" />';
 		echo '</fieldset>';
 		echo '</form>';
-		echo '<div id="current-time">' . $t_now . '</div>';
+		echo '</div>';
 	} else {
 		# User has only one project, set it as both current and default
 		if( ALL_PROJECTS == helper_get_current_project() ) {
@@ -591,8 +595,10 @@ function html_login_info() {
 				html_meta_redirect( $t_redirect_url, 0, false );
 			}
 		}
-		echo '<div id="current-time-centered">' . $t_now . '</div>';
 	}
+
+	# Current time
+	echo '<div id="current-time">' . $t_now . '</div>';
 }
 
 /**
@@ -906,26 +912,28 @@ function print_menu() {
 		if( !current_user_is_anonymous() ) {
 			$t_menu_options[] = '<a id="logout-link" href="' . helper_mantis_url( 'logout_page.php">' ) . lang_get( 'logout_link' ) . '</a>';
 		}
-		echo '<form method="post" action="' . helper_mantis_url( 'jump_to_bug.php" class="bug-jump-form">' );
+
+		# Display main menu
+		echo "\n" . '<div class="main-menu">'. "\n";
+
+		# Menu items
+		echo '<ul id="menu-items">' . "\n";
+		echo "\t<li>" . implode( $t_menu_options, "</li>\n\t<li>" ) . "</li>\n";
+		echo "</ul>\n";
+
+		# Bug Jump form
+		echo '<div id="bug-jump" >';
+		echo '<form method="post" class="bug-jump-form" action="' . helper_mantis_url( 'jump_to_bug.php' ) . '">';
 		echo '<fieldset class="bug-jump">';
 		# CSRF protection not required here - form does not result in modifications
-
-		$t_bug_label = lang_get( 'issue_id' );
-		echo '<input type="hidden" name="bug_label" value="', $t_bug_label, '" />';
-		echo '<input type="text" name="bug_id" size="10" class="small" />&#160;';
-
-		echo '<input type="submit" class="button-small" value="' . lang_get( 'jump' ) . '" />&#160;';
+		echo '<input type="hidden" name="bug_label" value="' . lang_get( 'issue_id' ) . '" />';
+		echo '<input type="text" name="bug_id" size="4" />&#160;';
+		echo '<input type="submit" value="' . lang_get( 'jump' ) . '" />&#160;';
 		echo '</fieldset>';
 		echo '</form>';
-		echo '<div class="main-menu">';
-		echo '<div>';
-		echo '<ul class="menu">';
-		echo '<li>';
-		echo implode( $t_menu_options, "</li>\n<li>" );
-		echo '</li>';
-		echo '</ul>';
-		echo '</div>';
-		echo '</div>';
+		echo "</div>\n";
+
+		echo "</div>\n";
 	}
 }
 
@@ -1049,7 +1057,7 @@ function print_manage_menu( $p_page = '' ) {
 		}
 	}
 
-	echo '<div id="manage-menu">';
+	echo "\n" . '<div id="manage-menu">' . "\n";
 	echo '<ul class="menu">';
 	foreach( $t_pages AS $t_page ) {
 		if( $t_page['url'] == '' ) {
@@ -1125,7 +1133,7 @@ function print_manage_config_menu( $p_page = '' ) {
 		}
 	}
 
-	echo '<br /><div id="manage-config-menu">';
+	echo '<div id="manage-config-menu">';
 	echo '<ul class="menu">';
 	foreach ( $t_pages as $t_page ) {
 		if( $t_page['url'] == '' ) {

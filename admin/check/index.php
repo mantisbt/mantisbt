@@ -101,6 +101,11 @@ if( !$g_failed_test ) {
 }
 
 if( !$g_failed_test ) {
+	define( 'CHECK_WEBSERVICE_INC_ALLOW', true );
+	include( 'check_webservice_inc.php' );
+}
+
+if( !$g_failed_test ) {
 	define( 'CHECK_INTEGRITY_INC_ALLOW', true );
 	include( 'check_integrity_inc.php' );
 }
@@ -108,26 +113,37 @@ if( !$g_failed_test ) {
 if( !$g_failed_test ) {
 	define( 'CHECK_CRYPTO_INC_ALLOW', true );
 	include( 'check_crypto_inc.php' );
+}
 
+if( !$g_failed_test ) {
 	define( 'CHECK_I18N_INC_ALLOW', true );
 	include( 'check_i18n_inc.php' );
+}
 
+if( !$g_failed_test ) {
 	define( 'CHECK_L10N_INC_ALLOW', true );
 	include( 'check_L10n_inc.php' );
+}
 
+if( !$g_failed_test ) {
 	define( 'CHECK_EMAIL_INC_ALLOW', true );
 	include( 'check_email_inc.php' );
+}
 
+if( !$g_failed_test ) {
 	define( 'CHECK_ANONYMOUS_INC_ALLOW', true );
 	include( 'check_anonymous_inc.php' );
+}
 
+if( !$g_failed_test ) {
 	define( 'CHECK_ATTACHMENTS_INC_ALLOW', true );
 	include( 'check_attachments_inc.php' );
+}
 
+if( !$g_failed_test ) {
 	define( 'CHECK_DISPLAY_INC_ALLOW', true );
 	include( 'check_display_inc.php' );
 }
-
 ?>
 </table>
 <?php if( $g_failed_test ) { ?>

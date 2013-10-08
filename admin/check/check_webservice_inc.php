@@ -15,46 +15,43 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Check to see if cookies are working
- *
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
- * @uses core.php
- * @uses authentication_api.php
+ * @uses check_api.php
  * @uses config_api.php
- * @uses gpc_api.php
- * @uses print_api.php
- * @uses string_api.php
+ * @uses constant_inc.php
  */
 
-/**
- * MantisBT Core API's
- */
-require_once( 'core.php' );
-require_api( 'authentication_api.php' );
-require_api( 'config_api.php' );
-require_api( 'gpc_api.php' );
-require_api( 'print_api.php' );
-require_api( 'string_api.php' );
-
-if ( auth_is_user_authenticated() ) {
-	$f_return = gpc_get_string( 'return' );
-	$c_return = string_prepare_header( $f_return );
-
-	# If this is the first login for an instance, then redirect to create project page.
-	# Use lack of projects as a hint for such scenario.
-	if ( is_blank( $f_return ) || $f_return == 'index.php' ) {
-		if ( current_user_is_administrator() && project_table_empty() ) {
-			$c_return = 'manage_proj_create_page.php';
-		}
-	}
-
-	$t_redirect_url = $c_return;
-} else {
-	$t_redirect_url = 'login_page.php?cookie_error=1';
+if ( !defined( 'CHECK_WEBSERVICE_INC_ALLOW' ) ) {
+	return;
 }
 
-print_header_redirect( $t_redirect_url, true, true );
+/**
+ * MantisBT Check API
+ */
+require_once( 'check_api.php' );
+require_api( 'config_api.php' );
+require_api( 'constant_inc.php' );
+
+check_print_section_header_row( 'Webservice' );
+
+$t_library_path = config_get_global( 'library_path' );
+$t_library_path = realpath( $t_library_path );
+if ( $t_library_path[strlen( $t_library_path )-1] != '/' ) {
+	$t_library_path .= '/';
+}
+
+check_print_test_warn_row(
+	"Legacy <em>library/nusoap</em> folder must be deleted.",
+	!is_dir( $t_library_path . 'nusoap' )
+);
+
+check_print_test_warn_row(
+	'SOAP Extension Enabled',
+	extension_loaded( 'soap' ),
+	array( false => 'Enable the PHP SOAP extension.' )
+);
+

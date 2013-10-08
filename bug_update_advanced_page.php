@@ -139,7 +139,11 @@ $tpl_show_additional_information = in_array( 'additional_info', $t_fields );
 $tpl_additional_information_textarea = $tpl_show_additional_information ? string_textarea( $tpl_bug->additional_information ) : '';
 $tpl_show_steps_to_reproduce = in_array( 'steps_to_reproduce', $t_fields );
 $tpl_steps_to_reproduce_textarea = $tpl_show_steps_to_reproduce ? string_textarea( $tpl_bug->steps_to_reproduce ) : '';
-$tpl_handler_name = string_display_line( user_get_name( $tpl_bug->handler_id ) );
+if( NO_USER == $tpl_bug->handler_id ) {
+	$tpl_handler_name =  '';
+} else {
+	$tpl_handler_name = string_display_line( user_get_name( $tpl_bug->handler_id ) );
+}
 
 $tpl_can_change_view_state = $tpl_show_view_state && access_has_project_level( config_get( 'change_view_status_threshold' ) );
 
@@ -263,10 +267,17 @@ if ( $tpl_show_reporter ) {
 		echo '<th class="category"><label for="reporter_id">' . lang_get( 'reporter' ) . '</label></th>';
 		echo '<td>';
 
-		echo '<select ' . helper_get_tab_index() . ' id="reporter_id" name="reporter_id">';
-		print_reporter_option_list( $tpl_bug->reporter_id, $tpl_bug->project_id );
-		echo '</select>';
-
+		# Do not allow the bug's reporter to edit the Reporter field
+		# when limit_reporters is ON
+		if( ON == config_get( 'limit_reporters' )
+		&&  !access_has_project_level( REPORTER + 1, $tpl_bug->project_id )
+		) {
+			echo string_attribute( user_get_name( $tpl_bug->reporter_id ) );
+		} else {
+			echo '<select ' . helper_get_tab_index() . ' id="reporter_id" name="reporter_id">';
+			print_reporter_option_list( $tpl_bug->reporter_id, $tpl_bug->project_id );
+			echo '</select>';
+		}
 		echo '</td>';
 	} else {
 		$t_spacer += 2;

@@ -3857,13 +3857,6 @@ LOG_ALL &amp; ~LOG_DATABASE
 	<para>The following options are used to control the behaviour of the MantisBT SOAP API and are usually configured in <literal>api/soap/mc_config_inc.php</literal>.</para>
         <variablelist>
             <varlistentry>
-                <term>$g_mc_use_nusoap</term>
-                <listitem>
-                    <para>
-			Flag controlling the library to use for SOAP communication. When the native PHP extension is available this flag default to OFF, which means that nusoap will not used. The native extension has the advantage of being faster, more memory efficient and maintained to work with recent versions on PHP. When the extension is not available MantisBT falls back to using nusoap.</para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
                 <term>$g_mc_readonly_access_level_threshold</term>
                 <listitem>
                     <para>Minimum global access level required to access webservice for readonly operations.</para>
