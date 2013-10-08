@@ -502,7 +502,7 @@ function print_column_title_handler_id( $p_sort, $p_dir, $p_columns_target = COL
 }
 
 /**
- *
+ * Print Priority column header
  * @param string sort
  * @param string direction
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
@@ -511,7 +511,9 @@ function print_column_title_handler_id( $p_sort, $p_dir, $p_columns_target = COL
  */
 function print_column_title_priority( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<th class="column-priority">';
-	print_view_bug_sort_link( lang_get( 'priority_abbreviation' ), 'priority', $p_sort, $p_dir, $p_columns_target );
+	# Use short label only when displaying icons
+	$t_label = lang_get( config_get( 'show_priority_text' ) ? 'priority' : 'priority_abbreviation' );
+	print_view_bug_sort_link( $t_label, 'priority', $p_sort, $p_dir, $p_columns_target );
 	print_sort_icon( $p_dir, $p_sort, 'priority' );
 	echo '</th>';
 }
