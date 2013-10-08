@@ -78,7 +78,16 @@ tr.print-category	{ color: #000000; font-weight: bold; }
 td.my-buglist-bug	{ width: 0; }
 td.my-buglist-description	{ width: 100%; }
 
-#buglist tr			{ text-align: center; }
+/**
+ * view_all_bug_page.php
+ */
+#buglist td, th			{ text-align: center; }
+#buglist .column-summary,
+#buglist .column-description,
+#buglist .column-steps-to-reproduce,
+#buglist .column-additional-information
+	{ text-align: left; }
+
 
 tr.bugnote .bugnote-meta { background-color: #c8c8e8; color: #000000; font-weight: bold; width: 25%; line-height: 1.4; vertical-align: top; }
 tr.bugnote .bugnote-note { background-color: #e8e8e8; color: #000000; width: 75%; vertical-align: top; }
