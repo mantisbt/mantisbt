@@ -1110,7 +1110,7 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 			}
 		} else {
 			# Otherwise always start with ASCending
-			$t_dir = 'ASC';
+			$p_dir = 'ASC';
 		}
 
 		$t_sort_field = rawurlencode( $p_sort_field );
@@ -1127,9 +1127,8 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 			}
 		} else {
 			# Otherwise always start with ASCending
-			$t_dir = 'ASC';
+			$p_dir = 'ASC';
 		}
-
 		$t_sort_field = rawurlencode( $p_sort_field );
 		print_link( "view_all_set.php?sort=$t_sort_field&dir=$p_dir&type=2", $p_string );
 	} else {
