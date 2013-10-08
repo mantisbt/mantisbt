@@ -75,6 +75,9 @@ tr.vcenter			{ vertical-align: middle; }
 tr.print			{ vertical-align: top; }
 tr.print-category	{ color: #000000; font-weight: bold; }
 
+td.my-buglist-bug	{ width: 0; }
+td.my-buglist-description	{ width: 100%; }
+
 #buglist tr			{ text-align: center; }
 
 tr.bugnote .bugnote-meta { background-color: #c8c8e8; color: #000000; font-weight: bold; width: 25%; line-height: 1.4; vertical-align: top; }
