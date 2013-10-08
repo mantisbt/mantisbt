@@ -593,8 +593,8 @@ $s_to = 'To';
 $s_sent_you_this_reminder_about = 'sent you this reminder about';
 $s_bug_reminder = 'Send a reminder';
 $s_reminder_sent_to = 'Reminder sent to';
-$s_reminder_sent_none' = 'No reminders could be sent';
-$s_reminder_list_truncated' = 'recipients list truncated, refer to Issue History for full list';
+$s_reminder_sent_none = 'No reminders could be sent';
+$s_reminder_list_truncated = 'recipients list truncated, refer to Issue History for full list';
 $s_bug_send_button = 'Send';
 $s_reminder = 'Reminder';
 $s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
@@ -1258,9 +1258,9 @@ $s_issue_id = 'Issue #';
 $s_recently_visited = 'Recently Visited';
 $s_priority_abbreviation = 'P';
 $s_note_user_id_label = 'Note By:';
-$s_filter_match_type' = 'Match Type';
-$s_filter_match_all' = 'All Conditions';
-$s_filter_match_any' = 'Any Condition';
+$s_filter_match_type = 'Match Type';
+$s_filter_match_all = 'All Conditions';
+$s_filter_match_any = 'Any Condition';
 
 # view_all_inc.php
 $s_none = 'none';
