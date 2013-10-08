@@ -10,73 +10,53 @@
 set_error_handler( 'mc_error_handler' );
 
 /**
- * Abstract the differences in creating SOAP objects between the php5 soap extension and nusoap
+ * A factory class that can abstract away operations that can behave differently based
+ * on the underlying soap implementation.
  * 
- * <p>As long as we decide to support both implementations we should add all non-generic
- * factory code to this class.</p>
+ * TODO: Consider removing this class since it currently has one implementation which
+ * targets the php soap extension.
  */
 class SoapObjectsFactory {
-
 	static function newSoapFault( $p_fault_code, $p_fault_string) {
-		if ( class_exists('soap_fault') )
-			return new soap_fault( $p_fault_code, '', $p_fault_string );
-		else
-			return new SoapFault( $p_fault_code, $p_fault_string );
+		return new SoapFault( $p_fault_code, $p_fault_string );
 	}
 
 	static function unwrapObject( $p_object ) {
-		if ( is_object( $p_object ) )
+		if ( is_object( $p_object ) ) {
 			return get_object_vars( $p_object );
+		}
 
 		return $p_object;
 	}
 	
 	static function newDateTimeVar( $p_value ) {
-		
 		$string_value = self::newDateTimeString( $p_value );
 		
-		if ( class_exists('soapval') )
-			return new soapval( 'due_date', 'xsd:dateTime', $string_value );
-		else
-			return new SoapVar( $string_value, XSD_DATETIME, 'xsd:dateTime');
+		return new SoapVar( $string_value, XSD_DATETIME, 'xsd:dateTime');
 	}
 	
 	static function newDateTimeString ( $p_timestamp ) {
-
-		if ( $p_timestamp == null || date_is_null( $p_timestamp) )
+		if ( $p_timestamp == null || date_is_null( $p_timestamp ) ) {
 			return null;
-		else if ( function_exists('timestamp_to_iso8601') )
-			return timestamp_to_iso8601( $p_timestamp, false);
-		else {
-			return date('c', (int) $p_timestamp);
 		}
+
+		return date('c', (int) $p_timestamp);
 	}
 	
 	static function parseDateTimeString ( $p_string ) {
-		
-		if ( function_exists('iso8601_to_timestamp') ) {
-			return iso8601_to_timestamp( $p_string );
-		} else {
-			return strtotime( $p_string );
-		}
+		return strtotime( $p_string );
 	}
 	
 	static function encodeBinary ( $p_binary ) {
-		if ( class_exists('soap_fault') )
-			return base64_encode( $p_binary );
-		else 
-			return $p_binary;
+		return $p_binary;
 	}
 	
 	static function isSoapFault ( $p_maybe_fault ) {
-		if ( ! is_object( $p_maybe_fault ) )
+		if ( !is_object( $p_maybe_fault ) ) {
 			return false;
-		
-		if ( class_exists('soap_fault') ) {
-			return get_class($p_maybe_fault ) == 'soap_fault';
-		} else {
-			return get_class($p_maybe_fault ) == 'SoapFault';
 		}
+
+		return get_class($p_maybe_fault ) == 'SoapFault';
 	}
 }
 

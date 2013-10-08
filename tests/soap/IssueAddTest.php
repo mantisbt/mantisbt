@@ -246,8 +246,8 @@ class IssueAddTest extends SoapBase {
 	 * 3. Validating that the due date is properly encoded as null
 	 *
 	 * This stricter verification originates in some SOAP frameworks, notably
-	 * Axis, not accepting the empty tag format sent by nusoap by default, which
-	 * is accepted by the PHP5 SOAP extension nevertheless.
+	 * Axis, not accepting the empty tag format, which is accepted by the PHP5
+	 * SOAP extension nevertheless.
 	 */
 	public function testCreateIssueWithNullDueDate() {
 		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithNullDueDate' );
