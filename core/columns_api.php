@@ -465,7 +465,7 @@ function print_column_title_id( $p_sort, $p_dir, $p_columns_target = COLUMNS_TAR
  * @access public
  */
 function print_column_title_project_id( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<th class="column-project">';
+	echo '<th class="column-project-id">';
 	print_view_bug_sort_link( lang_get( 'email_project' ), 'project_id', $p_sort, $p_dir, $p_columns_target );
 	print_sort_icon( $p_dir, $p_sort, 'project_id' );
 	echo '</th>';
@@ -570,7 +570,7 @@ function print_column_title_eta( $p_sort, $p_dir, $p_columns_target = COLUMNS_TA
  * @access public
  */
 function print_column_title_resolution( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<th>';
+	echo '<th class="column-resolution">';
 	print_view_bug_sort_link( lang_get( 'resolution' ), 'resolution', $p_sort, $p_dir, $p_columns_target );
 	print_sort_icon( $p_dir, $p_sort, 'resolution' );
 	echo '</th>';
@@ -585,7 +585,7 @@ function print_column_title_resolution( $p_sort, $p_dir, $p_columns_target = COL
  * @access public
  */
 function print_column_title_fixed_in_version( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<th>';
+	echo '<th class="column-fixed-in-version">';
 	print_view_bug_sort_link( lang_get( 'fixed_in_version' ), 'fixed_in_version', $p_sort, $p_dir, $p_columns_target );
 	print_sort_icon( $p_dir, $p_sort, 'fixed_in_version' );
 	echo '</th>';
@@ -600,10 +600,10 @@ function print_column_title_fixed_in_version( $p_sort, $p_dir, $p_columns_target
  * @access public
  */
 function print_column_title_target_version( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td>';
+	echo '<th class="column-target-version">';
 	print_view_bug_sort_link( lang_get( 'target_version' ), 'target_version', $p_sort, $p_dir, $p_columns_target );
 	print_sort_icon( $p_dir, $p_sort, 'target_version' );
-	echo '</td>';
+	echo '</th>';
 }
 
 /**
@@ -633,10 +633,10 @@ function print_column_title_view_state( $p_sort, $p_dir, $p_columns_target = COL
  * @access public
  */
 function print_column_title_os( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td>';
+	echo '<th class="column-os">';
 	print_view_bug_sort_link( lang_get( 'os' ), 'os', $p_sort, $p_dir, $p_columns_target );
 	print_sort_icon( $p_dir, $p_sort, 'os' );
-	echo '</td>';
+	echo '</th>';
 }
 
 /**
@@ -648,10 +648,10 @@ function print_column_title_os( $p_sort, $p_dir, $p_columns_target = COLUMNS_TAR
  * @access public
  */
 function print_column_title_os_build( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td>';
+	echo '<th class="column-os-build">';
 	print_view_bug_sort_link( lang_get( 'os_version' ), 'os_build', $p_sort, $p_dir, $p_columns_target );
 	print_sort_icon( $p_dir, $p_sort, 'os_build' );
-	echo '</td>';
+	echo '</th>';
 }
 
 /**
@@ -734,7 +734,24 @@ function print_column_title_attachment_count( $p_sort, $p_dir, $p_columns_target
 }
 
 /**
- *
+ * Prints Category column header
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
+function print_column_title_category_id( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	echo '<th class="column-category">';
+	print_view_bug_sort_link( lang_get( 'category' ), 'category', $p_sort, $p_dir, $p_columns_target );
+	print_sort_icon( $p_dir, $p_sort, 'category' );
+	echo '</th>';
+}
+
+/**
+ * Prints Category column header
+ * The actual column is 'category_id', this function is just here for backwards
+ * compatibility
  * @param string sort
  * @param string direction
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
@@ -742,10 +759,8 @@ function print_column_title_attachment_count( $p_sort, $p_dir, $p_columns_target
  * @access public
  */
 function print_column_title_category( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<th class="column-category">';
-	print_view_bug_sort_link( lang_get( 'category' ), 'category', $p_sort, $p_dir, $p_columns_target );
-	print_sort_icon( $p_dir, $p_sort, 'category' );
-	echo '</th>';
+	trigger_error(ERROR_GENERIC, WARNING);
+	print_column_title_category_id( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE );
 }
 
 /**
@@ -817,10 +832,10 @@ function print_column_title_last_updated( $p_sort, $p_dir, $p_columns_target = C
  * @access public
  */
 function print_column_title_summary( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td>';
+	echo '<th class="column-summary">';
 	print_view_bug_sort_link( lang_get( 'summary' ), 'summary', $p_sort, $p_dir, $p_columns_target );
 	print_sort_icon( $p_dir, $p_sort, 'summary' );
-	echo '</td>';
+	echo '</th>';
 }
 
 /**
@@ -877,6 +892,28 @@ function print_column_title_additional_information( $p_sort, $p_dir, $p_columns_
 	echo '</th>';
 }
 
+/**
+ * Prints Due Date column header
+ * @param BugData $p_bug bug object
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
+function print_column_title_due_date( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	echo '<th class="column-due-date">';
+	print_view_bug_sort_link( lang_get( 'due_date' ), 'due_date', $p_sort, $p_dir, $p_columns_target );
+	print_sort_icon( $p_dir, $p_sort, 'due_date' );
+	echo '</th>';
+}
+
+/**
+ * Prints Overdue column header
+ * @param string sort
+ * @param string direction
+ * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @return null
+ * @access public
+ */
 function print_column_title_overdue( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_icon_path;
 	echo '<th class="column-overdue">';
@@ -1377,28 +1414,27 @@ function print_column_view_state( $p_bug, $p_columns_target = COLUMNS_TARGET_VIE
 }
 
 /**
- *
+ * Prints Due Date column contents
  * @param BugData $p_bug bug object
  * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
  */
 function print_column_due_date( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	$t_overdue = '';
+
 	if ( !access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id ) ||
-		date_is_null( $p_bug->due_date ) ) {
-		echo '<td class="column-due-date">&#160;</td>';
-		return;
-	}
-
-	if ( bug_is_overdue( $p_bug->id ) ) {
-		echo '<td class="column-due-date overdue">';
+		date_is_null( $p_bug->due_date )
+	) {
+		$t_value = '&#160;';
 	} else {
-		echo '<td>';
+		if( bug_is_overdue( $p_bug->id ) ) {
+			$t_overdue = ' overdue';
+		}
+		$t_value = string_display_line( date( config_get( 'short_date_format' ), $p_bug->due_date ) );
 	}
 
-	echo string_display_line( date( config_get( 'short_date_format' ), $p_bug->due_date ) );
-
-	echo '</td>';
+	printf( '<td class="column-due-date%s">%s</td>', $t_overdue, $t_value );
 }
 
 /**

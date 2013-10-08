@@ -250,7 +250,7 @@ function custom_function_default_print_column_title( $p_column, $p_columns_targe
 	$t_custom_field = column_get_custom_field_name( $p_column );
 	if( $t_custom_field !== null ) {
 		if( COLUMNS_TARGET_CSV_PAGE != $p_columns_target ) {
-			echo '<td>';
+			echo '<th class="column-custom-' . $t_custom_field . '">';
 		}
 
 		$t_field_id = custom_field_get_id_from_name( $t_custom_field );
@@ -269,7 +269,7 @@ function custom_function_default_print_column_title( $p_column, $p_columns_targe
 		}
 
 		if( COLUMNS_TARGET_CSV_PAGE != $p_columns_target ) {
-			echo '</td>';
+			echo '</th>';
 		}
 	} else {
 		$t_plugin_columns = columns_get_plugin_columns();
@@ -283,10 +283,10 @@ function custom_function_default_print_column_title( $p_column, $p_columns_targe
 			print_column_title_plugin( $p_column, $t_column_object, $t_sort, $t_dir, $p_columns_target );
 
 		} else {
-			echo '<td>';
+			echo '<th>';
 			print_view_bug_sort_link( column_get_title( $p_column ), $p_column, $t_sort, $t_dir, $p_columns_target );
 			print_sort_icon( $t_dir, $t_sort, $p_column );
-			echo '</td>';
+			echo '</th>';
 		}
 	}
 }
@@ -303,14 +303,14 @@ function custom_function_default_print_column_value( $p_column, $p_bug, $p_colum
 		$t_column_end = '';
 		$t_column_empty = '';
 	} else {
-		$t_column_start = '<td>';
+		$t_column_start = '<td class="column-%s">';
 		$t_column_end = '</td>';
 		$t_column_empty = '&#160;';
 	}
 
 	$t_custom_field = column_get_custom_field_name( $p_column );
 	if( $t_custom_field !== null ) {
-		echo $t_column_start;
+		printf( $t_column_start, 'custom-' . $t_custom_field );
 
 		$t_field_id = custom_field_get_id_from_name( $t_custom_field );
 		if( $t_field_id === false ) {
@@ -349,10 +349,11 @@ function custom_function_default_print_column_value( $p_column, $p_bug, $p_colum
 			print_column_plugin( $t_column_object, $p_bug, $p_columns_target );
 
 		} else {
+			printf( $t_column_start, $p_column );
 			if( isset( $p_bug->$p_column ) ) {
-				echo $t_column_start . string_display_line( $p_bug->$p_column ) . $t_column_end;
+				echo string_display_line( $p_bug->$p_column ) . $t_column_end;
 			} else {
-				echo $t_column_start . '@' . $p_column . '@' . $t_column_end;
+				echo '@' . $p_column . '@' . $t_column_end;
 			}
 		}
 	}
