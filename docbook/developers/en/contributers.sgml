@@ -2,7 +2,7 @@
 	<title>Contributing to MantisBT</title>
 
 	<para>
-		MantisBT uses the source control tool <ulink url="http://git.or.cz">Git</ulink>
+		MantisBT uses the source control tool <ulink url="http://git-scm.com/">Git</ulink>
 		for tracking development of the project.  If you are new to Git, you can
 		find some good resources for learning and installing Git in the
 		<link linkend="dev.appendix.git">Appendix</link>.
@@ -51,43 +51,201 @@ $ git config --global alias.ci "commit"
 		<title>Cloning the Repository</title>
 
 		<para>
-			The primary repository for MantisBT is hosted and available in multiple
-			methods depending on user status and intentions.  For most contributers,
-			the public clone URL is
-			<ulink url="git://github.com/mantisbt/mantisbt.git">git://github.com/mantisbt/mantisbt.git</ulink>.
-			To clone the repository, perform the following from your target workspace:
+			The official MantisBT source code repository is hosted at
+			<ulink url="https://github.com/mantisbt/mantisbt">GitHub</ulink>.
+
+			This document assumes that you have already signed up for and
+			setup a GitHub account.
 		</para>
 
-		<programlisting>
-$ git clone git://github.com/mantisbt/mantisbt.git
-		</programlisting>
+		<sect2 id="dev.contrib.clone.dev">
+			<title>Determining the Clone URL</title>
 
-		<para>
-			If you are a member of the MantisBT development team with write access to
-			the repository, there is a special clone URL that uses your SSH key to
-			handle access permissions and allow you read and write access.  Note: This
-			action <emphasis>will fail</emphasis> if you do not have developer access
-			or do not have your public SSH key set up correctly.
-		</para>
+			<para>
+				Which URL you will use to clone the repository before you
+				start developing depends on your situation.
+			</para>
 
-		<programlisting>
-$ git clone git@github.com:mantisbt/mantisbt.git
-		</programlisting>
+			<variablelist>
+				<varlistentry>
+					<term>MantisBT Core Team Developers</term>
+					<listitem>
+						<para>
+							MantisBT developers have <emphasis>push</emphasis> access to the
+							official repository.
+						</para>
+						<para>
+							Benefitting from this access requires a special URL
+							that uses your SSH key to handle access permissions:
+							<ulink url="git@github.com:mantisbt/mantisbt.git">git@github.com:mantisbt/mantisbt.git</ulink>.
+							Alternatively, an HTTPS link can be used as well,
+							in which case you will have to provide your GitHub
+							User ID and password when Git requests it:
+							<ulink url="https://github.com/mantisbt/mantisbt.git">https://github.com/mantisbt/mantisbt.git</ulink>.
+						</para>
 
-		<para>
-			After performing the cloning operation, you should end up with a new
-			directory in your workspace, <filename>mantisbt/</filename>.  By default,
-			it will only track code from the primary remote branch, <literal>master</literal>,
-			which is the latest development version of MantisBT.  For contributers
-			planning to work with stable release branches, or other development
-			branches, you will need to set up local tracking branches in your
-			repository.  The following commands will set up a tracking branch for the
-			current stable branch, <literal>master-1.2.x</literal>.
-		</para>
+						<note><para>
+							Pushes <emphasis>will fail</emphasis> if you
+							do not have push access or your public SSH key
+							is not set up correctly in your GitHub profile.
+						</para></note>
+					</listitem>
+				</varlistentry>
 
-		<programlisting>
-$ git checkout -b master-1.2.x origin/master-1.2.x
-		</programlisting>
+				<varlistentry>
+					<term>Contributors</term>
+					<listitem>
+						<para>
+							For other people, the MantisBT repository and
+							the related clone URLs
+							<ulink url="git://github.com/mantisbt/mantisbt.git">git://github.com/mantisbt/mantisbt.git</ulink> (SSH)
+							or
+							<ulink url="https://github.com/mantisbt/mantisbt.git">https://github.com/mantisbt/mantisbt.git</ulink> (HTTPS)
+							will always be read-only.
+						</para>
+						<para>
+							It is therefore strongly advised to <emphasis>
+							<ulink url="https://github.com/mantisbt/mantisbt/fork">
+								create your own fork
+							</ulink>
+							</emphasis> of MantisBT where you will be able
+							to push your changes, and then use the fork's URL
+							instead to clone, which will look like this:
+							<ulink url="git@github.com:YourGitHubID/mantisbt.git">git@github.com:YourGitHubID/mantisbt.git</ulink>
+							or
+							<ulink url="https://github.com/YourGitHubID/mantisbt.git">https://github.com/YourGitHubID/mantisbt.git</ulink>
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</sect2>
+
+		<sect2 id="dev.contrib.clone.clone">
+			<title>Initializing the Clone</title>
+
+			<para>
+				To clone the repository, execute the following command
+				from your target workspace:
+<programlisting>
+git clone YourCloneURL
+</programlisting>
+				After performing the cloning operation, you should end up with a new
+				directory in your workspace, <filename>mantisbt/</filename>,
+				containing the MantisBT repository with a <literal>remote</literal>
+				named <emphasis>origin</emphasis> pointing to your Clone URL.
+			</para>
+
+			<para>
+				MantisBT uses <ulink url="http://git-scm.com/book/en/Git-Tools-Submodules">Git submodules</ulink>
+				to store and manage some third-party libraries.
+				These require additional steps to initialize properly:
+<programlisting>
+cd mantisbt
+git submodule update --init
+</programlisting>
+			</para>
+
+			<warning><para>
+				Failure to execute the submodule initialization commands
+				will result in the corresponding directories under
+				<filename>/library</filename> being empty, which will then
+				cause errors when running MantisBT.
+			</para></warning>
+		</sect2>
+
+		<sect2 id="dev.contrib.clone.remotes">
+			<title>Adding remotes</title>
+
+			<para>
+				If you are planning to use your own fork to push and
+				maintain your changes, then we recommend setting up an
+				<emphasis>upstream</emphasis> <literal>remote</literal>
+				for MantisBT's official repository, which will make it easier
+				to keep your repository up-to-date.
+<programlisting>
+git remote add --tags upstream git://github.com/mantisbt/mantisbt.git
+</programlisting>
+			</para>
+		</sect2>
+
+		<sect2 id="dev.contrib.clone.branches">
+			<title>Checking out branches</title>
+
+			<para>
+				By default, the new clone will only track code from
+				the primary remote branch, <literal>master</literal>,
+				which is the latest development version of MantisBT.
+				If you are planning to work with stable release or
+				other development branches, you will need to set up
+				local tracking branches in your repository.
+			</para>
+			<para>
+				The following command will set up a tracking branch for the
+				current stable branch, <literal>master-1.2.x</literal>.
+<programlisting>
+git checkout -b master-1.2.x origin/master-1.2.x
+</programlisting>
+			</para>
+
+			<note>
+				<para>
+					With the introduction of submodules for some of the
+					third-party libraries, you may encounter
+					issues when switching to an older branch which
+					still has code from those libraries in a subdirectory
+					of <filename>/library</filename> rather than a submodule:
+				</para>
+				<para>
+<programlisting>
+$ git checkout old_branch
+error: The following untracked working tree files would be overwritten by checkout
+	(list of files)
+Aborting
+</programlisting>
+				</para>
+				<para>
+					To resolve this, you first have to get rid of the
+					submodules directories before you can checkout the branch.
+					The command below will move all submodules to
+					<filename>/tmp</filename>:
+<programlisting>
+sed -rn "s/^.*path\s*=\s*(.*)$/\1/p" .gitmodules |xargs -I{} mv -v {} /tmp
+git checkout old_branch
+</programlisting>
+				</para>
+				<para>
+					When switching back from the older branch, the submodules
+					directories will be empty.
+					At that point you can either
+					<itemizedlist>
+						<listitem>
+							<para>
+								Update the submodules to reclone them
+<programlisting>
+git submodule update
+</programlisting>
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Restore the directories previously moved
+								to <filename>/tmp</filename> back into
+								the empty directories, e.g.
+<programlisting>
+sed -rn "s/^.*path\s*=\s*(.*)$/\1/p" .gitmodules |xargs -n 1 basename |xargs -I{} mv -v /tmp/{} library
+</programlisting>
+							</para>
+						</listitem>
+					</itemizedlist>
+				</para>
+				<para>
+					For further reference:
+					<ulink url="http://git-scm.com/book/en/Git-Tools-Submodules#Issues-with-Submodules">
+						Pro Git book
+					</ulink>
+				</para>
+			</note>
+		</sect2>
 
 	</sect1>
 
@@ -95,38 +253,46 @@ $ git checkout -b master-1.2.x origin/master-1.2.x
 		<title>Maintaining Tracking Branches</title>
 
 		<para>
-			In order to keep your local repository up to date with the official,
-			there are a few simple commands needed for any tracking branches that you
-			may have, including <literal>master</literal> and
-			<literal>master-1.2.x</literal>.
+			In order to keep your local repository up-to-date with the
+			official one, there are a few simple commands needed for any
+			tracking branches that you may have, including
+			<literal>master</literal> and <literal>master-1.2.x</literal>.
 		</para>
 
 		<para>
-			First, you'll need to got the latest information from the remote repo:
+			First, you'll need to get the latest information from the remote repo:
+<programlisting>
+git fetch origin
+</programlisting>
 		</para>
 
-		<programlisting>
-$ git fetch origin
-		</programlisting>
+		<note><para>
+			If you cloned from your personal GitHub fork instead of
+			the official MantisBT repository as explained in
+			<xref linkend="dev.contrib.clone.remotes" />,
+			then you should instead execute:
+<programlisting>
+git fetch upstream
+</programlisting>
+		</para></note>
 
 		<para>
 			Then for each tracking branch you have, enter the following commands:
+<programlisting>
+git checkout BranchName
+git rebase
+</programlisting>
 		</para>
-
-		<programlisting>
-$ git checkout master
-$ git rebase origin/master
-		</programlisting>
 
 		<para>
-			Alternatively, you may combine the above steps into a single command
-			for each remote tracking branch:
+			Alternatively, you may combine the fetch and rebase operations
+			described above into a single pull command
+			(for each remote tracking branch):
+<programlisting>
+git checkout master
+git pull --rebase
+</programlisting>
 		</para>
-
-		<programlisting>
-$ git checkout master
-$ git pull --rebase
-		</programlisting>
 	</sect1>
 
 	<sect1 id="dev.contrib.prepare">
@@ -219,15 +385,15 @@ $ git merge master
 
 		<para>
 			In order to run the tests, you will need to have the PHP Soap extension
-			, <ulink url="http://www.phpunit.de">PHPUnit 3.4 or newer</ulink> and 
+			, <ulink url="http://www.phpunit.de">PHPUnit 3.4 or newer</ulink> and
 			<ulink url="http://phing.info">Phing 2.4 or newer</ulink> installed.
-			The tests are configured using a <literal>bootstrap.php</literal> file. The 
+			The tests are configured using a <literal>bootstrap.php</literal> file. The
 			<literal>boostrap.php.sample</literal> file contains the settings you will
-			need to adjust to run all the tests. 
+			need to adjust to run all the tests.
 		</para>
 
 		<para>
-			Running the unit tests is done from root directory using the following 
+			Running the unit tests is done from root directory using the following
 			command:
 		</para>
 
@@ -246,7 +412,7 @@ $ phing test
 			<itemizedlist>
         	                <listitem><para>Install MantisBT locally and configure a project
 				and a category.</para></listitem>
-				<listitem><para>Adjust the <literal>bootstrap.php</literal> file 
+				<listitem><para>Adjust the <literal>bootstrap.php</literal> file
 				to point to your local installation.</para></listitem>
 				<listitem><para>Customize the <literal>config_inc.php</literal>
 				to enable all the features tested using the SOAP tests. The
