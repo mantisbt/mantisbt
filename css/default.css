@@ -510,11 +510,22 @@ div.form-container fieldset label.required:before {
 	padding: .5em;
 	float: right;
 }
-.odd {
+fieldset > .field-container:nth-child(2n+1),
+form > table > tr:nth-child(2n+1),
+table#manage-overview-table > tr:nth-child(2n+1),
+div.form-container > table > tr:nth-child(2n+2),
+div.table-container > table > tr:nth-child(2n+2) {
 	background-color: #d8d8d8;
 }
-.even {
+fieldset > .field-container:nth-child(2n),
+form > table > tr:nth-child(2n+2),
+table#manage-overview-table > tr:nth-child(2n),
+div.form-container > table > tr:nth-child(2n+3),
+div.table-container > table > tr:nth-child(2n+3) {
 	background-color: #e8e8e8;
+}
+form > table > tr:last-child {
+	background-color: white;
 }
 fieldset fieldset.field-container,
 div.field-container {

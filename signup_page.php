@@ -78,12 +78,12 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 			}
 			?>
 			</ul>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="username"><span><?php echo lang_get( 'username' ) ?></span></label>
 				<span class="input"><input id="username" type="text" name="username" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" class="autofocus" /></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="email-field"><span><?php echo lang_get( 'email_label' ) ?></span></label>
 				<span class="input"><?php print_email_input( 'email', '' ) ?></span>
 				<span class="label-style"></span>
@@ -94,7 +94,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 			if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 && ( true == $t_allow_passwd ) ) {
 				# captcha image requires GD library and related option to ON
 
-				echo '<div class="field-container ', helper_alternate_class_no_attribute(), '">';
+				echo '<div class="field-container">';
 				echo '<label for="captcha-field"><span>' . lang_get( 'signup_captcha_request_label' ) . '</span></label>';
 				echo '<span id="captcha-input" class="input">';
 				print_captcha_input( 'captcha', '' );

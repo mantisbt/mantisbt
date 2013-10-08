@@ -728,12 +728,12 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 		?>
 
 			<input type="hidden" name="_authenticate" value="1" />
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="username"><span><?php echo lang_get( 'username' );?></span></label>
 				<span class="input"><input id="username" type="text" disabled="disabled" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" value="<?php echo string_attribute( $p_username );?>" /></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="password"><span><?php echo lang_get( 'password' );?></span></label>
 				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" class="autofocus" /></span>
 				<span class="label-style"></span>

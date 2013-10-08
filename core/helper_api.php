@@ -77,27 +77,6 @@ function helper_alternate_colors( $p_index, $p_odd_color, $p_even_color ) {
 }
 
 /**
- * alternate classes for table rows
- * If no index is given, continue alternating based on the last index given
- * @param int $p_index
- * @param string $p_odd_class default: row-1
- * @param string $p_even_class default: row-2
- * @return string
- */
-function helper_alternate_class( $p_index = null, $p_odd_class = 'row-1', $p_even_class = 'row-2' ) {
-	static $t_index = 1;
-
-	if( null !== $p_index ) {
-		$t_index = $p_index;
-	}
-
-	if( 1 == $t_index++ % 2 ) {
-		return "class=\"$p_odd_class\"";
-	} else {
-		return "class=\"$p_even_class\"";
-	}
-}
-/**
  * Transpose a bidimensional array
  *
  * e.g. array('a'=>array('k1'=>1,'k2'=>2),'b'=>array('k1'=>3,'k2'=>4))
@@ -121,28 +100,6 @@ function helper_array_transpose( $p_array ) {
 		}
 	}
 	return $t_out;
-}
-
-/**
- * return alternate classes for rows, no attribute
- * If no index is given, continue alternating based on the last index given
- * @param int $p_index
- * @param string $p_odd_class default: odd
- * @param string $p_even_class default: even
- * @return string
- */
-function helper_alternate_class_no_attribute( $p_index = null, $p_odd_class = 'odd', $p_even_class = 'even' ) {
-	static $t_index = 1;
-
-	if( null !== $p_index ) {
-		$t_index = $p_index;
-	}
-
-	if( 1 == $t_index++ % 2 ) {
-		return $p_odd_class;
-	} else {
-		return $p_even_class;
-	}
 }
 
 /**

@@ -93,8 +93,8 @@ else {
 		# trace bug id back to project
 		$t_project_id = bug_get_field( $v_bug_id, 'project_id' );
 		$t_cust_value = $v_value;
-		printf("\n<tr %s><td><a href=\"../view.php?id=%d\">%07d</a></td><td>%s</td><td>",
-			helper_alternate_class(), $v_bug_id, $v_bug_id, $v_value);
+		printf("\n<tr><td><a href=\"../view.php?id=%d\">%07d</a></td><td>%s</td><td>",
+			$v_bug_id, $v_bug_id, $v_value);
 
 		# validate field contents
 		switch( $f_dest_field ) {

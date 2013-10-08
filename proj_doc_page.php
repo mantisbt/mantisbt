@@ -133,7 +133,7 @@ for ($i=0;$i<$num_files;$i++) {
 	$v_date_added = date( config_get( 'normal_date_format' ), $v_date_added );
 
 ?>
-<tr <?php echo helper_alternate_class( $i ) ?>>
+<tr>
 	<td>
 <?php
 	$t_href = '<a href="file_download.php?file_id='.$v_id.'&amp;type=doc">';

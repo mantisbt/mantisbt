@@ -72,7 +72,7 @@ $t_max_column_count = 2;
 
 foreach( $t_query_arr as $t_id => $t_name ) {
 	if ( $t_column_count == 0 ) {
-		print '<tr ' . helper_alternate_class() . '>';
+		print '<tr>';
 	}
 
 	print '<td>';

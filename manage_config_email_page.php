@@ -181,7 +181,7 @@ function get_section_begin_for_email( $p_section_name ) {
 function get_capability_row_for_email( $p_caption, $p_message_type ) {
 	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 
-	echo '<tr ' . helper_alternate_class() . '><td>' . string_display( $p_caption ) . '</td>';
+	echo '<tr><td>' . string_display( $p_caption ) . '</td>';
 	echo '<td class="center"' . colour_notify_flag( $p_message_type, 'reporter' ) . '>' . show_notify_flag( $p_message_type, 'reporter' )  . '</td>';
 	echo '<td class="center"' . colour_notify_flag( $p_message_type, 'handler' ) . '>' . show_notify_flag( $p_message_type, 'handler' ) . '</td>';
 	echo '<td class="center"' . colour_notify_flag( $p_message_type, 'monitor' ) . '>' . show_notify_flag( $p_message_type, 'monitor' ) . '</td>';

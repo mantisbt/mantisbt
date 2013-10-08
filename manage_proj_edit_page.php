@@ -97,12 +97,12 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			<legend><span><?php echo lang_get( 'edit_project_title' ) ?></span></legend>
 			<?php echo form_security_field( 'manage_proj_update' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-			<div class="field-container <?php echo helper_alternate_class_no_attribute() ?>">
+			<div class="field-container">
 				<label for="project-name" class="required"><span><?php echo lang_get( 'project_name' ) ?></span></label>
 				<span class="input"><input type="text" id="project-name" name="name" size="60" maxlength="128" value="<?php echo string_attribute( $row['name'] ) ?>" /></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="project-status"><span><?php echo lang_get( 'status' ) ?></span></label>
 				<span class="select">
 					<select id="project-status" name="status">
@@ -111,17 +111,17 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 				</span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="project-enabled"><span><?php echo lang_get( 'enabled' ) ?></span></label>
 				<span class="checkbox"><input type="checkbox" id="project-enabled" name="enabled" <?php check_checked( (int)$row['enabled'], ON ); ?> /></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="project-inherit-global"><span><?php echo lang_get( 'inherit_global' ) ?></span></label>
 				<span class="checkbox"><input type="checkbox" id="project-inherit-global" name="inherit_global" <?php check_checked( (int)$row['inherit_global'], ON ); ?> /></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="project-view-state"><span><?php echo lang_get( 'view_status' ) ?></span></label>
 				<span class="select">
 					<select id="project-view-state" name="view_state">
@@ -139,13 +139,13 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 					$t_file_path = config_get( 'absolute_path_default_upload_folder' );
 				}
 				?>
-				<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+				<div class="field-container">
 					<label for="project-file-path"><span><?php echo lang_get( 'upload_file_path' ) ?></span></label>
 					<span class="input"><input type="text" id="project-file-path" name="file_path" size="60" maxlength="250" value="<?php echo string_attribute( $t_file_path ) ?>" /></span>
 					<span class="label-style"></span>
 				</div><?php
 			} ?>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="project-description"><span><?php echo lang_get( 'description' ) ?></span></label>
 				<span class="textarea"><textarea id="project-description" name="description" cols="70" rows="5"><?php echo string_textarea( $row['description'] ) ?></textarea></span>
 				<span class="label-style"></span>
@@ -172,11 +172,6 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 	</form>
 </div>
 <?php } ?>
-
-<?php
-	# reset the class counter
-	helper_alternate_class_no_attribute( 0 );
-?>
 
 <!-- SUBPROJECTS -->
 <div id="manage-project-update-subprojects-div" class="form-container">
@@ -229,7 +224,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 				foreach ( $t_subproject_ids as $t_subproject_id ) {
 					$t_subproject = project_get_row( $t_subproject_id );
 					$t_inherit_parent = project_hierarchy_inherit_parent( $t_subproject_id, $f_project_id, true ); ?>
-				<tr <?php echo helper_alternate_class() ?>>
+				<tr>
 					<td>
 						<a href="manage_proj_edit_page.php?project_id=<?php echo $t_subproject['id'] ?>"><?php echo string_display( $t_subproject['name'] ) ?></a>
 					</td>
@@ -298,7 +293,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 			$t_id = $t_category['id'];
 			$t_inherited = ( $t_category['project_id'] != $f_project_id );
 		?>
-		<tr <?php echo helper_alternate_class() ?>>
+		<tr>
 			<td><?php echo string_display( category_full_name( $t_id, /* showProject */ $t_inherited, $f_project_id ) )  ?></td>
 			<td><?php echo prepare_user_name( $t_category['user_id'] ) ?></td>
 			<td class="center">
@@ -328,11 +323,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 		</fieldset>
 	</form>
 
-</div><?php
-
-# reset the class counter
-helper_alternate_class( 0 ); ?>
-
+</div>
 <div id="project-versions-div" class="form-container">
 	<h2><?php echo lang_get( 'versions' ); ?></h2>
 	<form id="manage-project-version-copy-form" method="post" action="manage_proj_ver_copy.php">
@@ -369,7 +360,7 @@ helper_alternate_class( 0 ); ?>
 				$t_date_formatted = ' ';
 			} ?>
 
-		<tr <?php echo helper_alternate_class() ?>>
+		<tr>
 			<td><?php echo string_display( $t_name ) ?></td>
 			<td><?php echo trans_bool( $t_released ) ?></td>
 			<td><?php echo trans_bool( $t_obsolete ) ?></td>
@@ -399,9 +390,6 @@ helper_alternate_class( 0 ); ?>
 		</fieldset>
 	</form>
 </div><?php
-
-# reset the class counter
-helper_alternate_class( 0 );
 
 # You need either global permissions or project-specific permissions to link
 #  custom fields
@@ -433,7 +421,7 @@ if ( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_p
 		</tr><?php
 		foreach( $t_custom_fields as $t_field_id ) {
 			$t_desc = custom_field_get_definition( $t_field_id ); ?>
-			<tr <?php echo helper_alternate_class() ?>>
+			<tr>
 				<td><?php echo custom_field_get_display_name( $t_desc['name'] ) ?></td>
 				<td>
 					<form method="post" action="manage_proj_custom_field_update.php">
@@ -534,16 +522,13 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 
 	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
 
-	# reset the class counter
-	helper_alternate_class( 0 );
-
 	$t_users_count = count( $t_sort );
 	$t_removable_users_exist = false;
 
 	for ( $i = 0; $i < $t_users_count; $i++ ) {
 		$t_user = $t_users[$i];
 ?>
-		<tr <?php echo helper_alternate_class() ?>>
+		<tr>
 			<td>
 				<a href="manage_user_edit_page.php?user_id=<?php echo $t_user['id'] ?>">
 					<?php echo $t_display[$i] ?>
@@ -593,7 +578,7 @@ if ( $t_can_manage_users ) {
 			<legend><span><?php echo lang_get( 'add_user_title' ) ?></span></legend>
 			<?php echo form_security_field( 'manage_proj_user_add' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="project-add-users-username"><span><?php echo lang_get( 'username' ) ?></span></label>
 				<span class="select">
 					<select id="project-add-users-username" name="user_id[]" multiple="multiple" size="10"><?php
@@ -604,7 +589,7 @@ if ( $t_can_manage_users ) {
 				</span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="project-add-users-access-level"><span><?php echo lang_get( 'access_level' ) ?></span></label>
 				<span class="select">
 					<select id="project-add-users-access-level" name="access_level"><?php

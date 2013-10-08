@@ -31,7 +31,7 @@ access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 html_page_top( 'MantisBT Administration' );
 
 function print_info_row( $p_description, $p_value ) {
-	echo '<tr ' . helper_alternate_class() . '>';
+	echo '<tr>';
 	echo '<th class="category">' . $p_description . '</th>';
 	echo '<td>' . $p_value . '</td>';
 	echo '</tr>';

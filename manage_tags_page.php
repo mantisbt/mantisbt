@@ -136,7 +136,7 @@ print_manage_menu( 'manage_tags_page.php' ); ?>
 		while( $t_tag_row = db_fetch_array( $t_result ) ) {
 			$t_tag_name = string_display_line( $t_tag_row['name'] );
 			$t_tag_description = string_display( $t_tag_row['description'] ); ?>
-		<tr <?php echo helper_alternate_class() ?>><?php
+		<tr><?php
 		if ( $t_can_edit ) { ?>
 			<td><a href="tag_view_page.php?tag_id=<?php echo $t_tag_row['id'] ?>" ><?php echo $t_tag_name ?></a></td><?php
 		} else { ?>
@@ -161,14 +161,14 @@ print_manage_menu( 'manage_tags_page.php' ); ?>
 		<fieldset class="has-required">
 			<legend><span><?php echo lang_get( 'tag_create' ) ?></span></legend>
 			<?php echo form_security_field( 'tag_create' ); ?>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="tag-name" class="required"><span><?php echo lang_get( 'tag_name' ) ?></span></label>
 				<span class="input"><input type="text" id="tag-name" name="name" size="40" maxlength="100" />
 				<span><?php echo sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) ); ?></span>
 				</span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="tag-description"><span><?php echo lang_get( 'tag_description' ) ?></span></label>
 				<span class="textarea"><textarea id="tag-description" name="description" cols="80" rows="6"></textarea></span>
 				<span class="label-style"></span>

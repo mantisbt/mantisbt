@@ -73,12 +73,12 @@ print_manage_menu( 'manage_proj_cat_edit_page.php' ); ?>
 			<?php echo form_security_field( 'manage_proj_cat_update' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>"/>
 			<input type="hidden" name="category_id" value="<?php echo string_attribute( $f_category_id ) ?>" />
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="proj-category-name"><span><?php echo lang_get( 'category' ) ?></span></label>
 				<span class="input"><input type="text" id="proj-category-name" name="name" size="32" maxlength="128" value="<?php echo string_attribute( $t_name ) ?>" /></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="proj-category-assigned-to"><span><?php echo lang_get( 'assigned_to' ) ?></span></label>
 				<span class="select">
 					<select id="proj-category-assigned-to" name="assigned_to">

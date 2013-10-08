@@ -81,17 +81,17 @@ html_page_top( sprintf( lang_get( 'tag_update' ), $t_name ) );
 			<div class="section-link"><?php print_bracket_link( 'tag_view_page.php?tag_id='.$f_tag_id, lang_get( 'tag_update_return' ) ); ?></div>
 			<input type="hidden" name="tag_id" value="<?php echo $f_tag_id ?>"/>
 			<?php echo form_security_field( 'tag_update' ) ?>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<span class="display-label"><span><?php echo lang_get( 'tag_id' ) ?></span></span>
 				<span class="display-value"><span><?php echo $t_tag_row['id'] ?></span></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="tag-name"><span><?php echo lang_get( 'tag_name' ) ?></span></label>
 				<span class="input"><input type="text" <?php echo helper_get_tab_index() ?> id="tag-name" name="name" value="<?php echo $t_name ?>"/></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<?php
 					if ( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
 						echo '<label for="tag-user-id"><span>', lang_get( 'tag_creator' ), '</span></label>';
@@ -104,17 +104,17 @@ html_page_top( sprintf( lang_get( 'tag_update' ), $t_name ) );
 					} ?>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<span class="display-label"><span><?php echo lang_get( 'tag_created' ) ?></span></span>
 				<span class="display-value"><span><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></span></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<span class="display-label"><span><?php echo lang_get( 'tag_updated' ) ?></span></span>
 				<span class="display-value"><span><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></span></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="tag-description"><span><?php echo lang_get( 'tag_description' ) ?></span></label>
 				<span class="textarea"><textarea id="tag-description" name="description" <?php echo helper_get_tab_index() ?> cols="80" rows="6"><?php echo string_textarea( $t_description ) ?></textarea></span>
 				<span class="label-style"></span>

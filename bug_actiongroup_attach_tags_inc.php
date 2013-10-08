@@ -57,7 +57,7 @@ function action_attach_tags_print_title() {
  * Prints the table and form for the Attach Tags group action page.
  */
 function action_attach_tags_print_fields() {
-	echo '<tr ',helper_alternate_class(),'><th class="category">',lang_get('tag_attach_long'),'</th><td>';
+	echo '<tr><th class="category">',lang_get('tag_attach_long'),'</th><td>';
 	print_tag_input();
 	echo '<input type="submit" class="button" value="' . lang_get( 'tag_attach' ) . ' " /></td></tr>';
 }

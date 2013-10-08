@@ -115,7 +115,7 @@ if( count( $t_projects ) == 0 ) {
 <?php
 	# Printing rows of projects with attachments to move
 	foreach( $t_projects as $t_id => $t_project ) {
-		echo '<tr ' . helper_alternate_class() . '>';
+		echo '<tr>';
 		printf(
 			'<td>%s</td><td class="center">%s</td><td class="center">'
 			. '<input type="checkbox" name="to_disk[]" value="%d" /></td>',

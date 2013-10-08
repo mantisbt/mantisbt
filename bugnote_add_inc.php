@@ -98,7 +98,7 @@ require_api( 'lang_api.php' );
 
 <?php if ( config_get('time_tracking_enabled') ) { ?>
 <?php if ( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $f_bug_id ) ) { ?>
-<tr <?php echo helper_alternate_class() ?>>
+<tr>
 	<th class="category">
 		<?php echo lang_get( 'time_tracking' ) ?>
 	</th>

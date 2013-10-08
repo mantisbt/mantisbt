@@ -70,7 +70,7 @@ html_page_top( lang_get( 'select_project_button' ) );
 		<fieldset>
 			<legend><span><?php echo lang_get( 'choose_project' ) ?></span></legend>
 			<input type="hidden" name="ref" value="<?php echo string_html_specialchars( $f_ref ) ?>" />
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="select-project-id"><span><?php echo lang_get( 'select_project_button' ) ?></span></label>
 				<span class="select">
 					<select id="select-project-id" name="project_id">
@@ -79,7 +79,7 @@ html_page_top( lang_get( 'select_project_button' ) );
 				</span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="set-default"><span><?php echo lang_get( 'make_default' ) ?></span></label>
 				<span class="checkbox"><input id="set-default" type="checkbox" name="make_default" /></span>
 				<span class="label-style"></span>

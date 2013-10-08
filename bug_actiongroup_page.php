@@ -362,7 +362,7 @@ if( $t_bugnote ) {
 	</td>
 </tr>
 <?php if ( access_has_project_level( config_get( 'private_bugnote_threshold' ), $t_project_id ) ) { ?>
-<tr <?php echo helper_alternate_class() ?>>
+<tr>
 	<th class="category">
 		<?php echo lang_get( 'view_status' ) ?>
 	</th>

@@ -159,7 +159,7 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 <?php # display the checkboxes
 for ($i=0 ; $i <$field_name_count ; $i++) {
 
-	printf ( '<tr %s>', helper_alternate_class( $i ) );
+	echo '<tr>';
 ?>
 
 	<th class="category">

@@ -207,10 +207,9 @@ if ( ON == config_get( 'time_tracking_with_billing' ) ) {
 				$t_link = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_item['bug_id'] ) ) . lang_get( 'word_separator' ) . string_display( $t_item['summary'] );
 				echo '<tr class="row-category-history"><td colspan="4">' . $t_link . "</td></tr>";
 				$t_prev_id = $t_item['bug_id'];
-				helper_alternate_class( 1 );
 			}
 ?>
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<td class="small-caption">
 			<?php echo $t_item[$t_name_field] ?>
 		</td>
@@ -260,10 +259,9 @@ if ( ON == config_get( 'time_tracking_with_billing' ) ) {
 	</tr>
 
 <?php
-	helper_alternate_class( 1 );
 	foreach ( $t_user_summary as $t_username => $t_total_time ) {
 ?>
-	<tr <?php echo helper_alternate_class() ?>>
+	<tr>
 		<td class="small-caption">
 			<?php echo $t_username; ?>
 		</td>

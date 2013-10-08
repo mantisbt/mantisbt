@@ -100,17 +100,17 @@ html_page_top( lang_get( 'edit_news_title' ) );
 			<div class="section-link"><?php print_bracket_link( 'news_menu_page.php', lang_get( 'go_back' ) ) ?></div>
 			<?php echo form_security_field( 'news_update' ); ?>
 			<input type="hidden" name="news_id" value="<?php echo $v_id ?>" />
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="news-update-headline" class="required"><span><?php echo lang_get( 'headline' ) ?></span></label>
 				<span class="input"><input type="text" id="news-update-headline" name="headline" size="64" maxlength="64" value="<?php echo $v_headline ?>" /></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="news-update-body" class="required"><span><?php echo lang_get( 'body' ) ?></span></label>
 				<span class="textarea"><textarea id="news-update-body" name="body" cols="60" rows="10"><?php echo $v_body ?></textarea></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for=""><span><?php echo lang_get( 'post_to' ) ?></span></label>
 				<span class="select">
 					<select name="project_id"><?php
@@ -123,12 +123,12 @@ html_page_top( lang_get( 'edit_news_title' ) );
 				</span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="news-update-announcement"><span><?php echo lang_get( 'announcement' ) ?></span> <span class="help-text"><?php echo lang_get( 'stays_on_top' ) ?></span></label>
 				<span class="checkbox"><input type="checkbox" id="news-update-announcement" name="announcement" <?php check_checked( $v_announcement, 1 ); ?> /></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for=""><span><?php echo lang_get( 'view_status' ) ?></span></label>
 				<span class="select">
 					<select name="view_state">

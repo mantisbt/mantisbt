@@ -195,7 +195,7 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only=fals
 	$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project_id, $t_user )
 			  && ( ( ALL_PROJECTS == $t_project_id ) || !$p_all_projects_only );
 
-	echo '<tr ' . helper_alternate_class() . ">\n";
+	echo "<tr>\n";
 
 	# Access levels
 	echo "\t<td>" . string_display( $p_caption ) . "</td>\n";
@@ -235,7 +235,7 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only=
 	$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project_id, $t_user )
 			  && ( ( ALL_PROJECTS == $t_project_id ) || !$p_all_projects_only );
 
-	echo '<tr ' . helper_alternate_class() . ">\n\t<td>" . string_display( $p_caption ) . "</td>\n";
+	echo "<tr>\n\t<td>" . string_display( $p_caption ) . "</td>\n";
 
 	# Value
 	$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
@@ -268,7 +268,7 @@ function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects
 	$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $t_project_id, $t_user )
 			  && ( ( ALL_PROJECTS == $t_project_id ) || !$p_all_projects_only );
 
-	echo '<tr ' . helper_alternate_class() . ">\n\t<td>" . string_display( $p_caption ) . "</td>\n";
+	echo "<tr>\n\t<td>" . string_display( $p_caption ) . "</td>\n";
 
 	# Value
 	$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );

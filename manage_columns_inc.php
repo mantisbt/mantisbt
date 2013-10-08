@@ -90,27 +90,27 @@ $t_excel = implode( ', ', $t_columns );
 			<input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
 			<input type="hidden" name="form_page" value="<?php echo $t_account_page ? 'account' : 'manage'; ?>" />
 
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="all-columns"><span><?php echo lang_get( 'all_columns_title' )?></span></label>
 				<span class="textarea"><textarea id="all-columns" <?php echo helper_get_tab_index() ?> name="all_columns" readonly="readonly" cols="80" rows="5"><?php echo $t_all ?></textarea></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="view-issues-columns" class="required"><span><?php echo lang_get( 'view_issues_columns_title' )?></span></label>
 				<span class="textarea"><textarea id="view-issues-columns" <?php echo helper_get_tab_index() ?> name="view_issues_columns" cols="80" rows="5"><?php echo $t_view_issues ?></textarea></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="print-issues-columns" class="required"><span><?php echo lang_get( 'print_issues_columns_title' )?></span></label>
 				<span class="textarea"><textarea id="print-issues-columns" <?php echo helper_get_tab_index() ?> name="print_issues_columns" cols="80" rows="5"><?php echo $t_print_issues ?></textarea></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="csv-columns" class="required"><span><?php echo lang_get( 'csv_columns_title' )?></span></label>
 				<span class="textarea"><textarea id="csv-columns" <?php echo helper_get_tab_index() ?> name="csv_columns" cols="80" rows="5"><?php echo $t_csv ?></textarea></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="excel-columns" class="required"><span><?php echo lang_get( 'excel_columns_title' )?></span></label>
 				<span class="textarea"><textarea id="excel-columns" <?php echo helper_get_tab_index() ?> name="excel_columns" cols="80" rows="5"><?php echo $t_excel ?></textarea></span>
 				<span class="label-style"></span>

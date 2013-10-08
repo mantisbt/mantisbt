@@ -77,12 +77,12 @@ html_page_top();
 
 <div class="section-container">
 	<h2><?php echo lang_get( 'view_account_title' ) ?></h2>
-	<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+	<div class="field-container">
 		<span class="display-label"><span><?php echo lang_get( 'username' ) ?></span></span>
 		<span class="display-value"><span><?php echo string_display_line( $u_username ) ?></span></span>
 		<span class="label-style"></span>
 	</div>
-	<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+	<div class="field-container">
 		<span class="display-label"><span><?php echo lang_get( 'email' ) ?></span></span>
 		<span class="display-value"><span>
 			<?php
@@ -98,7 +98,7 @@ html_page_top();
 		</span></span>
 		<span class="label-style"></span>
 	</div>
-	<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+	<div class="field-container">
 		<span class="display-label"><span><?php echo lang_get( 'realname' ) ?></span></span>
 		<span class="display-value"><span><?php
 			if ( ! ( $t_can_manage || $t_can_see_realname ) ) {

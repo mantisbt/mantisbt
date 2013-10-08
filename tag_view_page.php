@@ -73,39 +73,39 @@ html_page_top( sprintf( lang_get( 'tag_details' ), $t_name ) ); ?>
 	<div class="section-link">
 		<?php print_bracket_link( 'search.php?tag_string='.urlencode($t_tag_row['name']), sprintf( lang_get( 'tag_filter_default' ), tag_stats_attached( $f_tag_id ) ) ); ?>
 	</div>
-	<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+	<div class="field-container">
 		<span class="display-label"><span><?php echo lang_get( 'tag_id' ) ?></span></span>
 		<span class="display-value"><span><?php echo $t_tag_row['id'] ?></span></span>
 		<span class="label-style"></span>
 	</div>
-	<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+	<div class="field-container">
 		<span class="display-label"><span><?php echo lang_get( 'tag_name' ) ?></span></span>
 		<span class="display-value"><span><?php echo $t_name ?></span></span>
 		<span class="label-style"></span>
 	</div>
-	<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+	<div class="field-container">
 		<span class="display-label"><span><?php echo lang_get( 'tag_creator' ) ?></span></span>
 		<span class="display-value"><span><?php echo string_display_line( user_get_name($t_tag_row['user_id']) ) ?></span></span>
 		<span class="label-style"></span>
 	</div>
-	<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+	<div class="field-container">
 		<span class="display-label"><span><?php echo lang_get( 'tag_created' ) ?></span></span>
 		<span class="display-value"><span><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></span></span>
 		<span class="label-style"></span>
 	</div>
-	<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+	<div class="field-container">
 		<span class="display-label"><span><?php echo lang_get( 'tag_updated' ) ?></span></span>
 		<span class="display-value"><span><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></span></span>
 		<span class="label-style"></span>
 	</div>
-	<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+	<div class="field-container">
 		<span class="display-label"><span><?php echo lang_get( 'tag_description' ) ?></span></span>
 		<span class="display-value"><span><?php echo $t_description ?></span></span>
 		<span class="label-style"></span>
 	</div><?php
 	$t_tags_related = tag_stats_related( $f_tag_id );
 	if ( count( $t_tags_related ) ) { ?>
-	<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+	<div class="field-container">
 		<span class="display-label"><span><?php echo lang_get( 'tag_related' ); ?></span></span>
 		<div class="display-value"><div>
 		<table id="related-tags" class="tag-list" cellpadding="5" cellspacing="1" border="1"><?php

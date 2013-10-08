@@ -134,7 +134,7 @@ $t_by_string = sprintf( lang_get( 'revision_by' ), string_display_line( date( co
 ?>
 <tr class="spacer"><td><a id="revision-<?php echo $t_revision['id'] ?>"></a></td></tr>
 
-<tr <?php echo helper_alternate_class() ?>>
+<tr>
 <th class="category"><?php echo lang_get( 'revision' ) ?></th>
 <td colspan="2"><?php echo $t_by_string ?></td>
 <td class="center" width="5%">
@@ -143,7 +143,7 @@ $t_by_string = sprintf( lang_get( 'revision_by' ), string_display_line( date( co
 } ?>
 </tr>
 
-<tr <?php echo helper_alternate_class() ?>>
+<tr>
 <th class="category"><?php echo $t_label ?></th>
 <td colspan="3"><?php echo string_display_links( $t_revision['value'] ) ?></td>
 </tr>
@@ -170,7 +170,7 @@ print_bracket_link( 'view.php?id=' . $t_bug_id, lang_get( 'back_to_issue' ) );
 </td>
 </tr>
 
-<tr <?php echo helper_alternate_class() ?>>
+<tr>
 <th class="category" width="15%"><?php echo lang_get( 'summary' ) ?></th>
 <td colspan="3"><?php echo bug_format_summary( $t_bug_id, SUMMARY_FIELD ) ?></td>
 </tr>

@@ -125,12 +125,12 @@ if ( $t_force_pw_reset ) {
 
 		if ( !helper_call_custom_function( 'auth_can_change_password', array() ) ) {
 			# With LDAP --> ?>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<span class="display-label"><span><?php echo lang_get( 'username' ) ?></span></span>
 				<span class="input"><span class="field-value"><?php echo string_display_line( $u_username ) ?></span></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<span class="display-label"><span><?php echo lang_get( 'password' ) ?></span></span>
 				<span class="input"><span class="field-value"><?php echo lang_get( 'no_password_change' ) ?></span></span>
 				<span class="label-style"></span>
@@ -139,23 +139,23 @@ if ( $t_force_pw_reset ) {
 			# Without LDAP
 			$t_show_update_button = true;
 			?>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<span class="display-label"><span><?php echo lang_get( 'username' ) ?></span></span>
 				<span class="input"><span class="field-value"><?php echo string_display_line( $u_username ) ?></span></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="password" <?php if ( $t_force_pw_reset ) { ?> class="required" <?php } ?>><span><?php echo lang_get( 'password' ) ?></span></label>
 				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="password-confirm" <?php if ( $t_force_pw_reset ) { ?> class="required" <?php } ?>><span><?php echo lang_get( 'confirm_password' ) ?></span></label>
 				<span class="input"><input id="password-confirm" type="password" name="password_confirm" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
 				<span class="label-style"></span>
 			</div><?php
 		} ?>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<span class="display-label"><span><?php echo lang_get( 'email' ) ?></span></span>
 				<span class="input"><?php
 				if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
@@ -169,7 +169,7 @@ if ( $t_force_pw_reset ) {
 				</span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>"><?php
+			<div class="field-container"><?php
 				if ( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
 					# With LDAP
 					echo '<span class="display-label"><span>' . lang_get( 'realname' ) . '</span></span>';
@@ -188,12 +188,12 @@ if ( $t_force_pw_reset ) {
 				} ?>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<span class="display-label"><span><?php echo lang_get( 'access_level' ) ?></span></span>
 				<span class="input"><span class="field-value"><?php echo get_enum_element( 'access_levels', $u_access_level ); ?></span></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<span class="display-label"><span><?php echo lang_get( 'access_level_project' ) ?></span></span>
 				<span class="input"><span class="field-value"><?php echo get_enum_element( 'access_levels', current_user_get_access_level() ); ?></span></span>
 				<span class="label-style"></span>
@@ -201,7 +201,7 @@ if ( $t_force_pw_reset ) {
 			<?php
 			$t_projects = user_get_assigned_projects( auth_get_current_user_id() );
 			if( count( $t_projects ) > 0 ) {
-				echo '<div class="field-container ' . helper_alternate_class_no_attribute() . '">';
+				echo '<div class="field-container">';
 				echo '<span class="display-label"><span>' . lang_get( 'assigned_projects' ) . '</span></span>';
 				echo '<div class="input">';
 				echo '<ul class="project-list">';

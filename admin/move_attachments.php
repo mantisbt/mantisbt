@@ -194,7 +194,7 @@ if( empty( $t_moved ) ) {
 				'<th>File</th><th>Filename</th><th>Status</th>',
 				'</tr>';
 			foreach( $t_row['data'] as $t_data ) {
-				echo '<tr ' . helper_alternate_class() .'>';
+				echo '<tr>';
 				if( $f_file_type == 'bug' ) {
 					printf( '<td>%s</td>', bug_format_id( $t_data['bug_id'] ) );
 				}

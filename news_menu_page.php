@@ -58,22 +58,22 @@ html_page_top( lang_get( 'edit_news_link' ) );
 		<fieldset class="has-required">
 			<legend><span><?php echo lang_get( 'add_news_title' ) ?></span></legend>
 			<?php echo form_security_field( 'news_add' ); ?>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="news-headline" class="required"><span><?php echo lang_get( 'headline' ) ?></span></label>
 				<span class="input"><input type="text" id="news-headline" name="headline" size="64" maxlength="64" /></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="news-body" class="required"><span><?php echo lang_get( 'body' ) ?></span></label>
 				<span class="textarea"><textarea id="news-body" name="body" cols="60" rows="8"></textarea></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="news-announcement"><span><?php echo lang_get( 'announcement' ) ?></span> <span class="help-text"><?php echo lang_get( 'stays_on_top' ) ?></span></label>
 				<span class="checkbox"><input type="checkbox" id="news-announcement" name="announcement" /></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="news-view-status"><span><?php echo lang_get( 'view_status' ) ?></span></label>
 				<span class="select">
 					<select id="news-view-status" name="view_state">
@@ -95,13 +95,13 @@ if ( news_get_count( helper_get_current_project(), current_user_is_administrator
 		<fieldset>
 			<legend><span><?php echo lang_get( 'edit_or_delete_news_title' ) ?></span></legend>
 			<?php echo form_security_field( 'news_delete' ); ?>
-			<fieldset class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<fieldset class="field-container">
 					<span class="radio"><input type="radio" id="news-edit-action" name="action" value="edit" checked="checked" /></span>
 					<label for="news-edit-action"><span><?php echo lang_get( 'edit_post' ) ?></span></label>
 					<span class="radio"><input type="radio" id="news-delete-action" name="action" value="delete" /></span>
 					<label for="news-delete-action"><span><?php echo lang_get( 'delete_post' ) ?></span></label>
 			</fieldset>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="news-edit-id"><span><?php echo lang_get( 'select_post' ) ?></span></label>
 				<span class="select">
 					<select id="news-edit-id" name="news_id">

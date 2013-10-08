@@ -71,12 +71,12 @@ html_page_top2a();
 
 			$t_allow_passwd = helper_call_custom_function( 'auth_can_change_password', array() );
 			if ( $t_allow_passwd ) { ?>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="username"><span><?php echo lang_get( 'username' ) ?></span></label>
 				<span class="input"><input id="username" type="text" name="username" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" class="autofocus" /></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="email-field"><span><?php echo lang_get( 'email' ) ?></span></label>
 				<span class="input"><?php print_email_input( 'email', '' ) ?></span>
 				<span class="label-style"></span>

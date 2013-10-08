@@ -169,25 +169,25 @@ if( $f_error || $f_cookie_error ) {
 			}
 			?>
 			</ul>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="username"><span><?php echo lang_get( 'username' ) ?></span></label>
 				<span class="input"><input id="username" type="text" name="username" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" value="<?php echo string_attribute( $f_username ); ?>" class="<?php echo $t_username_field_autofocus ?>" /></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="password"><span><?php echo lang_get( 'password' ) ?></span></label>
 				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" class="<?php echo $t_password_field_autofocus ?>" /></span>
 				<span class="label-style"></span>
 			</div>
 			<?php if( ON == config_get( 'allow_permanent_cookie' ) ) { ?>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="remember-login"><span><?php echo lang_get( 'save_login' ) ?></span></label>
 				<span class="input"><input id="remember-login" type="checkbox" name="perm_login" <?php echo ( $f_perm_login ? 'checked="checked" ' : '' ) ?>/></span>
 				<span class="label-style"></span>
 			</div>
 			<?php } ?>
 			<?php if ( $t_session_validation ) { ?>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label id="secure-session-label" for="secure-session"><span><?php echo lang_get( 'secure_session' ) ?></span></label>
 				<span class="input">
 					<input id="secure-session" type="checkbox" name="secure_session" <?php echo ( $t_default_secure_session ? 'checked="checked" ' : '' ) ?>/>

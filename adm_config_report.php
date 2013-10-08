@@ -354,7 +354,7 @@ while( $row = db_fetch_array( $result ) ) {
 
 ?>
 <!-- Repeated Info Rows -->
-		<tr <?php echo helper_alternate_class() ?> width="100%">
+		<tr width="100%">
 			<td >
 				<?php echo ($v_user_id == 0) ? lang_get( 'all_users' ) : string_display_line( user_get_name( $v_user_id ) ) ?>
 			</td>
@@ -428,7 +428,7 @@ if( $t_read_write_access ) {
 		</span></legend>
 
 		<!-- Username -->
-		<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+		<div class="field-container">
 			<label for="config-user-id"><span><?php echo lang_get( 'username' ) ?></span></label>
 			<span class="select">
 				<select id="config-user-id" name="user_id">
@@ -443,7 +443,7 @@ if( $t_read_write_access ) {
 		</div>
 
 			<!-- Project -->
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="config-project-id"><span><?php echo lang_get( 'project_name' ) ?></span></label>
 				<span class="select">
 					<select id="config-project-id" name="project_id">
@@ -458,7 +458,7 @@ if( $t_read_write_access ) {
 			</div>
 
 			<!-- Config option name -->
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="config-option"><span><?php echo lang_get( 'configuration_option' ) ?></span></label>
 				<span class="input">
 					<input type="text" name="config_option"
@@ -469,7 +469,7 @@ if( $t_read_write_access ) {
 			</div>
 
 			<!-- Option type -->
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="config-type"><span><?php echo lang_get( 'configuration_option_type' ) ?></span></label>
 				<span class="select">
 					<select id="config-type" name="type">
@@ -480,7 +480,7 @@ if( $t_read_write_access ) {
 			</div>
 
 			<!-- Option Value -->
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="config-value"><span><?php echo lang_get( 'configuration_option_value' ) ?></span></label>
 				<span class="textarea">
 					<textarea name="value" cols="80" rows="10"><?php

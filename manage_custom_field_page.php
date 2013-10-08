@@ -68,7 +68,7 @@ print_manage_menu( 'manage_custom_field_page.php' );
 		$t_custom_fields = custom_field_get_ids();
 		foreach( $t_custom_fields as $t_field_id ) {
 			$t_desc = custom_field_get_definition( $t_field_id ); ?>
-		<tr <?php echo helper_alternate_class() ?>>
+		<tr>
 			<td>
 				<a href="manage_custom_field_edit_page.php?field_id=<?php echo $t_field_id ?>"><?php echo custom_field_get_display_name( $t_desc['name'] ) ?></a>
 			</td>

@@ -89,7 +89,7 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 		<?php echo lang_get( 'reminder' ) ?>
 	</th>
 </tr>
-<tr <?php echo helper_alternate_class() ?>>
+<tr>
 	<td>
 		<select name="to[]" multiple="multiple" size="10">
 			<?php

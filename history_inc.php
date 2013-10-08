@@ -83,7 +83,7 @@ if ( !access_has_bug_level( $t_access_level_needed, $f_bug_id ) ) {
 <?php
 	foreach ( $t_history as $t_item ) {
 ?>
-<tr <?php echo helper_alternate_class() ?>>
+<tr>
 	<td class="small-caption">
 		<?php echo $t_item['date'] ?>
 	</td>

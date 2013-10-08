@@ -315,7 +315,7 @@ $user_count = db_num_rows( $result );
 		if( !isset( $t_access_level[$u_access_level] ) ) {
 			$t_access_level[$u_access_level] = get_enum_element( 'access_levels', $u_access_level );
 		} ?>
-		<tr <?php echo helper_alternate_class( $i ) ?>>
+		<tr>
 			<td><?php
 				if ( access_has_global_level( $u_access_level ) ) { ?>
 					<a href="manage_user_edit_page.php?user_id=<?php echo $u_id ?>"><?php echo string_display_line( $u_username ) ?></a><?php
@@ -346,21 +346,17 @@ $user_count = db_num_rows( $result );
 		?>
 	</div>
 </div>
-<?php
-	# Manage Form END
-	helper_alternate_class_no_attribute(0);
-?>
-	<div id="manage-user-edit-div" class="form-container">
-		<form id="manage-user-edit-form" method="get" action="manage_user_edit_page.php"<?php # CSRF protection not required here - form does not result in modifications ?>>
-			<fieldset>
-				<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
-					<label for="username"><span><?php echo lang_get( 'search' ) ?></span></label>
-					<span class="input"><input id="username" type="text" name="username" value="" /></span>
-					<span class="label-style"></span>
-				</div>
-				<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'manage_user' ) ?>" /></span>
-			</fieldset>
-		</form>
-	</div>
+<div id="manage-user-edit-div" class="form-container">
+	<form id="manage-user-edit-form" method="get" action="manage_user_edit_page.php"<?php # CSRF protection not required here - form does not result in modifications ?>>
+		<fieldset>
+			<div class="field-container">
+				<label for="username"><span><?php echo lang_get( 'search' ) ?></span></label>
+				<span class="input"><input id="username" type="text" name="username" value="" /></span>
+				<span class="label-style"></span>
+			</div>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'manage_user' ) ?>" /></span>
+		</fieldset>
+	</form>
+</div>
 <?php
 html_page_bottom();

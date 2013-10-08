@@ -61,20 +61,20 @@ print_manage_menu( 'manage_user_create_page.php' );
 		<fieldset>
 			<legend><span><?php echo lang_get( 'create_new_account_title' ) ?></span></legend>
 			<?php echo form_security_field( 'manage_user_create' ) ?>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="user-username"><span><?php echo lang_get( 'username' ) ?></span></label>
 				<span class="input"><input type="text" id="user-username" name="username" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" /></span>
 				<span class="label-style"></span>
 			</div><?php
 			if ( !$t_ldap || config_get( 'use_ldap_realname' ) == OFF ) { ?>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="user-realname"><span><?php echo lang_get( 'realname' ) ?></span></label>
 				<span class="input"><input type="text" id="user-realname" name="realname" size="32" maxlength="<?php echo DB_FIELD_SIZE_REALNAME;?>" /></span>
 				<span class="label-style"></span>
 			</div><?php
 			}
 			if ( !$t_ldap || config_get( 'use_ldap_email' ) == OFF ) { ?>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="email-field"><span><?php echo lang_get( 'email' ) ?></span></label>
 				<span class="input"><?php print_email_input( 'email', '' ) ?></span>
 				<span class="label-style"></span>
@@ -82,18 +82,18 @@ print_manage_menu( 'manage_user_create_page.php' );
 			}
 
 			if ( OFF == config_get( 'send_reset_password' ) )  { ?>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="user-password"><span><?php echo lang_get( 'password' ) ?></span></label>
 				<span class="input"><input type="password" id="user-password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="user-verify-password"><span><?php echo lang_get( 'verify_password' ) ?></span></label>
 				<span class="input"><input type="password" id="user-verify-password" name="password_verify" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
 				<span class="label-style"></span>
 			</div><?php
 			} ?>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="user-access-level"><span><?php echo lang_get( 'access_level' ) ?></span></label>
 				<span class="select">
 					<select id="user-access-level" name="access_level">
@@ -102,12 +102,12 @@ print_manage_menu( 'manage_user_create_page.php' );
 				</span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="user-enabled"><span><?php echo lang_get( 'enabled' ) ?></span></label>
 				<span class="checkbox"><input type="checkbox" id="user-enabled" name="enabled" checked="checked" /></span>
 				<span class="label-style"></span>
 			</div>
-			<div class="field-container <?php echo helper_alternate_class_no_attribute(); ?>">
+			<div class="field-container">
 				<label for="user-protected"><span><?php echo lang_get( 'protected' ) ?></span></label>
 				<span class="checkbox"><input type="checkbox" id="user-protected" name="protected" /></span>
 				<span class="label-style"></span>

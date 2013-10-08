@@ -34,7 +34,7 @@ print_manage_menu( );
 	</td>
 </tr>
 
-<tr <?php echo helper_alternate_class( )?>>
+<tr>
 	<td class="category" width="60%">
 		<?php echo lang_get( 'plugin_format_process_text' )?>
 		<br /><span class="small"><?php echo lang_get( 'plugin_format_process_text_warning_notice' )?></span>
@@ -49,7 +49,7 @@ print_manage_menu( );
 	</td>
 </tr>
 
-<tr <?php echo helper_alternate_class( )?>>
+<tr>
 	<th class="category">
 		<?php echo lang_get( 'plugin_format_process_urls' )?>
 	</th>
@@ -63,7 +63,7 @@ print_manage_menu( );
 	</td>
 </tr>
 
-<tr <?php echo helper_alternate_class( )?>>
+<tr>
 	<th class="category">
 		<?php echo lang_get( 'plugin_format_process_buglinks' )?>
 	</th>
