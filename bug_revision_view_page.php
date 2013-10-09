@@ -103,33 +103,31 @@ function show_revision( $t_revision ) {
 	}
 
 	switch( $t_revision['type'] ) {
-	case REV_DESCRIPTION:
-		$t_label = lang_get( 'description' );
-		break;
-	case REV_STEPS_TO_REPRODUCE:
-		$t_label = lang_get( 'steps_to_reproduce' );
-		break;
-	case REV_ADDITIONAL_INFO:
-		$t_label = lang_get( 'additional_information' );
-		break;
+		case REV_DESCRIPTION:
+			$t_label = lang_get( 'description' );
+			break;
+		case REV_STEPS_TO_REPRODUCE:
+			$t_label = lang_get( 'steps_to_reproduce' );
+			break;
+		case REV_ADDITIONAL_INFO:
+			$t_label = lang_get( 'additional_information' );
+			break;
+		case REV_BUGNOTE:
+			if ( is_null( $s_user_access ) ) {
+				$s_user_access = access_has_bug_level( config_get( 'private_bugnote_threshold' ), $t_revision['bug_id'] );
+			}
 
-	case REV_BUGNOTE:
-		if ( is_null( $s_user_access ) ) {
-			$s_user_access = access_has_bug_level( config_get( 'private_bugnote_threshold' ), $t_revision['bug_id'] );
-		}
+			if ( !$s_user_access ) {
+				return null;
+			}
 
-		if ( !$s_user_access ) {
-			return null;
-		}
-
-		$t_label = lang_get( 'bugnote' );
-		break;
-
-	default:
-		$t_label = '';
+			$t_label = lang_get( 'bugnote' );
+			break;
+		default:
+			$t_label = '';
 	}
 
-$t_by_string = sprintf( lang_get( 'revision_by' ), string_display_line( date( config_get( 'normal_date_format' ), $t_revision['timestamp'] ) ), string_display_line( user_get_name( $t_revision['user_id'] ) ) );
+	$t_by_string = sprintf( lang_get( 'revision_by' ), string_display_line( date( config_get( 'normal_date_format' ), $t_revision['timestamp'] ) ), string_display_line( user_get_name( $t_revision['user_id'] ) ) );
 
 ?>
 <tr class="spacer"><td><a id="revision-<?php echo $t_revision['id'] ?>"></a></td></tr>
