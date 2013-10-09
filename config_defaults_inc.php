@@ -793,12 +793,6 @@ $g_fallback_language = 'english';
 $g_window_title = 'MantisBT';
 
 /**
- * title at top of html page (empty by default, since there is a logo now)
- * @global string $g_page_title
- */
-$g_page_title = '';
-
-/**
  * Check for admin directory, database upgrades, etc.
  * @global int $g_admin_checks
  */
@@ -3347,6 +3341,13 @@ $g_bottom_include_page = '%absolute_path%';
 /**
  * Specify your top/bottom include file (logos, banners, etc). If a top file is
  * supplied, the default MantisBT logo at the top will be hidden.
+ * For example, you could include a centered title at the top of the page with:
+ *
+ * <div class="center"><span class="pagetitle">TITLE</span></div>
+ *
+ * The default banner which is removed if you use an include file can be found in html_api.php in
+ * the function called html_top_banner.
+ *
  * @global string $g_top_include_page
  */
 $g_top_include_page = '%absolute_path%';

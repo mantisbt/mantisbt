@@ -165,3 +165,4 @@ config_obsolete( 'administrator_email', 'webmaster_email' );
 config_obsolete( 'session_key' );
 config_obsolete( 'dhtml_filters', 'use_dynamic_filters' );
 config_obsolete( 'use_iis' );
+config_obsolete( 'page_title', 'top_include_page' );
