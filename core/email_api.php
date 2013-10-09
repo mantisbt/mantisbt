@@ -571,10 +571,9 @@ function email_notify_new_account( $p_username, $p_email ) {
  * @param int $p_message_id
  * @param array $p_header_optional_params = null
  * @param array $p_extra_user_ids_to_email
- * @return bool
+ * @return null
  */
 function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, $p_header_optional_params = null, $p_extra_user_ids_to_email = array() ) {
-	$t_ok = true;
 
 	if( ON === config_get( 'enable_email_notification' ) ) {
 		ignore_user_abort( true );
@@ -596,7 +595,7 @@ function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, $p_head
 				lang_push( user_pref_get_language( $t_user_id, $t_project_id ) );
 
 				$t_visible_bug_data = email_build_visible_bug_data( $t_user_id, $p_bug_id, $p_message_id );
-				$t_ok = email_bug_info_to_one_user( $t_visible_bug_data, $p_message_id, $t_project_id, $t_user_id, $p_header_optional_params ) && $t_ok;
+				email_bug_info_to_one_user( $t_visible_bug_data, $p_message_id, $t_project_id, $t_user_id, $p_header_optional_params );
 
 				lang_pop();
 			}
@@ -608,7 +607,7 @@ function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, $p_head
 		}
 	}
 
-	return $t_ok;
+	return;
 }
 
 /**
@@ -1201,7 +1200,7 @@ function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
  * @param int $p_project_id
  * @param int $p_user_id
  * @param array $p_header_optional_params
- * @return bool
+ * @return null
  */
 function email_bug_info_to_one_user( $p_visible_bug_data, $p_message_id, $p_project_id, $p_user_id, $p_header_optional_params = null ) {
 	$t_user_email = user_get_email( $p_user_id );
@@ -1209,7 +1208,7 @@ function email_bug_info_to_one_user( $p_visible_bug_data, $p_message_id, $p_proj
 	# check whether email should be sent
 	# @@@ can be email field empty? if yes - then it should be handled here
 	if( ON !== config_get( 'enable_email_notification' ) || is_blank( $t_user_email ) ) {
-		return true;
+		return;
 	}
 
 	# build subject
@@ -1242,9 +1241,9 @@ function email_bug_info_to_one_user( $p_visible_bug_data, $p_message_id, $p_proj
 	}
 
 	# send mail
-	$t_ok = email_store( $t_user_email, $t_subject, $t_message, $t_mail_headers );
+	email_store( $t_user_email, $t_subject, $t_message, $t_mail_headers );
 
-	return $t_ok;
+	return;
 }
 
 /**
