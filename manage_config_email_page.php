@@ -162,6 +162,7 @@ function show_notify_threshold( $p_access, $p_action ) {
 function get_section_begin_for_email( $p_section_name ) {
 	global $t_project;
 	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
+	echo '<div class="form-container">'. "\n";
 	echo '<table class="width100">';
 	echo '<tr><td class="form-title-caps" colspan="' . ( count( $t_access_levels ) + 7 ) . '">' . $p_section_name . '</td></tr>' . "\n";
 	echo '<tr><td class="form-title" width="30%" rowspan="2">' . lang_get( 'message' ) . '</td>';
@@ -195,7 +196,7 @@ function get_capability_row_for_email( $p_caption, $p_message_type ) {
 }
 
 function get_section_end_for_email() {
-	echo '</table><br />' . "\n";
+	echo '</table></div><br />' . "\n";
 }
 
 

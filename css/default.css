@@ -6,7 +6,7 @@ body {
 	margin: 6px 4px;
 }
 
-p 					{ font-family: Verdana, Arial, Helvetica, sans-serif; }
+p				{ font-family: Verdana, Arial, Helvetica, sans-serif; }
 
 pre				{ margin-top: 0px; margin-bottom: 0px; }
 
@@ -34,11 +34,6 @@ span.small 			{ font-size: 8pt; font-weight: normal; }
 span.pagetitle		{ font-size: 12pt; font-weight: bold; text-align: center }
 span.bracket-link	{ white-space: nowrap; }
 
-span.dependency_dated		{ color: maroon; }
-span.dependency_met			{ color: green; }
-span.dependency_unmet		{ color: red; }
-span.dependency_upgrade		{ color: orange; }
-
 table				{ border: none; }
 table td, table th	{ border: none; border-spacing: 0px; }
 table.hide			{ width: 100%; border: solid 0px #ffffff; }
@@ -54,7 +49,7 @@ td.left				{ text-align: left; }
 td.right			{ text-align: right; }
 td.category, th.category		{ background-color: #c8c8e8; color: #000000; font-weight: bold; vertical-align : top; }
 td.overdue			{ background-color: #ff0000; color: #000000; font-weight: bold; }
-
+td.width30		{ width: 30%; }
 td.col-1			{ background-color: #d8d8d8; color: #000000; }
 td.col-2			{ background-color: #e8e8e8; color: #000000; }
 td.form-title		{ background-color: #ffffff; color: #000000; font-weight: bold; text-align: left; }
@@ -113,11 +108,7 @@ tr.bugnote .time-tracked,
 #project-selector select{ font-size: small; line-height: 1em; }
 #project-selector select{ font-size: small; line-height: 1em; }
 #project-selector .button { font-size: small; line-height: 1em; padding: 0; margin: 0; }
-#rss-feed { float: right; width: 16px; z-index: 0; padding: .5em 0; margin: 0; }
-
-td.login-info-left		{ width: 33%; padding: 0px; text-align: left; }
-td.login-info-middle	{ width: 33%; padding: 0px; text-align: center; }
-td.login-info-right		{ width: 33%; padding: 0px; text-align: right; white-space: nowrap; }
+#rss-feed { float: right; width: 16px; z-index: 0; margin: 0; }
 
 .bug-jump { clear: both; display:block; float: right; padding: .25em; margin: 0; position: relative; top: .3em; z-index: 100; border: none; }
 .main-menu { float: right; width:100%; margin: 0; padding: 0; overflow: hidden; font-size: 1em; position: relative; top: -2em; border: 1px solid #999; background-color: #e8e8e8; z-index: 99; }
@@ -353,9 +344,9 @@ td.tainted input[type="text"], td.tainted select { background-color: #ffffff; co
 select.tainted { background-color: #ffffff; color: red; }
 
 #filter_open, #filter_closed { position: relative; border: 1px solid #000; padding: 0; margin: 0; }
-#filter_open_link, #filter_closed_link { float: left; position: relative; top: 1em; padding: 0 .5em; margin: 0; }
+#filter_open_link, #filter_closed_link { float: left; position: relative; top: 0.5em; padding: 0 .5em; margin: 0; }
 .search-box { float: left; position: relative; padding: 0; margin: 0; }
-.search-box, .save-query, .submit-query, .stored-queries, .manage-queries { top: .3em; }
+.manage-queries, .reset-query, .save-query, .search-box, .stored-queries, .submit-query { top: .3em; }
 .submit-query, .save-query {  float: left; position: relative; padding: 0 .5em; margin: 0; font-size: 1em; }
 .filter-links, .stored-queries, .manage-queries, .reset-query { float: right; position: relative; padding: 0 .5em; margin: 0; z-index: 100; }
 .save-query {  float: right; }
@@ -512,8 +503,11 @@ div.form-container fieldset label.required:before {
 }
 fieldset > .field-container:nth-child(2n+1),
 form > table > tr:nth-child(2n+1),
+div.table-container > table > tbody > tr:nth-child(2n+1),
 table#manage-overview-table > tr:nth-child(2n+1),
 div.form-container > table > tr:nth-child(2n+2),
+div.form-container > table > tbody > tr:nth-child(2n+2),
+div.table-container > table > tbody > tr:nth-child(2n+2),
 div.table-container > table > tr:nth-child(2n+2) {
 	background-color: #d8d8d8;
 }
@@ -521,6 +515,8 @@ fieldset > .field-container:nth-child(2n),
 form > table > tr:nth-child(2n+2),
 table#manage-overview-table > tr:nth-child(2n),
 div.form-container > table > tr:nth-child(2n+3),
+div.form-container > table > tbody > tr:nth-child(2n+3),
+div.table-container > table > tbody > tr:nth-child(2n+3),
 div.table-container > table > tr:nth-child(2n+3) {
 	background-color: #e8e8e8;
 }
@@ -650,11 +646,7 @@ div.important-msg ul li {
 	margin-left: 2em;
 	background-color: #fceded;
 }
-.continue-link {
-	clear: both;
-	display: block;
-	text-align: center;
-}
+
 ul.project-list { list-style: none; margin: .5em 0em 2em 0em; padding: 0em .5em; }
 ul.project-list li { margin: 0em; line-height: 1.25em; clear: both; min-width: 30em; }
 ul.project-list li span.access-level:before { content: ' ['; }
@@ -674,3 +666,8 @@ tr.bugnote-private td.bugnote-meta { background-color: #e8e8e8; }
 
 div#mantis.centered_page div#banner { text-align: center; }
 
+/* manage_plugin_page.php */
+span.dependency_dated		{ color: maroon; }
+span.dependency_met			{ color: green; }
+span.dependency_unmet		{ color: red; }
+span.dependency_upgrade		{ color: orange; }

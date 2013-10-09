@@ -330,7 +330,6 @@ $result = db_query_bound( $query );
 <div>
 <div id="adm-config-div" class="table-container" style="display: table">
 	<h2><?php echo lang_get( 'database_configuration' ) ?></h2>
-<!--	<table cellspacing="1" cellpadding="5" border="1"> -->
 	<table cellspacing="1" width="100%">
 		<tr class="row-category">
 			<th><?php echo lang_get( 'username' ) ?></th>

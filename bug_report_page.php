@@ -224,10 +224,10 @@ html_page_top( lang_get( 'report_bug_link' ) );
 print_recently_visited();
 ?>
 <br />
-<div>
 <form name="report_bug_form" method="post" <?php if ( $tpl_show_attachments ) { echo 'enctype="multipart/form-data"'; } ?> action="bug_report.php">
 <?php echo form_security_field( 'bug_report' ) ?>
-<table class="width90" cellspacing="1">
+<div class="table-container">
+<table cellspacing="1">
 	<tr>
 		<td class="form-title" colspan="2">
 			<input type="hidden" name="m_id" value="<?php echo $f_master_bug_id ?>" />
@@ -358,7 +358,7 @@ print_recently_visited();
 			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
 				<?php collapse_open( 'profile' ); collapse_icon('profile'); ?>
 				<?php echo lang_get( 'or_fill_in' ); ?>
-			<table class="width90" cellspacing="0">
+			<table class="width100" cellspacing="0">
 					<?php } else { ?>
 						<?php echo lang_get( 'or_fill_in' ); ?>
 					<?php } ?>
@@ -667,7 +667,7 @@ print_recently_visited();
 		</td>
 	</tr>
 </table>
-</form>
 </div>
+</form>
 <?php
 html_page_bottom();

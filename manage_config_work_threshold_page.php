@@ -77,6 +77,7 @@ function set_overrides( $p_config ) {
 function get_section_begin_mcwt( $p_section_name ) {
 	global $t_access_levels;
 
+	echo '<div class="form-container">'. "\n";
 	echo '<table class="width100">';
 	echo '<tr><td class="form-title" colspan="' . ( count( $t_access_levels ) + 2 ) . '">' . $p_section_name . '</td></tr>' . "\n";
 	echo '<tr><td class="form-title" width="40%" rowspan="2">' . lang_get( 'perm_rpt_capability' ) . '</td>';
@@ -290,7 +291,7 @@ function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects
 }
 
 function get_section_end() {
-	echo '</table><br />' . "\n";
+	echo '</table></div><br />' . "\n";
 }
 
 

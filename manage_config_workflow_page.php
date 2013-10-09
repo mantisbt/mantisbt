@@ -136,26 +136,27 @@ function show_flag( $p_from_status_id, $p_to_status_id ) {
 
 function section_begin( $p_section_name ) {
 	$t_enum_statuses = MantisEnum::getValues( config_get( 'status_enum_string' ) );
-	echo '<table class="width100">';
-	echo '<tr><td class="form-title-caps" colspan="' . ( count( $t_enum_statuses ) + 2 ) . '">'
-		. $p_section_name . '</td></tr>' . "\n";
-	echo '<tr><td class="form-title" width="30%" rowspan="2">' . lang_get( 'current_status' ) . '</td>';
-	echo '<td class="form-title" style="text-align:center" colspan="' . ( count( $t_enum_statuses ) + 1 ) . '">'
-		. lang_get( 'next_status' ) . '</td></tr>';
-	echo "\n<tr>";
+	echo '<div class="form-container">'. "\n";
+	echo "\t" . '<table class="width100">'. "\n";
+	echo "\t\t" . '<tr>' . "\n\t\t\t" . '<td class="form-title-caps" colspan="' . ( count( $t_enum_statuses ) + 2 ) . '">'
+		. $p_section_name . '</td>' . "\n\t\t" . '</tr>' . "\n";
+	echo "\t\t" . '<tr>' . "\n\t\t\t" . '<td class="form-title width30" rowspan="2">' . lang_get( 'current_status' ) . '</td>'. "\n";
+	echo "\t\t\t" . '<td class="form-title" style="text-align:center" colspan="' . ( count( $t_enum_statuses ) + 1 ) . '">'
+		. lang_get( 'next_status' ) . '</td>' . "\n\t\t" . '</tr>'. "\n";
+	echo "\t\t<tr>". "\n";
 
 	foreach( $t_enum_statuses as $t_status ) {
-		echo '<td class="form-title" style="text-align:center">&#160;' . string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_status ) ) . '&#160;</td>';
+		echo "\t\t\t" . '<td class="form-title" style="text-align:center">&#160;' . string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_status ) ) . '&#160;</td>' ."\n";
 	}
 
-	echo '<td class="form-title" style="text-align:center">' . lang_get( 'custom_field_default_value' ) . '</td>';
-	echo '</tr>' . "\n";
+	echo "\t\t\t" . '<td class="form-title" style="text-align:center">' . lang_get( 'custom_field_default_value' ) . '</td>' . "\n";
+	echo "\t\t" . '</tr>' . "\n";
 }
 
 function capability_row( $p_from_status ) {
 	global $t_file_workflow, $t_global_workflow, $t_project_workflow, $t_can_change_workflow;
 	$t_enum_status = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
-	echo '<tr><td>' . string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $p_from_status ) ) . '</td>';
+	echo "\t\t" .'<tr><td>' . string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $p_from_status ) ) . '</td>' . "\n";
 	foreach ( $t_enum_status as $t_to_status_id => $t_to_status_label ) {
 		echo show_flag( $p_from_status, $t_to_status_id );
 	}
@@ -168,7 +169,7 @@ function capability_row( $p_from_status ) {
 	if ( $t_can_change_workflow && $t_colour != '' ) {
 		set_overrides( 'status_enum_workflow' );
 	}
-	echo '<td class="center"' . $t_colour . '>';
+	echo "\t\t\t" . '<td class="center"' . $t_colour . '>';
 	if ( $t_can_change_workflow ) {
 		echo '<select name="default_' . $p_from_status . '">';
 		print_enum_string_option_list( 'status', $t_project );
@@ -176,20 +177,21 @@ function capability_row( $p_from_status ) {
 	} else {
 		echo MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_project );
 	}
-	echo ' </td>';
-	echo '</tr>' . "\n";
+	echo ' </td>' . "\n";
+	echo "\t\t" . '</tr>' . "\n";
 }
 
 function section_end() {
-	echo '</table><br />' . "\n";
+	echo '</table></div><br />' . "\n";
 }
 
 function threshold_begin( $p_section_name ) {
+	echo '<div class="form-container">';
 	echo '<table class="width100">';
-	echo '<tr><td class="form-title" colspan="3">' . $p_section_name . '</td></tr>' . "\n";
-	echo '<tr><td class="form-title" width="30%">' . lang_get( 'threshold' ) . '</td>';
-	echo '<td class="form-title" >' . lang_get( 'status_level' ) . '</td>';
-	echo '<td class="form-title" >' . lang_get( 'alter_level' ) . '</td></tr>';
+	echo "\t" . '<tr><td class="form-title" colspan="3">' . $p_section_name . '</td></tr>' . "\n";
+	echo "\t" . '<tr><td class="form-title width30">' . lang_get( 'threshold' ) . '</td>' . "\n";
+	echo "\t\t" . '<td class="form-title" >' . lang_get( 'status_level' ) . '</td>' . "\n";
+	echo "\t\t" . '<td class="form-title" >' . lang_get( 'alter_level' ) . '</td></tr>' . "\n";
 	echo "\n";
 }
 
@@ -206,32 +208,32 @@ function threshold_row( $p_threshold ) {
 		set_overrides( $p_threshold );
 	}
 
-	echo '<tr><td>' . lang_get( 'desc_' . $p_threshold ) . '</td>';
+	echo '<tr><td>' . lang_get( 'desc_' . $p_threshold ) . '</td>' . "\n";
 	if ( $t_can_change_threshold ) {
 		echo '<td' . $t_colour . '><select name="threshold_' . $p_threshold . '">';
 		print_enum_string_option_list( 'status', $t_project );
-		echo '</select> </td>';
+		echo '</select> </td>' . "\n";
 		echo '<td><select name="access_' . $p_threshold . '">';
 		print_enum_string_option_list( 'access_levels', config_get_access( $p_threshold ) );
-		echo '</select> </td>';
+		echo '</select> </td>' . "\n";
 		$t_can_change_flags = true;
 	} else {
-		echo '<td' . $t_colour . '>' . MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_project ) . '&#160;</td>';
-		echo '<td>' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), config_get_access( $p_threshold ) ) . '&#160;</td>';
+		echo '<td' . $t_colour . '>' . MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_project ) . '&#160;</td>' . "\n";
+		echo '<td>' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), config_get_access( $p_threshold ) ) . '&#160;</td>' . "\n";
 	}
 
 	echo '</tr>' . "\n";
 }
 
 function threshold_end() {
-	echo '</table><br />' . "\n";
+	echo '</table></div><br />' . "\n";
 }
 
 function access_begin( $p_section_name ) {
+	echo '<div class="form-container">';
 	echo '<table class="width100">';
-	echo '<tr><td class="form-title" colspan="2">'
-		. $p_section_name . '</td></tr>' . "\n";
-	echo '<tr><td class="form-title" colspan="2">' . lang_get( 'access_change' ) . '</td></tr>';
+	echo "\t\t" . '<tr><td class="form-title" colspan="2">' . $p_section_name . '</td></tr>' . "\n";
+	echo "\t\t" . '<tr><td class="form-title" colspan="2">' . lang_get( 'access_change' ) . '</td></tr>' . "\n";
 }
 
 function access_row() {
@@ -252,9 +254,8 @@ function access_row() {
 	# Print the table rows
 	foreach( $t_enum_status as $t_status => $t_status_label ) {
 
-		echo '<tr><td width="30%">'
-			. string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_status ) )
-			. '</td>';
+		echo "\t\t" . '<tr><td class="width30">'
+			. string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_status ) ) . '</td>' . "\n";
 
 		if( $t_status == $t_submit_status ) {
 			# 'NEW' status
@@ -286,19 +287,23 @@ function access_row() {
 		}
 
 		if ( $t_can_change ) {
-			echo '<td' . $t_colour . '><select name="access_change_' . $t_status . '">';
+			echo '<td' . $t_colour . '><select name="access_change_' . $t_status . '">' . "\n";
 			print_enum_string_option_list( 'access_levels', $t_level_project );
-			echo '</select> </td>';
+			echo '</select> </td>' . "\n";
 			$t_can_change_flags = true;
 		} else {
 			echo '<td class="center"' . $t_colour . '>'
 				. MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_level_project )
-				. '</td>';
+				. '</td>' . "\n";
 		}
 
 		echo '</tr>' . "\n";
 	}
 } # end function access_row
+
+function access_end() {
+	echo '</table></div><br />' . "\n";
+}
 
 echo '<br /><br />';
 
@@ -383,7 +388,7 @@ echo '<br />';
 if ( '' <> $t_validation_result ) {
 	echo '<table class="width100">';
 	echo '<tr><td class="form-title" colspan="3">' . lang_get( 'validation' ) . '</td></tr>' . "\n";
-	echo '<tr><td class="form-title" width="30%">' . lang_get( 'status' ) . '</td>';
+	echo '<tr><td class="form-title width30">' . lang_get( 'status' ) . '</td>';
 	echo '<td class="form-title" >' . lang_get( 'comment' ) . '</td></tr>';
 	echo "\n";
 	echo $t_validation_result;
@@ -412,7 +417,7 @@ if ( $t_can_change_workflow ) {
 # display the access levels required to move an issue
 access_begin( lang_get( 'access_levels' ) );
 access_row();
-section_end();
+access_end();
 
 if ( $t_access >= config_get_access( 'set_status_threshold' ) ) {
 	echo '<p>' . lang_get( 'access_change_access_label' );
