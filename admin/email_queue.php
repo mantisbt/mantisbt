@@ -27,6 +27,8 @@ require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' 
 
 access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 
+html_page_top();
+
 $f_to = gpc_get( 'send', null );
 
 if ( $f_to !== null ) {
@@ -73,8 +75,11 @@ if( count( $t_ids ) > 0 ) {
 			, '</td></tr>';
 	}
 	echo '</table>';
+
+	html_button( 'email_queue.php', 'Send All', array( 'send' => 'all') );
+	html_button( 'email_queue.php', 'Send Or Delete All', array( 'send' => 'sendordelall') );
 } else {
+	echo 'Email Queue Empty';
 }
 
-html_button( 'email_queue.php', 'Send All', array( 'send' => 'all') );
-html_button( 'email_queue.php', 'Send Or Delete All', array( 'send' => 'sendordelall') );
+html_page_bottom();
