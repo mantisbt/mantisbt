@@ -473,12 +473,12 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 /**
  * Generate a random 16 character password.
  * @todo Review use of $p_email within mantis
+ * @todo create memorable passwords?
  * @param string $p_email unused
  * @return string 16 character random password
  * @access public
  */
 function auth_generate_random_password() {
-	# !TODO: create memorable passwords?
 	return crypto_generate_uri_safe_nonce( 16 );
 }
 
