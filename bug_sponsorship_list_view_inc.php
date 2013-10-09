@@ -175,13 +175,12 @@ if ( $t_show_sponsorships ) {
 					. lang_get( 'sponsorship_more_info' ) . '</a>]';
 			}
 
-	$t_total_sponsorship = bug_get_field( $f_bug_id, 'sponsorship_total' );
-	if ( $t_total_sponsorship > 0 ) {
-		echo ' <span style="font-weight: normal;">(';
-		echo sprintf( lang_get( 'total_sponsorship_amount' ),
-			sponsorship_format_amount( $t_total_sponsorship ) );
-		echo ')</span>';
-	}
+			if ( $t_total_sponsorship > 0 ) {
+				echo ' <span style="font-weight: normal;">(';
+				echo sprintf( lang_get( 'total_sponsorship_amount' ),
+				sponsorship_format_amount( $t_total_sponsorship ) );
+				echo ')</span>';
+			}
 ?>
 		</td>
 	</tr>
