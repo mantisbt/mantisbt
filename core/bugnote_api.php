@@ -73,6 +73,8 @@ class BugnoteData {
 	var $note_type;
 	var $note_attr;
 	var $time_tracking;
+
+	var $bugnote_text_id;
 }
 
 /**
@@ -314,20 +316,28 @@ function bugnote_get_text( $p_bugnote_id ) {
  * @access public
  */
 function bugnote_get_field( $p_bugnote_id, $p_field_name ) {
+	static $t_vars;
 	global $g_cache_bugnote;
 
 	if( isset( $g_cache_bugnote[(int)$p_bugnote_id] ) ) {
 		return $g_cache_bugnote[(int)$p_bugnote_id]->$p_field_name;
 	}
 
-	$c_bugnote_id = db_prepare_int( $p_bugnote_id );
-	$c_field_name = db_prepare_string( $p_field_name );
+	if ($t_vars == null ) {
+		$t_vars = getClassProperties( 'BugnoteData', 'public');
+	}
+
+	if( !array_key_exists( $p_field_name, $t_vars ) ) {
+		error_parameters($p_field_name);
+		trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
+	}
+
 	$t_bugnote_table = db_get_table( 'bugnote' );
 
-	$query = "SELECT $c_field_name
+	$query = "SELECT $p_field_name
 		          	FROM $t_bugnote_table
 		          	WHERE id=" . db_param();
-	$result = db_query_bound( $query, array( $c_bugnote_id ), 1 );
+	$result = db_query_bound( $query, array( $p_bugnote_id ), 1 );
 
 	return db_result( $result );
 }
