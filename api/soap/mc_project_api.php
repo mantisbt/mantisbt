@@ -120,7 +120,7 @@ function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page
  *
  * @param string $p_username  The name of the user trying to access the project list.
  * @param string $p_password  The password of the user.
- * @return Array  suitable to be converted into a ProjectDataArray
+ * @return array  suitable to be converted into a ProjectDataArray
  */
 function mc_projects_get_user_accessible( $p_username, $p_password ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
@@ -159,7 +159,7 @@ function mc_projects_get_user_accessible( $p_username, $p_password ) {
  * @param string $p_username  The name of the user trying to access the categories.
  * @param string $p_password  The password of the user.
  * @param integer $p_project_id  The id of the project to retrieve the categories for.
- * @return Array  of categorie names
+ * @return array  of categorie names
  */
 function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
     global $g_project_override;
@@ -295,7 +295,7 @@ function mc_project_rename_category_by_name( $p_username, $p_password, $p_projec
  * @param string $p_username  The name of the user trying to access the versions.
  * @param string $p_password  The password of the user.
  * @param integer $p_project_id  The id of the project to retrieve the versions for.
- * @return Array  representing a ProjectVersionDataArray structure.
+ * @return array  representing a ProjectVersionDataArray structure.
  */
 function mc_project_get_versions( $p_username, $p_password, $p_project_id ) {
     global $g_project_override;
@@ -328,7 +328,7 @@ function mc_project_get_versions( $p_username, $p_password, $p_project_id ) {
  * @param string $p_username  The name of the user trying to access the versions.
  * @param string $p_password  The password of the user.
  * @param integer $p_project_id  The id of the project to retrieve the versions for.
- * @return Array  representing a ProjectVersionDataArray structure.
+ * @return array  representing a ProjectVersionDataArray structure.
  */
 function mc_project_get_released_versions( $p_username, $p_password, $p_project_id ) {
 	global $g_project_override;
@@ -362,7 +362,7 @@ function mc_project_get_released_versions( $p_username, $p_password, $p_project_
  * @param string $p_username  The name of the user trying to access the versions.
  * @param string $p_password  The password of the user.
  * @param integer $p_project_id  The id of the project to retrieve the versions for.
- * @return Array  representing a ProjectVersionDataArray structure.
+ * @return array  representing a ProjectVersionDataArray structure.
  */
 function mc_project_get_unreleased_versions( $p_username, $p_password, $p_project_id ) {
     global $g_project_override;
@@ -395,7 +395,7 @@ function mc_project_get_unreleased_versions( $p_username, $p_password, $p_projec
  *
  * @param string $p_username  The name of the user trying to add the issue.
  * @param string $p_password  The password of the user.
- * @param Array $p_version  A ProjectVersionData structure containing information about the new verison.
+ * @param array $p_version  A ProjectVersionData structure containing information about the new verison.
  * @return integer  The id of the created version.
  */
 function mc_project_version_add( $p_username, $p_password, $p_version ) {
@@ -464,7 +464,7 @@ function mc_project_version_add( $p_username, $p_password, $p_version ) {
  * @param string $p_username  The name of the user trying to update the issue.
  * @param string $p_password  The password of the user.
  * @param integer $p_version_id A version's id
- * @param Array $p_version  A ProjectVersionData structure containing information about the new verison.
+ * @param array $p_version  A ProjectVersionData structure containing information about the new verison.
  * @return bool returns true or false depending on the success of the update action
  */
 function mc_project_version_update( $p_username, $p_password, $p_version_id, $p_version ) {
@@ -583,7 +583,7 @@ function mc_project_version_delete( $p_username, $p_password, $p_version_id ) {
  * @param string $p_username  The name of the user trying to access the versions.
  * @param string $p_password  The password of the user.
  * @param integer $p_project_id  The id of the project to retrieve the custom fields for.
- * @return Array  representing a CustomFieldDefinitionDataArray structure.
+ * @return array  representing a CustomFieldDefinitionDataArray structure.
  */
 function mc_project_get_custom_fields( $p_username, $p_password, $p_project_id ) {
 	global $g_project_override;
@@ -644,7 +644,7 @@ function mc_project_get_custom_fields( $p_username, $p_password, $p_project_id )
  * @param string $p_username  The name of the user trying to access the versions.
  * @param string $p_password  The password of the user.
  * @param integer $p_project_id  The id of the project to retrieve the attachments for.
- * @return Array  representing a ProjectAttachmentDataArray structure.
+ * @return array  representing a ProjectAttachmentDataArray structure.
  */
 function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
     global $g_project_override;
@@ -761,7 +761,7 @@ function mc_project_get_all_subprojects( $p_username, $p_password, $p_project_id
  * Get a project definition.
  *
  * @param integer $p_project_id  The id of the project to retrieve.
- * @return Array an Array containing the id and the name of the project.
+ * @return array an array containing the id and the name of the project.
  */
 function mci_project_as_array_by_id( $p_project_id ) {
 	$t_result = array();
@@ -795,7 +795,7 @@ function mc_project_get_id_from_name( $p_username, $p_password, $p_project_name 
  *
  * @param string $p_username  The name of the user trying to access the versions.
  * @param string $p_password  The password of the user.
- * @param Array $p_project A new ProjectData structure
+ * @param array $p_project A new ProjectData structure
  * @return integer the new project's project_id
  */
 function mc_project_add( $p_username, $p_password, $p_project ) {
@@ -871,7 +871,7 @@ function mc_project_add( $p_username, $p_password, $p_project ) {
  * @param string $p_username  The name of the user
  * @param string $p_password  The password of the user
  * @param integer $p_project_id A project's id
- * @param Array $p_project A new ProjectData structure
+ * @param array $p_project A new ProjectData structure
  * @return bool returns true or false depending on the success of the update action
  */
 function mc_project_update( $p_username, $p_password, $p_project_id, $p_project ) {
@@ -1020,7 +1020,7 @@ function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, 
  * @param string $p_password  The password of the user.
  * @param integer $p_project_id  The id of the project to retrieve the users for.
  * @param integer $p_access Minimum access level.
- * @return Array  representing a ProjectAttachmentDataArray structure.
+ * @return array  representing a ProjectAttachmentDataArray structure.
  */
 function mc_project_get_users( $p_username, $p_password, $p_project_id, $p_access ) {
     global $g_project_override;

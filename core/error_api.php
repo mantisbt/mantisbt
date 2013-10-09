@@ -371,7 +371,7 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 			$t_results[] = '[' . error_build_parameter_string( $t_key, false, $p_depth ) . ']' . ' => ' . error_build_parameter_string( $t_value, false, $p_depth );
 		}
 
-		return '<Array> { ' . implode( $t_results, ', ' ) . ' }';
+		return '<array> { ' . implode( $t_results, ', ' ) . ' }';
 	}
 	else if( is_object( $p_param ) ) {
 		$t_results = array();

@@ -147,7 +147,7 @@ function ini_get_number( $p_name ) {
 
 /**
  * Sort a multi-dimensional array by one of its keys
- * @param array $p_array Array to sort
+ * @param array $p_array array to sort
  * @param string $p_key key to sort array on
  * @param int $p_direction sort direction
  * @return array sorted array

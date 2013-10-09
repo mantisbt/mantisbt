@@ -60,7 +60,7 @@ if( function_exists( 'scandir' ) ) {
 	checklangdir( $t_mantis_dir );
 }
 else {
-	$t_lang_files = Array();
+	$t_lang_files = array();
 	foreach( $g_language_choices_arr as $t_lang ) {
 		if( $t_lang == 'auto' ) {
 			continue;
@@ -180,11 +180,11 @@ function checkfile( $p_path, $p_file, $p_quiet = false ) {
 		return true;
 }
 
-$basevariables = Array();
+$basevariables = array();
 
 function checktoken( $file, $base = false ) {
 	$in_php_code = false;
-	$variables = Array();
+	$variables = array();
 	global $basevariables;
 	$current_var = null;
 	$last_token = 0;

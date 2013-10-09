@@ -42,7 +42,7 @@ function mc_issue_exists( $p_username, $p_password, $p_issue_id ) {
  * @param string $p_username  The name of the user trying to access the issue.
  * @param string $p_password  The password of the user.
  * @param integer $p_issue_id  The id of the issue to retrieve.
- * @return Array that represents an IssueData structure
+ * @return array that represents an IssueData structure
  */
 function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	global $g_project_override;
@@ -127,7 +127,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 * @param string $p_username  The name of the user trying to access the issue.
 * @param string $p_password  The password of the user.
 * @param integer $p_issue_id  The id of the issue to retrieve.
-* @return Array that represents a HistoryDataArray structure
+* @return array that represents a HistoryDataArray structure
 */
 function mc_issue_get_history( $p_username, $p_password, $p_issue_id ) {
     global $g_project_override;
@@ -278,7 +278,7 @@ function mci_issue_get_custom_fields( $p_issue_id ) {
  * Get the attachments of an issue.
  *
  * @param integer $p_issue_id  The id of the issue to retrieve the attachments for
- * @return Array that represents an AttachmentData structure
+ * @return array that represents an AttachmentData structure
  */
 function mci_issue_get_attachments( $p_issue_id ) {
 	$t_attachment_rows = bug_get_attachments( $p_issue_id );
@@ -310,7 +310,7 @@ function mci_issue_get_attachments( $p_issue_id ) {
  * Get the relationships of an issue.
  *
  * @param integer $p_issue_id  The id of the issue to retrieve the relationships for
- * @return Array that represents an RelationShipData structure
+ * @return array that represents an RelationShipData structure
  */
 function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
 	$t_relationships = array();
@@ -350,7 +350,7 @@ function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
  * Get all visible notes for a specific issue
  *
  * @param integer $p_issue_id  The id of the issue to retrieve the notes for
- * @return Array that represents an IssueNoteData structure
+ * @return array that represents an IssueNoteData structure
  */
 function mci_issue_get_notes( $p_issue_id ) {
 	$t_user_id = auth_get_current_user_id();
@@ -459,35 +459,35 @@ function mc_issue_get_biggest_id( $p_username, $p_password, $p_project_id ) {
 	$t_none = defined( 'META_FILTER_NONE' ) ? META_FILTER_NONE : 'none';
 
 	$t_filter = array(
-		'category_id' => Array(
+		'category_id' => array(
 			'0' => $t_any,
 		),
-		'severity' => Array(
+		'severity' => array(
 			'0' => $t_any,
 		),
-		'status' => Array(
+		'status' => array(
 			'0' => $t_any,
 		),
 		'highlight_changed' => 0,
-		'reporter_id' => Array(
+		'reporter_id' => array(
 			'0' => $t_any,
 		),
-		'handler_id' => Array(
+		'handler_id' => array(
 			'0' => $t_any,
 		),
-		'resolution' => Array(
+		'resolution' => array(
 			'0' => $t_any,
 		),
-		'build' => Array(
+		'build' => array(
 			'0' => $t_any,
 		),
-		'version' => Array(
+		'version' => array(
 			'0' => $t_any,
 		),
-		'hide_status' => Array(
+		'hide_status' => array(
 			'0' => $t_none,
 		),
-		'monitor_user_id' => Array(
+		'monitor_user_id' => array(
 			'0' => $t_any,
 		),
 		'dir' => 'DESC',
@@ -544,7 +544,7 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 		FROM $t_bug_table
 		WHERE summary = " . db_param();
 
-	$result = db_query_bound( $query, Array( $p_summary ), 1 );
+	$result = db_query_bound( $query, array( $p_summary ), 1 );
 
 	if( db_num_rows( $result ) == 0 ) {
 		return 0;
@@ -570,7 +570,7 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
  *
  * @param string $p_username  The name of the user trying to add the issue.
  * @param string $p_password  The password of the user.
- * @param Array $p_issue  A IssueData structure containing information about the new issue.
+ * @param array $p_issue  A IssueData structure containing information about the new issue.
  * @return integer  The id of the created issue.
  */
 function mc_issue_add( $p_username, $p_password, $p_issue ) {
@@ -771,7 +771,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
  * Created By KGB
  * @param string $p_username The name of the user trying to add the issue.
  * @param string $p_password The password of the user.
- * @param Array $p_issue A IssueData structure containing information about the new issue.
+ * @param array $p_issue A IssueData structure containing information about the new issue.
  * @return integer The id of the created issue.
  */
 function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {

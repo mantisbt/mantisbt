@@ -75,7 +75,7 @@ require_api( 'user_api.php' );
 			FROM $t_bugnote_table
 			WHERE bug_id=" . db_param() . " $t_restriction
 			ORDER BY date_submitted $t_bugnote_order";
-	$result = db_query_bound($query, Array( $c_bug_id ) );
+	$result = db_query_bound($query, array( $c_bug_id ) );
 	$num_notes = db_num_rows($result);
 ?>
 
@@ -108,7 +108,7 @@ require_api( 'user_api.php' );
 		$query = "SELECT note, id
 				FROM $t_bugnote_text_table
 				WHERE id=" . db_param();
-		$result2 = db_query_bound( $query, Array( $v3_bugnote_text_id ) );
+		$result2 = db_query_bound( $query, array( $v3_bugnote_text_id ) );
 		$v3_note = db_result( $result2, 0, 0 );
 		$v3_bugnote_text_id = db_result( $result2, 0, 1 );
 

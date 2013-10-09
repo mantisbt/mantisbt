@@ -69,7 +69,7 @@ $t_string_table = db_get_table( 'custom_field_string' );
 $t_bug_table = db_get_table( 'bug' );
 $query = 'SELECT * FROM ' . $t_string_table . ' WHERE field_id = ' . db_param() . ' and value <> ' . db_param();
 
-$result = @db_query_bound( $query, Array( $f_source_field_id, '' ) );
+$result = @db_query_bound( $query, array( $f_source_field_id, '' ) );
 if( FALSE == $result ) {
 	echo '<p>No fields need to be updated.</p>';
 }

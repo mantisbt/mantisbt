@@ -83,7 +83,7 @@ function news_create( $p_project_id, $p_poster_id, $p_view_state, $p_announcemen
 				      " . db_param() . ",
 				      " . db_param() . "
 					)";
-	db_query_bound( $query, Array( $c_project_id, $c_poster_id, db_now(), db_now(), $c_view_state, $c_announcement, $p_headline, $p_body ) );
+	db_query_bound( $query, array( $c_project_id, $c_poster_id, db_now(), db_now(), $c_view_state, $c_announcement, $p_headline, $p_body ) );
 
 	$t_news_id = db_insert_id( $t_news_table );
 
@@ -102,7 +102,7 @@ function news_delete( $p_news_id ) {
 	$query = "DELETE FROM $t_news_table
 	    		  WHERE id=" . db_param();
 
-	db_query_bound( $query, Array( $c_news_id ) );
+	db_query_bound( $query, array( $c_news_id ) );
 
 	# db_query errors on failure so:
 	return true;
@@ -118,7 +118,7 @@ function news_delete_all( $p_project_id ) {
 	$query = "DELETE FROM $t_news_table
 	    		  WHERE project_id=" . db_param();
 
-	db_query_bound( $query, Array( $c_project_id ) );
+	db_query_bound( $query, array( $c_project_id ) );
 
 	# db_query errors on failure so:
 	return true;
@@ -154,7 +154,7 @@ function news_update( $p_news_id, $p_project_id, $p_view_state, $p_announcement,
 					last_modified= " . db_param() . "
 				  WHERE id=" . db_param();
 
-	db_query_bound( $query, Array( $c_view_state, $c_announcement, $p_headline, $p_body, $c_project_id, db_now(), $c_news_id ) );
+	db_query_bound( $query, array( $c_view_state, $c_announcement, $p_headline, $p_body, $c_project_id, db_now(), $c_news_id ) );
 
 	# db_query errors on failure so:
 	return true;
@@ -170,7 +170,7 @@ function news_get_row( $p_news_id ) {
 	$query = "SELECT *
 				  FROM $t_news_table
 				  WHERE id=" . db_param();
-	$result = db_query_bound( $query, Array( $c_news_id ) );
+	$result = db_query_bound( $query, array( $c_news_id ) );
 
 	if( 0 == db_num_rows( $result ) ) {
 		trigger_error( ERROR_NEWS_NOT_FOUND, ERROR );
@@ -295,7 +295,7 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 						FROM $t_news_table WHERE
 						( " . db_helper_compare_days( 0, 'date_posted', "< $t_news_view_limit_days" ) . "
 						 OR announcement = " . db_param() . " ) ";
-			$t_params = Array(
+			$t_params = array(
 				db_now(),
 				1,
 			);

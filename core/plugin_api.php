@@ -246,7 +246,7 @@ function plugin_config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_
 
 /**
  * Set plugin default values to global values without overriding anything.
- * @param array Array of configuration option name/value pairs.
+ * @param array array of configuration option name/value pairs.
  */
 function plugin_config_defaults( $p_options ) {
 	if( !is_array( $p_options ) ) {
@@ -329,7 +329,7 @@ function plugin_event_hook( $p_name, $p_callback ) {
 
 /**
  * Hook multiple plugin callbacks at once.
- * @param array Array of event name/callback key/value pairs
+ * @param array array of event name/callback key/value pairs
  */
 function plugin_event_hook_many( $p_hooks ) {
 	if( !is_array( $p_hooks ) ) {
@@ -676,7 +676,7 @@ function plugin_upgrade( $p_plugin ) {
 				$t_status = call_user_func( 'install_' . $t_schema[$i][1] );
 			}
 		} else {
-			$t_sqlarray = call_user_func_array( Array( $t_dict, $t_schema[$i][0] ), $t_schema[$i][1] );
+			$t_sqlarray = call_user_func_array( array( $t_dict, $t_schema[$i][0] ), $t_schema[$i][1] );
 		}
 
 		if( $t_sqlarray ) {
@@ -837,7 +837,7 @@ function plugin_register_installed() {
 	$t_plugin_table = db_get_table( 'plugin' );
 
 	$t_query = "SELECT basename, priority, protected FROM $t_plugin_table WHERE enabled=" . db_param() . ' ORDER BY priority DESC';
-	$t_result = db_query_bound( $t_query, Array( 1 ) );
+	$t_result = db_query_bound( $t_query, array( 1 ) );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_basename = $t_row['basename'];

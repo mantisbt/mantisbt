@@ -77,7 +77,7 @@ $query = "UPDATE $t_user_print_pref_table
 		SET print_pref=" . db_param() . "
 		WHERE user_id=" . db_param();
 
-$result = db_query_bound( $query, Array( $t_default, $t_user_id ) );
+$result = db_query_bound( $query, array( $t_default, $t_user_id ) );
 
 form_security_purge( 'print_all_bug_options_reset' );
 

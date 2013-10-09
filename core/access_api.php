@@ -130,7 +130,7 @@ function access_cache_matrix_project( $p_project_id ) {
 		$query = "SELECT user_id, access_level
 					  FROM $t_project_user_list_table
 					  WHERE project_id=" . db_param();
-		$result = db_query_bound( $query, Array( (int)$p_project_id ) );
+		$result = db_query_bound( $query, array( (int)$p_project_id ) );
 		$count = db_num_rows( $result );
 		for( $i = 0;$i < $count;$i++ ) {
 			$row = db_fetch_array( $result );
@@ -167,7 +167,7 @@ function access_cache_matrix_user( $p_user_id ) {
 		$query = "SELECT project_id, access_level
 					  FROM $t_project_user_list_table
 					  WHERE user_id=" . db_param();
-		$result = db_query_bound( $query, Array( (int)$p_user_id ) );
+		$result = db_query_bound( $query, array( (int)$p_user_id ) );
 
 		$count = db_num_rows( $result );
 

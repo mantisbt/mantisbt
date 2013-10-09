@@ -58,7 +58,7 @@ function project_hierarchy_add( $p_child_id, $p_parent_id, $p_inherit_parent = t
 						VALUES
 						( " . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 
-	db_query_bound( $query, Array( $c_child_id, $c_parent_id, $c_inherit_parent ) );
+	db_query_bound( $query, array( $c_child_id, $c_parent_id, $c_inherit_parent ) );
 }
 
 /**
@@ -79,7 +79,7 @@ function project_hierarchy_update( $p_child_id, $p_parent_id, $p_inherit_parent 
 					SET inherit_parent=" . db_param() . '
 					WHERE child_id=' . db_param() . '
 						AND parent_id=' . db_param();
-	db_query_bound( $query, Array( $c_inherit_parent, $c_child_id, $c_parent_id ) );
+	db_query_bound( $query, array( $c_inherit_parent, $c_child_id, $c_parent_id ) );
 }
 
 /**
@@ -98,7 +98,7 @@ function project_hierarchy_remove( $p_child_id, $p_parent_id ) {
 		                WHERE child_id = " . db_param() . "
 						AND parent_id = " . db_param();
 
-	db_query_bound( $query, Array( $c_child_id, $c_parent_id ) );
+	db_query_bound( $query, array( $c_child_id, $c_parent_id ) );
 }
 
 /**
@@ -115,7 +115,7 @@ function project_hierarchy_remove_all( $p_project_id ) {
 		                WHERE child_id = " . db_param() . "
 						  OR parent_id = " . db_param();
 
-	db_query_bound( $query, Array( $c_project_id, $c_project_id ) );
+	db_query_bound( $query, array( $c_project_id, $c_project_id ) );
 }
 
 /**
@@ -185,7 +185,7 @@ function project_hierarchy_cache( $p_show_disabled = false ) {
 				  WHERE $t_enabled_clause
 				  ORDER BY p.name";
 
-	$result = db_query_bound( $query, ( $p_show_disabled ? null : Array( true ) ) );
+	$result = db_query_bound( $query, ( $p_show_disabled ? null : array( true ) ) );
 	$row_count = db_num_rows( $result );
 
 	$g_cache_project_hierarchy = array();
@@ -300,7 +300,7 @@ function project_hierarchy_get_subprojects( $p_project_id, $p_show_disabled = fa
  */
 function project_hierarchy_get_all_subprojects( $p_project_id, $p_show_disabled = false ) {
 	$t_todo = project_hierarchy_get_subprojects( $p_project_id, $p_show_disabled );
-	$t_subprojects = Array();
+	$t_subprojects = array();
 
 	while( $t_todo ) {
 		$t_elem = array_shift( $t_todo );

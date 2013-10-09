@@ -355,7 +355,7 @@ function helper_get_current_project_trace() {
 	if( null === $t_project_id ) {
 		$t_bottom = current_user_get_pref( 'default_project' );
 		$t_parent = $t_bottom;
-		$t_project_id = Array(
+		$t_project_id = array(
 			$t_bottom,
 		);
 
@@ -373,7 +373,7 @@ function helper_get_current_project_trace() {
 	}
 
 	if( !project_exists( $t_bottom ) || ( 0 == project_get_field( $t_bottom, 'enabled' ) ) || !access_has_project_level( VIEWER, $t_bottom ) ) {
-		$t_project_id = Array(
+		$t_project_id = array(
 			ALL_PROJECTS,
 		);
 	}

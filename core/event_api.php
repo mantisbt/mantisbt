@@ -205,7 +205,7 @@ function event_callback( $p_event, $p_callback, $p_plugin, $p_params = null ) {
  * All callbacks will be called with parameters, and their
  * return values will be ignored.
  * @param string Event name
- * @param array Array of callback function/plugin basename key/value pairs
+ * @param array array of callback function/plugin basename key/value pairs
  * @param array Callback parameters
  * @access public
  */
@@ -223,7 +223,7 @@ function event_type_execute( $p_event, $p_callbacks, $p_params ) {
  * return values will be echoed to the client, separated by a given string.
  * If there are no callbacks, then nothing will be sent as output.
  * @param string Event name
- * @param array Array of callback function/plugin basename key/value pairs
+ * @param array array of callback function/plugin basename key/value pairs
  * @param multi Output separator (if single string) or indexed array of pre, mid, and post strings
  * @access public
  */
@@ -262,7 +262,7 @@ function event_type_output( $p_event, $p_callbacks, $p_params = null ) {
  * callbacks will be called with the previous's output as its input.  The
  * final callback's return value will be returned to the event origin.
  * @param string Event name
- * @param array Array of callback function/plugin basename key/value pairs
+ * @param array array of callback function/plugin basename key/value pairs
  * @param string Input string
  * @return string Output string
  * @access public
@@ -296,7 +296,7 @@ function event_type_chain( $p_event, $p_callbacks, $p_input, $p_params ) {
  * returns a non-null value; at this point, no other callbacks will be
  * processed, and the return value be passed back to the event origin.
  * @param string Event name
- * @param array Array of callback function/plugin basename key/value pairs
+ * @param array array of callback function/plugin basename key/value pairs
  * @param multi Parameters passed to callbacks
  * @return multi The first non-null callback result, or null otherwise
  * @access public
@@ -323,9 +323,9 @@ function event_type_first( $p_event, $p_callbacks, $p_params ) {
  * return value of each callback will be appended to an array with the callback's
  * basename as the key.  This array will then be returned to the event origin.
  * @param string Event name
- * @param array Array of callback function/plugin basename key/value pairs
+ * @param array array of callback function/plugin basename key/value pairs
  * @param multi Data
- * @return array Array of callback/return key/value pairs
+ * @return array array of callback/return key/value pairs
  * @access public
  */
 function event_type_default( $p_event, $p_callbacks, $p_data ) {

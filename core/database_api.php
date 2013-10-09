@@ -289,7 +289,7 @@ function db_query( $p_query, $p_limit = -1, $p_offset = -1 ) {
  * @global adodb database connection object
  * @global boolean indicating whether queries array is populated
  * @param string $p_query Parameterlised Query string to execute
- * @param array $arr_parms Array of parameters matching $p_query
+ * @param array $arr_parms array of parameters matching $p_query
  * @param int $p_limit Number of results to return
  * @param int $p_offset offset query results for paging
  * @return ADORecordSet|bool adodb result set or false if the query failed.

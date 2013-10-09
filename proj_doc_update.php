@@ -130,12 +130,12 @@ if ( is_uploaded_file( $v_tmp_name ) ) {
 		SET title=" . db_param() . ", description=" . db_param() . ", date_added=" . db_param() . ",
 			filename=" . db_param() . ", filesize=" . db_param() . ", file_type=" .db_param() . ", content=" .db_param() . "
 			WHERE id=" . db_param();
-	$result = db_query_bound( $query, Array( $f_title, $f_description, db_now(), $v_name, $t_file_size, $v_type, $c_content, $f_file_id ) );
+	$result = db_query_bound( $query, array( $f_title, $f_description, db_now(), $v_name, $t_file_size, $v_type, $c_content, $f_file_id ) );
 } else {
 	$query = "UPDATE $t_project_file_table
 			SET title=" . db_param() . ", description=" . db_param() . "
 			WHERE id=" . db_param();
-	$result = db_query_bound( $query, Array( $f_title, $f_description, $f_file_id ) );
+	$result = db_query_bound( $query, array( $f_title, $f_description, $f_file_id ) );
 }
 
 if ( !$result ) {

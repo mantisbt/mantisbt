@@ -11,7 +11,7 @@
  *
  * @param string $p_username  The name of the user trying to access the enumeration.
  * @param string $p_password  The password of the user.
- * @return Array  The requested enumeration
+ * @return array  The requested enumeration
  */
 function mc_enum_status( $p_username, $p_password ) {
 	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
@@ -26,7 +26,7 @@ function mc_enum_status( $p_username, $p_password ) {
  *
  * @param string $p_username  The name of the user trying to access the enumeration.
  * @param string $p_password  The password of the user.
- * @return Array  The requested enumeration
+ * @return array  The requested enumeration
  */
 function mc_enum_priorities( $p_username, $p_password ) {
 	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
@@ -41,7 +41,7 @@ function mc_enum_priorities( $p_username, $p_password ) {
  *
  * @param string $p_username  The name of the user trying to access the enumeration.
  * @param string $p_password  The password of the user.
- * @return Array  The requested enumeration
+ * @return array  The requested enumeration
  */
 function mc_enum_severities( $p_username, $p_password ) {
 	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
@@ -56,7 +56,7 @@ function mc_enum_severities( $p_username, $p_password ) {
  *
  * @param string $p_username  The name of the user trying to access the enumeration.
  * @param string $p_password  The password of the user.
- * @return Array  The requested enumeration
+ * @return array  The requested enumeration
  */
 function mc_enum_reproducibilities( $p_username, $p_password ) {
 	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
@@ -71,7 +71,7 @@ function mc_enum_reproducibilities( $p_username, $p_password ) {
  *
  * @param string $p_username  The name of the user trying to access the enumeration.
  * @param string $p_password  The password of the user.
- * @return Array  The requested enumeration
+ * @return array  The requested enumeration
  */
 function mc_enum_projections( $p_username, $p_password ) {
 	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
@@ -86,7 +86,7 @@ function mc_enum_projections( $p_username, $p_password ) {
  *
  * @param string $p_username  The name of the user trying to access the enumeration.
  * @param string $p_password  The password of the user.
- * @return Array  The requested enumeration
+ * @return array  The requested enumeration
  */
 function mc_enum_etas( $p_username, $p_password ) {
 	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
@@ -101,7 +101,7 @@ function mc_enum_etas( $p_username, $p_password ) {
  *
  * @param string $p_username  The name of the user trying to access the enumeration.
  * @param string $p_password  The password of the user.
- * @return Array  The requested enumeration
+ * @return array  The requested enumeration
  */
 function mc_enum_resolutions( $p_username, $p_password ) {
 	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
@@ -116,7 +116,7 @@ function mc_enum_resolutions( $p_username, $p_password ) {
  *
  * @param string $p_username  The name of the user trying to access the enumeration.
  * @param string $p_password  The password of the user.
- * @return Array  The requested enumeration
+ * @return array  The requested enumeration
  */
 function mc_enum_access_levels( $p_username, $p_password ) {
 	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
@@ -131,7 +131,7 @@ function mc_enum_access_levels( $p_username, $p_password ) {
  *
  * @param string $p_username  The name of the user trying to access the enumeration.
  * @param string $p_password  The password of the user.
- * @return Array  The requested enumeration
+ * @return array  The requested enumeration
  */
 function mc_enum_project_status( $p_username, $p_password ) {
 	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
@@ -146,7 +146,7 @@ function mc_enum_project_status( $p_username, $p_password ) {
  *
  * @param string $p_username  The name of the user trying to access the enumeration.
  * @param string $p_password  The password of the user.
- * @return Array  The requested enumeration
+ * @return array  The requested enumeration
  */
 function mc_enum_project_view_states( $p_username, $p_password ) {
 	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
@@ -161,7 +161,7 @@ function mc_enum_project_view_states( $p_username, $p_password ) {
  *
  * @param string $p_username  The name of the user trying to access the enumeration.
  * @param string $p_password  The password of the user.
- * @return Array  The requested enumeration
+ * @return array  The requested enumeration
  */
 function mc_enum_view_states( $p_username, $p_password ) {
 	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
@@ -176,7 +176,7 @@ function mc_enum_view_states( $p_username, $p_password ) {
  *
  * @param string $p_username  The name of the user trying to access the enumeration.
  * @param string $p_password  The password of the user.
- * @return Array  The requested enumeration
+ * @return array  The requested enumeration
  */
 function mc_enum_custom_field_types( $p_username, $p_password ) {
 	if ( !mci_validate_enum_access( $p_username, $p_password ) ) {
@@ -211,7 +211,7 @@ function mc_enum_get( $p_username, $p_password, $p_enumeration ) {
  * be safely converted into an ObjectRef structure.
  *
  * @param string $p_enumeration_name  The name of the enumeration to convert
- * @return Array  The converted enumeration
+ * @return array  The converted enumeration
  */
 function mci_explode_to_objectref( $p_enumeration_name ) {
 
@@ -260,7 +260,7 @@ function mci_validate_enum_access($p_username, $p_password) {
  * @param integer $p_enum_id  The id of the enumeration element to retrieve.
  * @param String $p_enum_type  The type of the enumeration element (e.g. 'status', 'reproducibility' etc.).
  * @param String $p_lang  The language for the name field.
- * @return Array an Array containing the id and the name of the enumeration element.
+ * @return array an array containing the id and the name of the enumeration element.
  */
 function mci_enum_get_array_by_id( $p_enum_id, $p_enum_type, $p_lang ) {
 	$t_result = array();

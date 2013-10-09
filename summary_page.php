@@ -77,7 +77,7 @@ $query = "SELECT b.id, b.date_submitted, b.last_updated, MAX(h.date_modified) as
 		WHERE b.status >=" . db_param() . " AND $specific_where
 		GROUP BY b.id, b.status, b.date_submitted, b.last_updated
 		ORDER BY b.id ASC";
-$result = db_query_bound( $query, Array( $t_resolved, $t_resolved ) );
+$result = db_query_bound( $query, array( $t_resolved, $t_resolved ) );
 $bug_count = db_num_rows( $result );
 
 $t_bug_id       = 0;
