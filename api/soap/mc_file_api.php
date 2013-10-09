@@ -114,7 +114,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 				    . db_param() . ", " . db_param() . ", " . db_param() . ", "
 				    . db_param() . ", " . db_param() . ", " . db_param() . ", "
 				    . db_param() . ", " . db_param() . " )";
-	db_query_bound( $query, array(
+	db_query_bound( $query, Array(
 		$t_id,
 		$p_title,
 		$p_desc,

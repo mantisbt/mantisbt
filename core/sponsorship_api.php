@@ -88,7 +88,7 @@ function sponsorship_cache_row( $p_sponsorship_id, $p_trigger_errors = true ) {
 	$query = "SELECT *
 				  FROM $t_sponsorship_table
 				  WHERE id=" . db_param();
-	$result = db_query_bound( $query, array( $c_sponsorship_id ) );
+	$result = db_query_bound( $query, Array( $c_sponsorship_id ) );
 
 	if( 0 == db_num_rows( $result ) ) {
 		$g_cache_sponsorships[$c_sponsorship_id] = false;
@@ -152,7 +152,7 @@ function sponsorship_get_id( $p_bug_id, $p_user_id = null ) {
 	$t_sponsorship_table = db_get_table( 'sponsorship' );
 
 	$query = "SELECT id FROM $t_sponsorship_table WHERE bug_id = " . db_param() . " AND user_id = " . db_param();
-	$t_result = db_query_bound( $query, array( $c_bug_id, $c_user_id ), 1 );
+	$t_result = db_query_bound( $query, Array( $c_bug_id, $c_user_id ), 1 );
 
 	if( db_num_rows( $t_result ) == 0 ) {
 		return false;
@@ -206,7 +206,7 @@ function sponsorship_get_all_ids( $p_bug_id ) {
 
 	$query = "SELECT * FROM $t_sponsorship_table
 				WHERE bug_id = " . db_param();
-	$t_result = db_query_bound( $query, array( $c_bug_id ) );
+	$t_result = db_query_bound( $query, Array( $c_bug_id ) );
 
 	$t_sponsorship_ids = array();
 	while( $row = db_fetch_array( $t_result ) ) {
@@ -311,7 +311,7 @@ function sponsorship_set( $p_sponsorship ) {
 				  VALUES
 				    (" . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
 
-		db_query_bound( $query, array( $c_bug_id, $c_user_id, $c_amount, $c_logo, $c_url, $c_now, $c_now ) );
+		db_query_bound( $query, Array( $c_bug_id, $c_user_id, $c_amount, $c_logo, $c_url, $c_now, $c_now ) );
 		$t_sponsorship_id = db_insert_id( $t_sponsorship_table );
 
 		history_log_event_special( $c_bug_id, BUG_ADD_SPONSORSHIP, $c_user_id, $c_amount );
@@ -335,7 +335,7 @@ function sponsorship_set( $p_sponsorship ) {
 
 		sponsorship_clear_cache( $c_id );
 
-		db_query_bound( $query, array( $c_bug_id, $c_user_id, $c_amount, $c_logo, $c_url, $c_now, $c_id ) );
+		db_query_bound( $query, Array( $c_bug_id, $c_user_id, $c_amount, $c_logo, $c_url, $c_now, $c_id ) );
 
 		history_log_event_special( $c_bug_id, BUG_UPDATE_SPONSORSHIP, $c_user_id, $c_amount );
 	}
@@ -393,7 +393,7 @@ function sponsorship_delete( $p_sponsorship_id ) {
 	# Delete the bug entry
 	$query = "DELETE FROM $t_sponsorship_table
 				  WHERE id=" . db_param();
-	db_query_bound( $query, array( $c_sponsorship_id ) );
+	db_query_bound( $query, Array( $c_sponsorship_id ) );
 
 	sponsorship_clear_cache( $p_sponsorship_id );
 
@@ -420,7 +420,7 @@ function sponsorship_update_paid( $p_sponsorship_id, $p_paid ) {
 	$query = "UPDATE $t_sponsorship_table
 				  SET last_updated= " . db_param() . ", paid=" . db_param() . "
 				  WHERE id=" . db_param();
-	db_query_bound( $query, array( db_now(), $c_paid, $c_sponsorship_id ) );
+	db_query_bound( $query, Array( db_now(), $c_paid, $c_sponsorship_id ) );
 
 	history_log_event_special( $t_sponsorship->bug_id, BUG_PAID_SPONSORSHIP, $t_sponsorship->user_id, $p_paid );
 	sponsorship_clear_cache( $p_sponsorship_id );
@@ -441,7 +441,7 @@ function sponsorship_update_date( $p_sponsorship_id ) {
 	$query = "UPDATE $t_sponsorship_table
 				  SET last_updated= " . db_param() . "
 				  WHERE id=" . db_param();
-	db_query_bound( $query, array( db_now(), $c_sponsorship_id ) );
+	db_query_bound( $query, Array( db_now(), $c_sponsorship_id ) );
 
 	sponsorship_clear_cache( $p_sponsorship_id );
 

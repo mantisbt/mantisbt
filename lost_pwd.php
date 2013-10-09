@@ -77,7 +77,7 @@ $t_user_table = db_get_table( 'user' );
 
 /** @todo Consider moving this query to user_api.php */
 $query = 'SELECT id FROM ' . $t_user_table . ' WHERE username = ' . db_param() . ' AND email = ' . db_param() . ' AND enabled=' . db_param();
-$result = db_query_bound( $query, array( $f_username, $f_email, true ) );
+$result = db_query_bound( $query, Array( $f_username, $f_email, true ) );
 
 if ( 0 == db_num_rows( $result ) ) {
 	trigger_error( ERROR_LOST_PASSWORD_NOT_MATCHING_DATA, ERROR );

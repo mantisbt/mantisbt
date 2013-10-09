@@ -348,16 +348,16 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 				WHERE config_id = " . db_param() . " AND
 					project_id = " . db_param() . " AND
 					user_id = " . db_param();
-		$result = db_query_bound( $query, array( $c_option, $c_project, $c_user ) );
+		$result = db_query_bound( $query, Array( $c_option, $c_project, $c_user ) );
 
-		$t_params = array();
+		$t_params = Array();
 		if( 0 < db_result( $result ) ) {
 			$t_set_query = "UPDATE $t_config_table
 					SET value=" . db_param() . ", type=" . db_param() . ", access_reqd=" . db_param() . "
 					WHERE config_id = " . db_param() . " AND
 						project_id = " . db_param() . " AND
 						user_id = " . db_param();
-			$t_params = array(
+			$t_params = Array(
 				(string)$c_value,
 				$t_type,
 				$c_access,
@@ -370,7 +370,7 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 					( value, type, access_reqd, config_id, project_id, user_id )
 					VALUES
 					(" . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ',' . db_param() . ' )';
-			$t_params = array(
+			$t_params = Array(
 				(string)$c_value,
 				$t_type,
 				$c_access,
@@ -474,7 +474,7 @@ function config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECT
 					project_id=" . db_param() . " AND
 					user_id=" . db_param();
 
-		$result = @db_query_bound( $query, array( $p_option, $c_project, $c_user ) );
+		$result = @db_query_bound( $query, Array( $p_option, $c_project, $c_user ) );
 	}
 
 	config_flush_cache( $p_option, $p_user, $p_project );
@@ -508,7 +508,7 @@ function config_delete_project( $p_project = ALL_PROJECTS ) {
 	$query = "DELETE FROM $t_config_table
 				WHERE project_id=" . db_param();
 
-	$result = @db_query_bound( $query, array( $c_project ) );
+	$result = @db_query_bound( $query, Array( $c_project ) );
 
 	# flush cache here in case some of the deleted configs are in use.
 	config_flush_cache();

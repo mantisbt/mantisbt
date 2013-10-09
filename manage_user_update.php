@@ -157,13 +157,13 @@ if ( ( $f_access_level >= $t_admin_threshold ) && ( !user_is_administrator( $f_u
 #  protected flag then don't update the access level and enabled flag.
 #  If the user was unprotected or the protected flag is being turned off
 #  then proceed with a full update.
-$query_params = array();
+$query_params = Array();
 if ( $f_protected && $t_old_protected ) {
 	$query = "UPDATE $t_user_table
 			SET username=" . db_param() . ", email=" . db_param() . ",
 				protected=" . db_param() . ", realname=" . db_param() . "
 			WHERE id=" . db_param();
-	$query_params = array( $c_username, $c_email, $c_protected, $c_realname, $c_user_id );
+	$query_params = Array( $c_username, $c_email, $c_protected, $c_realname, $c_user_id );
 	# Prevent e-mail notification for a change that did not happen
 	$f_access_level = $t_old_access_level;
 } else {
@@ -172,7 +172,7 @@ if ( $f_protected && $t_old_protected ) {
 				access_level=" . db_param() . ", enabled=" . db_param() . ",
 				protected=" . db_param() . ", realname=" . db_param() . "
 			WHERE id=" . db_param();
-	$query_params = array( $c_username, $c_email, $c_access_level, $c_enabled, $c_protected, $c_realname, $c_user_id );
+	$query_params = Array( $c_username, $c_email, $c_access_level, $c_enabled, $c_protected, $c_realname, $c_user_id );
 }
 
 $result = db_query_bound( $query, $query_params );

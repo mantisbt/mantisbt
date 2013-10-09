@@ -119,7 +119,7 @@ function install_category_migrate() {
 	$query = "SELECT project_id, category FROM $t_bug_table ORDER BY project_id, category";
 	$t_bug_result = db_query_bound( $query );
 
-	$t_data = array();
+	$t_data = Array();
 
 	# Find categories specified by project
 	while( $row = db_fetch_array( $t_category_result ) ) {

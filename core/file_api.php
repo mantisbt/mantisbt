@@ -344,7 +344,7 @@ function file_delete_attachments( $p_bug_id ) {
 	$query = "SELECT diskfile, filename
 				FROM $t_bug_file_table
 				WHERE bug_id=" . db_param();
-	$result = db_query_bound( $query, array( $c_bug_id ) );
+	$result = db_query_bound( $query, Array( $c_bug_id ) );
 
 	$file_count = db_num_rows( $result );
 	if( 0 == $file_count ) {
@@ -378,7 +378,7 @@ function file_delete_attachments( $p_bug_id ) {
 	# Delete the corresponding db records
 	$query = "DELETE FROM $t_bug_file_table
 				  WHERE bug_id=" . db_param();
-	$result = db_query_bound( $query, array( $c_bug_id ) );
+	$result = db_query_bound( $query, Array( $c_bug_id ) );
 
 	# db_query errors on failure so:
 	return true;
@@ -423,7 +423,7 @@ function file_delete_project_files( $p_project_id ) {
 	# Delete the corresponding db records
 	$query = "DELETE FROM $t_project_file_table
 				WHERE project_id=" . db_param();
-	$result = db_query_bound( $query, array( (int) $p_project_id ) );
+	$result = db_query_bound( $query, Array( (int) $p_project_id ) );
 }
 
 # Delete all cached files that are older than configured number of days.
@@ -481,7 +481,7 @@ function file_get_field( $p_file_id, $p_field_name, $p_table = 'bug' ) {
 	$query = "SELECT $c_field_name
 				  FROM $t_bug_file_table
 				  WHERE id=" . db_param();
-	$result = db_query_bound( $query, array( (int) $p_file_id ), 1 );
+	$result = db_query_bound( $query, Array( (int) $p_file_id ), 1 );
 
 	return db_result( $result );
 }
@@ -521,7 +521,7 @@ function file_delete( $p_file_id, $p_table = 'bug' ) {
 	$t_file_table = db_get_table( $p_table . '_file' );
 	$query = "DELETE FROM $t_file_table
 				WHERE id=" . db_param();
-	db_query_bound( $query, array( $c_file_id ) );
+	db_query_bound( $query, Array( $c_file_id ) );
 	return true;
 }
 
@@ -752,7 +752,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 				    . db_param() . ", " . db_param() . ", " . db_param() . ", "
 				    . db_param() . ", " . db_param() . ", " . db_param() . ", "
 				    . db_param() . ", " . db_param() . " )";
-	db_query_bound( $query, array(
+	db_query_bound( $query, Array(
 		$t_id,
 		$p_title,
 		$p_desc,
@@ -910,7 +910,7 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 		default:
 			return false;
 	}
-	$result = db_query_bound( $query, array( $p_file_id ) );
+	$result = db_query_bound( $query, Array( $p_file_id ) );
 	$row = db_fetch_array( $result );
 
 	if ( $f_type == 'bug' ) {
@@ -1048,7 +1048,7 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 				file_delete_local( $t_disk_file_name_from );
 			}
 			chmod( $t_disk_file_name_to, config_get( 'attachments_file_permissions' ) );
-			db_query_bound( $query_disk_attachment_update, array( db_prepare_string( $t_path_to ), $c_bug_id, db_prepare_int( $t_row['id'] ) ) );
+			db_query_bound( $query_disk_attachment_update, Array( db_prepare_string( $t_path_to ), $c_bug_id, db_prepare_int( $t_row['id'] ) ) );
 		} else {
 			trigger_error( ERROR_FILE_DUPLICATE, ERROR );
 		}
@@ -1069,7 +1069,7 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 	$t_mantis_bug_file_table = db_get_table( 'bug_file' );
 
 	$query = 'SELECT * FROM ' . $t_mantis_bug_file_table . ' WHERE bug_id = ' . db_param();
-	$result = db_query_bound( $query, array( $p_source_bug_id ) );
+	$result = db_query_bound( $query, Array( $p_source_bug_id ) );
 	$t_count = db_num_rows( $result );
 
 	$t_project_id = bug_get_field( $p_source_bug_id, 'project_id' );
@@ -1110,7 +1110,7 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 									 " . db_param() . ",
 									 " . db_param() . ",
 									 " . db_param() . ");";
-		db_query_bound( $query, array( $p_dest_bug_id, $t_bug_file['title'], $t_bug_file['description'], $t_new_diskfile_name, $t_new_file_name, $t_file_path, $t_bug_file['filesize'], $t_bug_file['file_type'], $t_bug_file['date_added'], $t_bug_file['content'] ) );
+		db_query_bound( $query, Array( $p_dest_bug_id, $t_bug_file['title'], $t_bug_file['description'], $t_new_diskfile_name, $t_new_file_name, $t_file_path, $t_bug_file['filesize'], $t_bug_file['file_type'], $t_bug_file['date_added'], $t_bug_file['content'] ) );
 	}
 }
 

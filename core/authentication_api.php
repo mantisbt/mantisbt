@@ -398,7 +398,7 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 	}
 
 	$t_password = user_get_field( $p_user_id, 'password' );
-	$t_login_methods = array(
+	$t_login_methods = Array(
 		MD5,
 		CRYPT,
 		PLAIN,
@@ -573,7 +573,7 @@ function auth_is_cookie_string_unique( $p_cookie_string ) {
 	$query = "SELECT COUNT(*)
 				  FROM $t_user_table
 				  WHERE cookie_string=" . db_param();
-	$result = db_query_bound( $query, array( $p_cookie_string ) );
+	$result = db_query_bound( $query, Array( $p_cookie_string ) );
 	$t_count = db_result( $result );
 
 	if( $t_count > 0 ) {
@@ -617,7 +617,7 @@ function auth_get_current_user_cookie( $p_login_anonymous=true ) {
 
 					# get anonymous information if database is available
 					$query = 'SELECT id, cookie_string FROM ' . db_get_table( 'user' ) . ' WHERE username = ' . db_param();
-					$result = db_query_bound( $query, array( config_get( 'anonymous_account' ) ) );
+					$result = db_query_bound( $query, Array( config_get( 'anonymous_account' ) ) );
 
 					if( 1 == db_num_rows( $result ) ) {
 						$row = db_fetch_array( $result );
@@ -782,7 +782,7 @@ function auth_is_cookie_valid( $p_cookie_string ) {
 	$query = "SELECT *
 				  FROM $t_user_table
 				  WHERE cookie_string=" . db_param();
-	$result = db_query_bound( $query, array( $p_cookie_string ) );
+	$result = db_query_bound( $query, Array( $p_cookie_string ) );
 
 	# return true if a matching cookie was found
 	if( 1 == db_num_rows( $result ) ) {
@@ -819,7 +819,7 @@ function auth_get_current_user_id() {
 	$query = "SELECT id
 				  FROM $t_user_table
 				  WHERE cookie_string=" . db_param();
-	$result = db_query_bound( $query, array( $t_cookie_string ) );
+	$result = db_query_bound( $query, Array( $t_cookie_string ) );
 
 	# The cookie was invalid. Clear the cookie (to allow people to log in again)
 	# and give them an Access Denied message.

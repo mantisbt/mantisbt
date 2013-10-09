@@ -303,7 +303,7 @@ $user_count = db_num_rows( $result );
 ?>
 		</tr><?php
 	$t_date_format = config_get( 'normal_date_format' );
-	$t_access_level = array();
+	$t_access_level = Array();
 	for ($i=0;$i<$user_count;$i++) {
 		# prefix user data with u_
 		$row = db_fetch_array($result);
