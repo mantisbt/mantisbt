@@ -73,8 +73,6 @@ class BugnoteData {
 	var $note_type;
 	var $note_attr;
 	var $time_tracking;
-
-	var $bugnote_text_id;
 }
 
 /**
