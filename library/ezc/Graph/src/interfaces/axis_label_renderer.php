@@ -43,7 +43,7 @@
  *           Indicates if steps are shown on the outer side of axis.
  * @property bool $outerGrid
  *           Indicates if the grid is shown on the outer side of axis.
- * @property bool $showLables
+ * @property bool $showLabels
  *           Indicates if the labels should be shown
  * @property int $labelPadding
  *           Padding of labels.

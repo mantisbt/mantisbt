@@ -387,18 +387,9 @@ abstract class ezcMailPart
                     // break intentionally missing
 
                 default:
-                    $preferences = array(
-                        'input-charset' => $charset,
-                        'output-charset' => $charset,
-                        'line-length' => ezcMailHeaderFolder::getLimit(),
-                        'scheme' => 'Q',
-                        'line-break-chars' => ezcMailTools::lineBreak()
-                    );
-                    $value = iconv_mime_encode( 'dummy', $value, $preferences );
-                    $value = substr( $value, 7 ); // "dummy: " + 1
-
                     // just to keep compatibility with code which might read
                     // the headers after generateHeaders() has been called
+                    $value = ezcMailTools::mimeHeaderEncode( $value, $charset );
                     $this->setHeader( $header, $value, $charset );
                     break;
             }

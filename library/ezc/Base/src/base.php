@@ -577,6 +577,7 @@ class ezcBase
             $autoloadDirPath = $basePath . '/autoload';
         }
 
+
         // check if autoload dir exists
         if ( !is_dir( $autoloadDirPath ) )
         {

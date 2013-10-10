@@ -138,15 +138,7 @@ class ezcMailTools
                     // break intentionally missing
 
                 default:
-                    $preferences = array(
-                        'input-charset' => $item->charset,
-                        'output-charset' => $item->charset,
-                        'scheme' => 'Q',
-                        'line-break-chars' => ezcMailTools::lineBreak()
-                    );
-                    $name = iconv_mime_encode( 'dummy', $name, $preferences );
-                    $name = substr( $name, 7 ); // "dummy: " + 1
-                    $text = $name . ' <' . $item->email . '>';
+                    $text = self::mimeHeaderEncode( $name, $item->charset ) . ' <' . $item->email . '>';
                     break;
             }
         }
@@ -793,6 +785,41 @@ class ezcMailTools
             }
         }
         return $htmlText;
+    }
+
+    /**
+     * Encodes mime header value.
+     *
+     * @param string $value
+     * @param string $charset
+     *
+     * @return string
+     */
+    static public function mimeHeaderEncode( $value, $charset )
+    {
+        $preferences = array(
+            'input-charset' => $charset,
+            'output-charset' => $charset,
+            'line-length' => ezcMailHeaderFolder::getLimit(),
+            'scheme' => 'Q',
+            'line-break-chars' => self::lineBreak()
+        );
+        // Mime encoding can fail with iconv when using multi-byte strings, generating a notice.
+        // See https://bugs.php.net/bug.php?id=53891
+        // I know, using the silent operator is usually evil, but we have no choice here...
+        $tmpValue = @iconv_mime_encode( 'dummy', $value, $preferences );
+        if ( $tmpValue !== false )
+        {
+            $value = substr( $tmpValue, 7 ); // "dummy: " + 1
+            unset( $tmpValue );
+        }
+        // Try to use mbstring extension if present.
+        else if ( extension_loaded( 'mbstring' ) )
+        {
+            $value = mb_encode_mimeheader( $value, $charset, 'Q', self::lineBreak() );
+        }
+
+        return $value;
     }
 }
 ?>
