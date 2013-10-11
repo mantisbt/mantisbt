@@ -15,18 +15,26 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language File
- * See the qqq 'language' for message documentation incl. usage of parameters
+ * Language File - Egyptian Spoken Arabic (مصرى)
+ *
  * **********************************************************************
  * ** This file is generated from translations stored in translatewiki **
  * ** Information on Copyright/License for translatewiki translations  **
  * ** is available at http://translatewiki.net/wiki/Project:About      **
  * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
  * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ *
  * @ingroup Language
- * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @file
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
 */
 
