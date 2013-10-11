@@ -28,6 +28,40 @@
  * @ingroup Language
  * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @author Adrian Spinei
+ * @author Alexey Chumakov
+ * @author André Eisenbach
+ * @author Bastian Pfenningschmidt
+ * @author Christian Weiske
+ * @author Damien Regad
+ * @author Daniel Tschinder
+ * @author Daryn Warriner
+ * @author David Hicks
+ * @author David Newcomb
+ * @author Dominik Blunk
+ * @author Frank Rodgers
+ * @author Gianluca Sforna
+ * @author Glenn Henshaw
+ * @author Jeroen Latour
+ * @author Jim Hanley
+ * @author John Reese
+ * @author Julian Fitzell
+ * @author Kenzaburo Ito
+ * @author Lincoln Maskey
+ * @author Marcello Scata
+ * @author Martin Fuchs
+ * @author Paul Richards
+ * @author Robert Munteanu
+ * @author Siebrand Mazeland
+ * @author Victor Boctor
+ * @author beerfrick
+ * @author bigbadger
+ * @author dwethell
+ * @author jctrosset
+ * @author jhuggins
+ * @author jotel
+ * @author zakman
 */
 
 # Script directionality (currently supported: ltr and rtl)
