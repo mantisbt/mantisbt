@@ -1,6 +1,82 @@
 <chapter id="admin.customize">
     <title>Customizing MantisBT</title>
 
+	<section id="admin.customize.strings">
+		<title>Strings / Translations</title>
+
+		<para>All strings used in MantisBT, including those defined in
+			plugins, can be customized or translated differently.
+			This is achieved by overriding them in the
+			<filename>Custom Strings File</filename>
+			(see <emphasis>$g_custom_strings_file</emphasis>
+			in <xref linkend="admin.config.path"/>),
+			which is automatically detected and included by MantisBT code.
+		</para>
+
+		<para>Defining custom strings here provides a simple upgrade path,
+			and avoids having to re-do the changes when upgrading to the
+			next release.
+		</para>
+
+		<para>Two formats are supported within this file:
+		</para>
+
+		<variablelist>
+			<varlistentry>
+				<term>New Format</term>
+				<listitem>
+					<para>Define a
+						<emphasis>$s_custom_messages</emphasis>
+						array as follows:
+<programlisting>
+$s_custom_messages = array( LANG => array( CODE => STRING, ... ) );
+</programlisting>
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Legacy Format</term>
+				<listitem>
+					<para>One variable per string
+<programlisting>
+$s_CODE = STRING;
+</programlisting>
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+
+		<para>Where
+			<itemizedlist>
+				<listitem>
+					<para>LANG = language code, as defined in
+						<emphasis>$g_language_choices_arr</emphasis>
+						(see <xref linkend="admin.config.language" />)
+					</para>
+				</listitem>
+				<listitem>
+					<para>CODE = string code, as called by
+						lang_get() function.
+					</para>
+				</listitem>
+				<listitem>
+					<para>STRING = string value / translation
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+		<note><para>Mixing old and new formats within the file is not supported.
+		</para></note>
+		<warning><para>NEVER call <emphasis>lang_get_current()</emphasis>
+			from the <emphasis>Custom Strings File</emphasis>, as doing so
+			will reset the active_language, causing the code to return
+			incorrect translations if the default language is different
+			from English.
+			Always use the <emphasis>$g_active_language</emphasis>
+			global variable instead.
+		</para></warning>
+	</section>
+
     <section id="admin.customize.customfields">
         <title>Custom Fields</title>
 
@@ -79,8 +155,10 @@
 						(see <xref linkend="admin.customize.customfields.localize" />).
 					</para>
 					<note><para>If the specified variable is not found in the
-						language files or in custom strings, then it will be
-						displayed as-is.
+						language files or in the
+						<emphasis>Custom Strings File</emphasis>
+						(see <xref linkend="admin.customize.strings"/>),
+						then it will be displayed as-is.
 					</para></note>
                 </listitem>
                 <listitem>
@@ -305,9 +383,11 @@
 				<listitem>
 					<para>Set the localization strings
 						<itemizedlist>
-							<listitem><para>In the main MantisBT directory, locate and
-								edit file <emphasis>custom_strings_inc.php</emphasis>
-								(create it if it does not exist)
+							<listitem><para>In the main MantisBT directory,
+								locate and edit the
+								<emphasis>Custom Strings File</emphasis>
+								(see <xref linkend="admin.customize.strings"/>),
+								create it if it does not exist.
 							</para></listitem>
 							<listitem><para>Localize the custom field's label
 								<emphasis>my_start_date</emphasis> by adding
@@ -326,15 +406,6 @@ switch( $g_active_language ) {
 		break;
 }
 </programlisting>
-								<warning><para>Do NOT call
-									<emphasis>lang_get_current()</emphasis>
-									from custom_strings_inc.php, as doing so
-									will reset the active_language, causing the
-									code to return incorrect translations if the
-									default language is different from English.
-									Always use the <emphasis>$g_active_language</emphasis>
-									global variable instead.
-								</para></warning>
 							</para></listitem>
 						</itemizedlist>
 					</para>
@@ -343,10 +414,13 @@ switch( $g_active_language ) {
 		</para>
 
 		<note><para>Had we decided to use <emphasis>start_date</emphasis>
-			as the custom field's name, then it would not have been necessary to
-			modify custom_strings_inc.php, since MantisBT would have used the
+			as the custom field's name, then it would not have been necessary
+			to modify the <emphasis>Custom Strings File</emphasis>
+			(see <xref linkend="admin.customize.strings"/>),
+			since MantisBT would have used the
 			existing, already localized string from the standard language files.
-			To check for standard strings, inspect lang/strings_english.txt.
+			To check for standard strings, inspect
+			<filename>lang/strings_english.txt</filename>.
 		</para></note>
 	</section>
 
@@ -356,7 +430,25 @@ switch( $g_active_language ) {
             <section id="admin.customize.customfields.defaults.date">
                 <title>Dynamic defaults for Date fields</title>
 
-                <para>Custom fields of type date can be defaulted to a specific dates or to relative dates.  Typically relative dates is the scenario that makes sense in most of the cases.  The format for specific dates is an integer which indicates the number of seconds since the Unix Epoch (January 1 1970 00:00:00 GMT), which is the format consumed by the PHP <ulink url="http://www.php.net/date">date()</ulink> method.  The relative scenario expects default values like {tomorrow}, {yesterday}, {+2 days}, {-3 days}, {next week}, etc.  The curly brackets indicate that this is a logical value which is then evaluated using the PHP <ulink url="http://www.php.net/strtotime">strtotime()</ulink> function.</para>
+				<para>Custom fields of type date can be defaulted to
+					either specific or relative dates.
+					Typically, relative dates is the scenario that makes
+					sense in most of the cases.
+				</para>
+				<para>The format for specific dates is an integer which
+					indicates the number of seconds since the
+					<ulink url="http://en.wikipedia.org/wiki/Unix_time">
+						Unix Epoch</ulink> (January 1 1970 00:00:00 UTC),
+					which is the format consumed by the PHP
+					<ulink url="http://www.php.net/date">date()</ulink> method.
+				</para>
+				<para>The relative scenario expects default values like
+					{tomorrow}, {yesterday}, {+2 days}, {-3 days}, {next week}, etc.
+					The curly brackets indicate that this is a logical value
+					which is then evaluated using the PHP
+					<ulink url="http://www.php.net/strtotime">strtotime()</ulink>
+					function.
+				</para>
             </section>
         </section>
 
@@ -483,6 +575,7 @@ functions section.</para>
         </section>
 
     </section>
+
     <section id="admin.customize.enums">
         <title>Enumerations</title>
 
@@ -497,20 +590,20 @@ functions section.</para>
         </para>
 
         <formalpara>
-            <title>How enumerations work?</title>
+			<title>How do enumerations work?</title>
 
             <para>
                 <filename>core/constant_inc.php</filename> defines the
                 constants that correspond to those in the enumeration. These are
                 useful to refer to these enumerations in the configs and the code.
-                <programlisting>
-                    define( 'VIEWER', 10 )
-                    define( 'REPORTER', 25 )
-                    define( 'UPDATER',  40 )
-                    define( 'DEVELOPER', 55 )
-                    define( 'MANAGER', 70 )
-                    define( 'ADMINISTRATOR', 90 )
-                </programlisting>
+<programlisting>
+define( 'VIEWER', 10 );
+define( 'REPORTER', 25 );
+define( 'UPDATER',  40 );
+define( 'DEVELOPER', 55 );
+define( 'MANAGER', 70 );
+define( 'ADMINISTRATOR', 90 );
+</programlisting>
             </para>
         </formalpara>
 
@@ -518,38 +611,41 @@ functions section.</para>
             <filename>config_defaults_inc.php</filename> includes the defaults for the
             enumerations. The configuration options that are defaulted here are
             used in specifying which enumerations are active and should be used
-            in MantisBT.  However, the strings included in the enumerations here
-            are just for documentation purpose, they are not shown to the user
-            (due to the need for localisation). Hence, if an entry in this
-            enumeration is not found in the corresponding localised enumeration
-            (i.e. 70:manager), then it will be printed to the user as @70@.
+			in MantisBT.
 
-            <programlisting>
-                $g_access_levels_enum_string =
-                '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator';
-            </programlisting>
+<programlisting>
+$g_access_levels_enum_string =
+	'10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator';
+</programlisting>
+			<note><para>The strings included in the enumerations here are just for
+				documentation purposes, they are not actually shown to the user
+				(due to the need for localisation). Hence, if an entry in this
+				enumeration is not found in the corresponding localised string
+				(i.e. 70:manager), then it will be printed to the user as @70@.
+			</para></note>
         </para>
         <para>
-            <filename>lang/strings_german.txt</filename> provide the
-            localised strings (in this case, in german) for enumerations. But again, the master list is
-            the enumeration in the configs, the ones in the language files are
+			The Language Files (e.g. <filename>lang/strings_german.txt</filename>)
+			provide the localised strings (German in this case) for enumerations.
+			But again, the <emphasis>master list</emphasis> is
+			the enumeration in the configs themselves, the ones in the language files are
             just used for finding the localised equivalent for an entry. Hence,
             if a user changes the config to have only two types of users
             developers and administrators, then only those will be prompted to
             the users even if the enumerations in the language files still
             includes the full list.
-            <programlisting>
-
-                $s_access_levels_enum_string =
-                '10:Betrachter,25:Reporter,40:Updater,55:Entwickler,70:Manager,90:Administrator';
-            </programlisting>
+<programlisting>
+$s_access_levels_enum_string =
+	'10:Betrachter,25:Reporter,40:Updater,55:Entwickler,70:Manager,90:Administrator';
+</programlisting>
         </para>
 
         <formalpara>
-            <title>How can they be customised?</title> <para>Let say we want to remove access level
-                "Updater" and add access level "Senior
-                Developer".
-            </para>
+			<title>How can they be customised?</title>
+			<para>Let say we want to remove access level
+				"Updater" and add access level "Senior
+				Developer".
+			</para>
         </formalpara>
         <para>
             The file <filename>custom_constants_inc.php</filename> is supported for the
@@ -559,49 +655,45 @@ functions section.</para>
             MantisBT and you will need to create it if you need such
             customisation. In our example, we need to define a constant for the
             new access level.
-            <programlisting>
-                define ( 'SENIOR_DEVELOPER', 60 );
-            </programlisting>
+<programlisting>
+define( 'SENIOR_DEVELOPER', 60 );
+</programlisting>
         </para>
 
         <para>
             In <filename>config_inc.php</filename>
-            <programlisting>
-                // Remove Updater and add Senior Developer
-                $g_access_levels_enum_string =
-                '10:viewer,25:reporter,55:developer,60:senior_developer,70:manager,90:administrator';
-                // Give access to Senior developers to create/delete custom field.
-                $g_manage_custom_fields_threshold = SENIOR_DEVELOPER;
-            </programlisting>
+<programlisting>
+// Remove Updater and add Senior Developer
+$g_access_levels_enum_string =
+	'10:viewer,25:reporter,55:developer,60:senior_developer,70:manager,90:administrator';
+
+// Give access to Senior developers to create/delete custom field.
+$g_manage_custom_fields_threshold = SENIOR_DEVELOPER;
+</programlisting>
         </para>
 
         <para>
-            The file <filename>custom_strings_inc.php</filename> is introduced for a similar reason
-            to that of custom_constants_inc.php, which is to define custom
-            strings. The advantage of defining them here is to provide a simple
-            upgrade path, and avoid having to re-do the changes when upgrading
-            to the next MantisBT release. Note that you will need to create this
-            file if you need such customisation. The file is automatically
-            detected and included by MantisBT code.
-            <programlisting>
-                # Note that we don't have to remove the Updater entry from the
-                localisation file if the current language is 'english' ) {
-                $s_access_levels_enum_string =
-                '10:Betrachter,25:Reporter,40:Updater,55:Entwickler,60:Senior
-                Developer,70:Manager,90:Administrator'; }
-            </programlisting>
+			Update the <emphasis>Custom Strings File</emphasis>
+			(see <xref linkend="admin.customize.strings"/>)
+<programlisting>
+$s_access_levels_enum_string =
+	'10:Betrachter,25:Reporter,40:Updater,55:Entwickler,60:Senior Developer,70:Manager,90:Administrator';
+</programlisting>
+			<note><para>We don't need to remove the <emphasis>Updater</emphasis>
+				entry from the localisation file if the current language
+				is 'English'.
+			</para></note>
         </para>
 
         <formalpara>
-            <title>Conclusion</title><para>We have covered how enumerations work in general, and how
-                to customise one of them. If you are interested in customising
-                other enumerations, a good starting point would be to go to "MantisBT
-                Enum Strings" section in config_defaults_inc.php. This section
-                defines all enumerations that are used by MantisBT.
-                For versions that are older than 0.18.0, custom_*_inc.php files are
-                not supported, and hence you will need to change in the actual
-                constants / language files directly.
-            </para>
+			<title>Conclusion</title>
+			<para>We have covered how enumerations work in general, and how
+				to customise one of them. If you are interested in customising
+				other enumerations, a good starting point would be to go to
+				<emphasis>MantisBT Enum Strings</emphasis> section in
+				<filename>config_defaults_inc.php</filename>. This section
+				defines all enumerations that are used by MantisBT.
+			</para>
         </formalpara>
 
     </section>
@@ -616,55 +708,75 @@ functions section.</para>
             <itemizedlist>
                 <listitem>
                     <para>Notify only managers of new issues.
-                        <programlisting>
-                            $g_notify_flags['new']['threshold_min'] = MANAGER;
-                            $g_notify_flags['new']['threshold_max'] = MANAGER;
-                        </programlisting>
+<programlisting>
+$g_notify_flags['new'] = array(
+	'threshold_min' => MANAGER,
+	'threshold_max' => MANAGER,
+);
+</programlisting>
                     </para>
                 </listitem>
                 <listitem>
                     <para>Notify Developers and managers of all project events,
                         except, exclude developers from the 'closed' events.
-                        <programlisting>$g_default_notify_flags['threshold_min'] = DEVELOPER;
-                            $g_default_notify_flags['threshold_max'] = MANAGER;
-                            $g_notify_flags['closed']['threshold_max'] = MANAGER;
-                            $g_notify_flags['closed']['threshold_max'] = MANAGER;
-                        </programlisting>
+<programlisting>
+$g_default_notify_flags = array(
+	'threshold_min' => DEVELOPER,
+	'threshold_max' => MANAGER,
+);
+$g_notify_flags['closed'] = array(
+	'threshold_min' => MANAGER,
+	'threshold_max' => MANAGER,
+);
+</programlisting>
                     </para>
                 </listitem>
                 <listitem>
                     <para>Exclude those who contributed issue notes from getting
                         messages about other changes in the issue.
-                        <programlisting>$g_default_notify_flags['bugnotes'] = OFF;</programlisting>
+<programlisting>
+$g_default_notify_flags['bugnotes'] = OFF;
+</programlisting>
                     </para>
                 </listitem>
                 <listitem>
                     <para>Exclude those monitoring issues from seeing the 'closed'
                         message
-                        <programlisting>$g_notify_flags['closed']['monitor'] = OFF;</programlisting>
+<programlisting>
+$g_notify_flags['closed']['monitor'] = OFF;
+</programlisting>
                     </para>
                 </listitem>
                 <listitem>
                     <para>Only notify developers when issue notes are added.
-                        <programlisting>$g_notify_flags['bugnote']['threshold_min'] = DEVELOPER;
-                            $g_notify_flags['bugnote']['threshold_max'] = DEVELOPER;
-                        </programlisting>
+<programlisting>
+$g_notify_flags['bugnote'] = array(
+	'threshold_min' => DEVELOPER,
+	'threshold_max' => DEVELOPER,
+);
+</programlisting>
                     </para>
                 </listitem>
                 <listitem>
                     <para>Notify managers of changes in sponsorship.
-                        <programlisting>$g_notify_flags['sponsor']['threshold_max'] = MANAGER;
-                            $g_notify_flags['sponsor']['threshold_max'] = MANAGER;
-                        </programlisting>
+<programlisting>
+$g_notify_flags['sponsor'] = array(
+	'threshold_min' => MANAGER,
+	'threshold_max' => MANAGER,
+);
+</programlisting>
                     </para>
                 </listitem>
                 <listitem>
                     <para>Notify originator and managers of changes in ownership
                         ("Assigned To:").
-                        <programlisting>$g_notify_flags['owner']['threshold_max'] = MANAGER;
-                            $g_notify_flags['owner']['threshold_max'] = MANAGER;
-                            $g_notify_flags['owner']['reporter'] = ON;
-                        </programlisting>
+<programlisting>
+$g_notify_flags['owner'] = array(
+	'threshold_min' => MANAGER,
+	'threshold_max' => MANAGER,
+	'reporter'      => ON,
+);
+</programlisting>
                     </para>
                 </listitem>
                 <listitem>
@@ -672,14 +784,21 @@ functions section.</para>
                         to those involved in them. Don't send mail people already know
                         about. Also send new issue notifications to managers so they can
                         screen them.
-                        <programlisting>$g_mail_receive_own = OFF;
-                            $g_default_notify_flags =
-                            array('reporter' =&gt; ON, 'handler' =&gt; ON, 'monitor' =&gt; ON,
-                            'bugnotes' =&gt; ON, 'threshold_min' =&gt; NOBODY, 'threshold_max'
-                            =&gt; NOBODY);
-                            $g_notify_flags['new']['threshold_min'] = MANAGER;
-                            $g_notify_flags['new']['threshold_max'] = MANAGER;
-                        </programlisting>
+<programlisting>
+$g_mail_receive_own = OFF;
+$g_default_notify_flags = array(
+	'reporter'      => ON,
+	'handler'       => ON,
+	'monitor'       => ON,
+	'bugnotes'      => ON,
+	'threshold_min' => NOBODY,
+	'threshold_max' => NOBODY
+);
+$g_notify_flags['new'] = array(
+	'threshold_min' => MANAGER,
+	'threshold_max' => MANAGER,
+);
+</programlisting>
                     </para>
                 </listitem>
                 <listitem>
@@ -735,8 +854,9 @@ $g_status_colors['<emphasis>testing</emphasis>'] = '#ACE7AE';
 				</listitem>
 
 				<listitem>
-					<para>Define the required translation strings for the new
-						status, for each language used in the installation.
+					<para>Define the required translation strings for
+						the new status, for each language used in
+						the installation.
 						<itemizedlist>
 							<listitem><para><emphasis>s_status_enum_string</emphasis>:
 								status codes translation (refer to the original
@@ -758,9 +878,10 @@ $g_status_colors['<emphasis>testing</emphasis>'] = '#ACE7AE';
 						underscores in the language strings names (e.g.
 						for '35:pending user', use '$s_pending_user_bug_button')
 					</para>
-					<para>In the main mantisbt directory, locate and edit file
-						<emphasis>custom_strings_inc.php</emphasis>;
-						(create it if it does not exist)
+					<para>In the main mantisbt directory, locate and edit
+						the <emphasis>Custom Strings File</emphasis>
+						(see <xref linkend="admin.customize.strings"/>),
+						create it if it does not exist
 <programlisting>
 &lt;?php
 # Translation for Custom Status Code: <emphasis>testing</emphasis>
@@ -785,15 +906,6 @@ switch( $g_active_language ) {
 		break;
 }
 </programlisting>
-						<warning><para>Do NOT call
-							<emphasis>lang_get_current()</emphasis>
-							from custom_strings_inc.php, as doing so
-							will reset the active_language, causing the
-							code to return incorrect translations if the
-							default language is different from English.
-							Always use the <emphasis>$g_active_language</emphasis>
-							global variable instead.
-						</para></warning>
 					</para>
 				</listitem>
 
@@ -1049,7 +1161,8 @@ define( 'ERROR_VALIDATE_FAILURE', 2000 );
 				</listitem>
 
 				<listitem>
-					<para><filename>custom_strings_inc.php</filename>
+					<para><emphasis>Custom Strings File</emphasis>
+						(see <xref linkend="admin.customize.strings"/>)
 					</para>
 
 					<programlisting>

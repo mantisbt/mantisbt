@@ -878,10 +878,24 @@ function db_time_queries() {
 
 /**
  * get database table name
- * @return string containing full database table name
+ *
+ * @param string $p_name can either be specified as 'XXX' (e.g. 'bug'), or
+ *                       using the legacy style 'mantis_XXX_table'; in the
+ *                       latter case, a deprecation warning will be issued
+ * @return string containing full database table name (with prefix and suffix)
  */
-function db_get_table( $p_option ) {
-	$t_table = $p_option;
+function db_get_table( $p_name ) {
+	if( strpos( $p_name, 'mantis_') === 0 ) {
+		$t_table = substr( $p_name, 7, strpos( $p_name, '_table' ) - 7 );
+		error_parameters(
+			"db_get_table( '$p_name' )",
+			"db_get_table( '$t_table' )"
+		);
+		trigger_error(ERROR_DEPRECATED_SUPERSEDED, WARNING );
+	} else {
+		$t_table = $p_name;
+	}
+
 	$t_prefix = config_get_global( 'db_table_prefix' );
 	$t_suffix = config_get_global( 'db_table_suffix' );
 	if ( $t_prefix ) {

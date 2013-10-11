@@ -223,6 +223,7 @@ function html_page_top2() {
 			echo '<br />';
 		}
 	}
+
 	print_menu();
 	echo '<div id="content">', "\n";
 	event_signal( 'EVENT_LAYOUT_CONTENT_BEGIN' );
@@ -1047,7 +1048,7 @@ function print_manage_menu( $p_page = '' ) {
 	echo '<ul class="menu">';
 	foreach( $t_pages AS $t_page ) {
 		if( $t_page['url'] == '' ) {
-			echo '<li>', lang_get( $t_page['label'] ), '</li>';
+			echo '<li><span>', lang_get( $t_page['label'] ), '</span></li>';
 		} else {
 			echo '<li><a href="'. helper_mantis_url( $t_page['url'] ) .'">' . lang_get( $t_page['label'] ) . '</a></li>';
 		}
@@ -1123,14 +1124,14 @@ function print_manage_config_menu( $p_page = '' ) {
 	echo '<ul class="menu">';
 	foreach ( $t_pages as $t_page ) {
 		if( $t_page['url'] == '' ) {
-			echo '<li>', lang_get( $t_page['label'] ), '</li>';
+			echo '<li><span>', lang_get( $t_page['label'] ), '</span></li>';
 		} else {
 			echo '<li><a href="'. helper_mantis_url( $t_page['url'] ) .'">' . lang_get( $t_page['label'] ) . '</a></li>';
 		}
 	}
 
 	foreach ( $t_menu_options as $t_menu_item ) {
-		echo '<li>', $t_menu_item, '</li>';
+		echo '<li><span>', $t_menu_item, '</span></li>';
 	}
 
 	echo '</ul>';

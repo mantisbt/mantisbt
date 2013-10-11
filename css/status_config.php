@@ -54,8 +54,16 @@ header( 'X-Content-Type-Options: nosniff' );
 /**
  *	@todo Modify to run sections only on certain pages.
  *	eg. status colors are only necessary on a few pages.(my view, view all bugs, bug view, etc. )
- *	other pages my need to include dynamic css styles as well
+ *	other pages may need to include dynamic css styles as well
  */
+$t_referer_page = basename( parse_url( $_SERVER['HTTP_REFERER'], PHP_URL_PATH ) );
+switch( $t_referer_page ) {
+	case 'login_page.php':
+		# We don't need custom status colors on login page, and this is
+		# actually causing an error since we're not authenticated yet.
+		exit;
+}
+
 $t_status_string = config_get( 'status_enum_string' );
 $t_statuses = MantisEnum::getAssocArrayIndexedByValues( $t_status_string );
 $t_colors = config_get( 'status_colors' );
@@ -63,7 +71,7 @@ $t_color_count = count( $t_colors );
 $t_color_width = ( $t_color_count > 0 ? ( round( 100/$t_color_count ) ) : 0 );
 $t_status_percents = get_percentage_by_status();
 foreach( $t_statuses AS $t_id=>$t_label ) {
-	if( array_key_exists( $t_label, $t_colors ) ) { 
+	if( array_key_exists( $t_label, $t_colors ) ) {
 		echo ".$t_label-color { background-color: {$t_colors[$t_label]}; width: $t_color_width%; }\n";
 	}
 	if( array_key_exists( $t_id, $t_status_percents ) ) {

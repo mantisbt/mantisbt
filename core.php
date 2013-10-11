@@ -123,7 +123,14 @@ function require_lib( $p_library_name ) {
 	global $g_library_path;
 	if ( !isset( $g_libraries_included[$p_library_name] ) ) {
 		$t_existing_globals = get_defined_vars();
-		require_once( $g_library_path . $p_library_name );
+
+		$t_library_file_path = $g_library_path . $p_library_name;
+		if ( !file_exists( $t_library_file_path ) ) {
+			echo "External library '$t_library_file_path' not found.";
+			exit;
+		}
+
+		require_once( $t_library_file_path );
 		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_existing_globals' => 0, 't_new_globals' => 0 ) );
 		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
 			global $$t_global_name;

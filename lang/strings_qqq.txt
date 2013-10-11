@@ -30,40 +30,38 @@
  * @link http://www.mantisbt.org
 */
 
-$s_messages = array(
-	'actiongroup_menu_copy' => '{{Identical|Copy}}',
-	'excel_export' => '“Excel” is the name of a program; do not translate it unless Microsoft has translated the program’s name into your language (e.g., 엑셀 in Korean).',
-	'login_link' => '{{Identical|Login}}',
-	'go_back' => '{{Identical|Go back}}',
-	'email_summary' => '{{Identical|Summary}}',
-	'manage_profiles_link' => '{{Identical|Profile}}',
-	'timezone' => '{{Identical|Time zone}}',
-	'stick_bug_button' => 'Button label to mark an issue sticky.',
-	'unstick_bug_button' => 'Button label to mark an issue unsticky.',
-	'summary' => '{{Identical|Summary}}',
-	'profile' => '{{Identical|Profile}}',
-	'revision' => '{{Identical|Revision}}',
-	'please_report' => 'Is displayed whenever an SQL error occurs.
-* $1 is a mailto: link with {{msg-mantis|s_administrator}} as link text',
-	'click_to_login' => '{{Identical|Login}}',
-	'login_title' => '{{Identical|Login}}',
-	'login_button' => '{{Identical|Login}}',
-	'plugin_update' => '{{Identical|Update}}',
-	'plugin_key' => 'This message is the title of the page section used to show the different meaning of color codes;
-Color codes are described in the s_plugin_key* messages',
-	'update' => '{{Identical|Update}}',
-	'summary_link' => '{{Identical|Summary}}',
-	'logout_link' => '{{Identical|Logout}}',
-	'back_link' => '{{Identical|Back}}',
-	'start_date' => '{{Identical|Start date}}',
-	'end_date' => '{{Identical|End date}}',
-	'ok' => '{{Identical|OK}}',
-	'add_user_to_monitor' => '{{Identical|Add}}',
-	'add_new_relationship_button' => '{{Identical|Add}}',
-	'on' => 'Switch confition (for filter, for example)',
-	'off' => 'Switch condition (for filter, for example)',
-	'show_all_tags' => '{{Identical|All}}',
-);
+$s_actiongroup_menu_copy = '{{Identical|Copy}}';
+$s_excel_export = '“Excel” is the name of a program; do not translate it unless Microsoft has translated the program’s name into your language (e.g., 엑셀 in Korean).';
+$s_login_link = '{{Identical|Login}}';
+$s_go_back = '{{Identical|Go back}}';
+$s_email_summary = '{{Identical|Summary}}';
+$s_manage_profiles_link = '{{Identical|Profile}}';
+$s_timezone = '{{Identical|Time zone}}';
+$s_stick_bug_button = 'Button label to mark an issue sticky.';
+$s_unstick_bug_button = 'Button label to mark an issue unsticky.';
+$s_summary = '{{Identical|Summary}}';
+$s_profile = '{{Identical|Profile}}';
+$s_revision = '{{Identical|Revision}}';
+$s_please_report = 'Is displayed whenever an SQL error occurs.
+* $1 is a mailto: link with {{msg-mantis|s_administrator}} as link text';
+$s_click_to_login = '{{Identical|Login}}';
+$s_login_title = '{{Identical|Login}}';
+$s_login_button = '{{Identical|Login}}';
+$s_plugin_update = '{{Identical|Update}}';
+$s_plugin_key = 'This message is the title of the page section used to show the different meaning of color codes;
+Color codes are described in the s_plugin_key* messages';
+$s_update = '{{Identical|Update}}';
+$s_summary_link = '{{Identical|Summary}}';
+$s_logout_link = '{{Identical|Logout}}';
+$s_back_link = '{{Identical|Back}}';
+$s_start_date = '{{Identical|Start date}}';
+$s_end_date = '{{Identical|End date}}';
+$s_ok = '{{Identical|OK}}';
+$s_add_user_to_monitor = '{{Identical|Add}}';
+$s_add_new_relationship_button = '{{Identical|Add}}';
+$s_on = 'Switch confition (for filter, for example)';
+$s_off = 'Switch condition (for filter, for example)';
+$s_show_all_tags = '{{Identical|All}}';
 
 
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'If we need to specify the number of expected parameter in string, we just need to write something like "Lalal %2$s bububu %1$d", where 1 and 2 - the index number in argument list (actually, expected in original message)';

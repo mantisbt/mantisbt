@@ -214,12 +214,22 @@ $g_language_path = $g_absolute_path . 'lang' . DIRECTORY_SEPARATOR;
 
 /**
  * absolute path to custom strings file.
- * This file allows overriding of strings declared in the language file, or in plugin language files
+ * This file allows overriding of strings declared in language files,
+ * including plugin-specific ones.
+ *
  * Two formats are supported:
- * Legacy format: $s_*
- * New format: define a $s_custom_messages array as follows:
- * $s_custom_messages = array( 'en' => array( string => string ) ) ;
- * NOTE: you can not mix/merge old/new formats within this file.
+ * - New format: define a $s_custom_messages array as follows:
+ *   $s_custom_messages = array( LANG => array( CODE => STRING, ... ) );
+ * - Legacy format: one variable per string
+ *   $s_CODE = STRING;
+ *
+ * Where
+ * - LANG   = language code, as defined in {@link $g_language_choices_arr}
+ * - CODE   = string code, as called by {@link lang_get()}
+ * - STRING = string value / translation
+ *
+ * NOTE: mixing old and new formats within the file is not supported
+ *
  * @global string $g_custom_strings_file
  */
 $g_custom_strings_file = $g_absolute_path . 'custom_strings_inc.php';
@@ -4046,108 +4056,134 @@ $g_subprojects_inherit_versions = ON;
  **********************************/
 
 /**
- * Time page loads. The page execution timer shows at the bottom of each page.
+ * Time page loads.
+ * The page execution timer shows at the bottom of each page.
+ *
  * @global int $g_show_timer
  */
 $g_show_timer = OFF;
 
 /**
  * Show memory usage for each page load in the footer.
+ *
  * @global int $g_show_memory_usage
  */
 $g_show_memory_usage = OFF;
 
 /**
- * Used for debugging e-mail feature, when set to OFF the emails work as normal.
- * when set to e-mail address, all e-mails are sent to this address with the
- * original To, Cc, Bcc included in the message body.
+ * Used for debugging e-mail notifications.
+ * When it is OFF, the emails are sent normally.
+ * If set to an e-mail address, all messages are sent to it, with the
+ * original recipients (To, Cc, Bcc) included in the message body.
+ *
  * @global int $g_debug_email
  */
 $g_debug_email = OFF;
 
 /**
  * Shows the total number/unique number of queries executed to serve the page.
+ *
  * @global int $g_show_queries_count
  */
 $g_show_queries_count = OFF;
 
 /**
- * --- detailed error messages -----
- * Shows a list of variables and their values when an error is triggered
- * Only applies to error types configured to 'halt' in $g_display_errors, below
+ * Errors Display method
+ * Defines what errors are displayed and how. Available options are:
+ * - DISPLAY_ERROR_HALT    stop and display error message (including
+ *                         variables and backtrace if
+ *                         {@link $g_show_detailed_errors} is ON)
+ * - DISPLAY_ERROR_INLINE  display 1 line error and continue execution
+ * - DISPLAY_ERROR_NONE    no error displayed
+ *
+ * WARNING: E_USER_ERROR should always be set to DISPLAY_ERROR_HALT. Using
+ * another value will cause program execution to continue, which may lead to
+ * data integrity issues and/or cause MantisBT to function incorrectly.
+ *
+ * A developer might set this in config_inc.php as:
+ *	$g_display_errors = array(
+ *		E_WARNING      => DISPLAY_ERROR_HALT,
+ *		E_NOTICE       => DISPLAY_ERROR_INLINE,
+ *		E_USER_ERROR   => DISPLAY_ERROR_HALT,
+ *		E_USER_WARNING => DISPLAY_ERROR_INLINE,
+ *		E_USER_NOTICE  => DISPLAY_ERROR_INLINE
+ *	);
+ *
+ * @global array $g_display_errors
+ */
+$g_display_errors = array(
+	E_WARNING      => DISPLAY_ERROR_INLINE,
+	E_NOTICE       => DISPLAY_ERROR_NONE,
+	E_USER_ERROR   => DISPLAY_ERROR_HALT,
+	E_USER_WARNING => DISPLAY_ERROR_INLINE,
+	E_USER_NOTICE  => DISPLAY_ERROR_NONE
+);
+
+/**
+ * Detailed error messages
+ * Shows a list of variables and their values when an error is triggered.
+ * Only applies to error types configured to DISPLAY_ERROR_HALT in
+ * {@link $g_display_errors}
+ *
  * WARNING: Potential security hazard.  Only turn this on when you really
  * need it for debugging
+ *
  * @global int $g_show_detailed_errors
  */
 $g_show_detailed_errors = OFF;
 
 /**
- * --- error display ---
- * what errors are displayed and how?
- * The options for display are:
- *  'halt' - stop and display traceback
- *  'inline' - display 1 line error and continue
- *  'none' - no error displayed
- * A developer might set this in config_inc.php as:
- *	$g_display_errors = array(
- *		E_WARNING => 'halt',
- *		E_NOTICE => 'halt',
- *		E_USER_ERROR => 'halt',
- *		E_USER_WARNING => 'none',
- *		E_USER_NOTICE => 'none'
- *	);
- * @global array $g_display_errors
- */
-$g_display_errors = array(
-	E_WARNING => 'inline',
-	E_NOTICE => 'none',
-	E_USER_ERROR => 'halt',
-	E_USER_WARNING => 'inline',
-	E_USER_NOTICE => 'none'
-);
-
-/**
- * --- debug messages ---
+ * Debug messages
  * If this option is turned OFF (default) page redirects will continue to
- *  function even if a non-fatal error occurs.  For debugging purposes, you
- *  can set this to ON so that any non-fatal error will prevent page redirection,
- *  allowing you to see the errors.
- * Only turn this option on for debugging
+ * function even if a non-fatal error occurs.  For debugging purposes, you
+ * can set this to ON so that any non-fatal error will prevent page redirection,
+ * allowing you to see the errors.
+ * Only turn this option on when debugging
+ *
  * @global int $g_stop_on_errors
  */
 $g_stop_on_errors = OFF;
 
 /**
- * --- system logging ---
- * This controls the logging of information to a separate file for debug or audit
- * $g_log_level controls what information is logged
- *  see constant_inc.php for details on the log channels available
- *  e.g., $g_log_level = LOG_EMAIL | LOG_EMAIL_RECIPIENT | LOG_FILTERING | LOG_AJAX;
+ * System logging
+ * This controls the type of logging information recorded.
+ * The available log channels are:
  *
- * $g_log_destination specifies the file where the data goes
- *   right now, only "file:<file path>" is supported
- *   e.g. (Linux), $g_log_destination = 'file:/tmp/mantisbt.log';
- *   e.g. (Windows), $g_log_destination = 'file:c:/temp/mantisbt.log';
- *   see http://www.php.net/error_log for details
+ * LOG_NONE, LOG_EMAIL, LOG_EMAIL_RECIPIENT, LOG_FILTERING,
+ * LOG_AJAX, LOG_LDAP, LOG_DATABASE, LOG_SOAP, LOG_ALL
+ *
+ * and can be combined using
+ * {@link http://php.net/language.operators.bitwise PHP bitwise operators}
+ * Refer to {@link $g_log_destination} for details on where to save the logs.
+ *
  * @global int $g_log_level
  */
 $g_log_level = LOG_NONE;
 
 /**
- * 4 Options currently exist for log destination:
- * a) '': The default value (empty string) means default PHP error log settings
- * b) 'file': Log to a specific file - specified as 'file:/var/log/mantis.log'
- * c) 'firebug': make use of firefox's firebug addon from http://getfirebug.com/ - Note: if user is
- *    not running firefox, this options falls through to the default php error log settings.
- * d) 'page': Display log output at bottom of the page.
+ * Specifies where the log data goes
+ *
+ * The following 4 options are available:
+ * - '':        The empty string means {@link http://php.net/error_log
+ *              default PHP error log settings}
+ * - 'file':    Log to a specific file, specified as an absolute path, e.g.
+ *              'file:/var/log/mantis.log' (Unix) or
+ *              'file:c:/temp/mantisbt.log' (Windows)
+ * - 'firebug': make use of Firefox {@link http://getfirebug.com/ Firebug Add-on}.
+ *              If user is not running firefox, this options falls back to
+ *              the default php error log settings.
+ * - 'page':    Display log output at bottom of the page. See also
+ *              {@link $g_show_log_threshold} to restrict who can see log data.
+ *
  * @global string $g_log_destination
  */
 $g_log_destination = '';
 
 /**
- * Indicates the access level required for a user to see the log output (if log_destination is page)
- * Note that this threshold is compared against the user's default global access level rather than
- * the threshold based on the current active project.
+ * Indicates the access level required for a user to see the log output
+ * (if {@link $g_log_destination} is 'page').
+ * Note that this threshold is compared against the user's global access level,
+ * rather than the one from the currently active project.
  *
  * @global int $g_show_log_threshold
  */

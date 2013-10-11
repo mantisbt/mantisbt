@@ -131,6 +131,7 @@ $t_bug_note->time_tracking = gpc_get_string( 'time_tracking', '0:00' );
 # look at a range of statuses when performing this check.
 $t_resolved_status = config_get( 'bug_resolved_status_threshold' );
 $t_closed_status = config_get( 'bug_closed_status_threshold' );
+$t_reopen_resolution = config_get( 'bug_reopen_resolution' );
 $t_resolve_issue = false;
 $t_close_issue = false;
 $t_reopen_issue = false;
@@ -179,7 +180,7 @@ if ( $t_existing_bug->status !== $t_updated_bug->status ) {
 	}
 	if( $t_reopen_issue ) {
 		# for everyone allowed to reopen an issue, set the reopen resolution
-		$t_updated_bug->resolution = config_get( 'bug_reopen_resolution' );
+		$t_updated_bug->resolution = $t_reopen_resolution;
 	}
 }
 
@@ -209,13 +210,30 @@ if ( $t_existing_bug->category_id !== $t_updated_bug->category_id ) {
 	}
 }
 
-# Don't allow resolutions denoting completion of issue to be used if the issue
-# has yet to be resolved or closed.
-if ( $t_existing_bug->resolution !== $t_updated_bug->resolution &&
-     $t_updated_bug->resolution >= config_get( 'bug_resolution_fixed_threshold' ) &&
-     $t_updated_bug->status < $t_resolved_status ) {
-	error_parameters( lang_get( 'resolution' ) );
-	trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
+# Don't allow changing the Resolution in the following cases:
+# - new status < RESOLVED and resolution denoting completion (>= fixed_threshold)
+# - new status >= RESOLVED and resolution < fixed_threshold
+# - resolution = REOPENED and current status < RESOLVED and new status >= RESOLVED
+# Refer to #15653 for further details (particularly note 37180)
+$t_resolution_fixed_threshold = config_get( 'bug_resolution_fixed_threshold' );
+if( $t_existing_bug->resolution != $t_updated_bug->resolution && (
+	   (  $t_updated_bug->resolution >= $t_resolution_fixed_threshold
+	   && $t_updated_bug->resolution != $t_reopen_resolution
+	   && $t_updated_bug->status < $t_resolved_status
+	   )
+	|| (  $t_updated_bug->resolution == $t_reopen_resolution
+	   && (  $t_existing_bug->status < $t_resolved_status
+	      || $t_updated_bug->status >= $t_resolved_status
+	   ) )
+	|| (  $t_updated_bug->resolution < $t_resolution_fixed_threshold
+	   && $t_updated_bug->status >= $t_resolved_status
+	   )
+) ) {
+	error_parameters(
+		get_enum_element( 'resolution', $t_updated_bug->resolution ),
+		get_enum_element( 'status', $t_updated_bug->status )
+	);
+	trigger_error( ERROR_INVALID_RESOLUTION, ERROR );
 }
 
 # Ensure that the user has permission to change the target version of the issue.
