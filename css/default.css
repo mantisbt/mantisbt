@@ -437,6 +437,7 @@ div.table-container {
 }
 
 #view-issue-details,
+#bug-update,
 #bugnote_add_open,
 #history_open
 	{ width: 100%; margin: 3px; }

@@ -169,26 +169,46 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 
 print_recently_visited();
 
-echo '<br />';
-echo '<form name="update_bug_form" method="post" action="bug_update.php">';
-echo form_security_field( 'bug_update' );
-echo '<table class="width100" cellspacing="1">';
-echo '<tr>';
-echo '<td class="form-title" colspan="3">';
-echo '<input type="hidden" name="bug_id" value="', $tpl_bug_id, '" />';
-echo lang_get( 'updating_bug_advanced_title' );
-echo '</td><td class="right" colspan="3">';
-print_bracket_link( string_get_bug_view_url( $tpl_bug_id ), lang_get( 'back_to_bug_link' ) );
-echo '</td></tr>';
+?>
+<br />
+<div id="bug-update" class="form-container">
 
+	<form name="update_bug_form" method="post" action="bug_update.php">
+		<?php echo form_security_field( 'bug_update' ); ?>
+		<table>
+			<thead>
+				<tr>
+					<td class="form-title" colspan="3">
+						<input type="hidden" name="bug_id" value="', $tpl_bug_id, '" />
+						<?php echo lang_get( 'updating_bug_advanced_title' ); ?>
+					</td>
+					<td class="right" colspan="3">
+						<?php print_bracket_link(
+							string_get_bug_view_url( $tpl_bug_id ),
+							lang_get( 'back_to_bug_link' )
+							);
+						?>
+					</td>
+				</tr>
+
+<?php
 # Submit Button
 if ( $tpl_top_buttons_enabled ) {
-        echo '<tr><td class="center" colspan="6">';
-        echo '<input ', helper_get_tab_index(), ' type="submit" class="button" value="', lang_get( 'update_information_button' ), '" />';
-        echo '</td></tr>';
+?>
+				<tr>
+					<td class="center" colspan="6">
+						<input ', helper_get_tab_index(), '
+							type="submit" class="button"
+							value="', lang_get( 'update_information_button' ), '" />
+					</td>
+				</tr>
+			</thead>
+
+<?php
 }
-
-
+?>
+			<tbody>
+<?php
 event_signal( 'EVENT_UPDATE_BUG_FORM_TOP', array( $tpl_bug_id, true ) );
 
 if ( $tpl_show_id || $tpl_show_project || $tpl_show_category || $tpl_show_view_state || $tpl_show_date_submitted | $tpl_show_last_updated ) {
@@ -251,6 +271,7 @@ if ( $tpl_show_id || $tpl_show_project || $tpl_show_category || $tpl_show_view_s
 
 	# spacer
 	echo '<tr class="spacer"><td colspan="6"></td></tr>';
+	echo '<tr class="hidden"></tr>';
 }
 
 #
@@ -619,6 +640,7 @@ event_signal( 'EVENT_UPDATE_BUG_FORM', array( $tpl_bug_id, true ) );
 
 # spacer
 echo '<tr class="spacer"><td colspan="6"></td></tr>';
+echo '<tr class="hidden"></tr>';
 
 # Summary
 if ( $tpl_show_summary ) {
@@ -656,6 +678,7 @@ if ( $tpl_show_additional_information ) {
 }
 
 echo '<tr class="spacer"><td colspan="6"></td></tr>';
+echo '<tr class="hidden"></tr>';
 
 # Custom Fields
 $t_custom_fields_found = false;
@@ -685,7 +708,8 @@ foreach ( $t_related_custom_field_ids as $t_id ) {
 if ( $t_custom_fields_found ) {
 	# spacer
 	echo '<tr class="spacer"><td colspan="6"></td></tr>';
-} # custom fields found
+	echo '<tr class="hidden"></tr>';
+}
 
 # Bugnote Text Box
 echo '<tr>';
@@ -722,13 +746,25 @@ event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $tpl_bug_id ) );
 
 # Submit Button
 if ( $tpl_bottom_buttons_enabled ) {
-       echo '<tr><td class="center" colspan="6">';
-       echo '<input ', helper_get_tab_index(), ' type="submit" class="button" value="', lang_get( 'update_information_button' ), '" />';
-       echo '</td></tr>';
+?>
+			<tfoot>
+				<tr>
+					<td class="center" colspan="6">
+						<input <?php helper_get_tab_index(); ?>
+							type="submit" class="button"
+							value="<?php echo lang_get( 'update_information_button' ); ?>" />
+					</td>
+				</tr>
+			</tfoot>
+<?php
 }
+?>
 
-echo '</table></form>';
+		</table>
+	</form>
+</div>
 
+<?php
 define( 'BUGNOTE_VIEW_INC_ALLOW', true );
 include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bugnote_view_inc.php' );
 html_page_bottom();
