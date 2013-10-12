@@ -118,7 +118,11 @@ function checklangdir( $p_path, $p_lang_files = null ) {
 		}
 		// Skipping english language, readme and hidden files
 		foreach( $t_lang_files as $key => $t_lang ) {
-			if( $t_lang[0] == '.' || $t_lang == 'langreadme.txt' || $t_lang == STRINGS_ENGLISH ) {
+			if( $t_lang[0] == '.'
+			 || $t_lang == 'langreadme.txt'
+			 || $t_lang == 'README'
+			 || $t_lang == STRINGS_ENGLISH
+			) {
 				unset( $t_lang_files[$key] );
 			}
 		}
