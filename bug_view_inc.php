@@ -370,6 +370,7 @@ if ( $tpl_show_id || $tpl_show_project || $tpl_show_category || $tpl_show_view_s
 
 	# spacer
 	echo '<tr class="spacer"><td colspan="6"></td></tr>';
+	echo '<tr class="hidden"></tr>';
 }
 
 #
@@ -646,6 +647,7 @@ event_signal( 'EVENT_VIEW_BUG_DETAILS', array( $tpl_bug_id ) );
 
 # spacer
 echo '<tr class="spacer"><td colspan="6"></td></tr>';
+echo '<tr class="hidden"></tr>';
 
 #
 # Bug Details (screen wide fields)
@@ -703,6 +705,7 @@ if ( $tpl_can_attach_tag ) {
 
 # spacer
 echo '<tr class="spacer"><td colspan="6"></td></tr>';
+echo '<tr class="hidden"></tr>';
 
 # Custom Fields
 $t_custom_fields_found = false;
@@ -726,7 +729,8 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 if ( $t_custom_fields_found ) {
 	# spacer
 	echo '<tr class="spacer"><td colspan="6"></td></tr>';
-} # custom fields found
+	echo '<tr class="hidden"></tr>';
+}
 
 # Attachments
 if ( $tpl_show_attachments ) {
