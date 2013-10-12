@@ -170,7 +170,7 @@ class BugData {
 				$value = (int)$value;
 				break;
 			case 'target_version':
-				if ( !$this->loading ) {
+				if ( !$this->loading && $this->$name != $value) {
 					# Only set target_version if user has access to do so
 					if( !access_has_project_level( config_get( 'roadmap_update_threshold' ) ) ) {
 						trigger_error( ERROR_ACCESS_DENIED, ERROR );
