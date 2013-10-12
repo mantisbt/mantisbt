@@ -543,7 +543,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Jūsu ziņojumā konstatētas kļūdas.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Fails neeksistē';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Šādi faili ir aizliegti';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Katalogs neeksistē. Pārbaudiet projekta opcijas.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Faila dublikāts. Vispirms izdzēsiet veco failu.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Projekts ar šādu nosaukumu jau eksistē.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Nav aizpildīti visi lauki.  Pārbaudiet ievades pareizību.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Šis lietotājs ir aizsargāts. Jūs nevarat labot opcijas.';

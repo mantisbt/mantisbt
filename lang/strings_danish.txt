@@ -813,7 +813,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Din rapportering indeholder fejl.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Der er ikke valgt en fil';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Denne filtype er ikke tilladt';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Denne mappe findes ikke. Undersøg venligst projektets indstillinger.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Denne fil findes allerede. Slet den gamle fil først.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Der findes allerede et projekt med dette navn.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Et påkrævet felt er ikke udfyldt. Ret venligst dette.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Denne konto er beskyttet. Du har ikke adgang før kontoens beskyttelse er ophævet.';

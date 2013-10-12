@@ -836,7 +836,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Það var villa í tilkynningunni.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Engin skrá valin';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Þessi tegund skráar er ekki leyfð';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Þessi mappa er ekki til. Athugaðu verkefna stillinguna.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Þetta er afrit. Eyddu skránni fyrst.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Verkefni með sama nafni er til.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Nauðsynlegt svæði \'%1$s\' var autt. Athugaðu betur ílagsgögnin.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Þessi aðgangur er lokaður. Þú hefur ekki aðgang þar til læsingu hefur verið aflétt.';

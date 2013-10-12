@@ -553,7 +553,6 @@ $MANTIS_ERROR[ERROR_SQL] = 'Erro de SQL detetado';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Nenhum ficheiro especificado';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'O tipo de ficheiro está bloqueado.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'A pasta não existe. Por favor verifique as definições do projeto.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Este ficheiro é um duplicado. Por favor apague o ficheiro antes.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Já existe um projeto com esse nome.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Esta conta está protegida. Você não tem permissão para aceder a isto até que a proteção seja removida.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Acesso Negado.';

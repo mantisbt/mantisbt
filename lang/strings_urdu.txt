@@ -907,7 +907,6 @@ $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'کوی فاہل بتای نہی گی';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'اس قسم کی فاہل کی اجازت نہی';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'لسٹ دستیاب نہی ھے.
 Please check the project settings.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'یہ نقل والی فاہل ھےمہربانی کر کے پہلے اسے خارج کریں.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'اس نام کا منصو بہ پہلے ہی موجود ھے.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'اپنی اندراج والی قیمت دیکھیں ایک بہت ہی خاص اندراج نہی ھے \'%1$s\'';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'یہ کھاتہ مھفوظ ھے آپ اسے استہمال نہی کر سکتے جب تک اسے غیر  مہفوظ نہ بنایا جاے۔.';

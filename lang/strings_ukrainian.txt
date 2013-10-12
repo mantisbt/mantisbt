@@ -717,7 +717,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Десь у вашому звіті є помил
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Не вказаний файл';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Недозволений тип файлів';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Папка не існує. Перевірте параметри проекту.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Це дублікат файлу. Спочатку видаліть попередній файл.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Проект з такою назвою вже існує.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Не заповнене обов\'язкове поле \'%1$s\'.  Перевірте заповнені поля.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Цей запис захищений.  Ви не зможете переглядати його доки ввімкнений захист.';

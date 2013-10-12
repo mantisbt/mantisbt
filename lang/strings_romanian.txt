@@ -885,7 +885,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'EROARE: Aţi omis un detaliu obligatoriu din rapo
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'EROARE: Nu aţi specificat un fişier.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'ERROR: Acest tip de fişier nu este acceptat.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'EROARE: Calea specificată nu există. Verificaţi configuraţia proiectului.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ERROR: Acest fişier există deja. Ştergeţi vechiul fişier.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'ERROR: Există deja un proiect cu acest nume.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Un câmp necesar "%1$s" a fost vid. Reverificaţi datele de intrare.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'ERROR: Acest cont este protejat şi nu poate fi accesat până când protecţia nu este ridicată.';

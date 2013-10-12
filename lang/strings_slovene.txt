@@ -612,7 +612,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'V vašem poročilu je bila napaka.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Nobena datoteka ni bila določena';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Vrsta datoteke ni odobrena';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Direktorij ne obstaja. Preverite nastavitve projekta.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Datoteka je dvojnik.  Najprej izbrišite datoteko.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Projekt s tem imenom že obstaja.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Polje \'%1$s\' je  bilo prazno.  Ponovno preverite vnose.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Uporabniški račun je zaščiten. Dostop je onemogočen, dokler se zaščita računa ne odpravi.';
