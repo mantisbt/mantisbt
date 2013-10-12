@@ -59,14 +59,6 @@ check_print_test_warn_row(
 	array( false => 'You have disabled email validation checks. For security reasons it is suggested that you enable these validation checks.' )
 );
 
-if( is_windows_server() && config_get_global( 'validate_email' ) && !config_get_global( 'use_ldap_email' ) ) {
-	check_print_test_row(
-		'Require at least PHP 5.3.0 if the server type is Windows and the check_mx_record configuration option is enabled',
-		config_get_global( 'check_mx_record' ) && version_compare( phpversion(), '5.3.0', '>=' ),
-		array( false => 'Versions of PHP prior to 5.3.0 are unable to check MX records when validating email addresses.' )
-	);
-}
-
 check_print_test_row(
 	'send_reset_password = ON requires allow_blank_email = OFF',
 	!config_get_global( 'send_reset_password' ) || !config_get_global( 'allow_blank_email' )
