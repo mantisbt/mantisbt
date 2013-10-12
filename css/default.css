@@ -48,7 +48,7 @@ td.left				{ text-align: left; }
 td.right			{ text-align: right; }
 td.category, th.category		{ background-color: #c8c8e8; color: #000000; font-weight: bold; vertical-align : top; }
 td.overdue			{ background-color: #ff0000; color: #000000; font-weight: bold; }
-td.width30		{ width: 30%; }
+td.width30			{ width: 30%; }
 td.col-1			{ background-color: #d8d8d8; color: #000000; }
 td.col-2			{ background-color: #e8e8e8; color: #000000; }
 td.form-title		{ background-color: #ffffff; color: #000000; font-weight: bold; text-align: left; }
@@ -423,6 +423,7 @@ div.error-info { text-align: center; margin: 1em; }
 .myview-left-col, .myview-right-col { width: 50%; vertical-align: top; }
 #manage-overview-table th { width: 30%; }
 
+#history_open,
 div.section-container,
 div.form-container,
 div.table-container {
@@ -432,11 +433,17 @@ div.table-container {
 	padding: 1px;
 	min-width: 50em;
 	border: 1px solid #000;
-	width: 85%; /* default width */
+	width: 90%; /* default width */
 }
+
+#view-issue-details,
+#history_open
+	{ width: 100%; margin: 3px; }
+
 #manage-user-div {
 	min-width: 57em;
 }
+
 div.section-container h2,
 div.form-container h2,
 div.table-container h2 {
@@ -453,6 +460,7 @@ div.section-container table,
 div.form-container table,
 div.table-container table {
 	width: 100%;
+	border-spacing: 1px;
 }
 div.section-container table th,
 div.form-container table th,
@@ -525,25 +533,29 @@ div.form-container fieldset label.required:before {
 	padding: .5em;
 	float: right;
 }
-fieldset > .field-container:nth-child(2n+1),
-form > table > tr:nth-child(2n+1),
-div.table-container > table > tbody > tr:nth-child(2n+1),
-table#manage-overview-table > tr:nth-child(2n+1),
-div.form-container > table > tr:nth-child(2n+2),
-div.form-container > table > tbody > tr:nth-child(2n+2),
-div.table-container > table > tbody > tr:nth-child(2n+2),
-div.table-container > table > tr:nth-child(2n+2) {
-	background-color: #d8d8d8;
-}
-fieldset > .field-container:nth-child(2n),
-form > table > tr:nth-child(2n+2),
-table#manage-overview-table > tr:nth-child(2n),
-div.form-container > table > tr:nth-child(2n+3),
-div.form-container > table > tbody > tr:nth-child(2n+3),
-div.table-container > table > tbody > tr:nth-child(2n+3),
-div.table-container > table > tr:nth-child(2n+3) {
-	background-color: #e8e8e8;
-}
+
+/* Even/odd rows for tables and forms */
+fieldset > .field-container:nth-child(odd),
+form > table > tr:nth-child(odd),
+div.table-container > table > tbody > tr:nth-child(odd),
+div.table-container > table > tr:nth-child(odd),
+div.form-container > form > table > tbody > tr:nth-child(odd),
+div.form-container > table > tbody > tr:nth-child(odd),
+div.form-container > table > tr:nth-child(odd),
+table#manage-overview-table > tr:nth-child(odd)
+	{ background-color: #e8e8e8; }
+
+fieldset > .field-container:nth-child(even),
+form > table > tr:nth-child(even),
+table#manage-overview-table > tr:nth-child(even),
+div.table-container > table > tbody > tr:nth-child(even),
+div.table-container > table > tr:nth-child(even),
+div.form-container > form > table > tbody > tr:nth-child(even),
+div.form-container > table > tbody > tr:nth-child(even),
+div.form-container > table > tr:nth-child(even),
+#custom-field-link-project
+	{ background-color: #d8d8d8; }
+
 form > table > tr:last-child {
 	background-color: white;
 }
