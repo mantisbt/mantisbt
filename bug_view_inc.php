@@ -238,7 +238,8 @@ $tpl_links = event_signal( 'EVENT_MENU_ISSUE', $f_bug_id );
 #
 
 echo '<br />';
-echo '<table class="width100" cellspacing="1">';
+echo '<div id="view-issue-details" class="table-container">';
+echo '<table>';
 echo '<thead><tr class="bug-nav">';
 
 # Form Title
@@ -737,6 +738,7 @@ if ( $tpl_show_attachments ) {
 }
 
 echo '</tbody></table>';
+echo '</div>';
 
 # User list sponsoring the bug
 if ( $tpl_show_sponsorships_box ) {
