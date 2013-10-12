@@ -1683,3 +1683,4 @@ $MANTIS_ERROR[ERROR_INVALID_RESOLUTION] = 'Resolution "%1$s" is not allowed for 
 $MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Unable to update timezone.';
 $MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = 'Deprecated functionality: "%1$s", use "%2$s" instead.';
 $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'WARNING: System is configured to display MantisBT errors (E_USER_ERROR) inline. Program execution will continue; this may lead to system/data integrity issues.';
+$MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Data Type mismatch. Enable detailed error messages for further information.';
