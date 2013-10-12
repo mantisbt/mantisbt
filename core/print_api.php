@@ -669,7 +669,7 @@ function print_profile_option_list_for_project( $p_project_id, $p_select_id = ''
  * @param int $p_select_id ID to mark as selected by default
  */
 function print_profile_option_list_from_profiles( $p_profiles, $p_select_id ) {
-	echo '<option value=""></option>';
+	echo '<option value="">' . lang_get( 'select_option' ) . '</option>';
 	foreach( $p_profiles as $t_profile ) {
 		extract( $t_profile, EXTR_PREFIX_ALL, 'v' );
 
