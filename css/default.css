@@ -423,7 +423,6 @@ div.error-info { text-align: center; margin: 1em; }
 .myview-left-col, .myview-right-col { width: 50%; vertical-align: top; }
 #manage-overview-table th { width: 30%; }
 
-#history_open,
 div.section-container,
 div.form-container,
 div.table-container {
@@ -439,6 +438,7 @@ div.table-container {
 #view-issue-details,
 #history_open
 	{ width: 100%; margin: 3px; }
+#history_open table { border-spacing: 0; }
 
 #manage-user-div {
 	min-width: 57em;
