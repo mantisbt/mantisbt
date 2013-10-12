@@ -341,7 +341,7 @@ if ( ON == $f_reopen_flag ) {
 				<th class="category">
 					<?php echo lang_get( 'add_bugnote_title' ) ?>
 				</th>
-				<td class="center">
+				<td>
 					<textarea name="bugnote_text" cols="80" rows="10"></textarea>
 				</td>
 			</tr>
