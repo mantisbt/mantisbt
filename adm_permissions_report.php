@@ -55,14 +55,18 @@ function get_section_begin_apr( $p_section_name ) {
 
 	$t_output = '<div class="table-container">';
 	$t_output .= '<table>';
+	$t_output .= '<thead>';
 	$t_output .= '<tr><td class="form-title-caps" colspan="' . ( count( $t_access_levels ) + 1 ) . '">' . $p_section_name . '</td></tr>' . "\n";
-	$t_output .= '<tr><td class="form-title">' . lang_get( 'perm_rpt_capability' ) . '</td>';
+	$t_output .= '<tr class="row-category2">';
+	$t_output .= '<th class="form-title">' . lang_get( 'perm_rpt_capability' ) . '</th>';
 
 	foreach( $t_access_levels as $t_access_level ) {
-		$t_output .= '<td class="form-title" style="text-align:center">&#160;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&#160;</td>';
+		$t_output .= '<th class="form-title" style="text-align:center">&#160;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&#160;</th>';
 	}
 
 	$t_output .= '</tr>' . "\n";
+	$t_output .= '</thead>';
+	$t_output .= '<tbody>';
 
 	return $t_output;
 }
@@ -87,7 +91,7 @@ function get_capability_row( $p_caption, $p_access_level ) {
 }
 
 function get_section_end() {
-	$t_output = '</table></div><br />' . "\n";
+	$t_output = '</tbody></table></div><br />' . "\n";
 	return $t_output;
 }
 

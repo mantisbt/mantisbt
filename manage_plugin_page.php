@@ -80,28 +80,33 @@ foreach( $t_plugins as $t_basename => $t_plugin ) {
 if ( 0 < count( $t_plugins_installed ) ) {
 ?>
 <br/>
-<form action="manage_plugin_update.php" method="post">
-<?php echo form_security_field( 'manage_plugin_update' ) ?>
-<table class="width100" cellspacing="1">
+<div class="form-container">
 
-<!-- Title -->
-<tr>
-	<td class="form-title" colspan="7">
-		<?php echo lang_get( 'plugins_installed' ) ?>
+	<form action="manage_plugin_update.php" method="post">
 
-	</td>
-</tr>
+		<?php echo form_security_field( 'manage_plugin_update' ) ?>
+		<table>
 
-<!-- Info -->
-<tr class="row-category">
-	<td width="20%"><?php echo lang_get( 'plugin' ) ?></td>
-	<td width="35%"><?php echo lang_get( 'plugin_description' ) ?></td>
-	<td width="20%"><?php echo lang_get( 'plugin_depends' ) ?></td>
-	<td width="7%"><?php echo lang_get( 'plugin_priority' ) ?></td>
-	<td width="8%"><?php echo lang_get( 'plugin_protected' ) ?></td>
-	<td width="10%"><?php echo lang_get( 'plugin_actions' ) ?></td>
-</tr>
+			<thead>
+				<!-- Title -->
+				<tr>
+					<td class="form-title" colspan="7">
+						<?php echo lang_get( 'plugins_installed' ) ?>
+					</td>
+				</tr>
 
+				<!-- Info -->
+				<tr class="row-category">
+					<th width="20%"><?php echo lang_get( 'plugin' ) ?></th>
+					<th width="35%"><?php echo lang_get( 'plugin_description' ) ?></th>
+					<th width="20%"><?php echo lang_get( 'plugin_depends' ) ?></th>
+					<th width="7%"><?php echo lang_get( 'plugin_priority' ) ?></th>
+					<th width="8%"><?php echo lang_get( 'plugin_protected' ) ?></th>
+					<th width="10%"><?php echo lang_get( 'plugin_actions' ) ?></th>
+				</tr>
+			</thead>
+
+			<tbody>
 <?php
 foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 	$t_description = string_display_line_links( $t_plugin->description );
@@ -180,108 +185,120 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 	if ( $t_uninstall ) { print_bracket_link( 'manage_plugin_uninstall.php?name=' . $t_basename . form_security_param( 'manage_plugin_uninstall' ), lang_get( 'plugin_uninstall' ) ); }
 	echo '</td></tr>';
 } ?>
+			</tbody>
 
-<tr>
-	<td colspan="3"></td>
-	<td colspan="2" class="center">
-		<input type="submit" class="button" value="<?php echo lang_get( 'plugin_update' ) ?>"/>
-	</td>
-	<td></td>
-</tr>
+			<tfoot>
+				<tr>
+					<td colspan="3"></td>
+					<td colspan="2" class="center">
+						<input type="submit" class="button" value="<?php echo lang_get( 'plugin_update' ) ?>"/>
+					</td>
+					<td></td>
+				</tr>
+			</tfoot>
 
-</table>
-</form>
+		</table>
+	</form>
+</div>
 <?php
 }
 
 if ( 0 < count( $t_plugins_available ) ) {
 ?>
 <br/>
-<table class="width100" cellspacing="1">
+<div class="table-container">
+	<table>
 
-<!-- Title -->
-<tr>
-	<td class="form-title" colspan="7">
-		<?php echo lang_get( 'plugins_available' ) ?>
+		<thead>
+			<!-- Title -->
+			<tr>
+				<td class="form-title" colspan="7">
+					<?php echo lang_get( 'plugins_available' ) ?>
+				</td>
+			</tr>
 
-	</td>
-</tr>
+			<!-- Info -->
+			<tr class="row-category">
+				<td width="25%"><?php echo lang_get( 'plugin' ) ?></td>
+				<td width="45%"><?php echo lang_get( 'plugin_description' ) ?></td>
+				<td width="20%"><?php echo lang_get( 'plugin_depends' ) ?></td>
+				<td width="10%"><?php echo lang_get( 'plugin_actions' ) ?></td>
+			</tr>
+		</thead>
 
-<!-- Info -->
-<tr class="row-category">
-	<td width="25%"><?php echo lang_get( 'plugin' ) ?></td>
-	<td width="45%"><?php echo lang_get( 'plugin_description' ) ?></td>
-	<td width="20%"><?php echo lang_get( 'plugin_depends' ) ?></td>
-	<td width="10%"><?php echo lang_get( 'plugin_actions' ) ?></td>
-</tr>
-
+		<tbody>
 <?php
-foreach ( $t_plugins_available as $t_basename => $t_plugin ) {
-	$t_description = string_display_line_links( $t_plugin->description );
-	$t_author = $t_plugin->author;
-	$t_contact = $t_plugin->contact;
-	$t_url = $t_plugin->url ;
-	$t_requires = $t_plugin->requires;
-	$t_depends = array();
+	foreach ( $t_plugins_available as $t_basename => $t_plugin ) {
+		$t_description = string_display_line_links( $t_plugin->description );
+		$t_author = $t_plugin->author;
+		$t_contact = $t_plugin->contact;
+		$t_url = $t_plugin->url ;
+		$t_requires = $t_plugin->requires;
+		$t_depends = array();
 
-	$t_name = string_display_line( $t_plugin->name.' '.$t_plugin->version );
+		$t_name = string_display_line( $t_plugin->name.' '.$t_plugin->version );
 
-	if ( !is_blank( $t_author ) ) {
-		if ( is_array( $t_author ) ) {
-			$t_author = implode( $t_author, ', ' );
-		}
-		if ( !is_blank( $t_contact ) ) {
-			$t_author = '<br/>' . sprintf( lang_get( 'plugin_author' ),
-				'<a href="mailto:' . string_display_line( $t_contact ) . '">' . string_display_line( $t_author ) . '</a>' );
-		} else {
-			$t_author = '<br/>' . string_display_line( sprintf( lang_get( 'plugin_author' ), $t_author ) );
-		}
-	}
-
-	if ( !is_blank( $t_url ) ) {
-		$t_url = '<br/>' . lang_get( 'plugin_url' ) . lang_get( 'word_separator' ) . "<a href=\"$t_url\">$t_url</a>";
-	}
-
-	$t_ready = true;
-	if ( is_array( $t_requires ) ) {
-		foreach( $t_requires as $t_plugin => $t_version ) {
-			$t_dependency = plugin_dependency( $t_plugin, $t_version );
-			if ( 1 == $t_dependency ) {
-				$t_depends[] = '<span class="small dependency_met">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</span>';
-			} else if ( -1 == $t_dependency ) {
-				$t_ready = false;
-				$t_depends[] = '<span class="small dependency_dated">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</span>';
+		if ( !is_blank( $t_author ) ) {
+			if ( is_array( $t_author ) ) {
+				$t_author = implode( $t_author, ', ' );
+			}
+			if ( !is_blank( $t_contact ) ) {
+				$t_author = '<br/>' . sprintf( lang_get( 'plugin_author' ),
+					'<a href="mailto:' . string_display_line( $t_contact ) . '">' . string_display_line( $t_author ) . '</a>' );
 			} else {
-				$t_ready = false;
-				$t_depends[] = '<span class="small dependency_unmet">'.string_display_line( $t_plugin.' '.$t_version ).'</span>';
+				$t_author = '<br/>' . string_display_line( sprintf( lang_get( 'plugin_author' ), $t_author ) );
 			}
 		}
+
+		if ( !is_blank( $t_url ) ) {
+			$t_url = '<br/>' . lang_get( 'plugin_url' ) . lang_get( 'word_separator' ) . "<a href=\"$t_url\">$t_url</a>";
+		}
+
+		$t_ready = true;
+		if ( is_array( $t_requires ) ) {
+			foreach( $t_requires as $t_plugin => $t_version ) {
+				$t_dependency = plugin_dependency( $t_plugin, $t_version );
+				if ( 1 == $t_dependency ) {
+					$t_depends[] = '<span class="small dependency_met">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</span>';
+				} else if ( -1 == $t_dependency ) {
+					$t_ready = false;
+					$t_depends[] = '<span class="small dependency_dated">'.string_display_line( $t_plugins[$t_plugin]->name.' '.$t_version ).'</span>';
+				} else {
+					$t_ready = false;
+					$t_depends[] = '<span class="small dependency_unmet">'.string_display_line( $t_plugin.' '.$t_version ).'</span>';
+				}
+			}
+		}
+
+		if ( 0 < count( $t_depends ) ) {
+			$t_depends = implode( $t_depends, '<br/>' );
+		} else {
+			$t_depends = '<span class="small dependency_met">' . lang_get( 'plugin_no_depends' ) . '</span>';
+		}
+
+		echo '<tr>';
+		echo '<td class="small center">',$t_name,'</td>';
+		echo '<td class="small">',$t_description,$t_author,$t_url,'</td>';
+		echo '<td class="center">',$t_depends,'</td>';
+		echo '<td class="center">';
+		if ( $t_ready ) { print_bracket_link( 'manage_plugin_install.php?name=' . $t_basename . form_security_param( 'manage_plugin_install' ), lang_get( 'plugin_install' ) ); }
+		echo '</td></tr>';
 	}
+?>
+		</tbody>
+	</table>
+</div>
 
-	if ( 0 < count( $t_depends ) ) {
-		$t_depends = implode( $t_depends, '<br/>' );
-	} else {
-		$t_depends = '<span class="small dependency_met">' . lang_get( 'plugin_no_depends' ) . '</span>';
-	}
-
-	echo '<tr>';
-	echo '<td class="small center">',$t_name,'</td>';
-	echo '<td class="small">',$t_description,$t_author,$t_url,'</td>';
-	echo '<td class="center">',$t_depends,'</td>';
-	echo '<td class="center">';
-	if ( $t_ready ) { print_bracket_link( 'manage_plugin_install.php?name=' . $t_basename . form_security_param( 'manage_plugin_install' ), lang_get( 'plugin_install' ) ); }
-	echo '</td></tr>';
-} ?>
-
-</table>
-<?php } ?>
-
-<br/><?php echo lang_get( 'plugin_key_label' ) ?>
-<span class='dependency_met'><?php echo lang_get( 'plugin_key_met' ) ?></span>,
-<span class='dependency_unmet'><?php echo lang_get( 'plugin_key_unmet' ) ?></span>,
-<span class='dependency_dated'><?php echo lang_get( 'plugin_key_dated' ) ?></span>,
-<span class='dependency_upgrade'><?php echo lang_get( 'plugin_key_upgrade' ) ?></span>.
-
+<?php
+} # available plugins
+?>
+<div class="center">
+	<br/><?php echo lang_get( 'plugin_key_label' ) ?>
+	<span class='dependency_met'><?php echo lang_get( 'plugin_key_met' ) ?></span>,
+	<span class='dependency_unmet'><?php echo lang_get( 'plugin_key_unmet' ) ?></span>,
+	<span class='dependency_dated'><?php echo lang_get( 'plugin_key_dated' ) ?></span>,
+	<span class='dependency_upgrade'><?php echo lang_get( 'plugin_key_upgrade' ) ?></span>.
+</div>
 <?php
 html_page_bottom();
 

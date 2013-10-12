@@ -55,51 +55,57 @@ if ( !access_has_bug_level( $t_access_level_needed, $f_bug_id ) ) {
 <a id="history"></a><br />
 
 <?php
-	collapse_open( 'history' );
+	collapse_open( 'history', '', 'table-container' );
 	$t_history = history_get_events_array( $f_bug_id );
 ?>
-<table class="width100" cellspacing="0">
-<tr>
-	<td class="form-title" colspan="4">
+<table>
+	<thead>
+		<tr>
+			<td class="form-title" colspan="4">
 <?php
-	collapse_icon( 'history' );
-	echo lang_get( 'bug_history' ) ?>
-	</td>
-</tr>
-<tr class="row-category-history">
-	<td class="small-caption">
-		<?php echo lang_get( 'date_modified' ) ?>
-	</td>
-	<td class="small-caption">
-		<?php echo lang_get( 'username' ) ?>
-	</td>
-	<td class="small-caption">
-		<?php echo lang_get( 'field' ) ?>
-	</td>
-	<td class="small-caption">
-		<?php echo lang_get( 'change' ) ?>
-	</td>
-</tr>
+			collapse_icon( 'history' );
+			echo lang_get( 'bug_history' ) ?>
+			</td>
+		</tr>
+
+		<tr class="row-category-history">
+			<th class="small-caption">
+				<?php echo lang_get( 'date_modified' ) ?>
+			</th>
+			<th class="small-caption">
+				<?php echo lang_get( 'username' ) ?>
+			</th>
+			<th class="small-caption">
+				<?php echo lang_get( 'field' ) ?>
+			</th>
+			<th class="small-caption">
+				<?php echo lang_get( 'change' ) ?>
+			</th>
+		</tr>
+	</thead>
+
+	<tbody>
 <?php
-	foreach ( $t_history as $t_item ) {
+	foreach( $t_history as $t_item ) {
 ?>
-<tr>
-	<td class="small-caption">
-		<?php echo $t_item['date'] ?>
-	</td>
-	<td class="small-caption">
-		<?php print_user( $t_item['userid'] ) ?>
-	</td>
-	<td class="small-caption">
-		<?php echo string_display( $t_item['note'] ) ?>
-	</td>
-	<td class="small-caption">
-		<?php echo ( $t_item['raw'] ? string_display_line_links( $t_item['change'] ) : $t_item['change'] ) ?>
-	</td>
-</tr>
+		<tr>
+			<td class="small-caption">
+				<?php echo $t_item['date'] ?>
+			</td>
+			<td class="small-caption">
+				<?php print_user( $t_item['userid'] ) ?>
+			</td>
+			<td class="small-caption">
+				<?php echo string_display( $t_item['note'] ) ?>
+			</td>
+			<td class="small-caption">
+				<?php echo ( $t_item['raw'] ? string_display_line_links( $t_item['change'] ) : $t_item['change'] ) ?>
+			</td>
+		</tr>
 <?php
 	} # end for loop
 ?>
+	</tbody>
 </table>
 <?php
 	collapse_closed( 'history' );

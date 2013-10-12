@@ -138,13 +138,17 @@ if ( $g_global_profiles ) {
 				<span class="input"><input id="action-edit" type="radio" name="action" value="edit" /></span>
 				<span class="label-style"></span>
 			</div>
+<?php
+	if ( !$g_global_profiles ) {
+?>
 			<div class="field-container">
-				<?php if ( !$g_global_profiles ) { ?>
 				<label for="action-default"><span><?php echo lang_get( 'make_default' ) ?></span></label>
 				<span class="input"><input id="action-default" type="radio" name="action" value="make_default" /></span>
-				<?php } ?>
 				<span class="label-style"></span>
 			</div>
+<?php
+	}
+?>
 			<div class="field-container">
 				<label for="action-delete"><span><?php echo lang_get( 'delete_profile' ) ?></span></label>
 				<span class="input"><input id="action-delete" type="radio" name="action" value="delete" /></span>
