@@ -114,7 +114,12 @@ while (list ($t_box_title, $t_box_display) = each ($t_boxes)) {
 	}
 
 	# don't display "Assigned to Me" bugs to users that bugs can't be assigned to
-	else if ( $t_box_title == 'assigned' && ( current_user_is_anonymous() OR user_get_assigned_open_bug_count( $t_current_user_id, $t_project_id ) == 0 ) ) {
+	else if(
+		$t_box_title == 'assigned'
+	&&  ( current_user_is_anonymous()
+		|| !access_has_project_level( config_get( 'handle_bug_threshold' ), $t_project_id, $t_current_user_id )
+		)
+	) {
 		$t_number_of_boxes = $t_number_of_boxes - 1;
 	}
 
