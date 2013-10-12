@@ -15,18 +15,26 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language File
- * See the qqq 'language' for message documentation incl. usage of parameters
+ * Language File - Occitan (occitan)
+ *
  * **********************************************************************
  * ** This file is generated from translations stored in translatewiki **
  * ** Information on Copyright/License for translatewiki translations  **
  * ** is available at http://translatewiki.net/wiki/Project:About      **
  * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
  * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ *
  * @ingroup Language
- * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @file
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
 */
 
@@ -569,10 +577,6 @@ $s_plugin_install = 'Installacion';
 $s_plugin_upgrade = 'Mesa a nivèl';
 $s_plugin_uninstall = 'Desinstallar';
 $s_plugin_uninstall_message = 'Sètz segur que volètz desinstallar lo plugin « %1$s » ?';
-$s_plugin_key_met = 'Plugin prèst';
-$s_plugin_key_unmet = 'Dependéncias introbablas';
-$s_plugin_key_dated = 'Dependéncias perimidas';
-$s_plugin_key_upgrade = 'Mesa a nivèl requerida';
 $s_project_added_msg = 'Lo projècte es estat apondut amb succès...';
 $s_category_added_msg = 'Categoria novèla creada amb succès...';
 $s_category_deleted_msg = 'Categoria escafada amb succès...';
@@ -1074,7 +1078,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'I aviá una error dins vòstre rapòrt.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Pas cap de fichièr especificat';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Tipe de fichièr interdich';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Lo repertòri existís pas. Mercés de verificar los paramètres del projècte.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Fichièr duplicat.  Suprimir d\'en primièr lo primièr.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Un projècte amb aqueste nom existís ja.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Un camp obligatòri "%1$s" es pas entresenhat.  Mercés de verificar vòstra picada.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Aqueste compte es protegit.  Sètz pas autorizat(ada) a i accedir tant que la proteccion existís.';

@@ -15,18 +15,26 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language File
- * See the qqq 'language' for message documentation incl. usage of parameters
+ * Language File - Ukrainian (українська)
+ *
  * **********************************************************************
  * ** This file is generated from translations stored in translatewiki **
  * ** Information on Copyright/License for translatewiki translations  **
  * ** is available at http://translatewiki.net/wiki/Project:About      **
  * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
  * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ *
  * @ingroup Language
- * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @file
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
 */
 
@@ -709,7 +717,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Десь у вашому звіті є помил
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Не вказаний файл';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Недозволений тип файлів';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Папка не існує. Перевірте параметри проекту.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Це дублікат файлу. Спочатку видаліть попередній файл.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Проект з такою назвою вже існує.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Не заповнене обов\'язкове поле \'%1$s\'.  Перевірте заповнені поля.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Цей запис захищений.  Ви не зможете переглядати його доки ввімкнений захист.';

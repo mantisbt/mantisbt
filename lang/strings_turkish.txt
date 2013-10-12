@@ -15,18 +15,26 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language File
- * See the qqq 'language' for message documentation incl. usage of parameters
+ * Language File - Turkish (Türkçe)
+ *
  * **********************************************************************
  * ** This file is generated from translations stored in translatewiki **
  * ** Information on Copyright/License for translatewiki translations  **
  * ** is available at http://translatewiki.net/wiki/Project:About      **
  * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
  * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ *
  * @ingroup Language
- * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @file
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
 */
 
@@ -44,7 +52,6 @@ $s_private_project_msg = 'Bu projeye sadece yöneticiler ve yöneticiler tarafı
 $s_access_level_project = 'Proje Erişim Sınırı';
 $s_view_submitted_bug_link = 'Gönderilmiş Bugları İzle %1$s';
 $s_assigned_projects = 'Atanmış Projeler';
-$s_unassigned_projects = 'Atanmamış Projeler';
 $s_print = 'Yazdır';
 $s_jump = 'Git';
 $s_copy_users = 'Kullanıcıları Kopyala';
@@ -189,7 +196,6 @@ $s_add_bugnote_button = 'Bug Notu Ekle';
 $s_bugnote_edit_link = 'Güncelle';
 $s_closed_bug_button = 'Bug Kapat';
 $s_bugnote_updated_msg = 'Bug notu başarıyla güncellendi...';
-$s_edited_on = 'güncelleme tarihi:';
 $s_click_to_login = 'Sisteme Girmek İçin Tıklayınız';
 $s_login_page_info = 'Bug Takip Sistemine hoşgeldiniz.';
 $s_login_title = 'Sisteme Giriş';
@@ -198,8 +204,6 @@ $s_choose_project = 'Proje Seç';
 $s_login_button = 'Sisteme Gir';
 $s_signup_link = 'Yeni bir hesap aç';
 $s_select_project_button = 'Proje Seç';
-$s_open_and_assigned_to_me = 'Açık ve bana atanmış olanlar';
-$s_open_and_reported_to_me = 'Açık ve benim tarafımdan bildirilenler';
 $s_newer_news_link = 'Yeni Haberler';
 $s_older_news_link = 'Eski Haberler';
 $s_created_user_part1 = 'Kullanıcı';
@@ -396,6 +400,5 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Raporunuzda bir hata tespit edildi.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Dosya adı belirtilmedi.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Bu dosya türüne izin verilmemektedir';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Dizin bulunamadı. Lütfen proje ayarlarınızı kontrol ediniz.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Bu daha önce girilmiş bir dosya adı. Lütfen önce dosyayı siliniz.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Gerekli bir girdi alanı boş bırakıldı. Lütfen girdilerinizi kontrol ediniz.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Bu kullanıcı hesabı koruma altında. Koruma kaldırılana kadar erişime izin verilmeyecektir.';

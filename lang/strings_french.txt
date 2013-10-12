@@ -15,18 +15,26 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language File
- * See the qqq 'language' for message documentation incl. usage of parameters
+ * Language File - French (français)
+ *
  * **********************************************************************
  * ** This file is generated from translations stored in translatewiki **
  * ** Information on Copyright/License for translatewiki translations  **
  * ** is available at http://translatewiki.net/wiki/Project:About      **
  * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
  * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ *
  * @ingroup Language
- * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @file
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
 */
 
@@ -66,7 +74,6 @@ $s_access_level_project = 'Niveau d\'accès du projet';
 $s_view_submitted_bug_link = 'Voir le bogue soumis %1$s';
 $s_assigned_projects = 'Projets assignés';
 $s_assigned_projects_label = 'Projets assignés :';
-$s_unassigned_projects_label = 'Projets non assignés :';
 $s_print = 'Imprimer';
 $s_jump = 'Chercher';
 $s_copy_users = 'Copier les utilisateurs';
@@ -475,8 +482,6 @@ $s_lost_password_done_title = 'Message de mot de passe envoyé';
 $s_lost_password_subject = 'Réinitialisation de mot de passe';
 $s_lost_password_info = 'Pour réinitialiser votre mot de passe, merci d\'indiquer le nom d\'utilisateur et l\'adresse de courriel du compte.<br /><br />Si les données correspondent à un compte valide, il vous sera envoyé par courriel une URL spéciale qui contient un code de validation pour votre compte. Merci de suivre ce lien pour changer votre mot de passe.';
 $s_lost_password_confirm_hash_OK = 'Votre confirmation a été acceptée. Merci de mettre à jour votre mot de passe.';
-$s_open_and_assigned_to_me_label = 'Bogues ouverts qui me sont assignés :';
-$s_open_and_reported_to_me_label = 'Bogues ouverts dont je suis le rapporteur :';
 $s_newer_news_link = 'Nouvelles récentes';
 $s_older_news_link = 'Anciennes nouvelles';
 $s_archives = 'Archives';
@@ -608,11 +613,6 @@ $s_plugin_install = 'Installation';
 $s_plugin_upgrade = 'Mise à niveau';
 $s_plugin_uninstall = 'Désinstaller';
 $s_plugin_uninstall_message = 'Voulez-vous vraiment désinstaller le plugiciel « %1$s » ?';
-$s_plugin_key_label = 'Clé :';
-$s_plugin_key_met = 'Plugiciel prêt';
-$s_plugin_key_unmet = 'Dépendances introuvables';
-$s_plugin_key_dated = 'Dépendances périmées';
-$s_plugin_key_upgrade = 'Mise à niveau requise';
 $s_project_added_msg = 'Nouveau projet installé avec succès...';
 $s_category_added_msg = 'Nouvelle catégorie créée avec succès...';
 $s_category_deleted_msg = 'Catégorie effacée avec succès...';
@@ -836,7 +836,6 @@ $s_viewing_bugs_title = 'Liste des bogues';
 $s_updated = 'Mis à jour';
 $s_sticky = 'Afficher les bogues récurrants';
 $s_sticky_label = 'Afficher les bogues récurrants :';
-$s_sort_label = 'Trier par :';
 $s_issue_id = 'Bogue #';
 $s_recently_visited = 'Visité récemment';
 $s_priority_abbreviation = 'P';
@@ -850,8 +849,6 @@ $s_prev = 'Précédent';
 $s_next = 'Suivant';
 $s_first = 'Premier';
 $s_last = 'Dernier';
-$s_start_date_label = 'Date de début :';
-$s_end_date_label = 'Date de fin :';
 $s_use_date_filters = 'Utiliser les filtres de date';
 $s_use_date_filters_label = 'Utiliser les filtres de date :';
 $s_yes = 'Oui';
@@ -1144,7 +1141,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Il y avait une erreur dans votre rapport.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Aucun fichier spécifié';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Type de fichier interdit';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Le répertoire n\'existe pas. Merci de vérifier les paramètres du projet.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Fichier dupliqué.  Supprimer d\'abord le premier.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Un projet ayant ce nom existe déjà.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Le champ obligatoire « %1$s » n\'est pas renseigné.  Merci de vérifier votre saisie.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Ce compte est protégé.  Vous n\'êtes pas autorisés à y accéder tant que la protection existe.';

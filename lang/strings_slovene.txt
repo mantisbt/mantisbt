@@ -15,18 +15,26 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language File
- * See the qqq 'language' for message documentation incl. usage of parameters
+ * Language File - Slovenian (slovenščina)
+ *
  * **********************************************************************
  * ** This file is generated from translations stored in translatewiki **
  * ** Information on Copyright/License for translatewiki translations  **
  * ** is available at http://translatewiki.net/wiki/Project:About      **
  * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
  * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ *
  * @ingroup Language
- * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @file
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
 */
 
@@ -604,7 +612,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'V vašem poročilu je bila napaka.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Nobena datoteka ni bila določena';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Vrsta datoteke ni odobrena';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Direktorij ne obstaja. Preverite nastavitve projekta.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Datoteka je dvojnik.  Najprej izbrišite datoteko.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Projekt s tem imenom že obstaja.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Polje \'%1$s\' je  bilo prazno.  Ponovno preverite vnose.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Uporabniški račun je zaščiten. Dostop je onemogočen, dokler se zaščita računa ne odpravi.';

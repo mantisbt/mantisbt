@@ -15,18 +15,26 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language File
- * See the qqq 'language' for message documentation incl. usage of parameters
+ * Language File - Swedish (svenska)
+ *
  * **********************************************************************
  * ** This file is generated from translations stored in translatewiki **
  * ** Information on Copyright/License for translatewiki translations  **
  * ** is available at http://translatewiki.net/wiki/Project:About      **
  * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
  * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ *
  * @ingroup Language
- * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @file
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
 */
 
@@ -560,10 +568,6 @@ $s_plugin_install = 'Installera';
 $s_plugin_upgrade = 'Uppgradera';
 $s_plugin_uninstall = 'Avinstallera';
 $s_plugin_uninstall_message = 'Är du säker att du vill avinstallera insticksprogrammet "%1$s"?';
-$s_plugin_key_met = 'instickprogrammet redo';
-$s_plugin_key_unmet = 'beroende saknas';
-$s_plugin_key_dated = 'föråldrade beroenden';
-$s_plugin_key_upgrade = 'uppgradering behövs';
 $s_project_added_msg = 'Projektet har lagts till...';
 $s_category_added_msg = 'Kategorin har lagts till...';
 $s_category_deleted_msg = 'Kategorin har tagits bort...';
@@ -1050,7 +1054,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Det fanns ett fel i din rapport.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Ingen fil angiven';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Filtypen är inte tillåten';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Katalogen finns inte. Var god kontrollera projektinställningarna.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Filen finns redan.  Var god ta bort den andra filen först.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Ett projekt med det namnet finns redan.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Det obligatoriska fältet "%1$s" var tomt. Var god kontrollera din inmatning.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Detta konto är skyddat.  Du har inte tillgång till det innan skyddet är borttaget.';

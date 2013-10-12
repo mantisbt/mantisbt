@@ -15,18 +15,26 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language File
- * See the qqq 'language' for message documentation incl. usage of parameters
+ * Language File - Breton (brezhoneg)
+ *
  * **********************************************************************
  * ** This file is generated from translations stored in translatewiki **
  * ** Information on Copyright/License for translatewiki translations  **
  * ** is available at http://translatewiki.net/wiki/Project:About      **
  * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
  * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ *
  * @ingroup Language
- * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @file
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
 */
 
@@ -66,7 +74,6 @@ $s_access_level_project = 'Live moned ar raktres';
 $s_view_submitted_bug_link = 'Gwelet an draen kaset %1$s';
 $s_assigned_projects = 'Raktresoù deverket';
 $s_assigned_projects_label = 'Raktresoù deverket :';
-$s_unassigned_projects_label = 'Raktresoù n\'int ket deverket :';
 $s_print = 'Moullañ';
 $s_jump = 'Klask';
 $s_copy_users = 'Eilañ an implijerien';
@@ -471,8 +478,6 @@ $s_lost_password_done_title = 'Kaset eo bet ar gemennadenn gant ar ger-tremen';
 $s_lost_password_subject = 'Adderaouekaat ar ger-tremen';
 $s_lost_password_info = 'Evit adderaouekaat ho ker-tremen, pourchasit an anv hag ar chomlec\'h postel evit ar gont, mar plij. <br/><br/> Ma klot ar roadennoù gant ur gont reizh, e vo kaset deoc\'h un URL dre bostel, ennañ ur c\'hod gwiriekaat evit ho kont. Heuilhit al liamm evit cheñch ho ker-tremen, mar plij.';
 $s_lost_password_confirm_hash_OK = 'Asantet eo bet ho kadarnadur. Hizivait ho ker-tremen, mar plij.';
-$s_open_and_assigned_to_me_label = 'Digor ha deverket din-me :';
-$s_open_and_reported_to_me_label = 'Digor ha titouret ganin-me :';
 $s_newer_news_link = 'Keleier nevesañ';
 $s_older_news_link = 'Keleier koshañ';
 $s_archives = 'Dielloù';
@@ -598,11 +603,6 @@ $s_plugin_install = 'Staliañ';
 $s_plugin_upgrade = 'Lakaat a-live';
 $s_plugin_uninstall = 'Distaliañ';
 $s_plugin_uninstall_message = 'Ha sur oc\'h hoc\'h eus c\'hoant da zistaliañ al lugant « %1$s » ?';
-$s_plugin_key_label = 'Alc\'hwez :';
-$s_plugin_key_met = 'Prest eo al lugant';
-$s_plugin_key_unmet = 'Sujidigezhioù n\'int ket bet kavet';
-$s_plugin_key_dated = 'Sujidigezhioù diamzeret';
-$s_plugin_key_upgrade = 'Ezhomm zo da lakaat a-live';
 $s_project_added_msg = 'Ouzhpennet-mat eo bet ar raktres...';
 $s_category_added_msg = 'Ouzhpennet-mat eo bet ar rummad...';
 $s_category_deleted_msg = 'Dilamet-mat eo bet ar rummad...';
@@ -826,7 +826,6 @@ $s_viewing_bugs_title = 'Gwelet an drein';
 $s_updated = 'Hizivaet';
 $s_sticky = 'Diskouez an drein pegus';
 $s_sticky_label = 'Diskouez an drein pegus :';
-$s_sort_label = 'Urzhiañ dre :';
 $s_issue_id = 'Draen niv.';
 $s_recently_visited = 'Gweladennet nevez zo';
 $s_note_user_id_label = 'Notenn gant :';
@@ -839,8 +838,6 @@ $s_prev = 'A-raok';
 $s_next = 'Da-heul';
 $s_first = 'Kentañ';
 $s_last = 'Diwezhañ';
-$s_start_date_label = 'Deiziad deroù :';
-$s_end_date_label = 'Deiziad dibenn :';
 $s_use_date_filters = 'Implijout siloù deiziad';
 $s_use_date_filters_label = 'Implijout siloù dre zeiziad :';
 $s_yes = 'Ya';
@@ -1126,7 +1123,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Ur fazi a oa en ho tanevell.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'N\'eus bet diferet restr ebet';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Ar seurt restr n\'eo ket aotreet.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'N\'eus ket eus ar c\'havlec\'h. Gwiriit arventennoù ar raktres, mar plij.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Ur restr doublet eo. Dilamit ar restr da gentañ, mar plij.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Ur raktres en anv-se zo anezhañ dija.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Goullo e oa ur vaezienn rekis. Gwiriit ho roadennoù, mar plij.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Gwarezet eo ar gont-mañ. N\'oc\'h ket aotreet da vont dezhañ keit ha ma\'z eo gwarezet.';

@@ -15,18 +15,26 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language File
- * See the qqq 'language' for message documentation incl. usage of parameters
+ * Language File - Colognian (Ripoarisch)
+ *
  * **********************************************************************
  * ** This file is generated from translations stored in translatewiki **
  * ** Information on Copyright/License for translatewiki translations  **
  * ** is available at http://translatewiki.net/wiki/Project:About      **
  * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
  * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ *
  * @ingroup Language
- * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @file
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
 */
 
@@ -563,7 +571,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'En Dingem Bereesch es ene Fähler opjetrodde.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Kein Dattei aanjejovve.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Di Zoot Dattei es nit zohjelohße.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Dat Verzeijshneß jidd_et nit. Loor donoh en de Enshtellunge för et Projäk.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Dat es en dubbelte Datei. Donn eets de eezte dovun fottschmiiße.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'E Projäk met däm Name jidd_et ald.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'De nüüdejje Aanjab „%1$s“ es nit jemaat. Donn ens Ding Enjaabe nohloore.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Heh dä Zohjang es extra jeschöz. Do kanns De nix met maache, bes dat dä Schoz wider opjehovve es.';

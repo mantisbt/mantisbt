@@ -15,18 +15,26 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language File
- * See the qqq 'language' for message documentation incl. usage of parameters
+ * Language File - Dutch (Nederlands)
+ *
  * **********************************************************************
  * ** This file is generated from translations stored in translatewiki **
  * ** Information on Copyright/License for translatewiki translations  **
  * ** is available at http://translatewiki.net/wiki/Project:About      **
  * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
  * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ *
  * @ingroup Language
- * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @file
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
 */
 
@@ -66,7 +74,6 @@ $s_access_level_project = 'Toegangsniveau project';
 $s_view_submitted_bug_link = 'Melding %1$s bekijken';
 $s_assigned_projects = 'Toegewezen projecten';
 $s_assigned_projects_label = 'Toegewezen projecten:';
-$s_unassigned_projects_label = 'Niet-toegewezen projecten:';
 $s_print = 'Afdrukken';
 $s_jump = 'Ga naar';
 $s_copy_users = 'Gebruikers kopiëren';
@@ -475,8 +482,6 @@ $s_lost_password_done_title = 'Het wachtwoordbericht is verstuurd';
 $s_lost_password_subject = 'Wachtwoord opnieuw instellen';
 $s_lost_password_info = 'Geef hier uw naam en e-mailadres in om uw verloren wachtwoord opnieuw in te stellen.<br/><br/>Als de gegevens overeen komen met een geldige gebruiker, ontvangt u een verwijzing met de validatiecode via e-mail. Volg deze verwijzing om uw wachtwoord aan te passen.';
 $s_lost_password_confirm_hash_OK = 'Uw bevestiging is geaccepteerd. Pas alstublieft uw wachtwoord aan.';
-$s_open_and_assigned_to_me_label = 'Open en aan mij toegewezen:';
-$s_open_and_reported_to_me_label = 'Open en door mij gemeld:';
 $s_newer_news_link = 'Nieuwer nieuws';
 $s_older_news_link = 'Ouder nieuws';
 $s_archives = 'Archieven';
@@ -608,11 +613,6 @@ $s_plugin_install = 'Installeren';
 $s_plugin_upgrade = 'Upgraden';
 $s_plugin_uninstall = 'Deïnstalleren';
 $s_plugin_uninstall_message = 'Weet u zeker dat u de uitbreiding "%1$s" wilt deïnstalleren?';
-$s_plugin_key_label = 'Sleutel:';
-$s_plugin_key_met = 'uitbreiding beschikbaar';
-$s_plugin_key_unmet = 'niet-beschikbare afhankelijkheden';
-$s_plugin_key_dated = 'verouderde afhankelijkheden';
-$s_plugin_key_upgrade = 'upgrade nodig';
 $s_project_added_msg = 'Het project is toegevoegd.';
 $s_category_added_msg = 'De categorie is toegevoegd.';
 $s_category_deleted_msg = 'De categorie is verwijderd.';
@@ -836,7 +836,6 @@ $s_viewing_bugs_title = 'Meldingen bekijken';
 $s_updated = 'Aangepast';
 $s_sticky = 'Sticky meldingen weergeven';
 $s_sticky_label = 'Sticky-meldingen weergeven:';
-$s_sort_label = 'Sorteren op:';
 $s_issue_id = 'Meldingsnr.';
 $s_recently_visited = 'Recent bekeken';
 $s_priority_abbreviation = 'P';
@@ -850,8 +849,6 @@ $s_prev = 'Vorige';
 $s_next = 'Volgende';
 $s_first = 'Eerste';
 $s_last = 'Laatste';
-$s_start_date_label = 'Begindatum:';
-$s_end_date_label = 'Einddatum:';
 $s_use_date_filters = 'Datumfilters gebruiken';
 $s_use_date_filters_label = 'Datumfilters gebruiken:';
 $s_yes = 'Ja';
@@ -1144,7 +1141,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Er is een fout in uw rapport gevonden.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Geen bestand opgegeven.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Het bestandstype is niet toegestaan.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'De map bestaat niet. Controleer alstublieft de projectinstellingen.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Dit bestand bestaat al.  Verwijder het bestaande bestand eerst.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Dit project bestaat al.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Een verplicht veld ("%1$s") is niet ingevuld. Controleer alstublieft uw invoer.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Deze gebruiker is beschermd. U hebt hier geen toegang totdat de bescherming is opgeheven.';

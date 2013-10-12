@@ -15,18 +15,26 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language File
- * See the qqq 'language' for message documentation incl. usage of parameters
+ * Language File - Volapük (Volapük)
+ *
  * **********************************************************************
  * ** This file is generated from translations stored in translatewiki **
  * ** Information on Copyright/License for translatewiki translations  **
  * ** is available at http://translatewiki.net/wiki/Project:About      **
  * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
  * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ *
  * @ingroup Language
- * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @file
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
 */
 
@@ -183,7 +191,6 @@ $s_delete_link = 'Moükön';
 $s_add_bugnote_title = 'Läükön Noeti';
 $s_add_bugnote_button = 'Läükön Noeti';
 $s_bugnote_edit_link = 'Redakön';
-$s_edited_on = 'pebevobon ün:';
 $s_hide_content = 'Klänedön Ninädi';
 $s_show_content = 'Jonön Ninädi';
 $s_total_queries_executed = '%1$d seivids valemik peledunons.';
@@ -201,7 +208,6 @@ $s_lost_password_link = 'Eperol-li letavödi olik?';
 $s_select_project_button = 'Välön Proyegi';
 $s_lost_password_done_title = 'Letavödanun pesedon';
 $s_lost_password_confirm_hash_OK = 'Fümedam olik pezepon. Votükolös letavödi olik.';
-$s_open_and_assigned_to_me = 'Maifik ä pegivülöl obe';
 $s_site_information = 'Nüns tefü Topäd';
 $s_mantis_version = 'Fomam ela MantisBT';
 $s_site_path = 'Luveg Bevüresodatopäda';
@@ -251,7 +257,6 @@ $s_plugin_author = 'Lautan: %$1s';
 $s_plugin_url = 'Bevüresodatopäd:';
 $s_plugin_protected = 'Pejelon';
 $s_plugin_actions = 'Duns';
-$s_plugin_key = 'Kik';
 $s_project_added_msg = 'Proyeg peläükon benosekiko...';
 $s_category_added_msg = 'Klad peläükon benosekiko...';
 $s_category_deleted_msg = 'Klad pemoükon benosekiko...';
@@ -360,8 +365,6 @@ $s_prev = 'Büik';
 $s_next = 'Sököl';
 $s_first = 'Balid';
 $s_last = 'Lätik';
-$s_start_date = 'Primadät';
-$s_end_date = 'Finadät';
 $s_use_date_filters = 'Gebön Dätisulis';
 $s_yes = 'Si';
 $s_no = 'No';
@@ -403,7 +406,6 @@ $s_horizontal = 'Horitätik';
 $s_view = 'Logön';
 $s_notes = 'NOETS';
 $s_add_notes = 'Läükön noetis';
-$s_delete_note = 'Moükön noetis';
 $s_view_private_notes = 'Logön noetis privatik';
 $s_delete_attachment_button = 'Moükön';
 $s_filters = 'suls';
@@ -441,7 +443,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'In nunod oli ädabinon pöl.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Ragiv nonik pegivon.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Ragivatip no pedälon.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Ragiviär no dabinon. Kontrololös parametemi proyega.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Atos binon ragiv petelüköl. Büo moükolös ragivi.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Proyeg labü nem at ya dabinon.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Fel zesüdik: „$1$s“ ävagon. Kontrololös utosi, kelosi epenol.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Kal at pejelon. No dalol gebön ani jüs kalijel ponosükon.';

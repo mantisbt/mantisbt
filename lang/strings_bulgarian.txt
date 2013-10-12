@@ -15,18 +15,26 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language File
- * See the qqq 'language' for message documentation incl. usage of parameters
+ * Language File - Bulgarian (български)
+ *
  * **********************************************************************
  * ** This file is generated from translations stored in translatewiki **
  * ** Information on Copyright/License for translatewiki translations  **
  * ** is available at http://translatewiki.net/wiki/Project:About      **
  * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
  * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ *
  * @ingroup Language
- * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @file
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
 */
 
@@ -953,7 +961,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Грешка в отчета.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Не е зададен файл';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Този файлов тип е забранен за зареждане';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Няма такава директория. Моля  проверете проектните настройки.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Зареденият файл вече съществува.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Вече съществува проект с такова име.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Задължителното поле \'%1$s\' е празно. Моля допълнете формата.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Профилът е защитен. Нямате право на достъп докато не се премахне защитата.';

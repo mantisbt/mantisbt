@@ -15,18 +15,26 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language File
- * See the qqq 'language' for message documentation incl. usage of parameters
+ * Language File - Romanian (română)
+ *
  * **********************************************************************
  * ** This file is generated from translations stored in translatewiki **
  * ** Information on Copyright/License for translatewiki translations  **
  * ** is available at http://translatewiki.net/wiki/Project:About      **
  * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
  * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ *
  * @ingroup Language
- * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @file
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
 */
 
@@ -877,7 +885,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'EROARE: Aţi omis un detaliu obligatoriu din rapo
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'EROARE: Nu aţi specificat un fişier.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'ERROR: Acest tip de fişier nu este acceptat.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'EROARE: Calea specificată nu există. Verificaţi configuraţia proiectului.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'ERROR: Acest fişier există deja. Ştergeţi vechiul fişier.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'ERROR: Există deja un proiect cu acest nume.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Un câmp necesar "%1$s" a fost vid. Reverificaţi datele de intrare.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'ERROR: Acest cont este protejat şi nu poate fi accesat până când protecţia nu este ridicată.';

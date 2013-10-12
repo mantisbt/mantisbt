@@ -15,18 +15,26 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language File
- * See the qqq 'language' for message documentation incl. usage of parameters
+ * Language File - Catalan (català)
+ *
  * **********************************************************************
  * ** This file is generated from translations stored in translatewiki **
  * ** Information on Copyright/License for translatewiki translations  **
  * ** is available at http://translatewiki.net/wiki/Project:About      **
  * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
  * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ *
  * @ingroup Language
- * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @file
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
 */
 
@@ -66,7 +74,6 @@ $s_access_level_project = 'Nivell d\'Accés del Projecte';
 $s_view_submitted_bug_link = 'Mostra la Incidència %1$s';
 $s_assigned_projects = 'Projectes Assignats';
 $s_assigned_projects_label = 'Projectes Assignats:';
-$s_unassigned_projects_label = 'Projectes sense Assignar:';
 $s_print = 'Imprimeix';
 $s_jump = 'Salta';
 $s_copy_users = 'Copia els Usuaris';
@@ -471,8 +478,6 @@ $s_lost_password_done_title = 'Missatge de contrasenya enviat';
 $s_lost_password_subject = 'Restaura la contrasenya';
 $s_lost_password_info = 'Per a recuperar la seva contrasenya oblidada, si us plau completi el seu correu i contrasenya.<br /><br />Si les dades es corresponen amb un compte vàlid, rebrà un correu amb una URL especial per a canviar la contrasenya. Si us plau segueixi les instruccions que rebrà i podrà canviar la contrasenya.';
 $s_lost_password_confirm_hash_OK = 'La seva confirmació ha estat acceptada. Si us plau canviï la seva contrasenya.';
-$s_open_and_assigned_to_me_label = 'Obert i assignat a mi:';
-$s_open_and_reported_to_me_label = 'Obert i reportat per mi:';
 $s_newer_news_link = 'Notícies noves';
 $s_older_news_link = 'Notícies anteriors';
 $s_archives = 'Notícies arxivades';
@@ -599,11 +604,6 @@ $s_plugin_install = 'Instal·la';
 $s_plugin_upgrade = 'Actualització';
 $s_plugin_uninstall = 'Desinstal·la';
 $s_plugin_uninstall_message = 'Està segur de voler desinstal·lar el plugin "%1$s"?';
-$s_plugin_key_label = 'Clau:';
-$s_plugin_key_met = 'plugin llest';
-$s_plugin_key_unmet = 'dependències no satisfetes';
-$s_plugin_key_dated = 'dependencies desactualitzades';
-$s_plugin_key_upgrade = 'actualització requerida';
 $s_project_added_msg = 'El projecte ha estat agregat...';
 $s_category_added_msg = 'La categoria ha estat agregada...';
 $s_category_deleted_msg = 'La categoria ha estat eliminada...';
@@ -827,7 +827,6 @@ $s_viewing_bugs_title = 'Incidències';
 $s_updated = 'Actualitzat';
 $s_sticky = 'Mostra les Incidències Fixades';
 $s_sticky_label = 'Mostra les Incidències Fixades:';
-$s_sort_label = 'Ordenat per:';
 $s_issue_id = 'Incidència #';
 $s_recently_visited = 'Visitades Recentment';
 $s_priority_abbreviation = 'P';
@@ -841,8 +840,6 @@ $s_prev = 'Ant';
 $s_next = 'Seg';
 $s_first = 'Primer';
 $s_last = 'Últim';
-$s_start_date_label = 'Data d\'Inici:';
-$s_end_date_label = 'Data Final:';
 $s_use_date_filters = 'Utilitza filtres de data';
 $s_use_date_filters_label = 'Utilitza Filtres de Data:';
 $s_yes = 'Sí';
@@ -1131,7 +1128,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'S\'ha trobat un error en la seva incidència.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Arxiu no especificat';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Aquest tipus d\'arxiu no està permès';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'El directori no existeix. Si us plau revisi la configuració del projecte.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Aquest és un arxiu duplicat. Si us plau esborri l\'arxiu primer.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Ja existeix un projecte amb aquest nom.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'El camp requerit "%1$s" està buit. Si us plau, comprovi les dades.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Aquest compte està protegit. No hi té accés fins que la protecció del compte hagi estat retirada.';

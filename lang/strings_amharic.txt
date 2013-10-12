@@ -15,18 +15,26 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language File
- * See the qqq 'language' for message documentation incl. usage of parameters
+ * Language File - Amharic (አማርኛ)
+ *
  * **********************************************************************
  * ** This file is generated from translations stored in translatewiki **
  * ** Information on Copyright/License for translatewiki translations  **
  * ** is available at http://translatewiki.net/wiki/Project:About      **
  * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
  * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ *
  * @ingroup Language
- * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @file
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
 */
 
@@ -55,7 +63,6 @@ $s_anonymous = ' ስም የሌለው';
 $s_jump_to_bugnotes = 'ወደ ማስታወሻ እለፍ';
 $s_assigned_projects = 'የተመደበ  ፕሮጀክት';
 $s_assigned_projects_label = 'የተመደበ  ፕሮጀክት:';
-$s_unassigned_projects_label = 'ያልተመደበ  ፕሮጀክት';
 $s_print = 'አትም';
 $s_jump = 'መዝለል';
 $s_copy_categories_from = 'የፈርጅ ቅጂ  ከ';
@@ -291,8 +298,6 @@ $s_select_project_button = 'ፕሮጀክት ምረጥ';
 $s_lost_password_title = 'የይለፍ ቃሉን እንደገና አስተካክል';
 $s_lost_password_done_title = 'የይለፍ ቃሉ መልዕክት ተልኮዋል';
 $s_lost_password_subject = 'የይለፍ ቃሉን እንደገና አስተከክል';
-$s_open_and_assigned_to_me_label = 'ለእኔ የተከፈተና የተመደበ';
-$s_open_and_reported_to_me_label = 'በእኔ የተከፈተና ሪፖርት የተደረገ';
 $s_newer_news_link = 'አዲስ ዜናዎች';
 $s_older_news_link = 'የቆዩ ዜናዎች';
 $s_archives = 'መዝገቦች';
@@ -336,7 +341,6 @@ $s_changed = 'የተቀየረ(ሰዓት) :';
 $s_changed_label = 'የተቀየረ(ሰዓት) :';
 $s_viewing_bugs_title = 'ጉዳዩን በመመልከት ላይ';
 $s_updated = 'የዘመነ';
-$s_sort_label = 'የተደረደረው በ :';
 $s_issue_id = 'ጉዳይ #';
 $s_recently_visited = 'በቅርብ የተጎበኘ';
 $s_note_user_id_label = 'ማስታወሻ በ :';
@@ -349,8 +353,6 @@ $s_prev = 'የበፊት';
 $s_next = 'ቃጣይ';
 $s_first = 'መጀመሪያ';
 $s_last = 'መጨረሻ';
-$s_start_date_label = 'የመጀመሪያ ቀን :';
-$s_end_date_label = 'የመጨረሻው ቀን :';
 $s_yes = 'አዎ';
 $s_no = 'አይ';
 $s_or_unassigned = 'ወይም ያልተመደበ';

@@ -15,18 +15,26 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language File
- * See the qqq 'language' for message documentation incl. usage of parameters
+ * Language File - Russian (русский)
+ *
  * **********************************************************************
  * ** This file is generated from translations stored in translatewiki **
  * ** Information on Copyright/License for translatewiki translations  **
  * ** is available at http://translatewiki.net/wiki/Project:About      **
  * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
  * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ *
  * @ingroup Language
- * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @file
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
 */
 
@@ -66,7 +74,6 @@ $s_access_level_project = 'Уровень доступа к проекту';
 $s_view_submitted_bug_link = 'Просмотреть созданный инцидент %1$s';
 $s_assigned_projects = 'Назначенные проекты';
 $s_assigned_projects_label = 'Назначенные проекты:';
-$s_unassigned_projects_label = 'Неназначенные проекты:';
 $s_print = 'печать';
 $s_jump = 'Перейти';
 $s_copy_users = 'Копирование пользователей';
@@ -473,8 +480,6 @@ $s_lost_password_done_title = 'Сообщение отправлено';
 $s_lost_password_subject = 'Сброс пароля';
 $s_lost_password_info = 'Для восстановления пароля введите регистрационное имя и адрес электронной почты своей учетной записи.<br /><br />Если данные соответствует существующей учетной записи, вам будет выслана специальная ссылка на страницу с кодом проверки. Для смены пароля перейдите по этой ссылке.';
 $s_lost_password_confirm_hash_OK = 'Подтверждение принято. Обновите свой пароль.';
-$s_open_and_assigned_to_me_label = 'Открытых и назначенных мне:';
-$s_open_and_reported_to_me_label = 'Открытых, созданных мной:';
 $s_newer_news_link = 'Свежие новости';
 $s_older_news_link = 'Старые новости';
 $s_archives = 'Архивы';
@@ -606,11 +611,6 @@ $s_plugin_install = 'Установить';
 $s_plugin_upgrade = 'Обновить';
 $s_plugin_uninstall = 'Удалить';
 $s_plugin_uninstall_message = 'Вы уверены, что хотите удалить плагин «%1$s»?';
-$s_plugin_key_label = 'Ключ:';
-$s_plugin_key_met = 'плагин готов';
-$s_plugin_key_unmet = 'не зависит';
-$s_plugin_key_dated = 'несовместимая версия';
-$s_plugin_key_upgrade = 'необходимо обновление';
 $s_project_added_msg = 'Проект добавлен...';
 $s_category_added_msg = 'Категория добавлена...';
 $s_category_deleted_msg = 'Категория удалена...';
@@ -834,7 +834,6 @@ $s_viewing_bugs_title = 'Список инцидентов';
 $s_updated = 'Изменен';
 $s_sticky = 'Выводить прикрепленные';
 $s_sticky_label = 'Выводить прикрепленные:';
-$s_sort_label = 'Сортировать по:';
 $s_issue_id = 'Инцидент #';
 $s_recently_visited = 'Недавно посещенные';
 $s_priority_abbreviation = 'П';
@@ -848,8 +847,6 @@ $s_prev = 'пред.';
 $s_next = 'след.';
 $s_first = 'первая';
 $s_last = 'последняя';
-$s_start_date_label = 'С:';
-$s_end_date_label = 'По:';
 $s_use_date_filters = 'За период';
 $s_use_date_filters_label = 'За период:';
 $s_yes = 'да';
@@ -1142,7 +1139,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Во введенной информации об
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Не указан файл.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Этот тип файлов запрещен.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Каталог не существует. Проверьте настройки проекта.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Дубликат файла. Сначала удалите старый файл.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Проект с таким названием уже существует.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Обязательное поле \'%1$s\' не заполнено. Пожалуйста, проверьте правильность заполнения.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Эта учетная запись защищена. Вы не сможете получить к ней доступ, пока защита не снята.';

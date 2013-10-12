@@ -15,18 +15,26 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language File
- * See the qqq 'language' for message documentation incl. usage of parameters
+ * Language File - Slovak (slovenčina)
+ *
  * **********************************************************************
  * ** This file is generated from translations stored in translatewiki **
  * ** Information on Copyright/License for translatewiki translations  **
  * ** is available at http://translatewiki.net/wiki/Project:About      **
  * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
  * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ *
  * @ingroup Language
- * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @file
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
 */
 
@@ -563,10 +571,6 @@ $s_plugin_install = 'Inštalácia';
 $s_plugin_upgrade = 'Upgradovať';
 $s_plugin_uninstall = 'Odinštalovať';
 $s_plugin_uninstall_message = 'Ste si istý, že chcete odinštalovať zásuvný modul "%1$s"?';
-$s_plugin_key_met = 'zásuvný modul pripravený';
-$s_plugin_key_unmet = 'nesplnené závislosti';
-$s_plugin_key_dated = 'zastaralé závislosti';
-$s_plugin_key_upgrade = 'vyžadovaný upgrade';
 $s_project_added_msg = 'Projekt bol úspešne pridaný...';
 $s_category_added_msg = 'Kategória bola úspešne pridaná...';
 $s_category_deleted_msg = 'Kategória bola úspešne zmazaná...';
@@ -1068,7 +1072,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Vo vašej správe bola chyba.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Žiadny súbor nebol určený.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Tento typ súboru nie je povolený.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Adresár neexistuje. Prosím skontrolujte nastavenia projektu.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Toto je duplikátny súbor. Prosím, najprv súbor zmažte.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Projekt s takým názvom už existuje.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Potrebné pole „%1$s“ nebolo vyplnené. Prosím, znova skontrolujte údaje, ktoré ste zadali.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Toto konto je chránené. Nemáte povolený vstup dokiaľ nebude ochrana odstránená.';

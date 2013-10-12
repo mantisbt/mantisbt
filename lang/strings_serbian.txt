@@ -15,18 +15,26 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language File
- * See the qqq 'language' for message documentation incl. usage of parameters
+ * Language File - Serbian (Cyrillic script) (српски (ћирилица)‎)
+ *
  * **********************************************************************
  * ** This file is generated from translations stored in translatewiki **
  * ** Information on Copyright/License for translatewiki translations  **
  * ** is available at http://translatewiki.net/wiki/Project:About      **
  * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
  * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ *
  * @ingroup Language
- * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @file
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
 */
 
@@ -647,7 +655,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Postoji greska u vasem izvestaju.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Fajl nije izabran';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Ovaj tip fajla nije dozvoljen';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Direktorijum ne postoji. Molim proverite podesavanja projekta.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'Dupliran fajl. Molim izbrisite fajl prvo.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Projekat pod tim imenom vec postoji.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Obavezno polje je ostavljeno prazno. Molim proverite podatke.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Ovaj nalog je zasticen. Niste ovlasceni da mu pristupite dok se zastita ne ukloni .';

@@ -15,18 +15,26 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language File
- * See the qqq 'language' for message documentation incl. usage of parameters
+ * Language File - Hebrew (עברית)
+ *
  * **********************************************************************
  * ** This file is generated from translations stored in translatewiki **
  * ** Information on Copyright/License for translatewiki translations  **
  * ** is available at http://translatewiki.net/wiki/Project:About      **
  * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
  * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  *
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ *
  * @ingroup Language
- * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @file
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
 */
 
@@ -550,10 +558,6 @@ $s_plugin_install = 'התקנה';
 $s_plugin_upgrade = 'שדרוג';
 $s_plugin_uninstall = 'הסרה';
 $s_plugin_uninstall_message = 'להסיר את התוסף "%1$s"?';
-$s_plugin_key_met = 'תוסף מוכן';
-$s_plugin_key_unmet = 'חסרות תלויות';
-$s_plugin_key_dated = 'תלויות לא עדכניות';
-$s_plugin_key_upgrade = 'נדרש שדרוג';
 $s_project_added_msg = 'הפרויקט הוקם';
 $s_category_added_msg = 'הקטגוריה נוספה';
 $s_category_deleted_msg = 'הקטגוריה נמחקה';
@@ -1034,7 +1038,6 @@ $MANTIS_ERROR[ERROR_REPORT] = 'נמצאה שגיאה בדו"ח שלך.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'לא צוין קובץ';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'סוג הקובץ אסור';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'המחיצה אינה קיימת - יש לבדוק את הגדרות הפרויקט.';
-$MANTIS_ERROR[ERROR_DUPLICATE_FILE] = 'קובץ זה כבר קיים. יש למחוק את הקובץ הקודם.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'קיים פרויקט בשם זה.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'שדה חובה \'%1$s\' הושאר ריק.  עליך לבדוק את הנתונים שקלטת.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'חשבון זה מוגן. אין אפשרות לגשת לחשבון זה אלא לאחר הסרת ההגנה.';
