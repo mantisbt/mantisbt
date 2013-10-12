@@ -38,9 +38,6 @@
  * @uses utility_api.php
  */
 
-/**
- * MantisBT Core API's
- */
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -228,7 +225,8 @@ if ( config_get_global( 'admin_checks' ) == ON ) {
 		$t_warnings[] = debug_setting_message( 'security', $t_config, 'OFF' );
 	}
 	$t_config = 'display_errors';
-	if( config_get_global( $t_config )[E_USER_ERROR] != DISPLAY_ERROR_HALT ) {
+	$t_errors = config_get_global( $t_config );
+	if( $t_errors[E_USER_ERROR] != DISPLAY_ERROR_HALT ) {
 		$t_warnings[] = debug_setting_message(
 			'integrity',
 			$t_config . '[E_USER_ERROR]',
