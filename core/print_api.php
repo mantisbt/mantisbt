@@ -615,7 +615,7 @@ function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_fi
 		}
 
 		echo '<option value="' . $t_full_id . '"';
-		check_selected( $p_project_id, $t_full_id );
+		check_selected( (string)$p_project_id, (string)$t_full_id );
 		check_disabled( $t_id == $p_filter_project_id || !$t_can_report );
 		echo '>'
 			. str_repeat( '&#160;', count( $p_parents ) )
