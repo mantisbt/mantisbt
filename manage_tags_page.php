@@ -125,28 +125,36 @@ print_manage_menu( 'manage_tags_page.php' ); ?>
 	<?php if ( $t_can_edit ) { ?>
 	<div class="section-link"><?php print_link( '#tagcreate', lang_get( 'tag_create' ) ) ?></div>
 	<?php } ?>
-	<table cellspacing="1" cellpadding="5" border="1">
-		<tr class="row-category">
-			<td><?php echo lang_get( 'tag_name' ) ?></td>
-			<td><?php echo lang_get( 'tag_creator' ) ?></td>
-			<td><?php echo lang_get( 'tag_created' ) ?></td>
-			<td><?php echo lang_get( 'tag_updated' ) ?></td>
-		</tr><?php
+	<table>
+		<thead>
+			<tr class="row-category">
+				<td><?php echo lang_get( 'tag_name' ) ?></td>
+				<td><?php echo lang_get( 'tag_creator' ) ?></td>
+				<td><?php echo lang_get( 'tag_created' ) ?></td>
+				<td><?php echo lang_get( 'tag_updated' ) ?></td>
+			</tr>
+		</thead>
+		<tbody>
+<?php
 		# Display all tags
 		while( $t_tag_row = db_fetch_array( $t_result ) ) {
 			$t_tag_name = string_display_line( $t_tag_row['name'] );
-			$t_tag_description = string_display( $t_tag_row['description'] ); ?>
-		<tr><?php
-		if ( $t_can_edit ) { ?>
-			<td><a href="tag_view_page.php?tag_id=<?php echo $t_tag_row['id'] ?>" ><?php echo $t_tag_name ?></a></td><?php
-		} else { ?>
-			<td><?php echo $t_tag_name ?></td><?php
-		} ?>
-			<td><?php echo string_display_line( user_get_name( $t_tag_row['user_id'] ) ) ?></td>
-			<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></td>
-			<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></td>
-		</tr><?php
-		} # end while loop on tags ?>
+			$t_tag_description = string_display( $t_tag_row['description'] );
+?>
+			<tr>
+			<?php if( $t_can_edit ) { ?>
+				<td><a href="tag_view_page.php?tag_id=<?php echo $t_tag_row['id'] ?>" ><?php echo $t_tag_name ?></a></td>
+			<?php } else { ?>
+				<td><?php echo $t_tag_name ?></td>
+			<?php } ?>
+				<td><?php echo string_display_line( user_get_name( $t_tag_row['user_id'] ) ) ?></td>
+				<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></td>
+				<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></td>
+			</tr>
+<?php
+		} # end while loop on tags
+?>
+		</tbody>
 	</table>
 	<div class="pager-links"><?php
 		/* @todo hack - pass in the hide inactive filter via cheating the actual filter value */
