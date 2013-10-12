@@ -2754,8 +2754,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<?php
 		}?>
 			<td colspan="1" class="small-caption" id="show_priority_filter_target">
-              <?php
-							  $t_output = '';
+<?php
+		$t_output = '';
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_PRIORITY] ) == 0 ) {
 			echo lang_get( 'any' );
@@ -3274,11 +3274,13 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		?>
 		<tr class="row-1">
 			<td class="small-caption category2">
-                <a href="<?php echo $t_filters_url . FILTER_PROPERTY_NOTE_USER_ID;?>" id="note_user_id_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'note_user_id_label' )?></a>
-            </td>
-            <td class="small-caption" id="note_user_id_filter_target">
-                <?php
-                    $t_output = '';
+				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_NOTE_USER_ID;?>" id="note_user_id_filter"<?php echo $t_dynamic_filter_expander_class ?>>
+					<?php echo lang_get( 'note_user_id_label' )?>
+				</a>
+			</td>
+			<td class="small-caption" id="note_user_id_filter_target">
+				<?php
+					$t_output = '';
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_NOTE_USER_ID] ) == 0 ) {
 			echo lang_get( 'any' );
@@ -3314,9 +3316,13 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			}
 		}
 		?>
-            </td>
-			<td class="small-caption">
-				<a href="<?php echo $t_filters_url . 'show_sort';?>" id="show_sort_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'sort_label' )?></a>
+			</td>
+
+			<!-- Sort by -->
+			<td class="small-caption category2">
+				<a href="<?php echo $t_filters_url . 'show_sort';?>" id="show_sort_filter"<?php echo $t_dynamic_filter_expander_class ?>>
+					<?php echo lang_get( 'sort_label' )?>
+				</a>
 			</td>
 			<td class="small-caption" id="show_sort_filter_target">
 				<?php
@@ -3340,17 +3346,20 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_DIRECTION, '_', $i, '" value="', string_attribute( $t_dir_fields[$i] ), '" />';
 			}
 		}
-		?>
+?>
 			</td>
-			<?php
-				if( 'advanced' == $t_view_type ) {
-			?>
-					<td class="small-caption" colspan="2">
-						<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PROJECT_ID;?>" id="project_id_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'email_project_label' )?></a>
-					</td>
-					<td class="small-caption" id="project_id_filter_target">
-						<?php
-							$t_output = '';
+<?php
+		if( 'advanced' == $t_view_type ) {
+?>
+			<!-- Project -->
+			<td class="small-caption category2" colspan="2">
+				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PROJECT_ID;?>" id="project_id_filter"<?php echo $t_dynamic_filter_expander_class ?>>
+					<?php echo lang_get( 'email_project_label' )?>
+				</a>
+			</td>
+			<td class="small-caption" id="project_id_filter_target">
+<?php
+			$t_output = '';
 			if( !is_array( $t_filter[FILTER_PROPERTY_PROJECT_ID] ) ) {
 				$t_filter[FILTER_PROPERTY_PROJECT_ID] = array(
 					$t_filter[FILTER_PROPERTY_PROJECT_ID],
@@ -3377,10 +3386,10 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				}
 				echo $t_output;
 			}
-			?>
-					</td>
-					<?php
-					if( $t_filter_cols > 6 ) {
+?>
+			</td>
+<?php
+			if( $t_filter_cols > 6 ) {
 				echo '<td class="small-caption" colspan="' . ( $t_filter_cols - 5 ) . '">&#160;</td>';
 			}
 		} else {
@@ -3388,10 +3397,12 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				echo '<td class="small-caption" colspan="' . ( $t_filter_cols - 2 ) . '">&#160;</td>';
 			}
 		}
-		?>
+?>
 		</tr>
+
+		<!-- Match Type -->
 		<tr class="row-1">
-			<td class="small-caption"><a href="<?php echo $t_filters_url . FILTER_PROPERTY_MATCH_TYPE;?>" id="match_type_filter"><?php echo lang_get( 'filter_match_type' )?>:</a></td>
+			<td class="small-caption category2"><a href="<?php echo $t_filters_url . FILTER_PROPERTY_MATCH_TYPE;?>" id="match_type_filter"><?php echo lang_get( 'filter_match_type' )?>:</a></td>
 			<td class="small-caption" id="match_type_filter_target">
 			<?php
 				switch( $t_filter[FILTER_PROPERTY_MATCH_TYPE] ) {
