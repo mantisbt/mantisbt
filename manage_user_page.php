@@ -281,8 +281,9 @@ $user_count = db_num_rows( $result );
 		</fieldset>
 	</form>
 
-	<table cellspacing="1" cellpadding="5" border="1">
-		<tr class="row-category">
+	<table>
+		<thead>
+			<tr class="row-category">
 <?php
 	# Print column headers with sort links
 	$t_columns = array(
@@ -291,17 +292,21 @@ $user_count = db_num_rows( $result );
 	);
 
 	foreach( $t_columns as $t_col ) {
-		echo "\t<td>";
+		echo "\t<th>";
 		print_manage_user_sort_link( 'manage_user_page.php',
 			lang_get( $t_col ),
 			$t_col,
 			$c_dir, $c_sort, $c_hide_inactive, $c_filter, $c_show_disabled
 		);
 		print_sort_icon( $c_dir, $c_sort, $t_col );
-		echo "</td>\n";
+		echo "</th>\n";
 	}
 ?>
-		</tr><?php
+			</tr>
+		</thead>
+
+		<tbody>
+<?php
 	$t_date_format = config_get( 'normal_date_format' );
 	$t_access_level = array();
 	for ($i=0;$i<$user_count;$i++) {
@@ -315,30 +320,34 @@ $user_count = db_num_rows( $result );
 		if( !isset( $t_access_level[$u_access_level] ) ) {
 			$t_access_level[$u_access_level] = get_enum_element( 'access_levels', $u_access_level );
 		} ?>
-		<tr>
-			<td><?php
-				if ( access_has_global_level( $u_access_level ) ) { ?>
-					<a href="manage_user_edit_page.php?user_id=<?php echo $u_id ?>"><?php echo string_display_line( $u_username ) ?></a><?php
-				} else {
-					echo string_display_line( $u_username );
-				} ?>
-			</td>
-			<td><?php echo string_display_line( $u_realname ) ?></td>
-			<td><?php print_email_link( $u_email, $u_email ) ?></td>
-			<td><?php echo $t_access_level[$u_access_level] ?></td>
-			<td class="center"><?php echo trans_bool( $u_enabled ) ?></td>
-			<td class="center"><?php
-				if ( $u_protected ) {
-					echo " $t_lock_image";
-				} else {
-					echo '&#160;';
-				} ?>
-			</td>
-			<td><?php echo $u_date_created ?></td>
-			<td><?php echo $u_last_visit ?></td>
-		</tr><?php
-	}  # end for ?>
+			<tr>
+				<td><?php
+					if ( access_has_global_level( $u_access_level ) ) { ?>
+						<a href="manage_user_edit_page.php?user_id=<?php echo $u_id ?>"><?php echo string_display_line( $u_username ) ?></a><?php
+					} else {
+						echo string_display_line( $u_username );
+					} ?>
+				</td>
+				<td><?php echo string_display_line( $u_realname ) ?></td>
+				<td><?php print_email_link( $u_email, $u_email ) ?></td>
+				<td><?php echo $t_access_level[$u_access_level] ?></td>
+				<td class="center"><?php echo trans_bool( $u_enabled ) ?></td>
+				<td class="center"><?php
+					if ( $u_protected ) {
+						echo " $t_lock_image";
+					} else {
+						echo '&#160;';
+					} ?>
+				</td>
+				<td><?php echo $u_date_created ?></td>
+				<td><?php echo $u_last_visit ?></td>
+			</tr>
+<?php
+	}  # end for
+?>
+		</tbody>
 	</table>
+
 	<div class="pager-links">
 		<?php
 		/* @todo hack - pass in the hide inactive filter via cheating the actual filter value */
