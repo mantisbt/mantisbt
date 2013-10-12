@@ -114,6 +114,7 @@ $s_access_level_project = 'Project Access Level';
 $s_view_submitted_bug_link = 'View Submitted Issue %1$s';
 $s_assigned_projects = 'Assigned Projects';
 $s_assigned_projects_label = 'Assigned Projects';
+$s_unassigned_projects_label = 'Unassigned Projects';
 $s_print = 'Print';
 $s_jump = 'Jump';
 $s_copy_users = 'Copy Users';
@@ -673,6 +674,8 @@ $s_lost_password_info = 'To reinstate your lost password, please supply the name
 $s_lost_password_confirm_hash_OK = 'Your confirmation has been accepted. Please update your password.';
 
 # main_page.php
+$s_open_and_assigned_to_me_label = 'Open and assigned to me:';
+$s_open_and_reported_to_me_label = 'Open and reported by me:';
 $s_newer_news_link = 'Newer News';
 $s_older_news_link = 'Older News';
 $s_archives = 'Archives';
@@ -829,6 +832,11 @@ $s_plugin_install = 'Install';
 $s_plugin_upgrade = 'Upgrade';
 $s_plugin_uninstall = 'Uninstall';
 $s_plugin_uninstall_message = 'Are you sure you want to uninstall the "%1$s" plugin?';
+$s_plugin_key_label = 'Key:';
+$s_plugin_key_met = 'plugin ready';
+$s_plugin_key_unmet = 'unmet dependencies';
+$s_plugin_key_dated = 'outdated dependencies';
+$s_plugin_key_upgrade = 'upgrade needed';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Project has been successfully added...';
@@ -1166,6 +1174,7 @@ $s_viewing_bugs_title = 'Viewing Issues';
 $s_updated = 'Updated';
 $s_sticky = 'Show Sticky Issues';
 $s_sticky_label = 'Show Sticky Issues:';
+$s_sort_label = 'Sort by:';
 $s_issue_id = 'Issue #';
 $s_recently_visited = 'Recently Visited';
 $s_priority_abbreviation = 'P';
@@ -1184,6 +1193,8 @@ $s_prev = 'Prev';
 $s_next = 'Next';
 $s_first = 'First';
 $s_last = 'Last';
+$s_start_date_label = 'Start Date:';
+$s_end_date_label = 'End Date:';
 $s_use_date_filters = 'Use Date Filters';
 $s_use_date_filters_label = 'Use Date Filters:';
 $s_yes = 'Yes';
