@@ -182,7 +182,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
 
 <br />
 
-<div class="form-container">
+<div class="form-container center">
 	<form method="post" action="manage_custom_field_delete.php" class="action-button">
 		<fieldset>
 			<?php echo form_security_field( 'manage_custom_field_delete' ); ?>
@@ -198,7 +198,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
 		   * can't link/unlink fields from/to. */
 ?>
 <div class="form-container">
-	<div class="field-container">
+	<div id="custom-field-link-project" class="field-container">
 		<span class="display-label"><span><?php echo lang_get( 'link_custom_field_to_project_title' ) ?></span></span>
 		<div class="display-value">
 			<?php print_custom_field_projects_list( $f_field_id ) ?>

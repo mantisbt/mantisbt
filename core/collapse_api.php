@@ -64,8 +64,9 @@ $g_collapse_cache_token = null;
  * javascript is disabled.
  * @param string $p_name Collapse block name
  * @param string $p_section Collapse block section
+ * @param string $p_css_class CSS class to apply to the div (defaults to none)
  */
-function collapse_open( $p_name, $p_section = '' ) {
+function collapse_open( $p_name, $p_section = '', $p_css_class = '' ) {
 	global $g_current_collapse_section, $g_open_collapse_section;
 
 	$t_block = ( is_blank( $p_section ) ? $p_name : $p_section . '_' . $p_name );
@@ -76,11 +77,17 @@ function collapse_open( $p_name, $p_section = '' ) {
 		trigger_error( ERROR_GENERIC, ERROR );
 	}
 
+	if( $t_display ) {
+		$p_css_class .= ' collapse-open';
+	} else {
+		$p_css_class .= ' collapse-closed';
+	}
+
 	$g_open_collapse_section = true;
 	$g_current_collapse_section = $t_block;
 
 	$t_div_id = $t_block . '_open';
-	echo "\n<div id=\"", $t_div_id, '"', ( $t_display ? ' class="collapse-open"' : ' class="collapse-closed"' ), '>';
+	echo "\n<div id=\"$t_div_id\" class=\"$p_css_class\">";
 }
 
 /**

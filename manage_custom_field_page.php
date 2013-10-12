@@ -57,27 +57,31 @@ print_manage_menu( 'manage_custom_field_page.php' );
 
 <div class="table-container">
 	<h2><?php echo lang_get( 'custom_fields_setup' ) ?></h2>
-	<table cellspacing="1" cellpadding="5" border="1">
-		<tr>
-			<th class="category"><?php echo lang_get( 'custom_field_name' ) ?></th>
-			<th class="category"><?php echo lang_get( 'custom_field_project_count' ) ?></th>
-			<th class="category"><?php echo lang_get( 'custom_field_type' ) ?></th>
-			<th class="category"><?php echo lang_get( 'custom_field_possible_values' ) ?></th>
-			<th class="category"><?php echo lang_get( 'custom_field_default_value' ) ?></th>
-		</tr><?php
+	<table>
+		<thead>
+			<tr>
+				<th class="category"><?php echo lang_get( 'custom_field_name' ) ?></th>
+				<th class="category"><?php echo lang_get( 'custom_field_project_count' ) ?></th>
+				<th class="category"><?php echo lang_get( 'custom_field_type' ) ?></th>
+				<th class="category"><?php echo lang_get( 'custom_field_possible_values' ) ?></th>
+				<th class="category"><?php echo lang_get( 'custom_field_default_value' ) ?></th>
+			</tr>
+		</thead>
+		<tbody><?php
 		$t_custom_fields = custom_field_get_ids();
 		foreach( $t_custom_fields as $t_field_id ) {
 			$t_desc = custom_field_get_definition( $t_field_id ); ?>
-		<tr>
-			<td>
-				<a href="manage_custom_field_edit_page.php?field_id=<?php echo $t_field_id ?>"><?php echo custom_field_get_display_name( $t_desc['name'] ) ?></a>
-			</td>
-			<td><?php echo count( custom_field_get_project_ids( $t_field_id ) ) ?></td>
-			<td><?php echo get_enum_element( 'custom_field_type', $t_desc['type'] ) ?></td>
-			<td><?php echo string_display( $t_desc['possible_values'] ) ?></td>
-			<td><?php echo string_display( $t_desc['default_value'] ) ?></td>
-		</tr><?php
+			<tr>
+				<td>
+					<a href="manage_custom_field_edit_page.php?field_id=<?php echo $t_field_id ?>"><?php echo custom_field_get_display_name( $t_desc['name'] ) ?></a>
+				</td>
+				<td><?php echo count( custom_field_get_project_ids( $t_field_id ) ) ?></td>
+				<td><?php echo get_enum_element( 'custom_field_type', $t_desc['type'] ) ?></td>
+				<td><?php echo string_display( $t_desc['possible_values'] ) ?></td>
+				<td><?php echo string_display( $t_desc['default_value'] ) ?></td>
+			</tr><?php
 		} # Create Form END ?>
+		</tbody>
 	</table>
 	<form method="post" action="manage_custom_field_create.php">
 		<fieldset>

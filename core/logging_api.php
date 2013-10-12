@@ -226,6 +226,7 @@ function log_print_to_page() {
 			echo "\t\t<tr><td>" . $g_log_levels[LOG_DATABASE] . '</td><td colspan="3">' . $t_total_query_time . "</td></tr>\n";
 		}
 		echo "\t</tbody>\n\t</table>\n";
+
+		echo "<!--END Mantis Debug Log Output-->\n\n";
 	}
-	echo "<!--END Mantis Debug Log Output-->\n\n";
 }

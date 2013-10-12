@@ -615,7 +615,7 @@ function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_fi
 		}
 
 		echo '<option value="' . $t_full_id . '"';
-		check_selected( $p_project_id, $t_full_id );
+		check_selected( (string)$p_project_id, (string)$t_full_id );
 		check_disabled( $t_id == $p_filter_project_id || !$t_can_report );
 		echo '>'
 			. str_repeat( '&#160;', count( $p_parents ) )
@@ -669,7 +669,7 @@ function print_profile_option_list_for_project( $p_project_id, $p_select_id = ''
  * @param int $p_select_id ID to mark as selected by default
  */
 function print_profile_option_list_from_profiles( $p_profiles, $p_select_id ) {
-	echo '<option value=""></option>';
+	echo '<option value="">' . lang_get( 'select_option' ) . '</option>';
 	foreach( $p_profiles as $t_profile ) {
 		extract( $t_profile, EXTR_PREFIX_ALL, 'v' );
 
@@ -1175,7 +1175,7 @@ function print_plugin_priority_list( $p_priority ) {
 	}
 
 	for( $i = 5;$i >= 1;$i-- ) {
-		echo '<option value="', $i, '" ', check_selected( $p_priority, $i ), ' >', $i, '</option>';
+		echo '<option value="', $i, '" ', check_selected( $p_priority, (string)$i ), ' >', $i, '</option>';
 	}
 }
 

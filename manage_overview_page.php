@@ -68,6 +68,7 @@ print_manage_menu();
 		<tr class="spacer">
 			<td colspan="2"></td>
 		</tr>
+		<tr class="hidden"></tr>
 	<?php
 	$t_is_admin = current_user_is_administrator();
 	if ( $t_is_admin ) {

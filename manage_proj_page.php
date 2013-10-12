@@ -87,29 +87,34 @@ print_manage_menu( 'manage_proj_page.php' );
 		print_button( 'manage_proj_create_page.php', lang_get( 'create_new_project_link' ) );
 	} ?>
 
-	<table cellspacing="1" cellpadding="5" border="1">
-		<tr class="row-category">
-			<td><?php
-				print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'name' ), 'name', $t_direction, $f_sort );
-				print_sort_icon( $t_direction, $f_sort, 'name' ); ?>
-			</td>
-			<td><?php
-				print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'status' ), 'status', $t_direction, $f_sort );
-				print_sort_icon( $t_direction, $f_sort, 'status' ); ?>
-			</td>
-			<td><?php
-				print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'enabled' ), 'enabled', $t_direction, $f_sort );
-				print_sort_icon( $t_direction, $f_sort, 'enabled' ); ?>
-			</td>
-			<td><?php
-				print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'view_status' ), 'view_state', $t_direction, $f_sort );
-				print_sort_icon( $t_direction, $f_sort, 'view_state' ); ?>
-			</td>
-			<td><?php
-				print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'description' ), 'description', $t_direction, $f_sort );
-				print_sort_icon( $t_direction, $f_sort, 'description' ); ?>
-			</td>
-		</tr><?php
+	<table>
+		<thead>
+			<tr class="row-category">
+				<td><?php
+					print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'name' ), 'name', $t_direction, $f_sort );
+					print_sort_icon( $t_direction, $f_sort, 'name' ); ?>
+				</td>
+				<td><?php
+					print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'status' ), 'status', $t_direction, $f_sort );
+					print_sort_icon( $t_direction, $f_sort, 'status' ); ?>
+				</td>
+				<td><?php
+					print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'enabled' ), 'enabled', $t_direction, $f_sort );
+					print_sort_icon( $t_direction, $f_sort, 'enabled' ); ?>
+				</td>
+				<td><?php
+					print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'view_status' ), 'view_state', $t_direction, $f_sort );
+					print_sort_icon( $t_direction, $f_sort, 'view_state' ); ?>
+				</td>
+				<td><?php
+					print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'description' ), 'description', $t_direction, $f_sort );
+					print_sort_icon( $t_direction, $f_sort, 'description' ); ?>
+				</td>
+			</tr>
+		</thead>
+
+		<tbody>
+<?php
 		$t_manage_project_threshold = config_get( 'manage_project_threshold' );
 		$t_projects = user_get_accessible_projects( auth_get_current_user_id(), true );
 		$t_full_projects = array();
@@ -157,45 +162,58 @@ print_manage_menu( 'manage_proj_page.php' );
 				array_unshift( $t_stack, $t_subprojects );
 			}
 		} ?>
+		</tbody>
 	</table>
 </div>
 
 <div id="categories" class="form-container">
 	<h2><?php echo lang_get( 'global_categories' ) ?></h2>
-	<table cellspacing="1" cellpadding="5" border="1"><?php
+
+	<table>
+<?php
 		$t_categories = category_get_all_rows( ALL_PROJECTS );
 		$t_can_update_global_cat = access_has_global_level( config_get( 'manage_site_threshold' ) );
 
-		if ( count( $t_categories ) > 0 ) { ?>
-		<tr class="row-category">
-			<td><?php echo lang_get( 'category' ) ?></td>
-			<td><?php echo lang_get( 'assign_to' ) ?></td>
-			<?php if( $t_can_update_global_cat ) { ?>
-			<td class="center"><?php echo lang_get( 'actions' ) ?></td>
-			<?php } ?>
-		</tr><?php
-		}
+		if ( count( $t_categories ) > 0 ) {
+?>
+		<thead>
+			<tr class="row-category">
+				<td><?php echo lang_get( 'category' ) ?></td>
+				<td><?php echo lang_get( 'assign_to' ) ?></td>
+				<?php if( $t_can_update_global_cat ) { ?>
+				<td class="center"><?php echo lang_get( 'actions' ) ?></td>
+				<?php } ?>
+			</tr>
+		</thead>
 
-	foreach( $t_categories as $t_category ) {
-		$t_id = $t_category['id'];
-	?>
-		<tr>
-			<td><?php echo string_display( category_full_name( $t_id, false ) )  ?></td>
-			<td><?php echo prepare_user_name( $t_category['user_id'] ) ?></td>
-			<?php if( $t_can_update_global_cat ) { ?>
-			<td class="center">
-				<?php
+		<tbody>
+<?php
+			foreach( $t_categories as $t_category ) {
+				$t_id = $t_category['id'];
+?>
+			<tr>
+				<td><?php echo string_display( category_full_name( $t_id, false ) )  ?></td>
+				<td><?php echo prepare_user_name( $t_category['user_id'] ) ?></td>
+				<?php if( $t_can_update_global_cat ) { ?>
+				<td class="center">
+<?php
 					$t_id = urlencode( $t_id );
 					$t_project_id = urlencode( ALL_PROJECTS );
 
 					print_button( "manage_proj_cat_edit_page.php?id=$t_id&project_id=$t_project_id", lang_get( 'edit_link' ) );
 					echo '&#160;';
 					print_button( "manage_proj_cat_delete.php?id=$t_id&project_id=$t_project_id", lang_get( 'delete_link' ) );
-				?>
-			</td>
+?>
+				</td>
 			<?php } ?>
-		</tr><?php
-	} # end for loop ?>
+			</tr>
+<?php
+			} # end for loop
+?>
+		</tbody>
+<?php
+		} # end if
+?>
 	</table>
 
 <?php if( $t_can_update_global_cat ) { ?>
