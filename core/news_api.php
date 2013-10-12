@@ -47,8 +47,18 @@ require_api( 'lang_api.php' );
 require_api( 'twitter_api.php' );
 require_api( 'utility_api.php' );
 
-# --------------------
-# Add a news item
+/**
+ * Add a news item
+ *
+ * @param int $p_project_id project id
+ * @param int $p_poster_id user id of poster
+ * @param int $p_view_state View state
+ * @param bool $p_announcement annoucement
+ * @param string $p_headline News Headline
+ * @param string $p_body News Body
+ * @return int news article id
+ * @throws MantisBT\Exception\Field\EmptyField
+ */
 function news_create( $p_project_id, $p_poster_id, $p_view_state, $p_announcement, $p_headline, $p_body ) {
 	$c_project_id = db_prepare_int( $p_project_id );
 	$c_poster_id = db_prepare_int( $p_poster_id );
@@ -92,8 +102,12 @@ function news_create( $p_project_id, $p_poster_id, $p_view_state, $p_announcemen
 	return $t_news_id;
 }
 
-# --------------------
-# Delete the news entry
+/**
+ * Delete the news entry
+ *
+ * @param int $p_news_id news id
+ * @return bool always true
+ */
 function news_delete( $p_news_id ) {
 	$c_news_id = db_prepare_int( $p_news_id );
 
@@ -108,8 +122,12 @@ function news_delete( $p_news_id ) {
 	return true;
 }
 
-# --------------------
-# Delete the news entry
+/**
+ * Delete the news entry
+ *
+ * @param int $p_project_id project id
+ * @return bool always true
+ */
 function news_delete_all( $p_project_id ) {
 	$c_project_id = db_prepare_int( $p_project_id );
 
@@ -124,8 +142,17 @@ function news_delete_all( $p_project_id ) {
 	return true;
 }
 
-# --------------------
-# Update news item
+/**
+ * Update news item
+ *
+ * @param int $p_news_id news id
+ * @param int $p_project_id project id
+ * @param int $p_view_state view state
+ * @param bool $p_announcement announcement
+ * @param string $p_headline news headline
+ * @param string $p_body news body
+ * @return bool always true
+ */
 function news_update( $p_news_id, $p_project_id, $p_view_state, $p_announcement, $p_headline, $p_body ) {
 	$c_news_id = db_prepare_int( $p_news_id );
 	$c_project_id = db_prepare_int( $p_project_id );
@@ -160,8 +187,12 @@ function news_update( $p_news_id, $p_project_id, $p_view_state, $p_announcement,
 	return true;
 }
 
-# --------------------
-# Selects the news item associated with the specified id
+/**
+ * Selects the news item associated with the specified id
+ *
+ * @param int $p_news_id news id
+ * @return array news article
+ */
 function news_get_row( $p_news_id ) {
 	$c_news_id = db_prepare_int( $p_news_id );
 
@@ -180,8 +211,13 @@ function news_get_row( $p_news_id ) {
 	}
 }
 
-# --------------------
-# get news count (selected project plus sitewide posts)
+/**
+ * get news count (selected project plus site wide posts)
+ *
+ * @param int $p_project_id project id
+ * @param bool $p_global site wide news i.e. ALL_PROJECTS
+ * @return int news count
+ */
 function news_get_count( $p_project_id, $p_sitewide = true ) {
 	$c_project_id = db_prepare_int( $p_project_id );
 
@@ -201,8 +237,13 @@ function news_get_count( $p_project_id, $p_sitewide = true ) {
 	return db_result( $result, 0, 0 );
 }
 
-# --------------------
-# get news items (selected project plus sitewide posts)
+/**
+ * get news items (selected project plus site wide posts)
+ *
+ * @param int $p_project_id project id
+ * @param bool $p_global site wide news i.e. ALL_PROJECTS
+ * @return array Array of news articles
+ */
 function news_get_rows( $p_project_id, $p_sitewide = true ) {
 	$t_news_table = db_get_table( 'news' );
 
@@ -238,22 +279,36 @@ function news_get_rows( $p_project_id, $p_sitewide = true ) {
 	return $t_rows;
 }
 
-# --------------------
-# Check if the specified news item is private
+/**
+ * Get field from news item
+ *
+ * @param int $p_news_id news id
+ * @param string $p_field_name field name
+ * @return
+ */
 function news_get_field( $p_news_id, $p_field_name ) {
 	$row = news_get_row( $p_news_id );
 	return( $row[$p_field_name] );
 }
 
-# --------------------
-# Check if the specified news item is private
+/**
+ * Check if the specified news item is private
+ *
+ * @param int $p_news_id news id
+ * @return bool
+ */
 function news_is_private( $p_news_id ) {
 	return( news_get_field( $p_news_id, 'view_state' ) == VS_PRIVATE );
 }
 
-# --------------------
-# Gets a limited set of news rows to be viewed on one page based on the criteria
-# defined in the configuration file.
+/**
+ * Gets a limited set of news rows to be viewed on one page based on the criteria
+ * defined in the configuration file.
+ *
+ * @param int $p_offset offset
+ * @param int $p_project_id project id
+ * @return array
+ */
 function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 	if( $p_project_id === null ) {
 		$p_project_id = helper_get_current_project();
@@ -324,15 +379,17 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 	return $t_rows;
 }
 
-# --------------------
-# Checks if the news feature is enabled or not.
-# true: enabled, otherwise false.
+/** 
+ * Checks if the news feature is enabled or not.
+ * true: enabled, otherwise false.
+ */
 function news_is_enabled() {
 	return config_get( 'news_enabled' ) == ON;
 }
 
-# --------------------
-# Ensures that the news feature is enabled, otherwise generates an access denied error.
+/**
+ * Ensures that the news feature is enabled, otherwise generates an access denied error.
+ */
 function news_ensure_enabled() {
 	if ( !news_is_enabled() ) {
 		access_denied();

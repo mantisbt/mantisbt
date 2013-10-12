@@ -132,7 +132,7 @@ function lang_get_default() {
 }
 
 /**
- *
+ * Auto Map Language from HTTP server data
  * @return string
  */
 function lang_map_auto() {
@@ -232,7 +232,7 @@ function lang_push( $p_lang = null ) {
 }
 
 /**
- * pop a language onto the stack and return it
+ * pop a language from the stack and return it
  * @return string
  */
 function lang_pop() {

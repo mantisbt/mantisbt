@@ -489,7 +489,7 @@ function helper_project_specific_where( $p_project_id, $p_user_id = null ) {
 }
 
 /**
- *
+ * Get array of columns for given target
  * @param int $p_columns_target
  * @param bool $p_viewable_only
  * @param int $p_user_id
@@ -651,7 +651,7 @@ function helper_duration_to_minutes( $p_hhmm ) {
 			$t_min = (integer) $t_a[0] * 60 + (integer) $t_a[1];
 			break;
 		case 3:
-			// if seconds included, approxiate it to minutes
+			// if seconds included, approximate it to minutes
 			$t_min = (integer) $t_a[0] * 60 + (integer) $t_a[1];
 
 			if( (integer) $t_a[2] >= 30 ) {

@@ -15,6 +15,7 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Print all bug options include file
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -43,7 +44,9 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
-# this function only gets the field names, by appending strings
+/**
+ * this function only gets the field names, by appending strings
+ */
 function get_field_names()
 {
 	#currently 27 fields
@@ -78,7 +81,12 @@ function get_field_names()
 				'time_tracking' );
 }
 
-
+/**
+ * Edit Printing preferences
+ * @param int $p_user_id user id
+ * @param bool $p_error_if_protected error if account protected
+ * @param string $p_redirect_url redirect url
+ */
 function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $p_redirect_url = '' )
 {
 	if ( null === $p_user_id ) {

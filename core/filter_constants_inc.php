@@ -15,6 +15,7 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 	/**
+	 * Constants used for Filters
 	 * @package MantisBT
 	 * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org

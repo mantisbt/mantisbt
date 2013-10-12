@@ -48,15 +48,50 @@ require_api( 'history_api.php' );
  * @subpackage classes
  */
 class SponsorshipData {
+	/**
+	 * Sponsorship id
+	 */
+
 	var $id = 0;
+
+	/**
+	 * Bug ID
+	 */
 	var $bug_id = 0;
+
+	/**
+	 * User ID
+	 */
 	var $user_id = 0;
+
+	/**
+	 * Sponsorship amount
+	 */
 	var $amount = 0;
+
+	/**
+	 * Logo
+	 */
 	var $logo = '';
+
+	/**
+	 * URL
+	 */
 	var $url = '';
+
+	/**
+	 * Sponsorship paid
+	 */
 	var $paid = 0;
 
+	/**
+	 * date submitted timestamp
+	 */
 	var $date_submitted = '';
+
+	/**
+	 * Last updated timestamp
+	 */
 	var $last_updated = '';
 }
 
@@ -222,7 +257,7 @@ function sponsorship_get_all_ids( $p_bug_id ) {
 /**
  * Get the amount of sponsorships for the specified id(s)
  * handles the case where $p_sponsorship_id is an array or an id.
- * @param int $p_sponsorship_id
+ * @param array|int $p_sponsorship_id
  * @return int
  */
 function sponsorship_get_amount( $p_sponsorship_id ) {
@@ -407,7 +442,7 @@ function sponsorship_delete( $p_sponsorship_id ) {
  * updates the paid field
  * @param int $p_sponsorship_id
  * @param int $p_paid
- * @return true
+ * @return bool
  */
 function sponsorship_update_paid( $p_sponsorship_id, $p_paid ) {
 	$c_sponsorship_id = db_prepare_int( $p_sponsorship_id );
@@ -431,7 +466,7 @@ function sponsorship_update_paid( $p_sponsorship_id, $p_paid ) {
 /**
  * updates the last_updated field
  * @param int $p_sponsorship_id
- * @return true
+ * @return bool
  */
 function sponsorship_update_date( $p_sponsorship_id ) {
 	$c_sponsorship_id = db_prepare_int( $p_sponsorship_id );

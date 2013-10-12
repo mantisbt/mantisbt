@@ -44,6 +44,7 @@ require_css( 'status_config.php' );
 
 /**
  * Initialise bug action group api
+ * @param string $p_action custom action to run
  */
 function bug_group_action_init( $p_action ) {
 	$t_valid_actions = bug_group_action_get_commands( current_user_get_accessible_projects() );
@@ -80,7 +81,7 @@ function bug_group_action_print_bottom() {
 /**
  * Print the list of selected issues and the legend for the status colors.
  *
- * @param $p_bug_ids_array   An array of issue ids.
+ * @param array $p_bug_ids_array An array of issue ids.
  */
 function bug_group_action_print_bug_list( $p_bug_ids_array ) {
 	$t_legend_position = config_get( 'status_legend_position' );
@@ -122,7 +123,7 @@ function bug_group_action_print_bug_list( $p_bug_ids_array ) {
  * Print the array of issue ids via hidden fields in the form to be passed on to
  * the bug action group action page.
  *
- * @param $p_bug_ids_array   An array of issue ids.
+ * @param array $p_bug_ids_array An array of issue ids.
  */
 function bug_group_action_print_hidden_fields( $p_bug_ids_array ) {
 	foreach( $p_bug_ids_array as $t_bug_id ) {
@@ -135,7 +136,7 @@ function bug_group_action_print_hidden_fields( $p_bug_ids_array ) {
  * and the submit button.  This ends up calling action_<action>_print_fields()
  * from bug_actiongroup_<action>_inc.php
  *
- * @param $p_action   The custom action name without the "EXT_" prefix.
+ * @param string $p_action The custom action name without the "EXT_" prefix.
  */
 function bug_group_action_print_action_fields( $p_action ) {
 	$t_function_name = 'action_' . $p_action . '_print_fields';
@@ -146,7 +147,7 @@ function bug_group_action_print_action_fields( $p_action ) {
  * Prints some title text for the custom action page.  This ends up calling
  * action_<action>_print_title() from bug_actiongroup_<action>_inc.php
  *
- * @param $p_action   The custom action name without the "EXT_" prefix.
+ * @param string $p_action The custom action name without the "EXT_" prefix.
  */
 function bug_group_action_print_title( $p_action ) {
 	$t_function_name = 'action_' . $p_action . '_print_title';
@@ -157,10 +158,10 @@ function bug_group_action_print_title( $p_action ) {
  * Validates the combination of an action and a bug.  This ends up calling
  * action_<action>_validate() from bug_actiongroup_<action>_inc.php
  *
- * @param $p_action   The custom action name without the "EXT_" prefix.
- * @param $p_bug_id   The id of the bug to validate the action on.
+ * @param string $p_action The custom action name without the "EXT_" prefix.
+ * @param int $p_bug_id The id of the bug to validate the action on.
  *
- * @returns true|array true if action can be applied or array of ( bug_id => reason for failure to validate )
+ * @returns bool|array true if action can be applied or array of ( bug_id => reason for failure to validate )
  */
 function bug_group_action_validate( $p_action, $p_bug_id ) {
 	$t_function_name = 'action_' . $p_action . '_validate';
@@ -172,9 +173,9 @@ function bug_group_action_validate( $p_action, $p_bug_id ) {
  * Executes an action on a bug.  This ends up calling
  * action_<action>_process() from bug_actiongroup_<action>_inc.php
  *
- * @param $p_action   The custom action name without the "EXT_" prefix.
- * @param $p_bug_id   The id of the bug to validate the action on.
- * @returns true|array Action can be applied., ( bug_id => reason for failure to process )
+ * @param string $p_action The custom action name without the "EXT_" prefix.
+ * @param int $p_bug_id The id of the bug to validate the action on.
+ * @returns bool|array Action can be applied., ( bug_id => reason for failure to process )
  */
 function bug_group_action_process( $p_action, $p_bug_id ) {
 	$t_function_name = 'action_' . $p_action . '_process';
@@ -184,7 +185,7 @@ function bug_group_action_process( $p_action, $p_bug_id ) {
 /**
  * Get a list of bug group actions available to the current user for one or
  * more projects.
- * @param array $p_projects An array containing one or more project IDs
+ * @param array $p_project_ids An array containing one or more project IDs
  * @return null
  */
 function bug_group_action_get_commands( $p_project_ids = null ) {

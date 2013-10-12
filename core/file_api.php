@@ -50,8 +50,11 @@ require_api( 'utility_api.php' );
 
 $g_cache_file_count = array();
 
-# ## File API ###
-# Gets the filename without the bug id prefix.
+/**
+ * Gets the filename without the bug id prefix.
+ * @param string $p_filename filename
+ * @return string
+ */
 function file_get_display_name( $p_filename ) {
 	$t_array = explode( '-', $p_filename, 2 );
 
@@ -74,7 +77,11 @@ function file_get_display_name( $p_filename ) {
 	}
 }
 
-# Check the number of attachments a bug has (if any)
+/**
+ * Check the number of attachments a bug has (if any)
+ * @param int $p_bug_id bug id
+ * @return int
+ */
 function file_bug_attachment_count( $p_bug_id ) {
 	global $g_cache_file_count;
 
@@ -117,7 +124,11 @@ function file_bug_attachment_count( $p_bug_id ) {
 	return $t_file_count;
 }
 
-# Check if a specific bug has attachments
+/**
+ * Check if a specific bug has attachments
+ * @param int $p_bug_id bug id
+ * @return bool
+ */
 function file_bug_has_attachments( $p_bug_id ) {
 	if( file_bug_attachment_count( $p_bug_id ) > 0 ) {
 		return true;
@@ -126,7 +137,12 @@ function file_bug_has_attachments( $p_bug_id ) {
 	}
 }
 
-# Check if the current user can view attachments for the specified bug.
+/**
+ * Check if the current user can view attachments for the specified bug.
+ * @param int $p_bug_id bug id
+ * @param int $p_uploader_user_id user id
+ * @return bool
+ */
 function file_can_view_bug_attachments( $p_bug_id, $p_uploader_user_id = null ) {
 	$t_uploaded_by_me = auth_get_current_user_id() === $p_uploader_user_id;
 	$t_can_view = access_has_bug_level( config_get( 'view_attachments_threshold' ), $p_bug_id );
@@ -134,7 +150,12 @@ function file_can_view_bug_attachments( $p_bug_id, $p_uploader_user_id = null ) 
 	return $t_can_view;
 }
 
-# Check if the current user can download attachments for the specified bug.
+/**
+ * Check if the current user can download attachments for the specified bug.
+ * @param int $p_bug_id bug id
+ * @param int $p_uploader_user_id user id
+ * @return bool
+ */
 function file_can_download_bug_attachments( $p_bug_id, $p_uploader_user_id = null ) {
 	$t_uploaded_by_me = auth_get_current_user_id() === $p_uploader_user_id;
 	$t_can_download = access_has_bug_level( config_get( 'download_attachments_threshold' ), $p_bug_id );
@@ -142,7 +163,12 @@ function file_can_download_bug_attachments( $p_bug_id, $p_uploader_user_id = nul
 	return $t_can_download;
 }
 
-# Check if the current user can delete attachments from the specified bug.
+/**
+ * Check if the current user can delete attachments from the specified bug.
+ * @param int $p_bug_id bug id
+ * @param int $p_uploader_user_id user id
+ * @return bool
+ */
 function file_can_delete_bug_attachments( $p_bug_id, $p_uploader_user_id = null ) {
 	if( bug_is_readonly( $p_bug_id ) ) {
 		return false;
@@ -153,8 +179,12 @@ function file_can_delete_bug_attachments( $p_bug_id, $p_uploader_user_id = null 
 	return $t_can_delete;
 }
 
-# Get icon corresponding to the specified filename
-# returns an associative array with "url" and "alt" text.
+/**
+ * Get icon corresponding to the specified filename
+ * returns an associative array with "url" and "alt" text.
+ * @param string $p_display_filename filename
+ * @return array
+ */
 function file_get_icon_url( $p_display_filename ) {
 	$t_file_type_icons = config_get( 'file_type_icons' );
 
@@ -172,8 +202,7 @@ function file_get_icon_url( $p_display_filename ) {
  *
  * @param string $p_path       The path.
  * @param string $p_filename   The file name.
- *
- * @return The combined full path.
+ * @return string The combined full path.
  */
 function file_path_combine( $p_path, $p_filename ) {
 	$t_path = $p_path;
@@ -187,16 +216,16 @@ function file_path_combine( $p_path, $p_filename ) {
 }
 
 /**
- * Nomalizes the disk file path based on the following algorithm:
+ * Normalizes the disk file path based on the following algorithm:
  * 1. If disk file exists, then return as is.
  * 2. If not, and a project path is available, then check with that, if exists return it.
  * 3. If not, then use default upload path, then check with that, if exists return it.
- * 4. If disk file doesn't include a path, then return expected path based on project path or default path.
+ * 4. If disk file does not include a path, then return expected path based on project path or default path.
  * 5. Otherwise return as is.
  *
  * @param string $p_diskfile  The disk file (full path or just filename).
- * @param integer The project id - shouldn't be 0 (ALL_PROJECTS).
- * @return The normalized full path.
+ * @param integer $p_project_id The project id - shouldn't be 0 (ALL_PROJECTS).
+ * @return string The normalized full path.
  */
 function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
 	if ( file_exists( $p_diskfile ) ) {
@@ -246,21 +275,24 @@ function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
 	return $p_diskfile;
 }
 
-# --------------------
-# Gets an array of attachments that are visible to the currently logged in user.
-# Each element of the array contains the following:
-# display_name - The attachment display name (i.e. file name dot extension)
-# size - The attachment size in bytes.
-# date_added - The date where the attachment was added.
-# can_download - true: logged in user has access to download the attachment, false: otherwise.
-# diskfile - The name of the file on disk.  Typically this is a hash without an extension.
-# download_url - The download URL for the attachment (only set if can_download is true).
-# exists - Applicable for DISK attachments.  true: file exists, otherwise false.
-# can_delete - The logged in user can delete the attachments.
-# preview - true: the attachment should be previewable, otherwise false.
-# type - Can be "image", "text" or empty for other types.
-# alt - The alternate text to be associated with the icon.
-# icon - array with icon information, contains 'url' and 'alt' elements.
+/**
+ * Gets an array of attachments that are visible to the currently logged in user.
+ * Each element of the array contains the following:
+ * display_name - The attachment display name (i.e. file name dot extension)
+ * size - The attachment size in bytes.
+ * date_added - The date where the attachment was added.
+ * can_download - true: logged in user has access to download the attachment, false: otherwise.
+ * diskfile - The name of the file on disk.  Typically this is a hash without an extension.
+ * download_url - The download URL for the attachment (only set if can_download is true).
+ * exists - Applicable for DISK attachments.  true: file exists, otherwise false.
+ * can_delete - The logged in user can delete the attachments.
+ * preview - true: the attachment should be previewable, otherwise false.
+ * type - Can be "image", "text" or empty for other types.
+ * alt - The alternate text to be associated with the icon.
+ * icon - array with icon information, contains 'url' and 'alt' elements.
+ * @param int $p_bug_id bug id
+ * @return array
+ */
 function file_get_visible_attachments( $p_bug_id ) {
 	$t_attachment_rows = bug_get_attachments( $p_bug_id );
 	$t_visible_attachments = array();
@@ -332,7 +364,11 @@ function file_get_visible_attachments( $p_bug_id ) {
 	return $t_attachments;
 }
 
-# delete all files that are associated with the given bug
+/**
+ * delete all files that are associated with the given bug
+ * @param int $p_bug_id bug id
+ * @return bool
+ */
 function file_delete_attachments( $p_bug_id ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
 
@@ -384,6 +420,10 @@ function file_delete_attachments( $p_bug_id ) {
 	return true;
 }
 
+/**
+ * Delete files by project
+ * @param int $p_project_id project id
+ */
 function file_delete_project_files( $p_project_id ) {
 	$t_project_file_table = db_get_table( 'project_file' );
 	$t_method = config_get( 'file_upload_method' );
@@ -426,11 +466,16 @@ function file_delete_project_files( $p_project_id ) {
 	$result = db_query_bound( $query, array( (int) $p_project_id ) );
 }
 
-# Delete all cached files that are older than configured number of days.
+/**
+ * Delete all cached files that are older than configured number of days.
+ */
 function file_ftp_cache_cleanup() {
 }
 
-# Connect to ftp server using configured server address, user name, and password.
+/**
+ * Connect to ftp server using configured server address, user name, and password.
+ * @return int
+ */
 function file_ftp_connect() {
 	$conn_id = ftp_connect( config_get( 'file_upload_ftp_server' ) );
 	$login_result = ftp_login( $conn_id, config_get( 'file_upload_ftp_user' ), config_get( 'file_upload_ftp_pass' ) );
@@ -442,29 +487,49 @@ function file_ftp_connect() {
 	return $conn_id;
 }
 
-# Put a file to the ftp server.
+/**
+ * Put a file to the ftp server.
+ * @param int $p_conn_id Resource id
+ * @param string $p_remote_filename remote filename
+ * @param string $p_local_filename local filename
+ */
 function file_ftp_put( $p_conn_id, $p_remote_filename, $p_local_filename ) {
 	helper_begin_long_process();
 	$upload = ftp_put( $p_conn_id, $p_remote_filename, $p_local_filename, FTP_BINARY );
 }
 
-# Get a file from the ftp server.
+/**
+ * Get a file from the ftp server.
+ * @param int $p_conn_id Resource id
+ * @param string $p_local_filename local filename
+ * @param string $p_remote_filename remote filename
+ */
 function file_ftp_get( $p_conn_id, $p_local_filename, $p_remote_filename ) {
 	helper_begin_long_process();
 	$download = ftp_get( $p_conn_id, $p_local_filename, $p_remote_filename, FTP_BINARY );
 }
 
-# Delete a file from the ftp server
+/**
+ * Delete a file from the ftp server
+ * @param int $p_conn_id Resource id
+ * @param string $p_filename filename
+ */
 function file_ftp_delete( $p_conn_id, $p_filename ) {
 	@ftp_delete( $p_conn_id, $p_filename );
 }
 
-# Disconnect from the ftp server
+/**
+ * Disconnect from the ftp server
+ * @param int $p_conn_id Resource id
+ */
 function file_ftp_disconnect( $p_conn_id ) {
 	ftp_quit( $p_conn_id );
 }
 
-# Delete a local file even if it is read-only.
+/**
+ * Delete a local file even if it is read-only.
+ * @param string $p_filename
+ */
 function file_delete_local( $p_filename ) {
 	if( file_exists( $p_filename ) ) {
 		chmod( $p_filename, 0775 );
@@ -472,7 +537,13 @@ function file_delete_local( $p_filename ) {
 	}
 }
 
-# Return the specified field value
+/**
+ * Return the specified field value
+ * @param int $p_file_id file id
+ * @param string $p_field_name field name
+ * @param string $p_table table name
+ * @return string
+ */
 function file_get_field( $p_file_id, $p_field_name, $p_table = 'bug' ) {
 	$c_field_name = db_prepare_string( $p_field_name );
 	$t_bug_file_table = db_get_table( $p_table . '_file' );
@@ -486,6 +557,12 @@ function file_get_field( $p_file_id, $p_field_name, $p_table = 'bug' ) {
 	return db_result( $result );
 }
 
+/**
+ * Delete File
+ * @param int $p_file_id file id
+ * @param string $p_table table id
+ * @return bool
+ */
 function file_delete( $p_file_id, $p_table = 'bug' ) {
 	$t_upload_method = config_get( 'file_upload_method' );
 
@@ -525,7 +602,11 @@ function file_delete( $p_file_id, $p_table = 'bug' ) {
 	return true;
 }
 
-# File type check
+/**
+ * File type check
+ * @param string $p_file_name filename
+ * @return bool
+ */
 function file_type_check( $p_file_name ) {
 	$t_allowed_files = config_get( 'allowed_files' );
 	$t_disallowed_files = config_get( 'disallowed_files' );;
@@ -559,7 +640,11 @@ function file_type_check( $p_file_name ) {
 	return false;
 }
 
-# clean file name by removing sensitive characters and replacing them with underscores
+/**
+ * clean file name by removing sensitive characters and replacing them with underscores
+ * @param string $p_filename filename
+ * @return string
+ */
 function file_clean_name( $p_filename ) {
 	return preg_replace( '/[\/*?"<>|\\ :&]/', "_", $p_filename );
 }
@@ -567,8 +652,9 @@ function file_clean_name( $p_filename ) {
 /**
  * Generate a string to use as the identifier for the file
  * It is not guaranteed to be unique and should be checked
+ * The string returned should be 32 characters in length
  * @param string $p_seed
- * @return string MD5 hash to use as filename
+ * @return string
  */
 function file_generate_name( $p_seed ) {
 	return md5( $p_seed . time() );
@@ -576,9 +662,10 @@ function file_generate_name( $p_seed ) {
 
 /**
  * Generate a UNIQUE string to use as the identifier for the file
- * @param string $p_seed Seed to generate the filename
- * @param string $p_filepath File path
- * @return string unique file name
+ * The string returned should be 64 characters in length
+ * @param string $p_seed seed
+ * @param string $p_filepath filepath
+ * @return string
  */
 function file_generate_unique_name( $p_seed, $p_filepath ) {
 	do {
@@ -777,9 +864,9 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 	}
 }
 
-# --------------------
-# Return true if file uploading is enabled (in our config and PHP's),
-#  false otherwise
+/**
+ * Return true if file uploading is enabled (in our config and PHP's), false otherwise
+ */
 function file_is_uploading_enabled() {
 	if( ini_get_bool( 'file_uploads' ) && ( ON == config_get( 'allow_file_upload' ) ) ) {
 		return true;
@@ -788,9 +875,14 @@ function file_is_uploading_enabled() {
 	}
 }
 
-# Check if the user can upload files for this project
-#  return true if they can, false otherwise
-#  the project defaults to the current project and the user to the current user
+/**
+ * Check if the user can upload files for this project
+ * return true if they can, false otherwise
+ * the project defaults to the current project and the user to the current user
+ * @param int $p_project_id project id
+ * @param int $p_user_id user id
+ * @return bool
+ */
 function file_allow_project_upload( $p_project_id = null, $p_user_id = null ) {
 	if( null === $p_project_id ) {
 		$p_project_id = helper_get_current_project();
@@ -801,13 +893,17 @@ function file_allow_project_upload( $p_project_id = null, $p_user_id = null ) {
 	return( file_is_uploading_enabled() && ( access_has_project_level( config_get( 'upload_project_file_threshold' ), $p_project_id, $p_user_id ) ) );
 }
 
-# --------------------
-# Check if the user can upload files for this bug
-#  return true if they can, false otherwise
-#  the user defaults to the current user
-#
-#  if the bug null (the default) we answer whether the user can
-#   upload a file to a new bug in the current project
+/**
+ * Check if the user can upload files for this bug
+ *  return true if they can, false otherwise
+ *  the user defaults to the current user
+ *
+ *  if the bug null (the default) we answer whether the user can
+ *   upload a file to a new bug in the current project
+ * @param int $p_bug Bug id
+ * @param int $p_user_id user id
+ * @return bool
+ */
 function file_allow_bug_upload( $p_bug_id = null, $p_user_id = null ) {
 	if( null === $p_user_id ) {
 		$p_user_id = auth_get_current_user_id();
@@ -845,8 +941,10 @@ function file_allow_bug_upload( $p_bug_id = null, $p_user_id = null ) {
 	return access_has_project_level( config_get( 'upload_bug_file_threshold' ), $t_project_id, $p_user_id );
 }
 
-# --------------------
-# checks whether the specified upload path exists and is writable
+/**
+ * checks whether the specified upload path exists and is writable
+ * @param string $p_upload_path upload path
+ */
 function file_ensure_valid_upload_path( $p_upload_path ) {
 	if( !file_exists( $p_upload_path ) || !is_dir( $p_upload_path ) || !is_writable( $p_upload_path ) || !is_readable( $p_upload_path ) ) {
 		trigger_error( ERROR_FILE_INVALID_UPLOAD_PATH, ERROR );
@@ -856,8 +954,7 @@ function file_ensure_valid_upload_path( $p_upload_path ) {
 /**
  * Ensure a file was uploaded
  *
- * This function perform various checks for determining if the upload
- * was successful
+ * This function perform various checks for determining if the upload was successful
  *
  * @param array $p_file the uploaded file info, as retrieved from gpc_get_file()
  */

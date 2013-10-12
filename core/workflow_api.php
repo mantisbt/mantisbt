@@ -47,7 +47,7 @@ function workflow_transition_edge_exists( $p_from_status_id, $p_to_status_id ) {
 
 /**
  * Parse a workflow into a graph-like array of workflow transitions.
- * @param array The workflow enumeration to parse.
+ * @param array $p_enum_workflow The workflow enumeration to parse.
  * @return array The parsed workflow graph.
  */
 function workflow_parse( $p_enum_workflow ) {

@@ -15,7 +15,6 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- *
  * GET PARAMETERS FOR THIS PAGE
  *
  * project_id: 0 - all projects, otherwise project id.
@@ -45,9 +44,6 @@
  * @uses utility_api.php
  */
 
-/**
- * MantisBT Core API's
- */
 require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'bug_api.php' );

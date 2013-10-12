@@ -14,7 +14,6 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
  * Session API
  *
@@ -54,6 +53,9 @@ $g_session = null;
  * @subpackage classes
  */
 abstract class MantisSession {
+	/**
+	 * Session ID
+	 */
 	var $id;
 
 	/**
@@ -97,6 +99,7 @@ abstract class MantisSession {
 class MantisPHPSession extends MantisSession {
 	/**
 	 * Constructor
+	 * @param int $p_session_id session id
 	 */
 	function __construct( $p_session_id=null ) {
 		global $g_cookie_secure_flag_enabled;
@@ -236,8 +239,8 @@ function session_validate( $p_session ) {
 
 /**
  * Get arbitrary data from the session.
- * @param string Session variable name
- * @param mixed Default value
+ * @param string $p_name Session variable name
+ * @param mixed $p_default Default value
  * @return mixed Session variable
  */
 function session_get( $p_name, $p_default = null ) {
@@ -249,8 +252,8 @@ function session_get( $p_name, $p_default = null ) {
 
 /**
  * Get an integer from the session.
- * @param string Session variable name
- * @param mixed Default value
+ * @param string $p_name Session variable name
+ * @param mixed $p_default Default value
  * @return int Session variable
  */
 function session_get_int( $p_name, $p_default = null ) {
@@ -261,8 +264,8 @@ function session_get_int( $p_name, $p_default = null ) {
 
 /**
  * Get a boolean from the session.
- * @param string Session variable name
- * @param mixed Default value
+ * @param string $p_name Session variable name
+ * @param mixed $p_default Default value
  * @return boolean Session variable
  */
 function session_get_bool( $p_name, $p_default = null ) {
@@ -273,8 +276,8 @@ function session_get_bool( $p_name, $p_default = null ) {
 
 /**
  * Get a string from the session.
- * @param string Session variable name
- * @param mixed Default value
+ * @param string $p_name Session variable name
+ * @param mixed $p_default Default value
  * @return string Session variable
  */
 function session_get_string( $p_name, $p_default = null ) {
@@ -285,8 +288,8 @@ function session_get_string( $p_name, $p_default = null ) {
 
 /**
  * Set a session variable.
- * @param string Session variable name
- * @param mixed Variable value
+ * @param string $p_name Session variable name
+ * @param mixed $p_value Variable value
  */
 function session_set( $p_name, $p_value ) {
 	global $g_session;
@@ -295,7 +298,7 @@ function session_set( $p_name, $p_value ) {
 
 /**
  * Delete a session variable.
- * @param string Session variable name
+ * @param string $p_name Session variable name
  */
 function session_delete( $p_name ) {
 	global $g_session;

@@ -57,7 +57,7 @@ function form_action_self() {
  * Generate a random security token, prefixed by date, store it in the
  * user's session, and then return the string to be used as a form element
  * element with the security token as the value.
- * @param string Form name
+ * @param string $p_form_name Form name
  * @return string Security token string
  */
 function form_security_token( $p_form_name ) {
@@ -140,7 +140,7 @@ function form_security_param( $p_form_name ) {
  * Validate the security token for the given form name based on tokens
  * stored in the user's session.  While checking stored tokens, any that
  * are more than 3 days old will be purged.
- * @param string Form name
+ * @param string $p_form_name Form name
  * @return boolean Form is valid
  */
 function form_security_validate( $p_form_name ) {

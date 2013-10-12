@@ -223,7 +223,6 @@ function html_page_top2() {
 			echo '<br />';
 		}
 	}
-
 	print_menu();
 	echo '<div id="content">', "\n";
 	event_signal( 'EVENT_LAYOUT_CONTENT_BEGIN' );
@@ -340,6 +339,10 @@ function html_title( $p_page_title = null ) {
 	echo '</title>', "\n";
 }
 
+/**
+ * Require a CSS file to be in html page headers
+ * @param string $p_stylesheet_path path to CSS stylesheet
+ */
 function require_css( $p_stylesheet_path ) {
 	global $g_stylesheets_included;
 	$g_stylesheets_included[$p_stylesheet_path] = $p_stylesheet_path;
@@ -365,6 +368,7 @@ function html_css() {
 
 /**
  * Prints a css link
+ * @param string $p_filename filename
  * @return null
  */
 function html_css_link( $p_filename ) {
@@ -376,8 +380,7 @@ function html_css_link( $p_filename ) {
  * (6) Print an HTML meta tag to redirect to another page
  * This function is optional and may be called by pages that need a redirect.
  * $p_time is the number of seconds to wait before redirecting.
- * If we have handled any errors on this page and the 'stop_on_errors' config
- *  option is turned on, return false and don't redirect.
+ * If we have handled any errors on this page return false and don't redirect.
  *
  * @param string $p_url The page to redirect: has to be a relative path
  * @param integer $p_time seconds to wait for before redirecting
@@ -407,6 +410,10 @@ function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
 	return true;
 }
 
+/**
+ * Require a javascript file to be in html page headers
+ * @param string $p_script_path path to Javascript file
+ */
 function require_js( $p_script_path ) {
 	global $g_scripts_included;
 	$g_scripts_included[$p_script_path] = $p_script_path;

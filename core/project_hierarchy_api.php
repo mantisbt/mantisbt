@@ -213,6 +213,7 @@ function project_hierarchy_cache( $p_show_disabled = false ) {
 		if( $row['inherit_global'] && !isset( $g_cache_project_inheritance[(int)$row['id']][ALL_PROJECTS] ) ) {
 			$g_cache_project_inheritance[(int)$row['id']][] = ALL_PROJECTS;
 		}
+
 		if( $row['inherit_parent'] && !isset( $g_cache_project_inheritance[(int)$row['id']][(int)$row['parent_id']] ) ) {
 			$g_cache_project_inheritance[(int)$row['id']][] = (int) $row['parent_id'];
 		}

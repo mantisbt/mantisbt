@@ -48,36 +48,149 @@ require_api( 'utility_api.php' );
  * @subpackage classes
  */
 class UserPreferences {
+	/**
+	 * Default Profile
+	 */
 	protected $default_profile = NULL;
+
+	/**
+	 * Default Project for user
+	 */
 	protected $default_project = NULL;
+	
+	/**
+	 * Automatic Refresh delay
+	 */
 	protected $refresh_delay = NULL;
+	
+	/**
+	 * Automatic Redirect delay
+	 */	
 	protected $redirect_delay = NULL;
+
+	/**
+	 * Bugnote order - oldest/newest first
+	 */
 	protected $bugnote_order = NULL;
+	
+	/**
+	 * Receive email on new bugs
+	 */
 	protected $email_on_new = NULL;
+
+	/**
+	 * Receive email on assigned bugs
+	 */
 	protected $email_on_assigned = NULL;
+	
+	/**
+	 * Receive email on feedback
+	 */
 	protected $email_on_feedback = NULL;
+
+	/**
+	 * Receive email on resolved bugs
+	 */
 	protected $email_on_resolved = NULL;
+
+	/**
+	 * Receive email on closed bugs
+	 */
 	protected $email_on_closed = NULL;
+
+	/**
+	 * Receive email on reopened bugs
+	 */
 	protected $email_on_reopened = NULL;
+
+	/**
+	 * Receive email on new bugnote
+	 */
 	protected $email_on_bugnote = NULL;
+
+	/**
+	 * Receive email on bug status change
+	 */
 	protected $email_on_status = NULL;
+
+	/**
+	 * Receive email on bug priority change
+	 */
 	protected $email_on_priority = NULL;
+	
+	/**
+	 * Minimum Severity on which to trigger email if set to receive
+	 */	
 	protected $email_on_new_min_severity = NULL;
+
+	/**
+	 * Minimum Severity on which to trigger email if set to receive
+	 */	
 	protected $email_on_assigned_min_severity = NULL;
+
+	/**
+	 * Minimum Severity on which to trigger email if set to receive
+	 */	
 	protected $email_on_feedback_min_severity = NULL;
+
+	/**
+	 * Minimum Severity on which to trigger email if set to receive
+	 */	
 	protected $email_on_resolved_min_severity = NULL;
+
+	/**
+	 * Minimum Severity on which to trigger email if set to receive
+	 */	
 	protected $email_on_closed_min_severity = NULL;
+
+	/**
+	 * Minimum Severity on which to trigger email if set to receive
+	 */	
 	protected $email_on_reopened_min_severity = NULL;
+
+	/**
+	 * Minimum Severity on which to trigger email if set to receive
+	 */	
 	protected $email_on_bugnote_min_severity = NULL;
+
+	/**
+	 * Minimum Severity on which to trigger email if set to receive
+	 */	
 	protected $email_on_status_min_severity = NULL;
+
+	/**
+	 * Minimum Severity on which to trigger email if set to receive
+	 */	
 	protected $email_on_priority_min_severity = NULL;
+
+	/**
+	 * Number of bugnotes to include in generated emails
+	 */
 	protected $email_bugnote_limit = NULL;
+
+	/**
+	 * Users language preference
+	 */
 	protected $language = NULL;
+
+	/**
+	 * User Timezone
+	 */
 	protected $timezone = NULL;
 
+	/**
+	 * User id
+	 */
 	private $pref_user_id;
+
+	/**
+	 * Project ID
+	 */
 	private $pref_project_id;
 
+	/**
+	 * Default Values - Config Field Mappings
+	 */
 	private static $default_mapping = array(
 	'default_profile' => 'default_profile',
 	'default_project' => 'default_project',
@@ -121,9 +234,10 @@ class UserPreferences {
 	}
 
 	/**
-	 * @param string $name
-	 * @param string $value
-	 * @private
+	 * Overloaded function
+	 * @param string $p_name Property name
+	 * @param string $p_value Value
+	 * @access private
 	 */
 	public function __set($name, $value) {
 		switch ($name) {
@@ -136,8 +250,9 @@ class UserPreferences {
 	}
 
 	/**
-	 * @param string $t_string
-	 * @private
+	 * Overloaded function
+	 * @param string $p_string Property name
+	 * @access private
 	 */
 	public function __get( $p_string ) {
 		if( is_null( $this->$p_string ) ) {
@@ -147,7 +262,8 @@ class UserPreferences {
 	}
 
 	/**
-	 * @param string $t_string
+	 * Public Get() function
+	 * @param string $p_string Property
 	 */
 	function Get( $p_string ) {
 		if( is_null( $this->$p_string ) ) {
@@ -173,7 +289,7 @@ $g_cache_current_user_pref = array();
  * @param int $p_user_id
  * @param int $p_project_id
  * @param bool $p_trigger_errors
- * @return false|array
+ * @return bool|array
  */
 function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigger_errors = true ) {
 	global $g_cache_user_pref;
@@ -260,7 +376,7 @@ function user_pref_cache_array_rows( $p_user_id_array, $p_project_id = ALL_PROJE
  * Clear the user preferences cache (or just the given id if specified)
  * @param $p_user_id
  * @param $p_project_id
- * @return true
+ * @return bool
  */
 function user_pref_clear_cache( $p_user_id = null, $p_project_id = null ) {
 	global $g_cache_user_pref;
@@ -296,7 +412,7 @@ function user_pref_exists( $p_user_id, $p_project_id = ALL_PROJECTS ) {
  * @param int $p_user_id
  * @param int $p_project_id
  * @param UserPreferences $p_prefs
- * @return true
+ * @return bool
  */
 function user_pref_insert( $p_user_id, $p_project_id, $p_prefs ) {
 	static $t_vars;
@@ -339,7 +455,6 @@ function user_pref_insert( $p_user_id, $p_project_id, $p_prefs ) {
  * @param int $p_user_id
  * @param int $p_project_id
  * @param UserPreferences $p_prefs
- * @return true
  */
 function user_pref_update( $p_user_id, $p_project_id, $p_prefs ) {
 	static $t_vars;
@@ -382,7 +497,7 @@ function user_pref_update( $p_user_id, $p_project_id, $p_prefs ) {
  * returns true if the prefs were successfully deleted
  * @param int $p_user_id
  * @param int $p_project_id
- * @return true
+ * @return bool
  */
 function user_pref_delete( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	$c_user_id = db_prepare_int( $p_user_id );
@@ -437,7 +552,7 @@ function user_pref_delete_all( $p_user_id ) {
  *  call user_pref_delete() for each one and the code is short so that's
  *  what we do
  * @param $p_project_id
- * @return true
+ * @return bool
  */
 function user_pref_delete_project( $p_project_id ) {
 	$c_project_id = db_prepare_int( $p_project_id );
@@ -553,16 +668,14 @@ function user_pref_get_language( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 /**
  * Set a user preference
  *
- * By getting the prefs for the project first we deal fairly well with defaults.
- *  If there are currently no prefs for that project, the ALL_PROJECTS prefs will
- *  be returned so we end up storing a new set of prefs for the given project
- *  based on the prefs for ALL_PROJECTS.  If there isn't even an entry for
+ * By getting the preferences for the project first we deal fairly well with defaults. If there are currently no
+ * preferences for that project, the ALL_PROJECTS preferences will be returned so we end up storing a new set of
+ * preferences for the given project based on the preferences for ALL_PROJECTS.  If there isn't even an entry for
  *  ALL_PROJECTS, we'd get returned a default UserPreferences object to modify.
  * @param int $p_user_id
  * @param string $p_pref_name
  * @param string $p_pref_value
  * @param int $p_project_id
- * @return true
  */
 function user_pref_set_pref( $p_user_id, $p_pref_name, $p_pref_value, $p_project_id = ALL_PROJECTS ) {
 	$t_prefs = user_pref_get( $p_user_id, $p_project_id );
@@ -581,7 +694,6 @@ function user_pref_set_pref( $p_user_id, $p_pref_name, $p_pref_value, $p_project
  * @param int $p_user_id
  * @param UserPreferences $p_prefs
  * @param int $p_project_id
- * @return true
  */
 function user_pref_set( $p_user_id, $p_prefs, $p_project_id = ALL_PROJECTS ) {
 	if( user_pref_exists( $p_user_id, $p_project_id ) ) {

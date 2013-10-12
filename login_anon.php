@@ -18,9 +18,8 @@
  * login_anon.php logs a user in anonymously without having to enter a username
  * or password.
  *
- * Depends on two global configuration variables:
- * allow_anonymous_login - bool which must be true to allow anonymous login.
- * anonymous_account - name of account to login with.
+ * Depends on global configuration variables:
+ * anonymous_login - false or name of account to login with.
  *
  * TODO:
  * Check how manage account is impacted.
@@ -38,9 +37,6 @@
  * @uses string_api.php
  */
 
-/**
- * MantisBT Core API's
- */
 require_once( 'core.php' );
 require_api( 'config_api.php' );
 require_api( 'gpc_api.php' );

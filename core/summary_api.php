@@ -53,14 +53,13 @@ require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
 /**
- * Print a summary row
+ * Print row in summary table
  *
- * @param string p_label
- * @param int $p_label,
- * @param int $p_open Number of open issues
- * @param int $p_resolved Number of resolved issues
- * @param int $p_closed Number of closed issues
- * @param int $p_total Total number of issues
+ * @param string $p_label label
+ * @param string $p_open count of open issues - normally string with hyperlink to filter
+ * @param string $p_resolved count of resolved issues - normally string with hyperlink to filter
+ * @param string $p_closed count of closed issues - normally string with hyperlink to filter
+ * @param string $p_total count of total issues - normally string with hyperlink to filter
  */
 function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p_total ) {
 	printf( '<tr>' );
@@ -396,7 +395,9 @@ function summary_print_by_activity() {
 	}
 }
 
-# Print list of bugs opened from the longest time
+/**
+ * Print list of bugs opened from the longest time
+ */
 function summary_print_by_age() {
 	$t_mantis_bug_table = db_get_table( 'bug' );
 
@@ -440,7 +441,9 @@ function summary_print_by_age() {
 	}
 }
 
-# print bug counts by assigned to each developer
+/**
+ * print bug counts by assigned to each developer
+ */
 function summary_print_by_developer() {
 	$t_mantis_bug_table = db_get_table( 'bug' );
 	$t_mantis_user_table = db_get_table( 'user' );
@@ -540,7 +543,9 @@ function summary_print_by_developer() {
 	}
 }
 
-# print bug counts by reporter id
+/**
+ * print bug counts by reporter id
+ */
 function summary_print_by_reporter() {
 	$t_mantis_bug_table = db_get_table( 'bug' );
 	$t_mantis_user_table = db_get_table( 'user' );
@@ -620,7 +625,9 @@ function summary_print_by_reporter() {
 	}
 }
 
-# print a bug count per category
+/**
+ * print a bug count per category
+ */
 function summary_print_by_category() {
 	$t_mantis_bug_table = db_get_table( 'bug' );
 	$t_mantis_category_table = db_get_table( 'category' );
@@ -737,7 +744,14 @@ function summary_print_by_category() {
 	}
 }
 
-# print bug counts by project
+/**
+ * print bug counts by project
+ * @todo check p_cache
+ *
+ * @param array $p_projects Array of project id's
+ * @param int $p_level level
+ * @param int $p_cache cache
+ */
 function summary_print_by_project( $p_projects = null, $p_level = 0, $p_cache = null ) {
 	$t_mantis_bug_table = db_get_table( 'bug' );
 	$t_mantis_project_table = db_get_table( 'project' );
@@ -818,7 +832,11 @@ function summary_print_by_project( $p_projects = null, $p_level = 0, $p_cache = 
 	}
 }
 
-# Print developer / resolution report
+/**
+ * Print developer / resolution report
+ *
+ * @param string $p_resolution_enum_string resolution enum string
+ */
 function summary_print_developer_resolution( $p_resolution_enum_string ) {
 	$t_mantis_bug_table = db_get_table( 'bug' );
 	$t_mantis_user_table = db_get_table( 'user' );
@@ -923,7 +941,11 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 	}
 }
 
-# Print reporter / resolution report
+/**
+ * Print reporter / resolution report
+ *
+ * @param string $p_resolution_enum_string resolution enum string
+ */
 function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 	$t_mantis_bug_table = db_get_table( 'bug' );
 	$t_mantis_user_table = db_get_table( 'user' );
@@ -1036,7 +1058,12 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 	}
 }
 
-# Print reporter effectiveness report
+/**
+ * Print reporter effectiveness report
+ *
+ * @param string $p_severity_enum_string severity enum string
+ * @param string $p_resolution_enum_string resolution enum string
+ */
 function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resolution_enum_string ) {
 	$t_mantis_bug_table = db_get_table( 'bug' );
 	$t_mantis_user_table = db_get_table( 'user' );

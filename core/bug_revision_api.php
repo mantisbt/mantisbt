@@ -126,7 +126,7 @@ function bug_revision_get( $p_revision_id ) {
 
 /**
  * Get the name of the type of a bug revision.
- * @param int $p_revision_id Revision type ID (see constant_inc.php for possible values)
+ * @param int $p_revision_type_id Revision type ID (see constant_inc.php for possible values)
  * @return string Name of the type of the bug revision
  */
 function bug_revision_get_type_name( $p_revision_type_id ) {
@@ -193,7 +193,7 @@ function bug_revision_drop( $p_revision_id ) {
  * @param int $p_bug_id Bug ID
  * @param int $p_type Revision Type (optional)
  * @param int $p_bugnote_id Bugnote ID (optional)
- * @return array|null array of Revision rows
+ * @return array|null Array of Revision rows
  */
 function bug_revision_count( $p_bug_id, $p_type=REV_ANY, $p_bugnote_id=0 ) {
 	$t_bug_rev_table = db_get_table( 'bug_revision' );
@@ -274,12 +274,11 @@ function bug_revision_last( $p_bug_id, $p_type=REV_ANY, $p_bugnote_id=0 ) {
 }
 
 /**
- * Retrieve a full list of changes to the bug's information, sorted in
- * reverse chronological order.
+ * Retrieve a full list of changes to the bug's information.
  * @param int $p_bug_id Bug ID
  * @param int $p_type Revision Type
  * @param int $p_bugnote_id Bugnote ID
- * @return array/null array of Revision rows
+ * @return array/null Array of Revision rows
  */
 function bug_revision_list( $p_bug_id, $p_type=REV_ANY, $p_bugnote_id=0 ) {
 	$t_bug_rev_table = db_get_table( 'bug_revision' );
@@ -313,9 +312,9 @@ function bug_revision_list( $p_bug_id, $p_type=REV_ANY, $p_bugnote_id=0 ) {
 
 /**
  * Retrieve a list of changes to a bug of the same type as the
- * given revision ID, sorted in reverse chronological order.
+ * given revision ID.
  * @param int $p_rev_id Revision ID
- * @return array|null array of Revision rows
+ * @return array|null Array of Revision rows
  */
 function bug_revision_like( $p_rev_id ) {
 	$t_bug_rev_table = db_get_table( 'bug_revision' );

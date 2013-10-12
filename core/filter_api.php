@@ -308,10 +308,10 @@ function filter_get_url( $p_custom_filter ) {
 }
 
 /**
- *  Encodes a field and it's value for the filter URL.  This handles the URL encoding
- *  and arrays.
+ * Encodes a field and it's value for the filter URL.  This handles the URL encoding and arrays.
  * @param string $p_field_name The field name.
  * @param string $p_field_value The field value (can be an array)
+ * @param int $p_field_type Field Type e.g. FILTER_TYPE_MULTI_STRING
  * @return string url encoded string
  */
 function filter_encode_field_and_value( $p_field_name, $p_field_value, $p_field_type=null ) {
@@ -333,9 +333,6 @@ function filter_encode_field_and_value( $p_field_name, $p_field_value, $p_field_
 	return implode( $t_query_array, '&' );
 }
 
-# ==========================================================================
-# GENERAL FUNCTIONS                            						      =
-# ==========================================================================
 /**
  *  Checks the supplied value to see if it is an ANY value.
  * @param string $p_field_value - The value to check.
@@ -405,8 +402,10 @@ function filter_field_is_myself( $p_field_value ) {
 }
 
 /**
-     * @param $p_count
-     * @param $p_per_page
+ * Filter per page
+ * @param array $p_filter filter
+ * @param int $p_count count
+ * @param int $p_per_page per page
      * @return int
      */
 function filter_per_page( $p_filter, $p_count, $p_per_page ) {
@@ -417,11 +416,11 @@ function filter_per_page( $p_filter, $p_count, $p_per_page ) {
 }
 
 /**
-     *  Use $p_count and $p_per_page to determine how many pages to split this list up into.
-     *  For the sake of consistency have at least one page, even if it is empty.
-     * @param $p_count
-     * @param $p_per_page
-     * @return $t_page_count
+ *  Use $p_count and $p_per_page to determine how many pages to split this list up into.
+ *  For the sake of consistency have at least one page, even if it is empty.
+ * @param int $p_count count
+ * @param int $p_per_page per page
+ * @return int page count
      */
 function filter_page_count( $p_count, $p_per_page ) {
 	$t_page_count = ceil( $p_count / $p_per_page );
@@ -432,10 +431,11 @@ function filter_page_count( $p_count, $p_per_page ) {
 }
 
 /**
-     *  Checks to make sure $p_page_number isn't past the last page.
-     *  and that $p_page_number isn't before the first page
-     *   @param $p_page_number
-     *   @param $p_page_count
+ * Checks to make sure $p_page_number isn't past the last page.
+ * and that $p_page_number isn't before the first page
+ * @param int $p_page_number Page number
+ * @param int $p_page_count Page count
+ * @return int
      */
 function filter_valid_page_number( $p_page_number, $p_page_count ) {
 	if( $p_page_number > $p_page_count ) {
@@ -449,18 +449,18 @@ function filter_valid_page_number( $p_page_number, $p_page_count ) {
 }
 
 /**
-     *  Figure out the offset into the db query, offset is which record to start querying from
-     * @param int $p_page_number
-     * @param int $p_per_page
-     * @return int
-     */
+ * Figure out the offset into the db query, offset is which record to start querying from
+ * @param int $p_page_number Page number
+ * @param int $p_per_page Per page
+ * @return int
+ */
 function filter_offset( $p_page_number, $p_per_page ) {
 	return(( (int) $p_page_number -1 ) * (int) $p_per_page );
 }
 
 /**
- *  Make sure that our filters are entirely correct and complete (it is possible that they are not).
- *  We need to do this to cover cases where we don't have complete control over the filters given.s
+ * Make sure that our filters are entirely correct and complete (it is possible that they are not).
+ * We need to do this to cover cases where we don't have complete control over the filters given.s
  * @param array $p_filter_arr
  * @return mixed
  * @todo function needs to be abstracted
@@ -1039,22 +1039,22 @@ function filter_get_bug_count( $p_query_clauses ) {
 }
 
 /**
- * @todo Had to make all these parameters required because we can't use
- *  call-time pass by reference anymore.  I really preferred not having
- *  to pass all the params in if you didn't want to, but I wanted to get
- *  rid of the errors for now.  If we can think of a better way later
- *  (maybe return an object) that would be great.
+ * Get set of bug rows from given filter
+ * @todo Had to make all these parameters required because we can't use call-time pass by reference anymore.
+ * I really preferred not having to pass all the params in if you didn't want to, but I wanted to get
+ *  rid of the errors for now.  If we can think of a better way later (maybe return an object) that would be great.
  *
- * @param int $p_page_number the page you want to see (set to the actual page on return)
- * @param int $p_per_page the number of bugs to see per page (set to actual on return)
+ * @param int $p_page_number Page number of the page you want to see (set to the actual page on return)
+ * @param int $p_per_page The number of bugs to see per page (set to actual on return)
  *      -1   indicates you want to see all bugs
  *      null indicates you want to use the value specified in the filter
  * @param int $p_page_count you don't need to give a value here, the number of pages will be stored here on return
  * @param int $p_bug_count you don't need to give a value here, the number of bugs will be stored here on return
- * @param mixed $p_custom_filter Filter to use.
+ * @param mixed $p_custom_filter Custom Filter to use.
  * @param int $p_project_id project id to use in filtering.
  * @param int $p_user_id user id to use as current user when filtering.
- * @param bool $p_show_sticky get sticky issues only.
+ * @param bool $p_show_sticky true/false - get sticky issues only.
+ * @return bool
  */
 function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p_bug_count, $p_custom_filter = null, $p_project_id = null, $p_user_id = null, $p_show_sticky = null ) {
 	log_event( LOG_FILTERING, 'START NEW FILTER QUERY' );
@@ -4000,8 +4000,8 @@ function print_filter_note_user_id() {
 
 /**
  * Print plugin filter fields as defined by MantisFilter objects.
- * @param string Field name
- * @param object Filter object
+ * @param string $p_field_name Field name
+ * @param object $p_filter_object Filter object
  */
 function print_filter_plugin_field( $p_field_name, $p_filter_object ) {
 	global $t_select_modifier, $t_filter, $f_view_type;
@@ -4108,7 +4108,7 @@ function print_filter_custom_field( $p_field_id ) {
 }
 
 /**
- *  print sort fields
+ * Print sort fields
  */
 function print_filter_show_sort() {
 	global $t_filter;
@@ -4184,7 +4184,7 @@ function print_filter_show_sort() {
 }
 
 /**
- *  print custom field date fields
+ * Print custom field date fields
  * @param int $p_field_num
  * @param int $p_field_id
  */
@@ -4335,8 +4335,8 @@ function print_filter_match_type() {
 
 /**
  *  Prints a multi-value filter field.
- * @param  string $p_field_name
- * @param mixed $p_field_value
+ * @param string $p_field_name Field name
+ * @param mixed $p_field_value field value
  */
 function print_multivalue_field( $p_field_name, $p_field_value ) {
 	$t_output = '';
@@ -4573,6 +4573,7 @@ function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
 }
 
 /**
+ * get current filter for given project and user
  * @param int $p_project_id
  * @param int $p_user_id
  * @return int
@@ -4751,7 +4752,8 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
 }
 
 /**
- * @param str $p_name
+ * Check that the given filter name does not exceed the maximum filter length
+ * @param string $p_name filter name
  * @return bool true when under max_length (64) and false when over
  */
 function filter_name_valid_length( $p_name ) {

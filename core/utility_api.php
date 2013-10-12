@@ -147,7 +147,7 @@ function ini_get_number( $p_name ) {
 
 /**
  * Sort a multi-dimensional array by one of its keys
- * @param array $p_array array to sort
+ * @param array $p_array Array to sort
  * @param string $p_key key to sort array on
  * @param int $p_direction sort direction
  * @return array sorted array
@@ -208,6 +208,11 @@ function is_page_name( $p_string ) {
 	return isset( $_SERVER['SCRIPT_NAME'] ) && ( 0 < strpos( $_SERVER['SCRIPT_NAME'], $p_string ) );
 }
 
+/**
+ * return true or false if the host operating system is windows
+ * @return bool
+ * @access public
+ */
 function is_windows_server() {
 	if( defined( 'PHP_WINDOWS_VERSION_MAJOR' ) ) {
 		return (PHP_WINDOWS_VERSION_MAJOR > 0);
@@ -215,6 +220,15 @@ function is_windows_server() {
 	return ('WIN' == substr( PHP_OS, 0, 3 ) );
 }
 
+/**
+ * return array of class properties (via reflection api)
+ * @param string $p_classname class name
+ * @param string $p_type property type - public/private/protected/static
+ * @param bool $p_return_object whether to return array of property objects
+ * @param bool $p_include_parent whether to include properties of parent classes
+ * @return bool
+ * @access public
+ */
 function getClassProperties($className, $types='public', $return_object = false, $include_parent = false ) {
 	$ref = new ReflectionClass($className);
 	$props = $ref->getProperties();
@@ -240,6 +254,10 @@ function getClassProperties($className, $types='public', $return_object = false,
 	return $props_arr;
 }
 
+/**
+ * return string of system font path
+ * @access public
+ */
 function get_font_path() {
 		$t_font_path = config_get_global( 'system_font_folder' );
 		if( $t_font_path == '' ) {

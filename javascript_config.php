@@ -15,6 +15,7 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Handle configuration required for javascript
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -23,20 +24,20 @@
  * @uses config_api.php
  */
 
-/**
- * MantisBT Core API's
- */
 require_once( 'core.php' );
 require_api( 'config_api.php' );
 
+/**
+ * Print array of config option->values for javascript
+ * @param string $p_config_key config option
+ */
 function print_config_value( $p_config_key ) {
 	echo "config['" . $p_config_key . "'] = '" . addslashes( config_get( $p_config_key ) ) . "';\n";
 }
 
 /**
  * Send correct MIME Content-Type header for JavaScript content.
- * See http://www.rfc-editor.org/rfc/rfc4329.txt for details on why
- * application/javasscript is the correct MIME type.
+ * See http://www.rfc-editor.org/rfc/rfc4329.txt for details on why application/javascript is the correct MIME type.
  */
 header( 'Content-Type: application/javascript; charset=UTF-8' );
 

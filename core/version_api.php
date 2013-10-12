@@ -49,17 +49,45 @@ require_api( 'project_hierarchy_api.php' );
  * @subpackage classes
  */
 class VersionData {
+	/**
+	 * Version id
+	 */
 	protected $id = 0;
+
+	/**
+	 * Project ID
+	 */
 	protected $project_id = 0;
+
+	/**
+	 * Version name
+	 */
 	protected $version = '';
+
+	/**
+	 * Version Description
+	 */
 	protected $description = '';
+
+	/**
+	 * Version Release Status e.g. VERSION_FUTURE
+	 */
 	protected $released = VERSION_FUTURE;
+
+	/**
+	 * Date Order
+	 */
 	protected $date_order = 1;
+
+	/**
+	 * Obsolete
+	 */
 	protected $obsolete = 0;
 
 	/**
-	 * @param string $name
-	 * @param string $value
+	 * Overloaded function
+	 * @param string $p_name property name
+	 * @param string $p_value value
 	 * @private
 	 */
 	public function __set($name, $value) {
@@ -80,7 +108,8 @@ class VersionData {
 	}
 
 	/**
-	 * @param string $p_string
+	 * Overloaded function
+	 * @param string $p_name property name
 	 * @private
 	 */
 	public function __get( $p_name ) {
@@ -300,7 +329,6 @@ function version_update( $p_version_info ) {
  * Remove a version from the project
  * @param int $p_version_id
  * @param string $p_new_version
- * @return true
  */
 function version_remove( $p_version_id, $p_new_version = '' ) {
 	$c_version_id = db_prepare_int( $p_version_id );
@@ -346,7 +374,7 @@ function version_remove( $p_version_id, $p_new_version = '' ) {
 /**
  * Remove all versions associated with a project
  * @param int $p_project_id
- * @return true
+ * @return bool
  */
 function version_remove_all( $p_project_id ) {
 	$c_project_id = db_prepare_int( $p_project_id );
@@ -415,10 +443,11 @@ function version_cache_array_rows( $p_project_id_array ) {
 
 /**
  * Return all versions for the specified project
- * @param int $p_project_id
- * @param int $p_released
- * @param bool $p_obsolete
- * @return array array of version rows (in array format)
+ * @param int $p_project_id project id
+ * @param int $p_released include released
+ * @param bool $p_obsolete include obsolete
+ * @param bool $p_inherit inherit versions
+ * @return array Array of version rows (in array format)
  */
 function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = false, $p_inherit = null ) {
 	global $g_cache_versions, $g_cache_versions_project;
@@ -578,7 +607,7 @@ function version_get_field( $p_version_id, $p_field_name ) {
 }
 
 /**
- * Gets the full name of a version.  This may include the project name as a prefix (e.g. '[MantisBT] 1.2.0')
+ * Gets the full name of a version.  This may include the project name as a prefix (e.g. '[MantisBT] 2.0.0')
  *
  * @param int $p_version_id  The version id.
  * @param bool $p_show_project  Whether to include the project or not, null means include the project if different from current.

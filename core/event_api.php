@@ -43,8 +43,8 @@ $g_event_cache = array();
 /**
  * Declare an event of a given type.
  * Will do nothing if event already exists.
- * @param string Event name
- * @param int Event type
+ * @param string $p_name Event name
+ * @param int $p_type Event type
  * @access public
  */
 function event_declare( $p_name, $p_type = EVENT_TYPE_DEFAULT ) {
@@ -60,8 +60,8 @@ function event_declare( $p_name, $p_type = EVENT_TYPE_DEFAULT ) {
 }
 
 /**
- * Convenience function for decleare multiple events.
- * @param array Events
+ * Convenience function for declare multiple events.
+ * @param array $p_events Events
  * @access public
  */
 function event_declare_many( $p_events ) {
@@ -73,9 +73,9 @@ function event_declare_many( $p_events ) {
 /**
  * Hook a callback function to a given event.
  * A plugin's basename must be specified for proper handling of plugin callbacks.
- * @param string Event name
- * @param string Callback function
- * @param string Plugin basename
+ * @param string $p_name Event name
+ * @param string $p_callback Callback function
+ * @param int|string $p_plugin Plugin basename
  * @access public
  */
 function event_hook( $p_name, $p_callback, $p_plugin = 0 ) {
@@ -92,8 +92,8 @@ function event_hook( $p_name, $p_callback, $p_plugin = 0 ) {
 
 /**
  * Hook multiple callback functions to multiple events.
- * @param array Event name/callback pairs
- * @param string Plugin basename
+ * @param array $p_hooks Event name/callback pairs
+ * @param int|string $p_plugin Plugin basename
  * @access public
  */
 function event_hook_many( $p_hooks, $p_plugin = 0 ) {
@@ -128,10 +128,11 @@ function event_clear_callbacks() {
 
 /**
  * Signal an event to execute and handle callbacks as necessary.
- * @param string Event name
- * @param multi Event parameters
- * @param int Event type override
- * @return multi Null if event undeclared, appropriate return value otherwise
+ * @param string $p_name Event name
+ * @param mixed $p_params Event parameters
+ * @param mixed $p_params_dynamic Event parameters Dynamic
+ * @param int $p_type Event type override
+ * @return mixed Null if event undeclared, appropriate return value otherwise
  * @access public
  */
 function event_signal( $p_name, $p_params = null, $p_params_dynamic = null, $p_type = null ) {
@@ -204,9 +205,9 @@ function event_callback( $p_event, $p_callback, $p_plugin, $p_params = null ) {
  * Process an execute event type.
  * All callbacks will be called with parameters, and their
  * return values will be ignored.
- * @param string Event name
- * @param array array of callback function/plugin basename key/value pairs
- * @param array Callback parameters
+ * @param string $p_event Event name
+ * @param array $p_callbacks Array of callback function/plugin base name key/value pairs
+ * @param array $p_params Callback parameters
  * @access public
  */
 function event_type_execute( $p_event, $p_callbacks, $p_params ) {
@@ -222,9 +223,10 @@ function event_type_execute( $p_event, $p_callbacks, $p_params ) {
  * All callbacks will be called with the given parameters, and their
  * return values will be echoed to the client, separated by a given string.
  * If there are no callbacks, then nothing will be sent as output.
- * @param string Event name
- * @param array array of callback function/plugin basename key/value pairs
- * @param multi Output separator (if single string) or indexed array of pre, mid, and post strings
+ * @param string $p_event Event name
+ * @param $p_callbacks
+ * @param mixed $p_params Output separator (if single string) or indexed array of pre, mid, and post strings
+ * @internal param array $p_callback Array of callback function/plugin base name key/value pairs
  * @access public
  */
 function event_type_output( $p_event, $p_callbacks, $p_params = null ) {
@@ -261,9 +263,10 @@ function event_type_output( $p_event, $p_callbacks, $p_params = null ) {
  * The first callback with be called with the given input.  All following
  * callbacks will be called with the previous's output as its input.  The
  * final callback's return value will be returned to the event origin.
- * @param string Event name
- * @param array array of callback function/plugin basename key/value pairs
- * @param string Input string
+ * @param string $p_event Event name
+ * @param array $p_callbacks Array of callback function/plugin basename key/value pairs
+ * @param string $p_input Input string
+ * @param array $p_params parameters
  * @return string Output string
  * @access public
  */
@@ -295,10 +298,10 @@ function event_type_chain( $p_event, $p_callbacks, $p_input, $p_params ) {
  * Callbacks will be called with the given parameters until a callback
  * returns a non-null value; at this point, no other callbacks will be
  * processed, and the return value be passed back to the event origin.
- * @param string Event name
- * @param array array of callback function/plugin basename key/value pairs
- * @param multi Parameters passed to callbacks
- * @return multi The first non-null callback result, or null otherwise
+ * @param string $p_event Event name
+ * @param array $p_callbacks Array of callback function/plugin basename key/value pairs
+ * @param mixed $p_params Parameters passed to callbacks
+ * @return mixed The first non-null callback result, or null otherwise
  * @access public
  */
 function event_type_first( $p_event, $p_callbacks, $p_params ) {
@@ -322,10 +325,10 @@ function event_type_first( $p_event, $p_callbacks, $p_params ) {
  * All callbacks will be called with the given data parameters.  The
  * return value of each callback will be appended to an array with the callback's
  * basename as the key.  This array will then be returned to the event origin.
- * @param string Event name
- * @param array array of callback function/plugin basename key/value pairs
- * @param multi Data
- * @return array array of callback/return key/value pairs
+ * @param string $p_event Event name
+ * @param array $p_callbacks Array of callback function/plugin basename key/value pairs
+ * @param mixed $p_data Data
+ * @return array Array of callback/return key/value pairs
  * @access public
  */
 function event_type_default( $p_event, $p_callbacks, $p_data ) {

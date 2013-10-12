@@ -73,16 +73,45 @@ define( 'GRAPHVIZ_PDF', 28 );
  * @subpackage classes
  */
 class Graph {
+	/**
+	 * Name
+	 */
 	var $name = 'G';
+
+	/**
+	 * Attributes
+	 */
 	var $attributes = array();
+
+	/**
+	 * Default node
+	 */
 	var $default_node = null;
+
+	/**
+	 * Default edge
+	 */
 	var $default_edge = null;
+
+	/**
+	 * Nodes
+	 */
 	var $nodes = array();
+
+	/**
+	 * Edges
+	 */
 	var $edges = array();
 
+	/**
+	 * Graphviz tool
+	 */
 	var $graphviz_tool;
 	var $graphviz_com_module;
 
+	/**
+	 * Formats
+	 */
 	var $formats = array(
 		'dot' => array(
 			'binary' => false,

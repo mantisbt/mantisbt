@@ -40,7 +40,7 @@ $g_tokens_purged = false;
 
 /**
  * Check if a token exists.
- * @param integer Token ID
+ * @param integer $p_token_id Token ID
  * @return boolean True if token exists
  */
 function token_exists( $p_token_id ) {
@@ -57,7 +57,7 @@ function token_exists( $p_token_id ) {
 
 /**
  * Make sure a token exists.
- * @param integer Token ID
+ * @param integer $p_token_id Token ID
  * @return boolean True if token exists
  */
 function token_ensure_exists( $p_token_id ) {
@@ -68,11 +68,10 @@ function token_ensure_exists( $p_token_id ) {
 	return true;
 }
 
-# High-level CRUD Usage
 /**
  * Get a token's information
- * @param integer Token type
- * @param integer User ID
+ * @param integer $p_type Token type
+ * @param integer $p_user_id User ID
  * @return array Token row
  */
 function token_get( $p_type, $p_user_id = null ) {
@@ -96,8 +95,8 @@ function token_get( $p_type, $p_user_id = null ) {
 
 /**
  * Get a token's value or null if not found
- * @param integer Token type
- * @param integer User ID (null for current user)
+ * @param int $p_type Token type
+ * @param int $p_user_id User ID (null for current user)
  * @return array Token row
  */
 function token_get_value( $p_type, $p_user_id = null ) {
@@ -112,10 +111,10 @@ function token_get_value( $p_type, $p_user_id = null ) {
 
 /**
  * Create or update a token's value and expiration
- * @param integer Token type
- * @param string Token value
- * @param integer Token expiration in seconds
- * @param integer User ID
+ * @param integer $p_type Token type
+ * @param string $p_value Token value
+ * @param integer $p_expiry Token expiration in seconds
+ * @param integer $p_user_id User ID
  * @return integer Token ID
  */
 function token_set( $p_type, $p_value, $p_expiry = TOKEN_EXPIRY, $p_user_id = null ) {
@@ -151,9 +150,8 @@ function token_touch( $p_token_id, $p_expiry = TOKEN_EXPIRY ) {
 
 /**
  * Delete a token.
- * @param integer Token type
- * @param integer User ID or null for current logged in user.
- * @return always true
+ * @param integer $p_type Token type
+ * @param integer $p_user_id User ID or null for current logged in user.
  */
 function token_delete( $p_type, $p_user_id = null ) {
 	$c_type = db_prepare_int( $p_type );
@@ -170,8 +168,7 @@ function token_delete( $p_type, $p_user_id = null ) {
 
 /**
  * Delete all tokens owned by a specified user.
- * @param integer User ID or null for current logged in user.
- * @return always true
+ * @param integer $p_user_id User ID or null for current logged in user.
  */
 function token_delete_by_owner( $p_user_id = null ) {
 	if( $p_user_id == null ) {
@@ -190,13 +187,12 @@ function token_delete_by_owner( $p_user_id = null ) {
 	return true;
 }
 
-# Low-level CRUD, not for general use
 /**
  * Create a token.
- * @param integer Token type
- * @param string Token value
- * @param integer Token expiration in seconds
- * @param integer User ID
+ * @param integer $p_type Token type
+ * @param string $p_value Token value
+ * @param integer $p_expiry Token expiration in seconds
+ * @param integer $p_user_id User ID
  * @return integer Token ID
  */
 function token_create( $p_type, $p_value, $p_expiry = TOKEN_EXPIRY, $p_user_id = null ) {
@@ -216,10 +212,10 @@ function token_create( $p_type, $p_value, $p_expiry = TOKEN_EXPIRY, $p_user_id =
 
 /**
  * Update a token
- * @param integer Token ID
- * @param string Token value
- * @param integer Token expiration in seconds
- * @return always true.
+ * @param integer $p_token_id Token ID
+ * @param string $p_value Token value
+ * @param integer $p_expiry Token expiration in seconds
+ * @return bool always true.
  */
 function token_update( $p_token_id, $p_value, $p_expiry = TOKEN_EXPIRY ) {
 	token_ensure_exists( $p_token_id );
@@ -256,8 +252,8 @@ function token_delete_by_type( $p_token_type ) {
 
 /**
  * Purge all expired tokens.
- * @param integer Token type
- * @return always true.
+ * @param integer $p_token_type Token type
+ * @return bool always true.
  */
 function token_purge_expired( $p_token_type = null ) {
 	global $g_tokens_purged;

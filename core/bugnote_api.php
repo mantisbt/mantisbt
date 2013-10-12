@@ -62,17 +62,60 @@ require_api( 'utility_api.php' );
  * @subpackage classes
  */
 class BugnoteData {
+	/**
+	 * Bugnote ID
+	 */
 	var $id;
+
+	/**
+	 * Bug ID
+	 */
 	var $bug_id;
-	var $bugnote_text_id;
+	
+	/**
+	 * Reporter ID
+	 */
 	var $reporter_id;
+
+	/**
+	 * Note text
+	 */
 	var $note;
+
+	/**
+	 * View State
+	 */
 	var $view_state;
+
+	/**
+	 * Date submitted
+	 */
 	var $date_submitted;
+
+	/**
+	 * Last Modified
+	 */
 	var $last_modified;
+
+	/**
+	 * Bugnote type
+	 */
 	var $note_type;
+
+	/**
+	 * ???
+	 */
 	var $note_attr;
+
+	/**
+	 * Time tracking information
+	 */
 	var $time_tracking;
+
+	/**
+	 * Bugnote Text id
+	 */
+	var $bugnote_text_id;
 }
 
 /**
@@ -140,7 +183,7 @@ function bugnote_is_user_reporter( $p_bugnote_id, $p_user_id ) {
  * @param int $p_date_submitted date submitted (defaults to now())
  * @param int $p_last_modified last modification date (defaults to now())
  * @param bool $p_skip_bug_update skip bug last modification update (useful when importing bugs/bugnotes)
- * @return false|int false or indicating bugnote id added
+ * @return bool|int false or indicating bugnote id added
  * @access public
  */
 function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_private = false, $p_type = BUGNOTE, $p_attr = '', $p_user_id = null, $p_send_email = TRUE, $p_date_submitted = 0, $p_last_modified = 0, $p_skip_bug_update = FALSE, $p_log_history = TRUE ) {
@@ -714,8 +757,8 @@ function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost
 
 /**
  * Clear a bugnote from the cache or all bug notes if no bugnote id specified.
- * @param int bugnote id to clear (optional)
- * @return null
+ * @param int $p_bugnote_id id to clear (optional)
+ * @return bool
  * @access public
  */
 function bugnote_clear_cache( $p_bugnote_id = null ) {

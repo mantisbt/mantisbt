@@ -145,6 +145,9 @@ function log_event( $p_level, $p_msg, $p_backtrace = null ) {
 	}
 }
 
+/**
+ * Print logging api output to bottom of html page
+ */
 function log_print_to_page() {
 	if ( config_get_global( 'log_destination' ) === 'page' && auth_is_user_authenticated() && access_has_global_level( config_get( 'show_log_threshold' ) ) ) {
 		global $g_log_events, $g_log_levels;

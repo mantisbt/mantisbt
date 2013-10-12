@@ -52,17 +52,24 @@ $g_cache_db_table_exists = false;
 $g_cache_config_user = null;
 $g_cache_config_project = null;
 
-# ## Configuration API ###
-# ------------------
-# Retrieves the value of a config option
-#  This function will return one of (in order of preference):
-#    1. value from cache
-#    2. value from database
-#     looks for specified config_id + current user + current project.
-#     if not found, config_id + current user + all_project
-#     if not found, config_id + default user + current project
-#     if not found, config_id + default user + all_project.
-#    3.use GLOBAL[config_id]
+/**
+ *
+ * Retrieves the value of a config option
+ *  This function will return one of (in order of preference):
+ *    1. value from cache
+ *    2. value from database
+ *     looks for specified config_id + current user + current project.
+ *     if not found, config_id + current user + all_project
+ *     if not found, config_id + default user + current project
+ *     if not found, config_id + default user + all_project.
+ *    3.use GLOBAL[config_id]
+ *
+ * @param string $p_option Config option
+ * @param string $p_default default value
+ * @param int $p_user user id
+ * @param int $p_project project id
+ * @return mixed
+ */
 function config_get( $p_option, $p_default = null, $p_user = null, $p_project = null ) {
 	global $g_cache_config, $g_cache_config_access, $g_cache_db_table_exists, $g_cache_filled;
 	global $g_cache_config_user, $g_cache_config_project, $g_project_override;
@@ -183,8 +190,13 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 	return config_get_global( $p_option, $p_default );
 }
 
-# ----------------------
-# force config variable from a global to avoid recursion
+/**
+ * force config variable from a global to avoid recursion
+ *
+ * @param string $p_option config option
+ * @param string $p_default default value
+ * @return string
+ */
 function config_get_global( $p_option, $p_default = null ) {
 	global $g_cache_config_eval;
 	if( isset( $GLOBALS['g_' . $p_option] ) ) {
@@ -206,8 +218,14 @@ function config_get_global( $p_option, $p_default = null ) {
 	}
 }
 
-# ------------------
-# Retrieves the access level needed to change a config value
+/**
+ * Retrieves the access level needed to change a config value
+ *
+ * @param string $p_option config option
+ * @param int $p_user user id
+ * @param int $p_project project id
+ * @return int
+ */
 function config_get_access( $p_option, $p_user = null, $p_project = null ) {
 	global $g_cache_config, $g_cache_config_access, $g_cache_filled;
 
@@ -262,9 +280,15 @@ function config_get_access( $p_option, $p_user = null, $p_project = null ) {
 	return $t_found ? $t_access : config_get_global( 'admin_site_threshold' );
 }
 
-# ------------------
-# Returns true if the specified config option exists (ie. a
-#  value or default can be found), false otherwise
+/**
+ * Returns true if the specified config option exists (ie. a
+ * value or default can be found), false otherwise
+ *
+ * @param string $p_option config option
+ * @param int $p_user user id
+ * @param int $p_project project id
+ * @return bool
+ */
 function config_is_set( $p_option, $p_user = null, $p_project = null ) {
 	global $g_cache_config, $g_cache_filled;
 
@@ -316,9 +340,17 @@ function config_is_set( $p_option, $p_user = null, $p_project = null ) {
 	return isset( $GLOBALS['g_' . $p_option] );
 }
 
-# ------------------
-# Sets the value of the given config option to the given value
-#  If the config option does not exist, an ERROR is triggered
+/**
+ * Sets the value of the given config option to the given value
+ *  If the config option does not exist, an ERROR is triggered
+ *
+ * @param string $p_option config option
+ * @param string $p_value config value
+ * @param int $p_user user id
+ * @param int $p_project project id
+ * @param int $p_access access level
+ * @return bool
+ */
 function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PROJECTS, $p_access = DEFAULT_ACCESS_LEVEL ) {
 	if( $p_access == DEFAULT_ACCESS_LEVEL ) {
 		$p_access = config_get_global( 'admin_site_threshold' );
@@ -388,10 +420,16 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 	return true;
 }
 
-# ------------------
-# Sets the value of the given config option in the global namespace.
-#  Does *not* persist the value between sessions. If override set to
-#  false, then the value will only be set if not already existent.
+/**
+ * Sets the value of the given config option in the global namespace.
+ * Does *not* persist the value between sessions. If override set to
+ * false, then the value will only be set if not already existent.
+ *
+ * @param string $p_option config option
+ * @param string $p_value config value
+ * @param bool $p_override override existing value if already set
+ * @return bool
+ */
 function config_set_global( $p_option, $p_value, $p_override = true ) {
 	global $g_cache_config_eval;
 
@@ -403,9 +441,18 @@ function config_set_global( $p_option, $p_value, $p_override = true ) {
 	return true;
 }
 
-# ------------------
-# Sets the value of the given config option to the given value
-#  If the config option does not exist, an ERROR is triggered
+/**
+ * Sets the value of the given config option to the given value
+ *  If the config option does not exist, an ERROR is triggered
+ *
+ * @param string $p_option config option
+ * @param string $p_value config value
+ * @param int $p_type type
+ * @param int $p_user user id
+ * @param int $p_project project id
+ * @param int $p_access access level
+ * @return bool
+ */
 function config_set_cache( $p_option, $p_value, $p_type, $p_user = NO_USER, $p_project = ALL_PROJECTS, $p_access = DEFAULT_ACCESS_LEVEL ) {
 	global $g_cache_config, $g_cache_config_access;
 
@@ -419,9 +466,13 @@ function config_set_cache( $p_option, $p_value, $p_type, $p_user = NO_USER, $p_p
 	return true;
 }
 
-# ------------------
-# Checks if the specific configuration option can be set in the database, otherwise it can only be set
-# in the configuration file (config_inc.php / config_defaults_inc.php).
+/**
+ * Checks if the specific configuration option can be set in the database, otherwise it can only be set
+ * in the configuration file (config_inc.php / config_defaults_inc.php).
+ *
+ * @param string $p_option config option
+ * @return bool
+ */
 function config_can_set_in_database( $p_option ) {
 	global $g_cache_can_set_in_database, $g_cache_bypass_lookup;
 
@@ -440,14 +491,23 @@ function config_can_set_in_database( $p_option ) {
 	return !$t_bypass_lookup;
 }
 
-# ------------------
-# Checks if the specific configuration option can be deleted from the database.
+/**
+ * Checks if the specific configuration option can be deleted from the database.
+ *
+ * @param string $p_option config option
+ * @return bool
+ */
 function config_can_delete( $p_option ) {
 	return( utf8_strtolower( $p_option ) != 'database_version' );
 }
 
-# ------------------
-# delete the config entry
+/**
+ * delete the config entry
+ *
+ * @param string $p_option config option
+ * @param int $p_user user id
+ * @param int $p_project project id
+ */
 function config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECTS ) {
 	global $g_cache_config, $g_cache_config_access;
 
@@ -499,8 +559,11 @@ function config_delete_for_user( $p_option, $p_user_id ) {
 	db_query_bound( $query, array( $p_option, $c_user_id ) );
 }
 
-# ------------------
-# delete the config entry
+/**
+ * delete the config entry
+ *
+ * @param int $p_project project id
+ */
 function config_delete_project( $p_project = ALL_PROJECTS ) {
 	global $g_cache_config, $g_cache_config_access;
 	$t_config_table = db_get_table( 'config' );
@@ -514,9 +577,14 @@ function config_delete_project( $p_project = ALL_PROJECTS ) {
 	config_flush_cache();
 }
 
-# ------------------
-# delete the config entry from the cache
-# @@@ to be used sparingly
+/**
+ * delete the config entry from the cache
+ * @@@ to be used sparingly
+ *
+ * @param string $p_option config option
+ * @param int $p_user user id
+ * @param int $p_project project id
+ */
 function config_flush_cache( $p_option = '', $p_user = ALL_USERS, $p_project = ALL_PROJECTS ) {
 	global $g_cache_config, $g_cache_config_access, $g_cache_filled;
 
@@ -582,9 +650,7 @@ function config_obsolete( $p_var, $p_replace = '' ) {
 
 /**
  * check for recursion in defining config variables
- *
- * If there is a %text% in the returned value, re-evaluate the "text"
- * part and replace the string
+ * If there is a %text% in the returned value, re-evaluate the "text" part and replace the string
  *
  * @param string $p_value config variable to evaluate
  * @param bool if true, gets  %text% as a global config, defaults to false
@@ -622,14 +688,9 @@ function config_eval( $p_value, $p_global = false ) {
 }
 
 /**
- * Defines if a config variable is considered "private"
+ * list of configuration variable which may expose webserver details and should not be exposed to users or webservices
  *
- * The purpose of this function is to avoid exposure of potentially
- * sensitive or confidential information to users or web services.
- * This includes things such as webserver details, paths, usernames and
- * passwords, hostnames/IP addresses, etc.
- *
- * @param string $p_config_var config variable to evaluate
+ * @param string $p_config_var config option
  * @return bool
  */
 function config_is_private( $p_config_var ) {

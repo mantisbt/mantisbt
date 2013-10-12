@@ -42,16 +42,37 @@ require_api( 'utility_api.php' );
  * @subpackage classes
  */
 class EmailData {
-	// properties set during creation
+	/**
+	 * Email address
+	 */
 	var $email = '';
+
+	/**
+	 * Subject text
+	 */
+
 	var $subject = '';
+	/**
+	 * Body text
+	 */
+
 	var $body = '';
+
+	/**
+	 * Meta Data array
+	 */
 	var $metadata = array(
 		'headers' => array(),
 	);
 
-	// auto-populated properties
+	/**
+	 * Email ID
+	 */
 	var $email_id = 0;
+
+	/**
+	 * Submitted
+	 */
 	var $submitted = '';
 };
 

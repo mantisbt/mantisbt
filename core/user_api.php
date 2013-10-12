@@ -179,15 +179,13 @@ function user_search_cache( $p_field, $p_value ) {
 	return false;
 }
 
-# ===================================
-# Boolean queries and ensures
-# ===================================
-# --------------------
-# check to see if user exists by id
-# return true if it does, false otherwise
-#
-# Use user_cache_row() to benefit from caching if called multiple times
-#  and because if the user does exist the data may well be wanted
+/**
+ * check to see if user exists by id
+ * return true if it does, false otherwise
+ *
+ * @param int $p_user_id User ID
+ * @return bool
+ */
 function user_exists( $p_user_id ) {
 	$row = user_cache_row( $p_user_id, false );
 
@@ -237,9 +235,14 @@ function user_ensure_name_unique( $p_username ) {
 	}
 }
 
-# --------------------
-# Check if the realname is a valid username (does not account for uniqueness)
-# Return 0 if it is invalid, The number of matches + 1
+/**
+ * Check if the realname is a valid username (does not account for uniqueness)
+ * Return 0 if it is invalid, The number of matches + 1
+ *
+ * @param string $p_username username
+ * @param string $p_realname realname
+ * @return int
+ */
 function user_is_realname_unique( $p_username, $p_realname ) {
 	if( is_blank( $p_realname ) ) {
 		# don't bother checking if realname is blank
@@ -281,9 +284,13 @@ function user_is_realname_unique( $p_username, $p_realname ) {
 	return $t_count + 1;
 }
 
-# --------------------
-# Check if the realname is a unique
-# Trigger an error if the username is not valid
+/**
+ * Check if the realname is a unique
+ * Trigger an error if the username is not valid
+ *
+ * @param string $p_username username
+ * @param string $p_realname realname
+ */
 function user_ensure_realname_unique( $p_username, $p_realname ) {
 	if( 1 > user_is_realname_unique( $p_username, $p_realname ) ) {
 		trigger_error( ERROR_USER_REAL_MATCH_USER, ERROR );
@@ -345,8 +352,11 @@ function user_is_monitoring_bug( $p_user_id, $p_bug_id ) {
 	}
 }
 
-# --------------------
-# return true if the user has access of ADMINISTRATOR or higher, false otherwise
+/**
+ * return true if the user has access of ADMINISTRATOR or higher, false otherwise
+ * @param int $p_user_id User ID
+ * @return bool
+ */
 function user_is_administrator( $p_user_id ) {
 	$t_access_level = user_get_field( $p_user_id, 'access_level' );
 
@@ -357,15 +367,15 @@ function user_is_administrator( $p_user_id ) {
 	}
 }
 
-/*
+/**
  * Check if a user has a protected user account.
  * Protected user accounts cannot be updated without manage_user_threshold
  * permission. If the user ID supplied is that of the anonymous user, this
  * function will always return true. The anonymous user account is always
  * considered to be protected.
  *
- * @param int $p_user_id
- * @return true: user is protected; false: user is not protected.
+ * @param int $p_user_id User ID
+ * @return bool true: user is protected; false: user is not protected.
  * @access public
  */
 function user_is_protected( $p_user_id ) {
@@ -398,8 +408,12 @@ function user_ensure_unprotected( $p_user_id ) {
 	}
 }
 
-# --------------------
-# return true is the user account is enabled, false otherwise
+/**
+ * return true is the user account is enabled, false otherwise
+ *
+ * @param int $p_user_id User ID
+ * @return bool
+ */
 function user_is_enabled( $p_user_id ) {
 	if( ON == user_get_field( $p_user_id, 'enabled' ) ) {
 		return true;
@@ -408,8 +422,12 @@ function user_is_enabled( $p_user_id ) {
 	}
 }
 
-# --------------------
-# count the number of users at or greater than a specific level
+/**
+ * count the number of users at or greater than a specific level
+ *
+ * @param int $p_level Access Level [Default ANYBODY]
+ * @return int
+ */
 function user_count_level( $p_level = ANYBODY ) {
 	$t_level = db_prepare_int( $p_level );
 	$t_user_table = db_get_table( 'user' );
@@ -584,9 +602,13 @@ function user_delete_profiles( $p_user_id ) {
 	return true;
 }
 
-# --------------------
-# delete a user account (account, profiles, preferences, project-specific access levels)
-# returns true when the account was successfully deleted
+/**
+ * delete a user account (account, profiles, preferences, project-specific access levels)
+ * returns true when the account was successfully deleted
+ *
+ * @param int $p_user_id User ID
+ * @return bool Always true
+ */
 function user_delete( $p_user_id ) {
 	$c_user_id = db_prepare_int( $p_user_id );
 	$t_user_table = db_get_table( 'user' );
@@ -682,7 +704,13 @@ function user_get_id_by_email( $p_email ) {
 	}
 }
 
-# Get a user id from their real name
+
+/**
+ * Get a user id from their real name
+ *
+ * @param string $p_realname Realname
+ * @return array
+ */
 function user_get_id_by_realname( $p_realname ) {
 	global $g_cache_user;
 	if( $t_user = user_search_cache( 'realname', $p_realname ) ) {
@@ -726,8 +754,13 @@ function user_get_row( $p_user_id ) {
 	return user_cache_row( $p_user_id );
 }
 
-# --------------------
-# return the specified user field for the user id
+/**
+ * return the specified user field for the user id
+ *
+ * @param int $p_user_id User ID
+ * @param string $p_field_name Field Name
+ * @return string
+ */
 function user_get_field( $p_user_id, $p_field_name ) {
 	if( NO_USER == $p_user_id ) {
 		error_parameters( NO_USER );
@@ -746,8 +779,12 @@ function user_get_field( $p_user_id, $p_field_name ) {
 	}
 }
 
-# --------------------
-# lookup the user's email in LDAP or the db as appropriate
+/**
+ * lookup the user's email in LDAP or the db as appropriate
+ *
+ * @param int $p_user_id User ID
+ * @return string
+ */
 function user_get_email( $p_user_id ) {
 	$t_email = '';
 	if( LDAP == config_get( 'login_method' ) && ON == config_get( 'use_ldap_email' ) ) {
@@ -759,8 +796,12 @@ function user_get_email( $p_user_id ) {
 	return $t_email;
 }
 
-# --------------------
-# lookup the user's realname
+/**
+ * lookup the user's realname
+ *
+ * @param int $p_user_id User ID
+ * @return string
+ */
 function user_get_realname( $p_user_id ) {
 	$t_realname = '';
 
@@ -775,9 +816,13 @@ function user_get_realname( $p_user_id ) {
 	return $t_realname;
 }
 
-# --------------------
-# return the username or a string "user<id>" if the user does not exist
-# if $g_show_realname is set and real name is not empty, return it instead
+/**
+ * return the username or a string "user<id>" if the user does not exist
+ * if show_user_realname_threshold is set and real name is not empty, return it instead
+ *
+ * @param int $p_user_id User ID
+ * @return string
+ */
 function user_get_name( $p_user_id ) {
 	$row = user_cache_row( $p_user_id, false );
 
@@ -803,6 +848,8 @@ function user_get_name( $p_user_id ) {
 /**
 * Return the user avatar image URL
 * in this first implementation, only gravatar.com avatars are supported
+* @param int $p_user_id User ID
+* @param int $p_size pixel size of image
 * @return array|bool an array( URL, width, height ) or false when the given user has no avatar
 */
 function user_get_avatar( $p_user_id, $p_size = 80 ) {
@@ -856,8 +903,13 @@ function user_get_access_level( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 
 $g_user_accessible_projects_cache = null;
 
-# --------------------
-# retun an array of project IDs to which the user has access
+/**
+ * retun an array of project IDs to which the user has access
+ *
+ * @param int $p_user_id User ID
+ * @param bool $p_show_disabled include disabled projects in array
+ * @return array
+ */
 function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 	global $g_user_accessible_projects_cache;
 
@@ -925,8 +977,13 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 
 $g_user_accessible_subprojects_cache = null;
 
-# --------------------
-# retun an array of subproject IDs of a certain project to which the user has access
+/**
+ * return an array of sub-project IDs of a certain project to which the user has access
+ * @param int $p_user_id User Id
+ * @param int $p_project_id Project ID
+ * @param bool $p_show_disabled include disabled projects in array
+ * @return array
+ */
 function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_disabled = false ) {
 	global $g_user_accessible_subprojects_cache;
 
@@ -998,7 +1055,12 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 	return $t_projects[(int)$p_project_id];
 }
 
-# --------------------
+/**
+ * retun an array of sub-project IDs of all sub-projects project to which the user has access
+ * @param int $p_user_id User Id
+ * @param int $p_project_id Project ID
+ * @return array
+ */
 function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
 	/** @todo (thraxisp) Should all top level projects be a sub-project of ALL_PROJECTS implicitly?
 	 *  affects how news and some summaries are generated
@@ -1017,6 +1079,12 @@ function user_get_all_accessible_subprojects( $p_user_id, $p_project_id ) {
 	return $t_subprojects;
 }
 
+/**
+ * retun an array of sub-project IDs of all project to which the user has access
+ * @param int $p_user_id User Id
+ * @param int $p_project_id Project ID
+ * @return array
+ */
 function user_get_all_accessible_projects( $p_user_id, $p_project_id ) {
 	if( ALL_PROJECTS == $p_project_id ) {
 		$t_topprojects = user_get_accessible_projects( $p_user_id );
@@ -1168,8 +1236,14 @@ function user_get_reported_open_bug_count( $p_user_id, $p_project_id = ALL_PROJE
 	return db_result( $result );
 }
 
-# --------------------
-# return a profile row
+/**
+ * return a profile row
+ *
+ * @param int $p_user_id User ID
+ * @param int $p_profile_id Profile ID
+ * @return array
+ * @throws MantisBT\Exception\User\UserProfileNotFound
+ */
 function user_get_profile_row( $p_user_id, $p_profile_id ) {
 	$c_user_id = db_prepare_int( $p_user_id );
 	$c_profile_id = db_prepare_int( $p_profile_id );
@@ -1191,16 +1265,24 @@ function user_get_profile_row( $p_user_id, $p_profile_id ) {
 	return $row;
 }
 
-# --------------------
-# Get failed login attempts
+/**
+ * Get failed login attempts
+ *
+ * @param int $p_user_id User ID
+ * @return bool
+ */
 function user_is_login_request_allowed( $p_user_id ) {
 	$t_max_failed_login_count = config_get( 'max_failed_login_count' );
 	$t_failed_login_count = user_get_field( $p_user_id, 'failed_login_count' );
 	return( $t_failed_login_count < $t_max_failed_login_count || OFF == $t_max_failed_login_count );
 }
 
-# --------------------
-# Get 'lost password' in progress attempts
+/**
+ * Get 'lost password' in progress attempts
+ *
+ * @param int $p_user_id User ID
+ * @return bool 
+ */
 function user_is_lost_password_request_allowed( $p_user_id ) {
 	if( OFF == config_get( 'lost_password_feature' ) ) {
 		return false;
@@ -1210,8 +1292,13 @@ function user_is_lost_password_request_allowed( $p_user_id ) {
 	return( $t_lost_password_in_progress_count < $t_max_lost_password_in_progress_count || OFF == $t_max_lost_password_in_progress_count );
 }
 
-# --------------------
-# return the bug filter parameters for the specified user
+/**
+ * return the bug filter parameters for the specified user
+ *
+ * @param int $p_user_id User ID
+ * @param int $p_project_id Project ID
+ * @return array 
+ */
 function user_get_bug_filter( $p_user_id, $p_project_id = null ) {
 	if( null === $p_project_id ) {
 		$t_project_id = helper_get_current_project();
@@ -1234,13 +1321,14 @@ function user_get_bug_filter( $p_user_id, $p_project_id = null ) {
 	return $t_filter;
 }
 
-# ===================================
-# Data Modification
-# ===================================
-# --------------------
-# Update the last_visited field to be now
+/**
+ * Update the last_visited field to be now
+ *
+ * @param int $p_user_id User ID
+ * @return bool always true
+ */
 function user_update_last_visit( $p_user_id ) {
-	$c_user_id = db_prepare_int( $p_user_id );
+	$c_user_id = (int)$p_user_id;
 	$c_value = db_now();
 
 	$t_user_table = db_get_table( 'user' );
@@ -1253,13 +1341,16 @@ function user_update_last_visit( $p_user_id ) {
 
 	user_update_cache( $p_user_id, 'last_visit', $c_value );
 
-	# db_query errors on failure so:
 	return true;
 }
 
-# --------------------
-# Increment the number of times the user has logegd in
-# This function is only called from the login.php script
+/**
+ * Increment the number of times the user has logged in
+ * This function is only called from the login.php script
+ *
+ * @param int $p_user_id User ID
+ * @return bool always true
+ */
 function user_increment_login_count( $p_user_id ) {
 	$t_user_table = db_get_table( 'user' );
 
@@ -1275,8 +1366,12 @@ function user_increment_login_count( $p_user_id ) {
 	return true;
 }
 
-# --------------------
-# Reset to zero the failed login attempts
+/**
+ * Reset to zero the failed login attempts
+ *
+ * @param int $p_user_id User ID
+ * @return bool always true
+ */
 function user_reset_failed_login_count_to_zero( $p_user_id ) {
 	$t_user_table = db_get_table( 'user' );
 
@@ -1290,8 +1385,12 @@ function user_reset_failed_login_count_to_zero( $p_user_id ) {
 	return true;
 }
 
-# --------------------
-# Increment the failed login count by 1
+/**
+ * Increment the failed login count by 1
+ *
+ * @param int $p_user_id User ID
+ * @return bool always true 
+ */
 function user_increment_failed_login_count( $p_user_id ) {
 	$t_user_table = db_get_table( 'user' );
 
@@ -1305,8 +1404,12 @@ function user_increment_failed_login_count( $p_user_id ) {
 	return true;
 }
 
-# --------------------
-# Reset to zero the 'lost password' in progress attempts
+/**
+ * Reset to zero the 'lost password' in progress attempts
+ *
+ * @param int $p_user_id User ID
+ * @return bool always true 
+ */
 function user_reset_lost_password_in_progress_count_to_zero( $p_user_id ) {
 	$t_user_table = db_get_table( 'user' );
 
@@ -1320,8 +1423,12 @@ function user_reset_lost_password_in_progress_count_to_zero( $p_user_id ) {
 	return true;
 }
 
-# --------------------
-# Increment the failed login count by 1
+/**
+ * Increment the failed login count by 1
+ *
+ * @param int $p_user_id User ID
+ * @return bool always true 
+ */
 function user_increment_lost_password_in_progress_count( $p_user_id ) {
 	$t_user_table = db_get_table( 'user' );
 
@@ -1384,14 +1491,23 @@ function user_set_field( $p_user_id, $p_field_name, $p_field_value ) {
 	return true;
 }
 
-# --------------------
-# Set the user's default project
+/**
+ * Set Users Default project in preferences
+ * @param int $p_user_id User ID
+ * @param int $p_project_id Project ID
+ */
 function user_set_default_project( $p_user_id, $p_project_id ) {
-	return user_pref_set_pref( $p_user_id, 'default_project', (int) $p_project_id );
+	user_pref_set_pref( $p_user_id, 'default_project', (int) $p_project_id );
 }
 
-# --------------------
-# Set the user's password to the given string, encoded as appropriate
+/**
+ * Set the user's password to the given string, encoded as appropriate
+ *
+ * @param int $p_user_id User ID
+ * @param string $p_password Password
+ * @param bool $p_allow_protected Allow password change to protected accounts [optional - default false]
+ * @return bool always true 
+ */
 function user_set_password( $p_user_id, $p_password, $p_allow_protected = false ) {
 	if( !$p_allow_protected ) {
 		user_ensure_unprotected( $p_user_id );

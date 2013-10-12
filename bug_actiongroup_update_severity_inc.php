@@ -15,6 +15,8 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Bug action group include file
+ *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -67,6 +69,7 @@ function action_update_severity_print_fields() {
 /**
  * Validates the action on the specified bug id.
  *
+ * @param int $p_bug_id bug id
  * @return string|null On failure: the reason why the action could not be validated. On success: null.
  */
 function action_update_severity_validate( $p_bug_id ) {
@@ -89,8 +92,7 @@ function action_update_severity_validate( $p_bug_id ) {
 /**
  * Executes the custom action on the specified bug id.
  *
- * @param $p_bug_id  The bug id to execute the custom action on.
- *
+ * @param int $p_bug_id The bug id to execute the custom action on.
  * @return null Previous validation ensures that this function doesn't fail. Therefore we can always return null to indicate no errors occurred.
  */
 function action_update_severity_process( $p_bug_id ) {

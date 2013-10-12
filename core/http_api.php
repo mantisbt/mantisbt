@@ -100,7 +100,7 @@ function http_content_disposition_header( $p_filename, $p_inline = false ) {
 
 /**
  * Set caching headers that will allow or prevent browser caching.
- * @param boolean Allow caching
+ * @param boolean $p_allow_caching Allow caching
  */
 function http_caching_headers( $p_allow_caching=false ) {
 	global $g_allow_browser_cache;

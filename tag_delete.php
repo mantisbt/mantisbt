@@ -15,6 +15,8 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Delete a tag
+ *
  * @package MantisBT
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
@@ -30,9 +32,6 @@
  * @uses tag_api.php
  */
 
-/**
- * MantisBT Core API's
- */ 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );

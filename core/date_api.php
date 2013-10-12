@@ -67,6 +67,7 @@ $g_cache_timezone = array();
 
 /**
  * set new timezone
+ * @param string $p_timezone PHP timezone to set
  * @return null
  * @access public
  */
@@ -102,7 +103,7 @@ function date_restore_timezone( ) {
 }
 
 /**
- *
+ * Print html option tags for month in a select list - in user's language
  * @param int $p_month
  * @return null
  * @access public
@@ -119,7 +120,7 @@ function print_month_option_list( $p_month = 0 ) {
 }
 
 /**
- *
+ * Print numeric month html option tags for select list
  *
  * @param int $p_month
  * @return null
@@ -136,7 +137,7 @@ function print_numeric_month_option_list( $p_month = 0 ) {
 }
 
 /**
- *
+ * Print html option tags for Day of month in a select list
  * @param int $p_day
  * @return null
  * @access public
@@ -152,7 +153,8 @@ function print_day_option_list( $p_day = 0 ) {
 }
 
 /**
- *
+ * Print html option tags for year since 1999 in a select list
+ * @todo deprecate this for year_range
  * @param int $p_year
  * @return null
  * @access public
@@ -170,10 +172,10 @@ function print_year_option_list( $p_year = 0 ) {
 }
 
 /**
- *
- * @param int $p_year
- * @param int $p_start
- * @param int $p_end
+ * Print html option tags for year in a select list
+ * @param int $p_year Current Year
+ * @param int $p_start First Year to display
+ * @param int $p_end Last Year to display
  * @return null
  * @access public
  */
@@ -209,7 +211,7 @@ function print_year_range_option_list( $p_year = 0, $p_start = 0, $p_end = 0 ) {
 }
 
 /**
- *
+ * Print <select> tag for selecting a date
  * @param string $p_name
  * @param string $p_format
  * @param int $p_date

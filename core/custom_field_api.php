@@ -52,15 +52,6 @@ require_api( 'project_api.php' );
 require_api( 'string_api.php' );
 require_api( 'utility_api.php' );
 
-# ## Custom Fields API ###
-# *******************************************
-#	TODO
-#	- add an object to store field data like BugData and UserPrefs ?
-#	- add caching functions like user, bug, etc
-#	- make existing api functions use caching functions
-#	- add functions to return individual db columns for a field definition
-# *******************************************
-
 $g_custom_field_types[CUSTOM_FIELD_TYPE_STRING] = 'standard';
 $g_custom_field_types[CUSTOM_FIELD_TYPE_TEXTAREA] = 'standard';
 $g_custom_field_types[CUSTOM_FIELD_TYPE_NUMERIC] = 'standard';
@@ -77,6 +68,12 @@ foreach( $g_custom_field_types as $type ) {
 }
 unset( $type );
 
+/**
+ * Return true whether to display custom field
+ * @param int $p_type custom field type
+ * @param string $p_display when to display
+ * @return bool
+ */
 function custom_field_allow_manage_display( $p_type, $p_display ) {
 	global $g_custom_field_type_definition;
 	if( isset( $g_custom_field_type_definition[$p_type]['#display_' . $p_display] ) ) {
@@ -432,7 +429,7 @@ function custom_field_create( $p_name ) {
  * Update the field definition
  * return true on success, false on failure
  * @param int $p_field_id custom field id
- * @param array custom field definition
+ * @param array $p_def_array custom field definition
  * @return bool
  * @access public
  */
@@ -903,8 +900,8 @@ function custom_field_get_value( $p_field_id, $p_bug_id ) {
 
 /**
  * Gets the custom fields array for the given bug readable by specified level.
- * array keys are custom field names. array is sorted by custom field sequence number;
- * array items are arrays with the next keys:
+ * Array keys are custom field names. Array is sorted by custom field sequence number;
+ * Array items are arrays with the next keys:
  * 'type', 'value', 'access_level_r'
  * @param int $p_bug_id bug id
  * @param int $p_user_access_level Access level
@@ -924,8 +921,8 @@ function custom_field_get_linked_fields( $p_bug_id, $p_user_access_level ) {
 }
 
 /**
- * Gets the custom fields array for the given bug. array keys are custom field names.
- * array is sorted by custom field sequence number; array items are arrays with the next keys:
+ * Gets the custom fields array for the given bug. Array keys are custom field names.
+ * Array is sorted by custom field sequence number; Array items are arrays with the next keys:
  * 'type', 'value', 'access_level_r'
  * @param int $p_bug_id bug id
  * @return  array
@@ -1248,8 +1245,8 @@ function custom_field_default_to_value( $p_value, $p_type ) {
  * return true on success, false on failure
  * @param int $p_field_id custom field id
  * @param int $p_bug_id bug id
- * @param mixed $p_value
- * @param boolean $p_log create history logs for new values
+ * @param mixed $p_value new custom field value
+ * @param boolean $p_log_insert create history logs for new values
  * @return bool
  * @access public
  */
@@ -1364,7 +1361,6 @@ function print_custom_field_input( $p_field_def, $p_bug_id = null ) {
 
 /**
  * Prepare a string containing a custom field value for display
- * @todo This probably belongs in the string_api.php
  * @param array  $p_def contains the definition of the custom field
  * @param int $p_field_id contains the id of the field
  * @param int $p_bug_id contains the bug id to display the custom field value for

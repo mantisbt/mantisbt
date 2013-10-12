@@ -15,6 +15,8 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * View Bug Revisions
+ *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
@@ -37,9 +39,6 @@
  * @uses user_api.php
  */
 
-/**
- * MantisBT Core API's
- */
 require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'bug_api.php' );
@@ -93,16 +92,22 @@ if ( $f_bug_id ) {
 	trigger_error( ERROR_GENERIC, ERROR );
 }
 
-function show_revision( $t_revision ) {
+/**
+ * Show Bug revision
+ *
+ * @param array $p_revision Bug Revision Data
+ * @return null
+ */
+function show_revision( $p_revision ) {
 	static $s_can_drop = null;
 	static $s_drop_token = null;
 	static $s_user_access = null;
 	if ( is_null( $s_can_drop ) ) {
-		$s_can_drop = access_has_bug_level( config_get( 'bug_revision_drop_threshold' ), $t_revision['bug_id'] );
+		$s_can_drop = access_has_bug_level( config_get( 'bug_revision_drop_threshold' ), $p_revision['bug_id'] );
 		$s_drop_token = form_security_param( 'bug_revision_drop' );
 	}
 
-	switch( $t_revision['type'] ) {
+	switch( $p_revision['type'] ) {
 		case REV_DESCRIPTION:
 			$t_label = lang_get( 'description' );
 			break;
@@ -127,23 +132,23 @@ function show_revision( $t_revision ) {
 			$t_label = '';
 	}
 
-	$t_by_string = sprintf( lang_get( 'revision_by' ), string_display_line( date( config_get( 'normal_date_format' ), $t_revision['timestamp'] ) ), string_display_line( user_get_name( $t_revision['user_id'] ) ) );
+	$t_by_string = sprintf( lang_get( 'revision_by' ), string_display_line( date( config_get( 'normal_date_format' ), $p_revision['timestamp'] ) ), string_display_line( user_get_name( $t_revision['user_id'] ) ) );
 
 ?>
-<tr class="spacer"><td><a id="revision-<?php echo $t_revision['id'] ?>"></a></td></tr>
+<tr class="spacer"><td><a id="revision-<?php echo $p_revision['id'] ?>"></a></td></tr>
 
 <tr>
 <th class="category"><?php echo lang_get( 'revision' ) ?></th>
 <td colspan="2"><?php echo $t_by_string ?></td>
 <td class="center" width="5%">
 <?php if ( $s_can_drop ) {
-	print_bracket_link( 'bug_revision_drop.php?id=' . $t_revision['id'] . $s_drop_token, lang_get( 'revision_drop' ) );
+	print_bracket_link( 'bug_revision_drop.php?id=' . $p_revision['id'] . $s_drop_token, lang_get( 'revision_drop' ) );
 } ?>
 </tr>
 
 <tr>
 <th class="category"><?php echo $t_label ?></th>
-<td colspan="3"><?php echo string_display_links( $t_revision['value'] ) ?></td>
+<td colspan="3"><?php echo string_display_links( $p_revision['value'] ) ?></td>
 </tr>
 
 	<?php

@@ -218,6 +218,7 @@ function email_notify_flag( $action, $flag ) {
 }
 
 /**
+ * Collect valid email recipients for email notification
  * @todo yarick123: email_collect_recipients(...) will be completely rewritten to provide additional information such as language, user access,..
  * @todo yarick123:sort recipients list by language to reduce switches between different languages
  * @param int $p_bug_id
@@ -811,7 +812,7 @@ function email_bug_deleted( $p_bug_id ) {
  * @param string $p_subject
  * @param string $p_message
  * @param array $p_headers
- * @return int e-mail queue id, or NULL if e-mail was not stored
+ * @return int
  */
 function email_store( $p_recipient, $p_subject, $p_message, $p_headers = null ) {
 	$t_recipient = trim( $p_recipient );

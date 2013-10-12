@@ -572,8 +572,8 @@ $g_cache_bug_text = array();
 
 /**
  * Cache a database result-set containing full contents of bug_table row.
- * @param array p_bug_database_result database row containing all columns from mantis_bug_table
- * @param array p_stats (optional) array representing bugnote stats
+ * @param array $p_bug_database_result database row containing all columns from mantis_bug_table
+ * @param array $p_stats (optional) array representing bugnote stats
  * @return array returns an array representing the bug row if bug exists
  * @access public
  */
@@ -628,7 +628,7 @@ function bug_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 
 /**
  * Cache a set of bugs
- * @param array p_bug_id_array integer array representing bug ids to cache
+ * @param array $p_bug_id_array integer array representing bug ids to cache
  * @return null
  * @access public
  * @uses database_api.php
@@ -662,8 +662,8 @@ function bug_cache_array_rows( $p_bug_id_array ) {
 
 /**
  * Inject a bug into the bug cache
- * @param array p_bug_row bug row to cache
- * @param array p_stats bugnote stats to cache
+ * @param array $p_bug_row bug row to cache
+ * @param array $p_stats bugnote stats to cache
  * @return null
  * @access private
  */
@@ -760,7 +760,7 @@ function bug_text_clear_cache( $p_bug_id = null ) {
 
 /**
  * Check if a bug exists
- * @param int p_bug_id integer representing bug id
+ * @param int $p_bug_id integer representing bug id
  * @return bool true if bug exists, false otherwise
  * @access public
  */
@@ -774,7 +774,7 @@ function bug_exists( $p_bug_id ) {
 
 /**
  * Check if a bug exists. If it doesn't then trigger an error
- * @param int p_bug_id integer representing bug id
+ * @param int $p_bug_id integer representing bug id
  * @return null
  * @access public
  */
@@ -787,8 +787,8 @@ function bug_ensure_exists( $p_bug_id ) {
 
 /**
  * check if the given user is the reporter of the bug
- * @param int p_bug_id integer representing bug id
- * @param int p_user_id integer reprenting a user id
+ * @param int $p_bug_id integer representing bug id
+ * @param int $p_user_id integer reprenting a user id
  * @return bool return true if the user is the reporter, false otherwise
  * @access public
  */
@@ -802,8 +802,8 @@ function bug_is_user_reporter( $p_bug_id, $p_user_id ) {
 
 /**
  * check if the given user is the handler of the bug
- * @param int p_bug_id integer representing bug id
- * @param int p_user_id integer reprenting a user id
+ * @param int $p_bug_id integer representing bug id
+ * @param int $p_user_id integer reprenting a user id
  * @return bool return true if the user is the handler, false otherwise
  * @access public
  */
@@ -819,7 +819,7 @@ function bug_is_user_handler( $p_bug_id, $p_user_id ) {
  * Check if the bug is readonly and shouldn't be modified
  * For a bug to be readonly the status has to be >= bug_readonly_status_threshold and
  * current user access level < update_readonly_bug_threshold.
- * @param int p_bug_id integer representing bug id
+ * @param int $p_bug_id integer representing bug id
  * @return bool
  * @access public
  * @uses access_api.php
@@ -1549,7 +1549,10 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 
 /**
  * assign the bug to the given user
- * @param array p_bug_id_array integer array representing bug ids to cache
+ * @param int $p_bug Bug Object
+ * @param int $p_user_id User id
+ * @param string $p_bugnote_text bugnote text
+ * @param bool $p_bugnote_private indicate whether bugnote is private
  * @return null
  * @access public
  * @uses database_api.php
@@ -1603,10 +1606,10 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 
 /**
  * close the given bug
- * @param int p_bug_id
- * @param string p_bugnote_text
- * @param bool p_bugnote_private
- * @param string p_time_tracking
+ * @param int $p_bug Bug Object
+ * @param string $p_bugnote_text bugnote text
+ * @param bool $p_bugnote_private bugnote private
+ * @param string $p_time_tracking time tracking
  * @return bool (always true)
  * @access public
  */
@@ -1628,7 +1631,14 @@ function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false,
 
 /**
  * resolve the given bug
- * @return bool (alawys true)
+ * @param int $p_bug Bug Object
+ * @param int $p_resolution resolution
+ * @param string $p_fixed_in_version fixed in version
+ * @param string $p_bugnote_text bugnote text
+ * @param int $p_duplicate_id duplicate id
+ * @param int $p_handler_id handler id
+ * @param bool $p_bugnote_private private bugnote
+ * @param string $p_time_tracking time tracking
  * @access public
  */
 function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bugnote_text = '', $p_duplicate_id = null, $p_handler_id = null, $p_bugnote_private = false, $p_time_tracking = '0:00' ) {
@@ -1740,7 +1750,7 @@ function bug_reopen( $p_bug_id, $p_bugnote_text = '', $p_time_tracking = '0:00',
 
 /**
  * updates the last_updated field
- * @param int p_bug_id integer representing bug ids
+ * @param int $p_bug_id integer representing bug ids
  * @return bool (always true)
  * @access public
  * @uses database_api.php
@@ -1762,9 +1772,9 @@ function bug_update_date( $p_bug_id ) {
 
 /**
  * enable monitoring of this bug for the user
- * @param int p_bug_id integer representing bug ids
- * @param int p_user_id integer representing user ids
- * @return true if successful, false if unsuccessful
+ * @param int $p_bug_id integer representing bug ids
+ * @param int $p_user_id integer representing user ids
+ * @return bool true if successful, false if unsuccessful
  * @access public
  * @uses database_api.php
  * @uses history_api.php
@@ -1805,6 +1815,7 @@ function bug_monitor( $p_bug_id, $p_user_id ) {
  * Returns the list of users monitoring the specified bug
  *
  * @param int $p_bug_id
+ * @return array
  */
 function bug_get_monitors( $p_bug_id ) {
 
@@ -1837,8 +1848,8 @@ function bug_get_monitors( $p_bug_id ) {
 
 /**
  * Copy list of users monitoring a bug to the monitor list of a second bug
- * @param int p_source_bug_id integer representing the bug ID of the source bug
- * @param int p_dest_bug_id integer representing the bug ID of the destination bug
+ * @param int $p_source_bug_id integer representing the bug ID of the source bug
+ * @param int $p_dest_bug_id integer representing the bug ID of the destination bug
  * @return bool (always true)
  * @access public
  * @uses database_api.php
@@ -1872,8 +1883,8 @@ function bug_monitor_copy( $p_source_bug_id, $p_dest_bug_id ) {
 /**
  * disable monitoring of this bug for the user
  * if $p_user_id = null, then bug is unmonitored for all users.
- * @param int p_bug_id integer representing bug ids
- * @param int p_user_id integer representing user ids
+ * @param int $p_bug_id integer representing bug ids
+ * @param int $p_user_id integer representing user ids
  * @return bool (always true)
  * @access public
  * @uses database_api.php
@@ -1907,7 +1918,7 @@ function bug_unmonitor( $p_bug_id, $p_user_id ) {
 
 /**
  * Pads the bug id with the appropriate number of zeros.
- * @param int p_bug_id
+ * @param int $p_bug_id
  * @return string
  * @access public
  * @uses config_api.php

@@ -592,7 +592,6 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 /**
  * delete all history associated with a bug
  * @param int $p_bug_id
- * @return true
  */
 function history_delete( $p_bug_id ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );

@@ -213,10 +213,8 @@ function string_email_links( $p_string ) {
 	return event_signal( 'EVENT_DISPLAY_EMAIL', $p_string );
 }
 
-# --------------------
-# Process a string for display in a textarea box
 /**
- * @todo function documentation
+ * Process a string for display in a textarea box
  * @param string
  * @return string
  */

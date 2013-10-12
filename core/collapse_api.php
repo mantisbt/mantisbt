@@ -62,8 +62,8 @@ $g_collapse_cache_token = null;
  * Marks the beginning of a collapse block's open phase.
  * This will be visible if the block is expanded, or if
  * javascript is disabled.
- * @param string Collapse block name
- * @param string Collapse block section
+ * @param string $p_name Collapse block name
+ * @param string $p_section Collapse block section
  */
 function collapse_open( $p_name, $p_section = '' ) {
 	global $g_current_collapse_section, $g_open_collapse_section;
@@ -87,8 +87,8 @@ function collapse_open( $p_name, $p_section = '' ) {
  * Marks the end of a collapse block's open phase and the beginning
  * of the block's closed phase.  Thi will only be visible if the
  * block have been collapsed and javascript is enabled.
- * @param string Collapse block name
- * @param string Collapse block section
+ * @param string $p_name Collapse block name
+ * @param string $p_section Collapse block section
  */
 function collapse_closed( $p_name, $p_section = '' ) {
 	global $g_current_collapse_section, $g_open_collapse_section;
@@ -115,8 +115,8 @@ function collapse_closed( $p_name, $p_section = '' ) {
  * Marks the location where a +/- icon is placed in output
  * for the user to toggle the collapse block status.
  * This should appear in both the open and closed phase of a block.
- * @param string Collapse block name
- * @param string Collapse block section
+ * @param string $p_name Collapse block name
+ * @param string $p_section Collapse block section
  */
 function collapse_icon( $p_name, $p_section = '' ) {
 	if( OFF == config_get( 'use_javascript' ) ) {
@@ -141,10 +141,10 @@ function collapse_icon( $p_name, $p_section = '' ) {
 }
 
 /**
- * Marks the end of a collaps block's closed phase.
+ * Marks the end of a collapse block's closed phase.
  * Closed phase output is discarded if javascript is disabled.
- * @param string Collapse block name
- * @param string Collapse block section
+ * @param string $p_name Collapse block name
+ * @param string $p_section Collapse block section
  */
 function collapse_end( $p_name, $p_section = '' ) {
 	global $g_current_collapse_section, $g_open_collapse_section;
@@ -173,7 +173,7 @@ function collapse_end( $p_name, $p_section = '' ) {
 
 /**
  * Determine if a block should be displayed open by default.
- * @param string Collapse block
+ * @param string $p_block Collapse block
  * @return bool
  */
 function collapse_display( $p_block ) {

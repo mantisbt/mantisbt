@@ -360,6 +360,10 @@ function category_exists( $p_category_id ) {
 
 $g_cache_category_project = null;
 
+/**
+ * Cache categories from multiple projects
+ * @param array array of project ids
+ */
 function category_cache_array_rows_by_project( $p_project_id_array ) {
 	global $g_category_cache, $g_cache_category_project;
 
