@@ -12,7 +12,7 @@
  * @param string $p_username  The name of the user trying to access the filters.
  * @param string $p_password  The password of the user.
  * @param integer $p_project_id  The id of the project to retrieve filters for.
- * @return Array that represents a FilterDataArray structure
+ * @return array that represents a FilterDataArray structure
  */
 function mc_filter_get( $p_username, $p_password, $p_project_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
@@ -45,7 +45,7 @@ function mc_filter_get( $p_username, $p_password, $p_project_id ) {
  * @param integer $p_filter_id  The id of the filter to apply.
  * @param integer $p_page_number  Start with the given page number (zero-based)
  * @param integer $p_per_page  Number of issues to display per page
- * @return Array that represents an IssueDataArray structure
+ * @return array that represents an IssueDataArray structure
  */
 function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filter_id, $p_page_number, $p_per_page ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
@@ -91,7 +91,7 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
  * @param integer $p_filter_id  The id of the filter to apply.
  * @param integer $p_page_number  Start with the given page number (zero-based)
  * @param integer $p_per_page  Number of issues to display per page
- * @return Array that represents an IssueDataArray structure
+ * @return array that represents an IssueDataArray structure
  */
 function mc_filter_get_issue_headers( $p_username, $p_password, $p_project_id, $p_filter_id, $p_page_number, $p_per_page ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );

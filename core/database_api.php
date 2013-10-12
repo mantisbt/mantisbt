@@ -289,7 +289,7 @@ function db_query( $p_query, $p_limit = -1, $p_offset = -1 ) {
  * @global adodb database connection object
  * @global boolean indicating whether queries array is populated
  * @param string $p_query Parameterlised Query string to execute
- * @param array $arr_parms Array of parameters matching $p_query
+ * @param array $arr_parms array of parameters matching $p_query
  * @param int $p_limit Number of results to return
  * @param int $p_offset offset query results for paging
  * @return ADORecordSet|bool adodb result set or false if the query failed.
@@ -878,10 +878,24 @@ function db_time_queries() {
 
 /**
  * get database table name
- * @return string containing full database table name
+ *
+ * @param string $p_name can either be specified as 'XXX' (e.g. 'bug'), or
+ *                       using the legacy style 'mantis_XXX_table'; in the
+ *                       latter case, a deprecation warning will be issued
+ * @return string containing full database table name (with prefix and suffix)
  */
-function db_get_table( $p_option ) {
-	$t_table = $p_option;
+function db_get_table( $p_name ) {
+	if( strpos( $p_name, 'mantis_') === 0 ) {
+		$t_table = substr( $p_name, 7, strpos( $p_name, '_table' ) - 7 );
+		error_parameters(
+			"db_get_table( '$p_name' )",
+			"db_get_table( '$t_table' )"
+		);
+		trigger_error(ERROR_DEPRECATED_SUPERSEDED, WARNING );
+	} else {
+		$t_table = $p_name;
+	}
+
 	$t_prefix = config_get_global( 'db_table_prefix' );
 	$t_suffix = config_get_global( 'db_table_suffix' );
 	if ( $t_prefix ) {

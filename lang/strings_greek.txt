@@ -1,40 +1,42 @@
 <?php
-/** MantisBT - a php based bugtracking system
+# MantisBT - A PHP based bugtracking system
+
+# MantisBT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# MantisBT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Language File - Greek (Ελληνικά)
  *
- * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * **********************************************************************
+ * ** This file is generated from translations stored in translatewiki **
+ * ** Information on Copyright/License for translatewiki translations  **
+ * ** is available at http://translatewiki.net/wiki/Project:About      **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
  *
- * MantisBT is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * MantisBT is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
- */
-/** Greek (Ελληνικά)
- * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- *
- * @author AK
- * @author Consta
- * @author Crazymadlover
- * @author Evropi
- * @author Geraki
- * @author Kongr43gpen
- * @author Kostas Vorilas, math1890@yahoo.gr
- * @author Omnipaedista
- * @author ZaDiak
- */
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+*/
 
 $s_actiongroup_menu_move = 'Μετακίνηση';
 $s_actiongroup_menu_copy = 'Αντιγραφή';
@@ -44,7 +46,6 @@ $s_actiongroup_menu_delete = 'Διαγραφή';
 $s_actiongroup_menu_resolve = 'Επίλυση';
 $s_actiongroup_menu_update_priority = 'Αλλαγή Προτεραιότητας';
 $s_actiongroup_menu_update_status = 'Αλλαγή Κατάστασης';
-$s_actiongroup_menu_update_severity = 'Αλλαγή Σοβαρότητας';
 $s_actiongroup_menu_update_view_status = 'Αλλαγή Προβολής Κατάστασης';
 $s_actiongroup_menu_update_category = 'Αλλαγή Κατηγορίας';
 $s_actiongroup_menu_set_sticky = 'Εν/Απενεργοποιήσε σε Προσκήνιο';
@@ -58,7 +59,6 @@ $s_operation_successful = 'Διαδικασία Επιτυχής.';
 $s_date_order = 'Χρονολογική Σειρά';
 $s_print_all_bug_page_link = 'Εκτύπωση Αναφορών';
 $s_csv_export = 'Εξαγωγή CSV';
-$s_excel_export = 'Εξαγωγή Αρχείου Excel';
 $s_login_anonymously = 'Ανώνυμη Είσοδος';
 $s_anonymous = 'Ανώνυμος';
 $s_jump_to_bugnotes = 'Σημειώσεις';
@@ -67,7 +67,6 @@ $s_private_project_msg = 'Η εφαρμογή είναι ΙΔΙΩΤΙΚΗ. Μο�
 $s_access_level_project = 'Επίπεδο στην Εφαρμογή';
 $s_view_submitted_bug_link = 'Προβολή Απεσταλμένου Θέματος %1$s';
 $s_assigned_projects = 'Ανατεθέντες Εφαρμογές';
-$s_unassigned_projects = 'Μη Ανατεθέντες Εφαρμογές';
 $s_print = 'Εκτύπωση';
 $s_jump = 'Μετάβαση';
 $s_copy_users = 'Αντιγραφή Χρηστών';
@@ -90,6 +89,7 @@ $s_stays_on_top = 'Παραμονή στο Προσκήνιο';
 $s_delete_bugnote_button = 'Διαγραφή Σημείωσης';
 $s_delete_bugnote_sure_msg = 'Είστε σίγουρος πως θέλετε να διαγράψετε το θέμα;';
 $s_bug_relationships = 'Σχέσεις';
+$s_bug_relationships_label = 'Σχέσεις:';
 $s_empty_password_sure_msg = 'Ο χρήστης έχει κενό κωδικό. Είστε σίγουρος;';
 $s_empty_password_button = 'Χρήση Κενού Κωδικού';
 $s_reauthenticate_title = 'Επικυρώστε';
@@ -113,7 +113,7 @@ $s_bug_deleted = 'Θέμα Διαγράφηκε';
 $s_make_private = 'Όρισε Ιδιωτικό';
 $s_make_public = 'Όρισε Δημόσιο';
 $s_create_new_project_link = 'Δημιουργία Νέας Εφαρμογής';
-$s_login_link = 'Είσοδος';
+$s_login_link = 'Σύνδεση';
 $s_select_option = '(επιλέξτε)';
 $s_category_group_bugs_button = 'Ενημέρωση Κατηγορίας';
 $s_hide_button = 'Προβολή επιλεγμένων μόνο';
@@ -122,34 +122,6 @@ $s_printing_options_link = 'Επιλογές Εκτύπωσης';
 $s_bugnote_date = 'Ημερομηνία σημείωσης';
 $s_bugnote_description = 'Περιγραφή σημείωσης';
 $s_error_no_proceed = 'Παρακαλώ πιέστε το "Back" στον φυλλομετρήτη σας για να επιστρέψετε στην προηγούμενη σελίδα. Εκεί μπορείτε να διορθώσετε τα λάθη που σας υποδεικνύει το μήνυμα λάθους ή να επίλεξετε άλλη σελίδα. Επίσης, μπορείτε να επιλέξετε άλλη σελίδα απευθείας απο τη μενού-μπάρα.';
-$MANTIS_ERROR[ERROR_SQL] = 'Εντοπίστηκε σφάλμα SQL.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'A necessary field \'%1$s\' was empty.  Please recheck your inputs.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Το όνομα χρήστη είναι ήδη δεσμευμένο. Παρακαλώ επιστρέψτε στην προηγούμενη σελίδα και επιλέξτε κάποιο άλλο.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option \'%1$s\' not found.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%1$s\' can not be set in the database.  It must be set in config_inc.php.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String \'%1$s\' not found.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Το εγχείρημα "%1$d" δεν βρέθηκε.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database field \'%1$s\' not found.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Το φίλτρο %1$s δεν βρέθηκε.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Το φίλτρο που προσπαθείτε να χρησιμοποιήσετε είναι πολύ παλιό για να αναβαθμιστεί. Παρακαλώ δημιουργήστε το ξανά.';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Invalid email.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Το προφίλ δε βρέθηκε.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Προσαρμοσμένο πεδίο δεν βρέθηκε.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Αυτό είναι ένα διπλότυπο όνομα.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Άκυρη τιμή για το πεδίο "%1$s".';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Σύνδεση στη βάση δεδομένων απέτυχε. Το μήνυμα σφάλματος που έχει σταλθεί από τη βάση είναι #%1$d: %2$s.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Ερώτημα στη βάση δεδομένων απέτυχε. Το μήνυμα σφάλματος που έχει σταλθεί από τη βάση είναι #%1$d: %2$s για το ερώτημα: %3$s.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Επιλογή βάσης δεδομένων απέτυχε. Το μήνυμα σφάλματος έχει που σταλθεί από τη βάση είναι #%1$d: %2$s.';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Μια κατηγορία με αυτό το όνομα υπάρχει ήδη.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Δε βρέθηκε κατηγορία.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version \'%1$s\' not found.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Το όνομα χρήστη δεν είναι δεκτό. Τα ονόματα μπορούν να περιέχουν μόνο λατινικούς χαρακτήρες, αριθμούς, κενά, παύλες και underscores(-).';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%1$s\' has invalid value \'%2$s\'';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%1$d\' is read-only';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'An issue can\'t be related to itself.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Τα δεδομένα δεν ταιριάζουν με κανένα λογαριασμό';
 $s_login_error = 'Ο λογαριασμός είναι απενεργοποιήμενος ή το όνομα/κωδικός χρήστη είναι λάθος.';
 $s_login_cookies_disabled = 'Ο browser δεν μπορεί να διαχειριστεί τα cookies ή δεν γνωρίζει πως να τα χειριστεί.';
 $s_go_back = 'Πίσω';
@@ -254,7 +226,6 @@ $s_realname_duplicated = 'Το πραγματικό όνομα το έχει ή�
 $s_realname_updated = 'Η αλλαγή του ονόματος ήταν επιτυχής';
 $s_password_updated = 'Ο κωδικός άλλαξε με επιτυχία';
 $s_multiple_projects = 'Τα θέματα που έχετε επιλέξει είναι από διαφορετικές εφαρμογές. Οι κάτωθι παράμετροι αντιστοιχούν στις ρυθμίσεις όλων των εφρμογών. Αν αυτο δεν είναι σώστο, παρακαλώ δοκιμάστε να κάνετε αλλαγές σε λιγότερα θέματα.';
-$s_bug_assign_msg = 'Το θέμα ορίστηκε επιτυχώς...';
 $s_new_bug_title = 'Νέο Θέμα';
 $s_feedback_bug_title = 'Αναζήτηση Ενημέρωσης';
 $s_acknowledged_bug_title = 'Αναγνώριση Θέματος';
@@ -320,7 +291,7 @@ $s_fixed_in_version = 'Έκδοση Διόρθωσης';
 $s_target_version = 'Εκδοχή Στόχου';
 $s_votes = 'Ψήφοι';
 $s_summary = 'Περίληψη (μέχρι 64 χαρακτήρες)';
-$s_description = 'Περιγραφή';
+$s_description = 'Αναλυτική Περιγραφή';
 $s_steps_to_reproduce = 'Βήματα για Αναπαραγωγή';
 $s_update_information_button = 'Ενήμερωση Πληροφοριών';
 $s_sticky_issue = 'Θέμα Στο Προσκήνιο';
@@ -340,9 +311,8 @@ $s_add_bugnote_button = 'Προσθήκη';
 $s_bugnote_edit_link = 'Επεξεργασία';
 $s_closed_bug_button = 'Κλείσιμο Θέματος';
 $s_bugnote_updated_msg = 'Η σημείωση ενημερώθηκε με επιτυχία...';
-$s_edited_on = 'ενημερώθηκε :';
 $s_show_content = 'Εμφάνιση Περιεχομένων';
-$s_click_to_login = 'Είσοδος';
+$s_click_to_login = 'Σύνδεση';
 $s_login_title = 'Είσοδος';
 $s_save_login = 'Αποθήκευση στοιχείων';
 $s_choose_project = 'Εφαρμογή';
@@ -357,8 +327,6 @@ $s_lost_password_info = 'Για να επαναφέρετε χαμένο κωδ�
 που περιέχει ένα κωδικό επιβεβαίωσης για τον λογαριασμό σας. Παρακαλώ ακολουθήστε τον σύνδεσμο για να
 αλλάξετε τον κωδικό σας.';
 $s_lost_password_confirm_hash_OK = 'Η επιβεβαίωση έγινε δεκτή.Παρακαλώ ανανεώστε τον κωδικό σας.';
-$s_open_and_assigned_to_me = 'Εκκρεμή και ανατεθέντα';
-$s_open_and_reported_to_me = 'Εκκρεμή και αναφερθέντα';
 $s_newer_news_link = 'Πρόσφατα Νέα';
 $s_older_news_link = 'Παλαιά Νέα';
 $s_archives = 'Αρχεία';
@@ -418,14 +386,10 @@ $s_access_change = 'Ελάχιστο Επίπεδο Πρόσβασης για τ
 $s_desc_bug_submit_status = 'Κατάσταση στην οποία ένα νέο θέμα μπορεί να οριστεί';
 $s_desc_bug_reopen_status = 'Κατάσταση στην οποία επανεξεταζόμενα θέματα ορίζονται';
 $s_desc_bug_resolved_status_threshold = 'Κατάσταση στην οποία ένα θέμα θεωρείται επιλυμένο';
-$s_workflow_change_access = 'Ποιος μπορεί να αλλάξει το διάγραμμα ροής';
-$s_access_change_access = 'Ποιος μπορεί να αλλάξει το επίπεδο πρόσβασης';
 $s_assign_issue = 'Ορίσμος θέματος';
-$s_allow_close_immediate = 'Επιτρέπεται το θέμα να κλείνει στην Επίλυση';
 $s_allow_reporter_close = 'Επιτρέπεται ο Reporter να κλείνει το Θέμα';
 $s_allow_reporter_reopen = 'Επιτρέπεται ο Reporter να επανεξετάζει το Θέμα';
 $s_set_status_assigned = 'Όρισε κατάσταση στον καθορισμό Υπευθύνου';
-$s_allow_user_edit = 'Επιτρέπεται ο χρήστης να γράφει τις δικές του σημειώσεις λαθών';
 $s_limit_access = 'Περιορισμός των reporter στα θέματα τους';
 $s_submit_status = 'Κατάσταση στην οποία νέο θέμα ορίζεται';
 $s_assigned_status = 'Κατάσταση στην οποία τίθονται τα αυτομάτως θέματα';
@@ -451,7 +415,6 @@ $s_plugin_actions = 'Δράσεις';
 $s_plugin_install = 'Εγκατάσταση';
 $s_plugin_upgrade = 'Αναβάθμιση';
 $s_plugin_uninstall = 'Απεγκατάσταση';
-$s_plugin_key = 'Κλειδί';
 $s_project_added_msg = 'Η εφαρμογή προστέθηκε επιτυχώς...';
 $s_category_added_msg = 'Η κατηγορία προστέθηκε επιτυχώς...';
 $s_category_deleted_msg = 'Η κατηγορία διαγράφηκε επιτυχώς...';
@@ -504,7 +467,7 @@ $s_account_deleted_msg = 'Ο λογαριασμός διαγράφηκε...';
 $s_delete_account_sure_msg = 'Είστε σίγουρος πως θέλετε να διαγράψετε το λογαριασμό;';
 $s_prune_accounts_button = 'Μόνιμη διαγραφή';
 $s_edit_user_title = 'Ενημέρωση Χρήστη';
-$s_reset_password_button = 'Επαναφορά Κωδικού';
+$s_reset_password_button = 'Μηδενισμός Κωδικού';
 $s_delete_user_button = 'Διαγραφή Χρήστη';
 $s_reset_password_msg = 'Ο Μηδενισμός Κωδικού στέλνει email επιβεβαίωσης.';
 $s_reset_password_msg2 = 'Ο Μηδενισμός Κωδικού δημιουργεί κενό κωδικό.';
@@ -554,6 +517,7 @@ $s_user_documentation = 'Εγχειρίδιο Χρήστη';
 $s_project_documentation = 'Τεκμηρίωση Εφαρμογής';
 $s_add_file = 'Προσθήκη Αρχείου';
 $s_remove_user_sure_msg = 'Είστε σίγουρος πως επιθυμείτε να αφαιρέσετε τον χρήστη;';
+$s_remove_user_button = 'Αφαίρεση Χρήστη';
 $s_remove_all_users_sure_msg = 'Είστε σίγουρος πως θέλετε να αφαιρέθούν όλοι οι χρήστες;';
 $s_remove_all_users_button = 'Αφαίρεση Όλων των Χρηστών';
 $s_add_user_title = 'Προσθήκη Χρήστη στην Εφαρμογή';
@@ -632,7 +596,6 @@ $s_changed = 'Μεταβολή(ώρες)';
 $s_viewing_bugs_title = 'Προβολή Θεμάτων';
 $s_updated = 'Ενημέρωση';
 $s_sticky = 'Προβολή Σημειωμένων Θεμάτων';
-$s_sort = 'Ιεράρχηση';
 $s_recently_visited = 'Πρόσφατες επισκέψεις';
 $s_none = 'Κανένα';
 $s_current = 'Παρόν';
@@ -643,8 +606,6 @@ $s_prev = 'Προηγ';
 $s_next = 'Επομ';
 $s_first = 'Πρώτο';
 $s_last = 'Τελευταίο';
-$s_start_date = 'Από';
-$s_end_date = 'Εώς';
 $s_use_date_filters = 'Φίλτρα Ημερομηνίας';
 $s_yes = 'Ναι';
 $s_no = 'Όχι';
@@ -747,8 +708,6 @@ $s_update_view_status = 'Αλλαγή κατάστασης θέματος (δη�
 $s_show_list_of_users_monitoring_issue = 'Προβολή λίστας χρήστων που παρακολουθούν το θέμα';
 $s_notes = 'ΣΗΜΕΙΩΣΕΙΣ';
 $s_add_notes = 'Προσθήκη σημειώσεων';
-$s_update_notes = 'Ενημέρωση σημειώσεων';
-$s_delete_note = 'Διαγραφή σημείωσης';
 $s_view_private_notes = 'Προβολή ιδιωτικών σημειώσεων';
 $s_news = 'ΝΕΑ';
 $s_view_private_news = 'Προβολή ιδιωτικών νέων';
@@ -788,22 +747,29 @@ $s_before_date = 'Πριν';
 $s_after_date = 'Μετά';
 $s_from_date = 'Από';
 $s_to_date = 'Προς';
-$s_wiki = 'Wiki';
 $s_tags = 'Ετικέτες';
 $s_tag_name = 'Όνομα';
 $s_tag_creator = 'Δημιουργός';
 $s_tag_attach = 'Επισύναψη';
 $s_show_all_tags = 'Όλα';
 $s_view_account_title = 'Πληροφορίες Χρήστη';
-$s_month_january = 'Ιανουάριος';
-$s_month_february = 'Φεβρουάριος';
-$s_month_march = 'Μάρτιος';
-$s_month_april = 'Απρίλιος';
-$s_month_may = 'Μάιος';
-$s_month_june = 'Ιούνιος';
-$s_month_july = 'Ιούλιος';
-$s_month_august = 'Αύγουστος';
-$s_month_september = 'Σεπτέμβριος';
-$s_month_october = 'Οκτώβριος';
-$s_month_november = 'Νοέμβριος';
-$s_month_december = 'Δεκέμβριος';
+
+
+$MANTIS_ERROR[ERROR_SQL] = 'Εντοπίστηκε σφάλμα SQL.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'A necessary field \'%1$s\' was empty.  Please recheck your inputs.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Το όνομα χρήστη είναι ήδη δεσμευμένο. Παρακαλώ επιστρέψτε στην προηγούμενη σελίδα και επιλέξτε κάποιο άλλο.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option \'%1$s\' not found.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%1$s\' can not be set in the database.  It must be set in config_inc.php.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String \'%1$s\' not found.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Το εγχείρημα "%1$d" δεν βρέθηκε.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database field \'%1$s\' not found.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Invalid email.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Άκυρη τιμή για το πεδίο "%1$s".';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version \'%1$s\' not found.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Το όνομα χρήστη δεν είναι δεκτό. Τα ονόματα μπορούν να περιέχουν μόνο λατινικούς χαρακτήρες, αριθμούς, κενά, παύλες και underscores(-).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option \'%1$s\' has invalid value \'%2$s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue \'%1$d\' is read-only';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'An issue can\'t be related to itself.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Τα δεδομένα δεν ταιριάζουν με κανένα λογαριασμό';

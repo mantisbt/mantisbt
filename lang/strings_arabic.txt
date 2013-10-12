@@ -1,42 +1,48 @@
 <?php
-/** MantisBT - a php based bugtracking system
+# MantisBT - A PHP based bugtracking system
+
+# MantisBT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# MantisBT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Language File - Arabic (العربية)
  *
- * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * **********************************************************************
+ * ** This file is generated from translations stored in translatewiki **
+ * ** Information on Copyright/License for translatewiki translations  **
+ * ** is available at http://translatewiki.net/wiki/Project:About      **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
  *
- * MantisBT is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * MantisBT is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
- */
-/** Arabic (العربية)
- * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- *
- * @author DRIHEM
- * @author Meno25
- * @author OsamaK
- * @author Tarawneh
- * @author زكريا
- */
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+*/
 
 $s_directionality = 'rtl';
-$s_actiongroup_menu_move = 'انقل';
+$s_actiongroup_menu_move = 'نقل';
 $s_actiongroup_menu_copy = 'نسخ';
 $s_actiongroup_menu_assign = 'توكيل';
-$s_actiongroup_menu_close = 'أغلق';
+$s_actiongroup_menu_close = 'إغلاق';
 $s_actiongroup_menu_delete = 'حذف';
 $s_actiongroup_menu_resolve = 'حل';
 $s_actiongroup_menu_update_priority = 'تحديث الأولوية';
@@ -68,7 +74,6 @@ $s_private_project_msg = 'هذا المشروع خاص. فقط الإداريو�
 $s_access_level_project = 'مستوى الوصول للمشروع';
 $s_view_submitted_bug_link = 'عرض القضية المرسلة %1$s';
 $s_assigned_projects = 'المشاريع الموكولة';
-$s_unassigned_projects = 'المشاريع غير الموكولة';
 $s_print = 'اطبع';
 $s_jump = 'اقفز';
 $s_copy_users = 'نسخ المستخدمين';
@@ -84,7 +89,7 @@ $s_old_value = 'قيمة قديمة';
 $s_new_value = 'قيمة جديدة';
 $s_date_modified = 'تاريخ التعديل';
 $s_bugnote = 'ملاحظة';
-$s_change = 'تغيير';
+$s_change = 'غيّر';
 $s_bugnote_view_state = 'ملاحظة حالة العرض';
 $s_bug_monitor = 'القضية المراقبة';
 $s_bug_end_monitor = 'مراقبة نهاية القضية';
@@ -94,6 +99,7 @@ $s_bugnote_link_title = 'وصلة مباشرة إلى الملاحظة';
 $s_delete_bugnote_button = 'حذف الملاحظة';
 $s_delete_bugnote_sure_msg = 'هل أنت متأكد أنك تريد حذف هذه الملاحظة؟';
 $s_bug_relationships = 'علاقات';
+$s_bug_relationships_label = 'العلاقات:';
 $s_empty_password_sure_msg = 'المستخدم لديه كلمة سر فارغة. هل أنت متأكد من أن هذا هو ما تريده؟';
 $s_empty_password_button = 'استخدام كلمة سر فارغة';
 $s_reauthenticate_title = 'تحقق';
@@ -128,8 +134,6 @@ $s_select_option = '(اختر)';
 $s_bug_actiongroup_access = 'أنت لا تمتلك السماحات المناسبة للقيام بهذا الفعل.';
 $s_bug_actiongroup_status = 'هذه القضية لا يمكن تغييرها إلى الحالة المطلوبة';
 $s_bug_actiongroup_category = 'هذه القضية لا يمكن تغييرها إلى التصنيف المطلوب';
-$s_bug_actiongroup_handler = 'لا يسمح لهذا المستخدم بمعالجة هذه المشكلة';
-$s_bug_actiongroup_version = 'الإصدار المطلوب لا وجود له في مشروع هذه المشكلة';
 $s_close_bugs_conf_msg = 'هل أنت متأكد من أنك تريد إغلاق هذه القضايا؟';
 $s_delete_bugs_conf_msg = 'هل أنت متأكد من أنك تريد حذف هذه القضايا؟';
 $s_move_bugs_conf_msg = 'نقل القضايا إلى';
@@ -157,8 +161,6 @@ $s_set_sticky_group_bugs_button = 'ضبط/عدم ضبط كملصوقة';
 $s_fixed_in_version_group_bugs_button = 'تحديث أصلحت في النسخة';
 $s_target_version_group_bugs_button = 'تحديث النسخة الهدف';
 $s_update_severity_title = 'تحديث الشدة';
-$s_update_severity_msg = 'حدد أولوية المشكلة';
-$s_update_severity_button = 'حدث الشدة';
 $s_hide_button = 'عرض المختار فقط';
 $s_printing_preferences_title = 'اختر الحقول للطبع';
 $s_printing_options_link = 'خيارات الطبع';
@@ -166,6 +168,941 @@ $s_bugnote_title = 'معالج الملاحظات';
 $s_bugnote_date = 'تاريخ الملاحظة';
 $s_bugnote_description = 'وصف الملاحظة';
 $s_error_no_proceed = 'من فضلك استخدم زر "رجوع" في متصفحك للعودة إلى الصفحة السابقة.  هناك يمكنك تصحيح أي مشاكل تم تعرفها في هذا الخطأ أو اختيار فعل آخر.  يمكنك أيضا الضغط على خيار من شريط القائمة للذهاب مباشرة إلى قسم جديد.';
+$s_login_error = 'حسابك ربما يكون معطلا أو ممنوعا أو أن اسم المستخدم/كلمة السر التي أدخلتها غير صحيحة.';
+$s_login_cookies_disabled = 'متصفحك إما أنه لا يعرف كيف يتعامل مع الكوكيز، أو يرفض التعامل معها.';
+$s_go_back = 'رجوع';
+$s_proceed = 'تابع';
+$s_switch = 'حول';
+$s_logged_in_as = 'تسجيل الدخول ك';
+$s_prefix_for_deleted_users = 'مستخدم';
+$s_administrator = 'إداري';
+$s_myself = 'أنا';
+$s_default_access_level = 'مستوى الدخول الافتراضي';
+$s_issue_status_percentage = 'النسبة المئوية لحالة القضية';
+$s_access_levels_enum_string = '10:مشاهد,25:مبلغ,40:محدث,55:مطور,70:مدير,90:إداري';
+$s_project_status_enum_string = '10:تطوير,30:إصدار,50:مستقر,70:قديم';
+$s_project_view_state_enum_string = '10:علني,50:خاص';
+$s_view_state_enum_string = '10:علني,50:خاص';
+$s_priority_enum_string = '10:لا شيء,20:منخفض,30:عادي,40:مرتفع,50:عاجل,60:فوري';
+$s_severity_enum_string = '10:خاصية,20:تافه,30:نص,40:تعديل,50:طفيف,60:كبير,70:تتسبب في الانهيار,80:تمنع التطوير';
+$s_reproducibility_enum_string = '10:دائما,30:أحيانا,50:عشوائيا,70:لم أجرب,90:غير قادر على إعادة الإنتاج,100:N/A';
+$s_status_enum_string = '10:جديد,20:طلب ردود,30:معرفة,40:مؤكدة,50:مكلفة,80:محلولة,90:مغلقة';
+$s_resolution_enum_string = '10:مفتوحة,20:مصلحة,30:مفتوحة مرة أخرى,40:غير قادر على إعادة الإنتاج,50:لا يمكن إصلاحها,60:مكررة,70:لا تغيير مطلوب,80:موقفة,90:لن تصلح';
+$s_projection_enum_string = '10:لا شيء,30:تعديل,50:إصلاح طفيف,70:عمل ضخم,90:إعادة تصميم';
+$s_eta_enum_string = '10:لا شيء,20:< 1 يوم,30:2-3 أيام,40:< 1 أسبوع,50:< 1 شهر,60:> 1 شهر';
+$s_sponsorship_enum_string = '0:غير مدفوعة,1:مطلوبة,2:مدفوعة';
+$s_new_account_subject = 'تسجيل حساب';
+$s_new_account_greeting = 'شكرا لك للتسجيل. لديك حساب باسم المتخدم "%1$s". لإكمال تسجيلك، زر المسار التالي (تأكد من أنه مدخل كسطر وحيد) واضبط كلمة السر الخاصة بدخولك:';
+$s_new_account_username = 'اسم المستخدم:';
+$s_new_account_message = 'لو أنك لم تطلب أي تسجيل، تجاهل هذه الرسالة ولا شيء سيحدث.';
+$s_new_account_do_not_reply = 'لا ترد على هذه الرسالة';
+$s_new_account_email = 'البريد الإلكتروني:';
+$s_new_account_IP = 'عنوان الأيبي البعيد:';
+$s_new_account_signup_msg = 'الحساب التالي تم إنشاؤه:';
+$s_reset_request_msg = 'شخص ما (على الأرجح أنت) طلب تغيير كلمة السر من خلال تحقيق البريد الإلكتروني. لو لم يكن هذا أنت، تجاهل هذه الرسالة ولا شيء سيحدث.
+
+لو أنك طلبت هذا التحقيق، زر المسار التالي لتغيير كلمة سرك:';
+$s_reset_request_in_progress_msg = 'لو أنك وفرت اسم المستخدم وعنوان البريد الإلكتروني الصحيح لحسابك، سنكون قد أرسلنا الآن رسالة تأكيد إلى عنوان البريد الإلكتروني هذا. متى تم تلقي الرسالة، اتبع الإجراءات الموفرة لتغيير كلمة السر لحسابك.';
+$s_email_notification_title_for_status_bug_new = 'القضية التالية الآن في الحالة جديد (مجددا)';
+$s_email_notification_title_for_status_bug_feedback = 'القضية التالية تتطلب ردك.';
+$s_email_notification_title_for_status_bug_acknowledged = 'القضية التالية تم تعريفها.';
+$s_email_notification_title_for_status_bug_confirmed = 'القضية التالية تم تأكيدها.';
+$s_email_notification_title_for_status_bug_assigned = 'القضية التالية تم إيكالها.';
+$s_email_notification_title_for_status_bug_resolved = 'القضية التالية تم حلها.';
+$s_email_notification_title_for_status_bug_closed = 'القضية التالية تم إغلاقها.';
+$s_email_notification_title_for_action_bug_submitted = 'القضية التالية تم تنفيذها.';
+$s_email_notification_title_for_action_bug_assigned = 'القضية التالية تم إيكالها.';
+$s_email_notification_title_for_action_bug_reopened = 'القضية التالية تمت إعادة فتحها.';
+$s_email_notification_title_for_action_bug_deleted = 'القضية التالية تم حذفها.';
+$s_email_notification_title_for_action_bug_updated = 'القضية التالية تم تحديثها.';
+$s_email_notification_title_for_action_sponsorship_added = 'القضية التالية تمت رعايتها.';
+$s_email_notification_title_for_action_sponsorship_updated = 'رعاية القضية التالية تم تعديلها.';
+$s_email_notification_title_for_action_sponsorship_deleted = 'رعاية القضية التالية تم سحبها.';
+$s_email_notification_title_for_action_bugnote_submitted = 'ملاحظة تمت إضافتها إلى هذه القضية.';
+$s_email_notification_title_for_action_duplicate_of_relationship_added = 'القضية التالية تم ضبطها كتكرار للقضية %1$s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_added = 'القضية %1$s تم ضبطها كتكرار للقضية التالية.';
+$s_email_notification_title_for_action_related_to_relationship_added = 'القضية التالية تم ضبطها كمرتبطة بالقضية %1$s.';
+$s_email_notification_title_for_action_dependant_on_relationship_added = 'القضية التالية تم ضبطها كأب للقضية %1$s.';
+$s_email_notification_title_for_action_blocks_relationship_added = 'القضية التالية تم ضبطها كابن للقضية %1$s.';
+$s_email_notification_title_for_action_duplicate_of_relationship_deleted = 'القضية التالية تمت إزالة ضبطها كتكرار للقضية %1$s.';
+$s_email_notification_title_for_action_has_duplicate_relationship_deleted = 'القضية %1$s تمت إزالتها كتكرار للقضية التالية.';
+$s_email_notification_title_for_action_related_to_relationship_deleted = 'القضية التالية تم ضبطها كغير مرتبطة بالقضية %1$s.';
+$s_email_notification_title_for_action_dependant_on_relationship_deleted = 'القضية التالية تمت إزالتها كأب  للقضية %1$s.';
+$s_email_notification_title_for_action_blocks_relationship_deleted = 'القضية التالية تمت إزالتها كابن للقضية %1$s.';
+$s_email_notification_title_for_action_relationship_child_resolved = 'القضية المرتبطة %1$s تم حلها.';
+$s_email_notification_title_for_action_relationship_child_closed = 'القضية المرتبطة %1$s تم إغلاقها.';
+$s_email_notification_title_for_action_monitor = 'القضية %1$s متابعة الآن بواسطة المستخدم %1$s.';
+$s_email_reporter = 'تم الإبلاغ بواسطة';
+$s_email_handler = 'تم إيكالها إلى';
+$s_email_project = 'مشروع';
+$s_email_project_label = 'المشروع:';
+$s_email_bug = 'رقم القضية';
+$s_email_category = 'التصنيف';
+$s_email_reproducibility = 'القابلية لإعادة الإنتاج';
+$s_email_severity = 'الشدة';
+$s_email_priority = 'الأولوية';
+$s_email_status = 'الحالة';
+$s_email_resolution = 'الحل';
+$s_email_duplicate = 'مكرر';
+$s_email_fixed_in_version = 'أصلحت في النسخة';
+$s_email_target_version = 'النسخة الهدف';
+$s_email_date_submitted = 'تاريخ الإرسال';
+$s_email_last_modified = 'آخر تعديل';
+$s_email_summary = 'الملخص';
+$s_email_description = 'الوصف';
+$s_email_additional_information = 'معلومات إضافية';
+$s_email_steps_to_reproduce = 'الخطوات لإعادة الإنتاج';
+$s_account_protected_msg = 'الحساب تمت حمايته. لم يمكن تغيير الإعدادات...';
+$s_account_removed_msg = 'حسابك تمت إزالته...';
+$s_confirm_delete_msg = 'هل أنت متأكد أنك تريد حذف حسابك؟';
+$s_delete_account_button = 'حذف الحساب';
+$s_manage_profiles_link = 'ملفات';
+$s_change_preferences_link = 'تفضيلات';
+$s_edit_account_title = 'عدل الحساب';
+$s_username = 'اسم المستخدم';
+$s_username_label = 'اسم المستخدم:';
+$s_realname = 'الاسم الحقيقي';
+$s_realname_label = 'الاسم الحقيقي:';
+$s_email = 'البريد الإلكتروني';
+$s_email_label = 'البريد الإلكتروني:';
+$s_password = 'كلمة السر';
+$s_no_password_change = 'كلمة السر يتم التحكم بها بواسطة نظام آخر، لذا فلا يمكن تعديلها هنا.';
+$s_confirm_password = 'أكد كلمة السر';
+$s_access_level = 'مستوى الدخول';
+$s_update_user_button = 'تحديث المستخدم';
+$s_verify_warning = 'معلومات حسابك تم تأكيدها. رسالة تأكيد الحساب التي تلقيتها الآن غير صحيحة.';
+$s_verify_change_password = 'يجب أن تضبط كلمة سر هنا ليسمح لك بتسجيل الدخول مرة ثانية.';
+$s_default_account_preferences_title = 'تفضيلات الحساب';
+$s_default_project = 'المشروع الافتراضي';
+$s_refresh_delay = 'تحديث التأخير';
+$s_minutes = 'دقائق';
+$s_redirect_delay = 'تحويل التأخير';
+$s_seconds = 'ثواني';
+$s_with_minimum_severity = 'بالشدة الدنيا';
+$s_bugnote_order = 'ترتيب الملاحظات';
+$s_bugnote_order_asc = 'تصاعدي';
+$s_bugnote_order_desc = 'تنازلي';
+$s_email_on_new = 'أرسل رسالة عند الإنشاء';
+$s_email_on_assigned = 'أرسل رسالة عند تغيير المعالج';
+$s_email_on_feedback = 'أرسل رسالة عند الرد';
+$s_email_on_resolved = 'أرسل رسالة عند الحل';
+$s_email_on_closed = 'أرسل رسالة عند الإغلاق';
+$s_email_on_reopened = 'أرسل رسالة عند إعادة الفتح';
+$s_email_on_bugnote_added = 'أرسل رسالة عند إضافة ملاحظة';
+$s_email_on_status_change = 'أرسل رسالة عند تغيير الحالة';
+$s_email_on_priority_change = 'أرسل رسالة عند تغيير الأولوية';
+$s_email_bugnote_limit = 'حد ملاحظات البريد الإلكتروني';
+$s_language = 'اللغة';
+$s_update_prefs_button = 'تحديث التفضيلات';
+$s_reset_prefs_button = 'إعادة ضبط التفضيلات';
+$s_timezone = 'منطقة زمنية';
+$s_prefs_reset_msg = 'التفضيلات تمت إعادة ضبطها...';
+$s_prefs_updated_msg = 'التفضيلات تم حذفها...';
+$s_profile_added_msg = 'الملف تمت إضافته...';
+$s_profile_deleted_msg = 'الملف تم حذفه...';
+$s_edit_profile_title = 'عدل الملف';
+$s_platform = 'نظام';
+$s_platform_label = 'المنصة:';
+$s_operating_system = 'نظام التشغيل';
+$s_additional_description = 'وصف إضافي';
+$s_update_profile_button = 'تحديث الملف';
+$s_profile_defaulted_msg = 'الملف الافتراضي تم تحديثه...';
+$s_add_profile_title = 'إضافة ملف';
+$s_add_profile_button = 'إضافة ملف';
+$s_edit_or_delete_profiles_title = 'عدل أو احذف الملفات';
+$s_edit_profile = 'عدل الملف';
+$s_make_default = 'اجعله افتراضيا';
+$s_delete_profile = 'حذف الملف';
+$s_select_profile = 'اختر الملف';
+$s_submit_button = 'تنفيذ';
+$s_profile_updated_msg = 'الملف تم تحديثه...';
+$s_my_sponsorship = 'عمليات رعايتي';
+$s_update_sponsorship_button = 'تغيير حالة الدفع';
+$s_no_sponsored = 'لا قضايا مرعية موكولة إليك تم العثور عليها.';
+$s_own_sponsored = 'القضايا التي قمت برعايتها:';
+$s_issues_handled = 'القضايا المرعية التي تم إيكالها إليك:';
+$s_no_own_sponsored = 'أنت لم ترع أي قضايا.';
+$s_sponsor = 'راعي';
+$s_sponsor_verb = 'يرعى';
+$s_amount = 'كمية';
+$s_total_owing = 'الدين الإجمالي';
+$s_total_paid = 'إجمالي المدفوع';
+$s_sponsor_hide = 'إخفاء المحلول والمدفوع';
+$s_sponsor_show = 'عرض الكل';
+$s_payment_updated = 'معلومات الدفع تم تحديثها.';
+$s_account_updated_msg = 'حسابك تم تحديثه بنجاح...';
+$s_email_updated = 'عنوان البريد الإلكتروني تم تحديثه بنجاح';
+$s_realname_duplicated = 'الاسم الحقيقي مستعمل بواسطة مستخدم آخر';
+$s_realname_updated = 'الاسم الحقيقي تم تحديثه بنجاح';
+$s_password_updated = 'كلمة السر تم تحديثها بنجاح';
+$s_multiple_projects = 'القضايا التي اخترتها من مشاريع مختلفة. المحددات بالأسفل تعكس الإعدادات لكل المشاريع. لو أن هذا غير صحيح، من فضلك أعد محاولة القيام بتغييرك باختيار عدد أصغر من القضايا.';
+$s_new_bug_title = 'قضية جديدة';
+$s_feedback_bug_title = 'طلب ردود على القضية';
+$s_acknowledged_bug_title = 'التعريف بالقضية';
+$s_confirmed_bug_title = 'تأكيد القضية';
+$s_assigned_bug_title = 'إيكال القضية';
+$s_new_bug_button = 'قضية جديدة';
+$s_feedback_bug_button = 'طلب ردود';
+$s_acknowledged_bug_button = 'تعريف القضية';
+$s_confirmed_bug_button = 'تأكيد القضية';
+$s_assigned_bug_button = 'تكليف القضية';
+$s_bug_close_msg = 'القضية تم إغلاقها...';
+$s_close_immediately = 'أغلق حالا:';
+$s_closed_bug_title = 'إغلاق القضية';
+$s_bug_deleted_msg = 'القضية تم حذفها...';
+$s_delete_bug_sure_msg = 'هل أنت متأكد أنك تريد حذف هذه القضية؟';
+$s_delete_bug_button = 'حذف القضية';
+$s_monitor_bug_button = 'تابع';
+$s_unmonitor_bug_button = 'إنهاء المراقبة';
+$s_file_upload_msg = 'رفع الملف نجح';
+$s_upload_file = 'رفع ملف';
+$s_select_file = 'اختر ملفا';
+$s_upload_file_button = 'رفع ملف';
+$s_max_file_size = 'الحجم الأقصى';
+$s_max_file_size_label = 'الحجم الأقصى:';
+$s_bug_reopened_msg = 'القضية تمت إعادة فتحها...';
+$s_reopen_add_bugnote_title = 'إضافة ملاحظة كسبب لإعادة فتح القضية';
+$s_bugnote_add_reopen_button = 'إضافة ملاحظة وإعادة فتح القضية';
+$s_resolved_bug_title = 'حل القضية';
+$s_resolved_bug_button = 'حل القضية';
+$s_bug_resolved_msg = 'القضية تم حلها. أدخل الملاحظة بالأسفل...';
+$s_resolve_add_bugnote_title = 'إضافة ملاحظة كسبب لحل القضية';
+$s_bugnote_add_resolve_button = 'إضافة ملاحظة';
+$s_from = 'من';
+$s_to = 'إلى';
+$s_sent_you_this_reminder_about = 'أرسل إليك هذه التذكرة حول';
+$s_bug_reminder = 'إرسال تذكرة';
+$s_reminder_sent_to = 'التذكرة تم إرسالها إلى:';
+$s_bug_send_button = 'إرسال';
+$s_reminder = 'تذكرة';
+$s_reminder_explain = 'هذه الملاحظة سيتنم إرسالها إلى المتلقين المعروضين كطالبي ردود على هذه القضية.';
+$s_reminder_monitor = 'هؤلاء المتلقون سيبدءون أيضا مراقبة القضايا. يمكنهم التوقف باستخدام زر التوقف عن المراقبة.';
+$s_reminder_store = 'هذه الملاحظة سيتم تخزينها مع القضية.';
+$s_confirm_sponsorship = 'من فضلك أكد أنك تريد رعاية القضية %1$d ل%2$s.';
+$s_stick_bug_button = 'ثبّت';
+$s_unstick_bug_button = 'ألغِ التثبيت';
+$s_bug_updated_msg = 'القضية تم تحديثها بنجاح...';
+$s_back_to_bug_link = 'رجوع إلى القضية';
+$s_update_simple_link = 'تحديث بسيط';
+$s_updating_bug_advanced_title = 'تحديث معلومات القضية';
+$s_id = 'رقم';
+$s_category = 'تصنيف';
+$s_category_label = 'التصنيف:';
+$s_severity = 'شدة';
+$s_severity_label = 'الشدة:';
+$s_reproducibility = 'القابلية لإعادة الإنتاج';
+$s_date_submitted = 'تاريخ الإرسال';
+$s_last_update = 'آخر تحديث';
+$s_reporter = 'المبلغ';
+$s_reporter_label = 'المُبلّغ:';
+$s_assigned_to = 'أوكلت إلى';
+$s_assigned_to_label = 'مُسندة إلى:';
+$s_priority = 'أولوية';
+$s_priority_label = 'الأهمية:';
+$s_resolution = 'الحل';
+$s_resolution_label = 'الحل:';
+$s_status = 'حالة';
+$s_status_label = 'الحالة:';
+$s_duplicate_id = 'رقم التكرار';
+$s_os = 'نظام التشغيل';
+$s_os_label = 'نظام التشغيل:';
+$s_projection = 'مسقط';
+$s_os_version = 'نسخة نظام التشغيل';
+$s_os_version_label = 'إصدار نظام التشغيل:';
+$s_eta = 'زمن الوصول المتوقع';
+$s_product_version = 'نسخة المنتج';
+$s_product_version_label = 'نسخة المنتج:';
+$s_build = 'نسخة';
+$s_fixed_in_version = 'أصلحت في النسخة';
+$s_fixed_in_version_label = 'أصلحت في الإصدار:';
+$s_target_version = 'النسخة الهدف';
+$s_target_version_label = 'النسخة المستهدفة:';
+$s_votes = 'أصوات';
+$s_summary = 'ملخص';
+$s_description = 'وصف';
+$s_steps_to_reproduce = 'الخطوات لإعادة الإنتاج';
+$s_update_information_button = 'تحديث المعلومات';
+$s_sticky_issue = 'قضية لاصقة';
+$s_profile = 'ملف';
+$s_profile_label = 'الملف:';
+$s_updating_bug_simple_title = 'تحديث معلومات القضية';
+$s_view_revisions = 'رؤية المراجعات';
+$s_revision = 'المراجعة';
+$s_revision_by = '%1$s بواسطة %2$s';
+$s_revision_drop = 'إسقاط';
+$s_all_revisions = 'كل المراجعات';
+$s_back_to_issue = 'رجوع إلى القضية';
+$s_confirm_revision_drop = 'هل أنت متأكد أنك تريد إسقاط مراجعة العلة هذه؟';
+$s_vote_added_msg = 'التصويت تمت إضافته...';
+$s_bugnote_added_msg = 'الملاحظة تمت إضافتها...';
+$s_bugnote_deleted_msg = 'الملاحظة تم حذفها بنجاح...';
+$s_bug_notes_title = 'ملاحظات';
+$s_edit_bugnote_title = 'عدل الملاحظة';
+$s_no_bugnotes_msg = 'لا توجد ملاحظات ملحقة بهذه القضية.';
+$s_delete_link = 'حذف';
+$s_add_bugnote_title = 'إضافة ملاحظة';
+$s_add_bugnote_button = 'إضافة ملاحظة';
+$s_bugnote_edit_link = 'عدل';
+$s_closed_bug_button = 'إغلاق القضية';
+$s_bugnote_updated_msg = 'الملاحظة تم تحديثها بنجاح...';
+$s_hide_content = 'إخفاء المحتوى';
+$s_show_content = 'إظهار المحتوى';
+$s_total_queries_executed = '%1$d استعلامات إجمالية تم تنفيذها.';
+$s_unique_queries_executed = '%1$d استعلامات منفردة تم تنفيذها.';
+$s_memory_usage_in_kb = 'استخدام الذاكرة: %1$s كيلوبايت';
+$s_please_report = 'من فضلك أبلغ هذا إلى %1$.';
+$s_click_to_login = 'لُج';
+$s_warning_plain_password_authentication = '<strong>تحذير:</strong> تحقيق كلمة السر الصافي مستخدم، هذا سيكشف كلمات سرك للإداريين.';
+$s_warning_default_administrator_account_present = '<strong>تحذير:</strong> ينبغي عليك تعطيل حساب \'administrator\' الافتراضي أو تغيير كلمة سره.';
+$s_warning_admin_directory_present = '<strong>تحذير:</strong> مجلد الإدارة ينبغي إزالته.';
+$s_error_database_version_out_of_date_1 = '<strong>خطأ:</strong> هيكل قاعدة البيانات يبدو أنه قديم (config(databaseversion) هو 0 وجداول الترقية القديمة موجودة). النسخة 1.x من مانتيس بي تي استحدثت عملية ترقية جديدة. أنت يبدو أنك تقوم بالترقية من إصدار 0.XX. من فضلك قم بالترقية إلى 1.0.8 أو 1.1.X، ثم قم بالترقية إلى 1.2.';
+$s_error_database_no_schema_version = '<strong>خطأ:</strong> هيكل قاعدة البيانات يبدو أنه قديم(config(databaseversion) هو 0 وجداول الترقية القديمة غير موجودة). من فضلك تحقق من أن قاعدة بياناتك تعمل - لم يمكننا استرجاع نسخة سكيما قاعدة البيانات. جدول Config لم يرجع نسخة سكيما قاعدة بيانات صحيحة - من فضلك سل عن الدعم في قائمة مساعدة مانتيس البريدية لو كان هذا مطلوبا.';
+$s_error_database_version_out_of_date_2 = '<strong>تحذير:</strong> هيكل قاعدة البيانات ربما يكون قديما. من فضلك قم بالترقية <a href="admin/install.php">هنا</a> قبل تسجيل الدخول.';
+$s_error_code_version_out_of_date = '<strong>تحذير:</strong> هيكل قاعدة البيانات أكثر حداثة من الكود المنصب.  من فضلك قم بترقية الكود.';
+$s_login_page_info = 'مرحبا إلى متتبع القضايا.';
+$s_login_title = 'تسجيل الدخول';
+$s_save_login = 'تذكر تسجيل دخولي على هذا الحاسوب';
+$s_secure_session = 'جلسة آمنة';
+$s_choose_project = 'اختر المشروع';
+$s_login_button = 'تسجيل الدخول';
+$s_signup_link = 'تسجيل حساب جديد';
+$s_lost_password_link = 'فقدت كلمة سرك؟';
+$s_select_project_button = 'اختر المشروع';
+$s_lost_password_title = 'إعادة ضبط كلمة السر';
+$s_lost_password_done_title = 'رسالة كلمة السر تم إرسالها';
+$s_lost_password_subject = 'إعادة ضبط كلمة السر';
+$s_lost_password_info = 'لاسترجاع كلمة سرك المفقودة، من فضلك وفر الاسم وعنوان البريد الإلكتروني للحساب.<br /><br />لو أن البيانات تطابق حسابا صحيحا، سيتم إرسال مسار خاص إليك من خلال البريد الإلكتروني يحتوي على كود تحقيق. من فضلك اتبع هذه الوصلة لتغيير كلمة سرك.';
+$s_lost_password_confirm_hash_OK = 'تأكيدك تم قبوله. من فضلك حدث كلمة السر الخاصة بك.';
+$s_newer_news_link = 'أخبار أجدد';
+$s_older_news_link = 'أخبار أقدم';
+$s_archives = 'أرشيفات';
+$s_rss = 'آر إس إس';
+$s_site_information = 'معلومات الموقع';
+$s_mantis_version = 'نسخة مانتيس بي تي';
+$s_schema_version = 'نسخة سكيما';
+$s_site_path = 'مسار الموقع';
+$s_core_path = 'مسار القلب';
+$s_plugin_path = 'مسار الإضافة';
+$s_created_user_part1 = 'أنشأ مستخدما';
+$s_created_user_part2 = 'بمستوى صلاحية';
+$s_create_new_account_title = 'إنشاء حساب جديد';
+$s_verify_password = 'تأكيد كلمة السر';
+$s_enabled = 'مفعل';
+$s_enabled_label = 'مُمكنة:';
+$s_protected = 'محمي';
+$s_protected_label = 'محمية:';
+$s_create_user_button = 'إنشاء المستخدم';
+$s_hide_disabled = 'إخفاء المعطل';
+$s_filter_button = 'تشغيل الفلتر';
+$s_create_filter_link = 'إنشاء وصلة دائمة';
+$s_create_short_link = 'إنشاء وصلة قصيرة';
+$s_filter_permalink = 'التالي وصلة دائمة للفلتر المضبوط حاليا:';
+$s_manage_users_link = 'التحكم بالمستخدمين';
+$s_manage_projects_link = 'التحكم بالمشاريع';
+$s_manage_custom_field_link = 'التحكم بالحقول المخصصة';
+$s_manage_global_profiles_link = 'التحكم بالملفات العامة';
+$s_manage_plugin_link = 'التحكم بالإضافات';
+$s_permissions_summary_report = 'تقرير السماحات';
+$s_manage_config_link = 'التحكم بالضبط';
+$s_manage_threshold_config = 'حدود معدل العمل';
+$s_manage_email_config = 'إخطارات البريد الإلكتروني';
+$s_manage_workflow_config = 'نقل معدل العمل';
+$s_manage_tags_link = 'التحكم بالوسوم';
+$s_create_new_account_link = 'إنشاء حساب جديد';
+$s_projects_link = 'مشاريع';
+$s_documentation_link = 'وثائق';
+$s_new_accounts_title = 'حسابات جديدة';
+$s_1_week_title = '1 أسبوع';
+$s_never_logged_in_title = 'لم يسجل الدخول أبدا';
+$s_prune_accounts = 'إلغاء الحسابات';
+$s_hide_inactive = 'إخفاء غير النشط';
+$s_manage_accounts_title = 'التحكم بالحسابات';
+$s_p = 'p';
+$s_date_created = 'تاريخ الإنشاء';
+$s_last_visit = 'آخر زيارة';
+$s_last_visit_label = 'آخر زيارة:';
+$s_edit_user_link = 'عدل المستخدم';
+$s_config_all_projects = 'ملاحظة: عمليات الضبط هذه تؤثر على كل المشاريع، إلا لو تم تجاوزها لمشروع معين.';
+$s_config_project = 'ملاحظة: عمليات الضبط هذه تؤثر فقط على المشروع %1$s.';
+$s_colour_coding = 'في الجدول بالأسفل، كود اللون التالي مطبق:';
+$s_colour_project = 'إعدادات المشروع تتجاوز الإعدادات الأخرى.';
+$s_colour_global = 'كل إعدادات المشروع تتجاوز الإعدادات الافتراضية.';
+$s_issue_reporter = 'المستخدم الذي أبلغ عن القضية';
+$s_issue_handler = 'المستخدم الذي يتعامل مع القضية';
+$s_users_added_bugnote = 'المستخدمون الذين أضافوا ملاحظات العلل';
+$s_change_configuration = 'تحديث الضبط';
+$s_message = 'رسالة';
+$s_default_notify = 'ضبط أعلام الإخطار الافتراضية إلى';
+$s_action_notify = 'ضبط أعلام إخطار الفعل إلى';
+$s_notify_defaults_change_access = 'من يمكنه تغيير افتراضيات الإخطار';
+$s_notify_actions_change_access = 'من يمكنه تغيير الإشعارات:';
+$s_revert_to_system = 'حذف كل إعدادات المشاريع';
+$s_revert_to_all_project = 'حذف الإعدادات الخاصة بمشروع';
+$s_non_existent = 'غير موجود';
+$s_current_status = 'الحالة الحالية';
+$s_next_status = 'الحالة القادمة';
+$s_workflow = 'معدل العمل';
+$s_workflow_thresholds = 'الحدود التي تؤثر على معدل العمل';
+$s_threshold = 'الحد';
+$s_status_level = 'حالة';
+$s_alter_level = 'من يمكنه تغيير هذه القيمة';
+$s_validation = 'التحقق من معدل العمل';
+$s_comment = 'تعليق التحقق';
+$s_superfluous = 'قوس من القضية لنفسها تم تطبيقه، ولا يحتاج إلى أن يتم إعطاؤه صراحة.';
+$s_unreachable = 'أنت لا يمكنك نقل قضية إلى هذه الحالة';
+$s_no_exit = 'أنت لا يمكنك نقل قضية خارج هذه الحالة';
+$s_access_levels = 'مستويات الصلاحية';
+$s_access_change = 'أقل مستوى صلاحية للتغيير إلى هذه الحالة';
+$s_desc_bug_submit_status = 'الحالة التي يتم ضبط قضية جديدة عليها';
+$s_desc_bug_reopen_status = 'الحالة التي يتم ضبط القضايا المفتوحة عليها';
+$s_desc_bug_resolved_status_threshold = 'الحالة حيث يتم اعتبار قضية ما محلولة';
+$s_desc_bug_closed_status_threshold = 'الحالة حيث قضية ما تعتبر مغلقة';
+$s_default_not_in_flow = 'الحالة الافتراضية ل%1$s لم يتم اختيارها في الحالات القادمة ل%2$s. سيتم تجاهلها.';
+$s_assign_issue = 'إيكال قضية';
+$s_allow_reporter_close = 'يسمح للمبلغ بإغلاق القضية';
+$s_allow_reporter_reopen = 'يسمح للمبلغ بإعادة فتح القضية';
+$s_set_status_assigned = 'ضبط الحالة عند تكليف المعالج';
+$s_limit_access = 'تحديد صلاحية المبلغ بقضاياه الخاصة';
+$s_submit_status = 'الحالة التي يتم ضبط القضية الجديدة عليها';
+$s_assigned_status = 'الحالة لضبط القضايا المكلفة تلقائيا إليها';
+$s_resolved_status = 'الحالة حيث تعتبر قضية ما محلولة';
+$s_readonly_status = 'الحالة حيث تصبح قضية ما للقراءة فقط';
+$s_reopen_status = 'الحالة التي يتم ضبط قضية معاد فتحها إليها';
+$s_reopen_resolution = 'الحل الذي يتم ضبط قضية معاد فتحها إليه';
+$s_config_delete_sure = 'هل أنت متأكد أنت تريد حذف الإعدادات ل:';
+$s_in_project = 'في المشروع';
+$s_delete_config_button = 'حذف الإعدادات';
+$s_configuration_report = 'تقرير الضبط';
+$s_database_configuration = 'ضبط قاعدة البيانات';
+$s_configuration_option = 'خيار الضبط';
+$s_configuration_option_type = 'نوع';
+$s_configuration_option_value = 'قيمة';
+$s_all_users = 'كل المستخدمين';
+$s_set_configuration_option = 'ضبط خيار الضبط';
+$s_delete_config_sure_msg = 'هل أنت متأكد أنك تريد حذف خيار الضبط هذا؟';
+$s_plugin = 'إضافة';
+$s_plugins_installed = 'الإضافات المنصبة';
+$s_plugins_available = 'الإضافات المتوفرة';
+$s_plugin_description = 'وصف';
+$s_plugin_author = 'المؤلف: %1$s';
+$s_plugin_url = 'موقع الوب:';
+$s_plugin_depends = 'اعتمادات';
+$s_plugin_no_depends = 'لا اعتمادات';
+$s_plugin_priority = 'أولوية';
+$s_plugin_protected = 'محمي';
+$s_plugin_update = 'تحديث';
+$s_plugin_actions = 'أفعال';
+$s_plugin_install = 'تنصيب';
+$s_plugin_upgrade = 'ترقية';
+$s_plugin_uninstall = 'فك التنصيب';
+$s_plugin_uninstall_message = 'هل أنت متأكد أنك تريد إزالة الإضافة "%1$s"؟';
+$s_project_added_msg = 'المشروع تمت إضافته بنجاح...';
+$s_category_added_msg = 'التصنيف تمت إضافته بنجاح...';
+$s_category_deleted_msg = 'التصنيف تم حذفه بنجاح...';
+$s_category_delete_sure_msg = 'هل أنت متأكد أنك تريد حذف هذا التصنيف؟<br />التصنيف "%1$s" يحتوي على %2$d علة.';
+$s_delete_category_button = 'حذف التصنيف';
+$s_edit_project_category_title = 'عدل تصنيف المشروع';
+$s_update_category_button = 'تحديث التصنيف';
+$s_category_updated_msg = 'التصنيف تم تحديثه بنجاح...';
+$s_add_subproject_title = 'إضافة مشروع فرعي';
+$s_project_deleted_msg = 'المشروع تمت إزالته بنجاح...';
+$s_project_delete_msg = 'هل أنت متأكد أنك تريد حذف هذا المشروع وكل تقارير القضايا الملحقة؟';
+$s_project_delete_button = 'حذف المشروع';
+$s_edit_project_title = 'عدل المشروع';
+$s_project_name = 'اسم المشروع';
+$s_project_name_label = 'اسم المشروع:';
+$s_view_status = 'عرض الحالة';
+$s_view_status_label = 'عرض الحالة';
+$s_public = 'علني';
+$s_private = 'خاص';
+$s_update_project_button = 'تحديث المشروع';
+$s_delete_project_button = 'حذف المشروع';
+$s_copy_from = 'نسخ من';
+$s_copy_to = 'نسخ إلى';
+$s_categories_and_version_title = 'التصنيفات والنسخ';
+$s_categories = 'تصنيفات';
+$s_add_category_button = 'إضافة نسخة';
+$s_versions = 'نسخ';
+$s_add_version_button = 'إضافة نسخة';
+$s_add_and_edit_version_button = 'أضف وعدل النسخة';
+$s_edit_link = 'عدل';
+$s_actions = 'أفعال';
+$s_version = 'نسخة';
+$s_version_label = 'النسخة:';
+$s_timestamp = 'طابع زمني';
+$s_update = 'تحديث';
+$s_subprojects = 'مشاريع فرعية';
+$s_add_subproject = 'أضف كمشروع فرعي';
+$s_create_new_subproject_link = 'إنشاء مشروع فرعي جديد';
+$s_unlink_link = 'إزالة الوصلات';
+$s_show_global_users = 'عرض المستخدمين بالصلاحيات العامة';
+$s_hide_global_users = 'إخفاء المستخدمين بالصلاحيات العامة';
+$s_add_project_title = 'إضافة مشروع';
+$s_upload_file_path = 'مسار ملف الرفع';
+$s_add_project_button = 'إضافة مشروع';
+$s_projects_title = 'مشاريع';
+$s_projects_title_label = 'المشاريع:';
+$s_name = 'اسم';
+$s_project_updated_msg = 'المشروع تم تحديثه بنجاح...';
+$s_version_added_msg = 'النسخة تمت إضافتها بنجاح...';
+$s_version_deleted_msg = 'النسخة تم حذفها بنجاح...';
+$s_version_delete_sure = 'هل أنت متأكد أنك تريد حذف هذه النسخة؟';
+$s_delete_version_button = 'حذف نسخة';
+$s_edit_project_version_title = 'عدل نسخة المشروع';
+$s_update_version_button = 'تحديث النسخة';
+$s_released = 'تم الإصدار';
+$s_not_released = 'لم يتم الإصدار بعد';
+$s_scheduled_release = 'مجدولة للإصدار';
+$s_obsolete = 'قديم';
+$s_version_updated_msg = 'النسخة تم تحديثها بنجاح...';
+$s_account_delete_protected_msg = 'الحساب محمي. لا يمكن حذف هذا الحساب.';
+$s_account_deleted_msg = 'الحساب تم حذفه...';
+$s_delete_account_sure_msg = 'هل أنت متأكد أنك تريد حذف هذا الحساب؟';
+$s_notify_user = 'أخطر المستخدم';
+$s_accounts_pruned_msg = 'كل الحسابات التي لم تسجل الدخول أبدا وأقدم من 1 أسبوع تمت إزالتها';
+$s_prune_accounts_button = 'إلغاء';
+$s_confirm_account_pruning = 'هل أنت متأكد أنك تريد حذف الحسابات القديمة التي لم تقم بتسجيل الدخول أبدا؟';
+$s_edit_user_title = 'عدل المستخدم';
+$s_reset_password_button = 'إعادة ضبط كلمة السر';
+$s_delete_user_button = 'حذف المستخدم';
+$s_reset_password_msg = 'إعادة ضبط كلمة السر يرسل مسار التأكيد من خلال البريد الإلكتروني.';
+$s_reset_password_msg2 = 'إعادة ضبط كلمة السر يعيد ضبط كلمة السر لتصبح فارغة.';
+$s_show_all_users = 'الكل';
+$s_users_unused = 'غير مستخدم';
+$s_users_new = 'جديد';
+$s_account_reset_protected_msg = 'الحساب محمي. لم يمكن إعادة ضبط كلمة السر.';
+$s_account_reset_msg = 'طلب تأكيد تم إرساله إلى عنوان البريد الإلكتروني المختار للمستخدم. باستخدام هذا، المستخدم سيصبح قادرا على تغيير كلمة سره.';
+$s_account_reset_msg2 = 'كلمة سر الحساب تم ضبطها كفارغة...';
+$s_manage_user_protected_msg = 'الحساب محمي. مستوى الصلاحية والتفعيل محميان. أما غير هذا، فالحساب تم تحديثه...';
+$s_manage_user_updated_msg = 'الحساب تم تحديثه بنجاح...';
+$s_email_user_updated_subject = 'حُدّث الحساب';
+$s_main_link = 'رئيسي';
+$s_view_bugs_link = 'عرض القضايا';
+$s_report_bug_link = 'الإبلاغ عن قضية';
+$s_changelog_link = 'سجل التغيير';
+$s_roadmap_link = 'خريطة الطريق';
+$s_summary_link = 'ملخص';
+$s_account_link = 'حسابي';
+$s_users_link = 'مستخدمون';
+$s_manage_link = 'تحكم';
+$s_edit_news_link = 'عدل الأخبار';
+$s_docs_link = 'وثائق';
+$s_logout_link = 'اخرج';
+$s_my_view_link = 'عرضي';
+$s_my_view_title_unassigned = 'غير موكولة';
+$s_my_view_title_recent_mod = 'معدلة حديثا';
+$s_my_view_title_reported = 'أبلغت بواسطتي';
+$s_my_view_title_assigned = 'موكلة لي (غير محلولة)';
+$s_my_view_title_resolved = 'تم الحل';
+$s_my_view_title_monitored = 'مراقبة بواسطتي';
+$s_my_view_title_feedback = 'بانتظار الردود مني';
+$s_my_view_title_verify = 'بانتظار تأكيد الحل مني';
+$s_my_view_title_my_comments = 'القضايا التي علقت عليها';
+$s_news_added_msg = 'مدخلة الأخبار تمت إضافتها...';
+$s_news_deleted_msg = 'تم حذف مدخلة الأخبار...';
+$s_delete_news_sure_msg = 'هل أنت متأكد أنك تريد حذف مدخلة الأخبار هذه؟';
+$s_delete_news_item_button = 'حذف مدخلة الأخبار';
+$s_edit_news_title = 'عدل الأخبار';
+$s_headline = 'عنوان';
+$s_body = 'جسم';
+$s_update_news_button = 'تحديث الأخبار';
+$s_add_news_title = 'إضافة الأخبار';
+$s_post_to = 'أرسل إلى';
+$s_post_news_button = 'إرسال الأخبار';
+$s_edit_or_delete_news_title = 'عدل أو احذف الأخبار';
+$s_edit_post = 'عدل الرسالة';
+$s_delete_post = 'حذف الرسالة';
+$s_select_post = 'اختيار الرسالة';
+$s_news_updated_msg = 'مدخلة الأخبار تم تحديثها...';
+$s_back_link = 'رجوع';
+$s_file_uploaded_msg = 'رفع الملف نجح.';
+$s_upload_file_title = 'رفع ملف';
+$s_title = 'عنوان';
+$s_project_file_deleted_msg = 'ملف المشروع تم حذفه';
+$s_confirm_file_delete_msg = 'هل أنت متأكد أنك تريد حذف هذا الملف؟';
+$s_filename = 'اسم الملف';
+$s_filename_label = 'اسم الملف:';
+$s_file_update_button = 'تحديث الملف';
+$s_file_delete_button = 'حذف الملف';
+$s_project_documentation_title = 'وثائق المشروع';
+$s_user_documentation = 'وثائق المستخدم';
+$s_project_documentation = 'وثائق المشروع';
+$s_add_file = 'إضافة ملف';
+$s_project_document_updated = 'تحديث المشروع نجح.';
+$s_project_user_added_msg = 'أضاف المستخدم بنجاح إلى المشروع.';
+$s_project_removed_user_msg = 'أزال المستخدم بنجاح من المشروع.';
+$s_remove_user_sure_msg = 'هل أنت متأكد أنك تريد إزالة هذا المستخدم؟';
+$s_remove_user_button = 'إزالة المستخدم';
+$s_remove_all_users_sure_msg = 'هل أنت متأكد أنك تريد إزالة كل المستخدمين من هذا المشروع؟';
+$s_remove_all_users_button = 'إزالة كل المستخدمين';
+$s_add_user_title = 'إضافة مستخدم إلى المشروع';
+$s_add_user_button = 'إضافة مستخدم';
+$s_project_selection_title = 'اختيار المشروع';
+$s_remove_link = 'إزالة';
+$s_remove_all_link = 'إزالة الكل';
+$s_updated_user_msg = 'تم تحديث المستخدم بنجاح.';
+$s_must_enter_category = 'يجب أن تختار تصنيفا';
+$s_must_enter_severity = 'يجب أن تختار شدة.';
+$s_must_enter_reproducibility = 'يجب أن تختار قابلية لإعادة الإنتاج.';
+$s_must_enter_summary = 'يجب أن تدخل ملخصا';
+$s_must_enter_description = 'يجب أن تدخل وصفا';
+$s_report_more_bugs = 'الإبلاغ عن مزيد من القضايا';
+$s_submission_thanks_msg = 'شكرا لك لمساهمتك.';
+$s_simple_report_link = 'تقرير بسيط';
+$s_enter_report_details_title = 'أدخل تفاصيل التقرير';
+$s_required = 'مطلوب';
+$s_select_category = 'اختر التصنيف';
+$s_select_reproducibility = 'اختر قابلية لإعادة الإنتاج';
+$s_select_severity = 'اختر شدة';
+$s_or_fill_in = 'أو املأ';
+$s_assign_to = 'موكولة إلى';
+$s_additional_information = 'معلومات إضافية';
+$s_submit_report_button = 'إرسال التقرير';
+$s_check_report_more_bugs = 'اختر للإبلاغ عن مزيد من القضايا';
+$s_report_stay = 'التقرير يبقى';
+$s_selected_project = 'المشروع المختار';
+$s_valid_project_msg = 'يجب أن تختار مشروعا صحيحا';
+$s_signup_done_title = 'تسجيل الحساب تمت معالجته.';
+$s_password_emailed_msg = 'تهانينا. أنت سجلت بنجاح. أنت الآن يتم إرسال بريد تأكيد إلكتروني إليك للتحقق من عنوان بريدك الإلكتروني. زيارة الوصلة المرسلة إليك في البريد الإلكتروني هذا ستنشط حسابك.';
+$s_no_reponse_msg = 'سيكون لديك سبعة أيام لإكمال عملية تأكيد الحساب؛ لو أنك فشلت في إكمال تأكيد الحساب خلال سبعة أيام، هذا الحساب المسجل حديثا ربما يتم إلغاؤه.';
+$s_signup_info = 'عند إكمال هذه الاستمارة وتأكيد إجاباتك، سيتم إرسال رسالة تأكيد إليك إلى عنوان البريد الإكتروني الذي حددته.<br />باستخدام بريد التأكيد، ستصبح قادرا على تنشيط حسابك. لو فشلت في تنشيط حسابك لمدة سبعة أيام، سيتم إلغاؤه.<br />يجب عليك أن تحدد عنوان بريد إلكتروني حتى تتلقى رسالة تأكيد الحساب.';
+$s_signup_title = 'إنشاء حساب';
+$s_signup_button = 'إنشاء حساب';
+$s_no_password_request = 'كلمة سرك يتم التحكم بها بواسطة نظام آخر. من فضلك اتصل بإداري نظامك.';
+$s_edit_site_settings_title = 'عدل إعدادات الموقع';
+$s_save_settings_button = 'حفظ الإعدادات';
+$s_site_settings_title = 'إعدادات الموقع';
+$s_system_info_link = 'معلومات النظام';
+$s_site_settings_link = 'إعدادات الموقع';
+$s_site_settings_updated_msg = 'إعدادات الموقع تم تحديثها';
+$s_summary_title = 'ملخص';
+$s_summary_advanced_link = 'ملخص متقدم';
+$s_by_project = 'حسب المشروع';
+$s_by_status = 'حسب الحالة';
+$s_by_date = 'حسب التاريخ (الأيام)';
+$s_by_severity = 'حسب الشدة';
+$s_by_resolution = 'حسب الحل';
+$s_by_category = 'حسب التصنيف';
+$s_by_priority = 'حسب الأولوية';
+$s_by_developer = 'حسب المطور';
+$s_by_reporter = 'حسب المبلغ';
+$s_reporter_by_resolution = 'المبلغ حسب الحل';
+$s_reporter_effectiveness = 'فعالية المبلغ';
+$s_developer_by_resolution = 'المطور حسب الحل';
+$s_percentage_fixed = '% تم إصلاحها';
+$s_percentage_errors = '% خاطئة';
+$s_errors = 'خطأ';
+$s_opened = 'مفتوحة';
+$s_resolved = 'محلولة';
+$s_total = 'إجمالي';
+$s_balance = 'توازن';
+$s_most_active = 'الأكثر نشاطا';
+$s_score = 'نتيجة';
+$s_days = 'أيام';
+$s_time_stats = 'إحصاءات الوقت للقضايا المحلولة (أيام)';
+$s_longest_open_bug = 'أقدم قضية مفتوحة';
+$s_longest_open = 'أقدم مفتوح';
+$s_average_time = 'زمن متوسط';
+$s_total_time = 'زمن إجمالي';
+$s_developer_stats = 'إحصاءات المطور';
+$s_reporter_stats = 'إحصاءات المبلغ';
+$s_orct = '(مفتوحة/محلولة/مغلقة/إجمالي)';
+$s_any = 'أي';
+$s_all = 'كل';
+$s_show = 'عرض';
+$s_show_label = 'اعرض:';
+$s_changed = 'تغيرت(ساعات)';
+$s_viewing_bugs_title = 'عرض القضايا';
+$s_updated = 'تم التحديث';
+$s_sticky = 'عرض القضايا اللاصقة';
+$s_issue_id = 'القضية #';
+$s_recently_visited = 'المزارة حديثا';
+$s_priority_abbreviation = 'P';
+$s_none = 'لا شيء';
+$s_current = 'حالي';
+$s_search = 'بحث';
+$s_view_prev_link = 'عرض السابق';
+$s_view_next_link = 'عرض التالي';
+$s_prev = 'سابق';
+$s_next = 'تالي';
+$s_first = 'أول';
+$s_last = 'آخر';
+$s_use_date_filters = 'استخدم فلاتر التاريخ';
+$s_yes = 'نعم';
+$s_no = 'لا';
+$s_open_filters = 'تغيير الفلتر';
+$s_or_unassigned = 'أو غير مكلفة';
+$s_ok = 'موافق';
+$s_select_all = 'اختر الكل';
+$s_use_query = 'استخدم الفلتر';
+$s_delete_query = 'احذف الفلتر';
+$s_query_deleted = 'الفلتر تم حذفه';
+$s_save_query = 'حفظ الفلتر الحالي';
+$s_reset_query = 'إعادة ضبط الفلتر';
+$s_query_name = 'اسم الفلتر';
+$s_query_name_label = 'اسم المُرشّح:';
+$s_query_exists = 'هذا المرشح بالذات يبدو أنه موجود بالفعل.';
+$s_query_dupe_name = 'يوجد مرشح آخر بهذا الاسم بالفعل. من فضلك اختر اسما مختلفا لهذا المرشح.';
+$s_query_blank_name = 'أنت لا يمكنك تخزين فلتر بدون اسم. من فضلك أعط هذا الفلتر اسما قبل حفظه.';
+$s_query_name_too_long = 'لا يمكنك تخزين اسم مرشح بأكثر من 64 حرف. من فضلك أعط هذا المرشح اسما أقصر.';
+$s_query_store_error = 'كان هناك خطأ أثناء حفظ هذا المرشح.';
+$s_open_queries = 'التحكم بالفلاتر';
+$s_query_delete_msg = 'هل أنت متأكد أنك تريد حذف هذا المرشح؟';
+$s_view_simple_link = 'عرض بسيط';
+$s_product_build = 'نسخة المنتج';
+$s_system_profile = 'وصف النظام';
+$s_update_bug_button = 'تعديل';
+$s_bug_assign_to_button = 'تكليف إلى:';
+$s_bug_status_to_button = 'غير الحالة إلى:';
+$s_reopen_bug_button = 'إعادة فتح';
+$s_move_bug_button = 'نقل';
+$s_attached_files = 'الملفات الملحقة';
+$s_publish = 'نشر';
+$s_cached = 'مخزن';
+$s_add_user_to_monitor = 'أضف';
+$s_no_users_monitoring_bug = 'لا يوجد مستخدمون يراقبون هذه القضية.';
+$s_users_monitoring_bug = 'المستخدمون الذين يراقبون هذه القضية';
+$s_monitoring_user_list = 'قائمة المستخدمين';
+$s_no_users_sponsoring_bug = 'لا يوجد مستخدمون يرعون هذه القضية.';
+$s_users_sponsoring_bug = 'المستخدمون الذين يرعون هذه القضية';
+$s_sponsors_list = 'قائمة الرعاة';
+$s_total_sponsorship_amount = 'إجمالي الرعاية = %1$s';
+$s_add_custom_field_button = 'حقل مخصص جديد';
+$s_delete_custom_field_button = 'حذف الحقل المخصص';
+$s_delete_custom_field_everywhere = 'حذف الحقل المخصص في كل مكان';
+$s_update_custom_field_button = 'تحديث الحقل المخصص';
+$s_add_existing_custom_field = 'إضافة الحقل المخصص الموجود هذا';
+$s_edit_custom_field_title = 'عدل الحقل المخصص';
+$s_custom_field = 'حقل';
+$s_custom_field_label = 'الحقل:';
+$s_custom_fields_setup = 'حقول مخصصة';
+$s_custom_field_name = 'اسم';
+$s_custom_field_project_count = 'عداد المشروع';
+$s_custom_field_type = 'نوع';
+$s_custom_field_possible_values = 'قيم محتملة';
+$s_custom_field_default_value = 'قيمة افتراضية';
+$s_custom_field_valid_regexp = 'تعبير منتظم';
+$s_custom_field_access_level_r = 'صلاحية القراءة';
+$s_custom_field_access_level_rw = 'صلاحية الكتابة';
+$s_custom_field_length_min = 'الحجم الأدنى';
+$s_custom_field_length_max = 'الحجم الأقصى';
+$s_custom_field_filter_by = 'إضافة إلى الفلتر';
+$s_custom_field_display_report = 'عرض عند إبلاغ القضايا';
+$s_custom_field_display_update = 'عرض عند تحديث القضايا';
+$s_custom_field_display_resolved = 'عرض عند حل القضايا';
+$s_custom_field_display_closed = 'عرض عند إغلاق القضايا';
+$s_custom_field_require_report = 'مطلوب عند الإبلاغ';
+$s_custom_field_require_update = 'مطلوب عند التحديث';
+$s_custom_field_require_resolved = 'مطلوب عند الحل';
+$s_custom_field_require_closed = 'مطلوب عند الإغلاق';
+$s_link_custom_field_to_project_title = 'وصل حقل مخصص إلى المشروع';
+$s_link_custom_field_to_project_button = 'وصل الحقل المخصص';
+$s_custom_field_sequence = 'تتابع';
+$s_custom_field_sequence_label = 'التسلسل:';
+$s_custom_field_type_enum_string = '0:سلسلة,1:رقمي,2:طائف,3:ترقيم,4:بريد إلكتروني,5:صندوق تعليم,6:قائمة,7:قائمة اختيار متعدد,8:تاريخ,9:راديو';
+$s_confirm_used_custom_field_deletion = 'هذا الحقل موصول من مشروع واحد على الأقل.  لو استمريت فكل القيم لهذا الحقل سيتم حذفها بشكل دائم.  هذا الفعل لا يمكن استرجاعه.  لو أنك لا تريد حذف هذا الحقل، اضغط زر رجوع في متصفحك. للمتابعة، اضغط الزر بالأسفل';
+$s_confirm_custom_field_deletion = 'هل أنت متأكد أنك تريد حذف الحقل المخصص هذا وكل القيم المصاحبة؟';
+$s_field_delete_button = 'حذف الحقل';
+$s_confirm_custom_field_unlinking = 'هل أنت متأكد من أنك تريد إزالة (وصلات) الحقل المخصص هذا من المشروع وحذف كل القيم المرتبطة؟';
+$s_field_remove_button = 'إزالة الحقل';
+$s_hide_status = 'إخفاء الحالة';
+$s_hide_status_label = 'أخف الحالة:';
+$s_filter_closed = 'مغلق';
+$s_filter_resolved = 'محلول';
+$s_hide_closed = 'إخفاء المغلق';
+$s_hide_resolved = 'إخفاء المحلولة';
+$s_and_above = 'و الأعلى';
+$s_advanced_filters = 'فلاتر متقدمة';
+$s_simple_filters = 'فلاتر بسيطة';
+$s_monitored_by = 'مراقبة بواسطة';
+$s_monitored_by_label = 'يراقبها:';
+$s_attachments = 'الملحق(ات)';
+$s_bytes = 'بايت';
+$s_phpmailer_language = 'en';
+$s_sponsors = '%1$d راعي(رعاة)';
+$s_sponsorship_added = 'الرعاية تمت إضافتها';
+$s_sponsorship_updated = 'الرعاية تم تحديثها';
+$s_sponsorship_deleted = 'الرعاية تم حذفها';
+$s_sponsorship_paid = 'الرعاية تم دفعها';
+$s_sponsorship_more_info = 'المزيد من المعلومات حول الرعاية';
+$s_sponsorship_total = 'إجمالي الرعاية';
+$s_changelog = 'سجل التغيير';
+$s_changelog_empty = 'لا معلومات سجل تغيير متوفرة';
+$s_roadmap = 'خريطة الطريق';
+$s_resolved_progress = '%1$d من %2$d قضية(قضايا) تم حلها.  التقدم (%3$d%%).';
+$s_http_auth_realm = 'تسجيل دخول مانتيس بي تي';
+$s_bug = 'قضية';
+$s_bugs = 'قضايا';
+$s_add_new_relationship = 'علاقة جديدة';
+$s_add_new_relationship_button = 'أضف';
+$s_this_bug = 'القضية الحالية';
+$s_relationship_added = 'العلاقة تمت إضافتها';
+$s_relationship_deleted = 'العلاقة تم حذفها';
+$s_no_relationship = 'لا علاقة';
+$s_relationship_replaced = 'العلاقة تم استبدالها';
+$s_replace_relationship_button = 'استبدال';
+$s_replace_relationship_sure_msg = 'توجد علاقة بالفعل بين هاتين القضيتين. هل أنت متأكد أنك تريد استبدالها؟';
+$s_relationship_with_parent = 'العلاقة مع القضية الأصلية';
+$s_delete_relationship_button = 'حذف';
+$s_delete_relationship_sure_msg = 'هل أنت متأكد أنك تريد حذف هذه العلاقة؟';
+$s_relationship_warning_blocking_bugs_not_resolved = 'ليس كل أطفال هذه القضية تم حلهم أو إغلاقهم بعد.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<strong>انتباه</strong>. ليس كل أطفال هذه القضية تم حلهم أو إغلاقهم.<br />قبل <strong>حل/إغلاق</strong> قضية أساسية، كل القضايا المرتبطة كأبناء لهذه الواحدة ينبغي أن يتم حلها أو إغلاقها.';
+$s_create_child_bug_button = 'استنسخ';
+$s_bug_cloned_to = 'القضية تم تكرارها';
+$s_bug_created_from = 'القضية تم توليدها من';
+$s_viewing_bug_relationship_graph_title = 'رسمة العلاقة';
+$s_viewing_bug_dependency_graph_title = 'رسمة الاعتماد';
+$s_relation_graph = 'رسمة العلاقة';
+$s_dependency_graph = 'رسمة الاعتماد';
+$s_vertical = 'رأسي';
+$s_horizontal = 'أفقي';
+$s_view_issue = 'عرض قضية';
+$s_perm_rpt_capability = 'القدرة';
+$s_view = 'عرض';
+$s_issues = 'قضايا';
+$s_report_issue = 'إبلاغ قضية';
+$s_update_issue = 'تحديث قضية';
+$s_monitor_issue = 'مراقبة قضية';
+$s_handle_issue = 'التحكم بقضية';
+$s_move_issue = 'نقل قضية';
+$s_delete_issue = 'حذف قضية';
+$s_reopen_issue = 'إعادة فتح قضية';
+$s_view_private_issues = 'عرض القضايا الخاصة';
+$s_update_readonly_issues = 'تحديث قضايا القراءة فقط';
+$s_update_issue_status = 'تحديث حالة القضية';
+$s_set_view_status = 'اضبط حالة الرؤية عند الإبلاغ عن قضية أو ملاحظة جديدة';
+$s_update_view_status = 'غير حالة الرؤية للقضايا أو الملاحظات الموجودة';
+$s_show_list_of_users_monitoring_issue = 'عرض قائمة بالمستخدمين الذين يراقبون القضية';
+$s_notes = 'ملاحظات';
+$s_add_notes = 'إضافة ملاحظات';
+$s_view_private_notes = 'رؤية ملاحظات الآخرين الخاصة';
+$s_news = 'أخبار';
+$s_view_private_news = 'عرض الأخبار الخاصة';
+$s_manage_news = 'التحكم بالأخبار';
+$s_view_list_of_attachments = 'عرض قائمة الملحقات';
+$s_download_attachments = 'تنزيل الملحقات';
+$s_delete_attachments = 'حذف الملحقات';
+$s_delete_attachment_button = 'حذف';
+$s_delete_attachment_sure_msg = 'هل أنت متأكد من أنك تريد حذف هذا الملحق؟';
+$s_upload_issue_attachments = 'رفع ملحقات القضية';
+$s_filters = 'فلاتر';
+$s_save_filters = 'حفظ الفلاتر';
+$s_save_filters_as_shared = 'حفظ الفلاتر كمشاركة';
+$s_use_saved_filters = 'استخدم الفلاتر المحفوظة';
+$s_create_project = 'إنشاء مشروع';
+$s_delete_project = 'حذف مشروع';
+$s_manage_project = 'التحكم بالمشروع';
+$s_manage_user_access_to_project = 'التحكم بصلاحية المستخدم لمشروع';
+$s_automatically_included_in_private_projects = 'مضمنة تلقائيا في المشاريع الخاصة';
+$s_project_documents = 'وثائق المشروع';
+$s_view_project_documents = 'عرض وثائق المشروع';
+$s_upload_project_documents = 'رفع وثائق المشروع';
+$s_link_custom_fields_to_projects = 'وصل الحقول المخصصة للمشاريع';
+$s_sponsorships = 'عمليات الرعاية';
+$s_view_sponsorship_details = 'عرض تفاصيل الرعاية';
+$s_view_sponsorship_total = 'عرض إجمالي الرعاية';
+$s_sponsor_issue = 'قضية راعي';
+$s_assign_sponsored_issue = 'توكيل قضية مرعية';
+$s_handle_sponsored_issue = 'معالجة قضية مرعية';
+$s_others = 'أخرى';
+$s_see_email_addresses_of_other_users = 'عرض عناوين البريد الإلكتروني للمستخدمين الآخرين';
+$s_send_reminders = 'إرسال مذكرات';
+$s_add_profiles = 'أضف الملفات';
+$s_notify_of_new_user_created = 'إخطار بإنشاء المستخدمين الجدد';
+$s_email_notification = 'إخطار بالبريد الإلكتروني';
+$s_status_changed_to = 'الحالة تتغير إلى';
+$s_email_on_deleted = 'أرسل رسالة عند الحذف';
+$s_email_on_sponsorship_changed = 'أرسل رسالة عند تغيير الرعاية';
+$s_email_on_relationship_changed = 'أرسل رسالة عند تغيير العلاقة';
+$s_loading = 'جاري التحميل...';
+$s_between_date = 'بين';
+$s_on_or_before_date = 'في أو قبل';
+$s_before_date = 'قبل';
+$s_after_date = 'بعد';
+$s_on_or_after_date = 'في أو بعد';
+$s_from_date = 'من';
+$s_to_date = 'إلى';
+$s_on_date = 'في';
+$s_on = 'مفعل';
+$s_off = 'معطل';
+$s_wiki = 'ويكي';
+$s_tags = 'وسوم';
+$s_tags_label = 'وسوم:';
+$s_tag_details = 'تفاصيل الوسم: %1$s';
+$s_tag_id = 'رقم الوسم';
+$s_tag_name = 'اسم';
+$s_tag_creator = 'منشئ';
+$s_tag_created = 'تاريخ الإنشاء';
+$s_tag_updated = 'آخر تحديث';
+$s_tag_description = 'وصف الوسم';
+$s_tag_statistics = 'إحصاءات الاستخدام';
+$s_tag_update = 'تحديث الوسم: %1$s';
+$s_tag_update_return = 'رجوع إلى الوسم';
+$s_tag_update_button = 'تحديث الوسم';
+$s_tag_delete_button = 'حذف الوسم';
+$s_tag_delete_message = 'هل أنت متأكد أنك تريد حذف هذا الوسم؟';
+$s_tag_existing = 'وسوم موجودة';
+$s_tag_none_attached = 'لا وسوم تم إلحاقها.';
+$s_tag_attach = 'إلحاق';
+$s_tag_attach_long = 'إلحاق الوسوم';
+$s_tag_attach_failed = 'إلحاق الوسم فشل.';
+$s_tag_detach = 'إزالة إلحاق "%1$s"';
+$s_tag_separate_by = '(افصل بواسطة "%1$s")';
+$s_tag_invalid_name = 'اسم وسم غير صحيح.';
+$s_tag_create_denied = 'سماح الإنشاء تم رفضه.';
+$s_tag_filter_default = 'القضايا الملحقة (%1$s)';
+$s_tag_history_attached = 'الوسم تم إلحاقه';
+$s_tag_history_detached = 'الوسم تمت إزالة إلحاقه';
+$s_tag_history_renamed = 'الوسم تمت إعادة تسميته';
+$s_tag_related = 'وسوم مرتبطة';
+$s_tag_related_issues = 'القضايا المشتركة (%1$s)';
+$s_tag_stats_attached = 'القضايا الملحقة: %1$s';
+$s_tag_create = 'إنشاء الوسم';
+$s_show_all_tags = 'الكل';
+$s_time_tracking_billing_link = 'بيلنج';
+$s_time_tracking = 'تتبع الزمن';
+$s_time_tracking_get_info_button = 'الحصول على معلومات تتبع الوقت';
+$s_time_tracking_cost_per_hour = 'التكلفة / ساعة';
+$s_time_tracking_cost = 'تكلفة';
+$s_time_tracking_cost_label = 'تكلفة:';
+$s_total_time_for_issue = 'الوقت الإجمالي للقضية = %1$s';
+$s_access_denied = 'السماح تم رفضه.';
+$s_twitter_resolved = '%1$d: [%2$s] %3$s (تم حلها بواسطة %4$s في %5$s)';
+$s_twitter_resolved_no_version = '%1$d: [%2$s] %3$s (تم حلها بواسطة %4$s)';
+$s_development_team = 'فريق التطوير';
+$s_manage_columns_config = 'التحكم بالأعمدة';
+$s_all_columns_title = 'كل الأعمدة المتوفرة';
+$s_csv_columns_title = 'أعمدة CSV';
+$s_view_issues_columns_title = 'عرض أعمدة القضايا';
+$s_print_issues_columns_title = 'طبع أعمدة القضايا';
+$s_excel_columns_title = 'أعمدة إكسل';
+$s_update_columns_as_global_default = 'تحديث الأعمدة كافتراضية عامة لكل المشاريع';
+$s_update_columns_for_current_project = 'تحديث الأعمدة للمشروع الحالي';
+$s_update_columns_as_my_default = 'تحديث الأعمدة كافتراضية لكل المشاريع';
+$s_reset_columns_configuration = 'إعادة ضبط ضبط الأعمدة';
+$s_copy_columns_from = 'نسخ الأعمدة من';
+$s_copy_columns_to = 'نسخ الأعمدة إلى';
+$s_due_date = 'تاريخ الدفع';
+$s_overdue = 'تأخر عن الدفع';
+$s_view_account_title = 'معلومات المستخدم';
+$s_manage_user = 'التحكم بالمستخدم';
+$s_install_information = 'معلومات تنصيب مانتيس بي تي';
+$s_database_information = 'معلومات قاعدة بيانات مانتيس بي تي';
+$s_path_information = 'معلومات مسار مانتيس بي تي';
+$s_month_january = 'يناير';
+$s_month_february = 'فبراير';
+$s_month_march = 'مارس';
+$s_month_april = 'أبريل';
+$s_month_may = 'مايو';
+$s_month_june = 'يونيو';
+$s_month_july = 'يوليو';
+$s_month_august = 'أغسطس';
+$s_month_september = 'سبتمبر';
+$s_month_october = 'أكتوبر';
+$s_month_november = 'نوفمبر';
+$s_month_december = 'ديسمبر';
+
+
 $MANTIS_ERROR[ERROR_GENERIC] = 'حدث خطأ خلال هذا الفعل. ربما ترغب في إبلاغ هذا الخطأ إلى إداريك المحلي.';
 $MANTIS_ERROR[ERROR_SQL] = 'خطأ SQL تم كشفه.';
 $MANTIS_ERROR[ERROR_REPORT] = 'كان هناك خطأ في تقريرك.';
@@ -217,7 +1154,6 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'هذا اسم مكرر.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'على الأقل مشروع واحد مازال يستخدم هذا الحقل.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'قيمة غير صحيحة للحقل "%1$s".';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'تعريف حقل مخصص غير صحيح.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'خاصية حقل مخصص غير صحيحة (%1$s).';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'تحقق LDAP فشل.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'الاتصال بخادم LDAP فشل.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'تحديث سجل LDAP فشل.';
@@ -230,7 +1166,6 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'يوجد تصنيف بهذا الاس
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'لا فعل نسخ تم تحديده.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'التصنيف لم يتم العثور عليه.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'التصنيف "%1$s" لم يتم العثور عليه للمشروع "%2$s".';
-$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'لا يمكن حذف هذه الفئة، لأنها محددة "كفئة أفتراضية للمنقولات".';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'نسخة بهذا الاسم موجودة بالفعل.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'النسخة "%1$s" لم يتم العثور عليها.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'اسم المستخدم غير صحيح. أسماء المستخدمين يمكن أن تحتوي فقط على الحروف اللاتينية، الأرقام، فراغات، شرط، نقط، علامات زائد وكشيدات.';
@@ -269,7 +1204,6 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'الحدث "%1$s" لم يتم إعلا�
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'الإضافة غير مسجلة مع مانتيس بي تي.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'الإضافة منصبة بالفعل.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'صفحة الإضافة لم يتم العثور عليها.';
-$MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'فشل تثبيت البرنامج المساعد: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'ترقية سكيما الإضافة فشلت في القطعة #%1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'كان هناك خطأ غير معروف "%1$s" خلال تنفيذ الإضافة "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'الحقل "%1$s" يحتوي على العامود المكرر "%2$s".';
@@ -277,959 +1211,8 @@ $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'الحقل "%1$s" يحتوي على ال
 $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'معالج جلسة غير صحيح.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'متغير الجلسة "%1$s" لم يتم العثور عليه.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'جلستك أصبحت غير صحيحة.';
-$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'نص استمارة سرية غير صحيح. قد يرجع السبب إلى انتهاء وقت الجلسة، أو إرسال النموذج عن طريق الخطأ مرتين.';
+$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'نص استمارة سرية غير صحيح.  هل أرسلت الاستمارة مرتين بطريق الخطأ؟';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'هذه الصفحة لا يمكن الوصول إليها باستخدام هذه الطريقة.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'حقل ترتيب غير صحيح.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'نسق تاريخ غير صالح.';
 $MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'تعذّر تحديث المنطقة الزمنية.';
-$s_login_error = 'حسابك ربما يكون معطلا أو ممنوعا أو أن اسم المستخدم/كلمة السر التي أدخلتها غير صحيحة.';
-$s_login_cookies_disabled = 'متصفحك إما أنه لا يعرف كيف يتعامل مع الكوكيز، أو يرفض التعامل معها.';
-$s_go_back = 'رجوع';
-$s_proceed = 'تابع';
-$s_switch = 'حول';
-$s_logged_in_as = 'تسجيل الدخول ك';
-$s_prefix_for_deleted_users = 'مستخدم';
-$s_administrator = 'إداري';
-$s_myself = 'أنا';
-$s_default_access_level = 'مستوى الدخول الافتراضي';
-$s_issue_status_percentage = 'النسبة المئوية لحالة القضية';
-$s_access_levels_enum_string = '10:مشاهد,25:مبلغ,40:محدث,55:مطور,70:مدير,90:إداري';
-$s_project_status_enum_string = '10:تطوير,30:إصدار,50:مستقر,70:قديم';
-$s_project_view_state_enum_string = '10:علني,50:خاص';
-$s_view_state_enum_string = '10:علني,50:خاص';
-$s_priority_enum_string = '10:لا شيء,20:منخفض,30:عادي,40:مرتفع,50:عاجل,60:فوري';
-$s_severity_enum_string = '10:خاصية,20:تافه,30:نص,40:تعديل,50:طفيف,60:كبير,70:تتسبب في الانهيار,80:تمنع التطوير';
-$s_reproducibility_enum_string = '10:دائما,30:أحيانا,50:عشوائيا,70:لم أجرب,90:غير قادر على إعادة الإنتاج,100:N/A';
-$s_status_enum_string = '10:جديد,20:طلب ردود,30:معرفة,40:مؤكدة,50:مكلفة,80:محلولة,90:مغلقة';
-$s_resolution_enum_string = '10:مفتوحة,20:مصلحة,30:مفتوحة مرة أخرى,40:غير قادر على إعادة الإنتاج,50:لا يمكن إصلاحها,60:مكررة,70:لا تغيير مطلوب,80:موقفة,90:لن تصلح';
-$s_projection_enum_string = '10:لا شيء,30:تعديل,50:إصلاح طفيف,70:عمل ضخم,90:إعادة تصميم';
-$s_eta_enum_string = '10:لا شيء,20:< 1 يوم,30:2-3 أيام,40:< 1 أسبوع,50:< 1 شهر,60:> 1 شهر';
-$s_sponsorship_enum_string = '0:غير مدفوعة,1:مطلوبة,2:مدفوعة';
-$s_new_account_subject = 'تسجيل حساب';
-$s_new_account_greeting = 'شكرا لك للتسجيل. لديك حساب باسم المتخدم "%1$s". لإكمال تسجيلك، زر المسار التالي (تأكد من أنه مدخل كسطر وحيد) واضبط كلمة السر الخاصة بدخولك:';
-$s_new_account_greeting_admincreated = 'قام المستخدم %1$s بإنشاء حساب تحت اسم "%2$s". لإكمال عملية التسجيل رجاءً، قم بزيارة الصفحة التالية (تأكد من إدخاله في سطر واحد) و أضبط كلمة السر الخاصة بك:';
-$s_new_account_username = 'اسم المستخدم:';
-$s_new_account_message = 'لو أنك لم تطلب أي تسجيل، تجاهل هذه الرسالة ولا شيء سيحدث.';
-$s_new_account_do_not_reply = 'لا ترد على هذه الرسالة';
-$s_new_account_email = 'البريد الإلكتروني:';
-$s_new_account_IP = 'عنوان الأيبي البعيد:';
-$s_new_account_signup_msg = 'الحساب التالي تم إنشاؤه:';
-$s_reset_request_msg = 'شخص ما (على الأرجح أنت) طلب تغيير كلمة السر من خلال تحقيق البريد الإلكتروني. لو لم يكن هذا أنت، تجاهل هذه الرسالة ولا شيء سيحدث.
-
-لو أنك طلبت هذا التحقيق، زر المسار التالي لتغيير كلمة سرك:';
-$s_reset_request_in_progress_msg = 'لو أنك وفرت اسم المستخدم وعنوان البريد الإلكتروني الصحيح لحسابك، سنكون قد أرسلنا الآن رسالة تأكيد إلى عنوان البريد الإلكتروني هذا. متى تم تلقي الرسالة، اتبع الإجراءات الموفرة لتغيير كلمة السر لحسابك.';
-$s_email_notification_title_for_status_bug_new = 'القضية التالية الآن في الحالة جديد (مجددا)';
-$s_email_notification_title_for_status_bug_feedback = 'القضية التالية تتطلب ردك.';
-$s_email_notification_title_for_status_bug_acknowledged = 'القضية التالية تم تعريفها.';
-$s_email_notification_title_for_status_bug_confirmed = 'القضية التالية تم تأكيدها.';
-$s_email_notification_title_for_status_bug_assigned = 'القضية التالية تم إيكالها.';
-$s_email_notification_title_for_status_bug_resolved = 'القضية التالية تم حلها.';
-$s_email_notification_title_for_status_bug_closed = 'القضية التالية تم إغلاقها.';
-$s_email_notification_title_for_action_bug_submitted = 'القضية التالية تم تنفيذها.';
-$s_email_notification_title_for_action_bug_assigned = 'القضية التالية تم إيكالها.';
-$s_email_notification_title_for_action_bug_reopened = 'القضية التالية تمت إعادة فتحها.';
-$s_email_notification_title_for_action_bug_deleted = 'القضية التالية تم حذفها.';
-$s_email_notification_title_for_action_bug_updated = 'القضية التالية تم تحديثها.';
-$s_email_notification_title_for_action_sponsorship_added = 'القضية التالية تمت رعايتها.';
-$s_email_notification_title_for_action_sponsorship_updated = 'رعاية القضية التالية تم تعديلها.';
-$s_email_notification_title_for_action_sponsorship_deleted = 'رعاية القضية التالية تم سحبها.';
-$s_email_notification_title_for_action_bugnote_submitted = 'ملاحظة تمت إضافتها إلى هذه القضية.';
-$s_email_notification_title_for_action_duplicate_of_relationship_added = 'القضية التالية تم ضبطها كتكرار للقضية %1$s.';
-$s_email_notification_title_for_action_has_duplicate_relationship_added = 'القضية %1$s تم ضبطها كتكرار للقضية التالية.';
-$s_email_notification_title_for_action_related_to_relationship_added = 'القضية التالية تم ضبطها كمرتبطة بالقضية %1$s.';
-$s_email_notification_title_for_action_dependant_on_relationship_added = 'القضية التالية تم ضبطها كأب للقضية %1$s.';
-$s_email_notification_title_for_action_blocks_relationship_added = 'القضية التالية تم ضبطها كابن للقضية %1$s.';
-$s_email_notification_title_for_action_duplicate_of_relationship_deleted = 'القضية التالية تمت إزالة ضبطها كتكرار للقضية %1$s.';
-$s_email_notification_title_for_action_has_duplicate_relationship_deleted = 'القضية %1$s تمت إزالتها كتكرار للقضية التالية.';
-$s_email_notification_title_for_action_related_to_relationship_deleted = 'القضية التالية تم ضبطها كغير مرتبطة بالقضية %1$s.';
-$s_email_notification_title_for_action_dependant_on_relationship_deleted = 'القضية التالية تمت إزالتها كأب  للقضية %1$s.';
-$s_email_notification_title_for_action_blocks_relationship_deleted = 'القضية التالية تمت إزالتها كابن للقضية %1$s.';
-$s_email_notification_title_for_action_relationship_child_resolved = 'القضية المرتبطة %1$s تم حلها.';
-$s_email_notification_title_for_action_relationship_child_closed = 'القضية المرتبطة %1$s تم إغلاقها.';
-$s_email_notification_title_for_action_monitor = 'القضية %1$s متابعة الآن بواسطة المستخدم %1$s.';
-$s_email_reporter = 'تم الإبلاغ بواسطة';
-$s_email_handler = 'تم إيكالها إلى';
-$s_email_project = 'مشروع';
-$s_email_bug = 'رقم القضية';
-$s_email_category = 'التصنيف';
-$s_email_reproducibility = 'القابلية لإعادة الإنتاج';
-$s_email_severity = 'الشدة';
-$s_email_priority = 'الأولوية';
-$s_email_status = 'الحالة';
-$s_email_resolution = 'الحل';
-$s_email_duplicate = 'مكرر';
-$s_email_fixed_in_version = 'أصلحت في النسخة';
-$s_email_target_version = 'النسخة الهدف';
-$s_email_date_submitted = 'تاريخ الإرسال';
-$s_email_last_modified = 'آخر تعديل';
-$s_email_summary = 'الملخص';
-$s_email_description = 'الوصف';
-$s_email_additional_information = 'معلومات إضافية';
-$s_email_steps_to_reproduce = 'الخطوات لإعادة الإنتاج';
-$s_account_protected_msg = 'الحساب تمت حمايته. لم يمكن تغيير الإعدادات...';
-$s_account_removed_msg = 'حسابك تمت إزالته...';
-$s_confirm_delete_msg = 'هل أنت متأكد أنك تريد حذف حسابك؟';
-$s_delete_account_button = 'حذف الحساب';
-$s_manage_profiles_link = 'ملفات';
-$s_change_preferences_link = 'تفضيلات';
-$s_edit_account_title = 'عدل الحساب';
-$s_username = 'اسم المستخدم';
-$s_realname = 'الاسم الحقيقي';
-$s_email = 'البريد الإلكتروني';
-$s_password = 'كلمة السر';
-$s_no_password_change = 'كلمة السر يتم التحكم بها بواسطة نظام آخر، لذا فلا يمكن تعديلها هنا.';
-$s_confirm_password = 'أكد كلمة السر';
-$s_access_level = 'مستوى الدخول';
-$s_update_user_button = 'تحديث المستخدم';
-$s_verify_warning = 'معلومات حسابك تم تأكيدها. رسالة تأكيد الحساب التي تلقيتها الآن غير صحيحة.';
-$s_verify_change_password = 'يجب أن تضبط كلمة سر هنا ليسمح لك بتسجيل الدخول مرة ثانية.';
-$s_default_account_preferences_title = 'تفضيلات الحساب';
-$s_default_project = 'المشروع الافتراضي';
-$s_refresh_delay = 'تحديث التأخير';
-$s_minutes = 'دقائق';
-$s_redirect_delay = 'تحويل التأخير';
-$s_seconds = 'ثواني';
-$s_with_minimum_severity = 'بالشدة الدنيا';
-$s_bugnote_order = 'ترتيب الملاحظات';
-$s_bugnote_order_asc = 'تصاعدي';
-$s_bugnote_order_desc = 'تنازلي';
-$s_email_on_new = 'أرسل رسالة عند الإنشاء';
-$s_email_on_assigned = 'أرسل رسالة عند تغيير المعالج';
-$s_email_on_feedback = 'أرسل رسالة عند الرد';
-$s_email_on_resolved = 'أرسل رسالة عند الحل';
-$s_email_on_closed = 'أرسل رسالة عند الإغلاق';
-$s_email_on_reopened = 'أرسل رسالة عند إعادة الفتح';
-$s_email_on_bugnote_added = 'أرسل رسالة عند إضافة ملاحظة';
-$s_email_on_status_change = 'أرسل رسالة عند تغيير الحالة';
-$s_email_on_priority_change = 'أرسل رسالة عند تغيير الأولوية';
-$s_email_bugnote_limit = 'حد ملاحظات البريد الإلكتروني';
-$s_language = 'اللغة';
-$s_update_prefs_button = 'تحديث التفضيلات';
-$s_reset_prefs_button = 'إعادة ضبط التفضيلات';
-$s_timezone = 'منطقة زمنية';
-$s_prefs_reset_msg = 'التفضيلات تمت إعادة ضبطها...';
-$s_prefs_updated_msg = 'التفضيلات تم حذفها...';
-$s_profile_added_msg = 'الملف تمت إضافته...';
-$s_profile_deleted_msg = 'الملف تم حذفه...';
-$s_edit_profile_title = 'عدل الملف';
-$s_platform = 'نظام';
-$s_operating_system = 'نظام التشغيل';
-$s_additional_description = 'وصف إضافي';
-$s_update_profile_button = 'تحديث الملف';
-$s_profile_defaulted_msg = 'الملف الافتراضي تم تحديثه...';
-$s_add_profile_title = 'إضافة ملف';
-$s_add_profile_button = 'إضافة ملف';
-$s_edit_or_delete_profiles_title = 'عدل أو احذف الملفات';
-$s_edit_profile = 'عدل الملف';
-$s_make_default = 'اجعله افتراضيا';
-$s_delete_profile = 'حذف الملف';
-$s_select_profile = 'اختر الملف';
-$s_submit_button = 'إرسال';
-$s_profile_updated_msg = 'الملف تم تحديثه...';
-$s_my_sponsorship = 'عمليات رعايتي';
-$s_update_sponsorship_button = 'تغيير حالة الدفع';
-$s_no_sponsored = 'لا قضايا مرعية موكولة إليك تم العثور عليها.';
-$s_own_sponsored = 'القضايا التي قمت برعايتها:';
-$s_issues_handled = 'القضايا المرعية التي تم إيكالها إليك:';
-$s_no_own_sponsored = 'أنت لم ترع أي قضايا.';
-$s_sponsor = 'راعي';
-$s_sponsor_verb = 'يرعى';
-$s_amount = 'كمية';
-$s_total_owing = 'الدين الإجمالي';
-$s_total_paid = 'إجمالي المدفوع';
-$s_sponsor_hide = 'إخفاء المحلول والمدفوع';
-$s_sponsor_show = 'اعرض الكل';
-$s_payment_updated = 'معلومات الدفع تم تحديثها.';
-$s_account_updated_msg = 'حسابك تم تحديثه بنجاح...';
-$s_email_updated = 'عنوان البريد الإلكتروني تم تحديثه بنجاح';
-$s_realname_duplicated = 'الاسم الحقيقي مستعمل بواسطة مستخدم آخر';
-$s_realname_updated = 'الاسم الحقيقي تم تحديثه بنجاح';
-$s_password_updated = 'كلمة السر تم تحديثها بنجاح';
-$s_multiple_projects = 'القضايا التي اخترتها من مشاريع مختلفة. المحددات بالأسفل تعكس الإعدادات لكل المشاريع. لو أن هذا غير صحيح، من فضلك أعد محاولة القيام بتغييرك باختيار عدد أصغر من القضايا.';
-$s_bug_assign_msg = 'القضية تم إيكالها بنجاح...';
-$s_new_bug_title = 'قضية جديدة';
-$s_feedback_bug_title = 'طلب ردود على القضية';
-$s_acknowledged_bug_title = 'التعريف بالقضية';
-$s_confirmed_bug_title = 'تأكيد القضية';
-$s_assigned_bug_title = 'إيكال القضية';
-$s_new_bug_button = 'قضية جديدة';
-$s_feedback_bug_button = 'طلب ردود';
-$s_acknowledged_bug_button = 'تعريف القضية';
-$s_confirmed_bug_button = 'تأكيد القضية';
-$s_assigned_bug_button = 'تكليف القضية';
-$s_bug_close_msg = 'القضية تم إغلاقها...';
-$s_close_immediately = 'أغلق حالا:';
-$s_closed_bug_title = 'إغلاق القضية';
-$s_bug_deleted_msg = 'القضية تم حذفها...';
-$s_delete_bug_sure_msg = 'هل أنت متأكد أنك تريد حذف هذه القضية؟';
-$s_delete_bug_button = 'حذف';
-$s_monitor_bug_button = 'تابع';
-$s_unmonitor_bug_button = 'إنهاء المراقبة';
-$s_file_upload_msg = 'رفع الملف نجح';
-$s_upload_file = 'رفع ملف';
-$s_upload_files = 'رفع الملفات';
-$s_select_file = 'اختر ملفا';
-$s_select_files = 'اختر الملفّات';
-$s_upload_file_button = 'رفع ملف';
-$s_upload_files_button = 'رفع الملفات';
-$s_max_file_size = 'الحجم الأقصى';
-$s_bug_reopened_msg = 'القضية تمت إعادة فتحها...';
-$s_reopen_add_bugnote_title = 'إضافة ملاحظة كسبب لإعادة فتح القضية';
-$s_bugnote_add_reopen_button = 'إضافة ملاحظة وإعادة فتح القضية';
-$s_resolved_bug_title = 'حل القضية';
-$s_resolved_bug_button = 'حل القضية';
-$s_bug_resolved_msg = 'القضية تم حلها. أدخل الملاحظة بالأسفل...';
-$s_resolve_add_bugnote_title = 'إضافة ملاحظة كسبب لحل القضية';
-$s_bugnote_add_resolve_button = 'إضافة ملاحظة';
-$s_from = 'من';
-$s_to = 'إلى';
-$s_sent_you_this_reminder_about = 'أرسل إليك هذه التذكرة حول';
-$s_bug_reminder = 'إرسال تذكرة';
-$s_reminder_sent_to = 'تم إرسال التذكرة إلى';
-$s_reminder_sent_none = 'تعذر إرسال أي تذكيرات';
-$s_reminder_list_truncated = 'تم أقتطاع قائمة المستلمين، راجع تاريخ المشكلة للقائمة الكاملة';
-$s_bug_send_button = 'أرسل';
-$s_reminder = 'تذكرة';
-$s_reminder_explain = 'هذه الملاحظة سيتنم إرسالها إلى المتلقين المعروضين كطالبي ردود على هذه القضية.';
-$s_reminder_monitor = 'هؤلاء المتلقون سيبدءون أيضا مراقبة القضايا. يمكنهم التوقف باستخدام زر التوقف عن المراقبة.';
-$s_reminder_store = 'هذه الملاحظة سيتم تخزينها مع القضية.';
-$s_confirm_sponsorship = 'من فضلك أكد أنك تريد رعاية القضية %1$d ل%2$s.';
-$s_stick_bug_button = 'ثبّت';
-$s_unstick_bug_button = 'ألغِ التثبيت';
-$s_bug_updated_msg = 'القضية تم تحديثها بنجاح...';
-$s_back_to_bug_link = 'رجوع إلى القضية';
-$s_update_simple_link = 'تحديث بسيط';
-$s_updating_bug_advanced_title = 'تحديث معلومات القضية';
-$s_id = 'رقم';
-$s_category = 'تصنيف';
-$s_severity = 'شدة';
-$s_reproducibility = 'القابلية لإعادة الإنتاج';
-$s_date_submitted = 'تاريخ الإرسال';
-$s_last_update = 'آخر تحديث';
-$s_reporter = 'المبلغ';
-$s_assigned_to = 'أوكلت إلى';
-$s_priority = 'أولوية';
-$s_resolution = 'الحل';
-$s_status = 'الحالة';
-$s_duplicate_id = 'رقم التكرار';
-$s_os = 'نظام التشغيل';
-$s_projection = 'مسقط';
-$s_os_version = 'نسخة نظام التشغيل';
-$s_eta = 'زمن الوصول المتوقع';
-$s_product_version = 'نسخة المنتج';
-$s_build = 'نسخة';
-$s_fixed_in_version = 'أصلحت في النسخة';
-$s_target_version = 'النسخة الهدف';
-$s_votes = 'أصوات';
-$s_summary = 'ملخص';
-$s_description = 'الوصف';
-$s_steps_to_reproduce = 'الخطوات لإعادة الإنتاج';
-$s_update_information_button = 'تحديث المعلومات';
-$s_sticky_issue = 'قضية لاصقة';
-$s_profile = 'الملف';
-$s_updating_bug_simple_title = 'تحديث معلومات القضية';
-$s_view_revisions = 'رؤية المراجعات';
-$s_revision = 'المراجعة';
-$s_revision_by = '%1$s بواسطة %2$s';
-$s_revision_drop = 'إسقاط';
-$s_bug_revision_dropped_history = 'أسقاط مراجعة الخطأ';
-$s_bugnote_revision_dropped_history = 'إسقاط مراجعة الملاحظة';
-$s_all_revisions = 'كل المراجعات';
-$s_back_to_issue = 'رجوع إلى القضية';
-$s_confirm_revision_drop = 'هل أنت متأكد أنك تريد إسقاط مراجعة العلة هذه؟';
-$s_vote_added_msg = 'التصويت تمت إضافته...';
-$s_bugnote_added_msg = 'الملاحظة تمت إضافتها...';
-$s_bugnote_deleted_msg = 'الملاحظة تم حذفها بنجاح...';
-$s_bug_notes_title = 'ملاحظات';
-$s_edit_bugnote_title = 'عدل الملاحظة';
-$s_no_bugnotes_msg = 'لا توجد ملاحظات ملحقة بهذه القضية.';
-$s_delete_link = 'حذف';
-$s_add_bugnote_title = 'إضافة ملاحظة';
-$s_add_bugnote_button = 'إضافة ملاحظة';
-$s_bugnote_edit_link = 'تعديل';
-$s_closed_bug_button = 'إغلاق القضية';
-$s_bugnote_updated_msg = 'الملاحظة تم تحديثها بنجاح...';
-$s_edited_on = 'تم التعديل في:';
-$s_hide_content = 'إخفاء المحتوى';
-$s_show_content = 'إظهار المحتوى';
-$s_total_queries_executed = '%1$d استعلامات إجمالية تم تنفيذها.';
-$s_unique_queries_executed = '%1$d استعلامات منفردة تم تنفيذها.';
-$s_memory_usage_in_kb = 'استخدام الذاكرة: %1$s كيلوبايت';
-$s_please_report = 'من فضلك أبلغ هذا إلى %1$.';
-$s_click_to_login = 'تسجيل الدخول';
-$s_warning_plain_password_authentication = '<strong>تحذير:</strong> تحقيق كلمة السر الصافي مستخدم، هذا سيكشف كلمات سرك للإداريين.';
-$s_warning_default_administrator_account_present = '<strong>تحذير:</strong> ينبغي عليك تعطيل حساب \'administrator\' الافتراضي أو تغيير كلمة سره.';
-$s_warning_admin_directory_present = '<strong>تحذير:</strong> مجلد الإدارة ينبغي إزالته.';
-$s_error_database_version_out_of_date_1 = '<strong>خطأ:</strong> هيكل قاعدة البيانات يبدو أنه قديم (config(databaseversion) هو 0 وجداول الترقية القديمة موجودة). النسخة 1.x من مانتيس بي تي استحدثت عملية ترقية جديدة. أنت يبدو أنك تقوم بالترقية من إصدار 0.XX. من فضلك قم بالترقية إلى 1.0.8 أو 1.1.X، ثم قم بالترقية إلى 1.2.';
-$s_error_database_no_schema_version = '<strong>خطأ:</strong> هيكل قاعدة البيانات يبدو أنه قديم(config(databaseversion) هو 0 وجداول الترقية القديمة غير موجودة). من فضلك تحقق من أن قاعدة بياناتك تعمل - لم يمكننا استرجاع نسخة سكيما قاعدة البيانات. جدول Config لم يرجع نسخة سكيما قاعدة بيانات صحيحة - من فضلك سل عن الدعم في قائمة مساعدة مانتيس البريدية لو كان هذا مطلوبا.';
-$s_error_database_version_out_of_date_2 = '<strong>تحذير:</strong> هيكل قاعدة البيانات ربما يكون قديما. من فضلك قم بالترقية <a href="admin/install.php">هنا</a> قبل تسجيل الدخول.';
-$s_error_code_version_out_of_date = '<strong>تحذير:</strong> هيكل قاعدة البيانات أكثر حداثة من الكود المنصب.  من فضلك قم بترقية الكود.';
-$s_login_page_info = 'مرحبا إلى متتبع القضايا.';
-$s_login_title = 'تسجيل الدخول';
-$s_save_login = 'تذكر دخولي بهذا المتصفح';
-$s_secure_session = 'جلسة آمنة';
-$s_secure_session_long = 'أسمح فقط لدورتك باستخدام عنوان الآي بي هذا.';
-$s_choose_project = 'اختر المشروع';
-$s_login_button = 'تسجيل الدخول';
-$s_signup_link = 'تسجيل حساب جديد';
-$s_lost_password_link = 'فقدت كلمة سرك؟';
-$s_select_project_button = 'اختر المشروع';
-$s_lost_password_title = 'إعادة ضبط كلمة السر';
-$s_lost_password_done_title = 'رسالة كلمة السر تم إرسالها';
-$s_lost_password_subject = 'إعادة ضبط كلمة السر';
-$s_lost_password_info = 'لاسترجاع كلمة سرك المفقودة، من فضلك وفر الاسم وعنوان البريد الإلكتروني للحساب.<br /><br />لو أن البيانات تطابق حسابا صحيحا، سيتم إرسال مسار خاص إليك من خلال البريد الإلكتروني يحتوي على كود تحقيق. من فضلك اتبع هذه الوصلة لتغيير كلمة سرك.';
-$s_lost_password_confirm_hash_OK = 'تأكيدك تم قبوله. من فضلك حدث كلمة السر الخاصة بك.';
-$s_open_and_assigned_to_me = 'مفتوحة وأنا مكلف بها';
-$s_open_and_reported_to_me = 'مفتوحة وأنا أبلغتها';
-$s_newer_news_link = 'أخبار أجدد';
-$s_older_news_link = 'أخبار أقدم';
-$s_archives = 'أرشيفات';
-$s_rss = 'آر إس إس';
-$s_site_information = 'معلومات الموقع';
-$s_mantis_version = 'نسخة مانتيس بي تي';
-$s_schema_version = 'نسخة سكيما';
-$s_site_path = 'مسار الموقع';
-$s_core_path = 'مسار القلب';
-$s_plugin_path = 'مسار الإضافة';
-$s_created_user_part1 = 'أنشأ مستخدما';
-$s_created_user_part2 = 'بمستوى صلاحية';
-$s_create_new_account_title = 'إنشاء حساب جديد';
-$s_verify_password = 'تأكيد كلمة السر';
-$s_enabled = 'مفعل';
-$s_protected = 'محمي';
-$s_create_user_button = 'إنشاء المستخدم';
-$s_hide_disabled = 'إخفاء المعطل';
-$s_filter_button = 'تشغيل الفلتر';
-$s_default_filter = 'مرشح افتراضي';
-$s_create_filter_link = 'إنشاء وصلة دائمة';
-$s_create_short_link = 'إنشاء وصلة قصيرة';
-$s_filter_permalink = 'التالي وصلة دائمة للفلتر المضبوط حاليا:';
-$s_manage_users_link = 'التحكم بالمستخدمين';
-$s_manage_projects_link = 'التحكم بالمشاريع';
-$s_manage_custom_field_link = 'التحكم بالحقول المخصصة';
-$s_manage_global_profiles_link = 'التحكم بالملفات العامة';
-$s_manage_plugin_link = 'التحكم بالإضافات';
-$s_permissions_summary_report = 'تقرير السماحات';
-$s_manage_config_link = 'التحكم بالضبط';
-$s_manage_threshold_config = 'حدود معدل العمل';
-$s_manage_email_config = 'إخطارات البريد الإلكتروني';
-$s_manage_workflow_config = 'نقل معدل العمل';
-$s_manage_tags_link = 'التحكم بالوسوم';
-$s_create_new_account_link = 'إنشاء حساب جديد';
-$s_projects_link = 'مشاريع';
-$s_documentation_link = 'وثائق';
-$s_new_accounts_title = 'حسابات جديدة';
-$s_1_week_title = '1 أسبوع';
-$s_never_logged_in_title = 'لم يسجل الدخول أبدا';
-$s_prune_accounts = 'إلغاء الحسابات';
-$s_hide_inactive = 'إخفاء غير النشط';
-$s_show_disabled = 'أظهر المعطلة';
-$s_manage_accounts_title = 'التحكم بالحسابات';
-$s_p = 'بي';
-$s_date_created = 'تاريخ الإنشاء';
-$s_last_visit = 'آخر زيارة';
-$s_edit_user_link = 'عدل المستخدم';
-$s_config_all_projects = 'ملاحظة: عمليات الضبط هذه تؤثر على كل المشاريع، إلا لو تم تجاوزها لمشروع معين.';
-$s_config_project = 'ملاحظة: عمليات الضبط هذه تؤثر فقط على المشروع %1$s.';
-$s_colour_coding = 'في الجدول بالأسفل، كود اللون التالي مطبق:';
-$s_colour_project = 'إعدادات المشروع تتجاوز الإعدادات الأخرى.';
-$s_colour_global = 'كل إعدادات المشروع تتجاوز الإعدادات الافتراضية.';
-$s_issue_reporter = 'المستخدم الذي أبلغ عن القضية';
-$s_issue_handler = 'المستخدم الذي يتعامل مع القضية';
-$s_users_added_bugnote = 'المستخدمون الذين أضافوا ملاحظات العلل';
-$s_change_configuration = 'تحديث الضبط';
-$s_message = 'رسالة';
-$s_default_notify = 'ضبط أعلام الإخطار الافتراضية إلى';
-$s_action_notify = 'ضبط أعلام إخطار الفعل إلى';
-$s_notify_defaults_change_access = 'من يمكنه تغيير افتراضيات الإخطار';
-$s_notify_actions_change_access = 'من يمكنه تغيير الإشعارات:';
-$s_revert_to_system = 'حذف كل إعدادات المشاريع';
-$s_revert_to_all_project = 'حذف الإعدادات الخاصة بمشروع';
-$s_non_existent = 'غير موجود';
-$s_current_status = 'الحالة الحالية';
-$s_next_status = 'الحالة القادمة';
-$s_workflow = 'معدل العمل';
-$s_workflow_thresholds = 'الحدود التي تؤثر على معدل العمل';
-$s_threshold = 'الحد';
-$s_status_level = 'الحالة';
-$s_alter_level = 'من يمكنه تغيير هذه القيمة';
-$s_validation = 'التحقق من معدل العمل';
-$s_comment = 'تعليق التحقق';
-$s_superfluous = 'قوس من القضية لنفسها تم تطبيقه، ولا يحتاج إلى أن يتم إعطاؤه صراحة.';
-$s_unreachable = 'أنت لا يمكنك نقل قضية إلى هذه الحالة';
-$s_no_exit = 'أنت لا يمكنك نقل قضية خارج هذه الحالة';
-$s_access_levels = 'مستويات الصلاحية';
-$s_access_change = 'أقل مستوى صلاحية للتغيير إلى هذه الحالة';
-$s_desc_bug_submit_status = 'الحالة التي يتم ضبط قضية جديدة عليها';
-$s_desc_bug_reopen_status = 'الحالة التي يتم ضبط القضايا المفتوحة عليها';
-$s_desc_bug_resolved_status_threshold = 'الحالة حيث يتم اعتبار قضية ما محلولة';
-$s_desc_bug_closed_status_threshold = 'الحالة حيث قضية ما تعتبر مغلقة';
-$s_workflow_change_access = 'من يمكنه تغيير معدل العمل';
-$s_access_change_access = 'من يمكنه تغيير مستويات الصلاحية';
-$s_default_not_in_flow = 'الحالة الافتراضية ل%1$s لم يتم اختيارها في الحالات القادمة ل%2$s. سيتم تجاهلها.';
-$s_assign_issue = 'إيكال قضية';
-$s_allow_close_immediate = 'يسمح للقضايا بأن يتم إغلاقها عند الحل';
-$s_allow_reporter_close = 'يسمح للمبلغ بإغلاق القضية';
-$s_allow_reporter_reopen = 'يسمح للمبلغ بإعادة فتح القضية';
-$s_set_status_assigned = 'ضبط الحالة عند تكليف المعالج';
-$s_allow_user_edit = 'يسمح للمستخدم بتعديل ملاحظات عللهم';
-$s_limit_access = 'تحديد صلاحية المبلغ بقضاياه الخاصة';
-$s_submit_status = 'الحالة التي يتم ضبط القضية الجديدة عليها';
-$s_assigned_status = 'الحالة لضبط القضايا المكلفة تلقائيا إليها';
-$s_resolved_status = 'الحالة حيث تعتبر قضية ما محلولة';
-$s_readonly_status = 'الحالة حيث تصبح قضية ما للقراءة فقط';
-$s_reopen_status = 'الحالة التي يتم ضبط قضية معاد فتحها إليها';
-$s_reopen_resolution = 'الحل الذي يتم ضبط قضية معاد فتحها إليه';
-$s_config_delete_sure = 'هل أنت متأكد أنت تريد حذف الإعدادات ل:';
-$s_in_project = 'في المشروع';
-$s_delete_config_button = 'حذف الإعدادات';
-$s_configuration_report = 'تقرير الضبط';
-$s_database_configuration = 'ضبط قاعدة البيانات';
-$s_configuration_option = 'خيار الضبط';
-$s_configuration_option_type = 'نوع';
-$s_configuration_option_value = 'قيمة';
-$s_all_users = 'كل المستخدمين';
-$s_set_configuration_option = 'ضبط خيار الضبط';
-$s_delete_config_sure_msg = 'هل أنت متأكد أنك تريد حذف خيار الضبط هذا؟';
-$s_configuration_corrupted = 'الإعدادات في  قاعدة البيانات معطوبة.';
-$s_plugin = 'إضافة';
-$s_plugins_installed = 'الإضافات المنصبة';
-$s_plugins_available = 'الإضافات المتوفرة';
-$s_plugin_description = 'الوصف';
-$s_plugin_author = 'المؤلف: %1$s';
-$s_plugin_url = 'موقع الوب:';
-$s_plugin_depends = 'اعتمادات';
-$s_plugin_no_depends = 'لا اعتمادات';
-$s_plugin_priority = 'أولوية';
-$s_plugin_protected = 'محمي';
-$s_plugin_update = 'تحديث';
-$s_plugin_actions = 'أفعال';
-$s_plugin_install = 'تنصيب';
-$s_plugin_upgrade = 'ترقية';
-$s_plugin_uninstall = 'فك التنصيب';
-$s_plugin_uninstall_message = 'هل أنت متأكد أنك تريد إزالة الإضافة "%1$s"؟';
-$s_plugin_key = 'مفتاح';
-$s_plugin_key_met = 'الإضافة جاهزة';
-$s_plugin_key_unmet = 'اعتمادات غير مقابلة';
-$s_plugin_key_dated = 'اعتمادات قديمة';
-$s_plugin_key_upgrade = 'الترقية مطلوبة';
-$s_project_added_msg = 'المشروع تمت إضافته بنجاح...';
-$s_category_added_msg = 'التصنيف تمت إضافته بنجاح...';
-$s_category_deleted_msg = 'التصنيف تم حذفه بنجاح...';
-$s_category_delete_sure_msg = 'هل أنت متأكد أنك تريد حذف هذا التصنيف؟<br />التصنيف "%1$s" يحتوي على %2$d علة.';
-$s_delete_category_button = 'حذف التصنيف';
-$s_edit_project_category_title = 'عدل تصنيف المشروع';
-$s_update_category_button = 'تحديث التصنيف';
-$s_category_updated_msg = 'التصنيف تم تحديثه بنجاح...';
-$s_add_subproject_title = 'إضافة مشروع فرعي';
-$s_project_deleted_msg = 'المشروع تمت إزالته بنجاح...';
-$s_project_delete_msg = 'هل أنت متأكد أنك تريد حذف هذا المشروع وكل تقارير القضايا الملحقة؟';
-$s_project_delete_button = 'حذف المشروع';
-$s_edit_project_title = 'عدل المشروع';
-$s_project_name = 'اسم المشروع';
-$s_view_status = 'عرض الحالة';
-$s_public = 'علني';
-$s_private = 'خاص';
-$s_update_project_button = 'تحديث المشروع';
-$s_delete_project_button = 'حذف المشروع';
-$s_copy_from = 'نسخ من';
-$s_copy_to = 'نسخ إلى';
-$s_categories_and_version_title = 'التصنيفات والنسخ';
-$s_categories = 'تصنيفات';
-$s_add_category_button = 'إضافة نسخة';
-$s_versions = 'نسخ';
-$s_add_version_button = 'إضافة نسخة';
-$s_add_and_edit_version_button = 'أضف وعدل النسخة';
-$s_edit_link = 'تعديل';
-$s_actions = 'أفعال';
-$s_version = 'نسخة';
-$s_timestamp = 'طابع زمني';
-$s_update = 'حدّث';
-$s_subprojects = 'مشاريع فرعية';
-$s_add_subproject = 'أضف كمشروع فرعي';
-$s_create_new_subproject_link = 'إنشاء مشروع فرعي جديد';
-$s_unlink_link = 'إزالة الوصلات';
-$s_show_global_users = 'عرض المستخدمين بالصلاحيات العامة';
-$s_hide_global_users = 'إخفاء المستخدمين بالصلاحيات العامة';
-$s_add_project_title = 'إضافة مشروع';
-$s_upload_file_path = 'مسار ملف الرفع';
-$s_add_project_button = 'إضافة مشروع';
-$s_projects_title = 'مشاريع';
-$s_name = 'الاسم';
-$s_project_updated_msg = 'المشروع تم تحديثه بنجاح...';
-$s_version_added_msg = 'النسخة تمت إضافتها بنجاح...';
-$s_version_deleted_msg = 'النسخة تم حذفها بنجاح...';
-$s_version_delete_sure = 'هل أنت متأكد أنك تريد حذف هذه النسخة؟';
-$s_delete_version_button = 'حذف نسخة';
-$s_edit_project_version_title = 'عدل نسخة المشروع';
-$s_update_version_button = 'تحديث النسخة';
-$s_released = 'تم الإصدار';
-$s_not_released = 'لم يتم الإصدار بعد';
-$s_scheduled_release = 'مجدولة للإصدار';
-$s_obsolete = 'قديم';
-$s_version_updated_msg = 'النسخة تم تحديثها بنجاح...';
-$s_account_delete_protected_msg = 'الحساب محمي. لا يمكن حذف هذا الحساب.';
-$s_account_deleted_msg = 'الحساب تم حذفه...';
-$s_delete_account_sure_msg = 'هل أنت متأكد أنك تريد حذف هذا الحساب؟';
-$s_notify_user = 'أخطر المستخدم';
-$s_accounts_pruned_msg = 'كل الحسابات التي لم تسجل الدخول أبدا وأقدم من 1 أسبوع تمت إزالتها';
-$s_prune_accounts_button = 'إلغاء';
-$s_confirm_account_pruning = 'هل أنت متأكد أنك تريد حذف الحسابات القديمة التي لم تقم بتسجيل الدخول أبدا؟';
-$s_edit_user_title = 'عدل المستخدم';
-$s_account_unlock_button = 'أفتح الحساب';
-$s_reset_password_button = 'إعادة ضبط كلمة السر';
-$s_delete_user_button = 'حذف المستخدم';
-$s_reset_password_msg = 'إعادة ضبط كلمة السر يرسل مسار التأكيد من خلال البريد الإلكتروني.';
-$s_reset_password_msg2 = 'إعادة ضبط كلمة السر يعيد ضبط كلمة السر لتصبح فارغة.';
-$s_show_all_users = 'الكل';
-$s_users_unused = 'غير مستخدم';
-$s_users_new = 'جديد';
-$s_account_reset_protected_msg = 'الحساب محمي. لم يمكن إعادة ضبط كلمة السر.';
-$s_account_reset_msg = 'طلب تأكيد تم إرساله إلى عنوان البريد الإلكتروني المختار للمستخدم. باستخدام هذا، المستخدم سيصبح قادرا على تغيير كلمة سره.';
-$s_account_reset_msg2 = 'كلمة سر الحساب تم ضبطها كفارغة...';
-$s_account_unlock_msg = 'تم إعادة فتح الحساب.';
-$s_manage_user_protected_msg = 'الحساب محمي. لا يمكن تعديل ‘مستوى الصلاحية‘ و‘التفعيل‘ . تم تحديث باقي الحقول بنجاح.';
-$s_manage_user_updated_msg = 'الحساب تم تحديثه بنجاح...';
-$s_email_user_updated_subject = 'حُدّث الحساب';
-$s_email_user_updated_msg = 'تم تحديث حسابك من طرف مسؤول. قائمة بهذه التغييرات مقدمة أسفله. يمكنك تحديث تفاصيل حسابك والتفصيلات الخاصة بك في أي وقت بزيارة العنوان الإلكتروني التالي:';
-$s_main_link = 'رئيسي';
-$s_view_bugs_link = 'عرض القضايا';
-$s_report_bug_link = 'الإبلاغ عن قضية';
-$s_changelog_link = 'سجل التغيير';
-$s_roadmap_link = 'خريطة الطريق';
-$s_summary_link = 'ملخص';
-$s_account_link = 'حسابي';
-$s_users_link = 'مستخدمون';
-$s_manage_link = 'تحكم';
-$s_edit_news_link = 'عدل الأخبار';
-$s_docs_link = 'وثائق';
-$s_logout_link = 'تسجيل الخروج';
-$s_my_view_link = 'عرضي';
-$s_my_view_title_unassigned = 'غير موكولة';
-$s_my_view_title_recent_mod = 'معدلة حديثا';
-$s_my_view_title_reported = 'أبلغت بواسطتي';
-$s_my_view_title_assigned = 'موكلة لي (غير محلولة)';
-$s_my_view_title_resolved = 'تم الحل';
-$s_my_view_title_monitored = 'مراقبة بواسطتي';
-$s_my_view_title_feedback = 'بانتظار الردود مني';
-$s_my_view_title_verify = 'بانتظار تأكيد الحل مني';
-$s_my_view_title_my_comments = 'القضايا التي علقت عليها';
-$s_news_added_msg = 'مدخلة الأخبار تمت إضافتها...';
-$s_news_deleted_msg = 'تم حذف مدخلة الأخبار...';
-$s_delete_news_sure_msg = 'هل أنت متأكد أنك تريد حذف مدخلة الأخبار هذه؟';
-$s_delete_news_item_button = 'حذف مدخلة الأخبار';
-$s_edit_news_title = 'عدل الأخبار';
-$s_headline = 'عنوان';
-$s_body = 'جسم';
-$s_update_news_button = 'تحديث الأخبار';
-$s_add_news_title = 'إضافة الأخبار';
-$s_post_to = 'أرسل إلى';
-$s_post_news_button = 'إرسال الأخبار';
-$s_edit_or_delete_news_title = 'عدل أو احذف الأخبار';
-$s_edit_post = 'عدل الرسالة';
-$s_delete_post = 'حذف الرسالة';
-$s_select_post = 'اختيار الرسالة';
-$s_news_updated_msg = 'مدخلة الأخبار تم تحديثها...';
-$s_back_link = 'رجوع';
-$s_file_uploaded_msg = 'رفع الملف نجح.';
-$s_upload_file_title = 'رفع ملف';
-$s_title = 'عنوان';
-$s_project_file_deleted_msg = 'ملف المشروع تم حذفه';
-$s_confirm_file_delete_msg = 'هل أنت متأكد أنك تريد حذف هذا الملف؟';
-$s_filename = 'اسم الملف';
-$s_file_update_button = 'حدّث الملف';
-$s_file_delete_button = 'حذف الملف';
-$s_project_documentation_title = 'وثائق المشروع';
-$s_user_documentation = 'وثائق المستخدم';
-$s_project_documentation = 'وثائق المشروع';
-$s_add_file = 'إضافة ملف';
-$s_project_document_updated = 'تحديث المشروع نجح.';
-$s_project_user_added_msg = 'أضاف المستخدم بنجاح إلى المشروع.';
-$s_project_removed_user_msg = 'أزال المستخدم بنجاح من المشروع.';
-$s_remove_user_sure_msg = 'هل أنت متأكد أنك تريد إزالة هذا المستخدم؟';
-$s_remove_user_from_project_button = 'قم بإزالة المستخدم من المشروع %s';
-$s_remove_all_users_sure_msg = 'هل أنت متأكد أنك تريد إزالة كل المستخدمين من هذا المشروع؟';
-$s_remove_all_users_button = 'إزالة كل المستخدمين';
-$s_add_user_title = 'إضافة مستخدم إلى المشروع';
-$s_add_user_button = 'إضافة مستخدم';
-$s_project_selection_title = 'اختيار المشروع';
-$s_remove_link = 'إزالة';
-$s_remove_all_link = 'إزالة الكل';
-$s_updated_user_msg = 'تم تحديث المستخدم بنجاح.';
-$s_must_enter_category = 'يجب أن تختار تصنيفا';
-$s_must_enter_severity = 'يجب أن تختار شدة.';
-$s_must_enter_reproducibility = 'يجب أن تختار قابلية لإعادة الإنتاج.';
-$s_must_enter_summary = 'يجب أن تدخل ملخصا';
-$s_must_enter_description = 'يجب أن تدخل وصفا';
-$s_report_more_bugs = 'الإبلاغ عن مزيد من القضايا';
-$s_submission_thanks_msg = 'شكرا لك لمساهمتك.';
-$s_simple_report_link = 'تقرير بسيط';
-$s_enter_report_details_title = 'أدخل تفاصيل التقرير';
-$s_required = 'مطلوب';
-$s_select_category = 'اختر التصنيف';
-$s_select_reproducibility = 'اختر قابلية لإعادة الإنتاج';
-$s_select_severity = 'اختر شدة';
-$s_or_fill_in = 'أو املأ';
-$s_assign_to = 'موكولة إلى';
-$s_additional_information = 'معلومات إضافية';
-$s_submit_report_button = 'إرسال التقرير';
-$s_check_report_more_bugs = 'اختر للإبلاغ عن مزيد من القضايا';
-$s_report_stay = 'التقرير يبقى';
-$s_selected_project = 'المشروع المختار';
-$s_valid_project_msg = 'يجب أن تختار مشروعا صحيحا';
-$s_signup_done_title = 'تسجيل الحساب تمت معالجته.';
-$s_password_emailed_msg = 'تهانينا. أنت سجلت بنجاح. أنت الآن يتم إرسال بريد تأكيد إلكتروني إليك للتحقق من عنوان بريدك الإلكتروني. زيارة الوصلة المرسلة إليك في البريد الإلكتروني هذا ستنشط حسابك.';
-$s_no_reponse_msg = 'سيكون لديك سبعة أيام لإكمال عملية تأكيد الحساب؛ لو أنك فشلت في إكمال تأكيد الحساب خلال سبعة أيام، هذا الحساب المسجل حديثا ربما يتم إلغاؤه.';
-$s_signup_captcha_request = 'أدخل الكود كما هو معروض في الصندوق على اليمين.';
-$s_signup_info = 'عند إكمال هذه الاستمارة وتأكيد إجاباتك، سيتم إرسال رسالة تأكيد إليك إلى عنوان البريد الإكتروني الذي حددته.<br />باستخدام بريد التأكيد، ستصبح قادرا على تنشيط حسابك. لو فشلت في تنشيط حسابك لمدة سبعة أيام، سيتم إلغاؤه.<br />يجب عليك أن تحدد عنوان بريد إلكتروني حتى تتلقى رسالة تأكيد الحساب.';
-$s_signup_title = 'إنشاء حساب';
-$s_signup_button = 'إنشاء حساب';
-$s_no_password_request = 'كلمة سرك يتم التحكم بها بواسطة نظام آخر. من فضلك اتصل بإداري نظامك.';
-$s_edit_site_settings_title = 'عدل إعدادات الموقع';
-$s_save_settings_button = 'حفظ الإعدادات';
-$s_site_settings_title = 'إعدادات الموقع';
-$s_system_info_link = 'معلومات النظام';
-$s_site_settings_link = 'إعدادات الموقع';
-$s_site_settings_updated_msg = 'إعدادات الموقع تم تحديثها';
-$s_summary_title = 'ملخص';
-$s_summary_advanced_link = 'ملخص متقدم';
-$s_by_project = 'حسب المشروع';
-$s_by_status = 'حسب الحالة';
-$s_by_date = 'حسب التاريخ (الأيام)';
-$s_by_severity = 'حسب الشدة';
-$s_by_resolution = 'حسب الحل';
-$s_by_category = 'حسب التصنيف';
-$s_by_priority = 'حسب الأولوية';
-$s_by_developer = 'حسب المطور';
-$s_by_reporter = 'حسب المبلغ';
-$s_reporter_by_resolution = 'المبلغ حسب الحل';
-$s_reporter_effectiveness = 'فعالية المبلغ';
-$s_developer_by_resolution = 'المطور حسب الحل';
-$s_percentage_fixed = '% تم إصلاحها';
-$s_percentage_errors = '% خاطئة';
-$s_errors = 'خطأ';
-$s_opened = 'مفتوحة';
-$s_resolved = 'محلولة';
-$s_total = 'إجمالي';
-$s_balance = 'توازن';
-$s_most_active = 'الأكثر نشاطا';
-$s_score = 'نتيجة';
-$s_days = 'أيام';
-$s_time_stats = 'إحصاءات الوقت للقضايا المحلولة (أيام)';
-$s_longest_open_bug = 'أقدم قضية مفتوحة';
-$s_longest_open = 'أقدم مفتوح';
-$s_average_time = 'زمن متوسط';
-$s_total_time = 'زمن إجمالي';
-$s_developer_stats = 'إحصاءات المطور';
-$s_reporter_stats = 'إحصاءات المبلغ';
-$s_orct = '(مفتوحة/محلولة/مغلقة/إجمالي)';
-$s_any = 'أي';
-$s_all = 'كل';
-$s_show = 'عرض';
-$s_changed = 'تغيرت(ساعات)';
-$s_viewing_bugs_title = 'عرض القضايا';
-$s_updated = 'تم التحديث';
-$s_sticky = 'عرض القضايا اللاصقة';
-$s_sort = 'الترتيب حسب';
-$s_issue_id = 'القضية #';
-$s_recently_visited = 'المزارة حديثا';
-$s_priority_abbreviation = 'بي';
-$s_note_user_id = 'الملاحظة بواسطة';
-$s_filter_match_type = 'نوع المطابقة';
-$s_filter_match_all = 'جميع الشروط';
-$s_filter_match_any = 'أي شرط';
-$s_none = 'لا شيء';
-$s_current = 'حالي';
-$s_search = 'بحث';
-$s_view_prev_link = 'عرض السابق';
-$s_view_next_link = 'عرض التالي';
-$s_prev = 'سابق';
-$s_next = 'تالي';
-$s_first = 'أول';
-$s_last = 'آخر';
-$s_start_date = 'تاريخ البداية';
-$s_end_date = 'تاريخ النهاية';
-$s_use_date_filters = 'استخدم فلاتر التاريخ';
-$s_yes = 'نعم';
-$s_no = 'لا';
-$s_open_filters = 'تغيير الفلتر';
-$s_or_unassigned = 'أو غير مكلفة';
-$s_ok = 'موافق';
-$s_select_all = 'اختر الكل';
-$s_use_query = 'استخدم الفلتر';
-$s_delete_query = 'احذف الفلتر';
-$s_query_deleted = 'الفلتر تم حذفه';
-$s_save_query = 'حفظ الفلتر الحالي';
-$s_reset_query = 'إعادة ضبط الفلتر';
-$s_query_name = 'اسم الفلتر';
-$s_query_exists = 'هذا المرشح بالذات يبدو أنه موجود بالفعل.';
-$s_query_dupe_name = 'يوجد مرشح آخر بهذا الاسم بالفعل. من فضلك اختر اسما مختلفا لهذا المرشح.';
-$s_query_blank_name = 'أنت لا يمكنك تخزين فلتر بدون اسم. من فضلك أعط هذا الفلتر اسما قبل حفظه.';
-$s_query_name_too_long = 'لا يمكنك تخزين اسم مرشح بأكثر من 64 حرف. من فضلك أعط هذا المرشح اسما أقصر.';
-$s_query_store_error = 'كان هناك خطأ أثناء حفظ هذا المرشح.';
-$s_open_queries = 'التحكم بالفلاتر';
-$s_query_delete_msg = 'هل أنت متأكد أنك تريد حذف هذا المرشح؟';
-$s_view_simple_link = 'عرض بسيط';
-$s_product_build = 'نسخة المنتج';
-$s_system_profile = 'وصف النظام';
-$s_update_bug_button = 'تعديل';
-$s_bug_assign_to_button = 'تكليف إلى:';
-$s_bug_status_to_button = 'غير الحالة إلى:';
-$s_reopen_bug_button = 'إعادة فتح';
-$s_close_bug_button = 'أغلق';
-$s_move_bug_button = 'انقل';
-$s_attached_files = 'الملفات الملحقة';
-$s_publish = 'نشر';
-$s_cached = 'مخزن';
-$s_add_user_to_monitor = 'أضف';
-$s_bug_view_title = 'عرض تفاصيل المشكلة';
-$s_no_users_monitoring_bug = 'لا يوجد مستخدمون يراقبون هذه القضية.';
-$s_users_monitoring_bug = 'المستخدمون الذين يراقبون هذه القضية';
-$s_monitoring_user_list = 'قائمة المستخدمين';
-$s_no_users_sponsoring_bug = 'لا يوجد مستخدمون يرعون هذه القضية.';
-$s_users_sponsoring_bug = 'المستخدمون الذين يرعون هذه القضية';
-$s_sponsors_list = 'قائمة الرعاة';
-$s_total_sponsorship_amount = 'إجمالي الرعاية = %1$s';
-$s_add_custom_field_button = 'حقل مخصص جديد';
-$s_delete_custom_field_button = 'حذف الحقل المخصص';
-$s_delete_custom_field_everywhere = 'حذف الحقل المخصص في كل مكان';
-$s_update_custom_field_button = 'تحديث الحقل المخصص';
-$s_add_existing_custom_field = 'إضافة الحقل المخصص الموجود هذا';
-$s_edit_custom_field_title = 'عدل الحقل المخصص';
-$s_custom_field = 'حقل';
-$s_custom_fields_setup = 'حقول مخصصة';
-$s_custom_field_name = 'الاسم';
-$s_custom_field_project_count = 'عداد المشروع';
-$s_custom_field_type = 'نوع';
-$s_custom_field_possible_values = 'قيم محتملة';
-$s_custom_field_default_value = 'قيمة افتراضية';
-$s_custom_field_valid_regexp = 'تعبير منتظم';
-$s_custom_field_access_level_r = 'صلاحية القراءة';
-$s_custom_field_access_level_rw = 'صلاحية الكتابة';
-$s_custom_field_length_min = 'الحجم الأدنى';
-$s_custom_field_length_max = 'الحجم الأقصى';
-$s_custom_field_filter_by = 'إضافة إلى الفلتر';
-$s_custom_field_display_report = 'عرض عند إبلاغ القضايا';
-$s_custom_field_display_update = 'عرض عند تحديث القضايا';
-$s_custom_field_display_resolved = 'عرض عند حل القضايا';
-$s_custom_field_display_closed = 'عرض عند إغلاق القضايا';
-$s_custom_field_require_report = 'مطلوب عند الإبلاغ';
-$s_custom_field_require_update = 'مطلوب عند التحديث';
-$s_custom_field_require_resolved = 'مطلوب عند الحل';
-$s_custom_field_require_closed = 'مطلوب عند الإغلاق';
-$s_link_custom_field_to_project_title = 'وصل حقل مخصص إلى المشروع';
-$s_link_custom_field_to_project_button = 'وصل الحقل المخصص';
-$s_linked_projects = 'المشاريع الموصولة';
-$s_custom_field_sequence = 'تتابع';
-$s_custom_field_type_enum_string = '0:سلسلة,1:رقمي,2:طائف,3:ترقيم,4:بريد إلكتروني,5:صندوق تعليم,6:قائمة,7:قائمة اختيار متعدد,8:تاريخ,9:راديو';
-$s_confirm_used_custom_field_deletion = 'هذا الحقل موصول من مشروع واحد على الأقل.  لو استمريت فكل القيم لهذا الحقل سيتم حذفها بشكل دائم.  هذا الفعل لا يمكن استرجاعه.  لو أنك لا تريد حذف هذا الحقل، اضغط زر رجوع في متصفحك. للمتابعة، اضغط الزر بالأسفل';
-$s_confirm_custom_field_deletion = 'هل أنت متأكد أنك تريد حذف الحقل المخصص هذا وكل القيم المصاحبة؟';
-$s_field_delete_button = 'حذف الحقل';
-$s_confirm_custom_field_unlinking = 'هل أنت متأكد من أنك تريد إزالة ارتباط الحقل المخصص هذا من المشروع؟ القيم لن يتم حذفها طالما أن الحقل المخصص نفسه لم يتم حذفه.';
-$s_field_remove_button = 'إزالة الحقل';
-$s_hide_status = 'إخفاء الحالة';
-$s_filter_closed = 'مغلق';
-$s_filter_resolved = 'محلول';
-$s_hide_closed = 'إخفاء المغلق';
-$s_hide_resolved = 'إخفاء المحلولة';
-$s_and_above = 'و الأعلى';
-$s_advanced_filters = 'فلاتر متقدمة';
-$s_simple_filters = 'فلاتر بسيطة';
-$s_monitored_by = 'مراقبة بواسطة';
-$s_attachments = 'الملحق(ات)';
-$s_bytes = 'بايت';
-$s_attachment_missing = 'الملفات المرفقة مفقودة';
-$s_attachment_count = 'عدد المرفقات';
-$s_view_attachments_for_issue = 'عرض %1$d المرفقات للمشكل #%2$d';
-$s_phpmailer_language = 'إنج';
-$s_sponsors = '%1$d راعي(رعاة)';
-$s_sponsorship_added = 'الرعاية تمت إضافتها';
-$s_sponsorship_updated = 'الرعاية تم تحديثها';
-$s_sponsorship_deleted = 'الرعاية تم حذفها';
-$s_sponsorship_paid = 'الرعاية تم دفعها';
-$s_sponsorship_more_info = 'المزيد من المعلومات حول الرعاية';
-$s_sponsorship_total = 'إجمالي الرعاية';
-$s_changelog = 'سجل التغيير';
-$s_changelog_empty = 'لا معلومات سجل تغيير متوفرة';
-$s_roadmap = 'خريطة الطريق';
-$s_resolved_progress = '%1$d من %2$d قضية(قضايا) تم حلها.  التقدم (%3$d%%).';
-$s_http_auth_realm = 'تسجيل دخول مانتيس بي تي';
-$s_bug = 'قضية';
-$s_bugs = 'قضايا';
-$s_add_new_relationship = 'علاقة جديدة';
-$s_add_new_relationship_button = 'أضف';
-$s_this_bug = 'القضية الحالية';
-$s_relationship_added = 'العلاقة تمت إضافتها';
-$s_relationship_deleted = 'العلاقة تم حذفها';
-$s_no_relationship = 'لا علاقة';
-$s_relationship_replaced = 'العلاقة تم استبدالها';
-$s_replace_relationship_button = 'استبدال';
-$s_replace_relationship_sure_msg = 'توجد علاقة بالفعل بين هاتين القضيتين. هل أنت متأكد أنك تريد استبدالها؟';
-$s_relationship_with_parent = 'العلاقة مع القضية الأصلية';
-$s_delete_relationship_button = 'حذف';
-$s_delete_relationship_sure_msg = 'هل أنت متأكد أنك تريد حذف هذه العلاقة؟';
-$s_relationship_warning_blocking_bugs_not_resolved = 'ليس كل أطفال هذه القضية تم حلهم أو إغلاقهم بعد.';
-$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>انتباه</b>. ليس كل أطفال هذه القضية تم حلهم أو إغلاقهم.<br />قبل <b>حل/إغلاق</b> قضية أساسية، كل القضايا المرتبطة كأبناء لهذه الواحدة ينبغي أن يتم حلها أو إغلاقها.';
-$s_create_child_bug_button = 'استنسخ';
-$s_bug_cloned_to = 'القضية تم تكرارها';
-$s_bug_created_from = 'القضية تم توليدها من';
-$s_copy_from_parent = 'أنسخ بيانات ممتدة من مشكلة مشابهة';
-$s_copy_notes_from_parent = 'أنسخ ملاحظات الخلل';
-$s_copy_attachments_from_parent = 'أنسخ المرفقات';
-$s_viewing_bug_relationship_graph_title = 'رسمة العلاقة';
-$s_viewing_bug_dependency_graph_title = 'رسمة الاعتماد';
-$s_relation_graph = 'رسمة العلاقة';
-$s_dependency_graph = 'رسمة الاعتماد';
-$s_vertical = 'رأسي';
-$s_horizontal = 'أفقي';
-$s_view_issue = 'عرض قضية';
-$s_checkin = 'تسجيل';
-$s_perm_rpt_capability = 'القدرة';
-$s_view = 'عرض';
-$s_issues = 'قضايا';
-$s_report_issue = 'إبلاغ قضية';
-$s_update_issue = 'تحديث قضية';
-$s_monitor_issue = 'مراقبة قضية';
-$s_handle_issue = 'التحكم بقضية';
-$s_move_issue = 'نقل قضية';
-$s_delete_issue = 'حذف قضية';
-$s_reopen_issue = 'إعادة فتح قضية';
-$s_view_private_issues = 'عرض القضايا الخاصة';
-$s_update_readonly_issues = 'تحديث قضايا القراءة فقط';
-$s_update_issue_status = 'تحديث حالة القضية';
-$s_set_view_status = 'اضبط حالة الرؤية عند الإبلاغ عن قضية أو ملاحظة جديدة';
-$s_update_view_status = 'غير حالة الرؤية للقضايا أو الملاحظات الموجودة';
-$s_show_list_of_users_monitoring_issue = 'عرض قائمة بالمستخدمين الذين يراقبون القضية';
-$s_notes = 'ملاحظات';
-$s_add_notes = 'إضافة ملاحظات';
-$s_update_notes = 'تحديث ملاحظات';
-$s_delete_note = 'حذف ملاحظة';
-$s_view_private_notes = 'رؤية ملاحظات الآخرين الخاصة';
-$s_news = 'أخبار';
-$s_view_private_news = 'عرض الأخبار الخاصة';
-$s_manage_news = 'التحكم بالأخبار';
-$s_view_list_of_attachments = 'عرض قائمة الملحقات';
-$s_download_attachments = 'تنزيل الملحقات';
-$s_delete_attachments = 'حذف الملحقات';
-$s_delete_attachment_button = 'حذف';
-$s_delete_attachment_sure_msg = 'هل أنت متأكد من أنك تريد حذف هذا الملحق؟';
-$s_upload_issue_attachments = 'رفع ملحقات القضية';
-$s_filters = 'مرشحات';
-$s_save_filters = 'احفظ المُرشِّحات';
-$s_save_filters_as_shared = 'حفظ الفلاتر كمشاركة';
-$s_use_saved_filters = 'استخدم المُرشِّحات المحفوظة';
-$s_create_project = 'إنشاء مشروع';
-$s_delete_project = 'حذف مشروع';
-$s_manage_project = 'التحكم بالمشروع';
-$s_manage_user_access_to_project = 'التحكم بصلاحية المستخدم لمشروع';
-$s_automatically_included_in_private_projects = 'مضمنة تلقائيا في المشاريع الخاصة';
-$s_project_documents = 'وثائق المشروع';
-$s_view_project_documents = 'عرض وثائق المشروع';
-$s_upload_project_documents = 'رفع وثائق المشروع';
-$s_link_custom_fields_to_projects = 'وصل الحقول المخصصة للمشاريع';
-$s_sponsorships = 'عمليات الرعاية';
-$s_view_sponsorship_details = 'عرض تفاصيل الرعاية';
-$s_view_sponsorship_total = 'عرض إجمالي الرعاية';
-$s_sponsor_issue = 'قضية راعي';
-$s_assign_sponsored_issue = 'توكيل قضية مرعية';
-$s_handle_sponsored_issue = 'معالجة قضية مرعية';
-$s_others = 'أخرى';
-$s_see_email_addresses_of_other_users = 'عرض عناوين البريد الإلكتروني للمستخدمين الآخرين';
-$s_send_reminders = 'إرسال مذكرات';
-$s_receive_reminders = 'تلقى التنبيهات';
-$s_add_profiles = 'أضف الملفات';
-$s_notify_of_new_user_created = 'إخطار بإنشاء المستخدمين الجدد';
-$s_email_notification = 'إخطار بالبريد الإلكتروني';
-$s_status_changed_to = 'الحالة تتغير إلى';
-$s_email_on_deleted = 'أرسل رسالة عند الحذف';
-$s_email_on_sponsorship_changed = 'أرسل رسالة عند تغيير الرعاية';
-$s_email_on_relationship_changed = 'أرسل رسالة عند تغيير العلاقة';
-$s_loading = 'جاري التحميل...';
-$s_between_date = 'بين';
-$s_on_or_before_date = 'في أو قبل';
-$s_before_date = 'قبل';
-$s_after_date = 'بعد';
-$s_on_or_after_date = 'في أو بعد';
-$s_from_date = 'من';
-$s_to_date = 'إلى';
-$s_on_date = 'في';
-$s_on = 'مفعل';
-$s_off = 'معطل';
-$s_wiki = 'ويكي';
-$s_tags = 'وسوم';
-$s_tag_details = 'تفاصيل الوسم: %1$s';
-$s_tag_id = 'رقم الوسم';
-$s_tag_name = 'الاسم';
-$s_tag_creator = 'منشئ';
-$s_tag_created = 'تاريخ الإنشاء';
-$s_tag_updated = 'آخر تحديث';
-$s_tag_description = 'وصف الوسم';
-$s_tag_statistics = 'إحصاءات الاستخدام';
-$s_tag_update = 'تحديث الوسم: %1$s';
-$s_tag_update_return = 'رجوع إلى الوسم';
-$s_tag_update_button = 'تحديث الوسم';
-$s_tag_delete_button = 'حذف الوسم';
-$s_tag_delete_message = 'هل أنت متأكد أنك تريد حذف هذا الوسم؟';
-$s_tag_existing = 'وسوم موجودة';
-$s_tag_none_attached = 'لا وسوم تم إلحاقها.';
-$s_tag_attach = 'إلحاق';
-$s_tag_attach_long = 'إلحاق الوسوم';
-$s_tag_attach_failed = 'إلحاق الوسم فشل.';
-$s_tag_detach = 'إزالة إلحاق "%1$s"';
-$s_tag_separate_by = '(افصل بواسطة "%1$s")';
-$s_tag_invalid_name = 'اسم وسم غير صحيح.';
-$s_tag_create_denied = 'سماح الإنشاء تم رفضه.';
-$s_tag_filter_default = 'القضايا الملحقة (%1$s)';
-$s_tag_history_attached = 'الوسم تم إلحاقه';
-$s_tag_history_detached = 'الوسم تمت إزالة إلحاقه';
-$s_tag_history_renamed = 'الوسم تمت إعادة تسميته';
-$s_tag_related = 'وسوم مرتبطة';
-$s_tag_related_issues = 'القضايا المشتركة (%1$s)';
-$s_tag_stats_attached = 'القضايا الملحقة: %1$s';
-$s_tag_create = 'إنشاء الوسم';
-$s_show_all_tags = 'الكل';
-$s_time_tracking_billing_link = 'تتبع الوقت';
-$s_time_tracking = 'تتبع الزمن';
-$s_time_tracking_time_spent = 'الوقت المستغرق:';
-$s_time_tracking_get_info_button = 'الحصول على معلومات تتبع الوقت';
-$s_time_tracking_cost_per_hour = 'التكلفة / ساعة';
-$s_time_tracking_cost = 'تكلفة';
-$s_total_time_for_issue = 'الوقت الإجمالي للقضية = %1$s';
-$s_time_tracking_stopwatch_start = 'بداية';
-$s_time_tracking_stopwatch_stop = 'إيقاف';
-$s_time_tracking_stopwatch_reset = 'إعادة الضبط';
-$s_access_denied = 'السماح تم رفضه.';
-$s_twitter_resolved = '%1$d: [%2$s] %3$s (تم حلها بواسطة %4$s في %5$s)';
-$s_twitter_resolved_no_version = '%1$d: [%2$s] %3$s (تم حلها بواسطة %4$s)';
-$s_development_team = 'فريق التطوير';
-$s_manage_columns_config = 'التحكم بالأعمدة';
-$s_all_columns_title = 'كل الأعمدة المتوفرة';
-$s_csv_columns_title = 'أعمدة CSV';
-$s_view_issues_columns_title = 'عرض أعمدة القضايا';
-$s_print_issues_columns_title = 'طبع أعمدة القضايا';
-$s_excel_columns_title = 'أعمدة إكسل';
-$s_update_columns_as_global_default = 'تحديث الأعمدة كافتراضية عامة لكل المشاريع';
-$s_update_columns_for_current_project = 'تحديث الأعمدة للمشروع الحالي';
-$s_update_columns_as_my_default = 'تحديث الأعمدة كافتراضية لكل المشاريع';
-$s_reset_columns_configuration = 'إعادة ضبط ضبط الأعمدة';
-$s_copy_columns_from = 'نسخ الأعمدة من';
-$s_copy_columns_to = 'نسخ الأعمدة إلى';
-$s_due_date = 'تاريخ الدفع';
-$s_overdue = 'تأخر عن الدفع';
-$s_view_account_title = 'معلومات المستخدم';
-$s_manage_user = 'التحكم بالمستخدم';
-$s_install_information = 'معلومات تنصيب مانتيس بي تي';
-$s_database_information = 'معلومات قاعدة بيانات مانتيس بي تي';
-$s_path_information = 'معلومات مسار مانتيس بي تي';
-$s_month_january = 'يناير';
-$s_month_february = 'فبراير';
-$s_month_march = 'مارس';
-$s_month_april = 'أبريل';
-$s_month_may = 'مايو';
-$s_month_june = 'يونيو';
-$s_month_july = 'يوليو';
-$s_month_august = 'أغسطس';
-$s_month_september = 'سبتمبر';
-$s_month_october = 'أكتوبر';
-$s_month_november = 'نوفمبر';
-$s_month_december = 'ديسمبر';

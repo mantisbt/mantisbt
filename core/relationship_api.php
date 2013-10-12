@@ -344,7 +344,7 @@ function relationship_get( $p_relationship_id ) {
 /**
  * get all relationships with the given bug as source
  * @param int $p_src_bug_id Source Bug id
- * @return array Array of BugRelationshipData objects
+ * @return array array of BugRelationshipData objects
  */
 function relationship_get_all_src( $p_src_bug_id ) {
 	$c_src_bug_id = db_prepare_int( $p_src_bug_id );
@@ -388,7 +388,7 @@ function relationship_get_all_src( $p_src_bug_id ) {
 /**
  * get all relationships with the given bug as destination
  * @param int $p_dest_bug_id Destination Bug id
- * @return array Array of BugRelationshipData objects
+ * @return array array of BugRelationshipData objects
  */
 function relationship_get_all_dest( $p_dest_bug_id ) {
 	$c_dest_bug_id = db_prepare_int( $p_dest_bug_id );
@@ -433,7 +433,7 @@ function relationship_get_all_dest( $p_dest_bug_id ) {
  * get all relationships associated with the given bug
  * @param int $p_bug_id  Bug id
  * @param bool &$p_is_different_projects Returned Boolean value indicating if some relationships cross project boundaries
- * @return array Array of BugRelationshipData objects
+ * @return array array of BugRelationshipData objects
  */
 function relationship_get_all( $p_bug_id, &$p_is_different_projects ) {
 	$t_src = relationship_get_all_src( $p_bug_id );

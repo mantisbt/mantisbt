@@ -111,7 +111,7 @@ class masc_captcha
 			// extracts config array
 			if(is_array($config))
 			{
-				if($this->debug) echo "\n<br />-Captcha-Debug: Extracts Config-Array in unsecure-mode!";
+				if($this->debug) echo "\n<br />-Captcha-Debug: Extracts Config-array in unsecure-mode!";
 				foreach($config as $k=>$v) $this->$k = $v;
 			}
 
@@ -127,7 +127,7 @@ class masc_captcha
 			// check TrueTypeFonts
 			if(is_array($this->TTF_RANGE))
 			{
-				if($this->debug) echo "\n<br />-Captcha-Debug: Check given TrueType-Array! (".count($this->TTF_RANGE).")";
+				if($this->debug) echo "\n<br />-Captcha-Debug: Check given TrueType-array! (".count($this->TTF_RANGE).")";
 				$temp = array();
 				foreach($this->TTF_RANGE as $k=>$v)
 				{

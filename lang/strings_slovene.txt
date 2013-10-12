@@ -1,36 +1,44 @@
 <?php
-/** MantisBT - a php based bugtracking system
+# MantisBT - A PHP based bugtracking system
+
+# MantisBT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# MantisBT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Language File - Slovenian (slovenščina)
  *
- * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * **********************************************************************
+ * ** This file is generated from translations stored in translatewiki **
+ * ** Information on Copyright/License for translatewiki translations  **
+ * ** is available at http://translatewiki.net/wiki/Project:About      **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
  *
- * MantisBT is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * MantisBT is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
- */
-/** Slovenian (slovenščina)
- * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- *
- * @author Davor Orlic, orlicdavor@hotmail.com
- * @author Dbc334
- * @author Matej Rizman, matej.rizman@guest.arnes.si
- */
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+*/
 
-$s_actiongroup_menu_move = 'Prestavi';
+$s_actiongroup_menu_move = 'Premakni';
 $s_actiongroup_menu_copy = 'Kopiraj';
 $s_actiongroup_menu_assign = 'Priredi';
 $s_actiongroup_menu_close = 'Zapri';
@@ -39,9 +47,6 @@ $s_actiongroup_menu_resolve = 'Razreši';
 $s_actiongroup_menu_update_priority = 'Posodobi prioritete';
 $s_actiongroup_menu_update_status = 'Posodobi status';
 $s_actiongroup_menu_update_view_status = 'Posodobi zasebnost';
-$s_actiongroup_menu_update_field = 'Posodobi %1$s';
-$s_actiongroup_menu_add_note = 'Dodaj beležko';
-$s_actiongroup_menu_attach_tags = 'Pripni oznake';
 $s_actiongroup_bugs = 'Izbrane zadeve';
 $s_all_projects = 'Vsi projekti';
 $s_move_bugs = 'Premakni zadeve';
@@ -49,16 +54,14 @@ $s_operation_successful = 'Operacija uspela.';
 $s_date_order = 'Razporedi po datumu';
 $s_print_all_bug_page_link = 'Izpis poročila';
 $s_csv_export = 'Izvozi v CSV';
-$s_excel_export = 'Izvoz v Excel';
 $s_login_anonymously = 'Anonimna prijava';
-$s_anonymous = 'Brezimnež';
+$s_anonymous = 'Anonimnež';
 $s_jump_to_bugnotes = 'Skoči na beležke';
 $s_public_project_msg = 'Ta projekt je javen. Vsi uporabniki imajo dostop do njega.';
 $s_private_project_msg = 'Ta projek je zaseben. Do njega imajo dostop samo administratorji in ročno dodani uporabniki.';
 $s_access_level_project = 'Raven dostopa na projektu';
 $s_view_submitted_bug_link = 'Ogled sporočenih zadev %1$s';
 $s_assigned_projects = 'Dodeljeni projekti';
-$s_unassigned_projects = 'Nedodeljeni projekti';
 $s_print = 'Natisni';
 $s_jump = 'Skoči';
 $s_copy_users = 'Kopiraj uporabnike';
@@ -81,7 +84,6 @@ $s_delete_bugnote_sure_msg = 'Ali ste prepričani, da želite izbrisati beležko
 $s_bug_relationships = 'Relacije';
 $s_empty_password_sure_msg = 'Uporabnikovo geslo je prazno. Ali ste prepričani, da to želite?';
 $s_empty_password_button = 'Uporabi prazno geslo';
-$s_no_category = '(Brez kategorij)';
 $s_duplicate_of = 'Dvojnik od';
 $s_has_duplicate = 'Ima dvojnik';
 $s_related_to = 'Je v povezavi z';
@@ -127,76 +129,10 @@ $s_bugnote_title = 'Beležka';
 $s_bugnote_date = 'Datum beležke';
 $s_bugnote_description = 'Opis beležke';
 $s_error_no_proceed = 'V vašem spletnem brskalniku uporabite gumb Nazaj, s katerim se vrnete na predhodno stran. Na tej strani popravite težave, ki so opisane v predhodni napaki, ali pa izberite druge operacijo. Drugo operacijo lahko izberete tudi sedaj tako, da izberete ustrezno opcijo iz menijske vrste zgoraj.';
-$MANTIS_ERROR[ERROR_GENERIC] = 'Med potekom operacije je prišlo do napake. Napako lahko prijavite vašemu lokalnemu operaterju.';
-$MANTIS_ERROR[ERROR_SQL] = 'Odkrita je bila SQL napaka.';
-$MANTIS_ERROR[ERROR_REPORT] = 'V vašem poročilu je bila napaka.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Nobena datoteka ni bila določena';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Vrsta datoteke ni odobrena';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Direktorij ne obstaja. Preverite nastavitve projekta.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Projekt s tem imenom že obstaja.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Polje \'%1$s\' je  bilo prazno.  Ponovno preverite vnose.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Uporabniški račun je zaščiten. Dostop je onemogočen, dokler se zaščita računa ne odpravi.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Dostop zavrnjen.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Nalaganje datoteke je spodletelo. MantisBT datoteke ne more brati. Prosimo, preverite nastavitve projekta.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Naložitev datoteke je bila neuspešna. Vzrok je najverjetneje velikost datoteke, ki jo dovoljuje ta PHP namestitev.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Zahtevan parameter za to stran (%1$s) ni bil najden.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Uporabniško ime je že v uporabi. Vrnite se nazaj in izberite drugega.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Nisem našel konfiguracijske opcije \'%1$s\'.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%1$s\' can not be set in the database.  It must be set in config_inc.php.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Niz \'%1$s\' ni bil najden.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Beležka ni bila najdena.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projekt »%1$d« ni bil najden.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Nisem našel polja \'%1$s\' v podatkovni bazi.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Dostop do FTP serverja je onemogočen.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Ime projekta je že v uporabi. Vrnite se nazaj in izberite drugega.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Ime projekta je neveljavno. Ime projekta ne sme biti prazno.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Prijavna informacija shranjena v vašem brskalniku je neveljavna. Mogoče je vaš račun izbrisan?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferenc za uporabnika ni bilo mogoče najti.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Predmet novice ni bil najden.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Gesli se ne ujemata.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'Pričakovano je bilo polje, vendar je bil za %1$s prejet niz.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Pričakovan je bil niz, vendar je bilo za %1$s prejeto polje.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Zadeva %1$d ni bila najdena.';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Neveljavni elektronski naslov.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil ni bil najden.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'Vrsta datoteke ni dovoljena za naložitev.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Datoteka je dvojnik. Najprej izbrišite datoteko.';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Ne morete določiti zadeve kot dvojnik same sebe.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'To je ime dvojnika.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Še vsaj en projekt uporablja to polje.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Neveljavna vrednost za polje »%1$s«.';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Neuspešna LDAP avtentikacija';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Neuspešna povezava na LDAP server.';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Posodobitev LDAP zapisa je bila neuspešna.';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Zapis uporabnika LDAP ni bil najden.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Povezava s podatkovno bazo je spodletela. Napaka iz podatkovne baze #%1$d: %2$s';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Poizvedba v podatkovni bazi je spodletela. Napaka iz podatkovne baze #%1$d: %2$s za poizvedbo: %3$s';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Izbira podatkovne baze je spodletela.  Napaka iz podatkovne baze #%1$d: %2$s';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Kategorija s tem imenom že obstaja.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Operacija kopiranja ni bila specificirana.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorija ni bila najdena.';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Verzija s tem imenom že obstaja.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Različica »%1$s« ni bila najdena.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Uporabniško ime je neveljavno. Uporabniška imena lahko vsebujejo samo latinske črke, številke, razmike, vezaje, pike, znake plus in podčrtaje.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Uporabnik nima potrebnih pravic.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponzorstvo ni omogočeno.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponzorstvo %1$d ni bilo najdeno.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Vrednost sponzorstva (%1$s) je manjša od najmanše vrednosti (%2$s).';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Uporabnik nima potrebnih uporabniških pravic za delo s sponzoriziranimi zadevami.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Dostop zavrnjen: Dodeljevanje sponzoriziranih zadev zahteva višje pravice.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Opcija konfiguracije \'%1$s\' ima neveljavno vrednost \'%2$s\'';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Operacija ne more biti izvedena, ker je zadeva \'%1$d\' označena samo za branje';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'NAPAKA: Med tema dvema zadevama relacija že obstaja.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'NAPAKA: Nisem našel relacije.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Dostop zavrnjen: zadeva %1$d potrebuje višji nivo dostopa.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'NAPAKA: Zadeva ne more biti v relaciji sama s seboj.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';
 $s_login_error = 'vaš račun ja onemogočen ali pa ste vnesli napačnega uporabnika in/ali geslo.';
 $s_login_cookies_disabled = 'Vaš brskalnik ne podpira piškotkov ali pa zavrača delo z njimi.';
 $s_go_back = 'Pojdi nazaj';
-$s_proceed = 'Nadaljuj';
+$s_proceed = 'Kliknite tukaj za nadaljevanje.';
 $s_switch = 'Preklopi';
 $s_logged_in_as = 'Prijavljeni ste kot';
 $s_prefix_for_deleted_users = 'uporabnik';
@@ -218,8 +154,6 @@ $s_new_account_greeting = 'Pozdravljeni in dobrodošli v Sledilniku zadev.  To s
 $s_new_account_username = 'Uporabniško ime:';
 $s_new_account_message = 'Po tem, ko se boste prijavili na spletno stran, vas prosimo, da spremenite geslo. Bodite pozorni na to, da je vaše geslo shranjeno s pomočjo enosmernega šifriranja. Če boste geslo pozabili, ga boste morali ponastaviti.';
 $s_new_account_do_not_reply = 'Na to sporočilo ne odgovarjajte.';
-$s_new_account_email = 'E-pošta:';
-$s_new_account_IP = 'Oddaljeni IP-naslov:';
 $s_reset_request_msg = 'Prišlo je do zahteve po ponastavitvi vašega gesla';
 $s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 $s_email_notification_title_for_status_bug_feedback = 'Naslednja zadeva zahteva vašo POVRATNO INFORMACIJO.';
@@ -249,16 +183,13 @@ $s_email_category = 'Kategorija';
 $s_email_reproducibility = 'Ponovljivost';
 $s_email_severity = 'Resnost';
 $s_email_priority = 'Prioriteta';
-$s_email_status = 'Stanje';
 $s_email_resolution = 'Razrešitev';
 $s_email_duplicate = 'Dvojnik';
 $s_email_fixed_in_version = 'Popravljeno v verziji';
-$s_email_target_version = 'Ciljna različica';
 $s_email_date_submitted = 'Datum sporočitve';
 $s_email_last_modified = 'Zadnjič spremenjeno';
 $s_email_summary = 'Povzetek';
 $s_email_description = 'Opis';
-$s_email_additional_information = 'Dodatne informacije';
 $s_account_protected_msg = 'Račun je zaščiten. Ne morem spremeniti nastavitev...';
 $s_account_removed_msg = 'Vaš račun je bil izbrisan...';
 $s_confirm_delete_msg = 'Ste prepričani, da želite izbrisati račun?';
@@ -314,15 +245,14 @@ $s_account_updated_msg = 'Vaš račun je bil uspešno posodobljen...';
 $s_email_updated = 'Elektronski naslov je bil uspešno posodobljen...';
 $s_realname_updated = 'Pravo ime je bilo uspešno posodobljeno';
 $s_password_updated = 'Geslo je bilo uspešno posodobljeno';
-$s_bug_assign_msg = 'Zadeva je bila uspešno dodeljena...';
 $s_feedback_bug_title = 'Provide Feedback to Issue';
 $s_feedback_bug_button = 'Provide Feedback';
 $s_bug_close_msg = 'Zadeva je bila uspešno zaprta...';
 $s_close_immediately = 'Zapri takoj:';
 $s_bug_deleted_msg = 'Zadeva je bila izbrisana...';
 $s_delete_bug_sure_msg = 'Ali ste prepričani, da želite izbrisati to zadevo?';
-$s_delete_bug_button = 'Izbriši';
-$s_monitor_bug_button = 'Opazuj';
+$s_delete_bug_button = 'Izbriši zadevo';
+$s_monitor_bug_button = 'Opazuj zadevo';
 $s_unmonitor_bug_button = 'Zaključi opazovanje';
 $s_file_upload_msg = 'Datoteka se je uspešno naložila';
 $s_upload_file = 'Nalaganje datoteke';
@@ -339,7 +269,7 @@ $s_from = 'Od';
 $s_to = 'Za';
 $s_sent_you_this_reminder_about = 'vam je poslal opomnik za';
 $s_bug_reminder = 'Pošlji opomnik';
-$s_reminder_sent_to = 'Opomnik poslan';
+$s_reminder_sent_to = 'Opomnik poslan:';
 $s_bug_send_button = 'Pošlji';
 $s_reminder = 'Opomnik';
 $s_bug_updated_msg = 'Issue je bila uspešno posodobljen...';
@@ -355,7 +285,6 @@ $s_reporter = 'Sporočitelj';
 $s_assigned_to = 'Dodeljena';
 $s_priority = 'Prioriteta';
 $s_resolution = 'Razrešitev';
-$s_status = 'Stanje';
 $s_duplicate_id = 'ID dvojnika';
 $s_projection = 'Projekcija';
 $s_os_version = 'Verzija OS';
@@ -378,18 +307,15 @@ $s_add_bugnote_title = 'Dodajanje beležke';
 $s_add_bugnote_button = 'Dodaj beležko';
 $s_bugnote_edit_link = 'Uredi';
 $s_bugnote_updated_msg = 'Beležka je bila uspešno posodobljena...';
-$s_edited_on = 'Popravljena na:';
-$s_click_to_login = 'Prijava';
+$s_click_to_login = 'Kliknite tukaj za prijavo';
 $s_login_page_info = 'Dobrodošli v Sledilniku zahtev';
 $s_login_title = 'Prijava';
-$s_save_login = 'Zapomni si moje prijavne podatke v tem brskalniku';
+$s_save_login = 'Shrani';
 $s_choose_project = 'Izberite projekt';
 $s_login_button = 'Prijavi';
 $s_signup_link = 'prijavljanje za nov račun';
 $s_select_project_button = 'Izberi projekt';
 $s_lost_password_info = 'To reinstate your lost password, please supply the name and email address for the account.<br /><br />If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.';
-$s_open_and_assigned_to_me = 'Št. odprtih in dodeljenih meni';
-$s_open_and_reported_to_me = 'Št. odprtih in sporočenih od mene';
 $s_newer_news_link = 'Novejše novice';
 $s_older_news_link = 'Starejše novice';
 $s_archives = 'Arhiv';
@@ -405,7 +331,7 @@ $s_filter_button = 'Vklopi filter';
 $s_manage_users_link = 'Uporabniki';
 $s_manage_projects_link = 'Projekti';
 $s_manage_custom_field_link = 'Uporabniško določena polja';
-$s_manage_email_config = 'E-poštna obvestila';
+$s_manage_email_config = 'Email Notifications';
 $s_manage_workflow_config = 'Workflow';
 $s_create_new_account_link = 'Ustvari nov račun';
 $s_projects_link = 'Projekti';
@@ -420,11 +346,10 @@ $s_date_created = 'Datum ustvarjanja';
 $s_last_visit = 'Zadnji obisk';
 $s_edit_user_link = 'Uredi uporabnika';
 $s_config_all_projects = 'Note: These configurations affect ALL PROJECTS.';
-$s_status_level = 'Stanje';
 $s_project_added_msg = 'Projekt je bila uspešno dodan...';
 $s_category_added_msg = 'Kategorija je bila uspešno dodana...';
 $s_category_deleted_msg = 'Kategorija je bila uspešno izbrisana...';
-$s_category_delete_sure_msg = 'Ste prepričani, da želite izbrisati to kategorijo?<br />Kategorija »%1$s« vsebuje %2$d objav.';
+$s_category_delete_sure_msg = 'Ste prepričani, da želite izbrisati to kategorijo?';
 $s_delete_category_button = 'Izbriši kategorijo';
 $s_edit_project_category_title = 'Urejanje kategorije';
 $s_update_category_button = 'Posodobi kategorijo';
@@ -474,11 +399,11 @@ $s_reset_password_button = 'Ponastavi geslo';
 $s_delete_user_button = 'Briši uporabnika';
 $s_reset_password_msg = 'Ponastavljanje gesla ustvari naključno ustvarjeno geslo.';
 $s_reset_password_msg2 = 'Ponastavljanje gesla nastavi prazno geslo.';
-$s_show_all_users = 'Vsi';
+$s_show_all_users = 'VSI';
 $s_account_reset_protected_msg = 'Račun je zaščiten. Ne morem ponastaviti gesla.';
 $s_account_reset_msg = 'Ustvaril sem novo geslo in ga poslal uporabniku..';
 $s_account_reset_msg2 = 'Geslo je bilo postavljeno na prazno...';
-$s_manage_user_protected_msg = 'Račun je zaščiten, zato polji »Raven dostopa« in »Omogočeno« ni mogoče spremeniti. Druga polja smo uspešno posodobili.';
+$s_manage_user_protected_msg = 'Račun je zaščiten.';
 $s_manage_user_updated_msg = 'Račun uspešno posodobljen...';
 $s_main_link = 'Začetek';
 $s_view_bugs_link = 'Pregled';
@@ -601,8 +526,6 @@ $s_prev = 'Naslednja';
 $s_next = 'Prejšnja';
 $s_first = 'Prva';
 $s_last = 'Zadnja';
-$s_start_date = 'Datum začetka';
-$s_end_date = 'Datum zaključka';
 $s_use_date_filters = 'Filter po datumu';
 $s_yes = 'Da';
 $s_no = 'Ne';
@@ -611,12 +534,12 @@ $s_or_unassigned = 'Ali nedodeljeni';
 $s_ok = 'V redu';
 $s_use_query = 'Uporabi filter';
 $s_delete_query = 'Briši filter';
-$s_query_deleted = 'Filter je izbrisan';
+$s_query_deleted = 'Filter izbrisan';
 $s_save_query = 'Shrani trenutni filter';
 $s_reset_query = 'Ponastavi filter';
 $s_query_name = 'Ime filtra';
-$s_query_exists = 'Zdi se, da ta določen filter že obstaja.';
-$s_query_dupe_name = 'Drug filter s tem imenom že obstaja. Prosimo, izberite drugačno ime za ta filter.';
+$s_query_exists = 'Ta filter že obstaja.';
+$s_query_dupe_name = 'Filter s tem imenom že obstaja. Prosim izberite drugo ime za ta filter.';
 $s_query_blank_name = 'Ne morete shraniti filtra brez imena. Prosim poimenujte filter.';
 $s_query_store_error = 'Pri shranjevanju filtra je prišlo do napake.';
 $s_open_queries = 'Uredi filtre';
@@ -624,14 +547,13 @@ $s_query_delete_msg = 'Ali ste prepričani, da želite izbrisati ta filter?';
 $s_view_simple_link = 'Enostaven pogled';
 $s_product_build = 'Gradnja';
 $s_system_profile = 'Opis sistema';
-$s_update_bug_button = 'Uredi';
+$s_update_bug_button = 'Posodobi zadevo';
 $s_bug_assign_to_button = 'Dodeli:';
 $s_reopen_bug_button = 'Ponovno odpri';
-$s_move_bug_button = 'Prestavi';
+$s_move_bug_button = 'Premakni';
 $s_attached_files = 'Dodane datoteke';
 $s_publish = 'Objavi';
 $s_cached = 'Predpomnjen';
-$s_add_user_to_monitor = 'Dodaj';
 $s_no_users_monitoring_bug = 'Noben uporabnik ne opazuje te zadeve.';
 $s_users_monitoring_bug = 'To zadevo opazujejo uporabniki';
 $s_monitoring_user_list = 'Seznam uporabnikov';
@@ -652,7 +574,7 @@ $s_and_above = 'in zgornje';
 $s_advanced_filters = 'Napredni filtri';
 $s_simple_filters = 'Enostavni filtri';
 $s_monitored_by = 'Opazovan od';
-$s_attachments = 'priponka(-e)';
+$s_attachments = 'priloge';
 $s_phpmailer_language = 'si';
 $s_sponsors = '%1$d sponzorjev';
 $s_sponsorship_added = 'Dodal sponzorstvo';
@@ -670,12 +592,11 @@ $s_relationship_deleted = 'Relacija izbrisana';
 $s_delete_relationship_button = 'Briši';
 $s_delete_relationship_sure_msg = 'Ali ste prepričani, da želite izbrisati to relacijo?';
 $s_relationship_warning_blocking_bugs_not_resolved = 'Niso vsi potomci te zadeve rešeni ali zaprti.';
-$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>POZOR</b>. Niso vsi potomci te zadeve rešeni ali zaprti. <br /> Pred zaprtjem ali razrešitvijo zadeve morajo biti vsi potomci te zadeve razrešeni ali zaprti.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<strong>POZOR</strong>. Niso vsi potomci te zadeve rešeni ali zaprti. <br /> Pred zaprtjem ali razrešitvijo zadeve morajo biti vsi potomci te zadeve razrešeni ali zaprti.';
 $s_bug_cloned_to = 'Zadeva klonirana';
 $s_bug_created_from = 'Zadeva ustvarjena iz';
-$s_filters = 'Filtri';
 $s_see_email_addresses_of_other_users = 'See email addresses of other users';
-$s_email_notification = 'E-poštna obvestila';
+$s_email_notification = 'EMAIL NOTIFICATION';
 $s_email_on_deleted = 'Email on Deleted';
 $s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
 $s_email_on_relationship_changed = 'Email on Relationship changed';
@@ -683,15 +604,71 @@ $s_from_date = 'Od';
 $s_to_date = 'Za';
 $s_on_date = 'zaradi';
 $s_on = 'zaradi';
-$s_month_january = 'januar';
-$s_month_february = 'februar';
-$s_month_march = 'marec';
-$s_month_april = 'april';
-$s_month_may = 'maj';
-$s_month_june = 'junij';
-$s_month_july = 'julij';
-$s_month_august = 'avgust';
-$s_month_september = 'september';
-$s_month_october = 'oktober';
-$s_month_november = 'november';
-$s_month_december = 'december';
+
+
+$MANTIS_ERROR[ERROR_GENERIC] = 'Med potekom operacije je prišlo do napake. Napako lahko prijavite vašemu lokalnemu operaterju.';
+$MANTIS_ERROR[ERROR_SQL] = 'Odkrita je bila SQL napaka.';
+$MANTIS_ERROR[ERROR_REPORT] = 'V vašem poročilu je bila napaka.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Nobena datoteka ni bila določena';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Vrsta datoteke ni odobrena';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Direktorij ne obstaja. Preverite nastavitve projekta.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Projekt s tem imenom že obstaja.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Polje \'%1$s\' je  bilo prazno.  Ponovno preverite vnose.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Uporabniški račun je zaščiten. Dostop je onemogočen, dokler se zaščita računa ne odpravi.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Dostop zavrnjen.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Naložitev datoteke je bila neuspešna. Naložitev PHP datotek je mogoče onemogočeno. Prosite vašega administratorja, da zažene skripto admin_check in odpravi težavo.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Naložitev datoteke je bila neuspešna. Vzrok je najverjetneje velikost datoteke, ki jo dovoljuje ta PHP namestitev.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Zahtevan parameter za to stran ni bil najden.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Uporabniško ime je že v uporabi. Vrnite se nazaj in izberite drugega.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Nisem našel konfiguracijske opcije \'%1$s\'.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option \'%1$s\' can not be set in the database.  It must be set in config_inc.php.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Niz \'%1$s\' ni bil najden.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Beležka ni bila najdena.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projekt ni bil najden.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Nisem našel polja \'%1$s\' v podatkovni bazi.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Dostop do FTP serverja je onemogočen.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Ime projekta je že v uporabi. Vrnite se nazaj in izberite drugega.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Ime projekta je neveljavno. Ime projekta ne sme biti prazno.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Prijavna informacija shranjena v vašem brskalniku je neveljavna. Mogoče je vaš račun izbrisan?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferenc za uporabnika ni bilo mogoče najti.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Predmet novice ni bil najden.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Gesli se ne ujemata.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'An array was expected but a string was received.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Zadeva %1$d ni bila najdena.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Neveljavni elektronski naslov.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil ni bil najden.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'Vrsta datoteke ni dovoljena za naložitev.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Datoteka je dvojnik. Najprej izbrišite datoteko.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Ne morete določiti zadeve kot dvojnik same sebe.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'To je ime dvojnika.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Še vsaj en projekt uporablja to polje.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Neveljavna vrednost za polje';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Neuspešna LDAP avtentikacija';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Neuspešna povezava na LDAP server.';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Posodobitev LDAP zapisa je bila neuspešna.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Zapis uporabnika LDAP ni bil najden.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Povezava s podatkovno bazo je spodletela. Napaka iz podatkovne baze #%1$d: %2$s';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Poizvedba v podatkovni bazi je spodletela. Napaka iz podatkovne baze #%1$d: %2$s za poizvedbo: %3$s';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Izbira podatkovne baze je spodletela.  Napaka iz podatkovne baze #%1$d: %2$s';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Kategorija s tem imenom že obstaja.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Operacija kopiranja ni bila specificirana.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorija ni bila najdena.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Verzija s tem imenom že obstaja.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Verzija ni bila najdena.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Uporabniško ime je neveljavno. Uporabniško ime lahko vsebuje samo črke, številke, razmik, vezaje in podčrtaje.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Uporabnik nima potrebnih pravic.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponzorstvo ni omogočeno.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponzorstvo %1$d ni bilo najdeno.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Vrednost sponzorstva (%1$s) je manjša od najmanše vrednosti (%2$s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Uporabnik nima potrebnih uporabniških pravic za delo s sponzoriziranimi zadevami.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Dostop zavrnjen: Dodeljevanje sponzoriziranih zadev zahteva višje pravice.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an email address. Please update your profile.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Opcija konfiguracije \'%1$s\' ima neveljavno vrednost \'%2$s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Operacija ne more biti izvedena, ker je zadeva \'%1$d\' označena samo za branje';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'NAPAKA: Med tema dvema zadevama relacija že obstaja.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'NAPAKA: Nisem našel relacije.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Dostop zavrnjen: zadeva %1$d potrebuje višji nivo dostopa.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'NAPAKA: Zadeva ne more biti v relaciji sama s seboj.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The \'lost your password\' feature is not available.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information doesn\'t match any registered account!';

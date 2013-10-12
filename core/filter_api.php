@@ -4736,7 +4736,7 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
 					AND (is_public = " . db_prepare_bool(true) . "
 						OR user_id = " . db_param() . ")
 					ORDER BY is_public DESC, name ASC";
-	$result = db_query_bound( $query, Array( $t_project_id, $t_user_id ) );
+	$result = db_query_bound( $query, array( $t_project_id, $t_user_id ) );
 	$query_count = db_num_rows( $result );
 
 	for( $i = 0;$i < $query_count;$i++ ) {

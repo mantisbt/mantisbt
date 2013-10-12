@@ -274,54 +274,58 @@ $result = db_query_bound( $query );
 
 	<table cellspacing="1">
 		<!-- Title -->
-		<tr>
-			<td class="form-title" colspan="7">
-				<?php echo lang_get( 'filters' ) ?>
-			</td>
-		</tr>
+		<thead>
+			<tr>
+				<td class="form-title" colspan="7">
+					<?php echo lang_get( 'filters' ) ?>
+				</td>
+			</tr>
 
-		<tr class="row-category2">
-			<td class="small-caption">
-				<?php echo lang_get( 'username' ); ?>: <br />
-			</td>
-			<td class="small-caption">
-				<?php echo lang_get( 'project_name' ); ?>: <br />
-			</td>
-			<td class="small-caption">
-				<?php echo lang_get( 'configuration_option' ); ?>: <br />
-			</td>
-		</tr>
+			<tr class="row-category2">
+				<th>
+					<?php echo lang_get( 'username' ); ?><br />
+				</th>
+				<th>
+					<?php echo lang_get( 'project_name' ); ?><br />
+				</th>
+				<th>
+					<?php echo lang_get( 'configuration_option' ); ?><br />
+				</th>
+			</tr>
+		</thead>
 
-		<tr class="row-1">
-			<td>
-				<select name="filter_user_id">
-				<?php
-				print_option_list_from_array( $t_users_list, $t_filter_user_value );
-				?>
-				</select>
-			</td>
-			<td>
-				<select name="filter_project_id">
-				<?php
-				print_option_list_from_array( $t_projects_list, $t_filter_project_value );
-				?>
-				</select>
-			</td>
-			<td>
-				<select name="filter_config_id">
-				<?php
-				print_option_list_from_array( $t_configs_list, $t_filter_config_value );
-				?>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="3">
-				<input name="apply_filter_button" type="submit" class="button-small" value="<?php echo lang_get( 'filter_button' )?>" />
-				<input name="default_filter_button" type="submit" class="button-small" value="<?php echo lang_get( 'default_filter' )?>" />
-				<input name="reset_filter_button" type="submit" class="button-small" value="<?php echo lang_get( 'reset_query' )?>" />
-			</td>
-		</tr>
+		<tbody>
+			<tr class="row-1">
+				<td>
+					<select name="filter_user_id">
+					<?php
+					print_option_list_from_array( $t_users_list, $t_filter_user_value );
+					?>
+					</select>
+				</td>
+				<td>
+					<select name="filter_project_id">
+					<?php
+					print_option_list_from_array( $t_projects_list, $t_filter_project_value );
+					?>
+					</select>
+				</td>
+				<td>
+					<select name="filter_config_id">
+					<?php
+					print_option_list_from_array( $t_configs_list, $t_filter_config_value );
+					?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<input name="apply_filter_button" type="submit" class="button-small" value="<?php echo lang_get( 'filter_button' )?>" />
+					<input name="default_filter_button" type="submit" class="button-small" value="<?php echo lang_get( 'default_filter' )?>" />
+					<input name="reset_filter_button" type="submit" class="button-small" value="<?php echo lang_get( 'reset_query' )?>" />
+				</td>
+			</tr>
+		</tbody>
 	</table>
 	</form>
 </div>
@@ -331,18 +335,21 @@ $result = db_query_bound( $query );
 <div id="adm-config-div" class="table-container" style="display: table">
 	<h2><?php echo lang_get( 'database_configuration' ) ?></h2>
 	<table cellspacing="1" width="100%">
-		<tr class="row-category">
-			<th><?php echo lang_get( 'username' ) ?></th>
-			<th><?php echo lang_get( 'project_name' ) ?></th>
-			<th><?php echo lang_get( 'configuration_option' ) ?></th>
-			<th><?php echo lang_get( 'configuration_option_type' ) ?></th>
-			<th><?php echo lang_get( 'configuration_option_value' ) ?></th>
-			<th><?php echo lang_get( 'access_level' ) ?></th>
-			<?php if( $t_read_write_access ) { ?>
-			<th><?php echo lang_get( 'actions' ) ?></th>
-			<?php } ?>
-		</tr>
+		<thead>
+			<tr class="row-category">
+				<th><?php echo lang_get( 'username' ) ?></th>
+				<th><?php echo lang_get( 'project_name' ) ?></th>
+				<th><?php echo lang_get( 'configuration_option' ) ?></th>
+				<th><?php echo lang_get( 'configuration_option_type' ) ?></th>
+				<th><?php echo lang_get( 'configuration_option_value' ) ?></th>
+				<th><?php echo lang_get( 'access_level' ) ?></th>
+				<?php if( $t_read_write_access ) { ?>
+				<th><?php echo lang_get( 'actions' ) ?></th>
+				<?php } ?>
+			</tr>
+		</thead>
 
+		<tbody>
 <?php
 # Pre-generate a form security token to avoid performance issues when the
 # db contains a large number of configurations
@@ -353,19 +360,19 @@ while( $row = db_fetch_array( $result ) ) {
 
 ?>
 <!-- Repeated Info Rows -->
-		<tr width="100%">
-			<td >
-				<?php echo ($v_user_id == 0) ? lang_get( 'all_users' ) : string_display_line( user_get_name( $v_user_id ) ) ?>
-			</td>
-			<td ><?php echo string_display_line( project_get_name( $v_project_id, false ) ) ?></td>
-			<td><?php echo string_display_line( $v_config_id ) ?></td>
-			<td ><?php echo string_display_line( get_config_type( $v_type ) ) ?></td>
-			<td style="overflow-x:auto;"><?php print_config_value_as_string( $v_type, $v_value ) ?></td>
-			<td ><?php echo get_enum_element( 'access_levels', $v_access_reqd ) ?></td>
+			<tr width="100%">
+				<td>
+					<?php echo ($v_user_id == 0) ? lang_get( 'all_users' ) : string_display_line( user_get_name( $v_user_id ) ) ?>
+				</td>
+				<td><?php echo string_display_line( project_get_name( $v_project_id, false ) ) ?></td>
+				<td><?php echo string_display_line( $v_config_id ) ?></td>
+				<td><?php echo string_display_line( get_config_type( $v_type ) ) ?></td>
+				<td style="overflow-x:auto;"><?php print_config_value_as_string( $v_type, $v_value ) ?></td>
+				<td><?php echo get_enum_element( 'access_levels', $v_access_reqd ) ?></td>
 <?php
 	if( $t_read_write_access ) {
 ?>
-			<td class="center">
+				<td class="center">
 <?php
 		if( config_can_delete( $v_config_id ) ) {
 			# Update button (will populate edit form at page bottom)
@@ -397,14 +404,15 @@ while( $row = db_fetch_array( $result ) ) {
 			echo '&#160;';
 		}
 ?>
-			</td>
+				</td>
 <?php
 	} # end if config_can_delete
 ?>
-		</tr>
+			</tr>
 <?php
 } # end while loop
 ?>
+		</tbody>
 	</table>
 </div>
 </div>

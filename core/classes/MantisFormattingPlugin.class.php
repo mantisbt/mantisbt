@@ -47,7 +47,7 @@ abstract class MantisFormattingPlugin extends MantisPlugin {
 	 * @param string Event name
 	 * @param string Unformatted text
 	 * @param boolean Multiline text
-	 * @return multi Array with formatted text and multiline paramater
+	 * @return multi array with formatted text and multiline paramater
 	 */
 	function text( $p_event, $p_string, $p_multiline = true ) {
 		return $p_string;
@@ -58,7 +58,7 @@ abstract class MantisFormattingPlugin extends MantisPlugin {
 	 * @param string Event name
 	 * @param string Unformatted text
 	 * @param boolean Multiline text
-	 * @return multi Array with formatted text and multiline paramater
+	 * @return multi array with formatted text and multiline paramater
 	 */
 	function formatted( $p_event, $p_string, $p_multiline = true ) {
 		return $p_string;

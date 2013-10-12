@@ -418,7 +418,7 @@ function version_cache_array_rows( $p_project_id_array ) {
  * @param int $p_project_id
  * @param int $p_released
  * @param bool $p_obsolete
- * @return array Array of version rows (in array format)
+ * @return array array of version rows (in array format)
  */
 function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = false, $p_inherit = null ) {
 	global $g_cache_versions, $g_cache_versions_project;

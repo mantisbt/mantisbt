@@ -1,43 +1,42 @@
 <?php
-/** MantisBT - a php based bugtracking system
+# MantisBT - A PHP based bugtracking system
+
+# MantisBT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# MantisBT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Language File - Swedish (svenska)
  *
- * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * **********************************************************************
+ * ** This file is generated from translations stored in translatewiki **
+ * ** Information on Copyright/License for translatewiki translations  **
+ * ** is available at http://translatewiki.net/wiki/Project:About      **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
  *
- * MantisBT is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * MantisBT is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
- */
-/** Swedish (svenska)
- * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- *
- * @author Fader
- * @author Lokal Profil
- * @author McDutchie
- * @author Najami
- * @author Nghtwlkr
- * @author Sannab
- * @author Skalman
- * @author Thomas Sjogren <thomas.sjogren@multicomsecurity.se>
- * @author Thosjo
- * @author Tor.klingberg
- * @author Warrakkk
- * @author WikiPhoenix
- */
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+*/
 
 $s_actiongroup_menu_move = 'Flytta';
 $s_actiongroup_menu_copy = 'Kopiera';
@@ -47,7 +46,6 @@ $s_actiongroup_menu_delete = 'Ta bort';
 $s_actiongroup_menu_resolve = 'Lös';
 $s_actiongroup_menu_update_priority = 'Uppdatera prioritet';
 $s_actiongroup_menu_update_status = 'Uppdatera status';
-$s_actiongroup_menu_update_severity = 'Uppdatera allvarlighetsgrad';
 $s_actiongroup_menu_update_view_status = 'Uppdatera vy-status';
 $s_actiongroup_menu_update_category = 'Uppdatera kategori';
 $s_actiongroup_menu_set_sticky = 'Uppdatera klistrad';
@@ -64,8 +62,8 @@ $s_move_bugs = 'Flytta ärenden';
 $s_operation_successful = 'Operationen lyckades.';
 $s_date_order = 'Datumordning';
 $s_print_all_bug_page_link = 'Skriv ut rapporter';
-$s_csv_export = 'CSV-export';
-$s_excel_export = 'Excel-export';
+$s_csv_export = 'CSV export';
+$s_excel_export = 'Export till Excel';
 $s_login_anonymously = 'Logga in anonymt';
 $s_anonymous = 'Anonym';
 $s_jump_to_bugnotes = 'Hoppa till meddelanden';
@@ -74,7 +72,6 @@ $s_private_project_msg = 'Det här projektet är PRIVAT.  Endast administratöre
 $s_access_level_project = 'Projektets tillgångsnivå';
 $s_view_submitted_bug_link = 'Visa rapporterat ärende %1$s';
 $s_assigned_projects = 'Tilldelade projekt';
-$s_unassigned_projects = 'Icke tilldelade projekt';
 $s_print = 'Skriv ut';
 $s_jump = 'Hoppa';
 $s_copy_users = 'Kopiera användare';
@@ -96,7 +93,6 @@ $s_bug_monitor = 'Ärendet bevakas';
 $s_bug_end_monitor = 'Ärendet bevakas ej';
 $s_announcement = 'Tillkännagivande';
 $s_stays_on_top = 'Stannar högt upp';
-$s_bugnote_link_title = 'Direktlänk till anteckning';
 $s_delete_bugnote_button = 'Ta bort meddelande';
 $s_delete_bugnote_sure_msg = 'Är du säker på att du vill ta bort detta meddelande?';
 $s_bug_relationships = 'Samband';
@@ -134,8 +130,6 @@ $s_select_option = '(välj)';
 $s_bug_actiongroup_access = 'Du hade inte tillräckliga rättigheter för att utföra åtgärden.';
 $s_bug_actiongroup_status = 'Detta ärende kan inte ändras till den valda statusen.';
 $s_bug_actiongroup_category = 'Detta ärende kan inte ändras till den valda kategorin';
-$s_bug_actiongroup_handler = 'Den begärda användaren tillåts inte hantera denna fråga';
-$s_bug_actiongroup_version = 'Den begärda versionen existerar inte i denna frågas projekt';
 $s_close_bugs_conf_msg = 'Är du säker på att du vill stänga dessa ärenden?';
 $s_delete_bugs_conf_msg = 'Är du säker på att du vill ta bort dessa ärenden?';
 $s_move_bugs_conf_msg = 'Flytta ärenden till';
@@ -162,9 +156,6 @@ $s_view_status_group_bugs_button = 'Uppdatera vy-status';
 $s_set_sticky_group_bugs_button = 'Uppdatera klistrad';
 $s_fixed_in_version_group_bugs_button = 'Uppdatera Åtgärdat i version';
 $s_target_version_group_bugs_button = 'Uppdatera målversion';
-$s_update_severity_title = 'Uppdatera allvarlighetsgrad';
-$s_update_severity_msg = 'Välj ärendets allvarlighetsgrad';
-$s_update_severity_button = 'Uppdatera allvarlighetsgrad';
 $s_hide_button = 'Visa bara valda';
 $s_printing_preferences_title = 'Välj fält att skriva ut';
 $s_printing_options_link = 'Utskriftsinställningar';
@@ -172,122 +163,6 @@ $s_bugnote_title = 'Hanterare för meddelande';
 $s_bugnote_date = 'Datum för meddelande';
 $s_bugnote_description = 'Beskrivning av meddelande';
 $s_error_no_proceed = 'Använd "back"-knappen i din webbläsare för att återgå till föregående sida. Där kan du rätta de fel som uppstått. Du kan också välja att gå direkt till en annan sida via någon av länkarna i menyn.';
-$MANTIS_ERROR[ERROR_GENERIC] = 'Ett fel uppstod.  Du kan rapportera detta fel till din lokala administratör.';
-$MANTIS_ERROR[ERROR_SQL] = 'Ett SQL-fel uppstod.';
-$MANTIS_ERROR[ERROR_REPORT] = 'Det fanns ett fel i din rapport.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Ingen fil angiven';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Filtypen är inte tillåten';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Katalogen finns inte. Var god kontrollera projektinställningarna.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Ett projekt med det namnet finns redan.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Det obligatoriska fältet "%1$s" var tomt. Var god kontrollera din inmatning.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Detta konto är skyddat.  Du har inte tillgång till det innan skyddet är borttaget.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Åtkomst nekas.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Skickning av filen misslyckades. Filen kan inte läsas av MantisBT, Kontrollera projektinställningarna.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Skickning av filen misslyckades.  Det beror troligen på att filen var större än vad denna PHP-installation tillåter.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Ett obligatoriskt värde (%1$s) för den här sidan saknas.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Användarnamnet finns redan. Gå tillbaka och välj ett annat användarnamn.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfigurationsvalet \'%1$s\' kunde inte hittas.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Konfigurationsvalet \'%1$s\' kan inte användas i databasen.  Det måste skrivas i config_inc.php.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Strängen \'%1$s\' kunde inte hittas.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Meddelandet saknas.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projektet "%1$d" saknas.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Databasfältet "%1$s" saknas.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Kan inte ansluta till FTP-servern.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Otillräckliga rättigheter för att hantera ett ärende med denna status.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Ett projekt med det namnet finns redan.  Gå tillbaka och välj ett annat.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Felaktigt projektnamn angavs.  Projektnamn kan inte vara tomma.';
-$MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Användare vid namn "%1$s" hittas ej.';
-$MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'Användare med id "%1$d" hittades inte.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Inloggningsinformationen som din webbläsare har sparat är ogiltig. Ditt användarekonto har kanske tagits bort?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Användarinställningar kunde inte hittas för detta användarkonto.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Hittar inte nyheten.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Lösenordet stämmer inte med verifikationen.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'En array förväntades men en sträng mottogs för %1$s.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'En sträng förväntades men en array mottogs för %1$s.';
-$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Ett siffra förväntades för %1$s.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Ärende %1$d kan inte hittas.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filter %1$s kan inte hittas.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Filtret du försöker använda är för gammalt för att uppgraderas, skapa ett nytt.';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Ogiltig e-postadress.';
-$MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Det är inte tillåtet att använda kasserbara e-postadresser.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profilen kan inte hittas.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'Filtypen är inte tillåten.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Filen finns redan.  Var god ta bort den andra filen först.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Ogiltig sökväg för skickade filer.  Katalogen finns inte eller är inte skrivbar av webservern.';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Ingen fil skickades. Gå tillbaka och välj en fil innan du trycker på Skicka.';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Filen som skickades in kunde inte flyttas till fillagringskatalogen. Katalogen finns inte eller är inte skrivbar för servern.';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Kan inte ange ett ärende som kopia av sig själv.';
-$MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Ärenderevision hittas ej.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Det egendefinierade fältet kunde inte hittas.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Detta namnet är inte unikt.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Fältet används av åtminstone ett annat projekt.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Ogiltigt fältvärde för "1$s".';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Felaktig definition av egendefinierat fält';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Ogiltig anpassad fältegenskap (%1$s).';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP-autentisering misslyckades,';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Anslutningen till LDAP-servern misslyckades';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Uppdatering av LDAP-posten misslyckades.';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Användarens LDAP-post kunde inte hittas.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP har inte laddats.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Kan inte ansluta till databasen. Felmeddelandet som erhölls från databasen var #%1$d: %2$s.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Databasfråga misslyckades. Felmeddelandet som erhölls från databasen var #%1$d: %2$s för frågan: %3$s.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Databasurval misslyckades. Felmeddelandet som erhölls från databasen var #%1$d: %2$s.';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Kategorin finns redan.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Ingen kopieringsändring angiven.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorin finns inte.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Kategori "%1$s" hittades inte i projekt "%2$s".';
-$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Denna kategori kan inte raderas, eftersom den definieras som "Standardkategori för flyttningar".';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Versionen finns redan.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versionen "%1$s" hittas inte.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Användarnamnet är ogiltigt. Användarnamn får enbart innehålla latinska bokstäver, siffror, mellanslag, bindestreck, punkter, plustecken och understreck.';
-$MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'Användarens namn är ogiltigt.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Användaren har inte tillräcklig behörighet.';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Det "Riktiga Namnet" är detsamma som en annan användares inloggningsnamn. Vänligen välj ett annat.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorstöd är ej påslaget.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsring %1$d kunde inte hittas.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorskap (%1$s) är mindre än minimalbelopp (%2$s).';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Hanteraren har inte rättigheter att hantera sponsrade ärenden.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Åtkomst nekad: tilldelning av sponsrade ärenden kräver högre rättigheter.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsorn har inte angett någon e-postadress. Var vänlig och uppdatera din profil.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Inställningsval \'%1$s\' har ett ogiltigt värde \'%2$s\'';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Valet kan inte utföras eftersom ärendet \'%1$d\' är skrivskyddat.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Det finns redan en relation mellan dessa ärenden.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Relationen kunde inte hittas.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Åtkomst nekad: Ärendet %1$d kräver högre användarrättigheter.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Ett ärende kan inte ha en relation till sig själv.';
-$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Verifieringshashsumman överenstämmer inte. Var vänlig och försök igen.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Funktionalitet för borttappat lösenord är inte tillgänglig.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Du måste ange en e-postadress för att kunna återställa lösenordet';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Den angivna informationen överensstämmer inte med något användarkonto!';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'URL:en är ogiltig för verfiering eller används redan. Var vänlig och ansök igen.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maximalt antal samtidiga förfrågningar har uppnåtts. Var vänlig kontakta din systemadministratör.';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Den operationen skulle skapa en loop i underprojekthierarkin.';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Du kan inte radera eller degradera det sista administratörskontot. För att utföra den åtgärd du begärt, måste du först skapa ett annat administratörskonto.';
-$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Omdirigeringsfel, verifiera att det inte finns blanksteg utanför PHP-blocket (&lt;?php ?&gt;) i config_inc.php eller custom_*.php filerna.';
-$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'Twitterintegration kräver PHP CURL som inte är installerad.';
-$MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Kunde inte hitta en tagg med det namnet.';
-$MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'En tagg med det namnet existerar redan.';
-$MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Benämningen på taggen är ogiltig.';
-$MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'Den taggen är inte tilldelad det ärendet.';
-$MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Den taggen är redan tilldelad det ärendet.';
-$MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Element kunde inte hittas.';
-$MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Händelse "%1$s" har ännu inte blivit deklarerad.';
-$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Insticksprogrammet är inte registrerat hos MantisBT.';
-$MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Insticksprogrammet är redan installerat.';
-$MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Sidan för insticksprogrammet kunde inte hittas.';
-$MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Plugin-installation misslyckades: %1$s.';
-$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Uppgraderingen av insticksprogrammets schema misslyckades i block #%1$s.';
-$MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Okänt fel "%1$s" vid exekvering av insticksprogrammet "%2$s".';
-$MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Fält "%1$s" innehåller duplicerade kolumner "%2$s".';
-$MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Fält "%1$s" innehåller ogiltigt fält "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Ogiltig sessionshanterare.';
-$MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Sessionsvariabel "%1$s" hittades inte.';
-$MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Din session är inte längre giltig.';
-$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Ogiltigt säkerhetsnyckel för formuläret. Detta kan bero på en utgången session, eller att formuläret av misstag skickats två gånger.';
-$MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Denna sida kan inte besökas med den här metoden.';
-$MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Ogiltigt sorteringsfält.';
-$MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Ogiltigt datumformat.';
-$MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Klarar inte att uppdatera tidszon.';
 $s_login_error = 'Ditt användarkonto kan vara avstängt eller så har du angivit ett felaktigt användarnamn eller lösenord.';
 $s_login_cookies_disabled = 'Din webbläsare kan inte eller vägrar att hantera kakor.';
 $s_go_back = 'Gå tillbaks';
@@ -323,7 +198,7 @@ $s_new_account_signup_msg = 'Följande användarkonto har skapats:';
 $s_reset_request_msg = 'Någon (troligtvis du) har begärt en ändring av lösenordet genom e-postverifikation. Om det inte var du, ignorera då detta meddelande så kommer inget att hända.
 
 Om du begärde denna verifikation, gå till följande webbadress för att ändra ditt lösenord:';
-$s_reset_request_in_progress_msg = 'Om du lämnat rätt användarnamn och e-postadress för ditt konto, så har vi nu skickat en bekräftelse till den e-postadressen. När meddelandet har tagits emot, följ anvisningarna för att ändra lösenord på ditt konto.';
+$s_reset_request_in_progress_msg = 'If you supplied the correct username and email address for your account, we will now have sent a confirmation message to that email address. Once the message has been received, follow the instructions provided to change the password on your account.';
 $s_email_notification_title_for_status_bug_new = 'Följande ärende har blivit NYTT (igen)';
 $s_email_notification_title_for_status_bug_feedback = 'Följande ärende kräver din ÅTERKOPPLING.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Följande ärende har blivit GODKÄNT.';
@@ -452,7 +327,6 @@ $s_realname_duplicated = 'Riktigt namn används av en annan användare';
 $s_realname_updated = 'Riktigt namn har uppdaterats';
 $s_password_updated = 'Lösenordet har uppdaterats';
 $s_multiple_projects = 'Ärendena du har markerat tillhör olika projekt. Parametrarna nedan rör alla projekt. Om detta är felaktigt, försök göra om din ändring med färre ärenden markerade.';
-$s_bug_assign_msg = 'Ärendet har tilldelats...';
 $s_new_bug_title = 'Nytt ärende';
 $s_feedback_bug_title = 'Begär återkoppling till ärende';
 $s_acknowledged_bug_title = 'Acceptera ärende';
@@ -473,11 +347,8 @@ $s_monitor_bug_button = 'Bevaka';
 $s_unmonitor_bug_button = 'Sluta bevaka ärendet';
 $s_file_upload_msg = 'Filskickningen lyckades';
 $s_upload_file = 'Skicka in fil';
-$s_upload_files = 'Ladda upp filer';
 $s_select_file = 'Välj fil';
-$s_select_files = 'Välj filer';
 $s_upload_file_button = 'Skicka fil';
-$s_upload_files_button = 'Ladda upp filer';
 $s_max_file_size = 'Maximal storlek';
 $s_bug_reopened_msg = 'Ärendet har återöppnats...';
 $s_reopen_add_bugnote_title = 'Lägg till meddelande om anledning till återöppning';
@@ -491,17 +362,13 @@ $s_from = 'Från';
 $s_to = 'Till';
 $s_sent_you_this_reminder_about = 'har skickat denna påminnelse till dig angående';
 $s_bug_reminder = 'Skicka en påminnelse';
-$s_reminder_sent_to = 'Påminnelse skickad till';
-$s_reminder_sent_none = 'Inga påminnelser kunde skickas';
-$s_reminder_list_truncated = 'mottagarlistan trunkerad';
+$s_reminder_sent_to = 'Påminnelse skickad till:';
 $s_bug_send_button = 'Skicka';
 $s_reminder = 'Påminnelse';
 $s_reminder_explain = 'Meddelandet kommer att skickas till mottagare som begärt återkoppling till detta ärende.';
 $s_reminder_monitor = 'Mottagarna kommer också börja bevaka ärendet. De kan sluta bevaka det genom att använda motsvarande knapp.';
 $s_reminder_store = 'Detta meddelande kommer att sparas med ärendet.';
 $s_confirm_sponsorship = 'Bekräfta att du vill sponsra ärende %1$d med %2$s.';
-$s_stick_bug_button = 'Fästa';
-$s_unstick_bug_button = 'Avfästa';
 $s_bug_updated_msg = 'Ärendet har uppdaterats...';
 $s_back_to_bug_link = 'Tillbaka till ärende';
 $s_update_simple_link = 'Uppdatera enkel';
@@ -538,8 +405,6 @@ $s_view_revisions = 'Visa revisioner';
 $s_revision = 'Revision';
 $s_revision_by = '%1$s av %2$s';
 $s_revision_drop = 'Släpp';
-$s_bug_revision_dropped_history = 'Buggrevision tappad';
-$s_bugnote_revision_dropped_history = 'Kommentarsrevision tappad';
 $s_all_revisions = 'Alla revisioner';
 $s_back_to_issue = 'Tillbaka till ärende';
 $s_confirm_revision_drop = 'Är du säker på att du vill släppa denna ärenderevision?';
@@ -555,7 +420,6 @@ $s_add_bugnote_button = 'Lägg till meddelande';
 $s_bugnote_edit_link = 'Redigera';
 $s_closed_bug_button = 'Stäng ärende';
 $s_bugnote_updated_msg = 'Meddelandet har uppdaterats...';
-$s_edited_on = 'redigerad:';
 $s_hide_content = 'Dölj innehåll';
 $s_show_content = 'Visa innehåll';
 $s_total_queries_executed = '%1$d antal förfrågningar utförda.';
@@ -572,7 +436,7 @@ $s_error_database_version_out_of_date_2 = '<strong>VARNING:</strong> Databasstru
 $s_error_code_version_out_of_date = '<strong>VARNING:</strong> Databasstrukturen är nyare än den installerade koden. Vänligen uppgradera.';
 $s_login_page_info = 'Välkommen till ärendehanteraren.';
 $s_login_title = 'Logga in';
-$s_save_login = 'Kom ihåg mina inloggningsuppgifter på denna webbläsare';
+$s_save_login = 'Spara inloggning';
 $s_secure_session = 'Säker session';
 $s_secure_session_long = 'Tillåt att din session enbart kan användas från denna IP-adress.';
 $s_choose_project = 'Välj projekt';
@@ -585,8 +449,6 @@ $s_lost_password_done_title = 'E-post med lösenord har skickats';
 $s_lost_password_subject = 'Lösenord återställt';
 $s_lost_password_info = 'För att återställa det förlorade lösenordet, var vänlig ange användarnamn och e-postadress för kontot.<br /><br />Om informationen motsvarar ett giltigt konto kommer du att via e-post bli tillsänd en webbadress som innehåller en verifieringskod för ditt konto. Var vänligt följ länken för att ändra ditt lösenord.';
 $s_lost_password_confirm_hash_OK = 'Din bekräftelse har accepterats. Var vänlig och uppdatera ditt lösenord.';
-$s_open_and_assigned_to_me = 'Öppna och tilldelade till mig';
-$s_open_and_reported_to_me = 'Öppna och rapporterade av mig';
 $s_newer_news_link = 'Nyare nyheter';
 $s_older_news_link = 'Äldre nyheter';
 $s_archives = 'Arkiv';
@@ -595,7 +457,6 @@ $s_site_information = 'Site information';
 $s_mantis_version = 'Version av MantisBT';
 $s_schema_version = 'Version av schema';
 $s_site_path = 'Sökväg till webbplats';
-$s_core_path = 'Coresökväg';
 $s_plugin_path = 'Sökväg till insticksmoduler';
 $s_created_user_part1 = 'Skapade användare';
 $s_created_user_part2 = 'med åtkomstnivån';
@@ -606,7 +467,6 @@ $s_protected = 'Skyddad';
 $s_create_user_button = 'Skapa konto';
 $s_hide_disabled = 'Göm avaktiverade';
 $s_filter_button = 'Filtrera';
-$s_default_filter = 'Standardfilter';
 $s_create_filter_link = 'Skapa permalänk';
 $s_create_short_link = 'Skapa kort länk';
 $s_filter_permalink = 'Följande är en permanent länk till följande konfigurerade filter:';
@@ -629,7 +489,6 @@ $s_1_week_title = '1 vecka';
 $s_never_logged_in_title = 'Har aldrig loggat in';
 $s_prune_accounts = 'Ta bort inaktiva konton';
 $s_hide_inactive = 'Göm inaktiva';
-$s_show_disabled = 'Visa avaktiverade';
 $s_manage_accounts_title = 'Hantera konton';
 $s_p = 'Skyddad';
 $s_date_created = 'Skapad';
@@ -648,7 +507,7 @@ $s_message = 'Meddelande';
 $s_default_notify = 'Sätter notifieringsflaggor till';
 $s_action_notify = 'Sätter händelsenotifieringsflaggor till';
 $s_notify_defaults_change_access = 'Ändra användare som kan ändra notifieringsinställningar till';
-$s_notify_actions_change_access = 'Vem kan ändra påminnelser:';
+$s_notify_actions_change_access = 'Ändra användare som kan ändra händelsenotifieringsinställningar till';
 $s_revert_to_system = 'Ta bort alla projektspecifika inställningar';
 $s_revert_to_all_project = 'Ta bort alla projektspecifika inställningar';
 $s_non_existent = 'icke-existerande';
@@ -670,15 +529,11 @@ $s_desc_bug_submit_status = 'Status att sätta ett nytt ärende till';
 $s_desc_bug_reopen_status = 'Status som återöppnade ärenden får';
 $s_desc_bug_resolved_status_threshold = 'Status när ett ärende betraktas som löst';
 $s_desc_bug_closed_status_threshold = 'Status när ett ärende ska anses stängt';
-$s_workflow_change_access = 'Ändra användare som kan ändra arbetsflöde till';
-$s_access_change_access = 'Ändra användare som kan ändra åtkomstnivåer till';
 $s_default_not_in_flow = 'Angivet förval för status för %1$s är inte valt bland nästkommande statusvärden för %2$s. Det kommer att ignoreras';
 $s_assign_issue = 'Tilldela ett ärende';
-$s_allow_close_immediate = 'Tillåt ärendet att stängas när det löses';
 $s_allow_reporter_close = 'Tillåt rapporterare att stänga ärendet';
 $s_allow_reporter_reopen = 'Tillåt rapporterare att återöppna ärendet';
 $s_set_status_assigned = 'Sätt status vid tilldelning';
-$s_allow_user_edit = 'Tillåt användare att redigera sina egna buggmeddelanden';
 $s_limit_access = 'Begränsa rapporterares tillgång till sina egna ärenden';
 $s_submit_status = 'Status att sätta ett nytt ärende till';
 $s_assigned_status = 'Status att sätta automatiskt tilldelade ärenden till';
@@ -686,7 +541,7 @@ $s_resolved_status = 'Status där ett ärende betraktas som löst';
 $s_readonly_status = 'Status där ett ärende blir skrivskyddat';
 $s_reopen_status = 'Status att sätta ett återöppnat ärende till';
 $s_reopen_resolution = 'Lösning som ett återöppnat ärende sätts till';
-$s_config_delete_sure = 'Är du säker på att du vill ta bort inställningarna för:';
+$s_config_delete_sure = 'Är du säker på att du vill ta bort inställningarna för';
 $s_in_project = 'i projektet';
 $s_delete_config_button = 'Ta bort inställningar';
 $s_configuration_report = 'Konfigurationsrapport';
@@ -697,7 +552,6 @@ $s_configuration_option_value = 'Värde';
 $s_all_users = 'Alla användare';
 $s_set_configuration_option = 'Ange konfigurationsalternativ';
 $s_delete_config_sure_msg = 'Är du säker på att du vill ta bort detta konfigurationsalternativ?';
-$s_configuration_corrupted = 'Konfigurationen i databasen är skadad.';
 $s_plugin = 'Insticksprogram';
 $s_plugins_installed = 'Installerade insticksprogram';
 $s_plugins_available = 'Tillgängliga insticksprogram';
@@ -714,11 +568,6 @@ $s_plugin_install = 'Installera';
 $s_plugin_upgrade = 'Uppgradera';
 $s_plugin_uninstall = 'Avinstallera';
 $s_plugin_uninstall_message = 'Är du säker att du vill avinstallera insticksprogrammet "%1$s"?';
-$s_plugin_key = 'Nyckel';
-$s_plugin_key_met = 'instickprogrammet redo';
-$s_plugin_key_unmet = 'beroende saknas';
-$s_plugin_key_dated = 'föråldrade beroenden';
-$s_plugin_key_upgrade = 'uppgradering behövs';
 $s_project_added_msg = 'Projektet har lagts till...';
 $s_category_added_msg = 'Kategorin har lagts till...';
 $s_category_deleted_msg = 'Kategorin har tagits bort...';
@@ -782,19 +631,17 @@ $s_accounts_pruned_msg = 'Alla konton som aldrig loggat in och är äldre än en
 $s_prune_accounts_button = 'Ta bort';
 $s_confirm_account_pruning = 'Är du säker på att du vill ta bort äldre konton som aldrig loggat in?';
 $s_edit_user_title = 'Redigera användarkonto';
-$s_account_unlock_button = 'Låsa upp konto';
 $s_reset_password_button = 'Nollställ lösenord';
 $s_delete_user_button = 'Ta bort kontot';
 $s_reset_password_msg = 'Nollställ lösenord skickar godkännandelänk via e-post.';
 $s_reset_password_msg2 = 'Nollställ lösenord sätter ett tomt lösenord.';
-$s_show_all_users = 'Alla';
+$s_show_all_users = 'ALLA';
 $s_users_unused = 'OANVÄNT';
 $s_users_new = 'NY';
 $s_account_reset_protected_msg = 'Kontot skyddat. Kan inte nollställa lösenordet.';
 $s_account_reset_msg = 'Godkännandelänk har blivit skickat till angiven användares e-postadress. Med hjälp av denna kommer användaren att kunna ändra sitt lösenord.';
 $s_account_reset_msg2 = 'Lösenordet är tomt...';
-$s_account_unlock_msg = 'Kontot har låsts upp.';
-$s_manage_user_protected_msg = 'Kontot är skyddat. Fälten \'Åtkomstnivå\' och \'Aktivering\' kan inte ändras. Andra fält har uppdaterats...';
+$s_manage_user_protected_msg = 'Kontot skyddat. Åtkomstnivå och aktivering skyddade. Utöver det har kontot uppdaterats...';
 $s_manage_user_updated_msg = 'Kontot uppdaterat...';
 $s_email_user_updated_subject = 'Användarkonto uppdaterat';
 $s_email_user_updated_msg = 'Ditt konto har blivit uppdaterat av en administrator. En lista av ändringar är bifogad nedanför. Du kan uppdatera dina kontodetaljer och preferenser när du önskar genom att besöka följande URL:';
@@ -853,7 +700,7 @@ $s_project_document_updated = 'Uppdaterade projektet';
 $s_project_user_added_msg = 'Lade till användaren till projektet';
 $s_project_removed_user_msg = 'Tog bort användaren från projektet';
 $s_remove_user_sure_msg = 'Är du säker på att du vill ta bort användaren?';
-$s_remove_user_from_project_button = 'Ta bort användare från projekt %s';
+$s_remove_user_button = 'Ta bort användaren';
 $s_remove_all_users_sure_msg = 'Är du säker på att du vill ta bort alla användare i detta projekt?';
 $s_remove_all_users_button = 'Ta bort alla användare';
 $s_add_user_title = 'Lägg till användare till projektet';
@@ -886,7 +733,6 @@ $s_valid_project_msg = 'Du måste välja ett giltigt projekt';
 $s_signup_done_title = 'Kontoregistrering behandlad';
 $s_password_emailed_msg = 'Grattis. Du blivit registrerad. Du kommer nu att bli tillsänd en bekräftelse via e-post för att kontrollera din e-postadress. När du besökt länken som du fått i detta e-postmeddelande kommer ditt konto att aktiveras.';
 $s_no_reponse_msg = 'Du har sju dagar på dig att bekräfta ditt konto; om så inte skulle vara fallet kan konton komma att tas bort.';
-$s_signup_captcha_request = 'Mata in koden som den visas i rutan till höger';
 $s_signup_info = 'När du kompletterat detta formulär och dina svar kontrollerats, kommer du att bli tillsänd en bekräftelse via e-post till e-postadressen du angett.<br />Med detta e-postmeddelande kan du aktivera ditt konto. Om du inte bekräftar ditt konto inom sju dagar, så kan konton komma att tas bort.<br />Du måste alltså ange en giltig e-postadress för att kunna få bekräftelsemeddelandet.';
 $s_signup_title = 'Skapa ett användarkonto';
 $s_signup_button = 'Skapa kontot';
@@ -914,8 +760,6 @@ $s_developer_by_resolution = 'Utvecklare per löst';
 $s_percentage_fixed = '% Fixade';
 $s_percentage_errors = '% Felaktiga';
 $s_errors = 'Falska';
-$s_opened = 'Öppnad';
-$s_resolved = 'Löst';
 $s_total = 'Totalt';
 $s_balance = 'Balans';
 $s_most_active = 'Mest aktiva';
@@ -936,14 +780,9 @@ $s_changed = 'Ändrad(timmar)';
 $s_viewing_bugs_title = 'Visa ärenden';
 $s_updated = 'Uppdaterad';
 $s_sticky = 'Visa klistrade ärenden';
-$s_sort = 'Sortera på';
 $s_issue_id = 'Ärende #';
 $s_recently_visited = 'Senast besökta';
 $s_priority_abbreviation = 'P';
-$s_note_user_id = 'Meddelande av';
-$s_filter_match_type = 'Matchningstyp';
-$s_filter_match_all = 'Alla villkor';
-$s_filter_match_any = 'Vilket villkor som helst';
 $s_none = 'ingen';
 $s_current = 'nuvarande';
 $s_search = 'Sök';
@@ -953,8 +792,6 @@ $s_prev = 'Föregående';
 $s_next = 'Nästa';
 $s_first = 'Första';
 $s_last = 'Sista';
-$s_start_date = 'Startdatum';
-$s_end_date = 'Slutdatum';
 $s_use_date_filters = 'Använd datumfilter';
 $s_yes = 'Ja';
 $s_no = 'Nej';
@@ -982,13 +819,11 @@ $s_update_bug_button = 'Modifiera';
 $s_bug_assign_to_button = 'Tilldela till:';
 $s_bug_status_to_button = 'Ändra status till:';
 $s_reopen_bug_button = 'Återöppna';
-$s_close_bug_button = 'Stäng';
 $s_move_bug_button = 'Flytta';
 $s_attached_files = 'Associerade filer';
 $s_publish = 'Publicera';
 $s_cached = 'Cachad';
 $s_add_user_to_monitor = 'Lägg till';
-$s_bug_view_title = 'Visa problemdetaljer';
 $s_no_users_monitoring_bug = 'Inga användare bevakar detta ärende.';
 $s_users_monitoring_bug = 'Användare som bevakar detta ärende';
 $s_monitoring_user_list = 'Användarlista';
@@ -1025,13 +860,12 @@ $s_custom_field_require_resolved = 'Krävs vid lösning';
 $s_custom_field_require_closed = 'Krävs vid stängning';
 $s_link_custom_field_to_project_title = 'Länka skräddarsytt fält till projekt';
 $s_link_custom_field_to_project_button = 'Länka skräddarsytt fält';
-$s_linked_projects = 'Länkade projekt';
 $s_custom_field_sequence = 'Serie';
 $s_custom_field_type_enum_string = '0:Sträng,1:Numerisk,2:Flyttal,3:Uppräkning,4:E-post,5:Checkbox,6:List,7:Flervalslista,8:Datum,9:Radioknapp';
 $s_confirm_used_custom_field_deletion = 'Detta fält är för närvarande länkat till åtminstone ett projekt.  Om du fortsätter kommer alla värden för dett fält att tas bort permanent.  Denna åtgärd kan inte ångras.  Om du inte vill ta bort detta fält, tryck \'Bakåt\' i din webbläsare.  För att fortsätta, tryck på knappen nedan';
 $s_confirm_custom_field_deletion = 'Är du säker på att du vill ta bort detta skräddarsydda fält och alla associerade värden?';
 $s_field_delete_button = 'Ta bort fält';
-$s_confirm_custom_field_unlinking = 'Är du säker på att du vill avlänka detta skräddarsydda fält från projektet? Värdena kommer inte raderas så länge det skräddarsydda fältet inte tas bort.';
+$s_confirm_custom_field_unlinking = 'Är du säker på att du vill ta bort (avlänka) detta skräddarsydda fält från projektet och ta bort alla associerade värden?';
 $s_field_remove_button = 'Ta bort fält';
 $s_hide_status = 'Dölj status';
 $s_filter_closed = 'stängda';
@@ -1043,10 +877,6 @@ $s_advanced_filters = 'Avancerade filter';
 $s_simple_filters = 'Enkla filter';
 $s_monitored_by = 'Bevakas av';
 $s_attachments = 'bilagor';
-$s_bytes = 'bytes';
-$s_attachment_missing = 'Bilaga saknas';
-$s_attachment_count = 'Antal bilagor';
-$s_view_attachments_for_issue = 'Visa %1$d bilaga/bilagor till problem #%2$d';
 $s_phpmailer_language = 'se';
 $s_sponsors = '%1$d sponsor(er)';
 $s_sponsorship_added = 'Sponsring tillagd';
@@ -1076,13 +906,10 @@ $s_relationship_with_parent = 'Förhållande med föräldraärendet';
 $s_delete_relationship_button = 'Ta bort';
 $s_delete_relationship_sure_msg = 'Är du säker på att du vill bryta detta förhållande?';
 $s_relationship_warning_blocking_bugs_not_resolved = 'Alla barn till detta ärende har ännu inte lösts eller stängts.';
-$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>VARNING</b>. Alla barn till detta ärende har ännu inte lösts eller stängts.<br />Innan du <b>löser/stänger</b> ett föräldraärende, bör barnärendena till denna lösas eller stängas.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<strong>VARNING</strong>. Alla barn till detta ärende har ännu inte lösts eller stängts.<br />Innan du <strong>löser/stänger</strong> ett föräldraärende, bör barnärendena till denna lösas eller stängas.';
 $s_create_child_bug_button = 'Klon';
 $s_bug_cloned_to = 'Ärende klonat';
 $s_bug_created_from = 'Ärende skapat från';
-$s_copy_from_parent = 'Kopiera utökad data från föräldrabuggen';
-$s_copy_notes_from_parent = 'Kopiera buggnoteringar';
-$s_copy_attachments_from_parent = 'Kopiera bilagor';
 $s_viewing_bug_relationship_graph_title = 'Graf över relationer';
 $s_viewing_bug_dependency_graph_title = 'Beroendegraf';
 $s_relation_graph = 'Graf över relationer';
@@ -1090,7 +917,6 @@ $s_dependency_graph = 'Graf över beroenden';
 $s_vertical = 'Vertikal';
 $s_horizontal = 'Horisontell';
 $s_view_issue = 'Visa ärende';
-$s_checkin = 'Incheckning';
 $s_perm_rpt_capability = 'Tillgång';
 $s_view = 'Visa';
 $s_issues = 'ÄRENDEN';
@@ -1104,14 +930,12 @@ $s_reopen_issue = 'Återöppna ärenden';
 $s_view_private_issues = 'Läsa privata ärenden';
 $s_update_readonly_issues = 'Uppdatera skrivskyddade ärenden';
 $s_update_issue_status = 'Uppdatera ett ärendes status';
-$s_set_view_status = 'Ange visningsstatus (offentlig eller privat)';
-$s_update_view_status = 'Uppdatera visningsstatus (offentlig eller privat)';
+$s_set_view_status = 'Sätta status (publik eller privat)';
+$s_update_view_status = 'Uppdatera status (publik eller privat)';
 $s_show_list_of_users_monitoring_issue = 'Visa användare som bevakar ett ärende';
 $s_notes = 'MEDDELANDEN';
 $s_add_notes = 'Lägga till meddelanden';
-$s_update_notes = 'Uppdatera meddelanden';
-$s_delete_note = 'Ta bort meddelanden';
-$s_view_private_notes = 'Visa privata anteckningar';
+$s_view_private_notes = 'Läsa privata meddelanden';
 $s_news = 'NYHETER';
 $s_view_private_news = 'Läsa privata nyheter';
 $s_manage_news = 'Hantera nyheter';
@@ -1121,7 +945,7 @@ $s_delete_attachments = 'Ta bort bilagor';
 $s_delete_attachment_button = 'Ta bort';
 $s_delete_attachment_sure_msg = 'Är du säker på att du vill ta bort denna bilaga?';
 $s_upload_issue_attachments = 'Skicka bilaga till ärende';
-$s_filters = 'Filter';
+$s_filters = 'filter';
 $s_save_filters = 'Spara filter';
 $s_save_filters_as_shared = 'Spara filter som delade';
 $s_use_saved_filters = 'Använda sparade filter';
@@ -1143,7 +967,6 @@ $s_handle_sponsored_issue = 'Hantera sponsrat ärende';
 $s_others = 'ANNAT';
 $s_see_email_addresses_of_other_users = 'Se e-postadresser till andra användare';
 $s_send_reminders = 'Skicka påminnelser';
-$s_receive_reminders = 'Få påminnelser';
 $s_add_profiles = 'Lägg till profiler';
 $s_notify_of_new_user_created = 'Meddela nyskapade användare';
 $s_email_notification = 'E-postpåminnelse';
@@ -1195,16 +1018,12 @@ $s_tag_related_issues = 'Delade ärenden (%1$s)';
 $s_tag_stats_attached = 'Kopplade ärenden: %1$s';
 $s_tag_create = 'Skapa tagg';
 $s_show_all_tags = 'Alla';
-$s_time_tracking_billing_link = 'Tidsspårning';
+$s_time_tracking_billing_link = 'Kostnadsberäkning';
 $s_time_tracking = 'Tidsåtgång';
-$s_time_tracking_time_spent = 'Spenderad tid:';
 $s_time_tracking_get_info_button = 'Hämta information om tidsåtgång';
 $s_time_tracking_cost_per_hour = 'Kostnad / Timme';
 $s_time_tracking_cost = 'Kostnad';
 $s_total_time_for_issue = 'Total tid för ärende = %1$s';
-$s_time_tracking_stopwatch_start = 'Starta';
-$s_time_tracking_stopwatch_stop = 'Stoppa';
-$s_time_tracking_stopwatch_reset = 'Återställ';
 $s_access_denied = 'Åtkomst nekad.';
 $s_twitter_resolved = '%1$d: [%2$s] %3$s (löst av %4$s i %5$s)';
 $s_twitter_resolved_no_version = '%1$d: [%2$s] %3$s (löst av %4$s)';
@@ -1227,16 +1046,118 @@ $s_view_account_title = 'Användarinformation';
 $s_manage_user = 'Hantera användare';
 $s_install_information = 'MantisBT installationsinformation';
 $s_database_information = 'MantisBT databasinformation';
-$s_path_information = 'sökvägsinformation för MantisBT';
-$s_month_january = 'januari';
-$s_month_february = 'februari';
-$s_month_march = 'mars';
-$s_month_april = 'april';
-$s_month_may = 'maj';
-$s_month_june = 'juni';
-$s_month_july = 'juli';
-$s_month_august = 'augusti';
-$s_month_september = 'september';
-$s_month_october = 'oktober';
-$s_month_november = 'november';
-$s_month_december = 'december';
+
+
+$MANTIS_ERROR[ERROR_GENERIC] = 'Ett fel uppstod.  Du kan rapportera detta fel till din lokala administratör.';
+$MANTIS_ERROR[ERROR_SQL] = 'Ett SQL-fel uppstod.';
+$MANTIS_ERROR[ERROR_REPORT] = 'Det fanns ett fel i din rapport.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Ingen fil angiven';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Filtypen är inte tillåten';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Katalogen finns inte. Var god kontrollera projektinställningarna.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Ett projekt med det namnet finns redan.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Det obligatoriska fältet "%1$s" var tomt. Var god kontrollera din inmatning.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Detta konto är skyddat.  Du har inte tillgång till det innan skyddet är borttaget.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Åtkomst nekas.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Skickning av filen misslyckades. Filen kan inte läsas av MantisBT, Kontrollera projektinställningarna.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Skickning av filen misslyckades.  Det beror troligen på att filen var större än vad denna PHP-installation tillåter.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Ett obligatoriskt värde (%1$s) för den här sidan saknas.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Användarnamnet finns redan. Gå tillbaka och välj ett annat användarnamn.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfigurationsvalet \'%1$s\' kunde inte hittas.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Konfigurationsvalet \'%1$s\' kan inte användas i databasen.  Det måste skrivas i config_inc.php.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Strängen \'%1$s\' kunde inte hittas.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Meddelandet saknas.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projektet "%1$d" saknas.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Databasfältet "%1$s" saknas.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Kan inte ansluta till FTP-servern.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Otillräckliga rättigheter för att hantera ett ärende med denna status.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Ett projekt med det namnet finns redan.  Gå tillbaka och välj ett annat.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Felaktigt projektnamn angavs.  Projektnamn kan inte vara tomma.';
+$MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Användare vid namn "%1$s" hittas ej.';
+$MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'Användare med id "%1$d" hittades inte.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Inloggningsinformationen som din webbläsare har sparat är ogiltig. Ditt användarekonto har kanske tagits bort?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Användarinställningar kunde inte hittas för detta användarkonto.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Hittar inte nyheten.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Lösenordet stämmer inte med verifikationen.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'En array förväntades men en sträng mottogs för %1$s.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'En sträng förväntades men en array mottogs för %1$s.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Ett siffra förväntades för %1$s.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Ärende %1$d kan inte hittas.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filter %1$s kan inte hittas.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Filtret du försöker använda är för gammalt för att uppgraderas, skapa ett nytt.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Ogiltig e-postadress.';
+$MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Det är inte tillåtet att använda kasserbara e-postadresser.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profilen kan inte hittas.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'Filtypen är inte tillåten.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Filen finns redan.  Var god ta bort den andra filen först.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Ogiltig sökväg för skickade filer.  Katalogen finns inte eller är inte skrivbar av webservern.';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Ingen fil skickades. Gå tillbaka och välj en fil innan du trycker på Skicka.';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Filen som skickades in kunde inte flyttas till fillagringskatalogen. Katalogen finns inte eller är inte skrivbar för servern.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Kan inte ange ett ärende som kopia av sig själv.';
+$MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Ärenderevision hittas ej.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Det egendefinierade fältet kunde inte hittas.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Detta namnet är inte unikt.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Fältet används av åtminstone ett annat projekt.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Ogiltigt fältvärde för "1$s".';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Felaktig definition av egendefinierat fält';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP-autentisering misslyckades,';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Anslutningen till LDAP-servern misslyckades';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Uppdatering av LDAP-posten misslyckades.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'Användarens LDAP-post kunde inte hittas.';
+$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP har inte laddats.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Kan inte ansluta till databasen. Felmeddelandet som erhölls från databasen var #%1$d: %2$s.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Databasfråga misslyckades. Felmeddelandet som erhölls från databasen var #%1$d: %2$s för frågan: %3$s.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Databasurval misslyckades. Felmeddelandet som erhölls från databasen var #%1$d: %2$s.';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Kategorin finns redan.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Ingen kopieringsändring angiven.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorin finns inte.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Kategori "%1$s" hittades inte i projekt "%2$s".';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Versionen finns redan.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versionen "%1$s" hittas inte.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Användarnamnet är ogiltigt. Användarnamn får enbart innehålla latinska bokstäver, siffror, mellanslag, bindestreck och understreck.';
+$MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'Användarens namn är ogiltigt.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Användaren har inte tillräcklig behörighet.';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Det "Riktiga Namnet" är detsamma som en annan användares inloggningsnamn. Vänligen välj ett annat.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorstöd är ej påslaget.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsring %1$d kunde inte hittas.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorskap (%1$s) är mindre än minimalbelopp (%2$s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Hanteraren har inte rättigheter att hantera sponsrade ärenden.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Åtkomst nekad: tilldelning av sponsrade ärenden kräver högre rättigheter.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsorn har inte angett någon e-postadress. Var vänlig och uppdatera din profil.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Inställningsval \'%1$s\' har ett ogiltigt värde \'%2$s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Valet kan inte utföras eftersom ärendet \'%1$d\' är skrivskyddat.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Det finns redan en relation mellan dessa ärenden.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Relationen kunde inte hittas.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Åtkomst nekad: Ärendet %1$d kräver högre användarrättigheter.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Ett ärende kan inte ha en relation till sig själv.';
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Verifieringshashsumman överenstämmer inte. Var vänlig och försök igen.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Funktionalitet för borttappat lösenord är inte tillgänglig.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Du måste ange en e-postadress för att kunna återställa lösenordet';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Den angivna informationen överensstämmer inte med något användarkonto!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'URL:en är ogiltig för verfiering eller används redan. Var vänlig och ansök igen.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maximalt antal samtidiga förfrågningar har uppnåtts. Var vänlig kontakta din systemadministratör.';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Den operationen skulle skapa en loop i underprojekthierarkin.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Du kan inte ändra accessnivå på den enda ADMINISTRATÖREN i systemet.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Omdirigeringsfel, verifiera att det inte finns blanksteg utanför PHP-blocket (&lt;?php ?&gt;) i config_inc.php eller custom_*.php filerna.';
+$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'Twitterintegration kräver PHP CURL som inte är installerad.';
+$MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Kunde inte hitta en tagg med det namnet.';
+$MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'En tagg med det namnet existerar redan.';
+$MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Benämningen på taggen är ogiltig.';
+$MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'Den taggen är inte tilldelad det ärendet.';
+$MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Den taggen är redan tilldelad det ärendet.';
+$MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Element kunde inte hittas.';
+$MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Händelse "%1$s" har ännu inte blivit deklarerad.';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Insticksprogrammet är inte registrerat hos MantisBT.';
+$MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Insticksprogrammet är redan installerat.';
+$MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Sidan för insticksprogrammet kunde inte hittas.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Uppgraderingen av insticksprogrammets schema misslyckades i block #%1$s.';
+$MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Okänt fel "%1$s" vid exekvering av insticksprogrammet "%2$s".';
+$MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Fält "%1$s" innehåller duplicerade kolumner "%2$s".';
+$MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Fält "%1$s" innehåller ogiltigt fält "%2$s".';
+$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Ogiltig sessionshanterare.';
+$MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Sessionsvariabel "%1$s" hittades inte.';
+$MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Din session är inte längre giltig.';
+$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Ogiltigt säkerhetselement.  Sände du in formuläret två gånger av misstag?';
+$MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Denna sida kan inte besökas med den här metoden.';
+$MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Ogiltigt sorteringsfält.';
+$MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Ogiltigt datumformat.';
+$MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Klarar inte att uppdatera tidszon.';

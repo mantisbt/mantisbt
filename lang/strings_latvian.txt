@@ -1,33 +1,42 @@
 <?php
-/** MantisBT - a php based bugtracking system
+# MantisBT - A PHP based bugtracking system
+
+# MantisBT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# MantisBT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Language File - Latvian (latviešu)
  *
- * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * **********************************************************************
+ * ** This file is generated from translations stored in translatewiki **
+ * ** Information on Copyright/License for translatewiki translations  **
+ * ** is available at http://translatewiki.net/wiki/Project:About      **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
  *
- * MantisBT is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * MantisBT is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
- */
-/** Latvian (latviešu)
- * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- *
- * @author Papuass
- * @author Sergis Kanters, "kanters at yahoo dot com"
- */
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+*/
 
 $s_actiongroup_menu_move = 'Pārvietot';
 $s_actiongroup_menu_assign = 'Piešķirt';
@@ -49,7 +58,6 @@ $s_private_project_msg = 'Šis projekts publiski nav pieejams. Tikai administrā
 $s_access_level_project = 'Pieejas līmenis projektam';
 $s_view_submitted_bug_link = 'Skatīt reģistrētu ķļūdu %1$s';
 $s_assigned_projects = 'Piešķirtie projekti';
-$s_unassigned_projects = 'Nepiešķirtie projekti';
 $s_print = 'Drukāt';
 $s_jump = 'Pāriet';
 $s_copy_users = 'Kopēt lietotājus';
@@ -112,25 +120,9 @@ $s_printing_options_link = 'Izdrukas opcijas';
 $s_bugnote_title = 'Bugnote handler';
 $s_bugnote_date = 'Date of bugnote';
 $s_bugnote_description = 'Bugnote description';
-$MANTIS_ERROR[ERROR_GENERIC] = 'darbības izpildes rezultātā notikusi kļūda.  Iespējams, Jūs vēlaties par to ziņot savam lokālajam administrātoram.';
-$MANTIS_ERROR[ERROR_SQL] = 'Notikusi SQL kļūda.';
-$MANTIS_ERROR[ERROR_REPORT] = 'Jūsu ziņojumā konstatētas kļūdas.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Fails neeksistē';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Šādi faili ir aizliegti';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Katalogs neeksistē. Pārbaudiet projekta opcijas.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Projekts ar šādu nosaukumu jau eksistē.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Nav aizpildīti visi lauki.  Pārbaudiet ievades pareizību.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Šis lietotājs ir aizsargāts. Jūs nevarat labot opcijas.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Pieeja liegta.';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Šāda kategorija jau eksistē.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorija nav atrasta.';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Šāda versija jau eksistē.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versija "%1$s" nav atrasta.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'The username is invalid.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Lieotājam nav nepieciešamā pieejas līmeņa';
 $s_login_error = 'Jūsu pieeja ir atslēgta vai ievadīts nepareizs lietotāja vārds, parole.';
 $s_go_back = 'Atpakaļ';
-$s_proceed = 'Turpināt';
+$s_proceed = 'Nospiediet, lai turpinātu';
 $s_switch = 'Pārslēgties';
 $s_logged_in_as = 'Piereģistrēts kā';
 $s_administrator = 'Administrātors';
@@ -180,7 +172,7 @@ $s_account_removed_msg = 'Jūsu lietotājs tika izdzēsts...';
 $s_confirm_delete_msg = 'Vai esat pārliecināti, ka vēlaties sevi dzēst no sistēmas?';
 $s_delete_account_button = 'Lietotāja dzēšana';
 $s_manage_profiles_link = 'Profilu vadība';
-$s_change_preferences_link = 'Izvēles';
+$s_change_preferences_link = 'Opcijas';
 $s_edit_account_title = 'Lietotāja konta labošana';
 $s_username = 'Lietotājs';
 $s_email = 'E-pasts';
@@ -222,18 +214,17 @@ $s_edit_profile = 'Profila labošana';
 $s_make_default = 'Izveidot profilu';
 $s_delete_profile = 'Dzēst profilu';
 $s_select_profile = 'Izvēlēties profilu';
-$s_submit_button = 'Iesniegt';
+$s_submit_button = 'Nosūtīt';
 $s_profile_updated_msg = 'Profils saglabāts...';
 $s_account_updated_msg = 'Lietotāja konts saglabāts...';
 $s_email_updated = 'Email address successfully updated';
-$s_bug_assign_msg = 'Kļūdas atbildīgais tika noteikts...';
 $s_bug_close_msg = 'Kļūda aizvērta...';
 $s_close_immediately = 'Nekavējoties aizvērt:';
 $s_closed_bug_title = 'Aizvērt kļūdu';
 $s_bug_deleted_msg = 'Kļūda izdzēsta...';
 $s_delete_bug_sure_msg = 'Vai esat pārliecināti, ka vēlaties dzēst kļūdu?';
 $s_delete_bug_button = 'Dzēst kļūdu';
-$s_monitor_bug_button = 'Uzraudzīt';
+$s_monitor_bug_button = 'Ieslēgt kļūdas monitoringu';
 $s_unmonitor_bug_button = 'Izslēgt kļūdas monitoringu';
 $s_file_upload_msg = 'Fails ielādēts';
 $s_upload_file = 'Faila ielādēšana';
@@ -252,7 +243,7 @@ $s_from = 'No';
 $s_to = 'Kam';
 $s_sent_you_this_reminder_about = 'sūtīt šo atgādinājumu par';
 $s_bug_reminder = 'Atgādinājumu sūtīšana';
-$s_reminder_sent_to = 'Atgādinājums nosūtīts uz';
+$s_reminder_sent_to = 'Atgādinājums nosūtīts uz:';
 $s_bug_send_button = 'Sūtīt';
 $s_reminder = 'Atgādinājums';
 $s_bug_updated_msg = 'Informācija par kļūdu ir atjaunota...';
@@ -292,8 +283,7 @@ $s_add_bugnote_button = 'Pievienot';
 $s_bugnote_edit_link = 'Labot';
 $s_closed_bug_button = 'AIZVĒRT kļūdu';
 $s_bugnote_updated_msg = 'Komentārs saglabāts...';
-$s_edited_on = 'labots:';
-$s_click_to_login = 'Pieslēgties';
+$s_click_to_login = 'Noklikšķiniet, lai pieslēgtos';
 $s_login_page_info = 'Sveicināti problēmu, kļūdu un jaunas funkcionalitātes pieprasījumu uzskaites un kontroles sistēmā(bugtrack)';
 $s_login_title = 'Pieslēgšanās';
 $s_save_login = 'Iegaumēt paroli';
@@ -302,8 +292,6 @@ $s_login_button = 'Pieslēgties';
 $s_signup_link = 'Jums nav paroles? Reģistrēties sistēmā kā jaunam lietotājam.';
 $s_select_project_button = 'Izvēlaties projektu';
 $s_lost_password_info = 'To reinstate your lost password, please supply the name and email address for the account.<br /><br />If the data corresponds to a valid account, you will be sent a special URL via email that contains a validation code for your account. Please follow this link to change your password.';
-$s_open_and_assigned_to_me = 'man piešķirtās atvērtās(neatrisinātās) kļūdas/problēmas';
-$s_open_and_reported_to_me = 'manis reģistrētie, vēl atvērtie(neatrisinātie) ziņojumi';
 $s_newer_news_link = 'Jaunākās ziņas';
 $s_older_news_link = 'Vecas ziņas';
 $s_archives = 'Arhīvs';
@@ -315,7 +303,7 @@ $s_enabled = 'Atļauts';
 $s_protected = 'Aizsargāts konts';
 $s_create_user_button = 'Izveidot';
 $s_hide_disabled = 'Slēpt bloķētos';
-$s_filter_button = 'Pielietot filtru';
+$s_filter_button = 'Atlasīt';
 $s_manage_users_link = 'Lietotāju vadība';
 $s_manage_projects_link = 'Projektu vadība';
 $s_manage_custom_field_link = 'Custom lauku noteikšana';
@@ -357,7 +345,7 @@ $s_categories = 'Kategorijas';
 $s_add_category_button = 'Pielikt kategoriju';
 $s_versions = 'Versijas';
 $s_add_version_button = 'Pielikt versiju';
-$s_edit_link = 'Labot';
+$s_edit_link = 'labot';
 $s_actions = 'Darbības';
 $s_version = 'Versija';
 $s_timestamp = 'Laiks';
@@ -370,14 +358,14 @@ $s_name = 'Nosaukums';
 $s_project_updated_msg = 'Projekta izmaiņas saglabātas...';
 $s_version_added_msg = 'Versija tika pielikta...';
 $s_version_deleted_msg = 'Versija nodzēsta...';
-$s_version_delete_sure = 'Vai tiešām vēlaties dzēst šo versiju?';
+$s_version_delete_sure = 'Vai esat pārliecināti, ka vēlaties dzēst šo versiju?';
 $s_delete_version_button = 'Dzēst versiju';
 $s_edit_project_version_title = 'Projekta versijas labošana';
 $s_update_version_button = 'Labot projekta versiju';
 $s_version_updated_msg = 'Versija saglabāta...';
 $s_account_delete_protected_msg = 'Lietotāja konts ir aizsargāts. Dzēst nevar.';
 $s_account_deleted_msg = 'Lietotājs nodzēsts...';
-$s_delete_account_sure_msg = 'Vai tiešām vēlaties dzēst šo lietotāju?';
+$s_delete_account_sure_msg = 'Vai esat pārliecināti, ka vēlaties dzēst šo lietotāju?';
 $s_accounts_pruned_msg = 'Visi lietotāji, kas nekad nav lietojuši sistēmu un ir reģistrēti ilgāk nekā nedēļu atpakaļ tika nodzēsti';
 $s_confirm_account_pruning = 'Vai Jūs esat pārliecināti, ka vēlaties dzēst lietotājus, kas nekad nav pieslēgušies?';
 $s_edit_user_title = 'Lietotāja labošana';
@@ -437,7 +425,7 @@ $s_remove_user_sure_msg = 'Vai tiešām vēlaties dzēst lietotāju?';
 $s_add_user_title = 'Lietotāja pievienošana projektam';
 $s_add_user_button = 'Pievienot';
 $s_project_selection_title = 'Projekta izvēle';
-$s_remove_link = 'Noņemt';
+$s_remove_link = 'dzēst';
 $s_updated_user_msg = 'Lietotājs pievienots';
 $s_must_enter_category = 'Jums jāizvēlas kategorija';
 $s_must_enter_severity = 'Jums jāizvēlas kritiskums';
@@ -498,9 +486,9 @@ $s_any = 'visi';
 $s_show = 'Parādīt';
 $s_changed = 'Izmaiņas (pa stundu)';
 $s_viewing_bugs_title = 'Kļūdu apskate';
-$s_updated = 'Atjaunināts';
+$s_updated = 'Atjaunots';
 $s_none = 'nav';
-$s_search = 'Meklēt';
+$s_search = 'meklēt';
 $s_view_prev_link = 'iepriekšējos';
 $s_view_next_link = 'nākošos';
 $s_prev = 'iepr.';
@@ -510,7 +498,7 @@ $s_last = 'pēdējais';
 $s_view_simple_link = 'Apskate';
 $s_product_build = 'produkta apakšversija';
 $s_system_profile = 'Sistēmas (darba vides) apraksts';
-$s_update_bug_button = 'Labot';
+$s_update_bug_button = 'Labot kļūdas informāciju';
 $s_bug_assign_to_button = 'Piešķirts:';
 $s_reopen_bug_button = 'Atkārtoti atvērt';
 $s_attached_files = 'Failu pievienošana';
@@ -547,3 +535,21 @@ $s_filter_resolved = 'Atrisinātie';
 $s_attachments = 'pielikums(-i)';
 $s_from_date = 'No';
 $s_to_date = 'Kam';
+
+
+$MANTIS_ERROR[ERROR_GENERIC] = 'darbības izpildes rezultātā notikusi kļūda.  Iespējams, Jūs vēlaties par to ziņot savam lokālajam administrātoram.';
+$MANTIS_ERROR[ERROR_SQL] = 'Notikusi SQL kļūda.';
+$MANTIS_ERROR[ERROR_REPORT] = 'Jūsu ziņojumā konstatētas kļūdas.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Fails neeksistē';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Šādi faili ir aizliegti';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Katalogs neeksistē. Pārbaudiet projekta opcijas.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Projekts ar šādu nosaukumu jau eksistē.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Nav aizpildīti visi lauki.  Pārbaudiet ievades pareizību.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Šis lietotājs ir aizsargāts. Jūs nevarat labot opcijas.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Pieeja liegta.';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Šāda kategorija jau eksistē.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorija nav atrasta.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Šāda versija jau eksistē.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versija "%1$s" nav atrasta.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'The username is invalid.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Lieotājam nav nepieciešamā pieejas līmeņa';

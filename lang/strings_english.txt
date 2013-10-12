@@ -1,34 +1,76 @@
 <?php
-/** MantisBT - a php based bugtracking system
- *
- * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2010  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- *
- * MantisBT is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * MantisBT is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
- */
+# MantisBT - A PHP based bugtracking system
 
-/** English (English)
+# MantisBT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# MantisBT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Language File - English (English)
+ *
+ * **********************************************************************
+ * ** This file is generated from translations stored in translatewiki **
+ * ** Information on Copyright/License for translatewiki translations  **
+ * ** is available at http://translatewiki.net/wiki/Project:About      **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
  *
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
  *
- * @author Kenzaburo Ito, kenito@300baud.org
- * @author various developers
- */
+ * @author Adrian Spinei
+ * @author Alexey Chumakov
+ * @author André Eisenbach
+ * @author Bastian Pfenningschmidt
+ * @author Christian Weiske
+ * @author Damien Regad
+ * @author Daniel Tschinder
+ * @author Daryn Warriner
+ * @author David Hicks
+ * @author David Newcomb
+ * @author Dominik Blunk
+ * @author Frank Rodgers
+ * @author Gianluca Sforna
+ * @author Glenn Henshaw
+ * @author Jeroen Latour
+ * @author Jim Hanley
+ * @author John Reese
+ * @author Julian Fitzell
+ * @author Kenzaburo Ito
+ * @author Lincoln Maskey
+ * @author Marcello Scata
+ * @author Martin Fuchs
+ * @author Paul Richards
+ * @author Robert Munteanu
+ * @author Siebrand Mazeland
+ * @author Victor Boctor
+ * @author beerfrick
+ * @author bigbadger
+ * @author dwethell
+ * @author jctrosset
+ * @author jhuggins
+ * @author jotel
+ * @author zakman
+*/
 
 # Script directionality (currently supported: ltr and rtl)
 $s_directionality = 'ltr';
@@ -72,7 +114,6 @@ $s_access_level_project = 'Project Access Level';
 $s_view_submitted_bug_link = 'View Submitted Issue %1$s';
 $s_assigned_projects = 'Assigned Projects';
 $s_assigned_projects_label = 'Assigned Projects';
-$s_unassigned_projects_label = 'Unassigned Projects';
 $s_print = 'Print';
 $s_jump = 'Jump';
 $s_copy_users = 'Copy Users';
@@ -135,7 +176,9 @@ $s_make_public = 'Make Public';
 $s_create_new_project_link = 'Create New Project';
 
 $s_login_link = 'Login';
-$s_select_option = '(select)'; # comboboxes default to this to instruct user to explicitly select an entry.
+
+# comboboxes default to this to instruct user to explicitly select an entry.
+$s_select_option = '(select)';
 
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
@@ -186,129 +229,6 @@ $s_bugnote_date = 'Date of note';
 $s_bugnote_description = 'Note description';
 
 $s_error_no_proceed = 'Please use the "Back" button in your web browser to return to the previous page. There you can correct whatever problems were identified in this error or select another action. You can also click an option from the menu bar to go directly to a new section.';
-
-# ERROR strings
-$MANTIS_ERROR[ERROR_GENERIC] = 'An error occurred during this action. You may wish to report this error to your local administrator.';
-$MANTIS_ERROR[ERROR_SQL] = 'SQL error detected.';
-$MANTIS_ERROR[ERROR_REPORT] = 'There was an error in your report.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'No file specified.';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'The file type is disallowed.';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'The directory does not exist. Please check the project settings.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'A project with that name already exists.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'A necessary field "%1$s" was empty. Please recheck your inputs.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'This account is protected. You are not allowed to access this until the account protection is lifted.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Access Denied.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'File upload failed. File is not readable by MantisBT. Please check the project settings.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'File upload failed. This is likely because the filesize was larger than is currently allowed by this PHP installation.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'A required parameter to this page (%1$s) was not found.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used. Please go back and select another one.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option "%1$s" not found.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option "%1$s" can not be set in the database. It must be set in config_inc.php.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String "%1$s" not found.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Note not found.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Project "%1$d" not found.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database field "%1$s" not found.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Unable to connect to FTP server.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Issue handler does not have sufficient access rights to handle issue at this status.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'A project with that name already exists. Please go back and enter a different name.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Invalid project name specified. Project names cannot be blank.';
-$MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'User with name "%1$s" not found.';
-$MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'User with id "%1$d" not found.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'The login information stored by your browser is invalid. Perhaps your account was deleted?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferences could not be found for this user.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'News item not found.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match verification.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'An array was expected but a string was received for %1$s.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received for %1$s.';
-$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %1$s.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Issue %1$d not found.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filter %1$s not found.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded. Please re-create it.';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Invalid e-mail address.';
-$MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'It is not allowed to use disposable e-mail addresses.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'File type not allowed for uploads.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'This is a duplicate file. Please delete the file first.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Invalid upload path. Directory either does not exist or not writable to webserver.';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload.';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver.';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'You cannot set an issue as a duplicate of itself.';
-$MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Issue revision not found.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Invalid value for field "%1$s".';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Invalid custom field property (%1$s).';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_LINKED_TO_PROJECT] = 'Custom field "%1$s" (id %2$s) not linked to currently active project.';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP Authentication Failed.';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Server Connection Failed.';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP Record Update has failed.';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP Extension Not Loaded.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Database connection failed. Error received from database was #%1$d: %2$s.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Database query failed. Error received from database was #%1$d: %2$s for the query: %3$s.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Database selection failed. Error received from database was #%1$d: %2$s.';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'A category with that name already exists.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No copy action was specified.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Category not found.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Category "%1$s" not found for project "%2$s".';
-$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'This Category cannot be deleted, because it is defined as "Default Category For Moves".';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'A version with that name already exists.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version "%1$s" not found.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'The username is invalid. Usernames may only contain Latin letters, numbers, spaces, hyphens, dots, plus signs and underscores.';
-$MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'The user real name is invalid.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level.';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %1$d not found.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%1$s) is below minimum amount (%2$s).';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an e-mail address. Please update your profile.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option "%1$s" has invalid value "%2$s".';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue "%1$d" is read-only.';
-$MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'This issue cannot be resolved until all dependant issues have been resolved.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'There is already a relationship between these two issues.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Relationship not found.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Access denied: The issue %1$d requires higher access level.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'An issue cannot be related to itself.';
-$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The "lost your password" feature is not available.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information does not match any registered account!';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maximum number of in-progress requests reached. Please contact the system administrator.';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot remove or demote the last administrator account. To perform the action you requested, you first need to create another administrator account.';
-$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
-$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'Twitter integration requires PHP cURL extension which is not installed.';
-$MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Could not find a tag with that name.';
-$MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'A tag already exists with that name.';
-$MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'That tag name is invalid.';
-$MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'That tag is not attached to that issue.';
-$MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'That tag already attached to that issue.';
-$MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Token could not be found.';
-$MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Event "%1$s" has not yet been declared.';
-$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Plugin is not registered with MantisBT.';
-$MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Plugin is already installed.';
-$MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Plugin page not found.';
-$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Upgrading the plugin schema failed in block #%1$s.';
-$MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Plugin installation failed: %1$s.';
-$MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'There was an unknown error "%1$s" during execution of the "%2$s" plugin.';
-$MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Field "%1$s" contains duplicate column "%2$s".';
-$MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Field "%1$s" contains invalid field "%2$s".';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Invalid session handler.';
-$MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Session variable "%1$s" not found.';
-$MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Your session has become invalidated.';
-$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Invalid form security token. This could be caused by a session timeout, or accidentally submitting the form twice.';
-$MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = 'For security reasons MantisBT will not operate when $g_crypto_master_salt is not specified correctly in config_inc.php or is shorter than 16 characters long.';
-$MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = 'Unable to find a source of strong randomness for cryptographic purposes.';
-$MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'This page cannot be accessed using this method.';
-$MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Invalid sort field.';
-$MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Invalid date format.';
-$MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Unable to update timezone.';
-
 $s_login_error = 'Your account may be disabled or blocked or the username/password you entered is incorrect.';
 $s_login_cookies_disabled = 'Your browser either does not know how to handle cookies, or refuses to handle them.';
 
@@ -365,7 +285,6 @@ $s_email_notification_title_for_status_bug_confirmed = 'The following issue has 
 $s_email_notification_title_for_status_bug_assigned = 'The following issue has been ASSIGNED.';
 $s_email_notification_title_for_status_bug_resolved = 'The following issue has been RESOLVED.';
 $s_email_notification_title_for_status_bug_closed = 'The following issue has been CLOSED';
-
 $s_email_notification_title_for_action_bug_submitted = 'The following issue has been SUBMITTED.';
 $s_email_notification_title_for_action_bug_assigned = 'The following issue has been ASSIGNED.';
 $s_email_notification_title_for_action_bug_reopened = 'The following issue has been REOPENED.';
@@ -374,7 +293,6 @@ $s_email_notification_title_for_action_bug_updated = 'The following issue has be
 $s_email_notification_title_for_action_sponsorship_added = 'The following issue has been SPONSORED.';
 $s_email_notification_title_for_action_sponsorship_updated = 'A sponsorship of the following issue was modified.';
 $s_email_notification_title_for_action_sponsorship_deleted = 'A sponsorship of the following issue was withdrawn.';
-
 $s_email_notification_title_for_action_bugnote_submitted = 'A NOTE has been added to this issue.';
 $s_email_notification_title_for_action_duplicate_of_relationship_added = 'The following issue has been set as DUPLICATE OF issue %1$s.';
 $s_email_notification_title_for_action_has_duplicate_relationship_added = 'The issue %1$s has been set as DUPLICATE OF the following issue.';
@@ -525,8 +443,6 @@ $s_realname_duplicated = 'Real name is used by another user';
 $s_realname_updated = 'Real name successfully updated';
 $s_password_updated = 'Password successfully updated';
 
-# adm_permission_report.php
-
 # bug_action_group_page
 $s_multiple_projects = 'The issues you have selected are from different projects. The parameters below reflect the settings for all projects. If this is incorrect, please retry your change with a smaller number of issues selected.';
 
@@ -566,8 +482,11 @@ $s_unmonitor_bug_button = 'End Monitoring';
 $s_file_upload_msg = 'File upload successful.';
 
 # bug_file_upload_inc.php
+$s_upload_file = 'Upload File';
 $s_upload_files = 'Upload Files';
+$s_select_file = 'Select File';
 $s_select_files = 'Select Files';
+$s_upload_file_button = 'Upload File';
 $s_upload_files_button = 'Upload Files';
 $s_max_file_size = 'Maximum size';
 $s_max_file_size_label = 'Maximum size:';
@@ -593,7 +512,7 @@ $s_sent_you_this_reminder_about = 'sent you this reminder about';
 $s_bug_reminder = 'Send a reminder';
 $s_reminder_sent_to = 'Reminder sent to';
 $s_reminder_sent_none = 'No reminders could be sent';
-$s_reminder_list_truncated = 'recipients list truncated, refer to Issue History for full list';
+$s_reminder_list_truncated = 'recipients list truncated';
 $s_bug_send_button = 'Send';
 $s_reminder = 'Reminder';
 $s_reminder_explain = 'This note will be sent to the recipients listed requesting feedback on this issue.';
@@ -707,7 +626,7 @@ $s_total_query_execution_time = 'Total query execution time: %1$s seconds';
 $s_page_execution_time = 'Page execution time: %1$s seconds';
 $s_memory_usage_in_kb = 'Memory usage: %1$s KiB';
 
-#log_api.php
+# log_api.php
 $s_log_page_number = 'Number';
 $s_log_page_time = 'Execution time';
 $s_log_page_caller = 'Caller';
@@ -723,16 +642,19 @@ $s_click_to_login = 'Login';
 $s_warning_plain_password_authentication = '<strong>Warning:</strong> Plain password authentication is used, this will expose your passwords to administrators.';
 $s_warning_default_administrator_account_present = '<strong>Warning:</strong> You should disable the default \'administrator\' account or change its password.';
 $s_warning_admin_directory_present = '<strong>Warning:</strong> Admin directory should be removed.';
+$s_warning_change_setting = '<strong>Warning:</strong> "%1$s" is not set to its default value (%2$s), which ';
+$s_warning_security_hazard = 'is a potential security hazard as it can expose sensitive information.';
+$s_warning_integrity_hazard = 'will cause Mantis to continue when errors occurs and may lead to system/data integrity issues.';
+$s_warning_debug_email = '<strong>Warning:</strong> "debug_email" is not OFF, all notification e-mails will be sent to "%1$s".';
 $s_error_database_version_out_of_date_1 = '<strong>Error:</strong> The database structure appears to be out of date (config(databaseversion) is 0 and old upgrade tables exist). Version 1.x of MantisBT introduced a new upgrade process. You appear to be upgrading from a 0.XX Release. Please upgrade to 1.0.8 or 1.1.X, then upgrade to 1.2.';
 $s_error_database_no_schema_version = '<strong>Error:</strong> The database structure appears to be out of date (config(databaseversion) is 0 and old upgrade tables do not exist). Please check that your database is running - we can not retrieve the database schema version. Config Table did not return a valid database schema version - please ask for support on the mantis-help mailing list if required.';
 $s_error_database_version_out_of_date_2 = '<strong>Warning:</strong> The database structure may be out of date. Please upgrade <a href="admin/install.php">here</a> before logging in.';
 $s_error_code_version_out_of_date = '<strong>Warning:</strong> The database structure is more up-to-date than the code installed. Please upgrade the code.';
 
 # login_page.php
-#@@@ should the following string be related to $g_window_title?
 $s_login_page_info = 'Welcome to the Issue Tracker.';
 $s_login_title = 'Login';
-$s_save_login = 'Remember my login in this computer';
+$s_save_login = 'Remember my login in this browser';
 $s_secure_session = 'Secure Session';
 $s_secure_session_long = 'Only allow your session to be used from this IP address.';
 $s_choose_project = 'Choose Project';
@@ -751,8 +673,6 @@ $s_lost_password_info = 'To reinstate your lost password, please supply the name
 $s_lost_password_confirm_hash_OK = 'Your confirmation has been accepted. Please update your password.';
 
 # main_page.php
-$s_open_and_assigned_to_me_label = 'Open and assigned to me:';
-$s_open_and_reported_to_me_label = 'Open and reported by me:';
 $s_newer_news_link = 'Newer News';
 $s_older_news_link = 'Older News';
 $s_archives = 'Archives';
@@ -890,7 +810,7 @@ $s_configuration_option_value = 'Value';
 $s_all_users = 'All Users';
 $s_set_configuration_option = 'Set Configuration Option';
 $s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
-$s_configuration_corrupted = 'The configuration in the database is corrupted.';
+$s_configuration_corrupted = 'The configuration in database is corrupted.';
 
 # manage_plugin_page.php
 $s_plugin = 'Plugin';
@@ -909,11 +829,6 @@ $s_plugin_install = 'Install';
 $s_plugin_upgrade = 'Upgrade';
 $s_plugin_uninstall = 'Uninstall';
 $s_plugin_uninstall_message = 'Are you sure you want to uninstall the "%1$s" plugin?';
-$s_plugin_key_label = 'Key:';
-$s_plugin_key_met = 'plugin ready';
-$s_plugin_key_unmet = 'unmet dependencies';
-$s_plugin_key_dated = 'outdated dependencies';
-$s_plugin_key_upgrade = 'upgrade needed';
 
 # manage_proj_add.php
 $s_project_added_msg = 'Project has been successfully added...';
@@ -1060,8 +975,6 @@ $s_edit_news_link = 'Edit News';
 $s_docs_link = 'Docs';
 $s_logout_link = 'Logout';
 $s_my_view_link = 'My View';
-
-# meta_inc.php
 
 # my_view_page.php
 $s_my_view_title_unassigned = 'Unassigned';
@@ -1253,7 +1166,6 @@ $s_viewing_bugs_title = 'Viewing Issues';
 $s_updated = 'Updated';
 $s_sticky = 'Show Sticky Issues';
 $s_sticky_label = 'Show Sticky Issues:';
-$s_sort_label = 'Sort by:';
 $s_issue_id = 'Issue #';
 $s_recently_visited = 'Recently Visited';
 $s_priority_abbreviation = 'P';
@@ -1272,8 +1184,6 @@ $s_prev = 'Prev';
 $s_next = 'Next';
 $s_first = 'First';
 $s_last = 'Last';
-$s_start_date_label = 'Start Date:';
-$s_end_date_label = 'End Date:';
 $s_use_date_filters = 'Use Date Filters';
 $s_use_date_filters_label = 'Use Date Filters:';
 $s_yes = 'Yes';
@@ -1315,10 +1225,7 @@ $s_publish = 'Publish';
 $s_cached = 'Cached';
 $s_add_user_to_monitor = 'Add';
 
-# view_bug_inc.php
-
 # view_bug_page.php
-# print_all_bug_page_word.php
 $s_bug_view_title = 'View Issue Details';
 
 # bug_monitor_list_view_inc.php
@@ -1364,18 +1271,14 @@ $s_custom_field_require_closed = 'Required On Close';
 $s_link_custom_field_to_project_title = 'Link custom field to project';
 $s_link_custom_field_to_project_button = 'Link Custom Field';
 $s_linked_projects_label = 'Linked Projects:';
-
 $s_custom_field_sequence = 'Sequence';
 $s_custom_field_sequence_label = 'Sequence';
-$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:E-mail,5:Checkbox,6:List,7:Multiselection list,8:Date,9:Radio';
-
+$s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:E-mail,5:Checkbox,6:List,7:Multiselection list,8:Date,9:Radio,10:Textarea';
 $s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project. If you continue all values for this field will be permanently deleted. This action cannot be undone. If you do not want to delete this field, hit the Back button in your browser. To proceed, click the button below';
 $s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
 $s_field_delete_button = 'Delete Field';
-
 $s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
 $s_field_remove_button = 'Remove Field';
-
 $s_hide_status = 'Hide Status';
 $s_hide_status_label = 'Hide Status:';
 $s_filter_closed = 'Closed';
@@ -1387,7 +1290,6 @@ $s_advanced_filters = 'Advanced Filters';
 $s_simple_filters = 'Simple Filters';
 $s_monitored_by = 'Monitored By';
 $s_monitored_by_label = 'Monitored By:';
-
 $s_attachments = 'attachment(s)';
 $s_bytes = 'bytes';
 $s_attachment_missing = 'Attachment missing';
@@ -1483,7 +1385,7 @@ $s_delete_attachments = 'Delete attachments';
 $s_delete_attachment_button = 'Delete';
 $s_delete_attachment_sure_msg = 'Are you sure you wish to delete this attachment?';
 $s_upload_issue_attachments = 'Upload issue attachments';
-$s_filters = 'filters';
+$s_filters = 'Filters';
 $s_save_filters = 'Save filters';
 $s_save_filters_as_shared = 'Save filters as shared';
 $s_use_saved_filters = 'Use saved filters';
@@ -1575,10 +1477,10 @@ $s_show_all_tags = 'All';
 # Time Tracking
 $s_time_tracking_billing_link = 'Time Tracking';
 $s_time_tracking = 'Time tracking';
-$s_time_tracking_time_spent = 'Time spent';
+$s_time_tracking_time_spent = 'Time spent:';
 $s_time_tracking_get_info_button = 'Get Time Tracking Information';
 $s_time_tracking_cost_per_hour = 'Cost / Hour';
-$s_time_tracking_cost_per_hour_label = 'Cost / Hour';
+$s_time_tracking_cost_per_hour_label = 'Cost / Hour:';
 $s_time_tracking_cost = 'Cost';
 $s_time_tracking_cost_label = 'Cost:';
 $s_total_time_for_issue = 'Total time for issue = %1$s';
@@ -1641,3 +1543,132 @@ $s_month_september = 'September';
 $s_month_october = 'October';
 $s_month_november = 'November';
 $s_month_december = 'December';
+
+/**
+ * ERROR strings
+ */
+$s_missing_error_string = 'Missing Error String: ';
+
+$MANTIS_ERROR[ERROR_GENERIC] = 'An error occurred during this action. You may wish to report this error to your local administrator.';
+$MANTIS_ERROR[ERROR_SQL] = 'SQL error detected.';
+$MANTIS_ERROR[ERROR_REPORT] = 'There was an error in your report.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'No file specified.';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'The file type is disallowed.';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'The directory does not exist. Please check the project settings.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'A project with that name already exists.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'A necessary field "%1$s" was empty. Please recheck your inputs.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'This account is protected. You are not allowed to access this until the account protection is lifted.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Access Denied.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'File upload failed. File is not readable by MantisBT. Please check the project settings.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'File upload failed. This is likely because the filesize was larger than is currently allowed by this PHP installation.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'A required parameter to this page (%1$s) was not found.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'That username is already being used. Please go back and select another one.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Configuration option "%1$s" not found.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Configuration option "%1$s" can not be set in the database. It must be set in config_inc.php.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String "%1$s" not found.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Note not found.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Project "%1$d" not found.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database field "%1$s" not found.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Unable to connect to FTP server.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Issue handler does not have sufficient access rights to handle issue at this status.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'A project with that name already exists. Please go back and enter a different name.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Invalid project name specified. Project names cannot be blank.';
+$MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'User with name "%1$s" not found.';
+$MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'User with id "%1$d" not found.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'The login information stored by your browser is invalid. Perhaps your account was deleted?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferences could not be found for this user.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'News item not found.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match verification.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'An array was expected but a string was received for %1$s.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'A string was expected but an array was received for %1$s.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'A number was expected for %1$s.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Issue %1$d not found.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filter %1$s not found.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'The filter you are trying to use is too old to be upgraded. Please re-create it.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Invalid e-mail address.';
+$MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'It is not allowed to use disposable e-mail addresses.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profile not found.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'File type not allowed for uploads.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'This is a duplicate file. Please delete the file first.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Invalid upload path. Directory either does not exist or not writable to webserver.';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload.';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'You cannot set an issue as a duplicate of itself.';
+$MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Issue revision not found.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'This is a duplicate name.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'At least one project still uses this field.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Invalid value for field "%1$s".';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Invalid custom field definition.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Invalid custom field property (%1$s).';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_LINKED_TO_PROJECT] = 'Custom field "%1$s" (id %2$s) not linked to currently active project.';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP Authentication Failed.';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP Server Connection Failed.';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP Record Update has failed.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP User Record Not Found.';
+$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'LDAP Extension Not Loaded.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Database connection failed. Error received from database was #%1$d: %2$s.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Database query failed. Error received from database was #%1$d: %2$s for the query: %3$s.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Database selection failed. Error received from database was #%1$d: %2$s.';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'A category with that name already exists.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No copy action was specified.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Category not found.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Category "%1$s" not found for project "%2$s".';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'This Category cannot be deleted, because it is defined as "Default Category For Moves".';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'A version with that name already exists.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version "%1$s" not found.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'The username is invalid. Usernames may only contain Latin letters, numbers, spaces, hyphens, dots, plus signs and underscores.';
+$MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'The user real name is invalid.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'User does not have required access level.';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'The "Real Name" chosen matches another user\'s login name. Please choose another.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorship support not enabled.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorship %1$d not found.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorship (%1$s) is below minimum amount (%2$s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Handler does not have the required access level to handle sponsored issues.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Access Denied: Assigning sponsored issues requires higher access level.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponsor has not provided an e-mail address. Please update your profile.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Configuration option "%1$s" has invalid value "%2$s".';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'The action cannot be performed because issue "%1$d" is read-only.';
+$MANTIS_ERROR[ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING] = 'This issue cannot be resolved until all dependant issues have been resolved.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'There is already a relationship between these two issues.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Relationship not found.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Access denied: The issue %1$d requires higher access level.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'An issue cannot be related to itself.';
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Confirmation hash does not match. Please retry.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'The "lost your password" feature is not available.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'You must provide an e-mail address in order to reset the password.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'The provided information does not match any registered account!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'The confirmation URL is invalid or has already been used. Please signup again.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maximum number of in-progress requests reached. Please contact the system administrator.';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'That operation would create a loop in the subproject hierarchy.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'You cannot remove or demote the last administrator account. To perform the action you requested, you first need to create another administrator account.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Page redirection error, ensure that there are no spaces outside the PHP block (&lt;?php ?&gt;) in config_inc.php or custom_*.php files.';
+$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'Twitter integration requires PHP cURL extension which is not installed.';
+$MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Could not find a tag with that name.';
+$MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'A tag already exists with that name.';
+$MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'That tag name is invalid.';
+$MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'That tag is not attached to that issue.';
+$MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'That tag already attached to that issue.';
+$MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Token could not be found.';
+$MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Event "%1$s" has not yet been declared.';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Plugin is not registered with MantisBT.';
+$MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Plugin is already installed.';
+$MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Plugin page not found.';
+$MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Plugin installation failed: %1$s.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Upgrading the plugin schema failed in block #%1$s.';
+$MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'There was an unknown error "%1$s" during execution of the "%2$s" plugin.';
+$MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Field "%1$s" contains duplicate column "%2$s".';
+$MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Field "%1$s" contains invalid field "%2$s".';
+$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Invalid session handler.';
+$MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Session variable "%1$s" not found.';
+$MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Your session has become invalidated.';
+$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Invalid form security token. This could be caused by a session timeout, or accidentally submitting the form twice.';
+$MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = 'For security reasons MantisBT will not operate when $g_crypto_master_salt is not specified correctly in config_inc.php or is shorter than 16 characters long.';
+$MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = 'Unable to find a source of strong randomness for cryptographic purposes.';
+$MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'This page cannot be accessed using this method.';
+$MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Invalid sort field.';
+$MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Invalid date format.';
+$MANTIS_ERROR[ERROR_INVALID_RESOLUTION] = 'Resolution "%1$s" is not allowed for status "%2$s"';
+$MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Unable to update timezone.';
+$MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = 'Deprecated functionality: "%1$s", use "%2$s" instead.';
+$MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'WARNING: System is configured to display MantisBT errors (E_USER_ERROR) inline. Program execution will continue; this may lead to system/data integrity issues.';

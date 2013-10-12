@@ -138,7 +138,7 @@ while(( $i <= $lastid ) && !$g_failed ) {
 		$sqlarray = call_user_func_array( array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
 	}
 
-	$ret = $dict->ExecuteSQLarray( $sqlarray );
+	$ret = $dict->ExecuteSQLArray( $sqlarray );
 	if( $ret == 2 ) {
 		print_test_result( GOOD );
 		config_set( 'database_version', $i );

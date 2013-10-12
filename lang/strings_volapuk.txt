@@ -1,33 +1,42 @@
 <?php
-/** MantisBT - a php based bugtracking system
+# MantisBT - A PHP based bugtracking system
+
+# MantisBT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# MantisBT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Language File - Volapük (Volapük)
  *
- * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * **********************************************************************
+ * ** This file is generated from translations stored in translatewiki **
+ * ** Information on Copyright/License for translatewiki translations  **
+ * ** is available at http://translatewiki.net/wiki/Project:About      **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
  *
- * MantisBT is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * MantisBT is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
- */
-/** Volapük (Volapük)
- * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- *
- * @author Malafaya
- * @author Smeira
- */
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+*/
 
 $s_actiongroup_menu_move = 'Topätükön';
 $s_actiongroup_menu_copy = 'Kopiedön';
@@ -79,64 +88,6 @@ $s_select_option = '(välön)';
 $s_printing_preferences_title = 'Välön felis ad dabükön';
 $s_bugnote_date = 'Noetadät';
 $s_bugnote_description = 'Noetabepenam';
-$MANTIS_ERROR[ERROR_GENERIC] = 'Pöl ejenon dü dun at. Nunolös, begö! pöli at guvane topik ola.';
-$MANTIS_ERROR[ERROR_SQL] = 'Pöl-SQL petuvon.';
-$MANTIS_ERROR[ERROR_REPORT] = 'In nunod oli ädabinon pöl.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Ragiv nonik pegivon.';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Ragivatip no pedälon.';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Ragiviär no dabinon. Kontrololös parametemi proyega.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Proyeg labü nem at ya dabinon.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Fel zesüdik: „$1$s“ ävagon. Kontrololös utosi, kelosi epenol.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Kal at pejelon. No dalol gebön ani jüs kalijel ponosükon.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Ragivilöpükam no eplöpon. Ragiv at no binon reidovik ele MantisBT. Kontrololös parametemi proyega.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Ragivilöpükam no eplöpon. Atos ba ejenon bi ragivagretot pluon tefü maxum anu padälöl fa fomam-PHP at.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Paramet peflagöl pada at (%1$s) no petuvon.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Gebananem at ya pagebon. Geikolös e välolös votiki.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Noet no petuvon.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Proyeg: „%1$d“ no petuvon.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Nünodemafel: „%1$s“ no petuvon.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Proyeg labü nem at ya dabinon. Geikolös e penolös nemi votik.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Proyeganem no lonöföl pepenon. Proyeganems no kanons vagön.';
-$MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Geban labü nem: „%1$s“ no petuvon.';
-$MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'Geban labü dientifanüm: „%1$d“ no petuvon.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Nunädamanüns in bevüresodanaföm olik pekipedöls no lonöfons. Kal olik ba pemoükon-li?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Buükams no petuvons demü geban at.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Letavöd no veräton.';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Ladet leäktronik no lonöföl.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profül no petuvon.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'Ragivasot no padälöl pö löpükams.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Atos binon ragiv petelüköl. Büo moükolös ragivi.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Löpükamaluveg no lonöfon. Ragiviar no dabinon, u no binon penovik dünanünöme.';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Ragiv nonik pelöpükon. Geikolös e välolös ragivi büä osteifülos löpükami.';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'No eplöpos ad pladön ragivi pelöpüköl ini ragiviär pro dakip ragivas. Ragiviär no dabinon u no binon penovik dünanünöme.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Fel pelönedüköl no petuvon.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Atos binon nem petelüköl.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Proyeg pu bal gebon feli at.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Völad no lonöföl pro %1$s.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Miedet fela pelönedüköl no lonöfon.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Yümam ad nünodem no eplöpon. Pöl se nünodem pedagetöl äbinon: #%1$d: %2$s.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Nünödemaseivid no eplöpon. Pöl pedagetöl se nünödem äbinon #%1$d: %2$s tefü seivid: %3$s.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Väl nünodema no eplöpon. Pöl se nünodem pedagetöl äbinon: #%1$d: %2%2$s.';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Klad labü nem at ya dabinon.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No kopiedadun pebegon.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Klad no petuvon.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Klad: „%1$s“ no petuvon pro proyeg: „%2$s“.';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Fomam labü nem at ya dabinon.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Fomam: „%1$s“ no petuvon.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Gebananem no lonöfon. Gebananems dalons binädon teiko me tonats latinik, numats, spads, e malats: „-“ e „_“.';
-$MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'Nem jenöfik gebana no lonöfon.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Geban no labon dälanivodi zesüdik.';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = '„Nem jenöfik“ pevälöl leigon ko nunädamanem gebana votik. Valolös votiki.';
-$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Fümedasaedot no leigon. Steifülolös dönu.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Dun: „letavöd peperon“ no gebidon.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Mutol gevön ladeti leäktronik ad vagükön letavödi.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Nüns pegevöl leigons ko kal peregistaröl nonik!';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'El URL fümedama no lonöfon u ya pegebon. Nunädolös oli dönu.';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'No kanol votükön dälanivodi GUVANA teik sita.';
-$MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Fel: „%1$s“ keninükon padüli petelüköl: „%2$s“.';
-$MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Fel: „%1$s“ keninükon feli no lonöföli: „%2$s“.';
-$MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Pad at no binon lügolovik me metod at.';
-$MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Leodükamafel no lonöföl.';
 $s_login_error = 'Kal olik binon ba negebovik u peblokon, u ba gebananem e/u letavöd fa ol pepenöls no verätons.';
 $s_login_cookies_disabled = 'Bevüresodanaföm olik no kanon lasumön kekilis, u refudon onis.';
 $s_go_back = 'Geikön';
@@ -219,7 +170,7 @@ $s_from = 'De';
 $s_to = 'Lü';
 $s_sent_you_this_reminder_about = 'esedon mebapenedi at tefü';
 $s_bug_reminder = 'Sedön mebapenedi';
-$s_reminder_sent_to = 'Mebapened pesedon ele:';
+$s_reminder_sent_to = 'Mebapened pesedon ele';
 $s_bug_send_button = 'Sedön';
 $s_reminder = 'Mebapened';
 $s_id = 'Dientifäd';
@@ -240,7 +191,6 @@ $s_delete_link = 'Moükön';
 $s_add_bugnote_title = 'Läükön Noeti';
 $s_add_bugnote_button = 'Läükön Noeti';
 $s_bugnote_edit_link = 'Redakön';
-$s_edited_on = 'pebevobon ün:';
 $s_hide_content = 'Klänedön Ninädi';
 $s_show_content = 'Jonön Ninädi';
 $s_total_queries_executed = '%1$d seivids valemik peledunons.';
@@ -250,7 +200,7 @@ $s_click_to_login = 'Klikolös is ad nunädön oli';
 $s_warning_default_administrator_account_present = '<strong>NUNED:</strong> Sötol negebidükön kali kösömik: „guvan“ u votükön letavödi oni.';
 $s_warning_admin_directory_present = '<strong>NUNED:</strong> Guvanaragiviär söton pemoükön.';
 $s_login_title = 'Nunädam';
-$s_save_login = 'Dakipön nunädamanünis obik in nünöm at';
+$s_save_login = 'Dakipön Nunädami';
 $s_choose_project = 'Välön Proyegi';
 $s_login_button = 'Nunädam';
 $s_signup_link = 'Jafön kali nulik';
@@ -258,7 +208,6 @@ $s_lost_password_link = 'Eperol-li letavödi olik?';
 $s_select_project_button = 'Välön Proyegi';
 $s_lost_password_done_title = 'Letavödanun pesedon';
 $s_lost_password_confirm_hash_OK = 'Fümedam olik pezepon. Votükolös letavödi olik.';
-$s_open_and_assigned_to_me = 'Maifik ä pegivülöl obe';
 $s_site_information = 'Nüns tefü Topäd';
 $s_mantis_version = 'Fomam ela MantisBT';
 $s_site_path = 'Luveg Bevüresodatopäda';
@@ -308,7 +257,6 @@ $s_plugin_author = 'Lautan: %$1s';
 $s_plugin_url = 'Bevüresodatopäd:';
 $s_plugin_protected = 'Pejelon';
 $s_plugin_actions = 'Duns';
-$s_plugin_key = 'Kik';
 $s_project_added_msg = 'Proyeg peläükon benosekiko...';
 $s_category_added_msg = 'Klad peläükon benosekiko...';
 $s_category_deleted_msg = 'Klad pemoükon benosekiko...';
@@ -381,6 +329,7 @@ $s_add_file = 'Läükön Ragivi';
 $s_project_user_added_msg = 'Geban peläükön proyege benosekiko.';
 $s_project_removed_user_msg = 'Geban pemoükon benosekiko se proyeg.';
 $s_remove_user_sure_msg = 'Vilol-li fümiko moükön gebani at?';
+$s_remove_user_button = 'Moükön Gebani';
 $s_remove_all_users_sure_msg = 'Vilol-li fümiko moükön gebanis valik se proyeg at?';
 $s_remove_all_users_button = 'Moükön Gebanis Valik';
 $s_add_user_title = 'Läükön gebani proyege';
@@ -416,11 +365,9 @@ $s_prev = 'Büik';
 $s_next = 'Sököl';
 $s_first = 'Balid';
 $s_last = 'Lätik';
-$s_start_date = 'Primadät';
-$s_end_date = 'Finadät';
 $s_use_date_filters = 'Gebön Dätisulis';
 $s_yes = 'Si';
-$s_no = 'Nö';
+$s_no = 'No';
 $s_open_filters = 'Votükön Suli';
 $s_select_all = 'Välön Vali';
 $s_use_query = 'Gebön Suli';
@@ -459,7 +406,6 @@ $s_horizontal = 'Horitätik';
 $s_view = 'Logön';
 $s_notes = 'NOETS';
 $s_add_notes = 'Läükön noetis';
-$s_delete_note = 'Moükön noetis';
 $s_view_private_notes = 'Logön noetis privatik';
 $s_delete_attachment_button = 'Moükön';
 $s_filters = 'suls';
@@ -489,3 +435,63 @@ $s_tag_created = 'Jafadät';
 $s_tag_statistics = 'Gebamastatits';
 $s_copy_columns_from = 'Kopiedön Padülis Se';
 $s_copy_columns_to = 'Kopiedön Padülis Lü';
+
+
+$MANTIS_ERROR[ERROR_GENERIC] = 'Pöl ejenon dü dun at. Nunolös, begö! pöli at guvane topik ola.';
+$MANTIS_ERROR[ERROR_SQL] = 'Pöl-SQL petuvon.';
+$MANTIS_ERROR[ERROR_REPORT] = 'In nunod oli ädabinon pöl.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Ragiv nonik pegivon.';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Ragivatip no pedälon.';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Ragiviär no dabinon. Kontrololös parametemi proyega.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Proyeg labü nem at ya dabinon.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Fel zesüdik: „$1$s“ ävagon. Kontrololös utosi, kelosi epenol.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Kal at pejelon. No dalol gebön ani jüs kalijel ponosükon.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Ragivilöpükam no eplöpon. Ragiv at no binon reidovik ele MantisBT. Kontrololös parametemi proyega.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Ragivilöpükam no eplöpon. Atos ba ejenon bi ragivagretot pluon tefü maxum anu padälöl fa fomam-PHP at.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Paramet peflagöl pada at (%1$s) no petuvon.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Gebananem at ya pagebon. Geikolös e välolös votiki.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Noet no petuvon.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Proyeg: „%1$d“ no petuvon.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Nünodemafel: „%1$s“ no petuvon.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Proyeg labü nem at ya dabinon. Geikolös e penolös nemi votik.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Proyeganem no lonöföl pepenon. Proyeganems no kanons vagön.';
+$MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Geban labü nem: „%1$s“ no petuvon.';
+$MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'Geban labü dientifanüm: „%1$d“ no petuvon.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Nunädamanüns in bevüresodanaföm olik pekipedöls no lonöfons. Kal olik ba pemoükon-li?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Buükams no petuvons demü geban at.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Letavöd no veräton.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Ladet leäktronik no lonöföl.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profül no petuvon.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'Ragivasot no padälöl pö löpükams.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Atos binon ragiv petelüköl. Büo moükolös ragivi.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Löpükamaluveg no lonöfon. Ragiviar no dabinon, u no binon penovik dünanünöme.';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Ragiv nonik pelöpükon. Geikolös e välolös ragivi büä osteifülos löpükami.';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'No eplöpos ad pladön ragivi pelöpüköl ini ragiviär pro dakip ragivas. Ragiviär no dabinon u no binon penovik dünanünöme.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Fel pelönedüköl no petuvon.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Atos binon nem petelüköl.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Proyeg pu bal gebon feli at.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Völad no lonöföl pro %1$s.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Miedet fela pelönedüköl no lonöfon.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Yümam ad nünodem no eplöpon. Pöl se nünodem pedagetöl äbinon: #%1$d: %2$s.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Nünödemaseivid no eplöpon. Pöl pedagetöl se nünödem äbinon #%1$d: %2$s tefü seivid: %3$s.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Väl nünodema no eplöpon. Pöl se nünodem pedagetöl äbinon: #%1$d: %2%2$s.';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Klad labü nem at ya dabinon.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'No kopiedadun pebegon.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Klad no petuvon.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Klad: „%1$s“ no petuvon pro proyeg: „%2$s“.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Fomam labü nem at ya dabinon.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Fomam: „%1$s“ no petuvon.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Gebananem no lonöfon. Gebananems dalons binädon teiko me tonats latinik, numats, spads, e malats: „-“ e „_“.';
+$MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'Nem jenöfik gebana no lonöfon.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Geban no labon dälanivodi zesüdik.';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = '„Nem jenöfik“ pevälöl leigon ko nunädamanem gebana votik. Valolös votiki.';
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Fümedasaedot no leigon. Steifülolös dönu.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Dun: „letavöd peperon“ no gebidon.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Mutol gevön ladeti leäktronik ad vagükön letavödi.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Nüns pegevöl leigons ko kal peregistaröl nonik!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'El URL fümedama no lonöfon u ya pegebon. Nunädolös oli dönu.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'No kanol votükön dälanivodi GUVANA teik sita.';
+$MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Fel: „%1$s“ keninükon padüli petelüköl: „%2$s“.';
+$MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Fel: „%1$s“ keninükon feli no lonöföli: „%2$s“.';
+$MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Pad at no binon lügolovik me metod at.';
+$MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Leodükamafel no lonöföl.';

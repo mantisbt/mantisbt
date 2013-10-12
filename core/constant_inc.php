@@ -66,7 +66,7 @@ define( 'CLOSED', 90 );
 define( 'OPEN', 10 );
 define( 'FIXED', 20 );
 define( 'REOPENED', 30 );
-define( 'UNABLE_TO_DUPLICATE', 40 );
+define( 'UNABLE_TO_REPRODUCE', 40 );
 define( 'NOT_FIXABLE', 50 );
 define( 'DUPLICATE', 60 );
 define( 'NOT_A_BUG', 70 );
@@ -226,6 +226,9 @@ define( 'ERROR_INVALID_REQUEST_METHOD', 19 );
 define( 'ERROR_INVALID_SORT_FIELD', 20 );
 define( 'ERROR_INVALID_DATE_FORMAT', 21 );
 define( 'ERROR_UPDATING_TIMEZONE', 22 );
+define( 'ERROR_DEPRECATED_SUPERSEDED', 23 );
+define( 'ERROR_INVALID_RESOLUTION', 24 );
+define( 'ERROR_DISPLAY_USER_ERROR_INLINE', 25 );
 
 # ERROR_CONFIG_*
 define( 'ERROR_CONFIG_OPT_NOT_FOUND', 100 );
@@ -287,8 +290,6 @@ define( 'ERROR_NEWS_NOT_FOUND', 1000 );
 # ERROR_BUG_*
 define( 'ERROR_BUG_NOT_FOUND', 1100 );
 define( 'ERROR_BUG_DUPLICATE_SELF', 1101 );
-# Obsoleted
-#define( 'ERROR_BUG_RESOLVED_ACTION_DENIED', 1102 );
 define( 'ERROR_BUG_READ_ONLY_ACTION_DENIED', 1103 );
 define( 'ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING', 1104 );
 define( 'ERROR_BUG_REVISION_NOT_FOUND', 1150 );
@@ -497,8 +498,14 @@ define( 'CUSTOM_FIELD_TYPE_BUGNOTE', 2 );
 define( 'CUSTOM_FIELD_TYPE_PROJECT', 3 );
 define( 'CUSTOM_FIELD_TYPE_FILE', 4 );
 
+# display types for $g_display_errors
+define( 'DISPLAY_ERROR_HALT', 'halt' );
+define( 'DISPLAY_ERROR_INLINE', 'inline' );
+define( 'DISPLAY_ERROR_NONE', 'none' );
+
 # system logging
-#  logging levels, can be OR'd together
+# The logging levels can be combined using bitwise operators
+define( 'LOG_ALL',                     ~0 );  # All possible log levels
 define( 'LOG_NONE',                     0 );  # no logging
 define( 'LOG_EMAIL',                    1 );  # all emails sent
 define( 'LOG_EMAIL_RECIPIENT',          2 );  # details of email recipient determination
@@ -544,3 +551,7 @@ define( 'DB_FIELD_SIZE_PASSWORD', 32);
 define( 'PASSWORD_MAX_SIZE_BEFORE_HASH', 1024 );
 
 define( 'SECONDS_PER_DAY', 86400 );
+
+# Obsolete / deprecated constants
+define( 'UNABLE_TO_DUPLICATE', 40 );
+define( 'ERROR_BUG_RESOLVED_ACTION_DENIED', 1102 );

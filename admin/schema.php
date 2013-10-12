@@ -613,3 +613,5 @@ $upgrade[] = array( 'AddColumnSQL', array( db_get_table( 'custom_field_string' )
 	text		XL  			NULL DEFAULT NULL " ) );
 $upgrade[] = array( 'UpdateFunction', 'update_history_long_custom_fields' );
 $upgrade[] = array( 'CreateIndexSQL', array( 'idx_bug_id', db_get_table( 'bug_monitor' ), 'bug_id' ) );
+$upgrade[] = array( 'AlterColumnSQL', array( db_get_table( 'project' ), "inherit_global L NOTNULL DEFAULT '0'" ) );
+$upgrade[] = array( 'AlterColumnSQL', array( db_get_table( 'project_hierarchy' ), "inherit_parent L NOTNULL DEFAULT '0'" ) );

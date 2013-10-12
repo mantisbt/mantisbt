@@ -39,6 +39,7 @@ check_print_test_row( 'config_inc.php configuration file exists',
 	array( false => 'Please use <a href="install.php">install.php</a> to perform the initial installation of MantisBT.' )
 );
 
+# Debugging / Developer Settings
 check_print_test_warn_row( 'Check whether diagnostic logging is enabled',
 	$g_log_level == LOG_NONE,
 	array( false => 'Global Log Level should usually be set to LOG_NONE for production use' )
@@ -49,4 +50,21 @@ check_print_test_warn_row( 'Check whether log output is sent to end user',
 	array( false => 'Diagnostic output destination is currently sent to end users browser' )
 );
 
+check_print_test_warn_row( 'Detailed errors should be OFF',
+	$g_show_detailed_errors == OFF,
+	array( false => 'Setting show_detailed_errors = ON is a potential security hazard as it can expose sensitive information.' )
+);
+
+check_print_test_warn_row( 'MantisBT Application Errors should halt execution',
+	$g_display_errors[E_USER_ERROR] == DISPLAY_ERROR_HALT,
+	array( false => 'Continuing after an error may lead to system and/or data integrity issues. Set $g_display_errors[E_USER_ERROR] = \'halt\';' )
+);
+
+check_print_test_warn_row( 'Email debugging should be OFF',
+	$g_debug_email ===  OFF,
+	array( false => "All notification e-mails will be sent to $g_debug_email" )
+);
+
+
+# Obsolete Settings
 require_api( 'obsolete.php' );

@@ -137,7 +137,7 @@ function show_flag( $p_from_status_id, $p_to_status_id ) {
 function section_begin( $p_section_name ) {
 	$t_enum_statuses = MantisEnum::getValues( config_get( 'status_enum_string' ) );
 	echo '<div class="form-container">'. "\n";
-	echo "\t" . '<table class="width100">'. "\n";
+	echo "\t<table>\n";
 	echo "\t\t" . '<tr>' . "\n\t\t\t" . '<td class="form-title-caps" colspan="' . ( count( $t_enum_statuses ) + 2 ) . '">'
 		. $p_section_name . '</td>' . "\n\t\t" . '</tr>' . "\n";
 	echo "\t\t" . '<tr>' . "\n\t\t\t" . '<td class="form-title width30" rowspan="2">' . lang_get( 'current_status' ) . '</td>'. "\n";
@@ -187,7 +187,7 @@ function section_end() {
 
 function threshold_begin( $p_section_name ) {
 	echo '<div class="form-container">';
-	echo '<table class="width100">';
+	echo '<table>';
 	echo "\t" . '<tr><td class="form-title" colspan="3">' . $p_section_name . '</td></tr>' . "\n";
 	echo "\t" . '<tr><td class="form-title width30">' . lang_get( 'threshold' ) . '</td>' . "\n";
 	echo "\t\t" . '<td class="form-title" >' . lang_get( 'status_level' ) . '</td>' . "\n";
@@ -231,7 +231,7 @@ function threshold_end() {
 
 function access_begin( $p_section_name ) {
 	echo '<div class="form-container">';
-	echo '<table class="width100">';
+	echo '<table>';
 	echo "\t\t" . '<tr><td class="form-title" colspan="2">' . $p_section_name . '</td></tr>' . "\n";
 	echo "\t\t" . '<tr><td class="form-title" colspan="2">' . lang_get( 'access_change' ) . '</td></tr>' . "\n";
 }

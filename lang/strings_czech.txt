@@ -1,46 +1,42 @@
 <?php
-/** MantisBT - a php based bugtracking system
+# MantisBT - A PHP based bugtracking system
+
+# MantisBT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# MantisBT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Language File - Czech (česky)
  *
- * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * **********************************************************************
+ * ** This file is generated from translations stored in translatewiki **
+ * ** Information on Copyright/License for translatewiki translations  **
+ * ** is available at http://translatewiki.net/wiki/Project:About      **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
  *
- * MantisBT is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * MantisBT is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
- */
-/** Czech (česky)
- * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- *
- * @author Adam Zivner
- * @author Chmee2
- * @author Jezevec
- * @author Jirí Kuchta, kuchta@feec.vutbr.cz
- * @author Kuvaly
- * @author Luk
- * @author Matěj Grabovský
- * @author Milan Cizek, cizek.milan@seznam.cz
- * @author Mormegil
- * @author Pavel Loupal, Pavel.Loupal@seznam.cz
- * @author Petr Švec, petr.svec@pak.izscr.cz
- * @author Přemek Brada, brada@kiv.zcu.cz
- * @author Quinn
- * @author Utar
- * @author Vít Jurásek, vit.jurasek@vegateam.cz
- */
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+*/
 
 $s_actiongroup_menu_move = 'Přesunout';
 $s_actiongroup_menu_copy = 'Kopírovat';
@@ -50,7 +46,6 @@ $s_actiongroup_menu_delete = 'Zrušit';
 $s_actiongroup_menu_resolve = 'Vyřešit';
 $s_actiongroup_menu_update_priority = 'Upravit prioritu';
 $s_actiongroup_menu_update_status = 'Upravit stav';
-$s_actiongroup_menu_update_severity = 'Aktualizovat závažnost';
 $s_actiongroup_menu_update_view_status = 'Upravit stav zobrazení';
 $s_actiongroup_menu_update_category = 'Upravit kategorii';
 $s_actiongroup_menu_set_sticky = '(Od)nastavit "sticky"';
@@ -77,7 +72,6 @@ $s_private_project_msg = 'Tento projekt je SOUKROMÝ.  Je přístupný pouze spr
 $s_access_level_project = 'Úroveň přístupu k projektu';
 $s_view_submitted_bug_link = 'Zobrazit vložený problém %1$s';
 $s_assigned_projects = 'Přiřazené projekty';
-$s_unassigned_projects = 'Nepřiřazené projekty';
 $s_print = 'Tisk';
 $s_jump = 'Přechod na problém';
 $s_copy_users = 'Kopírovat uživatele';
@@ -99,7 +93,6 @@ $s_bug_monitor = 'Problém sledován';
 $s_bug_end_monitor = 'Konec sledování problému';
 $s_announcement = 'Oznámení';
 $s_stays_on_top = 'Vždy nahoře';
-$s_bugnote_link_title = 'Přímý odkaz na poznámku';
 $s_delete_bugnote_button = 'Zrušit poznámku';
 $s_delete_bugnote_sure_msg = 'Opravdu si přejete zrušit tento report?';
 $s_bug_relationships = 'Závislosti';
@@ -137,8 +130,6 @@ $s_select_option = '(vybrat)';
 $s_bug_actiongroup_access = 'Nemáte potřebné oprávnění k této činnosti.';
 $s_bug_actiongroup_status = 'Tento problém nelze převést do požadovaného stavu';
 $s_bug_actiongroup_category = 'Tento problém nelze změnit do požadované kategorie';
-$s_bug_actiongroup_handler = 'Požadovaný uživatel není oprávněn řešit tento problém';
-$s_bug_actiongroup_version = 'Požadovaná verze v tomto projektu neexistuje';
 $s_close_bugs_conf_msg = 'Opravdu si přejete uzavřít tyto problémy ?';
 $s_delete_bugs_conf_msg = 'Opravdu si přejete smazat tyto problémy ?';
 $s_move_bugs_conf_msg = 'Přesunout problémy do';
@@ -165,9 +156,6 @@ $s_view_status_group_bugs_button = 'Upravit zobrazení problému';
 $s_set_sticky_group_bugs_button = '(Od)nastavit "sticky"';
 $s_fixed_in_version_group_bugs_button = 'Změnit "vyřešeno ve verzi"';
 $s_target_version_group_bugs_button = 'Změnit cílovou verzi';
-$s_update_severity_title = 'Aktualizovat závažnost';
-$s_update_severity_msg = 'Vyberte závažnost problému';
-$s_update_severity_button = 'Aktualizovat závažnost';
 $s_hide_button = 'Zobrazit pouze vybrané';
 $s_printing_preferences_title = 'Vyberte pole k tisku';
 $s_printing_options_link = 'Nastavení tisku';
@@ -175,122 +163,6 @@ $s_bugnote_title = 'Operátor poznámek';
 $s_bugnote_date = 'Datum poznámky';
 $s_bugnote_description = 'Popis poznámky';
 $s_error_no_proceed = 'K návratu na předcházející stránku prosím použijte tlačítko "Zpět" vašeho prohlížeče. Můžete tak opravit chyby indikované touto chybovou zprávou, nebo zvolit jinou akci. Můžete také zvolit jinou volbu z nabídky a přejít přímo na jinou sekci.';
-$MANTIS_ERROR[ERROR_GENERIC] = 'Při této akci se vyskytla chyba. Oznamte to svému lokálnímu správci.';
-$MANTIS_ERROR[ERROR_SQL] = 'Chyba SQL.';
-$MANTIS_ERROR[ERROR_REPORT] = 'Chybná data ve vašem reportu.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Soubor nebyl zadán.';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Nepovolený typ souboru';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Adresář neexistuje, zkontrolujte nastavení projektu.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Projekt s tímto jménem už existuje.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Povinné pole "%1$s" je prázdné. Prosím, zkontrolujte zadané údaje.';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Tento účet je chráněn. Nesmíte sem přistupovat dokud nebude ochrana účtu odstraněna.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Přístup odepřen.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Chyba uploadu souboru, MantisBT jej nemůže přečíst. Zkontrolujte prosím nastavení projektu.';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Chyba uploadu souboru.  Soubor byl zřejmě větší, zež je povoleno instalací PHP.';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Nutný parametr pro tuto stránku (%1$s) nebyl nalezen.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Toto uživatelské jméno je již použito.  Prosíme, vraťte se zpět a zvolte jiné.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfigurační volba \'%1$s\' nenalezena.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Konfigurační volbu \'%1$s\' nelze uložit do databáze.  Musí být uvedena v souboru config_inc.php.';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Textový řetězec  \'%1$s\'  nenalezen.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Poznámka nebyla nalezena.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projekt "%1$d" nebyl nalezen.';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Pole v databázi "%1$s" nebylo nalezeno.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Nelze se spojit s FTP serverem.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Operátor problému nemá potřebná přístupová práva k práci s problémem v tomto stavu.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Projekt tohoto jména již existuje.  Prosím vraťte se a zadejte jiné jméno.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Zadáno neplatné jméno projektu. Jméno projektu nesmí být prázdné.';
-$MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Uživatel se jménem "%1$s" nebyl nalezen.';
-$MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'Uživatel s id "%1$s" nebyl nalezen.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Přihlašovací informace uložené vaším prohlížečem nejsou platné. Nebyl váš účet smazán?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Pro tohoto uživatele nelze najít nastavení.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Novinka nenalezena.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Hesla nejsou shodná.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'Očekávalo se pole, ale byl přijat řetězec pro "%1$s".';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Očekával se řetězec, ale bylo přijato pole pro "%1$s".';
-$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Pro %1$s bylo očekáváno číslo.';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Problém %1$d nebyl nalezen.';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filtr %1$s nebyl nalezen.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Filter, který chcete použít, je pro aktualizaci příliš starý. Prosím vytvořte jej znovu.';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Neplatný e-mail.';
-$MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Jednorázové e-maily nejsou povoleny.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil nebyl nalezen.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'Nepovolený typ souboru pro upload.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Soubor tohoto jména již existuje, nejprve soubor prosím smažte.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Nedovolená cesta pro upload.  Adresář buď neexistuje, nebo do něj nelze zapisovat';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Upload souboru neproběhl. Prosím vraťte se a vyberte soubor dříve než stisknete tlačítko "Nahrát".';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploadovaný soubor nelze přesunout do adresáře pro uskladnění souborů. Adresář buď neexistuje, nebo do něj webserver nesmí zapisovat.';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Nemůžete nastavit, že problém je duplikátem sama sebe.';
-$MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Revize problému nebyla nalezena.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Uživatelem definované pole nebylo nalezeno';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Duplicitní jméno.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Toto pole stále ještě používá alespoň jeden projekt.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Nepřípustná hodnota pro pole "%1$s".';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Nepřípustná definice uživatelského pole';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Neplatné vlastní zadání pole (%1$s)';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP Autentizace se nezdařila';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Nezdařila se komunikace s LDAP serverem';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP Chyba při úpravě záznamu.';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP Nenalezen záznam uživatele.';
-$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Extenze LDAP není načtena.';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Připojení k databázi selhalo. Chyba přijatá z databáze byla #%1$d: %2$s.';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Databázový dotaz selhal. Chyba přijatá z databáze zní #%1$d: %2$s pro dotaz %3$s.';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Výběr databáze se nezdařil. Chyba přijatá z databáze zní #%1$d: %2$s.';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Kategorie tohoto jména již existuje.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Nebylo specifikováno kopírování.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorie nenalezena.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Kategorie \'%1$s\' nebyla pro projekt \'%2$s\' nalezena.';
-$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Tuto kategorii nelze odstranit, protože je definována jako "Výchozí kategorie pro přesuny".';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Verze tohoto jména již existuje.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Verze "%1$s" nebyla nalezena.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Neplatné uživatelské jméno. Uživatelská jména mohou obsahovat pouze písmena z latinky, čísla, mezery, spojovníky, tečky, znaménka plus a podtržítka.';
-$MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'Neplatné skutečné jméno uživatele.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Uživatel nemá potřebnou přístupovou úroveň';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Zvolené "Skutečné jméno" se shoduje s přihlašovacím jménem jiného uživatele. Zvolte si prosím jiné.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponzoring není povolen.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponzoring %1$d nenalezen.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponzoring (%1$s) je pod minimální částkou (%2$s).';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Operátor problému nemá minimální přístupovou úroveň požadovanou pro manipulaci se sponzorovanými problémy.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Přístup zamítnut: přidělení sponzorovaného problému vyžaduje vyšší přístupovou úroveň.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponzor neposkytl e-mail. Upravte prosím svůj profil.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfigurační volba "%1$s" má neplatnou hodnotu "%2$s"';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Tato akce nemůže být uskutečněna, protože problém "%1$d" je ve stavu "jen ke čtení"';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Vztah mezi těmito dvěma problémy už existuje.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Vztah nebyl nalezen.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Přístup zamítnut: problém %1$d vyžaduje vyšší úroveň přístupu.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Problém nemůže být ve vztahu sám se sebou.';
-$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Potvrzení se nezdařilo. Prosím opakujte.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Funkce "zapomenuté heslo" není dostupná.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Pro zrušení hesla musíte uvést svůj e-mail.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Zadané informace neodpovídají žádnému z registrovaných účtů!';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Potvrzovací URL je chybné nebo bylo již použito. Prosím přihlaste se znovu.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Dosaženo maximum vnitřních procesů. Obraťte se na správce systému.';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Tato operace by vytvořila smyčku v hierarchii podprojektů.';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Není možné odstranit ani změnit úroveň přístupu jediného administrátora v systému. K provedení této akce je potřeba nejdříve vytvořit jiný administrátorský účet.';
-$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Chybné přesměrování stránky, ověřte zda nejsou mezery mimo blok PHP (&lt;?php ?&gt;) v souboru config_inc.php nebo v souborech custom_*.php';
-$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'Integrace Twitteru vyžaduje rozšíření PHP cURL, které není nainstalováno.';
-$MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Štítek s tímto jménem nebyl nalezen.';
-$MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'Štítek s tímto jménem už existuje.';
-$MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Chybné jméno štítku.';
-$MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'Tento štítek nenáleží k tomuto problému.';
-$MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Tento štítek už je k tomuto problému přiřazen.';
-$MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Token nebyl nalezen.';
-$MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Událost \'%1$s\' nebyla dosud deklarována.';
-$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Plugin není v MantisBT registrován.';
-$MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Plugin je už nainstalován.';
-$MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Stránka pluginu nebyla nalezena.';
-$MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Instalace zásuvného modulu selhala: %1$s';
-$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Aktualizace schema pluginu selhalo na bloku #%1$s.';
-$MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Při běhu pluginu "%2$s" se vyskytla neznámá chyba "%1$s".';
-$MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Pole \'%1$s\' obsahuje duplicitní sloupec \'%2$s\'.';
-$MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Pole \'%1$s\' obsahuje neplatné pole \'%2$s\'';
-$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Neplatný řadič sezení.';
-$MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Proměnná sezení "%1$s" nebyla nalezena.';
-$MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Sezení je neplatné.';
-$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Neplatný zabezpečující token formuláře. Buď byl nechtě formulář odeslán dvakrát nebo došlo k vypršení časového limitu relace.';
-$MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Tato stránka není touto metodou přístupná.';
-$MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Neplatné řadicí pole.';
-$MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Neplatný formát data.';
-$MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Nelze aktualizovat časové pásmo.';
 $s_login_error = 'Váš účet je deaktivován nebo blokován, popř. jste zadali chybnou kombinaci uživatelské jméno/heslo.';
 $s_login_cookies_disabled = 'Váš prohlížeč neumí nebo odmítá pracovat s cookies.';
 $s_go_back = 'Zpět';
@@ -359,6 +231,7 @@ $s_email_notification_title_for_action_monitor = 'Problém %1$s je od teď sledo
 $s_email_reporter = 'Reportér';
 $s_email_handler = 'Operátor';
 $s_email_project = 'Projekt';
+$s_email_project_label = 'Projekt:';
 $s_email_bug = 'ID problému';
 $s_email_category = 'Kategorie';
 $s_email_reproducibility = 'Reprodukovatelnost';
@@ -383,8 +256,11 @@ $s_manage_profiles_link = 'Profily';
 $s_change_preferences_link = 'Nastavení';
 $s_edit_account_title = 'Upravit účet';
 $s_username = 'Uživatelské jméno';
+$s_username_label = 'Uživatelské jméno:';
 $s_realname = 'Skutečné jméno';
+$s_realname_label = 'Opravdové jméno:';
 $s_email = 'E-mail';
+$s_email_label = 'E-mail:';
 $s_password = 'Heslo';
 $s_no_password_change = 'Heslo je spravováno jiným systémem, zde jej tedy nelze modifikovat.';
 $s_confirm_password = 'Potvrďte heslo';
@@ -455,7 +331,6 @@ $s_realname_duplicated = 'Skutečné jméno je použito jiným uživatelem';
 $s_realname_updated = 'Skutečné jméno bylo úspěšně upraveno.';
 $s_password_updated = 'Heslo bylo úspěšně upraveno';
 $s_multiple_projects = 'Vybrali jste problémy z různých projektů. Níže uvedené parametry odpovídají nastavení pro všechny projekty. Pokud to není správně, opakujte váš pokyn ke změně s výběrem menšího množství problémů.';
-$s_bug_assign_msg = 'Problém byl úspěšně přiřazen...';
 $s_new_bug_title = 'Nový problém';
 $s_feedback_bug_title = 'Žádost o odezvu na problém';
 $s_acknowledged_bug_title = 'Přijmout problém';
@@ -472,15 +347,12 @@ $s_closed_bug_title = 'Uzavřít problém';
 $s_bug_deleted_msg = 'Problém byl smazán.';
 $s_delete_bug_sure_msg = 'Skutečně chcete smazat tento problém?';
 $s_delete_bug_button = 'Smazat problém';
-$s_monitor_bug_button = 'Sledovat';
+$s_monitor_bug_button = 'Sledovat problém';
 $s_unmonitor_bug_button = 'Konec sledování';
 $s_file_upload_msg = 'Upload souboru proběhl úspěšně';
 $s_upload_file = 'Upload souboru';
-$s_upload_files = 'Nahrát soubory';
 $s_select_file = 'Výběr souboru';
-$s_select_files = 'Vybrat soubory';
 $s_upload_file_button = 'Upload';
-$s_upload_files_button = 'Nahrát soubory';
 $s_max_file_size = 'Maximální velikost';
 $s_bug_reopened_msg = 'Problém byl znovuotevřen.';
 $s_reopen_add_bugnote_title = 'Přidat důvod pro znovuotevření problému';
@@ -494,17 +366,13 @@ $s_from = 'Od:';
 $s_to = 'Komu:';
 $s_sent_you_this_reminder_about = 'vám poslal toto upozornění na';
 $s_bug_reminder = 'Odeslat upozornění';
-$s_reminder_sent_to = 'Upomínka zaslána na';
-$s_reminder_sent_none = 'Nemohou být odeslány žádné upomínky';
-$s_reminder_list_truncated = 'seznam příjemců byl vyčištěn';
+$s_reminder_sent_to = 'Odesláno upozornění:';
 $s_bug_send_button = 'Odeslat';
 $s_reminder = 'Upozornění';
 $s_reminder_explain = 'Toto upozornění je odesláno příjemci, který byl uveden jako žadatel o odezvu ohledně tohoto problému.';
 $s_reminder_monitor = 'Tito příjemci jsou zařazeni ke sledování tohoto problému. Mohou se odhlásit použitím tlačítka \'Konec sledování\'.';
 $s_reminder_store = 'Toto upozornění je uloženo jako poznámka k problému.';
 $s_confirm_sponsorship = 'Prosím potvrďte že chcete sponzorovat problém %1$d z %2$s.';
-$s_stick_bug_button = 'Přišpendlit';
-$s_unstick_bug_button = 'Odšpendlit';
 $s_bug_updated_msg = 'Problém byl úspěšně upraven.';
 $s_back_to_bug_link = 'Zpět na problém';
 $s_update_simple_link = 'Jednoduchá úprava';
@@ -541,8 +409,6 @@ $s_view_revisions = 'Zobrazit revize';
 $s_revision = 'Revize';
 $s_revision_by = '%1$s z %2$s';
 $s_revision_drop = 'Zahodit';
-$s_bug_revision_dropped_history = 'Vynechány chybové revize';
-$s_bugnote_revision_dropped_history = 'Vynechány revize poznámek';
 $s_all_revisions = 'Všechny revize';
 $s_back_to_issue = 'Zpět na problém';
 $s_confirm_revision_drop = 'Jste si jistí, že chcete zahodit tuto revizi problému?';
@@ -558,7 +424,6 @@ $s_add_bugnote_button = 'Přidat poznámku';
 $s_bugnote_edit_link = 'Upravit';
 $s_closed_bug_button = 'Uzavřít problém';
 $s_bugnote_updated_msg = 'Poznámka byla úspěšně upravena.';
-$s_edited_on = 'upraveno:';
 $s_hide_content = 'Skrýt obsah';
 $s_show_content = 'Zobrazit obsah';
 $s_total_queries_executed = 'Vykonáno celkem %1$d dotazů.';
@@ -575,7 +440,7 @@ $s_error_database_version_out_of_date_2 = '<strong>Varování:</strong> struktur
 $s_error_code_version_out_of_date = '<strong>Varování:</strong> struktura databáze je novější než nainstalovaný MantisBT, aktualizujte jej prosím.';
 $s_login_page_info = '<strong>Sledovač problémů Vás vítá.</strong>';
 $s_login_title = 'Přihlášení';
-$s_save_login = 'Zapamatovat si mé přihlášení v tomto prohlížeči';
+$s_save_login = 'Uložit login';
 $s_secure_session = 'Bezpečné sezení';
 $s_secure_session_long = 'Povolit sezení jen z této IP adresy.';
 $s_choose_project = 'Vybrat projekt';
@@ -588,8 +453,6 @@ $s_lost_password_done_title = 'Odeslán dopis o změně hesla';
 $s_lost_password_subject = 'Změna hesla';
 $s_lost_password_info = 'Chcete-li obnovit vaše ztracené heslo, zadejte prosím uživatelské jméno svého účtu a svůj e-mail.<br /><br />Pokud bude tato zadaná kombinace odpovídat některému účtu, zašleme vám dopis s unikátní webovou adresou pro potvrzení změny hesla. Navštivte tuto adresu a dokončete změnu vašeho hesla.';
 $s_lost_password_confirm_hash_OK = 'Vaše potvrzení bylo přijato. Nyní můžete změnit vaše přístupové heslo.';
-$s_open_and_assigned_to_me = 'Moje otevřené a přiřazené';
-$s_open_and_reported_to_me = 'Moje otevřené a vytvořené';
 $s_newer_news_link = 'Novější novinky';
 $s_older_news_link = 'Starší novinky';
 $s_archives = 'Archiv';
@@ -609,7 +472,6 @@ $s_protected = 'Ochrana';
 $s_create_user_button = 'Vytvořit';
 $s_hide_disabled = 'Skrýt nepovolené';
 $s_filter_button = 'Použít filtr';
-$s_default_filter = 'Standardní filtr';
 $s_create_filter_link = 'Vytvořit trvalý odkaz';
 $s_create_short_link = 'Vythořit krátký odkaz';
 $s_filter_permalink = 'Trvalý odkaz na nyní konfigurovaný filtr:';
@@ -632,7 +494,6 @@ $s_1_week_title = '1 týden';
 $s_never_logged_in_title = 'Nikdy nepřihlášení';
 $s_prune_accounts = 'Pročistit účty';
 $s_hide_inactive = 'Skrýt neaktivní';
-$s_show_disabled = 'Zobrazit nepovolené';
 $s_manage_accounts_title = 'Správa účtu';
 $s_p = 'nesmazatelné';
 $s_date_created = 'Datum vytvoření';
@@ -651,7 +512,7 @@ $s_message = 'Zpráva';
 $s_default_notify = 'Nastavení výchozí upozorňovací vlajky na';
 $s_action_notify = 'Nastavení upozorňovací vlajky akce na';
 $s_notify_defaults_change_access = 'Kdo může změnit výchozí upozorňovací nastavení';
-$s_notify_actions_change_access = 'Upozorňování může změnit:';
+$s_notify_actions_change_access = 'Kdo může změnit upozorňování';
 $s_revert_to_system = 'Smazat nastavení všech projektů.';
 $s_revert_to_all_project = 'Smazat nastavení specifické pro projekt';
 $s_non_existent = 'neexistuje';
@@ -673,15 +534,11 @@ $s_desc_bug_submit_status = 'Stav na který je nastaven nový problém';
 $s_desc_bug_reopen_status = 'Stav na který jsou nastaveny znovuotevřené problémy';
 $s_desc_bug_resolved_status_threshold = 'Stav ve kterém je problém považovaný za vyřešený';
 $s_desc_bug_closed_status_threshold = 'Stav ve kterém je problém považovaný za uzavřený';
-$s_workflow_change_access = 'Kdo může měnit workflow';
-$s_access_change_access = 'Kdo může měnit úrovně přístupu';
 $s_default_not_in_flow = 'Výchozí stav %1$s není přítomen v dalších stavech pro %2$s a bude ignorován.';
 $s_assign_issue = 'Přiřadit problém';
-$s_allow_close_immediate = 'Povol uzavření problému při jeho vyřešení';
 $s_allow_reporter_close = 'Dovol reportérovi uzavřít problém.';
 $s_allow_reporter_reopen = 'Dovol reportérovi znovuotevřít problém.';
 $s_set_status_assigned = 'Nastav stav při přiřazení operátorovi.';
-$s_allow_user_edit = 'Dovol uživateli upravovat poznámky k vlastním problémům';
 $s_limit_access = 'Omez přístup reportérů k vlastním problémům';
 $s_submit_status = 'Stav na který je nastaven nový problém';
 $s_assigned_status = 'Stav na který se nastaví automaticky přiřazované problémy';
@@ -689,7 +546,7 @@ $s_resolved_status = 'Stav ve kterém je problém považován za vyřešený';
 $s_readonly_status = 'Stav ve kterém se stává problém pouze ke čtení';
 $s_reopen_status = 'Stav na který je nastaven znovuotevřený problém';
 $s_reopen_resolution = 'Řešení na které je nastaven znovuotevřený problém.';
-$s_config_delete_sure = 'Jste si jistý, že chcete smazat nastavení pro:';
+$s_config_delete_sure = 'Jste si jistý, že chcete smazat nastavení pro';
 $s_in_project = 'v projektu';
 $s_delete_config_button = 'Smazat nastavení';
 $s_configuration_report = 'Hlášení o konfiguraci';
@@ -700,7 +557,6 @@ $s_configuration_option_value = 'Hodnota';
 $s_all_users = 'Všichni uživatelé';
 $s_set_configuration_option = 'Nastavit konfigurační možnost';
 $s_delete_config_sure_msg = 'Jste si jisti, že si přejete smazat tuto konfigurační možnost?';
-$s_configuration_corrupted = 'Konfigurace v databázi je poškozena.';
 $s_plugin = 'Plugin';
 $s_plugins_installed = 'Instalované zásuvky';
 $s_plugins_available = 'Dostupné zásuvky';
@@ -717,11 +573,6 @@ $s_plugin_install = 'Instalovat';
 $s_plugin_upgrade = 'Upgradovat';
 $s_plugin_uninstall = 'Odinstalovat';
 $s_plugin_uninstall_message = 'Opravdu chcete odinstalovat zásuvku \'%1$s\'?';
-$s_plugin_key = 'Klíč';
-$s_plugin_key_met = 'zásuvka připravena';
-$s_plugin_key_unmet = 'Nesplněné závislosti';
-$s_plugin_key_dated = 'Zastaralé závislosti';
-$s_plugin_key_upgrade = 'vyžadován upgrade';
 $s_project_added_msg = 'Projekt byl úspěšně přidán...';
 $s_category_added_msg = 'Kategorie byla úspěšně přidána...';
 $s_category_deleted_msg = 'Kategorie byla úspěšně smazána...';
@@ -751,7 +602,7 @@ $s_add_version_button = 'Přidat verzi';
 $s_add_and_edit_version_button = 'Přidat a změnit verzi';
 $s_edit_link = 'upravit';
 $s_actions = 'Akce';
-$s_version = 'Verze';
+$s_version = 'Verze/Sestavení';
 $s_timestamp = 'Časová značka';
 $s_update = 'Aktualizace';
 $s_subprojects = 'Podprojekty';
@@ -785,7 +636,6 @@ $s_accounts_pruned_msg = 'Všechny účty, na které se nikdo nepřihlásil a js
 $s_prune_accounts_button = 'Vyčistit';
 $s_confirm_account_pruning = 'Opravdu chcete odstranit všechny staré účty, na které se dosud nikdo nepřihlásil?';
 $s_edit_user_title = 'Úpravy ušivatele';
-$s_account_unlock_button = 'Odemknout účet';
 $s_reset_password_button = 'Změnit heslo';
 $s_delete_user_button = 'Smazat uživatele';
 $s_reset_password_msg = 'Změna hesla odešle potvrzovací URL elektronickým dopisem.';
@@ -796,8 +646,7 @@ $s_users_new = 'Nové';
 $s_account_reset_protected_msg = 'Účet je chráněn. Není možné změnit heslo.';
 $s_account_reset_msg = 'Potvrzovací dopis byl odeslán na vaši elektronickou adresu...';
 $s_account_reset_msg2 = 'Heslo k účtu bylo nastaveno na prázdné...';
-$s_account_unlock_msg = 'Účet byl odemčen.';
-$s_manage_user_protected_msg = 'Účet je chráněn; „Přístupová úroveň“ a „Povolení“ nemohou být upraveny. Ostatní pole byla úspěšně aktualizována.';
+$s_manage_user_protected_msg = 'Účet je chráněn. Úroveň přístupu a příznak jsou chráněny. Pokud ne, účet byl aktualizován...';
 $s_manage_user_updated_msg = 'Účet byl úspěšně aktualizován...';
 $s_email_user_updated_subject = 'Účet aktualizován';
 $s_email_user_updated_msg = 'Váš účet byl aktualizován správcem. Seznam provedených změn je níže. Kdykoliv můžete aktualizovat podrobnosti o vašem účtu a nastavení navštívením této adresy:';
@@ -856,13 +705,13 @@ $s_project_document_updated = 'Projekt byl úspěšně aktualizován';
 $s_project_user_added_msg = 'Uživatel byl úspěšně přiřazen k projektu';
 $s_project_removed_user_msg = 'Uživatel byl úspěšně odebrán z projektu';
 $s_remove_user_sure_msg = 'Skutečně odebrat tohoto uživatele?';
-$s_remove_user_from_project_button = 'Odstranit uživatele z projektu %s';
+$s_remove_user_button = 'Odebrat uživatele';
 $s_remove_all_users_sure_msg = 'Opravdu chcete odebrat všechny uživatele tohoto projektu?';
 $s_remove_all_users_button = 'Odebrat všechny uživatele';
 $s_add_user_title = 'Přidat uživatele k projektu';
 $s_add_user_button = 'Přidej uživatele';
 $s_project_selection_title = 'Výběr projektu';
-$s_remove_link = 'Odstranit';
+$s_remove_link = 'odstranit';
 $s_remove_all_link = 'Odstranit vše';
 $s_updated_user_msg = 'Aktualizace uživatele proběhla úspěšně.';
 $s_must_enter_category = 'Musíte vybrat kategorii';
@@ -889,7 +738,6 @@ $s_valid_project_msg = 'Musíte vybrat platný projekt';
 $s_signup_done_title = 'Registrace účtu dokončena';
 $s_password_emailed_msg = 'Blahopřejeme, registrace byla úspěšná. Na vaši elektronickou adresu byl právě odeslán kontrolní dopis. V tomto dopisu obdržíte jedinečnou webovou adresu, kterou musíte navštívit pro aktivaci vašeho účtu.';
 $s_no_reponse_msg = 'Na dokončení potvrzení vašeho účtu máte termín sedmi dní. Nepodaří-li se vám aktivovat účet v průběhu sedmi dní, bude tento nový účet smazán.';
-$s_signup_captcha_request = 'Zadejte kód který vidíte v rámečku na pravé straně';
 $s_signup_info = 'Po dokončení této kontroly vašich odpovědí vám pošleme kontrolní elektronický dopis.<br />Použitím tohoto kontrolního dopisu budete moci aktivovat váš účet. Nepodaří-li se vám aktivovat účet v průběhu sedmi dní, bude účet smazán.<br />Abyste dostali tento kontrolní dopis, musí být vámi zadaná elektronická adresa platná.';
 $s_signup_title = 'Vytvoření uživatele';
 $s_signup_button = 'Vytvořit';
@@ -917,8 +765,6 @@ $s_developer_by_resolution = 'Vývojář podle řešení';
 $s_percentage_fixed = '% opravených';
 $s_percentage_errors = '% chybných';
 $s_errors = 'Chybně';
-$s_opened = 'Otevřen';
-$s_resolved = 'Vyřešen';
 $s_total = 'Celkem';
 $s_balance = 'Bilance';
 $s_most_active = 'Nejaktivnější';
@@ -939,13 +785,8 @@ $s_changed = 'Změněné(h)';
 $s_viewing_bugs_title = 'Prohlížení problémů';
 $s_updated = 'Aktualizace';
 $s_sticky = 'Ukázat "sticky" problémy';
-$s_sort = 'Řadit podle';
 $s_issue_id = 'Problém číslo';
 $s_recently_visited = 'Posledně navštívené';
-$s_note_user_id = 'Poznámka od';
-$s_filter_match_type = 'Typ shody';
-$s_filter_match_all = 'Všechny podmínky';
-$s_filter_match_any = 'Jakékoliv podmínky';
 $s_none = 'žádný';
 $s_current = 'nynější';
 $s_search = 'Hledat';
@@ -955,8 +796,6 @@ $s_prev = 'Předchozí';
 $s_next = 'Další';
 $s_first = 'První';
 $s_last = 'Poslední';
-$s_start_date = 'Počáteční datum';
-$s_end_date = 'Koncové datum';
 $s_use_date_filters = 'Filtr podle data';
 $s_yes = 'Ano';
 $s_no = 'Ne';
@@ -980,11 +819,10 @@ $s_query_delete_msg = 'Opravdu chcete smazat tento filtr?';
 $s_view_simple_link = 'Jednoduchý pohled';
 $s_product_build = 'Sestavení produktu';
 $s_system_profile = 'Popis systému';
-$s_update_bug_button = 'Editovat';
+$s_update_bug_button = 'Aktualizovat';
 $s_bug_assign_to_button = 'Přiřadit k:';
 $s_bug_status_to_button = 'Změnit stav na:';
-$s_reopen_bug_button = 'Otevřít znovu';
-$s_close_bug_button = 'Zavřít';
+$s_reopen_bug_button = 'Znovuotevřít';
 $s_move_bug_button = 'Přesunout';
 $s_attached_files = 'Přiložené soubory';
 $s_publish = 'Publikovat';
@@ -1027,13 +865,12 @@ $s_custom_field_require_resolved = 'Nutné k vyřešení';
 $s_custom_field_require_closed = 'Nutné k uzavření';
 $s_link_custom_field_to_project_title = 'Připojit k názvu problému uživatelské pole';
 $s_link_custom_field_to_project_button = 'Připojit uživatelské pole';
-$s_linked_projects = 'Připojené projekty';
 $s_custom_field_sequence = 'Pořadí';
 $s_custom_field_type_enum_string = '0:Text,1:Celé číslo,2:Reálné číslo,3:Výčet,4:Email,5:Zaškrtávátko,6:Seznam,7:Vícevýběrový seznam,8:Datum,9:Výběr';
 $s_confirm_used_custom_field_deletion = 'Toto pole je momentálně připojeno k alespoň jednomu projektu. Budete-li pokračovat, všechny hodnoty tohoto pole budou nevratně smazány. Nepřejete-li si zrušit toto pole, stiskněte tlačítko "Zpět" ve svém prohlížeči. Pokračovat můžete tlačítkem níže';
 $s_confirm_custom_field_deletion = 'Opravdu si přejete zrušit toto uživatelské pole a všechny k němu náležející hodnoty?';
 $s_field_delete_button = 'Zrušit pole';
-$s_confirm_custom_field_unlinking = 'Opravdu chcete odpojit toto uživatelské pole od projektu? Hodnoty nebudou vymazány, dokud nebude smazáno samotné pole.';
+$s_confirm_custom_field_unlinking = 'Opravdu odpojit toto uživatelské pole od projektu a zrušit všechny přiřazené hodnoty?';
 $s_field_remove_button = 'Odstranit pole';
 $s_hide_status = 'Skrýt stav';
 $s_filter_closed = 'Uzavřeno';
@@ -1046,9 +883,6 @@ $s_simple_filters = 'Jednoduché filtry';
 $s_monitored_by = 'Sledováno';
 $s_attachments = 'přílohy';
 $s_bytes = 'bajtů';
-$s_attachment_missing = 'Příloha chybí';
-$s_attachment_count = 'Počet příloh';
-$s_view_attachments_for_issue = 'Zobrazit %1$d příloh k problému #%2$d';
 $s_phpmailer_language = 'cs';
 $s_sponsors = '%1$d sponzor(-ři)';
 $s_sponsorship_added = 'Sponzoring přidán';
@@ -1077,13 +911,10 @@ $s_relationship_with_parent = 'Vztah s rodičovským problémem';
 $s_delete_relationship_button = 'Odebrat';
 $s_delete_relationship_sure_msg = 'Opravdu chcete odebrat tento vztah?';
 $s_relationship_warning_blocking_bugs_not_resolved = 'Ne všechny potomci tohoto problému jsou vyřešeni nebo uzavřeni.';
-$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>Pozor:</b> ne všechny potomci tohoto problému jsou vyřešeni nebo uzavřeni.<br />Před <b>vyřešením/uzavřením</b> otcovského problému musí být vyřešeny nebo uzavřeny všechny problémy považované za jeho potomky.';
-$s_create_child_bug_button = 'Klonovat';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<strong>Pozor:</strong> ne všechny potomci tohoto problému jsou vyřešeni nebo uzavřeni.<br />Před <strong>vyřešením/uzavřením</strong> otcovského problému musí být vyřešeny nebo uzavřeny všechny problémy považované za jeho potomky.';
+$s_create_child_bug_button = 'Vytvořit potomka';
 $s_bug_cloned_to = 'Problém je klonován';
 $s_bug_created_from = 'Problém generován z';
-$s_copy_from_parent = 'Kopírovat další data z nadřazeného záznamu';
-$s_copy_notes_from_parent = 'Kopírovat poznámky k chybám';
-$s_copy_attachments_from_parent = 'Kopírovat přílohy';
 $s_viewing_bug_relationship_graph_title = 'Graf vztahů';
 $s_viewing_bug_dependency_graph_title = 'Graf závyslostí';
 $s_relation_graph = 'Relační graf';
@@ -1091,7 +922,6 @@ $s_dependency_graph = 'Graf závislostí';
 $s_vertical = 'Vertikální';
 $s_horizontal = 'Horizontální';
 $s_view_issue = 'Zobrazit problém';
-$s_checkin = 'Kontroluji';
 $s_perm_rpt_capability = 'Schopnost';
 $s_view = 'Zobrazit';
 $s_issues = 'Problémy';
@@ -1105,13 +935,11 @@ $s_reopen_issue = 'Znovuotevřít problém';
 $s_view_private_issues = 'Zobrazit soukromé problémy';
 $s_update_readonly_issues = 'Upravit problémy jen ke čtení';
 $s_update_issue_status = 'Upravit stav problému';
-$s_set_view_status = 'Nastavit stav zobrazení (veřejný či soukromý)';
-$s_update_view_status = 'Změnit stav zobrazení (veřejný či soukromý)';
+$s_set_view_status = 'Nastavit stav zobrazení (veřejný a soukromý)';
+$s_update_view_status = 'Upravit stav zobrazení (veřejný a soukromý)';
 $s_show_list_of_users_monitoring_issue = 'Zobrazit seznam uživatelů sledujících tento problém';
 $s_notes = 'Poznámka';
 $s_add_notes = 'Přidat poznámky';
-$s_update_notes = 'Upravit poznámky';
-$s_delete_note = 'Smazat poznámku';
 $s_view_private_notes = 'Zobrazit soukromé poznámky';
 $s_news = 'Novinky';
 $s_view_private_news = 'Zobrazit soukromé novinky';
@@ -1144,7 +972,6 @@ $s_handle_sponsored_issue = 'Řešit sponzorovaný problém';
 $s_others = 'OSTATNÍ';
 $s_see_email_addresses_of_other_users = 'Zobrazit emailové adresy ostatních uživatelů';
 $s_send_reminders = 'Odeslat připomenutí';
-$s_receive_reminders = 'Přijímat upomínky';
 $s_add_profiles = 'Přidat profily';
 $s_notify_of_new_user_created = 'Upozorni na nově vytvořené uživatele';
 $s_email_notification = 'Upozorňování e-mailem';
@@ -1165,6 +992,7 @@ $s_on = 'zap.';
 $s_off = 'vyp.';
 $s_wiki = 'Wiki';
 $s_tags = 'Značky';
+$s_tags_label = 'Značky:';
 $s_tag_details = 'Detaily značky: %1$s';
 $s_tag_id = 'Název značky';
 $s_tag_name = 'Název';
@@ -1196,16 +1024,12 @@ $s_tag_related_issues = 'Sdílené problémy (%1$s)';
 $s_tag_stats_attached = 'Připojené problémy: %1$s';
 $s_tag_create = 'Vytvořit štítek';
 $s_show_all_tags = 'Všechny';
-$s_time_tracking_billing_link = 'Sledování času';
+$s_time_tracking_billing_link = 'Fakturace';
 $s_time_tracking = 'Sledování času';
-$s_time_tracking_time_spent = 'Stráveno času:';
 $s_time_tracking_get_info_button = 'Získej informace o čase';
 $s_time_tracking_cost_per_hour = 'Cena / Hodina';
 $s_time_tracking_cost = 'Cena';
 $s_total_time_for_issue = 'Celkový čas pro problém %1$s';
-$s_time_tracking_stopwatch_start = 'Spustit';
-$s_time_tracking_stopwatch_stop = 'Zastavit';
-$s_time_tracking_stopwatch_reset = 'Resetovat';
 $s_access_denied = 'Přístup zamítnut.';
 $s_twitter_resolved = '%1$d: [%2$s] %3$s (vyřešil %4$s v %5$s)';
 $s_twitter_resolved_no_version = '%1$d: [%2$s] %3$s (vyřešil %4$s)';
@@ -1229,15 +1053,118 @@ $s_manage_user = 'Spravovat uživatele';
 $s_install_information = 'Informace o instalaci MantisBT';
 $s_database_information = 'Informace o databázi MantisBT';
 $s_path_information = 'Informace o cestě k MantisBT';
-$s_month_january = 'leden';
-$s_month_february = 'únor';
-$s_month_march = 'březen';
-$s_month_april = 'duben';
-$s_month_may = 'květen';
-$s_month_june = 'červen';
-$s_month_july = 'červenec';
-$s_month_august = 'srpen';
-$s_month_september = 'září';
-$s_month_october = 'říjen';
-$s_month_november = 'listopad';
-$s_month_december = 'prosinec';
+
+
+$MANTIS_ERROR[ERROR_GENERIC] = 'Při této akci se vyskytla chyba. Oznamte to svému lokálnímu správci.';
+$MANTIS_ERROR[ERROR_SQL] = 'Chyba SQL.';
+$MANTIS_ERROR[ERROR_REPORT] = 'Chybná data ve vašem reportu.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Soubor nebyl zadán.';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Nepovolený typ souboru';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Adresář neexistuje, zkontrolujte nastavení projektu.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Projekt s tímto jménem už existuje.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Povinné pole "%1$s" je prázdné. Prosím, zkontrolujte zadané údaje.';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Tento účet je chráněn. Nesmíte sem přistupovat dokud nebude ochrana účtu odstraněna.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Přístup odepřen.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Chyba uploadu souboru, MantisBT jej nemůže přečíst. Zkontrolujte prosím nastavení projektu.';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Chyba uploadu souboru.  Soubor byl zřejmě větší, zež je povoleno instalací PHP.';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Nutný parametr pro tuto stránku (%1$s) nebyl nalezen.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Toto uživatelské jméno je již použito.  Prosíme, vraťte se zpět a zvolte jiné.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Konfigurační volba \'%1$s\' nenalezena.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Konfigurační volbu \'%1$s\' nelze uložit do databáze.  Musí být uvedena v souboru config_inc.php.';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Textový řetězec  \'%1$s\'  nenalezen.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Poznámka nebyla nalezena.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projekt "%1$d" nebyl nalezen.';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Pole v databázi "%1$s" nebylo nalezeno.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Nelze se spojit s FTP serverem.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Operátor problému nemá potřebná přístupová práva k práci s problémem v tomto stavu.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Projekt tohoto jména již existuje.  Prosím vraťte se a zadejte jiné jméno.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Zadáno neplatné jméno projektu. Jméno projektu nesmí být prázdné.';
+$MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Uživatel se jménem "%1$s" nebyl nalezen.';
+$MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'Uživatel s id "%1$s" nebyl nalezen.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Přihlašovací informace uložené vaším prohlížečem nejsou platné. Nebyl váš účet smazán?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Pro tohoto uživatele nelze najít nastavení.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Novinka nenalezena.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Hesla nejsou shodná.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'Očekávalo se pole, ale byl přijat řetězec pro "%1$s".';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Očekával se řetězec, ale bylo přijato pole pro "%1$s".';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Pro %1$s bylo očekáváno číslo.';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Problém %1$d nebyl nalezen.';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Filtr %1$s nebyl nalezen.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Filter, který chcete použít, je pro aktualizaci příliš starý. Prosím vytvořte jej znovu.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Neplatný e-mail.';
+$MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Jednorázové e-maily nejsou povoleny.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil nebyl nalezen.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'Nepovolený typ souboru pro upload.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Soubor tohoto jména již existuje, nejprve soubor prosím smažte.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Nedovolená cesta pro upload.  Adresář buď neexistuje, nebo do něj nelze zapisovat';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Upload souboru neproběhl. Prosím vraťte se a vyberte soubor dříve než stisknete tlačítko "Nahrát".';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploadovaný soubor nelze přesunout do adresáře pro uskladnění souborů. Adresář buď neexistuje, nebo do něj webserver nesmí zapisovat.';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Nemůžete nastavit, že problém je duplikátem sama sebe.';
+$MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Revize problému nebyla nalezena.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Uživatelem definované pole nebylo nalezeno';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Duplicitní jméno.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Toto pole stále ještě používá alespoň jeden projekt.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Nepřípustná hodnota pro pole "%1$s".';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Nepřípustná definice uživatelského pole';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP Autentizace se nezdařila';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Nezdařila se komunikace s LDAP serverem';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'LDAP Chyba při úpravě záznamu.';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = 'LDAP Nenalezen záznam uživatele.';
+$MANTIS_ERROR[ERROR_LDAP_EXTENSION_NOT_LOADED] = 'Extenze LDAP není načtena.';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'Připojení k databázi selhalo. Chyba přijatá z databáze byla #%1$d: %2$s.';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'Databázový dotaz selhal. Chyba přijatá z databáze zní #%1$d: %2$s pro dotaz %3$s.';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'Výběr databáze se nezdařil. Chyba přijatá z databáze zní #%1$d: %2$s.';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Kategorie tohoto jména již existuje.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Nebylo specifikováno kopírování.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorie nenalezena.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Kategorie \'%1$s\' nebyla pro projekt \'%2$s\' nalezena.';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Verze tohoto jména již existuje.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Verze "%1$s" nebyla nalezena.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Neplatné uživatelské jméno. Uživatelská jména mohou obsahovat pouze písmena z latinky, čísla, mezery, pomlčky a podtržítka.';
+$MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'Neplatné skutečné jméno uživatele.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Uživatel nemá potřebnou přístupovou úroveň';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Zvolené "Skutečné jméno" se shoduje s přihlašovacím jménem jiného uživatele. Zvolte si prosím jiné.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponzoring není povolen.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponzoring %1$d nenalezen.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponzoring (%1$s) je pod minimální částkou (%2$s).';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Operátor problému nemá minimální přístupovou úroveň požadovanou pro manipulaci se sponzorovanými problémy.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Přístup zamítnut: přidělení sponzorovaného problému vyžaduje vyšší přístupovou úroveň.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Sponzor neposkytl e-mail. Upravte prosím svůj profil.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'Konfigurační volba "%1$s" má neplatnou hodnotu "%2$s"';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Tato akce nemůže být uskutečněna, protože problém "%1$d" je ve stavu "jen ke čtení"';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Vztah mezi těmito dvěma problémy už existuje.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Vztah nebyl nalezen.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = 'Přístup zamítnut: problém %1$d vyžaduje vyšší úroveň přístupu.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'Problém nemůže být ve vztahu sám se sebou.';
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Potvrzení se nezdařilo. Prosím opakujte.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Funkce "zapomenuté heslo" není dostupná.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Pro zrušení hesla musíte uvést svůj e-mail.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Zadané informace neodpovídají žádnému z registrovaných účtů!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Potvrzovací URL je chybné nebo bylo již použito. Prosím přihlaste se znovu.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Dosaženo maximum vnitřních procesů. Obraťte se na správce systému.';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Tato operace by vytvořila smyčku v hierarchii podprojektů.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Není možné změnit úroveň přístupu jediného administrátora v systému.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Chybné přesměrování stránky, ověřte zda nejsou mezery mimo blok PHP (&lt;?php ?&gt;) v souboru config_inc.php nebo v souborech custom_*.php';
+$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'Integrace Twitteru vyžaduje rozšíření PHP cURL, které není nainstalováno.';
+$MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Štítek s tímto jménem nebyl nalezen.';
+$MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'Štítek s tímto jménem už existuje.';
+$MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Chybné jméno štítku.';
+$MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'Tento štítek nenáleží k tomuto problému.';
+$MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Tento štítek už je k tomuto problému přiřazen.';
+$MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Token nebyl nalezen.';
+$MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Událost \'%1$s\' nebyla dosud deklarována.';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Plugin není v MantisBT registrován.';
+$MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Plugin je už nainstalován.';
+$MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Stránka pluginu nebyla nalezena.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Aktualizace schema pluginu selhalo na bloku #%1$s.';
+$MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Při běhu pluginu "%2$s" se vyskytla neznámá chyba "%1$s".';
+$MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Pole \'%1$s\' obsahuje duplicitní sloupec \'%2$s\'.';
+$MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Pole \'%1$s\' obsahuje neplatné pole \'%2$s\'';
+$MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Neplatný řadič sezení.';
+$MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Proměnná sezení "%1$s" nebyla nalezena.';
+$MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Sezení je neplatné.';
+$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Neplatný zabezpečující token formuláře. Neodeslali jste nechtě formulář dvakrát?';
+$MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Tato stránka není touto metodou přístupná.';
+$MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Neplatné řadicí pole.';
+$MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Neplatný formát data.';
+$MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Nelze aktualizovat časové pásmo.';

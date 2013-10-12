@@ -246,7 +246,7 @@ function plugin_config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_
 
 /**
  * Set plugin default values to global values without overriding anything.
- * @param array Array of configuration option name/value pairs.
+ * @param array array of configuration option name/value pairs.
  */
 function plugin_config_defaults( $p_options ) {
 	if( !is_array( $p_options ) ) {
@@ -329,7 +329,7 @@ function plugin_event_hook( $p_name, $p_callback ) {
 
 /**
  * Hook multiple plugin callbacks at once.
- * @param array Array of event name/callback key/value pairs
+ * @param array array of event name/callback key/value pairs
  */
 function plugin_event_hook_many( $p_hooks ) {
 	if( !is_array( $p_hooks ) ) {
@@ -680,7 +680,7 @@ function plugin_upgrade( $p_plugin ) {
 		}
 
 		if( $t_sqlarray ) {
-			$t_status = $t_dict->ExecuteSQLarray( $t_sqlarray );
+			$t_status = $t_dict->ExecuteSQLArray( $t_sqlarray );
 		}
 
 		if( 2 == $t_status ) {

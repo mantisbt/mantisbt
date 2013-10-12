@@ -382,7 +382,7 @@ function mci_filter_db_get_available_queries( $p_project_id = null, $p_user_id =
 					AND (is_public = " . db_prepare_bool(true) . "
 						OR user_id = " . db_param() . ")
 					ORDER BY is_public DESC, name ASC";
-	$result = db_query_bound( $query, Array( $t_project_id, $t_user_id ) );
+	$result = db_query_bound( $query, array( $t_project_id, $t_user_id ) );
 	$query_count = db_num_rows( $result );
 
 	for( $i = 0;$i < $query_count;$i++ ) {
@@ -405,7 +405,7 @@ function mci_filter_db_get_available_queries( $p_project_id = null, $p_user_id =
  * Get a category definition.
  *
  * @param integer $p_category_id  The id of the category to retrieve.
- * @return Array an Array containing the id and the name of the category.
+ * @return array an array containing the id and the name of the category.
  */
 function mci_category_as_array_by_id( $p_category_id ) {
 	$t_result = array();
@@ -436,7 +436,7 @@ function mci_project_version_as_array( $p_version ) {
  * Returns time tracking information from a bug note.
  *
  * @param int $p_issue_id The id of the issue
- * @param Array $p_note A note as passed to the soap api methods
+ * @param array $p_note A note as passed to the soap api methods
  *
  * @return String the string time entry to be added to the bugnote, in 'HH:mm' format
  */

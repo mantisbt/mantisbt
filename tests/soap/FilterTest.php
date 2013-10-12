@@ -542,7 +542,7 @@ class FilterTest extends SoapBase {
 
 	/**
 	 *
-	 * @return Array the project issues
+	 * @return array the project issues
 	 */
 	private function getProjectIssues() {
 
@@ -558,7 +558,7 @@ class FilterTest extends SoapBase {
 	 * Gets the issues for the specified user.
 	 * @param $filterType The filter type ('assigned', 'monitored', 'reported')
 	 * @param $targetUser The target user object reference.
-	 * @return Array Matching issues
+	 * @return array Matching issues
 	 */
 	private function getIssuesForUser( $filterType, $targetUser ) {
 		// mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id, $filterType, $p_target_user, $p_page_number, $p_per_page )
@@ -574,7 +574,7 @@ class FilterTest extends SoapBase {
 
 	/**
 	 *
-	 * @return Array the project issues
+	 * @return array the project issues
 	 */
 	private function getAllProjectsIssues() {
 
@@ -588,7 +588,7 @@ class FilterTest extends SoapBase {
 	
 	/**
 	 *
-	 * @return Array the project issues
+	 * @return array the project issues
 	 */
 	private function getProjectIssueHeaders() {
 
@@ -602,7 +602,7 @@ class FilterTest extends SoapBase {
 
 	/**
 	 *
-	 * @return Array the project issues
+	 * @return array the project issues
 	 */
 	private function getAllProjectsIssueHeaders() {
 

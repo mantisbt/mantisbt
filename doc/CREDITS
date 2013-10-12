@@ -4,7 +4,9 @@ Copyright (C) 2000-2002  Kenzaburo Ito - kenito@300baud.org
 Copyright (C) 2002-2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
 -------------------------------------------------------------------------------
 
-*** Please contact project administrators if you should be on this list!
+*** Please contact project administrators by sending a message to the
+*** mailing list if your name should be on this document!
+
 
 CREDITS
 
@@ -13,18 +15,16 @@ Administrators
 
 Victor Boctor (vboctor)
 
+
 Developers
 ----------
 
 Damien Regad (dregad)
 Daryn Warriner (daryn, dwarrine)
-David Hicks (dhx)
-Gianluca Sforna (giallu)
-John Reese (jreese, nuclear_eclipse)
 Paul Richards (grangeway, paulr, minimoo, prichards)
 Robert Munteaunu (rombert)
 Roland Becker (atrol)
-Siebrand Mazeland (siebrand)
+
 
 Ex-Administrators
 -----------------
@@ -33,15 +33,132 @@ Jeroen Latour (jlatour)
 Julian Fitzell (jfitzell)
 Kenzaburo Ito (prescience, cluebie, presbert)
 
+
 Ex-Developers
 -------------
 
+David Hicks (dhx)
+Gianluca Sforna (giallu)
 Glenn Henshaw (thraxisp)
+John Reese (jreese, nuclear_eclipse)
+Siebrand Mazeland (siebrand)
+
 
 Contributors
 ------------
+People who contributed code to MantisBT, listed in reverse order of the
+number of commits authored.
 
+Victor Boctor
+Kenzaburo Ito
+Paul Richards
+Glenn Henshaw
+Damien Regad
+Julian Fitzell
+David Hicks
+John Reese
+Jeroen Latour
+Robert Munteanu
+Siebrand Mazeland
+Gianluca Sforna
+André Eisenbach
+Daryn Warriner
+bigbadger
+Lincoln Maskey
+Marcello Scata
+Roland Becker
+Alexey Chumakov
+beerfrick
+Bastian Pfenningschmidt
+Kornel Lesinski
 Adrian Spinei
+Martin Fuchs
+zakman
+jbrugger
+jctrosset
+ryandesign
+rufinus
+Kirill Krasnov
+David Newcomb
+jhuggins
+yarick123
+jotel
+robertjf
+Frank Rodgers
+Chris Fitch
+Johan Guilbaud
+davidu
+planser
+Franck Villaume
+Véronique Maginot
+myplacedk
+smhanson
+vwegert
+Daniel Tschinder
+Stefan Pettersson
+Vincent Sels
+Giovanni Giacobbi
+Jim Hanley
+Stéphane Veyret
+Tamás Gulácsi
+cyclespersecond
+scoates
+torija
+Alexander Menk
+Carlos Proensa
+Christian Weiske
+Dan Moore
+Dominik Blunk
+Markus Schneider
+Tarik Sedlarevic
+puklos
+Alexander Maringer
+Andreas Schopper
+Benjamin Renard
+Bill Stidham
+Brian Wrightson
+Daniel N
+David W. Juntgen
+Dawit Ayalew
+Edward Rudd
+Florent Daigniere
+Gulacsi Tamas
+Henning Eiben
+Jacky Alcine
+Jacob Hoover
+Jonas Nockert
+Karl Wiggisser
+Laszlo Kovacs
+Marcin Kłeczek
+Marco Dings
+Matt McCutchen
+MatthieuR
+Michael Lorer
+Michael Weibel
+Olivier Mengué
+Pier-Luc Duchaine
+Raul Baldner junior
+Raymond van Asperen
+Ross Nelson
+SL-Gundam
+Sebastian Kayser
+Sergio Del Franco
+Todd Whitesel
+cybd
+davethegr8
+dwethell
+gcompagnon
+greenius
+jeckyll
+mbaranski
+petertc
+tfromm
+watergad
+Adrian Spinei
+
+Other Contributors
+------------------
+
 Alan Seiden (db2 support)
 Alexander Leschinsky (wanderer)
 Alexander Menk
@@ -122,9 +239,12 @@ watergad
 Yves Durasnel
 Volker Wegert
 
+
 Translations
 ------------
 MantisBT is translated at http://translatewiki.net
+The list of contributors for each translated language can be found in
+the respective language files.
 
 Adam Bienias
 Adam Zivner

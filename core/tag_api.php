@@ -115,7 +115,7 @@ function tag_ensure_unique( $p_name ) {
  * The prefix parameter is optional, but allows you to prefix the regex
  * check, which is useful for filters, etc.
  * @param string Tag name
- * @param array Array reference for regex matches
+ * @param array array reference for regex matches
  * @param string Prefix regex pattern
  * @return boolean True if the name is valid
  */
@@ -567,7 +567,7 @@ function tag_bug_get_row( $p_tag_id, $p_bug_id ) {
 /**
  * Return an array of tags attached to a given bug sorted by tag name.
  * @param Bug ID
- * @return array Array of tag rows with attachement information
+ * @return array array of tag rows with attachement information
  */
 function tag_bug_get_attached( $p_bug_id ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
@@ -594,7 +594,7 @@ function tag_bug_get_attached( $p_bug_id ) {
 /**
  * Return an array of bugs that a tag is attached to.
  * @param integer Tag ID
- * @return array Array of bug ID's.
+ * @return array array of bug ID's.
  */
 function tag_get_bugs_attached( $p_tag_id ) {
 	$c_tag_id = db_prepare_int( $p_tag_id );
@@ -801,7 +801,7 @@ function tag_stats_attached( $p_tag_id ) {
  * Defaults to a list of five tags.
  * @param integer Tag ID
  * @param integer List size
- * @return array Array of tag rows, with share count added
+ * @return array array of tag rows, with share count added
  */
 function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
 	$t_bug_table = db_get_table( 'bug' );

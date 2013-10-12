@@ -1,34 +1,42 @@
 <?php
-/** MantisBT - a php based bugtracking system
+# MantisBT - A PHP based bugtracking system
+
+# MantisBT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# MantisBT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Language File - Urdu (اردو)
  *
- * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * **********************************************************************
+ * ** This file is generated from translations stored in translatewiki **
+ * ** Information on Copyright/License for translatewiki translations  **
+ * ** is available at http://translatewiki.net/wiki/Project:About      **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
  *
- * MantisBT is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * MantisBT is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
- */
-/** Urdu (اردو)
- * 
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- *
- * @author Kenzaburo Ito, kenito@300baud.org
- * @author various developers
- * @author محبوب عالم
- */
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+*/
 
 $s_directionality = 'rtl';
 $s_actiongroup_menu_move = 'حرکت مين لاو';
@@ -61,7 +69,6 @@ $s_private_project_msg = 'یہ منصوبہ آزاد نہی ہے صرف انتط
 $s_access_level_project = ' منصوبہے کو استہمال کرنے کادرجا';
 $s_view_submitted_bug_link = 'جمح کہے گے مسلے دکھاو %1$s';
 $s_assigned_projects = ' منصوبہے سپرد کرو';
-$s_unassigned_projects = 'جو منصوبہے سپرد نھی ھوے';
 $s_print = 'چھاپو';
 $s_jump = ' چھلانگ';
 $s_copy_users = ' استہمال کرنے والوں کو نقل کرو';
@@ -143,91 +150,6 @@ $s_bugnote_title = 'معلومات کو سنبھالنے والہ';
 $s_bugnote_date = '  معلومات کی تاریخ';
 $s_bugnote_description = ' معلومات کی وضاحت';
 $s_error_no_proceed = ' مۂربانی کر کے پہچھے والے صہفےپر جا نے کے لۓ پہچھے والہ بٹن استہمال کرین۔ آپ وہہاں سے اپنی خرابی دیکھ سکھتے ہیں یا اور کام منتہب کر سکتے ہیں۔آپ لسٹ سے بھی کسی کام کو دبا کر کسی نۓ حصے پر جا سکتے ہیں۔';
-$MANTIS_ERROR[ERROR_GENERIC] = 'یہ کام کرتے ھوے ایک خرابی آ گی ھے.  آپ اپنی انتضامیہ کو اس کے بارے میں آگاہ کر سکتے ہیں۔ .';
-$MANTIS_ERROR[ERROR_SQL] = ' کی خرابی آ گی ھے اس کے بارے میں اگ ہ کر یںSQL';
-$MANTIS_ERROR[ERROR_REPORT] = 'آپ کی معلومات مین خرابی تھی.';
-$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'کوی فاہل بتای نہی گی';
-$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'اس قسم کی فاہل کی اجازت نہی';
-$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'لسٹ دستیاب نہی ھے.
-Please check the project settings.';
-$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'اس نام کا منصو بہ پہلے ہی موجود ھے.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'اپنی اندراج والی قیمت دیکھیں ایک بہت ہی خاص اندراج نہی ھے \'%1$s\'';
-$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'یہ کھاتہ مھفوظ ھے آپ اسے استہمال نہی کر سکتے جب تک اسے غیر  مہفوظ نہ بنایا جاے۔.';
-$MANTIS_ERROR[ERROR_ACCESS_DENIED] = ' حق حاصل نہی ھے.';
-$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'فایل دوبارہ نئ نہی ھوی ھے۔مینٹیس فایل نہیں پڑ سکتا مہربانی کر کے منصوبے کی طرز دیکھیں۔';
-$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = ' فایل دوبارہ نئ نہی ھوی ھے۔ کیونکہ فایل کا ساہز  پی ایچ پیکے تقرر سے زیادہ ھے۔ .';
-$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = '(%1$s)  اس صہفے کا ضروری حصہ نہیں ملا.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'استہمال کرنے والے کا نام پہلے ہی استہمال ھو رہ ھے۔مہربانی کر کے پیچھے جاہیں اور کوی اور نام منتہب کریں.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'ساخت کا انتخاب نہیں  ملا \'%1$s\'.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = ' ساخت کا انتخاب ڈیٹا بیس میں سیٹ   نہی ھو سکتا یہ میں     config_inc.php ھونا چاہیے  .';
-$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = ' \'%1$s\' سٹرنگ نہیں ملی.';
-$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = ' معلومات نہیں ملی.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = '   منصو بہ نہی ملا .';
-$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ڈیٹا بیس کا حصہ نہی ملا \'%1$s\'.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = ' نے سے قاصر ھے   صرور سے ملاFTP.';
-$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'ایشوذ کو چل نے والے کے پاس اس مقام پر ایشوذ چلانے کے اختیار نہیں ھیںا.';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = ' اس منصوبے کا نام پہلے ہی استہمال ھو رہ ھے۔مہربانی کر کے پیچھے جاہیں اور کوی اور نام منتہب کریں..';
-$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = '  منصوبے کا نام ٹھیک نہی ھے۔منصوبے کا نام خالی نہی ھو سکتا.';
-$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'لاگن کی معلومات جو آپ نے مہیا کی ہیں وہ  ٹھیک نہیں ہیں۔ھو سکتا ھے آپ کا کھاتہ خارج ھو چکا ھو ?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'ااس استہمال کرنے والے بندے کے لیے انتخاب نہیں ملا.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'خبروں والوں چیزیں نہیں ملیں.';
-$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'راز والا لفظ تصدیق وا لے  لفظ کے ساتھ نہیں ملا.';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = ' ایک ایرے متوقہع تھا لیکن   کے لیے آیا ھے %1$s ایک لفظ   .';
-$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = ' ایک لفظ متوقہع تھا لیکن ایک ایرے     کےلیےآیا ھے%1$s.';
-$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'متوقہع تھا  کے لیے %1$sایک نمبر .';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'کے لیے نہیں ملا%1$d مسہلہ .';
-$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = '  نہیں ملا%1$s فلژ.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'آپ جو فلژ استہمال کر رھے ھیں وہ پرانا ھے آپ استہمال کرنے کے لیے نیا بنایں';
-$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'ای میل ٹھیک نہہیں ھے.';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'جاہزہ نہیں ملا.';
-$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'فاہل کی قسم اپ لوڈ کے لیے ٹھیک نہیں ھے.';
-$MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'یہ نقل والی فاہل ھےمہربانی کر کے پہلے اسے خارج کریں.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'اپ لوڈ کا راستہ ٹھیک نہی ھے.  فاہل یا تو ٹھیک نہی ھے یا ویب سرور پر کا پی نھی ھوی ھے';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'کوی فاہل اپ لوڈ نہی ھوی ھے. مہربانی کرکے پیچھے جایں اور اپ لوڈ کرنے کے لیے فاہل منتہب کرہں';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'اپ لوڈ فاہل سٹوریج فہرست میں نہں ڈالی جا سکتی یا تو فہرست ھے ھی نھی یا ویب سرور کی طرف سے اجاذت نہیں';
-$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'آپ ایک مسہلے جیسا دوسرا مسلہ نہں بنا سکتے.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'کسٹم کی جگہ نہی ملی';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = ' یہ فاہل نقل ھے.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = ' یہ منصوبہ صرف ایک جیز کو ایک وقت میں استہمال کر سکتا ھے .';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'اس چیز کے لیے قیمت ٹھیک نہیں ھے';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'اس قسٹم والی چیز کا نام ٹھیک نہی ھے';
-$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = ' کی اجازت فیل ھو گی ھےLDAP';
-$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = ' کے سرور سے رابطہ فیل ھو گیا ھے LDAP';
-$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = ' LDAP       کے ریکارڈ نہے نہیں  ھوے      .';
-$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = ' کے استہمال کرنے والوں کے نام نہیں ملے LDAP      .';
-$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'ڈیٹا بیس سے رابطہ فیل ھو گیا ھے. خرابی ڈیٹا بیس سے حاصل ھوی ھے #%1$d: %2$s';
-$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = ' ڈیٹا بیس کی کیوری فیل ھو گی ھے  کیوری کیلیے %s #%1$d: %s خرابی جو ڈیٹا بیس سے حاصل ھوی ھے';
-$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = ' ڈیٹا بیس سے رابطہ ختم ھو گیا ھے #%1$d: %2$s خرابی جو ڈیٹا بیس سے حاصل ھوی ھے.';
-$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'اسی قسم کی جماعت کا نام پہلے ہی موجود ھے.';
-$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'کوی نقل کا کام نہی ملا.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = ' جماعت نہی ملی .';
-$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ایک نیا ایژیشن اسی نام کا موجود ھے.';
-$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = '  ایژیشن نہی ملا\'%1$s\'.';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'استہمال کرنے والے کا نام ٹھیک نہی ھے۔ استہمال کرنے والے کا نام صرف لاطینی لفظ،نمبرز،سپیس،^،اور _ پر مشتمل ھو سکتا ھے.';
-$MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'استہمال کرنے والے کا نام ٹھیک نھی ھے.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'استہمال کرنے والے کا اصلی نام ٹھیک نہی ھے';
-$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'آپ نے جو نام منتخب کیا ھےوہ کسی اور کے نام سے مل رھا ھے مہربانی کر کے کوی دوسرا نام استہمال کریں.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'سپانسرشپ کی سپورٹ ٹھیک نہیں ھے.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = '  نہی ملا %1$d سپانسرشپ.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = ' (%s) سپانسرشپ کی قیمت مقررہ قیمت سے قم ھے';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'ٹھیک کرنےوالےکے پاس مقررہ ایشوذ ٹھیک کرنے کا حق حاصل نہیں ھے.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = ' داخلۂ ممنوع ھے مقررہ ایشوذ کو زیادہ حق کی ضرورت ھے.';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'پیش کار کادیا ھوا ای میل ٹھیک نہی ھے مھربانی کر کے اپنا ریکارڈ نیا کریں.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'ساخت کے اختیار کی قیمت ٹھیک نہی ھے \'%s\' \'%s\'';
-$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = ' یہ عمل نہی چل سکتا کیونکہ اس  ایشوذ کو صرف پڑھ سکتے ہیں';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'يہاں پہلے ھی دو ایشوذوں کے درمیان تہلق ھے.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = ' تہلق نہی ملا.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = ' داخلۂ ممنوع ھے مقررہ ایشوذ کو زیادہ حق کی ضرورت ھے.';
-$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'ایک ایشوذ خود سے تہلق نہی رکھ سکتا .';
-$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'اجازت نہی مل سکتی مہربانی کر کے دوبارہ کوشش کریں  .';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'آپ کا راز والہ لفظ نہی ملا یہ فیچر آپ کے لیے دستیاب نہی ھے.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'آپ کو راز والہ لفظ تبدیل کرنے کے لیے ای میل کی ضرورت ھے لفظ';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = '  آپ نے  جو مہلومات فراہم کی ھے وہ کسی استہمال کرنے والے کے کھاتے سے نہی ملتی !';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'ٹھیک نہی ھےیا وہ استہمال ھو رھا ھے مہربانی کر کے آپ دوبارہ  رجسٹر ھونے کی کو شش کریں  URL ثبوت والہ .';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'درخواستیں بہت زیادہ ھو چکی ھیں مھربانی کر کے اپنی انتظامیہ سے رابطہ کریں';
-$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'یہ کام دوسرے ایشوذوں پر لوپ بنا دے  گا .';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'آپ چلا نے کے عمل کو تبدیل نہی کر سکتے صرف انتظامیہ یہ کام کر سکتی ھے.';
-$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = ' صہفے  پر واپس جانے کی حرابی ھے یقین کر لیں کوی جگہ پی ایچ پی کے خانے سے باہر تو نہی (&ایل ٹی;?پی ایج پی ?&جی ٹی;) مین config_inc.php یا custom_*.php files.';
 $s_login_error = ' آپ کا کھا تہ ختم ھو گیا ھے یا بند کر دیا گیا ھے،یا پھر آپ کا استہمال والہ نام یا راز لفظ جو آپ نے دیا ھے ٹھیک نہی ھے .';
 $s_login_cookies_disabled = ' آپ کا براوزر                         یا تو یہ جانتا نہی کے کوکیز کو کہسے   چلانہ ھے یا چلانے سے انکار کر رھا ھے                               .';
 $s_go_back = 'پیچھے جاو';
@@ -305,8 +227,6 @@ $s_email_date_submitted = 'جمعح کرا نے کی تاریخ';
 $s_email_last_modified = 'آخری دفع جب تبدیل کیا گیا';
 $s_email_summary = 'خلاصا';
 $s_email_description = 'وضاحت';
-$s_email_additional_information = 'اضافی معلومات';
-$s_email_steps_to_reproduce = 'دوبارہ بنانے کے سٹیپ';
 $s_account_protected_msg = 'کھاتہ پروٹیکٹیڈ ھے یہ تبدیل نہی ھو سکتا۔۔۔';
 $s_account_removed_msg = 'آپ کا کھاتہ ختم ھو چکا ھے';
 $s_confirm_delete_msg = '? کیا آپ واقہی اپنا کھاتہ خارج کرنا چاہتے ھیں';
@@ -345,7 +265,6 @@ $s_email_bugnote_limit = ' ای- میل معلومات کی حد';
 $s_language = 'ذبان';
 $s_update_prefs_button = 'پسند کو نیا کرنا';
 $s_reset_prefs_button = ' پسند کو دوبارہ سیٹ کرنا';
-$s_timezone = 'منطقۂ وقت';
 $s_prefs_reset_msg = 'پسند کو  تبدیل کیا جا چکا ھے';
 $s_prefs_updated_msg = 'پسند کو  نیا کیا جا چکا ھے';
 $s_profile_added_msg = 'مختصر جاہزہ جمعح کیا جا چکا ھے';
@@ -385,7 +304,6 @@ $s_realname_duplicated = 'حقیقی نام کسی اور کے استعمال م
 $s_realname_updated = 'حقیقی نامکامیابی کے ساتھ تبدیل ھو کر نیا ھو گیا ھے';
 $s_password_updated = ' راذ والا لفظ تبدیل ھو کر نیا ھو گیا ھے';
 $s_multiple_projects = ' ایشوذ جو آپ نے چنا ھے وہ کسی اور منصوبے/پروجیکٹ سے تعلق رکھتا ھے نیچے دی گی معلومات تمام منصوبوں کی سیٹنگ دکھا رھا ھے اگر یہ ٹھیک نہی ھے تو مہربانی کر کے اپنی تبدیلی دیے گے تھوڈے منصوبے میں سے دوبارہ کوشش کریں .';
-$s_bug_assign_msg = ' ایشوذ کامیابی کے ساتھ سپرد کر دیا گیا ھے';
 $s_new_bug_title = 'نیا ایشوذ';
 $s_feedback_bug_title = 'آپ نے جس ایشوذ کے لیے کہا تھا اس کی راے/فیڑ بیک';
 $s_acknowledged_bug_title = 'ایشوذ جس کی اجازت مل گی ھے';
@@ -472,7 +390,6 @@ $s_add_bugnote_button = ' معلومات کو جمع کرو';
 $s_bugnote_edit_link = 'تبدیل';
 $s_closed_bug_button = 'ایشوذ بند کر دو';
 $s_bugnote_updated_msg = ' معلومات کامیابی کے ساتھ جمہع ھو چکی ھیں...';
-$s_edited_on = 'تبدیلی پر:';
 $s_show_content = 'حصا دکھاو';
 $s_click_to_login = 'لاگن کر نے کیلیے کلک کریں';
 $s_login_page_info = 'ایشوذ کو ٹریک کرنے میں خوش آمدید.';
@@ -488,8 +405,6 @@ $s_lost_password_done_title = 'راذ وا لے لفظ کی معلومات بھ�
 $s_lost_password_subject = 'راذ وا لہ لفظ دوبارہ سیٹ کرو';
 $s_lost_password_info = ' اگر آپ اپنا کھویا ھوا راذ والہ لفظ حاصل کرنا چاھتے ھیں  تو مہربانی کر کے اپنے کھاتے کیلیے اپنا نام اور ای میل دیں اس تصدیق کے لیے آپ اس یو آر ایل پر جایں اور اپنا راز والہ لفظ تبدیل کر لیں،جب آپ پیغام لے لیں تو آپ د ی  گی  مہلومات پر عمل کر کے  اپنا راز والہ لفظ تبدیل کر لیں  .';
 $s_lost_password_confirm_hash_OK = 'آپ کی التجا قبول ھو چکی ھے مہربانی کر کے اپنا راذ والہ لفظ تبدیل کر لیں .';
-$s_open_and_assigned_to_me = 'کھولو اور میرے ذمہ لگا دو';
-$s_open_and_reported_to_me = 'کھولو اور مجھے رپورٹ کرو';
 $s_newer_news_link = 'نی خبر';
 $s_older_news_link = 'پرانی خبر';
 $s_archives = 'ریکارڈ';
@@ -560,15 +475,11 @@ $s_access_change = 'سب سے چھوٹا لیول اس ایشوذ کو تبدی�
 $s_desc_bug_submit_status = 'مقام جہاں نیا ایشوذ سیٹ کیا گیا ھے';
 $s_desc_bug_reopen_status = 'مقام جہاں دوبارہ کھلنے والہ ایشوذ سیٹ کیا گیا ھے';
 $s_desc_bug_resolved_status_threshold = ' مقام جہاں پر   ایشوذ حل نظر آے';
-$s_workflow_change_access = 'کامکے فلو کو تبدیل کر سکتا ھے  جو';
-$s_access_change_access = ' پر کر سکتا ھے جو کام کے فلو کو استعمال کر نے کے لیول';
 $s_default_not_in_flow = '  کا ڈیفالٹ مقام منتخب نہی کیا گیا اگلے مقام ٪  ایس کیلیے اس کو نہی دیکھا جاے گا    %s';
 $s_assign_issue = 'ایک ایشوذ سپرد کرو';
-$s_allow_close_immediate = ' ایشوذ کو اجاذت دو کے وہ حل ھونے پر بند ھو جاے';
 $s_allow_reporter_close = 'رپوٹ کرنے والے کو اجاذت دو کہ وہ ایشوذ کو بند کر سکے';
 $s_allow_reporter_reopen = 'رپوٹ کرنے والے کو اجاذت دو کہ وہ ایشوذ کو دوبارہ کھول سکے';
 $s_set_status_assigned = 'مقام کو سہٹ کرو ھہنڈلر کی سپردگی پر';
-$s_allow_user_edit = ' استعمال کر نے  والے کو اجازت دو کہ وہ اپنے غلطی کی معلومات کو تبدیل کر سکے';
 $s_limit_access = ' رپورٹ کرنے والے کے اپنے ایشوذ کو استہمال کرنے پر حد مقرر کرو';
 $s_submit_status = ' مقام جس پر نیا ایشوذ سہٹ کیا گیا';
 $s_assigned_status = ' مقام جس پر آٹو سپردگی ایشوذ کو دی گی ھے';
@@ -706,6 +617,7 @@ $s_project_document_updated = ' منصوبہ  کامیابی کے ساتھ اپ 
 $s_project_user_added_msg = '  استعمال کر نے والے کامیابی کے ساتھ منصوبہ میں شامل ھو گے ھیں';
 $s_project_removed_user_msg = ' استعمال کر نے والے کامیابی کے ساتھ منصوبہ سے خارج ھو گہے ھیں';
 $s_remove_user_sure_msg = ' کیا آپ واقعی اس  استعمال والے کو خارج کرنا چاھتے ھیں ?';
+$s_remove_user_button = '   استعمال کر نے والے کو ختم کرو';
 $s_remove_all_users_sure_msg = ' کیا آپ واقعی اس منصوبہ کو استعمال والے کو خارج کرنا چاھتے?';
 $s_remove_all_users_button = '   تمام استعمال کر نے  والوں کو خارج کرو';
 $s_add_user_title = ' استعمال کر نے  والوں کو منصوبہ میں جمع کرو';
@@ -738,7 +650,6 @@ $s_valid_project_msg = 'منصوبہ  منتخب کرنا ھو گا آپ کو ض
 $s_signup_done_title = 'اکاونٹ کی کاروای ھو گی ھے';
 $s_password_emailed_msg = 'آپ کو مبارک ھو آپ کامیابی کے ساتھ رجسٹرڈ ھو چکے ھیں۔ اب آپ کو ایک ای میل بھیجی جاے گی جس سے آپ کا ای میل چیک کیا جاے گا۔لنک پر جانے سے آپ کا کھاتہ چل پڑے گا.';
 $s_no_reponse_msg = '  آپ کے پاس صرف سات دن ھیں اپنا کھاتہ کا پراسیس پورا کرنے کو اگر آپ  سات دن میں پراسیس پورا میں ناکام ھو جاتے ھیں تو یہ نیا کھاتہ ختم کر دیا جاے گا .';
-$s_signup_captcha_request = ' کوڈ کا اندراج کریں جیسا یہ دایں طرف ڈبے میں نظر آ رھا ھے';
 $s_signup_info = ' اس فارم کے پورا ھونے اور آپکے جواب کے ثبوت پر آپ کو کو ایک ای میل بھیجی جاے گی جو آپ نے مہیا کی ھے آپ  سات دن میں پراسیس پورا میں ناکام ھو جاتے ھیں تو یہ نیا کھاتہ ختم کر دیا جاے گاآپ کو ٹھیک ای میل فراھم کرنا ھو گا تا کے آپ کو تصدیق والی ای-میل بھیجی جاے On completion .';
 $s_signup_title = 'ساہن اپ';
 $s_signup_button = ' ساہن اپ';
@@ -782,7 +693,6 @@ $s_changed = 'بدلو(گھنٹے)';
 $s_viewing_bugs_title = 'ایشوذ جو نظر آ رھے ھیں';
 $s_updated = 'اپ ڈیٹڈ';
 $s_sticky = 'سب سے گندا ایشوذ';
-$s_sort = 'الگ کر نے سے';
 $s_issue_id = 'ایشوذ #';
 $s_recently_visited = 'تھو ڈی دیر پہلے ھی وذٹ کیا ھوا';
 $s_none = 'کوی نہی';
@@ -794,8 +704,6 @@ $s_prev = 'پھیچے والہ';
 $s_next = 'آگے والہ';
 $s_first = 'پہلا';
 $s_last = 'آخر والا';
-$s_start_date = 'شروع والی تاریخ';
-$s_end_date = ' آخر والی تاریخ';
 $s_use_date_filters = ' تاریخ کی فلٹر';
 $s_yes = 'ھاں';
 $s_no = 'ناں';
@@ -861,7 +769,6 @@ $s_custom_field_require_resolved = 'حل پر ضرورت ھے';
 $s_custom_field_require_closed = 'بند ھونے پر ضرورت ھے';
 $s_link_custom_field_to_project_title = 'کسٹم فیلڈ کا ایشوذ سے لنک کرو';
 $s_link_custom_field_to_project_button = ' کسٹم فیلڈ سے لنک';
-$s_linked_projects = 'جو پراجیکٹ لنک کیا گیا ھے';
 $s_custom_field_sequence = 'ترتیب';
 $s_custom_field_type_enum_string = '0:سٹرنگ,1:نمیرک,2:فلوٹ,3:انیمیریشن,4:ای-میل,5:چیک باکس,6:لسٹ,7:ملٹی سیلیکشن لسٹ,8:تاریخ';
 $s_confirm_used_custom_field_deletion = '  یہ فیلڈ اس وقت صرف ایک منصوبے سے لنکڈ ھے اگر آپ اسے جاری رکھیں گے تو یہ مستقل طور پر ختم ھو جاے گی یہ کام دوبارہ ریکور بھی نہی ھو گا اگر آپ اس فیلڈ کو خارج نہی کرنا چاھتے پیچھے والے بٹن کو دبایں اگر آگے جانا چاھتے ھیں  تو نیچے والے بٹن کو کلک کریں';
@@ -907,7 +814,7 @@ $s_relationship_with_parent = 'والد ایشوذ کے ساتھ تعلق';
 $s_delete_relationship_button = 'خارج';
 $s_delete_relationship_sure_msg = '  کیا آپ واقعی اس تعلق کو خارج کرنا چاھتے ھیں  ?';
 $s_relationship_warning_blocking_bugs_not_resolved = 'اس ایشوذ کے سارے  بچے ابھی تک حل یا بند نہی ھوے .';
-$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>توجا دیں</b>. اس ایشوذ کے سارے  بچے ابھی تک حل یا بند نہی ھوے .<br />پہلے <b>حل ھوے /بند</b>ایک والد ایشوذ کے ساتھ جتنے بھی بچے ھیں حل یا بند ھونے چاھیں .';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<strong>توجا دیں</strong>. اس ایشوذ کے سارے  بچے ابھی تک حل یا بند نہی ھوے .<br />پہلے <strong>حل ھوے /بند</strong>ایک والد ایشوذ کے ساتھ جتنے بھی بچے ھیں حل یا بند ھونے چاھیں .';
 $s_create_child_bug_button = 'کاپی بناو';
 $s_bug_cloned_to = 'ایشوذ کی کاپی بناو';
 $s_bug_created_from = '  ایشوذ اس سے بن رھے ھیں';
@@ -917,7 +824,6 @@ $s_dependency_graph = 'دارو مدار کا گراف';
 $s_vertical = 'ویرٹیکل';
 $s_horizontal = 'ھوریذینٹل';
 $s_view_issue = 'ایشوذ دکھاو';
-$s_checkin = 'چیک ان';
 $s_perm_rpt_capability = 'صلاحیت';
 $s_view = 'دکھاو';
 $s_issues = 'ایشوذ';
@@ -936,8 +842,6 @@ $s_update_view_status = ' ویو کا مقام اپ ڈیٹ کرو(پبلک مق�
 $s_show_list_of_users_monitoring_issue = 'جو استعمال کر نے والے ھیں ان کی لسٹ دکھاو جو ایشوذ کو مانیٹر کر رھے ھیں';
 $s_notes = 'معلومات';
 $s_add_notes = '  معلومات کو جمع کرو';
-$s_update_notes = 'معلومات کو اپ ڈیٹ کرو';
-$s_delete_note = 'معلومات کو خارج کرو';
 $s_view_private_notes = '   پرایویٹ معلومات کو دکھاو';
 $s_news = 'نیوذ';
 $s_view_private_news = 'پرایویٹ نیوذ کو دکھاو';
@@ -994,3 +898,90 @@ $s_time_tracking_get_info_button = '  وقت کی ٹریکنگ کی معلوما
 $s_time_tracking_cost_per_hour = 'قیمت / گھنٹہ';
 $s_time_tracking_cost = ' قیمت';
 $s_total_time_for_issue = 'تمام وقت ایشوذ کے لیے  = %ایس';
+
+
+$MANTIS_ERROR[ERROR_GENERIC] = 'یہ کام کرتے ھوے ایک خرابی آ گی ھے.  آپ اپنی انتضامیہ کو اس کے بارے میں آگاہ کر سکتے ہیں۔ .';
+$MANTIS_ERROR[ERROR_SQL] = ' کی خرابی آ گی ھے اس کے بارے میں اگ ہ کر یںSQL';
+$MANTIS_ERROR[ERROR_REPORT] = 'آپ کی معلومات مین خرابی تھی.';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'کوی فاہل بتای نہی گی';
+$MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'اس قسم کی فاہل کی اجازت نہی';
+$MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'لسٹ دستیاب نہی ھے.
+Please check the project settings.';
+$MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'اس نام کا منصو بہ پہلے ہی موجود ھے.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'اپنی اندراج والی قیمت دیکھیں ایک بہت ہی خاص اندراج نہی ھے \'%1$s\'';
+$MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'یہ کھاتہ مھفوظ ھے آپ اسے استہمال نہی کر سکتے جب تک اسے غیر  مہفوظ نہ بنایا جاے۔.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = ' حق حاصل نہی ھے.';
+$MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'فایل دوبارہ نئ نہی ھوی ھے۔مینٹیس فایل نہیں پڑ سکتا مہربانی کر کے منصوبے کی طرز دیکھیں۔';
+$MANTIS_ERROR[ERROR_FILE_TOO_BIG] = ' فایل دوبارہ نئ نہی ھوی ھے۔ کیونکہ فایل کا ساہز  پی ایچ پیکے تقرر سے زیادہ ھے۔ .';
+$MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = '(%1$s)  اس صہفے کا ضروری حصہ نہیں ملا.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'استہمال کرنے والے کا نام پہلے ہی استہمال ھو رہ ھے۔مہربانی کر کے پیچھے جاہیں اور کوی اور نام منتہب کریں.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'ساخت کا انتخاب نہیں  ملا \'%1$s\'.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = ' ساخت کا انتخاب ڈیٹا بیس میں سیٹ   نہی ھو سکتا یہ میں     config_inc.php ھونا چاہیے  .';
+$MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = ' \'%1$s\' سٹرنگ نہیں ملی.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = ' معلومات نہیں ملی.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = '   منصو بہ نہی ملا .';
+$MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ڈیٹا بیس کا حصہ نہی ملا \'%1$s\'.';
+$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = ' نے سے قاصر ھے   صرور سے ملاFTP.';
+$MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'ایشوذ کو چل نے والے کے پاس اس مقام پر ایشوذ چلانے کے اختیار نہیں ھیںا.';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = ' اس منصوبے کا نام پہلے ہی استہمال ھو رہ ھے۔مہربانی کر کے پیچھے جاہیں اور کوی اور نام منتہب کریں..';
+$MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = '  منصوبے کا نام ٹھیک نہی ھے۔منصوبے کا نام خالی نہی ھو سکتا.';
+$MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'لاگن کی معلومات جو آپ نے مہیا کی ہیں وہ  ٹھیک نہیں ہیں۔ھو سکتا ھے آپ کا کھاتہ خارج ھو چکا ھو ?';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'ااس استہمال کرنے والے بندے کے لیے انتخاب نہیں ملا.';
+$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'خبروں والوں چیزیں نہیں ملیں.';
+$MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'راز والا لفظ تصدیق وا لے  لفظ کے ساتھ نہیں ملا.';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = ' ایک ایرے متوقہع تھا لیکن   کے لیے آیا ھے %1$s ایک لفظ   .';
+$MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = ' ایک لفظ متوقہع تھا لیکن ایک ایرے     کےلیےآیا ھے%1$s.';
+$MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'متوقہع تھا  کے لیے %1$sایک نمبر .';
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'کے لیے نہیں ملا%1$d مسہلہ .';
+$MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = '  نہیں ملا%1$s فلژ.';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'آپ جو فلژ استہمال کر رھے ھیں وہ پرانا ھے آپ استہمال کرنے کے لیے نیا بنایں';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'ای میل ٹھیک نہہیں ھے.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'جاہزہ نہیں ملا.';
+$MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'فاہل کی قسم اپ لوڈ کے لیے ٹھیک نہیں ھے.';
+$MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'یہ نقل والی فاہل ھےمہربانی کر کے پہلے اسے خارج کریں.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'اپ لوڈ کا راستہ ٹھیک نہی ھے.  فاہل یا تو ٹھیک نہی ھے یا ویب سرور پر کا پی نھی ھوی ھے';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'کوی فاہل اپ لوڈ نہی ھوی ھے. مہربانی کرکے پیچھے جایں اور اپ لوڈ کرنے کے لیے فاہل منتہب کرہں';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'اپ لوڈ فاہل سٹوریج فہرست میں نہں ڈالی جا سکتی یا تو فہرست ھے ھی نھی یا ویب سرور کی طرف سے اجاذت نہیں';
+$MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'آپ ایک مسہلے جیسا دوسرا مسلہ نہں بنا سکتے.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'کسٹم کی جگہ نہی ملی';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = ' یہ فاہل نقل ھے.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = ' یہ منصوبہ صرف ایک جیز کو ایک وقت میں استہمال کر سکتا ھے .';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'اس چیز کے لیے قیمت ٹھیک نہیں ھے';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'اس قسٹم والی چیز کا نام ٹھیک نہی ھے';
+$MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = ' کی اجازت فیل ھو گی ھےLDAP';
+$MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = ' کے سرور سے رابطہ فیل ھو گیا ھے LDAP';
+$MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = ' LDAP       کے ریکارڈ نہے نہیں  ھوے      .';
+$MANTIS_ERROR[ERROR_LDAP_USER_NOT_FOUND] = ' کے استہمال کرنے والوں کے نام نہیں ملے LDAP      .';
+$MANTIS_ERROR[ERROR_DB_CONNECT_FAILED] = 'ڈیٹا بیس سے رابطہ فیل ھو گیا ھے. خرابی ڈیٹا بیس سے حاصل ھوی ھے #%1$d: %2$s';
+$MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = ' ڈیٹا بیس کی کیوری فیل ھو گی ھے  کیوری کیلیے %s #%1$d: %s خرابی جو ڈیٹا بیس سے حاصل ھوی ھے';
+$MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = ' ڈیٹا بیس سے رابطہ ختم ھو گیا ھے #%1$d: %2$s خرابی جو ڈیٹا بیس سے حاصل ھوی ھے.';
+$MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'اسی قسم کی جماعت کا نام پہلے ہی موجود ھے.';
+$MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'کوی نقل کا کام نہی ملا.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = ' جماعت نہی ملی .';
+$MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'ایک نیا ایژیشن اسی نام کا موجود ھے.';
+$MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = '  ایژیشن نہی ملا\'%1$s\'.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'استہمال کرنے والے کا نام ٹھیک نہی ھے۔ استہمال کرنے والے کا نام صرف لاطینی لفظ،نمبرز،سپیس،^،اور _ پر مشتمل ھو سکتا ھے.';
+$MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'استہمال کرنے والے کا نام ٹھیک نھی ھے.';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'استہمال کرنے والے کا اصلی نام ٹھیک نہی ھے';
+$MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'آپ نے جو نام منتخب کیا ھےوہ کسی اور کے نام سے مل رھا ھے مہربانی کر کے کوی دوسرا نام استہمال کریں.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'سپانسرشپ کی سپورٹ ٹھیک نہیں ھے.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = '  نہی ملا %1$d سپانسرشپ.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = ' (%s) سپانسرشپ کی قیمت مقررہ قیمت سے قم ھے';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'ٹھیک کرنےوالےکے پاس مقررہ ایشوذ ٹھیک کرنے کا حق حاصل نہیں ھے.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = ' داخلۂ ممنوع ھے مقررہ ایشوذ کو زیادہ حق کی ضرورت ھے.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'پیش کار کادیا ھوا ای میل ٹھیک نہی ھے مھربانی کر کے اپنا ریکارڈ نیا کریں.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'ساخت کے اختیار کی قیمت ٹھیک نہی ھے \'%s\' \'%s\'';
+$MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = ' یہ عمل نہی چل سکتا کیونکہ اس  ایشوذ کو صرف پڑھ سکتے ہیں';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'يہاں پہلے ھی دو ایشوذوں کے درمیان تہلق ھے.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = ' تہلق نہی ملا.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW] = ' داخلۂ ممنوع ھے مقررہ ایشوذ کو زیادہ حق کی ضرورت ھے.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'ایک ایشوذ خود سے تہلق نہی رکھ سکتا .';
+$MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'اجازت نہی مل سکتی مہربانی کر کے دوبارہ کوشش کریں  .';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'آپ کا راز والہ لفظ نہی ملا یہ فیچر آپ کے لیے دستیاب نہی ھے.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'آپ کو راز والہ لفظ تبدیل کرنے کے لیے ای میل کی ضرورت ھے لفظ';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = '  آپ نے  جو مہلومات فراہم کی ھے وہ کسی استہمال کرنے والے کے کھاتے سے نہی ملتی !';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'ٹھیک نہی ھےیا وہ استہمال ھو رھا ھے مہربانی کر کے آپ دوبارہ  رجسٹر ھونے کی کو شش کریں  URL ثبوت والہ .';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'درخواستیں بہت زیادہ ھو چکی ھیں مھربانی کر کے اپنی انتظامیہ سے رابطہ کریں';
+$MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'یہ کام دوسرے ایشوذوں پر لوپ بنا دے  گا .';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'آپ چلا نے کے عمل کو تبدیل نہی کر سکتے صرف انتظامیہ یہ کام کر سکتی ھے.';
+$MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = ' صہفے  پر واپس جانے کی حرابی ھے یقین کر لیں کوی جگہ پی ایچ پی کے خانے سے باہر تو نہی (&ایل ٹی;?پی ایج پی ?&جی ٹی;) مین config_inc.php یا custom_*.php files.';

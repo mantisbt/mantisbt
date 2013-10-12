@@ -1,35 +1,42 @@
 <?php
-/** MantisBT - a php based bugtracking system
- *
- * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- *
- * MantisBT is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * MantisBT is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
- */
+# MantisBT - A PHP based bugtracking system
 
-/** Norwegian Nynorsk (‪Norsk (nynorsk)‬)
+# MantisBT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# MantisBT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Language File - Norwegian Nynorsk (‪Norsk (nynorsk)‬)
+ *
+ * **********************************************************************
+ * ** This file is generated from translations stored in translatewiki **
+ * ** Information on Copyright/License for translatewiki translations  **
+ * ** is available at http://translatewiki.net/wiki/Project:About      **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
  *
  * See the qqq 'language' for message documentation incl. usage of parameters
- * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- *
- * @author Frokor
- * @author Gunnernett
- * @author Harald Khan
- */
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+*/
 
 $s_actiongroup_menu_move = 'Flytt';
 $s_actiongroup_menu_copy = 'Kopier';
@@ -62,7 +69,6 @@ $s_private_project_msg = 'Dette prosjektet er PRIVAT. Berre administratorar og b
 $s_access_level_project = 'Prosjekttilgjenge';
 $s_view_submitted_bug_link = 'Sjå insend sak %1$s';
 $s_assigned_projects = 'Tildelte prosjekt';
-$s_unassigned_projects = 'Utildelte prosjekt';
 $s_print = 'Skriv ut';
 $s_jump = 'Gå til';
 $s_copy_users = 'Kopier brukarar';
@@ -116,8 +122,6 @@ $s_move_group_bugs_button = 'Flytt saker';
 $s_copy_group_bugs_button = 'Kopier saker';
 $s_assign_group_bugs_button = 'Tildel saker';
 $s_printing_options_link = 'Val for utskrift';
-$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Fann ikkje sak %1$d';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Fann ikkje kategorien.';
 $s_go_back = 'Attende';
 $s_switch = 'Skift';
 $s_logged_in_as = 'Innlogga som';
@@ -252,7 +256,6 @@ $s_add_bugnote_button = 'Legg til merknad';
 $s_bugnote_edit_link = 'Endra';
 $s_closed_bug_button = 'Lat att sak';
 $s_bugnote_updated_msg = 'Merknaden er vorten oppdatert.';
-$s_edited_on = 'endra:';
 $s_hide_content = 'Løyn innhald';
 $s_show_content = 'Vis innhald';
 $s_click_to_login = 'Trykk her for å logga inn';
@@ -299,15 +302,12 @@ $s_reporter_by_resolution = 'Meldar etter løysingsstoda';
 $s_reporter_effectiveness = 'Meldareffektivitet';
 $s_developer_by_resolution = 'Utviklar etter løysingsstoda';
 $s_percentage_fixed = '% fiksa';
-$s_sort = 'Sorter etter';
 $s_issue_id = 'Sak #';
 $s_recently_visited = 'Sist vitja';
 $s_prev = 'Førre';
 $s_next = 'Neste';
 $s_first = 'Fyrste';
 $s_last = 'Siste';
-$s_start_date = 'Startdato';
-$s_end_date = 'Sluttdato';
 $s_use_date_filters = 'Nytt datofilter';
 $s_yes = 'Ja';
 $s_no = 'Nei';
@@ -342,8 +342,6 @@ $s_set_view_status = 'Endra visingsstoda (offentleg eller privat)';
 $s_update_view_status = 'Oppdater visingsstoda (offentleg eller privat)';
 $s_notes = 'MERKNADER';
 $s_add_notes = 'Legg til merknader';
-$s_update_notes = 'Oppdater merknader';
-$s_delete_note = 'Slett merknad';
 $s_view_private_notes = 'Sjå private merknader';
 $s_news = 'NYHENDE';
 $s_view_private_news = 'Sjå private nyhende';
@@ -390,3 +388,7 @@ $s_development_team = 'Utviklarlag';
 $s_overdue = 'Forseinka';
 $s_view_account_title = 'Brukarinformasjon';
 $s_manage_user = 'Handsam brukar';
+
+
+$MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Fann ikkje sak %1$d';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Fann ikkje kategorien.';

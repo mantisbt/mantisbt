@@ -43,6 +43,10 @@ $g_error_handled = false;
 $g_error_proceed_url = null;
 $g_error_send_page_header = true;
 
+# Make sure we always capture User-defined errors regardless of ini settings
+# These can be disabled in config_inc.php, see $g_display_errors
+error_reporting( error_reporting() | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE );
+
 set_error_handler( 'error_handler' );
 
 /**
@@ -120,6 +124,9 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 		case E_USER_ERROR:
 			$t_error_type = "APPLICATION ERROR #$p_error";
 			$t_error_description = error_string( $p_error );
+			if( $t_method == DISPLAY_ERROR_INLINE ) {
+				$t_error_description .= "\n" . error_string( ERROR_DISPLAY_USER_ERROR_INLINE );
+			}
 			break;
 		case E_USER_WARNING:
 			$t_error_type = "APPLICATION WARNING #$p_error";
@@ -141,15 +148,22 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 	$t_error_description = nl2br( $t_error_description );
 
 	switch( $t_method ) {
-		case 'halt':
+		case DISPLAY_ERROR_HALT:
 			# disable any further event callbacks
 			if ( function_exists( 'event_clear_callbacks' ) ) {
 				event_clear_callbacks();
 			}
 
 			$t_oblen = ob_get_length();
-			if( error_handled() && $t_oblen > 0 ) {
+			if( $t_oblen > 0 ) {
 				$t_old_contents = ob_get_contents();
+				if( !error_handled() ) {
+					# Retrieve the previously output header
+					if( false !== preg_match_all( '|^(.*)(</head>.*$)|is', $t_old_contents, $result ) ) {
+						$t_old_headers = $result[1][0];
+						unset( $t_old_contents );
+					}
+				}
 			}
 
 			# We need to ensure compression is off - otherwise the compression headers are output.
@@ -172,11 +186,18 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 				} else {
 					echo '<html><head><title>', $t_error_type, '</title></head><body>';
 				}
+			} else {
+				# Output the previously sent headers, if defined
+				if( isset( $t_old_headers ) ) {
+					echo $t_old_headers, "\n";
+					html_page_top2();
+				}
 			}
 
 			echo '<div id="error-msg">';
 			echo '<div class="error-type">' . $t_error_type . '</div>';
 			echo '<div class="error-description">', $t_error_description, '</div>';
+
 			echo '<div class="error-info">';
 			if( null === $g_error_proceed_url ) {
 				echo lang_get( 'error_no_proceed' );
@@ -213,7 +234,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 				echo '</body></html>', "\n";
 			}
 			exit();
-		case 'inline':
+		case DISPLAY_ERROR_INLINE:
 			echo '<div class="error-inline">', $t_error_type, ': ', $t_error_description, '</div>';
 			$g_error_handled = true;
 			break;
@@ -238,7 +259,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
  */
 function error_print_details( $p_file, $p_line, $p_context ) {
 	?>
-		<table class="width75">
+		<table class="width90">
 			<tr>
 				<td>Full path: <?php echo htmlentities( $p_file, ENT_COMPAT, 'UTF-8' );?></td>
 			</tr>
@@ -264,7 +285,7 @@ function error_print_context( $p_context ) {
 		return;
 	}
 
-	echo '<table class="width100"><tr><th>Variable</th><th>Value</th><th>Type</th></tr>';
+	echo '<table class="width100" style="table-layout:fixed;"><tr><th>Variable</th><th>Value</th><th>Type</th></tr>';
 
 	# print normal variables
 	foreach( $p_context as $t_var => $t_val ) {
@@ -277,14 +298,16 @@ function error_print_context( $p_context ) {
 				$t_val = '**********';
 			}
 
-			echo '<tr><td>', $t_var, '</td><td>', $t_val, '</td><td>', $t_type, '</td></tr>', "\n";
+			echo '<tr><td style="width=20%; word-wrap:break-word; overflow:auto;">', $t_var,
+				'</td><td style="width=70%; word-wrap:break-word; overflow:auto;">', $t_val,
+				'</td><td style="width=10%;">', $t_type, '</td></tr>', "\n";
 		}
 	}
 
 	# print arrays
 	foreach( $p_context as $t_var => $t_val ) {
 		if( is_array( $t_val ) && ( $t_var != 'GLOBALS' ) ) {
-			echo '<tr><td colspan="3"><br /><strong>', $t_var, '</strong></td></tr>';
+			echo '<tr><td colspan="3" style="word-wrap:break-word"><br /><strong>', $t_var, '</strong></td></tr>';
 			echo '<tr><td colspan="3">';
 			error_print_context( $t_val );
 			echo '</td></tr>';
@@ -300,7 +323,7 @@ function error_print_context( $p_context ) {
  * @uses error_alternate_class
  */
 function error_print_stack_trace() {
-	echo '<table class="width75">';
+	echo '<table class="width90">';
 	echo '<tr><th>Filename</th><th>Line</th><th></th><th></th><th>Function</th><th>Args</th></tr>';
 
 	$t_stack = debug_backtrace();
@@ -348,7 +371,7 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 			$t_results[] = '[' . error_build_parameter_string( $t_key, false, $p_depth ) . ']' . ' => ' . error_build_parameter_string( $t_value, false, $p_depth );
 		}
 
-		return '<Array> { ' . implode( $t_results, ', ' ) . ' }';
+		return '<array> { ' . implode( $t_results, ', ' ) . ' }';
 	}
 	else if( is_object( $p_param ) ) {
 		$t_results = array();
@@ -379,16 +402,17 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 function error_string( $p_error ) {
 	global $g_error_parameters;
 
+	$t_err_msg = lang_get( 'MANTIS_ERROR' );
+	if( array_key_exists( $p_error, $t_err_msg) ) {
+		$t_error = $t_err_msg[$p_error];
+	} else {
+		return lang_get( 'missing_error_string' ) . $p_error;
+	}
+
 	# We pad the parameter array to make sure that we don't get errors if
 	#  the caller didn't give enough parameters for the error string
 	$t_padding = array_pad( array(), 10, '' );
 
-	$t_error = lang_get( $p_error, null, false );
-
-	if( $t_error == '' ) {
-		return lang_get( 'missing_error_string' ) . $p_error;
-	}
-	
 	# ripped from string_api
 	$t_string = call_user_func_array( 'sprintf', array_merge( array( $t_error ), $g_error_parameters, $t_padding ) );
 	return preg_replace( "/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", @htmlspecialchars( $t_string, ENT_COMPAT, 'UTF-8' ) );
