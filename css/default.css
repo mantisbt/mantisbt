@@ -441,11 +441,11 @@ div.table-container {
 #bugnote_add_open,
 #history_open
 	{ width: 100%; margin: 3px; }
-#history_open table { border-spacing: 0; }
 
-#manage-user-div {
-	min-width: 57em;
-}
+#history_open table 	{ border-spacing: 0; }
+
+#bug-change-status-div	{ width: 75%; }
+#manage-user-div 		{ min-width: 57em; }
 
 div.section-container h2,
 div.form-container h2,
