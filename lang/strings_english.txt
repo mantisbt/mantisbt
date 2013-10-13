@@ -1540,6 +1540,7 @@ $s_label = '%1$s:';
 $s_install_information = 'MantisBT Installation Information';
 $s_database_information = 'MantisBT Database Information';
 $s_path_information = 'MantisBT Path Information';
+$s_mantisbt_database_statistics = 'MantisBT Database Statistics';
 
 # months
 $s_month_january = 'January';

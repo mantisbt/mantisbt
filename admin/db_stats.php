@@ -23,9 +23,24 @@
  * @link http://www.mantisbt.org
  */
 
-require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 
 access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
+
+html_page_top();
+
+/**
+ * Output HTML Table Row
+ *
+ * @param string $p_description Row Description
+ * @param string $p_value Row Value
+ */
+function print_info_row( $p_description, $p_value ) {
+	echo '<tr>';
+	echo '<th class="category">' . $p_description . '</th>';
+	echo '<td>' . $p_value . '</td>';
+	echo '</tr>';
+}
 
 /**
  * Function to get row count for a given table
@@ -35,27 +50,27 @@ access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
  */
 function helper_table_row_count( $p_table ) {
 	$t_table = $p_table;
-	$query = "SELECT COUNT(*) FROM $t_table";
-	$result = db_query_bound( $query );
-	$t_users = db_result( $result );
+	$t_query = "SELECT COUNT(*) FROM $t_table";
+	$t_result = db_query( $t_query );
+	$t_count = db_result( $t_result );
 
-	return $t_users;
+	return $t_count;
 }
-
-# --------------------
-function print_table_stats( $p_table_name ) {
-	$t_count = helper_table_row_count( $p_table_name );
-	echo "$p_table_name = $t_count records<br />";
-}
-
-echo '<html><head><title>MantisBT Database Statistics</title></head><body>';
-
-echo '<h1>MantisBT Database Statistics</h1>';
-
+?>
+<div class="table-container">
+<table cellspacing="1">
+<tr>
+<td class="form-title" width="30%" colspan="2"><?php echo lang_get( 'mantisbt_database_statistics' ) ?></td>
+</tr>
+<?php
 foreach( db_get_table_list() as $t_table ) {
 	if( db_table_exists( $t_table ) ) {
-		print_table_stats( $t_table );
+			print_info_row( $t_table, helper_table_row_count($t_table) . ' records' );
 	}
 }
+?>
+</table>
+</div>
+<?php
 
-echo '</body></html>';
+html_page_bottom();
