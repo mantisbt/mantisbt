@@ -15,6 +15,8 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Manage Email Configuration
+ *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -34,9 +36,6 @@
  * @uses string_api.php
  */
 
-/**
- * MantisBT Core API's
- */
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -58,10 +57,9 @@ auth_reauthenticate();
  * Similar to array_merge_recursive but keyed-valued are always overwritten.
  * Priority goes to the 2nd array.
  *
- * @static yes
  * @public yes
- * @param $paArray1 array
- * @param $paArray2 array
+ * @param $p_array1 array
+ * @param $p_array2 array
  * @return array
  */
 function array_merge_recursive2($p_Array1, $p_Array2) {
@@ -74,24 +72,36 @@ function array_merge_recursive2($p_Array1, $p_Array2) {
 	return $p_Array1;
 }
 
-# --------------------
-# get_notify_flag cloned from email_notify_flag
-# Get the value associated with the specific action and flag.
-# For example, you can get the value associated with notifying "admin"
-# on action "new", i.e. notify administrators on new bugs which can be
-# ON or OFF.
-function get_notify_flag( $action, $flag ) {
+/**
+ * get_notify_flag cloned from email_notify_flag
+ * Get the value associated with the specific action and flag.
+ * For example, you can get the value associated with notifying "admin"
+ * on action "new", i.e. notify administrators on new bugs which can be
+ * ON or OFF.
+ *
+ * @param string $p_action action
+ * @param string $p_flag flag
+ * @return string
+ */
+function get_notify_flag( $p_action, $p_flag ) {
 	global $t_notify_flags, $t_default_notify_flags;
 
-	$val = OFF;
-	if ( isset ( $t_notify_flags[$action][$flag] ) ) {
-		$val = $t_notify_flags[$action][$flag];
-	} else if ( isset ( $t_default_notify_flags[$flag] ) ) {
-		$val = $t_default_notify_flags[$flag];
+	$t_val = OFF;
+	if ( isset ( $t_notify_flags[$p_action][$p_flag] ) ) {
+		$t_val = $t_notify_flags[$p_action][$p_flag];
+	} else if ( isset ( $t_default_notify_flags[$p_flag] ) ) {
+		$t_val = $t_default_notify_flags[$p_flag];
 	}
-	return $val;
+	return $t_val;
 }
 
+/**
+ * Return CSS for flag
+ *
+ * @param string $p_action action
+ * @param string $p_flag flag
+ * @return string
+ */
 function colour_notify_flag ( $p_action, $p_flag ) {
 	global $t_notify_flags, $t_global_notify_flags, $t_file_notify_flags, $t_colour_project, $t_colour_global;
 
@@ -113,7 +123,13 @@ function colour_notify_flag ( $p_action, $p_flag ) {
 	return $t_colour;
 }
 
-# Get the value associated with the specific action and flag.
+/**
+ * Get the value associated with the specific action and flag.
+ *
+ * @param string $p_action action
+ * @param string $p_flag flag
+ * @return string
+ */
 function show_notify_flag( $p_action, $p_flag ) {
 	global $t_can_change_flags , $t_can_change_defaults;
 	$t_flag = get_notify_flag( $p_action, $p_flag );
@@ -126,6 +142,13 @@ function show_notify_flag( $p_action, $p_flag ) {
 	}
 }
 
+/**
+ * Get CSS for threshold flags
+ *
+ * @param string $p_access access
+ * @param string $p_action action
+ * @return string
+ */
 function colour_threshold_flag ( $p_access, $p_action ) {
 	global $t_notify_flags, $t_global_notify_flags, $t_file_notify_flags, $t_colour_project, $t_colour_global;
 
@@ -146,6 +169,13 @@ function colour_threshold_flag ( $p_access, $p_action ) {
 	return $t_colour;
 }
 
+/**
+ * HTML for Show notify threshold
+ *
+ * @param string $p_access access
+ * @param string $p_action action
+ * @return string
+ */
 function show_notify_threshold( $p_access, $p_action ) {
 	global $t_can_change_flags , $t_can_change_defaults;
 	$t_flag = ( $p_access >= get_notify_flag( $p_action, 'threshold_min' ) )
@@ -159,6 +189,11 @@ function show_notify_threshold( $p_access, $p_action ) {
 	}
 }
 
+/**
+ * HTML for email section
+ *
+ * @param string $p_section_name section name
+ */
 function get_section_begin_for_email( $p_section_name ) {
 	global $t_project;
 	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
@@ -179,6 +214,12 @@ function get_section_begin_for_email( $p_section_name ) {
 	echo '</tr>' . "\n";
 }
 
+/**
+ * HTML for Row
+ *
+ * @param string $p_caption caption
+ * @param string $p_message_type message type
+ */
 function get_capability_row_for_email( $p_caption, $p_message_type ) {
 	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 
@@ -195,6 +236,10 @@ function get_capability_row_for_email( $p_caption, $p_message_type ) {
 	echo '</tr>' . "\n";
 }
 
+/**
+ * HTML for email section end
+ *
+ */
 function get_section_end_for_email() {
 	echo '</table></div><br />' . "\n";
 }

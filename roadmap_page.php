@@ -94,7 +94,10 @@ function print_version_header( $p_version_row ) {
 	echo utf8_str_pad( '', utf8_strlen( $t_release_title_without_hyperlinks ), '=' ), '<br />';
 }
 
-# print project header
+/**
+ * print project header
+ * @param string $p_project_name project name
+ */
 function print_project_header_roadmap( $p_project_name ) {
 	echo '<br /><span class="pagetitle">', string_display( $p_project_name ), ' - ', lang_get( 'roadmap' ), '</span><br />';
 }

@@ -14,18 +14,23 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-# Each entry below defines the schema. The upgrade array consists of
-#  two elements
-# The first is the function to generate SQL statements (see adodb schema doc for more details)
-#  e.g., CreateTableSQL, DropTableSQL, ChangeTableSQL, RenameTableSQL, RenameColumnSQL,
-#  DropTableSQL, ChangeTableSQL, RenameTableSQL, RenameColumnSQL, AlterColumnSQL, DropColumnSQL
-#  A local function "InsertData" has been provided to add data to the db
-# The second parameter is an array of the parameters to be passed to the function.
-
-# An update identifier is inferred from the ordering of this table. ONLY ADD NEW CHANGES TO THE
-#  END OF THE TABLE!!!
+/**
+ * Each entry below defines the schema. The upgrade array consists of two elements
+ * The first is the function to generate SQL statements e.g., CreateTableSQL, DropTableSQL, 
+ * ChangeTableSQL, RenameTableSQL, RenameColumnSQL, DropTableSQL, ChangeTableSQL, RenameTableSQL, 
+ * RenameColumnSQL, AlterColumnSQL, DropColumnSQL
+ *
+ * A local function "InsertData" has been provided to add data to the db
+ * The second parameter is an array of the parameters to be passed to the function.
+ * 
+ * An update identifier is inferred from the ordering of this table. ONLY ADD NEW CHANGES TO THE
+ * END OF THE TABLE!!!
+ */
 
 if ( !function_exists( 'db_null_date' ) ) {
+	/**
+	 * Legacy null date function for installer backwards compatibility
+	 */
 	function db_null_date() {
 		return 0;
 	}

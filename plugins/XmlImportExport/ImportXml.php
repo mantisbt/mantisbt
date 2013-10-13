@@ -18,6 +18,10 @@
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  */
 
+/**
+ * Import XML Plugin
+ */
+
 require_once( 'ImportXml' . DIRECTORY_SEPARATOR . 'Mapper.php' );
 require_once( 'ImportXml' . DIRECTORY_SEPARATOR . 'Issue.php' );
 

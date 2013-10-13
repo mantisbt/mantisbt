@@ -48,6 +48,9 @@ class Mantis_HelperTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( $out, helper_array_transpose( $in ) );
 	}
 
+	/**
+	 * Returns test array
+	 */
 	public function providerArrayTranspose()
 	{
 		return array(

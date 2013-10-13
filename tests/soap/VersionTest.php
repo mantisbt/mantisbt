@@ -15,6 +15,8 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Mantis Webservice Tests
+ *
  * @package Tests
  * @subpackage UnitTests
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -30,8 +32,10 @@ class VersionTest extends SoapBase {
 
 	const DATE_ORDER = '2015-10-29T12:59:14+00:00';
 
+	/**
+	 * Test Version
+	 */
 	private function getTestVersion() {
-
 		return array (
 			'project_id' => $this->getProjectId(),
 			'name' => '1.0',
@@ -117,6 +121,9 @@ class VersionTest extends SoapBase {
 		self::fail('Did not find version with id ' . $versionId . ' in the reply');
 	}
 
+	/**
+	 * Return Number of versions
+	 */
 	private function countVersions() {
 
 		return count ( $this->client->mc_project_get_versions( $this->userName, $this->password, $this->getProjectId() ) );

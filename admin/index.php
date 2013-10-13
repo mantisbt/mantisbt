@@ -15,14 +15,14 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Mantis Administration Section
+ *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
-/**
- * MantisBT Core API's
- */
+
 require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 require_once( 'schema.php' );
 
@@ -30,6 +30,12 @@ access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 
 html_page_top( 'MantisBT Administration' );
 
+/**
+ * Print Check result - information only
+ *
+ * @param string $p_description description
+ * @param string $p_value information
+ */
 function print_info_row( $p_description, $p_value ) {
 	echo '<tr>';
 	echo '<th class="category">' . $p_description . '</th>';

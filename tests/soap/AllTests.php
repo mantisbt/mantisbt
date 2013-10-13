@@ -15,6 +15,8 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Mantis Webservice Tests
+ *
  * @package Tests
  * @subpackage UnitTests
  * @copyright Copyright 2002  MantisBT Team   - mantisbt-dev@lists.sourceforge.net

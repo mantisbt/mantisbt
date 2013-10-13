@@ -40,6 +40,9 @@ require_once 'StringTest.php';
  */
 class Mantis_AllTests extends PHPUnit_Framework_TestSuite
 {
+	/**
+	 * Defines test suite
+	 */
 	public static function suite()
 	{
 		$suite = new Mantis_AllTests('Main Code');

@@ -15,6 +15,8 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Workflow Configuration Page
+ *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -35,9 +37,6 @@
  * @uses workflow_api.php
  */
 
-/**
- * MantisBT Core API's
- */
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -65,6 +64,10 @@ $t_can_change_workflow = $t_access >= config_get_access( 'status_enum_workflow' 
 $t_can_change_flags = $t_can_change_workflow;
 $t_overrides = array();
 
+/**
+ * Set overrides
+ * @param string $p_config config value
+ */
 function set_overrides( $p_config ) {
 	global $t_overrides;
 	if( !in_array( $p_config, $t_overrides ) ) {
@@ -95,7 +98,12 @@ function set_colour_override( $p_level_file, $p_level_global, $p_level_project )
 }
 
 
-# Get the value associated with the specific action and flag.
+/**
+ * Get the value associated with the specific action and flag.
+ * @param int $p_from_status_id from status id
+ * @param int $p_to_status_id to status id
+ * @return string
+ */
 function show_flag( $p_from_status_id, $p_to_status_id ) {
 	global $t_can_change_workflow, $t_overrides,
 		$t_file_workflow, $t_global_workflow, $t_project_workflow,
@@ -134,6 +142,10 @@ function show_flag( $p_from_status_id, $p_to_status_id ) {
 	return $t_value;
 }
 
+/**
+ * section header
+ * @param string $p_section_name section name
+ */
 function section_begin( $p_section_name ) {
 	$t_enum_statuses = MantisEnum::getValues( config_get( 'status_enum_string' ) );
 	echo '<div class="form-container">'. "\n";
@@ -160,6 +172,10 @@ function section_begin( $p_section_name ) {
 	echo "\t\t<tbody>\n";
 }
 
+/**
+ * Print row
+ * @param int $p_from_status from status
+ */
 function capability_row( $p_from_status ) {
 	global $t_file_workflow, $t_global_workflow, $t_project_workflow, $t_can_change_workflow;
 	$t_enum_status = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
@@ -188,10 +204,17 @@ function capability_row( $p_from_status ) {
 	echo "\t\t" . '</tr>' . "\n";
 }
 
+/**
+ * section footer
+ */
 function section_end() {
 	echo '</tbody></table></div><br />' . "\n";
 }
 
+/**
+ * threshold section begin
+ * @param string $p_section_name section name
+ */
 function threshold_begin( $p_section_name ) {
 	echo '<div class="form-container">';
 	echo '<table>';
@@ -206,6 +229,10 @@ function threshold_begin( $p_section_name ) {
 	echo '<tbody>';
 }
 
+/**
+ * threshold section row
+ * @param string $p_threshold threshold
+ */
 function threshold_row( $p_threshold ) {
 	global $t_access, $t_can_change_flags;
 
@@ -236,10 +263,17 @@ function threshold_row( $p_threshold ) {
 	echo '</tr>' . "\n";
 }
 
+/**
+ * threshold section end
+ */
 function threshold_end() {
 	echo '</tbody></table></div><br />' . "\n";
 }
 
+/**
+ * access begin
+ * @param string $p_section_name section name
+ */
 function access_begin( $p_section_name ) {
 	echo '<div class="form-container">';
 	echo '<table>';
@@ -250,6 +284,9 @@ function access_begin( $p_section_name ) {
 	echo '<tbody>';
 }
 
+/**
+ * access row
+ */
 function access_row() {
 	global $t_access, $t_can_change_flags;
 

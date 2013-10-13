@@ -15,6 +15,8 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Mantis Tests
+ *
  * @package Tests
  * @subpackage UnitTests
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org

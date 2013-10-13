@@ -15,6 +15,7 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Web Service Checks
  * @package MantisBT
  * @copyright Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -29,9 +30,6 @@ if ( !defined( 'CHECK_WEBSERVICE_INC_ALLOW' ) ) {
 	return;
 }
 
-/**
- * MantisBT Check API
- */
 require_once( 'check_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );

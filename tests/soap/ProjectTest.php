@@ -15,6 +15,8 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Mantis Webservice Tests
+ *
  * @package Tests
  * @subpackage UnitTests
  * @copyright Copyright (C) 2010-2013 MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -27,138 +29,124 @@ require_once 'SoapBase.php';
  * Test fixture for project webservice methods.
  */
 class ProjectTest extends SoapBase {
+	/**
+	 * Array of project ID's to delete
+	 */
+	private $projectIdToDelete = array();
 
-       private $projectIdToDelete = array();
+	/**
+	 * A test case that tests the following:
+	 * 1. Create a project.
+	 * 2. Rename the project.
+	 */        
+	public function testAddRenameDeleteProject() {
+		$projectName = $this->getOriginalNameProject();
+		$projectNewName = $this->getNewNameProject();
 
-       /**
-        * A test case that tests the following:
-        * 1. Create a project.
-        * 2. Rename the project.
-        */        
-       public function testAddRenameDeleteProject() {
-               $projectName = $this->getOriginalNameProject();
-               $projectNewName = $this->getNewNameProject();
+		$projectDataStructure = $this->newProjectAsArray($projectName);
 
-               $projectDataStructure = $this->newProjectAsArray($projectName);
+		$projectId = $this->client->mc_project_add( $this->userName, $this->password, $projectDataStructure);
 
-               $projectId = $this->client->mc_project_add(
-                       $this->userName,
-                       $this->password,
-                       $projectDataStructure);
+		$this->projectIdToDelete[] = $projectId;
 
-               $this->projectIdToDelete[] = $projectId;
+		$projectsArray = $this->client->mc_projects_get_user_accessible( $this->userName, $this->password);
 
-               $projectsArray = $this->client->mc_projects_get_user_accessible(
-                       $this->userName,
-                       $this->password);
+		foreach( $projectsArray as $project ) {
+			if( $project->id == $projectId ) {
+				$this->assertEquals($projectName, $project->name);
+			}
+		}
 
-               foreach ( $projectsArray as $project ) {
-                       if ( $project->id == $projectId ) {
-                               $this->assertEquals($projectName, $project->name);
-                       }
-               }
+		$projectDataStructure['name'] = $projectNewName;
 
-               $projectDataStructure['name'] = $projectNewName;
+		$return_bool = $this->client->mc_project_update( $this->userName, $this->password, $projectId, 
+														$projectDataStructure);
 
-               $return_bool = $this->client->mc_project_update(
-                       $this->userName,
-                       $this->password,
-                       $projectId,
-                       $projectDataStructure);
+		$projectsArray = $this->client->mc_projects_get_user_accessible( $this->userName, $this->password);
 
-               $projectsArray = $this->client->mc_projects_get_user_accessible(
-                       $this->userName,
-                       $this->password);
+		foreach( $projectsArray as $project ) {
+			if( $project->id == $projectId ) {
+				$this->assertEquals($projectNewName, $project->name);
+			}
+		}
+	}
 
-               foreach ( $projectsArray as $project ) {
-                       if ( $project->id == $projectId ) {
-                               $this->assertEquals($projectNewName, $project->name);
-                       }
-               }
-       }
-        
-       /**
-        * A test case which does the following
-        * 
-        * 1. Create a project
-        * 2. Retrieve the project id by name
-        * 
-        */
-       public function testGetIdFromName() {
+	/**
+	* A test case which does the following
+	* 
+	* 1. Create a project
+	* 2. Retrieve the project id by name
+	* 
+	*/
+	public function testGetIdFromName() {
+		$projectName = 'TestProjectForIdFromName';
 
-               $projectName = 'TestProjectForIdFromName';
-        
-               $projectDataStructure = $this->newProjectAsArray($projectName);
+		$projectDataStructure = $this->newProjectAsArray($projectName);
 
-               $projectId = $this->client->mc_project_add(
-                       $this->userName,
-                       $this->password,
-                       $projectDataStructure);
+		$projectId = $this->client->mc_project_add( $this->userName, $this->password, $projectDataStructure);
 
-               $this->projectIdToDelete[] = $projectId;
-               
-               $projectIdFromName = $this->client->mc_project_get_id_from_name(
-                       $this->userName,
-                       $this->password,
-                       $projectName);
+		$this->projectIdToDelete[] = $projectId;
 
-                $this->assertEquals($projectIdFromName, $projectId);
-       }
+		$projectIdFromName = $this->client->mc_project_get_id_from_name( $this->userName, $this->password, 
+																		$projectName);
 
-       /**
-        * A test case which does the following
-        *
-        * 1. Create a project
-        * 2. Retrieve the subproject ids. Must returns empty array.
-        *
-        */
-       public function testGetSubprojects() {
-               $projectName = $this->getOriginalNameProject();
-               $projectDataStructure = $this->newProjectAsArray($projectName);
+		$this->assertEquals($projectIdFromName, $projectId);
+	}
 
-               $projectId = $this->client->mc_project_add(
-                       $this->userName,
-                       $this->password,
-                       $projectDataStructure);
+	/**
+	* A test case which does the following
+	*
+	* 1. Create a project
+	* 2. Retrieve the subproject ids. Must returns empty array.
+	*
+	*/
+	public function testGetSubprojects() {
+		$projectName = $this->getOriginalNameProject();
+		$projectDataStructure = $this->newProjectAsArray($projectName);
 
-               $this->projectIdToDelete[] = $projectId;
+		$projectId = $this->client->mc_project_add( $this->userName, $this->password, $projectDataStructure);
 
-               $projectsArray = $this->client->mc_project_get_all_subprojects(
-                       $this->userName,
-                       $this->password,
-                       $projectId);
+		$this->projectIdToDelete[] = $projectId;
 
-                $this->assertEquals(0, count($projectsArray));
-       }
+		$projectsArray = $this->client->mc_project_get_all_subprojects( $this->userName, $this->password, $projectId);
 
-       private function newProjectAsArray($projectName) {
-       	
-       	       $projectDataStructure = array();
-               $projectDataStructure['name'] = $projectName;
-               $projectDataStructure['status'] = "development";
-               $projectDataStructure['view_state'] = 10;
+		$this->assertEquals(0, count($projectsArray));
+	}
 
-               return $projectDataStructure;
-       }
+	/**
+	 * New project Array
+	 */
+	private function newProjectAsArray($projectName) {
+		$projectDataStructure = array();
+		$projectDataStructure['name'] = $projectName;
+		$projectDataStructure['status'] = "development";
+		$projectDataStructure['view_state'] = 10;
 
-       protected function tearDown() {
+		return $projectDataStructure;
+	}
 
-               parent::tearDown();
+	/**
+	 * Tear Down
+	 */
+	protected function tearDown() {
+		parent::tearDown();
 
-               foreach ( $this->projectIdToDelete as $projectId )  {
-                       $this->client->mc_project_delete(
-                               $this->userName,
-                               $this->password,
-                               $projectId);
-               }
-       }
+		foreach( $this->projectIdToDelete as $projectId )  {
+			$this->client->mc_project_delete( $this->userName, $this->password, $projectId);
+		}
+	}
 
-       private function getOriginalNameProject() {
-               return 'my_project_name';
-       }
+	/**
+	 * Return old project name
+	 */
+	private function getOriginalNameProject() {
+		return 'my_project_name';
+	}
 
-       private function getNewNameProject() {
-               return 'my_new_project_name';
-       }
-
+	/**
+	 * Return new project name
+	 */
+	private function getNewNameProject() {
+		return 'my_new_project_name';
+	}
 }

@@ -31,7 +31,9 @@ require_once 'soap/AllTests.php';
 
 class AllTests
 {
-
+	/**
+	 * Defines test suite
+	 */
     public static function suite()
     {
         $suite = new PHPUnit_Framework_TestSuite('Mantis Bug Tracker');

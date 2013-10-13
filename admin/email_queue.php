@@ -23,9 +23,7 @@
  * @copyright Copyright 2002  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
-/**
- * Mantis Core API's
- */
+
 require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
 
 access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );

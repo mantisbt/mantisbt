@@ -15,6 +15,11 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Mantis Configuration Checks
+ *
+ * This process runs a number of configuration checks against the mantis configuration to find 
+ * common issues.
+ *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net

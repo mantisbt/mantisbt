@@ -15,6 +15,8 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Mantis Webservice Tests
+ *
  * @package Tests
  * @subpackage UnitTests
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
@@ -34,22 +36,63 @@ require_once ( $t_root_path . DIRECTORY_SEPARATOR . 'core/constant_inc.php' );
  * Test cases for SoapEnum class.
  */
 class SoapBase extends PHPUnit_Framework_TestCase {
+	/**
+	 * Soap Client
+	 */
 	protected $client;
+
+	/**
+	 * Username
+	 */
 	protected $userName = 'administrator';
+
+	/**
+	 * Password
+	 */
 	protected $password = 'root';
+
+	/**
+	 * Email address
+	 */
 	protected $email = 'root@localhost';
+
+	/**
+	 * User ID
+	 */
 	protected $userId = '1';
 
+	/**
+	 * MantisBT Path
+	 */
 	protected $mantisPath;
+
+	/**
+	 * Array of Issue IDs to delete
+	 */
 	private   $issueIdsToDelete = array();
+	
+	/**
+	 * Array of Version IDs to delete
+	 */
 	private   $versionIdsToDelete = array();
+
+	/**
+	 * Array of Tag IDs to delete
+	 */
 	private   $tagIdsToDelete = array();
+
+	/**
+	 * Soal Client Options Array
+	 */
 	private   $defaultSoapClientOptions = array(  'trace'      => true,
 								                  'exceptions' => true,
 								        		  'cache_wsdl' => WSDL_CACHE_NONE,
 								        		  'trace'      => true
 								               );
 
+	/**
+	 * setUp
+	 */
     protected function setUp()
     {
     	if (!isset($GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED']) ||
@@ -75,6 +118,9 @@ class SoapBase extends PHPUnit_Framework_TestCase {
     	return array();
     }
 
+	/**
+	 * tearDown
+	 */
     protected function tearDown() {
 
     	foreach ( $this->versionIdsToDelete as $versionIdToDelete ) {
@@ -93,14 +139,23 @@ class SoapBase extends PHPUnit_Framework_TestCase {
     	}
     }
 
+	/**
+	 * return default project id
+	 */
     protected function getProjectId() {
     	return 1;
     }
 
+	/**
+	 * return default category
+	 */
     protected function getCategory() {
  		return 'General';
     }
 
+	/**
+	 * Skip if time tracking is not enabled
+	 */
     protected function skipIfTimeTrackingIsNotEnabled() {
 
     	$timeTrackingEnabled = $this->client->mc_config_get_string($this->userName, $this->password, 'time_tracking_enabled');
@@ -109,6 +164,9 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 		}
     }
 
+	/**
+	 * getIssueToAdd
+	 */
 	protected function getIssueToAdd( $testCase ) {
 		return array(
 				'summary' => $testCase . ': test issue: ' . rand(1, 1000000),
@@ -150,6 +208,9 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 		$this->tagIdsToDelete[] = $tagId;
 	}
 
+	/**
+	 * Skip if due date thesholds are too high
+	 */
 	protected function skipIfDueDateIsNotEnabled() {
 
 		if ( $this->client->mc_config_get_string( $this->userName, $this->password, 'due_date_view_threshold' ) > 90  ||
@@ -158,12 +219,18 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 			 }
 	}
 
+	/**
+	 * Skip if no category is not on
+	 */
 	protected function skipIfAllowNoCategoryIsDisabled() {
 		if ( $this->client->mc_config_get_string($this->userName, $this->password, 'allow_no_category' ) != true ) {
 			$this->markTestSkipped( 'g_allow_no_category is not ON.' );
 		}
 	}
 
+	/**
+	 * Skip if zlib extension not found
+	 */
 	protected function skipIsZlibIsNotAvailable() {
 		if( !extension_loaded( 'zlib' ) ) {
 			$this->markTestSkipped('zlib extension not found.');

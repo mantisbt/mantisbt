@@ -15,6 +15,8 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Workflow Threshold Configuration
+ *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -33,9 +35,6 @@
  * @uses print_api.php
  */
 
-/**
- * MantisBT Core API's
- */
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -59,6 +58,11 @@ html_page_top( lang_get( 'manage_threshold_config' ), $t_redirect_url );
 
 $t_access = current_user_get_access_level();
 
+/**
+ * set row
+ * @param string $p_threshold threshold
+ * @param bool $p_all_projects_only all projects only
+ */
 function set_capability_row( $p_threshold, $p_all_projects_only=false ) {
 	global $t_access, $t_project;
 
@@ -103,6 +107,11 @@ function set_capability_row( $p_threshold, $p_all_projects_only=false ) {
 	}
 }
 
+/**
+ * Get capability boolean
+ * @param string $p_threshold threshold
+ * @param bool $p_all_projects_only all projects only
+ */
 function set_capability_boolean( $p_threshold, $p_all_projects_only=false ) {
 	global $t_access, $t_project;
 
@@ -119,6 +128,11 @@ function set_capability_boolean( $p_threshold, $p_all_projects_only=false ) {
 	}
 }
 
+/**
+ * Set capability enum
+ * @param string $p_threshold threshold
+ * @param bool $p_all_projects_only all projects only
+ */
 function set_capability_enum( $p_threshold, $p_all_projects_only=false ) {
 	global $t_access, $t_project;
 
@@ -133,7 +147,6 @@ function set_capability_enum( $p_threshold, $p_all_projects_only=false ) {
 		}
 	}
 }
-
 
 # Issues
 set_capability_row( 'report_bug_threshold' );

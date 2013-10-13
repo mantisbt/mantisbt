@@ -6,6 +6,9 @@
 # change the license of future releases.
 # See docs/ folder for more details
 
+/**
+ * Get username, realname and email from for a given user id
+ */
 function mci_account_get_array_by_id( $p_user_id ) {
 	$t_result = array();
 	$t_result['id'] = $p_user_id;
@@ -27,6 +30,9 @@ function mci_account_get_array_by_id( $p_user_id ) {
 	return $t_result;
 }
 
+/**
+ * Get username, realname and email from for a set of given user ids
+ */
 function mci_account_get_array_by_ids ( $p_user_ids ) {
     
     $t_result = array();

@@ -73,7 +73,6 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
-
 #============ Permissions ============
 auth_ensure_user_authenticated();
 
@@ -82,6 +81,7 @@ current_user_ensure_unprotected();
 # extracts the user information for the currently logged in user
 # and prefixes it with u_
 $row = user_get_row( auth_get_current_user_id() );
+
 extract( $row, EXTR_PREFIX_ALL, 'u' );
 
 $t_ldap = ( LDAP == config_get( 'login_method' ) );

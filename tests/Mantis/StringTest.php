@@ -49,6 +49,9 @@ class Mantis_StringTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( $out, $a );
 	}
 
+	/**
+	 * Returns test Strings
+	 */
 	public function provider()
 	{
 		$testStrings = array(

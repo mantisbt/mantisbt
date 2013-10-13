@@ -14,22 +14,22 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-	/**
+/**
  * Summary Cumulative Graph by date
-	 * @package MantisBT
-	 * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
-	 * @link http://www.mantisbt.org
-	 */
+ * @package MantisBT
+ * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ */
 
-	require_once( 'core.php' );
+require_once( 'core.php' );
 
-	require_once( 'graph_api.php' );
+require_once( 'graph_api.php' );
 
-	access_ensure_project_level( config_get( 'view_summary_threshold' ) );
+access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
-	$f_width = gpc_get_int( 'width', 300 );
-	$t_ar = plugin_config_get( 'bar_aspect' );
+$f_width = gpc_get_int( 'width', 300 );
+$t_ar = plugin_config_get( 'bar_aspect' );
 
-	$t_metrics = create_cumulative_bydate();
-	graph_cumulative_bydate( $t_metrics, $f_width, $f_width * $t_ar );
+$t_metrics = create_cumulative_bydate();
+graph_cumulative_bydate( $t_metrics, $f_width, $f_width * $t_ar );

@@ -14,33 +14,33 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-	/**
-	 * This page displays "improved" charts on priorities : bars, 3Dpie and a mix priorities per status
-	 *
-	 * @package MantisBT
-	 * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
-	 * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
-	 * @link http://www.mantisbt.org
-	 */
+/**
+ * This page displays "improved" charts on priorities : bars, 3Dpie and a mix priorities per status
+ *
+ * @package MantisBT
+ * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ */
 
-	require_once( 'core.php' );
+require_once( 'core.php' );
 
-	require_once( 'graph_api.php' );
+require_once( 'graph_api.php' );
 
-	access_ensure_project_level( config_get( 'view_summary_threshold' ) );
+access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
-	html_page_top();
+html_page_top();
 
-	print_summary_menu( 'summary_page.php' );
-	echo '<br />';
+print_summary_menu( 'summary_page.php' );
+echo '<br />';
 
-	print_summary_submenu();
-	$t_width = plugin_config_get( 'window_width' );
-	$t_graph_width = (int) ( ( $t_width - 50 ) * 0.6 );
+print_summary_submenu();
+$t_width = plugin_config_get( 'window_width' );
+$t_graph_width = (int) ( ( $t_width - 50 ) * 0.6 );
 
-	# gather the data for the graphs
-	$t_metrics = enum_bug_group( lang_get( 'priority_enum_string' ), 'priority');
-	$t_token = token_set( TOKEN_GRAPH, serialize( $t_metrics ) );
+# gather the data for the graphs
+$t_metrics = enum_bug_group( lang_get( 'priority_enum_string' ), 'priority');
+$t_token = token_set( TOKEN_GRAPH, serialize( $t_metrics ) );
 
  ?>
 

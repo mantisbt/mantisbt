@@ -15,6 +15,8 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Mantis Database installation process
+ *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -22,8 +24,6 @@
  */
 
 error_reporting( E_ALL );
-
-/** @todo put this somewhere */
 @set_time_limit( 0 );
 
 # Load the MantisDB core in maintenance mode. This mode will assume that
@@ -39,8 +39,13 @@ $g_error_send_page_header = false; # bypass page headers in error handler
 $g_failed = false;
 $g_database_upgrade = false;
 
-# -------
-# print test result
+/**
+ * Print Test result
+ *
+ * @param int $p_result Result - BAD|GOOD
+ * @param bool $p_hard_fail Fail installation or soft warning
+ * @param string $p_message Message to display to user
+ */
 function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
 	global $g_failed;
 	echo '<td ';
@@ -62,8 +67,14 @@ function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
 	echo '</td>';
 }
 
-# -------
-# print test header and result
+/**
+ * Print Test result
+ *
+ * @param string $p_test_description Test Description
+ * @param int $p_result Result - BAD|GOOD
+ * @param bool $p_hard_fail Fail installation or soft warning
+ * @param string $p_message Message to display to user
+ */
 function print_test( $p_test_description, $p_result, $p_hard_fail = true, $p_message = '' ) {
 
 	echo "\n<tr><td bgcolor=\"#ffffff\">$p_test_description</td>";
@@ -71,8 +82,13 @@ function print_test( $p_test_description, $p_result, $p_hard_fail = true, $p_mes
 	echo "</tr>\n";
 }
 
-# --------
-# create an SQLArray to insert data
+/**
+ * create an SQLArray to insert data
+ *
+ * @param string $p_table table
+ * @param string $p_data data
+ * @return array
+ */
 function InsertData( $p_table, $p_data ) {
 	$query = "INSERT INTO " . $p_table . $p_data;
 	return array( $query );

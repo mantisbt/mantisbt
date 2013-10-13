@@ -15,6 +15,8 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Manage configuration for workflow Config
+ *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -35,9 +37,6 @@
  * @uses user_api.php
  */
 
-/**
- * MantisBT Core API's
- */
 require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -67,6 +66,11 @@ $t_show_submit = false;
 $t_access_levels = MantisEnum::getAssocArrayIndexedByValues( config_get( 'access_levels_enum_string' ) );
 
 $t_overrides = array();
+
+/**
+ * Set overrides
+ * @param string $p_config config value
+ */
 function set_overrides( $p_config ) {
 	global $t_overrides;
 	if ( !in_array( $p_config, $t_overrides ) ) {
@@ -74,6 +78,10 @@ function set_overrides( $p_config ) {
 	}
 }
 
+/**
+ * Section header
+ * @param string $p_section_name section name
+ */
 function get_section_begin_mcwt( $p_section_name ) {
 	global $t_access_levels;
 
@@ -159,6 +167,12 @@ function print_who_can_change( $p_threshold, $p_can_change ) {
 	echo "</td>\n";
 }
 
+/**
+ * Get row
+ * @param string $p_caption caption
+ * @param string $p_threshold threshold
+ * @param bool $p_all_projects_only all projects only
+ */
 function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only=false ) {
 	global $t_user, $t_project_id, $t_show_submit, $t_access_levels;
 
@@ -231,6 +245,12 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only=fals
 	echo "</tr>\n";
 }
 
+/**
+ * Get boolean row
+ * @param string $p_caption caption
+ * @param string $p_threshold threshold
+ * @param bool $p_all_projects_only all projects only
+ */
 function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only=false ) {
 	global $t_user, $t_project_id, $t_show_submit, $t_access_levels;
 
@@ -264,6 +284,13 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only=
 	echo "</tr>\n";
 }
 
+/**
+ * Get enum row
+ * @param string $p_caption caption
+ * @param string $p_threshold threshold
+ * @param string $p_enum enum
+ * @param bool $p_all_projects_only all projects only
+ */
 function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects_only=false ) {
 	global $t_user, $t_project_id, $t_show_submit, $t_access_levels;
 

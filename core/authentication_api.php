@@ -472,9 +472,7 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 
 /**
  * Generate a random 16 character password.
- * @todo Review use of $p_email within mantis
  * @todo create memorable passwords?
- * @param string $p_email unused
  * @return string 16 character random password
  * @access public
  */
@@ -593,7 +591,7 @@ function auth_is_cookie_string_unique( $p_cookie_string ) {
  * if no user is logged in and anonymous login is enabled, returns cookie for anonymous user
  * otherwise returns '' (an empty string)
  *
- * @param boolean auto-login anonymous user
+ * @param boolean $p_login_anonymous auto-login anonymous user
  * @return string current user login cookie string
  * @access public
  */
@@ -638,7 +636,7 @@ function auth_get_current_user_cookie( $p_login_anonymous=true ) {
 
 /**
  * Set authentication tokens for secure session.
- * @param integer User ID
+ * @param integer $p_user_id User ID
  * @access public
  */
 function auth_set_tokens( $p_user_id ) {
@@ -685,8 +683,8 @@ function auth_reauthenticate() {
 
 /**
  * Generate the intermediate authentication page.
- * @param integer User ID
- * @param string Username
+ * @param integer $p_user_id User ID
+ * @param string $p_username Username
  * @return bool
  * @access public
  */
@@ -852,6 +850,7 @@ function auth_http_prompt() {
 }
 
 /**
+ * Update Cookies to reflect pending logout
  *
  * @param bool $p_pending
  * @access public
@@ -868,6 +867,7 @@ function auth_http_set_logout_pending( $p_pending ) {
 }
 
 /**
+ * Check cookie values to see if Logout is pending
  *
  * @return bool
  * @access public

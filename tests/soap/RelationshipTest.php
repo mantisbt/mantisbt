@@ -15,6 +15,8 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Mantis Webservice Tests
+ *
  * @package Tests
  * @subpackage UnitTests
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -32,7 +34,6 @@ class RelationshipTest extends SoapBase {
 	 * Creates two issues and adds a relationship between them
 	 */
 	public function testCreateIssuesAndAddRelation() {
-		
 	    $firstIssue = $this->getIssueToAdd( 'RelationshipTest.testCreateIssueAndAddRelation1' );
 
 		$firstIssueId = $this->client->mc_issue_add( $this->userName, $this->password, $firstIssue);
@@ -73,7 +74,6 @@ class RelationshipTest extends SoapBase {
 	 * Creates two issues, adds and then deletes a relationship between them
 	 */
 	public function testDeleteRelation() {
-		
 	    $firstIssue = $this->getIssueToAdd( 'RelationshipTest.testCreateIssueAndAddRelation1' );
 
 		$firstIssueId = $this->client->mc_issue_add( $this->userName, $this->password, $firstIssue);

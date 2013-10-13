@@ -14,23 +14,20 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-	/**
-	 * @package MantisBT
-	 * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
-	 * @link http://www.mantisbt.org
-	 */
-	 /**
-	  * MantisBT Unit Test
-	  */
-	 /**
-	  * test config_get and config_set
-	  *
-	  * run from command line using: php -q test_config_get_set.php
-	  *  inspect results manually
-	  * Notes:
-	  *  data set from the test may need to be removed from the database manually
-	  */
-require_once( 'test.php' );
+/**
+ * MantisBT Unit Test
+ * test config_get and config_set
+ *
+ * run from command line using: php -q test_config_get_set.php
+ *  inspect results manually
+ * Notes:
+ *  data set from the test may need to be removed from the database manually
+ * @package MantisBT
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ */
+
+ require_once( 'test.php' );
 
 $t_config = 'main_menu_custom_options';
 $t_test = config_get( $t_config );

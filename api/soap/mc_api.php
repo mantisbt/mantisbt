@@ -17,10 +17,16 @@ set_error_handler( 'mc_error_handler' );
  * targets the php soap extension.
  */
 class SoapObjectsFactory {
+	/**
+	 * 
+	 */
 	static function newSoapFault( $p_fault_code, $p_fault_string) {
 		return new SoapFault( $p_fault_code, $p_fault_string );
 	}
 
+	/**
+	 * 
+	 */
 	static function unwrapObject( $p_object ) {
 		if ( is_object( $p_object ) ) {
 			return get_object_vars( $p_object );
@@ -29,12 +35,18 @@ class SoapObjectsFactory {
 		return $p_object;
 	}
 	
+	/**
+	 * 
+	 */
 	static function newDateTimeVar( $p_value ) {
 		$string_value = self::newDateTimeString( $p_value );
 		
 		return new SoapVar( $string_value, XSD_DATETIME, 'xsd:dateTime');
 	}
 	
+	/**
+	 * 
+	 */
 	static function newDateTimeString ( $p_timestamp ) {
 		if ( $p_timestamp == null || date_is_null( $p_timestamp ) ) {
 			return null;
@@ -43,14 +55,23 @@ class SoapObjectsFactory {
 		return date('c', (int) $p_timestamp);
 	}
 	
+	/**
+	 * 
+	 */
 	static function parseDateTimeString ( $p_string ) {
 		return strtotime( $p_string );
 	}
 	
+	/**
+	 * 
+	 */
 	static function encodeBinary ( $p_binary ) {
 		return $p_binary;
 	}
 	
+	/**
+	 * 
+	 */
 	static function isSoapFault ( $p_maybe_fault ) {
 		if ( !is_object( $p_maybe_fault ) ) {
 			return false;

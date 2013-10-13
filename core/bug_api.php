@@ -78,49 +78,175 @@ require_api( 'utility_api.php' );
  * @subpackage classes
  */
 class BugData {
+	/**
+	 * Bug ID
+	 */
 	protected $id;
+
+	/**
+	 * Project ID
+	 */
 	protected $project_id = null;
+
+	/**
+	 * Reporter ID
+	 */
 	protected $reporter_id = 0;
+
+	/**
+	 * Bug Handler ID
+	 */
 	protected $handler_id = 0;
 	protected $duplicate_id = 0;
+
+	/**
+	 * Priority
+	 */
 	protected $priority = NORMAL;
+
+	/**
+	 * Severity
+	 */
 	protected $severity = MINOR;
+
+	/**
+	 * Reproducibility
+	 */
 	protected $reproducibility = 10;
+
+	/**
+	 * Status
+	 */
 	protected $status = NEW_;
+
+	/**
+	 * Resolution
+	 */
 	protected $resolution = OPEN;
+
+	/**
+	 * Projection
+	 */
 	protected $projection = 10;
+
+	/**
+	 * Category ID
+	 */
 	protected $category_id = 1;
+
+	/**
+	 * Date Submitted
+	 */
 	protected $date_submitted = '';
+
+	/**
+	 * Last Updated
+	 */
 	protected $last_updated = '';
+
+	/**
+	 * ETA
+	 */
 	protected $eta = 10;
+
+	/**
+	 * OS
+	 */
 	protected $os = '';
+
+	/**
+	 * OS Build
+	 */
 	protected $os_build = '';
+
+	/**
+	 * Platform
+	 */
 	protected $platform = '';
+
+	/**
+	 * Version
+	 */
 	protected $version = '';
+
+	/**
+	 * Fixed in version
+	 */
 	protected $fixed_in_version = '';
+
+	/**
+	 * Target Version
+	 */
 	protected $target_version = '';
+
+	/**
+	 * Build
+	 */
 	protected $build = '';
+
+	/**
+	 * View State
+	 */
 	protected $view_state = VS_PUBLIC;
+
+	/**
+	 * Summary
+	 */
 	protected $summary = '';
+
+	/**
+	 * Sponsorship Total
+	 */
 	protected $sponsorship_total = 0;
+
+	/**
+	 * Sticky
+	 */
 	protected $sticky = 0;
+
+	/**
+	 * Due Date
+	 */
 	protected $due_date = 0;
 
-	# omitted:
-	# var $bug_text_id
+	/**
+	 * Profile ID
+	 */
 	protected $profile_id = 0;
 
-	# extended info
+	/**
+	 * Description
+	 */
 	protected $description = '';
+
+	/**
+	 * Steps to reproduce
+	 */
 	protected $steps_to_reproduce = '';
+
+	/**
+	 * Additional Information
+	 */
 	protected $additional_information = '';
 
-	# internal helper objects
+	/**
+	 * Stats
+	 */
 	private $_stats = null;
 
+	/**
+	 * Attachment Count
+	 */
 	public $attachment_count = null;
+
+	/**
+	 * Bugnotes count
+	 */
 	public $bugnotes_count = null;
 
+	/**
+	 * Indicates if bug is currently being loaded from database
+	 */
 	private $loading = false;
 
 	/**
@@ -150,6 +276,10 @@ class BugData {
 	}
 
 	/**
+	 * Overloaded Function handling property sets
+	 *
+	 * @param string $p_name name
+	 * @param string $p_value value
 	 * @private
 	 */
 	public function __set($name, $value) {
@@ -187,7 +317,11 @@ class BugData {
 	}
 
 	/**
+	 * Overloaded Function handling property get
+	 *
+	 * @param string $p_name name
 	 * @private
+     * @return string
 	 */
 	public function __get($name) {
 		if( $this->is_extended_field($name) )
@@ -196,7 +330,11 @@ class BugData {
 	}
 
 	/**
+	 * Overloaded Function handling property isset
+	 *
+	 * @param string $p_name name
 	 * @private
+     * @return bool
 	 */
 	public function __isset($name) {
 		return isset( $this->{$name} );
@@ -231,6 +369,8 @@ class BugData {
 
 	/**
 	 * Returns if the field is an extended field which needs fetch_extended_info()
+	 *
+	 * @param string $p_field_name Field Name
 	 * @return boolean
 	 */
 	private function is_extended_field( $p_field_name ) {
@@ -396,12 +536,13 @@ class BugData {
 	}
 
 	/**
-	 * Update a bug from the given data structure
-	 *  If the third parameter is true, also update the longer strings table
-	 * @param bool p_update_extended
-	 * @param bool p_bypass_email Default false, set to true to avoid generating emails (if sending elsewhere)
-	 * @return bool (always true)
-	 * @access public
+     * Update a bug from the given data structure
+     *  If the third parameter is true, also update the longer strings table
+     * @param bool $p_update_extended
+     * @param bool $p_bypass_mail
+     * @internal param bool $p_bypass_email Default false, set to true to avoid generating emails (if sending elsewhere)
+     * @return bool (always true)
+     * @access public
 	 */
 	function update( $p_update_extended = false, $p_bypass_mail = false ) {
 		self::validate( $p_update_extended );
@@ -681,7 +822,7 @@ function bug_add_to_cache( $p_bug_row, $p_stats = null ) {
 
 /**
  * Clear a bug from the cache or all bugs if no bug id specified.
- * @param int bug id to clear (optional)
+ * @param int $p_bug_id bug id to clear (optional)
  * @return null
  * @access public
  */
@@ -884,8 +1025,8 @@ function bug_is_overdue( $p_bug_id ) {
 
 /**
  * Validate workflow state to see if bug can be moved to requested state
- * @param int p_bug_status current bug status
- * @param int p_wanted_status new bug status
+ * @param int $p_bug_status current bug status
+ * @param int $p_wanted_status new bug status
  * @return bool
  * @access public
  * @uses config_api.php
@@ -920,14 +1061,14 @@ function bug_check_workflow( $p_bug_status, $p_wanted_status ) {
  * Copy a bug from one project to another. Also make copies of issue notes, attachments, history,
  * email notifications etc.
  * @todo Not managed FTP file upload
- * @param array p_bug_id integer representing bug id
- * @param int p_target_project_id
- * @param bool p_copy_custom_fields
- * @param bool p_copy_relationships
- * @param bool p_copy_history
- * @param bool p_copy_attachments
- * @param bool p_copy_bugnotes
- * @param bool p_copy_monitoring_users
+ * @param int $p_bug_id bug id
+ * @param int $p_target_project_id target project id
+ * @param bool $p_copy_custom_fields copy custom fields
+ * @param bool $p_copy_relationships copy relationships
+ * @param bool $p_copy_history copy history
+ * @param bool $p_copy_attachments copy attachments
+ * @param bool $p_copy_bugnotes copy bugnotes
+ * @param bool $p_copy_monitoring_users copy monitoring users
  * @return int representing the new bugid
  * @access public
  */
@@ -1092,8 +1233,8 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
  * Moves an issue from a project to another.
  *
  * @todo Validate with sub-project / category inheritance scenarios.
- * @param int p_bug_id The bug to be moved.
- * @param int p_target_project_id The target project to move the bug to.
+ * @param int $p_bug_id The bug to be moved.
+ * @param int $p_target_project_id The target project to move the bug to.
  * @access public
  */
 function bug_move( $p_bug_id, $p_target_project_id ) {
@@ -1207,8 +1348,7 @@ function bug_delete( $p_bug_id ) {
 
 /**
  * Delete all bugs associated with a project
- * @param array p_project_id integer representing a projectid
- * @return bool always true
+ * @param array $p_project_id integer representing a projectid
  * @access public
  * @uses database_api.php
  */
@@ -1233,8 +1373,6 @@ function bug_delete_all( $p_project_id ) {
 	# @todo should we check the return value of each bug_delete() and
 	#  return false if any of them return false? Presumable bug_delete()
 	#  will eventually trigger an error on failure so it won't matter...
-
-	return true;
 }
 
 /**
@@ -1284,6 +1422,11 @@ function bug_get( $p_bug_id, $p_get_extended = false ) {
 	return $t_bug_data;
 }
 
+/**
+ * Convert row [from database] to bug object
+ * @param array $p_row bug database row
+ * @return BugData
+ */
 function bug_row_to_object( $p_row ) {
 	$t_bug_data = new BugData;
 	$t_bug_data->loadrow( $p_row );
@@ -1293,8 +1436,8 @@ function bug_row_to_object( $p_row ) {
 /**
  * return the specified field of the given bug
  *  if the field does not exist, display a warning and return ''
- * @param int p_bug_id integer representing bug id
- * @param string p_fieldname field name
+ * @param int $p_bug_id integer representing bug id
+ * @param string $p_field_name field name
  * @return string
  * @access public
  */
@@ -1333,8 +1476,8 @@ function bug_get_text_field( $p_bug_id, $p_field_name ) {
 /**
  * return the bug summary
  *  this is a wrapper for the custom function
- * @param int p_bug_id integer representing bug id
- * @param int p_context representing SUMMARY_CAPTION, SUMMARY_FIELD
+ * @param int $p_bug_id integer representing bug id
+ * @param int $p_context representing SUMMARY_CAPTION, SUMMARY_FIELD
  * @return string
  * @access public
  * @uses helper_api.php
@@ -1346,7 +1489,7 @@ function bug_format_summary( $p_bug_id, $p_context ) {
 /**
  * return the timestamp for the most recent time at which a bugnote
  *  associated with the bug was modified
- * @param int p_bug_id integer representing bug id
+ * @param int $p_bug_id integer representing bug id
  * @return bool|int false or timestamp in integer format representing newest bugnote timestamp
  * @access public
  * @uses database_api.php
@@ -1373,7 +1516,7 @@ function bug_get_newest_bugnote_timestamp( $p_bug_id ) {
  * return the timestamp for the most recent time at which a bugnote
  *  associated with the bug was modified and the total bugnote
  *  count in one db query
- * @param int p_bug_id integer representing bug id
+ * @param int $p_bug_id integer representing bug id
  * @return object consisting of bugnote stats
  * @access public
  * @uses database_api.php
@@ -1414,7 +1557,7 @@ function bug_get_bugnote_stats( $p_bug_id ) {
  * Get array of attachments associated with the specified bug id.  The array will be
  * sorted in terms of date added (ASC).  The array will include the following fields:
  * id, title, diskfile, filename, filesize, file_type, date_added, user_id.
- * @param int p_bug_id integer representing bug id
+ * @param int $p_bug_id integer representing bug id
  * @return array array of results or null
  * @access public
  * @uses database_api.php
@@ -1441,14 +1584,11 @@ function bug_get_attachments( $p_bug_id ) {
 	return $t_result;
 }
 
-# ===================================
-# Data Modification
-# ===================================
 /**
  * Set the value of a bug field
- * @param int p_bug_id integer representing bug id
- * @param string p_field_name pre-defined field name
- * @param any p_value value to set
+ * @param int $p_bug_id integer representing bug id
+ * @param string $p_field_name pre-defined field name
+ * @param mixed $p_value value to set
  * @return bool (always true)
  * @access public
  * @uses database_api.php
@@ -1721,10 +1861,10 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 
 /**
  * reopen the given bug
- * @param int p_bug_id
- * @param string p_bugnote_text
- * @param string p_time_tracking
- * @param bool p_bugnote_private
+ * @param int $p_bug_id
+ * @param string $p_bugnote_text
+ * @param string $p_time_tracking
+ * @param bool $p_bugnote_private
  * @return bool (always true)
  * @access public
  * @uses database_api.php
