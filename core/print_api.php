@@ -246,7 +246,7 @@ function print_user_with_subject( $p_user_id, $p_bug_id ) {
 		$t_email = user_get_email( $p_user_id );
 		print_email_link_with_subject( $t_email, $t_username, $p_bug_id );
 	} else {
-		echo '<span style="text-decoration: line-through">';
+		echo '<span class="user" style="text-decoration: line-through">';
 		echo $t_username;
 		echo '</span>';
 	}
@@ -1551,7 +1551,7 @@ function get_email_link_with_subject( $p_email, $p_text, $p_summary ) {
 	$t_mailto = string_attribute( "mailto:$t_email?subject=$t_summary" );
 	$t_text = string_display( $p_text );
 
-	return "<a href=\"$t_mailto\">$t_text</a>";
+	return "<a class=\"user\" href=\"$t_mailto\">$t_text</a>";
 }
 
 /**
