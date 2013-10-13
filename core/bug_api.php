@@ -1082,8 +1082,8 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 	$t_mantis_bug_history_table = db_get_table( 'bug_history' );
 	$t_mantis_db = $g_db;
 
-	$t_bug_id = db_prepare_int( $p_bug_id );
-	$t_target_project_id = db_prepare_int( $p_target_project_id );
+	$t_bug_id = (int)$p_bug_id;
+	$t_target_project_id = (int)$p_target_project_id;
 
 	$t_bug_data = bug_get( $t_bug_id, true );
 
@@ -1126,8 +1126,8 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 		for( $i = 0;$i < $t_count;$i++ ) {
 			$t_bug_custom = db_fetch_array( $result );
 
-			$c_field_id = db_prepare_int( $t_bug_custom['field_id'] );
-			$c_new_bug_id = db_prepare_int( $t_new_bug_id );
+			$c_field_id = (int)$t_bug_custom['field_id'];
+			$c_new_bug_id = (int)$t_new_bug_id;
 			$c_value = $t_bug_custom['value'];
 
 			$query = "INSERT INTO $t_mantis_custom_field_string_table
@@ -1495,7 +1495,7 @@ function bug_format_summary( $p_bug_id, $p_context ) {
  * @uses database_api.php
  */
 function bug_get_newest_bugnote_timestamp( $p_bug_id ) {
-	$c_bug_id = db_prepare_int( $p_bug_id );
+	$c_bug_id = (int)$p_bug_id;
 	$t_bugnote_table = db_get_table( 'bugnote' );
 
 	$query = "SELECT last_modified
@@ -1523,7 +1523,7 @@ function bug_get_newest_bugnote_timestamp( $p_bug_id ) {
  */
 function bug_get_bugnote_stats( $p_bug_id ) {
 	global $g_cache_bug;
-	$c_bug_id = db_prepare_int( $p_bug_id );
+	$c_bug_id = (int)$p_bug_id;
 
 	if( !is_null( $g_cache_bug[$c_bug_id]['_stats'] ) ) {
 		if( $g_cache_bug[$c_bug_id]['_stats'] === false ) {
@@ -1564,15 +1564,13 @@ function bug_get_bugnote_stats( $p_bug_id ) {
  * @uses file_api.php
  */
 function bug_get_attachments( $p_bug_id ) {
-	$c_bug_id = db_prepare_int( $p_bug_id );
-
 	$t_bug_file_table = db_get_table( 'bug_file' );
 
 	$query = "SELECT id, title, diskfile, filename, filesize, file_type, date_added, user_id
 		                FROM $t_bug_file_table
 		                WHERE bug_id=" . db_param() . "
 		                ORDER BY date_added";
-	$db_result = db_query_bound( $query, array( $c_bug_id ) );
+	$db_result = db_query_bound( $query, array( $p_bug_id ) );
 	$num_files = db_num_rows( $db_result );
 
 	$t_result = array();
@@ -1595,7 +1593,7 @@ function bug_get_attachments( $p_bug_id ) {
  * @uses history_api.php
  */
 function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
-	$c_bug_id = db_prepare_int( $p_bug_id );
+	$c_bug_id = (int)$p_bug_id;
 	$c_value = null;
 
 	switch( $p_field_name ) {
