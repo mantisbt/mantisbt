@@ -257,7 +257,7 @@ while ( $t_row = db_fetch_array( $t_result ) ) {
 $t_user_count = count( $t_users );
 ?>
 <div id="manage-user-div" class="form-container">
-	<h2><?php echo lang_get( 'manage_accounts_title' ) ?></h2> [<?php echo $total_user_count ?>]
+	<h2><?php echo lang_get( 'manage_accounts_title' ) ?></h2> [<?php echo $t_total_user_count ?>]
 	<?php print_button( 'manage_user_create_page.php', lang_get( 'create_new_account_link' ) ) ?>
 	<?php if ( $f_filter === 'UNUSED' ) echo print_button( 'manage_user_prune.php', lang_get( 'prune_accounts' ) ); ?>
 	<form id="manage-user-filter" method="post" action="manage_user_page.php">
