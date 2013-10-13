@@ -530,7 +530,7 @@ $s_unstick_bug_button = 'Unstick';
 # bug_update.php
 $s_bug_updated_msg = 'Issue has been successfully updated...';
 
-# bug_update_advanced_page.php
+# bug_update_page.php
 $s_back_to_bug_link = 'Back To Issue';
 $s_update_simple_link = 'Update Simple';
 $s_updating_bug_advanced_title = 'Updating Issue Information';

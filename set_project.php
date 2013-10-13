@@ -101,7 +101,6 @@ if ( !is_blank( $c_ref ) ) {
 				case 'bug_view_page.php':
 				case 'bug_view_advanced_page.php':
 				case 'bug_update_page.php':
-				case 'bug_update_advanced_page.php':
 				case 'bug_change_status_page.php':
 					$t_path = $t_home_page;
 					break;
