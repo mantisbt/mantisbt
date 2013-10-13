@@ -36,7 +36,7 @@ class XmlImportExportPlugin extends MantisPlugin {
 		$this->description = plugin_lang_get( 'description' );
 		$this->page = '';
 
-		$this->version = '1.0';
+		$this->version = '1.3.0';
 		$this->requires = array(
 			'MantisCore' => '1.3.0',
 		);

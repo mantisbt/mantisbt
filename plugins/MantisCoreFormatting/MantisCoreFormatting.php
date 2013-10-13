@@ -31,7 +31,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 		$this->description = lang_get( 'plugin_format_description' );
 		$this->page = 'config';
 
-		$this->version = '1.0b';
+		$this->version = '1.3.0';
 		$this->requires = array(
 			'MantisCore' => '1.3.0',
 		);
