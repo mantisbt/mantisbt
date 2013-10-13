@@ -119,7 +119,7 @@ function show_revision( $p_revision ) {
 			break;
 		case REV_BUGNOTE:
 			if ( is_null( $s_user_access ) ) {
-				$s_user_access = access_has_bug_level( config_get( 'private_bugnote_threshold' ), $t_revision['bug_id'] );
+				$s_user_access = access_has_bug_level( config_get( 'private_bugnote_threshold' ), $p_revision['bug_id'] );
 			}
 
 			if ( !$s_user_access ) {
