@@ -118,7 +118,8 @@ function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
 				  WHERE id=" . db_param();
 	$result = db_query_bound( $t_query, array( $p_field_id ) );
 
-	if( 0 == db_num_rows( $result ) ) {
+	$t_row = db_fetch_array( $t_result );
+	if( !$t_row ) {
 		if( $p_trigger_errors ) {
 			error_parameters( 'Custom ' . $p_field_id );
 			trigger_error( ERROR_CUSTOM_FIELD_NOT_FOUND, ERROR );
@@ -127,12 +128,10 @@ function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
 		}
 	}
 
-	$row = db_fetch_array( $result );
+	$g_cache_custom_field[$p_field_id] = $t_row;
+	$g_cache_name_to_id_map[$t_row['name']] = $p_field_id;
 
-	$g_cache_custom_field[$c_field_id] = $row;
-	$g_cache_name_to_id_map[$row['name']] = $c_field_id;
-
-	return $row;
+	return $t_row;
 }
 
 /**
@@ -624,18 +623,19 @@ function custom_field_get_id_from_name( $p_field_name ) {
 
 	$t_custom_field_table = db_get_table( 'custom_field' );
 
-	$query = "SELECT id FROM $t_custom_field_table WHERE name = " . db_param();
-	$t_result = db_query_bound( $query, array( $p_field_name ) );
+	$t_query = "SELECT id FROM $t_custom_field_table WHERE name = " . db_param();
+	$t_result = db_query_bound( $t_query, array( $p_field_name ) );
 
-	if( db_num_rows( $t_result ) == 0 ) {
+	$t_row = db_fetch_array( $t_result );
+
+	if( !$t_row ) {
 		$g_cache_name_to_id_map[$p_field_name] = false;
 		return false;
 	}
 
-	$row = db_fetch_array( $t_result );
-	$g_cache_name_to_id_map[$p_field_name] = $row['id'];
+	$g_cache_name_to_id_map[$p_field_name] = $t_row['id'];
 
-	return $row['id'];
+	return $t_row['id'];
 }
 
 /**
@@ -723,13 +723,11 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 				ORDER BY sequence ASC, name ASC";
 		}
 
-		$result = db_query_bound( $t_query, $t_params );
-		$t_row_count = db_num_rows( $result );
+		$t_result = db_query_bound( $t_query, $t_params );
 		$t_ids = array();
 
-		for( $i = 0;$i < $t_row_count;$i++ ) {
-			$row = db_fetch_array( $result );
-			array_push( $t_ids, $row['id'] );
+		while( $t_row = db_fetch_array( $t_result ) ) {
+			array_push( $t_ids, $t_row['id'] );
 		}
 		custom_field_cache_array_rows( $t_ids );
 
@@ -754,15 +752,12 @@ function custom_field_get_ids() {
 				  FROM $t_custom_field_table
 				  ORDER BY name ASC";
 		$result = db_query_bound( $query );
-		$t_row_count = db_num_rows( $result );
 		$t_ids = array();
 
-		for( $i = 0;$i < $t_row_count;$i++ ) {
-			$row = db_fetch_array( $result );
+		while( $t_row = db_fetch_array( $result ) ) {
+			$g_cache_custom_field[(int) $t_row['id']] = $t_row;
 
-			$g_cache_custom_field[(int) $row['id']] = $row;
-
-			array_push( $t_ids, $row['id'] );
+			array_push( $t_ids, $t_row['id'] );
 		}
 		$g_cache_cf_list = $t_ids;
 	} else {

@@ -583,8 +583,8 @@ function category_get_field( $p_category_id, $p_field_name ) {
 	$t_query = "SELECT id FROM $t_category_table
 				WHERE name=" . db_param() . " AND project_id=" . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_category_name, (int) $p_project_id ) );
-	$t_count = db_num_rows( $t_result );
-	if( 1 > $t_count ) {
+	$t_id = db_result( $t_result );
+	if( $t_id ) {
 		if( $p_trigger_errors ) {
 			error_parameters( $p_category_name, $t_project_name );
 			trigger_error( ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT, ERROR );
@@ -593,7 +593,7 @@ function category_get_field( $p_category_id, $p_field_name ) {
 		}
 	}
 
-	return db_result( $t_result );
+	return $t_id;
 }
 
 /**

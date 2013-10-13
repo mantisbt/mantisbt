@@ -107,7 +107,6 @@ $query = "SELECT pft.id, pft.project_id, pft.filename, pft.filesize, pft.title, 
 					( ut.access_level >= $t_admin ) )
 			ORDER BY pt.name ASC, pft.title ASC";
 $result = db_query( $query );
-$num_files = db_num_rows( $result );
 
 html_page_top( lang_get( 'docs_link' ) );
 ?>
@@ -123,8 +122,9 @@ html_page_top( lang_get( 'docs_link' ) );
 	</td>
 </tr>
 <?php
-for ($i=0;$i<$num_files;$i++) {
-	$row = db_fetch_array( $result );
+$i = 0;
+while( $row = db_fetch_array( $result ) ) {
+	$i++;
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 	$v_filesize = number_format( $v_filesize );
 	$v_title = string_display( $v_title );

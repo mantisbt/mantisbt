@@ -402,18 +402,17 @@ function cfdef_prepare_list_value_to_database($p_value) {
 function cfdef_prepare_list_distinct_values($p_field_def) {
 	$t_custom_field_table = db_get_table( 'custom_field' );
 
-	$query = "SELECT possible_values
+	$t_query = "SELECT possible_values
 			  FROM $t_custom_field_table
 			  WHERE id=" . db_param();
-	$result = db_query_bound( $query, array( $p_field_def['id'] ) );
+	$t_result = db_query_bound( $t_query, array( $p_field_def['id'] ) );
 
-	$t_row_count = db_num_rows( $result );
-	if ( 0 == $t_row_count ) {
+	$t_row = db_fetch_array( $t_result );
+	if ( !$t_row ) {
 		return false;
 	}
-	$row = db_fetch_array( $result );
 
-	$t_possible_values = custom_field_prepare_possible_values( $row['possible_values'] );
+	$t_possible_values = custom_field_prepare_possible_values( $t_row['possible_values'] );
 	$t_values_arr = explode( '|', $t_possible_values );
 	$t_return_arr = array();
 

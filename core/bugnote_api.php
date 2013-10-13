@@ -305,9 +305,7 @@ function bugnote_delete_all( $p_bug_id ) {
 		          	FROM $t_bugnote_table
 		          	WHERE bug_id=" . db_param();
 	$result = db_query_bound( $query, array( (int)$p_bug_id ) );
-	$bugnote_count = db_num_rows( $result );
-	for( $i = 0;$i < $bugnote_count;$i++ ) {
-		$row = db_fetch_array( $result );
+	while( $row = db_fetch_array( $result ) ) {
 		$t_bugnote_text_id = $row['bugnote_text_id'];
 
 		# Delete the corresponding bugnote texts

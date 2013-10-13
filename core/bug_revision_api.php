@@ -95,11 +95,10 @@ function bug_revision_add( $p_bug_id, $p_user_id, $p_type, $p_value, $p_bugnote_
  */
 function bug_revision_exists( $p_revision_id ) {
 	$t_bug_rev_table = db_get_table( 'bug_revision' );
-
-	$t_query = "SELECT * FROM $t_bug_rev_table WHERE id=" . db_param();
+	$t_query = "SELECT id FROM $t_bug_rev_table WHERE id=" . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_revision_id ) );
 
-	if ( db_num_rows( $t_result ) < 1 ) {
+	if ( !db_result( $t_result ) ) {
 		return false;
 	}
 
@@ -117,11 +116,12 @@ function bug_revision_get( $p_revision_id ) {
 	$t_query = "SELECT * FROM $t_bug_rev_table WHERE id=" . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_revision_id ) );
 
-	if ( db_num_rows( $t_result ) < 1 ) {
+	$t_row = db_fetch_array( $t_result );
+	if ( !$t_row ) {
 		trigger_error( ERROR_BUG_REVISION_NOT_FOUND, ERROR );
 	}
 
-	return db_fetch_array( $t_result );
+	return $t_row;
 }
 
 /**
@@ -266,8 +266,9 @@ function bug_revision_last( $p_bug_id, $p_type=REV_ANY, $p_bugnote_id=0 ) {
 	$t_query .= ' ORDER BY timestamp DESC';
 	$t_result = db_query_bound( $t_query, $t_params, 1 );
 
-	if ( db_num_rows( $t_result ) > 0 ) {
-		return db_fetch_array( $t_result );
+	$t_row = db_fetch_array( $t_result );
+	if ( $t_row ) {
+		return $t_row;
 	} else {
 		return null;
 	}
@@ -322,11 +323,12 @@ function bug_revision_like( $p_rev_id ) {
 	$t_query = "SELECT bug_id, bugnote_id, type FROM $t_bug_rev_table WHERE id=" . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_rev_id ) );
 
-	if ( db_num_rows( $t_result ) < 1 ) {
+	$t_row = db_fetch_array( $t_result );
+	
+	if ( !$t_row ) {
 		trigger_error( ERROR_BUG_REVISION_NOT_FOUND, ERROR );
 	}
 
-	$t_row = db_fetch_array( $t_result );
 	$t_bug_id = $t_row['bug_id'];
 	$t_bugnote_id = $t_row['bugnote_id'];
 	$t_type = $t_row['type'];
