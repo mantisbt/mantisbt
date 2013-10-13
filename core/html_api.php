@@ -1281,7 +1281,6 @@ function print_summary_menu( $p_page = '' ) {
 
 /**
  * Print the color legend for the status colors
- * @param string
  * @return null
  */
 function html_status_legend() {
@@ -1392,10 +1391,10 @@ function html_status_percentage_legend() {
 
 /**
  * Print an html button inside a form
- * @param string $p_action
- * @param string $p_button_text
- * @param array $p_fields
- * @param string $p_method
+ * @param string $p_action Action
+ * @param string $p_button_text Button Text
+ * @param array $p_fields Fields
+ * @param string $p_method Form submit method - default post
  * @return null
  */
 function html_button( $p_action, $p_button_text, $p_fields = null, $p_method = 'post' ) {
@@ -1814,6 +1813,8 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 /**
  * get the css class name for the given status, user and project
  * @param int $p_status
+ * @param null $p_user
+ * @param null $p_project
  * @return string
  */
 function html_get_status_css_class( $p_status, $p_user = null, $p_project = null ) {

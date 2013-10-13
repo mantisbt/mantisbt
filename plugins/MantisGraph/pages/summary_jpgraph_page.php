@@ -22,9 +22,7 @@
 	 * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org
 	 */
-	 /**
-	  * MantisBT Core API's
-	  */
+
 	require_once( 'core.php' );
 	access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 

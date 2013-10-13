@@ -22,9 +22,7 @@
 	 * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org
 	 */
-	 /**
-	  * MantisBT Core API's
-	  */
+
 	require_once( 'core.php' );
 
 	require_once( 'graph_api.php' );
@@ -43,7 +41,6 @@
 	# gather the data for the graphs
 	$t_metrics = create_category_summary();
 	$t_token = token_set( TOKEN_GRAPH, serialize( $t_metrics ) );
-
  ?>
 
 <br />

@@ -1,19 +1,26 @@
 <?php
-# MantisBT - A PHP based bugtracking system
-# Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
-# MantisBT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# MantisBT is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+/**
+ * MantisBT - A PHP based bugtracking system
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ */
 
+/**
+ * Mantis Core Formatting plugin
+ */
 class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 
 	/**
@@ -118,8 +125,8 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 
 	/**
 	 * RSS text processing.
-	 * @param string Event name
-	 * @param string Unformatted text
+	 * @param string $p_event Event name
+	 * @param string $p_string Unformatted text
 	 * @return string Formatted text
 	 */
 	function rss( $p_event, $p_string ) {
@@ -154,8 +161,8 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 
 	/**
 	 * Email text processing.
-	 * @param string Event name
-	 * @param string Unformatted text
+	 * @param string $p_event Event name
+	 * @param string $p_string Unformatted text
 	 * @return string Formatted text
 	 */
 	function email( $p_event, $p_string ) {

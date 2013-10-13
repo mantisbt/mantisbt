@@ -1,18 +1,22 @@
 <?php
-# MantisBT - A PHP based bugtracking system
-
-# MantisBT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# MantisBT is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+/**
+ * MantisBT - A PHP based bugtracking system
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ */
 
 /**
  * Class for actions dealing with date periods
@@ -25,17 +29,17 @@
  * @link http://www.mantisbt.org
  * @package MantisBT
  * @subpackage classes
- *
  */
 class Period {
-
 	/**
-	* @var string start date
+	* start date
+	* @var string
 	*/
 	var $start = '';
 
 	/**
-	* @var string end date
+	* end date
+	* @var string
 	*/
 	var $end = '';
 
@@ -238,7 +242,7 @@ class Period {
 
 	/**
 	* get number of days in interval
-	*
+     * @return int
 	*/
 	function get_elapsed_days() {
 		return( $this->get_end_timestamp() - $this->get_start_timestamp() ) / ( 24 * 60 * 60 );
@@ -248,6 +252,7 @@ class Period {
 	* print a period selector
 	*
 	* @param string $p_control_name
+     * @return string
 	*/
 	function period_selector( $p_control_name ) {
 		$t_periods = array(

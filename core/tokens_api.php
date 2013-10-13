@@ -129,9 +129,8 @@ function token_set( $p_type, $p_value, $p_expiry = TOKEN_EXPIRY, $p_user_id = nu
 
 /**
  * Touch a token to update its expiration time.
- * @param integer Token ID
- * @param integer Token expiration in seconds
- * @return always true
+ * @param integer $p_token_id Token ID
+ * @param integer $p_expiry Token expiration in seconds
  */
 function token_touch( $p_token_id, $p_expiry = TOKEN_EXPIRY ) {
 	token_ensure_exists( $p_token_id );
@@ -144,8 +143,6 @@ function token_touch( $p_token_id, $p_expiry = TOKEN_EXPIRY ) {
 					SET expiry=" . db_param() . "
 					WHERE id=" . db_param();
 	db_query_bound( $t_query, array( $c_token_expiry, $c_token_id ) );
-
-	return true;
 }
 
 /**
@@ -162,8 +159,6 @@ function token_delete( $p_type, $p_user_id = null ) {
 	$t_query = "DELETE FROM $t_tokens_table
 					WHERE type=" . db_param() . " AND owner=" . db_param();
 	db_query_bound( $t_query, array( $c_type, $c_user_id ) );
-
-	return true;
 }
 
 /**
@@ -234,8 +229,8 @@ function token_update( $p_token_id, $p_value, $p_expiry = TOKEN_EXPIRY ) {
 
 /**
  * Delete all tokens of a specified type.
- * @param integer Token Type
- * @return always true.
+ * @param integer $p_token_type Token Type
+ * @return bool always true.
  */
 function token_delete_by_type( $p_token_type ) {
 	$c_token_type = db_prepare_int( $p_token_type );

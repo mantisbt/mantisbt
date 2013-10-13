@@ -16,7 +16,13 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 # See the README and LICENSE files for details
+/**
+ * Cron Script to send emails from Mantis.
+ */
 
+/**
+ * Global Bypass http headers
+ */
 global $g_bypass_headers;
 $g_bypass_headers = 1;
 

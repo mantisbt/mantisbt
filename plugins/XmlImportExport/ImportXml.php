@@ -1,35 +1,68 @@
 <?php
-# MantisBT - A PHP based bugtracking system
-# Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
-# MantisBT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# MantisBT is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+/**
+ * MantisBT - A PHP based bugtracking system
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ */
 
 require_once( 'ImportXml' . DIRECTORY_SEPARATOR . 'Mapper.php' );
 require_once( 'ImportXml' . DIRECTORY_SEPARATOR . 'Issue.php' );
 
+/**
+ * Source Data
+ */
 class SourceData {
+	/**
+	 * Version
+	 */
 	public $version;
+	/**
+	 * Urlbase
+	 */
 	public $urlbase;
+	/**
+	 * Issue link
+	 */
 	public $issuelink;
+	/**
+	 * Note link
+	 */
 	public $notelink;
+	/**
+	 * Format
+	 */
 	public $format;
 
+	/**
+	 * Get url to view issue
+	 * @param int issue id
+     * @return string
+	 */
 	public function get_issue_url( $issue_id ) {
 		return $this->urlbase . 'view.php?id=' . $issue_id;
 	}
 
-	public function get_note_url( $issue_id, $note_id ) {
-		return $this->urlbase . 'view.php?id=' . $issue_id . '#c' . $note_id;
+	/**
+	 * Get url to view bugnote
+	 * @param int $p_issue_id issue id
+	 * @param int $p_note_id note id
+     * @return string
+	 */
+	public function get_note_url( $p_issue_id, $p_note_id ) {
+		return $this->urlbase . 'view.php?id=' . $p_issue_id . '#c' . $p_note_id;
 	}
 }
 
@@ -37,24 +70,54 @@ class SourceData {
   * Perform import from an XML file
   */
 class ImportXML {
+	/**
+	 * Source
+	 * @access private
+	 */
 	private $source_;
+	/**
+	 * reader
+	 * @access private
+	 */
 	private $reader_;
+	/**
+	 * itemsmap
+	 * @access private
+	 */
 	private $itemsMap_;
+	/**
+	 * strategy
+	 * @access private
+	 */
 	private $strategy_;
+	/**
+	 * fallback
+	 * @access private
+	 */
 	private $fallback_;
 
 	// issues specific options
+	/**
+	 * keep category
+	 * @access private
+	 */
 	private $keepCategory_;
+	/**
+	 * default category
+	 * @access private
+	 */
 	private $defaultCategory_;
 
 	/**
 	  * Constructor
 	  *
-	  * @param string $filename name of the file to read
+	  * @param string $p_filename name of the file to read
 	  * @param string $strategy conversion strategy; one of "renumber", "link" or "disable"
 	  * @param string $fallback alternative conversion strategy when "renumber" does not apply
+	  * @param string $keepCategory keep category
+	  * @param string $defaultCategory default category
 	  */
-	public function __construct( $filename, $strategy, $fallback, $keepCategory, $defaultCategory ) {
+	public function __construct( $p_filename, $strategy, $fallback, $keepCategory, $defaultCategory ) {
 		$this->source_ = new SourceData;
 		$this->reader_ = new XMLReader( );
 		$this->itemsMap_ = new ImportXml_Mapper;
@@ -63,14 +126,11 @@ class ImportXML {
 		$this->keepCategory_ = $keepCategory;
 		$this->defaultCategory_ = $defaultCategory;
 
-		$this->reader_->open( $filename['tmp_name'] );
+		$this->reader_->open( $p_filename['tmp_name'] );
 	}
 
 	/**
 	 * Perform import from an XML file
- *
-	 * @param string $p_filename name of the file to read
-	 * @param string $p_strategy conversion strategy; one of "renumber", "link" or "disable"
 	 */
 	public function import( ) {
 		// Read the <mantis> element and it's attributes
@@ -138,31 +198,34 @@ class ImportXML {
 	/**
 	 * Compute and return the new link
 	 *
+	 * @param string $p_oldLinkTag old link tag
+	 * @param string $p_oldId old issue id
+     * @return string
 	 */
-	private function getReplacementString( $oldLinkTag, $oldId ) {
+	private function getReplacementString( $p_oldLinkTag, $p_oldId ) {
 		$linkTag = config_get( 'bug_link_tag' );
 
 		$replacement = '';
 		switch( $this->strategy_ ) {
 			case 'link':
-				$replacement = $this->source_->get_issue_url( $oldId );
+				$replacement = $this->source_->get_issue_url( $p_oldId );
 				break;
 
 			case 'disable':
-				$replacement = htmlFullEntities( $oldLinkTag ) . $oldId;
+				$replacement = htmlFullEntities( $p_oldLinkTag ) . $p_oldId;
 				break;
 
 			case 'renumber':
-				if( $this->itemsMap_->exists( 'issue', $oldId ) ) {
+				if( $this->itemsMap_->exists( 'issue', $p_oldId ) ) {
 					// regular renumber
-					$replacement = $linkTag . $this->itemsMap_->getNewID( 'issue', $oldId );
+					$replacement = $linkTag . $this->itemsMap_->getNewID( 'issue', $p_oldId );
 				} else {
 					// fallback strategy
 					if( $this->fallback_ == 'link' ) {
-						$replacement = $this->source_->get_issue_url( $oldId );
+						$replacement = $this->source_->get_issue_url( $p_oldId );
 					}
 					if( $this->fallback_ == 'disable' ) {
-						$replacement = htmlFullEntities( $oldLinkTag ) . $oldId;
+						$replacement = htmlFullEntities( $p_oldLinkTag ) . $p_oldId;
 					}
 				}
 				break;
@@ -171,10 +234,14 @@ class ImportXML {
 				echo "Unknown method";
 		}
 
-		//echo "$oldId -> $replacement\n"; // DEBUG
 		return $replacement;
 	}
 
+	/**
+	 * Get importer object
+	 * @param element $p_element_name name
+     * @return ImportXml_Issue
+	 */
 	private function get_importer_object( $p_element_name ) {
 		$importer = null;
 		switch( $p_element_name ) {
@@ -189,8 +256,9 @@ class ImportXML {
 /** candidates for string api **/
 
 /**
- * Convert each character of the passed string to the
- * corresponding HTML entity.
+ * Convert each character of the passed string to the corresponding HTML entity.
+ * @param string string to convert
+ * @return string
  */
 function htmlFullEntities( $string ) {
 	$chars = str_split( $string );
@@ -198,6 +266,11 @@ function htmlFullEntities( $string ) {
 	return implode( '', $escaped );
 }
 
+/**
+ * Get entity
+ * @param string character to convert
+ * @return string
+ */
 function getEntity( $char ) {
 	return '&#' . ord( $char ) . ';';
 }

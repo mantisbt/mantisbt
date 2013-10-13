@@ -14,6 +14,14 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Edit Graph Plugin Configuration
+ * @package MantisBT
+ * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ */
+
 auth_reauthenticate( );
 access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 
@@ -43,7 +51,7 @@ if ( isset( $t_current_font_selected[$t_current_font] ) ) {
 /**
  * Prints checked="checked" to the end of a HTML <option> tag if the supplied
  * font name matches the current font configuration value.
- * @param string The name of the font to check
+ * @param string $p_font_name The name of the font to check
  * @return string Either checked="checked" for a match or otherwise an empty string
  */
 function print_font_checked( $p_font_name ) {

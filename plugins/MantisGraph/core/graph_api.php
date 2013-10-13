@@ -15,13 +15,14 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Graph API
+ *
  * @package CoreAPI
  * @subpackage GraphAPI
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
-
 
 if( OFF == plugin_config_get( 'eczlibrary' ) ) {
 	$t_font_path = get_font_path();
@@ -50,6 +51,9 @@ if( OFF == plugin_config_get( 'eczlibrary' ) ) {
 	require_lib( 'ezc/Base/src/base.php' );
 }
 
+/**
+ * Get Font to use with graphs from config value
+ */
 function graph_get_font() {
 	$t_font = plugin_config_get( 'font', 'arial' );
 
@@ -101,10 +105,14 @@ function graph_get_font() {
 	}
 }
 
-# ## Graph API ###
-# --------------------
-# graphing routines
-# --------------------
+/**
+ * Generate Bar Graph
+ *
+ * @param array $p_metrics Graph Data
+ * @param string $p_title title
+ * @param int $p_graph_width width of graph in pixels
+ * @param int $p_graph_height height of graph in pixels
+ */
 function graph_bar( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_height = 400 ) {
 	$t_graph_font = graph_get_font();
 
@@ -170,7 +178,15 @@ function graph_bar( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_he
 	}
 }
 
-# Function which displays the charts using the absolute values according to the status (opened/closed/resolved)
+/**
+ * Function which displays the charts using the absolute values according to the status (opened/closed/resolved)
+ *
+ * @param array $p_metrics Graph Data
+ * @param string $p_title title
+ * @param int $p_graph_width width of graph in pixels
+ * @param int $p_graph_height height of graph in pixels
+ * @param int $p_baseline jpgraph baseline
+ */
 function graph_group( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_height = 400, $p_baseline = 100 ) {
 
 	# $p_metrics is an array of three arrays
@@ -279,8 +295,17 @@ function graph_group( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_
 	}
 }
 
-# --------------------
-# Function that displays pie charts
+/**
+ * Function that displays pie charts
+ *
+ * @param array $p_metrics Graph Data
+ * @param string $p_title title
+ * @param int $p_graph_width width of graph in pixels
+ * @param int $p_graph_height height of graph in pixels
+ * @param float|int $p_center jpgraph center
+ * @param float|int $p_poshorizontal jpgraph horizontal
+ * @param float|int $p_posvertical jpgraph vertical
+ */
 function graph_pie( $p_metrics, $p_title = '', $p_graph_width = 500, $p_graph_height = 350, $p_center = 0.4, $p_poshorizontal = 0.10, $p_posvertical = 0.09 ) {
 	$t_graph_font = graph_get_font();
 
@@ -348,7 +373,13 @@ function graph_pie( $p_metrics, $p_title = '', $p_graph_width = 500, $p_graph_he
 	}
 }
 
-# --------------------
+/**
+ * Cumulative line graph
+ *
+ * @param array $p_metrics Graph Data
+ * @param int $p_graph_width width of graph in pixels
+ * @param int $p_graph_height height of graph in pixels
+ */
 function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_height = 380 ) {
 
 	$t_graph_font = graph_get_font();
@@ -464,7 +495,15 @@ function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_hei
 	}
 }
 
-# --------------------
+/**
+ * Line Chart by date
+ *
+ * @param array $p_metrics Graph Data
+ * @param array $p_labels labels
+ * @param string $p_title title
+ * @param int $p_graph_width width of graph in pixels
+ * @param int $p_graph_height height of graph in pixels
+ */
 function graph_bydate( $p_metrics, $p_labels, $p_title, $p_graph_width = 300, $p_graph_height = 380 ) {
 	$t_graph_font = graph_get_font();
 	error_check( is_array( $p_metrics ) ? count( $p_metrics ) : 0, lang_get( 'by_date' ) );
@@ -559,9 +598,12 @@ function graph_bydate( $p_metrics, $p_labels, $p_title, $p_graph_width = 300, $p
 	}
 }
 
-# --------------------
-# utilities
-# --------------------
+/**
+ * Calculate total metrics
+ *
+ * @param array $p_metrics data
+ * @return array
+ */
 function graph_total_metrics( $p_metrics ) {
 	foreach( $p_metrics['open'] as $t_enum => $t_value ) {
 		$total[$t_enum] = $t_value + $p_metrics['resolved'][$t_enum] + $p_metrics['closed'][$t_enum];
@@ -569,11 +611,13 @@ function graph_total_metrics( $p_metrics ) {
 	return $total;
 }
 
-# --------------------
-# Data Extractions
-# --------------------
-# --------------------
-# summarize metrics by a single field in the bug table
+/**
+ * summarize metrics by a single ENUM field in the bug table
+ *
+ * @param string $p_enum_string enumeration string
+ * @param string $p_enum enum field
+ * @return array
+ */
 function create_bug_enum_summary( $p_enum_string, $p_enum ) {
 	$t_project_id = helper_get_current_project();
 	$t_bug_table = db_get_table( 'bug' );
@@ -594,7 +638,14 @@ function create_bug_enum_summary( $p_enum_string, $p_enum ) {
 	return $t_metrics;
 }
 
-# Function which gives the absolute values according to the status (opened/closed/resolved)
+/**
+ * Function which gives the absolute values according to the status (opened/closed/resolved)
+ *
+ * @param string $p_enum_string enumeration string
+ * @param string $p_enum enum field
+ * @throws MantisBT\Exception\Database\FieldNotFound
+ * @return array
+ */
 function enum_bug_group( $p_enum_string, $p_enum ) {
 	$t_bug_table = db_get_table( 'bug' );
 
@@ -634,12 +685,13 @@ function enum_bug_group( $p_enum_string, $p_enum ) {
 		$t_metrics['resolved'][$t_label] = db_result( $result2, 0, 0 );
 	}
 
-	# ## end for
-
 	return $t_metrics;
 }
 
-# --------------------
+/**
+ * Create summary table of developers
+ * @return array
+ */
 function create_developer_summary() {
 	$t_project_id = helper_get_current_project();
 	$t_user_table = db_get_table( 'user' );
@@ -692,11 +744,13 @@ function create_developer_summary() {
 	}
 	ksort($t_metrics);
 
-	# end for
 	return $t_metrics;
 }
 
-# --------------------
+/**
+ * Create summary table of reporters
+ * @return array
+ */
 function create_reporter_summary() {
 	global $reporter_name, $reporter_count;
 
@@ -736,11 +790,13 @@ function create_reporter_summary() {
 	}
 	ksort($t_metrics);
 
-	# end for
 	return $t_metrics;
 }
 
-# --------------------
+/**
+ * Create summary table of categories
+ * @return array
+ */
 function create_category_summary() {
 	global $category_name, $category_bug_count;
 
@@ -774,11 +830,13 @@ function create_category_summary() {
 		}
 	}
 
-	# end for
 	return $t_metrics;
 }
 
-# --------------------
+/**
+ * Create cumulative graph by date
+ * @return array
+ */
 function create_cumulative_bydate() {
 
 	$t_clo_val = config_get( 'bug_closed_status_threshold' );
@@ -877,39 +935,52 @@ function create_cumulative_bydate() {
 	return $t_metrics;
 }
 
+/**
+ * Get formatted date string
+ *
+ * @param int $p_date date
+ * @return string
+ */
 function graph_date_format( $p_date ) {
 	return date( config_get( 'short_date_format' ), $p_date );
 }
 
-# ----------------------------------------------------
-# Check that there is enough data to create graph
-# ----------------------------------------------------
+/**
+ * Check that there is enough data to create graph
+ *
+ * @param int $p_bug_count bug count
+ * @param string $p_title title
+ */
 function error_check( $bug_count, $title ) {
 	if( 0 == $bug_count ) {
 		error_text( $title, plugin_lang_get( 'not_enough_data' ) );
 	}
 }
 
-function error_text( $title, $text ) {
+/**
+ * Display Error 'graph'
+ *
+ * @param string $p_title title
+ * @param string $p_text text
+ * @todo check error graphs do not support utf8
+ */
+function error_text( $p_title, $p_text ) {
 		if( OFF == plugin_config_get( 'eczlibrary' ) ) {
-
-			$t_graph_font = graph_get_font();
-
 			$graph = new CanvasGraph( 300, 380 );
+            $t_graph_font = graph_get_font();
 
-			$txt = new Text( $text, 150, 100 );
+			$txt = new Text( $p_text, 150, 100 );
 			$txt->Align( "center", "center", "center" );
 			$txt->SetFont( $t_graph_font, FS_BOLD );
-			$graph->title->Set( $title );
+			$graph->title->Set( $p_title );
 			$graph->title->SetFont( $t_graph_font, FS_BOLD );
 			$graph->AddText( $txt );
 			$graph->Stroke();
 		} else {
 			$im = imagecreate(300, 300);
-			/* @todo check: error graphs dont support utf8 */
 			$bg = imagecolorallocate($im, 255, 255, 255);
-			$textcolor = imagecolorallocate($im, 0, 0, 0);
-			imagestring($im, 5, 0, 0, $text, $textcolor);
+			$t_text_color = imagecolorallocate($im, 0, 0, 0);
+			imagestring($im, 5, 0, 0, $p_text, $t_text_color);
 			header('Content-type: image/png');
 			imagepng($im);
 			imagedestroy($im);

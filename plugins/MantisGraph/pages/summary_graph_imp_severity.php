@@ -21,9 +21,7 @@
 	 * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
 	 * @link http://www.mantisbt.org
 	 */
-	 /**
-	  * MantisBT Core API's
-	  */
+
 	require_once( 'core.php' );
 
 	require_once( 'graph_api.php' );

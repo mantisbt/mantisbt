@@ -57,14 +57,23 @@ class XmlImportExportPlugin extends MantisPlugin {
 		return $hooks;
 	}
 
+	/**
+	 * Import Issues Menu
+	 */
 	function import_issues_menu( ) {
 		return array( '<a href="' . plugin_page( 'import' ) . '">' . plugin_lang_get( 'import' ) . '</a>', );
 	}
 
+	/**
+	 * Export Issues Menu
+	 */
 	function export_issues_menu( ) {
 		return array( '<a href="' . plugin_page( 'export' ) . '">' . plugin_lang_get( 'export' ) . '</a>', );
 	}
 
+	/**
+	 * Plugin Installation
+	 */
 	function install() {
 		$result = extension_loaded("xmlreader") && extension_loaded("xmlwriter");
 		if ( ! $result ) {

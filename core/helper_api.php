@@ -410,14 +410,12 @@ function helper_clear_pref_cookies() {
 /**
  * Check whether the user has confirmed this action.
  *
- * If the user has not confirmed the action, generate a page which asks
- * the user to confirm and then submits a form back to the current page
- * with all the GET and POST data and an additional field called _confirmed
- * to indicate that confirmation has been done.
+ * If the user has not confirmed the action, generate a page which asks the user to confirm and
+ * then submits a form back to the current page with all the GET and POST data and an additional
+ * field called _confirmed to indicate that confirmation has been done.
  * @param string $p_message
  * @param string $p_button_label
  * @return bool
- * @todo improve this formatting - to only be about 50% of the screen width so that it doesn't become hard to read.
  */
 function helper_ensure_confirmed( $p_message, $p_button_label ) {
 	if( true == gpc_get_bool( '_confirmed' ) ) {
