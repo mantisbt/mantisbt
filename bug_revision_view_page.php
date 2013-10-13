@@ -161,6 +161,7 @@ print_recently_visited();
 ?>
 
 <br/>
+<div class="table-container">
 <table class="width100" cellspacing="1">
 
 <tr>
@@ -183,6 +184,7 @@ print_bracket_link( 'view.php?id=' . $t_bug_id, lang_get( 'back_to_issue' ) );
 } ?>
 
 </table>
+</div>
 
 <?php
 html_page_bottom();

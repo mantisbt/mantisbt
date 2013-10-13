@@ -562,9 +562,11 @@ div.form-container > table > tr:nth-child(even),
 #custom-field-link-project
 	{ background-color: #d8d8d8; }
 
-form > table > tr:last-child {
+form > table > tr:last-child,
+div.table-container > table > tbody > tr > td.right {
 	background-color: white;
 }
+
 fieldset fieldset.field-container,
 div.field-container {
 	position: relative;
