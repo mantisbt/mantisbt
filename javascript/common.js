@@ -200,7 +200,7 @@ $(document).ready( function() {
 	$('#project-selector').children('.button').hide();
 	setBugLabel();
 
-	$('input[type=checkbox]#use_date_filters').live('click', function() {
+	$(document).on('click', 'input[type=checkbox]#use_date_filters', function() {
 		if (!$(this).is(':checked')) {
 			$('div.filter-box select[name=start_year]').prop('disabled', true);
 			$('div.filter-box select[name=start_month]').prop('disabled', true);
@@ -230,7 +230,7 @@ $(document).ready( function() {
 		}
 	});
 
-	$('#tag_select').live('change', function() {
+	$(document).on('change', '#tag_select', function() {
 		var tagSeparator = $('#tag_separator').val();
 		var currentTagString = $('#tag_string').val();
 		var newTagOptionID = $(this).val();
