@@ -24,54 +24,48 @@
  * @link http://www.mantisbt.org
  */
 
-require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 
 access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 
 html_page_top( 'MantisBT Administration - System Utilities' );
 
 ?>
-<table width="100%" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+<table width="100%" cellspacing="0" cellpadding="0">
 	<tr class="top-bar">
 		<td class="links">
 			[ <a href="index.php">Back to MantisBT Administration</a> ]
 		</td>
-		<td class="title">
-			System Utilities
-		</td>
 	</tr>
 </table>
-<br /><br />
+<br />
+<h2>System Utilities</h2>
+<table width="80%" cellpadding="10" cellspacing="1" border="1">
+	<tr class="row-category">
+		<th width="70%">Description</th><th width="30%">Execute</th>
+	</tr>
 
-<table width="80%" bgcolor="#222222" cellpadding="10" cellspacing="1">
-	<tr><td bgcolor="#e8e8e8" colspan="2"><span class="title">Upgrade Utilities</span></td></tr>
-
-	<!-- # Headings -->
-	<tr bgcolor="#ffffff"><th width="70%">Description</th><th width="30%">Execute</th></tr>
-
-	<!-- each row links to an upgrade
-		move database bug attachments to disk -->
-	<tr bgcolor="#ffffff"><td>Move attachments stored in database schema to disk files.</td><td class="center">
+	<tr class="row-1"><td>Move attachments stored in database schema to disk files.</td><td class="center">
 	<?php html_button( 'move_attachments_page.php', 'Move Attachments to Disk', array( 'type' => 'bug' ) );?>
 	</td></tr>
 
-	<!-- move database project files to disk -->
-	<tr bgcolor="#ffffff"><td>Move project files stored in database schema to disk.</td><td class="center">
+	<tr class="row-2"><td>Move project files stored in database schema to disk.</td><td class="center">
 	<?php html_button( 'move_attachments_page.php', 'Move Project Files to Disk', array( 'type' => 'project' ) );?>
 	</td></tr>
 
-	<!-- move custom field content to standard field -->
-	<tr bgcolor="#ffffff"><td>Copy Custom Field to Standard Field.</td><td class="center">
+	<tr class="row-1"><td>Copy Custom Field to Standard Field.</td><td class="center">
 	<form method="post" action="copy_field.php">
+		<fieldset>
 		From
 		<select name="source_id">
 			<?php
 				$t_custom_ids = custom_field_get_ids();
 foreach( $t_custom_ids as $t_id ) {
-	printf( "<option value=\"%d\">%s</option>", $t_id, custom_field_get_field( $t_id, 'name' ) );
+	printf( "<option value=\"%d\">%s</option>", $t_id, string_html_specialchars( custom_field_get_field( $t_id, 'name' ) ) );
 }
 ?>
-		</select> to
+		</select> 
+		To
 		<select name="dest_id">
 			<?php
 /** @todo should be expanded and configurable */
@@ -84,12 +78,14 @@ foreach( $t_dest_ids as $t_id ) {
 }
 ?>
 		</select>
+		
 	<input type="submit" class="button" value="Copy" />
+	</fieldset>
 	</form>
 	</td></tr>
 
 	<!-- Database Statistics -->
-	<tr bgcolor="#ffffff"><td>Show database statistics.</td><td class="center">
+	<tr class="row-2"><td>Show database statistics.</td><td class="center">
 	<?php html_button( 'db_stats.php', 'Display', array() );?>
 	</td></tr>
 </table>
