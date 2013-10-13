@@ -61,6 +61,7 @@ td.print-category, th.print-category	{ font-size: 8pt; color: #000000; font-weig
 td.print-overdue	{ font-size: 8pt; color: #000000; font-weight: bold; padding: 2px; }
 td.print-bottom		{ border-bottom: 1px solid #000000; }
 td.print-spacer		{ background-color: #ffffff; color: #000000; font-size: 1pt; line-height: 0.1; padding: 0px;}
+td.print > a:link.user { text-decoration: none; color: black; }
 
 tr					{}
 tr.spacer			{ background-color: #ffffff !important; color: #000000; height: 5px; }
@@ -561,9 +562,11 @@ div.form-container > table > tr:nth-child(even),
 #custom-field-link-project
 	{ background-color: #d8d8d8; }
 
-form > table > tr:last-child {
+form > table > tr:last-child,
+div.table-container > table > tbody > tr > td.right {
 	background-color: white;
 }
+
 fieldset fieldset.field-container,
 div.field-container {
 	position: relative;

@@ -119,7 +119,7 @@ function show_revision( $p_revision ) {
 			break;
 		case REV_BUGNOTE:
 			if ( is_null( $s_user_access ) ) {
-				$s_user_access = access_has_bug_level( config_get( 'private_bugnote_threshold' ), $t_revision['bug_id'] );
+				$s_user_access = access_has_bug_level( config_get( 'private_bugnote_threshold' ), $p_revision['bug_id'] );
 			}
 
 			if ( !$s_user_access ) {
@@ -132,7 +132,7 @@ function show_revision( $p_revision ) {
 			$t_label = '';
 	}
 
-	$t_by_string = sprintf( lang_get( 'revision_by' ), string_display_line( date( config_get( 'normal_date_format' ), $p_revision['timestamp'] ) ), string_display_line( user_get_name( $t_revision['user_id'] ) ) );
+	$t_by_string = sprintf( lang_get( 'revision_by' ), string_display_line( date( config_get( 'normal_date_format' ), $p_revision['timestamp'] ) ), prepare_user_name( $p_revision['user_id'] ) );
 
 ?>
 <tr class="spacer"><td><a id="revision-<?php echo $p_revision['id'] ?>"></a></td></tr>
@@ -161,6 +161,7 @@ print_recently_visited();
 ?>
 
 <br/>
+<div class="table-container">
 <table class="width100" cellspacing="1">
 
 <tr>
@@ -183,6 +184,7 @@ print_bracket_link( 'view.php?id=' . $t_bug_id, lang_get( 'back_to_issue' ) );
 } ?>
 
 </table>
+</div>
 
 <?php
 html_page_bottom();
