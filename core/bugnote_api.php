@@ -126,13 +126,12 @@ class BugnoteData {
  * @access public
  */
 function bugnote_exists( $p_bugnote_id ) {
-	$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 	$t_bugnote_table = db_get_table( 'bugnote' );
 
 	$query = "SELECT COUNT(*)
 		          	FROM $t_bugnote_table
 		          	WHERE id=" . db_param();
-	$result = db_query_bound( $query, array( $c_bugnote_id ) );
+	$result = db_query_bound( $query, array( $p_bugnote_id ) );
 
 	if( 0 == db_result( $result ) ) {
 		return false;
@@ -187,11 +186,11 @@ function bugnote_is_user_reporter( $p_bugnote_id, $p_user_id ) {
  * @access public
  */
 function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_private = false, $p_type = BUGNOTE, $p_attr = '', $p_user_id = null, $p_send_email = TRUE, $p_date_submitted = 0, $p_last_modified = 0, $p_skip_bug_update = FALSE, $p_log_history = TRUE ) {
-	$c_bug_id = db_prepare_int( $p_bug_id );
+	$c_bug_id = (int)$p_bug_id;
 	$c_time_tracking = helper_duration_to_minutes( $p_time_tracking );
-	$c_type = db_prepare_int( $p_type );
-	$c_date_submitted = $p_date_submitted <= 0 ? db_now() : db_prepare_int( $p_date_submitted );
-	$c_last_modified = $p_last_modified <= 0 ? db_now() : db_prepare_int( $p_last_modified );
+	$c_type = (int)$p_type;
+	$c_date_submitted = $p_date_submitted <= 0 ? db_now() : (int)$p_date_submitted;
+	$c_last_modified = $p_last_modified <= 0 ? db_now() : (int)$p_last_modified;
 
 	if( REMINDER !== $p_type ) {
 		# Check if this is a time-tracking note
@@ -225,9 +224,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 
 	# get user information
 	if( $p_user_id === null ) {
-		$c_user_id = auth_get_current_user_id();
-	} else {
-		$c_user_id = db_prepare_int( $p_user_id );
+		$p_user_id = auth_get_current_user_id();
 	}
 
 	# Check for private bugnotes.
@@ -238,11 +235,11 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	}
 
 	# insert bugnote info
-	$query = "INSERT INTO $t_bugnote_table
+	$t_query = "INSERT INTO $t_bugnote_table
 				(bug_id, reporter_id, bugnote_text_id, view_state, date_submitted, last_modified, note_type, note_attr, time_tracking )
 			VALUES
 				(" . db_param() . ', ' . db_param() . ',' . db_param() . ', ' . db_param() . ', ' . db_param() . ',' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-	db_query_bound( $query, array( $c_bug_id, $c_user_id, $t_bugnote_text_id, $t_view_state, $c_date_submitted, $c_last_modified, $c_type, $p_attr, $c_time_tracking ) );
+	db_query_bound( $t_query, array( $c_bug_id, $p_user_id, $t_bugnote_text_id, $t_view_state, $c_date_submitted, $c_last_modified, $c_type, $p_attr, $c_time_tracking ) );
 
 	# get bugnote id
 	$t_bugnote_id = db_insert_id( $t_bugnote_table );
@@ -274,7 +271,6 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
  * @access public
  */
 function bugnote_delete( $p_bugnote_id ) {
-	$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 	$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
 	$t_bugnote_text_id = bugnote_get_field( $p_bugnote_id, 'bugnote_text_id' );
 	$t_bugnote_text_table = db_get_table( 'bugnote_text' );
@@ -282,7 +278,7 @@ function bugnote_delete( $p_bugnote_id ) {
 
 	# Remove the bugnote
 	$query = 'DELETE FROM ' . $t_bugnote_table . ' WHERE id=' . db_param();
-	db_query_bound( $query, array( $c_bugnote_id ) );
+	db_query_bound( $query, array( (int)$p_bugnote_id ) );
 
 	# Remove the bugnote text
 	$query = 'DELETE FROM ' . $t_bugnote_text_table . ' WHERE id=' . db_param();
@@ -301,7 +297,6 @@ function bugnote_delete( $p_bugnote_id ) {
  * @access public
  */
 function bugnote_delete_all( $p_bug_id ) {
-	$c_bug_id = db_prepare_int( $p_bug_id );
 	$t_bugnote_table = db_get_table( 'bugnote' );
 	$t_bugnote_text_table = db_get_table( 'bugnote_text' );
 
@@ -309,7 +304,7 @@ function bugnote_delete_all( $p_bug_id ) {
 	$query = "SELECT bugnote_text_id
 		          	FROM $t_bugnote_table
 		          	WHERE bug_id=" . db_param();
-	$result = db_query_bound( $query, array( $c_bug_id ) );
+	$result = db_query_bound( $query, array( (int)$p_bug_id ) );
 	$bugnote_count = db_num_rows( $result );
 	for( $i = 0;$i < $bugnote_count;$i++ ) {
 		$row = db_fetch_array( $result );
@@ -324,7 +319,7 @@ function bugnote_delete_all( $p_bug_id ) {
 	# Delete the corresponding bugnotes
 	$query = "DELETE FROM $t_bugnote_table
 		          	WHERE bug_id=" . db_param();
-	$result = db_query_bound( $query, array( $c_bug_id ) );
+	$result = db_query_bound( $query, array( (int)$p_bug_id ) );
 
 	# db_query errors on failure so:
 	return true;
@@ -390,16 +385,15 @@ function bugnote_get_field( $p_bugnote_id, $p_field_name ) {
  * @access public
  */
 function bugnote_get_latest_id( $p_bug_id ) {
-	$c_bug_id = db_prepare_int( $p_bug_id );
 	$t_bugnote_table = db_get_table( 'bugnote' );
 
-	$query = "SELECT id
+	$t_query = "SELECT id
 		          	FROM $t_bugnote_table
 		          	WHERE bug_id=" . db_param() . "
 		          	ORDER by last_modified DESC";
-	$result = db_query_bound( $query, array( $c_bug_id ), 1 );
+	$t_result = db_query_bound( $t_query, array( (int)$p_bug_id ), 1 );
 
-	return (int)db_result( $result );
+	return (int)db_result( $t_result );
 }
 
 /**
@@ -529,14 +523,13 @@ function bugnote_get_all_bugnotes( $p_bug_id ) {
  * @access public
  */
 function bugnote_set_time_tracking( $p_bugnote_id, $p_time_tracking ) {
-	$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 	$c_bugnote_time_tracking = helper_duration_to_minutes( $p_time_tracking );
 	$t_bugnote_table = db_get_table( 'bugnote' );
 
 	$query = "UPDATE $t_bugnote_table
 				SET time_tracking = " . db_param() . "
 				WHERE id=" . db_param();
-	db_query_bound( $query, array( $c_bugnote_time_tracking, $c_bugnote_id ) );
+	db_query_bound( $query, array( $c_bugnote_time_tracking, $p_bugnote_id ) );
 
 	# db_query errors if there was a problem so:
 	return true;
@@ -549,13 +542,12 @@ function bugnote_set_time_tracking( $p_bugnote_id, $p_time_tracking ) {
  * @access public
  */
 function bugnote_date_update( $p_bugnote_id ) {
-	$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 	$t_bugnote_table = db_get_table( 'bugnote' );
 
 	$query = "UPDATE $t_bugnote_table
 					SET last_modified=" . db_param() . "
 					WHERE id=" . db_param();
-	db_query_bound( $query, array( db_now(), $c_bugnote_id ) );
+	db_query_bound( $query, array( db_now(), $p_bugnote_id ) );
 
 	# db_query errors if there was a problem so:
 	return true;
@@ -612,7 +604,6 @@ function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
  * @access public
  */
 function bugnote_set_view_state( $p_bugnote_id, $p_private ) {
-	$c_bugnote_id = db_prepare_int( $p_bugnote_id );
 	$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
 
 	if( $p_private ) {
@@ -623,10 +614,10 @@ function bugnote_set_view_state( $p_bugnote_id, $p_private ) {
 
 	$t_bugnote_table = db_get_table( 'bugnote' );
 
-	$query = "UPDATE $t_bugnote_table
+	$t_query = "UPDATE $t_bugnote_table
 		          	SET view_state=" . db_param() . "
 		          	WHERE id=" . db_param();
-	db_query_bound( $query, array( $t_view_state, $c_bugnote_id ) );
+	db_query_bound( $t_query, array( $t_view_state, $p_bugnote_id ) );
 
 	history_log_event_special( $t_bug_id, BUGNOTE_STATE_CHANGED, $t_view_state, bugnote_format_id( $p_bugnote_id ) );
 
@@ -654,7 +645,6 @@ function bugnote_format_id( $p_bugnote_id ) {
  * @access public
  */
 function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
-	$c_bug_id = db_prepare_int( $p_bug_id );
 	$c_to = strtotime( $p_to ) + SECONDS_PER_DAY - 1;
 	$c_from = strtotime( $p_from );
 
@@ -675,17 +665,17 @@ function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
 
 	$t_results = array();
 
-	$query = "SELECT username, realname, SUM(time_tracking) AS sum_time_tracking
+	$t_query = "SELECT username, realname, SUM(time_tracking) AS sum_time_tracking
 				FROM $t_user_table u, $t_bugnote_table bn
 				WHERE u.id = bn.reporter_id AND bn.time_tracking != 0 AND
 				bn.bug_id = '$c_bug_id'
 				$t_from_where $t_to_where
 				GROUP BY u.username, u.realname";
 
-	$result = db_query( $query );
+	$t_result = db_query_bound( $t_query, array( $p_bug_id ) );
 
-	while( $row = db_fetch_array( $result ) ) {
-		$t_results[] = $row;
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_results[] = $t_row;
 	}
 
 	return $t_results;

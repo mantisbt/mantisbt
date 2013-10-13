@@ -85,9 +85,6 @@ function file_get_display_name( $p_filename ) {
 function file_bug_attachment_count( $p_bug_id ) {
 	global $g_cache_file_count;
 
-	$c_bug_id = db_prepare_int( $p_bug_id );
-	$t_bug_file_table = db_get_table( 'bug_file' );
-
 	# First check if we have a cache hit
 	if( isset( $g_cache_file_count[$p_bug_id] ) ) {
 		return $g_cache_file_count[$p_bug_id];
@@ -102,16 +99,17 @@ function file_bug_attachment_count( $p_bug_id ) {
 
 	# Otherwise build the cache and return the attachment count
 	#   for the given bug (if any).
-	$query = "SELECT bug_id, COUNT(bug_id) AS attachments
+	$t_bug_file_table = db_get_table( 'bug_file' );
+	$t_query = "SELECT bug_id, COUNT(bug_id) AS attachments
 				FROM $t_bug_file_table
 				GROUP BY bug_id";
-	$result = db_query_bound( $query );
+	$t_result = db_query_bound( $t_query );
 
 	$t_file_count = 0;
-	while( $row = db_fetch_array( $result ) ) {
-		$g_cache_file_count[$row['bug_id']] = $row['attachments'];
-		if( $p_bug_id == $row['bug_id'] ) {
-			$t_file_count = $row['attachments'];
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$g_cache_file_count[$t_row['bug_id']] = $t_row['attachments'];
+		if( $p_bug_id == $t_row['bug_id'] ) {
+			$t_file_count = $t_row['attachments'];
 		}
 	}
 
@@ -370,17 +368,14 @@ function file_get_visible_attachments( $p_bug_id ) {
  * @return bool
  */
 function file_delete_attachments( $p_bug_id ) {
-	$c_bug_id = db_prepare_int( $p_bug_id );
-
-	$t_bug_file_table = db_get_table( 'bug_file' );
-
 	$t_method = config_get( 'file_upload_method' );
 
 	# Delete files from disk
+	$t_bug_file_table = db_get_table( 'bug_file' );
 	$query = "SELECT diskfile, filename
 				FROM $t_bug_file_table
 				WHERE bug_id=" . db_param();
-	$result = db_query_bound( $query, array( $c_bug_id ) );
+	$result = db_query_bound( $query, array( $p_bug_id ) );
 
 	$file_count = db_num_rows( $result );
 	if( 0 == $file_count ) {
@@ -414,7 +409,7 @@ function file_delete_attachments( $p_bug_id ) {
 	# Delete the corresponding db records
 	$query = "DELETE FROM $t_bug_file_table
 				  WHERE bug_id=" . db_param();
-	$result = db_query_bound( $query, array( $c_bug_id ) );
+	db_query_bound( $query, array( $p_bug_id ) );
 
 	# db_query errors on failure so:
 	return true;
@@ -566,7 +561,7 @@ function file_get_field( $p_file_id, $p_field_name, $p_table = 'bug' ) {
 function file_delete( $p_file_id, $p_table = 'bug' ) {
 	$t_upload_method = config_get( 'file_upload_method' );
 
-	$c_file_id = db_prepare_int( $p_file_id );
+	$c_file_id = (int)$p_file_id;
 	$t_filename = file_get_field( $p_file_id, 'filename', $p_table );
 	$t_diskfile = file_get_field( $p_file_id, 'diskfile', $p_table );
 
@@ -854,12 +849,12 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 	) );
 
 	if( 'bug' == $p_table ) {
-		# bump the last_updated date
+		# update the last_updated date
 		if ( !$p_skip_bug_update ) {
 			$result = bug_update_date( $p_bug_id );
 		}
 
-		# add history entry
+		# log file added to bug history
 		history_log_event_special( $p_bug_id, FILE_ADDED, $t_file_name );
 	}
 }
@@ -1120,8 +1115,8 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 	}
 
 	# Initialize the update query to update a single row
+	$c_bug_id = (int)$p_bug_id;
 	$t_bug_file_table = db_get_table( 'bug_file' );
-	$c_bug_id = db_prepare_int( $p_bug_id );
 	$query_disk_attachment_update = "UPDATE $t_bug_file_table
 	                                 SET folder=" . db_param() . "
 	                                 WHERE bug_id=" . db_param() . "

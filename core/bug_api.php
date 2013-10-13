@@ -1696,10 +1696,7 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
  * @uses database_api.php
  */
 function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_private = false ) {
-	$c_bug_id = db_prepare_int( $p_bug_id );
-	$c_user_id = db_prepare_int( $p_user_id );
-
-	if(( $c_user_id != NO_USER ) && !access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id, $p_user_id ) ) {
+	if(( $p_user_id != NO_USER ) && !access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug_id, $p_user_id ) ) {
 		trigger_error( ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS );
 	}
 
@@ -1721,11 +1718,11 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 		$query = "UPDATE $t_bug_table
 					  SET handler_id=" . db_param() . ", status=" . db_param() . "
 					  WHERE id=" . db_param();
-		db_query_bound( $query, array( $c_user_id, $t_ass_val, $c_bug_id ) );
+		db_query_bound( $query, array( $p_user_id, $t_ass_val, $p_bug_id ) );
 
 		# log changes
-		history_log_event_direct( $c_bug_id, 'status', $h_status, $t_ass_val );
-		history_log_event_direct( $c_bug_id, 'handler_id', $h_handler_id, $p_user_id );
+		history_log_event_direct( $p_bug_id, 'status', $h_status, $t_ass_val );
+		history_log_event_direct( $p_bug_id, 'handler_id', $h_handler_id, $p_user_id );
 
 		# Add bugnote if supplied ignore false return
 		bugnote_add( $p_bug_id, $p_bugnote_text, 0, $p_bugnote_private, 0, '', NULL, FALSE );
@@ -1961,7 +1958,7 @@ function bug_get_monitors( $p_bug_id ) {
 		return array();
 	}
 
-	$c_bug_id = db_prepare_int( $p_bug_id );
+	$c_bug_id = (int)$p_bug_id;
 	$t_bug_monitor_table = db_get_table( 'bug_monitor' );
 	$t_user_table = db_get_table( 'user' );
 

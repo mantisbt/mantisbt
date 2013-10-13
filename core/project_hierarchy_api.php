@@ -49,16 +49,12 @@ function project_hierarchy_add( $p_child_id, $p_parent_id, $p_inherit_parent = t
 
 	$t_project_hierarchy_table = db_get_table( 'project_hierarchy' );
 
-	$c_child_id = db_prepare_int( $p_child_id );
-	$c_parent_id = db_prepare_int( $p_parent_id );
-	$c_inherit_parent = db_prepare_bool( $p_inherit_parent );
-
 	$query = "INSERT INTO $t_project_hierarchy_table
 		                ( child_id, parent_id, inherit_parent )
 						VALUES
 						( " . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 
-	db_query_bound( $query, array( $c_child_id, $c_parent_id, $c_inherit_parent ) );
+	db_query_bound( $query, array( $p_child_id, $p_parent_id, $p_inherit_parent ) );
 }
 
 /**
@@ -71,15 +67,11 @@ function project_hierarchy_add( $p_child_id, $p_parent_id, $p_inherit_parent = t
 function project_hierarchy_update( $p_child_id, $p_parent_id, $p_inherit_parent = true ) {
 	$t_project_hierarchy_table = db_get_table( 'project_hierarchy' );
 
-	$c_child_id = db_prepare_int( $p_child_id );
-	$c_parent_id = db_prepare_int( $p_parent_id );
-	$c_inherit_parent = db_prepare_bool( $p_inherit_parent );
-
 	$query = "UPDATE $t_project_hierarchy_table
 					SET inherit_parent=" . db_param() . '
 					WHERE child_id=' . db_param() . '
 						AND parent_id=' . db_param();
-	db_query_bound( $query, array( $c_inherit_parent, $c_child_id, $c_parent_id ) );
+	db_query_bound( $query, array( $p_inherit_parent, $p_child_id, $p_parent_id ) );
 }
 
 /**
@@ -91,14 +83,11 @@ function project_hierarchy_update( $p_child_id, $p_parent_id, $p_inherit_parent 
 function project_hierarchy_remove( $p_child_id, $p_parent_id ) {
 	$t_project_hierarchy_table = db_get_table( 'project_hierarchy' );
 
-	$c_child_id = db_prepare_int( $p_child_id );
-	$c_parent_id = db_prepare_int( $p_parent_id );
-
 	$query = "DELETE FROM $t_project_hierarchy_table
 		                WHERE child_id = " . db_param() . "
 						AND parent_id = " . db_param();
 
-	db_query_bound( $query, array( $c_child_id, $c_parent_id ) );
+	db_query_bound( $query, array( $p_child_id, $p_parent_id ) );
 }
 
 /**
@@ -109,13 +98,11 @@ function project_hierarchy_remove( $p_child_id, $p_parent_id ) {
 function project_hierarchy_remove_all( $p_project_id ) {
 	$t_project_hierarchy_table = db_get_table( 'project_hierarchy' );
 
-	$c_project_id = db_prepare_int( $p_project_id );
-
 	$query = "DELETE FROM $t_project_hierarchy_table
 		                WHERE child_id = " . db_param() . "
 						  OR parent_id = " . db_param();
 
-	db_query_bound( $query, array( $c_project_id, $c_project_id ) );
+	db_query_bound( $query, array( $p_project_id, $p_project_id ) );
 }
 
 /**
@@ -247,12 +234,8 @@ function project_hierarchy_inheritance( $p_project_id, $p_show_disabled = false 
 
 	project_hierarchy_cache( $p_show_disabled );
 
-	$t_project_ids = array(
-		(int) $p_project_id,
-	);
-	$t_lookup_ids = array(
-		(int) $p_project_id,
-	);
+	$t_project_ids = array( (int) $p_project_id, );
+	$t_lookup_ids = array( (int) $p_project_id, );
 
 	while( count( $t_lookup_ids ) > 0 ) {
 		$t_project_id = array_shift( $t_lookup_ids );

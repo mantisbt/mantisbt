@@ -60,11 +60,6 @@ require_api( 'utility_api.php' );
  * @throws MantisBT\Exception\Field\EmptyField
  */
 function news_create( $p_project_id, $p_poster_id, $p_view_state, $p_announcement, $p_headline, $p_body ) {
-	$c_project_id = db_prepare_int( $p_project_id );
-	$c_poster_id = db_prepare_int( $p_poster_id );
-	$c_view_state = db_prepare_int( $p_view_state );
-	$c_announcement = db_prepare_bool( $p_announcement );
-
 	if( is_blank( $p_headline ) ) {
 		error_parameters( lang_get( 'headline' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
@@ -77,9 +72,7 @@ function news_create( $p_project_id, $p_poster_id, $p_view_state, $p_announcemen
 
 	$t_news_table = db_get_table( 'news' );
 
-	# Add item
-
-	$query = "INSERT
+	$t_query = "INSERT
 				INTO $t_news_table
 	    		  ( project_id, poster_id, date_posted, last_modified,
 	    		    view_state, announcement, headline, body )
@@ -93,7 +86,7 @@ function news_create( $p_project_id, $p_poster_id, $p_view_state, $p_announcemen
 				      " . db_param() . ",
 				      " . db_param() . "
 					)";
-	db_query_bound( $query, array( $c_project_id, $c_poster_id, db_now(), db_now(), $c_view_state, $c_announcement, $p_headline, $p_body ) );
+	db_query_bound( $t_query, array( (int)$p_project_id, (int)$p_poster_id, db_now(), db_now(), (int)$p_view_state, $p_announcement, $p_headline, $p_body ) );
 
 	$t_news_id = db_insert_id( $t_news_table );
 
@@ -109,14 +102,11 @@ function news_create( $p_project_id, $p_poster_id, $p_view_state, $p_announcemen
  * @return bool always true
  */
 function news_delete( $p_news_id ) {
-	$c_news_id = db_prepare_int( $p_news_id );
-
 	$t_news_table = db_get_table( 'news' );
 
-	$query = "DELETE FROM $t_news_table
-	    		  WHERE id=" . db_param();
+	$t_query = "DELETE FROM $t_news_table WHERE id=" . db_param();
 
-	db_query_bound( $query, array( $c_news_id ) );
+	db_query_bound( $t_query, array( $p_news_id ) );
 
 	# db_query errors on failure so:
 	return true;
@@ -129,14 +119,11 @@ function news_delete( $p_news_id ) {
  * @return bool always true
  */
 function news_delete_all( $p_project_id ) {
-	$c_project_id = db_prepare_int( $p_project_id );
-
 	$t_news_table = db_get_table( 'news' );
 
-	$query = "DELETE FROM $t_news_table
-	    		  WHERE project_id=" . db_param();
+	$query = "DELETE FROM $t_news_table WHERE project_id=" . db_param();
 
-	db_query_bound( $query, array( $c_project_id ) );
+	db_query_bound( $query, array( (int)$p_project_id ) );
 
 	# db_query errors on failure so:
 	return true;
@@ -154,11 +141,6 @@ function news_delete_all( $p_project_id ) {
  * @return bool always true
  */
 function news_update( $p_news_id, $p_project_id, $p_view_state, $p_announcement, $p_headline, $p_body ) {
-	$c_news_id = db_prepare_int( $p_news_id );
-	$c_project_id = db_prepare_int( $p_project_id );
-	$c_view_state = db_prepare_int( $p_view_state );
-	$c_announcement = db_prepare_bool( $p_announcement );
-
 	if( is_blank( $p_headline ) ) {
 		error_parameters( lang_get( 'headline' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
@@ -172,7 +154,7 @@ function news_update( $p_news_id, $p_project_id, $p_view_state, $p_announcement,
 	$t_news_table = db_get_table( 'news' );
 
 	# Update entry
-	$query = "UPDATE $t_news_table
+	$t_query = "UPDATE $t_news_table
 				  SET view_state=" . db_param() . ",
 					announcement=" . db_param() . ",
 					headline=" . db_param() . ",
@@ -181,7 +163,7 @@ function news_update( $p_news_id, $p_project_id, $p_view_state, $p_announcement,
 					last_modified= " . db_param() . "
 				  WHERE id=" . db_param();
 
-	db_query_bound( $query, array( $c_view_state, $c_announcement, $p_headline, $p_body, $c_project_id, db_now(), $c_news_id ) );
+	db_query_bound( $t_query, array( $p_view_state, $p_announcement, $p_headline, $p_body, $p_project_id, db_now(), $p_news_id ) );
 
 	# db_query errors on failure so:
 	return true;
@@ -194,14 +176,9 @@ function news_update( $p_news_id, $p_project_id, $p_view_state, $p_announcement,
  * @return array news article
  */
 function news_get_row( $p_news_id ) {
-	$c_news_id = db_prepare_int( $p_news_id );
-
 	$t_news_table = db_get_table( 'news' );
-
-	$query = "SELECT *
-				  FROM $t_news_table
-				  WHERE id=" . db_param();
-	$result = db_query_bound( $query, array( $c_news_id ) );
+	$t_query = "SELECT * FROM $t_news_table WHERE id=" . db_param();
+	$result = db_query_bound( $t_query, array( $p_news_id ) );
 
 	if( 0 == db_num_rows( $result ) ) {
 		trigger_error( ERROR_NEWS_NOT_FOUND, ERROR );
@@ -218,23 +195,19 @@ function news_get_row( $p_news_id ) {
  * @param bool $p_global site wide news i.e. ALL_PROJECTS
  * @return int news count
  */
-function news_get_count( $p_project_id, $p_sitewide = true ) {
-	$c_project_id = db_prepare_int( $p_project_id );
-
+function news_get_count( $p_project_id, $p_global = true ) {
 	$t_news_table = db_get_table( 'news' );
 	$t_project_where = helper_project_specific_where( $p_project_id );
 
-	$query = "SELECT COUNT(*)
-				  FROM $t_news_table
-				  WHERE $t_project_where";
+	$t_query = "SELECT COUNT(*) FROM $t_news_table WHERE $t_project_where";
 
-	if( $p_sitewide ) {
-		$query .= ' OR project_id=' . ALL_PROJECTS;
+	if( $p_global ) {
+		$t_query .= ' OR project_id=' . ALL_PROJECTS;
 	}
 
-	$result = db_query_bound( $query );
+	$result = db_query_bound( $t_query );
 
-	return db_result( $result, 0, 0 );
+	return db_result( $result, 0 );
 }
 
 /**
@@ -254,8 +227,7 @@ function news_get_rows( $p_project_id, $p_sitewide = true ) {
 		$t_projects[] = ALL_PROJECTS;
 	}
 
-	$query = "SELECT *
-				  FROM $t_news_table";
+	$query = "SELECT * FROM $t_news_table";
 
 	if( 1 == count( $t_projects ) ) {
 		$c_project_id = $t_projects[0];
@@ -287,8 +259,8 @@ function news_get_rows( $p_project_id, $p_sitewide = true ) {
  * @return
  */
 function news_get_field( $p_news_id, $p_field_name ) {
-	$row = news_get_row( $p_news_id );
-	return( $row[$p_field_name] );
+	$t_row = news_get_row( $p_news_id );
+	return( $t_row[$p_field_name] );
 }
 
 /**
@@ -314,7 +286,7 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 		$p_project_id = helper_get_current_project();
 	}
 
-	$c_offset = db_prepare_int( $p_offset );
+	$c_offset = (int)$p_offset;
 
 	$t_projects = current_user_get_all_accessible_subprojects( $p_project_id );
 	$t_projects[] = (int)$p_project_id;
@@ -330,8 +302,7 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 		case 0:
 
 			# BY_LIMIT - Select the news posts
-			$query = "SELECT *
-						FROM $t_news_table";
+			$query = "SELECT * FROM $t_news_table";
 
 			if( 1 == count( $t_projects ) ) {
 				$c_project_id = $t_projects[0];

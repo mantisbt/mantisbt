@@ -99,9 +99,6 @@ function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_descrip
  * @return true
  */
 function profile_delete( $p_user_id, $p_profile_id ) {
-	$c_user_id = db_prepare_int( $p_user_id );
-	$c_profile_id = db_prepare_int( $p_profile_id );
-
 	if( ALL_USERS != $p_user_id ) {
 		user_ensure_unprotected( $p_user_id );
 	}
@@ -111,7 +108,7 @@ function profile_delete( $p_user_id, $p_profile_id ) {
 	# Delete the profile
 	$query = "DELETE FROM $t_user_profile_table
 				  WHERE id=" . db_param() . " AND user_id=" . db_param();
-	db_query_bound( $query, array( $c_profile_id, $c_user_id ) );
+	db_query_bound( $query, array( $p_profile_id, $p_user_id ) );
 
 	# db_query errors on failure so:
 	return true;
@@ -128,9 +125,6 @@ function profile_delete( $p_user_id, $p_profile_id ) {
  * @return true
  */
 function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_build, $p_description ) {
-	$c_user_id = db_prepare_int( $p_user_id );
-	$c_profile_id = db_prepare_int( $p_profile_id );
-
 	if( ALL_USERS != $p_user_id ) {
 		user_ensure_unprotected( $p_user_id );
 	}
@@ -162,10 +156,7 @@ function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_bu
 					  os_build=" . db_param() . ",
 					  description=" . db_param() . "
 				  WHERE id=" . db_param() . " AND user_id=" . db_param();
-	$result = db_query_bound( $query, array( $p_platform, $p_os, $p_os_build, $p_description, $c_profile_id, $c_user_id ) );
-
-	# db_query errors on failure so:
-	return true;
+	$result = db_query_bound( $query, array( $p_platform, $p_os, $p_os_build, $p_description, $p_profile_id, $p_user_id ) );
 }
 
 /**
@@ -175,15 +166,12 @@ function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_bu
  * @return array
  */
 function profile_get_row( $p_user_id, $p_profile_id ) {
-	$c_user_id = db_prepare_int( $p_user_id );
-	$c_profile_id = db_prepare_int( $p_profile_id );
-
 	$t_user_profile_table = db_get_table( 'user_profile' );
 
 	$query = "SELECT *
 				  FROM $t_user_profile_table
 				  WHERE id=" . db_param() . " AND user_id=" . db_param();
-	$result = db_query_bound( $query, array( $c_profile_id, $c_user_id ) );
+	$result = db_query_bound( $query, array( $p_profile_id, $p_user_id ) );
 
 	return db_fetch_array( $result );
 }
@@ -195,16 +183,12 @@ function profile_get_row( $p_user_id, $p_profile_id ) {
  * @todo relationship of this function to profile_get_row?
  */
 function profile_get_row_direct( $p_profile_id ) {
-	$c_profile_id = db_prepare_int( $p_profile_id );
-
 	$t_user_profile_table = db_get_table( 'user_profile' );
 
-	$query = "SELECT *
-				  FROM $t_user_profile_table
-				  WHERE id=" . db_param();
-	$result = db_query_bound( $query, array( $c_profile_id ) );
+	$query = "SELECT * FROM $t_user_profile_table WHERE id=" . db_param();
+	$t_result = db_query_bound( $query, array( $p_profile_id ) );
 
-	return db_fetch_array( $result );
+	return db_fetch_array( $t_result );
 }
 
 /**
@@ -258,7 +242,7 @@ function profile_get_all_for_user( $p_user_id ) {
  * @return array
  */
 function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
-	$c_user_id = ( $p_user_id === null ) ? auth_get_current_user_id() : db_prepare_int( $p_user_id );
+	$c_user_id = ( $p_user_id === null ) ? auth_get_current_user_id() : $p_user_id;
 
 	switch( $p_field ) {
 		case 'id':
@@ -328,13 +312,12 @@ function profile_get_all_for_project( $p_project_id ) {
  * @return string
  */
 function profile_get_default( $p_user_id ) {
-	$c_user_id = db_prepare_int( $p_user_id );
 	$t_mantis_user_pref_table = db_get_table( 'user_pref' );
 
 	$query = "SELECT default_profile
 			FROM $t_mantis_user_pref_table
 			WHERE user_id=" . db_param();
-	$result = db_query_bound( $query, array( $c_user_id ) );
+	$result = db_query_bound( $query, array( $p_user_id ) );
 
 	$t_default_profile = (int)db_result( $result, 0, 0 );
 

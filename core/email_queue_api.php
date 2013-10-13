@@ -82,7 +82,7 @@ class EmailData {
  * @return EmailData
  */
 function email_queue_prepare_db( $p_email_data ) {
-	$p_email_data->email_id = db_prepare_int( $p_email_data->email_id );
+	$p_email_data->email_id = (int)$p_email_data->email_id;
 
 	return $p_email_data;
 }
@@ -179,11 +179,10 @@ function email_queue_row_to_object( $p_row ) {
  * @return bool|EmailData
  */
 function email_queue_get( $p_email_id ) {
-	$c_email_id = db_prepare_int( $p_email_id );
 	$t_email_table = db_get_table( 'email' );
 
 	$query = 'SELECT * FROM ' . $t_email_table . ' WHERE email_id=' . db_param();
-	$result = db_query_bound( $query, array( $c_email_id ) );
+	$result = db_query_bound( $query, array( $p_email_id ) );
 
 	$t_row = db_fetch_array( $result );
 
@@ -196,11 +195,10 @@ function email_queue_get( $p_email_id ) {
  * @return null
  */
 function email_queue_delete( $p_email_id ) {
-	$c_email_id = db_prepare_int( $p_email_id );
 	$t_email_table = db_get_table( 'email' );
 
 	$query = 'DELETE FROM ' . $t_email_table . ' WHERE email_id=' . db_param();
-	db_query_bound( $query, array( $c_email_id ) );
+	db_query_bound( $query, array( $p_email_id ) );
 
 	log_event( LOG_EMAIL, "message #$p_email_id deleted from queue" );
 }

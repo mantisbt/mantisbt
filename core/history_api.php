@@ -82,17 +82,14 @@ function history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_ne
 		$c_field_name = $p_field_name;
 		$c_old_value = ( is_null( $p_old_value ) ? '' : $p_old_value );
 		$c_new_value = ( is_null( $p_new_value ) ? '' : $p_new_value );
-		$c_bug_id = db_prepare_int( $p_bug_id );
-		$c_user_id = db_prepare_int( $p_user_id );
-		$c_type = db_prepare_int( $p_type );
 
 		$t_mantis_bug_history_table = db_get_table( 'bug_history' );
 
-		$query = "INSERT INTO $t_mantis_bug_history_table
+		$t_query = "INSERT INTO $t_mantis_bug_history_table
 						( user_id, bug_id, date_modified, field_name, old_value, new_value, type )
 					VALUES
 						( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-		$result = db_query_bound( $query, array( $c_user_id, $c_bug_id, db_now(), $c_field_name, $c_old_value, $c_new_value, $c_type ) );
+		$result = db_query_bound( $t_query, array( $p_user_id, $p_bug_id, db_now(), $c_field_name, $c_old_value, $c_new_value, $p_type ) );
 	}
 }
 
@@ -119,8 +116,6 @@ function history_log_event( $p_bug_id, $p_field_name, $p_old_value ) {
  * @return null
  */
 function history_log_event_special( $p_bug_id, $p_type, $p_optional = '', $p_optional2 = '' ) {
-	$c_bug_id = db_prepare_int( $p_bug_id );
-	$c_type = db_prepare_int( $p_type );
 	$c_optional = ( $p_optional );
 	$c_optional2 = ( $p_optional2 );
 	$t_user_id = auth_get_current_user_id();
@@ -131,7 +126,7 @@ function history_log_event_special( $p_bug_id, $p_type, $p_optional = '', $p_opt
 					( user_id, bug_id, date_modified, type, old_value, new_value, field_name )
 				VALUES
 					( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ',' . db_param() . ', ' . db_param() . ')';
-	$result = db_query_bound( $query, array( $t_user_id, $c_bug_id, db_now(), $c_type, $c_optional, $c_optional2, '' ) );
+	$result = db_query_bound( $query, array( $t_user_id, $p_bug_id, db_now(), $p_type, $c_optional, $c_optional2, '' ) );
 }
 
 /**
@@ -171,7 +166,7 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 	$t_mantis_bug_history_table = db_get_table( 'bug_history' );
 	$t_mantis_user_table = db_get_table( 'user' );
 	$t_history_order = config_get( 'history_order' );
-	$c_bug_id = db_prepare_int( $p_bug_id );
+	$c_bug_id = (int)$p_bug_id;
 
 	$t_user_id = (( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
 
@@ -594,13 +589,8 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
  * @param int $p_bug_id
  */
 function history_delete( $p_bug_id ) {
-	$c_bug_id = db_prepare_int( $p_bug_id );
-
 	$t_bug_history_table = db_get_table( 'bug_history' );
 
 	$query = 'DELETE FROM ' . $t_bug_history_table . ' WHERE bug_id=' . db_param();
-	db_query_bound( $query, array( $c_bug_id ) );
-
-	# db_query errors on failure so:
-	return true;
+	db_query_bound( $query, array( $p_bug_id ) );
 }

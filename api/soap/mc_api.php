@@ -379,13 +379,13 @@ function mci_filter_db_get_available_queries( $p_project_id = null, $p_user_id =
 	if( null === $p_project_id ) {
 		$t_project_id = helper_get_current_project();
 	} else {
-		$t_project_id = db_prepare_int( $p_project_id );
+		$t_project_id = (int)$p_project_id;
 	}
 
 	if( null === $p_user_id ) {
 		$t_user_id = auth_get_current_user_id();
 	} else {
-		$t_user_id = db_prepare_int( $p_user_id );
+		$t_user_id = (int)$p_user_id;
 	}
 
 	# If the user doesn't have access rights to stored queries, just return
