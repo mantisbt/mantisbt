@@ -65,11 +65,11 @@ $g_allow_browser_cache = 1;
 $f_bug_id = gpc_get_int( 'id' );
 $t_bug = bug_get( $f_bug_id );
 
-$tpl_file = __FILE__;
-$tpl_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-$tpl_show_page_header = false;
-$tpl_force_readonly = true;
-$tpl_fields_config_option = 'bug_change_status_page_fields';
+$t_file = __FILE__;
+$t_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
+$t_show_page_header = false;
+$t_force_readonly = true;
+$t_fields_config_option = 'bug_change_status_page_fields';
 
 if( $t_bug->project_id != helper_get_current_project() ) {
 	# in case the current project is not the same project of the bug we are viewing...

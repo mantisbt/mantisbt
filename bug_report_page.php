@@ -191,30 +191,30 @@ $f_copy_attachments_from_parent   = gpc_get_bool( 'copy_attachments_from_parent'
 $t_fields = config_get( 'bug_report_page_fields' );
 $t_fields = columns_filter_disabled( $t_fields );
 
-$tpl_show_category = in_array( 'category_id', $t_fields );
-$tpl_show_reproducibility = in_array( 'reproducibility', $t_fields );
-$tpl_show_eta = in_array( 'eta', $t_fields );
-$tpl_show_severity = in_array( 'severity', $t_fields );
-$tpl_show_priority = in_array( 'priority', $t_fields );
-$tpl_show_steps_to_reproduce = in_array( 'steps_to_reproduce', $t_fields );
-$tpl_show_handler = in_array( 'handler', $t_fields ) && access_has_project_level( config_get( 'update_bug_assign_threshold' ) );
-$tpl_show_profiles = config_get( 'enable_profiles' );
-$tpl_show_platform = $tpl_show_profiles && in_array( 'platform', $t_fields );
-$tpl_show_os = $tpl_show_profiles && in_array( 'os', $t_fields );
-$tpl_show_os_version = $tpl_show_profiles && in_array( 'os_version', $t_fields );
-$tpl_show_resolution = in_array( 'resolution', $t_fields );
-$tpl_show_status = in_array( 'status', $t_fields );
+$t_show_category = in_array( 'category_id', $t_fields );
+$t_show_reproducibility = in_array( 'reproducibility', $t_fields );
+$t_show_eta = in_array( 'eta', $t_fields );
+$t_show_severity = in_array( 'severity', $t_fields );
+$t_show_priority = in_array( 'priority', $t_fields );
+$t_show_steps_to_reproduce = in_array( 'steps_to_reproduce', $t_fields );
+$t_show_handler = in_array( 'handler', $t_fields ) && access_has_project_level( config_get( 'update_bug_assign_threshold' ) );
+$t_show_profiles = config_get( 'enable_profiles' );
+$t_show_platform = $t_show_profiles && in_array( 'platform', $t_fields );
+$t_show_os = $t_show_profiles && in_array( 'os', $t_fields );
+$t_show_os_version = $t_show_profiles && in_array( 'os_version', $t_fields );
+$t_show_resolution = in_array( 'resolution', $t_fields );
+$t_show_status = in_array( 'status', $t_fields );
 
-$tpl_show_versions = version_should_show_product_version( $t_project_id );
-$tpl_show_product_version = $tpl_show_versions && in_array( 'product_version', $t_fields );
-$tpl_show_product_build = $tpl_show_versions && in_array( 'product_build', $t_fields ) && config_get( 'enable_product_build' ) == ON;
-$tpl_show_target_version = $tpl_show_versions && in_array( 'target_version', $t_fields ) && access_has_project_level( config_get( 'roadmap_update_threshold' ) );
-$tpl_show_additional_info = in_array( 'additional_info', $t_fields );
-$tpl_show_due_date = in_array( 'due_date', $t_fields ) && access_has_project_level( config_get( 'due_date_update_threshold' ), helper_get_current_project(), auth_get_current_user_id() );
-$tpl_show_attachments = in_array( 'attachments', $t_fields ) && file_allow_bug_upload();
-$tpl_show_view_state = in_array( 'view_state', $t_fields ) && access_has_project_level( config_get( 'set_view_status_threshold' ) );
+$t_show_versions = version_should_show_product_version( $t_project_id );
+$t_show_product_version = $t_show_versions && in_array( 'product_version', $t_fields );
+$t_show_product_build = $t_show_versions && in_array( 'product_build', $t_fields ) && config_get( 'enable_product_build' ) == ON;
+$t_show_target_version = $t_show_versions && in_array( 'target_version', $t_fields ) && access_has_project_level( config_get( 'roadmap_update_threshold' ) );
+$t_show_additional_info = in_array( 'additional_info', $t_fields );
+$t_show_due_date = in_array( 'due_date', $t_fields ) && access_has_project_level( config_get( 'due_date_update_threshold' ), helper_get_current_project(), auth_get_current_user_id() );
+$t_show_attachments = in_array( 'attachments', $t_fields ) && file_allow_bug_upload();
+$t_show_view_state = in_array( 'view_state', $t_fields ) && access_has_project_level( config_get( 'set_view_status_threshold' ) );
 
-if ( $tpl_show_due_date ) {
+if ( $t_show_due_date ) {
 	require_js( 'jscalendar/calendar.js' );
 	require_js( 'jscalendar/lang/calendar-en.js' );
 	require_js( 'jscalendar/calendar-setup.js' );
@@ -229,7 +229,7 @@ html_page_top( lang_get( 'report_bug_link' ) );
 print_recently_visited();
 ?>
 <br />
-<form name="report_bug_form" method="post" <?php if ( $tpl_show_attachments ) { echo 'enctype="multipart/form-data"'; } ?> action="bug_report.php">
+<form name="report_bug_form" method="post" <?php if ( $t_show_attachments ) { echo 'enctype="multipart/form-data"'; } ?> action="bug_report.php">
 <?php echo form_security_field( 'bug_report' ) ?>
 <div class="table-container">
 <table cellspacing="1">
@@ -243,7 +243,7 @@ print_recently_visited();
 <?php
 	event_signal( 'EVENT_REPORT_BUG_FORM_TOP', array( $t_project_id ) );
 
-	if ( $tpl_show_category ) {
+	if ( $t_show_category ) {
 ?>
 	<tr>
 		<th class="category" width="30%">
@@ -267,7 +267,7 @@ print_recently_visited();
 	</tr>
 <?php }
 
-	if ( $tpl_show_reproducibility ) {
+	if ( $t_show_reproducibility ) {
 ?>
 
 	<tr>
@@ -283,7 +283,7 @@ print_recently_visited();
 <?php
 	}
 
-	if ( $tpl_show_eta ) {
+	if ( $t_show_eta ) {
 ?>
 
 	<tr>
@@ -299,7 +299,7 @@ print_recently_visited();
 <?php
 	}
 
-	if ( $tpl_show_severity ) {
+	if ( $t_show_severity ) {
 ?>
 	<tr>
 		<th class="category">
@@ -314,7 +314,7 @@ print_recently_visited();
 <?php
 	}
 
-	if ( $tpl_show_priority ) {
+	if ( $t_show_priority ) {
 ?>
 	<tr>
 		<th class="category">
@@ -329,7 +329,7 @@ print_recently_visited();
 <?php
 	}
 
-	if ( $tpl_show_due_date ) {
+	if ( $t_show_due_date ) {
 		$t_date_to_display = '';
 
 		if ( !date_is_null( $f_due_date ) ) {
@@ -345,7 +345,7 @@ print_recently_visited();
 		</td>
 	</tr>
 <?php } ?>
-<?php if ( $tpl_show_platform || $tpl_show_os || $tpl_show_os_version ) { ?>
+<?php if ( $t_show_platform || $t_show_os || $t_show_os_version ) { ?>
 	<tr>
 		<th class="category">
 			<label for="profile_id"><?php echo lang_get( 'select_profile' ) ?></label>
@@ -429,7 +429,7 @@ print_recently_visited();
 	</tr>
 <?php } ?>
 <?php
-	if ( $tpl_show_product_version ) {
+	if ( $t_show_product_version ) {
 		$t_product_version_released_mask = VERSION_RELEASED;
 
 		if (access_has_project_level( config_get( 'report_issues_for_unreleased_versions_threshold' ) ) ) {
@@ -449,7 +449,7 @@ print_recently_visited();
 <?php
 	}
 ?>
-<?php if ( $tpl_show_product_build ) { ?>
+<?php if ( $t_show_product_build ) { ?>
 	<tr>
 		<th class="category">
 			<label for="build"><?php echo lang_get( 'product_build' ) ?></label>
@@ -460,7 +460,7 @@ print_recently_visited();
 	</tr>
 <?php } ?>
 
-<?php if ( $tpl_show_handler ) { ?>
+<?php if ( $t_show_handler ) { ?>
 	<tr>
 		<th class="category">
 			<label for="handler_id"><?php echo lang_get( 'assign_to' ) ?></label>
@@ -474,7 +474,7 @@ print_recently_visited();
 	</tr>
 <?php } ?>
 
-<?php if ( $tpl_show_status ) { ?>
+<?php if ( $t_show_status ) { ?>
 	<tr>
 		<th class="category">
 			<label for="status"><?php echo lang_get( 'status' ) ?></label>
@@ -496,7 +496,7 @@ print_recently_visited();
 	</tr>
 <?php } ?>
 
-<?php if ( $tpl_show_resolution ) { ?>
+<?php if ( $t_show_resolution ) { ?>
 	<tr>
 		<th class="category">
 			<label for="resolution"><?php echo lang_get( 'resolution' ) ?></label>
@@ -512,7 +512,7 @@ print_recently_visited();
 <?php } ?>
 
 <?php // Target Version (if permissions allow)
-	if ( $tpl_show_target_version ) { ?>
+	if ( $t_show_target_version ) { ?>
 	<tr>
 		<th class="category">
 			<label for="target_version"><?php echo lang_get( 'target_version' ) ?></label>
@@ -542,7 +542,7 @@ print_recently_visited();
 		</td>
 	</tr>
 
-<?php if ( $tpl_show_steps_to_reproduce ) { ?>
+<?php if ( $t_show_steps_to_reproduce ) { ?>
 		<tr>
 			<th class="category">
 				<label for="steps_to_reproduce"><?php print_documentation_link( 'steps_to_reproduce' ) ?></label>
@@ -553,7 +553,7 @@ print_recently_visited();
 		</tr>
 <?php } ?>
 
-<?php if ( $tpl_show_additional_info ) { ?>
+<?php if ( $t_show_additional_info ) { ?>
 	<tr>
 		<th class="category">
 			<label for="additional_info"><?php print_documentation_link( 'additional_information' ) ?></label>
@@ -590,7 +590,7 @@ print_recently_visited();
 ?>
 <?php
 	// File Upload (if enabled)
-	if ( $tpl_show_attachments ) {
+	if ( $t_show_attachments ) {
 		$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 		$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
 ?>
@@ -617,7 +617,7 @@ print_recently_visited();
 	</tr>
 
 <?php
-	if ( $tpl_show_view_state ) {
+	if ( $t_show_view_state ) {
 ?>
 	<tr>
 		<th class="category">
