@@ -54,6 +54,6 @@ current_user_ensure_unprotected();
 define ( 'ACCOUNT_COLUMNS', true );
 
 define( 'MANAGE_COLUMNS_INC_ALLOW', true );
-include ( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'manage_columns_inc.php' );
+include ( dirname( __FILE__ ) . '/manage_columns_inc.php' );
 
 html_page_bottom();

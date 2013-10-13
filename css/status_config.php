@@ -26,7 +26,7 @@
 /**
  * MantisBT Core API's
  */
-@require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+@require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 require_api( 'config_api.php' );
 
 /**

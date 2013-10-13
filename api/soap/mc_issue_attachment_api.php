@@ -6,7 +6,7 @@
 # change the license of future releases.
 # See docs/ folder for more details
 
-require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'mc_core.php' );
+require_once( dirname( __FILE__ ) . '/mc_core.php' );
 
 /**
  * Get the issue attachment with the specified id.

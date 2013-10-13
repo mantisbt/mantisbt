@@ -26,7 +26,7 @@
 /**
  * MantisBT Core API's
  */
-require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 
 form_security_validate( 'move_attachments_project_select' );
 

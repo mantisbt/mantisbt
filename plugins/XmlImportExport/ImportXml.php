@@ -22,8 +22,8 @@
  * Import XML Plugin
  */
 
-require_once( 'ImportXml' . DIRECTORY_SEPARATOR . 'Mapper.php' );
-require_once( 'ImportXml' . DIRECTORY_SEPARATOR . 'Issue.php' );
+require_once( 'ImportXml/Mapper.php' );
+require_once( 'ImportXml/Issue.php' );
 
 /**
  * Source Data

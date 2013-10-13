@@ -31,7 +31,7 @@ define( 'MANTIS_MAINTENANCE_MODE', true );
 /**
  * MantisBT Core API's
  */
-require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 $g_error_send_page_header = false; # suppress page headers in the error handler
 
 $g_failed = false;
@@ -103,13 +103,13 @@ $f_db_exists = gpc_get_bool( 'db_exists', false );
 
 # install the tables
 if ( !preg_match( '/^[a-zA-Z0-9_]+$/', $f_db_type ) ||
-     !file_exists( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'library' . DIRECTORY_SEPARATOR . 'adodb' . DIRECTORY_SEPARATOR . 'drivers' . DIRECTORY_SEPARATOR . 'adodb-' . $f_db_type . '.inc.php' ) ) {
+     !file_exists( dirname( dirname( __FILE__ ) ) . '/library/adodb/drivers/adodb-' . $f_db_type . '.inc.php' ) ) {
 	echo 'Invalid db type ' . htmlspecialchars( $f_db_type ) . '.';
 	exit;
 }
 
 $GLOBALS['g_db_type'] = $f_db_type; # database_api references this
-require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'schema.php' );
+require_once( dirname( __FILE__ ) . '/schema.php' );
 $g_db = ADONewConnection( $f_db_type );
 
 echo "\nPost 1.0 schema changes\n";

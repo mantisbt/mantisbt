@@ -24,7 +24,7 @@
 /**
  * Includes
  */
-require_once dirname( dirname(__FILE__) ) . DIRECTORY_SEPARATOR . 'TestConfig.php';
+require_once dirname( dirname(__FILE__) ) . '/TestConfig.php';
 
 /**
  * MantisBT Core API

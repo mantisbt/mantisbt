@@ -78,5 +78,5 @@ auth_attempt_script_login( user_get_field( $f_user_id, 'username' ) );
 
 user_increment_login_count( $f_user_id );
 
-include ( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'account_page.php' );
+include ( dirname( __FILE__ ) . '/account_page.php' );
 

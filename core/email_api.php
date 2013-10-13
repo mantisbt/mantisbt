@@ -176,7 +176,7 @@ function email_ensure_valid( $p_email ) {
  */
 function email_is_disposable( $p_email ) {
 	if( !class_exists( 'DisposableEmailChecker' ) ) {
-		require_lib( 'disposable' . DIRECTORY_SEPARATOR . 'disposable.php' );
+		require_lib( 'disposable/disposable.php' );
 	}
 
 	return DisposableEmailChecker::is_disposable_email( $p_email );

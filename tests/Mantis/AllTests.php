@@ -26,7 +26,7 @@
 /**
  * Includes
  */
-require_once dirname( dirname(__FILE__) ) . DIRECTORY_SEPARATOR . 'TestConfig.php';
+require_once dirname( dirname(__FILE__) ) . '/TestConfig.php';
 
 require_once 'EnumTest.php';
 require_once 'HelperTest.php';

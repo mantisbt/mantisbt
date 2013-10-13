@@ -31,7 +31,7 @@ error_reporting( E_ALL );
 # and plugins will not be loaded.
 define( 'MANTIS_MAINTENANCE_MODE', true );
 
-require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 require_api( 'install_helper_functions_api.php' );
 require_api( 'crypto_api.php' );
 $g_error_send_page_header = false; # bypass page headers in error handler
@@ -666,7 +666,7 @@ if( 3 == $t_install_state ) {
 		$GLOBALS['g_db_type'] = $f_db_type;
 
 		# database_api references this
-		require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'schema.php' );
+		require_once( dirname( __FILE__ ) . '/schema.php' );
 		$g_db = ADONewConnection( $f_db_type );
 		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
 		if( !$f_log_queries ) {
