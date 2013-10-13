@@ -211,3 +211,9 @@ if( is_windows_server() ) {
 		array( false => 'For best performance upgrade to PHP > 5.4.0.' )
 	);
 }
+
+check_print_test_warn_row(
+  'Check for php bug 61443 - php 5.4.0-5.4.3, trying to use compression with no output handler set',
+  !(ini_get( 'output_handler' ) == '' && function_exists( 'ini_set' ) &&
+    version_compare( PHP_VERSION, '5.4.0', '>=' ) && version_compare( PHP_VERSION, '5.4.4', '<' ) ),
+    array( false=> 'you should consider setting a php output handler, ensuring compression is disabled or upgrading to at least php 5.4.4' ) );
