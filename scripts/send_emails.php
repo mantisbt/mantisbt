@@ -28,7 +28,7 @@ $g_bypass_headers = 1;
 
 require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 
-require_once( 'email_api.php' );
+require_api( 'email_api.php' );
 
 # Make sure this script doesn't run via the webserver
 if( php_sapi_name() != 'cli' ) {
