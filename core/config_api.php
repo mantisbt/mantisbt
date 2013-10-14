@@ -378,7 +378,7 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 		$t_params = array(
 			$p_option,
 			(int)$p_project,
-			(int)$c_user,
+			(int)$p_user,
 		);
 		$result = db_query_bound( $query, $t_params );
 
