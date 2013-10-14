@@ -161,10 +161,10 @@ function project_hierarchy_cache( $p_show_disabled = false ) {
 	}
 	$g_cache_show_disabled = $p_show_disabled;
 
-	$t_project_table = db_get_table( 'project' );
-	$t_project_hierarchy_table = db_get_table( 'project_hierarchy' );
 	$t_enabled_clause = $p_show_disabled ? '1=1' : 'p.enabled = ' . db_param();
 
+	$t_project_table = db_get_table( 'project' );
+	$t_project_hierarchy_table = db_get_table( 'project_hierarchy' );
 	$query = "SELECT DISTINCT p.id, ph.parent_id, p.name, p.inherit_global, ph.inherit_parent
 				  FROM $t_project_table p
 				  LEFT JOIN $t_project_hierarchy_table ph
@@ -173,14 +173,11 @@ function project_hierarchy_cache( $p_show_disabled = false ) {
 				  ORDER BY p.name";
 
 	$result = db_query_bound( $query, ( $p_show_disabled ? null : array( true ) ) );
-	$row_count = db_num_rows( $result );
 
 	$g_cache_project_hierarchy = array();
 	$g_cache_project_inheritance = array();
 
-	for( $i = 0;$i < $row_count;$i++ ) {
-		$row = db_fetch_array( $result );
-
+	while ( $row = db_fetch_array( $result ) ) {
 		if( null === $row['parent_id'] ) {
 			$row['parent_id'] = ALL_PROJECTS;
 		}

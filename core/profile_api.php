@@ -212,13 +212,12 @@ function profile_get_all_rows( $p_user_id, $p_all_users = false ) {
 				  FROM $t_user_profile_table
 				  WHERE $query_where
 				  ORDER BY platform, os, os_build";
-	$result = db_query_bound( $query, $param );
+	$t_result = db_query_bound( $query, $param );
 
 	$t_rows = array();
-	$t_row_count = db_num_rows( $result );
 
-	for( $i = 0;$i < $t_row_count;$i++ ) {
-		array_push( $t_rows, db_fetch_array( $result ) );
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		array_push( $t_rows, $t_row );
 	}
 
 	return $t_rows;
@@ -263,14 +262,11 @@ function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
 				  FROM $t_user_profile_table
 				  WHERE ( user_id=" . db_param() . " ) OR ( user_id = 0 )
 				  ORDER BY $c_field";
-	$result = db_query_bound( $query, array( $c_user_id ) );
+	$t_result = db_query_bound( $query, array( $c_user_id ) );
 
 	$t_rows = array();
 
-	$t_row_count = db_num_rows( $result );
-
-	for( $i = 0;$i < $t_row_count;$i++ ) {
-		$t_row = db_fetch_array( $result );
+	while( $t_row = db_fetch_array( $t_result ) ) {
 		array_push( $t_rows, $t_row[$c_field] );
 	}
 
@@ -294,13 +290,12 @@ function profile_get_all_for_project( $p_project_id ) {
 				  WHERE $t_project_where
 				  AND up.id = b.profile_id
 				  ORDER BY platform, os, os_build";
-	$result = db_query_bound( $query );
+	$t_result = db_query_bound( $query );
 
 	$t_rows = array();
-	$t_row_count = db_num_rows( $result );
 
-	for( $i = 0;$i < $t_row_count;$i++ ) {
-		array_push( $t_rows, db_fetch_array( $result ) );
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		array_push( $t_rows, $t_row );
 	}
 
 	return $t_rows;

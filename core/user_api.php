@@ -104,6 +104,12 @@ function user_cache_row( $p_user_id, $p_trigger_errors = true ) {
 	return $row;
 }
 
+/**
+ * Generate an array of User objects from given User ID's
+ *
+ * @param array $p_user_id_array User IDs
+ * @return array
+ */
 function user_cache_array_rows( $p_user_id_array ) {
 	global $g_cache_user;
 	$c_user_id_array = array();
@@ -253,35 +259,40 @@ function user_is_realname_unique( $p_username, $p_realname ) {
 	$p_realname = trim( $p_realname );
 
 	# allow realname to match username
-	$t_count = 0;
-	if( $p_realname <> $p_username ) {
+	$t_duplicate_count = 0;
+	if( $p_realname !== $p_username ) {
 		# check realname does not match an existing username
 		#  but allow it to match the current user
 		$t_target_user = user_get_id_by_name( $p_username );
 		$t_other_user = user_get_id_by_name( $p_realname );
-		if( ( 0 != $t_other_user ) && ( $t_target_user != $t_other_user ) ) {
+		if( ( 0 !== $t_other_user ) && ( $t_target_user !== $t_other_user ) ) {
 			return 0;
 		}
 
 		# check to see if the realname is unique
 		$t_user_table = db_get_table( 'user' );
-		$query = "SELECT id
+		$t_query = "SELECT id
 				FROM $t_user_table
 				WHERE realname=" . db_param();
-		$result = db_query_bound( $query, array( $p_realname ) );
-		$t_count = db_num_rows( $result );
+		$t_result = db_query_bound( $t_query, array( $p_realname ) );
 
-		if( $t_count > 0 ) {
+		$t_users = array();
+		while ( $t_row = db_fetch_array( $t_result ) ) {
+			$t_users[] = $t_row;
+		}
+		$t_duplicate_count = count( $t_users );
+
+		if( $t_duplicate_count > 0 ) {
 			# set flags for non-unique realnames
 			if( config_get( 'differentiate_duplicates' ) ) {
-				for( $i = 0;$i < $t_count;$i++ ) {
-					$t_user_id = db_result( $result, $i );
+				for( $i = 0;$i < $t_duplicate_count;$i++ ) {
+					$t_user_id = $t_users[$i]['id'];
 					user_set_field( $t_user_id, 'duplicate_realname', ON );
 				}
 			}
 		}
 	}
-	return $t_count + 1;
+	return $t_duplicate_count + 1;
 }
 
 /**
@@ -331,8 +342,12 @@ function user_ensure_name_valid( $p_username ) {
 	}
 }
 
-# --------------------
-# return whether user is monitoring bug for the user id and bug id
+/**
+ * return whether user is monitoring bug for the user id and bug id
+ * @param int $p_user_id User ID
+ * @param int $p_bug_id Bug ID
+ * @return bool 
+ */
 function user_is_monitoring_bug( $p_user_id, $p_bug_id ) {
 	$c_user_id = db_prepare_int( $p_user_id );
 	$c_bug_id = db_prepare_int( $p_bug_id );
@@ -385,12 +400,12 @@ function user_is_protected( $p_user_id ) {
 	return false;
 }
 
-/*
+/**
  * Check if a user is the anonymous user account.
  * When anonymous logins are disabled this function will always return false.
  *
  * @param int $p_user_id
- * @return true: user is the anonymous user; false: user is not the anonymous user.
+ * @return bool true: user is the anonymous user; false: user is not the anonymous user.
  * @access public
  */
 function user_is_anonymous( $p_user_id ) {
@@ -400,8 +415,11 @@ function user_is_anonymous( $p_user_id ) {
 	return false;
 }
 
-# --------------------
-# Trigger an ERROR if the user account is protected
+/**
+ * Trigger an ERROR if the user account is protected
+ *
+ * @param int $p_user_id User ID
+ */
 function user_ensure_unprotected( $p_user_id ) {
 	if( user_is_protected( $p_user_id ) ) {
 		trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
@@ -429,10 +447,9 @@ function user_is_enabled( $p_user_id ) {
  * @return int
  */
 function user_count_level( $p_level = ANYBODY ) {
-	$t_level = db_prepare_int( $p_level );
 	$t_user_table = db_get_table( 'user' );
 	$query = "SELECT COUNT(id) FROM $t_user_table WHERE access_level>=" . db_param();
-	$result = db_query_bound( $query, array( $t_level ) );
+	$result = db_query_bound( $query, array( $p_level ) );
 
 	# Get the list of connected users
 	$t_users = db_result( $result );
@@ -471,12 +488,15 @@ function user_get_logged_in_user_ids( $p_session_duration_in_minutes ) {
 	return $t_users_connected;
 }
 
-# ===================================
-# Creation / Deletion / Updating
-# ===================================
-# --------------------
-# Create a user.
-# returns false if error, the generated cookie string if ok
+/**
+ * Create a user.
+ * returns false if error, the generated cookie string if ok
+ *
+ * @param string $p_username username
+ * @param string $p_password password
+ * @param string $p_email email
+ * @return string Cookie String
+ */
 function user_create( $p_username, $p_password, $p_email = '',
 	$p_access_level = null, $p_protected = false, $p_enabled = true,
 	$p_realname = '', $p_admin_name = '' ) {
@@ -610,8 +630,7 @@ function user_delete_profiles( $p_user_id ) {
  * @return bool Always true
  */
 function user_delete( $p_user_id ) {
-	$c_user_id = db_prepare_int( $p_user_id );
-	$t_user_table = db_get_table( 'user' );
+	$c_user_id = (int)$p_user_id;
 
 	user_ensure_unprotected( $p_user_id );
 
@@ -627,6 +646,7 @@ function user_delete( $p_user_id ) {
 	# unset non-unique realname flags if necessary
 	if( config_get( 'differentiate_duplicates' ) ) {
 		$c_realname = user_get_field( $p_user_id, 'realname' );
+		$t_user_table = db_get_table( 'user' );
 		$t_query = "SELECT id FROM $t_user_table WHERE realname=" . db_param();
 		$t_result = db_query_bound( $t_query, array( $c_realname ) );
 
@@ -890,9 +910,14 @@ function user_get_avatar( $p_user_id, $p_size = 80 ) {
 	return array( $t_avatar_url, $p_size, $p_size );
 }
 
-# --------------------
-# return the user's access level
-#  account for private project and the project user lists
+/**
+ * return the user's access level
+ * account for private project and the project user lists
+ *
+ * @param int $p_user_id User ID
+ * @param int $p_project_id Project ID
+ * @return int
+ */
 function user_get_access_level( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	$t_access_level = user_get_field( $p_user_id, 'access_level' );
 
@@ -1170,7 +1195,7 @@ function user_get_unassigned_by_project_id( $p_project_id = null ) {
     $t_users = array();
     $t_show_realname = ( ON == config_get( 'show_realname' ) );
     $t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
-    $t_user_count = db_num_rows( $t_result );
+
 	while( $t_row = db_fetch_array( $t_result ) ) {
         $t_users[] = $t_row['id'];
         $t_user_name = string_attribute( $t_row['username'] );
@@ -1253,22 +1278,18 @@ function user_get_reported_open_bug_count( $p_user_id, $p_project_id = ALL_PROJE
  * @throws MantisBT\Exception\User\UserProfileNotFound
  */
 function user_get_profile_row( $p_user_id, $p_profile_id ) {
-	$c_user_id = db_prepare_int( $p_user_id );
-	$c_profile_id = db_prepare_int( $p_profile_id );
-
 	$t_user_profile_table = db_get_table( 'user_profile' );
-
 	$query = "SELECT *
 				  FROM $t_user_profile_table
 				  WHERE id=" . db_param() . " AND
 				  		user_id=" . db_param();
-	$result = db_query_bound( $query, array( $c_profile_id, $c_user_id ) );
-
-	if( 0 == db_num_rows( $result ) ) {
-		trigger_error( ERROR_USER_PROFILE_NOT_FOUND, ERROR );
-	}
+	$result = db_query_bound( $query, array( $p_profile_id, $p_user_id ) );
 
 	$row = db_fetch_array( $result );
+
+	if( !$row ) {
+		trigger_error( ERROR_USER_PROFILE_NOT_FOUND, ERROR );
+	}
 
 	return $row;
 }

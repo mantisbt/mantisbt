@@ -203,7 +203,9 @@ if( $t_config_exists ) {
 	if( $g_db->IsConnected() ) {
 		$g_db_connected = true;
 	}
+
 	$t_cur_version = config_get( 'database_version', -1 );
+	
 	if( $t_cur_version > 1 ) {
 		$g_database_upgrade = true;
 		$f_db_exists = true;

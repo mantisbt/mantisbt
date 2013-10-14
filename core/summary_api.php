@@ -90,9 +90,13 @@ function summary_helper_get_developer_label ( $p_user_id ) {
 
 }
 
-# Used in summary reports
-# this function prints out the summary for the given enum setting
-# The enum field name is passed in through $p_enum
+/**
+ * Used in summary reports - this function prints out the summary for the given enum setting
+ * The enum field name is passed in through $p_enum
+ *
+ * @param string $p_enum enum field name
+ * @throws MantisBT\Exception\Database\FieldNotFound
+ */
 function summary_print_by_enum( $p_enum ) {
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
@@ -238,8 +242,12 @@ function summary_print_by_enum( $p_enum ) {
 	}
 }
 
-# prints the bugs submitted in the last X days (default is 1 day) for the
-# current project
+/**
+ * prints the bugs submitted in the last X days (default is 1 day) for the current project
+ *
+ * @param int $p_num_days number of days
+ * @return int
+ */
 function summary_new_bug_count_by_date( $p_time_length = 1 ) {
 	$t_mantis_bug_table = db_get_table( 'bug' );
 
@@ -260,8 +268,12 @@ function summary_new_bug_count_by_date( $p_time_length = 1 ) {
 	return db_result( $result, 0 );
 }
 
-# returns the number of bugs resolved in the last X days (default is 1 day) for the
-# current project
+/**
+ * returns the number of bugs resolved in the last X days (default is 1 day) for the current project
+ *
+ * @param int $p_num_days number of days
+ * @return int
+ */
 function summary_resolved_bug_count_by_date( $p_time_length = 1 ) {
 	$t_bug_table = db_get_table( 'bug' );
 	$t_bug_history_table = db_get_table( 'bug_history' );
@@ -292,8 +304,11 @@ function summary_resolved_bug_count_by_date( $p_time_length = 1 ) {
 	return db_result( $result, 0 );
 }
 
-# This function shows the number of bugs submitted in the last X days
-# An array of integers representing days is passed in
+/**
+ * This function shows the number of bugs submitted in the last X days
+ *
+ * @param array $p_date_array An array of integers representing days is passed in
+ */
 function summary_print_by_date( $p_date_array ) {
 	$arr_count = count( $p_date_array );
 	foreach( $p_date_array as $t_days ) {
@@ -331,13 +346,12 @@ function summary_print_by_date( $p_date_array ) {
 		print( "\n<td class=\"right$t_style\">$t_balance</td>\n" );
 		print( "</tr>\n" );
 	}
-
-	# end foreach
 }
 
-# Print list of open bugs with the highest activity score
-# the score is calculated assigning one "point" for each history event
-# associated with the bug
+/**
+ * Print list of open bugs with the highest activity score the score is calculated assigning 
+ * one "point" for each history event associated with the bug
+ */
 function summary_print_by_activity() {
 	$t_mantis_bug_table = db_get_table( 'bug' );
 	$t_mantis_history_table = db_get_table( 'bug_history' );

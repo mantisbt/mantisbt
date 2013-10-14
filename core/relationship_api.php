@@ -318,17 +318,12 @@ function relationship_copy_all( $p_bug_id, $p_new_bug_id ) {
  */
 function relationship_get( $p_relationship_id ) {
 	$t_mantis_bug_relationship_table = db_get_table( 'bug_relationship' );
-
-	$query = "SELECT *
-				FROM $t_mantis_bug_relationship_table
-				WHERE id=" . db_param();
+	$query = "SELECT * FROM $t_mantis_bug_relationship_table WHERE id=" . db_param();
 	$result = db_query_bound( $query, array( (int) $p_relationship_id ) );
 
-	$t_relationship_count = db_num_rows( $result );
+	$t_relationship = db_fetch_array( $result );
 
-	if( $t_relationship_count == 1 ) {
-		$t_relationship = db_fetch_array( $result );
-
+	if( $t_relationship ) {
 		$t_bug_relationship_data = new BugRelationshipData;
 		$t_bug_relationship_data->id = $t_relationship['id'];
 		$t_bug_relationship_data->src_bug_id = $t_relationship['source_bug_id'];
@@ -344,14 +339,11 @@ function relationship_get( $p_relationship_id ) {
 /**
  * get all relationships with the given bug as source
  * @param int $p_src_bug_id Source Bug id
- * @return array array of BugRelationshipData objects
+ * @return array Array of BugRelationshipData objects
  */
 function relationship_get_all_src( $p_src_bug_id ) {
-	$c_src_bug_id = db_prepare_int( $p_src_bug_id );
-
 	$t_mantis_bug_relationship_table = db_get_table( 'bug_relationship' );
 	$t_mantis_bug_table = db_get_table( 'bug' );
-
 	$query = "SELECT $t_mantis_bug_relationship_table.id, $t_mantis_bug_relationship_table.relationship_type,
 				$t_mantis_bug_relationship_table.source_bug_id, $t_mantis_bug_relationship_table.destination_bug_id,
 				$t_mantis_bug_table.project_id
@@ -359,15 +351,15 @@ function relationship_get_all_src( $p_src_bug_id ) {
 				INNER JOIN $t_mantis_bug_table ON $t_mantis_bug_relationship_table.destination_bug_id = $t_mantis_bug_table.id
 				WHERE source_bug_id=" . db_param() . "
 				ORDER BY relationship_type, $t_mantis_bug_relationship_table.id";
-	$result = db_query_bound( $query, array( $c_src_bug_id ) );
+	$result = db_query_bound( $query, array( $p_src_bug_id ) );
 
 	$t_src_project_id = bug_get_field( $p_src_bug_id, 'project_id' );
 
 	$t_bug_relationship_data = array();
-	$t_relationship_count = db_num_rows( $result );
 	$t_bug_array = array();
-	for( $i = 0;$i < $t_relationship_count;$i++ ) {
-		$row = db_fetch_array( $result );
+	$i = 0;
+
+	while( $row = db_fetch_array( $result ) ) {
 		$t_bug_relationship_data[$i] = new BugRelationshipData;
 		$t_bug_relationship_data[$i]->id = $row['id'];
 		$t_bug_relationship_data[$i]->src_bug_id = $row['source_bug_id'];
@@ -376,8 +368,11 @@ function relationship_get_all_src( $p_src_bug_id ) {
 		$t_bug_relationship_data[$i]->dest_project_id = $row['project_id'];
 		$t_bug_relationship_data[$i]->type = $row['relationship_type'];
 		$t_bug_array[] = $row['destination_bug_id'];
+		$i++;
 	}
-	unset( $t_bug_relationship_data[$t_relationship_count] );
+
+	unset( $t_bug_relationship_data[$i] );
+
 	if( !empty( $t_bug_array ) ) {
 		bug_cache_array_rows( $t_bug_array );
 	}
@@ -388,7 +383,7 @@ function relationship_get_all_src( $p_src_bug_id ) {
 /**
  * get all relationships with the given bug as destination
  * @param int $p_dest_bug_id Destination Bug id
- * @return array array of BugRelationshipData objects
+ * @return array Array of BugRelationshipData objects
  */
 function relationship_get_all_dest( $p_dest_bug_id ) {
 	$c_dest_bug_id = db_prepare_int( $p_dest_bug_id );
@@ -408,10 +403,10 @@ function relationship_get_all_dest( $p_dest_bug_id ) {
 	$t_dest_project_id = bug_get_field( $p_dest_bug_id, 'project_id' );
 
 	$t_bug_relationship_data = array();
-	$t_relationship_count = db_num_rows( $result );
 	$t_bug_array = array();
-	for( $i = 0;$i < $t_relationship_count;$i++ ) {
-		$row = db_fetch_array( $result );
+	$i = 0;
+
+	while( $row = db_fetch_array( $result ) ) {
 		$t_bug_relationship_data[$i] = new BugRelationshipData;
 		$t_bug_relationship_data[$i]->id = $row['id'];
 		$t_bug_relationship_data[$i]->src_bug_id = $row['source_bug_id'];
@@ -420,8 +415,9 @@ function relationship_get_all_dest( $p_dest_bug_id ) {
 		$t_bug_relationship_data[$i]->dest_project_id = $t_dest_project_id;
 		$t_bug_relationship_data[$i]->type = $row['relationship_type'];
 		$t_bug_array[] = $row['source_bug_id'];
+		$i++;
 	}
-	unset( $t_bug_relationship_data[$t_relationship_count] );
+	unset( $t_bug_relationship_data[$i] );
 
 	if( !empty( $t_bug_array ) ) {
 		bug_cache_array_rows( $t_bug_array );
@@ -433,7 +429,7 @@ function relationship_get_all_dest( $p_dest_bug_id ) {
  * get all relationships associated with the given bug
  * @param int $p_bug_id  Bug id
  * @param bool &$p_is_different_projects Returned Boolean value indicating if some relationships cross project boundaries
- * @return array array of BugRelationshipData objects
+ * @return array Array of BugRelationshipData objects
  */
 function relationship_get_all( $p_bug_id, &$p_is_different_projects ) {
 	$t_src = relationship_get_all_src( $p_bug_id );
@@ -456,30 +452,22 @@ function relationship_get_all( $p_bug_id, &$p_is_different_projects ) {
  * @return int Relationship ID
  */
 function relationship_exists( $p_src_bug_id, $p_dest_bug_id ) {
-	$c_src_bug_id = db_prepare_int( $p_src_bug_id );
-	$c_dest_bug_id = db_prepare_int( $p_dest_bug_id );
+	$c_src_bug_id = (int)$p_src_bug_id;
+	$c_dest_bug_id = (int)$p_dest_bug_id;
 
 	$t_mantis_bug_relationship_table = db_get_table( 'bug_relationship' );
 
-	$t_query = "SELECT *
-				FROM $t_mantis_bug_relationship_table
-				WHERE
-				(source_bug_id=" . db_param() . "
-				AND destination_bug_id=" . db_param() . ")
+	$t_query = "SELECT * FROM $t_mantis_bug_relationship_table
+				WHERE (source_bug_id=" . db_param() . " AND destination_bug_id=" . db_param() . ")
 				OR
 				(source_bug_id=" . db_param() . "
 				AND destination_bug_id=" . db_param() . ')';
 	$result = db_query_bound( $t_query, array( $c_src_bug_id, $c_dest_bug_id, $c_dest_bug_id, $c_src_bug_id ), 1 );
 
-	$t_relationship_count = db_num_rows( $result );
-
-	if( $t_relationship_count == 1 ) {
-
+	if( $row = db_fetch_array( $result ) ) {
 		# return the first id
-		$row = db_fetch_array( $result );
 		return $row['id'];
 	} else {
-
 		# no relationship found
 		return 0;
 	}

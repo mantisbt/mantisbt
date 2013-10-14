@@ -304,13 +304,13 @@ function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigg
 	}
 
 	$t_user_pref_table = db_get_table( 'user_pref' );
-
-	$query = "SELECT *
-				  FROM $t_user_pref_table
+	$t_query = "SELECT * FROM $t_user_pref_table
 				  WHERE user_id=" . db_param() . " AND project_id=" . db_param();
-	$result = db_query_bound( $query, array( (int)$p_user_id, (int)$p_project_id ) );
+	$t_result = db_query_bound( $t_query, array( (int)$p_user_id, (int)$p_project_id ) );
 
-	if( 0 == db_num_rows( $result ) ) {
+	$t_row = db_fetch_array( $t_result );
+
+	if( !$t_row ) {
 		if( $p_trigger_errors ) {
 			trigger_error( ERROR_USER_PREFS_NOT_FOUND, ERROR );
 		} else {
@@ -319,15 +319,13 @@ function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigg
 		}
 	}
 
-	$row = db_fetch_array( $result );
-
 	if( !isset( $g_cache_user_pref[(int)$p_user_id] ) ) {
 		$g_cache_user_pref[(int)$p_user_id] = array();
 	}
 
-	$g_cache_user_pref[(int)$p_user_id][(int)$p_project_id] = $row;
+	$g_cache_user_pref[(int)$p_user_id][(int)$p_project_id] = $t_row;
 
-	return $row;
+	return $t_row;
 }
 
 /**
@@ -421,12 +419,10 @@ function user_pref_exists( $p_user_id, $p_project_id = ALL_PROJECTS ) {
  */
 function user_pref_insert( $p_user_id, $p_project_id, $p_prefs ) {
 	static $t_vars;
-	$c_user_id = db_prepare_int( $p_user_id );
-	$c_project_id = db_prepare_int( $p_project_id );
+	$c_user_id = (int)$p_user_id;
+	$c_project_id = (int)$p_project_id;
 
 	user_ensure_unprotected( $p_user_id );
-
-	$t_user_pref_table = db_get_table( 'user_pref' );
 
 	if ($t_vars == null ) {
 		$t_vars = getClassProperties( 'UserPreferences', 'protected');
@@ -446,6 +442,7 @@ function user_pref_insert( $p_user_id, $p_project_id, $p_prefs ) {
 	$t_vars_string = implode( ', ', array_keys( $t_vars ) );
 	$t_params_string = implode( ',', $t_params );
 
+	$t_user_pref_table = db_get_table( 'user_pref' );
 	$query = 'INSERT INTO ' . $t_user_pref_table .
 			 ' (user_id, project_id, ' . $t_vars_string . ') ' .
 			 ' VALUES ( ' . $t_params_string . ')';
@@ -463,12 +460,8 @@ function user_pref_insert( $p_user_id, $p_project_id, $p_prefs ) {
  */
 function user_pref_update( $p_user_id, $p_project_id, $p_prefs ) {
 	static $t_vars;
-	$c_user_id = db_prepare_int( $p_user_id );
-	$c_project_id = db_prepare_int( $p_project_id );
 
 	user_ensure_unprotected( $p_user_id );
-
-	$t_user_pref_table = db_get_table( 'user_pref' );
 
 	if ($t_vars == null ) {
 		$t_vars = getClassProperties( 'UserPreferences', 'protected');
@@ -483,18 +476,16 @@ function user_pref_update( $p_user_id, $p_project_id, $p_prefs ) {
 	}
 
 	$t_pairs_string = implode( ', ', $t_pairs );
-	$t_values[] = $c_user_id;
-	$t_values[] = $c_project_id;
+	$t_values[] = $p_user_id;
+	$t_values[] = $p_project_id;
 
+	$t_user_pref_table = db_get_table( 'user_pref' );
 	$query = "UPDATE $t_user_pref_table
 				  SET $t_pairs_string
 				  WHERE user_id=" . db_param() . " AND project_id=" . db_param();
 	db_query_bound( $query, $t_values );
 
 	user_pref_clear_cache( $p_user_id, $p_project_id );
-
-	# db_query errors on failure so:
-	return true;
 }
 
 /**
@@ -505,17 +496,13 @@ function user_pref_update( $p_user_id, $p_project_id, $p_prefs ) {
  * @return bool
  */
 function user_pref_delete( $p_user_id, $p_project_id = ALL_PROJECTS ) {
-	$c_user_id = db_prepare_int( $p_user_id );
-	$c_project_id = db_prepare_int( $p_project_id );
-
 	user_ensure_unprotected( $p_user_id );
 
 	$t_user_pref_table = db_get_table( 'user_pref' );
-
 	$query = "DELETE FROM $t_user_pref_table
 				  WHERE user_id=" . db_param() . " AND
 				  		project_id=" . db_param();
-	db_query_bound( $query, array( $c_user_id, $c_project_id ) );
+	db_query_bound( $query, array( $p_user_id, $p_project_id ) );
 
 	user_pref_clear_cache( $p_user_id, $p_project_id );
 
@@ -534,14 +521,11 @@ function user_pref_delete( $p_user_id, $p_project_id = ALL_PROJECTS ) {
  * @return bool
  */
 function user_pref_delete_all( $p_user_id ) {
-	$c_user_id = db_prepare_int( $p_user_id );
-
 	user_ensure_unprotected( $p_user_id );
 
 	$t_user_pref_table = db_get_table( 'user_pref' );
-
 	$query = 'DELETE FROM ' . $t_user_pref_table . ' WHERE user_id=' . db_param();
-	db_query_bound( $query, array( $c_user_id ) );
+	db_query_bound( $query, array( $p_user_id ) );
 
 	user_pref_clear_cache( $p_user_id );
 
@@ -560,12 +544,9 @@ function user_pref_delete_all( $p_user_id ) {
  * @return bool
  */
 function user_pref_delete_project( $p_project_id ) {
-	$c_project_id = db_prepare_int( $p_project_id );
-
 	$t_user_pref_table = db_get_table( 'user_pref' );
-
 	$query = 'DELETE FROM ' . $t_user_pref_table . ' WHERE project_id=' . db_param();
-	db_query_bound( $query, array( $c_project_id ) );
+	db_query_bound( $query, array( $p_project_id ) );
 
 	# db_query errors on failure so:
 	return true;
@@ -589,19 +570,19 @@ function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 
 	$t_prefs = new UserPreferences( $p_user_id, $p_project_id );
 
-	$row = user_pref_cache_row( $p_user_id, $p_project_id, false );
+	$t_row = user_pref_cache_row( $p_user_id, $p_project_id, false );
 
 	# If the user has no preferences for the given project
-	if( false === $row ) {
+	if( false === $t_row ) {
 		if( ALL_PROJECTS != $p_project_id ) {
 			# Try to get the prefs for ALL_PROJECTS (the defaults)
-			$row = user_pref_cache_row( $p_user_id, ALL_PROJECTS, false );
+			$t_row = user_pref_cache_row( $p_user_id, ALL_PROJECTS, false );
 		}
 
-		# If $row is still false (the user doesn't have default preferences)
-		if( false === $row ) {
+		# If $t_row is still false (the user doesn't have default preferences)
+		if( false === $t_row ) {
 			# We use an empty array
-			$row = array();
+			$t_row = array();
 		}
 	}
 
@@ -609,14 +590,14 @@ function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 		$t_vars = getClassProperties( 'UserPreferences', 'protected');
 	}
 
-	$t_row_keys = array_keys( $row );
+	$t_row_keys = array_keys( $t_row );
 
 	# Check each variable in the class
 	foreach( $t_vars as $var => $val ) {
 		# If we got a field from the DB with the same name
 		if( in_array( $var, $t_row_keys, true ) ) {
 			# Store that value in the object
-			$t_prefs->$var = $row[$var];
+			$t_prefs->$var = $t_row[$var];
 		}
 	}
 	if ( auth_is_user_authenticated() && auth_get_current_user_id() == $p_user_id ) {

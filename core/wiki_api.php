@@ -44,7 +44,7 @@ function wiki_enabled() {
 }
 
 /**
- *
+ * Initilise wiki engine
  * @return null
  * @access public
  */
@@ -78,7 +78,7 @@ function wiki_init() {
 }
 
 /**
- *
+ * Generate wiki link to a bug
  * @param int $p_bug_id Bug ID
  * @return string url
  * @access public
@@ -88,7 +88,7 @@ function wiki_link_bug( $p_bug_id ) {
 }
 
 /**
- *
+ * Generate wiki link to a project
  * @param int $p_project_id
  * @return string url
  * @access public

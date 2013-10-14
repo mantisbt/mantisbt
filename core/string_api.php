@@ -591,16 +591,13 @@ function string_restore_valid_html_tags( $p_string, $p_multiline = true ) {
  * @return string
  */
 function string_get_bug_page( $p_action, $p_user_id = null ) {
-	if ( $p_action == 'view' ) {
-		return 'bug_view_page.php';
-	}
-
-	if ( $p_action == 'update' ) {
-		return 'bug_update_page.php';
-	}
-
-	if ( $p_action == 'report' ) {
-		return 'bug_report_page.php';
+	switch( $p_action ) {
+		case 'view':
+			return 'bug_view_page.php';
+		case 'update':
+			return 'bug_update_page.php';
+		case 'report':
+			return 'bug_report_page.php';
 	}
 
 	trigger_error( ERROR_GENERIC, ERROR );

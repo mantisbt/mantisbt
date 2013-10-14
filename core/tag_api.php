@@ -80,22 +80,25 @@ function tag_ensure_exists( $p_tag_id ) {
 /**
  * Determine if a given name is unique (not already used).
  * Uses a case-insensitive search of the database for existing tags with the same name.
- * @param string Tag name
+ * @param string $p_name Tag name
  * @return boolean True if name is unique
  */
 function tag_is_unique( $p_name ) {
 	$c_name = trim( $p_name );
 	$t_tag_table = db_get_table( 'tag' );
 
-	$query = 'SELECT id FROM ' . $t_tag_table . ' WHERE ' . db_helper_like( 'name' );
-	$result = db_query_bound( $query, array( $c_name ) );
+	$t_query = 'SELECT id FROM ' . $t_tag_table . ' WHERE ' . db_helper_like( 'name' );
+	$result = db_query_bound( $t_query, array( $c_name ) );
 
-	return db_num_rows( $result ) == 0;
+	if ( db_result( $result ) ) {
+		return false;
+	}
+	return true;
 }
 
 /**
  * Ensure that a name is unique.
- * @param string Tag name
+ * @param string $p_name Tag name
  */
 function tag_ensure_unique( $p_name ) {
 	if( !tag_is_unique( $p_name ) ) {
@@ -287,14 +290,15 @@ function tag_get( $p_tag_id ) {
 
 	$t_tag_table = db_get_table( 'tag' );
 	$query = "SELECT * FROM $t_tag_table WHERE id=" . db_param();
-	$result = db_query_bound( $query, array( $p_tag_id ) );
+	$t_result = db_query_bound( $query, array( $p_tag_id ) );
 
-	if( 0 == db_num_rows( $result ) ) {
+	$t_row = db_fetch_array( $t_result );
+
+	if( !$t_row ) {
 		return false;
 	}
-	$row = db_fetch_array( $result );
 
-	return $row;
+	return $t_row;
 }
 
 /**
@@ -304,17 +308,17 @@ function tag_get( $p_tag_id ) {
  */
 function tag_get_by_name( $p_name ) {
 	$t_tag_table = db_get_table( 'tag' );
-
 	$query = "SELECT * FROM $t_tag_table
 					WHERE " . db_helper_like( 'name' );
 	$result = db_query_bound( $query, array( $p_name ) );
 
-	if( 0 == db_num_rows( $result ) ) {
+	$t_row = db_fetch_array( $t_result );
+
+	if( !$t_row ) {
 		return false;
 	}
-	$row = db_fetch_array( $result );
 
-	return $row;
+	return $t_row;
 }
 
 /**
@@ -513,20 +517,18 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 	return $t_results_to_return;
 }
 
-# Associative
 /**
  * Determine if a tag is attached to a bug.
- * @param integer Tag ID
- * @param integer Bug ID
+ * @param integer $p_tag_id Tag ID
+ * @param integer $p_bug_id Bug ID
  * @return boolean True if the tag is attached
  */
 function tag_bug_is_attached( $p_tag_id, $p_bug_id ) {
 	$t_bug_tag_table = db_get_table( 'bug_tag' );
-
-	$query = "SELECT * FROM $t_bug_tag_table
+	$query = "SELECT id FROM $t_bug_tag_table
 					WHERE tag_id=" . db_param() . " AND bug_id=" . db_param();
 	$result = db_query_bound( $query, array( $p_tag_id, $p_bug_id ) );
-	return( db_num_rows( $result ) > 0 );
+	return( db_result( $result ) > 0 );
 }
 
 /**
@@ -537,21 +539,21 @@ function tag_bug_is_attached( $p_tag_id, $p_bug_id ) {
  */
 function tag_bug_get_row( $p_tag_id, $p_bug_id ) {
 	$t_bug_tag_table = db_get_table( 'bug_tag' );
-
 	$query = "SELECT * FROM $t_bug_tag_table
 					WHERE tag_id=" . db_param() . " AND bug_id=" . db_param();
 	$result = db_query_bound( $query, array( $p_tag_id, $p_bug_id ) );
 
-	if( db_num_rows( $result ) == 0 ) {
+	$t_row = db_fetch_array( $result );
+	if( !$t_row ) {
 		trigger_error( TAG_NOT_ATTACHED, ERROR );
 	}
-	return db_fetch_array( $result );
+	return $t_row;
 }
 
 /**
  * Return an array of tags attached to a given bug sorted by tag name.
- * @param Bug ID
- * @return array array of tag rows with attachement information
+ * @param int $p_bug_id Bug ID
+ * @return array Array of tag rows with attachement information
  */
 function tag_bug_get_attached( $p_bug_id ) {
 	$t_tag_table = db_get_table( 'tag' );
@@ -595,9 +597,10 @@ function tag_get_bugs_attached( $p_tag_id ) {
 
 /**
  * Attach a tag to a bug.
- * @param integer Tag ID
- * @param integer Bug ID
- * @param integer User ID
+ * @param integer $p_tag_id Tag ID
+ * @param integer $p_bug_id Bug ID
+ * @param integer $p_user_id User ID
+ * @return bool
  */
 function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
 	access_ensure_bug_level( config_get( 'tag_attach_threshold' ), $p_bug_id, $p_user_id );
@@ -641,10 +644,11 @@ function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
 
 /**
  * Detach a tag from a bug.
- * @param integer Tag ID
- * @param integer Bug ID
- * @param boolean Add history entries to bug
- * @param integer User Id (or null for current logged in user)
+ * @param integer $p_tag_id Tag ID
+ * @param integer $p_bug_id Bug ID
+ * @param boolean $p_add_history Add history entries to bug
+ * @param integer $p_user_id User Id (or null for current logged in user)
+ * @return bool
  */
 function tag_bug_detach( $p_tag_id, $p_bug_id, $p_add_history = true, $p_user_id = null ) {
 	if( $p_user_id === null ) {
@@ -684,9 +688,9 @@ function tag_bug_detach( $p_tag_id, $p_bug_id, $p_add_history = true, $p_user_id
 
 /**
  * Detach all tags from a given bug.
- * @param integer Bug ID
- * @param boolean Add history entries to bug
- * @param integer User Id (or null for current logged in user)
+ * @param integer $p_bug_id Bug ID
+ * @param boolean $p_add_history Add history entries to bug
+ * @param integer $p_user_id User Id (or null for current logged in user)
  */
 function tag_bug_detach_all( $p_bug_id, $p_add_history = true, $p_user_id = null ) {
 	$t_tags = tag_bug_get_attached( $p_bug_id );
@@ -730,7 +734,8 @@ function tag_display_link( $p_tag_row, $p_bug_id = 0 ) {
 
 /**
  * Display a list of attached tag hyperlinks separated by the configured hyperlinks.
- * @param Bug ID
+ * @param int $p_bug_id Bug ID
+ * @return bool
  */
 function tag_display_attached( $p_bug_id ) {
 	$t_tag_rows = tag_bug_get_attached( $p_bug_id );
@@ -751,16 +756,15 @@ function tag_display_attached( $p_bug_id ) {
 
 /**
  * Get the number of bugs a given tag is attached to.
- * @param integer Tag ID
+ * @param integer $p_tag_id Tag ID
  * @return integer Number of attached bugs
  */
 function tag_stats_attached( $p_tag_id ) {
-	$c_tag_id = (int)$p_tag_id;
 	$t_bug_tag_table = db_get_table( 'bug_tag' );
 
 	$query = "SELECT COUNT(*) FROM $t_bug_tag_table
 					WHERE tag_id=" . db_param();
-	$result = db_query_bound( $query, array( $c_tag_id ) );
+	$result = db_query_bound( $query, array( $p_tag_id ) );
 
 	return db_result( $result );
 }
@@ -770,9 +774,9 @@ function tag_stats_attached( $p_tag_id ) {
  * Returns a list of tags that are the most related to the given tag,
  * based on the number of times they have been attached to the same bugs.
  * Defaults to a list of five tags.
- * @param integer Tag ID
- * @param integer List size
- * @return array array of tag rows, with share count added
+ * @param integer $p_tag_id Tag ID
+ * @param integer $p_limit List size
+ * @return array Array of tag rows, with share count added
  */
 function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
 	$t_bug_table = db_get_table( 'bug' );
