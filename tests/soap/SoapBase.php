@@ -70,7 +70,7 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	 * Array of Issue IDs to delete
 	 */
 	private   $issueIdsToDelete = array();
-	
+
 	/**
 	 * Array of Version IDs to delete
 	 */
@@ -236,4 +236,16 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 			$this->markTestSkipped('zlib extension not found.');
 		}
 	}
+
+	/**
+	 * Converts date to UTC
+	 * @param $p_date date string
+	 * @return DateTime object
+	 * Tests creating a new version
+	 */
+	protected function dateToUTC($p_date) {
+		$convDate = new DateTime($p_date);
+		return $convDate->setTimeZone(new DateTimeZone('UTC'));
+	}
+
 }
