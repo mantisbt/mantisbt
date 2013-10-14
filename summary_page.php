@@ -77,7 +77,7 @@ $query = "SELECT b.id, b.date_submitted, b.last_updated, MAX(h.date_modified) as
 		GROUP BY b.id, b.status, b.date_submitted, b.last_updated
 		ORDER BY b.id ASC";
 $result = db_query_bound( $query, array( $t_resolved, $t_resolved ) );
-$bug_count = 0
+$bug_count = 0;
 
 $t_bug_id       = 0;
 $t_largest_diff = 0;
