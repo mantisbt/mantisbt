@@ -141,7 +141,7 @@ function category_exists( $p_category_id ) {
 					( project_id, name )
 				  VALUES
 					( " . db_param() . ', ' . db_param() . ' )';
-	db_query_bound( $query, array( $p_project_id, $p_name ) );
+	db_query_bound( $t_query, array( $p_project_id, $p_name ) );
 
 	# db_query errors on failure so:
 	return db_insert_id( $t_category_table );
