@@ -1,22 +1,30 @@
 language: php
 
+# Environment setup and test scripts execution
+
+before_script:
+  - ./scripts/travis_before_script.sh
+
+script:
+  - phpunit --bootstrap ./tests/bootstrap.php ./tests/AllTests.php
+
+# What to build, and on which platforms
+
 php:
   - 5.3
   - 5.4
   - 5.5
 
-before_script: ./scripts/travis_before_script.sh
-
 env:
   - DB=mysql
   - DB=pgsql
-
-script: phpunit --bootstrap ./tests/bootstrap.php ./tests/AllTests.php
 
 branches:
   only:
     - master
     - master-1.2.x
+
+# Notifications
 
 notifications:
   email:
