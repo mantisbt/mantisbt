@@ -375,7 +375,12 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 				WHERE config_id = " . db_param() . " AND
 					project_id = " . db_param() . " AND
 					user_id = " . db_param();
-		$result = db_query_bound( $query, array( $c_option, $c_project, $c_user ) );
+		$t_params = array(
+			$p_option,
+			(int)$p_project,
+			(int)$c_user,
+		);
+		$result = db_query_bound( $query, $t_params );
 
 		$t_params = array();
 		if( 0 < db_result( $result ) ) {
