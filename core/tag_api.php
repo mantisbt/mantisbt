@@ -350,7 +350,7 @@ function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
 	tag_ensure_unique( $p_name );
 
 	if( null == $p_user_id ) {
-		$p_used_id = auth_get_current_user_id();
+		$p_user_id = auth_get_current_user_id();
 	} else {
 		user_ensure_exists( $p_user_id );
 	}
@@ -609,7 +609,7 @@ function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
 	}
 
 	if( null == $p_user_id ) {
-		$p_used_id = auth_get_current_user_id();
+		$p_user_id = auth_get_current_user_id();
 	} else {
 		user_ensure_exists( $p_user_id );
 	}
