@@ -43,17 +43,6 @@ class VersionTest extends SoapBase {
 	}
 
 	/**
-	 * Converts date to UTC
-	 * @param $p_date date string
-	 * @return DateTime object
-	 * Tests creating a new version
-	 */
-	private function dateToUTC($p_date) {
-		$convDate = new DateTime($p_date);
-		return $convDate->setTimeZone(new DateTimeZone('UTC'));
-	}
-
-	/**
 	 * Tests creating a new version
 	 */
 	public function testAddVersion() {
