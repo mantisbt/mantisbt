@@ -290,6 +290,15 @@ function plugin_lang_get( $p_name, $p_basename = null ) {
 	return $t_string;
 }
 
+/**
+ * log history event from plugin
+ * @param int $p_bug_id bug id
+ * @param string $p_field_name field name
+ * @param string $p_old_value old value
+ * @param string $p_new_value new value
+ * @param int $p_user_id user id
+ * @param string $p_basename plugin basename
+ */
 function plugin_history_log( $p_bug_id, $p_field_name, $p_old_value, $p_new_value = '', $p_user_id = null, $p_basename = null ) {
 	if( is_null( $p_basename ) ) {
 		$t_basename = plugin_get_current();
@@ -324,8 +333,8 @@ function plugin_error( $p_error_name, $p_error_type = ERROR, $p_basename = null 
 
 /**
  * Hook a plugin's callback function to an event.
- * @param string Event name
- * @param string Callback function
+ * @param string $p_name Event name
+ * @param string $p_callback Callback function
  */
 function plugin_event_hook( $p_name, $p_callback ) {
 	$t_basename = plugin_get_current();
@@ -334,7 +343,7 @@ function plugin_event_hook( $p_name, $p_callback ) {
 
 /**
  * Hook multiple plugin callbacks at once.
- * @param array array of event name/callback key/value pairs
+ * @param array $p_hooks Array of event name/callback key/value pairs
  */
 function plugin_event_hook_many( $p_hooks ) {
 	if( !is_array( $p_hooks ) ) {

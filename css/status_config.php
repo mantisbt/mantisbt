@@ -15,6 +15,8 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Generate CSS from that requires output from php for specific settings e.g. status values
+ *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -23,9 +25,6 @@
  * @uses config_api.php
  */
 
-/**
- * MantisBT Core API's
- */
 @require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 require_api( 'config_api.php' );
 

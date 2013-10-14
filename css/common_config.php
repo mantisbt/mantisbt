@@ -15,6 +15,9 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Generate Common CSS that requires PHP Output, and therefore can not be included in the .css files
+ * For example, language specific settings
+ *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -23,9 +26,6 @@
  * @uses config_api.php
  */
 
-/**
- * MantisBT Core API's
- */
 @require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 require_api( 'lang_api.php' );
 require_api( 'config_api.php' );
