@@ -1,17 +1,26 @@
 language: php
 
+# Environment setup and test scripts execution
+
+before_install:
+  - git submodule update --init --recursive
+
+before_script:
+  - ./scripts/travis_before_script.sh
+
+script:
+  - phpunit --bootstrap ./tests/bootstrap.php ./tests/AllTests.php
+
+# What to build, and on which platforms
+
 php:
   - 5.3
   - 5.4
   - 5.5
 
-before_script: ./scripts/travis_before_script.sh
-
 env:
   - DB=mysql
   - DB=pgsql
-
-script: phpunit --bootstrap ./tests/bootstrap.php ./tests/AllTests.php
 
 branches:
   only:
@@ -22,3 +31,23 @@ matrix:
   # Until #14398 is fixed, PostgreSQL should not cause entire build to fail
   allow_failures:
     - env: DB=pgsql
+
+# Notifications
+
+notifications:
+  email:
+    on_success: change
+    on_failure: always
+    recipients:
+      - mantisbt-cvs@lists.sourceforge.net
+
+  irc:
+    on_success: change
+    on_failure: always
+    channels:
+       - "chat.freenode.net#mantisbt"
+    skip_join: true
+    template:
+      - "Build #%{build_number}: %{repository} %{branch} (%{commit}) %{author} - %{message}"
+      - "Build details: %{build_url}"
+      - "Code Changes: %{compare_url}"

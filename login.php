@@ -58,6 +58,10 @@ gpc_set_cookie( config_get_global( 'cookie_prefix' ) . '_secure_session', $f_sec
 if ( auth_attempt_login( $f_username, $f_password, $f_perm_login ) ) {
 	session_set( 'secure_session', $f_secure_session );
 
+	if ( $f_username == 'administrator' && $f_password == 'root' && ( is_blank( $t_return ) || $t_return == 'index.php' ) ) {
+		$t_return = 'account_page.php';
+	}
+
 	$t_redirect_url = 'login_cookie_test.php?return=' . $t_return;
 
 } else {

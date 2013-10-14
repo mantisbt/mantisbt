@@ -116,7 +116,7 @@ function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
 	$t_query = "SELECT *
 				  FROM $t_custom_field_table
 				  WHERE id=" . db_param();
-	$result = db_query_bound( $t_query, array( $p_field_id ) );
+	$t_result = db_query_bound( $t_query, array( $p_field_id ) );
 
 	$t_row = db_fetch_array( $t_result );
 	if( !$t_row ) {
@@ -282,18 +282,15 @@ function custom_field_is_name_unique( $p_name, $p_custom_field_id = null ) {
 	$query = "SELECT COUNT(*)
 				  FROM $t_custom_field_table
 				  WHERE name=" . db_param();
+	$t_params = array( $p_name );
 	if( $p_custom_field_id !== null ) {
-		$c_id = db_prepare_int( $p_custom_field_id );
 		$query .= ' AND (id <> ' . db_param() . ')';
+		array_unshift( $t_params, (int)$p_custom_field_id );
 	}
-	$result = db_query_bound( $query, ( ($p_custom_field_id !== null) ? array( $p_name, $c_id ) : array( $p_name ) ) );
+	$result = db_query_bound( $query, $t_params );
 	$count = db_result( $result );
 
-	if( $count > 0 ) {
-		return false;
-	} else {
-		return true;
-	}
+	return ( $count == 0 );
 }
 
 /**
@@ -488,8 +485,8 @@ function custom_field_update( $p_field_id, $p_def_array ) {
  * @access public
  */
 function custom_field_link( $p_field_id, $p_project_id ) {
-	$c_field_id = db_prepare_int( $p_field_id );
-	$c_project_id = db_prepare_int( $p_project_id );
+	$p_field_id = (int)$p_field_id;
+	$p_project_id = (int)$p_project_id;
 
 	custom_field_ensure_exists( $p_field_id );
 	project_ensure_exists( $p_project_id );
@@ -503,7 +500,7 @@ function custom_field_link( $p_field_id, $p_project_id ) {
 					( field_id, project_id )
 				  VALUES
 					( " . db_param() . ', ' . db_param() . ')';
-	db_query_bound( $query, array( $c_field_id, $c_project_id ) );
+	db_query_bound( $query, array( $p_field_id, $p_project_id ) );
 
 	# db_query errors on failure so:
 	return true;
@@ -540,6 +537,8 @@ function custom_field_unlink( $p_field_id, $p_project_id ) {
  * @access public
  */
 function custom_field_destroy( $p_field_id ) {
+	$p_field_id = (int)$p_field_id;
+
 	# delete all values
 	$t_custom_field_string_table = db_get_table( 'custom_field_string' );
 	$t_query = "DELETE FROM $t_custom_field_string_table WHERE field_id=" . db_param();
@@ -556,7 +555,7 @@ function custom_field_destroy( $p_field_id ) {
 	# delete the definition
 	$query = "DELETE FROM $t_custom_field_table
 				  WHERE id=" .  db_param();
-	db_query_bound( $query, array( $c_field_id ) );
+	db_query_bound( $query, array( $p_field_id ) );
 
 	custom_field_clear_cache( $p_field_id );
 
@@ -848,8 +847,8 @@ function custom_field_get_display_name( $p_name ) {
  * @access public
  */
 function custom_field_get_value( $p_field_id, $p_bug_id ) {
-	$c_field_id = (int)$p_field_id;
-	$c_bug_id = (int)$p_bug_id;
+	$p_field_id = (int)$p_field_id;
+	$p_bug_id = (int)$p_bug_id;
 
 	$row = custom_field_cache_row( $p_field_id );
 
@@ -867,7 +866,7 @@ function custom_field_get_value( $p_field_id, $p_bug_id ) {
 				  FROM $t_custom_field_string_table
 				  WHERE bug_id=" . db_param() . " AND
 				  		field_id=" . db_param();
-	$result = db_query_bound( $query, array( $c_bug_id, $c_field_id ) );
+	$result = db_query_bound( $query, array( $p_bug_id, $p_field_id ) );
 
 	if( db_num_rows( $result ) > 0 ) {
 		return custom_field_database_to_value( db_result( $result ), $row['type'] );
@@ -969,15 +968,15 @@ function custom_field_get_all_linked_fields( $p_bug_id ) {
  * @access public
  */
 function custom_field_get_sequence( $p_field_id, $p_project_id ) {
-	$c_field_id = (int)$p_field_id;
-	$c_project_id = (int)$p_project_id;
+	$p_field_id = (int)$p_field_id;
+	$p_project_id = (int)$p_project_id;
 
 	$t_custom_field_project_table = db_get_table( 'custom_field_project' );
 	$query = "SELECT sequence
 				  FROM $t_custom_field_project_table
 				  WHERE field_id=" . db_param() . " AND
 						project_id=" . db_param();
-	$result = db_query_bound( $query, array( $c_field_id, $c_project_id ), 1 );
+	$result = db_query_bound( $query, array( $p_field_id, $p_project_id ), 1 );
 
 	if( 0 == db_num_rows( $result ) ) {
 		return false;
@@ -1248,7 +1247,12 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 					  SET $t_value_field=" . db_param() . "
 					  WHERE field_id=" . db_param() . " AND
 					  		bug_id=" . db_param();
-		db_query_bound( $query, array( custom_field_value_to_database( $p_value, $t_type ), $c_field_id, $c_bug_id ) );
+		$t_params = array(
+			custom_field_value_to_database( $p_value, $t_type ),
+			(int)$p_field_id,
+			(int)$p_bug_id,
+		);
+		db_query_bound( $query, $t_params );
 
 		$row = db_fetch_array( $result );
 		history_log_event_direct( $p_bug_id, $t_name, custom_field_database_to_value( $row[$t_value_field], $t_type ), $p_value );
@@ -1257,7 +1261,12 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 						( field_id, bug_id, $t_value_field )
 					  VALUES
 						( " . db_param() . ', ' . db_param() . ', ' . db_param() . ')';
-		db_query_bound( $query, array( $p_field_id, $p_bug_id, custom_field_value_to_database( $p_value, $t_type ) ) );
+		$t_params = array(
+			(int)$p_field_id,
+			(int)$p_bug_id,
+			custom_field_value_to_database( $p_value, $t_type ),
+		);
+		db_query_bound( $query, $t_params );
 		# Don't log history events for new bug reports or on other special occasions
 		if ( $p_log_insert ) {
 			history_log_event_direct( $p_bug_id, $t_name, '', $p_value );

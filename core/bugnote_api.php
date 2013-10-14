@@ -71,7 +71,7 @@ class BugnoteData {
 	 * Bug ID
 	 */
 	var $bug_id;
-	
+
 	/**
 	 * Reporter ID
 	 */
@@ -129,8 +129,8 @@ function bugnote_exists( $p_bugnote_id ) {
 	$t_bugnote_table = db_get_table( 'bugnote' );
 
 	$query = "SELECT COUNT(*)
-		          	FROM $t_bugnote_table
-		          	WHERE id=" . db_param();
+		FROM $t_bugnote_table
+		WHERE id=" . db_param();
 	$result = db_query_bound( $query, array( $p_bugnote_id ) );
 
 	if( 0 == db_result( $result ) ) {
@@ -225,10 +225,12 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	# get user information
 	if( $p_user_id === null ) {
 		$p_user_id = auth_get_current_user_id();
+	} else {
+		$p_user_id = (int)$p_user_id;
 	}
 
 	# Check for private bugnotes.
-	if( $p_private && access_has_bug_level( config_get( 'set_view_status_threshold' ), $p_bug_id, $c_user_id ) ) {
+	if( $p_private && access_has_bug_level( config_get( 'set_view_status_threshold' ), $p_bug_id, $p_user_id ) ) {
 		$t_view_state = VS_PRIVATE;
 	} else {
 		$t_view_state = VS_PUBLIC;
@@ -239,7 +241,18 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 				(bug_id, reporter_id, bugnote_text_id, view_state, date_submitted, last_modified, note_type, note_attr, time_tracking )
 			VALUES
 				(" . db_param() . ', ' . db_param() . ',' . db_param() . ', ' . db_param() . ', ' . db_param() . ',' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-	db_query_bound( $t_query, array( $c_bug_id, $p_user_id, $t_bugnote_text_id, $t_view_state, $c_date_submitted, $c_last_modified, $c_type, $p_attr, $c_time_tracking ) );
+	$t_params = array(
+		$c_bug_id,
+		$p_user_id,
+		$t_bugnote_text_id,
+		$t_view_state,
+		$c_date_submitted,
+		$c_last_modified,
+		$c_type,
+		$p_attr,
+		$c_time_tracking
+	);
+	db_query_bound( $t_query, $t_params );
 
 	# get bugnote id
 	$t_bugnote_id = db_insert_id( $t_bugnote_table );
@@ -316,7 +329,7 @@ function bugnote_delete_all( $p_bug_id ) {
 
 	# Delete the corresponding bugnotes
 	$query = "DELETE FROM $t_bugnote_table
-		          	WHERE bug_id=" . db_param();
+		WHERE bug_id=" . db_param();
 	$result = db_query_bound( $query, array( (int)$p_bug_id ) );
 
 	# db_query errors on failure so:
@@ -666,11 +679,11 @@ function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
 	$t_query = "SELECT username, realname, SUM(time_tracking) AS sum_time_tracking
 				FROM $t_user_table u, $t_bugnote_table bn
 				WHERE u.id = bn.reporter_id AND bn.time_tracking != 0 AND
-				bn.bug_id = '$c_bug_id'
+				bn.bug_id = " . db_param() . "
 				$t_from_where $t_to_where
 				GROUP BY u.username, u.realname";
 
-	$t_result = db_query_bound( $t_query, array( $p_bug_id ) );
+	$t_result = db_query_bound( $t_query, array( (int)$p_bug_id ) );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_results[] = $t_row;
@@ -689,7 +702,7 @@ function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
  * @access public
  */
 function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost ) {
-	$c_project_id = db_prepare_int( $p_project_id );
+	$c_project_id = (int)$p_project_id;
 
 	$c_to = strtotime( $p_to ) + SECONDS_PER_DAY - 1;
 	$c_from = strtotime( $p_from );
@@ -703,22 +716,27 @@ function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost
 	$t_user_table = db_get_table( 'user' );
 	$t_bugnote_table = db_get_table( 'bugnote' );
 
+	$t_params = array();
+
+	if( ALL_PROJECTS != $c_project_id ) {
+		$t_project_where = ' AND b.project_id = ' . db_param() . ' AND bn.bug_id = b.id ';
+		$t_params[] = $c_project_id;
+	} else {
+		$t_project_where = '';
+	}
+
 	if( !is_blank( $c_from ) ) {
-		$t_from_where = " AND bn.date_submitted >= $c_from";
+		$t_from_where = ' AND bn.date_submitted >= ' . db_param();
+		$t_params[] = $c_from;
 	} else {
 		$t_from_where = '';
 	}
 
 	if( !is_blank( $c_to ) ) {
-		$t_to_where = " AND bn.date_submitted <= $c_to";
+		$t_to_where = ' AND bn.date_submitted <= ' . db_param();
+		$t_params[] = $c_to;
 	} else {
 		$t_to_where = '';
-	}
-
-	if( ALL_PROJECTS != $c_project_id ) {
-		$t_project_where = " AND b.project_id = '$c_project_id' AND bn.bug_id = b.id ";
-	} else {
-		$t_project_where = '';
 	}
 
 	$t_results = array();
@@ -729,8 +747,7 @@ function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost
 			$t_project_where $t_from_where $t_to_where
 			GROUP BY bn.bug_id, u.username, u.realname, b.summary
 			ORDER BY bn.bug_id";
-
-	$result = db_query( $query );
+	$result = db_query_bound( $query, $t_params );
 
 	$t_cost_min = $p_cost / 60.0;
 
