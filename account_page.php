@@ -78,6 +78,8 @@ auth_ensure_user_authenticated();
 
 current_user_ensure_unprotected();
 
+html_page_top( lang_get( 'account_link' ) );
+
 # extracts the user information for the currently logged in user
 # and prefixes it with u_
 $row = user_get_row( auth_get_current_user_id() );
@@ -90,22 +92,33 @@ $t_ldap = ( LDAP == config_get( 'login_method' ) );
 #  that version instead of the one in the DB
 $u_email = user_get_email( $u_id, $u_username );
 
+# If the password is the default password, then prompt user to change it.
+$t_reset_password = $u_username == 'administrator' && auth_does_password_match( $u_id, 'root' );
+
 # note if we are being included by a script of a different name, if so,
-#  this is a mandatory password change request
-$t_force_pw_reset = is_page_name( 'verify.php' );
+# this is a mandatory password change request
+$t_verify = is_page_name( 'verify.php' );
 
-# Only show the update button if there is something to update.
-$t_show_update_button = false;
+$t_force_pw_reset = false;
 
-html_page_top( lang_get( 'account_link' ) );
+if ( $t_verify || $t_reset_password ) {
+	$t_can_change_password = helper_call_custom_function( 'auth_can_change_password', array() );
 
-if ( $t_force_pw_reset ) {
 	echo '<div id="reset-passwd-msg" class="important-msg">';
 	echo '<ul>';
-	echo '<li>' . lang_get( 'verify_warning' ) . '</li>';
-	if ( helper_call_custom_function( 'auth_can_change_password', array() ) ) {
-		echo '<li>' . lang_get( 'verify_change_password' ) . '</li>';
+
+	if ( $t_verify ) {
+		echo '<li>' . lang_get( 'verify_warning' ) . '</li>';
+
+		if ( $t_can_change_password ) {
+			echo '<li>' . lang_get( 'verify_change_password' ) . '</li>';
+			$t_force_pw_reset = true;
+		}
+	} else if ( $t_reset_password && $t_can_change_password ) {
+		echo '<li>' . lang_get( 'warning_default_administrator_account_present' ) . '</li>';
+		$t_force_pw_reset = true;
 	}
+
 	echo '</ul>';
 	echo '</div>';
 }

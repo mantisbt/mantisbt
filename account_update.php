@@ -70,7 +70,7 @@ $f_password_confirm	= gpc_get_string( 'password_confirm', '' );
 // admins / managers to change details of other users.
 $t_user_id = auth_get_current_user_id();
 
-$t_redirect_url = 'account_page.php';
+$t_redirect_url = 'index.php';
 
 /** @todo Listing what fields were updated is not standard behaviour of MantisBT - it also complicates the code. */
 $t_email_updated = false;
