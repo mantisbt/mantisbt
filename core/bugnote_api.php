@@ -71,7 +71,7 @@ class BugnoteData {
 	 * Bug ID
 	 */
 	var $bug_id;
-	
+
 	/**
 	 * Reporter ID
 	 */
@@ -129,8 +129,8 @@ function bugnote_exists( $p_bugnote_id ) {
 	$t_bugnote_table = db_get_table( 'bugnote' );
 
 	$query = "SELECT COUNT(*)
-		          	FROM $t_bugnote_table
-		          	WHERE id=" . db_param();
+		FROM $t_bugnote_table
+		WHERE id=" . db_param();
 	$result = db_query_bound( $query, array( $p_bugnote_id ) );
 
 	if( 0 == db_result( $result ) ) {
@@ -316,7 +316,7 @@ function bugnote_delete_all( $p_bug_id ) {
 
 	# Delete the corresponding bugnotes
 	$query = "DELETE FROM $t_bugnote_table
-		          	WHERE bug_id=" . db_param();
+		WHERE bug_id=" . db_param();
 	$result = db_query_bound( $query, array( (int)$p_bug_id ) );
 
 	# db_query errors on failure so:
