@@ -17,3 +17,21 @@ branches:
   only:
     - master
     - master-1.2.x
+
+notifications:
+  email:
+    on_success: change
+    on_failure: always
+    recipients:
+      - mantisbt-cvs@lists.sourceforge.net
+
+  irc:
+    on_success: change
+    on_failure: always
+    channels:
+       - "chat.freenode.net#mantisbt"
+    skip_join: true
+    template:
+      - "Build #%{build_number}: %{repository} %{branch} (%{commit}) %{author} - %{message}"
+      - "Build details: %{build_url}"
+      - "Code Changes: %{compare_url}"
