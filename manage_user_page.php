@@ -123,23 +123,20 @@ print_manage_menu( 'manage_user_page.php' );
 
 # New Accounts Form BEGIN
 
-$days_old = 7 * SECONDS_PER_DAY;
-$query = "SELECT *
-	FROM $t_user_table
-	WHERE ".db_helper_compare_days("" . db_now() . "","date_created","<= $days_old")."
-	ORDER BY date_created DESC";
-$result = db_query_bound( $query );
-$g_db->debug=false;
-$new_user_count = db_num_rows( $result);
+$t_days_old = 7 * SECONDS_PER_DAY;
+$t_query = "SELECT COUNT(*) AS new_user_count FROM $t_user_table
+	WHERE ".db_helper_compare_days("" . db_now() . "","date_created","<= $t_days_old");
+$t_result = db_query_bound( $t_query );
+$t_row = db_fetch_array( $t_result );
+$t_new_user_count = $t_row['new_user_count'];
 
 # Never Logged In Form BEGIN
 
-$query = "SELECT *
-	FROM $t_user_table
-	WHERE ( login_count = 0 ) AND ( date_created = last_visit )
-	ORDER BY date_created DESC";
-$result = db_query_bound( $query );
-$unused_user_count = db_num_rows( $result );
+$t_query = "SELECT COUNT(*) AS unused_user_count FROM $t_user_table
+	WHERE ( login_count = 0 ) AND ( date_created = last_visit )";
+$t_result = db_query_bound( $t_query );
+$t_row = db_fetch_array( $t_result );
+$t_unused_user_count = $t_row['unused_user_count'];
 
 # Manage Form BEGIN
 
@@ -162,9 +159,9 @@ echo '<ul class="menu">';
 foreach ( $t_prefix_array as $t_prefix => $t_caption ) {
 	echo '<li>';
 	if ( $t_prefix === 'UNUSED' ) {
-		$t_title = ' title="[' . $unused_user_count . '] (' . lang_get( 'never_logged_in_title' ) . ')"';
+		$t_title = ' title="[' . $t_unused_user_count . '] (' . lang_get( 'never_logged_in_title' ) . ')"';
 	} else if ( $t_prefix === 'NEW' ) {
-		$t_title = ' title="[' . $new_user_count . '] (' . lang_get( '1_week_title' ) . ')"';
+		$t_title = ' title="[' . $t_new_user_count . '] (' . lang_get( '1_week_title' ) . ')"';
 	} else {
 		$t_title = '';
 	}
@@ -189,7 +186,7 @@ if ( $f_filter === 'ALL' ) {
 } else if ( $f_filter === 'UNUSED' ) {
 	$t_where = '(login_count = 0) AND ( date_created = last_visit )';
 } else if ( $f_filter === 'NEW' ) {
-	$t_where = db_helper_compare_days("" . db_now() . "","date_created","<= $days_old");
+	$t_where = db_helper_compare_days("" . db_now() . "","date_created","<= $t_days_old");
 } else {
 	$t_where_params[] = $f_filter . '%';
 	$t_where = db_helper_like( 'UPPER(username)' );
@@ -199,10 +196,10 @@ $p_per_page = 50;
 
 $t_offset = ( ( $f_page_number - 1 ) * $p_per_page );
 
-$total_user_count = 0;
+$t_total_user_count = 0;
 
 # Get the user data in $c_sort order
-$result = '';
+$t_result = '';
 
 if( 1 == $c_show_disabled ) {
 	$t_show_disabled_cond = '';
@@ -211,24 +208,20 @@ if( 1 == $c_show_disabled ) {
 }
 
 if ( 0 == $c_hide_inactive ) {
-	$query = "SELECT count(*) as usercnt
-			FROM $t_user_table
-			WHERE $t_where
-			$t_show_disabled_cond";
-	$result = db_query_bound($query, $t_where_params);
-	$row = db_fetch_array( $result );
-	$total_user_count = $row['usercnt'];
+	$t_query = "SELECT count(*) as user_count FROM $t_user_table WHERE $t_where $t_show_disabled_cond";
+	$t_result = db_query_bound($t_query, $t_where_params);
+	$t_row = db_fetch_array( $t_result );
+	$t_total_user_count = $t_row['user_count'];
 } else {
-	$query = "SELECT count(*) as usercnt
-			FROM $t_user_table
+	$query = "SELECT count(*) as user_count FROM $t_user_table
 			WHERE $t_where AND " . db_helper_compare_days("" . db_now() . "","last_visit","< $days_old")
 			. $t_show_disabled_cond;
-	$result = db_query_bound($query, $t_where_params);
-	$row = db_fetch_array( $result );
-	$total_user_count = $row['usercnt'];
+	$t_result = db_query_bound($query, $t_where_params);
+	$t_row = db_fetch_array( $t_result );
+	$t_total_user_count = $t_row['user_count'];
 }
 
-$t_page_count = ceil($total_user_count / $p_per_page);
+$t_page_count = ceil($t_total_user_count / $p_per_page);
 if ( $t_page_count < 1 ) {
 	$t_page_count = 1;
 }
@@ -245,23 +238,23 @@ if ( $f_page_number < 1 ) {
 
 
 if ( 0 == $c_hide_inactive ) {
-	$query = "SELECT *
-			FROM $t_user_table
-			WHERE $t_where
-			$t_show_disabled_cond
-			ORDER BY $c_sort $c_dir";
-	$result = db_query_bound($query, $t_where_params, $p_per_page, $t_offset);
+	$t_query = "SELECT * FROM $t_user_table WHERE $t_where $t_show_disabled_cond ORDER BY $c_sort $c_dir";
+	$t_result = db_query_bound($t_query, $t_where_params, $p_per_page, $t_offset);
 } else {
 
-	$query = "SELECT *
-			FROM $t_user_table
+	$t_query = "SELECT * FROM $t_user_table
 			WHERE $t_where AND " . db_helper_compare_days( "" . db_now() . "", "last_visit", "< $days_old" ) . "
 			$t_show_disabled_cond
 			ORDER BY $c_sort $c_dir";
-	$result = db_query_bound($query, $t_where_params, $p_per_page, $t_offset );
+	$t_result = db_query_bound($t_query, $t_where_params, $p_per_page, $t_offset );
 }
-$user_count = db_num_rows( $result );
 
+$t_users = array();
+while ( $t_row = db_fetch_array( $t_result ) ) {
+	$t_users[] = $t_row;
+}
+
+$t_user_count = count( $t_users );
 ?>
 <div id="manage-user-div" class="form-container">
 	<h2><?php echo lang_get( 'manage_accounts_title' ) ?></h2> [<?php echo $total_user_count ?>]
@@ -308,10 +301,10 @@ $user_count = db_num_rows( $result );
 <?php
 	$t_date_format = config_get( 'normal_date_format' );
 	$t_access_level = array();
-	for ($i=0;$i<$user_count;$i++) {
+	for ($i=0;$i<$t_user_count;$i++) {
 		# prefix user data with u_
-		$row = db_fetch_array($result);
-		extract( $row, EXTR_PREFIX_ALL, 'u' );
+		$t_user = $t_users[$i];
+		extract( $t_user, EXTR_PREFIX_ALL, 'u' );
 
 		$u_date_created  = date( $t_date_format, $u_date_created );
 		$u_last_visit    = date( $t_date_format, $u_last_visit );

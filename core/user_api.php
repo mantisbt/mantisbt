@@ -627,17 +627,20 @@ function user_delete( $p_user_id ) {
 	# unset non-unique realname flags if necessary
 	if( config_get( 'differentiate_duplicates' ) ) {
 		$c_realname = user_get_field( $p_user_id, 'realname' );
-		$query = "SELECT id
-					FROM $t_user_table
-					WHERE realname=" . db_param();
-		$result = db_query_bound( $query, array( $c_realname ) );
-		$t_count = db_num_rows( $result );
+		$t_query = "SELECT id FROM $t_user_table WHERE realname=" . db_param();
+		$t_result = db_query_bound( $t_query, array( $c_realname ) );
 
-		if( $t_count == 2 ) {
+		$t_users = array();
+		while ( $t_row = db_fetch_array( $t_result ) ) {
+			$t_users[] = $t_row;
+		}
 
+		$t_user_count = count( $t_users );
+
+		if( $t_user_count == 2 ) {
 			# unset flags if there are now only 2 unique names
-			for( $i = 0;$i < $t_count;$i++ ) {
-				$t_user_id = db_result( $result, $i );
+			for( $i = 0;$i < $t_user_count;$i++ ) {
+				$t_user_id = $t_users[$i]['id'];
 				user_set_field( $t_user_id, 'duplicate_realname', OFF );
 			}
 		}
@@ -646,19 +649,19 @@ function user_delete( $p_user_id ) {
 	user_clear_cache( $p_user_id );
 
 	# Remove account
-	$query = "DELETE FROM $t_user_table
-				  WHERE id=" . db_param();
-	db_query_bound( $query, array( $c_user_id ) );
+	$t_query = "DELETE FROM $t_user_table WHERE id=" . db_param();
+	db_query_bound( $t_query, array( $c_user_id ) );
 
 	return true;
 }
 
-# ===================================
-# Data Access
-# ===================================
-# --------------------
-# get a user id from a username
-#  return false if the username does not exist
+/**
+ * get a user id from a username
+ * return false if the username does not exist
+ *
+ * @param string $p_username username
+ * @return int|bool
+ */
 function user_get_id_by_name( $p_username ) {
 	global $g_cache_user;
 	if( $t_user = user_search_cache( 'username', $p_username ) ) {
@@ -667,21 +670,23 @@ function user_get_id_by_name( $p_username ) {
 
 	$t_user_table = db_get_table( 'user' );
 
-	$query = "SELECT *
-				  FROM $t_user_table
-				  WHERE username=" . db_param();
+	$query = "SELECT * FROM $t_user_table WHERE username=" . db_param();
 	$result = db_query_bound( $query, array( $p_username ) );
 
-	if( 0 == db_num_rows( $result ) ) {
-		return false;
-	} else {
-		$row = db_fetch_array( $result );
-		user_cache_database_result( $row );
-		return $row['id'];
+	$t_row = db_fetch_array( $result );
+	if( $t_row ) {
+		user_cache_database_result( $t_row );
+		return $t_row['id'];
 	}
+	return false;
 }
 
-# Get a user id from an email address
+/**
+ * Get a user id from their email address
+ *
+ * @param string $p_email Email Address
+ * @return array
+ */
 function user_get_id_by_email( $p_email ) {
 	global $g_cache_user;
 	if( $t_user = user_search_cache( 'email', $p_email ) ) {
@@ -690,18 +695,15 @@ function user_get_id_by_email( $p_email ) {
 
 	$t_user_table = db_get_table( 'user' );
 
-	$query = "SELECT *
-				  FROM $t_user_table
-				  WHERE email=" . db_param();
+	$query = "SELECT * FROM $t_user_table WHERE email=" . db_param();
 	$result = db_query_bound( $query, array( $p_email ) );
 
-	if( 0 == db_num_rows( $result ) ) {
-		return false;
-	} else {
-		$row = db_fetch_array( $result );
-		user_cache_database_result( $row );
-		return $row['id'];
+	$t_row = db_fetch_array( $result );
+	if( $t_row ) {
+		user_cache_database_result( $t_row );
+		return $t_row['id'];
 	}
+	return false;
 }
 
 
@@ -718,24 +720,26 @@ function user_get_id_by_realname( $p_realname ) {
 	}
 
 	$t_user_table = db_get_table( 'user' );
-
-	$query = "SELECT *
-				  FROM $t_user_table
-				  WHERE realname=" . db_param();
+	$query = "SELECT * FROM $t_user_table WHERE realname=" . db_param();
 	$result = db_query_bound( $query, array( $p_realname ) );
 
-	if( 0 == db_num_rows( $result ) ) {
+	$row = db_fetch_array( $result );
+
+	if( !$row ) {
 		return false;
 	} else {
-		$row = db_fetch_array( $result );
 		user_cache_database_result( $row );
 		return $row['id'];
 	}
 }
 
-# --------------------
-# return all data associated with a particular user name
-#  return false if the username does not exist
+/**
+ * return all data associated with a particular user name
+ * return false if the username does not exist
+ *
+ * @param int $p_username Username
+ * @return array
+ */
 function user_get_row_by_name( $p_username ) {
 	$t_user_id = user_get_id_by_name( $p_username );
 
@@ -748,8 +752,12 @@ function user_get_row_by_name( $p_username ) {
 	return $row;
 }
 
-# --------------------
-# return a user row
+/**
+ * return a user row
+ *
+ * @param int $p_user_id User ID
+ * @return array
+ */
 function user_get_row( $p_user_id ) {
 	return user_cache_row( $p_user_id );
 }
@@ -944,13 +952,9 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 			  ORDER BY p.name";
 		$result = db_query_bound( $query, ( $p_show_disabled ? array( $p_user_id, $t_public, $t_private, $p_user_id ) : array( $p_user_id, true, $t_public, $t_private, $p_user_id ) ) );
 
-		$row_count = db_num_rows( $result );
-
 		$t_projects = array();
 
-		for( $i = 0;$i < $row_count;$i++ ) {
-			$row = db_fetch_array( $result );
-
+		while ( $row = db_fetch_array( $result ) ) {
 			$t_projects[(int)$row['id']] = ( $row['parent_id'] === NULL ) ? 0 : (int)$row['parent_id'];
 		}
 
@@ -1030,13 +1034,9 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 		$result = db_query_bound( $query, ( $p_show_disabled ? array( $p_user_id, $t_public, $t_private, $p_user_id ) : array( $p_user_id, 1, $t_public, $t_private, $p_user_id ) ) );
 	}
 
-	$row_count = db_num_rows( $result );
-
 	$t_projects = array();
 
-	for( $i = 0;$i < $row_count;$i++ ) {
-		$row = db_fetch_array( $result );
-
+	while( $row = db_fetch_array( $result ) ) {
 		if( !isset( $t_projects[(int)$row['parent_id']] ) ) {
 			$t_projects[(int)$row['parent_id']] = array();
 		}
@@ -1132,10 +1132,8 @@ function user_get_assigned_projects( $p_user_id ) {
                     u.user_id=" . db_param() . "
                 ORDER BY p.name";
 	$t_result = db_query_bound( $t_query, array( $p_user_id ) );
-	$category_count = db_num_rows( $t_result );
 	$t_projects = array();
-	for( $i = 0;$i < $category_count;$i++ ) {
-		$t_row = db_fetch_array( $t_result );
+	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_project_id = $t_row['id'];
 		$t_projects[$t_project_id] = $t_row;
 	}
@@ -1198,15 +1196,20 @@ function user_get_unassigned_by_project_id( $p_project_id = null ) {
 	return $t_user_list;
 }
 
-# --------------------
-# return the number of open assigned bugs to a user in a project
+/**
+ * return the number of open assigned bugs to a user in a project
+ *
+ * @param int $p_user_id User ID
+ * @param int $p_project_id Project ID
+ * @return int
+ */
 function user_get_assigned_open_bug_count( $p_user_id, $p_project_id = ALL_PROJECTS ) {
-	$t_bug_table = db_get_table( 'bug' );
 
 	$t_where_prj = helper_project_specific_where( $p_project_id, $p_user_id ) . ' AND';
 
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
+	$t_bug_table = db_get_table( 'bug' );
 	$query = "SELECT COUNT(*)
 				  FROM $t_bug_table
 				  WHERE $t_where_prj
@@ -1217,8 +1220,13 @@ function user_get_assigned_open_bug_count( $p_user_id, $p_project_id = ALL_PROJE
 	return db_result( $result );
 }
 
-# --------------------
-# return the number of open reported bugs by a user in a project
+/**
+ * return the number of open reported bugs by a user in a project
+ *
+ * @param int $p_user_id User ID
+ * @param int $p_project_id Project ID
+ * @return int
+ */
 function user_get_reported_open_bug_count( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	$t_bug_table = db_get_table( 'bug' );
 
@@ -1481,8 +1489,15 @@ function user_set_fields( $p_user_id, $p_fields ) {
 	user_clear_cache( $p_user_id );
 }
 
-# --------------------
-# Set a user field
+/**
+ * Set a user field
+ *
+ * @param int $p_user_id User ID
+ * @param string $p_field_name Field Name
+ * @param string $p_field_value Field Value
+ * @return bool always true
+ * @throws MantisBT\Exception\Database\FieldNotFound
+ */
 function user_set_field( $p_user_id, $p_field_name, $p_field_value ) {
 
 	user_set_fields($p_user_id, array ( $p_field_name => $p_field_value ) );
@@ -1557,14 +1572,19 @@ function user_set_name( $p_user_id, $p_username ) {
 	return user_set_field( $p_user_id, 'username', $p_username );
 }
 
-# --------------------
-# Reset the user's password
-#  Take into account the 'send_reset_password' setting
-#   - if it is ON, generate a random password and send an email
-#      (unless the second parameter is false)
-#   - if it is OFF, set the password to blank
-#  Return false if the user is protected, true if the password was
-#   successfully reset
+/**
+ * Reset the user's password
+ *  Take into account the 'send_reset_password' setting
+ *   - if it is ON, generate a random password and send an email
+ *      (unless the second parameter is false)
+ *   - if it is OFF, set the password to blank
+ *  Return false if the user is protected, true if the password was
+ *   successfully reset
+ *
+ * @param int $p_user_id User ID
+ * @param bool $p_send_email send confirmation email
+ * @return bool
+ */
 function user_reset_password( $p_user_id, $p_send_email = true ) {
 	$t_protected = user_get_field( $p_user_id, 'protected' );
 
@@ -1579,7 +1599,6 @@ function user_reset_password( $p_user_id, $p_send_email = true ) {
 	#     Should we just have two functions? (user_reset_password_random()
 	#     and user_reset_password() )?
 	if(( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
-
 		$t_email = user_get_field( $p_user_id, 'email' );
 		if( is_blank( $t_email ) ) {
 			trigger_error( ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED, ERROR );
@@ -1597,7 +1616,6 @@ function user_reset_password( $p_user_id, $p_send_email = true ) {
 			email_send_confirm_hash_url( $p_user_id, $t_confirm_hash );
 		}
 	} else {
-
 		# use blank password, no emailing
 		$t_password = auth_process_plain_password( '' );
 		user_set_field( $p_user_id, 'password', $t_password );

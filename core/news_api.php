@@ -180,10 +180,11 @@ function news_get_row( $p_news_id ) {
 	$t_query = "SELECT * FROM $t_news_table WHERE id=" . db_param();
 	$result = db_query_bound( $t_query, array( $p_news_id ) );
 
-	if( 0 == db_num_rows( $result ) ) {
+	$row = db_fetch_array( $result );
+
+	if( !$row ) {
 		trigger_error( ERROR_NEWS_NOT_FOUND, ERROR );
 	} else {
-		$row = db_fetch_array( $result );
 		return $row;
 	}
 }
@@ -217,35 +218,32 @@ function news_get_count( $p_project_id, $p_global = true ) {
  * @param bool $p_global site wide news i.e. ALL_PROJECTS
  * @return array Array of news articles
  */
-function news_get_rows( $p_project_id, $p_sitewide = true ) {
-	$t_news_table = db_get_table( 'news' );
-
+function news_get_rows( $p_project_id, $p_global = true ) {
 	$t_projects = current_user_get_all_accessible_subprojects( $p_project_id );
 	$t_projects[] = (int)$p_project_id;
 
-	if( $p_sitewide && ALL_PROJECTS != $p_project_id ) {
+	if( $p_global && ALL_PROJECTS != $p_project_id ) {
 		$t_projects[] = ALL_PROJECTS;
 	}
 
-	$query = "SELECT * FROM $t_news_table";
+	$t_news_table = db_get_table( 'news' );
+	$t_query = "SELECT * FROM $t_news_table";
 
 	if( 1 == count( $t_projects ) ) {
 		$c_project_id = $t_projects[0];
-		$query .= " WHERE project_id='$c_project_id'";
+		$t_query .= " WHERE project_id='$c_project_id'";
 	} else {
-		$query .= ' WHERE project_id IN (' . join( $t_projects, ',' ) . ')';
+		$t_query .= ' WHERE project_id IN (' . join( $t_projects, ',' ) . ')';
 	}
 
-	$query .= " ORDER BY date_posted DESC";
+	$t_query .= " ORDER BY date_posted DESC";
 
-	$result = db_query( $query );
+	$result = db_query_bound( $t_query, array() );
 
 	$t_rows = array();
-	$t_row_count = db_num_rows( $result );
 
-	for( $i = 0;$i < $t_row_count;$i++ ) {
-		$row = db_fetch_array( $result );
-		array_push( $t_rows, $row );
+	while( $t_row = db_fetch_array( $result ) ) {
+		array_push( $t_rows, $t_row );
 	}
 
 	return $t_rows;
@@ -337,14 +335,9 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 			break;
 	}
 
-	# end switch
-
-	$t_row_count = db_num_rows( $result );
-
 	$t_rows = array();
-	for( $i = 0;$i < $t_row_count;$i++ ) {
-		$row = db_fetch_array( $result );
-		array_push( $t_rows, $row );
+	while( $t_row = db_fetch_array( $result ) ) {
+		array_push( $t_rows, $t_row );
 	}
 
 	return $t_rows;

@@ -257,16 +257,14 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 
 	# add users monitoring the bug
-	$t_bug_monitor_table = db_get_table( 'bug_monitor' );
 	if( ON == email_notify_flag( $p_notify_type, 'monitor' ) ) {
-		$query = "SELECT DISTINCT user_id
+		$t_bug_monitor_table = db_get_table( 'bug_monitor' );
+		$t_query = "SELECT DISTINCT user_id
 					  FROM $t_bug_monitor_table
 					  WHERE bug_id=" . db_param();
-		$result = db_query_bound( $query, array( $p_bug_id ) );
+		$t_result = db_query_bound( $t_query, array( $p_bug_id ) );
 
-		$count = db_num_rows( $result );
-		for( $i = 0;$i < $count;$i++ ) {
-			$t_user_id = db_result( $result, $i );
+		while( $t_user_id = db_result( $t_result ) ) {
 			$t_recipients[$t_user_id] = true;
 			log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, add Monitor = @U%d', $p_bug_id, $t_user_id ) );
 		}
@@ -279,16 +277,14 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 	$t_bug = bug_get( $p_bug_id );
 	$t_bug_date = $t_bug->last_updated;
 
-	$t_bugnote_table = db_get_table( 'bugnote' );
 	if( ON == email_notify_flag( $p_notify_type, 'bugnotes' ) ) {
-		$query = "SELECT DISTINCT reporter_id
+		$t_bugnote_table = db_get_table( 'bugnote' );
+		$t_query = "SELECT DISTINCT reporter_id
 					  FROM $t_bugnote_table
 					  WHERE bug_id = " . db_param();
-		$result = db_query_bound( $query, array( $p_bug_id ) );
+		$t_result = db_query_bound( $t_query, array( $p_bug_id ) );
 
-		$count = db_num_rows( $result );
-		for( $i = 0;$i < $count;$i++ ) {
-			$t_user_id = db_result( $result, $i );
+		while( $t_user_id = db_result( $t_result ) ) {
 			$t_recipients[$t_user_id] = true;
 			log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, add Note Author = @U%d', $p_bug_id, $t_user_id ) );
 		}

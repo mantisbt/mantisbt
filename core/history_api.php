@@ -84,12 +84,11 @@ function history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_ne
 		$c_new_value = ( is_null( $p_new_value ) ? '' : $p_new_value );
 
 		$t_mantis_bug_history_table = db_get_table( 'bug_history' );
-
 		$t_query = "INSERT INTO $t_mantis_bug_history_table
 						( user_id, bug_id, date_modified, field_name, old_value, new_value, type )
 					VALUES
 						( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-		$result = db_query_bound( $t_query, array( $p_user_id, $p_bug_id, db_now(), $c_field_name, $c_old_value, $c_new_value, $p_type ) );
+		db_query_bound( $t_query, array( $p_user_id, $p_bug_id, db_now(), $c_field_name, $c_old_value, $c_new_value, $p_type ) );
 	}
 }
 
@@ -163,10 +162,7 @@ function history_get_events_array( $p_bug_id, $p_user_id = null ) {
  * @return array
  */
 function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
-	$t_mantis_bug_history_table = db_get_table( 'bug_history' );
-	$t_mantis_user_table = db_get_table( 'user' );
 	$t_history_order = config_get( 'history_order' );
-	$c_bug_id = (int)$p_bug_id;
 
 	$t_user_id = (( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
 
@@ -179,12 +175,12 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 	# I give you an example. We create a child of a bug with different custom fields. In the history of the child
 	# bug we will find the line related to the relationship mixed with the custom fields (the history is creted
 	# for the new bug with the same timestamp...)
+	$t_mantis_bug_history_table = db_get_table( 'bug_history' );
 	$query = "SELECT *
 				FROM $t_mantis_bug_history_table
 				WHERE bug_id=" . db_param() . "
 				ORDER BY date_modified $t_history_order,id";
-	$result = db_query_bound( $query, array( $c_bug_id ) );
-	$raw_history_count = db_num_rows( $result );
+	$result = db_query_bound( $query, array( $p_bug_id ) );
 	$raw_history = array();
 
 	$t_private_bugnote_threshold = config_get( 'private_bugnote_threshold' );
@@ -194,10 +190,8 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 	$t_show_handler_threshold = config_get( 'view_handler_threshold' );
 
 	$t_standard_fields = columns_get_standard();
-
-	for( $i = 0, $j = 0;$i < $raw_history_count;++$i ) {
-		$t_row = db_fetch_array( $result );
-
+	$j = 0;
+	while( $t_row = db_fetch_array( $result ) ) {
 		$v_type = $t_row['type'];
 		$v_field_name = $t_row['field_name'];
 		$v_user_id = $t_row['user_id'];
@@ -590,7 +584,6 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
  */
 function history_delete( $p_bug_id ) {
 	$t_bug_history_table = db_get_table( 'bug_history' );
-
 	$query = 'DELETE FROM ' . $t_bug_history_table . ' WHERE bug_id=' . db_param();
 	db_query_bound( $query, array( $p_bug_id ) );
 }

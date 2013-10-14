@@ -239,14 +239,14 @@ class UserPreferences {
 	 * @param string $p_value Value
 	 * @access private
 	 */
-	public function __set($name, $value) {
-		switch ($name) {
+	public function __set($p_name, $p_value) {
+		switch ($p_name) {
 			case 'timezone':
-				if( $value == '' ) {
-					$value = null;
+				if( $p_value == '' ) {
+					$p_value = null;
 				}
 		}
-		$this->$name = $value;
+		$this->$p_name = $p_value;
 	}
 
 	/**
@@ -531,7 +531,7 @@ function user_pref_delete( $p_user_id, $p_project_id = ALL_PROJECTS ) {
  *  call user_pref_delete() for each one and the code is short so that's
  *  what we do
  * @param int $p_user_id
- * @return true
+ * @return bool
  */
 function user_pref_delete_all( $p_user_id ) {
 	$c_user_id = db_prepare_int( $p_user_id );

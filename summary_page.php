@@ -63,13 +63,12 @@ $t_user_id = auth_get_current_user_id();
 $t_project_ids = user_get_all_accessible_projects( $t_user_id, $f_project_id);
 $specific_where = helper_project_specific_where( $f_project_id, $t_user_id);
 
-$t_bug_table = db_get_table( 'bug' );
-$t_history_table = db_get_table( 'bug_history' );
-
 $t_resolved = config_get( 'bug_resolved_status_threshold' );
 # the issue may have passed through the status we consider resolved
 #  (e.g., bug is CLOSED, not RESOLVED). The linkage to the history field
 #  will look up the most recent 'resolved' status change and return it as well
+$t_bug_table = db_get_table( 'bug' );
+$t_history_table = db_get_table( 'bug_history' );
 $query = "SELECT b.id, b.date_submitted, b.last_updated, MAX(h.date_modified) as hist_update, b.status
 	FROM $t_bug_table b LEFT JOIN $t_history_table h
 		ON b.id = h.bug_id  AND h.type=0 AND h.field_name='status' AND h.new_value=" . db_param() . "
