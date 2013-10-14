@@ -2,6 +2,9 @@ language: php
 
 # Environment setup and test scripts execution
 
+before_install:
+  - git submodule update --init --recursive
+
 before_script:
   - ./scripts/travis_before_script.sh
 
