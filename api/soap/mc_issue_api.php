@@ -76,6 +76,8 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
+	log_event(LOG_WEBSERVICE, "getting details for issue '$p_issue_id'");
+
 	$t_bug = bug_get( $p_issue_id, true );
 	$t_issue_data = array();
 
@@ -163,6 +165,8 @@ function mc_issue_get_history( $p_username, $p_password, $p_issue_id ) {
 	if( !access_compare_level( $t_user_access_level, config_get( 'view_history_threshold' ) ) ){
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
+
+	log_event(LOG_WEBSERVICE, "retrieving history for issue '$p_issue_id'");
 
 	$t_bug_history = history_get_raw_events_array($p_issue_id, $t_user_id);
 
@@ -730,6 +734,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 
 	# submit the issue
 	$t_issue_id = $t_bug_data->create();
+	log_event(LOG_WEBSERVICE, "created new issue id '$t_issue_id'");
 
 	$t_set_custom_field_error = mci_issue_set_custom_fields( $t_issue_id, $p_issue['custom_fields'], false );
 	if ( $t_set_custom_field_error != null ) return $t_set_custom_field_error;
@@ -738,8 +743,8 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 		mci_issue_set_monitors( $t_issue_id , $t_user_id, $p_issue['monitors'] );
 
 	if( isset( $t_notes ) && is_array( $t_notes ) ) {
-		foreach( $t_notes as $t_note ) {
 
+		foreach( $t_notes as $t_note ) {
 			$t_note = SoapObjectsFactory::unwrapObject( $t_note );
 
 			if( isset( $t_note['view_state'] ) ) {
@@ -752,7 +757,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 			$note_attr = isset ( $t_note['note_type'] ) ? $t_note['note_attr'] : '';
 
 			$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
-			bugnote_add(
+			$t_note_id = bugnote_add(
 				$t_issue_id,
 				$t_note['text'],
 				mci_get_time_tracking_from_note( $t_issue_id, $t_note ),
@@ -762,6 +767,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 				$t_user_id,
 				FALSE # don't send mail
 			);
+			log_event(LOG_WEBSERVICE, "bugnote id '$t_note_id' added to issue '$t_issue_id'");
 		}
 	}
 
@@ -1002,6 +1008,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	}
 
 	# submit the issue
+	log_event(LOG_WEBSERVICE, "updating issue '$p_issue_id'");
 	return $t_bug_data->update( /* update_extended */ true, /* bypass_email */ true );
 
 }
@@ -1065,6 +1072,7 @@ function mc_issue_delete( $p_username, $p_password, $p_issue_id ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
+	log_event(LOG_WEBSERVICE, "deleting issue '$p_issue_id'");
 	return bug_delete( $p_issue_id );
 }
 
@@ -1127,6 +1135,7 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, $p_note ) {
 	$note_type = isset ( $p_note['note_type'] ) ? (int) $p_note['note_type'] : BUGNOTE;
 	$note_attr = isset ( $p_note['note_type'] ) ? $p_note['note_attr'] : '';
 
+	log_event(LOG_WEBSERVICE, "adding bugnote to issue '$p_issue_id'");
 	return bugnote_add( $p_issue_id, $p_note['text'], mci_get_time_tracking_from_note( $p_issue_id, $p_note ), $t_view_state_id == VS_PRIVATE, $note_type, $note_attr, $t_user_id );
 }
 
@@ -1178,6 +1187,7 @@ function mc_issue_note_delete( $p_username, $p_password, $p_issue_note_id ) {
 		return mci_soap_fault_access_denied( $t_user_id, "Issue '$t_issue_id' is readonly" );
 	}
 
+	log_event(LOG_WEBSERVICE, "deleting bugnote id '$p_issue_note_id'");
 	return bugnote_delete( $p_issue_note_id );
 }
 
@@ -1250,6 +1260,7 @@ function mc_issue_note_update( $p_username, $p_password, $p_note ) {
 		bugnote_set_view_state( $t_issue_note_id, $t_view_state_id == VS_PRIVATE );
 	}
 
+	log_event(LOG_WEBSERVICE, "updating bugnote id '$t_issue_note_id'");
 	bugnote_set_text( $t_issue_note_id, $p_note['text'] );
 
 	return bugnote_date_update( $t_issue_note_id );
@@ -1311,6 +1322,7 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, $p_re
 	$t_old_id_relationship = relationship_same_type_exists( $p_issue_id, $t_dest_issue_id, $t_rel_type['id'] );
 
 	if( $t_old_id_relationship == 0 ) {
+		log_event(LOG_WEBSERVICE, "adding relationship type '${t_rel_type['id']}' between '$p_issue_id' and '$t_dest_issue_id'");
 		relationship_add( $p_issue_id, $t_dest_issue_id, $t_rel_type['id'] );
 
 		// The above function call into MantisBT does not seem to return a valid BugRelationshipData object.
@@ -1383,6 +1395,7 @@ function mc_issue_relationship_delete( $p_username, $p_password, $p_issue_id, $p
 	$t_rel_type = $t_bug_relationship_data->type;
 
 	# delete relationship from the DB
+	log_event(LOG_WEBSERVICE, "deleting relationship id '$p_relationship_id'");
 	relationship_delete( $p_relationship_id );
 
 	# update bug last updated
