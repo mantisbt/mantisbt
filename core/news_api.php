@@ -103,9 +103,7 @@ function news_create( $p_project_id, $p_poster_id, $p_view_state, $p_announcemen
  */
 function news_delete( $p_news_id ) {
 	$t_news_table = db_get_table( 'news' );
-
 	$t_query = "DELETE FROM $t_news_table WHERE id=" . db_param();
-
 	db_query_bound( $t_query, array( $p_news_id ) );
 
 	# db_query errors on failure so:
@@ -120,10 +118,8 @@ function news_delete( $p_news_id ) {
  */
 function news_delete_all( $p_project_id ) {
 	$t_news_table = db_get_table( 'news' );
-
-	$query = "DELETE FROM $t_news_table WHERE project_id=" . db_param();
-
-	db_query_bound( $query, array( (int)$p_project_id ) );
+	$t_query = "DELETE FROM $t_news_table WHERE project_id=" . db_param();
+	db_query_bound( $t_query, array( (int)$p_project_id ) );
 
 	# db_query errors on failure so:
 	return true;

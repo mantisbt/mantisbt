@@ -6,6 +6,14 @@
 # change the license of future releases.
 # See docs/ folder for more details
 
+/**
+ * MantisConnect - A webservice interface to Mantis Bug Tracker
+ *
+ * @package MantisBT
+ * @copyright Copyright 2004  Victor Boctor - vboctor@users.sourceforge.net
+ * @link http://www.mantisbt.org
+ */
+
 # Check if the current user can download attachments for the specified bug.
 function mci_file_can_download_bug_attachments( $p_bug_id, $p_user_id ) {
 	$t_can_download = access_has_bug_level( config_get( 'download_attachments_threshold' ), $p_bug_id );

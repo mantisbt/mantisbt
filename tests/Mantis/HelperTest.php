@@ -15,7 +15,9 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Mantis Unit Tests
  * @package Tests
+ * MantisBT Core Unit Tests
  * @subpackage Helper
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org

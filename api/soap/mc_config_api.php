@@ -6,6 +6,20 @@
 # change the license of future releases.
 # See docs/ folder for more details
 
+/**
+ * MantisConnect - A webservice interface to Mantis Bug Tracker
+ *
+ * @package MantisBT
+ * @copyright Copyright 2004  Victor Boctor - vboctor@users.sourceforge.net
+ * @link http://www.mantisbt.org
+ */
+
+/**
+ * Get config string
+ * @param string $p_username username
+ * @param string $p_password password
+ * @param string $p_config_var config variable
+ */
 function mc_config_get_string( $p_username, $p_password, $p_config_var ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
 	if( $t_user_id === false ) {

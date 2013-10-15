@@ -583,9 +583,13 @@ function user_signup( $p_username, $p_email = null ) {
 	return user_create( $p_username, $t_password, $p_email );
 }
 
-# --------------------
-# delete project-specific user access levels.
-# returns true when successfully deleted
+/**
+ * delete project-specific user access levels.
+ * returns true when successfully deleted
+ *
+ * @param int $p_user_id User ID
+ * @return bool Always true
+ */
 function user_delete_project_specific_access_levels( $p_user_id ) {
 	$c_user_id = db_prepare_int( $p_user_id );
 

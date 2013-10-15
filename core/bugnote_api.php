@@ -234,7 +234,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	$t_query = "INSERT INTO $t_bugnote_table
 				(bug_id, reporter_id, bugnote_text_id, view_state, date_submitted, last_modified, note_type, note_attr, time_tracking )
 			VALUES (" . db_param() . ', ' . db_param() . ',' . db_param() . ', ' . db_param() . ', ' . db_param() . ',' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-	db_query_bound( $t_query, array( $c_bug_id, $p_user_id, $t_view_state, $c_date_submitted, $c_last_modified, $c_type, $p_attr, $c_time_tracking, $t_bugnote_text ) );
+	db_query_bound( $t_query, array( $c_bug_id, $p_user_id, $t_bugnote_text_id, $t_view_state, $c_date_submitted, $c_last_modified, $c_type, $p_attr, $c_time_tracking, $t_bugnote_text ) );
 
 	# get bugnote id
 	$t_bugnote_id = db_insert_id( $t_bugnote_table );
@@ -707,14 +707,14 @@ function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost
 			$t_project_where $t_from_where $t_to_where
 			GROUP BY bn.bug_id, u.username, u.realname, b.summary
 			ORDER BY bn.bug_id";
-	$result = db_query_bound( $t_query, $t_params );
+	$t_result = db_query_bound( $t_query, $t_params );
 
 	$t_cost_min = $p_cost / 60.0;
 
-	while( $row = db_fetch_array( $result ) ) {
-		$t_total_cost = $t_cost_min * $row['sum_time_tracking'];
-		$row['cost'] = $t_total_cost;
-		$t_results[] = $row;
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_total_cost = $t_cost_min * $t_row['sum_time_tracking'];
+		$t_row['cost'] = $t_total_cost;
+		$t_results[] = $t_row;
 	}
 
 	return $t_results;

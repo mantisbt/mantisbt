@@ -98,7 +98,11 @@ unset( $t_local_config );
 # Remember (globally) which API files have already been loaded
 $g_api_included = array();
 
-# Define an API inclusion function to replace require_once
+/**
+ * Define an API inclusion function to replace require_once
+ *
+ * @param string $p_api_name api file name
+ */
 function require_api( $p_api_name ) {
 	global $g_api_included;
 	global $g_core_path;
@@ -117,7 +121,12 @@ function require_api( $p_api_name ) {
 # Remember (globally) which library files have already been loaded
 $g_libraries_included = array();
 
-# Define an API inclusion function to replace require_once
+
+/**
+ * Define an API inclusion function to replace require_once
+ *
+ * @param string $p_library_name lib file name
+ */
 function require_lib( $p_library_name ) {
 	global $g_libraries_included;
 	global $g_library_path;
@@ -140,7 +149,11 @@ function require_lib( $p_library_name ) {
 	}
 }
 
-# Define an autoload function to automatically load classes when referenced
+/**
+ * Define an autoload function to automatically load classes when referenced
+ *
+ * @param string $p_class class name
+ */
 function __autoload( $className ) {
 	global $g_class_path;
 	global $g_library_path;

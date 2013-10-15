@@ -6,6 +6,14 @@
 # change the license of future releases.
 # See docs/ folder for more details
 
+/**
+ * MantisConnect - A webservice interface to Mantis Bug Tracker
+ *
+ * @package MantisBT
+ * @copyright Copyright 2004  Victor Boctor - vboctor@users.sourceforge.net
+ * @link http://www.mantisbt.org
+ */
+
 # Minimum global access level required to access webservice for readonly operations.
 $g_mc_readonly_access_level_threshold = REPORTER;
 

@@ -15,6 +15,13 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * MantisConnect - A webservice interface to Mantis Bug Tracker
+ *
+ * @package MantisBT
+ * @link http://www.mantisbt.org
+ */
+
+/**
  * Retrieves all tags, unless the users
  *
  * @param string   $p_username    The user's username

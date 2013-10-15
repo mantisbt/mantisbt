@@ -258,16 +258,21 @@ function custom_function_default_auth_can_change_password() {
 	}
 }
 
-# returns an array of the column names to be displayed.
-# The column names to use are those of the field names in the bug table.
-# In addition, you can use the following:
-# - "selection" for selection checkboxes.
-# - "edit" for icon to open the edit page.
-# - "custom_xxxx" were xxxx is the name of the custom field that is valid for the
-#   current project.  In case of "All Projects, the field will be empty where it is
-#   not applicable.
-# $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
-# $p_user_id: The user id or null for current logged in user.
+/**
+ * returns an array of the column names to be displayed.
+ * The column names to use are those of the field names in the bug table.
+ * In addition, you can use the following:
+ * - "selection" for selection checkboxes.
+ * - "edit" for icon to open the edit page.
+ * - "custom_xxxx" were xxxx is the name of the custom field that is valid for the
+ *   current project.  In case of "All Projects, the field will be empty where it is
+ *   not applicable.
+ *
+ * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
+ * @param int $p_user_id The user id or null for current logged in user.
+ * @param int $p_project_id The project id or null for current project.
+ * @return array
+ */
 function custom_function_default_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAGE, $p_user_id = null ) {
 	$t_project_id = helper_get_current_project();
 

@@ -6,6 +6,14 @@
 # change the license of future releases.
 # See docs/ folder for more details
 
+/**
+ * MantisConnect - A webservice interface to Mantis Bug Tracker
+ *
+ * @package MantisBT
+ * @copyright Copyright 2004  Victor Boctor - vboctor@users.sourceforge.net
+ * @link http://www.mantisbt.org
+ */
+
 # set up error_handler() as the new default error handling function
 set_error_handler( 'mc_error_handler' );
 

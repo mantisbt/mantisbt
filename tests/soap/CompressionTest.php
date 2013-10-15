@@ -56,7 +56,10 @@ class CompressionTest extends SoapBase {
 			$this->password,
 			$issueId);
 	}
-	
+
+	/**
+	 * Soap Client Flags for test
+	 */
     protected function extraSoapClientFlags() {
     	
     	return array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP);

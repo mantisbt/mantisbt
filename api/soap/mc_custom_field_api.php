@@ -7,6 +7,14 @@
 # See docs/ folder for more details
 
 /**
+ * MantisConnect - A webservice interface to Mantis Bug Tracker
+ *
+ * @package MantisBT
+ * @copyright Copyright 2004  Victor Boctor - vboctor@users.sourceforge.net
+ * @link http://www.mantisbt.org
+ */
+
+/**
  * Get the custom field id given an object ref.  The id is set based on the following algorithm:
  * - id from objectref (if not zero).
  * - id corresponding to name in object ref.

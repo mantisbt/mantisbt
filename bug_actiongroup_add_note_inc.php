@@ -94,7 +94,7 @@ function action_add_note_print_fields() {
 		echo get_enum_element( 'view_state', $t_default_state );
 ?>
 				<input type="hidden" name="view_state" value="<?php echo $t_default_state; ?>" />';
-<?
+<?php
 	}
 ?>
 			</td>

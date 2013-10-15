@@ -7,6 +7,14 @@
 # See docs/ folder for more details
 
 /**
+ * MantisConnect - A webservice interface to Mantis Bug Tracker
+ *
+ * @package MantisBT
+ * @copyright Copyright 2004  Victor Boctor - vboctor@users.sourceforge.net
+ * @link http://www.mantisbt.org
+ */
+
+/**
  * Get all user defined issue filters for the given project.
  *
  * @param string $p_username  The name of the user trying to access the filters.

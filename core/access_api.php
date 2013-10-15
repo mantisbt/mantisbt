@@ -126,7 +126,6 @@ function access_cache_matrix_project( $p_project_id ) {
 
 	if( !in_array( (int) $p_project_id, $g_cache_access_matrix_project_ids ) ) {
 		$t_project_user_list_table = db_get_table( 'project_user_list' );
-
 		$query = "SELECT user_id, access_level
 					  FROM $t_project_user_list_table
 					  WHERE project_id=" . db_param();
@@ -160,7 +159,6 @@ function access_cache_matrix_user( $p_user_id ) {
 
 	if( !in_array( (int) $p_user_id, $g_cache_access_matrix_user_ids ) ) {
 		$t_project_user_list_table = db_get_table( 'project_user_list' );
-
 		$t_query = "SELECT project_id, access_level
 					  FROM $t_project_user_list_table
 					  WHERE user_id=" . db_param();

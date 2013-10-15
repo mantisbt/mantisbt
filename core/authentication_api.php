@@ -567,12 +567,10 @@ function auth_generate_unique_cookie_string() {
  */
 function auth_is_cookie_string_unique( $p_cookie_string ) {
 	$t_user_table = db_get_table( 'user' );
+	$t_query = "SELECT COUNT(*) FROM $t_user_table WHERE cookie_string=" . db_param();
+	$t_result = db_query_bound( $t_query, array( $p_cookie_string ) );
 
-	$query = "SELECT COUNT(*)
-				  FROM $t_user_table
-				  WHERE cookie_string=" . db_param();
-	$result = db_query_bound( $query, array( $p_cookie_string ) );
-	$t_count = db_result( $result );
+	$t_count = db_result( $t_result );
 
 	if( $t_count > 0 ) {
 		return false;
@@ -835,6 +833,7 @@ function auth_get_current_user_id() {
 
 
 /**
+ * Generate HTTP 401 Access Denied header and page for user, prompting for BASIC authentication
  *
  * @access public
  */

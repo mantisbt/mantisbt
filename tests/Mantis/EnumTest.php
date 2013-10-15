@@ -15,6 +15,7 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * MantisBT Core Unit Tests
  * @package    Tests
  * @subpackage Enum
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net

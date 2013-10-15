@@ -168,7 +168,6 @@ function bug_group_action_validate( $p_action, $p_bug_id ) {
 	return $t_function_name( $p_bug_id );
 }
 
-
 /**
  * Executes an action on a bug.  This ends up calling
  * action_<action>_process() from bug_actiongroup_<action>_inc.php

@@ -789,14 +789,13 @@ function bug_cache_array_rows( $p_bug_id_array ) {
 	}
 
 	$t_bug_table = db_get_table( 'bug' );
-
-	$query = "SELECT *
+	$t_query = "SELECT *
 				  FROM $t_bug_table
 				  WHERE id IN (" . implode( ',', $c_bug_id_array ) . ')';
-	$result = db_query_bound( $query );
+	$t_result = db_query_bound( $t_query );
 
-	while( $row = db_fetch_array( $result ) ) {
-		bug_add_to_cache( $row );
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		bug_add_to_cache( $t_row );
 	}
 	return;
 }
@@ -1880,16 +1879,12 @@ function bug_reopen( $p_bug_id, $p_bugnote_text = '', $p_time_tracking = '0:00',
  * @uses database_api.php
  */
 function bug_update_date( $p_bug_id ) {
-	$c_bug_id = (int) $p_bug_id;
-
 	$t_bug_table = db_get_table( 'bug' );
-
-	$query = "UPDATE $t_bug_table
-				  SET last_updated= " . db_param() . "
+	$query = "UPDATE $t_bug_table SET last_updated= " . db_param() . "
 				  WHERE id=" . db_param();
-	db_query_bound( $query, array( db_now(), $c_bug_id ) );
+	db_query_bound( $query, array( db_now(), $p_bug_id ) );
 
-	bug_clear_cache( $c_bug_id );
+	bug_clear_cache( $p_bug_id );
 
 	return true;
 }
@@ -1918,9 +1913,9 @@ function bug_monitor( $p_bug_id, $p_user_id ) {
 		return false;
 	}
 
-	$t_bug_monitor_table = db_get_table( 'bug_monitor' );
 
 	# Insert monitoring record
+	$t_bug_monitor_table = db_get_table( 'bug_monitor' );
 	$query = 'INSERT INTO ' . $t_bug_monitor_table . '( user_id, bug_id ) VALUES (' . db_param() . ',' . db_param() . ')';
 	db_query_bound( $query, array( $c_user_id, $c_bug_id ) );
 
@@ -1947,22 +1942,19 @@ function bug_get_monitors( $p_bug_id ) {
 		return array();
 	}
 
-	$c_bug_id = (int)$p_bug_id;
 	$t_bug_monitor_table = db_get_table( 'bug_monitor' );
 	$t_user_table = db_get_table( 'user' );
 
 	# get the bugnote data
-	$query = "SELECT user_id, enabled
+	$t_query = "SELECT user_id, enabled
 			FROM $t_bug_monitor_table m, $t_user_table u
 			WHERE m.bug_id=" . db_param() . " AND m.user_id = u.id
 			ORDER BY u.realname, u.username";
-	$result = db_query_bound($query, array( $c_bug_id ) );
-	$num_users = db_num_rows($result);
+	$t_result = db_query_bound($t_query, array( $p_bug_id ) );
 
 	$t_users = array();
-	for ( $i = 0; $i < $num_users; $i++ ) {
-		$row = db_fetch_array( $result );
-		$t_users[$i] = $row['user_id'];
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_users[] = $t_row['user_id'];
 	}
 
 	user_cache_array_rows( $t_users );
@@ -1985,7 +1977,6 @@ function bug_monitor_copy( $p_source_bug_id, $p_dest_bug_id ) {
 	$c_dest_bug_id = (int)$p_dest_bug_id;
 
 	$t_bug_monitor_table = db_get_table( 'bug_monitor' );
-
 	$query = 'SELECT user_id
 		FROM ' . $t_bug_monitor_table . '
 		WHERE bug_id = ' . db_param();
@@ -2013,24 +2004,20 @@ function bug_monitor_copy( $p_source_bug_id, $p_dest_bug_id ) {
  * @uses history_api.php
  */
 function bug_unmonitor( $p_bug_id, $p_user_id ) {
-	$c_bug_id = (int) $p_bug_id;
-	$c_user_id = (int) $p_user_id;
-
-	$t_bug_monitor_table = db_get_table( 'bug_monitor' );
-
 	# Delete monitoring record
+	$t_bug_monitor_table = db_get_table( 'bug_monitor' );
 	$query = 'DELETE FROM ' . $t_bug_monitor_table . ' WHERE bug_id = ' . db_param();
-	$db_query_params[] = $c_bug_id;
+	$db_query_params[] = $p_bug_id;
 
 	if( $p_user_id !== null ) {
 		$query .= " AND user_id = " . db_param();
-		$db_query_params[] = $c_user_id;
+		$db_query_params[] = $p_user_id;
 	}
 
 	db_query_bound( $query, $db_query_params );
 
 	# log new un-monitor action
-	history_log_event_special( $c_bug_id, BUG_UNMONITOR, $c_user_id );
+	history_log_event_special( $p_bug_id, BUG_UNMONITOR, $p_user_id );
 
 	# updated the last_updated date
 	bug_update_date( $p_bug_id );

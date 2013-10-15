@@ -6,6 +6,13 @@
 # change the license of future releases.
 # See docs/ folder for more details
 
+/**
+ * MantisConnect - A webservice interface to Mantis Bug Tracker
+ *
+ * @package MantisBT
+ * @copyright Copyright 2004  Victor Boctor - vboctor@users.sourceforge.net
+ * @link http://www.mantisbt.org
+ */
 
 /**
  * Use a standard filter to get issues associated with the specified user.
@@ -78,6 +85,9 @@ function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id
 	return $t_result;
 }
 
+/**
+ * Project Get Issues
+ */
 function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page_number, $p_per_page ) {
     global $g_project_override;
 
@@ -978,6 +988,9 @@ function mc_project_delete( $p_username, $p_password, $p_project_id ) {
 	return project_delete( $p_project_id );
 }
 
+/**
+ * Get Issue Headers
+ */
 function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, $p_page_number, $p_per_page ) {
     global $g_project_override;
 

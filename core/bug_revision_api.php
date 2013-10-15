@@ -44,8 +44,6 @@ function bug_revision_add( $p_bug_id, $p_user_id, $p_type, $p_value, $p_bugnote_
 		return null;
 	}
 
-	$t_bug_rev_table = db_get_table( 'bug_revision' );
-
 	$t_last = bug_revision_last( $p_bug_id, $p_type );
 
 	# Don't save a revision twice if nothing has changed
@@ -61,6 +59,7 @@ function bug_revision_add( $p_bug_id, $p_user_id, $p_type, $p_value, $p_bugnote_
 		$t_timestamp = $p_timestamp;
 	}
 
+	$t_bug_rev_table = db_get_table( 'bug_revision' );
 	$t_query = "INSERT INTO $t_bug_rev_table (
 			bug_id,
 			bugnote_id,
@@ -112,7 +111,6 @@ function bug_revision_exists( $p_revision_id ) {
  */
 function bug_revision_get( $p_revision_id ) {
 	$t_bug_rev_table = db_get_table( 'bug_revision' );
-
 	$t_query = "SELECT * FROM $t_bug_rev_table WHERE id=" . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_revision_id ) );
 
@@ -155,7 +153,6 @@ function bug_revision_get_type_name( $p_revision_type_id ) {
  */
 function bug_revision_drop( $p_revision_id ) {
 	$t_bug_rev_table = db_get_table( 'bug_revision' );
-
 	if ( is_array( $p_revision_id ) ) {
 		$t_revisions = array();
 		$t_first = true;
@@ -199,8 +196,7 @@ function bug_revision_count( $p_bug_id, $p_type=REV_ANY, $p_bugnote_id=0 ) {
 	$t_bug_rev_table = db_get_table( 'bug_revision' );
 
 	$t_params = array( $p_bug_id );
-	$t_query = "SELECT COUNT(id) FROM $t_bug_rev_table
-		WHERE bug_id=" . db_param();
+	$t_query = "SELECT COUNT(id) FROM $t_bug_rev_table WHERE bug_id=" . db_param();
 
 	if ( REV_ANY < $p_type ) {
 		$t_query .= ' AND type=' . db_param();
@@ -334,8 +330,7 @@ function bug_revision_like( $p_rev_id ) {
 	$t_type = $t_row['type'];
 
 	$t_params = array( $t_bug_id );
-	$t_query = "SELECT * FROM $t_bug_rev_table
-		WHERE bug_id=" . db_param();
+	$t_query = "SELECT * FROM $t_bug_rev_table WHERE bug_id=" . db_param();
 
 	if ( REV_ANY < $t_type ) {
 		$t_query .= ' AND type=' . db_param();

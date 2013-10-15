@@ -16,13 +16,12 @@
 # This upgrade moves attachments from the database to the disk
 
 /**
+ * Copy Custom fields to built in fields
+ *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
- */
-/**
- * MantisBT Core API's
  */
 require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 
