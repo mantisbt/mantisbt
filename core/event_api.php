@@ -153,9 +153,11 @@ function event_signal( $p_name, $p_params = null, $p_params_dynamic = null, $p_t
 
 	switch( $t_type ) {
 		case EVENT_TYPE_EXECUTE:
-			return event_type_execute( $p_name, $t_callbacks, $p_params );
+			event_type_execute( $p_name, $t_callbacks, $p_params );
+			return null;
 		case EVENT_TYPE_OUTPUT:
-			return event_type_output( $p_name, $t_callbacks, $p_params );
+			event_type_output( $p_name, $t_callbacks, $p_params );
+			return null;
 		case EVENT_TYPE_CHAIN:
 			return event_type_chain( $p_name, $t_callbacks, $p_params, $p_params_dynamic );
 		case EVENT_TYPE_FIRST:
