@@ -53,8 +53,8 @@ require_api( 'utility_api.php' );
  * Prints the title for the custom action page.
  */
 function action_add_note_print_title() {
-	echo '<tr class="form-title">';
-	echo '<td colspan="2">';
+	echo '<tr>';
+	echo '<td class="form-title" colspan="2">';
 	echo lang_get( 'add_bugnote_title' );
 	echo '</td></tr>';
 }
@@ -66,30 +66,49 @@ function action_add_note_print_title() {
  * A row has two columns.
  */
 function action_add_note_print_fields() {
-	echo '<tr class="row-1"><th class="category">', lang_get( 'add_bugnote_title' ), '</th><td><textarea name="bugnote_text" cols="80" rows="10"></textarea></td></tr>';
 ?>
-	<!-- View Status -->
-	<tr class="row-2">
-	<th class="category">
-		<?php echo lang_get( 'view_status' ) ?>
-	</th>
-	<td>
+	<tbody>
+		<tr>
+			<th class="category">
+				<?php lang_get( 'add_bugnote_title' ); ?>
+			</th>
+			<td>
+				<textarea name="bugnote_text" cols="80" rows="10"></textarea>
+			</td>
+		</tr>
+
+		<!-- View Status -->
+		<tr class="row-2">
+			<th class="category">
+				<?php echo lang_get( 'view_status' ) ?>
+			</th>
+			<td>
 <?php
 	$t_default_state = config_get( 'default_bugnote_view_status' );
 	if ( access_has_project_level( config_get( 'set_view_status_threshold' ) ) ) { ?>
-		<select name="view_state">
-			<?php print_enum_string_option_list( 'view_state', $t_default_state ) ?>
-		</select>
+				<select name="view_state">
+					<?php print_enum_string_option_list( 'view_state', $t_default_state ) ?>
+				</select>
 <?php
 	} else {
 		echo get_enum_element( 'view_state', $t_default_state );
-		echo '<input type="hidden" name="view_state" value="', $t_default_state, '" />';
+?>
+				<input type="hidden" name="view_state" value="<?php echo $t_default_state; ?>" />';
+<?
 	}
 ?>
-	</td>
-	</tr>
-	<?php
-	echo '<tr><td colspan="2" class="center"><input type="submit" class="button" value="' . lang_get( 'add_bugnote_button' ) . ' " /></td></tr>';
+			</td>
+		</tr>
+	</tbody>
+
+	<tfoot>
+		<tr>
+			<td colspan="2" class="center">
+				<input type="submit" class="button" value="<?php echo lang_get( 'add_bugnote_button' ); ?>" />
+			</td>
+		</tr>
+	</tfoot>
+<?php
 }
 
 /**

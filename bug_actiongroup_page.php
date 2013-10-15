@@ -235,27 +235,30 @@ if ( $t_multiple_projects ) {
 
 <br />
 
-<div>
-<form method="post" action="bug_actiongroup.php">
-<?php echo form_security_field( $t_form_name ); ?>
-<input type="hidden" name="action" value="<?php echo string_attribute( $f_action ) ?>" />
+<div id="action-group-div" class="form-container">
+	<form method="post" action="bug_actiongroup.php">
+		<?php echo form_security_field( $t_form_name ); ?>
+		<input type="hidden" name="action" value="<?php echo string_attribute( $f_action ) ?>" />
 <?php
+
 	bug_group_action_print_hidden_fields( $f_bug_arr );
 
 	if ( $f_action === 'CUSTOM' ) {
 		echo "<input type=\"hidden\" name=\"custom_field_id\" value=\"$t_custom_field_id\" />";
 	}
 ?>
-<table class="width75" cellspacing="1">
+
+		<table>
+			<tbody>
 <?php
-if ( !$t_finished ) {
+	if ( !$t_finished ) {
 ?>
-<tr class="row-1">
-	<th class="category">
-		<?php echo $t_question_title ?>
-	</th>
-	<td>
-	<?php
+				<tr class="row-1">
+					<th class="category">
+						<?php echo $t_question_title ?>
+					</th>
+					<td>
+<?php
 		if ( $f_action === 'CUSTOM' ) {
 			$t_custom_field_def = custom_field_get_definition( $t_custom_field_id );
 
@@ -306,95 +309,95 @@ if ( !$t_finished ) {
 
 			echo '</select>';
 		}
-		?>
-	</td>
-</tr>
-	<?php
-	if ( isset( $t_question_title2 ) ) {
-		switch ( $f_action ) {
-			case 'RESOLVE':
-				$t_show_product_version = ( ON == config_get( 'show_product_version' ) )
-					|| ( ( AUTO == config_get( 'show_product_version' ) )
-								&& ( count( version_get_all_rows( $t_project_id ) ) > 0 ) );
-				if ( $t_show_product_version ) {
-	?>
-		<tr class="row-2">
-			<th class="category">
-				<?php echo $t_question_title2 ?>
-			</th>
-			<td>
-				<select name="<?php echo $t_form2 ?>">
-					<?php print_version_option_list( '', null, VERSION_ALL );?>
-				</select>
-			</td>
-		</tr>
-	<?php
-				}
-				break;
+?>
+					</td>
+				</tr>
+<?php
+		if( isset( $t_question_title2 ) ) {
+			switch ( $f_action ) {
+				case 'RESOLVE':
+					$t_show_product_version = ( ON == config_get( 'show_product_version' ) )
+						|| ( ( AUTO == config_get( 'show_product_version' ) )
+									&& ( count( version_get_all_rows( $t_project_id ) ) > 0 ) );
+					if ( $t_show_product_version ) {
+?>
+				<tr class="row-2">
+					<th class="category">
+						<?php echo $t_question_title2 ?>
+					</th>
+					<td>
+						<select name="<?php echo $t_form2 ?>">
+							<?php print_version_option_list( '', null, VERSION_ALL );?>
+						</select>
+					</td>
+				</tr>
+<?php
+					}
+					break;
+			}
+		}
+
+	} else {
+?>
+				<tr class="row-1">
+					<th class="category" colspan="2">
+						<?php echo $t_question_title; ?>
+					</th>
+				</tr>
+<?php
+	}
+
+	if( $t_bugnote ) {
+?>
+				<tr class="row-1">
+					<th class="category">
+						<?php echo lang_get( 'add_bugnote_title' ); ?>
+					</th>
+					<td>
+						<textarea name="bugnote_text" cols="80" rows="10"></textarea>
+					</td>
+				</tr>
+<?php
+		if ( access_has_project_level( config_get( 'private_bugnote_threshold' ), $t_project_id ) ) {
+?>
+				<tr>
+					<th class="category">
+						<?php echo lang_get( 'view_status' ) ?>
+					</th>
+					<td>
+<?php
+			$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
+			if ( access_has_project_level( config_get( 'set_view_status_threshold' ), $t_project_id ) ) {
+?>
+						<input type="checkbox" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
+<?php
+				echo lang_get( 'private' );
+			} else {
+				echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
+			}
+?>
+					</td>
+				</tr>
+<?php
 		}
 	}
-	?>
-<?php
-} else {
 ?>
+			</tbody>
 
-<tr class="row-1">
-	<th class="category" colspan="2">
-		<?php echo $t_question_title; ?>
-	</th>
-</tr>
-<?php
-}
-?>
+			<tfoot>
+				<tr>
+					<td class="center" colspan="2">
+						<input type="submit" class="button" value="<?php echo $t_button_title ?>" />
+					</td>
+				</tr>
+			</tfoot>
+		</table>
 
-<?php
-if( $t_bugnote ) {
-?>
-<tr class="row-1">
-	<th class="category">
-		<?php echo lang_get( 'add_bugnote_title' ); ?>
-	</th>
-	<td>
-		<textarea name="bugnote_text" cols="80" rows="10"></textarea>
-	</td>
-</tr>
-<?php if ( access_has_project_level( config_get( 'private_bugnote_threshold' ), $t_project_id ) ) { ?>
-<tr>
-	<th class="category">
-		<?php echo lang_get( 'view_status' ) ?>
-	</th>
-	<td>
-<?php
-		$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
-		if ( access_has_project_level( config_get( 'set_view_status_threshold' ), $t_project_id ) ) {
-?>
-			<input type="checkbox" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
-<?php
-			echo lang_get( 'private' );
-		} else {
-			echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
-		}
-?>
-	</td>
-</tr>
-<?php } ?>
+	</form>
+</div>
 
-<?php
-}
-?>
-<tr>
-	<td class="center" colspan="2">
-		<input type="submit" class="button" value="<?php echo $t_button_title ?>" />
-	</td>
-</tr>
-</table>
 <br />
 
 <?php
-bug_group_action_print_bug_list( $f_bug_arr );
-?>
-</form>
-</div>
-
-<?php
+bug_group_action_print_bug_list( $f_bug_arr ); ?>
 bug_group_action_print_bottom();

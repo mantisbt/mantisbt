@@ -425,6 +425,7 @@ div.error-info { text-align: center; margin: 1em; }
 .myview-left-col, .myview-right-col { width: 50%; vertical-align: top; }
 #manage-overview-table th { width: 30%; }
 
+#action-group-issues-div,
 div.section-container,
 div.form-container,
 div.table-container {
@@ -445,7 +446,11 @@ div.table-container {
 
 #history_open table 	{ border-spacing: 0; }
 
-#bug-change-status-div	{ width: 75%; }
+#bug-change-status-div,
+#action-group-div
+	{ width: 75%; }
+#action-group-issues-div
+	{ width: 75%; margin: 0 auto; }
 #manage-user-div 		{ min-width: 57em; }
 
 div.section-container h2,
@@ -462,7 +467,8 @@ div.table-container h2 {
 }
 div.section-container table,
 div.form-container table,
-div.table-container table {
+div.table-container table,
+#action-group-issues-div table {
 	width: 100%;
 	border-spacing: 1px;
 }

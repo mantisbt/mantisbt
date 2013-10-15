@@ -53,23 +53,27 @@ bug_group_action_init( $t_external_action );
 bug_group_action_print_top();
 ?>
 
-	<br />
+<br />
 
-	<div>
+<div id="action-group-div" class="form-container" >
 	<form method="post" action="bug_actiongroup_ext.php">
-<?php echo form_security_field( $t_form_name ); ?>
+		<?php echo form_security_field( $t_form_name ); ?>
 		<input type="hidden" name="action" value="<?php echo string_attribute( $t_external_action ) ?>" />
-<table class="width75" cellspacing="1">
-	<?php
-	bug_group_action_print_title( $t_external_action );
+		<table>
+			<thead>
+				<?php bug_group_action_print_title( $t_external_action ); ?>
+			</thead>
+			<tbody>
+<?php
 	bug_group_action_print_hidden_fields( $f_bug_arr );
 	bug_group_action_print_action_fields( $t_external_action );
-	?>
-</table>
+?>
+			</tbody>
+		</table>
 	</form>
-	</div>
+</div>
 
-	<br />
+<br />
 
 <?php
 bug_group_action_print_bug_list( $f_bug_arr );

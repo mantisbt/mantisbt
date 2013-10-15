@@ -91,8 +91,8 @@ function bug_group_action_print_bug_list( $p_bug_ids_array ) {
 		echo '<br />';
 	}
 
-	echo '<div>';
-	echo '<table class="width75" cellspacing="1">';
+	echo '<div id="action-group-issues-div">';
+	echo '<table>';
 	echo '<tr class="row-1">';
 	echo '<th class="category" colspan="2">';
 	echo lang_get( 'actiongroup_bugs' );
