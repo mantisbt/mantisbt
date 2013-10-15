@@ -136,7 +136,7 @@ html_page_top( sprintf( lang_get( 'tag_details' ), $t_name ) ); ?>
 
 	if ( $t_can_edit_own || $t_can_edit ) {
 ?>
-	<div class="action-buttons">
+	<div class="action-buttons center">
 <?php
 		if ( $t_can_edit_own ) {
 ?>
