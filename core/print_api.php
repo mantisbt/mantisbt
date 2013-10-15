@@ -276,7 +276,7 @@ function print_email_input( $p_field_name, $p_email ) {
  * @param string $p_field_name Name of input tag
  */
 function print_captcha_input( $p_field_name ) {
-	echo '<input id="captcha-field" type="text" name="' . $p_field_name . '" size="5" maxlength="5" value="" />';
+	echo '<input id="captcha-field" type="text" name="' . $p_field_name . '" size="6" maxlength="6" value="" />';
 }
 
 /**

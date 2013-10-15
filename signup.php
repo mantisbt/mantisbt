@@ -55,7 +55,6 @@ form_security_validate( 'signup' );
 $f_username		= strip_tags( gpc_get_string( 'username' ) );
 $f_email		= strip_tags( gpc_get_string( 'email' ) );
 $f_captcha		= gpc_get_string( 'captcha', '' );
-$f_public_key	= gpc_get_string( 'public_key', '' );
 
 $f_username = trim( $f_username );
 $f_email = email_append_domain( trim( $f_email ) );
@@ -75,9 +74,10 @@ if ( OFF == config_get_global( 'allow_signup' ) ) {
 if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 	&&
 			helper_call_custom_function( 'auth_can_change_password', array() ) ) {
 	# captcha image requires GD library and related option to ON
-	$t_private_key = substr( hash( 'whirlpool', 'captcha' . config_get_global( 'crypto_master_salt' ) . $f_public_key, false ), 0, 5 );
+	require_lib( 'securimage/securimage.php' );
 
-	if ( $t_private_key != $f_captcha ) {
+	$securimage = new Securimage();
+	if ($securimage->check($f_captcha) == false) {
 		trigger_error( ERROR_SIGNUP_NOT_MATCHING_CAPTCHA, ERROR );
 	}
 }
