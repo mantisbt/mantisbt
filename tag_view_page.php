@@ -101,13 +101,19 @@ html_page_top( sprintf( lang_get( 'tag_details' ), $t_name ) ); ?>
 		<span class="display-label"><span><?php echo lang_get( 'tag_description' ) ?></span></span>
 		<span class="display-value"><span><?php echo $t_description ?></span></span>
 		<span class="label-style"></span>
-	</div><?php
+	</div>
+
+<?php
+	# Related tags
+
 	$t_tags_related = tag_stats_related( $f_tag_id );
-	if ( count( $t_tags_related ) ) { ?>
+	if ( count( $t_tags_related ) ) {
+?>
 	<div class="field-container">
 		<span class="display-label"><span><?php echo lang_get( 'tag_related' ); ?></span></span>
-		<div class="display-value"><div>
-		<table id="related-tags" class="tag-list" cellpadding="5" cellspacing="1" border="1"><?php
+		<span class="display-value">
+			<table id="related-tags" class="tag-list">
+<?php
 		foreach( $t_tags_related as $t_tag ) {
 			$t_name = string_display_line( $t_tag['name'] );
 			$t_description = string_display_line( $t_tag['description'] );
@@ -117,15 +123,23 @@ html_page_top( sprintf( lang_get( 'tag_details' ), $t_name ) ); ?>
 			<tr>
 				<td><span class="tag-link"><a href="tag_view_page.php?tag_id=<?php echo $t_tag['id']; ?>" title="<?php echo $t_description; ?>"><?php echo $t_name; ?></a></span></td>
 				<td><span class="tag-filter"><a href="<?php echo $t_link; ?>"><?php echo $t_label; ?></a></span></td>
-			</tr><?php
-		} ?>
-		</table><?php
-	} ?></div></div>
+			</tr>
+<?php
+		}
+?>
+			</table>
+		</span>
 		<span class="label-style"></span>
-	</div><?php
-	if ( $t_can_edit_own || $t_can_edit ) { ?>
-	<div class="action-buttons"><?php
-	if ( $t_can_edit_own ) { ?>
+	</div>
+<?php
+	}
+
+	if ( $t_can_edit_own || $t_can_edit ) {
+?>
+	<div class="action-buttons">
+<?php
+		if ( $t_can_edit_own ) {
+?>
 		<form class="action-button" action="tag_update_page.php" method="post">
 			<fieldset>
 				<?php # CSRF protection not required here - form does not result in modifications ?>
