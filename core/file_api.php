@@ -540,13 +540,12 @@ function file_delete_local( $p_filename ) {
  * @return string
  */
 function file_get_field( $p_file_id, $p_field_name, $p_table = 'bug' ) {
-	$c_field_name = db_prepare_string( $p_field_name );
 	$t_bug_file_table = db_get_table( $p_table . '_file' );
+	if( !db_field_exists( $p_field_name, $t_bug_file_table ) ) {
+		trigger_error( ERROR_DB_FIELD_NOT_FOUND, ERROR );
+	}
 
-	# get info
-	$query = "SELECT $c_field_name
-				  FROM $t_bug_file_table
-				  WHERE id=" . db_param();
+	$query = "SELECT $p_field_name FROM $t_bug_file_table WHERE id=" . db_param();
 	$result = db_query_bound( $query, array( (int) $p_file_id ), 1 );
 
 	return db_result( $result );
