@@ -65,8 +65,8 @@ $t_graph_relation = ( 'relation' == $f_type );
 $t_graph_horizontal = ( 'horizontal' == $f_orientation );
 
 if ( $t_graph_relation )
-	$t_graph = relgraph_generate_rel_graph( $f_bug_id, $t_bug );
+	$t_graph = relgraph_generate_rel_graph( $f_bug_id );
 else
-	$t_graph = relgraph_generate_dep_graph( $f_bug_id, $t_bug, $t_graph_horizontal );
+	$t_graph = relgraph_generate_dep_graph( $f_bug_id, $t_graph_horizontal );
 
 relgraph_output_image( $t_graph );

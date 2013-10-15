@@ -18,16 +18,11 @@
  * Relationship Graph API
  *
  * This uses GraphViz utilities to generate relationship graphs for
- * issues. Either GraphViz (for all OSs except Windows) or
- * WinGraphviz (for Windows) must be installed in order to use this
- * feature.
+ * issues. GraphViz must be installed in order to use this feature.
  *
  * Graphviz is available at:
  * 	- http://www.graphviz.org/
  * 	- http://www.research.att.com/sw/tools/graphviz/
- *
- * WinGraphviz is available at:
- * 	- http://home.so-net.net.tw/oodtsen/wingraphviz/
  *
  * Most Linux distributions already have a GraphViz package
  * conveniently available for download and install. Refer to
@@ -81,8 +76,13 @@ function relgraph_bug_format_id( $p_bug_id ) {
 	return $t_pretty_bug_id;
 }
 
-# Generate a relationship graph for the given issue.
-function relgraph_generate_rel_graph( $p_bug_id, $p_bug = null ) {
+/**
+ * Generate a relationship graph for the given issue.
+ *
+ * @param int $p_bug_id bug id
+ * @return Graph
+ */
+function relgraph_generate_rel_graph( $p_bug_id ) {
 
 	# List of visited issues and their data.
 	$v_bug_list = array();
@@ -228,12 +228,11 @@ function relgraph_generate_rel_graph( $p_bug_id, $p_bug = null ) {
 /**
  * Generate a dependency relationship graph for the given issue.
  * @param int $p_bug_id bug id
- * @param MantisBug $p_bug Bug object
  * @param bool $p_horizontal graph orientation - horizontal if true
  * @todo duplicate bug/bugid
  * @return Digraph
  */
-function relgraph_generate_dep_graph( $p_bug_id, $p_bug = null, $p_horizontal = false ) {
+function relgraph_generate_dep_graph( $p_bug_id, $p_horizontal = false ) {
 
 	# List of visited issues and their data.
 	$v_bug_list = array();
@@ -246,9 +245,7 @@ function relgraph_generate_dep_graph( $p_bug_id, $p_bug = null, $p_horizontal = 
 	# so, if these issues happen to be visited also, relationship links
 	# will be preserved.
 	# The first issue in the list is the one we are parting from.
-	if( null === $p_bug ) {
-		$p_bug = bug_get( $p_bug_id, true );
-	}
+	$p_bug = bug_get( $p_bug_id, true );
 
 	$v_bug_list[$p_bug_id] = $p_bug;
 	$v_bug_list[$p_bug_id]->is_descendant = true;
