@@ -272,7 +272,7 @@ function custom_field_ensure_exists( $p_field_id ) {
  */
 function custom_field_is_name_unique( $p_name, $p_custom_field_id = null ) {
 	$t_custom_field_table = db_get_table( 'custom_field' );
-	$t_$query = "SELECT COUNT(*) FROM $t_custom_field_table WHERE name=" . db_param();
+	$t_query = "SELECT COUNT(*) FROM $t_custom_field_table WHERE name=" . db_param();
 	if( $p_custom_field_id !== null ) {
 		$t_query .= ' AND (id <> ' . db_param() . ')';
 	}
