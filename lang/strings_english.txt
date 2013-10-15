@@ -647,8 +647,7 @@ $s_warning_change_setting = '<strong>Warning:</strong> "%1$s" is not set to its 
 $s_warning_security_hazard = 'is a potential security hazard as it can expose sensitive information.';
 $s_warning_integrity_hazard = 'will cause Mantis to continue when errors occurs and may lead to system/data integrity issues.';
 $s_warning_debug_email = '<strong>Warning:</strong> "debug_email" is not OFF, all notification e-mails will be sent to "%1$s".';
-$s_error_database_version_out_of_date_1 = '<strong>Error:</strong> The database structure appears to be out of date (config(databaseversion) is 0 and old upgrade tables exist). Version 1.x of MantisBT introduced a new upgrade process. You appear to be upgrading from a 0.XX Release. Please upgrade to 1.0.8 or 1.1.X, then upgrade to 1.2.';
-$s_error_database_no_schema_version = '<strong>Error:</strong> The database structure appears to be out of date (config(databaseversion) is 0 and old upgrade tables do not exist). Please check that your database is running - we can not retrieve the database schema version. Config Table did not return a valid database schema version - please ask for support on the mantis-help mailing list if required.';
+$s_error_database_no_schema_version = '<strong>Error:</strong> The database structure appears to be out of date (config(databaseversion) is 0) or corrupt. Please check that your database is running - we can not retrieve the database schema version. Config Table did not return a valid database schema version - please ask for support on the mantis-help mailing list if required.';
 $s_error_database_version_out_of_date_2 = '<strong>Warning:</strong> The database structure may be out of date. Please upgrade <a href="admin/install.php">here</a> before logging in.';
 $s_error_code_version_out_of_date = '<strong>Warning:</strong> The database structure is more up-to-date than the code installed. Please upgrade the code.';
 

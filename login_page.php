@@ -238,52 +238,26 @@ if ( config_get_global( 'admin_checks' ) == ON ) {
 		$t_warnings[] = sprintf( lang_get( 'warning_debug_email' ), $t_debug_email );
 	}
 
-	# Check if the admin directory is available and is readable.
-	$t_admin_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR;
-	if ( is_dir( $t_admin_dir ) ) {
-		$t_warnings[] = lang_get( 'warning_admin_directory_present' );
+	# since admin directory and db_upgrade lists are available check for missing db upgrades
+	# if db version is 0, we do not have a valid database.
+	$t_db_version = config_get( 'database_version' , 0 );
+	if ( $t_db_version == 0 ) {
+		$t_warnings[] = lang_get( 'error_database_no_schema_version' );
 	}
-	if ( is_dir( $t_admin_dir ) && is_readable( $t_admin_dir ) && is_executable( $t_admin_dir ) && @file_exists( "$t_admin_dir/." ) ) {
-		# since admin directory and db_upgrade lists are available check for missing db upgrades
-		# Check for db upgrade for versions < 1.0.0 using old upgrader
-		$t_db_version = config_get( 'database_version' , 0 );
-		# if db version is 0, we haven't moved to new installer.
-		if ( $t_db_version == 0 ) {
-			$t_upgrade_count = 0;
-			if ( db_table_exists( db_get_table( 'upgrade' ) ) ) {
-				$query = "SELECT COUNT(*) from " . db_get_table( 'upgrade' ) . ";";
-				$result = db_query_bound( $query );
-				if ( db_num_rows( $result ) > 0 ) {
-					$t_upgrade_count = (int)db_result( $result );
-				}
-			}
 
-			if ( $t_upgrade_count > 0 ) { # table exists, check for number of updates
+	# Check for db upgrade for versions > 1.0.0 using new installer and schema
+	# Note: install_helper_functions_api.php required for db_null_date() function definition
+	require_api( 'install_helper_functions_api.php' );
+	require_once( 'admin' . DIRECTORY_SEPARATOR . 'schema.php' );
+	$t_upgrades_reqd = count( $upgrade ) - 1;
 
-				# new config table database version is 0.
-				# old upgrade tables exist.
-				# assume user is upgrading from <1.0 and therefore needs to update to 1.x before upgrading to 1.2
-				$t_warnings[] = lang_get( 'error_database_version_out_of_date_1' );
-			} else {
-				# old upgrade tables do not exist, yet config database_version is 0
-				$t_warnings[] = lang_get( 'error_database_no_schema_version' );
-			}
-		}
+	if ( ( 0 < $t_db_version ) &&
+			( $t_db_version != $t_upgrades_reqd ) ) {
 
-		# Check for db upgrade for versions > 1.0.0 using new installer and schema
-		# Note: install_helper_functions_api.php required for db_null_date() function definition
-		require_api( 'install_helper_functions_api.php' );
-		require_once( 'admin' . DIRECTORY_SEPARATOR . 'schema.php' );
-		$t_upgrades_reqd = count( $upgrade ) - 1;
-
-		if ( ( 0 < $t_db_version ) &&
-				( $t_db_version != $t_upgrades_reqd ) ) {
-
-			if ( $t_db_version < $t_upgrades_reqd ) {
-				$t_warnings[] = lang_get( 'error_database_version_out_of_date_2' );
-			} else {
-				$t_warnings[] = lang_get( 'error_code_version_out_of_date' );
-			}
+		if ( $t_db_version < $t_upgrades_reqd ) {
+			$t_warnings[] = lang_get( 'error_database_version_out_of_date_2' );
+		} else {
+			$t_warnings[] = lang_get( 'error_code_version_out_of_date' );
 		}
 	}
 	if( count( $t_warnings ) > 0 ) {
