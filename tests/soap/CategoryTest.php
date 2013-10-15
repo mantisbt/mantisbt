@@ -30,7 +30,7 @@ require_once 'SoapBase.php';
  */
 class CategoryTest extends SoapBase {
 
-	private $categoryNamesToDelete = array();	
+	private $categoryNamesToDelete = array();
 
 	/**
 	 * A test case that tests the following:
@@ -56,7 +56,7 @@ class CategoryTest extends SoapBase {
 			$categoryName);
 
 		$this->categoryNamesToDelete[] = $categoryName;
-			
+
 		$categoryList = $this->client->mc_project_get_categories(
 			$this->userName,
 			$this->password,
@@ -110,13 +110,13 @@ class CategoryTest extends SoapBase {
 				$categoryName);
 		}
 	}
-    
+
 	private function getOriginalNameCategory() {
- 		return 'my_category_name';
+		return 'soaptest_' . date('Ymd_His');
 	}
-    
+
 	private function getNewNameCategory() {
- 		return 'my_new_category_name';
+		return 'soaptest_renamed_' . date('Ymd_His');
 	}
- 
+
 }
