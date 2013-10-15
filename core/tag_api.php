@@ -310,7 +310,7 @@ function tag_get_by_name( $p_name ) {
 	$t_tag_table = db_get_table( 'tag' );
 	$query = "SELECT * FROM $t_tag_table
 					WHERE " . db_helper_like( 'name' );
-	$result = db_query_bound( $query, array( $p_name ) );
+	$t_result = db_query_bound( $query, array( $p_name ) );
 
 	$t_row = db_fetch_array( $t_result );
 
