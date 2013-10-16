@@ -904,28 +904,28 @@ if( 5 == $t_install_state ) {
 	</td>
 	<?php
 	$t_config = '<?php' . "\n"
-		. "\t\$g_hostname      = '$f_hostname';\n"
-		. "\t\$g_db_type       = '$f_db_type';\n"
-		. "\t\$g_database_name = '$f_database_name';\n"
-		. "\t\$g_db_username   = '$f_db_username';\n"
-		. "\t\$g_db_password   = '$f_db_password';\n";
+		. "\$g_hostname               = '$f_hostname';\n"
+		. "\$g_db_type                = '$f_db_type';\n"
+		. "\$g_database_name          = '$f_database_name';\n"
+		. "\$g_db_username            = '$f_db_username';\n"
+		. "\$g_db_password            = '$f_db_password';\n";
 
 	switch( $f_db_type ) {
 		case 'db2':
-			$t_config .= "\t\$g_db_schema     = '$f_db_schema';\n";
+			$t_config .=  "\$g_db_schema              = '$f_db_schema';\n";
 			break;
 		case 'oci8':
 			$t_config .= "\n"
-				. "\t\$g_db_table_prefix        = '$t_db_table_prefix';\n"
-				. "\t\$g_db_table_plugin_prefix = '$t_db_table_plugin_prefix';\n"
-				. "\t\$g_db_table_suffix        = '$t_db_table_suffix';\n";
+				. "\$g_db_table_prefix        = '$t_db_table_prefix';\n"
+				. "\$g_db_table_plugin_prefix = '$t_db_table_plugin_prefix';\n"
+				. "\$g_db_table_suffix        = '$t_db_table_suffix';\n";
 			break;
 		default:
 			break;
 	}
 
 	$t_config .= "\n"
-		. "\t\$g_default_timezone   = '$f_timezone';\n"
+		. "\$g_default_timezone       = '$f_timezone';\n"
 		. "\n";
 
 	/* Automatically generate a strong master salt/nonce for MantisBT
@@ -936,7 +936,7 @@ if( 5 == $t_install_state ) {
 	$t_crypto_master_salt_raw = crypto_generate_random_string(32);
 	if ( $t_crypto_master_salt_raw !== null ) {
 		$t_crypto_master_salt = base64_encode( $t_crypto_master_salt_raw );
-		$t_config .= "\t\$g_crypto_master_salt = '$t_crypto_master_salt';\n";
+		$t_config .= "\$g_crypto_master_salt     = '$t_crypto_master_salt';\n";
 	}
 
 	$t_write_failed = true;
