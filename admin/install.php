@@ -771,7 +771,7 @@ if( 3 == $t_install_state ) {
 							$sqlarray = array();
 						}
 					} else {
-						$sqlarray = call_user_func_array( Array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
+						$sqlarray = call_user_func_array( array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
 					}
 					break;
 			}

@@ -69,7 +69,7 @@ if( db_is_oracle() ) {
  * 'Release markers' are placed right AFTER the last schema step that is
  * included in the corresponding release
  */
-$upgrade[  0] = array('CreateTableSQL',Array(db_get_table( 'config' ),"
+$upgrade[  0] = array('CreateTableSQL',array(db_get_table( 'config' ),"
 			  config_id C(64) NOTNULL PRIMARY,
 			  project_id I DEFAULT '0' PRIMARY,
 			  user_id I DEFAULT '0' PRIMARY,
@@ -272,7 +272,7 @@ $upgrade[ 31] = array('CreateTableSQL',array(db_get_table('project'),"
 # Index autocreated when oci used
 $upgrade[ 32] = db_is_oracle()
 	? NULL	# No-op - required to ensure schema version consistency
-	: Array('CreateIndexSQL',Array('idx_project_id',db_get_table('project'),'id'));
+	: array('CreateIndexSQL',array('idx_project_id',db_get_table('project'),'id'));
 
 $upgrade[ 33] = array('CreateIndexSQL',array('idx_project_name',db_get_table('project'),'name',array('UNIQUE')));
 $upgrade[ 34] = array('CreateIndexSQL',array('idx_project_view',db_get_table('project'),'view_state'));
@@ -407,7 +407,7 @@ $upgrade[ 54] = array('CreateTableSQL',array(db_get_table('email'),"
 # Index autocreated when oci used
 $upgrade[ 55] = db_is_oracle()
 	? NULL	# No-op - required to ensure schema version consistency
-	: Array('CreateIndexSQL',Array('idx_email_id',db_get_table('email'),'email_id'));
+	: array('CreateIndexSQL',array('idx_email_id',db_get_table('email'),'email_id'));
 
 $upgrade[ 56] = array('AddColumnSQL',array(db_get_table('bug'), "target_version C(64) NOTNULL DEFAULT \" '' \""));
 $upgrade[ 57] = array('AddColumnSQL',array(db_get_table('bugnote'), "time_tracking I UNSIGNED NOTNULL DEFAULT \" 0 \""));
