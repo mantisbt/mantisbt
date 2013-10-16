@@ -2017,7 +2017,7 @@ function bug_unmonitor( $p_bug_id, $p_user_id ) {
 	db_query_bound( $query, $db_query_params );
 
 	# log new un-monitor action
-	history_log_event_special( $p_bug_id, BUG_UNMONITOR, $p_user_id );
+	history_log_event_special( $p_bug_id, BUG_UNMONITOR, (int)$p_user_id );
 
 	# updated the last_updated date
 	bug_update_date( $p_bug_id );
