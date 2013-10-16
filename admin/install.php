@@ -166,27 +166,29 @@ $t_config_exists = file_exists( $t_config_filename );
 
 if( $t_config_exists && $t_install_state <= 1 ) {
 	# config already exists - probably an upgrade
-	$f_dsn           = config_get( 'dsn', '' );
-	$f_hostname      = config_get( 'hostname', '' );
-	$f_db_type       = config_get( 'db_type', '' );
-	$f_database_name = config_get( 'database_name', '' );
-	$f_db_schema     = config_get( 'db_schema', '' );
-	$f_db_username   = config_get( 'db_username', '' );
-	$f_db_password   = config_get( 'db_password', '' );
-	$f_timezone      = config_get( 'default_timezone', '' );
+	$f_dsn                = config_get( 'dsn', '' );
+	$f_hostname           = config_get( 'hostname', '' );
+	$f_db_type            = config_get( 'db_type', '' );
+	$f_database_name      = config_get( 'database_name', '' );
+	$f_db_schema          = config_get( 'db_schema', '' );
+	$f_db_username        = config_get( 'db_username', '' );
+	$f_db_password        = config_get( 'db_password', '' );
+	$f_timezone           = config_get( 'default_timezone', '' );
+	$f_crypto_master_salt = config_get( 'crypto_master_salt', '' );
 } else {
 	# read control variables with defaults
-	$f_dsn           = gpc_get( 'dsn', config_get( 'dsn', '' ) );
-	$f_hostname      = gpc_get( 'hostname', config_get( 'hostname', 'localhost' ) );
-	$f_db_type       = gpc_get( 'db_type', config_get( 'db_type', '' ) );
-	$f_database_name = gpc_get( 'database_name', config_get( 'database_name', 'bugtracker' ) );
-	$f_db_schema     = gpc_get( 'db_schema', config_get( 'db_schema', '' ) );
-	$f_db_username   = gpc_get( 'db_username', config_get( 'db_username', '' ) );
-	$f_db_password   = gpc_get( 'db_password', config_get( 'db_password', '' ) );
+	$f_dsn                = gpc_get( 'dsn', config_get( 'dsn', '' ) );
+	$f_hostname           = gpc_get( 'hostname', config_get( 'hostname', 'localhost' ) );
+	$f_db_type            = gpc_get( 'db_type', config_get( 'db_type', '' ) );
+	$f_database_name      = gpc_get( 'database_name', config_get( 'database_name', 'bugtracker' ) );
+	$f_db_schema          = gpc_get( 'db_schema', config_get( 'db_schema', '' ) );
+	$f_db_username        = gpc_get( 'db_username', config_get( 'db_username', '' ) );
+	$f_db_password        = gpc_get( 'db_password', config_get( 'db_password', '' ) );
 	if( CONFIGURED_PASSWORD == $f_db_password ) {
 		$f_db_password = config_get( 'db_password' );
 	}
-	$f_timezone      = gpc_get( 'timezone', config_get( 'default_timezone' ) );
+	$f_timezone           = gpc_get( 'timezone', config_get( 'default_timezone' ) );
+	$f_crypto_master_salt = gpc_get( 'crypto_master_salt', config_get( 'crypto_master_salt' ) );
 }
 $f_admin_username = gpc_get( 'admin_username', '' );
 $f_admin_password = gpc_get( 'admin_password', '' );
@@ -564,7 +566,10 @@ if( !$g_database_upgrade ) {
 	</td>
 </tr>
 
-<?php if( !$g_database_upgrade ) {?>
+<?php
+# install-only fields: when upgrading, only display admin username and password
+if( !$g_database_upgrade ) {
+?>
 <tr>
 	<td>
 		Default Time Zone
@@ -575,7 +580,29 @@ if( !$g_database_upgrade ) {
 		</select>
 	</td>
 </tr>
-<?php } ?>
+
+<tr>
+	<td>
+		Master salt value for cryptographic hashing
+		(Refer to documentation for details)
+	</td>
+	<td>
+<?php
+	# Automatically generate a strong master salt/nonce for MantisBT
+	# cryptographic purposes. If a strong source of randomness is not
+	# available the user will have to manually set this value post
+	# installation.
+	$t_crypto_master_salt = crypto_generate_random_string(32);
+	if ( $t_crypto_master_salt !== null ) {
+		$t_crypto_master_salt = base64_encode( $t_crypto_master_salt );
+	}
+?>
+		<input name="crypto_master_salt" type="textbox" size=40 value="<?php echo $t_crypto_master_salt; ?>"></input>
+	</td>
+</tr>
+<?php
+} # end install-only fields
+?>
 
 <tr>
 	<td>
@@ -926,18 +953,8 @@ if( 5 == $t_install_state ) {
 
 	$t_config .= "\n"
 		. "\$g_default_timezone       = '$f_timezone';\n"
-		. "\n";
-
-	/* Automatically generate a strong master salt/nonce for MantisBT
-	 * cryptographic purposes. If a strong source of randomness is not
-	 * available the user will have to manually set this value post
-	 * installation.
-	 */
-	$t_crypto_master_salt_raw = crypto_generate_random_string(32);
-	if ( $t_crypto_master_salt_raw !== null ) {
-		$t_crypto_master_salt = base64_encode( $t_crypto_master_salt_raw );
-		$t_config .= "\$g_crypto_master_salt     = '$t_crypto_master_salt';\n";
-	}
+		. "\n"
+		. "\$g_crypto_master_salt     = '$f_crypto_master_salt';\n";
 
 	$t_write_failed = true;
 
