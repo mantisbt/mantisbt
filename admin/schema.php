@@ -15,16 +15,22 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Each entry below defines the schema. The upgrade array consists of two elements
- * The first is the function to generate SQL statements e.g., CreateTableSQL, DropTableSQL,
- * ChangeTableSQL, RenameTableSQL, RenameColumnSQL, DropTableSQL, ChangeTableSQL, RenameTableSQL,
- * RenameColumnSQL, AlterColumnSQL, DropColumnSQL
+ * MantisBT schema definition
+ * The schema is defined a list of schema updates, stored as an array.
  *
- * A local function "InsertData" has been provided to add data to the db
- * The second parameter is an array of the parameters to be passed to the function.
+ * Each upgrade step consists of two elements:
+ * 1. The function to generate SQL statements. Available functions (from ADOdb
+ *    library) are:
+ *      CreateTableSQL, DropTableSQL, ChangeTableSQL, RenameTableSQL,
+ *      RenameColumnSQL, DropTableSQL, ChangeTableSQL, RenameTableSQL,
+ *      RenameColumnSQL, AlterColumnSQL, DropColumnSQL
+ *    A local function "InsertData" has been provided to add data to the db
  *
- * An update identifier is inferred from the ordering of this table. ONLY ADD NEW CHANGES TO THE
- * END OF THE TABLE!!!
+ * 2. An array of the parameters to be passed to the function.
+ *
+ * The integrity of the schema relies on strict ordering of this array.
+ * - ONLY ADD NEW CHANGES TO THE END OF THE TABLE!!!
+ * - NEVER SKIP AN INDEX IN THE SEQUENCE!!!
  */
 
 if ( !function_exists( 'db_null_date' ) ) {
