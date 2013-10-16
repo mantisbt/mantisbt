@@ -173,6 +173,7 @@ if( $t_config_exists && $t_install_state <= 1 ) {
 	$f_db_schema     = config_get( 'db_schema', '' );
 	$f_db_username   = config_get( 'db_username', '' );
 	$f_db_password   = config_get( 'db_password', '' );
+	$f_timezone      = config_get( 'default_timezone', '' );
 } else {
 	# read control variables with defaults
 	$f_dsn           = gpc_get( 'dsn', config_get( 'dsn', '' ) );
@@ -185,6 +186,7 @@ if( $t_config_exists && $t_install_state <= 1 ) {
 	if( CONFIGURED_PASSWORD == $f_db_password ) {
 		$f_db_password = config_get( 'db_password' );
 	}
+	$f_timezone      = gpc_get( 'timezone', config_get( 'default_timezone' ) );
 }
 $f_admin_username = gpc_get( 'admin_username', '' );
 $f_admin_password = gpc_get( 'admin_password', '' );
@@ -562,6 +564,19 @@ if( !$g_database_upgrade ) {
 	</td>
 </tr>
 
+<?php if( !$g_database_upgrade ) {?>
+<tr>
+	<td>
+		Default Time Zone
+	</td>
+	<td>
+		<select id="timezone" name="timezone">
+			<?php print_timezone_option_list( config_get_global( 'default_timezone' ) ) ?>
+		</select>
+	</td>
+</tr>
+<?php } ?>
+
 <tr>
 	<td>
 		<?php echo ( $g_failed
@@ -908,7 +923,10 @@ if( 5 == $t_install_state ) {
 		default:
 			break;
 	}
-	$t_config .= "\n";
+
+	$t_config .= "\n"
+		. "\t\$g_default_timezone   = '$f_timezone';\n"
+		. "\n";
 
 	/* Automatically generate a strong master salt/nonce for MantisBT
 	 * cryptographic purposes. If a strong source of randomness is not
