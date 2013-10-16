@@ -65,6 +65,9 @@ if( db_is_oracle() ) {
 
 /**
  * Begin schema definition
+ *
+ * 'Release markers' are placed right AFTER the last schema step that is
+ * included in the corresponding release
  */
 $upgrade[  0] = array('CreateTableSQL',Array(db_get_table( 'config' ),"
 			  config_id C(64) NOTNULL PRIMARY,
@@ -386,6 +389,9 @@ $upgrade[ 51] = array('InsertData', array( db_get_table('user'),
 	"(username, realname, email, password, date_created, last_visit, enabled, protected, access_level, login_count, lost_password_request_count, failed_login_count, cookie_string) VALUES
 		('administrator', '', 'root@localhost', '63a9f0ea7bb98050796b649e85481845', " . $t_timestamp . ", " . $t_timestamp . ", '1', '0', 90, 3, 0, 0, '" .
 			md5( mt_rand( 0, mt_getrandmax() ) + mt_rand( 0, mt_getrandmax() ) ) . md5( time() ) . "')" ) );
+
+# Release marker: 1.0.0 - 1.0.7
+
 $upgrade[ 52] = array('AlterColumnSQL', array( db_get_table( 'bug_history' ), "old_value C(255) $t_notnull" ) );
 $upgrade[ 53] = array('AlterColumnSQL', array( db_get_table( 'bug_history' ), "new_value C(255) $t_notnull" ) );
 
@@ -432,6 +438,7 @@ $upgrade[ 62] = array('CreateTableSQL', array( db_get_table( 'bug_tag' ), "
 
 $upgrade[ 63] = array('CreateIndexSQL', array( 'idx_typeowner', db_get_table( 'tokens' ), 'type, owner' ) );
 
+# Release marker: 1.1.0 - 1.1.8
 # Release marker: 1.2.0-SVN
 
 $upgrade[ 64] = array('CreateTableSQL', array( db_get_table( 'plugin' ), "
@@ -492,8 +499,13 @@ $upgrade[ 81] = array( 'AddColumnSQL', array( db_get_table( 'project_version' ),
 $upgrade[ 82] = array( 'AddColumnSQL', array( db_get_table( 'bug' ), "
 	due_date        T       NOTNULL DEFAULT '" . db_null_date() . "' " ) );
 
+# Release marker: 1.2.0a1
+
 $upgrade[ 83] = array( 'AddColumnSQL', array( db_get_table( 'custom_field' ), "
   filter_by 		L 		NOTNULL DEFAULT \" '1' \"" ) );
+
+# Release marker: 1.2.0a2 - 1.2.0a3
+
 $upgrade[ 84] = array( 'CreateTableSQL', array( db_get_table( 'bug_revision' ), "
 	id			I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
 	bug_id		I		UNSIGNED NOTNULL,
@@ -681,6 +693,9 @@ $upgrade[172] = array( 'AddColumnSQL', array( db_get_table( 'project_file' ), "
 	user_id			I		UNSIGNED NOTNULL DEFAULT '0' " ) );
 $upgrade[173] = array( 'AddColumnSQL', array( db_get_table( 'bug_file' ), "
 	user_id		I  			UNSIGNED NOTNULL DEFAULT '0' " ) );
+
+# Release marker: 1.2.0rc1
+
 $upgrade[174] = array( 'DropColumnSQL', array( db_get_table( 'custom_field'), "advanced" ) );
 $upgrade[175] = array( 'DropColumnSQL', array( db_get_table( 'user_pref'), "advanced_report" ) );
 $upgrade[176] = array( 'DropColumnSQL', array( db_get_table( 'user_pref'), "advanced_view" ) );
@@ -693,6 +708,9 @@ if( db_is_oracle() ) {
 } else {
 	$t_index_name = 'idx_project_hierarchy_parent_id';
 }
+
+# Release marker: 1.2.0rc2
+
 $upgrade[179] = array( 'CreateIndexSQL', array( $t_index_name, db_get_table( 'project_hierarchy' ), 'parent_id' ) );
 
 # ----------------------------------------------------------------------------
@@ -701,7 +719,13 @@ $upgrade[179] = array( 'CreateIndexSQL', array( $t_index_name, db_get_table( 'pr
 $upgrade[180] = array( 'CreateIndexSQL', array( 'idx_tag_name', db_get_table( 'tag' ), 'name' ) );
 $upgrade[181] = array( 'CreateIndexSQL', array( 'idx_bug_tag_tag_id', db_get_table( 'bug_tag' ), 'tag_id' ) );
 $upgrade[182] = array( 'CreateIndexSQL', array( 'idx_email_id', db_get_table( 'email' ), 'email_id', array( 'DROP' ) ), array( 'db_index_exists', array( db_get_table( 'email' ), 'idx_email_id') ) );
+
+# Release marker: 1.2.0
+
 $upgrade[183] = array( 'UpdateFunction', 'correct_multiselect_custom_fields_db_format' );
+
+# Release marker: 1.2.1 - 1.2.15
+
 $upgrade[184] = array( 'UpdateFunction', "stored_filter_migrate" );
 $upgrade[185] = array( 'AddColumnSQL', array( db_get_table( 'custom_field_string' ), "
 	text		XL  			NULL DEFAULT NULL " ) );
@@ -709,3 +733,5 @@ $upgrade[186] = array( 'UpdateFunction', 'update_history_long_custom_fields' );
 $upgrade[187] = array( 'CreateIndexSQL', array( 'idx_bug_id', db_get_table( 'bug_monitor' ), 'bug_id' ) );
 $upgrade[188] = array( 'AlterColumnSQL', array( db_get_table( 'project' ), "inherit_global L NOTNULL DEFAULT '0'" ) );
 $upgrade[189] = array( 'AlterColumnSQL', array( db_get_table( 'project_hierarchy' ), "inherit_parent L NOTNULL DEFAULT '0'" ) );
+
+# Release marker: 1.3.0
