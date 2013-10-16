@@ -261,12 +261,9 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('project'),"
 ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
 
 # Index autocreated when oci used
-if( db_is_oracle() ) {
-	# No-op - required to ensure schema version consistency
-	$upgrade[] = NULL;
-} else {
-	$upgrade[] = Array('CreateIndexSQL',Array('idx_project_id',db_get_table('project'),'id'));
-}
+$upgrade[] = db_is_oracle()
+	? NULL	# No-op - required to ensure schema version consistency
+	: Array('CreateIndexSQL',Array('idx_project_id',db_get_table('project'),'id'));
 
 $upgrade[] = array('CreateIndexSQL',array('idx_project_name',db_get_table('project'),'name',array('UNIQUE')));
 $upgrade[] = array('CreateIndexSQL',array('idx_project_view',db_get_table('project'),'view_state'));
@@ -396,12 +393,9 @@ $upgrade[] = array('CreateTableSQL',array(db_get_table('email'),"
   ",array('mysql' => 'ENGINE=MyISAM DEFAULT CHARSET=utf8', 'pgsql' => 'WITHOUT OIDS')));
 
 # Index autocreated when oci used
-if( db_is_oracle() ) {
-	# No-op - required to ensure schema version consistency
-	$upgrade[] = NULL;
-} else {
-	$upgrade[] = Array('CreateIndexSQL',Array('idx_email_id',db_get_table('email'),'email_id'));
-}
+$upgrade[] = db_is_oracle()
+	? NULL	# No-op - required to ensure schema version consistency
+	: Array('CreateIndexSQL',Array('idx_email_id',db_get_table('email'),'email_id'));
 
 $upgrade[] = array('AddColumnSQL',array(db_get_table('bug'), "target_version C(64) NOTNULL DEFAULT \" '' \""));
 $upgrade[] = array('AddColumnSQL',array(db_get_table('bugnote'), "time_tracking I UNSIGNED NOTNULL DEFAULT \" 0 \""));
@@ -443,11 +437,10 @@ $upgrade[] = array('AlterColumnSQL', array( db_get_table( 'user_pref' ), "redire
 
 # Apparently mysql now has a STRICT mode, where setting a DEFAULT value on a
 # blob/text is now an error, instead of being silently ignored
-if ( isset( $f_db_type ) && ( $f_db_type == 'mysql' || $f_db_type == 'mysqli' ) ) {
-	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'custom_field' ), "possible_values X NOTNULL" ) );
-} else {
-	$upgrade[] = array('AlterColumnSQL', array( db_get_table( 'custom_field' ), "possible_values X NOTNULL DEFAULT \" '' \"" ) );
-}
+$upgrade[] = ( isset( $f_db_type ) && ( $f_db_type == 'mysql' || $f_db_type == 'mysqli' ) )
+	? array('AlterColumnSQL', array( db_get_table( 'custom_field' ), "possible_values X NOTNULL" ) )
+	: array('AlterColumnSQL', array( db_get_table( 'custom_field' ), "possible_values X NOTNULL DEFAULT \" '' \"" ) );
+
 
 $upgrade[] = array( 'CreateTableSQL', array( db_get_table( 'category' ), "
 	id				I		UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
