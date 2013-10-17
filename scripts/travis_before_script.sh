@@ -50,7 +50,7 @@ sleep 10
 # trigger installation
 curl --data "install=2&hostname=localhost&db_username=${DB_USER}&db_type=${DB}&db_password=&database_name=bugtracker&admin_username=${DB_USER}&admin_password=" http://localhost/admin/install.php
 
-echo " \$g_crypto_master_salt='1234567890abcdef'; " >> config_inc.php
+echo " \$g_crypto_master_salt='1234567890abcdef'; " | sudo tee -a config_inc.php
 
 # create the first project
 if [ $DB = 'mysql' ]; then
