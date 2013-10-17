@@ -440,6 +440,8 @@ if( 1 == $t_install_state ) {
 
 <form method='POST'>
 
+<input name="install" type="hidden" value="2"></input>
+
 <table width="100%" cellpadding="10" cellspacing="1">
 
 <tr>
@@ -457,13 +459,15 @@ if( 1 == $t_install_state ) {
 # install-only fields: when upgrading, only display admin username and password
 if( !$g_database_upgrade ) {
 ?>
+
+<!-- Database type selection list -->
 <tr>
 	<td>
 		Type of Database
 	</td>
 	<td>
 		<select name="db_type">
-		<?php
+<?php
 			// Build selection list of available DB types
 			$t_db_list = array(
 				'mysql'       => 'MySQL (default)',
@@ -483,13 +487,14 @@ if( !$g_database_upgrade ) {
 			foreach( $t_db_list as $t_db => $t_db_descr ) {
 				echo '<option value="' . $t_db . '"' .
 					( $t_db == $f_db_type ? ' selected="selected"' : '' ) . '>' .
-					$t_db_descr . '</option>';
+					$t_db_descr . "</option>\n";
 			}
-		?>
+?>
 		</select>
 	</td>
 </tr>
 
+<!-- Database server hostname -->
 <tr>
 	<td>
 		Hostname (for Database Server)
@@ -499,6 +504,7 @@ if( !$g_database_upgrade ) {
 	</td>
 </tr>
 
+<!-- Database username and password -->
 <tr>
 	<td>
 		Username (for Database)
@@ -513,15 +519,16 @@ if( !$g_database_upgrade ) {
 		Password (for Database)
 	</td>
 	<td>
-		<input name="db_password" type="password"
-			value="<?php
-				echo( !is_blank( $f_db_password ) && $t_config_exists
-					? CONFIGURED_PASSWORD
-					: $f_db_password )?>">
+		<input name="db_password" type="password" value="<?php
+			echo !is_blank( $f_db_password ) && $t_config_exists
+				? CONFIGURED_PASSWORD
+				: $f_db_password;
+		?>">
 		</input>
 	</td>
 </tr>
 
+<!-- Database name -->
 <tr>
 	<td>
 		Database name (for Database)
@@ -534,6 +541,7 @@ if( !$g_database_upgrade ) {
 } # end install-only fields
 ?>
 
+<!-- Admin user and password -->
 <tr>
 	<td>
 		Admin Username (to <?php echo( !$g_database_upgrade ) ? 'create Database' : 'update Database'?> if required)
@@ -548,21 +556,12 @@ if( !$g_database_upgrade ) {
 		Admin Password (to <?php echo( !$g_database_upgrade ) ? 'create Database' : 'update Database'?> if required)
 	</td>
 	<td>
-		<input name="admin_password" type="password"
-			value="<?php
-				echo !is_blank( $f_admin_password) && $f_admin_password == $f_db_password
-					? CONFIGURED_PASSWORD
-					: $f_admin_password; ?>">
+		<input name="admin_password" type="password" value="<?php
+			echo !is_blank( $f_admin_password) && $f_admin_password == $f_db_password
+				? CONFIGURED_PASSWORD
+				: $f_admin_password;
+		?>">
 		</input>
-	</td>
-</tr>
-
-<tr>
-	<td>
-		Print SQL Queries instead of Writing to the Database
-	</td>
-	<td>
-		<input name="log_queries" type="checkbox" value="1" <?php echo( $f_log_queries ? 'checked="checked"' : '' )?>></input>
 	</td>
 </tr>
 
@@ -570,6 +569,7 @@ if( !$g_database_upgrade ) {
 # install-only fields: when upgrading, only display admin username and password
 if( !$g_database_upgrade ) {
 ?>
+<!-- Timezone -->
 <tr>
 	<td>
 		Default Time Zone
@@ -581,6 +581,7 @@ if( !$g_database_upgrade ) {
 	</td>
 </tr>
 
+<!-- Cryptographic salt -->
 <tr>
 	<td>
 		Master salt value for cryptographic hashing
@@ -604,6 +605,17 @@ if( !$g_database_upgrade ) {
 } # end install-only fields
 ?>
 
+<!-- Printing SQL queries -->
+<tr>
+	<td>
+		Print SQL Queries instead of Writing to the Database
+	</td>
+	<td>
+		<input name="log_queries" type="checkbox" value="1" <?php echo( $f_log_queries ? 'checked="checked"' : '' )?>>
+	</td>
+</tr>
+
+<!-- Submit button -->
 <tr>
 	<td>
 		<?php echo ( $g_failed
@@ -615,7 +627,6 @@ if( !$g_database_upgrade ) {
 		<input name="go" type="submit" class="button" value="Install/Upgrade Database"></input>
 	</td>
 </tr>
-<input name="install" type="hidden" value="2"></input>
 
 </table>
 <?php
@@ -1146,18 +1157,18 @@ if( $g_failed && $t_install_state != 1 ) {
 		<input name="db_type" type="hidden" value="<?php echo $f_db_type?>"></input>
 		<input name="database_name" type="hidden" value="<?php echo $f_database_name?>"></input>
 		<input name="db_username" type="hidden" value="<?php echo $f_db_username?>"></input>
-		<input name="db_password" type="hidden"
-			value="<?php
-				echo( !is_blank( $f_db_password ) && $t_config_exists
-					? CONFIGURED_PASSWORD
-					: $f_db_password )?>">
+		<input name="db_password" type="hidden" value="<?php
+			echo !is_blank( $f_db_password ) && $t_config_exists
+				? CONFIGURED_PASSWORD
+				: $f_db_password;
+		?>">
 		</input>
 		<input name="admin_username" type="hidden" value="<?php echo $f_admin_username?>"></input>
-		<input name="admin_password" type="hidden"
-			value="<?php
-				echo !is_blank( $f_admin_password ) && $f_admin_password == $f_db_password
-					? CONFIGURED_PASSWORD
-					: $f_admin_password; ?>">
+		<input name="admin_password" type="hidden" value="<?php
+			echo !is_blank( $f_admin_password ) && $f_admin_password == $f_db_password
+				? CONFIGURED_PASSWORD
+				: $f_admin_password;
+		?>">
 		</input>
 		<input name="log_queries" type="hidden" value="<?php echo( $f_log_queries ? 1 : 0 )?>"></input>
 		<input name="db_exists" type="hidden" value="<?php echo( $f_db_exists ? 1 : 0 )?>"></input>
