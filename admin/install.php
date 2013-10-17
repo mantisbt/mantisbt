@@ -110,6 +110,8 @@ html_head_begin();
 html_css_link( 'admin.css' );
 html_content_type();
 html_title( 'Administration - Installation' );
+html_javascript_link( 'jquery-1.9.1.min.js' );
+html_javascript_link( 'install.js' );
 html_head_end();
 ?>
 
@@ -166,17 +168,35 @@ if( 0 == $t_install_state ) {
 $t_config_filename = $g_absolute_path . 'config_inc.php';
 $t_config_exists = file_exists( $t_config_filename );
 
+# Initialize Oracle-specific values for prefix and suffix, and set
+# values for other db's as per config defaults
+$t_prefix_defaults = array(
+	'oci8' => array(
+		'db_table_prefix'        => 'm',
+		'db_table_plugin_prefix' => 'plg',
+		'db_table_suffix'        => '',
+	) ,
+);
+foreach( $t_prefix_defaults['oci8'] as $t_key => $t_value ) {
+	$t_prefix_defaults['other'][$t_key] = config_get( $t_key, '' );
+}
+
 if( $t_config_exists && $t_install_state <= 1 ) {
 	# config already exists - probably an upgrade
-	$f_dsn                = config_get( 'dsn', '' );
-	$f_hostname           = config_get( 'hostname', '' );
-	$f_db_type            = config_get( 'db_type', '' );
-	$f_database_name      = config_get( 'database_name', '' );
-	$f_db_schema          = config_get( 'db_schema', '' );
-	$f_db_username        = config_get( 'db_username', '' );
-	$f_db_password        = config_get( 'db_password', '' );
-	$f_timezone           = config_get( 'default_timezone', '' );
-	$f_crypto_master_salt = config_get( 'crypto_master_salt', '' );
+	$f_dsn                    = config_get( 'dsn', '' );
+	$f_hostname               = config_get( 'hostname', '' );
+	$f_db_type                = config_get( 'db_type', '' );
+	$f_database_name          = config_get( 'database_name', '' );
+	$f_db_schema              = config_get( 'db_schema', '' );
+	$f_db_username            = config_get( 'db_username', '' );
+	$f_db_password            = config_get( 'db_password', '' );
+	$f_timezone               = config_get( 'default_timezone', '' );
+	$f_crypto_master_salt     = config_get( 'crypto_master_salt', '' );
+
+	# Set default prefix/suffix form variables ($f_db_table_XXX)
+	foreach( $t_prefix_defaults['other'] as $t_key => $t_value ) {
+		${'f_' . $t_key} = $t_value;
+	}
 } else {
 	# read control variables with defaults
 	$f_dsn                = gpc_get( 'dsn', config_get( 'dsn', '' ) );
@@ -191,6 +211,12 @@ if( $t_config_exists && $t_install_state <= 1 ) {
 	}
 	$f_timezone           = gpc_get( 'timezone', config_get( 'default_timezone' ) );
 	$f_crypto_master_salt = gpc_get( 'crypto_master_salt', config_get( 'crypto_master_salt' ) );
+
+	# Set default prefix/suffix form variables ($f_db_table_XXX)
+	$t_prefix_type = $f_db_type == 'oci8' ? $f_db_type : 'other';
+	foreach( $t_prefix_defaults[$t_prefix_type] as $t_key => $t_value ) {
+		${'f_' . $t_key} = gpc_get( $t_key, $t_value );
+	}
 }
 $f_admin_username = gpc_get( 'admin_username', '' );
 $f_admin_password = gpc_get( 'admin_password', '' );
@@ -468,7 +494,22 @@ if( !$g_database_upgrade ) {
 		Type of Database
 	</td>
 	<td>
-		<select name="db_type">
+		<!-- Default values for table prefix/suffix -->
+		<div>
+<?php
+	# These elements are referenced by the db selection list's on change event
+	# to populate the corresponding fields as appropriate
+	foreach( $t_prefix_defaults as $t_db_type => $t_defaults ) {
+		echo '<div id="default_' . $t_db_type . '" class="hidden">';
+		foreach( $t_defaults as $t_key => $t_value ) {
+			echo "\n\t" . '<span name="' . $t_key . '">' . $t_value . '</span>';
+		}
+		echo "\n" . '</div>' . "\n";
+	}
+?>
+		</div>
+
+		<select id="db_type" name="db_type">
 <?php
 			// Build selection list of available DB types
 			$t_db_list = array(
@@ -568,6 +609,18 @@ if( !$g_database_upgrade ) {
 <?php
 # install-only fields: when upgrading, only display admin username and password
 if( !$g_database_upgrade ) {
+	$t_prefix_labels = array(
+		'db_table_prefix'        => 'Database Table Prefix',
+		'db_table_plugin_prefix' => 'Database Plugin Table Prefix',
+		'db_table_suffix'        => 'Database Table Suffix',
+	);
+	foreach( $t_prefix_defaults[$t_prefix_type] as $t_key => $t_value ) {
+		echo "<tr>\n\t<td>\n";
+		echo "\t\t${t_prefix_labels[$t_key]}\n";
+		echo "\t</td>\n\t<td>\n\t\t";
+		echo '<input id="' . $t_key . '" name="' . $t_key . '" type="textbox" value="' . $f_db_table_prefix . '">';
+		echo "\n\t</td>\n</tr>\n\n";
+	}
 ?>
 <!-- Timezone -->
 <tr>
@@ -749,13 +802,10 @@ if( 3 == $t_install_state ) {
 		# fake out database access routines used by config_get
 		config_set_global( 'db_type', $f_db_type );
 
-		# Initialize short table prefixes and suffix for Oracle
-		if ( $f_db_type == 'oci8' ) {
-			$GLOBALS['g_db_table_prefix']        = $t_db_table_prefix        = 'm';
-			$GLOBALS['g_db_table_plugin_prefix'] = $t_db_table_plugin_prefix = 'plg';
-			$GLOBALS['g_db_table_suffix']        = $t_db_table_suffix        = '_t';
-		}
-
+		# Initialize table prefixes as specified by user
+		config_set_global( 'db_table_prefix', $f_db_table_prefix );
+		config_set_global( 'db_table_plugin_prefix', $f_db_table_plugin_prefix );
+		config_set_global( 'db_table_suffix', $f_db_table_suffix );
 		# database_api references this
 		require_once( dirname( __FILE__ ) . '/schema.php' );
 		$g_db = ADONewConnection( $f_db_type );
@@ -952,18 +1002,26 @@ if( 5 == $t_install_state ) {
 		case 'db2':
 			$t_config .=  "\$g_db_schema              = '$f_db_schema';\n";
 			break;
-		case 'oci8':
-			$t_config .= "\n"
-				. "\$g_db_table_prefix        = '$t_db_table_prefix';\n"
-				. "\$g_db_table_plugin_prefix = '$t_db_table_plugin_prefix';\n"
-				. "\$g_db_table_suffix        = '$t_db_table_suffix';\n";
-			break;
 		default:
 			break;
 	}
+	$t_config .= "\n";
 
-	$t_config .= "\n"
-		. "\$g_default_timezone       = '$f_timezone';\n"
+	# Add lines for table prefix/suffix if different from default
+	$t_insert_line = false;
+	foreach( $t_prefix_defaults['other'] as $t_key => $t_value ) {
+		$t_new_value = ${'f_' . $t_key};
+		if( $t_new_value != $t_value ) {
+			$t_config .= '$' . str_pad( $t_key, 25 ) . "= '" . ${'f_' . $t_key} . "';\n";
+			$t_insert_line = true;
+		}
+	}
+	if( $t_insert_line ) {
+		$t_config .= "\n";
+	}
+
+	$t_config .=
+		  "\$g_default_timezone       = '$f_timezone';\n"
 		. "\n"
 		. "\$g_crypto_master_salt     = '$f_crypto_master_salt';\n";
 
