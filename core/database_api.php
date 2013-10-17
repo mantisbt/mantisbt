@@ -959,13 +959,12 @@ function db_get_table( $p_name ) {
 
 	$t_prefix = config_get_global( 'db_table_prefix' );
 	$t_suffix = config_get_global( 'db_table_suffix' );
-	if ( $t_prefix ) {
+
+	if( $t_prefix ) {
 		$t_table = $t_prefix . '_' . $t_table;
 	}
-	# Oci8 not support long object names(30 chars max), reducing table names
-	if ( $t_suffix && $GLOBALS['g_db_type'] == 'oci8' ) {
-		$t_table .= $t_suffix;
-	}
+	$t_table .= $t_suffix;
+
 	db_check_identifier_size( $t_table );
 
 	return $t_table;
