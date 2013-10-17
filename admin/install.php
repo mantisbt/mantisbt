@@ -106,11 +106,13 @@ function InsertData( $p_table, $p_data ) {
 $t_install_state = gpc_get_int( 'install', 0 );
 
 html_begin();
+html_head_begin();
+html_css_link( 'admin.css' );
+html_content_type();
+html_title( 'Administration - Installation' );
+html_head_end();
 ?>
-<head>
-<title> MantisBT Administration - Installation  </title>
-<link rel="stylesheet" type="text/css" href="admin.css" />
-</head>
+
 <body>
 <table width="100%" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
 	<tr class="top-bar">
