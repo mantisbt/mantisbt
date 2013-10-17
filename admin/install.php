@@ -379,6 +379,12 @@ if( 2 == $t_install_state ) {
 		} else {
 			print_test_result( GOOD );
 		}
+
+		# due to a bug in ADODB, this call prompts warnings, hence the @
+		# the check only works on mysql if the database is open
+		$t_version_info = @$g_db->ServerInfo();
+		echo '<br /> Running ' . $f_db_type . ' version ' . nl2br( $t_version_info['description'] );
+
 	} else {
 		print_test_result( BAD, true, 'Does administrative user have access to the database? ( ' . db_error_msg() . ' )' );
 	}
@@ -420,9 +426,6 @@ if( 2 == $t_install_state ) {
 	<td bgcolor="#ffffff">
 		Checking Database Server Version
 		<?php
-		# due to a bug in ADODB, this call prompts warnings, hence the @
-		# the check only works on mysql if the database is open
-		$t_version_info = @$g_db->ServerInfo();
 		echo '<br /> Running ' . $f_db_type . ' version ' . nl2br( $t_version_info['description'] );
 		?>
 	</td>
