@@ -185,7 +185,20 @@ if( $t_config_exists ) {
 
 	if( 0 == $t_install_state ) {
 		print_test( 'Setting Database Type', '' !== $f_db_type, true, 'database type is blank?' );
-		print_test( 'Checking Database connection settings exist', ( $f_dsn !== '' || ( $f_database_name !== '' && $f_db_username !== '' && $f_hostname !== '' ) ), true, 'database connection settings do not exist?' );
+
+		$t_db_conn_exists = ( $f_dsn !== '' || ( $f_database_name !== '' && $f_db_username !== '' && $f_hostname !== '' ) );
+		# Oracle supports binding in two ways:
+		#  - hostname, username/password and database name
+		#  - tns name (insert into hostname field) and username/password, database name is still empty
+		if ( $f_db_type == 'oci8' ) {
+			$t_db_conn_exists = $t_db_conn_exists || ( $f_database_name == '' && $f_db_username !== '' && $f_hostname !== '' );
+		}
+		print_test( 'Checking Database connection settings exist',
+			$t_db_conn_exists,
+			true,
+			'database connection settings do not exist?'
+		);
+
 		print_test( 'Checking PHP support for database type',
 			db_check_database_support( $f_db_type ), true,
 			'database is not supported by PHP. Check that it has been compiled into your server.'
@@ -205,7 +218,7 @@ if( $t_config_exists ) {
 	}
 
 	$t_cur_version = config_get( 'database_version', -1 );
-	
+
 	if( $t_cur_version > 1 ) {
 		$g_database_upgrade = true;
 		$f_db_exists = true;
@@ -277,7 +290,7 @@ if( 2 == $t_install_state ) {
 
 	print_test( 'Setting Database Username', '' !== $f_db_username, true, 'database username is blank' );
 	print_test( 'Setting Database Password', '' !== $f_db_password, false, 'database password is blank' );
-	print_test( 'Setting Database Name', '' !== $f_database_name, true, 'database name is blank' );
+	print_test( 'Setting Database Name', '' !== $f_database_name || $f_db_type == 'oci8' , true, 'database name is blank' );
 
 	if( $f_db_type == 'db2' ) {
 		print_test( 'Setting Database Schema', !is_blank( $f_db_schema ), true, 'must have a schema name for AS400 in the form of DBNAME/SCHEMA' );
@@ -384,7 +397,7 @@ if( 2 == $t_install_state ) {
 		# due to a bug in ADODB, this call prompts warnings, hence the @
 		# the check only works on mysql if the database is open
 		$t_version_info = @$g_db->ServerInfo();
-		echo '<br /> Running ' . $f_db_type . ' version ' . $t_version_info['description'];
+		echo '<br /> Running ' . $f_db_type . ' version ' . nl2br( $t_version_info['description'] );
 		?>
 	</td>
 	<?php
@@ -620,7 +633,13 @@ if( 3 == $t_install_state ) {
 					$t_db_open = true;
 				} else {
 					$t_error = db_error_msg();
-					if( strstr( $t_error, 'atabase exists' ) ) {
+					if( $f_db_type == 'oci8' ) {
+						$t_db_exists = preg_match( '/ORA-01920/', $t_error );
+					} else {
+						$t_db_exists = strstr( $t_error, 'atabase exists' );
+					}
+
+					if( $t_db_exists ) {
 						print_test_result( BAD, false, 'Database already exists? ( ' . db_error_msg() . ' )' );
 					} else {
 						print_test_result( BAD, true, 'Does administrative user have access to create the database? ( ' . db_error_msg() . ' )' );
@@ -632,7 +651,9 @@ if( 3 == $t_install_state ) {
 		?>
 </tr>
 <?php
+	# Close the connection and clear the ADOdb object to free memory
 	$g_db->Close();
+	$g_db = null;
 ?>
 <tr>
 	<td bgcolor="#ffffff">
@@ -665,7 +686,14 @@ if( 3 == $t_install_state ) {
 		$g_db_connected = false;
 
 		# fake out database access routines used by config_get
-		$GLOBALS['g_db_type'] = $f_db_type;
+		config_set_global( 'db_type', $f_db_type );
+
+		# Initialize short table prefixes and suffix for Oracle
+		if ( $f_db_type == 'oci8' ) {
+			$GLOBALS['g_db_table_prefix']        = $t_db_table_prefix        = 'm';
+			$GLOBALS['g_db_table_plugin_prefix'] = $t_db_table_plugin_prefix = 'plg';
+			$GLOBALS['g_db_table_suffix']        = $t_db_table_suffix        = '_t';
+		}
 
 		# database_api references this
 		require_once( dirname( __FILE__ ) . '/schema.php' );
@@ -700,55 +728,83 @@ if( 3 == $t_install_state ) {
 				echo '<tr><td bgcolor="#ffffff">';
 			}
 
-			$dict = NewDataDictionary( $g_db );
+			$dict = @NewDataDictionary( $g_db );
 			$t_sql = true;
 			$t_target = $upgrade[$i][1][0];
-			if( $upgrade[$i][0] == 'InsertData' ) {
-				$sqlarray = call_user_func_array( $upgrade[$i][0], $upgrade[$i][1] );
-			}
-			else if( $upgrade[$i][0] == 'UpdateSQL' ) {
-				$sqlarray = array(
-					$upgrade[$i][1],
-				);
-				$t_target = $upgrade[$i][1];
-			} else if( $upgrade[$i][0] == 'UpdateFunction' ) {
-				$sqlarray = array(
-					$upgrade[$i][1],
-				);
-				if( isset( $upgrade[$i][2] ) ) {
-					$sqlarray[] = $upgrade[$i][2];
-				}
-				$t_sql = false;
-				$t_target = $upgrade[$i][1];
-			} else {
-				/* 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade. */
-				if( isset( $upgrade[$i][2] ) ) {
-					if( call_user_func_array( $upgrade[$i][2][0], $upgrade[$i][2][1] ) ) {
-						$sqlarray = call_user_func_array( array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
-					} else {
-						$sqlarray = array();
+
+			switch ($upgrade[$i][0]) {
+
+				case 'InsertData':
+					$sqlarray = call_user_func_array( $upgrade[$i][0], $upgrade[$i][1] );
+					break;
+
+				case 'UpdateSQL':
+					$sqlarray = array(
+						$upgrade[$i][1],
+					);
+					$t_target = $upgrade[$i][1];
+					break;
+
+				case 'UpdateFunction':
+					$sqlarray = array(
+						$upgrade[$i][1],
+					);
+					if( isset( $upgrade[$i][2] ) ) {
+						$sqlarray[] = $upgrade[$i][2];
 					}
-				} else {
-					$sqlarray = call_user_func_array( array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
-				}
+					$t_sql = false;
+					$t_target = $upgrade[$i][1];
+					break;
+
+				case NULL:
+					// No-op upgrade step - required for oci8
+					break;
+
+				default:
+						$sqlarray = call_user_func_array( array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
+
+					/* 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade. */
+					if( isset( $upgrade[$i][2] ) ) {
+						if( call_user_func_array( $upgrade[$i][2][0], $upgrade[$i][2][1] ) ) {
+							$sqlarray = call_user_func_array( array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
+						} else {
+							$sqlarray = array();
+						}
+					} else {
+						$sqlarray = call_user_func_array( array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
+					}
+					break;
 			}
 			if( $f_log_queries ) {
 				if( $t_sql ) {
 					foreach( $sqlarray as $sql ) {
-						echo htmlentities( $sql ) . ";\n\n";
+						# "CREATE OR REPLACE TRIGGER" statements must end with "END;\n/" for Oracle sqlplus
+						if ( $f_db_type == 'oci8' && stripos( $sql, 'CREATE OR REPLACE TRIGGER' ) === 0 ) {
+							$t_sql_end = "\n/";
+						} else {
+							$t_sql_end = ";";
+						}
+						echo htmlentities( $sql ) . $t_sql_end . "\n\n";
 					}
 				}
 			} else {
-				echo 'Schema ' . $upgrade[$i][0] . ' ( ' . $t_target . ' )</td>';
-				if( $t_sql ) {
-					$ret = $dict->ExecuteSQLArray( $sqlarray, false );
+				echo "Schema step $i: ";
+				if( is_null( $upgrade[$i][0]) ) {
+					echo 'No operation';
+					$ret = 2;
 				} else {
-					if( isset( $sqlarray[1] ) ) {
-						$ret = call_user_func( 'install_' . $sqlarray[0], $sqlarray[1] );
+					echo $upgrade[$i][0] . " ( $t_target )";
+					if( $t_sql ) {
+						$ret = $dict->ExecuteSQLArray( $sqlarray, false );
 					} else {
-						$ret = call_user_func( 'install_' . $sqlarray[0] );
+						if( isset( $sqlarray[1] ) ) {
+							$ret = call_user_func( 'install_' . $sqlarray[0], $sqlarray[1] );
+						} else {
+							$ret = call_user_func( 'install_' . $sqlarray[0] );
+						}
 					}
 				}
+				echo '</td>';
 				if( $ret == 2 ) {
 					print_test_result( GOOD );
 					config_set( 'database_version', $i );
@@ -824,17 +880,26 @@ if( 5 == $t_install_state ) {
 	?>
 	</td>
 	<?php
-	$t_config = '<?php' . "\n";
-	$t_config .= "\t\$g_hostname = '$f_hostname';\n";
-	$t_config .= "\t\$g_db_type = '$f_db_type';\n";
-	$t_config .= "\t\$g_database_name = '$f_database_name';\n";
-	$t_config .= "\t\$g_db_username = '$f_db_username';\n";
-	$t_config .= "\t\$g_db_password = '$f_db_password';\n";
+	$t_config = '<?php' . "\n"
+		. "\t\$g_hostname      = '$f_hostname';\n"
+		. "\t\$g_db_type       = '$f_db_type';\n"
+		. "\t\$g_database_name = '$f_database_name';\n"
+		. "\t\$g_db_username   = '$f_db_username';\n"
+		. "\t\$g_db_password   = '$f_db_password';\n";
 
-	if( $f_db_type == 'db2' ) {
-		$t_config .= "\t\$g_db_schema = '$f_db_schema';\n";
+	switch( $f_db_type ) {
+		case 'db2':
+			$t_config .= "\t\$g_db_schema     = '$f_db_schema';\n";
+			break;
+		case 'oci8':
+			$t_config .= "\n"
+				. "\t\$g_db_table_prefix        = '$t_db_table_prefix';\n"
+				. "\t\$g_db_table_plugin_prefix = '$t_db_table_plugin_prefix';\n"
+				. "\t\$g_db_table_suffix        = '$t_db_table_suffix';\n";
+			break;
+		default:
+			break;
 	}
-
 	$t_config .= "\n";
 
 	/* Automatically generate a strong master salt/nonce for MantisBT
