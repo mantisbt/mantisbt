@@ -257,6 +257,7 @@ define( 'ERROR_DB_CONNECT_FAILED', 400 );
 define( 'ERROR_DB_QUERY_FAILED', 401 );
 define( 'ERROR_DB_SELECT_FAILED', 402 );
 define( 'ERROR_DB_FIELD_NOT_FOUND', 403 );
+define( 'ERROR_DB_IDENTIFIER_TOO_LONG', 404 );
 
 # ERROR_FILE_*
 define( 'ERROR_FILE_TOO_BIG', 500 );
@@ -521,7 +522,7 @@ define( 'LOG_FILTERING',                4 );  # logging for filtering.
 define( 'LOG_AJAX',                     8 );  # logging for AJAX / XmlHttpRequests
 define( 'LOG_LDAP',                     16 );  # logging for ldap
 define( 'LOG_DATABASE',                 32 );  # logging for Database
-define( 'LOG_WEBSERVICE',              64 );  # logging for Web Service Requests
+define( 'LOG_WEBSERVICE',               64 );  # logging for Web Service Requests
 
 # COLUMNS_TARGET_*
 define( 'COLUMNS_TARGET_VIEW_PAGE', 1 );
@@ -561,5 +562,8 @@ define( 'PASSWORD_MAX_SIZE_BEFORE_HASH', 1024 );
 define( 'SECONDS_PER_DAY', 86400 );
 
 # Obsolete / deprecated constants
-define( 'UNABLE_TO_DUPLICATE', 40 );
-define( 'ERROR_BUG_RESOLVED_ACTION_DENIED', 1102 );
+# Defined below for backwards-compatibility purposes -- Do not use them
+#        Constant                                   # Replaced by
+define( 'UNABLE_TO_DUPLICATE', 40 );                # UNABLE_TO_REPRODUCE
+define( 'ERROR_BUG_RESOLVED_ACTION_DENIED', 1102 ); # N/A
+define( 'LOG_SOAP', 64 );                           # LOG_WEBSERVICE

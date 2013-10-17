@@ -811,7 +811,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 
 				chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
 
-				$c_content = "''";
+				$c_content = '';
 			} else {
 				trigger_error( ERROR_FILE_DUPLICATE, ERROR );
 			}
@@ -826,14 +826,10 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 	$t_file_table = db_get_table( $p_table . '_file' );
 	$t_id_col = $p_table . "_id";
 
-	$query = "INSERT INTO $t_file_table
-				( $t_id_col, title, description, diskfile, filename, folder, filesize, file_type, date_added, content, user_id )
-					  VALUES
-				( " . db_param() . ", " . db_param() . ", " . db_param() . ", "
-				    . db_param() . ", " . db_param() . ", " . db_param() . ", "
-				    . db_param() . ", " . db_param() . ", " . db_param() . ", "
-				    . db_param() . ", " . db_param() . " )";
-	db_query_bound( $query, array(
+	$t_query_fields = "
+		$t_id_col, title, description, diskfile, filename, folder,
+		filesize, file_type, date_added, user_id";
+	$t_param = array(
 		$t_id,
 		$p_title,
 		$p_desc,
@@ -843,9 +839,29 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 		$t_file_size,
 		$p_file['type'],
 		$p_date_added,
-		$c_content,
 		(int)$p_user_id,
-	) );
+	);
+
+	# oci8 stores contents in a BLOB, which is updated separately
+	if( !db_is_oracle() ) {
+		$t_query_fields .= ", content";
+		$t_param[] = $c_content;
+	}
+
+	$t_query_param = db_param();
+	for( $i = 1; $i < count( $t_param ); $i++ ){
+		$t_query_param .= ", " . db_param();
+	}
+
+	$t_query = "INSERT INTO $t_file_table ( $t_query_fields )
+	VALUES
+		( $t_query_param )";
+
+	db_query_bound( $t_query, $t_param );
+
+	if( db_is_oracle() ) {
+		db_update_blob( $t_file_table, 'content', $c_content, "diskfile='$t_unique_name'" );
+	}
 
 	if( 'bug' == $p_table ) {
 		# update the last_updated date

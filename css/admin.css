@@ -81,6 +81,8 @@ th {
 	border-color: black;
 }
 
+.hidden				{ display: none; }
+
 #mantisbt-header-logo {
 	text-align: center;
 }

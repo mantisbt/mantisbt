@@ -91,12 +91,12 @@ print_manage_menu( 'manage_proj_ver_edit_page.php' ); ?>
 			</div>
 			<div class="field-container">
 				<label for="proj-version-released"><span><?php echo lang_get( 'released' ) ?></span></label>
-				<span class="checkbox"><input type="checkbox" id="proj-version-released" name="released" <?php check_checked( $t_version->released, VERSION_RELEASED ); ?> /></span>
+				<span class="checkbox"><input type="checkbox" id="proj-version-released" name="released" <?php check_checked( (int)$t_version->released, VERSION_RELEASED ); ?> /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
 				<label for="proj-version-obsolete"><span><?php echo lang_get( 'obsolete' ) ?></span></label>
-				<span class="checkbox"><input type="checkbox" id="proj-version-obsolete" name="obsolete" <?php check_checked( $t_version->obsolete, true ); ?> /></span>
+				<span class="checkbox"><input type="checkbox" id="proj-version-obsolete" name="obsolete" <?php check_checked( (boolean)$t_version->obsolete, true ); ?> /></span>
 				<span class="label-style"></span>
 			</div>
 			

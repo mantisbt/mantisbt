@@ -106,11 +106,15 @@ function InsertData( $p_table, $p_data ) {
 $t_install_state = gpc_get_int( 'install', 0 );
 
 html_begin();
+html_head_begin();
+html_css_link( 'admin.css' );
+html_content_type();
+html_title( 'Administration - Installation' );
+html_javascript_link( 'jquery-1.9.1.min.js' );
+html_javascript_link( 'install.js' );
+html_head_end();
 ?>
-<head>
-<title> MantisBT Administration - Installation  </title>
-<link rel="stylesheet" type="text/css" href="admin.css" />
-</head>
+
 <body>
 <table width="100%" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
 	<tr class="top-bar">
@@ -149,7 +153,6 @@ switch( $t_install_state ) {
 </table>
 <br /><br />
 
-<form method='POST'>
 <?php
 if( 0 == $t_install_state ) {
 	?>
@@ -164,28 +167,85 @@ if( 0 == $t_install_state ) {
 
 $t_config_filename = $g_absolute_path . 'config_inc.php';
 $t_config_exists = file_exists( $t_config_filename );
-$f_hostname = null;
-$f_db_type = null;
-$f_database_name = null;
-$f_db_username = null;
-$f_db_password = null;
+
+# Initialize Oracle-specific values for prefix and suffix, and set
+# values for other db's as per config defaults
+$t_prefix_defaults = array(
+	'oci8' => array(
+		'db_table_prefix'        => 'm',
+		'db_table_plugin_prefix' => 'plg',
+		'db_table_suffix'        => '',
+	) ,
+);
+foreach( $t_prefix_defaults['oci8'] as $t_key => $t_value ) {
+	$t_prefix_defaults['other'][$t_key] = config_get( $t_key, '' );
+}
+
+if( $t_config_exists && $t_install_state <= 1 ) {
+	# config already exists - probably an upgrade
+	$f_dsn                    = config_get( 'dsn', '' );
+	$f_hostname               = config_get( 'hostname', '' );
+	$f_db_type                = config_get( 'db_type', '' );
+	$f_database_name          = config_get( 'database_name', '' );
+	$f_db_schema              = config_get( 'db_schema', '' );
+	$f_db_username            = config_get( 'db_username', '' );
+	$f_db_password            = config_get( 'db_password', '' );
+	$f_timezone               = config_get( 'default_timezone', '' );
+	$f_crypto_master_salt     = config_get( 'crypto_master_salt', '' );
+
+	# Set default prefix/suffix form variables ($f_db_table_XXX)
+	foreach( $t_prefix_defaults['other'] as $t_key => $t_value ) {
+		${'f_' . $t_key} = $t_value;
+	}
+} else {
+	# read control variables with defaults
+	$f_dsn                = gpc_get( 'dsn', config_get( 'dsn', '' ) );
+	$f_hostname           = gpc_get( 'hostname', config_get( 'hostname', 'localhost' ) );
+	$f_db_type            = gpc_get( 'db_type', config_get( 'db_type', '' ) );
+	$f_database_name      = gpc_get( 'database_name', config_get( 'database_name', 'bugtracker' ) );
+	$f_db_schema          = gpc_get( 'db_schema', config_get( 'db_schema', '' ) );
+	$f_db_username        = gpc_get( 'db_username', config_get( 'db_username', '' ) );
+	$f_db_password        = gpc_get( 'db_password', config_get( 'db_password', '' ) );
+	if( CONFIGURED_PASSWORD == $f_db_password ) {
+		$f_db_password = config_get( 'db_password' );
+	}
+	$f_timezone           = gpc_get( 'timezone', config_get( 'default_timezone' ) );
+	$f_crypto_master_salt = gpc_get( 'crypto_master_salt', config_get( 'crypto_master_salt' ) );
+
+	# Set default prefix/suffix form variables ($f_db_table_XXX)
+	$t_prefix_type = $f_db_type == 'oci8' ? $f_db_type : 'other';
+	foreach( $t_prefix_defaults[$t_prefix_type] as $t_key => $t_value ) {
+		${'f_' . $t_key} = gpc_get( $t_key, $t_value );
+	}
+}
+$f_admin_username = gpc_get( 'admin_username', '' );
+$f_admin_password = gpc_get( 'admin_password', '' );
+if( CONFIGURED_PASSWORD == $f_admin_password ) {
+	$f_admin_password = '';
+}
+$f_log_queries    = gpc_get_bool( 'log_queries', false );
+$f_db_exists      = gpc_get_bool( 'db_exists', false );
+
 if( $t_config_exists ) {
 	if( 0 == $t_install_state ) {
 		print_test( "Config File Exists - Upgrade", true );
-	}
 
-	# config already exists - probably an upgrade
-
-	$f_dsn = config_get( 'dsn', '' );
-	$f_hostname = config_get( 'hostname', '' );
-	$f_db_type = config_get( 'db_type', '' );
-	$f_database_name = config_get( 'database_name', '' );
-	$f_db_username = config_get( 'db_username', '' );
-	$f_db_password = config_get( 'db_password', '' );
-
-	if( 0 == $t_install_state ) {
 		print_test( 'Setting Database Type', '' !== $f_db_type, true, 'database type is blank?' );
-		print_test( 'Checking Database connection settings exist', ( $f_dsn !== '' || ( $f_database_name !== '' && $f_db_username !== '' && $f_hostname !== '' ) ), true, 'database connection settings do not exist?' );
+
+		# @TODO: dsn config seems to be undefined, remove ?
+		$t_db_conn_exists = ( $f_dsn !== '' || ( $f_database_name !== '' && $f_db_username !== '' && $f_hostname !== '' ) );
+		# Oracle supports binding in two ways:
+		#  - hostname, username/password and database name
+		#  - tns name (insert into hostname field) and username/password, database name is still empty
+		if ( $f_db_type == 'oci8' ) {
+			$t_db_conn_exists = $t_db_conn_exists || ( $f_database_name == '' && $f_db_username !== '' && $f_hostname !== '' );
+		}
+		print_test( 'Checking Database connection settings exist',
+			$t_db_conn_exists,
+			true,
+			'database connection settings do not exist?'
+		);
+
 		print_test( 'Checking PHP support for database type',
 			db_check_database_support( $f_db_type ), true,
 			'database is not supported by PHP. Check that it has been compiled into your server.'
@@ -205,7 +265,7 @@ if( $t_config_exists ) {
 	}
 
 	$t_cur_version = config_get( 'database_version', -1 );
-	
+
 	if( $t_cur_version > 1 ) {
 		$g_database_upgrade = true;
 		$f_db_exists = true;
@@ -214,23 +274,8 @@ if( $t_config_exists ) {
 			print_test( 'Config File Exists but Database does not', false, false, 'Bad config_inc.php?' );
 		}
 	}
-} else {
-	# read control variables with defaults
-	$f_hostname = gpc_get( 'hostname', config_get( 'hostname', 'localhost' ) );
-	$f_db_type = gpc_get( 'db_type', config_get( 'db_type', '' ) );
-	$f_database_name = gpc_get( 'database_name', config_get( 'database_name', 'bugtrack' ) );
-	$f_db_username = gpc_get( 'db_username', config_get( 'db_username', '' ) );
-	$f_db_password = gpc_get( 'db_password', config_get( 'db_password', '' ) );
-	if( CONFIGURED_PASSWORD == $f_db_password ) {
-		$f_db_password = config_get( 'db_password' );
-	}
 }
-$f_admin_username = gpc_get( 'admin_username', '' );
-$f_admin_password = gpc_get( 'admin_password', '' );
-$f_log_queries = gpc_get_bool( 'log_queries', false );
-$f_db_exists = gpc_get_bool( 'db_exists', false );
 
-$f_db_schema = '';
 if( $f_db_type == 'db2' ) {
 
 	# If schema name is supplied, then separate it from database name.
@@ -265,19 +310,37 @@ if( 2 == $t_install_state ) {
 	?>
 
 <table width="100%" cellpadding="10" cellspacing="1">
-<!-- Setting config variables -->
-<?php print_test( 'Setting Database Hostname', '' !== $f_hostname, true, 'host name is blank' )?>
-
-<!-- Setting config variables -->
-<?php print_test( 'Setting Database Type', '' !== $f_db_type, true, 'database type is blank?' )?>
 
 <!-- Checking DB support-->
 <?php
+	print_test( 'Setting Database Type', '' !== $f_db_type, true, 'database type is blank?' );
+
 	print_test( 'Checking PHP support for database type', db_check_database_support( $f_db_type ), true, 'database is not supported by PHP. Check that it has been compiled into your server.' );
 
+	# ADOdb library version check
+	# PostgreSQL, Oracle and MSSQL require at least 5.18.
+	# @TODO dregad 20131001 req is 5.19 actually, but must wait until official release
+	# MySQL should be fine with 5.10
+	$t_adodb_version = substr( $ADODB_vers, 1, strpos( $ADODB_vers, ' ' ) - 1 );
+	switch( $f_db_type ) {
+		case 'mssqlnative':
+		case 'oci8' :
+		case 'pgsql' :
+			$t_adodb_min = '5.18';
+			break;
+		default:
+			$t_adodb_min = '5.10';
+	}
+	print_test( "Checking ADOdb Library version is at least $t_adodb_min",
+		version_compare( $t_adodb_version, $t_adodb_min, '>=' ),
+		true,
+		'Current version: ' . $ADODB_vers
+	);
+
+	print_test( 'Setting Database Hostname', '' !== $f_hostname, true, 'host name is blank' );
 	print_test( 'Setting Database Username', '' !== $f_db_username, true, 'database username is blank' );
 	print_test( 'Setting Database Password', '' !== $f_db_password, false, 'database password is blank' );
-	print_test( 'Setting Database Name', '' !== $f_database_name, true, 'database name is blank' );
+	print_test( 'Setting Database Name', '' !== $f_database_name || $f_db_type == 'oci8' , true, 'database name is blank' );
 
 	if( $f_db_type == 'db2' ) {
 		print_test( 'Setting Database Schema', !is_blank( $f_db_schema ), true, 'must have a schema name for AS400 in the form of DBNAME/SCHEMA' );
@@ -302,15 +365,11 @@ if( 2 == $t_install_state ) {
 	</td>
 	<?php
 		if( '' !== $f_admin_password ) {
-		print_test_result( GOOD );
-	} else {
-		if( '' != $f_db_password ) {
+			print_test_result( GOOD );
+		} else {
 			print_test_result( BAD, false, 'admin user password is blank, using database user password instead' );
 			$f_admin_password = $f_db_password;
-		} else {
-			print_test_result( GOOD );
 		}
-	}
 	?>
 </tr>
 
@@ -340,6 +399,12 @@ if( 2 == $t_install_state ) {
 		} else {
 			print_test_result( GOOD );
 		}
+
+		# due to a bug in ADODB, this call prompts warnings, hence the @
+		# the check only works on mysql if the database is open
+		$t_version_info = @$g_db->ServerInfo();
+		echo '<br /> Running ' . $f_db_type . ' version ' . nl2br( $t_version_info['description'] );
+
 	} else {
 		print_test_result( BAD, true, 'Does administrative user have access to the database? ( ' . db_error_msg() . ' )' );
 	}
@@ -381,10 +446,7 @@ if( 2 == $t_install_state ) {
 	<td bgcolor="#ffffff">
 		Checking Database Server Version
 		<?php
-		# due to a bug in ADODB, this call prompts warnings, hence the @
-		# the check only works on mysql if the database is open
-		$t_version_info = @$g_db->ServerInfo();
-		echo '<br /> Running ' . $f_db_type . ' version ' . $t_version_info['description'];
+		echo '<br /> Running ' . $f_db_type . ' version ' . nl2br( $t_version_info['description'] );
 		?>
 	</td>
 	<?php
@@ -427,20 +489,51 @@ if( 2 == $t_install_state ) {
 if( 1 == $t_install_state ) {
 	?>
 
+<form method='POST'>
+
+<input name="install" type="hidden" value="2">
+
 <table width="100%" cellpadding="10" cellspacing="1">
+
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title"><?php echo $g_database_upgrade ? 'Upgrade Options' : 'Installation Options'?></span>
+		<span class="title">
+			<?php echo
+				( $g_database_upgrade ? 'Upgrade Options' : 'Installation Options' ),
+				( $g_failed ? ': Checks Failed... ' : '' )
+			?>
+		</span>
 	</td>
 </tr>
-<?php if( !$g_database_upgrade ) {?>
+
+<?php
+# install-only fields: when upgrading, only display admin username and password
+if( !$g_database_upgrade ) {
+?>
+
+<!-- Database type selection list -->
 <tr>
 	<td>
 		Type of Database
 	</td>
 	<td>
-		<select name="db_type">
-		<?php
+		<!-- Default values for table prefix/suffix -->
+		<div>
+<?php
+	# These elements are referenced by the db selection list's on change event
+	# to populate the corresponding fields as appropriate
+	foreach( $t_prefix_defaults as $t_db_type => $t_defaults ) {
+		echo '<div id="default_' . $t_db_type . '" class="hidden">';
+		foreach( $t_defaults as $t_key => $t_value ) {
+			echo "\n\t" . '<span name="' . $t_key . '">' . $t_value . '</span>';
+		}
+		echo "\n" . '</div>' . "\n";
+	}
+?>
+		</div>
+
+		<select id="db_type" name="db_type">
+<?php
 			// Build selection list of available DB types
 			$t_db_list = array(
 				'mysql'       => 'MySQL (default)',
@@ -460,69 +553,66 @@ if( 1 == $t_install_state ) {
 			foreach( $t_db_list as $t_db => $t_db_descr ) {
 				echo '<option value="' . $t_db . '"' .
 					( $t_db == $f_db_type ? ' selected="selected"' : '' ) . '>' .
-					$t_db_descr . '</option>';
+					$t_db_descr . "</option>\n";
 			}
-		?>
+?>
 		</select>
 	</td>
 </tr>
-<?php
-}
 
-if( !$g_database_upgrade ) {?>
+<!-- Database server hostname -->
 <tr>
 	<td>
 		Hostname (for Database Server)
 	</td>
 	<td>
-		<input name="hostname" type="textbox" value="<?php echo $f_hostname?>"></input>
+		<input name="hostname" type="textbox" value="<?php echo $f_hostname?>">
 	</td>
 </tr>
-<?php
-}
 
-if( !$g_database_upgrade ) {?>
+<!-- Database username and password -->
 <tr>
 	<td>
 		Username (for Database)
 	</td>
 	<td>
-		<input name="db_username" type="textbox" value="<?php echo $f_db_username?>"></input>
+		<input name="db_username" type="textbox" value="<?php echo $f_db_username?>">
 	</td>
 </tr>
-<?php
-}
 
-if( !$g_database_upgrade ) {?>
 <tr>
 	<td>
 		Password (for Database)
 	</td>
 	<td>
-		<input name="db_password" type="password" value="<?php echo( !is_blank( $f_db_password ) ? CONFIGURED_PASSWORD : "" )?>"></input>
+		<input name="db_password" type="password" value="<?php
+			echo !is_blank( $f_db_password ) && $t_config_exists
+				? CONFIGURED_PASSWORD
+				: $f_db_password;
+		?>">
 	</td>
 </tr>
-<?php
-}
 
-if( !$g_database_upgrade ) {?>
+<!-- Database name -->
 <tr>
 	<td>
 		Database name (for Database)
 	</td>
 	<td>
-		<input name="database_name" type="textbox" value="<?php echo $f_database_name?>"></input>
+		<input name="database_name" type="textbox" value="<?php echo $f_database_name?>">
 	</td>
 </tr>
 <?php
-}?>
+} # end install-only fields
+?>
 
+<!-- Admin user and password -->
 <tr>
 	<td>
 		Admin Username (to <?php echo( !$g_database_upgrade ) ? 'create Database' : 'update Database'?> if required)
 	</td>
 	<td>
-		<input name="admin_username" type="textbox" value="<?php echo $f_admin_username?>"></input>
+		<input name="admin_username" type="textbox" value="<?php echo $f_admin_username?>">
 	</td>
 </tr>
 
@@ -531,28 +621,88 @@ if( !$g_database_upgrade ) {?>
 		Admin Password (to <?php echo( !$g_database_upgrade ) ? 'create Database' : 'update Database'?> if required)
 	</td>
 	<td>
-		<input name="admin_password" type="password" value="<?php echo $f_admin_password?>"></input>
+		<input name="admin_password" type="password" value="<?php
+			echo !is_blank( $f_admin_password) && $f_admin_password == $f_db_password
+				? CONFIGURED_PASSWORD
+				: $f_admin_password;
+		?>">
 	</td>
 </tr>
 
+<?php
+# install-only fields: when upgrading, only display admin username and password
+if( !$g_database_upgrade ) {
+	$t_prefix_labels = array(
+		'db_table_prefix'        => 'Database Table Prefix',
+		'db_table_plugin_prefix' => 'Database Plugin Table Prefix',
+		'db_table_suffix'        => 'Database Table Suffix',
+	);
+	foreach( $t_prefix_defaults[$t_prefix_type] as $t_key => $t_value ) {
+		echo "<tr>\n\t<td>\n";
+		echo "\t\t${t_prefix_labels[$t_key]}\n";
+		echo "\t</td>\n\t<td>\n\t\t";
+		echo '<input id="' . $t_key . '" name="' . $t_key . '" type="textbox" value="' . $f_db_table_prefix . '">';
+		echo "\n\t</td>\n</tr>\n\n";
+	}
+?>
+<!-- Timezone -->
+<tr>
+	<td>
+		Default Time Zone
+	</td>
+	<td>
+		<select id="timezone" name="timezone">
+			<?php print_timezone_option_list( config_get_global( 'default_timezone' ) ) ?>
+		</select>
+	</td>
+</tr>
+
+<!-- Cryptographic salt -->
+<tr>
+	<td>
+		Master salt value for cryptographic hashing
+		(Refer to documentation for details)
+	</td>
+	<td>
+<?php
+	# Automatically generate a strong master salt/nonce for MantisBT
+	# cryptographic purposes. If a strong source of randomness is not
+	# available the user will have to manually set this value post
+	# installation.
+	$t_crypto_master_salt = crypto_generate_random_string(32);
+	if ( $t_crypto_master_salt !== null ) {
+		$t_crypto_master_salt = base64_encode( $t_crypto_master_salt );
+	}
+?>
+		<input name="crypto_master_salt" type="textbox" size=40 value="<?php echo $t_crypto_master_salt; ?>">
+	</td>
+</tr>
+<?php
+} # end install-only fields
+?>
+
+<!-- Printing SQL queries -->
 <tr>
 	<td>
 		Print SQL Queries instead of Writing to the Database
 	</td>
 	<td>
-		<input name="log_queries" type="checkbox" value="1" <?php echo( $f_log_queries ? 'checked="checked"' : '' )?>></input>
+		<input name="log_queries" type="checkbox" value="1" <?php echo( $f_log_queries ? 'checked="checked"' : '' )?>>
 	</td>
 </tr>
 
+<!-- Submit button -->
 <tr>
 	<td>
-		Attempt Installation
+		<?php echo ( $g_failed
+			? 'Please correct failed checks and try again'
+			: 'Attempt Installation' );
+		?>
 	</td>
 	<td>
-		<input name="go" type="submit" class="button" value="Install/Upgrade Database"></input>
+		<input name="go" type="submit" class="button" value="Install/Upgrade Database">
 	</td>
 </tr>
-<input name="install" type="hidden" value="2"></input>
 
 </table>
 <?php
@@ -620,7 +770,13 @@ if( 3 == $t_install_state ) {
 					$t_db_open = true;
 				} else {
 					$t_error = db_error_msg();
-					if( strstr( $t_error, 'atabase exists' ) ) {
+					if( $f_db_type == 'oci8' ) {
+						$t_db_exists = preg_match( '/ORA-01920/', $t_error );
+					} else {
+						$t_db_exists = strstr( $t_error, 'atabase exists' );
+					}
+
+					if( $t_db_exists ) {
 						print_test_result( BAD, false, 'Database already exists? ( ' . db_error_msg() . ' )' );
 					} else {
 						print_test_result( BAD, true, 'Does administrative user have access to create the database? ( ' . db_error_msg() . ' )' );
@@ -632,7 +788,9 @@ if( 3 == $t_install_state ) {
 		?>
 </tr>
 <?php
+	# Close the connection and clear the ADOdb object to free memory
 	$g_db->Close();
+	$g_db = null;
 ?>
 <tr>
 	<td bgcolor="#ffffff">
@@ -665,8 +823,12 @@ if( 3 == $t_install_state ) {
 		$g_db_connected = false;
 
 		# fake out database access routines used by config_get
-		$GLOBALS['g_db_type'] = $f_db_type;
+		config_set_global( 'db_type', $f_db_type );
 
+		# Initialize table prefixes as specified by user
+		config_set_global( 'db_table_prefix', $f_db_table_prefix );
+		config_set_global( 'db_table_plugin_prefix', $f_db_table_plugin_prefix );
+		config_set_global( 'db_table_suffix', $f_db_table_suffix );
 		# database_api references this
 		require_once( dirname( __FILE__ ) . '/schema.php' );
 		$g_db = ADONewConnection( $f_db_type );
@@ -700,55 +862,83 @@ if( 3 == $t_install_state ) {
 				echo '<tr><td bgcolor="#ffffff">';
 			}
 
-			$dict = NewDataDictionary( $g_db );
+			$dict = @NewDataDictionary( $g_db );
 			$t_sql = true;
 			$t_target = $upgrade[$i][1][0];
-			if( $upgrade[$i][0] == 'InsertData' ) {
-				$sqlarray = call_user_func_array( $upgrade[$i][0], $upgrade[$i][1] );
-			}
-			else if( $upgrade[$i][0] == 'UpdateSQL' ) {
-				$sqlarray = array(
-					$upgrade[$i][1],
-				);
-				$t_target = $upgrade[$i][1];
-			} else if( $upgrade[$i][0] == 'UpdateFunction' ) {
-				$sqlarray = array(
-					$upgrade[$i][1],
-				);
-				if( isset( $upgrade[$i][2] ) ) {
-					$sqlarray[] = $upgrade[$i][2];
-				}
-				$t_sql = false;
-				$t_target = $upgrade[$i][1];
-			} else {
-				/* 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade. */
-				if( isset( $upgrade[$i][2] ) ) {
-					if( call_user_func_array( $upgrade[$i][2][0], $upgrade[$i][2][1] ) ) {
-						$sqlarray = call_user_func_array( array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
-					} else {
-						$sqlarray = array();
+
+			switch ($upgrade[$i][0]) {
+
+				case 'InsertData':
+					$sqlarray = call_user_func_array( $upgrade[$i][0], $upgrade[$i][1] );
+					break;
+
+				case 'UpdateSQL':
+					$sqlarray = array(
+						$upgrade[$i][1],
+					);
+					$t_target = $upgrade[$i][1];
+					break;
+
+				case 'UpdateFunction':
+					$sqlarray = array(
+						$upgrade[$i][1],
+					);
+					if( isset( $upgrade[$i][2] ) ) {
+						$sqlarray[] = $upgrade[$i][2];
 					}
-				} else {
-					$sqlarray = call_user_func_array( array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
-				}
+					$t_sql = false;
+					$t_target = $upgrade[$i][1];
+					break;
+
+				case NULL:
+					// No-op upgrade step - required for oci8
+					break;
+
+				default:
+						$sqlarray = call_user_func_array( array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
+
+					/* 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade. */
+					if( isset( $upgrade[$i][2] ) ) {
+						if( call_user_func_array( $upgrade[$i][2][0], $upgrade[$i][2][1] ) ) {
+							$sqlarray = call_user_func_array( array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
+						} else {
+							$sqlarray = array();
+						}
+					} else {
+						$sqlarray = call_user_func_array( array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
+					}
+					break;
 			}
 			if( $f_log_queries ) {
 				if( $t_sql ) {
 					foreach( $sqlarray as $sql ) {
-						echo htmlentities( $sql ) . ";\n\n";
+						# "CREATE OR REPLACE TRIGGER" statements must end with "END;\n/" for Oracle sqlplus
+						if ( $f_db_type == 'oci8' && stripos( $sql, 'CREATE OR REPLACE TRIGGER' ) === 0 ) {
+							$t_sql_end = "\n/";
+						} else {
+							$t_sql_end = ";";
+						}
+						echo htmlentities( $sql ) . $t_sql_end . "\n\n";
 					}
 				}
 			} else {
-				echo 'Schema ' . $upgrade[$i][0] . ' ( ' . $t_target . ' )</td>';
-				if( $t_sql ) {
-					$ret = $dict->ExecuteSQLArray( $sqlarray, false );
+				echo "Schema step $i: ";
+				if( is_null( $upgrade[$i][0]) ) {
+					echo 'No operation';
+					$ret = 2;
 				} else {
-					if( isset( $sqlarray[1] ) ) {
-						$ret = call_user_func( 'install_' . $sqlarray[0], $sqlarray[1] );
+					echo $upgrade[$i][0] . " ( $t_target )";
+					if( $t_sql ) {
+						$ret = $dict->ExecuteSQLArray( $sqlarray, false );
 					} else {
-						$ret = call_user_func( 'install_' . $sqlarray[0] );
+						if( isset( $sqlarray[1] ) ) {
+							$ret = call_user_func( 'install_' . $sqlarray[0], $sqlarray[1] );
+						} else {
+							$ret = call_user_func( 'install_' . $sqlarray[0] );
+						}
 					}
 				}
+				echo '</td>';
 				if( $ret == 2 ) {
 					print_test_result( GOOD );
 					config_set( 'database_version', $i );
@@ -785,17 +975,17 @@ if( 4 == $t_install_state ) {
 	/** @todo to be written */
 	// must post data gathered to preserve it
 	?>
-		<input name="hostname" type="hidden" value="<?php echo $f_hostname?>"></input>
-		<input name="db_type" type="hidden" value="<?php echo $f_db_type?>"></input>
-		<input name="database_name" type="hidden" value="<?php echo $f_database_name?>"></input>
-		<input name="db_username" type="hidden" value="<?php echo $f_db_username?>"></input>
-		<input name="db_password" type="hidden" value="<?php echo $f_db_password?>"></input>
-		<input name="admin_username" type="hidden" value="<?php echo $f_admin_username?>"></input>
-		<input name="admin_password" type="hidden" value="<?php echo $f_admin_password?>"></input>
-		<input name="log_queries" type="hidden" value="<?php echo( $f_log_queries ? 1 : 0 )?>"></input>
-		<input name="db_exists" type="hidden" value="<?php echo( $f_db_exists ? 1 : 0 )?>"></input>
+		<input name="hostname" type="hidden" value="<?php echo $f_hostname?>">
+		<input name="db_type" type="hidden" value="<?php echo $f_db_type?>">
+		<input name="database_name" type="hidden" value="<?php echo $f_database_name?>">
+		<input name="db_username" type="hidden" value="<?php echo $f_db_username?>">
+		<input name="db_password" type="hidden" value="<?php echo $f_db_password?>">
+		<input name="admin_username" type="hidden" value="<?php echo $f_admin_username?>">
+		<input name="admin_password" type="hidden" value="<?php echo $f_admin_password?>">
+		<input name="log_queries" type="hidden" value="<?php echo( $f_log_queries ? 1 : 0 )?>">
+		<input name="db_exists" type="hidden" value="<?php echo( $f_db_exists ? 1 : 0 )?>">
 <?php
-	# must post <input name="install" type="hidden" value="5"></input>
+	# must post <input name="install" type="hidden" value="5">
 	# rather than the following line
 	$t_install_state++;
 }  # end install_state == 4
@@ -824,29 +1014,39 @@ if( 5 == $t_install_state ) {
 	?>
 	</td>
 	<?php
-	$t_config = '<?php' . "\n";
-	$t_config .= "\t\$g_hostname = '$f_hostname';\n";
-	$t_config .= "\t\$g_db_type = '$f_db_type';\n";
-	$t_config .= "\t\$g_database_name = '$f_database_name';\n";
-	$t_config .= "\t\$g_db_username = '$f_db_username';\n";
-	$t_config .= "\t\$g_db_password = '$f_db_password';\n";
+	$t_config = '<?php' . "\n"
+		. "\$g_hostname               = '$f_hostname';\n"
+		. "\$g_db_type                = '$f_db_type';\n"
+		. "\$g_database_name          = '$f_database_name';\n"
+		. "\$g_db_username            = '$f_db_username';\n"
+		. "\$g_db_password            = '$f_db_password';\n";
 
-	if( $f_db_type == 'db2' ) {
-		$t_config .= "\t\$g_db_schema = '$f_db_schema';\n";
+	switch( $f_db_type ) {
+		case 'db2':
+			$t_config .=  "\$g_db_schema              = '$f_db_schema';\n";
+			break;
+		default:
+			break;
 	}
-
 	$t_config .= "\n";
 
-	/* Automatically generate a strong master salt/nonce for MantisBT
-	 * cryptographic purposes. If a strong source of randomness is not
-	 * available the user will have to manually set this value post
-	 * installation.
-	 */
-	$t_crypto_master_salt_raw = crypto_generate_random_string(32);
-	if ( $t_crypto_master_salt_raw !== null ) {
-		$t_crypto_master_salt = base64_encode( $t_crypto_master_salt_raw );
-		$t_config .= "\t\$g_crypto_master_salt = '$t_crypto_master_salt';\n";
+	# Add lines for table prefix/suffix if different from default
+	$t_insert_line = false;
+	foreach( $t_prefix_defaults['other'] as $t_key => $t_value ) {
+		$t_new_value = ${'f_' . $t_key};
+		if( $t_new_value != $t_value ) {
+			$t_config .= '$' . str_pad( $t_key, 25 ) . "= '" . ${'f_' . $t_key} . "';\n";
+			$t_insert_line = true;
+		}
 	}
+	if( $t_insert_line ) {
+		$t_config .= "\n";
+	}
+
+	$t_config .=
+		  "\$g_default_timezone       = '$f_timezone';\n"
+		. "\n"
+		. "\$g_crypto_master_salt     = '$f_crypto_master_salt';\n";
 
 	$t_write_failed = true;
 
@@ -1015,10 +1215,13 @@ if( 7 == $t_install_state ) {
 <?php
 	}
 }
+?>
+</form>
+<?php
 
 # end install_state == 7
 
-if( $g_failed ) {
+if( $g_failed && $t_install_state != 1 ) {
 	?>
 <table width="100%" bgcolor="#222222" cellpadding="10" cellspacing="1">
 <tr>
@@ -1029,23 +1232,32 @@ if( $g_failed ) {
 <tr>
 	<td bgcolor="#ffffff">Please correct failed checks</td>
 	<td bgcolor="#ffffff">
-		<input name="install" type="hidden" value="<?php echo $t_install_state?>"></input>
-		<input name="hostname" type="hidden" value="<?php echo $f_hostname?>"></input>
-		<input name="db_type" type="hidden" value="<?php echo $f_db_type?>"></input>
-		<input name="database_name" type="hidden" value="<?php echo $f_database_name?>"></input>
-		<input name="db_username" type="hidden" value="<?php echo $f_db_username?>"></input>
-		<input name="db_password" type="hidden" value="<?php echo $f_db_password?>"></input>
-		<input name="admin_username" type="hidden" value="<?php echo $f_admin_username?>"></input>
-		<input name="admin_password" type="hidden" value="<?php echo $f_admin_password?>"></input>
-		<input name="log_queries" type="hidden" value="<?php echo( $f_log_queries ? 1 : 0 )?>"></input>
-		<input name="db_exists" type="hidden" value="<?php echo( $f_db_exists ? 1 : 0 )?>"></input>
-		<input name="retry" type="submit" class="button" value="Retry"></input>
+<form method='POST'>
+		<input name="install" type="hidden" value="<?php echo $t_install_state?>">
+		<input name="hostname" type="hidden" value="<?php echo $f_hostname?>">
+		<input name="db_type" type="hidden" value="<?php echo $f_db_type?>">
+		<input name="database_name" type="hidden" value="<?php echo $f_database_name?>">
+		<input name="db_username" type="hidden" value="<?php echo $f_db_username?>">
+		<input name="db_password" type="hidden" value="<?php
+			echo !is_blank( $f_db_password ) && $t_config_exists
+				? CONFIGURED_PASSWORD
+				: $f_db_password;
+		?>">
+		<input name="admin_username" type="hidden" value="<?php echo $f_admin_username?>">
+		<input name="admin_password" type="hidden" value="<?php
+			echo !is_blank( $f_admin_password ) && $f_admin_password == $f_db_password
+				? CONFIGURED_PASSWORD
+				: $f_admin_password;
+		?>">
+		<input name="log_queries" type="hidden" value="<?php echo( $f_log_queries ? 1 : 0 )?>">
+		<input name="db_exists" type="hidden" value="<?php echo( $f_db_exists ? 1 : 0 )?>">
+		<input name="retry" type="submit" class="button" value="Retry">
+</form>
 	</td>
 </tr>
 </table>
 <?php
 }
 ?>
-</form>
 </body>
 </html>

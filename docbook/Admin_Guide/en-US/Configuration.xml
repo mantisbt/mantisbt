@@ -3672,9 +3672,9 @@ $g_display_errors = array(
 							</listitem>
 						</varlistentry>
 						<varlistentry>
-							<term>LOG_SOAP</term>
+							<term>LOG_WEBSERVICE</term>
 							<listitem>
-								<para>logs the details of SOAP API operations
+								<para>logs the details of Web Services operations (e.g. SOAP API)
 								</para>
 							</listitem>
 						</varlistentry>

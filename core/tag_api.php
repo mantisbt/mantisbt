@@ -310,7 +310,7 @@ function tag_get_by_name( $p_name ) {
 	$t_tag_table = db_get_table( 'tag' );
 	$query = "SELECT * FROM $t_tag_table
 					WHERE " . db_helper_like( 'name' );
-	$result = db_query_bound( $query, array( $p_name ) );
+	$t_result = db_query_bound( $query, array( $p_name ) );
 
 	$t_row = db_fetch_array( $t_result );
 
@@ -525,10 +525,10 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
  */
 function tag_bug_is_attached( $p_tag_id, $p_bug_id ) {
 	$t_bug_tag_table = db_get_table( 'bug_tag' );
-	$query = "SELECT id FROM $t_bug_tag_table
+	$query = "SELECT bug_id FROM $t_bug_tag_table
 					WHERE tag_id=" . db_param() . " AND bug_id=" . db_param();
 	$result = db_query_bound( $query, array( $p_tag_id, $p_bug_id ) );
-	return( db_result( $result ) > 0 );
+	return( db_result( $result ) !== false );
 }
 
 /**
