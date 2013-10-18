@@ -55,6 +55,8 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
+auth_reauthenticate();
+
 form_security_validate('account_update');
 
 auth_ensure_user_authenticated();
@@ -63,6 +65,7 @@ current_user_ensure_unprotected();
 
 $f_email           	= gpc_get_string( 'email', '' );
 $f_realname        	= gpc_get_string( 'realname', '' );
+$f_password_current = gpc_get_string( 'password_current', '' );
 $f_password        	= gpc_get_string( 'password', '' );
 $f_password_confirm	= gpc_get_string( 'password_confirm', '' );
 
@@ -109,7 +112,11 @@ if ( !is_blank( $f_password ) ) {
 	if ( $f_password != $f_password_confirm ) {
 		trigger_error( ERROR_USER_CREATE_PASSWORD_MISMATCH, ERROR );
 	} else {
-		if ( !auth_does_password_match( $t_user_id, $f_password ) ) {
+		if ( !auth_does_password_match( $t_user_id, $f_password_current ) ) {
+			trigger_error( ERROR_USER_CURRENT_PASSWORD_MISMATCH, ERROR );
+		}
+
+ 		if ( !auth_does_password_match( $t_user_id, $f_password ) ) {
 			user_set_password( $t_user_id, $f_password );
 			$t_password_updated = true;
 		}

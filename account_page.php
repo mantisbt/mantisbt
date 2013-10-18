@@ -76,6 +76,8 @@ require_api( 'utility_api.php' );
 #============ Permissions ============
 auth_ensure_user_authenticated();
 
+auth_reauthenticate();
+
 current_user_ensure_unprotected();
 
 html_page_top( lang_get( 'account_link' ) );
@@ -150,6 +152,11 @@ if ( $t_verify || $t_reset_password ) {
 			<div class="field-container">
 				<span class="display-label"><span><?php echo lang_get( 'username' ) ?></span></span>
 				<span class="input"><span class="field-value"><?php echo string_display_line( $u_username ) ?></span></span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container">
+				<label for="password" <?php if ( $t_force_pw_reset ) { ?> class="required" <?php } ?>><span><?php echo lang_get( 'current_password' ) ?></span></label>
+				<span class="input"><input id="password-current" type="password" name="password_current" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
