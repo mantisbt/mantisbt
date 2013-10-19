@@ -83,6 +83,7 @@ declare -A query=(
 	[db_password]=$DB_PASSWORD
 	[admin_username]=$DB_USER
 	[admin_password]=$DB_PASSWORD
+	[crypto_master_salt]=$(head -c 18 /dev/urandom | base64 | tr '+/' '-_')
 )
 
 # Build http query string
@@ -95,8 +96,6 @@ done
 
 # trigger installation
 curl --data "${query_string:1}" http://localhost/admin/install.php
-
-echo " \$g_crypto_master_salt='1234567890abcdef'; " | sudo tee -a config_inc.php
 
 
 # create the first project
