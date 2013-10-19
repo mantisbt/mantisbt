@@ -1,19 +1,41 @@
 #!/bin/bash
 
 # Global variables initialization
+MANTIS_DB_NAME=bugtracker
 MANTIS_BOOTSTRAP=tests/bootstrap.php
+
+SQL_CREATE_DB="CREATE DATABASE $MANTIS_DB_NAME;"
+SQL_CREATE_PROJECT="INSERT INTO mantis_project_table
+	(name, inherit_global, description)
+	VALUES
+	('Test Project',true,'Travis-CI Test Project');"
 
 
 # create database
-if [ $DB = 'mysql' ]; then
-	mysql -e 'create database bugtracker;'
-	DB_USER='root'
-elif [ $DB = 'pgsql' ]; then
-	psql -c 'CREATE DATABASE bugtracker;' -U postgres
-	psql -c "ALTER USER postgres SET bytea_output = 'escape';" -U postgres
-	DB_USER='postgres'
-fi
+case $DB in
 
+	mysql)
+		DB_USER='root'
+		DB_PASSWORD=''
+		DB_CMD='mysql -e'
+		DB_CMD_SCHEMA="$MANTIS_DB_NAME"
+
+		$DB_CMD "$SQL_CREATE_DB"
+		;;
+
+	pgsql)
+		DB_USER='postgres'
+		DB_PASSWORD=''
+		DB_CMD="psql -U $DB_USER -c"
+		DB_CMD_SCHEMA="-d $MANTIS_DB_NAME"
+
+		$DB_CMD "$SQL_CREATE_DB"
+		$DB_CMD "ALTER USER $DB_USER SET bytea_output = 'escape';"
+		;;
+esac
+
+
+# Web server setup
 if [ $TRAVIS_PHP_VERSION = '5.3' ]; then
 	# install Apache as PHP 5.3 does not come with an embedded web server
 	sudo apt-get update -qq
@@ -50,12 +72,13 @@ fi
 #  wait until server is up
 sleep 10
 
+
 # Define parameters for MantisBT installer
 declare -A query=(
 	[install]=2
 	[db_type]=$DB
 	[hostname]='localhost'
-	[database_name]='bugtracker'
+	[database_name]=$MANTIS_DB_NAME
 	[db_username]=$DB_USER
 	[db_password]=$DB_PASSWORD
 	[admin_username]=$DB_USER
@@ -77,11 +100,7 @@ echo " \$g_crypto_master_salt='1234567890abcdef'; " | sudo tee -a config_inc.php
 
 
 # create the first project
-if [ $DB = 'mysql' ]; then
-	mysql -e "INSERT INTO mantis_project_table(name, inherit_global) VALUES('First project', 1)" bugtracker
-elif [ $DB = 'pgsql' ]; then
-	psql -c "INSERT INTO mantis_project_table(name, inherit_global, description) VALUES('First project', 1, '')" -d bugtracker -U postgres
-fi
+$DB_CMD "$SQL_CREATE_PROJECT" $DB_CMD_SCHEMA
 
 
 # enable SOAP tests
