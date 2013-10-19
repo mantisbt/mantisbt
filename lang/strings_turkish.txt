@@ -33,11 +33,13 @@
  * @author Karduelis
  * @author Khutuck
  * @author Korayal
+ * @author Meelo
  * @author Oktay Altunergil - oktay@bellatlantic.net
  * @author Thinkfast
  * @author Trockya
  */
 
+$s_directionality = 'soldan sağa';
 $s_actiongroup_menu_move = 'Taşı';
 $s_actiongroup_menu_copy = 'Kopyala';
 $s_actiongroup_menu_assign = 'Ata';
