@@ -23,9 +23,8 @@ env:
   - DB=pgsql
 
 branches:
-  only:
-    - master
-    - master-1.2.x
+  except:
+    - master-2.0.x
 
 # Notifications
 
