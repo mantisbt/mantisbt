@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Global variables initialization
+MANTIS_BOOTSTRAP=tests/bootstrap.php
+
+
 # create database
 if [ $DB = 'mysql' ]; then
 	mysql -e 'create database bugtracker;'
@@ -51,6 +55,7 @@ curl --data "install=2&hostname=localhost&db_username=${DB_USER}&db_type=${DB}&d
 
 echo " \$g_crypto_master_salt='1234567890abcdef'; " | sudo tee -a config_inc.php
 
+
 # create the first project
 if [ $DB = 'mysql' ]; then
 	mysql -e "INSERT INTO mantis_project_table(name, inherit_global) VALUES('First project', 1)" bugtracker
@@ -58,5 +63,10 @@ elif [ $DB = 'pgsql' ]; then
 	psql -c "INSERT INTO mantis_project_table(name, inherit_global, description) VALUES('First project', 1, '')" -d bugtracker -U postgres
 fi
 
+
 # enable SOAP tests
-echo "<?php \$GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED'] = true;  \$GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'] = 'http://localhost/api/soap/mantisconnect.php?wsdl';?>" > ./tests/bootstrap.php
+cat <<-EOF >> $MANTIS_BOOTSTRAP
+	<?php
+		\$GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED'] = true;
+		\$GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'] = 'http://localhost/api/soap/mantisconnect.php?wsdl';
+	EOF
