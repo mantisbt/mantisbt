@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Global variables initialization
+HOSTNAME=localhost
 MANTIS_DB_NAME=bugtracker
 MANTIS_BOOTSTRAP=tests/bootstrap.php
 
@@ -66,7 +67,7 @@ else
 	# get path of PHP as the path is not in $PATH for sudo
 	myphp=$(which php)
 	# sudo needed for port 80
-	sudo $myphp -S localhost:80 &
+	sudo $myphp -S $HOSTNAME:80 &
 fi
 
 #  wait until server is up
@@ -77,7 +78,7 @@ sleep 10
 declare -A query=(
 	[install]=2
 	[db_type]=$DB
-	[hostname]='localhost'
+	[hostname]=$HOSTNAME
 	[database_name]=$MANTIS_DB_NAME
 	[db_username]=$DB_USER
 	[db_password]=$DB_PASSWORD
@@ -95,7 +96,7 @@ do
 done
 
 # trigger installation
-curl --data "${query_string:1}" http://localhost/admin/install.php
+curl --data "${query_string:1}" http://$HOSTNAME/admin/install.php
 
 
 # create the first project
@@ -106,5 +107,5 @@ $DB_CMD "$SQL_CREATE_PROJECT" $DB_CMD_SCHEMA
 cat <<-EOF >> $MANTIS_BOOTSTRAP
 	<?php
 		\$GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED'] = true;
-		\$GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'] = 'http://localhost/api/soap/mantisconnect.php?wsdl';
+		\$GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'] = 'http://$HOSTNAME/api/soap/mantisconnect.php?wsdl';
 	EOF
