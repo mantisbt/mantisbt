@@ -50,8 +50,28 @@ fi
 #  wait until server is up
 sleep 10
 
+# Define parameters for MantisBT installer
+declare -A query=(
+	[install]=2
+	[db_type]=$DB
+	[hostname]='localhost'
+	[database_name]='bugtracker'
+	[db_username]=$DB_USER
+	[db_password]=$DB_PASSWORD
+	[admin_username]=$DB_USER
+	[admin_password]=$DB_PASSWORD
+)
+
+# Build http query string
+unset query_string
+for param in "${!query[@]}"
+do
+	value=${query[$param]}
+	query_string="${query_string}&${param}=${value}"
+done
+
 # trigger installation
-curl --data "install=2&hostname=localhost&db_username=${DB_USER}&db_type=${DB}&db_password=&database_name=bugtracker&admin_username=${DB_USER}&admin_password=" http://localhost/admin/install.php
+curl --data "${query_string:1}" http://localhost/admin/install.php
 
 echo " \$g_crypto_master_salt='1234567890abcdef'; " | sudo tee -a config_inc.php
 
