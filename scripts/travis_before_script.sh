@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # create database
 if [ $DB = 'mysql' ]; then
@@ -14,24 +14,23 @@ if [ $TRAVIS_PHP_VERSION = '5.3' ]; then
 	# install Apache as PHP 5.3 does not come with an embedded web server
 	sudo apt-get update -qq
 	sudo apt-get install -qq apache2 libapache2-mod-php5 php5-mysql php5-pgsql
-	
-	WEBROOT="$(pwd)"
 
-	echo "<VirtualHost *:80>
-        DocumentRoot $WEBROOT
-        <Directory />
-                Options FollowSymLinks
-                AllowOverride All
-        </Directory>
-        <Directory $WEBROOT >
-                Options Indexes FollowSymLinks MultiViews
-                AllowOverride All
-                Order allow,deny
-                allow from all
-        </Directory>
+	cat <<-EOF | sudo tee /etc/apache2/sites-available/default >/dev/null
+		<VirtualHost *:80>
+		    DocumentRoot $PWD
+		    <Directory />
+		        Options FollowSymLinks
+		        AllowOverride All
+		    </Directory>
+		    <Directory $PWD>
+		        Options Indexes FollowSymLinks MultiViews
+		        AllowOverride All
+		        Order allow,deny
+		        allow from all
+		    </Directory>
+		</VirtualHost>
+		EOF
 
-	</VirtualHost>" | sudo tee /etc/apache2/sites-available/default > /dev/null
-	
 	sudo service apache2 restart
 
 	# needed to allow web server to create config_inc.php
