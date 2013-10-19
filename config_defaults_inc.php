@@ -4249,4 +4249,4 @@ $g_mantistouch_url = '';
 
 
 # Temporary variables should not remain defined in global scope
-unset( $t_protocol, $t_host, $t_hosts, $t_port, $t_self, $t_path, $t_use_iis );
+unset( $t_protocol, $t_host, $t_hosts, $t_port, $t_self, $t_path );
