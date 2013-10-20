@@ -1,4 +1,7 @@
 #!/bin/bash
+# -----------------------------------------------------------------------------
+# MantisBT Travis-CI before script
+# -----------------------------------------------------------------------------
 
 # Global variables initialization
 HOSTNAME=localhost
@@ -12,7 +15,17 @@ SQL_CREATE_PROJECT="INSERT INTO mantis_project_table
 	('Test Project',true,'Travis-CI Test Project');"
 
 
-# create database
+# -----------------------------------------------------------------------------
+
+function step () {
+	echo "-----------------------------------------------------------------------------"
+	echo $1
+	echo
+}
+
+# -----------------------------------------------------------------------------
+step "Create database $MANTIS_DB_NAME"
+
 case $DB in
 
 	mysql)
@@ -36,7 +49,9 @@ case $DB in
 esac
 
 
-# Web server setup
+# -----------------------------------------------------------------------------
+step "Web server setup"
+
 if [ $TRAVIS_PHP_VERSION = '5.3' ]; then
 	# install Apache as PHP 5.3 does not come with an embedded web server
 	sudo apt-get update -qq
@@ -74,6 +89,9 @@ fi
 sleep 10
 
 
+# -----------------------------------------------------------------------------
+step "MantisBT Installation"
+
 # Define parameters for MantisBT installer
 declare -A query=(
 	[install]=2
@@ -99,13 +117,19 @@ done
 curl --data "${query_string:1}" http://$HOSTNAME/admin/install.php
 
 
-# create the first project
+# -----------------------------------------------------------------------------
+step "Post-installation steps"
+
+echo "Creating project"
 $DB_CMD "$SQL_CREATE_PROJECT" $DB_CMD_SCHEMA
 
 
 # enable SOAP tests
+echo "Creating PHPUnit Bootstrap file"
 cat <<-EOF >> $MANTIS_BOOTSTRAP
 	<?php
 		\$GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED'] = true;
 		\$GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'] = 'http://$HOSTNAME/api/soap/mantisconnect.php?wsdl';
 	EOF
+
+step "Before-script execution completed successfully"
