@@ -755,8 +755,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 
 	email_new_bug( $t_issue_id );
 
-	error_log("Status is " . $t_bug_data->status . ", default is " . config_get('bug_submit_status'));
-	
+
 	if ( $t_bug_data->status != config_get('bug_submit_status') )
         history_log_event($t_issue_id, 'status', config_get('bug_submit_status') );
 
