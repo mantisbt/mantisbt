@@ -402,17 +402,47 @@ function version_cache_array_rows( $p_project_id_array ) {
  */
 function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = false, $p_inherit = null ) {
 	global $g_cache_versions, $g_cache_versions_project;
+	
+	if ( $p_inherit === null ) {
+		$t_inherit = ( ON == config_get( 'subprojects_inherit_versions' ) );
+	} else {
+		$t_inherit = $p_inherit;
+	}
+	
+	if( $t_inherit ) {
+		$t_project_ids = project_hierarchy_inheritance( $p_project_id );
+	} else {
+		$t_project_ids [] = $p_project_id;
+	}
 
-	if( isset( $g_cache_versions_project[ (int)$p_project_id ] ) ) {
-		if( !empty( $g_cache_versions_project[ (int)$p_project_id ]) ) {
-			foreach( $g_cache_versions_project[ (int)$p_project_id ] as $t_id ) {
-				$t_versions[] = version_cache_row( $t_id );
-			}
-			return $t_versions;
-		} else {
-			return array();
+	$t_is_cached = true;
+	foreach ($t_project_ids as $t_project_id ) {
+		if( !isset( $g_cache_versions_project[ (int)$t_project_id ] ) ) {
+			$t_is_cached = false;
 		}
 	}
+	if( $t_is_cached ) {  
+		$t_versions = array();
+		foreach ($t_project_ids as $t_project_id ) {
+			if( !empty( $g_cache_versions_project[ (int)$t_project_id ]) ) {
+				foreach( $g_cache_versions_project[ (int)$t_project_id ] as $t_id ) {
+					$t_versions[] = version_cache_row( $t_id );
+				}
+			}
+		}
+		return $t_versions;
+	}
+	
+#	if( isset( $g_cache_versions_project[ (int)$p_project_id ] ) ) {
+#		if( !empty( $g_cache_versions_project[ (int)$p_project_id ]) ) {
+#			foreach( $g_cache_versions_project[ (int)$p_project_id ] as $t_id ) {
+#				$t_versions[] = version_cache_row( $t_id );
+#			}
+#			return $t_versions;
+#		} else {
+#			return array();
+#		}
+#	}
 
 	$c_project_id = db_prepare_int( $p_project_id );
 	$t_project_version_table = db_get_table( 'mantis_project_version_table' );
