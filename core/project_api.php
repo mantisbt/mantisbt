@@ -89,7 +89,6 @@ function project_table_empty() {
  * @param int $p_project_id project id
  * @param bool $p_trigger_errors trigger errors
  * @return mixed
- * @throws MantisBT\Exception\Project\ProjectNotFound
  */
 function project_cache_row( $p_project_id, $p_trigger_errors = true ) {
 	global $g_cache_project, $g_cache_project_missing;
@@ -529,7 +528,6 @@ function project_get_all_rows() {
  * @param int $p_project_id project id
  * @param string $p_field_name field name
  * @param bool $p_trigger_errors trigger errors
- * @throws MantisBT\Exception\Database\FieldNotFound
  * @return string
  */
 function project_get_field( $p_project_id, $p_field_name, $p_trigger_errors = true ) {

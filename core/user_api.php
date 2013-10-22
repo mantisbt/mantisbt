@@ -1279,7 +1279,6 @@ function user_get_reported_open_bug_count( $p_user_id, $p_project_id = ALL_PROJE
  * @param int $p_user_id User ID
  * @param int $p_profile_id Profile ID
  * @return array
- * @throws MantisBT\Exception\User\UserProfileNotFound
  */
 function user_get_profile_row( $p_user_id, $p_profile_id ) {
 	$t_user_profile_table = db_get_table( 'user_profile' );
@@ -1521,7 +1520,6 @@ function user_set_fields( $p_user_id, $p_fields ) {
  * @param string $p_field_name Field Name
  * @param string $p_field_value Field Value
  * @return bool always true
- * @throws MantisBT\Exception\Database\FieldNotFound
  */
 function user_set_field( $p_user_id, $p_field_name, $p_field_value ) {
 

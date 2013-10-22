@@ -57,7 +57,6 @@ require_api( 'utility_api.php' );
  * @param string $p_headline News Headline
  * @param string $p_body News Body
  * @return int news article id
- * @throws MantisBT\Exception\Field\EmptyField
  */
 function news_create( $p_project_id, $p_poster_id, $p_view_state, $p_announcement, $p_headline, $p_body ) {
 	if( is_blank( $p_headline ) ) {
