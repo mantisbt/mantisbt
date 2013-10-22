@@ -476,7 +476,6 @@ function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = 
 		return $t_versions;
 	}
 
-	$c_project_id = db_prepare_int( $p_project_id );
 	$t_project_version_table = db_get_table( 'project_version' );
 
 	$t_param_count = 0;
