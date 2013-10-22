@@ -360,15 +360,8 @@ if ( $f_temp_filter ) {
 	$f_type = 1;
 }
 
-if ( $f_do_filter_by_date ) {
-	$f_do_filter_by_date = 'on';
-}
-
-if ( $f_sticky_issues ) {
-	$f_sticky_issues = 'on';
-} else {
-	$f_sticky_issues = 'off';
-}
+$f_do_filter_by_date = $f_do_filter_by_date ? 'on' : 'off';
+$f_sticky_issues = $f_sticky_issues ? 'on' : 'off';
 
 if ( $f_type < 0 ) {
 	print_header_redirect( 'view_all_bug_page.php' );
