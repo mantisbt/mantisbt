@@ -4532,7 +4532,7 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
 }
 
 /**
- * This function returns the filter string that is tied to the unique id parameter. If the user 
+ * This function returns the filter string that is tied to the unique id parameter. If the user
  * doesn't have permission to see this filter, the function returns null
  * @param int $p_filter_id
  * @param int $p_user_id

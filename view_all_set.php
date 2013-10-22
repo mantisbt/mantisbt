@@ -492,7 +492,7 @@ switch ( $f_type ) {
 			$t_setting_arr[ FILTER_PROPERTY_TAG_STRING ] 			= $f_tag_string;
 			$t_setting_arr[ FILTER_PROPERTY_TAG_SELECT ] 			= $f_tag_select;
 			$t_setting_arr[ FILTER_PROPERTY_NOTE_USER_ID ] 			= $f_note_user_id;
-			$t_setting_arr[ FILTER_PROPERTY_MATCH_TYPE ] 			= $f_match_type;			
+			$t_setting_arr[ FILTER_PROPERTY_MATCH_TYPE ] 			= $f_match_type;
 			$t_setting_arr = array_merge( $t_setting_arr, $f_filter_input );
 			break;
 	# Set the sort order and direction

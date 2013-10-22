@@ -346,7 +346,7 @@ function user_ensure_name_valid( $p_username ) {
  * return whether user is monitoring bug for the user id and bug id
  * @param int $p_user_id User ID
  * @param int $p_bug_id Bug ID
- * @return bool 
+ * @return bool
  */
 function user_is_monitoring_bug( $p_user_id, $p_bug_id ) {
 	$c_user_id = db_prepare_int( $p_user_id );
@@ -1313,7 +1313,7 @@ function user_is_login_request_allowed( $p_user_id ) {
  * Get 'lost password' in progress attempts
  *
  * @param int $p_user_id User ID
- * @return bool 
+ * @return bool
  */
 function user_is_lost_password_request_allowed( $p_user_id ) {
 	if( OFF == config_get( 'lost_password_feature' ) ) {
@@ -1329,7 +1329,7 @@ function user_is_lost_password_request_allowed( $p_user_id ) {
  *
  * @param int $p_user_id User ID
  * @param int $p_project_id Project ID
- * @return array 
+ * @return array
  */
 function user_get_bug_filter( $p_user_id, $p_project_id = null ) {
 	if( null === $p_project_id ) {
@@ -1421,7 +1421,7 @@ function user_reset_failed_login_count_to_zero( $p_user_id ) {
  * Increment the failed login count by 1
  *
  * @param int $p_user_id User ID
- * @return bool always true 
+ * @return bool always true
  */
 function user_increment_failed_login_count( $p_user_id ) {
 	$t_user_table = db_get_table( 'user' );
@@ -1440,7 +1440,7 @@ function user_increment_failed_login_count( $p_user_id ) {
  * Reset to zero the 'lost password' in progress attempts
  *
  * @param int $p_user_id User ID
- * @return bool always true 
+ * @return bool always true
  */
 function user_reset_lost_password_in_progress_count_to_zero( $p_user_id ) {
 	$t_user_table = db_get_table( 'user' );
@@ -1459,7 +1459,7 @@ function user_reset_lost_password_in_progress_count_to_zero( $p_user_id ) {
  * Increment the failed login count by 1
  *
  * @param int $p_user_id User ID
- * @return bool always true 
+ * @return bool always true
  */
 function user_increment_lost_password_in_progress_count( $p_user_id ) {
 	$t_user_table = db_get_table( 'user' );
@@ -1544,7 +1544,7 @@ function user_set_default_project( $p_user_id, $p_project_id ) {
  * @param int $p_user_id User ID
  * @param string $p_password Password
  * @param bool $p_allow_protected Allow password change to protected accounts [optional - default false]
- * @return bool always true 
+ * @return bool always true
  */
 function user_set_password( $p_user_id, $p_password, $p_allow_protected = false ) {
 	if( !$p_allow_protected ) {
