@@ -3874,7 +3874,12 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 ?>
 		<tr>
 			<td colspan="2">
-				<label><input type="checkbox" id="use_date_filters" name="<?php echo FILTER_PROPERTY_FILTER_BY_DATE ?>"<?php check_checked( $t_filter[FILTER_PROPERTY_FILTER_BY_DATE], 'on' ) ?> /><?php echo lang_get( 'use_date_filters' )?></label>
+				<label>
+					<input type="checkbox" id="use_date_filters" name="<?php
+						echo FILTER_PROPERTY_FILTER_BY_DATE ?>"<?php
+						check_checked( $t_filter[FILTER_PROPERTY_FILTER_BY_DATE], 'on' ) ?> />
+					<?php echo lang_get( 'use_date_filters' )?>
+				</label>
 			</td>
 		</tr>
 <?php
