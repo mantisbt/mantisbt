@@ -58,6 +58,7 @@ header( 'X-Content-Type-Options: nosniff' );
 $t_referer_page = basename( parse_url( $_SERVER['HTTP_REFERER'], PHP_URL_PATH ) );
 switch( $t_referer_page ) {
 	case 'login_page.php':
+	case 'signup_page.php':
 		# We don't need custom status colors on login page, and this is
 		# actually causing an error since we're not authenticated yet.
 		exit;
