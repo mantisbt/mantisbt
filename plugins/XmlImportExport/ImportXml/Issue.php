@@ -253,7 +253,19 @@ class ImportXml_Issue implements ImportXml_Interface {
 		// add bugnotes
 		if ( $this->new_id_ > 0 && is_array( $t_bugnotes ) && count( $t_bugnotes ) > 0 ) {
 			foreach ( $t_bugnotes as $t_bugnote) {
-				bugnote_add( $this->new_id_, $t_bugnote->note, $t_bugnote->time_tracking, $t_bugnote->private, $t_bugnote->note_type, $t_bugnote_>note_attr, $t_bugnote->reporter_id, false, $t_bugnote->date_submitted, $t_bugnote->last_modified, true );
+				bugnote_add(
+					$this->new_id_,
+					$t_bugnote->note,
+					$t_bugnote->time_tracking,
+					$t_bugnote->private,
+					$t_bugnote->note_type,
+					$t_bugnote->note_attr,
+					$t_bugnote->reporter_id,
+					false,
+					$t_bugnote->date_submitted,
+					$t_bugnote->last_modified,
+					true
+				);
 			}
 		}
 
