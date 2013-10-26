@@ -117,7 +117,7 @@ echo "Connecting to database... ";
 $t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
 
 if( false == $t_result ) {
-	echo "failed\n";
+	echo "Failed.\n";
 	exit( 1 );
 }
 
@@ -127,6 +127,7 @@ $g_db_connected = true; # fake out database access routines used by config_get
 $t_last_update = config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS );
 $lastid = count( $upgrade ) - 1;
 $i = $t_last_update + 1;
+$t_count_done = 0;
 
 while(( $i <= $lastid ) && !$g_failed ) {
 	echo 'Create Schema ( ' . $upgrade[$i][0] . ' on ' . $upgrade[$i][1][0] . ' )';
@@ -147,12 +148,17 @@ while(( $i <= $lastid ) && !$g_failed ) {
 	}
 
 	$i++;
+	$t_count_done++;
 }
 
+echo "$t_count_done schema upgrades executed.\n";
+
 if( false == $g_failed ) {
+	echo "Done.\n";
 	exit( 0 );
 }
 
+echo "Failed.\n";
 exit( 1 );
 
 # vim: noexpandtab tabstop=4 softtabstop=0:
