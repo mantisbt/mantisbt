@@ -46,8 +46,17 @@ html_page_top( plugin_lang_get( 'import' ) );
 
 print_manage_menu( 'manage_import_issues_page.php' );
 
-echo "<pre>\n";
-$importer->import( );
-echo "</pre>\n";
+?>
 
+<br />
+
+<pre>
+
+<?php
+$importer->import( );
+?>
+
+</pre>
+
+<?php
 html_page_bottom();
