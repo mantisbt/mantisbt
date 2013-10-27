@@ -221,7 +221,10 @@ function filter_get_url( $p_custom_filter ) {
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_FILTER_BY_DATE, $p_custom_filter[FILTER_PROPERTY_FILTER_BY_DATE] );
+		$t_query[] = filter_encode_field_and_value(
+			FILTER_PROPERTY_FILTER_BY_DATE,
+			$p_custom_filter[FILTER_PROPERTY_FILTER_BY_DATE] ? 'on' : 'off'
+		);
 
 		# The start and end dates are only applicable if filter by date is set.
 		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_DAY] ) ) {
@@ -3877,7 +3880,7 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 				<label>
 					<input type="checkbox" id="use_date_filters" name="<?php
 						echo FILTER_PROPERTY_FILTER_BY_DATE ?>"<?php
-						check_checked( $t_filter[FILTER_PROPERTY_FILTER_BY_DATE], 'on' ) ?> />
+						check_checked( gpc_string_to_bool( $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ), true ) ?> />
 					<?php echo lang_get( 'use_date_filters' )?>
 				</label>
 			</td>
