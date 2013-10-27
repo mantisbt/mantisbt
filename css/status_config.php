@@ -60,6 +60,7 @@ switch( $t_referer_page ) {
 	case 'login_page.php':
 	case 'signup_page.php':
 	case 'lost_pwd_page.php':
+	case 'account_update.php':
 		# We don't need custom status colors on login page, and this is
 		# actually causing an error since we're not authenticated yet.
 		exit;
