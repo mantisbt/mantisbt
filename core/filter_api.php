@@ -177,7 +177,10 @@ function filter_get_url( $p_custom_filter ) {
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_STICKY] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_STICKY, $p_custom_filter[FILTER_PROPERTY_STICKY] );
+		$t_query[] = filter_encode_field_and_value(
+			FILTER_PROPERTY_STICKY,
+			$p_custom_filter[FILTER_PROPERTY_STICKY] ? 'on' : 'off'
+		);
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_VERSION] ) ) {
@@ -2882,9 +2885,11 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<td class="small-caption" id="sticky_issues_filter_target">
 				<?php
 					$t_sticky_filter_state = gpc_string_to_bool( $t_filter[FILTER_PROPERTY_STICKY] );
-		print( $t_sticky_filter_state ? lang_get( 'yes' ) : lang_get( 'no' ) );
-		?>
-				<input type="hidden" name="sticky_issues" value="<?php echo $t_sticky_filter_state ? 'on' : 'off';?>" />
+					print( $t_sticky_filter_state ? lang_get( 'yes' ) : lang_get( 'no' ) );
+				?>
+				<input type="hidden" name="<?php
+					echo FILTER_PROPERTY_STICKY; ?>" value="<?php
+					echo $t_sticky_filter_state ? 'on' : 'off'; ?>" />
 			</td>
 			<td class="small-caption" colspan="2" id="highlight_changed_filter_target">
 				<?php
