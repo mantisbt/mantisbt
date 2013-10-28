@@ -437,7 +437,6 @@ class FilterTest extends SoapBase {
 	
 	private function doTestGetPages( $methodName ) {
 
-		$issueCount;
 		$currentIssues = count($this->getProjectIssues());
 		if ( $currentIssues >= 3) {
 			$issueCount = $currentIssues;
