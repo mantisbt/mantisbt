@@ -244,7 +244,7 @@ function getClassProperties($p_classname, $p_type='public', $p_return_object = f
 			$t_props_arr[$t_name] = true;
 	}
 	if ( $p_include_parent ) {
-		if($t_parentclass = $ref->getParentClass()){
+		if($t_parentclass = $t_ref->getParentClass()){
 			$t_parent_props_arr = getClassProperties($t_parentclass->getName());//RECURSION
 			if(count($t_parent_props_arr) > 0)
 				$t_props_arr = array_merge($t_parent_props_arr, $t_props_arr);
