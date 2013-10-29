@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 # -----------------------------------------------------------------------------
 # MantisBT Travis-CI before script
 # -----------------------------------------------------------------------------
@@ -34,7 +34,7 @@ case $DB in
 		DB_CMD='mysql -e'
 		DB_CMD_SCHEMA="$MANTIS_DB_NAME"
 
-		$DB_CMD "$SQL_CREATE_DB" || exit 1
+		$DB_CMD "$SQL_CREATE_DB"
 		;;
 
 	pgsql)
@@ -43,8 +43,8 @@ case $DB in
 		DB_CMD="psql -U $DB_USER -c"
 		DB_CMD_SCHEMA="-d $MANTIS_DB_NAME"
 
-		$DB_CMD "$SQL_CREATE_DB" || exit 1
-		$DB_CMD "ALTER USER $DB_USER SET bytea_output = 'escape';" || exit 1
+		$DB_CMD "$SQL_CREATE_DB"
+		$DB_CMD "ALTER USER $DB_USER SET bytea_output = 'escape';"
 		;;
 esac
 
@@ -113,14 +113,14 @@ do
 done
 
 # trigger installation
-curl --data "${query_string:1}" http://$HOSTNAME/admin/install.php || exit 1
+curl --data "${query_string:1}" http://$HOSTNAME/admin/install.php
 
 
 # -----------------------------------------------------------------------------
 step "Post-installation steps"
 
 echo "Creating project"
-$DB_CMD "$SQL_CREATE_PROJECT" $DB_CMD_SCHEMA || exit 1
+$DB_CMD "$SQL_CREATE_PROJECT" $DB_CMD_SCHEMA
 
 
 # enable SOAP tests
