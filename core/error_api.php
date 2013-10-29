@@ -425,7 +425,7 @@ function error_string( $p_error ) {
 	$t_padding = array_pad( array(), 10, '' );
 
 	# ripped from string_api
-	$t_string = call_user_func_array( 'sprintf', array_merge( array( $t_error ), $g_error_parameters, $t_padding ) );
+	$t_string = vsprintf ( $t_error, array_merge( $g_error_parameters, $t_padding ) );
 	return preg_replace( "/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", @htmlspecialchars( $t_string, ENT_COMPAT, 'UTF-8' ) );
 }
 
