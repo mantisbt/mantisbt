@@ -1559,7 +1559,7 @@ $s_month_december = 'December';
 /**
  * ERROR strings
  */
-$s_missing_error_string = 'Missing Error String: ';
+$s_missing_error_string = 'Missing Error String: %1$s';
 
 $MANTIS_ERROR[ERROR_GENERIC] = 'An error occurred during this action. You may wish to report this error to your local administrator.';
 $MANTIS_ERROR[ERROR_SQL] = 'SQL error detected.';

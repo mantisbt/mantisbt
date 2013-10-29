@@ -414,6 +414,8 @@ function error_string( $p_error ) {
 		} else {
 			# Error string not found
 			$t_error = lang_get( 'missing_error_string' );
+			# Prepend the error number
+			array_unshift( $g_error_parameters, $p_error );
 			break;
 		}
 	}
