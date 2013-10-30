@@ -768,8 +768,8 @@ function print_column_title_attachment_count( $p_sort, $p_dir, $p_columns_target
  */
 function print_column_title_category_id( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<th class="column-category">';
-	print_view_bug_sort_link( lang_get( 'category' ), 'category', $p_sort, $p_dir, $p_columns_target );
-	print_sort_icon( $p_dir, $p_sort, 'category' );
+	print_view_bug_sort_link( lang_get( 'category' ), 'category_id', $p_sort, $p_dir, $p_columns_target );
+	print_sort_icon( $p_dir, $p_sort, 'category_id' );
 	echo '</th>';
 }
 

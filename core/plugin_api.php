@@ -616,7 +616,7 @@ function plugin_install( $p_plugin ) {
 	plugin_push_current( $p_plugin->basename );
 
 	if( !$p_plugin->install() ) {
-		plugin_pop_current( $p_plugin->basename );
+		plugin_pop_current();
 		return null;
 	}
 

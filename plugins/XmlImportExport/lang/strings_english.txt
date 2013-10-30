@@ -50,7 +50,7 @@ $s_plugin_XmlImportExport_description = 'Adds XML based import and export capabi
 $s_plugin_XmlImportExport_import = 'Import issues';
 $s_plugin_XmlImportExport_export = 'XML Export';
 
-$s_plugin_XmlImportExport_importing_in_project = 'Importing issues in project:';
+$s_plugin_XmlImportExport_importing_in_project = 'Importing issues into project: \'%s\'';
 $s_plugin_XmlImportExport_import_options = 'Import options';
 
 $s_plugin_XmlImportExport_cross_references = 'Cross references';

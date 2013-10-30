@@ -43,17 +43,20 @@ if( ALL_PROJECTS == $t_project_id ) {
 
 ?>
 
-<div class="center">
+<div class="table-container">
 <form name="file_upload" method="post" enctype="multipart/form-data" action="<?php echo plugin_page( 'import_action' )?>">
 <?php echo form_security_field( 'plugin_xml_import_action' ) ?>
 
 <input type="hidden" name="project_id" value="<?php echo $t_project_id;?>" />
 
-<table class="width100">
+<table>
 <tr>
 	<td class="form-title" colspan="2">
 <?php
-	echo plugin_lang_get( 'importing_in_project' ) . ' ' . string_display( project_get_field( $t_project_id, 'name' ) );
+	printf(
+		plugin_lang_get( 'importing_in_project' ),
+		string_display( project_get_field( $t_project_id, 'name' ) )
+	);
 ?>
 	</td>
 </tr>

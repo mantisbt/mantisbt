@@ -265,7 +265,7 @@ function user_is_realname_unique( $p_username, $p_realname ) {
 		#  but allow it to match the current user
 		$t_target_user = user_get_id_by_name( $p_username );
 		$t_other_user = user_get_id_by_name( $p_realname );
-		if( ( 0 !== $t_other_user ) && ( $t_target_user !== $t_other_user ) ) {
+		if( ( false !== $t_other_user ) && ( $t_target_user !== $t_other_user ) ) {
 			return 0;
 		}
 
@@ -346,7 +346,7 @@ function user_ensure_name_valid( $p_username ) {
  * return whether user is monitoring bug for the user id and bug id
  * @param int $p_user_id User ID
  * @param int $p_bug_id Bug ID
- * @return bool 
+ * @return bool
  */
 function user_is_monitoring_bug( $p_user_id, $p_bug_id ) {
 	$c_user_id = db_prepare_int( $p_user_id );
@@ -477,7 +477,7 @@ function user_get_logged_in_user_ids( $p_session_duration_in_minutes ) {
 
 	# Execute query
 	$query = 'SELECT id FROM ' . $t_user_table . ' WHERE last_visit > ' . db_param();
-	$result = db_query_bound( $query, array( $c_last_timestamp_threshold ), 1 );
+	$result = db_query_bound( $query, array( $t_last_timestamp_threshold ), 1 );
 
 	# Get the list of connected users
 	$t_users_connected = array();
@@ -1279,7 +1279,6 @@ function user_get_reported_open_bug_count( $p_user_id, $p_project_id = ALL_PROJE
  * @param int $p_user_id User ID
  * @param int $p_profile_id Profile ID
  * @return array
- * @throws MantisBT\Exception\User\UserProfileNotFound
  */
 function user_get_profile_row( $p_user_id, $p_profile_id ) {
 	$t_user_profile_table = db_get_table( 'user_profile' );
@@ -1314,7 +1313,7 @@ function user_is_login_request_allowed( $p_user_id ) {
  * Get 'lost password' in progress attempts
  *
  * @param int $p_user_id User ID
- * @return bool 
+ * @return bool
  */
 function user_is_lost_password_request_allowed( $p_user_id ) {
 	if( OFF == config_get( 'lost_password_feature' ) ) {
@@ -1330,7 +1329,7 @@ function user_is_lost_password_request_allowed( $p_user_id ) {
  *
  * @param int $p_user_id User ID
  * @param int $p_project_id Project ID
- * @return array 
+ * @return array
  */
 function user_get_bug_filter( $p_user_id, $p_project_id = null ) {
 	if( null === $p_project_id ) {
@@ -1422,7 +1421,7 @@ function user_reset_failed_login_count_to_zero( $p_user_id ) {
  * Increment the failed login count by 1
  *
  * @param int $p_user_id User ID
- * @return bool always true 
+ * @return bool always true
  */
 function user_increment_failed_login_count( $p_user_id ) {
 	$t_user_table = db_get_table( 'user' );
@@ -1441,7 +1440,7 @@ function user_increment_failed_login_count( $p_user_id ) {
  * Reset to zero the 'lost password' in progress attempts
  *
  * @param int $p_user_id User ID
- * @return bool always true 
+ * @return bool always true
  */
 function user_reset_lost_password_in_progress_count_to_zero( $p_user_id ) {
 	$t_user_table = db_get_table( 'user' );
@@ -1460,7 +1459,7 @@ function user_reset_lost_password_in_progress_count_to_zero( $p_user_id ) {
  * Increment the failed login count by 1
  *
  * @param int $p_user_id User ID
- * @return bool always true 
+ * @return bool always true
  */
 function user_increment_lost_password_in_progress_count( $p_user_id ) {
 	$t_user_table = db_get_table( 'user' );
@@ -1521,7 +1520,6 @@ function user_set_fields( $p_user_id, $p_fields ) {
  * @param string $p_field_name Field Name
  * @param string $p_field_value Field Value
  * @return bool always true
- * @throws MantisBT\Exception\Database\FieldNotFound
  */
 function user_set_field( $p_user_id, $p_field_name, $p_field_value ) {
 
@@ -1546,7 +1544,7 @@ function user_set_default_project( $p_user_id, $p_project_id ) {
  * @param int $p_user_id User ID
  * @param string $p_password Password
  * @param bool $p_allow_protected Allow password change to protected accounts [optional - default false]
- * @return bool always true 
+ * @return bool always true
  */
 function user_set_password( $p_user_id, $p_password, $p_allow_protected = false ) {
 	if( !$p_allow_protected ) {

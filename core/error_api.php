@@ -402,11 +402,22 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 function error_string( $p_error ) {
 	global $g_error_parameters;
 
-	$t_err_msg = lang_get( 'MANTIS_ERROR' );
-	if( array_key_exists( $p_error, $t_err_msg) ) {
-		$t_error = $t_err_msg[$p_error];
-	} else {
-		return lang_get( 'missing_error_string' ) . $p_error;
+	$t_lang = null;
+	while( true ) {
+		$t_err_msg = lang_get( 'MANTIS_ERROR', $t_lang );
+		if( array_key_exists( $p_error, $t_err_msg) ) {
+			$t_error = $t_err_msg[$p_error];
+			break;
+		} elseif( is_null( $t_lang ) ) {
+			# Error string not found, fall back to English
+			$t_lang = 'english';
+		} else {
+			# Error string not found
+			$t_error = lang_get( 'missing_error_string' );
+			# Prepend the error number
+			array_unshift( $g_error_parameters, $p_error );
+			break;
+		}
 	}
 
 	# We pad the parameter array to make sure that we don't get errors if
@@ -414,7 +425,7 @@ function error_string( $p_error ) {
 	$t_padding = array_pad( array(), 10, '' );
 
 	# ripped from string_api
-	$t_string = call_user_func_array( 'sprintf', array_merge( array( $t_error ), $g_error_parameters, $t_padding ) );
+	$t_string = vsprintf ( $t_error, array_merge( $g_error_parameters, $t_padding ) );
 	return preg_replace( "/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", @htmlspecialchars( $t_string, ENT_COMPAT, 'UTF-8' ) );
 }
 

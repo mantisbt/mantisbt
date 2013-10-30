@@ -643,7 +643,6 @@ function create_bug_enum_summary( $p_enum_string, $p_enum ) {
  *
  * @param string $p_enum_string enumeration string
  * @param string $p_enum enum field
- * @throws MantisBT\Exception\Database\FieldNotFound
  * @return array
  */
 function enum_bug_group( $p_enum_string, $p_enum ) {

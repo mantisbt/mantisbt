@@ -92,7 +92,7 @@ $t_ldap = ( LDAP == config_get( 'login_method' ) );
 
 # In case we're using LDAP to get the email address... this will pull out
 #  that version instead of the one in the DB
-$u_email = user_get_email( $u_id, $u_username );
+$u_email = user_get_email( $u_id );
 
 # If the password is the default password, then prompt user to change it.
 $t_reset_password = $u_username == 'administrator' && auth_does_password_match( $u_id, 'root' );

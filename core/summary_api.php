@@ -95,7 +95,6 @@ function summary_helper_get_developer_label ( $p_user_id ) {
  * The enum field name is passed in through $p_enum
  *
  * @param string $p_enum enum field name
- * @throws MantisBT\Exception\Database\FieldNotFound
  */
 function summary_print_by_enum( $p_enum ) {
 	$t_project_id = helper_get_current_project();

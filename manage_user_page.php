@@ -214,7 +214,7 @@ if ( 0 == $c_hide_inactive ) {
 	$t_total_user_count = $t_row['user_count'];
 } else {
 	$query = "SELECT count(*) as user_count FROM $t_user_table
-			WHERE $t_where AND " . db_helper_compare_days("" . db_now() . "","last_visit","< $days_old")
+			WHERE $t_where AND " . db_helper_compare_days("" . db_now() . "","last_visit","< $t_days_old")
 			. $t_show_disabled_cond;
 	$t_result = db_query_bound($query, $t_where_params);
 	$t_row = db_fetch_array( $t_result );
@@ -243,7 +243,7 @@ if ( 0 == $c_hide_inactive ) {
 } else {
 
 	$t_query = "SELECT * FROM $t_user_table
-			WHERE $t_where AND " . db_helper_compare_days( "" . db_now() . "", "last_visit", "< $days_old" ) . "
+			WHERE $t_where AND " . db_helper_compare_days( "" . db_now() . "", "last_visit", "< $t_days_old" ) . "
 			$t_show_disabled_cond
 			ORDER BY $c_sort $c_dir";
 	$t_result = db_query_bound($t_query, $t_where_params, $p_per_page, $t_offset );
@@ -257,9 +257,9 @@ while ( $t_row = db_fetch_array( $t_result ) ) {
 $t_user_count = count( $t_users );
 ?>
 <div id="manage-user-div" class="form-container">
-	<h2><?php echo lang_get( 'manage_accounts_title' ) ?></h2> [<?php echo $total_user_count ?>]
+	<h2><?php echo lang_get( 'manage_accounts_title' ) ?></h2> [<?php echo $t_total_user_count ?>]
 	<?php print_button( 'manage_user_create_page.php', lang_get( 'create_new_account_link' ) ) ?>
-	<?php if ( $f_filter === 'UNUSED' ) echo print_button( 'manage_user_prune.php', lang_get( 'prune_accounts' ) ); ?>
+	<?php if ( $f_filter === 'UNUSED' ) print_button( 'manage_user_prune.php', lang_get( 'prune_accounts' ) ); ?>
 	<form id="manage-user-filter" method="post" action="manage_user_page.php">
 		<fieldset>
 			<?php # CSRF protection not required here - form does not result in modifications ?>

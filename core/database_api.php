@@ -1095,10 +1095,10 @@ function db_oracle_order_binds_sequentially( $p_query ) {
 }
 
 /**
- * Adopt input query string and bindvars array to Oracle DB syntax:
- * 1. Change bind vars id's to sequence beginnging with 0(calls order_binds_sequentally() )
+ * Adapt input query string and bindvars array to Oracle DB syntax:
+ * 1. Change bind vars id's to sequence beginning with 0
  *    (calls db_oracle_order_binds_sequentially() )
- * 2. Remove "AS" keyword, because it not supported with table aliasing
+ * 2. Remove "AS" keyword, because it is not supported with table aliasing
  * 3. Remove null bind variables in insert statements for default values support
  * 4. Replace "tab.column=:bind" to "tab.column IS NULL" when :bind is empty string
  * 5. Replace "SET tab.column=:bind" to "SET tab.column=DEFAULT" when :bind is empty string
@@ -1106,7 +1106,7 @@ function db_oracle_order_binds_sequentially( $p_query ) {
  * @param array $arr_parms Array of parameters matching $p_query, function sorts array keys
  * @return string Query string with sorted bind variable numbers.
  */
-function db_oracle_adapt_query_syntax_ora( $p_query , &$arr_parms = null )  {
+function db_oracle_adapt_query_syntax( $p_query , &$arr_parms = null )  {
 	# Remove "AS" keyword, because not supported with table aliasing
 	$t_is_odd = true;
 	$t_query = '';
@@ -1178,7 +1178,7 @@ function db_oracle_adapt_query_syntax_ora( $p_query , &$arr_parms = null )  {
 			$t_removed_set_where = '';
 
 			# Need to order parameter array element correctly
-			$p_query = db_oracle_order_binds_sequentally( $p_query );
+			$p_query = db_oracle_order_binds_sequentially( $p_query );
 
 			# Find and remove temporarily "SET var1=:bind1, var2=:bind2 WHERE" part
 			preg_match( '/^(?P<before_set_where>.*)(?P<set_where>[\s\n\r]*set[\s\n\r]+[\s\n\ra-z0-9_\.=,:\']+)(?P<after_set_where>where[\d\D]*)$/i' , $p_query, $t_matches );
@@ -1226,7 +1226,7 @@ function db_oracle_adapt_query_syntax_ora( $p_query , &$arr_parms = null )  {
 				# Put temporarily removed "SET ... WHERE" part back
 				$p_query = str_replace( $t_set_where_template_str , $t_removed_set_where , $p_query );
 				# Need to order parameter array element correctly
-				$p_query = order_binds_sequentially( $p_query );
+				$p_query = db_oracle_order_binds_sequentially( $p_query );
 				# Find and remove temporary "SET var1=:bind1, var2=:bind2 WHERE" part again
 				preg_match( '/^(?P<before_set_where>.*)(?P<set_where>[\s\n\r]*set[\s\n\r]+[\s\n\ra-z0-9_\.=,:\']+)(?P<after_set_where>where[\d\D]*)$/i' , $p_query , $t_matches );
 				$t_removed_set_where = $t_matches['set_where'];

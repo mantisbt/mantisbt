@@ -173,7 +173,7 @@ if( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_
 <?php
 /**
  * Output Bug Rows
- * 
+ *
  * @param array array of bug objects
  */
 function write_bug_rows ( $p_rows )

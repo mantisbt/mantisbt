@@ -171,6 +171,7 @@ class ImportXML {
 		printf( "Processing cross-references for %s issues...", count( $importedIssues ) );
 		foreach( $importedIssues as $oldId => $newId ) {
 			$bugData = bug_get( $newId, true );
+			$content_replaced = false;
 
 			$bugLinkRegexp = '/(^|[^\w])(' . preg_quote( $this->source_->issuelink, '/' ) . ')(\d+)\b/e';
 			// replace links in description

@@ -60,4 +60,3 @@ bug_set_field( $f_bug_id, 'sticky', 'stick' == $f_action );
 form_security_purge( 'bug_stick' );
 
 print_successful_redirect_to_bug( $f_bug_id );
-?>

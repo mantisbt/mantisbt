@@ -222,6 +222,7 @@ function current_user_get_bug_filter( $p_project_id = null ) {
 		} else {
 			$t_filter = unserialize( $f_filter_string );
 		}
+		$t_filter = filter_ensure_valid_filter( $t_filter );
 	} else if( !filter_is_cookie_valid() ) {
 		return false;
 	} else {
@@ -229,6 +230,5 @@ function current_user_get_bug_filter( $p_project_id = null ) {
 		$t_filter = user_get_bug_filter( $t_user_id, $p_project_id );
 	}
 
-	$t_filter = filter_ensure_valid_filter( $t_filter );
 	return $t_filter;
 }

@@ -177,7 +177,10 @@ function filter_get_url( $p_custom_filter ) {
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_STICKY] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_STICKY, $p_custom_filter[FILTER_PROPERTY_STICKY] );
+		$t_query[] = filter_encode_field_and_value(
+			FILTER_PROPERTY_STICKY,
+			$p_custom_filter[FILTER_PROPERTY_STICKY] ? 'on' : 'off'
+		);
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_VERSION] ) ) {
@@ -221,7 +224,10 @@ function filter_get_url( $p_custom_filter ) {
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) ) {
-		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_FILTER_BY_DATE, $p_custom_filter[FILTER_PROPERTY_FILTER_BY_DATE] );
+		$t_query[] = filter_encode_field_and_value(
+			FILTER_PROPERTY_FILTER_BY_DATE,
+			$p_custom_filter[FILTER_PROPERTY_FILTER_BY_DATE] ? 'on' : 'off'
+		);
 
 		# The start and end dates are only applicable if filter by date is set.
 		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_DAY] ) ) {
@@ -2879,9 +2885,11 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<td class="small-caption" id="sticky_issues_filter_target">
 				<?php
 					$t_sticky_filter_state = gpc_string_to_bool( $t_filter[FILTER_PROPERTY_STICKY] );
-		print( $t_sticky_filter_state ? lang_get( 'yes' ) : lang_get( 'no' ) );
-		?>
-				<input type="hidden" name="sticky_issues" value="<?php echo $t_sticky_filter_state ? 'on' : 'off';?>" />
+					print( $t_sticky_filter_state ? lang_get( 'yes' ) : lang_get( 'no' ) );
+				?>
+				<input type="hidden" name="<?php
+					echo FILTER_PROPERTY_STICKY; ?>" value="<?php
+					echo $t_sticky_filter_state ? 'on' : 'off'; ?>" />
 			</td>
 			<td class="small-caption" colspan="2" id="highlight_changed_filter_target">
 				<?php
@@ -3874,7 +3882,12 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 ?>
 		<tr>
 			<td colspan="2">
-				<label><input type="checkbox" id="use_date_filters" name="<?php echo FILTER_PROPERTY_FILTER_BY_DATE ?>"<?php check_checked( $t_filter[FILTER_PROPERTY_FILTER_BY_DATE], 'on' ) ?> /><?php echo lang_get( 'use_date_filters' )?></label>
+				<label>
+					<input type="checkbox" id="use_date_filters" name="<?php
+						echo FILTER_PROPERTY_FILTER_BY_DATE ?>"<?php
+						check_checked( gpc_string_to_bool( $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ), true ) ?> />
+					<?php echo lang_get( 'use_date_filters' )?>
+				</label>
 			</td>
 		</tr>
 <?php
@@ -4082,8 +4095,8 @@ function print_filter_custom_field( $p_field_id ) {
 
 		# Note: Prior to PHP 4.2.0, array_search() returns NULL on failure instead of FALSE.
 		?>
-			<span style="color:red;weight:bold;">
-				unknown custom filter (custom <?php $p_field_id;?>)
+			<span style="color:red;font-weight:bold;">
+				unknown custom filter (custom <?php echo $p_field_id;?>)
 			</span>
 			<?php
 	} else if( isset( $t_accessible_custom_fields_names[$j] ) ) {
@@ -4527,7 +4540,7 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
 }
 
 /**
- * This function returns the filter string that is tied to the unique id parameter. If the user 
+ * This function returns the filter string that is tied to the unique id parameter. If the user
  * doesn't have permission to see this filter, the function returns null
  * @param int $p_filter_id
  * @param int $p_user_id

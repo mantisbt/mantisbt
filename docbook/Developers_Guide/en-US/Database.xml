@@ -6,6 +6,27 @@
 <chapter id="dev.database">
 	<title>Database Schema Management</title>
 
+	<section id="dev.database.erd">
+		<title>The MantisBT schema</title>
+
+		<para>The MantisBT database schema (excluding plugins) is described in
+			the Entity-Relationship diagram (ERD) below. There is also a
+			<ulink url="http://mantisbt.org/docs/erd/">
+				PDF version available for download</ulink>.
+		</para>
+
+		<figure id="erd">
+			<title>MantisBT Entity-Relationship Diagram</title>
+			<ulink url="images/erd.png">
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/erd.png" scalefit="1" width="100%" />
+					</imageobject>
+				</inlinemediaobject>
+			</ulink>
+		</figure>
+	</section>
+
 	<section id="dev.database.schema">
 		<title>Schema Definition</title>
 

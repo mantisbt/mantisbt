@@ -753,7 +753,7 @@ function custom_field_get_ids() {
 function custom_field_get_project_ids( $p_field_id ) {
 	$t_custom_field_project_table = db_get_table( 'custom_field_project' );
 	$query = "SELECT project_id FROM $t_custom_field_project_table WHERE field_id = " . db_param();
-	$result = db_query_bound( $query, array( $p_field_id ) );
+	$t_result = db_query_bound( $query, array( $p_field_id ) );
 
 	$t_ids = array();
 

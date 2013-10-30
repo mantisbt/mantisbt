@@ -1020,7 +1020,7 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 	$result = db_query_bound( $query, array( $p_file_id ) );
 	$row = db_fetch_array( $result );
 
-	if ( $f_type == 'bug' ) {
+	if( $p_type == 'bug' ) {
 		$t_project_id = bug_get_field( $row['bug_id'], 'project_id' );
 	} else {
 		$t_project_id = $row['bug_id'];

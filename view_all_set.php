@@ -238,6 +238,7 @@ $f_match_type = gpc_get_int( FILTER_PROPERTY_MATCH_TYPE, FILTER_MATCH_ALL );
 $f_per_page				= gpc_get_int( FILTER_PROPERTY_ISSUES_PER_PAGE, -1 );
 $f_highlight_changed	= gpc_get_int( FILTER_PROPERTY_HIGHLIGHT_CHANGED, config_get( 'default_show_changed' ) );
 $f_sticky_issues		= gpc_get_bool( FILTER_PROPERTY_STICKY );
+
 # sort direction
 $f_sort_d				= gpc_get_string( FILTER_PROPERTY_SORT_FIELD_NAME, '' );
 $f_dir_d				= gpc_get_string( FILTER_PROPERTY_SORT_DIRECTION, '' );
@@ -247,6 +248,7 @@ $f_sort_1				= gpc_get_string( FILTER_PROPERTY_SORT_FIELD_NAME . '_1', '' );
 $f_dir_1				= gpc_get_string( FILTER_PROPERTY_SORT_DIRECTION . '_1', '' );
 
 # date values
+$f_do_filter_by_date	= gpc_get_bool( FILTER_PROPERTY_FILTER_BY_DATE );
 $f_start_month			= gpc_get_int( FILTER_PROPERTY_START_MONTH, date( 'm' ) );
 $f_end_month			= gpc_get_int( FILTER_PROPERTY_END_MONTH, date( 'm' ) );
 $f_start_day			= gpc_get_int( FILTER_PROPERTY_START_DAY, 1 );
@@ -254,7 +256,6 @@ $f_end_day				= gpc_get_int( FILTER_PROPERTY_END_DAY, date( 'd' ) );
 $f_start_year			= gpc_get_int( FILTER_PROPERTY_START_YEAR, date( 'Y' ) );
 $f_end_year				= gpc_get_int( FILTER_PROPERTY_END_YEAR, date( 'Y' ) );
 $f_search				= gpc_get_string( FILTER_PROPERTY_SEARCH, '' );
-$f_do_filter_by_date	= gpc_get_bool( FILTER_PROPERTY_FILTER_BY_DATE );
 $f_view_state			= gpc_get_int( FILTER_PROPERTY_VIEW_STATE, META_FILTER_ANY );
 
 $f_tag_string			= gpc_get_string( FILTER_PROPERTY_TAG_STRING, '' );
@@ -358,16 +359,6 @@ $f_relationship_bug = gpc_get_int( FILTER_PROPERTY_RELATIONSHIP_BUG, 0 );
 
 if ( $f_temp_filter ) {
 	$f_type = 1;
-}
-
-if ( $f_do_filter_by_date ) {
-	$f_do_filter_by_date = 'on';
-}
-
-if ( $f_sticky_issues ) {
-	$f_sticky_issues = 'on';
-} else {
-	$f_sticky_issues = 'off';
 }
 
 if ( $f_type < 0 ) {
@@ -499,7 +490,7 @@ switch ( $f_type ) {
 			$t_setting_arr[ FILTER_PROPERTY_TAG_STRING ] 			= $f_tag_string;
 			$t_setting_arr[ FILTER_PROPERTY_TAG_SELECT ] 			= $f_tag_select;
 			$t_setting_arr[ FILTER_PROPERTY_NOTE_USER_ID ] 			= $f_note_user_id;
-			$t_setting_arr[ FILTER_PROPERTY_MATCH_TYPE ] 			= $f_match_type;			
+			$t_setting_arr[ FILTER_PROPERTY_MATCH_TYPE ] 			= $f_match_type;
 			$t_setting_arr = array_merge( $t_setting_arr, $f_filter_input );
 			break;
 	# Set the sort order and direction
@@ -578,30 +569,27 @@ switch ( $f_type ) {
 
 $tc_setting_arr = filter_ensure_valid_filter( $t_setting_arr );
 
-/**
- *  Remove any statuses that should be excluded by the hide_status field
- */
+# Remove any statuses that should be excluded by the hide_status field
 if( $f_view_type == "advanced" ) {
-    if( $tc_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] > 0 ) {
-        $t_statuses = MantisEnum::getValues( config_get( 'status_enum_string' ) );
-        foreach( $t_statuses as $t_key=>$t_val ) {
-            if( $t_val < $tc_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] ) {
-                $t_keep_statuses[$t_key] = $t_val;
-            }
-        }
-        $tc_setting_arr[FILTER_PROPERTY_STATUS] = $t_keep_statuses;
-    }
+	if( $tc_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] > 0 ) {
+		$t_statuses = MantisEnum::getValues( config_get( 'status_enum_string' ) );
+		foreach( $t_statuses as $t_key=>$t_val ) {
+			if( $t_val < $tc_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] ) {
+				$t_keep_statuses[$t_key] = $t_val;
+			}
+		}
+		$tc_setting_arr[FILTER_PROPERTY_STATUS] = $t_keep_statuses;
+	}
 }
-/**
- *  If a status is selected in the status and the hide status field, remove it from
- *  hide status
- */
+
+# If a status is selected in the status and the hide_status field,
+# remove it from hide status
 if( $f_view_type == "simple" && $tc_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] > 0 ) {
-    foreach( $tc_setting_arr[FILTER_PROPERTY_STATUS] as $t_key => $t_val ) {
-        if( $tc_setting_arr[FILTER_PROPERTY_STATUS][$t_key] == $tc_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] ) {
-            unset( $tc_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] );
-        }
-    }
+	foreach( $tc_setting_arr[FILTER_PROPERTY_STATUS] as $t_key => $t_val ) {
+		if( $tc_setting_arr[FILTER_PROPERTY_STATUS][$t_key] == $tc_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] ) {
+			unset( $tc_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] );
+		}
+	}
 }
 
 $t_settings_serialized = serialize( $tc_setting_arr );
