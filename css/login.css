@@ -24,24 +24,36 @@ span#no-password-msg, #signup-info, #lost-password-msg {
 	display: block;
 	padding: 1em;
 }
-#login-links {
-	position: absolute;
-	top: .5em;
-	right: 0em;
+#login-links,
+#captcha-refresh {
 	list-style: none;
 	margin: 0em;
 	padding: 0em;
 }
-#login-links li {
+#login-links {
+	position: absolute;
+	top: .5em;
+	right: 0em;
+}
+#login-links li,
+#captcha-refresh li {
 	float: left;
 	padding: 0em .25em;
 }
-#login-links li:before {
+#login-links li:before,
+#captcha-refresh li:before {
 	content: '[';
 }
-#login-links li:after {
+#login-links li:after,
+#captcha-refresh li:after {
 	content: ']';
 }
-#login-links li a {
+#login-links li a,
+#captcha-refresh li a {
 	padding: 0em .35em;
+}
+
+#captcha-image {
+	cursor: pointer;
+	padding-right:3px;
 }
