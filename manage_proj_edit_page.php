@@ -279,7 +279,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 	} else {
 		# If there are no subprojects, clear floats to h2 overlap on div border
 ?>
-		<div class="br"></div>
+		<br />
 <?php } ?>
 
 </div>
