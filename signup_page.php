@@ -64,54 +64,69 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 		<fieldset>
 			<legend><span><?php echo lang_get( 'signup_title' ) ?></span></legend>
 			<?php echo form_security_field( 'signup' ); ?>
+
 			<ul id="login-links">
-			<li><a href="login_page.php"><?php echo lang_get( 'login_link' ); ?></a></li>
-			<?php
+				<li><a href="login_page.php"><?php echo lang_get( 'login_link' ); ?></a></li>
+<?php
 			# lost password feature disabled or reset password via email disabled
 			if ( ( LDAP != config_get_global( 'login_method' ) ) &&
 				( ON == config_get( 'lost_password_feature' ) ) &&
 				( ON == config_get( 'send_reset_password' ) ) &&
 				( ON == config_get( 'enable_email_notification' ) ) ) {
-				echo '<li><a href="lost_pwd_page.php">', lang_get( 'lost_password_link' ), '</a></li>';
+?>
+				<li><a href="lost_pwd_page.php"><?php echo lang_get( 'lost_password_link' ); ?></a></li>
+<?php
 			}
-			?>
+?>
 			</ul>
+
 			<div class="field-container">
 				<label for="username"><span><?php echo lang_get( 'username' ) ?></span></label>
 				<span class="input"><input id="username" type="text" name="username" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" class="autofocus" /></span>
 				<span class="label-style"></span>
 			</div>
+
 			<div class="field-container">
 				<label for="email-field"><span><?php echo lang_get( 'email_label' ) ?></span></label>
 				<span class="input"><?php print_email_input( 'email', '' ) ?></span>
 				<span class="label-style"></span>
 			</div>
 
-			<?php
-			$t_allow_passwd = helper_call_custom_function( 'auth_can_change_password', array() );
-			if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 && ( true == $t_allow_passwd ) ) {
-				# captcha image requires GD library and related option to ON
+<?php
+			$t_allow_passwd_change = helper_call_custom_function( 'auth_can_change_password', array() );
+			# captcha image requires GD library and related option to ON
+			if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 && $t_allow_passwd_change ) {
+?>
+			<div class="field-container">
+				<label for="captcha-field"><span><?php
+					echo lang_get( 'signup_captcha_request_label' );
+				?></span></label>
+				<span id="captcha-input" class="input">
+					<?php print_captcha_input( 'captcha' ); ?>
+					<span class="captcha-image">
+						<img src="library/securimage/securimage_show.php" alt="visual captcha" />
+					</span>
+					<object type="application/x-shockwave-flash" width="19" height="19"
+						data="
+						library/securimage/securimage_play.swf?audio_file=library/securimage/securimage_play.php&amp;bgColor1=#fff&amp;bgColor2=#fff&amp;iconColor=#777&amp;borderWidth=1&amp;borderColor=#000">
+						<param name="movie" value="
+						library/securimage/securimage_play.swf?audio_file=library/securimage/securimage_play.php&amp;bgColor1=#fff&amp;bgColor2=#fff&amp;iconColor=#777&amp;borderWidth=1&amp;borderColor=#000" />
+					</object>
+				</span>
 
-				echo '<div class="field-container">';
-				echo '<label for="captcha-field"><span>' . lang_get( 'signup_captcha_request_label' ) . '</span></label>';
-				echo '<span id="captcha-input" class="input">';
-				print_captcha_input( 'captcha' );
-				echo '<span class="captcha-image"><img src="library/securimage/securimage_show.php" alt="visual captcha" /></span>';
-				echo ' <object type="application/x-shockwave-flash" data="library/securimage/securimage_play.swf?audio_file=library/securimage/securimage_play.php&amp;bgColor1=#fff&amp;bgColor2=#fff&amp;iconColor=#777&amp;borderWidth=1&amp;borderColor=#000" width="19" height="19">
-				<param name="movie" value="library/securimage/securimage_play.swf?audio_file=library/securimage/securimage_play.php&amp;bgColor1=#fff&amp;bgColor2=#fff&amp;iconColor=#777&amp;borderWidth=1&amp;borderColor=#000" />
-				</object>';
-
-				echo '</span>';
-				echo '<span class="label-style"></span>';
-				echo '</div>';
+				<span class="label-style"></span>
+			</div>
+<?php
 			}
-			if( false == $t_allow_passwd ) {
+			if( !$t_allow_passwd_change ) {
 				echo '<span id="no-password-msg">';
 				echo lang_get( 'no_password_request' );
 				echo '</span>';
 			}
-			?>
+?>
+
 			<span id="signup-info"><?php echo lang_get( 'signup_info' ); ?></span>
+
 			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'signup_button' ) ?>" /></span>
 		</fieldset>
 	</form>
