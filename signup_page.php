@@ -96,6 +96,17 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 			$t_allow_passwd_change = helper_call_custom_function( 'auth_can_change_password', array() );
 			# captcha image requires GD library and related option to ON
 			if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 && $t_allow_passwd_change ) {
+				$t_securimage_path = 'library/securimage';
+				$t_securimage_show = "$t_securimage_path/securimage_show.php";
+				$t_securimage_play = "$t_securimage_path/securimage_play.swf?"
+					. http_build_query( array(
+						'audio_file' => "$t_securimage_path/securimage_play.php",
+						'bgColor1=' => '#fff',
+						'bgColor2=' => '#fff',
+						'iconColor=' => '#777',
+						'borderWidth=' => 1,
+						'borderColor=' => '#000',
+					) );
 ?>
 			<div class="field-container">
 				<label for="captcha-field"><span><?php
@@ -104,13 +115,11 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 				<span id="captcha-input" class="input">
 					<?php print_captcha_input( 'captcha' ); ?>
 					<span class="captcha-image">
-						<img src="library/securimage/securimage_show.php" alt="visual captcha" />
+						<img src="<? echo $t_securimage_show; ?>" alt="visual captcha" />
 					</span>
 					<object type="application/x-shockwave-flash" width="19" height="19"
-						data="
-						library/securimage/securimage_play.swf?audio_file=library/securimage/securimage_play.php&amp;bgColor1=#fff&amp;bgColor2=#fff&amp;iconColor=#777&amp;borderWidth=1&amp;borderColor=#000">
-						<param name="movie" value="
-						library/securimage/securimage_play.swf?audio_file=library/securimage/securimage_play.php&amp;bgColor1=#fff&amp;bgColor2=#fff&amp;iconColor=#777&amp;borderWidth=1&amp;borderColor=#000" />
+						data="<? echo $t_securimage_play; ?>">
+						<param name="movie" value="<? echo $t_securimage_play; ?>" />
 					</object>
 				</span>
 
