@@ -11,7 +11,7 @@ ezc             | ez Components   | 2009.2.1  | unpatched
 phpmailer       | PHPMailer       | 5.2.6     | unpatched [1]
 rssbuilder      | RSSBuilder      | 2.2.1     | patched [2]
 utf8            | phputf8         | 0.5       | unpatched
-Securimage      | Securimage      | 3.5.1     | unpatched
+securimage      | PHP Captcha     | 3.5.1     | unpatched [1]
 -------------------------------------------------------------------
 
 [1] Library is tracked as a GIT submodule; refer to the corresponding
@@ -27,4 +27,4 @@ ezc         -  http://ezcomponents.org/
 phpmailer   -  https://github.com/PHPMailer/PHPMailer
 rssbuilder  -  http://code.google.com/p/flaimo-php/
 utf8        -  http://sourceforge.net/projects/phputf8
-secureimage -  http://www.phpcaptcha.org/download/
+secureimage -  http://www.phpcaptcha.org/
