@@ -36,6 +36,7 @@ nbproject/
 
 # IIS7 
 web.config
+!library/securimage/web.config
 
 #libraries
 library/jpgraph
