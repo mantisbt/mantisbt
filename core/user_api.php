@@ -647,10 +647,11 @@ function user_delete( $p_user_id ) {
 	# Remove project specific access levels
 	user_delete_project_specific_access_levels( $p_user_id );
 
+	$t_user_table = db_get_table( 'user' );
+
 	# unset non-unique realname flags if necessary
 	if( config_get( 'differentiate_duplicates' ) ) {
 		$c_realname = user_get_field( $p_user_id, 'realname' );
-		$t_user_table = db_get_table( 'user' );
 		$t_query = "SELECT id FROM $t_user_table WHERE realname=" . db_param();
 		$t_result = db_query_bound( $t_query, array( $c_realname ) );
 

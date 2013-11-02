@@ -56,9 +56,21 @@ $f_file_path 	= gpc_get_string( 'file_path', '' );
 $f_enabled	 	= gpc_get_bool( 'enabled' );
 $f_inherit_global = gpc_get_bool( 'inherit_global', 0 );
 
-access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
+$t_manage_project_threshold = config_get( 'manage_project_threshold' );
+access_ensure_project_level( $t_manage_project_threshold, $f_project_id );
+
+# Save current access level to that project, so we can restore it if needed
+$t_user_id = auth_get_current_user_id();
+$t_access_level = user_get_access_level( $t_user_id, $f_project_id );
 
 project_update( $f_project_id, $f_name, $f_description, $f_status, $f_view_state, $f_file_path, $f_enabled, $f_inherit_global );
+
+# User just locked themselves out of the project by making it private,
+# so we add them to the project with their previous access level
+if( VS_PRIVATE == $f_view_state && !access_has_project_level( $t_manage_project_threshold, $f_project_id ) ) {
+	project_add_user( $f_project_id, $t_user_id, $t_access_level );
+}
+
 event_signal( 'EVENT_MANAGE_PROJECT_UPDATE', array( $f_project_id ) );
 
 form_security_purge( 'manage_proj_update' );
