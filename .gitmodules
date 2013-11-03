@@ -4,6 +4,3 @@
 [submodule "library/phpmailer"]
 	path = library/phpmailer
 	url = https://github.com/mantisbt/PHPMailer
-[submodule "library/securimage"]
-	path = library/securimage
-	url = https://github.com/mantisbt/securimage.git
