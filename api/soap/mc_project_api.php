@@ -129,6 +129,10 @@ function mc_projects_get_user_accessible( $p_username, $p_password ) {
 		return mci_soap_fault_login_failed();
 	}
 
+	if( !mci_has_readonly_access( $t_user_id ) ) {
+		return mci_soap_fault_access_denied( $t_user_id );
+	}
+
 	$t_lang = mci_get_user_lang( $t_user_id );
 
 	$t_result = array();
