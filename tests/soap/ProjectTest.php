@@ -119,8 +119,8 @@ class ProjectTest extends SoapBase {
 	private function newProjectAsArray($projectName) {
 		$projectDataStructure = array();
 		$projectDataStructure['name'] = $projectName;
-		$projectDataStructure['status'] = "development";
-		$projectDataStructure['view_state'] = 10;
+		$projectDataStructure['status'] = array( 'name' => 'development' );
+		$projectDataStructure['view_state'] = array( 'id' => VS_PUBLIC );
 
 		return $projectDataStructure;
 	}
