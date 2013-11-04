@@ -38,7 +38,7 @@ class ProjectTest extends SoapBase {
 	 * A test case that tests the following:
 	 * 1. Create a project.
 	 * 2. Rename the project.
-	 */        
+	 */
 	public function testAddRenameDeleteProject() {
 		$projectName = $this->getOriginalNameProject();
 		$projectNewName = $this->getNewNameProject();
@@ -59,7 +59,7 @@ class ProjectTest extends SoapBase {
 
 		$projectDataStructure['name'] = $projectNewName;
 
-		$return_bool = $this->client->mc_project_update( $this->userName, $this->password, $projectId, 
+		$return_bool = $this->client->mc_project_update( $this->userName, $this->password, $projectId,
 														$projectDataStructure);
 
 		$projectsArray = $this->client->mc_projects_get_user_accessible( $this->userName, $this->password);
@@ -73,10 +73,10 @@ class ProjectTest extends SoapBase {
 
 	/**
 	* A test case which does the following
-	* 
+	*
 	* 1. Create a project
 	* 2. Retrieve the project id by name
-	* 
+	*
 	*/
 	public function testGetIdFromName() {
 		$projectName = 'TestProjectForIdFromName';
@@ -87,7 +87,7 @@ class ProjectTest extends SoapBase {
 
 		$this->projectIdToDelete[] = $projectId;
 
-		$projectIdFromName = $this->client->mc_project_get_id_from_name( $this->userName, $this->password, 
+		$projectIdFromName = $this->client->mc_project_get_id_from_name( $this->userName, $this->password,
 																		$projectName);
 
 		$this->assertEquals($projectIdFromName, $projectId);
