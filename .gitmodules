@@ -7,3 +7,6 @@
 [submodule "library/disposable"]
 	path = library/disposable
 	url = https://github.com/mantisbt/disposable_email_checker
+[submodule "library/securimage"]
+	path = library/securimage
+	url = https://github.com/mantisbt/securimage.git
