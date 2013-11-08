@@ -1915,24 +1915,26 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_cf_join_clause = "LEFT JOIN $t_custom_field_string_table $t_table_name ON $t_bug_table.id = $t_table_name.bug_id AND $t_table_name.field_id = $t_cfid";
 
 				if( $t_def['type'] == CUSTOM_FIELD_TYPE_DATE ) {
+					# Define the value field with type cast to integer
+					$t_value_field = "CAST(COALESCE(NULLIF(${t_table_name}.value, ''), '0') AS DECIMAL)";
 					switch( $t_filter['custom_fields'][$t_cfid][0] ) {
 						case CUSTOM_FIELD_DATE_ANY:
 							break;
 						case CUSTOM_FIELD_DATE_NONE:
 							array_push( $t_join_clauses, $t_cf_join_clause );
-							$t_custom_where_clause = '(( ' . $t_table_name . '.bug_id is null) OR ( ' . $t_table_name . '.value = 0)';
+							$t_custom_where_clause = "( ${t_table_name}.bug_id is null OR ${t_value_field} = 0 ";
 							break;
 						case CUSTOM_FIELD_DATE_BEFORE:
 							array_push( $t_join_clauses, $t_cf_join_clause );
-							$t_custom_where_clause = '(( ' . $t_table_name . '.value != 0 AND (' . $t_table_name . '.value+0) < ' . ( $t_filter['custom_fields'][$t_cfid][2] ) . ')';
+							$t_custom_where_clause = "( ${t_value_field} != 0 AND ${t_value_field} < " . $t_filter['custom_fields'][$t_cfid][2];
 							break;
 						case CUSTOM_FIELD_DATE_AFTER:
 							array_push( $t_join_clauses, $t_cf_join_clause );
-							$t_custom_where_clause = '( (' . $t_table_name . '.value+0) > ' . ( $t_filter['custom_fields'][$t_cfid][1] + 1 );
+							$t_custom_where_clause = "( ${t_value_field} > " . ( $t_filter['custom_fields'][$t_cfid][1] + 1 );
 							break;
 						default:
 							array_push( $t_join_clauses, $t_cf_join_clause );
-							$t_custom_where_clause = '( (' . $t_table_name . '.value+0) BETWEEN ' . $t_filter['custom_fields'][$t_cfid][1] . ' AND ' . $t_filter['custom_fields'][$t_cfid][2];
+							$t_custom_where_clause = "( ${t_value_field} BETWEEN " . $t_filter['custom_fields'][$t_cfid][1] . ' AND ' . $t_filter['custom_fields'][$t_cfid][2];
 							break;
 					}
 				} else {
