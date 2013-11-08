@@ -1901,10 +1901,11 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				# skip this custom field it shouldn't be filterable
 			}
 
+			$t_field = $t_filter['custom_fields'][$t_cfid];
 			$t_custom_where_clause = '';
 
 			# Ignore all custom filters that are not set, or that are set to '' or "any"
-			if( !filter_field_is_any( $t_filter['custom_fields'][$t_cfid] ) ) {
+			if( !filter_field_is_any( $t_field ) ) {
 				$t_def = custom_field_get_definition( $t_cfid );
 				$t_table_name = $t_custom_field_string_table . '_' . $t_cfid;
 
@@ -1917,7 +1918,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				if( $t_def['type'] == CUSTOM_FIELD_TYPE_DATE ) {
 					# Define the value field with type cast to integer
 					$t_value_field = "CAST(COALESCE(NULLIF(${t_table_name}.value, ''), '0') AS DECIMAL)";
-					switch( $t_filter['custom_fields'][$t_cfid][0] ) {
+					switch( $t_field[0] ) {
 						case CUSTOM_FIELD_DATE_ANY:
 							break;
 						case CUSTOM_FIELD_DATE_NONE:
@@ -1926,15 +1927,15 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 							break;
 						case CUSTOM_FIELD_DATE_BEFORE:
 							array_push( $t_join_clauses, $t_cf_join_clause );
-							$t_custom_where_clause = "( ${t_value_field} != 0 AND ${t_value_field} < " . $t_filter['custom_fields'][$t_cfid][2];
+							$t_custom_where_clause = "( ${t_value_field} != 0 AND ${t_value_field} < " . $t_field[2];
 							break;
 						case CUSTOM_FIELD_DATE_AFTER:
 							array_push( $t_join_clauses, $t_cf_join_clause );
-							$t_custom_where_clause = "( ${t_value_field} > " . ( $t_filter['custom_fields'][$t_cfid][1] + 1 );
+							$t_custom_where_clause = "( ${t_value_field} > " . ( $t_field[1] + 1 );
 							break;
 						default:
 							array_push( $t_join_clauses, $t_cf_join_clause );
-							$t_custom_where_clause = "( ${t_value_field} BETWEEN " . $t_filter['custom_fields'][$t_cfid][1] . ' AND ' . $t_filter['custom_fields'][$t_cfid][2];
+							$t_custom_where_clause = "( ${t_value_field} BETWEEN " . $t_field[1] . ' AND ' . $t_field[2];
 							break;
 					}
 				} else {
@@ -1942,7 +1943,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 					array_push( $t_join_clauses, $t_cf_join_clause );
 
 					$t_filter_array = array();
-					foreach( $t_filter['custom_fields'][$t_cfid] as $t_filter_member ) {
+					foreach( $t_field as $t_filter_member ) {
 						$t_filter_member = stripslashes( $t_filter_member );
 						if( filter_field_is_none( $t_filter_member ) ) {
 
