@@ -165,6 +165,23 @@ check_print_info_row(
 );
 
 if( db_is_mysql() ) {
+	$t_db_min_version = '5.0.8';
+} elseif( db_is_pgsql() ) {
+	# Minimum version below not due to a specific MantisBT requirement,
+	# but because it's the oldest supported PostgreSQL release.
+	$t_db_min_version = '8.4';
+} else {
+	$t_db_min_version = 0;
+}
+check_print_test_row(
+	'Minimum database version required for MantisBT',
+	version_compare( $t_db_version, $t_db_min_version, '>=' ),
+	array(
+		true => 'You are using version ' . htmlentities( $t_db_version ) . '.',
+		false => 'The database version you are using is ' . htmlentities( $t_db_version )
+			. ". The minimum requirement for MantisBT on your database platform is $t_db_min_version."
+	)
+);
 
 	check_print_test_row(
 		'Version of MySQL being used is within the <a href="http://www.mysql.com/about/legal/lifecycle/">MySQL extended lifecycle period</a>',
