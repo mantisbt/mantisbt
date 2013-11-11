@@ -59,7 +59,7 @@ if( isset( $ADODB_vers ) ) {
 	check_print_test_row(
 		'Checking use of the <a href="http://adodb.sourceforge.net/#extension">ADOdb extension</a>',
 		!extension_loaded( 'ADOdb' ),
-		"The 'ADOdb' extension is not supported and must be disabled"
+		"The ADOdb extension is not supported and must be disabled"
 	);
 }
 check_print_test_row(
