@@ -17,7 +17,7 @@
 /**
  * Mantis Configuration Checks
  *
- * This process runs a number of configuration checks against the mantis configuration to find 
+ * This process runs a number of configuration checks against the mantis configuration to find
  * common issues.
  *
  * @package MantisBT
