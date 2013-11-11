@@ -154,6 +154,11 @@ if( !db_is_connected() ) {
 }
 
 $t_database_server_info = $g_db->ServerInfo();
+$t_db_version = $t_database_server_info['version'];
+preg_match('/^[0-9]+\.[0-9+]/', $t_db_version, $t_matches );
+$t_db_major_version = $t_matches[0];
+
+# MantisBT minimum version
 check_print_info_row(
 	'Database server version',
 	htmlentities( $t_database_server_info['version'] )
