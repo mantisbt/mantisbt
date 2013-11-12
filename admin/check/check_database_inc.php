@@ -269,14 +269,60 @@ if( db_is_mysql() ) {
 	}
 }
 
-if( db_is_pgsql() ) {
+# PostgreSQL support checking
+elseif( db_is_pgsql() ) {
+
+	# Version support information
+	$t_versions = array(
+		# Version => EOL date
+		'9.3' => '2018-09-30',
+		'9.2' => '2017-09-30',
+		'9.1' => '2016-09-30',
+		'9.0' => '2015-09-30',
+		'8.4' => '2014-07-31',
+	);
+	$t_support_url = 'http://www.postgresql.org/support/versioning/';
+
+	# Determine EOL date
+	if( array_key_exists( $t_db_major_version, $t_versions ) ) {
+		$t_date_eol = $t_versions[$t_db_major_version];
+	} else {
+		$t_version = key( $t_versions );
+		if( version_compare( $t_db_major_version, $t_version , '>' ) ) {
+			# Major version is higher than the most recent in array - assume we're supported
+			$t_date_eol = new DateTime;
+			$t_date_eol = $t_date_eol->add( new DateInterval( 'P1Y' ) )->format( $t_date_format );
+			$t_assume = array( 'more recent', $t_version, 'supported' );
+		} else {
+			# Assume EOL
+			$t_date_eol = null;
+			end( $t_versions );
+			$t_assume = array( 'older', key( $t_versions ), 'at end of life' );
+		}
+
+		check_print_test_warn_row(
+			'PostgreSQL version support information availability',
+			false,
+			array(
+				false => "Release information for version $t_db_major_version is not available. "
+					. vsprintf(
+						'Since it is %s than %s, we assume it is %s. ',
+						$t_assume
+					)
+					. 'Please refer to the <a href="' . $t_support_url
+					. '">PostgreSQL release support policy</a> to make sure.'
+			)
+		);
+	}
 
 	check_print_test_row(
-		'Version of PostgreSQL being used still has <a href="http://wiki.postgresql.org/wiki/PostgreSQL_Release_Support_Policy">release support</a>',
-		version_compare( $t_database_server_info['version'], '7.4', '>=' ),
-		array( false => 'The version of PostgreSQL you are using is '. htmlentities( $t_database_server_info['version'] ). '. This version is no longer supported and should not be used as security flaws discovered in this version will not be fixed.' )
+		'Version of PostgreSQL is <a href="' . $t_support_url . '">supported</a>',
+		date_create( $t_date_eol ) > date_create( 'now' ),
+		array(
+			false => 'PostgreSQL version ' . htmlentities( $t_db_version )
+				. ' is no longer supported and should not be used, as security flaws discovered in this version will not be fixed.'
+		)
 	);
-
 }
 
 $t_table_prefix = config_get_global( 'db_table_prefix' );
