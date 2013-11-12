@@ -183,24 +183,90 @@ check_print_test_row(
 	)
 );
 
-	check_print_test_row(
-		'Version of MySQL being used is within the <a href="http://www.mysql.com/about/legal/lifecycle/">MySQL extended lifecycle period</a>',
-		version_compare( $t_database_server_info['version'], '5.0', '>=' ),
-		array(
-			true => 'Extended lifecycle support ends on 2011-12-31 for MySQL 5.0 and on 2013-12-31 for MySQL 5.1.',
-			false => 'The version of MySQL you are using is ' . htmlentities( $t_database_server_info['version'] ) . '. This version is no longer supported and should not be used as security flaws discovered in this version will not be fixed.'
-		)
-	);
+$t_date_format = config_get( 'short_date_format' );
 
-	check_print_test_warn_row(
-		'Version of MySQL being used is within the <a href="http://www.mysql.com/about/legal/lifecycle/">MySQL active lifecycle period</a>',
-		version_compare( $t_database_server_info['version'], '5.1', '>=' ),
-		array(
-			true => 'Active lifecycle support ends on 2010-12-31 for MySQL 5.1.',
-			false => 'The version of MySQL you are using is ' . htmlentities( $t_database_server_info['version'] ) . '. It is recommended you use a newer version of MySQL still within the active lifecycle period.'
-		)
+# MySQL support checking
+if( db_is_mysql() ) {
+	# Note: the MySQL lifecycle page [1] is no longer available.
+	# The list below was built based on information found in [2].
+	# [1] http://www.mysql.com/about/legal/lifecycle/
+	# [2] http://dev.mysql.com/doc/refman/5.7/en/faqs-general.html#qandaitem-B-1-1-1
+	$t_versions = array(
+		# Series >= Type, GA status, GA date
+		'5.0' => array( 'GA', '5.0.15', '2005-10-19' ),
+		'5.1' => array( 'GA', '5.1.30', '2008-11-14' ),
+		'5.4' => array( 'Discontinued' ),
+		'5.5' => array( 'GA', '5.5.8', '2010-12-03' ),
+		'5.6' => array( 'GA', '5.6.10', '2013-02-05' ),
+		'5.7' => array( 'Development' ),
+		'6.0' => array( 'Discontinued' ),
 	);
+	$t_support_url = 'http://www.mysql.com/support/';
 
+	# Is it a GA release
+	$t_mysql_ga_release = false;
+	$t_date_premier_end = $t_date_extended_end = null;
+	if( !array_key_exists( $t_db_major_version, $t_versions ) ) {
+		check_print_test_warn_row(
+			'MySQL Lifecycle and Release Support data availability',
+			false,
+			array(
+				false => 'Release information for MySQL ' . $t_db_major_version
+					. ' series is not available, unable to perform the lifecycle checks.'
+			)
+		);
+	} else {
+		if( 'GA' == $t_versions[$t_db_major_version][0] ) {
+			$t_mysql_ga_release = version_compare( $t_database_server_info['version'], $t_versions[$t_db_major_version][1], '>=' );
+			# Support end-dates as per http://www.mysql.com/support/
+			$t_date_ga = new DateTime( $t_versions[$t_db_major_version][2] );
+			$t_date_premier_end = $t_date_ga->add( new DateInterval( 'P5Y' ) )->format( $t_date_format );
+			$t_date_extended_end = $t_date_ga->add( new DateInterval( 'P3Y' ) )->format( $t_date_format );
+		} else {
+			$t_mysql_ga_release = false;
+			$t_date_premier_end = $t_date_extended_end = null;
+		}
+		check_print_test_row(
+			'MySQL version is a General Availability (GA) release',
+			$t_mysql_ga_release,
+			array(
+				true => 'You are using MySQL version ' . htmlentities( $t_db_version ) . '.',
+				false => 'The version of MySQL you are using is '
+					. htmlentities( $t_db_version )
+					. '. This is a development or pre-GA version which '
+					. ( $t_versions[$t_db_major_version][0] == 'Discontinued' ? 'has been discontinued and ' : '' )
+					. 'is not recommended for Production use. You should upgrade to a supported GA release.'
+			)
+		);
+
+		# Within lifecycle 'Extended' support
+		check_print_test_row(
+			'MySQL version is within the <a href="' . $t_support_url . '">Extended Support</a> period (GA + 8 years)',
+			date_create( $t_date_extended_end ) > date_create( 'now' ),
+			array(
+				true => "Extended support for MySQL $t_db_major_version series ends on " . $t_date_extended_end,
+				false => 'Support for the release of MySQL you are using ('
+					. htmlentities( $t_db_version )
+					. ') ended on ' . $t_date_extended_end
+					. '. It should not be used, as security flaws discovered in this version will not be fixed.'
+			)
+		);
+
+		# Within lifecycle 'Premier' support
+		check_print_test_warn_row(
+			'Version of MySQL being used is within the <a href="' . $t_support_url . '">Premier Support</a> period (GA + 5 years)',
+			date_create( $t_date_premier_end ) > date_create( 'now' ),
+			array(
+				true => "Premier support for MySQL $t_db_major_version series ends on " . $t_date_premier_end,
+				false => 'Premier Support for the release of MySQL you are using ('
+					. htmlentities( $t_db_version )
+					. ') ended on ' . $t_date_premier_end
+					. '. The release is in its Extended support period, which ends on '
+					. $t_date_extended_end
+					. '. You should upgrade to a newer version of MySQL which is still within its Premier support period to benefit from bug fixes and security patches.'
+			)
+		);
+	}
 }
 
 if( db_is_pgsql() ) {
