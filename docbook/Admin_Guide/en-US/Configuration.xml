@@ -1774,7 +1774,7 @@ $g_language_choices_arr = array( 'english', 'french', 'german' );
 
         <variablelist>
             <varlistentry>
-                <term>$g_html_tags</term>
+                <term>$g_html_valid_tags</term>
                 <listitem>
                     <para>This is the list of HTML tags that are allowed.Do NOT
                         include href or img tags here.Do NOT include tags that have
