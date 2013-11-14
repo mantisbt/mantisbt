@@ -471,6 +471,7 @@ define( 'TOKEN_GRAPH', 2 );
 define( 'TOKEN_LAST_VISITED', 3 );
 define( 'TOKEN_AUTHENTICATED', 4 );
 define( 'TOKEN_COLLAPSE', 5 );
+define( 'TOKEN_ACCOUNT_VERIFY', 6 );
 define( 'TOKEN_USER', 1000 );
 
 # token expirations

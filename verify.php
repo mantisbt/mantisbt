@@ -78,5 +78,6 @@ auth_attempt_script_login( user_get_field( $f_user_id, 'username' ) );
 
 user_increment_login_count( $f_user_id );
 
-include ( dirname( __FILE__ ) . '/account_page.php' );
 
+define( 'ACCOUNT_VERIFICATION_INC', true );
+include ( dirname( __FILE__ ) . '/account_page.php' );

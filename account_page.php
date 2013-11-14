@@ -73,10 +73,14 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
+$t_account_verification = defined( 'ACCOUNT_VERIFICATION_INC' );
+
 #============ Permissions ============
 auth_ensure_user_authenticated();
 
-auth_reauthenticate();
+if( !$t_account_verification  ) {
+	auth_reauthenticate();
+}
 
 current_user_ensure_unprotected();
 
@@ -153,12 +157,18 @@ if ( $t_verify || $t_reset_password ) {
 				<span class="display-label"><span><?php echo lang_get( 'username' ) ?></span></span>
 				<span class="input"><span class="field-value"><?php echo string_display_line( $u_username ) ?></span></span>
 				<span class="label-style"></span>
-			</div>
+			</div><?php
+			# When verifying account, set a token and don't display current password
+			if( $t_account_verification ) {
+				token_set( TOKEN_ACCOUNT_VERIFY, true, TOKEN_EXPIRY_AUTHENTICATED, $u_id );
+			} else {
+			?>
 			<div class="field-container">
 				<label for="password" <?php if ( $t_force_pw_reset ) { ?> class="required" <?php } ?>><span><?php echo lang_get( 'current_password' ) ?></span></label>
 				<span class="input"><input id="password-current" type="password" name="password_current" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
 				<span class="label-style"></span>
-			</div>
+			</div><?php
+			} ?>
 			<div class="field-container">
 				<label for="password" <?php if ( $t_force_pw_reset ) { ?> class="required" <?php } ?>><span><?php echo lang_get( 'password' ) ?></span></label>
 				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
@@ -227,7 +237,7 @@ if ( $t_verify || $t_reset_password ) {
 					$t_access_level = get_enum_element( 'access_levels', $t_access_level );
 					$t_view_state = get_enum_element( 'project_view_state', $t_view_state );
 
-					echo '<li><span class="project-name">' . $t_project_name . '</span> <span class="access-level">' . $t_access_level . '</span> <span class="view-state">' . $t_view_state . '</span></li>'; 
+					echo '<li><span class="project-name">' . $t_project_name . '</span> <span class="access-level">' . $t_access_level . '</span> <span class="view-state">' . $t_view_state . '</span></li>';
 				}
 				echo '</ul>';
 				echo '</div>';
