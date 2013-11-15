@@ -54,3 +54,50 @@ check_print_test_row(
 	config_get_global( 'bugnote_link_tag' ),
 	array( false => 'The value of the bugnote_link_tag option cannot be blank/null.' )
 );
+
+if( plugin_is_installed( 'MantisGraph' ) ) {
+	plugin_push_current( 'MantisGraph' );
+
+	check_print_test_row(
+		'Checking GD library is enabled, and version 2...',
+		get_gd_version() == 2
+	);
+
+	if ( plugin_config_get( 'eczlibrary', ON ) == OFF ) {
+		$t_jpgraph_path = plugin_config_get( 'jpgraph_path' );
+		if( $t_jpgraph_path == '' ) {
+			$t_jpgraph_path = config_get( 'absolute_path' ) . 'library/jpgraph';
+		}
+		$t_jpgraph_path .= '/jpgraph.php';
+
+		$t_jpgraph_found = check_print_test_row(
+			'Checking we can find jpgraph library class files',
+			file_exists( $t_jpgraph_path ),
+			//array( false => dirname( $t_jpgraph_path ) )
+			dirname( $t_jpgraph_path )
+		);
+
+		if( $t_jpgraph_found ) {
+			require_once( $t_jpgraph_path );
+
+			# Old versions of jpgraph did not define the constant
+			$t_jpgraph_version = defined( 'JPG_VERSION' ) ? JPG_VERSION : 'Unknown version';
+
+			check_print_test_row(
+				'Checking jpgraph library version is at least 2.3.0',
+				version_compare( $t_jpgraph_version, '2.3.0', '>=' ),
+				$t_jpgraph_version
+			);
+		}
+
+		$t_jpgraph_antialias = plugin_config_get( 'jpgraph_antialias', OFF );
+		if( $t_jpgraph_antialias ) {
+			check_print_test_row(
+				'jpgraph anti-aliasing requires the php-bundled GD library',
+				$t_jpgraph_antialias == OFF || function_exists('imageantialias'),
+				array( false => 'The functionality requires the imageantialias() function' )
+			);
+		}
+	}
+	plugin_pop_current();
+}
