@@ -60,15 +60,26 @@ set_time_limit( 60 * 5 );
 $g_show_all = gpc_get_bool( 'show_all', false );
 $g_show_errors = gpc_get_bool( 'show_errors', false );
 
-$t_url = basename( __FILE__ ) . '?' . http_build_query(
-	array(
-		'show_all' => (int)!$g_show_all,
-		'show_errors' => (int)!$g_show_errors,
-	)
-);
+function mode_url( $p_all, $p_errors ) {
+	return basename( __FILE__ ) . '?' . http_build_query(
+		array(
+			'show_all' => (int)$p_all,
+			'show_errors' => (int)$p_errors,
+		)
+	);
+}
+
 $t_link = '<a href="%s">%s %s</a>';
-$t_show_all_mode_link = sprintf( $t_link, $t_url, ($g_show_all ? 'Hide' : 'Show'), 'passed tests' );
-$t_show_errors_mode_link = sprintf( $t_link, $t_url, ($g_show_errors ? 'Hide' : 'Show'), 'verbose error messages' );
+$t_show_all_mode_link = sprintf( $t_link,
+	mode_url( !$g_show_all, $g_show_errors ),
+	($g_show_all ? 'Hide' : 'Show'),
+	'passed tests'
+);
+$t_show_errors_mode_link = sprintf( $t_link,
+	mode_url( $g_show_all, !$g_show_errors ),
+	($g_show_errors ? 'Hide' : 'Show'),
+	'verbose error messages'
+);
 
 http_content_headers();
 
