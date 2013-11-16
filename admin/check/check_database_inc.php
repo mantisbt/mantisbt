@@ -87,7 +87,8 @@ check_print_info_row(
 check_print_test_row(
 	'Database type is supported by the version of PHP installed on this server',
 	db_check_database_support( $t_database_type ),
-	array( false => 'The current database type is set to ' . htmlentities( $t_database_type ) . '. The version of PHP installed on this server does not have support for this database type.' )
+	array( false => 'The current database type is set to ' . htmlentities( $t_database_type )
+		. '. The version of PHP installed on this server does not have support for this database type.' )
 );
 
 if ( db_is_mssql() ) {
@@ -107,7 +108,9 @@ if ( db_is_mssql() ) {
 	check_print_test_warn_row(
 		'mssql.textsize php.ini directive is set to -1',
 		$t_mssql_textsize == -1,
-		array( false => 'The value of the mssql.textsize directive is currently ' . htmlentities( $t_mssql_textsize ) . '. You should set this value to -1 to prevent large text fields being truncated upon being read from the database.' )
+		array( false => 'The value of the mssql.textsize directive is currently '
+			. htmlentities( $t_mssql_textsize )
+			. '. You should set this value to -1 to prevent large text fields being truncated upon being read from the database.' )
 	);
 
 	$t_mssql_textlimit = ini_get_number( 'mssql.textlimit' );
@@ -119,7 +122,9 @@ if ( db_is_mssql() ) {
 	check_print_test_warn_row(
 		'mssql.textlimit php.ini directive is set to -1',
 		$t_mssql_textlimit == -1,
-		array( false => 'The value of the mssql.textlimit directive is currently ' . htmlentities( $t_mssql_textlimit ) . '. You should set this value to -1 to prevent large text fields being truncated upon being read from the database.' )
+		array( false => 'The value of the mssql.textlimit directive is currently '
+			. htmlentities( $t_mssql_textlimit )
+			. '. You should set this value to -1 to prevent large text fields being truncated upon being read from the database.' )
 	);
 }
 
@@ -145,7 +150,9 @@ check_print_info_row(
 
 db_connect( $t_database_dsn, $t_database_hostname, $t_database_username, $t_database_password, $t_database_name );
 check_print_test_row(
-	'Can open connection to database <em>' . htmlentities( $t_database_name ) . '</em> on host <em>' . htmlentities( $t_database_hostname ) . '</em> with username <em>' . htmlentities( $t_database_username ) . '</em>',
+	'Can open connection to database <em>' . htmlentities( $t_database_name )
+	. '</em> on host <em>' . htmlentities( $t_database_hostname )
+	. '</em> with username <em>' . htmlentities( $t_database_username ) . '</em>',
 	db_is_connected()
 );
 
@@ -349,7 +356,9 @@ if( db_is_mysql() ) {
 			check_print_test_row(
 				'Table <em>' . htmlentities( $t_row['Name'] ) . '</em> is using UTF-8 collation',
 				substr( $t_row['Collation'], 0, 5 ) === 'utf8_',
-				array( false => 'Table ' . htmlentities( $t_row['Name'] ) . ' is using ' . htmlentities( $t_row['Collation'] ) . ' collation where UTF-8 collation is required.' )
+				array( false => 'Table ' . htmlentities( $t_row['Name'] )
+					. ' is using ' . htmlentities( $t_row['Collation'] )
+					. ' collation where UTF-8 collation is required.' )
 			);
 		}
 	}
@@ -362,9 +371,16 @@ if( db_is_mysql() ) {
 					continue;
 				}
 				check_print_test_row(
-					'Text column <em>' . htmlentities( $t_row['Field'] ) . '</em> of type <em>' . $t_row['Type'] . '</em> on table <em>' . htmlentities( $t_table ) . '</em> is is using UTF-8 collation',
+					'Text column <em>' . htmlentities( $t_row['Field'] )
+					. '</em> of type <em>' . $t_row['Type']
+					. '</em> on table <em>' . htmlentities( $t_table )
+					. '</em> is is using UTF-8 collation',
 					substr( $t_row['Collation'], 0, 5 ) === 'utf8_',
-					array( false => 'Text column ' . htmlentities( $t_row['Field'] ) . ' of type ' . $t_row['Type'] . ' on table ' . htmlentities( $t_table ) . ' is using ' . htmlentities( $t_row['Collation'] ) . ' collation where UTF-8 collation is required.' )
+					array( false => 'Text column ' . htmlentities( $t_row['Field'] )
+						. ' of type ' . $t_row['Type']
+						. ' on table ' . htmlentities( $t_table )
+						. ' is using ' . htmlentities( $t_row['Collation'] )
+						. ' collation where UTF-8 collation is required.' )
 				);
 			}
 		}
