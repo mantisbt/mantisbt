@@ -1626,6 +1626,7 @@ $g_language_choices_arr = array( 'english', 'french', 'german' );
             <varlistentry>
                 <term>$g_file_upload_method</term>
                 <listitem>
+                    <!-- bug 16610 -->
                     <para>Values: DISK, DATABASE, FTP
                     </para>
                     <para>Specify the location for uploading attachments.
