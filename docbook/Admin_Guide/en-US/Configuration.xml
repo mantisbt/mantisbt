@@ -1626,14 +1626,18 @@ $g_language_choices_arr = array( 'english', 'french', 'german' );
             <varlistentry>
                 <term>$g_file_upload_method</term>
                 <listitem>
-                    <para>Specify the location for uploading attachments. This can be
-                        DISK, DATABASE, or FTP. In case of FTP, the files are saved on the
+                    <!-- bug 16610 -->
+                    <para>Values: DISK, DATABASE, FTP
+                    </para>
+                    <para>Specify the location for uploading attachments.
+                        In case of FTP, the files are saved on the
                         webserver (same as disk) as well as on the specified FTP server.
-                        Default value is DATABASE.
                         In case of DISK / FTP upload methods you need to provide the
                         webserver with write access rights to the configured upload path
                         (configured in the project) and temporary upload path (used by
                         PHP).
+                    </para>
+                    <para>Default: DATABASE
                     </para>
                 </listitem>
             </varlistentry>
