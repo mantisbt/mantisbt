@@ -26,6 +26,7 @@
  * @file
  *
  * @author 9pagod
+ * @author Baonguyen21022003
  * @author Duongnvm
  * @author Minh Nguyen
  * @author Tuankiet65
@@ -127,6 +128,7 @@ $s_bug_actiongroup_access = 'Bạn không có quyền thích hợp để thực 
 $s_bug_actiongroup_status = 'Vấn đề là không thể thay đổi trạng thái yêu cầu';
 $s_bug_actiongroup_category = 'Vấn đề là không thể thay đổi để các chuyên mục yêu cầu';
 $s_bug_actiongroup_handler = 'Người dùng được yêu câu không có quyền để xử lí vấn đề này';
+$s_bug_actiongroup_version = 'Các phiên bản được yêu cầu không tồn tại trong dự án này vấn đề';
 $s_close_bugs_conf_msg = 'Bạn có chắc bạn muốn đóng những Issue này?';
 $s_delete_bugs_conf_msg = 'Bạn có chắc bạn muốn xóa các Issue này?';
 $s_move_bugs_conf_msg = 'Di chuyển các Issue đến';
@@ -214,6 +216,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Đây là một tên trùng
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Ít nhất một dự án vẫn sử dụng trường này.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Giá trị không hợp lệ cho trường "%1$s".';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Định nghĩa lĩnh vực tùy chỉnh không hợp lệ.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Lĩnh vực tùy chỉnh không hợp lệ bất động sản ( %1$s ).';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Xác thực LDAP thất bại';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Kết nối máy chủ LDAP thất bại';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Cập nhật hồ sơ LDAP thất bại';
@@ -226,6 +229,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Tên chuyên mục đã tồn tại';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Không có hành động sao chép được chỉ ra';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Chuyên mục không tìm thấy';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Chuyên mục "%1$s" không có đối với dự án "%2$s".';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Thể loại này không thể được xóa bỏ, bởi vì nó được định nghĩa là "Mặc định thể loại cho chuyển".';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Tên phiên bản đã tồn tại';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Phiên bản "%1$s" không tìm thấy.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Tên người dùng không hợp lệ. Tên người dùng chỉ có thể chứa chữ cái Latin, số, dấu cách, dấu gạch ngang, dấu chấm, cộng với dấu hiệu và gạch dưới.';
@@ -482,6 +486,7 @@ $s_sent_you_this_reminder_about = 'gửi bạn nhắc nhở này về';
 $s_bug_reminder = 'Gửi một nhắc nhở';
 $s_reminder_sent_to = 'Nhắc nhở gửi đến';
 $s_reminder_sent_none = 'Không có lời nhắc nào có thể gửi';
+$s_reminder_list_truncated = 'danh sách người nhận cắt ngắn';
 $s_bug_send_button = 'Gửi';
 $s_reminder = 'Nhắc nhở';
 $s_reminder_explain = 'Đây là ghi chú sẽ được gửi đến các người nhận được liệt kê yêu cầu phản hồi về issue này';
@@ -927,6 +932,7 @@ $s_sort = 'Sắp xếp theo';
 $s_issue_id = 'ID issue';
 $s_recently_visited = 'Gần đây đã viếng thăm';
 $s_note_user_id = 'Chú ý:';
+$s_filter_match_type = 'Loại đối sánh';
 $s_filter_match_all = 'Tất cả Điều kiện';
 $s_filter_match_any = 'Bất kỳ Điều kiện';
 $s_none = 'không';
@@ -1063,6 +1069,7 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>Chú ý:</b> Một v�
 $s_create_child_bug_button = 'Nhân bản';
 $s_bug_cloned_to = 'Vấn đề đã được nhân bản';
 $s_bug_created_from = 'Vấn đề được phát sinh từ';
+$s_copy_from_parent = 'Sao chép dữ liệu kéo dài từ vấn đề phụ huynh';
 $s_copy_notes_from_parent = 'Sao chép ghi chú lỗi';
 $s_copy_attachments_from_parent = 'Sao chép tập tin đính kèm';
 $s_viewing_bug_relationship_graph_title = 'Biểu đồ quan hệ';
