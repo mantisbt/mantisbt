@@ -27,6 +27,7 @@
  *
  * @author Hydra
  * @author Kenzaburo Ito, kenito@300baud.org
+ * @author Liuxinyu970226
  * @author Yfdyh000
  */
 
@@ -42,7 +43,7 @@ $s_plugin_XmlImportExport_renumber = '重新编号';
 $s_plugin_XmlImportExport_renumber_desc = '尝试转换到新的编号引用';
 $s_plugin_XmlImportExport_link = '链接';
 $s_plugin_XmlImportExport_link_desc = '转换为原问题的一个链接';
-$s_plugin_XmlImportExport_disable = '禁止';
+$s_plugin_XmlImportExport_disable = '禁用';
 $s_plugin_XmlImportExport_disable_desc = '禁用链接';
 $s_plugin_XmlImportExport_fallback = '备选策略 (当不使用"重新编号"时):';
 $s_plugin_XmlImportExport_fallback_category = '备选分类:';
