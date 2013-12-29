@@ -3968,8 +3968,7 @@
 	 * - 'http://MyOwnMantisTouch.com/'
 	 * - ''
 	 */
-	$g_mantistouch_url = '';
-
+	$g_mantistouch_url = file_exists( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . "m" ) ? $g_path . 'm/' : '';
 
 	# Temporary variables should not remain defined in global scope
 	unset( $t_protocol, $t_host, $t_hosts, $t_port, $t_self, $t_path, $t_use_iis );
