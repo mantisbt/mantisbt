@@ -457,3 +457,15 @@ function install_do_nothing() {
 	# return 2 because that's what ADOdb/DataDict does when things happen properly
 	return 2;
 }
+
+/**
+ * create an SQLArray to insert data
+ *
+ * @param string $p_table table
+ * @param string $p_data data
+ * @return array
+ */
+function InsertData( $p_table, $p_data ) {
+	$query = "INSERT INTO " . $p_table . $p_data;
+	return array( $query );
+}
