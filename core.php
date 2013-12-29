@@ -121,7 +121,6 @@ function require_api( $p_api_name ) {
 # Remember (globally) which library files have already been loaded
 $g_libraries_included = array();
 
-
 /**
  * Define an API inclusion function to replace require_once
  *
@@ -180,6 +179,19 @@ require_api( 'mobile_api.php' );
 
 if ( strlen( $GLOBALS['g_mantistouch_url'] ) > 0 && mobile_is_mobile_browser() ) {
 	$t_url = sprintf( $GLOBALS['g_mantistouch_url'], $GLOBALS['g_path'] );
+
+	$t_issue_id = '';
+	if ( strstr( $_SERVER['SCRIPT_NAME'], 'view.php' ) !== false ) {
+		$t_issue_id = (int)$_GET['id'];
+	}
+
+	if ( !empty( $t_issue_id ) )  {
+		if ( strstr( $t_url, 'url=' ) !== false ) {
+			$t_url .= '&issue_id=' . $t_issue_id;
+		} else {
+			$t_url .= '?issue_id=' . $t_issue_id;
+		}
+	}
 
 	header( 'Content-Type: text/html' );
 

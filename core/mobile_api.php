@@ -29,6 +29,11 @@
  * @return boolean<p>True if Mobile Browser, False on PC Browser</p>
  */
 function mobile_is_mobile_browser() {
+	// If api call rather than browser then return false.
+	if ( strstr( $_SERVER['SCRIPT_NAME'], '/api/' ) !== false ) {
+		return false;
+	}
+
 	$_SERVER['ALL_HTTP'] = isset( $_SERVER['ALL_HTTP'] ) ? $_SERVER['ALL_HTTP'] : '';
 
 	$t_mobile_browser = false;
