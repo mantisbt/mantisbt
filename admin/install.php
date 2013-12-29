@@ -68,13 +68,6 @@ function print_test( $p_test_description, $p_result, $p_hard_fail = true, $p_mes
 	echo "</tr>\n";
 }
 
-# --------
-# create an SQLArray to insert data
-function InsertData( $p_table, $p_data ) {
-	$query = "INSERT INTO " . $p_table . $p_data;
-	return Array( $query );
-}
-
 # install_state
 #   0 = no checks done
 #   1 = server ok, get database information

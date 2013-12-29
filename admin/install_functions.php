@@ -256,3 +256,11 @@ function install_correct_multiselect_custom_fields_db_format() {
 	# Return 2 because that's what ADOdb/DataDict does when things happen properly
 	return 2;
 }
+
+# --------
+# create an SQLArray to insert data
+function InsertData( $p_table, $p_data ) {
+	$query = "INSERT INTO " . $p_table . $p_data;
+	return Array( $query );
+}
+
