@@ -28,6 +28,9 @@ $g_skip_open_db = true;  # don't open the database in database_api.php
  * MantisBT Core API's
  */
 require_once( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'core.php' );
+require_once( 'install_functions.php' );
+require_once( 'install_helper_functions.php' );
+
 $g_error_send_page_header = false; # suppress page headers in the error handler
 
 $g_failed = false;
@@ -83,10 +86,11 @@ if( false == $result ) {
 	exit( 1 );
 }
 
+# TODO: Enhance this check to support the mode where this script is called on an empty database.
 # check to see if the new installer was used
 if ( -1 == config_get( 'database_version', -1 ) ) {
-	echo "Upgrade from the current installed MantisBT version is no longer supported.  If you are using MantisBT version older than 1.0.0, then upgrade to v1.0.0 first.";
-	exit( 1 );
+        echo "Upgrade from the current installed MantisBT version is no longer supported.  If you are using MantisBT version older than 1.0.0, then upgrade to v1.0.0 first.";
+        exit( 1 );
 }
 
 # read control variables with defaults
@@ -126,17 +130,54 @@ $i = $t_last_update + 1;
 $t_count_done = 0;
 
 while(( $i <= $lastid ) && !$g_failed ) {
-	echo 'Create Schema ( ' . $upgrade[$i][0] . ' on ' . $upgrade[$i][1][0] . ' )';
 	$dict = NewDataDictionary( $g_db );
+	$t_sql = true;
+	$t_target = $upgrade[$i][1][0];
 
-	if( $upgrade[$i][0] == 'InsertData' ) {
+	if ( $upgrade[$i][0] == 'InsertData' ) {
 		$sqlarray = call_user_func_array( $upgrade[$i][0], $upgrade[$i][1] );
+	} else if ( $upgrade[$i][0] == 'UpdateSQL' ) {
+		$sqlarray = array(
+			$upgrade[$i][1],
+		);
+
+		$t_target = $upgrade[$i][1];
+	} else if ( $upgrade[$i][0] == 'UpdateFunction' ) {
+		$sqlarray = array(
+			$upgrade[$i][1],
+		);
+
+		if ( isset( $upgrade[$i][2] ) ) {
+			$sqlarray[] = $upgrade[$i][2];
+		}
+
+		$t_sql = false;
+		$t_target = $upgrade[$i][1];
 	} else {
-		$sqlarray = call_user_func_array( Array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
+		/* 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade. */
+		if ( isset( $upgrade[$i][2] ) ) {
+			if ( call_user_func_array( $upgrade[$i][2][0], $upgrade[$i][2][1] ) ) {
+				$sqlarray = call_user_func_array( Array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
+			} else {
+				$sqlarray = array();
+			}
+		} else {
+			$sqlarray = call_user_func_array( Array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
+		}
 	}
 
-	$ret = $dict->ExecuteSQLArray( $sqlarray );
-	if( $ret == 2 ) {
+	echo 'Schema ' . $upgrade[$i][0] . ' ( ' . $t_target . ' ) ';
+	if ( $t_sql ) {
+		$ret = $dict->ExecuteSQLArray( $sqlarray, false );
+	} else {
+		if ( isset( $sqlarray[1] ) ) {
+			$ret = call_user_func( 'install_' . $sqlarray[0], $sqlarray[1] );
+		} else {
+			$ret = call_user_func( 'install_' . $sqlarray[0] );
+		}
+	}
+
+	if ( $ret == 2 ) {
 		print_test_result( GOOD );
 		config_set( 'database_version', $i );
 	} else {
