@@ -233,7 +233,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 	if ( ON == email_notify_flag( $p_notify_type, 'explicit' ) ) {
 		foreach ( $p_extra_user_ids_to_email as $t_user_id ) {
 			$t_recipients[$t_user_id] = true;
-			log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, add explicitly specified user = @U%d', $p_bug_id, $t_user_id ) );
+			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, add explicitly specified user = @U%d', $p_bug_id, $t_user_id );
 		}
 	}
 
@@ -241,7 +241,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 	if( ON == email_notify_flag( $p_notify_type, 'reporter' ) ) {
 		$t_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );
 		$t_recipients[$t_reporter_id] = true;
-		log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, add Reporter = @U%d', $p_bug_id, $t_reporter_id ) );
+		log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, add Reporter = @U%d', $p_bug_id, $t_reporter_id );
 	}
 
 	# add Handler
@@ -250,7 +250,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 
 		if( $t_handler_id > 0 ) {
 			$t_recipients[$t_handler_id] = true;
-			log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, add Handler = @U%d', $p_bug_id, $t_handler_id ) );
+			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, add Handler = @U%d', $p_bug_id, $t_handler_id );
 		}
 	}
 
@@ -267,7 +267,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 		while( $t_row = db_fetch_array( $t_result ) ) {
 			$t_user_id = $t_row['user_id'];
 			$t_recipients[$t_user_id] = true;
-			log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, add Monitor = @U%d', $p_bug_id, $t_user_id ) );
+			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, add Monitor = @U%d', $p_bug_id, $t_user_id );
 		}
 	}
 
@@ -287,7 +287,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 		while( $t_row = db_fetch_array( $t_result ) ) {
 			$t_user_id = $t_row['reporter_id'];
 			$t_recipients[$t_user_id] = true;
-			log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, add Note Author = @U%d', $p_bug_id, $t_user_id ) );
+			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, add Note Author = @U%d', $p_bug_id, $t_user_id );
 		}
 	}
 
@@ -300,7 +300,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 		if( $t_user['access_level'] <= $t_threshold_max ) {
 			if( !$t_bug_is_private || access_compare_level( $t_user['access_level'], config_get( 'private_bug_threshold' ) ) ) {
 				$t_recipients[$t_user['id']] = true;
-				log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, add Project User = @U%d', $p_bug_id, $t_user['id'] ) );
+				log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, add Project User = @U%d', $p_bug_id, $t_user['id'] );
 			}
 		}
 	}
@@ -313,7 +313,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 			if ( is_array( $t_recipients_included ) ) {
 				foreach( $t_recipients_included as $t_user_id ) {
 					$t_recipients[ $t_user_id ] = true;
-					log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, %s plugin added user @U%d', $p_bug_id, $t_plugin, $t_user_id ) );
+					log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, %s plugin added user @U%d', $p_bug_id, $t_plugin, $t_user_id );
 				}
 			}
 		}
@@ -370,13 +370,13 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 	foreach( $t_recipients as $t_id => $t_ignore ) {
 		# Possibly eliminate the current user
 		if(( auth_get_current_user_id() == $t_id ) && ( OFF == config_get( 'email_receive_own' ) ) ) {
-			log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, drop @U%d (own)', $p_bug_id, $t_id ) );
+			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (own)', $p_bug_id, $t_id );
 			continue;
 		}
 
 		# Eliminate users who don't exist anymore or who are disabled
 		if( !user_exists( $t_id ) || !user_is_enabled( $t_id ) ) {
-			log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, drop @U%d (disabled)', $p_bug_id, $t_id ) );
+			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (disabled)', $p_bug_id, $t_id );
 			continue;
 		}
 
@@ -384,7 +384,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 		if( $t_pref_field ) {
 			$t_notify = user_pref_get_pref( $t_id, $t_pref_field );
 			if( OFF == $t_notify ) {
-				log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, drop @U%d (pref %s off)', $p_bug_id, $t_id, $t_pref_field ) );
+				log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (pref %s off)', $p_bug_id, $t_id, $t_pref_field );
 				continue;
 			} else {
 				# Users can define the severity of an issue before they are emailed for
@@ -394,7 +394,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 				$t_bug_severity = bug_get_field( $p_bug_id, 'severity' );
 
 				if( $t_bug_severity < $t_min_sev_notify ) {
-					log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, drop @U%d (pref threshold)', $p_bug_id, $t_id ) );
+					log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (pref threshold)', $p_bug_id, $t_id );
 					continue;
 				}
 			}
@@ -405,7 +405,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 		if( !access_has_bug_level( VIEWER, $p_bug_id, $t_id )
 		 || $t_bug_date == $t_bugnote_date && !access_has_bugnote_level( VIEWER, $t_bugnote_id, $t_id )
 		) {
-			log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, drop @U%d (access level)', $p_bug_id, $t_id ) );
+			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (access level)', $p_bug_id, $t_id );
 			continue;
 		}
 
@@ -417,7 +417,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 				# exclude if any plugin returns true (excludes the user)
 				if ( $t_recipient_excluded ) {
 					$t_exclude = true;
-					log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, %s plugin dropped user @U%d', $p_bug_id, $t_plugin, $t_id ) );
+					log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, %s plugin dropped user @U%d', $p_bug_id, $t_plugin, $t_id );
 				}
 			}
 		}
@@ -430,7 +430,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 		# Finally, let's get their emails, if they've set one
 		$t_email = user_get_email( $t_id );
 		if( is_blank( $t_email ) ) {
-			log_event( LOG_EMAIL_RECIPIENT, sprintf( 'Issue = #%d, drop @U%d (no email)', $p_bug_id, $t_id ) );
+			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (no email)', $p_bug_id, $t_id );
 		} else {
 			# @@@ we could check the emails for validity again but I think
 			#   it would be too slow
@@ -477,7 +477,7 @@ function email_signup( $p_user_id, $p_password, $p_confirm_hash, $p_admin_name =
 	# or else users won't be able to sign up
 	if( !is_blank( $t_email ) ) {
 		email_store( $t_email, $t_subject, $t_message );
-		log_event( LOG_EMAIL, sprintf( 'Signup Email = %s, Hash = %s, User = @U%d', $t_email, $p_confirm_hash, $p_user_id ) );
+		log_event( LOG_EMAIL, 'Signup Email = %s, Hash = %s, User = @U%d', $t_email, $p_confirm_hash, $p_user_id );
 
 		if( OFF == config_get( 'email_send_using_cronjob' ) ) {
 			email_send_all();
@@ -513,7 +513,7 @@ function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
 	# or else users won't be able to receive their reset pws
 	if( !is_blank( $t_email ) ) {
 		email_store( $t_email, $t_subject, $t_message );
-		log_event( LOG_EMAIL, sprintf( 'Password reset for user @U%d sent to %s', $p_user_id, $t_email ) );
+		log_event( LOG_EMAIL, 'Password reset for user @U%d sent to %s', $p_user_id, $t_email );
 
 		if( OFF == config_get( 'email_send_using_cronjob' ) ) {
 			email_send_all();
@@ -545,7 +545,7 @@ function email_notify_new_account( $p_username, $p_email ) {
 
 		if( !is_blank( $t_recipient_email ) ) {
 			email_store( $t_recipient_email, $t_subject, $t_message );
-			log_event( LOG_EMAIL, sprintf( 'New Account Notify for email = \'%s\'', $t_recipient_email ) );
+			log_event( LOG_EMAIL, 'New Account Notify for email = \'%s\'', $t_recipient_email );
 
 			if( OFF == config_get( 'email_send_using_cronjob' ) ) {
 				email_send_all();
@@ -585,7 +585,7 @@ function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, $p_head
 		if( is_array( $t_recipients ) ) {
 			# send email to every recipient
 			foreach( $t_recipients as $t_user_id => $t_user_email ) {
-				log_event( LOG_EMAIL, sprintf( "Issue = #%d, Type = %s, Msg = '%s', User = @U%d, Email = '%s'.", $p_bug_id, $p_notify_type, $p_message_id, $t_user_id, $t_user_email ) );
+				log_event( LOG_EMAIL, "Issue = #%d, Type = %s, Msg = '%s', User = @U%d, Email = '%s'.", $p_bug_id, $p_notify_type, $p_message_id, $t_user_id, $t_user_email );
 
 				# load (push) user language here as build_visible_bug_data assumes current language
 				lang_push( user_pref_get_language( $t_user_id, $t_project_id ) );
@@ -614,7 +614,7 @@ function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, $p_head
  * @return null
  */
 function email_monitor_added( $p_bug_id, $p_user_id ) {
-	log_event( LOG_EMAIL, sprintf( 'Issue #%d monitored by user @U%d', $p_bug_id, $p_user_id ) );
+	log_event( LOG_EMAIL, 'Issue #%d monitored by user @U%d', $p_bug_id, $p_user_id );
 
 	$t_opt = array();
 	$t_opt[] = bug_format_id( $p_bug_id );
@@ -631,7 +631,7 @@ function email_monitor_added( $p_bug_id, $p_user_id ) {
  * @return null
  */
 function email_relationship_added( $p_bug_id, $p_related_bug_id, $p_rel_type ) {
-	log_event( LOG_EMAIL, sprintf( 'Relationship added: Issue #%d, related issue %d, relationship type %s.', $p_bug_id, $p_related_bug_id, $p_rel_type ) );
+	log_event( LOG_EMAIL, 'Relationship added: Issue #%d, related issue %d, relationship type %s.', $p_bug_id, $p_related_bug_id, $p_rel_type );
 
 	$t_opt = array();
 	$t_opt[] = bug_format_id( $p_related_bug_id );
@@ -650,7 +650,7 @@ function email_relationship_added( $p_bug_id, $p_related_bug_id, $p_rel_type ) {
  * @return null
  */
 function email_relationship_deleted( $p_bug_id, $p_related_bug_id, $p_rel_type ) {
-	log_event( LOG_EMAIL, sprintf( 'Relationship deleted: Issue #%d, related issue %d, relationship type %s.', $p_bug_id, $p_related_bug_id, $p_rel_type ) );
+	log_event( LOG_EMAIL, 'Relationship deleted: Issue #%d, related issue %d, relationship type %s.', $p_bug_id, $p_related_bug_id, $p_rel_type );
 
 	$t_opt = array();
 	$t_opt[] = bug_format_id( $p_related_bug_id );

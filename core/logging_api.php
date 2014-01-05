@@ -50,10 +50,9 @@ $g_log_levels = array(
  * Log an event
  * @param int $p_level Valid debug log level
  * @param string|array $p_msg Either a string, or an array structured as (string,execution time)
- * @param object $p_backtrace [Optional] debug_backtrace() stack to use
  * @return null
  */
-function log_event( $p_level, $p_msg, $p_backtrace = null ) {
+function log_event( $p_level, $p_msg /*,args*/) {
 	global $g_log_levels;
 
 	# check to see if logging is enabled
@@ -67,15 +66,16 @@ function log_event( $p_level, $p_msg, $p_backtrace = null ) {
 		$t_event = $p_msg;
 		$s_msg = var_export( $p_msg, true );
 	} else {
+		$args = func_get_args();
+		array_shift($args); // skip level
+		array_shift($args); // skip message
+		$p_msg = vsprintf( $p_msg, $args);
+
 		$t_event = array( $p_msg, 0 );
 		$s_msg = $p_msg;
 	}
 
-	if( $p_backtrace === null ) {
 		$t_backtrace = debug_backtrace();
-	} else {
-		$t_backtrace = $p_backtrace;
-	}
 	$t_caller = basename( $t_backtrace[0]['file'] );
 	$t_caller .= ":" . $t_backtrace[0]['line'];
 
@@ -90,7 +90,7 @@ function log_event( $p_level, $p_msg, $p_backtrace = null ) {
 	$t_now = date( config_get_global( 'complete_date_format' ) );
 	$t_level = $g_log_levels[$p_level];
 
-	$t_plugin_event = '[' . $t_level . '] ' . $s_msg;
+	$t_plugin_event = '[' . $t_level . '] ' . $p_msg;
 	if( function_exists( 'event_signal' ) )
 		event_signal( 'EVENT_LOG', array( $t_plugin_event ) );
 
@@ -120,8 +120,8 @@ function log_event( $p_level, $p_msg, $p_backtrace = null ) {
 			break;
 		case 'firebug':
 			if( !class_exists( 'FirePHP' ) ) {
-				if( file_exists( config_get_global( 'library_path' ) . 'FirePHPCore' . DIRECTORY_SEPARATOR . 'FirePHP.class.php' ) ) {
-					require_lib( 'FirePHPCore' . DIRECTORY_SEPARATOR . 'FirePHP.class.php' );
+				if( file_exists( config_get_global( 'library_path' ) . 'FirePHPCore/FirePHP.class.php' ) ) {
+					require_lib( 'FirePHPCore/FirePHP.class.php' );
 				}
 			}
 			if( class_exists( 'FirePHP' ) ) {
@@ -158,13 +158,12 @@ function log_print_to_page() {
 		$t_total_queries_count = 0;
 		$t_total_event_count = count( $g_log_events );
 
-		if( $t_total_event_count == 0 ) {
 			echo "\n\n<!--Mantis Debug Log Output-->";
+		if( $t_total_event_count == 0 ) {
 			echo "<!--END Mantis Debug Log Output-->\n\n";
 			return;
 		}
 
-		echo "\n\n<!--Mantis Debug Log Output-->";
 		echo "<hr />\n";
 		echo "<table id=\"log-event-list\">\n";
 		echo "\t<thead>\n";

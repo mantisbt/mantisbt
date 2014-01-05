@@ -302,7 +302,7 @@ function db_query( $p_query, $p_limit = -1, $p_offset = -1 ) {
 	$t_elapsed = number_format( microtime(true) - $t_start, 4 );
 
 	if( ON == $g_db_log_queries ) {
-		log_event( LOG_DATABASE, array( $p_query, $t_elapsed), debug_backtrace() );
+		log_event( LOG_DATABASE, array( $p_query, $t_elapsed) );
 		array_push( $g_queries_array, array( $p_query, $t_elapsed ) );
 	} else {
 		array_push( $g_queries_array, array( '', $t_elapsed ) );
@@ -407,7 +407,7 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 			}
 		}
 		$t_log_msg = array( $p_query, $t_elapsed );
-		log_event( LOG_DATABASE, $t_log_msg, debug_backtrace() );
+		log_event( LOG_DATABASE, $t_log_msg );
 		array_push( $g_queries_array, $t_log_msg );
 	} else {
 		array_push( $g_queries_array, array( '', $t_elapsed ) );
