@@ -147,6 +147,11 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 
 	$t_error_description = nl2br( $t_error_description );
 
+	if( php_sapi_name() == 'cli' ) {
+		echo $t_error_type . " " . $t_error_description . "\n";
+		exit();
+	}
+
 	switch( $t_method ) {
 		case DISPLAY_ERROR_HALT:
 			# disable any further event callbacks
