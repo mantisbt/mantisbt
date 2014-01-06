@@ -84,7 +84,6 @@ $t_ldap = ( LDAP == config_get( 'login_method' ) );
 
 # Update email (but only if LDAP isn't being used)
 if ( !( $t_ldap && config_get( 'use_ldap_email' ) ) ) {
-	$f_email = email_append_domain( $f_email );
 	email_ensure_valid( $f_email );
 	email_ensure_not_disposable( $f_email );
 

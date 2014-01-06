@@ -57,7 +57,7 @@ $f_email		= strip_tags( gpc_get_string( 'email' ) );
 $f_captcha		= gpc_get_string( 'captcha', '' );
 
 $f_username = trim( $f_username );
-$f_email = email_append_domain( trim( $f_email ) );
+$f_email = trim( $f_email );
 $f_captcha = utf8_strtolower( trim( $f_captcha ) );
 
 # force logout on the current user if already authenticated

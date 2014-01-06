@@ -259,16 +259,8 @@ function print_user_with_subject( $p_user_id, $p_bug_id ) {
  * @param string $p_email Email address
  */
 function print_email_input( $p_field_name, $p_email ) {
-	$t_limit_email_domain = config_get( 'limit_email_domain' );
-	if( $t_limit_email_domain ) {
-
-		# remove the domain part
-		$p_email = preg_replace( '/@' . preg_quote( $t_limit_email_domain, '/' ) . '$/i', '', $p_email );
-		echo '<input id="email-field" type="text" name="' . string_attribute( $p_field_name ) . '" size="20" maxlength="64" value="' . string_attribute( $p_email ) . '" />@' . string_display_line( $t_limit_email_domain );
-	} else {
 		echo '<input id="email-field" type="text" name="' . string_attribute( $p_field_name ) . '" size="32" maxlength="64" value="' . string_attribute( $p_email ) . '" />';
 	}
-}
 
 /**
  * print out an email editing input

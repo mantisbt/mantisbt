@@ -125,11 +125,13 @@ function email_is_valid( $p_email ) {
 	if( PHPMailer::ValidateAddress( $p_email ) ) {
 		$t_domain = end( explode( '@', $p_email ) );
 
-		# see if we're limited to one domain
-		$t_limit_email_domain = config_get( 'limit_email_domain' );
-		if( $t_limit_email_domain !== OFF  ) {
-			if( 0 != strcasecmp( $t_limit_email_domain, $t_domain ) ) {
-				return false;
+		# see if we're limited to a set of known domains
+		$t_limit_email_domains = config_get( 'limit_email_domains' );
+		if( !empty( $t_limit_email_domains ) ) {
+			foreach( $t_limit_email_domains as $t_email_domain ) {
+				if( 0 == strcasecmp( $t_email_domain, $t_domain ) ) {
+					return true; // no need to check mx record details (below) if we've explicity allowed the domain
+				}
 			}
 		}
 
@@ -1107,31 +1109,6 @@ function email_build_subject( $p_bug_id ) {
 function make_lf_crlf( $p_string ) {
 	$t_string = str_replace( "\n", "\r\n", $p_string );
 	return str_replace( "\r\r\n", "\r\n", $t_string );
-}
-
-/**
- * Appends an email domain to the specified email address if email is
- * not empty, it doesn't already have a domain part and if a
- * limit_email_domain is configured.
- *
- * Check limit_email_domain option and append the domain name if it is set
- * @todo limit_email_domain called after we look for @ in domain name?
- * @param string $p_email The email address to append the domain to.
- * @returns The email address with the appended domain (if applicable).
- */
-function email_append_domain( $p_email ) {
-	# If email is empty or already contains a domain, then return as is.
-	if ( is_blank( $p_email ) || strchr( $p_email, '@' ) ) {
-		return $p_email;
-	}
-
-	# If limit email domain is set, then append it.
-	$t_limit_email_domain = config_get( 'limit_email_domain' );
-	if ( $t_limit_email_domain === OFF ) {
-		return $p_email;
-	}
-
-	return "$p_email@$t_limit_email_domain";
 }
 
 /**

@@ -87,7 +87,6 @@ if ( $f_password != $f_password_verify ) {
 	trigger_error( ERROR_USER_CREATE_PASSWORD_MISMATCH, ERROR );
 }
 
-$f_email = email_append_domain( $f_email );
 email_ensure_not_disposable( $f_email );
 
 if ( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {

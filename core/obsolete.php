@@ -166,3 +166,4 @@ config_obsolete( 'session_key' );
 config_obsolete( 'dhtml_filters', 'use_dynamic_filters' );
 config_obsolete( 'use_iis' );
 config_obsolete( 'page_title', 'top_include_page' );
+config_obsolete( 'limit_email_domain', 'limit_email_domains' );

@@ -117,7 +117,7 @@ if ( $t_ldap && config_get( 'use_ldap_realname' ) ) {
 if ( $t_ldap && config_get( 'use_ldap_email' ) ) {
 	$t_email = ldap_email( $f_user_id );
 } else {
-	$t_email = email_append_domain( trim( $f_email ) );
+	$t_email = trim( $f_email );
 	email_ensure_valid( $t_email );
 	email_ensure_not_disposable( $t_email );
 }
