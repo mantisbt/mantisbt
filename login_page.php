@@ -233,10 +233,6 @@ if ( config_get_global( 'admin_checks' ) == ON ) {
 			DISPLAY_ERROR_HALT
 		);
 	}
-	$t_debug_email = config_get( 'debug_email' );
-	if( $t_debug_email !==  OFF ) {
-		$t_warnings[] = sprintf( lang_get( 'warning_debug_email' ), $t_debug_email );
-	}
 
 	# since admin directory and db_upgrade lists are available check for missing db upgrades
 	# if db version is 0, we do not have a valid database.

@@ -4083,14 +4083,13 @@ $g_show_timer = OFF;
 $g_show_memory_usage = OFF;
 
 /**
- * Used for debugging e-mail notifications.
- * When it is OFF, the emails are sent normally.
- * If set to an e-mail address, all messages are sent to it, with the
- * original recipients (To, Cc, Bcc) included in the message body.
- *
- * @global int $g_debug_email
+ * This is used for debugging the e-mail features in mantis. By default this is blank.
+ * This can be set to a valid email address when diagnosing problems with emails.
+ * All e-mails are sent to this address with the original To, Cc, Bcc included in the message body.
+ * Note: The email is NOT send to the recipients, only to the debug email address.
+ * @global string $g_debug_email
  */
-$g_debug_email = OFF;
+$g_debug_email = '';
 
 /**
  * Shows the total number/unique number of queries executed to serve the page.

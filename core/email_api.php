@@ -109,21 +109,17 @@ function email_regex_simple() {
  */
 function email_is_valid( $p_email ) {
 	# if we don't validate then just accept
-	if( OFF == config_get( 'validate_email' ) ) {
+	if( OFF == config_get( 'validate_email' ) ||
+		ON == config_get( 'use_ldap_email' ) ||
+		( is_blank( $p_email ) && ON == config_get( 'allow_blank_email' ) )
+	) {
 		return true;
 	}
 
-	if ( LDAP == config_get( 'login_method' ) && ON == config_get( 'use_ldap_email' ) ) {
-		return true;
-	}
-
-	if( is_blank( $p_email ) && ON == config_get( 'allow_blank_email' ) ) {
-		return true;
-	}
-
-	# Delegate email validation to PHPMailer
-	if( PHPMailer::ValidateAddress( $p_email ) ) {
-		$t_domain = end( explode( '@', $p_email ) );
+	// check email address is a valid format
+	$t_email = filter_var($p_email, FILTER_SANITIZE_EMAIL);
+	if (filter_var($t_email, FILTER_VALIDATE_EMAIL)) {
+		$t_domain = end( explode( '@', $t_email ) );
 
 		# see if we're limited to a set of known domains
 		$t_limit_email_domains = config_get( 'limit_email_domains' );
@@ -133,19 +129,20 @@ function email_is_valid( $p_email ) {
 					return true; // no need to check mx record details (below) if we've explicity allowed the domain
 				}
 			}
+				return false;
 		}
 
 		if( ON == config_get( 'check_mx_record' ) ) {
-			$temp = '';
+			$t_mx = '';
 
 			# Check for valid mx records
-			if( getmxrr( $t_domain, $temp ) ) {
+			if( getmxrr( $t_domain, $t_mx ) ) {
 				return true;
 			} else {
-				$host = $t_domain . '.';
+				$t_host = $t_domain . '.';
 
 				# for no mx record... try dns check
-				if( checkdnsrr( $host, 'ANY' ) ) {
+				if( checkdnsrr( $t_host, 'ANY' ) ) {
 					return true;
 				}
 			}
@@ -202,18 +199,18 @@ function email_ensure_not_disposable( $p_email ) {
  * For example, you can get the value associated with notifying "admin"
  * on action "new", i.e. notify administrators on new bugs which can be
  * ON or OFF.
- * @param string $action
- * @param string $flag
+ * @param string $p_action
+ * @param string $p_flag
  * @return int
  */
-function email_notify_flag( $action, $flag ) {
+function email_notify_flag( $p_action, $p_flag ) {
 	$t_notify_flags = config_get( 'notify_flags' );
 	$t_default_notify_flags = config_get( 'default_notify_flags' );
-	if( isset( $t_notify_flags[$action][$flag] ) ) {
-		return $t_notify_flags[$action][$flag];
+	if( isset( $t_notify_flags[$p_action][$p_flag] ) ) {
+		return $t_notify_flags[$p_action][$p_flag];
 	}
-	else if( isset( $t_default_notify_flags[$flag] ) ) {
-		return $t_default_notify_flags[$flag];
+	else if( isset( $t_default_notify_flags[$p_flag] ) ) {
+		return $t_default_notify_flags[$p_flag];
 	}
 
 	return OFF;
@@ -466,8 +463,7 @@ function email_signup( $p_user_id, $p_password, $p_confirm_hash, $p_admin_name =
 	# Build Welcome Message
 	$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'new_account_subject' );
 
-	//if( $p_admin_created && $p_admin_name) {
-	if( $p_admin_name ) {
+	if( !empty( $p_admin_name ) ) {
 		$intro_text = sprintf( lang_get( 'new_account_greeting_admincreated' ), $p_admin_name, $t_username );
 	} else {
 		$intro_text = sprintf( lang_get( 'new_account_greeting' ), $t_username );
@@ -1367,13 +1363,13 @@ function email_format_bug_message( $p_visible_bug_data ) {
  * if $p_visible_bug_data contains specified attribute the function
  * returns concatenated translated attribute name and original
  * attribute value. Else return empty string.
- * @param array $p_visible_bug_data
- * @param string $p_attribute_id
+ * @param array $p_visible_bug_data Visible Bug Data array
+ * @param string $p_attribute_id Attribute ID
  * @return string
  */
-function email_format_attribute( $p_visible_bug_data, $attribute_id ) {
-	if( array_key_exists( $attribute_id, $p_visible_bug_data ) ) {
-		return utf8_str_pad( lang_get( $attribute_id ) . ': ', config_get( 'email_padding_length' ), ' ', STR_PAD_RIGHT ) . $p_visible_bug_data[$attribute_id] . "\n";
+function email_format_attribute( $p_visible_bug_data, $p_attribute_id ) {
+	if( array_key_exists( $p_attribute_id, $p_visible_bug_data ) ) {
+		return utf8_str_pad( lang_get( $p_attribute_id ) . ': ', config_get( 'email_padding_length' ), ' ', STR_PAD_RIGHT ) . $p_visible_bug_data[$p_attribute_id] . "\n";
 	}
 	return '';
 }

@@ -63,8 +63,8 @@ check_print_test_warn_row( 'MantisBT Application Errors should halt execution',
 );
 
 check_print_test_warn_row( 'Email debugging should be OFF',
-	$g_debug_email ===  OFF,
-	array( false => "All notification e-mails will be sent to $g_debug_email" )
+	empty($g_debug_email),
+	array( false => "All notification e-mails will be sent to: $g_debug_email" )
 );
 
 
