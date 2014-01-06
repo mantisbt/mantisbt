@@ -88,12 +88,12 @@ $g_db_type				= 'mysql';
 /**
  * adodb Data Source Name
  * This is an EXPERIMENTAL field.
- * If the above database settings, do not provide enough flexibilty, it is
+ * If the above database settings, do not provide enough flexibility, it is
  * possible to specify a dsn for the database connection. For further details,
  * currently, you need to see the adodb manual at
  * http://phplens.com/adodb/code.initialization.html#dsnsupport. For example,
  * if db_type is odbc_mssql. The following is an example dsn:
- * "Driver={SQL Server Native Client 10.0};SERVER=.\sqlexpress;DATABASE=bugtracker2;UID=mantis;PWD=passwd;"
+ * "Driver={SQL Server Native Client 10.0};SERVER=.\sqlexpress;DATABASE=bugtracker;UID=mantis;PWD=password;"
  * NOTE: the installer does not yet fully support the use of dsn's
  */
 $g_dsn = '';
@@ -387,7 +387,7 @@ $g_max_lost_password_in_progress_count = 3;
 
 /**
  * Webmaster email address. This is shown publicly at the bottom of each page
- * and thus may be suspectible to being detected by spam email harvesters.
+ * and thus may be susceptible to being detected by spam email harvesters.
  * @global string $g_webmaster_email
  */
 $g_webmaster_email		= 'webmaster@example.com';
@@ -460,7 +460,7 @@ $g_enable_email_notification	= ON;
  * $g_notify_flags['new']['threshold_max'] = DEVELOPER;
  *
  * You might want to do something similar so all managers are notified when a
- * bug is closed.  If you didn't want reporters to be notified when a bug is
+ * bug is closed.  If you did not want reporters to be notified when a bug is
  * closed (only when it is resolved) you would use:
  *
  * $g_notify_flags['closed']['reporter'] = OFF;
@@ -525,7 +525,7 @@ $g_check_mx_record = OFF;
  * if ON, allow the user to omit an email field
  * note if you allow users to create their own accounts, they
  * must specify an email at that point, no matter what the value
- * of this option is.  Otherwise they wouldn't get their passwords.
+ * of this option is.  Otherwise they would not get their passwords.
  * @global int $g_allow_blank_email
  */
 $g_allow_blank_email = OFF;
@@ -906,7 +906,7 @@ $g_view_issues_page_columns = array (
 
 /**
  * The default columns to be included in the Print Issues Page. This can be
- * overriden using Manage -> Manage Configuration -> Manage Columns. Also each
+ * overridden using Manage -> Manage Configuration -> Manage Columns. Also each
  * user can configure their own columns using My Account -> Manage Columns.
  * @global array $g_print_issues_page_columns
  */
@@ -917,7 +917,7 @@ $g_print_issues_page_columns = array (
 );
 
 /**
- * The default columns to be included in the CSV export. This can be overriden
+ * The default columns to be included in the CSV export. This can be overridden
  * using Manage -> Manage Configuration -> Manage Columns. Also each user can
  * configure their own columns using My Account -> Manage Columns.
  * @global array $g_csv_columns
@@ -931,7 +931,7 @@ $g_csv_columns = array (
 
 /**
  * The default columns to be included in the Excel export. This can be
- * overriden using Manage -> Manage Configuration -> Manage Columns. Also each
+ * overridden using Manage -> Manage Configuration -> Manage Columns. Also each
  * user can configure their own columns using My Account -> Manage Columns
  * @global array $g_excel_columns
  */
@@ -1274,7 +1274,7 @@ $g_default_bug_relationship = BUG_RELATED;
 
 /**
  * Default global category to be used when an issue is moved from a project to another
- * that doesn't have a category with a matching name.  The default is 1 which is the "General"
+ * that does not have a category with a matching name.  The default is 1 which is the "General"
  * category that is created in the default database.
  */
 $g_default_category_for_moves = 1;
@@ -1304,7 +1304,7 @@ $g_hide_status_default = CLOSED;
 $g_show_sticky_issues = ON;
 
 /**
- * make sure people aren't refreshing too often
+ * make sure people are not refreshing too often
  * in minutes
  * @global int $g_min_refresh_delay
  */
@@ -1745,7 +1745,7 @@ $g_file_download_xsendfile_header_name = 'X-Sendfile';
 /**
  * html tags
  * Set this flag to automatically convert www URLs and
- * email adresses into clickable links
+ * email addresses into clickable links
  * @global int $g_html_make_links
  */
 $g_html_make_links = ON;
@@ -2110,7 +2110,7 @@ $g_preview_max_height = 250;
 $g_view_attachments_threshold = VIEWER;
 
 /**
- * list of filetypes to view inline. This is a string of extentions separated
+ * list of filetypes to view inline. This is a string of extensions separated
  * by commas. This is used when downloading an attachment. Rather than
  * downloading, the attachment is viewed in the browser.
  * @global string $g_inline_file_exts
@@ -2444,7 +2444,7 @@ $g_bug_update_page_fields = array (
 
 /**
  * An array of optional fields to show on the bug change status page. This
- * only changes the visibibility of fields shown below the form used for
+ * only changes the visibility of fields shown below the form used for
  * updating the status of an issue.
  *
  * The following optional fields are allowed:
@@ -2748,7 +2748,7 @@ $g_set_view_status_threshold = REPORTER;
 $g_change_view_status_threshold = UPDATER;
 
 /**
- * Threshold needed to show the list of users montoring a bug on the bug view pages.
+ * Threshold needed to show the list of users monitoring a bug on the bug view pages.
  * @global int $g_show_monitor_list_threshold
  */
 $g_show_monitor_list_threshold = DEVELOPER;
@@ -2995,7 +2995,7 @@ $g_csv_separator = ',';
 
 /**
  * CSV Export
- * Add Byte Order Mark (BOM) at the begining of the file as it helps Excel display the file in UTF-8
+ * Add Byte Order Mark (BOM) at the beginning of the file as it helps Excel display the file in UTF-8
  * @global string $g_csv_add_bom
  */
 $g_csv_add_bom = OFF;
@@ -3710,7 +3710,7 @@ $g_relationship_graph_fontname = 'Arial';
 $g_relationship_graph_fontsize = 8;
 
 /**
- * Default dependency orientation. If you have issues with lots of childs
+ * Default dependency orientation. If you have issues with lots of children
  * or parents, leave as 'horizontal', otherwise, if you have lots of
  * "chained" issue dependencies, change to 'vertical'.
  * @global string $g_relationship_graph_orientation

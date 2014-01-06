@@ -20,7 +20,7 @@
  * Users are presented with a list of available columns (fields). They mean then choose which types
  * of field to include on the following types of pages:
  * i) "View Issues Columns" - These are the fields displayed when viewing the list of bugs
- * ii) "Print Issues Columnes" - These are the fields that are included when printing out bug 
+ * ii) "Print Issues Columns" - These are the fields that are included when printing out bug
  * details.
  * iii) "Export Issues Columns" - These are the list of fields included when exporting an issue from
  * the bug tracker. 

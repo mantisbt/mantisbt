@@ -8,7 +8,7 @@
 		<title>Building a Plugin</title>
 
 		<para>
-			This section will act as a walkthrough of how to build a plugin, from the
+			This section will act as a walk through of how to build a plugin, from the
 			bare basics all the way up to advanced topics.  A general understanding of
 			the concepts covered in the last section is assumed, as well as knowledge
 			of how the event system works.  Later topics in this section will require
@@ -16,7 +16,7 @@
 		</para>
 
 		<para>
-			This walkthrough will be working towards building a single end result: the
+			This walk through will be working towards building a single end result: the
 			"Example" plugin as listed in <xref linkend="dev.plugins.building.source" />.
 			You may refer to the final source code along the way,
 			although every part of it will be built up in steps throughout this section.

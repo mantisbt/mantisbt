@@ -97,13 +97,13 @@ WHERE category_id = (OldCategoryId)
 				</orderedlist>
 			</para>
 
-			<para>Finally, to avoid future occurences, you need to set
+			<para>Finally, to avoid future occurrences, you need to set
 				$g_default_category_for_moves
 				(see <xref linkend="admin.config.defaults" />)
 				to a valid Category Id.
 				This must be done as appropriate, either globally in
 				config_inc.php, or via the Manage Configuration page,
-				for all occurences of the parameter.
+				for all occurrences of the parameter.
 			</para>
 
 			<para>Note: to retrieve a category's ID, you can either
