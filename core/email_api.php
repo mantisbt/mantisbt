@@ -82,6 +82,12 @@ require_lib( 'phpmailer' . DIRECTORY_SEPARATOR . 'class.phpmailer.php' );
  $g_phpMailer = null;
 
 /**
+ * Indicates whether any emails are currently stored for process during this request.
+ * Note: This is only used if not sending emails via cron job
+ */
+ $g_email_stored = false;
+
+/**
  * Use a simple perl regex for valid email addresses.  This is not a complete regex,
  * as it does not cover quoted addresses or domain literals, but it is simple and
  * covers the vast majority of all email addresses without being overly complex.
@@ -476,10 +482,6 @@ function email_signup( $p_user_id, $p_password, $p_confirm_hash, $p_admin_name =
 	if( !is_blank( $t_email ) ) {
 		email_store( $t_email, $t_subject, $t_message );
 		log_event( LOG_EMAIL, 'Signup Email = %s, Hash = %s, User = @U%d', $t_email, $p_confirm_hash, $p_user_id );
-
-		if( OFF == config_get( 'email_send_using_cronjob' ) ) {
-			email_send_all();
-		}
 	}
 
 	#		lang_pop(); # see above
@@ -512,10 +514,6 @@ function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
 	if( !is_blank( $t_email ) ) {
 		email_store( $t_email, $t_subject, $t_message );
 		log_event( LOG_EMAIL, 'Password reset for user @U%d sent to %s', $p_user_id, $t_email );
-
-		if( OFF == config_get( 'email_send_using_cronjob' ) ) {
-			email_send_all();
-		}
 	}
 
 	lang_pop();
@@ -545,9 +543,8 @@ function email_notify_new_account( $p_username, $p_email ) {
 			email_store( $t_recipient_email, $t_subject, $t_message );
 			log_event( LOG_EMAIL, 'New Account Notify for email = \'%s\'', $t_recipient_email );
 
-			if( OFF == config_get( 'email_send_using_cronjob' ) ) {
-				email_send_all();
-			}
+
+
 		}
 
 		lang_pop();
@@ -568,40 +565,34 @@ function email_notify_new_account( $p_username, $p_email ) {
  * @return null
  */
 function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, $p_header_optional_params = null, $p_extra_user_ids_to_email = array() ) {
-
-	if( ON === config_get( 'enable_email_notification' ) ) {
-		ignore_user_abort( true );
-
-		bugnote_get_all_bugnotes( $p_bug_id );
-
-		# @todo yarick123: email_collect_recipients(...) will be completely rewritten to provide additional information such as language, user access,..
-		# @todo yarick123:sort recipients list by language to reduce switches between different languages
-		$t_recipients = email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_to_email );
-
-		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
-
-		if( is_array( $t_recipients ) ) {
-			# send email to every recipient
-			foreach( $t_recipients as $t_user_id => $t_user_email ) {
-				log_event( LOG_EMAIL, "Issue = #%d, Type = %s, Msg = '%s', User = @U%d, Email = '%s'.", $p_bug_id, $p_notify_type, $p_message_id, $t_user_id, $t_user_email );
-
-				# load (push) user language here as build_visible_bug_data assumes current language
-				lang_push( user_pref_get_language( $t_user_id, $t_project_id ) );
-
-				$t_visible_bug_data = email_build_visible_bug_data( $t_user_id, $p_bug_id, $p_message_id );
-				email_bug_info_to_one_user( $t_visible_bug_data, $p_message_id, $t_project_id, $t_user_id, $p_header_optional_params );
-
-				lang_pop();
-			}
-		}
-
-		# Only trigger the draining of the email queue if cronjob is disabled and email notifications are enabled.
-		if( OFF == config_get( 'email_send_using_cronjob' ) ) {
-			email_send_all();
-		}
+	if( OFF == config_get( 'enable_email_notification' ) ) {
+		return;
 	}
 
-	return;
+	ignore_user_abort( true );
+
+	bugnote_get_all_bugnotes( $p_bug_id );
+
+	# @todo yarick123: email_collect_recipients(...) will be completely rewritten to provide additional information such as language, user access,..
+	# @todo yarick123:sort recipients list by language to reduce switches between different languages
+	$t_recipients = email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_to_email );
+
+	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+
+	if( is_array( $t_recipients ) ) {
+		# send email to every recipient
+		foreach( $t_recipients as $t_user_id => $t_user_email ) {
+			log_event( LOG_EMAIL, "Issue = #%d, Type = %s, Msg = '%s', User = @U%d, Email = '%s'.", $p_bug_id, $p_notify_type, $p_message_id, $t_user_id, $t_user_email );
+
+			# load (push) user language here as build_visible_bug_data assumes current language
+			lang_push( user_pref_get_language( $t_user_id, $t_project_id ) );
+
+			$t_visible_bug_data = email_build_visible_bug_data( $t_user_id, $p_bug_id, $p_message_id );
+			email_bug_info_to_one_user( $t_visible_bug_data, $p_message_id, $t_project_id, $t_user_id, $p_header_optional_params );
+
+			lang_pop();
+		}
+	}
 }
 
 /**
@@ -808,6 +799,8 @@ function email_bug_deleted( $p_bug_id ) {
  * @return int
  */
 function email_store( $p_recipient, $p_subject, $p_message, $p_headers = null ) {
+	global $g_email_stored;
+
 	$t_recipient = trim( $p_recipient );
 	$t_subject = string_email( trim( $p_subject ) );
 	$t_message = string_email_links( trim( $p_message ) );
@@ -845,6 +838,8 @@ function email_store( $p_recipient, $p_subject, $p_message, $p_headers = null ) 
 
 	$t_email_id = email_queue_add( $t_email_data );
 
+	$g_email_stored = true;
+
 	return $t_email_id;
 }
 
@@ -859,8 +854,7 @@ function email_store( $p_recipient, $p_subject, $p_message, $p_headers = null ) 
  * @return null
  */
 function email_send_all($p_delete_on_failure = false) {
-	$t_ids = email_queue_get_ids('ASC');
-	$t_date_format = config_get( 'complete_date_format' );
+	$t_ids = email_queue_get_ids();
 
 	log_event( LOG_EMAIL, "Processing e-mail queue (" . count( $t_ids ) . " messages)" );
 
@@ -868,17 +862,12 @@ function email_send_all($p_delete_on_failure = false) {
 		$t_email_data = email_queue_get( $t_id );
 		$t_start = microtime(true);
 
-		log_event( LOG_EMAIL,
-			"Sending message #$t_id queued on " .
-			date( $t_date_format, $t_email_data->submitted )
-		);
-
-		# check if email was not found.  This can happen if another request
-		# picks up the email first and sends it.
+		# check if email was not found.  This can happen if another request picks up the email first and sends it.
 		if( $t_email_data === false ) {
 			$t_email_sent = true;
-			log_event( LOG_EMAIL, 'message has already been sent' );
+			log_event( LOG_EMAIL, 'Message #$t_id has already been sent' );
 		} else {
+			log_event( LOG_EMAIL, "Sending message #$t_id" );
 			$t_email_sent = email_send( $t_email_data );
 		}
 
@@ -896,7 +885,6 @@ function email_send_all($p_delete_on_failure = false) {
 				break;
 			}
 		}
-
 	}
 }
 
@@ -983,7 +971,7 @@ function email_send( $p_email_data ) {
 	$mail->AddCustomHeader('Auto-Submitted:auto-generated');
 	$mail->AddCustomHeader('X-Auto-Response-Suppress: All');
 
-	if( OFF !== $t_debug_email ) {
+	if( !empty( $t_debug_email ) ) {
 		$t_message = 'To: ' . $t_recipient . "\n\n" . $t_message;
 		$t_recipient = $t_debug_email;
 	}
@@ -1116,6 +1104,10 @@ function make_lf_crlf( $p_string ) {
  * @return array List of users ids to whom the reminder e-mail was actually sent
  */
 function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
+	if( OFF == config_get( 'enable_email_notification' ) ) {
+		return;
+	}
+
 	if( !is_array( $p_recipients ) ) {
 		$p_recipients = array(
 			$p_recipients,
@@ -1143,19 +1135,13 @@ function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
 		$t_header = "\n" . lang_get( 'on_date' ) . " $t_date, $t_sender $t_sender_email " . lang_get( 'sent_you_this_reminder_about' ) . ": \n\n";
 		$t_contents = $t_header . string_get_bug_view_url_with_fqdn( $p_bug_id, $t_recipient ) . " \n\n$p_message";
 
-		if( ON == config_get( 'enable_email_notification' ) ) {
-			$t_id = email_store( $t_email, $t_subject, $t_contents );
-			if( $t_id !== null ) {
-				$result[] = $t_recipient;
-			}
-			log_event( LOG_EMAIL, "queued reminder email #$t_id for U$t_recipient" );
+		$t_id = email_store( $t_email, $t_subject, $t_contents );
+		if( $t_id !== null ) {
+			$result[] = $t_recipient;
 		}
+		log_event( LOG_EMAIL, "queued reminder email #$t_id for U$t_recipient" );
 
 		lang_pop();
-	}
-
-	if( OFF == config_get( 'email_send_using_cronjob' ) ) {
-		email_send_all();
 	}
 
 	return $result;
