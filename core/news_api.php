@@ -32,7 +32,6 @@
  * @uses error_api.php
  * @uses helper_api.php
  * @uses lang_api.php
- * @uses twitter_api.php
  * @uses utility_api.php
  */
 
@@ -44,7 +43,6 @@ require_api( 'database_api.php' );
 require_api( 'error_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'lang_api.php' );
-require_api( 'twitter_api.php' );
 require_api( 'utility_api.php' );
 
 /**
@@ -88,8 +86,6 @@ function news_create( $p_project_id, $p_poster_id, $p_view_state, $p_announcemen
 	db_query_bound( $t_query, array( (int)$p_project_id, (int)$p_poster_id, db_now(), db_now(), (int)$p_view_state, $p_announcement, $p_headline, $p_body ) );
 
 	$t_news_id = db_insert_id( $t_news_table );
-
-	twitter_news( $t_news_id );
 
 	return $t_news_id;
 }

@@ -728,8 +728,6 @@ function config_is_private( $p_config_var ) {
 		case 'log_destination':
 		case 'dot_tool':
 		case 'neato_tool':
-		case 'twitter_username':
-		case 'twitter_password':
 			return true;
 	}
 

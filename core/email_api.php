@@ -542,9 +542,6 @@ function email_notify_new_account( $p_username, $p_email ) {
 		if( !is_blank( $t_recipient_email ) ) {
 			email_store( $t_recipient_email, $t_subject, $t_message );
 			log_event( LOG_EMAIL, 'New Account Notify for email = \'%s\'', $t_recipient_email );
-
-
-
 		}
 
 		lang_pop();

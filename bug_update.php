@@ -40,7 +40,6 @@
  * @uses lang_api.php
  * @uses print_api.php
  * @uses relationship_api.php
- * @uses twitter_api.php
  */
 
 require_once( 'core.php' );
@@ -61,7 +60,6 @@ require_api( 'history_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'relationship_api.php' );
-require_api( 'twitter_api.php' );
 
 form_security_validate( 'bug_update' );
 
@@ -413,13 +411,6 @@ if ( $t_resolve_issue ) {
 	email_generic( $f_bug_id, $t_new_status_label, 'email_notification_title_for_status_bug_' . $t_new_status_label );
 } else {
 	email_generic( $f_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
-}
-
-# Twitter notification of bug update.
-if ( $t_resolve_issue &&
-     $t_updated_bug->resolution >= config_get( 'bug_resolution_fixed_threshold' ) &&
-     $t_updated_bug->resolution < config_get( 'bug_resolution_not_fixed_threshold' ) ) {
-	twitter_issue_resolved( $f_bug_id );
 }
 
 form_security_purge( 'bug_update' );
