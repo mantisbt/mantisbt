@@ -16,7 +16,7 @@
 
 /**
  * @package MantisBT
- * @copyright Copyright (C) 2000 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright (C) 2000 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
