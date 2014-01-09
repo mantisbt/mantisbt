@@ -1246,7 +1246,7 @@ function bug_move( $p_bug_id, $p_target_project_id ) {
 		$t_category_project_id = category_get_field( $t_category_id, 'project_id' );
 
 		if ( $t_category_project_id != ALL_PROJECTS
-		  && !project_hierarchy_inherit_parent( $p_target_project_id, $t_category_project_id )
+		  && !in_array( $t_category_project_id , project_hierarchy_inheritance( $p_target_project_id ) )
 		) {
 			// Map by name
 			$t_category_name = category_get_field( $t_category_id, 'name' );
