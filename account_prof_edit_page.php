@@ -107,7 +107,7 @@ if ( profile_is_global( $f_profile_id ) ) {
 </tr>
 <tr class="row-2">
 	<th class="category">
-		<span class="required">*</span><?php echo lang_get( 'operating_system' ) ?>
+		<span class="required">*</span><?php echo lang_get( 'os' ) ?>
 	</th>
 	<td>
 		<input type="text" name="os" size="32" maxlength="32" value="<?php echo string_attribute( $v_os ) ?>" />

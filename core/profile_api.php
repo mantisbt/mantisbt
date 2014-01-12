@@ -66,7 +66,7 @@ function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_descrip
 
 	# os cannot be blank
 	if( is_blank( $p_os ) ) {
-		error_parameters( lang_get( 'operating_system' ) );
+		error_parameters( lang_get( 'os' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
@@ -137,7 +137,7 @@ function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_bu
 
 	# os cannot be blank
 	if( is_blank( $p_os ) ) {
-		error_parameters( lang_get( 'operating_system' ) );
+		error_parameters( lang_get( 'os' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 

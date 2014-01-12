@@ -102,7 +102,7 @@ if ( $g_global_profiles ) {
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="os" class="required"><span><?php echo lang_get( 'operating_system' ) ?></span></label>
+				<label for="os" class="required"><span><?php echo lang_get( 'os' ) ?></span></label>
 				<span class="input"><input id="os" type="text" name="os" size="32" maxlength="32" /></span>
 				<span class="label-style"></span>
 			</div>
