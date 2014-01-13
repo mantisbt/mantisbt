@@ -858,6 +858,7 @@ $s_update_category_button = 'Update Category';
 $s_category_updated_msg = 'Category has been successfully updated...';
 
 # manage_proj_create_page.php
+$s_create_first_project = 'Create a project to be able to log issues.';
 $s_add_subproject_title = 'Add Subproject';
 
 # manage_proj_delete.php

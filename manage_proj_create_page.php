@@ -56,6 +56,15 @@ html_page_top();
 print_manage_menu( 'manage_proj_create_page.php' );
 
 $f_parent_id = gpc_get( 'parent_id', null );
+
+if ( project_table_empty() ) {
+	echo '<br />';
+	echo '<div id="create-first-project" class="important-msg">';
+	echo '<ul>';
+	echo '<li>' . lang_get( 'create_first_project' ) . '</li>';
+	echo '</ul>';
+	echo '</div>';
+}
 ?>
 
 <div id="manage-project-create-div" class="form-container">
