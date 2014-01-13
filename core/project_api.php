@@ -32,7 +32,6 @@
  * @uses error_api.php
  * @uses file_api.php
  * @uses lang_api.php
- * @uses news_api.php
  * @uses project_hierarchy_api.php
  * @uses user_api.php
  * @uses user_pref_api.php
@@ -49,7 +48,6 @@ require_api( 'database_api.php' );
 require_api( 'error_api.php' );
 require_api( 'file_api.php' );
 require_api( 'lang_api.php' );
-require_api( 'news_api.php' );
 require_api( 'project_hierarchy_api.php' );
 require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );

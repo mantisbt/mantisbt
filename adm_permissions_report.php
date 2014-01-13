@@ -95,12 +95,6 @@ function get_section_end() {
 	return $t_output;
 }
 
-# News
-echo get_section_begin_apr( lang_get( 'news' ) );
-echo get_capability_row( lang_get( 'view_private_news' ), config_get( 'private_news_threshold' ) );
-echo get_capability_row( lang_get( 'manage_news' ), config_get( 'manage_news_threshold' ) );
-echo get_section_end();
-
 # Attachments
 if( config_get( 'allow_file_upload' ) == ON ) {
 	echo get_section_begin_apr( lang_get( 'attachments' ) );

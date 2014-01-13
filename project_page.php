@@ -100,7 +100,7 @@ if ( access_has_project_level( config_get( 'manage_project_threshold' ), $f_proj
 
 echo '</p>';
 
-/** @todo Add status, view state, versions, sub-projects, parent projects, and news. */
+/** @todo Add status, view state, versions, sub-projects, and parent projects. */
 /** @todo Schema change: add home page, license, */
 
 $t_description = project_get_field( $f_project_id, 'description' );

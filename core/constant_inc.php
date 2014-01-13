@@ -154,10 +154,6 @@ define( 'ADVANCED_ONLY', 2 );
 define( 'SIMPLE_DEFAULT', 3 );
 define( 'ADVANCED_DEFAULT', 4 );
 
-# news values
-define( 'BY_LIMIT', 0 );
-define( 'BY_DATE', 1 );
-
 # all projects
 define( 'ALL_PROJECTS', 0 );
 
@@ -295,6 +291,7 @@ define( 'ERROR_USER_CURRENT_PASSWORD_MISMATCH', 812 );
 define( 'ERROR_AUTH_INVALID_COOKIE', 900 );
 
 # ERROR_NEWS_*
+# TODO: Remove once removed from all language files
 define( 'ERROR_NEWS_NOT_FOUND', 1000 );
 
 # ERROR_BUG_*

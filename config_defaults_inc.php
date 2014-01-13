@@ -1151,44 +1151,6 @@ $g_calendar_date_format = 'Y-m-d H:i';
  */
 $g_default_timezone = '';
 
-/**************************
- * MantisBT News Settings *
- **************************/
-
-/**
- * Indicates whether the news feature should be enabled or disabled.
- * This feature is deprecated and is expected to be moved to a plugin
- * in the future.
- */
-$g_news_enabled = OFF;
-
-/**
- * Limit News Items
- * limit by entry count or date
- * BY_LIMIT - entry limit
- * BY_DATE - by date
- * @global int $g_news_limit_method
- */
-$g_news_limit_method = BY_LIMIT;
-
-/**
- * limit by last X entries
- * @global int $g_news_view_limit
- */
-$g_news_view_limit = 7;
-
-/**
- * limit by days
- * @global int $g_news_view_limit_days
- */
-$g_news_view_limit_days = 30;
-
-/**
- * threshold for viewing private news
- * @global int $g_private_news_threshold
- */
-$g_private_news_threshold = DEVELOPER;
-
 /********************************
  * MantisBT Default Preferences *
  ********************************/
@@ -2677,12 +2639,6 @@ $g_admin_site_threshold = ADMINISTRATOR;
  * @global int $g_manage_project_threshold
  */
 $g_manage_project_threshold = MANAGER;
-
-/**
- * Threshold needed to add/delete/modify news
- * @global int $g_manage_news_threshold
- */
-$g_manage_news_threshold = MANAGER;
 
 /**
  * Threshold required to delete a project
