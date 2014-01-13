@@ -38,7 +38,7 @@
 	<td class="form-title" colspan="2">
 <?php
 	collapse_icon( 'bugnote_add' );
-	echo lang_get( 'add_bugnote_title' ) ?>
+	echo '<a id="reply">' . lang_get( 'add_bugnote_title' ) . '</a>'; ?>
 	</td>
 </tr>
 <tr class="row-2">

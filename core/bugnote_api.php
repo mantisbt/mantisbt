@@ -32,6 +32,10 @@ require_once( 'current_user_api.php' );
  */
 require_once( 'email_api.php' );
 /**
+ * requires email_api
+ */
+require_once( 'notification_api.php' );
+/**
  * requires history_api
  */
 require_once( 'history_api.php' );
@@ -208,7 +212,9 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 
 	# only send email if the text is not blank, otherwise, it is just recording of time without a comment.
 	if( TRUE == $p_send_email && !is_blank( $t_bugnote_text ) ) {
-		email_bugnote_add( $p_bug_id );
+		// email_bugnote_add( $p_bug_id );
+		$t_notification_comment = notification_load_comment( $t_bugnote_id );
+		notification_comment_added( $t_notification_comment );
 	}
 
 	return $t_bugnote_id;
@@ -227,6 +233,8 @@ function bugnote_delete( $p_bugnote_id ) {
 	$t_bugnote_text_table = db_get_table( 'mantis_bugnote_text_table' );
 	$t_bugnote_table = db_get_table( 'mantis_bugnote_table' );
 
+    $t_notification_comment = notification_load_comment( $c_bugnote_id );
+
 	# Remove the bugnote
 	$query = 'DELETE FROM ' . $t_bugnote_table . ' WHERE id=' . db_param();
 	db_query_bound( $query, Array( $c_bugnote_id ) );
@@ -237,6 +245,8 @@ function bugnote_delete( $p_bugnote_id ) {
 
 	# log deletion of bug
 	history_log_event_special( $t_bug_id, BUGNOTE_DELETED, bugnote_format_id( $p_bugnote_id ) );
+
+    notification_comment_deleted( $t_notification_comment );
 
 	return true;
 }
@@ -514,6 +524,8 @@ function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
 		return true;
 	}
 
+	$t_old_notification_comment = notification_load_comment( $p_bugnote_id );
+
 	$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
 	$t_bugnote_text_id = bugnote_get_field( $p_bugnote_id, 'bugnote_text_id' );
 	$t_bugnote_text_table = db_get_table( 'mantis_bugnote_text_table' );
@@ -539,6 +551,9 @@ function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
 
 	# log new bugnote
 	history_log_event_special( $t_bug_id, BUGNOTE_UPDATED, bugnote_format_id( $p_bugnote_id ), $t_revision_id );
+
+	$t_notification_comment = notification_load_comment( $p_bugnote_id );
+	notification_comment_updated( $t_notification_comment, $t_old_notification_comment );
 
 	return true;
 }

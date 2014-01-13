@@ -222,7 +222,8 @@
 	# Allow plugins to post-process bug data with the new bug ID
 	event_signal( 'EVENT_REPORT_BUG', array( $t_bug_data, $t_bug_id ) );
 
-	email_new_bug( $t_bug_id );
+	$t_issue_notification_info = notification_load_issue( $t_bug_id );
+	notification_issue_added( $t_issue_notification_info );
 
 	// log status and resolution changes if they differ from the default
 	if ( $t_bug_data->status != config_get('bug_submit_status') )

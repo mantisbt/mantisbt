@@ -753,8 +753,8 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 		mci_tag_set_for_issue( $t_issue_id, $p_issue['tags'], $t_user_id );
 	}
 
-	email_new_bug( $t_issue_id );
-
+	$t_issue_notification_info = notification_load_issue( $t_issue_id );
+	notification_issue_added( $t_issue_notification_info );
 
 	if ( $t_bug_data->status != config_get('bug_submit_status') )
         history_log_event($t_issue_id, 'status', config_get('bug_submit_status') );

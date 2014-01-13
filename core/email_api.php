@@ -791,13 +791,10 @@ function email_bug_deleted( $p_bug_id ) {
  * @param string $p_subject
  * @param string $p_message
  * @param array $p_headers
+ * @param array $p_metadata
  * @return int e-mail queue id, or NULL if e-mail was not stored
  */
-function email_store( $p_recipient, $p_subject, $p_message, $p_headers = null ) {
-	$t_recipient = trim( $p_recipient );
-	$t_subject = string_email( trim( $p_subject ) );
-	$t_message = string_email_links( trim( $p_message ) );
-
+function email_store( $p_recipient, $p_subject, $p_message, $p_headers = null, $p_metadata = null ) {
 	# short-circuit if no recipient is defined, or email disabled
 	# note that this may cause signup messages not to be sent
 
@@ -805,12 +802,25 @@ function email_store( $p_recipient, $p_subject, $p_message, $p_headers = null ) 
 		return;
 	}
 
+	$t_recipient = trim( $p_recipient );
+
+	// TODO: Why is string_email() and string_email_links() called here?  It is called at email_send().
+	$t_subject = string_email( trim( $p_subject ) );
+
+	$t_html = isset( $p_metadata['html'] );
+
+	if ( $t_html ) {
+		$t_message = trim( $p_message );
+	} else {
+		$t_message = string_email_links( trim( $p_message ) );
+	}
+
 	$t_email_data = new EmailData;
 
 	$t_email_data->email = $t_recipient;
 	$t_email_data->subject = $t_subject;
 	$t_email_data->body = $t_message;
-	$t_email_data->metadata = array();
+	$t_email_data->metadata = $p_metadata === null ? array() : $p_metadata;
 	$t_email_data->metadata['headers'] = $p_headers === null ? array() : $p_headers;
 	$t_email_data->metadata['priority'] = config_get( 'mail_priority' );
 
@@ -897,9 +907,16 @@ function email_send( $p_email_data ) {
 
 	$t_email_data = $p_email_data;
 
+	$t_html = isset( $t_email_data->metadata['html'] );
+
 	$t_recipient = trim( $t_email_data->email );
 	$t_subject = string_email( trim( $t_email_data->subject ) );
-	$t_message = string_email_links( trim( $t_email_data->body ) );
+
+	if ( $t_html ) {
+		$t_message = $t_email_data->body;
+	} else {
+		$t_message = string_email_links( trim( $t_email_data->body ) );
+	}
 
 	$t_debug_email = config_get( 'debug_email' );
 	$t_mailer_method = config_get( 'phpMailer_method' );
@@ -958,8 +975,19 @@ function email_send( $p_email_data ) {
 			break;
 	}
 
-	$mail->IsHTML( false );              # set email format to plain text
-	$mail->WordWrap = 80;              # set word wrap to 50 characters
+	$mail->IsHTML( $t_html );              # set email format
+
+	if ( $t_html ) {
+        if ( isset( $t_email_data->metadata['images'] ) ) {
+            $t_images_folder = dirname( dirname( __FILE__ ) ) . '/images/';
+            foreach ( $t_email_data->metadata['images'] as $t_image ) {
+                $mail->AddEmbeddedImage( $t_images_folder . $t_image, $t_image, $t_image );
+            }
+        }
+    } else {
+		$mail->WordWrap = 80;              # set word wrap limit for text email.
+	}
+
 	$mail->Priority = $t_email_data->metadata['priority'];  # Urgent = 1, Not Urgent = 5, Disable = 0
 	$mail->CharSet = $t_email_data->metadata['charset'];
 	$mail->Host = config_get( 'smtp_host' );
@@ -988,7 +1016,12 @@ function email_send( $p_email_data ) {
 	}
 
 	$mail->Subject = $t_subject;
-	$mail->Body = make_lf_crlf( "\n" . $t_message );
+
+	if ( $t_html ) {
+		$mail->Body = $t_message;
+	} else {
+		$mail->Body = make_lf_crlf( "\n" . $t_message );
+	}
 
 	if( isset( $t_email_data->metadata['headers'] ) && is_array( $t_email_data->metadata['headers'] ) ) {
 		foreach( $t_email_data->metadata['headers'] as $t_key => $t_value ) {

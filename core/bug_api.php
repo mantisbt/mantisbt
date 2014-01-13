@@ -393,6 +393,10 @@ class BugData {
 
 		$c_bug_id = $this->id;
 
+		if ( !$p_bypass_mail ) {
+			$t_notification_issue_info_old = notification_load_issue( $c_bug_id );
+		}
+
 		if( is_blank( $this->due_date ) ) {
 			$this->due_date = date_get_null();
 		}
@@ -529,9 +533,11 @@ class BugData {
 
 		# allow bypass if user is sending mail separately
 		if( false == $p_bypass_mail ) {
+			$t_notification_issue_info = notification_load_issue( $c_bug_id );
+
 			# bug assigned
 			if( $t_old_data->handler_id != $this->handler_id ) {
-				email_generic( $c_bug_id, 'owner', 'email_notification_title_for_action_bug_assigned' );
+				notification_issue_updated( $t_notification_issue_info_old, $t_notification_issue_info, 'owner' );
 				return true;
 			}
 
@@ -539,13 +545,13 @@ class BugData {
 			if( $t_old_data->status != $this->status ) {
 				$t_status = MantisEnum::getLabel( config_get( 'status_enum_string' ), $this->status );
 				$t_status = str_replace( ' ', '_', $t_status );
-				email_generic( $c_bug_id, $t_status, 'email_notification_title_for_status_bug_' . $t_status );
+				notification_issue_updated( $t_notification_issue_info_old, $t_notification_issue_info, $t_status );
 				return true;
 			}
 
 			# @todo handle priority change if it requires special handling
 			# generic update notification
-			email_generic( $c_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
+			notification_issue_updated( $t_notification_issue_info_old, $t_notification_issue_info, 'updated' );
 		}
 
 		return true;
@@ -1134,7 +1140,8 @@ function bug_delete( $p_bug_id ) {
 	# log deletion of bug
 	history_log_event_special( $p_bug_id, BUG_DELETED, bug_format_id( $p_bug_id ) );
 
-	email_bug_deleted( $p_bug_id );
+	$t_notification_issue_info = notification_load_issue( $p_bug_id );
+	notification_issue_deleted( $t_notification_issue_info );
 
 	# call post-deletion custom function.  We call this here to allow the custom function to access the details of the bug before
 	# they are deleted from the database given it's id.  The other option would be to move this to the end of the function and
@@ -1559,6 +1566,7 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 	$t_bug_table = db_get_table( 'mantis_bug_table' );
 
 	if(( $t_ass_val != $h_status ) || ( $p_user_id != $h_handler_id ) ) {
+		$t_notification_issue_info_old = notification_load_issue( $p_bug_id );
 
 		# get user id
 		$query = "UPDATE $t_bug_table
@@ -1571,7 +1579,12 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 		history_log_event_direct( $c_bug_id, 'handler_id', $h_handler_id, $p_user_id );
 
 		# Add bugnote if supplied ignore false return
-		bugnote_add( $p_bug_id, $p_bugnote_text, 0, $p_bugnote_private, 0, '', NULL, FALSE );
+		$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, 0, $p_bugnote_private, 0, '', NULL, FALSE );
+		if ( $t_bugnote_id === false ) {
+			$t_comment_notification_info = null;
+		} else {
+			$t_comment_notification_info = notification_load_comment( $t_bugnote_id );
+		}
 
 		# updated the last_updated date
 		bug_update_date( $p_bug_id );
@@ -1579,7 +1592,8 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 		bug_clear_cache( $p_bug_id );
 
 		# send assigned to email
-		email_assign( $p_bug_id );
+		$t_notification_issue_info = notification_load_issue( $p_bug_id );
+		notification_issue_updated( $t_notification_issue_info_old, $t_notification_issue_info, 'owner', $t_comment_notification_info );
 	}
 
 	return true;
@@ -1595,16 +1609,25 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
  * @access public
  */
 function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false, $p_time_tracking = '0:00' ) {
+	$t_issue_notification_info_old = notification_load_issue( $p_bug_id );
+
 	$p_bugnote_text = trim( $p_bugnote_text );
 
 	# Add bugnote if supplied ignore a false return
 	# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
 	# Error condition stopped execution but status had already been changed
-	bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', NULL, FALSE );
+	$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', NULL, FALSE );
+	if ( $t_bugnote_id === false ) {
+		$t_comment_notification_info = null;
+	} else {
+		$t_comment_notification_info = notification_load_comment( $t_bugnote_id );
+	}
 
 	bug_set_field( $p_bug_id, 'status', config_get( 'bug_closed_status_threshold' ) );
 
-	email_close( $p_bug_id );
+	$t_issue_notification_info = notification_load_issue( $p_bug_id );
+	notification_issue_updated( $t_issue_notification_info_old, $t_issue_notification_info, 'closed', $t_comment_notification_info );
+
 	email_relationship_child_closed( $p_bug_id );
 
 	return true;
@@ -1625,16 +1648,24 @@ function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false,
  * @access public
  */
 function bug_resolve( $p_bug_id, $p_resolution, $p_status = null, $p_fixed_in_version = '', $p_duplicate_id = null, $p_handler_id = null, $p_bugnote_text = '', $p_bugnote_private = false, $p_time_tracking = '0:00' ) {
+	$t_issue_notification_info_old = notification_load_issue( $p_bug_id );
+
 	$c_resolution = (int) $p_resolution;
 	if( null == $p_status ) {
 		$p_status = config_get( 'bug_resolved_status_threshold' );
 	}
+
 	$p_bugnote_text = trim( $p_bugnote_text );
 
 	# Add bugnote if supplied
 	# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
 	# Error condition stopped execution but status had already been changed
-	bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', NULL, FALSE );
+	$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', NULL, FALSE );
+	if ( $t_bugnote_id === false ) {
+		$t_comment_notification_info = null;
+	} else {
+		$t_comment_notification_info = notification_load_comment( $t_bugnote_id );
+	}
 
 	$t_duplicate = !is_blank( $p_duplicate_id ) && ( $p_duplicate_id != 0 );
 	if( $t_duplicate ) {
@@ -1686,7 +1717,9 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_status = null, $p_fixed_in_ve
 		bug_set_field( $p_bug_id, 'handler_id', $p_handler_id );
 	}
 
-	email_resolved( $p_bug_id );
+	$t_issue_notification_info = notification_load_issue( $p_bug_id );
+	notification_issue_updated( $t_issue_notification_info_old, $t_issue_notification_info, 'resolved', $t_comment_notification_info );
+
 	email_relationship_child_resolved( $p_bug_id );
 
 	if( $c_resolution >= config_get( 'bug_resolution_fixed_threshold' ) &&
@@ -1711,17 +1744,25 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_status = null, $p_fixed_in_ve
  * @uses config_api.php
  */
 function bug_reopen( $p_bug_id, $p_bugnote_text = '', $p_time_tracking = '0:00', $p_bugnote_private = false ) {
+	$t_issue_notification_info_old = notification_load_issue( $p_bug_id );
+
 	$p_bugnote_text = trim( $p_bugnote_text );
 
 	# Add bugnote if supplied
 	# Moved bugnote_add before bug_set_field calls in case time_tracking_no_note is off.
 	# Error condition stopped execution but status had already been changed
-	bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', NULL, FALSE );
+	$t_bugnote_id = bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking, $p_bugnote_private, 0, '', NULL, FALSE );
+	if ( $t_bugnote_id === false ) {
+		$t_comment_notification_info = null;
+	} else {
+		$t_comment_notification_info = notification_load_comment( $t_bugnote_id );
+	}
 
 	bug_set_field( $p_bug_id, 'status', config_get( 'bug_reopen_status' ) );
 	bug_set_field( $p_bug_id, 'resolution', config_get( 'bug_reopen_resolution' ) );
 
-	email_reopen( $p_bug_id );
+	$t_issue_notification_info = notification_load_issue( $p_bug_id );
+	notification_issue_updated( $t_issue_notification_info_old, $t_issue_notification_info, 'reopened', $t_comment_notification_info );
 
 	return true;
 }
