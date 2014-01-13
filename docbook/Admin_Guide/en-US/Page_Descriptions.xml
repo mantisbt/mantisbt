@@ -1051,24 +1051,4 @@
             should check off on the issue by using the Close Issue button.
         </para>
     </section>
-
-    <section id="admin.pages.news">
-
-        <title>News Syndication</title>
-
-
-        <para>MantisBT supports news syndication using RSS v2.0 protocol.
-            MantisBT also supports authenticated news feeds for private projects
-            or installations where anonymous access is not enabled. Authenticated feeds takes a
-            user name and a key token that are used to authenticate the user
-            and generate the feed results in the context of the user's access
-            rights (i.e. the same as what the user would see if they were to
-            logged into MantisBT).To get access to the News RSS as anonymous
-            user, visit the following
-            page:&#160;http://www.example.com/mantisbt/news_rss.php&#160;While a
-            user is logged in, the RSS links provided in the UI will always
-            provide links to the authenticated feeds, if no user is logged in
-            (i.e. anonymous), then anonymous links will be provided.
-        </para>
-    </section>
 </chapter>

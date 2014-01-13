@@ -395,9 +395,6 @@ function project_delete( $p_project_id ) {
 	# Delete the records assigning users to this project
 	project_remove_all_users( $p_project_id );
 
-	# Delete all news entries associated with the project being deleted
-	news_delete_all( $p_project_id );
-
 	# Delete project specific configurations
 	config_delete_project( $p_project_id );
 

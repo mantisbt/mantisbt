@@ -406,44 +406,6 @@ function print_tag_option_list( $p_bug_id = 0 ) {
 }
 
 /**
- * Constructs the string for one news entry given the row retrieved from the news table.
- *
- * @param string $p_headline Headline of news article
- * @param string $p_body Body text of news article
- * @param int $p_poster_id User ID of author
- * @param int $p_view_state view State - either VS_PRIVATE or VS_PUBLIC
- * @param bool $p_announcement Flagged if news should be an announcement
- * @param int $p_date_posted Date associated with news entry
- */
-function print_news_entry( $p_headline, $p_body, $p_poster_id, $p_view_state, $p_announcement, $p_date_posted ) {
-	$t_headline = string_display_links( $p_headline );
-	$t_body = string_display_links( $p_body );
-	$t_date_posted = date( config_get( 'normal_date_format' ), $p_date_posted );
-
-	if( VS_PRIVATE == $p_view_state ) {
-		$t_news_css = 'news-heading-private';
-	} else {
-		$t_news_css = 'news-heading-public';
-	} ?>
-
-	<div class="news-item">
-		<h3 class="<?php echo $t_news_css; ?>">
-			<span class="news-title"><?php echo $t_headline; ?></span>
-			<span class="news-date-posted"><?php echo $t_date_posted; ?></span>
-			<span class="news-author"><?php echo prepare_user_name( $p_poster_id ); ?></span><?php
-
-			if( 1 == $p_announcement ) { ?>
-				<span class="news-announcement"><?php echo lang_get( 'announcement' ); ?></span><?php
-			}
-			if( VS_PRIVATE == $p_view_state ) { ?>
-				<span class="news-private"><?php echo lang_get( 'private' ); ?></span><?php
-			} ?>
-		</h3>
-		<p class="news-body"><?php echo $t_body; ?></p>
-	</div><?php
-}
-
-/**
  * Print User option list for assigned to field
  * @param int|string $p_user_id user id
  * @param int $p_project_id project id
