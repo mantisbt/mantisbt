@@ -620,7 +620,7 @@ $s_hide_content = 'Hide Content';
 $s_show_content = 'Show Content';
 
 # html_api.php
-$s_webmaster_contact_information = 'If you encounter problems accessing this bug tracker please <a href="mailto:%1$s" title="Contact the webmaster via e-mail.">contact us via e-mail</a> for assistance.';
+$s_webmaster_contact_information = 'Contact <a href="mailto:%1$s" title="Contact the webmaster via e-mail.">administrator</a> for assistance';
 $s_total_queries_executed = 'Total queries executed: %1$d';
 $s_unique_queries_executed = 'Unique queries executed: %1$d';
 $s_total_query_execution_time = 'Total query execution time: %1$s seconds';
