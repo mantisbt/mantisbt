@@ -472,11 +472,6 @@ function install_update_history_long_custom_fields() {
 	return 2;
 }
 
-function install_do_nothing() {
-	# return 2 because that's what ADOdb/DataDict does when things happen properly
-	return 2;
-}
-
 /**
  * create an SQLArray to insert data
  *
