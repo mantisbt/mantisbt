@@ -1278,7 +1278,7 @@ function bug_delete( $p_bug_id ) {
 	# log deletion of bug
 	history_log_event_special( $p_bug_id, BUG_DELETED, bug_format_id( $p_bug_id ) );
 
-	email_bug_deleted( $p_bug_id );
+	email_generic( $p_bug_id, 'deleted', 'email_notification_title_for_action_bug_deleted' );
 
 	# call post-deletion custom function.  We call this here to allow the custom function to access the details of the bug before
 	# they are deleted from the database given it's id.  The other option would be to move this to the end of the function and
@@ -1719,7 +1719,7 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 		bug_clear_cache( $p_bug_id );
 
 		# send assigned to email
-		email_assign( $p_bug_id );
+		email_generic( $p_bug_id, 'owner', 'email_notification_title_for_action_bug_assigned' );
 	}
 
 	return true;
@@ -1744,7 +1744,7 @@ function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false,
 
 	bug_set_field( $p_bug_id, 'status', config_get( 'bug_closed_status_threshold' ) );
 
-	email_close( $p_bug_id );
+	email_generic( $p_bug_id, 'closed', 'The following issue has been CLOSED' );
 	email_relationship_child_closed( $p_bug_id );
 
 	return true;
@@ -1829,7 +1829,7 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 		bug_set_field( $p_bug_id, 'handler_id', $p_handler_id );
 	}
 
-	email_resolved( $p_bug_id );
+	email_generic( $p_bug_id, 'resolved', 'The following issue has been RESOLVED.' );
 	email_relationship_child_resolved( $p_bug_id );
 
 	return true;
@@ -1859,7 +1859,7 @@ function bug_reopen( $p_bug_id, $p_bugnote_text = '', $p_time_tracking = '0:00',
 	bug_set_field( $p_bug_id, 'status', config_get( 'bug_reopen_status' ) );
 	bug_set_field( $p_bug_id, 'resolution', config_get( 'bug_reopen_resolution' ) );
 
-	email_reopen( $p_bug_id );
+	email_generic( $p_bug_id, 'reopened', 'email_notification_title_for_action_bug_reopened' );
 
 	return true;
 }

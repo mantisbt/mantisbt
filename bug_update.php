@@ -395,16 +395,16 @@ helper_call_custom_function( 'issue_update_notify', array( $f_bug_id ) );
 
 # Send a notification of changes via email.
 if ( $t_resolve_issue ) {
-	email_resolved( $f_bug_id );
+	email_generic( $f_bug_id, 'resolved', 'The following issue has been RESOLVED.' );
 	email_relationship_child_resolved( $f_bug_id );
 } else if ( $t_close_issue ) {
-	email_close( $f_bug_id );
+	email_generic( $f_bug_id, 'closed', 'The following issue has been CLOSED' );
 	email_relationship_child_closed( $f_bug_id );
 } else if ( $t_reopen_issue ) {
-	email_reopen( $f_bug_id );
+	email_generic( $f_bug_id, 'reopened', 'email_notification_title_for_action_bug_reopened' );
 } else if ( $t_existing_bug->handler_id === NO_USER &&
             $t_updated_bug->handler_id !== NO_USER ) {
-	email_assign( $f_bug_id );
+	email_generic( $f_bug_id, 'owner', 'email_notification_title_for_action_bug_assigned' );
 } else if ( $t_existing_bug->status !== $t_updated_bug->status ) {
 	$t_new_status_label = MantisEnum::getLabel( config_get( 'status_enum_string' ), $t_updated_bug->status );
 	$t_new_status_label = str_replace( ' ', '_', $t_new_status_label );

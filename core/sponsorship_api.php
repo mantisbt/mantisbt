@@ -379,9 +379,9 @@ function sponsorship_set( $p_sponsorship ) {
 	bug_monitor( $c_bug_id, $c_user_id );
 
 	if( $c_id == 0 ) {
-		email_sponsorship_added( $c_bug_id );
+		email_generic( $c_bug_id, 'sponsor', 'email_notification_title_for_action_sponsorship_added' );
 	} else {
-		email_sponsorship_updated( $c_bug_id );
+		email_generic( $c_bug_id, 'sponsor', 'email_notification_title_for_action_sponsorship_updated' );
 	}
 
 	return $t_sponsorship_id;
@@ -435,7 +435,7 @@ function sponsorship_delete( $p_sponsorship_id ) {
 	history_log_event_special( $t_sponsorship->bug_id, BUG_DELETE_SPONSORSHIP, $t_sponsorship->user_id, $t_sponsorship->amount );
 	sponsorship_update_bug( $t_sponsorship->bug_id );
 
-	email_sponsorship_deleted( $t_sponsorship->bug_id );
+	email_generic( $t_sponsorship->bug_id, 'sponsor', 'A sponsorship of the following issue was withdrawn.' );
 }
 
 /**
