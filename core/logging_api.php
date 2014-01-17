@@ -150,7 +150,11 @@ function log_event( $p_level, $p_msg /*,args*/) {
  */
 function log_print_to_page() {
 	if ( config_get_global( 'log_destination' ) === 'page' && auth_is_user_authenticated() && access_has_global_level( config_get( 'show_log_threshold' ) ) ) {
-		global $g_log_events, $g_log_levels;
+		global $g_log_events, $g_log_levels, $g_email_stored;
+
+		if( $g_email_stored == true ) {
+			email_send_all();
+		}
 
 		$t_unique_queries_count = 0;
 		$t_total_query_execution_time = 0;
@@ -158,7 +162,8 @@ function log_print_to_page() {
 		$t_total_queries_count = 0;
 		$t_total_event_count = count( $g_log_events );
 
-			echo "\n\n<!--Mantis Debug Log Output-->";
+		echo "\n\n<!--Mantis Debug Log Output-->";
+
 		if( $t_total_event_count == 0 ) {
 			echo "<!--END Mantis Debug Log Output-->\n\n";
 			return;
