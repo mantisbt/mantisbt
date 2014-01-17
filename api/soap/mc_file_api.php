@@ -154,25 +154,21 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 
 	# we handle the case where the file is attached to a bug
 	# or attached to a project as a project doc.
-	$query = '';
+	$t_query = '';
 	switch( $p_type ) {
 		case 'bug':
 			$t_bug_file_table = db_get_table( 'mantis_bug_file_table' );
-			$query = "SELECT *
-				FROM $t_bug_file_table
-				WHERE id='$p_file_id'";
+			$t_query = "SELECT * FROM $t_bug_file_table WHERE id=" . db_param();
 			break;
 		case 'doc':
 			$t_project_file_table = db_get_table( 'mantis_project_file_table' );
-			$query = "SELECT *
-				FROM $t_project_file_table
-				WHERE id='$p_file_id'";
+			$t_query = "SELECT * FROM $t_project_file_table WHERE id=" . db_param();
 			break;
 		default:
 			return SoapObjectsFactory::newSoapFault( 'Server', 'Invalid file type '.$p_type. ' .' );
 	}
 
-	$result = db_query( $query );
+	$result = db_query_bound( $t_query, array( $p_file_id ) );
 
 	if ( $result->EOF ) {
 		return SoapObjectsFactory::newSoapFault( 'Client', 'Unable to find an attachment with type ' . $p_type. ' and id ' . $p_file_id . ' .' );
