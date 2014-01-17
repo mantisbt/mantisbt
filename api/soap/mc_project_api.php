@@ -706,14 +706,14 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		FROM $t_project_file_table pft
 		LEFT JOIN $t_project_table pt ON pft.project_id = pt.id
 		LEFT JOIN $t_project_user_list_table pult
-		ON pft.project_id = pult.project_id AND pult.user_id = $t_user_id
-		LEFT JOIN $t_user_table ut ON ut.id = $t_user_id
+		ON pft.project_id = pult.project_id AND pult.user_id = " . db_param() . "
+		LEFT JOIN $t_user_table ut ON ut.id = " . db_param() . "
 		WHERE pft.project_id in (" . implode( ',', $t_projects ) . ") AND
-		( ( ( pt.view_state = $t_pub OR pt.view_state is null ) AND pult.user_id is null AND ut.access_level $t_access_clause ) OR
-		( ( pult.user_id = $t_user_id ) AND ( pult.access_level $t_access_clause ) ) OR
-		( ut.access_level = $t_admin ) )
+		( ( ( pt.view_state = " . db_param() . " OR pt.view_state is null ) AND pult.user_id is null AND ut.access_level $t_access_clause ) OR
+		( ( pult.user_id = " . db_param() . " ) AND ( pult.access_level $t_access_clause ) ) OR
+		( ut.access_level = " . db_param() . " ) )
 		ORDER BY pt.name ASC, pft.title ASC";
-	$result = db_query( $query );
+	$result = db_query_bound( $query, array( $t_user_id, $t_user_id, $t_pub, $t_user_id, $t_admin ) );
 	$num_files = db_num_rows( $result );
 
 	$t_result = array();

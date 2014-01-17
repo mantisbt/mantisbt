@@ -77,7 +77,7 @@ function summary_print_by_enum( $p_enum ) {
 				WHERE $t_project_filter
 				GROUP BY $p_enum $t_status_query
 				ORDER BY $p_enum $t_status_query";
-	$result = db_query( $query );
+	$result = db_query_bound( $query );
 
 	$t_last_value = -1;
 	$t_bugs_open = 0;
@@ -374,10 +374,10 @@ function summary_print_by_age() {
 		return;
 	}
 	$query = "SELECT * FROM $t_mantis_bug_table
-				WHERE status < $t_resolved
+				WHERE status < " . db_param() . "
 				AND $specific_where
 				ORDER BY date_submitted ASC, priority DESC";
-	$result = db_query( $query );
+	$result = db_query_bound( $query, array( $t_resolved ) );
 
 	$t_count = 0;
 	$t_private_bug_threshold = config_get( 'private_bug_threshold' );
@@ -423,7 +423,7 @@ function summary_print_by_developer() {
 				WHERE handler_id>0 AND $specific_where
 				GROUP BY handler_id, status
 				ORDER BY handler_id, status";
-	$result = db_query( $query );
+	$result = db_query_bound( $query );
 
 	$t_last_handler = -1;
 	$t_bugs_open = 0;
@@ -524,7 +524,7 @@ function summary_print_by_reporter() {
 				WHERE $specific_where
 				GROUP BY reporter_id
 				ORDER BY num DESC";
-	$result = db_query( $query, $t_reporter_summary_limit );
+	$result = db_query_bound( $query, null, $t_reporter_summary_limit );
 
 	$t_reporters = array();
 	while( $row = db_fetch_array( $result ) ) {
@@ -536,11 +536,11 @@ function summary_print_by_reporter() {
 	foreach( $t_reporters as $t_reporter ) {
 		$v_reporter_id = $t_reporter;
 		$query = "SELECT COUNT(id) as bugcount, status FROM $t_mantis_bug_table
-					WHERE reporter_id=$v_reporter_id
+					WHERE reporter_id=" . db_param() . "
 					AND $specific_where
 					GROUP BY status
 					ORDER BY status";
-		$result2 = db_query( $query );
+		$result2 = db_query_bound( $query, array( $v_reporter_id ) );
 
 		$last_reporter = -1;
 		$t_bugs_open = 0;
@@ -608,7 +608,7 @@ function summary_print_by_category() {
 				GROUP BY $t_project_query c.name, b.category_id, b.status
 				ORDER BY $t_project_query c.name";
 
-	$result = db_query( $query );
+	$result = db_query_bound( $query );
 
 	$last_category_name = -1;
 	$last_category_id = -1;

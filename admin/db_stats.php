@@ -30,11 +30,11 @@ access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 # --------------------
 function helper_table_row_count( $p_table ) {
 	$t_table = $p_table;
-	$query = "SELECT COUNT(*) FROM $t_table";
-	$result = db_query_bound( $query );
-	$t_users = db_result( $result );
+	$t_query = "SELECT COUNT(*) FROM $t_table";
+	$t_result = db_query_bound( $t_query );
+	$t_count = db_result( $t_result );
 
-	return $t_users;
+	return $t_count;
 }
 
 # --------------------

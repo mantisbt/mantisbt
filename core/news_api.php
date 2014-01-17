@@ -266,13 +266,15 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 
 			if( 1 == count( $t_projects ) ) {
 				$c_project_id = $t_projects[0];
-				$query .= " WHERE project_id='$c_project_id'";
+				$query .= " WHERE project_id=" . db_params();
+				$t_params = array( $c_project_id );
 			} else {
 				$query .= ' WHERE project_id IN (' . join( $t_projects, ',' ) . ')';
+				$t_params = null;
 			}
 
 			$query .= ' ORDER BY announcement DESC, id DESC';
-			$result = db_query( $query, $t_news_view_limit, $c_offset );
+			$result = db_query_bound( $query, $t_params, $t_news_view_limit, $c_offset );
 			break;
 		case 1:
 
