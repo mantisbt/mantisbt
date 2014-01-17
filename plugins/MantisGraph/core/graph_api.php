@@ -627,11 +627,15 @@ function create_bug_enum_summary( $p_enum_string, $p_enum ) {
 	$t_metrics = array();
 	$t_assoc_array = MantisEnum::getAssocArrayIndexedByValues( $p_enum_string );
 
+	if( !db_field_exists( $p_enum, $t_bug_table ) ) {
+		trigger_error( ERROR_DB_FIELD_NOT_FOUND, ERROR );
+	}
+
 	foreach ( $t_assoc_array as $t_value => $t_label  ) {
 		$query = "SELECT COUNT(*)
 					FROM $t_bug_table
-					WHERE $p_enum='$t_value' $specific_where";
-		$result = db_query( $query );
+					WHERE $p_enum=" . db_param() . " $specific_where";
+		$result = db_query_bound( $query, array( $t_value ) );
 		$t_metrics[$t_label] = db_result( $result, 0 );
 	}
 
@@ -655,32 +659,36 @@ function enum_bug_group( $p_enum_string, $p_enum ) {
 	$t_clo_val = config_get( 'bug_closed_status_threshold' );
 	$specific_where = " AND " . helper_project_specific_where( $t_project_id, $t_user_id );
 
+	if( !db_field_exists( $p_enum, $t_bug_table ) ) {
+		trigger_error( ERROR_DB_FIELD_NOT_FOUND, ERROR );
+	}
+
 	$t_array_indexed_by_enum_values = MantisEnum::getAssocArrayIndexedByValues( $p_enum_string );
 	$enum_count = count( $t_array_indexed_by_enum_values );
 	foreach ( $t_array_indexed_by_enum_values as $t_value => $t_label ) {
 		# Calculates the number of bugs opened and puts the results in a table
 		$query = "SELECT COUNT(*)
 					FROM $t_bug_table
-					WHERE $p_enum='$t_value' AND
-						status<'$t_res_val' $specific_where";
-		$result2 = db_query( $query );
+					WHERE $p_enum=" . db_param() . " AND
+						status<" . db_param() . " $specific_where";
+		$result2 = db_query( $query, array( $t_value, $t_res_val ) );
 		$t_metrics['open'][$t_label] = db_result( $result2, 0, 0 );
 
 		# Calculates the number of bugs closed and puts the results in a table
 		$query = "SELECT COUNT(*)
 					FROM $t_bug_table
-					WHERE $p_enum='$t_value' AND
-						status>='$t_clo_val' $specific_where";
-		$result2 = db_query( $query );
+					WHERE $p_enum=" . db_param() . " AND
+						status>=" . db_param() . " $specific_where";
+		$result2 = db_query_bound( $query, array( $t_value, $t_clo_val ) );
 		$t_metrics['closed'][$t_label] = db_result( $result2, 0, 0 );
 
 		# Calculates the number of bugs resolved and puts the results in a table
 		$query = "SELECT COUNT(*)
 					FROM $t_bug_table
-					WHERE $p_enum='$t_value' AND
-						status>='$t_res_val'  AND
-						status<'$t_clo_val' $specific_where";
-		$result2 = db_query( $query );
+					WHERE $p_enum=" . db_param() . " AND
+						status>=" . db_param() . " AND
+						status<" . db_param() . " $specific_where";
+		$result2 = db_query_bound( $query, array(  $t_value, $t_res_val, $t_clo_val ) );
 		$t_metrics['resolved'][$t_label] = db_result( $result2, 0, 0 );
 	}
 
@@ -875,12 +883,12 @@ function create_cumulative_bydate() {
 			FROM $t_bug_table LEFT JOIN $t_history_table
 			ON $t_bug_table.id = $t_history_table.bug_id
 			WHERE $specific_where
-						AND $t_bug_table.status >= '$t_res_val'
-						AND ( ( $t_history_table.new_value >= '$t_res_val'
+						AND $t_bug_table.status >= " . db_param() . "
+						AND ( ( $t_history_table.new_value >= " . db_param() . "
 								AND $t_history_table.field_name = 'status' )
 						OR $t_history_table.id is NULL )
 			ORDER BY $t_bug_table.id, date_modified ASC";
-	$result = db_query( $query );
+	$result = db_query( $query, array( $t_res_val, $t_res_val ) );
 	$bug_count = db_num_rows( $result );
 
 	$t_last_id = 0;
