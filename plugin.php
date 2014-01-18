@@ -57,6 +57,11 @@ if ( !is_file( $t_page ) ) {
 		trigger_error( ERROR_PLUGIN_PAGE_NOT_FOUND, ERROR );
 }
 
+if( plugin_needs_upgrade( $g_plugin_cache[$t_basename] ) ) {
+	error_parameters( $t_basename );
+	trigger_error( ERROR_PLUGIN_UPGRADE_NEEDED, ERROR );
+}
+
 plugin_push_current( $t_basename );
 include( $t_page );
 
