@@ -269,7 +269,7 @@ function file_get_visible_attachments( $p_bug_id ) {
 		$t_id = $t_row['id'];
 		$t_filename = $t_row['filename'];
 		$t_filesize = $t_row['filesize'];
-		$t_diskfile = file_normalize_attachment_path( $t_row['diskfile'], bug_get_field( $p_bug_id, 'project_id' ) );
+		$t_diskfile = $t_row['local_disk_file'];
 		$t_date_added = $t_row['date_added'];
 
 		$t_attachment = array();
@@ -290,7 +290,7 @@ function file_get_visible_attachments( $p_bug_id ) {
 			$image_previewed = false;
 		}
 
-		$t_attachment['exists'] = config_get( 'file_upload_method' ) != DISK || file_exists( $t_diskfile );
+		$t_attachment['exists'] = $t_row['exists'];
 		$t_attachment['icon'] = file_get_icon_url( $t_attachment['display_name'] );
 
 		$t_attachment['preview'] = false;
@@ -317,51 +317,38 @@ function file_get_visible_attachments( $p_bug_id ) {
 
 # delete all files that are associated with the given bug
 function file_delete_attachments( $p_bug_id ) {
-	$c_bug_id = db_prepare_int( $p_bug_id );
-
-	$t_bug_file_table = db_get_table( 'mantis_bug_file_table' );
-
-	$t_method = config_get( 'file_upload_method' );
-
-	# Delete files from disk
-	$query = "SELECT diskfile, filename
-				FROM $t_bug_file_table
-				WHERE bug_id=" . db_param();
-	$result = db_query_bound( $query, Array( $c_bug_id ) );
-
-	$file_count = db_num_rows( $result );
-	if( 0 == $file_count ) {
+	$t_attachments = bug_get_attachments( $p_bug_id );
+	if ( count( $t_attachments ) == 0 ) {
 		return true;
 	}
 
-	if(( DISK == $t_method ) || ( FTP == $t_method ) ) {
+	// There is no way to figure out if attachment was saved to FTP via the database,
+	// so use the current configuration.
+	$t_ftp_method = config_get( 'file_upload_method' ) == FTP;
 
-		# there may be more than one file
-		$ftp = 0;
-		if( FTP == $t_method ) {
-			$ftp = file_ftp_connect();
-		}
+	if ( $t_ftp_method ) {
+		$ftp = file_ftp_connect();
+	}
 
-		for( $i = 0;$i < $file_count;$i++ ) {
-			$row = db_fetch_array( $result );
+	foreach ( $t_attachments as $t_attachment ) {
+		if ( $t_attachment['store'] == DISK ) {
+			file_delete_local( $t_attachment['local_disk_file'] );
 
-			$t_local_diskfile = file_normalize_attachment_path( $row['diskfile'], bug_get_field( $p_bug_id, 'project_id' ) );
-			file_delete_local( $t_local_diskfile );
-
-			if( FTP == $t_method ) {
+			if ( $t_ftp_method ) {
 				file_ftp_delete( $ftp, $row['diskfile'] );
 			}
 		}
+	}
 
-		if( FTP == $t_method ) {
-			file_ftp_disconnect( $ftp );
-		}
+	if ( $t_ftp_method ) {
+		file_ftp_disconnect( $ftp );
 	}
 
 	# Delete the corresponding db records
+	$t_bug_file_table = db_get_table( 'mantis_bug_file_table' );
 	$query = "DELETE FROM $t_bug_file_table
 				  WHERE bug_id=" . db_param();
-	$result = db_query_bound( $query, Array( $c_bug_id ) );
+	$result = db_query_bound( $query, array( $p_bug_id ) );
 
 	# db_query errors on failure so:
 	return true;
@@ -483,18 +470,14 @@ function file_delete( $p_file_id, $p_table = 'bug' ) {
 		$t_project_id = file_get_field( $p_file_id, 'project_id', $p_table );
 	}
 
-	if(( DISK == $t_upload_method ) || ( FTP == $t_upload_method ) ) {
-		if( FTP == $t_upload_method ) {
-			$ftp = file_ftp_connect();
-			file_ftp_delete( $ftp, $t_diskfile );
-			file_ftp_disconnect( $ftp );
-		}
-
-		$t_local_disk_file = file_normalize_attachment_path( $t_diskfile, $t_project_id );
-		if ( file_exists( $t_local_disk_file ) ) {
-			file_delete_local( $t_local_disk_file );
-		}
+	if ( FTP == $t_upload_method ) {
+		$ftp = file_ftp_connect();
+		file_ftp_delete( $ftp, $t_diskfile );
+		file_ftp_disconnect( $ftp );
 	}
+
+	$t_local_disk_file = file_normalize_attachment_path( $t_diskfile, $t_project_id );
+	file_delete_local( $t_local_disk_file );
 
 	if( 'bug' == $p_table ) {
 		# log file deletion

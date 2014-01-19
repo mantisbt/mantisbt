@@ -146,65 +146,39 @@
 
 	$t_content_type_override = file_get_content_type_override ( $t_filename );
 
-	# dump file content to the connection.
-	switch ( config_get( 'file_upload_method' ) ) {
-		case DISK:
-			$t_local_disk_file = file_normalize_attachment_path( $v_diskfile, $t_project_id );
+	// Use data from actual attachment record rather than configuration since the configuration
+	// may change over time and the database may end up having a mix of attachments in DATABASE
+	// and DISK.
+	$t_local_disk_file = file_normalize_attachment_path( $v_diskfile, $t_project_id );
 
-			if ( file_exists( $t_local_disk_file ) ) {
-				if ( $finfo ) {
-					$t_file_info_type = $finfo->file( $t_local_disk_file );
+	if ( file_exists( $t_local_disk_file ) ) {
+		if ( $finfo ) {
+			$t_file_info_type = $finfo->file( $t_local_disk_file );
 
-					if ( $t_file_info_type !== false ) {
-						$t_content_type = $t_file_info_type;
-					}
-				}
-
-				if ( $t_content_type_override ) {
-					$t_content_type = $t_content_type_override;
-				}
-
-				header( 'Content-Type: ' . $t_content_type );
-				readfile( $t_local_disk_file );
+			if ( $t_file_info_type !== false ) {
+				$t_content_type = $t_file_info_type;
 			}
-			break;
-		case FTP:
-			$t_local_disk_file = file_normalize_attachment_path( $v_diskfile, $t_project_id );
+		}
 
-			if ( !file_exists( $t_local_disk_file ) ) {
-				$ftp = file_ftp_connect();
-				file_ftp_get ( $ftp, $t_local_disk_file, $v_diskfile );
-				file_ftp_disconnect( $ftp );
+		if ( $t_content_type_override ) {
+			$t_content_type = $t_content_type_override;
+		}
+
+		header( 'Content-Type: ' . $t_content_type );
+		readfile( $t_local_disk_file );
+	} else {
+		if ( $finfo ) {
+			$t_file_info_type = $finfo->buffer( $v_content );
+
+			if ( $t_file_info_type !== false ) {
+				$t_content_type = $t_file_info_type;
 			}
+		}
 
-			if ( $finfo ) {
-				$t_file_info_type = $finfo->file( $t_local_disk_file );
+		if ( $t_content_type_override ) {
+			$t_content_type = $t_content_type_override;
+		}
 
-				if ( $t_file_info_type !== false ) {
-					$t_content_type = $t_file_info_type;
-				}
-			}
-
-			if ( $t_content_type_override ) {
-				$t_content_type = $t_content_type_override;
-			}
-
-			header( 'Content-Type: ' . $t_content_type );
-			readfile( $t_local_disk_file );
-			break;
-		default:
-			if ( $finfo ) {
-				$t_file_info_type = $finfo->buffer( $v_content );
-
-				if ( $t_file_info_type !== false ) {
-					$t_content_type = $t_file_info_type;
-				}
-			}
-
-			if ( $t_content_type_override ) {
-				$t_content_type = $t_content_type_override;
-			}
-
-			header( 'Content-Type: ' . $t_content_type );
-			echo $v_content;
+		header( 'Content-Type: ' . $t_content_type );
+		echo $v_content;
 	}

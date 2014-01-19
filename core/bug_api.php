@@ -1406,10 +1406,11 @@ function bug_get_bugnote_stats( $p_bug_id ) {
  */
 function bug_get_attachments( $p_bug_id ) {
 	$c_bug_id = db_prepare_int( $p_bug_id );
+	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 
 	$t_bug_file_table = db_get_table( 'mantis_bug_file_table' );
 
-	$query = "SELECT id, title, diskfile, filename, filesize, file_type, date_added, user_id
+	$query = "SELECT id, title, diskfile, filename, filesize, file_type, date_added, user_id, content <> '' as content_in_db
 		                FROM $t_bug_file_table
 		                WHERE bug_id=" . db_param() . "
 		                ORDER BY date_added";
@@ -1419,7 +1420,15 @@ function bug_get_attachments( $p_bug_id ) {
 	$t_result = array();
 
 	for( $i = 0;$i < $num_files;$i++ ) {
-		$t_result[] = db_fetch_array( $db_result );
+		$t_row = db_fetch_array( $db_result );
+
+		$t_row['store'] = $t_row['content_in_db'] == '1' ? DATABASE : DISK;
+		if ( $t_row['store'] == DISK ) {
+			$t_row['local_disk_file'] = file_normalize_attachment_path( $t_row['diskfile'], $t_project_id );
+		}
+
+		$t_row['exists'] = $t_row['store'] == DATABASE || file_exists( $t_row['local_disk_file'] );
+		$t_result[] = $t_row;
 	}
 
 	return $t_result;
