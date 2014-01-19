@@ -825,9 +825,7 @@ function relationship_view_box( $p_bug_id ) {
 <?php
 	# bug not read-only and user authenticated
 	if( !bug_is_readonly( $p_bug_id ) ) {
-
-		# user access level at least updater
-		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
+		if ( access_has_bug_level( config_get( 'relationship_edit_threshold' ), $p_bug_id ) ) {
 			?>
 <tr class="row-1">
 	<td class="category"><?php echo lang_get( 'add_new_relationship' )?></td>

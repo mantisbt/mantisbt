@@ -2817,7 +2817,9 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_FILTER_BY_DATE;?>" id="do_filter_by_date_filter"><?php echo lang_get( 'use_date_filters' )?>:</a>
 			</td>
 			<td class="small-caption" valign="top" colspan="2">
+				<?php if ( ON == config_get( 'relationship_enable' ) ) { ?>
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_RELATIONSHIP_TYPE;?>" id="relationship_type_filter"><?php echo lang_get( 'bug_relationships' )?>:</a>
+				<?php } ?>
 			</td>
 			<?php if( $t_filter_cols > 8 ) {
 			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';
@@ -2929,7 +2931,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			</td>
 
 			<td class="small-caption" valign="top" colspan="2" id="relationship_type_filter_target">
-							<?php
+				<?php if ( ON == config_get( 'relationship_enable' ) ) {
 								echo '<input type="hidden" name="', FILTER_PROPERTY_RELATIONSHIP_TYPE, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE]), '" />';
 		echo '<input type="hidden" name="', FILTER_PROPERTY_RELATIONSHIP_BUG, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_RELATIONSHIP_BUG] ), '" />';
 		$c_rel_type = $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE];
@@ -2940,7 +2942,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			echo relationship_get_description_for_history( $c_rel_type ) . ' ' . $c_rel_bug;
 		}
 
-		?>
+		} ?>
 			</td>
 			<?php if( $t_filter_cols > 8 ) {
 			echo '<td class="small-caption" valign="top" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';

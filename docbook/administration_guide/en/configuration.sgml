@@ -3023,9 +3023,27 @@
     </section>
 
     <section id="admin.config.relationship">
-        <title>Relationship Graphs</title>
+        <title>Relationships</title>
 
         <variablelist>
+            <varlistentry>
+                <term>$g_relationship_enable</term>
+                <listitem>
+                    <para>
+                        This enables or disables the relationship feature.  Possible values are ON or OFF.
+                        Default is ON.
+                    </para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_relationship_edit_threshold</term>
+                <listitem>
+                    <para>
+                        The access level threshold for users to add or delete relationships.
+                        Default is UPDATER.
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry>
                 <term>$g_relationship_graph_enable</term>
                 <listitem>
