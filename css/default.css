@@ -7,6 +7,7 @@ body {
 }
 
 p				{ font-family: Verdana, Arial, Helvetica, sans-serif; }
+p.compact		{ margin: 0;}
 
 pre				{ margin-top: 0px; margin-bottom: 0px; }
 
@@ -328,7 +329,8 @@ div.quick-summary-right	{ width: 49%; padding: 2px; text-align: right; float: ri
 
 .avatar
 {
-	float: right;
+	float: left;
+	margin-right: 3px;
 	border: 0;
 	border-radius: 5px;
 }
