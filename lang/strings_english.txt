@@ -1234,7 +1234,6 @@ $s_close_bug_button = 'Close';
 $s_move_bug_button = 'Move';
 $s_attached_files = 'Attached Files';
 $s_publish = 'Publish';
-$s_cached = 'Cached';
 $s_add_user_to_monitor = 'Add';
 
 # view_bug_page.php

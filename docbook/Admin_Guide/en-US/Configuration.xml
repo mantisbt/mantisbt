@@ -1597,8 +1597,8 @@ $g_language_choices_arr = array( 'english', 'french', 'german' );
 
         <para>MantisBT allows users to upload file attachments and
             associate them with bugs as well as projects. Bug attachments /
-            project documents can be uploaded to the webserver, database or an
-            FTP server. When bugs are uploaded to the webserver they are
+            project documents can be uploaded to the webserver or database.
+            When bugs are uploaded to the webserver they are
             uploaded to the path that is configured in the project
             properties. In case of problems getting the file upload feature to
             work, check the following resources:
@@ -1621,14 +1621,12 @@ $g_language_choices_arr = array( 'english', 'french', 'german' );
                 <term>$g_file_upload_method</term>
                 <listitem>
                     <para>Specify the location for uploading attachments.
-                        In case of FTP, the files are saved on the
-                        webserver (same as disk) as well as on the specified FTP server.
-                        In case of DISK / FTP upload methods you need to provide the
+                        In case of DISK methods you need to provide the
                         webserver with write access rights to the configured upload path
                         (configured in the project) and temporary upload path (used by
                         PHP).
                     </para>
-                    <para>Values: DISK, DATABASE, FTP
+                    <para>Values: DISK or DATABASE
                     </para>
                     <para>Default: DATABASE
                     </para>
@@ -1648,30 +1646,6 @@ $g_language_choices_arr = array( 'english', 'french', 'german' );
                         You may also have to configure your php.ini file to increase the
                         execution time, memory limit, max post size, and max upload size.
                     </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term>$g_file_upload_ftp_server</term>
-                <listitem>
-                    <para>Address of the FTP server to write to (eg: ftp.example.com).
-                        This option is only effective if upload method is FTP.
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term>$g_file_upload_ftp_user</term>
-                <listitem>
-                    <para>FTP user name for account to be used in uploading files to
-                        the FTP server. This account must have read/write access to the FTP
-                        server. The default path for the account is used for uploading the
-                        files.
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term>$g_file_upload_ftp_pass</term>
-                <listitem>
-                    <para>Password to use when logging in to the FTP server.</para>
                 </listitem>
             </varlistentry>
             <varlistentry>

@@ -1057,7 +1057,6 @@ function bug_check_workflow( $p_bug_status, $p_wanted_status ) {
 /**
  * Copy a bug from one project to another. Also make copies of issue notes, attachments, history,
  * email notifications etc.
- * @todo Not managed FTP file upload
  * @param int $p_bug_id bug id
  * @param int $p_target_project_id target project id
  * @param bool $p_copy_custom_fields copy custom fields

@@ -1635,13 +1635,13 @@ $g_allow_file_upload = ON;
 
 /**
  * Upload destination: specify actual location in project settings
- * DISK, DATABASE, or FTP.
+ * DISK or DATABASE. FTP is now deprecated and will map to DISK.
  * @global int $g_file_upload_method
  */
 $g_file_upload_method = DATABASE;
 
 /**
- * When using FTP or DISK for storing uploaded files, this setting control
+ * When using DISK for storing uploaded files, this setting control
  * the access permissions they will have on the web server: with the default
  * value (0400) files will be read-only, and accessible only by the user
  * running the apache process (probably "apache" in Linux and "Administrator"
@@ -1651,24 +1651,6 @@ $g_file_upload_method = DATABASE;
  * @global int $g_attachments_file_permissions
  */
 $g_attachments_file_permissions = 0400;
-
-/**
- * FTP settings, used if $g_file_upload_method = FTP
- * @global string $g_file_upload_ftp_server
- */
-$g_file_upload_ftp_server = 'ftp.myserver.com';
-
-/**
- *
- * @global string $g_file_upload_ftp_user
- */
-$g_file_upload_ftp_user = 'readwriteuser';
-
-/**
- *
- * @global string $g_file_upload_ftp_pass
- */
-$g_file_upload_ftp_pass = 'readwritepass';
 
 /**
  * Maximum file size that can be uploaded
@@ -4195,12 +4177,14 @@ $g_global_settings = array(
 	'language_auto_map', 'fallback_language', 'login_method', 'plugins_enabled', 'session_handler',
 	'session_save_path', 'session_validation', 'show_detailed_errors', 'show_queries_count',
 	'stop_on_errors',	'use_javascript', 'version_suffix',	'custom_strings_file',
-	'file_upload_ftp_server', 'file_upload_ftp_user', 'file_upload_ftp_pass',
 	'fileinfo_magic_db_file', 'css_include_file', 'css_rtl_include_file', 'meta_include_file',
 	'file_type_icons', 'path', 'icon_path', 'short_path', 'absolute_path', 'core_path',
 	'class_path','library_path', 'language_path', 'absolute_path_default_upload_folder',
 	'ldap_simulation_file_path', 'plugin_path', 'bottom_include_page', 'top_include_page',
 	'default_home_page', 'logout_redirect_page', 'manual_url', 'logo_url', 'wiki_engine_url',
+
+	// deprecated in 1.3.0dev
+	'file_upload_ftp_server', 'file_upload_ftp_user', 'file_upload_ftp_pass',
 );
 
 /***************
