@@ -969,6 +969,10 @@ function email_send( $p_email_data ) {
 	$mail->AddCustomHeader('Auto-Submitted:auto-generated');
 	$mail->AddCustomHeader('X-Auto-Response-Suppress: All');
 
+	// Setup new line and encoding to avoid extra new lines with some smtp gateways like sendgrid.net
+	$mail->LE         = "\r\n";
+	$mail->Encoding   = "quoted-printable";
+
 	if( OFF !== $t_debug_email ) {
 		$t_message = 'To: ' . $t_recipient . "\n\n" . $t_message;
 		$t_recipient = $t_debug_email;
