@@ -727,7 +727,8 @@ function config_is_private( $p_config_var ) {
 		case 'neato_tool':
 			return true;
 
-		// Deprecated in 1.3.0dev
+		// Marked obsolete in 1.3.0dev - keep here to make sure they are not disclosed by soap api.
+		// These can be removed once complete removal from config and db is enforced by upgrade process.
 		case 'file_upload_ftp_server':
 		case 'file_upload_ftp_user':
 		case 'file_upload_ftp_pass':
