@@ -27,6 +27,7 @@
  *
  * @author EugeneZelenko
  * @author Jim-by
+ * @author Red Winged Duck
  */
 
 $s_plugin_graph_title = 'Графікі MantisBT';
@@ -83,7 +84,7 @@ $s_plugin_MantisGraph_period_this_month = 'Гэты месяц';
 $s_plugin_MantisGraph_period_last_month = 'Мінулы месяц';
 $s_plugin_MantisGraph_period_this_quarter = 'Гэты квартал';
 $s_plugin_MantisGraph_period_last_quarter = 'Папярэдні квартал';
-$s_plugin_MantisGraph_period_year_to_date = 'З пачатку года';
+$s_plugin_MantisGraph_period_year_to_date = 'З пачатку году';
 $s_plugin_MantisGraph_period_select = 'Адвольныя даты';
 $s_plugin_MantisGraph_period_last_year = 'Папярэдні год';
 $s_plugin_MantisGraph_select = 'Калі ласка, зрабіце выбар';

@@ -27,6 +27,7 @@
  *
  * @author EugeneZelenko
  * @author Jim-by
+ * @author Red Winged Duck
  * @author Wizardist
  */
 
@@ -484,7 +485,7 @@ $s_sent_you_this_reminder_about = 'дасылае Вам гэтае нагадв
 $s_bug_reminder = 'Даслаць напамін';
 $s_reminder_sent_to = 'Нагадваньне дасланае да';
 $s_reminder_sent_none = 'Нагадваньне ня можа быць дасланае';
-$s_reminder_list_truncated = 'сьпіс атрымальнікаў скарочаныб зьвярніцеся ў гісторыю вынікаў за поўным сьпісам';
+$s_reminder_list_truncated = 'сьпіс атрымальнікаў скарочаны';
 $s_bug_send_button = 'Даслаць';
 $s_reminder = 'Напамін';
 $s_reminder_explain = 'Гэты камэнтар будзе дасланы атрымальнікам, якія запыталі водгук пра гэтую праблему.';

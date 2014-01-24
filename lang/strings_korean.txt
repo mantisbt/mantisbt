@@ -26,6 +26,7 @@
  * @file
  *
  * @author Changwoo
+ * @author Priviet
  * @author Wtspout
  * @author aporie@kornet.net
  * @author hardkoder@gmail.com - (마지막 수정일:2004/09/22)
@@ -424,7 +425,7 @@ $s_add_profile_title = '프로필 추가';
 $s_add_profile_button = '프로필 추가';
 $s_edit_or_delete_profiles_title = '프로필 편집하거나 삭제';
 $s_edit_profile = '프로필 편집';
-$s_make_default = '기본값 만들기';
+$s_make_default = '기본 값 만들기';
 $s_delete_profile = '프로필 삭제';
 $s_select_profile = '프로필 편집';
 $s_submit_button = '확인';
