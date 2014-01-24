@@ -32,8 +32,6 @@ notifications:
   email:
     on_success: change
     on_failure: always
-    recipients:
-      - mantisbt-cvs@lists.sourceforge.net
 
   irc:
     on_success: change
