@@ -41,7 +41,6 @@
  * @uses html_api.php
  * @uses lang_api.php
  * @uses last_visited_api.php
- * @uses news_api.php
  * @uses prepare_api.php
  * @uses profile_api.php
  * @uses project_api.php
@@ -71,7 +70,6 @@ require_api( 'helper_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'last_visited_api.php' );
-require_api( 'news_api.php' );
 require_api( 'prepare_api.php' );
 require_api( 'profile_api.php' );
 require_api( 'project_api.php' );
@@ -405,124 +403,6 @@ function print_tag_option_list( $p_bug_id = 0 ) {
 		}
 		echo '<option value="', $row['id'], '" title="', string_attribute( $row['name'] ), '">', string_attribute( $t_string ), '</option>';
 	}
-}
-
-/**
- * Get current headlines and id  prefix with v_
- */
-function print_news_item_option_list() {
-	$t_mantis_news_table = db_get_table( 'news' );
-
-	$t_project_id = helper_get_current_project();
-
-	$t_global = access_has_global_level( config_get_global( 'admin_site_threshold' ) );
-	if( $t_global ) {
-		$query = "SELECT id, headline, announcement, view_state
-				FROM $t_mantis_news_table
-				ORDER BY date_posted DESC";
-	} else {
-		$query = "SELECT id, headline, announcement, view_state
-				FROM $t_mantis_news_table
-				WHERE project_id=" . db_param() . "
-				ORDER BY date_posted DESC";
-	}
-	$result = db_query_bound( $query, ($t_global == true ? array() : array( $t_project_id ) ) );
-	$news_count = db_num_rows( $result );
-
-	for( $i = 0;$i < $news_count;$i++ ) {
-		$row = db_fetch_array( $result );
-
-		$t_headline = string_display( $row['headline'] );
-		$t_announcement = $row['announcement'];
-		$t_view_state = $row['view_state'];
-		$t_id = $row['id'];
-
-		$t_notes = array();
-		$t_note_string = '';
-
-		if ( 1 == $t_announcement ) {
-			array_push( $t_notes, lang_get( 'announcement' ) );
-		}
-
-		if ( VS_PRIVATE == $t_view_state ) {
-			array_push( $t_notes, lang_get( 'private' ) );
-		}
-
-		if ( count( $t_notes ) > 0 ) {
-			$t_note_string = ' [' . implode( ' ', $t_notes ) . ']';
-		}
-
-		echo "<option value=\"$t_id\">$t_headline$t_note_string</option>";
-	}
-}
-
-/**
- * Constructs the string for one news entry given the row retrieved from the news table.
- *
- * @param string $p_headline Headline of news article
- * @param string $p_body Body text of news article
- * @param int $p_poster_id User ID of author
- * @param int $p_view_state view State - either VS_PRIVATE or VS_PUBLIC
- * @param bool $p_announcement Flagged if news should be an announcement
- * @param int $p_date_posted Date associated with news entry
- */
-function print_news_entry( $p_headline, $p_body, $p_poster_id, $p_view_state, $p_announcement, $p_date_posted ) {
-	$t_headline = string_display_links( $p_headline );
-	$t_body = string_display_links( $p_body );
-	$t_date_posted = date( config_get( 'normal_date_format' ), $p_date_posted );
-
-	if( VS_PRIVATE == $p_view_state ) {
-		$t_news_css = 'news-heading-private';
-	} else {
-		$t_news_css = 'news-heading-public';
-	} ?>
-
-	<div class="news-item">
-		<h3 class="<?php echo $t_news_css; ?>">
-			<span class="news-title"><?php echo $t_headline; ?></span>
-			<span class="news-date-posted"><?php echo $t_date_posted; ?></span>
-			<span class="news-author"><?php echo prepare_user_name( $p_poster_id ); ?></span><?php
-
-			if( 1 == $p_announcement ) { ?>
-				<span class="news-announcement"><?php echo lang_get( 'announcement' ); ?></span><?php
-			}
-			if( VS_PRIVATE == $p_view_state ) { ?>
-				<span class="news-private"><?php echo lang_get( 'private' ); ?></span><?php
-			} ?>
-		</h3>
-		<p class="news-body"><?php echo $t_body; ?></p>
-	</div><?php
-}
-
-/**
- * print a news item given a row in the news table.
- * @param array $p_news_row news database result
- */
-function print_news_entry_from_row( $p_news_row ) {
-	$t_headline = $p_news_row['headline'];
-	$t_body = $p_news_row['body'];
-	$t_poster_id = $p_news_row['poster_id'];
-	$t_view_state = $p_news_row['view_state'];
-	$t_announcement = $p_news_row['announcement'];
-	$t_date_posted = $p_news_row['date_posted'];
-
-	print_news_entry( $t_headline, $t_body, $t_poster_id, $t_view_state, $t_announcement, $t_date_posted );
-}
-
-/**
- * print a news item
- *
- * @param int $p_news_id news article ID
- */
-function print_news_string_by_news_id( $p_news_id ) {
-	$row = news_get_row( $p_news_id );
-
-	# only show VS_PRIVATE posts to configured threshold and above
-	if(( VS_PRIVATE == $row['view_state'] ) && !access_has_project_level( config_get( 'private_news_threshold' ) ) ) {
-		return;
-	}
-
-	print_news_entry_from_row( $row );
 }
 
 /**

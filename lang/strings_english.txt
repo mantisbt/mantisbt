@@ -675,9 +675,6 @@ $s_lost_password_confirm_hash_OK = 'Your confirmation has been accepted. Please 
 # main_page.php
 $s_open_and_assigned_to_me_label = 'Open and assigned to me:';
 $s_open_and_reported_to_me_label = 'Open and reported by me:';
-$s_newer_news_link = 'Newer News';
-$s_older_news_link = 'Older News';
-$s_archives = 'Archives';
 $s_rss = 'RSS';
 
 # manage_overview_page
@@ -970,7 +967,6 @@ $s_email_user_updated_subject = 'Account updated';
 $s_email_user_updated_msg = 'Your account has been updated by an administrator. A list of these changes is provided below. You can update your account details and preferences at any time by visiting the following URL:';
 
 # menu_inc.php
-$s_main_link = 'Main';
 $s_view_bugs_link = 'View Issues';
 $s_report_bug_link = 'Report Issue';
 $s_changelog_link = 'Change Log';
@@ -979,7 +975,6 @@ $s_summary_link = 'Summary';
 $s_account_link = 'My Account';
 $s_users_link = 'Users';
 $s_manage_link = 'Manage';
-$s_edit_news_link = 'Edit News';
 $s_docs_link = 'Docs';
 $s_logout_link = 'Logout';
 $s_my_view_link = 'My View';
@@ -995,36 +990,8 @@ $s_my_view_title_feedback = 'Awaiting Feedback from Me';
 $s_my_view_title_verify = 'Awaiting Confirmation of Resolution from Me';
 $s_my_view_title_my_comments = 'Issues I Have Commented On';
 
-# news_add.php
-$s_news_added_msg = 'News item added...';
-
-# news_delete.php
-$s_news_deleted_msg = 'Deleted news item...';
-
-# news_delete_page.php
-$s_delete_news_sure_msg = 'Are you sure you wish to delete this news item?';
-$s_delete_news_item_button = 'Delete News Item';
-
-# news_edit_page.php
-$s_edit_news_title = 'Edit News';
-$s_headline = 'Headline';
+# Email
 $s_body = 'Body';
-$s_update_news_button = 'Update News';
-
-# news_menu_page.php
-$s_add_news_title = 'Add News';
-$s_post_to = 'Post to';
-$s_post_news_button = 'Post News';
-$s_edit_or_delete_news_title = 'Edit or Delete News';
-$s_edit_post = 'Edit Post';
-$s_delete_post = 'Delete Post';
-$s_select_post = 'Select Post';
-
-# news_update.php
-$s_news_updated_msg = 'News item updated...';
-
-# news_view_page.php
-$s_back_link = 'Back';
 
 # proj_doc_add.php
 $s_file_uploaded_msg = 'File upload successful.';
@@ -1388,9 +1355,6 @@ $s_show_list_of_users_monitoring_issue = 'Show list of users monitoring issue';
 $s_notes = 'Notes';
 $s_add_notes = 'Add notes';
 $s_view_private_notes = 'View others\' private notes';
-$s_news = 'News';
-$s_view_private_news = 'View private news';
-$s_manage_news = 'Manage news';
 $s_view_list_of_attachments = 'View list of attachments';
 $s_download_attachments = 'Download attachments';
 $s_delete_attachments = 'Delete attachments';
@@ -1590,7 +1554,6 @@ $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'User with name "%1$s" not found.'
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'User with id "%1$d" not found.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'The login information stored by your browser is invalid. Perhaps your account was deleted?';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Preferences could not be found for this user.';
-$MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'News item not found.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Password does not match verification.';
 $MANTIS_ERROR[ERROR_USER_CURRENT_PASSWORD_MISMATCH] = 'Current password is incorrect.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'An array was expected but a string was received for %1$s.';

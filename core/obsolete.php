@@ -167,3 +167,8 @@ config_obsolete( 'dhtml_filters', 'use_dynamic_filters' );
 config_obsolete( 'use_iis' );
 config_obsolete( 'page_title', 'top_include_page' );
 config_obsolete( 'limit_email_domain', 'limit_email_domains' );
+config_obsolete( 'news_enabled' );
+config_obsolete( 'news_limit_method' );
+config_obsolete( 'news_view_limit' );
+config_obsolete( 'news_view_limit_days' );
+config_obsolete( 'private_news_threshold' );

@@ -70,7 +70,6 @@
  * @uses form_api.php
  * @uses helper_api.php
  * @uses lang_api.php
- * @uses news_api.php
  * @uses php_api.php
  * @uses print_api.php
  * @uses project_api.php
@@ -95,7 +94,6 @@ require_api( 'filter_constants_inc.php' );
 require_api( 'form_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'lang_api.php' );
-require_api( 'news_api.php' );
 require_api( 'php_api.php' );
 require_api( 'print_api.php' );
 require_api( 'project_api.php' );
@@ -796,11 +794,6 @@ function print_menu() {
 
 		$t_menu_options = array();
 
-		# Main Page
-		if ( config_get( 'news_enabled' ) == ON ) {
-			$t_menu_options[] = '<a href="' . helper_mantis_url( 'main_page.php' ) . '">' . lang_get( 'main_link' ) . '</a>';
-		}
-
 		# Plugin / Event added options
 		$t_event_menu_options = event_signal( 'EVENT_MENU_MAIN_FRONT' );
 		foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
@@ -883,17 +876,6 @@ function print_menu() {
 					}
 				}
 				$t_menu_options[] = "<a href=\"$t_link\">" . lang_get( 'manage_link' ) . '</a>';
-			}
-		}
-
-		# News Page
-		if ( news_is_enabled() && access_has_project_level( config_get( 'manage_news_threshold' ) ) ) {
-
-			# Admin can edit news for All Projects (site-wide)
-			if( ALL_PROJECTS != helper_get_current_project() || current_user_is_administrator() ) {
-				$t_menu_options[] = '<a href="' . helper_mantis_url( 'news_menu_page.php">' ) . lang_get( 'edit_news_link' ) . '</a>';
-			} else {
-				$t_menu_options[] = '<a href="' . helper_mantis_url( 'login_select_proj_page.php">' ) . lang_get( 'edit_news_link' ) . '</a>';
 			}
 		}
 

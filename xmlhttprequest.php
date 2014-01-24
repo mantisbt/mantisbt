@@ -15,8 +15,7 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This is the first page a user sees when they login to the bugtracker
- * News is displayed which can notify users of any important changes
+ * AJAX
  *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
