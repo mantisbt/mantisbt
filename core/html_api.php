@@ -1307,7 +1307,6 @@ function html_status_legend() {
 
 	$t_status_array = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
 	$t_status_names = MantisEnum::getAssocArrayIndexedByValues( lang_get( 'status_enum_string' ) );
-	$enum_count = count( $t_status_array );
 
 	# read through the list and eliminate unused ones for the selected project
 	# assumes that all status are are in the enum array
@@ -1348,7 +1347,6 @@ function html_status_legend() {
 	echo '<tr>';
 
 	# draw the status bar
-	$width = (int)( 100 / count( $t_status_array ) );
 	$t_status_enum_string = config_get('status_enum_string' );
 	foreach( $t_status_array as $t_status => $t_name ) {
 		$t_val = isset( $t_status_names[$t_status] ) ? $t_status_names[$t_status] : $t_status_array[$t_status];
@@ -1372,7 +1370,7 @@ function html_status_percentage_legend() {
 	$t_status_percents = get_percentage_by_status();
 	$t_status_enum_string = config_get('status_enum_string' );
 	$t_enum_values = MantisEnum::getValues( $t_status_enum_string );
-	$enum_count = count( $t_enum_values );
+	$t_enum_count = count( $t_enum_values );
 
 	$t_bug_count = array_sum( $t_status_percents );
 
@@ -1380,7 +1378,7 @@ function html_status_percentage_legend() {
 		echo '<br />';
 		echo '<table class="width100" cellspacing="1">';
 		echo '<tr>';
-		echo '<td class="form-title" colspan="' . $enum_count . '">' . lang_get( 'issue_status_percentage' ) . '</td>';
+		echo '<td class="form-title" colspan="' . $t_enum_count . '">' . lang_get( 'issue_status_percentage' ) . '</td>';
 		echo '</tr>';
 		echo '<tr>';
 
@@ -1531,7 +1529,6 @@ function html_button_bug_assign_to( $p_bug ) {
 	}
 
 	$t_current_user_id = auth_get_current_user_id();
-	$t_new_status = ( ON == config_get( 'auto_set_status_to_assigned' ) ) ? config_get( 'bug_assigned_status' ) : $p_bug->status;
 	$t_options = array();
 	$t_default_assign_to = null;
 
@@ -1736,9 +1733,6 @@ function html_button_wiki( $p_bug_id ) {
  * @return null
  */
 function html_buttons_view_bug_page( $p_bug_id ) {
-	$t_resolved = config_get( 'bug_resolved_status_threshold' );
-	$t_closed = config_get( 'bug_closed_status_threshold' );
-	$t_status = bug_get_field( $p_bug_id, 'status' );
 	$t_readonly = bug_is_readonly( $p_bug_id );
 	$t_sticky = config_get( 'set_bug_sticky_threshold' );
 

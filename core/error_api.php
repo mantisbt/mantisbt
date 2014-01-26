@@ -71,8 +71,7 @@ set_error_handler( 'error_handler' );
  * @uses html_api.php (optional)
  */
 function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
-	global $g_error_parameters, $g_error_handled, $g_error_proceed_url;
-	global $g_lang_overrides;
+	global $g_error_parameters, $g_error_handled;
 	global $g_error_send_page_header;
 
 	# check if errors were disabled with @ somewhere in this call chain
@@ -99,7 +98,6 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 		$t_lang_pushed = true;
 	}
 
-	$t_short_file = basename( $p_file );
 	$t_method_array = config_get_global( 'display_errors' );
 	if( isset( $t_method_array[$p_type] ) ) {
 		$t_method = $t_method_array[$p_type];

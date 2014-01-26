@@ -123,7 +123,6 @@ function ini_get_bool( $p_name ) {
 function ini_get_number( $p_name ) {
 	$t_value = ini_get( $p_name );
 
-	$t_result = 0;
 	switch( substr( $t_value, -1 ) ) {
 		case 'G':
 		case 'g':

@@ -130,8 +130,6 @@ function collapse_icon( $p_name, $p_section = '' ) {
 		return;
 	}
 
-	$t_block = ( is_blank( $p_section ) ? $p_name : $p_section . '_' . $p_name );
-
 	global $g_open_collapse_section;
 
 	if( $g_open_collapse_section === true ) {
@@ -157,7 +155,7 @@ function collapse_end( $p_name, $p_section = '' ) {
 	global $g_current_collapse_section, $g_open_collapse_section;
 
 	$t_block = ( is_blank( $p_section ) ? $p_name : $p_section . '_' . $p_name );
-	$t_display = collapse_display( $t_block );
+	collapse_display( $t_block );
 
 	# Make sure a section is opened, and it is the same section.
 	if( $t_block !== $g_current_collapse_section ) {
@@ -210,7 +208,6 @@ function collapse_cache_token() {
 		return;
 	}
 
-	$t_user_id = auth_get_current_user_id();
 	$t_token = token_get_value( TOKEN_COLLAPSE );
 
 	if( !is_null( $t_token ) ) {

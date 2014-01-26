@@ -98,7 +98,6 @@ function summary_helper_get_developer_label ( $p_user_id ) {
  */
 function summary_print_by_enum( $p_enum ) {
 	$t_project_id = helper_get_current_project();
-	$t_user_id = auth_get_current_user_id();
 
 	$t_project_filter = helper_project_specific_where( $t_project_id );
 	if( ' 1<>1' == $t_project_filter ) {
@@ -253,7 +252,6 @@ function summary_new_bug_count_by_date( $p_time_length = 1 ) {
 	$c_time_length = (int) $p_time_length * SECONDS_PER_DAY;
 
 	$t_project_id = helper_get_current_project();
-	$t_user_id = auth_get_current_user_id();
 
 	$specific_where = helper_project_specific_where( $t_project_id );
 	if( ' 1<>1' == $specific_where ) {
@@ -281,7 +279,6 @@ function summary_resolved_bug_count_by_date( $p_time_length = 1 ) {
 	$c_time_length = (int) $p_time_length * SECONDS_PER_DAY;
 
 	$t_project_id = helper_get_current_project();
-	$t_user_id = auth_get_current_user_id();
 
 	$specific_where = helper_project_specific_where( $t_project_id );
 	if( ' 1<>1' == $specific_where ) {
@@ -309,7 +306,6 @@ function summary_resolved_bug_count_by_date( $p_time_length = 1 ) {
  * @param array $p_date_array An array of integers representing days is passed in
  */
 function summary_print_by_date( $p_date_array ) {
-	$arr_count = count( $p_date_array );
 	foreach( $p_date_array as $t_days ) {
 		$t_new_count = summary_new_bug_count_by_date( $t_days );
 		$t_resolved_count = summary_resolved_bug_count_by_date( $t_days );
@@ -356,7 +352,6 @@ function summary_print_by_activity() {
 	$t_mantis_history_table = db_get_table( 'bug_history' );
 
 	$t_project_id = helper_get_current_project();
-	$t_user_id = auth_get_current_user_id();
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
 	$specific_where = helper_project_specific_where( $t_project_id );
@@ -415,7 +410,6 @@ function summary_print_by_age() {
 	$t_mantis_bug_table = db_get_table( 'bug' );
 
 	$t_project_id = helper_get_current_project();
-	$t_user_id = auth_get_current_user_id();
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
 	$specific_where = helper_project_specific_where( $t_project_id );
@@ -459,10 +453,7 @@ function summary_print_by_age() {
  */
 function summary_print_by_developer() {
 	$t_mantis_bug_table = db_get_table( 'bug' );
-	$t_mantis_user_table = db_get_table( 'user' );
-
 	$t_project_id = helper_get_current_project();
-	$t_user_id = auth_get_current_user_id();
 
 	$specific_where = helper_project_specific_where( $t_project_id );
 	if( ' 1<>1' == $specific_where ) {
@@ -561,11 +552,9 @@ function summary_print_by_developer() {
  */
 function summary_print_by_reporter() {
 	$t_mantis_bug_table = db_get_table( 'bug' );
-	$t_mantis_user_table = db_get_table( 'user' );
 	$t_reporter_summary_limit = config_get( 'reporter_summary_limit' );
 
 	$t_project_id = helper_get_current_project();
-	$t_user_id = auth_get_current_user_id();
 
 	$specific_where = helper_project_specific_where( $t_project_id );
 	if( ' 1<>1' == $specific_where ) {
@@ -595,7 +584,6 @@ function summary_print_by_reporter() {
 					ORDER BY status";
 		$result2 = db_query( $query );
 
-		$last_reporter = -1;
 		$t_bugs_open = 0;
 		$t_bugs_resolved = 0;
 		$t_bugs_closed = 0;
@@ -644,7 +632,6 @@ function summary_print_by_reporter() {
 function summary_print_by_category() {
 	$t_mantis_bug_table = db_get_table( 'bug' );
 	$t_mantis_category_table = db_get_table( 'category' );
-	$t_mantis_project_table = db_get_table( 'project' );
 	$t_summary_category_include_project = config_get( 'summary_category_include_project' );
 
 	$t_project_id = helper_get_current_project();
@@ -666,7 +653,6 @@ function summary_print_by_category() {
 	$result = db_query( $query );
 
 	$last_category_name = -1;
-	$last_category_id = -1;
 	$last_project = -1;
 	$t_bugs_open = 0;
 	$t_bugs_resolved = 0;
@@ -721,7 +707,6 @@ function summary_print_by_category() {
 			$t_bugs_open += $row['bugcount'];
 		}
 
-		$last_category_id = $v_category_id;
 		$last_category_name = $v_category_name;
 		if(( ON == $t_summary_category_include_project ) && ( ALL_PROJECTS == $t_project_id ) ) {
 			$last_project = $row['project_id'];
@@ -852,10 +837,8 @@ function summary_print_by_project( $p_projects = null, $p_level = 0, $p_cache = 
  */
 function summary_print_developer_resolution( $p_resolution_enum_string ) {
 	$t_mantis_bug_table = db_get_table( 'bug' );
-	$t_mantis_user_table = db_get_table( 'user' );
 
 	$t_project_id = helper_get_current_project();
-	$t_user_id = auth_get_current_user_id();
 
 	# Get the resolution values ot use
 	$c_res_s = MantisEnum::getValues( $p_resolution_enum_string );
@@ -961,11 +944,9 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
  */
 function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 	$t_mantis_bug_table = db_get_table( 'bug' );
-	$t_mantis_user_table = db_get_table( 'user' );
 	$t_reporter_summary_limit = config_get( 'reporter_summary_limit' );
 
 	$t_project_id = helper_get_current_project();
-	$t_user_id = auth_get_current_user_id();
 
 	# Get the resolution values ot use
 	$c_res_s = MantisEnum::getValues( $p_resolution_enum_string );
@@ -1083,7 +1064,6 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 	$t_reporter_summary_limit = config_get( 'reporter_summary_limit' );
 
 	$t_project_id = helper_get_current_project();
-	$t_user_id = auth_get_current_user_id();
 
 	$t_severity_multipliers = config_get( 'severity_multipliers' );
 	$t_resolution_multipliers = config_get( 'resolution_multipliers' );
@@ -1094,7 +1074,6 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 
 	# Get the resolution values to use
 	$c_res_s = MantisEnum::getValues( $p_resolution_enum_string );
-	$enum_res_count = count( $c_res_s );
 
 	# Checking if it's a per project statistic or all projects
 	$specific_where = helper_project_specific_where( $t_project_id );

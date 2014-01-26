@@ -195,7 +195,6 @@ function show_notify_threshold( $p_access, $p_action ) {
  * @param string $p_section_name section name
  */
 function get_section_begin_for_email( $p_section_name ) {
-	global $t_project;
 	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 	echo '<div class="form-container">'. "\n";
 	echo '<table class="width100">';

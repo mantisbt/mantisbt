@@ -152,7 +152,6 @@ function db_is_connected() {
  * @return bool indicating if php current supports the given database type
  */
 function db_check_database_support( $p_db_type ) {
-	$t_support = false;
 	switch( $p_db_type ) {
 		case 'mysql':
 			$t_support = function_exists( 'mysql_connect' );
@@ -443,8 +442,6 @@ function db_param() {
  * @return int Record Count
  */
 function db_num_rows( $p_result ) {
-	global $g_db;
-
 	return $p_result->RecordCount();
 }
 
@@ -543,8 +540,6 @@ function db_fetch_array( &$p_result ) {
  * @return mixed Database result
  */
 function db_result( $p_result, $p_index1 = 0, $p_index2 = 0 ) {
-	global $g_db;
-
 	if( $p_result && ( db_num_rows( $p_result ) > 0 ) ) {
 		$p_result->Move( $p_index1 );
 		$t_result = $p_result->GetArray();
@@ -569,7 +564,6 @@ function db_result( $p_result, $p_index1 = 0, $p_index2 = 0 ) {
  */
 function db_insert_id( $p_table = null, $p_field = "id" ) {
 	global $g_db;
-	$t_db_type = config_get_global( 'db_type' );
 
 	if( isset( $p_table ) ) {
 		if( db_is_oracle() ) {
@@ -620,7 +614,7 @@ function db_table_exists( $p_table_name ) {
  * @return bool indicating whether the index exists
  */
 function db_index_exists( $p_table_name, $p_index_name ) {
-	global $g_db, $g_db_schema;
+	global $g_db;
 
 	if( is_blank( $p_index_name ) || is_blank( $p_table_name ) ) {
 		return false;
@@ -651,7 +645,6 @@ function db_index_exists( $p_table_name, $p_index_name ) {
  * @return bool indicating whether the field exists
  */
 function db_field_exists( $p_field_name, $p_table_name ) {
-	global $g_db;
 	$columns = db_field_names( $p_table_name );
 	return in_array( $p_field_name, $columns );
 }
@@ -839,8 +832,6 @@ function db_prepare_bool( $p_bool ) {
  * @return string Formatted Date for DB insertion e.g. 1970-01-01 00:00:00 ready for database insertion
  */
 function db_now() {
-	global $g_db;
-
 	return time();
 }
 

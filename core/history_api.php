@@ -125,7 +125,7 @@ function history_log_event_special( $p_bug_id, $p_type, $p_optional = '', $p_opt
 					( user_id, bug_id, date_modified, type, old_value, new_value, field_name )
 				VALUES
 					( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ',' . db_param() . ', ' . db_param() . ')';
-	$result = db_query_bound( $query, array( $t_user_id, $p_bug_id, db_now(), $p_type, $c_optional, $c_optional2, '' ) );
+	db_query_bound( $query, array( $t_user_id, $p_bug_id, db_now(), $p_type, $c_optional, $c_optional2, '' ) );
 }
 
 /**
@@ -183,7 +183,6 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 	$result = db_query_bound( $query, array( $p_bug_id ) );
 	$raw_history = array();
 
-	$t_private_bugnote_threshold = config_get( 'private_bugnote_threshold' );
 	$t_private_bugnote_visible = access_has_bug_level( config_get( 'private_bugnote_threshold' ), $p_bug_id, $t_user_id );
 	$t_tag_view_threshold = config_get( 'tag_view_threshold' );
 	$t_show_monitor_list_threshold = config_get( 'show_monitor_list_threshold' );
