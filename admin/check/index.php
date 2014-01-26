@@ -74,7 +74,7 @@ http_content_headers();
 </head>
 <body>
 <div id="mantisbt-header-logo">
-	<img src="../../images/mantis_logo.png" alt="MantisBT Logo" />
+	<a id="logo-link" href="../"><img id="logo-image" src="../../images/mantis_logo.png" alt="MantisBT Logo" /></a>
 </div>
 <p class="notice">Verbosity: <?php echo $t_show_all_mode_link ?> | <?php echo $t_show_errors_mode_link ?></p>
 <table id="check-results">
