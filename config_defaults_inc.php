@@ -1034,15 +1034,8 @@ $g_sort_by_last_name = OFF;
  *   "http:/path/to/unknown.jpg" or "%path%images/no_avatar.png")
  *
  * @global int|string $g_show_avatar
- * @see $g_show_avatar_threshold
  */
 $g_show_avatar = OFF;
-
-/**
- * Only users above this threshold will have their avatar shown
- * @global int $g_show_avatar_threshold
- */
-$g_show_avatar_threshold = DEVELOPER;
 
 /**
  * Show release dates on changelog
