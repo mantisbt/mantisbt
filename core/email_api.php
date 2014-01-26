@@ -979,16 +979,10 @@ function email_build_subject( $p_bug_id ) {
 	# grab the subject (summary)
 	$p_subject = bug_get_field( $p_bug_id, 'summary' );
 
-	# pad the bug id with zeros
-	$t_bug_id = bug_format_id( $p_bug_id );
+	# padd the bug id with zeros
+	$p_bug_id = bug_format_id( $p_bug_id );
 
-	# build standard subject string
-	$t_email_subject = "[$p_project_name $t_bug_id]: $p_subject";
-
-	# update subject as defined by plugins
-	$t_email_subject = event_signal( 'EVENT_DISPLAY_EMAIL_BUILD_SUBJECT', $t_email_subject, array( 'bug_id' => $p_bug_id ) );
-
-	return $t_email_subject;
+	return '[' . $p_project_name . ' ' . $p_bug_id . ']: ' . $p_subject;
 }
 
 /**
