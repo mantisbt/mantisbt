@@ -65,8 +65,8 @@ access_ensure_project_level( config_get( 'upload_project_file_threshold' ), $t_p
 $t_project_file_table = db_get_table( 'project_file' );
 $query = "SELECT title FROM $t_project_file_table
 			WHERE id=" . db_param();
-$result = db_query_bound( $query, array( $f_file_id ) );
-$t_title = db_result( $result );
+$t_result = db_query_bound( $query, array( $f_file_id ) );
+$t_title = db_result( $t_result );
 
 # Confirm with the user
 helper_ensure_confirmed( lang_get( 'confirm_file_delete_msg' ) .

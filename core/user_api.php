@@ -84,9 +84,9 @@ function user_cache_row( $p_user_id, $p_trigger_errors = true ) {
 	$query = "SELECT *
 				  FROM $t_user_table
 				  WHERE id=" . db_param();
-	$result = db_query_bound( $query, array( $p_user_id ) );
+	$t_result = db_query_bound( $query, array( $p_user_id ) );
 
-	if( 0 == db_num_rows( $result ) ) {
+	if( 0 == db_num_rows( $t_result ) ) {
 		$g_cache_user[$p_user_id] = false;
 
 		if( $p_trigger_errors ) {
@@ -97,7 +97,7 @@ function user_cache_row( $p_user_id, $p_trigger_errors = true ) {
 		return false;
 	}
 
-	$row = db_fetch_array( $result );
+	$row = db_fetch_array( $t_result );
 
 	$g_cache_user[$p_user_id] = $row;
 
@@ -129,9 +129,9 @@ function user_cache_array_rows( $p_user_id_array ) {
 	$query = "SELECT *
 				  FROM $t_user_table
 				  WHERE id IN (" . implode( ',', $c_user_id_array ) . ')';
-	$result = db_query_bound( $query );
+	$t_result = db_query_bound( $query );
 
-	while( $row = db_fetch_array( $result ) ) {
+	while( $row = db_fetch_array( $t_result ) ) {
 		$g_cache_user[(int) $row['id']] = $row;
 	}
 	return;
@@ -224,9 +224,9 @@ function user_is_name_unique( $p_username ) {
 	$query = "SELECT username
 				FROM $t_user_table
 				WHERE username=" . db_param();
-	$result = db_query_bound( $query, array( $p_username ), 1 );
+	$t_result = db_query_bound( $query, array( $p_username ), 1 );
 
-	if( db_num_rows( $result ) > 0 ) {
+	if( db_num_rows( $t_result ) > 0 ) {
 		return false;
 	} else {
 		return true;
@@ -358,9 +358,9 @@ function user_is_monitoring_bug( $p_user_id, $p_bug_id ) {
 				  FROM $t_bug_monitor_table
 				  WHERE user_id=" . db_param() . " AND bug_id=" . db_param();
 
-	$result = db_query_bound( $query, array( $c_user_id, $c_bug_id ) );
+	$t_result = db_query_bound( $query, array( $c_user_id, $c_bug_id ) );
 
-	if( 0 == db_result( $result ) ) {
+	if( 0 == db_result( $t_result ) ) {
 		return false;
 	} else {
 		return true;
@@ -449,10 +449,10 @@ function user_is_enabled( $p_user_id ) {
 function user_count_level( $p_level = ANYBODY ) {
 	$t_user_table = db_get_table( 'user' );
 	$query = "SELECT COUNT(id) FROM $t_user_table WHERE access_level>=" . db_param();
-	$result = db_query_bound( $query, array( $p_level ) );
+	$t_result = db_query_bound( $query, array( $p_level ) );
 
 	# Get the list of connected users
-	$t_users = db_result( $result );
+	$t_users = db_result( $t_result );
 
 	return $t_users;
 }
@@ -477,11 +477,11 @@ function user_get_logged_in_user_ids( $p_session_duration_in_minutes ) {
 
 	# Execute query
 	$query = 'SELECT id FROM ' . $t_user_table . ' WHERE last_visit > ' . db_param();
-	$result = db_query_bound( $query, array( $t_last_timestamp_threshold ), 1 );
+	$t_result = db_query_bound( $query, array( $t_last_timestamp_threshold ), 1 );
 
 	# Get the list of connected users
 	$t_users_connected = array();
-	while( $row = db_fetch_array( $result ) ) {
+	while( $row = db_fetch_array( $t_result ) ) {
 		$t_users_connected[] = $row['id'];
 	}
 
@@ -696,9 +696,9 @@ function user_get_id_by_name( $p_username ) {
 	$t_user_table = db_get_table( 'user' );
 
 	$query = "SELECT * FROM $t_user_table WHERE username=" . db_param();
-	$result = db_query_bound( $query, array( $p_username ) );
+	$t_result = db_query_bound( $query, array( $p_username ) );
 
-	$t_row = db_fetch_array( $result );
+	$t_row = db_fetch_array( $t_result );
 	if( $t_row ) {
 		user_cache_database_result( $t_row );
 		return $t_row['id'];
@@ -721,9 +721,9 @@ function user_get_id_by_email( $p_email ) {
 	$t_user_table = db_get_table( 'user' );
 
 	$query = "SELECT * FROM $t_user_table WHERE email=" . db_param();
-	$result = db_query_bound( $query, array( $p_email ) );
+	$t_result = db_query_bound( $query, array( $p_email ) );
 
-	$t_row = db_fetch_array( $result );
+	$t_row = db_fetch_array( $t_result );
 	if( $t_row ) {
 		user_cache_database_result( $t_row );
 		return $t_row['id'];
@@ -746,9 +746,9 @@ function user_get_id_by_realname( $p_realname ) {
 
 	$t_user_table = db_get_table( 'user' );
 	$query = "SELECT * FROM $t_user_table WHERE realname=" . db_param();
-	$result = db_query_bound( $query, array( $p_realname ) );
+	$t_result = db_query_bound( $query, array( $p_realname ) );
 
-	$row = db_fetch_array( $result );
+	$row = db_fetch_array( $t_result );
 
 	if( !$row ) {
 		return false;
@@ -965,8 +965,6 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 		$t_public = VS_PUBLIC;
 		$t_private = VS_PRIVATE;
 
-		$result = null;
-
 		$query = "SELECT p.id, p.name, ph.parent_id
 						  FROM $t_project_table p
 						  LEFT JOIN $t_project_user_list_table u
@@ -980,11 +978,11 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 							        u.user_id=" . db_param() . " )
 							)
 			  ORDER BY p.name";
-		$result = db_query_bound( $query, ( $p_show_disabled ? array( $p_user_id, $t_public, $t_private, $p_user_id ) : array( $p_user_id, true, $t_public, $t_private, $p_user_id ) ) );
+		$t_result = db_query_bound( $query, ( $p_show_disabled ? array( $p_user_id, $t_public, $t_private, $p_user_id ) : array( $p_user_id, true, $t_public, $t_private, $p_user_id ) ) );
 
 		$t_projects = array();
 
-		while ( $row = db_fetch_array( $result ) ) {
+		while ( $row = db_fetch_array( $t_result ) ) {
 			$t_projects[(int)$row['id']] = ( $row['parent_id'] === NULL ) ? 0 : (int)$row['parent_id'];
 		}
 
@@ -1045,7 +1043,7 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 					  WHERE $t_enabled_clause
 					  	 ph.parent_id IS NOT NULL
 					  ORDER BY p.name";
-		$result = db_query_bound( $query, ( $p_show_disabled ? null : array( true ) ) );
+		$t_result = db_query_bound( $query, ( $p_show_disabled ? null : array( true ) ) );
 	} else {
 		$query = "SELECT DISTINCT p.id, p.name, ph.parent_id
 					  FROM $t_project_table p
@@ -1061,12 +1059,12 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 						        u.user_id=' . db_param() . ' )
 						)
 					  ORDER BY p.name';
-		$result = db_query_bound( $query, ( $p_show_disabled ? array( $p_user_id, $t_public, $t_private, $p_user_id ) : array( $p_user_id, 1, $t_public, $t_private, $p_user_id ) ) );
+		$t_result = db_query_bound( $query, ( $p_show_disabled ? array( $p_user_id, $t_public, $t_private, $p_user_id ) : array( $p_user_id, 1, $t_public, $t_private, $p_user_id ) ) );
 	}
 
 	$t_projects = array();
 
-	while( $row = db_fetch_array( $result ) ) {
+	while( $row = db_fetch_array( $t_result ) ) {
 		if( !isset( $t_projects[(int)$row['parent_id']] ) ) {
 			$t_projects[(int)$row['parent_id']] = array();
 		}
@@ -1245,9 +1243,9 @@ function user_get_assigned_open_bug_count( $p_user_id, $p_project_id = ALL_PROJE
 				  WHERE $t_where_prj
 				  		status<'$t_resolved' AND
 				  		handler_id=" . db_param();
-	$result = db_query_bound( $query, array( $p_user_id ) );
+	$t_result = db_query_bound( $query, array( $p_user_id ) );
 
-	return db_result( $result );
+	return db_result( $t_result );
 }
 
 /**
@@ -1269,9 +1267,9 @@ function user_get_reported_open_bug_count( $p_user_id, $p_project_id = ALL_PROJE
 				  WHERE $t_where_prj
 						  status<'$t_resolved' AND
 						  reporter_id=" . db_param();
-	$result = db_query_bound( $query, array( $p_user_id ) );
+	$t_result = db_query_bound( $query, array( $p_user_id ) );
 
-	return db_result( $result );
+	return db_result( $t_result );
 }
 
 /**
@@ -1287,9 +1285,9 @@ function user_get_profile_row( $p_user_id, $p_profile_id ) {
 				  FROM $t_user_profile_table
 				  WHERE id=" . db_param() . " AND
 				  		user_id=" . db_param();
-	$result = db_query_bound( $query, array( $p_profile_id, $p_user_id ) );
+	$t_result = db_query_bound( $query, array( $p_profile_id, $p_user_id ) );
 
-	$row = db_fetch_array( $result );
+	$row = db_fetch_array( $t_result );
 
 	if( !$row ) {
 		trigger_error( ERROR_USER_PROFILE_NOT_FOUND, ERROR );

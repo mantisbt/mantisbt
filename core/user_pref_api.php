@@ -356,9 +356,9 @@ function user_pref_cache_array_rows( $p_user_id_array, $p_project_id = ALL_PROJE
 				  FROM $t_user_pref_table
 				  WHERE user_id IN (" . implode( ',', $c_user_id_array ) . ') AND project_id=' . db_param();
 
-	$result = db_query_bound( $query, array( (int)$p_project_id ) );
+	$t_result = db_query_bound( $query, array( (int)$p_project_id ) );
 
-	while( $row = db_fetch_array( $result ) ) {
+	while( $row = db_fetch_array( $t_result ) ) {
 		if ( !isset( $g_cache_user_pref[(int) $row['user_id']] ) ) {
 			$g_cache_user_pref[(int) $row['user_id']] = array();
 		}

@@ -204,8 +204,8 @@ function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type )
 				( source_bug_id, destination_bug_id, relationship_type )
 				VALUES
 				( " . db_param() . ',' . db_param() . ',' . db_param() . ')';
-	$result = db_query_bound( $query, array( $c_src_bug_id, $c_dest_bug_id, $c_relationship_type ) );
-	$t_relationship = db_fetch_array( $result );
+	$t_result = db_query_bound( $query, array( $c_src_bug_id, $c_dest_bug_id, $c_relationship_type ) );
+	$t_relationship = db_fetch_array( $t_result );
 
 	$t_bug_relationship_data = new BugRelationshipData;
 	$t_bug_relationship_data->id = $t_relationship['id'];
@@ -244,8 +244,8 @@ function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id,
 					destination_bug_id=" . db_param() . ",
 					relationship_type=" . db_param() . "
 				WHERE id=" . db_param();
-	$result = db_query_bound( $query, array( $c_src_bug_id, $c_dest_bug_id, $c_relationship_type, $c_relationship_id ) );
-	$t_relationship = db_fetch_array( $result );
+	$t_result = db_query_bound( $query, array( $c_src_bug_id, $c_dest_bug_id, $c_relationship_type, $c_relationship_id ) );
+	$t_relationship = db_fetch_array( $t_result );
 
 	$t_bug_relationship_data = new BugRelationshipData;
 	$t_bug_relationship_data->id = $t_relationship['id'];
@@ -265,9 +265,8 @@ function relationship_delete( $p_relationship_id ) {
 
 	$t_mantis_bug_relationship_table = db_get_table( 'bug_relationship' );
 
-	$query = "DELETE FROM $t_mantis_bug_relationship_table
-				WHERE id=" . db_param();
-	$result = db_query_bound( $query, array( $c_relationship_id ) );
+	$query = "DELETE FROM $t_mantis_bug_relationship_table WHERE id=" . db_param();
+	db_query_bound( $query, array( $c_relationship_id ) );
 }
 
 /**
@@ -282,7 +281,7 @@ function relationship_delete_all( $p_bug_id ) {
 	$query = "DELETE FROM $t_mantis_bug_relationship_table
 				WHERE source_bug_id=" . db_param() . " OR
 				destination_bug_id=" . db_param();
-	$result = db_query_bound( $query, array( $c_bug_id, $c_bug_id ) );
+	db_query_bound( $query, array( $c_bug_id, $c_bug_id ) );
 }
 
 /**
@@ -319,9 +318,9 @@ function relationship_copy_all( $p_bug_id, $p_new_bug_id ) {
 function relationship_get( $p_relationship_id ) {
 	$t_mantis_bug_relationship_table = db_get_table( 'bug_relationship' );
 	$query = "SELECT * FROM $t_mantis_bug_relationship_table WHERE id=" . db_param();
-	$result = db_query_bound( $query, array( (int) $p_relationship_id ) );
+	$t_result = db_query_bound( $query, array( (int) $p_relationship_id ) );
 
-	$t_relationship = db_fetch_array( $result );
+	$t_relationship = db_fetch_array( $t_result );
 
 	if( $t_relationship ) {
 		$t_bug_relationship_data = new BugRelationshipData;
@@ -351,7 +350,7 @@ function relationship_get_all_src( $p_src_bug_id ) {
 				INNER JOIN $t_mantis_bug_table ON $t_mantis_bug_relationship_table.destination_bug_id = $t_mantis_bug_table.id
 				WHERE source_bug_id=" . db_param() . "
 				ORDER BY relationship_type, $t_mantis_bug_relationship_table.id";
-	$result = db_query_bound( $query, array( $p_src_bug_id ) );
+	$t_result = db_query_bound( $query, array( $p_src_bug_id ) );
 
 	$t_src_project_id = bug_get_field( $p_src_bug_id, 'project_id' );
 
@@ -359,7 +358,7 @@ function relationship_get_all_src( $p_src_bug_id ) {
 	$t_bug_array = array();
 	$i = 0;
 
-	while( $row = db_fetch_array( $result ) ) {
+	while( $row = db_fetch_array( $t_result ) ) {
 		$t_bug_relationship_data[$i] = new BugRelationshipData;
 		$t_bug_relationship_data[$i]->id = $row['id'];
 		$t_bug_relationship_data[$i]->src_bug_id = $row['source_bug_id'];
@@ -398,7 +397,7 @@ function relationship_get_all_dest( $p_dest_bug_id ) {
 				INNER JOIN $t_mantis_bug_table ON $t_mantis_bug_relationship_table.source_bug_id = $t_mantis_bug_table.id
 				WHERE destination_bug_id=" . db_param() . "
 				ORDER BY relationship_type, $t_mantis_bug_relationship_table.id";
-	$result = db_query_bound( $query, array( $c_dest_bug_id ) );
+	$t_result = db_query_bound( $query, array( $c_dest_bug_id ) );
 
 	$t_dest_project_id = bug_get_field( $p_dest_bug_id, 'project_id' );
 
@@ -406,7 +405,7 @@ function relationship_get_all_dest( $p_dest_bug_id ) {
 	$t_bug_array = array();
 	$i = 0;
 
-	while( $row = db_fetch_array( $result ) ) {
+	while( $row = db_fetch_array( $t_result ) ) {
 		$t_bug_relationship_data[$i] = new BugRelationshipData;
 		$t_bug_relationship_data[$i]->id = $row['id'];
 		$t_bug_relationship_data[$i]->src_bug_id = $row['source_bug_id'];
@@ -462,9 +461,9 @@ function relationship_exists( $p_src_bug_id, $p_dest_bug_id ) {
 				OR
 				(source_bug_id=" . db_param() . "
 				AND destination_bug_id=" . db_param() . ')';
-	$result = db_query_bound( $t_query, array( $c_src_bug_id, $c_dest_bug_id, $c_dest_bug_id, $c_src_bug_id ), 1 );
+	$t_result = db_query_bound( $t_query, array( $c_src_bug_id, $c_dest_bug_id, $c_dest_bug_id, $c_src_bug_id ), 1 );
 
-	if( $row = db_fetch_array( $result ) ) {
+	if( $row = db_fetch_array( $t_result ) ) {
 		# return the first id
 		return $row['id'];
 	} else {

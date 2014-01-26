@@ -61,9 +61,9 @@ require_api( 'utility_api.php' );
 function tag_exists( $p_tag_id ) {
 	$t_tag_table = db_get_table( 'tag' );
 	$query = "SELECT * FROM $t_tag_table WHERE id=" . db_param();
-	$result = db_query_bound( $query, array( $p_tag_id ) );
+	$t_result = db_query_bound( $query, array( $p_tag_id ) );
 
-	return db_num_rows( $result ) > 0;
+	return db_num_rows( $t_result ) > 0;
 }
 
 /**
@@ -88,9 +88,9 @@ function tag_is_unique( $p_name ) {
 	$t_tag_table = db_get_table( 'tag' );
 
 	$t_query = 'SELECT id FROM ' . $t_tag_table . ' WHERE ' . db_helper_like( 'name' );
-	$result = db_query_bound( $t_query, array( $c_name ) );
+	$t_result = db_query_bound( $t_query, array( $c_name ) );
 
-	if ( db_result( $result ) ) {
+	if ( db_result( $t_result ) ) {
 		return false;
 	}
 	return true;
@@ -479,13 +479,13 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 			$query = "SELECT t.id FROM $t_tag_table t
 					LEFT JOIN $t_bug_tag_table b ON t.id=b.tag_id
 					WHERE b.bug_id IS NULL OR b.bug_id != " . db_param();
-			$result = db_query_bound( $query, $t_params );
+			$t_result = db_query_bound( $query, $t_params );
 
 			$t_params = null;
 
 			$t_subquery_results = array();
 
-			while( $row = db_fetch_array( $result ) ) {
+			while( $row = db_fetch_array( $t_result ) ) {
 				$t_subquery_results[] = (int)$row['id'];
 			}
 
@@ -506,11 +506,11 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 	}
 
 	$query .= ' ORDER BY name ASC ';
-	$result = db_query_bound( $query, $t_params );
+	$t_result = db_query_bound( $query, $t_params );
 
 	$t_results_to_return = array();
 
-	while( $row = db_fetch_array( $result ) ) {
+	while( $row = db_fetch_array( $t_result ) ) {
 		$t_results_to_return[] = $row;
 	}
 
@@ -527,8 +527,8 @@ function tag_bug_is_attached( $p_tag_id, $p_bug_id ) {
 	$t_bug_tag_table = db_get_table( 'bug_tag' );
 	$query = "SELECT bug_id FROM $t_bug_tag_table
 					WHERE tag_id=" . db_param() . " AND bug_id=" . db_param();
-	$result = db_query_bound( $query, array( $p_tag_id, $p_bug_id ) );
-	return( db_result( $result ) !== false );
+	$t_result = db_query_bound( $query, array( $p_tag_id, $p_bug_id ) );
+	return( db_result( $t_result ) !== false );
 }
 
 /**
@@ -541,9 +541,9 @@ function tag_bug_get_row( $p_tag_id, $p_bug_id ) {
 	$t_bug_tag_table = db_get_table( 'bug_tag' );
 	$query = "SELECT * FROM $t_bug_tag_table
 					WHERE tag_id=" . db_param() . " AND bug_id=" . db_param();
-	$result = db_query_bound( $query, array( $p_tag_id, $p_bug_id ) );
+	$t_result = db_query_bound( $query, array( $p_tag_id, $p_bug_id ) );
 
-	$t_row = db_fetch_array( $result );
+	$t_row = db_fetch_array( $t_result );
 	if( !$t_row ) {
 		trigger_error( TAG_NOT_ATTACHED, ERROR );
 	}
@@ -564,10 +564,10 @@ function tag_bug_get_attached( $p_bug_id ) {
 					LEFT JOIN $t_bug_tag_table as b
 						on t.id=b.tag_id
 					WHERE b.bug_id=" . db_param();
-	$result = db_query_bound( $query, array( $p_bug_id ) );
+	$t_result = db_query_bound( $query, array( $p_bug_id ) );
 
 	$rows = array();
-	while( $row = db_fetch_array( $result ) ) {
+	while( $row = db_fetch_array( $t_result ) ) {
 		$rows[] = $row;
 	}
 
@@ -585,10 +585,10 @@ function tag_get_bugs_attached( $p_tag_id ) {
 
 	$query = "SELECT bug_id FROM $t_bug_tag_table
 					WHERE tag_id=" . db_param();
-	$result = db_query_bound( $query, array( $p_tag_id ) );
+	$t_result = db_query_bound( $query, array( $p_tag_id ) );
 
 	$bugs = array();
-	while( $row = db_fetch_array( $result ) ) {
+	while( $row = db_fetch_array( $t_result ) ) {
 		$bugs[] = $row['bug_id'];
 	}
 
@@ -764,9 +764,9 @@ function tag_stats_attached( $p_tag_id ) {
 
 	$query = "SELECT COUNT(*) FROM $t_bug_tag_table
 					WHERE tag_id=" . db_param();
-	$result = db_query_bound( $query, array( $p_tag_id ) );
+	$t_result = db_query_bound( $query, array( $p_tag_id ) );
 
-	return db_result( $result );
+	return db_result( $t_result );
 }
 
 /**
@@ -801,10 +801,10 @@ function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
 					WHERE tag_id != " . db_param() . "
 						AND bug_id IN ( $subquery ) ";
 
-	$result = db_query_bound( $query, array( /*query*/ $p_tag_id, /*subquery*/ $c_user_id, $c_user_id, $p_tag_id ) );
+	$t_result = db_query_bound( $query, array( /*query*/ $p_tag_id, /*subquery*/ $c_user_id, $c_user_id, $p_tag_id ) );
 
 	$t_tag_counts = array();
-	while( $row = db_fetch_array( $result ) ) {
+	while( $row = db_fetch_array( $t_result ) ) {
 		if( !isset( $t_tag_counts[$row['tag_id']] ) ) {
 			$t_tag_counts[$row['tag_id']] = 1;
 		} else {

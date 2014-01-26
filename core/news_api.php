@@ -169,9 +169,9 @@ function news_update( $p_news_id, $p_project_id, $p_view_state, $p_announcement,
 function news_get_row( $p_news_id ) {
 	$t_news_table = db_get_table( 'news' );
 	$t_query = "SELECT * FROM $t_news_table WHERE id=" . db_param();
-	$result = db_query_bound( $t_query, array( $p_news_id ) );
+	$t_result = db_query_bound( $t_query, array( $p_news_id ) );
 
-	$row = db_fetch_array( $result );
+	$row = db_fetch_array( $t_result );
 
 	if( !$row ) {
 		trigger_error( ERROR_NEWS_NOT_FOUND, ERROR );
@@ -197,9 +197,9 @@ function news_get_count( $p_project_id, $p_global = true ) {
 		$t_query .= ' OR project_id=' . ALL_PROJECTS;
 	}
 
-	$result = db_query_bound( $t_query );
+	$t_result = db_query_bound( $t_query );
 
-	return db_result( $result, 0 );
+	return db_result( $t_result, 0 );
 }
 
 /**
@@ -229,11 +229,11 @@ function news_get_rows( $p_project_id, $p_global = true ) {
 
 	$t_query .= " ORDER BY date_posted DESC";
 
-	$result = db_query_bound( $t_query, array() );
+	$t_result = db_query_bound( $t_query, array() );
 
 	$t_rows = array();
 
-	while( $t_row = db_fetch_array( $result ) ) {
+	while( $t_row = db_fetch_array( $t_result ) ) {
 		array_push( $t_rows, $t_row );
 	}
 
@@ -301,7 +301,7 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 			}
 
 			$query .= ' ORDER BY announcement DESC, id DESC';
-			$result = db_query( $query, $t_news_view_limit, $c_offset );
+			$t_result = db_query( $query, $t_news_view_limit, $c_offset );
 			break;
 		case 1:
 
@@ -322,12 +322,12 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 				$query .= ' AND project_id IN (' . join( $t_projects, ',' ) . ')';
 			}
 			$query .= " ORDER BY announcement DESC, id DESC";
-			$result = db_query_bound( $query, $t_params, $t_news_view_limit, $c_offset );
+			$t_result = db_query_bound( $query, $t_params, $t_news_view_limit, $c_offset );
 			break;
 	}
 
 	$t_rows = array();
-	while( $t_row = db_fetch_array( $result ) ) {
+	while( $t_row = db_fetch_array( $t_result ) ) {
 		array_push( $t_rows, $t_row );
 	}
 

@@ -96,11 +96,11 @@ $t_per_page = -1;
 $t_bug_count = null;
 $t_page_count = null;
 
-$result = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count );
-$row_count = count( $result );
+$t_result = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count );
+$row_count = count( $t_result );
 
 # pre-cache custom column data
-columns_plugin_cache_issue_data( $result );
+columns_plugin_cache_issue_data( $t_result );
 
 # for export
 $t_show_flag = gpc_get_int( 'show_flag', 0 );
@@ -225,7 +225,7 @@ $t_icon_path = config_get( 'icon_path' );
 </tr>
 <?php
 	for( $i=0; $i < $row_count; $i++ ) {
-		$t_row = $result[$i];
+		$t_row = $t_result[$i];
 
 		# alternate row colors
 		$status_color = helper_alternate_colors( $i, '#ffffff', '#dddddd' );

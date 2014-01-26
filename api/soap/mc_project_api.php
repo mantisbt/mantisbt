@@ -722,12 +722,12 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		( ( pult.user_id = $t_user_id ) AND ( pult.access_level $t_access_clause ) ) OR
 		( ut.access_level = $t_admin ) )
 		ORDER BY pt.name ASC, pft.title ASC";
-	$result = db_query( $query );
-	$num_files = db_num_rows( $result );
+	$t_result = db_query( $query );
+	$num_files = db_num_rows( $t_result );
 
 	$t_result = array();
 	for( $i = 0;$i < $num_files;$i++ ) {
-		$row = db_fetch_array( $result );
+		$row = db_fetch_array( $t_result );
 
 		$t_attachment = array();
 		$t_attachment['id'] = $row['id'];

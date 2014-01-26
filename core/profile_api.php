@@ -156,7 +156,7 @@ function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_bu
 					  os_build=" . db_param() . ",
 					  description=" . db_param() . "
 				  WHERE id=" . db_param() . " AND user_id=" . db_param();
-	$result = db_query_bound( $query, array( $p_platform, $p_os, $p_os_build, $p_description, $p_profile_id, $p_user_id ) );
+	db_query_bound( $query, array( $p_platform, $p_os, $p_os_build, $p_description, $p_profile_id, $p_user_id ) );
 }
 
 /**
@@ -171,9 +171,9 @@ function profile_get_row( $p_user_id, $p_profile_id ) {
 	$query = "SELECT *
 				  FROM $t_user_profile_table
 				  WHERE id=" . db_param() . " AND user_id=" . db_param();
-	$result = db_query_bound( $query, array( $p_profile_id, $p_user_id ) );
+	$t_result = db_query_bound( $query, array( $p_profile_id, $p_user_id ) );
 
-	return db_fetch_array( $result );
+	return db_fetch_array( $t_result );
 }
 
 /**
@@ -312,9 +312,9 @@ function profile_get_default( $p_user_id ) {
 	$query = "SELECT default_profile
 			FROM $t_mantis_user_pref_table
 			WHERE user_id=" . db_param();
-	$result = db_query_bound( $query, array( $p_user_id ) );
+	$t_result = db_query_bound( $query, array( $p_user_id ) );
 
-	$t_default_profile = (int)db_result( $result, 0, 0 );
+	$t_default_profile = (int)db_result( $t_result, 0, 0 );
 
 	return $t_default_profile;
 }

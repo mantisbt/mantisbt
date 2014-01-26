@@ -61,13 +61,13 @@ $days_old = (int)7 * SECONDS_PER_DAY;
 $query = "SELECT id, access_level
 		FROM $t_user_table
 		WHERE ( login_count = 0 ) AND ( date_created = last_visit ) AND " . db_helper_compare_days( 0, "date_created", "> $days_old" );
-$result = db_query_bound($query, array( db_now() ) );
+$t_result = db_query_bound($query, array( db_now() ) );
 
-if ( !$result ) {
+if ( !$t_result ) {
 	trigger_error( ERROR_GENERIC, ERROR );
 }
 
-$count = db_num_rows( $result );
+$count = db_num_rows( $t_result );
 
 if ( $count > 0 ) {
 	helper_ensure_confirmed( lang_get( 'confirm_account_pruning' ),
@@ -75,7 +75,7 @@ if ( $count > 0 ) {
 }
 
 for ($i=0; $i < $count; $i++) {
-	$row = db_fetch_array( $result );
+	$row = db_fetch_array( $t_result );
 	# Don't prune accounts with a higher global access level than the current user
 	if ( access_has_global_level( $row['access_level'] ) ) {
 		user_delete($row['id']);

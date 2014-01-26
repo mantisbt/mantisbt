@@ -411,11 +411,11 @@ function mci_filter_db_get_available_queries( $p_project_id = null, $p_user_id =
 					AND (is_public = " . db_prepare_bool(true) . "
 						OR user_id = " . db_param() . ")
 					ORDER BY is_public DESC, name ASC";
-	$result = db_query_bound( $query, array( $t_project_id, $t_user_id ) );
-	$query_count = db_num_rows( $result );
+	$t_result = db_query_bound( $query, array( $t_project_id, $t_user_id ) );
+	$query_count = db_num_rows( $t_result );
 
 	for( $i = 0;$i < $query_count;$i++ ) {
-		$row = db_fetch_array( $result );
+		$row = db_fetch_array( $t_result );
 
 		$t_filter_detail = explode( '#', $row['filter_string'], 2 );
 		if ( !isset($t_filter_detail[1]) ) {

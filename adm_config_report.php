@@ -262,7 +262,7 @@ $query = "SELECT config_id, user_id, project_id, type, value, access_reqd
 	FROM $t_config_table
 	$t_where
 	ORDER BY user_id, project_id, config_id ";
-$result = db_query_bound( $query );
+$t_result = db_query_bound( $query );
 ?>
 
 <!-- FILTER FORM -->
@@ -355,7 +355,7 @@ $result = db_query_bound( $query );
 # db contains a large number of configurations
 $t_form_security_token = form_security_token( 'adm_config_delete' );
 
-while( $row = db_fetch_array( $result ) ) {
+while( $row = db_fetch_array( $t_result ) ) {
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 ?>

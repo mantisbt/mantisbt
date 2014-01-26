@@ -1028,7 +1028,7 @@ function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
 	$t_subject = email_build_subject( $p_bug_id );
 	$t_date = date( config_get( 'normal_date_format' ) );
 
-	$result = array();
+	$t_result = array();
 	foreach( $p_recipients as $t_recipient ) {
 		lang_push( user_pref_get_language( $t_recipient, $t_project_id ) );
 
@@ -1044,14 +1044,14 @@ function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
 
 		$t_id = email_store( $t_email, $t_subject, $t_contents );
 		if( $t_id !== null ) {
-			$result[] = $t_recipient;
+			$t_result[] = $t_recipient;
 		}
 		log_event( LOG_EMAIL, "queued reminder email #$t_id for U$t_recipient" );
 
 		lang_pop();
 	}
 
-	return $result;
+	return $t_result;
 }
 
 /**

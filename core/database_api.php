@@ -578,14 +578,14 @@ function db_insert_id( $p_table = null, $p_field = "id" ) {
 			$query = "SELECT currval('" . $p_table . "_" . $p_field . "_seq')";
 		}
 		if( isset( $query ) ) {
-			$result = db_query_bound( $query );
-			return db_result( $result );
+			$t_result = db_query_bound( $query );
+			return db_result( $t_result );
 		}
 	}
 	if( db_is_mssql() ) {
 		$query = "SELECT IDENT_CURRENT('$p_table')";
-		$result = db_query_bound( $query );
-		return db_result( $result );
+		$t_result = db_query_bound( $query );
+		return db_result( $t_result );
 	}
 	return $g_db->Insert_ID();
 }

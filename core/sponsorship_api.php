@@ -123,9 +123,9 @@ function sponsorship_cache_row( $p_sponsorship_id, $p_trigger_errors = true ) {
 	$query = "SELECT *
 				  FROM $t_sponsorship_table
 				  WHERE id=" . db_param();
-	$result = db_query_bound( $query, array( $c_sponsorship_id ) );
+	$t_result = db_query_bound( $query, array( $c_sponsorship_id ) );
 
-	if( 0 == db_num_rows( $result ) ) {
+	if( 0 == db_num_rows( $t_result ) ) {
 		$g_cache_sponsorships[$c_sponsorship_id] = false;
 
 		if( $p_trigger_errors ) {
@@ -136,7 +136,7 @@ function sponsorship_cache_row( $p_sponsorship_id, $p_trigger_errors = true ) {
 		}
 	}
 
-	$row = db_fetch_array( $result );
+	$row = db_fetch_array( $t_result );
 	$g_cache_sponsorships[$c_sponsorship_id] = $row;
 
 	return $row;

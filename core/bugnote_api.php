@@ -312,9 +312,9 @@ function bugnote_delete_all( $p_bug_id ) {
 	$query = "SELECT bugnote_text_id
 		          	FROM $t_bugnote_table
 		          	WHERE bug_id=" . db_param();
-	$result = db_query_bound( $query, array( (int)$p_bug_id ) );
+	$t_result = db_query_bound( $query, array( (int)$p_bug_id ) );
 	$t_bugnote_text_table = db_get_table( 'bugnote_text' );
-	while( $row = db_fetch_array( $result ) ) {
+	while( $row = db_fetch_array( $t_result ) ) {
 		$t_bugnote_text_id = $row['bugnote_text_id'];
 
 		# Delete the corresponding bugnote texts
@@ -326,7 +326,7 @@ function bugnote_delete_all( $p_bug_id ) {
 	# Delete the corresponding bugnotes
 	$query = "DELETE FROM $t_bugnote_table
 		WHERE bug_id=" . db_param();
-	$result = db_query_bound( $query, array( (int)$p_bug_id ) );
+	$t_result = db_query_bound( $query, array( (int)$p_bug_id ) );
 
 	# db_query errors on failure so:
 	return true;
@@ -375,9 +375,9 @@ function bugnote_get_field( $p_bugnote_id, $p_field_name ) {
 
 	$t_bugnote_table = db_get_table( 'bugnote' );
 	$t_query = "SELECT $p_field_name FROM $t_bugnote_table WHERE id=" . db_param();
-	$result = db_query_bound( $t_query, array( $p_bugnote_id ), 1 );
+	$t_result = db_query_bound( $t_query, array( $p_bugnote_id ), 1 );
 
-	return db_result( $result );
+	return db_result( $t_result );
 }
 
 /**

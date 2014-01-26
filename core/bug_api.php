@@ -399,9 +399,9 @@ class BugData {
 		$query = "SELECT COUNT(*)
 					  FROM $t_bugnote_table
 					  WHERE bug_id =" . db_param() . " $t_restriction";
-		$result = db_query_bound( $query, array( $this->bug_id ) );
+		$t_result = db_query_bound( $query, array( $this->bug_id ) );
 
-		return db_result( $result );
+		return db_result( $t_result );
 	}
 
 	/**
@@ -486,10 +486,10 @@ class BugData {
 			$query = "SELECT user_id
 						  FROM $t_category_table
 						  WHERE id=" . db_param();
-			$result = db_query_bound( $query, array( $this->category_id ) );
+			$t_result = db_query_bound( $query, array( $this->category_id ) );
 
-			if( $t_result = db_result( $result ) ) {
-				$this->handler_id = db_result( $result );
+			if( $t_result = db_result( $t_result ) ) {
+				$this->handler_id = db_result( $t_result );
 			}
 		}
 
@@ -747,9 +747,9 @@ function bug_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 	$query = "SELECT *
 				  FROM $t_bug_table
 				  WHERE id=" . db_param();
-	$result = db_query_bound( $query, array( $c_bug_id ) );
+	$t_result = db_query_bound( $query, array( $c_bug_id ) );
 
-	if( 0 == db_num_rows( $result ) ) {
+	if( 0 == db_num_rows( $t_result ) ) {
 		$g_cache_bug[$c_bug_id] = false;
 
 		if( $p_trigger_errors ) {
@@ -760,7 +760,7 @@ function bug_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 		}
 	}
 
-	$row = db_fetch_array( $result );
+	$row = db_fetch_array( $t_result );
 
 	return bug_add_to_cache( $row );
 }
@@ -858,9 +858,9 @@ function bug_text_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 				  FROM $t_bug_text_table bt, $t_bug_table b
 				  WHERE b.id=" . db_param() . " AND
 				  		b.bug_text_id = bt.id";
-	$result = db_query_bound( $query, array( $c_bug_id ) );
+	$t_result = db_query_bound( $query, array( $c_bug_id ) );
 
-	if( 0 == db_num_rows( $result ) ) {
+	if( 0 == db_num_rows( $t_result ) ) {
 		$g_cache_bug_text[$c_bug_id] = false;
 
 		if( $p_trigger_errors ) {
@@ -871,7 +871,7 @@ function bug_text_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 		}
 	}
 
-	$row = db_fetch_array( $result );
+	$row = db_fetch_array( $t_result );
 
 	$g_cache_bug_text[$c_bug_id] = $row;
 
@@ -1117,9 +1117,9 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 		$query = "SELECT field_id, bug_id, value
 					   FROM $t_mantis_custom_field_string_table
 					   WHERE bug_id=" . db_param();
-		$result = db_query_bound( $query, array( $t_bug_id ) );
+		$t_result = db_query_bound( $query, array( $t_bug_id ) );
 
-		while( $t_bug_custom = db_fetch_array( $result ) ) {
+		while( $t_bug_custom = db_fetch_array( $t_result ) ) {
 			$c_field_id = (int)$t_bug_custom['field_id'];
 			$c_new_bug_id = (int)$t_new_bug_id;
 			$c_value = $t_bug_custom['value'];
@@ -1141,18 +1141,18 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 		$query = "SELECT *
 					  FROM $t_mantis_bugnote_table
 					  WHERE bug_id=" . db_param();
-		$result = db_query_bound( $query, array( $t_bug_id ) );
+		$t_result = db_query_bound( $query, array( $t_bug_id ) );
 
-		while( $t_bug_note = db_fetch_array( $result ) ) {
+		while( $t_bug_note = db_fetch_array( $t_result ) ) {
 			$t_bugnote_text_id = $t_bug_note['bugnote_text_id'];
 
 			$query2 = "SELECT *
 						   FROM $t_mantis_bugnote_text_table
 						   WHERE id=" . db_param();
-			$result2 = db_query_bound( $query2, array( $t_bugnote_text_id ) );
+			$t_result2 = db_query_bound( $query2, array( $t_bugnote_text_id ) );
 
 			$t_bugnote_text_insert_id = -1;
-			if( $t_bugnote_text = db_fetch_array( $result2 ) ) {
+			if( $t_bugnote_text = db_fetch_array( $t_result2 ) ) {
 				$query2 = "INSERT INTO $t_mantis_bugnote_text_table
 							   ( note )
 							   VALUES ( " . db_param() . ' )';
@@ -1190,9 +1190,9 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 		$query = "SELECT *
 					  FROM $t_mantis_bug_history_table
 					  WHERE bug_id = " . db_param();
-		$result = db_query_bound( $query, array( $t_bug_id ) );
+		$t_result = db_query_bound( $query, array( $t_bug_id ) );
 
-		while( $t_bug_history = db_fetch_array( $result ) ) {
+		while( $t_bug_history = db_fetch_array( $t_result ) ) {
 			$query = "INSERT INTO $t_mantis_bug_history_table
 						  ( user_id, bug_id, date_modified, field_name, old_value, new_value, type )
 						  VALUES ( " . db_param() . ",
@@ -1485,8 +1485,8 @@ function bug_get_newest_bugnote_timestamp( $p_bug_id ) {
 				  FROM $t_bugnote_table
 				  WHERE bug_id=" . db_param() . "
 				  ORDER BY last_modified DESC";
-	$result = db_query_bound( $query, array( $c_bug_id ), 1 );
-	$row = db_result( $result );
+	$t_result = db_query_bound( $query, array( $c_bug_id ), 1 );
+	$row = db_result( $t_result );
 
 	if( false === $row ) {
 		return false;
@@ -1973,9 +1973,9 @@ function bug_monitor_copy( $p_source_bug_id, $p_dest_bug_id ) {
 	$query = 'SELECT user_id
 		FROM ' . $t_bug_monitor_table . '
 		WHERE bug_id = ' . db_param();
-	$result = db_query_bound( $query, array( $c_source_bug_id ) );
+	$t_result = db_query_bound( $query, array( $c_source_bug_id ) );
 
-	while( $t_bug_monitor = db_fetch_array( $result ) ) {
+	while( $t_bug_monitor = db_fetch_array( $t_result ) ) {
 		if ( user_exists( $t_bug_monitor['user_id'] ) &&
 			!user_is_monitoring_bug( $t_bug_monitor['user_id'], $c_dest_bug_id ) ) {
 			$query = 'INSERT INTO ' . $t_bug_monitor_table . ' ( user_id, bug_id )

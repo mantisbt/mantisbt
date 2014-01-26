@@ -53,9 +53,9 @@ html_page_top();
 			$t_email_data->body = 'Your PHP mail settings appear to be correctly set.';
 			$t_email_data->metadata['priority'] = config_get( 'mail_priority' );
 			$t_email_data->metadata['charset'] = 'utf-8';
-			$result = email_send( $t_email_data );
+			$t_result = email_send( $t_email_data );
 
-			if( !$result ) {
+			if( !$t_result ) {
 				echo ' PROBLEMS SENDING MAIL TO: ' . config_get_global( 'webmaster_email' ) . '. Please check your php/mail server settings.<br />';
 			} else {
 				echo ' mail() send successful.<br />';

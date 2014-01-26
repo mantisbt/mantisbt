@@ -940,13 +940,13 @@ function custom_field_get_sequence( $p_field_id, $p_project_id ) {
 				  FROM $t_custom_field_project_table
 				  WHERE field_id=" . db_param() . " AND
 						project_id=" . db_param();
-	$result = db_query_bound( $query, array( $p_field_id, $p_project_id ), 1 );
+	$t_result = db_query_bound( $query, array( $p_field_id, $p_project_id ), 1 );
 
-	if( 0 == db_num_rows( $result ) ) {
+	if( 0 == db_num_rows( $t_result ) ) {
 		return false;
 	}
 
-	$t_row = db_fetch_array( $result );
+	$t_row = db_fetch_array( $t_result );
 
 	return $t_row['sequence'];
 }
@@ -967,8 +967,8 @@ function custom_field_validate( $p_field_id, $p_value ) {
 				  		 access_level_rw, length_min, length_max, default_value
 				  FROM $t_custom_field_table
 				  WHERE id=" . db_param();
-	$result = db_query_bound( $query, array( $p_field_id ) );
-	$row = db_fetch_array( $result );
+	$t_result = db_query_bound( $query, array( $p_field_id ) );
+	$row = db_fetch_array( $t_result );
 
 	$t_name = $row['name'];
 	$t_type = $row['type'];
@@ -1204,9 +1204,9 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 				  FROM $t_custom_field_string_table
 				  WHERE field_id=" . db_param() . " AND
 				  		bug_id=" . db_param();
-	$result = db_query_bound( $query, array( $p_field_id, $p_bug_id ) );
+	$t_result = db_query_bound( $query, array( $p_field_id, $p_bug_id ) );
 
-	if( db_num_rows( $result ) > 0 ) {
+	if( db_num_rows( $t_result ) > 0 ) {
 		$query = "UPDATE $t_custom_field_string_table
 					  SET $t_value_field=" . db_param() . "
 					  WHERE field_id=" . db_param() . " AND
@@ -1218,7 +1218,7 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 		);
 		db_query_bound( $query, $t_params );
 
-		$row = db_fetch_array( $result );
+		$row = db_fetch_array( $t_result );
 		history_log_event_direct( $p_bug_id, $t_name, custom_field_database_to_value( $row[$t_value_field], $t_type ), $p_value );
 	} else {
 		$query = "INSERT INTO $t_custom_field_string_table
@@ -1259,7 +1259,7 @@ function custom_field_set_sequence( $p_field_id, $p_project_id, $p_sequence ) {
 				  SET sequence=" . db_param() . "
 				  WHERE field_id=" . db_param() . " AND
 				  		project_id=" . db_param();
-	$result = db_query_bound( $query, array( $p_sequence, $p_field_id, $p_project_id ) );
+	db_query_bound( $query, array( $p_sequence, $p_field_id, $p_project_id ) );
 
 	custom_field_clear_cache( $p_field_id );
 

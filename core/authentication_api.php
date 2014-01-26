@@ -777,11 +777,11 @@ function auth_is_cookie_valid( $p_cookie_string ) {
 	$query = "SELECT *
 				  FROM $t_user_table
 				  WHERE cookie_string=" . db_param();
-	$result = db_query_bound( $query, array( $p_cookie_string ) );
+	$t_result = db_query_bound( $query, array( $p_cookie_string ) );
 
 	# return true if a matching cookie was found
-	if( 1 == db_num_rows( $result ) ) {
-		user_cache_database_result( db_fetch_array( $result ) );
+	if( 1 == db_num_rows( $t_result ) ) {
+		user_cache_database_result( db_fetch_array( $t_result ) );
 		return true;
 	} else {
 		return false;

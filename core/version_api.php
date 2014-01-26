@@ -139,9 +139,9 @@ function version_cache_row( $p_version_id, $p_trigger_errors = true ) {
 
 	$t_project_version_table = db_get_table( 'project_version' );
 	$query = "SELECT * FROM $t_project_version_table WHERE id=" . db_param();
-	$result = db_query_bound( $query, array( $c_version_id ) );
+	$t_result = db_query_bound( $query, array( $c_version_id ) );
 
-	$row = db_fetch_array( $result );
+	$row = db_fetch_array( $t_result );
 
 	if( !$row ) {
 		$g_cache_versions[$c_version_id] = false;
@@ -419,10 +419,10 @@ function version_cache_array_rows( $p_project_id_array ) {
 				  FROM $t_project_version_table
 				  WHERE project_id IN (" . implode( ',', $c_project_id_array ) . ')
 				  ORDER BY date_order DESC';
-	$result = db_query_bound( $query );
+	$t_result = db_query_bound( $query );
 
 	$rows = array();
-	while( $row = db_fetch_array( $result ) ) {
+	while( $row = db_fetch_array( $t_result ) ) {
 		$g_cache_versions[(int) $row['id']] = $row;
 
 		$rows[ (int)$row[ 'project_id' ] ][] = $row['id'];
@@ -542,9 +542,9 @@ function version_get_all_rows_with_subs( $p_project_id, $p_released = null, $p_o
 	$query = "SELECT * FROM $t_project_version_table
 				  WHERE $t_project_where $t_released_where $t_obsolete_where
 				  ORDER BY date_order DESC";
-	$result = db_query_bound( $query, $t_query_params );
+	$t_result = db_query_bound( $query, $t_query_params );
 	$rows = array();
-	while( $row = db_fetch_array( $result ) ) {
+	while( $row = db_fetch_array( $t_result ) ) {
 		$rows[] = $row;
 	}
 	return $rows;
@@ -581,9 +581,9 @@ function version_get_id( $p_version, $p_project_id = null, $p_inherit = null ) {
 					WHERE " . $t_project_where . " AND
 						version=" . db_param();
 
-	$result = db_query_bound( $query, array( $p_version ) );
+	$t_result = db_query_bound( $query, array( $p_version ) );
 
-	if( $t_row = db_result( $result ) ) {
+	if( $t_row = db_result( $t_result ) ) {
 		return $t_row;
 	} else {
 		return false;

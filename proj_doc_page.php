@@ -106,7 +106,7 @@ $query = "SELECT pft.id, pft.project_id, pft.filename, pft.filesize, pft.title, 
 					( ( pult.user_id = $t_user_id ) AND ( pult.access_level $t_access_clause ) ) OR
 					( ut.access_level >= $t_admin ) )
 			ORDER BY pt.name ASC, pft.title ASC";
-$result = db_query( $query );
+$t_result = db_query( $query );
 
 html_page_top( lang_get( 'docs_link' ) );
 ?>
@@ -123,7 +123,7 @@ html_page_top( lang_get( 'docs_link' ) );
 </tr>
 <?php
 $i = 0;
-while( $row = db_fetch_array( $result ) ) {
+while( $row = db_fetch_array( $t_result ) ) {
 	$i++;
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 	$v_filesize = number_format( $v_filesize );

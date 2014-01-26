@@ -101,8 +101,8 @@ $t_per_page = -1;
 $t_bug_count = null;
 $t_page_count = null;
 
-$result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
-$t_row_count = count( $result );
+$t_result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
+$t_row_count = count( $t_result );
 
 # Headers depending on intended output
 if ( $f_type_page == 'html' ) {
@@ -156,7 +156,7 @@ $t_current_user_id = auth_get_current_user_id();
 $t_user_bugnote_order = user_pref_get_pref ( $t_current_user_id, 'bugnote_order' );
 
 for( $j=0; $j < $t_row_count; $j++ ) {
-	$t_bug = $result[$j];
+	$t_bug = $t_result[$j];
 	$t_id = $t_bug->id;
 
 	if ( $j % 50 == 0 ) {

@@ -556,12 +556,12 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 		FROM $t_bug_table
 		WHERE summary = " . db_param();
 
-	$result = db_query_bound( $query, array( $p_summary ), 1 );
+	$t_result = db_query_bound( $query, array( $p_summary ), 1 );
 
-	if( db_num_rows( $result ) == 0 ) {
+	if( db_num_rows( $t_result ) == 0 ) {
 		return 0;
 	} else {
-		while(( $row = db_fetch_array( $result ) ) !== false ) {
+		while(( $row = db_fetch_array( $t_result ) ) !== false ) {
 			$t_issue_id = (int) $row['id'];
 			$t_project_id = bug_get_field( $t_issue_id, 'project_id' );
 			$g_project_override = $t_project_id;

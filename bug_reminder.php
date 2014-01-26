@@ -91,14 +91,14 @@ foreach ( $f_to as $t_recipient ) {
 	}
 }
 
-$result = email_bug_reminder( $f_to, $f_bug_id, $f_body );
+$t_result = email_bug_reminder( $f_to, $f_bug_id, $f_body );
 
 # Add reminder as bugnote if store reminders option is ON.
 if ( ON == config_get( 'store_reminders' ) ) {
 	# Build list of recipients, truncated to note_attr fields's length
 	$t_attr = '|';
 	$t_length = 0;
-	foreach( $result as $t_id ) {
+	foreach( $t_result as $t_id ) {
 		$t_recipient = $t_id . '|';
 		$t_length += strlen( $t_recipient );
 		if( $t_length > 250 ) {
