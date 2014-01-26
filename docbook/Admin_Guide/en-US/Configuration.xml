@@ -1047,6 +1047,12 @@ $g_language_choices_arr = array( 'english', 'french', 'german' );
 					</para>
                 </listitem>
             </varlistentry>
+            <varlistentry>
+                <term>$g_show_avatar_threshold</term>
+                <listitem>
+                    <para>The threshold of users for which MantisBT should attempt to show the avatar (default DEVELOPER).  Note that the threshold is related to the user for whom the avatar is being shown, rather than the user who is currently logged in.</para>
+                </listitem>
+            </varlistentry>
         </variablelist>
     </section>
 
