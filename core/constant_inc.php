@@ -144,7 +144,6 @@ define( 'HTTP_AUTH', 6 );
 
 # file upload methods
 define( 'DISK', 1 );
-define( 'FTP', 1 );
 define( 'DATABASE', 2 );
 
 # show variable values
@@ -226,7 +225,6 @@ define( 'ERROR_EMPTY_FIELD', 11 );
 define( 'ERROR_PROTECTED_ACCOUNT', 12 );
 define( 'ERROR_ACCESS_DENIED', 13 );
 define( 'ERROR_UPLOAD_FAILURE', 15 );
-define( 'ERROR_FTP_CONNECT_ERROR', 16 );			// deprecated - remove when no longer used in language files.
 define( 'ERROR_HANDLER_ACCESS_TOO_LOW', 17 );
 define( 'ERROR_PAGE_REDIRECTION', 18 );
 define( 'ERROR_INVALID_REQUEST_METHOD', 19 );
@@ -565,3 +563,6 @@ define( 'SECONDS_PER_DAY', 86400 );
 define( 'UNABLE_TO_DUPLICATE', 40 );                # UNABLE_TO_REPRODUCE
 define( 'ERROR_BUG_RESOLVED_ACTION_DENIED', 1102 ); # N/A
 define( 'LOG_SOAP', 64 );                           # LOG_WEBSERVICE
+define( 'FTP', 1 );                                 # DISK
+define( 'ERROR_FTP_CONNECT_ERROR', 16 );            # N/A
+
