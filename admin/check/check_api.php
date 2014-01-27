@@ -63,11 +63,17 @@ function check_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) 
 
 /**
  * Check whether any unhandled errors exist
+ * @return bool|int false if there are no unhandled errors, or the lowest
+ *                  unhandled {@see http://php.net/errorfunc.constants Error Type}
  */
 function check_unhandled_errors_exist() {
 	global $g_errors_raised;
 	if ( count( $g_errors_raised ) > 0 ) {
-		return true;
+		$t_type = E_ALL;
+		foreach( $g_errors_raised as $t_error ) {
+			$t_type = min( $t_type, $t_error['type'] );
+		}
+		return $t_type;
 	}
 	return false;
 }
@@ -195,13 +201,18 @@ function check_print_test_row( $p_description, $p_pass, $p_info = null ) {
 		}
 	}
 	echo "</td>\n";
-	if( $p_pass && !check_unhandled_errors_exist() ) {
-		check_print_test_result( GOOD );
+
+	if( $p_pass && !$t_unhandled ) {
+		$t_result = GOOD;
+	} elseif( $t_unhandled == E_DEPRECATED ) {
+		$t_result = WARN;
 	} else {
-		check_print_test_result( BAD );
+		$t_result = BAD;
 	}
+	check_print_test_result( $t_result );
 	echo "\t</tr>\n";
-	if( check_unhandled_errors_exist() ) {
+
+	if( $t_unhandled ) {
 		check_print_error_rows();
 	}
 	$g_alternate_row = $g_alternate_row === 1 ? 2 : 1;
@@ -230,15 +241,17 @@ function check_print_test_warn_row( $p_description, $p_pass, $p_info = null ) {
 		}
 	}
 	echo "</td>\n";
-	if( $p_pass && !check_unhandled_errors_exist() ) {
-		check_print_test_result( GOOD );
-	} else if( !check_unhandled_errors_exist() ) {
-		check_print_test_result( WARN );
+	if( $p_pass && !$t_unhandled ) {
+		$t_result = GOOD;
+	} elseif( !$t_unhandled || $t_unhandled == E_DEPRECATED ) {
+		$t_result = WARN;
 	} else {
-		check_print_test_result( BAD );
+		$t_result = BAD;
 	}
+	check_print_test_result( $t_result );
 	echo "\t</tr>\n";
-	if( check_unhandled_errors_exist() ) {
+
+	if( $t_unhandled ) {
 		check_print_error_rows();
 	}
 	$g_alternate_row = $g_alternate_row === 1 ? 2 : 1;
