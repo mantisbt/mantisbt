@@ -192,30 +192,7 @@ switch ( config_get( 'file_upload_method' ) ) {
 			}
 		}
 		break;
-	case FTP:
-		$t_local_disk_file = file_normalize_attachment_path( $v_diskfile, $t_project_id );
-
-		if ( !file_exists( $t_local_disk_file ) ) {
-			$ftp = file_ftp_connect();
-			file_ftp_get ( $ftp, $t_local_disk_file, $v_diskfile );
-			file_ftp_disconnect( $ftp );
-		}
-
-		if ( $finfo ) {
-			$t_file_info_type = $finfo->file( $t_local_disk_file );
-
-			if ( $t_file_info_type !== false ) {
-				$t_content_type = $t_file_info_type;
-			}
-		}
-
-		if ( $t_content_type_override )
-			$t_content_type = $t_content_type_override;
-
-		header( 'Content-Type: ' . $t_content_type );
-		readfile( $t_local_disk_file );
-		break;
-	default:
+	case DATABASE:
 		if ( $finfo ) {
 			$t_file_info_type = $finfo->buffer( $v_content );
 
@@ -229,4 +206,6 @@ switch ( config_get( 'file_upload_method' ) ) {
 
 		header( 'Content-Type: ' . $t_content_type );
 		echo $v_content;
+	default:
+		trigger_error( ERROR_GENERIC, ERROR );
 }

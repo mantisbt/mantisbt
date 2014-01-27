@@ -382,27 +382,13 @@ function file_delete_attachments( $p_bug_id ) {
 		return true;
 	}
 
-	if(( DISK == $t_method ) || ( FTP == $t_method ) ) {
-
-		# there may be more than one file
-		$ftp = 0;
-		if( FTP == $t_method ) {
-			$ftp = file_ftp_connect();
-		}
+	if ( DISK == $t_method ) {
 
 		for( $i = 0;$i < $file_count;$i++ ) {
 			$row = db_fetch_array( $result );
 
 			$t_local_diskfile = file_normalize_attachment_path( $row['diskfile'], bug_get_field( $p_bug_id, 'project_id' ) );
 			file_delete_local( $t_local_diskfile );
-
-			if( FTP == $t_method ) {
-				file_ftp_delete( $ftp, $row['diskfile'] );
-			}
-		}
-
-		if( FTP == $t_method ) {
-			file_ftp_disconnect( $ftp );
 		}
 	}
 
@@ -423,9 +409,8 @@ function file_delete_project_files( $p_project_id ) {
 	$t_project_file_table = db_get_table( 'project_file' );
 	$t_method = config_get( 'file_upload_method' );
 
-	# Delete the file physically (if stored via DISK or FTP)
-	if(( DISK == $t_method ) || ( FTP == $t_method ) ) {
-
+	# Delete the file physically (if stored via DISK)
+	if ( DISK == $t_method ) {
 		# Delete files from disk
 		$query = "SELECT diskfile, filename
 					FROM $t_project_file_table
@@ -434,24 +419,11 @@ function file_delete_project_files( $p_project_id ) {
 
 		$file_count = db_num_rows( $result );
 
-		$ftp = 0;
-		if( FTP == $t_method ) {
-			$ftp = file_ftp_connect();
-		}
-
 		for( $i = 0;$i < $file_count;$i++ ) {
 			$row = db_fetch_array( $result );
 
 			$t_local_diskfile = file_normalize_attachment_path( $row['diskfile'], $p_project_id );
 			file_delete_local( $t_local_diskfile );
-
-			if( FTP == $t_method ) {
-				file_ftp_delete( $ftp, $row['diskfile'] );
-			}
-		}
-
-		if( FTP == $t_method ) {
-			file_ftp_disconnect( $ftp );
 		}
 	}
 
@@ -459,66 +431,6 @@ function file_delete_project_files( $p_project_id ) {
 	$query = "DELETE FROM $t_project_file_table
 				WHERE project_id=" . db_param();
 	$result = db_query_bound( $query, array( (int) $p_project_id ) );
-}
-
-/**
- * Delete all cached files that are older than configured number of days.
- */
-function file_ftp_cache_cleanup() {
-}
-
-/**
- * Connect to ftp server using configured server address, user name, and password.
- * @return int
- */
-function file_ftp_connect() {
-	$conn_id = ftp_connect( config_get( 'file_upload_ftp_server' ) );
-	$login_result = ftp_login( $conn_id, config_get( 'file_upload_ftp_user' ), config_get( 'file_upload_ftp_pass' ) );
-
-	if(( !$conn_id ) || ( !$login_result ) ) {
-		trigger_error( ERROR_FTP_CONNECT_ERROR, ERROR );
-	}
-
-	return $conn_id;
-}
-
-/**
- * Put a file to the ftp server.
- * @param int $p_conn_id Resource id
- * @param string $p_remote_filename remote filename
- * @param string $p_local_filename local filename
- */
-function file_ftp_put( $p_conn_id, $p_remote_filename, $p_local_filename ) {
-	helper_begin_long_process();
-	$upload = ftp_put( $p_conn_id, $p_remote_filename, $p_local_filename, FTP_BINARY );
-}
-
-/**
- * Get a file from the ftp server.
- * @param int $p_conn_id Resource id
- * @param string $p_local_filename local filename
- * @param string $p_remote_filename remote filename
- */
-function file_ftp_get( $p_conn_id, $p_local_filename, $p_remote_filename ) {
-	helper_begin_long_process();
-	$download = ftp_get( $p_conn_id, $p_local_filename, $p_remote_filename, FTP_BINARY );
-}
-
-/**
- * Delete a file from the ftp server
- * @param int $p_conn_id Resource id
- * @param string $p_filename filename
- */
-function file_ftp_delete( $p_conn_id, $p_filename ) {
-	@ftp_delete( $p_conn_id, $p_filename );
-}
-
-/**
- * Disconnect from the ftp server
- * @param int $p_conn_id Resource id
- */
-function file_ftp_disconnect( $p_conn_id ) {
-	ftp_quit( $p_conn_id );
 }
 
 /**
@@ -571,13 +483,7 @@ function file_delete( $p_file_id, $p_table = 'bug' ) {
 		$t_project_id = file_get_field( $p_file_id, 'project_id', $p_table );
 	}
 
-	if(( DISK == $t_upload_method ) || ( FTP == $t_upload_method ) ) {
-		if( FTP == $t_upload_method ) {
-			$ftp = file_ftp_connect();
-			file_ftp_delete( $ftp, $t_diskfile );
-			file_ftp_disconnect( $ftp );
-		}
-
+	if ( DISK == $t_upload_method ) {
 		$t_local_disk_file = file_normalize_attachment_path( $t_diskfile, $t_project_id );
 		if ( file_exists( $t_local_disk_file ) ) {
 			file_delete_local( $t_local_disk_file );
@@ -794,17 +700,10 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 	$t_method = config_get( 'file_upload_method' );
 
 	switch( $t_method ) {
-		case FTP:
 		case DISK:
 			file_ensure_valid_upload_path( $t_file_path );
 
 			if( !file_exists( $t_disk_file_name ) ) {
-				if( FTP == $t_method ) {
-					$conn_id = file_ftp_connect();
-					file_ftp_put( $conn_id, $t_disk_file_name, $t_tmp_file );
-					file_ftp_disconnect( $conn_id );
-				}
-
 				if( !move_uploaded_file( $t_tmp_file, $t_disk_file_name ) ) {
 					trigger_error( ERROR_FILE_MOVE_FAILED, ERROR );
 				}
@@ -1060,25 +959,7 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 			}
 			return false;
 			break;
-		case FTP:
-			$t_local_disk_file = file_normalize_attachment_path( $row['diskfile'], $t_project_id );
-
-			if ( !file_exists( $t_local_disk_file ) ) {
-				$ftp = file_ftp_connect();
-				file_ftp_get ( $ftp, $t_local_disk_file, $row['diskfile'] );
-				file_ftp_disconnect( $ftp );
-			}
-
-			if ( $finfo_available ) {
-				$t_file_info_type = $finfo->file( $t_local_disk_file );
-
-				if ( $t_file_info_type !== false ) {
-					$t_content_type = $t_file_info_type;
-				}
-			}
-			return array( 'type' => $t_content_type, 'content' => file_get_contents( $t_local_disk_file ) );
-			break;
-		default:
+		case DATABASE:
 			if ( $finfo_available ) {
 				$t_file_info_type = $finfo->buffer( $row['content'] );
 
@@ -1088,6 +969,8 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 			}
 			return array( 'type' => $t_content_type, 'content' => $row['content'] );
 			break;
+		default:
+			trigger_error( ERROR_GENERIC, ERROR );
 	}
 }
 

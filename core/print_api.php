@@ -1780,12 +1780,6 @@ function print_bug_attachment_header( $p_attachment ) {
 		print_link( 'bug_file_delete.php?file_id=' . $p_attachment['id'] . form_security_param( 'bug_file_delete' ), lang_get( 'delete_link' ), false, 'small' );
 		echo ']';
 	}
-
-	if ( $p_attachment['exists'] ) {
-		if ( config_get( 'file_upload_method' ) == FTP ) {
-			echo lang_get( 'word_separator' ) . '(' . lang_get( 'cached' ) . ')';
-		}
-	}
 }
 
 /**
@@ -1803,25 +1797,16 @@ function print_bug_attachment_preview_text( $p_attachment ) {
 				$t_content = file_get_contents( $p_attachment['diskfile'] );
 			}
 			break;
-		case FTP:
-			if ( file_exists( $p_attachment['diskfile'] ) ) {
-				$t_content = file_get_contents( $p_attachment['diskfile'] );
-			} else {
-				$t_ftp = file_ftp_connect();
-				file_ftp_get( $t_ftp, $p_attachment['diskfile'], $p_attachment['diskfile'] );
-				file_ftp_disconnect( $t_ftp );
-				if ( file_exists( $p_attachment['diskfile'] ) ) {
-					$t_content = file_get_contents( $p_attachment['diskfile'] );
-				}
-			}
-			break;
-		default:
+		case DATABASE:
 			$t_bug_file_table = db_get_table( 'bug_file' );
 			$c_attachment_id = db_prepare_int( $p_attachment['id'] );
 			$t_query = "SELECT * FROM $t_bug_file_table WHERE id=" . db_param();
 			$t_result = db_query_bound( $t_query, array( $c_attachment_id ) );
 			$t_row = db_fetch_array( $t_result );
 			$t_content = $t_row['content'];
+			break;
+		default:
+			trigger_error( ERROR_GENERIC, ERROR );
 	}
 	echo htmlspecialchars( $t_content );
 	echo '</pre>';

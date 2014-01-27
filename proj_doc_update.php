@@ -98,16 +98,9 @@ if ( is_uploaded_file( $v_tmp_name ) ) {
 
 	$t_method = config_get( 'file_upload_method' );
 	switch ( $t_method ) {
-		case FTP:
 		case DISK:
 			file_ensure_valid_upload_path( $t_file_path );
 
-			if ( FTP == $t_method ) {
-				$conn_id = file_ftp_connect();
-				file_ftp_delete ( $conn_id, $t_disk_file_name );
-				file_ftp_put ( $conn_id, $t_disk_file_name, $v_tmp_name );
-				file_ftp_disconnect ( $conn_id );
-			}
 			if ( file_exists( $t_disk_file_name ) ) {
 				file_delete_local( $t_disk_file_name );
 			}

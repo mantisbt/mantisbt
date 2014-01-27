@@ -84,7 +84,6 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	$t_method = config_get( 'file_upload_method' );
 
 	switch( $t_method ) {
-		case FTP:
 		case DISK:
 			if( !file_exists( $t_file_path ) || !is_dir( $t_file_path ) || !is_writable( $t_file_path ) || !is_readable( $t_file_path ) ) {
 				return SoapObjectsFactory::newSoapFault( 'Server', "Upload folder '{$t_file_path}' doesn't exist.");
@@ -94,16 +93,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 
 			if( !file_exists( $t_disk_file_name ) ) {
 				mci_file_write_local( $t_disk_file_name, $p_content );
-
-				if( FTP == $t_method ) {
-					$conn_id = file_ftp_connect();
-					file_ftp_put( $conn_id, $t_disk_file_name, $t_disk_file_name );
-					file_ftp_disconnect( $conn_id );
-					file_delete_local( $t_disk_file_name );
-				} else {
-					chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
-				}
-
+				chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
 				$c_content = "''";
 			}
 			break;
@@ -220,16 +210,9 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 			} else {
 				return SoapObjectsFactory::newSoapFault(  'Client', 'Unable to find an attachment with type ' . $p_type. ' and id ' . $p_file_id . ' .' );
 			}
-		case FTP:
-			if( file_exists( $t_diskfile ) ) {
-				return mci_file_read_local( $t_diskfile );
-			} else {
-				$ftp = file_ftp_connect();
-				file_ftp_get( $ftp, $t_diskfile, $t_diskfile );
-				file_ftp_disconnect( $ftp );
-				return mci_file_read_local( $t_diskfile );
-			}
-		default:
+		case DATABASE:
 			return $t_content;
+		default:
+			trigger_error( ERROR_GENERIC, ERROR );
 	}
 }

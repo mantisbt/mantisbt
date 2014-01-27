@@ -701,9 +701,6 @@ function config_is_private( $p_config_var ) {
 		case 'global_settings':
 		case 'system_font_folder':
 		case 'phpMailer_method':
-		case 'file_upload_ftp_server':
-		case 'file_upload_ftp_user':
-		case 'file_upload_ftp_pass':
 		case 'attachments_file_permissions':
 		case 'file_upload_method':
 		case 'absolute_path_default_upload_folder':
@@ -728,6 +725,13 @@ function config_is_private( $p_config_var ) {
 		case 'log_destination':
 		case 'dot_tool':
 		case 'neato_tool':
+			return true;
+
+		// Marked obsolete in 1.3.0dev - keep here to make sure they are not disclosed by soap api.
+		// These can be removed once complete removal from config and db is enforced by upgrade process.
+		case 'file_upload_ftp_server':
+		case 'file_upload_ftp_user':
+		case 'file_upload_ftp_pass':
 			return true;
 	}
 

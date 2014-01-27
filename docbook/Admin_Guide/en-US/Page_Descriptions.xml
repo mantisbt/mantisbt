@@ -361,12 +361,11 @@
                         </para>
                     </listitem>
                     <listitem>
-                        <para>afile directory used to store attachments for issues and
+                        <para>file directory used to store attachments for issues and
                             documents associated with the project. This folder is located on
                             the webserver, it can be absolute path or path relative to the main
                             MantisBT folder. Note that this is only used if the files are stored
-                            on disk or via FTP. In case of FTP, the cached version that is
-                            saved on the webserver, is stored in the specified path.
+                            on disk.
                         </para>
                     </listitem>
                     <listitem>
