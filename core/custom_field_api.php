@@ -625,7 +625,7 @@ function custom_field_get_id_from_name( $p_field_name ) {
  * @access public
  */
 function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
-	global $g_cache_cf_linked, $g_cache_custom_field;
+	global $g_cache_cf_linked;
 
 	if( !isset( $g_cache_cf_linked[$p_project_id] ) ) {
 

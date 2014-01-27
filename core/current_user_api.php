@@ -209,8 +209,6 @@ function current_user_ensure_unprotected() {
  */
 function current_user_get_bug_filter( $p_project_id = null ) {
 	$f_filter_string = gpc_get_string( 'filter', '' );
-	$t_view_all_cookie = '';
-	$t_cookie_detail = '';
 	$t_filter = '';
 
 	if( !is_blank( $f_filter_string ) ) {

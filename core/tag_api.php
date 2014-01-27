@@ -450,10 +450,8 @@ function tag_delete( $p_tag_id ) {
 	}
 
 	$t_tag_table = db_get_table( 'tag' );
-	$t_bug_tag_table = db_get_table( 'bug_tag' );
 
-	$query = "DELETE FROM $t_tag_table
-					WHERE id=" . db_param();
+	$query = "DELETE FROM $t_tag_table WHERE id=" . db_param();
 	db_query_bound( $query, array( $p_tag_id ) );
 
 	return true;

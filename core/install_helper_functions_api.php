@@ -304,7 +304,7 @@ function install_correct_multiselect_custom_fields_db_format() {
 			SET value = '$c_value'
 			WHERE field_id = $c_field_id
 				AND bug_id = $c_bug_id";
-		$t_update_result = db_query_bound( $t_update_query );
+		db_query_bound( $t_update_query );
 	}
 
 	# Remove vertical pipe | prefix and suffix from radio custom field values.
@@ -324,7 +324,7 @@ function install_correct_multiselect_custom_fields_db_format() {
 			SET value = '$c_value'
 			WHERE field_id = $c_field_id
 				AND bug_id = $c_bug_id";
-		$t_update_result = db_query_bound( $t_update_query );
+		db_query_bound( $t_update_query );
 	}
 
 	# Re-enable query logging if we disabled it

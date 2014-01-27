@@ -230,7 +230,7 @@ function config_get_access( $p_option, $p_user = null, $p_project = null ) {
 	global $g_cache_config, $g_cache_config_access, $g_cache_filled;
 
 	if( !$g_cache_filled ) {
-		$t = config_get( $p_option, -1, $p_user, $p_project );
+		config_get( $p_option, -1, $p_user, $p_project );
 	}
 
 	# prepare the user's list
@@ -286,7 +286,7 @@ function config_is_set( $p_option, $p_user = null, $p_project = null ) {
 	global $g_cache_config, $g_cache_filled;
 
 	if( !$g_cache_filled ) {
-		$t = config_get( $p_option, -1, $p_user, $p_project );
+		config_get( $p_option, -1, $p_user, $p_project );
 	}
 
 	# prepare the user's list
@@ -404,7 +404,7 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 			);
 		}
 
-		$result = db_query_bound( $t_set_query, $t_params );
+		db_query_bound( $t_set_query, $t_params );
 	}
 
 	config_set_cache( $p_option, $c_value, $t_type, $p_user, $p_project, $p_access );
@@ -501,8 +501,6 @@ function config_can_delete( $p_option ) {
  * @param int $p_project project id
  */
 function config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECTS ) {
-	global $g_cache_config, $g_cache_config_access;
-
 	# bypass table lookup for certain options
 	$t_bypass_lookup = !config_can_set_in_database( $p_option );
 
@@ -516,7 +514,7 @@ function config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECT
 				WHERE config_id = " . db_param() . " AND
 					project_id=" . db_param() . " AND
 					user_id=" . db_param();
-		$result = db_query_bound( $query, array( $p_option, $p_project, $p_user ) );
+		db_query_bound( $query, array( $p_option, $p_project, $p_user ) );
 	}
 
 	config_flush_cache( $p_option, $p_user, $p_project );
@@ -547,9 +545,8 @@ function config_delete_for_user( $p_option, $p_user_id ) {
  */
 function config_delete_project( $p_project = ALL_PROJECTS ) {
 	$t_config_table = db_get_table( 'config' );
-	$query = "DELETE FROM $t_config_table
-				WHERE project_id=" . db_param();
-	$result = db_query_bound( $query, array( $p_project ) );
+	$query = "DELETE FROM $t_config_table WHERE project_id=" . db_param();
+	db_query_bound( $query, array( $p_project ) );
 
 	# flush cache here in case some of the deleted configs are in use.
 	config_flush_cache();
@@ -564,7 +561,7 @@ function config_delete_project( $p_project = ALL_PROJECTS ) {
  * @param int $p_project project id
  */
 function config_flush_cache( $p_option = '', $p_user = ALL_USERS, $p_project = ALL_PROJECTS ) {
-	global $g_cache_config, $g_cache_config_access, $g_cache_filled;
+	global $g_cache_filled;
 
 	if( '' !== $p_option ) {
 		unset( $GLOBALS['g_cache_config'][$p_option][$p_user][$p_project] );

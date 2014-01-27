@@ -688,7 +688,6 @@ function user_delete( $p_user_id ) {
  * @return int|bool
  */
 function user_get_id_by_name( $p_username ) {
-	global $g_cache_user;
 	if( $t_user = user_search_cache( 'username', $p_username ) ) {
 		return $t_user['id'];
 	}
@@ -1551,9 +1550,6 @@ function user_set_password( $p_user_id, $p_password, $p_allow_protected = false 
 	if( !$p_allow_protected ) {
 		user_ensure_unprotected( $p_user_id );
 	}
-
-	$t_email = user_get_field( $p_user_id, 'email' );
-	$t_username = user_get_field( $p_user_id, 'username' );
 
 	# When the password is changed, invalidate the cookie to expire sessions that
 	# may be active on all browsers.

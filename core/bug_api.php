@@ -655,7 +655,7 @@ class BugData {
 
 			if( $t_old_data->description != $this->description ) {
 				if ( bug_revision_count( $c_bug_id, REV_DESCRIPTION ) < 1 ) {
-					$t_revision_id = bug_revision_add( $c_bug_id, $t_old_data->reporter_id, REV_DESCRIPTION, $t_old_data->description, 0, $t_old_data->date_submitted );
+					bug_revision_add( $c_bug_id, $t_old_data->reporter_id, REV_DESCRIPTION, $t_old_data->description, 0, $t_old_data->date_submitted );
 				}
 				$t_revision_id = bug_revision_add( $c_bug_id, $t_current_user, REV_DESCRIPTION, $this->description );
 				history_log_event_special( $c_bug_id, DESCRIPTION_UPDATED, $t_revision_id );
@@ -663,7 +663,7 @@ class BugData {
 
 			if( $t_old_data->steps_to_reproduce != $this->steps_to_reproduce ) {
 				if ( bug_revision_count( $c_bug_id, REV_STEPS_TO_REPRODUCE ) < 1 ) {
-					$t_revision_id = bug_revision_add( $c_bug_id, $t_old_data->reporter_id, REV_STEPS_TO_REPRODUCE, $t_old_data->steps_to_reproduce, 0, $t_old_data->date_submitted );
+					bug_revision_add( $c_bug_id, $t_old_data->reporter_id, REV_STEPS_TO_REPRODUCE, $t_old_data->steps_to_reproduce, 0, $t_old_data->date_submitted );
 				}
 				$t_revision_id = bug_revision_add( $c_bug_id, $t_current_user, REV_STEPS_TO_REPRODUCE, $this->steps_to_reproduce );
 				history_log_event_special( $c_bug_id, STEP_TO_REPRODUCE_UPDATED, $t_revision_id );
@@ -671,7 +671,7 @@ class BugData {
 
 			if( $t_old_data->additional_information != $this->additional_information ) {
 				if ( bug_revision_count( $c_bug_id, REV_ADDITIONAL_INFO ) < 1 ) {
-					$t_revision_id = bug_revision_add( $c_bug_id, $t_old_data->reporter_id, REV_ADDITIONAL_INFO, $t_old_data->additional_information, 0, $t_old_data->date_submitted );
+					bug_revision_add( $c_bug_id, $t_old_data->reporter_id, REV_ADDITIONAL_INFO, $t_old_data->additional_information, 0, $t_old_data->date_submitted );
 				}
 				$t_revision_id = bug_revision_add( $c_bug_id, $t_current_user, REV_ADDITIONAL_INFO, $this->additional_information );
 				history_log_event_special( $c_bug_id, ADDITIONAL_INFO_UPDATED, $t_revision_id );
@@ -1073,11 +1073,9 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 	global $g_db;
 
 	$t_mantis_custom_field_string_table = db_get_table( 'custom_field_string' );
-	$t_mantis_bug_file_table = db_get_table( 'bug_file' );
 	$t_mantis_bugnote_table = db_get_table( 'bugnote' );
 	$t_mantis_bugnote_text_table = db_get_table( 'bugnote_text' );
 	$t_mantis_bug_history_table = db_get_table( 'bug_history' );
-	$t_mantis_db = $g_db;
 
 	$t_bug_id = (int)$p_bug_id;
 	$t_target_project_id = (int)$p_target_project_id;
