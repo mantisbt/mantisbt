@@ -176,22 +176,6 @@ function print_successful_redirect( $p_redirect_to ) {
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  * Print avatar image for the given user ID
  *
@@ -677,7 +661,7 @@ function print_profile_option_list_from_profiles( $p_profiles, $p_select_id ) {
 	}
 }
 
-/** 
+/**
  * Since categories can be orphaned we need to grab all unique instances of category
  * We check in the project category table and in the bug table
  * We put them all in one array and make sure the entries are unique
@@ -1171,7 +1155,7 @@ function print_plugin_priority_list( $p_priority ) {
 	}
 }
 
-/** 
+/**
  * prints a link to VIEW a bug given an ID
  *  account for the user preference and site override
  * @param int $p_bug_id bug id
