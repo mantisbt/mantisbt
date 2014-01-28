@@ -72,7 +72,7 @@ function print_info_row( $p_description, $p_value ) {
 		$t_version_suffix = '';
 	}
 	print_info_row( lang_get( 'mantis_version' ), MANTIS_VERSION, $t_version_suffix );
-	print_info_row( 'php_version', phpversion());
+	print_info_row( lang_get( 'php_version' ), phpversion());
 ?>
 		<tr>
 			<td class="form-title" width="30%" colspan="2">
@@ -81,7 +81,7 @@ function print_info_row( $p_description, $p_value ) {
 		</tr>
 <?php
 	print_info_row( lang_get( 'schema_version' ), config_get( 'database_version' ) );
-	print_info_row( 'adodb_version', $g_db->Version() );
+	print_info_row( lang_get( 'adodb_version' ), $g_db->Version() );
 ?>
 		<tr>
 			<td class="form-title" width="30%" colspan="2">
