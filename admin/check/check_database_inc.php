@@ -172,11 +172,11 @@ check_print_info_row(
 );
 
 if( db_is_mysql() ) {
-	$t_db_min_version = '5.0.8';
+	$t_db_min_version = DB_MIN_VERSION_MYSQL;
 } elseif( db_is_pgsql() ) {
-	# Minimum version below not due to a specific MantisBT requirement,
-	# but because it's the oldest supported PostgreSQL release.
-	$t_db_min_version = '8.4';
+	$t_db_min_version = DB_MIN_VERSION_PGSQL;
+} elseif( db_is_mssql() ) {
+	$t_db_min_version = DB_MIN_VERSION_MSSQL;
 } else {
 	$t_db_min_version = 0;
 }
