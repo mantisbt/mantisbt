@@ -1542,6 +1542,8 @@ $s_install_information = 'MantisBT Installation Information';
 $s_database_information = 'MantisBT Database Information';
 $s_path_information = 'MantisBT Path Information';
 $s_mantisbt_database_statistics = 'MantisBT Database Statistics';
+$s_php_version = 'PHP Version';
+$s_adodb_version = 'ADOdb Version';
 
 # months
 $s_month_january = 'January';
