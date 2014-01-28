@@ -39,6 +39,7 @@ define( 'PHP_CGI', 1 );
 
 # installation
 define( 'CONFIGURED_PASSWORD', "______" );
+define( 'DB_MIN_VERSION_ADODB', '5.19dev' ); # For mssql, oracle and pgsql
 define( 'DB_MIN_VERSION_MSSQL', '9.0.0' );
 define( 'DB_MIN_VERSION_MYSQL', '5.0.8' );   # See #16584
 define( 'DB_MIN_VERSION_PGSQL', '8.4' );     # Earliest supported version as of Jan 2014
