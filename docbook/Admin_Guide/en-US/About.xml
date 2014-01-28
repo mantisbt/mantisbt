@@ -158,15 +158,17 @@
                 <para>
                     <ulink url="http://www.mantisbt.org/irc.php">IRC</ulink> -
                     The IRC channel is mainly used by developers to engage in
-                    in-person discussion.  The recommended tool for IRC is XChat (for Linux),
-                    XChat 2 (for Windows).  However, you can also use <ulink
-                    url="http://webchat.freenode.net/">Web Chat</ulink> to connect to IRC
-                    via your web browser.  This is also useful when your work
-                    firewall blocks the IRC port (although there are other
-                    workarounds involving tunneling to fix this issue).  Many people
-                    prefer to use IRC to ask questions to the developers and other
-                    users who are in the IRC channel.  The IRC channel logs are archived
-                    and made available on the web. (TODO: add irc logs link)
+                    in-person discussion.  There are many free IRC clients:
+                    XChat (for Linux), <ulink url="http://hexchat.github.io/">HexChat</ulink>,
+                    <ulink url="http://www.icechat.net/">IceChat</ulink> amongst others.
+                    You can also use <ulink url="http://webchat.freenode.net/">Web Chat</ulink>
+                    to connect to IRC via your web browser.
+                    This may also useful when your work firewall blocks the IRC port.
+                    Many people prefer to use IRC to ask questions to the developers and other
+                    users who are in the IRC channel.
+                    The IRC channel logs are archived and made
+                    <ulink url="http://www.mantisbt.org/irclogs.php">
+                        available on the MantisBT web site</ulink>.
                 </para>
             </listitem>
             <listitem>
