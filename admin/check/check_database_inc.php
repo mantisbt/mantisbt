@@ -51,7 +51,7 @@ if( isset( $ADODB_vers ) ) {
 	# This bug has been fixed in ADOdb 5.11 (May 5, 2010) but we still
 	# need to use the backwards compatible approach to detect ADOdb <5.11.
 	if( preg_match( '/^[Vv]([0-9\.]+)/', $ADODB_vers, $t_matches ) == 1 ) {
-		$t_adodb_version_check_ok = version_compare( $t_matches[1], '5.10', '>=' );
+		$t_adodb_version_check_ok = version_compare( $t_matches[1], DB_MIN_VERSION_ADODB, '>=' );
 		$t_adodb_version_info = 'ADOdb version ' . htmlentities( $t_matches[1] ) . ' was found.';
 	}
 
@@ -63,7 +63,7 @@ if( isset( $ADODB_vers ) ) {
 	);
 }
 check_print_test_row(
-	'Version of <a href="http://en.wikipedia.org/wiki/ADOdb">ADOdb</a> available is at least 5.11',
+	'Version of <a href="http://en.wikipedia.org/wiki/ADOdb">ADOdb</a> available is at least ' . DB_MIN_VERSION_ADODB,
 	$t_adodb_version_check_ok,
 	$t_adodb_version_info
 );
