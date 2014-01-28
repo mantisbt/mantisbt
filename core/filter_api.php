@@ -4696,7 +4696,7 @@ function filter_db_delete_filter( $p_filter_id ) {
 	$query = 'DELETE FROM ' . $t_filters_table . ' WHERE id=' . db_param();
 	$result = db_query_bound( $query, array( $c_filter_id ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 

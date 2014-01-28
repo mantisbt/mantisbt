@@ -416,7 +416,7 @@ function project_delete( $p_project_id ) {
 
 	project_clear_cache( $p_project_id );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -467,7 +467,7 @@ function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_v
 
 	project_clear_cache( $p_project_id );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -788,7 +788,7 @@ function project_add_user( $p_project_id, $p_user_id, $p_access_level ) {
 
 	db_query_bound( $query, array( $c_project_id, $c_user_id, $c_access_level ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -808,7 +808,7 @@ function project_update_user_access( $p_project_id, $p_user_id, $p_access_level 
 
 	db_query_bound( $query, array( $c_access_level, $c_project_id, $c_user_id ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -841,7 +841,7 @@ function project_remove_user( $p_project_id, $p_user_id ) {
 
 	db_query_bound( $query, array( $c_project_id, $c_user_id ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -866,7 +866,7 @@ function project_remove_all_users( $p_project_id, $p_access_level_limit = null )
 		db_query_bound( $t_query, array( $p_project_id ) );
 	}
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 

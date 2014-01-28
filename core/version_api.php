@@ -238,7 +238,7 @@ function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $
 	$t_version_id = db_insert_id( $t_project_version_table );
 	
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return $t_version_id;
 }
 
@@ -387,7 +387,7 @@ function version_remove_all( $p_project_id ) {
 				  WHERE project_id=" . db_param();
 	db_query_bound( $query, array( $c_project_id ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
