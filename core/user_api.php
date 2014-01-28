@@ -1395,7 +1395,7 @@ function user_increment_login_count( $p_user_id ) {
 
 	user_clear_cache( $p_user_id );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -1526,7 +1526,7 @@ function user_set_field( $p_user_id, $p_field_name, $p_field_value ) {
 
 	user_set_fields($p_user_id, array ( $p_field_name => $p_field_value ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -1569,7 +1569,7 @@ function user_set_password( $p_user_id, $p_password, $p_allow_protected = false 
 				  WHERE id=" . db_param();
 	db_query_bound( $query, array( $c_password, $c_cookie_string, $c_user_id ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 

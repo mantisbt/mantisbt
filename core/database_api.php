@@ -278,51 +278,6 @@ function db_check_identifier_size( $p_identifier ) {
  * @global array of previous executed queries for profiling
  * @global adodb database connection object
  * @global boolean indicating whether queries array is populated
- * @param string $p_query Query string to execute
- * @param int $p_limit Number of results to return
- * @param int $p_offset offset query results for paging
- * @return ADORecordSet|bool adodb result set or false if the query failed.
- * @deprecated db_query_bound should be used in preference to this function. This function will likely be removed in 1.2.0 final
- */
-function db_query( $p_query, $p_limit = -1, $p_offset = -1 ) {
-	global $g_queries_array, $g_db, $g_db_log_queries;
-
-	$t_start = microtime(true);
-
-	if( db_is_oracle() ) {
-		$p_query = db_oracle_adapt_query_syntax( $p_query );
-	}
-
-	if(( $p_limit != -1 ) || ( $p_offset != -1 ) ) {
-		$t_result = $g_db->SelectLimit( $p_query, $p_limit, $p_offset );
-	} else {
-		$t_result = $g_db->Execute( $p_query );
-	}
-
-	$t_elapsed = number_format( microtime(true) - $t_start, 4 );
-
-	if( ON == $g_db_log_queries ) {
-		log_event( LOG_DATABASE, array( $p_query, $t_elapsed) );
-		array_push( $g_queries_array, array( $p_query, $t_elapsed ) );
-	} else {
-		array_push( $g_queries_array, array( '', $t_elapsed ) );
-	}
-
-	if( !$t_result ) {
-		db_error( $p_query );
-		trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
-		return false;
-	} else {
-		return $t_result;
-	}
-}
-
-/**
- * execute query, requires connection to be opened
- * An error will be triggered if there is a problem executing the query.
- * @global array of previous executed queries for profiling
- * @global adodb database connection object
- * @global boolean indicating whether queries array is populated
  * @param string $p_query Parameterlised Query string to execute
  * @param array $arr_parms array of parameters matching $p_query
  * @param int $p_limit Number of results to return
@@ -765,7 +720,7 @@ function db_prepare_string( $p_string ) {
 /**
  * Prepare a binary string before DB insertion
  * Use of this function is required for some DB types, to properly encode
- * BLOB fields prior to calling db_query_bound() or db_query()
+ * BLOB fields prior to calling db_query_bound()
  * @param string $p_string raw binary data
  * @return string prepared database query string
  */

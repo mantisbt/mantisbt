@@ -101,7 +101,7 @@ function news_delete( $p_news_id ) {
 	$t_query = "DELETE FROM $t_news_table WHERE id=" . db_param();
 	db_query_bound( $t_query, array( $p_news_id ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -116,7 +116,7 @@ function news_delete_all( $p_project_id ) {
 	$t_query = "DELETE FROM $t_news_table WHERE project_id=" . db_param();
 	db_query_bound( $t_query, array( (int)$p_project_id ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -156,7 +156,7 @@ function news_update( $p_news_id, $p_project_id, $p_view_state, $p_announcement,
 
 	db_query_bound( $t_query, array( $p_view_state, $p_announcement, $p_headline, $p_body, $p_project_id, db_now(), $p_news_id ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
