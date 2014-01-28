@@ -19,7 +19,7 @@
 	<corpauthor>
 		<inlinemediaobject>
 			<imageobject>
-				<imagedata fileref="Common_Content/images/title_logo.svg" format="SVG" />
+				<imagedata fileref="./images/mantis_logo.png" format="PNG" />
 			</imageobject>
 		</inlinemediaobject>
 	</corpauthor>
