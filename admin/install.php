@@ -443,14 +443,14 @@ if( 2 == $t_install_state ) {
 		switch( $f_db_type ) {
 			case 'mysql':
 			case 'mysqli':
-				if( version_compare( $t_version_info['version'], '5.0.8', '<' ) ) {
-					$t_error = 'MySQL 5.0.8 or later is required for installation.';
+				if( version_compare( $t_version_info['version'], DB_MIN_VERSION_MYSQL, '<' ) ) {
+					$t_error = 'MySQL ' . DB_MIN_VERSION_MYSQL . ' or later is required for installation.';
 				}
 				break;
 			case 'mssql':
 			case 'mssqlnative':
-				if( version_compare( $t_version_info['version'], '9.0.0', '<' ) ) {
-					$t_error = 'SQL Server 2005 or later is required for installation.';
+				if( version_compare( $t_version_info['version'], DB_MIN_VERSION_MSSQL, '<' ) ) {
+					$t_error = 'SQL Server 2005 (' . DB_MIN_VERSION_MSSQL . ') or later is required for installation.';
 				}
 				break;
 			case 'pgsql':
