@@ -11,7 +11,9 @@
 	<edition>1.0</edition>
 	<abstract>
 		<para>
-			A short overview and summary of the book&#39;s subject and purpose, traditionally no more than one paragraph long. Note: the abstract will appear in the front matter of your book and will also be placed in the description field of the book&#39;s RPM spec file.
+			This book is targeted at MantisBT administrators, and documents the
+			installation, upgrade, configuration, customization and administration
+			tasks required to operate the software.
 		</para>
 	</abstract>
 	<corpauthor>
