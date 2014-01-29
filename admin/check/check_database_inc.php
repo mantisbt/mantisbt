@@ -91,11 +91,19 @@ check_print_test_row(
 		. '. The version of PHP installed on this server does not have support for this database type.' )
 );
 
+if( db_is_mysql() ) {
+	check_print_test_warn_row(
+		'PHP support for MySQL driver',
+		'mysql' != $t_database_type,
+		array( false => "'mysql' driver is deprecated as of PHP 5.5.0, please use 'mysqli' instead" )
+	);
+}
+
 if ( db_is_mssql() ) {
 
 	check_print_test_warn_row(
 		'PHP support for Microsoft SQL Server driver',
-		'mssql' != config_get_global( 'db_type' ),
+		'mssql' != $t_database_type,
 		array( false => "'mssql' driver is no longer supported in PHP >= 5.3, please use 'mssqlnative' instead" )
 	);
 
