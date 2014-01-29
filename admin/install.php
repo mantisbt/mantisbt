@@ -522,18 +522,21 @@ if( !$g_database_upgrade ) {
 
 		<select id="db_type" name="db_type">
 <?php
-			// Build selection list of available DB types
+			# Build selection list of available DB types
 			$t_db_list = array(
-				'mysql'       => 'MySQL (default)',
-				'mysqli'      => 'MySQLi',
+				'mysqli'      => 'MySQL Improved',
+				'mysql'       => 'MySQL',
 				'mssql'       => 'Microsoft SQL Server',
 				'mssqlnative' => 'Microsoft SQL Server Native Driver',
 				'pgsql'       => 'PostgreSQL',
 				'oci8'        => 'Oracle',
 				'db2'         => 'IBM DB2',
 			);
-
-			// mssql is not supported with PHP >= 5.3
+			# mysql is deprecated as of PHP 5.5.0
+			if( version_compare( phpversion(), '5.5.0' ) >= 0 ) {
+				unset( $t_db_list['mysql']);
+			}
+			# mssql is not supported with PHP >= 5.3
 			if( version_compare( phpversion(), '5.3' ) >= 0 ) {
 				unset( $t_db_list['mssql']);
 			}

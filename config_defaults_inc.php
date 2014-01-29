@@ -74,8 +74,8 @@ $g_db_schema			= '';
  *
  * RDBMS           db_type       PHP ext   Comments
  * -----           -------       -------   --------
- * MySQL           mysql         mysql     default
- *                 mysqli        mysqli
+ * MySQL           mysql         mysql
+ *                 mysqli        mysqli    default
  * PostgreSQL      pgsql         pgsql
  * MS SQL Server   mssqlnative   sqlsrv    experimental
  * Oracle          oci8          oci8      experimental
@@ -83,7 +83,7 @@ $g_db_schema			= '';
  *
  * @global string $g_db_type
  */
-$g_db_type				= 'mysql';
+$g_db_type				= 'mysqli';
 
 /**
  * adodb Data Source Name
