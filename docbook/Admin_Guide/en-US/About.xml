@@ -238,7 +238,10 @@
        <title>Versioning</title>
 
        <para>
-           The release numbering convention we use is major.minor.micro (eg. 1.2.0rc1).
+           Our release numbering convention follows the guidelines of
+           <ulink url="http://semver.org/">Semantic Versioning</ulink>.
+           Given a version number <emphasis>Major.Minor.Patch</emphasis>
+           and an optional <emphasis>Suffix</emphasis> (eg. 1.2.0rc1):
        </para>
 
        <itemizedlist>
@@ -246,21 +249,25 @@
                 <para>
                      Major - Indicates a very large change in the core package.
                      Rewrites or major milestones.
+                     API changes which are not backwards-compatible.
                 </para>
         </listitem>
             <listitem>
                 <para>
-                    Minor - Significant amount of feature addition/modification.
+                    Minor - Introduction of new features or significant changes
+                    in functionality, in a backwards-compatible manner.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Micro - Mostly bug fixes and maintenance releases.
+                    Patch - Bug fixes, maintenance and security releases.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Suffix - rc1 for first release candidate, a1 for alpha 1, etc.
+                    Suffix - Optional, indicates a development release.
+                    a1 for alpha 1, b1 for beta 1, rc1 for first release candidate, etc.
+                    Absence of suffix indicates a stable release.
                 </para>
             </listitem>
         </itemizedlist>
