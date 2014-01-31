@@ -3387,7 +3387,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					echo '<input type="hidden" name="', FILTER_PROPERTY_PROJECT_ID, '[]" value="', string_attribute( $t_current ), '" />';
 					$t_this_name = '';
 					if( META_FILTER_CURRENT == $t_current ) {
-						$t_this_name = lang_get( 'current' );
+						$t_this_name = '[' . lang_get( 'current' ) . ']';
 					} else {
 						$t_this_name = project_get_name( $t_current, false );
 					}
