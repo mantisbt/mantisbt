@@ -316,7 +316,6 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'show' ) ?></th>
 	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'view_status' ) ?></th>
 	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'sticky' ) ?></th>
-	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'changed' ) ?></th>
 	<th class="small-caption" colspan="<?php echo ( 3 * $t_custom_cols ); ?>">
 		<label>
 			<input type="checkbox" id="use_date_filters"
@@ -326,10 +325,9 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 			<?php echo lang_get( 'use_date_filters' )?>
 		</label>
 	</th>
-	<th class="small-caption" colspan="<?php echo ( ( $t_filter_cols -7 ) * $t_custom_cols ); ?>">
+	<th class="small-caption" colspan="<?php echo ( ( $t_filter_cols -8 ) * $t_custom_cols ); ?>">
 		<?php echo lang_get( 'bug_relationships' ) ?>
 	</th>
-	<!-- <th colspan="<?php echo ( ( $t_filter_cols - 8 ) * $t_custom_cols ); ?>">&#160;</th> -->
 </tr>
 <tr class="row-1">
 	<!-- Number of bugs per page -->
@@ -344,10 +342,6 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_sticky_issues(); ?>
 	</td>
-	<!-- Highlight changed bugs -->
-	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<?php print_filter_highlight_changed(); ?>
-	</td>
 	<!-- Date filters -->
  	<td class="left" colspan="<?php echo ( 3 * $t_custom_cols ); ?>">
 		<?php print_filter_do_filter_by_date( true ); # hide checkbox as it's already been shown ?>
@@ -356,7 +350,6 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 	<td colspan="<?php echo ( ( $t_filter_cols - 8 ) * $t_custom_cols ); ?>">
 		<?php print_filter_relationship_type(); ?>
 	</td>
-	<!-- <td colspan="<?php echo ( ( $t_filter_cols - 7 ) * $t_custom_cols ); ?>">&#160;</td> -->
 </tr>
 
 <!-- Filter row 4 (custom fields) -->
@@ -413,17 +406,26 @@ if ( 'simple' == $f_view_type ) {
 ?>
 
 <tr class="row-1">
+	<!-- Sort by -->
 	<th class="small-caption category2" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php echo lang_get( 'sort_label' ) ?>
 	</th>
-	<td colspan="<?php echo ( ( $t_filter_cols - 1 - $t_project_cols ) * $t_custom_cols ); ?>">
+	<td colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
 		<?php
 			print_filter_show_sort();
 		?>
 	</td>
+
+	<!-- Highlight changed bugs -->
+	<th class="small-caption category2" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'changed' ) ?></th>
+	<td colspan="<?php echo ( $t_filter_cols - 4 - $t_project_cols ) * $t_custom_cols ; ?>">
+		<?php print_filter_highlight_changed(); ?>
+	</td>
+
 	<?php
 		if ( 'advanced' == $f_view_type ) {
 	?>
+	<!-- Projects -->
 			<th class="small-caption category2" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 				<?php echo lang_get( 'email_project_label' ) ?>
 			</th>
