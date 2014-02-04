@@ -43,7 +43,6 @@ function print_info_row( $p_description, $p_value ) {
 	echo '</tr>';
 }
 ?>
-<br />
 
 <div id="admin-menu">
 	<ul class="menu">
@@ -59,10 +58,13 @@ function print_info_row( $p_description, $p_value ) {
 	</ul>
 </div>
 
-<table class="width75" cellspacing="1">
-<tr>
-<td class="form-title" width="30%" colspan="2"><?php echo lang_get( 'install_information' ) ?></td>
-</tr>
+<div id="admin-overview" class="table-container">
+	<table>
+		<tr>
+			<td class="form-title" width="30%" colspan="2">
+				<?php echo lang_get( 'install_information' ) ?>
+			</td>
+		</tr>
 <?php
 	if( ON == config_get( 'show_version' ) ) {
 		$t_version_suffix = config_get_global( 'version_suffix' );
@@ -70,23 +72,29 @@ function print_info_row( $p_description, $p_value ) {
 		$t_version_suffix = '';
 	}
 	print_info_row( lang_get( 'mantis_version' ), MANTIS_VERSION, $t_version_suffix );
-	print_info_row( 'php_version', phpversion());
+	print_info_row( lang_get( 'php_version' ), phpversion());
 ?>
-<tr>
-<td class="form-title" width="30%" colspan="2"><?php echo lang_get( 'database_information' ) ?></td>
-</tr>
+		<tr>
+			<td class="form-title" width="30%" colspan="2">
+				<?php echo lang_get( 'database_information' ) ?>
+			</td>
+		</tr>
 <?php
 	print_info_row( lang_get( 'schema_version' ), config_get( 'database_version' ) );
-	print_info_row( 'adodb_version', $g_db->Version() );
+	print_info_row( lang_get( 'adodb_version' ), $g_db->Version() );
 ?>
-<tr>
-<td class="form-title" width="30%" colspan="2"><?php echo lang_get( 'path_information' ) ?></td>
-</tr>
+		<tr>
+			<td class="form-title" width="30%" colspan="2">
+				<?php echo lang_get( 'path_information' ) ?>
+			</td>
+		</tr>
 <?php
 	print_info_row( lang_get( 'site_path' ), config_get( 'absolute_path' ) );
 	print_info_row( lang_get( 'core_path' ), config_get( 'core_path' ) );
 	print_info_row( lang_get( 'plugin_path' ), config_get( 'plugin_path' ) );
 ?>
-</table>
+	</table>
+</div>
+
 <?php
 	html_page_bottom();
