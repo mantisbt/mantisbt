@@ -397,7 +397,7 @@ function file_delete_attachments( $p_bug_id ) {
 				  WHERE bug_id=" . db_param();
 	db_query_bound( $query, array( $p_bug_id ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 

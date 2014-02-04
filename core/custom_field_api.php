@@ -460,7 +460,7 @@ function custom_field_update( $p_field_id, $p_def_array ) {
 
 		custom_field_clear_cache( $p_field_id );
 
-		# db_query errors on failure so:
+		# db_query_bound() errors on failure so:
 		return true;
 	}
 
@@ -488,7 +488,7 @@ function custom_field_link( $p_field_id, $p_project_id ) {
 				  VALUES ( " . db_param() . ', ' . db_param() . ')';
 	db_query_bound( $t_query, array( $p_field_id, $p_project_id ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -511,7 +511,7 @@ function custom_field_unlink( $p_field_id, $p_project_id ) {
 				  		project_id = " . db_param();
 	db_query_bound( $t_query, array( $p_field_id, $p_project_id ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -540,7 +540,7 @@ function custom_field_destroy( $p_field_id ) {
 
 	custom_field_clear_cache( $p_field_id );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -559,7 +559,7 @@ function custom_field_unlink_all( $p_project_id ) {
 	$t_query = "DELETE FROM $t_custom_field_project_table WHERE project_id=" . db_param();
 	db_query_bound( $t_query, array( $p_project_id ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -577,7 +577,7 @@ function custom_field_delete_all_values( $p_bug_id ) {
 	$t_query = "DELETE FROM $t_custom_field_string_table WHERE bug_id=" . db_param();
 	db_query_bound( $t_query, array( $p_bug_id ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -1239,7 +1239,7 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 
 	custom_field_clear_cache( $p_field_id );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 

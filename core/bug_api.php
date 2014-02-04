@@ -1328,7 +1328,7 @@ function bug_delete( $p_bug_id ) {
 	bug_clear_cache( $p_bug_id );
 	bug_text_clear_cache( $p_bug_id );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 

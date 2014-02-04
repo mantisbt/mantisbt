@@ -328,7 +328,7 @@ function bugnote_delete_all( $p_bug_id ) {
 		WHERE bug_id=" . db_param();
 	$result = db_query_bound( $query, array( (int)$p_bug_id ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -527,7 +527,7 @@ function bugnote_set_time_tracking( $p_bugnote_id, $p_time_tracking ) {
 	$query = "UPDATE $t_bugnote_table SET time_tracking = " . db_param() . " WHERE id=" . db_param();
 	db_query_bound( $query, array( $c_bugnote_time_tracking, $p_bugnote_id ) );
 
-	# db_query errors if there was a problem so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -542,7 +542,7 @@ function bugnote_date_update( $p_bugnote_id ) {
 	$t_query = "UPDATE $t_bugnote_table SET last_modified=" . db_param() . " WHERE id=" . db_param();
 	db_query_bound( $t_query, array( db_now(), $p_bugnote_id ) );
 
-	# db_query errors if there was a problem so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
