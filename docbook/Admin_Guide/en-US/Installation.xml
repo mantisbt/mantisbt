@@ -257,7 +257,7 @@
 							<row>
 								<entry morerows='4' valign='middle'>RDBMS</entry>
 								<entry>MySQL</entry>
-								<entry>4.1.x</entry>
+								<entry>5.0.8</entry>
 								<entry>5.5.x or above</entry>
 								<entry>PHP extension: mysql/mysqli</entry>
 							</row>
