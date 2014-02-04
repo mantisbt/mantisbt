@@ -55,9 +55,16 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
-auth_reauthenticate();
-
 form_security_validate('account_update');
+
+$t_user_id = auth_get_current_user_id();
+
+# If token is set, it's a password reset request from verify.php, and if
+# not we need to reauthenticate the user
+$t_account_verification = token_get_value( TOKEN_ACCOUNT_VERIFY, $t_user_id );
+if( !$t_account_verification ) {
+	auth_reauthenticate();
+}
 
 auth_ensure_user_authenticated();
 
@@ -68,10 +75,6 @@ $f_realname        	= gpc_get_string( 'realname', '' );
 $f_password_current = gpc_get_string( 'password_current', '' );
 $f_password        	= gpc_get_string( 'password', '' );
 $f_password_confirm	= gpc_get_string( 'password_confirm', '' );
-
-// get the user id once, so that if we decide in the future to enable this for
-// admins / managers to change details of other users.
-$t_user_id = auth_get_current_user_id();
 
 $t_redirect_url = 'index.php';
 
@@ -111,7 +114,7 @@ if ( !is_blank( $f_password ) ) {
 	if ( $f_password != $f_password_confirm ) {
 		trigger_error( ERROR_USER_CREATE_PASSWORD_MISMATCH, ERROR );
 	} else {
-		if ( !auth_does_password_match( $t_user_id, $f_password_current ) ) {
+		if ( !$t_account_verification && !auth_does_password_match( $t_user_id, $f_password_current ) ) {
 			trigger_error( ERROR_USER_CURRENT_PASSWORD_MISMATCH, ERROR );
 		}
 
@@ -123,6 +126,11 @@ if ( !is_blank( $f_password ) ) {
 }
 
 form_security_purge('account_update');
+
+# Clear the verification token
+if( $t_account_verification ) {
+	token_delete( TOKEN_ACCOUNT_VERIFY, $t_user_id );
+}
 
 html_page_top( null, $t_redirect_url );
 
