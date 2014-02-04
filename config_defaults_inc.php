@@ -145,6 +145,7 @@ if ( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
 		case 'admin':
 			$t_path = rtrim( dirname( $t_path ), '/\\' ) . '/';
 			break;
+		case 'check':		# admin checks dir
 		case 'soap':
 			$t_path = rtrim( dirname( dirname( $t_path ) ), '/\\' ) . '/';
 			break;
