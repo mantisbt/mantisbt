@@ -192,7 +192,7 @@ function project_cache_all() {
 	return $g_cache_project;
 }
 
-/** 
+/**
  * Clear the project cache (or just the given id if specified)
  * @param int $p_project_id project id
  * @return bool
@@ -444,6 +444,17 @@ function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_v
 
 	$t_old_name = project_get_field( $p_project_id, 'name' );
 
+	# If project is becoming private, save current user's access level
+	# so we can add them to the project afterwards so they don't lock
+	# themselves out
+	$t_old_view_state = project_get_field( $p_project_id, 'view_state' );
+	$t_is_becoming_private = VS_PRIVATE == $p_view_state && VS_PRIVATE != $t_old_view_state;
+	if( $t_is_becoming_private ) {
+		$t_user_id = auth_get_current_user_id();
+		$t_access_level = user_get_access_level( $t_user_id, $p_project_id );
+		$t_manage_project_threshold = config_get( 'manage_project_threshold' );
+	}
+
 	if( strcasecmp( $p_name, $t_old_name ) != 0 ) {
 		project_ensure_name_unique( $p_name );
 	}
@@ -466,6 +477,12 @@ function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_v
 	db_query_bound( $query, array( $p_name, (int) $p_status, $c_enabled, (int) $p_view_state, $p_file_path, $p_description, $c_inherit_global, $p_project_id ) );
 
 	project_clear_cache( $p_project_id );
+
+	# User just locked themselves out of the project by making it private,
+	# so we add them to the project with their previous access level
+	if( $t_is_becoming_private && !access_has_project_level( $t_manage_project_threshold, $p_project_id ) ) {
+		project_add_user( $p_project_id, $t_user_id, $t_access_level );
+	}
 
 	# db_query errors on failure so:
 	return true;
