@@ -1761,17 +1761,18 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		# use the complementary type
 		$t_comp_type = relationship_get_complementary_type( $c_rel_type );
 		$t_clauses = array();
-		$t_table_name = 'relationship';
-		array_push( $t_join_clauses, "LEFT JOIN $t_bug_relationship_table $t_table_name ON $t_table_name.destination_bug_id = $t_bug_table.id" );
-		array_push( $t_join_clauses, "LEFT JOIN $t_bug_relationship_table ${t_table_name}2 ON ${t_table_name}2.source_bug_id = $t_bug_table.id" );
+		$t_table_dst = 'rel_dst';
+		$t_table_src = 'rel_src';
+		array_push( $t_join_clauses, "LEFT JOIN $t_bug_relationship_table $t_table_dst ON $t_table_dst.destination_bug_id = $t_bug_table.id" );
+		array_push( $t_join_clauses, "LEFT JOIN $t_bug_relationship_table $t_table_src ON $t_table_src.source_bug_id = $t_bug_table.id" );
 
 		// get reverse relationships
 		$t_where_params[] = $t_comp_type;
 		$t_where_params[] = $c_rel_bug;
 		$t_where_params[] = $c_rel_type;
 		$t_where_params[] = $c_rel_bug;
-		array_push( $t_clauses, "($t_table_name.relationship_type=" . db_param() . " AND $t_table_name.source_bug_id=" . db_param() . ')' );
-		array_push( $t_clauses, "($t_table_name" . "2.relationship_type=" . db_param() . " AND $t_table_name" . "2.destination_bug_id=" . db_param() . ')' );
+		array_push( $t_clauses, "($t_table_dst.relationship_type=" . db_param() . " AND $t_table_dst.source_bug_id=" . db_param() . ')' );
+		array_push( $t_clauses, "($t_table_src.relationship_type=" . db_param() . " AND $t_table_src.destination_bug_id=" . db_param() . ')' );
 		array_push( $t_where_clauses, '(' . implode( ' OR ', $t_clauses ) . ')' );
 	}
 
@@ -1917,25 +1918,26 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 				if( $t_def['type'] == CUSTOM_FIELD_TYPE_DATE ) {
 					# Define the value field with type cast to integer
-					$t_value_field = "CAST(COALESCE(NULLIF(${t_table_name}.value, ''), '0') AS DECIMAL)";
+					$t_value_field = "CAST(COALESCE(NULLIF($t_table_name.value, ''), '0') AS DECIMAL)";
 					switch( $t_field[0] ) {
+						# Closing parenthesis intentionally omitted, will be added later on
 						case CUSTOM_FIELD_DATE_ANY:
 							break;
 						case CUSTOM_FIELD_DATE_NONE:
 							array_push( $t_join_clauses, $t_cf_join_clause );
-							$t_custom_where_clause = "( ${t_table_name}.bug_id is null OR ${t_value_field} = 0 ";
+							$t_custom_where_clause = "( $t_table_name.bug_id is null OR $t_value_field = 0 ";
 							break;
 						case CUSTOM_FIELD_DATE_BEFORE:
 							array_push( $t_join_clauses, $t_cf_join_clause );
-							$t_custom_where_clause = "( ${t_value_field} != 0 AND ${t_value_field} < " . $t_field[2];
+							$t_custom_where_clause = "( $t_value_field != 0 AND $t_value_field < " . $t_field[2];
 							break;
 						case CUSTOM_FIELD_DATE_AFTER:
 							array_push( $t_join_clauses, $t_cf_join_clause );
-							$t_custom_where_clause = "( ${t_value_field} > " . ( $t_field[1] + 1 );
+							$t_custom_where_clause = "( $t_value_field > " . ( $t_field[1] + 1 );
 							break;
 						default:
 							array_push( $t_join_clauses, $t_cf_join_clause );
-							$t_custom_where_clause = "( ${t_value_field} BETWEEN " . $t_field[1] . ' AND ' . $t_field[2];
+							$t_custom_where_clause = "( $t_value_field BETWEEN " . $t_field[1] . ' AND ' . $t_field[2];
 							break;
 					}
 				} else {
@@ -2499,8 +2501,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					$t_any_found = true;
 				} else {
 					$t_profile = profile_get_row_direct( $t_current );
-
-					$t_this_string = "${t_profile['platform']} ${t_profile['os']} ${t_profile['os_build']}";
+					$t_this_string = $t_profile['platform'] . ' ' . $t_profile['os'] . ' ' . $t_profile['os_build'];
 				}
 				if( $t_first_flag != true ) {
 					$t_output = $t_output . '<br />';
