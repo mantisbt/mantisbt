@@ -78,6 +78,7 @@ require_api( 'utility_api.php' );
 form_security_validate( 'bug_report' );
 
 $t_project_id = null;
+
 $f_master_bug_id = gpc_get_int( 'm_id', 0 );
 if ( $f_master_bug_id > 0 ) {
 	bug_ensure_exists( $f_master_bug_id );
@@ -98,7 +99,7 @@ if ( $t_project_id != helper_get_current_project() ) {
 	$g_project_override = $t_project_id;
 }
 
-access_ensure_project_level( config_get('report_bug_threshold' ) );
+access_ensure_project_level( config_get( 'report_bug_threshold' ) );
 
 $t_bug_data = new BugData;
 $t_bug_data->project_id             = $t_project_id;
@@ -244,22 +245,30 @@ if ( $f_master_bug_id > 0 ) {
 	# copy notes from parent
 	if ( $f_copy_notes_from_parent ) {
 
-	    $t_parent_bugnotes = bugnote_get_all_bugnotes( $f_master_bug_id );
+		$t_parent_bugnotes = bugnote_get_all_bugnotes( $f_master_bug_id );
 
-	    foreach ( $t_parent_bugnotes as $t_parent_bugnote ) {
+		foreach ( $t_parent_bugnotes as $t_parent_bugnote ) {
+			$t_private = $t_parent_bugnote->view_state == VS_PRIVATE;
 
-	        $t_private = $t_parent_bugnote->view_state == VS_PRIVATE;
-
-	        bugnote_add( $t_bug_id, $t_parent_bugnote->note, $t_parent_bugnote->time_tracking,
-	            $t_private, $t_parent_bugnote->note_type, $t_parent_bugnote->note_attr,
-	            $t_parent_bugnote->reporter_id, /* send_email */ FALSE , /* date submitted */ 0,
-	            /* date modified */ 0,  /* log history */ FALSE);
-	    }
+			bugnote_add(
+				$t_bug_id,
+				$t_parent_bugnote->note,
+				$t_parent_bugnote->time_tracking,
+				$t_private,
+				$t_parent_bugnote->note_type,
+				$t_parent_bugnote->note_attr,
+				$t_parent_bugnote->reporter_id,
+				/* send_email */ FALSE,
+				/* date submitted */ 0,
+				/* date modified */ 0,
+				/* log history */ FALSE
+			);
+		}
 	}
 
 	# copy attachments from parent
 	if ( $f_copy_attachments_from_parent ) {
-        file_copy_attachments( $f_master_bug_id, $t_bug_id );
+		file_copy_attachments( $f_master_bug_id, $t_bug_id );
 	}
 }
 
