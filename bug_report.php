@@ -80,6 +80,8 @@ form_security_validate( 'bug_report' );
 $t_project_id = null;
 
 $f_master_bug_id = gpc_get_int( 'm_id', 0 );
+$f_rel_type      = gpc_get_int( 'rel_type', BUG_REL_NONE );
+
 if ( $f_master_bug_id > 0 ) {
 	bug_ensure_exists( $f_master_bug_id );
 	if ( bug_is_readonly( $f_master_bug_id ) ) {
@@ -89,7 +91,9 @@ if ( $f_master_bug_id > 0 ) {
 	$t_master_bug = bug_get( $f_master_bug_id, true );
 	$t_project_id = $t_master_bug->project_id;
 	project_ensure_exists( $t_project_id );
-	access_ensure_bug_level( config_get( 'update_bug_threshold', null, null, $t_project_id ), $f_master_bug_id );
+	if( $f_rel_type >= BUG_REL_ANY ) {
+		access_ensure_bug_level( config_get( 'update_bug_threshold', null, null, $t_project_id ), $f_master_bug_id );
+	}
 } else {
 	$f_project_id = gpc_get_int( 'project_id' );
 	project_ensure_exists( $f_project_id );
@@ -129,7 +133,6 @@ if ( is_blank ( $t_bug_data->due_date ) ) {
 	$t_bug_data->due_date = date_get_null();
 }
 
-$f_rel_type                         = gpc_get_int( 'rel_type', BUG_REL_NONE );
 $f_files                            = gpc_get_file( 'ufile', null ); /** @todo (thraxisp) Note that this always returns a structure */
 $f_report_stay                      = gpc_get_bool( 'report_stay', false );
 $f_copy_notes_from_parent           = gpc_get_bool( 'copy_notes_from_parent', false);

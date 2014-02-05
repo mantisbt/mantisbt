@@ -91,9 +91,6 @@ if ( $f_master_bug_id > 0 ) {
 
 	$t_bug = bug_get( $f_master_bug_id, true );
 
-	# the user can at least update the master bug (needed to add the relationship)...
-	access_ensure_bug_level( config_get( 'update_bug_threshold', null, null, $t_bug->project_id ), $f_master_bug_id );
-
 	#@@@ (thraxisp) Note that the master bug is cloned into the same project as the master, independent of
 	#       what the current project is set to.
 	if( $t_bug->project_id != helper_get_current_project() ) {
@@ -632,10 +629,11 @@ print_recently_visited();
 			<label><input <?php echo helper_get_tab_index() ?> type="radio" name="view_state" value="<?php echo VS_PRIVATE ?>" <?php check_checked( $f_view_state, VS_PRIVATE ) ?> /> <?php echo lang_get( 'private' ) ?></label>
 		</td>
 	</tr>
-	<?php
+<?php
 	}
-	//Relationship (in case of cloned bug creation...)
-	if( $f_master_bug_id > 0 ) {
+
+	# Relationship (in case of cloned bug creation...)
+	if( $f_master_bug_id > 0 && access_has_bug_level( config_get( 'update_bug_threshold' ), $f_master_bug_id ) ) {
 ?>
 	<tr>
 		<th class="category">

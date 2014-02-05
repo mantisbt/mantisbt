@@ -1618,12 +1618,12 @@ function html_button_bug_move( $p_bug_id ) {
 }
 
 /**
- * Print a button to move the given bug to a different project
+ * Print a button to clone the given bug
  * @param int $p_bug_id
  * @return null
  */
 function html_button_bug_create_child( $p_bug_id ) {
-	if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
+	if( access_has_bug_level( config_get( 'report_bug_threshold' ), $p_bug_id ) ) {
 		html_button( string_get_bug_report_url(), lang_get( 'create_child_bug_button' ), array( 'm_id' => $p_bug_id ) );
 	}
 }
