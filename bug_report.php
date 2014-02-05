@@ -88,13 +88,12 @@ if ( $f_master_bug_id > 0 ) {
 	}
 	$t_master_bug = bug_get( $f_master_bug_id, true );
 	$t_project_id = $t_master_bug->project_id;
-	project_ensure_exists( $t_project_id );
-	access_ensure_bug_level( config_get( 'update_bug_threshold', null, null, $t_project_id ), $f_master_bug_id );
 } else {
 	$f_project_id = gpc_get_int( 'project_id' );
-	project_ensure_exists( $f_project_id );
 	$t_project_id = $f_project_id;
 }
+project_ensure_exists( $t_project_id );
+
 if ( $t_project_id != helper_get_current_project() ) {
 	$g_project_override = $t_project_id;
 }
