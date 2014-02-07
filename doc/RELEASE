@@ -1,6 +1,34 @@
 MantisBT Release Notes
 ======================
 
+1.2.16 Security Release (2014-02-07)
+-------------------------------------------------
+
+MantisBT 1.2.16 is a security update for the stable 1.2.x branch. All
+installations that are currently running any 1.2.x version are strongly advised
+to upgrade to this release. Download it from [3].
+
+The following security issues were resolved:
+
+ - Cross-site scripting (XSS) issue in account_sponsor_page.php, allowing a
+   malicious user with project manager access to execute arbitrary JavaScript
+   code (CVE-2013-4460). Affects MantisBT 1.1.0 and later.
+   Refer to issue #16513 for detailed information.
+
+ - SQL injection attacks through the SOAP API's mc_attachment_get() function
+   (CVE-2014-1608). Affects MantisBT 1.1.0a4 and later.
+   Refer to issue #16879 for detailed information.
+
+ - Additional cases of unsanitized SQL query parameters usage were identified,
+   potentially allowing SQL injection attacks (CVE-2014-1609).
+   Refer to issue #16880 for detailed information.
+
+This release also includes many bug fixes and enhancements to the tracker
+and the SOAP api, as well as updated translations in many languages.
+
+A full changelog for the 1.2.x series can be found on the official site. [1]
+
+
 1.2.15 Security Release (2013-04-12)
 -------------------------------------------------
 
@@ -351,6 +379,7 @@ There have also been many improvements to the codebase beyond adding features:
 
 [1] The changelog is split between multiple releases:
 
+	1.2.16     http://www.mantisbt.org/bugs/changelog_page.php?version_id=183
 	1.2.15     http://www.mantisbt.org/bugs/changelog_page.php?version_id=182
 	1.2.14     http://www.mantisbt.org/bugs/changelog_page.php?version_id=181
 	1.2.13     http://www.mantisbt.org/bugs/changelog_page.php?version_id=180
@@ -379,3 +408,6 @@ There have also been many improvements to the codebase beyond adding features:
 
     https://github.com/mantisbt
     https://github.com/mantisbt-plugins
+
+[3] MantisBT can be downloaded from SourceForge
+	http://sourceforge.net/projects/mantisbt/files/mantis-stable/
