@@ -34,6 +34,7 @@
  * @author Hzy980512
  * @author Kai-Zheng Cheng, neek@sina.com
  * @author Liangent
+ * @author Liuxinyu970226
  * @author Mmyangfl
  * @author NetCobra, netcobra@gmail.com
  * @author PhiLiP
@@ -62,14 +63,14 @@ $s_actiongroup_menu_update_severity = '更新严重性';
 $s_actiongroup_menu_update_view_status = '更改查看权限';
 $s_actiongroup_menu_update_category = '更新类别';
 $s_actiongroup_menu_set_sticky = '设置/取消置顶';
-$s_actiongroup_menu_update_field = '更新 %1$s';
+$s_actiongroup_menu_update_field = '更新%1$s';
 $s_actiongroup_menu_update_target_version = '更改目标版本';
 $s_actiongroup_menu_update_fixed_in_version = '更改修正版本';
 $s_actiongroup_menu_update_product_build = '更新产品Build';
 $s_actiongroup_menu_add_note = '添加注释';
 $s_actiongroup_menu_attach_tags = '添加标签';
 $s_actiongroup_bugs = '选择问题';
-$s_actiongroup_error_issue_is_readonly = '问题是只读的';
+$s_actiongroup_error_issue_is_readonly = '问题是只读的。';
 $s_all_projects = '所有项目';
 $s_move_bugs = '移动问题';
 $s_operation_successful = '操作成功。';
@@ -114,8 +115,8 @@ $s_bug_relationships = '关联';
 $s_empty_password_sure_msg = '确定要设置用户密码为空吗？';
 $s_empty_password_button = '使用空白密码';
 $s_reauthenticate_title = '认证';
-$s_reauthenticate_message = '该页面需要权限认证, 但您的安全session已过期. 要继续操作请输入您的认证信息.';
-$s_no_category = '(无类型)';
+$s_reauthenticate_message = '您正在访问一个安全页面，并且您的安全会话已过期。要继续操作请输入您的认证信息。';
+$s_no_category = '（无分类）';
 $s_global_categories = '全局类型';
 $s_inherit = '继承类型';
 $s_inherit_global = '继承全局类型';
@@ -288,6 +289,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = '插件已安装';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = '插件页面未找到';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = '插件安装失败：%1$s。';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = '升级插件方案失败于块 #%1$s。';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = '在连接此页面之前“%1$s”插件需要更新。';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = '在执行插件"%2$s"过程中出现未知错误"%1$s"';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = '字段 "%1$s" 包含重复字段 "%2$s"。';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = '字段 "%1$s" 包含无效字段 "%2$s"。';

@@ -29,6 +29,7 @@
  * @author Jim-by
  * @author Red Winged Duck
  * @author Wizardist
+ * @author Zedlik
  */
 
 $s_actiongroup_menu_move = 'Перанесьці';
@@ -269,6 +270,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Пашырэньне ўжо у�
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Старонка пашырэньня ня знойдзеная.';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Памылка ўсталяваньня плягіну: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Памылка абнаўленьня схемы дапаўненьня ў блёку #%1$s.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'Каб адкрыць старонку трэба абнавіць плагін «%1$s».';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Узьнікла невядомая памылка «%1$s» падчас выкананьня дапаўненьня «%2$s».';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Поле «%1$s» утрымлівае дублікат слупка «%2$s».';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Поле «%1$s» зьмяшчае няслушнае поле «%2$s».';
@@ -972,7 +974,7 @@ $s_update_bug_button = 'Рэдагаваць';
 $s_bug_assign_to_button = 'Прызначыць:';
 $s_bug_status_to_button = 'Зьмяніць статус на:';
 $s_reopen_bug_button = 'Адкрыць ізноў';
-$s_close_bug_button = 'Зачыніць';
+$s_close_bug_button = 'Закрыць';
 $s_move_bug_button = 'Перанесьці';
 $s_attached_files = 'Далучаныя файлы';
 $s_publish = 'Апублікаваць';

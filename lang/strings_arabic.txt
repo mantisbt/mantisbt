@@ -25,6 +25,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Claw eg
  * @author DRIHEM
  * @author Meno25
  * @author OsamaK
@@ -271,6 +272,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'الإضافة منصبة با�
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'صفحة الإضافة لم يتم العثور عليها.';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'فشل تثبيت البرنامج المساعد: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'ترقية سكيما الإضافة فشلت في القطعة #%1$s.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'البرنامج المساعد "%1$s" بحاجة إلى التحديث قبل أن يمكنك دخول هذه الصفحة.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'كان هناك خطأ غير معروف "%1$s" خلال تنفيذ الإضافة "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'الحقل "%1$s" يحتوي على العامود المكرر "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'الحقل "%1$s" يحتوي على الحقل غير الصحيح "%2$s".';
@@ -487,7 +489,7 @@ $s_sent_you_this_reminder_about = 'أرسل إليك هذه التذكرة حو�
 $s_bug_reminder = 'إرسال تذكرة';
 $s_reminder_sent_to = 'تم إرسال التذكرة إلى';
 $s_reminder_sent_none = 'تعذر إرسال أي تذكيرات';
-$s_reminder_list_truncated = 'تم أقتطاع قائمة المستلمين، راجع تاريخ المشكلة للقائمة الكاملة';
+$s_reminder_list_truncated = 'تم اقتطاع قائمة المستلمين';
 $s_bug_send_button = 'أرسل';
 $s_reminder = 'تذكرة';
 $s_reminder_explain = 'هذه الملاحظة سيتنم إرسالها إلى المتلقين المعروضين كطالبي ردود على هذه القضية.';

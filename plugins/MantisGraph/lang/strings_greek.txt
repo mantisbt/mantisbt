@@ -1,0 +1,46 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Greek (Ελληνικά)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Omnipaedista
+ */
+
+$s_plugin_graph_title = 'Γράφημα Mantis';
+$s_plugin_MantisGraph_title = 'Γράφημα Mantis';
+$s_plugin_MantisGraph_config = 'Διαμόρφωση';
+$s_plugin_MantisGraph_synthesis_link = 'Σύνθεση';
+$s_plugin_MantisGraph_graph_bug_page_link = 'Γράφημα';
+$s_plugin_MantisGraph_library = 'Βιβλιοθήκη γραφημάτων για να χρησιμοποιήσετε';
+$s_plugin_MantisGraph_legend_resolved = 'Επιλυμένος';
+$s_plugin_MantisGraph_legend_total = 'Σύνολο';
+$s_plugin_MantisGraph_legend_opened = 'Ανοιγμένος';
+$s_plugin_MantisGraph_legend_closed = 'Κλειστός';
+$s_plugin_MantisGraph_legend_reported = 'Αναφερόμενος';
+$s_plugin_MantisGraph_cumulative = 'Σωρευτικός';
+$s_plugin_MantisGraph_period_none = 'Κανένα';
+$s_plugin_MantisGraph_period_this_week = 'Αυτή τη Βδομάδα';
+$s_plugin_MantisGraph_period_this_month = 'Αυτό το Μήνα';
+$s_plugin_MantisGraph_period_last_year = 'Πέρυσι';

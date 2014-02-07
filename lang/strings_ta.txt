@@ -1,0 +1,306 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2013  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Tamil (தமிழ்)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Aswn
+ * @author Karthi.dr
+ * @author Shanmugamp7
+ * @author TRYPPN
+ */
+
+$s_actiongroup_menu_move = 'நகர்த்தவும்';
+$s_actiongroup_menu_copy = 'நகல் எடு';
+$s_actiongroup_menu_assign = 'வகுத்தமை';
+$s_actiongroup_menu_close = 'மூடுக';
+$s_actiongroup_menu_delete = 'நீக்கவும்';
+$s_actiongroup_menu_resolve = 'தீர்வு காணவும்';
+$s_actiongroup_menu_update_priority = 'முன்னுரிமையை புதுப்பி';
+$s_actiongroup_menu_update_status = 'நிலைமையை புதுப்பி';
+$s_actiongroup_menu_update_category = 'வகையை புதுப்பி';
+$s_actiongroup_menu_update_field = 'புதுப்பி%1$s';
+$s_actiongroup_menu_update_target_version = 'இலக்கு பதிப்பை புதுப்பி';
+$s_actiongroup_menu_update_fixed_in_version = 'நிலையான பதிப்பை புதுப்பிக்கவும்';
+$s_actiongroup_menu_add_note = 'குறிப்பை சேர்';
+$s_actiongroup_menu_attach_tags = 'குறிச்சொற்களை இணை';
+$s_actiongroup_bugs = 'தேர்ந்தெடுக்கப்பட்ட பிரச்னைகள்';
+$s_all_projects = 'அனைத்து திட்டங்கள்';
+$s_move_bugs = 'பிரச்னைகளை நகர்த்து';
+$s_operation_successful = 'இயக்கம் வெற்றியடைந்தது.';
+$s_date_order = 'தேதி வரிசை';
+$s_print_all_bug_page_link = 'அச்சு அறிக்கைகள்';
+$s_csv_export = 'CSV ஏற்றுமதி';
+$s_excel_export = 'எக்செல் ஏற்றுமதி';
+$s_login_anonymously = 'அடையாளமற்றவராக புகுபதிகை செய்யவும்';
+$s_anonymous = 'அடையாளமற்றவர்';
+$s_jump_to_bugnotes = 'குறிப்புகளுக்கு தாவவும்';
+$s_public_project_msg = 'இந்த திட்டம் பொதுவானது. எல்லா பயனீட்டாளர்களுக்கும் இதை அணுக அனுமதி உள்ளது.';
+$s_private_project_msg = 'இந்த திட்டம் தனிப்பட்டது.நிர்வாகிகள் மற்றும் கைமுறையாக சேர்க்கப்பட்ட பயனர்களுக்கு மட்டுமே இதை அணுக அனுமதி உண்டு.';
+$s_access_level_project = 'திட்ட அணுகல் மட்டம்';
+$s_view_submitted_bug_link = 'சமர்ப்பிக்கப்பட்ட பிரச்சினை %1$s ஐ காண்';
+$s_assigned_projects = 'ஒதுக்கப்பட்ட திட்டங்கள்';
+$s_unassigned_projects = 'வகுத்தமைக்கப்படாத திட்டங்கள்';
+$s_print = 'அச்சிடு';
+$s_jump = 'தாவு';
+$s_copy_users = 'பயனர்களை நகலெடு';
+$s_copy_categories_from = '$ இல் இருந்து பகுப்புகளை நகலெடு';
+$s_copy_categories_to = '$ க்கு பகுப்புகளை நகலெடு';
+$s_bug_history = 'பிரச்சினை வரலாறு';
+$s_field = 'புலம்';
+$s_old_value = 'பழைய மதிப்பு';
+$s_new_value = 'புதிய மதிப்பு';
+$s_date_modified = 'திருத்தப்பட்ட தேதி';
+$s_bugnote = 'குறிப்பு';
+$s_change = 'மாற்று';
+$s_announcement = 'அறிவிப்பு';
+$s_bugnote_link_title = 'குறிப்புக்கான நேரடி இணைப்பு';
+$s_delete_bugnote_button = 'குறிப்பை நீக்கு';
+$s_delete_bugnote_sure_msg = 'நீங்கள் இந்த குறிப்பை  நீக்க வேண்டுமென உறுதியாக விரும்புகிறீர்களா?';
+$s_bug_relationships = 'உறவுகள்';
+$s_empty_password_sure_msg = 'பயனர் காலி கடவுச்சொல்லை கொண்டுள்ளார்.அதைத்தான் நீங்கள் விரும்புகிறீர்கள் என்பதில் உறுதியாக உள்ளீர்களா?';
+$s_empty_password_button = 'காலி கடவுச்சொல்லை உபயோகிக்கவும்';
+$s_reauthenticate_title = 'அங்கீகரிக்கவும்';
+$s_reauthenticate_message = 'நீங்கள் ஒரு பாதுகாப்பான பக்கத்தை பார்வையிடுகிறீர்கள், உங்கள் பாதுகாப்பான அமர்வு காலாவதி ஆகிவிட்டது. தொடர உங்களை உறுதிப்படுத்தி கொள்ளவும்';
+$s_no_category = '(வகை இல்லை)';
+$s_global_categories = 'உலகளவிய பிரிவுகள்';
+$s_new_bug = 'புதிய பிரச்சினை';
+$s_bugnote_added = 'குறிப்பு சேர்க்கப்பட்டது';
+$s_bugnote_edited = 'குறிப்பு திருத்தப்பட்டது';
+$s_bugnote_deleted = 'குறிப்பு நீக்கப்பட்டது';
+$s_summary_updated = 'சுருக்கம் புதுப்பிக்கப்பட்டது';
+$s_description_updated = 'விளக்கம் புதுப்பிக்கப்பட்டது';
+$s_additional_information_updated = 'கூடுதலான தகவல் புதுப்பிக்கப்பட்டது';
+$s_file_added = 'கோப்பு சேர்க்கப்பட்டது';
+$s_file_deleted = 'கோப்பு நீக்கப்பட்டது';
+$s_bug_deleted = 'பிரச்சினை நீக்கப்பட்டது';
+$s_make_private = 'தனிப்பட்டதாக  உருவாக்கவும்';
+$s_make_public = 'பொதுவானதாக அமை';
+$s_create_new_project_link = 'புதிய திட்டத்தை உருவாக்கு';
+$s_login_link = 'புகுபதிகை';
+$s_select_option = '(தேர்ந்தெடு)';
+$s_bug_actiongroup_access = 'அந்த செயலை நிகழ்த்த முறையான அனுமதியை நீங்கள் கொண்டிருக்கவில்லை';
+$s_close_group_bugs_button = 'பிரச்னைகளை  மூடு';
+$s_delete_group_bugs_button = 'பிரச்னைகளை நீக்கு';
+$s_move_group_bugs_button = 'பிரச்னைகளை நகர்த்து';
+$s_copy_group_bugs_button = 'பிரச்னைகளை  நகலெடு';
+$s_assign_group_bugs_button = 'பிரச்னைகளை வகுத்தமை';
+$s_resolve_group_bugs_button = 'பிரச்சினைகளை தீர்க்கவும்';
+$s_priority_group_bugs_button = 'முன்னுரிமையை புதுப்பி';
+$s_status_group_bugs_button = 'நிலைமையை புதுப்பி';
+$s_category_group_bugs_button = 'வகையை புதுப்பி';
+$s_fixed_in_version_group_bugs_button = 'நிலையான பதிப்பை புதுப்பிக்கவும்';
+$s_target_version_group_bugs_button = 'இலக்கு பதிப்பை புதுப்பி';
+$s_bugnote_date = 'குறிப்பின் தேதி';
+$MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'எந்தக்  கோப்பும் குறிப்பிடப்படவில்லை.';
+$MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'அனுமதி மறுக்கப்பட்டது.';
+$MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'குறிப்பு காணப்படவில்லை.';
+$MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'தவறான மின் அஞ்சல் முகவரி';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'சுயகுறிப்பு காணப்படவில்லை.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'இது ஒரு போலியான பெயர்.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'பகுப்பு காணப்படவில்லை.';
+$MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'உறவுமுறை காணப்படவில்லை.';
+$s_go_back = 'பின் செல்';
+$s_prefix_for_deleted_users = 'பயனர்';
+$s_administrator = 'நிர்வாகி';
+$s_new_account_subject = 'கணக்கு பதிவு';
+$s_new_account_email = 'மின்னஞ்சல்:';
+$s_email_project = 'திட்டம்';
+$s_email_category = 'பகுப்பு';
+$s_email_priority = 'முன்னுரிமை';
+$s_email_status = 'நிலைமை';
+$s_email_summary = 'சுருக்கம்';
+$s_email_description = 'விளக்கம்';
+$s_delete_account_button = 'கணக்கினை நீக்கு';
+$s_manage_profiles_link = 'சுயகுறிப்புகள்';
+$s_change_preferences_link = 'விருப்பங்கள்';
+$s_edit_account_title = 'கணக்கை திருத்து';
+$s_username = 'பயனர் பெயர்';
+$s_realname = 'உண்மையான பெயர்';
+$s_email = 'மின்னஞ்சல்';
+$s_password = 'கடவுச்சொல்';
+$s_no_password_change = 'கடவுச்சொல் மற்றொரு முறைமையினால் கையாளப்படுகிறது, எனவே இங்கே திருத்த இயலாது.';
+$s_confirm_password = 'கடவுச்சொல்லை உறுதிசெய்';
+$s_access_level = 'அனுமதி மட்டம்';
+$s_update_user_button = 'பயனரை  புதுப்பி';
+$s_minutes = 'நிமிடங்கள்';
+$s_seconds = 'விநாடிகள்';
+$s_language = 'மொழி';
+$s_timezone = 'நேர மண்டலம்';
+$s_edit_profile = 'சுயவிவரத்தை திருத்து';
+$s_submit_button = 'சமர்ப்பி';
+$s_amount = 'தொகை';
+$s_delete_bug_button = 'நீக்கு';
+$s_category = 'பகுப்பு';
+$s_priority = 'முன்னுரிமை';
+$s_status = 'நிலைமை';
+$s_votes = 'வாக்குகள்';
+$s_summary = 'சுருக்கம்';
+$s_description = 'விளக்கம்';
+$s_profile = 'சுயகுறிப்பு';
+$s_all_revisions = 'எல்லா பரிசீலனைகளும்';
+$s_back_to_issue = 'பிரச்சினைக்கு திரும்பு';
+$s_vote_added_msg = 'வாக்கு சேர்க்கப்பட்டது.';
+$s_bugnote_added_msg = 'குறிப்பு சேர்க்கப்பட்டது...';
+$s_bugnote_deleted_msg = 'குறிப்பானது வெற்றிகரமாக நீக்கப்பட்டது....';
+$s_bug_notes_title = 'குறிப்புகள்';
+$s_edit_bugnote_title = 'குறிப்பை திருத்து';
+$s_no_bugnotes_msg = 'இந்த பிரச்சினையுடன் எந்த குறிப்பும் இணைக்கப்படவில்லை.';
+$s_delete_link = 'நீக்கு';
+$s_add_bugnote_title = 'குறிப்பை சேர்';
+$s_add_bugnote_button = 'குறிப்பை சேர்';
+$s_bugnote_edit_link = 'தொகு';
+$s_closed_bug_button = 'பிரச்னையை  மூடு';
+$s_bugnote_updated_msg = 'குறிப்பானது வெற்றிகரமாக புதுப்பிக்கப்பட்டது....';
+$s_hide_content = 'உள்ளடக்கங்களை மறை';
+$s_show_content = 'உள்ளடக்கங்களை காட்டு';
+$s_click_to_login = 'புகுபதிகை';
+$s_login_title = 'புகுபதிகை';
+$s_choose_project = 'திட்டத்தை தேர்ந்தெடு';
+$s_login_button = 'புகுபதிகை';
+$s_signup_link = 'ஒரு புதிய கணக்கை பதிவு செய்';
+$s_lost_password_link = 'உங்கள் கடவுச்சொல் மறந்துவிட்டதா?';
+$s_select_project_button = 'திட்டத்தை தேர்வுசெய்';
+$s_lost_password_title = 'கடவுச்சொல் மீட்டமைப்பு';
+$s_lost_password_done_title = 'கடவுச்சொல் தகவல் அனுப்பப்பட்டது';
+$s_lost_password_subject = 'கடவுச்சொல் மீட்டமைப்பு';
+$s_create_new_account_title = 'புதிய கணக்கு ஒன்றை உருவாக்கு';
+$s_protected = 'காக்கப்பட்டது';
+$s_create_user_button = 'பயனரை உருவாக்கு';
+$s_projects_link = 'திட்டங்கள்';
+$s_1_week_title = 'ஒரு வாரம்';
+$s_last_visit = 'கடைசி வருகை';
+$s_message = 'தகவல்';
+$s_status_level = 'நிலைமை';
+$s_configuration_option_type = 'வகை';
+$s_configuration_option_value = 'மதிப்பு';
+$s_all_users = 'அனைத்து பயனர்களும்';
+$s_plugin_description = 'விளக்கம்';
+$s_plugin_author = 'எழுத்தாளர்: %1$s';
+$s_plugin_url = 'இணைய தளம்:';
+$s_plugin_priority = 'முன்னுரிமை';
+$s_plugin_protected = 'காக்கப்பட்டது';
+$s_plugin_update = 'புதுப்பி';
+$s_plugin_actions = 'செயல்கள்';
+$s_plugin_install = 'நிறுவு';
+$s_plugin_upgrade = 'மேம்படுத்து';
+$s_delete_category_button = 'பகுப்பினை நீக்கு';
+$s_project_delete_button = 'திட்டத்தை நீக்கு';
+$s_edit_project_title = 'திட்டத்தை தொகு';
+$s_project_name = 'திட்டத்தின் பெயர்';
+$s_view_status = 'நிலையை காண்';
+$s_public = 'பொது';
+$s_private = 'தனிப்பட்டது';
+$s_update_project_button = 'திட்டத்தை புதுப்பி';
+$s_delete_project_button = 'திட்டத்தை நீக்கு';
+$s_categories_and_version_title = 'பகுப்புகள் மற்றும் பதிப்புகள்';
+$s_categories = 'பகுப்புகள்';
+$s_add_category_button = ' பகுப்பை சேர்க்கவும்';
+$s_versions = 'பதிப்புக்கள்';
+$s_add_version_button = 'பதிப்பை சேர்';
+$s_add_and_edit_version_button = 'பதிப்பை சேர் மற்றும் திருத்து';
+$s_edit_link = 'தொகு';
+$s_version = 'பதிப்பு';
+$s_update = 'புதுப்பி';
+$s_unlink_link = 'இணைப்பை நீக்கு';
+$s_projects_title = 'திட்டங்கள்';
+$s_name = 'பெயர்';
+$s_project_updated_msg = 'திட்டம் வெற்றிகரமாக புதுப்பிக்கப்பட்டுள்ளது...';
+$s_delete_user_button = 'பயனரை நீக்கு';
+$s_show_all_users = 'அனைத்தும்';
+$s_users_new = 'புதிய';
+$s_main_link = 'முதன்மை';
+$s_summary_link = 'சுருக்கம்';
+$s_account_link = 'என் கணக்கு';
+$s_users_link = 'பயனர்கள்';
+$s_docs_link = 'கோப்புகள்';
+$s_logout_link = 'விடுபதிகை';
+$s_my_view_link = 'என் பார்வை';
+$s_back_link = 'பின்செல்';
+$s_title = 'தலைப்பு';
+$s_filename = 'கோப்பின் பெயர்';
+$s_add_file = 'கோப்பை சேர்';
+$s_add_user_button = 'பயனரை சேர்';
+$s_remove_link = 'நீக்கு';
+$s_remove_all_link = 'அனைத்தையும் நீக்கு';
+$s_signup_title = 'பதிவுசெய்';
+$s_signup_button = 'பதிவுசெய்';
+$s_summary_title = 'சுருக்கம்';
+$s_total = 'மொத்தம்';
+$s_days = 'நாட்கள்';
+$s_show = 'காட்டு';
+$s_updated = 'புதிப்பிக்கப்பட்டது';
+$s_recently_visited = 'சமீபத்தில் பார்வையிடப்பட்டவை';
+$s_current = 'தற்போதைய';
+$s_prev = 'முந்தைய';
+$s_next = 'அடுத்தது';
+$s_first = 'முதல்';
+$s_last = 'கடைசி';
+$s_start_date = 'தொடக்க நாள்';
+$s_end_date = 'முடிந்த நாள்';
+$s_yes = 'ஆம்';
+$s_no = 'இல்லை';
+$s_ok = 'சரி';
+$s_update_bug_button = 'திருத்து';
+$s_move_bug_button = 'நகர்த்து';
+$s_monitoring_user_list = 'பயனர் பட்டியல்';
+$s_custom_field_name = 'பெயர்';
+$s_custom_field_type = 'வகை';
+$s_custom_field_length_min = 'குறைந்தபட்ச நீளம்';
+$s_custom_field_length_max = 'அதிகபட்ச நீளம்';
+$s_filter_closed = 'மூடப்பட்டது';
+$s_filter_resolved = 'தீர்வு காணப்பட்டது';
+$s_bytes = 'பைட்டுகள்';
+$s_bug = 'விவகாரம்';
+$s_bugs = 'பிரச்னைகள்';
+$s_add_new_relationship_button = 'சேர்';
+$s_delete_relationship_button = 'நீக்கு';
+$s_view = 'பார்வையிடு';
+$s_notes = 'குறிப்புகள்';
+$s_before_date = 'முன்';
+$s_after_date = 'பின்';
+$s_tag_name = 'பெயர்';
+$s_tag_creator = 'உருவாக்கியவர்';
+$s_tag_created = 'உருவாக்கப்பட்ட தேதி';
+$s_tag_statistics = 'பயன்பாட்டு புள்ளிவிவரங்கள்';
+$s_show_all_tags = 'அனைத்தும்';
+$s_time_tracking_time_spent = 'செலவிடப்பட்ட நேரம்:';
+$s_time_tracking_cost_per_hour = 'செலவு / மணி நேரம்';
+$s_time_tracking_cost = 'செலவு';
+$s_time_tracking_stopwatch_start = 'தொடங்கு';
+$s_time_tracking_stopwatch_stop = 'நிறுத்து';
+$s_time_tracking_stopwatch_reset = 'மீட்டமை';
+$s_access_denied = 'அனுமதி மறுக்கப்பட்டது.';
+$s_month_january = 'சனவரி';
+$s_month_february = 'பிப்ரவரி';
+$s_month_march = 'மார்ச்சு';
+$s_month_april = 'ஏப்ரல்';
+$s_month_may = 'மே';
+$s_month_june = 'சூன்';
+$s_month_july = 'சூலை';
+$s_month_august = 'ஆகத்து';
+$s_month_september = 'செப்டம்பர்';
+$s_month_october = 'அக்டோபர்';
+$s_month_november = 'நவம்பர்';
+$s_month_december = 'திசம்பர்';

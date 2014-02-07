@@ -273,6 +273,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Udvidelsen er allerede installe
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Plugin siden blev ikke fundet.';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Plugin installationen mislykkedes: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Opgradering af plugin skemaet mislykkedes i blok #%1$s.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = '"%1$s" plugin skal opgraderes før du kan få adgang til denne side.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Der opstod en ukendt fejl "%1$s" under udførelsen af "%2$s" plugin.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Feltet "%1$s" indeholder dublet kolonner "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Feltet "%1$s" indeholder ugyldigt felt "%2$s".';

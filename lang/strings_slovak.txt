@@ -27,6 +27,7 @@
  *
  * @author Dregad
  * @author Helix84
+ * @author Kusavica
  * @author Lubos Magat <lubos@magat.sk>
  * @author Rudko
  * @author Teslaton
@@ -271,6 +272,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Plugin je už nainštalovaný.'
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Stránka pluginu nebola nájdená.';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Inštalácia pluginu zlyhala: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Aktualizácia schémy pluginu zlyhalo v bloku #%1$s.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'Aby ste sa mohli dostať na "%1$s" musíte aktualizovať jeden z vašich zásuvných modulov.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Pri prevádzke pluginu "%2$s" sa vyskytla neznáma chyba "%1$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Pole \'%1$s\' obsahuje duplicitný stĺpec \'%2$s\'.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Pole "%1$s" obsahuje neplatné pole "%2$s".';

@@ -282,6 +282,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'O Plugin já está instalado.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'A página do Plugin não foi encontrada.';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Falha na instalação do complemento: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'A atualização do schema do plugin falhou no bloco #%1$s.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'O plugin "%1$s" precisa ser atualizando antes de poder acessar a esta página.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Ocorreu um erro desconhecido "%1$s" durante a execução do plugin "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Campo "%1$s" contém uma duplicação da coluna "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Campo "%1$s" contém o campo "%2$s" inválido.';

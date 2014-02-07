@@ -17,16 +17,17 @@
  * You should have received a copy of the GNU General Public License
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-/** Croatian (Hrvatski)
- *
+/** Croatian (hrvatski)
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
  *
+ * @author Bugoslav
  * @author Dejan Gambin, dejan.gambin@grad-pula.hinet.hr
+ * @author Herr Mlinka
  */
 
 $s_all_projects = 'Svi projekti';
@@ -51,12 +52,14 @@ $MANTIS_ERROR[ERROR_REPORT] = 'Greška u izvješću.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Nije naznačena datoteka';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Tip datoteke nije dozvoljen';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Mapa ne postoji. Molimo Vas da provjerite postavke projekta.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Potrebno polje je prazno. Molimo Vas da ponovno provjerite ulazne podatke.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Potrebno polje "%1$s" je prazno. Molimo Vas da ponovno provjerite ulazne podatke.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Korisnički račun je zaštićen. Za to vrijeme Vam nije omogućen pristup.';
 $s_go_back = 'Idi natrag';
 $s_proceed = 'Klikni ovdje za nastavak';
 $s_switch = 'Prebaci';
 $s_logged_in_as = 'Prijavljen kao';
+$s_prefix_for_deleted_users = 'suradnik';
+$s_administrator = 'administrator';
 $s_access_levels_enum_string = '10:pregled,25:prijava,40:ažuriranje,55:razvoj,70:upravljanje,90:administracija';
 $s_project_status_enum_string = '10:u razvoju,30:izdan,50:stabilan,70:zastario';
 $s_project_view_state_enum_string = '10:javan,50:privatan';
@@ -192,7 +195,7 @@ $s_bugnote_edit_link = 'Editiraj';
 $s_closed_bug_button = 'Zatvori bug';
 $s_bugnote_updated_msg = 'Bilješka je uspješno ažurirana...';
 $s_edited_on = 'editirana na:';
-$s_click_to_login = 'Klikni ovdje za prijavu';
+$s_click_to_login = 'Prijavi se';
 $s_login_page_info = 'Dobrodošli u HelpDesk';
 $s_login_title = 'Prijava';
 $s_save_login = 'Pohrani prijavu';
@@ -232,7 +235,7 @@ $s_edit_user_link = 'Editiraj korisnika';
 $s_project_added_msg = 'Projekt je uspješno dodan...';
 $s_category_added_msg = 'Kategorija je uspješno dodana...';
 $s_category_deleted_msg = 'Kategorija je uspješno obrisana...';
-$s_category_delete_sure_msg = 'Jeste li sigurni da želite obrisati kategoriju?';
+$s_category_delete_sure_msg = 'Jeste li sigurni da želite obrisati kategoriju?<br />Kategorija "%1$s" sadrži %2$d komponenata.';
 $s_delete_category_button = 'Obriši kategoriju';
 $s_edit_project_category_title = 'Editiraj kategoriju projekta';
 $s_update_category_button = 'Ažuriraj kategoriju';
@@ -391,3 +394,15 @@ $s_system_profile = 'Opis sustava';
 $s_update_bug_button = 'Ažuriraj bug';
 $s_reopen_bug_button = 'Ponovno otvori bug';
 $s_attached_files = 'Pridružene datoteke';
+$s_month_january = 'siječnja';
+$s_month_february = 'veljače';
+$s_month_march = 'ožujka';
+$s_month_april = 'travnja';
+$s_month_may = 'svibnja';
+$s_month_june = 'lipnja';
+$s_month_july = 'srpnja';
+$s_month_august = 'kolovoza';
+$s_month_september = 'rujna';
+$s_month_october = 'listopada';
+$s_month_november = 'studenoga';
+$s_month_december = 'prosinca';

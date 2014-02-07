@@ -37,6 +37,7 @@
  * @author KPu3uC B Poccuu
  * @author Kirill
  * @author Mikhail Oleynik (MiTo Team), m.oleynik@gmail.com
+ * @author Okras
  * @author Ole Yves
  * @author Oleg Gashev gashev@zahav.net.il
  * @author Prima klasy4na
@@ -284,6 +285,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Плагин уже устан�
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Страница плагина не найдена.';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Не удалось установить плагин: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Обновление схемы плагина привело к сбою в блоке #%1$s.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'Для открытия страницы необходимо обновить плагин «%1$s».';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Во время выполнения плагина "%2$s" возникла неизвестная ошибка "%1$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Поле "%1$s" содержит дублирующийся столбец "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Поле «%1$s» содержит недопустимое поле «%2$s».';

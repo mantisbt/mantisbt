@@ -293,6 +293,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Das Plugin ist bereits installi
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Die Plugin-Seite wurde nicht gefunden.';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Installation des Plugins fehlgeschlagen: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Aktualisierung des Plugin-Schemas ist in Block #%1$s fehlgeschlagen.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'Das Plugin „%1$s“ muss aktualisiert werden, bevor Sie auf diese Seite zugreifen können.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Es ist ein unbekannter Fehler „%1$s“ während der Ausführung des „%2$s“-Plugins aufgetreten.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Das Feld „%1$s“ enthält doppelte Spalte „%2$s“.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Das Feld „%1$s“ enthält ungültiges Feld „%2$s“.';

@@ -17,9 +17,8 @@
  * You should have received a copy of the GNU General Public License
  * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-/** Norwegian Nynorsk (‪Norsk (nynorsk)‬)
- *
+/** Norwegian Nynorsk (norsk nynorsk)
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
  *
@@ -29,6 +28,8 @@
  * @author Frokor
  * @author Gunnernett
  * @author Harald Khan
+ * @author Nghtwlkr
+ * @author Njardarlogar
  */
 
 $s_actiongroup_menu_move = 'Flytt';
@@ -179,7 +180,7 @@ $s_account_removed_msg = 'Kontoen din er vorten fjerna.';
 $s_confirm_delete_msg = 'Er du sikker på at du ynskjer å sletta brukarkontoen din?';
 $s_delete_account_button = 'Slett konto';
 $s_manage_profiles_link = 'Profilar';
-$s_change_preferences_link = 'Preferansar';
+$s_change_preferences_link = 'Innstillingar';
 $s_edit_account_title = 'Endra brukarkonto';
 $s_username = 'Brukarnamn';
 $s_realname = 'Verkeleg namn';
@@ -255,7 +256,7 @@ $s_bugnote_updated_msg = 'Merknaden er vorten oppdatert.';
 $s_edited_on = 'endra:';
 $s_hide_content = 'Løyn innhald';
 $s_show_content = 'Vis innhald';
-$s_click_to_login = 'Trykk her for å logga inn';
+$s_click_to_login = 'Logg inn';
 $s_login_title = 'Innlogging';
 $s_save_login = 'Lagra innlogging';
 $s_choose_project = 'Vel prosjekt';
@@ -275,7 +276,7 @@ $s_project_delete_button = 'Slett prosjekt';
 $s_edit_project_title = 'Endra prosjekt';
 $s_project_name = 'Prosjektnamn';
 $s_edit_user_title = 'Endra brukar';
-$s_show_all_users = 'ALLE';
+$s_show_all_users = 'Alle';
 $s_users_unused = 'UNYTTA';
 $s_users_new = 'NYE';
 $s_account_reset_protected_msg = 'Brukarkontoen er verna. Kan ikkje nullstilla passord.';
