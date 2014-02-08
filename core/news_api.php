@@ -266,7 +266,7 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 
 			if( 1 == count( $t_projects ) ) {
 				$c_project_id = $t_projects[0];
-				$query .= " WHERE project_id=" . db_params();
+				$query .= " WHERE project_id=" . db_param();
 				$t_params = array( $c_project_id );
 			} else {
 				$query .= ' WHERE project_id IN (' . join( $t_projects, ',' ) . ')';
