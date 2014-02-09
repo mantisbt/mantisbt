@@ -31,6 +31,7 @@ require_once dirname( dirname(__FILE__) ) . '/TestConfig.php';
 require_once 'EnumTest.php';
 require_once 'HelperTest.php';
 require_once 'StringTest.php';
+require_once 'UtilityTest.php';
 
 
 /**
@@ -50,6 +51,7 @@ class Mantis_AllTests extends PHPUnit_Framework_TestSuite
 		$suite->addTestSuite('MantisEnumTest');
 		$suite->addTestSuite('Mantis_HelperTest');
 		$suite->addTestSuite('Mantis_StringTest');
+		$suite->addTestSuite('Mantis_UtilityTest');
 
 		return $suite;
 	}
