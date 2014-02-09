@@ -91,9 +91,6 @@ if ( $f_master_bug_id > 0 ) {
 
 	$t_bug = bug_get( $f_master_bug_id, true );
 
-	# the user can at least update the master bug (needed to add the relationship)...
-	access_ensure_bug_level( config_get( 'update_bug_threshold', null, null, $t_bug->project_id ), $f_master_bug_id );
-
 	#@@@ (thraxisp) Note that the master bug is cloned into the same project as the master, independent of
 	#       what the current project is set to.
 	if( $t_bug->project_id != helper_get_current_project() ) {
@@ -481,13 +478,17 @@ print_recently_visited();
 		</th>
 		<td>
 			<select <?php echo helper_get_tab_index() ?> name="status">
-			<?php 
-			$resolution_options = get_status_option_list(access_get_project_level( $t_project_id), 
-					config_get('bug_submit_status'), true, 
-					ON == config_get( 'allow_reporter_close' ), $t_project_id );
+			<?php
+			$resolution_options = get_status_option_list(
+				access_get_project_level( $t_project_id ),
+				config_get( 'bug_submit_status' ),
+				true,
+				ON == config_get( 'allow_reporter_close' ),
+				$t_project_id
+			);
 			foreach ( $resolution_options as $key => $value ) {
 			?>
-				<option value="<?php echo $key ?>" <?php check_selected($key, config_get('bug_submit_status')); ?> >
+				<option value="<?php echo $key ?>" <?php check_selected( $key, config_get( 'bug_submit_status') ); ?> >
 					<?php echo $value ?>
 				</option>
 			<?php } ?>
@@ -503,8 +504,8 @@ print_recently_visited();
 		</th>
 		<td>
 			<select <?php echo helper_get_tab_index() ?> name="resolution">
-				<?php 
-				print_enum_string_option_list('resolution', config_get('default_bug_resolution'));
+				<?php
+				print_enum_string_option_list( 'resolution', config_get( 'default_bug_resolution' ) );
 				?>
 			</select>
 		</td>
@@ -628,10 +629,11 @@ print_recently_visited();
 			<label><input <?php echo helper_get_tab_index() ?> type="radio" name="view_state" value="<?php echo VS_PRIVATE ?>" <?php check_checked( $f_view_state, VS_PRIVATE ) ?> /> <?php echo lang_get( 'private' ) ?></label>
 		</td>
 	</tr>
-	<?php
+<?php
 	}
-	//Relationship (in case of cloned bug creation...)
-	if( $f_master_bug_id > 0 ) {
+
+	# Relationship (in case of cloned bug creation...)
+	if( $f_master_bug_id > 0 && access_has_bug_level( config_get( 'update_bug_threshold' ), $f_master_bug_id ) ) {
 ?>
 	<tr>
 		<th class="category">
