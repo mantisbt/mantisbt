@@ -843,6 +843,12 @@ $g_enable_project_documentation = OFF;
 $g_show_footer_menu = OFF;
 
 /**
+ * show login information
+ * @global int $g_show_login_info
+*/
+$g_show_login_info = ON;
+
+/**
  * show extra menu bar with all available projects
  * @global int $g_show_project_menu_bar
  */
