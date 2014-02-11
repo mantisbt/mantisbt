@@ -1124,6 +1124,7 @@ $s_copy_columns_from = 'Скопировать столбцы из';
 $s_copy_columns_to = 'Скопировать столбцы в';
 $s_due_date = 'Дата окончания';
 $s_overdue = 'Просрочено';
+$s_due_date_was = 'Срок закончился';
 $s_view_account_title = 'Информация о пользователе';
 $s_manage_user = 'Управление пользователями';
 $s_label = '%1$:';
