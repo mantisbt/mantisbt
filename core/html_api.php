@@ -216,7 +216,9 @@ function html_page_top2() {
 	}
 
 	if( auth_is_user_authenticated() ) {
-		html_login_info();
+	        if( ON == config_get( 'show_login_info' ) ) {
+	    	    html_login_info();
+	        }
 
 		if( ON == config_get( 'show_project_menu_bar' ) ) {
 			print_project_menu_bar();
