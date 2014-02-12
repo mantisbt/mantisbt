@@ -265,38 +265,6 @@ if ( $t_show_handler || $t_show_due_date ) {
 # Priority, Severity, Reproducibility
 #
 
-if ( $t_show_priority || $t_show_severity || $t_show_reproducibility ) {
-	echo '<tr class="print">';
-
-	$t_spacer = 0;
-
-	if ( $t_show_priority ) {
-		echo '<th class="print-category">', lang_get( 'priority' ), '</th>';
-		echo '<td class="print">', $t_priority, '</td>';
-	} else {
-		$t_spacer += 2;
-	}
-
-	if ( $t_show_severity ) {
-		echo '<th class="print-category">', lang_get( 'severity' ), '</th>';
-		echo '<td class="print">', $t_severity, '</td>';
-	} else {
-		$t_spacer += 2;
-	}
-
-	if ( $t_show_reproducibility ) {
-		echo '<th class="print-category">', lang_get( 'reproducibility' ), '</th>';
-		echo '<td class="print">', $t_reproducibility, '</td>';
-	} else {
-		$t_spacer += 2;
-	}
-
-	if ( $t_spacer > 0 ) {
-		echo '<td class="print" colspan="', $t_spacer, '">&#160;</td>';
-	}
-
-	echo '</tr>';
-}
 
 #
 # Status, Resolution
@@ -507,69 +475,12 @@ echo "<tr class=\"print\">";
 echo "<td class=\"print-category\">" . lang_get( 'bug_relationships' ) . "</td>";
 echo "<td class=\"print\" colspan=\"5\">" . relationship_get_summary_html_preview( $f_bug_id ) . "</td></tr>";
 
-if ( $t_show_attachments ) {
-	echo '<tr class="print">';
-	echo '<th class="print-category">', lang_get( 'attached_files' ), '</th>';
-	echo '<td class="print" colspan="5">';
-
-	$t_attachments = file_get_visible_attachments( $f_bug_id );
-	$t_first_attachment = true;
-	$t_path = config_get_global( 'path' );
-
-	foreach ( $t_attachments as $t_attachment  ) {
-		if ( $t_first_attachment ) {
-			$t_first_attachment = false;
-		} else {
-			echo '<br />';
-		}
-
-		$c_filename = string_display_line( $t_attachment['display_name'] );
-		$c_download_url = $t_path . htmlspecialchars( $t_attachment['download_url'] );
-		$c_filesize = number_format( $t_attachment['size'] );
-		$c_date_added = date( config_get( 'normal_date_format' ), $t_attachment['date_added'] );
-		if ( isset( $t_attachment['icon'] ) ) {
-			echo '<img src="', $t_attachment['icon']['url'], '" alt="', $t_attachment['icon']['alt'], '" />&#160;';
-		}
-
-		echo "$c_filename ($c_filesize) <span class=\"italic\">$c_date_added</span><br />$c_download_url";
-
-		if ( $t_attachment['preview'] && $t_attachment['type'] == 'image' ) {
-			echo '<br /><img src="', $t_attachment['download_url'], '" alt="', $t_attachment['alt'], '" /><br />';
-		}
-	}
-
-	echo '</td></tr>';
-}
 
 #
 # Issue History
 #
 
-if ( $t_show_history ) {
-	echo '<tr><td class="print-spacer" colspan="6"><hr /></td></tr>';
 
-	echo '<tr><th class="form-title">', lang_get( 'bug_history' ), '</th></tr>';
-
-	echo '<tr class="print-category">';
-	echo '<th class="row-category-history">', lang_get( 'date_modified' ), '</th>';
-	echo '<th class="row-category-history">', lang_get( 'username' ), '</th>';
-	echo '<th class="row-category-history">', lang_get( 'field' ), '</th>';
-	echo '<th class="row-category-history">', lang_get( 'change' ), '</th>';
-	echo '</tr>';
-
-	$t_history = history_get_events_array( $f_bug_id );
-
-	foreach ( $t_history as $t_item ) {
-		echo '<tr class="print">';
-		echo '<td class="print">', $t_item['date'], '</td>';
-		echo '<td class="print">';
-		print_user( $t_item['userid'] );
-		echo '</td>';
-		echo '<td class="print">', string_display( $t_item['note'] ), '</td>';
-		echo '<td class="print">', string_display_line_links( $t_item['change'] ), '</td>';
-		echo '</tr>';
-	}
-}
 
 echo '</table>';
 
