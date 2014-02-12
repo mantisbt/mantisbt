@@ -2144,11 +2144,13 @@ function filter_cache_result( $p_rows, $p_id_array_lastmod ) {
  * @see filter_draw_selection_area2
  */
 function filter_draw_selection_area( $p_page_number, $p_for_screen = true ) {
+	if( access_compare_level( current_user_get_access_level(), config_get( 'filter_view_threshold' ) )) {
 	collapse_open( 'filter' );
 	filter_draw_selection_area2( $p_page_number, $p_for_screen, true );
 	collapse_closed( 'filter' );
 	filter_draw_selection_area2( $p_page_number, $p_for_screen, false );
 	collapse_end( 'filter' );
+}
 }
 
 /**
