@@ -868,7 +868,7 @@ function email_send( $p_email_data ) {
 	}
 
 	$mail->IsHTML( false );              # set email format to plain text
-	$mail->WordWrap = 80;              # set word wrap to 50 characters
+	$mail->WordWrap = 300;              # set word wrap to 50 characters
 	$mail->Priority = $t_email_data->metadata['priority'];  # Urgent = 1, Not Urgent = 5, Disable = 0
 	$mail->CharSet = $t_email_data->metadata['charset'];
 	$mail->Host = config_get( 'smtp_host' );
@@ -1146,13 +1146,11 @@ function email_format_bug_message( $p_visible_bug_data ) {
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_handler' );
 	$t_message .= $t_email_separator1 . " \n";
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_project' );
-	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_bug' );
+
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_category' );
-	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_reproducibility' );
-	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_severity' );
-	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_priority' );
+
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_status' );
-	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_target_version' );
+
 
 	# custom fields formatting
 	foreach( $p_visible_bug_data['custom_fields'] as $t_custom_field_name => $t_custom_field_data ) {
@@ -1168,10 +1166,6 @@ function email_format_bug_message( $p_visible_bug_data ) {
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_resolution' );
 		$t_message .= email_format_attribute( $p_visible_bug_data, 'email_fixed_in_version' );
 	}
-	$t_message .= $t_email_separator1 . " \n";
-
-	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_date_submitted' );
-	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_last_modified' );
 	$t_message .= $t_email_separator1 . " \n";
 
 	$t_message .= email_format_attribute( $p_visible_bug_data, 'email_summary' );
@@ -1192,21 +1186,6 @@ function email_format_bug_message( $p_visible_bug_data ) {
 		}
 	}
 
-	# Sponsorship
-	if( isset( $p_visible_bug_data['sponsorship_total'] ) && ( $p_visible_bug_data['sponsorship_total'] > 0 ) ) {
-		$t_message .= $t_email_separator1 . " \n";
-		$t_message .= sprintf( lang_get( 'total_sponsorship_amount' ), sponsorship_format_amount( $p_visible_bug_data['sponsorship_total'] ) ) . "\n" . "\n";
-
-		if( isset( $p_visible_bug_data['sponsorships'] ) ) {
-			foreach( $p_visible_bug_data['sponsorships'] as $t_sponsorship ) {
-				$t_date_added = date( config_get( 'normal_date_format' ), $t_sponsorship->date_submitted );
-
-				$t_message .= $t_date_added . ': ';
-				$t_message .= user_get_name( $t_sponsorship->user_id );
-				$t_message .= ' (' . sponsorship_format_amount( $t_sponsorship->amount ) . ')' . " \n";
-			}
-		}
-	}
 
 	$t_message .= $t_email_separator1 . " \n\n";
 
@@ -1236,21 +1215,6 @@ function email_format_bug_message( $p_visible_bug_data ) {
 		$t_message .= $t_string . " \n";
 		$t_message .= $t_email_separator2 . " \n";
 		$t_message .= $t_bugnote->note . " \n\n";
-	}
-
-	# format history
-	if( array_key_exists( 'history', $p_visible_bug_data ) ) {
-		$t_message .= lang_get( 'bug_history' ) . " \n";
-		$t_message .= utf8_str_pad( lang_get( 'date_modified' ), 17 ) . utf8_str_pad( lang_get( 'username' ), 15 ) . utf8_str_pad( lang_get( 'field' ), 25 ) . utf8_str_pad( lang_get( 'change' ), 20 ) . " \n";
-
-		$t_message .= $t_email_separator1 . " \n";
-
-		foreach( $p_visible_bug_data['history'] as $t_raw_history_item ) {
-			$t_localized_item = history_localize_item( $t_raw_history_item['field'], $t_raw_history_item['type'], $t_raw_history_item['old_value'], $t_raw_history_item['new_value'], false );
-
-			$t_message .= utf8_str_pad( date( $t_normal_date_format, $t_raw_history_item['date'] ), 17 ) . utf8_str_pad( $t_raw_history_item['username'], 15 ) . utf8_str_pad( $t_localized_item['note'], 25 ) . utf8_str_pad( $t_localized_item['change'], 20 ) . "\n";
-		}
-		$t_message .= $t_email_separator1 . " \n\n";
 	}
 
 	return $t_message;
