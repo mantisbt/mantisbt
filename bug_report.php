@@ -224,7 +224,7 @@ if ( $f_master_bug_id > 0 ) {
 	history_log_event_special( $t_bug_id, BUG_CREATED_FROM, '', $f_master_bug_id );
 	history_log_event_special( $f_master_bug_id, BUG_CLONED_TO, '', $t_bug_id );
 
-	if ( $f_rel_type >= BUG_REL_ANY ) {
+	if ( $f_rel_type > BUG_REL_ANY ) {
 		# Add the relationship
 		relationship_add( $t_bug_id, $f_master_bug_id, $f_rel_type );
 
