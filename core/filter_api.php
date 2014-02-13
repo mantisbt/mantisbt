@@ -3387,7 +3387,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					echo '<input type="hidden" name="', FILTER_PROPERTY_PROJECT_ID, '[]" value="', string_attribute( $t_current ), '" />';
 					$t_this_name = '';
 					if( META_FILTER_CURRENT == $t_current ) {
-						$t_this_name = lang_get( 'current' );
+						$t_this_name = '[' . lang_get( 'current' ) . ']';
 					} else {
 						$t_this_name = project_get_name( $t_current, false );
 					}
@@ -4302,28 +4302,28 @@ function print_filter_custom_field_date( $p_field_num, $p_field_id ) {
 	echo "\n<table cellspacing=\"0\" cellpadding=\"0\"><tr><td>\n";
 	echo "<select size=\"1\" name=\"custom_field_" . $p_field_id . "_control\">\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_ANY . '"';
-	check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ANY );
+	check_selected( (int)$t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ANY );
 	echo '>' . lang_get( 'any' ) . '</option>' . "\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_NONE . '"';
-	check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_NONE );
+	check_selected( (int)$t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_NONE );
 	echo '>' . lang_get( 'none' ) . '</option>' . "\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_BETWEEN . '"';
-	check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_BETWEEN );
+	check_selected( (int)$t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_BETWEEN );
 	echo '>' . lang_get( 'between_date' ) . '</option>' . "\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_ONORBEFORE . '"';
-	check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ONORBEFORE );
+	check_selected( (int)$t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ONORBEFORE );
 	echo '>' . lang_get( 'on_or_before_date' ) . '</option>' . "\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_BEFORE . '"';
-	check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_BEFORE );
+	check_selected( (int)$t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_BEFORE );
 	echo '>' . lang_get( 'before_date' ) . '</option>' . "\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_ON . '"';
-	check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ON );
+	check_selected( (int)$t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ON );
 	echo '>' . lang_get( 'on_date' ) . '</option>' . "\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_AFTER . '"';
-	check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_AFTER );
+	check_selected( (int)$t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_AFTER );
 	echo '>' . lang_get( 'after_date' ) . '</option>' . "\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_ONORAFTER . '"';
-	check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ONORAFTER );
+	check_selected( (int)$t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ONORAFTER );
 	echo '>' . lang_get( 'on_or_after_date' ) . '</option>' . "\n";
 	echo '</select>' . "\n";
 
@@ -4344,7 +4344,7 @@ function print_filter_project_id() {
 		<!-- Project -->
 		<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_PROJECT_ID;?>[]">
 			<option value="<?php echo META_FILTER_CURRENT ?>"
-				<?php check_selected( $t_filter[FILTER_PROPERTY_PROJECT_ID], META_FILTER_CURRENT, false );?>>
+				<?php check_selected( $t_filter[FILTER_PROPERTY_PROJECT_ID], META_FILTER_CURRENT );?>>
 				[<?php echo lang_get( 'current' )?>]
 			</option>
 			<?php print_project_option_list( $t_filter[FILTER_PROPERTY_PROJECT_ID] )?>
