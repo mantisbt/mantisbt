@@ -698,10 +698,7 @@ function db_prepare_string( $p_string ) {
 			return utf8_substr( $t_escaped, 1, utf8_strlen( $t_escaped ) - 2 );
 			break;
 		case 'mysql':
-			return mysql_real_escape_string( $p_string );
 		case 'mysqli':
-			# For some reason mysqli_escape_string( $p_string ) always returns an empty
-			# string.  This is happening with PHP v5.0.2.
 			$t_escaped = $g_db->qstr( $p_string, false );
 			return utf8_substr( $t_escaped, 1, utf8_strlen( $t_escaped ) - 2 );
 		case 'postgres':
