@@ -2854,7 +2854,6 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_STICKY;?>" id="sticky_issues_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'sticky_label' )?></a>
 			</td>
 			<td class="small-caption" colspan="2">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_HIGHLIGHT_CHANGED;?>" id="highlight_changed_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'changed_label' )?></a>
 			</td>
 			<td class="small-caption" >
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_FILTER_BY_DATE;?>" id="do_filter_by_date_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'use_date_filters_label' )?></a>
@@ -2895,11 +2894,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					echo FILTER_PROPERTY_STICKY; ?>" value="<?php
 					echo $t_sticky_filter_state ? 'on' : 'off'; ?>" />
 			</td>
-			<td class="small-caption" colspan="2" id="highlight_changed_filter_target">
-				<?php
-					echo $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED];
-		echo '<input type="hidden" name="', FILTER_PROPERTY_HIGHLIGHT_CHANGED, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] ), '" />';
-		?>
+			<td class="small-caption" colspan="2">&#160;
 			</td>
 			<td class="small-caption" id="do_filter_by_date_filter_target">
 		<?php
@@ -3431,7 +3426,23 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			?>
 			<input type="hidden" name="match_type" value="<?php echo $t_filter[FILTER_PROPERTY_MATCH_TYPE] ?>"/>
 			</td>
-			<td colspan="6">&#160;</td>
+
+			<td class="small-caption category2">
+				<a id="highlight_changed_filter"
+					href="<?php echo $t_filters_url . FILTER_PROPERTY_HIGHLIGHT_CHANGED; ?>"
+					<?php #echo $t_dynamic_filter_expander_class; ?>>
+					<?php echo lang_get( 'changed_label' )?>
+				</a>
+			</td>
+			<td class="small-caption" valign="top" id="highlight_changed_filter_target">
+				<?php echo $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED]; ?>
+				<input type="hidden"
+					name="<?php echo FILTER_PROPERTY_HIGHLIGHT_CHANGED; ?>"
+					value="<?php echo string_attribute( $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] ); ?>"
+				/>
+			</td>
+
+			<td colspan="4">&#160;</td>
 		</tr>
 	</table>
 		<?php
