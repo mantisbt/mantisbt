@@ -491,6 +491,7 @@ $s_upload_file_button = 'Upload File';
 $s_upload_files_button = 'Upload Files';
 $s_max_file_size = 'Maximum size';
 $s_max_file_size_label = 'Maximum size:';
+$s_file_kb = 'KiB';
 
 # bug_reopen.php
 $s_bug_reopened_msg = 'Issue has been reopened...';
@@ -1525,6 +1526,7 @@ $s_copy_columns_to = 'Copy Columns To';
 # due date
 $s_due_date = 'Due Date';
 $s_overdue = 'Overdue';
+$s_due_date_was = 'Due date was';
 
 #account_view_page.php
 $s_view_account_title = 'User Information';
