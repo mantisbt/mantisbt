@@ -71,6 +71,7 @@ $s_add_new_relationship_button = '{{Identical|Add}}';
 $s_on = 'Switch confition (for filter, for example)';
 $s_off = 'Switch condition (for filter, for example)';
 $s_show_all_tags = '{{Identical|All}}';
+$s_file_size_info = 'Displays file size information, where $1 is the size and $2 is the unit';
 
 
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'If we need to specify the number of expected parameter in string, we just need to write something like "Lalal %2$s bububu %1$d", where 1 and 2 - the index number in argument list (actually, expected in original message)';
