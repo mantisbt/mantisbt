@@ -346,10 +346,24 @@ check_print_info_row(
 	htmlentities( $t_table_prefix )
 );
 
+$t_table_plugin_prefix = config_get_global( 'db_table_plugin_prefix' );
+check_print_info_row(
+	'Prefix added to each Plugin table name',
+	htmlentities( $t_table_plugin_prefix )
+);
+
 $t_table_suffix = config_get_global( 'db_table_suffix' );
 check_print_info_row(
 	'Suffix added to each MantisBT table name',
 	htmlentities( $t_table_suffix )
+);
+
+check_print_test_warn_row(
+	'Plugin table prefix should not be empty',
+	!empty($t_table_plugin_prefix),
+	array(
+		false => 'Defining $g_db_table_plugin_prefix allows easy identification of plugin-specific vs MantisBT core tables',
+	)
 );
 
 if( db_is_mysql() ) {
