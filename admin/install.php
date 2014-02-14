@@ -1016,7 +1016,7 @@ if( 5 == $t_install_state ) {
 	foreach( $t_prefix_defaults['other'] as $t_key => $t_value ) {
 		$t_new_value = ${'f_' . $t_key};
 		if( $t_new_value != $t_value ) {
-			$t_config .= '$' . str_pad( $t_key, 25 ) . "= '" . ${'f_' . $t_key} . "';\n";
+			$t_config .= '$g_' . str_pad( $t_key, 25 ) . "= '" . ${'f_' . $t_key} . "';\n";
 			$t_insert_line = true;
 		}
 	}
