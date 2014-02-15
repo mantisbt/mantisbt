@@ -142,7 +142,7 @@ function process_complex_value( $p_value, $p_trimquotes = false ) {
 
 	# Parsing regex initialization
 	if( is_null( $s_regex_array ) ) {
-		$s_regex_array = '^array[\s]*\((.*)\)$';
+		$s_regex_array = '^array[\s]*\((.*)\)[;]*$';
 		$s_regex_string =
 			# unquoted string (word)
 			'[\w]+' . '|' .
