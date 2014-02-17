@@ -24,6 +24,47 @@ function mc_config_get_string( $p_username, $p_password, $p_config_var ) {
 		return SoapObjectsFactory::newSoapFault( 'Client', "Config '$p_config_var' is undefined" );
 	}
 
-	return config_get( $p_config_var );
+	$t_value = config_get( $p_config_var );
+
+	# If array, serialize to string to avoid php error relating to serializing array as string.
+	if ( is_array( $t_value ) ) {
+		$t_value = mci_serialize_array( $t_value );
+	}
+
+	return $t_value;
+}
+
+/**
+ * Serialize a standard or associative array to a string.
+ * Elements are going to be separated by a new line.
+ * Key and value are going to eb separated by a tab.
+ * Nested arrays are not supported.  Type of keys/values doesn't affect the output.
+ * @param $p_array The array to serialize.
+ */
+function mci_serialize_array( $p_array ) {
+	$t_associative = array_keys( $p_array ) !== range( 0, count( $p_array ) - 1 );
+	$t_result = '';
+	$t_key_value_separator = "\t";
+	$t_value_separator = "\n";
+
+	if ( $t_associative ) {
+		foreach ( $p_array as $t_key => $t_value ) {
+			if ( !empty( $t_result ) ) {
+				$t_result .= $t_value_separator;
+			}
+
+			$t_result .= $t_key . $t_key_value_separator . $t_value;
+		}
+	} else {
+		foreach ( $p_array as $t_value ) {
+			if ( !empty( $t_result ) ) {
+				$t_result .= $t_value_separator;
+			}
+
+			$t_result .= $t_value;
+		}
+	}
+
+	return $t_result;
 }
 
