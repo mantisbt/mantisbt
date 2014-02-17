@@ -1033,9 +1033,6 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 	$t_project_user_list_table = db_get_table( 'project_user_list' );
 	$t_project_hierarchy_table = db_get_table( 'project_hierarchy' );
 
-	$t_public = VS_PUBLIC;
-	$t_private = VS_PRIVATE;
-
 	if( access_has_global_level( config_get( 'private_project_threshold' ), $p_user_id ) ) {
 		$t_enabled_clause = $p_show_disabled ? '' : 'p.enabled = ' . db_param() . ' AND';
 		$query = "SELECT DISTINCT p.id, p.name, ph.parent_id
@@ -1061,7 +1058,12 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 						        u.user_id=' . db_param() . ' )
 						)
 					  ORDER BY p.name';
-		$result = db_query_bound( $query, ( $p_show_disabled ? array( $p_user_id, $t_public, $t_private, $p_user_id ) : array( $p_user_id, 1, $t_public, $t_private, $p_user_id ) ) );
+		$t_param = array( $p_user_id, VS_PUBLIC, VS_PRIVATE, $p_user_id );
+		if( $p_show_disabled ) {
+			# Insert enabled flag value in 2nd position of parameter array
+			array_splice( $t_param, 1, 0, true );
+		}
+		$result = db_query_bound( $query, $t_param );
 	}
 
 	$t_projects = array();
