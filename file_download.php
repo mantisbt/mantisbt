@@ -206,6 +206,7 @@ switch ( config_get( 'file_upload_method' ) ) {
 
 		header( 'Content-Type: ' . $t_content_type );
 		echo $v_content;
+		break;
 	default:
 		trigger_error( ERROR_GENERIC, ERROR );
 }
