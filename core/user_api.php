@@ -1033,6 +1033,8 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 	$t_project_user_list_table = db_get_table( 'project_user_list' );
 	$t_project_hierarchy_table = db_get_table( 'project_hierarchy' );
 
+	db_param_push();
+
 	if( access_has_global_level( config_get( 'private_project_threshold' ), $p_user_id ) ) {
 		$t_enabled_clause = $p_show_disabled ? '' : 'p.enabled = ' . db_param() . ' AND';
 		$query = "SELECT DISTINCT p.id, p.name, ph.parent_id

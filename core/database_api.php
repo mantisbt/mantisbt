@@ -73,10 +73,17 @@ if( db_is_oracle() ) {
 }
 
 /**
- * Tracks the query parameter count for use with db_aparam:().
+ * Tracks the query parameter count for use with db_param().
  * @global int $g_db_param_count
  */
 $g_db_param_count = 0;
+
+/**
+ * Query parameter count stack
+ * Used by {@see db_param_push()} and {@see db_param_pop()}
+ * @see $g_db_param_count
+ */
+$g_db_param_stack = array();
 
 /**
  * Open a connection to the database.
@@ -275,6 +282,7 @@ function db_check_identifier_size( $p_identifier ) {
 /**
  * execute query, requires connection to be opened
  * An error will be triggered if there is a problem executing the query.
+ * This will call {@see db_param_pop()} after a successful execution
  * @global array of previous executed queries for profiling
  * @global adodb database connection object
  * @global boolean indicating whether queries array is populated
@@ -368,28 +376,55 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 		array_push( $g_queries_array, array( '', $t_elapsed ) );
 	}
 
-	# We can't reset the counter because we have queries being built
-	# and executed while building bigger queries in filter_api. -jreese
-	# $g_db_param_count = 0;
-
 	if( !$t_result ) {
 		db_error( $p_query );
 		trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
 		return false;
 	} else {
+		db_param_pop();
 		return $t_result;
 	}
 }
 
 /**
  * Generate a string to insert a parameter into a database query string
- * @return string 'wildcard' matching a paramater in correct ordered format for the current database.
+ * @return string 'wildcard' matching a parameter in correct ordered format for the current database.
  */
 function db_param() {
 	global $g_db;
 	global $g_db_param_count;
 
 	return $g_db->Param( $g_db_param_count++ );
+}
+
+/**
+ * Pushes current value of $g_db_param_count onto stack and resets its value
+ * Allows the caller to build multiple queries concurrently on RDBMS using
+ * positional parameters (e.g. PostgreSQL)
+ */
+function db_param_push() {
+	global $g_db_param_count;
+	global $g_db_param_stack;
+
+	$g_db_param_stack[] = $g_db_param_count;
+	$g_db_param_count = 0;
+}
+
+/**
+ * Pops previous value of $g_db_param_count from stack
+ * This function is called by {@see db_query_bound()} and should normally not
+ * be executed directly
+ */
+function db_param_pop() {
+	global $g_db_param_count;
+	global $g_db_param_stack;
+	global $g_db;
+
+	$g_db_param_count = (int)array_pop( $g_db_param_stack );
+	if( db_is_pgsql() ) {
+		# Manually reset the ADOdb param number to the value we just popped
+		$g_db->_pnum = $g_db_param_count;
+	}
 }
 
 /**
