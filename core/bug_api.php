@@ -399,7 +399,7 @@ class BugData {
 		$query = "SELECT COUNT(*)
 					  FROM $t_bugnote_table
 					  WHERE bug_id =" . db_param() . " $t_restriction";
-		$result = db_query_bound( $query, array( $this->bug_id ) );
+		$result = db_query_bound( $query, array( $this->id ) );
 
 		return db_result( $result );
 	}
