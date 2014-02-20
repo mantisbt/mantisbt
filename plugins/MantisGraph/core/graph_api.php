@@ -886,7 +886,7 @@ function create_cumulative_bydate() {
 								AND $t_history_table.field_name = 'status' )
 						OR $t_history_table.id is NULL )
 			ORDER BY $t_bug_table.id, date_modified ASC";
-	$t_result = db_query_bound( $query, array( $t_res_val, $t_res_val ) );
+	$t_result = db_query_bound( $query, array( $t_res_val, (string)$t_res_val ) );
 	$bug_count = db_num_rows( $t_result );
 
 	$t_last_id = 0;
