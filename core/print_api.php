@@ -1866,3 +1866,27 @@ function print_timezone_option_list( $p_timezone ) {
 		echo "\t</optgroup>\n";
 	}
 }
+
+/**
+ * Return file size information
+ * @param int $p_size
+ * @param string $p_unit
+ * @return string
+ */
+function get_filesize_info( $p_size, $p_unit ) {
+	return sprintf( lang_get( 'file_size_info' ), number_format( $p_size ), $p_unit );
+}
+
+/**
+ * Print maximum file size information
+ * @param int $p_size in bytes
+ * @param int $p_divider optional divider, defaults to 1000
+ * @param string $p_unit optional language string of unit, defaults to KB
+ */
+function print_max_filesize( $p_size, $p_divider = 1000, $p_unit = 'kb' ) {
+	echo '<span class="small" title="' . get_filesize_info( $p_size, lang_get( 'bytes' ) ) . '">';
+	echo lang_get( 'max_file_size_label' )
+		. lang_get( 'word_separator' )
+		. get_filesize_info( $p_size / $p_divider, lang_get( $p_unit ) );
+	echo '</span>';
+}

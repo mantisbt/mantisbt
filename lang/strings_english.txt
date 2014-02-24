@@ -489,8 +489,8 @@ $s_select_file = 'Select File';
 $s_select_files = 'Select Files';
 $s_upload_file_button = 'Upload File';
 $s_upload_files_button = 'Upload Files';
-$s_max_file_size = 'Maximum size';
 $s_max_file_size_label = 'Maximum size:';
+$s_file_size_info = '%1$s %2$s'; # $1 = size, $2 = unit (e.g. kb, bytes)
 
 # bug_reopen.php
 $s_bug_reopened_msg = 'Issue has been reopened...';
@@ -1303,6 +1303,7 @@ $s_monitored_by = 'Monitored By';
 $s_monitored_by_label = 'Monitored By:';
 $s_attachments = 'attachment(s)';
 $s_bytes = 'bytes';
+$s_kb = 'KB';
 $s_attachment_missing = 'Attachment missing';
 $s_attachment_count = 'Attachment count';
 $s_view_attachments_for_issue = 'View %1$d attachment(s) for issue #%2$d';
@@ -1525,6 +1526,7 @@ $s_copy_columns_to = 'Copy Columns To';
 # due date
 $s_due_date = 'Due Date';
 $s_overdue = 'Overdue';
+$s_overdue_since = 'Overdue since %1$s';
 
 #account_view_page.php
 $s_view_account_title = 'User Information';

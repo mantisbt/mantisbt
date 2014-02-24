@@ -597,8 +597,9 @@ print_recently_visited();
 ?>
 	<tr>
 		<th class="category">
-			<label for="file"><?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?></label><br />
-			<span class="small"><?php echo lang_get( 'max_file_size_label' ) . lang_get( 'word_separator' ) . number_format( $t_max_file_size/1000 ) ?>k</span>
+			<label for="file"><?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?></label>
+			<br />
+			<?php echo print_max_filesize( $t_max_file_size ); ?>
 		</th>
 		<td>
 			<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
