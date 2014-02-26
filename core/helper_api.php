@@ -600,7 +600,8 @@ function helper_show_query_count() {
  * @return string
  */
 function helper_mantis_url( $p_url ) {
-	if( is_blank( $p_url ) ) {
+	# If we got a blank or absolute URL, return it as-is
+	if( is_blank( $p_url ) || preg_match( '#^(/|https?://)#i', $p_url ) ) {
 		return $p_url;
 	}
 	return config_get_global( 'short_path' ) . $p_url;
