@@ -849,36 +849,36 @@ if( 3 == $t_install_state ) {
 			# Since MantisBT 1.1.0 / ADOdb 4.96 (corresponding to schema 51)
 			# 'L' columns are BOOLEAN instead of SMALLINT
 			# Check for any DB discrepancies and update columns if needed
-			$ret = check_pgsql_bool_columns();
-			if( $ret !== true ) {
+			$t_bool_columns = check_pgsql_bool_columns();
+			if( $t_bool_columns !== true ) {
 				# Some columns need converting
-				$msg = "PostgreSQL: check Boolean columns' actual type";
-				if( is_array( $ret ) ) {
+				$t_msg = "PostgreSQL: check Boolean columns' actual type";
+				if( is_array( $t_bool_columns ) ) {
 					print_test(
-						$msg,
-						count( $ret ) == 0,
+						$t_msg,
+						count( $t_bool_columns ) == 0,
 						false,
-						count( $ret ) . ' columns must be converted to BOOLEAN'
+						count( $t_bool_columns ) . ' columns must be converted to BOOLEAN'
 					);
 				} else {
 					# We did not get an array => error occured
-					print_test( $msg, false, true, $ret );
+					print_test( $t_msg, false, true, $t_bool_columns );
 				}
 
 				# Convert the columns
-				foreach( $ret as $row ) {
-					extract( $row );
-					$t_null = $is_nullable ? 'NULL' : 'NOT NULL';
-					$t_default = is_null( $column_default ) ? 'NULL' : $column_default;
-					$sqlarray = $dict->AlterColumnSQL(
-						$table_name,
-						"$column_name L $t_null DEFAULT $t_default"
+				foreach( $t_bool_columns as $t_row ) {
+					extract( $t_row, EXTR_PREFIX_ALL, 'v' );
+					$t_null = $v_is_nullable ? 'NULL' : 'NOT NULL';
+					$t_default = is_null( $v_column_default ) ? 'NULL' : $v_column_default;
+					$t_sqlarray = $dict->AlterColumnSQL(
+						$v_table_name,
+						"$v_column_name L $t_null DEFAULT $t_default"
 					);
 					print_test(
-						"Converting column $table_name.$column_name to BOOLEAN",
-						2 == $dict->ExecuteSQLArray( $sqlarray, false ),
+						"Converting column $v_table_name.$v_column_name to BOOLEAN",
+						2 == $dict->ExecuteSQLArray( $t_sqlarray, false ),
 						true,
-						print_r( $sqlarray, true )
+						print_r( $t_sqlarray, true )
 					);
 					if( $g_failed ) {
 						# Error occured, bail out
