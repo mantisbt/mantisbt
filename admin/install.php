@@ -684,6 +684,8 @@ if( !$g_database_upgrade ) {
 </tr>
 
 </table>
+</form>
+
 <?php
 }  # end install_state == 1
 
@@ -792,7 +794,7 @@ if( 3 == $t_install_state ) {
 			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . db_error_msg() . ' )' );
 		}
 		$g_db->Close();
-		?>
+	?>
 </tr>
 <?php
 	}
@@ -983,16 +985,24 @@ if( 5 == $t_install_state ) {
 
 <tr>
 	<td bgcolor="#ffffff">
-		<?php
-			if( !$t_config_exists ) {
-		echo 'Creating Configuration File (config_inc.php)<br />';
-		echo '<span class="error-msg">(if this file is not created, create it manually with the contents below)</span>';
+<?php
+	if( !$t_config_exists ) {
+?>
+		Creating Configuration File (config_inc.php)<br />
+		<span class="error-msg">
+			(if this file is not created, create it manually with the contents below)
+		</span>
+<?php
 	} else {
-		echo 'Updating Configuration File (config_inc.php)<br />';
+?>
+		Updating Configuration File (config_inc.php)<br />
+<?php
 	}
-	?>
+?>
 	</td>
-	<?php
+<?php
+	# Generating the config_inc.php file
+
 	$t_config = '<?php' . PHP_EOL
 		. "\$g_hostname               = '$f_hostname';" . PHP_EOL
 		. "\$g_db_type                = '$f_db_type';" . PHP_EOL
@@ -1059,11 +1069,28 @@ if( 5 == $t_install_state ) {
 </tr>
 <?php
 	if( true == $t_write_failed ) {
-		echo '<tr><table width="50%" cellpadding="10" cellspacing="1">';
-		echo '<tr><td>Please add the following lines to ' . $g_absolute_path . 'config_inc.php before continuing to the database upgrade check:</td></tr>';
-		echo '<tr><td><pre>' . htmlentities( $t_config ) . '</pre></td></tr></table></tr>';
+?>
+<tr>
+	<td colspan="2">
+		<table width="50%" cellpadding="10" cellspacing="1">
+			<tr>
+				<td>
+					Please add the following lines to
+					'<?php echo $g_absolute_path; ?>config_inc.php'
+					before continuing to the database upgrade check:
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<pre><?php echo htmlentities( $t_config ); ?></pre>
+				</td>
+			</tr>
+		</table>
+	</td>
+</tr>
+<?php
 	}
-	?>
+?>
 
 </table>
 
@@ -1184,19 +1211,27 @@ if( 6 == $t_install_state ) {
 if( 7 == $t_install_state ) {
 	# cleanup and launch upgrade
 	?>
-<p>Install was successful.</p>
+<table width="100%" bgcolor="#222222" cellpadding="10" cellspacing="1">
+<tr>
+	<td bgcolor="#e8e8e8" colspan="2">
+		<span class="title">Installation Complete...</span>
+	</td>
+</tr>
+<tr bgcolor="#ffffff">
+	<td>
+		MantisBT was installed successfully.
 <?php if( $f_db_exists ) {?>
-<p><a href="../login_page.php">Continue</a> to log into Mantis</p>
-<?php
-	} else {?>
-<p>Please log in as the administrator and <a href="../login_page.php">create</a> your first project.</p>
+		<a href="../login_page.php">Continue</a> to log in.
+<?php } else { ?>
+		Please log in as the administrator and <a href="../login_page.php">create</a> your first project.
+<?php } ?>
+	</td>
+	<?php print_test_result( GOOD ); ?>
+</tr>
+</table>
 
 <?php
-	}
 }
-?>
-</form>
-<?php
 
 # end install_state == 7
 
@@ -1205,7 +1240,7 @@ if( $g_failed && $t_install_state != 1 ) {
 <table width="100%" bgcolor="#222222" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Checks Failed...</span>
+		<span class="title">Installation Failed...</span>
 	</td>
 </tr>
 <tr>
