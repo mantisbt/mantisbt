@@ -129,9 +129,9 @@ tr.bugnote .time-tracked,
 
 .main-menu { float: left; width: 100%; padding: 0; border: 1px solid #999; background-color: #e8e8e8; z-index: 99; }
 .main-menu ul { clear: left; float: left; list-style: none; position: relative; margin: 0; padding: .25em; }
-.main-menu ul li { display:block; float: left; list-style: none; padding: .15em .5em; margin: 0; position: relative; }
-.main-menu ul li a { padding-right: .9em; border-right: 1px solid #000; text-decoration: underline; }
-.main-menu ul li > a#logout-link { padding-right: 0; border-right: none; }
+.main-menu ul li { display:block; float: left; list-style: none; padding: .15em 0; margin: 0; position: relative; }
+.main-menu ul li a { padding: 0 .9em; border-right: 1px solid #000; text-decoration: underline; }
+.main-menu ul li > a#logout-link { border-right: none; }
 .main-menu div#bug-jump { float: right; margin: 0; padding: 2px 0; position: relative; z-index: 100; border: none; }
 .main-menu input { font-size: 9pt; }
 
