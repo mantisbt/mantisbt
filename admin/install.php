@@ -895,11 +895,11 @@ if( 3 == $t_install_state ) {
 					foreach( $sqlarray as $sql ) {
 						# "CREATE OR REPLACE TRIGGER" statements must end with "END;\n/" for Oracle sqlplus
 						if ( $f_db_type == 'oci8' && stripos( $sql, 'CREATE OR REPLACE TRIGGER' ) === 0 ) {
-							$t_sql_end = "\n/";
+							$t_sql_end = PHP_EOL . "/";
 						} else {
 							$t_sql_end = ";";
 						}
-						echo htmlentities( $sql ) . $t_sql_end . "\n\n";
+						echo htmlentities( $sql ) . $t_sql_end . PHP_EOL . PHP_EOL;
 					}
 				}
 			} else {
@@ -935,7 +935,7 @@ if( 3 == $t_install_state ) {
 		}
 		if( $f_log_queries ) {
 			# add a query to set the database version
-			echo 'INSERT INTO ' . db_get_table( 'config' ) . ' ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'' . $lastid . '\', 1, 90, \'database_version\', 0, 0 );' . "\n";
+			echo 'INSERT INTO ' . db_get_table( 'config' ) . ' ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'' . $lastid . '\', 1, 90, \'database_version\', 0, 0 );' . PHP_EOL;
 			echo '</pre><br /><p style="color:red">Your database has not been created yet. Please create the database, then install the tables and data using the information above before proceeding.</p></td></tr>';
 		}
 	}
@@ -995,39 +995,39 @@ if( 5 == $t_install_state ) {
 	?>
 	</td>
 	<?php
-	$t_config = '<?php' . "\n"
-		. "\$g_hostname               = '$f_hostname';\n"
-		. "\$g_db_type                = '$f_db_type';\n"
-		. "\$g_database_name          = '$f_database_name';\n"
-		. "\$g_db_username            = '$f_db_username';\n"
-		. "\$g_db_password            = '$f_db_password';\n";
+	$t_config = '<?php' . PHP_EOL
+		. "\$g_hostname               = '$f_hostname';" . PHP_EOL
+		. "\$g_db_type                = '$f_db_type';" . PHP_EOL
+		. "\$g_database_name          = '$f_database_name';" . PHP_EOL
+		. "\$g_db_username            = '$f_db_username';" . PHP_EOL
+		. "\$g_db_password            = '$f_db_password';" . PHP_EOL;
 
 	switch( $f_db_type ) {
 		case 'db2':
-			$t_config .=  "\$g_db_schema              = '$f_db_schema';\n";
+			$t_config .=  "\$g_db_schema              = '$f_db_schema';" . PHP_EOL;
 			break;
 		default:
 			break;
 	}
-	$t_config .= "\n";
+	$t_config .= PHP_EOL;
 
 	# Add lines for table prefix/suffix if different from default
 	$t_insert_line = false;
 	foreach( $t_prefix_defaults['other'] as $t_key => $t_value ) {
 		$t_new_value = ${'f_' . $t_key};
 		if( $t_new_value != $t_value ) {
-			$t_config .= '$g_' . str_pad( $t_key, 25 ) . "= '" . ${'f_' . $t_key} . "';\n";
+			$t_config .= '$g_' . str_pad( $t_key, 25 ) . "= '" . ${'f_' . $t_key} . "';" . PHP_EOL;
 			$t_insert_line = true;
 		}
 	}
 	if( $t_insert_line ) {
-		$t_config .= "\n";
+		$t_config .= PHP_EOL;
 	}
 
 	$t_config .=
-		  "\$g_default_timezone       = '$f_timezone';\n"
-		. "\n"
-		. "\$g_crypto_master_salt     = '$f_crypto_master_salt';\n";
+		  "\$g_default_timezone       = '$f_timezone';" . PHP_EOL
+		. PHP_EOL
+		. "\$g_crypto_master_salt     = '$f_crypto_master_salt';" . PHP_EOL;
 
 	$t_write_failed = true;
 
