@@ -998,9 +998,9 @@ if( 5 == $t_install_state ) {
 	$t_config = '<?php' . PHP_EOL
 		. "\$g_hostname               = '$f_hostname';" . PHP_EOL
 		. "\$g_db_type                = '$f_db_type';" . PHP_EOL
-		. "\$g_database_name          = '$f_database_name';" . PHP_EOL
-		. "\$g_db_username            = '$f_db_username';" . PHP_EOL
-		. "\$g_db_password            = '$f_db_password';" . PHP_EOL;
+		. "\$g_database_name          = '" . addslashes( $f_database_name ) . "';" . PHP_EOL
+		. "\$g_db_username            = '" . addslashes( $f_db_username ) . "';" . PHP_EOL
+		. "\$g_db_password            = '" . addslashes( $f_db_password ) . "';" . PHP_EOL;
 
 	switch( $f_db_type ) {
 		case 'db2':
@@ -1027,7 +1027,7 @@ if( 5 == $t_install_state ) {
 	$t_config .=
 		  "\$g_default_timezone       = '$f_timezone';" . PHP_EOL
 		. PHP_EOL
-		. "\$g_crypto_master_salt     = '$f_crypto_master_salt';" . PHP_EOL;
+		. "\$g_crypto_master_salt     = '" . addslashes( $f_crypto_master_salt ) . "';" . PHP_EOL;
 
 	$t_write_failed = true;
 
