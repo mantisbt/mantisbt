@@ -237,7 +237,7 @@ $g_short_path = $t_path;
  * Used to link to manual for User Documentation.
  * @global string $g_manual_url
  */
-$g_manual_url = 'http://www.mantisbt.org/docs/master-1.2.x/';
+$g_manual_url = 'http://www.mantisbt.org/docs/master/en-US/Admin_Guide/html-desktop/';
 
 /**************
  * Web Server *
