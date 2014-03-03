@@ -1,6 +1,23 @@
 MantisBT Release Notes
 ======================
 
+1.2.17 Security Release (2014-03-04)
+-------------------------------------------------
+
+MantisBT 1.2.17 is a security update for the stable 1.2.x branch. All
+installations that are currently running any 1.2.x version are strongly advised
+to upgrade to this release. Download it from [3].
+
+An SQL injection vulnerability (CVE-2014-2238) in adm_config_report.php was
+patched. Refer to issue #17055 for detailed information.
+
+This release also includes a few bug fixes for the tracker, including News API
+correction for the regression issue #16940 introduced in 1.2.16, as well as
+updated translations in many languages.
+
+A full changelog for the 1.2.x series can be found on the official site. [1]
+
+
 1.2.16 Security Release (2014-02-07)
 -------------------------------------------------
 
@@ -379,6 +396,7 @@ There have also been many improvements to the codebase beyond adding features:
 
 [1] The changelog is split between multiple releases:
 
+	1.2.17     http://www.mantisbt.org/bugs/changelog_page.php?version_id=189
 	1.2.16     http://www.mantisbt.org/bugs/changelog_page.php?version_id=183
 	1.2.15     http://www.mantisbt.org/bugs/changelog_page.php?version_id=182
 	1.2.14     http://www.mantisbt.org/bugs/changelog_page.php?version_id=181
