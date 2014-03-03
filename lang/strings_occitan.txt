@@ -267,6 +267,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Lo plugin ja es installat.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'La pagina del plugin es introbabla.';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Fracàs de l\'installacion del plugin: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'La mesa a jorn del l\'esquèma pel ligicial antispam a fracassat en blôt #%1$s.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'Lo modul « %1$s » deu èsser mes a jorn abans de poder accedir a aquesta pagina.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Una error desconeguda « %1$s » s\'es produsida durant l\'execucion del logicial « %2$s ».';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Lo camp « %1$s » possedís pas mai d\'una colomna « %2$s ».';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Lo camp « %1$s » possedís una colomna invalida « %2$s »';

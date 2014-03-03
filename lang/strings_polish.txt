@@ -283,6 +283,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Wtyczka już jest zainstalowana
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Brak strony wtyczki.';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Instalacja wtyczki nie powiodła się: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Błąd aktualizacji schematu wtyczki w bloku %1$s.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'W celu otwarcia strony, musisz zaktualizować wtyczkę „%1$s”.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Wystąpił nieznany błąd „%1$s” w trakcie wykonywania kodu wtyczki „%2$s”.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Pole „%1$s” zawiera dwa razy kolumnę „%2$s”.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Pole „%1$s” zawiera nieprawidłowe pole „%2$s”.';

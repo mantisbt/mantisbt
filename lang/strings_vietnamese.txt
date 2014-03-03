@@ -270,6 +270,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Plugin đã được cài đặ
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Trang Plugin không tìm thấy';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Không thể cài đặt phần mở rộng: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Nâng cấp lược đồ plugin không thành công trong khối #%1$s.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'Các " %1$s " plugin cần phải được nâng cấp trước khi bạn có thể truy cập trang này.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Có một lỗi không rõ "%1$s" trong quá trình thực hiện của các "%2$s" plugin';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Trường "%1$s" có chứa bản sao cột "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Trường "%1$s" có chứa không hợp lệ trường "%2$s".';
@@ -560,7 +561,7 @@ $s_warning_plain_password_authentication = '<strong>Cảnh báo:</strong> Đồn
 $s_warning_default_administrator_account_present = '<strong>Cảnh báo:</strong> Bạn nên vô hiệu hóa tài khoản của \'quản trị\' mặc định hoặc thay đổi mật khẩu của mình.';
 $s_warning_admin_directory_present = '<strong>Cảnh báo:</strong> thư mục Admin nên được loại bỏ.';
 $s_error_database_version_out_of_date_1 = '<strong>Lỗi:</strong> Cấu trúc cơ sở dữ liệu dường như là của ngày (config(databaseversion) là 0 và cũ nâng cấp bảng tồn tại). Phiên bản 1.x của MantisBT giới thiệu một quá trình nâng cấp mới. Bạn dường như được nâng cấp từ một 0. XX Release. Xin vui lòng nâng cấp lên 1.0.8 hoặc 1.1.X, sau đó nâng cấp lên 1.2.';
-$s_error_database_no_schema_version = '<strong>Lỗi:</strong> Cấu trúc cơ sở dữ liệu dường như là của ngày (config(databaseversion) là nâng cấp 0 và cũ bàn không tồn tại). Hãy kiểm tra cơ sở dữ liệu của bạn đang chạy - chúng tôi có thể không truy xuất bản đồ cơ sở dữ liệu. Bảng cấu hìnhe không trở về một phiên bản đồ cơ sở dữ liệu hợp lệ - xin vui lòng yêu cầu hỗ trợ trong danh sách gửi thư mantis-giúp đỡ, nếu cần thiết.';
+$s_error_database_no_schema_version = '<strong>Lỗi:</strong> Cấu trúc cơ sở dữ liệu dường như là của ngày (config(databaseversion) là nâng cấp 0 và cũ bàn không tồn tại). Hãy kiểm tra cơ sở dữ liệu của bạn đang chạy - chúng tôi có thể không truy xuất bản đồ cơ sở dữ liệu. Bảng cấu hình không trở về một phiên bản đồ cơ sở dữ liệu hợp lệ - xin vui lòng yêu cầu hỗ trợ trong danh sách gửi thư mantis-giúp đỡ, nếu cần thiết.';
 $s_error_database_version_out_of_date_2 = '<strong>Cảnh báo:</strong> Các cấu trúc cơ sở dữ liệu có thể được trong ngày. Hãy nâng cấp <a href="admin/install.php">ở đây</a> trước khi đăng nhập';
 $s_error_code_version_out_of_date = '<strong>Cảnh báo:</strong> Cấu trúc cơ sở dữ liệu là up-to-date hơn so với các mã được cài đặt. Xin vui lòng nâng cấp mã.';
 $s_login_page_info = 'Chào mừng đến với Issue Tracker.';

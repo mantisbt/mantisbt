@@ -266,6 +266,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Le plug-in es ja installate.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Pagina de plug-in non trovate.';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Le installation del plug-in ha fallite: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Le actualisation del schema de plug-in falleva in le bloco #%1$s.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'Le plug-in "%1$s" debe esser actualisate ante de poter acceder a iste pagina.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Il habeva un error incognite "%1$s" durante le execution del plug-in "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Le campo "%1$s" contine un columna duplicate "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Le campo "%1$s" contine un campo invalide "%2$s".';

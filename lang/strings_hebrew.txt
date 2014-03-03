@@ -30,6 +30,7 @@
  * @author Orentet
  * @author Rotemliss
  * @author YaronSh
+ * @author Yona b
  */
 
 $s_directionality = 'rtl';
@@ -271,6 +272,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'התוסף כבר מותקן.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'דף תוסף לא נמצא.';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'התקנת תוסף נכשלה: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'שדרוג הַסְּכֵמָה של התוסף נכשל בבלוק #%1$s.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'נדרש לעדכן את מודול "%1$s" לפני שניתן יהיה לגשת לדף זה';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'אירעה שגיאה לא ידועה „%1$s” במהלך ביצוע התוסף „%2$s”.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'השדה „%1$s” מכיל עמודה כפולה „%2$s”.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'שדה „%1$s” מכיל שדה לא תקין „%2$s”.';
