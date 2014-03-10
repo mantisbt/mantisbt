@@ -362,9 +362,13 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 			$t_field_localized = lang_get( 'target_version' );
 			break;
 		case 'date_submitted':
+			$p_old_value = date( config_get( 'normal_date_format' ), $p_old_value );
+			$p_new_value = date( config_get( 'normal_date_format' ), $p_new_value );
 			$t_field_localized = lang_get( 'date_submitted' );
 			break;
 		case 'last_updated':
+			$p_old_value = date( config_get( 'normal_date_format' ), $p_old_value );
+			$p_new_value = date( config_get( 'normal_date_format' ), $p_new_value );
 			$t_field_localized = lang_get( 'last_update' );
 			break;
 		case 'os':
