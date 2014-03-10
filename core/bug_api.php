@@ -1649,7 +1649,9 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 	db_query_bound( $query, array( $c_value, $c_bug_id ) );
 
 	# updated the last_updated date
-	bug_update_date( $p_bug_id );
+	if ( $p_field_name != 'last_updated' ) {
+		bug_update_date( $p_bug_id );
+	}
 
 	# log changes except for duplicate_id which is obsolete and should be removed in
 	# MantisBT 1.3.
