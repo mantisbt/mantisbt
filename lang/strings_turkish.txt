@@ -27,6 +27,7 @@
  *
  * @author Emperyan
  * @author Erdemaslancan
+ * @author Gorizon
  * @author Hedda Gabler
  * @author Incelemeelemani
  * @author Joseph
@@ -278,6 +279,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Eklenti zaten yüklü.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Eklenti sayfası bulunamadı.';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Eklenti kurulumu başarısız oldu: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = '#%1$s bloğundaki eklenti şeması yükseltmesi başarısız.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = '" %1$s " Eklentisi bu sayfaya erişebilmek için önce yükseltilmeleri gerekiyor.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = '"%2$s" çalıştırılması sonucu bilinmeyen bir %1$s hatası oluştu.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = '"%1$s" alanı birden fazla "%2$s" sütunu içeriyor.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = '"%1$s" alanı geçersiz geçersiz "%2$s" alanı içeriyor.';

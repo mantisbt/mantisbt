@@ -28,6 +28,7 @@
  * @author Aotake
  * @author Fievarsty
  * @author Fryed-peach
+ * @author Hiro884
  * @author Hosiryuhosi
  * @author Iwai.masaharu
  * @author Mfuji
@@ -277,6 +278,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'プラグインはインスト�
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'プラグインのページが見つかりません。';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'プラグインのインストールに失敗しました: %1$s';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'ブロック #%1$s でプラグインのスキーマのアップグレードに失敗しました。';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'このページにアクセスするためには "%1$s" プラグインをアップグレードする必要があります。';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = '「%2$s」プラグインの実行中に不明なエラー「%1$s」が発生しました。';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = '項目「%1$s」の列「%2$s」が重複しています。';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = '項目「%1$s」が、無効な項目「%2$s」を含んでいます。';
