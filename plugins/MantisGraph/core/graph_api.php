@@ -63,11 +63,14 @@ function graph_get_font() {
 			'verdana' => 'verdana.ttf',
 			'trebuchet' => 'trebuc.ttf',
 			'verasans' => 'Vera.ttf',
+			'dejavusans' => 'DejaVuSans.ttf',
 			'times' => 'times.ttf',
 			'georgia' => 'georgia.ttf',
 			'veraserif' => 'VeraSe.ttf',
+			'dejavuserif' => 'DejaVuSerif.ttf',
 			'courier' => 'cour.ttf',
 			'veramono' => 'VeraMono.ttf',
+			'dejavumono' => 'DejaVuSansMono.ttf',
 		);
 
 		if( isset( $t_font_map[$t_font] ) ) {
