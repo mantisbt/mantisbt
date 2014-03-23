@@ -258,41 +258,41 @@ function getClassProperties($p_classname, $p_type='public', $p_return_object = f
  * @access public
  */
 function get_font_path() {
-		$t_font_path = config_get_global( 'system_font_folder' );
-		if( $t_font_path == '' ) {
-			if ( is_windows_server() ) {
-				$sroot = $_SERVER['SystemRoot'];
-				if( empty($sroot) ) {
-					return '';
-				} else {
-					$t_font_path = $sroot.'/fonts/';
-				}
+	$t_font_path = config_get_global( 'system_font_folder' );
+	if( $t_font_path == '' ) {
+		if ( is_windows_server() ) {
+			$t_sys_root = $_SERVER['SystemRoot'];
+			if( empty($t_sys_root) ) {
+				return '';
 			} else {
-				if( file_exists( '/usr/share/fonts/corefonts/' ) ) {
-					$t_font_path = '/usr/share/fonts/corefonts/';
-				} else if( file_exists( '/usr/share/fonts/truetype/msttcorefonts/' ) ) {
-					$t_font_path = '/usr/share/fonts/truetype/msttcorefonts/';
-				} else if( file_exists( '/usr/share/fonts/msttcorefonts/' ) ) {
-					$t_font_path = '/usr/share/fonts/msttcorefonts/';
-				} else {
-					$t_font_path = '/usr/share/fonts/truetype/';
-				}
+				$t_font_path = $t_sys_root . '/fonts/';
+			}
+		} else {
+			if( file_exists( '/usr/share/fonts/corefonts/' ) ) {
+				$t_font_path = '/usr/share/fonts/corefonts/';
+			} else if( file_exists( '/usr/share/fonts/truetype/msttcorefonts/' ) ) {
+				$t_font_path = '/usr/share/fonts/truetype/msttcorefonts/';
+			} else if( file_exists( '/usr/share/fonts/msttcorefonts/' ) ) {
+				$t_font_path = '/usr/share/fonts/msttcorefonts/';
+			} else {
+				$t_font_path = '/usr/share/fonts/truetype/';
 			}
 		}
-		return $t_font_path;
+	}
+	return $t_font_path;
 }
 
 function finfo_get_if_available() {
-	
+
 	if ( class_exists( 'finfo' ) ) {
 		$t_info_file = config_get( 'fileinfo_magic_db_file' );
-	
+
 		if ( is_blank( $t_info_file ) ) {
 			$finfo = new finfo( FILEINFO_MIME );
 		} else {
 			$finfo = new finfo( FILEINFO_MIME, $t_info_file );
 		}
-	
+
 		if ( $finfo ) {
 			return $finfo;
 		}
