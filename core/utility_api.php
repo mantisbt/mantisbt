@@ -255,7 +255,13 @@ function getClassProperties($p_classname, $p_type='public', $p_return_object = f
 
 /**
  * return string of system font path
+ * If {@see $g_system_font_folder} is not defined, on Linux systems the api
+ * attempts to find a fonts directory by checking for existence of several
+ * directories below the base fonts path (basically trying to match
+ * /usr/share/fonts/[truetype/|corefonts/][msttcorefonts/|dejavu/]);
+ * the first directory found to exist will be used as font path.
  * @access public
+ * @return string Font path
  */
 function get_font_path() {
 	$t_font_path = config_get_global( 'system_font_folder' );
@@ -268,15 +274,18 @@ function get_font_path() {
 				$t_font_path = $t_sys_root . '/fonts/';
 			}
 		} else {
-			if( file_exists( '/usr/share/fonts/corefonts/' ) ) {
-				$t_font_path = '/usr/share/fonts/corefonts/';
-			} else if( file_exists( '/usr/share/fonts/truetype/msttcorefonts/' ) ) {
-				$t_font_path = '/usr/share/fonts/truetype/msttcorefonts/';
-			} else if( file_exists( '/usr/share/fonts/msttcorefonts/' ) ) {
-				$t_font_path = '/usr/share/fonts/msttcorefonts/';
-			} else {
-				$t_font_path = '/usr/share/fonts/truetype/';
+			$t_base = '/usr/share/fonts';
+			$t_font_dir1 = array( '/truetype/', 'corefonts/', '/' );
+			$t_font_dir2 = array( 'msttcorefonts/', 'dejavu/', '' );
+			foreach( $t_font_dir1 as $t_dir1 ) {
+				foreach( $t_font_dir2 as $t_dir2 ) {
+					$t_font_path = $t_base . $t_dir1 . $t_dir2;
+					if( file_exists( $t_font_path ) ) {
+						return $t_font_path;
+					}
+				}
 			}
+			$t_font_path = $t_base;
 		}
 	}
 	return $t_font_path;
