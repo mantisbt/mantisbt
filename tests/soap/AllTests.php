@@ -53,36 +53,36 @@ require_once 'TagTest.php';
  */
 class Soap_AllTests extends PHPUnit_Framework_TestSuite
 {
-    protected function setUp()
-    {
-        if ( ! extension_loaded('soap') ) {
-            $this->markTestSuiteSkipped(
-                    'The SOAP extension is not available.'
-                    );
-        }
+	protected function setUp()
+	{
+	if ( ! extension_loaded('soap') ) {
+		$this->markTestSuiteSkipped(
+			'The SOAP extension is not available.'
+			);
+	}
 
-    }
+	}
 
-    public static function suite()
-    {
-        $suite = new Soap_AllTests('SOAP Interface');
+	public static function suite()
+	{
+		$suite = new Soap_AllTests('SOAP Interface');
 
-        $suite->addTestSuite('EnumTest');
-        $suite->addTestSuite('IssueAddTest');
-        $suite->addTestSuite('IssueMonitorTest');
-        $suite->addTestSuite('IssueNoteTest');
-        $suite->addTestSuite('IssueUpdateTest');
-        $suite->addTestSuite('FilterTest');
-        $suite->addTestSuite('AttachmentTest');
-        $suite->addTestSuite('LoginTest');
-        $suite->addTestSuite('CategoryTest');
-        $suite->addTestSuite('CompressionTest');
-	    $suite->addTestSuite('ProjectTest');
-	    $suite->addTestSuite('VersionTest');
-	    $suite->addTestSuite('RelationshipTest');
-	    $suite->addTestSuite('UserTest');
-	    $suite->addTestSuite('TagTest');
+		$suite->addTestSuite('EnumTest');
+		$suite->addTestSuite('IssueAddTest');
+		$suite->addTestSuite('IssueMonitorTest');
+		$suite->addTestSuite('IssueNoteTest');
+		$suite->addTestSuite('IssueUpdateTest');
+		$suite->addTestSuite('FilterTest');
+		$suite->addTestSuite('AttachmentTest');
+		$suite->addTestSuite('LoginTest');
+		$suite->addTestSuite('CategoryTest');
+		$suite->addTestSuite('CompressionTest');
+		$suite->addTestSuite('ProjectTest');
+		$suite->addTestSuite('VersionTest');
+		$suite->addTestSuite('RelationshipTest');
+		$suite->addTestSuite('UserTest');
+		$suite->addTestSuite('TagTest');
 
-        return $suite;
-    }
+		return $suite;
+	}
 }

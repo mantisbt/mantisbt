@@ -85,59 +85,58 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	 * Soal Client Options Array
 	 */
 	private   $defaultSoapClientOptions = array(  'trace'      => true,
-								                  'exceptions' => true,
-								        		  'cache_wsdl' => WSDL_CACHE_NONE,
-								        		  'trace'      => true
-								               );
+												  'exceptions' => true,
+												  'cache_wsdl' => WSDL_CACHE_NONE,
+												  'trace'      => true
+											   );
 
 	/**
 	 * setUp
 	 */
-    protected function setUp()
-    {
-    	if (!isset($GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED']) ||
+	protected function setUp()
+	{
+		if (!isset($GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED']) ||
 			!$GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED']) {
 			$this->markTestSkipped( 'The Soap tests are disabled.' );
 		}
 
-		$this->client = new
-		    SoapClient(
-		       $GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'],
-		       	array_merge($this->defaultSoapClientOptions, $this->extraSoapClientFlags()
-				)
-		    );
+		$this->client = new SoapClient(
+			$GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'],
+			array_merge($this->defaultSoapClientOptions, $this->extraSoapClientFlags()
+			)
+		);
 
-	    $this->mantisPath = substr($GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'], 0, -strlen('api/soap/mantisconnect.php?wsdl'));
-    }
+		$this->mantisPath = substr($GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'], 0, -strlen('api/soap/mantisconnect.php?wsdl'));
+	}
 
-    /**
-     * @return an array of extra options to be passed to the SoapClient constructor
-     */
-    protected function extraSoapClientFlags() {
+	/**
+	 * @return an array of extra options to be passed to the SoapClient constructor
+	 */
+	protected function extraSoapClientFlags() {
 
-    	return array();
-    }
+		return array();
+	}
 
 	/**
 	 * tearDown
 	 */
-    protected function tearDown() {
+	protected function tearDown() {
 
-    	foreach ( $this->versionIdsToDelete as $versionIdToDelete ) {
-    		$this->client->mc_project_version_delete($this->userName, $this->password, $versionIdToDelete);
-    	}
+		foreach ( $this->versionIdsToDelete as $versionIdToDelete ) {
+			$this->client->mc_project_version_delete($this->userName, $this->password, $versionIdToDelete);
+		}
 
-    	foreach ( $this->issueIdsToDelete as $issueIdToDelete ) {
-    		$this->client->mc_issue_delete(
-    			$this->userName,
-    			$this->password,
-    			$issueIdToDelete);
-    	}
+		foreach ( $this->issueIdsToDelete as $issueIdToDelete ) {
+			$this->client->mc_issue_delete(
+				$this->userName,
+				$this->password,
+				$issueIdToDelete);
+		}
 
-    	foreach ( $this->tagIdsToDelete as $tagIdToDelete ) {
-    		$this->client->mc_tag_delete ( $this->userName, $this->password, $tagIdToDelete );
-    	}
-    }
+		foreach ( $this->tagIdsToDelete as $tagIdToDelete ) {
+			$this->client->mc_tag_delete ( $this->userName, $this->password, $tagIdToDelete );
+		}
+	}
 
 	/**
 	 * return default project id
@@ -149,20 +148,20 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	/**
 	 * return default category
 	 */
-    protected function getCategory() {
- 		return 'General';
-    }
+	protected function getCategory() {
+		return 'General';
+	}
 
 	/**
 	 * Skip if time tracking is not enabled
 	 */
-    protected function skipIfTimeTrackingIsNotEnabled() {
+	protected function skipIfTimeTrackingIsNotEnabled() {
 
-    	$timeTrackingEnabled = $this->client->mc_config_get_string($this->userName, $this->password, 'time_tracking_enabled');
+		$timeTrackingEnabled = $this->client->mc_config_get_string($this->userName, $this->password, 'time_tracking_enabled');
 		if ( !$timeTrackingEnabled ) {
 			$this->markTestSkipped('Time tracking is not enabled');
 		}
-    }
+	}
 
 	/**
 	 * getIssueToAdd
