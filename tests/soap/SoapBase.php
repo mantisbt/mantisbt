@@ -67,6 +67,11 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	protected $mantisPath;
 
 	/**
+	 * Project ID
+	 */
+	protected $projectId = 1;
+
+	/**
 	 * Array of Issue IDs to delete
 	 */
 	private   $issueIdsToDelete = array();
@@ -100,6 +105,11 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 			$this->markTestSkipped( 'The Soap tests are disabled.' );
 		}
 
+		$this->assertTrue(
+			array_key_exists('MANTIS_TESTSUITE_SOAP_HOST', $GLOBALS) &&
+			!empty($GLOBALS['MANTIS_TESTSUITE_SOAP_HOST']),
+			"You must define 'MANTIS_TESTSUITE_SOAP_HOST' in your bootstrap file"
+		);
 		$this->client = new SoapClient(
 			$GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'],
 			array_merge($this->defaultSoapClientOptions, $this->extraSoapClientFlags()
@@ -107,6 +117,30 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 		);
 
 		$this->mantisPath = substr($GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'], 0, -strlen('api/soap/mantisconnect.php?wsdl'));
+
+		if (array_key_exists('MANTIS_TESTSUITE_USERNAME', $GLOBALS)) {
+			$this->userName = $GLOBALS['MANTIS_TESTSUITE_USERNAME'];
+		} else {
+			$this->userName = 'administrator';
+		}
+
+		if (array_key_exists('MANTIS_TESTSUITE_PASSWORD', $GLOBALS)) {
+			$this->password = $GLOBALS['MANTIS_TESTSUITE_PASSWORD'];
+		} else {
+			$this->password = 'root';
+		}
+
+		if (array_key_exists('MANTIS_TESTSUITE_EMAIL', $GLOBALS)) {
+			$this->email = $GLOBALS['MANTIS_TESTSUITE_EMAIL'];
+		} else {
+			$this->email = 'root@localhost';
+		}
+
+		if (array_key_exists('MANTIS_TESTSUITE_PROJECT_ID', $GLOBALS)) {
+			$this->projectId = $GLOBALS['MANTIS_TESTSUITE_PROJECT_ID'];
+		} else {
+			$this->projectId = 1;
+		}
 	}
 
 	/**
@@ -141,9 +175,9 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	/**
 	 * return default project id
 	 */
-    protected function getProjectId() {
-    	return 1;
-    }
+	protected function getProjectId() {
+		return $this->projectId;
+	}
 
 	/**
 	 * return default category
