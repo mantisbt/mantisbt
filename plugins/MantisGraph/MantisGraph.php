@@ -63,10 +63,6 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 */
 	function init() {
 		spl_autoload_register( array( 'MantisGraphPlugin', 'autoload' ) );
-
-		$t_path = config_get_global('plugin_path' ). plugin_get_current() . '/core/';
-
-		set_include_path(get_include_path() . PATH_SEPARATOR . $t_path);
 	}
 
 	/**

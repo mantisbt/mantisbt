@@ -798,6 +798,23 @@ function plugin_include( $p_basename, $p_child = null ) {
 }
 
 /**
+ * Allows a plugin page to require a plugin-specific API
+ * @param string $p_file The API to be included
+ * @param string $p_basename Plugin's basename (defaults to current plugin)
+ */
+function plugin_require_api( $p_file, $p_basename = null ) {
+	if( is_null( $p_basename ) ) {
+		$t_current = plugin_get_current();
+	} else {
+		$t_current = $p_basename;
+	}
+
+	$t_path = config_get_global( 'plugin_path' ) . $t_current . '/';
+
+	require_once( $t_path . $p_file );
+}
+
+/**
  * Register a plugin with MantisBT.
  * The plugin class must already be loaded before calling.
  * @param string $p_basename Plugin classname without 'Plugin' postfix
