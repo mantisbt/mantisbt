@@ -31,14 +31,12 @@ if( OFF == plugin_config_get( 'eczlibrary' ) ) {
 	}
 	$t_jpgraph_path = plugin_config_get( 'jpgraph_path', '' );
 	if( $t_jpgraph_path !== '' ) {
-		set_include_path(get_include_path() . PATH_SEPARATOR . $t_jpgraph_path );
-		$ip = get_include_path();
-		require_once( 'jpgraph.php' );
-		require_once( 'jpgraph_line.php' );
-		require_once( 'jpgraph_bar.php' );
-		require_once( 'jpgraph_pie.php' );
-		require_once( 'jpgraph_pie3d.php' );
-		require_once( 'jpgraph_canvas.php' );
+		require_once( $t_jpgraph_path . 'jpgraph.php' );
+		require_once( $t_jpgraph_path . 'jpgraph_line.php' );
+		require_once( $t_jpgraph_path . 'jpgraph_bar.php' );
+		require_once( $t_jpgraph_path . 'jpgraph_pie.php' );
+		require_once( $t_jpgraph_path . 'jpgraph_pie3d.php' );
+		require_once( $t_jpgraph_path . 'jpgraph_canvas.php' );
 	} else {
 		require_lib( 'jpgraph/jpgraph.php' );
 		require_lib( 'jpgraph/jpgraph_line.php' );

@@ -14,8 +14,6 @@
  * @link http://www.mantisbt.org
  */
 
-set_include_path( '../../library' );
-
 # Path to MantisBT is assumed to be the grand parent directory.  If this is not
 # the case, then this variable should be set to the MantisBT path.
 # This can not be a configuration option, then MantisConnect configuration
