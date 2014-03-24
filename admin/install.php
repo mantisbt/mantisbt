@@ -838,12 +838,62 @@ if( 3 == $t_install_state ) {
 			}
 		}
 
+		$dict = NewDataDictionary( $g_db );
+
+		# Special processing for specific schema versions
+		# This allows execution of additional install steps, which are
+		# not a Mantis schema upgrade but nevertheless required due to
+		# changes in the code
+
+		if( $t_last_update > 51 && $t_last_update < 189 ) {
+			# Since MantisBT 1.1.0 / ADOdb 4.96 (corresponding to schema 51)
+			# 'L' columns are BOOLEAN instead of SMALLINT
+			# Check for any DB discrepancies and update columns if needed
+			$t_bool_columns = check_pgsql_bool_columns();
+			if( $t_bool_columns !== true ) {
+				# Some columns need converting
+				$t_msg = "PostgreSQL: check Boolean columns' actual type";
+				if( is_array( $t_bool_columns ) ) {
+					print_test(
+						$t_msg,
+						count( $t_bool_columns ) == 0,
+						false,
+						count( $t_bool_columns ) . ' columns must be converted to BOOLEAN'
+					);
+				} else {
+					# We did not get an array => error occured
+					print_test( $t_msg, false, true, $t_bool_columns );
+				}
+
+				# Convert the columns
+				foreach( $t_bool_columns as $t_row ) {
+					extract( $t_row, EXTR_PREFIX_ALL, 'v' );
+					$t_null = $v_is_nullable ? 'NULL' : 'NOT NULL';
+					$t_default = is_null( $v_column_default ) ? 'NULL' : $v_column_default;
+					$t_sqlarray = $dict->AlterColumnSQL(
+						$v_table_name,
+						"$v_column_name L $t_null DEFAULT $t_default"
+					);
+					print_test(
+						"Converting column $v_table_name.$v_column_name to BOOLEAN",
+						2 == $dict->ExecuteSQLArray( $t_sqlarray, false ),
+						true,
+						print_r( $t_sqlarray, true )
+					);
+					if( $g_failed ) {
+						# Error occured, bail out
+						break;
+					}
+				}
+			}
+		}
+		# End of special processing for specific schema versions
+
 		while(( $i <= $lastid ) && !$g_failed ) {
 			if( !$f_log_queries ) {
 				echo '<tr><td bgcolor="#ffffff">';
 			}
 
-			$dict = @NewDataDictionary( $g_db );
 			$t_sql = true;
 			$t_target = $upgrade[$i][1][0];
 

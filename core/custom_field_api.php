@@ -116,7 +116,7 @@ function custom_field_cache_row( $p_field_id, $p_trigger_errors = true ) {
 	$t_result = db_query_bound( $t_query, array( $p_field_id ) );
 
 	$t_row = db_fetch_array( $t_result );
-	
+
 	if( !$t_row ) {
 		if( $p_trigger_errors ) {
 			error_parameters( 'Custom ' . $p_field_id );
@@ -631,6 +631,8 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 
 		$t_custom_field_table = db_get_table( 'custom_field' );
 		$t_custom_field_project_table = db_get_table( 'custom_field_project' );
+
+		db_param_push();
 
 		if( ALL_PROJECTS == $p_project_id ) {
 			$t_project_user_list_table = db_get_table( 'project_user_list' );

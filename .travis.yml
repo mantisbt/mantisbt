@@ -27,9 +27,7 @@ branches:
     - master-2.0.x
 
 matrix:
-  # Until #14398 is fixed, PostgreSQL should not cause entire build to fail
   allow_failures:
-    - env: DB=pgsql
 
 # Notifications
 
