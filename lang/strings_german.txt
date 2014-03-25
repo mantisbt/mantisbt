@@ -1235,7 +1235,6 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maximale 
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Diese Operation würde eine Schleife in der Unterprojekthierarchie erzeugen.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Sie können das letzte Administrator-Benutzerkonto nicht entfernen oder herabstufen. Um diese Aktion durchzuführen, muss erst ein anderes Administrator-Benutzerkonto erstellt werden.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Fehler bei der Seitenweiterleitung, versichern Sie sich, dass keine Leerzeichen außerhalb des PHP-Blocks (&lt;?php ?&gt;) in config_inc.php oder custom_*.php-Dateien existieren.';
-$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'Die Twitter-Integration verlangt die PHP-cURL-Erweiterung, die derzeit nicht installiert ist.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Es konnte kein Tag dieses Namens gefunden werden.';
 $MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'Es existiert bereits ein Tag dieses Namens.';
 $MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Der Tag-Name ist ungültig.';

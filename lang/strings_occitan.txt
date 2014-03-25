@@ -1166,7 +1166,6 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Nombre Ma
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Aquesta operacion va crear una recursion dins la ierarquia dels sosprojèctes.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Podètz pas suprimir o destituir l\'unic compte d\'administrator del sistèma. Per realizar l\'accion qu\'avètz demandada vos cal, d\'en primièr crear un autre compte d\'administrator.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Error de reencaminament, verificatz qu\'i a pas d\'espacis a l\'exterior del blòt PHP block (&lt;?php ?&gt;) dins los fichièrs config_inc.php o custom_*.php.';
-$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'L\'integracion amb Twitter necessita l\'extension PHP CURL qu\'es pas installada.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'La balisa amb aqueste nom es introbabla.';
 $MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'Una balisa amb aqueste nom existís ja.';
 $MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Aqueste nom de balisa es invalid.';

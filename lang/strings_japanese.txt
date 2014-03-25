@@ -1220,7 +1220,6 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'リクエ
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'その操作によってサブプロジェクトがループしてしまいます。';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = '最後の一人の管理者アカウントの削除または管理者権限除去はできません。要求した操作を行うためには、まず他の管理者アカウントを作成する必要があります。';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = '画面遷移に失敗しました。config_inc.php や custom_*.php ファイルの PHP ブロック (&lt;?php ?&gt;) の外側にスペースがないことを確認してください。';
-$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'Twitter との統合は PHP の cURL 拡張が必要ですが、インストールされていません。';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = '該当のタグを見つけられませんでした。';
 $MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'そのタグ名は既に登録済みです。';
 $MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'そのタグ名は不正です。';

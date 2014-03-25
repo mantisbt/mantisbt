@@ -890,7 +890,6 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Įvesti duomenys nesutam
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Neteisingas arba jau panaudotas patvirtinimo URL adresas. Užsiregistruokite dar kartą.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maksimalus laukiančių prašymų skaičius pasiektas. Susisiekite su administratoriumi';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Ši operacija sukurtų uždatą ratą sub-projekto hierarchijoje.';
-$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'Twitter integracijai reikalingas PHP CURL išplėtimas, kuris nėra įdiegtas.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Nepavyko rasti gairės tokiu pavadinimu.';
 $MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'Gairė tokiu pavadinimu jau egzistuoja.';
 $MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Šis gairės pavadinimas yra neteisingas.';

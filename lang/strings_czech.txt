@@ -1150,7 +1150,6 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Dosaženo
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Tato operace by vytvořila smyčku v hierarchii podprojektů.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Není možné změnit úroveň přístupu jediného administrátora v systému.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Chybné přesměrování stránky, ověřte zda nejsou mezery mimo blok PHP (&lt;?php ?&gt;) v souboru config_inc.php nebo v souborech custom_*.php';
-$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'Integrace Twitteru vyžaduje rozšíření PHP cURL, které není nainstalováno.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Štítek s tímto jménem nebyl nalezen.';
 $MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'Štítek s tímto jménem už existuje.';
 $MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Chybné jméno štítku.';

@@ -1229,7 +1229,6 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maks anta
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Operasjonen vil medføre en uendelig løkke i hierarkiet av underprosjekter.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Du kan ikke fjerne eller degradere den siste administratorkontoen. For å utføre handlingen du ba om må du først opprette en annen administratorkonto.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Feil ved omdirrigering. Vennligst kontrollere at det ikke er noen mellomrom utenfor PHP-kode (&lt;?php ?&gt;) i config_inc.php eller i custom_*.php-filene';
-$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'Twitter-integrasjon krever PHP cURL-extension, som ikke er installert.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Kunne ikke finne en tagg med det navnet.';
 $MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'Det eksisterer allerede et nøkkelord med samme navn';
 $MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Taggnavnet er ugyldig.';

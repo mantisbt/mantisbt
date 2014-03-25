@@ -1230,7 +1230,6 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Número m
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Esa operación puede crear un ciclo recursivo en la jerarquía del subproyecto.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'No puedes remover o rebajar la última cuenta de administrador. Para realizar la acción que solicitaste, primero necesitas crear otra cuenta de administrador.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Error de redirección. Asegúrese que no haya espacios fuera del bloque PHP (&lt;?php ?&gt;) en config_inc.php o en los archivos custom_*.php.';
-$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'La integración con Twitter requiere la extensión CURL de PHP, que no está instalada.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'No se encuentra una etiqueta con ese nombre.';
 $MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'Ya existe una etiqueta con ese nombre.';
 $MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'El nombre de la etiqueta no es válido.';

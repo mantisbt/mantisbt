@@ -1196,7 +1196,6 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Kyselyjen
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Tämä toiminto aiheuttaisi päättymättömän silmukan aliprojektihierarkiassa.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Ainoan ylläpitäjän oikeustasoa ei voi muuttaa. Luo toinen ylläpitotili jonka oikeustasoa voit muokata.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Sivunohjaus virhe. Varmista, ettei PHP-lohkon ulkopuolella ole välilyöntejä (&lt;?php ?&gt;) tiedostossa config_inc.php tai kustomoiduissa custom_*.php -tiedostoissa.';
-$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'Twitter-liittymä vaatii PHP cURL -laajennuksen jota ei ole asennettu.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Tägiä ei löytynyt tällä nimellä.';
 $MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'Tällä nimellä on jo olemassa tägi.';
 $MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Tägin nimi on epäkelpo.';

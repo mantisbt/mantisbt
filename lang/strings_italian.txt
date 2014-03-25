@@ -1067,7 +1067,6 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Raggiunto
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Questa operazione creerebbe una circolarità nella gerarchia dei sottoprogetti.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Non puoi modificare il livello di accesso nell\'unico amministratore del sistema.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Errore nella redirezione della pagina, assicurati non ci siani spazi fuori dal blocco PHP (&lt;?php ?&gt;) nel file config_inc.php o nei file custom_*.php';
-$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'L\'integrazione con Twitter necessita dell\'estensione CURL per PHP che non risulta installata.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Non esiste un\'etichetta con quel nome.';
 $MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'Esiste già un\'etichetta con quel nome.';
 $MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Il nome dell\'etichetta non è valido.';

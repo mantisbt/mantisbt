@@ -1233,7 +1233,6 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Maximali 
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Die Operation deet e Schlyfe in dr Unterprojäkthierarchii erzyge.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Du chasch s letscht Administrator-Benutzerkonto nit useneh oder abesetze. Go die Aktion durfiere muess zerscht e ander Administrator-Benutzerkonto aagleit wäre.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Fähler bi dr Sytewyterleitig, versicher Di, ass es kei Läärzeiche git usserhalb vum PHP-Block (&lt;?php ?&gt;) in config_inc.php oder custom_*.php-Dateie.';
-$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'D Twitter-Integration verlangt d PHP CURL-Erwyterig, wu zurzyt nit inschtalliert isch.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'S isch kei Markierig mit däm Name gfunde wore.';
 $MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'S git scho ne Tag mit däm Name.';
 $MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Dr Tag-Name isch nit giltig.';

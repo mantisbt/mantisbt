@@ -1201,7 +1201,6 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'العد�
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'هذه العمليه ستنشئ حلقه تكرار فى بناء المشروع الفرعى.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'أنت لا يمكنك إزاله آخر حساب إدارى. لتنفيذ الفعل الذى طلبته، تحتاج إلى إنشاء حساب إدارى آخر.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'خطأ تحويل صفحه، تأكد من أنه لا توجد فراغات خارج قطعه PHP (&lt;?php ?&gt;) فى ملفات config_inc.php أو custom_*.php.';
-$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'دمج تويتر يتطلب الامتداد PHP CURL الذى هو غير منصب.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'لم يمكن العثور على وسم بهذا الاسم.';
 $MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'وسم بهذا الاسم موجود بالفعل.';
 $MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'اسم الوسم هذا غير صحيح.';

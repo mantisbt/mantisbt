@@ -1160,7 +1160,6 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Dosiahnet
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Táto operácia by vytvorila slučku v hierarchii podprojektov.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Nie je možné odstrániť alebo zmeniť úroveň prístupu jediného administrátora v systéme. Na vykonanie tohto úkonu musí byť vytvorený iný účet administrátora.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Chybné presmerovanie stránky, overte či nie sú medzery mimo bloku PHP (&lt;?php ?&gt;) v súbore config_inc.php alebo v súboroch custom_*.php';
-$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'Integrácia Twitteru vyžaduje rozšírenie PHP cURL, ktoré nie je nainštalované.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Štítok s týmto menom nebol nájdený.';
 $MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'Štítok s týmto menom už existuje.';
 $MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Chybné meno štítku.';

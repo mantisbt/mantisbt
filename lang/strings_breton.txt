@@ -1218,7 +1218,6 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Tizhet eo
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Gant an oberiadenn-se e vefe krouet ur boukl en urzhaz an israktresoù.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Ne c\'hallit ket lemel pe terriñ ar gont merour diwezhañ. Evit seveniñ an ober hoc\'h eus goulennet e rankit krouiñ ur gont merour all da gentañ.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Fazi adkas, gwiriit hag-eñ n\'eus ket esaouennoù e-maez ar bloc\'had PHP (&lt;?php ?&gt;) er restroù config_inc.php pe custom_*.php.';
-$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'An enframmadur gant Twitter en deus ezhomm eus an astenn PHP CURL ha n\'eo ket staliet.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Ne c\'haller ket kavout ur valizenn en anv-se.';
 $MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'Ur valizenn en anv-se zo anezhi dija.';
 $MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Direizh eo anv ar valizenn.';

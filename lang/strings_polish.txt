@@ -1161,7 +1161,6 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Osiągni�
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Ta operacja spowodowałaby pętlę w hierarchii podprojektów.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Nie możesz usunąć lub zmienić poziomu dostępu jedynego administratora systemu. Przeprowadzenie operacji, którą próbujesz wykonać będzie możliwe dopiero po utworzeniu innego konta administratora.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Błąd przekierowania, prosze upenić się, że spacje nie występują poza blokiem PHP (&lt;?php ?&gt;) w plikach config_inc.php lub custom_*.php.';
-$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'Integracja z Twitter-em wymaga bibliotek PHP CURL, które nie zostały zainstalowane.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Nie można znaleźć taga o podanej nazwie.';
 $MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'Tag o podanej nazwie już istnieje.';
 $MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Nazwa tagu jest nieprawidłowa.';

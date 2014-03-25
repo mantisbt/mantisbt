@@ -1129,7 +1129,6 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Naabot na
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Lilikha ng isang likaw/pag-ikot ang ganyang pagsasagawa/operasyon sa loob ng kahanayan/hirarkiya ng kabahaging proyekto.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Hindi mo mababago ang kaantasan ng pagpunta/akseso ng nag-iisang TAGAPANGASIWA sa loob ng sistema.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Kamalian sa pagtuturo/pagpapapunta sa ibang pahina, siguraduhing walang mga patlang sa labas ng bloke ng PHP (&lt;?php ?&gt;) na nasa loob ng mga talaksang config_inc.php o custom_*.php.';
-$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'Nangangailangan ang pagsasama ng pangsiyap (\'\'twitter\'\') ng hindi pa nailuluklok na karugtong na PHP CURL.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Hindi matagpuan ang isang tatak na may ganyang pangalan.';
 $MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'Umiiral na ang isang tatak na may ganyang pangalan.';
 $MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Hindi tanggap ang pangalan ng ganyang tatak.';

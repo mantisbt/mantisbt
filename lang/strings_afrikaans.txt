@@ -568,7 +568,6 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Ondersteuning vir borgskap is ni
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Borgskap %1$d nie gevind nie.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Borgskap (%1$s) lê onder nie minimum bedrag (%2$s).';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_NOT_FOUND] = 'Die verwantskap is nie gevind nie.';
-$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'Twitter-integrasie benodig die PHP cURL-uitbreiding wat nie geïnstalleer is nie.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Daar is geen etiket met die naam nie.';
 $MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'Daar bestaan reeds \'n etiket met die naam.';
 $MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'Die etiketnaam is ongeldig.';

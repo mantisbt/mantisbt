@@ -1125,7 +1125,6 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'הושג 
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'הפעולה הזאת תיצור לולאה בעץ התת פרויקטים.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'אינך יכול לשנות את רמת הגישה של המנהל היחיד במערכת.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'שגיאה בהפניית דף, יש לבדוק שאין רווחים מחוץ לבלוק PHP (&lt;?php ?&gt;) בקבצים config_inc.php או custom_*.php.';
-$MANTIS_ERROR[ERROR_TWITTER_NO_CURL_EXT] = 'לשם אינטגרציה עם טוויטר נדרשת ההרחבה PHP CURL שלא מותקנת.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'לא נמצא תג בשם הזה.';
 $MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'כבר קיים תג בשם הזה.';
 $MANTIS_ERROR[ERROR_TAG_NAME_INVALID] = 'שם התג הזה לא תקין.';
