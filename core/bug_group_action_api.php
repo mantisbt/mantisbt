@@ -102,8 +102,6 @@ function bug_group_action_print_bug_list( $p_bug_ids_array ) {
 	$t_i = 1;
 
 	foreach( $p_bug_ids_array as $t_bug_id ) {
-		$t_class = sprintf( "row-%d", ( $t_i++ % 2 ) + 1 );
-
 		# choose color based on status
 		$status_label = html_get_status_css_class( bug_get_field( $t_bug_id, 'status' ), auth_get_current_user_id(), bug_get_field( $t_bug_id, 'project_id' ) );
 

@@ -1040,7 +1040,7 @@ function print_column_plugin( $p_column_object, $p_bug, $p_columns_target = COLU
  * @access public
  */
 function print_column_edit( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	global $t_icon_path, $t_update_bug_threshold;
+	global $t_icon_path;
 
 	echo '<td class="column-edit">';
 

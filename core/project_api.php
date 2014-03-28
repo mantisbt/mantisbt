@@ -633,7 +633,6 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 
 	$t_user_table = db_get_table( 'user' );
 	$t_project_user_list_table = db_get_table( 'project_user_list' );
-	$t_project_table = db_get_table( 'project' );
 
 	$t_on = ON;
 	$t_users = array();

@@ -326,7 +326,7 @@ function bugnote_delete_all( $p_bug_id ) {
 	# Delete the corresponding bugnotes
 	$query = "DELETE FROM $t_bugnote_table
 		WHERE bug_id=" . db_param();
-	$result = db_query_bound( $query, array( (int)$p_bug_id ) );
+	db_query_bound( $query, array( (int)$p_bug_id ) );
 
 	# db_query errors on failure so:
 	return true;
