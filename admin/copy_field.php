@@ -68,13 +68,13 @@ $t_string_table = db_get_table( 'custom_field_string' );
 $t_bug_table = db_get_table( 'bug' );
 $query = 'SELECT * FROM ' . $t_string_table . ' WHERE field_id = ' . db_param() . ' and value <> ' . db_param();
 
-$result = @db_query_bound( $query, array( $f_source_field_id, '' ) );
-if( FALSE == $result ) {
+$t_result = @db_query_bound( $query, array( $f_source_field_id, '' ) );
+if( FALSE == $t_result ) {
 	echo '<p>No fields need to be updated.</p>';
 }
 else {
 
-	$count = db_num_rows( $result );
+	$count = db_num_rows( $t_result );
 	echo '<p>Found ' . $count . ' fields to be updated.</p>';
 	$t_failures = 0;
 
@@ -86,7 +86,7 @@ else {
 	}
 
 	for( $i = 0;$i < $count;$i++ ) {
-		$row = db_fetch_array( $result );
+		$row = db_fetch_array( $t_result );
 		extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 		# trace bug id back to project

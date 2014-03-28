@@ -75,13 +75,13 @@ $query = "SELECT b.id, b.date_submitted, b.last_updated, MAX(h.date_modified) as
 		WHERE b.status >=" . db_param() . " AND $specific_where
 		GROUP BY b.id, b.status, b.date_submitted, b.last_updated
 		ORDER BY b.id ASC";
-$result = db_query_bound( $query, array( $t_resolved, $t_resolved ) );
+$t_result = db_query_bound( $query, array( $t_resolved, $t_resolved ) );
 $bug_count = 0;
 
 $t_bug_id       = 0;
 $t_largest_diff = 0;
 $t_total_time   = 0;
-while( $row = db_fetch_array( $result ) ) {
+while( $row = db_fetch_array( $t_result ) ) {
 	$bug_count++;
 	$t_date_submitted = $row['date_submitted'];
 	$t_id = $row['id'];

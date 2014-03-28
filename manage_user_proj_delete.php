@@ -68,7 +68,7 @@ helper_ensure_confirmed( lang_get( 'remove_user_sure_msg' ) .
 	'<br/>' . lang_get( 'project_name_label' ) . lang_get( 'word_separator' ) . $t_project_name,
 	lang_get( 'remove_user_button' ) );
 
-$result = project_remove_user( $f_project_id, $f_user_id );
+project_remove_user( $f_project_id, $f_user_id );
 
 form_security_purge( 'manage_user_proj_delete' );
 

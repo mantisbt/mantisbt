@@ -182,9 +182,9 @@ function email_queue_get( $p_email_id ) {
 	$t_email_table = db_get_table( 'email' );
 
 	$query = 'SELECT * FROM ' . $t_email_table . ' WHERE email_id=' . db_param();
-	$result = db_query_bound( $query, array( $p_email_id ) );
+	$t_result = db_query_bound( $query, array( $p_email_id ) );
 
-	$t_row = db_fetch_array( $result );
+	$t_row = db_fetch_array( $t_result );
 
 	return email_queue_row_to_object( $t_row );
 }
@@ -212,10 +212,10 @@ function email_queue_get_ids( $p_sort_order = 'DESC' ) {
 	$t_email_table = db_get_table( 'email' );
 
 	$query = "SELECT email_id FROM $t_email_table ORDER BY email_id $p_sort_order";
-	$result = db_query_bound( $query );
+	$t_result = db_query_bound( $query );
 
 	$t_ids = array();
-	while(( $t_row = db_fetch_array( $result ) ) !== false ) {
+	while(( $t_row = db_fetch_array( $t_result ) ) !== false ) {
 		$t_ids[] = $t_row['email_id'];
 	}
 

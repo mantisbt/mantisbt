@@ -516,9 +516,9 @@ function category_cache_array_rows( $p_cat_id_array ) {
 				LEFT JOIN $t_project_table p
 					ON c.project_id=p.id
 				WHERE c.id IN (" . implode( ',', $c_cat_id_array ) . ')';
-	$result = db_query_bound( $query );
+	$t_result = db_query_bound( $query );
 
-	while( $row = db_fetch_array( $result ) ) {
+	while( $row = db_fetch_array( $t_result ) ) {
 		$g_category_cache[(int) $row['id']] = $row;
 	}
 	return;

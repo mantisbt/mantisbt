@@ -174,7 +174,7 @@ if ( $f_protected && $t_old_protected ) {
 	$query_params = array( $c_username, $c_email, $c_access_level, $c_enabled, $c_protected, $c_realname, $c_user_id );
 }
 
-$result = db_query_bound( $query, $query_params );
+$t_result = db_query_bound( $query, $query_params );
 
 if ( $f_send_email_notification ) {
 	lang_push( user_pref_get_language( $f_user_id ) );
@@ -214,14 +214,14 @@ $t_redirect_url = 'manage_user_edit_page.php?user_id=' . $c_user_id;
 
 form_security_purge('manage_user_update');
 
-html_page_top( null, $result ? $t_redirect_url : null );
+html_page_top( null, $t_result ? $t_redirect_url : null );
 
 if ( $f_protected && $t_old_protected ) {				# PROTECTED
     echo '<div class="failure-msg">';
     echo lang_get( 'manage_user_protected_msg' ) . '<br />';
     print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
     echo '</div>';
-} else if ( $result ) {					# SUCCESS
+} else if ( $t_result ) {					# SUCCESS
     html_operation_successful( $t_redirect_url );
 }
 

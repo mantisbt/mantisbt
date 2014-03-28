@@ -180,7 +180,7 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 				FROM $t_mantis_bug_history_table
 				WHERE bug_id=" . db_param() . "
 				ORDER BY date_modified $t_history_order,id";
-	$result = db_query_bound( $query, array( $p_bug_id ) );
+	$t_result = db_query_bound( $query, array( $p_bug_id ) );
 	$raw_history = array();
 
 	$t_private_bugnote_visible = access_has_bug_level( config_get( 'private_bugnote_threshold' ), $p_bug_id, $t_user_id );
@@ -190,7 +190,7 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 
 	$t_standard_fields = columns_get_standard();
 	$j = 0;
-	while( $t_row = db_fetch_array( $result ) ) {
+	while( $t_row = db_fetch_array( $t_result ) ) {
 		extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
 		if ( $v_type == NORMAL_TYPE ) {

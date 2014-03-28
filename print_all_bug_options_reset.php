@@ -74,7 +74,7 @@ $query = "UPDATE $t_user_print_pref_table
 		SET print_pref=" . db_param() . "
 		WHERE user_id=" . db_param();
 
-$result = db_query_bound( $query, array( $t_default, $t_user_id ) );
+$t_result = db_query_bound( $query, array( $t_default, $t_user_id ) );
 
 form_security_purge( 'print_all_bug_options_reset' );
 
@@ -83,7 +83,7 @@ $t_redirect_url = 'print_all_bug_options_page.php';
 html_page_top( null, $t_redirect_url );
 
 
-if ( $result ) {
+if ( $t_result ) {
     html_operation_successful( $t_redirect_url );
 } else {
     echo '<div class="failure-msg">';

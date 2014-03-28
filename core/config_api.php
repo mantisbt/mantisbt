@@ -139,8 +139,8 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 			if( !$g_cache_filled ) {
 				$t_config_table = db_get_table( 'config' );
 				$query = "SELECT config_id, user_id, project_id, type, value, access_reqd FROM $t_config_table";
-				$result = db_query_bound( $query );
-				while( false <> ( $row = db_fetch_array( $result ) ) ) {
+				$t_result = db_query_bound( $query );
+				while( false <> ( $row = db_fetch_array( $t_result ) ) ) {
 					$t_config = $row['config_id'];
 					$t_user = $row['user_id'];
 					$t_project = $row['project_id'];
@@ -545,8 +545,8 @@ function config_delete_for_user( $p_option, $p_user_id ) {
  */
 function config_delete_project( $p_project = ALL_PROJECTS ) {
 	$t_config_table = db_get_table( 'config' );
-	$query = "DELETE FROM $t_config_table WHERE project_id=" . db_param();
-	db_query_bound( $query, array( $p_project ) );
+	$t_query = "DELETE FROM $t_config_table WHERE project_id=" . db_param();
+	db_query_bound( $t_query, array( $p_project ) );
 
 	# flush cache here in case some of the deleted configs are in use.
 	config_flush_cache();

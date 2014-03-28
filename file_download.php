@@ -95,8 +95,8 @@ switch ( $f_type ) {
 	default:
 		access_denied();
 }
-$result = db_query_bound( $query, array( $c_file_id ) );
-$row = db_fetch_array( $result );
+$t_result = db_query_bound( $query, array( $c_file_id ) );
+$row = db_fetch_array( $t_result );
 extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 if ( $f_type == 'bug' ) {
