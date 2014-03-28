@@ -444,12 +444,15 @@
                 the value constraints.
             </para>
             <informaltable>
-                <tgroup cols="3"><tbody>
+                <tgroup cols="3">
+                    <thead>
                         <row>
                             <entry>Type</entry>
                             <entry>Field Contents</entry>
                             <entry>Value Constraints</entry>
                         </row>
+                    </thead>
+                    <tbody>
                         <row>
                             <entry>String</entry>
                             <entry>text string up to 255 characters</entry>
@@ -519,74 +522,76 @@
                 </tgroup>
             </informaltable>
 
-            <para>
-                The display entries are used as follows:
-                <informaltable>
-                    <tgroup cols="2"><tbody>
-                            <row>
-                                <entry>Entry</entry>
-                                <entry>Meaning</entry>
-                            </row>
-                            <row>
-                                <entry>Display Only On Advanced Page</entry>
-                                <entry>If checked, the field will NOT be shown on the simple issue
-                                    displays
-                                </entry>
-                            </row>
-                            <row>
-                                <entry>Display When Reporting Issues</entry>
-                                <entry>If checked, the field will be shown on the report issues
-                                    displays
-                                </entry>
-                            </row>
-                            <row>
-                                <entry>Display When Updating Issues</entry>
-                                <entry>If checked, the field will NOT be shown on the update issue
-                                    and change status displays
-                                </entry>
-                            </row>
-                            <row>
-                                <entry>Display When Resolving Issues</entry>
-                                <entry>If checked, the field will NOT be shown on the update issue
-                                    displays and change status displays, if the new status is
-                                    resolved.
-                                </entry>
-                            </row>
-                            <row>
-                                <entry>Display When Closing Issues</entry>
-                                <entry>If checked, the field will NOT be shown on the update issue
-                                    displays and change status displays, if the new status is
-                                    closed.
-                                </entry>
-                            </row>
-                            <row>
-                                <entry>Required On Report</entry>
-                                <entry>If checked, the field must be filled in on the issue
-                                    reports.
-                                </entry>
-                            </row>
-                            <row>
-                                <entry>Required On Update</entry>
-                                <entry>If checked, the field must be filled in on the update issue
-                                    and change status displays.
-                                </entry>
-                            </row>
-                            <row>
-                                <entry>Required On Resolve</entry>
-                                <entry>If checked, the field must be filled in on the update issue
-                                    and change status displays, if the new status is resolved.
-                                </entry>
-                            </row>
-                            <row>
-                                <entry>Required On Close</entry>
-                                <entry>If checked, the field must be filled in on the update issue
-                                    and change status displays, if the new status is closed.
-                                </entry>
-                            </row>
-                        </tbody>
-                    </tgroup>
-                </informaltable>
+            <para>The display entries are used as follows:
             </para>
+            <informaltable>
+                <tgroup cols="2">
+                    <thead>
+                        <row>
+                            <entry>Entry</entry>
+                            <entry>Meaning</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>Display Only On Advanced Page</entry>
+                            <entry>If checked, the field will NOT be shown on the simple issue
+                                displays
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>Display When Reporting Issues</entry>
+                            <entry>If checked, the field will be shown on the report issues
+                                displays
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>Display When Updating Issues</entry>
+                            <entry>If checked, the field will NOT be shown on the update issue
+                                and change status displays
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>Display When Resolving Issues</entry>
+                            <entry>If checked, the field will NOT be shown on the update issue
+                                displays and change status displays, if the new status is
+                                resolved.
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>Display When Closing Issues</entry>
+                            <entry>If checked, the field will NOT be shown on the update issue
+                                displays and change status displays, if the new status is
+                                closed.
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>Required On Report</entry>
+                            <entry>If checked, the field must be filled in on the issue
+                                reports.
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>Required On Update</entry>
+                            <entry>If checked, the field must be filled in on the update issue
+                                and change status displays.
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>Required On Resolve</entry>
+                            <entry>If checked, the field must be filled in on the update issue
+                                and change status displays, if the new status is resolved.
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>Required On Close</entry>
+                            <entry>If checked, the field must be filled in on the update issue
+                                and change status displays, if the new status is closed.
+                            </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </informaltable>
 
             <para>Notes on Display
                 <itemizedlist>
@@ -644,12 +649,15 @@
 
                 <formalpara><title>Issues</title>
                 <para><informaltable>
-                    <tgroup cols="3"><tbody>
+                    <tgroup cols="3">
+                        <thead>
                             <row>
                                 <entry>Title</entry>
                                 <entry>Variable</entry>
                                 <entry>Description</entry>
                             </row>
+                        </thead>
+                        <tbody>
                             <row>
                                 <entry>Report an Issue</entry>
                                 <entry>$g_report_bug_threshold</entry>
@@ -786,12 +794,15 @@
                 <formalpara><title>Notes</title>
                 <para>
                 <informaltable>
-                    <tgroup cols="3"><tbody>
+                    <tgroup cols="3">
+                        <thead>
                             <row>
                                 <entry>Title</entry>
                                 <entry>Variable</entry>
                                 <entry>Description</entry>
                             </row>
+                        </thead>
+                        <tbody>
                             <row>
                                 <entry>Add Notes</entry>
                                 <entry>$g_add_bugnote_threshold</entry>
@@ -836,7 +847,15 @@
                     <title>Others</title>
                     <para>
                 <informaltable>
-                    <tgroup cols="3"><tbody>
+                    <tgroup cols="3">
+                        <thead>
+                            <row>
+                                <entry>Title</entry>
+                                <entry>Variable</entry>
+                                <entry>Description</entry>
+                            </row>
+                        </thead>
+                        <tbody>
                             <row>
                                 <entry>View Change Log</entry>
                                 <entry>$g_view_changelog_threshold</entry>
@@ -876,12 +895,15 @@
                 </para>
                 <table>
                     <title>Issues</title>
-                    <tgroup cols="3"><tbody>
+                    <tgroup cols="3">
+                        <thead>
                             <row>
                                 <entry>Title</entry>
                                 <entry>Variable</entry>
                                 <entry>Description</entry>
                             </row>
+                        </thead>
+                        <tbody>
                             <row>
                                 <entry>Status to which a new issue is set</entry>
                                 <entry>$g_bug_submit_status</entry>
