@@ -39,7 +39,7 @@
          <title>Blog about MantisBT</title>
 
          <para>
-	     If you have a blog, then blog about MantisBT, review it's features
+	     If you have a blog, then talk about MantisBT, review it's features
 	     and help us spread the word.  A lot of users also like to blog
 	     about how they customized MantisBT to fit their needs or to
 	     integrate with other tools that they use in their work environment.
@@ -50,15 +50,17 @@
         <title>Integrate with MantisBT</title>
 
         <para>
-	    If you have a product that can be integrates with MantisBT to provide
-	    a value for MantisBT users, that would be a great place to contribute
-	    and benefit both your project's community and the MantisBT community.
-	    A great examples in this area are integrations with content management
+	    If you have a product that can be integrated with MantisBT to provide
+	    value for MantisBT users, that would be a great place to contribute
+	    and benefit both your project's and the MantisBT community.
+	</para>
+	<para>
+	    A great example in this area are integrations with content management
 	    systems (e.g. *Nuke, Xoops), project management (PHPProjekt), and
 	    TestLink for Test Management. MantisBT can easily be integrated with
 	    projects in any programming language whether it is hosted on the same
 	    webserver or anywhere else in the world. This can be achieved through
-	    it's SOAP API and MantisConnect client libraries. MantisConnect comes
+	    its SOAP API and MantisConnect client libraries. MantisConnect comes
 	    with client libraries and samples in languages like PHP, .NET, Java and
 	    Cocoa.
 	</para>
