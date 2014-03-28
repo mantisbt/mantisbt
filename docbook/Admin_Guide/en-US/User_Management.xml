@@ -285,95 +285,84 @@
 		</para>
 	</section>
 
-    <section id="admin.user.prefs">
-        <title>User Preferences</title>
+	<section id="admin.user.prefs">
+		<title>User Preferences</title>
 
-	<para>Users can fine tune they way MantisBT interacts with them via
-	modifying their user preferences.  User preferences can only be managed
-	by users and are not available for the administrators to tweak.  The
-	administrators can only tweak the default value for such preferences.
-	However, once a user account is created, it is then the responsibility
-	of the user to manage their own preferences.  The user preferences
-	include the following:
+		<para>Users can fine tune the way MantisBT interacts with them by
+			modifying their user preferences to override the defaults set by
+			the administrator; If the administrator changes a default setting,
+			it will not automatically cascade in the users' preferences once
+			they have been set, so it is the users' responsibility to manage
+			their own preferences.
+		</para>
+		<para>The user preferences include the following:
+		</para>
 
-	<itemizedlist>
-	    <listitem>
-	        <para>Default Project: A user can choose the default project
-		that is selected when the user first logs in.  This can be a
-		specific project or "All Projects".  For users that only work on
-		one project, it would make sense to set such project as the
-		default project (rather than "All Projects").  The active
-		project is part of the filter applied on the issues listed in
-		the "View Issues" page.  Also any newly reported issues will be
-		associated with the active project.</para>
-             </listitem>
-	     <listitem>
-	        <para>Refresh Delay: The refresh delay is used to specify the
-		number of seconds between auto-refreshes of the View Issues
-		page.</para>
-	     </listitem>
-	     <listitem>
-	        <para>Redirect Delay: The redirect delay is the number of
-		seconds to wait after displaying flash messages like "Issue created
-		successfully", and before the user gets redirected to the
-		next page.</para>
-	     </listitem>
-	     <listitem>
-	        <para>Notes Sort Order: The preference relating to how notes
-		should be ordered on an issue is viewed or in email
-		notifications.  The ascending order is where notes are ordered
-		so that ordered notes appear before newer notes, the descending
-		order is the reverse.</para>
-	     </listitem>
-	     <listitem>
-	        <para>Email on New: If unticked, then email notifications
-		relating to creation of a new issue would be disabled.  Note
-		that the preference is only used to disabled notifications that
-		as per the administrator's configuration, this user would have
-		qualified to receive them.</para>
-	     </listitem>
-	     <listitem>
-	        <para>Email on Change of Handler: TODO - is this preference
-		used?</para>
-	     </listitem>
-	     <listitem>
-	        <para>Email on Feedback: TODO - is this preference used?</para>
-	     </listitem>
-	     <listitem>
-	        <para>Email on Resolved: TODO</para>
-	     </listitem>
-	     <listitem>
-	        <para>Email on Closed: TODO</para>
-	     </listitem>
-	     <listitem>
-	        <para>Email on Reopened: TODO</para>
-	     </listitem>
-	     <listitem>
-	        <para>Email on Note Added: TODO</para>
-	     </listitem>
-	     <listitem>
-	        <para>Email on Status Change: TODO</para>
-	     </listitem>
-	     <listitem>
-	        <para>Email on Priority Change: TODO - is this preference used?</para>
-	     </listitem>
-	     <listitem>
-	        <para>Email Notes Limit: This preference can be used to limit
-		the number of issue notes to view or to be included in an email
-		notifications.  Specifying N here means that the latest N
-		notes will be included.  The value 0 causes all notes to be
-		included.</para>
-	     </listitem>
-	     <listitem>
-	        <para>Language: The preferred language of the user.  This
-		language is used by the GUI and in email notifications.  Note
-		that MantisBT uses UTF8 for encoding the data, and hence, the
-		user can be interacting with MantisBT user interface in Chinese
-		while logging issue data in German.</para>
-	     </listitem>
-         </itemizedlist>
-	 </para>
-    </section>
+		<itemizedlist>
+			<listitem>
+				<para><emphasis>Default Project</emphasis>:
+					A user can choose the default project
+					that is selected when the user first logs in.  This can be a
+					specific project or "All Projects".  For users that only work on
+					one project, it would make sense to set such project as the
+					default project (rather than "All Projects").  The active
+					project is part of the filter applied on the issues listed in
+					the "View Issues" page.  Also any newly reported issues will be
+					associated with the active project.
+				</para>
+			</listitem>
+			<listitem>
+				<para><emphasis>Refresh Delay</emphasis>:
+					The refresh delay is used to specify the
+					number of seconds between auto-refreshes of the View Issues
+					page.
+				</para>
+			</listitem>
+			<listitem>
+				<para><emphasis>Redirect Delay</emphasis>:
+					The redirect delay is the number of
+					seconds to wait after displaying flash messages like
+					"Issue created successfully", and before the user gets
+					redirected to the next page.
+				</para>
+			</listitem>
+			<listitem>
+				<para><emphasis>Notes Sort Order</emphasis>:
+					The preference relating to how notes should be ordered when
+					issue is viewed or in email notifications.  Ascending
+					order means that older notes are displayed first
+				</para>
+			</listitem>
+			<listitem>
+				<para><emphasis>Email on XXX</emphasis>:
+					If unticked, then the notifications related to the
+					corresponding event would be disabled.  User can also specify
+					the minimum issue severity of for the email to be sent.
+				</para>
+				<para>Note that the preference is only used to disable
+					notifications that as per the administrator's configuration,
+					this user would have qualified to receive.
+				</para>
+			</listitem>
+			<listitem>
+				<para><emphasis>Email Notes Limit</emphasis>:
+					This preference can be used to limit the number of issue
+					notes to be included in a email notifications.
+					Specifying N here will cause only the latest N to be included.
+					The value 0 means that all notes will be included.
+				</para>
+			</listitem>
+			<listitem>
+				<para><emphasis>Language</emphasis>:
+					The preferred language of the user.  This
+					language is used by the GUI and in email notifications.  Note
+					that MantisBT uses UTF8 for encoding the data, hence the
+					user could for example use MantisBT with a Chinese interface,
+					while logging issue data in German.
+				</para>
+			</listitem>
+		</itemizedlist>
+	</section>
 
     <section id="admin.user.profiles">
         <title>User Profiles</title>
