@@ -96,26 +96,25 @@ html_page_top2a();
 ?>
 
 <br />
-<div>
-<table class="width50" cellspacing="1">
-<tr>
-	<td class="center">
+
+<div id="error-msg">
+	<div class="center">
 		<strong><?php echo lang_get( 'signup_done_title' ) ?></strong><br/>
 		<?php echo "[$f_username - $f_email] " ?>
-	</td>
-</tr>
-<tr>
-	<td>
-		<br/>
+	</div>
+
+	<div>
+		<br />
 		<?php echo lang_get( 'password_emailed_msg' ) ?>
-		<br /><br/>
+		<br /><br />
 		<?php echo lang_get( 'no_reponse_msg') ?>
-		<br/><br/>
-	</td>
-</tr>
-</table>
+		<br /><br/>
+	</div>
+</div>
+
 <br />
-<?php print_bracket_link( 'login_page.php', lang_get( 'proceed' ) ); ?>
+<div class="center">
+	<?php print_bracket_link( 'login_page.php', lang_get( 'proceed' ) ); ?>
 </div>
 
 <?php

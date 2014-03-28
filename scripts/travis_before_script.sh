@@ -5,6 +5,7 @@
 
 # Global variables initialization
 HOSTNAME=localhost
+PORT=80
 MANTIS_DB_NAME=bugtracker
 MANTIS_BOOTSTRAP=tests/bootstrap.php
 
@@ -82,7 +83,7 @@ else
 	# get path of PHP as the path is not in $PATH for sudo
 	myphp=$(which php)
 	# sudo needed for port 80
-	sudo $myphp -S $HOSTNAME:80 &
+	sudo $myphp -S $HOSTNAME:$PORT &
 fi
 
 #  wait until server is up
@@ -114,7 +115,7 @@ do
 done
 
 # trigger installation
-curl --data "${query_string:1}" http://$HOSTNAME/admin/install.php
+curl --data "${query_string:1}" http://$HOSTNAME:$PORT/admin/install.php
 
 
 # -----------------------------------------------------------------------------

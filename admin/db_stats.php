@@ -51,7 +51,7 @@ function print_info_row( $p_description, $p_value ) {
 function helper_table_row_count( $p_table ) {
 	$t_table = $p_table;
 	$t_query = "SELECT COUNT(*) FROM $t_table";
-	$t_result = db_query( $t_query );
+	$t_result = db_query_bound( $t_query );
 	$t_count = db_result( $t_result );
 
 	return $t_count;

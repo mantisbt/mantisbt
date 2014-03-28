@@ -399,7 +399,7 @@ class BugData {
 		$query = "SELECT COUNT(*)
 					  FROM $t_bugnote_table
 					  WHERE bug_id =" . db_param() . " $t_restriction";
-		$result = db_query_bound( $query, array( $this->bug_id ) );
+		$result = db_query_bound( $query, array( $this->id ) );
 
 		return db_result( $result );
 	}
@@ -1057,7 +1057,6 @@ function bug_check_workflow( $p_bug_status, $p_wanted_status ) {
 /**
  * Copy a bug from one project to another. Also make copies of issue notes, attachments, history,
  * email notifications etc.
- * @todo Not managed FTP file upload
  * @param int $p_bug_id bug id
  * @param int $p_target_project_id target project id
  * @param bool $p_copy_custom_fields copy custom fields
@@ -1327,7 +1326,7 @@ function bug_delete( $p_bug_id ) {
 	bug_clear_cache( $p_bug_id );
 	bug_text_clear_cache( $p_bug_id );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -1648,7 +1647,9 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 	db_query_bound( $query, array( $c_value, $c_bug_id ) );
 
 	# updated the last_updated date
-	bug_update_date( $p_bug_id );
+	if ( $p_field_name != 'last_updated' ) {
+		bug_update_date( $p_bug_id );
+	}
 
 	# log changes except for duplicate_id which is obsolete and should be removed in
 	# MantisBT 1.3.

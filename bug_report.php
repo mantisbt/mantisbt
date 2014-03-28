@@ -78,6 +78,7 @@ require_api( 'utility_api.php' );
 form_security_validate( 'bug_report' );
 
 $t_project_id = null;
+
 $f_master_bug_id = gpc_get_int( 'm_id', 0 );
 if ( $f_master_bug_id > 0 ) {
 	bug_ensure_exists( $f_master_bug_id );
@@ -86,19 +87,18 @@ if ( $f_master_bug_id > 0 ) {
 		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 	}
 	$t_master_bug = bug_get( $f_master_bug_id, true );
-	project_ensure_exists( $t_master_bug->project_id );
-	access_ensure_bug_level( config_get( 'update_bug_threshold', null, null, $t_master_bug->project_id ), $f_master_bug_id );
 	$t_project_id = $t_master_bug->project_id;
 } else {
 	$f_project_id = gpc_get_int( 'project_id' );
-	project_ensure_exists( $f_project_id );
 	$t_project_id = $f_project_id;
 }
+project_ensure_exists( $t_project_id );
+
 if ( $t_project_id != helper_get_current_project() ) {
 	$g_project_override = $t_project_id;
 }
 
-access_ensure_project_level( config_get('report_bug_threshold' ) );
+access_ensure_project_level( config_get( 'report_bug_threshold' ) );
 
 $t_bug_data = new BugData;
 $t_bug_data->project_id             = $t_project_id;
@@ -128,6 +128,7 @@ if ( is_blank ( $t_bug_data->due_date ) ) {
 	$t_bug_data->due_date = date_get_null();
 }
 
+$f_rel_type                         = gpc_get_int( 'rel_type', BUG_REL_NONE );
 $f_files                            = gpc_get_file( 'ufile', null ); /** @todo (thraxisp) Note that this always returns a structure */
 $f_report_stay                      = gpc_get_bool( 'report_stay', false );
 $f_copy_notes_from_parent           = gpc_get_bool( 'copy_notes_from_parent', false);
@@ -213,9 +214,6 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	}
 }
 
-$f_master_bug_id = gpc_get_int( 'm_id', 0 );
-$f_rel_type = gpc_get_int( 'rel_type', -1 );
-
 if ( $f_master_bug_id > 0 ) {
 	# it's a child generation... let's create the relationship and add some lines in the history
 
@@ -226,7 +224,7 @@ if ( $f_master_bug_id > 0 ) {
 	history_log_event_special( $t_bug_id, BUG_CREATED_FROM, '', $f_master_bug_id );
 	history_log_event_special( $f_master_bug_id, BUG_CLONED_TO, '', $t_bug_id );
 
-	if ( $f_rel_type >= 0 ) {
+	if ( $f_rel_type > BUG_REL_ANY ) {
 		# Add the relationship
 		relationship_add( $t_bug_id, $f_master_bug_id, $f_rel_type );
 
@@ -244,22 +242,30 @@ if ( $f_master_bug_id > 0 ) {
 	# copy notes from parent
 	if ( $f_copy_notes_from_parent ) {
 
-	    $t_parent_bugnotes = bugnote_get_all_bugnotes( $f_master_bug_id );
+		$t_parent_bugnotes = bugnote_get_all_bugnotes( $f_master_bug_id );
 
-	    foreach ( $t_parent_bugnotes as $t_parent_bugnote ) {
+		foreach ( $t_parent_bugnotes as $t_parent_bugnote ) {
+			$t_private = $t_parent_bugnote->view_state == VS_PRIVATE;
 
-	        $t_private = $t_parent_bugnote->view_state == VS_PRIVATE;
-
-	        bugnote_add( $t_bug_id, $t_parent_bugnote->note, $t_parent_bugnote->time_tracking,
-	            $t_private, $t_parent_bugnote->note_type, $t_parent_bugnote->note_attr,
-	            $t_parent_bugnote->reporter_id, /* send_email */ FALSE , /* date submitted */ 0,
-	            /* date modified */ 0,  /* log history */ FALSE);
-	    }
+			bugnote_add(
+				$t_bug_id,
+				$t_parent_bugnote->note,
+				$t_parent_bugnote->time_tracking,
+				$t_private,
+				$t_parent_bugnote->note_type,
+				$t_parent_bugnote->note_attr,
+				$t_parent_bugnote->reporter_id,
+				/* send_email */ FALSE,
+				/* date submitted */ 0,
+				/* date modified */ 0,
+				/* log history */ FALSE
+			);
+		}
 	}
 
 	# copy attachments from parent
 	if ( $f_copy_attachments_from_parent ) {
-        file_copy_attachments( $f_master_bug_id, $t_bug_id );
+		file_copy_attachments( $f_master_bug_id, $t_bug_id );
 	}
 }
 

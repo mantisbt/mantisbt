@@ -138,7 +138,7 @@ function category_exists( $p_category_id ) {
 				  VALUES ( " . db_param() . ', ' . db_param() . ' )';
 	db_query_bound( $t_query, array( $p_project_id, $p_name ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return db_insert_id( $t_category_table );
 }
 
@@ -174,7 +174,7 @@ function category_exists( $p_category_id ) {
 		}
 	}
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -211,7 +211,7 @@ function category_exists( $p_category_id ) {
 				  WHERE category_id=" . db_param();
 	db_query_bound( $t_query, array( $p_new_category_id, $p_category_id ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 

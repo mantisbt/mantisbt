@@ -1,6 +1,6 @@
 <?php
 # MantisConnect - A webservice interface to Mantis Bug Tracker
-# 
+#
 # This program is distributed under dual licensing.  These include
 # GPL and a commercial licenses.  Victor Boctor reserves the right to
 # change the license of future releases.
@@ -73,7 +73,7 @@ if ( !mci_is_webservice_call() ) {
 		echo 'This is not a SOAP webservice request, for documentation, see ' .  $parts[0] . 'mantisconnect.php';
 		exit();
 	}
-	
+
 	header('Content-Type: text/xml');
 	$wsdl = file_get_contents('mantisconnect.wsdl');
 	$wsdl = str_replace('http://www.mantisbt.org/bugs/api/soap/mantisconnect.php', config_get('path').'api/soap/mantisconnect.php', $wsdl);

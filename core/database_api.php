@@ -73,10 +73,58 @@ if( db_is_oracle() ) {
 }
 
 /**
- * Tracks the query parameter count for use with db_aparam:().
- * @global int $g_db_param_count
+ * Mantis Database Parameters Count class
+ * Stores the current parameter count, provides method to generate parameters
+ * and a simple stack mechanism to enable the caller to build multiple queries
+ * concurrently on RDBMS using positional parameters (e.g. PostgreSQL)
+ * @package MantisBT
+ * @subpackage classes
  */
-$g_db_param_count = 0;
+class MantisDbParam {
+	/** Current parameter count */
+	public $count = 0;
+
+	/** Parameter count stack */
+	private $stack = array();
+
+	/**
+	 * Generate a string to insert a parameter into a database query string
+	 * @return string 'wildcard' matching a parameter in correct ordered format for the current database.
+	 */
+	public function assign() {
+		global $g_db;
+		return $g_db->Param( $this->count++ );
+	}
+
+	/**
+	 * Pushes current parameter count onto stack and resets its value to 0
+	 */
+	public function push() {
+		$this->stack[] = $this->count;
+		$this->count = 0;
+	}
+
+	/**
+	 * Pops the previous value of param count from the stack
+	 * This function is called by {@see db_query_bound()} and should not need
+	 * to be executed directly
+	 */
+	public function pop() {
+		global $g_db;
+
+		$this->count = (int)array_pop( $this->stack );
+		if( db_is_pgsql() ) {
+			# Manually reset the ADOdb param number to the value we just popped
+			$g_db->_pnum = $this->count;
+		}
+	}
+}
+
+/**
+ * Tracks the query parameter count
+ * @global object $g_db_param
+ */
+$g_db_param = new MantisDbParam();
 
 /**
  * Open a connection to the database.
@@ -274,51 +322,7 @@ function db_check_identifier_size( $p_identifier ) {
 /**
  * execute query, requires connection to be opened
  * An error will be triggered if there is a problem executing the query.
- * @global array of previous executed queries for profiling
- * @global adodb database connection object
- * @global boolean indicating whether queries array is populated
- * @param string $p_query Query string to execute
- * @param int $p_limit Number of results to return
- * @param int $p_offset offset query results for paging
- * @return ADORecordSet|bool adodb result set or false if the query failed.
- * @deprecated db_query_bound should be used in preference to this function. This function will likely be removed in 1.2.0 final
- */
-function db_query( $p_query, $p_limit = -1, $p_offset = -1 ) {
-	global $g_queries_array, $g_db, $g_db_log_queries;
-
-	$t_start = microtime(true);
-
-	if( db_is_oracle() ) {
-		$p_query = db_oracle_adapt_query_syntax( $p_query );
-	}
-
-	if(( $p_limit != -1 ) || ( $p_offset != -1 ) ) {
-		$t_result = $g_db->SelectLimit( $p_query, $p_limit, $p_offset );
-	} else {
-		$t_result = $g_db->Execute( $p_query );
-	}
-
-	$t_elapsed = number_format( microtime(true) - $t_start, 4 );
-
-	if( ON == $g_db_log_queries ) {
-		log_event( LOG_DATABASE, array( $p_query, $t_elapsed) );
-		array_push( $g_queries_array, array( $p_query, $t_elapsed ) );
-	} else {
-		array_push( $g_queries_array, array( '', $t_elapsed ) );
-	}
-
-	if( !$t_result ) {
-		db_error( $p_query );
-		trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
-		return false;
-	} else {
-		return $t_result;
-	}
-}
-
-/**
- * execute query, requires connection to be opened
- * An error will be triggered if there is a problem executing the query.
+ * This will pop the database parameter stack {@see MantisDbParam} after a successful execution
  * @global array of previous executed queries for profiling
  * @global adodb database connection object
  * @global boolean indicating whether queries array is populated
@@ -329,7 +333,7 @@ function db_query( $p_query, $p_limit = -1, $p_offset = -1 ) {
  * @return ADORecordSet|bool adodb result set or false if the query failed.
  */
 function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset = -1 ) {
-	global $g_queries_array, $g_db, $g_db_log_queries, $g_db_param_count;
+	global $g_queries_array, $g_db, $g_db_log_queries, $g_db_param;
 
 	$t_db_type = config_get_global( 'db_type' );
 
@@ -412,28 +416,33 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 		array_push( $g_queries_array, array( '', $t_elapsed ) );
 	}
 
-	# We can't reset the counter because we have queries being built
-	# and executed while building bigger queries in filter_api. -jreese
-	# $g_db_param_count = 0;
-
 	if( !$t_result ) {
 		db_error( $p_query );
 		trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
 		return false;
 	} else {
+		$g_db_param->pop();
 		return $t_result;
 	}
 }
 
 /**
  * Generate a string to insert a parameter into a database query string
- * @return string 'wildcard' matching a paramater in correct ordered format for the current database.
+ * @return string 'wildcard' matching a parameter in correct ordered format for the current database.
  */
 function db_param() {
-	global $g_db;
-	global $g_db_param_count;
+	global $g_db_param;
+	return $g_db_param->assign();
+}
 
-	return $g_db->Param( $g_db_param_count++ );
+/**
+ * Pushes current parameter count onto stack and resets its value
+ * Allows the caller to build multiple queries concurrently on RDBMS using
+ * positional parameters (e.g. PostgreSQL)
+ */
+function db_param_push() {
+	global $g_db_param;
+	$g_db_param->push();
 }
 
 /**
@@ -736,10 +745,7 @@ function db_prepare_string( $p_string ) {
 			return utf8_substr( $t_escaped, 1, utf8_strlen( $t_escaped ) - 2 );
 			break;
 		case 'mysql':
-			return mysql_real_escape_string( $p_string );
 		case 'mysqli':
-			# For some reason mysqli_escape_string( $p_string ) always returns an empty
-			# string.  This is happening with PHP v5.0.2.
 			$t_escaped = $g_db->qstr( $p_string, false );
 			return utf8_substr( $t_escaped, 1, utf8_strlen( $t_escaped ) - 2 );
 		case 'postgres':
@@ -758,7 +764,7 @@ function db_prepare_string( $p_string ) {
 /**
  * Prepare a binary string before DB insertion
  * Use of this function is required for some DB types, to properly encode
- * BLOB fields prior to calling db_query_bound() or db_query()
+ * BLOB fields prior to calling db_query_bound()
  * @param string $p_string raw binary data
  * @return string prepared database query string
  */

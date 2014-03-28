@@ -489,8 +489,8 @@ $s_select_file = 'Select File';
 $s_select_files = 'Select Files';
 $s_upload_file_button = 'Upload File';
 $s_upload_files_button = 'Upload Files';
-$s_max_file_size = 'Maximum size';
 $s_max_file_size_label = 'Maximum size:';
+$s_file_size_info = '%1$s %2$s'; # $1 = size, $2 = unit (e.g. kb, bytes)
 
 # bug_reopen.php
 $s_bug_reopened_msg = 'Issue has been reopened...';
@@ -1169,8 +1169,8 @@ $s_any = 'any';
 $s_all = 'all';
 $s_show = 'Show';
 $s_show_label = 'Show:';
-$s_changed = 'Changed(hrs)';
-$s_changed_label = 'Changed(hrs):';
+$s_changed = 'Highlight changed (hours)';
+$s_changed_label = 'Highlight changed (hours):';
 $s_viewing_bugs_title = 'Viewing Issues';
 $s_updated = 'Updated';
 $s_sticky = 'Show Sticky Issues';
@@ -1234,7 +1234,6 @@ $s_close_bug_button = 'Close';
 $s_move_bug_button = 'Move';
 $s_attached_files = 'Attached Files';
 $s_publish = 'Publish';
-$s_cached = 'Cached';
 $s_add_user_to_monitor = 'Add';
 
 # view_bug_page.php
@@ -1304,6 +1303,7 @@ $s_monitored_by = 'Monitored By';
 $s_monitored_by_label = 'Monitored By:';
 $s_attachments = 'attachment(s)';
 $s_bytes = 'bytes';
+$s_kb = 'KB';
 $s_attachment_missing = 'Attachment missing';
 $s_attachment_count = 'Attachment count';
 $s_view_attachments_for_issue = 'View %1$d attachment(s) for issue #%2$d';
@@ -1526,6 +1526,7 @@ $s_copy_columns_to = 'Copy Columns To';
 # due date
 $s_due_date = 'Due Date';
 $s_overdue = 'Overdue';
+$s_overdue_since = 'Overdue since %1$s';
 
 #account_view_page.php
 $s_view_account_title = 'User Information';
@@ -1542,6 +1543,8 @@ $s_install_information = 'MantisBT Installation Information';
 $s_database_information = 'MantisBT Database Information';
 $s_path_information = 'MantisBT Path Information';
 $s_mantisbt_database_statistics = 'MantisBT Database Statistics';
+$s_php_version = 'PHP Version';
+$s_adodb_version = 'ADOdb Version';
 
 # months
 $s_month_january = 'January';
@@ -1582,7 +1585,6 @@ $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String "%1$s" not found.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Note not found.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Project "%1$d" not found.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Database field "%1$s" not found.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Unable to connect to FTP server.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Issue handler does not have sufficient access rights to handle issue at this status.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'A project with that name already exists. Please go back and enter a different name.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Invalid project name specified. Project names cannot be blank.';
@@ -1670,6 +1672,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Plugin is already installed.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Plugin page not found.';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Plugin installation failed: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Upgrading the plugin schema failed in block #%1$s.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'The "%1$s" plugin needs to be upgraded before you can access this page.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'There was an unknown error "%1$s" during execution of the "%2$s" plugin.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Field "%1$s" contains duplicate column "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Field "%1$s" contains invalid field "%2$s".';

@@ -448,7 +448,7 @@ function user_pref_insert( $p_user_id, $p_project_id, $p_prefs ) {
 			 ' VALUES ( ' . $t_params_string . ')';
 	db_query_bound( $query, $t_values  );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -506,7 +506,7 @@ function user_pref_delete( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 
 	user_pref_clear_cache( $p_user_id, $p_project_id );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -529,7 +529,7 @@ function user_pref_delete_all( $p_user_id ) {
 
 	user_pref_clear_cache( $p_user_id );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -548,7 +548,7 @@ function user_pref_delete_project( $p_project_id ) {
 	$query = 'DELETE FROM ' . $t_user_pref_table . ' WHERE project_id=' . db_param();
 	db_query_bound( $query, array( $p_project_id ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 

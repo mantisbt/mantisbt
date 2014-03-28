@@ -176,22 +176,6 @@ function print_successful_redirect( $p_redirect_to ) {
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  * Print avatar image for the given user ID
  *
@@ -567,7 +551,7 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
 	if( $p_include_all_projects && $p_filter_project_id !== ALL_PROJECTS ) {
 		echo '<option value="' . ALL_PROJECTS . '"';
 		if ( $p_project_id !== null ) {
-			check_selected( (int)$p_project_id, ALL_PROJECTS, false );
+			check_selected( $p_project_id, ALL_PROJECTS, false );
 		}
 		echo '>' . lang_get( 'all_projects' ) . '</option>' . "\n";
 	}
@@ -579,7 +563,7 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
 		}
 
 		echo '<option value="' . $t_id . '"';
-		check_selected( (int)$p_project_id, $t_id );
+		check_selected( $p_project_id, $t_id, false );
 		check_disabled( $t_id == $p_filter_project_id || !$t_can_report );
 		echo '>' . string_attribute( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
 		print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only );
@@ -607,7 +591,7 @@ function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_fi
 		}
 
 		echo '<option value="' . $t_full_id . '"';
-		check_selected( (string)$p_project_id, (string)$t_full_id );
+		check_selected( $p_project_id, $t_full_id, false );
 		check_disabled( $t_id == $p_filter_project_id || !$t_can_report );
 		echo '>'
 			. str_repeat( '&#160;', count( $p_parents ) )
@@ -677,7 +661,7 @@ function print_profile_option_list_from_profiles( $p_profiles, $p_select_id ) {
 	}
 }
 
-/** 
+/**
  * Since categories can be orphaned we need to grab all unique instances of category
  * We check in the project category table and in the bug table
  * We put them all in one array and make sure the entries are unique
@@ -1166,7 +1150,7 @@ function print_plugin_priority_list( $p_priority ) {
 	}
 }
 
-/** 
+/**
  * prints a link to VIEW a bug given an ID
  *  account for the user preference and site override
  * @param int $p_bug_id bug id
@@ -1789,12 +1773,6 @@ function print_bug_attachment_header( $p_attachment ) {
 		print_link( 'bug_file_delete.php?file_id=' . $p_attachment['id'] . form_security_param( 'bug_file_delete' ), lang_get( 'delete_link' ), false, 'small' );
 		echo ']';
 	}
-
-	if ( $p_attachment['exists'] ) {
-		if ( config_get( 'file_upload_method' ) == FTP ) {
-			echo lang_get( 'word_separator' ) . '(' . lang_get( 'cached' ) . ')';
-		}
-	}
 }
 
 /**
@@ -1812,25 +1790,16 @@ function print_bug_attachment_preview_text( $p_attachment ) {
 				$t_content = file_get_contents( $p_attachment['diskfile'] );
 			}
 			break;
-		case FTP:
-			if ( file_exists( $p_attachment['diskfile'] ) ) {
-				$t_content = file_get_contents( $p_attachment['diskfile'] );
-			} else {
-				$t_ftp = file_ftp_connect();
-				file_ftp_get( $t_ftp, $p_attachment['diskfile'], $p_attachment['diskfile'] );
-				file_ftp_disconnect( $t_ftp );
-				if ( file_exists( $p_attachment['diskfile'] ) ) {
-					$t_content = file_get_contents( $p_attachment['diskfile'] );
-				}
-			}
-			break;
-		default:
+		case DATABASE:
 			$t_bug_file_table = db_get_table( 'bug_file' );
 			$c_attachment_id = db_prepare_int( $p_attachment['id'] );
 			$t_query = "SELECT * FROM $t_bug_file_table WHERE id=" . db_param();
 			$t_result = db_query_bound( $t_query, array( $c_attachment_id ) );
 			$t_row = db_fetch_array( $t_result );
 			$t_content = $t_row['content'];
+			break;
+		default:
+			trigger_error( ERROR_GENERIC, ERROR );
 	}
 	echo htmlspecialchars( $t_content );
 	echo '</pre>';
@@ -1889,4 +1858,28 @@ function print_timezone_option_list( $p_timezone ) {
 		}
 		echo "\t</optgroup>\n";
 	}
+}
+
+/**
+ * Return file size information
+ * @param int $p_size
+ * @param string $p_unit
+ * @return string
+ */
+function get_filesize_info( $p_size, $p_unit ) {
+	return sprintf( lang_get( 'file_size_info' ), number_format( $p_size ), $p_unit );
+}
+
+/**
+ * Print maximum file size information
+ * @param int $p_size in bytes
+ * @param int $p_divider optional divider, defaults to 1000
+ * @param string $p_unit optional language string of unit, defaults to KB
+ */
+function print_max_filesize( $p_size, $p_divider = 1000, $p_unit = 'kb' ) {
+	echo '<span class="small" title="' . get_filesize_info( $p_size, lang_get( 'bytes' ) ) . '">';
+	echo lang_get( 'max_file_size_label' )
+		. lang_get( 'word_separator' )
+		. get_filesize_info( $p_size / $p_divider, lang_get( $p_unit ) );
+	echo '</span>';
 }

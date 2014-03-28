@@ -110,7 +110,7 @@ function profile_delete( $p_user_id, $p_profile_id ) {
 				  WHERE id=" . db_param() . " AND user_id=" . db_param();
 	db_query_bound( $query, array( $p_profile_id, $p_user_id ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 

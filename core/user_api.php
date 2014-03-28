@@ -1032,8 +1032,7 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 	$t_project_user_list_table = db_get_table( 'project_user_list' );
 	$t_project_hierarchy_table = db_get_table( 'project_hierarchy' );
 
-	$t_public = VS_PUBLIC;
-	$t_private = VS_PRIVATE;
+	db_param_push();
 
 	if( access_has_global_level( config_get( 'private_project_threshold' ), $p_user_id ) ) {
 		$t_enabled_clause = $p_show_disabled ? '' : 'p.enabled = ' . db_param() . ' AND';
@@ -1060,7 +1059,12 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 						        u.user_id=' . db_param() . ' )
 						)
 					  ORDER BY p.name';
-		$result = db_query_bound( $query, ( $p_show_disabled ? array( $p_user_id, $t_public, $t_private, $p_user_id ) : array( $p_user_id, 1, $t_public, $t_private, $p_user_id ) ) );
+		$t_param = array( $p_user_id, VS_PUBLIC, VS_PRIVATE, $p_user_id );
+		if( $p_show_disabled ) {
+			# Insert enabled flag value in 2nd position of parameter array
+			array_splice( $t_param, 1, 0, true );
+		}
+		$result = db_query_bound( $query, $t_param );
 	}
 
 	$t_projects = array();
@@ -1394,7 +1398,7 @@ function user_increment_login_count( $p_user_id ) {
 
 	user_clear_cache( $p_user_id );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -1525,7 +1529,7 @@ function user_set_field( $p_user_id, $p_field_name, $p_field_value ) {
 
 	user_set_fields($p_user_id, array ( $p_field_name => $p_field_value ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -1565,7 +1569,7 @@ function user_set_password( $p_user_id, $p_password, $p_allow_protected = false 
 				  WHERE id=" . db_param();
 	db_query_bound( $query, array( $c_password, $c_cookie_string, $c_user_id ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 

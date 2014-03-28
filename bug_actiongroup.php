@@ -204,6 +204,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			$f_priority = gpc_get_int( 'priority' );
 			/** @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) ); */
 			bug_set_field( $t_bug_id, 'priority', $f_priority );
+			email_generic( $t_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
 			helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 		} else {
 			$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
@@ -221,6 +222,9 @@ foreach( $f_bug_arr as $t_bug_id ) {
 				# Add bugnote if supplied
 				if ( !is_blank( $f_bug_notetext ) ) {
 					bugnote_add( $t_bug_id, $f_bug_notetext, null, $f_bug_noteprivate );
+					# No need to call email_generic(), bugnote_add() does it
+				} else {
+					email_generic( $t_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
 				}
 
 				helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
@@ -238,6 +242,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			if ( category_exists( $f_category_id ) ) {
 				/** @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) ); */
 				bug_set_field( $t_bug_id, 'category_id', $f_category_id );
+				email_generic( $t_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
 				helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 			} else {
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_category' );
@@ -255,6 +260,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			if ( $f_fixed_in_version === '' || version_get_id( $f_fixed_in_version, $t_project_id ) !== false ) {
 				/** @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) ); */
 				bug_set_field( $t_bug_id, 'fixed_in_version', $f_fixed_in_version );
+				email_generic( $t_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
 				helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 				} else {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_version' );
@@ -272,11 +278,12 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			if ( $f_target_version === '' || version_get_id( $f_target_version, $t_project_id ) !== false ) {
 				/** @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) ); */
 				bug_set_field( $t_bug_id, 'target_version', $f_target_version );
+				email_generic( $t_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
 				helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
-				} else {
-					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_version' );
-			}
 			} else {
+				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_version' );
+			}
+		} else {
 			$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 		}
 		break;
@@ -286,6 +293,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			$f_view_status = gpc_get_int( 'view_status' );
 			/** @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) ); */
 			bug_set_field( $t_bug_id, 'view_state', $f_view_status );
+			email_generic( $t_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
 			helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 		} else {
 			$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
@@ -314,6 +322,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 		$t_custom_field_value = gpc_get_custom_field( $t_form_var, $t_custom_field_def['type'], null );
 		custom_field_set_value( $f_custom_field_id, $t_bug_id, $t_custom_field_value );
 		bug_update_date( $t_bug_id );
+		email_generic( $t_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
 		helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 		break;
 

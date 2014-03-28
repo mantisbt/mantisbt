@@ -122,9 +122,9 @@ function email_is_valid( $p_email ) {
 		return true;
 	}
 
-	// check email address is a valid format
-	$t_email = filter_var($p_email, FILTER_SANITIZE_EMAIL);
-	if (filter_var($t_email, FILTER_VALIDATE_EMAIL)) {
+	# check email address is a valid format
+	$t_email = filter_var( $p_email, FILTER_SANITIZE_EMAIL );
+	if( PHPMailer::ValidateAddress( $t_email ) ) {
 		$t_domain = end( explode( '@', $t_email ) );
 
 		# see if we're limited to a set of known domains
@@ -877,6 +877,10 @@ function email_send( $p_email_data ) {
 	$mail->FromName = config_get( 'from_name' );
 	$mail->AddCustomHeader('Auto-Submitted:auto-generated');
 	$mail->AddCustomHeader('X-Auto-Response-Suppress: All');
+
+	// Setup new line and encoding to avoid extra new lines with some smtp gateways like sendgrid.net
+	$mail->LE         = "\r\n";
+	$mail->Encoding   = "quoted-printable";
 
 	if( !empty( $t_debug_email ) ) {
 		$t_message = 'To: ' . $t_recipient . "\n\n" . $t_message;

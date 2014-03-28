@@ -38,7 +38,7 @@ class ProjectTest extends SoapBase {
 	 * A test case that tests the following:
 	 * 1. Create a project.
 	 * 2. Rename the project.
-	 */        
+	 */
 	public function testAddRenameDeleteProject() {
 		$projectName = $this->getOriginalNameProject();
 		$projectNewName = $this->getNewNameProject();
@@ -59,7 +59,7 @@ class ProjectTest extends SoapBase {
 
 		$projectDataStructure['name'] = $projectNewName;
 
-		$return_bool = $this->client->mc_project_update( $this->userName, $this->password, $projectId, 
+		$return_bool = $this->client->mc_project_update( $this->userName, $this->password, $projectId,
 														$projectDataStructure);
 
 		$projectsArray = $this->client->mc_projects_get_user_accessible( $this->userName, $this->password);
@@ -73,10 +73,10 @@ class ProjectTest extends SoapBase {
 
 	/**
 	* A test case which does the following
-	* 
+	*
 	* 1. Create a project
 	* 2. Retrieve the project id by name
-	* 
+	*
 	*/
 	public function testGetIdFromName() {
 		$projectName = 'TestProjectForIdFromName';
@@ -87,7 +87,7 @@ class ProjectTest extends SoapBase {
 
 		$this->projectIdToDelete[] = $projectId;
 
-		$projectIdFromName = $this->client->mc_project_get_id_from_name( $this->userName, $this->password, 
+		$projectIdFromName = $this->client->mc_project_get_id_from_name( $this->userName, $this->password,
 																		$projectName);
 
 		$this->assertEquals($projectIdFromName, $projectId);
@@ -114,13 +114,51 @@ class ProjectTest extends SoapBase {
 	}
 
 	/**
+	* A test case which validates that managers do not lock themselves out when
+	* making a project Private.
+	*
+	* 1. Create a project
+	* 2. Create a test manager user (currently not implemented, see below)
+	* 3. Set project view state to private
+	* 4. Ensure user can still access the project
+	*
+	* @TODO for this to be a truly useful test case, the project update should
+	* actually be performed by a user with MANAGER role. However since the SOAP
+	* API does not provide user administration functions, it is currently not
+	* possible to properly implement this test.
+	*/
+	public function testSetProjectPrivateLockout() {
+		$projectDataStructure = $this->newProjectAsArray( $this->getName() . "_" . rand() );
+
+		# step 1
+		$projectId = $this->client->mc_project_add( $this->userName, $this->password, $projectDataStructure );
+		$this->projectIdToDelete[] = $projectId;
+
+		# step 3
+		$projectDataStructure['view_state'] = array( 'id' => VS_PRIVATE );
+		$updateOk = $this->client->mc_project_update( $this->userName, $this->password, $projectId, $projectDataStructure );
+		$this->assertTrue( $updateOk, "Project update failed");
+
+		# step 4
+		$projList = $this->client->mc_projects_get_user_accessible( $this->userName, $this->password );
+		$found = false;
+		foreach( $projList as $proj ) {
+			if( $projectId == $proj->id ) {
+				$found = true;
+				break;
+			}
+		}
+		$this->assertTrue( $found, "User '$this->userName' no longer has access to the project" );
+	}
+
+	/**
 	 * New project Array
 	 */
 	private function newProjectAsArray($projectName) {
 		$projectDataStructure = array();
 		$projectDataStructure['name'] = $projectName;
-		$projectDataStructure['status'] = "development";
-		$projectDataStructure['view_state'] = 10;
+		$projectDataStructure['status'] = array( 'name' => 'development' );
+		$projectDataStructure['view_state'] = array( 'id' => VS_PUBLIC );
 
 		return $projectDataStructure;
 	}

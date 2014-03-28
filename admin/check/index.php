@@ -17,7 +17,7 @@
 /**
  * Mantis Configuration Checks
  *
- * This process runs a number of configuration checks against the mantis configuration to find 
+ * This process runs a number of configuration checks against the mantis configuration to find
  * common issues.
  *
  * @package MantisBT
@@ -60,22 +60,42 @@ set_time_limit( 60 * 5 );
 $g_show_all = gpc_get_bool( 'show_all', false );
 $g_show_errors = gpc_get_bool( 'show_errors', false );
 
-$t_show_all_mode_link = '<a href="index.php?show_all=' . ($g_show_all ? '0' : '1') . '&amp;show_errors=' . ($g_show_errors ? '1' : '0') . '">' . ($g_show_all ? 'Hide passed tests' : 'Show passed tests') . '</a>';
-$t_show_errors_mode_link = '<a href="index.php?show_all=' . ($g_show_all ? '1' : '0') . '&amp;show_errors=' . ($g_show_errors ? '0' : '1') . '">' . ($g_show_errors ? 'Hide verbose error messages' : 'Show verbose error messages') . '</a>';
+function mode_url( $p_all, $p_errors ) {
+	return basename( __FILE__ ) . '?' . http_build_query(
+		array(
+			'show_all' => (int)$p_all,
+			'show_errors' => (int)$p_errors,
+		)
+	);
+}
+
+$t_link = '<a href="%s">%s %s</a>';
+$t_show_all_mode_link = sprintf( $t_link,
+	mode_url( !$g_show_all, $g_show_errors ),
+	($g_show_all ? 'Hide' : 'Show'),
+	'passed tests'
+);
+$t_show_errors_mode_link = sprintf( $t_link,
+	mode_url( $g_show_all, !$g_show_errors ),
+	($g_show_errors ? 'Hide' : 'Show'),
+	'verbose error messages'
+);
 
 http_content_headers();
+
+html_begin();
+
+html_head_begin();
+html_css_link( 'admin.css' );
+html_content_type();
+html_title( 'MantisBT Administration - Check Installation' );
+html_head_end();
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta http-equiv="Content-type" content="application/xhtml+xml; charset=UTF-8" />
-<title>MantisBT Administration - Check Installation</title>
-<link rel="stylesheet" href="../admin.css" type="text/css" />
-</head>
+
 <body>
-<div id="mantisbt-header-logo">
-	<img src="../../images/mantis_logo.png" alt="MantisBT Logo" />
-</div>
+
+<?php html_top_banner(); ?>
+
 <p class="notice">Verbosity: <?php echo $t_show_all_mode_link ?> | <?php echo $t_show_errors_mode_link ?></p>
 <table id="check-results">
 	<thead>
@@ -85,6 +105,7 @@ http_content_headers();
 			</th>
 		</tr>
 	</thead>
+
 <?php
 
 define( 'CHECK_PHP_INC_ALLOW', true );

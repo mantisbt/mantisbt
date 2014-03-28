@@ -39,6 +39,10 @@ define( 'PHP_CGI', 1 );
 
 # installation
 define( 'CONFIGURED_PASSWORD', "______" );
+define( 'DB_MIN_VERSION_ADODB', '5.19dev' ); # For mssql, oracle and pgsql
+define( 'DB_MIN_VERSION_MSSQL', '9.0.0' );
+define( 'DB_MIN_VERSION_MYSQL', '5.0.8' );   # See #16584
+define( 'DB_MIN_VERSION_PGSQL', '8.4' );     # Earliest supported version as of Jan 2014
 
 # error types
 define( 'ERROR', E_USER_ERROR );
@@ -145,7 +149,6 @@ define( 'HTTP_AUTH', 6 );
 # file upload methods
 define( 'DISK', 1 );
 define( 'DATABASE', 2 );
-define( 'FTP', 3 );
 
 # show variable values
 define( 'BOTH', 0 );
@@ -226,7 +229,6 @@ define( 'ERROR_EMPTY_FIELD', 11 );
 define( 'ERROR_PROTECTED_ACCOUNT', 12 );
 define( 'ERROR_ACCESS_DENIED', 13 );
 define( 'ERROR_UPLOAD_FAILURE', 15 );
-define( 'ERROR_FTP_CONNECT_ERROR', 16 );
 define( 'ERROR_HANDLER_ACCESS_TOO_LOW', 17 );
 define( 'ERROR_PAGE_REDIRECTION', 18 );
 define( 'ERROR_INVALID_REQUEST_METHOD', 19 );
@@ -380,6 +382,7 @@ define( 'ERROR_PLUGIN_ALREADY_INSTALLED', 2501 );
 define( 'ERROR_PLUGIN_PAGE_NOT_FOUND', 2502 );
 define( 'ERROR_PLUGIN_UPGRADE_FAILED', 2503 );
 define( 'ERROR_PLUGIN_INSTALL_FAILED', 2504 );
+define( 'ERROR_PLUGIN_UPGRADE_NEEDED', 2505 );
 define( 'ERROR_PLUGIN_GENERIC', 2599 );
 
 # ERROR_COLUMNS_*
@@ -471,6 +474,7 @@ define( 'TOKEN_GRAPH', 2 );
 define( 'TOKEN_LAST_VISITED', 3 );
 define( 'TOKEN_AUTHENTICATED', 4 );
 define( 'TOKEN_COLLAPSE', 5 );
+define( 'TOKEN_ACCOUNT_VERIFY', 6 );
 define( 'TOKEN_USER', 1000 );
 
 # token expirations
@@ -565,3 +569,6 @@ define( 'SECONDS_PER_DAY', 86400 );
 define( 'UNABLE_TO_DUPLICATE', 40 );                # UNABLE_TO_REPRODUCE
 define( 'ERROR_BUG_RESOLVED_ACTION_DENIED', 1102 ); # N/A
 define( 'LOG_SOAP', 64 );                           # LOG_WEBSERVICE
+define( 'FTP', 1 );                                 # DISK
+define( 'ERROR_FTP_CONNECT_ERROR', 16 );            # N/A
+

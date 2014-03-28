@@ -27,9 +27,7 @@ branches:
     - master-2.0.x
 
 matrix:
-  # Until #14398 is fixed, PostgreSQL should not cause entire build to fail
   allow_failures:
-    - env: DB=pgsql
 
 # Notifications
 
@@ -37,8 +35,6 @@ notifications:
   email:
     on_success: change
     on_failure: always
-    recipients:
-      - mantisbt-cvs@lists.sourceforge.net
 
   irc:
     on_success: change

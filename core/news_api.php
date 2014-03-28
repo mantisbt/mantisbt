@@ -101,7 +101,7 @@ function news_delete( $p_news_id ) {
 	$t_query = "DELETE FROM $t_news_table WHERE id=" . db_param();
 	db_query_bound( $t_query, array( $p_news_id ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -116,7 +116,7 @@ function news_delete_all( $p_project_id ) {
 	$t_query = "DELETE FROM $t_news_table WHERE project_id=" . db_param();
 	db_query_bound( $t_query, array( (int)$p_project_id ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -156,7 +156,7 @@ function news_update( $p_news_id, $p_project_id, $p_view_state, $p_announcement,
 
 	db_query_bound( $t_query, array( $p_view_state, $p_announcement, $p_headline, $p_body, $p_project_id, db_now(), $p_news_id ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -295,13 +295,15 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 
 			if( 1 == count( $t_projects ) ) {
 				$c_project_id = $t_projects[0];
-				$query .= " WHERE project_id='$c_project_id'";
+				$query .= " WHERE project_id=" . db_param();
+				$t_params = array( $c_project_id );
 			} else {
 				$query .= ' WHERE project_id IN (' . join( $t_projects, ',' ) . ')';
+				$t_params = null;
 			}
 
 			$query .= ' ORDER BY announcement DESC, id DESC';
-			$result = db_query( $query, $t_news_view_limit, $c_offset );
+			$result = db_query_bound( $query, $t_params, $t_news_view_limit, $c_offset );
 			break;
 		case 1:
 

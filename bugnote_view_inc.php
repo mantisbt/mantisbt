@@ -158,8 +158,9 @@ $num_notes = count( $t_bugnotes );
 <tr class="bugnote <?php echo $t_bugnote_css ?>" id="c<?php echo $t_bugnote->id ?>">
         <td class="bugnote-meta">
 		<?php print_avatar( $t_bugnote->reporter_id ); ?>
-		<span class="small bugnote-permalink"><a rel="bookmark" href="<?php echo string_get_bugnote_view_url($t_bugnote->bug_id, $t_bugnote->id) ?>" title="<?php echo lang_get( 'bugnote_link_title' ) ?>"><?php echo htmlentities( config_get_global( 'bugnote_link_tag' ) ) . $t_bugnote_id_formatted ?></a></span><br />
+		<p class="compact"><span class="small bugnote-permalink"><a rel="bookmark" href="<?php echo string_get_bugnote_view_url($t_bugnote->bug_id, $t_bugnote->id) ?>" title="<?php echo lang_get( 'bugnote_link_title' ) ?>"><?php echo htmlentities( config_get_global( 'bugnote_link_tag' ) ) . $t_bugnote_id_formatted ?></a></span></p>
 
+		<p class="compact">
 		<span class="bugnote-reporter">
 		<?php
 			print_user( $t_bugnote->reporter_id );
@@ -178,19 +179,19 @@ $num_notes = count( $t_bugnotes );
 		<?php if ( VS_PRIVATE == $t_bugnote->view_state ) { ?>
 		<span class="small bugnote-view-state">[ <?php echo lang_get( 'private' ) ?> ]</span>
 		<?php } ?>
-		<br />
-		<span class="small bugnote-date-submitted"><?php echo date( $t_normal_date_format, $t_bugnote->date_submitted ); ?></span><br />
+		</p>
+		<p class="compact"><span class="small bugnote-date-submitted"><?php echo date( $t_normal_date_format, $t_bugnote->date_submitted ); ?></span></p>
 		<?php
 		if ( $t_bugnote_modified ) {
-			echo '<span class="small bugnote-last-modified">' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . date( $t_normal_date_format, $t_bugnote->last_modified ) . '</span><br />';
+			echo '<p class="compact"><span class="small bugnote-last-modified">' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . date( $t_normal_date_format, $t_bugnote->last_modified ) . '</span></p>';
 			$t_revision_count = bug_revision_count( $f_bug_id, REV_BUGNOTE, $t_bugnote->id );
 			if ( $t_revision_count >= 1) {
 				$t_view_num_revisions_text = sprintf( lang_get( 'view_num_revisions' ), $t_revision_count );
-				echo '<span class="small bugnote-revisions-link"><a href="bug_revision_view_page.php?bugnote_id=' . $t_bugnote->id . '">' . $t_view_num_revisions_text . '</a></span><br />';
+				echo '<p class="compact"><span class="small bugnote-revisions-link"><a href="bug_revision_view_page.php?bugnote_id=' . $t_bugnote->id . '">' . $t_view_num_revisions_text . '</a></span></p>';
 			}
 		}
 		?>
-		<br /><div class="small bugnote-buttons">
+		<div class="small bugnote-buttons">
 		<?php
 			# bug must be open to be editable
 			if ( !bug_is_readonly( $f_bug_id ) ) {

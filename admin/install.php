@@ -306,21 +306,11 @@ if( 2 == $t_install_state ) {
 	print_test( 'Checking PHP support for database type', db_check_database_support( $f_db_type ), true, 'database is not supported by PHP. Check that it has been compiled into your server.' );
 
 	# ADOdb library version check
-	# PostgreSQL, Oracle and MSSQL require at least 5.18.
-	# @TODO dregad 20131001 req is 5.19 actually, but must wait until official release
-	# MySQL should be fine with 5.10
+	# PostgreSQL, Oracle and MSSQL require at least 5.19. MySQL should be fine
+	# with 5.10 but to simplify we align to the requirement of the others.
 	$t_adodb_version = substr( $ADODB_vers, 1, strpos( $ADODB_vers, ' ' ) - 1 );
-	switch( $f_db_type ) {
-		case 'mssqlnative':
-		case 'oci8' :
-		case 'pgsql' :
-			$t_adodb_min = '5.18';
-			break;
-		default:
-			$t_adodb_min = '5.10';
-	}
-	print_test( "Checking ADOdb Library version is at least $t_adodb_min",
-		version_compare( $t_adodb_version, $t_adodb_min, '>=' ),
+	print_test( "Checking ADOdb Library version is at least " . DB_MIN_VERSION_ADODB,
+		version_compare( $t_adodb_version, DB_MIN_VERSION_ADODB, '>=' ),
 		true,
 		'Current version: ' . $ADODB_vers
 	);
@@ -391,8 +381,6 @@ if( 2 == $t_install_state ) {
 		# due to a bug in ADODB, this call prompts warnings, hence the @
 		# the check only works on mysql if the database is open
 		$t_version_info = @$g_db->ServerInfo();
-		echo '<br /> Running ' . $f_db_type . ' version ' . nl2br( $t_version_info['description'] );
-
 	} else {
 		print_test_result( BAD, true, 'Does administrative user have access to the database? ( ' . db_error_msg() . ' )' );
 	}
@@ -443,14 +431,14 @@ if( 2 == $t_install_state ) {
 		switch( $f_db_type ) {
 			case 'mysql':
 			case 'mysqli':
-				if( version_compare( $t_version_info['version'], '4.1.0', '<' ) ) {
-					$t_error = 'MySQL 4.1.0 or later is required for installation.';
+				if( version_compare( $t_version_info['version'], DB_MIN_VERSION_MYSQL, '<' ) ) {
+					$t_error = 'MySQL ' . DB_MIN_VERSION_MYSQL . ' or later is required for installation.';
 				}
 				break;
 			case 'mssql':
 			case 'mssqlnative':
-				if( version_compare( $t_version_info['version'], '9.0.0', '<' ) ) {
-					$t_error = 'SQL Server 2005 or later is required for installation.';
+				if( version_compare( $t_version_info['version'], DB_MIN_VERSION_MSSQL, '<' ) ) {
+					$t_error = 'SQL Server 2005 (' . DB_MIN_VERSION_MSSQL . ') or later is required for installation.';
 				}
 				break;
 			case 'pgsql':
@@ -522,18 +510,21 @@ if( !$g_database_upgrade ) {
 
 		<select id="db_type" name="db_type">
 <?php
-			// Build selection list of available DB types
+			# Build selection list of available DB types
 			$t_db_list = array(
-				'mysql'       => 'MySQL (default)',
-				'mysqli'      => 'MySQLi',
+				'mysqli'      => 'MySQL Improved',
+				'mysql'       => 'MySQL',
 				'mssql'       => 'Microsoft SQL Server',
 				'mssqlnative' => 'Microsoft SQL Server Native Driver',
 				'pgsql'       => 'PostgreSQL',
 				'oci8'        => 'Oracle',
 				'db2'         => 'IBM DB2',
 			);
-
-			// mssql is not supported with PHP >= 5.3
+			# mysql is deprecated as of PHP 5.5.0
+			if( version_compare( phpversion(), '5.5.0' ) >= 0 ) {
+				unset( $t_db_list['mysql']);
+			}
+			# mssql is not supported with PHP >= 5.3
 			if( version_compare( phpversion(), '5.3' ) >= 0 ) {
 				unset( $t_db_list['mssql']);
 			}
@@ -693,6 +684,8 @@ if( !$g_database_upgrade ) {
 </tr>
 
 </table>
+</form>
+
 <?php
 }  # end install_state == 1
 
@@ -801,7 +794,7 @@ if( 3 == $t_install_state ) {
 			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . db_error_msg() . ' )' );
 		}
 		$g_db->Close();
-		?>
+	?>
 </tr>
 <?php
 	}
@@ -845,12 +838,62 @@ if( 3 == $t_install_state ) {
 			}
 		}
 
+		$dict = NewDataDictionary( $g_db );
+
+		# Special processing for specific schema versions
+		# This allows execution of additional install steps, which are
+		# not a Mantis schema upgrade but nevertheless required due to
+		# changes in the code
+
+		if( $t_last_update > 51 && $t_last_update < 189 ) {
+			# Since MantisBT 1.1.0 / ADOdb 4.96 (corresponding to schema 51)
+			# 'L' columns are BOOLEAN instead of SMALLINT
+			# Check for any DB discrepancies and update columns if needed
+			$t_bool_columns = check_pgsql_bool_columns();
+			if( $t_bool_columns !== true ) {
+				# Some columns need converting
+				$t_msg = "PostgreSQL: check Boolean columns' actual type";
+				if( is_array( $t_bool_columns ) ) {
+					print_test(
+						$t_msg,
+						count( $t_bool_columns ) == 0,
+						false,
+						count( $t_bool_columns ) . ' columns must be converted to BOOLEAN'
+					);
+				} else {
+					# We did not get an array => error occured
+					print_test( $t_msg, false, true, $t_bool_columns );
+				}
+
+				# Convert the columns
+				foreach( $t_bool_columns as $t_row ) {
+					extract( $t_row, EXTR_PREFIX_ALL, 'v' );
+					$t_null = $v_is_nullable ? 'NULL' : 'NOT NULL';
+					$t_default = is_null( $v_column_default ) ? 'NULL' : $v_column_default;
+					$t_sqlarray = $dict->AlterColumnSQL(
+						$v_table_name,
+						"$v_column_name L $t_null DEFAULT $t_default"
+					);
+					print_test(
+						"Converting column $v_table_name.$v_column_name to BOOLEAN",
+						2 == $dict->ExecuteSQLArray( $t_sqlarray, false ),
+						true,
+						print_r( $t_sqlarray, true )
+					);
+					if( $g_failed ) {
+						# Error occured, bail out
+						break;
+					}
+				}
+			}
+		}
+		# End of special processing for specific schema versions
+
 		while(( $i <= $lastid ) && !$g_failed ) {
 			if( !$f_log_queries ) {
 				echo '<tr><td bgcolor="#ffffff">';
 			}
 
-			$dict = @NewDataDictionary( $g_db );
 			$t_sql = true;
 			$t_target = $upgrade[$i][1][0];
 
@@ -902,11 +945,11 @@ if( 3 == $t_install_state ) {
 					foreach( $sqlarray as $sql ) {
 						# "CREATE OR REPLACE TRIGGER" statements must end with "END;\n/" for Oracle sqlplus
 						if ( $f_db_type == 'oci8' && stripos( $sql, 'CREATE OR REPLACE TRIGGER' ) === 0 ) {
-							$t_sql_end = "\n/";
+							$t_sql_end = PHP_EOL . "/";
 						} else {
 							$t_sql_end = ";";
 						}
-						echo htmlentities( $sql ) . $t_sql_end . "\n\n";
+						echo htmlentities( $sql ) . $t_sql_end . PHP_EOL . PHP_EOL;
 					}
 				}
 			} else {
@@ -942,7 +985,7 @@ if( 3 == $t_install_state ) {
 		}
 		if( $f_log_queries ) {
 			# add a query to set the database version
-			echo 'INSERT INTO ' . db_get_table( 'config' ) . ' ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'' . $lastid . '\', 1, 90, \'database_version\', 0, 0 );' . "\n";
+			echo 'INSERT INTO ' . db_get_table( 'config' ) . ' ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'' . $lastid . '\', 1, 90, \'database_version\', 0, 0 );' . PHP_EOL;
 			echo '</pre><br /><p style="color:red">Your database has not been created yet. Please create the database, then install the tables and data using the information above before proceeding.</p></td></tr>';
 		}
 	}
@@ -992,49 +1035,57 @@ if( 5 == $t_install_state ) {
 
 <tr>
 	<td bgcolor="#ffffff">
-		<?php
-			if( !$t_config_exists ) {
-		echo 'Creating Configuration File (config_inc.php)<br />';
-		echo '<span class="error-msg">(if this file is not created, create it manually with the contents below)</span>';
+<?php
+	if( !$t_config_exists ) {
+?>
+		Creating Configuration File (config_inc.php)<br />
+		<span class="error-msg">
+			(if this file is not created, create it manually with the contents below)
+		</span>
+<?php
 	} else {
-		echo 'Updating Configuration File (config_inc.php)<br />';
+?>
+		Updating Configuration File (config_inc.php)<br />
+<?php
 	}
-	?>
+?>
 	</td>
-	<?php
-	$t_config = '<?php' . "\n"
-		. "\$g_hostname               = '$f_hostname';\n"
-		. "\$g_db_type                = '$f_db_type';\n"
-		. "\$g_database_name          = '$f_database_name';\n"
-		. "\$g_db_username            = '$f_db_username';\n"
-		. "\$g_db_password            = '$f_db_password';\n";
+<?php
+	# Generating the config_inc.php file
+
+	$t_config = '<?php' . PHP_EOL
+		. "\$g_hostname               = '$f_hostname';" . PHP_EOL
+		. "\$g_db_type                = '$f_db_type';" . PHP_EOL
+		. "\$g_database_name          = '" . addslashes( $f_database_name ) . "';" . PHP_EOL
+		. "\$g_db_username            = '" . addslashes( $f_db_username ) . "';" . PHP_EOL
+		. "\$g_db_password            = '" . addslashes( $f_db_password ) . "';" . PHP_EOL;
 
 	switch( $f_db_type ) {
 		case 'db2':
-			$t_config .=  "\$g_db_schema              = '$f_db_schema';\n";
+			$t_config .=  "\$g_db_schema              = '$f_db_schema';" . PHP_EOL;
 			break;
 		default:
 			break;
 	}
-	$t_config .= "\n";
+	$t_config .= PHP_EOL;
 
 	# Add lines for table prefix/suffix if different from default
 	$t_insert_line = false;
 	foreach( $t_prefix_defaults['other'] as $t_key => $t_value ) {
 		$t_new_value = ${'f_' . $t_key};
 		if( $t_new_value != $t_value ) {
-			$t_config .= '$' . str_pad( $t_key, 25 ) . "= '" . ${'f_' . $t_key} . "';\n";
+			$t_config .= '$g_' . str_pad( $t_key, 25 ) . "= '" . ${'f_' . $t_key} . "';" . PHP_EOL;
 			$t_insert_line = true;
 		}
 	}
 	if( $t_insert_line ) {
-		$t_config .= "\n";
+		$t_config .= PHP_EOL;
 	}
 
 	$t_config .=
-		  "\$g_default_timezone       = '$f_timezone';\n"
-		. "\n"
-		. "\$g_crypto_master_salt     = '$f_crypto_master_salt';\n";
+		  "\$g_default_timezone       = '$f_timezone';" . PHP_EOL
+		. PHP_EOL
+		. "\$g_crypto_master_salt     = '" . addslashes( $f_crypto_master_salt ) . "';" . PHP_EOL;
 
 	$t_write_failed = true;
 
@@ -1068,11 +1119,28 @@ if( 5 == $t_install_state ) {
 </tr>
 <?php
 	if( true == $t_write_failed ) {
-		echo '<tr><table width="50%" cellpadding="10" cellspacing="1">';
-		echo '<tr><td>Please add the following lines to ' . $g_absolute_path . 'config_inc.php before continuing to the database upgrade check:</td></tr>';
-		echo '<tr><td><pre>' . htmlentities( $t_config ) . '</pre></td></tr></table></tr>';
+?>
+<tr>
+	<td colspan="2">
+		<table width="50%" cellpadding="10" cellspacing="1">
+			<tr>
+				<td>
+					Please add the following lines to
+					'<?php echo $g_absolute_path; ?>config_inc.php'
+					before continuing to the database upgrade check:
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<pre><?php echo htmlentities( $t_config ); ?></pre>
+				</td>
+			</tr>
+		</table>
+	</td>
+</tr>
+<?php
 	}
-	?>
+?>
 
 </table>
 
@@ -1193,19 +1261,27 @@ if( 6 == $t_install_state ) {
 if( 7 == $t_install_state ) {
 	# cleanup and launch upgrade
 	?>
-<p>Install was successful.</p>
+<table width="100%" bgcolor="#222222" cellpadding="10" cellspacing="1">
+<tr>
+	<td bgcolor="#e8e8e8" colspan="2">
+		<span class="title">Installation Complete...</span>
+	</td>
+</tr>
+<tr bgcolor="#ffffff">
+	<td>
+		MantisBT was installed successfully.
 <?php if( $f_db_exists ) {?>
-<p><a href="../login_page.php">Continue</a> to log into Mantis</p>
-<?php
-	} else {?>
-<p>Please log in as the administrator and <a href="../login_page.php">create</a> your first project.</p>
+		<a href="../login_page.php">Continue</a> to log in.
+<?php } else { ?>
+		Please log in as the administrator and <a href="../login_page.php">create</a> your first project.
+<?php } ?>
+	</td>
+	<?php print_test_result( GOOD ); ?>
+</tr>
+</table>
 
 <?php
-	}
 }
-?>
-</form>
-<?php
 
 # end install_state == 7
 
@@ -1214,7 +1290,7 @@ if( $g_failed && $t_install_state != 1 ) {
 <table width="100%" bgcolor="#222222" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Checks Failed...</span>
+		<span class="title">Installation Failed...</span>
 	</td>
 </tr>
 <tr>

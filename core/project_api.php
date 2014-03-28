@@ -192,7 +192,7 @@ function project_cache_all() {
 	return $g_cache_project;
 }
 
-/** 
+/**
  * Clear the project cache (or just the given id if specified)
  * @param int $p_project_id project id
  * @return bool
@@ -416,7 +416,7 @@ function project_delete( $p_project_id ) {
 
 	project_clear_cache( $p_project_id );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -444,6 +444,17 @@ function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_v
 
 	$t_old_name = project_get_field( $p_project_id, 'name' );
 
+	# If project is becoming private, save current user's access level
+	# so we can add them to the project afterwards so they don't lock
+	# themselves out
+	$t_old_view_state = project_get_field( $p_project_id, 'view_state' );
+	$t_is_becoming_private = VS_PRIVATE == $p_view_state && VS_PRIVATE != $t_old_view_state;
+	if( $t_is_becoming_private ) {
+		$t_user_id = auth_get_current_user_id();
+		$t_access_level = user_get_access_level( $t_user_id, $p_project_id );
+		$t_manage_project_threshold = config_get( 'manage_project_threshold' );
+	}
+
 	if( strcasecmp( $p_name, $t_old_name ) != 0 ) {
 		project_ensure_name_unique( $p_name );
 	}
@@ -467,7 +478,13 @@ function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_v
 
 	project_clear_cache( $p_project_id );
 
-	# db_query errors on failure so:
+	# User just locked themselves out of the project by making it private,
+	# so we add them to the project with their previous access level
+	if( $t_is_becoming_private && !access_has_project_level( $t_manage_project_threshold, $p_project_id ) ) {
+		project_add_user( $p_project_id, $t_user_id, $t_access_level );
+	}
+
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -787,7 +804,7 @@ function project_add_user( $p_project_id, $p_user_id, $p_access_level ) {
 
 	db_query_bound( $query, array( $c_project_id, $c_user_id, $c_access_level ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -807,7 +824,7 @@ function project_update_user_access( $p_project_id, $p_user_id, $p_access_level 
 
 	db_query_bound( $query, array( $c_access_level, $c_project_id, $c_user_id ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -840,7 +857,7 @@ function project_remove_user( $p_project_id, $p_user_id ) {
 
 	db_query_bound( $query, array( $c_project_id, $c_user_id ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
@@ -865,7 +882,7 @@ function project_remove_all_users( $p_project_id, $p_access_level_limit = null )
 		db_query_bound( $t_query, array( $p_project_id ) );
 	}
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 

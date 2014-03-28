@@ -930,7 +930,7 @@ function print_menu() {
 		echo '<fieldset class="bug-jump">';
 		# CSRF protection not required here - form does not result in modifications
 		echo '<input type="hidden" name="bug_label" value="' . lang_get( 'issue_id' ) . '" />';
-		echo '<input type="text" name="bug_id" size="4" />&#160;';
+		echo '<input type="text" name="bug_id" size="8" />&#160;';
 		echo '<input type="submit" value="' . lang_get( 'jump' ) . '" />&#160;';
 		echo '</fieldset>';
 		echo '</form>';
@@ -1615,12 +1615,12 @@ function html_button_bug_move( $p_bug_id ) {
 }
 
 /**
- * Print a button to move the given bug to a different project
+ * Print a button to clone the given bug
  * @param int $p_bug_id
  * @return null
  */
 function html_button_bug_create_child( $p_bug_id ) {
-	if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
+	if( access_has_bug_level( config_get( 'report_bug_threshold' ), $p_bug_id ) ) {
 		html_button( string_get_bug_report_url(), lang_get( 'create_child_bug_button' ), array( 'm_id' => $p_bug_id ) );
 	}
 }
@@ -1819,6 +1819,11 @@ function html_buttons_view_bug_page( $p_bug_id ) {
  * @param null $p_user
  * @param null $p_project
  * @return string
+ *
+ * @todo This does not work properly when displaying issues from a project other
+ * than then current one, if the other project has custom status or colors.
+ * This is due to the dynamic css for color coding (css/status_config.php).
+ * Build CSS including project or even user-specific colors ?
  */
 function html_get_status_css_class( $p_status, $p_user = null, $p_project = null ) {
 	return string_attribute( MantisEnum::getLabel( config_get('status_enum_string', null, $p_user, $p_project ), $p_status ) . '-color' );

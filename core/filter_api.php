@@ -1759,17 +1759,18 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		# use the complementary type
 		$t_comp_type = relationship_get_complementary_type( $c_rel_type );
 		$t_clauses = array();
-		$t_table_name = 'relationship';
-		array_push( $t_join_clauses, "LEFT JOIN $t_bug_relationship_table $t_table_name ON $t_table_name.destination_bug_id = $t_bug_table.id" );
-		array_push( $t_join_clauses, "LEFT JOIN $t_bug_relationship_table ${t_table_name}2 ON ${t_table_name}2.source_bug_id = $t_bug_table.id" );
+		$t_table_dst = 'rel_dst';
+		$t_table_src = 'rel_src';
+		array_push( $t_join_clauses, "LEFT JOIN $t_bug_relationship_table $t_table_dst ON $t_table_dst.destination_bug_id = $t_bug_table.id" );
+		array_push( $t_join_clauses, "LEFT JOIN $t_bug_relationship_table $t_table_src ON $t_table_src.source_bug_id = $t_bug_table.id" );
 
 		// get reverse relationships
 		$t_where_params[] = $t_comp_type;
 		$t_where_params[] = $c_rel_bug;
 		$t_where_params[] = $c_rel_type;
 		$t_where_params[] = $c_rel_bug;
-		array_push( $t_clauses, "($t_table_name.relationship_type=" . db_param() . " AND $t_table_name.source_bug_id=" . db_param() . ')' );
-		array_push( $t_clauses, "($t_table_name" . "2.relationship_type=" . db_param() . " AND $t_table_name" . "2.destination_bug_id=" . db_param() . ')' );
+		array_push( $t_clauses, "($t_table_dst.relationship_type=" . db_param() . " AND $t_table_dst.source_bug_id=" . db_param() . ')' );
+		array_push( $t_clauses, "($t_table_src.relationship_type=" . db_param() . " AND $t_table_src.destination_bug_id=" . db_param() . ')' );
 		array_push( $t_where_clauses, '(' . implode( ' OR ', $t_clauses ) . ')' );
 	}
 
@@ -1899,10 +1900,11 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				# skip this custom field it shouldn't be filterable
 			}
 
+			$t_field = $t_filter['custom_fields'][$t_cfid];
 			$t_custom_where_clause = '';
 
 			# Ignore all custom filters that are not set, or that are set to '' or "any"
-			if( !filter_field_is_any( $t_filter['custom_fields'][$t_cfid] ) ) {
+			if( !filter_field_is_any( $t_field ) ) {
 				$t_def = custom_field_get_definition( $t_cfid );
 				$t_table_name = $t_custom_field_string_table . '_' . $t_cfid;
 
@@ -1913,24 +1915,27 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_cf_join_clause = "LEFT JOIN $t_custom_field_string_table $t_table_name ON $t_bug_table.id = $t_table_name.bug_id AND $t_table_name.field_id = $t_cfid";
 
 				if( $t_def['type'] == CUSTOM_FIELD_TYPE_DATE ) {
-					switch( $t_filter['custom_fields'][$t_cfid][0] ) {
+					# Define the value field with type cast to integer
+					$t_value_field = "CAST(COALESCE(NULLIF($t_table_name.value, ''), '0') AS DECIMAL)";
+					switch( $t_field[0] ) {
+						# Closing parenthesis intentionally omitted, will be added later on
 						case CUSTOM_FIELD_DATE_ANY:
 							break;
 						case CUSTOM_FIELD_DATE_NONE:
 							array_push( $t_join_clauses, $t_cf_join_clause );
-							$t_custom_where_clause = '(( ' . $t_table_name . '.bug_id is null) OR ( ' . $t_table_name . '.value = 0)';
+							$t_custom_where_clause = "( $t_table_name.bug_id is null OR $t_value_field = 0 ";
 							break;
 						case CUSTOM_FIELD_DATE_BEFORE:
 							array_push( $t_join_clauses, $t_cf_join_clause );
-							$t_custom_where_clause = '(( ' . $t_table_name . '.value != 0 AND (' . $t_table_name . '.value+0) < ' . ( $t_filter['custom_fields'][$t_cfid][2] ) . ')';
+							$t_custom_where_clause = "( $t_value_field != 0 AND $t_value_field < " . $t_field[2];
 							break;
 						case CUSTOM_FIELD_DATE_AFTER:
 							array_push( $t_join_clauses, $t_cf_join_clause );
-							$t_custom_where_clause = '( (' . $t_table_name . '.value+0) > ' . ( $t_filter['custom_fields'][$t_cfid][1] + 1 );
+							$t_custom_where_clause = "( $t_value_field > " . ( $t_field[1] + 1 );
 							break;
 						default:
 							array_push( $t_join_clauses, $t_cf_join_clause );
-							$t_custom_where_clause = '( (' . $t_table_name . '.value+0) BETWEEN ' . $t_filter['custom_fields'][$t_cfid][1] . ' AND ' . $t_filter['custom_fields'][$t_cfid][2];
+							$t_custom_where_clause = "( $t_value_field BETWEEN " . $t_field[1] . ' AND ' . $t_field[2];
 							break;
 					}
 				} else {
@@ -1938,7 +1943,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 					array_push( $t_join_clauses, $t_cf_join_clause );
 
 					$t_filter_array = array();
-					foreach( $t_filter['custom_fields'][$t_cfid] as $t_filter_member ) {
+					foreach( $t_field as $t_filter_member ) {
 						$t_filter_member = stripslashes( $t_filter_member );
 						if( filter_field_is_none( $t_filter_member ) ) {
 
@@ -2494,8 +2499,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					$t_any_found = true;
 				} else {
 					$t_profile = profile_get_row_direct( $t_current );
-
-					$t_this_string = "${t_profile['platform']} ${t_profile['os']} ${t_profile['os_build']}";
+					$t_this_string = $t_profile['platform'] . ' ' . $t_profile['os'] . ' ' . $t_profile['os_build'];
 				}
 				if( $t_first_flag != true ) {
 					$t_output = $t_output . '<br />';
@@ -2848,7 +2852,6 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_STICKY;?>" id="sticky_issues_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'sticky_label' )?></a>
 			</td>
 			<td class="small-caption" colspan="2">
-				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_HIGHLIGHT_CHANGED;?>" id="highlight_changed_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'changed_label' )?></a>
 			</td>
 			<td class="small-caption" >
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_FILTER_BY_DATE;?>" id="do_filter_by_date_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'use_date_filters_label' )?></a>
@@ -2889,11 +2892,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					echo FILTER_PROPERTY_STICKY; ?>" value="<?php
 					echo $t_sticky_filter_state ? 'on' : 'off'; ?>" />
 			</td>
-			<td class="small-caption" colspan="2" id="highlight_changed_filter_target">
-				<?php
-					echo $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED];
-		echo '<input type="hidden" name="', FILTER_PROPERTY_HIGHLIGHT_CHANGED, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] ), '" />';
-		?>
+			<td class="small-caption" colspan="2">&#160;
 			</td>
 			<td class="small-caption" id="do_filter_by_date_filter_target">
 		<?php
@@ -3381,7 +3380,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					echo '<input type="hidden" name="', FILTER_PROPERTY_PROJECT_ID, '[]" value="', string_attribute( $t_current ), '" />';
 					$t_this_name = '';
 					if( META_FILTER_CURRENT == $t_current ) {
-						$t_this_name = lang_get( 'current' );
+						$t_this_name = '[' . lang_get( 'current' ) . ']';
 					} else {
 						$t_this_name = project_get_name( $t_current, false );
 					}
@@ -3425,7 +3424,23 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			?>
 			<input type="hidden" name="match_type" value="<?php echo $t_filter[FILTER_PROPERTY_MATCH_TYPE] ?>"/>
 			</td>
-			<td colspan="6">&#160;</td>
+
+			<td class="small-caption category2">
+				<a id="highlight_changed_filter"
+					href="<?php echo $t_filters_url . FILTER_PROPERTY_HIGHLIGHT_CHANGED; ?>"
+					<?php #echo $t_dynamic_filter_expander_class; ?>>
+					<?php echo lang_get( 'changed_label' )?>
+				</a>
+			</td>
+			<td class="small-caption" valign="top" id="highlight_changed_filter_target">
+				<?php echo $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED]; ?>
+				<input type="hidden"
+					name="<?php echo FILTER_PROPERTY_HIGHLIGHT_CHANGED; ?>"
+					value="<?php echo string_attribute( $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] ); ?>"
+				/>
+			</td>
+
+			<td colspan="4">&#160;</td>
 		</tr>
 	</table>
 		<?php
@@ -4294,28 +4309,28 @@ function print_filter_custom_field_date( $p_field_num, $p_field_id ) {
 	echo "\n<table cellspacing=\"0\" cellpadding=\"0\"><tr><td>\n";
 	echo "<select size=\"1\" name=\"custom_field_" . $p_field_id . "_control\">\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_ANY . '"';
-	check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ANY );
+	check_selected( (int)$t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ANY );
 	echo '>' . lang_get( 'any' ) . '</option>' . "\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_NONE . '"';
-	check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_NONE );
+	check_selected( (int)$t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_NONE );
 	echo '>' . lang_get( 'none' ) . '</option>' . "\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_BETWEEN . '"';
-	check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_BETWEEN );
+	check_selected( (int)$t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_BETWEEN );
 	echo '>' . lang_get( 'between_date' ) . '</option>' . "\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_ONORBEFORE . '"';
-	check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ONORBEFORE );
+	check_selected( (int)$t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ONORBEFORE );
 	echo '>' . lang_get( 'on_or_before_date' ) . '</option>' . "\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_BEFORE . '"';
-	check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_BEFORE );
+	check_selected( (int)$t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_BEFORE );
 	echo '>' . lang_get( 'before_date' ) . '</option>' . "\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_ON . '"';
-	check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ON );
+	check_selected( (int)$t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ON );
 	echo '>' . lang_get( 'on_date' ) . '</option>' . "\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_AFTER . '"';
-	check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_AFTER );
+	check_selected( (int)$t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_AFTER );
 	echo '>' . lang_get( 'after_date' ) . '</option>' . "\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_ONORAFTER . '"';
-	check_selected( $t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ONORAFTER );
+	check_selected( (int)$t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ONORAFTER );
 	echo '>' . lang_get( 'on_or_after_date' ) . '</option>' . "\n";
 	echo '</select>' . "\n";
 
@@ -4336,7 +4351,7 @@ function print_filter_project_id() {
 		<!-- Project -->
 		<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_PROJECT_ID;?>[]">
 			<option value="<?php echo META_FILTER_CURRENT ?>"
-				<?php check_selected( $t_filter[FILTER_PROPERTY_PROJECT_ID], META_FILTER_CURRENT, false );?>>
+				<?php check_selected( $t_filter[FILTER_PROPERTY_PROJECT_ID], META_FILTER_CURRENT );?>>
 				[<?php echo lang_get( 'current' )?>]
 			</option>
 			<?php print_project_option_list( $t_filter[FILTER_PROPERTY_PROJECT_ID] )?>
@@ -4691,7 +4706,7 @@ function filter_db_delete_filter( $p_filter_id ) {
 	$t_query = 'DELETE FROM ' . $t_filters_table . ' WHERE id=' . db_param();
 	db_query_bound( $t_query, array( $c_filter_id ) );
 
-	# db_query errors on failure so:
+	# db_query_bound() errors on failure so:
 	return true;
 }
 
