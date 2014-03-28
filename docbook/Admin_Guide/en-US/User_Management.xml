@@ -264,22 +264,26 @@
 	the list of access levels will be covered in the customization section.</para>
     </section>
 
-    <section id="admin.user.autocreate">
-        <title>Auto Creation of Accounts on Login</title>
+	<section id="admin.user.autocreate">
+		<title>Auto Creation of Accounts on Login</title>
 
-	<para>In some cases MantisBT is setup in a way, where it allows users
-	that already exists in a directory or another application to be
-	automatically authenticated and added to MantisBT.  For example, a
-	company may setup their MantisBT installation in a way, where its staff
-	members that are already registered in their LDAP directory, should be
-	allowed to login into MantisBT with the same user name and password.
-	Another example, is where MantisBT is integrated into some content
-	management system, where it is desired to have a single registration and
-	single sign-on experience.  In such scenarios, once a user logs in for
-	the first time, a user account is automatically created for them,
-	although the password verification is still done against LDAP or the
-	main users repository.</para>
-    </section>
+		<para>If you are using a global user directory (LDAP, Active Directory),
+			you may want to configure MantisBT so users who already exists in the
+			directory will be automatically authenticated and added to MantisBT.
+		</para>
+		<para>For example, a company may setup their MantisBT installation in
+			a way, where its staff members that are already registered in their
+			LDAP directory, should be allowed to login into MantisBT with the
+			same user name and password. Another option could be if MantisBT is
+			integrated into some content management system, where it is desired
+			to have a single registration and single sign-on experience.
+		</para>
+		<para>In such scenarios, once a user logs in for the first time, a
+			user account is automatically created for them, although the
+			password verification is still done against LDAP or the
+			main users repository.
+		</para>
+	</section>
 
     <section id="admin.user.prefs">
         <title>User Preferences</title>
