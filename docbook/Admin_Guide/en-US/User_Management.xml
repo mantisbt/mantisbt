@@ -364,23 +364,26 @@
 		</itemizedlist>
 	</section>
 
-    <section id="admin.user.profiles">
-        <title>User Profiles</title>
+	<section id="admin.user.profiles">
+		<title>User Profiles</title>
 
-	<para>A user profile describes an environment that the user uses to run
-	the software for which issues are being tracked.  The profile
-	information include "Platform", "Operating System", "OS Version", and
-	"Additional Description".  Each user has access to profiles that they
-	create (can be multiple), in addition to global ones that are shared
-	created by other users.  When reporting issues, users can elect to enter
-	information like platform, operating system, version manually, or they
-	can choose from the list of profiles that are already defined.</para>
-
-	<para>Global profiles are typically used by the administrator to define
-	a set of standard profiles that are typically used by the MantisBT
-	users.  This makes it easier for the users to use such profiles without
-	having to define create them.  The access level required for users to be
-	able to create global profiles is configured by the $g_manage_global_profile_threshold
-	configuration option and it is defaulted to MANAGER.</para>
-    </section>
+		<para>A user profile describes an environment that used to run
+			the software for which issues are being tracked.
+		</para>
+		<para>When reporting issues, users can elect to enter information
+			like platform, operating system and version manually, or they
+			can choose from a list of available profiles.
+		</para>
+		<para>Each user has access to all the personal profiles they create,
+			in addition to global ones; Profile data includes
+			"Platform", "Operating System", "OS Version", and "Additional Description".
+		</para>
+		<para>Global profiles are typically used by the administrator to define
+			a set of standard system settings used in their environment, which
+			saves users the trouble of having to define them individually.
+			The access level required to manage global profiles is configured
+			by the $g_manage_global_profile_threshold configuration option
+			and defaults to MANAGER.
+		</para>
+	</section>
 </chapter>
