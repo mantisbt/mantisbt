@@ -64,41 +64,4 @@
 	</para>
     </section>
 
-    <section id="admin.contributing.register">
-        <title>Registered in MantisBT Users Directory</title>
-
-        <para>
-	    Join the <ulink url="http://www.mantisbt.org/directory.php">Users
-	    Directory</ulink> by clicking Submit. While entering your company or
-	    project details you will be able to write up a testimonial about
-	    MantisBT which will then be included in the <ulink
-	    url="http://www.mantisbt.org/testimonials.php">Testimonials
-	    page</ulink>.
-	</para>
-    </section>
-
-    <section id="admin.contributing.donate">
-        <title>Donate Money</title>
-
-        <para>
-	    Use the PayPal donate buttons that you will see around the website
-	    (e.g. bottom left of the home page).  You can donate using your
-	    credit card even if you don't have a PayPal account. Donations is
-	    a very easy way for the MantisBT community to give back to MantisBT.
-	    The donations can be as small as US$1 or as big as you or your organization
-	    want it to be.
-	</para>
-    </section>
-
-    <section id="admin.contributing.sponsor">
-        <title>Sponsor MantisBT</title>
-
-        <para>
-	    MantisBT Sponsors are organizations that have realized the benefit
-	    brought to their business by using MantisBT and would like to
-	    protect such investment and always push it forward via sponsorship.
-	    Please take a moment to visit our sponsors page and use the "Contact
-	    Us" page for further information.
-        </para>
-    </section>
 </chapter>
