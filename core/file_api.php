@@ -56,8 +56,6 @@ $g_cache_file_count = array();
  * @return string
  */
 function file_get_display_name( $p_filename ) {
-	$t_array = explode( '-', $p_filename, 2 );
-
 	# Check if it's a project document filename (doc-0000000-filename)
 	# or a bug attachment filename (0000000-filename)
 	# for newer filenames, the filename in schema is correct.
@@ -430,7 +428,7 @@ function file_delete_project_files( $p_project_id ) {
 	# Delete the corresponding db records
 	$query = "DELETE FROM $t_project_file_table
 				WHERE project_id=" . db_param();
-	$result = db_query_bound( $query, array( (int) $p_project_id ) );
+	db_query_bound( $query, array( (int) $p_project_id ) );
 }
 
 /**
@@ -1064,7 +1062,6 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 
 	$t_project_id = bug_get_field( $p_source_bug_id, 'project_id' );
 
-	$t_bug_file = array();
 	for( $i = 0;$i < $t_count;$i++ ) {
 		$t_bug_file = db_fetch_array( $result );
 

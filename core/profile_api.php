@@ -156,7 +156,7 @@ function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_bu
 					  os_build=" . db_param() . ",
 					  description=" . db_param() . "
 				  WHERE id=" . db_param() . " AND user_id=" . db_param();
-	$result = db_query_bound( $query, array( $p_platform, $p_os, $p_os_build, $p_description, $p_profile_id, $p_user_id ) );
+	db_query_bound( $query, array( $p_platform, $p_os, $p_os_build, $p_description, $p_profile_id, $p_user_id ) );
 }
 
 /**

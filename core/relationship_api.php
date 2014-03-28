@@ -282,7 +282,7 @@ function relationship_delete_all( $p_bug_id ) {
 	$query = "DELETE FROM $t_mantis_bug_relationship_table
 				WHERE source_bug_id=" . db_param() . " OR
 				destination_bug_id=" . db_param();
-	$result = db_query_bound( $query, array( $c_bug_id, $c_bug_id ) );
+	db_query_bound( $query, array( $c_bug_id, $c_bug_id ) );
 }
 
 /**
@@ -291,11 +291,6 @@ function relationship_delete_all( $p_bug_id ) {
  * @param int $p_new_bug_id Destination Bug Id
  */
 function relationship_copy_all( $p_bug_id, $p_new_bug_id ) {
-	$c_bug_id = db_prepare_int( $p_bug_id );
-	$c_new_bug_id = db_prepare_int( $p_new_bug_id );
-
-	$t_mantis_bug_relationship_table = db_get_table( 'bug_relationship' );
-
 	$t_relationship = relationship_get_all_src( $p_bug_id );
 	$t_relationship_count = count( $t_relationship );
 	for( $i = 0;$i < $t_relationship_count;$i++ ) {

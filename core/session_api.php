@@ -257,7 +257,6 @@ function session_get( $p_name, $p_default = null ) {
  * @return int Session variable
  */
 function session_get_int( $p_name, $p_default = null ) {
-	global $g_session;
 	$t_args = func_get_args();
 	return (int) call_user_func_array( 'session_get', $t_args );
 }
@@ -269,7 +268,6 @@ function session_get_int( $p_name, $p_default = null ) {
  * @return boolean Session variable
  */
 function session_get_bool( $p_name, $p_default = null ) {
-	global $g_session;
 	$t_args = func_get_args();
 	return true && call_user_func_array( 'session_get', $t_args );
 }
@@ -281,7 +279,6 @@ function session_get_bool( $p_name, $p_default = null ) {
  * @return string Session variable
  */
 function session_get_string( $p_name, $p_default = null ) {
-	global $g_session;
 	$t_args = func_get_args();
 	return '' . call_user_func_array( 'session_get', $t_args );
 }

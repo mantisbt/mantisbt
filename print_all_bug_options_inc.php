@@ -111,10 +111,10 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 	$field_name_count = count( $t_field_name_arr );
 
 	# Grab the data
-	$query = "SELECT print_pref
+	$t_query = "SELECT print_pref
 			FROM $t_user_print_pref_table
 			WHERE user_id=" . db_param();
-	$result = db_query_bound( $query, array( $c_user_id ) );
+	$result = db_query_bound( $t_query, array( $c_user_id ) );
 
 	## OOPS, No entry in the database yet.  Lets make one
 	if ( 0 == db_num_rows( $result ) ) {
@@ -126,19 +126,19 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 		$t_default = implode( '', $t_default_arr ) ;
 
 		# all fields are added by default
-		$query = "INSERT
+		$t_query = "INSERT
 				INTO $t_user_print_pref_table
 				(user_id, print_pref)
 				VALUES
 				(" . db_param() . "," . db_param() . ")";
 
-		$result = db_query_bound( $query, array( $c_user_id, $t_default ) );
+		db_query_bound( $t_query, array( $c_user_id, $t_default ) );
 
 		# Rerun select query
-		$query = "SELECT print_pref
+		$t_query = "SELECT print_pref
 				FROM $t_user_print_pref_table
 				WHERE user_id=" . db_param();
-		$result = db_query_bound( $query, array( $c_user_id ) );
+		$result = db_query_bound( $t_query, array( $c_user_id ) );
 	}
 
 	# putting the query result into an array with the same size as $t_fields_arr
@@ -146,7 +146,6 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 	$t_prefs = $row['print_pref'];
 
 	# Account Preferences Form BEGIN
-	$t_index_count=0;
 ?>
 <br />
 <div>
