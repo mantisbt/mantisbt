@@ -204,7 +204,9 @@ function current_user_ensure_unprotected() {
 /**
  * Returns the issue filter parameters for the current user
  *
- * @return Active issue filter for current user or false if no filter is currently defined.
+ * @param int $p_project_id project id. This argument is only used if a 'filter' string is not passed via the web request.
+ *            The default value is null meaning return the current filter for user's current project if a filter string is not supplied.
+ * @return mixed Active issue filter for current user or false if no filter is currently defined.
  * @access public
  */
 function current_user_get_bug_filter( $p_project_id = null ) {
