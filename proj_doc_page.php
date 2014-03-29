@@ -66,10 +66,6 @@ if ( OFF == config_get( 'enable_project_documentation' ) || !file_is_uploading_e
 $g_project_override = $f_project_id;
 
 $t_user_id = auth_get_current_user_id();
-$t_project_file_table = db_get_table( 'project_file' );
-$t_project_table = db_get_table( 'project' );
-$t_project_user_list_table = db_get_table( 'project_user_list' );
-$t_user_table = db_get_table( 'user' );
 $t_pub = VS_PUBLIC;
 $t_priv = VS_PRIVATE;
 $t_admin = config_get_global( 'admin_site_threshold' );
@@ -96,17 +92,17 @@ if ( is_array( $t_reqd_access ) ) {
 }
 
 $query = "SELECT pft.id, pft.project_id, pft.filename, pft.filesize, pft.title, pft.description, pft.date_added
-			FROM $t_project_file_table pft
-				LEFT JOIN $t_project_table pt ON pft.project_id = pt.id
-				LEFT JOIN $t_project_user_list_table pult
-					ON pft.project_id = pult.project_id AND pult.user_id = " . db_param() . "
-				LEFT JOIN $t_user_table ut ON ut.id = " . db_param() . "
+			FROM {project_file} pft
+				LEFT JOIN {project} pt ON pft.project_id = pt.id
+				LEFT JOIN {project_user_list} pult
+					ON pft.project_id = pult.project_id AND pult.user_id = %d
+				LEFT JOIN {user} ut ON ut.id=%d
 			WHERE pft.project_id in (" . implode( ',', $t_projects ) . ") AND
-				( ( ( pt.view_state = " . db_param() . " OR pt.view_state is null ) AND pult.user_id is null AND ut.access_level $t_access_clause ) OR
-					( ( pult.user_id = " . db_param() . " ) AND ( pult.access_level $t_access_clause ) ) OR
-					( ut.access_level >= " . db_param() . " ) )
+				( ( ( pt.view_state = %d OR pt.view_state is null ) AND pult.user_id is null AND ut.access_level $t_access_clause ) OR
+					( ( pult.user_id = %d ) AND ( pult.access_level $t_access_clause ) ) OR
+					( ut.access_level >= %d ) )
 			ORDER BY pt.name ASC, pft.title ASC";
-$t_result = db_query_bound( $query, array( $t_user_id, $t_user_id, $t_pub, $t_user_id, $t_admin ) );
+$t_result = db_query( $query, array( $t_user_id, $t_user_id, $t_pub, $t_user_id, $t_admin ) );
 
 html_page_top( lang_get( 'docs_link' ) );
 ?>

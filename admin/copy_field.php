@@ -64,11 +64,9 @@ if( !in_array( $f_dest_field, $t_valid_fields ) ) {
 
 # @@@ check that source and destination are compatible
 
-$t_string_table = db_get_table( 'custom_field_string' );
-$t_bug_table = db_get_table( 'bug' );
-$query = 'SELECT * FROM ' . $t_string_table . ' WHERE field_id = ' . db_param() . ' and value <> ' . db_param();
+$query = 'SELECT * FROM {custom_field_string} WHERE field_id=%d and value <> %s';
 
-$t_result = @db_query_bound( $query, array( $f_source_field_id, '' ) );
+$t_result = @db_query( $query, array( $f_source_field_id, '' ) );
 if( FALSE == $t_result ) {
 	echo '<p>No fields need to be updated.</p>';
 }

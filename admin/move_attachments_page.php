@@ -41,16 +41,12 @@ echo '</p></div>';
 # File type should be 'bug' (default) or 'project'
 $f_file_type = gpc_get( 'type', 'bug' );
 
-$t_bug_table = db_get_table( 'mantis_bug_table' );
-$t_project_table = db_get_table( 'mantis_project_table' );
-
 switch( $f_file_type ) {
 	case 'project':
 		$t_type = 'Project Files';
-		$t_file_table = db_get_table( 'mantis_project_file_table' );
 		$t_query = "SELECT p.id, p.name, COUNT(f.id) disk
-			FROM $t_file_table f
-			LEFT JOIN $t_project_table p ON p.id = f.project_id
+			FROM {project_file} f
+			LEFT JOIN {project} p ON p.id = f.project_id
 			WHERE content <> ''
 			GROUP BY p.id, p.name
 			ORDER BY p.name";
@@ -59,11 +55,10 @@ switch( $f_file_type ) {
 	case 'bug':
 	default:
 		$t_type = 'Attachments';
-		$t_file_table = db_get_table( 'mantis_bug_file_table' );
 		$t_query = "SELECT p.id, p.name, COUNT(f.id) disk
-			FROM $t_file_table f
-			JOIN $t_bug_table b ON b.id = f.bug_id
-			JOIN $t_project_table p ON p.id = b.project_id
+			FROM {bug_file} f
+			JOIN {bug} b ON b.id = f.bug_id
+			JOIN {project} p ON p.id = b.project_id
 			WHERE content <> ''
 			GROUP BY p.id, p.name
 			ORDER BY p.name";
@@ -71,7 +66,7 @@ switch( $f_file_type ) {
 }
 
 # Move to disk: projects having non-empty attachments in the DB
-$t_result = db_query_bound( $t_query );
+$t_result = db_query( $t_query );
 
 # Build list, excluding projects having upload method other than DISK
 $t_projects = array();

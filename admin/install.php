@@ -34,10 +34,20 @@ define( 'MANTIS_MAINTENANCE_MODE', true );
 require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 require_api( 'install_helper_functions_api.php' );
 require_api( 'crypto_api.php' );
-$g_error_send_page_header = false; # bypass page headers in error handler
 
 $g_failed = false;
 $g_database_upgrade = false;
+
+/**
+ * Print Info result
+ *
+ * @param string $p_description Description Message to display to user
+ * @param string $p_info Info Message to display to user
+ */
+function print_info_row( $p_description, $p_info = null ) {
+	echo "\t<tr>\n\t\t<td bgcolor=\"#ffffff\">$p_description</td>\n";
+ 	echo "\t\t<td bgcolor=\"#ffffff\">$p_info</td>\n\t</tr>\n";
+}
 
 /**
  * Print Test result
@@ -102,7 +112,6 @@ html_javascript_link( 'jquery-1.9.1.min.js' );
 html_javascript_link( 'install.js' );
 html_head_end();
 ?>
-
 <body>
 <table width="100%" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
 	<tr class="top-bar">
@@ -156,30 +165,14 @@ if( 0 == $t_install_state ) {
 $t_config_filename = $g_absolute_path . 'config_inc.php';
 $t_config_exists = file_exists( $t_config_filename );
 
-# Initialize Oracle-specific values for prefix and suffix, and set
-# values for other db's as per config defaults
-$t_prefix_defaults = array(
-	'oci8' => array(
-		'db_table_prefix'        => 'm',
-		'db_table_plugin_prefix' => 'plg',
-		'db_table_suffix'        => '',
-	) ,
-);
-foreach( $t_prefix_defaults['oci8'] as $t_key => $t_value ) {
-	$t_prefix_defaults['other'][$t_key] = config_get( $t_key, '' );
-}
-
 if( $t_config_exists && $t_install_state <= 1 ) {
 	# config already exists - probably an upgrade
 	$f_dsn                    = config_get( 'dsn', '' );
 	$f_hostname               = config_get( 'hostname', '' );
 	$f_db_type                = config_get( 'db_type', '' );
 	$f_database_name          = config_get( 'database_name', '' );
-	$f_db_schema              = config_get( 'db_schema', '' );
 	$f_db_username            = config_get( 'db_username', '' );
 	$f_db_password            = config_get( 'db_password', '' );
-	$f_timezone               = config_get( 'default_timezone', '' );
-	$f_crypto_master_salt     = config_get( 'crypto_master_salt', '' );
 
 	# Set default prefix/suffix form variables ($f_db_table_XXX)
 	foreach( $t_prefix_defaults['other'] as $t_key => $t_value ) {
@@ -191,19 +184,10 @@ if( $t_config_exists && $t_install_state <= 1 ) {
 	$f_hostname           = gpc_get( 'hostname', config_get( 'hostname', 'localhost' ) );
 	$f_db_type            = gpc_get( 'db_type', config_get( 'db_type', '' ) );
 	$f_database_name      = gpc_get( 'database_name', config_get( 'database_name', 'bugtracker' ) );
-	$f_db_schema          = gpc_get( 'db_schema', config_get( 'db_schema', '' ) );
 	$f_db_username        = gpc_get( 'db_username', config_get( 'db_username', '' ) );
 	$f_db_password        = gpc_get( 'db_password', config_get( 'db_password', '' ) );
 	if( CONFIGURED_PASSWORD == $f_db_password ) {
 		$f_db_password = config_get( 'db_password' );
-	}
-	$f_timezone           = gpc_get( 'timezone', config_get( 'default_timezone' ) );
-	$f_crypto_master_salt = gpc_get( 'crypto_master_salt', config_get( 'crypto_master_salt' ) );
-
-	# Set default prefix/suffix form variables ($f_db_table_XXX)
-	$t_prefix_type = $f_db_type == 'oci8' ? $f_db_type : 'other';
-	foreach( $t_prefix_defaults[$t_prefix_type] as $t_key => $t_value ) {
-		${'f_' . $t_key} = gpc_get( $t_key, $t_value );
 	}
 }
 $f_admin_username = gpc_get( 'admin_username', '' );
@@ -211,43 +195,27 @@ $f_admin_password = gpc_get( 'admin_password', '' );
 if( CONFIGURED_PASSWORD == $f_admin_password ) {
 	$f_admin_password = '';
 }
-$f_log_queries    = gpc_get_bool( 'log_queries', false );
 $f_db_exists      = gpc_get_bool( 'db_exists', false );
 
 if( $t_config_exists ) {
 	if( 0 == $t_install_state ) {
 		print_test( "Config File Exists - Upgrade", true );
-
 		print_test( 'Setting Database Type', '' !== $f_db_type, true, 'database type is blank?' );
-
-		# @TODO: dsn config seems to be undefined, remove ?
-		$t_db_conn_exists = ( $f_dsn !== '' || ( $f_database_name !== '' && $f_db_username !== '' && $f_hostname !== '' ) );
-		# Oracle supports binding in two ways:
-		#  - hostname, username/password and database name
-		#  - tns name (insert into hostname field) and username/password, database name is still empty
-		if ( $f_db_type == 'oci8' ) {
-			$t_db_conn_exists = $t_db_conn_exists || ( $f_database_name == '' && $f_db_username !== '' && $f_hostname !== '' );
-		}
-		print_test( 'Checking Database connection settings exist',
-			$t_db_conn_exists,
-			true,
-			'database connection settings do not exist?'
-		);
-
-		print_test( 'Checking PHP support for database type',
-			db_check_database_support( $f_db_type ), true,
-			'database is not supported by PHP. Check that it has been compiled into your server.'
-		);
-		if( $f_db_type == 'mssql' ) {
-			print_test( 'Checking PHP support for Microsoft SQL Server driver',
-				version_compare( phpversion(), '5.3' ) < 0, true,
-				'mssql driver is no longer supported in PHP >= 5.3, please use mssqlnative instead'
-			);
-		}
+		print_test( 'Checking Database connection settings exist', ( $f_dsn !== '' || ( $f_database_name !== '' && $f_db_username !== '' && $f_hostname !== '' ) ), true, 'database connection settings do not exist?' );
+		print_test( 'Checking PHP support for database type', extension_loaded( $f_db_type ), true, 'database is not supported by PHP. Check that it has been compiled into your server.' );
 	}
 
-	$g_db = ADONewConnection( $f_db_type );
-	$t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
+ 	$g_db = MantisDatabase::get_driver_instance($f_db_type);
+ 	try {
+ 		$t_result = $g_db->connect( null, $f_hostname, $f_db_username, $f_db_password, $f_database_name, null );
+		$t_prefix = config_get_global( 'db_table_prefix' ) . '_';
+		$t_suffix = config_get_global( 'db_table_suffix' );
+
+		$g_db->SetPrefixes( $t_prefix, $t_suffix );
+ 	} catch (Exception $ex) {
+ 		$t_result = false;
+ 	}
+ 		
 	if( $g_db->IsConnected() ) {
 		$g_db_connected = true;
 	}
@@ -257,6 +225,7 @@ if( $t_config_exists ) {
 	if( $t_cur_version > 1 ) {
 		$g_database_upgrade = true;
 		$f_db_exists = true;
+		print_info_row( "Current Schema Version", $t_cur_version );
 	} else {
 		if( 0 == $t_install_state ) {
 			print_test( 'Config File Exists but Database does not', false, false, 'Bad config_inc.php?' );
@@ -264,27 +233,12 @@ if( $t_config_exists ) {
 	}
 }
 
-if( $f_db_type == 'db2' ) {
-
-	# If schema name is supplied, then separate it from database name.
-	if( strpos( $f_database_name, '/' ) != false ) {
-		$f_db2AS400 = $f_database_name;
-		list( $f_database_name, $f_db_schema ) = explode( '/', $f_db2AS400, 2 );
-	}
-}
-
 if( 0 == $t_install_state ) {
-	?>
-
-<!-- Check PHP Version -->
-<?php print_test( ' Checking PHP version (your version is ' . phpversion() . ')', check_php_version( phpversion() ), true, 'Upgrade to a more recent version of PHP' );?>
-
-<!-- Check Safe Mode -->
-<?php
-print_test( 'Checking if safe mode is enabled for install script',
-	! ini_get ( 'SAFE_MODE' ),
-	true,
-	'Disable safe_mode in php.ini before proceeding' ) ?>
+	if( $g_database_upgrade == false ) {	
+		print_test( 'Checking Database Extensions Available', check_get_database_extensions(),true);
+		print_info_row( 'Available Database Extensions', check_get_database_extensions(true));
+	}
+?>
 
 </table>
 <?php
@@ -302,27 +256,11 @@ if( 2 == $t_install_state ) {
 <!-- Checking DB support-->
 <?php
 	print_test( 'Setting Database Type', '' !== $f_db_type, true, 'database type is blank?' );
-
-	print_test( 'Checking PHP support for database type', db_check_database_support( $f_db_type ), true, 'database is not supported by PHP. Check that it has been compiled into your server.' );
-
-	# ADOdb library version check
-	# PostgreSQL, Oracle and MSSQL require at least 5.19. MySQL should be fine
-	# with 5.10 but to simplify we align to the requirement of the others.
-	$t_adodb_version = substr( $ADODB_vers, 1, strpos( $ADODB_vers, ' ' ) - 1 );
-	print_test( "Checking ADOdb Library version is at least " . DB_MIN_VERSION_ADODB,
-		version_compare( $t_adodb_version, DB_MIN_VERSION_ADODB, '>=' ),
-		true,
-		'Current version: ' . $ADODB_vers
-	);
-
+	print_test( 'Checking PHP support for database type', extension_loaded( $f_db_type ), true, 'database is not supported by PHP. Check that it has been compiled into your server.' );
 	print_test( 'Setting Database Hostname', '' !== $f_hostname, true, 'host name is blank' );
 	print_test( 'Setting Database Username', '' !== $f_db_username, true, 'database username is blank' );
 	print_test( 'Setting Database Password', '' !== $f_db_password, false, 'database password is blank' );
-	print_test( 'Setting Database Name', '' !== $f_database_name || $f_db_type == 'oci8' , true, 'database name is blank' );
-
-	if( $f_db_type == 'db2' ) {
-		print_test( 'Setting Database Schema', !is_blank( $f_db_schema ), true, 'must have a schema name for AS400 in the form of DBNAME/SCHEMA' );
-	}
+	print_test( 'Setting Database Name', '' !== $f_database_name, true, 'database name is blank' );
 ?>
 <tr>
 	<td bgcolor="#ffffff">
@@ -357,32 +295,29 @@ if( 2 == $t_install_state ) {
 		Attempting to connect to database as admin
 	</td>
 	<?php
-		$t_db_open = false;
-	$g_db = ADONewConnection( $f_db_type );
-	$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password );
+	$t_db_open = false;
+
+	$g_db = MantisDatabase::get_driver_instance($f_db_type);
+	try {
+		$t_result = $g_db->connect( null, $f_hostname, $f_admin_username, $f_admin_password, null, null );
+	} catch (Exception $ex) {
+		$t_result = false;
+	}
 
 	if( $t_result ) {
-
 		# check if db exists for the admin
-		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
+ 		try {
+ 			$t_result = @$g_db->Connect( null, $f_hostname, $f_admin_username, $f_admin_password, $f_database_name, null );
+ 		} catch (Exception $ex) {
+ 			$t_result = false;
+ 		}
 		if( $t_result ) {
 			$t_db_open = true;
 			$f_db_exists = true;
-		}
-		if( $f_db_type == 'db2' ) {
-			$t_result = $g_db->execute( 'set schema ' . $f_db_schema );
-			if( $t_result === false ) {
-				print_test_result( BAD, true, 'set schema failed: ' . $g_db->errorMsg() );
-			}
-		} else {
 			print_test_result( GOOD );
 		}
-
-		# due to a bug in ADODB, this call prompts warnings, hence the @
-		# the check only works on mysql if the database is open
-		$t_version_info = @$g_db->ServerInfo();
 	} else {
-		print_test_result( BAD, true, 'Does administrative user have access to the database? ( ' . db_error_msg() . ' )' );
+		print_test_result( BAD, true, 'Does administrative user have access to the database? ( ' . $ex->GetMessage() . ' )' );
 	}
 	?>
 </tr>
@@ -394,19 +329,16 @@ if( 2 == $t_install_state ) {
 		Attempting to connect to database as user
 	</td>
 	<?php
-		$g_db = ADONewConnection( $f_db_type );
-		$t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
+ 		$g_db = MantisDatabase::get_driver_instance($f_db_type);
+ 		try {
+ 			$t_result = $g_db->connect( null, $f_hostname, $f_db_username, $f_db_password, $f_database_name, null );
+ 		} catch (Exception $ex) {
+ 			$t_result = false;
+ 		}
 
 		if( $t_result == true ) {
 			$t_db_open = true;
-			if( $f_db_type == 'db2' ) {
-				$t_result = $g_db->execute( 'set schema ' . $f_db_schema );
-				if( $t_result === false ) {
-					print_test_result( BAD, true, 'set schema failed: ' . $g_db->errorMsg() );
-				}
-			} else {
-				print_test_result( GOOD );
-			}
+			print_test_result( GOOD );
 		} else {
 			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . db_error_msg() . ' )' );
 		}
@@ -422,27 +354,20 @@ if( 2 == $t_install_state ) {
 	<td bgcolor="#ffffff">
 		Checking Database Server Version
 		<?php
-		echo '<br /> Running ' . $f_db_type . ' version ' . nl2br( $t_version_info['description'] );
+		$t_version_info = $g_db->get_server_info();
+
+		echo '<br /> Running ' . $f_db_type . ' version ' . $t_version_info['version'];
 		?>
 	</td>
 	<?php
 		$t_warning = '';
 		$t_error = '';
 		switch( $f_db_type ) {
-			case 'mysql':
-			case 'mysqli':
-				if( version_compare( $t_version_info['version'], DB_MIN_VERSION_MYSQL, '<' ) ) {
-					$t_error = 'MySQL ' . DB_MIN_VERSION_MYSQL . ' or later is required for installation.';
+			case 'pdo_mysql':
+				if( version_compare( $t_version_info['version'], '5.0.8', '<' ) ) {
+					$t_error = 'MySQL 5.0.8 or later is required for installation.';
 				}
 				break;
-			case 'mssql':
-			case 'mssqlnative':
-				if( version_compare( $t_version_info['version'], DB_MIN_VERSION_MSSQL, '<' ) ) {
-					$t_error = 'SQL Server 2005 (' . DB_MIN_VERSION_MSSQL . ') or later is required for installation.';
-				}
-				break;
-			case 'pgsql':
-			case 'db2':
 			default:
 				break;
 		}
@@ -493,47 +418,16 @@ if( !$g_database_upgrade ) {
 		Type of Database
 	</td>
 	<td>
-		<!-- Default values for table prefix/suffix -->
-		<div>
-<?php
-	# These elements are referenced by the db selection list's on change event
-	# to populate the corresponding fields as appropriate
-	foreach( $t_prefix_defaults as $t_db_type => $t_defaults ) {
-		echo '<div id="default_' . $t_db_type . '" class="hidden">';
-		foreach( $t_defaults as $t_key => $t_value ) {
-			echo "\n\t" . '<span name="' . $t_key . '">' . $t_value . '</span>';
-		}
-		echo "\n" . '</div>' . "\n";
-	}
-?>
-		</div>
-
 		<select id="db_type" name="db_type">
 <?php
-			# Build selection list of available DB types
-			$t_db_list = array(
-				'mysqli'      => 'MySQL Improved',
-				'mysql'       => 'MySQL',
-				'mssql'       => 'Microsoft SQL Server',
-				'mssqlnative' => 'Microsoft SQL Server Native Driver',
-				'pgsql'       => 'PostgreSQL',
-				'oci8'        => 'Oracle',
-				'db2'         => 'IBM DB2',
-			);
-			# mysql is deprecated as of PHP 5.5.0
-			if( version_compare( phpversion(), '5.5.0' ) >= 0 ) {
-				unset( $t_db_list['mysql']);
+ 		$t_db_types = explode(',',check_get_database_extensions(true));
+		foreach( $t_db_types as $t_type ) {
+			if( $f_db_type == $t_type ) {
+				echo '<option value="' . $t_type . '" selected="selected">' . $t_type . '</option>';
+			} else {
+				echo '<option value="' . $t_type . '">' . $t_type . '</option>';
 			}
-			# mssql is not supported with PHP >= 5.3
-			if( version_compare( phpversion(), '5.3' ) >= 0 ) {
-				unset( $t_db_list['mssql']);
-			}
-
-			foreach( $t_db_list as $t_db => $t_db_descr ) {
-				echo '<option value="' . $t_db . '"' .
-					( $t_db == $f_db_type ? ' selected="selected"' : '' ) . '>' .
-					$t_db_descr . "</option>\n";
-			}
+  		}
 ?>
 		</select>
 	</td>
@@ -608,68 +502,6 @@ if( !$g_database_upgrade ) {
 	</td>
 </tr>
 
-<?php
-# install-only fields: when upgrading, only display admin username and password
-if( !$g_database_upgrade ) {
-	$t_prefix_labels = array(
-		'db_table_prefix'        => 'Database Table Prefix',
-		'db_table_plugin_prefix' => 'Database Plugin Table Prefix',
-		'db_table_suffix'        => 'Database Table Suffix',
-	);
-	foreach( $t_prefix_defaults[$t_prefix_type] as $t_key => $t_value ) {
-		echo "<tr>\n\t<td>\n";
-		echo "\t\t${t_prefix_labels[$t_key]}\n";
-		echo "\t</td>\n\t<td>\n\t\t";
-		echo '<input id="' . $t_key . '" name="' . $t_key . '" type="textbox" value="' . $f_db_table_prefix . '">';
-		echo "\n\t</td>\n</tr>\n\n";
-	}
-?>
-<!-- Timezone -->
-<tr>
-	<td>
-		Default Time Zone
-	</td>
-	<td>
-		<select id="timezone" name="timezone">
-			<?php print_timezone_option_list( config_get_global( 'default_timezone' ) ) ?>
-		</select>
-	</td>
-</tr>
-
-<!-- Cryptographic salt -->
-<tr>
-	<td>
-		Master salt value for cryptographic hashing
-		(Refer to documentation for details)
-	</td>
-	<td>
-<?php
-	# Automatically generate a strong master salt/nonce for MantisBT
-	# cryptographic purposes. If a strong source of randomness is not
-	# available the user will have to manually set this value post
-	# installation.
-	$t_crypto_master_salt = crypto_generate_random_string(32);
-	if ( $t_crypto_master_salt !== null ) {
-		$t_crypto_master_salt = base64_encode( $t_crypto_master_salt );
-	}
-?>
-		<input name="crypto_master_salt" type="textbox" size=40 value="<?php echo $t_crypto_master_salt; ?>">
-	</td>
-</tr>
-<?php
-} # end install-only fields
-?>
-
-<!-- Printing SQL queries -->
-<tr>
-	<td>
-		Print SQL Queries instead of Writing to the Database
-	</td>
-	<td>
-		<input name="log_queries" type="checkbox" value="1" <?php echo( $f_log_queries ? 'checked="checked"' : '' )?>>
-	</td>
-</tr>
-
 <!-- Submit button -->
 <tr>
 	<td>
@@ -698,106 +530,61 @@ if( 3 == $t_install_state ) {
 		<span class="title">Installing Database</span>
 	</td>
 </tr>
-<?php if( !$f_log_queries ) {?>
 <tr>
 	<td bgcolor="#ffffff">
 		Create database if it does not exist
 	</td>
 	<?php
-		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
-
-		if( $f_db_type == 'db2' ) {
-			$rs = $g_db->Execute( "select * from SYSIBM.SCHEMATA WHERE SCHEMA_NAME = '" . $f_db_schema . "' AND SCHEMA_OWNER = '" . $f_db_username . "'" );
-			if( $rs === false ) {
-				echo "<br />false";
-			}
-
-			if( $rs->EOF ) {
-				$t_result = false;
-				echo $g_db->errorMsg();
-			} else {
-				$t_result = $g_db->execute( 'set schema ' . $f_db_schema );
-			}
-		}
-
+ 		try {
+ 			$t_result = $g_db->connect( null, $f_hostname, $f_admin_username, $f_admin_password, null, null );
+ 		} catch (Exception $ex) {
+  			$t_result = false;
+  		}
 		$t_db_open = false;
 
-		if( $t_result == true ) {
+		if( $g_db->database_exists( $f_database_name ) === true ) {
 			print_test_result( GOOD );
 			$t_db_open = true;
 		} else {
-			// create db
-			$g_db = ADONewConnection( $f_db_type );
-			$t_result = $g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password );
+			$dict = MantisDatabaseDict::get_driver_instance($f_db_type);
 
-			$dict = NewDataDictionary( $g_db );
-
-			if( $f_db_type == 'db2' ) {
-				$rs = $g_db->Execute( "CREATE SCHEMA " . $f_db_schema );
-
-				if( !$rs ) {
-					$t_result = false;
-					print_test_result( BAD, true, 'Does administrative user have access to create the database? ( ' . db_error_msg() . ' )' );
-					$t_install_state--; # db creation failed, allow user to re-enter user/password info
-				} else {
-					print_test_result( GOOD );
-					$t_db_open = true;
-				}
+			$sqlarray = $dict->CreateDatabase( $f_database_name );
+				$ret = $dict->ExecuteSQLarray( $sqlarray );
+			if( $ret == 2 ) {
+				print_test_result( GOOD );
+				$t_db_open = true;
 			} else {
-				$sqlarray = $dict->CreateDatabase( $f_database_name, array( 'mysql' => 'DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci' ) );
-				$ret = $dict->ExecuteSQLArray( $sqlarray, false );
-				if( $ret == 2 ) {
-					print_test_result( GOOD );
-					$t_db_open = true;
+					$t_error_msg = $g_db->get_last_error();
+					if( strstr( $t_error_msg, 'atabase exists' ) ) {
+						print_test_result( BAD, false, 'Database already exists? ( ' . $t_error_msg . ' )' );
 				} else {
-					$t_error = db_error_msg();
-					if( $f_db_type == 'oci8' ) {
-						$t_db_exists = preg_match( '/ORA-01920/', $t_error );
-					} else {
-						$t_db_exists = strstr( $t_error, 'atabase exists' );
-					}
-
-					if( $t_db_exists ) {
-						print_test_result( BAD, false, 'Database already exists? ( ' . db_error_msg() . ' )' );
-					} else {
-						print_test_result( BAD, true, 'Does administrative user have access to create the database? ( ' . db_error_msg() . ' )' );
-						$t_install_state--; # db creation failed, allow user to re-enter user/password info
-					}
+						print_test_result( BAD, true, 'Does administrative user have access to create the database? ( ' . $t_error_msg . ' )' );
+					$t_install_state--; # db creation failed, allow user to re-enter user/password info
 				}
 			}
 		}
 		?>
 </tr>
-<?php
-	# Close the connection and clear the ADOdb object to free memory
-	$g_db->Close();
-	$g_db = null;
-?>
 <tr>
 	<td bgcolor="#ffffff">
 		Attempting to connect to database as user
 	</td>
 	<?php
-		$g_db = ADONewConnection( $f_db_type );
-		$t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
-
-		if( $f_db_type == 'db2' ) {
-			$t_result = $g_db->execute( 'set schema ' . $f_db_schema );
-			if( $t_result === false ) {
-				echo $g_db->errorMsg();
-			}
-		}
+ 		$g_db = MantisDatabase::get_driver_instance($f_db_type);
+ 		try {
+ 			$t_result = $g_db->connect( null, $f_hostname, $f_db_username, $f_db_password, $f_database_name, null );
+ 		} catch (Exception $ex) {
+ 			$t_result = false;
+  		}
 
 		if( $t_result == true ) {
 			print_test_result( GOOD );
 		} else {
-			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . db_error_msg() . ' )' );
+			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . $g_db->get_last_error() . ' )' );
 		}
-		$g_db->Close();
 	?>
 </tr>
 <?php
-	}
 
 	# install the tables
 	if( false == $g_failed ) {
@@ -806,110 +593,36 @@ if( 3 == $t_install_state ) {
 		# fake out database access routines used by config_get
 		config_set_global( 'db_type', $f_db_type );
 
-		# Initialize table prefixes as specified by user
-		config_set_global( 'db_table_prefix', $f_db_table_prefix );
-		config_set_global( 'db_table_plugin_prefix', $f_db_table_plugin_prefix );
-		config_set_global( 'db_table_suffix', $f_db_table_suffix );
 		# database_api references this
 		require_once( dirname( __FILE__ ) . '/schema.php' );
-		$g_db = ADONewConnection( $f_db_type );
-		$t_result = @$g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password, $f_database_name );
-		if( !$f_log_queries ) {
-			$g_db_connected = true;
 
-			# fake out database access routines used by config_get
-		}
+ 		$g_db = MantisDatabase::get_driver_instance($f_db_type);
+ 		try {
+ 			$t_result = $g_db->connect( null, $f_hostname, $f_admin_username, $f_admin_password, $f_database_name, null );
+ 		} catch (Exception $ex) {
+ 			$t_result = false;
+ 		}
+
 		$t_last_update = config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS );
 		$lastid = count( $upgrade ) - 1;
 		$i = $t_last_update + 1;
-		if( $f_log_queries ) {
-			echo '<tr><td bgcolor="#ffffff" col_span="2"> Database Creation Suppressed, SQL Queries follow <pre>';
-		}
-
-		# Make sure we do the upgrades using UTF-8 if needed
-		if ( $f_db_type === 'mysql' || $f_db_type === 'mysqli' ) {
-			$g_db->execute( 'SET NAMES UTF8' );
-		}
-
-		if( $f_db_type == 'db2' ) {
-			$t_result = $g_db->execute( 'set schema ' . $f_db_schema );
-			if( $t_result === false ) {
-				echo $g_db->errorMsg();
-			}
-		}
-
-		$dict = NewDataDictionary( $g_db );
-
-		# Special processing for specific schema versions
-		# This allows execution of additional install steps, which are
-		# not a Mantis schema upgrade but nevertheless required due to
-		# changes in the code
-
-		if( $t_last_update > 51 && $t_last_update < 189 ) {
-			# Since MantisBT 1.1.0 / ADOdb 4.96 (corresponding to schema 51)
-			# 'L' columns are BOOLEAN instead of SMALLINT
-			# Check for any DB discrepancies and update columns if needed
-			$t_bool_columns = check_pgsql_bool_columns();
-			if( $t_bool_columns !== true ) {
-				# Some columns need converting
-				$t_msg = "PostgreSQL: check Boolean columns' actual type";
-				if( is_array( $t_bool_columns ) ) {
-					print_test(
-						$t_msg,
-						count( $t_bool_columns ) == 0,
-						false,
-						count( $t_bool_columns ) . ' columns must be converted to BOOLEAN'
-					);
-				} else {
-					# We did not get an array => error occured
-					print_test( $t_msg, false, true, $t_bool_columns );
-				}
-
-				# Convert the columns
-				foreach( $t_bool_columns as $t_row ) {
-					extract( $t_row, EXTR_PREFIX_ALL, 'v' );
-					$t_null = $v_is_nullable ? 'NULL' : 'NOT NULL';
-					$t_default = is_null( $v_column_default ) ? 'NULL' : $v_column_default;
-					$t_sqlarray = $dict->AlterColumnSQL(
-						$v_table_name,
-						"$v_column_name L $t_null DEFAULT $t_default"
-					);
-					print_test(
-						"Converting column $v_table_name.$v_column_name to BOOLEAN",
-						2 == $dict->ExecuteSQLArray( $t_sqlarray, false ),
-						true,
-						print_r( $t_sqlarray, true )
-					);
-					if( $g_failed ) {
-						# Error occured, bail out
-						break;
-					}
-				}
-			}
-		}
-		# End of special processing for specific schema versions
 
 		while(( $i <= $lastid ) && !$g_failed ) {
-			if( !$f_log_queries ) {
-				echo '<tr><td bgcolor="#ffffff">';
-			}
-
+			$g_db->SetPrefixes( 'mantis_', '_table' );
+			$dict = MantisDatabaseDict::get_driver_instance($f_db_type);
 			$t_sql = true;
 			$t_target = $upgrade[$i][1][0];
 
 			switch ($upgrade[$i][0]) {
-
 				case 'InsertData':
 					$sqlarray = call_user_func_array( $upgrade[$i][0], $upgrade[$i][1] );
 					break;
-
 				case 'UpdateSQL':
 					$sqlarray = array(
 						$upgrade[$i][1],
 					);
 					$t_target = $upgrade[$i][1];
 					break;
-
 				case 'UpdateFunction':
 					$sqlarray = array(
 						$upgrade[$i][1],
@@ -920,13 +633,8 @@ if( 3 == $t_install_state ) {
 					$t_sql = false;
 					$t_target = $upgrade[$i][1];
 					break;
-
-				case NULL:
-					// No-op upgrade step - required for oci8
-					break;
-
 				default:
-						$sqlarray = call_user_func_array( array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
+					$sqlarray = call_user_func_array( array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
 
 					/* 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade. */
 					if( isset( $upgrade[$i][2] ) ) {
@@ -939,55 +647,38 @@ if( 3 == $t_install_state ) {
 						$sqlarray = call_user_func_array( array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
 					}
 					break;
-			}
-			if( $f_log_queries ) {
-				if( $t_sql ) {
-					foreach( $sqlarray as $sql ) {
-						# "CREATE OR REPLACE TRIGGER" statements must end with "END;\n/" for Oracle sqlplus
-						if ( $f_db_type == 'oci8' && stripos( $sql, 'CREATE OR REPLACE TRIGGER' ) === 0 ) {
-							$t_sql_end = PHP_EOL . "/";
-						} else {
-							$t_sql_end = ";";
-						}
-						echo htmlentities( $sql ) . $t_sql_end . PHP_EOL . PHP_EOL;
-					}
-				}
+		}
+			echo 'Schema Step $i: ' . $upgrade[$i][0] . ' ( ' . $t_target . ' )</td>';
+			if( $t_sql ) {
+				$ret = $dict->ExecuteSQLarray( $sqlarray );
 			} else {
-				echo "Schema step $i: ";
-				if( is_null( $upgrade[$i][0]) ) {
-					echo 'No operation';
-					$ret = 2;
+				if( isset( $sqlarray[1] ) ) {
+					$ret = call_user_func( 'install_' . $sqlarray[0], $sqlarray[1] );
 				} else {
-					echo $upgrade[$i][0] . " ( $t_target )";
-					if( $t_sql ) {
-						$ret = $dict->ExecuteSQLArray( $sqlarray, false );
-					} else {
-						if( isset( $sqlarray[1] ) ) {
-							$ret = call_user_func( 'install_' . $sqlarray[0], $sqlarray[1] );
-						} else {
-							$ret = call_user_func( 'install_' . $sqlarray[0] );
-						}
-					}
+					$ret = call_user_func( 'install_' . $sqlarray[0] );
 				}
-				echo '</td>';
-				if( $ret == 2 ) {
-					print_test_result( GOOD );
-					config_set( 'database_version', $i );
-				} else {
-					$all_sql = '';
-					foreach ( $sqlarray as $single_sql )
-						$all_sql .= $single_sql . '<br />';
-					print_test_result( BAD, true, $all_sql  . $g_db->ErrorMsg() );
-				}
-				echo '</tr>';
 			}
+			if( $ret == 2 ) {
+				print_test_result( GOOD );
+				config_set( 'database_version', $i );
+			} else {
+				$all_sql = '';
+				foreach ( $sqlarray as $single_sql )
+					$all_sql .= $single_sql . '<br />';
+				print_test_result( BAD, true, $all_sql  . $g_db->get_last_error() );
+			}
+			echo '</tr>';
 			$i++;
 		}
-		if( $f_log_queries ) {
-			# add a query to set the database version
-			echo 'INSERT INTO ' . db_get_table( 'config' ) . ' ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'' . $lastid . '\', 1, 90, \'database_version\', 0, 0 );' . PHP_EOL;
-			echo '</pre><br /><p style="color:red">Your database has not been created yet. Please create the database, then install the tables and data using the information above before proceeding.</p></td></tr>';
-		}
+		
+ 		if ( $t_last_update === -1 ) {
+ 			$ret = call_user_func( 'install_create_admin_if_not_exist', array( 'administrator', 'root') );
+ 			if( $ret == 2 ) {
+ 				print_test_result( GOOD );
+ 			} else {
+ 				print_test_result( BAD, true, $g_db->get_last_error() );
+ 			}
+ 		}
 	}
 	if( false == $g_failed ) {
 		$t_install_state++;
@@ -1058,34 +749,8 @@ if( 5 == $t_install_state ) {
 		. "\$g_db_type                = '$f_db_type';" . PHP_EOL
 		. "\$g_database_name          = '" . addslashes( $f_database_name ) . "';" . PHP_EOL
 		. "\$g_db_username            = '" . addslashes( $f_db_username ) . "';" . PHP_EOL
-		. "\$g_db_password            = '" . addslashes( $f_db_password ) . "';" . PHP_EOL;
-
-	switch( $f_db_type ) {
-		case 'db2':
-			$t_config .=  "\$g_db_schema              = '$f_db_schema';" . PHP_EOL;
-			break;
-		default:
-			break;
-	}
-	$t_config .= PHP_EOL;
-
-	# Add lines for table prefix/suffix if different from default
-	$t_insert_line = false;
-	foreach( $t_prefix_defaults['other'] as $t_key => $t_value ) {
-		$t_new_value = ${'f_' . $t_key};
-		if( $t_new_value != $t_value ) {
-			$t_config .= '$g_' . str_pad( $t_key, 25 ) . "= '" . ${'f_' . $t_key} . "';" . PHP_EOL;
-			$t_insert_line = true;
-		}
-	}
-	if( $t_insert_line ) {
-		$t_config .= PHP_EOL;
-	}
-
-	$t_config .=
-		  "\$g_default_timezone       = '$f_timezone';" . PHP_EOL
-		. PHP_EOL
-		. "\$g_crypto_master_salt     = '" . addslashes( $f_crypto_master_salt ) . "';" . PHP_EOL;
+		. "\$g_db_password            = '" . addslashes( $f_db_password ) . "';" . PHP_EOL
+		. "\$g_crypto_master_salt     = '" . base64_encode( crypto_generate_random_string( 32, false ) ) . "';" . PHP_EOL;
 
 	$t_write_failed = true;
 
@@ -1106,7 +771,6 @@ if( 5 == $t_install_state ) {
 		if ( ( $f_hostname != config_get( 'hostname', '' ) ) ||
 			( $f_db_type != config_get( 'db_type', '' ) ) ||
 			( $f_database_name != config_get( 'database_name', '') ) ||
-			( $f_db_schema != config_get( 'db_schema', '') ) ||
 			( $f_db_username != config_get( 'db_username', '' ) ) ||
 			( $f_db_password != config_get( 'db_password', '' ) ) ) {
 			print_test_result( BAD, false, 'file ' . $g_absolute_path . 'config_inc.php' . ' already exists and has different settings' );
@@ -1171,21 +835,20 @@ if( 6 == $t_install_state ) {
 		Attempting to connect to database as user
 	</td>
 	<?php
-		$g_db = ADONewConnection( $f_db_type );
-	$t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
+ 	$g_db = MantisDatabase::get_driver_instance($f_db_type);
+	$g_db->SetPrefixes( 'mantis_', '_table' );
+ 	try {
+ 		$t_result = $g_db->connect( null, $f_hostname, $f_db_username, $f_db_password, $f_database_name, null );
+ 	} catch (Exception $ex) {
+ 		$t_result = false;
+ 	}
 
 	if( $t_result == true ) {
 		print_test_result( GOOD );
 	} else {
-		print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . db_error_msg() . ' )' );
+		print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . $g_db->get_last_error() . ' )' );
 	}
 
-	if( $f_db_type == 'db2' ) {
-		$t_result = $g_db->execute( 'set schema ' . $f_db_schema );
-		if( $t_result === false ) {
-			echo $g_db->errorMsg();
-		}
-	}
 	?>
 </tr>
 <tr>
@@ -1193,14 +856,13 @@ if( 6 == $t_install_state ) {
 		checking ability to SELECT records
 	</td>
 	<?php
-		$t_mantis_config_table = db_get_table( 'config' );
-	$t_query = "SELECT COUNT(*) FROM $t_mantis_config_table";
+	$t_query = 'SELECT COUNT(*) FROM {config}';
 	$t_result = @$g_db->Execute( $t_query );
 
 	if( $t_result != false ) {
 		print_test_result( GOOD );
 	} else {
-		print_test_result( BAD, true, 'Database user doesn\'t have SELECT access to the database ( ' . db_error_msg() . ' )' );
+		print_test_result( BAD, true, 'Database user doesn\'t have SELECT access to the database ( ' . $g_db->get_last_error() . ' )' );
 	}
 	?>
 </tr>
@@ -1209,13 +871,13 @@ if( 6 == $t_install_state ) {
 		checking ability to INSERT records
 	</td>
 	<?php
-		$t_query = "INSERT INTO $t_mantis_config_table ( value, type, access_reqd, config_id, project_id, user_id ) VALUES ('test', 1, 90, 'database_test', 20, 0 )";
+		$t_query = "INSERT INTO {config} ( value, type, access_reqd, config_id, project_id, user_id ) VALUES ('test', 1, 90, 'database_test', 20, 0 )";
 	$t_result = @$g_db->Execute( $t_query );
 
 	if( $t_result != false ) {
 		print_test_result( GOOD );
 	} else {
-		print_test_result( BAD, true, 'Database user doesn\'t have INSERT access to the database ( ' . db_error_msg() . ' )' );
+		print_test_result( BAD, true, 'Database user doesn\'t have INSERT access to the database ( ' . $g_db->get_last_error() . ' )' );
 	}
 	?>
 </tr>
@@ -1224,13 +886,13 @@ if( 6 == $t_install_state ) {
 		checking ability to UPDATE records
 	</td>
 	<?php
-		$t_query = "UPDATE $t_mantis_config_table SET value='test_update' WHERE config_id='database_test'";
+		$t_query = "UPDATE {config} SET value='test_update' WHERE config_id='database_test'";
 	$t_result = @$g_db->Execute( $t_query );
 
 	if( $t_result != false ) {
 		print_test_result( GOOD );
 	} else {
-		print_test_result( BAD, true, 'Database user doesn\'t have UPDATE access to the database ( ' . db_error_msg() . ' )' );
+		print_test_result( BAD, true, 'Database user doesn\'t have UPDATE access to the database ( ' . $g_db->get_last_error() . ' )' );
 	}
 	?>
 </tr>
@@ -1239,7 +901,7 @@ if( 6 == $t_install_state ) {
 		checking ability to DELETE records
 	</td>
 	<?php
-		$t_query = "DELETE FROM $t_mantis_config_table WHERE config_id='database_test'";
+		$t_query = "DELETE FROM {config} WHERE config_id='database_test'";
 	$t_result = @$g_db->Execute( $t_query );
 
 	if( $t_result != false ) {
