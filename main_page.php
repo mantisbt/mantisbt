@@ -97,7 +97,7 @@ if ( news_is_enabled() ) {
 			$t_row = $t_news_rows[$i];
 
 			# only show VS_PRIVATE posts to configured threshold and above
-			if ( ( VS_PRIVATE == $t_row[ 'view_state' ] ) &&
+			if ( ( VS_PRIVATE == $t_row['view_state'] ) &&
 				 !access_has_project_level( config_get( 'private_news_threshold' ) ) ) {
 				continue;
 			}

@@ -43,6 +43,11 @@ check_print_test_row(
 	'PHP version ' . phpversion() . ' is currently installed on this server.'
 );
 
+check_print_test_row( 'Checking that safe mode is disabled (for install script)',
+	! ini_get ( 'SAFE_MODE' ),
+	array( false => 'Disable safe_mode in php.ini before proceeding' )
+);
+
 $t_extensions_required = array(
 	'date',
 	'hash',

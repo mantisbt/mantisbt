@@ -71,13 +71,13 @@ $f_email = gpc_get_string('email');
 
 email_ensure_valid( $f_email );
 
-$t_user_table = db_get_table( 'user' );
-
 /** @todo Consider moving this query to user_api.php */
-$t_query = 'SELECT id FROM ' . $t_user_table . ' WHERE username = ' . db_param() . ' AND email = ' . db_param() . ' AND enabled=' . db_param();
-$t_result = db_query_bound( $t_query, array( $f_username, $f_email, true ) );
+$t_query = 'SELECT id FROM {user} WHERE username=%s AND email=%s AND enabled=%d';
+$t_result = db_query( $t_query, array( $f_username, $f_email, true ) );
 
-if ( 0 == db_num_rows( $t_result ) ) {
+$t_row = db_fetch_array( $t_result );
+
+if ( !$t_row ) {
 	trigger_error( ERROR_LOST_PASSWORD_NOT_MATCHING_DATA, ERROR );
 }
 
@@ -85,8 +85,7 @@ if( is_blank( $f_email ) ) {
 	trigger_error( ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED, ERROR );
 }
 
-$row = db_fetch_array( $t_result );
-$t_user_id = $row['id'];
+$t_user_id = $t_row['id'];
 
 if( user_is_protected( $t_user_id ) ) {
 	trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );

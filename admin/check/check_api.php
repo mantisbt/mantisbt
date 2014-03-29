@@ -146,10 +146,11 @@ function check_print_section_header_row( $p_heading ) {
  *
  * @param string $p_description description
  * @param string $p_info information
+ * @param bool $p_always_show indicates whether to always show this info line in check output
  */
-function check_print_info_row( $p_description, $p_info = null ) {
+function check_print_info_row( $p_description, $p_info = null, $p_always_show = false ) {
 	global $g_alternate_row, $g_show_all;
-	if( !$g_show_all ) {
+	if( !$g_show_all && !$p_always_show) {
 		return;
 	}
 	echo "\t<tr>\n\t\t<td class=\"description$g_alternate_row\">$p_description</td>\n";
@@ -183,12 +184,13 @@ function check_print_test_result( $p_result ) {
  * @param string $p_description description
  * @param bool $p_pass pass
  * @param string $p_info information
+ * @param bool $p_always_show indicates whether to always show this info line in check output
  * @return bool
  */
-function check_print_test_row( $p_description, $p_pass, $p_info = null ) {
+function check_print_test_row( $p_description, $p_pass, $p_info = null, $p_always_show = false ) {
 	global $g_alternate_row, $g_show_all;
 	$t_unhandled = check_unhandled_errors_exist();
-	if ( !$g_show_all && $p_pass && !$t_unhandled) {
+	if ( !$g_show_all && $p_pass && !$t_unhandled && !$p_always_show) {
 		return $p_pass;
 	}
 
@@ -224,12 +226,13 @@ function check_print_test_row( $p_description, $p_pass, $p_info = null ) {
  * @param string $p_description description
  * @param bool $p_pass pass
  * @param string $p_info information
+ * @param bool $p_always_show indicates whether to always show this info line in check output
  * @return bool
  */
-function check_print_test_warn_row( $p_description, $p_pass, $p_info = null ) {
+function check_print_test_warn_row( $p_description, $p_pass, $p_info = null, $p_always_show = false ) {
 	global $g_alternate_row, $g_show_all;
 	$t_unhandled = check_unhandled_errors_exist();
-	if ( !$g_show_all && $p_pass && !$t_unhandled) {
+	if ( !$g_show_all && $p_pass && !$t_unhandled && !$p_always_show) {
 		return $p_pass;
 	}
 	echo "\t<tr>\n\t\t<td class=\"description$g_alternate_row\">$p_description";
@@ -256,4 +259,37 @@ function check_print_test_warn_row( $p_description, $p_pass, $p_info = null ) {
 	}
 	$g_alternate_row = $g_alternate_row === 1 ? 2 : 1;
 	return $p_pass;
+}
+
+/**
+ * Check Database extensions currently supported by PHP
+ * @param bool $p_list return as comma seperated list
+ * @return bool
+ */
+function check_get_database_extensions( $p_list = false ) {
+	$t_ext_array = get_loaded_extensions();
+	$t_db = '';
+	foreach( $t_ext_array as $t_ext) {
+		$t_extl = strtolower( $t_ext );
+		if( $t_extl == 'pdo' )
+			continue;
+		// pdo drivers
+		if( substr( $t_extl, 0, 3 ) == 'pdo' ) {
+			$t_db .= $t_extl . ',';
+		}
+		// non-pdo drivers
+		switch ($t_extl) {
+			default:
+				continue;
+		}
+	}
+
+	if( $p_list == true ) {
+		return rtrim( $t_db, ',' );
+	} else {
+		if( $t_db != '' ) {
+			return true;
+		}
+	}
+	return false;
 }

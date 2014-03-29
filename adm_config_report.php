@@ -187,23 +187,17 @@ $t_edit_option          = gpc_get_string( 'config_option', $t_filter_config_valu
 $t_edit_type            = gpc_get_string( 'type', CONFIG_TYPE_DEFAULT );
 $t_edit_value           = gpc_get_string( 'value', '' );
 
-# Apply filters
-$t_config_table  = db_get_table( 'config' );
-$t_project_table = db_get_table( 'project' );
-
 # Get users in db having specific configs
-$query = "SELECT DISTINCT user_id
-	FROM $t_config_table
-	WHERE user_id <> " . db_param() ;
-$t_result = db_query_bound( $query, array( ALL_USERS ) );
+$t_query = 'SELECT DISTINCT user_id FROM {config} WHERE user_id<>%d';
+$t_result = db_query( $t_query, array( ALL_USERS ) );
 if( $t_filter_user_value != META_FILTER_NONE && $t_filter_user_value != ALL_USERS ) {
 	# Make sure the filter value exists in the list
 	$t_users_list[$t_filter_user_value] = user_get_name( $t_filter_user_value );
 } else {
 	$t_users_list = array();
 }
-while( $row = db_fetch_array( $t_result ) ) {
-	$t_user_id = $row['user_id'];
+while( $t_row = db_fetch_array( $t_result ) ) {
+	$t_user_id = $t_row['user_id'];
 	$t_users_list[$t_user_id] = user_get_name( $t_user_id );
 }
 asort( $t_users_list );
@@ -215,31 +209,31 @@ $t_users_list = array(
 	+ $t_users_list;
 
 # Get projects in db with specific configs
-$query = "SELECT DISTINCT project_id, pt.name as project_name
-	FROM $t_config_table as ct
-	JOIN $t_project_table as pt ON pt.id = ct.project_id
+$t_query = "SELECT DISTINCT project_id, pt.name as project_name
+	FROM {config} as ct
+	JOIN {project} as pt ON pt.id = ct.project_id
 	WHERE project_id!=0
 	ORDER BY project_name";
-$t_result = db_query_bound( $query );
+$t_result = db_query( $t_query );
 $t_projects_list[META_FILTER_NONE] = '[' . lang_get( 'any' ) . ']';
 $t_projects_list[ALL_PROJECTS] = lang_get( 'all_projects' );
-while( $row = db_fetch_array( $t_result ) ) {
-	extract( $row, EXTR_PREFIX_ALL, 'v' );
+while( $t_row = db_fetch_array( $t_result ) ) {
+	extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 	$t_projects_list[$v_project_id] = $v_project_name;
 }
 
 # Get config list used in db
-$query = "SELECT DISTINCT config_id
-	FROM $t_config_table
+$t_query = "SELECT DISTINCT config_id
+	FROM {config}
 	ORDER BY config_id";
-$t_result = db_query_bound( $query );
+$t_result = db_query( $t_query );
 $t_configs_list[META_FILTER_NONE] = '[' . lang_get( 'any' ) . ']';
 if( $t_filter_config_value != META_FILTER_NONE ) {
 	# Make sure the filter value exists in the list
 	$t_configs_list[$t_filter_config_value] = $t_filter_config_value;
 }
-while( $row = db_fetch_array( $t_result ) ) {
-	extract( $row, EXTR_PREFIX_ALL, 'v' );
+while( $t_row = db_fetch_array( $t_result ) ) {
+	extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 	$t_configs_list[$v_config_id] = $v_config_id;
 }
 
@@ -247,26 +241,26 @@ while( $row = db_fetch_array( $t_result ) ) {
 $t_where = '';
 $t_param = array();
 if( $t_filter_user_value != META_FILTER_NONE ) {
-	$t_where .= " AND user_id = " . db_param();
+	$t_where .= ' AND user_id=%d';
 	$t_param[] = $t_filter_user_value;
 }
 if( $t_filter_project_value != META_FILTER_NONE ) {
-	$t_where .= " AND project_id = " . db_param();
+	$t_where .= ' AND project_id=%d';
 	$t_param[] = $t_filter_project_value;
 }
 if( $t_filter_config_value != META_FILTER_NONE ) {
-	$t_where .= " AND config_id = " . db_param();
+	$t_where .= 'AND config_id=%s';
 	$t_param[] = $t_filter_config_value;
 }
 if( $t_where != '' ) {
-	$t_where = " WHERE 1=1 " . $t_where;
+	$t_where = ' WHERE 1=1 ' . $t_where;
 }
 
-$query = "SELECT config_id, user_id, project_id, type, value, access_reqd
-	FROM $t_config_table
+$t_query = "SELECT config_id, user_id, project_id, type, value, access_reqd
+	FROM {config}
 	$t_where
 	ORDER BY user_id, project_id, config_id ";
-$t_result = db_query_bound( $query, $t_param );
+$t_result = db_query( $t_query, $t_param );
 ?>
 
 <!-- FILTER FORM -->
@@ -359,8 +353,8 @@ $t_result = db_query_bound( $query, $t_param );
 # db contains a large number of configurations
 $t_form_security_token = form_security_token( 'adm_config_delete' );
 
-while( $row = db_fetch_array( $t_result ) ) {
-	extract( $row, EXTR_PREFIX_ALL, 'v' );
+while( $t_row = db_fetch_array( $t_result ) ) {
+	extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
 ?>
 <!-- Repeated Info Rows -->

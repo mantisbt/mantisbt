@@ -113,28 +113,16 @@ function email_queue_add( $p_email_data ) {
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	$t_email_table = db_get_table( 'email' );
-
 	$c_email = $t_email_data->email;
 	$c_subject = $t_email_data->subject;
 	$c_body = $t_email_data->body;
 	$c_metadata = serialize( $t_email_data->metadata );
 
-	$query = "INSERT INTO $t_email_table
-				    ( email,
-				      subject,
-					  body,
-					  submitted,
-					  metadata)
-				  VALUES
-				    ( " . db_param() . ",
-				      " . db_param() . ",
-				      " . db_param() . ",
-					  " . db_param() . ",
-					  " . db_param() . "
-					)";
-	db_query_bound( $query, array( $c_email, $c_subject, $c_body, db_now(), $c_metadata ) );
-	$t_id = db_insert_id( $t_email_table, 'email_id' );
+	$t_query = "INSERT INTO {email} ( email, subject, body, submitted, metadata) VALUES ( %s, %s, %s, %d, %s )";
+	db_query( $t_query, array( $c_email, $c_subject, $c_body, db_now(), $c_metadata ) );
+
+
+	$t_id = db_insert_id( '{email}', 'email_id' );
 
 	log_event( LOG_EMAIL, "message #$t_id queued" );
 
@@ -179,10 +167,8 @@ function email_queue_row_to_object( $p_row ) {
  * @return bool|EmailData
  */
 function email_queue_get( $p_email_id ) {
-	$t_email_table = db_get_table( 'email' );
-
-	$query = 'SELECT * FROM ' . $t_email_table . ' WHERE email_id=' . db_param();
-	$t_result = db_query_bound( $query, array( $p_email_id ) );
+	$t_query = 'SELECT * FROM {email} WHERE email_id=%d';
+	$t_result = db_query( $t_query, array( $p_email_id ) );
 
 	$t_row = db_fetch_array( $t_result );
 
@@ -195,24 +181,24 @@ function email_queue_get( $p_email_id ) {
  * @return null
  */
 function email_queue_delete( $p_email_id ) {
-	$t_email_table = db_get_table( 'email' );
-
-	$query = 'DELETE FROM ' . $t_email_table . ' WHERE email_id=' . db_param();
-	db_query_bound( $query, array( $p_email_id ) );
+	$t_query = 'DELETE FROM {email} WHERE email_id=%d';
+	db_query( $t_query, array( $p_email_id ) );
 
 	log_event( LOG_EMAIL, "message #$p_email_id deleted from queue" );
 }
 
 /**
- * Get array of email queue id's
- * @param string $p_sort_order 'ASC' or 'DESC' (defaults to DESC)
+ * Get array of next email queue id's to process
+ * These are processed either at:
+ * a) At end of a web page request
+ * b) By a background cron job
+ * It is anticipated that the email table should generally be kept empty, and that
+ * emails will be processed in the order they are queued.
  * @return array
  */
-function email_queue_get_ids( $p_sort_order = 'DESC' ) {
-	$t_email_table = db_get_table( 'email' );
-
-	$query = "SELECT email_id FROM $t_email_table ORDER BY email_id $p_sort_order";
-	$t_result = db_query_bound( $query );
+function email_queue_get_ids() {
+	$t_query = 'SELECT email_id FROM {email} ORDER BY email_id ASC';
+	$t_result = db_query( $t_query );
 
 	$t_ids = array();
 	while(( $t_row = db_fetch_array( $t_result ) ) !== false ) {

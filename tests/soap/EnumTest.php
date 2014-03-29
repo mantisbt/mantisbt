@@ -27,10 +27,14 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture for enum related webservice method.
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class EnumTest extends SoapBase {
 	/**
 	 * Tests mc_enum_access_levels method.
+	 *
 	 */
 	public function testAccessLevel() {
 		$accessLevelsObjectRefs = $this->client->mc_enum_access_levels( $this->userName, $this->password);
@@ -59,6 +63,7 @@ class EnumTest extends SoapBase {
 
 	/**
 	 * Tests mc_enum_status method.
+	 *
 	 */
 	public function testStatus() {
 		$statusesObjectRefs = $this->client->mc_enum_status($this->userName, $this->password);
@@ -144,6 +149,7 @@ class EnumTest extends SoapBase {
 
 	/**
 	 * Tests mc_enum_severities method.
+	 *
 	 */
 	public function testSeverity() {
 		$severityObjectRefs = $this->client->mc_enum_severities($this->userName, $this->password);
@@ -174,6 +180,7 @@ class EnumTest extends SoapBase {
 
 	/**
 	 * Tests mc_enum_projections method.
+	 *
 	 */
 	public function testProjection() {
 		$projectionObjectRefs = $this->client->mc_enum_projections($this->userName, $this->password);
@@ -201,6 +208,7 @@ class EnumTest extends SoapBase {
 
 	/**
 	 * Tests mc_enum_etas method.
+	 *
 	 */
 	public function testEta() {
 		$etaObjectRefs = $this->client->mc_enum_etas($this->userName, $this->password);
@@ -229,6 +237,7 @@ class EnumTest extends SoapBase {
 
 	/**
 	 * Tests mc_enum_resolutions method.
+	 *
 	 */
 	public function testResolution() {
 		$resolutionObjectRefs = $this->client->mc_enum_resolutions($this->userName, $this->password);
@@ -279,11 +288,12 @@ class EnumTest extends SoapBase {
 	
 	/**
 	 * Tests mc_enum_get with severities parameter
+	 *
 	 */
 	public function testEnumGet() {
 		
-		$result = $this->client->mc_enum_get($this->userName, $this->password, 'severity');
+		$t_result = $this->client->mc_enum_get($this->userName, $this->password, 'severity');
 		
-		$this->assertEquals( '10:feature,20:trivial,30:text,40:tweak,50:minor,60:major,70:crash,80:block', $result);
+		$this->assertEquals( '10:feature,20:trivial,30:text,40:tweak,50:minor,60:major,70:crash,80:block', $t_result);
 	}
 }

@@ -112,8 +112,30 @@ define( 'CHECK_PHP_INC_ALLOW', true );
 include( 'check_php_inc.php' );
 
 if( !$g_failed_test ) {
+	define( 'CHECK_INTEGRITY_INC_ALLOW', true );
+	include( 'check_integrity_inc.php' );
+}
+
+if( !$g_failed_test ) {
 	define( 'CHECK_DATABASE_INC_ALLOW', true );
 	include( 'check_database_inc.php' );
+}
+
+if( $g_installation_required ) {
+?>
+	</table>
+	<?php if( $g_failed_test ) { ?>
+	<p class="notice fail2" id="check-notice-failed">Some tests failed. Please review and correct these failed tests before installing MantisBT.</p>
+	<?php } else if( $g_passed_test_with_warnings ) { ?>
+	<p class="notice warn2" id="check-notice-warnings">Some warnings were encountered. Please review and consider correcting these warnings before installing MantisBT.</p>
+	<?php } else { ?>
+	<p class="notice pass2" id="check-notice-passed">All Pre-Installation tests passed.</p>
+	<?php } ?>
+	<p class="notice pass2" id="check-notice-install">To Install MantisBT, Click <a href="../install.php">HERE</a></p>
+	</body>
+	</html>
+<?php
+	return;
 }
 
 if( !$g_failed_test ) {
@@ -129,11 +151,6 @@ if( !$g_failed_test ) {
 if( !$g_failed_test ) {
 	define( 'CHECK_WEBSERVICE_INC_ALLOW', true );
 	include( 'check_webservice_inc.php' );
-}
-
-if( !$g_failed_test ) {
-	define( 'CHECK_INTEGRITY_INC_ALLOW', true );
-	include( 'check_integrity_inc.php' );
 }
 
 if( !$g_failed_test ) {

@@ -37,30 +37,29 @@
  ******************************/
 
 /**
- * hostname should be either a hostname or connection string to supply to adodb.
+ * hostname should be either a hostname or connection string to supply to for the database.
  * For example, if you would like to connect to a database server on the local machine,
  * set hostname to 'localhost'
  * If you need to supply a port to connect to, set hostname as 'localhost:3306'.
  * @global string $g_hostname
  */
-$g_hostname				= 'localhost';
+$g_hostname				= '';
 /**
  * User name to use for connecting to the database. The user needs to have
- * read/write access to the MantisBT database. The default user name is "root".
+ * read/write access to the MantisBT database.
  * @global string $g_db_username
  */
-$g_db_username			= 'root';
+$g_db_username			= '';
 /**
- * Password for the specified user name. The default password is empty.
+ * Password for the specified user name.
  * @global string $g_db_password
  */
 $g_db_password			= '';
  /**
   * Name of database that contains MantisBT tables.
-  * The default database name is "bugtracker".
   * @global string $g_database_name
   */
-$g_database_name		= 'bugtracker';
+$g_database_name		= '';
 
 /**
  * Database Schema Name - used in the case of db2.
@@ -75,7 +74,7 @@ $g_db_schema			= '';
  * RDBMS           db_type       PHP ext   Comments
  * -----           -------       -------   --------
  * MySQL           mysql         mysql
- *                 mysqli        mysqli    default
+ *                 mysqli        mysqli
  * PostgreSQL      pgsql         pgsql
  * MS SQL Server   mssqlnative   sqlsrv    experimental
  * Oracle          oci8          oci8      experimental
@@ -83,7 +82,7 @@ $g_db_schema			= '';
  *
  * @global string $g_db_type
  */
-$g_db_type				= 'mysqli';
+$g_db_type				= '';
 
 /**
  * adodb Data Source Name
@@ -97,6 +96,12 @@ $g_db_type				= 'mysqli';
  * NOTE: the installer does not yet fully support the use of dsn's
  */
 $g_dsn = '';
+
+/**
+ * Database Connection Options
+ * e.g. array( 'dbpersist' ) to use persistent PDO connections
+ */
+$g_db_options = array();
 
 /**************************
  * MantisBT Path Settings *
@@ -3326,12 +3331,6 @@ $g_use_javascript = ON;
  * @global int $g_compress_html
  */
 $g_compress_html = ON;
-
-/**
- * Use persistent database connections
- * @global int $g_use_persistent_connections
- */
-$g_use_persistent_connections = OFF;
 
 /*****************
  * Include files *

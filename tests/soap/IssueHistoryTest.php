@@ -27,12 +27,16 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture for issue history
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class IssueHistoryTest extends SoapBase {
 	/**
 	 * A test case that tests the following:
 	 * 1. Creates a new issue
 	 * 2. validates that history entry is present
+	 *
 	 */
 	public function testCreatedIssueHasHistoryEntry() {
 
@@ -68,6 +72,7 @@ class IssueHistoryTest extends SoapBase {
 	 * 1. Creates a new issue
 	 * 2. Updates the issue summary
 	 * 3. Validates that a history entry for the update was created
+	 *
 	 */
 	public function testUpdatedIssueHasHistoryEntry() {
 
@@ -116,6 +121,7 @@ class IssueHistoryTest extends SoapBase {
 	 * A test case that tests the following:
 	 * 1. Creates a new issue with non-default status and resolution
 	 * 2. Validates that history entries are created for the status and resolution
+	 *
 	 */
 	function testCreatedIssueWithNonDefaultStatusAndResolutionHasHistoryEntries() {
 

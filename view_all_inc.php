@@ -71,7 +71,7 @@ if( helper_get_current_project() > 0 ) {
 	category_get_all_rows( helper_get_current_project() );
 } else {
 	$t_categories = array();
-	foreach ($rows as $t_row) {
+	foreach ($t_rows as $t_row) {
 		$t_categories[] = $t_row->category_id;
 	}
 	category_cache_array_rows( array_unique( $t_categories ) );
@@ -111,9 +111,9 @@ if( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_
 			$v_start = 0;
 			$v_end   = 0;
 
-			if( count( $rows ) > 0 ) {
+			if( count( $t_rows ) > 0 ) {
 				$v_start = $t_filter['per_page'] * ($f_page_number - 1) + 1;
-				$v_end = $v_start + count( $rows ) - 1;
+				$v_end = $v_start + count( $t_rows ) - 1;
 			}
 
 			echo lang_get( 'viewing_bugs_title' );
@@ -218,7 +218,7 @@ function write_bug_rows ( $p_rows )
 }
 
 
-write_bug_rows($rows);
+write_bug_rows($t_rows);
 # -- ====================== end of BUG LIST ========================= --
 
 # -- ====================== MASS BUG MANIPULATION =================== --

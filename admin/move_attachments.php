@@ -48,34 +48,37 @@ function move_attachments_to_disk( $p_type, $p_projects ) {
 		return array();
 	}
 
+	$t_file_table = '';
 	# Build the SQL query based on attachment type
-	$t_file_table = db_get_table( "mantis_${p_type}_file_table" );
 	switch( $p_type ) {
 		case 'project':
-
+			$t_file_table = '{project_file}';
 			$t_query = "SELECT f.*
 				FROM $t_file_table f
 				WHERE content <> ''
-				  AND f.project_id = " . db_param() . "
+				  AND f.project_id=%d
 				ORDER BY f.filename";
 			break;
-
 		case 'bug':
-			$t_bug_table = db_get_table( 'mantis_bug_table' );
-
+			$t_file_table = '{bug_file}';
 			$t_query = "SELECT f.*
 				FROM $t_file_table f
-				JOIN $t_bug_table b ON b.id = f.bug_id
+				JOIN {bug} b ON b.id = f.bug_id
 				WHERE content <> ''
-				  AND b.project_id = " . db_param() . "
+				  AND b.project_id=%d
 				ORDER BY f.bug_id, f.filename";
 			break;
+		default:
+			trigger_error( ERROR_GENERIC, ERROR );		
 	}
 
 	# Process projects list
 	foreach( $p_projects as $t_project ) {
 		# Retrieve attachments for the project
-		$t_result = db_query_bound( $t_query, array( $t_project ) );
+		$t_result = db_query( $t_query, array( $t_project ) );
+
+		$t_rows = 0;
+		$t_failures = 0;
 
 		# Project upload path
 		$t_upload_path = project_get_upload_path( $t_project );
@@ -85,11 +88,13 @@ function move_attachments_to_disk( $p_type, $p_projects ) {
 			|| !is_writable( $t_upload_path )
 		) {
 			# Invalid path
-			$t_failures = db_num_rows( $t_result );
+			while( $t_row = db_fetch_array( $t_result ) ) {
+				$t_rows++;
+				$t_failures++;
+			}
 			$t_data = "ERROR: Upload path '$t_upload_path' does not exist or is not writable";
 		} else {
 			# Process attachments
-			$t_failures = 0;
 			$t_data = array();
 
 			if( $p_type == 'project' ) {
@@ -97,6 +102,7 @@ function move_attachments_to_disk( $p_type, $p_projects ) {
 			}
 
 			while( $t_row = db_fetch_array( $t_result ) ) {
+				$t_rows++;
 				if( $p_type == 'bug' ) {
 					$t_seed = $t_row['bug_id'] . $t_row['filename'];
 				}
@@ -107,12 +113,8 @@ function move_attachments_to_disk( $p_type, $p_projects ) {
 				if( file_put_contents( $t_filename, $t_row['content'] ) ) {
 					# successful, update database
 					# @todo do we want to check the size of data transfer matches here?
-					$t_update_query = "UPDATE $t_file_table
-						SET diskfile = " . db_param() . ",
-							folder = " . db_param() . ",
-							content = ''
-						WHERE id = " . db_param();
-					$t_update_result = db_query_bound(
+					$t_update_query = "UPDATE $t_file_table SET diskfile=%s, folder=%s, content = '' WHERE id=%d";
+					$t_update_result = db_query(
 						$t_update_query,
 						array( $t_filename, $t_upload_path, $t_row['id'] )
 					);
@@ -144,7 +146,7 @@ function move_attachments_to_disk( $p_type, $p_projects ) {
 		$t_moved[] = array(
 			'name'       => project_get_name( $t_project ),
 			'path'       => $t_upload_path,
-			'rows'       => db_num_rows( $t_result ),
+			'rows'       => $t_rows,
 			'failed'     => $t_failures,
 			'data'       => $t_data,
 		);

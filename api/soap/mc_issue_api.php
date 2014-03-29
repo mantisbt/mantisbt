@@ -550,31 +550,24 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 		return mci_soap_fault_login_failed();
 	}
 
-	$t_bug_table = db_get_table( 'bug' );
+	$t_query = 'SELECT id FROM {bug} WHERE summary=%s';
 
-	$query = "SELECT id
-		FROM $t_bug_table
-		WHERE summary = " . db_param();
+	$t_result = db_query( $t_query, array( $p_summary ), 1 );
 
-	$t_result = db_query_bound( $query, array( $p_summary ), 1 );
+	while(( $t_row = db_fetch_array( $t_result ) ) !== false ) {
+		$t_issue_id = (int) $t_row['id'];
+		$t_project_id = bug_get_field( $t_issue_id, 'project_id' );
+		$g_project_override = $t_project_id;
 
-	if( db_num_rows( $t_result ) == 0 ) {
-		return 0;
-	} else {
-		while(( $row = db_fetch_array( $t_result ) ) !== false ) {
-			$t_issue_id = (int) $row['id'];
-			$t_project_id = bug_get_field( $t_issue_id, 'project_id' );
-			$g_project_override = $t_project_id;
-
-			if( mci_has_readonly_access( $t_user_id, $t_project_id ) &&
-				access_has_bug_level( VIEWER, $t_issue_id, $t_user_id ) ) {
-				return $t_issue_id;
-			}
+		if( mci_has_readonly_access( $t_user_id, $t_project_id ) &&
+			access_has_bug_level( VIEWER, $t_issue_id, $t_user_id ) ) {
+			return $t_issue_id;
 		}
-
-		// no issue found that belongs to a project that the user has read access to.
-		return 0;
 	}
+
+	// no issue found that belongs to a project that the user has read access to.
+	return 0;
+
 }
 
 /**
@@ -1325,7 +1318,7 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, $p_re
 
 		// The above function call into MantisBT does not seem to return a valid BugRelationshipData object.
 		// So we call db_insert_id in order to find the id of the created relationship.
-		$t_relationship_id = db_insert_id( db_get_table( 'bug_relationship' ) );
+		$t_relationship_id = db_insert_id( '{bug_relationship}' );
 
 		# Add log line to the history (both bugs)
 		history_log_event_special( $p_issue_id, BUG_ADD_RELATIONSHIP, $t_rel_type['id'], $t_dest_issue_id );

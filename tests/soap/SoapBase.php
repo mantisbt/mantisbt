@@ -87,7 +87,7 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	private   $tagIdsToDelete = array();
 
 	/**
-	 * Soal Client Options Array
+	 * Soap Client Options Array
 	 */
 	private   $defaultSoapClientOptions = array(  'trace'      => true,
 												  'exceptions' => true,
