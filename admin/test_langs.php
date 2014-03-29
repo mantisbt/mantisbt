@@ -156,10 +156,10 @@ function checkfile( $p_path, $p_file, $p_quiet = false ) {
 		$file = $p_path . $p_file;
 
 		set_error_handler( 'lang_error_handler' );
-		$result = checktoken( $file, ($p_file == STRINGS_ENGLISH ) );
+		$t_result = checktoken( $file, ($p_file == STRINGS_ENGLISH ) );
 		restore_error_handler();
 
-		if( !$result ) {
+		if( !$t_result ) {
 			print_error( "Language file '$p_file' failed at phase 1.", 'FAILED' );
 			if( $p_quiet ) {
 				return false;
@@ -175,12 +175,12 @@ function checkfile( $p_path, $p_file, $p_quiet = false ) {
 
 		set_error_handler( 'lang_error_handler' );
 		ob_start();
-		$result = eval( "require_once( '$file' );" );
+		$t_result = eval( "require_once( '$file' );" );
 		$data = ob_get_contents();
 		ob_end_clean();
 		restore_error_handler();
 
-		if( $result === false ) {
+		if( $t_result === false ) {
 			print_error( "Language file '$p_file' failed at eval", 'FAILED' );
 			if( $p_quiet ) {
 				return false;

@@ -75,8 +75,8 @@ require_api( 'user_api.php' );
 			FROM $t_bugnote_table
 			WHERE bug_id=" . db_param() . " $t_restriction
 			ORDER BY date_submitted $t_bugnote_order";
-	$result = db_query_bound($query, array( $c_bug_id ) );
-	$num_notes = db_num_rows($result);
+	$t_result = db_query_bound($query, array( $c_bug_id ) );
+	$num_notes = db_num_rows($t_result);
 ?>
 
 <br />
@@ -99,7 +99,7 @@ require_api( 'user_api.php' );
 <?php
 	for ( $i=0; $i < $num_notes; $i++ ) {
 		# prefix all bugnote data with v3_
-		$row = db_fetch_array( $result );
+		$row = db_fetch_array( $t_result );
 		extract( $row, EXTR_PREFIX_ALL, 'v3' );
 		$v3_date_submitted = date( config_get( 'normal_date_format' ), $v3_date_submitted );
 		$v3_last_modified = date( config_get( 'normal_date_format' ), $v3_last_modified );
@@ -108,9 +108,9 @@ require_api( 'user_api.php' );
 		$query = "SELECT note, id
 				FROM $t_bugnote_text_table
 				WHERE id=" . db_param();
-		$result2 = db_query_bound( $query, array( $v3_bugnote_text_id ) );
-		$v3_note = db_result( $result2, 0, 0 );
-		$v3_bugnote_text_id = db_result( $result2, 0, 1 );
+		$t_result2 = db_query_bound( $query, array( $v3_bugnote_text_id ) );
+		$v3_note = db_result( $t_result2, 0, 0 );
+		$v3_bugnote_text_id = db_result( $t_result2, 0, 1 );
 
 		$v3_note = string_display_links( $v3_note );
 ?>

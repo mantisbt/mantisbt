@@ -56,8 +56,6 @@ $g_cache_file_count = array();
  * @return string
  */
 function file_get_display_name( $p_filename ) {
-	$t_array = explode( '-', $p_filename, 2 );
-
 	# Check if it's a project document filename (doc-0000000-filename)
 	# or a bug attachment filename (0000000-filename)
 	# for newer filenames, the filename in schema is correct.
@@ -375,9 +373,9 @@ function file_delete_attachments( $p_bug_id ) {
 	$query = "SELECT diskfile, filename
 				FROM $t_bug_file_table
 				WHERE bug_id=" . db_param();
-	$result = db_query_bound( $query, array( $p_bug_id ) );
+	$t_result = db_query_bound( $query, array( $p_bug_id ) );
 
-	$file_count = db_num_rows( $result );
+	$file_count = db_num_rows( $t_result );
 	if( 0 == $file_count ) {
 		return true;
 	}
@@ -385,7 +383,7 @@ function file_delete_attachments( $p_bug_id ) {
 	if ( DISK == $t_method ) {
 
 		for( $i = 0;$i < $file_count;$i++ ) {
-			$row = db_fetch_array( $result );
+			$row = db_fetch_array( $t_result );
 
 			$t_local_diskfile = file_normalize_attachment_path( $row['diskfile'], bug_get_field( $p_bug_id, 'project_id' ) );
 			file_delete_local( $t_local_diskfile );
@@ -415,12 +413,12 @@ function file_delete_project_files( $p_project_id ) {
 		$query = "SELECT diskfile, filename
 					FROM $t_project_file_table
 					WHERE project_id=" . db_param();
-		$result = db_query_bound( $query, array( (int) $p_project_id ) );
+		$t_result = db_query_bound( $query, array( (int) $p_project_id ) );
 
-		$file_count = db_num_rows( $result );
+		$file_count = db_num_rows( $t_result );
 
 		for( $i = 0;$i < $file_count;$i++ ) {
-			$row = db_fetch_array( $result );
+			$row = db_fetch_array( $t_result );
 
 			$t_local_diskfile = file_normalize_attachment_path( $row['diskfile'], $p_project_id );
 			file_delete_local( $t_local_diskfile );
@@ -430,7 +428,7 @@ function file_delete_project_files( $p_project_id ) {
 	# Delete the corresponding db records
 	$query = "DELETE FROM $t_project_file_table
 				WHERE project_id=" . db_param();
-	$result = db_query_bound( $query, array( (int) $p_project_id ) );
+	db_query_bound( $query, array( (int) $p_project_id ) );
 }
 
 /**
@@ -458,9 +456,9 @@ function file_get_field( $p_file_id, $p_field_name, $p_table = 'bug' ) {
 	}
 
 	$query = "SELECT $p_field_name FROM $t_bug_file_table WHERE id=" . db_param();
-	$result = db_query_bound( $query, array( (int) $p_file_id ), 1 );
+	$t_result = db_query_bound( $query, array( (int) $p_file_id ), 1 );
 
-	return db_result( $result );
+	return db_result( $t_result );
 }
 
 /**
@@ -765,7 +763,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 	if( 'bug' == $p_table ) {
 		# update the last_updated date
 		if ( !$p_skip_bug_update ) {
-			$result = bug_update_date( $p_bug_id );
+			bug_update_date( $p_bug_id );
 		}
 
 		# log file added to bug history
@@ -916,8 +914,8 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 		default:
 			return false;
 	}
-	$result = db_query_bound( $query, array( $p_file_id ) );
-	$row = db_fetch_array( $result );
+	$t_result = db_query_bound( $query, array( $p_file_id ) );
+	$row = db_fetch_array( $t_result );
 
 	if( $p_type == 'bug' ) {
 		$t_project_id = bug_get_field( $row['bug_id'], 'project_id' );
@@ -1055,18 +1053,16 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
  * @param int $p_dest_bug_id
  */
 function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
-
 	$t_mantis_bug_file_table = db_get_table( 'bug_file' );
 
 	$query = 'SELECT * FROM ' . $t_mantis_bug_file_table . ' WHERE bug_id = ' . db_param();
-	$result = db_query_bound( $query, array( $p_source_bug_id ) );
-	$t_count = db_num_rows( $result );
+	$t_result = db_query_bound( $query, array( $p_source_bug_id ) );
+	$t_count = db_num_rows( $t_result );
 
 	$t_project_id = bug_get_field( $p_source_bug_id, 'project_id' );
 
-	$t_bug_file = array();
 	for( $i = 0;$i < $t_count;$i++ ) {
-		$t_bug_file = db_fetch_array( $result );
+		$t_bug_file = db_fetch_array( $t_result );
 
 		# prepare the new diskfile name and then copy the file
 		$t_source_file = $t_bug_file['folder'] . $t_bug_file['diskfile'];

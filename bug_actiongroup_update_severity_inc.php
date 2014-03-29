@@ -89,8 +89,6 @@ function action_update_severity_print_fields() {
  * @return string|null On failure: the reason why the action could not be validated. On success: null.
  */
 function action_update_severity_validate( $p_bug_id ) {
-	$f_severity = gpc_get_string( 'severity' );
-
 	$t_update_severity_threshold = config_get( 'update_bug_threshold' );
 	$t_bug_id = $p_bug_id;
 

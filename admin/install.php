@@ -370,8 +370,8 @@ if( 2 == $t_install_state ) {
 			$f_db_exists = true;
 		}
 		if( $f_db_type == 'db2' ) {
-			$result = $g_db->execute( 'set schema ' . $f_db_schema );
-			if( $result === false ) {
+			$t_result = $g_db->execute( 'set schema ' . $f_db_schema );
+			if( $t_result === false ) {
 				print_test_result( BAD, true, 'set schema failed: ' . $g_db->errorMsg() );
 			}
 		} else {
@@ -400,8 +400,8 @@ if( 2 == $t_install_state ) {
 		if( $t_result == true ) {
 			$t_db_open = true;
 			if( $f_db_type == 'db2' ) {
-				$result = $g_db->execute( 'set schema ' . $f_db_schema );
-				if( $result === false ) {
+				$t_result = $g_db->execute( 'set schema ' . $f_db_schema );
+				if( $t_result === false ) {
 					print_test_result( BAD, true, 'set schema failed: ' . $g_db->errorMsg() );
 				}
 			} else {
@@ -782,8 +782,8 @@ if( 3 == $t_install_state ) {
 		$t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
 
 		if( $f_db_type == 'db2' ) {
-			$result = $g_db->execute( 'set schema ' . $f_db_schema );
-			if( $result === false ) {
+			$t_result = $g_db->execute( 'set schema ' . $f_db_schema );
+			if( $t_result === false ) {
 				echo $g_db->errorMsg();
 			}
 		}
@@ -832,8 +832,8 @@ if( 3 == $t_install_state ) {
 		}
 
 		if( $f_db_type == 'db2' ) {
-			$result = $g_db->execute( 'set schema ' . $f_db_schema );
-			if( $result === false ) {
+			$t_result = $g_db->execute( 'set schema ' . $f_db_schema );
+			if( $t_result === false ) {
 				echo $g_db->errorMsg();
 			}
 		}
@@ -1181,8 +1181,8 @@ if( 6 == $t_install_state ) {
 	}
 
 	if( $f_db_type == 'db2' ) {
-		$result = $g_db->execute( 'set schema ' . $f_db_schema );
-		if( $result === false ) {
+		$t_result = $g_db->execute( 'set schema ' . $f_db_schema );
+		if( $t_result === false ) {
 			echo $g_db->errorMsg();
 		}
 	}

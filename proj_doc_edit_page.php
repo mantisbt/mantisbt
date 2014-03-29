@@ -67,8 +67,8 @@ $t_proj_file_table = db_get_table( 'project_file' );
 $query = "SELECT *
 		FROM $t_proj_file_table
 		WHERE id=" . db_param();
-$result = db_query_bound( $query, array( $c_file_id ) );
-$row = db_fetch_array( $result );
+$t_result = db_query_bound( $query, array( $c_file_id ) );
+$row = db_fetch_array( $t_result );
 extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 $v_title = string_attribute( $v_title );

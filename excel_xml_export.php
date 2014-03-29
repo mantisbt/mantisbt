@@ -69,8 +69,8 @@ $t_short_date_format = config_get( 'short_date_format' );
 $t_page_number = gpc_get_int( 'page_number', 1 );
 $t_per_page = 100;
 
-$result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
-if ( $result === false ) {
+$t_result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
+if ( $t_result === false ) {
 	print_header_redirect( 'view_all_set.php?type=0&print=1' );
 }
 
@@ -87,9 +87,9 @@ $t_columns = excel_get_columns();
 
 do {
 	# pre-cache custom column data
-	columns_plugin_cache_issue_data( $result );
+	columns_plugin_cache_issue_data( $t_result );
 
-	foreach( $result as $t_row ) {
+	foreach( $t_result as $t_row ) {
 		if ( is_blank( $f_export ) || in_array( $t_row->id, $f_bug_arr ) ) {
 			echo excel_get_start_row();
 
@@ -115,7 +115,7 @@ do {
 	$t_more = ( $t_page_number < $t_page_count );
 	if ( $t_more ) {
 		$t_page_number++;
-		$result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
+		$t_result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
 	}
 } while ( $t_more );
 

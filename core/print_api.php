@@ -410,11 +410,11 @@ function print_news_item_option_list() {
 				WHERE project_id=" . db_param() . "
 				ORDER BY date_posted DESC";
 	}
-	$result = db_query_bound( $query, ($t_global == true ? array() : array( $t_project_id ) ) );
-	$news_count = db_num_rows( $result );
+	$t_result = db_query_bound( $query, ($t_global == true ? array() : array( $t_project_id ) ) );
+	$news_count = db_num_rows( $t_result );
 
 	for( $i = 0;$i < $news_count;$i++ ) {
-		$row = db_fetch_array( $result );
+		$row = db_fetch_array( $t_result );
 
 		$t_headline = string_display( $row['headline'] );
 		$t_announcement = $row['announcement'];
@@ -670,9 +670,6 @@ function print_profile_option_list_from_profiles( $p_profiles, $p_select_id ) {
  * @param int $p_project_id project id
  */
 function print_category_option_list( $p_category_id = 0, $p_project_id = null ) {
-	$t_category_table = db_get_table( 'category' );
-	$t_project_table = db_get_table( 'project' );
-
 	if( null === $p_project_id ) {
 		$t_project_id = helper_get_current_project();
 	} else {
@@ -850,11 +847,11 @@ function print_build_option_list( $p_build = '' ) {
 				FROM $t_bug_table
 				WHERE $t_project_where
 				ORDER BY build DESC";
-	$result = db_query_bound( $query );
-	$option_count = db_num_rows( $result );
+	$t_result = db_query_bound( $query );
+	$option_count = db_num_rows( $t_result );
 
 	for( $i = 0;$i < $option_count;$i++ ) {
-		$row = db_fetch_array( $result );
+		$row = db_fetch_array( $t_result );
 		$t_overall_build_arr[] = $row['build'];
 	}
 
@@ -1059,10 +1056,10 @@ function print_project_user_list_option_list2( $p_user_id ) {
 				WHERE p.enabled = " . db_param() . " AND
 					u.user_id IS NULL
 				ORDER BY p.name";
-	$result = db_query_bound( $query, array( $c_user_id, true ) );
-	$category_count = db_num_rows( $result );
+	$t_result = db_query_bound( $query, array( $c_user_id, true ) );
+	$category_count = db_num_rows( $t_result );
 	for( $i = 0;$i < $category_count;$i++ ) {
-		$row = db_fetch_array( $result );
+		$row = db_fetch_array( $t_result );
 		$t_project_name = string_attribute( $row['name'] );
 		$t_user_id = $row['id'];
 		echo "<option value=\"$t_user_id\">$t_project_name</option>";
@@ -1114,8 +1111,6 @@ function print_custom_field_projects_list( $p_field_id ) {
 		echo '<br />- ';
 
 		$t_linked_field_ids = custom_field_get_linked_ids( $t_project_id );
-
-		$t_current_project_fields = array();
 
 		$t_first = true;
 		foreach( $t_linked_field_ids as $t_current_field_id ) {
@@ -1409,7 +1404,6 @@ function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur
  */
 function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter_id = 0 ) {
 	$t_items = array();
-	$t_link = '';
 
 	# Check if we have more than one page,
 	#  otherwise return without doing anything.
@@ -1703,7 +1697,6 @@ function get_dropdown( $p_control_array, $p_control_name, $p_match = '', $p_add_
  */
 function print_bug_attachments_list( $p_bug_id ) {
 	$t_attachments = file_get_visible_attachments( $p_bug_id );
-	$t_attachments_count = count( $t_attachments );
 	echo "\n<ul>";
 	foreach ( $t_attachments as $t_attachment ) {
 		echo "\n<li>";

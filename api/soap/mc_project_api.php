@@ -722,12 +722,13 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		( ( pult.user_id = " . db_param() . " ) AND ( pult.access_level $t_access_clause ) ) OR
 		( ut.access_level = " . db_param() . " ) )
 		ORDER BY pt.name ASC, pft.title ASC";
-	$result = db_query_bound( $query, array( $t_user_id, $t_user_id, $t_pub, $t_user_id, $t_admin ) );
-	$num_files = db_num_rows( $result );
 
-	$t_result = array();
+	$t_result = db_query_bound( $query, array( $t_user_id, $t_user_id, $t_pub, $t_user_id, $t_admin ) );
+	$num_files = db_num_rows( $t_result );
+
+	$t_attachments = array();
 	for( $i = 0;$i < $num_files;$i++ ) {
-		$row = db_fetch_array( $result );
+		$row = db_fetch_array( $t_result );
 
 		$t_attachment = array();
 		$t_attachment['id'] = $row['id'];
@@ -739,10 +740,10 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		$t_attachment['date_submitted'] = SoapObjectsFactory::newDateTimeVar( $row['date_added'] );
 		$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $row['id'] . '&amp;type=doc';
 		$t_attachment['user_id'] = $row['user_id'];
-		$t_result[] = $t_attachment;
+		$t_attachments[] = $t_attachment;
 	}
 
-	return $t_result;
+	return $t_attachments;
 }
 
 function mc_project_get_all_subprojects( $p_username, $p_password, $p_project_id ) {

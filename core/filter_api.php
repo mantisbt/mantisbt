@@ -1421,9 +1421,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	$t_available_statuses = MantisEnum::getValues( config_get( 'status_enum_string' ) );
 
 	if( 'simple' == $t_filter['_view_type'] ) {
-
 		# simple filtering: if showing any, restrict by the hide status value, otherwise ignore the hide
-		$t_any_found = false;
 		$t_this_status = $t_filter[FILTER_PROPERTY_STATUS][0];
 		$t_this_hide_status = $t_filter[FILTER_PROPERTY_HIDE_STATUS][0];
 
@@ -4230,9 +4228,7 @@ function print_filter_show_sort() {
  * @param int $p_field_id
  */
 function print_filter_custom_field_date( $p_field_num, $p_field_id ) {
-	global $t_filter, $t_accessible_custom_fields_names, $t_accessible_custom_fields_types, $t_accessible_custom_fields_values, $t_accessible_custom_fields_ids, $t_select_modifier;
-
-	$t_js_toggle_func = 'toggle_custom_date_field_' . $p_field_id . '_controls';
+	global $t_filter, $t_accessible_custom_fields_values;
 
 	# Resort the values so there ordered numerically, they are sorted as strings otherwise which
 	# may be wrong for dates before early 2001.
@@ -4350,7 +4346,7 @@ function print_filter_custom_field_date( $p_field_num, $p_field_id ) {
  *  print project field
  */
 function print_filter_project_id() {
-	global $t_select_modifier, $t_filter, $f_view_type;
+	global $t_select_modifier, $t_filter;
 	?>
 		<!-- Project -->
 		<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_PROJECT_ID;?>[]">
@@ -4364,7 +4360,7 @@ function print_filter_project_id() {
 }
 
 function print_filter_match_type() {
-	global $t_select_modifier, $t_filter, $f_view_type;
+	global $t_select_modifier, $t_filter;
 ?>
 		<!-- Project -->
 		<select <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_MATCH_TYPE;?>">
@@ -4453,9 +4449,9 @@ function filter_cache_row( $p_filter_id, $p_trigger_errors = true ) {
 	$t_query = 'SELECT *
 				  FROM ' . $t_filters_table . '
 				  WHERE id=' . db_param();
-	$result = db_query_bound( $t_query, array( $p_filter_id ) );
+	$t_result = db_query_bound( $t_query, array( $p_filter_id ) );
 
-	if( 0 == db_num_rows( $result ) ) {
+	if( 0 == db_num_rows( $t_result ) ) {
 		if( $p_trigger_errors ) {
 			error_parameters( $p_filter_id );
 			trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
@@ -4464,7 +4460,7 @@ function filter_cache_row( $p_filter_id, $p_trigger_errors = true ) {
 		}
 	}
 
-	$row = db_fetch_array( $result );
+	$row = db_fetch_array( $t_result );
 
 	$g_cache_filter[$p_filter_id] = $row;
 
@@ -4518,10 +4514,10 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
 					WHERE user_id=" . db_param() . "
 					AND project_id=" . db_param() . "
 					AND name=" . db_param();
-	$result = db_query_bound( $query, array( $t_user_id, $c_project_id, $p_name ) );
+	$t_result = db_query_bound( $query, array( $t_user_id, $c_project_id, $p_name ) );
 
-	if( db_num_rows( $result ) > 0 ) {
-		$row = db_fetch_array( $result );
+	if( db_num_rows( $t_result ) > 0 ) {
+		$row = db_fetch_array( $t_result );
 
 		$query = "UPDATE $t_filters_table
 					  SET is_public=" . db_param() . ",
@@ -4543,10 +4539,10 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
 						WHERE user_id=" . db_param() . "
 						AND project_id=" . db_param() . "
 						AND name=" . db_param();
-		$result = db_query_bound( $query, array( $t_user_id, $c_project_id, $p_name ) );
+		$t_result = db_query_bound( $query, array( $t_user_id, $c_project_id, $p_name ) );
 
-		if( db_num_rows( $result ) > 0 ) {
-			$row = db_fetch_array( $result );
+		if( db_num_rows( $t_result ) > 0 ) {
+			$row = db_fetch_array( $t_result );
 			return $row['id'];
 		}
 
@@ -4580,10 +4576,10 @@ function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
 
 	$t_filters_table = db_get_table( 'filters' );
 	$query = 'SELECT * FROM ' . $t_filters_table . ' WHERE id=' . db_param();
-	$result = db_query_bound( $query, array( $c_filter_id ) );
+	$t_result = db_query_bound( $query, array( $c_filter_id ) );
 
-	if( db_num_rows( $result ) > 0 ) {
-		$row = db_fetch_array( $result );
+	if( db_num_rows( $t_result ) > 0 ) {
+		$row = db_fetch_array( $t_result );
 
 		if( $row['user_id'] != $t_user_id ) {
 			if( $row['is_public'] != true ) {
@@ -4627,10 +4623,10 @@ function filter_db_get_project_current( $p_project_id, $p_user_id = null ) {
 				  WHERE user_id=" . db_param() . "
 					AND project_id=" . db_param() . "
 					AND name=" . db_param();
-	$result = db_query_bound( $query, array( $c_user_id, $c_project_id, '' ) );
+	$t_result = db_query_bound( $query, array( $c_user_id, $c_project_id, '' ) );
 
-	if( db_num_rows( $result ) > 0 ) {
-		$row = db_fetch_array( $result );
+	if( db_num_rows( $t_result ) > 0 ) {
+		$row = db_fetch_array( $t_result );
 		return $row['id'];
 	}
 
@@ -4647,10 +4643,10 @@ function filter_db_get_name( $p_filter_id ) {
 
 	$t_filters_table = db_get_table( 'filters' );
 	$query = 'SELECT * FROM ' . $t_filters_table . ' WHERE id=' . db_param();
-	$result = db_query_bound( $query, array( $c_filter_id ) );
+	$t_result = db_query_bound( $query, array( $c_filter_id ) );
 
-	if( db_num_rows( $result ) > 0 ) {
-		$row = db_fetch_array( $result );
+	if( db_num_rows( $t_result ) > 0 ) {
+		$row = db_fetch_array( $t_result );
 
 		if( $row['user_id'] != auth_get_current_user_id() ) {
 			if( $row['is_public'] != true ) {
@@ -4685,9 +4681,9 @@ function filter_db_can_delete_filter( $p_filter_id ) {
 				  AND user_id=" . db_param() . "
 				  AND project_id!=" . db_param();
 
-	$result = db_query_bound( $query, array( $c_filter_id, $t_user_id, -1 ) );
+	$t_result = db_query_bound( $query, array( $c_filter_id, $t_user_id, -1 ) );
 
-	if( db_num_rows( $result ) > 0 ) {
+	if( db_num_rows( $t_result ) > 0 ) {
 		return true;
 	}
 
@@ -4702,14 +4698,13 @@ function filter_db_can_delete_filter( $p_filter_id ) {
 function filter_db_delete_filter( $p_filter_id ) {
 	$t_filters_table = db_get_table( 'filters' );
 	$c_filter_id = (int)$p_filter_id;
-	$t_user_id = auth_get_current_user_id();
 
 	if( !filter_db_can_delete_filter( $c_filter_id ) ) {
 		return false;
 	}
 
-	$query = 'DELETE FROM ' . $t_filters_table . ' WHERE id=' . db_param();
-	$result = db_query_bound( $query, array( $c_filter_id ) );
+	$t_query = 'DELETE FROM ' . $t_filters_table . ' WHERE id=' . db_param();
+	db_query_bound( $t_query, array( $c_filter_id ) );
 
 	# db_query_bound() errors on failure so:
 	return true;
@@ -4722,10 +4717,10 @@ function filter_db_delete_current_filters() {
 	$t_filters_table = db_get_table( 'filters' );
 	$t_all_id = ALL_PROJECTS;
 
-	$query = "DELETE FROM $t_filters_table
+	$t_query = "DELETE FROM $t_filters_table
 					WHERE project_id<=" . db_param() . "
 					AND name=" . db_param();
-	$result = db_query_bound( $query, array( $t_all_id, '' ) );
+	db_query_bound( $t_query, array( $t_all_id, '' ) );
 }
 
 /**
@@ -4766,11 +4761,11 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
 					AND (is_public = " . db_prepare_bool(true) . "
 						OR user_id = " . db_param() . ")
 					ORDER BY is_public DESC, name ASC";
-	$result = db_query_bound( $query, array( $t_project_id, $t_user_id ) );
-	$query_count = db_num_rows( $result );
+	$t_result = db_query_bound( $query, array( $t_project_id, $t_user_id ) );
+	$query_count = db_num_rows( $t_result );
 
 	for( $i = 0;$i < $query_count;$i++ ) {
-		$row = db_fetch_array( $result );
+		$row = db_fetch_array( $t_result );
 		$t_overall_query_arr[$row['id']] = $row['name'];
 	}
 

@@ -51,7 +51,7 @@ header( 'X-Content-Type-Options: nosniff' );
 /**
  * Print the result of an upgrade step.
  *
- * @param integer $result       GOOD or BAD.
+ * @param integer $p_result       GOOD or BAD.
  * @param bool    $p_hard_fail  If result is BAD, sets the global failure flag.
  * @param string  $p_message    The message describing the upgrade step.
  * @access private
@@ -76,11 +76,11 @@ function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
 	echo "\n";
 }
 
-$result = @db_connect( config_get_global( 'dsn', false ), config_get_global( 'hostname' ),
+$t_result = @db_connect( config_get_global( 'dsn', false ), config_get_global( 'hostname' ),
 	config_get_global( 'db_username' ), config_get_global( 'db_password' ),
 	config_get_global( 'database_name' ) );
 
-if( false == $result ) {
+if( false == $t_result ) {
 	echo "Opening connection to database " .
 		config_get_global( 'database_name' ) .
 		" on host " . config_get_global( 'hostname' ) .
