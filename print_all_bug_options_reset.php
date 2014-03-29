@@ -69,12 +69,9 @@ for ($i=0 ; $i<$field_name_count ; $i++) {
 $t_default = implode('',$t_default_arr) ;
 
 # reset to defaults
-$t_user_print_pref_table = db_get_table( 'user_print_pref' );
-$query = "UPDATE $t_user_print_pref_table
-		SET print_pref=" . db_param() . "
-		WHERE user_id=" . db_param();
+$query = "UPDATE {user_print_pref} SET print_pref=%s WHERE user_id=%d";
 
-$t_result = db_query_bound( $query, array( $t_default, $t_user_id ) );
+$t_result = db_query( $query, array( $t_default, $t_user_id ) );
 
 form_security_purge( 'print_all_bug_options_reset' );
 

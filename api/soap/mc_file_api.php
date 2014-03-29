@@ -108,23 +108,11 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	$query = "INSERT INTO $t_file_table
 				( $t_id_col, title, description, diskfile, filename, folder, filesize, file_type, date_added, content, user_id )
 		VALUES
-				( " . db_param() . ", " . db_param() . ", " . db_param() . ", "
-				    . db_param() . ", " . db_param() . ", " . db_param() . ", "
-				    . db_param() . ", " . db_param() . ", " . db_param() . ", "
-				    . db_param() . ", " . db_param() . " )";
-	db_query_bound( $query, array(
-		$t_id,
-		$p_title,
-		$p_desc,
-		$t_unique_name,
-		$p_name,
-		$t_file_path,
-		$t_file_size,
-		$p_file_type,
-		db_now(),
-		$c_content,
-		(int)$p_user_id,
-	) );
+				(%d,%s,%s,%s,%s,%s,
+				 %d,%s,%d,%b,%d)";
+	db_query( $query, array(
+		$t_id, $p_title, $p_desc, $t_unique_name, $p_name, $t_file_path,
+		$t_file_size, $p_file_type, db_now(), $c_content, (int)$p_user_id ) );
 
 	# get attachment id
 	$t_attachment_id = db_insert_id( $t_file_table );
@@ -155,18 +143,16 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 	$t_query = '';
 	switch( $p_type ) {
 		case 'bug':
-			$t_bug_file_table = db_get_table( 'bug_file' );
-			$t_query = "SELECT * FROM $t_bug_file_table WHERE id=" . db_param();
+			$t_query = 'SELECT * FROM {bug_file} WHERE id=%d';
 			break;
 		case 'doc':
-			$t_project_file_table = db_get_table( 'project_file' );
-			$t_query = "SELECT * FROM $t_project_file_table WHERE id=" . db_param();
+			$t_query = 'SELECT * FROM {project_file} WHERE id=%d';
 			break;
 		default:
 			return SoapObjectsFactory::newSoapFault( 'Server', 'Invalid file type '.$p_type. ' .' );
 	}
 
-	$t_result = db_query_bound( $t_query, array( $p_file_id ) );
+	$t_result = db_query( $t_query, array( $p_file_id ) );
 
 	if ( $t_result->EOF ) {
 		return SoapObjectsFactory::newSoapFault( 'Client', 'Unable to find an attachment with type ' . $p_type. ' and id ' . $p_file_id . ' .' );

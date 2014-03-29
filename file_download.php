@@ -81,21 +81,15 @@ $c_file_id = (integer)$f_file_id;
 $query = '';
 switch ( $f_type ) {
 	case 'bug':
-		$t_bug_file_table = db_get_table( 'bug_file' );
-		$query = "SELECT *
-			FROM $t_bug_file_table
-			WHERE id=" . db_param();
+		$query = "SELECT * FROM {bug_file} WHERE id=%d";
 		break;
 	case 'doc':
-		$t_project_file_table = db_get_table( 'project_file' );
-		$query = "SELECT *
-			FROM $t_project_file_table
-			WHERE id=" . db_param();
+		$query = "SELECT * FROM {project_file} WHERE id=%d";
 		break;
 	default:
 		access_denied();
 }
-$t_result = db_query_bound( $query, array( $c_file_id ) );
+$t_result = db_query( $query, array( $c_file_id ) );
 $row = db_fetch_array( $t_result );
 extract( $row, EXTR_PREFIX_ALL, 'v' );
 
