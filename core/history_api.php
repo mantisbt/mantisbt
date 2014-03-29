@@ -83,12 +83,11 @@ function history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_ne
 		$c_old_value = ( is_null( $p_old_value ) ? '' : $p_old_value );
 		$c_new_value = ( is_null( $p_new_value ) ? '' : $p_new_value );
 
-		$t_mantis_bug_history_table = db_get_table( 'bug_history' );
-		$t_query = "INSERT INTO $t_mantis_bug_history_table
+		$t_query = "INSERT INTO {bug_history}
 						( user_id, bug_id, date_modified, field_name, old_value, new_value, type )
 					VALUES
-						( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-		db_query_bound( $t_query, array( $p_user_id, $p_bug_id, db_now(), $c_field_name, $c_old_value, $c_new_value, $p_type ) );
+						( %d, %d, %d, %s, %s, %s, %d )";
+		db_query( $t_query, array( $p_user_id, $p_bug_id, db_now(), $c_field_name, $c_old_value, $c_new_value, $p_type ) );
 	}
 }
 
@@ -110,22 +109,21 @@ function history_log_event( $p_bug_id, $p_field_name, $p_old_value ) {
  * These are special case logs (new bug, deleted bugnote, etc.)
  * @param int $p_bug_id
  * @param int $p_type
- * @param string $p_optional
- * @param string $p_optional2
+ * @param string $p_old_value
+ * @param string $p_new_value
  * @return null
  */
-function history_log_event_special( $p_bug_id, $p_type, $p_optional = '', $p_optional2 = '' ) {
-	$c_optional = ( $p_optional );
-	$c_optional2 = ( $p_optional2 );
+function history_log_event_special( $p_bug_id, $p_type, $p_old_value = '', $p_new_value = '' ) {
 	$t_user_id = auth_get_current_user_id();
 
-	$t_mantis_bug_history_table = db_get_table( 'bug_history' );
+	$c_old_value = ( is_null( $p_old_value ) ? '' : $p_old_value );
+	$c_new_value = ( is_null( $p_new_value ) ? '' : $p_new_value );
 
-	$query = "INSERT INTO $t_mantis_bug_history_table
+	$t_query = "INSERT INTO {bug_history}
 					( user_id, bug_id, date_modified, type, old_value, new_value, field_name )
 				VALUES
-					( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ',' . db_param() . ', ' . db_param() . ')';
-	db_query_bound( $query, array( $t_user_id, $p_bug_id, db_now(), $p_type, $c_optional, $c_optional2, '' ) );
+					( %d, %d, %d, %d, %s, %s, %s)";
+	db_query( $t_query, array( $t_user_id, $p_bug_id, db_now(), $p_type, $c_old_value, $c_new_value, '' ) );
 }
 
 /**
@@ -175,12 +173,8 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 	# I give you an example. We create a child of a bug with different custom fields. In the history of the child
 	# bug we will find the line related to the relationship mixed with the custom fields (the history is creted
 	# for the new bug with the same timestamp...)
-	$t_mantis_bug_history_table = db_get_table( 'bug_history' );
-	$query = "SELECT *
-				FROM $t_mantis_bug_history_table
-				WHERE bug_id=" . db_param() . "
-				ORDER BY date_modified $t_history_order,id";
-	$t_result = db_query_bound( $query, array( $p_bug_id ) );
+	$t_query = "SELECT * FROM {bug_history} WHERE bug_id=%d ORDER BY date_modified $t_history_order,id";
+	$t_result = db_query( $t_query, array( $p_bug_id ) );
 	$raw_history = array();
 
 	$t_private_bugnote_visible = access_has_bug_level( config_get( 'private_bugnote_threshold' ), $p_bug_id, $t_user_id );
@@ -581,7 +575,6 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
  * @param int $p_bug_id
  */
 function history_delete( $p_bug_id ) {
-	$t_bug_history_table = db_get_table( 'bug_history' );
-	$query = 'DELETE FROM ' . $t_bug_history_table . ' WHERE bug_id=' . db_param();
-	db_query_bound( $query, array( $p_bug_id ) );
+	$t_query = 'DELETE FROM {bug_history} WHERE bug_id=%d';
+	db_query( $t_query, array( $p_bug_id ) );
 }

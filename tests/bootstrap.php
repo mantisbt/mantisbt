@@ -22,7 +22,7 @@ $GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED'] = true;
  * @global string $GLOBALS['MANTIS_TESTSUITE_SOAP_HOST']
  * @name MANTIS_TESTSUITE_SOAP_HOST
  */
-$GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'] = 'http://localhost/mantisbt/api/soap/mantisconnect.php?wsdl';
+$GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'] = 'http://localhost/api/soap/mantisconnect.php?wsdl';
 
 /**
  * The user account that will run the tests
@@ -51,3 +51,10 @@ $GLOBALS['MANTIS_TESTSUITE_EMAIL'] = 'root@localhost';
  * @name MANTIS_TESTSUITE_PROJECT_ID
  */
 $GLOBALS['MANTIS_TESTSUITE_PROJECT_ID'] = 1;
+
+/*
+ * Test Database (for DB Tests)
+ * @global string $GLOBALS['MANTIS_TESTSUITE_DATABASE_NAME']
+ * @name MANTIS_TESTSUITE_DATABASE_NAME
+ */
+$GLOBALS['MANTIS_TESTSUITE_DATABASE_NAME'] = 'testmdb';

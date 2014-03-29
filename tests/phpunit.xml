@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit backupGlobals="false"
+		 backupStaticAttributes="false"
+		 bootstrap="bootstrap.php"
+		 colors="false"
+		 convertErrorsToExceptions="true"
+		 convertNoticesToExceptions="true"
+		 convertWarningsToExceptions="true"
+		 forceCoversAnnotation="false"
+		 mapTestClassNameToCoveredClassName="false"
+		 processIsolation="false"
+		 stopOnError="true"
+		 stopOnFailure="true"
+		 stopOnIncomplete="false"
+		 stopOnSkipped="false"
+		 syntaxCheck="false"
+		 strict="false"
+		 verbose="true">
+
+<php>
+	<server name="HTTP_HOST" value="localhost"/>
+	<server name="REQUEST_URI" value="@REQUEST_URI@"/>
+	<server name="REMOTE_ADDR" value="127.0.0.1"/>
+</php>
+
+<testsuites>
+	<testsuite name="MantisTests">
+		<directory>./Mantis</directory>
+	</testsuite>
+	<testsuite name="PluginTests">
+		<directory>./Plugins</directory>
+		<directory>../../plugins/*/tests</directory>
+		<directory>../../plugins/*/Test</directory>
+	</testsuite>
+	<testsuite name="DatabaseTests">
+		<directory>./Database</directory>
+		<directory>./Database/DataTypes</directory>
+	</testsuite>
+	<testsuite name="SOAPTests">
+		<file>./soap/EnumTest.php</file>
+		<file>./soap/IssueAddTest.php</file>
+		<file>./soap/IssueMonitorTest.php</file>
+		<file>./soap/IssueNoteTest.php</file>
+		<file>./soap/IssueUpdateTest.php</file>
+		<file>./soap/FilterTest.php</file>
+		<file>./soap/AttachmentTest.php</file>
+		<file>./soap/LoginTest.php</file>
+		<file>./soap/CategoryTest.php</file>
+		<file>./soap/CompressionTest.php</file>
+		<file>./soap/ProjectTest.php</file>
+		<file>./soap/VersionTest.php</file>
+		<file>./soap/RelationshipTest.php</file>
+		<file>./soap/UserTest.php</file>
+		<file>./soap/TagTest.php</file>
+	</testsuite>
+</testsuites>
+
+</phpunit>

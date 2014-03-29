@@ -27,12 +27,18 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture which verifies login mechanisms
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class LoginTest extends SoapBase {
 
 	private $dummyUser = 'no';
 	private $dummyPassword = 'user';
 
+	/**
+	 *
+	 */
 	public function testLoginFailed() {
 		try {
 			$this->client->mc_login( $this->dummyUser , $this->dummyPassword );
@@ -42,6 +48,9 @@ class LoginTest extends SoapBase {
 		}
 	}
 
+	/**
+	 *
+	 */
 	public function testLoginSuccessfully() {
 		$t_user_data = $this->client->mc_login( $this->userName, $this->password );
 
@@ -52,6 +61,9 @@ class LoginTest extends SoapBase {
 		$this->assertEquals( 90, (integer)$t_user_data->access_level, 'access_level' );
 	}
 
+	/**
+	 *
+	 */
 	public function testGetIssueGetLoginFailed() {
 		try {
 			$this->client->mc_issue_get( $this->dummyUser , $this->dummyPassword, 1 );
@@ -61,6 +73,9 @@ class LoginTest extends SoapBase {
 		}
 	}
 
+	/**
+	 *
+	 */
 	public function testProjectGetUsersLoginFailed() {
 		try {
 			$this->client->mc_project_get_users( $this->dummyUser , $this->dummyPassword, $this->getProjectId(), 0 );
@@ -70,6 +85,9 @@ class LoginTest extends SoapBase {
 		}
 	}
 
+	/**
+	 *
+	 */
 	public function testGetEnumStatusLoginFailed() {
 		try {
 			$this->client->mc_enum_status( $this->dummyUser , $this->dummyPassword);
@@ -79,6 +97,9 @@ class LoginTest extends SoapBase {
 		}
 	}
 
+	/**
+	 *
+	 */
 	public function testProjectGetIssuesLoginFailed() {
 		try {
 			$this->client->mc_project_get_issues( $this->dummyUser , $this->dummyPassword, $this->getProjectId(), 0, 15 );
@@ -88,6 +109,9 @@ class LoginTest extends SoapBase {
 		}
 	}
 
+	/**
+	 *
+	 */
 	public function testFilterGetIssuesLoginFailed() {
 		try {
 			$this->client->mc_filter_get_issues( $this->dummyUser , $this->dummyPassword, $this->getProjectId(), 1, 0, 15 );
@@ -97,6 +121,9 @@ class LoginTest extends SoapBase {
 		}
 	}
 
+	/**
+	 *
+	 */
 	public function testLoginWithNullPasswordIsRejected() {
 		try {
 			$this->client->mc_enum_status( $this->userName, null);
@@ -106,6 +133,9 @@ class LoginTest extends SoapBase {
 		}
 	}
 
+	/**
+	 *
+	 */
 	public function testLoginWithEmptyPasswordIsRejected() {
 		try {
 			$this->client->mc_enum_status( $this->userName, '');
@@ -115,6 +145,9 @@ class LoginTest extends SoapBase {
 		}
 	}
 
+	/**
+	 *
+	 */
 	public function testLoginWithIncorrectPasswordIsRejected() {
 		try {
 			$this->client->mc_enum_status( $this->userName, "This really should be incorrect");

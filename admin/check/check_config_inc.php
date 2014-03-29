@@ -38,7 +38,7 @@ check_print_section_header_row( 'Configuration' );
 
 check_print_test_row( 'config_inc.php configuration file exists',
 	file_exists( dirname( dirname( dirname( __FILE__ ) ) ) . '/config_inc.php' ),
-	array( false => 'Please use <a href="install.php">install.php</a> to perform the initial installation of MantisBT.' )
+	array( false => 'Please proceed to  <a href="install.php">install.php</a> to perform the initial installation of MantisBT.' )
 );
 
 # Debugging / Developer Settings
@@ -66,7 +66,3 @@ check_print_test_warn_row( 'Email debugging should be OFF',
 	empty($g_debug_email),
 	array( false => "All notification e-mails will be sent to: $g_debug_email" )
 );
-
-
-# Obsolete Settings
-require_api( 'obsolete.php' );

@@ -82,7 +82,7 @@ foreach( $t_query_arr as $t_id => $t_name ) {
 		echo ' ';
 	}
 
-	$t_query_id = db_prepare_int( $t_id );
+	$t_query_id = (int)$t_id;
 	print_link( "view_all_set.php?type=3&source_query_id=$t_query_id", $t_name );
 
 	if ( filter_db_can_delete_filter( $t_id ) ) {

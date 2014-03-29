@@ -32,7 +32,6 @@ require_once dirname( dirname(__FILE__) ) . '/TestConfig.php';
  */
 require_mantis_core();
 
-
 /**
  * String API tests
  * @package    Tests
@@ -42,7 +41,9 @@ class Mantis_StringTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Tests string_sanitize_url()
+	 *
 	 * @dataProvider provider
+	 * @group SOAP
 	 */
 	public function testStringSanitize( $in, $out )
 	{

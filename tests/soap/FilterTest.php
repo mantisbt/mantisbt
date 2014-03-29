@@ -27,6 +27,9 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture for filter related webservice method.
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class FilterTest extends SoapBase {
 	
@@ -34,6 +37,7 @@ class FilterTest extends SoapBase {
 
 	/**
 	 * Test the "assigned" filter type when issue is not assigned and no target user provided.
+	 *
 	 */
 	public function testGetIssuesForUserForUnassignedNoTargetUser() {
 		$targetUser = array();
@@ -56,6 +60,7 @@ class FilterTest extends SoapBase {
 
 	/**
 	 * Test the "assigned" filter type for unassigned issues with target user specified.
+	 *
 	 */
 	public function testGetIssuesForUserForUnassignedWithTargetUser() {
 		$targetUser = array( 'name' => $this->userName );
@@ -77,6 +82,7 @@ class FilterTest extends SoapBase {
 
 	/**
 	 * Test the "assigned" filter type for assigned issues with no target user.
+	 *
 	 */
 	public function testGetIssuesForUserForAssignedWithNoTargetUser() {
 		$targetUser = array();
@@ -101,6 +107,7 @@ class FilterTest extends SoapBase {
 
 	/**
 	 * Test the "assigned" filter type for assigned issues with target user specified.
+	 *
 	 */
 	public function testGetIssuesForUserForAssignedWithTargetUser() {
 		$targetUser = array( 'name' => $this->userName );
@@ -127,6 +134,7 @@ class FilterTest extends SoapBase {
 	/**
 	 * Test the "assigned" filter type for assigned issues with target user specified.
 	 * Make sure resolved issues are not returned.
+	 *
 	 */
 	public function testGetIssuesForUserForAssignedWithTargetUserNoResolved() {
 		$targetUser = array( 'name' => $this->userName );
@@ -161,6 +169,7 @@ class FilterTest extends SoapBase {
 	/**
 	 * Test the "reported" filter type with no target user.
 	 * @expectedException SoapFault
+	 *
 	 */
 	public function testGetIssuesForUserReportedNoTargetUser() {
 		$targetUser = array();
@@ -169,6 +178,7 @@ class FilterTest extends SoapBase {
 
 	/**
 	 * Test the "reported" filter type with target user.
+	 *
 	 */
 	public function testGetIssuesForUserReportedWithTargetUser() {
 		$targetUser = array( 'name' => $this->userName );
@@ -191,6 +201,7 @@ class FilterTest extends SoapBase {
 
 	/**
 	 * Test the "monitored" filter type with no target user.
+	 *
 	 */
 	public function testGetIssuesForUserMonitoredNoTargetUser() {
 		$targetUser = array();
@@ -212,6 +223,7 @@ class FilterTest extends SoapBase {
 
 	/**
 	 * Test the "monitored" filter type with target user.
+	 *
 	 */
 	public function testGetIssuesForUserMonitoredWithTargetUser() {
 		$targetUser = array( 'name' => $this->userName );
@@ -233,6 +245,7 @@ class FilterTest extends SoapBase {
 
 	/**
 	 * Test the "monitored" filter type with target user and a monitored issue.
+	 *
 	 */
 	public function testGetIssuesForUserForMonitoredWithTargetUserAndMatch() {
 		$targetUser = array( 'name' => $this->userName );
@@ -265,6 +278,7 @@ class FilterTest extends SoapBase {
 	/**
 	 * Test the "monitored" filter type with target user.
 	 * @expectedException SoapFault
+	 *
 	 */
 	public function testGetIssuesForUserInvalidFilter() {
 		$targetUser = array( 'name' => $this->userName );
@@ -278,6 +292,7 @@ class FilterTest extends SoapBase {
 	 * 3. Retrieving all the project's issues
 	 * 4. Verifying that one extra issue is found in the results
 	 * 5. Verifying that the first returned issue is the one we have submitted
+	 *
 	 */
 	public function testGetProjectIssues() {
 
@@ -305,6 +320,7 @@ class FilterTest extends SoapBase {
 	 * 3. Retrieving all the project's issue headers
 	 * 4. Verifying that one extra issue is found in the results
 	 * 5. Verifying that the first returned issue is the one we have submitted
+	 *
 	 */
 	public function testGetProjectIssueHeaders() {
 
@@ -333,6 +349,7 @@ class FilterTest extends SoapBase {
 	 * 4. Creating 3 notes for that issue
 	 * 5. Retrieving all the project's issue headers
 	 * 7. Verifying that the first returned issue has 3 notes
+	 *
 	 */
 	public function testGetProjectIssueHeadersCountNotes() {
 
@@ -378,6 +395,7 @@ class FilterTest extends SoapBase {
 	 * 2. Creating an issue with status = closed and resolution = fixed
 	 * 3. Retrieving all the project's issues
 	 * 4. Verifying that one extra issue is found in the results
+	 *
 	 */
 	public function testGetProjectClosedIssues() {
 
@@ -407,6 +425,7 @@ class FilterTest extends SoapBase {
 	 * 3. Verifying that the created issue is present in the retrieved issues
 	 *
 	 * Test created to verify issue #11609
+	 *
 	 */
 	public function testGetProjectIssuesWithoutCategory() {
 
@@ -429,6 +448,7 @@ class FilterTest extends SoapBase {
 	
 	/**
 	 * Verifies that after the last page no more issues are being returned
+	 *
 	 */
 	public function testGetIssueHeadersPaged() {
 		
@@ -469,12 +489,17 @@ class FilterTest extends SoapBase {
 	
 	/**
 	 * Verifies that after the last page no more issues are being returned
+	 *
 	 */
 	public function testGetIssuesPaged() {
 
 		$this->doTestGetPages('mc_project_get_issues');
 	}
-	
+
+	/**
+	 *
+	 *
+	 */
 	public function testGetAllProjectsIssues() {
 	
 		$initialIssues = $this->getAllProjectsIssues();
@@ -493,7 +518,11 @@ class FilterTest extends SoapBase {
 		$this->assertEquals( 1, count( $projectIssues ) - count( $initialIssues ), "count(projectIssues) - count(initialIssues)");
 		$this->assertEquals( $issueId, $projectIssues[0]->id, "issueId");
 	}
-	
+
+	/**
+	 *
+	 *
+	 */
 	public function testGetAllProjectsIssueHeaders() {
 	
 		$initialIssues = $this->getAllProjectsIssueHeaders();
@@ -512,7 +541,11 @@ class FilterTest extends SoapBase {
 		$this->assertEquals( 1, count( $projectIssues ) - count( $initialIssues ), "count(projectIssues) - count(initialIssues)" );
 		$this->assertEquals( $issueId, $projectIssues[0]->id, "issueId" );
 	}
-	
+
+	/**
+	 *
+	 *
+	 */
 	public function testFilterGetIssuesReturnsIssueMonitors() {
 	    
 	    $issueToAdd = $this->getIssueToAdd( 'FilterTest.testFilterGetIssuesReturnsIssueMonitors' );

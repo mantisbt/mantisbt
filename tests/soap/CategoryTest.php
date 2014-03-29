@@ -27,6 +27,9 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture for category webservice methods.
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class CategoryTest extends SoapBase {
 

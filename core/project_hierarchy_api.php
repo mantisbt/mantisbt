@@ -47,14 +47,8 @@ function project_hierarchy_add( $p_child_id, $p_parent_id, $p_inherit_parent = t
 		trigger_error( ERROR_PROJECT_RECURSIVE_HIERARCHY, ERROR );
 	}
 
-	$t_project_hierarchy_table = db_get_table( 'project_hierarchy' );
-
-	$query = "INSERT INTO $t_project_hierarchy_table
-		                ( child_id, parent_id, inherit_parent )
-						VALUES
-						( " . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-
-	db_query_bound( $query, array( $p_child_id, $p_parent_id, $p_inherit_parent ) );
+	$t_query = "INSERT INTO {project_hierarchy} ( child_id, parent_id, inherit_parent ) VALUES ( %d, %d, %d )";
+	db_query( $t_query, array( $p_child_id, $p_parent_id, $p_inherit_parent ) );
 }
 
 /**
@@ -65,13 +59,8 @@ function project_hierarchy_add( $p_child_id, $p_parent_id, $p_inherit_parent = t
  * @return null
  */
 function project_hierarchy_update( $p_child_id, $p_parent_id, $p_inherit_parent = true ) {
-	$t_project_hierarchy_table = db_get_table( 'project_hierarchy' );
-
-	$query = "UPDATE $t_project_hierarchy_table
-					SET inherit_parent=" . db_param() . '
-					WHERE child_id=' . db_param() . '
-						AND parent_id=' . db_param();
-	db_query_bound( $query, array( $p_inherit_parent, $p_child_id, $p_parent_id ) );
+	$t_query = "UPDATE {project_hierarchy} SET inherit_parent=%d WHERE child_id=%d AND parent_id=%d";
+	db_query( $t_query, array( $p_inherit_parent, $p_child_id, $p_parent_id ) );
 }
 
 /**
@@ -81,13 +70,8 @@ function project_hierarchy_update( $p_child_id, $p_parent_id, $p_inherit_parent 
  * @return null
  */
 function project_hierarchy_remove( $p_child_id, $p_parent_id ) {
-	$t_project_hierarchy_table = db_get_table( 'project_hierarchy' );
-
-	$query = "DELETE FROM $t_project_hierarchy_table
-		                WHERE child_id = " . db_param() . "
-						AND parent_id = " . db_param();
-
-	db_query_bound( $query, array( $p_child_id, $p_parent_id ) );
+	$t_query = "DELETE FROM {project_hierarchy} WHERE child_id = %d AND parent_id = %d";
+	db_query( $t_query, array( $p_child_id, $p_parent_id ) );
 }
 
 /**
@@ -96,13 +80,8 @@ function project_hierarchy_remove( $p_child_id, $p_parent_id ) {
  * @return null
  */
 function project_hierarchy_remove_all( $p_project_id ) {
-	$t_project_hierarchy_table = db_get_table( 'project_hierarchy' );
-
-	$query = "DELETE FROM $t_project_hierarchy_table
-		                WHERE child_id = " . db_param() . "
-						  OR parent_id = " . db_param();
-
-	db_query_bound( $query, array( $p_project_id, $p_project_id ) );
+	$t_query = "DELETE FROM {project_hierarchy} WHERE child_id = %d OR parent_id = %d";
+	db_query( $t_query, array( $p_project_id, $p_project_id ) );
 }
 
 /**
@@ -161,45 +140,43 @@ function project_hierarchy_cache( $p_show_disabled = false ) {
 	}
 	$g_cache_show_disabled = $p_show_disabled;
 
-	$t_enabled_clause = $p_show_disabled ? '1=1' : 'p.enabled = ' . db_param();
+	$t_enabled_clause = $p_show_disabled ? '1=1' : 'p.enabled = %d';
 
-	$t_project_table = db_get_table( 'project' );
-	$t_project_hierarchy_table = db_get_table( 'project_hierarchy' );
-	$query = "SELECT DISTINCT p.id, ph.parent_id, p.name, p.inherit_global, ph.inherit_parent
-				  FROM $t_project_table p
-				  LEFT JOIN $t_project_hierarchy_table ph
+	$t_query = "SELECT DISTINCT p.id, ph.parent_id, p.name, p.inherit_global, ph.inherit_parent
+				  FROM {project} p
+				  LEFT JOIN {project_hierarchy} ph
 				    ON ph.child_id = p.id
 				  WHERE $t_enabled_clause
 				  ORDER BY p.name";
 
-	$t_result = db_query_bound( $query, ( $p_show_disabled ? null : array( true ) ) );
+	$t_result = db_query( $t_query, ( $p_show_disabled ? null : array( true ) ) );
 
 	$g_cache_project_hierarchy = array();
 	$g_cache_project_inheritance = array();
 
-	while ( $row = db_fetch_array( $t_result ) ) {
-		if( null === $row['parent_id'] ) {
-			$row['parent_id'] = ALL_PROJECTS;
+	while ( $t_row = db_fetch_array( $t_result ) ) {
+		if( null === $t_row['parent_id'] ) {
+			$t_row['parent_id'] = ALL_PROJECTS;
 		}
 
-		if( isset( $g_cache_project_hierarchy[(int)$row['parent_id']] ) ) {
-			$g_cache_project_hierarchy[(int)$row['parent_id']][] = (int)$row['id'];
+		if( isset( $g_cache_project_hierarchy[(int)$t_row['parent_id']] ) ) {
+			$g_cache_project_hierarchy[(int)$t_row['parent_id']][] = (int)$t_row['id'];
 		} else {
-			$g_cache_project_hierarchy[(int)$row['parent_id']] = array(
-				(int)$row['id'],
+			$g_cache_project_hierarchy[(int)$t_row['parent_id']] = array(
+				(int)$t_row['id'],
 			);
 		}
 
-		if( !isset( $g_cache_project_inheritance[(int)$row['id']] ) ) {
-			$g_cache_project_inheritance[(int)$row['id']] = array();
+		if( !isset( $g_cache_project_inheritance[(int)$t_row['id']] ) ) {
+			$g_cache_project_inheritance[(int)$t_row['id']] = array();
 		}
 
-		if( $row['inherit_global'] && !isset( $g_cache_project_inheritance[(int)$row['id']][ALL_PROJECTS] ) ) {
-			$g_cache_project_inheritance[(int)$row['id']][] = ALL_PROJECTS;
+		if( $t_row['inherit_global'] && !isset( $g_cache_project_inheritance[(int)$t_row['id']][ALL_PROJECTS] ) ) {
+			$g_cache_project_inheritance[(int)$t_row['id']][] = ALL_PROJECTS;
 		}
 
-		if( $row['inherit_parent'] && !isset( $g_cache_project_inheritance[(int)$row['id']][(int)$row['parent_id']] ) ) {
-			$g_cache_project_inheritance[(int)$row['id']][] = (int) $row['parent_id'];
+		if( $t_row['inherit_parent'] && !isset( $g_cache_project_inheritance[(int)$t_row['id']][(int)$t_row['parent_id']] ) ) {
+			$g_cache_project_inheritance[(int)$t_row['id']][] = (int) $t_row['parent_id'];
 		}
 	}
 }

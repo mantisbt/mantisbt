@@ -27,6 +27,9 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture for issue creation webservice methods.
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class IssueAddTest extends SoapBase {
 	/**
@@ -35,6 +38,7 @@ class IssueAddTest extends SoapBase {
 	 * 2. mc_issue_get_biggest_id()
 	 * 3. mc_issue_get_id_from_summary()
 	 * 4. The defaulting of the non-mandatory parameters.
+	 *
 	 */
 	public function testCreateIssue() {
 		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssue' );
@@ -105,6 +109,7 @@ class IssueAddTest extends SoapBase {
 	/**
 	 * A test cases that tests the creation of issues with html markup in summary
 	 * and description.
+	 *
 	 */
 	public function testCreateIssueWithHtmlMarkup() {
 		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithHtmlMarkup' );
@@ -138,6 +143,7 @@ class IssueAddTest extends SoapBase {
 	 * 3. Delete the issue.
 	 *
 	 * This test case was added for bug #9132.
+	 *
 	 */
 	public function testCreateIssueWithRareFields() {
 		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithRareFields' );
@@ -179,6 +185,7 @@ class IssueAddTest extends SoapBase {
 	 * 3. Retrieving the issue after it is created
 	 * 4. Verifying that the correct handler is passed
 	 * 5. Deleting the issue
+	 *
 	 */
 	public function testCreateIssueWithHandler() {
 
@@ -213,6 +220,7 @@ class IssueAddTest extends SoapBase {
 	 * 1. Creating an issue with a due date
 	 * 2. Retrieving the issue
 	 * 3. Validating that the due date is properly set
+	 *
 	 */
 	public function testCreateIssueWithDueDate() {
 
@@ -250,6 +258,7 @@ class IssueAddTest extends SoapBase {
 	 * This stricter verification originates in some SOAP frameworks, notably
 	 * Axis, not accepting the empty tag format, which is accepted by the PHP5
 	 * SOAP extension nevertheless.
+	 *
 	 */
 	public function testCreateIssueWithNullDueDate() {
 		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithNullDueDate' );
@@ -325,6 +334,8 @@ class IssueAddTest extends SoapBase {
 	/**
 	 * A test cases that tests the creation of issues
 	 * with a note passed in which contains time tracking data.
+	 *
+	 * @group SOAP
 	 */
 	public function testCreateIssueWithTimeTrackingNote() {
 
@@ -367,6 +378,8 @@ class IssueAddTest extends SoapBase {
 	 * 1. Creating an issue where the handler is given by name
 	 * 2. Retrieving the issue
 	 * 3. Verifying that the handler name is correctly set
+	 *
+	 * @group SOAP
 	 */
 	public function testCreateIssueWithHandlerByName() {
 
@@ -392,6 +405,8 @@ class IssueAddTest extends SoapBase {
 
 	/**
 	 * Tests that a created issue with a non-existent version returns the correct error message.
+	 *
+	 * @group SOAP
 	 */
 	public function testCreateIssueWithFaultyVersionGeneratesError() {
 
@@ -412,6 +427,8 @@ class IssueAddTest extends SoapBase {
 
 	/**
 	 * Tests that an issue with a proper version set is correctly created
+	 *
+	 * @group SOAP
 	 */
 	public function testCreateIssueWithVersion() {
 
@@ -441,6 +458,8 @@ class IssueAddTest extends SoapBase {
 
 	/**
 	 * Test that the biggest id is correctly retrieved
+	 *
+	 * @group SOAP
 	 */
 	public function testGetBiggestId() {
 
@@ -462,6 +481,8 @@ class IssueAddTest extends SoapBase {
 	/**
 	 * A test cases that tests the creation of issues
 	 * with a note passed in which contains time tracking data.
+	 *
+	 * @group SOAP
 	 */
 	public function testCreateIssueWithMiscNote() {
 
@@ -495,6 +516,11 @@ class IssueAddTest extends SoapBase {
 		$this->assertEquals( 'attr_value', $note->note_attr );
 	}
 
+	/**
+	 *
+	 *
+	 * @group SOAP
+	 */
 	public function testCreateIssueWithTags() {
 
 		// initialise tags
@@ -521,6 +547,7 @@ class IssueAddTest extends SoapBase {
 	/**
 	 * Tests that an issue with enumerated fields set by name has the field values correctly set
 	 *
+	 * @group SOAP
 	 */
 	public function testCreateIssueWithFieldsByName() {
 		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithFieldsByName' );
@@ -549,6 +576,8 @@ class IssueAddTest extends SoapBase {
 	/**
 	 * A test cases that tests the creation of issues with non-latin text, to validate that
 	 * it is not stripped.
+	 *
+	 * @group SOAP
 	 */
 	public function testCreateIssueWithNonLatinText() {
 		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithNonLatinText' );

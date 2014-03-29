@@ -27,11 +27,15 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture for non-login user methods
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class TagTest extends SoapBase {
 
     /**
      * Tests retrieving, creating and deleting tags
+	 *
      */
     public function testTagOperations() {
         
@@ -76,6 +80,7 @@ class TagTest extends SoapBase {
     
     /**
 	 * Tests that creating tags with invalid names is not allowed
+	 *
      */
     public function testCreateTagWithInvalidName() {
     	
@@ -94,6 +99,7 @@ class TagTest extends SoapBase {
 
     /**
 	 * Tests that creating tags with invalid names is not allowed
+	 *
      */
     public function testDeleteNonExistantTag() {
     	
@@ -107,6 +113,7 @@ class TagTest extends SoapBase {
     
     /**
 	 * Tests that creating a tag with no description works
+	 *
      */
     public function testCreateTagWithNoDescription() {
     	
@@ -121,6 +128,7 @@ class TagTest extends SoapBase {
     
     /**
 	 * Tests that creating a tag with no description works
+	 *
      */
     public function testCreateTagWithExistingName() {
     	
@@ -140,6 +148,7 @@ class TagTest extends SoapBase {
     
     /**
      * Tests that setting tags on issues works
+	 *
      */
     public function testSetTagsOnIssue() {
     	
