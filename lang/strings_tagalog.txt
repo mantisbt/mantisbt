@@ -26,6 +26,7 @@
  * @file
  *
  * @author AnakngAraw
+ * @author Jojit fb
  * @author Mirzali
  * @author Sky Harbor
  */
@@ -371,7 +372,7 @@ $s_edit_account_title = 'Baguhin ang Kuwenta/Akawnt';
 $s_username = 'Pangalan ng tagagamit';
 $s_realname = 'Tunay na Pangalan';
 $s_email = 'E-liham';
-$s_password = 'Hudyat';
+$s_password = 'Password';
 $s_no_password_change = 'Ang hudyat ay nasa ilalim ng kapangyarihan ng ibang sistema, kaya\'t hindi mababago rito.';
 $s_confirm_password = 'Tiyakin ang Hudyat';
 $s_access_level = 'Antas ng Pagpasok/Akseso';
