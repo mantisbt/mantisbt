@@ -376,9 +376,11 @@ function print_tag_input( $p_bug_id = 0, $p_string = '' ) {
 /**
  * Print the dropdown combo-box of existing tags.
  * When passed a bug ID, the option list will not contain any tags attached to the given bug.
+ * When passed a Selected Tag ID that tag will be the actively selected in the <SELECT component
  * @param integer $p_bug_id Bug ID
+ * @param integer $p_selected_id Tag Id of selected Tag
  */
-function print_tag_option_list( $p_bug_id = 0 ) {
+function print_tag_option_list( $p_bug_id = 0, $p_selected_id = 0) {
 	$t_rows = tag_get_candidates_for_bug( $p_bug_id );
 
 	echo '<option value="0">', string_html_specialchars( lang_get( 'tag_existing' ) ), '</option>';
@@ -387,7 +389,12 @@ function print_tag_option_list( $p_bug_id = 0 ) {
 		if ( !empty( $row['description'] ) ) {
 			$t_string .= ' - ' . utf8_substr( $row['description'], 0, 20 );
 		}
-		echo '<option value="', $row['id'], '" title="', string_attribute( $row['name'] ), '">', string_attribute( $t_string ), '</option>';
+    		if ($row['id'] == $p_selected_id) {
+      			$t_selected = 'selected="selected"';
+    		} else {
+      			$t_selected = '';
+    		}
+		echo '<option value="', $row['id'], '" ' , $t_selected, ' title="', string_attribute( $row['name'] ), '">', string_attribute( $t_string ), '</option>';
 	}
 }
 
