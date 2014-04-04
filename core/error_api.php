@@ -47,7 +47,7 @@ $g_error_send_page_header = true;
 # These can be disabled in config_inc.php, see $g_display_errors
 error_reporting( error_reporting() | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE );
 
-set_error_handler( 'error_handler' );
+#set_error_handler( 'error_handler' );
 
 /**
  * Default error handler

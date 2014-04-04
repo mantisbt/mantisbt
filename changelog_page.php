@@ -187,8 +187,6 @@ foreach( $t_project_ids as $t_project_id ) {
 	$t_user_access_level_is_reporter = ( REPORTER == access_get_project_level( $t_project_id ) );
 
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
-	$t_bug_table	= db_get_table( 'bug' );
-	$t_relation_table = db_get_table( 'bug_relationship' );
 
 	# grab version info for later use
 	$t_version_rows = version_get_all_rows( $t_project_id, /* released */ null, /* obsolete */ false );
@@ -209,14 +207,10 @@ foreach( $t_project_ids as $t_project_id ) {
 			continue;
 		}
 
-		$query = "SELECT sbt.*, dbt.fixed_in_version AS parent_version, rt.source_bug_id
-			FROM $t_bug_table AS sbt
-			LEFT JOIN $t_relation_table AS rt
-				ON sbt.id=rt.destination_bug_id AND rt.relationship_type=" . BUG_DEPENDANT . "
-			LEFT JOIN $t_bug_table AS dbt ON dbt.id=rt.source_bug_id
-			WHERE sbt.project_id=" . db_param() . "
-			  AND sbt.fixed_in_version=" . db_param() . "
-			ORDER BY sbt.status ASC, sbt.last_updated DESC";
+		$t_query = "SELECT sbt.*, dbt.fixed_in_version AS parent_version, {bug_relationship}.source_bug_id FROM {bug} sbt
+				LEFT JOIN {bug_relationship} ON sbt.id={bug_relationship}.destination_bug_id AND {bug_relationship}.relationship_type=2
+				LEFT JOIN {bug} dbt ON dbt.id={bug_relationship}.source_bug_id
+				WHERE sbt.project_id=%d AND sbt.fixed_in_version=%s ORDER BY sbt.status ASC, sbt.last_updated DESC";
 
 		$t_description = version_get_field( $t_version_id, 'description' );
 
@@ -225,7 +219,7 @@ foreach( $t_project_ids as $t_project_id ) {
 		$t_issue_parents = array();
 		$t_issue_handlers = array();
 
-		$t_result = db_query_bound( $query, array( $t_project_id, $t_version ) );
+		$t_result = db_query( $t_query, array( $t_project_id, $t_version ) );
 
 		while ( $t_row = db_fetch_array( $t_result ) ) {
 			# hide private bugs if user doesn't have access to view them.

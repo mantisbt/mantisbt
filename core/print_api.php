@@ -395,27 +395,18 @@ function print_tag_option_list( $p_bug_id = 0 ) {
  * Get current headlines and id  prefix with v_
  */
 function print_news_item_option_list() {
-	$t_mantis_news_table = db_get_table( 'news' );
-
 	$t_project_id = helper_get_current_project();
 
 	$t_global = access_has_global_level( config_get_global( 'admin_site_threshold' ) );
 	if( $t_global ) {
-		$query = "SELECT id, headline, announcement, view_state
-				FROM $t_mantis_news_table
-				ORDER BY date_posted DESC";
+		$t_query = "SELECT id, headline, announcement, view_state FROM {news} ORDER BY date_posted DESC";
 	} else {
-		$query = "SELECT id, headline, announcement, view_state
-				FROM $t_mantis_news_table
-				WHERE project_id=" . db_param() . "
-				ORDER BY date_posted DESC";
+		$t_query = "SELECT id, headline, announcement, view_state FROM {news}
+				WHERE project_id=%d ORDER BY date_posted DESC";
 	}
-	$t_result = db_query_bound( $query, ($t_global == true ? array() : array( $t_project_id ) ) );
-	$news_count = db_num_rows( $t_result );
+	$t_result = db_query( $t_query, ($t_global == true ? array() : array( $t_project_id ) ) );
 
-	for( $i = 0;$i < $news_count;$i++ ) {
-		$row = db_fetch_array( $t_result );
-
+	while( $row = db_fetch_array( $t_result ) ) {
 		$t_headline = string_display( $row['headline'] );
 		$t_announcement = $row['announcement'];
 		$t_view_state = $row['view_state'];
@@ -835,7 +826,6 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
  * @param string $p_build build
  */
 function print_build_option_list( $p_build = '' ) {
-	$t_bug_table = db_get_table( 'bug' );
 	$t_overall_build_arr = array();
 
 	$t_project_id = helper_get_current_project();
@@ -843,11 +833,10 @@ function print_build_option_list( $p_build = '' ) {
 	$t_project_where = helper_project_specific_where( $t_project_id );
 
 	# Get the "found in" build list
-	$query = "SELECT DISTINCT build
-				FROM $t_bug_table
+	$query = "SELECT DISTINCT build FROM {bug}
 				WHERE $t_project_where
 				ORDER BY build DESC";
-	$t_result = db_query_bound( $query );
+	$t_result = db_query( $query );
 	$option_count = db_num_rows( $t_result );
 
 	for( $i = 0;$i < $option_count;$i++ ) {
@@ -1044,19 +1033,16 @@ function print_project_user_list_option_list( $p_project_id = null ) {
  * @param int $p_user_id user id
  */
 function print_project_user_list_option_list2( $p_user_id ) {
-	$t_mantis_project_user_list_table = db_get_table( 'project_user_list' );
-	$t_mantis_project_table = db_get_table( 'project' );
-
 	$c_user_id = db_prepare_int( $p_user_id );
 
 	$query = "SELECT DISTINCT p.id, p.name
-				FROM $t_mantis_project_table p
-				LEFT JOIN $t_mantis_project_user_list_table u
-				ON p.id=u.project_id AND u.user_id=" . db_param() . "
-				WHERE p.enabled = " . db_param() . " AND
+				FROM {project} p
+				LEFT JOIN {project_user_list} u
+				ON p.id=u.project_id AND u.user_id=%d
+				WHERE p.enabled=%d AND
 					u.user_id IS NULL
 				ORDER BY p.name";
-	$t_result = db_query_bound( $query, array( $c_user_id, true ) );
+	$t_result = db_query( $query, array( $c_user_id, true ) );
 	$category_count = db_num_rows( $t_result );
 	for( $i = 0;$i < $category_count;$i++ ) {
 		$row = db_fetch_array( $t_result );
@@ -1791,10 +1777,9 @@ function print_bug_attachment_preview_text( $p_attachment ) {
 			}
 			break;
 		case DATABASE:
-			$t_bug_file_table = db_get_table( 'bug_file' );
 			$c_attachment_id = db_prepare_int( $p_attachment['id'] );
-			$t_query = "SELECT * FROM $t_bug_file_table WHERE id=" . db_param();
-			$t_result = db_query_bound( $t_query, array( $c_attachment_id ) );
+			$t_query = "SELECT * FROM {bug_file} WHERE id=%d";
+			$t_result = db_query( $t_query, array( $c_attachment_id ) );
 			$t_row = db_fetch_array( $t_result );
 			$t_content = $t_row['content'];
 			break;
