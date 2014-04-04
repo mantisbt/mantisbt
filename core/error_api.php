@@ -71,7 +71,7 @@ set_error_handler( 'error_handler' );
  * @uses html_api.php (optional)
  */
 function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
-	global $g_error_parameters, $g_error_handled;
+	global $g_error_parameters, $g_error_handled, $g_error_proceed_url;
 	global $g_error_send_page_header;
 
 	# check if errors were disabled with @ somewhere in this call chain
