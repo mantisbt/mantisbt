@@ -227,7 +227,30 @@ if ( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get
 					</select>
 				</td>
 			</tr>
-<?php } ?>
+<?php } 
+
+if ( config_get( 'ask_target_version' ) == ON ) {
+	if ( $f_new_status == config_get( 'ask_target_version_on_status' )){
+		if (   version_should_show_product_version( $t_bug->project_id ) && !bug_is_readonly( $f_bug_id ) && access_has_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id ) ) {
+
+	?>
+	<!-- Ask for Target Version in a list that contain only FUTURE versions (not released) -->
+
+				<tr>
+					<th class="category">
+						<?php echo lang_get( 'target_version' ) ?>
+					</th>
+					<td>
+						<select name="target_version">
+						<?php print_version_option_list( $t_bug->target_version, $t_bug->project_id, VERSION_FUTURE, false, false) ?>
+						</select>
+					</td>
+				</tr>
+<?php
+		}
+	}
+}
+?>
 
 <?php if ( $t_can_update_due_date ) {
 	$t_date_to_display = '';

@@ -2618,6 +2618,23 @@ $g_main_menu_custom_options = array(
                     </para>
                 </listitem>
             </varlistentry>
+			<varlistentry>
+                <term>$g_ask_target_version</term>
+                <listitem>
+                    <para>If set to ON, ask the user to define the target version when the status is set to a predefined value.
+					 Must be used combined with $g_ask_target_version_on_status
+					The default value is OFF
+                    </para>
+                </listitem>
+            </varlistentry>
+			<varlistentry>
+                <term>$g_ask_target_version_on_status</term>
+                <listitem>
+                    <para> Define the status where target_version is asked. Must be used combined with $g_ask_target_version
+					The default value is CONFIRMED.
+                    </para>
+                </listitem>
+            </varlistentry>
             <varlistentry>
                 <term>$g_csv_add_bom</term>
                 <listitem>
