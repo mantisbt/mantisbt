@@ -255,44 +255,53 @@ function getClassProperties($p_classname, $p_type='public', $p_return_object = f
 
 /**
  * return string of system font path
+ * If {@see $g_system_font_folder} is not defined, on Linux systems the api
+ * attempts to find a fonts directory by checking for existence of several
+ * directories below the base fonts path (basically trying to match
+ * /usr/share/fonts/[truetype/|corefonts/][msttcorefonts/|dejavu/]);
+ * the first directory found to exist will be used as font path.
  * @access public
+ * @return string Font path
  */
 function get_font_path() {
-		$t_font_path = config_get_global( 'system_font_folder' );
-		if( $t_font_path == '' ) {
-			if ( is_windows_server() ) {
-				$sroot = $_SERVER['SystemRoot'];
-				if( empty($sroot) ) {
-					return '';
-				} else {
-					$t_font_path = $sroot.'/fonts/';
-				}
+	$t_font_path = config_get_global( 'system_font_folder' );
+	if( $t_font_path == '' ) {
+		if ( is_windows_server() ) {
+			$t_sys_root = $_SERVER['SystemRoot'];
+			if( empty($t_sys_root) ) {
+				return '';
 			} else {
-				if( file_exists( '/usr/share/fonts/corefonts/' ) ) {
-					$t_font_path = '/usr/share/fonts/corefonts/';
-				} else if( file_exists( '/usr/share/fonts/truetype/msttcorefonts/' ) ) {
-					$t_font_path = '/usr/share/fonts/truetype/msttcorefonts/';
-				} else if( file_exists( '/usr/share/fonts/msttcorefonts/' ) ) {
-					$t_font_path = '/usr/share/fonts/msttcorefonts/';
-				} else {
-					$t_font_path = '/usr/share/fonts/truetype/';
+				$t_font_path = $t_sys_root . '/fonts/';
+			}
+		} else {
+			$t_base = '/usr/share/fonts';
+			$t_font_dir1 = array( '/truetype/', 'corefonts/', '/' );
+			$t_font_dir2 = array( 'msttcorefonts/', 'dejavu/', '' );
+			foreach( $t_font_dir1 as $t_dir1 ) {
+				foreach( $t_font_dir2 as $t_dir2 ) {
+					$t_font_path = $t_base . $t_dir1 . $t_dir2;
+					if( file_exists( $t_font_path ) ) {
+						return $t_font_path;
+					}
 				}
 			}
+			$t_font_path = $t_base;
 		}
-		return $t_font_path;
+	}
+	return $t_font_path;
 }
 
 function finfo_get_if_available() {
-	
+
 	if ( class_exists( 'finfo' ) ) {
 		$t_info_file = config_get( 'fileinfo_magic_db_file' );
-	
+
 		if ( is_blank( $t_info_file ) ) {
 			$finfo = new finfo( FILEINFO_MIME );
 		} else {
 			$finfo = new finfo( FILEINFO_MIME, $t_info_file );
 		}
-	
+
 		if ( $finfo ) {
 			return $finfo;
 		}

@@ -63,15 +63,11 @@ if ( plugin_config_get( 'font' ) != $f_font ) {
 		case 'veraserif':
 		case 'courier':
 		case 'veramono':
-			plugin_config_set( 'font', $f_font );
-			break;
 		case 'dejavusans':
 		case 'dejavuserif':
 		case 'dejavumono':
-			if ($f_library == ON ){
-				plugin_config_set( 'font', $f_font );
-				break;
-			}
+			plugin_config_set( 'font', $f_font );
+			break;
 		default:
 			plugin_config_set( 'font', 'arial' );
 	}

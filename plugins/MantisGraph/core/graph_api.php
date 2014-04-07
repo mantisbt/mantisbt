@@ -98,6 +98,9 @@ function graph_get_font() {
 			'veraserif' => FF_VERASERIF,
 			'courier' => FF_COURIER,
 			'veramono' => FF_VERAMONO,
+			'dejavusans' => FF_DV_SANSSERIF,
+			'dejavuserif' => FF_DV_SERIF,
+			'dejavumono' => FF_DV_SANSSERIFMONO,
 		);
 
 		if( isset( $t_font_map[$t_font] ) ) {
