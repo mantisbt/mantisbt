@@ -604,6 +604,9 @@ function db_table_exists( $p_table_name ) {
 	}
 
 	$t_tables = db_get_table_list();
+	if( !is_array( $t_tables ) ) {
+		return false;
+	}
 
 	# Can't use in_array() since it is case sensitive
 	$t_table_name = utf8_strtolower( $p_table_name );
