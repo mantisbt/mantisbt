@@ -731,7 +731,7 @@ $upgrade[185] = array( 'AddColumnSQL', array( db_get_table( 'custom_field_string
 	text		XL  			NULL DEFAULT NULL " ) );
 $upgrade[186] = array( 'UpdateFunction', 'update_history_long_custom_fields' );
 $upgrade[187] = array( 'CreateIndexSQL', array( 'idx_bug_id', db_get_table( 'bug_monitor' ), 'bug_id' ) );
-$upgrade[188] = array( 'AlterColumnSQL', array( db_get_table( 'project' ), "inherit_global L NOTNULL DEFAULT '0'" ) );
-$upgrade[189] = array( 'AlterColumnSQL', array( db_get_table( 'project_hierarchy' ), "inherit_parent L NOTNULL DEFAULT '0'" ) );
+$upgrade[188] = array( 'AlterColumnSQL', array( db_get_table( 'project' ), "inherit_global L $t_notnull DEFAULT '0'" ) );
+$upgrade[189] = array( 'AlterColumnSQL', array( db_get_table( 'project_hierarchy' ), "inherit_parent L $t_notnull DEFAULT '0'" ) );
 
 # Release marker: 1.3.0
