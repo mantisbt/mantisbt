@@ -22,32 +22,36 @@
  * This is the call order of these functions, should you need to figure out
  * which to modify or which to leave out:
  *
- * html_page_top1
- * 	html_begin
- * 	html_head_begin
- * 	html_css
- * 	html_content_type
- * 	html_rss_link
- * 	(html_meta_redirect)
- * 	html_title
- * html_page_top2
- * 	html_page_top2a
- * 	html_head_end
- * 	html_body_begin
- * 	html_top_banner
- * 	html_login_info
- * 	(print_project_menu_bar)
- * 	print_menu
+ * html_page_top
+ *   html_page_top1
+ *     html_begin
+ *     html_head_begin
+ *     html_content_type
+ *     (Additional META tags: {@see $g_meta_include_file} and {@see robots_meta config})
+ *     html_title
+ *     html_css
+ *     html_rss_link
+ *     html_head_javascript
+ *   (html_meta_redirect)
+ *   html_page_top2
+ *     html_page_top2a
+ *       html_head_end
+ *       html_body_begin
+ *       html_top_banner
+ *     html_login_info
+ *     (print_project_menu_bar)
+ *     print_menu
  *
  * ...Page content here...
  *
- * html_page_bottom1
- * 	(print_menu)
- * 	html_page_bottom1a
- * 	html_bottom_banner
- * 	html_footer
- * 	html_body_end
- * html_end
+ * html_page_bottom
+ *   html_page_bottom1
+ *     (print_menu)
+ *     html_page_bottom1a
+ *       html_bottom_banner
+ *       html_footer
+ *       html_body_end
+ *       html_end
  *
  * @package CoreAPI
  * @subpackage HTMLAPI
@@ -180,15 +184,16 @@ function html_page_top( $p_page_title = null, $p_redirect_url = null ) {
 function html_page_top1( $p_page_title = null ) {
 	html_begin();
 	html_head_begin();
-	html_css();
+
 	html_content_type();
 	include( config_get( 'meta_include_file' ) );
-
 	global $g_robots_meta;
 	if ( !is_blank( $g_robots_meta ) ) {
 		echo "\t", '<meta name="robots" content="', $g_robots_meta, '" />', "\n";
 	}
 
+	html_title( $p_page_title );
+	html_css();
 	html_rss_link();
 
 	$t_favicon_image = config_get( 'favicon_image' );
@@ -200,7 +205,6 @@ function html_page_top1( $p_page_title = null ) {
 	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Text Search" href="' . string_sanitize_url( 'browser_search_plugin.php?type=text', true) . '" />' . "\n";
 	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Issue Id" href="' . string_sanitize_url( 'browser_search_plugin.php?type=id', true) . '" />' . "\n";
 
-	html_title( $p_page_title );
 	html_head_javascript();
 }
 
