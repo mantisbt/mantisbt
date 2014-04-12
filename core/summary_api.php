@@ -106,14 +106,13 @@ function summary_print_by_enum( $p_enum ) {
 
 	$t_filter_prefix = config_get( 'bug_count_hyperlink_prefix' );
 
-	$t_mantis_bug_table = db_get_table( 'bug' );
 	$t_status_query = ( 'status' == $p_enum ) ? '' : ' ,status ';
-	$query = "SELECT COUNT(id) as bugcount, $p_enum $t_status_query
-				FROM $t_mantis_bug_table
+	$t_query = "SELECT COUNT(id) as bugcount, $p_enum $t_status_query
+				FROM {bug}
 				WHERE $t_project_filter
 				GROUP BY $p_enum $t_status_query
 				ORDER BY $p_enum $t_status_query";
-	$t_result = db_query_bound( $query );
+	$t_result = db_query( $t_query );
 
 	$t_last_value = -1;
 	$t_bugs_open = 0;
@@ -247,8 +246,6 @@ function summary_print_by_enum( $p_enum ) {
  * @return int
  */
 function summary_new_bug_count_by_date( $p_time_length = 1 ) {
-	$t_mantis_bug_table = db_get_table( 'bug' );
-
 	$c_time_length = (int) $p_time_length * SECONDS_PER_DAY;
 
 	$t_project_id = helper_get_current_project();
@@ -258,11 +255,10 @@ function summary_new_bug_count_by_date( $p_time_length = 1 ) {
 		return;
 	}
 
-	$query = "SELECT COUNT(*)
-				FROM $t_mantis_bug_table
-				WHERE " . db_helper_compare_days( "" . db_now() . "", "date_submitted", "<= $c_time_length" ) . " AND $specific_where";
-	$t_result = db_query_bound( $query );
-	return db_result( $t_result, 0 );
+	$t_query = "SELECT COUNT(*) FROM {bug}
+				WHERE " . db_helper_compare_days( "" . db_now() . "", "date_submitted", "<= $t_time_length" ) . " AND $specific_where";
+	$t_result = db_query( $t_query );
+	return db_result( $t_result );
 }
 
 /**
@@ -272,8 +268,6 @@ function summary_new_bug_count_by_date( $p_time_length = 1 ) {
  * @return int
  */
 function summary_resolved_bug_count_by_date( $p_time_length = 1 ) {
-	$t_bug_table = db_get_table( 'bug' );
-	$t_bug_history_table = db_get_table( 'bug_history' );
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
 	$c_time_length = (int) $p_time_length * SECONDS_PER_DAY;
@@ -285,19 +279,19 @@ function summary_resolved_bug_count_by_date( $p_time_length = 1 ) {
 		return;
 	}
 
-	$query = "SELECT COUNT(DISTINCT(b.id))
-				FROM $t_bug_table b
-				LEFT JOIN $t_bug_history_table h
+	$t_query = "SELECT COUNT(DISTINCT(b.id))
+				FROM {bug} b
+				LEFT JOIN {bug_history} h
 				ON b.id = h.bug_id
 				AND h.type = " . NORMAL_TYPE . "
 				AND h.field_name = 'status'
-				WHERE b.status >= " . db_param() . "
-				AND h.old_value < " . db_param() . "
-				AND h.new_value >= " . db_param() . "
-				AND " . db_helper_compare_days( "" . db_now() . "", "date_modified", "<= $c_time_length" ) . "
+				WHERE b.status >= %d
+				AND h.old_value < %s
+				AND h.new_value >= %s
+				AND " . db_helper_compare_days( "" . db_now() . "", "date_modified", "<= $t_time_length" ) . "
 				AND $specific_where";
-	$t_result = db_query_bound( $query, array( $t_resolved, $t_resolved, $t_resolved ) );
-	return db_result( $t_result, 0 );
+	$t_result = db_query( $t_query, array( $t_resolved, $t_resolved, $t_resolved ) );
+	return db_result( $t_result );
 }
 
 /**
@@ -348,9 +342,6 @@ function summary_print_by_date( $p_date_array ) {
  * one "point" for each history event associated with the bug
  */
 function summary_print_by_activity() {
-	$t_mantis_bug_table = db_get_table( 'bug' );
-	$t_mantis_history_table = db_get_table( 'bug_history' );
-
 	$t_project_id = helper_get_current_project();
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
@@ -358,14 +349,14 @@ function summary_print_by_activity() {
 	if( ' 1<>1' == $specific_where ) {
 		return;
 	}
-	$query = "SELECT COUNT(h.id) as count, b.id, b.summary, b.view_state
-				FROM $t_mantis_bug_table b, $t_mantis_history_table h
+	$t_query = "SELECT COUNT(h.id) as count, b.id, b.summary, b.view_state
+				FROM {bug} b, {bug_history} h
 				WHERE h.bug_id = b.id
-				AND b.status < " . db_param() . "
+				AND b.status < %d
 				AND $specific_where
 				GROUP BY h.bug_id, b.id, b.summary, b.last_updated, b.view_state
 				ORDER BY count DESC, b.last_updated DESC";
-	$t_result = db_query_bound( $query, array( $t_resolved ) );
+	$t_result = db_query( $t_query, array( $t_resolved ) );
 
 	$t_count = 0;
 	$t_private_bug_threshold = config_get( 'private_bug_threshold' );
@@ -407,8 +398,6 @@ function summary_print_by_activity() {
  * Print list of bugs opened from the longest time
  */
 function summary_print_by_age() {
-	$t_mantis_bug_table = db_get_table( 'bug' );
-
 	$t_project_id = helper_get_current_project();
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
@@ -416,11 +405,9 @@ function summary_print_by_age() {
 	if( ' 1<>1' == $specific_where ) {
 		return;
 	}
-	$query = "SELECT * FROM $t_mantis_bug_table
-				WHERE status < " . db_param() . "
-				AND $specific_where
+	$query = "SELECT * FROM {bug} WHERE status<%d AND $specific_where
 				ORDER BY date_submitted ASC, priority DESC";
-	$t_result = db_query_bound( $query, array( $t_resolved ) );
+	$t_result = db_query( $query, array( $t_resolved ) );
 
 	$t_count = 0;
 	$t_private_bug_threshold = config_get( 'private_bug_threshold' );
@@ -452,7 +439,6 @@ function summary_print_by_age() {
  * print bug counts by assigned to each developer
  */
 function summary_print_by_developer() {
-	$t_mantis_bug_table = db_get_table( 'bug' );
 	$t_project_id = helper_get_current_project();
 
 	$specific_where = helper_project_specific_where( $t_project_id );
@@ -461,11 +447,11 @@ function summary_print_by_developer() {
 	}
 
 	$query = "SELECT COUNT(id) as bugcount, handler_id, status
-				FROM $t_mantis_bug_table
+				FROM {bug}
 				WHERE handler_id>0 AND $specific_where
 				GROUP BY handler_id, status
 				ORDER BY handler_id, status";
-	$t_result = db_query_bound( $query );
+	$t_result = db_query( $query );
 
 	$t_last_handler = -1;
 	$t_bugs_open = 0;
@@ -551,7 +537,6 @@ function summary_print_by_developer() {
  * print bug counts by reporter id
  */
 function summary_print_by_reporter() {
-	$t_mantis_bug_table = db_get_table( 'bug' );
 	$t_reporter_summary_limit = config_get( 'reporter_summary_limit' );
 
 	$t_project_id = helper_get_current_project();
@@ -561,12 +546,11 @@ function summary_print_by_reporter() {
 		return;
 	}
 
-	$query = "SELECT reporter_id, COUNT(*) as num
-				FROM $t_mantis_bug_table
+	$query = "SELECT reporter_id, COUNT(*) as num FROM {bug}
 				WHERE $specific_where
 				GROUP BY reporter_id
 				ORDER BY num DESC";
-	$t_result = db_query_bound( $query, null, $t_reporter_summary_limit );
+	$t_result = db_query( $query, null, $t_reporter_summary_limit );
 
 	$t_reporters = array();
 	while( $row = db_fetch_array( $t_result ) ) {
@@ -577,12 +561,12 @@ function summary_print_by_reporter() {
 
 	foreach( $t_reporters as $t_reporter ) {
 		$v_reporter_id = $t_reporter;
-		$query = "SELECT COUNT(id) as bugcount, status FROM $t_mantis_bug_table
-					WHERE reporter_id=" . db_param() . "
+		$query = "SELECT COUNT(id) as bugcount, status FROM {bug}
+					WHERE reporter_id=%d
 					AND $specific_where
 					GROUP BY status
 					ORDER BY status";
-		$t_result2 = db_query_bound( $query, array( $v_reporter_id ) );
+		$t_result2 = db_query( $query, array( $v_reporter_id ) );
 
 		$t_bugs_open = 0;
 		$t_bugs_resolved = 0;
@@ -630,8 +614,6 @@ function summary_print_by_reporter() {
  * print a bug count per category
  */
 function summary_print_by_category() {
-	$t_mantis_bug_table = db_get_table( 'bug' );
-	$t_mantis_category_table = db_get_table( 'category' );
 	$t_summary_category_include_project = config_get( 'summary_category_include_project' );
 
 	$t_project_id = helper_get_current_project();
@@ -644,13 +626,13 @@ function summary_print_by_category() {
 	$t_project_query = ( ON == $t_summary_category_include_project ) ? 'b.project_id, ' : '';
 
 	$query = "SELECT COUNT(b.id) as bugcount, $t_project_query c.name AS category_name, category_id, b.status
-				FROM $t_mantis_bug_table b
-				JOIN $t_mantis_category_table c ON b.category_id=c.id
+				FROM {bug} b
+				JOIN {category} c ON b.category_id=c.id
 				WHERE b.$specific_where
 				GROUP BY $t_project_query c.name, b.category_id, b.status
 				ORDER BY $t_project_query c.name";
 
-	$t_result = db_query_bound( $query );
+	$t_result = db_query( $query );
 
 	$last_category_name = -1;
 	$last_project = -1;
@@ -751,7 +733,6 @@ function summary_print_by_category() {
  * @param int $p_cache cache
  */
 function summary_print_by_project( $p_projects = null, $p_level = 0, $p_cache = null ) {
-	$t_mantis_bug_table = db_get_table( 'bug' );
 	$t_mantis_project_table = db_get_table( 'project' );
 
 	$t_project_id = helper_get_current_project();
@@ -768,11 +749,8 @@ function summary_print_by_project( $p_projects = null, $p_level = 0, $p_cache = 
 
 	# Retrieve statistics one time to improve performance.
 	if( null === $p_cache ) {
-		$query = "SELECT project_id, status, COUNT( status ) AS bugcount
-					FROM $t_mantis_bug_table
-					GROUP BY project_id, status";
-
-		$t_result = db_query_bound( $query );
+		$query = "SELECT project_id, status, COUNT( status ) AS bugcount FROM {bug} GROUP BY project_id, status";
+		$t_result = db_query( $query );
 		$p_cache = array();
 
 		$t_resolved_val = config_get( 'bug_resolved_status_threshold' );
@@ -836,8 +814,6 @@ function summary_print_by_project( $p_projects = null, $p_level = 0, $p_cache = 
  * @param string $p_resolution_enum_string resolution enum string
  */
 function summary_print_developer_resolution( $p_resolution_enum_string ) {
-	$t_mantis_bug_table = db_get_table( 'bug' );
-
 	$t_project_id = helper_get_current_project();
 
 	# Get the resolution values ot use
@@ -853,11 +829,11 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 
 	# Get all of the bugs and split them up into an array
 	$query = "SELECT COUNT(id) as bugcount, handler_id, resolution
-				FROM $t_mantis_bug_table
+				FROM {bug}
 				WHERE $specific_where
 				GROUP BY handler_id, resolution
 				ORDER BY handler_id, resolution";
-	$t_result = db_query_bound( $query );
+	$t_result = db_query( $query );
 
 	$t_handler_res_arr = array();
 	$t_arr = db_fetch_array( $t_result );
@@ -943,7 +919,6 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
  * @param string $p_resolution_enum_string resolution enum string
  */
 function summary_print_reporter_resolution( $p_resolution_enum_string ) {
-	$t_mantis_bug_table = db_get_table( 'bug' );
 	$t_reporter_summary_limit = config_get( 'reporter_summary_limit' );
 
 	$t_project_id = helper_get_current_project();
@@ -960,10 +935,10 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 
 	# Get all of the bugs and split them up into an array
 	$query = "SELECT COUNT(id) as bugcount, reporter_id, resolution
-				FROM $t_mantis_bug_table
+				FROM {bug}
 				WHERE $specific_where
 				GROUP BY reporter_id, resolution";
-	$t_result = db_query_bound( $query );
+	$t_result = db_query( $query );
 
 	$t_reporter_res_arr = array();
 	$t_reporter_bugcount_arr = array();
@@ -1059,8 +1034,6 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
  * @param string $p_resolution_enum_string resolution enum string
  */
 function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resolution_enum_string ) {
-	$t_mantis_bug_table = db_get_table( 'bug' );
-	$t_mantis_user_table = db_get_table( 'user' );
 	$t_reporter_summary_limit = config_get( 'reporter_summary_limit' );
 
 	$t_project_id = helper_get_current_project();
@@ -1083,10 +1056,10 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 
 	# Get all of the bugs and split them up into an array
 	$query = "SELECT COUNT(id) as bugcount, reporter_id, resolution, severity
-				FROM $t_mantis_bug_table
+				FROM {bug}
 				WHERE $specific_where
 				GROUP BY reporter_id, resolution, severity";
-	$t_result = db_query_bound( $query );
+	$t_result = db_query( $query );
 
 	$t_reporter_ressev_arr = array();
 	$t_reporter_bugcount_arr = array();

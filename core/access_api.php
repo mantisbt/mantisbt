@@ -125,11 +125,8 @@ function access_cache_matrix_project( $p_project_id ) {
 	}
 
 	if( !in_array( (int) $p_project_id, $g_cache_access_matrix_project_ids ) ) {
-		$t_project_user_list_table = db_get_table( 'project_user_list' );
-		$query = "SELECT user_id, access_level
-					  FROM $t_project_user_list_table
-					  WHERE project_id=" . db_param();
-		$t_result = db_query_bound( $query, array( (int)$p_project_id ) );
+		$query = 'SELECT user_id, access_level FROM {project_user_list} WHERE project_id=%d';
+		$t_result = db_query( $query, array( (int)$p_project_id ) );
 		while( $t_row = db_fetch_array( $t_result ) ) {
 			$g_cache_access_matrix[(int) $t_row['user_id']][(int) $p_project_id] = (int) $t_row['access_level'];
 		}
@@ -158,11 +155,8 @@ function access_cache_matrix_user( $p_user_id ) {
 	global $g_cache_access_matrix, $g_cache_access_matrix_user_ids;
 
 	if( !in_array( (int) $p_user_id, $g_cache_access_matrix_user_ids ) ) {
-		$t_project_user_list_table = db_get_table( 'project_user_list' );
-		$t_query = "SELECT project_id, access_level
-					  FROM $t_project_user_list_table
-					  WHERE user_id=" . db_param();
-		$t_result = db_query_bound( $t_query, array( (int)$p_user_id ) );
+		$t_query = "SELECT project_id, access_level FROM {project_user_list} WHERE user_id=%d";
+		$t_result = db_query( $t_query, array( (int)$p_user_id ) );
 
 		# make sure we always have an array to return
 		$g_cache_access_matrix[(int) $p_user_id] = array();

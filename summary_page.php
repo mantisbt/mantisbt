@@ -67,15 +67,13 @@ $t_resolved = config_get( 'bug_resolved_status_threshold' );
 # the issue may have passed through the status we consider resolved
 #  (e.g., bug is CLOSED, not RESOLVED). The linkage to the history field
 #  will look up the most recent 'resolved' status change and return it as well
-$t_bug_table = db_get_table( 'bug' );
-$t_history_table = db_get_table( 'bug_history' );
 $query = "SELECT b.id, b.date_submitted, b.last_updated, MAX(h.date_modified) as hist_update, b.status
-	FROM $t_bug_table b LEFT JOIN $t_history_table h
-		ON b.id = h.bug_id  AND h.type=0 AND h.field_name='status' AND h.new_value=" . db_param() . "
-		WHERE b.status >=" . db_param() . " AND $specific_where
+	FROM {bug} b LEFT JOIN {bug_history} h
+		ON b.id = h.bug_id  AND h.type=0 AND h.field_name='status' AND h.new_value=%s
+		WHERE b.status >=%d AND $specific_where
 		GROUP BY b.id, b.status, b.date_submitted, b.last_updated
 		ORDER BY b.id ASC";
-$t_result = db_query_bound( $query, array( $t_resolved, $t_resolved ) );
+$t_result = db_query( $query, array( $t_resolved, $t_resolved ) );
 $bug_count = 0;
 
 $t_bug_id       = 0;

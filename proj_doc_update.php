@@ -73,8 +73,6 @@ if ( is_blank( $f_title ) ) {
 	trigger_error( ERROR_EMPTY_FIELD, ERROR );
 }
 
-$t_project_file_table = db_get_table( 'project_file' );
-
 /** @todo (thraxisp) this code should probably be integrated into file_api to share methods used to store files */
 
 file_ensure_uploaded( $f_file );
@@ -118,16 +116,14 @@ if ( is_uploaded_file( $v_tmp_name ) ) {
 			/** @todo Such errors should be checked in the admin checks */
 			trigger_error( ERROR_GENERIC, ERROR );
 	}
-	$query = "UPDATE $t_project_file_table
-		SET title=" . db_param() . ", description=" . db_param() . ", date_added=" . db_param() . ",
-			filename=" . db_param() . ", filesize=" . db_param() . ", file_type=" .db_param() . ", content=" .db_param() . "
-			WHERE id=" . db_param();
-	$t_result = db_query_bound( $query, array( $f_title, $f_description, db_now(), $v_name, $t_file_size, $v_type, $c_content, $f_file_id ) );
+	$query = "UPDATE {project_file}
+		SET title=%s, description=%s, date_added=%d,
+			filename=%s, filesize=%d, file_type=%s, content=%b
+			WHERE id=%d";
+	$t_result = db_query( $query, array( $f_title, $f_description, db_now(), $v_name, $t_file_size, $v_type, $c_content, $f_file_id ) );
 } else {
-	$query = "UPDATE $t_project_file_table
-			SET title=" . db_param() . ", description=" . db_param() . "
-			WHERE id=" . db_param();
-	$t_result = db_query_bound( $query, array( $f_title, $f_description, $f_file_id ) );
+	$query = "UPDATE {project_file} SET title=%s, description=%s WHERE id=%d";
+	$t_result = db_query( $query, array( $f_title, $f_description, $f_file_id ) );
 }
 
 if ( !$t_result ) {
