@@ -27,12 +27,16 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture for issue monitoring webservice methods.
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class IssueMonitorTest extends SoapBase {
 	/**
 	 * A test case that tests the following:
 	 * 1. Creates a new issue
 	 * 2. validates that the monitor list is empty
+	 *
 	 */
 	public function testCreateIssueHasEmptyMonitorList() {
 
@@ -62,6 +66,7 @@ class IssueMonitorTest extends SoapBase {
 	 * 3. Retrieves the issue and verifies that the user is in the monitor list
 	 * 4. Removes a monitor from the issue
 	 * 5. Retrieves the issue and verifies that the user is not in the monitor list
+	 *
 	 */
 	public function testAddMonitorWhenCreatingAnIssue() {
 
@@ -97,6 +102,7 @@ class IssueMonitorTest extends SoapBase {
 	 * 1. Creates a new issue
 	 * 2. Adds a monitor to it
 	 * 3. Retrieves the issue and verifies that the user is in the monitor list
+	 *
 	 */
 	public function testAddMonitorToExistingIssue() {
 	    
@@ -137,6 +143,7 @@ class IssueMonitorTest extends SoapBase {
 	 * 2. Retrieves the issue
 	 * 3. Updates the monitor list to be empty
 	 * 4. Retrieves the issue and verifies that the monitors list is empty
+	 *
 	 */
 	public function testRemoveMonitor() {
 	    
@@ -173,6 +180,7 @@ class IssueMonitorTest extends SoapBase {
 	 * 2. Retrieves the issue
 	 * 3. Updates the issue ( no actual changes )
 	 * 4. Retrieves the issue and verifies that the monitors list is unchanged
+	 *
 	 */
 	public function testUpdateKeepsMonitor() {
 	    

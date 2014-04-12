@@ -155,7 +155,7 @@ function check_file_integrity_recursive( $p_directory, $p_base_directory, $p_rel
 	}
 }
 
-check_print_section_header_row( 'Integrity' );
+check_print_section_header_row( 'File Integrity' );
 
 $t_can_perform_integrity_check = isset( $g_integrity_release_blobs ) && isset( $g_integrity_commit_blobs );
 check_print_test_warn_row(

@@ -153,18 +153,41 @@ function require_lib( $p_library_name ) {
  *
  * @param string $p_class class name
  */
-function __autoload( $className ) {
+function __autoload( $p_class ) {
 	global $g_class_path;
 	global $g_library_path;
 
-	$t_require_path = $g_class_path . $className . '.class.php';
+    if( strstr( $p_class, 'MantisBT\Exception' ) ) {
+        $t_parts = explode( '\\', $p_class);
+        $t_class = array_pop($t_parts);
+        array_shift($t_parts);
+        $t_name = implode( DIRECTORY_SEPARATOR, $t_parts ) . DIRECTORY_SEPARATOR;
+        $t_require_path = $g_class_path . $t_name . $t_class . '.class.php';
+        if ( file_exists( $t_require_path ) ) {
+            require_once( $t_require_path );
+            return;
+        }
+    }
+
+	$t_parts = explode( '_', $p_class );
+	$t_count = sizeof( $t_parts );
+
+	$t_name = implode( DIRECTORY_SEPARATOR, $t_parts ) . DIRECTORY_SEPARATOR;
+	$t_require_path = $g_class_path . $t_name . $t_parts[$t_count-1] . '.class.php';
 
 	if ( file_exists( $t_require_path ) ) {
 		require_once( $t_require_path );
 		return;
 	}
 
-	$t_require_path = $g_library_path . 'rssbuilder' . DIRECTORY_SEPARATOR . 'class.' . $className . '.inc.php';
+	$t_require_path = $g_class_path . $p_class . '.class.php';
+
+	if ( file_exists( $t_require_path ) ) {
+		require_once( $t_require_path );
+		return;
+	}
+
+	$t_require_path = $g_library_path . 'rssbuilder' . DIRECTORY_SEPARATOR . 'class.' . $p_class . '.inc.php';
 
 	if ( file_exists( $t_require_path ) ) {
 		require_once( $t_require_path );
@@ -255,11 +278,7 @@ require_api( 'database_api.php' );
 require_api( 'config_api.php' );
 
 if ( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
-	if( OFF == $g_use_persistent_connections ) {
-		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name, config_get_global( 'db_schema' ) );
-	} else {
-		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name, config_get_global( 'db_schema' ), true );
-	}
+	db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name, $g_db_options );
 }
 
 # Initialise plugins

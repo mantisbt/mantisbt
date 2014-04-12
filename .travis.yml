@@ -6,10 +6,9 @@ before_install:
   - git submodule update --init --recursive
 
 before_script:
-  - ./scripts/travis_before_script.sh
+ - chmod +x ./.travis.sh
 
-script:
-  - phpunit --bootstrap ./tests/bootstrap.php ./tests/AllTests.php
+script: ./.travis.sh
 
 # What to build, and on which platforms
 
@@ -17,6 +16,7 @@ php:
   - 5.3
   - 5.4
   - 5.5
+  - hhvm
 
 env:
   - DB=mysql
@@ -34,10 +34,10 @@ matrix:
 notifications:
   email:
     on_success: change
-    on_failure: always
+    on_failure: change
 
   irc:
-    on_success: change
+    on_success: always
     on_failure: always
     channels:
        - "chat.freenode.net#mantisbt"

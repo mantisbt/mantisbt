@@ -27,6 +27,9 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture for project webservice methods.
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class ProjectTest extends SoapBase {
 	/**
@@ -38,6 +41,7 @@ class ProjectTest extends SoapBase {
 	 * A test case that tests the following:
 	 * 1. Create a project.
 	 * 2. Rename the project.
+	 *
 	 */
 	public function testAddRenameDeleteProject() {
 		$projectName = $this->getOriginalNameProject();
@@ -72,12 +76,12 @@ class ProjectTest extends SoapBase {
 	}
 
 	/**
-	* A test case which does the following
-	*
-	* 1. Create a project
-	* 2. Retrieve the project id by name
-	*
-	*/
+	 * A test case which does the following
+	 *
+	 * 1. Create a project
+	 * 2. Retrieve the project id by name
+	 *
+	 */
 	public function testGetIdFromName() {
 		$projectName = 'TestProjectForIdFromName';
 
@@ -126,6 +130,7 @@ class ProjectTest extends SoapBase {
 	* actually be performed by a user with MANAGER role. However since the SOAP
 	* API does not provide user administration functions, it is currently not
 	* possible to properly implement this test.
+	*
 	*/
 	public function testSetProjectPrivateLockout() {
 		$projectDataStructure = $this->newProjectAsArray( $this->getName() . "_" . rand() );

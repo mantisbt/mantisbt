@@ -88,9 +88,9 @@ html_page_top( lang_get( 'account_link' ) );
 
 # extracts the user information for the currently logged in user
 # and prefixes it with u_
-$row = user_get_row( auth_get_current_user_id() );
+$t_row = user_get_row( auth_get_current_user_id() );
 
-extract( $row, EXTR_PREFIX_ALL, 'u' );
+extract( $t_row, EXTR_PREFIX_ALL, 'u' );
 
 $t_ldap = ( LDAP == config_get( 'login_method' ) );
 

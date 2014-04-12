@@ -55,14 +55,11 @@ $t_filter = current_user_get_bug_filter();
 $t_filter['_view_type']	= 'advanced';
 $t_filter[FILTER_PROPERTY_STATUS] = array(META_FILTER_ANY);
 $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME] = '';
-$rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $t_filter, null, null, true );
-if ( count($rows) == 0 ) {
+$t_rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $t_filter, null, null, true );
+if ( count($t_rows) == 0 ) {
 	// no data to graph
 	exit();
 }
-
-$t_bug_table			= db_get_table( 'bug' );
-$t_bug_hist_table			= db_get_table( 'bug_history' );
 
 $t_marker = array();
 $t_data = array();
@@ -83,7 +80,7 @@ $t_view_status = array();
 
 // walk through all issues and grab their status for 'now'
 $t_marker[$t_ptr] = time();
-foreach ($rows as $t_row) {
+foreach ($t_rows as $t_row) {
 	if ( isset( $t_data[$t_ptr][$t_row->status] ) ) {
 		$t_data[$t_ptr][$t_row->status] ++;
 	} else {
@@ -97,12 +94,12 @@ foreach ($rows as $t_row) {
 // get the history for these bugs over the interval required to offset the data
 // type = 0 and field=status are status changes
 // type = 1 are new bugs
-$t_select = 'SELECT bug_id, type, old_value, new_value, date_modified FROM '.$t_bug_hist_table.
+$t_select = 'SELECT bug_id, type, old_value, new_value, date_modified FROM {bug_history}' .
 	' WHERE bug_id in ('.implode(',', $t_bug).
 	') and ( (type='.NORMAL_TYPE.' and field_name=\'status\')
-		or type='.NEW_BUG.' ) and date_modified >= ' . db_param() .
+		or type='.NEW_BUG.' ) and date_modified>=%d'.
 	' order by date_modified DESC';
-$t_result = db_query_bound( $t_select, array( $t_start ) );
+$t_result = db_query( $t_select, array( $t_start ) );
 $t_row = db_fetch_array( $t_result );
 
 for ($t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr) {

@@ -189,10 +189,6 @@ function session_init( $p_session_id=null ) {
 		case 'php':
 			$g_session = new MantisPHPSession( $p_session_id );
 			break;
-
-		case 'adodb':
-
-			# Not yet implemented
 		case 'memcached':
 
 			# Not yet implemented

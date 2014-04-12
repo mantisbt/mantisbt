@@ -47,6 +47,8 @@ class MantisEnumTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Tests getLabel() method.
+	 *
+	 * @group Mantis
 	 */
 	public function testGetLabel() {
 		$this->assertEquals( 'viewer', MantisEnum::getLabel( MantisEnumTest::ACCESS_LEVELS_ENUM, 10 ) );
@@ -62,6 +64,8 @@ class MantisEnumTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Tests getLocalizedLabel() method.
+	 *
+	 * @group Mantis
 	 */
 	public function testGetLocalizedLabel() {
 		// Test existing case
@@ -77,6 +81,8 @@ class MantisEnumTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Tests getValues() method.
+	 *
+	 * @group Mantis
 	 */
 	public function testGetValues() {
 		$this->assertEquals( array( 10, 25, 40, 55, 70,90 ), MantisEnum::getValues( MantisEnumTest::ACCESS_LEVELS_ENUM, 10 ) );
@@ -85,6 +91,8 @@ class MantisEnumTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Tests getAssocArrayIndexedByValues() method.
+	 *
+	 * @group Mantis
 	 */
 	public function testGetAssocArrayIndexedByValues() {
 		$this->assertEquals( array(), MantisEnum::getAssocArrayIndexedByValues( MantisEnumTest::EMPTY_ENUM ) );
@@ -96,6 +104,8 @@ class MantisEnumTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Tests getAssocArrayIndexedByLabels() method.
+	 *
+	 * @group Mantis
 	 */
 	public function testGetAssocArrayIndexedByLabels() {
 		$this->assertEquals( array(), MantisEnum::getAssocArrayIndexedByLabels( MantisEnumTest::EMPTY_ENUM ) );
@@ -107,6 +117,8 @@ class MantisEnumTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Tests getValue() method.
+	 *
+	 * @group Mantis
 	 */
 	public function testGetValue() {
 		$this->assertEquals( false, MantisEnum::getValue( MantisEnumTest::EMPTY_ENUM, 'viewer' ) );
@@ -121,6 +133,8 @@ class MantisEnumTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Tests hasValue() method.
+	 *
+	 * @group Mantis
 	 */
 	public function testHasValue() {
 		$this->assertEquals( true, MantisEnum::hasValue( MantisEnumTest::ACCESS_LEVELS_ENUM, 10 ) );
@@ -130,6 +144,8 @@ class MantisEnumTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Tests enumerations that contain duplicate values.
+	 *
+	 * @group Mantis
 	 */
 	public function testDuplicateValuesEnum() {
 		$this->assertEquals( 'viewer1', MantisEnum::getLabel( MantisEnumTest::DUPLICATE_VALUES_ENUM, 10 ) );
@@ -138,6 +154,8 @@ class MantisEnumTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Tests enumerations that contain duplicate labels.
+	 *
+	 * @group Mantis
 	 */
 	public function testDuplicateLabelsValuesEnum() {
 		$this->assertEquals( 'viewer', MantisEnum::getLabel( MantisEnumTest::DUPLICATE_LABELS_ENUM, 10 ) );
@@ -147,6 +165,8 @@ class MantisEnumTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Tests enumerations with a single tuple.
+	 *
+	 * @group Mantis
 	 */
 	public function testSingleValueEnum() {
 		$this->assertEquals( 'viewer', MantisEnum::getLabel( MantisEnumTest::SINGLE_VALUE_ENUM, 10 ) );
@@ -155,6 +175,8 @@ class MantisEnumTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Tests enumerations with labels that contain spaces.
+	 *
+	 * @group Mantis
 	 */
 	public function testNameWithSpacesEnum() {
 		$this->assertEquals( 'first label', MantisEnum::getLabel( MantisEnumTest::NAME_WITH_SPACES_ENUM, 10 ) );
@@ -164,6 +186,8 @@ class MantisEnumTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Tests enumerations that contain duplicate labels.
+	 *
+	 * @group Mantis
 	 */
 	public function testNonTrimmedEnum() {
 		$this->assertEquals( 'viewer', MantisEnum::getLabel( MantisEnumTest::NON_TRIMMED_ENUM, 10 ) );

@@ -381,7 +381,6 @@ function translate_category_name_to_id( $p_category_name, $p_project_id ) {
  * names but an array of filter structures.
  */
 function mci_filter_db_get_available_queries( $p_project_id = null, $p_user_id = null ) {
-	$t_filters_table = db_get_table( 'filters' );
 	$t_overall_query_arr = array();
 
 	if( null === $p_project_id ) {
@@ -404,27 +403,24 @@ function mci_filter_db_get_available_queries( $p_project_id = null, $p_user_id =
 	# Get the list of available queries. By sorting such that public queries are
 	# first, we can override any query that has the same name as a private query
 	# with that private one
-	$query = "SELECT * FROM $t_filters_table
-					WHERE (project_id=" . db_param() . "
+	$t_query = "SELECT * FROM {filters}
+					WHERE (project_id=%d
 						OR project_id=0)
 					AND name!=''
-					AND (is_public = " . db_prepare_bool(true) . "
-						OR user_id = " . db_param() . ")
+					AND (is_public=%d
+						OR user_id=%d)
 					ORDER BY is_public DESC, name ASC";
-	$t_result = db_query_bound( $query, array( $t_project_id, $t_user_id ) );
-	$query_count = db_num_rows( $t_result );
+	$t_result = db_query( $t_query, array( $t_project_id, true, $t_user_id ) );
 
-	for( $i = 0;$i < $query_count;$i++ ) {
-		$row = db_fetch_array( $t_result );
-
-		$t_filter_detail = explode( '#', $row['filter_string'], 2 );
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_filter_detail = explode( '#', $t_row['filter_string'], 2 );
 		if ( !isset($t_filter_detail[1]) ) {
 			continue;
 		}
 		$t_filter = unserialize( $t_filter_detail[1] );
 		$t_filter = filter_ensure_valid_filter( $t_filter );
-		$row['url'] = filter_get_url( $t_filter );
-		$t_overall_query_arr[$row['name']] = $row;
+		$t_row['url'] = filter_get_url( $t_filter );
+		$t_overall_query_arr[$t_row['name']] = $t_row;
 	}
 
 	return array_values( $t_overall_query_arr );
