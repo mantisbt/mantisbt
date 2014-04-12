@@ -175,31 +175,6 @@ function __autoload( $className ) {
 # Register the autoload function to make it effective immediately
 spl_autoload_register( '__autoload' );
 
-require_api( 'mobile_api.php' );
-
-if ( strlen( $GLOBALS['g_mantistouch_url'] ) > 0 && mobile_is_mobile_browser() ) {
-	$t_url = sprintf( $GLOBALS['g_mantistouch_url'], $GLOBALS['g_path'] );
-
-	$t_issue_id = '';
-	if ( strstr( $_SERVER['SCRIPT_NAME'], 'view.php' ) !== false ) {
-		$t_issue_id = (int)$_GET['id'];
-	}
-
-	if ( !empty( $t_issue_id ) )  {
-		if ( strstr( $t_url, 'url=' ) !== false ) {
-			$t_url .= '&issue_id=' . $t_issue_id;
-		} else {
-			$t_url .= '?issue_id=' . $t_issue_id;
-		}
-	}
-
-	header( 'Content-Type: text/html' );
-
-	header( "Location: $t_url" );
-
-	exit; # additional output can cause problems so let's just stop output here
-}
-
 # Load UTF8-capable string functions
 define( 'UTF8', $g_library_path . 'utf8' );
 require_lib( 'utf8/utf8.php' );
