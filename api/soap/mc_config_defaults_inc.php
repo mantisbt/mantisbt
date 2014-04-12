@@ -15,7 +15,7 @@
  */
 
 # Minimum global access level required to access webservice for readonly operations.
-$g_mc_readonly_access_level_threshold = REPORTER;
+$g_mc_readonly_access_level_threshold = VIEWER;
 
 # Minimum global access level required to access webservice for read/write operations.
 $g_mc_readwrite_access_level_threshold = REPORTER;
