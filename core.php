@@ -114,14 +114,20 @@ function require_api( $p_api_name ) {
 /**
  * Include the specific config file, if exists.
  * @param $p_file_name The file name to include (e.g. custom_strings_inc.php).
+ * @param $p_once Include the file only once?
  * @return true found, false not found.
  */
-function require_config( $p_file_name ) {
+function require_config( $p_file_name, $p_once = true ) {
 	$t_config_folder = dirname( dirname( __FILE__ ) ) . '/config/';
 	$t_custom_inc = $t_config_folder . $p_file_name;
 
 	if ( file_exists( $t_custom_inc ) ) {
-		require_once( $t_custom_inc );
+		if ( $p_once ) {
+			require_once( $t_custom_inc );
+		} else {
+			require( $t_custom_inc );
+		}
+
 		return true;
 	}
 
