@@ -21,10 +21,25 @@
  * defined here, define them in a file called config_inc.php, which will
  * be loaded after this file.
  *
+ * A config_inc.php is created as part of the mantis installater with global database settings.
+ *
+ * Global Settings which can not be stored in the database and you may wish to modify have been
+ * placed at the top of this file. These settings should be modified in config_inc.php.
+ *
+ * At a minimum, if creating a config_inc file manually, set valid values for the following sections:
+ *
+ * 1) Global Settings - MantisBT Database Settings [all]
+ * 2) Global Settings - MantisBT Path Settings [path and short_path]
+ * 3) Global Settings - Security and Cryptography [crypto_master_salt]
+ * 4) Global Settings - Email Server Settings
+ *
+ * Per-Project/User Settings follow these and can often be changed directly in the mantis user
+ * interface, however in some cases you may still wish to use the config_inc.php to provide a
+ * default value. Default values for these settings can also be set by storing a database entry for
+ * all users and all projects.
+ *
  * In general a value of OFF means the feature is disabled and ON means the
  * feature is enabled.  Any other cases will have an explanation.
- *
- * For more details see http://www.mantisbt.org/docs/master-1.2.x/
  *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
@@ -32,41 +47,47 @@
  * @link http://www.mantisbt.org
  */
 
-/******************************
- * MantisBT Database Settings *
- ******************************/
+/**
+ * MantisConfig Class
+ */
+global $MantisConfig;
+$MantisConfig = new stdClass();
+
+/************************************************
+ * Global Settings - MantisBT Database Settings *
+ ************************************************/
 
 /**
- * hostname should be either a hostname or connection string to supply to adodb.
+ * hostname should be either a hostname or connection string.
  * For example, if you would like to connect to a database server on the local machine,
  * set hostname to 'localhost'
  * If you need to supply a port to connect to, set hostname as 'localhost:3306'.
- * @global string $g_hostname
+ * @global string hostname
  */
-$g_hostname				= 'localhost';
+$MantisConfig->hostname				= 'localhost';
 /**
  * User name to use for connecting to the database. The user needs to have
  * read/write access to the MantisBT database. The default user name is "root".
- * @global string $g_db_username
+ * @global string db_username
  */
-$g_db_username			= 'root';
+$MantisConfig->db_username			= 'root';
 /**
  * Password for the specified user name. The default password is empty.
- * @global string $g_db_password
+ * @global string db_password
  */
-$g_db_password			= '';
+$MantisConfig->db_password			= '';
  /**
   * Name of database that contains MantisBT tables.
   * The default database name is "bugtracker".
-  * @global string $g_database_name
+  * @global string database_name
   */
-$g_database_name		= 'bugtracker';
+$MantisConfig->database_name		= 'bugtracker';
 
 /**
  * Database Schema Name - used in the case of db2.
- * @global string $g_db_schema
+ * @global string db_schema
  */
-$g_db_schema			= '';
+$MantisConfig->db_schema			= '';
 
 /**
  * Defines the database type. Supported types are listed below;
@@ -81,12 +102,12 @@ $g_db_schema			= '';
  * Oracle          oci8          oci8      experimental
  * DB2             db2           ibm-db2   experimental
  *
- * @global string $g_db_type
+ * @global string db_type
  */
-$g_db_type				= 'mysqli';
+$MantisConfig->db_type				= 'mysqli';
 
 /**
- * adodb Data Source Name
+ * Database Connection - Data Source Name
  * This is an EXPERIMENTAL field.
  * If the above database settings, do not provide enough flexibility, it is
  * possible to specify a dsn for the database connection. For further details,
@@ -96,7 +117,7 @@ $g_db_type				= 'mysqli';
  * "Driver={SQL Server Native Client 10.0};SERVER=.\sqlexpress;DATABASE=bugtracker;UID=mantis;PWD=password;"
  * NOTE: the installer does not yet fully support the use of dsn's
  */
-$g_dsn = '';
+$MantisConfig->dsn = '';
 
 /**************************
  * MantisBT Path Settings *
@@ -166,52 +187,52 @@ if ( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
  * requires trailing /
  * @global string $g_path
  */
-$g_path	= $t_protocol . '://' . $t_host . $t_path;
+$MantisConfig->path	= $t_protocol . '://' . $t_host . $t_path;
 
 /**
  * path to your images directory (for icons)
  * requires trailing /
  * @global string $g_icon_path
  */
-$g_icon_path = '%path%images/';
+$MantisConfig->icon_path = '%path%images' . DIRECTORY_SEPARATOR;
 
 /**
  * Short web path without the domain name
  * requires trailing /
  * @global string $g_short_path
  */
-$g_short_path = $t_path;
+$MantisConfig->short_path = $t_path;
 
 /**
  * absolute path to your installation.  Requires trailing / or \
  * @global string $g_absolute_path
  */
-$g_absolute_path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
+$MantisConfig->absolute_path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
 /**
  * absolute patch to your core files. The default is usually OK,
  * unless you moved the 'core' directory out of your webroot (recommended).
  * @global string $g_core_path
  */
-$g_core_path = $g_absolute_path . 'core' . DIRECTORY_SEPARATOR;
+$MantisConfig->core_path = $MantisConfig->absolute_path . 'core' . DIRECTORY_SEPARATOR;
 
 /**
  * absolute path to class files.  Requires trailing / or \
  * @global string $g_class_path
  */
-$g_class_path = $g_core_path . 'classes' . DIRECTORY_SEPARATOR;
+$MantisConfig->class_path = $MantisConfig->core_path . 'classes' . DIRECTORY_SEPARATOR;
 
 /**
  * absolute path to library files. Requires trailing / or \
  * @global string $g_library_path
  */
-$g_library_path = $g_absolute_path . 'library' . DIRECTORY_SEPARATOR;
+$MantisConfig->library_path = $MantisConfig->absolute_path . 'library' . DIRECTORY_SEPARATOR;
 
 /**
  * absolute path to language files. Requires trailing / or \
  * @global string $g_language_path
  */
-$g_language_path = $g_absolute_path . 'lang' . DIRECTORY_SEPARATOR;
+$MantisConfig->language_path = $MantisConfig->absolute_path . 'lang' . DIRECTORY_SEPARATOR;
 
 /**
  * absolute path to custom strings file.
@@ -233,13 +254,13 @@ $g_language_path = $g_absolute_path . 'lang' . DIRECTORY_SEPARATOR;
  *
  * @global string $g_custom_strings_file
  */
-$g_custom_strings_file = $g_absolute_path . 'custom_strings_inc.php';
+$MantisConfig->custom_strings_file = $MantisConfig->absolute_path . 'custom_strings_inc.php';
 
 /**
  * Used to link to manual for User Documentation.
  * @global string $g_manual_url
  */
-$g_manual_url = 'http://www.mantisbt.org/docs/master-1.2.x/';
+$MantisConfig->manual_url = 'http://www.mantisbt.org/docs/master-1.2.x/';
 
 /**************
  * Web Server *
@@ -252,20 +273,20 @@ $g_manual_url = 'http://www.mantisbt.org/docs/master-1.2.x/';
  *  'memcached' -> Memcached storage sessions
  * @global string $g_session_handler
  */
-$g_session_handler = 'php';
+$MantisConfig->session_handler = 'php';
 
 /**
  * Session save path.  If false, uses default value as set by session handler.
  * @global bool $g_session_save_path
  */
-$g_session_save_path = false;
+$MantisConfig->session_save_path = false;
 
 /**
  * Session validation
  * WARNING: Disabling this could be a potential security risk!!
  * @global int $g_session_validation
  */
-$g_session_validation = ON;
+$MantisConfig->session_validation = ON;
 
 /**
  * Form security validation.
@@ -274,7 +295,7 @@ $g_session_validation = ON;
  * incorrectly.
  * WARNING: Disabling this is a security risk!!
  */
-$g_form_security_validation = ON;
+$MantisConfig->form_security_validation = ON;
 
 /*****************************
  * Security and Cryptography *
@@ -307,7 +328,7 @@ $g_form_security_validation = ON;
  *
  * @global string $g_crypto_master_salt
  */
-$g_crypto_master_salt = '';
+$MantisConfig->crypto_master_salt = '';
 
 /****************************
  * Signup and Lost Password *
@@ -320,7 +341,7 @@ $g_crypto_master_salt = '';
  * @see $g_send_reset_password
  * @global int $g_allow_signup
  */
-$g_allow_signup			= ON;
+$MantisConfig->allow_signup			= ON;
 
 /**
  * Max. attempts to login using a wrong password before lock the account.
@@ -329,14 +350,14 @@ $g_allow_signup			= ON;
  * Set to OFF to disable this control
  * @global int $g_max_failed_login_count
  */
-$g_max_failed_login_count = OFF;
+$MantisConfig->max_failed_login_count = OFF;
 
 /**
  * access level required to be notified when a new user has been created using
  * the "signup form"
  * @global int $g_notify_new_user_created_threshold_min
  */
-$g_notify_new_user_created_threshold_min = ADMINISTRATOR;
+$MantisConfig->notify_new_user_created_threshold_min = ADMINISTRATOR;
 
 /**
  * If ON, users will be sent their password when their account is created
@@ -345,13 +366,13 @@ $g_notify_new_user_created_threshold_min = ADMINISTRATOR;
  * creating new accounts, and the password will be set to blank when reset.
  * @global int $g_send_reset_password
  */
-$g_send_reset_password	= ON;
+$MantisConfig->send_reset_password	= ON;
 
 /**
  * use captcha image to validate subscription it requires GD library installed
  * @global int $g_signup_use_captcha
  */
-$g_signup_use_captcha	= ON;
+$MantisConfig->signup_use_captcha	= ON;
 
 /**
  * absolute path (with trailing slash!) to folder which contains your
@@ -359,20 +380,20 @@ $g_signup_use_captcha	= ON;
  * the Relationship Graphs
  * @global string $g_system_font_folder
  */
-$g_system_font_folder	= '';
+$MantisConfig->system_font_folder	= '';
 
 /**
  * font name used to create the captcha image. i.e. arial.ttf
  * (the font file has to exist in the system_font_folder)
  * @global string $g_font_per_captcha
  */
-$g_font_per_captcha	= 'arial.ttf';
+$MantisConfig->font_per_captcha	= 'arial.ttf';
 
 /**
  * Setting to disable the 'lost your password' feature.
  * @global int $g_lost_password_feature
  */
-$g_lost_password_feature = ON;
+$MantisConfig->lost_password_feature = ON;
 
 /**
  * Max. simultaneous requests of 'lost password'
@@ -380,7 +401,7 @@ $g_lost_password_feature = ON;
  * reset. Value resets to zero at each successfully login
  * @global int $g_max_lost_password_in_progress_count
  */
-$g_max_lost_password_in_progress_count = 3;
+$MantisConfig->max_lost_password_in_progress_count = 3;
 
 /***************************
  * MantisBT Email Settings *
@@ -391,25 +412,25 @@ $g_max_lost_password_in_progress_count = 3;
  * and thus may be susceptible to being detected by spam email harvesters.
  * @global string $g_webmaster_email
  */
-$g_webmaster_email		= 'webmaster@example.com';
+$MantisConfig->webmaster_email		= 'webmaster@example.com';
 
 /**
  * the sender email, part of 'From: ' header in emails
  * @global string $g_from_email
  */
-$g_from_email			= 'noreply@example.com';
+$MantisConfig->from_email			= 'noreply@example.com';
 
 /**
  * the sender name, part of 'From: ' header in emails
  * @global string $g_from_name
  */
-$g_from_name			= 'Mantis Bug Tracker';
+$MantisConfig->from_name			= 'Mantis Bug Tracker';
 
 /**
  * the return address for bounced mail
  * @global string $g_return_path_email
  */
-$g_return_path_email	= 'admin@example.com';
+$MantisConfig->return_path_email	= 'admin@example.com';
 
 /**
  * Allow email notification.
@@ -420,7 +441,7 @@ $g_return_path_email	= 'admin@example.com';
  * accounts are not sent to users.
  * @global int $g_enable_email_notification
  */
-$g_enable_email_notification	= ON;
+$MantisConfig->enable_email_notification	= ON;
 
 
 /**
@@ -469,7 +490,7 @@ $g_enable_email_notification	= ON;
  * @global array $g_default_notify_flags
  */
 
-$g_default_notify_flags = array(
+$MantisConfig->default_notify_flags = array(
 	'reporter'      => ON,
 	'handler'       => ON,
 	'monitor'       => ON,
@@ -489,12 +510,12 @@ $g_default_notify_flags = array(
  * @see $g_default_notify_flags
  * @global array $g_notify_flags
  */
-$g_notify_flags['new'] = array(
+$MantisConfig->notify_flags['new'] = array(
 	'bugnotes' => OFF,
 	'monitor'  => OFF
 );
 
-$g_notify_flags['monitor'] = array(
+$MantisConfig->notify_flags['monitor'] = array(
 	'reporter'      => OFF,
 	'handler'       => OFF,
 	'monitor'       => OFF,
@@ -508,19 +529,19 @@ $g_notify_flags['monitor'] = array(
  * Whether user's should receive emails for their own actions
  * @global int $g_email_receive_own
  */
-$g_email_receive_own = OFF;
+$MantisConfig->email_receive_own = OFF;
 
 /**
  * set to OFF to disable email check
  * @global int $g_validate_email
  */
-$g_validate_email = ON;
+$MantisConfig->validate_email = ON;
 
 /**
  * set to OFF to disable email check
  * @global int $g_check_mx_record
  */
-$g_check_mx_record = OFF;
+$MantisConfig->check_mx_record = OFF;
 
 /**
  * if ON, allow the user to omit an email field
@@ -529,7 +550,7 @@ $g_check_mx_record = OFF;
  * of this option is.  Otherwise they would not get their passwords.
  * @global int $g_allow_blank_email
  */
-$g_allow_blank_email = OFF;
+$MantisConfig->allow_blank_email = OFF;
 
 /**
  * Only allow and send email to addresses in the given domain(s)
@@ -537,20 +558,20 @@ $g_allow_blank_email = OFF;
  * $g_limit_email_domains		= array( 'users.sourceforge.net', 'sourceforge.net' );
  * @global array $g_limit_email_domains
  */
-$g_limit_email_domains = array();
+$MantisConfig->limit_email_domains = array();
 
 /**
  * This specifies the access level that is needed to get the mailto: links.
  * @global int $g_show_user_email_threshold
  */
-$g_show_user_email_threshold = NOBODY;
+$MantisConfig->show_user_email_threshold = NOBODY;
 
 /**
  * This specifies the access level that is needed to see realnames on user view
  * page
  * @global int $g_show_user_realname_threshold
  */
-$g_show_user_realname_threshold = NOBODY;
+$MantisConfig->show_user_realname_threshold = NOBODY;
 
 /**
  * If use_x_priority is set to ON, what should the value be?
@@ -558,7 +579,7 @@ $g_show_user_realname_threshold = NOBODY;
  * Note: some MTAs interpret X-Priority = 0 to mean 'Very Urgent'
  * @global int $g_mail_priority
  */
-$g_mail_priority = 3;
+$MantisConfig->mail_priority = 3;
 
 /**
  * select the method to mail by:
@@ -567,7 +588,7 @@ $g_mail_priority = 3;
  * PHPMAILER_METHOD_SMTP - SMTP
  * @global int $g_phpMailer_method
  */
-$g_phpMailer_method = PHPMAILER_METHOD_MAIL;
+$MantisConfig->mailer_method = PHPMAILER_METHOD_MAIL;
 
 /**
  * This option allows you to use a remote SMTP host.  Must use the phpMailer script
@@ -577,7 +598,7 @@ $g_phpMailer_method = PHPMAILER_METHOD_MAIL;
  * Hosts will be tried in order.
  * @global string $g_smtp_host
  */
-$g_smtp_host = 'localhost';
+$MantisConfig->smtp_host = 'localhost';
 
 /**
  * These options allow you to use SMTP Authentication when you use a remote
@@ -585,19 +606,19 @@ $g_smtp_host = 'localhost';
  * and password will be used when logging in to the SMTP server.
  * @global string $g_smtp_username
  */
-$g_smtp_username = '';
+$MantisConfig->smtp_username = '';
 
 /**
  * SMTP Server Authentication password
  * @global string $g_smtp_password
  */
-$g_smtp_password = '';
+$MantisConfig->smtp_password = '';
 
 /**
  * This control the connection mode to SMTP server. Can be 'ssl' or 'tls'
  * @global string $g_smtp_connection_mode
  */
-$g_smtp_connection_mode = '';
+$MantisConfig->smtp_connection_mode = '';
 
 /**
  * The smtp port to use.  The typical SMTP ports are 25 and 587.  The port to
@@ -605,7 +626,7 @@ $g_smtp_connection_mode = '';
  * used.
  * @global int $g_smtp_port
  */
-$g_smtp_port = 25;
+$MantisConfig->smtp_port = 25;
 
 /**
  * It is recommended to use a cronjob or a scheduler task to send emails. The
@@ -614,7 +635,7 @@ $g_smtp_port = 25;
  * which triggers notifications.  This slows user performance.
  * @global int $g_email_send_using_cronjob
  */
-$g_email_send_using_cronjob = OFF;
+$MantisConfig->email_send_using_cronjob = OFF;
 
 /**
  * Specify whether e-mails should be sent with the category set or not. This
@@ -623,23 +644,23 @@ $g_email_send_using_cronjob = OFF;
  * OFF, EMAIL_CATEGORY_PROJECT_CATEGORY (format: [Project] Category)
  * @global int $g_email_set_category
  */
-$g_email_set_category = OFF;
+$MantisConfig->email_set_category = OFF;
 
 /**
  * email separator and padding
  * @global string $g_email_separator1
  */
-$g_email_separator1 = str_pad('', 70, '=');
+$MantisConfig->email_separator1 = str_pad('', 70, '=');
 /**
  * email separator and padding
  * @global string $g_email_separator2
  */
-$g_email_separator2 = str_pad('', 70, '-');
+$MantisConfig->email_separator2 = str_pad('', 70, '-');
 /**
  * email separator and padding
  * @global int $g_email_padding_length
  */
-$g_email_padding_length	= 28;
+$MantisConfig->email_padding_length	= 28;
 
 /***************************
  * MantisBT Version String *
@@ -649,13 +670,13 @@ $g_email_padding_length	= 28;
  * Set to off by default to not expose version to users
  * @global int $g_show_version
  */
-$g_show_version = OFF;
+$MantisConfig->show_version = OFF;
 
 /**
  * String appended to the MantisBT version when displayed to the user
  * @global string $g_version_suffix
  */
-$g_version_suffix = '';
+$MantisConfig->version_suffix = '';
 
 /**
  * Custom copyright and licensing statement shown at the footer of each page.
@@ -663,7 +684,7 @@ $g_version_suffix = '';
  * This string is treated as raw HTML and thus you must use &amp; instead of &.
  * @global string $g_copyright_statement
  */
-$g_copyright_statement = '';
+$MantisConfig->copyright_statement = '';
 
 /******************************
  * MantisBT Language Settings *
@@ -674,13 +695,13 @@ $g_copyright_statement = '';
  * user agent (web browser) language preference.
  * @global string $g_default_language
  */
-$g_default_language = 'auto';
+$MantisConfig->default_language = 'auto';
 
 /**
  * list the choices that the users are allowed to choose
  * @global array $g_language_choices_arr
  */
-$g_language_choices_arr	= array(
+$MantisConfig->language_choices_arr	= array(
 	'auto',
 	'afrikaans',
 	'amharic',
@@ -737,7 +758,7 @@ $g_language_choices_arr	= array(
  * Browser language mapping for 'auto' language selection
  * @global array $g_language_auto_map
  */
-$g_language_auto_map = array(
+$MantisConfig->language_auto_map = array(
 	'af' => 'afrikaans',
 	'am' => 'amharic',
 	'ar' => 'arabic',
@@ -791,7 +812,7 @@ $g_language_auto_map = array(
  * Fallback for automatic language selection
  * @global string $g_fallback_language
  */
-$g_fallback_language = 'english';
+$MantisConfig->fallback_language = 'english';
 
 /*****************************
  * MantisBT Display Settings *
@@ -801,31 +822,31 @@ $g_fallback_language = 'english';
  * browser window title
  * @global string $g_window_title
  */
-$g_window_title = 'MantisBT';
+$MantisConfig->window_title = 'MantisBT';
 
 /**
  * Check for admin directory, database upgrades, etc.
  * @global int $g_admin_checks
  */
-$g_admin_checks = ON;
+$MantisConfig->admin_checks = ON;
 
 /**
  * Favicon image
  * @global string $g_favicon_image
  */
-$g_favicon_image = 'images/favicon.ico';
+$MantisConfig->favicon_image = 'images/favicon.ico';
 
 /**
  * Logo
  * @global string $g_logo_image
  */
-$g_logo_image = 'images/mantis_logo.png';
+$MantisConfig->logo_image = 'images/mantis_logo.png';
 
 /**
  * Logo URL link
  * @global string $g_logo_url
  */
-$g_logo_url = '%default_home_page%';
+$MantisConfig->logo_url = '%default_home_page%';
 
 /**
  * Specifies whether to enable support for project documents or not.
@@ -833,27 +854,27 @@ $g_logo_url = '%default_home_page%';
  * in the future.
  * @global int $g_enable_project_documentation
  */
-$g_enable_project_documentation = OFF;
+$MantisConfig->enable_project_documentation = OFF;
 
 /**
  * Display another instance of the menu at the bottom.  The top menu will still
  * remain.
  * @global int $g_show_footer_menu
  */
-$g_show_footer_menu = OFF;
+$MantisConfig->show_footer_menu = OFF;
 
 /**
  * show extra menu bar with all available projects
  * @global int $g_show_project_menu_bar
  */
-$g_show_project_menu_bar = OFF;
+$MantisConfig->show_project_menu_bar = OFF;
 
 /**
  * show assigned to names
  * This is in the view all pages
  * @global int $g_show_assigned_names
  */
-$g_show_assigned_names = ON;
+$MantisConfig->show_assigned_names = ON;
 
 /**
  * show priority as icon
@@ -861,7 +882,7 @@ $g_show_assigned_names = ON;
  * ON:  Shows priority as text in view all bugs page
  * @global int $g_show_priority_text
  */
-$g_show_priority_text = OFF;
+$MantisConfig->show_priority_text = OFF;
 
 /**
  * Define the priority level at which a bug becomes significant. Significant
@@ -869,7 +890,7 @@ $g_show_priority_text = OFF;
  * feature.
  * @global int $g_priority_significant_threshold
  */
-$g_priority_significant_threshold = HIGH;
+$MantisConfig->priority_significant_threshold = HIGH;
 
 /**
  * Define the severity level at which a bug becomes significant.
@@ -877,7 +898,7 @@ $g_priority_significant_threshold = HIGH;
  * disable the feature.
  * @global int $g_severity_significant_threshold
  */
-$g_severity_significant_threshold = MAJOR;
+$MantisConfig->severity_significant_threshold = MAJOR;
 
 /**
  * The default columns to be included in the View Issues Page.
@@ -899,7 +920,7 @@ $g_severity_significant_threshold = MAJOR;
  *
  * @global array $g_view_issues_page_columns
  */
-$g_view_issues_page_columns = array (
+$MantisConfig->view_issues_page_columns = array (
 	'selection', 'edit', 'priority', 'id', 'sponsorship_total',
 	'bugnotes_count', 'attachment_count', 'category_id', 'severity', 'status',
 	'last_updated', 'summary'
@@ -911,7 +932,7 @@ $g_view_issues_page_columns = array (
  * user can configure their own columns using My Account -> Manage Columns.
  * @global array $g_print_issues_page_columns
  */
-$g_print_issues_page_columns = array (
+$MantisConfig->print_issues_page_columns = array (
 	'selection', 'priority', 'id', 'sponsorship_total', 'bugnotes_count',
 	'attachment_count', 'category_id', 'severity', 'status', 'last_updated',
 	'summary'
@@ -923,7 +944,7 @@ $g_print_issues_page_columns = array (
  * configure their own columns using My Account -> Manage Columns.
  * @global array $g_csv_columns
  */
-$g_csv_columns = array (
+$MantisConfig->csv_columns = array (
 	'id', 'project_id', 'reporter_id', 'handler_id', 'priority',
 	'severity', 'reproducibility', 'version', 'projection', 'category_id',
 	'date_submitted', 'eta', 'os', 'os_build', 'platform', 'view_state',
@@ -936,7 +957,7 @@ $g_csv_columns = array (
  * user can configure their own columns using My Account -> Manage Columns
  * @global array $g_excel_columns
  */
-$g_excel_columns = array (
+$MantisConfig->excel_columns = array (
 	'id', 'project_id', 'reporter_id', 'handler_id', 'priority', 'severity',
 	'reproducibility', 'version', 'projection', 'category_id',
 	'date_submitted', 'eta', 'os', 'os_build', 'platform', 'view_state',
@@ -947,14 +968,14 @@ $g_excel_columns = array (
  * show projects when in All Projects mode
  * @global int $g_show_bug_project_links
  */
-$g_show_bug_project_links = ON;
+$MantisConfig->show_bug_project_links = ON;
 
 /**
  * Position of the status colour legend, can be: POSITION_*
  * see constant_inc.php. (*: TOP , BOTTOM , or BOTH)
  * @global int $g_status_legend_position
  */
-$g_status_legend_position = STATUS_LEGEND_POSITION_BOTTOM;
+$MantisConfig->status_legend_position = STATUS_LEGEND_POSITION_BOTTOM;
 
 /**
  * Show a legend with percentage of bug status
@@ -962,21 +983,21 @@ $g_status_legend_position = STATUS_LEGEND_POSITION_BOTTOM;
  * If set to ON it will printed below the status colour legend.
  * @global int $g_status_percentage_legend
  */
-$g_status_percentage_legend = OFF;
+$MantisConfig->status_percentage_legend = OFF;
 
 /**
  * Position of the filter box, can be: POSITION_*
  * POSITION_TOP, POSITION_BOTTOM, or POSITION_NONE for none.
  * @global int $g_filter_position
  */
-$g_filter_position = FILTER_POSITION_TOP;
+$MantisConfig->filter_position = FILTER_POSITION_TOP;
 
 /**
  * Position of action buttons when viewing issues.
  * Can be: POSITION_TOP, POSITION_BOTTOM, or POSITION_BOTH.
  * @global int $g_action_button_position
  */
-$g_action_button_position = POSITION_BOTTOM;
+$MantisConfig->action_button_position = POSITION_BOTTOM;
 
 /**
  * show product versions in create, view and update screens
@@ -985,7 +1006,7 @@ $g_action_button_position = POSITION_BOTTOM;
  * AUTO suppresses the display if there are no versions defined for the project
  * @global int $g_show_product_version
  */
-$g_show_product_version = AUTO;
+$MantisConfig->show_product_version = AUTO;
 
 /**
  * The access level threshold at which users will see the date of release
@@ -994,26 +1015,26 @@ $g_show_product_version = AUTO;
  * to disable the feature.
  * @global int $g_show_version_dates_threshold
  */
-$g_show_version_dates_threshold = NOBODY;
+$MantisConfig->show_version_dates_threshold = NOBODY;
 
 /**
  * show users with their real name or not
  * @global int $g_show_realname
  */
-$g_show_realname = OFF;
+$MantisConfig->show_realname = OFF;
 
 /**
  * leave off for now
  * @global int $g_differentiate_duplicates
  */
-$g_differentiate_duplicates = OFF;
+$MantisConfig->differentiate_duplicates = OFF;
 
 /**
  * sorting for names in dropdown lists. If turned on, "Jane Doe" will be sorted
  * with the "D"s
  * @global int $g_sort_by_last_name
  */
-$g_sort_by_last_name = OFF;
+$MantisConfig->sort_by_last_name = OFF;
 
 /**
  * Show user avatar
@@ -1037,25 +1058,25 @@ $g_sort_by_last_name = OFF;
  * @global int|string $g_show_avatar
  * @see $g_show_avatar_threshold
  */
-$g_show_avatar = OFF;
+$MantisConfig->show_avatar = OFF;
 
 /**
  * Only users above this threshold will have their avatar shown
  * @global int $g_show_avatar_threshold
  */
-$g_show_avatar_threshold = DEVELOPER;
+$MantisConfig->show_avatar_threshold = DEVELOPER;
 
 /**
  * Show release dates on changelog
  * @global int $g_show_changelog_dates
  */
-$g_show_changelog_dates = ON;
+$MantisConfig->show_changelog_dates = ON;
 
 /**
  * Show release dates on roadmap
  * @global int $g_show_roadmap_dates
  */
-$g_show_roadmap_dates = ON;
+$MantisConfig->show_roadmap_dates = ON;
 
 /**************************
  * MantisBT Time Settings *
@@ -1065,7 +1086,7 @@ $g_show_roadmap_dates = ON;
  * time for 'permanent' cookie to live in seconds (1 year)
  * @global int $g_cookie_time_length
  */
-$g_cookie_time_length = 30000000;
+$MantisConfig->cookie_time_length = 30000000;
 
 /**
  * Allow users to opt for a 'permanent' cookie when logging in
@@ -1074,13 +1095,13 @@ $g_cookie_time_length = 30000000;
  * @see $g_cookie_time_length
  * @global int $g_allow_permanent_cookie
  */
-$g_allow_permanent_cookie = ON;
+$MantisConfig->allow_permanent_cookie = ON;
 
 /**
  * minutes to wait before document is stale (in minutes)
  * @global int $g_content_expire
  */
-$g_content_expire = 0;
+$MantisConfig->content_expire = 0;
 
 /**
  * The time (in seconds) to allow for page execution during long processes
@@ -1089,7 +1110,7 @@ $g_content_expire = 0;
  *  execute until it is finished.
  * @global int $g_long_process_timeout
  */
-$g_long_process_timeout = 0;
+$MantisConfig->long_process_timeout = 0;
 
 /**************************
  * MantisBT Date Settings *
@@ -1101,7 +1122,7 @@ $g_long_process_timeout = 0;
  * for detailed instructions on date formatting
  * @global string $g_short_date_format
  */
-$g_short_date_format = 'Y-m-d';
+$MantisConfig->short_date_format = 'Y-m-d';
 
 /**
  * date format strings defaults to ISO 8601 formatting
@@ -1109,7 +1130,7 @@ $g_short_date_format = 'Y-m-d';
  * for detailed instructions on date formatting
  * @global string $g_normal_date_format
  */
-$g_normal_date_format = 'Y-m-d H:i';
+$MantisConfig->normal_date_format = 'Y-m-d H:i';
 
 /**
  * date format strings defaults to ISO 8601 formatting
@@ -1117,7 +1138,7 @@ $g_normal_date_format = 'Y-m-d H:i';
  * for detailed instructions on date formatting
  * @global string $g_complete_date_format
  */
-$g_complete_date_format = 'Y-m-d H:i T';
+$MantisConfig->complete_date_format = 'Y-m-d H:i T';
 
 /**
  * jscalendar date format string
@@ -1125,7 +1146,7 @@ $g_complete_date_format = 'Y-m-d H:i T';
  * for detailed instructions on date formatting
  * @global string $g_calendar_js_date_format
  */
-$g_calendar_js_date_format = '\%Y-\%m-\%d \%H:\%M';
+$MantisConfig->calendar_js_date_format = '\%Y-\%m-\%d \%H:\%M';
 
 /**
  * jscalendar date format string
@@ -1133,7 +1154,7 @@ $g_calendar_js_date_format = '\%Y-\%m-\%d \%H:\%M';
  * for detailed instructions on date formatting
  * @global string $g_calendar_date_format
  */
-$g_calendar_date_format = 'Y-m-d H:i';
+$MantisConfig->calendar_date_format = 'Y-m-d H:i';
 
 /******************************
  * MantisBT TimeZone Settings *
@@ -1150,7 +1171,7 @@ $g_calendar_date_format = 'Y-m-d H:i';
  * @link http://php.net/timezones List of Supported Timezones
  * @global string $g_default_timezone
  */
-$g_default_timezone = '';
+$MantisConfig->default_timezone = '';
 
 /**************************
  * MantisBT News Settings *
@@ -1161,7 +1182,7 @@ $g_default_timezone = '';
  * This feature is deprecated and is expected to be moved to a plugin
  * in the future.
  */
-$g_news_enabled = OFF;
+$MantisConfig->news_enabled = OFF;
 
 /**
  * Limit News Items
@@ -1170,25 +1191,25 @@ $g_news_enabled = OFF;
  * BY_DATE - by date
  * @global int $g_news_limit_method
  */
-$g_news_limit_method = BY_LIMIT;
+$MantisConfig->news_limit_method = BY_LIMIT;
 
 /**
  * limit by last X entries
  * @global int $g_news_view_limit
  */
-$g_news_view_limit = 7;
+$MantisConfig->news_view_limit = 7;
 
 /**
  * limit by days
  * @global int $g_news_view_limit_days
  */
-$g_news_view_limit_days = 30;
+$MantisConfig->news_view_limit_days = 30;
 
 /**
  * threshold for viewing private news
  * @global int $g_private_news_threshold
  */
-$g_private_news_threshold = DEVELOPER;
+$MantisConfig->private_news_threshold = DEVELOPER;
 
 /********************************
  * MantisBT Default Preferences *
@@ -1199,249 +1220,249 @@ $g_private_news_threshold = DEVELOPER;
  * look in constant_inc.php for values
  * @global int $g_default_new_account_access_level
  */
-$g_default_new_account_access_level = REPORTER;
+$MantisConfig->default_new_account_access_level = REPORTER;
 
 /**
  * Default Bug View Status (VS_PUBLIC or VS_PRIVATE)
  * @global int $g_default_bug_view_status
  */
-$g_default_bug_view_status = VS_PUBLIC;
+$MantisConfig->default_bug_view_status = VS_PUBLIC;
 
 /**
  * Default value for steps to reproduce field.
  * @global string $g_default_bug_steps_to_reproduce
  */
-$g_default_bug_steps_to_reproduce = '';
+$MantisConfig->default_bug_steps_to_reproduce = '';
 
 /**
  * Default value for addition information field.
  * @global string $g_default_bug_additional_info
  */
-$g_default_bug_additional_info = '';
+$MantisConfig->default_bug_additional_info = '';
 
 /**
  * Default Bugnote View Status (VS_PUBLIC or VS_PRIVATE)
  * @global int $g_default_bugnote_view_status
  */
-$g_default_bugnote_view_status = VS_PUBLIC;
+$MantisConfig->default_bugnote_view_status = VS_PUBLIC;
 
 /**
  * Default bug resolution when reporting a new bug
  * @global int $g_default_bug_resolution
  */
-$g_default_bug_resolution = OPEN;
+$MantisConfig->default_bug_resolution = OPEN;
 
 /**
  * Default bug severity when reporting a new bug
  * @global int $g_default_bug_severity
  */
-$g_default_bug_severity = MINOR;
+$MantisConfig->default_bug_severity = MINOR;
 
 /**
  * Default bug priority when reporting a new bug
  * @global int $g_default_bug_priority
  */
-$g_default_bug_priority = NORMAL;
+$MantisConfig->default_bug_priority = NORMAL;
 
 /**
  * Default bug reproducibility when reporting a new bug
  * @global int $g_default_bug_reproducibility
  */
-$g_default_bug_reproducibility = REPRODUCIBILITY_HAVENOTTRIED;
+$MantisConfig->default_bug_reproducibility = REPRODUCIBILITY_HAVENOTTRIED;
 
 /**
  * Default bug projection when reporting a new bug
  * @global int $g_default_bug_projection
  */
-$g_default_bug_projection = PROJECTION_NONE;
+$MantisConfig->default_bug_projection = PROJECTION_NONE;
 
 /**
  * Default bug ETA when reporting a new bug
  * @global int $g_default_bug_eta
  */
-$g_default_bug_eta = ETA_NONE;
+$MantisConfig->default_bug_eta = ETA_NONE;
 
 /**
  * Default relationship between a new bug and its parent when cloning it
  * @global int $g_default_bug_relationship_clone
  */
-$g_default_bug_relationship_clone = BUG_REL_NONE;
+$MantisConfig->default_bug_relationship_clone = BUG_REL_NONE;
 
 /**
  * Default for new bug relationships
  * @global int $g_default_bug_relationship
  */
-$g_default_bug_relationship = BUG_RELATED;
+$MantisConfig->default_bug_relationship = BUG_RELATED;
 
 /**
  * Default global category to be used when an issue is moved from a project to another
  * that does not have a category with a matching name.  The default is 1 which is the "General"
  * category that is created in the default database.
  */
-$g_default_category_for_moves = 1;
+$MantisConfig->default_category_for_moves = 1;
 
 /**
  *
  * @global int $g_default_limit_view
  */
-$g_default_limit_view = 50;
+$MantisConfig->default_limit_view = 50;
 
 /**
  *
  * @global int $g_default_show_changed
  */
-$g_default_show_changed = 6;
+$MantisConfig->default_show_changed = 6;
 
 /**
  *
  * @global int $g_hide_status_default
  */
-$g_hide_status_default = CLOSED;
+$MantisConfig->hide_status_default = CLOSED;
 
 /**
  *
  * @global string $g_show_sticky_issues
  */
-$g_show_sticky_issues = ON;
+$MantisConfig->show_sticky_issues = ON;
 
 /**
  * make sure people are not refreshing too often
  * in minutes
  * @global int $g_min_refresh_delay
  */
-$g_min_refresh_delay = 10;
+$MantisConfig->min_refresh_delay = 10;
 
 /**
  * in minutes
  * @global int $g_default_refresh_delay
  */
-$g_default_refresh_delay = 30;
+$MantisConfig->default_refresh_delay = 30;
 
 /**
  * in seconds
  * @global int $g_default_redirect_delay
  */
-$g_default_redirect_delay = 2;
+$MantisConfig->default_redirect_delay = 2;
 
 /**
  *
  * @global string $g_default_bugnote_order
  */
-$g_default_bugnote_order = 'ASC';
+$MantisConfig->default_bugnote_order = 'ASC';
 
 /**
  *
  * @global int $g_default_email_on_new
  */
-$g_default_email_on_new = ON;
+$MantisConfig->default_email_on_new = ON;
 
 /**
  *
  * @global int $g_default_email_on_assigned
  */
-$g_default_email_on_assigned = ON;
+$MantisConfig->default_email_on_assigned = ON;
 
 /**
  *
  * @global int $g_default_email_on_feedback
  */
-$g_default_email_on_feedback = ON;
+$MantisConfig->default_email_on_feedback = ON;
 
 /**
  *
  * @global int $g_default_email_on_resolved
  */
-$g_default_email_on_resolved = ON;
+$MantisConfig->default_email_on_resolved = ON;
 
 /**
  *
  * @global int $g_default_email_on_closed
  */
-$g_default_email_on_closed = ON;
+$MantisConfig->default_email_on_closed = ON;
 
 /**
  *
  * @global int $g_default_email_on_reopened
  */
-$g_default_email_on_reopened = ON;
+$MantisConfig->default_email_on_reopened = ON;
 
 /**
  *
  * @global int $g_default_email_on_bugnote
  */
-$g_default_email_on_bugnote = ON;
+$MantisConfig->default_email_on_bugnote = ON;
 
 /**
  * @todo Unused
  * @global int $g_default_email_on_status
  */
-$g_default_email_on_status = 0;
+$MantisConfig->default_email_on_status = 0;
 
 /**
  * @todo Unused
  * @global int $g_default_email_on_priority
  */
-$g_default_email_on_priority = 0;
+$MantisConfig->default_email_on_priority = 0;
 
 /**
  * 'any'
  * @global int $g_default_email_on_new_minimum_severity
  */
-$g_default_email_on_new_minimum_severity = OFF;
+$MantisConfig->default_email_on_new_minimum_severity = OFF;
 
 /**
  * 'any'
  * @global int $g_default_email_on_assigned_minimum_severity
  */
-$g_default_email_on_assigned_minimum_severity = OFF;
+$MantisConfig->default_email_on_assigned_minimum_severity = OFF;
 
 /**
  * 'any'
  * @global int $g_default_email_on_feedback_minimum_severity
  */
-$g_default_email_on_feedback_minimum_severity = OFF;
+$MantisConfig->default_email_on_feedback_minimum_severity = OFF;
 
 /**
  * 'any'
  * @global int $g_default_email_on_resolved_minimum_severity
  */
-$g_default_email_on_resolved_minimum_severity = OFF;
+$MantisConfig->default_email_on_resolved_minimum_severity = OFF;
 
 /**
  * 'any'
  * @global int $g_default_email_on_closed_minimum_severity
  */
-$g_default_email_on_closed_minimum_severity = OFF;
+$MantisConfig->default_email_on_closed_minimum_severity = OFF;
 
 /**
  * 'any'
  * @global int $g_default_email_on_reopened_minimum_severity
  */
-$g_default_email_on_reopened_minimum_severity = OFF;
+$MantisConfig->default_email_on_reopened_minimum_severity = OFF;
 
 /**
  * 'any'
  * @global int $g_default_email_on_bugnote_minimum_severity
  */
-$g_default_email_on_bugnote_minimum_severity = OFF;
+$MantisConfig->default_email_on_bugnote_minimum_severity = OFF;
 
 /**
  * 'any'
  * @global int $g_default_email_on_status_minimum_severity
  */
-$g_default_email_on_status_minimum_severity = OFF;
+$MantisConfig->default_email_on_status_minimum_severity = OFF;
 
 /**
  * @todo Unused
  * @global int $g_default_email_on_priority_minimum_severity
  */
-$g_default_email_on_priority_minimum_severity = OFF;
+$MantisConfig->default_email_on_priority_minimum_severity = OFF;
 
 /**
  *
  * @global int $g_default_email_bugnote_limit
  */
-$g_default_email_bugnote_limit = 0;
+$MantisConfig->default_email_bugnote_limit = 0;
 
 /*****************************
  * MantisBT Summary Settings *
@@ -1452,27 +1473,27 @@ $g_default_email_bugnote_limit = 0;
  * this is useful when there are hundreds of reporters
  * @global int $g_reporter_summary_limit
  */
-$g_reporter_summary_limit = 10;
+$MantisConfig->reporter_summary_limit = 10;
 
 /**
  * summary date displays
  * date lengths to count bugs by (in days)
  * @global array $g_date_partitions
  */
-$g_date_partitions = array( 1, 2, 3, 7, 30, 60, 90, 180, 365);
+$MantisConfig->date_partitions = array( 1, 2, 3, 7, 30, 60, 90, 180, 365);
 
 /**
  * shows project '[project] category' when 'All Projects' is selected
  * otherwise only 'category name'
  * @global int $g_summary_category_include_project
  */
-$g_summary_category_include_project = OFF;
+$MantisConfig->summary_category_include_project = OFF;
 
 /**
  * threshold for viewing summary
  * @global int $g_view_summary_threshold
  */
-$g_view_summary_threshold = MANAGER;
+$MantisConfig->view_summary_threshold = MANAGER;
 
 /**
  * Define the multipliers which are used to determine the effectiveness
@@ -1480,7 +1501,7 @@ $g_view_summary_threshold = MANAGER;
  * result in an increase in reporter effectiveness.
  * @global array $g_severity_multipliers
  */
-$g_severity_multipliers = array(
+$MantisConfig->severity_multipliers = array(
 	FEATURE => 1,
 	TRIVIAL => 2,
 	TEXT    => 3,
@@ -1499,7 +1520,7 @@ $g_severity_multipliers = array(
  * $g_bug_resolution_not_fixed_threshold.
  * @global array $g_resolution_multipliers
  */
-$g_resolution_multipliers = array(
+$MantisConfig->resolution_multipliers = array(
 	UNABLE_TO_DUPLICATE => 2,
 	NOT_FIXABLE         => 1,
 	DUPLICATE           => 3,
@@ -1517,7 +1538,7 @@ $g_resolution_multipliers = array(
  * change to ASC or DESC
  * @global string $g_bugnote_order
  */
-$g_bugnote_order = 'DESC';
+$MantisConfig->bugnote_order = 'DESC';
 
 /*********************************
  * MantisBT Bug History Settings *
@@ -1528,14 +1549,14 @@ $g_bugnote_order = 'DESC';
  * change to ON or OFF
  * @global int $g_history_default_visible
  */
-$g_history_default_visible = ON;
+$MantisConfig->history_default_visible = ON;
 
 /**
  * bug history ordering
  * change to ASC or DESC
  * @global string $g_history_order
  */
-$g_history_order = 'ASC';
+$MantisConfig->history_order = 'ASC';
 
 /******************************
  * MantisBT Reminder Settings *
@@ -1545,7 +1566,7 @@ $g_history_order = 'ASC';
  * are reminders stored as bugnotes
  * @global int $g_store_reminders
  */
-$g_store_reminders = ON;
+$MantisConfig->store_reminders = ON;
 
 /**
  * Automatically add recipients of reminders to monitor list, if they are not
@@ -1553,20 +1574,20 @@ $g_store_reminders = ON;
  * If recipients of the reminders are below the monitor threshold, they will not be added.
  * @global int $g_reminder_recipients_monitor_bug
  */
-$g_reminder_recipients_monitor_bug = ON;
+$MantisConfig->reminder_recipients_monitor_bug = ON;
 
 /**
  * Default Reminder View Status (VS_PUBLIC or VS_PRIVATE)
  * @global int $g_default_reminder_view_status
  */
-$g_default_reminder_view_status = VS_PUBLIC;
+$MantisConfig->default_reminder_view_status = VS_PUBLIC;
 
 /**
  * The minimum access level required to show up in the list of users who can receive a reminder.
  * The access level is that of the project to which the issue belongs.
  * @global int $g_reminder_receive_threshold
  */
-$g_reminder_receive_threshold = DEVELOPER;
+$MantisConfig->reminder_receive_threshold = DEVELOPER;
 
 /*********************************
  * MantisBT Sponsorship Settings *
@@ -1576,53 +1597,53 @@ $g_reminder_receive_threshold = DEVELOPER;
  * Whether to enable/disable the whole issue sponsorship feature
  * @global int $g_enable_sponsorship
  */
-$g_enable_sponsorship = OFF;
+$MantisConfig->enable_sponsorship = OFF;
 
 /**
  * Currency used for all sponsorships.
  * @global string $g_sponsorship_currency
  */
-$g_sponsorship_currency = 'US$';
+$MantisConfig->sponsorship_currency = 'US$';
 
 /**
  * Access level threshold needed to view the total sponsorship for an issue by
  * all users.
  * @global int $g_view_sponsorship_total_threshold
  */
-$g_view_sponsorship_total_threshold = VIEWER;
+$MantisConfig->view_sponsorship_total_threshold = VIEWER;
 
 /**
  * Access level threshold needed to view the users sponsoring an issue and the
  * sponsorship amount for each.
  * @global int $g_view_sponsorship_details_threshold
  */
-$g_view_sponsorship_details_threshold = VIEWER;
+$MantisConfig->view_sponsorship_details_threshold = VIEWER;
 
 /**
  * Access level threshold needed to allow user to sponsor issues.
  * @global int $g_sponsor_threshold
  */
-$g_sponsor_threshold = REPORTER;
+$MantisConfig->sponsor_threshold = REPORTER;
 
 /**
  * Access level required to be able to handle sponsored issues.
  * @global int $g_handle_sponsored_bugs_threshold
  */
-$g_handle_sponsored_bugs_threshold = DEVELOPER;
+$MantisConfig->handle_sponsored_bugs_threshold = DEVELOPER;
 
 /**
  * Access level required to be able to assign a sponsored issue to a user with
  * access level greater or equal to 'handle_sponsored_bugs_threshold'.
  * @global int $g_assign_sponsored_bugs_threshold
  */
-$g_assign_sponsored_bugs_threshold = MANAGER;
+$MantisConfig->assign_sponsored_bugs_threshold = MANAGER;
 
 /**
  * Minimum sponsorship amount. If the user enters a value less than this, an
  * error will be prompted.
  * @global int $g_minimum_sponsorship_amount
  */
-$g_minimum_sponsorship_amount = 5;
+$MantisConfig->minimum_sponsorship_amount = 5;
 
 /*********************************
  * MantisBT File Upload Settings *
@@ -1639,14 +1660,14 @@ $g_minimum_sponsorship_amount = 5;
  *   $g_allow_reporter_upload
  * @global int $g_allow_file_upload
  */
-$g_allow_file_upload = ON;
+$MantisConfig->allow_file_upload = ON;
 
 /**
  * Upload destination: specify actual location in project settings
  * DISK or DATABASE. FTP is now deprecated and will map to DISK.
  * @global int $g_file_upload_method
  */
-$g_file_upload_method = DATABASE;
+$MantisConfig->file_upload_method = DATABASE;
 
 /**
  * When using DISK for storing uploaded files, this setting control
@@ -1658,20 +1679,20 @@ $g_file_upload_method = DATABASE;
  * http://www.perlfect.com/articles/chmod.shtml
  * @global int $g_attachments_file_permissions
  */
-$g_attachments_file_permissions = 0400;
+$MantisConfig->attachments_file_permissions = 0400;
 
 /**
  * Maximum file size that can be uploaded
  * Also check your PHP settings (default is usually 2MBs)
  * @global int $g_max_file_size
  */
-$g_max_file_size = 5000000;
+$MantisConfig->max_file_size = 5000000;
 
 /**
  * Maximum number of files that can be uploaded simultaneously
  * @global int $g_file_upload_max_num
  */
-$g_file_upload_max_num = 1;
+$MantisConfig->file_upload_max_num = 1;
 
 /**
  * Files that are allowed or not allowed.  Separate items by commas.
@@ -1680,26 +1701,26 @@ $g_file_upload_max_num = 1;
  * $g_disallowed_files takes precedence over $g_allowed_files
  * @global string $g_allowed_files
  */
-$g_allowed_files = '';
+$MantisConfig->allowed_files = '';
 
 /**
  *
  * @global string $g_disallowed_files
  */
-$g_disallowed_files = '';
+$MantisConfig->disallowed_files = '';
 
 /**
  * prefix to be used for the file system names of files uploaded to projects.
  * Eg: doc-001-myprojdoc.zip
  * @global string $g_document_files_prefix
  */
-$g_document_files_prefix = 'doc';
+$MantisConfig->document_files_prefix = 'doc';
 
 /**
  * absolute path to the default upload folder.  Requires trailing / or \
  * @global string $g_absolute_path_default_upload_folder
  */
-$g_absolute_path_default_upload_folder = '';
+$MantisConfig->absolute_path_default_upload_folder = '';
 
 /**
  * Enable support for sending files to users via a more efficient X-Sendfile
@@ -1709,7 +1730,7 @@ $g_absolute_path_default_upload_folder = '';
  * are using.
  * @global int $g_file_download_method
  */
-$g_file_download_xsendfile_enabled = OFF;
+$MantisConfig->file_download_xsendfile_enabled = OFF;
 
 /**
  * The name of the X-Sendfile header to use. Each server tends to implement
@@ -1719,7 +1740,7 @@ $g_file_download_xsendfile_enabled = OFF;
  * uses X-Accel-Redirect and Lighttpd v1.4 uses X-LIGHTTPD-send-file.
  * @global string $g_file_download_xsendfile_header_name
  */
-$g_file_download_xsendfile_header_name = 'X-Sendfile';
+$MantisConfig->file_download_xsendfile_header_name = 'X-Sendfile';
 
 /**************************
  * MantisBT HTML Settings *
@@ -1731,7 +1752,7 @@ $g_file_download_xsendfile_header_name = 'X-Sendfile';
  * email addresses into clickable links
  * @global int $g_html_make_links
  */
-$g_html_make_links = ON;
+$MantisConfig->html_make_links = ON;
 
 /**
  * These are the valid html tags for multi-line fields (e.g. description)
@@ -1739,7 +1760,7 @@ $g_html_make_links = ON;
  * do NOT include tags that require attributes
  * @global string $g_html_valid_tags
  */
-$g_html_valid_tags = 'p, li, ul, ol, br, pre, i, b, u, em, strong';
+$MantisConfig->html_valid_tags = 'p, li, ul, ol, br, pre, i, b, u, em, strong';
 
 /**
  * These are the valid html tags for single line fields (e.g. issue summary).
@@ -1747,14 +1768,14 @@ $g_html_valid_tags = 'p, li, ul, ol, br, pre, i, b, u, em, strong';
  * do NOT include tags that require attributes
  * @global string $g_html_valid_tags_single_line
  */
-$g_html_valid_tags_single_line = 'i, b, u, em, strong';
+$MantisConfig->html_valid_tags_single_line = 'i, b, u, em, strong';
 
 /**
  * maximum length of the description in a dropdown menu (for search)
  * set to 0 to disable truncations
  * @global int $g_max_dropdown_length
  */
-$g_max_dropdown_length = 40;
+$MantisConfig->max_dropdown_length = 40;
 
 /**
  * This flag controls whether pre-formatted text (delimited by HTML pre tags
@@ -1762,7 +1783,7 @@ $g_max_dropdown_length = 40;
  * If turned off, the display may be wide when viewing the text
  * @global int $g_wrap_in_preformatted_text
  */
-$g_wrap_in_preformatted_text = ON;
+$MantisConfig->wrap_in_preformatted_text = ON;
 
 /************************
  * MantisBT HR Settings *
@@ -1772,13 +1793,13 @@ $g_wrap_in_preformatted_text = ON;
  * Horizontal Rule Size
  * @global int $g_hr_size
  */
-$g_hr_size = 1;
+$MantisConfig->hr_size = 1;
 
 /**
  * Horizontal Rule Width
  * @global int $g_hr_width
  */
-$g_hr_width = 50;
+$MantisConfig->hr_width = 50;
 
 /*********************************************
  * MantisBT Authentication and LDAP Settings *
@@ -1792,19 +1813,19 @@ $g_hr_width = 50;
  * to "fall back" to older methods if possible.
  * @global int $g_login_method
  */
-$g_login_method = MD5;
+$MantisConfig->login_method = MD5;
 
 /**
  * Re-authentication required for admin areas
  * @global int $g_reauthentication
  */
-$g_reauthentication = ON;
+$MantisConfig->reauthentication = ON;
 
 /**
  * Duration of the reauthentication timeout, in seconds
  * @global int $g_reauthentication_expiry
  */
-$g_reauthentication_expiry = TOKEN_EXPIRY_AUTHENTICATED;
+$MantisConfig->reauthentication_expiry = TOKEN_EXPIRY_AUTHENTICATED;
 
 
 /**
@@ -1824,20 +1845,20 @@ $g_reauthentication_expiry = TOKEN_EXPIRY_AUTHENTICATED;
  *
  * @global string $g_ldap_server
  */
-$g_ldap_server = 'ldaps://ldap.example.com/';
+$MantisConfig->ldap_server = 'ldaps://ldap.example.com/';
 
 /**
  * The root distinguished name for LDAP searches
  * @global string $g_ldap_root_dn
  */
-$g_ldap_root_dn = 'dc=example,dc=com';
+$MantisConfig->ldap_root_dn = 'dc=example,dc=com';
 
 /**
  * LDAP search filter for the organization
  * e.g. '(organizationname=*Traffic)'
  * @global string $g_ldap_organization
  */
-$g_ldap_organization = '';
+$MantisConfig->ldap_organization = '';
 
 /**
  * The LDAP Protocol Version, if 0, then the protocol version is not set.
@@ -1845,7 +1866,7 @@ $g_ldap_organization = '';
  *
  * @global int $g_ldap_protocol_version
  */
-$g_ldap_protocol_version = 0;
+$MantisConfig->ldap_protocol_version = 0;
 
 /**
  * Determines whether the LDAP library automatically follows referrals returned
@@ -1854,7 +1875,7 @@ $g_ldap_protocol_version = 0;
  *
  * @global int $g_ldap_follow_referrals
  */
-$g_ldap_follow_referrals = ON;
+$MantisConfig->ldap_follow_referrals = ON;
 
 /**
  * The distinguished name of the service account to use for binding to the
@@ -1863,7 +1884,7 @@ $g_ldap_follow_referrals = ON;
  *
  * @global string $g_ldap_bind_dn
  */
-$g_ldap_bind_dn = '';
+$MantisConfig->ldap_bind_dn = '';
 
 /**
  * The password for the service account used to establish the connection to
@@ -1871,34 +1892,34 @@ $g_ldap_bind_dn = '';
  *
  * @global string $g_ldap_bind_passwd
  */
-$g_ldap_bind_passwd = '';
+$MantisConfig->ldap_bind_passwd = '';
 
 /**
  * The LDAP field for username
  * Use 'sAMAccountName' for Active Directory
  * @global string $g_ldap_uid_field
  */
-$g_ldap_uid_field = 'uid';
+$MantisConfig->ldap_uid_field = 'uid';
 
 /**
  * The LDAP field for the user's real name (i.e. common name).
  * @global string $g_ldap_realname_field
  */
-$g_ldap_realname_field = 'cn';
+$MantisConfig->ldap_realname_field = 'cn';
 
 /**
  * Use the realname specified in LDAP (ON) rather than the one stored in the
  * database (OFF).
  * @global int $g_use_ldap_realname
  */
-$g_use_ldap_realname = OFF;
+$MantisConfig->use_ldap_realname = OFF;
 
 /**
  * Use the email address specified in LDAP (ON) rather than the one stored
  * in the database (OFF).
  * @global int $g_use_ldap_email
  */
-$g_use_ldap_email = OFF;
+$MantisConfig->use_ldap_email		= OFF;
 
 /**
  * This configuration option allows replacing the ldap server with a comma-
@@ -1914,7 +1935,7 @@ $g_use_ldap_email = OFF;
  * On production systems, this option should be set to ''.
  * @global int $g_ldap_simulation_file_path
  */
-$g_ldap_simulation_file_path = '';
+$MantisConfig->ldap_simulation_file_path = '';
 
 /*******************
  * Status Settings *
@@ -1924,19 +1945,19 @@ $g_ldap_simulation_file_path = '';
  * Status to assign to the bug when submitted.
  * @global int $g_bug_submit_status
  */
-$g_bug_submit_status = NEW_;
+$MantisConfig->bug_submit_status = NEW_;
 
 /**
  * Status to assign to the bug when assigned.
  * @global int $g_bug_assigned_status
  */
-$g_bug_assigned_status = ASSIGNED;
+$MantisConfig->bug_assigned_status = ASSIGNED;
 
 /**
  * Status to assign to the bug when reopened.
  * @global int $g_bug_reopen_status
  */
-$g_bug_reopen_status = FEEDBACK;
+$MantisConfig->bug_reopen_status = FEEDBACK;
 
 /**
  * Status to assign to the bug when feedback is required from the issue
@@ -1944,7 +1965,7 @@ $g_bug_reopen_status = FEEDBACK;
  * to $g_bug_assigned_status or $g_bug_submit_status.
  * @global int $g_bug_feedback_status
  */
-$g_bug_feedback_status = FEEDBACK;
+$MantisConfig->bug_feedback_status = FEEDBACK;
 
 /**
  * When a note is added to a bug currently in $g_bug_feedback_status, and the note
@@ -1953,20 +1974,20 @@ $g_bug_feedback_status = FEEDBACK;
  * developer.  Defaults to enabled.
  * @global boolean $g_reassign_on_feedback
  */
-$g_reassign_on_feedback = ON;
+$MantisConfig->reassign_on_feedback = ON;
 
 /**
  * Resolution to assign to the bug when reopened.
  * @global int $g_bug_reopen_resolution
  */
-$g_bug_reopen_resolution = REOPENED;
+$MantisConfig->bug_reopen_resolution = REOPENED;
 
 /**
  * Default resolution to assign to a bug when it is resolved as being a
  * duplicate of another issue.
  * @global int $g_bug_duplicate_resolution
  */
-$g_bug_duplicate_resolution = DUPLICATE;
+$MantisConfig->bug_duplicate_resolution = DUPLICATE;
 
 /**
  * Bug becomes readonly if its status is >= this status.  The bug becomes
@@ -1974,7 +1995,7 @@ $g_bug_duplicate_resolution = DUPLICATE;
  * threshold.
  * @global int $g_bug_readonly_status_threshold
  */
-$g_bug_readonly_status_threshold = RESOLVED;
+$MantisConfig->bug_readonly_status_threshold = RESOLVED;
 
 /**
  * Bug is resolved, ready to be closed or reopened.  In some custom
@@ -1982,7 +2003,7 @@ $g_bug_readonly_status_threshold = RESOLVED;
  * custom (FIXED or TESTED) status.
  * @global int $g_bug_resolved_status_threshold
  */
-$g_bug_resolved_status_threshold = RESOLVED;
+$MantisConfig->bug_resolved_status_threshold = RESOLVED;
 
 /**
  * Threshold resolution which denotes that a bug has been resolved and
@@ -1991,7 +2012,7 @@ $g_bug_resolved_status_threshold = RESOLVED;
  * resolved successfully.
  * @global int $g_bug_resolution_fixed_threshold
  */
-$g_bug_resolution_fixed_threshold = FIXED;
+$MantisConfig->bug_resolution_fixed_threshold = FIXED;
 
 /**
  * Threshold resolution which denotes that a bug has been resolved without
@@ -1999,14 +2020,14 @@ $g_bug_resolution_fixed_threshold = FIXED;
  * threshold are considered to be resolved in an unsuccessful way.
  * @global int $g_bug_resolution_not_fixed_threshold
  */
-$g_bug_resolution_not_fixed_threshold = UNABLE_TO_DUPLICATE;
+$MantisConfig->bug_resolution_not_fixed_threshold = UNABLE_TO_DUPLICATE;
 
 /**
  * Bug is closed.  In some custom installations a bug may be considered as
  * closed when it is moved to a custom (COMPLETED or IMPLEMENTED) status.
  * @global int $g_bug_closed_status_threshold
  */
-$g_bug_closed_status_threshold = CLOSED;
+$MantisConfig->bug_closed_status_threshold = CLOSED;
 
 /**
  * Automatically set status to ASSIGNED whenever a bug is assigned to a person.
@@ -2014,7 +2035,7 @@ $g_bug_closed_status_threshold = CLOSED;
  * the bug is in progress, rather than just put in a person's queue.
  * @global int $g_auto_set_status_to_assigned
  */
-$g_auto_set_status_to_assigned	= ON;
+$MantisConfig->auto_set_status_to_assigned	= ON;
 
 /**
  * 'status_enum_workflow' defines the workflow, and reflects a simple
@@ -2031,7 +2052,7 @@ $g_auto_set_status_to_assigned	= ON;
  * $g_status_enum_workflow[CLOSED] ='50:assigned';
  * @global array $g_status_enum_workflow
  */
-$g_status_enum_workflow = array();
+$MantisConfig->status_enum_workflow = array();
 
 /****************************
  * Bug Attachments Settings *
@@ -2045,7 +2066,7 @@ $g_status_enum_workflow = array();
  * by itself.
  * @global string $g_fileinfo_magic_db_file
  */
-$g_fileinfo_magic_db_file = '';
+$MantisConfig->fileinfo_magic_db_file = '';
 
 /**
  * Specifies the maximum size (in bytes) below which an attachment is
@@ -2053,13 +2074,13 @@ $g_fileinfo_magic_db_file = '';
  * To disable the previewing of attachments, set max size to 0.
  * @global int $g_preview_attachments_inline_max_size
  */
-$g_preview_attachments_inline_max_size = 256 * 1024;
+$MantisConfig->preview_attachments_inline_max_size = 256 * 1024;
 
 /**
  * Extensions for text files that can be expanded inline.
  * @global array $g_preview_text_extensions
  */
-$g_preview_text_extensions = array(
+$MantisConfig->preview_text_extensions = array(
 	'', 'txt', 'diff', 'patch'
 );
 
@@ -2067,7 +2088,7 @@ $g_preview_text_extensions = array(
  * Extensions for images that can be expanded inline.
  * @global array $g_preview_image_extensions
  */
-$g_preview_image_extensions = array(
+$MantisConfig->preview_image_extensions = array(
 	'bmp', 'png', 'gif', 'jpg', 'jpeg'
 );
 
@@ -2076,21 +2097,21 @@ $g_preview_image_extensions = array(
  * width should be imposed then it should be set to 0.
  * @global int $g_preview_max_width
  */
-$g_preview_max_width = 0;
+$MantisConfig->preview_max_width = 0;
 
 /**
  * Specifies the maximum height for the auto-preview feature. If no maximum
  * height should be imposed then it should be set to 0.
  * @global int $g_preview_max_height
  */
-$g_preview_max_height = 250;
+$MantisConfig->preview_max_height = 250;
 
 /**
  * access level needed to view bugs attachments.  View means to see the file
  * names, sizes, and timestamps of the attachments.
  * @global int $g_view_attachments_threshold
  */
-$g_view_attachments_threshold = VIEWER;
+$MantisConfig->view_attachments_threshold = VIEWER;
 
 /**
  * list of filetypes to view inline. This is a string of extensions separated
@@ -2098,62 +2119,62 @@ $g_view_attachments_threshold = VIEWER;
  * downloading, the attachment is viewed in the browser.
  * @global string $g_inline_file_exts
  */
-$g_inline_file_exts = 'gif,png,jpg,jpeg,bmp';
+$MantisConfig->inline_file_exts = 'gif,png,jpg,jpeg,bmp';
 
 /**
  * access level needed to download bug attachments
  * @global int $g_download_attachments_threshold
  */
-$g_download_attachments_threshold = VIEWER;
+$MantisConfig->download_attachments_threshold = VIEWER;
 
 /**
  * access level needed to delete bug attachments
  * @global int $g_delete_attachments_threshold
  */
-$g_delete_attachments_threshold = DEVELOPER;
+$MantisConfig->delete_attachments_threshold = DEVELOPER;
 
 /**
  * allow users to view attachments uploaded by themselves even if their access
  * level is below view_attachments_threshold.
  * @global int $g_allow_view_own_attachments
  */
-$g_allow_view_own_attachments = ON;
+$MantisConfig->allow_view_own_attachments = ON;
 
 /**
  * allow users to download attachments uploaded by themselves even if their
  * access level is below download_attachments_threshold.
  * @global int $g_allow_download_own_attachments
  */
-$g_allow_download_own_attachments = ON;
+$MantisConfig->allow_download_own_attachments = ON;
 
 /**
  * allow users to delete attachments uploaded by themselves even if their access
  * level is below delete_attachments_threshold.
  * @global int $g_allow_delete_own_attachments
  */
-$g_allow_delete_own_attachments = OFF;
+$MantisConfig->allow_delete_own_attachments = OFF;
 
 /**********************
- * Field Visibility
+ * Field Visibility   *
  **********************/
 
 /**
  * Enable or disable usage of the ETA field.
  * @global int $g_enable_eta
  */
-$g_enable_eta = OFF;
+$MantisConfig->enable_eta = OFF;
 
 /**
  * Enable or disable usage of the Projection field.
  * @global int $g_enable_projection
  */
-$g_enable_projection = OFF;
+$MantisConfig->enable_projection = OFF;
 
 /**
  * Enable or disable usage of the Product Build field.
  * @global int $g_enable_product_build
  */
-$g_enable_product_build = OFF;
+$MantisConfig->enable_product_build = OFF;
 
 /**
  * An array of optional fields to show on the bug report page.
@@ -2186,7 +2207,7 @@ $g_enable_product_build = OFF;
  *
  * @global array $g_bug_report_page_fields
  */
-$g_bug_report_page_fields = array(
+$MantisConfig->bug_report_page_fields = array(
 	'additional_info',
 	'attachments',
 	'category_id',
@@ -2248,7 +2269,7 @@ $g_bug_report_page_fields = array(
  *
  * @global array $g_bug_view_page_fields
  */
-$g_bug_view_page_fields = array (
+$MantisConfig->bug_view_page_fields = array (
 	'additional_info',
 	'attachments',
 	'category_id',
@@ -2322,7 +2343,7 @@ $g_bug_view_page_fields = array (
  *
  * @global array $g_bug_print_page_fields
  */
-$g_bug_print_page_fields = array (
+$MantisConfig->bug_print_page_fields = array (
 	'additional_info',
 	'attachments',
 	'category_id',
@@ -2395,7 +2416,7 @@ $g_bug_print_page_fields = array (
  *
  * @global array $g_bug_update_page_fields
  */
-$g_bug_update_page_fields = array (
+$MantisConfig->bug_update_page_fields = array (
 	'additional_info',
 	'category_id',
 	'date_submitted',
@@ -2471,7 +2492,7 @@ $g_bug_update_page_fields = array (
  *
  * @global array $g_bug_change_status_page_fields
  */
-$g_bug_change_status_page_fields = array (
+$MantisConfig->bug_change_status_page_fields = array (
 	'additional_info',
 	'attachments',
 	'category_id',
@@ -2511,7 +2532,7 @@ $g_bug_change_status_page_fields = array (
  * access level needed to report a bug
  * @global int $g_report_bug_threshold
  */
-$g_report_bug_threshold = REPORTER;
+$MantisConfig->report_bug_threshold = REPORTER;
 
 /**
  * access level needed to update bugs (i.e., the update_bug_page)
@@ -2519,14 +2540,14 @@ $g_report_bug_threshold = REPORTER;
  * and the pencil icon in view_all_bug_page
  * @global int $g_update_bug_threshold
  */
-$g_update_bug_threshold = UPDATER;
+$MantisConfig->update_bug_threshold = UPDATER;
 
 /**
  * Access level needed to monitor bugs.
  * Look in the constant_inc.php file if you want to set a different value.
  * @global int $g_monitor_bug_threshold
  */
-$g_monitor_bug_threshold = REPORTER;
+$MantisConfig->monitor_bug_threshold = REPORTER;
 
 /**
  * Access level needed to add other users to the list of users monitoring
@@ -2534,28 +2555,28 @@ $g_monitor_bug_threshold = REPORTER;
  * Look in the constant_inc.php file if you want to set a different value.
  * @global int $g_monitor_add_others_bug_threshold
  */
-$g_monitor_add_others_bug_threshold = DEVELOPER;
+$MantisConfig->monitor_add_others_bug_threshold = DEVELOPER;
 
 /**
  * Access level needed to delete other users from the list of users
  * monitoring a bug.
  * Look in the constant_inc.php file if you want to set a different value.
- * @global int $g_monitor_delete_others_bug_threshold
+ * @global int $g_monitor_add_others_bug_threshold
  */
-$g_monitor_delete_others_bug_threshold = DEVELOPER;
+$MantisConfig->monitor_delete_others_bug_threshold = DEVELOPER;
 
 /**
  * access level needed to view private bugs
  * Look in the constant_inc.php file if you want to set a different value
  * @global int $g_private_bug_threshold
  */
-$g_private_bug_threshold = DEVELOPER;
+$MantisConfig->private_bug_threshold = DEVELOPER;
 
 /**
  * access level needed to be able to be listed in the assign to field.
  * @global int $g_handle_bug_threshold
  */
-$g_handle_bug_threshold = DEVELOPER;
+$MantisConfig->handle_bug_threshold = DEVELOPER;
 
 /**
  * access level needed to show the Assign To: button bug_view*_page or
@@ -2564,41 +2585,39 @@ $g_handle_bug_threshold = DEVELOPER;
  * This defaults to $g_handle_bug_threshold
  * @global int $g_update_bug_assign_threshold
  */
-$g_update_bug_assign_threshold = '%handle_bug_threshold%';
+$MantisConfig->update_bug_assign_threshold = '%handle_bug_threshold%';
 
 /**
  * access level needed to view private bugnotes
  * Look in the constant_inc.php file if you want to set a different value
  * @global int $g_private_bugnote_threshold
  */
-$g_private_bugnote_threshold = DEVELOPER;
+$MantisConfig->private_bugnote_threshold = DEVELOPER;
 
 /**
  * access level needed to view handler in bug reports and notification email
- * @todo yarick123: now it is implemented for notification email only
  * @global int $g_view_handler_threshold
  */
-$g_view_handler_threshold = VIEWER;
+$MantisConfig->view_handler_threshold = VIEWER;
 
 /**
  * access level needed to view history in bug reports and notification email
- * @todo yarick123: now it is implemented for notification email only
  * @global int $g_view_history_threshold
  */
-$g_view_history_threshold = VIEWER;
+$MantisConfig->view_history_threshold = VIEWER;
 
 /**
  * access level needed to send a reminder from the bug view pages
  * set to NOBODY to disable the feature
  * @global int $g_bug_reminder_threshold
  */
-$g_bug_reminder_threshold = DEVELOPER;
+$MantisConfig->bug_reminder_threshold = DEVELOPER;
 
 /**
  * Access lever required to drop bug history revisions
  * @global int $g_bug_revision_drop_threshold
  */
-$g_bug_revision_drop_threshold = MANAGER;
+$MantisConfig->bug_revision_drop_threshold = MANAGER;
 
 /**
  * access level needed to upload files to the project documentation section
@@ -2606,7 +2625,7 @@ $g_bug_revision_drop_threshold = MANAGER;
  * See also: $g_upload_bug_file_threshold, $g_allow_file_upload
  * @global int $g_upload_project_file_threshold
  */
-$g_upload_project_file_threshold = MANAGER;
+$MantisConfig->upload_project_file_threshold = MANAGER;
 
 /**
  * access level needed to upload files to attach to a bug
@@ -2617,31 +2636,31 @@ $g_upload_project_file_threshold = MANAGER;
  *			$g_allow_reporter_upload
  * @global int $g_upload_bug_file_threshold
  */
-$g_upload_bug_file_threshold = REPORTER;
+$MantisConfig->upload_bug_file_threshold = REPORTER;
 
 /**
  * Add bugnote threshold
  * @global int $g_add_bugnote_threshold
  */
-$g_add_bugnote_threshold = REPORTER;
+$MantisConfig->add_bugnote_threshold = REPORTER;
 
 /**
  * Threshold at which a user can edit the bugnotes of other users
  * @global int $g_update_bugnote_threshold
  */
-$g_update_bugnote_threshold = DEVELOPER;
+$MantisConfig->update_bugnote_threshold = DEVELOPER;
 
 /**
  * Threshold needed to view project documentation
  * @global int $g_view_proj_doc_threshold
  */
-$g_view_proj_doc_threshold = ANYBODY;
+$MantisConfig->view_proj_doc_threshold = ANYBODY;
 
 /**
  * Site manager
  * @global int $g_manage_site_threshold
  */
-$g_manage_site_threshold = MANAGER;
+$MantisConfig->manage_site_threshold = MANAGER;
 
 /**
  * Threshold at which a user is considered to be a site administrator.
@@ -2652,56 +2671,56 @@ $g_manage_site_threshold = MANAGER;
  * It is strongly advised you leave this option alone.
  * @global int $g_admin_site_threshold
  */
-$g_admin_site_threshold = ADMINISTRATOR;
+$MantisConfig->admin_site_threshold = ADMINISTRATOR;
 
 /**
  * Threshold needed to manage a project: edit project
  * details (not to add/delete projects) ...etc.
  * @global int $g_manage_project_threshold
  */
-$g_manage_project_threshold = MANAGER;
+$MantisConfig->manage_project_threshold = MANAGER;
 
 /**
  * Threshold needed to add/delete/modify news
  * @global int $g_manage_news_threshold
  */
-$g_manage_news_threshold = MANAGER;
+$MantisConfig->manage_news_threshold = MANAGER;
 
 /**
  * Threshold required to delete a project
  * @global int $g_delete_project_threshold
  */
-$g_delete_project_threshold = ADMINISTRATOR;
+$MantisConfig->delete_project_threshold = ADMINISTRATOR;
 
 /**
  * Threshold needed to create a new project
  * @global int $g_create_project_threshold
  */
-$g_create_project_threshold = ADMINISTRATOR;
+$MantisConfig->create_project_threshold = ADMINISTRATOR;
 
 /**
  * Threshold needed to be automatically included in private projects
  * @global int $g_private_project_threshold
  */
-$g_private_project_threshold = ADMINISTRATOR;
+$MantisConfig->private_project_threshold = ADMINISTRATOR;
 
 /**
  * Threshold needed to manage user access to a project
  * @global int $g_project_user_threshold
  */
-$g_project_user_threshold = MANAGER;
+$MantisConfig->project_user_threshold = MANAGER;
 
 /**
  * Threshold needed to manage user accounts
  * @global int $g_manage_user_threshold
  */
-$g_manage_user_threshold = ADMINISTRATOR;
+$MantisConfig->manage_user_threshold = ADMINISTRATOR;
 
 /**
  * Delete bug threshold
  * @global int $g_delete_bug_threshold
  */
-$g_delete_bug_threshold = DEVELOPER;
+$MantisConfig->delete_bug_threshold = DEVELOPER;
 
 /**
  * Threshold at which a user can delete the bugnotes of other users.
@@ -2709,106 +2728,106 @@ $g_delete_bug_threshold = DEVELOPER;
  * $g_delete_bug_threshold.
  * @global string $g_delete_bugnote_threshold
  */
-$g_delete_bugnote_threshold = '%delete_bug_threshold%';
+$MantisConfig->delete_bugnote_threshold = '%delete_bug_threshold%';
 
 /**
  * Move bug threshold
  * @global int $g_move_bug_threshold
  */
-$g_move_bug_threshold = DEVELOPER;
+$MantisConfig->move_bug_threshold = DEVELOPER;
 
 /**
  * Threshold needed to set the view status while reporting a bug or a bug note.
  * @global int $g_set_view_status_threshold
  */
-$g_set_view_status_threshold = REPORTER;
+$MantisConfig->set_view_status_threshold = REPORTER;
 
 /**
  * Threshold needed to update the view status while updating a bug or a bug note.
  * This threshold should be greater or equal to $g_set_view_status_threshold.
  * @global int $g_change_view_status_threshold
  */
-$g_change_view_status_threshold = UPDATER;
+$MantisConfig->change_view_status_threshold = UPDATER;
 
 /**
  * Threshold needed to show the list of users monitoring a bug on the bug view pages.
  * @global int $g_show_monitor_list_threshold
  */
-$g_show_monitor_list_threshold = DEVELOPER;
+$MantisConfig->show_monitor_list_threshold = DEVELOPER;
 
 /**
  * Threshold needed to be able to use stored queries
  * @global int $g_stored_query_use_threshold
  */
-$g_stored_query_use_threshold = REPORTER;
+$MantisConfig->stored_query_use_threshold = REPORTER;
 
 /**
  * Threshold needed to be able to create stored queries
  * @global int $g_stored_query_create_threshold
  */
-$g_stored_query_create_threshold = DEVELOPER;
+$MantisConfig->stored_query_create_threshold = DEVELOPER;
 
 /**
  * Threshold needed to be able to create shared stored queries
  * @global int $g_stored_query_create_shared_threshold
  */
-$g_stored_query_create_shared_threshold = MANAGER;
+$MantisConfig->stored_query_create_shared_threshold = MANAGER;
 
 /**
  * Threshold needed to update readonly bugs.  Readonly bugs are identified via
  * $g_bug_readonly_status_threshold.
  * @global int $g_update_readonly_bug_threshold
  */
-$g_update_readonly_bug_threshold = MANAGER;
+$MantisConfig->update_readonly_bug_threshold = MANAGER;
 
 /**
  * threshold for viewing changelog
  * @global int $g_view_changelog_threshold
  */
-$g_view_changelog_threshold = VIEWER;
+$MantisConfig->view_changelog_threshold = VIEWER;
 
 /**
  * threshold for viewing roadmap
  * @global int $g_roadmap_view_threshold
  */
-$g_roadmap_view_threshold = VIEWER;
+$MantisConfig->roadmap_view_threshold = VIEWER;
 
 /**
  * threshold for updating roadmap, target_version, etc
  * @global int $g_roadmap_update_threshold
  */
-$g_roadmap_update_threshold = DEVELOPER;
+$MantisConfig->roadmap_update_threshold = DEVELOPER;
 
 /**
  * status change thresholds
  * @global int $g_update_bug_status_threshold
  */
-$g_update_bug_status_threshold = DEVELOPER;
+$MantisConfig->update_bug_status_threshold = DEVELOPER;
 
 /**
  * access level needed to re-open bugs
  * @global int $g_reopen_bug_threshold
  */
-$g_reopen_bug_threshold = DEVELOPER;
+$MantisConfig->reopen_bug_threshold = DEVELOPER;
 
 /**
  * access level needed to assign bugs to unreleased product versions
  * @global int $g_report_issues_for_unreleased_versions_threshold
  */
-$g_report_issues_for_unreleased_versions_threshold = DEVELOPER;
+$MantisConfig->report_issues_for_unreleased_versions_threshold = DEVELOPER;
 
 /**
  * access level needed to set a bug sticky
  * @global int $g_set_bug_sticky_threshold
  */
-$g_set_bug_sticky_threshold = MANAGER;
+$MantisConfig->set_bug_sticky_threshold = MANAGER;
 
 /**
  * The minimum access level for someone to be a member of the development team
  * and appear on the project information page.
  * @global int $g_development_team_threshold
  */
-$g_development_team_threshold = DEVELOPER;
+$MantisConfig->development_team_threshold = DEVELOPER;
 
 /**
  * this array sets the access thresholds needed to enter each status listed.
@@ -2821,7 +2840,7 @@ $g_development_team_threshold = DEVELOPER;
  * );
  * @global array $g_set_status_threshold
  */
-$g_set_status_threshold = array( NEW_ => REPORTER );
+$MantisConfig->set_status_threshold = array( NEW_ => REPORTER );
 
 /**
  * Threshold at which a user can edit his/her own bugnotes.
@@ -2829,7 +2848,7 @@ $g_set_status_threshold = array( NEW_ => REPORTER );
  * $g_update_bugnote_threshold.
  * @global int $g_bugnote_user_edit_threshold
  */
-$g_bugnote_user_edit_threshold = '%update_bugnote_threshold%';
+$MantisConfig->bugnote_user_edit_threshold = '%update_bugnote_threshold%';
 
 /**
  * Threshold at which a user can delete his/her own bugnotes.
@@ -2837,7 +2856,7 @@ $g_bugnote_user_edit_threshold = '%update_bugnote_threshold%';
  * $g_delete_bugnote_threshold.
  * @global int $g_bugnote_user_delete_threshold
  */
-$g_bugnote_user_delete_threshold = '%delete_bugnote_threshold%';
+$MantisConfig->bugnote_user_delete_threshold = '%delete_bugnote_threshold%';
 
 /**
  * Threshold at which a user can change the view state of his/her own bugnotes.
@@ -2845,48 +2864,48 @@ $g_bugnote_user_delete_threshold = '%delete_bugnote_threshold%';
  * $g_change_view_status_threshold.
  * @global int $g_bugnote_user_change_view_state_threshold
  */
-$g_bugnote_user_change_view_state_threshold = '%change_view_status_threshold%';
+$MantisConfig->bugnote_user_change_view_state_threshold = '%change_view_status_threshold%';
 
 /**
  * Allow a bug to have no category
  * @global int $g_allow_no_category
  */
-$g_allow_no_category = OFF;
+$MantisConfig->allow_no_category = OFF;
 
 /**
  * limit reporters. Set to ON if you wish to limit reporters to only viewing
  * bugs that they report.
  * @global int $g_limit_reporters
  */
-$g_limit_reporters = OFF;
+$MantisConfig->limit_reporters = OFF;
 
 /**
  * reporter can close. Allow reporters to close the bugs they reported, after
  * they are marked resolved.
  * @global int $g_allow_reporter_close
  */
-$g_allow_reporter_close	 = OFF;
+$MantisConfig->allow_reporter_close	 = OFF;
 
 /**
  * reporter can reopen. Allow reporters to reopen the bugs they reported, after
  * they are marked resolved.
  * @global int $g_allow_reporter_reopen
  */
-$g_allow_reporter_reopen = ON;
+$MantisConfig->allow_reporter_reopen = ON;
 
 /**
  * reporter can upload
  * Allow reporters to upload attachments to bugs they reported.
  * @global int $g_allow_reporter_upload
  */
-$g_allow_reporter_upload = ON;
+$MantisConfig->allow_reporter_upload = ON;
 
 /**
  * account delete
  * Allow users to delete their own accounts
  * @global int $g_allow_account_delete
  */
-$g_allow_account_delete = OFF;
+$MantisConfig->allow_account_delete = OFF;
 
 /**
  * Enable anonymous access to MantisBT. You must also specify
@@ -2894,7 +2913,7 @@ $g_allow_account_delete = OFF;
  * MantisBT with. The default setting is OFF.
  * @global int $g_allow_anonymous_login
  */
-$g_allow_anonymous_login = OFF;
+$MantisConfig->allow_anonymous_login = OFF;
 
 /**
  * Define the account which anonymous users will assume when using MantisBT.
@@ -2907,7 +2926,7 @@ $g_allow_anonymous_login = OFF;
  * MantisBT installation.
  * @global string $g_anonymous_account
  */
-$g_anonymous_account = '';
+$MantisConfig->anonymous_account = '';
 
 /**
  * Bug Linking
@@ -2916,7 +2935,7 @@ $g_anonymous_account = '';
  * eg. for bug: a link would be bug:98
  * @global string $g_bug_link_tag
  */
-$g_bug_link_tag = '#';
+$MantisConfig->bug_link_tag = '#';
 
 /**
  * Bugnote Linking
@@ -2925,7 +2944,7 @@ $g_bug_link_tag = '#';
  * eg. for bugnote: a link would be bugnote:98
  * @global string $g_bugnote_link_tag
  */
-$g_bugnote_link_tag = '~';
+$MantisConfig->bugnote_link_tag = '~';
 
 /**
  * Bug Count Linking
@@ -2936,7 +2955,7 @@ $g_bugnote_link_tag = '~';
  * permanently change the filter - 'view_all_set.php?type=1';
  * @global string $g_bug_count_hyperlink_prefix
  */
-$g_bug_count_hyperlink_prefix = 'view_all_set.php?type=1&amp;temporary=y';
+$MantisConfig->bug_count_hyperlink_prefix = 'view_all_set.php?type=1&amp;temporary=y';
 
 /**
  * The regular expression to use when validating new user login names
@@ -2949,7 +2968,7 @@ $g_bug_count_hyperlink_prefix = 'view_all_set.php?type=1&amp;temporary=y';
  * http://rubular.com/.
  * @global string $g_user_login_valid_regex
  */
-$g_user_login_valid_regex = '/^([a-z\d\-.+_ ]+(@[a-z\d\-.]+\.[a-z]{2,4})?)$/i';
+$MantisConfig->user_login_valid_regex = '/^([a-z\d\-.+_ ]+(@[a-z\d\-.]+\.[a-z]{2,4})?)$/i';
 
 /**
  * Default user name prefix used to filter the list of users in
@@ -2958,7 +2977,7 @@ $g_user_login_valid_regex = '/^([a-z\d\-.+_ ]+(@[a-z\d\-.]+\.[a-z]{2,4})?)$/i';
  * the manage users page takes a long time.
  * @global string $g_default_manage_user_prefix
  */
-$g_default_manage_user_prefix = 'ALL';
+$MantisConfig->default_manage_user_prefix = 'ALL';
 
 /**
  * Default tag prefix used to filter the list of tags in
@@ -2967,34 +2986,34 @@ $g_default_manage_user_prefix = 'ALL';
  * the manage tags page takes a long time.
  * @global string $g_default_manage_tag_prefix
  */
-$g_default_manage_tag_prefix = 'ALL';
+$MantisConfig->default_manage_tag_prefix = 'ALL';
 
 /**
  * CSV Export
  * Set the csv separator
  * @global string $g_csv_separator
  */
-$g_csv_separator = ',';
+$MantisConfig->csv_separator = ',';
 
 /**
  * CSV Export
  * Add Byte Order Mark (BOM) at the beginning of the file as it helps Excel display the file in UTF-8
  * @global string $g_csv_add_bom
  */
-$g_csv_add_bom = OFF;
+$MantisConfig->csv_add_bom = OFF;
 
 
 /**
  * The threshold required for users to be able to manage configuration of a project.
  * This includes workflow, email notifications, columns to view, and others.
  */
-$g_manage_configuration_threshold = MANAGER;
+$MantisConfig->manage_configuration_threshold = MANAGER;
 
 /**
  * threshold for users to view the system configurations
  * @global int $g_view_configuration_threshold
  */
-$g_view_configuration_threshold = ADMINISTRATOR;
+$MantisConfig->view_configuration_threshold = ADMINISTRATOR;
 
 /**
  * threshold for users to set the system configurations generically via
@@ -3005,7 +3024,7 @@ $g_view_configuration_threshold = ADMINISTRATOR;
  * trusted.
  * @global int $g_set_configuration_threshold
  */
-$g_set_configuration_threshold = ADMINISTRATOR;
+$MantisConfig->set_configuration_threshold = ADMINISTRATOR;
 
 /************************************
  * MantisBT Look and Feel Variables *
@@ -3015,7 +3034,7 @@ $g_set_configuration_threshold = ADMINISTRATOR;
  * status color codes, using the Tango color palette
  * @global array $g_status_colors
  */
-$g_status_colors = array(
+$MantisConfig->status_colors = array(
 	'new'          => '#fcbdbd', // red    (scarlet red #ef2929)
 	'feedback'     => '#e3b7eb', // purple (plum        #75507b)
 	'acknowledged' => '#ffcd85', // orange (orango      #f57900)
@@ -3030,33 +3049,33 @@ $g_status_colors = array(
  *  The bug id will be padded with 0's up to the size given
  * @global int $g_display_project_padding
  */
-$g_display_project_padding = 3;
+$MantisConfig->display_project_padding = 3;
 
 /**
  * The padding level when displaying bug ids
  *  The bug id will be padded with 0's up to the size given
  * @global int $g_display_bug_padding
  */
-$g_display_bug_padding = 7;
+$MantisConfig->display_bug_padding = 7;
 
 /**
  * The padding level when displaying bugnote ids
  *  The bugnote id will be padded with 0's up to the size given
  * @global int $g_display_bugnote_padding
  */
-$g_display_bugnote_padding = 7;
+$MantisConfig->display_bugnote_padding = 7;
 
 /**
  * colours for configuration display
  * @global string $g_colour_project
  */
-$g_colour_project = 'LightGreen';
+$MantisConfig->colour_project = 'LightGreen';
 
 /**
  * colours for configuration display
  * @global string $g_colour_global
  */
-$g_colour_global = 'LightBlue';
+$MantisConfig->colour_global = 'LightBlue';
 
 /*****************************
  * MantisBT Cookie Variables *
@@ -3070,13 +3089,13 @@ $g_colour_global = 'LightBlue';
  * @link http://php.net/function.setcookie
  * @global string $g_cookie_path
  */
-$g_cookie_path = '/';
+$MantisConfig->cookie_path = '/';
 
 /**
  * The domain that the MantisBT cookies are available to
  * @global string $g_cookie_domain
  */
-$g_cookie_domain = '';
+$MantisConfig->cookie_domain = '';
 
 /**
  * Version of the view_all_page cookie
@@ -3084,7 +3103,7 @@ $g_cookie_domain = '';
  * @see $g_view_all_cookie
  * @global string $g_cookie_version
  */
-$g_cookie_version = 'v8';
+$MantisConfig->cookie_version = 'v8';
 
 /**
  * Prefix for all MantisBT cookies
@@ -3095,49 +3114,49 @@ $g_cookie_version = 'v8';
  * @see $g_cookie_path
  * @global string $g_cookie_prefix
  */
-$g_cookie_prefix = 'MANTIS';
+$MantisConfig->cookie_prefix = 'MANTIS';
 
 /**
  *
  * @global string $g_string_cookie
  */
-$g_string_cookie = '%cookie_prefix%_STRING_COOKIE';
+$MantisConfig->string_cookie = '%cookie_prefix%_STRING_COOKIE';
 
 /**
  *
  * @global string $g_project_cookie
  */
-$g_project_cookie = '%cookie_prefix%_PROJECT_COOKIE';
+$MantisConfig->project_cookie = '%cookie_prefix%_PROJECT_COOKIE';
 
 /**
  *
  * @global string $g_view_all_cookie
  */
-$g_view_all_cookie = '%cookie_prefix%_VIEW_ALL_COOKIE';
+$MantisConfig->view_all_cookie = '%cookie_prefix%_VIEW_ALL_COOKIE';
 
 /**
  * Stores the filter criteria for the Manage User page
  * @global string $g_manage_users_cookie
  */
-$g_manage_users_cookie		= '%cookie_prefix%_MANAGE_USERS_COOKIE';
+$MantisConfig->manage_users_cookie		= '%cookie_prefix%_MANAGE_USERS_COOKIE';
 
 /**
  * Stores the filter criteria for the Manage Config Report page
  * @global string $g_manage_config_cookie
  */
-$g_manage_config_cookie		= '%cookie_prefix%_MANAGE_CONFIG_COOKIE';
+$MantisConfig->manage_cookie = '%cookie_prefix%_MANAGE_CONFIG_COOKIE';
 
 /**
  *
  * @global string $g_logout_cookie
  */
-$g_logout_cookie = '%cookie_prefix%_LOGOUT_COOKIE';
+$MantisConfig->logout_cookie = '%cookie_prefix%_LOGOUT_COOKIE';
 
 /**
  *
  * @global string $g_bug_list_cookie
  */
-$g_bug_list_cookie = '%cookie_prefix%_BUG_LIST_COOKIE';
+$MantisConfig->bug_list_cookie = '%cookie_prefix%_BUG_LIST_COOKIE';
 
 /*****************************
  * MantisBT Filter Variables *
@@ -3147,19 +3166,19 @@ $g_bug_list_cookie = '%cookie_prefix%_BUG_LIST_COOKIE';
  *
  * @global int $g_filter_by_custom_fields
  */
-$g_filter_by_custom_fields = ON;
+$MantisConfig->filter_by_custom_fields = ON;
 
 /**
  *
  * @global int $g_filter_custom_fields_per_row
  */
-$g_filter_custom_fields_per_row = 8;
+$MantisConfig->filter_custom_fields_per_row = 8;
 
 /**
  *
  * @global int $g_view_filters
  */
-$g_view_filters = SIMPLE_DEFAULT;
+$MantisConfig->view_filters = SIMPLE_DEFAULT;
 
 /**
  * This switch enables the use of AJAX to dynamically load and create filter
@@ -3168,21 +3187,21 @@ $g_view_filters = SIMPLE_DEFAULT;
  * will result in speed improvements and bandwidth reduction.
  * @global int $g_use_dynamic_filters
  */
-$g_use_dynamic_filters = ON;
+$MantisConfig->use_dynamic_filters = ON;
 
 /**
  * The threshold required for users to be able to create permalinks.  To turn
  * off this feature use NOBODY.
  * @global int $g_create_permalink_threshold
  */
-$g_create_permalink_threshold = DEVELOPER;
+$MantisConfig->create_permalink_threshold = DEVELOPER;
 
 /**
  * The service to use to create a short URL.  The %s will be replaced by the
  * long URL. To disable the feature set to ''.
  * @global string $g_create_short_url
  */
-$g_create_short_url = 'http://tinyurl.com/create.php?url=%s';
+$MantisConfig->create_short_url = 'http://tinyurl.com/create.php?url=%s';
 
 /*************************************
  * MantisBT Database Table Variables *
@@ -3194,7 +3213,7 @@ $g_create_short_url = 'http://tinyurl.com/create.php?url=%s';
  * should be set to blank or kept as short as possible (e.g. 'm')
  * @global string $g_db_table_prefix
  */
-$g_db_table_prefix = 'mantis';
+$MantisConfig->db_table_prefix = 'mantis';
 
 /**
  * plugin table prefix
@@ -3202,7 +3221,7 @@ $g_db_table_prefix = 'mantis';
  * should be kept as short as possible (e.g. 'plg')
  * @global string $g_db_table_prefix
  */
-$g_db_table_plugin_prefix	= 'plugin';
+$MantisConfig->db_table_plugin_prefix	= 'plugin';
 
 /**
  * table suffix
@@ -3210,7 +3229,7 @@ $g_db_table_plugin_prefix	= 'plugin';
  * should be set to blank or kept as short as possible
  * @global string $g_db_table_suffix
  */
-$g_db_table_suffix = '_table';
+$MantisConfig->db_table_suffix = '_table';
 
 /*************************
  * MantisBT Enum Strings *
@@ -3221,48 +3240,48 @@ $g_db_table_suffix = '_table';
  * (if enabled) directly use MantisBT to edit them.
  * @global string $g_access_levels_enum_string
  */
-$g_access_levels_enum_string = '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator';
+$MantisConfig->access_levels_enum_string = '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator';
 
 /**
  *
  * @global string $g_project_status_enum_string
  */
-$g_project_status_enum_string = '10:development,30:release,50:stable,70:obsolete';
+$MantisConfig->project_status_enum_string = '10:development,30:release,50:stable,70:obsolete';
 
 /**
  *
  * @global string $g_project_view_state_enum_string
  */
-$g_project_view_state_enum_string = '10:public,50:private';
+$MantisConfig->project_view_state_enum_string = '10:public,50:private';
 
 /**
  *
  * @global string $g_view_state_enum_string
  */
-$g_view_state_enum_string = '10:public,50:private';
+$MantisConfig->view_state_enum_string = '10:public,50:private';
 
 /**
  *
  * @global string $g_priority_enum_string
  */
-$g_priority_enum_string = '10:none,20:low,30:normal,40:high,50:urgent,60:immediate';
+$MantisConfig->priority_enum_string = '10:none,20:low,30:normal,40:high,50:urgent,60:immediate';
 /**
  *
  * @global string $g_severity_enum_string
  */
-$g_severity_enum_string = '10:feature,20:trivial,30:text,40:tweak,50:minor,60:major,70:crash,80:block';
+$MantisConfig->severity_enum_string = '10:feature,20:trivial,30:text,40:tweak,50:minor,60:major,70:crash,80:block';
 
 /**
  *
  * @global string $g_reproducibility_enum_string
  */
-$g_reproducibility_enum_string = '10:always,30:sometimes,50:random,70:have not tried,90:unable to duplicate,100:N/A';
+$MantisConfig->reproducibility_enum_string = '10:always,30:sometimes,50:random,70:have not tried,90:unable to duplicate,100:N/A';
 
 /**
  *
  * @global string $g_status_enum_string
  */
-$g_status_enum_string = '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved,90:closed';
+$MantisConfig->status_enum_string = '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved,90:closed';
 
 /**
  * @@@ for documentation, the values in this list are also used to define
@@ -3272,31 +3291,31 @@ $g_status_enum_string = '10:new,20:feedback,30:acknowledged,40:confirmed,50:assi
  * expected to be English names for the states
  * @global string $g_resolution_enum_string
  */
-$g_resolution_enum_string = '10:open,20:fixed,30:reopened,40:unable to duplicate,50:not fixable,60:duplicate,70:not a bug,80:suspended,90:wont fix';
+$MantisConfig->resolution_enum_string = '10:open,20:fixed,30:reopened,40:unable to duplicate,50:not fixable,60:duplicate,70:not a bug,80:suspended,90:wont fix';
 
 /**
  *
  * @global string $g_projection_enum_string
  */
-$g_projection_enum_string = '10:none,30:tweak,50:minor fix,70:major rework,90:redesign';
+$MantisConfig->projection_enum_string = '10:none,30:tweak,50:minor fix,70:major rework,90:redesign';
 
 /**
  *
  * @global string $g_eta_enum_string
  */
-$g_eta_enum_string = '10:none,20:< 1 day,30:2-3 days,40:< 1 week,50:< 1 month,60:> 1 month';
+$MantisConfig->eta_enum_string = '10:none,20:< 1 day,30:2-3 days,40:< 1 week,50:< 1 month,60:> 1 month';
 
 /**
  *
  * @global string $g_sponsorship_enum_string
  */
-$g_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
+$MantisConfig->sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
 
 /**
  *
  * @global string $g_custom_field_type_enum_string
  */
-$g_custom_field_type_enum_string = '0:string,1:numeric,2:float,3:enum,4:email,5:checkbox,6:list,7:multiselection list,8:date,9:radio,10:textarea';
+$MantisConfig->custom_field_type_enum_string = '0:string,1:numeric,2:float,3:enum,4:email,5:checkbox,6:list,7:multiselection list,8:date,9:radio,10:textarea';
 
 /*********************************
  * MantisBT Javascript Variables *
@@ -3306,7 +3325,7 @@ $g_custom_field_type_enum_string = '0:string,1:numeric,2:float,3:enum,4:email,5:
  * allow the use of Javascript?
  * @global int $g_use_javascript
  */
-$g_use_javascript = ON;
+$MantisConfig->use_javascript = ON;
 
 /*******************************
  * MantisBT Speed Optimisation *
@@ -3325,13 +3344,13 @@ $g_use_javascript = ON;
  * at the command line (look for 'zlib')
  * @global int $g_compress_html
  */
-$g_compress_html = ON;
+$MantisConfig->compress_html = ON;
 
 /**
  * Use persistent database connections
  * @global int $g_use_persistent_connections
  */
-$g_use_persistent_connections = OFF;
+$MantisConfig->use_persistent_connections = OFF;
 
 /*****************
  * Include files *
@@ -3341,7 +3360,7 @@ $g_use_persistent_connections = OFF;
  * Specify your top/bottom include file (logos, banners, etc)
  * @global string $g_bottom_include_page
  */
-$g_bottom_include_page = '%absolute_path%';
+$MantisConfig->bottom_include_page = '%absolute_path%';
 
 /**
  * Specify your top/bottom include file (logos, banners, etc). If a top file is
@@ -3355,26 +3374,26 @@ $g_bottom_include_page = '%absolute_path%';
  *
  * @global string $g_top_include_page
  */
-$g_top_include_page = '%absolute_path%';
+$MantisConfig->top_include_page = '%absolute_path%';
 
 /**
  * CSS file
  * @global string $g_css_include_file
  */
-$g_css_include_file = 'default.css';
+$MantisConfig->css_include_file = 'default.css';
 
 /**
  * RTL CSS file
  * @global string $g_css_rtl_include_file
  */
-$g_css_rtl_include_file = 'rtl.css';
+$MantisConfig->css_rtl_include_file = 'rtl.css';
 
 
 /**
  * meta tags
  * @global string $g_meta_include_file
  */
-$g_meta_include_file = '%absolute_path%meta_inc.php';
+$MantisConfig->meta_include_file = '%absolute_path%meta_inc.php';
 
 /****************
  * Redirections *
@@ -3384,13 +3403,13 @@ $g_meta_include_file = '%absolute_path%meta_inc.php';
  * Default page after Login or Set Project
  * @global string $g_default_home_page
  */
-$g_default_home_page = 'my_view_page.php';
+$MantisConfig->default_home_page = 'my_view_page.php';
 
 /**
  * Specify where the user should be sent after logging out.
  * @global string $g_logout_redirect_page
  */
-$g_logout_redirect_page = 'login_page.php';
+$MantisConfig->logout_redirect_page = 'login_page.php';
 
 /***********
  * Headers *
@@ -3406,7 +3425,7 @@ $g_logout_redirect_page = 'login_page.php';
  * http://msdn.microsoft.com/en-us/library/ms537343.aspx for more information.
  * @global array $g_custom_headers
  */
-$g_custom_headers = array();
+$MantisConfig->custom_headers = array();
 
 /**
  * Browser Caching Control
@@ -3437,19 +3456,19 @@ $g_custom_headers = array();
  * Threshold needed to manage custom fields
  * @global int $g_manage_custom_fields_threshold
  */
-$g_manage_custom_fields_threshold = ADMINISTRATOR;
+$MantisConfig->manage_custom_fields_threshold = ADMINISTRATOR;
 
 /**
  * Threshold needed to link/unlink custom field to/from a project
  * @global int $g_custom_field_link_threshold
  */
-$g_custom_field_link_threshold = MANAGER;
+$MantisConfig->custom_field_link_threshold = MANAGER;
 
 /**
  * Whether to start editng a custom field immediately after creating it
  * @global int $g_custom_field_edit_after_create
  */
-$g_custom_field_edit_after_create = ON;
+$MantisConfig->custom_field_edit_after_create = ON;
 
 /****************
  * Custom Menus *
@@ -3467,7 +3486,7 @@ $g_custom_field_edit_after_create = ON;
  * if the current logged in user has the appropriate access level.
  * @global array $g_main_menu_custom_options
  */
-$g_main_menu_custom_options = array();
+$MantisConfig->main_menu_custom_options = array();
 
 /*********
  * Icons *
@@ -3481,7 +3500,7 @@ $g_main_menu_custom_options = array();
  * - All icons will be displayed as 16x16 pixels.
  * @global array $g_file_type_icons
  */
-$g_file_type_icons = array(
+$MantisConfig->file_type_icons = array(
 	''	=> 'text.gif',
 	'7z'	=> 'zip.gif',
 	'ace'	=> 'zip.gif',
@@ -3556,7 +3575,7 @@ $g_file_type_icons = array(
  *
  * @global array $g_file_download_content_type_overrides
  */
-$g_file_download_content_type_overrides = array (
+$MantisConfig->file_download_content_type_overrides = array (
 	'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 	'dotx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.template',
 	'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
@@ -3571,7 +3590,7 @@ $g_file_download_content_type_overrides = array (
  * Status to icon mapping
  * @global array $g_status_icon_arr
  */
-$g_status_icon_arr = array (
+$MantisConfig->status_icon_arr = array (
 	NONE      => '',
 	LOW       => 'priority_low_1.gif',
 	NORMAL    => 'priority_normal.gif',
@@ -3584,7 +3603,7 @@ $g_status_icon_arr = array (
  * Sort direction to icon mapping
  * @global array $g_sort_icon_arr
  */
-$g_sort_icon_arr = array (
+$MantisConfig->sort_icon_arr = array (
 	ASCENDING  => 'up.gif',
 	DESCENDING => 'down.gif'
 );
@@ -3593,7 +3612,7 @@ $g_sort_icon_arr = array (
  * Read status to icon mapping
  * @global array $g_unread_icon_arr
  */
-$g_unread_icon_arr = array (
+$MantisConfig->unread_icon_arr = array (
 	READ   => 'mantis_space.gif',
 	UNREAD => 'unread.gif'
 );
@@ -3606,14 +3625,14 @@ $g_unread_icon_arr = array (
  * Number of bugs shown in each box
  * @global int $g_my_view_bug_count
  */
-$g_my_view_bug_count = 10;
+$MantisConfig->my_view_bug_count = 10;
 
 /**
  * Boxes to be shown and their order
  * A box that is not to be shown can have its value set to 0
  * @global array $g_my_view_boxes
  */
-$g_my_view_boxes = array (
+$MantisConfig->my_view_boxes = array (
 	'assigned'      => '1',
 	'unassigned'    => '2',
 	'reported'      => '3',
@@ -3630,7 +3649,7 @@ $g_my_view_boxes = array (
  * boxes start at the same vertical position)
  * @global int $g_my_view_boxes_fixed_position
  */
-$g_my_view_boxes_fixed_position = ON;
+$MantisConfig->my_view_boxes_fixed_position = ON;
 
 
 /*************
@@ -3642,7 +3661,7 @@ $g_my_view_boxes_fixed_position = ON;
  * syndication is not used, it is recommended to set it to OFF.
  * @global int $g_rss_enabled
  */
-$g_rss_enabled = ON;
+$MantisConfig->rss_enabled = ON;
 
 
 /*********************
@@ -3661,7 +3680,7 @@ $g_rss_enabled = ON;
  * core/relationship_graph_api.php for more information.
  * @global int $g_relationship_graph_enable
  */
-$g_relationship_graph_enable = OFF;
+$MantisConfig->relationship_graph_enable = OFF;
 
 /**
  * Complete path to dot and neato tools. Your webserver must have execute
@@ -3669,14 +3688,14 @@ $g_relationship_graph_enable = OFF;
  * NOTE: On windows, the IIS user may require permissions to cmd.exe to be able to use PHP's proc_open
  * @global string $g_dot_tool
  */
-$g_dot_tool = '/usr/bin/dot';
+$MantisConfig->dot_tool = '/usr/bin/dot';
 /**
  * Complete path to dot and neato tools. Your webserver must have execute
  * permission to these programs in order to generate relationship graphs.
  * NOTE: On windows, the IIS user may require permissions to cmd.exe to be able to use PHP's proc_open
  * @global string $g_neato_tool
  */
-$g_neato_tool = '/usr/bin/neato';
+$MantisConfig->neato_tool = '/usr/bin/neato';
 
 /**
  * Font name and size, as required by Graphviz. If Graphviz fails to run
@@ -3684,13 +3703,13 @@ $g_neato_tool = '/usr/bin/neato';
  * Linux, try the name of the font file without the extension.
  * @global string $g_relationship_graph_fontname
  */
-$g_relationship_graph_fontname = 'Arial';
+$MantisConfig->relationship_graph_fontname = 'Arial';
 
 /**
  *
  * @global int $g_relationship_graph_fontsize
  */
-$g_relationship_graph_fontsize = 8;
+$MantisConfig->relationship_graph_fontsize = 8;
 
 /**
  * Default dependency orientation. If you have issues with lots of children
@@ -3698,7 +3717,7 @@ $g_relationship_graph_fontsize = 8;
  * "chained" issue dependencies, change to 'vertical'.
  * @global string $g_relationship_graph_orientation
  */
-$g_relationship_graph_orientation = 'horizontal';
+$MantisConfig->relationship_graph_orientation = 'horizontal';
 
 /**
  * Max depth for relation graphs. This only affects relation graphs,
@@ -3707,7 +3726,7 @@ $g_relationship_graph_orientation = 'horizontal';
  * viewing.
  * @global int $g_relationship_graph_max_depth
  */
-$g_relationship_graph_max_depth = 2;
+$MantisConfig->relationship_graph_max_depth = 2;
 
 /**
  * If set to ON, clicking on an issue on the relationship graph will open
@@ -3716,21 +3735,21 @@ $g_relationship_graph_max_depth = 2;
  *
  * @global int $g_relationship_graph_view_on_click
  */
-$g_relationship_graph_view_on_click = OFF;
+$MantisConfig->relationship_graph_view_on_click = OFF;
 
 /**
  * Number of years in the past that custom date fields will display in
  * drop down boxes.
  * @global int $g_backward_year_count
  */
-$g_backward_year_count = 4;
+$MantisConfig->backward_year_count = 4;
 
 /**
  * Number of years in the future that custom date fields will display in
  * drop down boxes.
  * @global int $g_forward_year_count
  */
-$g_forward_year_count = 4;
+$MantisConfig->forward_year_count = 4;
 
 /**
  * Custom Group Actions
@@ -3766,7 +3785,7 @@ $g_forward_year_count = 4;
  *
  * @global array $g_custom_group_actions
  */
-$g_custom_group_actions = array();
+$MantisConfig->custom_group_actions = array();
 
 /********************
  * Wiki Integration *
@@ -3776,27 +3795,27 @@ $g_custom_group_actions = array();
  * Wiki Integration Enabled?
  * @global int $g_wiki_enable
  */
-$g_wiki_enable = OFF;
+$MantisConfig->wiki_enable = OFF;
 
 /**
  * Wiki Engine.
  * Supported engines: 'dokuwiki', 'mediawiki', 'twiki', 'wikka', 'xwiki'
  * @global string $g_wiki_engine
  */
-$g_wiki_engine = '';
+$MantisConfig->wiki_engine = '';
 
 /**
  * Wiki namespace to be used as root for all pages relating to this MantisBT
  * installation.
  * @global string $g_wiki_root_namespace
  */
-$g_wiki_root_namespace = 'mantis';
+$MantisConfig->wiki_root_namespace = 'mantis';
 
 /**
  * URL under which the wiki engine is hosted.  Must be on the same server.
  * @global string $g_wiki_engine_url
  */
-$g_wiki_engine_url = $t_protocol . '://' . $t_host . '/%wiki_engine%/';
+$MantisConfig->wiki_engine_url = '/%wiki_engine%/';
 
 /********************
  * Recently Visited *
@@ -3806,13 +3825,13 @@ $g_wiki_engine_url = $t_protocol . '://' . $t_host . '/%wiki_engine%/';
  * Whether to show the most recently visited issues or not.  At the moment we always track them even if this flag is off.
  * @global int $g_recently_visited
  */
-$g_recently_visited = ON;
+$MantisConfig->recently_visited = ON;
 
 /**
  * The maximum number of issues to keep in the recently visited list.
  * @global int $g_recently_visited_count
  */
-$g_recently_visited_count = 5;
+$MantisConfig->recently_visited_count = 5;
 
 /***************
  * Bug Tagging *
@@ -3822,49 +3841,49 @@ $g_recently_visited_count = 5;
  * String that will separate tags as entered for input
  * @global int $g_tag_separator
  */
-$g_tag_separator = ',';
+$MantisConfig->tag_separator = ',';
 
 /**
  * Access level required to view tags attached to a bug
  * @global int $g_tag_view_threshold
  */
-$g_tag_view_threshold = VIEWER;
+$MantisConfig->tag_view_threshold = VIEWER;
 
 /**
  * Access level required to attach tags to a bug
  * @global int $g_tag_attach_threshold
  */
-$g_tag_attach_threshold = REPORTER;
+$MantisConfig->tag_attach_threshold = REPORTER;
 
 /**
  * Access level required to detach tags from a bug
  * @global int $g_tag_detach_threshold
  */
-$g_tag_detach_threshold = DEVELOPER;
+$MantisConfig->tag_detach_threshold = DEVELOPER;
 
 /**
  * Access level required to detach tags attached by the same user
  * @global int $g_tag_detach_own_threshold
  */
-$g_tag_detach_own_threshold = REPORTER;
+$MantisConfig->tag_detach_own_threshold = REPORTER;
 
 /**
  * Access level required to create new tags
  * @global int $g_tag_create_threshold
  */
-$g_tag_create_threshold = REPORTER;
+$MantisConfig->tag_create_threshold = REPORTER;
 
 /**
  * Access level required to edit tag names and descriptions
  * @global int $g_tag_edit_threshold
  */
-$g_tag_edit_threshold = DEVELOPER;
+$MantisConfig->tag_edit_threshold = DEVELOPER;
 
 /**
  * Access level required to edit descriptions by the creating user
  * @global int $g_tag_edit_own_threshold
  */
-$g_tag_edit_own_threshold = REPORTER;
+$MantisConfig->tag_edit_own_threshold = REPORTER;
 
 /*****************
  * Time tracking *
@@ -3874,43 +3893,43 @@ $g_tag_edit_own_threshold = REPORTER;
  * Turn on Time Tracking accounting
  * @global int $g_time_tracking_enabled
  */
-$g_time_tracking_enabled = OFF;
+$MantisConfig->time_tracking_enabled = OFF;
 
 /**
  * A billing sums
  * @global int $g_time_tracking_with_billing
  */
-$g_time_tracking_with_billing = OFF;
+$MantisConfig->time_tracking_with_billing = OFF;
 
 /**
  * Stop watch to build time tracking field
  * @global int $g_time_tracking_stopwatch
  */
-$g_time_tracking_stopwatch = OFF;
+$MantisConfig->time_tracking_stopwatch = OFF;
 
 /**
  * access level required to view time tracking information
  * @global int $g_time_tracking_view_threshold
  */
-$g_time_tracking_view_threshold = DEVELOPER;
+$MantisConfig->time_tracking_view_threshold = DEVELOPER;
 
 /**
  * access level required to add/edit time tracking information
  * @global int $g_time_tracking_edit_threshold
  */
-$g_time_tracking_edit_threshold = DEVELOPER;
+$MantisConfig->time_tracking_edit_threshold = DEVELOPER;
 
 /**
  * access level required to run reports
  * @global int $g_time_tracking_reporting_threshold
  */
-$g_time_tracking_reporting_threshold = MANAGER;
+$MantisConfig->time_tracking_reporting_threshold = MANAGER;
 
 /**
  * allow time tracking to be recorded without a bugnote
  * @global int $g_time_tracking_without_note
  */
-$g_time_tracking_without_note = ON;
+$MantisConfig->time_tracking_without_note = ON;
 
 /****************************
  * Profile Related Settings *
@@ -3920,26 +3939,26 @@ $g_time_tracking_without_note = ON;
  * Enable Profiles
  * @global int $g_enable_profiles
  */
-$g_enable_profiles = ON;
+$MantisConfig->enable_profiles = ON;
 
 /**
  * Add profile threshold
  * @global int $g_add_profile_threshold
  */
-$g_add_profile_threshold = REPORTER;
+$MantisConfig->add_profile_threshold = REPORTER;
 
 /**
  * Threshold needed to be able to create and modify global profiles
  * @global int $g_manage_global_profile_threshold
  */
-$g_manage_global_profile_threshold = MANAGER;
+$MantisConfig->manage_global_profile_threshold = MANAGER;
 
 /**
  * Allows the users to enter free text when reporting/updating issues
  * for the profile related fields (i.e. platform, os, os build)
  * @global int $g_allow_freetext_in_profile_fields
  */
-$g_allow_freetext_in_profile_fields = ON;
+$MantisConfig->allow_freetext_in_profile_fields = ON;
 
 /*****************
  * Plugin System *
@@ -3949,26 +3968,26 @@ $g_allow_freetext_in_profile_fields = ON;
  * enable/disable plugins
  * @global int $g_plugins_enabled
  */
-$g_plugins_enabled = ON;
+$MantisConfig->plugins_enabled = ON;
 
 /**
  * absolute path to plugin files.
  * @global string $g_plugin_path
  */
-$g_plugin_path = $g_absolute_path . 'plugins' . DIRECTORY_SEPARATOR;
+$MantisConfig->plugin_path = $MantisConfig->absolute_path . 'plugins/';
 
 /**
  * management threshold.
  * @global int $g_manage_plugin_threshold
  */
-$g_manage_plugin_threshold = ADMINISTRATOR;
+$MantisConfig->manage_plugin_threshold = ADMINISTRATOR;
 
 /**
 * A mapping of file extensions to mime types, used when serving resources from plugins
 *
 * @global array $g_plugin_mime_types
 */
-$g_plugin_mime_types = array(
+$MantisConfig->plugin_mime_types = array(
 	    'css' => 'text/css',
 	    'js'  => 'text/javascript',
 	    'gif' => 'image/gif',
@@ -3994,7 +4013,7 @@ $g_plugin_mime_types = array(
  *
  * @global $g_plugins_force_installed
  */
-$g_plugins_force_installed = array();
+$MantisConfig->plugins_force_installed = array();
 
 /************
  * Due Date *
@@ -4004,13 +4023,13 @@ $g_plugins_force_installed = array();
  * threshold to update due date submitted
  * @global int $g_due_date_update_threshold
  */
-$g_due_date_update_threshold = NOBODY;
+$MantisConfig->due_date_update_threshold = NOBODY;
 
 /**
  * threshold to see due date
  * @global int $g_due_date_view_threshold
  */
-$g_due_date_view_threshold = NOBODY;
+$MantisConfig->due_date_view_threshold = NOBODY;
 
 /*****************
  * Sub-projects
@@ -4019,12 +4038,12 @@ $g_due_date_view_threshold = NOBODY;
 /**
  * Sub-projects should inherit categories from parent projects.
  */
-$g_subprojects_inherit_categories = ON;
+$MantisConfig->subprojects_inherit_categories = ON;
 
 /**
  * Sub-projects should inherit versions from parent projects.
  */
-$g_subprojects_inherit_versions = ON;
+$MantisConfig->subprojects_inherit_versions = ON;
 
 /**********************************
  * Debugging / Developer Settings *
@@ -4036,14 +4055,14 @@ $g_subprojects_inherit_versions = ON;
  *
  * @global int $g_show_timer
  */
-$g_show_timer = OFF;
+$MantisConfig->show_timer = OFF;
 
 /**
  * Show memory usage for each page load in the footer.
  *
  * @global int $g_show_memory_usage
  */
-$g_show_memory_usage = OFF;
+$MantisConfig->show_memory_usage = OFF;
 
 /**
  * This is used for debugging the e-mail features in mantis. By default this is blank.
@@ -4052,14 +4071,14 @@ $g_show_memory_usage = OFF;
  * Note: The email is NOT send to the recipients, only to the debug email address.
  * @global string $g_debug_email
  */
-$g_debug_email = '';
+$MantisConfig->debug_email = '';
 
 /**
  * Shows the total number/unique number of queries executed to serve the page.
  *
  * @global int $g_show_queries_count
  */
-$g_show_queries_count = OFF;
+$MantisConfig->show_queries_count = OFF;
 
 /**
  * Errors Display method
@@ -4085,7 +4104,7 @@ $g_show_queries_count = OFF;
  *
  * @global array $g_display_errors
  */
-$g_display_errors = array(
+$MantisConfig->display_errors = array(
 	E_WARNING      => DISPLAY_ERROR_INLINE,
 	E_NOTICE       => DISPLAY_ERROR_NONE,
 	E_USER_ERROR   => DISPLAY_ERROR_HALT,
@@ -4104,7 +4123,7 @@ $g_display_errors = array(
  *
  * @global int $g_show_detailed_errors
  */
-$g_show_detailed_errors = OFF;
+$MantisConfig->show_detailed_errors = OFF;
 
 /**
  * Debug messages
@@ -4116,7 +4135,7 @@ $g_show_detailed_errors = OFF;
  *
  * @global int $g_stop_on_errors
  */
-$g_stop_on_errors = OFF;
+$MantisConfig->stop_on_errors = OFF;
 
 /**
  * System logging
@@ -4132,7 +4151,7 @@ $g_stop_on_errors = OFF;
  *
  * @global int $g_log_level
  */
-$g_log_level = LOG_NONE;
+$MantisConfig->log_level = LOG_NONE;
 
 /**
  * Specifies where the log data goes
@@ -4151,7 +4170,7 @@ $g_log_level = LOG_NONE;
  *
  * @global string $g_log_destination
  */
-$g_log_destination = '';
+$MantisConfig->log_destination = '';
 
 /**
  * Indicates the access level required for a user to see the log output
@@ -4161,7 +4180,7 @@ $g_log_destination = '';
  *
  * @global int $g_show_log_threshold
  */
-$g_show_log_threshold = ADMINISTRATOR;
+$MantisConfig->show_log_threshold = ADMINISTRATOR;
 
 /**************************
  * Configuration Settings *
@@ -4172,7 +4191,7 @@ $g_show_log_threshold = ADMINISTRATOR;
  * It is used to bypass the database lookup and look here for appropriate global settings.
  * @global array $g_global_settings
  */
-$g_global_settings = array(
+$MantisConfig->global_settings = array(
 	'global_settings', 'admin_checks', 'allow_signup', 'allow_anonymous_login',
 	'anonymous_account', 'compress_html', 'content_expire', 'allow_permanent_cookie',
 	'cookie_time_length', 'cookie_path', 'cookie_domain', 'cookie_version',
@@ -4206,7 +4225,7 @@ $g_global_settings = array(
  * - 'http://MyOwnMantisTouch.com/'
  * - ''
  */
-$g_mantistouch_url = file_exists( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . "m" ) ? $g_path . 'm/' : '';
+$MantisConfig->mantistouch_url = file_exists( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . "m" ) ? $g_path . 'm/' : '';
 
 # Temporary variables should not remain defined in global scope
 unset( $t_protocol, $t_host, $t_hosts, $t_port, $t_self, $t_path );

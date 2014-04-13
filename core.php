@@ -105,10 +105,10 @@ $g_api_included = array();
  */
 function require_api( $p_api_name ) {
 	global $g_api_included;
-	global $g_core_path;
+	global $MantisConfig;
 	if ( !isset( $g_api_included[$p_api_name] ) ) {
 		$t_existing_globals = get_defined_vars();
-		require_once( $g_core_path . $p_api_name );
+		require_once( $MantisConfig->core_path . $p_api_name );
 		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_existing_globals' => 0, 't_new_globals' => 0 ) );
 		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
 			global $$t_global_name;
@@ -128,11 +128,11 @@ $g_libraries_included = array();
  */
 function require_lib( $p_library_name ) {
 	global $g_libraries_included;
-	global $g_library_path;
+	global $MantisConfig;
 	if ( !isset( $g_libraries_included[$p_library_name] ) ) {
 		$t_existing_globals = get_defined_vars();
 
-		$t_library_file_path = $g_library_path . $p_library_name;
+		$t_library_file_path = $MantisConfig->library_path . $p_library_name;
 		if ( !file_exists( $t_library_file_path ) ) {
 			echo "External library '$t_library_file_path' not found.";
 			exit;
@@ -154,17 +154,16 @@ function require_lib( $p_library_name ) {
  * @param string $p_class class name
  */
 function __autoload( $className ) {
-	global $g_class_path;
-	global $g_library_path;
+	global $MantisConfig;
 
-	$t_require_path = $g_class_path . $className . '.class.php';
+	$t_require_path = $MantisConfig->class_path . $className . '.class.php';
 
 	if ( file_exists( $t_require_path ) ) {
 		require_once( $t_require_path );
 		return;
 	}
 
-	$t_require_path = $g_library_path . 'rssbuilder' . DIRECTORY_SEPARATOR . 'class.' . $className . '.inc.php';
+	$t_require_path = $MantisConfig->library_path . 'rssbuilder' . DIRECTORY_SEPARATOR . 'class.' . $className . '.inc.php';
 
 	if ( file_exists( $t_require_path ) ) {
 		require_once( $t_require_path );
@@ -177,8 +176,8 @@ spl_autoload_register( '__autoload' );
 
 require_api( 'mobile_api.php' );
 
-if ( strlen( $GLOBALS['g_mantistouch_url'] ) > 0 && mobile_is_mobile_browser() ) {
-	$t_url = sprintf( $GLOBALS['g_mantistouch_url'], $GLOBALS['g_path'] );
+if ( strlen( $MantisConfig->mantistouch_url ) > 0 && mobile_is_mobile_browser() ) {
+	$t_url = sprintf( $MantisConfig->mantistouch_url, $MantisConfig->path );
 
 	$t_issue_id = '';
 	if ( strstr( $_SERVER['SCRIPT_NAME'], 'view.php' ) !== false ) {
@@ -201,7 +200,7 @@ if ( strlen( $GLOBALS['g_mantistouch_url'] ) > 0 && mobile_is_mobile_browser() )
 }
 
 # Load UTF8-capable string functions
-define( 'UTF8', $g_library_path . 'utf8' );
+define( 'UTF8', $MantisConfig->library_path . 'utf8' );
 require_lib( 'utf8/utf8.php' );
 require_lib( 'utf8/str_pad.php' );
 
@@ -255,10 +254,10 @@ require_api( 'database_api.php' );
 require_api( 'config_api.php' );
 
 if ( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
-	if( OFF == $g_use_persistent_connections ) {
-		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name, config_get_global( 'db_schema' ) );
+	if( OFF == $MantisConfig->use_persistent_connections ) {
+		db_connect( config_get_global( 'dsn', false ), $MantisConfig->hostname, $MantisConfig->db_username, $MantisConfig->db_password, $MantisConfig->database_name, config_get_global( 'db_schema' ) );
 	} else {
-		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name, config_get_global( 'db_schema' ), true );
+		db_connect( config_get_global( 'dsn', false ), $MantisConfig->hostname, $MantisConfig->db_username, $MantisConfig->db_password, $MantisConfig->database_name, config_get_global( 'db_schema' ), true );
 	}
 }
 

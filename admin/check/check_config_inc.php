@@ -35,36 +35,35 @@ if ( !defined( 'CHECK_CONFIG_INC_ALLOW' ) ) {
 require_once( 'check_api.php' );
 
 check_print_section_header_row( 'Configuration' );
-
 check_print_test_row( 'config_inc.php configuration file exists',
-	file_exists( dirname( dirname( dirname( __FILE__ ) ) ) . '/config_inc.php' ),
+	dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR . 'config_inc.php',
 	array( false => 'Please use <a href="install.php">install.php</a> to perform the initial installation of MantisBT.' )
 );
 
 # Debugging / Developer Settings
 check_print_test_warn_row( 'Check whether diagnostic logging is enabled',
-	$g_log_level == LOG_NONE,
+	$MantisConfig->log_level == LOG_NONE,
 	array( false => 'Global Log Level should usually be set to LOG_NONE for production use' )
 );
 
 check_print_test_warn_row( 'Check whether log output is sent to end user',
-	!($g_log_destination == 'firebug' || $g_log_destination == 'page'),
+	!($MantisConfig->log_destination == 'firebug' || $MantisConfig->log_destination == 'page'),
 	array( false => 'Diagnostic output destination is currently sent to end users browser' )
 );
 
 check_print_test_warn_row( 'Detailed errors should be OFF',
-	$g_show_detailed_errors == OFF,
+	$MantisConfig->show_detailed_errors == OFF,
 	array( false => 'Setting show_detailed_errors = ON is a potential security hazard as it can expose sensitive information.' )
 );
 
 check_print_test_warn_row( 'MantisBT Application Errors should halt execution',
-	$g_display_errors[E_USER_ERROR] == DISPLAY_ERROR_HALT,
-	array( false => 'Continuing after an error may lead to system and/or data integrity issues. Set $g_display_errors[E_USER_ERROR] = DISPLAY_ERROR_HALT;' )
+	$MantisConfig->display_errors[E_USER_ERROR] == DISPLAY_ERROR_HALT,
+	array( false => 'Continuing after an error may lead to system and/or data integrity issues. Set $MantisConfig->display_errors[E_USER_ERROR] = DISPLAY_ERROR_HALT;' )
 );
 
 check_print_test_warn_row( 'Email debugging should be OFF',
-	empty($g_debug_email),
-	array( false => "All notification e-mails will be sent to: $g_debug_email" )
+	empty($MantisConfig->debug_email),
+	array( false => "All notification e-mails will be sent to: " . $MantisConfig->debug_email )
 );
 
 
