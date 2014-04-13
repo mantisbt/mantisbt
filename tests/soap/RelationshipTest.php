@@ -27,11 +27,15 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture for issue relationships
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class RelationshipTest extends SoapBase {
 	
 	/**
 	 * Creates two issues and adds a relationship between them
+	 *
 	 */
 	public function testCreateIssuesAndAddRelation() {
 	    $firstIssue = $this->getIssueToAdd( 'RelationshipTest.testCreateIssueAndAddRelation1' );
@@ -72,6 +76,7 @@ class RelationshipTest extends SoapBase {
 	
 	/**
 	 * Creates two issues, adds and then deletes a relationship between them
+	 *
 	 */
 	public function testDeleteRelation() {
 	    $firstIssue = $this->getIssueToAdd( 'RelationshipTest.testCreateIssueAndAddRelation1' );

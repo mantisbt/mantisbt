@@ -141,19 +141,19 @@ if ( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_
 # if a profile was selected then let's use that information
 if ( 0 != $t_bug_data->profile_id ) {
 	if ( profile_is_global( $t_bug_data->profile_id ) ) {
-		$row = user_get_profile_row( ALL_USERS, $t_bug_data->profile_id );
+		$t_row = user_get_profile_row( ALL_USERS, $t_bug_data->profile_id );
 	} else {
-		$row = user_get_profile_row( $t_bug_data->reporter_id, $t_bug_data->profile_id );
+		$t_row = user_get_profile_row( $t_bug_data->reporter_id, $t_bug_data->profile_id );
 	}
 
 	if ( is_blank( $t_bug_data->platform ) ) {
-		$t_bug_data->platform = $row['platform'];
+		$t_bug_data->platform = $t_row['platform'];
 	}
 	if ( is_blank( $t_bug_data->os ) ) {
-		$t_bug_data->os = $row['os'];
+		$t_bug_data->os = $t_row['os'];
 	}
 	if ( is_blank( $t_bug_data->os_build ) ) {
-		$t_bug_data->os_build = $row['os_build'];
+		$t_bug_data->os_build = $t_row['os_build'];
 	}
 }
 helper_call_custom_function( 'issue_create_validate', array( $t_bug_data ) );

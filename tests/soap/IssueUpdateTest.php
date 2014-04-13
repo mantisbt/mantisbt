@@ -27,6 +27,9 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture for issue update webservice methods.
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class IssueUpdateTest extends SoapBase {
 	/**
@@ -35,6 +38,7 @@ class IssueUpdateTest extends SoapBase {
 	 * 2. Ability to retrieve the issue just added.
 	 * 3. Ability to modify the summary of the retrieved issue and update it in MantisBT.
 	 * 4. Ability to delete the issue.
+	 *
 	 */
 	public function testUpdateSummaryBasedOnPreviousGet() {
 		$issueToAdd = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateSummary' );
@@ -102,6 +106,7 @@ class IssueUpdateTest extends SoapBase {
 	 * 1. Ability to create an issue with only the mandatory parameters.
 	 * 2. Ability to update the summary of the issue while only supplying the mandatory fields.
 	 * 3. Ability to delete the issue.
+	 *
 	 */
 	public function testUpdateSummaryBasedOnMandatoryFields() {
 		$issueToAdd = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateSummaryBasedOnMandatoryFields' );
@@ -165,6 +170,7 @@ class IssueUpdateTest extends SoapBase {
 	 * 3. Getting the issue and calling update - making sure the note is not duplicated.
 	 * 4. Getting the issue, adding a new note and making sure that the first is not duplicated, but second is added.
 	 * 5. Deleting the issue.
+	 *
 	 */
 	public function testUpdateWithNewNote() {
 		$issueToAdd = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateWithNewNote' );
@@ -243,6 +249,7 @@ class IssueUpdateTest extends SoapBase {
 	 * 4. Updating the issue to add a handler
 	 * 5. Verifying that the correct handler is passed
 	 * 6. Deleting the issue
+	 *
 	 */
 	public function testUpdateIssueWithHandler() {
 
@@ -290,6 +297,7 @@ class IssueUpdateTest extends SoapBase {
 	 * 3. Updating the issue with a new date
 	 * 4. Re-retrieving the issue
 	 * 5. Validating the value of the due date
+	 *
 	 */
 	public function testUpdateIssueDueDate() {
 		$this->skipIfDueDateIsNotEnabled();
@@ -333,6 +341,7 @@ class IssueUpdateTest extends SoapBase {
 	 * 2. Updating the issue to unset the category
 	 * 3. Retrieving the issue
 	 * 4. Verifying that the category is empty.
+	 *
 	 */
 	public function testUpdateBugWithNoCategory() {
 		$this->skipIfAllowNoCategoryIsDisabled();
@@ -367,12 +376,13 @@ class IssueUpdateTest extends SoapBase {
 		$this->assertEquals( '', $issue->category, 'category' );
 	}
 
-	/*
+	/**
 	 * This test case tests the following:
 	 * 1. Creation of an issue.
 	 * 2. Updating the issue with a time tracking note
 	 * 3. Verifying that the time tracking note on the issue is preseved
 	 * 4. Deleting the issue.
+	 *
 	 */
 	public function testUpdateWithTimeTrackingNote() {
 
@@ -415,13 +425,14 @@ class IssueUpdateTest extends SoapBase {
 		$this->assertEquals( 30, $issueWithNote->notes[0]->time_tracking);
 	}
 
-	/*
+	/**
 	 * This test case tests the following:
 	 * 1. Creation of an issue.
 	 * 2. Updating the issue with rare fields
 	 * 3. Getting the issue
 	 * 4. Verifying that the rare field values are preserved
 	 * 5. Deleting the issue.
+	 *
 	 */
 	public function testUpdateWithRareFields() {
 
@@ -463,6 +474,10 @@ class IssueUpdateTest extends SoapBase {
 		$this->assertEquals( 'os_build', $retrievedIssue->os_build);
 	}
 
+	/**
+	 *
+	 *
+	 */
 	public function testUpdateWithTagOperations() {
 
 		// initialise tags
@@ -513,6 +528,10 @@ class IssueUpdateTest extends SoapBase {
 		self::assertEquals(0, count ( $issue->tags ) );
 	}
 
+	/**
+	 *
+	 *
+	 */
 	public function testUpdateWithMonitors() {
 
 		// create issue

@@ -54,36 +54,39 @@ require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 
-	$f_bug_id = gpc_get_int( 'bug_id' );
+$f_bug_id = gpc_get_int( 'bug_id' );
 
-	# grab the user id currently logged in
-	$t_user_id	= auth_get_current_user_id();
-	$c_bug_id		= (integer)$f_bug_id;
+# grab the user id currently logged in
+$t_user_id	= auth_get_current_user_id();
+$c_bug_id		= (integer)$f_bug_id;
 
- 	if ( !access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) {
+if ( !access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) {
  		$t_restriction = 'AND view_state=' . VS_PUBLIC;
- 	} else {
- 		$t_restriction = '';
- 	}
+} else {
+	$t_restriction = '';
+}
 
-	$t_bugnote_table		= db_get_table( 'bugnote' );
-	$t_bugnote_text_table	= db_get_table( 'bugnote_text' );
-	# get the bugnote data
-	$t_bugnote_order = current_user_get_pref( 'bugnote_order' );
+# get the bugnote data
+$t_bugnote_order = current_user_get_pref( 'bugnote_order' );
 
-	$query = "SELECT *
-			FROM $t_bugnote_table
-			WHERE bug_id=" . db_param() . " $t_restriction
+$t_query = "SELECT * FROM {bugnote}
+			WHERE bug_id=%d $t_restriction
 			ORDER BY date_submitted $t_bugnote_order";
-	$t_result = db_query_bound($query, array( $c_bug_id ) );
-	$num_notes = db_num_rows($t_result);
+$t_result = db_query( $t_query, array( $c_bug_id ) );
+
+$t_notes = array();
+while ( $t_row = db_fetch_array( $t_result ) ) {
+	$t_notes[] = $t_row;
+}
+
+$t_note_count = count( $t_notes );
 ?>
 
 <br />
 <table class="width100" cellspacing="1">
 <?php
 	# no bugnotes
-	if ( 0 == $num_notes ) {
+	if ( 0 == $t_note_count ) {
 ?>
 <tr>
 	<td class="print" colspan="2">
@@ -97,18 +100,17 @@ require_api( 'user_api.php' );
 	</td>
 </tr>
 <?php
-	for ( $i=0; $i < $num_notes; $i++ ) {
+	for ( $i = 0; $i < $t_note_count; $i++ ) {
 		# prefix all bugnote data with v3_
-		$row = db_fetch_array( $t_result );
-		extract( $row, EXTR_PREFIX_ALL, 'v3' );
+		extract( $t_notes[$i], EXTR_PREFIX_ALL, 'v3' );
 		$v3_date_submitted = date( config_get( 'normal_date_format' ), $v3_date_submitted );
 		$v3_last_modified = date( config_get( 'normal_date_format' ), $v3_last_modified );
 
 		# grab the bugnote text and id and prefix with v3_
-		$query = "SELECT note, id
-				FROM $t_bugnote_text_table
-				WHERE id=" . db_param();
-		$t_result2 = db_query_bound( $query, array( $v3_bugnote_text_id ) );
+		$t_query = "SELECT note, id
+				FROM {bugnote_text}
+				WHERE id=%d";
+		$t_result2 = db_query( $t_query, array( $v3_bugnote_text_id ) );
 		$v3_note = db_result( $t_result2, 0, 0 );
 		$v3_bugnote_text_id = db_result( $t_result2, 0, 1 );
 

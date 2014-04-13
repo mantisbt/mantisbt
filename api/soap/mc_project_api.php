@@ -679,10 +679,6 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
-	$t_project_file_table = db_get_table( 'project_file' );
-	$t_project_table = db_get_table( 'project' );
-	$t_project_user_list_table = db_get_table( 'project_user_list' );
-	$t_user_table = db_get_table( 'user' );
 	$t_pub = VS_PUBLIC;
 	$t_priv = VS_PRIVATE;
 	$t_admin = config_get_global( 'admin_site_threshold' );
@@ -711,35 +707,32 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		$t_access_clause = ">= $t_reqd_access ";
 	}
 
-	$query = "SELECT pft.id, pft.project_id, pft.filename, pft.file_type, pft.filesize, pft.title, pft.description, pft.date_added, pft.user_id
-		FROM $t_project_file_table pft
-		LEFT JOIN $t_project_table pt ON pft.project_id = pt.id
-		LEFT JOIN $t_project_user_list_table pult
-		ON pft.project_id = pult.project_id AND pult.user_id = " . db_param() . "
-		LEFT JOIN $t_user_table ut ON ut.id = " . db_param() . "
+	$t_query = "SELECT pft.id, pft.project_id, pft.filename, pft.file_type, pft.filesize, pft.title, pft.description, pft.date_added, pft.user_id
+		FROM {project_file} pft
+		LEFT JOIN {project} pt ON pft.project_id = pt.id
+		LEFT JOIN {project_user_list} pult
+		ON pft.project_id = pult.project_id AND pult.user_id=%d
+		LEFT JOIN {user} ut ON ut.id=%d
 		WHERE pft.project_id in (" . implode( ',', $t_projects ) . ") AND
-		( ( ( pt.view_state = " . db_param() . " OR pt.view_state is null ) AND pult.user_id is null AND ut.access_level $t_access_clause ) OR
-		( ( pult.user_id = " . db_param() . " ) AND ( pult.access_level $t_access_clause ) ) OR
-		( ut.access_level = " . db_param() . " ) )
+		( ( ( pt.view_state=%d OR pt.view_state is null ) AND pult.user_id is null AND ut.access_level $t_access_clause ) OR
+		( ( pult.user_id = %d ) AND ( pult.access_level $t_access_clause ) ) OR
+		( ut.access_level = %d ) )
 		ORDER BY pt.name ASC, pft.title ASC";
 
-	$t_result = db_query_bound( $query, array( $t_user_id, $t_user_id, $t_pub, $t_user_id, $t_admin ) );
-	$num_files = db_num_rows( $t_result );
+	$t_result = db_query( $t_query, array( $t_user_id, $t_user_id, $t_pub, $t_user_id, $t_admin ) );
 
 	$t_attachments = array();
-	for( $i = 0;$i < $num_files;$i++ ) {
-		$row = db_fetch_array( $t_result );
-
+	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_attachment = array();
-		$t_attachment['id'] = $row['id'];
-		$t_attachment['filename'] = $row['filename'];
-		$t_attachment['title'] = $row['title'];
-		$t_attachment['description'] = $row['description'];
-		$t_attachment['size'] = $row['filesize'];
-		$t_attachment['content_type'] = $row['file_type'];
-		$t_attachment['date_submitted'] = SoapObjectsFactory::newDateTimeVar( $row['date_added'] );
-		$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $row['id'] . '&amp;type=doc';
-		$t_attachment['user_id'] = $row['user_id'];
+		$t_attachment['id'] = $t_row['id'];
+		$t_attachment['filename'] = $t_row['filename'];
+		$t_attachment['title'] = $t_row['title'];
+		$t_attachment['description'] = $t_row['description'];
+		$t_attachment['size'] = $t_row['filesize'];
+		$t_attachment['content_type'] = $t_row['file_type'];
+		$t_attachment['date_submitted'] = SoapObjectsFactory::newDateTimeVar( $t_row['date_added'] );
+		$t_attachment['download_url'] = mci_get_mantis_path() . 'file_download.php?file_id=' . $t_row['id'] . '&amp;type=doc';
+		$t_attachment['user_id'] = $t_row['user_id'];
 		$t_attachments[] = $t_attachment;
 	}
 

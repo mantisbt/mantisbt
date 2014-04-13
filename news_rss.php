@@ -138,8 +138,8 @@ $t_news_count = count( $news_rows );
 
 # Loop through results
 for ( $i = 0; $i < $t_news_count; $i++ ) {
-	$row = $news_rows[$i];
-	extract( $row, EXTR_PREFIX_ALL, 'v' );
+	$t_row = $news_rows[$i];
+	extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
 	# skip news item if private, or
 	# belongs to a private project (will only happen

@@ -53,32 +53,29 @@ auth_reauthenticate();
 
 access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
-$t_user_table = db_get_table( 'user' );
-
 # Delete the users who have never logged in and are older than 1 week
-$days_old = (int)7 * SECONDS_PER_DAY;
+$t_days_old = (int)7 * SECONDS_PER_DAY;
 
-$query = "SELECT id, access_level
-		FROM $t_user_table
-		WHERE ( login_count = 0 ) AND ( date_created = last_visit ) AND " . db_helper_compare_days( 0, "date_created", "> $days_old" );
-$t_result = db_query_bound($query, array( db_now() ) );
+$t_query = "SELECT id, access_level FROM {user}
+		WHERE ( login_count = 0 ) AND ( date_created = last_visit ) AND " . db_helper_compare_days( 0, "date_created", "> $t_days_old" );
+$t_result = db_query( $t_query, array( db_now() ) );
 
-if ( !$t_result ) {
-	trigger_error( ERROR_GENERIC, ERROR );
+$t_users = array();
+while ( $t_row = db_fetch_array( $t_result ) ) {
+	$t_users[] = $t_row;
 }
 
-$count = db_num_rows( $t_result );
-
-if ( $count > 0 ) {
+$t_user_count = count( $t_users );
+if ( $t_user_count > 0 ) {
 	helper_ensure_confirmed( lang_get( 'confirm_account_pruning' ),
 							 lang_get( 'prune_accounts_button' ) );
 }
 
-for ($i=0; $i < $count; $i++) {
-	$row = db_fetch_array( $t_result );
+for ( $i = 0; $i < $t_user_count; $i++ ) {
+	$t_user = $t_users[$i];
 	# Don't prune accounts with a higher global access level than the current user
-	if ( access_has_global_level( $row['access_level'] ) ) {
-		user_delete($row['id']);
+	if ( access_has_global_level( $t_user['access_level'] ) ) {
+		user_delete( $t_user['id'] );
 	}
 }
 

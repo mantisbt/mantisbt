@@ -57,9 +57,9 @@ auth_ensure_user_authenticated();
 # extracts the user information for the currently logged in user
 # and prefixes it with u_
 $f_user_id = gpc_get_int( 'id', auth_get_current_user_id() );
-$row = user_get_row( $f_user_id );
+$t_row = user_get_row( $f_user_id );
 
-extract( $row, EXTR_PREFIX_ALL, 'u' );
+extract( $t_row, EXTR_PREFIX_ALL, 'u' );
 
 $t_can_manage = access_has_global_level( config_get( 'manage_user_threshold' ) ) &&
 	access_has_global_level( $u_access_level );

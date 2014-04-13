@@ -219,8 +219,6 @@ function print_user( $p_user_id ) {
  * @param int $p_bug_id Bug ID
  */
 function print_user_with_subject( $p_user_id, $p_bug_id ) {
-	$c_user_id = db_prepare_int( $p_user_id );
-
 	if( NO_USER == $p_user_id ) {
 		return;
 	}
@@ -243,8 +241,8 @@ function print_user_with_subject( $p_user_id, $p_bug_id ) {
  * @param string $p_email Email address
  */
 function print_email_input( $p_field_name, $p_email ) {
-		echo '<input id="email-field" type="text" name="' . string_attribute( $p_field_name ) . '" size="32" maxlength="64" value="' . string_attribute( $p_email ) . '" />';
-	}
+	echo '<input id="email-field" type="text" name="' . string_attribute( $p_field_name ) . '" size="32" maxlength="64" value="' . string_attribute( $p_email ) . '" />';
+}
 
 /**
  * print out an email editing input
@@ -355,7 +353,6 @@ function print_tag_attach_form( $p_bug_id, $p_string = '' ) {
 		<input type="submit" value="<?php echo lang_get( 'tag_attach' )?>" class="button" />
 		</form>
 		<?php
-		return true;
 }
 
 /**
@@ -382,12 +379,12 @@ function print_tag_option_list( $p_bug_id = 0 ) {
 	$t_rows = tag_get_candidates_for_bug( $p_bug_id );
 
 	echo '<option value="0">', string_html_specialchars( lang_get( 'tag_existing' ) ), '</option>';
-	foreach ( $t_rows as $row ) {
-		$t_string = $row['name'];
-		if ( !empty( $row['description'] ) ) {
-			$t_string .= ' - ' . utf8_substr( $row['description'], 0, 20 );
+	foreach ( $t_rows as $t_row ) {
+		$t_string = $t_row['name'];
+		if ( !empty( $t_row['description'] ) ) {
+			$t_string .= ' - ' . utf8_substr( $t_row['description'], 0, 20 );
 		}
-		echo '<option value="', $row['id'], '" title="', string_attribute( $row['name'] ), '">', string_attribute( $t_string ), '</option>';
+		echo '<option value="', $t_row['id'], '" title="', string_attribute( $t_row['name'] ), '">', string_attribute( $t_string ), '</option>';
 	}
 }
 
@@ -395,31 +392,22 @@ function print_tag_option_list( $p_bug_id = 0 ) {
  * Get current headlines and id  prefix with v_
  */
 function print_news_item_option_list() {
-	$t_mantis_news_table = db_get_table( 'news' );
-
 	$t_project_id = helper_get_current_project();
 
 	$t_global = access_has_global_level( config_get_global( 'admin_site_threshold' ) );
 	if( $t_global ) {
-		$query = "SELECT id, headline, announcement, view_state
-				FROM $t_mantis_news_table
-				ORDER BY date_posted DESC";
+		$t_query = "SELECT id, headline, announcement, view_state FROM {news} ORDER BY date_posted DESC";
 	} else {
-		$query = "SELECT id, headline, announcement, view_state
-				FROM $t_mantis_news_table
-				WHERE project_id=" . db_param() . "
-				ORDER BY date_posted DESC";
+		$t_query = "SELECT id, headline, announcement, view_state FROM {news}
+				WHERE project_id=%d ORDER BY date_posted DESC";
 	}
-	$t_result = db_query_bound( $query, ($t_global == true ? array() : array( $t_project_id ) ) );
-	$news_count = db_num_rows( $t_result );
+	$t_result = db_query( $t_query, ($t_global == true ? array() : array( $t_project_id ) ) );
 
-	for( $i = 0;$i < $news_count;$i++ ) {
-		$row = db_fetch_array( $t_result );
-
-		$t_headline = string_display( $row['headline'] );
-		$t_announcement = $row['announcement'];
-		$t_view_state = $row['view_state'];
-		$t_id = $row['id'];
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_headline = string_display( $t_row['headline'] );
+		$t_announcement = $t_row['announcement'];
+		$t_view_state = $t_row['view_state'];
+		$t_id = $t_row['id'];
 
 		$t_notes = array();
 		$t_note_string = '';
@@ -499,14 +487,14 @@ function print_news_entry_from_row( $p_news_row ) {
  * @param int $p_news_id news article ID
  */
 function print_news_string_by_news_id( $p_news_id ) {
-	$row = news_get_row( $p_news_id );
+	$t_row = news_get_row( $p_news_id );
 
 	# only show VS_PRIVATE posts to configured threshold and above
-	if(( VS_PRIVATE == $row['view_state'] ) && !access_has_project_level( config_get( 'private_news_threshold' ) ) ) {
+	if(( VS_PRIVATE == $t_row['view_state'] ) && !access_has_project_level( config_get( 'private_news_threshold' ) ) ) {
 		return;
 	}
 
-	print_news_entry_from_row( $row );
+	print_news_entry_from_row( $t_row );
 }
 
 /**
@@ -774,7 +762,7 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 	if( null === $p_project_id ) {
 		$c_project_id = helper_get_current_project();
 	} else {
-		$c_project_id = db_prepare_int( $p_project_id );
+		$c_project_id = $p_project_id;
 	}
 
 	if( $p_with_subs ) {
@@ -835,7 +823,6 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
  * @param string $p_build build
  */
 function print_build_option_list( $p_build = '' ) {
-	$t_bug_table = db_get_table( 'bug' );
 	$t_overall_build_arr = array();
 
 	$t_project_id = helper_get_current_project();
@@ -843,16 +830,11 @@ function print_build_option_list( $p_build = '' ) {
 	$t_project_where = helper_project_specific_where( $t_project_id );
 
 	# Get the "found in" build list
-	$query = "SELECT DISTINCT build
-				FROM $t_bug_table
-				WHERE $t_project_where
-				ORDER BY build DESC";
-	$t_result = db_query_bound( $query );
-	$option_count = db_num_rows( $t_result );
+	$t_query = "SELECT DISTINCT build FROM {bug} WHERE $t_project_where ORDER BY build DESC";
+	$t_result = db_query( $t_query );
 
-	for( $i = 0;$i < $option_count;$i++ ) {
-		$row = db_fetch_array( $t_result );
-		$t_overall_build_arr[] = $row['build'];
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_overall_build_arr[] = $t_row['build'];
 	}
 
 	$t_max_length = config_get( 'max_dropdown_length' );
@@ -1044,24 +1026,17 @@ function print_project_user_list_option_list( $p_project_id = null ) {
  * @param int $p_user_id user id
  */
 function print_project_user_list_option_list2( $p_user_id ) {
-	$t_mantis_project_user_list_table = db_get_table( 'project_user_list' );
-	$t_mantis_project_table = db_get_table( 'project' );
-
-	$c_user_id = db_prepare_int( $p_user_id );
-
-	$query = "SELECT DISTINCT p.id, p.name
-				FROM $t_mantis_project_table p
-				LEFT JOIN $t_mantis_project_user_list_table u
-				ON p.id=u.project_id AND u.user_id=" . db_param() . "
-				WHERE p.enabled = " . db_param() . " AND
+	$t_query = "SELECT DISTINCT p.id, p.name
+				FROM {project} p
+				LEFT JOIN {project_user_list} u
+				ON p.id=u.project_id AND u.user_id=%d
+				WHERE p.enabled=%d AND
 					u.user_id IS NULL
 				ORDER BY p.name";
-	$t_result = db_query_bound( $query, array( $c_user_id, true ) );
-	$category_count = db_num_rows( $t_result );
-	for( $i = 0;$i < $category_count;$i++ ) {
-		$row = db_fetch_array( $t_result );
-		$t_project_name = string_attribute( $row['name'] );
-		$t_user_id = $row['id'];
+	$t_result = db_query( $t_query, array( $p_user_id, true ) );
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_project_name = string_attribute( $t_row['name'] );
+		$t_user_id = $t_row['id'];
 		echo "<option value=\"$t_user_id\">$t_project_name</option>";
 	}
 }
@@ -1209,7 +1184,7 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 				$p_dir = 'ASC';
 			}
 		} else {
-			# Otherwise always start with ASCending
+			# Otherwise always start with Ascending
 			$p_dir = 'ASC';
 		}
 
@@ -1226,7 +1201,7 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 				$p_dir = 'ASC';
 			}
 		} else {
-			# Otherwise always start with ASCending
+			# Otherwise always start with Ascending
 			$p_dir = 'ASC';
 		}
 		$t_sort_field = rawurlencode( $p_sort_field );
@@ -1791,10 +1766,9 @@ function print_bug_attachment_preview_text( $p_attachment ) {
 			}
 			break;
 		case DATABASE:
-			$t_bug_file_table = db_get_table( 'bug_file' );
-			$c_attachment_id = db_prepare_int( $p_attachment['id'] );
-			$t_query = "SELECT * FROM $t_bug_file_table WHERE id=" . db_param();
-			$t_result = db_query_bound( $t_query, array( $c_attachment_id ) );
+			$c_attachment_id = (int)$p_attachment['id'];
+			$t_query = "SELECT * FROM {bug_file} WHERE id=%d";
+			$t_result = db_query( $t_query, array( $c_attachment_id ) );
 			$t_row = db_fetch_array( $t_result );
 			$t_content = $t_row['content'];
 			break;
