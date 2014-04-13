@@ -374,7 +374,7 @@ if( db_is_mysql() ) {
 	# Field names from MySQL data dictionary
 	# mysql returns fields with uppercase first letter, whereas
 	# mysqli uses all lowercase.
-	switch( $g_db_type ) {
+	switch( $MantisConfig->db_type ) {
 		case 'mysql':
 			$t_field_name      = 'Name';
 			$t_field_comment   = 'Comment';

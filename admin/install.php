@@ -153,7 +153,7 @@ if( 0 == $t_install_state ) {
 <?php
 }
 
-$t_config_filename = $g_absolute_path . 'config_inc.php';
+$t_config_filename = $MantisConfig->absolute_path . 'config_inc.php';
 $t_config_exists = file_exists( $t_config_filename );
 
 # Initialize Oracle-specific values for prefix and suffix, and set
@@ -1023,7 +1023,7 @@ if( 4 == $t_install_state ) {
 
 # all checks have passed, install the database
 if( 5 == $t_install_state ) {
-	$t_config_filename = $g_absolute_path . 'config_inc.php';
+	$t_config_filename = $MantisConfig->absolute_path . 'config_inc.php';
 	$t_config_exists = file_exists( $t_config_filename );
 	?>
 <table width="100%" cellpadding="10" cellspacing="1">
@@ -1054,15 +1054,15 @@ if( 5 == $t_install_state ) {
 	# Generating the config_inc.php file
 
 	$t_config = '<?php' . PHP_EOL
-		. "\$g_hostname               = '$f_hostname';" . PHP_EOL
-		. "\$g_db_type                = '$f_db_type';" . PHP_EOL
-		. "\$g_database_name          = '" . addslashes( $f_database_name ) . "';" . PHP_EOL
-		. "\$g_db_username            = '" . addslashes( $f_db_username ) . "';" . PHP_EOL
-		. "\$g_db_password            = '" . addslashes( $f_db_password ) . "';" . PHP_EOL;
+		. "\$MantisConfig->hostname               = '$f_hostname';" . PHP_EOL
+		. "\$MantisConfig->db_type                = '$f_db_type';" . PHP_EOL
+		. "\$MantisConfig->database_name          = '" . addslashes( $f_database_name ) . "';" . PHP_EOL
+		. "\$MantisConfig->db_username            = '" . addslashes( $f_db_username ) . "';" . PHP_EOL
+		. "\$MantisConfig->db_password            = '" . addslashes( $f_db_password ) . "';" . PHP_EOL;
 
 	switch( $f_db_type ) {
 		case 'db2':
-			$t_config .=  "\$g_db_schema              = '$f_db_schema';" . PHP_EOL;
+			$t_config .=  "\$MantisConfig->db_schema              = '$f_db_schema';" . PHP_EOL;
 			break;
 		default:
 			break;
@@ -1083,9 +1083,9 @@ if( 5 == $t_install_state ) {
 	}
 
 	$t_config .=
-		  "\$g_default_timezone       = '$f_timezone';" . PHP_EOL
+		  "\$MantisConfig->default_timezone       = '$f_timezone';" . PHP_EOL
 		. PHP_EOL
-		. "\$g_crypto_master_salt     = '" . addslashes( $f_crypto_master_salt ) . "';" . PHP_EOL;
+		. "\$MantisConfig->crypto_master_salt     = '" . addslashes( $f_crypto_master_salt ) . "';" . PHP_EOL;
 
 	$t_write_failed = true;
 
@@ -1109,7 +1109,7 @@ if( 5 == $t_install_state ) {
 			( $f_db_schema != config_get( 'db_schema', '') ) ||
 			( $f_db_username != config_get( 'db_username', '' ) ) ||
 			( $f_db_password != config_get( 'db_password', '' ) ) ) {
-			print_test_result( BAD, false, 'file ' . $g_absolute_path . 'config_inc.php' . ' already exists and has different settings' );
+			print_test_result( BAD, false, 'file ' . $MantisConfig->absolute_path . 'config_inc.php' . ' already exists and has different settings' );
 		} else {
 			print_test_result( GOOD, false );
 			$t_write_failed = false;
@@ -1126,7 +1126,7 @@ if( 5 == $t_install_state ) {
 			<tr>
 				<td>
 					Please add the following lines to
-					'<?php echo $g_absolute_path; ?>config_inc.php'
+					'<?php echo $MantisConfig->absolute_path; ?>config_inc.php'
 					before continuing to the database upgrade check:
 				</td>
 			</tr>
