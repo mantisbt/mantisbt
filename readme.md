@@ -23,7 +23,7 @@ Installation
  * Select the database type and enter the credentials to access the database
  * Click install/upgrade
  * Installation is complete -- you may need to copy the default configuration
-   to mantisbt/config_inc.php if your web server does not have write access
+   to mantisbt/config/config_inc.php if your web server does not have write access
  * Remove the admin/ directory from within the MantisBT installation path. The
    scripts within this directory should not be accessible on a live MantisBT
    site or on any installation that is accessible via the Internet.
@@ -35,8 +35,8 @@ UPGRADING
  * Extract the tarball into a clean directory; do not extract into an existing
    installation, as some files have been moved or deleted between releases
  * Copy your configuration from the old installation to the new directory,
-   including config_inc.php, custom_strings_inc.php, and
-   custom_constants_inc.php if they exist
+   including config_inc.php, custom_strings_inc.php, custom_relationships_inc.php,
+   custom_functions_inc.php and custom_constants_inc.php if they exist
  * Point your browser to http://path/to/mantisbt/admin/check.php to ensure that
    your webserver is compatible with MantisBT and configured correctly
  * Point your browser to http://path/to/mantisbt/admin/install.php to upgrade
@@ -51,15 +51,15 @@ CONFIGURATION
 -------------
 
 This file contains information to help you customize MantisBT.  A more
-detailed doc can be found at http://docs.mantisbt.org/
+detailed doc can be found at http://www.mantisbt.org/docs/
 
 * config_defaults_inc.php
   - this file contains the default values for all the site-wide variables.
-* config_inc.php
+* config/config_inc.php
   - You should create this file to change config variable values.  Your
     values from this file will be used instead of the defaults.  This file
     will not be overwritten when you upgrade, but config_defaults_inc.php will.
-    Look at config_inc.php.sample for an example.
+    Look at config/config_inc.php.sample for an example.
 
 * core/*_api.php - these files contains all the API library functions.
 

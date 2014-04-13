@@ -1,11 +1,14 @@
-# Config files
+# Config files - v1.2.x config files - keep for convenience for dev machines switching branches
 config_inc.php
 custom_constants_inc.php
 custom_functions_inc.php
 custom_relationships_inc.php
 custom_strings_inc.php
-mantis_offline.php
 api/soap/mc_config_inc.php
+
+# Config files
+config/
+mantis_offline.php
 
 # Docbook builds
 docbook/*/*/builddate
