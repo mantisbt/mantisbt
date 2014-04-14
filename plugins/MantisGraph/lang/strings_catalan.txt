@@ -27,6 +27,7 @@
  *
  * @author Bernat
  * @author Dtamajon
+ * @author Fitoschido
  * @author Paucabot
  */
 
@@ -87,7 +88,7 @@ $s_plugin_MantisGraph_period_last_quarter = 'L\'últim trimestre';
 $s_plugin_MantisGraph_period_year_to_date = 'Aquest any';
 $s_plugin_MantisGraph_period_select = 'Dates arbitràries';
 $s_plugin_MantisGraph_period_last_year = 'L\'últim any';
-$s_plugin_MantisGraph_select = 'Si us plau seleccioni';
+$s_plugin_MantisGraph_select = 'Seleccioneu';
 $s_plugin_MantisGraph_select_bystatus = 'per Estat';
 $s_plugin_MantisGraph_select_summbystatus = 'Resum per Estat';
 $s_plugin_MantisGraph_select_bycat = 'Resum per Categoria';
