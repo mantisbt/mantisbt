@@ -171,4 +171,16 @@ config_obsolete( 'file_upload_ftp_server' );
 config_obsolete( 'file_upload_ftp_user' );
 config_obsolete( 'file_upload_ftp_pass' );
 config_obsolete( 'mantistouch_url' );
+config_obsolete( 'mc_readonly_access_level_threshold', 'webservice_readonly_access_level_threshold' );
+config_obsolete( 'mc_readwrite_access_level_threshold', 'webservice_readwrite_access_level_threshold' );
+config_obsolete( 'mc_admin_access_level_threshold', 'webservice_admin_access_level_threshold' );
+config_obsolete( 'mc_specify_reporter_on_add_access_level_threshold', 'webservice_specify_reporter_on_add_access_level_threshold' );
+config_obsolete( 'mc_priority_enum_default_when_not_found', 'webservice_priority_enum_default_when_not_found' );
+config_obsolete( 'mc_severity_enum_default_when_not_found', 'webservice_severity_enum_default_when_not_found' );
+config_obsolete( 'mc_status_enum_default_when_not_found', 'webservice_status_enum_default_when_not_found' );
+config_obsolete( 'mc_resolution_enum_default_when_not_found', 'webservice_resolution_enum_default_when_not_found' );
+config_obsolete( 'mc_projection_enum_default_when_not_found', 'webservice_projection_enum_default_when_not_found' );
+config_obsolete( 'mc_eta_enum_default_when_not_found', 'webservice_eta_enum_default_when_not_found' );
+config_obsolete( 'mc_error_when_version_not_found', 'webservice_error_when_version_not_found' );
+config_obsolete( 'mc_version_when_not_found', 'webservice_version_when_not_found' );
 

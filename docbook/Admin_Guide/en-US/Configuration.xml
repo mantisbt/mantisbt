@@ -3834,19 +3834,19 @@ LOG_ALL &amp; ~LOG_DATABASE
 	<para>The following options are used to control the behaviour of the MantisBT SOAP API:</para>
         <variablelist>
             <varlistentry>
-                <term>$g_mc_readonly_access_level_threshold</term>
+                <term>$g_webservice_readonly_access_level_threshold</term>
                 <listitem>
                     <para>Minimum global access level required to access webservice for readonly operations.</para>
                 </listitem>
             </varlistentry>
             <varlistentry>
-                <term>$g_mc_readwrite_access_level_threshold</term>
+                <term>$g_webservice_readwrite_access_level_threshold</term>
                 <listitem>
                     <para>Minimum global access level required to access webservice for read/write operations.</para>
                 </listitem>
             </varlistentry>
             <varlistentry>
-                <term>$g_mc_admin_access_level_threshold</term>
+                <term>$g_webservice_admin_access_level_threshold</term>
                 <listitem>
                     <para>Minimum global access level required to access the administrator webservices.</para>
                 </listitem>
@@ -3856,7 +3856,7 @@ LOG_ALL &amp; ~LOG_DATABASE
 	<section id="admin.config.soap.disable">
 		<title>Disabling the SOAP API</title>
 		<para>If you wish to temporarily disable the SOAP API it is sufficient to set the specific access thresholds to NOBODY:</para>
-		<para><literal>$g_mc_readonly_access_level_threshold = $g_mc_readwrite_access_level_threshold = $g_mc_admin_access_level_threshold = NOBODY;</literal></para>
+		<para><literal>$g_webservice_readonly_access_level_threshold = $g_webservice_readwrite_access_level_threshold = $g_webservice_admin_access_level_threshold = NOBODY;</literal></para>
 		<para>While the SOAP API will still be accessible, it will not allow users to retrieve or modify data.</para>
 	</section>
     </section>
