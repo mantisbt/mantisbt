@@ -74,7 +74,7 @@ require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEP
 require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config_defaults_inc.php' );
 
 # Load user-defined constants (if required)
-require_config( 'custom_constants_inc.php' );
+@include_once( $g_config_path . 'custom_constants_inc.php' );
 
 # Remember (globally) which API files have already been loaded
 $g_api_included = array();
@@ -97,38 +97,6 @@ function require_api( $p_api_name ) {
 		extract( $t_new_globals );
 		$g_api_included[$p_api_name] = 1;
 	}
-}
-
-/**
- * Include the specific config file, if exists.
- * @param $p_file_name The file name to include (e.g. custom_strings_inc.php).
- * @param $p_once Include the file only once?
- * @return true found, false not found.
- */
-function require_config( $p_file_name, $p_once = true ) {
-	global $g_config_path;
-
-	$t_custom_inc = $g_config_path . $p_file_name;
-
-	if ( file_exists( $t_custom_inc ) ) {
-		$t_existing_globals = get_defined_vars();
-
-		if ( $p_once ) {
-			require_once( $t_custom_inc );
-		} else {
-			require( $t_custom_inc );
-		}
-
-		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_existing_globals' => 0, 't_new_globals' => 0 ) );
-		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
-			global $$t_global_name;
-		}
-		extract( $t_new_globals );
-
-		return true;
-	}
-
-	return false;
 }
 
 # Remember (globally) which library files have already been loaded
@@ -217,7 +185,9 @@ require_api( 'compress_api.php' );
 compress_start_handler();
 
 # config_inc may not be present if this is a new install
-$t_config_inc_found = require_config( 'config_inc.php' );
+$t_config_inc_found = file_exists( $g_config_path . 'config_inc.php' );
+
+@include_once( $g_config_path . 'config_inc.php' );
 
 # If no configuration file exists, redirect the user to the admin page so
 # they can complete installation and configuration of MantisBT
@@ -303,7 +273,7 @@ if ( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 
 # Load custom functions
 require_api( 'custom_function_api.php' );
-require_config( 'custom_functions_inc.php' );
+@include_once( $g_config_path . 'custom_functions_inc.php' );
 
 # Set HTTP response headers
 require_api( 'http_api.php' );

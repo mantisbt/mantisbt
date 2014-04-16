@@ -162,7 +162,7 @@ $g_relationships[BUG_RELATED] = array(
 	'#notify_deleted' => 'email_notification_title_for_action_related_to_relationship_deleted',
 );
 
-require_config( 'custom_relationships_inc.php' );
+include_once( $g_config_path . 'custom_relationships_inc.php' );
 
 /**
  * Return the complementary type of the provided relationship
