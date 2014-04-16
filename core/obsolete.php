@@ -170,4 +170,5 @@ config_obsolete( 'limit_email_domain', 'limit_email_domains' );
 config_obsolete( 'file_upload_ftp_server' );
 config_obsolete( 'file_upload_ftp_user' );
 config_obsolete( 'file_upload_ftp_pass' );
+config_obsolete( 'mantistouch_url' );
 
