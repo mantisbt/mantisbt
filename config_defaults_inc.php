@@ -4192,22 +4192,6 @@ $g_global_settings = array(
 	'default_home_page', 'logout_redirect_page', 'manual_url', 'logo_url', 'wiki_engine_url',
 );
 
-/***************
- * MantisTouch *
- ***************/
-
-/**
- * The MantisTouch URL to direct to.  The %s will be replaced by the contents of $g_path.
- * A blank value will disable redirection.  The %s is not required when redirecting to
- * MantisTouch instances that point to a single MantisBT instance and hence have a hard-coded URL.
- *
- * Following are three examples:
- * - 'http://mantisbt.mobi?url=%s'
- * - 'http://MyOwnMantisTouch.com/'
- * - ''
- */
-$g_mantistouch_url = file_exists( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . "m" ) ? $g_path . 'm/' : '';
-
 # Temporary variables should not remain defined in global scope
 unset( $t_protocol, $t_host, $t_hosts, $t_port, $t_self, $t_path );
 
