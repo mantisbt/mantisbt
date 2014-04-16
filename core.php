@@ -70,23 +70,11 @@ ob_start();
 # Load supplied constants
 require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'constant_inc.php' );
 
-# Load user-defined constants (if required)
-require_config( 'custom_constants_inc.php' );
-
 # Include default configuration settings
 require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config_defaults_inc.php' );
 
-# config_inc may not be present if this is a new install
-$t_config_inc_found = require_config( 'config_inc.php' );
-
-# Allow an environment variable (defined in an Apache vhost for example)
-# to specify a config file to load to override other local settings
-$t_local_config = getenv( 'MANTIS_CONFIG' );
-if ( $t_local_config && file_exists( $t_local_config ) ){
-	require_once( $t_local_config );
-	$t_config_inc_found = true;
-}
-unset( $t_local_config );
+# Load user-defined constants (if required)
+require_config( 'custom_constants_inc.php' );
 
 # Remember (globally) which API files have already been loaded
 $g_api_included = array();
@@ -118,15 +106,24 @@ function require_api( $p_api_name ) {
  * @return true found, false not found.
  */
 function require_config( $p_file_name, $p_once = true ) {
-	$t_config_folder = dirname( dirname( __FILE__ ) ) . '/config/';
-	$t_custom_inc = $t_config_folder . $p_file_name;
+	global $g_config_path;
+
+	$t_custom_inc = $g_config_path . $p_file_name;
 
 	if ( file_exists( $t_custom_inc ) ) {
+		$t_existing_globals = get_defined_vars();
+
 		if ( $p_once ) {
 			require_once( $t_custom_inc );
 		} else {
 			require( $t_custom_inc );
 		}
+
+		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_existing_globals' => 0, 't_new_globals' => 0 ) );
+		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
+			global $$t_global_name;
+		}
+		extract( $t_new_globals );
 
 		return true;
 	}
@@ -218,6 +215,9 @@ unset( $t_output );
 # Start HTML compression handler (if enabled)
 require_api( 'compress_api.php' );
 compress_start_handler();
+
+# config_inc may not be present if this is a new install
+$t_config_inc_found = require_config( 'config_inc.php' );
 
 # If no configuration file exists, redirect the user to the admin page so
 # they can complete installation and configuration of MantisBT

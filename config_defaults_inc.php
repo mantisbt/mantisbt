@@ -214,6 +214,21 @@ $g_library_path = $g_absolute_path . 'library' . DIRECTORY_SEPARATOR;
 $g_language_path = $g_absolute_path . 'lang' . DIRECTORY_SEPARATOR;
 
 /**
+ * Absolute path to config files. Requires trailing / or \
+ * If MANTIS_CONFIG_FOLDER environment variable is set, it will be used.
+ * This allows Apache vhost to be used to setup multiple instances serviced by
+ * same code by multiple configs.
+ * @global string $g_config_path
+ */
+$t_local_config = getenv( 'MANTIS_CONFIG_FOLDER' );
+if ( $t_local_config && is_dir( $t_local_config ) ) {
+	$g_config_path = $t_local_config;
+} else {
+	$g_config_path = $g_absolute_path . 'config' . DIRECTORY_SEPARATOR;
+}
+unset( $t_local_config );
+
+/**
  * absolute path to custom strings file.
  * This file allows overriding of strings declared in language files,
  * including plugin-specific ones.
