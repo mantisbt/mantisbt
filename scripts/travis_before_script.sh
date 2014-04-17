@@ -135,7 +135,7 @@ cat <<-EOF >> $MANTIS_BOOTSTRAP
 	EOF
 
 echo "Adding custom configuration options"
-
+sudo chmod 777 $MANTIS_CONFIG
 cat  <<-EOF >> $MANTIS_CONFIG
 
     \$g_allow_no_category = ON;
@@ -143,6 +143,6 @@ cat  <<-EOF >> $MANTIS_CONFIG
     \$g_due_date_view_threshold = DEVELOPER;
     \$g_enable_project_documentation = ON;
     \$g_time_tracking_enabled = ON
-    EOF
+	EOF
 
 step "Before-script execution completed successfully"
