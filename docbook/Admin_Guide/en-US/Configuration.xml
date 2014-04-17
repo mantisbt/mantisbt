@@ -201,21 +201,6 @@
                     </para>
                 </listitem>
             </varlistentry>
-			<varlistentry>
-				<term>$g_custom_strings_file</term>
-				<listitem>
-					<para>This is the path to the
-						<emphasis>Custom Strings File</emphasis>
-						(see <xref linkend="admin.customize.strings"/>).
-					</para>
-					<para>It allows overriding of strings declared in
-						language files, including plugin-specific ones.
-					</para>
-					<para>Defaults to <filename>custom_strings_inc.php</filename>
-						in the MantisBT root directory.
-					</para>
-				</listitem>
-			</varlistentry>
             <varlistentry>
                 <term>$g_manual_url</term>
                 <listitem>

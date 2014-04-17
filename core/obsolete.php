@@ -171,6 +171,7 @@ config_obsolete( 'file_upload_ftp_server' );
 config_obsolete( 'file_upload_ftp_user' );
 config_obsolete( 'file_upload_ftp_pass' );
 config_obsolete( 'mantistouch_url' );
+config_obsolete( 'custom_strings_file' );
 config_obsolete( 'mc_readonly_access_level_threshold', 'webservice_readonly_access_level_threshold' );
 config_obsolete( 'mc_readwrite_access_level_threshold', 'webservice_readwrite_access_level_threshold' );
 config_obsolete( 'mc_admin_access_level_threshold', 'webservice_admin_access_level_threshold' );

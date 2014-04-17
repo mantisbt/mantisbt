@@ -7,9 +7,7 @@
 		<para>All strings used in MantisBT, including those defined in
 			plugins, can be customized or translated differently.
 			This is achieved by overriding them in the
-			<filename>Custom Strings File</filename>
-			(see <emphasis>$g_custom_strings_file</emphasis>
-			in <xref linkend="admin.config.path"/>),
+			<filename>Custom Strings File</filename> (in config/custom_strings_inc.php),
 			which is automatically detected and included by MantisBT code.
 		</para>
 

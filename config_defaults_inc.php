@@ -134,28 +134,6 @@ $g_library_path = $g_absolute_path . 'library' . DIRECTORY_SEPARATOR;
 $g_language_path = $g_absolute_path . 'lang' . DIRECTORY_SEPARATOR;
 
 /**
- * absolute path to custom strings file.
- * This file allows overriding of strings declared in language files,
- * including plugin-specific ones.
- *
- * Two formats are supported:
- * - New format: define a $s_custom_messages array as follows:
- *   $s_custom_messages = array( LANG => array( CODE => STRING, ... ) );
- * - Legacy format: one variable per string
- *   $s_CODE = STRING;
- *
- * Where
- * - LANG   = language code, as defined in {@link $g_language_choices_arr}
- * - CODE   = string code, as called by {@link lang_get()}
- * - STRING = string value / translation
- *
- * NOTE: mixing old and new formats within the file is not supported
- *
- * @global string $g_custom_strings_file
- */
-$g_custom_strings_file = $g_absolute_path . 'custom_strings_inc.php';
-
-/**
  * Absolute path to config files. Requires trailing / or \
  * If MANTIS_CONFIG_FOLDER environment variable is set, it will be used.
  * This allows Apache vhost to be used to setup multiple instances serviced by
@@ -4211,7 +4189,7 @@ $g_global_settings = array(
 	'hostname','html_valid_tags', 'html_valid_tags_single_line', 'default_language',
 	'language_auto_map', 'fallback_language', 'login_method', 'plugins_enabled', 'session_handler',
 	'session_save_path', 'session_validation', 'show_detailed_errors', 'show_queries_count',
-	'stop_on_errors',	'use_javascript', 'version_suffix',	'custom_strings_file',
+	'stop_on_errors',	'use_javascript', 'version_suffix',
 	'fileinfo_magic_db_file', 'css_include_file', 'css_rtl_include_file', 'meta_include_file',
 	'file_type_icons', 'path', 'icon_path', 'short_path', 'absolute_path', 'core_path',
 	'class_path','library_path', 'language_path', 'absolute_path_default_upload_folder',
