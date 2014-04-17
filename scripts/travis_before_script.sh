@@ -142,7 +142,7 @@ cat  <<-EOF >> $MANTIS_CONFIG
     \$g_due_date_update_threshold = DEVELOPER;
     \$g_due_date_view_threshold = DEVELOPER;
     \$g_enable_project_documentation = ON;
-    \$g_time_tracking_enabled = ON
+    \$g_time_tracking_enabled = ON;
 	EOF
 
 step "Before-script execution completed successfully"
