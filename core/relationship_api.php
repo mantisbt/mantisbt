@@ -162,8 +162,8 @@ $g_relationships[BUG_RELATED] = array(
 	'#notify_deleted' => 'email_notification_title_for_action_related_to_relationship_deleted',
 );
 
-if ( file_exists( $g_config_path . 'custom_relationships_inc.php' ) ) {
-	include_once( $g_config_path . 'custom_relationships_inc.php' );
+if ( file_exists( config_get_global( 'config_path' ) . 'custom_relationships_inc.php' ) ) {
+	include_once( config_get_global( 'config_path' ) . 'custom_relationships_inc.php' );
 }
 
 /**
