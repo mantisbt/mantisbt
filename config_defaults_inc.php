@@ -98,9 +98,62 @@ $g_db_type				= 'mysqli';
  */
 $g_dsn = '';
 
-/**************************
- * Config Folder Location *
- **************************/
+/********************
+ * Folder Locations *
+ ********************/
+
+/**
+ * absolute path to your installation.  Requires trailing / or \
+ * @global string $g_absolute_path
+ */
+$g_absolute_path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
+
+/**
+ * absolute patch to your core files. The default is usually OK,
+ * unless you moved the 'core' directory out of your webroot (recommended).
+ * @global string $g_core_path
+ */
+$g_core_path = $g_absolute_path . 'core' . DIRECTORY_SEPARATOR;
+
+/**
+ * absolute path to class files.  Requires trailing / or \
+ * @global string $g_class_path
+ */
+$g_class_path = $g_core_path . 'classes' . DIRECTORY_SEPARATOR;
+
+/**
+ * absolute path to library files. Requires trailing / or \
+ * @global string $g_library_path
+ */
+$g_library_path = $g_absolute_path . 'library' . DIRECTORY_SEPARATOR;
+
+/**
+ * absolute path to language files. Requires trailing / or \
+ * @global string $g_language_path
+ */
+$g_language_path = $g_absolute_path . 'lang' . DIRECTORY_SEPARATOR;
+
+/**
+ * absolute path to custom strings file.
+ * This file allows overriding of strings declared in language files,
+ * including plugin-specific ones.
+ *
+ * Two formats are supported:
+ * - New format: define a $s_custom_messages array as follows:
+ *   $s_custom_messages = array( LANG => array( CODE => STRING, ... ) );
+ * - Legacy format: one variable per string
+ *   $s_CODE = STRING;
+ *
+ * Where
+ * - LANG   = language code, as defined in {@link $g_language_choices_arr}
+ * - CODE   = string code, as called by {@link lang_get()}
+ * - STRING = string value / translation
+ *
+ * NOTE: mixing old and new formats within the file is not supported
+ *
+ * @global string $g_custom_strings_file
+ */
+$g_custom_strings_file = $g_absolute_path . 'custom_strings_inc.php';
 
 /**
  * Absolute path to config files. Requires trailing / or \
@@ -208,59 +261,6 @@ $g_icon_path = '%path%images/';
  * @global string $g_short_path
  */
 $g_short_path = $t_path;
-
-/**
- * absolute path to your installation.  Requires trailing / or \
- * @global string $g_absolute_path
- */
-$g_absolute_path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
-/**
- * absolute patch to your core files. The default is usually OK,
- * unless you moved the 'core' directory out of your webroot (recommended).
- * @global string $g_core_path
- */
-$g_core_path = $g_absolute_path . 'core' . DIRECTORY_SEPARATOR;
-
-/**
- * absolute path to class files.  Requires trailing / or \
- * @global string $g_class_path
- */
-$g_class_path = $g_core_path . 'classes' . DIRECTORY_SEPARATOR;
-
-/**
- * absolute path to library files. Requires trailing / or \
- * @global string $g_library_path
- */
-$g_library_path = $g_absolute_path . 'library' . DIRECTORY_SEPARATOR;
-
-/**
- * absolute path to language files. Requires trailing / or \
- * @global string $g_language_path
- */
-$g_language_path = $g_absolute_path . 'lang' . DIRECTORY_SEPARATOR;
-
-/**
- * absolute path to custom strings file.
- * This file allows overriding of strings declared in language files,
- * including plugin-specific ones.
- *
- * Two formats are supported:
- * - New format: define a $s_custom_messages array as follows:
- *   $s_custom_messages = array( LANG => array( CODE => STRING, ... ) );
- * - Legacy format: one variable per string
- *   $s_CODE = STRING;
- *
- * Where
- * - LANG   = language code, as defined in {@link $g_language_choices_arr}
- * - CODE   = string code, as called by {@link lang_get()}
- * - STRING = string value / translation
- *
- * NOTE: mixing old and new formats within the file is not supported
- *
- * @global string $g_custom_strings_file
- */
-$g_custom_strings_file = $g_absolute_path . 'custom_strings_inc.php';
 
 /**
  * Used to link to manual for User Documentation.
