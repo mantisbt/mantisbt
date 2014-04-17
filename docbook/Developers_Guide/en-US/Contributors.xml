@@ -421,10 +421,18 @@ $ phing test
 				<listitem><para>Adjust the <literal>bootstrap.php</literal> file
 				to point to your local installation.</para></listitem>
 				<listitem><para>Customize the <literal>config_inc.php</literal>
-				to enable all the features tested using the SOAP tests. The
-				simplest way to do that is to run all the tests once and adjust it
-				based on the skipped tests.</para></listitem>
+				to enable all the features tested using the SOAP tests. A listing of the
+				configuration options needed to enable all tests is provided below.</para>
+				</listitem>
 			</itemizedlist>
+
+			<programlisting>
+$g_allow_no_category = ON;
+$g_due_date_update_threshold = DEVELOPER;
+$g_due_date_view_threshold = DEVELOPER;
+$g_enable_project_documentation = ON;
+$g_time_tracking_enabled = ON
+			</programlisting>
 
 		</section>
 
