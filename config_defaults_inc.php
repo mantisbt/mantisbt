@@ -99,6 +99,33 @@ $g_db_type				= 'mysqli';
 $g_dsn = '';
 
 /**************************
+ * Config Folder Location *
+ **************************/
+
+/**
+ * Absolute path to config files. Requires trailing / or \
+ * If MANTIS_CONFIG_FOLDER environment variable is set, it will be used.
+ * This allows Apache vhost to be used to setup multiple instances serviced by
+ * same code by multiple configs.
+ * @global string $g_config_path
+ */
+$t_local_config = getenv( 'MANTIS_CONFIG_FOLDER' );
+if ( $t_local_config && is_dir( $t_local_config ) ) {
+	$t_last_char = substr( $t_local_config , -1 );
+	if ( $t_last_char != '/' && $t_last_char != '\\' ) {
+		$t_local_config .= DIRECTORY_SEPARATOR;
+	}
+
+	unset( $t_last_char );
+
+	$g_config_path = $t_local_config;
+} else {
+	$g_config_path = $g_absolute_path . 'config' . DIRECTORY_SEPARATOR;
+}
+
+unset( $t_local_config );
+
+/**************************
  * MantisBT Path Settings *
  **************************/
 
@@ -134,7 +161,7 @@ if ( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
 	}
 
 	if ( !isset( $_SERVER['SCRIPT_NAME'] )) {
-		echo 'Invalid server configuration detected. Please set $g_path manually in config/config_inc.php.';
+		echo 'Invalid server configuration detected. Please set $g_path manually in ' . $g_config_path . 'config_inc.php.';
 		if ( isset( $_SERVER['SERVER_SOFTWARE'] ) && ( stripos($_SERVER['SERVER_SOFTWARE'], 'nginx') !== false ) )
 			echo ' Please try to add "fastcgi_param SCRIPT_NAME $fastcgi_script_name;" to the nginx server configuration.';
 		die;
@@ -154,7 +181,7 @@ if ( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
 			break;
 	}
 	if( strpos( $t_path, '&#' ) ) {
-		echo 'Can not safely determine $g_path. Please set $g_path manually in config/config_inc.php';
+		echo 'Can not safely determine $g_path. Please set $g_path manually in ' . $g_config_path . 'config_inc.php';
 		die;
 	}
 } else {
@@ -212,21 +239,6 @@ $g_library_path = $g_absolute_path . 'library' . DIRECTORY_SEPARATOR;
  * @global string $g_language_path
  */
 $g_language_path = $g_absolute_path . 'lang' . DIRECTORY_SEPARATOR;
-
-/**
- * Absolute path to config files. Requires trailing / or \
- * If MANTIS_CONFIG_FOLDER environment variable is set, it will be used.
- * This allows Apache vhost to be used to setup multiple instances serviced by
- * same code by multiple configs.
- * @global string $g_config_path
- */
-$t_local_config = getenv( 'MANTIS_CONFIG_FOLDER' );
-if ( $t_local_config && is_dir( $t_local_config ) ) {
-	$g_config_path = $t_local_config;
-} else {
-	$g_config_path = $g_absolute_path . 'config' . DIRECTORY_SEPARATOR;
-}
-unset( $t_local_config );
 
 /**
  * absolute path to custom strings file.

@@ -153,7 +153,7 @@ if( 0 == $t_install_state ) {
 <?php
 }
 
-$t_config_filename = $g_absolute_path . 'config/config_inc.php';
+$t_config_filename = $g_config_path . 'config_inc.php';
 $t_config_exists = file_exists( $t_config_filename );
 
 # Initialize Oracle-specific values for prefix and suffix, and set
@@ -1023,7 +1023,7 @@ if( 4 == $t_install_state ) {
 
 # all checks have passed, install the database
 if( 5 == $t_install_state ) {
-	$t_config_filename = $g_absolute_path . 'config/config_inc.php';
+	$t_config_filename = $g_config_path . 'config_inc.php';
 	$t_config_exists = file_exists( $t_config_filename );
 	?>
 <table width="100%" cellpadding="10" cellspacing="1">
@@ -1109,7 +1109,7 @@ if( 5 == $t_install_state ) {
 			( $f_db_schema != config_get( 'db_schema', '') ) ||
 			( $f_db_username != config_get( 'db_username', '' ) ) ||
 			( $f_db_password != config_get( 'db_password', '' ) ) ) {
-			print_test_result( BAD, false, 'file ' . $g_absolute_path . 'config/config_inc.php' . ' already exists and has different settings' );
+			print_test_result( BAD, false, 'file ' . $g_config_path . 'config_inc.php' . ' already exists and has different settings' );
 		} else {
 			print_test_result( GOOD, false );
 			$t_write_failed = false;

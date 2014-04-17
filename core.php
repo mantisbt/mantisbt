@@ -197,7 +197,7 @@ if ( $t_config_inc_found ) {
 # they can complete installation and configuration of MantisBT
 if ( false === $t_config_inc_found ) {
 	if( php_sapi_name() == 'cli' ) {
-		echo "Error: config/config_inc.php file not found; ensure MantisBT is properly setup.\n";
+		echo "Error: " . $g_config_path . "config_inc.php file not found; ensure MantisBT is properly setup.\n";
 		exit(1);
 	}
 
