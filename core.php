@@ -74,7 +74,9 @@ require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEP
 require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config_defaults_inc.php' );
 
 # Load user-defined constants (if required)
-@include_once( $g_config_path . 'custom_constants_inc.php' );
+if ( file_exists( $g_config_path . 'custom_constants_inc.php' ) ) {
+	include_once( $g_config_path . 'custom_constants_inc.php' );
+}
 
 # Remember (globally) which API files have already been loaded
 $g_api_included = array();
@@ -187,7 +189,9 @@ compress_start_handler();
 # config_inc may not be present if this is a new install
 $t_config_inc_found = file_exists( $g_config_path . 'config_inc.php' );
 
-@include_once( $g_config_path . 'config_inc.php' );
+if ( $t_config_inc_found ) {
+	include_once( $g_config_path . 'config_inc.php' );
+}
 
 # If no configuration file exists, redirect the user to the admin page so
 # they can complete installation and configuration of MantisBT
@@ -273,7 +277,10 @@ if ( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 
 # Load custom functions
 require_api( 'custom_function_api.php' );
-@include_once( $g_config_path . 'custom_functions_inc.php' );
+
+if ( file_exists( $g_config_path . 'custom_functions_inc.php' ) ) {
+	include_once( $g_config_path . 'custom_functions_inc.php' );
+}
 
 # Set HTTP response headers
 require_api( 'http_api.php' );
