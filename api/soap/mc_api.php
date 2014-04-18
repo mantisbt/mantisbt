@@ -175,7 +175,7 @@ function mci_check_login( $p_username, $p_password ) {
 	}
 
 	# if no user name supplied, then attempt to login as anonymous user.
-	if ( is_blank( $p_username ) || ( $p_username == $t_anonymous_account ) ) {
+	if ( is_blank( $p_username ) || ( strcasecmp( $p_username, $t_anonymous_account ) == 0 ) ) {
 		if ( !$t_anon_allowed ) {
 			return false;
 		}
