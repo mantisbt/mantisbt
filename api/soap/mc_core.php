@@ -14,6 +14,9 @@
  * @link http://www.mantisbt.org
  */
 
+# constants and configurations
+$t_current_dir = dirname( __FILE__ ) . '/';
+
 # MantisConnect APIs
 #   mc_* = public methods
 #   mci_* = internal methods
@@ -31,3 +34,5 @@ require_once( $t_current_dir . 'mc_custom_field_api.php' );
 require_once( $t_current_dir . 'mc_user_pref_api.php' );
 require_once( $t_current_dir . 'mc_tag_api.php' );
 require_once( $t_current_dir . 'mc_user_profile_api.php' );
+
+unset( $t_current_dir );

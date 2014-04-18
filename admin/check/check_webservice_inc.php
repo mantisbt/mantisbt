@@ -36,17 +36,6 @@ require_api( 'constant_inc.php' );
 
 check_print_section_header_row( 'Webservice' );
 
-$t_library_path = config_get_global( 'library_path' );
-$t_library_path = realpath( $t_library_path );
-if ( $t_library_path[strlen( $t_library_path )-1] != '/' ) {
-	$t_library_path .= '/';
-}
-
-check_print_test_warn_row(
-	"Legacy <em>library/nusoap</em> folder must be deleted.",
-	!is_dir( $t_library_path . 'nusoap' )
-);
-
 check_print_test_warn_row(
 	'SOAP Extension Enabled',
 	extension_loaded( 'soap' ),

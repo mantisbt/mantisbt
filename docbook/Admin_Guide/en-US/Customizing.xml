@@ -7,9 +7,7 @@
 		<para>All strings used in MantisBT, including those defined in
 			plugins, can be customized or translated differently.
 			This is achieved by overriding them in the
-			<filename>Custom Strings File</filename>
-			(see <emphasis>$g_custom_strings_file</emphasis>
-			in <xref linkend="admin.config.path"/>),
+			<filename>Custom Strings File</filename> (in config/custom_strings_inc.php),
 			which is automatically detected and included by MantisBT code.
 		</para>
 
@@ -979,8 +977,7 @@ $g_status_enum_workflow[CLOSED]       ='20:feedback,50:assigned';
 			<emphasis>custom_function_override_descriptive_name</emphasis>,
 			and placed in a file called
 			<filename>custom_functions_inc.php</filename> that must be saved in
-			MantisBT's root directory (This is the same place where the
-			<filename>config_inc.php</filename> file resides).
+			MantisBT's config directory.
 			In normal processing, the system will look for override functions
 			and execute them instead of the provided default functions.
 		</para>

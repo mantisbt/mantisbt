@@ -177,11 +177,11 @@ $t_ignore_files = array(
 	'lang/',
 	'library/',
 	'plugins/',
-	'config_inc.php',
-	'custom_constants_inc.php',
-	'custom_functions_inc.php',
-	'custom_relationships_inc.php',
-	'custom_strings_inc.php',
+	'config/config_inc.php',
+	'config/custom_constants_inc.php',
+	'config/custom_functions_inc.php',
+	'config/custom_relationships_inc.php',
+	'config/custom_strings_inc.php',
 	'mantis_offline.php'
 );
 check_file_integrity_recursive( $t_absolute_base_dir, $t_absolute_base_dir, '', $t_ignore_files );

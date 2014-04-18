@@ -43,7 +43,10 @@ require_api( 'utility_api.php' );
  */
 function crypto_init() {
 	if ( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
-		if ( strlen( config_get_global( 'crypto_master_salt' ) ) < 16 ) {
+		# When this API is called from core, config_api is not yet initialized
+		# so use the global variable directly rather than config_get_global().
+		global $g_crypto_master_salt;
+		if ( strlen( $g_crypto_master_salt ) < 16 ) {
 			trigger_error( ERROR_CRYPTO_MASTER_SALT_INVALID, ERROR );
 		}
 	}

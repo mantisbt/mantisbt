@@ -43,6 +43,7 @@ $t_path_config_names = array(
 	'core_path',
 	'class_path',
 	'library_path',
+	'config_path',
 	'language_path'
 );
 
@@ -117,6 +118,7 @@ $t_moveable_paths = array(
 	'core_path',
 	'class_path',
 	'library_path',
+	'config_path',
 	'language_path'
 );
 

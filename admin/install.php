@@ -27,7 +27,7 @@ error_reporting( E_ALL );
 @set_time_limit( 0 );
 
 # Load the MantisDB core in maintenance mode. This mode will assume that
-# config_inc.php hasn't been specified. Thus the database will not be opened
+# config/config_inc.php hasn't been specified. Thus the database will not be opened
 # and plugins will not be loaded.
 define( 'MANTIS_MAINTENANCE_MODE', true );
 
@@ -153,7 +153,7 @@ if( 0 == $t_install_state ) {
 <?php
 }
 
-$t_config_filename = $g_absolute_path . 'config_inc.php';
+$t_config_filename = $g_config_path . 'config_inc.php';
 $t_config_exists = file_exists( $t_config_filename );
 
 # Initialize Oracle-specific values for prefix and suffix, and set
@@ -285,6 +285,16 @@ print_test( 'Checking if safe mode is enabled for install script',
 	! ini_get ( 'SAFE_MODE' ),
 	true,
 	'Disable safe_mode in php.ini before proceeding' ) ?>
+
+<?php
+	print_test( 'Checking there is no config_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/config_inc.php' ), true, 'Move config_inc.php to config/config_inc.php.' );
+	print_test( 'Checking there is no custom_constants_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/custom_constants_inc.php' ), true, 'Move custom_constants_inc.php to config/custom_constants_inc.php.' );
+	print_test( 'Checking there is no custom_strings_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/custom_strings_inc.php' ), true, 'Move custom_strings_inc.php to config/custom_strings_inc.php.' );
+	print_test( 'Checking there is no custom_functions_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/custom_functions_inc.php' ), true, 'Move custom_functions_inc.php to config/custom_functions_inc.php.' );
+	print_test( 'Checking there is no custom_relationships_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/custom_relationships_inc.php' ), true, 'Move custom_relationships_inc.php to config/custom_relationships_inc.php.' );
+	print_test( 'Checking there is no mc_config_defaults_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/api/soap/mc_config_defaults_inc.php' ), true, 'Delete this file.' );
+	print_test( 'Checking there is no mc_config_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/api/soap/mc_config_inc.php' ), true, 'Move contents to config_inc.php file.' );
+?>
 
 </table>
 <?php
@@ -1023,7 +1033,7 @@ if( 4 == $t_install_state ) {
 
 # all checks have passed, install the database
 if( 5 == $t_install_state ) {
-	$t_config_filename = $g_absolute_path . 'config_inc.php';
+	$t_config_filename = $g_config_path . 'config_inc.php';
 	$t_config_exists = file_exists( $t_config_filename );
 	?>
 <table width="100%" cellpadding="10" cellspacing="1">
@@ -1038,14 +1048,14 @@ if( 5 == $t_install_state ) {
 <?php
 	if( !$t_config_exists ) {
 ?>
-		Creating Configuration File (config_inc.php)<br />
+		Creating Configuration File (config/config_inc.php)<br />
 		<span class="error-msg">
 			(if this file is not created, create it manually with the contents below)
 		</span>
 <?php
 	} else {
 ?>
-		Updating Configuration File (config_inc.php)<br />
+		Updating Configuration File (config/config_inc.php)<br />
 <?php
 	}
 ?>
@@ -1109,7 +1119,7 @@ if( 5 == $t_install_state ) {
 			( $f_db_schema != config_get( 'db_schema', '') ) ||
 			( $f_db_username != config_get( 'db_username', '' ) ) ||
 			( $f_db_password != config_get( 'db_password', '' ) ) ) {
-			print_test_result( BAD, false, 'file ' . $g_absolute_path . 'config_inc.php' . ' already exists and has different settings' );
+			print_test_result( BAD, false, 'file ' . $g_config_path . 'config_inc.php' . ' already exists and has different settings' );
 		} else {
 			print_test_result( GOOD, false );
 			$t_write_failed = false;

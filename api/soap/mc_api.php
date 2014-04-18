@@ -194,12 +194,12 @@ function mci_check_login( $p_username, $p_password ) {
 
 function mci_has_readonly_access( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	$t_access_level = user_get_access_level( $p_user_id, $p_project_id );
-	return( $t_access_level >= config_get( 'mc_readonly_access_level_threshold' ) );
+	return( $t_access_level >= config_get( 'webservice_readonly_access_level_threshold' ) );
 }
 
 function mci_has_readwrite_access( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	$t_access_level = user_get_access_level( $p_user_id, $p_project_id );
-	return( $t_access_level >= config_get( 'mc_readwrite_access_level_threshold' ) );
+	return( $t_access_level >= config_get( 'webservice_readwrite_access_level_threshold' ) );
 }
 
 function mci_has_access( $p_access_level, $p_user_id, $p_project_id = ALL_PROJECTS ) {
@@ -209,7 +209,7 @@ function mci_has_access( $p_access_level, $p_user_id, $p_project_id = ALL_PROJEC
 
 function mci_has_administrator_access( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	$t_access_level = user_get_access_level( $p_user_id, $p_project_id );
-	return( $t_access_level >= config_get( 'mc_admin_access_level_threshold' ) );
+	return( $t_access_level >= config_get( 'webservice_admin_access_level_threshold' ) );
 }
 
 function mci_get_project_id( $p_project ) {

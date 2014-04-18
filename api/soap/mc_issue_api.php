@@ -329,7 +329,7 @@ function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
 
 	$t_src_relationships = relationship_get_all_src( $p_issue_id );
 	foreach( $t_src_relationships as $t_relship_row ) {
-		if( access_has_bug_level( config_get( 'mc_readonly_access_level_threshold' ), $t_relship_row->dest_bug_id, $p_user_id ) ) {
+		if( access_has_bug_level( config_get( 'webservice_readonly_access_level_threshold' ), $t_relship_row->dest_bug_id, $p_user_id ) ) {
 			$t_relationship = array();
 			$t_reltype = array();
 			$t_relationship['id'] = $t_relship_row->id;
@@ -343,7 +343,7 @@ function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
 
 	$t_dest_relationships = relationship_get_all_dest( $p_issue_id );
 	foreach( $t_dest_relationships as $t_relship_row ) {
-		if( access_has_bug_level( config_get( 'mc_readonly_access_level_threshold' ), $t_relship_row->src_bug_id, $p_user_id ) ) {
+		if( access_has_bug_level( config_get( 'webservice_readonly_access_level_threshold' ), $t_relship_row->src_bug_id, $p_user_id ) ) {
 			$t_relationship = array();
 			$t_relationship['id'] = $t_relship_row->id;
 			$t_reltype = array();
@@ -624,7 +624,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 		if( $t_reporter_id != $t_user_id ) {
 
 			# Make sure that active user has access level required to specify a different reporter.
-			$t_specify_reporter_access_level = config_get( 'mc_specify_reporter_on_add_access_level_threshold' );
+			$t_specify_reporter_access_level = config_get( 'webservice_specify_reporter_on_add_access_level_threshold' );
 			if( !access_has_project_level( $t_specify_reporter_access_level, $t_project_id, $t_user_id ) ) {
 				return mci_soap_fault_access_denied( $t_user_id, "Active user does not have access level required to specify a different issue reporter" );
 			}
@@ -666,12 +666,12 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	if ( isset( $p_issue['version'] ) && !is_blank( $p_issue['version'] ) && !version_get_id( $p_issue['version'], $t_project_id ) ) {
 		$t_version = $p_issue['version'];
 
-		$t_error_when_version_not_found = config_get( 'mc_error_when_version_not_found' );
+		$t_error_when_version_not_found = config_get( 'webservice_error_when_version_not_found' );
 		if( $t_error_when_version_not_found == ON ) {
 			$t_project_name = project_get_name( $t_project_id );
 			return SoapObjectsFactory::newSoapFault('Client', "Version '$t_version' does not exist in project '$t_project_name'.");
 		} else {
-			$t_version_when_not_found = config_get( 'mc_version_when_not_found' );
+			$t_version_when_not_found = config_get( 'webservice_version_when_not_found' );
 			$t_version = $t_version_when_not_found;
 		}
 	}
@@ -857,12 +857,12 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	}
 
 	if ( isset( $p_issue['version'] ) && !is_blank( $p_issue['version'] ) && !version_get_id( $p_issue['version'], $t_project_id ) ) {
-		$t_error_when_version_not_found = config_get( 'mc_error_when_version_not_found' );
+		$t_error_when_version_not_found = config_get( 'webservice_error_when_version_not_found' );
 		if( $t_error_when_version_not_found == ON ) {
 			$t_project_name = project_get_name( $t_project_id );
 			return SoapObjectsFactory::newSoapFault( 'Client', "Version '" . $p_issue['version'] . "' does not exist in project '$t_project_name'." );
 		} else {
-			$t_version_when_not_found = config_get( 'mc_version_when_not_found' );
+			$t_version_when_not_found = config_get( 'webservice_version_when_not_found' );
 			$p_issue['version'] = $t_version_when_not_found;
 		}
 	}

@@ -70,30 +70,13 @@ ob_start();
 # Load supplied constants
 require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'constant_inc.php' );
 
-# Load user-defined constants (if required)
-if ( file_exists( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'custom_constants_inc.php' ) ) {
-	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'custom_constants_inc.php' );
-}
-
-$t_config_inc_found = false;
-
 # Include default configuration settings
 require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config_defaults_inc.php' );
 
-# config_inc may not be present if this is a new install
-if ( file_exists( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config_inc.php' ) ) {
-	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config_inc.php' );
-	$t_config_inc_found = true;
+# Load user-defined constants (if required)
+if ( file_exists( $g_config_path . 'custom_constants_inc.php' ) ) {
+	include_once( $g_config_path . 'custom_constants_inc.php' );
 }
-
-# Allow an environment variable (defined in an Apache vhost for example)
-# to specify a config file to load to override other local settings
-$t_local_config = getenv( 'MANTIS_CONFIG' );
-if ( $t_local_config && file_exists( $t_local_config ) ){
-	require_once( $t_local_config );
-	$t_config_inc_found = true;
-}
-unset( $t_local_config );
 
 # Remember (globally) which API files have already been loaded
 $g_api_included = array();
@@ -203,11 +186,18 @@ unset( $t_output );
 require_api( 'compress_api.php' );
 compress_start_handler();
 
+# config_inc may not be present if this is a new install
+$t_config_inc_found = file_exists( $g_config_path . 'config_inc.php' );
+
+if ( $t_config_inc_found ) {
+	include_once( $g_config_path . 'config_inc.php' );
+}
+
 # If no configuration file exists, redirect the user to the admin page so
 # they can complete installation and configuration of MantisBT
 if ( false === $t_config_inc_found ) {
 	if( php_sapi_name() == 'cli' ) {
-		echo "Error: config_inc.php file not found; ensure MantisBT is properly setup.\n";
+		echo "Error: " . $g_config_path . "config_inc.php file not found; ensure MantisBT is properly setup.\n";
 		exit(1);
 	}
 
@@ -287,8 +277,9 @@ if ( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 
 # Load custom functions
 require_api( 'custom_function_api.php' );
-if ( file_exists( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'custom_functions_inc.php' ) ) {
-	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'custom_functions_inc.php' );
+
+if ( file_exists( $g_config_path . 'custom_functions_inc.php' ) ) {
+	include_once( $g_config_path . 'custom_functions_inc.php' );
 }
 
 # Set HTTP response headers
