@@ -167,31 +167,10 @@ function mci_check_login( $p_username, $p_password ) {
 		return false;
 	}
 
-	$t_anon_allowed = config_get( 'allow_anonymous_login' );
-	if ( $t_anon_allowed == ON ) {
-		$t_anonymous_account = config_get( 'anonymous_account' );
-	} else {
-		$t_anonymous_account = '';
-	}
+	# Must not pass in password, otherwise, authentication will be by-passed.
+	$t_password = ( $p_password === null ) ? '' : $p_password;
 
-	# if no user name supplied, then attempt to login as anonymous user.
-	if ( is_blank( $p_username ) || ( strcasecmp( $p_username, $t_anonymous_account ) == 0 ) ) {
-		if ( !$t_anon_allowed ) {
-			return false;
-		}
-
-		$p_username = $t_anonymous_account;
-
-		# do not use password validation.
-		$p_password = null;
-	} else {
-		if( is_blank( $p_password ) ) {
-			# require password for authenticated access
-			return false;
-		}
-	}
-
-	if( false === auth_attempt_script_login( $p_username, $p_password ) ) {
+	if ( false === auth_attempt_script_login( $p_username, $t_password ) ) {
 		return false;
 	}
 
