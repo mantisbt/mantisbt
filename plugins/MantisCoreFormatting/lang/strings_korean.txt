@@ -26,6 +26,7 @@
  * @file
  *
  * @author Changwoo
+ * @author 아라
  */
 
 $s_plugin_format_title = '맨티스 서식';
@@ -37,4 +38,4 @@ $s_plugin_format_process_urls = 'URL 처리';
 $s_plugin_format_process_buglinks = '맨티스 링크(이슈/이슈노트)';
 $s_plugin_format_process_vcslinks = '버전 컨트롤 링크';
 $s_plugin_format_enabled = '사용';
-$s_plugin_format_disabled = '사용 않음';
+$s_plugin_format_disabled = '끄기';
