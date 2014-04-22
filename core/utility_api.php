@@ -62,7 +62,7 @@ function trans_bool( $p_num ) {
  * @access public
  */
 function terminate_directory_path( $p_path ) {
-	return rtrim( $p_path, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR;
+	return rtrim( $p_path, '/' ) . '/';
 }
 
 /**

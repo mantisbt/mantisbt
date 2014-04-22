@@ -27,6 +27,9 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture for version methods
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class VersionTest extends SoapBase {
 
@@ -48,6 +51,7 @@ class VersionTest extends SoapBase {
 
 	/**
 	 * Tests creating a new version
+	 *
 	 */
 	public function testAddVersion() {
 
@@ -77,6 +81,7 @@ class VersionTest extends SoapBase {
 
 	/**
 	 * Tests updating a version
+	 *
 	 */
 	public function testUpdateVersion() {
 

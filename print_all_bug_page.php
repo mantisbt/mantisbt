@@ -97,7 +97,7 @@ $t_bug_count = null;
 $t_page_count = null;
 
 $t_result = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count );
-$row_count = count( $t_result );
+$t_row_count = count( $t_result );
 
 # pre-cache custom column data
 columns_plugin_cache_issue_data( $t_result );
@@ -134,9 +134,9 @@ html_body_begin();
 #$f_export is a string for the word and excel pages
 
 $f_bug_arr = gpc_get_int_array( 'bug_arr', array() );
-$f_bug_arr[$row_count]=-1;
+$f_bug_arr[$t_row_count]=-1;
 
-for( $i=0; $i < $row_count; $i++ ) {
+for( $i=0; $i < $t_row_count; $i++ ) {
 	if ( isset( $f_bug_arr[$i] ) ) {
 		$index = $f_bug_arr[$i];
 		$t_bug_arr_sort[$index]=1;
@@ -191,9 +191,9 @@ $t_icon_path = config_get( 'icon_path' );
 		<?php
 			echo lang_get( 'viewing_bugs_title' );
 
-			if ( $row_count > 0 ) {
+			if ( $t_row_count > 0 ) {
 				$v_start = $f_offset+1;
-				$v_end   = $f_offset+$row_count;
+				$v_end   = $f_offset+$t_row_count;
 			} else {
 				$v_start = 0;
 				$v_end   = 0;
@@ -224,7 +224,7 @@ $t_icon_path = config_get( 'icon_path' );
 	<td colspan="9"></td>
 </tr>
 <?php
-	for( $i=0; $i < $row_count; $i++ ) {
+	for( $i=0; $i < $t_row_count; $i++ ) {
 		$t_row = $t_result[$i];
 
 		# alternate row colors

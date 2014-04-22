@@ -55,9 +55,7 @@ function check_php_version( $p_version ) {
  * @return string Formatted date representing unixtime(0) + 1 second, ready for database insertion
  */
 function db_null_date() {
-	global $g_db;
-
-	return $g_db->BindTimestamp( $g_db->UserTimeStamp( 1, 'Y-m-d H:i:s', true ) );
+	return MantisDatabase::GetInstance()->legacy_null_date();
 }
 
 /**
@@ -71,10 +69,8 @@ function db_null_date() {
  * @todo Review date handling
  */
 function db_unixtimestamp( $p_date = null, $p_gmt = false ) {
-	global $g_db;
-
 	if( null !== $p_date ) {
-		$p_timestamp = $g_db->UnixTimeStamp( $p_date, $p_gmt );
+		$p_timestamp = MantisDatabase::GetInstance()->legacy_timestamp( $p_date );
 	} else {
 		$p_timestamp = time();
 	}
@@ -82,115 +78,28 @@ function db_unixtimestamp( $p_date = null, $p_gmt = false ) {
 }
 
 /**
- * Check PostgreSQL boolean columns' type in the DB
- * Verifies that columns defined as type "L" (logical) in the Mantis schema
- * have the correct type in the underlying database.
- * The ADOdb library bundled with MantisBT releases prior to 1.1.0 (schema
- * version 51) created type "L" columns in PostgreSQL as SMALLINT, whereas later
- * versions created them as BOOLEAN.
- * @return mixed true if columns check OK
- *               error message string if errors occured
- *               array of invalid columns otherwise (empty if all columns check OK)
- */
-function check_pgsql_bool_columns() {
-	global $f_db_type, $f_database_name;
-	global $g_db;
-
-	# Only applies to PostgreSQL
-	if( $f_db_type != 'pgsql' ) {
-		return true;
-	}
-
-	# Build the list of "L" type columns as of schema version 51
-	$t_bool_columns = array(
-		'bug'             => array( 'sticky' ),
-		'custom_field'    => array( 'advanced', 'require_report', 'require_update', 'display_report', 'display_update', 'require_resolved', 'display_resolved', 'display_closed', 'require_closed' ),
-		'filters'         => array( 'is_public' ),
-		'news'            => array( 'announcement' ),
-		'project'         => array( 'enabled' ),
-		'project_version' => array( 'released' ),
-		'sponsorship'     => array( 'paid' ),
-		'user_pref'       => array( 'advanced_report', 'advanced_view', 'advanced_update', 'redirect_delay', 'email_on_new', 'email_on_assigned', 'email_on_feedback', 'email_on_resolved', 'email_on_closed', 'email_on_reopened', 'email_on_bugnote', 'email_on_status', 'email_on_priority' ),
-		'user'            => array( 'enabled', 'protected' ),
-	);
-
-	# Generate SQL to check columns against schema
-	$t_where = '';
-	foreach( $t_bool_columns as $t_table_name => $t_columns ) {
-		$t_table = db_get_table( $t_table_name );
-		$t_where .= "table_name = '$t_table' AND column_name IN ( '"
-			. implode($t_columns, "', '")
-			. "' ) OR\n";
-	}
-	$sql = "SELECT table_name, column_name, data_type, column_default, is_nullable
-		FROM information_schema.columns
-		WHERE
-			table_catalog = '$f_database_name' AND
-			data_type <> 'boolean' AND
-			(\n" . rtrim( $t_where, " OR\n" ) . "\n)";
-
-	$t_result = @$g_db->Execute( $sql );
-	if( $t_result === false ) {
-		return 'Unable to check information_schema';
-	} else if( $t_result->RecordCount() == 0 ) {
-		return array();
-	}
-
-	# Some columns are not BOOLEAN type, return the list
-	return $t_result->GetArray();
-}
-
-/**
- * Set the value of $g_db_log_queries as specified
- * This is used by install callback functions to ensure that only the relevant
- * queries are logged
- * @global int $g_db_log_queries
- * @param int $p_new_state new value to set $g_db_log_queries to (defaults to OFF)
- * @return int old value of $g_db_log_queries
- */
-function install_set_log_queries( $p_new_state = OFF ) {
-	global $g_db_log_queries;
-
-	$t_log_queries = $g_db_log_queries;
-
-	if ( $g_db_log_queries !== $p_new_state ) {
-		$g_db_log_queries = $p_new_state;
-	}
-
-	# Return the old value of $g_db_log_queries
-	return $t_log_queries;
-}
-
-/**
  * Migrate the legacy category data to the new category_id-based schema.
  */
 function install_category_migrate() {
-	$t_bug_table = db_get_table( 'bug' );
-	$t_category_table = db_get_table( 'category' );
-	$t_project_category_table = db_get_table( 'project_category' );
+	$t_query = "SELECT project_id, category, user_id FROM {project_category} ORDER BY project_id, category";
+	$t_category_result = db_query( $t_query );
 
-	# Disable query logging even if enabled in config, due to possibility of mass spam
-	$t_log_queries = install_set_log_queries();
-
-	$query = "SELECT project_id, category, user_id FROM $t_project_category_table ORDER BY project_id, category";
-	$t_category_result = db_query_bound( $query );
-
-	$query = "SELECT project_id, category FROM $t_bug_table ORDER BY project_id, category";
-	$t_bug_result = db_query_bound( $query );
+	$t_query = "SELECT project_id, category FROM {bug} ORDER BY project_id, category";
+	$t_bug_result = db_query( $t_query );
 
 	$t_data = array();
 
 	# Find categories specified by project
-	while( $row = db_fetch_array( $t_category_result ) ) {
-		$t_project_id = $row['project_id'];
-		$t_name = $row['category'];
-		$t_data[$t_project_id][$t_name] = $row['user_id'];
+	while( $t_row = db_fetch_array( $t_category_result ) ) {
+		$t_project_id = $t_row['project_id'];
+		$t_name = $t_row['category'];
+		$t_data[$t_project_id][$t_name] = $t_row['user_id'];
 	}
 
 	# Find orphaned categories from bugs
-	while( $row = db_fetch_array( $t_bug_result ) ) {
-		$t_project_id = $row['project_id'];
-		$t_name = $row['category'];
+	while( $t_row = db_fetch_array( $t_bug_result ) ) {
+		$t_project_id = $t_row['project_id'];
+		$t_name = $t_row['category'];
 
 		if ( !isset( $t_data[$t_project_id][$t_name] ) ) {
 			$t_data[$t_project_id][$t_name] = 0;
@@ -203,26 +112,20 @@ function install_category_migrate() {
 		foreach( $t_categories as $t_name => $t_user_id ) {
 			$t_lower_name = utf8_strtolower( trim( $t_name ) );
 			if ( !isset( $t_inserted[$t_lower_name] ) ) {
-				$query = "INSERT INTO $t_category_table ( name, project_id, user_id ) VALUES ( " .
-					db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-				db_query_bound( $query, array( $t_name, $t_project_id, $t_user_id ) );
-				$t_category_id = db_insert_id( $t_category_table );
+				$t_query = 'INSERT INTO {category} ( name, project_id, user_id ) VALUES ( %s, %d, %d )';
+				db_query( $t_query, array( $t_name, $t_project_id, $t_user_id ) );
+				$t_category_id = db_insert_id( '{category}' );
 				$t_inserted[$t_lower_name] = $t_category_id;
 			} else {
 				$t_category_id = $t_inserted[$t_lower_name];
 			}
 
-			$query = "UPDATE $t_bug_table SET category_id=" . db_param() . '
-						WHERE project_id=' . db_param() . ' AND category=' . db_param();
-			db_query_bound( $query, array( $t_category_id, $t_project_id, $t_name ) );
+			$t_query = "UPDATE {bug} SET category_id=%d WHERE project_id=%d AND category=%s";
+			db_query( $t_query, array( $t_category_id, $t_project_id, $t_name ) );
 		}
 	}
 
-	# Re-enable query logging if we disabled it
-	install_set_log_queries( $t_log_queries );
-
-	# return 2 because that's what ADOdb/DataDict does when things happen properly
-	return 2;
+	return DB_QUERY_SUCCESS;
 }
 
 /**
@@ -232,101 +135,69 @@ function install_category_migrate() {
  */
 function install_date_migrate( $p_data ) {
 	// $p_data[0] = tablename, [1] id column, [2] = old column, [3] = new column
-
-	# Disable query logging even if enabled in config, due to possibility of mass spam
-	$t_log_queries = install_set_log_queries();
-
 	$t_table = $p_data[0];
 	$t_id_column = $p_data[1];
-	$t_date_array = is_array( $p_data[2] );
 
-	if ( $t_date_array ) {
+	if ( is_array( $p_data[2] ) ) {
 		$t_old_column = implode( ',', $p_data[2] );
+		$t_date_array = true;
 		$t_cnt_fields = count( $p_data[2] );
-		$query = "SELECT $t_id_column, $t_old_column FROM $t_table";
-
-		$t_first_column = true;
-
-		# In order to handle large databases where we may timeout during the upgrade, we don't
-		# start from the beginning everytime.  Here we will only pickup rows where at least one
-		# of the datetime fields wasn't upgraded yet and upgrade them all.
-		foreach ( $p_data[3] as $t_new_column_name ) {
-			if ( $t_first_column ) {
-				$t_first_column = false;
-				$query .= ' WHERE ';
-			} else {
-				$query .= ' OR ';
-			}
-
-			$query .= "$t_new_column_name = 1";
+		$t_pairs = array();
+		foreach( $p_data[3] as $var ) {
+			array_push( $t_pairs, "$var=%s" ) ;
 		}
+		$t_new_column = implode( ',', $t_pairs );
+		$t_query = "SELECT $t_id_column, $t_old_column FROM $t_table";
 	} else {
 		$t_old_column = $p_data[2];
+		$t_new_column = $p_data[3] . '=%d';
+		$t_date_array = false;
 
 		# The check for timestamp being = 1 is to make sure the field wasn't upgraded
 		# already in a previous run - see bug #12601 for more details.
 		$t_new_column_name = $p_data[3];
-		$query = "SELECT $t_id_column, $t_old_column FROM $t_table WHERE $t_new_column_name = 1";
+		$t_query = "SELECT $t_id_column, $t_old_column FROM $t_table WHERE $t_new_column_name = 1";
 	}
 
-	$t_result = db_query_bound( $query );
+	$t_result = db_query( $t_query );
 
-	if( db_num_rows( $t_result ) > 0 ) {
+	$t_query = "UPDATE $t_table SET $t_new_column WHERE $t_id_column=%d";
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_id = (int)$t_row[$t_id_column];
 
-		# Build the update query
-		if ( $t_date_array ) {
-			$t_pairs = array();
-			foreach( $p_data[3] as $var ) {
-				array_push( $t_pairs, "$var=" . db_param() ) ;
-			}
-			$t_new_column = implode( ',', $t_pairs );
-		} else {
-			$t_new_column = $p_data[3] . "=" . db_param();
-		}
-		$query = "UPDATE $t_table SET $t_new_column
-					WHERE $t_id_column=" . db_param();
-
-		while( $row = db_fetch_array( $t_result ) ) {
-			$t_id = (int)$row[$t_id_column];
-
-			if( $t_date_array ) {
-				for( $i=0; $i < $t_cnt_fields; $i++ ) {
-					$t_old_value = $row[$p_data[2][$i]];
-
-					if( is_numeric( $t_old_value ) ) {
-						return 1; // Fatal: conversion may have already been run. If it has been run, proceeding will wipe timestamps from db
-					}
-
-					$t_new_value[$i] = db_unixtimestamp($t_old_value);
-					if ($t_new_value[$i] < 100000 ) {
-						$t_new_value[$i] = 1;
-					}
-				}
-				$t_values = $t_new_value;
-				$t_values[] = $t_id;
-			} else {
-				$t_old_value = $row[$t_old_column];
+		if( $t_date_array ) {
+			for( $i=0; $i < $t_cnt_fields; $i++ ) {
+				$t_old_value = $t_row[$p_data[2][$i]];
 
 				if( is_numeric( $t_old_value ) ) {
-					return 1; // Fatal: conversion may have already been run. If it has been run, proceeding will wipe timestamps from db
+					return DB_QUERY_FAILED; // Fatal: conversion may have already been run. If it has been run, proceeding will wipe timestamps from db
 				}
 
-				$t_new_value = db_unixtimestamp($t_old_value);
-				if ($t_new_value < 100000 ) {
-					$t_new_value = 1;
+				$t_new_value[$i] = db_unixtimestamp($t_old_value);
+				if ($t_new_value[$i] < 100000 ) {
+					$t_new_value[$i] = 1;
 				}
-				$t_values = array( $t_new_value, $t_id);
+			}
+			$t_values = $t_new_value;
+			$t_values[] = $t_id;
+		} else {
+			$t_old_value = $t_row[$t_old_column];
+
+			if( is_numeric( $t_old_value ) ) {
+				return DB_QUERY_FAILED; // Fatal: conversion may have already been run. If it has been run, proceeding will wipe timestamps from db
 			}
 
-			db_query_bound( $query, $t_values );
+			$t_new_value = db_unixtimestamp($t_old_value);
+			if ($t_new_value < 100000 ) {
+				$t_new_value = 1;
+			}
+			$t_values = array( $t_new_value, $t_id);
 		}
+
+		db_query( $t_query, $t_values );
 	}
 
-	# Re-enable query logging if we disabled it
-	install_set_log_queries( $t_log_queries );
-
-	# return 2 because that's what ADOdb/DataDict does when things happen properly
-	return 2;
+	return DB_QUERY_SUCCESS;
 
 }
 
@@ -339,58 +210,48 @@ function install_date_migrate( $p_data ) {
  * one possible value that can be assigned to a radio field.
  */
 function install_correct_multiselect_custom_fields_db_format() {
-	# Disable query logging even if enabled in config, due to possibility of mass spam
-	$t_log_queries = install_set_log_queries();
-
-	$t_value_table = db_get_table( 'custom_field_string' );
-	$t_field_table = db_get_table( 'custom_field' );
-
 	# Ensure multilist and checkbox custom field values have a vertical pipe |
 	# as a prefix and suffix.
-	$t_query = "SELECT v.field_id, v.bug_id, v.value from $t_value_table v
-		LEFT JOIN $t_field_table c
+	$t_query = "SELECT v.field_id, v.bug_id, v.value from {custom_field_string} v
+		LEFT JOIN {custom_field} c
 		ON v.field_id = c.id
 		WHERE (c.type = " . CUSTOM_FIELD_TYPE_MULTILIST . " OR c.type = " . CUSTOM_FIELD_TYPE_CHECKBOX . ")
 			AND v.value != ''
 			AND v.value NOT LIKE '|%|'";
-	$t_result = db_query_bound( $t_query );
+	$t_result = db_query( $t_query );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$c_field_id = (int)$t_row['field_id'];
 		$c_bug_id = (int)$t_row['bug_id'];
 		$c_value = '|' . rtrim( ltrim( $t_row['value'], '|' ), '|' ) . '|';
-		$t_update_query = "UPDATE $t_value_table
+		$t_update_query = "UPDATE {custom_field_string}
 			SET value = '$c_value'
 			WHERE field_id = $c_field_id
 				AND bug_id = $c_bug_id";
-		db_query_bound( $t_update_query );
+		db_query( $t_update_query );
 	}
 
 	# Remove vertical pipe | prefix and suffix from radio custom field values.
-	$t_query = "SELECT v.field_id, v.bug_id, v.value from $t_value_table v
-		LEFT JOIN $t_field_table c
+	$t_query = "SELECT v.field_id, v.bug_id, v.value from {custom_field_string} v
+		LEFT JOIN {custom_field} c
 		ON v.field_id = c.id
 		WHERE c.type = " . CUSTOM_FIELD_TYPE_RADIO . "
 			AND v.value != ''
 			AND v.value LIKE '|%|'";
-	$t_result = db_query_bound( $t_query );
+	$t_result = db_query( $t_query );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$c_field_id = (int)$t_row['field_id'];
 		$c_bug_id = (int)$t_row['bug_id'];
 		$c_value = rtrim( ltrim( $t_row['value'], '|' ), '|' );
-		$t_update_query = "UPDATE $t_value_table
+		$t_update_query = "UPDATE {custom_field_string}
 			SET value = '$c_value'
 			WHERE field_id = $c_field_id
 				AND bug_id = $c_bug_id";
-		db_query_bound( $t_update_query );
+		db_query( $t_update_query );
 	}
 
-	# Re-enable query logging if we disabled it
-	install_set_log_queries( $t_log_queries );
-
-	# Return 2 because that's what ADOdb/DataDict does when things happen properly
-	return 2;
+	return DB_QUERY_SUCCESS;
 }
 
 /**
@@ -400,9 +261,6 @@ function install_correct_multiselect_custom_fields_db_format() {
  *	filter None.  This removes it from all filters.
  */
 function install_stored_filter_migrate() {
-	# Disable query logging even if enabled in config, due to possibility of mass spam
-	$t_log_queries = install_set_log_queries();
-
 	require_api( 'filter_api.php' );
 
 	$t_cookie_version = config_get( 'cookie_version' );
@@ -421,9 +279,8 @@ function install_stored_filter_migrate() {
 	$t_filter_fields['and_not_assigned'] = null;
 	$t_filter_fields['sticky_issues'] = 'sticky';
 
-	$t_filters_table = db_get_table( 'filters' );
-	$t_query = "SELECT * FROM $t_filters_table";
-	$t_result = db_query_bound( $t_query );
+	$t_query = "SELECT * FROM {filters}";
+	$t_result = db_query( $t_query );
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_filter_arr = filter_deserialize( $t_row['filter_string'] );
 		foreach( $t_filter_fields AS $t_old=>$t_new ) {
@@ -439,15 +296,11 @@ function install_stored_filter_migrate() {
 		$t_filter_serialized = serialize( $t_filter_arr );
 		$t_filter_string = $t_cookie_version . '#' . $t_filter_serialized;
 
-		$t_update_query = "UPDATE $t_filters_table SET filter_string=" . db_param() . ' WHERE id=' . db_param();
-		$t_update_result = db_query_bound( $t_update_query, array( $t_filter_string, $t_row['id'] ) );
+		$t_update_query = 'UPDATE {filters} SET filter_string=%s WHERE id=%d';
+		db_query( $t_update_query, array( $t_filter_string, $t_row['id'] ) );
 	}
 
-	# Re-enable query logging if we disabled it
-	install_set_log_queries( $t_log_queries );
-
-	# Return 2 because that's what ADOdb/DataDict does when things happen properly
-	return 2;
+	return DB_QUERY_SUCCESS;
 }
 
 /**
@@ -457,8 +310,7 @@ function install_stored_filter_migrate() {
  * generated by a php function/configuration from the end user
  */
 function install_do_nothing() {
-	# return 2 because that's what ADOdb/DataDict does when things happen properly
-	return 2;
+	return DB_QUERY_SUCCESS;
 }
 
 /**
@@ -471,13 +323,9 @@ function install_do_nothing() {
  * @return int 2, because that's what ADOdb/DataDict does when things happen properly
  */
 function install_update_history_long_custom_fields() {
-	# Disable query logging even if enabled in config, due to possibility of mass spam
-	$t_log_queries = install_set_log_queries();
-
 	# Build list of custom field names longer than 32 chars for reference
-	$t_custom_field_table = db_get_table( 'custom_field' );
-	$t_query = "SELECT name FROM $t_custom_field_table";
-	$t_result = db_query_bound( $t_query );
+	$t_query = 'SELECT name FROM {custom_field}';
+	$t_result = db_query( $t_query );
 	while( $t_field = db_fetch_array( $t_result ) ) {
 		if( utf8_strlen( $t_field[0] ) > 32 ) {
 			$t_custom_fields[utf8_substr( $t_field[0], 0, 32 )] = $t_field[0];
@@ -485,10 +333,7 @@ function install_update_history_long_custom_fields() {
 	}
 	if( !isset( $t_custom_fields ) ) {
 		# There are no custom fields longer than 32, nothing to do
-
-		# Re-enable query logging if we disabled it
-		install_set_log_queries( $t_log_queries );
-		return 2;
+		return DB_QUERY_SUCCESS;
 	}
 
 	# Build list of standard fields to filter out from history
@@ -505,12 +350,11 @@ function install_update_history_long_custom_fields() {
 	$t_field_list = rtrim( $t_field_list, ', ' );
 
 	# Get the list of custom fields from the history table
-	$t_history_table = db_get_table( 'bug_history' );
 	$t_query = "SELECT DISTINCT field_name
-		FROM $t_history_table
+		FROM {bug_history}
 		WHERE type = " . NORMAL_TYPE . "
 		AND   field_name NOT IN ( $t_field_list )";
-	$t_result = db_query_bound( $t_query );
+	$t_result = db_query( $t_query );
 
 	# For each entry, update the truncated custom field name with its full name
 	# if a matching custom field exists
@@ -518,17 +362,12 @@ function install_update_history_long_custom_fields() {
 		# If field name's length is 32, then likely it was truncated so we try to match
 		if( utf8_strlen( $t_field[0] ) == 32 && array_key_exists( $t_field[0], $t_custom_fields ) ) {
 			# Match found, update all history records with this field name
-			$t_update_query = "UPDATE $t_history_table
-				SET field_name = " . db_param() . "
-				WHERE field_name = " . db_param();
-			db_query_bound( $t_update_query, array( $t_custom_fields[$t_field[0]], $t_field[0] ) );
+			$t_update_query = 'UPDATE $t_history_table SET field_name=%s WHERE field_name=%s';
+			db_query( $t_update_query, array( $t_custom_fields[$t_field[0]], $t_field[0] ) );
 		}
 	}
 
-	# Re-enable query logging if we disabled it
-	install_set_log_queries( $t_log_queries );
-
-	return 2;
+	return DB_QUERY_SUCCESS;
 }
 
 /**
@@ -539,6 +378,37 @@ function install_update_history_long_custom_fields() {
  * @return array
  */
 function InsertData( $p_table, $p_data ) {
-	$query = "INSERT INTO " . $p_table . $p_data;
-	return array( $query );
+	$t_query = "INSERT INTO " . $p_table . $p_data;
+	return array( $t_query );
+}
+
+function install_create_admin_if_not_exist( $p_data ) {
+	$t_query = "SELECT count(*) FROM {user}";
+	$t_result = db_query( $t_query );
+
+	if ( db_result($t_result) != 0 ) {
+		return DB_QUERY_SUCCESS;
+	}
+
+	$p_username = $p_data[0];
+	$p_password = $p_data[1];
+	$p_email = 'root@localhost';
+	$t_seed = $p_email . $p_username;
+	$t_cookie_string = auth_generate_unique_cookie_string( $t_seed );
+	$t_password = auth_process_plain_password( $p_password );
+
+	$t_query = "INSERT INTO {user}
+				    ( username, email, password, date_created, last_visit, enabled,
+				      protected, access_level, login_count, cookie_string, realname )
+				  VALUES
+				    ( %s, %s, %s, %d, %d, %d,
+				      %d, %d, %d, %s, %s)";
+	db_query( $t_query, array( $p_username, $p_email, $t_password, db_now(), db_now(), 1, 1, 90, 0, $t_cookie_string, '' ) );
+
+	# Create preferences for the user
+	$t_user_id = db_insert_id( '{user}' );
+
+	if( $t_user_id === 1 ) {
+		return DB_QUERY_SUCCESS;
+	}
 }

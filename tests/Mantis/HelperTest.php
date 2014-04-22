@@ -38,12 +38,15 @@ require_mantis_core();
  * Helper API tests
  * @package Tests
  * @subpackage String
+ * @group MANTIS
  */
 class Mantis_HelperTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Tests helper_array_transpose()
+	 *
 	 * @dataProvider providerArrayTranspose
+	 * @group SOAP
 	 */
 	public function testArrayTranspose( $in, $out )
 	{

@@ -78,26 +78,20 @@ $c_file_id = (integer)$f_file_id;
 
 # we handle the case where the file is attached to a bug
 # or attached to a project as a project doc.
-$query = '';
+$t_query = '';
 switch ( $f_type ) {
 	case 'bug':
-		$t_bug_file_table = db_get_table( 'bug_file' );
-		$query = "SELECT *
-			FROM $t_bug_file_table
-			WHERE id=" . db_param();
+		$t_query = "SELECT * FROM {bug_file} WHERE id=%d";
 		break;
 	case 'doc':
-		$t_project_file_table = db_get_table( 'project_file' );
-		$query = "SELECT *
-			FROM $t_project_file_table
-			WHERE id=" . db_param();
+		$t_query = "SELECT * FROM {project_file} WHERE id=%d";
 		break;
 	default:
 		access_denied();
 }
-$t_result = db_query_bound( $query, array( $c_file_id ) );
-$row = db_fetch_array( $t_result );
-extract( $row, EXTR_PREFIX_ALL, 'v' );
+$t_result = db_query( $t_query, array( $c_file_id ) );
+$t_row = db_fetch_array( $t_result );
+extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
 if ( $f_type == 'bug' ) {
 	$t_project_id = bug_get_field( $v_bug_id, 'project_id' );

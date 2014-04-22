@@ -27,6 +27,9 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture for issue notes webservice methods.
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class IssueNoteTest extends SoapBase {
 	/**
@@ -40,6 +43,7 @@ class IssueNoteTest extends SoapBase {
 	 * 7. Verify that submitted / last updated times are the same.
 	 * 8. Verify that submitted / last updated matches today.
 	 * 9. Delete the issue.
+	 *
 	 */
 	public function testAddNote() {
 		$issueToAdd = $this->getIssueToAdd( 'IssueNoteTest.testAddNote' );
@@ -103,6 +107,7 @@ class IssueNoteTest extends SoapBase {
 	 * 4. Verify the note id against the one returned when adding the note.
 	 * 5. Verify the time_tracking entry
 	 * 6. Delete the issue.
+	 *
 	 */
 	public function testAddNoteWithTimeTracking() {
 
@@ -156,6 +161,7 @@ class IssueNoteTest extends SoapBase {
      * 8.  Get the issue.
      * 9.  Verify that the issue has no notes.
      * 10. Delete the issue.
+	 *
 	 */
 	public function testAddThenUpdateThenDeleteNote() {
 		$issueToAdd = $this->getIssueToAdd( 'IssueNoteTest.testAddThenUpdateThenDeleteNote' );
@@ -228,6 +234,7 @@ class IssueNoteTest extends SoapBase {
 	 * 2. Attempt to add a note with no text.
 	 * 3. Make sure the SoapFault exception is thrown.
 	 * 4. Delete the issue.
+	 *
 	 */
 	public function testAddNoteWithNoText() {
 		$issueToAdd = $this->getIssueToAdd( 'IssueNoteTest.testAddNote' );

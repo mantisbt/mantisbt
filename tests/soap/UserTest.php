@@ -27,11 +27,15 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture for non-login user methods
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class UserTest extends SoapBase {
 
     /**
      * Tests getting a user preference
+	 *
      */
     public function testGetPreference() {
 

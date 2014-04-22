@@ -80,7 +80,7 @@ project_ensure_exists( $f_project_id );
 $g_project_override = $f_project_id;
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
-$row = project_get_row( $f_project_id );
+$t_row = project_get_row( $f_project_id );
 
 $t_can_manage_users = access_has_project_level( config_get( 'project_user_threshold' ), $f_project_id );
 
@@ -98,33 +98,33 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<div class="field-container">
 				<label for="project-name" class="required"><span><?php echo lang_get( 'project_name' ) ?></span></label>
-				<span class="input"><input type="text" id="project-name" name="name" size="60" maxlength="128" value="<?php echo string_attribute( $row['name'] ) ?>" /></span>
+				<span class="input"><input type="text" id="project-name" name="name" size="60" maxlength="128" value="<?php echo string_attribute( $t_row['name'] ) ?>" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
 				<label for="project-status"><span><?php echo lang_get( 'status' ) ?></span></label>
 				<span class="select">
 					<select id="project-status" name="status">
-						<?php print_enum_string_option_list( 'project_status', (int)$row['status'] ) ?>
+						<?php print_enum_string_option_list( 'project_status', (int)$t_row['status'] ) ?>
 					</select>
 				</span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
 				<label for="project-enabled"><span><?php echo lang_get( 'enabled' ) ?></span></label>
-				<span class="checkbox"><input type="checkbox" id="project-enabled" name="enabled" <?php check_checked( (int)$row['enabled'], ON ); ?> /></span>
+				<span class="checkbox"><input type="checkbox" id="project-enabled" name="enabled" <?php check_checked( (int)$t_row['enabled'], ON ); ?> /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
 				<label for="project-inherit-global"><span><?php echo lang_get( 'inherit_global' ) ?></span></label>
-				<span class="checkbox"><input type="checkbox" id="project-inherit-global" name="inherit_global" <?php check_checked( (int)$row['inherit_global'], ON ); ?> /></span>
+				<span class="checkbox"><input type="checkbox" id="project-inherit-global" name="inherit_global" <?php check_checked( (int)$t_row['inherit_global'], ON ); ?> /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
 				<label for="project-view-state"><span><?php echo lang_get( 'view_status' ) ?></span></label>
 				<span class="select">
 					<select id="project-view-state" name="view_state">
-						<?php print_enum_string_option_list( 'view_state', (int)$row['view_state']) ?>
+						<?php print_enum_string_option_list( 'view_state', (int)$t_row['view_state']) ?>
 					</select>
 				</span>
 				<span class="label-style"></span>
@@ -132,7 +132,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			<?php
 			$g_project_override = $f_project_id;
 			if( file_is_uploading_enabled() && DATABASE !== config_get( 'file_upload_method' ) ) {
-				$t_file_path = $row['file_path'];
+				$t_file_path = $t_row['file_path'];
 				# Don't reveal the absolute path to non-administrators for security reasons
 				if ( is_blank( $t_file_path ) && current_user_is_administrator() ) {
 					$t_file_path = config_get( 'absolute_path_default_upload_folder' );
@@ -146,7 +146,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			} ?>
 			<div class="field-container">
 				<label for="project-description"><span><?php echo lang_get( 'description' ) ?></span></label>
-				<span class="textarea"><textarea id="project-description" name="description" cols="70" rows="5"><?php echo string_textarea( $row['description'] ) ?></textarea></span>
+				<span class="textarea"><textarea id="project-description" name="description" cols="70" rows="5"><?php echo string_textarea( $t_row['description'] ) ?></textarea></span>
 				<span class="label-style"></span>
 			</div>
 

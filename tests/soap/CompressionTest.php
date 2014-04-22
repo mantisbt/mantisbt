@@ -27,6 +27,9 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture for calls with compression enabled
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class CompressionTest extends SoapBase {
 
@@ -40,6 +43,7 @@ class CompressionTest extends SoapBase {
 	 * 
 	 * <p>If any of the calls performed with compression enabled will
 	 * fail, the test will fail in turn with a SoapFault.</p>
+	 *
 	 */
 	public function testGetIssueWithCompressionEnabled() {
 		$issueToAdd = $this->getIssueToAdd( 'CompressionTest.testUpdateSummary' );
