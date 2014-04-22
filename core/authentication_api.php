@@ -282,6 +282,15 @@ function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
 
 /**
  * Allows scripts to login using a login name or ( login name + password )
+ *
+ * There are multiple scenarios where this is used:
+ * - Anonymous login (blank username supplied).
+ * - Anonymous login with anonymous user name specified.
+ * - Anonymous login with account not existing or disabled.
+ * - Pre-authenticated user via some secret hash from email verify or rss feed, where username
+ *   is specified but password is null.
+ * - Standard authentication with username and password specified.
+ *
  * @param string $p_username username
  * @param string $p_password username
  * @return bool indicates if authentication was successful
@@ -290,7 +299,29 @@ function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
 function auth_attempt_script_login( $p_username, $p_password = null ) {
 	global $g_script_login_cookie, $g_cache_current_user_id;
 
-	$t_user_id = user_get_id_by_name( $p_username );
+	$t_username = $p_username;
+	$t_password = $p_password;
+
+	$t_anon_allowed = config_get( 'allow_anonymous_login' );
+	if ( $t_anon_allowed == ON ) {
+		$t_anonymous_account = config_get( 'anonymous_account' );
+	} else {
+		$t_anonymous_account = '';
+	}
+
+	# if no user name supplied, then attempt to login as anonymous user.
+	if ( is_blank( $t_username ) || ( strcasecmp( $t_username, $t_anonymous_account ) == 0 ) ) {
+		if ( $t_anon_allowed == OFF ) {
+			return false;
+		}
+
+		$t_username = $t_anonymous_account;
+
+		# do not use password validation.
+		$t_password = null;
+	}
+
+	$t_user_id = user_get_id_by_name( $t_username );
 
 	if( false === $t_user_id ) {
 		return false;
@@ -304,8 +335,8 @@ function auth_attempt_script_login( $p_username, $p_password = null ) {
 	}
 
 	# validate password if supplied
-	if( null !== $p_password ) {
-		if( !auth_does_password_match( $t_user_id, $p_password ) ) {
+	if ( null !== $t_password ) {
+		if ( !auth_does_password_match( $t_user_id, $t_password ) ) {
 			return false;
 		}
 	}
