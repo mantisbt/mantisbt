@@ -78,7 +78,7 @@ function parse_config_global_vars( $p_file, &$p_var_list ) {
  */
 function require_mantis_core() {
 	parse_config_global_vars( 'config_defaults_inc.php', $t_var_list );
-	parse_config_global_vars( 'config_inc.php', $t_var_list );
+	parse_config_global_vars( 'config/config_inc.php', $t_var_list );
 
 	# HTTP headers bypass
 	$t_bypass_headers = 'g_bypass_headers';

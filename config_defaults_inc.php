@@ -18,7 +18,7 @@
  * Default Configuration Variables
  *
  * This file should not be changed. If you want to override any of the values
- * defined here, define them in a file called config_inc.php, which will
+ * defined here, define them in a file called config/config_inc.php, which will
  * be loaded after this file.
  *
  * In general a value of OFF means the feature is disabled and ON means the
@@ -98,6 +98,64 @@ $g_db_type				= 'mysqli';
  */
 $g_dsn = '';
 
+/********************
+ * Folder Locations *
+ ********************/
+
+/**
+ * absolute path to your installation.  Requires trailing / or \
+ * @global string $g_absolute_path
+ */
+$g_absolute_path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
+
+/**
+ * absolute patch to your core files. The default is usually OK,
+ * unless you moved the 'core' directory out of your webroot (recommended).
+ * @global string $g_core_path
+ */
+$g_core_path = $g_absolute_path . 'core' . DIRECTORY_SEPARATOR;
+
+/**
+ * absolute path to class files.  Requires trailing / or \
+ * @global string $g_class_path
+ */
+$g_class_path = $g_core_path . 'classes' . DIRECTORY_SEPARATOR;
+
+/**
+ * absolute path to library files. Requires trailing / or \
+ * @global string $g_library_path
+ */
+$g_library_path = $g_absolute_path . 'library' . DIRECTORY_SEPARATOR;
+
+/**
+ * absolute path to language files. Requires trailing / or \
+ * @global string $g_language_path
+ */
+$g_language_path = $g_absolute_path . 'lang' . DIRECTORY_SEPARATOR;
+
+/**
+ * Absolute path to config files. Requires trailing / or \
+ * If MANTIS_CONFIG_FOLDER environment variable is set, it will be used.
+ * This allows Apache vhost to be used to setup multiple instances serviced by
+ * same code by multiple configs.
+ * @global string $g_config_path
+ */
+$t_local_config = getenv( 'MANTIS_CONFIG_FOLDER' );
+if ( $t_local_config && is_dir( $t_local_config ) ) {
+	$t_last_char = substr( $t_local_config , -1 );
+	if ( $t_last_char != '/' && $t_last_char != '\\' ) {
+		$t_local_config .= DIRECTORY_SEPARATOR;
+	}
+
+	unset( $t_last_char );
+
+	$g_config_path = $t_local_config;
+} else {
+	$g_config_path = $g_absolute_path . 'config' . DIRECTORY_SEPARATOR;
+}
+
+unset( $t_local_config );
+
 /**************************
  * MantisBT Path Settings *
  **************************/
@@ -134,7 +192,7 @@ if ( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
 	}
 
 	if ( !isset( $_SERVER['SCRIPT_NAME'] )) {
-		echo 'Invalid server configuration detected. Please set $g_path manually in config_inc.php.';
+		echo 'Invalid server configuration detected. Please set $g_path manually in ' . $g_config_path . 'config_inc.php.';
 		if ( isset( $_SERVER['SERVER_SOFTWARE'] ) && ( stripos($_SERVER['SERVER_SOFTWARE'], 'nginx') !== false ) )
 			echo ' Please try to add "fastcgi_param SCRIPT_NAME $fastcgi_script_name;" to the nginx server configuration.';
 		die;
@@ -154,7 +212,7 @@ if ( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
 			break;
 	}
 	if( strpos( $t_path, '&#' ) ) {
-		echo 'Can not safely determine $g_path. Please set $g_path manually in config_inc.php';
+		echo 'Can not safely determine $g_path. Please set $g_path manually in ' . $g_config_path . 'config_inc.php';
 		die;
 	}
 } else {
@@ -181,59 +239,6 @@ $g_icon_path = '%path%images/';
  * @global string $g_short_path
  */
 $g_short_path = $t_path;
-
-/**
- * absolute path to your installation.  Requires trailing / or \
- * @global string $g_absolute_path
- */
-$g_absolute_path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-
-/**
- * absolute patch to your core files. The default is usually OK,
- * unless you moved the 'core' directory out of your webroot (recommended).
- * @global string $g_core_path
- */
-$g_core_path = $g_absolute_path . 'core' . DIRECTORY_SEPARATOR;
-
-/**
- * absolute path to class files.  Requires trailing / or \
- * @global string $g_class_path
- */
-$g_class_path = $g_core_path . 'classes' . DIRECTORY_SEPARATOR;
-
-/**
- * absolute path to library files. Requires trailing / or \
- * @global string $g_library_path
- */
-$g_library_path = $g_absolute_path . 'library' . DIRECTORY_SEPARATOR;
-
-/**
- * absolute path to language files. Requires trailing / or \
- * @global string $g_language_path
- */
-$g_language_path = $g_absolute_path . 'lang' . DIRECTORY_SEPARATOR;
-
-/**
- * absolute path to custom strings file.
- * This file allows overriding of strings declared in language files,
- * including plugin-specific ones.
- *
- * Two formats are supported:
- * - New format: define a $s_custom_messages array as follows:
- *   $s_custom_messages = array( LANG => array( CODE => STRING, ... ) );
- * - Legacy format: one variable per string
- *   $s_CODE = STRING;
- *
- * Where
- * - LANG   = language code, as defined in {@link $g_language_choices_arr}
- * - CODE   = string code, as called by {@link lang_get()}
- * - STRING = string value / translation
- *
- * NOTE: mixing old and new formats within the file is not supported
- *
- * @global string $g_custom_strings_file
- */
-$g_custom_strings_file = $g_absolute_path . 'custom_strings_inc.php';
 
 /**
  * Used to link to manual for User Documentation.
@@ -2021,7 +2026,7 @@ $g_auto_set_status_to_assigned	= ON;
  *  2-dimensional matrix. For each existing status, you define which
  *  statuses you can go to from that status, e.g. from NEW_ you might list statuses
  *  '10:new,20:feedback,30:acknowledged' but not higher ones.
- * The following example can be transferred to config_inc.php
+ * The following example can be transferred to config/config_inc.php
  * $g_status_enum_workflow[NEW_]='20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved';
  * $g_status_enum_workflow[FEEDBACK] ='10:new,30:acknowledged,40:confirmed,50:assigned,80:resolved';
  * $g_status_enum_workflow[ACKNOWLEDGED] ='20:feedback,40:confirmed,50:assigned,80:resolved';
@@ -4074,7 +4079,7 @@ $g_show_queries_count = OFF;
  * another value will cause program execution to continue, which may lead to
  * data integrity issues and/or cause MantisBT to function incorrectly.
  *
- * A developer might set this in config_inc.php as:
+ * A developer might set this in config/config_inc.php as:
  *	$g_display_errors = array(
  *		E_WARNING      => DISPLAY_ERROR_HALT,
  *		E_NOTICE       => DISPLAY_ERROR_INLINE,
@@ -4184,7 +4189,7 @@ $g_global_settings = array(
 	'hostname','html_valid_tags', 'html_valid_tags_single_line', 'default_language',
 	'language_auto_map', 'fallback_language', 'login_method', 'plugins_enabled', 'session_handler',
 	'session_save_path', 'session_validation', 'show_detailed_errors', 'show_queries_count',
-	'stop_on_errors',	'use_javascript', 'version_suffix',	'custom_strings_file',
+	'stop_on_errors',	'use_javascript', 'version_suffix',
 	'fileinfo_magic_db_file', 'css_include_file', 'css_rtl_include_file', 'meta_include_file',
 	'file_type_icons', 'path', 'icon_path', 'short_path', 'absolute_path', 'core_path',
 	'class_path','library_path', 'language_path', 'absolute_path_default_upload_folder',
@@ -4194,3 +4199,42 @@ $g_global_settings = array(
 
 # Temporary variables should not remain defined in global scope
 unset( $t_protocol, $t_host, $t_hosts, $t_port, $t_self, $t_path );
+
+
+/****************************
+ * Webservice Configuration *
+ ****************************/
+
+# Minimum global access level required to access webservice for readonly operations.
+$g_webservice_readonly_access_level_threshold = VIEWER;
+
+# Minimum global access level required to access webservice for read/write operations.
+$g_webservice_readwrite_access_level_threshold = REPORTER;
+
+# Minimum global access level required to access the administrator webservices
+$g_webservice_admin_access_level_threshold = MANAGER;
+
+# Minimum project access level required to be able to specify a reporter name when
+# adding an issue.  Otherwise, the current user is used as the reporter.  Users
+# who don't have this access level can always do another step to modify the issue
+# and specify a different name, but in this case it will be logged in the history
+# who original reported the issue.
+$g_webservice_specify_reporter_on_add_access_level_threshold = DEVELOPER;
+
+# The following enum ids are used when the webservices get enum labels that are not
+# defined in the associated MantisBT installation.  In this case, the enum id is set
+# to the value specified by the corresponding configuration option.
+$g_webservice_priority_enum_default_when_not_found = 0;
+$g_webservice_severity_enum_default_when_not_found = 0;
+$g_webservice_status_enum_default_when_not_found = 0;
+$g_webservice_resolution_enum_default_when_not_found = 0;
+$g_webservice_projection_enum_default_when_not_found = 0;
+$g_webservice_eta_enum_default_when_not_found = 0;
+
+# If ON and the supplied version is not found, then a SoapException will be raised.
+$g_webservice_error_when_version_not_found = ON;
+
+# Default version to be used if the specified version is not found and $g_webservice_error_when_version_not_found == OFF.
+# (at the moment this value does not depend on the project).
+$g_webservice_version_when_not_found = '';
+

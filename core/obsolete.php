@@ -171,4 +171,26 @@ config_obsolete( 'file_upload_ftp_server' );
 config_obsolete( 'file_upload_ftp_user' );
 config_obsolete( 'file_upload_ftp_pass' );
 config_obsolete( 'mantistouch_url' );
+config_obsolete( 'custom_strings_file' );
+config_obsolete( 'mc_readonly_access_level_threshold', 'webservice_readonly_access_level_threshold' );
+config_obsolete( 'mc_readwrite_access_level_threshold', 'webservice_readwrite_access_level_threshold' );
+config_obsolete( 'mc_admin_access_level_threshold', 'webservice_admin_access_level_threshold' );
+config_obsolete( 'mc_specify_reporter_on_add_access_level_threshold', 'webservice_specify_reporter_on_add_access_level_threshold' );
+config_obsolete( 'mc_priority_enum_default_when_not_found', 'webservice_priority_enum_default_when_not_found' );
+config_obsolete( 'mc_severity_enum_default_when_not_found', 'webservice_severity_enum_default_when_not_found' );
+config_obsolete( 'mc_status_enum_default_when_not_found', 'webservice_status_enum_default_when_not_found' );
+config_obsolete( 'mc_resolution_enum_default_when_not_found', 'webservice_resolution_enum_default_when_not_found' );
+config_obsolete( 'mc_projection_enum_default_when_not_found', 'webservice_projection_enum_default_when_not_found' );
+config_obsolete( 'mc_eta_enum_default_when_not_found', 'webservice_eta_enum_default_when_not_found' );
+config_obsolete( 'mc_error_when_version_not_found', 'webservice_error_when_version_not_found' );
+config_obsolete( 'mc_version_when_not_found', 'webservice_version_when_not_found' );
+env_obsolete( 'MANTIS_CONFIG', 'MANTIS_CONFIG_FOLDER' );
+
+function env_obsolete( $p_env_variable, $p_new_env_variable ) {
+	$t_env = getenv( $p_env_variable );
+	if ( $t_env ) {
+		$t_description = 'Environment variable <em>' . $p_env_variable . '</em> is obsolete.  Use <em>' . $p_new_env_variable . '</em> instead.';
+		check_print_test_warn_row( $t_description, false );
+	}
+}
 

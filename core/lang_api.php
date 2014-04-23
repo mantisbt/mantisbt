@@ -75,12 +75,12 @@ function lang_load( $p_lang, $p_dir = null ) {
 	}
 
 	# Allow overriding strings declared in the language file.
-	# custom_strings_inc.php can use $g_active_language
-	$t_custom_strings = config_get( 'absolute_path' ) . 'custom_strings_inc.php';
-	if( file_exists( $t_custom_strings ) ) {
-		require( $t_custom_strings );
+	# custom_strings_inc.php can use $g_active_language.
+	# Include file multiple times to allow for overrides per language.
+	global $g_config_path;
 
-		# this may be loaded multiple times, once per language
+	if ( file_exists( $g_config_path . 'custom_strings_inc.php' ) ) {
+		include( $g_config_path . 'custom_strings_inc.php' );
 	}
 
 	$t_vars = get_defined_vars();

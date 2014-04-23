@@ -75,9 +75,6 @@ if [ $TRAVIS_PHP_VERSION = '5.3' ]; then
 		EOF
 
 	sudo service apache2 restart
-
-	# needed to allow web server to create config_inc.php
-	chmod 777 .
 else
 	# use PHP's embedded server
 	# get path of PHP as the path is not in $PATH for sudo
@@ -85,6 +82,9 @@ else
 	# sudo needed for port 80
 	sudo $myphp -S $HOSTNAME:$PORT &
 fi
+
+# needed to allow web server to create config_inc.php
+chmod --recursive 777 .
 
 #  wait until server is up
 sleep 10

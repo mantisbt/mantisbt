@@ -37,8 +37,38 @@ require_once( 'check_api.php' );
 check_print_section_header_row( 'Configuration' );
 
 check_print_test_row( 'config_inc.php configuration file exists',
-	file_exists( dirname( dirname( dirname( __FILE__ ) ) ) . '/config_inc.php' ),
+	file_exists( $g_config_path . 'config_inc.php' ),
 	array( false => 'Please use <a href="install.php">install.php</a> to perform the initial installation of MantisBT.' )
+);
+
+check_print_test_row( 'config_inc.php must not be in MantisBT root folder',
+	!file_exists( $g_absolute_path . 'config_inc.php' ),
+	array( false => 'Move from MantisBT root folder to config folder.' )
+);
+
+check_print_test_row( 'custom_strings_inc.php must not be in MantisBT root folder',
+	!file_exists( $g_absolute_path . 'custom_strings_inc.php' ),
+	array( false => 'Move from MantisBT root folder to config folder.' )
+);
+
+check_print_test_row( 'custom_functions_inc.php must not be in MantisBT root folder',
+	!file_exists( $g_absolute_path . 'custom_functions_inc.php' ),
+	array( false => 'Move from MantisBT root folder to config folder.' )
+);
+
+check_print_test_row( 'custom_constants_inc.php must not be in MantisBT root folder',
+	!file_exists( $g_absolute_path . 'custom_constants_inc.php' ),
+	array( false => 'Move from MantisBT root folder to config folder.' )
+);
+
+check_print_test_row( 'custom_relationships_inc.php must not be in MantisBT root folder',
+	!file_exists( $g_absolute_path . 'custom_relationships_inc.php' ),
+	array( false => 'Move from MantisBT root folder to config folder.' )
+);
+
+check_print_test_row( 'api/soap/mc_config_inc.php is no longer supported',
+	!file_exists( $g_absolute_path . 'api/soap/mc_config_inc.php' ),
+	array( false => 'Move contents of api/soap/mc_config_inc.php into config/config_inc.php.' )
 );
 
 # Debugging / Developer Settings

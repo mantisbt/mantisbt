@@ -34,15 +34,6 @@ $t_mantis_dir = dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR;
 $g_bypass_headers = true;
 require_once( $t_mantis_dir . 'core.php' );
 
-# constants and configurations
-$t_current_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-require_once( $t_current_dir . 'mc_config_defaults_inc.php' );
-
-$t_user_configs = $t_current_dir . 'mc_config_inc.php';
-if( file_exists( $t_user_configs ) ) {
-	require_once( $t_user_configs );
-}
-
 /**
  * Checks if the request for the webservice is a documentation request (eg:
  * WSDL) or an actual webservice call.
