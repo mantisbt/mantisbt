@@ -1023,8 +1023,7 @@ function custom_field_validate( $p_field_id, $p_value ) {
 			break;
 		case CUSTOM_FIELD_TYPE_DATE:
 			# gpc_get_cf for date returns the value from strftime
-			# Either false (php >= 5.1) or -1 (php < 5.1) for failure
-			$t_valid &= ( $p_value == null ) || ( ( $p_value !== false ) && ( $p_value > 0 ) );
+			$t_valid &= ( $p_value == null ) || ( $p_value !== false );
 			break;
 		case CUSTOM_FIELD_TYPE_CHECKBOX:
 		case CUSTOM_FIELD_TYPE_MULTILIST:
