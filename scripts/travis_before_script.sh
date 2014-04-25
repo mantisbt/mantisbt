@@ -84,7 +84,7 @@ else
 fi
 
 # needed to allow web server to create config_inc.php
-chmod --recursive 777 .
+chmod 777 config
 
 #  wait until server is up
 sleep 10
