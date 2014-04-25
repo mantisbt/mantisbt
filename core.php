@@ -75,7 +75,7 @@ require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config_defaults_inc.p
 
 # Load user-defined constants (if required)
 if ( file_exists( $g_config_path . 'custom_constants_inc.php' ) ) {
-	include_once( $g_config_path . 'custom_constants_inc.php' );
+	require_once( $g_config_path . 'custom_constants_inc.php' );
 }
 
 # Remember (globally) which API files have already been loaded
@@ -190,7 +190,7 @@ compress_start_handler();
 $t_config_inc_found = file_exists( $g_config_path . 'config_inc.php' );
 
 if ( $t_config_inc_found ) {
-	include_once( $g_config_path . 'config_inc.php' );
+	require_once( $g_config_path . 'config_inc.php' );
 }
 
 # If no configuration file exists, redirect the user to the admin page so
@@ -279,7 +279,7 @@ if ( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 require_api( 'custom_function_api.php' );
 
 if ( file_exists( $g_config_path . 'custom_functions_inc.php' ) ) {
-	include_once( $g_config_path . 'custom_functions_inc.php' );
+	require_once( $g_config_path . 'custom_functions_inc.php' );
 }
 
 # Set HTTP response headers

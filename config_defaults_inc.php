@@ -103,38 +103,38 @@ $g_dsn = '';
  ********************/
 
 /**
- * absolute path to your installation.  Requires trailing / or \
+ * Path to root MantisBT folder.  Requires trailing / or \
  * @global string $g_absolute_path
  */
 $g_absolute_path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 
 /**
- * absolute patch to your core files. The default is usually OK,
+ * Path to core folder. The default is usually OK,
  * unless you moved the 'core' directory out of your webroot (recommended).
  * @global string $g_core_path
  */
 $g_core_path = $g_absolute_path . 'core' . DIRECTORY_SEPARATOR;
 
 /**
- * absolute path to class files.  Requires trailing / or \
+ * Path to classes folder.  Requires trailing / or \
  * @global string $g_class_path
  */
 $g_class_path = $g_core_path . 'classes' . DIRECTORY_SEPARATOR;
 
 /**
- * absolute path to library files. Requires trailing / or \
+ * Path to library folder for 3rd party libraries. Requires trailing / or \
  * @global string $g_library_path
  */
 $g_library_path = $g_absolute_path . 'library' . DIRECTORY_SEPARATOR;
 
 /**
- * absolute path to language files. Requires trailing / or \
+ * Path to lang folder for language files. Requires trailing / or \
  * @global string $g_language_path
  */
 $g_language_path = $g_absolute_path . 'lang' . DIRECTORY_SEPARATOR;
 
 /**
- * Absolute path to config files. Requires trailing / or \
+ * Path to custom configuration folder. Requires trailing / or \
  * If MANTIS_CONFIG_FOLDER environment variable is set, it will be used.
  * This allows Apache vhost to be used to setup multiple instances serviced by
  * same code by multiple configs.
@@ -142,13 +142,6 @@ $g_language_path = $g_absolute_path . 'lang' . DIRECTORY_SEPARATOR;
  */
 $t_local_config = getenv( 'MANTIS_CONFIG_FOLDER' );
 if ( $t_local_config && is_dir( $t_local_config ) ) {
-	$t_last_char = substr( $t_local_config , -1 );
-	if ( $t_last_char != '/' && $t_last_char != '\\' ) {
-		$t_local_config .= DIRECTORY_SEPARATOR;
-	}
-
-	unset( $t_last_char );
-
 	$g_config_path = $t_local_config;
 } else {
 	$g_config_path = $g_absolute_path . 'config' . DIRECTORY_SEPARATOR;
