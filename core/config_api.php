@@ -627,6 +627,13 @@ function config_obsolete( $p_var, $p_replace = '' ) {
 	}
 }
 
+/**
+ * Checks if an obsolete environment variable is set.
+ * If so, an error will be generated and the script will exit.
+ *
+ * @param string $p_env_variable old variable
+ * @param string $p_replace new variable
+ */
 function env_obsolete( $p_env_variable, $p_new_env_variable ) {
 	$t_env = getenv( $p_env_variable );
 	if ( $t_env ) {
