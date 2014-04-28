@@ -366,7 +366,7 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 		if( $p_user !== NO_USER ) {
 			user_ensure_exists( $p_user );
 		}
-		
+
 		$t_config_table = db_get_table( 'config' );
 		$t_query = "SELECT COUNT(*) from $t_config_table
 				WHERE config_id = " . db_param() . " AND
@@ -624,6 +624,14 @@ function config_obsolete( $p_var, $p_replace = '' ) {
 		}
 
 		check_print_test_warn_row( $t_description, false, $t_info );
+	}
+}
+
+function env_obsolete( $p_env_variable, $p_new_env_variable ) {
+	$t_env = getenv( $p_env_variable );
+	if ( $t_env ) {
+		$t_description = 'Environment variable <em>' . $p_env_variable . '</em> is obsolete.  Use <em>' . $p_new_env_variable . '</em> instead.';
+		check_print_test_warn_row( $t_description, false );
 	}
 }
 
