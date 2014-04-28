@@ -78,6 +78,13 @@ if ( file_exists( $g_config_path . 'custom_constants_inc.php' ) ) {
 	require_once( $g_config_path . 'custom_constants_inc.php' );
 }
 
+# config_inc may not be present if this is a new install
+$t_config_inc_found = file_exists( $g_config_path . 'config_inc.php' );
+
+if ( $t_config_inc_found ) {
+	require_once( $g_config_path . 'config_inc.php' );
+}
+
 # Remember (globally) which API files have already been loaded
 $g_api_included = array();
 
@@ -185,13 +192,6 @@ unset( $t_output );
 # Start HTML compression handler (if enabled)
 require_api( 'compress_api.php' );
 compress_start_handler();
-
-# config_inc may not be present if this is a new install
-$t_config_inc_found = file_exists( $g_config_path . 'config_inc.php' );
-
-if ( $t_config_inc_found ) {
-	require_once( $g_config_path . 'config_inc.php' );
-}
 
 # If no configuration file exists, redirect the user to the admin page so
 # they can complete installation and configuration of MantisBT

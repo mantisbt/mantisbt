@@ -185,12 +185,3 @@ config_obsolete( 'mc_eta_enum_default_when_not_found', 'webservice_eta_enum_defa
 config_obsolete( 'mc_error_when_version_not_found', 'webservice_error_when_version_not_found' );
 config_obsolete( 'mc_version_when_not_found', 'webservice_version_when_not_found' );
 env_obsolete( 'MANTIS_CONFIG', 'MANTIS_CONFIG_FOLDER' );
-
-function env_obsolete( $p_env_variable, $p_new_env_variable ) {
-	$t_env = getenv( $p_env_variable );
-	if ( $t_env ) {
-		$t_description = 'Environment variable <em>' . $p_env_variable . '</em> is obsolete.  Use <em>' . $p_new_env_variable . '</em> instead.';
-		check_print_test_warn_row( $t_description, false );
-	}
-}
-

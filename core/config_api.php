@@ -366,7 +366,7 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 		if( $p_user !== NO_USER ) {
 			user_ensure_exists( $p_user );
 		}
-		
+
 		$t_config_table = db_get_table( 'config' );
 		$t_query = "SELECT COUNT(*) from $t_config_table
 				WHERE config_id = " . db_param() . " AND
@@ -623,6 +623,22 @@ function config_obsolete( $p_var, $p_replace = '' ) {
 			$t_info .= 'please use ' . $p_replace . ' instead.';
 		}
 
+		check_print_test_warn_row( $t_description, false, $t_info );
+	}
+}
+
+/**
+ * Checks if an obsolete environment variable is set.
+ * If so, an error will be generated and the script will exit.
+ *
+ * @param string $p_env_variable old variable
+ * @param string $p_replace new variable
+ */
+function env_obsolete( $p_env_variable, $p_new_env_variable ) {
+	$t_env = getenv( $p_env_variable );
+	if ( $t_env ) {
+		$t_description = 'Environment variable <em>' . $p_env_variable . '</em> is obsolete.';
+		$t_info = 'please use ' . $p_new_env_variable . ' instead.';
 		check_print_test_warn_row( $t_description, false, $t_info );
 	}
 }
