@@ -637,8 +637,9 @@ function config_obsolete( $p_var, $p_replace = '' ) {
 function env_obsolete( $p_env_variable, $p_new_env_variable ) {
 	$t_env = getenv( $p_env_variable );
 	if ( $t_env ) {
-		$t_description = 'Environment variable <em>' . $p_env_variable . '</em> is obsolete.  Use <em>' . $p_new_env_variable . '</em> instead.';
-		check_print_test_warn_row( $t_description, false );
+		$t_description = 'Environment variable <em>' . $p_env_variable . '</em> is obsolete.';
+		$t_info = 'please use ' . $p_new_env_variable . ' instead.';
+		check_print_test_warn_row( $t_description, false, $t_info );
 	}
 }
 
