@@ -8,21 +8,23 @@
 	<subtitle>Reference for developers and community members</subtitle>
 	<productname>MantisBT</productname>
 	<productnumber>1.3</productnumber>
-	<edition>1</edition>
-	<pubsnumber>0</pubsnumber>
 	<abstract>
 		<para>
-                A reference guide and documentation of the Mantis Bug Tracker for developers and community members.
+			This book is targeted at MantisBT developers, contributors and
+			plugin authors.
+			It documents the development process
+			and provides reference information regarding the MantisBT core,
+			including the database schema as well as
+			the plugin system including an events reference.
 		</para>
 	</abstract>
 	<corpauthor>
 		<inlinemediaobject>
 			<imageobject>
-				<imagedata fileref="Common_Content/images/title_logo.svg" format="SVG" />
+				<imagedata fileref="./images/mantis_logo.png" format="PNG" />
 			</imageobject>
 		</inlinemediaobject>
 	</corpauthor>
 	<xi:include href="Common_Content/Legal_Notice.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="Author_Group.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 </bookinfo>
-

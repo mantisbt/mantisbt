@@ -8,12 +8,87 @@
 	<simpara>
 		<revhistory>
 			<revision>
-				<revnumber>0</revnumber>
+				<revnumber>1.3-6</revnumber>
+				<date>Tue Apr 28 2014</date>
+				<author>
+					<firstname>Damien</firstname>
+					<surname>Regad</surname>
+					<email>dregad@mantisbt.org</email>
+				</author>
+				<revdescription>
+					<simplelist>
+						<member>Full review and preparation for 1.3 release</member>
+					</simplelist>
+				</revdescription>
+			</revision>
+
+			<revision>
+				<revnumber>1.3-5</revnumber>
+				<date>Tue Dec 31 2013</date>
+				<author>
+					<firstname>Damien</firstname>
+					<surname>Regad</surname>
+					<email>dregad@mantisbt.org</email>
+				</author>
+				<revdescription>
+					<simplelist>
+						<member>2013 revisions by Damien Regad</member>
+					</simplelist>
+				</revdescription>
+			</revision>
+
+			<revision>
+				<revnumber>1.3-4</revnumber>
+				<date>Mon Dec 31 2012</date>
+				<author>
+					<firstname>Damien</firstname>
+					<surname>Regad</surname>
+					<email>dregad@mantisbt.org</email>
+				</author>
+				<revdescription>
+					<simplelist>
+						<member>2012 revisions by Kirill Krasnov, Damien Regad, Raymond van Asperen</member>
+					</simplelist>
+				</revdescription>
+			</revision>
+
+			<revision>
+				<revnumber>1.3-3</revnumber>
+				<date>Sat Dec 31 2011</date>
+				<author>
+					<firstname>Damien</firstname>
+					<surname>Regad</surname>
+					<email>dregad@mantisbt.org</email>
+				</author>
+				<revdescription>
+					<simplelist>
+						<member>2011 revisions by David Hicks, Dan Moore, Robert Munteanu, John Reese, Daryn Warriner</member>
+					</simplelist>
+				</revdescription>
+			</revision>
+
+			<revision>
+				<revnumber>1.3-2</revnumber>
+				<date>Fri Dec 31 2010</date>
+				<author>
+					<firstname>Damien</firstname>
+					<surname>Regad</surname>
+					<email>dregad@mantisbt.org</email>
+				</author>
+				<revdescription>
+					<simplelist>
+						<member>2010 revisions by David Hicks, John Reese</member>
+					</simplelist>
+				</revdescription>
+			</revision>
+
+			<revision>
+				<revnumber>1.3-1</revnumber>
 				<date>Thu Sep 2 2010</date>
 				<author>
-					<firstname>Dude</firstname>
-					<surname>McPants</surname>
-					<email>Dude.McPants@example.com</email>
+					<firstname>Gianluca</firstname>
+					<surname>Sforna</surname>
+					<email>giallu@gmail.com</email>
 				</author>
 				<revdescription>
 					<simplelist>

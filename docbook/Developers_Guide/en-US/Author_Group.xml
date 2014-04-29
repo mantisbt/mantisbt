@@ -5,14 +5,8 @@
 ]>
 <authorgroup>
 	<author>
-		<firstname>Gianluca</firstname>
-		<surname>Sforna</surname>
-		<!--affiliation>
-			<orgname>Somewhere</orgname>
-			<orgdiv>Someone</orgdiv>
-		</affiliation-->
-		<email>giallu@gmail.com</email>
+		<surname>MantisBT Development Team</surname>
+		<email>mantisbt-dev@lists.sourceforge.net</email>
 	</author>
-        <!-- TODO add other authors -->
 </authorgroup>
 
