@@ -334,7 +334,7 @@ git pull --rebase
 			</para>
 
 			<programlisting>
-$ git rebase master feature
+git rebase master feature
 			</programlisting>
 
 			<note>
@@ -349,9 +349,9 @@ $ git rebase master feature
 				</para>
 
 				<programlisting>
-$ git checkout feature
-$ git fetch remote/feature
-$ git rebase remote/feature
+git checkout feature
+git fetch remote/feature
+git rebase remote/feature
 				</programlisting>
 			</note>
 		</section>
@@ -377,8 +377,8 @@ $ git rebase remote/feature
 			</para>
 
 			<programlisting>
-$ git checkout feature
-$ git merge master
+git checkout feature
+git merge master
 			</programlisting>
 
 			<para>
@@ -401,8 +401,8 @@ $ git merge master
 		</para>
 
 		<para>
-			In order to run the tests, you will need to have the PHP Soap extension
-			, <ulink url="http://www.phpunit.de">PHPUnit 3.4 or newer</ulink> and
+			In order to run the tests, you will need to have the PHP Soap extension,
+			<ulink url="http://www.phpunit.de">PHPUnit 3.4 or newer</ulink> and
 			<ulink url="http://phing.info">Phing 2.4 or newer</ulink> installed.
 			The tests are configured using a <literal>bootstrap.php</literal> file. The
 			<literal>boostrap.php.sample</literal> file contains the settings you will
@@ -415,7 +415,7 @@ $ git merge master
 		</para>
 
 		<programlisting>
-$ phing test
+phing test
 		</programlisting>
 
 		<section id="dev.contrib.test.soap">
@@ -552,8 +552,8 @@ $ phing test
 						branch is up-to-date with the master branch by
 						rebasing it, resolving any conflicts if necessary.
 						<programlisting>
-$ git fetch upstream
-$ git rebase upstream/master MyBranch
+git fetch upstream
+git rebase upstream/master MyBranch
 						</programlisting>
 					</para>
 				</listitem>
@@ -563,7 +563,7 @@ $ git rebase upstream/master MyBranch
 						Push the branch to your Github fork
 
 						<programlisting>
-$ git push origin MyBranch
+git push origin MyBranch
 						</programlisting>
 					</para>
 				</listitem>
@@ -621,7 +621,7 @@ $ git push origin MyBranch
 			</para>
 
 			<programlisting>
-$ git format-patch --binary --stdout origin/master..HEAD > feature_branch.patch
+git format-patch --binary --stdout origin/master..HEAD > feature_branch.patch
 			</programlisting>
 
 			<para>
@@ -633,7 +633,7 @@ $ git format-patch --binary --stdout origin/master..HEAD > feature_branch.patch
 			</para>
 
 			<programlisting>
-$ git am --signoff feature_branch.patch
+git am --signoff feature_branch.patch
 			</programlisting>
 		</section>
 
@@ -685,7 +685,7 @@ $ git am --signoff feature_branch.patch
 						public repository, and will generate a summary of
 						changes.
 						<programlisting>
-$ git request-pull origin/master git@githosting.com:contrib.git MyBranch
+git request-pull origin/master git@githosting.com:contrib.git MyBranch
 						</programlisting>
 					</para>
 				</listitem>
@@ -706,8 +706,8 @@ $ git request-pull origin/master git@githosting.com:contrib.git MyBranch
 			</para>
 
 			<programlisting>
-$ git remote add feature  git@githosting.com:contrib.git
-$ git checkout -b MyBranch feature/MyBranch
+git remote add feature  git@githosting.com:contrib.git
+git checkout -b MyBranch feature/MyBranch
 			</programlisting>
 
 			<para>
@@ -719,9 +719,9 @@ $ git checkout -b MyBranch feature/MyBranch
 			</para>
 
 			<programlisting>
-$ git rebase master feature
-$ git checkout master
-$ git merge --no-ff feature
+git rebase master feature
+git checkout master
+git merge --no-ff feature
 			</programlisting>
 
 		</section>
