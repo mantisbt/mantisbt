@@ -324,8 +324,9 @@
 		<section id="admin.install.requirements.client">
 			<title>Client Requirements</title>
 
-			<para>MantisBT should run on most recent browsers in
-				the market, including but not limited to
+			<para>
+				MantisBT should run on all browsers in the market, including
+				but not limited to:
 			</para>
 
 			<itemizedlist>
