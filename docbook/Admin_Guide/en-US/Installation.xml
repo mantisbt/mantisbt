@@ -220,15 +220,16 @@
 						The supported RDBMS are:
 							MySQL (recommended),
 							PostgreSQL,
-							DB2,
 							Microsoft SQL Server and
-							Oracle (experimental).
+							Oracle.
 					</para>
-					<para>Note: There are known issues with all of the above
-						platforms except MySQL, and to a lesser extend PostgreSQL;
-						moreover, you should be aware that support for DB2, SQL
-						server and Oracle is limited.
-					</para>
+					<note><para>
+						There is also experimental support for DB2, although
+						you should be aware that none of the MantisBT core
+						developers have access to this platform, therefore
+						support is very limited and likely to be removed
+						in the future..
+					</para></note>
 				</listitem>
 
 			</itemizedlist>
@@ -271,7 +272,7 @@
 								<entry>MS SQL Server</entry>
 								<entry>2005</entry>
 								<entry>2005 or above</entry>
-								<entry>PHP extension: mssql or sqlsrv</entry>
+								<entry>PHP extension: sqlsrv</entry>
 							</row>
 							<row>
 								<entry>Oracle</entry>

@@ -58,7 +58,7 @@
 						below.
 					</para>
 					<para>The PHP extension corresponding to the selected type
-						must be enabled.
+						must be enabled (see also <xref linkend="admin.install.requirements.software.versions" />).
 					</para>
 
 					<informaltable>
@@ -66,7 +66,7 @@
 							<thead>
 								<row>
 									<entry>RDBMS</entry>
-									<entry>db_type</entry>
+									<entry>db_type (ADOdb)</entry>
 									<entry>PHP extension</entry>
 									<entry>Comments</entry>
 								</row>
@@ -90,21 +90,21 @@
 									<entry></entry>
 								</row>
 								<row>
-									<entry>IBM DB2</entry>
-									<entry>db2</entry>
-									<entry>db2</entry>
-									<entry>experimental</entry>
-								</row>
-								<row>
 									<entry>MS SQL Server</entry>
 									<entry>mssqlnative</entry>
 									<entry>sqlsrv</entry>
-									<entry>experimental</entry>
+									<entry></entry>
 								</row>
 								<row>
 									<entry>Oracle</entry>
 									<entry>oci8</entry>
 									<entry>oci8</entry>
+									<entry></entry>
+								</row>
+								<row>
+									<entry>IBM DB2</entry>
+									<entry>db2</entry>
+									<entry>db2</entry>
 									<entry>experimental</entry>
 								</row>
 							</tbody>
