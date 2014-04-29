@@ -768,10 +768,9 @@ mv mantisbt-1.2.x mantisbt
 			documents.
 		</para>
 
-		<para><emphasis>
-				!!! Backups should always be performed before an upgrade !!!
-			</emphasis>
-		</para>
+		<warning><para>
+			You should always backup your system (code and database) before upgrading !
+		</para></warning>
 
 		<section id="admin.install.backups.mysql">
 			<title>MySQL Backups</title>
