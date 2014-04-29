@@ -176,12 +176,6 @@
 								)
 							</para></listitem>
 
-							<listitem><para><emphasis>Hash</emphasis> -
-								<emphasis>mandatory</emphasis>.
-								This extension is available and enabled by
-								default in PHP >= 5.1.2.
-							</para></listitem>
-
 							<listitem><para><emphasis>Curl</emphasis> -
 								required for the Twitter integration feature
 							</para></listitem>
