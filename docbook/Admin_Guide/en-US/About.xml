@@ -145,28 +145,28 @@
             <listitem>
                 <para>
                     <ulink url="http://www.mantisbt.org/mailinglists.php">Mailing lists</ulink> -
-                    Available mailing lists are "mantisbt-announce"
-                    for announcements, "mantisbt-dev" for development issues,
-                    mantisbt-lang for localization and "mantisbt-help" for
-                    general help/support questions.  There are public archives for such
-                    mailing lists.  Note that only members of the mailing lists can
-                    post to them, hence, subscribe to the lists before you attempt
-                    to email them.
+                    Several lists are available, each of them with its own,
+                    specific purpose.  Note that posting messages is restricted
+                    to subscribers so you will have to register before you can
+                    send messages; however, there are public archives available
+                    if you're only interested in reading.
                 </para>
             </listitem>
             <listitem>
                 <para>
                     <ulink url="http://www.mantisbt.org/irc.php">IRC</ulink> -
                     The IRC channel is mainly used by developers to engage in
-                    in-person discussion.  The recommended tool for IRC is XChat (for Linux),
-                    XChat 2 (for Windows).  However, you can also use <ulink
-                    url="http://webchat.freenode.net/">Web Chat</ulink> to connect to IRC
-                    via your web browser.  This is also useful when your work
-                    firewall blocks the IRC port (although there are other
-                    workarounds involving tunneling to fix this issue).  Many people
-                    prefer to use IRC to ask questions to the developers and other
-                    users who are in the IRC channel.  The IRC channel logs are archived
-                    and made available on the web. (TODO: add irc logs link)
+                    in-person discussion.  There are many free IRC clients:
+                    XChat (for Linux), <ulink url="http://hexchat.github.io/">HexChat</ulink>,
+                    <ulink url="http://www.icechat.net/">IceChat</ulink> amongst others.
+                    You can also use <ulink url="http://webchat.freenode.net/">Web Chat</ulink>
+                    to connect to IRC via your web browser.
+                    This may also useful when your work firewall blocks the IRC port.
+                    Many people prefer to use IRC to ask questions to the developers and other
+                    users who are in the IRC channel.
+                    The IRC channel logs are archived and made
+                    <ulink url="http://www.mantisbt.org/irclogs.php">
+                        available on the MantisBT web site</ulink>.
                 </para>
             </listitem>
             <listitem>
@@ -180,7 +180,8 @@
                 <para>
                     Search - A good way for locating an answer for your question
                     or finding more information about a topic is to search across
-                    all MantisBT website and the Internet via
+                    all MantisBT website and the Internet via your favorite
+                    search engine, e.g.
                     <ulink url="http://www.google.com">Google</ulink> or
                     <ulink url="http://www.bing.com">Bing</ulink>.
                 </para>
@@ -190,8 +191,12 @@
         <para>
             It is important to note that support questions should not be sent
             directly to MantisBT developers or through the MantisBT contact us
-            pages.  Use of "Contact Us" page or emailing the developer directly
-            is available if you are after a paid support or consulting service.
+            pages.
+        </para>
+        <para>
+            Also, our <ulink url="http://mantisbt.org/bugs/">bug tracker</ulink>
+            is reserved for reporting issues with the software, and must not be
+            used for support requests.
         </para>
     </section>
 
@@ -206,9 +211,11 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    mantisbt-announce mailing list is a very low traffic
+                    The <ulink url="mailto:mantisbt-announce@lists.sourceforge.net">
+                        mantisbt-announce mailing list</ulink>
+                    is a very low traffic
                     list that is used for major announcements,  typically
-                    announcements about releases.  All MantisBT users are
+                    about new releases.  All MantisBT users are
                     encouraged to subscribe to this mailing list.  The
                     average traffic should be no more than one to two posts
                     per month.
@@ -237,7 +244,10 @@
        <title>Versioning</title>
 
        <para>
-           The release numbering convention we use is major.minor.micro (eg. 1.2.0rc1).
+           Our release numbering convention follows the guidelines of
+           <ulink url="http://semver.org/">Semantic Versioning</ulink>.
+           Given a version number <emphasis>Major.Minor.Patch</emphasis>
+           and an optional <emphasis>Suffix</emphasis> (eg. 1.2.0rc1):
        </para>
 
        <itemizedlist>
@@ -245,21 +255,25 @@
                 <para>
                      Major - Indicates a very large change in the core package.
                      Rewrites or major milestones.
+                     API changes which are not backwards-compatible.
                 </para>
         </listitem>
             <listitem>
                 <para>
-                    Minor - Significant amount of feature addition/modification.
+                    Minor - Introduction of new features or significant changes
+                    in functionality, in a backwards-compatible manner.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Micro - Mostly bug fixes and maintenance releases.
+                    Patch - Bug fixes, maintenance and security releases.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Suffix - rc1 for first release candidate, a1 for alpha 1, etc.
+                    Suffix - Optional, indicates a development release.
+                    a1 for alpha 1, b1 for beta 1, rc1 for first release candidate, etc.
+                    Absence of suffix indicates a stable release.
                 </para>
             </listitem>
         </itemizedlist>

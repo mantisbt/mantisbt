@@ -176,12 +176,6 @@
 								)
 							</para></listitem>
 
-							<listitem><para><emphasis>Hash</emphasis> -
-								<emphasis>mandatory</emphasis>.
-								This extension is available and enabled by
-								default in PHP >= 5.1.2.
-							</para></listitem>
-
 							<listitem><para><emphasis>Curl</emphasis> -
 								required for the Twitter integration feature
 							</para></listitem>
@@ -226,15 +220,16 @@
 						The supported RDBMS are:
 							MySQL (recommended),
 							PostgreSQL,
-							DB2,
 							Microsoft SQL Server and
-							Oracle (experimental).
+							Oracle.
 					</para>
-					<para>Note: There are known issues with all of the above
-						platforms except MySQL, and to a lesser extend PostgreSQL;
-						moreover, you should be aware that support for DB2, SQL
-						server and Oracle is limited.
-					</para>
+					<note><para>
+						There is also experimental support for DB2, although
+						you should be aware that none of the MantisBT core
+						developers have access to this platform, therefore
+						support is very limited and likely to be removed
+						in the future..
+					</para></note>
 				</listitem>
 
 			</itemizedlist>
@@ -277,7 +272,7 @@
 								<entry>MS SQL Server</entry>
 								<entry>2005</entry>
 								<entry>2005 or above</entry>
-								<entry>PHP extension: mssql or sqlsrv</entry>
+								<entry>PHP extension: sqlsrv</entry>
 							</row>
 							<row>
 								<entry>Oracle</entry>
@@ -329,8 +324,9 @@
 		<section id="admin.install.requirements.client">
 			<title>Client Requirements</title>
 
-			<para>MantisBT should run on most recent browsers in
-				the market, including but not limited to
+			<para>
+				MantisBT should run on all browsers in the market, including
+				but not limited to:
 			</para>
 
 			<itemizedlist>
@@ -774,10 +770,9 @@ mv mantisbt-1.2.x mantisbt
 			documents.
 		</para>
 
-		<para><emphasis>
-				!!! Backups should always be performed before an upgrade !!!
-			</emphasis>
-		</para>
+		<warning><para>
+			You should always backup your system (code and database) before upgrading !
+		</para></warning>
 
 		<section id="admin.install.backups.mysql">
 			<title>MySQL Backups</title>

@@ -34,7 +34,8 @@ function custom_function_override_changelog_include_issue( $p_issue_id ) {
 
         <para>MantisBT also provides the ability to customize the details to include from the issue and in what format.  This can be done using the following custom function.
 
-<programlisting>
+<programlisting language="PHP (HTML)"><![CDATA[
+<?php
 # --------------------
 # Prints one entry in the changelog.
 function custom_function_override_changelog_print_issue( $p_issue_id, $p_issue_level = 0 ) {
@@ -55,6 +56,7 @@ function custom_function_override_changelog_print_issue( $p_issue_id, $p_issue_l
 
     echo ' - ', get_enum_element( 'status', $t_bug->status ), '.&lt;br /&gt;';
 }
+]]>
 </programlisting>
         </para>
 
@@ -66,30 +68,30 @@ function custom_function_override_changelog_print_issue( $p_issue_id, $p_issue_l
             <itemizedlist>
                 <listitem>
 	                <para>To link to the changelog of version "ver1" of project "myproject":
-						<programlisting>
-						http://www.example.com/mantisbt/changelog_page.php?project=myproject&amp;version=ver1
-						</programlisting>
+<programlisting>
+http://www.example.com/mantisbt/changelog_page.php?project=myproject&amp;version=ver1
+</programlisting>
 	                </para>
                 </listitem>
                 <listitem>
                 	<para>To link to the changelog of all non-obsolete versions of project 'myproject':
-						<programlisting>
-						http://www.example.com/mantisbt/changelog_page.php?project=myproject
-						</programlisting>
+<programlisting>
+http://www.example.com/mantisbt/changelog_page.php?project=myproject
+</programlisting>
                 	</para>
                 </listitem>
                 <listitem>
-                	<para>To link to the changelog of project with id 1.  The project id can be figured out by going to the management page for the project and getting the value of project_id field form the URL.  
-						<programlisting>
-						http://www.example.com/mantisbt/changelog_page.php?project_id=1
-						</programlisting>
+                	<para>To link to the changelog of project with id 1.  The project id can be figured out by going to the management page for the project and getting the value of project_id field form the URL.
+<programlisting>
+http://www.example.com/mantisbt/changelog_page.php?project_id=1
+</programlisting>
                 	</para>
                 </listitem>
                 <listitem>
                 	<para>To link to the changelog of version with id 1.  The version id is unique across all projects and hence in this case it is not necessary to include the project id/name.  The version id can be figured out by going to the manage project page and editing the required version.  The version_id will be included in the URL.
-						<programlisting>
-						http://www.example.com/mantisbt/changelog_page.php?version_id=1
-						</programlisting>
+<programlisting>
+http://www.example.com/mantisbt/changelog_page.php?version_id=1
+</programlisting>
                 	</para>
                 </listitem>
             </itemizedlist>
@@ -118,19 +120,22 @@ http://www.example.com/mantisbt/project_page.php?project_id=1
         <para>
             MantisBT provides the ability to customize the criteria for issues to show up on the roadmap.  The default criteria is that the issue has to belong to a version that is not yet released and that the issues is not a duplicate.  However, such criteria can be customized by using custom functions as below.
 
-<programlisting>
+<programlisting language="PHP (HTML)"><![CDATA[
+<?php
 # --------------------
 # Checks the provided bug and determines whether it should be included in the roadmap or not.
 # returns true: to include, false: to exclude.
 function custom_function_override_roadmap_include_issue( $p_issue_id ) {
     return ( true );
 }
+]]>
 </programlisting>
         </para>
         <para>
             It is also possible to customize the details included about an issues and the presentation of such details.  This can be done through the following custom function:
 
-<programlisting>
+<programlisting language="PHP (HTML)"><![CDATA[
+<?php
 # --------------------
 # Prints one entry in the roadmap.
 function custom_function_override_roadmap_print_issue( $p_issue_id, $p_issue_level = 0 ) {
@@ -159,6 +164,7 @@ function custom_function_override_roadmap_print_issue( $p_issue_id, $p_issue_lev
 
     echo ' - ', get_enum_element( 'status', $t_bug->status ), $t_strike_end, '.&lt;br /&gt;';
 }
+]]>
 </programlisting>
         </para>
 
@@ -170,30 +176,30 @@ function custom_function_override_roadmap_print_issue( $p_issue_id, $p_issue_lev
             <itemizedlist>
                 <listitem>
 	                <para>To link to the roadmap of version "ver1" of project "myproject":
-						<programlisting>
-						http://www.example.com/mantisbt/roadmap_page.php?project=myproject&amp;version=ver1
-						</programlisting>
+<programlisting>
+http://www.example.com/mantisbt/roadmap_page.php?project=myproject&amp;version=ver1
+</programlisting>
 	                </para>
                 </listitem>
                 <listitem>
                 	<para>To link to the roadmap of all non-obsolete versions of project 'myproject':
-						<programlisting>
-						http://www.example.com/mantisbt/roadmap_page.php?project=myproject
-						</programlisting>
+<programlisting>
+http://www.example.com/mantisbt/roadmap_page.php?project=myproject
+</programlisting>
                 	</para>
                 </listitem>
                 <listitem>
-                	<para>To link to the roadmap of project with id 1.  The project id can be figured out by going to the management page for the project and getting the value of project_id field form the URL.  
-						<programlisting>
-						http://www.example.com/mantisbt/roadmap_page.php?project_id=1
-						</programlisting>
+                	<para>To link to the roadmap of project with id 1.  The project id can be figured out by going to the management page for the project and getting the value of project_id field form the URL.
+<programlisting>
+http://www.example.com/mantisbt/roadmap_page.php?project_id=1
+</programlisting>
                 	</para>
                 </listitem>
                 <listitem>
                 	<para>To link to the roadmap of version with id 1.  The version id is unique across all projects and hence in this case it is not necessary to include the project id/name.  The version id can be figured out by going to the manage project page and editing the required version.  The version_id will be included in the URL.
-						<programlisting>
-						http://www.example.com/mantisbt/roadmap_page.php?version_id=1
-						</programlisting>
+<programlisting>
+http://www.example.com/mantisbt/roadmap_page.php?version_id=1
+</programlisting>
                 	</para>
                 </listitem>
             </itemizedlist>
@@ -221,18 +227,18 @@ http://www.example.com/mantisbt/project_page.php?project_id=1
 					To activate the Time Tracking feature you have to set the configuration option "time_tracking_enabled" to ON. To activating the Time Tracking you can :
 					<itemizedlist>
 						<listitem><para>
-							Static solution : change the variable '$g_time_tracking_enabled' in the configuration file 'config_defaults_inc.php', this will change the configuration for all the MantisBT instance ; 
+							Static solution : change the variable '$g_time_tracking_enabled' in the configuration file 'config_defaults_inc.php', this will change the configuration for all the MantisBT instance ;
 						</para></listitem>
 						<listitem><para>
 							Dynamic and "project by project" solution : Use the administration page "Manage Configuration" and set the variable 'time_tracking_enabled' to '1' for which user and which project of you choice.
 						</para></listitem>
 					</itemizedlist>
 				</para>
-		
+
 				<para>
 					All Time Tracking configuration options are described in the configuration section off this guide.
 				</para>
-				
+
     </section>
 
     <section id="admin.project.graphs">

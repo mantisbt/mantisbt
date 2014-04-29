@@ -4,10 +4,10 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="admin.lifecycle">
-    <title>Issue Lifecycle and Workflow</title>
+	<title>Issue Lifecycle and Workflow</title>
 
-    <section id="admin.lifecycle.create">
-        <title>Issue Creation</title>
+<section id="admin.lifecycle.create">
+	<title>Issue Creation</title>
 
 	<para>The life cycle of an issue starts with its creation.  An issue can
 	be created via one of the following channels:
@@ -155,127 +155,193 @@ $g_status_enum_workflow[RESOLVED]       ='90:closed,20:feedback,50:assigned';
 $g_status_enum_workflow[CLOSED]         ='20:feedback,50:assigned';
 </programlisting>
 		</para>
-		<para>Notes:
-			<itemizedlist>
-				<listitem><para>The workflow needs to have a path from the
-					statuses greater than or equal to the 'resolved' state
-					back to the 'feedback' state (see 
-					<emphasis>$g_bug_resolved_status_threshold</emphasis> and 
-					<emphasis>$g_bug_feedback_status</emphasis> under 
-					<xref linkend="admin.config.status" />),
-					otherwise, the re-open operation won't work.
-				</para></listitem>
-				<listitem><para>The first item in each list denotes the default
-					value for this status, which will be pre-selected in the
-					Change Status combobox in the View Issues page.
-				</para></listitem>
-			</itemizedlist>
-		</para>
-        </section>
+		<note>
+			<para>The workflow needs to have a path from the
+				statuses greater than or equal to the 'resolved' state
+				back to the 'feedback' state (see
+				<emphasis>$g_bug_resolved_status_threshold</emphasis> and
+				<emphasis>$g_bug_feedback_status</emphasis> under
+				<xref linkend="admin.config.status" />),
+				otherwise, the re-open operation won't work.
+			</para>
+		</note>
+		<note>
+			<para>The first item in each list denotes the default
+				value for this status, which will be pre-selected in the
+				Change Status combobox in the View Issues page.
+			</para>
+		</note>
+	</section>
 
 	<section id="admin.lifecycle.workflow.thresholds">
-	    <title>Workflow Thresholds</title>
+		<title>Workflow Thresholds</title>
 
-	    <para>This "Manage &gt; Manage Configuration &gt; Workflow
-	    Thresholds" page allows users with ADMINISTRATOR access level to
-	    define the thresholds required to do certain actions.  Following is
-	    a list of such actions and what they mean:
+		<para>The "Manage &gt; Manage Configuration &gt; Workflow
+			Thresholds" page allows users with ADMINISTRATOR access level to
+			define the thresholds required to do certain actions.  Following is
+			a list of such actions and what they mean:
+		</para>
 
-	    <itemizedlist>
-	        <listitem><para>Report an issue - The access levels that are
-		allowed to report an issue.</para></listitem>
-	        <listitem><para>Update an issue - The access levels that are
-		allowed to update the header information of an issue.</para></listitem>
-	        <listitem><para>Allow issue to be closed on resolved - The
-		access levels that are allow to resolve and close an issue in
-		one step.</para></listitem>
-	        <listitem><para>Allow reporter to close issue - Indicates if
-		reporters should be allowed to close issues reported by them.</para></listitem>
-	        <listitem><para>Monitor an issue - The access levels required
-		for a user to be able to monitor an issue.  Once a user monitors
-		an issue, the user will be included in all future email
-		notifications relating to changes in the issue.</para></listitem>
-	        <listitem><para>Handle an issue - The access levels required for
-		a user to be shown in the list of users that can handle an
-		issue.</para></listitem>
-	        <listitem><para>Assign an issue - The access levels required for
-		a user to be able to change the handler (i.e. assign / unassign)
-		an issue.</para></listitem>
-	        <listitem><para>Move an issue - The access levels required for a
-		user to be able to move an issue from one project to another.
-		(TODO: are these access levels evaluated against source or
-		destination project?).</para></listitem>
-	        <listitem><para>Delete an issue - The access levels required for
-		a user to be able to delete an issue.</para></listitem>
-	        <listitem><para>Reopen an issue - The access levels required for
-		a user to be able to re-open a resolved or closed issue.</para></listitem>
-	        <listitem><para>Allow Reporter to re-open Issue - Whether the
-		reporter of an issue can re-open a resolved or closed issue,
-		independent of their access level.</para></listitem>
-	        <listitem><para>Status to which a reopened issue is set - This
-		is the status to which an issue is set after it is re-opened.</para></listitem>
-	        <listitem><para>Resolution to which a reopen issue is set - The
-		resolution to set on issues that are reopened.</para></listitem>
-	        <listitem><para>Status where an issue is considered resolved -
-		The status at which an issue is considered resolved.</para></listitem>
-	        <listitem><para>Status where an issue becomes readonly - Issues
-		with such status and above are considered read-only.  Read-only
-		issues can only be modified by users with a configured access
-		level.  Read-only applies to the issue header information as
-		well as other issue related information like relationships,
-		attachments, notes, etc.</para></listitem>
-	        <listitem><para>Update readonly issues - The access levels
-		required for a user to be able to modify a readonly issue.</para></listitem>
-	        <listitem><para>Update issue status - The access levels required
-		for a user to be able to modify the status of an issue.</para></listitem>
-	        <listitem><para>View private issues - The access levels for a
-		user to be able to view a private issue.</para></listitem>
-	        <listitem><para>Set view status (public vs. private) - The
-		access level for a user to be able to set whether an issue is
-		private or public, when reporting the issue.  If the user
-		reporting the issues doesn't have the required access, then the
-		issue will be created with the default view state.</para></listitem>
-	        <listitem><para>Update view status (public vs private) - The
-		access level required for a user to be able to update the view
-		status (i.e. public vs. private).</para></listitem>
-	        <listitem><para>Show list of users monitoring issue - The access
-		level required for a user to be able to view the list of users
-		monitoring an issue.</para></listitem>
-	        <listitem><para>Set status on assignment of handler - The access
-		levels required for a user to be able to re-assign an issue when
-		changing its status.</para></listitem>
-	        <listitem><para>Status to set auto-assigned issues to - The
-		status - This is the status that is set on issues that are auto
-		assigned to users that are associated with the category that the
-		issuer is reported under.</para></listitem>
-	        <listitem><para>Limit reporter's access to their own issues -
-		When set, reporters are only allow to view issues that they have
-		reported.</para></listitem>
-	        <listitem><para>Add notes - The access levels required for users
-		to be able to add notes.</para></listitem>
-	        <listitem><para>Update notes - The access levels required for
-		users to be able to update issue notes.</para></listitem>
-	        <listitem><para>Allow user to edit their own issue notes - A flag
-		that indicates the ability for users to edit issue notes report by them.</para></listitem>
-	        <listitem><para>Delete note - The access levels required for a
-		user to delete a note that they may or may not have reported
-		themselves.</para></listitem>
-	        <listitem><para>View private notes - The access levels required
-		for a user to be able to view private notes associated with an
-		issue that they have access to view.</para></listitem>
-	        <listitem><para>View Change Log - The access levels required for
-		a user to be able to view the change log.</para></listitem>
-	        <listitem><para>View Assigned To - The access levels required
-		for a user to be able to know the handler of an issue that they
-		have access to.</para></listitem>
-	        <listitem><para>View Issue History - The access levels required
-		for a user to be able to view the history of changes of an
-		issue.</para></listitem>
-	        <listitem><para>Send reminders - The access levels required for
-		a user to be able to send reminders to other users relating to
-		an issue that they have access to.</para></listitem>
-	    </itemizedlist>
-	    </para>
+		<itemizedlist>
+			<listitem><para>Report an issue - The access levels that are
+				allowed to report an issue.
+				</para>
+			</listitem>
+			<listitem><para>Update an issue - The access levels that are
+				allowed to update the header information of an issue.
+				</para>
+			</listitem>
+			<listitem><para>Allow issue to be closed on resolved - The
+				access levels that are allow to resolve and close an issue in
+				one step.
+				</para>
+			</listitem>
+			<listitem><para>Allow reporter to close issue - Indicates if
+				reporters should be allowed to close issues reported by them.
+				</para>
+			</listitem>
+			<listitem><para>Monitor an issue - The access levels required
+				for a user to be able to monitor an issue.  Once a user monitors
+				an issue, the user will be included in all future email
+				notifications relating to changes in the issue.
+				</para>
+			</listitem>
+			<listitem><para>Handle an issue - The access levels required for
+				a user to be shown in the list of users that can handle an
+				issue.
+				</para>
+			</listitem>
+			<listitem><para>Assign an issue - The access levels required for
+				a user to be able to change the handler (i.e. assign / unassign)
+				an issue.
+				</para>
+			</listitem>
+			<listitem><para>Move an issue - The access levels required for a
+				user to be able to move an issue from one project to another.
+				(TODO: are these access levels evaluated against source or
+				destination project?).
+				</para>
+			</listitem>
+			<listitem><para>Delete an issue - The access levels required for
+				a user to be able to delete an issue.
+				</para>
+			</listitem>
+			<listitem><para>Reopen an issue - The access levels required for
+				a user to be able to re-open a resolved or closed issue.
+				</para>
+			</listitem>
+			<listitem><para>Allow Reporter to re-open Issue - Whether the
+				reporter of an issue can re-open a resolved or closed issue,
+				independent of their access level.
+				</para>
+			</listitem>
+			<listitem><para>Status to which a reopened issue is set - This
+				is the status to which an issue is set after it is re-opened.
+				</para>
+			</listitem>
+			<listitem><para>Resolution to which a reopen issue is set - The
+				resolution to set on issues that are reopened.
+				</para>
+			</listitem>
+			<listitem><para>Status where an issue is considered resolved -
+				The status at which an issue is considered resolved.
+				</para>
+			</listitem>
+			<listitem><para>Status where an issue becomes readonly - Issues
+				with such status and above are considered read-only.  Read-only
+				issues can only be modified by users with a configured access
+				level.  Read-only applies to the issue header information as
+				well as other issue related information like relationships,
+				attachments, notes, etc.
+				</para>
+			</listitem>
+			<listitem><para>Update readonly issues - The access levels
+				required for a user to be able to modify a readonly issue.
+				</para>
+			</listitem>
+			<listitem><para>Update issue status - The access levels required
+				for a user to be able to modify the status of an issue.
+				</para>
+			</listitem>
+			<listitem><para>View private issues - The access levels for a
+				user to be able to view a private issue.
+				</para>
+			</listitem>
+			<listitem><para>Set view status (public vs. private) - The
+				access level for a user to be able to set whether an issue is
+				private or public, when reporting the issue.  If the user
+				reporting the issues doesn't have the required access, then the
+				issue will be created with the default view state.
+				</para>
+			</listitem>
+			<listitem><para>Update view status (public vs private) - The
+				access level required for a user to be able to update the view
+				status (i.e. public vs. private).
+				</para>
+			</listitem>
+			<listitem><para>Show list of users monitoring issue - The access
+				level required for a user to be able to view the list of users
+				monitoring an issue.
+				</para>
+			</listitem>
+			<listitem><para>Set status on assignment of handler - The access
+				levels required for a user to be able to re-assign an issue when
+				changing its status.
+				</para>
+			</listitem>
+			<listitem><para>Status to set auto-assigned issues to - The
+				status - This is the status that is set on issues that are auto
+				assigned to users that are associated with the category that the
+				issuer is reported under.
+				</para>
+			</listitem>
+			<listitem><para>Limit reporter's access to their own issues -
+				When set, reporters are only allow to view issues that they have
+				reported.
+				</para>
+			</listitem>
+			<listitem><para>Add notes - The access levels required for users
+				to be able to add notes.
+				</para>
+			</listitem>
+			<listitem><para>Update notes - The access levels required for
+				users to be able to update issue notes.
+				</para>
+			</listitem>
+			<listitem><para>Allow user to edit their own issue notes - A flag
+				that indicates the ability for users to edit issue notes report by them.
+				</para>
+			</listitem>
+			<listitem><para>Delete note - The access levels required for a
+				user to delete a note that they may or may not have reported
+				themselves.
+				</para>
+			</listitem>
+			<listitem><para>View private notes - The access levels required
+				for a user to be able to view private notes associated with an
+				issue that they have access to view.
+				</para>
+			</listitem>
+			<listitem><para>View Change Log - The access levels required for
+				a user to be able to view the change log.
+				</para>
+			</listitem>
+			<listitem><para>View Assigned To - The access levels required
+				for a user to be able to know the handler of an issue that they
+				have access to.
+				</para>
+			</listitem>
+			<listitem><para>View Issue History - The access levels required
+				for a user to be able to view the history of changes of an
+				issue.
+				</para>
+			</listitem>
+			<listitem><para>Send reminders - The access levels required for
+				a user to be able to send reminders to other users relating to
+				an issue that they have access to.
+				</para>
+			</listitem>
+			</itemizedlist>
+		</section>
 	</section>
-    </section>
 </chapter>
