@@ -530,10 +530,33 @@ $g_notify_flags['monitor'] = array(
 $g_email_receive_own = OFF;
 
 /**
- * set to OFF to disable email check
+ * Email addresses validation
+ *
+ * Determines if and how email addresses are validated. Possible values for
+ * this config are:
+ * - EMAIL_VALIDATE_PHP (default): validate using PHP's built-in method (see
+ *   {@link http://php.net/filter_var} with FILTER_SANITIZE_EMAIL filter
+ *   {@link http://php.net/filter.filters.validate}
+ *   This should be used with internet-facing installations.
+ *   Emails must have the form 'user@domain.tld'
+ * - EMAIL_VALIDATE_RFC5322: validate using an RFC5322-compliant regex
+ *   (see {@link http://squiloople.com/2009/12/20/email-address-validation/}.
+ *   This is useful for intranet installations, when relying on addresses
+ *   without a top-level domain (e.g. 'user@domain')
+ * - EMAIL_VALIDATE_AUTO: let PHPMailer's
+ *   {@link http://phpmailer.github.io/PHPMailer/classes/PHPMailer.html#method_validateAddress validateAddress()}
+ *   method pick the best validation pattern. On recent systems, this is
+ *   generally the same as EMAIL_VALIDATE_RFC5322.
+ * - OFF: disable email validation
+ *
+ * NOTE: Regardless of how this option is set, validation is not performed
+ * when using LDAP email (i.e. when $g_use_ldap_email = ON), as we assume that
+ * it is handled by the directory.
+ * @see $g_use_ldap_email
+ *
  * @global integer $g_validate_email
  */
-$g_validate_email = ON;
+$g_validate_email = EMAIL_VALIDATE_PHP;
 
 /**
  * set to OFF to disable email check

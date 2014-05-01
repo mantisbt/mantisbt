@@ -136,7 +136,50 @@
 		<varlistentry>
 			<term>$g_validate_email</term>
 			<listitem>
-				<para>Set to OFF to disable email checking. Default is ON.</para>
+				<para>Determines if and how email addresses are validated.
+					Possible values for this config option are:
+				</para>
+				<itemizedlist>
+					<listitem><para>
+						<literal>EMAIL_VALIDATE_PHP</literal> (default):
+						validate using PHP's built-in method (see
+						<ulink url="http://php.net/filter_var">
+							filter_var() function</ulink> with
+						<ulink url="http://php.net/filter.filters.validate">
+							FILTER_SANITIZE_EMAIL</ulink> filter).
+						This should be used with internet-facing
+						installations. Emails must have the form
+						<emphasis>user@domain.tld</emphasis>.
+					</para></listitem>
+					<listitem><para>
+						<literal>EMAIL_VALIDATE_RFC5322</literal>:
+						validate using an
+						<ulink url="http://squiloople.com/2009/12/20/email-address-validation/">
+							RFC5322-compliant regex</ulink>.
+						This is useful for intranet installations, when
+						relying addresses without a top-level domain (e.g.
+						<emphasis>user@domain</emphasis>).
+					</para></listitem>
+					<listitem><para>
+						<literal>EMAIL_VALIDATE_AUTO</literal>:
+						let PHPMailer's
+						<ulink url="http://phpmailer.github.io/PHPMailer/classes/PHPMailer.html#method_validateAddress">
+							validateAddress() method</ulink>
+						pick the best validation pattern.
+						On recent systems, this is generally the same as
+						<literal>EMAIL_VALIDATE_RFC5322</literal>.
+					</para></listitem>
+					<listitem><para>
+						<literal>OFF</literal>:
+						disable email check.
+					</para></listitem>
+				</itemizedlist>
+				<note><para>
+					Regardless of how this option is set, validation is
+					not performed when using LDAP email (i.e. when
+					$g_use_ldap_email = ON), as we assume that it is
+					handled by the directory.
+				</para></note>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
