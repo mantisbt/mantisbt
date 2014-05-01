@@ -137,6 +137,7 @@ function email_is_valid( $p_email ) {
 	}
 
 	# check email address is a valid format
+	log_event( LOG_EMAIL, "Validating address '$p_email' with method '$t_method'" );
 	$t_email = filter_var( $p_email, FILTER_SANITIZE_EMAIL );
 	if( PHPMailer::ValidateAddress( $t_email, $t_method ) ) {
 		$t_domain = substr( $t_email, strpos( $t_email, '@' ) + 1 );
@@ -149,6 +150,7 @@ function email_is_valid( $p_email ) {
 					return true; # no need to check mx record details (below) if we've explicity allowed the domain
 				}
 			}
+			log_event( LOG_EMAIL, "failed - not in limited domains list '$t_limit_email_domains'" );
 			return false;
 		}
 
@@ -165,11 +167,14 @@ function email_is_valid( $p_email ) {
 				if( checkdnsrr( $t_host, 'ANY' ) ) {
 					return true;
 				}
+				log_event( LOG_EMAIL, "failed - mx/dns record check" );
 			}
 		} else {
 			# Email format was valid but didn't check for valid mx records
 			return true;
 		}
+	} else {
+		log_event( LOG_EMAIL, "failed - invalid address" );
 	}
 
 	# Everything failed.  The email is invalid
