@@ -30,6 +30,7 @@ step "Create database $MANTIS_DB_NAME"
 case $DB in
 
 	mysql)
+		DB_TYPE='mysqli'
 		DB_USER='root'
 		DB_PASSWORD=''
 		DB_CMD='mysql -e'
@@ -39,6 +40,7 @@ case $DB in
 		;;
 
 	pgsql)
+		DB_TYPE='pgsql'
 		DB_USER='postgres'
 		DB_PASSWORD=''
 		DB_CMD="psql -U $DB_USER -c"
@@ -87,7 +89,7 @@ step "MantisBT Installation"
 # Define parameters for MantisBT installer
 declare -A query=(
 	[install]=2
-	[db_type]=$DB
+	[db_type]=$DB_TYPE
 	[hostname]=$HOSTNAME
 	[database_name]=$MANTIS_DB_NAME
 	[db_username]=$DB_USER
