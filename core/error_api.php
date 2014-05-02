@@ -110,14 +110,16 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 	}
 
 	# build an appropriate error string
+	$t_error_description = "'$p_error' in '$p_file' line $p_line";
 	switch( $p_type ) {
 		case E_WARNING:
 			$t_error_type = 'SYSTEM WARNING';
-			$t_error_description = "'$p_error' in '$p_file' line $p_line";
 			break;
 		case E_NOTICE:
 			$t_error_type = 'SYSTEM NOTICE';
-			$t_error_description = "'$p_error' in '$p_file' line $p_line";
+			break;
+		case E_DEPRECATED:
+			$t_error_type = 'DEPRECATED';
 			break;
 		case E_USER_ERROR:
 			$t_error_type = "APPLICATION ERROR #$p_error";
