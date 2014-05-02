@@ -5,6 +5,7 @@
 
 # Global variables initialization
 HOSTNAME=localhost
+PORT=80
 MANTIS_DB_NAME=bugtracker
 MANTIS_BOOTSTRAP=tests/bootstrap.php
 
@@ -58,7 +59,7 @@ sudo apt-get update -qq
 sudo apt-get install -qq apache2 libapache2-mod-php5 php5-mysql php5-pgsql
 
 cat <<-EOF | sudo tee /etc/apache2/sites-available/default >/dev/null
-    <VirtualHost *:80>
+    <VirtualHost *:$PORT>
         DocumentRoot $PWD
         <Directory />
             Options FollowSymLinks
