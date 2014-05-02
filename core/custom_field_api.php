@@ -1024,7 +1024,7 @@ function custom_field_validate( $p_field_id, $p_value ) {
 		case CUSTOM_FIELD_TYPE_DATE:
 			# gpc_get_cf for date returns the value from strtotime
 			# For 32 bit systems, supported range will be 13 Dec 1901 20:45:54 UTC to 19 Jan 2038 03:14:07 UTC
-			$t_valid &= ( $p_value == null ) || ( $p_value !== false );
+			$t_valid &= $p_value !== false;
 			break;
 		case CUSTOM_FIELD_TYPE_CHECKBOX:
 		case CUSTOM_FIELD_TYPE_MULTILIST:
