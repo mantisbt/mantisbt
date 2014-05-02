@@ -147,6 +147,11 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 	if( php_sapi_name() == 'cli' ) {
 		if( DISPLAY_ERROR_NONE != $t_method ) {
 			echo $t_error_type . ": " . $t_error_description . "\n";
+
+			if( ON == config_get_global( 'show_detailed_errors' ) ) {
+				echo "\n";
+				debug_print_backtrace();
+			}
 		}
 		if( DISPLAY_ERROR_HALT == $t_method ) {
 			exit(1);
