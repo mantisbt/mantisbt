@@ -146,7 +146,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 
 	if( php_sapi_name() == 'cli' ) {
 		echo $t_error_type . ": " . $t_error_description . "\n";
-		exit();
+		exit(1);
 	}
 
 	switch( $t_method ) {
@@ -235,7 +235,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 			} else {
 				echo '</body></html>', "\n";
 			}
-			exit();
+			exit(1);
 		case DISPLAY_ERROR_INLINE:
 			echo '<div class="error-inline">', $t_error_type, ': ', $t_error_description, '</div>';
 			$g_error_handled = true;
