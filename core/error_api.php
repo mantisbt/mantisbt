@@ -146,7 +146,9 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 
 	if( php_sapi_name() == 'cli' ) {
 		echo $t_error_type . ": " . $t_error_description . "\n";
-		exit(1);
+		if( DISPLAY_ERROR_HALT == $t_method ) {
+			exit(1);
+		}
 	}
 
 	switch( $t_method ) {
