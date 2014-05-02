@@ -538,6 +538,14 @@ $g_allow_blank_email = OFF;
 $g_limit_email_domains = array();
 
 /**
+ * Disallow users to user email addresses in the given domain(s) for accounts within Mantis
+ * For example:
+ * $g_blocked_email_domains		= array( 'localhost', 'users.sourceforge.net', 'sourceforge.net' );
+ * @global array $g_blocked_email_domains
+ */
+$g_blocked_email_domains = array( '' );
+
+/**
  * This specifies the access level that is needed to get the mailto: links.
  * @global int $g_show_user_email_threshold
  */

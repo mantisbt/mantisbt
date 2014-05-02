@@ -88,24 +88,26 @@ require_lib( 'phpmailer' . DIRECTORY_SEPARATOR . 'class.phpmailer.php' );
  $g_email_stored = false;
 
 /**
- * Use a simple perl regex for valid email addresses.  This is not a complete regex,
- * as it does not cover quoted addresses or domain literals, but it is simple and
- * covers the vast majority of all email addresses without being overly complex.
+ * Use the HTML5 standard pattern for valid email addresses for all email handling within Mantis.
+ * The HTML5 Pattern is available at http://www.w3.org/html/wg/drafts/html/master/forms.html#e-mail-state-(type=email)
+ * and is as follows:
+ * /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+ *
+ * The Standard regex has been modified as follows for use in MantisBT:
+ * 1) Character 22 is / . This has been changed to \/ for use in PHP.
+ * if $p_inline is set to true:
+ * 2) Character 2 is ^ . This has been removed to allow for mid-string matching (in string api)
+ * 3) Character 134 is $ . This has been removed to allow for mid-string matching (in string api)
+ *
+ * @param bool $p_inline if true, excludes start/end of string from regex to allow for matching an email address within a string.
  * @return string
  */
-function email_regex_simple() {
-	static $s_email_regex = null;
-
-	if( is_null( $s_email_regex ) ) {
-		$t_recipient = "([a-z0-9!#*+\/=?^_{|}~-]+(?:\.[a-z0-9!#*+\/=?^_{|}~-]+)*)";
-
-		# a domain is one or more subdomains
-		$t_subdomain = "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)";
-		$t_domain    = "(${t_subdomain}(?:\.${t_subdomain})*)";
-
-		$s_email_regex = "/${t_recipient}\@${t_domain}/i";
+function email_regex_simple($p_inline = false) {
+	if( $p_inline == true ) {
+		return "/[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*/";
+	} else {
+		return "/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/";
 	}
-	return $s_email_regex;
 }
 
 /**
@@ -122,10 +124,26 @@ function email_is_valid( $p_email ) {
 		return true;
 	}
 
-	# check email address is a valid format
+	# check email address passes PHP's FILTER_SANITIZE_EMAIL function
 	$t_email = filter_var( $p_email, FILTER_SANITIZE_EMAIL );
-	if( PHPMailer::ValidateAddress( $t_email ) ) {
+	if( $t_email === false || $t_email != $p_email ) {
+		# either filter_var returned an error or email address contained invalid characters so return false
+		return false;
+	}
+
+	# Check email address validates against the html5 standard email validation
+	if( preg_match( email_regex_simple(), $t_email ) ) {
 		$t_domain = end( explode( '@', $t_email ) );
+
+		# see if the email address is on the list of blocked domain names
+		$t_blocked_email_domains = config_get( 'blocked_email_domains' );
+		if( !empty( $t_blocked_email_domains ) ) {
+			foreach( $t_blocked_email_domains as $t_email_domain ) {
+				if( 0 == strcasecmp( $t_email_domain, $t_domain ) ) {
+					return false; # email domain is blocked
+				}
+			}
+		}
 
 		# see if we're limited to a set of known domains
 		$t_limit_email_domains = config_get( 'limit_email_domains' );
@@ -135,7 +153,7 @@ function email_is_valid( $p_email ) {
 					return true; // no need to check mx record details (below) if we've explicity allowed the domain
 				}
 			}
-				return false;
+			return false;
 		}
 
 		if( ON == config_get( 'check_mx_record' ) ) {

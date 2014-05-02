@@ -499,7 +499,7 @@ function string_insert_hrefs( $p_string ) {
 		$s_url_replace = "'<a ${t_url_href}>\\1</a> [<a ${t_url_href} target=\"_blank\">^</a>]'";
 
 		# e-mail regex
-		$s_email_regex = substr_replace( email_regex_simple(), '(?:mailto:)?', 1, 0 );
+		$s_email_regex = substr_replace( email_regex_simple( true ), '(?:mailto:)?', 1, 0 );
 	}
 
 	# Find any URL in a string and replace it by a clickable link
