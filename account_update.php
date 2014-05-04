@@ -88,7 +88,6 @@ $t_ldap = ( LDAP == config_get( 'login_method' ) );
 # Update email (but only if LDAP isn't being used)
 if( !( $t_ldap && config_get( 'use_ldap_email' ) ) ) {
 	email_ensure_valid( $f_email );
-	email_ensure_not_disposable( $f_email );
 
 	if( $f_email != user_get_email( $t_user_id ) ) {
 		user_set_email( $t_user_id, $f_email );
