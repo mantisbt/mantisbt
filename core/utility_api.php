@@ -299,3 +299,20 @@ function finfo_get_if_available() {
 
 	return null;
 }
+
+/**
+ * Performs a simple wild card matching routine
+ * ? = any single character, * = any characters
+ * @param string $p_pattern Pattern to match (e.g. *.org)
+ * @param string $p_string Subject string to test (e.g. mantisbt.org)
+ * @param boolean $p_case_sensitive Indicates whether to perform case sensitive matching - default false
+ * @returns boolean boolean value indicating whether pattern matches subject
+ */
+function wildcard_match( $p_pattern, $p_string, $p_case_sensitive = false) {
+	$t_pattern = strtr( preg_quote( $p_pattern, '/' ), array( '\*' => '.*', '\?' => '.' ) );
+	if( $p_case_sensitive ) {
+		return (bool)preg_match( '/^' . $t_pattern . '$/', $p_string);
+	} else {
+		return (bool)preg_match( '/^' . $t_pattern . '$/i', $p_string);
+	}
+}

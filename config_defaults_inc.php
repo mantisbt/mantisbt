@@ -543,7 +543,7 @@ $g_limit_email_domains = array();
  * $g_blocked_email_domains		= array( 'localhost', 'users.sourceforge.net', 'sourceforge.net' );
  * @global array $g_blocked_email_domains
  */
-$g_blocked_email_domains = array( '' );
+$g_blocked_email_domains = array();
 
 /**
  * This specifies the access level that is needed to get the mailto: links.
