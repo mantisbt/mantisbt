@@ -129,4 +129,7 @@ event_declare_many( array(
 
 	# Logging (tracing) events
 	'EVENT_LOG' => EVENT_TYPE_EXECUTE,
+
+	# Other Events
+	'EVENT_VALIDATE_EMAIL_ADDRESS' => EVENT_TYPE_FIRST,
 ) );

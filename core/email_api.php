@@ -133,7 +133,16 @@ function email_is_valid( $p_email ) {
 
 	# Check email address validates against the html5 standard email validation
 	if( preg_match( email_regex_simple(), $t_email ) ) {
-		$t_domain = end( explode( '@', $t_email ) );
+		$t_parts = explode( '@', $t_email );
+		$t_domain = end( $t_parts );
+
+		$t_result = event_signal( 'EVENT_VALIDATE_EMAIL_ADDRESS', array( $t_email, $t_domain ) );
+
+		if( $t_result === true ) {
+			return true;
+		} elseif( $t_result === false ) {
+			return false;
+		}
 
 		# see if the email address is on the list of blocked domain names
 		$t_blocked_email_domains = config_get( 'blocked_email_domains' );
@@ -171,7 +180,7 @@ function email_is_valid( $p_email ) {
 				}
 			}
 		} else {
-			# Email format was valid but did't check for valid mx records
+			# Email format was valid but we did not check for valid mx records
 			return true;
 		}
 	}
@@ -189,31 +198,6 @@ function email_is_valid( $p_email ) {
 function email_ensure_valid( $p_email ) {
 	if( !email_is_valid( $p_email ) ) {
 		trigger_error( ERROR_EMAIL_INVALID, ERROR );
-	}
-}
-
-/**
- * Check if the email address is disposable
- * @param string $p_email
- * @return bool
- */
-function email_is_disposable( $p_email ) {
-	if( !class_exists( 'DisposableEmailChecker' ) ) {
-		require_lib( 'disposable/disposable.php' );
-	}
-
-	return DisposableEmailChecker::is_disposable_email( $p_email );
-}
-
-/**
- * Check if the email address is disposable
- * trigger an ERROR if it isn't
- * @param string $p_email
- * @return null
- */
-function email_ensure_not_disposable( $p_email ) {
-	if( email_is_disposable( $p_email ) ) {
-		trigger_error( ERROR_EMAIL_DISPOSABLE, ERROR );
 	}
 }
 
