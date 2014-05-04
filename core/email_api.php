@@ -135,7 +135,7 @@ function email_is_valid( $p_email ) {
 		$t_blocked_email_domains = config_get( 'blocked_email_domains' );
 		if( !empty( $t_blocked_email_domains ) ) {
 			foreach( $t_blocked_email_domains as $t_email_domain ) {
-				if( 0 == strcasecmp( $t_email_domain, $t_domain ) ) {
+				if( wildcard_match( $t_email_domain, $t_domain ) ) {
 					return false; # email domain is blocked
 				}
 			}
@@ -145,7 +145,7 @@ function email_is_valid( $p_email ) {
 		$t_limit_email_domains = config_get( 'limit_email_domains' );
 		if( !empty( $t_limit_email_domains ) ) {
 			foreach( $t_limit_email_domains as $t_email_domain ) {
-				if( 0 == strcasecmp( $t_email_domain, $t_domain ) ) {
+				if( wildcard_match( $t_email_domain, $t_domain ) ) {
 					return true; # no need to check mx record details (below) if we've explicity allowed the domain
 				}
 			}
