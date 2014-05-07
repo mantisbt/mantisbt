@@ -2030,9 +2030,8 @@
 	 * An array of the fields to show on the bug report page.
 	 *
 	 * The following fields can not be included:
-	 * id, project, date_submitted, last_updated, status,
-	 * resolution, tags, fixed_in_version, projection, eta,
-	 * reporter.
+	 * id, project, date_submitted, last_updated, tags, fixed_in_version,
+	 * projection, eta, reporter.
 	 *
 	 * The following fields must be included:
 	 * category_id, summary, description.

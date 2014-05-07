@@ -2896,7 +2896,7 @@
 
     <section id="admin.config.sourcecontrol">
         <title>Source Control Integration</title>
-		<para>Note that the script expects to be invoked with UTF-8 input. If you have a 
+		<para>Note that the script expects to be invoked with UTF-8 input. If you have a
 			program which outputs text in a different encoding the results may be
 			incorrect.</para>
 
@@ -3189,9 +3189,10 @@
                         to view them.  See BUG_FIELD_* in constant_inc.php for all possible values.
                     </para>
                     <para>
-                        The following fields can not be included: BUG_FIELD_ID, BUG_FIELD_PROJECT,
-                        BUG_FIELD_DATE_SUBMITTED, BUG_FIELD_LAST_UPDATED, BUG_FIELD_STATUS,
-                        BUG_FIELD_RESOLUTION, BUG_FIELD_TAGS, BUG_FIELD_FIXED_IN_VERSION,
+                        The following fields cannot be included:
+                        BUG_FIELD_ID, BUG_FIELD_PROJECT,
+                        BUG_FIELD_DATE_SUBMITTED, BUG_FIELD_LAST_UPDATED,
+                        BUG_FIELD_TAGS, BUG_FIELD_FIXED_IN_VERSION,
                         BUG_FIELD_PROJECTION, BUG_FIELD_ETA, BUG_FIELD_REPORTER.
                     </para>
                     <para>
