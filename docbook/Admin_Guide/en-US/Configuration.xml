@@ -3191,7 +3191,9 @@ $g_main_menu_custom_options = array(
                         product_build,
                         product_version,
                         reproducibility,
+                        resolution,
                         severity,
+                        status,
                         steps_to_reproduce,
                         target_version,
                         view_state.

@@ -2169,7 +2169,9 @@ $g_enable_product_build = OFF;
  *   - product_build
  *   - product_version
  *   - reproducibility
+ *   - resolution
  *   - severity
+ *   - status
  *   - steps_to_reproduce
  *   - target_version
  *   - view_state
