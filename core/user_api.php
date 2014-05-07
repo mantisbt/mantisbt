@@ -1058,7 +1058,7 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 						)
 					  ORDER BY p.name';
 		$t_param = array( $p_user_id, VS_PUBLIC, VS_PRIVATE, $p_user_id );
-		if( $p_show_disabled ) {
+		if( !$p_show_disabled ) {
 			# Insert enabled flag value in 2nd position of parameter array
 			array_splice( $t_param, 1, 0, true );
 		}
