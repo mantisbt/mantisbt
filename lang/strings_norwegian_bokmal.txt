@@ -27,6 +27,7 @@
  *
  * @author Alf-Ivar Holm, affi@csc.no
  * @author Audun
+ * @author Cocu
  * @author Danmichaelo
  * @author EivindJ
  * @author Espen Holje, eh@escio.no
@@ -276,6 +277,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Tillegget er allerede installer
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Finner ikke siden for tilleggsprogrammet';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Installasjonen av utvidelsen feilet: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Oppgradering av skjema for tilleggsprogrammet feilet i blokk #%1$s.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'Plugin "%1$s" trenger en oppgradering før du kan få tilgang til denne siden.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Ukjent feil "%1$s" ved kjøring av tilleggsprogrammet "%2$s"';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Felt "%1$s" inneholder en duplikert kolonne "%2$s"';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Feltet "%1$s" inneholder et ugyldig felt "%2$s".';
@@ -492,7 +494,7 @@ $s_sent_you_this_reminder_about = 'sendte deg denne påminnelsen om';
 $s_bug_reminder = 'Send en påminnelse';
 $s_reminder_sent_to = 'Påminnelse sendt til';
 $s_reminder_sent_none = 'Ingen påminnelser kunne sendes';
-$s_reminder_list_truncated = 'mottakerlisten er avkortet, se historikken for fullstendig liste';
+$s_reminder_list_truncated = 'mottakerlisten er avkortet';
 $s_bug_send_button = 'Send';
 $s_reminder = 'Påminnelse';
 $s_reminder_explain = 'Denne meldingen vil bli sendt til dem som har bedt om tilbakemelding på denne saken.';
