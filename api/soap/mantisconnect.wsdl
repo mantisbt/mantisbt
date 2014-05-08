@@ -177,6 +177,19 @@
    />
   </xsd:all>
  </xsd:complexType>
+ <xsd:complexType name="CategoryData">
+  <xsd:all>
+   <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
+   <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="CategoryDataArray">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:CategoryData[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType> 
  <xsd:complexType name="HistoryDataArray">
   <xsd:complexContent>
    <xsd:restriction base="SOAP-ENC:Array">
@@ -621,7 +634,7 @@
   <part name="password" type="xsd:string" />
   <part name="project_id" type="xsd:integer" /></message>
 <message name="mc_project_get_categoriesResponse">
-  <part name="return" type="tns:StringArray" /></message>
+  <part name="return" type="tns:CategoryDataArray" /></message>
 <message name="mc_project_add_categoryRequest">
   <part name="username" type="xsd:string" />
   <part name="password" type="xsd:string" />
