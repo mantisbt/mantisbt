@@ -200,7 +200,10 @@ function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
 	$t_result = array();
 	$t_cat_array = category_get_all_rows( $p_project_id );
 	foreach( $t_cat_array as $t_category_row ) {
-		$t_result[] = $t_category_row['name'];
+		$t_categories = array();
+		$t_categories['id'] = $t_category_row['id'];
+		$t_categories['name'] = $t_category_row['name'];
+		$t_result[] = $t_categories;
 	}
 	return $t_result;
 }
