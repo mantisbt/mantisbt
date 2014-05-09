@@ -1,42 +1,35 @@
 <?php
-# MantisBT - A PHP based bugtracking system
-
-# MantisBT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# MantisBT is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * Language File - Hungarian (magyar)
+/** MantisBT - a php based bugtracking system
  *
- * **********************************************************************
- * ** This file is generated from translations stored in translatewiki **
- * ** Information on Copyright/License for translatewiki translations  **
- * ** is available at http://translatewiki.net/wiki/Project:About      **
- * **********************************************************************
- * **                                                                  **
- * **                      DO NOT UPDATE MANUALLY                      **
- * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
- * ** Detailed instructions on how to create or update translations at **
- * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
- * **********************************************************************
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Hungarian (magyar)
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
-*/
+ *
+ * @author Dj
+ * @author Glanthor Reviol
+ * @author Leiric
+ * @author Sucy
+ */
 
 $s_actiongroup_menu_move = 'Mozgatás';
 $s_actiongroup_menu_copy = 'Másolás';
@@ -132,6 +125,8 @@ $s_select_option = '(válasszon)';
 $s_bug_actiongroup_access = 'Nem rendelkezik a szükséges jogosultságokkal a művelet végrehajtásához.';
 $s_bug_actiongroup_status = 'Ezt az ügyet nem lehet a kért státuszúra állítani';
 $s_bug_actiongroup_category = 'Ezt az ügyet nem lehet a kért kategóriájúra változtatni';
+$s_bug_actiongroup_handler = 'A kért felhasználó nem kezelheti ezt az ügyet';
+$s_bug_actiongroup_version = 'A kért verzió nem létezik a probléma projektjében';
 $s_close_bugs_conf_msg = 'Valóban le akarja zárni ezeket az ügyeket?';
 $s_delete_bugs_conf_msg = 'Valóban törölni akarja ezeket az ügyeket?';
 $s_move_bugs_conf_msg = 'Ügyek mozgatása ide:';
@@ -187,7 +182,7 @@ $s_priority_enum_string = '10:ráér,20:alacsony,30:normál,40:magas,50:sürgős
 $s_severity_enum_string = '10:kérés,20:triviális,30:szöveghiba,40:zavar,50:apró hiba,60:nagyobb hiba,70:összeomlás,80:akadály';
 $s_reproducibility_enum_string = '10:mindig,30:néha,50:véletlenszerűen,70:nem próbáltam,90:reprodukálhatatlan,100:N/A';
 $s_status_enum_string = '10:új,20:visszajelzés,30:nyugtázva,40:jóváhagyva,50:hozzárendelve,80:megoldva,90:lezárva';
-$s_resolution_enum_string = '10:nyitott,20:kijavítva,30:újranyitva,40:reprodukálhatatlan,50:javíthatatlan,60:másolat,70:nem&#160;kell változtatni,80:felfüggesztve,90:nem lesz kijavítva';
+$s_resolution_enum_string = '10:nyitott,20:kijavítva,30:újranyitva,40:reprodukálhatatlan,50:javíthatatlan,60:másolat,70:nem&nbsp;kell változtatni,80:felfüggesztve,90:nem lesz kijavítva';
 $s_projection_enum_string = '10:nincs,30:trükk,50:apró javítás,70:nagyobb átalakítás,90:újratervezés';
 $s_eta_enum_string = '10:semmi,20:< 1 nap,30:2-3 nap,40:< 1 hét,50:< 1 hónap,60:> 1 hónap';
 $s_sponsorship_enum_string = '0:Nem fizetett,1:Felkérve,2:Fizetett';
@@ -300,7 +295,6 @@ $s_profile_added_msg = 'Profil hozzáadva...';
 $s_profile_deleted_msg = 'Profil törölve...';
 $s_edit_profile_title = 'Profil szerkesztése';
 $s_platform = 'Platform';
-$s_operating_system = 'Operációs rendszer';
 $s_additional_description = 'További leírás';
 $s_update_profile_button = 'Profil frissítése';
 $s_profile_defaulted_msg = 'Alapértelmezett profil frissítve...';
@@ -353,9 +347,11 @@ $s_monitor_bug_button = 'Figyelés';
 $s_unmonitor_bug_button = 'Ellenőrzés vége';
 $s_file_upload_msg = 'Sikeres fájlfeltöltés';
 $s_upload_file = 'Fájl feltöltése';
+$s_upload_files = 'Fájlok feltöltése';
 $s_select_file = 'Fájl kiválasztása';
+$s_select_files = 'Fájlok kiválasztása';
 $s_upload_file_button = 'Fájl feltöltése';
-$s_max_file_size = 'Max. méret';
+$s_upload_files_button = 'Fájlok feltöltése';
 $s_bug_reopened_msg = 'Ügy újranyitva...';
 $s_reopen_add_bugnote_title = 'Megjegyzés hozzáadása az ügy újranyitásához';
 $s_bugnote_add_reopen_button = 'Megjegyzés hozzáadása és az ügy újranyitása';
@@ -369,6 +365,8 @@ $s_to = 'Címzett';
 $s_sent_you_this_reminder_about = 'küldte Önnek ezt az emlékeztetőt a következőről:';
 $s_bug_reminder = 'Emlékeztető küldése';
 $s_reminder_sent_to = 'Emlékeztető elküldve a következőnek:';
+$s_reminder_sent_none = 'Nem sikerült elküldeni az emlékeztetőket';
+$s_reminder_list_truncated = 'címzettek listája csonkolva';
 $s_bug_send_button = 'Küldés';
 $s_reminder = 'Emlékeztető';
 $s_reminder_explain = 'Ezen megjegyzést mindenki megkapja, aki visszajelzést kért az ügyről.';
@@ -417,6 +415,8 @@ $s_view_revisions = 'Változatok megjelenítése';
 $s_revision = 'Változat';
 $s_revision_by = '%2$s, %1$s-kor';
 $s_revision_drop = 'Eldobás';
+$s_bug_revision_dropped_history = 'Ügy változata eldobva';
+$s_bugnote_revision_dropped_history = 'Megjegyzés változata eldobva';
 $s_all_revisions = 'Összes változat';
 $s_back_to_issue = 'Vissza az ügyhöz';
 $s_confirm_revision_drop = 'Biztos vagy benne, hogy el szeretnéd dobni ezt az ügyváltozatot?';
@@ -442,7 +442,6 @@ $s_click_to_login = 'Bejelentkezés';
 $s_warning_plain_password_authentication = '<strong>Figyelmeztetés:</strong> sima szöveges jelszó-hitelesítés használata, ez felfedi a jelszavad az adminisztrátorok előtt.';
 $s_warning_default_administrator_account_present = '<strong>Figyelmeztetés:</strong> le kellene tiltanod az alapértelmezett „adminisztrátor” fiókot, vagy megváltoztatni a jelszavát.';
 $s_warning_admin_directory_present = '<strong>Figyelmeztetés:</strong> az adminisztrátor könyvtárat el kell távolítani.';
-$s_error_database_version_out_of_date_1 = '<strong>Hiba:</strong> úgy tűnik, hogy az adatbázis struktúra elavult (a <code>config(databaseversion)</code> 0 és régi frissítési táblák is léteznek). A MantisBT 1.x verziójától megújult a frissítési folyamat. Úgy tűnik, hogy 0.xx-es kiadásról szeretnél frissíteni. Kérlek előbb frissíts az 1.0.8 vagy 1.1.x verzióra, és utána 1.2-re.';
 $s_error_database_no_schema_version = '<strong>Error:</strong> úgy tűnik, hogy az adatbázis struktúra elavult (a <code>config(databaseversion)</code> 0 és régi frissítési táblák nem léteznek). Kérlek ellenőrizd, hogy az adatbázis fut – nem tudom elérni az adatbázis séma verzióját. A konfigurációs tábla nem adott vissza érvényes adatbázis séma verziót – kérj segítséget a mantis-help levelezőlistán, ha szükséges.';
 $s_error_database_version_out_of_date_2 = '<strong>Figyelmeztetés:</strong> az adatbázis struktúra elavult lehet. Kérlek frissítsd <a href="admin/install.php">itt</a> mielőtt bejelentkezel.';
 $s_error_code_version_out_of_date = '<strong>Figyelmeztetés:</strong> az adatbázis struktúra frissebb, mint a telepített programverzió. Kérlek frissítsd a programot.';
@@ -480,6 +479,7 @@ $s_protected = 'Védett';
 $s_create_user_button = 'Felhasználó létrehozása';
 $s_hide_disabled = 'Letiltottak elrejtése';
 $s_filter_button = 'Szűrő alkalmazása';
+$s_default_filter = 'Alapértelmezett szűrő';
 $s_create_filter_link = 'Permalink létrehozása';
 $s_create_short_link = 'Rövid link létrehozása';
 $s_filter_permalink = 'Íme az éppen beállított szűrőhöz tartozó permalink:';
@@ -502,6 +502,7 @@ $s_1_week_title = '1 hét';
 $s_never_logged_in_title = 'Sosem lépett be';
 $s_prune_accounts = 'Felhasználók eltávolítása';
 $s_hide_inactive = 'Inaktívak elrejtése';
+$s_show_disabled = 'Letiltottak megjelenítése';
 $s_manage_accounts_title = 'Felhasználók kezelése';
 $s_date_created = 'Létrehozás dátuma';
 $s_last_visit = 'Utolsó látogatás';
@@ -650,6 +651,7 @@ $s_accounts_pruned_msg = 'Minden felhasználó törölve, aki sosem lépett be �
 $s_prune_accounts_button = 'Eltávolítás';
 $s_confirm_account_pruning = 'Valóban törölni szeretné a sosem belépett régi felhasználókat?';
 $s_edit_user_title = 'Felhasználó szerkesztése';
+$s_account_unlock_button = 'Fiók zárolásának feloldása';
 $s_reset_password_button = 'Jelszó visszaállítása';
 $s_delete_user_button = 'Felhasználó törlése';
 $s_reset_password_msg = 'A jelszó visszaállításakor emailben elküldjük a jóváhagyás URL-jét.';
@@ -660,7 +662,8 @@ $s_users_new = 'Új';
 $s_account_reset_protected_msg = 'Védett felhasználó. A jelszó nem állítható vissza.';
 $s_account_reset_msg = 'Egy jóváhagyási kérést küldtünk a kiválasztott felhasználó email-címére, melynek használatával megváltoztathatja a jelszavát.';
 $s_account_reset_msg2 = 'A felhasználó jelszavát üresre állítottuk...';
-$s_manage_user_protected_msg = 'Védett felhasználó. A hozzáférési szint és az engedélyezés nem módosítható. Egyébként a felhasználó frissítve...';
+$s_account_unlock_msg = 'A fiók zárolása feloldva.';
+$s_manage_user_protected_msg = 'Védett felhasználó. A hozzáférési szint és az engedélyezés nem módosítható. Egyébként a felhasználó frissítve.';
 $s_manage_user_updated_msg = 'Felhasználó sikeresen frissítve...';
 $s_email_user_updated_subject = 'Felhasználói fiók frissítve';
 $s_email_user_updated_msg = 'A felhasználói fiókodat frissítette egy adminisztrátor. A változások listáját alább láthatod. Bármikor frissítheted a fiókod részleteit és beállításaidat a következő URL felkeresésével:';
@@ -806,6 +809,9 @@ $s_sticky = 'Ragadós ügyek megjelenítése';
 $s_sort_label = 'Rendezés:';
 $s_issue_id = 'Ügy #';
 $s_recently_visited = 'Nemrég megtekintett';
+$s_filter_match_type = 'Egyezés típusa';
+$s_filter_match_all = 'Valamennyi feltétel';
+$s_filter_match_any = 'Egyik feltétel';
 $s_none = 'egyik sem';
 $s_current = 'aktuális';
 $s_search = 'Keresés';
@@ -842,10 +848,10 @@ $s_update_bug_button = 'Szerkesztés';
 $s_bug_assign_to_button = 'Hozzárendelés a következőhöz:';
 $s_bug_status_to_button = 'Státuszváltás a következőre:';
 $s_reopen_bug_button = 'Újranyitás';
+$s_close_bug_button = 'Bezárás';
 $s_move_bug_button = 'Áthelyezés';
 $s_attached_files = 'Csatolt fájlok';
 $s_publish = 'Publikálás';
-$s_cached = 'Gyorsítótárazva';
 $s_add_user_to_monitor = 'Hozzáadás';
 $s_bug_view_title = 'Ügy részleteinek megjelenítése';
 $s_no_users_monitoring_bug = 'Senki sem ellenőrzi ezt az ügyet.';
@@ -886,11 +892,11 @@ $s_custom_field_require_closed = 'Lezáráskor kötelező kitölteni';
 $s_link_custom_field_to_project_title = 'Egyedi mező projekthez kapcsolása';
 $s_link_custom_field_to_project_button = 'Egyedi mező kapcsolása';
 $s_custom_field_sequence = 'Sorozat';
-$s_custom_field_type_enum_string = '0:Sztring,1:Numerikus,2:Lebegőpontos,3:Felsorolás,4:E-mail,5:Jelölőnégyzet,6:Lista,7:Többkiválasztásos lista,8:Dátum,9:Rádiógomb';
+$s_custom_field_type_enum_string = '0:Sztring,1:Numerikus,2:Lebegőpontos,3:Felsorolás,4:E-mail,5:Jelölőnégyzet,6:Lista,7:Többkiválasztásos lista,8:Dátum,9:Rádiógomb, 10:Textarea';
 $s_confirm_used_custom_field_deletion = 'Ez a mező jelenleg legalább egy projekthez csatlakozik. Ha folytatja, a hozzá tartozó összes érték menthetetlenül elveszik. Ez a művelet nem visszavonható. Ha mégsem akarja törölni ezt a mezőt, nyomja meg a böngészője Vissza gombját. A törléshez nyomja meg az alábbi gombot';
 $s_confirm_custom_field_deletion = 'Valóban törölni szeretné ezt az egyedi mezőt és az összes társított értéket?';
 $s_field_delete_button = 'Mező törlése';
-$s_confirm_custom_field_unlinking = 'Valóban törölni (lecsatlakoztatni) szeretné ezt az egyedi mezőt a projektből, és törölni az összes társított értéket?';
+$s_confirm_custom_field_unlinking = 'Valóban törölni (lecsatlakoztatni) szeretné ezt az egyedi mezőt a projektből? Az értékek nem kerülnek törlésre, amíg maga az egyedi mező nem kerül eltörlésre.';
 $s_field_remove_button = 'Mező törlése a projektből';
 $s_hide_status = 'Státusz elrejtése';
 $s_hide_status_label = 'Állapot elrejtése:';
@@ -904,6 +910,9 @@ $s_simple_filters = 'Egyszerű szűrők';
 $s_monitored_by = 'Ellenőrzi';
 $s_attachments = 'csatolmány';
 $s_bytes = 'bájt';
+$s_attachment_missing = 'Hiányzó csatolmány';
+$s_attachment_count = 'Csatolmányok száma';
+$s_view_attachments_for_issue = 'A(z) #%2$d ügy %1$d csatolmányának megnézése';
 $s_phpmailer_language = 'hu';
 $s_sponsors = '%1$d támogató';
 $s_sponsorship_added = 'Támogatás hozzáadva';
@@ -932,10 +941,13 @@ $s_relationship_with_parent = 'Kapcsolat a szülő üggyel';
 $s_delete_relationship_button = 'Törlés';
 $s_delete_relationship_sure_msg = 'Valóban törölni szeretné ezt a kapcsolatot?';
 $s_relationship_warning_blocking_bugs_not_resolved = 'Ezen ügynek még nem minden gyermekét oldották meg vagy zárták le.';
-$s_relationship_warning_blocking_bugs_not_resolved_2 = '<strong>FIGYELEM</strong>. Ezen ügynek még nem minden gyermekét oldották meg vagy zárták le.<br />Mielőtt <strong>megoldana/lezárna</strong> egy szülő ügyet, minden, gyermekeként megjelölt ügyet meg kell oldani vagy le kell zárni.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>FIGYELEM</b>. Ezen ügynek még nem minden gyermekét oldották meg vagy zárták le.<br />Mielőtt <b>megoldana/lezárna</b> egy szülő ügyet, minden, gyermekeként megjelölt ügyet meg kell oldani vagy le kell zárni.';
 $s_create_child_bug_button = 'Klónozás';
 $s_bug_cloned_to = 'Ügy klónozva';
 $s_bug_created_from = 'Ügy generálva a következőből:';
+$s_copy_from_parent = 'Kiterjesztett adatok másolása a szülő ügyből';
+$s_copy_notes_from_parent = 'Ügy megjegyzés másolása';
+$s_copy_attachments_from_parent = 'Mellékletek másolása';
 $s_viewing_bug_relationship_graph_title = 'Kapcsolati háló';
 $s_viewing_bug_dependency_graph_title = 'Függőségi háló';
 $s_relation_graph = 'Kapcsolati grafikon';
@@ -993,6 +1005,7 @@ $s_handle_sponsored_issue = 'Támogatott ügy kezelése';
 $s_others = 'EGYEBEK';
 $s_see_email_addresses_of_other_users = 'Többi felhasználó email-címének megtekintése';
 $s_send_reminders = 'Emlékeztetők küldése';
+$s_receive_reminders = 'Emlékeztetők fogadása';
 $s_add_profiles = 'Profilok hozzáadása';
 $s_notify_of_new_user_created = 'Értesítés új felhasználó létrehozásakor';
 $s_email_notification = 'E-mail értesítés';
@@ -1044,12 +1057,16 @@ $s_tag_related_issues = 'Osztozó ügyek (%1$s)';
 $s_tag_stats_attached = '%1$s ügyhöz csatolva';
 $s_tag_create = 'Címke létrehozása';
 $s_show_all_tags = 'Mind';
-$s_time_tracking_billing_link = 'Számlázás';
+$s_time_tracking_billing_link = 'Időkövetés';
 $s_time_tracking = 'Időkövetés';
+$s_time_tracking_time_spent = 'Eltöltött idő:';
 $s_time_tracking_get_info_button = 'Időkövetési információk megtekintése';
 $s_time_tracking_cost_per_hour = 'Óradíj';
 $s_time_tracking_cost = 'Költség';
 $s_total_time_for_issue = 'Ügyre fordított összes idő = %1$s';
+$s_time_tracking_stopwatch_start = 'Indítás';
+$s_time_tracking_stopwatch_stop = 'Leállítás';
+$s_time_tracking_stopwatch_reset = 'Alaphelyzet';
 $s_access_denied = 'Hozzáférés megtagadva.';
 $s_twitter_resolved = '%1$d: [%2$s] %3$s (megoldotta %4$s - %5$s)';
 $s_twitter_resolved_no_version = '%1$d: [%2$s] %3$s (megoldotta %4$s)';
@@ -1085,8 +1102,6 @@ $s_month_september = 'Szeptember';
 $s_month_october = 'Október';
 $s_month_november = 'November';
 $s_month_december = 'December';
-
-
 $MANTIS_ERROR[ERROR_GENERIC] = 'Hiba lépett fel a művelet végrehajtása közben. Értesítse a helyi rendszergazdát.';
 $MANTIS_ERROR[ERROR_SQL] = 'SQL hiba.';
 $MANTIS_ERROR[ERROR_REPORT] = 'Hiba volt a jelentésében.';
@@ -1107,7 +1122,6 @@ $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'A(z) \'%1$s\' sztring hiányzik.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Nincs ilyen megjegyzés.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'A(z) „%1$d” projekt nem található.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'A(z) \'%1$s\' adatbázismező hiányzik.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Sikertelen csatlakozás az FTP-szerverhez.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Az ügy kezelőjének az ügy jelen állapotában nincs elég joga az ügy kezeléséhez.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Már létezik ilyen nevű projekt. Lépjen vissza, és adjon meg egy másik nevet.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Hibásan megadott projektnév: a projektnév nem lehet üres.';
@@ -1138,6 +1152,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Ez a név már létezik.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Ezt a mezőt még legalább egy projekt használja.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'A(z) „%1$s” mező hibás értéket tartalmaz.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Hibás egyedi mező definíció';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Hibás egyedi mező tulajdonság (%1$s).';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Sikertelen LDAP azonosítás';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Nem sikerült csatlakozni az LDAP szerverhez';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Az LDAP mező frissítése sikertelen.';
@@ -1150,6 +1165,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Már létezik ilyen nevű kategória.
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Nem adott meg másolási műveletet.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Nincs ilyen kategória.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'A(z) „%1$s” kategória nem található a(z) „%2$s” projekthez.';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'A kategóriát nem lehet törölni, mivel az ez alapértelmezett kategória a mozgatáshoz.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Már létezik ilyen nevű verzió.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'A(z) \'%1$s\' verzió nem található.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Hibás felhasználónév. A felhasználónevek csak latin betűket, számokat, szóközöket, kötőjeleket, pontokat, pluszjeleket és aláhúzásokat tartalmazhatnak.';
@@ -1187,14 +1203,16 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'A(z) „$1” esemény még nincs dekla
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'A bővítmény nincs regisztrálva a MantisBT-ben.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'A bővítmény már telepítve van.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'A bővítmény lap nem található.';
+$MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Bővítmény telepítése sikertelen: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'A bővítmény séma frissítése nem sikerült a következő blokknál: #%1$s.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'A  „%1$s” bővítményt frissíteni kell, mielőtt hozzáférnél ehhez az oldalhoz.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Ismeretlen hiba („%1$s”) történt a(z) „%2$s” bővítmény futtatásakor.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'A(z) „%1$s” mező duplikált oszlopot tartalmaz: „%2$s”.';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'A(z) „%1$s” mező érvénytelen mezőt tartalmaz: „%2$s”.';
 $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Érvénytelen munkamenet-kezelő.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'A(z) „%1$s” munkamenet változó nem található.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'A munkameneted érvénytelenítetté vált.';
-$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Érvénytelen biztonsági token. Nem küldted el véletlenül kétszer az űrlapot?';
+$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Érvénytelen biztonsági token. Ezt a munkamenet időtúllépése, vagy az űrlap véletlen kétszer történő elküldése okozhatja.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Ez a lap nem elérhető ezzel a módszerrel.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Érvénytelen rendezési mező.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Érvénytelen dátumformátum.';

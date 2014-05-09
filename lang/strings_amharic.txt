@@ -1,42 +1,32 @@
 <?php
-# MantisBT - A PHP based bugtracking system
-
-# MantisBT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# MantisBT is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * Language File - Amharic (አማርኛ)
+/** MantisBT - a php based bugtracking system
  *
- * **********************************************************************
- * ** This file is generated from translations stored in translatewiki **
- * ** Information on Copyright/License for translatewiki translations  **
- * ** is available at http://translatewiki.net/wiki/Project:About      **
- * **********************************************************************
- * **                                                                  **
- * **                      DO NOT UPDATE MANUALLY                      **
- * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
- * ** Detailed instructions on how to create or update translations at **
- * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
- * **********************************************************************
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Amharic (አማርኛ)
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
-*/
+ *
+ * @author Solomon
+ */
 
 $s_actiongroup_menu_move = ' አንቀሳቅስ';
 $s_actiongroup_menu_copy = ' ቅጂ';
@@ -198,7 +188,6 @@ $s_profile_deleted_msg = 'የተሰረዘ መገለጫ ...';
 $s_edit_profile_title = 'መገለጫውን ለውጥ';
 $s_platform = 'የመሳሪያ ሥርዓት';
 $s_platform_label = 'የመሳሪያ ሥርዓት:';
-$s_operating_system = 'ስርአተ ክወና';
 $s_additional_description = 'ተጨማሪ ገለፃ';
 $s_update_profile_button = 'መገለጫውን አዘምን';
 $s_profile_defaulted_msg = 'ነባሪ መገለጫው የዘመነ ...';
@@ -233,7 +222,6 @@ $s_file_upload_msg = 'ፋይል መስቀሉ የተሳካ';
 $s_upload_file = 'ፋይሉን ስቀል';
 $s_select_file = 'ፋይል ምረጥ';
 $s_upload_file_button = 'ፋይሉን ስቀል';
-$s_max_file_size = 'ከፍተኛው መጠን';
 $s_max_file_size_label = 'ከፍተኛው መጠን:';
 $s_bugnote_add_resolve_button = 'ማስታወሻ ጨምር';
 $s_from = 'ከ';
@@ -372,7 +360,6 @@ $s_reopen_bug_button = 'እንደገና ክፈት';
 $s_move_bug_button = 'አንቀሳቅስ';
 $s_attached_files = 'ፋይል አያይዝ';
 $s_publish = 'ድረ ገፅ ላይ አስቀምጥ';
-$s_cached = 'የተሸጎጠ';
 $s_add_user_to_monitor = 'አክል';
 $s_bug_view_title = 'የጉዳዩን ዝርዝር ሁኔታ ተመልከት';
 $s_no_users_monitoring_bug = 'ይህንን ጉዳይ ማንም  ተጠቃሚወ እየተቆጣጠረው አይደለም';
@@ -539,8 +526,6 @@ $s_month_september = 'መስከረም';
 $s_month_october = 'ጥቅምት';
 $s_month_november = 'ህዳር';
 $s_month_december = 'ታህሳስ';
-
-
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'ምንም ፋይል አልተገለጸም';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'መግባት የተከለከለ';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = ' ማስታወሻው አልተገኘም';

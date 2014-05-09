@@ -1,42 +1,37 @@
 <?php
-# MantisBT - A PHP based bugtracking system
-
-# MantisBT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# MantisBT is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * Language File - Finnish (suomi)
+/** MantisBT - a php based bugtracking system
  *
- * **********************************************************************
- * ** This file is generated from translations stored in translatewiki **
- * ** Information on Copyright/License for translatewiki translations  **
- * ** is available at http://translatewiki.net/wiki/Project:About      **
- * **********************************************************************
- * **                                                                  **
- * **                      DO NOT UPDATE MANUALLY                      **
- * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
- * ** Detailed instructions on how to create or update translations at **
- * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
- * **********************************************************************
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Finnish (suomi)
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
-*/
+ *
+ * @author Crt
+ * @author Lliehu
+ * @author Nike
+ * @author Silvonen
+ * @author Str4nd
+ * @author Tkh
+ */
 
 $s_actiongroup_menu_move = 'Siirrä';
 $s_actiongroup_menu_copy = 'Kopioi';
@@ -46,6 +41,7 @@ $s_actiongroup_menu_delete = 'Poista';
 $s_actiongroup_menu_resolve = 'Ratkaise';
 $s_actiongroup_menu_update_priority = 'Päivitä prioriteetti';
 $s_actiongroup_menu_update_status = 'Päivitä tila';
+$s_actiongroup_menu_update_severity = 'Päivitä vakavuus';
 $s_actiongroup_menu_update_view_status = 'Päivitä näyttötila';
 $s_actiongroup_menu_update_category = 'Päivitä kategoria';
 $s_actiongroup_menu_set_sticky = 'Aseta tai poista päällimmäisenä pysyminen';
@@ -303,7 +299,6 @@ $s_profile_added_msg = 'Profiili lisätty...';
 $s_profile_deleted_msg = 'Profiili poistettu...';
 $s_edit_profile_title = 'Muokkaa profiilia';
 $s_platform = 'Alusta';
-$s_operating_system = 'Käyttöjärjestelmä';
 $s_additional_description = 'Lisätietoja';
 $s_update_profile_button = 'Päivitä profiili';
 $s_profile_defaulted_msg = 'Oletusprofiili päivitetty...';
@@ -357,8 +352,8 @@ $s_unmonitor_bug_button = 'Lopeta tapahtuman seuranta';
 $s_file_upload_msg = 'Tiedoston lähetys onnistui';
 $s_upload_file = 'Lähetä tiedosto';
 $s_select_file = 'Valitse tiedosto';
+$s_select_files = 'Valitse tiedostot';
 $s_upload_file_button = 'Lähetä tiedosto';
-$s_max_file_size = 'Enimmäiskoko';
 $s_max_file_size_label = 'Maksimikoko:';
 $s_bug_reopened_msg = 'Tapahtuma on uudelleenavattu...';
 $s_reopen_add_bugnote_title = 'Lisää muistiinpanoksi uudelleenavaamisen syy';
@@ -385,7 +380,7 @@ $s_bug_updated_msg = 'Tapahtuma on onnistuneesti päivitetty...';
 $s_back_to_bug_link = 'Takaisin tapahtumaan';
 $s_update_simple_link = 'Yksinkertainen päivitys';
 $s_updating_bug_advanced_title = 'Päivitetään tapahtuman tietoja';
-$s_id = 'ID';
+$s_id = 'Tunniste';
 $s_category = 'Kategoria';
 $s_category_label = 'Kategoria:';
 $s_severity = 'Vakavuusaste';
@@ -427,6 +422,8 @@ $s_view_revisions = 'Tarkastele revisioita';
 $s_revision = 'Revisio';
 $s_revision_by = '%1$s / %2$s';
 $s_revision_drop = 'Pudota';
+$s_bug_revision_dropped_history = 'Bugin revisio poistettu';
+$s_bugnote_revision_dropped_history = 'Huomautuksen revisio poistettu';
 $s_all_revisions = 'Kaikki revisiot';
 $s_back_to_issue = 'Takaisin tapahtumaan';
 $s_confirm_revision_drop = 'Vahvista tämän tapahtuman revisioiden pudotus?';
@@ -452,19 +449,18 @@ $s_click_to_login = 'Kirjaudu sisään';
 $s_warning_plain_password_authentication = '<strong>Varoitus:</strong> Käytössä oleva salasanojen autentikointi jättää salasanat näkyviin selkokielisinä ylläpitäjille.';
 $s_warning_default_administrator_account_present = '<strong>Varoitus:</strong> Oletusylläpitotili \'administrator\' tulisi poistaa käytöstä tai sen salasana vaihtaa.';
 $s_warning_admin_directory_present = '<strong>Varoitus:</strong> Kansio Admin tulisi poistaa.';
-$s_error_database_version_out_of_date_1 = '<strong>Virhe:</strong> Tietokannan rakenne ei ole ajan tasalla (config(databaseversion) on 0 ja vanhoja päivitystauluja on olemassa). Versiosta 1.x lähtien MantisBT:ssä on ollut uusi päivitysprosessi. Olet päivittämässä versiosta 0.XX. Ole hyvä, ja päivitä ensin versioon 1.0.8 tai 1.1.X, jonka jälkeen voit päivittää versioon 1.2.';
 $s_error_database_no_schema_version = '<strong>Virhe:</strong> Tietokannan rakenne ei ole ajan tasalla (config(databaseversion) on 0 ja vanhoja päivitystauluja ei ole olemassa). Ole hyvä, ja varmista että tietokanta on käynnissä, muuten tietokannan schemaa ei voi ladata. Config -taulu ei palauttanut voimassaolevaa tietokannan scheman versiota. Kysy apua mantis-help -postituslistalla tarvittaessa.';
 $s_error_database_version_out_of_date_2 = '<strong>Varoitus:</strong> Tietokannan rakenne saattaa olla vanhentunut. Ole hyvä, ja päivitä se <a href="admin/install.php">täällä</a> ennen sisäänkirjautumista.';
 $s_error_code_version_out_of_date = '<strong>Varoitus:</strong> Tietokannan rakenne on uudempi kuin päivitettävä applikaatio. Ole hyvä, ja päivitä applikaatio uudempaan.';
 $s_login_page_info = 'Tervetuloa projektitapahtumaseurantaan.';
 $s_login_title = 'Kirjaudu sisään';
-$s_save_login = 'Tallenna sisäänkirjautumistiedot';
+$s_save_login = 'Muista kirjautumiseni tällä selaimella';
 $s_secure_session = 'Suojattu istunto';
 $s_secure_session_long = 'Salli istunnon käyttö vain tästä IP-osoitteesta.';
 $s_choose_project = 'Valitse projekti';
 $s_login_button = 'Kirjaudu sisään';
 $s_signup_link = 'Rekisteröi uusi käyttäjätunnus';
-$s_lost_password_link = 'Oletko unohtanut salasanasi?';
+$s_lost_password_link = 'Unohditko salasanasi?';
 $s_select_project_button = 'Valitse projekti';
 $s_lost_password_title = 'Uusi unohtunut salasana';
 $s_lost_password_done_title = 'Salasanaviesti lähetetty';
@@ -575,6 +571,7 @@ $s_configuration_option_value = 'Arvo';
 $s_all_users = 'Kaikki käyttäjät';
 $s_set_configuration_option = 'Aseta konfiguraatiovaihtoehto';
 $s_delete_config_sure_msg = 'Oletko varma, että haluat poistaa tämän konfiguraatiovaihtoehdon?';
+$s_configuration_corrupted = 'Tietokannassa olevat asetukset ovat vioittuneet.';
 $s_plugin = 'Laajennus';
 $s_plugins_installed = 'Asennettu laajennukset';
 $s_plugins_available = 'Saatavilla olevat laajennukset';
@@ -673,7 +670,7 @@ $s_users_new = 'Uusi';
 $s_account_reset_protected_msg = 'Käyttäjätunnus on suojattu. Salasanaa ei voida resetoida.';
 $s_account_reset_msg = 'Vahvistusviesti on lähetetty sähköpostiosoitteeseesi...';
 $s_account_reset_msg2 = 'Käyttäjätunnukselle on asetettu tyhjä salasana...';
-$s_manage_user_protected_msg = 'Käyttäjätunnus on suojattu. Käyttöoikeustaso ja Käytössä -valinnat suojattu. Kaikki muu käyttäjätunnuksessa päivitetty...';
+$s_manage_user_protected_msg = 'Käyttäjätunnus on suojattu. Kenttiö ”käyttöoikeustaso” ja ”käytössä” ei voi muuttaa. Muut kentät päivitettiin.';
 $s_manage_user_updated_msg = 'Käyttäjätunnus päivitetty...';
 $s_email_user_updated_subject = 'Tili päivitetty';
 $s_email_user_updated_msg = 'Ylläpito on päivittänyt tilisi. Lista tehdyistä muutoksista on alla. Voit päivittää tilitietosi ja oletusarvosi käymällä seuraavassa osoitteessa:';
@@ -849,7 +846,7 @@ $s_query_dupe_name = 'Toinen suodin on jo talletettu tällä nimellä. Valitse e
 $s_query_blank_name = 'Jokaisella talletettavalla suotimella on oltava nimi. Ole hyvä, ja syötä nimi ennen sen tallettamista.';
 $s_query_name_too_long = 'Et voi tallentaa suodattimen nimeä jonka pituus on enemmän kuin 64 merkkiä. Ole hyvä, ja anna tälle suodattimelle lyhyempi nimi.';
 $s_query_store_error = 'Suotimen tallettamisessa tapahtui virhe.';
-$s_open_queries = 'Muokkaa suotimia';
+$s_open_queries = 'Muokkaa suodattimia';
 $s_query_delete_msg = 'Oletko varma, että haluat poistaa tämän suotimen?';
 $s_view_simple_link = 'Näytä yksinkertaiset tiedot';
 $s_product_build = 'Tuotteen kooste';
@@ -858,10 +855,10 @@ $s_update_bug_button = 'Muokkaa';
 $s_bug_assign_to_button = 'Osoita henkilölle:';
 $s_bug_status_to_button = 'Muuta tilaksi:';
 $s_reopen_bug_button = 'Avaa uudelleen';
+$s_close_bug_button = 'Sulje';
 $s_move_bug_button = 'Siirrä';
 $s_attached_files = 'Liitetiedostot';
 $s_publish = 'Julkaise';
-$s_cached = 'Välimuistissa';
 $s_add_user_to_monitor = 'Lisää';
 $s_bug_view_title = 'Näytä tapahtuman tiedot';
 $s_no_users_monitoring_bug = 'Yksikään käyttäjä ei seuraa tätä tapahtumaa.';
@@ -902,11 +899,11 @@ $s_custom_field_require_closed = 'Vaadittu kenttä sulkemisessa';
 $s_link_custom_field_to_project_title = 'Linkitä kustomoitu kenttä projektiin';
 $s_link_custom_field_to_project_button = 'Linkitä kustomoitu kenttä';
 $s_custom_field_sequence = 'Järjestys';
-$s_custom_field_type_enum_string = '0:Merkkijono,1:Numeerinen,2:Liukuluku,3:Joukkoluettelo,4:Sähköpostiosoite,5:Valintaruutu,6:Lista,7:Monivalintalista,8:Päivämäärä,9:Valintanappi';
+$s_custom_field_type_enum_string = '0:Merkkijono,1:Numeerinen,2:Liukuluku,3:Joukkoluettelo,4:Sähköpostiosoite,5:Valintaruutu,6:Lista,7:Monivalintalista,8:Päivämäärä,9:Valintanappi, 10:Textarea';
 $s_confirm_used_custom_field_deletion = 'Tämä kenttä on liitetty ainakin yhteen projektiin.  Jos jatkat, kaikki tähän kenttään liitetyt arvot poistetaan. Tätä komentoa ei voida jälkeenpäin kumota.  Jos et halua poistaa tätä kenttää, paina selaimesi Takaisin-painiketta.  Jatkaaksesi, paina allaolevaa painiketta';
 $s_confirm_custom_field_deletion = 'Oletko varma, että haluat poistaa tämän mukautetun kentän ja kaikki siihen liitetyt arvot?';
 $s_field_delete_button = 'Poista kenttä';
-$s_confirm_custom_field_unlinking = 'Oletko varma, että haluat poistaa tämän mukautetun kentän projektista sekä kaikki mukautettuun kenttään syötetyt arvot?';
+$s_confirm_custom_field_unlinking = 'Haluatko varmasti irroittaa tämän mukautetun kentän tästä projektista? Arvoja ei poisteta, kunhan itse mukautettua kenttää ei poisteta.';
 $s_field_remove_button = 'Poista kenttä';
 $s_hide_status = 'Piilota tila';
 $s_hide_status_label = 'Piilota tila:';
@@ -921,6 +918,9 @@ $s_monitored_by = 'Seuraaja';
 $s_monitored_by_label = 'Seuraajat:';
 $s_attachments = 'liitteet';
 $s_bytes = 'tavua';
+$s_attachment_missing = 'Liite puuttuu';
+$s_attachment_count = 'Liitteiden lukumäärä';
+$s_view_attachments_for_issue = 'Näytä %1$d liitettä ilmoitukselle #%2$d';
 $s_phpmailer_language = 'fi';
 $s_sponsors = '%1$d sponsoria';
 $s_sponsorship_added = 'Sponsori lisätty';
@@ -949,10 +949,11 @@ $s_relationship_with_parent = 'Relaatio isätapahtuman kanssa';
 $s_delete_relationship_button = 'Poista';
 $s_delete_relationship_sure_msg = 'Oletko varma, että haluat poistaa tämän relaation?';
 $s_relationship_warning_blocking_bugs_not_resolved = 'Tällä tapahtumalla on ratkaisemattomia tai sulkemattomia lapsia.';
-$s_relationship_warning_blocking_bugs_not_resolved_2 = '<strong>Huom:</strong> Tällä tapahtumalla on ratkaisemattomia tai sulkemattomia lapsia.<br />Ennen isätapahtuman <strong>ratkaisua/sulkemista</strong> kaikki lapsitapahtumat tulisi merkitä ratkaistuiksi tai suljetuiksi.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>Huom:</b> Tällä tapahtumalla on ratkaisemattomia tai sulkemattomia lapsia.<br />Ennen isätapahtuman <b>ratkaisua/sulkemista</b> kaikki lapsitapahtumat tulisi merkitä ratkaistuiksi tai suljetuiksi.';
 $s_create_child_bug_button = 'Kloonaa';
 $s_bug_cloned_to = 'Tapahtuma kloonattu';
 $s_bug_created_from = 'Tapahtuma luotu tapahtumasta';
+$s_copy_attachments_from_parent = 'Kopioi liitteet';
 $s_viewing_bug_relationship_graph_title = 'Relaatiograafi';
 $s_viewing_bug_dependency_graph_title = 'Riippuvuusgraafi';
 $s_relation_graph = 'Relaatiograafi';
@@ -974,7 +975,7 @@ $s_view_private_issues = 'Näytä ykstyiset tapahtumat';
 $s_update_readonly_issues = 'Vain lukuoikeuksilla varustettujen tapahtumien päivitysoikeus';
 $s_update_issue_status = 'Tapahtuman tilan päivitys';
 $s_set_view_status = 'Näyttötilan määritys (julkinen/yksityinen)';
-$s_update_view_status = 'Näyttötilan päivitys (julkinen/yksityinen)';
+$s_update_view_status = 'Päivitä näyttötila (julkinen/yksityinen)';
 $s_show_list_of_users_monitoring_issue = 'Näytä lista tapahtumaa seuraavista käyttäjistä';
 $s_notes = 'Muistiinpanot';
 $s_add_notes = 'Lisää muistiinpanoja';
@@ -988,7 +989,7 @@ $s_delete_attachments = 'Poista liitetiedostoja';
 $s_delete_attachment_button = 'Poista';
 $s_delete_attachment_sure_msg = 'Oletko varma, että haluat poistaa tämän liitetiedoston?';
 $s_upload_issue_attachments = 'Päivitä tapahtuman liitetiedostoja';
-$s_filters = 'suotimet';
+$s_filters = 'Suotimet';
 $s_save_filters = 'Tallenna suotimet';
 $s_save_filters_as_shared = 'Tallenna suotimet jaettuina';
 $s_use_saved_filters = 'Käytä talletettuja suotimia';
@@ -1017,7 +1018,7 @@ $s_status_changed_to = 'Tila muutettu';
 $s_email_on_deleted = 'Sähköpostia, kun tapahtuma poistetaan';
 $s_email_on_sponsorship_changed = 'Sähköpostia, kun tapahtuman sponssi muuttuu';
 $s_email_on_relationship_changed = 'Sähköpostia, kun tapahtuman relaatioita muokataan';
-$s_loading = 'Ladataan...';
+$s_loading = 'Ladataan…';
 $s_between_date = 'Välillä';
 $s_on_or_before_date = 'Tällöin tai ennen';
 $s_before_date = 'Ennen';
@@ -1062,13 +1063,16 @@ $s_tag_related_issues = 'Jaetut tapahtumat (%1$s)';
 $s_tag_stats_attached = 'Liitetyt tapahtumat: %1$s';
 $s_tag_create = 'Luo tägi';
 $s_show_all_tags = 'Kaikki';
-$s_time_tracking_billing_link = 'Laskutus';
+$s_time_tracking_billing_link = 'Ajanseuranta';
 $s_time_tracking = 'Ajanseuranta';
 $s_time_tracking_get_info_button = 'Nouda ajanseurantatietoa';
 $s_time_tracking_cost_per_hour = 'Kustannus / tunti';
 $s_time_tracking_cost = 'Kustannus';
 $s_time_tracking_cost_label = 'Kustannus:';
 $s_total_time_for_issue = 'Aika yhteensä tapahtumalle = %1$s';
+$s_time_tracking_stopwatch_start = 'Aloita';
+$s_time_tracking_stopwatch_stop = 'Lopeta';
+$s_time_tracking_stopwatch_reset = 'Nollaa';
 $s_access_denied = 'Pääsy estetty.';
 $s_twitter_resolved = '%1$d: [%2$s] %3$s (ratkaisija %4$s kohteessa %5$s)';
 $s_twitter_resolved_no_version = '%1$d: [%2$s] %3$s (ratkaisija %4$s)';
@@ -1104,8 +1108,6 @@ $s_month_september = 'syyskuu';
 $s_month_october = 'lokakuu';
 $s_month_november = 'marraskuu';
 $s_month_december = 'joulukuu';
-
-
 $MANTIS_ERROR[ERROR_GENERIC] = 'Virhe suoritettaessa tätä komentoa. Saatat haluta ilmoittaa tästä virheestä paikallisen järjestelmäsi ylläpitäjälle.';
 $MANTIS_ERROR[ERROR_SQL] = 'SQL-virhe havaittu.';
 $MANTIS_ERROR[ERROR_REPORT] = 'Raportissasi oli virhe.';
@@ -1126,7 +1128,6 @@ $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Merkkijonoa \'%1$s\' ei löytynyt.
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Muistiinpanoa ei löydy.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projektia %1$d ei löydy.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Tietokantakenttää %1$s ei löydy.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Yhteys FTP-palvelimelle epäonnistui.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Tapahtumankäsittelijällä ei ole tarpeeksi oikeuksia tapahtuman käsittelyyn tällä tilalla.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Samanniminen projekti on jo olemassa.  Palaa edelliselle sivulle ja anna toinen nimi.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Virheellinen projektinimi. Projektilla on oltava nimi, se ei voi olla tyhjä.';

@@ -1,42 +1,35 @@
 <?php
-# MantisBT - A PHP based bugtracking system
-
-# MantisBT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# MantisBT is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * Language File - Breton (brezhoneg)
+/** MantisBT - a php based bugtracking system
  *
- * **********************************************************************
- * ** This file is generated from translations stored in translatewiki **
- * ** Information on Copyright/License for translatewiki translations  **
- * ** is available at http://translatewiki.net/wiki/Project:About      **
- * **********************************************************************
- * **                                                                  **
- * **                      DO NOT UPDATE MANUALLY                      **
- * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
- * ** Detailed instructions on how to create or update translations at **
- * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
- * **********************************************************************
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Breton (brezhoneg)
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
-*/
+ *
+ * @author Fohanno
+ * @author Fulup
+ * @author Gwenn-Ael
+ * @author Y-M D
+ */
 
 $s_actiongroup_menu_move = 'Dilec\'hiañ';
 $s_actiongroup_menu_copy = 'Eilañ';
@@ -135,6 +128,8 @@ $s_select_option = '(diuzañ)';
 $s_bug_actiongroup_access = 'N\'emañ ket an aotreoù rekis ganeoc\'h evit seveniñ an ober-se.';
 $s_bug_actiongroup_status = 'An draen-mañ ne c\'hall ket bezañ cheñchet d\'ar statud goulennet';
 $s_bug_actiongroup_category = 'An draen-mañ ne c\'hall ket bezañ kemmet evit ar rummad goulennet';
+$s_bug_actiongroup_handler = 'N\'eo ket aotreet an implijer galvet da ober war-dro ar gudenn-mañ.';
+$s_bug_actiongroup_version = 'Ar stumm goulennet n\'eus ket anezhañ e raktres ar gudenn-mañ';
 $s_close_bugs_conf_msg = 'Ha sur oc\'h hoc\'h eus c\'hoant da serriñ an drein-mañ ?';
 $s_delete_bugs_conf_msg = 'Ha sur oc\'h hoc\'h eus c\'hoant da zilemel an drein-mañ ?';
 $s_move_bugs_conf_msg = 'Dilec\'hiañ an drein da';
@@ -251,7 +246,7 @@ $s_email_duplicate = 'Doublenn';
 $s_email_fixed_in_version = 'Diskoulmet er stumm';
 $s_email_target_version = 'Stumm pal';
 $s_email_date_submitted = 'Deiziad kas';
-$s_email_last_modified = 'Kemm diwezhañ';
+$s_email_last_modified = 'Kemmet da ziwezhañ';
 $s_email_summary = 'Diverradur';
 $s_email_description = 'Deskrivadur';
 $s_email_additional_information = 'Titouroù ouzhpenn';
@@ -261,7 +256,7 @@ $s_account_removed_msg = 'Lamet eo bet ho kont...';
 $s_confirm_delete_msg = 'Ha sur oc\'h hoc\'h eus c\'hoant da zilemel ho kont ?';
 $s_delete_account_button = 'Dilemel ar gont';
 $s_manage_profiles_link = 'Profiloù';
-$s_change_preferences_link = 'Dibaboù gwellañ';
+$s_change_preferences_link = 'Penndibaboù';
 $s_edit_account_title = 'Aozañ ur gont';
 $s_username = 'Anv implijer';
 $s_username_label = 'Anv implijer :';
@@ -277,7 +272,7 @@ $s_access_level_label = 'Live moned :';
 $s_update_user_button = 'Hizivaat an implijer';
 $s_verify_warning = 'Gwiriekaet eo bet titouroù ho kont. Ar gemennadenn hoc\'h eus resevet evit kadarnaat ar gont n\'eo ket gwiriek ken bremañ.';
 $s_verify_change_password = 'Ret eo deoc\'h lakaat ur ger-tremen evit gallout kevreañ en-dro.';
-$s_default_account_preferences_title = 'Dibaboù gwellañ ar gont';
+$s_default_account_preferences_title = 'Penndibaboù ar gont';
 $s_default_project = 'Raktres dre ziouer';
 $s_refresh_delay = 'Termen freskaat';
 $s_minutes = 'munutenn';
@@ -298,17 +293,16 @@ $s_email_on_status_change = 'Kas ur postel pa vez cheñchet ar statud';
 $s_email_on_priority_change = 'Kas ur postel pa vez cheñchet ar c\'hentwir';
 $s_email_bugnote_limit = 'Harz notennoù postel';
 $s_language = 'Yezh';
-$s_update_prefs_button = 'Hizivaat an dibaboù gwellañ';
-$s_reset_prefs_button = 'Adderaouekaat an dibaboù gwellañ';
+$s_update_prefs_button = 'Hizivaat ar penndibaboù';
+$s_reset_prefs_button = 'Adderaouekaat ar penndibaboù';
 $s_timezone = 'Gwerzhid-eur';
-$s_prefs_reset_msg = 'Adderaouekaet eo bet an dibaboù gwellañ...';
-$s_prefs_updated_msg = 'Hizivaet eo bet an dibaboù gwellañ...';
+$s_prefs_reset_msg = 'Adderaouekaet eo bet ar penndibaboù...';
+$s_prefs_updated_msg = 'Hizivaet eo bet ar penndibaboù...';
 $s_profile_added_msg = 'Profil ouzhpennet...';
 $s_profile_deleted_msg = 'Profil dilamet...';
 $s_edit_profile_title = 'Aozañ ar profil';
 $s_platform = 'Leurenn';
 $s_platform_label = 'Leurenn :';
-$s_operating_system = 'Reizhiad korvoiñ';
 $s_additional_description = 'Deskrivadur ouzhpenn';
 $s_update_profile_button = 'Hizivaat ar profil';
 $s_profile_defaulted_msg = 'Hizivaet eo ar profil dre ziouer...';
@@ -361,10 +355,12 @@ $s_monitor_bug_button = 'Evezhiañ';
 $s_unmonitor_bug_button = 'Paouez da evezhiañ';
 $s_file_upload_msg = 'Karget-mat eo bet ar restr.';
 $s_upload_file = 'Kargañ ur restr';
+$s_upload_files = 'Enporzhiañ Restroù';
 $s_select_file = 'Diuzañ ur restr';
+$s_select_files = 'Diuzañ Restroù';
 $s_upload_file_button = 'Kargañ ar restr';
-$s_max_file_size = 'Ment vrasañ';
-$s_max_file_size_label = 'Ment brasañ';
+$s_upload_files_button = 'Enporzhiañ Restroù';
+$s_max_file_size_label = 'Ment vrasañ :';
 $s_bug_reopened_msg = 'Addigoret eo bet an draen...';
 $s_reopen_add_bugnote_title = 'Ouzhpennañ un notenn gant an abeg evit addigeriñ an draen';
 $s_bugnote_add_reopen_button = 'Ouzhpennañ un notenn hag addigeriñ an draen';
@@ -377,7 +373,9 @@ $s_from = 'Digant';
 $s_to = 'Da';
 $s_sent_you_this_reminder_about = 'en deus kaset deoc\'h un notenn derc\'hel soñj diwar-benn';
 $s_bug_reminder = 'Kas un notenn da zerc\'hel soñj';
-$s_reminder_sent_to = 'Notenn da zerc\'hel soñj kaset da:';
+$s_reminder_sent_to = 'Kemenn derc\'hel soñj kaset da:';
+$s_reminder_sent_none = 'N\'eus ket bet gallet kas kemenn derc\'hel soñ ebet';
+$s_reminder_list_truncated = 'troc\'het eo roll an degemererien';
 $s_bug_send_button = 'Kas';
 $s_reminder = 'Notenn da zerc\'hel soñj';
 $s_reminder_explain = 'Kaset e vo an notenn-mañ d\'an degemererien zo oc\'h evezhiañ an draen-mañ.';
@@ -397,7 +395,7 @@ $s_severity = 'Grevusted';
 $s_severity_label = 'Grevusted :';
 $s_reproducibility = 'Adproduusted';
 $s_date_submitted = 'Deiziad kas';
-$s_last_update = 'Hizivadenn diwezhañ';
+$s_last_update = 'Hizivaet da ziwezhañ';
 $s_reporter = 'Titourer';
 $s_reporter_label = 'Titourer :';
 $s_assigned_to = 'Deverket da';
@@ -413,7 +411,7 @@ $s_os = 'RK';
 $s_os_label = 'OS :';
 $s_projection = 'Raktresañ';
 $s_os_version = 'Stumm ar RK';
-$s_os_version_label = 'Doare an OS :';
+$s_os_version_label = 'Stumm an OS :';
 $s_eta = 'ETA';
 $s_product_version = 'Stumm ar produ';
 $s_product_version_label = 'Stumm ar produ :';
@@ -432,9 +430,12 @@ $s_profile = 'Profil';
 $s_profile_label = 'Profil :';
 $s_updating_bug_simple_title = 'O hizivaat titouroù an draen';
 $s_view_revisions = 'Gwelet an adweladennoù';
+$s_view_num_revisions = 'Diskouez %1$d adweladenn';
 $s_revision = 'Adweladenn';
 $s_revision_by = '%1$s gant %2$s';
 $s_revision_drop = 'Lemel';
+$s_bug_revision_dropped_history = 'Diverket eo bet notenn ar bug';
+$s_bugnote_revision_dropped_history = 'Diverket eo bet notenn an adweladenn';
 $s_all_revisions = 'An holl adweladennoù';
 $s_back_to_issue = 'Distreiñ d\'an draen';
 $s_confirm_revision_drop = 'Ha sur oc\'h hoc\'h eus c\'hoant da lemel an adweladenn draen-mañ ?';
@@ -450,6 +451,7 @@ $s_add_bugnote_button = 'Ouzhpennañ un notenn';
 $s_bugnote_edit_link = 'Aozañ';
 $s_closed_bug_button = 'Serriñ an draen';
 $s_bugnote_updated_msg = 'Hizivaet-mat eo bet an notenn...';
+$s_last_edited = 'Kemmet da ziwezhañ :';
 $s_hide_content = 'Kuzhat an endalc\'had';
 $s_show_content = 'Diskouez an endalc\'had';
 $s_total_queries_executed = '%1$d reked sevenet en holl.';
@@ -460,19 +462,18 @@ $s_click_to_login = 'Kevreañ';
 $s_warning_plain_password_authentication = '<strong>Evezh :</strong> Implijout a reer an dilesadur ger-tremen plaen, setu e c\'hallo ar verourien gwelet ho ker-tremen.';
 $s_warning_default_administrator_account_present = '<strong>Evezh :</strong> Dleout a rafec\'h diweredekaat ar gont dre ziouer « administrator » pe cheñch ar ger-tremen anezhi.';
 $s_warning_admin_directory_present = '<strong>Evezh :</strong> Dav e vefe lemel ar c\'havlec\'h Admin.';
-$s_error_database_version_out_of_date_1 = '<strong>Fazi :</strong> Diamzeret eo framm an diaz roadennoù war a seblant (config(databaseversion) zo par da 0 ha bez\' ez eus taolennoù lakaat a-live kozh). Un argerzh lakaat a-live nevez zo bet ouzhpennet e stumm 1.x MantisBT. O lakaat a-live emaoc\'h adalek ar stumm 0.XX war a seblant. Lakait a-live gant 1.0.8 pe 1.1.X da gentañ, ha neuze lakait a-live gant 1.2.';
 $s_error_database_no_schema_version = '<strong>Fazi :</strong> Diamzeret eo framm an diaz roadennoù war a seblant (config(databaseversion) zo par da 0 ha n\'eus ket eus an taolennoù lakaat a-live kozh). Gwiriit hag-eñ ez a ho tiaz roadennoù en-dro - n\'omp ket evit adkavout stumm brastres an diaz roadennoù. Gant an daolenn Config n\'eus ket bet retornet ur stumm reizh eus ar brastres - goulennit sikour war roll skignañ mantis-help ma vez ezhomm.';
 $s_error_database_version_out_of_date_2 = '<strong>Evezh :</strong> Diamzeret eo framm an diaz roadennoù marteze. Lakait-eñ a-live <a href="admin/install.php">amañ</a>, mar plij, a-raok kevreañ.';
 $s_error_code_version_out_of_date = '<strong>Evezh :</strong> Nevesoc\'h eo framm an diaz roadennoù eget ar c\'hod staliet. Lakait ar c\'hod a-live, mar plij.';
 $s_login_page_info = 'Degemer mat er reizhiad da verañ drein.';
-$s_login_title = 'Anv implijer';
-$s_save_login = 'Derc\'hel soñj eus va ger tremen war an urzhiataer-mañ';
+$s_login_title = 'Kevreañ';
+$s_save_login = 'Derc\'hel soñj eus an titouroù kevreañ war ar merdeer-mañ';
 $s_secure_session = 'Dalc\'h suraet';
 $s_secure_session_long = 'Aotren ho talc\'h da vezañ implijet diwar ar chomlec\'h IP-mañ hepken.';
 $s_choose_project = 'Dibab ur raktres';
 $s_login_button = 'Kevreañ';
 $s_signup_link = 'Digeriñ ur gont nevez';
-$s_lost_password_link = 'Ankouaet hoc\'h eus ho ker-tremen ?';
+$s_lost_password_link = 'Ankouaet ho ker-tremen ganeoc\'h ?';
 $s_select_project_button = 'Diuzañ ur raktres';
 $s_lost_password_title = 'Adderaouekaat ar ger-tremen';
 $s_lost_password_done_title = 'Kaset eo bet ar gemennadenn gant ar ger-tremen';
@@ -502,6 +503,7 @@ $s_protected_label = 'Gwarezet :';
 $s_create_user_button = 'Krouiñ un implijer';
 $s_hide_disabled = 'Kuzhat ar re ziweredekaet';
 $s_filter_button = 'Arloañ ar sil';
+$s_default_filter = 'Sil dre ziouer';
 $s_create_filter_link = 'Krouiñ ul liamm pad';
 $s_create_short_link = 'Krouiñ ul liamm berr';
 $s_filter_permalink = 'Amañ dindan ez eus ul liamm pad war-du ar sil red :';
@@ -524,6 +526,7 @@ $s_1_week_title = '1 sizhun';
 $s_never_logged_in_title = 'N\'eo ket kevreet morse';
 $s_prune_accounts = 'Lemel ar c\'hontoù';
 $s_hide_inactive = 'Kuzhat ar re zioberiant';
+$s_show_disabled = 'Diskouez ar re zo bet diweredekaet';
 $s_manage_accounts_title = 'Merañ ar c\'hontoù';
 $s_date_created = 'Deiziad krouiñ';
 $s_last_visit = 'Gweladenn diwezhañ';
@@ -571,6 +574,7 @@ $s_assign_issue = 'Deverkañ un draen';
 $s_allow_reporter_close = 'Aotren an titourer da serriñ an draen';
 $s_allow_reporter_reopen = 'Aotren an titourer da addigeriñ an draen';
 $s_set_status_assigned = 'Cheñch ar statud pa vez deverket';
+$s_edit_others_bugnotes = 'Kemmañ notennoù implijerien all';
 $s_limit_access = 'Strishaat moned an ditourerien d\'an drein o deus titouret';
 $s_submit_status = 'Statud a vez lakaet d\'un draen nevez';
 $s_assigned_status = 'Statud a vez lakaet d\'an drein emzeverket';
@@ -578,7 +582,7 @@ $s_resolved_status = 'Statud pa vez kontet an draen da vezañ diskoulmet';
 $s_readonly_status = 'Statud ma teu un draen da vezañ da lenn hepken';
 $s_reopen_status = 'Statud a vez lakaet d\'un draen addigoret';
 $s_reopen_resolution = 'Diskoulm a vez lakaet d\'un draen addigoret';
-$s_config_delete_sure = 'Ha sur oc\'h hoc\'h eus c\'hoant da zilemel an arventennoù evit :';
+$s_config_delete_sure = 'Ha sur oc\'h hoc\'h eus c\'hoant da ziverkañ an arventennoù evit :';
 $s_in_project = 'er raktres';
 $s_delete_config_button = 'Dilemel an arventennoù';
 $s_configuration_report = 'Danevell kefluniadur';
@@ -590,7 +594,7 @@ $s_all_users = 'An holl implijerien';
 $s_set_configuration_option = 'Lakaat an dibarzh kefluniañ';
 $s_delete_config_sure_msg = 'Ha sur oc\'h hoc\'h eus c\'hoant da zilemel an dibarzh kefluniañ-mañ ?';
 $s_configuration_corrupted = 'Brein eo kefluniadur an diaz roadennoù.';
-$s_plugin = 'Lugant';
+$s_plugin = 'Toupin';
 $s_plugins_installed = 'Lugantoù staliet';
 $s_plugins_available = 'Lugantoù da gaout';
 $s_plugin_description = 'Deskrivadur';
@@ -643,8 +647,8 @@ $s_add_and_edit_version_button = 'Ouzhpennañ hag aozañ ar stumm';
 $s_edit_link = 'Aozañ';
 $s_actions = 'Oberoù';
 $s_version = 'Stumm';
-$s_version_label = 'Doare :';
-$s_timestamp = 'Merker amzer';
+$s_version_label = 'Stumm :';
+$s_timestamp = 'Deiziad hag eur';
 $s_update = 'Hizivaat';
 $s_subprojects = 'Israktresoù';
 $s_add_subproject = 'Ouzhpennañ evel israktres';
@@ -678,6 +682,7 @@ $s_accounts_pruned_msg = 'Lamet eo bet an holl gontoù koshoc\'h eget ur sizhun 
 $s_prune_accounts_button = 'Lemel';
 $s_confirm_account_pruning = 'Ha sur oc\'h hoc\'h eus c\'hoant da zilemel kontoù kozh n\'int ket kevreet morse ?';
 $s_edit_user_title = 'Aozañ an implijer';
+$s_account_unlock_button = 'Dibrennañ ar gont';
 $s_reset_password_button = 'Adderaouekaat ar ger-tremen';
 $s_delete_user_button = 'Dilemel an implijer';
 $s_reset_password_msg = 'Adderaouekaat ar ger-tremen a gas un URL kadarnaat dre bostel.';
@@ -688,10 +693,11 @@ $s_users_new = 'Nevez';
 $s_account_reset_protected_msg = 'Kont gwarezet. Ne c\'haller ket adderaouekaat ar ger-tremen.';
 $s_account_reset_msg = 'Kaset ez eus bet ur goulenn kadarnaat da chomlec\'h postel an implijer diuzet. Gant se e c\'hallo an implijer cheñch e c\'her-tremen.';
 $s_account_reset_msg2 = 'Goulloet eo bet ger-tremen ar gont...';
-$s_manage_user_protected_msg = 'Kont gwarezet. Live moned ha gweredekadur gwarezet. A-hend-all, hizivaet eo bet ar gont...';
+$s_account_unlock_msg = 'Dibrennet eo bet ar gont.';
+$s_manage_user_protected_msg = 'Kont warezet. N\'hall ket ar maeziennoù \'liveoù moned\' ha \'gweredekaet\' bezañ kemmet. A-hend-all, hizivaet eo bet ar maeziennoù ervat.';
 $s_manage_user_updated_msg = 'Hizivaet-mat eo bet ar gont...';
 $s_email_user_updated_subject = 'Hizivaet eo ar gont';
-$s_email_user_updated_msg = 'Hizivaet eo bet ho kont gant ur merour. Kavout a reot ur roll eus ar c\'hemmoù amañ dindan. Gallout a rit hizivaat munudoù ha dibaboù gwellañ ho kont forzh pegoulz en ur weladenniñ an URL-mañ :';
+$s_email_user_updated_msg = 'Hizivaet eo bet ho kont gant ur merour. Kavout a reot ur roll eus ar c\'hemmoù amañ dindan. Gallout a rit hizivaat munudoù ha penndibaboù ho kont forzh pegoulz en ur weladenniñ an URL-mañ :';
 $s_main_link = 'Degemer';
 $s_view_bugs_link = 'Gwelet an drein';
 $s_report_bug_link = 'Titourañ un draen';
@@ -757,7 +763,7 @@ $s_project_selection_title = 'Diuzañ ur raktres';
 $s_remove_link = 'Lemel';
 $s_remove_all_link = 'Lemel pep tra';
 $s_updated_user_msg = 'Hizivaet-mat eo bet an implijer.';
-$s_must_enter_category = 'Ret eo deoc\'h diuzañ ur rummad';
+$s_must_enter_category = 'Ret eo deoc\'h diuzañ ur rummad.';
 $s_must_enter_severity = 'Ret eo deoc\'h diuzañ ul live grevusted';
 $s_must_enter_reproducibility = 'Ret eo deoc\'h diuzañ ul live adproduusted.';
 $s_must_enter_summary = 'Ret eo deoc\'h ebarzhiñ un diverradur.';
@@ -814,7 +820,7 @@ $s_resolved = 'Diskoulmet';
 $s_total = 'Hollad';
 $s_balance = 'Mentelad';
 $s_most_active = 'Oberiantañ';
-$s_score = 'Poenterezh';
+$s_score = 'Poentoù';
 $s_days = 'Deiz';
 $s_time_stats = 'Stadegoù (e deizioù) evit an drein diskoulmet';
 $s_longest_open_bug = 'Draen digor ar pellañ';
@@ -838,13 +844,16 @@ $s_sort_label = 'Urzhiañ dre :';
 $s_issue_id = 'Draen niv.';
 $s_recently_visited = 'Gweladennet nevez zo';
 $s_note_user_id_label = 'Notenn gant :';
+$s_filter_match_type = 'Seurt klotadur';
+$s_filter_match_all = 'An holl Zivizoù';
+$s_filter_match_any = 'Forzh peseurt Diviz';
 $s_none = 'hini ebet';
 $s_current = 'red';
 $s_search = 'Klask';
 $s_view_prev_link = 'Gwelet ar re gent';
 $s_view_next_link = 'Gwelet ar re da-heul';
-$s_prev = 'A-raok';
-$s_next = 'Da-heul';
+$s_prev = 'Kent';
+$s_next = 'War-lerc\'h';
 $s_first = 'Kentañ';
 $s_last = 'Diwezhañ';
 $s_start_date_label = 'Deiziad deroù :';
@@ -873,16 +882,16 @@ $s_open_queries = 'Merañ ar siloù';
 $s_query_delete_msg = 'Ha sur oc\'h hoc\'h eus c\'hoant da zilemel ar sil-mañ ?';
 $s_view_simple_link = 'Diskwel eeun';
 $s_product_build = 'Kempunadur ar produ';
-$s_product_build_label = 'Build ar produ :';
+$s_product_build_label = 'Daspugn ar produ :';
 $s_system_profile = 'Deskrivadur eus ar reizhiad';
 $s_update_bug_button = 'Aozañ';
 $s_bug_assign_to_button = 'Deverkañ da :';
 $s_bug_status_to_button = 'Cheñch ar statud da :';
 $s_reopen_bug_button = 'Addigeriñ';
+$s_close_bug_button = 'Serriñ';
 $s_move_bug_button = 'Dilec\'hiañ';
 $s_attached_files = 'Restroù stag';
 $s_publish = 'Embann';
-$s_cached = 'Er grubuilh';
 $s_add_user_to_monitor = 'Ouzhpennañ';
 $s_bug_view_title = 'Gwelet munudoù an draen';
 $s_no_users_monitoring_bug = 'N\'eus implijer ebet oc\'h evezhiañ an draen-mañ.';
@@ -925,11 +934,11 @@ $s_link_custom_field_to_project_button = 'Liammañ ar vaezienn personelaet';
 $s_linked_projects_label = 'Raktresoù liammet :';
 $s_custom_field_sequence = 'Heuliad';
 $s_custom_field_sequence_label = 'Heuliad :';
-$s_custom_field_type_enum_string = '0:Neudenn,1:Niverel,2:Flod,3:Diskont,4:Postel,5:Boest da askañ,6:Roll,7:Stern roll disachañ,8:Deiziad,9:Bouton radio';
+$s_custom_field_type_enum_string = '0:Neudenn,1:Niverel,2:Flod,3:Diskont,4:Postel,5:Boest da askañ,6:Roll,7:Stern roll disachañ,8:Deiziad,9:Bouton radio, 10:Textarea';
 $s_confirm_used_custom_field_deletion = 'Ar vaezienn-mañ zo liammet ouzh ur raktres da nebeutañ. Ma kendalc\'hit e vo dilamet da vat holl dalvoudoù ar vaezienn-mañ. Ne c\'haller ket dizober an ober-mañ. Ma ne fell ket deoc\'h dilemel ar vaezienn-mañ, pouezit war ar bouton Distreiñ en ho merdeer. Evit kenderc\'hel, klikit war ar bouton amañ dindan.';
 $s_confirm_custom_field_deletion = 'Ha sur oc\'h hoc\'h eus c\'hoant da zilemel ar vaezienn personelaet-mañ hag an holl dalvoudoù stag outi ?';
 $s_field_delete_button = 'Dilemel ar vaezienn';
-$s_confirm_custom_field_unlinking = 'Ha sur oc\'h hoc\'h eus c\'hoant da lemel ar vaezienn personelaet-mañ eus ar raktres ha da zilemel an holl dalvoudoù stag outi ?';
+$s_confirm_custom_field_unlinking = 'Ha sur oc\'h hoc\'h eus c\'hoant da ziliammañ ar vaezienn bersonelaet-mañ eus ar raktres ? Ne vo ket diverket an talvoudoù e-keit ha ma ne vo ket diverket ar vaezienn bersonelaet hec\'h-unan.';
 $s_field_remove_button = 'Lemel ar vaezienn';
 $s_hide_status = 'Kuzhat ar statud';
 $s_hide_status_label = 'Kuzhat ar statud :';
@@ -944,6 +953,9 @@ $s_monitored_by = 'Evezhiet gant';
 $s_monitored_by_label = 'Evezhiet gant :';
 $s_attachments = 'pezh stag';
 $s_bytes = 'okted';
+$s_attachment_missing = 'Mankout a ra ar restr stag';
+$s_attachment_count = 'Niver a restroù da-heul';
+$s_view_attachments_for_issue = 'Gwelet %1$d pezh stag evit an draen #%2$d';
 $s_sponsors = '%1$d sponsor';
 $s_sponsorship_added = 'Sponsoradur ouzhpennet';
 $s_sponsorship_updated = 'Sponsoradur hizivaet';
@@ -971,10 +983,13 @@ $s_relationship_with_parent = 'Darempred gant an draen tad';
 $s_delete_relationship_button = 'Dilemel';
 $s_delete_relationship_sure_msg = 'Ha sur oc\'h hoc\'h eus c\'hoant da zilemel an darempred-mañ ?';
 $s_relationship_warning_blocking_bugs_not_resolved = 'Holl vugale an draen-mañ n\'int ket diskoulmet pe serret c\'hoazh.';
-$s_relationship_warning_blocking_bugs_not_resolved_2 = '<strong>Evezh :</strong> Holl vugale an draen-mañ n\'int ket bet diskoulmet pe serret c\'hoazh.<br/>A-raok <strong>diskoulmañ/serriñ</strong> un draen tad e tlefe an holl zrein liammet outañ evel bugale bezañ diskoulmet pe serret.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>Evezh :</b> Holl vugale an draen-mañ n\'int ket bet diskoulmet pe serret c\'hoazh.<br/>A-raok <b>diskoulmañ/serriñ</b> un draen tad e tlefe an holl zrein liammet outañ evel bugale bezañ diskoulmet pe serret.';
 $s_create_child_bug_button = 'Klonañ';
 $s_bug_cloned_to = 'Draen klonet';
 $s_bug_created_from = 'Draen krouet diwar';
+$s_copy_from_parent = 'Eilañ ar roadennoù astennet adalek an tad.';
+$s_copy_notes_from_parent = 'Eilañ an notennoù';
+$s_copy_attachments_from_parent = 'Eilañ ar restroù stag';
 $s_viewing_bug_relationship_graph_title = 'Grafik an darempredoù';
 $s_viewing_bug_dependency_graph_title = 'Grafik sujidigezhioù';
 $s_relation_graph = 'Grafik darempredoù';
@@ -996,7 +1011,7 @@ $s_view_private_issues = 'Gwelet an drein prevez';
 $s_update_readonly_issues = 'Hizivaat drein da lenn hepken';
 $s_update_issue_status = 'Hizivaat statud an draen';
 $s_set_view_status = 'Lakaat ar statud gwelet (foran/prevez)';
-$s_update_view_status = 'Hizivaat ar statud gwelet (foran pe prevez)';
+$s_update_view_status = 'Hizivaat ar statud gwelet (foran vs prevez)';
 $s_show_list_of_users_monitoring_issue = 'Diskouez roll an implijerien zo oc\'h evezhiañ an draen';
 $s_notes = 'Notennoù';
 $s_add_notes = 'Ouzhpennañ notennoù';
@@ -1010,7 +1025,7 @@ $s_delete_attachments = 'Dilemel ar pezhioù stag';
 $s_delete_attachment_button = 'Dilemel';
 $s_delete_attachment_sure_msg = 'Ha sur oc\'h hoc\'h eus c\'hoant da zilemel ar pezh stag-mañ ?';
 $s_upload_issue_attachments = 'Kargañ pezhioù stag an draen';
-$s_filters = 'siloù';
+$s_filters = 'Siloù';
 $s_save_filters = 'Enrollañ ar siloù';
 $s_save_filters_as_shared = 'Enrollañ ha rannañ ar siloù';
 $s_use_saved_filters = 'Implijout ar siloù enrollet';
@@ -1032,6 +1047,7 @@ $s_handle_sponsored_issue = 'Plediñ gant an draen sponsoret';
 $s_others = 'Re all';
 $s_see_email_addresses_of_other_users = 'Gwelet chomlec\'hioù postel an implijerien all';
 $s_send_reminders = 'Kas notennoù derc\'hel soñj';
+$s_receive_reminders = 'Resev kemennoù derc\'hel soñj';
 $s_add_profiles = 'Ouzhpennañ profiloù';
 $s_notify_of_new_user_created = 'Kemenn krouidigezh un implijer nevez';
 $s_email_notification = 'Kemenn dre bostel';
@@ -1052,7 +1068,7 @@ $s_on = 'Gweredekaet';
 $s_off = 'Diweredekaet';
 $s_wiki = 'Wiki';
 $s_tags = 'Balizennoù';
-$s_tags_label = 'Merkoù :';
+$s_tags_label = 'Balizennoù :';
 $s_tag_details = 'Munudoù ar valizenn : %1$s';
 $s_tag_id = 'ID ar valizenn';
 $s_tag_name = 'Anv';
@@ -1063,7 +1079,7 @@ $s_tag_description = 'Deskrivadur ar valizenn';
 $s_tag_statistics = 'Stadegoù implij';
 $s_tag_update = 'Hizivaat ar valizenn : %1$s';
 $s_tag_update_return = 'Distreiñ d\'ar valizenn';
-$s_tag_update_button = 'Hizivaat ar valizenn';
+$s_tag_update_button = 'Hizivaat an dikedenn';
 $s_tag_delete_button = 'Dilemel ar valizenn';
 $s_tag_delete_message = 'Ha sur oc\'h hoc\'h eus c\'hoant da zilemel ar valizenn-mañ ?';
 $s_tag_existing = 'Balizennoù zo anezho';
@@ -1084,13 +1100,17 @@ $s_tag_related_issues = 'Drein rannet (%1$s)';
 $s_tag_stats_attached = 'Drein stag : %1$s';
 $s_tag_create = 'Krouiñ ur valizenn';
 $s_show_all_tags = 'An holl';
-$s_time_tracking_billing_link = 'O fakturenniñ';
+$s_time_tracking_billing_link = 'Heuliañ an amzer';
 $s_time_tracking = 'Heuliañ an amzer';
+$s_time_tracking_time_spent = 'Amzer aet hebiou :';
 $s_time_tracking_get_info_button = 'Tapout titouroù diwar-benn mererezh an amzer';
 $s_time_tracking_cost_per_hour = 'Koust dre eurvezh';
 $s_time_tracking_cost = 'Koust';
 $s_time_tracking_cost_label = 'Koust :';
 $s_total_time_for_issue = 'Amzer evit an draen en holl = %1$s';
+$s_time_tracking_stopwatch_start = 'Deroù';
+$s_time_tracking_stopwatch_stop = 'Paouez';
+$s_time_tracking_stopwatch_reset = 'Adderaouekaat';
 $s_access_denied = 'Moned nac\'het.';
 $s_twitter_resolved = '%1$d: [%2$s] %3$s (diskoulmet gant %4$s e-barzh %5$s)';
 $s_twitter_resolved_no_version = '%1$d: [%2$s] %3$s (diskoulmet gant %4$s)';
@@ -1126,8 +1146,6 @@ $s_month_september = 'Gwengolo';
 $s_month_october = 'Here';
 $s_month_november = 'Du';
 $s_month_december = 'Kerzu';
-
-
 $MANTIS_ERROR[ERROR_GENERIC] = 'C\'hoarvezet ez eus ur fazi. Marteze hoc\'h eus c\'hoant d\'e ditourañ d\'ho merour lec\'hel.';
 $MANTIS_ERROR[ERROR_SQL] = 'Fazi SQL dinoet.';
 $MANTIS_ERROR[ERROR_REPORT] = 'Ur fazi a oa en ho tanevell.';
@@ -1148,14 +1166,13 @@ $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'N\'eo ket bet kavet an neudenn « 
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'An notenn n\'eo ket bet kavet.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Ar raktres « %1$d » n\'eo ket bet kavet.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Maezienn « %1$s » an diaz roadennoù n\'eo ket bet kavet.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Ne c\'haller ket kevreañ ouzh ar servijer FTP.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Gant an den-mañ n\'emañ ket an aotreoù rekis evit plediñ gant un draen er statud-mañ.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Ur raktres en anv-se zo anezhañ dija. Distroit, mar plij, hag ebarzhit un anv all.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Direizh eo anv ar raktres. Anvioù ar raktresoù ne c\'hallont ket bezañ goullo.';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'N\'eus ket bet kavet un implijer en anv "%1$s"';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'N\'eus bet kavet implijer ebet gant an anavezer « %1$d ».';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Direizh eo an titouroù kevreañ enrollet gant ho merdeer. Marteze eo bet dilamet ho kont ?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'An dibaboù gwellañ n\'int ket bet kavet evit an implijer-mañ.';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Ar penndibaboù n\'int ket bet kavet evit an implijer-mañ.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Ar c\'heloù n\'eo ket bet kavet.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Ne glot ket ar ger-tremen gant ar gwiriadur.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'Un daolenn a oa gortozet met un neudenn zo bet resevet evit %1$s.';
@@ -1179,6 +1196,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Un anv doublet eo.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Ur raktres da nebeutañ a ra gant ar vaezienn-mañ c\'hoazh.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Talvoud direizh evit ar vaezienn « %1$s ».';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Direizh eo termenadur ar vaezienn personelaet.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'N\'eo ket reizh perzh ar vaezienn personelaet (%1$s).';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Gwiriekadur LDAP c\'hwitet.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'C\'hwitet eo ar c\'hevreadur ouzh ar servijer LDAP';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'C\'hwitet eo hizivadenn an enrolladenn LDAP.';
@@ -1189,8 +1207,9 @@ $MANTIS_ERROR[ERROR_DB_QUERY_FAILED] = 'C\'hwitet eo ar reked diaz roadennoù. A
 $MANTIS_ERROR[ERROR_DB_SELECT_FAILED] = 'C\'hwitet eo diuzadenn an diaz roadennoù. Ar fazi resevet digant an diaz roadennoù a oa #%1$d: %2$s.';
 $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Ur rummad en anv-se zo anezhañ dija.';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'N\'eus bet diferet ober eilañ ebet.';
-$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Ar rummad n\'eo ket bet kavet.';
+$MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'N\'eo ket bet kavet ar rummad.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Ar rummad « %1$s » n\'eo ket bet kavet evit ar raktres « %2$s ».';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Ne c\'haller ket lemel ar rumm-se rak termenet eo evel "Rumm dre ziouer evit  an dilec\'hiadoù".';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Ur stumm en anv-se zo anezhañ dija.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Ar stumm « %1$s » n\'eo ket bet kavet';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Direizh eo an anv implijer. En anvioù implijerien ne c\'hall bezañ nemet lizherennoù latin, niveroù, esaouennoù, barrennoùigoù, pikoù, arouezennoù mui hag istiredoù ("_").';
@@ -1228,14 +1247,16 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'An darvoud « %1$s » n\'eo ket bet dis
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'N\'eo ket enrollet al lugant gant MantisBT.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Staliet dija eo al lugant.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'N\'eo ket bet kavet pajenn al lugant.';
-$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Hizivadur ar brastres evit al lugant zo c\'hwitet er bloc\'had #%1$s.';
+$MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'C\'hwitet eo staliadur al lugant : %1$s.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Hizivadenn ar brastres evit al lugant zo c\'hwitet er bloc\'had #%1$s.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'Ar vodulenn "%1$s" a rank bezañ hizivaet a-raok gallout diraez ar bajenn-mañ.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Ur fazi dianav « %1$s » zo c\'hoarvezet e-pad ma oa al lugant « %2$s » o vont en-dro.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Ar vaezienn « %1$s » he deus meur a vann « %2$s ».';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Er vaezienn « %1$s » ez eus ur vaezienn direizh « %2$s ».';
 $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Merour dalc\'h direizh.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'An argemmenn dalc\'h « %1$s » n\'eo ket bet kavet.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Nullet eo bet ho talc\'h.';
-$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Direizh eo jedouer surentez ar furmskrid. Daoust ha kaset hoc\'h eus ar frumskrid div wech dre zarvoud ?';
+$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Direizh eo jedouer surentez ar furmskrid. Marteze hoc\'h aet en tu all d\'an termen resissaet evit an dalc\'h pe hoc\'h eus kaset ar furmskrid div wezh dre fazi.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Ne c\'haller ket mont d\'ar bajenn-mañ oc\'h implijout an hentenn-mañ.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Maezienn urzhiañ direizh.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Direizh eo furmad an deiziad.';

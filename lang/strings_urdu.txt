@@ -1,42 +1,32 @@
 <?php
-# MantisBT - A PHP based bugtracking system
-
-# MantisBT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# MantisBT is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * Language File - Urdu (اردو)
+/** MantisBT - a php based bugtracking system
  *
- * **********************************************************************
- * ** This file is generated from translations stored in translatewiki **
- * ** Information on Copyright/License for translatewiki translations  **
- * ** is available at http://translatewiki.net/wiki/Project:About      **
- * **********************************************************************
- * **                                                                  **
- * **                      DO NOT UPDATE MANUALLY                      **
- * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
- * ** Detailed instructions on how to create or update translations at **
- * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
- * **********************************************************************
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Urdu (اردو)
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
-*/
+ *
+ * @author محبوب عالم
+ */
 
 $s_directionality = 'rtl';
 $s_actiongroup_menu_move = 'حرکت مين لاو';
@@ -227,6 +217,8 @@ $s_email_date_submitted = 'جمعح کرا نے کی تاریخ';
 $s_email_last_modified = 'آخری دفع جب تبدیل کیا گیا';
 $s_email_summary = 'خلاصا';
 $s_email_description = 'وضاحت';
+$s_email_additional_information = 'اضافی معلومات';
+$s_email_steps_to_reproduce = 'دوبارہ بنانے کے سٹیپ';
 $s_account_protected_msg = 'کھاتہ پروٹیکٹیڈ ھے یہ تبدیل نہی ھو سکتا۔۔۔';
 $s_account_removed_msg = 'آپ کا کھاتہ ختم ھو چکا ھے';
 $s_confirm_delete_msg = '? کیا آپ واقہی اپنا کھاتہ خارج کرنا چاہتے ھیں';
@@ -265,13 +257,13 @@ $s_email_bugnote_limit = ' ای- میل معلومات کی حد';
 $s_language = 'ذبان';
 $s_update_prefs_button = 'پسند کو نیا کرنا';
 $s_reset_prefs_button = ' پسند کو دوبارہ سیٹ کرنا';
+$s_timezone = 'منطقۂ وقت';
 $s_prefs_reset_msg = 'پسند کو  تبدیل کیا جا چکا ھے';
 $s_prefs_updated_msg = 'پسند کو  نیا کیا جا چکا ھے';
 $s_profile_added_msg = 'مختصر جاہزہ جمعح کیا جا چکا ھے';
 $s_profile_deleted_msg = 'مختصر جاہزہ خارج کیا جا چکا ھے';
 $s_edit_profile_title = 'مختصر جاہزہ تبدیل کیا جا چکا ھے';
 $s_platform = 'پليٹ فارم';
-$s_operating_system = 'اپريٹنگ سسٹم';
 $s_additional_description = 'اضافی وضاحت';
 $s_update_profile_button = 'مختصر جاہزہ نیا';
 $s_profile_defaulted_msg = 'ڈی فالٹ جاہزہ نیا ھو گیا ھے';
@@ -326,7 +318,6 @@ $s_file_upload_msg = 'فایل کامیابی کے ساتھ اپ لوڈ ھو چ�
 $s_upload_file = ' فایل کو اپ لوڈ کرو';
 $s_select_file = '  فایل منتخب کرو';
 $s_upload_file_button = ' فایل کو اپ لوڈ کرو';
-$s_max_file_size = 'زیادہ ساہز';
 $s_bug_reopened_msg = '  ایشوذ دوبارہ کھل چکا ھے...';
 $s_reopen_add_bugnote_title = 'دوبارہ موصوع جو کھو لے گے ھیں معلومات کو جمع کر نے کی وجہ A';
 $s_bugnote_add_reopen_button = ' معلومات کو جمع کر و اور ایشوذ دوبارہ کھولو';
@@ -733,7 +724,6 @@ $s_reopen_bug_button = ' ایشوذ کو دوبارہ کھولو';
 $s_move_bug_button = ' ایشوذ کو حرکت میں  لاو';
 $s_attached_files = 'فایلز کو باندو';
 $s_publish = 'پبلش';
-$s_cached = 'کیشڈ';
 $s_no_users_monitoring_bug = '  کوی اور استعمال کر نے والہ اس ایشوذ کو نہی ھے.';
 $s_users_monitoring_bug = ' استعمال کر نے والہ اس ایشوذ کو مانیٹر کر رھا ھے';
 $s_monitoring_user_list = ' استعمال کر نے والوں کی لسٹ';
@@ -770,7 +760,7 @@ $s_custom_field_require_closed = 'بند ھونے پر ضرورت ھے';
 $s_link_custom_field_to_project_title = 'کسٹم فیلڈ کا ایشوذ سے لنک کرو';
 $s_link_custom_field_to_project_button = ' کسٹم فیلڈ سے لنک';
 $s_custom_field_sequence = 'ترتیب';
-$s_custom_field_type_enum_string = '0:سٹرنگ,1:نمیرک,2:فلوٹ,3:انیمیریشن,4:ای-میل,5:چیک باکس,6:لسٹ,7:ملٹی سیلیکشن لسٹ,8:تاریخ';
+$s_custom_field_type_enum_string = '0:سٹرنگ,1:نمیرک,2:فلوٹ,3:انیمیریشن,4:ای-میل,5:چیک باکس,6:لسٹ,7:ملٹی سیلیکشن لسٹ,8:تاریخ,9:Radio,10:Textarea';
 $s_confirm_used_custom_field_deletion = '  یہ فیلڈ اس وقت صرف ایک منصوبے سے لنکڈ ھے اگر آپ اسے جاری رکھیں گے تو یہ مستقل طور پر ختم ھو جاے گی یہ کام دوبارہ ریکور بھی نہی ھو گا اگر آپ اس فیلڈ کو خارج نہی کرنا چاھتے پیچھے والے بٹن کو دبایں اگر آگے جانا چاھتے ھیں  تو نیچے والے بٹن کو کلک کریں';
 $s_confirm_custom_field_deletion = 'کیا آپ واقعی اس کسٹم فیلڈ اور اس سے تعلق والی ویلیو کو خارج کرنا چاھتے ھیں?';
 $s_field_delete_button = ' فیلڈ کو خارج کرو';
@@ -898,8 +888,6 @@ $s_time_tracking_get_info_button = '  وقت کی ٹریکنگ کی معلوما
 $s_time_tracking_cost_per_hour = 'قیمت / گھنٹہ';
 $s_time_tracking_cost = ' قیمت';
 $s_total_time_for_issue = 'تمام وقت ایشوذ کے لیے  = %ایس';
-
-
 $MANTIS_ERROR[ERROR_GENERIC] = 'یہ کام کرتے ھوے ایک خرابی آ گی ھے.  آپ اپنی انتضامیہ کو اس کے بارے میں آگاہ کر سکتے ہیں۔ .';
 $MANTIS_ERROR[ERROR_SQL] = ' کی خرابی آ گی ھے اس کے بارے میں اگ ہ کر یںSQL';
 $MANTIS_ERROR[ERROR_REPORT] = 'آپ کی معلومات مین خرابی تھی.';
@@ -921,7 +909,6 @@ $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = ' \'%1$s\' سٹرنگ نہیں مل
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = ' معلومات نہیں ملی.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = '   منصو بہ نہی ملا .';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'ڈیٹا بیس کا حصہ نہی ملا \'%1$s\'.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = ' نے سے قاصر ھے   صرور سے ملاFTP.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'ایشوذ کو چل نے والے کے پاس اس مقام پر ایشوذ چلانے کے اختیار نہیں ھیںا.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = ' اس منصوبے کا نام پہلے ہی استہمال ھو رہ ھے۔مہربانی کر کے پیچھے جاہیں اور کوی اور نام منتہب کریں..';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = '  منصوبے کا نام ٹھیک نہی ھے۔منصوبے کا نام خالی نہی ھو سکتا.';

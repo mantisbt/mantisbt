@@ -1,42 +1,33 @@
 <?php
-# MantisBT - A PHP based bugtracking system
-
-# MantisBT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# MantisBT is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * Language File - Swiss German (Alemannisch)
+/** MantisBT - a php based bugtracking system
  *
- * **********************************************************************
- * ** This file is generated from translations stored in translatewiki **
- * ** Information on Copyright/License for translatewiki translations  **
- * ** is available at http://translatewiki.net/wiki/Project:About      **
- * **********************************************************************
- * **                                                                  **
- * **                      DO NOT UPDATE MANUALLY                      **
- * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
- * ** Detailed instructions on how to create or update translations at **
- * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
- * **********************************************************************
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Swiss German (Alemannisch)
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
-*/
+ *
+ * @author Als-Chlämens
+ * @author Als-Holder
+ */
 
 $s_actiongroup_menu_move = 'Verschiebe';
 $s_actiongroup_menu_copy = 'Kopiere';
@@ -96,7 +87,7 @@ $s_bug_monitor = 'Probläm beobachte';
 $s_bug_end_monitor = 'Ufhere mit dr Problämbeobachtig';
 $s_announcement = 'Aachindigung';
 $s_stays_on_top = 'Im Vordergrund blybe';
-$s_bugnote_link_title = 'Diräkt Gleich uf d Aamerkig';
+$s_bugnote_link_title = 'Diräkt Link uf d Aamerkig';
 $s_delete_bugnote_button = 'Problämnotiz lesche';
 $s_delete_bugnote_sure_msg = 'Witt die Notiz wirkli lesche?';
 $s_bug_relationships = 'Probläm-Beziehige';
@@ -135,6 +126,8 @@ $s_select_option = '(uuswehle)';
 $s_bug_actiongroup_access = 'Du hesch nit di notwändige Rächt go die uusgwehlt Aktion uusfiere.';
 $s_bug_actiongroup_status = 'Dr gwinscht Status isch fir des Probläm nit wehlbar.';
 $s_bug_actiongroup_category = 'Des Probläm cha nit in di gwinscht Kategorii gänderet wäre.';
+$s_bug_actiongroup_handler = 'Däm Benutzer isch s nit erlaubt dr Yytrag z bearbeite';
+$s_bug_actiongroup_version = 'Die Version git s nit im Projäkt vu däm Yytrag';
 $s_close_bugs_conf_msg = 'Witt wirkli alli uusgwehlte Probläm zuemache?';
 $s_delete_bugs_conf_msg = 'Witt wirkli alli uusgwehlte Probläm lesche?';
 $s_move_bugs_conf_msg = 'Probläm verschiebe no:';
@@ -244,7 +237,7 @@ $s_email_bug = 'Probläm-ID';
 $s_email_category = 'Kategorii';
 $s_email_reproducibility = 'Reproduzierbarkeit';
 $s_email_severity = 'Uuswirkig';
-$s_email_priority = 'Priorität';
+$s_email_priority = 'Prioritet';
 $s_email_status = 'Status';
 $s_email_resolution = 'Lesig';
 $s_email_duplicate = 'Duplikat';
@@ -308,7 +301,6 @@ $s_profile_deleted_msg = 'Profil glescht …';
 $s_edit_profile_title = 'Profil bearbeite';
 $s_platform = 'Rächnertyp';
 $s_platform_label = 'Plattform:';
-$s_operating_system = 'Betribssyschtem';
 $s_additional_description = 'Zuesätzligi Bschrybig';
 $s_update_profile_button = 'Profil aktualisiere';
 $s_profile_defaulted_msg = 'Standardprofil aktualisiert …';
@@ -323,7 +315,7 @@ $s_submit_button = 'Absände';
 $s_profile_updated_msg = 'Profil aktualisiert …';
 $s_my_sponsorship = 'Myy Sponsoreschafte';
 $s_update_sponsorship_button = 'Bezahlstatus ändere';
-$s_no_sponsored = 'Kei vu Dir gsponsereti Probläm gfunde.';
+$s_no_sponsored = 'Kei gsponsereti Yytreg gfunde, wu Dir zuegordnet sin.';
 $s_own_sponsored = 'Vu Dir gsponsereti Probläm:';
 $s_issues_handled = 'Gsponsereti Probläm, wu Dir zuegordnet sin:';
 $s_no_own_sponsored = 'Du hesch kei Probläm gsponseret.';
@@ -333,7 +325,7 @@ $s_amount = 'Betrag';
 $s_total_owing = 'Usseständ gsamt';
 $s_total_paid = 'bezahlt gsamt';
 $s_sponsor_hide = 'Bezahlt un Erledigt verbärge';
-$s_sponsor_show = 'Alli aszeige';
+$s_sponsor_show = 'Alli aazeige';
 $s_payment_updated = 'Bezahlinformation aktualisiert.';
 $s_account_updated_msg = 'Dyy Konto isch erfolgryych aktualisiert wore …';
 $s_email_updated = 'E-Mail-Adräss erfolgryych aktualisiert';
@@ -342,7 +334,7 @@ $s_realname_updated = '„Vollständige Name“ erfolgryych aktualisiert';
 $s_password_updated = 'Passwort erfolgryych aktualisiert.';
 $s_multiple_projects = 'Die vu Dir uusgwehlte Probläm ghere zue verschidene Projäkt. D Parameter, wu do unte stehn, berucksichtige d Yystellige vu alle Projäkt. Wänn des imfall falsch isch, versuech e Änderig mit weniger uusgwehlte Probläm.';
 $s_new_bug_title = 'Nej Probläm';
-$s_feedback_bug_title = 'Ruckmäldig zum Probläm mache';
+$s_feedback_bug_title = 'Ruckmäldig zum Yytrag frage';
 $s_acknowledged_bug_title = 'Probläm anerkänne';
 $s_confirmed_bug_title = 'Probläm bstätige';
 $s_assigned_bug_title = 'Probläm zuewyse';
@@ -361,9 +353,11 @@ $s_monitor_bug_button = 'Iberwache';
 $s_unmonitor_bug_button = 'Ufhere mit beobachte';
 $s_file_upload_msg = 'Ufelade erfolgrych';
 $s_upload_file = 'Datei uffelade';
+$s_upload_files = 'Dateie uffelade';
 $s_select_file = 'Datei wehle';
+$s_select_files = 'Dateie wehle';
 $s_upload_file_button = 'Datei uffelade';
-$s_max_file_size = 'Max. Greßi';
+$s_upload_files_button = 'Dateie uffelade';
 $s_max_file_size_label = 'Maximali Greßi';
 $s_bug_reopened_msg = 'Problämmäldig reaktiviert …';
 $s_reopen_add_bugnote_title = 'Notiz fir Problämreaktivierig zuefiege';
@@ -402,7 +396,7 @@ $s_reporter = 'Reporter';
 $s_reporter_label = 'Mälder:';
 $s_assigned_to = 'Bearbeitig dur';
 $s_assigned_to_label = 'Zuegwise an:';
-$s_priority = 'Priorität';
+$s_priority = 'Prioritet';
 $s_priority_label = 'Prioritet:';
 $s_resolution = 'Lesig';
 $s_resolution_label = 'Lesig:';
@@ -464,7 +458,6 @@ $s_click_to_login = 'Aamälde';
 $s_warning_plain_password_authentication = '<strong>WARNIG:</strong> Eifachi Passwort-Authentifizierig wird brucht, des zeigt dr Admischtratore s Passwort.';
 $s_warning_default_administrator_account_present = '<strong>WARNUNG:</strong> Du sottsch s Standard-Adminischtrator-Konto uschalte oder s Passwort ändere.';
 $s_warning_admin_directory_present = '<strong>WARNUNG:</strong> Adminischtrator-Verzeichnis sott uusegnuu wäre.';
-$s_error_database_version_out_of_date_1 = '<strong>FÄHLER:</strong> D Datebank-Struktur isch schyns veraltet (<code>config(databaseversion)</code> isch 0 un s git alti Aktualisierigs-Tabällen). In dr Version 1.x vu MantisBT het s e neje Aktualisierigs-Prozäss. Du aktualisiersch schyns vun ere 0.XX-Version. Bitte aktualisier zerscht uf 1.0.8 oder 1.1.X, un derno uf 1.2.';
 $s_error_database_no_schema_version = '<strong>FÄHLER:</strong> D Datebank-Struktur isch schyns veraltet (<code>config(databaseversion)</code> isch 0 un s git kei alti Aktualisierigs-Tabälle). Bitte iberprief, ass d Datebank aktiv isch - d Version vum Datebank-Schema cha nit gfunde wäre. <code>Config Table</code> git kei giltig Datebank-Schema zruck - bitte frog uf dr  „mantis-help“-Mailingslischt no Unterstitzig, wänn netig.';
 $s_error_database_version_out_of_date_2 = '<strong>WARNIG:</strong> D Datebank-Struktur chennt veraltet syy. Bitte <a href="admin/install.php">bearbeit</a> si vor em Aamälde.';
 $s_error_code_version_out_of_date = '<strong>WARNIG:</strong> D Datebank-Struktur isch nejer wie di inschtalliert Version. Bitte aktualisier s Programm.';
@@ -481,7 +474,7 @@ $s_select_project_button = 'Projäkt wehle';
 $s_lost_password_title = 'Passwort zrucksetze';
 $s_lost_password_done_title = 'Passwort-Nochricht gschickt';
 $s_lost_password_subject = 'Passwort zrucksetze';
-$s_lost_password_info = 'Go Dyy verlore Passwort iberchuu, gib bitte Benutzername un E-Mail Adräss zu Dyynem Konto aa.<br /><br />Wänn d Date zuen eme giltige Konto stimme, wird Dir e speziälli URL iber E-Mail gschickt, wu s e Bstätigungscode fir Dyy Konto din het. Bitte gang däm Gleich (Link) no un ändere Dyy Passwort.';
+$s_lost_password_info = 'Go Dyy verlore Passwort iberchuu, gib bitte Benutzername un E-Mail Adräss zu Dyynem Konto aa.<br /><br />Wänn d Date zuen eme giltige Konto stimme, wird Dir e speziälli URL iber E-Mail gschickt, wu s e Bstätigungscode fir Dyy Konto din het. Bitte gang däm Link no un ändere Dyy Passwort.';
 $s_lost_password_confirm_hash_OK = 'Dyy Bstätigung isch akzeptiert wore. Bitte aktualisier Dyy Passwort.';
 $s_open_and_assigned_to_me_label = 'Uffe un zuegwise an mi:';
 $s_open_and_reported_to_me_label = 'Uffe un gmäldet dur mi:';
@@ -528,6 +521,7 @@ $s_1_week_title = '1 Wuche';
 $s_never_logged_in_title = 'No nie aagmäldet';
 $s_prune_accounts = 'Konte lesche';
 $s_hide_inactive = 'Inaktivi verstecke';
+$s_show_disabled = 'Deaktivierti aazeige';
 $s_manage_accounts_title = 'Konte verwalte';
 $s_date_created = 'Aalegdatum';
 $s_last_visit = 'Letschte Bsuech';
@@ -604,10 +598,10 @@ $s_plugins_installed = 'Installierti Plugins';
 $s_plugins_available = 'Verfiegbari Plugins';
 $s_plugin_description = 'Bschryybig';
 $s_plugin_author = 'Autor: %1$s';
-$s_plugin_url = 'Website:';
+$s_plugin_url = 'Websyte:';
 $s_plugin_depends = 'Abhängigkeite';
 $s_plugin_no_depends = 'kei Abhängigkeite';
-$s_plugin_priority = 'Priorität';
+$s_plugin_priority = 'Prioritet';
 $s_plugin_protected = 'Gschitzt';
 $s_plugin_update = 'Aktualisierig';
 $s_plugin_actions = 'Aktione';
@@ -687,6 +681,7 @@ $s_accounts_pruned_msg = 'Alli Konte, wu nit brucht wore sin un eltzer sin wie 1
 $s_prune_accounts_button = 'Entgiltig lesche';
 $s_confirm_account_pruning = 'Witt alti Benutzer lesche, wu sich nie aagmäldet hän?';
 $s_edit_user_title = 'Benutzer bearbeite';
+$s_account_unlock_button = 'Benutzerkonto entsperre';
 $s_reset_password_button = 'Passwort zrucksetze';
 $s_delete_user_button = 'Benutzer lesche';
 $s_reset_password_msg = 'Passwort zrucksetze schickt e Bstätigungs-URL iber E-Mail.';
@@ -697,6 +692,7 @@ $s_users_new = 'NEJ';
 $s_account_reset_protected_msg = 'Konto gschitzt. Passwort cha nit glescht wäre.';
 $s_account_reset_msg = 'Bstätigungsnochricht isch an Dyy E-Mail-Adräss gschickt wore …';
 $s_account_reset_msg2 = 'Läär Passwort isch gsetzt wore …';
+$s_account_unlock_msg = 'S Benutzerkonto isch entsperrt wore';
 $s_manage_user_protected_msg = 'Konto gschitzt. Zuegriffsrächt un Aktivitätsflag sin gschitzt. Anderi Optione sin gänderet wore …';
 $s_manage_user_updated_msg = 'Konto aktualisiert …';
 $s_email_user_updated_subject = 'Benutzerkonto aktualisiert';
@@ -788,7 +784,7 @@ $s_report_stay = 'Im Yygabmodus blybe';
 $s_selected_project = 'Gwehlt Projäkt';
 $s_valid_project_msg = 'Du muesch e giltig Projäkt uuswehle.';
 $s_signup_done_title = 'Benutzerkonte-Regischtrierig uusgfiert.';
-$s_password_emailed_msg = 'Glickwunsch. Du hesch Di erfolgryych regischtriert. Dir wird jetz e Bstätigungs-E-Mail gschickt go Dyy E-Mail-Adräss iberpriefe. Wänn Du s Gleich (Link) in dr E-Mail drucksch, wird Dyy Konto frej gschalte.';
+$s_password_emailed_msg = 'Glickwunsch. Du hesch Di erfolgryych regischtriert. Dir wird jetz e Bstätigungs-E-Mail gschickt go Dyy E-Mail-Adräss iberpriefe. Wänn Du de Link in dr E-Mail drucksch, wird Dyy Konto frej gschalte.';
 $s_no_reponse_msg = 'Du hesch sibe Täg Zyt go d Kontobstätigung uusfiere. Wänn Du d Kontobstätigung nit innerhalb vu sibe Täg uusfiersch, no wird s nej regischtriert Konto glescht.';
 $s_signup_captcha_request_label = 'Gib dr Code yy, wien er im Chaschte uf dr rächte Syte aazeigt wird:';
 $s_signup_info = 'Noch em Abschicke vu däm Formular un dr Iberpriefig vu Dyyne Antworte wird Dir e Bstätigungs-E-Mail an d Adräss gschickt, wu Du aagee hesch.<br />Mit däre Mail chasch Dyy Konto aktiviere. Wänn Du Dyy Konto nit innerhalb vu sibe Täg frej schaltsch, wird s Konto glescht.<br />Du muesch e giltigi E-Mail-Adräss aagee go d Bstätigungs-Mail iberchuu.';
@@ -847,6 +843,9 @@ $s_sort_label = 'Sortiere no:';
 $s_issue_id = 'Probläm #';
 $s_recently_visited = 'Letschti ufgmacht';
 $s_note_user_id_label = 'Aagmerkt dur:';
+$s_filter_match_type = 'Träffertyp';
+$s_filter_match_all = 'Alli Bedingige';
+$s_filter_match_any = 'Kei Bedingig';
 $s_none = 'keini';
 $s_current = 'aktuälli';
 $s_search = 'Sueche';
@@ -888,10 +887,10 @@ $s_update_bug_button = 'Bearbeite';
 $s_bug_assign_to_button = 'Zueordne zue';
 $s_bug_status_to_button = 'Status wächsle zue:';
 $s_reopen_bug_button = 'Wider ufmache';
+$s_close_bug_button = 'Zuemache';
 $s_move_bug_button = 'Verschiebe';
 $s_attached_files = 'Aaghängti Dateie';
 $s_publish = 'Vereffetlige';
-$s_cached = 'Zwischegspycheret';
 $s_add_user_to_monitor = 'Zuefiege';
 $s_bug_view_title = 'Einzelheite vu dr Uusgab aaluege';
 $s_no_users_monitoring_bug = 'Kei Benutzer beobachte des Probläm.';
@@ -934,11 +933,11 @@ $s_link_custom_field_to_project_button = 'Benutzerdefiniert Fäld zueordne';
 $s_linked_projects_label = 'Vergleichti Projäkt:';
 $s_custom_field_sequence = 'Reihefolg';
 $s_custom_field_sequence_label = 'Abfolg:';
-$s_custom_field_type_enum_string = '0:Tekscht,1:Zahle,2:Gleitkommazahle,3:Ufzellig,4:E-Mail,5:Kontrollchäschtli,6:Lischt,7:Mehfachuuswahl-Lischt,8:Datum,9:Uuswahlchäschtli';
+$s_custom_field_type_enum_string = '0:Tekscht,1:Zahle,2:Gleitkommazahle,3:Ufzellig,4:E-Mail,5:Kontrollchäschtli,6:Lischt,7:Mehfachuuswahl-Lischt,8:Datum,9:Uuswahlchäschtli, 10:Textarea';
 $s_confirm_used_custom_field_deletion = 'Des Fäld wird zur Zyt vu zmindescht eim Projäkt brucht. Wänn Du wyter machsch, no wäre alli Wärt fir des Fäld fir immer glescht. Dää Vorgang cha nit ruckgängig gmacht wäre. Zum s Fäld nit z lesche, druck bitte uf dr „Zruck“-Chnopf in Dyym Web-Browser. Go wytermache druck bitte uf dr „Fäld lesche“-Chnopf.';
 $s_confirm_custom_field_deletion = 'Witt des benutzerdefiniert Fäld un alli zuegherige Wärt wirkli lesche?';
 $s_field_delete_button = 'Fäld lesche';
-$s_confirm_custom_field_unlinking = 'Bisch sicher, ass des benutzerdefiniert Fäld us em Projäkt witt uuseneh un alli Wärt, wu s din het, witt lesche?';
+$s_confirm_custom_field_unlinking = 'Bisch sicher, ass des benutzerdefiniert Fäld us em Projäkt witt uuseneh. D Wärt wäre nit glescht, solang s benutzerdefiniert Fäld sälber nit glescht wird.';
 $s_field_remove_button = 'Fäld uuseneh';
 $s_hide_status = 'Status uusblände';
 $s_hide_status_label = 'Status uusblände:';
@@ -954,6 +953,8 @@ $s_monitored_by_label = 'Iberwacht dur:';
 $s_attachments = 'Aaghängti Datei(e)';
 $s_bytes = 'Bytes';
 $s_attachment_missing = 'Aahang fählt';
+$s_attachment_count = 'Aazahl vu Dateiaahäng';
+$s_view_attachments_for_issue = '%1$d Dateiaahäng fir dr Yytrag #%2$d aazeige';
 $s_sponsors = '%1$d Sponsor(e)';
 $s_sponsorship_added = 'Sponsoreschaft zuegfiegt';
 $s_sponsorship_updated = 'Sponsoreschaft aktualisiert';
@@ -981,10 +982,13 @@ $s_relationship_with_parent = 'Beziehig zum Original-Probläm';
 $s_delete_relationship_button = 'Lesche';
 $s_delete_relationship_sure_msg = 'Bisch sicher, ass Du die Beziehig witt lesche?';
 $s_relationship_warning_blocking_bugs_not_resolved = 'Nit alli Probläm, wu blockiere, sin scho glest oder zuegmacht.';
-$s_relationship_warning_blocking_bugs_not_resolved_2 = '<strong>OBACHT</strong>. Nit alli Probläm, wu blockiere, sin scho behobe oder zuegmacht.<br />Voreb Du ne <strong>behebsch/zuemachsch</strong>, sotte alli Probläm, wu s blockiere, erledigt, behobe oder zuegmacht wäre.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>OBACHT</b>. Nit alli Probläm, wu blockiere, sin scho behobe oder zuegmacht.<br />Voreb Du ne <b>behebsch/zuemachsch</b>, sotte alli Probläm, wu s blockiere, erledigt, behobe oder zuegmacht wäre.';
 $s_create_child_bug_button = 'Klon aalege';
 $s_bug_cloned_to = 'Probläm dupliziert';
 $s_bug_created_from = 'Probläm aagleit vu';
+$s_copy_from_parent = 'Wyteri Date vum Original-Yytrag kopiere';
+$s_copy_notes_from_parent = 'Notize kopiere';
+$s_copy_attachments_from_parent = 'Dateiaahäng kopiere';
 $s_viewing_bug_relationship_graph_title = 'Beziehigs-Grafik';
 $s_viewing_bug_dependency_graph_title = 'Abhängigkeits-Grafik';
 $s_relation_graph = 'Grafik vu dr Beziehige';
@@ -1095,8 +1099,9 @@ $s_tag_related_issues = 'Gmeinsami Yyträg (%1$s)';
 $s_tag_stats_attached = 'Zuegordneti Yyträg: %1$s';
 $s_tag_create = 'Markierig aalege';
 $s_show_all_tags = 'Alli';
-$s_time_tracking_billing_link = 'Abrächnig';
+$s_time_tracking_billing_link = 'Zyterfassig';
 $s_time_tracking = 'Zyterfassig';
+$s_time_tracking_time_spent = 'Inveschtierti Zyt:';
 $s_time_tracking_get_info_button = 'Zyterfassigs-Informatione abfroge';
 $s_time_tracking_cost_per_hour = 'Cheschte / Stund';
 $s_time_tracking_cost = 'Cheschte';
@@ -1141,8 +1146,6 @@ $s_month_september = 'Septämber';
 $s_month_october = 'Oktober';
 $s_month_november = 'Novämber';
 $s_month_december = 'Dezämber';
-
-
 $MANTIS_ERROR[ERROR_GENERIC] = 'S het e Fähler gee, derwylscht die Aktion uusgfiert woren isch. Du chasch des im zueständige Amman schrybe.';
 $MANTIS_ERROR[ERROR_SQL] = 'SQL-Fähler gfunde.';
 $MANTIS_ERROR[ERROR_REPORT] = 'In Dyynem Report het s e Fähler din.';
@@ -1163,7 +1166,6 @@ $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Zeichechette „%1$s“ nit gfunde
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Problämnotiz nit gfunde.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projäkt „%1$d“ nit gfunde.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Datebankfäld „%1$s“ nit gfunde.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Kei Verbindig zum FTP-Server.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Dr Problämbearbeiter het nit d Rächt go ne Probläm mit däm Status bearbeite.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'S git scho ne Projäkt mit däm Name. Gang zruck un wehl e andere Name.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Nit giltige Projäktname. Projäktnäme chenne nit läär syy.';
@@ -1194,6 +1196,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Name dopplet vorhande.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Zmindesch ei Projäkt brucht des Fäld no.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Nit giltige Wärt fir Fäld „%1$s“.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Nit giltigi Definition fir benutzerdefiniert Fäld';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Uugiltig benutzerdefiniert Fäldattribut (%1$s).';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP-Authentifizierig fähl gschlaa.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Verbindig zum LDAP-Server fähl gschlaa.';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Aktualisierig vum LDAP-Yytrag fähl gschlaa.';
@@ -1206,6 +1209,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'E Kategorii mit däm Name git s scho.
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Kei Kopiervorgang aagee.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Kategorii nit gfunde.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'D Kategorii „%1$s“ isch fir s Projäkt „%2$s“ nit gfunde wore.';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Die Kategori cha nit glescht wäre, wel si as „Standardkategori fir Verschiebige“ definiert isch.';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'E Version mit däm Name git s scho.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version „%1$s“ nit gfunde.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Dr Benutzername isch nit giltig. Erlaubt sin nume Buechstabe, Zahle, Läärzeiche, Pluszeiche, Pinkt, Binde- un Unterstrich.';
@@ -1243,6 +1247,7 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'S Event „%1$s“ isch nonig deklarier
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'S Plugin isch nit in MantisBT regischtriert.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'S Plugin isch scho inschtalliert.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'D Plugin-Syte isch nit gfunde wopre.';
+$MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Installation vum Plugin isch fählgschlaa: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Aktualisierig vum Plugin-Schema isch in Block #%1$s fählgschlaa.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'E nit bekannte Fähler „%1$s“ isch ufträte, derwylscht s „%2$s“-Plugin uusgfiert woren sich.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Im Fäld „%1$s“ het s e doppleti Spalte „%2$s“.';
@@ -1250,7 +1255,7 @@ $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Im Fäld „%1$s“ het s e nit giltig F
 $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Nit giltige Session-Handler.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Session-Variable „%1$s“ isch nit gfunde wore.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Dyy Sitzig isch uugiltig wore.';
-$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Nit giltig Formular Sicherheits-Token. Hesch s Formular us Versäh zweimol abgeschickt?';
+$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Nit giltig Formular Sicherheits-Token. Villt het d Sitzig e Momänt uusgsetzt. Oder Du hesch s Formular us Versäh zweimol abgeschickt.';
 $MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = 'Us Sicherheitsgrind stoht MantisBT nit z Verfiegig, wänn $g_crypto_master_salt in config_inc.php nit korräkt gsetzt isch.';
 $MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = 'S isch kei Quälle fir sicheri Zuefallszahle gfunde wore fir d Verschlisslig.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Uf die Syte cha nit mit däre Methode zuegriffe wäre.';

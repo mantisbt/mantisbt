@@ -1,42 +1,35 @@
 <?php
-# MantisBT - A PHP based bugtracking system
-
-# MantisBT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# MantisBT is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * Language File - Tagalog (Tagalog)
+/** MantisBT - a php based bugtracking system
  *
- * **********************************************************************
- * ** This file is generated from translations stored in translatewiki **
- * ** Information on Copyright/License for translatewiki translations  **
- * ** is available at http://translatewiki.net/wiki/Project:About      **
- * **********************************************************************
- * **                                                                  **
- * **                      DO NOT UPDATE MANUALLY                      **
- * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
- * ** Detailed instructions on how to create or update translations at **
- * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
- * **********************************************************************
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Tagalog (Tagalog)
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
-*/
+ *
+ * @author AnakngAraw
+ * @author Jojit fb
+ * @author Mirzali
+ * @author Sky Harbor
+ */
 
 $s_actiongroup_menu_move = 'Ilipat';
 $s_actiongroup_menu_copy = 'Sipiin/Kopyahin';
@@ -46,6 +39,7 @@ $s_actiongroup_menu_delete = 'Burahin';
 $s_actiongroup_menu_resolve = 'Lunasan';
 $s_actiongroup_menu_update_priority = 'Isapanahon ang Priyoridad (mga dapat unahin)';
 $s_actiongroup_menu_update_status = 'Isapanahon ang Kalagayan';
+$s_actiongroup_menu_update_severity = 'Isapanahon ang Katindihan';
 $s_actiongroup_menu_update_view_status = 'Isapanahon ang Kalagayan ng Tanawin';
 $s_actiongroup_menu_update_category = 'Isapanahon ang Kaurian (kategorya)';
 $s_actiongroup_menu_set_sticky = 'Itakda/Huwag itakda bilang Madikit';
@@ -93,6 +87,7 @@ $s_bug_monitor = 'Minamatyagang Labas (edisyon)';
 $s_bug_end_monitor = 'Wakas sa Pagmamatyag ng Labas (edisyon)';
 $s_announcement = 'Pabatid-Bayan';
 $s_stays_on_top = 'Mananatili sa Itaas';
+$s_bugnote_link_title = 'Tuwirang kawing sa sulat';
 $s_delete_bugnote_button = 'Burahin ang Tala';
 $s_delete_bugnote_sure_msg = 'Nakatitiyak ka bang nais mong burahin ang talang ito?';
 $s_bug_relationships = 'Mga kaugnayan';
@@ -130,6 +125,8 @@ $s_select_option = '(pumili)';
 $s_bug_actiongroup_access = 'Wala kang naaangkop na mga kapahintulutan upang isagawa ang ganyang galaw.';
 $s_bug_actiongroup_status = 'Hindi mababago patungo sa hinihiling na katayuan ang labas na ito.';
 $s_bug_actiongroup_category = 'Hindi mababago patungo sa hinihiling na kaurian ang labas na ito.';
+$s_bug_actiongroup_handler = 'Ang hiniling na tagagamit ay hindi pinapahintulutang panghawakan ang paksang ito';
+$s_bug_actiongroup_version = 'Ang hiniling na bersiyon ay hindi umiiral sa proyekto ng labas na ito';
 $s_close_bugs_conf_msg = 'Nakatitiyak ka bang nais mong isara na ang mga labas na ito?';
 $s_delete_bugs_conf_msg = 'Nakatitiyak ka bang nais mong burahin ang mga labas na ito?';
 $s_move_bugs_conf_msg = 'Ilipat ang mga labas/edisyon patungo sa';
@@ -156,17 +153,20 @@ $s_view_status_group_bugs_button = 'Isapanahon ang Kalagayan ng Tanawin';
 $s_set_sticky_group_bugs_button = 'Itakda/Huwag itakda bilang Madikit';
 $s_fixed_in_version_group_bugs_button = 'Isapanahon ang Nakapirming Bersyon';
 $s_target_version_group_bugs_button = 'Isapanahon ang Tinutudla/Puntiryang Bersyon';
+$s_update_severity_title = 'Isapanahon ang Katindihan';
+$s_update_severity_msg = 'Piliin ang katindihan ng paksa';
+$s_update_severity_button = 'Isapanahon ang Katindihan';
 $s_hide_button = 'Ang napili lamang ang ipakita';
 $s_printing_preferences_title = 'Piliin ang mga kahanayang ililimbag';
 $s_printing_options_link = 'Mga Mapagpipilian sa Paglilimbag';
 $s_bugnote_title = 'Itala/Tandaan ang Tagahawak';
 $s_bugnote_date = 'Petsa ng tala';
-$s_bugnote_description = 'Paglalarawan ng tala/itinala';
-$s_error_no_proceed = 'Pakigamit ang pinduting "Bumalik" (\'\'Back\'\') na nasa iyong pangtingin-tingin sa web upang makabalik sa naunang pahina.  Doon mo maaaring itama ang anumang mga sularining napag-alaman sa kamaliang ito o pumili ng iba pang galaw. Maaari ka ring pumindot ng isang pagpipilian mula sa halang/bareta ng talaan ng pagpipilian upang makapunta ng tuwiran patungo sa isang bagong seksyon.';
+$s_bugnote_description = 'Paglalarawan sa itinala';
+$s_error_no_proceed = 'Pakigamit ang pindutang "Bumalik" na nasa iyong pangtingin-tingin sa web upang makabalik sa naunang pahina.  Doon mo maaaring itama ang anumang mga sularining napag-alaman sa kamaliang ito o pumili ng iba pang galaw. Maaari ka ring pumindot ng isang pagpipilian mula sa halang/bareta ng talaan ng pagpipilian upang makapunta ng tuwiran patungo sa isang bagong seksyon.';
 $s_login_error = 'Maaaring hindi pinapagana o hinadlangan ang akawnt mo o hindi tama ang ipinasok mong pangalan ng tagagamit/hudyat.';
 $s_login_cookies_disabled = 'Maaaring hindi alam ng pantingin-tingin (\'\'browser\'\') mo kung paano hawakan ang mga "otap" (\'\'cookies\'\'), o tumatangging harapin ang mga ito.';
 $s_go_back = 'Bumalik';
-$s_proceed = 'Pindutin dito upang magpatuloy';
+$s_proceed = 'Magpatuloy';
 $s_switch = 'Pagpalitin';
 $s_logged_in_as = 'Nakalagda bilang';
 $s_prefix_for_deleted_users = 'tagagamit';
@@ -186,14 +186,15 @@ $s_resolution_enum_string = '10:bukas,20:nakumpuni na,30:binuksan muli,40:hindi 
 $s_projection_enum_string = '10:wala,30:baguhin ng kaunti,50:maliit na pagkukumpuni,70:malaking pagbabago,90:muling pagdidisenyo';
 $s_eta_enum_string = '10:wala,20:< 1 araw,30:2-3 mga araw,40:< 1 linggo,50:< 1 buwan,60:> 1 buwan';
 $s_sponsorship_enum_string = '0:Hindi pa bayad,1:Hiniling,2:Bayad na';
-$s_new_account_subject = 'Pagpapatala/rehistrasyon ng kuwenta';
-$s_new_account_greeting = 'Salamat sa iyong pagpapatala.  Mayroon kang akawnt na may pangalan ng tagagamit na "%1$s". Upang makumpleto ang pagpapatala mo, dalawin ang sumusunod na URL (tiyaking naipasok ito bilang isahang guhit) at itakda ang sarili mong hudyat na pampasok:';
+$s_new_account_subject = 'Pagpapatala/rehistrasyon ng account';
+$s_new_account_greeting = 'Salamat sa iyong pagpapatala.  Mayroon kang kuwenta na may pangalan ng tagagamit na "%1$s". Upang makumpleto ang pagpapatala mo, dalawin ang sumusunod na URL (tiyaking naipasok ito bilang isahang guhit) at itakda ang sarili mong hudyat na pampasok:';
+$s_new_account_greeting_admincreated = 'Lumikha ang tagagamit na si %1$s ng isang akawnt para sa iyo na may pangalan ng tagagamit na "%2$s".  Upang makumpleto ang iyong pagtatala, dalawin ang sumusuno na URL (tiyaking nakapasok ito bilang isang isahang guhit) at itakda ang iyong hudyat ng pagpunta:';
 $s_new_account_username = 'Pangalan ng tagagamit:';
 $s_new_account_message = 'Kung hindi mo hiniling ang anumang pagpapatala, balewalain ang mensaheng ito at walang mangyayari.';
 $s_new_account_do_not_reply = 'HUWAG TUMUGON SA MENSAHENG ITO';
 $s_new_account_email = 'E-liham:';
 $s_new_account_IP = 'Malayong adres ng IP:';
-$s_new_account_signup_msg = 'Nalikha na ang sumusunod na kuwenta:';
+$s_new_account_signup_msg = 'Nalikha na ang sumusunod na account:';
 $s_reset_request_msg = 'Mayroong humiling (maaaring ikaw) ng isang pagbabago ng hudyat sa pamamagita ng pagpapatotoo ng e-liham. Kung hindi ikaw ito, huwag pansinin ang mensaheng ito at walang mangyayari.
 
 Kung hiniling ang pagpapatotoong ito, dalawin ang sumusunod na URL upang mabago ang iyong hudyat:';
@@ -247,23 +248,23 @@ $s_email_description = 'Paglalarawan';
 $s_email_additional_information = 'Karagdagang Kabatiran';
 $s_email_steps_to_reproduce = 'Mga Hakbang upang Muling Malikha';
 $s_account_protected_msg = 'Nakasanggalang ang kuwenta/akawnt.  Hindi mababago ang mga katakdaan...';
-$s_account_removed_msg = 'Natanggal na ang akawnt/kuwenta mo...';
+$s_account_removed_msg = 'Natanggal na ang account mo...';
 $s_confirm_delete_msg = 'Nakatitiyak ka bang nais mo talagang burahin ang kuwenta/akawnt mo?';
-$s_delete_account_button = 'Burahin ang Kuwenta/Akawnt';
+$s_delete_account_button = 'Burahin ang Account';
 $s_manage_profiles_link = 'Mga Talaan ng Katangian';
 $s_change_preferences_link = 'Mga kagustuhan';
-$s_edit_account_title = 'Baguhin ang Kuwenta/Akawnt';
+$s_edit_account_title = 'Baguhin ang Account';
 $s_username = 'Pangalan ng tagagamit';
 $s_realname = 'Tunay na Pangalan';
 $s_email = 'E-liham';
-$s_password = 'Hudyat';
+$s_password = 'Password';
 $s_no_password_change = 'Ang hudyat ay nasa ilalim ng kapangyarihan ng ibang sistema, kaya\'t hindi mababago rito.';
 $s_confirm_password = 'Tiyakin ang Hudyat';
 $s_access_level = 'Antas ng Pagpasok/Akseso';
 $s_update_user_button = 'Isapanahon ang Tagagamit';
 $s_verify_warning = 'Napatotohanan na ang kabatiran hinggil sa iyong kuwenta. Hindi na ngayon angkop/mabisa ang natanggap mong mensahe hinggil sa pagtitiyak ng akawnt.';
 $s_verify_change_password = 'Dapat kang magtakda ng isang hudyat dito upang mapahintulutan kang makalagdang muli.';
-$s_default_account_preferences_title = 'Mga Kagustuhan para sa Kuwenta/Akawnt';
+$s_default_account_preferences_title = 'Mga Kagustuhan para sa Account';
 $s_default_project = 'Likas na Nakatakdang Proyekto';
 $s_refresh_delay = 'Nabalam na Pagsasariwa';
 $s_minutes = 'mga minuto';
@@ -286,13 +287,13 @@ $s_email_bugnote_limit = 'Magpadala ng e-liham hinggil sa Hangganan ng mga Tala'
 $s_language = 'Wika';
 $s_update_prefs_button = 'Isapanahon ang mga Kagustuhan';
 $s_reset_prefs_button = 'Muling Itakda ang mga Kagustuhan';
+$s_timezone = 'Sona ng Oras';
 $s_prefs_reset_msg = 'Naitakda nang muli ang mga kagustuhan...';
 $s_prefs_updated_msg = 'Naisapanahon na ang mga kagustuhan...';
 $s_profile_added_msg = 'Naidagdag ang talaan ng katangian...';
 $s_profile_deleted_msg = 'Nabura ang talaan ng katangian...';
 $s_edit_profile_title = 'Baguhin ang Talaan ng Katangian';
 $s_platform = 'Batalan (plataporma)';
-$s_operating_system = 'Sistema sa Pagpapatakbo';
 $s_additional_description = 'Karagdagang Paglalarawan';
 $s_update_profile_button = 'Isapanahon ang Talaan ng Katangian';
 $s_profile_defaulted_msg = 'Naisapanahon na ang likas na nakatakdang talaan ng katangian...';
@@ -310,7 +311,7 @@ $s_update_sponsorship_button = 'Baguhin ang Kalagayan ng Pagbabayad';
 $s_no_sponsored = 'Walang natagpuang mga may pagtataguyod na labas na Nakatalaga Sa iyo.';
 $s_own_sponsored = 'Mga Labas na Itinaguyod Mo:';
 $s_issues_handled = 'Mga Labas Na May Pagtataguyod Na Nakatalaga Sa Iyo:';
-$s_no_own_sponsored = 'Walang kang tinangkilik na anumang mga labas.';
+$s_no_own_sponsored = 'Wala kang tinangkilik na anumang mga labas.';
 $s_sponsor = 'Tagapagtaguyod';
 $s_sponsor_verb = 'Tagapagtaguyod';
 $s_amount = 'Bilang/Halaga';
@@ -340,14 +341,16 @@ $s_close_immediately = 'Isara kaagad:';
 $s_closed_bug_title = 'Burahin ang Labas';
 $s_bug_deleted_msg = 'Nabura na ang labas...';
 $s_delete_bug_sure_msg = 'Nakatitiyak ka bang nais mong burahin ang labas na ito?';
-$s_delete_bug_button = 'Burahin ang Labas';
-$s_monitor_bug_button = 'Subaybayan ang Labas';
+$s_delete_bug_button = 'Burahin';
+$s_monitor_bug_button = 'Subaybayan';
 $s_unmonitor_bug_button = 'Wakasan ang Pagsubaybay';
 $s_file_upload_msg = 'Matagumpay ang pagkakarga ng talaksan.';
 $s_upload_file = 'Ikarga ang Talaksan';
+$s_upload_files = 'Ikarga ang mga Talaksan';
 $s_select_file = 'Piliin ang Talaksan';
+$s_select_files = 'Piliin ang mga Talaksan';
 $s_upload_file_button = 'Ikarga ang Talaksan';
-$s_max_file_size = 'Pinakamataas na sukat';
+$s_upload_files_button = 'Ikarga ang mga Talaksan';
 $s_bug_reopened_msg = 'Muling binuksan ang labas...';
 $s_reopen_add_bugnote_title = 'Idagdag Ang Itinalang Dahilan Para Sa Muling Pagbubukas ng Labas';
 $s_bugnote_add_reopen_button = 'Magdagdag ng Tala at Muling Buksan ang Labas';
@@ -360,13 +363,15 @@ $s_from = 'Mula kay';
 $s_to = 'Para kay';
 $s_sent_you_this_reminder_about = 'nagpadala sa iyo ng paalalang ito na tungkol sa';
 $s_bug_reminder = 'Magpadala ng isang paalala';
-$s_reminder_sent_to = 'Ipinadala ang paalala patungo kay:';
+$s_reminder_sent_to = 'Ipinadala ang paalala sa:';
 $s_bug_send_button = 'Ipadala';
 $s_reminder = 'Paalala';
 $s_reminder_explain = 'Ipapadala ang pabatid na ito sa nakatalang mga tatanggap na humihiling ng balik-ulat hinggil sa labas na ito.';
 $s_reminder_monitor = 'Magsisimula ring matyagan ng mga tatanggap na ito ang labas. Maaari nilang pahintuin ang pagtanggap ng sipi sa pamamagitan ng pindutang Huwag Matyagan.';
 $s_reminder_store = 'Itatabi ang talang ito na kasama ng labas.';
 $s_confirm_sponsorship = 'Pakitiyak kung nais mong itaguyod ang labas na %1$d para sa %2$s.';
+$s_stick_bug_button = 'Idikit';
+$s_unstick_bug_button = 'Huwag idikit';
 $s_bug_updated_msg = 'Matagumpay na naisapanahon ang labas...';
 $s_back_to_bug_link = 'Balikan Ang Labas';
 $s_update_simple_link = 'Payak na Pagsasapanahon';
@@ -403,6 +408,8 @@ $s_view_revisions = 'Tingnan ang mga Pagbabago';
 $s_revision = 'Pagbabago';
 $s_revision_by = '%1$s ni %2$s';
 $s_revision_drop = 'Ibagsak';
+$s_bug_revision_dropped_history = 'Inilaglag ang Pagbabago sa Bug';
+$s_bugnote_revision_dropped_history = 'Inilaglag ang Pagbabago sa Sulat';
 $s_all_revisions = 'Lahat ng mga Pagbabago';
 $s_back_to_issue = 'Bumalik sa Labas';
 $s_confirm_revision_drop = 'Nakatitiyak ka bang nais mong ibagsak ang pagbabago ng depektong ito?';
@@ -420,21 +427,22 @@ $s_closed_bug_button = 'Isara ang Labas';
 $s_bugnote_updated_msg = 'Matagumpay na naisapanahon ang tala...';
 $s_hide_content = 'Itago ang Nilalaman';
 $s_show_content = 'Ipakita ang Nilalaman';
-$s_total_queries_executed = '%1$d kabuoan ng naisakatuparang mga katanungan.';
-$s_unique_queries_executed = '%1$d natatanging mga katanungang naisakatuparan na.';
+$s_total_queries_executed = '%1$d kabuoan ng mga katanungang nasagot na.';
+$s_unique_queries_executed = '%1$d natatanging mga katanungang nasagot na.';
 $s_memory_usage_in_kb = 'paggamit ng alaala: %1$s KB';
 $s_please_report = 'Pakiulat ito sa %1$s.';
-$s_click_to_login = 'Pindutin dito upang makalagda';
+$s_click_to_login = 'Lumagda';
 $s_warning_plain_password_authentication = '<strong>BABALA:</strong> Ginagamit ang payak na pagpapatotoo ng hudyat, ilalantad nito sa mga tagapangasiwa ang iyong mga hudyat.';
 $s_warning_default_administrator_account_present = '<strong>BABALA:</strong> Dapat na huwag mong paganahin ang likas na nakatakdang akawnt ng \'tagapangasiwa\' o baguhin ang hudyat nito.';
 $s_warning_admin_directory_present = '<strong>BABALA:</strong> Dapat tanggalin ang direktoryo ng tagapangasiwa.';
-$s_error_database_version_out_of_date_1 = '<strong>KAMALIAN:</strong> Tila wala na sa panahon ang kayarian ng kalipunan ng dato (konpigurasyon(bersyon ng kalipunan ng dato) ay 0 at umiiral ang lumang mga tabla ng pagtataas ng uri). Nagpakilala ang Bersyong 1.x ng mantis ng isang bagong proseso ng pagtataas ng uri. Tila nagtataas ka ng uri mula sa isang Pakawalang 0.XX. Magtaas lamang po ng uri patungong 1.0.8 o 1.1.X, kasunod ang pagtaas ng uri papuntang 1.2.';
 $s_error_database_no_schema_version = '<strong>KAMALIAN:</strong> Tila wala na sa panahon ang kayarian ng kalipunan ng dato (ang konpigurasyon o pagkakaayos [bersyon ng kalipunan ng dato] ay 0 at hindi umiiral ang lumang mga tabla ng pagtataas ng uri). Pakisuri kung tumatakbo ang iyong kalipunan ng dato - hindi namin makuha ang bersyon ng plano ng kalipunan ng dato. Hindi nagpabalik ang Tabla ng Konpigurasyon o Pagkakaayos ng isang tanggap na bersyon ng plano ng kalipunan ng dato - humiling lamang ng suporta sa talaan ng mga susulatan ng mantis-saklolo (mantis-tulong) kung kailangan.';
 $s_error_database_version_out_of_date_2 = '<strong>BABALA:</strong> Maaaring wala na sa panahon ang kayarian ng kalipunan ng dato. Paki-isapanahon <a href="admin/install.php">dito</a> bago lumagda papasok.';
 $s_error_code_version_out_of_date = '<strong>BABALA:</strong> Mas napapanahon ang kayarian ng kalipunan ng dato kaysa nakaluklok na kodigo. Paki-isapanahon ang kodigo.';
 $s_login_page_info = 'Maligayang Pagdating sa Tagapagtugaygay ng Bakas ng Labas.';
 $s_login_title = 'Lumagda';
-$s_save_login = 'Sagipin ang Paglagda';
+$s_save_login = 'Tandaan ang lagda kong papasok sa pantingin-tinging ito';
+$s_secure_session = 'Tiwasay na Pulong';
+$s_secure_session_long = 'Pahintulutan ang nakalaang panahon mo na magamit lamang mula sa adres ng IP na ito.';
 $s_choose_project = 'Pumili ng Proyekto';
 $s_login_button = 'Lumagda';
 $s_signup_link = 'Magpatala para sa isang bagong kuwenta';
@@ -484,8 +492,9 @@ $s_documentation_link = 'Dokumentasyon';
 $s_new_accounts_title = 'Mga Bagong Akawnt';
 $s_1_week_title = '1 Linggo';
 $s_never_logged_in_title = 'Hindi Lumagda Kailanman';
-$s_prune_accounts = 'Bawasan ang mga Kuwenta/Akawnt';
+$s_prune_accounts = 'Bawasan ang mga Account';
 $s_hide_inactive = 'Walang Sigla ang Pagtatago';
+$s_show_disabled = 'Ipakita ang Hindi Pinagagana';
 $s_manage_accounts_title = 'Pamahalaan ang mga Akawnt';
 $s_date_created = 'Petsa ng Pagkakalikha';
 $s_last_visit = 'Huling Pagdalaw';
@@ -503,7 +512,7 @@ $s_message = 'Mensahe';
 $s_default_notify = 'Inihahanda ang likas na pagtatakda ng mga pagbabandila ng pabatid sa';
 $s_action_notify = 'Inihahanda ang galaw ng mga pagbabandila ng pabatid sa';
 $s_notify_defaults_change_access = 'Sino ang makapagbabago ng likas na mga pagtatakda ng pagpapabatid';
-$s_notify_actions_change_access = 'Sino ang makapagbabago ng mga pagpapabatid';
+$s_notify_actions_change_access = 'Sino ang makapagbabago ng mga pabatid:';
 $s_revert_to_system = 'Burahin ang Lahat ng mga Pagtatakdang Pamproyekto';
 $s_revert_to_all_project = 'Burahin ang Partikular na mga Pagtatakdang Pamproyekto';
 $s_non_existent = 'hindi umiiral';
@@ -511,7 +520,7 @@ $s_current_status = 'Kasalukuyang Kalagayan';
 $s_next_status = 'Susunod na Kalagayan';
 $s_workflow = 'Daloy ng gawain';
 $s_workflow_thresholds = 'Mga Abot ng Katindihang Nakakaapekto sa Daloy ng Gawain';
-$s_threshold = 'Abot ng katindihan';
+$s_threshold = 'Bingit ng katindihan';
 $s_status_level = 'Kalagayan';
 $s_alter_level = 'Sino ang makapagbabago ng halagang ito';
 $s_validation = 'Pagtitiyak ng Daloy ng Gawain';
@@ -537,7 +546,7 @@ $s_resolved_status = 'Kalagayan kung saan itinuturing bilang nalutas na ang isan
 $s_readonly_status = 'Kalagayan kung saan nagiging mababasa lamang ang isang labas';
 $s_reopen_status = 'Kalagayan kung saan nakatakda ang isang muling binuksang labas';
 $s_reopen_resolution = 'Kalutasan kung saan nakatakda ang isang muling binuksang labas';
-$s_config_delete_sure = 'Nakatitiyak ka bang nais mong burahin ang mga pagtatakda para sa';
+$s_config_delete_sure = 'Natitiyak mo bang nais mong burahin ang mga pagtatakda para sa:';
 $s_in_project = 'sa loob ng proyekto';
 $s_delete_config_button = 'Burahin ang mga Pagtatakda';
 $s_configuration_report = 'Ulat sa Pagkakaayos';
@@ -548,6 +557,7 @@ $s_configuration_option_value = 'Halaga';
 $s_all_users = 'Lahat ng mga Tagagamit';
 $s_set_configuration_option = 'Itakda ang Pagpipilian ng Pagkakaayos';
 $s_delete_config_sure_msg = 'Nakatitiyak ka bang nais mong burahin ang ganitong pagpipilian ng pagkakaayos?';
+$s_configuration_corrupted = 'Masama na ang pagkakaayos ng kalipunan ng dato.';
 $s_plugin = 'Pampasak';
 $s_plugins_installed = 'Nakaluklok na mga Pampasak';
 $s_plugins_available = 'Makukuhang mga Pampasak';
@@ -626,10 +636,12 @@ $s_version_updated_msg = 'Matagumpay na naisapanahon ang bersyon...';
 $s_account_delete_protected_msg = 'Nakasanggalang ang kuwenta.  Hindi mabubura ang akawnt na ito.';
 $s_account_deleted_msg = 'Nabura na ang akawnt...';
 $s_delete_account_sure_msg = 'Nakatitiyak ka bang nais mong burahin ang akawnt na ito?';
+$s_notify_user = 'Ipaalam sa Tagagamit';
 $s_accounts_pruned_msg = 'Tinanggal na ang lahat ng mga akawnt na hindi lumagda kailan man at mas luma kaysa 1 linggo';
 $s_prune_accounts_button = 'Bawasan';
 $s_confirm_account_pruning = 'Nakatitiyak ka bang nais mong burahin ang lumang mga akawnt na hindi lumagda kailanman?';
 $s_edit_user_title = 'Baguhin ang tagagamit';
+$s_account_unlock_button = 'Huwag Ikandado ang Akawnt';
 $s_reset_password_button = 'Muling Itakda ang Hudyat';
 $s_delete_user_button = 'Burahin ang Tagagamit';
 $s_reset_password_msg = 'Ipinapadala ng Muling Itakda ang Hudyat ang URL ng pagtitiyak sa pamamagitan ng e-liham.';
@@ -640,8 +652,11 @@ $s_users_new = 'BAGO';
 $s_account_reset_protected_msg = 'Nakasanggalang ang akawnt. Hindi maitatakdang muli ang hudyat.';
 $s_account_reset_msg = 'Ipinadala na ang isang kahilingan ng pagpapatunay patungo sa napiling adres ng e-liham ng tagagamit. Sa paggamit nito, magkakaroon ng kakayahan ang tagagamit na baguhin ang kanilang hudyat.';
 $s_account_reset_msg2 = 'Nakatakda bilang walang laman ang hudyat...';
+$s_account_unlock_msg = 'Tinanggal na ang kandado at nabuksan na ang akawnt.';
 $s_manage_user_protected_msg = 'Nakasanggalang na akawnt. Nakasanggalang ang antas ng pagpunta at pagpapagana. At kung hindi, naisapanahon na ang kuwenta...';
-$s_manage_user_updated_msg = 'Matagumpay na naisapanahon ang kuwenta...';
+$s_manage_user_updated_msg = 'Matagumpay na naisapanahon ang account...';
+$s_email_user_updated_subject = 'Naisapanahon ang akawnt';
+$s_email_user_updated_msg = 'Isipanahon ng isang tagapangasiwa ang akawnt mo.  Ibinigay sa ibaba ang isang talaan ng mga pagbabagong ito.  Maaari mong isapanahon ang mga detalye ng iyong akawnt at mga nais anumang oras sa pamamagitan ng pagdalaw sa sumusunod na URL:';
 $s_main_link = 'Pangunahin';
 $s_view_bugs_link = 'Tingnan ang mga Labas';
 $s_report_bug_link = 'Iulat ang Labas';
@@ -663,6 +678,7 @@ $s_my_view_title_resolved = 'Nalutas na';
 $s_my_view_title_monitored = 'Minamatyagan Ko';
 $s_my_view_title_feedback = 'Naghihintay ng Balik-Ulat mula sa Akin';
 $s_my_view_title_verify = 'Naghihintay ng Pagtitiyak ng Kalutasan mula sa Akin';
+$s_my_view_title_my_comments = 'Mga Paksang Pinuna Ko';
 $s_news_added_msg = 'Naidagdag ang bagay na pambalita...';
 $s_news_deleted_msg = 'Nabura ang bagay na pambalita...';
 $s_delete_news_sure_msg = 'Nakatitiyak ka bang nais mong burahin ang bagay na pambalitang ito?';
@@ -756,6 +772,8 @@ $s_developer_by_resolution = 'Tagapag-unlad Ayon sa Kalutasan';
 $s_percentage_fixed = '% Naayos na';
 $s_percentage_errors = '% Mali';
 $s_errors = 'Mali';
+$s_opened = 'Nabuksan';
+$s_resolved = 'Nalutas na';
 $s_total = 'Kabuoan';
 $s_balance = 'Balanse/Natitira pa';
 $s_most_active = 'Pinakamasigla';
@@ -810,18 +828,19 @@ $s_query_delete_msg = 'Nakatitiyak ka bang nais mong burahin ang pansalang ito?'
 $s_view_simple_link = 'Tingnan ng Payak';
 $s_product_build = 'Kayarian ng Produkto';
 $s_system_profile = 'Paglalarawan ng Sistema';
-$s_update_bug_button = 'Isapanahon ang Labas';
+$s_update_bug_button = 'Baguhin';
 $s_bug_assign_to_button = 'Italaga Kay:';
 $s_bug_status_to_button = 'Baguhin ang Katayuan para Maging:';
-$s_reopen_bug_button = 'Muling Buksan ang Labas';
-$s_move_bug_button = 'Ilipat ang Labas';
+$s_reopen_bug_button = 'Muling Buksan';
+$s_close_bug_button = 'Isara';
+$s_move_bug_button = 'Ilipat';
 $s_attached_files = 'Nakalakip na mga Talaksan';
 $s_publish = 'Ilathala';
-$s_cached = 'Iniligpit na';
 $s_add_user_to_monitor = 'Idagdag';
+$s_bug_view_title = 'Tingnan ang mga Detalye ng Paksa';
 $s_no_users_monitoring_bug = 'Walang mga tagagamit na nagmamatyag sa labas na ito.';
 $s_users_monitoring_bug = 'Mga tagagamit na nagmamatyag sa labas na ito';
-$s_monitoring_user_list = 'Talaa ng Tagagamit';
+$s_monitoring_user_list = 'Talaan ng Tagagamit';
 $s_no_users_sponsoring_bug = 'Walang mga tagagamit na nagtataguyod sa labas na ito.';
 $s_users_sponsoring_bug = 'Mga tagagamit na nagtataguyod sa labas na ito';
 $s_sponsors_list = 'Talaan ng mga Tagapagtaguyod';
@@ -856,11 +875,11 @@ $s_custom_field_require_closed = 'Kailangan Sa Pagsasara';
 $s_link_custom_field_to_project_title = 'Ikawing ang pinasadyang hanay sa proyekto';
 $s_link_custom_field_to_project_button = 'Ikawing ang Pinasadyang Hanay';
 $s_custom_field_sequence = 'Pagkakasunud-sunod';
-$s_custom_field_type_enum_string = '0:Bagting,1:Numeriko/Bilang,2:Nakalutang,3:Enumerasyon,4:E-liham,5:Kahong lagayan ng tsek,6:Talaan,7:Talaan ng maraming pagpipilian,8:Petsa,9:Radyo';
+$s_custom_field_type_enum_string = '0:Bagting,1:Numeriko/Bilang,2:Nakalutang,3:Enumerasyon,4:E-liham,5:Kahong lagayan ng tsek,6:Talaan,7:Talaan ng maraming pagpipilian,8:Petsa,9:Radyo,10:Textarea';
 $s_confirm_used_custom_field_deletion = 'Pangkasalukuyang nakakawing ang hanay na ito sa kahit na isang proyekto lamang. Pampamalagian na ang pagbura sa hanay kapag ipinagpatuloy mo ang lahat ng mga halaga.  Hindi na mababawi pa ang galaw na ito kapag naisakatuparan na. Kung hindi mo nais burahin ang hanay na ito, pindutin ang pindutang Bumalik (\'\'Back\'\') na nasa iyong pantingin-tingin (\'\'browser\'\'). Upang magpatuloy, pindutin ang pindutang nasa ibaba';
 $s_confirm_custom_field_deletion = 'Nakatitiyak ka bang nais mong burahin ang pasadyang hanay na ito at lahat ng nakaugnay na mga halaga?';
 $s_field_delete_button = 'Burahin ang Hanay';
-$s_confirm_custom_field_unlinking = 'Nakatitiyak ka bang nais mong tanggalin (huwag ikawing) ang pasadyang hanay na ito mula sa proyekto at burahin ang lahat ng nakaugnay na mga halaga?';
+$s_confirm_custom_field_unlinking = 'Nakatitiyak ka bang nais mong tanggalin ang kawing ng pasadyang hanay na ito mula sa proyekto?  Ang mga halaga ay hindi buburahin basta\'t ang pasadyang hanay mismo ay hindi nabubura.';
 $s_field_remove_button = 'Tanggalin ang Hanay';
 $s_hide_status = 'Itago ang Kalagayan';
 $s_filter_closed = 'Nakasara na';
@@ -872,6 +891,10 @@ $s_advanced_filters = 'Mas Masulong na mga Pansala';
 $s_simple_filters = 'Payak na mga Pansala';
 $s_monitored_by = 'Minamatyagan Ni';
 $s_attachments = '(mga) kalakip';
+$s_bytes = 'mga bayt';
+$s_attachment_missing = 'Nawawala ang kalakip';
+$s_attachment_count = 'Bilang ng kalakip';
+$s_view_attachments_for_issue = 'Tingnana ng (mga) lakip na %1$d para sa paksang #%2$d';
 $s_sponsors = '%1$d (mga) tagapagtaguyod';
 $s_sponsorship_added = 'Idinagdag ang Pagtataguyod';
 $s_sponsorship_updated = 'Isinapanahon ang Pagtataguyod';
@@ -899,10 +922,13 @@ $s_relationship_with_parent = 'Kaugnayan sa pinagmulan/magulang na labas';
 $s_delete_relationship_button = 'Burahin';
 $s_delete_relationship_sure_msg = 'Nakatitiyak ka bang nais mong burahin ang ugnayang ito?';
 $s_relationship_warning_blocking_bugs_not_resolved = 'Hindi lahat ng mga anak ng labas na ito ay nalutas o naisara na.';
-$s_relationship_warning_blocking_bugs_not_resolved_2 = '<strong>BIGYANG-PANSIN</strong>. Hindi lahat ng mga anak ng labas na ito ay nalutas o naisara na.<br />Bago <strong>lutasin/isara</strong> ang isang pinagmulan/magulang na labas, dapat na lutasin o isara muna ang lahat ng mga labas na umuugnay bilang anak ng isang ito.';
-$s_create_child_bug_button = 'Lumikha ng Kahawig';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>BIGYANG-PANSIN</b>. Hindi lahat ng mga anak ng labas na ito ay nalutas o naisara na.<br />Bago <b>lutasin/isara</b> ang isang pinagmulan/magulang na labas, dapat na lutasin o isara muna ang lahat ng mga labas na umuugnay bilang anak ng isang ito.';
+$s_create_child_bug_button = 'Kahawig';
 $s_bug_cloned_to = 'Nagaya na ang labas';
 $s_bug_created_from = 'Ginawa ang labas mula sa';
+$s_copy_from_parent = 'Kopyahin ang dinugtungang dato mula sa magulang na labas';
+$s_copy_notes_from_parent = 'Kopyahin ang mga tala sa depekto';
+$s_copy_attachments_from_parent = 'Kopyahin ang mga kalakip';
 $s_viewing_bug_relationship_graph_title = 'Talangguhit ng Ugnayan';
 $s_viewing_bug_dependency_graph_title = 'Talangguhit ng Umaasa';
 $s_relation_graph = 'Talangguhit ng Kaugnayan';
@@ -928,7 +954,7 @@ $s_update_view_status = 'Isapanahon ang katayuan ng pagtanaw (pangmadla laban sa
 $s_show_list_of_users_monitoring_issue = 'Ipakita ang talaan ng mga tagagamit na nagmamatyag ng labas';
 $s_notes = 'MGA TALA';
 $s_add_notes = 'Magdagdag ng mga tala';
-$s_view_private_notes = 'Tingnan ang pansariling mga tala';
+$s_view_private_notes = 'Tingnan ang mga talang pansarili';
 $s_news = 'BALITA';
 $s_view_private_news = 'Tingnan ang pansariling balita';
 $s_manage_news = 'Pamahalaan ang balita';
@@ -962,7 +988,7 @@ $s_see_email_addresses_of_other_users = 'Tingnan ang mga adres ng e-liham ng iba
 $s_send_reminders = 'Ipadala ang mga paalala';
 $s_add_profiles = 'Magdagdag ng mga talaan ng katangian';
 $s_notify_of_new_user_created = 'Pagpapabatid hinggil sa bagong nalikhang tagagamit';
-$s_email_notification = 'PAGBIBIGAY-ALAM SA PAMAMAGITAN NG E-LIHAM';
+$s_email_notification = 'Pabatid ng e-liham';
 $s_status_changed_to = 'Nagbabago ang kalagayan patungo sa';
 $s_email_on_deleted = 'Magpadala ng e-liham kapag Nabura';
 $s_email_on_sponsorship_changed = 'Magpadala ng e-liham kapag nabago ang Pagtataguyod';
@@ -1011,12 +1037,16 @@ $s_tag_related_issues = 'Pinagsasaluhang mga Labas (%1$s)';
 $s_tag_stats_attached = 'Nakakabit na mga Labas: %1$s';
 $s_tag_create = 'Likhain ang Tatak';
 $s_show_all_tags = 'LAHAT';
-$s_time_tracking_billing_link = 'Pagtatala ng babayaran';
+$s_time_tracking_billing_link = 'Pagtunton sa Oras';
 $s_time_tracking = 'Pagtunton sa oras';
+$s_time_tracking_time_spent = 'Nagamit na oras:';
 $s_time_tracking_get_info_button = 'Kuhanin ang Kabatiran hinggil sa Pagtunton ng Oras';
 $s_time_tracking_cost_per_hour = 'Halaga / Oras';
 $s_time_tracking_cost = 'Halaga';
 $s_total_time_for_issue = 'Kabuoang oras para sa labas = %1$s';
+$s_time_tracking_stopwatch_start = 'Magsimula';
+$s_time_tracking_stopwatch_stop = 'Tumigil';
+$s_time_tracking_stopwatch_reset = 'Muling itakda';
 $s_access_denied = 'Tinanggihan ang Pagpunta.';
 $s_twitter_resolved = '%1$d: [%2$s] %3$s (nalutas ni %4$s sa loob ng %5$s)';
 $s_twitter_resolved_no_version = '%1$d: [%2$s] %3$s (nalutas ni %4$s)';
@@ -1037,8 +1067,21 @@ $s_due_date = 'Taning na Petsa';
 $s_overdue = 'Lampas na sa Taning';
 $s_view_account_title = 'Kabatiran ukol sa Tagagamit';
 $s_manage_user = 'Pamahalaan ang Tagagamit';
-
-
+$s_install_information = 'Kabatiran sa Paglalagay ng MantisBT';
+$s_database_information = 'Kabatirang Pang-Kalipunan ng Dato ng MantisBT';
+$s_path_information = 'Kabatirang Pangdaanan ng MantisBT';
+$s_month_january = 'Enero';
+$s_month_february = 'Pebrero';
+$s_month_march = 'Marso';
+$s_month_april = 'Abril';
+$s_month_may = 'Mayo';
+$s_month_june = 'Hunyo';
+$s_month_july = 'Hulyo';
+$s_month_august = 'Agosto';
+$s_month_september = 'Setyembre';
+$s_month_october = 'Oktubre';
+$s_month_november = 'Nobyembre';
+$s_month_december = 'Disyembre';
 $MANTIS_ERROR[ERROR_GENERIC] = 'Naganap ang isang kamalian habang isinasagawa ang galaw na ito. Maaaring naisin mong iulat ang kamaliang ito sa iyong pampook na tagapangasiwa.';
 $MANTIS_ERROR[ERROR_SQL] = 'Napansin ang kamaliang pang-SQL.';
 $MANTIS_ERROR[ERROR_REPORT] = 'May isang kamalian sa loob ng iyong ulat.';
@@ -1059,7 +1102,6 @@ $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Hindi natagpuan ang bagting na "%1
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Hindi natagpuan ang tala.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Hindi natagpuan ang proyektong "%1$d".';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Hindi natagpuan ang kahanayang "%1$s" ng kalipunan ng dato.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Hindi nagawang umugnay/kumunekta sa serbidor ng FTP.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Walang sapat na karapatan sa pagpunta/akseso ang tagahawak ng labas/edisyon upang panghawakan ang paksa sa ganitong kalagayan.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Umiiral na isang proyektong may ganyang pangalan.  Bumalik lamang po at magpasok/maglagay ng isang ibang pangalan.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Hindi tanggap ang tinukoy na pangalan ng proyekto.  Hindi maaaring walang laman ang mga pangalan ng proyekto.';
@@ -1102,9 +1144,10 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Umiiral na ang isang kauriang may gan
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Walang tinukoy na galaw para sa pagsipi.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Hindi natagpuan ang kaurian.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Hindi natagpuan ang kauriang "%1$s" na para sa proyektong "%2$s".';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Hindi maaaring burahin ang Kategoryang ito, dahil binigyan ito ng kahulugan bilang "Likas Na Nakatakdang Kategorya Para Sa Mga Paglilipat".';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Umiiral na ang isang bersyong may ganyang pangalan.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Hindi natagpuan ang bersyong "%1$s".';
-$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Hindi tanggap ang pangalan ng tagagamit.  Maaaring maglaman lamang ang mga pangalan ng tagagamit ng mga titik na pang-Latin, mga bilang, mga patlang, mga gitling, at mga salungguhit.';
+$MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Hindi tanggap ang pangalan ng tagagamit.  Maaaring maglaman lamang ang mga pangalan ng tagagamit ng mga titik na pang-Latin, mga bilang, mga patlang, mga gitling, kasama ang mga balap at mga salungguhit.';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = 'Hindi tanggap ang tunay na pangalan ng tagagamit.';
 $MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Hindi nagkaroon ng kinakailangang kaantasan ng pagpasok ang tagagamit.';
 $MANTIS_ERROR[ERROR_USER_REAL_MATCH_USER] = 'Ang napiling "Tunay na Pangalan" ay tumutugma sa pangalang panlagda ng ibang tagagamit. Pumili lamang po ng iba pa.';
@@ -1127,7 +1170,7 @@ $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Hindi tumutugma sa anuma
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Hindi tanggap o ginagamit na ang URL na pangpagtitiyak. Magpatala lamang muli.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Naabot na ang pinakamataas na bilang ng pangkasalukuyang isinasakatuparang mga kahilingan. Makipag-ugnayan lamang sa tagapangasiwa ng sistema.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Lilikha ng isang likaw/pag-ikot ang ganyang pagsasagawa/operasyon sa loob ng kahanayan/hirarkiya ng kabahaging proyekto.';
-$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Hindi mo mababago ang kaantasan ng pagpunta/akseso ng nag-iisang TAGAPANGASIWA sa loob ng sistema.';
+$MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Hindi mo mababago o mapapababa ang kaantasan sa pagpunta ng huling kuwenta ng tagapangasiwa.  Upang maisagawa ang hiniling mong galaw, kailangan mo munang lumikha ng ibang kuwentang pangtagapangasiwa.';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = 'Kamalian sa pagtuturo/pagpapapunta sa ibang pahina, siguraduhing walang mga patlang sa labas ng bloke ng PHP (&lt;?php ?&gt;) na nasa loob ng mga talaksang config_inc.php o custom_*.php.';
 $MANTIS_ERROR[ERROR_TAG_NOT_FOUND] = 'Hindi matagpuan ang isang tatak na may ganyang pangalan.';
 $MANTIS_ERROR[ERROR_TAG_DUPLICATE] = 'Umiiral na ang isang tatak na may ganyang pangalan.';
@@ -1146,6 +1189,8 @@ $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Naglalaman ang kahanayang "%1$s" ng hind
 $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Hindi tanggap na tagahawak ng inilaang panahon.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Hindi natagpuan ang pabagu-bagong halagang "%1$s" ng pinaglaanang panahon.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Naging hindi katanggap-tanggap ang inilaang panahon para sa iyo.';
-$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Hindi tanggap na pormularyo ng panandang pangseguridad.  Hindi mo ba sinasadyang ipadala ng dalawang ulit ang pormularyo?';
+$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Hindi katanggap-tanggap na pormularyo ng panandang pangseguridad.  Maaaring ito ay dulot ng isang gatol sa sesyon, hindi sinasadyang nagkadalawang ulit na pagpapadala ng pormularyo.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Hindi mapupuntahan ang pahinang ito na ginagamitan ng ganitong paraan.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Hindi tanggap na hanay ng pagsasaayos.';
+$MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Hindi tangap na latag ng petsa.';
+$MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Hindi nagawang isapanahon ang sona ng oras.';

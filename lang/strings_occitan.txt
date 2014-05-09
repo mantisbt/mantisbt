@@ -1,42 +1,32 @@
 <?php
-# MantisBT - A PHP based bugtracking system
-
-# MantisBT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# MantisBT is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * Language File - Occitan (occitan)
+/** MantisBT - a php based bugtracking system
  *
- * **********************************************************************
- * ** This file is generated from translations stored in translatewiki **
- * ** Information on Copyright/License for translatewiki translations  **
- * ** is available at http://translatewiki.net/wiki/Project:About      **
- * **********************************************************************
- * **                                                                  **
- * **                      DO NOT UPDATE MANUALLY                      **
- * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
- * ** Detailed instructions on how to create or update translations at **
- * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
- * **********************************************************************
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Occitan (occitan)
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
-*/
+ *
+ * @author Cedric31
+ */
 
 $s_actiongroup_menu_move = 'Desplaçar';
 $s_actiongroup_menu_copy = 'Copiar';
@@ -73,7 +63,7 @@ $s_private_project_msg = 'Aqueste projècte es PRIVAT.  Sols los administrators 
 $s_access_level_project = 'Nivèl d\'accès del projècte';
 $s_view_submitted_bug_link = 'Veire lo bòg somés %1$s';
 $s_assigned_projects = 'Projèctes assignats';
-$s_print = 'Estampar';
+$s_print = 'Imprimir';
 $s_jump = 'Cercar';
 $s_copy_users = 'Copiar los utilizaires';
 $s_copy_categories_from = 'Copiar las categorias a partir de';
@@ -132,6 +122,8 @@ $s_select_option = '(causir)';
 $s_bug_actiongroup_access = 'Aviatz pas las permissions apropriadas per efectuar aquesta accion.';
 $s_bug_actiongroup_status = 'Aqueste bòg pòt pas èsser cambiat per l\'estat demandat';
 $s_bug_actiongroup_category = 'Aqueste bòg pòt pas èsser cambiat per la categoria demandada';
+$s_bug_actiongroup_handler = 'L\'utilizaire demandat es pas autorizat a tractar aquesta question';
+$s_bug_actiongroup_version = 'La version demandada existís pas dins lo projècte d\'aqueste problèma';
 $s_close_bugs_conf_msg = 'Sètz segur que volètz tampar aquestes bugs ?';
 $s_delete_bugs_conf_msg = 'Sètz segur que volètz suprimir aquestes bugs ?';
 $s_move_bugs_conf_msg = 'Desplaçar cap a';
@@ -163,11 +155,11 @@ $s_update_severity_msg = 'Causissètz la severitat del bug';
 $s_update_severity_button = 'Metre a jorn la severitat';
 $s_hide_button = 'Afichar solament los bògues seleccionats';
 $s_printing_preferences_title = 'Causir los camps d\'imprimir';
-$s_printing_options_link = 'Opcions d\'estampatge';
+$s_printing_options_link = 'Opcions d\'impression';
 $s_bugnote_title = 'Autor de la nòta';
 $s_bugnote_date = 'Data de la nòta';
 $s_bugnote_description = 'Descripcion de la nòta';
-$s_error_no_proceed = 'Mercés d\'utilizar lo boton « Precedent » de vòstre navigador web per tornar a la pagina precedenta. I poiretz corregir los problèmas identificats per aquesta error o causir una autra accion. Tanben podètz causir una opcion de la barra de menut per anar dirèctament dins una seccion novèla.';
+$s_error_no_proceed = 'Mercés d\'utilizar lo boton « Precedent » de vòstre navigador web per tornar a la pagina precedenta. I poiretz corregir los problèmas identificats per aquesta error o causir una autra accion. Tanben podètz causir una opcion de la barra de menú per anar dirèctament dins una seccion novèla.';
 $s_login_error = 'Benlèu vòstre compte es desactivat o alara lo còde d\'utilizaire e lo senhal qu\'avètz picats son incorrèctes.';
 $s_login_cookies_disabled = 'Vòstre navigador sap pas gerir los testimònis o refusa de los gerir.';
 $s_go_back = 'Retorn';
@@ -299,7 +291,6 @@ $s_profile_added_msg = 'Perfil apondut...';
 $s_profile_deleted_msg = 'Perfil suprimit...';
 $s_edit_profile_title = 'Modificar un perfil';
 $s_platform = 'Plataforma';
-$s_operating_system = 'Sistèma operatiu';
 $s_additional_description = 'Descripcion complementària';
 $s_update_profile_button = 'Metre a jorn lo perfil';
 $s_profile_defaulted_msg = 'Perfil per defaut mes a jorn...';
@@ -352,9 +343,11 @@ $s_monitor_bug_button = 'Susvelhar';
 $s_unmonitor_bug_button = 'Arrestar la susvelhança del bòg';
 $s_file_upload_msg = 'Fichièr mandat amb succès...';
 $s_upload_file = 'Jónher un fichièr';
+$s_upload_files = 'Importar de fichièrs';
 $s_select_file = 'Seleccionar un fichièr';
+$s_select_files = 'Seleccionar de fichièrs';
 $s_upload_file_button = 'Mandar lo fichièr';
-$s_max_file_size = 'Talha max.';
+$s_upload_files_button = 'Telecargar de fichièrs';
 $s_bug_reopened_msg = 'Lo bòg es estat dobèrt tornamai...';
 $s_reopen_add_bugnote_title = 'Apondre una nòta per la redobertura del bòg';
 $s_bugnote_add_reopen_button = 'Apondre una nòta e tornar dobrir lo bòg';
@@ -367,7 +360,9 @@ $s_from = 'De';
 $s_to = 'A';
 $s_sent_you_this_reminder_about = 'vos a mandat un rampèl a prepaus de';
 $s_bug_reminder = 'Mandar un rampèl';
-$s_reminder_sent_to = 'Rampèl mandat a:';
+$s_reminder_sent_to = 'Rapèl mandat a';
+$s_reminder_sent_none = 'Cap de rapèl a pas pogut èsser mandat';
+$s_reminder_list_truncated = 'lista dels destinataris troncada';
 $s_bug_send_button = 'Mandar';
 $s_reminder = 'Rampèl';
 $s_reminder_explain = 'Aquesta nòta serà mandada als destinataris que susvelhan aqueste bòg.';
@@ -412,6 +407,8 @@ $s_view_revisions = 'Veire las revisions';
 $s_revision = 'Revision';
 $s_revision_by = '%1$s per %2$s';
 $s_revision_drop = 'Suprimir';
+$s_bug_revision_dropped_history = 'Nòta de bug suprimida';
+$s_bugnote_revision_dropped_history = ' Nòta de revision suprimida';
 $s_all_revisions = 'Totas las revisions';
 $s_back_to_issue = 'Tornar al bòg';
 $s_confirm_revision_drop = 'Sètz segur(à) que volètz suprimir aquesta revision del bòg ?';
@@ -437,13 +434,12 @@ $s_click_to_login = 'Se connectar';
 $s_warning_plain_password_authentication = '<strong>ATENCION :</strong> l\'autentificacion per senhal en clar es utilizada, aquò expausarà vòstre senhal als administrators.';
 $s_warning_default_administrator_account_present = '<strong>ATENCION :</strong> Vos caldriá desactivar lo compte per defaut « administrator » o cambiar son senhal.';
 $s_warning_admin_directory_present = '<strong>ATENCION :</strong> lo repertòri Admin deuriá èsser suprimit.';
-$s_error_database_version_out_of_date_1 = '<strong>ERROR :</strong> L\'estructura de la banca de donadas sembla obsoleta (config(databaseversion) es 0 e las taulas de mesa a jorn ancianas existisson). La version 1.x de MantisBT a apondut un procediment de mesa a jorn novèl. Sembla que sètz a metre a jorn dempuèi la version 0.XX. Metètz a jorn cap a 1.0.8 o 1.1.X d\'en primièr, puèi metètz a jorn cap a 1.2.';
-$s_error_database_no_schema_version = '<strong>ERROR :</strong> L\'estructura de la banca de donadas sembla obsoleta (config(databaseversion) es 0 e las taulas de mesa a jorn ancianas existisson pas). Verificatz que vòstra banca de donadas fonciona - podèm pas trobar la version de l\'esquèma de la banca de donadas. La taula « Config » a pas renviat una version valida de l\'esquèma - demandatz d\'ajuda sus la tièra de difusion mantis-help se fa mestièr.';
+$s_error_database_no_schema_version = '<strong>ERROR :</strong> L\'estructura de la banca de donadas sembla obsoleta (config(databaseversion) es 0 e las taulas de mesa a jorn ancianas existisson pas). Verificatz que vòstra banca de donadas fonciona - podèm pas trobar la version de l\'esquèma de la banca de donadas. La taula « Config » a pas renviat una version valida de l\'esquèma - demandatz d\'ajuda sus la lista de difusion mantis-help se fa mestièr.';
 $s_error_database_version_out_of_date_2 = '<strong>ATENCION :</strong> L\'estructura de la banca de donadas pòt èsser depassada. Metètz a jorn dempuèi <a href="admin/install.php">ici</a> abans de vos identificar.';
 $s_error_code_version_out_of_date = '<strong>ATENCION :</strong> L\'estructura de la banca de donadas es mai recenta que lo logicial installat. Metètz a jorn lo logicial.';
 $s_login_page_info = 'Benvenguda sul sistèma de gestion dels bògues.';
 $s_login_title = 'Utilizaire';
-$s_save_login = 'Memorizar l\'utilizaire';
+$s_save_login = 'Se remembrar de mon identificant sus aqueste ordenador.';
 $s_secure_session = 'Sesilha securizada';
 $s_secure_session_long = 'Restrenh la sesilha a aquesta adreça IP.';
 $s_choose_project = 'Causir un projècte';
@@ -475,6 +471,7 @@ $s_protected = 'Protegit';
 $s_create_user_button = 'Crear l\'utilizaire';
 $s_hide_disabled = 'Amagar desactivats';
 $s_filter_button = 'Filtrar';
+$s_default_filter = 'Filtre per defaut';
 $s_create_filter_link = 'Crear ligam permanent';
 $s_create_short_link = 'Crear ligam cort';
 $s_filter_permalink = 'Çaijós un ligam permanent cap al filtre actual :';
@@ -497,6 +494,7 @@ $s_1_week_title = '1 setmana';
 $s_never_logged_in_title = 'S\'es pas jamai connectat';
 $s_prune_accounts = 'Escafar comptes';
 $s_hide_inactive = 'Amagar inactius';
+$s_show_disabled = 'Afichar desactivat(s)';
 $s_manage_accounts_title = 'Gerir los comptes';
 $s_p = 'p';
 $s_date_created = 'Data de creacion';
@@ -515,7 +513,7 @@ $s_message = 'Messatge';
 $s_default_notify = 'Mesa a jorn dels estats de la notificacion per defaut a';
 $s_action_notify = 'Mesa a jorn dels estats de la notificacion d\'accion a';
 $s_notify_defaults_change_access = 'Cambiar los utilizaires abilitats a modificar los paramètres de notificacion per defaut';
-$s_notify_actions_change_access = 'Utilizaires abilitats a modificar los paramètres de notificacion';
+$s_notify_actions_change_access = 'Utilizaires abilitats a modificar los paramètres de notificacion :';
 $s_revert_to_system = 'Escafar totas las opcions dels projèctes';
 $s_revert_to_all_project = 'Escafar las opcions especificas al projècte';
 $s_non_existent = 'inexistent';
@@ -549,7 +547,7 @@ $s_resolved_status = 'Estat alquin un bòg es considerat coma resolgut';
 $s_readonly_status = 'Estat alquin un bòg pòt èsser modificat';
 $s_reopen_status = 'Estat alquin un bògue redobert es iniciat';
 $s_reopen_resolution = 'Resolucion a laquina un bòg redobert es iniciat';
-$s_config_delete_sure = 'Sètz segur que volètz suprimir la configuracion per';
+$s_config_delete_sure = 'Sètz segur que volètz suprimir la configuracion per :';
 $s_in_project = 'del projècte';
 $s_delete_config_button = 'Suprimir la configuracion';
 $s_configuration_report = 'Rapòrt de configuracion';
@@ -644,6 +642,7 @@ $s_accounts_pruned_msg = 'Totes los comptes de mai d\'una setmana e que se son p
 $s_prune_accounts_button = 'Suprimir';
 $s_confirm_account_pruning = 'Sètz segur(a) que volètz suprimir los comptes que se son pas jamai connectats ?';
 $s_edit_user_title = 'Modificar un utilizaire';
+$s_account_unlock_button = 'Desvarrolhar lo compte';
 $s_reset_password_button = 'Escafar lo senhal';
 $s_delete_user_button = 'Suprimir l\'utilizaire';
 $s_reset_password_msg = 'La reïnicializacion del senhal envia un iperligam de confirmacion per corrièr electronic.';
@@ -654,7 +653,8 @@ $s_users_new = 'NOVÈL';
 $s_account_reset_protected_msg = 'Aqueste compte es protegit. Podètz pas reïnicializar lo senhal.';
 $s_account_reset_msg = 'Lo messatge de confirmacion es estat mandat a vòstra adreça de corrièr electronic...';
 $s_account_reset_msg2 = 'Lo senhal del compte es estat mes a void...';
-$s_manage_user_protected_msg = 'Compte protegit. Accreditacion e activacion protegidas. Autrament, lo compte es estat mes a jorn...';
+$s_account_unlock_msg = 'Lo compte es estat desvarrolhat.';
+$s_manage_user_protected_msg = 'Compte protegit; los camps \'Nivèl d’accès\' e \'Activat\' pòdon pas èsser modificats. Los autres camps son ben estats meses a jorn.';
 $s_manage_user_updated_msg = 'Lo compte es estat mes a jorn...';
 $s_email_user_updated_subject = 'Compte mes a jorn';
 $s_email_user_updated_msg = 'Vòstre compte es estat mes a jorn per un administrator. Una lista de las modificacions es afichada çaijós. Podètz metre a jorn los detalhs e preferéncias de vòstre compte en visitant l\'URL seguenta :';
@@ -798,6 +798,9 @@ $s_sticky = 'Afichar los bògues recurrents';
 $s_issue_id = 'Bòg #';
 $s_recently_visited = 'Visitqt recentament';
 $s_priority_abbreviation = 'P';
+$s_filter_match_type = 'Tipe de correspondéncia';
+$s_filter_match_all = 'Totas las condicions';
+$s_filter_match_any = 'Quina condicion que siá';
 $s_none = 'cap';
 $s_current = 'actuala';
 $s_search = 'Cercar';
@@ -834,10 +837,10 @@ $s_update_bug_button = 'Modificar';
 $s_bug_assign_to_button = 'Assignar a :';
 $s_bug_status_to_button = 'Cambiar l\'estat en :';
 $s_reopen_bug_button = 'Tornar dobrir';
+$s_close_bug_button = 'Tampar';
 $s_move_bug_button = 'Desplaçar';
 $s_attached_files = 'Pèças juntas';
 $s_publish = 'Publicat';
-$s_cached = 'Mes en amagatal';
 $s_add_user_to_monitor = 'Apondre';
 $s_bug_view_title = 'Visualizar los detalhs del resultat';
 $s_no_users_monitoring_bug = 'Cap d\'utilizaire susvelha pas aqueste bòg.';
@@ -877,11 +880,11 @@ $s_custom_field_require_closed = 'Necessari a la tampadura';
 $s_link_custom_field_to_project_title = 'Ligar un camp personalizat al projècte';
 $s_link_custom_field_to_project_button = 'Ligar camp personalizat';
 $s_custom_field_sequence = 'Seguida';
-$s_custom_field_type_enum_string = '0:Cadena de caractèrs,1:Nombre entièr,2:Nombre real,3:Enumeracion,4:Corrièl,5:Casa de marcar,6:Lista,7:Lista de seleccion multipla,8:Data,9:Boton ràdio';
+$s_custom_field_type_enum_string = '0:Cadena de caractèrs,1:Nombre entièr,2:Nombre real,3:Enumeracion,4:Corrièl,5:Casa de marcar,6:Lista,7:Lista de seleccion multipla,8:Data,9:Boton ràdio,10:Textarea';
 $s_confirm_used_custom_field_deletion = 'Aqueste camp es actualament ligat a al mens un projècte.  Se contunhatz, totas las valors d\'aqueste camp seràn suprimidas.  Aqiesta accion pòt pas èsser anullada.  Se volètz pas suprimir aquel camp, clicatz sul boton Retorn de vòstre navigador.  Siquenon per suprimir aqueste champ, clicatz sul boton çaijós';
 $s_confirm_custom_field_deletion = 'Sètz segur(a) que volètz suprimir aquel camp personalizat e totas las valors associadas ?';
 $s_field_delete_button = 'Suprimir lo camp';
-$s_confirm_custom_field_unlinking = 'Sètz segur(a) que volètz suprimir (definitivament) aquel camp personalizat del projècte e atal escafar totas las valors qu\'i son associadas ?';
+$s_confirm_custom_field_unlinking = 'Sètz segur que volètz dissociar aqueste camp personalizat del projècte ? Las valors seràn pas suprimidas tant que lo camp personalizat serà pas suprimit.';
 $s_field_remove_button = 'Levar lo camp';
 $s_hide_status = 'Amagar l\'estat';
 $s_filter_closed = 'Tampat';
@@ -894,6 +897,9 @@ $s_simple_filters = 'Filtres simples';
 $s_monitored_by = 'Susvelhat per';
 $s_attachments = 'pèça(s) junta(s)';
 $s_bytes = 'octets';
+$s_attachment_missing = 'Pèça junta mancanta';
+$s_attachment_count = 'Nombre de pèças juntas';
+$s_view_attachments_for_issue = 'Veire %1$d pèça(s) junta(s) pel bug #%2$d';
 $s_sponsors = '%1$d comanditari(s)';
 $s_sponsorship_added = 'Comandita aponduda';
 $s_sponsorship_updated = 'Comandita mesa a jorn';
@@ -921,10 +927,13 @@ $s_relationship_with_parent = 'Relacion amb lo bòg parent';
 $s_delete_relationship_button = 'Suprimir';
 $s_delete_relationship_sure_msg = 'Sètz segur(a) que volètz suprimir aquesta relacion ?';
 $s_relationship_warning_blocking_bugs_not_resolved = 'Totes los filhs d\'aqueste bòg son pas encara resolguts o tampats.';
-$s_relationship_warning_blocking_bugs_not_resolved_2 = '<strong>ATENCION</strong>. Totes los filhs d\'aqueste bòg son pas encara resolguts o tampats.<br />Abans de <strong>resòlvre/tampar</strong> un bòg paire, totes sos bògues filhs religats deurián èsser resolguts o tampats.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>ATENCION</b>. Totes los filhs d\'aqueste bòg son pas encara resolguts o tampats.<br />Abans de <b>resòlvre/tampar</b> un bòg paire, totes sos bògues filhs religats deurián èsser resolguts o tampats.';
 $s_create_child_bug_button = 'Clonar';
 $s_bug_cloned_to = 'Bòg duplicat';
 $s_bug_created_from = 'Bòg generit dempuèi';
+$s_copy_from_parent = 'Copiar las donadas espandidas del paire';
+$s_copy_notes_from_parent = 'Copiar las nòtas';
+$s_copy_attachments_from_parent = 'Copiar las pèças juntas';
 $s_viewing_bug_relationship_graph_title = 'Grafic relacional';
 $s_viewing_bug_dependency_graph_title = 'Grafic de las dependéncias';
 $s_relation_graph = 'Grafic de las relacions';
@@ -945,12 +954,12 @@ $s_reopen_issue = 'Tornar dobrir un bòg';
 $s_view_private_issues = 'Veire los bògues privats';
 $s_update_readonly_issues = 'Metre a jorn un bòg qu\'es en lectura sola';
 $s_update_issue_status = 'Metre a jorn l\'estatut d\'un bòg';
-$s_set_view_status = 'Cambiar l\'estat d\'afichatge (public versus privat)';
-$s_update_view_status = 'Metre a jorn l\'estat d\'afichatge (public versus privat)';
+$s_set_view_status = 'Definir l\'estat d\'afichatge (public versus privat) al moment del rapòrt d\'un novèl bug o nòta';
+$s_update_view_status = 'Metre a jorn l\'estat d\'afichatge (public versus privat) dels bugs o nòtas existentas';
 $s_show_list_of_users_monitoring_issue = 'Afichar la lista dels utilizaires que susvelhan un bòg';
 $s_notes = 'NÒTAS';
 $s_add_notes = 'Apondre de nòtas';
-$s_view_private_notes = 'Veire las nòtas privadas';
+$s_view_private_notes = 'Veire las nòtas privadas dels autres utilizaires';
 $s_news = 'NOVÈLAS';
 $s_view_private_news = 'Afichar las novèlas privadas';
 $s_manage_news = 'Gerir las novèlas';
@@ -960,7 +969,7 @@ $s_delete_attachments = 'Suprimir las pèças juntas';
 $s_delete_attachment_button = 'Suprimir';
 $s_delete_attachment_sure_msg = 'Sètz segur(a) que volètz suprimir aquesta pèça junta ?';
 $s_upload_issue_attachments = 'Metre a jorn las pèças juntas d\'un bòg';
-$s_filters = 'filtres';
+$s_filters = 'Filtres';
 $s_save_filters = 'Enregistrar los filtres';
 $s_save_filters_as_shared = 'Enregistrar e partejar los filtres';
 $s_use_saved_filters = 'Utilizar los filtres enregistrats';
@@ -982,6 +991,7 @@ $s_handle_sponsored_issue = 'Tractar un bòg comanditat';
 $s_others = 'AUTRES';
 $s_see_email_addresses_of_other_users = 'Veire las adreças de corrièr dels autres utilizaires';
 $s_send_reminders = 'Mandar de rampèls';
+$s_receive_reminders = 'Recebre de rapèls';
 $s_add_profiles = 'Apondre de perfils';
 $s_notify_of_new_user_created = 'Senhalar la creacion d\'un utilizaire novèl';
 $s_email_notification = 'Notificacion per corrièr electronic';
@@ -1033,12 +1043,16 @@ $s_tag_related_issues = 'Bògues partejats (%1$s)';
 $s_tag_stats_attached = 'Bògues associats : %1$s';
 $s_tag_create = 'Crear la balisa';
 $s_show_all_tags = 'TOTES';
-$s_time_tracking_billing_link = 'Facturacion';
+$s_time_tracking_billing_link = 'Seguiment del temps';
 $s_time_tracking = 'Seguit del temps';
+$s_time_tracking_time_spent = 'Temps passat :';
 $s_time_tracking_get_info_button = 'Obténer l\'informacion sul seguit del temps';
 $s_time_tracking_cost_per_hour = 'Còst per ora';
 $s_time_tracking_cost = 'Còst';
 $s_total_time_for_issue = 'Temps total pel bòg = %1$s';
+$s_time_tracking_stopwatch_start = 'Aviar';
+$s_time_tracking_stopwatch_stop = 'Arrèst';
+$s_time_tracking_stopwatch_reset = 'Reïnicializar';
 $s_access_denied = 'Accès refusat.';
 $s_twitter_resolved = '%1$d: [%2$s] %3$s (resolgut per %4$s version %5$s)';
 $s_twitter_resolved_no_version = '%1$d: [%2$s] %3$s (resolgut per %4$s)';
@@ -1047,7 +1061,7 @@ $s_manage_columns_config = 'Gerir totas las colomnas';
 $s_all_columns_title = 'Totas las colomnas disponiblas';
 $s_csv_columns_title = 'Colomnas CSV';
 $s_view_issues_columns_title = 'Colomnas per afichatge';
-$s_print_issues_columns_title = 'Colomnas per estampar';
+$s_print_issues_columns_title = 'Colomnas per imprimir';
 $s_excel_columns_title = 'Colomnas Excel';
 $s_update_columns_as_global_default = 'Metre a jorn las colomnas per totes los projèctes';
 $s_update_columns_for_current_project = 'Metre a jorn las colomnas pel projècte actual';
@@ -1074,8 +1088,6 @@ $s_month_september = 'setembre';
 $s_month_october = 'octobre';
 $s_month_november = 'novembre';
 $s_month_december = 'decembre';
-
-
 $MANTIS_ERROR[ERROR_GENERIC] = 'Una error s\'es producha.  Mercés de contactar vòstre administrator.';
 $MANTIS_ERROR[ERROR_SQL] = 'Error SQL detectada.';
 $MANTIS_ERROR[ERROR_REPORT] = 'I aviá una error dins vòstre rapòrt.';
@@ -1096,14 +1108,13 @@ $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Cadena « %1$s » introbabla.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Nòta introbabla.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projècte « %1$d » introbable.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Camp de banca de donadas "%1$s" introbable.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Impossible de se connectar al servidor FTP.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Aquesta persona possedís pas las permissions requesidas per préner en carga aqueste bòg dins son estat actual.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Un projècte amb aqueste nom existís ja.  Mercés de tornar en arrièr e de picar un autre nom.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Nom de projècte especificat invalid.  Los noms de projècte pòdon pas èsser voids.';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Utilizaire amb lo nom "%1$s" pas trobat.';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'Cap d\'utilizaire amb l\'ID « %1$d » es pas estat trobat.';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'Las entresenhas de connexion enregistradas per vòstre navigador son pas validas.  Benlèu vòstre compte es estat suprimit ?';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Las preferéncias poirián èsser introbablas per aqueste utilizaire.';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'Las preferéncias son pas estadas trobablas per aqueste utilizaire.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Novèlas introbabla.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = 'Lo senhal correspond pas a la verificacion.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = 'Tablèu inesperat mas cadena recebuda per %1$s.';
@@ -1127,6 +1138,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Aquò\'s un nom duplicat.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Al mens un projècte utiliza encara aqueste camp.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Valor invalida pel camp « %1$s ».';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Definicion de camp personalizat invalida';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Proprietat de camp personalizat invalid (%1$s).';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'Fracàs d\'indentificacion per LDAP.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'Fracàs de connexion al servidor LDAP';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Fracàs de mesa a jorn de l\'enregistrament LDAP.';
@@ -1139,6 +1151,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Categoria duplicada.';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Cap de còpia pas especificada.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Categoria introbabla.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Categoria « %1$s » introbabla pel projècte « %2$s ».';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Aquesta categoria pòt pas èsser suprimida, perque es definida coma "Categoria per defaut pels desplaçaments".';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Version duplicada.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Version "%1$s" introbabla.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Nom d\'utilizaire invalid. Lo nom d\'utilizaire pòt pas conténer que las letras latinas, nombres, espacis, junhents, punts, signes mai e traches de soslinhament.';
@@ -1176,14 +1189,16 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'L\'eveniment « %1$s » es indefinit.';
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Lo plugin es pas enregistat amb MantisBT.';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Lo plugin ja es installat.';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'La pagina del plugin es introbabla.';
+$MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Fracàs de l\'installacion del plugin: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'La mesa a jorn del l\'esquèma pel ligicial antispam a fracassat en blôt #%1$s.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'Lo modul « %1$s » deu èsser mes a jorn abans de poder accedir a aquesta pagina.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Una error desconeguda « %1$s » s\'es produsida durant l\'execucion del logicial « %2$s ».';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Lo camp « %1$s » possedís pas mai d\'una colomna « %2$s ».';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Lo camp « %1$s » possedís una colomna invalida « %2$s »';
 $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Gestionari de sesilha invalid.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'La variabla de sesilha « %1$s » es pas estada trobada.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Vòstra sesilha es estada invalidada.';
-$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Geton de seguretat del formulari invalid. Avètz somes dos còps lo formulari per accident ?';
+$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Geton de seguretat del formulari invalid. Aquò pòt èsser degut a un depassament de relambi de la sesilha, o un mandadís en doble accidental del formulari.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Impossible d\'afichar aquesta pagina amb aquesta foncion.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Camp de triada invalid.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Format de data invalid.';

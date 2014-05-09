@@ -1,42 +1,33 @@
 <?php
-# MantisBT - A PHP based bugtracking system
-
-# MantisBT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# MantisBT is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * Language File - Croatian (Hrvatski)
+/** MantisBT - a php based bugtracking system
  *
- * **********************************************************************
- * ** This file is generated from translations stored in translatewiki **
- * ** Information on Copyright/License for translatewiki translations  **
- * ** is available at http://translatewiki.net/wiki/Project:About      **
- * **********************************************************************
- * **                                                                  **
- * **                      DO NOT UPDATE MANUALLY                      **
- * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
- * ** Detailed instructions on how to create or update translations at **
- * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
- * **********************************************************************
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Croatian (hrvatski)
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
-*/
+ *
+ * @author Bugoslav
+ * @author Herr Mlinka
+ */
 
 $s_all_projects = 'Svi projekti';
 $s_move_bugs = 'Premjesti bugove';
@@ -57,6 +48,8 @@ $s_go_back = 'Idi natrag';
 $s_proceed = 'Klikni ovdje za nastavak';
 $s_switch = 'Prebaci';
 $s_logged_in_as = 'Prijavljen kao';
+$s_prefix_for_deleted_users = 'suradnik';
+$s_administrator = 'administrator';
 $s_access_levels_enum_string = '10:pregled,25:prijava,40:ažuriranje,55:razvoj,70:upravljanje,90:administracija';
 $s_project_status_enum_string = '10:u razvoju,30:izdan,50:stabilan,70:zastario';
 $s_project_view_state_enum_string = '10:javan,50:privatan';
@@ -118,7 +111,6 @@ $s_profile_added_msg = 'Profil dodan...';
 $s_profile_deleted_msg = 'Obrisan profil...';
 $s_edit_profile_title = 'Editiraj profil';
 $s_platform = 'Platforma';
-$s_operating_system = 'Operacijski sustav';
 $s_additional_description = 'Dodatni opis';
 $s_update_profile_button = 'Ažuriraj profil';
 $s_profile_defaulted_msg = 'Polazni profil ažuriran...';
@@ -190,7 +182,7 @@ $s_add_bugnote_button = 'Dodaj bilješku';
 $s_bugnote_edit_link = 'Editiraj';
 $s_closed_bug_button = 'Zatvori bug';
 $s_bugnote_updated_msg = 'Bilješka je uspješno ažurirana...';
-$s_click_to_login = 'Klikni ovdje za prijavu';
+$s_click_to_login = 'Prijavi se';
 $s_login_page_info = 'Dobrodošli u HelpDesk';
 $s_login_title = 'Prijava';
 $s_save_login = 'Pohrani prijavu';
@@ -228,7 +220,7 @@ $s_edit_user_link = 'Editiraj korisnika';
 $s_project_added_msg = 'Projekt je uspješno dodan...';
 $s_category_added_msg = 'Kategorija je uspješno dodana...';
 $s_category_deleted_msg = 'Kategorija je uspješno obrisana...';
-$s_category_delete_sure_msg = 'Jeste li sigurni da želite obrisati kategoriju?';
+$s_category_delete_sure_msg = 'Jeste li sigurni da želite obrisati kategoriju?<br />Kategorija "%1$s" sadrži %2$d komponenata.';
 $s_delete_category_button = 'Obriši kategoriju';
 $s_edit_project_category_title = 'Editiraj kategoriju projekta';
 $s_update_category_button = 'Ažuriraj kategoriju';
@@ -387,13 +379,23 @@ $s_system_profile = 'Opis sustava';
 $s_update_bug_button = 'Ažuriraj bug';
 $s_reopen_bug_button = 'Ponovno otvori bug';
 $s_attached_files = 'Pridružene datoteke';
-
-
+$s_month_january = 'siječnja';
+$s_month_february = 'veljače';
+$s_month_march = 'ožujka';
+$s_month_april = 'travnja';
+$s_month_may = 'svibnja';
+$s_month_june = 'lipnja';
+$s_month_july = 'srpnja';
+$s_month_august = 'kolovoza';
+$s_month_september = 'rujna';
+$s_month_october = 'listopada';
+$s_month_november = 'studenoga';
+$s_month_december = 'prosinca';
 $MANTIS_ERROR[ERROR_GENERIC] = 'U toku ove akcije pojavila se greška. Možete prijaviti grešku administratoru.';
 $MANTIS_ERROR[ERROR_SQL] = 'SQL greška detektirana.';
 $MANTIS_ERROR[ERROR_REPORT] = 'Greška u izvješću.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Nije naznačena datoteka';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Tip datoteke nije dozvoljen';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Mapa ne postoji. Molimo Vas da provjerite postavke projekta.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Potrebno polje je prazno. Molimo Vas da ponovno provjerite ulazne podatke.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Potrebno polje "%1$s" je prazno. Molimo Vas da ponovno provjerite ulazne podatke.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Korisnički račun je zaštićen. Za to vrijeme Vam nije omogućen pristup.';

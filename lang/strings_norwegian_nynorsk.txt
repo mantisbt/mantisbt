@@ -1,42 +1,35 @@
 <?php
-# MantisBT - A PHP based bugtracking system
-
-# MantisBT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# MantisBT is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * Language File - Norwegian Nynorsk (‪Norsk (nynorsk)‬)
+/** MantisBT - a php based bugtracking system
  *
- * **********************************************************************
- * ** This file is generated from translations stored in translatewiki **
- * ** Information on Copyright/License for translatewiki translations  **
- * ** is available at http://translatewiki.net/wiki/Project:About      **
- * **********************************************************************
- * **                                                                  **
- * **                      DO NOT UPDATE MANUALLY                      **
- * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
- * ** Detailed instructions on how to create or update translations at **
- * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
- * **********************************************************************
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Norwegian Nynorsk (norsk nynorsk)
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
-*/
+ *
+ * @author Frokor
+ * @author Gunnernett
+ * @author Nghtwlkr
+ * @author Njardarlogar
+ */
 
 $s_actiongroup_menu_move = 'Flytt';
 $s_actiongroup_menu_copy = 'Kopier';
@@ -183,7 +176,7 @@ $s_account_removed_msg = 'Kontoen din er vorten fjerna.';
 $s_confirm_delete_msg = 'Er du sikker på at du ynskjer å sletta brukarkontoen din?';
 $s_delete_account_button = 'Slett konto';
 $s_manage_profiles_link = 'Profilar';
-$s_change_preferences_link = 'Preferansar';
+$s_change_preferences_link = 'Innstillingar';
 $s_edit_account_title = 'Endra brukarkonto';
 $s_username = 'Brukarnamn';
 $s_realname = 'Verkeleg namn';
@@ -206,7 +199,6 @@ $s_profile_added_msg = 'La til profil';
 $s_profile_deleted_msg = 'Sletta profil';
 $s_edit_profile_title = 'Endra profil';
 $s_platform = 'Plattform';
-$s_operating_system = 'Operativsystem';
 $s_additional_description = 'Tilleggsinformasjon';
 $s_add_profile_title = 'Legg til profil';
 $s_add_profile_button = 'Legg til profil';
@@ -224,7 +216,6 @@ $s_file_upload_msg = 'Fila vart lasta opp.';
 $s_upload_file = 'Last opp fil';
 $s_select_file = 'Vel fil';
 $s_upload_file_button = 'Last opp fil';
-$s_max_file_size = 'Maks. storleik';
 $s_from = 'Frå';
 $s_to = 'Til';
 $s_bug_send_button = 'Send';
@@ -258,7 +249,7 @@ $s_closed_bug_button = 'Lat att sak';
 $s_bugnote_updated_msg = 'Merknaden er vorten oppdatert.';
 $s_hide_content = 'Løyn innhald';
 $s_show_content = 'Vis innhald';
-$s_click_to_login = 'Trykk her for å logga inn';
+$s_click_to_login = 'Logg inn';
 $s_login_title = 'Innlogging';
 $s_save_login = 'Lagra innlogging';
 $s_choose_project = 'Vel prosjekt';
@@ -278,7 +269,7 @@ $s_project_delete_button = 'Slett prosjekt';
 $s_edit_project_title = 'Endra prosjekt';
 $s_project_name = 'Prosjektnamn';
 $s_edit_user_title = 'Endra brukar';
-$s_show_all_users = 'ALLE';
+$s_show_all_users = 'Alle';
 $s_users_unused = 'UNYTTA';
 $s_users_new = 'NYE';
 $s_account_reset_protected_msg = 'Brukarkontoen er verna. Kan ikkje nullstilla passord.';
@@ -388,7 +379,5 @@ $s_development_team = 'Utviklarlag';
 $s_overdue = 'Forseinka';
 $s_view_account_title = 'Brukarinformasjon';
 $s_manage_user = 'Handsam brukar';
-
-
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Fann ikkje sak %1$d';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Fann ikkje kategorien.';

@@ -1,42 +1,32 @@
 <?php
-# MantisBT - A PHP based bugtracking system
-
-# MantisBT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# MantisBT is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
-
-/** Macedonian (Македонски)
+/** MantisBT - a php based bugtracking system
  *
- * **********************************************************************
- * ** This file is generated from translations stored in translatewiki **
- * ** Information on Copyright/License for translatewiki translations  **
- * ** is available at http://translatewiki.net/wiki/Project:About      **
- * **********************************************************************
- * **                                                                  **
- * **                      DO NOT UPDATE MANUALLY                      **
- * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
- * ** Detailed instructions on how to create or update translations at **
- * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
- * **********************************************************************
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Macedonian (македонски)
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
  *
  * @author Bjankuloski06
+ * @author Rancher
  */
 
 $s_plugin_graph_title = 'Графикони за MantisBT';
@@ -49,7 +39,7 @@ $s_plugin_MantisGraph_status_link = 'По состојба';
 $s_plugin_MantisGraph_priority_link = 'По приоритет';
 $s_plugin_MantisGraph_severity_link = 'По сериозност';
 $s_plugin_MantisGraph_category_link = 'По категорија';
-$s_plugin_MantisGraph_resolution_link = 'По резолуција';
+$s_plugin_MantisGraph_resolution_link = 'По разложеност';
 $s_plugin_MantisGraph_graph_bug_page_link = 'Графикон';
 $s_plugin_MantisGraph_library = 'Графиконска библиотека за користење';
 $s_plugin_MantisGraph_bundled = 'Групирано';
@@ -67,18 +57,18 @@ $s_plugin_MantisGraph_graph_imp_status_title = 'Синтетички графи�
 $s_plugin_MantisGraph_graph_imp_priority_title = 'Синтетички графикони по приоритет';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Синтетички графикони по сериозност';
 $s_plugin_MantisGraph_graph_imp_category_title = 'Синтетички графикони по категорија';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Синтетички графикони по резолуција';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Синтетички графикони по разложеност';
 $s_plugin_MantisGraph_by_status_pct = 'По статус (%)';
 $s_plugin_MantisGraph_by_priority_pct = 'По приоритет (%)';
 $s_plugin_MantisGraph_by_severity_pct = 'По сериозност (%)';
 $s_plugin_MantisGraph_by_category_pct = 'По категорија (%)';
-$s_plugin_MantisGraph_by_resolution_pct = 'По резолуција (%)';
+$s_plugin_MantisGraph_by_resolution_pct = 'По разложеност (%)';
 $s_plugin_MantisGraph_by_severity_mix = 'По сериозност и статус';
 $s_plugin_MantisGraph_by_priority_mix = 'По приоритет и статус';
-$s_plugin_MantisGraph_by_resolution_mix = 'По резолуција и статус';
+$s_plugin_MantisGraph_by_resolution_mix = 'По разложеност и состојба';
 $s_plugin_MantisGraph_legend_still_open = 'Сè уште отворени';
 $s_plugin_MantisGraph_legend_resolved = 'Решени';
-$s_plugin_MantisGraph_legend_assigned = 'Назначени';
+$s_plugin_MantisGraph_legend_assigned = 'Доделено';
 $s_plugin_MantisGraph_legend_total = 'Вкупно';
 $s_plugin_MantisGraph_legend_opened = 'Отворени';
 $s_plugin_MantisGraph_legend_closed = 'Затворени';

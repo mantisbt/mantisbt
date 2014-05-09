@@ -1,47 +1,44 @@
 <?php
-# MantisBT - A PHP based bugtracking system
-
-# MantisBT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# MantisBT is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * Language File - Norwegian Bokmål (norsk bokmål)
+/** MantisBT - a php based bugtracking system
  *
- * **********************************************************************
- * ** This file is generated from translations stored in translatewiki **
- * ** Information on Copyright/License for translatewiki translations  **
- * ** is available at http://translatewiki.net/wiki/Project:About      **
- * **********************************************************************
- * **                                                                  **
- * **                      DO NOT UPDATE MANUALLY                      **
- * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
- * ** Detailed instructions on how to create or update translations at **
- * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
- * **********************************************************************
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Norwegian Bokmål (norsk bokmål)
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
-*/
+ *
+ * @author Audun
+ * @author Cocu
+ * @author Danmichaelo
+ * @author EivindJ
+ * @author Holje
+ * @author Laaknor
+ * @author Nghtwlkr
+ * @author Njardarlogar
+ */
 
 $s_actiongroup_menu_move = 'Flytt til annet prosjekt';
 $s_actiongroup_menu_copy = 'Kopier til annet prosjekt';
 $s_actiongroup_menu_assign = 'Deleger til';
-$s_actiongroup_menu_close = 'Sett status til lukket';
+$s_actiongroup_menu_close = 'Lukk';
 $s_actiongroup_menu_delete = 'Slett';
 $s_actiongroup_menu_resolve = 'Sett status til løst';
 $s_actiongroup_menu_update_priority = 'Endre prioritet';
@@ -94,7 +91,7 @@ $s_change = 'Endring';
 $s_bugnote_view_state = 'Notatstatus';
 $s_bug_monitor = 'Saken overvåkes';
 $s_bug_end_monitor = 'Avslutt overvåkning av saken';
-$s_announcement = 'Annonsering';
+$s_announcement = 'Kunngjøring';
 $s_stays_on_top = 'Forblir på toppen';
 $s_bugnote_link_title = 'Direktelenke til notat';
 $s_delete_bugnote_button = 'Slett notat';
@@ -135,6 +132,8 @@ $s_select_option = '(velg)';
 $s_bug_actiongroup_access = 'Du hadde ikke rettighet til å utføre den handlingen.';
 $s_bug_actiongroup_status = 'Status kan ikke endres til den forespurte statusen';
 $s_bug_actiongroup_category = 'Saken kan ikke endres til den forespurte kategorien';
+$s_bug_actiongroup_handler = 'Den forespurte brukeren er ikke tillatt å håndtere denne utgaven';
+$s_bug_actiongroup_version = 'Den forespurte versjonen finnes ikke i denne utgavens prosjekt';
 $s_close_bugs_conf_msg = 'Er du sikker på at du vil lukke disse sakene?';
 $s_delete_bugs_conf_msg = 'Er du sikker på at du vil slette disse sakene?';
 $s_move_bugs_conf_msg = 'Flytte saker til';
@@ -308,7 +307,6 @@ $s_profile_deleted_msg = 'Profilen er slettet ...';
 $s_edit_profile_title = 'Rediger profil';
 $s_platform = 'Plattform';
 $s_platform_label = 'Plattform:';
-$s_operating_system = 'Operativsystem';
 $s_additional_description = 'Tilleggsinformasjon';
 $s_update_profile_button = 'Oppdatere profilen';
 $s_profile_defaulted_msg = 'Standard profil har blitt oppdatert ...';
@@ -361,9 +359,11 @@ $s_monitor_bug_button = 'Overvåk';
 $s_unmonitor_bug_button = 'Avslutt overvåking';
 $s_file_upload_msg = 'Fil lastet opp OK';
 $s_upload_file = 'Laste opp fil';
+$s_upload_files = 'Last opp filer';
 $s_select_file = 'Velg fil';
+$s_select_files = 'Velg filer';
 $s_upload_file_button = 'Last opp fil';
-$s_max_file_size = 'Maks størrelse';
+$s_upload_files_button = 'Last opp filer';
 $s_max_file_size_label = 'Maksimal størrelse:';
 $s_bug_reopened_msg = 'Saken har blitt gjenåpnet ...';
 $s_reopen_add_bugnote_title = 'Legg til beskjed om årsaken til gjenåpning';
@@ -377,8 +377,10 @@ $s_from = 'Fra';
 $s_to = 'Til';
 $s_sent_you_this_reminder_about = 'sendte deg denne påminnelsen om';
 $s_bug_reminder = 'Send en påminnelse';
-$s_reminder_sent_to = 'Påminnelse sendt til:';
-$s_bug_send_button = 'Sende';
+$s_reminder_sent_to = 'Påminnelse sendt til';
+$s_reminder_sent_none = 'Ingen påminnelser kunne sendes';
+$s_reminder_list_truncated = 'mottakerlisten er avkortet';
+$s_bug_send_button = 'Send';
 $s_reminder = 'Påminnelse';
 $s_reminder_explain = 'Denne meldingen vil bli sendt til dem som har bedt om tilbakemelding på denne saken.';
 $s_reminder_monitor = 'Disse mottagerne vil også begynne å overvåke denne saken. De kan fjerne seg fra listen ved å bruke Avslutt overvåking-knappen.';
@@ -463,13 +465,14 @@ $s_click_to_login = 'Logg inn';
 $s_warning_plain_password_authentication = '<strong>ADVARSEL</strong>Passord-autentisering i klartekst er i bruk. Dette vil gjøre passordene dine synlige for administratorer.';
 $s_warning_default_administrator_account_present = '<strong>ADVARSEL:</strong> Du bør deaktivere standardkontoen for \'administrator\'-brukeren eller endre passordet.';
 $s_warning_admin_directory_present = '<strong>ADVARSEL:</strong> Admin-katalogen bør slettes.';
-$s_error_database_version_out_of_date_1 = '<strong>FEIL:</strong> Database-strukturen ser ut til å være utdagert (config(databaseversion) er 0 og eldre oppgraderingstabeller eksisterer). Versjon 1.x av MantisBT introduserte en ny oppgraderingsprosess. Det ser ut som om du forsøker å oppgradere fra en 0.XX versjon. Vennligst oppgradere til versjon 1.0.8 eller 1.1X og deretter oppgradere til 1.2.';
 $s_error_database_no_schema_version = '<strong>FEIL:</strong> Databasestrukturen ser ut til å være utdatert (config(databaseversion) er 0 og eldre oppgraderingstabeller eksisterer). Vennligst kontroller hvilken versjon av databasen du kjører - vi kan ikke oppdage hvilken database-versjon som som kjøres. Konfigurasjonstabellen returnerte ikke en gyldig database-schema versjon. Du kan også spørre om bistand på mantis-help mailling-listen om nødvendig.';
 $s_error_database_version_out_of_date_2 = '<strong>ADVARSEL:</strong> Databasestrukturen kan være utdatert. Vennligst oppgrader <a href="admin/install.php">her</a> før du logger inn.';
 $s_error_code_version_out_of_date = '<strong>ADVARSEL:</strong> Databasestrukturen er mer ajourført enn den installerte koden. Vennligst oppgrader koden.';
 $s_login_page_info = 'Velkommen til bugtracker.';
 $s_login_title = 'Innlogging';
-$s_save_login = 'Husk meg på denne datamaskinen';
+$s_save_login = 'Husk meg i denne nettleseren';
+$s_secure_session = 'Sikker økt';
+$s_secure_session_long = 'Bare tillat økten din å bli brukt fra denne IP-adressen.';
 $s_choose_project = 'Velg prosjekt';
 $s_login_button = 'Logg inn';
 $s_signup_link = 'Registrer deg som ny bruker';
@@ -494,7 +497,7 @@ $s_core_path = 'Filkatalog til Core';
 $s_plugin_path = 'Filbane til tillegssprogram';
 $s_created_user_part1 = 'Bruker opprettet';
 $s_created_user_part2 = 'med tilgangsnivå';
-$s_create_new_account_title = 'Opprette ny konto';
+$s_create_new_account_title = 'Opprett ny konto';
 $s_verify_password = 'Bekrefte passord';
 $s_enabled = 'Aktivert';
 $s_enabled_label = 'Aktivert:';
@@ -503,6 +506,7 @@ $s_protected_label = 'Beskyttet:';
 $s_create_user_button = 'Opprett bruker';
 $s_hide_disabled = 'Skjul deaktiverte';
 $s_filter_button = 'Filtrer';
+$s_default_filter = 'Standardfilter';
 $s_create_filter_link = 'Opprette permanent lenke';
 $s_create_short_link = 'Lage kort lenke';
 $s_filter_permalink = 'Permanent lenke til det konfigurerte filteret:';
@@ -517,7 +521,7 @@ $s_manage_threshold_config = 'Arbeidsflyt terskelverdier';
 $s_manage_email_config = 'Epost påminnelser';
 $s_manage_workflow_config = 'Arbeidsflyt';
 $s_manage_tags_link = 'Administrer Innmerkning';
-$s_create_new_account_link = 'Opprett konto';
+$s_create_new_account_link = 'Opprett ny konto';
 $s_projects_link = 'Prosjekter';
 $s_documentation_link = 'Dokumentasjon';
 $s_new_accounts_title = 'Nye kontoer';
@@ -525,6 +529,7 @@ $s_1_week_title = '1 uke';
 $s_never_logged_in_title = 'Aldri logget inn';
 $s_prune_accounts = 'Fjern kontoer';
 $s_hide_inactive = 'Skjul inaktive';
+$s_show_disabled = 'Vis deaktiverte';
 $s_manage_accounts_title = 'Administrere kontoer';
 $s_date_created = 'Dato opprettet';
 $s_last_visit = 'Siste pålogging';
@@ -684,17 +689,19 @@ $s_accounts_pruned_msg = 'Alle kontoer som ikke har vært benyttet og som er eld
 $s_prune_accounts_button = 'Slett';
 $s_confirm_account_pruning = 'Er du sikker på at du vil slette gamle kontoer som ikke har vært logget inn?';
 $s_edit_user_title = 'Redigere bruker';
+$s_account_unlock_button = 'Lås opp konto';
 $s_reset_password_button = 'Nullstill passord';
 $s_delete_user_button = 'Slett bruker';
 $s_reset_password_msg = '\'Nullstill passord\' sender bekreftelses-URL via epost.';
 $s_reset_password_msg2 = 'Nullstille passord setter passordet til blank.';
-$s_show_all_users = 'ALLE';
+$s_show_all_users = 'Alle';
 $s_users_unused = 'IKKE I BRUK';
 $s_users_new = 'NY';
 $s_account_reset_protected_msg = 'Kontoen er beskyttet. Kan ikke nullstille passord.';
 $s_account_reset_msg = 'En bekreftelse har blitt sendt til epostadressen din ...';
 $s_account_reset_msg2 = 'Kontopassordet er satt til blank ...';
-$s_manage_user_protected_msg = 'Kontoen er beskyttet. Tilgangsnivå beskyttet. Hvis ikke har kontoen blit oppdatert ...';
+$s_account_unlock_msg = 'Kontoen har blitt låst opp.';
+$s_manage_user_protected_msg = 'Kontoen er beskyttet; feltene \'Tilgangsnivå\' og \'Aktivert\' kan ikke endres. Andre felt ble oppdatert.';
 $s_manage_user_updated_msg = 'Kontoen er oppdatert ...';
 $s_email_user_updated_subject = 'Konto oppdatert';
 $s_email_user_updated_msg = 'Din konto har blitt oppdatert av en administrator. En liste av disse endringene er gitt under. Du kan oppdatere dine kontodetaljer og innstillinger når som helst ved å besøke følgende URL:';
@@ -843,6 +850,9 @@ $s_sort_label = 'Sorter etter:';
 $s_issue_id = 'Sak #';
 $s_recently_visited = 'Sist besøkte';
 $s_note_user_id_label = 'Notert av:';
+$s_filter_match_type = 'Resultattype';
+$s_filter_match_all = 'Alle betingelser';
+$s_filter_match_any = 'Hvilken betingelse som helst';
 $s_none = 'Ingen';
 $s_current = 'gjeldende';
 $s_search = 'Søk';
@@ -884,11 +894,11 @@ $s_update_bug_button = 'Rediger';
 $s_bug_assign_to_button = 'Deleger til:';
 $s_bug_status_to_button = 'Endre status til:';
 $s_reopen_bug_button = 'Gjenåpne';
+$s_close_bug_button = 'Lukk';
 $s_move_bug_button = 'Flytt';
 $s_attached_files = 'Filvedlegg';
 $s_publish = 'Publisere';
-$s_cached = 'Midlertidig lagret';
-$s_add_user_to_monitor = 'Legge til';
+$s_add_user_to_monitor = 'Legg til';
 $s_bug_view_title = 'Vis problemdetaljer';
 $s_no_users_monitoring_bug = 'Ingen brukere overvåker denne saken.';
 $s_users_monitoring_bug = 'Brukere som overvåker denne saken';
@@ -930,11 +940,11 @@ $s_link_custom_field_to_project_button = 'Lenke brukerdefinerte felt';
 $s_linked_projects_label = 'Lenkede prosjekt:';
 $s_custom_field_sequence = 'Sekvens';
 $s_custom_field_sequence_label = 'Sekvens:';
-$s_custom_field_type_enum_string = '0:Streng,1:Numerisk,2:Flyttall,3:Oppramsing,4:Epost,5:Sjekkboks,6:Liste,7:Flervalgsliste,8:Dato,9:Enkeltvalg (radio)';
+$s_custom_field_type_enum_string = '0:Streng,1:Numerisk,2:Flyttall,3:Oppramsing,4:Epost,5:Sjekkboks,6:Liste,7:Flervalgsliste,8:Dato,9:Enkeltvalg (radio),10:Textarea';
 $s_confirm_used_custom_field_deletion = 'Dette feltet brukes nå av minst ett annet prosjekt. Hvis du fortsetter vil alle verdier for dette feltet bli sletta. Det er ikke mulig å gå tilbake på dette valget. Hvis du ikke vil slette dette feltet, trykk Tilbake-knappen i vevleseren din. For å fortsette, trykk knappen under.';
 $s_confirm_custom_field_deletion = 'Er du sikker på at du vil slette dette feltet og alle dets tilkoblede verdier?';
 $s_field_delete_button = 'Slett felt';
-$s_confirm_custom_field_unlinking = 'Er du sikker på at du ønsker å fjerne koblingen mellom dette skreddersydde feltet og prosjektet og slette alle tilhørende verdier?';
+$s_confirm_custom_field_unlinking = 'Er du sikker på at du ønsker å fjerne koblingen mellom dette egendefinerte feltet og prosjektet? Verdiene vil ikke bli slettet så lenge det egendefinerte feltet ikke blir slettet.';
 $s_field_remove_button = 'Fjerne felt';
 $s_hide_status = 'Skjul status';
 $s_hide_status_label = 'Skjul status:';
@@ -950,6 +960,8 @@ $s_monitored_by_label = 'Overvåket av:';
 $s_attachments = 'vedlegg';
 $s_bytes = 'bytes';
 $s_attachment_missing = 'Vedlegg mangler';
+$s_attachment_count = 'Antall vedlegg';
+$s_view_attachments_for_issue = 'Vis %1$d vedlegg for problem #%2$d';
 $s_phpmailer_language = 'no';
 $s_sponsors = '%1$d sponsor(er)';
 $s_sponsorship_added = 'Sponsing lagt til';
@@ -982,6 +994,9 @@ $s_relationship_warning_blocking_bugs_not_resolved_2 = '<strong>MERK</strong>. I
 $s_create_child_bug_button = 'Klon';
 $s_bug_cloned_to = 'Sak klonet';
 $s_bug_created_from = 'Sak klonet fra';
+$s_copy_from_parent = 'Kopier utvidet data fra overordnet problem';
+$s_copy_notes_from_parent = 'Kopier notater for feil';
+$s_copy_attachments_from_parent = 'Kopier vedlegg';
 $s_viewing_bug_relationship_graph_title = 'Relasjonsgraf';
 $s_viewing_bug_dependency_graph_title = 'Avhengighetsgraf';
 $s_relation_graph = 'Relasjonsgraf';
@@ -1005,7 +1020,7 @@ $s_update_issue_status = 'Oppdatere saksstatus';
 $s_set_view_status = 'Endre visningsstatus ved rapportering av et nytt problem eller notat';
 $s_update_view_status = 'Endre visningsstatus på eksisterende problem eller notat';
 $s_show_list_of_users_monitoring_issue = 'Se overvåkerliste';
-$s_notes = 'NOTATER';
+$s_notes = 'Notater';
 $s_add_notes = 'Legge til notat';
 $s_view_private_notes = 'Se andres private notater';
 $s_news = 'NYHETER';
@@ -1017,7 +1032,7 @@ $s_delete_attachments = 'Slette vedlegg';
 $s_delete_attachment_button = 'Slette';
 $s_delete_attachment_sure_msg = 'Er du sikker på at du ønsker å slette dette vedlegget?';
 $s_upload_issue_attachments = 'Laste opp vedlegg til saken';
-$s_filters = 'FILTRE';
+$s_filters = 'Filtre';
 $s_save_filters = 'Lagre filtre';
 $s_save_filters_as_shared = 'Lagre filtre som felles';
 $s_use_saved_filters = 'Bruke lagrede filtre';
@@ -1036,9 +1051,10 @@ $s_view_sponsorship_total = 'Se totalt sponset beløp';
 $s_sponsor_issue = 'Sponset sak';
 $s_assign_sponsored_issue = 'Tilordne sponset sak';
 $s_handle_sponsored_issue = 'Behandle sponset sak';
-$s_others = 'ANNET';
+$s_others = 'Andre';
 $s_see_email_addresses_of_other_users = 'Se epostadresser til andre brukere';
 $s_send_reminders = 'Sende påminnelse';
+$s_receive_reminders = 'Motta påminnelser';
 $s_add_profiles = 'Legge til profiler';
 $s_notify_of_new_user_created = 'Gi melding ved ny bruker';
 $s_email_notification = 'E-postvarsling';
@@ -1092,8 +1108,9 @@ $s_tag_related_issues = 'Delte saker (%1$s)';
 $s_tag_stats_attached = 'Saker koblet: %1$s';
 $s_tag_create = 'Opprett Innmerkning';
 $s_show_all_tags = 'Alle';
-$s_time_tracking_billing_link = 'Fakturering';
+$s_time_tracking_billing_link = 'Tidssporing';
 $s_time_tracking = 'Tidsstempling';
+$s_time_tracking_time_spent = 'Tid brukt:';
 $s_time_tracking_get_info_button = 'Hente tidsstempling';
 $s_time_tracking_cost_per_hour = 'Kostnad / time';
 $s_time_tracking_cost = 'Kostnad';
@@ -1137,8 +1154,6 @@ $s_month_september = 'September';
 $s_month_october = 'Oktober';
 $s_month_november = 'November';
 $s_month_december = 'Desember';
-
-
 $MANTIS_ERROR[ERROR_GENERIC] = 'Det oppstod en en feil. Du kan rapportere feilen til din administrator.';
 $MANTIS_ERROR[ERROR_SQL] = 'SQL-feil.';
 $MANTIS_ERROR[ERROR_REPORT] = 'Det var en feil i rapporten din.';
@@ -1159,7 +1174,6 @@ $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Strengen \'%1$s\' ikke funnet.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Finner ikke notat.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Finner ikke prosjektet "%1$d"';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Finner ikke database-feltet "%1$s"';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Kan ikke koble til FTP-server.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Saksbehandleren har ikke tilstrekkelig tilgangsnivå for å håndtere saker med denne statuskoden.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Et prosjekt med det samme navnet eksisterer fra før. Vennligst gå tilbake og angi et nytt navn.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Det ble oppgitt et ugyldig prosjektnavn. Prosjektnavnet kan ikke være blankt.';
@@ -1190,6 +1204,7 @@ $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Det brukerdefinerte navnet 
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Minst ett prosjekt bruker dette feltet.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Ugyldig verdi for feltet "%1$s"';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Ugyldig definisjon på skreddersydd felt.';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_PROPERTY] = 'Ugyldig egendefinert feltegenskap (%1$s).';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP-autentisering feilet';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP-tjenertilkobling feilet';
 $MANTIS_ERROR[ERROR_LDAP_UPDATE_FAILED] = 'Oppdatering av LDAP-posten feilet.';
@@ -1202,6 +1217,7 @@ $MANTIS_ERROR[ERROR_CATEGORY_DUPLICATE] = 'Kategorien eksisterer fra før.';
 $MANTIS_ERROR[ERROR_CATEGORY_NO_ACTION] = 'Ingen handling for kopiering er spesifisert.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND] = 'Finner ikke kategorien.';
 $MANTIS_ERROR[ERROR_CATEGORY_NOT_FOUND_FOR_PROJECT] = 'Kategori «%1$s» ikke funnet for prosjekt «%2$s».';
+$MANTIS_ERROR[ERROR_CATEGORY_CANNOT_DELETE_DEFAULT] = 'Denne kategorien kan ikke slettes, fordi den er definert som «Standardkategori for flyttinger».';
 $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Versjonen eksisterer fra før.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Versjon «%1$s» ikke funnet.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Brukernavnet er ugyldig. Brukernavn kan kun inneholde latinske bokstaver, tall, mellomrom, bindestreker, punktum, plusstegn og understrek.';
@@ -1239,14 +1255,16 @@ $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Hendelsen "%1$s" har ikke blitt deklare
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Tillegget er ikke registert i MantisBT';
 $MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Tillegget er allerede installert';
 $MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Finner ikke siden for tilleggsprogrammet';
+$MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Installasjonen av utvidelsen feilet: %1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Oppgradering av skjema for tilleggsprogrammet feilet i blokk #%1$s.';
+$MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'Plugin "%1$s" trenger en oppgradering før du kan få tilgang til denne siden.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Ukjent feil "%1$s" ved kjøring av tilleggsprogrammet "%2$s"';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Felt "%1$s" inneholder en duplikert kolonne "%2$s"';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Feltet "%1$s" inneholder et ugyldig felt "%2$s".';
 $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'Ugyldig sesjonshåndterings-kode';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Finner ikke sesjons-variabelen "%1$s"';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Din brukersesjon er ikke lenger gyldig';
-$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Ugyldig sikkerhetselement i skjema. Kanskje du har sendt inn skjemaet to ganger ved en tilfeldighet?';
+$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Ugyldig sikkerhetselement i skjema. Dette kan skyldes at sesjonen gikk ut på dato, eller at du sendte inn skjemaet to ganger ved en tilfeldighet.';
 $MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = 'Av sikkerhetsårsaker vil ikke MantisBT kjøre når $g_crypto_master_salt ikke er oppgitt korrekt i config_inc.php';
 $MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = 'Kunne ikke finne en kilde til sterk tilfeldighet for kryptografiske formål.';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'Siden kan ikke åpnes med denne metoden';

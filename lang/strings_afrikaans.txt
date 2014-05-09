@@ -1,48 +1,38 @@
 <?php
-# MantisBT - A PHP based bugtracking system
-
-# MantisBT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# MantisBT is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * Language File - Afrikaans (Afrikaans)
+/** MantisBT - a php based bugtracking system
  *
- * **********************************************************************
- * ** This file is generated from translations stored in translatewiki **
- * ** Information on Copyright/License for translatewiki translations  **
- * ** is available at http://translatewiki.net/wiki/Project:About      **
- * **********************************************************************
- * **                                                                  **
- * **                      DO NOT UPDATE MANUALLY                      **
- * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
- * ** Detailed instructions on how to create or update translations at **
- * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
- * **********************************************************************
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Afrikaans (Afrikaans)
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
-*/
+ *
+ * @author Naudefj
+ */
 
 $s_actiongroup_menu_move = 'Skuif';
 $s_actiongroup_menu_copy = 'Kopieer';
 $s_actiongroup_menu_assign = 'Toewys';
 $s_actiongroup_menu_close = 'Sluit';
-$s_actiongroup_menu_delete = 'Verwyder';
+$s_actiongroup_menu_delete = 'Skrap';
 $s_actiongroup_menu_update_priority = 'Wysig prioriteit';
 $s_actiongroup_menu_update_status = 'Wysig status';
 $s_actiongroup_menu_update_severity = 'Wysig impak';
@@ -180,7 +170,6 @@ $s_profile_deleted_msg = 'Geskrapte profiel...';
 $s_edit_profile_title = 'Wysig profiel';
 $s_platform = 'Platform';
 $s_platform_label = 'Platform:';
-$s_operating_system = 'Bedryfstelsel';
 $s_additional_description = 'Addisionele inligting';
 $s_update_profile_button = 'Opdateer profiel';
 $s_profile_defaulted_msg = 'Verstek profiel is opgedateer...';
@@ -215,7 +204,6 @@ $s_file_upload_msg = 'Lêer is suksesvol oplaai.';
 $s_upload_file = 'Laai lêer';
 $s_select_file = 'Kies Lêer';
 $s_upload_file_button = 'Laai lêer';
-$s_max_file_size = 'Maksimum lêergrootte';
 $s_max_file_size_label = 'Maksimum grootte:';
 $s_from = 'Van';
 $s_to = 'Na';
@@ -274,8 +262,10 @@ $s_show_content = 'Wys inhoud';
 $s_memory_usage_in_kb = 'geheue gebruik: %1$s KB';
 $s_please_report = 'Rapporteer dit asseblief aan die %1$s.';
 $s_click_to_login = 'Aanmeld';
+$s_login_title = 'Aanmeld';
 $s_save_login = 'Onthou my wagwoord op hierdie rekenaar';
 $s_choose_project = 'Kies projek';
+$s_login_button = 'Aanmeld';
 $s_signup_link = 'Registreer nuwe gebruiker';
 $s_lost_password_link = 'Wagwoord verloor?';
 $s_select_project_button = 'Kies projek';
@@ -376,7 +366,7 @@ $s_users_link = 'Gebruikers';
 $s_manage_link = 'Beheer';
 $s_edit_news_link = 'Wysig nuus';
 $s_docs_link = 'Dokumente';
-$s_logout_link = 'Teken uit';
+$s_logout_link = 'Teken af';
 $s_my_view_link = 'My oorsig';
 $s_my_view_title_unassigned = 'Nie toegeken nie';
 $s_my_view_title_recent_mod = 'Onlangs gewysig';
@@ -444,7 +434,6 @@ $s_query_name_label = 'Filternaam:';
 $s_update_bug_button = 'Wysig';
 $s_move_bug_button = 'Skuif';
 $s_publish = 'Publiseer';
-$s_cached = 'In kas';
 $s_add_user_to_monitor = 'Voeg by';
 $s_monitoring_user_list = 'Gebruikers';
 $s_custom_field = 'Veld';
@@ -529,8 +518,6 @@ $s_month_september = 'September';
 $s_month_october = 'Oktober';
 $s_month_november = 'November';
 $s_month_december = 'Desember';
-
-
 $MANTIS_ERROR[ERROR_SQL] = 'SQL-fout is ontdek.';
 $MANTIS_ERROR[ERROR_REPORT] = 'Daar was \'n fout in u verslag.';
 $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Geen lêer is verskaf nie.';
@@ -542,7 +529,6 @@ $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'String %1$s" is nie gevind nie.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Nota is nie gevind nie.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projek "%1$d" is nie gevind nie.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Databasisveld "%1$s" is nie gevind nie.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Kan nie met die FTP-bediener in verbinding tree nie.';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Die gebruiker met naam "%1$s" is nie gevind nie.';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'Die gebruiker met nommer "%1$d" is nie gevind nie.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Nuusberig nie gevind nie.';

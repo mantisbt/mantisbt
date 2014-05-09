@@ -1,42 +1,32 @@
 <?php
-# MantisBT - A PHP based bugtracking system
-
-# MantisBT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# MantisBT is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * Language File - Icelandic (íslenska)
+/** MantisBT - a php based bugtracking system
  *
- * **********************************************************************
- * ** This file is generated from translations stored in translatewiki **
- * ** Information on Copyright/License for translatewiki translations  **
- * ** is available at http://translatewiki.net/wiki/Project:About      **
- * **********************************************************************
- * **                                                                  **
- * **                      DO NOT UPDATE MANUALLY                      **
- * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
- * ** Detailed instructions on how to create or update translations at **
- * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
- * **********************************************************************
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Icelandic (íslenska)
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
-*/
+ *
+ * @author Snævar
+ */
 
 $s_actiongroup_menu_move = 'Færa';
 $s_actiongroup_menu_copy = 'Afrita';
@@ -144,7 +134,7 @@ $s_error_no_proceed = 'Notaðu "Bakk" hnappinn á vafranum til að komast á fyr
 $s_login_error = 'Aðgangi þínum hefur hugsanlega verið lokað eða hindraður eða notendanafn/lykilorð sem þú notar er rangt.';
 $s_login_cookies_disabled = 'Vafrarinn þinn veit hugsanlega ekki hvernig á að höndla kökur (cookies), eða neitar að taka við þeim.';
 $s_go_back = 'Farðu til baka';
-$s_proceed = 'Smelltu hér til að halda áfram';
+$s_proceed = 'Halda áfram';
 $s_switch = 'Skipta';
 $s_logged_in_as = 'Skráður inn sem';
 $s_prefix_for_deleted_users = 'notandi';
@@ -260,7 +250,6 @@ $s_profile_added_msg = 'Bætt við sniði...';
 $s_profile_deleted_msg = 'Sniði eytt...';
 $s_edit_profile_title = 'Skrifa snið';
 $s_platform = 'Verkvangur';
-$s_operating_system = 'Stýrikerfi';
 $s_additional_description = 'Viðbótar lýsing';
 $s_update_profile_button = 'Uppfæra snið';
 $s_profile_defaulted_msg = 'Sjálfgefið snið uppfært...';
@@ -295,13 +284,12 @@ $s_closed_bug_title = 'Loka beiðni';
 $s_bug_deleted_msg = 'Verkbeiðninni hefur verið eytt...';
 $s_delete_bug_sure_msg = 'Ertu viss um að þú viljir eyða þessari beiðni?';
 $s_delete_bug_button = 'Eyða beiðni';
-$s_monitor_bug_button = 'Vakta beiðni';
+$s_monitor_bug_button = 'Vakta';
 $s_unmonitor_bug_button = 'Hætta vöktun';
 $s_file_upload_msg = 'Upphal skráar tókst';
 $s_upload_file = 'Upphala skrá';
 $s_select_file = 'Velja skrá';
 $s_upload_file_button = 'Upphala skrá';
-$s_max_file_size = 'Hámarks stærð';
 $s_bug_reopened_msg = 'Verkbeiðnin hefur verið opnað aftur...';
 $s_reopen_add_bugnote_title = 'Settu ástæðu til að opna beiðnina aftur';
 $s_bugnote_add_reopen_button = 'Settu athugasemd og opnaðu beiðnina aftur';
@@ -314,7 +302,7 @@ $s_from = 'Frá';
 $s_to = 'Til';
 $s_sent_you_this_reminder_about = 'sendi þetta minnisatriði um';
 $s_bug_reminder = 'Senda minnisatriði';
-$s_reminder_sent_to = 'Minnisatriði sent til:';
+$s_reminder_sent_to = 'Áminning sent til:';
 $s_bug_send_button = 'Senda';
 $s_reminder = 'Minnisatriði';
 $s_reminder_explain = 'Þessi athugasemd mun verða send til allra sem hafa óskað eftir viðbrögðum við þessari beiðni.';
@@ -362,7 +350,7 @@ $s_bugnote_edit_link = 'Skrifa';
 $s_closed_bug_button = 'Loka verkbeiðni';
 $s_bugnote_updated_msg = 'Athugasemdin hefur verið uppfærð...';
 $s_show_content = 'Sýna innihald';
-$s_click_to_login = 'Ýtið hér til innskráningar';
+$s_click_to_login = 'Innskrá';
 $s_login_page_info = 'Velkomin í verkbeiðnakerfið.';
 $s_login_title = 'Innskráning';
 $s_save_login = 'Vista innskráningu';
@@ -422,7 +410,7 @@ $s_message = 'Skilaboð';
 $s_default_notify = 'Stilla sjálfgefin merki um athugasemdir í';
 $s_action_notify = 'Stilla merki um aðgerð við athugasemd í';
 $s_notify_defaults_change_access = 'Hver getur breytt sjálfgefnum athugasemdum';
-$s_notify_actions_change_access = 'Hver getur breytt athugasemdum';
+$s_notify_actions_change_access = 'Hver getur breytt athugasemdum:';
 $s_revert_to_system = 'Eyða öllum verkefna stillingum';
 $s_revert_to_all_project = 'Eyða sérstökum verkefna stillingum';
 $s_non_existent = 'er ekki til';
@@ -455,7 +443,7 @@ $s_resolved_status = 'Staða þar sem beiðni er álitin leyst';
 $s_readonly_status = 'Staða þar sem beiðni verður aðeins lesanlegt';
 $s_reopen_status = 'Staða sem enduropnuð beiðni fær';
 $s_reopen_resolution = 'Úrlausn sem enduropnaðar beiðnir fá';
-$s_config_delete_sure = 'Ertu viss um að vilja eyða stillingum fyrir';
+$s_config_delete_sure = 'Ertu viss um að vilja eyða stillingum fyrir:';
 $s_in_project = 'í framkvæmd';
 $s_delete_config_button = 'Eyða stillingum';
 $s_configuration_report = 'Skýrsla um stillingar';
@@ -469,7 +457,7 @@ $s_delete_config_sure_msg = 'Ertu viss um að vilja eyða þessum stillingar mö
 $s_project_added_msg = 'Verkefninu hefur verið bætt við...';
 $s_category_added_msg = 'Verkþættinum hefur verið bætt við...';
 $s_category_deleted_msg = 'Verkþættinum hefur verið eytt...';
-$s_category_delete_sure_msg = 'Ertu viss um að þú viljir eyða þessum verkþætti?';
+$s_category_delete_sure_msg = 'Ertu viss um að þú viljir eyða þessum verkþætti?<br />Verkþátturinn "%1$s" inniheldur %2$d villur.';
 $s_delete_category_button = 'Eyða verkþætti';
 $s_edit_project_category_title = 'Skrifa verkþátt';
 $s_update_category_button = 'Uppfæra verkþátt';
@@ -683,23 +671,22 @@ $s_query_deleted = 'Síu eytt';
 $s_save_query = 'Vista núverandi síu';
 $s_reset_query = 'Endurstilla síu';
 $s_query_name = 'Nafn síu';
-$s_query_exists = 'Þessi tiltekna fyrirspurn er þegar til staðar.';
-$s_query_dupe_name = 'Önnur fyrirspurn hefur nú þegar þetta nafn. Veldu annað nafn fyrir þessa fyrirspurn.';
+$s_query_exists = 'Þessi tiltekna sía er þegar til staðar.';
+$s_query_dupe_name = 'Önnur sía hefur nú þegar þetta nafn. Veldu annað nafn fyrir þessa síu.';
 $s_query_blank_name = 'Þú getur ekki vistað síu án nafns. Gefðu síunni nafn áður en þú vistar hana.';
-$s_query_store_error = 'Upp kom villa við að vista þessa fyrirspurn.';
+$s_query_store_error = 'Upp kom villa við að vista þessa síu.';
 $s_open_queries = 'Stjórna síum';
-$s_query_delete_msg = 'Ertu viss um að þú viljir eyða þessari fyrirspurn?';
+$s_query_delete_msg = 'Ertu viss um að þú viljir eyða þessari síu?';
 $s_view_simple_link = 'Einföld skoðun';
 $s_product_build = 'Útgáfa verkefnis';
 $s_system_profile = 'Lýsing kerfis';
-$s_update_bug_button = 'Uppfæra beiðni';
+$s_update_bug_button = 'Uppfæra';
 $s_bug_assign_to_button = 'Úthluta til';
 $s_bug_status_to_button = 'Breyta stöðu í';
-$s_reopen_bug_button = 'Enduropna verkbeiðni';
-$s_move_bug_button = 'Færa beiðni';
+$s_reopen_bug_button = 'Enduropna';
+$s_move_bug_button = 'Færa';
 $s_attached_files = 'Viðhengdar skrár';
 $s_publish = 'Útgefið';
-$s_cached = 'Falið';
 $s_no_users_monitoring_bug = 'Það er enginn notandi að vakta þessa beiðni.';
 $s_users_monitoring_bug = 'Notendur sem vakta þessa beiðni';
 $s_monitoring_user_list = 'Notenda listi';
@@ -730,7 +717,7 @@ $s_custom_field_require_update = 'Krafa í uppfærslu';
 $s_custom_field_require_resolved = 'Krafa við lausn';
 $s_custom_field_require_closed = 'Krafa við lokun';
 $s_custom_field_sequence = 'Runa';
-$s_custom_field_type_enum_string = '0:Strengur,1:Tala,2:Fljóta,3:Upptalning,4:Tölvupóstur,5:Gátreitur,6:Listi,7:Vallisti,8:Dagsetning';
+$s_custom_field_type_enum_string = '0:Strengur,1:Tala,2:Fljóta,3:Upptalning,4:Tölvupóstur,5:Gátreitur,6:Listi,7:Vallisti,8:Dagsetning,9:Radio,10:Textarea';
 $s_confirm_used_custom_field_deletion = 'Þetta svæði er tengt a.m.k. einu verkefni. Ef þú heldur áfram, munu öll gildi fyrir þetta svæði eyðast. Ekki er hægt að bakka með þessa aðgerð. Ef þú vilt ekki eyða þessu svæði, ýttu þá á Bakk hnappinn á vafranum. Til að halda áfram, ýttu þá á hnappinn fyrir neðan';
 $s_confirm_custom_field_deletion = 'Ertu viss um að vilja eyða þessu sérsniðna svæði og öllum gildum sem tengjast því?';
 $s_field_delete_button = 'Eyða svæði';
@@ -762,7 +749,7 @@ $s_relationship_with_parent = 'Tengsl við æðri beiðni';
 $s_delete_relationship_button = 'Eyða';
 $s_delete_relationship_sure_msg = 'Ertu viss um að vilja eyða þessum tengslum?';
 $s_relationship_warning_blocking_bugs_not_resolved = 'Ekki er búið að leysa eða loka öllum undiratriðum þessarar beiðni.';
-$s_relationship_warning_blocking_bugs_not_resolved_2 = '<strong>ATHUGAÐU</strong>. Ekki hafa öll undiratriði þessarar beiðni enn verið leyst eða lokuð.<br />Áður en hægt er að <strong>leysa/loka<strong> æðri beiðni þarf að vera búið að leysa eða loka öllum undiratriðum tengdum þessari beiðni.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>ATHUGAÐU</b>. Ekki hafa öll undiratriði þessarar beiðni enn verið leyst eða lokuð.<br />Áður en hægt er að <b>leysa/loka<b> æðri beiðni þarf að vera búið að leysa eða loka öllum undiratriðum tengdum þessari beiðni.';
 $s_create_child_bug_button = 'Útbúa samrit';
 $s_bug_cloned_to = 'Samrit verkbeiðnar';
 $s_bug_created_from = 'Beiðni mynduð af';
@@ -828,8 +815,18 @@ $s_from_date = 'Frá';
 $s_to_date = 'Til';
 $s_on_date = 'Á';
 $s_on = 'Á';
-
-
+$s_month_january = 'Janúar';
+$s_month_february = 'Febrúar';
+$s_month_march = 'Mars';
+$s_month_april = 'Apríl';
+$s_month_may = 'Maí';
+$s_month_june = 'Júní';
+$s_month_july = 'Júlí';
+$s_month_august = 'Ágúst';
+$s_month_september = 'September';
+$s_month_october = 'Október';
+$s_month_november = 'Nóvember';
+$s_month_december = 'Desember';
 $MANTIS_ERROR[ERROR_GENERIC] = 'Villa hefur orðið við þessa aðgerð. Þú ættir að tilkynna það til verkefnisstjóra.';
 $MANTIS_ERROR[ERROR_SQL] = 'SQL villa hefur orðið.';
 $MANTIS_ERROR[ERROR_REPORT] = 'Það var villa í tilkynningunni.';
@@ -848,9 +845,8 @@ $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Stillingar möguleiki \'%1$s\' fann
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Ekki er hægt að breyta stillingar möguleikanum \'%1$s\' í gagnagrunninum. Það verður að breyta honum í config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Strengur \'%1$s\' fannst ekki.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Athugasemd fannst ekki.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Verkefni fannst ekki.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Verkefniið "%1$d" fannst ekki.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Gagnagrunns svæðið \'%1$s\' fannst ekki.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'Get ekki tengst FTP þjóni.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Sá sem fer með verkbeiðnina hefur ekki nægilegan aðgang til þess að meðhöndla það á þessu stigi.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Verkefni með sama nafni er þegar til staðar. Farðu til baka og settu inn nýtt nafn.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Ógilt verkefnisnafn uppgefið. Verkefnisnöfn geta ekki verið auð.';
@@ -875,7 +871,7 @@ $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Þú getur ekki sett inn beiðni sem 
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Sérsniðið svæði finnst ekki';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NAME_NOT_UNIQUE] = 'Þetta er nafn afrits.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_IN_USE] = 'Að minnsta kosti eitt verkefni notar þetta svæði.';
-$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Óleyfileg gildi fyrir þetta svæði';
+$MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_VALUE] = 'Óleyfileg gildi fyrir þetta svæðið "%1$s".';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_INVALID_DEFINITION] = 'Sérsniðin svæðisskilgreining er ógilt';
 $MANTIS_ERROR[ERROR_LDAP_AUTH_FAILED] = 'LDAP staðfesting mistókst.';
 $MANTIS_ERROR[ERROR_LDAP_SERVER_CONNECT_FAILED] = 'LDAP tenging þjóns mistókst.';

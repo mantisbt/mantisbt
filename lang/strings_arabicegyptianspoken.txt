@@ -1,42 +1,34 @@
 <?php
-# MantisBT - A PHP based bugtracking system
-
-# MantisBT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# MantisBT is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * Language File - Egyptian Spoken Arabic (مصرى)
+/** MantisBT - a php based bugtracking system
  *
- * **********************************************************************
- * ** This file is generated from translations stored in translatewiki **
- * ** Information on Copyright/License for translatewiki translations  **
- * ** is available at http://translatewiki.net/wiki/Project:About      **
- * **********************************************************************
- * **                                                                  **
- * **                      DO NOT UPDATE MANUALLY                      **
- * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
- * ** Detailed instructions on how to create or update translations at **
- * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
- * **********************************************************************
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Egyptian Spoken Arabic (مصرى)
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
-*/
+ *
+ * @author Dudi
+ * @author Ghaly
+ * @author Meno25
+ */
 
 $s_directionality = 'rtl';
 $s_actiongroup_menu_move = 'انقل';
@@ -303,7 +295,6 @@ $s_profile_deleted_msg = 'الملف تم حذفه...';
 $s_edit_profile_title = 'عدل الملف';
 $s_platform = 'نظام';
 $s_platform_label = 'المنصة:';
-$s_operating_system = 'نظام التشغيل';
 $s_additional_description = 'وصف إضافي';
 $s_update_profile_button = 'تحديث الملف';
 $s_profile_defaulted_msg = 'الملف الافتراضى تم تحديثه...';
@@ -358,7 +349,6 @@ $s_file_upload_msg = 'رفع الملف نجح';
 $s_upload_file = 'رفع ملف';
 $s_select_file = 'اختر ملفا';
 $s_upload_file_button = 'رفع ملف';
-$s_max_file_size = 'الحجم الأقصى';
 $s_max_file_size_label = 'الحجم الأقصى:';
 $s_bug_reopened_msg = 'القضيه تمت إعاده فتحها...';
 $s_reopen_add_bugnote_title = 'إضافه ملاحظه كسبب لإعاده فتح القضية';
@@ -372,7 +362,7 @@ $s_from = 'من';
 $s_to = 'إلى';
 $s_sent_you_this_reminder_about = 'أرسل إليك هذه التذكره حول';
 $s_bug_reminder = 'إرسال تذكرة';
-$s_reminder_sent_to = 'التذكره تم إرسالها إلى:';
+$s_reminder_sent_to = 'التذكره إتبعتت ل:';
 $s_bug_send_button = 'إرسال';
 $s_reminder = 'تذكرة';
 $s_reminder_explain = 'هذه الملاحظه سيتنم إرسالها إلى المتلقين المعروضين كطالبى ردود على هذه القضيه.';
@@ -455,7 +445,6 @@ $s_click_to_login = 'لُج';
 $s_warning_plain_password_authentication = '<strong>تحذير:</strong> تحقيق كلمه السر الصافى مستخدم، هذا سيكشف كلمات سرك للإداريين.';
 $s_warning_default_administrator_account_present = '<strong>تحذير:</strong> ينبغى عليك تعطيل حساب \'administrator\' الافتراضى أو تغيير كلمه سره.';
 $s_warning_admin_directory_present = '<strong>تحذير:</strong> مجلد الإداره ينبغى إزالته.';
-$s_error_database_version_out_of_date_1 = '<strong>خطأ:</strong> هيكل قاعده البيانات يبدو أنه قديم (config(databaseversion) هو 0 وجداول الترقيه القديمه موجودة). النسخه 1.x من مانتيس بى تى استحدثت عمليه ترقيه جديده. أنت يبدو أنك تقوم بالترقيه من إصدار 0.XX. من فضلك قم بالترقيه إلى 1.0.8 أو 1.1.X، ثم قم بالترقيه إلى 1.2.';
 $s_error_database_no_schema_version = '<strong>خطأ:</strong> هيكل قاعده البيانات يبدو أنه قديم(config(databaseversion) هو 0 وجداول الترقيه القديمه غير موجودة). من فضلك تحقق من أن قاعده بياناتك تعمل - لم يمكننا استرجاع نسخه سكيما قاعده البيانات. جدول Config لم يرجع نسخه سكيما قاعده بيانات صحيحه - من فضلك سل عن الدعم فى قائمه مساعده مانتيس البريديه لو كان هذا مطلوبا.';
 $s_error_database_version_out_of_date_2 = '<strong>تحذير:</strong> هيكل قاعده البيانات ربما يكون قديما. من فضلك قم بالترقيه <a href="admin/install.php">هنا</a> قبل تسجيل الدخول.';
 $s_error_code_version_out_of_date = '<strong>تحذير:</strong> هيكل قاعده البيانات أكثر حداثه من الكود المنصب.  من فضلك قم بترقيه الكود.';
@@ -678,7 +667,7 @@ $s_users_new = 'جديد';
 $s_account_reset_protected_msg = 'الحساب محمى. لم يمكن إعاده ضبط كلمه السر.';
 $s_account_reset_msg = 'طلب تأكيد تم إرساله إلى عنوان البريد الإلكترونى المختار للمستخدم. باستخدام هذا، المستخدم سيصبح قادرا على تغيير كلمه سره.';
 $s_account_reset_msg2 = 'كلمه سر الحساب تم ضبطها كفارغه...';
-$s_manage_user_protected_msg = 'الحساب محمى. مستوى الصلاحيه والتفعيل محميان. أما غير هذا، فالحساب تم تحديثه...';
+$s_manage_user_protected_msg = 'الحساب محمى; \'مستوى الصلاحيه\' و\'التفعيل\' محميين. أما غير ده، فالحساب تم إتحدث  بنجاح.';
 $s_manage_user_updated_msg = 'الحساب تم تحديثه بنجاح...';
 $s_email_user_updated_subject = 'حُدّث الحساب';
 $s_main_link = 'رئيسي';
@@ -866,7 +855,6 @@ $s_reopen_bug_button = 'إعاده فتح';
 $s_move_bug_button = 'نقل';
 $s_attached_files = 'الملفات الملحقة';
 $s_publish = 'نشر';
-$s_cached = 'مخزن';
 $s_add_user_to_monitor = 'أضف';
 $s_no_users_monitoring_bug = 'لا يوجد مستخدمون يراقبون هذه القضيه.';
 $s_users_monitoring_bug = 'المستخدمون الذين يراقبون هذه القضية';
@@ -907,7 +895,7 @@ $s_link_custom_field_to_project_title = 'وصل حقل مخصص إلى المش�
 $s_link_custom_field_to_project_button = 'وصل الحقل المخصص';
 $s_custom_field_sequence = 'تتابع';
 $s_custom_field_sequence_label = 'التسلسل:';
-$s_custom_field_type_enum_string = '0:سلسلة,1:رقمي,2:طائف,3:ترقيم,4:بريد إلكتروني,5:صندوق تعليم,6:قائمة,7:قائمه اختيار متعدد,8:تاريخ,9:راديو';
+$s_custom_field_type_enum_string = '0:سلسلة,1:رقمي,2:طائف,3:ترقيم,4:بريد إلكتروني,5:صندوق تعليم,6:قائمة,7:قائمه اختيار متعدد,8:تاريخ,9:راديو, 10:Textarea';
 $s_confirm_used_custom_field_deletion = 'هذا الحقل موصول من مشروع واحد على الأقل.  لو استمريت فكل القيم لهذا الحقل سيتم حذفها بشكل دائم.  هذا الفعل لا يمكن استرجاعه.  لو أنك لا تريد حذف هذا الحقل، اضغط زر رجوع فى متصفحك. للمتابعه، اضغط الزر بالأسفل';
 $s_confirm_custom_field_deletion = 'هل أنت متأكد أنك تريد حذف الحقل المخصص هذا وكل القيم المصاحبة؟';
 $s_field_delete_button = 'حذف الحقل';
@@ -954,7 +942,7 @@ $s_relationship_with_parent = 'العلاقه مع القضيه الأصلية';
 $s_delete_relationship_button = 'حذف';
 $s_delete_relationship_sure_msg = 'هل أنت متأكد أنك تريد حذف هذه العلاقة؟';
 $s_relationship_warning_blocking_bugs_not_resolved = 'ليس كل أطفال هذه القضيه تم حلهم أو إغلاقهم بعد.';
-$s_relationship_warning_blocking_bugs_not_resolved_2 = '<strong>انتباه</strong>. ليس كل أطفال هذه القضيه تم حلهم أو إغلاقهم.<br />قبل <strong>حل/إغلاق</strong> قضيه أساسيه، كل القضايا المرتبطه كأبناء لهذه الواحده ينبغى أن يتم حلها أو إغلاقها.';
+$s_relationship_warning_blocking_bugs_not_resolved_2 = '<b>انتباه</b>. ليس كل أطفال هذه القضيه تم حلهم أو إغلاقهم.<br />قبل <b>حل/إغلاق</b> قضيه أساسيه، كل القضايا المرتبطه كأبناء لهذه الواحده ينبغى أن يتم حلها أو إغلاقها.';
 $s_create_child_bug_button = 'استنسخ';
 $s_bug_cloned_to = 'القضيه تم تكرارها';
 $s_bug_created_from = 'القضيه تم توليدها من';
@@ -1109,8 +1097,6 @@ $s_month_september = 'سبتمبر';
 $s_month_october = 'أكتوبر';
 $s_month_november = 'نوفمبر';
 $s_month_december = 'ديسمبر';
-
-
 $MANTIS_ERROR[ERROR_GENERIC] = 'حدث خطأ خلال هذا الفعل. ربما ترغب فى إبلاغ هذا الخطأ إلى إداريك المحلى.';
 $MANTIS_ERROR[ERROR_SQL] = 'خطأ SQL تم كشفه.';
 $MANTIS_ERROR[ERROR_REPORT] = 'كان هناك خطأ فى تقريرك.';
@@ -1131,7 +1117,6 @@ $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'السلسله "%1$s" لم يتم 
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'الملاحظه لم يتم العثور عليها.';
 $MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'المشروع "%1$d" لم يتم العثور عليه.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'حقل قاعده البيانات "%1$s" لم يتم العثور عليه.';
-$MANTIS_ERROR[ERROR_FTP_CONNECT_ERROR] = 'غير قادر على الاتصال بخادم FTP.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'معالج القضايا لا يمتلك الصلاحيه الكافيه لمعالجه القضايا فى هذه الحاله.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'يوجد مشروع بهذا الاسم بالفعل. من فضلك عد وأدخل اسما مختلفا.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'اسم مشروع غير صحيح تم تحديده. أسماء المشاريع لا يمكن أن تكون فارغه.';
@@ -1218,7 +1203,7 @@ $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'الحقل "%1$s" يحتوى على ال
 $MANTIS_ERROR[ERROR_SESSION_HANDLER_INVALID] = 'معالج جلسه غير صحيح.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'متغير الجلسه "%1$s" لم يتم العثور عليه.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'جلستك أصبحت غير صحيحه.';
-$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'نص استماره سريه غير صحيح.  هل أرسلت الاستماره مرتين بطريق الخطأ؟';
+$MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'نص استماره سريه مش صحيح . يمكن السبب  وقت الجلسه  خلص أو انك  أرسلت الاستماره مرتين بطريق الخطأ';
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'هذه الصفحه لا يمكن الوصول إليها باستخدام هذه الطريقه.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'حقل ترتيب غير صحيح.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'نسق تاريخ غير صالح.';

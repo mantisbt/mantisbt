@@ -1,44 +1,57 @@
 <?php
-# MantisBT - A PHP based bugtracking system
-
-# MantisBT is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# MantisBT is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * Language File - Tagalog (Tagalog)
+/** MantisBT - a php based bugtracking system
  *
- * **********************************************************************
- * ** This file is generated from translations stored in translatewiki **
- * ** Information on Copyright/License for translatewiki translations  **
- * ** is available at http://translatewiki.net/wiki/Project:About      **
- * **********************************************************************
- * **                                                                  **
- * **                      DO NOT UPDATE MANUALLY                      **
- * **                                                                  **
- * ** To improve a translation please visit http://translatewiki.net   **
- * ** Detailed instructions on how to create or update translations at **
- * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
- * **********************************************************************
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ */
+/** Tagalog (Tagalog)
+ * 
  * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
  *
  * @ingroup Language
  * @file
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
- * @link http://www.mantisbt.org
  *
+ * @author AnakngAraw
  */
 
+$s_plugin_graph_title = 'Mga Talangguhit ng Mantis';
+$s_plugin_graph_description = 'Opisyal na pampasak ng talangguhit.';
+$s_plugin_MantisGraph_title = 'Mga Talangguhit ng Mantis';
+$s_plugin_MantisGraph_menu_advanced_summary = 'Mas masulong na Buod';
+$s_plugin_MantisGraph_config = 'Pagkakaayos';
+$s_plugin_MantisGraph_synthesis_link = 'Pagbubuo';
+$s_plugin_MantisGraph_status_link = 'Ayon sa kalagayan';
+$s_plugin_MantisGraph_priority_link = 'Ayon sa kahalagahan';
+$s_plugin_MantisGraph_severity_link = 'Ayon sa kalubhaan';
+$s_plugin_MantisGraph_category_link = 'Ayon sa kategorya';
+$s_plugin_MantisGraph_resolution_link = 'Ayon sa resolusyon';
+$s_plugin_MantisGraph_graph_bug_page_link = 'Talangguhit';
+$s_plugin_MantisGraph_library = 'Gagamiting aklatan ng talangguhit';
+$s_plugin_MantisGraph_bundled = 'Nakabungkos';
+$s_plugin_MantisGraph_window_width = 'Lapad ng talangguhit (nasa mga piksel)';
+$s_plugin_MantisGraph_bar_aspect = 'katumbas na sukat ng aspeto ng talangguhit na bareta (taas/lapad)';
+$s_plugin_MantisGraph_summary_graphs_per_row = 'Mga talangguhit na ipapakita bawat pababang hanay sa ibabaw ng pahina ng mas masulong na buod';
+$s_plugin_MantisGraph_font = 'Estilo ng titik';
+$s_plugin_MantisGraph_jpgraph_path = 'Landas ng sistema ng aklatang JpGraph';
+$s_plugin_MantisGraph_jpgraph_path_default = 'Iwanang walang laman para sa likas na pagtatakda: {mantisroot}/library/jpgraph';
+$s_plugin_MantisGraph_jpgraph_antialias = 'Panlaban sa pagbabansag ng JpGraph';
+$s_plugin_MantisGraph_jpgraph_antialias_info = 'Pinapainam ng panlaban ng pagbabansag ang anyong natatanaw ng partikular na mga talangguhit kapalit ng pagganap (hanggang sa 8x na pagbagal)';
+$s_plugin_MantisGraph_enabled = 'Buhay';
+$s_plugin_MantisGraph_disabled = 'Nakapatay';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Mga talangguhit ng paglalangkap ayon sa kalagayan';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'Mga talangguhit ng paglalangkap ayon sa priyoridad (dapat mauna)';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Mga talangguhit ng paglalangkap ayon sa kalubhaan';
