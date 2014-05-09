@@ -812,7 +812,7 @@ $s_configuration_option_value = 'Value';
 $s_all_users = 'All Users';
 $s_set_configuration_option = 'Set Configuration Option';
 $s_delete_config_sure_msg = 'Are you sure you wish to delete this configuration option?';
-$s_configuration_corrupted = 'The configuration in database is corrupted.';
+$s_configuration_corrupted = 'The configuration in the database is corrupted.';
 
 # manage_plugin_page.php
 $s_plugin = 'Plugin';
@@ -1685,7 +1685,7 @@ $MANTIS_ERROR[ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS] = 'Unable to find
 $MANTIS_ERROR[ERROR_INVALID_REQUEST_METHOD] = 'This page cannot be accessed using this method.';
 $MANTIS_ERROR[ERROR_INVALID_SORT_FIELD] = 'Invalid sort field.';
 $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Invalid date format.';
-$MANTIS_ERROR[ERROR_INVALID_RESOLUTION] = 'Resolution "%1$s" is not allowed for status "%2$s"';
+$MANTIS_ERROR[ERROR_INVALID_RESOLUTION] = 'Resolution "%1$s" is not allowed for status "%2$s".';
 $MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Unable to update timezone.';
 $MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = 'Deprecated functionality: "%1$s", use "%2$s" instead.';
 $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'WARNING: System is configured to display MantisBT errors (E_USER_ERROR) inline. Program execution will continue; this may lead to system/data integrity issues.';
