@@ -678,12 +678,13 @@ $g_default_language = 'auto';
  * list the choices that the users are allowed to choose
  * @global array $g_language_choices_arr
  */
-$g_language_choices_arr	= array(
+$g_language_choices_arr = array(
 	'auto',
 	'afrikaans',
 	'amharic',
 	'arabic',
 	'arabicegyptianspoken',
+	'belarusian_tarask',
 	'breton',
 	'bulgarian',
 	'catalan',
@@ -703,6 +704,7 @@ $g_language_choices_arr	= array(
 	'hebrew',
 	'hungarian',
 	'icelandic',
+	'interlingua',
 	'italian',
 	'japanese',
 	'korean',
@@ -728,6 +730,7 @@ $g_language_choices_arr	= array(
 	'turkish',
 	'ukrainian',
 	'urdu',
+	'vietnamese',
 	'volapuk',
 );
 
@@ -740,6 +743,7 @@ $g_language_auto_map = array(
 	'am' => 'amharic',
 	'ar' => 'arabic',
 	'arz' => 'arabicegyptianspoken',
+	'be-tarask' => 'belarusian_tarask',
 	'bg' => 'bulgarian',
 	'br' => 'breton',
 	'ca' => 'catalan',
@@ -759,6 +763,7 @@ $g_language_auto_map = array(
 	'hu' => 'hungarian',
 	'hr' => 'croatian',
 	'is' => 'icelandic',
+	'ia' => 'interlingua',
 	'it-ch, it' => 'italian',
 	'ja' => 'japanese',
 	'ko' => 'korean',
@@ -782,6 +787,7 @@ $g_language_auto_map = array(
 	'tl' => 'tagalog',
 	'tr' => 'turkish',
 	'uk' => 'ukrainian',
+	'vi' => 'vietnamese',
 	'vo' => 'volapuk',
 );
 
