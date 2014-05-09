@@ -1,0 +1,109 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Vietnamese (Tiếng Việt)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Duongnvm
+ */
+
+$s_plugin_graph_title = 'Đồ thị Mantis';
+$s_plugin_graph_description = 'Plugin đồ thị chính thức';
+$s_plugin_MantisGraph_title = 'Đồ thị Mantis';
+$s_plugin_MantisGraph_menu_advanced_summary = 'Tóm tắt nâng cao';
+$s_plugin_MantisGraph_config = 'Cấu hình';
+$s_plugin_MantisGraph_synthesis_link = 'Tổng hợp';
+$s_plugin_MantisGraph_status_link = 'Tỷ lệ trạng thái';
+$s_plugin_MantisGraph_priority_link = 'Tỷ lệ ưu tiên';
+$s_plugin_MantisGraph_severity_link = 'Tỷ lệ độ nghiêm trọng';
+$s_plugin_MantisGraph_category_link = 'Tỷ lệ chuyên mục';
+$s_plugin_MantisGraph_resolution_link = 'Tỷ lệ giải quyết';
+$s_plugin_MantisGraph_graph_bug_page_link = 'Đồ thị';
+$s_plugin_MantisGraph_library = 'Thư viện đồ thị để sử dụng';
+$s_plugin_MantisGraph_bundled = 'Đóng gói';
+$s_plugin_MantisGraph_window_width = 'Chiều rộng đồ thị (bằng pixels)';
+$s_plugin_MantisGraph_bar_aspect = 'Biểu đồ thanh tỉ lệ (chiều cao/chiều rộng)';
+$s_plugin_MantisGraph_summary_graphs_per_row = 'Đồ thị hiển thị mỗi hàng trên trang tóm tắt nâng cao';
+$s_plugin_MantisGraph_font = 'Font';
+$s_plugin_MantisGraph_jpgraph_path = 'Đường dẫn hệ thống thư viện JpGraph';
+$s_plugin_MantisGraph_jpgraph_path_default = 'Để trống mặc định: {mantisroot} / thư viện / jpgraph';
+$s_plugin_MantisGraph_jpgraph_antialias = 'JpGraph anti-aliasing';
+$s_plugin_MantisGraph_jpgraph_antialias_info = 'Anti-aliasing cải thiện hình thức trực quan của đồ thị nhất định tại các chi phí của hoạt động (lên đến 8x chậm hơn)';
+$s_plugin_MantisGraph_enabled = 'Trên';
+$s_plugin_MantisGraph_disabled = 'Tắt';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Tổng hợp đồ thị theo trạng thái';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Tổng hợp đồ thị theo độ ưu tiên';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Tổng hợp đồ thị theo độ nghiêm trọng';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Tổng hợp đồ thị theo chuyên mục';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Tổng hợp đồ thị theo cách giải quyết';
+$s_plugin_MantisGraph_by_status_pct = 'Bởi trạng thái tỷ lệ phần trăm';
+$s_plugin_MantisGraph_by_priority_pct = 'Bởi tỷ lệ ưu tiên';
+$s_plugin_MantisGraph_by_severity_pct = 'Bởi tỷ lệ độ nghiêm trọng';
+$s_plugin_MantisGraph_by_category_pct = 'Bởi tỷ lệ chuyên mục';
+$s_plugin_MantisGraph_by_resolution_pct = 'Bỏi tỷ lệ giải quyết';
+$s_plugin_MantisGraph_by_severity_mix = 'Bởi mức độ nghiêm trọng và trạng thái';
+$s_plugin_MantisGraph_by_priority_mix = 'Bởi ưu tiên và trạng thái';
+$s_plugin_MantisGraph_by_resolution_mix = 'Bởi cách giải quyết và trạng thái';
+$s_plugin_MantisGraph_legend_still_open = 'Vẫn mở';
+$s_plugin_MantisGraph_legend_resolved = 'Giải quyết';
+$s_plugin_MantisGraph_legend_assigned = 'Chỉ định';
+$s_plugin_MantisGraph_legend_total = 'Tổng cộng';
+$s_plugin_MantisGraph_legend_opened = 'Đã mở';
+$s_plugin_MantisGraph_legend_closed = 'Đã đóng';
+$s_plugin_MantisGraph_legend_reported = 'Báo cáo';
+$s_plugin_MantisGraph_cumulative = 'Tích lũy';
+$s_plugin_MantisGraph_not_enough_data = 'Không đủ dữ liệu để tạo đồ thị';
+$s_plugin_MantisGraph_period_none = 'Không có';
+$s_plugin_MantisGraph_period_this_week = 'Tuần này';
+$s_plugin_MantisGraph_period_last_week = 'Tuần trước';
+$s_plugin_MantisGraph_period_two_weeks = 'Hai tuần trước';
+$s_plugin_MantisGraph_period_this_month = 'Tháng này';
+$s_plugin_MantisGraph_period_last_month = 'Tháng trước';
+$s_plugin_MantisGraph_period_this_quarter = 'Quý này';
+$s_plugin_MantisGraph_period_last_quarter = 'Quý trước';
+$s_plugin_MantisGraph_period_year_to_date = 'Năm tới ngày';
+$s_plugin_MantisGraph_period_select = 'Tùy ý ngày';
+$s_plugin_MantisGraph_period_last_year = 'Năm trước';
+$s_plugin_MantisGraph_select = 'Hãy chọn';
+$s_plugin_MantisGraph_select_bystatus = 'theo trạng thái';
+$s_plugin_MantisGraph_select_summbystatus = 'Tóm tắt theo trạng thái';
+$s_plugin_MantisGraph_select_bycat = 'Tóm tắt theo chuyên mục';
+$s_plugin_MantisGraph_select_both = 'Tóm tắt thao trạng thái và chuyên mục';
+$s_plugin_MantisGraph_show_as_graph = 'Hiển thị như đồ thị';
+$s_plugin_MantisGraph_show_as_table = 'Hiển thị như biểu bảng';
+$s_plugin_MantisGraph_show_graph = 'Hiển thị đồ thị';
+$s_plugin_MantisGraph_graph_page = 'Biểu đồ lịch sử issue';

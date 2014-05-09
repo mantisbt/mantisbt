@@ -1,0 +1,62 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Vietnamese (Tiếng Việt)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Duongnvm
+ * @author Tuankiet65
+ */
+
+$s_plugin_XmlImportExport_title = 'Xuất/nhập khẩu các issue';
+$s_plugin_XmlImportExport_description = 'Thêm XML dựa trên khả năng xuất nhập khẩu đến MantisBT';
+$s_plugin_XmlImportExport_import = 'Nhập khẩu các issue';
+$s_plugin_XmlImportExport_export = 'Xuất khẩu XML';
+$s_plugin_XmlImportExport_importing_in_project = 'Nhập khẩu các issue trong dự án:';
+$s_plugin_XmlImportExport_import_options = 'Các tùy chọn nhập khẩu';
+$s_plugin_XmlImportExport_cross_references = 'Xem qua các tài liệu tham khải';
+$s_plugin_XmlImportExport_default_strategy = 'Mặc định chuyển đổi chiến lược:';
+$s_plugin_XmlImportExport_renumber = 'Ghi số lại';
+$s_plugin_XmlImportExport_renumber_desc = 'Cố gắng để chuyển đổi tài liệu tham khảo để đánh số mới';
+$s_plugin_XmlImportExport_link = 'Liên kết';
+$s_plugin_XmlImportExport_link_desc = 'Chuyển đổi thành một liên kết đến mục gốc';
+$s_plugin_XmlImportExport_disable = 'Vô hiệu hoá';
+$s_plugin_XmlImportExport_disable_desc = 'Vô hiệu hóa các liên kết';
+$s_plugin_XmlImportExport_fallback = 'Chiến lược dự phòng (khi "Ghi số lại" không áp dụng):';
+$s_plugin_XmlImportExport_fallback_category = 'Chuyên mục dự phòng';
+$s_plugin_XmlImportExport_keep_same_category = 'Cố gắng giữ cùng chuyên mục';
+$s_plugin_XmlImportExport_error_no_xml = 'không thể tìm thấy phần mở rộng xmlreader và xmlwriter';

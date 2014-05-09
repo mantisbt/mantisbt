@@ -1,0 +1,109 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Serbian (Latin script) (srpski (latinica)‎)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Rancher
+ */
+
+$s_plugin_graph_title = 'Grafikoni za MantisBT';
+$s_plugin_graph_description = 'Zvanični dodatak za iscrtavanje grafikona.';
+$s_plugin_MantisGraph_title = 'Grafikoni za MantisBT';
+$s_plugin_MantisGraph_menu_advanced_summary = 'Napredni opis';
+$s_plugin_MantisGraph_config = 'Podešavanje';
+$s_plugin_MantisGraph_synthesis_link = 'Sinteza';
+$s_plugin_MantisGraph_status_link = 'Po stanju';
+$s_plugin_MantisGraph_priority_link = 'Po važnosti';
+$s_plugin_MantisGraph_severity_link = 'Po ozbiljnosti';
+$s_plugin_MantisGraph_category_link = 'Po kategoriji';
+$s_plugin_MantisGraph_resolution_link = 'Po rezoluciji';
+$s_plugin_MantisGraph_graph_bug_page_link = 'Grafikon';
+$s_plugin_MantisGraph_library = 'Grafikonska biblioteka za korišćenje';
+$s_plugin_MantisGraph_bundled = 'Grupisano';
+$s_plugin_MantisGraph_window_width = 'Širina grafikona (u pikselima)';
+$s_plugin_MantisGraph_bar_aspect = 'Razmera grafikona (visina/širina)';
+$s_plugin_MantisGraph_summary_graphs_per_row = 'Koliko grafikona da se prikazuje u redu na naprednoj stranici za opis';
+$s_plugin_MantisGraph_font = 'Font';
+$s_plugin_MantisGraph_jpgraph_path = 'Sistemska putanja do biblioteke JpGraph';
+$s_plugin_MantisGraph_jpgraph_path_default = 'Ostavite prazno za korišćenje podrazumevanih postavki: {mantisroot}/library/jpgraph';
+$s_plugin_MantisGraph_jpgraph_antialias = 'Omekšavanje JpGraph';
+$s_plugin_MantisGraph_jpgraph_antialias_info = 'Omekšavanje poboljšava izgled određenih grafikona na štetu brzine rada (do osam puta sporije)';
+$s_plugin_MantisGraph_enabled = 'Uključeno';
+$s_plugin_MantisGraph_disabled = 'Isključeno';
+$s_plugin_MantisGraph_graph_imp_status_title = 'Sintetički grafikoni po stanju';
+$s_plugin_MantisGraph_graph_imp_priority_title = 'Sintetički grafikoni po važnosti';
+$s_plugin_MantisGraph_graph_imp_severity_title = 'Sintetički grafikoni po ozbiljnosti';
+$s_plugin_MantisGraph_graph_imp_category_title = 'Sintetički grafikoni po kategoriji';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Sintetički grafikoni po rezoluciji';
+$s_plugin_MantisGraph_by_status_pct = 'Po stanju (%)';
+$s_plugin_MantisGraph_by_priority_pct = 'Po važnosti (%)';
+$s_plugin_MantisGraph_by_severity_pct = 'Po ozbiljnosti (%)';
+$s_plugin_MantisGraph_by_category_pct = 'Po kategoriji (%)';
+$s_plugin_MantisGraph_by_resolution_pct = 'Po rešenju (%)';
+$s_plugin_MantisGraph_by_severity_mix = 'Po ozbiljnosti i stanju';
+$s_plugin_MantisGraph_by_priority_mix = 'Po važnosti i stanju';
+$s_plugin_MantisGraph_by_resolution_mix = 'Po rešenju i stanju';
+$s_plugin_MantisGraph_legend_still_open = 'Još otvoreno';
+$s_plugin_MantisGraph_legend_resolved = 'Rešeno';
+$s_plugin_MantisGraph_legend_assigned = 'Dodeljeno';
+$s_plugin_MantisGraph_legend_total = 'Ukupno';
+$s_plugin_MantisGraph_legend_opened = 'Otvoreno';
+$s_plugin_MantisGraph_legend_closed = 'Zatvoreno';
+$s_plugin_MantisGraph_legend_reported = 'Prijavljeno';
+$s_plugin_MantisGraph_cumulative = 'Sveukupno sabrano';
+$s_plugin_MantisGraph_not_enough_data = 'Nema dovoljno podataka za stvaranje grafikona';
+$s_plugin_MantisGraph_period_none = 'Nema';
+$s_plugin_MantisGraph_period_this_week = 'Ova nedelja';
+$s_plugin_MantisGraph_period_last_week = 'Prethodna nedelja';
+$s_plugin_MantisGraph_period_two_weeks = 'Prethodne dve nedelje';
+$s_plugin_MantisGraph_period_this_month = 'Ovaj mesec';
+$s_plugin_MantisGraph_period_last_month = 'Prethodni mesec';
+$s_plugin_MantisGraph_period_this_quarter = 'Ovo tromesečje';
+$s_plugin_MantisGraph_period_last_quarter = 'Prethodno tromesečje';
+$s_plugin_MantisGraph_period_year_to_date = 'Za tačno jednu godinu';
+$s_plugin_MantisGraph_period_select = 'Proizvoljni datumi';
+$s_plugin_MantisGraph_period_last_year = 'Prethodna godina';
+$s_plugin_MantisGraph_select = 'Izaberite';
+$s_plugin_MantisGraph_select_bystatus = 'po stanju';
+$s_plugin_MantisGraph_select_summbystatus = 'Opis po stanju';
+$s_plugin_MantisGraph_select_bycat = 'Opis po kategoriji';
+$s_plugin_MantisGraph_select_both = 'Opis po stanju i kategoriji';
+$s_plugin_MantisGraph_show_as_graph = 'Prikaži kao grafikon';
+$s_plugin_MantisGraph_show_as_table = 'Prikaži kao tabelu';
+$s_plugin_MantisGraph_show_graph = 'Prikaži grafikon';
+$s_plugin_MantisGraph_graph_page = 'Istorija problema s grafikonom';

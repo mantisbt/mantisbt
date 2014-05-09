@@ -1,0 +1,61 @@
+<?php
+/** MantisBT - a php based bugtracking system
+ *
+ * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ *
+ * MantisBT is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * MantisBT is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * **********************************************************************
+ * ** This file contains translations stored in translatewiki.net.     **
+ * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** on copyright/license for translatewiki.net translations.         **
+ * **********************************************************************
+ * **                                                                  **
+ * **                      DO NOT UPDATE MANUALLY                      **
+ * **                                                                  **
+ * ** To improve a translation please visit http://translatewiki.net   **
+ * ** Detailed instructions on how to create or update translations at **
+ * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
+ * **********************************************************************
+ */
+/** Serbian (Cyrillic script) (српски (ћирилица)‎)
+ * 
+ * See the qqq 'language' for message documentation incl. usage of parameters
+ * To improve a translation please visit http://translatewiki.net
+ *
+ * @ingroup Language
+ * @file
+ *
+ * @author Rancher
+ */
+
+$s_plugin_XmlImportExport_title = 'Проблеми у увозу/извозу';
+$s_plugin_XmlImportExport_description = 'Додаје могућности увоза и извоза у XML.';
+$s_plugin_XmlImportExport_import = 'Увези проблеме';
+$s_plugin_XmlImportExport_export = 'XML извоз';
+$s_plugin_XmlImportExport_importing_in_project = 'Увожење проблема у пројекат:';
+$s_plugin_XmlImportExport_import_options = 'Поставке увоза';
+$s_plugin_XmlImportExport_cross_references = 'Упућивања';
+$s_plugin_XmlImportExport_default_strategy = 'Подразумевана стратегија за претварање:';
+$s_plugin_XmlImportExport_renumber = 'Пренумериши';
+$s_plugin_XmlImportExport_renumber_desc = 'Пробај да претвориш наводе у нове бројеве';
+$s_plugin_XmlImportExport_link = 'Веза';
+$s_plugin_XmlImportExport_link_desc = 'Претвори у везу до изворне ставке';
+$s_plugin_XmlImportExport_disable = 'Онемогући';
+$s_plugin_XmlImportExport_disable_desc = 'Онемогући везу';
+$s_plugin_XmlImportExport_fallback = 'Резервна стратегија (када „Пренумериши“ не важи):';
+$s_plugin_XmlImportExport_fallback_category = 'Резервна категорија:';
+$s_plugin_XmlImportExport_keep_same_category = 'Пробај да задржиш исту категорију';
+$s_plugin_XmlImportExport_error_no_xml = 'не могу да пронађем проширења xmlreader и xmlwriter';
