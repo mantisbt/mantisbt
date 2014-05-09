@@ -645,7 +645,7 @@ $s_warning_default_administrator_account_present = '<strong>Warning:</strong> Yo
 $s_warning_admin_directory_present = '<strong>Warning:</strong> Admin directory should be removed.';
 $s_warning_change_setting = '<strong>Warning:</strong> "%1$s" is not set to its default value (%2$s).';
 $s_warning_security_hazard = 'This is a potential security hazard as it can expose sensitive information.';
-$s_warning_integrity_hazard = 'This will cause Mantis to continue when errors occurs and may lead to system/data integrity issues.';
+$s_warning_integrity_hazard = 'This will cause MantisBT to continue when errors occurs and may lead to system/data integrity issues.';
 $s_warning_debug_email = '<strong>Warning:</strong> "<code>debug_email</code>" is not set to <code>OFF</code>, all notification e-mails will be sent to "%1$s".';
 $s_error_database_no_schema_version = '<strong>Error:</strong> The database structure appears to be out of date (config(databaseversion) is 0) or corrupt. Please check that your database is running - we can not retrieve the database schema version. Config Table did not return a valid database schema version - please ask for support on the mantis-help mailing list if required.';
 $s_error_database_version_out_of_date_2 = '<strong>Warning:</strong> The database structure may be out of date. Please upgrade <a href="admin/install.php">here</a> before logging in.';
@@ -1688,5 +1688,5 @@ $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Invalid date format.';
 $MANTIS_ERROR[ERROR_INVALID_RESOLUTION] = 'Resolution "%1$s" is not allowed for status "%2$s".';
 $MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Unable to update timezone.';
 $MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = 'Deprecated functionality: "%1$s", use "%2$s" instead.';
-$MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'WARNING: System is configured to display MantisBT errors (E_USER_ERROR) inline. Program execution will continue; this may lead to system/data integrity issues.';
+$MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'Warning: The system is configured to display MantisBT errors (E_USER_ERROR) inline. Program execution will continue; this may lead to system/data integrity issues.';
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Data Type mismatch. Enable detailed error messages for further information.';
