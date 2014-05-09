@@ -324,6 +324,7 @@ $s_search = 'Sichen';
 $s_prev = 'Vireg';
 $s_next = 'Nächst';
 $s_first = 'Éischt';
+$s_last = 'Lescht';
 $s_yes = 'Jo';
 $s_no = 'Neen';
 $s_open_filters = 'Filter änneren';
