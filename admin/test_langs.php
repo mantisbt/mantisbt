@@ -225,6 +225,8 @@ class LangCheckFile {
 			return false;
 		}
 
+		$t_do_html_check = extension_loaded('dom') && extension_loaded( 'libxml' );
+
 		$t_line = 0;
 		$t_variables = array();
 		static $s_basevariables;
@@ -351,7 +353,7 @@ class LangCheckFile {
 						$t_expect_end_array = true;
 						break;
 					case T_CONSTANT_ENCAPSED_STRING:
-						if( $t_token[1][0] != '\'' ) {
+						if( $t_text[0] != '\'' ) {
 							$this->logWarn( "Language strings should be single-quoted", $t_line );
 						}
 						if( $t_variable_array ) {
@@ -380,6 +382,29 @@ class LangCheckFile {
 							$t_pass = false;
 							$t_fatal = true;
 						}
+
+						# Perform HTML tags validation if the string contains any
+						if( $t_do_html_check && preg_match( '~</?[[:alpha:]][[:alnum:]]*>~iU', $t_text) ) {
+							/** @noinspection PhpComposerExtensionStubsInspection */
+							$t_dom = new DOMDocument();
+							set_error_handler(
+								function( $p_type, $p_error ) {
+									$t_msg = preg_replace( '/^DOM.*: (.*), line.*$/U', '\\1', $p_error );
+									/** @noinspection PhpUnhandledExceptionInspection See try/catch block below*/
+									throw new Exception( $t_msg );
+								},
+								E_WARNING
+							);
+							try {
+								/** @noinspection PhpComposerExtensionStubsInspection */
+								$t_dom->loadHTML( $t_text, LIBXML_HTML_NOIMPLIED );
+							}
+							catch( Exception $e ) {
+								$this->logWarn( $e->getMessage() . " for string $t_current_var", $t_line );
+							}
+							restore_error_handler();
+						}
+
 						$t_current_var = null;
 						$t_need_end_variable = true;
 						break;
