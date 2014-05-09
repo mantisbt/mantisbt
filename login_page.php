@@ -217,6 +217,7 @@ if ( config_get_global( 'admin_checks' ) == ON ) {
 	# Warnings for enabled debugging / developer settings
 	function debug_setting_message ( $p_type, $p_setting, $p_value ) {
 		return sprintf( lang_get( 'warning_change_setting' ), $p_setting, $p_value )
+			. sprintf( lang_get( 'word_separator' ) )
 			. sprintf( lang_get( "warning_${p_type}_hazard" ) );
 	}
 
