@@ -110,14 +110,16 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 	}
 
 	# build an appropriate error string
+	$t_error_description = "'$p_error' in '$p_file' line $p_line";
 	switch( $p_type ) {
 		case E_WARNING:
 			$t_error_type = 'SYSTEM WARNING';
-			$t_error_description = "'$p_error' in '$p_file' line $p_line";
 			break;
 		case E_NOTICE:
 			$t_error_type = 'SYSTEM NOTICE';
-			$t_error_description = "'$p_error' in '$p_file' line $p_line";
+			break;
+		case E_DEPRECATED:
+			$t_error_type = 'DEPRECATED';
 			break;
 		case E_USER_ERROR:
 			$t_error_type = "APPLICATION ERROR #$p_error";
@@ -137,116 +139,127 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 			$t_error_description = $p_error;
 			break;
 		default:
-
 			# shouldn't happen, just display the error just in case
-			$t_error_type = '';
+			$t_error_type = "UNHANDLED ERROR TYPE ($p_type)";
 			$t_error_description = $p_error;
 	}
 
 	$t_error_description = nl2br( $t_error_description );
 
 	if( php_sapi_name() == 'cli' ) {
-		echo $t_error_type . " " . $t_error_description . "\n";
-		exit();
-	}
-
-	switch( $t_method ) {
-		case DISPLAY_ERROR_HALT:
-			# disable any further event callbacks
-			if ( function_exists( 'event_clear_callbacks' ) ) {
-				event_clear_callbacks();
-			}
-
-			$t_oblen = ob_get_length();
-			if( $t_oblen > 0 ) {
-				$t_old_contents = ob_get_contents();
-				if( !error_handled() ) {
-					# Retrieve the previously output header
-					if( false !== preg_match_all( '|^(.*)(</head>.*$)|is', $t_old_contents, $t_result ) ) {
-						$t_old_headers = $t_result[1][0];
-						unset( $t_old_contents );
-					}
-				}
-			}
-
-			# We need to ensure compression is off - otherwise the compression headers are output.
-			compress_disable();
-
-			# then clean the buffer, leaving output buffering on.
-			if( $t_oblen > 0 ) {
-				ob_clean();
-			}
-
-			# don't send the page header information if it has already been sent
-			if( $g_error_send_page_header ) {
-				if( $t_html_api ) {
-					html_page_top1();
-					if( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected == true ) {
-						html_page_top2();
-					} else {
-						html_page_top2a();
-					}
-				} else {
-					echo '<html><head><title>', $t_error_type, '</title></head><body>';
-				}
-			} else {
-				# Output the previously sent headers, if defined
-				if( isset( $t_old_headers ) ) {
-					echo $t_old_headers, "\n";
-					html_page_top2();
-				}
-			}
-
-			echo '<div id="error-msg">';
-			echo '<div class="error-type">' . $t_error_type . '</div>';
-			echo '<div class="error-description">', $t_error_description, '</div>';
-
-			echo '<div class="error-info">';
-			if( null === $g_error_proceed_url ) {
-				echo lang_get( 'error_no_proceed' );
-			} else {
-				echo '<a href="', $g_error_proceed_url, '">', lang_get( 'proceed' ), '</a>';
-			}
-			echo '</div>';
+		if( DISPLAY_ERROR_NONE != $t_method ) {
+			echo $t_error_type . ": " . $t_error_description . "\n";
 
 			if( ON == config_get_global( 'show_detailed_errors' ) ) {
-				echo '<div class="error-details">';
-				error_print_details( $p_file, $p_line, $p_context );
-				echo '</div>';
-				echo '<div class="error-trace">';
-				error_print_stack_trace();
-				echo '</div>';
+				echo "\n";
+				debug_print_backtrace();
 			}
-			echo '</div>';
-
-			if( isset( $t_old_contents ) ) {
-				echo '<div class="warning">Previous non-fatal errors occurred.  Page contents follow.</div>';
-				echo '<div id="old-contents">';
-				echo $t_old_contents;
-				echo '</div>';
-			}
-
-			if( $t_html_api ) {
-				if( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected == true ) {
-					html_page_bottom();
-				} else {
-					html_body_end();
-					html_end();
-				}
-			} else {
-				echo '</body></html>', "\n";
-			}
-			exit();
-		case DISPLAY_ERROR_INLINE:
-			echo '<div class="error-inline">', $t_error_type, ': ', $t_error_description, '</div>';
-			$g_error_handled = true;
-			break;
-		default:
-			# do nothing - note we treat this as we've not handled an error, so any redirects go through.
 		}
+		if( DISPLAY_ERROR_HALT == $t_method ) {
+			exit(1);
+		}
+	} else {
 
-		if( $t_lang_pushed ) {
-			lang_pop();
+		switch( $t_method ) {
+			case DISPLAY_ERROR_HALT:
+				# disable any further event callbacks
+				if ( function_exists( 'event_clear_callbacks' ) ) {
+					event_clear_callbacks();
+				}
+
+				$t_oblen = ob_get_length();
+				if( $t_oblen > 0 ) {
+					$t_old_contents = ob_get_contents();
+					if( !error_handled() ) {
+						# Retrieve the previously output header
+						if( false !== preg_match_all( '|^(.*)(</head>.*$)|is', $t_old_contents, $t_result ) ) {
+							$t_old_headers = $t_result[1][0];
+							unset( $t_old_contents );
+						}
+					}
+				}
+
+				# We need to ensure compression is off - otherwise the compression headers are output.
+				compress_disable();
+
+				# then clean the buffer, leaving output buffering on.
+				if( $t_oblen > 0 ) {
+					ob_clean();
+				}
+
+				# don't send the page header information if it has already been sent
+				if( $g_error_send_page_header ) {
+					if( $t_html_api ) {
+						html_page_top1();
+						if( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected == true ) {
+							html_page_top2();
+						} else {
+							html_page_top2a();
+						}
+					} else {
+						echo '<html><head><title>', $t_error_type, '</title></head><body>';
+					}
+				} else {
+					# Output the previously sent headers, if defined
+					if( isset( $t_old_headers ) ) {
+						echo $t_old_headers, "\n";
+						html_page_top2();
+					}
+				}
+
+				echo '<div id="error-msg">';
+				echo '<div class="error-type">' . $t_error_type . '</div>';
+				echo '<div class="error-description">', $t_error_description, '</div>';
+
+				echo '<div class="error-info">';
+				if( null === $g_error_proceed_url ) {
+					echo lang_get( 'error_no_proceed' );
+				} else {
+					echo '<a href="', $g_error_proceed_url, '">', lang_get( 'proceed' ), '</a>';
+				}
+				echo '</div>';
+
+				if( ON == config_get_global( 'show_detailed_errors' ) ) {
+					echo '<div class="error-details">';
+					error_print_details( $p_file, $p_line, $p_context );
+					echo '</div>';
+					echo '<div class="error-trace">';
+					error_print_stack_trace();
+					echo '</div>';
+				}
+				echo '</div>';
+
+				if( isset( $t_old_contents ) ) {
+					echo '<div class="warning">Previous non-fatal errors occurred.  Page contents follow.</div>';
+					echo '<div id="old-contents">';
+					echo $t_old_contents;
+					echo '</div>';
+				}
+
+				if( $t_html_api ) {
+					if( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected == true ) {
+						html_page_bottom();
+					} else {
+						html_body_end();
+						html_end();
+					}
+				} else {
+					echo '</body></html>', "\n";
+				}
+				exit(1);
+
+			case DISPLAY_ERROR_INLINE:
+				echo '<div class="error-inline">', $t_error_type, ': ', $t_error_description, '</div>';
+				$g_error_handled = true;
+				break;
+
+			default:
+				# do nothing - note we treat this as we've not handled an error, so any redirects go through.
+		}
+	}
+
+	if( $t_lang_pushed ) {
+		lang_pop();
 	}
 
 	$g_error_parameters = array();
