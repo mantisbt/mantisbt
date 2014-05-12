@@ -90,7 +90,7 @@ function log_event( $p_level, $p_msg ) {
 	$t_now = date( config_get_global( 'complete_date_format' ) );
 	$t_level = $g_log_levels[$p_level];
 
-	$t_plugin_event = '[' . $t_level . '] ' . $p_msg;
+	$t_plugin_event = '[' . $t_level . '] ' . $t_msg;
 	if( function_exists( 'event_signal' ) ) {
 		event_signal( 'EVENT_LOG', array( $t_plugin_event ) );
 	}
@@ -130,7 +130,7 @@ function log_event( $p_level, $p_msg ) {
 				if( $s_firephp === null ) {
 					$s_firephp = FirePHP::getInstance( true );
 				}
-				$s_firephp->log( $p_msg, $t_php_event );
+				$s_firephp->log( $t_msg, $t_php_event );
 				return;
 			}
 			# if firebug is not available, fall through
