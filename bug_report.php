@@ -193,10 +193,13 @@ $t_bug_id = $t_bug_data->create();
 last_visited_issue( $t_bug_id );
 
 # Handle the file upload
-$t_files = helper_array_transpose( $f_files );
-foreach( $t_files as $t_file ) {
-	if( !empty( $t_file['name'] ) ) {
-		file_add( $t_bug_id, $t_file, 'bug' );
+if( !is_null( $f_files ) ) {
+	$t_files = helper_array_transpose( $f_files );
+	var_dump($t_files);
+	foreach( $t_files as $t_file ) {
+		if( !empty( $t_file['name'] ) ) {
+			file_add( $t_bug_id, $t_file, 'bug' );
+		}
 	}
 }
 
