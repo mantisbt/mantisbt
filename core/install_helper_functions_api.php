@@ -532,6 +532,40 @@ function install_update_history_long_custom_fields() {
 }
 
 /**
+ * Schema update to check that project hierarchy was valid
+ */
+function install_check_project_hierarchy() {
+	$t_project_hierarchy_table = db_get_table( 'project_hierarchy' );
+	$query = 'SELECT count(child_id) as count, child_id, parent_id FROM ' . $t_project_hierarchy_table . ' GROUP BY child_id, parent_id';
+
+	$t_result = db_query_bound( $query );
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$count = (int)$t_row['count'];
+		$child_id = (int)$t_row['child_id'];
+		$parent_id = (int)$t_row['parent_id'];
+
+		if( $count > 1 ) {
+			$query = 'SELECT inherit_parent, child_id, parent_id FROM ' . $t_project_hierarchy_table . ' WHERE child_id=' . db_param() . " AND parent_id=" . db_param();
+			$t_result2 = db_query_bound( $query, array( $child_id, $parent_id ) );
+
+			// get first result for inherit_parent, discard the rest
+			$t_row2 = db_fetch_array( $t_result2 );
+
+			$inherit = $t_row2['inherit_parent'];
+
+			$t_query_delete = 'DELETE FROM ' . $t_project_hierarchy_table . ' WHERE child_id=' . db_param() . " AND parent_id=" . db_param();
+			db_query_bound( $t_query_delete, array( $child_id, $parent_id ) );
+
+			$t_query_insert = 'INSERT INTO ' . $t_project_hierarchy_table . ' (child_id, parent_id, inherit_parent) VALUES (' . db_param() . "," . db_param() . "," . db_param() . ')';
+			db_query_bound( $t_query_insert, array( $child_id, $parent_id, $inherit ) );
+		}
+	}
+
+	# Return 2 because that's what ADOdb/DataDict does when things happen properly
+	return 2;
+}
+
+/**
  * create an SQLArray to insert data
  *
  * @param string $p_table table
