@@ -47,6 +47,7 @@
  * @author M42
  * @author Malafaya
  * @author McDutchie
+ * @author Vitorvicentevalente
  * @author Waldir
  */
 
@@ -451,6 +452,7 @@ $s_show_content = 'Mostrar conteúdo';
 $s_total_queries_executed = '%1$d queries executadas no total.';
 $s_unique_queries_executed = '%1$d queries únicas executadas.';
 $s_memory_usage_in_kb = 'utilização de memória: %1$s KB';
+$s_log_page_time = 'Tempo de execução';
 $s_please_report = 'Por favor, relate isto ao %1$s';
 $s_click_to_login = 'Entrar';
 $s_warning_plain_password_authentication = '<strong>Aviso:</strong> Autenticação com palavras-chave em claro está a ser usada. Os administradores ficarão a conhecer a sua palavra-chave.';
@@ -1069,6 +1071,7 @@ $s_time_tracking = 'Acompanhamento de tempo';
 $s_time_tracking_time_spent = 'Tempo gasto:';
 $s_time_tracking_get_info_button = 'Obter informação de acompanhamento de tempo';
 $s_time_tracking_cost_per_hour = 'Custo / Hora';
+$s_time_tracking_cost_per_hour_label = 'Custo / Hora:';
 $s_time_tracking_cost = 'Custo';
 $s_total_time_for_issue = 'Tempo total para o problema = %1$s';
 $s_time_tracking_stopwatch_start = 'Iniciar';
@@ -1097,6 +1100,7 @@ $s_manage_user = 'Gerir utilizador';
 $s_install_information = 'Informação da instalação MantisBT';
 $s_database_information = 'Informação da base de dados MantisBT';
 $s_path_information = 'Informação do caminho MantisBT';
+$s_php_version = 'Versão do PHP';
 $s_month_january = 'Janeiro';
 $s_month_february = 'Fevereiro';
 $s_month_march = 'Março';

@@ -43,7 +43,7 @@
  */
 
 $s_plugin_XmlImportExport_title = 'Importer / Exporter des bugs';
-$s_plugin_XmlImportExport_description = 'Ajout des importations et exportations au format XML compatible avec MantisBT.';
+$s_plugin_XmlImportExport_description = 'Permet d\'importer et exporter des fichiers au format XML compatible avec MantisBT.';
 $s_plugin_XmlImportExport_import = 'Importer des bugs';
 $s_plugin_XmlImportExport_export = 'Export XML';
 $s_plugin_XmlImportExport_importing_in_project = 'Importer les bugs dans le projet :';
