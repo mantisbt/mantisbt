@@ -75,10 +75,12 @@ if ( !file_allow_bug_upload( $f_bug_id ) ) {
 access_ensure_bug_level( config_get( 'upload_bug_file_threshold' ), $f_bug_id );
 
 # Process array of files to upload
-$t_files = helper_array_transpose( $f_files );
-foreach( $t_files as $t_file ) {
-	if( !empty( $t_file['name'] ) ) {
-		file_add( $f_bug_id, $t_file, 'bug' );
+if( -1 != $f_files ) {
+	$t_files = helper_array_transpose( $f_files );
+	foreach( $t_files as $t_file ) {
+		if( !empty( $t_file['name'] ) ) {
+			file_add( $f_bug_id, $t_file, 'bug' );
+		}
 	}
 }
 
