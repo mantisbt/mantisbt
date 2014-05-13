@@ -53,18 +53,9 @@ $g_db_connected = false;
 # @global bool $g_db_log_queries
 $g_db_log_queries = ( 0 != ( config_get_global( 'log_level' ) & LOG_DATABASE ) );
 
-
 # set adodb fetch mode
 # @global bool $ADODB_FETCH_MODE
-if( db_is_oracle() ) {
-	# Due to oci8 returning column names in uppercase, the MantisBT
-	# default fetch mode (ADODB_FETCH_ASSOC) does not work properly
-	# in the current version of ADOdb (5.18) so we override it.
-	# See #15426
-	$ADODB_FETCH_MODE = ADODB_FETCH_NUM;
-} else {
-	$ADODB_FETCH_MODE = ADODB_FETCH_ASSOC;
-}
+$ADODB_FETCH_MODE = ADODB_FETCH_ASSOC;
 
 /**
  * Mantis Database Parameters Count class
