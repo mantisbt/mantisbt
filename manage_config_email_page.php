@@ -132,11 +132,11 @@ function colour_notify_flag ( $p_action, $p_flag ) {
  */
 function show_notify_flag( $p_action, $p_flag ) {
 	global $t_can_change_flags , $t_can_change_defaults;
-	$t_flag = get_notify_flag( $p_action, $p_flag );
+	$t_flag = (bool)get_notify_flag( $p_action, $p_flag );
 	if ( $t_can_change_flags || $t_can_change_defaults ) {
 		$t_flag_name = $p_action . ':' . $p_flag;
-		$t_set = $t_flag ? "checked=\"checked\"" : "";
-		return "<input type=\"checkbox\" name=\"flag[]\" value=\"$t_flag_name\" $t_set />";
+		$t_set = $t_flag ? 'checked="checked"' : '';
+		return '<input type="checkbox" name="flag[]" value="' . $t_flag_name. '" ' . $t_set . ' />';
 	} else {
 		return ( $t_flag ? '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />' : '&#160;' );
 	}
@@ -197,20 +197,25 @@ function show_notify_threshold( $p_access, $p_action ) {
 function get_section_begin_for_email( $p_section_name ) {
 	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 	echo '<div class="form-container">'. "\n";
-	echo '<table class="width100">';
+	echo '<table>' . "\n";
+	echo '<thead>' . "\n";
 	echo '<tr><td class="form-title-caps" colspan="' . ( count( $t_access_levels ) + 7 ) . '">' . $p_section_name . '</td></tr>' . "\n";
-	echo '<tr><td class="form-title" width="30%" rowspan="2">' . lang_get( 'message' ) . '</td>';
-	echo'<td class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'issue_reporter' ) . '&#160;</td>';
-	echo '<td class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'issue_handler' ) . '&#160;</td>';
-	echo '<td class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'users_monitoring_bug' ) . '&#160;</td>';
-	echo '<td class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'users_added_bugnote' ) . '&#160;</td>';
-	echo '<td class="form-title" style="text-align:center" colspan="' . count( $t_access_levels ) . '">&#160;' . lang_get( 'access_levels' ) . '&#160;</td></tr><tr>';
+	echo '<tr class="row-category2">' . "\n";
+	echo '<th width="30%" rowspan="2">' . lang_get( 'message' ) . '</th>';
+	echo '<th class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'issue_reporter' ) . '&#160;</th>' . "\n";
+	echo '<th class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'issue_handler' ) . '&#160;</th>' . "\n";
+	echo '<th class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'users_monitoring_bug' ) . '&#160;</th>' . "\n";
+	echo '<th class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'users_added_bugnote' ) . '&#160;</th>' . "\n";
+	echo '<th class="form-title" style="text-align:center" colspan="' . count( $t_access_levels ) . '">&#160;' . lang_get( 'access_levels' ) . '&#160;</th>' . "\n";
+	echo '  </tr><tr class="row-category2">' . "\n";
 
 	foreach( $t_access_levels as $t_access_level ) {
-		echo '<td class="form-title" style="text-align:center">&#160;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&#160;</td>';
+		echo '  <th>&#160;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&#160;</th>' . "\n";
 	}
 
 	echo '</tr>' . "\n";
+	echo '</thead>' . "\n";
+	echo '<tbody>' . "\n";
 }
 
 /**
@@ -222,14 +227,14 @@ function get_section_begin_for_email( $p_section_name ) {
 function get_capability_row_for_email( $p_caption, $p_message_type ) {
 	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 
-	echo '<tr><td>' . string_display( $p_caption ) . '</td>';
-	echo '<td class="center"' . colour_notify_flag( $p_message_type, 'reporter' ) . '>' . show_notify_flag( $p_message_type, 'reporter' )  . '</td>';
-	echo '<td class="center"' . colour_notify_flag( $p_message_type, 'handler' ) . '>' . show_notify_flag( $p_message_type, 'handler' ) . '</td>';
-	echo '<td class="center"' . colour_notify_flag( $p_message_type, 'monitor' ) . '>' . show_notify_flag( $p_message_type, 'monitor' ) . '</td>';
-	echo '<td class="center"' . colour_notify_flag( $p_message_type, 'bugnotes' ) . '>' . show_notify_flag( $p_message_type, 'bugnotes' ) . '</td>';
+	echo '<tr><td>' . string_display( $p_caption ) . '</td>' . "\n";
+	echo '  <td class="center"' . colour_notify_flag( $p_message_type, 'reporter' ) . '>' . show_notify_flag( $p_message_type, 'reporter' )  . '</td>' . "\n";
+	echo '  <td class="center"' . colour_notify_flag( $p_message_type, 'handler' ) . '>' . show_notify_flag( $p_message_type, 'handler' ) . '</td>' . "\n";
+	echo '  <td class="center"' . colour_notify_flag( $p_message_type, 'monitor' ) . '>' . show_notify_flag( $p_message_type, 'monitor' ) . '</td>' . "\n";
+	echo '  <td class="center"' . colour_notify_flag( $p_message_type, 'bugnotes' ) . '>' . show_notify_flag( $p_message_type, 'bugnotes' ) . '</td>' . "\n";
 
 	foreach( $t_access_levels as $t_access_level ) {
-		echo '<td class="center"' . colour_threshold_flag( $t_access_level, $p_message_type ) . '>' . show_notify_threshold( $t_access_level, $p_message_type ) . '</td>';
+		echo '  <td class="center"' . colour_threshold_flag( $t_access_level, $p_message_type ) . '>' . show_notify_threshold( $t_access_level, $p_message_type ) . '</td>' . "\n";
 	}
 
 	echo '</tr>' . "\n";
@@ -240,7 +245,7 @@ function get_capability_row_for_email( $p_caption, $p_message_type ) {
  *
  */
 function get_section_end_for_email() {
-	echo '</table></div><br />' . "\n";
+	echo '</tbody></table></div><br />' . "\n";
 }
 
 
@@ -341,27 +346,28 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 	get_section_end_for_email();
 
 	if ( $t_can_change_flags  || $t_can_change_defaults ) {
-		echo '<p>' . lang_get( 'notify_actions_change_access' );
-		echo '<select name="notify_actions_access">';
+		echo '<p>' . lang_get( 'notify_actions_change_access' ) . "\n";
+		echo '<select name="notify_actions_access">' . "\n";
 		print_enum_string_option_list( 'access_levels', config_get_access( 'notify_flags' ) );
-		echo '</select> </p>';
+		echo "\n</select></p>";
 
-		echo "<input type=\"submit\" class=\"button\" value=\"" . lang_get( 'change_configuration' ) . "\" />\n";
+		echo '<input type="submit" class="button" value="' . lang_get( 'change_configuration' ) . '" />' . "\n";
 
 		echo "</form>\n";
 
-		echo "<div class=\"right\"><form name=\"mail_config_action\" method=\"post\" action=\"manage_config_revert.php\">\n";
-		echo form_security_field( 'manage_config_revert' );
-		echo "<input name=\"revert\" type=\"hidden\" value=\"notify_flags,default_notify_flags\"></input>";
-		echo "<input name=\"project\" type=\"hidden\" value=\"$t_project\"></input>";
-		echo "<input name=\"return\" type=\"hidden\" value=\"" . string_attribute( form_action_self() ) ."\"></input>";
-		echo "<input type=\"submit\" class=\"button\" value=\"";
+		echo '<div class="right">' . "\n";
+		echo '<form name="mail_config_action" method="post" action="manage_config_revert.php">' . "\n";
+		echo form_security_field( 'manage_config_revert' ) . "\n";
+		echo '<input name="revert" type="hidden" value="notify_flags,default_notify_flags" />' . "\n";
+		echo '<input name="project" type="hidden" value="' . $t_project . '" />' . "\n";
+		echo '<input name="return" type="hidden" value="' . string_attribute( form_action_self() ) . '" />' . "\n";
+		echo '<input type="submit" class="button" value="';
 		if ( ALL_PROJECTS == $t_project ) {
 			echo lang_get( 'revert_to_system' );
 		} else {
 			echo lang_get( 'revert_to_all_project' );
 		}
-		echo "\" />\n";
+		echo '" />' . "\n";
 		echo "</form></div>\n";
 	}
 
