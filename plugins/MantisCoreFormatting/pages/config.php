@@ -77,6 +77,14 @@ print_manage_menu( );
 <tr>
 	<th class="category">
 		<?php echo lang_get( 'plugin_format_process_buglinks' )?>
+		<br />
+		<span class="small"><?php
+			printf(
+				lang_get( 'plugin_format_process_buglinks_info' ),
+				config_get( 'bug_link_tag' ),
+				config_get( 'bugnote_link_tag' )
+			);
+		?></span>
 	</th>
 	<td class="center">
 		<label><input type="radio" name="process_buglinks" value="1" <?php echo( ON == plugin_config_get( 'process_buglinks' ) ) ? 'checked="checked" ' : ''?>/>
