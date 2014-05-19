@@ -195,16 +195,13 @@ function plugin_table( $p_name, $p_basename = null ) {
 		$t_current = $p_basename;
 	}
 
-	$t_table_name = config_get_global( 'db_table_prefix' );
-	if( !empty( $t_table_name ) ) {
-		$t_table_name .= '_';
+	# Determine plugin table prefix including trailing '_'
+	$t_prefix = trim( config_get_global( 'db_table_plugin_prefix' ) );
+	if( !empty( $t_prefix ) && '_' != substr( $t_prefix, -1 ) ) {
+		$t_prefix .= '_';
 	}
-	$t_table_name .=
-		config_get_global( 'db_table_plugin_prefix' ) .
-		$t_current . '_' . $p_name .
-		config_get_global( 'db_table_suffix' );
 
-	return $t_table_name;
+	return db_get_table( $t_prefix . $t_current . '_' . $p_name );
 }
 
 /**

@@ -959,16 +959,20 @@ function db_get_table( $p_name ) {
 		$t_table = $p_name;
 	}
 
-	$t_prefix = config_get_global( 'db_table_prefix' );
-	$t_suffix = config_get_global( 'db_table_suffix' );
-
-	if( $t_prefix ) {
-		$t_table = $t_prefix . '_' . $t_table;
+	# Determine table prefix including trailing '_'
+	$t_prefix = trim( config_get_global( 'db_table_prefix' ) );
+	if( !empty( $t_prefix ) && '_' != substr( $t_prefix, -1 ) ) {
+		$t_prefix .= '_';
 	}
-	$t_table .= $t_suffix;
+	# Determine table suffix including leading '_'
+	$t_suffix = trim( config_get_global( 'db_table_suffix' ) );
+	if( !empty( $t_suffix ) && '_' != substr( $t_suffix, 0, 1 ) ) {
+		$t_suffix = '_' . $t_suffix;
+	}
 
+	# Physical table name
+	$t_table = $t_prefix . $t_table . $t_suffix;
 	db_check_identifier_size( $t_table );
-
 	return $t_table;
 }
 
