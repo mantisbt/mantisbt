@@ -669,7 +669,9 @@ function plugin_install( $p_plugin ) {
  * @return bool True if plugin needs schema ugrades.
  */
 function plugin_needs_upgrade( $p_plugin ) {
+	plugin_push_current( $p_plugin->name );
 	$t_plugin_schema = $p_plugin->schema();
+	plugin_pop_current( $p_plugin->name );
 	if( is_null( $t_plugin_schema ) ) {
 		return false;
 	}
