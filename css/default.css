@@ -478,9 +478,7 @@ div#reauth-div,
 div#login-div,
 div#lost-password-div,
 div#signup-div,
-div#select-project-div,
-div#account-profile-div,
-div#account-profile-update-div {
+div#select-project-div {
 	width: 65%;
 }
 div#adm-config-div {
