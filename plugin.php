@@ -59,7 +59,7 @@ $t_page = $t_plugin_path.$t_basename.DIRECTORY_SEPARATOR.
 		'pages'.DIRECTORY_SEPARATOR.$t_action.'.php';
 
 if ( !is_file( $t_page ) ) {
-		trigger_error( ERROR_PLUGIN_PAGE_NOT_FOUND, ERROR );
+	trigger_error( ERROR_PLUGIN_PAGE_NOT_FOUND, ERROR );
 }
 
 if( plugin_needs_upgrade( $g_plugin_cache[$t_basename] ) ) {
@@ -69,4 +69,3 @@ if( plugin_needs_upgrade( $g_plugin_cache[$t_basename] ) ) {
 
 plugin_push_current( $t_basename );
 include( $t_page );
-
