@@ -50,6 +50,11 @@ if ( !isset( $g_plugin_cache[$t_basename] ) ) {
 	trigger_error( ERROR_PLUGIN_NOT_REGISTERED, ERROR );
 }
 
+# Plugin can be registered but fail to load e.g. due to unmet dependencies
+if( !plugin_is_loaded( $t_basename ) ) {
+	trigger_error( ERROR_PLUGIN_NOT_LOADED, ERROR );
+}
+
 $t_page = $t_plugin_path.$t_basename.DIRECTORY_SEPARATOR.
 		'pages'.DIRECTORY_SEPARATOR.$t_action.'.php';
 
