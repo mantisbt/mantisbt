@@ -558,9 +558,9 @@ function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) 
 function plugin_protected( $p_base_name ) {
 	global $g_plugin_cache_protected;
 
-	# For pseudo-plugin MantisCore, return protected as 1.
+	# Pseudo-plugin MantisCore is protected
 	if( $p_base_name == 'MantisCore' ) {
-		return 1;
+		return true;
 	}
 
 	return $g_plugin_cache_protected[$p_base_name];
@@ -588,6 +588,11 @@ function plugin_priority( $p_base_name ) {
  * @return bool True if plugin is installed
  */
 function plugin_is_installed( $p_basename ) {
+	# Pseudo-plugin MantisCore is always installed
+	if( $p_basename == 'MantisCore' ) {
+		return true;
+	}
+
 	$t_plugin_table = db_get_table( 'plugin' );
 
 	$t_forced_plugins = config_get_global( 'plugins_force_installed' );
