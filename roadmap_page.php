@@ -111,6 +111,7 @@ if ( is_blank( $f_project ) ) {
 	$f_project_id = project_get_id_by_name( $f_project );
 
 	if ( $f_project_id === 0 ) {
+		error_parameters( $f_project );
 		trigger_error( ERROR_PROJECT_NOT_FOUND, ERROR );
 	}
 }
