@@ -35,10 +35,9 @@ require_api( 'plugin_api.php' );
 
 $t_plugin_path = config_get( 'plugin_path' );
 
-$f_page= gpc_get_string( 'page' );
-$t_matches = array();
+$f_page = gpc_get_string( 'page' );
 
-if ( !preg_match( '/^([a-zA-Z0-9_-]+)\/([a-zA-Z0-9_-]+[\/a-zA-Z0-9_-]*)/', $f_page, $t_matches ) ) {
+if( !preg_match( '/^([a-zA-Z0-9_-]+)\/([a-zA-Z0-9_-]+[\/a-zA-Z0-9_-]*)/', $f_page, $t_matches ) ) {
 	error_parameters( $f_page );
 	trigger_error( ERROR_PLUGIN_INVALID_PAGE, ERROR );
 }

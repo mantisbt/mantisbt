@@ -39,9 +39,8 @@ require_api( 'plugin_api.php' );
 $t_plugin_path = config_get( 'plugin_path' );
 
 $f_file = gpc_get_string( 'file' );
-$t_matches = array();
 
-if ( !preg_match( '/^([a-zA-Z0-9_-]+)\/([a-zA-Z0-9_-]+[\/a-zA-Z0-9_-]*\.?[a-zA-Z0-9_-]*)/', $f_file, $t_matches ) ) {
+if( !preg_match( '/^([a-zA-Z0-9_-]+)\/([a-zA-Z0-9_-]+[\/a-zA-Z0-9_-]*\.?[a-zA-Z0-9_-]*)/', $f_file, $t_matches ) ) {
 	error_parameters( $f_file );
 	trigger_error( ERROR_PLUGIN_INVALID_FILE, ERROR );
 }
