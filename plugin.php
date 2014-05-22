@@ -46,13 +46,9 @@ if ( !preg_match( '/^([a-zA-Z0-9_-]+)\/([a-zA-Z0-9_-]+[\/a-zA-Z0-9_-]*)/', $f_pa
 $t_basename = $t_matches[1];
 $t_action = $t_matches[2];
 
-global $g_plugin_cache;
-if ( !isset( $g_plugin_cache[$t_basename] ) ) {
-	error_parameters( $t_basename );
-	trigger_error( ERROR_PLUGIN_NOT_REGISTERED, ERROR );
-}
+$t_plugin = plugin_get( $t_basename );
 
-if( plugin_needs_upgrade( $g_plugin_cache[$t_basename] ) ) {
+if( plugin_needs_upgrade( $t_plugin ) ) {
 	error_parameters( $t_basename );
 	trigger_error( ERROR_PLUGIN_UPGRADE_NEEDED, ERROR );
 }

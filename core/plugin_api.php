@@ -83,6 +83,29 @@ function plugin_pop_current() {
 }
 
 /**
+ * Returns an object representing the specified plugin
+ * Triggers an error if the plugin is not registered
+ * @param string|null $p_basename Plugin base name (defaults to current plugin)
+ * @return object Plugin Object
+ */
+function plugin_get( $p_basename = null ) {
+	global $g_plugin_cache;
+
+	if( is_null( $p_basename ) ) {
+		$t_current = plugin_get_current();
+	} else {
+		$t_current = $p_basename;
+	}
+
+	if ( !plugin_is_registered( $t_current ) ) {
+		error_parameters( $t_current );
+		trigger_error( ERROR_PLUGIN_NOT_REGISTERED, ERROR );
+	}
+
+	return $g_plugin_cache[$p_basename];
+}
+
+/**
  * Get the URL to the plugin wrapper page.
  * @param string $p_page Page name
  * @param bool $p_redirect return url for redirection
@@ -820,6 +843,17 @@ function plugin_require_api( $p_file, $p_basename = null ) {
 	$t_path = config_get_global( 'plugin_path' ) . $t_current . '/';
 
 	require_once( $t_path . $p_file );
+}
+
+/**
+ * Determine if a given plugin is registered.
+ * @param string $p_basename Plugin basename
+ * @return boolean True if plugin is registered
+ */
+function plugin_is_registered( $p_basename ) {
+	global $g_plugin_cache;
+
+	return isset( $g_plugin_cache[$p_basename] );
 }
 
 /**

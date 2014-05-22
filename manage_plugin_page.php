@@ -68,14 +68,12 @@ function plugin_sort( $p_plugin1, $p_plugin2 ) {
 $t_plugins = plugin_find_all();
 uasort( $t_plugins, 'plugin_sort' );
 
-global $g_plugin_cache;
-
 $t_plugins_installed = array();
 $t_plugins_available = array();
 $t_forced_plugins = config_get_global( 'plugins_force_installed' );
 
 foreach( $t_plugins as $t_basename => $t_plugin ) {
-	if ( isset( $g_plugin_cache[$t_basename] ) ) {
+	if( plugin_is_registered( $t_basename ) ) {
 		$t_plugins_installed[$t_basename] = $t_plugin;
 	} else {
 		$t_plugins_available[$t_basename] = $t_plugin;
