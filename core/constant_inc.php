@@ -560,7 +560,7 @@ define( 'PHPMAILER_METHOD_SMTP', 2 );
 
 # Lengths - NOTE: these may represent hard-coded values in db schema and should not be changed.
 define( 'DB_FIELD_SIZE_USERNAME', 255 );
-define( 'DB_FIELD_SIZE_REALNAME', 64 );
+define( 'DB_FIELD_SIZE_REALNAME', 255 );
 define( 'DB_FIELD_SIZE_PASSWORD', 32 );
 
 # Maximum size for the user's password when storing it as a hash
