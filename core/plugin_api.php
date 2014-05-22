@@ -153,7 +153,8 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
 
 	$t_file_path = plugin_file_path( $p_filename, $t_current );
 	if( false === $t_file_path ) {
-		trigger_error( ERROR_GENERIC, ERROR );
+		error_parameters( $t_current, $p_filename );
+		trigger_error( ERROR_PLUGIN_FILE_NOT_FOUND, ERROR );
 	}
 
 	$t_content_type = '';

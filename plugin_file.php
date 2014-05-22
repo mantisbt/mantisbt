@@ -42,7 +42,8 @@ $f_file = gpc_get_string( 'file' );
 $t_matches = array();
 
 if ( !preg_match( '/^([a-zA-Z0-9_-]+)\/([a-zA-Z0-9_-]+[\/a-zA-Z0-9_-]*\.?[a-zA-Z0-9_-]*)/', $f_file, $t_matches ) ) {
-	trigger_error( ERROR_GENERIC, ERROR );
+	error_parameters( $f_file );
+	trigger_error( ERROR_PLUGIN_INVALID_FILE, ERROR );
 }
 
 $t_basename = $t_matches[1];
