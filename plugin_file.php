@@ -49,11 +49,6 @@ if ( !preg_match( '/^([a-zA-Z0-9_-]+)\/([a-zA-Z0-9_-]+[\/a-zA-Z0-9_-]*\.?[a-zA-Z
 $t_basename = $t_matches[1];
 $t_file = $t_matches[2];
 
-global $g_plugin_cache;
-if ( !isset( $g_plugin_cache[$t_basename] ) ) {
-	error_parameters( $t_basename );
-	trigger_error( ERROR_PLUGIN_NOT_REGISTERED, ERROR );
-}
+$t_plugin = plugin_get( $t_basename );
 
 plugin_file_include( $t_file, $t_basename );
-
