@@ -50,6 +50,11 @@ if ( !isset( $g_plugin_cache[$t_basename] ) ) {
 	trigger_error( ERROR_PLUGIN_NOT_REGISTERED, ERROR );
 }
 
+if( plugin_needs_upgrade( $g_plugin_cache[$t_basename] ) ) {
+	error_parameters( $t_basename );
+	trigger_error( ERROR_PLUGIN_UPGRADE_NEEDED, ERROR );
+}
+
 # Plugin can be registered but fail to load e.g. due to unmet dependencies
 if( !plugin_is_loaded( $t_basename ) ) {
 	trigger_error( ERROR_PLUGIN_NOT_LOADED, ERROR );
@@ -59,11 +64,6 @@ $t_page = $t_plugin_path . $t_basename . '/pages/' . $t_action . '.php';
 
 if ( !is_file( $t_page ) ) {
 	trigger_error( ERROR_PLUGIN_PAGE_NOT_FOUND, ERROR );
-}
-
-if( plugin_needs_upgrade( $g_plugin_cache[$t_basename] ) ) {
-	error_parameters( $t_basename );
-	trigger_error( ERROR_PLUGIN_UPGRADE_NEEDED, ERROR );
 }
 
 plugin_push_current( $t_basename );
