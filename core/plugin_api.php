@@ -166,7 +166,7 @@ function plugin_file( $p_file, $p_redirect = false, $p_base_name = null ) {
  */
 function plugin_file_include( $p_filename, $p_basename = null ) {
 
-    global $g_plugin_mime_types;
+	global $g_plugin_mime_types;
 
 	if( is_null( $p_basename ) ) {
 		$t_current = plugin_get_current();
@@ -200,7 +200,7 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
 	}
 
 	if ( $t_content_type )
-    	header('Content-Type: ' . $t_content_type );
+		header('Content-Type: ' . $t_content_type );
 
 	readfile( $t_file_path );
 }
