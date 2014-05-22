@@ -47,6 +47,7 @@ $t_action = $t_matches[2];
 
 global $g_plugin_cache;
 if ( !isset( $g_plugin_cache[$t_basename] ) ) {
+	error_parameters( $t_basename );
 	trigger_error( ERROR_PLUGIN_NOT_REGISTERED, ERROR );
 }
 
@@ -57,6 +58,7 @@ if( plugin_needs_upgrade( $g_plugin_cache[$t_basename] ) ) {
 
 # Plugin can be registered but fail to load e.g. due to unmet dependencies
 if( !plugin_is_loaded( $t_basename ) ) {
+	error_parameters( $t_basename );
 	trigger_error( ERROR_PLUGIN_NOT_LOADED, ERROR );
 }
 

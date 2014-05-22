@@ -50,6 +50,7 @@ $t_file = $t_matches[2];
 
 global $g_plugin_cache;
 if ( !isset( $g_plugin_cache[$t_basename] ) ) {
+	error_parameters( $t_basename );
 	trigger_error( ERROR_PLUGIN_NOT_REGISTERED, ERROR );
 }
 

@@ -610,6 +610,7 @@ function plugin_install( $p_plugin ) {
 	access_ensure_global_level( config_get_global( 'manage_plugin_threshold' ) );
 
 	if( plugin_is_installed( $p_plugin->basename ) ) {
+		error_parameters( $p_plugin->basename );
 		trigger_error( ERROR_PLUGIN_ALREADY_INSTALLED, WARNING );
 		return null;
 	}
