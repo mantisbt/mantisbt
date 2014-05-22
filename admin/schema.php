@@ -739,5 +739,6 @@ $g_upgrade[192] = array( 'CreateIndexSQL', array('idx_bug_history_date_modified'
 $g_upgrade[193] = array( 'UpdateFunction', 'check_config_serialization', array() );
 $g_upgrade[194] = array( 'UpdateFunction', 'check_token_serialization', array() );
 $g_upgrade[195] = array( 'UpdateFunction', 'check_filters_serialization', array() );
+$g_upgrade[196] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "username C(255) $t_notnull DEFAULT \" '' \"" ) );
 
 # Release marker: 1.3.0
