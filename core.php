@@ -85,8 +85,6 @@ if ( $t_config_inc_found ) {
 	require_once( $g_config_path . 'config_inc.php' );
 }
 
-# Remember (globally) which API files have already been loaded
-$g_api_included = array();
 
 /**
  * Define an API inclusion function to replace require_once
@@ -94,9 +92,9 @@ $g_api_included = array();
  * @param string $p_api_name api file name
  */
 function require_api( $p_api_name ) {
-	global $g_api_included;
+	static $s_api_included;
 	global $g_core_path;
-	if ( !isset( $g_api_included[$p_api_name] ) ) {
+	if ( !isset( $s_api_included[$p_api_name] ) ) {
 		$t_existing_globals = get_defined_vars();
 		require_once( $g_core_path . $p_api_name );
 		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_existing_globals' => 0, 't_new_globals' => 0 ) );
@@ -104,7 +102,7 @@ function require_api( $p_api_name ) {
 			global $$t_global_name;
 		}
 		extract( $t_new_globals );
-		$g_api_included[$p_api_name] = 1;
+		$s_api_included[$p_api_name] = 1;
 	}
 }
 
