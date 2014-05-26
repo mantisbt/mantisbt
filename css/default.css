@@ -478,9 +478,7 @@ div#reauth-div,
 div#login-div,
 div#lost-password-div,
 div#signup-div,
-div#select-project-div,
-div#account-profile-div,
-div#account-profile-update-div {
+div#select-project-div {
 	width: 65%;
 }
 div#adm-config-div {
@@ -546,6 +544,7 @@ fieldset > .field-container:nth-child(odd),
 form > table > tr:nth-child(odd),
 div.table-container > table > tbody > tr:nth-child(odd),
 div.table-container > table > tr:nth-child(odd),
+div.summary-container > table > tbody > tr:nth-child(odd),
 div.form-container > form > table > tbody > tr:nth-child(odd),
 div.form-container > form > fieldset > table > tbody > tr:nth-child(odd),
 div.form-container > table > tbody > tr:nth-child(odd),
@@ -559,6 +558,7 @@ form > table > tr:nth-child(even),
 table#manage-overview-table > tr:nth-child(even),
 div.table-container > table > tbody > tr:nth-child(even),
 div.table-container > table > tr:nth-child(even),
+div.summary-container > table > tbody > tr:nth-child(even),
 div.form-container > form > table > tbody > tr:nth-child(even),
 div.form-container > form > fieldset > table > tbody > tr:nth-child(even),
 div.form-container > table > tbody > tr:nth-child(even),
@@ -720,3 +720,21 @@ span.dependency_dated		{ color: maroon; }
 span.dependency_met			{ color: green; }
 span.dependency_unmet		{ color: red; }
 span.dependency_upgrade		{ color: orange; }
+
+/* summary page */
+div.summary-container {
+	position: relative;
+	padding: 1px;
+	width: 49.5%;
+}
+div.summary-container table {
+	width: 100%;
+	border-spacing: 1px;
+	border: solid 1px #000000;
+	position: relative;
+	margin-bottom: 10px;
+}
+div#summary			{ width: 100%; padding: 0 4px;}
+div#summary-left	{ float: left; }
+div#summary-right	{ float: right; }
+div#summary-bottom	{ width: 99.8%; clear: both; }

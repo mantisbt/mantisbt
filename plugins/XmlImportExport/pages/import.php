@@ -43,7 +43,7 @@ if( ALL_PROJECTS == $t_project_id ) {
 
 ?>
 
-<div class="table-container">
+<div class="form-container">
 <form name="file_upload" method="post" enctype="multipart/form-data" action="<?php echo plugin_page( 'import_action' )?>">
 <?php echo form_security_field( 'plugin_xml_import_action' ) ?>
 
@@ -60,11 +60,11 @@ if( ALL_PROJECTS == $t_project_id ) {
 ?>
 	</td>
 </tr>
-<tr class="row-1">
-	<td class="category" width="25%">
+<tr>
+	<th class="category" width="25%">
 		<?php echo lang_get( 'select_file' )?><br />
-		<?php echo '<span class="small">(' . lang_get( 'max_file_size' ) . ': ' . number_format( $t_max_file_size / 1000 ) . 'k)</span>'?>
-	</td>
+		<?php echo '<span class="small">(' . lang_get( 'max_file_size_label' ) . ' ' . number_format( $t_max_file_size / 1000 ) . 'k)</span>'?>
+	</th>
 	<td width="85%">
 		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size?>" />
 		<input type="hidden" name="step" value="1" />
@@ -79,55 +79,53 @@ if( ALL_PROJECTS == $t_project_id ) {
 	</td>
 </tr>
 
-<tr class="row-2">
+<tr>
 	<th class="category" width="25%">
-	<?php echo plugin_lang_get( 'cross_references' );?>
+		<?php echo plugin_lang_get( 'cross_references' );?>
 	</th>
 	<td>
-	<p><?php echo plugin_lang_get( 'default_strategy' );?>
-	<select name="strategy">
-	<option value="renumber" title="<?php echo plugin_lang_get( 'renumber_desc' );?>">
-	<?php echo plugin_lang_get( 'renumber' );?></option>
-	<option value="link" title="<?php echo plugin_lang_get( 'link_desc' );?>">
-	<?php echo plugin_lang_get( 'link' );?></option>
-	<option value="disable" title="<?php echo plugin_lang_get( 'disable_desc' );?>">
-	<?php echo plugin_lang_get( 'disable' );?></option>
-	</select>
-	</p>
-	<p><?php echo plugin_lang_get( 'fallback' );?>
-	<select name="fallback">
-	<option value="link" title="<?php echo plugin_lang_get( 'link_desc' );?>">
-	<?php echo plugin_lang_get( 'link' );?></option>
-	<option value="disable" title="<?php echo plugin_lang_get( 'disable_desc' );?>">
-	<?php echo plugin_lang_get( 'disable' );?></option>
-	</select>
-	</p>
+		<?php echo plugin_lang_get( 'default_strategy' );?>
+		<select name="strategy">
+			<option value="renumber" title="<?php echo plugin_lang_get( 'renumber_desc' );?>">
+			<?php echo plugin_lang_get( 'renumber' );?></option>
+			<option value="link" title="<?php echo plugin_lang_get( 'link_desc' );?>">
+			<?php echo plugin_lang_get( 'link' );?></option>
+			<option value="disable" title="<?php echo plugin_lang_get( 'disable_desc' );?>">
+			<?php echo plugin_lang_get( 'disable' );?></option>
+		</select>
+		<br><br>
 
+		<?php echo plugin_lang_get( 'fallback' );?>
+		<select name="fallback">
+			<option value="link" title="<?php echo plugin_lang_get( 'link_desc' );?>">
+			<?php echo plugin_lang_get( 'link' );?></option>
+			<option value="disable" title="<?php echo plugin_lang_get( 'disable_desc' );?>">
+			<?php echo plugin_lang_get( 'disable' );?></option>
+		</select>
 	</td>
 </tr>
-
-<tr class="row-2">
-	<th class="category" width="25%"><?php echo lang_get( 'categories' );?></th>
-	<td>
-	<p><label for="keepcategory"><?php echo plugin_lang_get( 'keep_same_category' );?></label>
-	<input type="checkbox" checked="checked" id="keepcategory" name="keepcategory" /></p>
-
-	<p><?php echo plugin_lang_get( 'fallback_category' );?>
-	<select name="defaultcategory">
-<?php print_category_option_list( );?>
-	</select>
-	</p>
-
-	</td>
-</tr>
-
 
 <tr>
-	<td colspan="2" class="center">
-		<input type="submit" class="button" value="<?php echo lang_get( 'upload_file_button' )?>" />
+	<th class="category" width="25%">
+		<?php echo lang_get( 'categories' );?>
+	</th>
+	<td>
+		<input type="checkbox" checked="checked" id="keepcategory" name="keepcategory" />
+		<label for="keepcategory"><?php echo plugin_lang_get( 'keep_same_category' );?></label>
+		<br><br>
+
+		<?php echo plugin_lang_get( 'fallback_category' );?>
+		<select name="defaultcategory">
+			<?php print_category_option_list( );?>
+		</select>
 	</td>
 </tr>
 </table>
+
+<div class="submit-button">
+	<input type="submit" class="button" value="<?php echo lang_get( 'upload_file_button' )?>" />
+</div>
+
 </form>
 
 </div>

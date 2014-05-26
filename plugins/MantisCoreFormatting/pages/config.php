@@ -32,9 +32,12 @@ print_manage_menu( );
 ?>
 
 <br/>
+<div class="form-container" style="width: 60%">
+
 <form action="<?php echo plugin_page( 'config_edit' )?>" method="post">
 <?php echo form_security_field( 'plugin_format_config_edit' ) ?>
-<table class="width50" cellspacing="1">
+
+<table>
 
 <tr>
 	<td class="form-title" colspan="3">
@@ -43,10 +46,10 @@ print_manage_menu( );
 </tr>
 
 <tr>
-	<td class="category" width="60%">
+	<th class="category" width="60%">
 		<?php echo lang_get( 'plugin_format_process_text' )?>
 		<br /><span class="small"><?php echo lang_get( 'plugin_format_process_text_warning_notice' )?></span>
-	</td>
+	</th>
 	<td class="center" width="20%">
 		<label><input type="radio" name="process_text" value="1" <?php echo( ON == plugin_config_get( 'process_text' ) ) ? 'checked="checked" ' : ''?>/>
 			<?php echo lang_get( 'plugin_format_enabled' )?></label>
@@ -74,6 +77,14 @@ print_manage_menu( );
 <tr>
 	<th class="category">
 		<?php echo lang_get( 'plugin_format_process_buglinks' )?>
+		<br />
+		<span class="small"><?php
+			printf(
+				lang_get( 'plugin_format_process_buglinks_info' ),
+				config_get( 'bug_link_tag' ),
+				config_get( 'bugnote_link_tag' )
+			);
+		?></span>
 	</th>
 	<td class="center">
 		<label><input type="radio" name="process_buglinks" value="1" <?php echo( ON == plugin_config_get( 'process_buglinks' ) ) ? 'checked="checked" ' : ''?>/>
@@ -85,14 +96,15 @@ print_manage_menu( );
 	</td>
 </tr>
 
-<tr>
-	<td class="center" colspan="3">
-		<input type="submit" class="button" value="<?php echo lang_get( 'change_configuration' )?>" />
-	</td>
-</tr>
-
 </table>
+
+<div class="submit-button">
+	<input type="submit" class="button" value="<?php echo lang_get( 'change_configuration' )?>" />
+</div
+
 </form>
+
+</div>
 
 <?php
 html_page_bottom();
