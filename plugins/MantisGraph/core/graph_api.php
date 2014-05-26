@@ -61,11 +61,14 @@ function graph_get_font() {
 			'verdana' => 'verdana.ttf',
 			'trebuchet' => 'trebuc.ttf',
 			'verasans' => 'Vera.ttf',
+			'dejavusans' => 'DejaVuSans.ttf',
 			'times' => 'times.ttf',
 			'georgia' => 'georgia.ttf',
 			'veraserif' => 'VeraSe.ttf',
+			'dejavuserif' => 'DejaVuSerif.ttf',
 			'courier' => 'cour.ttf',
 			'veramono' => 'VeraMono.ttf',
+			'dejavumono' => 'DejaVuSansMono.ttf',
 		);
 
 		if( isset( $t_font_map[$t_font] ) ) {
@@ -93,6 +96,9 @@ function graph_get_font() {
 			'veraserif' => FF_VERASERIF,
 			'courier' => FF_COURIER,
 			'veramono' => FF_VERAMONO,
+			'dejavusans' => FF_DV_SANSSERIF,
+			'dejavuserif' => FF_DV_SERIF,
+			'dejavumono' => FF_DV_SANSSERIFMONO,
 		);
 
 		if( isset( $t_font_map[$t_font] ) ) {

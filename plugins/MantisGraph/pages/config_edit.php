@@ -63,6 +63,9 @@ if ( plugin_config_get( 'font' ) != $f_font ) {
 		case 'veraserif':
 		case 'courier':
 		case 'veramono':
+		case 'dejavusans':
+		case 'dejavuserif':
+		case 'dejavumono':
 			plugin_config_set( 'font', $f_font );
 			break;
 		default:
