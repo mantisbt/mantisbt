@@ -494,7 +494,7 @@ function string_insert_hrefs( $p_string ) {
 		$s_url_regex = "/(${t_url_protocol}(${t_url_part1}*?${t_url_part2}+))/su";
 
 		# e-mail regex
-		$s_email_regex = substr_replace( email_regex_simple(), '(?:mailto:)?', 1, 0 );
+		$s_email_regex = substr_replace( email_regex_simple( true ), '(?:mailto:)?', 1, 0 );
 	}
 
 	# Find any URL in a string and replace it by a clickable link
