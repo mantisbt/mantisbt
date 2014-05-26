@@ -352,7 +352,6 @@ $s_advanced_filters = '[[File:MantisBT-filter.png|150px|right]]
 Link on bug report filter screen. See screenshot.';
 $s_attachments = '{{Identical|Attachment}}';
 $s_phpmailer_language = '{{Optional}}';
-$s_sponsorship_process_url = '{{Optional}}';
 $s_changelog = '{{Identical|Change log}}';
 $s_resolved_progress = '<code>%3$d%%</code> is a percentage with a % escaped with %. Maybe you have to add a blank for your language (<code>{{int:percent|%3$d}}%</code>)';
 $s_bug = '{{Identical|Issue}}';

@@ -93,7 +93,7 @@ if ( $t_show_sponsorships ) {
 
 			echo lang_get( 'users_sponsoring_bug' );
 
-			$t_details_url = lang_get( 'sponsorship_process_url' );
+			$t_details_url = sprintf( config_get( 'sponsorship_details_url' ), lang_get_current() );
 			if ( !is_blank( $t_details_url ) ) {
 				echo '&#160;[<a href="' . $t_details_url . '" target="_blank">'
 					. lang_get( 'sponsorship_more_info' ) . '</a>]';
@@ -169,7 +169,7 @@ if ( $t_show_sponsorships ) {
 			collapse_icon( 'sponsorship' );
 			echo lang_get( 'users_sponsoring_bug' );
 
-			$t_details_url = lang_get( 'sponsorship_process_url' );
+			$t_details_url = sprintf( config_get( 'sponsorship_details_url' ), lang_get_current() );
 			if ( !is_blank( $t_details_url ) ) {
 				echo '&#160;[<a href="' . $t_details_url . '" target="_blank">'
 					. lang_get( 'sponsorship_more_info' ) . '</a>]';
