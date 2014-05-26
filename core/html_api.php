@@ -1447,7 +1447,7 @@ function html_button( $p_action, $p_button_text, array $p_fields = array(), $p_m
 	$p_action = urlencode( $p_action );
 	$p_button_text = string_attribute( $p_button_text );
 
-	if( utf8_strtolower( $p_method ) == 'get' ) {
+	if( strtolower( $p_method ) == 'get' ) {
 		$t_method = 'get';
 	} else {
 		$t_method = 'post';
