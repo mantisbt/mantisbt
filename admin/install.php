@@ -179,7 +179,6 @@ if( $t_config_exists && $t_install_state <= 1 ) {
 	$f_db_username            = config_get( 'db_username', '' );
 	$f_db_password            = config_get( 'db_password', '' );
 	$f_timezone               = config_get( 'default_timezone', '' );
-	$f_crypto_master_salt     = config_get( 'crypto_master_salt', '' );
 
 	# Set default prefix/suffix form variables ($f_db_table_XXX)
 	foreach( $t_prefix_defaults['other'] as $t_key => $t_value ) {
@@ -198,7 +197,6 @@ if( $t_config_exists && $t_install_state <= 1 ) {
 		$f_db_password = config_get( 'db_password' );
 	}
 	$f_timezone           = gpc_get( 'timezone', config_get( 'default_timezone' ) );
-	$f_crypto_master_salt = gpc_get( 'crypto_master_salt', config_get( 'crypto_master_salt' ) );
 
 	# Set default prefix/suffix form variables ($f_db_table_XXX)
 	$t_prefix_type = $f_db_type == 'oci8' ? $f_db_type : 'other';
@@ -645,27 +643,6 @@ if( !$g_database_upgrade ) {
 		</select>
 	</td>
 </tr>
-
-<!-- Cryptographic salt -->
-<tr>
-	<td>
-		Master salt value for cryptographic hashing
-		(Refer to documentation for details)
-	</td>
-	<td>
-<?php
-	# Automatically generate a strong master salt/nonce for MantisBT
-	# cryptographic purposes. If a strong source of randomness is not
-	# available the user will have to manually set this value post
-	# installation.
-	$t_crypto_master_salt = crypto_generate_random_string(32);
-	if ( $t_crypto_master_salt !== null ) {
-		$t_crypto_master_salt = base64_encode( $t_crypto_master_salt );
-	}
-?>
-		<input name="crypto_master_salt" type="textbox" size=40 value="<?php echo $t_crypto_master_salt; ?>">
-	</td>
-</tr>
 <?php
 } # end install-only fields
 ?>
@@ -1063,6 +1040,15 @@ if( 5 == $t_install_state ) {
 <?php
 	# Generating the config_inc.php file
 
+	# Automatically generate a strong master salt/nonce for MantisBT
+	# cryptographic purposes. If a strong source of randomness is not
+	# available the user will have to manually set this value post
+	# installation.
+	$t_crypto_master_salt = crypto_generate_random_string(32);
+	if ( $t_crypto_master_salt !== null ) {
+		$t_crypto_master_salt = base64_encode( $t_crypto_master_salt );
+	}
+
 	$t_config = '<?php' . PHP_EOL
 		. "\$g_hostname               = '$f_hostname';" . PHP_EOL
 		. "\$g_db_type                = '$f_db_type';" . PHP_EOL
@@ -1095,7 +1081,7 @@ if( 5 == $t_install_state ) {
 	$t_config .=
 		  "\$g_default_timezone       = '$f_timezone';" . PHP_EOL
 		. PHP_EOL
-		. "\$g_crypto_master_salt     = '" . addslashes( $f_crypto_master_salt ) . "';" . PHP_EOL;
+		. "\$g_crypto_master_salt     = '" . addslashes( $t_crypto_master_salt ) . "';" . PHP_EOL;
 
 	$t_write_failed = true;
 
@@ -1128,6 +1114,12 @@ if( 5 == $t_install_state ) {
 	?>
 </tr>
 <?php
+	if( $t_crypto_master_salt === null ) {
+		print_test( 'Setting Cryptographic salt in config file', false , false,
+					'Unable to find a random number source for cryptographic purposes. You will need to edit ' .
+					$g_config_path . 'config_inc.php' . ' and set a value for $g_crypto_master_salt manually' );
+	}
+
 	if( true == $t_write_failed ) {
 ?>
 <tr>
