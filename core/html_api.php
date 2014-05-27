@@ -613,7 +613,8 @@ function html_bottom_banner() {
 
 /**
  * A function that outputs that an operation was successful and provides a redirect link.
- * @param $p_redirect_url  The url to redirect to.
+ * @param string $p_redirect_url  The url to redirect to.
+ * @param string $p_message Message to display to the user
  */
 function html_operation_successful( $p_redirect_url, $p_message = '' ) {
     echo '<div class="success-msg">';
@@ -968,6 +969,9 @@ function print_project_menu_bar() {
 
 /**
  * Print the menu bar with a list of projects to which the user has access
+ * @todo check parents param - set_project.php?project_id=' . $p_parents . $t_subproject
+ * @param int $p_project_id project id
+ * @param string $p_parents
  * @return null
  */
 function print_subproject_menu_bar( $p_project_id, $p_parents = '' ) {

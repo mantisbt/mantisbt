@@ -3884,7 +3884,8 @@ function print_filter_highlight_changed() {
 }
 
 /**
- *  print filter by date fields
+ * Print filter by date fields
+ * @param bool $p_hide_checkbox hide data filter checkbox
  */
 function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 	global $t_filter;
@@ -4343,7 +4344,7 @@ function print_filter_custom_field_date( $p_field_num, $p_field_id ) {
 }
 
 /**
- *  print project field
+ * Print project field
  */
 function print_filter_project_id() {
 	global $t_select_modifier, $t_filter;
@@ -4359,6 +4360,9 @@ function print_filter_project_id() {
 		<?php
 }
 
+/**
+ * Print filter match type selector
+ */
 function print_filter_match_type() {
 	global $t_select_modifier, $t_filter;
 ?>

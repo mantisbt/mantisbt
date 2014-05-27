@@ -246,10 +246,10 @@ function summary_print_by_enum( $p_enum ) {
  * @param int $p_num_days number of days
  * @return int
  */
-function summary_new_bug_count_by_date( $p_time_length = 1 ) {
+function summary_new_bug_count_by_date( $p_num_days = 1 ) {
 	$t_mantis_bug_table = db_get_table( 'bug' );
 
-	$c_time_length = (int) $p_time_length * SECONDS_PER_DAY;
+	$_time_length = (int) $p_num_days * SECONDS_PER_DAY;
 
 	$t_project_id = helper_get_current_project();
 
@@ -271,12 +271,12 @@ function summary_new_bug_count_by_date( $p_time_length = 1 ) {
  * @param int $p_num_days number of days
  * @return int
  */
-function summary_resolved_bug_count_by_date( $p_time_length = 1 ) {
+function summary_resolved_bug_count_by_date( $p_num_days = 1 ) {
 	$t_bug_table = db_get_table( 'bug' );
 	$t_bug_history_table = db_get_table( 'bug_history' );
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
-	$c_time_length = (int) $p_time_length * SECONDS_PER_DAY;
+	$c_time_length = (int) $p_num_days * SECONDS_PER_DAY;
 
 	$t_project_id = helper_get_current_project();
 

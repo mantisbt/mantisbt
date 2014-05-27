@@ -135,6 +135,7 @@ class MantisPHPSession extends MantisSession {
 	 * get session data
 	 * @param string $p_name
 	 * @param mixed $p_default
+	 * @return string
 	 */
 	function get( $p_name, $p_default=null ) {
 		if ( isset( $_SESSION[ $this->key ][ $p_name ] ) ) {
@@ -180,7 +181,7 @@ class MantisPHPSession extends MantisSession {
 
 /**
  * Initialize the appropriate session handler.
- * @param string Session ID
+ * @param string $p_session_id Session ID
  */
 function session_init( $p_session_id=null ) {
 	global $g_session, $g_session_handler;
@@ -210,7 +211,7 @@ function session_init( $p_session_id=null ) {
  * Validate the legitimacy of a session.
  * Checks may include last-known IP address, or more.
  * Triggers an error when the session is invalid.
- * @param object Session object
+ * @param object $p_session Session object
  */
 function session_validate( $p_session ) {
 	$t_user_ip = '';

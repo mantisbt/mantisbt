@@ -232,9 +232,9 @@ function tag_parse_filters( $p_string ) {
 /**
  * Returns all available tags
  *
- * @param integer A string to match the beginning of the tag name
- * @param integer the number of tags to return
- * @param integer the offset of the result
+ * @param integer $p_name_filter A string to match the beginning of the tag name
+ * @param integer $p_count the number of tags to return
+ * @param integer $p_offset the offset of the result
  *
  * @return ADORecordSet|bool Tags sorted by name, or false if the query failed.
  */
@@ -258,7 +258,7 @@ function tag_get_all( $p_name_filter, $p_count, $p_offset) {
 
 /**
  * Counts all available tags
- * @param integer A string to match the beginning of the tag name
+ * @param integer $p_name_filter A string to match the beginning of the tag name
  */
 function tag_count ( $p_name_filter ) {
 
