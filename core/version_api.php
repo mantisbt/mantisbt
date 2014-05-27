@@ -90,21 +90,21 @@ class VersionData {
 	 * @param string $p_value value
 	 * @private
 	 */
-	public function __set($name, $value) {
-		switch ($name) {
+	public function __set($p_name, $p_value) {
+		switch ($p_name) {
 			case 'date_order':
-				if( !is_numeric($value) ) {
-					if( $value == '' ) {
-						$value = date_get_null();
+				if( !is_numeric($p_value) ) {
+					if( $p_value == '' ) {
+						$p_value = date_get_null();
 					}  else {
-						$value = strtotime( $value );
-						if ( $value === false ) {
+						$p_value = strtotime( $p_value );
+						if ( $p_value === false ) {
 							trigger_error( ERROR_INVALID_DATE_FORMAT, ERROR );
 						}
 					}
 				}
 		}
-		$this->$name = $value;
+		$this->$p_name = $p_value;
 	}
 
 	/**
@@ -244,7 +244,7 @@ function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $
 
 /**
  * Update the definition of a version
- * @param VersionData @p_version_info
+ * @param VersionData $p_version_info
  */
 function version_update( $p_version_info ) {
 	version_ensure_exists( $p_version_info->id );

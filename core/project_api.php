@@ -779,10 +779,13 @@ function project_get_upload_path( $p_project_id ) {
 	return $t_path;
 }
 
-# ===================================
-# Data Modification
-# ===================================
-# add user with the specified access level to a project
+/**
+ * add user with the specified access level to a project
+ * @param int $p_project_id project id
+ * @param int $p_user_id user id
+ * @param int $p_access_level access level
+ * @return bool
+ */
 function project_add_user( $p_project_id, $p_user_id, $p_access_level ) {
 	$t_project_user_list_table = db_get_table( 'project_user_list' );
 
@@ -808,8 +811,14 @@ function project_add_user( $p_project_id, $p_user_id, $p_access_level ) {
 	return true;
 }
 
-# update entry
-# must make sure entry exists beforehand
+/**
+ * update entry
+ * must make sure entry exists beforehand
+ * @param int $p_project_id project id
+ * @param int $p_user_id user id
+ * @param int $p_access_level access level
+ * @return bool
+ */
 function project_update_user_access( $p_project_id, $p_user_id, $p_access_level ) {
 	$t_project_user_list_table = db_get_table( 'project_user_list' );
 
@@ -828,9 +837,14 @@ function project_update_user_access( $p_project_id, $p_user_id, $p_access_level 
 	return true;
 }
 
-# update or add the entry as appropriate
-#  This function involves one more db query than project_update_user_acces()
-#  or project_add_user()
+/**
+ * update or add the entry as appropriate
+ * This function involves one more db query than project_update_user_acces() or project_add_user()
+ * @param int $p_project_id project id
+ * @param int $p_user_id user id
+ * @param int $p_access_level access level
+ * @return bool
+ */
 function project_set_user_access( $p_project_id, $p_user_id, $p_access_level ) {
 	if( project_includes_user( $p_project_id, $p_user_id ) ) {
 		return project_update_user_access( $p_project_id, $p_user_id, $p_access_level );
