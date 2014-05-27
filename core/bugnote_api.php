@@ -179,6 +179,7 @@ function bugnote_is_user_reporter( $p_bugnote_id, $p_user_id ) {
  * @param int $p_date_submitted date submitted (defaults to now())
  * @param int $p_last_modified last modification date (defaults to now())
  * @param bool $p_skip_bug_update skip bug last modification update (useful when importing bugs/bugnotes)
+ * @param bool $p_log_history log changes to bugnote history (defaults to true)
  * @return bool|int false or indicating bugnote id added
  * @access public
  */

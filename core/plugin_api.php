@@ -281,8 +281,8 @@ function plugin_config_defaults( $p_options ) {
 /**
  * Get a language string for the plugin.
  * Automatically prepends plugin_<basename> to the string requested.
- * @param string Language string name
- * @param string Plugin basename
+ * @param string $p_name Language string name
+ * @param string $p_basename Plugin basename
  * @return string Language string
  */
 function plugin_lang_get( $p_name, $p_basename = null ) {
@@ -323,9 +323,9 @@ function plugin_history_log( $p_bug_id, $p_field_name, $p_old_value, $p_new_valu
 
 /**
  * Trigger a plugin-specific error with the given name and type.
- * @param string Error name
- * @param int Error type
- * @param string Plugin basename
+ * @param string $p_error_name Error name
+ * @param int $p_error_type Error type
+ * @param string $p_basename Plugin basename
  */
 function plugin_error( $p_error_name, $p_error_type = ERROR, $p_basename = null ) {
 	if( is_null( $p_basename ) ) {
