@@ -22,10 +22,10 @@ $(document).ready(function(){
 	/* Set up events to modify the form css to show when a stored query has been modified */
 	begin_form = $('[name=filters_open]').serialize();
 
-	$('[:input').live("change", function() {
+	$(document).on('change', ':input', function() {
 		filter_highlight_changes($(this));
 	});
-	$(':checkbox').live("click", function() {
+	$(document).on('click', ':checkbox', function() {
 		filter_highlight_changes($(this));
 	});
 });
