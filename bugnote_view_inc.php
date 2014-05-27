@@ -275,7 +275,7 @@ $num_notes = count( $t_bugnotes );
 					break;
 			}
 
-			echo string_display_links( $t_bugnote->note );;
+			echo string_display_links( $t_bugnote->note );
 		?>
 	</td>
 </tr>
