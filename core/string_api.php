@@ -206,7 +206,7 @@ function string_email( $p_string ) {
 /**
  * Prepare a string for plain text display in email and add URLs for bug
  * links
- * @param string
+ * @param string $p_string
  * @return string
  */
 function string_email_links( $p_string ) {
@@ -215,7 +215,7 @@ function string_email_links( $p_string ) {
 
 /**
  * Process a string for display in a textarea box
- * @param string
+ * @param string $p_string
  * @return string
  */
 function string_textarea( $p_string ) {

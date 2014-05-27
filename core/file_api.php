@@ -807,7 +807,7 @@ function file_allow_project_upload( $p_project_id = null, $p_user_id = null ) {
  *
  *  if the bug null (the default) we answer whether the user can
  *   upload a file to a new bug in the current project
- * @param int $p_bug Bug id
+ * @param int $p_bug_id Bug id
  * @param int $p_user_id user id
  * @return bool
  */

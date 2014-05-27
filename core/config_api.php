@@ -632,7 +632,7 @@ function config_obsolete( $p_var, $p_replace = '' ) {
  * If so, an error will be generated and the script will exit.
  *
  * @param string $p_env_variable old variable
- * @param string $p_replace new variable
+ * @param string $p_new_env_variable new variable
  */
 function env_obsolete( $p_env_variable, $p_new_env_variable ) {
 	$t_env = getenv( $p_env_variable );
@@ -648,7 +648,7 @@ function env_obsolete( $p_env_variable, $p_new_env_variable ) {
  * If there is a %text% in the returned value, re-evaluate the "text" part and replace the string
  *
  * @param string $p_value config variable to evaluate
- * @param bool if true, gets  %text% as a global config, defaults to false
+ * @param bool $p_global if true, gets %text% as a global config, defaults to false
  * @return string
  */
 function config_eval( $p_value, $p_global = false ) {

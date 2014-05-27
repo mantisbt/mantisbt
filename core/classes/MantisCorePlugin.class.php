@@ -31,6 +31,9 @@
  * @subpackage classes
  */
 final class MantisCorePlugin extends MantisPlugin {
+	/**
+	 * Plugin registration
+	 */
 	function register() {
 		$this->name = 'MantisBT Core';
 		$this->description = 'Core plugin API for the Mantis Bug Tracker.';

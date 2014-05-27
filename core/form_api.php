@@ -118,7 +118,7 @@ function form_security_field( $p_form_name, $p_security_token = null ) {
 
 /**
  * Get a URL parameter containing a generated form security token.
- * @param string Form name
+ * @param string $p_form_name Form name
  * @return string Hidden form element to output
  */
 function form_security_param( $p_form_name ) {
@@ -183,7 +183,7 @@ function form_security_validate( $p_form_name ) {
 /**
  * Purge form security tokens that are older than 3 days, or used
  * for form validation.
- * @param string Form name
+ * @param string $p_form_name Form name
  */
 function form_security_purge( $p_form_name ) {
 	if ( PHP_CLI == php_mode() || OFF == config_get_global( 'form_security_validation' ) ) {

@@ -204,7 +204,7 @@ function column_is_plugin_column( $p_column ) {
 /**
  * Allow plugin columns to pre-cache data for a set of issues
  * rather than requiring repeated queries for each issue.
- * @param array Bug objects
+ * @param array $p_bugs Bug objects
  */
 function columns_plugin_cache_issue_data( $p_bugs ) {
 	$t_columns = columns_get_plugin_columns();
@@ -777,9 +777,9 @@ function print_column_title_category_id( $p_sort, $p_dir, $p_columns_target = CO
  * Prints Category column header
  * The actual column is 'category_id', this function is just here for backwards
  * compatibility
- * @param string sort
- * @param string direction
- * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @param string $p_sort sort
+ * @param string $p_dir direction
+ * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
  */
@@ -928,8 +928,9 @@ function print_column_title_additional_information( $p_sort, $p_dir, $p_columns_
 
 /**
  * Prints Due Date column header
- * @param BugData $p_bug bug object
- * @param int $p_columns_target: see COLUMNS_TARGET_* in constant_inc.php
+ * @param string $p_sort sort
+ * @param string $p_dir direction
+ * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
  * @return null
  * @access public
  */
@@ -1267,6 +1268,7 @@ function print_column_resolution( $p_bug, $p_columns_target = COLUMNS_TARGET_VIE
 }
 
 /**
+ * Print column content for column status
  *
  * @param BugData $p_bug bug object
  * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
@@ -1288,6 +1290,7 @@ function print_column_status( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PA
 }
 
 /**
+ * Print column content for column handler id
  *
  * @param BugData $p_bug bug object
  * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
@@ -1451,6 +1454,7 @@ function print_column_target_version( $p_bug, $p_columns_target = COLUMNS_TARGET
 }
 
 /**
+ * Print column content for view state column
  *
  * @param BugData $p_bug bug object
  * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
