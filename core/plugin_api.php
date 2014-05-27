@@ -83,6 +83,29 @@ function plugin_pop_current() {
 }
 
 /**
+ * Returns an object representing the specified plugin
+ * Triggers an error if the plugin is not registered
+ * @param string|null $p_basename Plugin base name (defaults to current plugin)
+ * @return object Plugin Object
+ */
+function plugin_get( $p_basename = null ) {
+	global $g_plugin_cache;
+
+	if( is_null( $p_basename ) ) {
+		$t_current = plugin_get_current();
+	} else {
+		$t_current = $p_basename;
+	}
+
+	if ( !plugin_is_registered( $t_current ) ) {
+		error_parameters( $t_current );
+		trigger_error( ERROR_PLUGIN_NOT_REGISTERED, ERROR );
+	}
+
+	return $g_plugin_cache[$p_basename];
+}
+
+/**
  * Get the URL to the plugin wrapper page.
  * @param string $p_page Page name
  * @param bool $p_redirect return url for redirection
@@ -143,7 +166,7 @@ function plugin_file( $p_file, $p_redirect = false, $p_base_name = null ) {
  */
 function plugin_file_include( $p_filename, $p_basename = null ) {
 
-    global $g_plugin_mime_types;
+	global $g_plugin_mime_types;
 
 	if( is_null( $p_basename ) ) {
 		$t_current = plugin_get_current();
@@ -153,7 +176,8 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
 
 	$t_file_path = plugin_file_path( $p_filename, $t_current );
 	if( false === $t_file_path ) {
-		trigger_error( ERROR_GENERIC, ERROR );
+		error_parameters( $t_current, $p_filename );
+		trigger_error( ERROR_PLUGIN_FILE_NOT_FOUND, ERROR );
 	}
 
 	$t_content_type = '';
@@ -176,7 +200,7 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
 	}
 
 	if ( $t_content_type )
-    	header('Content-Type: ' . $t_content_type );
+		header('Content-Type: ' . $t_content_type );
 
 	readfile( $t_file_path );
 }
@@ -556,9 +580,9 @@ function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) 
 function plugin_protected( $p_base_name ) {
 	global $g_plugin_cache_protected;
 
-	# For pseudo-plugin MantisCore, return protected as 1.
+	# Pseudo-plugin MantisCore is protected
 	if( $p_base_name == 'MantisCore' ) {
-		return 1;
+		return true;
 	}
 
 	return $g_plugin_cache_protected[$p_base_name];
@@ -586,6 +610,11 @@ function plugin_priority( $p_base_name ) {
  * @return boolean True if plugin is installed
  */
 function plugin_is_installed( $p_basename ) {
+	# Pseudo-plugin MantisCore is always installed
+	if( $p_basename == 'MantisCore' ) {
+		return true;
+	}
+
 	$t_plugin_table = db_get_table( 'plugin' );
 
 	$t_forced_plugins = config_get_global( 'plugins_force_installed' );
@@ -609,6 +638,7 @@ function plugin_install( $p_plugin ) {
 	access_ensure_global_level( config_get_global( 'manage_plugin_threshold' ) );
 
 	if( plugin_is_installed( $p_plugin->basename ) ) {
+		error_parameters( $p_plugin->basename );
 		trigger_error( ERROR_PLUGIN_ALREADY_INSTALLED, WARNING );
 		return null;
 	}
@@ -812,6 +842,17 @@ function plugin_require_api( $p_file, $p_basename = null ) {
 	$t_path = config_get_global( 'plugin_path' ) . $t_current . '/';
 
 	require_once( $t_path . $p_file );
+}
+
+/**
+ * Determine if a given plugin is registered.
+ * @param string $p_basename Plugin basename
+ * @return boolean True if plugin is registered
+ */
+function plugin_is_registered( $p_basename ) {
+	global $g_plugin_cache;
+
+	return isset( $g_plugin_cache[$p_basename] );
 }
 
 /**
