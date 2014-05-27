@@ -1012,7 +1012,7 @@ function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, 
 		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
 	}
 
-	$g_project_override = $p_project_id;;
+	$g_project_override = $p_project_id;
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );

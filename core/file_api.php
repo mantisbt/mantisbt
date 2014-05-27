@@ -507,7 +507,7 @@ function file_delete( $p_file_id, $p_table = 'bug' ) {
  */
 function file_type_check( $p_file_name ) {
 	$t_allowed_files = config_get( 'allowed_files' );
-	$t_disallowed_files = config_get( 'disallowed_files' );;
+	$t_disallowed_files = config_get( 'disallowed_files' );
 
 	# grab extension
 	$t_extension = pathinfo( $p_file_name, PATHINFO_EXTENSION );

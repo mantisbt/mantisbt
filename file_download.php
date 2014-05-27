@@ -160,7 +160,7 @@ http_content_disposition_header( $t_filename, $f_show_inline );
 header( 'Content-Length: ' . $v_filesize );
 
 # If finfo is available (always true for PHP >= 5.3.0) we can use it to determine the MIME type of files
-$finfo = finfo_get_if_available();;
+$finfo = finfo_get_if_available();
 
 $t_content_type = $v_file_type;
 
