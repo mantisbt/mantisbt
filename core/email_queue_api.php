@@ -192,13 +192,12 @@ function email_queue_delete( $p_email_id ) {
 
 /**
  * Get array of email queue id's
- * @param string $p_sort_order Either 'ASC' or 'DESC' (defaults to DESC).
  * @return array
  */
-function email_queue_get_ids( $p_sort_order = 'DESC' ) {
+function email_queue_get_ids() {
 	$t_email_table = db_get_table( 'email' );
 
-	$t_query = 'SELECT email_id FROM ' . $t_email_table . ' ORDER BY email_id ' . $p_sort_order;
+	$t_query = 'SELECT email_id FROM ' . $t_email_table . ' ORDER BY email_id ASC';
 	$t_result = db_query_bound( $t_query );
 
 	$t_ids = array();
