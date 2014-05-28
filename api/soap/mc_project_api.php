@@ -26,19 +26,19 @@
 /**
  * Use a standard filter to get issues associated with the specified user.
  *
- * @param $p_username logged in user name.
- * @param $p_password login password.
- * @param $p_project_id id of project to filter on, or ALL_PROJECTS.
- * @param $p_filter_type The name of the filter to apply
+ * @param string $p_username logged in user name.
+ * @param string $p_password login password.
+ * @param int $p_project_id id of project to filter on, or ALL_PROJECTS.
+ * @param string $p_filter_type The name of the filter to apply
  *        "assigned" - target user specified - issues assigned to target user that are not resolved.
  *        "assigned" - target user 0 - unassigned issues that are not resolved.
  *        "reported" - target user specified - issues reported by user.
  *        "reported" - target user 0 - will throw.
  *        "monitored" - target user specified - issues monitored by user.
  *        "monitored" - target user 0 - issues not monitored.
- * @param $p_target_user AccountData for target user, can include id, name, or both.
- * @param $p_page_number the page to return (1 based).
- * @param $p_per_page number of issues per page.
+ * @param string $p_target_user AccountData for target user, can include id, name, or both.
+ * @param int $p_page_number the page to return (1 based).
+ * @param int $p_per_page number of issues per page.
  * @return IssueDataArray a page of matching issues.
  */
 function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id, $p_filter_type, $p_target_user, $p_page_number, $p_per_page ) {
@@ -96,6 +96,12 @@ function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id
 
 /**
  * Project Get Issues
+ * @param string $p_username logged in user name.
+ * @param string $p_password login password.
+ * @param int $p_project_id Project Id
+ * @param int $p_page_number Page number
+ * @param int $p_per_page Per page
+ * @return array
  */
 function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page_number, $p_per_page ) {
 	global $g_project_override;
@@ -755,6 +761,13 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 	return $t_attachments;
 }
 
+/**
+ * Get the list of subprojects for a given project
+ * @param string $p_username  The name of the user trying to access the versions.
+ * @param string $p_password  The password of the user.
+ * @param integer $p_project_id  The id of the project to retrieve the attachments for.
+ * @return array
+ */
 function mc_project_get_all_subprojects( $p_username, $p_password, $p_project_id ) {
 	global $g_project_override;
 
@@ -1000,6 +1013,12 @@ function mc_project_delete( $p_username, $p_password, $p_project_id ) {
 
 /**
  * Get Issue Headers
+ * @param string $p_username  The name of the user trying to access the versions.
+ * @param string $p_password  The password of the user.
+ * @param integer $p_project_id  The id of the project to retrieve the attachments for.
+ * @param int $p_page_number Page number
+ * @param int $p_per_page Per page
+ * @return mixed
  */
 function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, $p_page_number, $p_per_page ) {
 	global $g_project_override;

@@ -27,11 +27,16 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture for category webservice methods.
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class CategoryTest extends SoapBase {
-
+	/**
+	 * @var array Category names to delete at end of test run
+	 */
 	private $categoryNamesToDelete = array();
-
+	
 	/**
 	 * A test case that tests the following:
 	 * 1. Get the project id.
@@ -98,6 +103,9 @@ class CategoryTest extends SoapBase {
 		$this->assertNotContains($categoryNewName, $categoryList);
 	}
 
+	/**
+	 * Tear Down: Remove categories created by tests
+	 */
 	protected function tearDown() {
 
 		parent::tearDown();
@@ -111,10 +119,18 @@ class CategoryTest extends SoapBase {
 		}
 	}
 
+	/**
+	 * Get an Original Category name for use in a test
+	 * @return string
+	 */
 	private function getOriginalNameCategory() {
 		return 'soaptest_' . date('Ymd_His');
 	}
 
+	/**
+	 * Get a Renamed Category name for use in a test
+	 * @return string
+	 */
 	private function getNewNameCategory() {
 		return 'soaptest_renamed_' . date('Ymd_His');
 	}

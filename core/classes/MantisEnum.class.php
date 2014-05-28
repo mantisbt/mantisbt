@@ -15,6 +15,7 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * MantisBT Enumeration Handling
  * @package MantisBT
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
@@ -209,11 +210,11 @@ class MantisEnum {
 	/**
 	 * Given a value it decorates it and returns it as the label.
 	 *
-	 * @param integer The value (e.g. 50).
-	 * @return The decorated value (e.g. @50@).
+	 * @param integer $p_value The value (e.g. 50).
+	 * @return string The decorated value (e.g. @50@).
 	 */
-	private static function getLabelForUnknownValue( $value ) {
-		$valueAsInteger = (int)$value;
+	private static function getLabelForUnknownValue( $p_value ) {
+		$valueAsInteger = (int)$p_value;
 		return '@' . $valueAsInteger . '@';
 	}
 }

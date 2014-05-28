@@ -27,6 +27,9 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture for issue update webservice methods.
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class IssueUpdateTest extends SoapBase {
 	/**
@@ -367,7 +370,7 @@ class IssueUpdateTest extends SoapBase {
 		$this->assertEquals( '', $issue->category, 'category' );
 	}
 
-	/*
+	/**
 	 * This test case tests the following:
 	 * 1. Creation of an issue.
 	 * 2. Updating the issue with a time tracking note
@@ -415,7 +418,7 @@ class IssueUpdateTest extends SoapBase {
 		$this->assertEquals( 30, $issueWithNote->notes[0]->time_tracking);
 	}
 
-	/*
+	/**
 	 * This test case tests the following:
 	 * 1. Creation of an issue.
 	 * 2. Updating the issue with rare fields
@@ -463,6 +466,9 @@ class IssueUpdateTest extends SoapBase {
 		$this->assertEquals( 'os_build', $retrievedIssue->os_build);
 	}
 
+	/**
+	 * Tests for updating Tags on issues
+	 */
 	public function testUpdateWithTagOperations() {
 
 		// initialise tags
@@ -513,6 +519,9 @@ class IssueUpdateTest extends SoapBase {
 		self::assertEquals(0, count ( $issue->tags ) );
 	}
 
+	/**
+	 * Tests for updating Monitors on issues
+	 */
 	public function testUpdateWithMonitors() {
 
 		// create issue

@@ -23,7 +23,12 @@
  * @link http://www.mantisbt.org
  */
 
-# Check if the current user can download attachments for the specified bug.
+/**
+ * Check if the current user can download attachments for the specified bug.
+ * @param int $p_bug_id Bug id
+ * @param int $p_user_id User id
+ * @return bool
+ */
 function mci_file_can_download_bug_attachments( $p_bug_id, $p_user_id ) {
 	$t_can_download = access_has_bug_level( config_get( 'download_attachments_threshold' ), $p_bug_id );
 	if( $t_can_download ) {
@@ -34,7 +39,11 @@ function mci_file_can_download_bug_attachments( $p_bug_id, $p_user_id ) {
 	return( $t_reported_by_me && config_get( 'allow_download_own_attachments' ) );
 }
 
-# Read a local file and return its content.
+/**
+ * Read a local file and return its content.
+ * @param string $p_diskfile name of file on disk
+ * @return string
+ */
 function mci_file_read_local( $p_diskfile ) {
 	$t_handle = fopen( $p_diskfile, "r" );
 	$t_content = fread( $t_handle, filesize( $p_diskfile ) );
@@ -42,13 +51,29 @@ function mci_file_read_local( $p_diskfile ) {
 	return $t_content;
 }
 
-# Write a local file.
+/**
+ * Write a local file.
+ * @param string $p_diskfile name of file on disk
+ * @param string $p_content file content to write
+ */
 function mci_file_write_local( $p_diskfile, $p_content ) {
 	$t_handle = fopen( $p_diskfile, "w" );
 	fwrite( $t_handle, $p_content );
 	fclose( $t_handle );
 }
 
+/**
+ * Add a file
+ * @param int $p_id file id
+ * @param string $p_name file name
+ * @param string $p_content file content to write
+ * @param string $p_file_type file type
+ * @param string $p_table database table name
+ * @param string $p_title title
+ * @param string $p_desc description
+ * @param string $p_user_id user id
+ * @return mixed
+ */
 function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_title = '', $p_desc = '', $p_user_id = null ) {
 	if( !file_type_check( $p_name ) ) {
 		return SoapObjectsFactory::newSoapFault( 'Client',  'File type not allowed.' );
@@ -158,7 +183,6 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
  * @return string|soap_fault the string contents, or a soap_fault
  */
 function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
-
 	# we handle the case where the file is attached to a bug
 	# or attached to a project as a project doc.
 	$t_query = '';

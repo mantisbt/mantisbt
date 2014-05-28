@@ -15,9 +15,10 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * MantisBT Core Unit Tests
+ * Test cases for MantisEnum Class
+ *
  * @package    Tests
- * @subpackage Enum
+ * @subpackage UnitTests
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
@@ -28,7 +29,6 @@
 require_once dirname( dirname(__FILE__) ) . '/TestConfig.php';
 
 require_once 'MantisEnum.class.php';
-
 
 /**
  * Test cases for MantisEnum class.

@@ -27,12 +27,25 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture which verifies login mechanisms
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class LoginTest extends SoapBase {
 
+	/**
+	 * Fake username
+	 */
 	private $dummyUser = 'no';
+
+	/**
+	 * Fake Password
+	 */
 	private $dummyPassword = 'user';
 
+	/**
+	 * Test Fake Login details fail
+	 */
 	public function testLoginFailed() {
 		try {
 			$this->client->mc_login( $this->dummyUser , $this->dummyPassword );
@@ -42,6 +55,9 @@ class LoginTest extends SoapBase {
 		}
 	}
 
+	/**
+	 * Tests a client login and that account data returned is valid
+	 */
 	public function testLoginSuccessfully() {
 		$t_user_data = $this->client->mc_login( $this->userName, $this->password );
 
@@ -52,6 +68,9 @@ class LoginTest extends SoapBase {
 		$this->assertEquals( 90, (integer)$t_user_data->access_level, 'access_level' );
 	}
 
+	/**
+	 * Tests issue_get fails with an invalid login 
+	 */
 	public function testGetIssueGetLoginFailed() {
 		try {
 			$this->client->mc_issue_get( $this->dummyUser , $this->dummyPassword, 1 );
@@ -61,6 +80,9 @@ class LoginTest extends SoapBase {
 		}
 	}
 
+	/**
+	 * Tests project_get_users fails with an invalid login 
+	 */
 	public function testProjectGetUsersLoginFailed() {
 		try {
 			$this->client->mc_project_get_users( $this->dummyUser , $this->dummyPassword, $this->getProjectId(), 0 );
@@ -70,6 +92,9 @@ class LoginTest extends SoapBase {
 		}
 	}
 
+	/**
+	 * Tests enum_status fails with an invalid login 
+	 */
 	public function testGetEnumStatusLoginFailed() {
 		try {
 			$this->client->mc_enum_status( $this->dummyUser , $this->dummyPassword);
@@ -79,6 +104,9 @@ class LoginTest extends SoapBase {
 		}
 	}
 
+	/**
+	 * Tests project_get_issues fails with an invalid login 
+	 */
 	public function testProjectGetIssuesLoginFailed() {
 		try {
 			$this->client->mc_project_get_issues( $this->dummyUser , $this->dummyPassword, $this->getProjectId(), 0, 15 );
@@ -88,6 +116,9 @@ class LoginTest extends SoapBase {
 		}
 	}
 
+	/**
+	 * Tests filter_get_issues fails with an invalid login 
+	 */
 	public function testFilterGetIssuesLoginFailed() {
 		try {
 			$this->client->mc_filter_get_issues( $this->dummyUser , $this->dummyPassword, $this->getProjectId(), 1, 0, 15 );
@@ -97,6 +128,9 @@ class LoginTest extends SoapBase {
 		}
 	}
 
+	/**
+	 * Tests Login with a null password is rejected
+	 */
 	public function testLoginWithNullPasswordIsRejected() {
 		try {
 			$this->client->mc_enum_status( $this->userName, null);
@@ -106,6 +140,9 @@ class LoginTest extends SoapBase {
 		}
 	}
 
+	/**
+	 * Tests Login with an empty password is rejected
+	 */
 	public function testLoginWithEmptyPasswordIsRejected() {
 		try {
 			$this->client->mc_enum_status( $this->userName, '');
@@ -115,6 +152,9 @@ class LoginTest extends SoapBase {
 		}
 	}
 
+	/**
+	 * Tests Login with the wrond password is rejected
+	 */
 	public function testLoginWithIncorrectPasswordIsRejected() {
 		try {
 			$this->client->mc_enum_status( $this->userName, "This really should be incorrect");
@@ -125,8 +165,9 @@ class LoginTest extends SoapBase {
 	}
 
 	/**
-	 * @param $e SoapFault
-	 * @return void
+	 * Check SOAP login failure is an access denied
+	 * @param SoapFault $e SoapFault
+	 * @return null
 	 */
 	private function assertIsLoginFailure($e) {
 		$this->assertRegexp( '/Access denied/i' , $e->getMessage() );

@@ -46,6 +46,7 @@ require_once 'UserTest.php';
 require_once 'TagTest.php';
 
 /**
+ * Soap Test Suite
  * @package    Tests
  * @subpackage UnitTests
  * @copyright Copyright 2002  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
@@ -53,16 +54,21 @@ require_once 'TagTest.php';
  */
 class Soap_AllTests extends PHPUnit_Framework_TestSuite
 {
+	/**
+	 * setUp
+	 */
 	protected function setUp()
 	{
-	if ( ! extension_loaded('soap') ) {
-		$this->markTestSuiteSkipped(
-			'The SOAP extension is not available.'
+		if ( ! extension_loaded('soap') ) {
+			$this->markTestSuiteSkipped(
+				'The SOAP extension is not available.'
 			);
+		}
 	}
 
-	}
-
+	/**
+	 * Initialises Soap Test Suite
+	 */
 	public static function suite()
 	{
 		$suite = new Soap_AllTests('SOAP Interface');

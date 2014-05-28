@@ -143,18 +143,18 @@ function require_lib( $p_library_name ) {
  *
  * @param string $p_class class name
  */
-function __autoload( $className ) {
+function __autoload( $p_class ) {
 	global $g_class_path;
 	global $g_library_path;
 
-	$t_require_path = $g_class_path . $className . '.class.php';
+	$t_require_path = $g_class_path . $p_class . '.class.php';
 
 	if ( file_exists( $t_require_path ) ) {
 		require_once( $t_require_path );
 		return;
 	}
 
-	$t_require_path = $g_library_path . 'rssbuilder' . DIRECTORY_SEPARATOR . 'class.' . $className . '.inc.php';
+	$t_require_path = $g_library_path . 'rssbuilder' . DIRECTORY_SEPARATOR . 'class.' . $p_class . '.inc.php';
 
 	if ( file_exists( $t_require_path ) ) {
 		require_once( $t_require_path );

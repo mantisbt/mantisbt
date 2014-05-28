@@ -27,6 +27,9 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture for issue relationships
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class RelationshipTest extends SoapBase {
 	

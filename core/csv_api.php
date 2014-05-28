@@ -83,28 +83,27 @@ function csv_get_default_filename() {
 
 /**
  * escape a string before writing it to csv file.
- * @param type $todo TODO
- * @return  TODO
+ * @param string $p_string string to escape
+ * @return string
  * @access public
  */
-function csv_escape_string( $p_str ) {
+function csv_escape_string( $p_string ) {
 		$t_escaped = str_split( '"' . csv_get_separator() . csv_get_newline() );
 		$t_must_escape = false;
 		while( ( $t_char = current( $t_escaped ) ) !== false && !$t_must_escape ) {
-			$t_must_escape = strpos( $p_str, $t_char ) !== false;
+			$t_must_escape = strpos( $p_string, $t_char ) !== false;
 			next( $t_escaped );
 		}
 		if ( $t_must_escape ) {
-			$p_str = '"' . str_replace( '"', '""', $p_str ) . '"';
+			$p_string = '"' . str_replace( '"', '""', $p_string ) . '"';
 		}
 
-		return $p_str;
+		return $p_string;
 }
 
 /**
- * An array of column names that are used to identify  fields to include and in which order.
- * @param type $todo TODO
- * @return  TODO
+ * An array of column names that are used to identify fields to include and in which order.
+ * @return array
  * @access public
  */
 function csv_get_columns() {

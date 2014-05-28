@@ -131,6 +131,7 @@ print_successful_redirect( 'adm_config_report.php' );
  * commas and '=>' within strings are handled
  *
  * @param string $p_value Complex value to process
+ * @param bool $p_trimquotes
  * @return parsed variable
  */
 function process_complex_value( $p_value, $p_trimquotes = false ) {

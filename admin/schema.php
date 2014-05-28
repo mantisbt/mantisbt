@@ -42,7 +42,9 @@ if ( !function_exists( 'db_null_date' ) ) {
 	}
 }
 
-
+/**
+ * Legacy date function for installer backwards compatibility
+ */
 function installer_db_now() {
 	global $g_db;
 

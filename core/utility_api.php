@@ -281,6 +281,10 @@ function get_font_path() {
 		return $t_font_path;
 }
 
+/**
+ * Return instance of fileinfo class if enabled in php
+ * @return finfo
+ */
 function finfo_get_if_available() {
 	
 	if ( class_exists( 'finfo' ) ) {

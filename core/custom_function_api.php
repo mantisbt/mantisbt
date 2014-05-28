@@ -270,7 +270,6 @@ function custom_function_default_auth_can_change_password() {
  *
  * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
  * @param int $p_user_id The user id or null for current logged in user.
- * @param int $p_project_id The project id or null for current project.
  * @return array
  */
 function custom_function_default_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAGE, $p_user_id = null ) {

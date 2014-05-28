@@ -957,9 +957,9 @@ function graph_date_format( $p_date ) {
  * @param int $p_bug_count bug count
  * @param string $p_title title
  */
-function error_check( $bug_count, $title ) {
-	if( 0 == $bug_count ) {
-		error_text( $title, plugin_lang_get( 'not_enough_data' ) );
+function error_check( $p_bug_count, $p_title ) {
+	if( 0 == $p_bug_count ) {
+		error_text( $p_title, plugin_lang_get( 'not_enough_data' ) );
 	}
 }
 

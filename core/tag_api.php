@@ -259,6 +259,7 @@ function tag_get_all( $p_name_filter, $p_count, $p_offset) {
 /**
  * Counts all available tags
  * @param integer $p_name_filter A string to match the beginning of the tag name
+ * @return int
  */
 function tag_count ( $p_name_filter ) {
 

@@ -44,6 +44,8 @@ class Mantis_HelperTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * Tests helper_array_transpose()
 	 * @dataProvider providerArrayTranspose
+	 * @param array $in input array
+	 * @param array $out output array
 	 */
 	public function testArrayTranspose( $in, $out )
 	{

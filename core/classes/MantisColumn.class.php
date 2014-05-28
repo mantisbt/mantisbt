@@ -1,8 +1,6 @@
 <?php
 # MantisBT - A PHP based bugtracking system
 
-# Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.
-
 # MantisBT is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -17,8 +15,16 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Mantis Column Handling
+ * @copyright Copyright 2009  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ * @package MantisBT
+ */
+
+/**
  * Base class that implements basic column functionality
  * and integration with MantisBT.
+ *
  * @package MantisBT
  * @subpackage classes
  */
@@ -53,7 +59,7 @@ abstract class MantisColumn {
 	 * that will be shown in a given view.  This is preferable to
 	 * the alternative option of querying the database for each
 	 * issue as the display() method is called.
-	 * @param array Bug objects
+	 * @param array $p_bugs Bug objects
 	 */
 	public function cache( $p_bugs ) {}
 

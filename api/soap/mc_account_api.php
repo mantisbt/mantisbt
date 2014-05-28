@@ -25,6 +25,8 @@
 
 /**
  * Get username, realname and email from for a given user id
+ * @param int $p_user_id User id
+ * @return array
  */
 function mci_account_get_array_by_id( $p_user_id ) {
 	$t_result = array();
@@ -49,6 +51,8 @@ function mci_account_get_array_by_id( $p_user_id ) {
 
 /**
  * Get username, realname and email from for a set of given user ids
+ * @param array $p_user_ids
+ * @return array
  */
 function mci_account_get_array_by_ids ( $p_user_ids ) {
     

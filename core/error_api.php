@@ -59,11 +59,11 @@ set_error_handler( 'error_handler' );
  * The others, being system errors, will come with a string in $p_error
  *
  * @access private
- * @param int p_type contains the level of the error raised, as an integer.
- * @param string p_error contains the error message, as a string.
- * @param string p_file contains the filename that the error was raised in, as a string.
- * @param int p_line contains the line number the error was raised at, as an integer.
- * @param array p_context to the active symbol table at the point the error occurred (optional)
+ * @param int $p_type contains the level of the error raised, as an integer.
+ * @param string $p_error contains the error message, as a string.
+ * @param string $p_file contains the filename that the error was raised in, as a string.
+ * @param int $p_line contains the line number the error was raised at, as an integer.
+ * @param array $p_context to the active symbol table at the point the error occurred (optional)
  * @uses lang_api.php
  * @uses config_api.php
  * @uses compress_api.php
@@ -475,7 +475,7 @@ function error_parameters() {
 /**
  * Set a url to give to the user to proceed after viewing the error
  * @access public
- * @param string p_url url given to user after viewing the error
+ * @param string $p_url url given to user after viewing the error
  * @return null
  */
 function error_proceed_url( $p_url ) {

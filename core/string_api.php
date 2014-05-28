@@ -181,7 +181,7 @@ function string_display_line_links( $p_string ) {
 
 /**
  * Prepare a string for display in rss
- * @param string
+ * @param string $p_string
  * @return string
  */
 function string_rss_links( $p_string ) {
@@ -224,7 +224,7 @@ function string_textarea( $p_string ) {
 
 /**
  * Process a string for display in a text box
- * @param string
+ * @param string $p_string
  * @return string
  */
 function string_attribute( $p_string ) {

@@ -371,9 +371,9 @@ function cfdef_input_textbox($p_field_def, $p_custom_field_value) {
  * @param array $p_field_def custom field definition
  * @param mixed $p_custom_field_value custom field value
  */
-function cfdef_input_textarea($p_field_def, $t_custom_field_value) {
+function cfdef_input_textarea($p_field_def, $p_custom_field_value) {
 	echo '<textarea ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '"';
-	echo ' cols="70" rows="8">' . $t_custom_field_value .'</textarea>';
+	echo ' cols="70" rows="8">' . $p_custom_field_value .'</textarea>';
 }
 
 /**

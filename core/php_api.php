@@ -56,8 +56,12 @@ function php_mode() {
 	return $s_mode;
 }
 
-# Returns true if the current PHP version is higher than the one
-#  specified in the given string
+/**
+ * Returns true if the current PHP version is higher than the one
+ * specified in the given string
+ * @param string $p_version_string version string to compare
+ * @return bool
+ */
 function php_version_at_least( $p_version_string ) {
 	global $g_cached_version;
 
@@ -89,6 +93,13 @@ function php_version_at_least( $p_version_string ) {
 
 # If mb_* not defined, define it to map to standard methods.
 if ( !function_exists( 'mb_substr' ) ) {
+	/**
+	 * Map mb_substr to utf8_substr if mb extension is not found
+	 * @param string $p_text text string
+	 * @param int $p_index start position
+	 * @param int $p_size size
+	 * @return string
+	 */
 	function mb_substr( $p_text, $p_index, $p_size ) {
 		return utf8_substr( $p_text, $p_index, $p_size );
 	}

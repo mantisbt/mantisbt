@@ -15,6 +15,7 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Mantis Configuration Report
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -71,6 +72,11 @@ $t_config_types = array(
 	CONFIG_TYPE_STRING  => 'string',
 );
 
+/**
+ * returns the configuration type for a given configuration type id
+ * @param int $p_type configuration type id to check
+ * @return string configuration type
+ */
 function get_config_type( $p_type ) {
 	global $t_config_types;
 
@@ -81,6 +87,13 @@ function get_config_type( $p_type ) {
 	}
 }
 
+/**
+ * Display a given config value appropriately
+ * @param int $p_type configuration type id
+ * @param mixed $p_value configuration value
+ * @param bool $p_for_display whether to pass the value via string attribute for web browser display
+ * @return null
+ */
 function print_config_value_as_string( $p_type, $p_value, $p_for_display = true ) {
 	$t_corrupted = false;
 
@@ -124,6 +137,12 @@ function print_config_value_as_string( $p_type, $p_value, $p_for_display = true 
 	}
 }
 
+/**
+ * Generate an html option list for the given array
+ * @param array $p_array
+ * @param string $p_filter_value the selected value
+ * @return null
+ */
 function print_option_list_from_array( $p_array, $p_filter_value ) {
 	foreach( $p_array as $t_key => $t_value ) {
 		echo "<option value='$t_key'";
@@ -131,7 +150,6 @@ function print_option_list_from_array( $p_array, $p_filter_value ) {
 		echo '>' . string_attribute( $t_value ) . "</option>\n";
 	}
 }
-
 
 # Get filter values
 $t_filter_save          = gpc_get_bool( 'save' );
