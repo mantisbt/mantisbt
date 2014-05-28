@@ -59,6 +59,7 @@ function mc_filter_get( $p_username, $p_password, $p_project_id ) {
  *
  * @param string $p_username  The name of the user trying to access the filters.
  * @param string $p_password  The password of the user.
+ * @param integer $p_project_id  The id of the project to retrieve filters for.
  * @param integer $p_filter_id  The id of the filter to apply.
  * @param integer $p_page_number  Start with the given page number (zero-based)
  * @param integer $p_per_page  Number of issues to display per page
@@ -105,6 +106,7 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
  *
  * @param string $p_username  The name of the user trying to access the filters.
  * @param string $p_password  The password of the user.
+ * @param integer $p_project_id  The id of the project to retrieve filters for.
  * @param integer $p_filter_id  The id of the filter to apply.
  * @param integer $p_page_number  Start with the given page number (zero-based)
  * @param integer $p_per_page  Number of issues to display per page

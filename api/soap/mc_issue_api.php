@@ -196,7 +196,7 @@ function mci_get_category( $p_category_id ) {
 }
 
 /**
- *
+ * Get due date for a given bug
  * @param BugData $p_bug
  * @return soapval the value to be encoded as the due date
  */
@@ -217,6 +217,7 @@ function mci_issue_get_due_date( $p_bug ) {
  * @param $p_issue_id   Issue id to apply custom field values to.
  * @param $p_custom_fields  The array of custom field values as described in the webservice complex types.
  * @param boolean $p_log_insert create history logs for new values
+ * @return mixed
  */
 function mci_issue_set_custom_fields( $p_issue_id, &$p_custom_fields, $p_log_insert ) {
 	# set custom field values on the submitted issue
@@ -330,7 +331,8 @@ function mci_issue_get_attachments( $p_issue_id ) {
 /**
  * Get the relationships of an issue.
  *
- * @param integer $p_issue_id  The id of the issue to retrieve the relationships for
+ * @param int $p_issue_id  The id of the issue to retrieve the relationships for
+ * @param int $p_user_id user id of the user trying to access the information
  * @return array that represents an RelationShipData structure
  */
 function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
@@ -370,7 +372,7 @@ function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
 /**
  * Get all visible notes for a specific issue
  *
- * @param integer $p_issue_id  The id of the issue to retrieve the notes for
+ * @param int $p_issue_id  The id of the issue to retrieve the notes for
  * @return array that represents an IssueNoteData structure
  */
 function mci_issue_get_notes( $p_issue_id ) {
@@ -406,9 +408,10 @@ function mci_issue_get_notes( $p_issue_id ) {
  * modify the existing monitors list.</p>
  *
  * @param int $p_issue_id the issue id to set the monitors for
- * @param int $p_user_id the user which requests the monitor change
+ * @param int $p_requesting_user_id the user which requests the monitor change
  * @param array $p_monitors An array of arrays with the <em>id</em> field set to the id
  *  of the users which should monitor this issue.
+ * @return mixed
  */
 function mci_issue_set_monitors( $p_issue_id , $p_requesting_user_id, $p_monitors ) {
 	if ( bug_is_readonly( $p_issue_id ) ) {
@@ -801,6 +804,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
  * Created By KGB
  * @param string $p_username The name of the user trying to add the issue.
  * @param string $p_password The password of the user.
+ * @param int $p_issue_id The issue id of the existing issue being updated
  * @param array $p_issue A IssueData structure containing information about the new issue.
  * @return integer The id of the created issue.
  */
@@ -1020,6 +1024,14 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 
 }
 
+/**
+ * Set tags for a given issue
+ * @param string $p_username username
+ * @param string $p_password password
+ * @param int $p_issue_id issue id
+ * @param array $p_tags tags
+ * @return mixed
+ */
 function mc_issue_set_tags ( $p_username, $p_password, $p_issue_id, $p_tags ) {
 	global $g_project_override;
 
@@ -1202,7 +1214,7 @@ function mc_issue_note_delete( $p_username, $p_password, $p_issue_note_id ) {
  * Update a note
  *
  * @param string $p_username  The name of the user trying to add a note to an issue.
- * param string $p_password  The password of the user.
+ * @param string $p_password  The password of the user.
  * @param IssueNoteData $p_note  The note to update.
  * @return true on success, false on failure
  */
@@ -1499,6 +1511,12 @@ function mci_issue_data_as_array( $p_issue_data, $p_user_id, $p_lang ) {
 		return $t_issue;
 }
 
+/**
+ * Get tags linked to a given bug id
+ * @param int $p_bug_id bug id
+ * @param int $p_user_id user accessing the information
+ * @return array
+ */
 function mci_issue_get_tags_for_bug_id( $p_bug_id, $p_user_id ) {
 
 	if ( !access_has_global_level( config_get( 'tag_view_threshold' ), $p_user_id ) )

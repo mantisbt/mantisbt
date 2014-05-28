@@ -52,11 +52,11 @@ class SourceData {
 
 	/**
 	 * Get url to view issue
-	 * @param int issue id
+	 * @param int $p_issue_id issue id
      * @return string
 	 */
-	public function get_issue_url( $issue_id ) {
-		return $this->urlbase . 'view.php?id=' . $issue_id;
+	public function get_issue_url( $p_issue_id ) {
+		return $this->urlbase . 'view.php?id=' . $p_issue_id;
 	}
 
 	/**
@@ -262,18 +262,18 @@ class ImportXML {
 
 /**
  * Convert each character of the passed string to the corresponding HTML entity.
- * @param string string to convert
+ * @param string $p_string string to convert
  * @return string
  */
-function htmlFullEntities( $string ) {
-	$chars = str_split( $string );
+function htmlFullEntities( $p_string ) {
+	$chars = str_split( $p_string );
 	$escaped = array_map( 'getEntity', $chars );
 	return implode( '', $escaped );
 }
 
 /**
  * Get entity
- * @param string character to convert
+ * @param string $char character to convert
  * @return string
  */
 function getEntity( $char ) {

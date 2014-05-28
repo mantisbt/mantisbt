@@ -130,6 +130,12 @@ function mc_tag_delete( $p_username, $p_password, $p_tag_id ) {
 	return tag_delete( $p_tag_id );
 }
 
+/**
+ * Set tag(s) for a given issue id
+ * @param int $p_issue_id Issue id
+ * @param array $p_tags array of tag
+ * @param int $p_user_id User id
+ */
 function mci_tag_set_for_issue ( $p_issue_id, $p_tags, $p_user_id ) {
 
 	$t_tag_ids_to_attach = array();

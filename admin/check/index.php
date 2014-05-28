@@ -60,6 +60,13 @@ set_time_limit( 60 * 5 );
 $g_show_all = gpc_get_bool( 'show_all', false );
 $g_show_errors = gpc_get_bool( 'show_errors', false );
 
+/**
+ * Returns a URL to implement filtering on the admin check page
+ *
+ * @param int $p_all whether to show all check out
+ * @param int $p_errors whether to show all errors
+ * @return string url
+ */
 function mode_url( $p_all, $p_errors ) {
 	return basename( __FILE__ ) . '?' . http_build_query(
 		array(

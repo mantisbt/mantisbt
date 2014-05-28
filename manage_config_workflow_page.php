@@ -352,6 +352,9 @@ function access_row() {
 	}
 } # end function access_row
 
+/**
+ * access section end
+ */
 function access_end() {
 	echo '</tbody></table></div><br />' . "\n";
 }

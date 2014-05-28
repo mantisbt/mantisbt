@@ -95,6 +95,10 @@ class BugData {
 	 * Bug Handler ID
 	 */
 	protected $handler_id = 0;
+	
+	/**
+	 * Duplicate ID
+	 */
 	protected $duplicate_id = 0;
 
 	/**
@@ -280,8 +284,8 @@ class BugData {
 	 * @param string $p_value value
 	 * @private
 	 */
-	public function __set($name, $value) {
-		switch ($name) {
+	public function __set($p_name, $p_value) {
+		switch ($p_name) {
 			// integer types
 			case 'id':
 			case 'project_id':
@@ -295,10 +299,10 @@ class BugData {
 			case 'resolution':
 			case 'projection':
 			case 'category_id':
-				$value = (int)$value;
+				$p_value = (int)$p_value;
 				break;
 			case 'target_version':
-				if ( !$this->loading && $this->$name != $value) {
+				if ( !$this->loading && $this->$p_name != $p_value) {
 					# Only set target_version if user has access to do so
 					if( !access_has_project_level( config_get( 'roadmap_update_threshold' ) ) ) {
 						trigger_error( ERROR_ACCESS_DENIED, ERROR );
@@ -306,12 +310,12 @@ class BugData {
 				}
 				break;
 			case 'due_date':
-				if ( !is_numeric( $value ) ) {
-					$value = strtotime($value);
+				if ( !is_numeric( $p_value ) ) {
+					$p_value = strtotime($p_value);
 				}
 				break;
 		}
-		$this->$name = $value;
+		$this->$p_name = $p_value;
 	}
 
 	/**
@@ -321,10 +325,10 @@ class BugData {
 	 * @private
      * @return string
 	 */
-	public function __get($name) {
-		if( $this->is_extended_field($name) )
+	public function __get($p_name) {
+		if( $this->is_extended_field($p_name) )
 			$this->fetch_extended_info();
-		return $this->{$name};
+		return $this->{$p_name};
 	}
 
 	/**
@@ -334,8 +338,8 @@ class BugData {
 	 * @private
      * @return bool
 	 */
-	public function __isset($name) {
-		return isset( $this->{$name} );
+	public function __isset($p_name) {
+		return isset( $this->{$p_name} );
 	}
 
 	/**
@@ -728,8 +732,8 @@ function bug_cache_database_result( $p_bug_database_result, $p_stats = null ) {
 
 /**
  * Cache a bug row if necessary and return the cached copy
- * @param array p_bug_id id of bug to cache from mantis_bug_table
- * @param array p_trigger_errors set to true to trigger an error if the bug does not exist.
+ * @param int $p_bug_id id of bug to cache from mantis_bug_table
+ * @param bool $p_trigger_errors set to true to trigger an error if the bug does not exist.
  * @return bool|array returns an array representing the bug row if bug exists or false if bug does not exist
  * @access public
  * @uses database_api.php
@@ -837,8 +841,8 @@ function bug_clear_cache( $p_bug_id = null ) {
 
 /**
  * Cache a bug text row if necessary and return the cached copy
- * @param int p_bug_id integer bug id to retrieve text for
- * @param bool p_trigger_errors If the second parameter is true (default), trigger an error if bug text not found.
+ * @param int $p_bug_id integer bug id to retrieve text for
+ * @param bool $p_trigger_errors If the second parameter is true (default), trigger an error if bug text not found.
  * @return bool|array returns false if not bug text found or array of bug text
  * @access public
  * @uses database_api.php
@@ -880,7 +884,7 @@ function bug_text_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 
 /**
  * Clear a bug's bug text from the cache or all bug text if no bug id specified.
- * @param int bug id to clear (optional)
+ * @param int $p_bug_id bug id to clear (optional)
  * @return null
  * @access public
  */
@@ -978,7 +982,7 @@ function bug_is_readonly( $p_bug_id ) {
 
 /**
  * Check if a given bug is resolved
- * @param int p_bug_id integer representing bug id
+ * @param int $p_bug_id integer representing bug id
  * @return bool true if bug is resolved, false otherwise
  * @access public
  * @uses config_api.php
@@ -990,7 +994,7 @@ function bug_is_resolved( $p_bug_id ) {
 
 /**
  * Check if a given bug is closed
- * @param int p_bug_id integer representing bug id
+ * @param int $p_bug_id integer representing bug id
  * @return bool true if bug is closed, false otherwise
  * @access public
  * @uses config_api.php
@@ -1002,7 +1006,7 @@ function bug_is_closed( $p_bug_id ) {
 
 /**
  * Check if a given bug is overdue
- * @param int p_bug_id integer representing bug id
+ * @param int $p_bug_id integer representing bug id
  * @return bool true if bug is overdue, false otherwise
  * @access public
  * @uses database_api.php
@@ -1260,7 +1264,7 @@ function bug_move( $p_bug_id, $p_target_project_id ) {
 /**
  * allows bug deletion :
  * delete the bug, bugtext, bugnote, and bugtexts selected
- * @param array p_bug_id integer representing bug id
+ * @param array $p_bug_id integer representing bug id
  * @return bool (always true)
  * @access public
  */
@@ -1361,7 +1365,7 @@ function bug_delete_all( $p_project_id ) {
  * @todo include reporter name and handler name, the problem is that
  *      handler can be 0, in this case no corresponding name will be
  *      found.  Use equivalent of (+) in Oracle.
- * @param int p_bug_id integer representing bug id
+ * @param int $p_bug_id integer representing bug id
  * @return array
  * @access public
  */
@@ -1375,7 +1379,7 @@ function bug_get_extended_row( $p_bug_id ) {
 
 /**
  * Returns the record of the specified bug
- * @param int p_bug_id integer representing bug id
+ * @param int $p_bug_id integer representing bug id
  * @return array
  * @access public
  */
@@ -1385,8 +1389,8 @@ function bug_get_row( $p_bug_id ) {
 
 /**
  * Returns an object representing the specified bug
- * @param int p_bug_id integer representing bug id
- * @param bool p_get_extended included extended information (including bug_text)
+ * @param int $p_bug_id integer representing bug id
+ * @param bool $p_get_extended included extended information (including bug_text)
  * @return object BugData Object
  * @access public
  */
@@ -1436,8 +1440,8 @@ function bug_get_field( $p_bug_id, $p_field_name ) {
 /**
  * return the specified text field of the given bug
  *  if the field does not exist, display a warning and return ''
- * @param int p_bug_id integer representing bug id
- * @param string p_fieldname field name
+ * @param int $p_bug_id integer representing bug id
+ * @param string $p_field_name field name
  * @return string
  * @access public
  */
@@ -1672,7 +1676,7 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 
 /**
  * assign the bug to the given user
- * @param int $p_bug Bug Object
+ * @param int $p_bug_id Bug id
  * @param int $p_user_id User id
  * @param string $p_bugnote_text bugnote text
  * @param bool $p_bugnote_private indicate whether bugnote is private
@@ -1726,7 +1730,7 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 
 /**
  * close the given bug
- * @param int $p_bug Bug Object
+ * @param int $p_bug_id Bug id
  * @param string $p_bugnote_text bugnote text
  * @param bool $p_bugnote_private bugnote private
  * @param string $p_time_tracking time tracking
@@ -1751,7 +1755,7 @@ function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false,
 
 /**
  * resolve the given bug
- * @param int $p_bug Bug Object
+ * @param int $p_bug_id Bug id
  * @param int $p_resolution resolution
  * @param string $p_fixed_in_version fixed in version
  * @param string $p_bugnote_text bugnote text
@@ -1760,6 +1764,7 @@ function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false,
  * @param bool $p_bugnote_private private bugnote
  * @param string $p_time_tracking time tracking
  * @access public
+ * @return bool
  */
 function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bugnote_text = '', $p_duplicate_id = null, $p_handler_id = null, $p_bugnote_private = false, $p_time_tracking = '0:00' ) {
 	$c_resolution = (int) $p_resolution;

@@ -326,6 +326,7 @@ function plugin_history_log( $p_bug_id, $p_field_name, $p_old_value, $p_new_valu
  * @param string $p_error_name Error name
  * @param int $p_error_type Error type
  * @param string $p_basename Plugin basename
+ * @return null
  */
 function plugin_error( $p_error_name, $p_error_type = ERROR, $p_basename = null ) {
 	if( is_null( $p_basename ) ) {

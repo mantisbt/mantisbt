@@ -58,20 +58,19 @@ require_api( 'string_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
-# ===================================
-# Caching
-# ===================================
-# ########################################
-# SECURITY NOTE: cache globals are initialized here to prevent them
-#   being spoofed if register_globals is turned on
-
 $g_cache_user = array();
+$g_user_accessible_subprojects_cache = null;
 
-# --------------------
-# Cache a user row if necessary and return the cached copy
-#  If the second parameter is true (default), trigger an error
-#  if the user can't be found.  If the second parameter is
-#  false, return false if the user can't be found.
+/**
+ * Cache a user row if necessary and return the cached copy
+ * If the second parameter is true (default), trigger an error
+ * if the user can't be found.  If the second parameter is
+ * false, return false if the user can't be found.
+ *
+ * @param int $p_user_id user id
+ * @param bool $p_trigger_errors trigger an error is the user does not exist
+ * @return array|bool array of database data or false if not found
+ */
 function user_cache_row( $p_user_id, $p_trigger_errors = true ) {
 	global $g_cache_user;
 
@@ -137,8 +136,10 @@ function user_cache_array_rows( $p_user_id_array ) {
 	return;
 }
 
-# --------------------
-# Cache an object as a bug.
+/**
+ * Cache an object as a bug.
+ * @param array $p_user_database_result
+ */
 function user_cache_database_result( $p_user_database_result ) {
 	global $g_cache_user;
 
@@ -149,8 +150,11 @@ function user_cache_database_result( $p_user_database_result ) {
 	$g_cache_user[$p_user_database_result['id']] = $p_user_database_result;
 }
 
-# --------------------
-# Clear the user cache (or just the given id if specified)
+/**
+ * Clear the user cache (or just the given id if specified)
+ * @param int $p_user_id User Id ( default is null to clear cache for all users )
+ * @return bool
+ */
 function user_clear_cache( $p_user_id = null ) {
 	global $g_cache_user;
 
@@ -163,6 +167,12 @@ function user_clear_cache( $p_user_id = null ) {
 	return true;
 }
 
+/**
+ * Update Cache entry for a given user and field
+ * @param int $p_user_id user id to update
+ * @param string $p_field field to update
+ * @param mixed $p_value updated value
+ */
 function user_update_cache( $p_user_id, $p_field, $p_value ) {
 	global $g_cache_user;
 
@@ -173,6 +183,14 @@ function user_update_cache( $p_user_id, $p_field, $p_value ) {
 	}
 }
 
+/**
+ * Searches the cache for a given field and value pair against any user,
+ * and returns the first user id that matches
+ * @param string $p_field User object field name
+ * @param mixed $p_value field value
+ * @param int|bool User id if found, if not false
+ * @return int|bool
+ */
 function user_search_cache( $p_field, $p_value ) {
 	global $g_cache_user;
 	if( isset( $g_cache_user ) ) {
@@ -202,10 +220,12 @@ function user_exists( $p_user_id ) {
 	}
 }
 
-# --------------------
-# check to see if user exists by id
-# if it doesn't exist then error
-#  otherwise let execution continue undisturbed
+/**
+ * check to see if user exists by id
+ * if the user does not exist, trigger an error
+ *
+ * @param int $p_user_id User ID
+ */
 function user_ensure_exists( $p_user_id ) {
 	$c_user_id = (integer)$p_user_id;
 
@@ -215,9 +235,11 @@ function user_ensure_exists( $p_user_id ) {
 	}
 }
 
-# --------------------
-# return true if the username is unique, false if there is already a user
-#  with that username
+/**
+ * return true if the username is unique, false if there is already a user with that username
+ * @param string $p_username username
+ * @return bool
+ */
 function user_is_name_unique( $p_username ) {
 	$t_user_table = db_get_table( 'user' );
 
@@ -233,8 +255,10 @@ function user_is_name_unique( $p_username ) {
 	}
 }
 
-# --------------------
-# Check if the username is unique and trigger an ERROR if it isn't
+/**
+ * Check if the username is unique and trigger an ERROR if it isn't
+ * @param string $p_username username
+ */
 function user_ensure_name_unique( $p_username ) {
 	if( !user_is_name_unique( $p_username ) ) {
 		trigger_error( ERROR_USER_NAME_NOT_UNIQUE, ERROR );
@@ -308,12 +332,12 @@ function user_ensure_realname_unique( $p_username, $p_realname ) {
 	}
 }
 
-# --------------------
-# Check if the username is a valid username (does not account for uniqueness)
-#  realname can match
-# Return true if it is, false otherwise
+/**
+ * Check if the username is a valid username (does not account for uniqueness) realname can match
+ * @param string $p_username username
+ * @return bool return true if user name is valid, false otherwise
+ */
 function user_is_name_valid( $p_username ) {
-
 	# The DB field is hard-coded. DB_FIELD_SIZE_USERNAME should not be modified.
 	if( utf8_strlen( $p_username ) > DB_FIELD_SIZE_USERNAME ) {
 		return false;
@@ -333,9 +357,11 @@ function user_is_name_valid( $p_username ) {
 	return true;
 }
 
-# --------------------
-# Check if the username is a valid username (does not account for uniqueness)
-# Trigger an error if the username is not valid
+/**
+ * Check if the username is a valid username (does not account for uniqueness)
+ * Trigger an error if the username is not valid
+ * @param string $p_username username
+ */
 function user_ensure_name_valid( $p_username ) {
 	if( !user_is_name_valid( $p_username ) ) {
 		trigger_error( ERROR_USER_NAME_INVALID, ERROR );
@@ -457,11 +483,14 @@ function user_count_level( $p_level = ANYBODY ) {
 	return $t_users;
 }
 
-# --------------------
-# Return an array of user ids that are logged in.
-# A user is considered logged in if the last visit timestamp is within the
-# specified session duration.
-# If the session duration is 0, then no users will be returned.
+/**
+ * Return an array of user ids that are logged in.
+ * A user is considered logged in if the last visit timestamp is within the
+ * specified session duration.
+ * If the session duration is 0, then no users will be returned.
+ * @param int $p_session_duration_in_minutes
+ * @return array
+ */
 function user_get_logged_in_user_ids( $p_session_duration_in_minutes ) {
 	$t_session_duration_in_minutes = (integer) $p_session_duration_in_minutes;
 
@@ -495,6 +524,11 @@ function user_get_logged_in_user_ids( $p_session_duration_in_minutes ) {
  * @param string $p_username username
  * @param string $p_password password
  * @param string $p_email email
+ * @param int $p_access_level global access level for the user
+ * @param bool $p_protected whether the account is protected from modifications (default false)
+ * @param bool $p_enabled whether the account is enabled
+ * @param string $p_realname users realname
+ * @param string $p_admin_name
  * @return string Cookie String
  */
 function user_create( $p_username, $p_password, $p_email = '',
@@ -544,11 +578,15 @@ function user_create( $p_username, $p_password, $p_email = '',
 	return $t_cookie_string;
 }
 
-# --------------------
-# Signup a user.
-# If the use_ldap_email config option is on then tries to find email using
-# ldap. $p_email may be empty, but the user wont get any emails.
-# returns false if error, the generated cookie string if ok
+/**
+ * Signup a user.
+ * If the use_ldap_email config option is on then tries to find email using
+ * ldap. $p_email may be empty, but the user wont get any emails.
+ * returns false if error, the generated cookie string if ok
+ * @param string $p_username username
+ * @param string $p_email email
+ * @return string|bool cookie string or false on error
+ */
 function user_signup( $p_username, $p_email = null ) {
 	if( null === $p_email ) {
 		$p_email = '';
@@ -606,9 +644,12 @@ function user_delete_project_specific_access_levels( $p_user_id ) {
 	return true;
 }
 
-# --------------------
-# delete profiles for the specified user
-# returns true when successfully deleted
+/**
+ * delete profiles for the specified user
+ * returns true when successfully deleted
+ * @param int $p_user_id User ID
+ * @return bool
+ */
 function user_delete_profiles( $p_user_id ) {
 	$c_user_id = db_prepare_int( $p_user_id );
 
@@ -1006,8 +1047,6 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 	return $t_projects;
 }
 
-$g_user_accessible_subprojects_cache = null;
-
 /**
  * return an array of sub-project IDs of a certain project to which the user has access
  * @param int $p_user_id User Id
@@ -1175,8 +1214,8 @@ function user_get_assigned_projects( $p_user_id ) {
  * List of users that are NOT in the specified project and that are enabled
  * if no project is specified use the current project
  * also exclude any administrators
- *	@param int $p_project_id
- *	@return array List of users not assigned to the specified project
+ * @param int $p_project_id
+ * @return array List of users not assigned to the specified project
  */
 function user_get_unassigned_by_project_id( $p_project_id = null ) {
     $t_mantis_project_user_list_table = db_get_table( 'project_user_list' );
@@ -1571,22 +1610,34 @@ function user_set_password( $p_user_id, $p_password, $p_allow_protected = false 
 	return true;
 }
 
-# --------------------
-# Set the user's email to the given string after checking that it is a valid email
+/**
+ * Set the user's email to the given string after checking that it is a valid email
+ * @param int $p_user_id User ID
+ * @param string $p_email email address
+ * @return bool
+ */
 function user_set_email( $p_user_id, $p_email ) {
 	email_ensure_valid( $p_email );
 
 	return user_set_field( $p_user_id, 'email', $p_email );
 }
 
-# --------------------
-# Set the user's realname to the given string after checking validity
+/**
+ * Set the user's realname to the given string after checking validity
+ * @param int $p_user_id User ID
+ * @param string $p_realname realname
+ * @return bool
+ */
 function user_set_realname( $p_user_id, $p_realname ) {
 	return user_set_field( $p_user_id, 'realname', $p_realname );
 }
 
-# --------------------
-# Set the user's username to the given string after checking that it is valid
+/**
+ * Set the user's username to the given string after checking that it is valid
+ * @param int $p_user_id User ID
+ * @param string $p_username username
+ * @return bool
+ */
 function user_set_name( $p_user_id, $p_username ) {
 	user_ensure_name_valid( $p_username );
 	user_ensure_name_unique( $p_username );

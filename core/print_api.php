@@ -207,7 +207,6 @@ function print_avatar( $p_user_id, $p_size = 80 ) {
  *
  * @param int $p_user_id User ID
  */
-# prints the name of the user given the id.  also makes it an email link.
 function print_user( $p_user_id ) {
 	echo prepare_user_name( $p_user_id );
 }
@@ -243,8 +242,8 @@ function print_user_with_subject( $p_user_id, $p_bug_id ) {
  * @param string $p_email Email address
  */
 function print_email_input( $p_field_name, $p_email ) {
-		echo '<input id="email-field" type="text" name="' . string_attribute( $p_field_name ) . '" size="32" maxlength="64" value="' . string_attribute( $p_email ) . '" />';
-	}
+	echo '<input id="email-field" type="text" name="' . string_attribute( $p_field_name ) . '" size="32" maxlength="64" value="' . string_attribute( $p_email ) . '" />';
+}
 
 /**
  * print out an email editing input
@@ -342,6 +341,7 @@ function print_reporter_option_list( $p_user_id, $p_project_id = null ) {
  * Print the entire form for attaching a tag to a bug.
  * @param integer $p_bug_id Bug ID
  * @param string $p_string Default contents of the input box
+ * @return bool
  */
 function print_tag_attach_form( $p_bug_id, $p_string = '' ) {
 	?>
@@ -523,7 +523,12 @@ function print_assign_to_option_list( $p_user_id = '', $p_project_id = null, $p_
 	print_user_option_list( $p_user_id, $p_project_id, $p_threshold );
 }
 
-
+/**
+ * Print User option list for bugnote filter field
+ * @param int|string $p_user_id user id
+ * @param int $p_project_id project id
+ * @param int $p_threshold access level
+ */
 function print_note_option_list( $p_user_id = '', $p_project_id = null, $p_threshold = null ) {
 	if ( null === $p_threshold ) {
 		$p_threshold = config_get( 'add_bugnote_threshold' );
@@ -535,12 +540,11 @@ function print_note_option_list( $p_user_id = '', $p_project_id = null, $p_thres
 /**
  * List projects that the current user has access to.
  *
- * @param integer $p_project_id 	The current project id or null to use cookie.
+ * @param int $p_project_id 	The current project id or null to use cookie.
  * @param bool $p_include_all_projects  true: include "All Projects", otherwise false.
- * @param mixed $p_filter_project_id  The id of a project to exclude or null.
- * @param string $p_trace  The current project trace, identifies the sub-project via a path from top to bottom.
+ * @param int|null $p_filter_project_id  The id of a project to exclude or null.
+ * @param string|bool $p_trace  The current project trace, identifies the sub-project via a path from top to bottom.
  * @param bool $p_can_report_only If true, disables projects in which user can't report issues; defaults to false (all projects enabled)
- * @return void
  */
 function print_project_option_list( $p_project_id = null, $p_include_all_projects = true, $p_filter_project_id = null, $p_trace = false, $p_can_report_only = false ) {
 	$t_user_id = auth_get_current_user_id();
@@ -570,8 +574,15 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
 	}
 }
 
-# --------------------
-# List projects that the current user has access to
+/**
+ * List projects that the current user has access to
+ * @param int $p_parent_id parent project id
+ * @param int $p_project_id project id
+ * @param int $p_filter_project_id filter project id
+ * @param bool $p_trace trace
+ * @param bool $p_can_report_only If true, disables projects in which user can't report issues; defaults to false (all projects enabled)
+ * @param array $p_parents array of parent projects
+ */
 function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_can_report_only = false, $p_parents = array() ) {
 	array_push( $p_parents, $p_parent_id );
 	$t_user_id = auth_get_current_user_id();
@@ -1160,8 +1171,11 @@ function print_bug_link( $p_bug_id, $p_detail_info = true ) {
 	echo string_get_bug_view_link( $p_bug_id, null, $p_detail_info );
 }
 
-# formats the priority given the status
-# shows the priority in BOLD if the bug is NOT closed and is of significant priority
+/**
+ * formats the priority given the status
+ * shows the priority in BOLD if the bug is NOT closed and is of significant priority
+ * @param BugData $p_bug Bug Object
+ */
 function print_formatted_priority_string( $p_bug ) {
 	$t_pri_str = get_enum_element( 'priority', $p_bug->priority, auth_get_current_user_id(), $p_bug->project_id );
 	$t_priority_threshold = config_get( 'priority_significant_threshold' );
@@ -1175,8 +1189,11 @@ function print_formatted_priority_string( $p_bug ) {
 	}
 }
 
-# formats the severity given the status
-# shows the severity in BOLD if the bug is NOT closed and is of significant severity
+/**
+ * formats the severity given the status
+ * shows the severity in BOLD if the bug is NOT closed and is of significant severity
+ * @param BugData $p_bug Bug Object
+ */
 function print_formatted_severity_string( $p_bug ) {
 	$t_sev_str = get_enum_element( 'severity', $p_bug->severity, auth_get_current_user_id(), $p_bug->project_id );
 	$t_severity_threshold = config_get( 'severity_significant_threshold' );
@@ -1209,7 +1226,7 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 				$p_dir = 'ASC';
 			}
 		} else {
-			# Otherwise always start with ASCending
+			# Otherwise always start with ascending
 			$p_dir = 'ASC';
 		}
 
@@ -1226,7 +1243,7 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 				$p_dir = 'ASC';
 			}
 		} else {
-			# Otherwise always start with ASCending
+			# Otherwise always start with ascending
 			$p_dir = 'ASC';
 		}
 		$t_sort_field = rawurlencode( $p_sort_field );
@@ -1236,6 +1253,17 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 	}
 }
 
+/**
+ * Print manage user sort link
+ * @param string $p_page page
+ * @param string $p_string string
+ * @param string $p_field sort field
+ * @param string $p_dir sort direction
+ * @param string $p_sort_by sort by
+ * @param int $p_hide_inactive hide inactive
+ * @param int $p_filter filter
+ * @param int $p_show_disabled show disabled users
+ */
 function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by, $p_hide_inactive = 0, $p_filter = ALL, $p_show_disabled = 0 ) {
 	if( $p_sort_by == $p_field ) {
 
@@ -1505,20 +1533,27 @@ function print_email_link_with_subject( $p_email, $p_text, $p_bug_id ) {
 	echo get_email_link_with_subject( $p_email, $p_text, $t_subject );
 }
 
-# return the mailto: href string link instead of printing it
-# add subject line
-function get_email_link_with_subject( $p_email, $p_text, $p_summary ) {
+/**
+ * return the mailto: href string link instead of printing it
+ * add subject line
+ *
+ * @param string $p_email Email Address
+ * @param string $p_text Link text to display to user
+ * @param string $p_subject email subject line
+ * @return string
+ */
+function get_email_link_with_subject( $p_email, $p_text, $p_subject ) {
 	if( !access_has_project_level( config_get( 'show_user_email_threshold' ) ) ) {
 		return $p_text;
 	}
 
 	# If we apply string_url() to the whole mailto: link then the @
-	#  gets turned into a %40 and you can't right click in browsers to
-	#  do Copy Email Address.  If we don't apply string_url() to the
-	#  summary text then an ampersand (for example) will truncate the text
-	$t_summary = string_url( $p_summary );
+	# gets turned into a %40 and you can't right click in browsers to
+	# do Copy Email Address.  If we don't apply string_url() to the
+	# subject text then an ampersand (for example) will truncate the text
+	$t_subject = string_url( $p_subject );
 	$t_email = string_url( $p_email );
-	$t_mailto = string_attribute( "mailto:$t_email?subject=$t_summary" );
+	$t_mailto = string_attribute( "mailto:$t_email?subject=$t_subject" );
 	$t_text = string_display( $p_text );
 
 	return "<a class=\"user\" href=\"$t_mailto\">$t_text</a>";
@@ -1564,19 +1599,19 @@ function print_hidden_input( $p_field_key, $p_field_val ) {
 	}
 }
 
-# =============================
-# Functions that used to be in html_api
-# =============================
-
-# This prints the little [?] link for user help
-# The $p_a_name is a link into the documentation.html file
+/**
+ * This prints the little [?] link for user help
+ * @param string $p_a_name is a link into the documentation.html file
+ */
 function print_documentation_link( $p_a_name = '' ) {
 	echo lang_get( $p_a_name ) . "\n";
 	# @@@ Disable documentation links for now.  May be re-enabled if linked to new manual.
 	# echo "<a href=\"doc/documentation.html#$p_a_name\" target=\"_info\">[?]</a>";
 }
 
-# prints the signup link
+/**
+ * prints the signup link
+ */
 function print_signup_link() {
 	if ( ( ON == config_get_global( 'allow_signup' ) ) &&
 		 ( LDAP != config_get_global( 'login_method' ) ) &&
@@ -1586,12 +1621,16 @@ function print_signup_link() {
 	}
 }
 
-# prints the login link
+/**
+ * prints the login link
+ */
 function print_login_link() {
 	print_bracket_link( 'login_page.php', lang_get( 'login_title' ) );
 }
 
-# prints the lost pwd link
+/**
+ * prints the lost pwd link
+ */
 function print_lost_password_link() {
 	# lost password feature disabled or reset password via email disabled -> stop here!
 	if ( ( LDAP != config_get_global( 'login_method' ) ) &&

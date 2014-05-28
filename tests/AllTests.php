@@ -15,24 +15,28 @@
 # along with Mantis.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Testing Framework for MantisBT
+ *
+ * Configuration by users should be performed in bootstrap.php
+ *
  * @package Tests
  * @subpackage UnitTests
  * @copyright Copyright 2002  MantisBT Team   - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
-/**
- * Test Configuration
- */
 require_once 'TestConfig.php';
 
 require_once 'Mantis/AllTests.php';
 require_once 'soap/AllTests.php';
 
+/**
+ * All tests
+ */
 class AllTests
 {
 	/**
-	 * Defines test suite
+	 * Test suite
 	 */
     public static function suite()
     {

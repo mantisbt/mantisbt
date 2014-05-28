@@ -114,6 +114,7 @@ function action_add_note_print_fields() {
 /**
  * Validates the action on the specified bug id.
  *
+ * @param int $p_bug_id bug id
  * @return string|null On failure: the reason why the action could not be validated. On success: null.
  */
 function action_add_note_validate( $p_bug_id ) {

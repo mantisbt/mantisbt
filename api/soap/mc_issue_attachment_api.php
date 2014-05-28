@@ -30,7 +30,7 @@ require_once( dirname( __FILE__ ) . '/mc_core.php' );
  *
  * @param string $p_username  The name of the user trying to access the filters.
  * @param string $p_password  The password of the user.
- * @param integer $p_attachment_id  The id of the attachment to be retrieved.
+ * @param integer $p_issue_attachment_id The id of the attachment to be retrieved.
  * @return Base64 encoded data that represents the attachment.
  */
 function mc_issue_attachment_get( $p_username, $p_password, $p_issue_attachment_id ) {

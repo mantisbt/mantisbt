@@ -27,10 +27,15 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture for attachment methods
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class AttachmentTest extends SoapBase {
 
-
+	/**
+	 * @var array project attachments to delete after tests
+	 */
 	private $projectAttachmentsToDelete = array();
 
 	/**
@@ -40,6 +45,7 @@ class AttachmentTest extends SoapBase {
 	 * 3. Get the issue.
 	 * 4. Verify that the attachment is present in the issue data
 	 * 5. Verify that the attachment contents is correct
+	 *
 	 */
 	public function testAttachmentIsAdded() {
 		$issueToAdd = $this->getIssueToAdd( 'AttachmentTest.testAttachmentIsAdded' );
@@ -87,6 +93,7 @@ class AttachmentTest extends SoapBase {
 	 * A test case that tests the following:
 	 * 1. Gets a non-existing issue attachment
 	 * 2. Verifies that that an error is thrown
+	 *
 	 */
 	public function testIssueAttachmentNotFound() {
 
@@ -108,6 +115,7 @@ class AttachmentTest extends SoapBase {
 	 * 3. Get the issue.
 	 * 4. Verify that the attachment is present in the issue data
 	 * 5. Verify that the attachment contents is correct
+	 *
 	 */
 	public function testProjectAttachmentIsAdded() {
 		$this->skipIfProjectDocumentationIsNotEnabled();
@@ -148,6 +156,7 @@ class AttachmentTest extends SoapBase {
 	 * A test case that tests the following:
 	 * 1. Gets a non-existing project attachment
 	 * 2. Verifies that an error is thrown
+	 *
 	 */
 	public function testProjectAttachmentNotFound() {
 
@@ -164,6 +173,9 @@ class AttachmentTest extends SoapBase {
 		}
 	}
 
+	/**
+	 * Skip test if enable_project_documentation is not enabled in the configuration
+	 */
 	private function skipIfProjectDocumentationIsNotEnabled() {
 
 		$configEnabled = $this->client->mc_config_get_string( $this->userName, $this->password, 'enable_project_documentation' );
@@ -173,6 +185,9 @@ class AttachmentTest extends SoapBase {
 		}
 	}
 
+	/**
+	 * Tear Down: Remove project attachments added by test
+	 */
 	protected function tearDown() {
 		SoapBase::tearDown();
 

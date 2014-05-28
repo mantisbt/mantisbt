@@ -30,7 +30,7 @@
  * Retrieve the contents of a remote URL.
  * First tries using built-in PHP modules (OpenSSL and cURL), then attempts
  * system call as last resort.
- * @param string URL
+ * @param string $p_url URL
  * @return null|string URL contents (NULL in case of errors)
  */
 function url_get( $p_url ) {

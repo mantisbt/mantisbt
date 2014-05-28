@@ -15,7 +15,8 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * MantisBT Core Unit Tests
+ * Test cases for string handling within mantis
+ *
  * @package    Tests
  * @subpackage String
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -34,15 +35,20 @@ require_mantis_core();
 
 
 /**
- * String API tests
+ * Mantis string handling test cases
  * @package    Tests
  * @subpackage String
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
  */
 class Mantis_StringTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Tests string_sanitize_url()
+      *
 	 * @dataProvider provider
+	  * @param string $in input
+	  * @param string $out expected output
 	 */
 	public function testStringSanitize( $in, $out )
 	{
@@ -51,7 +57,7 @@ class Mantis_StringTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Returns test Strings
+	 * Data provider for string sanitize test
 	 */
 	public function provider()
 	{

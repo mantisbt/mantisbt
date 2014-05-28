@@ -78,6 +78,10 @@ if( function_exists( 'scandir' ) ) {
 	echo 'php scandir is disabled - skipping<br />';
 }
 
+/**
+ * Check plugin language files
+ * @param string $p_path plugin path
+ */
 function checkplugins( $p_path ) {
 	$t_path = rtrim( $p_path, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR;
 
@@ -100,7 +104,7 @@ function checkplugins( $p_path ) {
  * Check directory of language files
  *
  * @param string $p_path path
- * @param string $p_subpath sub path
+ * @param string $p_lang_files sub path
  */
 function checklangdir( $p_path, $p_lang_files = null ) {
 	$t_path = rtrim( $p_path, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
@@ -403,6 +407,7 @@ function lang_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
  * Print Language File error
  *
  * @param string $p_string error string
+ * @param string $p_type message type to display (default ERROR)
  */
 function print_error( $p_string, $p_type = 'ERROR' ) {
 	echo '<p class="error-msg">', "$p_type: $p_string", '</p>';

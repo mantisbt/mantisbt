@@ -1062,7 +1062,7 @@ function filter_get_bug_count( $p_query_clauses ) {
  * @param int $p_project_id project id to use in filtering.
  * @param int $p_user_id user id to use as current user when filtering.
  * @param bool $p_show_sticky true/false - get sticky issues only.
- * @return bool
+ * @return bool|array
  */
 function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p_bug_count, $p_custom_filter = null, $p_project_id = null, $p_user_id = null, $p_show_sticky = null ) {
 	log_event( LOG_FILTERING, 'START NEW FILTER QUERY' );

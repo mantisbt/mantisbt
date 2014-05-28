@@ -15,6 +15,7 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Permissions Report
  * @package MantisBT
  * @author Marcello Scata' <marcelloscata at users.sourceforge.net> ITALY
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
@@ -50,6 +51,11 @@ html_page_top( lang_get( 'permissions_summary_report' ) );
 print_manage_menu( 'adm_permissions_report.php' );
 print_manage_config_menu( 'adm_permissions_report.php' );
 
+/**
+ * return html for start of administration report section
+ * @param string $p_section_name
+ * @return string
+ */
 function get_section_begin_apr( $p_section_name ) {
 	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 
@@ -71,6 +77,12 @@ function get_section_begin_apr( $p_section_name ) {
 	return $t_output;
 }
 
+/**
+ * Return html for a row
+ * @param string $p_caption
+ * @param int $p_access_level
+ * @return string
+ */
 function get_capability_row( $p_caption, $p_access_level ) {
 	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 
@@ -90,6 +102,10 @@ function get_capability_row( $p_caption, $p_access_level ) {
 	return $t_output;
 }
 
+/**
+ * return html for end of administration report section
+ * @return string
+ */
 function get_section_end() {
 	$t_output = '</tbody></table></div><br />' . "\n";
 	return $t_output;

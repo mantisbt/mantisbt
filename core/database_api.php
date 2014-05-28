@@ -197,6 +197,7 @@ function db_is_connected() {
 
 /**
  * Returns whether php support for a database is enabled
+ * @param string $p_db_type Database type
  * @return bool indicating if php current supports the given database type
  */
 function db_check_database_support( $p_db_type ) {
@@ -309,7 +310,7 @@ function db_is_oracle() {
 /**
  * Validates that the given identifier's length is OK for the db platform
  * Triggers an error if the identifier is too long
- * @param string p_identifier Identifier to check
+ * @param string $p_identifier Identifier to check
  */
 function db_check_identifier_size( $p_identifier ) {
 	# Oracle does not support long object names (30 chars max)
@@ -456,7 +457,6 @@ function db_num_rows( $p_result ) {
 
 /**
  * Retrieve number of rows affected by a specific database query
- * @param ADORecordSet $p_result Database Query Record Set to retrieve affected rows for.
  * @return int Affected Rows
  */
 function db_affected_rows() {
@@ -569,6 +569,7 @@ function db_result( $p_result, $p_index1 = 0, $p_index2 = 0 ) {
 /**
  * return the last inserted id for a specific database table
  * @param string $p_table a valid database table name
+ * @param string $p_field a valid field name (default "id")
  * @return int last successful insert id
  */
 function db_insert_id( $p_table = null, $p_field = "id" ) {
@@ -697,6 +698,7 @@ function db_error_msg() {
 
 /**
  * send both the error number and error message and query (optional) as paramaters for a triggered error
+ * @param string $p_query query that generated the error
  * @todo Use/Behaviour of this function should be reviewed before 1.2.0 final
  */
 function db_error( $p_query = null ) {
@@ -821,7 +823,7 @@ function db_prepare_double( $p_double ) {
 
 /**
  * prepare a boolean for database insertion.
- * @param boolean $p_boolean boolean
+ * @param boolean $p_bool boolean
  * @return int integer representing boolean
  * @deprecated db_query_bound should be used in preference to this function. This function may be removed in 1.2.0 final
  * @todo Use/Behaviour of this function should be reviewed before 1.2.0 final
@@ -1255,5 +1257,5 @@ function db_oracle_adapt_query_syntax( $p_query , &$arr_parms = null )  {
 		}
 	}
 	$p_query = db_oracle_order_binds_sequentially( $p_query );
-		return $p_query;
+	return $p_query;
 }

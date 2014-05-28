@@ -195,6 +195,7 @@ function columns_get_plugin_columns() {
 /**
  * Returns true if the specified $p_column is a plugin column.
  * @param string $p_column A column name.
+ * @return bool
  */
 function column_is_plugin_column( $p_column ) {
 	$t_plugin_columns = columns_get_plugin_columns();

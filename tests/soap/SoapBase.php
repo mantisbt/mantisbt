@@ -37,57 +37,57 @@ require_once ( $t_root_path . DIRECTORY_SEPARATOR . 'core/constant_inc.php' );
  */
 class SoapBase extends PHPUnit_Framework_TestCase {
 	/**
-	 * Soap Client
+	 * @var SoapClient Soap Client
 	 */
 	protected $client;
 
 	/**
-	 * Username
+	 * @var string Username
 	 */
 	protected $userName = 'administrator';
 
 	/**
-	 * Password
+	 * @var string Password
 	 */
 	protected $password = 'root';
 
 	/**
-	 * Email address
+	 * @var string Email address
 	 */
 	protected $email = 'root@localhost';
 
 	/**
-	 * User ID
+	 * @var int User ID
 	 */
 	protected $userId = '1';
 
 	/**
-	 * MantisBT Path
+	 * @var string MantisBT Path
 	 */
 	protected $mantisPath;
 
 	/**
-	 * Project ID
+	 * @var int Project ID
 	 */
 	protected $projectId = 1;
 
 	/**
-	 * Array of Issue IDs to delete
+	 * @var array Array of Issue IDs to delete
 	 */
 	private   $issueIdsToDelete = array();
 
 	/**
-	 * Array of Version IDs to delete
+	 * @var array Array of Version IDs to delete
 	 */
 	private   $versionIdsToDelete = array();
 
 	/**
-	 * Array of Tag IDs to delete
+	 * @var array Array of Tag IDs to delete
 	 */
 	private   $tagIdsToDelete = array();
 
 	/**
-	 * Soal Client Options Array
+	 * @var array Soap Client Options Array
 	 */
 	private   $defaultSoapClientOptions = array(  'trace'      => true,
 												  'exceptions' => true,
@@ -144,6 +144,7 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * Returns an array of extra options to be passed to the Soap Client 
 	 * @return an array of extra options to be passed to the SoapClient constructor
 	 */
 	protected function extraSoapClientFlags() {
@@ -199,6 +200,8 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * getIssueToAdd
+	 * @param string $testCase
+	 * @return array
 	 */
 	protected function getIssueToAdd( $testCase ) {
 		return array(

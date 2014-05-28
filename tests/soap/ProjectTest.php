@@ -27,6 +27,9 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture for project webservice methods.
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class ProjectTest extends SoapBase {
 	/**
@@ -153,6 +156,8 @@ class ProjectTest extends SoapBase {
 
 	/**
 	 * New project Array
+	 * @param string $projectName
+	 * @return array
 	 */
 	private function newProjectAsArray($projectName) {
 		$projectDataStructure = array();

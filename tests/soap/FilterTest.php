@@ -27,6 +27,9 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture for filter related webservice method.
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class FilterTest extends SoapBase {
 	
@@ -434,7 +437,11 @@ class FilterTest extends SoapBase {
 		
 		$this->doTestGetPages('mc_project_get_issue_headers');
 	}
-	
+
+	/**
+	 * Handles paging of issue testing
+	 * @param string $methodName Method name to call in client
+	 */
 	private function doTestGetPages( $methodName ) {
 
 		$currentIssues = count($this->getProjectIssues());
@@ -475,6 +482,9 @@ class FilterTest extends SoapBase {
 		$this->doTestGetPages('mc_project_get_issues');
 	}
 	
+	/**
+	 * Tests for getAllProjectsIssues
+	 */
 	public function testGetAllProjectsIssues() {
 	
 		$initialIssues = $this->getAllProjectsIssues();
@@ -494,6 +504,9 @@ class FilterTest extends SoapBase {
 		$this->assertEquals( $issueId, $projectIssues[0]->id, "issueId");
 	}
 	
+	/**
+	 * Tests for getAllProjectsIssueHeaders
+	 */
 	public function testGetAllProjectsIssueHeaders() {
 	
 		$initialIssues = $this->getAllProjectsIssueHeaders();
@@ -513,6 +526,9 @@ class FilterTest extends SoapBase {
 		$this->assertEquals( $issueId, $projectIssues[0]->id, "issueId" );
 	}
 	
+	/**
+	 * Test to check that Get Issues returns issue monitors
+	 */
 	public function testFilterGetIssuesReturnsIssueMonitors() {
 	    
 	    $issueToAdd = $this->getIssueToAdd( 'FilterTest.testFilterGetIssuesReturnsIssueMonitors' );
@@ -542,7 +558,7 @@ class FilterTest extends SoapBase {
 	}
 
 	/**
-	 *
+	 * Get issues for a given project
 	 * @return array the project issues
 	 */
 	private function getProjectIssues() {
@@ -574,7 +590,7 @@ class FilterTest extends SoapBase {
 	}
 
 	/**
-	 *
+	 * Get issues for all projects
 	 * @return array the project issues
 	 */
 	private function getAllProjectsIssues() {
@@ -588,7 +604,7 @@ class FilterTest extends SoapBase {
 	}
 	
 	/**
-	 *
+	 * Get issue headers for a given project
 	 * @return array the project issues
 	 */
 	private function getProjectIssueHeaders() {
@@ -602,7 +618,7 @@ class FilterTest extends SoapBase {
 	}
 
 	/**
-	 *
+	 * Get issue headers for all projects
 	 * @return array the project issues
 	 */
 	private function getAllProjectsIssueHeaders() {

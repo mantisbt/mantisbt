@@ -27,6 +27,9 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture for issue notes webservice methods.
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class IssueNoteTest extends SoapBase {
 	/**

@@ -77,6 +77,7 @@ function event_declare_many( $p_events ) {
  * @param string $p_callback Callback function
  * @param int|string $p_plugin Plugin basename
  * @access public
+ * @return null
  */
 function event_hook( $p_name, $p_callback, $p_plugin = 0 ) {
 	global $g_event_cache;
@@ -169,11 +170,11 @@ function event_signal( $p_name, $p_params = null, $p_params_dynamic = null, $p_t
 
 /**
  * Executes a plugin's callback function for a given event.
- * @param string Event name
- * @param string Callback name
- * @param string Plugin basename
- * @param multi Parameters for event callback
- * @return multi Null if callback not found, value from callback otherwise
+ * @param string $p_event Event name
+ * @param string $p_callback Callback name
+ * @param string $p_plugin Plugin basename
+ * @param mixed $p_params Parameters for event callback
+ * @return mixed null if callback not found, value from callback otherwise
  * @access public
  */
 function event_callback( $p_event, $p_callback, $p_plugin, $p_params = null ) {

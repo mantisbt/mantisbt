@@ -55,8 +55,14 @@ html_page_top( lang_get( 'manage_plugin_link' ) );
 
 print_manage_menu( 'manage_plugin_page.php' );
 
-function plugin_sort( $p1, $p2 ) {
-	return strcasecmp( $p1->name, $p2->name );
+/**
+ * Sort Plugins by name
+ * @param MantisPlugin $p_plugin1 Plugin 1
+ * @param MantisPlugin $p_plugin2 Plugin 2
+ * @return string
+ */
+function plugin_sort( $p_plugin1, $p_plugin2 ) {
+	return strcasecmp( $p_plugin1->name, $p_plugin2->name );
 }
 
 $t_plugins = plugin_find_all();

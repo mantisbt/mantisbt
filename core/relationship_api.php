@@ -105,11 +105,34 @@ require_css( 'status_config.php' );
  * @subpackage classes
  */
 class BugRelationshipData {
+	/**
+	 * Relationship id
+	 */
 	var $id;
+
+	/**
+	 * Source Bug id
+	 */
 	var $src_bug_id;
+
+	/**
+	 * Source project id
+	 */
 	var $src_project_id;
+
+	/**
+	 * Destination Bug id
+	 */
 	var $dest_bug_id;
+
+	/**
+	 * Destination project id
+	 */
 	var $dest_project_id;
+
+	/**
+	 * Type
+	 */
 	var $type;
 }
 
@@ -422,7 +445,7 @@ function relationship_get_all_dest( $p_dest_bug_id ) {
 /**
  * get all relationships associated with the given bug
  * @param int $p_bug_id  Bug id
- * @param bool &$p_is_different_projects Returned Boolean value indicating if some relationships cross project boundaries
+ * @param bool $p_is_different_projects Returned Boolean value indicating if some relationships cross project boundaries
  * @return array Array of BugRelationshipData objects
  */
 function relationship_get_all( $p_bug_id, &$p_is_different_projects ) {
@@ -783,7 +806,6 @@ function relationship_get_summary_text( $p_bug_id ) {
  * @param string $p_select_name List box name (default "rel_type")
  * @param bool $p_include_any Include an ANY option in list box (default false)
  * @param bool $p_include_none Include a NONE option in list box (default false)
- * @param int $p_bug_id Bug id
  * @return null
  */
 function relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_select_name = "rel_type", $p_include_any = false, $p_include_none = false ) {

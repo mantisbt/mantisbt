@@ -27,6 +27,9 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture for issue history
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class IssueHistoryTest extends SoapBase {
 	/**
@@ -165,6 +168,8 @@ class IssueHistoryTest extends SoapBase {
 	/**
 	 * Returns the issue's history in ascending order, regardless of the
 	 * default history sort order
+	 * @param int $issueId Issue Id
+	 * @return array
 	 */
 	private function getIssueHistory( $issueId ) {
 		$issueHistory = $this->client->mc_issue_get_history( $this->userName, $this->password, $issueId );
@@ -179,6 +184,13 @@ class IssueHistoryTest extends SoapBase {
 		}
 	}
 
+	/**
+	 * Check History entry is valid
+	 * @param object $historyEntry
+	 * @param string $fieldName
+	 * @param mixed $fieldValue
+	 * @param mixed $oldValue
+	 */
 	private function assertPropertyHistoryEntry( $historyEntry, $fieldName, $fieldValue, $oldValue) {
 		$this->assertNotEmpty($historyEntry->date);
 

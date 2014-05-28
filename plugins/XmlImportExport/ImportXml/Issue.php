@@ -57,14 +57,21 @@ class ImportXml_Issue implements ImportXml_Interface {
 	 */
 	private $defaultCategory_;
 
+	/**
+	 * Default Constructor
+	 * @param bool $keepCategory
+	 * @param int $defaultCategory
+	 */
 	public function __construct( $keepCategory, $defaultCategory ) {
 		$this->newbug_ = new BugData;
 		$this->keepCategory_ = $keepCategory;
 		$this->defaultCategory_ = $defaultCategory;
 	}
 
-	// Read stream until current item finishes, processing
-	// the data found
+	/**
+	 * Read stream until current item finishes, processing the data found
+	 * @param XMLreader $reader
+	 */
 	public function process( XMLreader $reader ) {
 
 		//print "\nImportIssue process()\n";
@@ -294,7 +301,7 @@ class ImportXml_Issue implements ImportXml_Interface {
 
 	/**
 	 * update mapper
-	 * @param Mapper mapper
+	 * @param ImportXml_Mapper mapper
 	 */
 	public function update_map( ImportXml_Mapper $mapper ) {
 		$mapper->add( 'issue', $this->old_id_, $this->new_id_ );

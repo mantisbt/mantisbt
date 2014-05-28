@@ -322,6 +322,9 @@ function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects
 	echo "</tr>\n";
 }
 
+/**
+ * Print section end
+ */
 function get_section_end() {
 	echo '</tbody></table></div><br />' . "\n";
 }

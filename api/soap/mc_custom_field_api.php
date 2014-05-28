@@ -30,6 +30,7 @@
  * - 0, if object ref doesn't contain an id or a name.
  *
  * @param ObjectRef  $p_object_ref   An associate array with "id" and "name" keys.
+ * @return int
  */
 function mci_get_custom_field_id_from_objectref( $p_object_ref ) {
 	

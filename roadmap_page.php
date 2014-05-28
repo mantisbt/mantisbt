@@ -69,7 +69,7 @@ require_api( 'version_api.php' );
 
 /**
  * Print header for the specified project version.
- * @param array array contain project version data
+ * @param array $p_version_row array contain project version data
  */
 function print_version_header( $p_version_row ) {
 	$t_project_id   = $p_version_row['project_id'];

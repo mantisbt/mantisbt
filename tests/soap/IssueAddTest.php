@@ -27,6 +27,9 @@ require_once 'SoapBase.php';
 
 /**
  * Test fixture for issue creation webservice methods.
+ *
+ * @requires extension soap
+ * @group SOAP
  */
 class IssueAddTest extends SoapBase {
 	/**
@@ -301,7 +304,7 @@ class IssueAddTest extends SoapBase {
 	}
 
 	/**
-	 *
+	 * Reads a due date out of the soap response
 	 * @param string $issueDataXml
 	 * @return string the xsi:null value
 	 */
@@ -495,6 +498,9 @@ class IssueAddTest extends SoapBase {
 		$this->assertEquals( 'attr_value', $note->note_attr );
 	}
 
+	/**
+	 * A test cases that tests the creation of issues with a tag
+	 */
 	public function testCreateIssueWithTags() {
 
 		// initialise tags

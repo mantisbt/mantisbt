@@ -253,6 +253,7 @@ class UserPreferences {
 	 * Overloaded function
 	 * @param string $p_string Property name
 	 * @access private
+	 * @return mixed
 	 */
 	public function __get( $p_string ) {
 		if( is_null( $this->$p_string ) ) {
@@ -269,6 +270,7 @@ class UserPreferences {
 	/**
 	 * Public Get() function
 	 * @param string $p_string Property
+	 * @return mixed
 	 */
 	function Get( $p_string ) {
 		if( is_null( $this->$p_string ) ) {
@@ -662,6 +664,7 @@ function user_pref_get_language( $p_user_id, $p_project_id = ALL_PROJECTS ) {
  * @param string $p_pref_name
  * @param string $p_pref_value
  * @param int $p_project_id
+ * @return bool
  */
 function user_pref_set_pref( $p_user_id, $p_pref_name, $p_pref_value, $p_project_id = ALL_PROJECTS ) {
 	$t_prefs = user_pref_get( $p_user_id, $p_project_id );
@@ -680,6 +683,7 @@ function user_pref_set_pref( $p_user_id, $p_pref_name, $p_pref_value, $p_project
  * @param int $p_user_id
  * @param UserPreferences $p_prefs
  * @param int $p_project_id
+ * @return null
  */
 function user_pref_set( $p_user_id, $p_prefs, $p_project_id = ALL_PROJECTS ) {
 	if( user_pref_exists( $p_user_id, $p_project_id ) ) {

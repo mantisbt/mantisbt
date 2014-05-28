@@ -227,7 +227,7 @@ function install_category_migrate() {
 
 /**
  * Migrate the legacy date format.
- * @param array Array: [0] = tablename, [1] id column, [2] = old column, [3] = new column
+ * @param array $p_data Array: [0] = tablename, [1] id column, [2] = old column, [3] = new column
  * @return int
  */
 function install_date_migrate( $p_data ) {

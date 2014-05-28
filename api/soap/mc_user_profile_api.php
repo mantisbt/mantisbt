@@ -30,7 +30,7 @@
  * @param string   $p_password    The user's password
  * @param integer  $p_page_number
  * @param integer  $p_per_page
- * 
+ * @return mixed
  */
 function mc_user_profiles_get_all( $p_username, $p_password, $p_page_number, $p_per_page ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
