@@ -53,38 +53,6 @@ html_page_top( 'MantisBT Administration - System Utilities' );
 	<?php html_button( 'move_attachments_page.php', 'Move Project Files to Disk', array( 'type' => 'project' ) );?>
 	</td></tr>
 
-	<tr class="row-1"><td>Copy Custom Field to Standard Field.</td><td class="center">
-	<form method="post" action="copy_field.php">
-		<fieldset>
-		From
-		<select name="source_id">
-			<?php
-				$t_custom_ids = custom_field_get_ids();
-foreach( $t_custom_ids as $t_id ) {
-	printf( "<option value=\"%d\">%s</option>", $t_id, string_html_specialchars( custom_field_get_field( $t_id, 'name' ) ) );
-}
-?>
-		</select> 
-		To
-		<select name="dest_id">
-			<?php
-/** @todo should be expanded and configurable */
-// list matches exact field name from database
-$t_dest_ids = array(
-	'fixed_in_version',
-);
-foreach( $t_dest_ids as $t_id ) {
-	printf( "<option value=\"%s\">%s</option>", $t_id, $t_id );
-}
-?>
-		</select>
-		
-	<input type="submit" class="button" value="Copy" />
-	</fieldset>
-	</form>
-	</td></tr>
-
-	<!-- Database Statistics -->
 	<tr class="row-2"><td>Show database statistics.</td><td class="center">
 	<?php html_button( 'db_stats.php', 'Display', array() );?>
 	</td></tr>
