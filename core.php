@@ -108,18 +108,15 @@ function require_api( $p_api_name ) {
 	}
 }
 
-# Remember (globally) which library files have already been loaded
-$g_libraries_included = array();
-
 /**
  * Define an API inclusion function to replace require_once
  *
  * @param string $p_library_name lib file name
  */
 function require_lib( $p_library_name ) {
-	global $g_libraries_included;
+	static $s_libraries_included;
 	global $g_library_path;
-	if ( !isset( $g_libraries_included[$p_library_name] ) ) {
+	if ( !isset( $s_libraries_included[$p_library_name] ) ) {
 		$t_existing_globals = get_defined_vars();
 
 		$t_library_file_path = $g_library_path . $p_library_name;
@@ -134,7 +131,7 @@ function require_lib( $p_library_name ) {
 			global $$t_global_name;
 		}
 		extract( $t_new_globals );
-		$g_libraries_included[$p_library_name] = 1;
+		$s_libraries_included[$p_library_name] = 1;
 	}
 }
 
