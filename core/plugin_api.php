@@ -927,9 +927,11 @@ function plugin_register_installed() {
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_basename = $t_row['basename'];
-		plugin_register( $t_basename );
-		$g_plugin_cache_priority[$t_basename] = $t_row['priority'];
-		$g_plugin_cache_protected[$t_basename] = $t_row['protected'];
+		if( !plugin_is_registered( $t_basename ) ) {
+			plugin_register( $t_basename );
+			$g_plugin_cache_priority[$t_basename] = $t_row['priority'];
+			$g_plugin_cache_protected[$t_basename] = $t_row['protected'];
+		}
 	}
 }
 
