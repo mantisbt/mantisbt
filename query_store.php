@@ -65,7 +65,7 @@ if ( is_blank( $f_query_name ) ) {
 	print_header_redirect( $t_query_redirect_url );
 }
 
-// mantis_filters_table.name has a length of 64. Not allowing longer.
+# mantis_filters_table.name has a length of 64. Not allowing longer.
 if ( !filter_name_valid_length( $f_query_name ) ) {
 	$t_query_redirect_url = $t_query_redirect_url . '?error_msg='
 		. urlencode( lang_get( 'query_name_too_long' ) );

@@ -57,7 +57,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 	 *
 	 * @param string  $p_event     Event name
 	 * @param string  $p_string    Raw text to process
-	 * @param boolean $p_multiline True for multiline text (default), false for single-line.
+	 * @param bool $p_multiline True for multiline text (default), false for single-line.
 	 *                             Determines which html tags are used.
 	 *
 	 * @return string Formatted text
@@ -95,7 +95,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 	 *
 	 * @param string  $p_event     Event name
 	 * @param string  $p_string    Raw text to process
-	 * @param boolean $p_multiline True for multiline text (default), false for single-line.
+	 * @param bool $p_multiline True for multiline text (default), false for single-line.
 	 *                             Determines which html tags are used.
 	 *
 	 * @return string Formatted text
@@ -152,8 +152,8 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 		}
 
 		if( ON == $s_buglinks ) {
-			$t_string = string_process_bug_link( $t_string, /* anchor */ true, /* detailInfo */ false, /* fqdn */ true );
-			$t_string = string_process_bugnote_link( $t_string, /* anchor */ true, /* detailInfo */ false, /* fqdn */ true );
+			$t_string = string_process_bug_link( $t_string, true, false, true );
+			$t_string = string_process_bugnote_link( $t_string, true, false, true );
 		}
 
 		return $t_string;

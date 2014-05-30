@@ -43,17 +43,16 @@ class Period {
 	*/
 	var $end = '';
 
-	// ******* End vars *********************************************
 	/**
 	* Constructor
 	*/
 	function Period() {
 		$this->start = '';
 
-		// default to today
+		# default to today
 		$this->end = '';
 
-		// default to today
+		# default to today
 	}
 
 	/**

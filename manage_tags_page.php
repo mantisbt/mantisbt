@@ -156,7 +156,7 @@ print_manage_menu( 'manage_tags_page.php' ); ?>
 		</tbody>
 	</table>
 	<div class="pager-links"><?php
-		/* @todo hack - pass in the hide inactive filter via cheating the actual filter value */
+		# @todo hack - pass in the hide inactive filter via cheating the actual filter value
 		print_page_links( 'manage_tags_page.php', 1, $t_page_count, (int)$f_page_number, $f_filter ); ?>
 	</div>
 </div>

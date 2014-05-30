@@ -49,10 +49,10 @@ $g_log_levels = array(
 /**
  * Log an event
  * @param int $p_level Valid debug log level
- * @param string|array $p_msg Either a string, or an array structured as (string,execution time)
+ * @param string|array,... $p_msg Either a string, or an array structured as (string,execution time)
  * @return null
  */
-function log_event( $p_level, $p_msg /*,args*/) {
+function log_event( $p_level, $p_msg ) {
 	global $g_log_levels;
 
 	# check to see if logging is enabled
@@ -67,15 +67,15 @@ function log_event( $p_level, $p_msg /*,args*/) {
 		$s_msg = var_export( $p_msg, true );
 	} else {
 		$args = func_get_args();
-		array_shift($args); // skip level
-		array_shift($args); // skip message
+		array_shift($args); # skip level
+		array_shift($args); # skip message
 		$p_msg = vsprintf( $p_msg, $args);
 
 		$t_event = array( $p_msg, 0 );
 		$s_msg = $p_msg;
 	}
 
-		$t_backtrace = debug_backtrace();
+	$t_backtrace = debug_backtrace();
 	$t_caller = basename( $t_backtrace[0]['file'] );
 	$t_caller .= ":" . $t_backtrace[0]['line'];
 
@@ -91,8 +91,9 @@ function log_event( $p_level, $p_msg /*,args*/) {
 	$t_level = $g_log_levels[$p_level];
 
 	$t_plugin_event = '[' . $t_level . '] ' . $p_msg;
-	if( function_exists( 'event_signal' ) )
+	if( function_exists( 'event_signal' ) ) {
 		event_signal( 'EVENT_LOG', array( $t_plugin_event ) );
+	}
 
 	$t_log_destination = config_get_global( 'log_destination' );
 
@@ -132,7 +133,7 @@ function log_event( $p_level, $p_msg /*,args*/) {
 				$firephp->log( $p_msg, $t_php_event );
 				return;
 			}
-			// if firebug is not available, fall through
+			# if firebug is not available, fall through
 		default:
 			# use default PHP error log settings
 			error_log( $t_php_event . PHP_EOL );

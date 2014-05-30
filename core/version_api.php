@@ -686,19 +686,19 @@ function version_prepare_db( $p_version_info ) {
 /**
  * Checks whether the product version should be shown
  * (i.e. report, update, view, print).
- * @param integer $p_project_id  The project id.
+ * @param int $p_project_id  The project id.
  * @return bool true: show, false: otherwise.
  */
 function version_should_show_product_version( $p_project_id ) {
-	return ( ON == config_get( 'show_product_version', /* default */ null, /* user_id */ null, $p_project_id ) )
-		|| ( ( AUTO == config_get( 'show_product_version', /* default */ null, /* user_id */ null, $p_project_id ) )
+	return ( ON == config_get( 'show_product_version', null, null, $p_project_id ) )
+		|| ( ( AUTO == config_get( 'show_product_version', null, null, $p_project_id ) )
 				&& ( count( version_get_all_rows( $p_project_id ) ) > 0 ) );
 }
 
 /**
  * Gets the where clause to use for retrieving versions.
  *
- * @param integer $p_project_id  The project id to use.
+ * @param int $p_project_id  The project id to use.
  * @param bool    $p_inherit  Include versions from parent projects? true: yes, false: no, null: use default configuration.
  * @return string The where clause not including WHERE.
  */

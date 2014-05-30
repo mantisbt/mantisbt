@@ -254,7 +254,7 @@ function session_get( $p_name, $p_default = null ) {
 /**
  * Get an integer from the session.
  * @param string $p_name Session variable name
- * @param mixed $p_default Default value
+ * @param int|null $p_default Default value
  * @return int Session variable
  */
 function session_get_int( $p_name, $p_default = null ) {
@@ -265,8 +265,8 @@ function session_get_int( $p_name, $p_default = null ) {
 /**
  * Get a boolean from the session.
  * @param string $p_name Session variable name
- * @param mixed $p_default Default value
- * @return boolean Session variable
+ * @param bool|null $p_default Default value
+ * @return bool Session variable
  */
 function session_get_bool( $p_name, $p_default = null ) {
 	$t_args = func_get_args();
@@ -276,7 +276,7 @@ function session_get_bool( $p_name, $p_default = null ) {
 /**
  * Get a string from the session.
  * @param string $p_name Session variable name
- * @param mixed $p_default Default value
+ * @param string|null $p_default Default value
  * @return string Session variable
  */
 function session_get_string( $p_name, $p_default = null ) {

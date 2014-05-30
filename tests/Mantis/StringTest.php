@@ -45,7 +45,7 @@ class Mantis_StringTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Tests string_sanitize_url()
-      *
+	  *
 	 * @dataProvider provider
 	  * @param string $in input
 	  * @param string $out expected output
@@ -79,23 +79,23 @@ class Mantis_StringTest extends PHPUnit_Framework_TestCase {
 			array( 'plugin.php?page=Source/list&id=1#abc', 'plugin.php?page=Source%2Flist&id=1#abc'),
 		);
 
-		/* @FIXME
-			array( $my_path.'abc.php',
-			array( $my_path.'abc.php?',
-			array( $my_path.'abc.php#a',
-			array( $my_path.'abc.php?abc=def',
-			array( $my_path.'abc.php?abc=def#a',
-			array( $my_path.'abc.php?abc=def&z=xyz',
-			array( $my_path.'abc.php?abc=def&amp;z=xyz',
-			array( $my_path.'abc.php?abc=def&z=xyz#a',
-			array( $my_path.'abc.php?abc=def&amp;z=xyz#a',
-			array( $my_path.'abc.php?abc=def&z=<script>alert("foo")</script>z#a',
-			array( $my_path.'abc.php?abc=def&z=z#<script>alert("foo")</script>a',
-			array( $my_path.'plugin.php?page=Source/index',
-			array( $my_path.'plugin.php?page=Source/list&id=1',
-			array( $my_path.'plugin.php?page=Source/list&id=1#abc',
-			array( 'http://www.test.my.url/'),
-		*/
+		# @FIXME
+		#	array( $my_path.'abc.php',
+		#	array( $my_path.'abc.php?',
+		#	array( $my_path.'abc.php#a',
+		#	array( $my_path.'abc.php?abc=def',
+		#	array( $my_path.'abc.php?abc=def#a',
+		#	array( $my_path.'abc.php?abc=def&z=xyz',
+		#	array( $my_path.'abc.php?abc=def&amp;z=xyz',
+		#	array( $my_path.'abc.php?abc=def&z=xyz#a',
+		#	array( $my_path.'abc.php?abc=def&amp;z=xyz#a',
+		#	array( $my_path.'abc.php?abc=def&z=<script>alert("foo")</script>z#a',
+		#	array( $my_path.'abc.php?abc=def&z=z#<script>alert("foo")</script>a',
+		#	array( $my_path.'plugin.php?page=Source/index',
+		#	array( $my_path.'plugin.php?page=Source/list&id=1',
+		#	array( $my_path.'plugin.php?page=Source/list&id=1#abc',
+		#	array( 'http://www.test.my.url/'),
+
 		return $testStrings;
 	}
 

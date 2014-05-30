@@ -334,11 +334,11 @@ if ( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 				break;
 			case CUSTOM_FIELD_DATE_AFTER:
 				$t_start = $t_start_date + $t_one_day - 1;
-				$t_end = 2147483647; // Some time in 2038, max value of a signed int.
+				$t_end = 2147483647; # Some time in 2038, max value of a signed int.
 				break;
 			case CUSTOM_FIELD_DATE_ONORAFTER:
 				$t_start = $t_start_date;
-				$t_end = 2147483647; // Some time in 2038, max value of a signed int.
+				$t_end = 2147483647; # Some time in 2038, max value of a signed int.
 				break;
 			}
 			$f_custom_fields_data[$t_cfid][1] = $t_start;
@@ -382,37 +382,36 @@ if ( ( $f_type == 3 ) && ( $f_source_query_id == -1 ) ) {
 	$f_type = 0;
 }
 
-/*   array contents
-     --------------
-	 0: version
-	 1: $f_show_category
-	 2: $f_show_severity
-	 3: $f_show_status
-	 4: $f_per_page
-	 5: $f_highlight_changed
-	 6: $f_hide_closed
-	 7: $f_reporter_id
-	 8: $f_handler_id
-	 9: $f_sort
-	10: $f_dir
-	11: $f_start_month
-	12: $f_start_day
-	13: $f_start_year
-	14: $f_end_month
-	15: $f_end_day
-	16: $f_end_year
-	17: $f_search
-	18: $f_hide_resolved
-	19: $f_show_resolution
-	20: $f_show_build
-	21: $f_show_version
-	22: $f_do_filter_by_date
-	23: $f_custom_field
-	24: $f_relationship_type
-	25: $f_relationship_bug
-	26: $f_show_profile
+#   array contents
+#   --------------
+#	 0: version
+#	 1: $f_show_category
+#	 2: $f_show_severity
+#	 3: $f_show_status
+#	 4: $f_per_page
+#	 5: $f_highlight_changed
+#	 6: $f_hide_closed
+#	 7: $f_reporter_id
+#	 8: $f_handler_id
+#	 9: $f_sort
+#	10: $f_dir
+#	11: $f_start_month
+#	12: $f_start_day
+#	13: $f_start_year
+#	14: $f_end_month
+#	15: $f_end_day
+#	16: $f_end_year
+#	17: $f_search
+#	18: $f_hide_resolved
+#	19: $f_show_resolution
+#	20: $f_show_build
+#	21: $f_show_version
+#	22: $f_do_filter_by_date
+#	23: $f_custom_field
+#	24: $f_relationship_type
+# 	25: $f_relationship_bug
+# 	26: $f_show_profile
 
-*/
 # Set new filter values.  These are stored in a cookie
 $t_view_all_cookie_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
 $t_view_all_cookie = filter_db_get_filter( $t_view_all_cookie_id );

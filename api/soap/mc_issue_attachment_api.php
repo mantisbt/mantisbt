@@ -30,8 +30,8 @@ require_once( dirname( __FILE__ ) . '/mc_core.php' );
  *
  * @param string $p_username  The name of the user trying to access the filters.
  * @param string $p_password  The password of the user.
- * @param integer $p_issue_attachment_id The id of the attachment to be retrieved.
- * @return Base64 encoded data that represents the attachment.
+ * @param int $p_issue_attachment_id The id of the attachment to be retrieved.
+ * @return string Base64 encoded data that represents the attachment.
  */
 function mc_issue_attachment_get( $p_username, $p_password, $p_issue_attachment_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
@@ -51,11 +51,11 @@ function mc_issue_attachment_get( $p_username, $p_password, $p_issue_attachment_
  *
  * @param string $p_username  The name of the user trying to add an attachment to an issue.
  * @param string $p_password  The password of the user.
- * @param integer $p_issue_id  The id of the issue to add the attachment to.
+ * @param int $p_issue_id  The id of the issue to add the attachment to.
  * @param string $p_name  The name of the file.
  * @param string $p_file_type The mime type of the file.
- * @param base64Binary $p_content  The attachment to add.
- * @return integer The id of the added attachment.
+ * @param string $p_content  The attachment to add (base64 encoded string)
+ * @return int The id of the added attachment.
  */
 function mc_issue_attachment_add( $p_username, $p_password, $p_issue_id, $p_name, $p_file_type, $p_content ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
@@ -76,8 +76,8 @@ function mc_issue_attachment_add( $p_username, $p_password, $p_issue_id, $p_name
  *
  * @param string $p_username  The name of the user trying to add an attachment to an issue.
  * @param string $p_password  The password of the user.
- * @param integer $p_issue_attachment_id  The id of the attachment to be deleted.
- * @return true: success, false: failure
+ * @param int $p_issue_attachment_id  The id of the attachment to be deleted.
+ * @return bool true: success, false: failure
  */
 function mc_issue_attachment_delete( $p_username, $p_password, $p_issue_attachment_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );

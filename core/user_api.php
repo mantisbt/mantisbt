@@ -602,15 +602,13 @@ function user_signup( $p_username, $p_email = null ) {
 		#  to retrieve it anyway.
 		#  I'll re-enable this once a plan has been properly formulated for LDAP
 		#  account management and creation.
-		/*			$t_email = '';
-					if ( ON == config_get( 'use_ldap_email' ) ) {
-						$t_email = ldap_email_from_username( $p_username );
-					}
-
-					if ( !is_blank( $t_email ) ) {
-						$p_email = $t_email;
-					}
-		*/
+		#			$t_email = '';
+		#			if ( ON == config_get( 'use_ldap_email' ) ) {
+		#				$t_email = ldap_email_from_username( $p_username );
+		#			}
+		#			if ( !is_blank( $t_email ) ) {
+		#				$p_email = $t_email;
+		#			}
 	}
 
 	$p_email = trim( $p_email );

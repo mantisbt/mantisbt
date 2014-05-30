@@ -65,16 +65,16 @@ if ( $t_manage_page ) {
 $t_columns = columns_get_all( $t_project_id );
 $t_all = implode( ', ', $t_columns );
 
-$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_CSV_PAGE, /* $p_viewable_only */ false, $t_user_id );
+$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_CSV_PAGE, false, $t_user_id );
 $t_csv = implode( ', ', $t_columns );
 
-$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_VIEW_PAGE, /* $p_viewable_only */ false, $t_user_id );
+$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_VIEW_PAGE, false, $t_user_id );
 $t_view_issues = implode( ', ', $t_columns );
 
-$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_PRINT_PAGE, /* $p_viewable_only */ false, $t_user_id );
+$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_PRINT_PAGE, false, $t_user_id );
 $t_print_issues = implode( ', ', $t_columns );
 
-$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_EXCEL_PAGE, /* $p_viewable_only */ false, $t_user_id );
+$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_EXCEL_PAGE, false, $t_user_id );
 $t_excel = implode( ', ', $t_columns );
 ?>
 
@@ -141,7 +141,7 @@ $t_excel = implode( ', ', $t_columns );
 			<input type="hidden" name="manage_page" value="<?php echo $t_manage_page ?>" />
 
 			<select name="other_project_id">
-				<?php print_project_option_list( /* project_id */ null, /* include_all_projects */ true, /* filter_project_id */ $t_project_id ); ?>
+				<?php print_project_option_list( null, true, $t_project_id ); ?>
 			</select>
 
 			<?php # Skip "Copy From" if the current project is ALL PROJECTS, the current page is management page, and the user is not administrator

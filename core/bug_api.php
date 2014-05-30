@@ -286,7 +286,7 @@ class BugData {
 	 */
 	public function __set($p_name, $p_value) {
 		switch ($p_name) {
-			// integer types
+			# integer types
 			case 'id':
 			case 'project_id':
 			case 'reporter_id':
@@ -323,7 +323,7 @@ class BugData {
 	 *
 	 * @param string $p_name name
 	 * @private
-     * @return string
+	 * @return string|int|bool
 	 */
 	public function __get($p_name) {
 		if( $this->is_extended_field($p_name) )
@@ -336,7 +336,7 @@ class BugData {
 	 *
 	 * @param string $p_name name
 	 * @private
-     * @return bool
+	 * @return bool
 	 */
 	public function __isset($p_name) {
 		return isset( $this->{$p_name} );
@@ -373,7 +373,7 @@ class BugData {
 	 * Returns if the field is an extended field which needs fetch_extended_info()
 	 *
 	 * @param string $p_field_name Field Name
-	 * @return boolean
+	 * @return bool
 	 */
 	private function is_extended_field( $p_field_name ) {
 		switch( $p_field_name ) {
@@ -1226,34 +1226,34 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
  * @access public
  */
 function bug_move( $p_bug_id, $p_target_project_id ) {
-	// Attempt to move disk based attachments to new project file directory.
+	# Attempt to move disk based attachments to new project file directory.
 	file_move_bug_attachments( $p_bug_id, $p_target_project_id );
 
-	// Move the issue to the new project.
+	# Move the issue to the new project.
 	bug_set_field( $p_bug_id, 'project_id', $p_target_project_id );
 
-	// Update the category if needed
+	# Update the category if needed
 	$t_category_id = bug_get_field( $p_bug_id, 'category_id' );
 
-	// Bug has no category
+	# Bug has no category
 	if( $t_category_id == 0 ) {
-		// Category is required in target project, set it to default
+		# Category is required in target project, set it to default
 		if( ON != config_get( 'allow_no_category', null, null, $p_target_project_id ) ) {
 			bug_set_field( $p_bug_id, 'category_id', config_get( 'default_category_for_moves' ) );
 		}
 	}
-	// Check if the category is global, and if not attempt mapping it to the new project
+	# Check if the category is global, and if not attempt mapping it to the new project
 	else {
 		$t_category_project_id = category_get_field( $t_category_id, 'project_id' );
 
 		if ( $t_category_project_id != ALL_PROJECTS
 		  && !in_array( $t_category_project_id , project_hierarchy_inheritance( $p_target_project_id ) )
 		) {
-			// Map by name
+			# Map by name
 			$t_category_name = category_get_field( $t_category_id, 'name' );
-			$t_target_project_category_id = category_get_id_by_name( $t_category_name, $p_target_project_id, /* triggerErrors */ false );
+			$t_target_project_category_id = category_get_id_by_name( $t_category_name, $p_target_project_id, false );
 			if ( $t_target_project_category_id === false ) {
-				// Use default category after moves, since there is no match by name.
+				# Use default category after moves, since there is no match by name.
 				$t_target_project_category_id = config_get( 'default_category_for_moves' );
 			}
 			bug_set_field( $p_bug_id, 'category_id', $t_target_project_category_id );
@@ -1264,7 +1264,7 @@ function bug_move( $p_bug_id, $p_target_project_id ) {
 /**
  * allows bug deletion :
  * delete the bug, bugtext, bugnote, and bugtexts selected
- * @param array $p_bug_id integer representing bug id
+ * @param int $p_bug_id integer representing bug id
  * @return bool (always true)
  * @access public
  */
@@ -1336,7 +1336,7 @@ function bug_delete( $p_bug_id ) {
 
 /**
  * Delete all bugs associated with a project
- * @param array $p_project_id integer representing a projectid
+ * @param int $p_project_id integer representing a projectid
  * @access public
  * @uses database_api.php
  */
@@ -1391,7 +1391,7 @@ function bug_get_row( $p_bug_id ) {
  * Returns an object representing the specified bug
  * @param int $p_bug_id integer representing bug id
  * @param bool $p_get_extended included extended information (including bug_text)
- * @return object BugData Object
+ * @return BugData BugData Object
  * @access public
  */
 function bug_get( $p_bug_id, $p_get_extended = false ) {
@@ -1519,7 +1519,7 @@ function bug_get_bugnote_stats( $p_bug_id ) {
 	}
 
 	$t_bugnote_table = db_get_table( 'bugnote' );
-	// @todo - optimise - max(), count()
+	# @todo - optimise - max(), count()
 	$query = "SELECT last_modified
 				  FROM $t_bugnote_table
 				  WHERE bug_id=" . db_param() . "
@@ -1573,7 +1573,7 @@ function bug_get_attachments( $p_bug_id ) {
  * Set the value of a bug field
  * @param int $p_bug_id integer representing bug id
  * @param string $p_field_name pre-defined field name
- * @param mixed $p_value value to set
+ * @param bool|int|string $p_value value to set
  * @return bool (always true)
  * @access public
  * @uses database_api.php

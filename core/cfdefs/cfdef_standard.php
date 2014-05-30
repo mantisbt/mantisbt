@@ -190,7 +190,7 @@ function cfdef_prepare_list_database_to_value($p_value) {
  * @return string
  */
 function cfdef_prepare_list_value_for_email($p_value) {
-	// strip start and end markers before converting markers to commas
+	# strip start and end markers before converting markers to commas
 	return str_replace( '|', ', ', utf8_substr( str_replace( '||', '|', '|' . $p_value . '|' ), 1, -1 ) );
 }
 
@@ -250,7 +250,7 @@ function cfdef_prepare_date_default( $p_value ) {
  * @return string
  */
 function cfdef_prepare_list_value($p_value) {
-	// strip start and end markers before converting markers to commas
+	# strip start and end markers before converting markers to commas
 	return string_display_line( str_replace( '|', ', ', utf8_substr( str_replace( '||', '|', '|' . $p_value . '|' ), 1, -1 ) ) );
 }
 

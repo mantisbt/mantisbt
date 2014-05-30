@@ -53,7 +53,7 @@ if ( count( current_user_get_accessible_projects() ) == 1) {
 	if ( count( current_user_get_accessible_subprojects( $t_project_id ) ) == 0 ) {
 		$t_ref_urlencoded = string_url( $f_ref );
 		print_header_redirect( "set_project.php?project_id=$t_project_id&ref=$t_ref_urlencoded", true);
-		/* print_header_redirect terminates script execution */
+		# print_header_redirect terminates script execution
 	}
 }
 

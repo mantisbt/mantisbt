@@ -468,7 +468,7 @@ function filter_offset( $p_page_number, $p_per_page ) {
  * Make sure that our filters are entirely correct and complete (it is possible that they are not).
  * We need to do this to cover cases where we don't have complete control over the filters given.s
  * @param array $p_filter_arr
- * @return mixed
+ * @return array
  * @todo function needs to be abstracted
  */
 function filter_ensure_valid_filter( $p_filter_arr ) {
@@ -1122,8 +1122,8 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 	$t_view_type = $t_filter['_view_type'];
 
-	// project query clauses must be AND-ed always, irrespective of how the filter
-	// clauses are requested by the user ( all matching -> AND, any matching -> OR )
+	# project query clauses must be AND-ed always, irrespective of how the filter
+	# clauses are requested by the user ( all matching -> AND, any matching -> OR )
 	$t_where_clauses = array();
 
 	$t_project_where_clauses =  array(
@@ -1144,7 +1144,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		"JOIN $t_project_table ON $t_project_table.id = $t_bug_table.project_id",
 	);
 
-	// normalize the project filtering into an array $t_project_ids
+	# normalize the project filtering into an array $t_project_ids
 	if( 'simple' == $t_view_type ) {
 		log_event( LOG_FILTERING, 'Simple Filter' );
 		$t_project_ids = array(
@@ -1167,8 +1167,8 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	log_event( LOG_FILTERING, 'project_ids = @P' . implode( ', @P', $t_project_ids ) );
 	log_event( LOG_FILTERING, 'include sub-projects = ' . ( $t_include_sub_projects ? '1' : '0' ) );
 
-	// if the array has ALL_PROJECTS, then reset the array to only contain ALL_PROJECTS.
-	// replace META_FILTER_CURRENT with the actualy current project id.
+	# if the array has ALL_PROJECTS, then reset the array to only contain ALL_PROJECTS.
+	# replace META_FILTER_CURRENT with the actualy current project id.
 	$t_all_projects_found = false;
 	$t_new_project_ids = array();
 	foreach( $t_project_ids as $t_pid ) {
@@ -1182,7 +1182,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			break;
 		}
 
-		// filter out inaccessible projects.
+		# filter out inaccessible projects.
 		if( !access_has_project_level( VIEWER, $t_pid, $t_user_id ) ) {
 			continue;
 		}
@@ -1204,7 +1204,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 	if( $t_projects_query_required ) {
 
-		// expand project ids to include sub-projects
+		# expand project ids to include sub-projects
 		if( $t_include_sub_projects ) {
 			$t_top_project_ids = $t_project_ids;
 
@@ -1218,7 +1218,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			$t_project_ids = array_unique( $t_project_ids );
 		}
 
-		// if no projects are accessible, then return an empty array.
+		# if no projects are accessible, then return an empty array.
 		if( count( $t_project_ids ) == 0 ) {
 			log_event( LOG_FILTERING, 'no accessible projects' );
 			return array();
@@ -1226,11 +1226,11 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 		log_event( LOG_FILTERING, 'project_ids after including sub-projects = @P' . implode( ', @P', $t_project_ids ) );
 
-		// this array is to be populated with project ids for which we only want to show public issues.  This is due to the limited
-		// access of the current user.
+		# this array is to be populated with project ids for which we only want to show public issues.  This is due to the limited
+		# access of the current user.
 		$t_public_only_project_ids = array();
 
-		// this array is populated with project ids that the current user has full access to.
+		# this array is populated with project ids that the current user has full access to.
 		$t_private_and_public_project_ids = array();
 
 		foreach( $t_project_ids as $t_pid ) {
@@ -1266,7 +1266,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			$t_public_only_query = null;
 		}
 
-		// both queries can't be null, so we either have one of them or both.
+		# both queries can't be null, so we either have one of them or both.
 
 		if( $t_private_and_public_query === null ) {
 			$t_project_query = $t_public_only_query;
@@ -1764,7 +1764,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		array_push( $t_join_clauses, "LEFT JOIN $t_bug_relationship_table $t_table_dst ON $t_table_dst.destination_bug_id = $t_bug_table.id" );
 		array_push( $t_join_clauses, "LEFT JOIN $t_bug_relationship_table $t_table_src ON $t_table_src.source_bug_id = $t_bug_table.id" );
 
-		// get reverse relationships
+		# get reverse relationships
 		$t_where_params[] = $t_comp_type;
 		$t_where_params[] = $c_rel_bug;
 		$t_where_params[] = $c_rel_type;
@@ -2016,13 +2016,13 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			$t_where_params[] = $c_search;
 
 			if( is_numeric( $t_search_term ) ) {
-				// PostgreSQL on 64-bit OS hack (see #14014)
+				# PostgreSQL on 64-bit OS hack (see #14014)
 				if( PHP_INT_MAX > 0x7FFFFFFF && db_is_pgsql() ) {
 					$t_search_max = 0x7FFFFFFF;
 				} else {
 					$t_search_max = PHP_INT_MAX;
 				}
-				// Note: no need to test negative values, '-' sign has been removed
+				# Note: no need to test negative values, '-' sign has been removed
 				if( $t_search_term <= $t_search_max ) {
 					$c_search_int = (int) $t_search_term;
 					$t_textsearch_where_clause .= " OR $t_bug_table.id = " . db_param();
@@ -2135,8 +2135,8 @@ function filter_cache_result( $p_rows, $p_id_array_lastmod ) {
 }
 
 /**
- *  Mainly based on filter_draw_selection_area2() but adds the support for the collapsible
- *  filter display.
+ * Mainly based on filter_draw_selection_area2() but adds the support for the collapsible
+ * filter display.
  * @param int $p_page_number
  * @param bool $p_for_screen
  * @see filter_draw_selection_area2
@@ -2150,9 +2150,9 @@ function filter_draw_selection_area( $p_page_number, $p_for_screen = true ) {
 }
 
 /**
- *  Prints the filter selection area for both the bug list view screen and
- *  the bug list print screen. This function was an attempt to make it easier to
- *  add new filters and rearrange them on screen for both pages.
+ * Prints the filter selection area for both the bug list view screen and
+ * the bug list print screen. This function was an attempt to make it easier to
+ * add new filters and rearrange them on screen for both pages.
  * @param int $p_page_number
  * @param bool $p_for_screen
  * @param bool $p_expanded
@@ -3446,7 +3446,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		<?php
 	}
 
-	// expanded
+	# expanded
 	collapse_icon( 'filter' );
 	echo '<div class="search-box">';
 	echo '<label>';
@@ -3532,7 +3532,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 }
 
 /**
- 	 * @internal The following functions each print out filter field inputs.
+ * @internal The following functions each print out filter field inputs.
  *      They are derived from view_filters_page.php
  *      The functions follow a strict naming convention:
  *
@@ -3772,7 +3772,7 @@ function print_filter_show_version() {
 		<select<?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_VERSION;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $t_filter[FILTER_PROPERTY_VERSION], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $t_filter[FILTER_PROPERTY_VERSION], (string)META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
-			<?php print_version_option_list( $t_filter[FILTER_PROPERTY_VERSION], /* projectId */ null, /* released */ VERSION_ALL, /* leadingBlank */ false, /* withSubs */ true )?>
+			<?php print_version_option_list( $t_filter[FILTER_PROPERTY_VERSION], null, VERSION_ALL, false, true )?>
 		</select>
 		<?php
 }
@@ -3786,7 +3786,7 @@ function print_filter_show_fixed_in_version() {
 		<select<?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_FIXED_IN_VERSION;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $t_filter[FILTER_PROPERTY_FIXED_IN_VERSION], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $t_filter[FILTER_PROPERTY_FIXED_IN_VERSION], (string)META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
-			<?php print_version_option_list( $t_filter[FILTER_PROPERTY_FIXED_IN_VERSION], /* projectId */ null, /* released */ VERSION_ALL, /* leadingBlank */ false, /* withSubs */ true )?>
+			<?php print_version_option_list( $t_filter[FILTER_PROPERTY_FIXED_IN_VERSION], null, VERSION_ALL, false, true )?>
 		</select>
 		<?php
 }
@@ -3800,7 +3800,7 @@ function print_filter_show_target_version() {
 		<select<?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_TARGET_VERSION;?>[]">
 			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $t_filter[FILTER_PROPERTY_TARGET_VERSION], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $t_filter[FILTER_PROPERTY_TARGET_VERSION], (string)META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
-			<?php print_version_option_list( $t_filter[FILTER_PROPERTY_TARGET_VERSION], /* projectId */ null, /* released */ VERSION_ALL, /* leadingBlank */ false, /* withSubs */ true )?>
+			<?php print_version_option_list( $t_filter[FILTER_PROPERTY_TARGET_VERSION], null, VERSION_ALL, false, true )?>
 		</select>
 		<?php
 }
@@ -4796,9 +4796,9 @@ function filter_name_valid_length( $p_name ) {
  * Create a filter for getting issues assigned to the specified project and user that
  * are not yet resolved.
  *
- * @param $p_project_id the project id or ALL_PROJECTS.
- * @param $p_user_id the user id or 0 to get unassigned issues.
- * @return a valid filter.
+ * @param int $p_project_id the project id or ALL_PROJECTS.
+ * @param int $p_user_id the user id or 0 to get unassigned issues.
+ * @return mixed valid filter.
  */
 function filter_create_assigned_to_unresolved( $p_project_id, $p_user_id ) {
 	$t_filter = filter_get_default();
@@ -4809,7 +4809,7 @@ function filter_create_assigned_to_unresolved( $p_project_id, $p_user_id ) {
 		$t_filter[FILTER_PROPERTY_HANDLER_ID] = array( '0' => $p_user_id );
 	}
 
-	$t_bug_resolved_status_threshold = config_get( 'bug_resolved_status_threshold', /* default */ null, $p_user_id, $p_project_id );
+	$t_bug_resolved_status_threshold = config_get( 'bug_resolved_status_threshold', null, $p_user_id, $p_project_id );
 	$t_filter[FILTER_PROPERTY_HIDE_STATUS] = array( '0' => $t_bug_resolved_status_threshold );
 
 	if ( $p_project_id != ALL_PROJECTS ) {
@@ -4821,9 +4821,9 @@ function filter_create_assigned_to_unresolved( $p_project_id, $p_user_id ) {
 
 /**
  * Create a filter for getting issues reported by the specified project and user.
- * @param $p_project_id the project id or ALL_PROJECTS.
- * @param $p_user_id the user id.
- * @return a valid filter.
+ * @param int $p_project_id the project id or ALL_PROJECTS.
+ * @param int $p_user_id the user id.
+ * @return array a valid filter.
  */
 function filter_create_reported_by( $p_project_id, $p_user_id ) {
 	$t_filter = filter_get_default();
@@ -4838,9 +4838,9 @@ function filter_create_reported_by( $p_project_id, $p_user_id ) {
 
 /**
  * Create a filter for getting issues monitored by the specified project and user.
- * @param $p_project_id the project id or ALL_PROJECTS.
- * @param $p_user_id the user id.
- * @return a valid filter.
+ * @param int $p_project_id the project id or ALL_PROJECTS.
+ * @param int $p_user_id the user id.
+ * @return array a valid filter.
  */
 function filter_create_monitored_by( $p_project_id, $p_user_id ) {
 	$t_filter = filter_get_default();

@@ -400,7 +400,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 	</td>
 </tr>
 <?php
-}       // foreach
+}       # foreach
 ?>
 <tr>
 	<td class="print-spacer" colspan="6">

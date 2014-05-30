@@ -432,9 +432,9 @@ function user_pref_insert( $p_user_id, $p_project_id, $p_prefs ) {
 
 	$t_values = array();
 
-	$t_params[] = db_param(); // user_id
+	$t_params[] = db_param(); # user_id
 	$t_values[] = $c_user_id;
-	$t_params[] = db_param(); // project_id
+	$t_params[] = db_param(); # project_id
 	$t_values[] = $c_project_id;
 	foreach( $t_vars as $var => $val ) {
 		array_push( $t_params, db_param());
@@ -645,7 +645,7 @@ function user_pref_get_pref( $p_user_id, $p_pref_name, $p_project_id = ALL_PROJE
 function user_pref_get_language( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	$t_prefs = user_pref_get( $p_user_id, $p_project_id );
 
-	// ensure the language is a valid one
+	# ensure the language is a valid one
 	$t_lang = $t_prefs->language;
 	if( !lang_language_exists( $t_lang ) ) {
 		$t_lang = null;

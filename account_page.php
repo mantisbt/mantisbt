@@ -184,10 +184,10 @@ if ( $t_verify || $t_reset_password ) {
 				<span class="display-label"><span><?php echo lang_get( 'email' ) ?></span></span>
 				<span class="input"><?php
 				if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
-					// With LDAP
+					# With LDAP
 					echo '<span class="field-value">' . string_display_line( $u_email ) . '</span>';
 				} else {
-					// Without LDAP
+					# Without LDAP
 					$t_show_update_button = true;
 					print_email_input( 'email', $u_email );
 				} ?>

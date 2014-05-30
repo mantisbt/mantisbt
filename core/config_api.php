@@ -591,7 +591,7 @@ function config_obsolete( $p_var, $p_replace = '' ) {
 		$t_description = 'The configuration option <em>' . $p_var . '</em> is now obsolete';
 		$t_info = '';
 
-		// Check if set in the database
+		# Check if set in the database
 		if( is_array( $g_cache_config ) && array_key_exists( $p_var, $g_cache_config ) ) {
 			$t_info .= 'it is currently defined in ';
 			if( isset( $GLOBALS['g_' . $p_var] ) ) {
@@ -611,7 +611,7 @@ function config_obsolete( $p_var, $p_replace = '' ) {
 			$t_info .= '</ul>';
 		}
 
-		// Replacement defined
+		# Replacement defined
 		if( is_array( $p_replace ) ) {
 			$t_info .= 'please see the following options: <ul>';
 			foreach( $p_replace as $t_option ) {
@@ -740,8 +740,8 @@ function config_is_private( $p_config_var ) {
 		case 'neato_tool':
 			return true;
 
-		// Marked obsolete in 1.3.0dev - keep here to make sure they are not disclosed by soap api.
-		// These can be removed once complete removal from config and db is enforced by upgrade process.
+		# Marked obsolete in 1.3.0dev - keep here to make sure they are not disclosed by soap api.
+		# These can be removed once complete removal from config and db is enforced by upgrade process.
 		case 'file_upload_ftp_server':
 		case 'file_upload_ftp_user':
 		case 'file_upload_ftp_pass':

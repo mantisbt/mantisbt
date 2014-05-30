@@ -176,7 +176,7 @@ function rss_get_news_feed_url( $p_project_id = null, $p_username = null, $p_rel
 
 	$t_user_id = user_get_id_by_name( $t_username );
 
-	// If we have a logged in user then they can be given a 'proper' feed, complete with auth string.
+	# If we have a logged in user then they can be given a 'proper' feed, complete with auth string.
 	if( user_is_anonymous( $t_user_id ) ) {
 		$t_rss_link .= "news_rss.php";
 

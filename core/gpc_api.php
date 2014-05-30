@@ -174,8 +174,8 @@ function gpc_isset_custom_field( $p_var_name, $p_custom_field_type ) {
 
 	switch ($p_custom_field_type ) {
 		case CUSTOM_FIELD_TYPE_DATE:
-			// date field is three dropdowns that default to 0
-			// Dropdowns are always present, so check if they are set
+			# date field is three dropdowns that default to 0
+			# Dropdowns are always present, so check if they are set
 			return gpc_isset( $t_field_name . '_day' ) &&
 				gpc_get_int( $t_field_name . '_day', 0 ) != 0 &&
 				gpc_isset( $t_field_name . '_month' ) &&
@@ -206,7 +206,7 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 	switch( $p_custom_field_type ) {
 		case CUSTOM_FIELD_TYPE_MULTILIST:
 		case CUSTOM_FIELD_TYPE_CHECKBOX:
-		    // ensure that the default is an array, if set
+		    # ensure that the default is an array, if set
 		    if ( ($p_default !== null) && !is_array($p_default) ) {
 		        $p_default = array( $p_default );
 		    }

@@ -73,7 +73,7 @@ if( plugin_is_installed( 'MantisGraph' ) ) {
 		$t_jpgraph_found = check_print_test_row(
 			'Checking we can find jpgraph library class files',
 			file_exists( $t_jpgraph_path ),
-			//array( false => dirname( $t_jpgraph_path ) )
+			# array( false => dirname( $t_jpgraph_path ) )
 			dirname( $t_jpgraph_path )
 		);
 

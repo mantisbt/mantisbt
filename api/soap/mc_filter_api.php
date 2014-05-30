@@ -28,7 +28,7 @@
  *
  * @param string $p_username  The name of the user trying to access the filters.
  * @param string $p_password  The password of the user.
- * @param integer $p_project_id  The id of the project to retrieve filters for.
+ * @param int $p_project_id  The id of the project to retrieve filters for.
  * @return array that represents a FilterDataArray structure
  */
 function mc_filter_get( $p_username, $p_password, $p_project_id ) {
@@ -59,10 +59,10 @@ function mc_filter_get( $p_username, $p_password, $p_project_id ) {
  *
  * @param string $p_username  The name of the user trying to access the filters.
  * @param string $p_password  The password of the user.
- * @param integer $p_project_id  The id of the project to retrieve filters for.
- * @param integer $p_filter_id  The id of the filter to apply.
- * @param integer $p_page_number  Start with the given page number (zero-based)
- * @param integer $p_per_page  Number of issues to display per page
+ * @param int $p_project_id  The id of the project to retrieve filters for.
+ * @param int $p_filter_id  The id of the filter to apply.
+ * @param int $p_page_number  Start with the given page number (zero-based)
+ * @param int $p_per_page  Number of issues to display per page
  * @return array that represents an IssueDataArray structure
  */
 function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filter_id, $p_page_number, $p_per_page ) {
@@ -90,7 +90,7 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 	$t_result = array();
 	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter, $p_project_id );
 
-	// the page number was moved back, so we have exceeded the actual page number, see bug #12991
+	# the page number was moved back, so we have exceeded the actual page number, see bug #12991
 	if ( $t_orig_page_number > $p_page_number )
 	    return $t_result;	
 
@@ -106,10 +106,10 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
  *
  * @param string $p_username  The name of the user trying to access the filters.
  * @param string $p_password  The password of the user.
- * @param integer $p_project_id  The id of the project to retrieve filters for.
- * @param integer $p_filter_id  The id of the filter to apply.
- * @param integer $p_page_number  Start with the given page number (zero-based)
- * @param integer $p_per_page  Number of issues to display per page
+ * @param int $p_project_id  The id of the project to retrieve filters for.
+ * @param int $p_filter_id  The id of the filter to apply.
+ * @param int $p_page_number  Start with the given page number (zero-based)
+ * @param int $p_per_page  Number of issues to display per page
  * @return array that represents an IssueDataArray structure
  */
 function mc_filter_get_issue_headers( $p_username, $p_password, $p_project_id, $p_filter_id, $p_page_number, $p_per_page ) {
@@ -135,7 +135,7 @@ function mc_filter_get_issue_headers( $p_username, $p_password, $p_project_id, $
 	$t_result = array();
 	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter, $p_project_id );
 
-	// the page number was moved back, so we have exceeded the actual page number, see bug #12991
+	# the page number was moved back, so we have exceeded the actual page number, see bug #12991
 	if ( $t_orig_page_number > $p_page_number )
 	    return $t_result;	
 

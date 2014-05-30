@@ -377,7 +377,7 @@ function custom_function_default_print_column_value( $p_column, $p_bug, $p_colum
 				$t_def = custom_field_get_definition( $t_field_id );
 				print_custom_field_value( $t_def, $t_field_id, $t_issue_id );
 			} else {
-				// field is not linked to project
+				# field is not linked to project
 				echo $t_column_empty;
 			}
 		}

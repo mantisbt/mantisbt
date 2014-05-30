@@ -89,13 +89,11 @@ class IssueNoteTest extends SoapBase {
 		$this->assertEquals( 2, $note->note_type );
 		$this->assertEquals( 'attr_value', $note->note_attr );
 
-		/*
-		$timestamp = strtotime( $note->date_submitted );
-		$t_submited_date = date( "ymd", $timestamp );
-		$t_today_date = date( "ymd" );
+		# $timestamp = strtotime( $note->date_submitted );
+		# $t_submited_date = date( "ymd", $timestamp );
+		# $t_today_date = date( "ymd" );
 
-		$this->assertEquals( $t_today_date, $t_submited_date );
-		*/
+		# $this->assertEquals( $t_today_date, $t_submited_date );
 	}
 
 	/**
@@ -153,12 +151,12 @@ class IssueNoteTest extends SoapBase {
 	 * 2. Add a note to the issue.
 	 * 3. Get the issue.
 	 * 4. Verify that the issue has one note.
-     * 5.  Update this note
-     * 6.  Verify that the note has been updated
-     * 7.  Delete the note.
-     * 8.  Get the issue.
-     * 9.  Verify that the issue has no notes.
-     * 10. Delete the issue.
+	 * 5.  Update this note
+	 * 6.  Verify that the note has been updated
+	 * 7.  Delete the note.
+	 * 8.  Get the issue.
+	 * 9.  Verify that the issue has no notes.
+	 * 10. Delete the issue.
 	 */
 	public function testAddThenUpdateThenDeleteNote() {
 		$issueToAdd = $this->getIssueToAdd( 'IssueNoteTest.testAddThenUpdateThenDeleteNote' );
@@ -192,25 +190,25 @@ class IssueNoteTest extends SoapBase {
 
 		$this->assertEquals( 1, count( $issueWithNote->notes ) );
 		
-        $noteDataNew = array(
-            'id' => $issueNoteId,
-            'text' => "some new note",
-        	'view_state' => array ( 'id' => 10 /* public */)
-        );
+		$noteDataNew = array(
+			'id' => $issueNoteId,
+			'text' => "some new note",
+			'view_state' => array ( 'id' => 10 ) # public
+		);
 
-        $this->client->mc_issue_note_update(
-            $this->userName,
-            $this->password,
-            $noteDataNew);
+		$this->client->mc_issue_note_update(
+			$this->userName,
+			$this->password,
+			$noteDataNew);
 
-        $issueWithNewNote = $this->client->mc_issue_get(
-            $this->userName,
-            $this->password,
-            $issueId);
+		$issueWithNewNote = $this->client->mc_issue_get(
+			$this->userName,
+			$this->password,
+			$issueId);
 
-        $this->assertEquals( 1, count( $issueWithNote->notes ) );
-        $this->assertEquals( $noteDataNew['text'], $issueWithNewNote->notes[0]->text );
-        $this->assertEquals( 'public', $issueWithNewNote->notes[0]->view_state->name );
+		$this->assertEquals( 1, count( $issueWithNote->notes ) );
+		$this->assertEquals( $noteDataNew['text'], $issueWithNewNote->notes[0]->text );
+		$this->assertEquals( 'public', $issueWithNewNote->notes[0]->view_state->name );
 
 		$this->client->mc_issue_note_delete(
 			$this->userName,

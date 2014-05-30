@@ -75,7 +75,7 @@ $g_cache_html_valid_tags_single_line = '';
 				$spaces += 4;
 			}
 
-			// 1 tab = 4 spaces, can be configurable.
+			# 1 tab = 4 spaces, can be configurable.
 
 			$count++;
 			$t_char = utf8_substr( $lines[$i], $count, 1 );

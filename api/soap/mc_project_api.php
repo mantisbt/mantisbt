@@ -36,10 +36,10 @@
  *        "reported" - target user 0 - will throw.
  *        "monitored" - target user specified - issues monitored by user.
  *        "monitored" - target user 0 - issues not monitored.
- * @param string $p_target_user AccountData for target user, can include id, name, or both.
+ * @param object $p_target_user AccountData for target user, can include id, name, or both.
  * @param int $p_page_number the page to return (1 based).
  * @param int $p_per_page number of issues per page.
- * @return IssueDataArray a page of matching issues.
+ * @return array a page of matching issues.
  */
 function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id, $p_filter_type, $p_target_user, $p_page_number, $p_per_page ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
@@ -66,7 +66,7 @@ function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id
 	if ( strcasecmp( $p_filter_type, 'assigned' ) == 0 ) {
 		$t_filter = filter_create_assigned_to_unresolved( $p_project_id, $t_target_user_id );
 	} else if ( strcasecmp( $p_filter_type, 'reported' ) == 0 ) {
-		// target id 0 for reporter doesn't make sense.
+		# target id 0 for reporter doesn't make sense.
 		if ( $t_target_user_id == 0 ) {
 			return SoapObjectsFactory::newSoapFault( 'Client', "Target user id must be specified for 'reported' filter." );
 		}
@@ -82,7 +82,7 @@ function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id
 
 	$t_result = array();
 
-	// the page number was moved back, so we have exceeded the actual page number, see bug #12991
+	# the page number was moved back, so we have exceeded the actual page number, see bug #12991
 	if ( $t_orig_page_number > $p_page_number ) {
 		return $t_result;
 	}
@@ -129,7 +129,7 @@ function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page
 
 	$t_result = array();
 
-	// the page number was moved back, so we have exceeded the actual page number, see bug #12991
+	# the page number was moved back, so we have exceeded the actual page number, see bug #12991
 	if ( $t_orig_page_number > $p_page_number )
 		return $t_result;
 
@@ -183,7 +183,7 @@ function mc_projects_get_user_accessible( $p_username, $p_password ) {
  *
  * @param string $p_username  The name of the user trying to access the categories.
  * @param string $p_password  The password of the user.
- * @param integer $p_project_id  The id of the project to retrieve the categories for.
+ * @param int $p_project_id  The id of the project to retrieve the categories for.
  * @return array  of categorie names
  */
 function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
@@ -215,9 +215,9 @@ function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
  * Add a new category to a project
  * @param string $p_username  The name of the user trying to access the categories.
  * @param string $p_password  The password of the user.
- * @param integer $p_project_id  The id of the project to retrieve the categories for.
+ * @param int $p_project_id  The id of the project to retrieve the categories for.
  * @param string $p_category_name The name of the new category to add
- * @return integer id of the new category
+ * @return int id of the new category
  */
 
 function mc_project_add_category($p_username, $p_password, $p_project_id, $p_category_name ) {
@@ -244,7 +244,7 @@ function mc_project_add_category($p_username, $p_password, $p_project_id, $p_cat
  * Delete a category of a project
  * @param string $p_username  The name of the user trying to access the categories.
  * @param string $p_password  The password of the user.
- * @param integer $p_project_id  The id of the project to retrieve the categories for.
+ * @param int $p_project_id  The id of the project to retrieve the categories for.
  * @param string $p_category_name The name of the category to delete
  * @return bool returns true or false depending on the success of the delete action
  */
@@ -267,10 +267,10 @@ function mc_project_delete_category ($p_username, $p_password, $p_project_id, $p
 		return mci_soap_fault_access_denied();
 	}
 
-	// find the id of the category
+	# find the id of the category
 	$p_category_id = category_get_id_by_name( $p_category_name, $p_project_id );
 
-	// delete the category and link all the issue to the default category
+	# delete the category and link all the issue to the default category
 	return category_remove( $p_category_id, config_get('default_category_for_moves') );
 }
 
@@ -278,7 +278,7 @@ function mc_project_delete_category ($p_username, $p_password, $p_project_id, $p
  * Update a category of a project
  * @param string $p_username  The name of the user trying to access the categories.
  * @param string $p_password  The password of the user.
- * @param integer $p_project_id  The id of the project to retrieve the categories for.
+ * @param int $p_project_id  The id of the project to retrieve the categories for.
  * @param string $p_category_name The name of the category to rename
  * @param string $p_category_name_new The new name of the category to rename
  * @param int $p_assigned_to User ID that category is assigned to
@@ -307,10 +307,10 @@ function mc_project_rename_category_by_name( $p_username, $p_password, $p_projec
 		return mci_soap_fault_access_denied();
 	}
 
-	// find the id of the category
+	# find the id of the category
 	$p_category_id = category_get_id_by_name( $p_category_name, $p_project_id );
 
-	// update the category
+	# update the category
 	return category_update( $p_category_id, $p_category_name_new, $p_assigned_to );
 }
 
@@ -319,7 +319,7 @@ function mc_project_rename_category_by_name( $p_username, $p_password, $p_projec
  *
  * @param string $p_username  The name of the user trying to access the versions.
  * @param string $p_password  The password of the user.
- * @param integer $p_project_id  The id of the project to retrieve the versions for.
+ * @param int $p_project_id  The id of the project to retrieve the versions for.
  * @return array  representing a ProjectVersionDataArray structure.
  */
 function mc_project_get_versions( $p_username, $p_password, $p_project_id ) {
@@ -352,7 +352,7 @@ function mc_project_get_versions( $p_username, $p_password, $p_project_id ) {
  *
  * @param string $p_username  The name of the user trying to access the versions.
  * @param string $p_password  The password of the user.
- * @param integer $p_project_id  The id of the project to retrieve the versions for.
+ * @param int $p_project_id  The id of the project to retrieve the versions for.
  * @return array  representing a ProjectVersionDataArray structure.
  */
 function mc_project_get_released_versions( $p_username, $p_password, $p_project_id ) {
@@ -386,7 +386,7 @@ function mc_project_get_released_versions( $p_username, $p_password, $p_project_
  *
  * @param string $p_username  The name of the user trying to access the versions.
  * @param string $p_password  The password of the user.
- * @param integer $p_project_id  The id of the project to retrieve the versions for.
+ * @param int $p_project_id  The id of the project to retrieve the versions for.
  * @return array  representing a ProjectVersionDataArray structure.
  */
 function mc_project_get_unreleased_versions( $p_username, $p_password, $p_project_id ) {
@@ -421,7 +421,7 @@ function mc_project_get_unreleased_versions( $p_username, $p_password, $p_projec
  * @param string $p_username  The name of the user trying to add the issue.
  * @param string $p_password  The password of the user.
  * @param array $p_version  A ProjectVersionData structure containing information about the new verison.
- * @return integer  The id of the created version.
+ * @return int  The id of the created version.
  */
 function mc_project_version_add( $p_username, $p_password, $p_version ) {
 	global $g_project_override;
@@ -488,7 +488,7 @@ function mc_project_version_add( $p_username, $p_password, $p_version ) {
  *
  * @param string $p_username  The name of the user trying to update the issue.
  * @param string $p_password  The password of the user.
- * @param integer $p_version_id A version's id
+ * @param int $p_version_id A version's id
  * @param array $p_version  A ProjectVersionData structure containing information about the new verison.
  * @return bool returns true or false depending on the success of the update action
  */
@@ -568,7 +568,7 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, $p_
  *
  * @param string $p_username  The name of the user trying to delete the version.
  * @param string $p_password  The password of the user.
- * @param integer $p_version_id A version's id
+ * @param int $p_version_id A version's id
  * @return bool returns true or false depending on the success of the delete action
  */
 function mc_project_version_delete( $p_username, $p_password, $p_version_id ) {
@@ -607,7 +607,7 @@ function mc_project_version_delete( $p_username, $p_password, $p_version_id ) {
  *
  * @param string $p_username  The name of the user trying to access the versions.
  * @param string $p_password  The password of the user.
- * @param integer $p_project_id  The id of the project to retrieve the custom fields for.
+ * @param int $p_project_id  The id of the project to retrieve the custom fields for.
  * @return array  representing a CustomFieldDefinitionDataArray structure.
  */
 function mc_project_get_custom_fields( $p_username, $p_password, $p_project_id ) {
@@ -668,7 +668,7 @@ function mc_project_get_custom_fields( $p_username, $p_password, $p_project_id )
  *
  * @param string $p_username  The name of the user trying to access the versions.
  * @param string $p_password  The password of the user.
- * @param integer $p_project_id  The id of the project to retrieve the attachments for.
+ * @param int $p_project_id  The id of the project to retrieve the attachments for.
  * @return array  representing a ProjectAttachmentDataArray structure.
  */
 function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
@@ -765,7 +765,7 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
  * Get the list of subprojects for a given project
  * @param string $p_username  The name of the user trying to access the versions.
  * @param string $p_password  The password of the user.
- * @param integer $p_project_id  The id of the project to retrieve the attachments for.
+ * @param int $p_project_id  The id of the project to retrieve the attachments for.
  * @return array
  */
 function mc_project_get_all_subprojects( $p_username, $p_password, $p_project_id ) {
@@ -793,7 +793,7 @@ function mc_project_get_all_subprojects( $p_username, $p_password, $p_project_id
 /**
  * Get a project definition.
  *
- * @param integer $p_project_id  The id of the project to retrieve.
+ * @param int $p_project_id The id of the project to retrieve.
  * @return array an array containing the id and the name of the project.
  */
 function mci_project_as_array_by_id( $p_project_id ) {
@@ -809,7 +809,7 @@ function mci_project_as_array_by_id( $p_project_id ) {
  * @param string $p_username  The name of the user trying to access the versions.
  * @param string $p_password  The password of the user.
  * @param string $p_project_name  The name of the project to retrieve.
- * @return integer  The id of the project with the given name, 0 if there is no such project.
+ * @return int  The id of the project with the given name, 0 if there is no such project.
  */
 function mc_project_get_id_from_name( $p_username, $p_password, $p_project_name ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
@@ -829,7 +829,7 @@ function mc_project_get_id_from_name( $p_username, $p_password, $p_project_name 
  * @param string $p_username  The name of the user trying to access the versions.
  * @param string $p_password  The password of the user.
  * @param array $p_project A new ProjectData structure
- * @return integer the new project's project_id
+ * @return int the new project's project_id
  */
 function mc_project_add( $p_username, $p_password, $p_project ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
@@ -853,7 +853,7 @@ function mc_project_add( $p_username, $p_password, $p_project ) {
 	if( isset( $p_project['status'] ) ) {
 		$t_status = $p_project['status'];
 	} else {
-		$t_status = array( 'name' => 'development' ); // development
+		$t_status = array( 'name' => 'development' ); # development
 	}
 
 	if( isset( $p_project['view_state'] ) ) {
@@ -886,7 +886,7 @@ function mc_project_add( $p_username, $p_password, $p_project ) {
 		$t_inherit_global = true;
 	}
 
-	// check to make sure project doesn't already exist
+	# check to make sure project doesn't already exist
 	if( !project_is_name_unique( $t_name ) ) {
 		return SoapObjectsFactory::newSoapFault( 'Client', 'Project name exists');
 	}
@@ -894,7 +894,7 @@ function mc_project_add( $p_username, $p_password, $p_project ) {
 	$t_project_status = mci_get_project_status_id( $t_status );
 	$t_project_view_state = mci_get_project_view_state_id( $t_view_state );
 
-	// project_create returns the new project's id, spit that out to webservice caller
+	# project_create returns the new project's id, spit that out to web service caller
 	return project_create( $t_name, $t_description, $t_project_status, $t_project_view_state, $t_file_path, $t_enabled, $t_inherit_global );
 }
 
@@ -903,7 +903,7 @@ function mc_project_add( $p_username, $p_password, $p_project ) {
  *
  * @param string $p_username  The name of the user
  * @param string $p_password  The password of the user
- * @param integer $p_project_id A project's id
+ * @param int $p_project_id A project's id
  * @param array $p_project A new ProjectData structure
  * @return bool returns true or false depending on the success of the update action
  */
@@ -933,7 +933,7 @@ function mc_project_update( $p_username, $p_password, $p_project_id, $p_project 
 		$t_name = $p_project['name'];
 	}
 
-	// check to make sure project doesn't already exist
+	# check to make sure project doesn't already exist
 	if ( $t_name != project_get_name( $p_project_id ) ) {
 		if( !project_is_name_unique( $t_name ) ) {
 			return SoapObjectsFactory::newSoapFault('Client', 'Project name exists');
@@ -987,7 +987,7 @@ function mc_project_update( $p_username, $p_password, $p_project_id, $p_project 
  *
  * @param string $p_username  The name of the user trying to access the versions.
  * @param string $p_password  The password of the user.
- * @param integer $p_project_id A project's id
+ * @param int $p_project_id A project's id
  * @return bool returns true or false depending on the success of the delete action
  */
 function mc_project_delete( $p_username, $p_password, $p_project_id ) {
@@ -1015,7 +1015,7 @@ function mc_project_delete( $p_username, $p_password, $p_project_id ) {
  * Get Issue Headers
  * @param string $p_username  The name of the user trying to access the versions.
  * @param string $p_password  The password of the user.
- * @param integer $p_project_id  The id of the project to retrieve the attachments for.
+ * @param int $p_project_id  The id of the project to retrieve the attachments for.
  * @param int $p_page_number Page number
  * @param int $p_per_page Per page
  * @return mixed
@@ -1044,7 +1044,7 @@ function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, 
 	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, null, $p_project_id );
 	$t_result = array();
 
-	// the page number was moved back, so we have exceeded the actual page number, see bug #12991
+	# the page number was moved back, so we have exceeded the actual page number, see bug #12991
 	if ( $t_orig_page_number > $p_page_number )
 		return $t_result;
 
@@ -1060,8 +1060,8 @@ function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, 
  *
  * @param string $p_username  The name of the user trying to access the versions.
  * @param string $p_password  The password of the user.
- * @param integer $p_project_id  The id of the project to retrieve the users for.
- * @param integer $p_access Minimum access level.
+ * @param int $p_project_id  The id of the project to retrieve the users for.
+ * @param int $p_access Minimum access level.
  * @return array  representing a ProjectAttachmentDataArray structure.
  */
 function mc_project_get_users( $p_username, $p_password, $p_project_id, $p_access ) {
@@ -1104,9 +1104,9 @@ function mc_project_get_users( $p_username, $p_password, $p_project_id, $p_acces
 	for( $i = 0;$i < count( $t_sort );$i++ ) {
 		$t_row = $t_users[$i];
 
-		// This is not very performant - But we have to assure that the data returned is exactly
-		// the same as the data that comes with an issue (test for equality - $t_row[] does not
-		// contain email fields).
+		# This is not very performant - But we have to assure that the data returned is exactly
+		# the same as the data that comes with an issue (test for equality - $t_row[] does not
+		# contain email fields).
 		$t_result[] = mci_account_get_array_by_id( $t_row['id'] );
 	}
 	return $t_result;

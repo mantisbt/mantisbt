@@ -178,8 +178,8 @@ function get_enum_element( $p_enum_name, $p_val, $p_user = null, $p_project = nu
  * This helper function is used by {@link check_checked()} and {@link check_selected()}
  * @param mixed $p_var1
  * @param mixed $p_var2
- * @param boolean $p_strict Set to true for strict type checking, false for loose
- * @return boolean
+ * @param bool $p_strict Set to true for strict type checking, false for loose
+ * @return bool
  */
 function helper_check_variables_equal( $p_var1, $p_var2, $p_strict ) {
 
@@ -224,7 +224,7 @@ function helper_check_variables_equal( $p_var1, $p_var2, $p_strict ) {
  *
  * @param mixed $p_var
  * @param mixed $p_val
- * @param boolean $p_strict Set to false to bypass strict type checking (defaults to true)
+ * @param bool $p_strict Set to false to bypass strict type checking (defaults to true)
  * @return null
  */
 function check_checked( $p_var, $p_val = true, $p_strict = true ) {
@@ -252,7 +252,7 @@ function check_checked( $p_var, $p_val = true, $p_strict = true ) {
  *
  * @param mixed $p_var the variable to compare
  * @param mixed $p_val the value to compare $p_var with
- * @param boolean $p_strict Set to false to bypass strict type checking (defaults to true)
+ * @param bool $p_strict Set to false to bypass strict type checking (defaults to true)
  * @return null
  */
 function check_selected( $p_var, $p_val = true, $p_strict = true ) {
@@ -619,7 +619,7 @@ function helper_duration_to_minutes( $p_hhmm ) {
 	$t_a = explode( ':', $p_hhmm );
 	$t_min = 0;
 
-	// time can be composed of max 3 parts (hh:mm:ss)
+	# time can be composed of max 3 parts (hh:mm:ss)
 	if( count( $t_a ) > 3 ) {
 		error_parameters( 'p_hhmm', $p_hhmm );
 		trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
@@ -627,13 +627,13 @@ function helper_duration_to_minutes( $p_hhmm ) {
 
 	$t_count = count( $t_a );
 	for( $i = 0;$i < $t_count;$i++ ) {
-		// all time parts should be integers and non-negative.
+		# all time parts should be integers and non-negative.
 		if( !is_numeric( $t_a[$i] ) || ( (integer) $t_a[$i] < 0 ) ) {
 			error_parameters( 'p_hhmm', $p_hhmm );
 			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
 		}
 
-		// minutes and seconds are not allowed to exceed 59.
+		# minutes and seconds are not allowed to exceed 59.
 		if(( $i > 0 ) && ( $t_a[$i] > 59 ) ) {
 			error_parameters( 'p_hhmm', $p_hhmm );
 			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
@@ -648,7 +648,7 @@ function helper_duration_to_minutes( $p_hhmm ) {
 			$t_min = (integer) $t_a[0] * 60 + (integer) $t_a[1];
 			break;
 		case 3:
-			// if seconds included, approximate it to minutes
+			# if seconds included, approximate it to minutes
 			$t_min = (integer) $t_a[0] * 60 + (integer) $t_a[1];
 
 			if( (integer) $t_a[2] >= 30 ) {

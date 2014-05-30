@@ -220,7 +220,7 @@ function file_path_combine( $p_path, $p_filename ) {
  * 5. Otherwise return as is.
  *
  * @param string $p_diskfile  The disk file (full path or just filename).
- * @param integer $p_project_id The project id - shouldn't be 0 (ALL_PROJECTS).
+ * @param int $p_project_id The project id - shouldn't be 0 (ALL_PROJECTS).
  * @return string The normalized full path.
  */
 function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
@@ -241,7 +241,7 @@ function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
 				return $t_diskfile;
 			}
 
-			// if we don't find the file, then this is the path we want to return.
+			# if we don't find the file, then this is the path we want to return.
 			$t_expected_file_path = $t_diskfile;
 		}
 	}
@@ -254,20 +254,20 @@ function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
 			return $t_diskfile;
 		}
 
-		// if the expected path not set to project directory, then set it to default directory.
+		# if the expected path not set to project directory, then set it to default directory.
 		if ( is_blank( $t_expected_file_path ) ) {
 			$t_expected_file_path = $t_diskfile;
 		}
 	}
 
-	// if diskfile doesn't include a path, then use the expected filename.
+	# if diskfile doesn't include a path, then use the expected filename.
 	if ( ( strstr( $p_diskfile, DIRECTORY_SEPARATOR ) === false ||
 	       strstr( $p_diskfile, '\\' ) === false ) &&
 	     !is_blank( $t_expected_file_path ) ) {
 	    return $t_expected_file_path;
 	}
 
-	// otherwise return as is.
+	# otherwise return as is.
 	return $p_diskfile;
 }
 
@@ -632,7 +632,7 @@ function file_is_name_unique( $p_name, $p_bug_id, $p_table  = 'bug' ) {
 /**
  * Add a file to the system using the configured storage method
  *
- * @param integer $p_bug_id the bug id (should be 0 when adding project doc)
+ * @param int $p_bug_id the bug id (should be 0 when adding project doc)
  * @param array $p_file the uploaded file info, as retrieved from gpc_get_file()
  * @param string $p_table 'bug' or 'project' depending on attachment type
  * @param string $p_title file title

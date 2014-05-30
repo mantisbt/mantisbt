@@ -141,7 +141,7 @@ function form_security_param( $p_form_name ) {
  * stored in the user's session.  While checking stored tokens, any that
  * are more than 3 days old will be purged.
  * @param string $p_form_name Form name
- * @return boolean Form is valid
+ * @return bool Form is valid
  */
 function form_security_validate( $p_form_name ) {
 	if ( PHP_CLI == php_mode() || OFF == config_get_global( 'form_security_validation' ) ) {

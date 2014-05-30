@@ -379,7 +379,7 @@ function category_cache_array_rows_by_project( $p_project_id_array ) {
  *	the specified projects.  If no project is specified, use the current project.
  *	If the current project is ALL_PROJECTS get all categories for all accessible projects.
  *	For all cases, get global categories and subproject categories according to configured inheritance settings.
- *	@param mixed $p_project_id A specific project or null
+ *	@param int|null $p_project_id A specific project or null
  *	@return array A unique array of category names
  */
 function category_get_filter_list( $p_project_id = null ) {

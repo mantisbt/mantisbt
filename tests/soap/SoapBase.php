@@ -91,8 +91,7 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	 */
 	private   $defaultSoapClientOptions = array(  'trace'      => true,
 												  'exceptions' => true,
-												  'cache_wsdl' => WSDL_CACHE_NONE,
-												  'trace'      => true
+												  'cache_wsdl' => WSDL_CACHE_NONE
 											   );
 
 	/**
@@ -145,7 +144,7 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Returns an array of extra options to be passed to the Soap Client 
-	 * @return an array of extra options to be passed to the SoapClient constructor
+	 * @return array an array of extra options to be passed to the SoapClient constructor
 	 */
 	protected function extraSoapClientFlags() {
 
@@ -275,7 +274,7 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Converts date to UTC
-	 * @param $p_date date string
+	 * @param string $p_date date string
 	 * @return DateTime object
 	 * Tests creating a new version
 	 */

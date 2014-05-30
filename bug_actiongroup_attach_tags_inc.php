@@ -67,7 +67,7 @@ function action_attach_tags_print_fields() {
 /**
  * Validates the Attach Tags group action.
  * Checks if a user can attach the requested tags to a given bug.
- * @param integer $p_bug_id Bug ID
+ * @param int $p_bug_id Bug ID
  * @return string|null On failure: the reason for tags failing validation for the given bug. On success: null.
  */
 function action_attach_tags_validate( $p_bug_id ) {
@@ -110,7 +110,7 @@ function action_attach_tags_validate( $p_bug_id ) {
 
 /**
  * Attaches all the tags to each bug in the group action.
- * @param integer $p_bug_id Bug ID
+ * @param int $p_bug_id Bug ID
  * @return null Previous validation ensures that this function doesn't fail. Therefore we can always return null to indicate no errors occurred.
  */
 function action_attach_tags_process( $p_bug_id ) {

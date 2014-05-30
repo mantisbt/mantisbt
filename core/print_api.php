@@ -82,7 +82,6 @@ require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 require_api( 'version_api.php' );
 
-
 /**
  * Print the headers to cause the page to redirect to $p_url
  * If $p_die is true (default), terminate the execution of the script immediately
@@ -91,10 +90,10 @@ require_api( 'version_api.php' );
  * This would be false if the URL is trusted (e.g. read from config_inc.php).
  *
  * @param string $p_url The page to redirect: has to be a relative path
- * @param boolean $p_die if true, stop the script after redirecting
- * @param boolean $p_sanitize apply string_sanitize_url to passed url
- * @param boolean $p_absolute indicate if url is absolute
- * @return boolean
+ * @param bool $p_die if true, stop the script after redirecting
+ * @param bool $p_sanitize apply string_sanitize_url to passed url
+ * @param bool $p_absolute indicate if url is absolute
+ * @return bool
  */
 function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_absolute = false ) {
 	if( ON == config_get_global( 'stop_on_errors' ) && error_handled() ) {
@@ -339,7 +338,7 @@ function print_reporter_option_list( $p_user_id, $p_project_id = null ) {
 
 /**
  * Print the entire form for attaching a tag to a bug.
- * @param integer $p_bug_id Bug ID
+ * @param int $p_bug_id Bug ID
  * @param string $p_string Default contents of the input box
  * @return bool
  */
@@ -360,7 +359,7 @@ function print_tag_attach_form( $p_bug_id, $p_string = '' ) {
 
 /**
  * Print the separator comment, input box, and existing tag dropdown menu.
- * @param integer $p_bug_id Bug ID
+ * @param int $p_bug_id Bug ID
  * @param string $p_string Default contents of the input box
  */
 function print_tag_input( $p_bug_id = 0, $p_string = '' ) {
@@ -374,9 +373,9 @@ function print_tag_input( $p_bug_id = 0, $p_string = '' ) {
 }
 
 /**
- * Print the dropdown combo-box of existing tags.
+ * Print the drop-down combo-box of existing tags.
  * When passed a bug ID, the option list will not contain any tags attached to the given bug.
- * @param integer $p_bug_id Bug ID
+ * @param int $p_bug_id Bug ID
  */
 function print_tag_option_list( $p_bug_id = 0 ) {
 	$t_rows = tag_get_candidates_for_bug( $p_bug_id );
@@ -689,7 +688,7 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 
 	if( config_get( 'allow_no_category' ) ) {
 		echo "<option value=\"0\"", check_selected( $p_category_id, 0 ), '>';
-		echo category_full_name( 0, /* show project */ false ), '</option>';
+		echo category_full_name( 0, false ), '</option>';
 	} else {
 		if( 0 == $p_category_id ) {
 			echo "<option value=\"0\"", check_selected( $p_category_id, 0 ), '>';
@@ -697,7 +696,7 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 		}
 	}
 
-	$cat_arr = category_get_all_rows( $t_project_id, /* inherit */ null, /* sortByProject */ true );
+	$cat_arr = category_get_all_rows( $t_project_id, null, true );
 
 	foreach( $cat_arr as $t_category_row ) {
 		$t_category_id = (int)$t_category_row['id'];
@@ -789,13 +788,9 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 	}
 
 	if( $p_with_subs ) {
-		$versions = version_get_all_rows_with_subs( $c_project_id, $p_released,
-		/* obsolete */
-		null );
+		$versions = version_get_all_rows_with_subs( $c_project_id, $p_released, null );
 	} else {
-		$versions = version_get_all_rows( $c_project_id, $p_released,
-		/* obsolete */
-		null );
+		$versions = version_get_all_rows( $c_project_id, $p_released, null );
 	}
 
 	# Ensure the selected version (if specified) is included in the list

@@ -68,11 +68,11 @@ function excel_get_header( $p_worksheet_title, $p_styles = array() ) {
  * Returns an XML string containing the <tt>ss:Styles</tt> entry, possibly empty
  *
  * @param array $p_styles an array of ExcelStyle entries
- * @return void|string
+ * @return null|string
  */
 function excel_get_styles( $p_styles ) {
 	if ( count ( $p_styles ) == 0 ) {
-		return;
+		return null;
 	}
 
 	$t_styles_string = '<ss:Styles>';
@@ -161,8 +161,8 @@ function excel_get_default_filename() {
 
 /**
  * Escapes the specified column value and includes it in a Cell Xml.
- * @param $p_value The value
- * @return The Cell Xml.
+ * @param string $p_value The value
+ * @return string The Cell Xml.
  */
 function excel_prepare_string( $p_value ) {
 	$t_type = is_numeric( $p_value ) ? 'Number' : 'String';
@@ -200,7 +200,7 @@ function excel_get_cell( $p_value, $p_type, $p_attributes = array() ) {
 
 /**
  * Gets the columns to be included in the Excel Xml export.
- * @return column names.
+ * @return array column names.
  */
 function excel_get_columns() {
 	$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_EXCEL_PAGE );
@@ -216,7 +216,7 @@ function excel_get_columns() {
 /**
  * Gets the formatted bug id value.
  * @param object $p_bug the bug
- * @return The bug id prefixed with 0s.
+ * @return string The bug id prefixed with 0s.
  */
 function excel_format_id( $p_bug ) {
 	return excel_prepare_string( bug_format_id( $p_bug->id ) );
@@ -225,7 +225,7 @@ function excel_format_id( $p_bug ) {
 /**
  * Gets the formatted project id value.
  * @param object $p_bug the bug
- * @return The project name.
+ * @return string The project name.
  */
 function excel_format_project_id( $p_bug ) {
 	return excel_prepare_string( project_get_name( $p_bug->project_id ) );
@@ -234,7 +234,7 @@ function excel_format_project_id( $p_bug ) {
 /**
  * Gets the formatted reporter id value.
  * @param object $p_bug the bug
- * @return The reporter user name.
+ * @return string The reporter user name.
  */
 function excel_format_reporter_id( $p_bug ) {
 	return excel_prepare_string( user_get_name( $p_bug->reporter_id ) );
@@ -243,7 +243,7 @@ function excel_format_reporter_id( $p_bug ) {
 /**
  * Gets the formatted number of bug notes.
  * @param object $p_bug the bug
- * @return The number of bug notes.
+ * @return string The number of bug notes.
  */
 function excel_format_bugnotes_count( $p_bug ) {
 	return excel_prepare_string( $p_bug->bugnotes_count );
@@ -252,7 +252,7 @@ function excel_format_bugnotes_count( $p_bug ) {
 /**
  * Gets the formatted handler id.
  * @param object $p_bug the bug
- * @return The handler user name or empty string.
+ * @return string The handler user name or empty string.
  */
 function excel_format_handler_id( $p_bug ) {
 	if( $p_bug->handler_id > 0 ) {
@@ -265,7 +265,7 @@ function excel_format_handler_id( $p_bug ) {
 /**
  * Gets the formatted priority.
  * @param object $p_bug the bug
- * @return the priority text.
+ * @return string the priority text.
  */
 function excel_format_priority( $p_bug ) {
 	return excel_prepare_string( get_enum_element( 'priority', $p_bug->priority, auth_get_current_user_id(), $p_bug->project_id ) );
@@ -274,7 +274,7 @@ function excel_format_priority( $p_bug ) {
 /**
  * Gets the formatted severity.
  * @param object $p_bug the bug
- * @return the severity text.
+ * @return string the severity text.
  */
 function excel_format_severity( $p_bug ) {
 	return excel_prepare_string( get_enum_element( 'severity', $p_bug->severity, auth_get_current_user_id(), $p_bug->project_id ) );
@@ -283,7 +283,7 @@ function excel_format_severity( $p_bug ) {
 /**
  * Gets the formatted reproducibility.
  * @param object $p_bug the bug
- * @return the reproducibility text.
+ * @return string the reproducibility text.
  */
 function excel_format_reproducibility( $p_bug ) {
 	return excel_prepare_string( get_enum_element( 'reproducibility', $p_bug->reproducibility, auth_get_current_user_id(), $p_bug->project_id ) );
@@ -292,7 +292,7 @@ function excel_format_reproducibility( $p_bug ) {
 /**
  * Gets the formatted view state,
  * @param object $p_bug the bug
- * @return The view state
+ * @return string The view state
  */
 function excel_format_view_state( $p_bug ) {
 	return excel_prepare_string( get_enum_element( 'view_state', $p_bug->view_state, auth_get_current_user_id(), $p_bug->project_id ) );
@@ -301,7 +301,7 @@ function excel_format_view_state( $p_bug ) {
 /**
  * Gets the formatted projection.
  * @param object $p_bug the bug
- * @return the projection text.
+ * @return string the projection text.
  */
 function excel_format_projection( $p_bug ) {
 	return excel_prepare_string( get_enum_element( 'projection', $p_bug->projection, auth_get_current_user_id(), $p_bug->project_id ) );
@@ -310,7 +310,7 @@ function excel_format_projection( $p_bug ) {
 /**
  * Gets the formatted eta.
  * @param object $p_bug the bug
- * @return the eta text.
+ * @return string the eta text.
  */
 function excel_format_eta( $p_bug ) {
 	return excel_prepare_string( get_enum_element( 'eta', $p_bug->eta, auth_get_current_user_id(), $p_bug->project_id ) );
@@ -319,7 +319,7 @@ function excel_format_eta( $p_bug ) {
 /**
  * Gets the status field.
  * @param object $p_bug the bug
- * @return the formatted status.
+ * @return string the formatted status.
  */
 function excel_format_status( $p_bug ) {
 	return excel_prepare_string( get_enum_element( 'status', $p_bug->status, auth_get_current_user_id(), $p_bug->project_id ) );
@@ -328,7 +328,7 @@ function excel_format_status( $p_bug ) {
 /**
  * Gets the resolution field.
  * @param object $p_bug the bug
- * @return the formatted resolution.
+ * @return string the formatted resolution.
  */
 function excel_format_resolution( $p_bug ) {
 	return excel_prepare_string( get_enum_element( 'resolution', $p_bug->resolution, auth_get_current_user_id(), $p_bug->project_id ) );
@@ -337,7 +337,7 @@ function excel_format_resolution( $p_bug ) {
 /**
  * Gets the formatted version.
  * @param object $p_bug the bug
- * @return the product version.
+ * @return string the product version.
  */
 function excel_format_version( $p_bug ) {
 	return excel_prepare_string( $p_bug->version );
@@ -346,7 +346,7 @@ function excel_format_version( $p_bug ) {
 /**
  * Gets the formatted fixed in version.
  * @param object $p_bug the bug
- * @return the fixed in version.
+ * @return string the fixed in version.
  */
 function excel_format_fixed_in_version( $p_bug ) {
 	return excel_prepare_string( $p_bug->fixed_in_version );
@@ -355,7 +355,7 @@ function excel_format_fixed_in_version( $p_bug ) {
 /**
  * Gets the formatted target version.
  * @param object $p_bug the bug
- * @return the target version.
+ * @return string the target version.
  */
 function excel_format_target_version( $p_bug ) {
 	return excel_prepare_string( $p_bug->target_version );
@@ -364,7 +364,7 @@ function excel_format_target_version( $p_bug ) {
 /**
  * Gets the formatted category.
  * @param object $p_bug the bug
- * @return the category.
+ * @return string the category.
  */
 function excel_format_category_id( $p_bug ) {
 	return excel_prepare_string( category_full_name( $p_bug->category_id, false ) );
@@ -373,7 +373,7 @@ function excel_format_category_id( $p_bug ) {
 /**
  * Gets the formatted operating system.
  * @param object $p_bug the bug
- * @return the operating system.
+ * @return string the operating system.
  */
 function excel_format_os( $p_bug ) {
 	return excel_prepare_string( $p_bug->os );
@@ -382,7 +382,7 @@ function excel_format_os( $p_bug ) {
 /**
  * Gets the formatted operating system build (version).
  * @param object $p_bug the bug
- * @return the operating system build (version)
+ * @return string the operating system build (version)
  */
 function excel_format_os_build( $p_bug ) {
 	return excel_prepare_string( $p_bug->os_build );
@@ -391,7 +391,7 @@ function excel_format_os_build( $p_bug ) {
 /**
  * Gets the formatted product build,
  * @param object $p_bug the bug
- * @return the product build.
+ * @return string the product build.
  */
 function excel_format_build( $p_bug ) {
 	return excel_prepare_string( $p_bug->build );
@@ -400,7 +400,7 @@ function excel_format_build( $p_bug ) {
 /**
  * Gets the formatted platform,
  * @param object $p_bug the bug
- * @return the platform.
+ * @return string the platform.
  */
 function excel_format_platform( $p_bug ) {
 	return excel_prepare_string( $p_bug->platform );
@@ -409,7 +409,7 @@ function excel_format_platform( $p_bug ) {
 /**
  * Gets the formatted date submitted.
  * @param object $p_bug the bug
- * @return the date submitted in short date format.
+ * @return string the date submitted in short date format.
  */
 function excel_format_date_submitted( $p_bug ) {
 	return excel_prepare_string( date( config_get( 'short_date_format' ), $p_bug->date_submitted ) );
@@ -418,7 +418,7 @@ function excel_format_date_submitted( $p_bug ) {
 /**
  * Gets the formatted date last updated.
  * @param object $p_bug the bug
- * @return the date last updated in short date format.
+ * @return string the date last updated in short date format.
  */
 function excel_format_last_updated( $p_bug ) {
 	return excel_prepare_string( date( config_get( 'short_date_format' ), $p_bug->last_updated ) );
@@ -427,7 +427,7 @@ function excel_format_last_updated( $p_bug ) {
 /**
  * Gets the summary field.
  * @param object $p_bug the bug
- * @return the formatted summary.
+ * @return string the formatted summary.
  */
 function excel_format_summary( $p_bug ) {
 	return excel_prepare_string( $p_bug->summary );
@@ -436,7 +436,7 @@ function excel_format_summary( $p_bug ) {
 /**
  * Gets the formatted selection.
  * @param object $p_bug the bug
- * @return an formatted empty string.
+ * @return string an formatted empty string.
  */
 function excel_format_selection( $p_bug ) {
 	return excel_prepare_string( '' );
@@ -445,7 +445,7 @@ function excel_format_selection( $p_bug ) {
 /**
  * Gets the formatted description field.
  * @param object $p_bug the bug
- * @return The formatted description (multi-line).
+ * @return string The formatted description (multi-line).
  */
 function excel_format_description( $p_bug ) {
 	return excel_prepare_string( $p_bug->description );
@@ -454,7 +454,7 @@ function excel_format_description( $p_bug ) {
 /**
  * Gets the formatted 'steps to reproduce' field.
  * @param object $p_bug the bug
- * @return The formatted steps to reproduce (multi-line).
+ * @return string The formatted steps to reproduce (multi-line).
  */
 function excel_format_steps_to_reproduce( $p_bug ) {
 	return excel_prepare_string( $p_bug->steps_to_reproduce );
@@ -463,7 +463,7 @@ function excel_format_steps_to_reproduce( $p_bug ) {
 /**
  * Gets the formatted 'additional information' field.
  * @param object $p_bug the bug
- * @return The formatted additional information (multi-line).
+ * @return string The formatted additional information (multi-line).
  */
 function excel_format_additional_information( $p_bug ) {
 	return excel_prepare_string( $p_bug->additional_information );
@@ -471,10 +471,10 @@ function excel_format_additional_information( $p_bug ) {
 
 /**
  * Gets the formatted value for the specified issue id, project and custom field.
- * @param $p_issue_id The issue id.
- * @param $p_project_id The project id.
- * @param $p_custom_field The custom field name (without 'custom_' prefix).
- * @return The custom field value.
+ * @param int $p_issue_id The issue id.
+ * @param int $p_project_id The project id.
+ * @param string $p_custom_field The custom field name (without 'custom_' prefix).
+ * @return string The custom field value.
  */
 function excel_format_custom_field( $p_issue_id, $p_project_id, $p_custom_field ) {
 	$t_field_id = custom_field_get_id_from_name( $p_custom_field );
@@ -488,7 +488,7 @@ function excel_format_custom_field( $p_issue_id, $p_project_id, $p_custom_field 
 		return excel_prepare_string( string_custom_field_value( $t_def, $t_field_id, $p_issue_id ) );
 	}
 
-	// field is not linked to project
+	# field is not linked to project
 	return excel_prepare_string( '' );
 }
 
@@ -496,7 +496,7 @@ function excel_format_custom_field( $p_issue_id, $p_project_id, $p_custom_field 
  * Gets the formatted value for the specified plugin column value.
  * @param string $p_column The plugin column name.
  * @param object $p_bug The bug to print the column for (needed for the display function of the plugin column).
- * @return The plugin column value.
+ * @return string The plugin column value.
  */
 function excel_format_plugin_column_value( $p_column, $p_bug ) {
 	$t_plugin_columns = columns_get_plugin_columns();
@@ -515,7 +515,7 @@ function excel_format_plugin_column_value( $p_column, $p_bug ) {
 /**
  * Gets the formatted due date.
  * @param object $p_bug the bug
- * @returns The formatted due date.
+ * @returns string The formatted due date.
  */
 function excel_format_due_date( $p_bug ) {
 	return excel_prepare_string( date( config_get( 'short_date_format' ), $p_bug->due_date ) );

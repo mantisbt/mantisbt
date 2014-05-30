@@ -41,7 +41,7 @@ class EnumTest extends SoapBase {
 
 		$accessLevels = EnumTest::ObjectRefsToAssoc( $accessLevelsObjectRefs );
 
-		// '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator'
+		# '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator'
 
 		$this->assertEquals( 6, count( $accessLevels ) );
 		$this->assertEquals( 'viewer', $accessLevels[10] );
@@ -70,7 +70,7 @@ class EnumTest extends SoapBase {
 
 		$statuses = EnumTest::ObjectRefsToAssoc( $statusesObjectRefs );
 
-		// '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved,90:closed'
+		# '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved,90:closed'
 
 		$this->assertEquals( 7, count( $statuses ) );
 		$this->assertEquals( 'new', $statuses[10] );
@@ -99,7 +99,7 @@ class EnumTest extends SoapBase {
 
 		$priorities = EnumTest::ObjectRefsToAssoc( $prioritiesObjectRefs );
 
-		// '10:none,20:low,30:normal,40:high,50:urgent,60:immediate'
+		# '10:none,20:low,30:normal,40:high,50:urgent,60:immediate'
 
 		$this->assertEquals( 6, count( $priorities ) );
 		$this->assertEquals( 'none', $priorities[10] );
@@ -127,7 +127,7 @@ class EnumTest extends SoapBase {
 
 		$reproducibilities = EnumTest::ObjectRefsToAssoc( $reproducibilityObjectRefs );
 
-		// '10:always,30:sometimes,50:random,70:have not tried,90:unable to duplicate,100:N/A'
+		# '10:always,30:sometimes,50:random,70:have not tried,90:unable to duplicate,100:N/A'
 
 		$this->assertEquals( 6, count( $reproducibilities ) );
 		$this->assertEquals( 'always', $reproducibilities[10] );
@@ -156,7 +156,7 @@ class EnumTest extends SoapBase {
 
 		$severities = EnumTest::ObjectRefsToAssoc( $severityObjectRefs );
 
-		// '10:feature,20:trivial,30:text,40:tweak,50:minor,60:major,70:crash,80:block'
+		# '10:feature,20:trivial,30:text,40:tweak,50:minor,60:major,70:crash,80:block'
 
 		$this->assertEquals( 8, count( $severities ) );
 		$this->assertEquals( 'feature', $severities[10] );
@@ -187,7 +187,7 @@ class EnumTest extends SoapBase {
 
 		$projections = EnumTest::ObjectRefsToAssoc( $projectionObjectRefs );
 
-		// '10:none,30:tweak,50:minor fix,70:major rework,90:redesign'
+		# '10:none,30:tweak,50:minor fix,70:major rework,90:redesign'
 
 		$this->assertEquals( 5, count( $projections ) );
 		$this->assertEquals( 'none', $projections[10] );
@@ -215,7 +215,7 @@ class EnumTest extends SoapBase {
 
 		$etas = EnumTest::ObjectRefsToAssoc( $etaObjectRefs );
 
-		// '10:none,20:< 1 day,30:2-3 days,40:< 1 week,50:< 1 month,60:> 1 month'
+		# '10:none,20:< 1 day,30:2-3 days,40:< 1 week,50:< 1 month,60:> 1 month'
 
 		$this->assertEquals( 6, count( $etas ) );
 		$this->assertEquals( 'none', $etas[10] );
@@ -244,7 +244,7 @@ class EnumTest extends SoapBase {
 
 		$resolutions = EnumTest::ObjectRefsToAssoc( $resolutionObjectRefs );
 
-		// '10:open,20:fixed,30:reopened,40:unable to duplicate,50:not fixable,60:duplicate,70:not a bug,80:suspended,90:wont fix'
+		# '10:open,20:fixed,30:reopened,40:unable to duplicate,50:not fixable,60:duplicate,70:not a bug,80:suspended,90:wont fix'
 
 		$this->assertEquals( 9, count( $resolutions ) );
 		$this->assertEquals( 'open', $resolutions[10] );
@@ -267,9 +267,9 @@ class EnumTest extends SoapBase {
 		$this->client->mc_enum_resolutions( 'administrator', '' );
 	}
 
-	// TODO: mc_enum_project_status
-	// TODO: mc_enum_project_view_states
-	// TODO: mc_enum_custom_field_types
+	# TODO: mc_enum_project_status
+	# TODO: mc_enum_project_view_states
+	# TODO: mc_enum_custom_field_types
 
 	/**
 	 * Converts an array of ObjectRefs array into an associate

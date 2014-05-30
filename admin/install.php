@@ -736,7 +736,7 @@ if( 3 == $t_install_state ) {
 			print_test_result( GOOD );
 			$t_db_open = true;
 		} else {
-			// create db
+			# create db
 			$g_db = ADONewConnection( $f_db_type );
 			$t_result = $g_db->Connect( $f_hostname, $f_admin_username, $f_admin_password );
 
@@ -932,13 +932,13 @@ if( 3 == $t_install_state ) {
 					break;
 
 				case NULL:
-					// No-op upgrade step - required for oci8
+					# No-op upgrade step - required for oci8
 					break;
 
 				default:
 						$sqlarray = call_user_func_array( array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
 
-					/* 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade. */
+					# 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade.
 					if( isset( $upgrade[$i][2] ) ) {
 						if( call_user_func_array( $upgrade[$i][2][0], $upgrade[$i][2][1] ) ) {
 							$sqlarray = call_user_func_array( array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
@@ -1013,8 +1013,8 @@ if( 3 == $t_install_state ) {
 # database installed, get any additional information
 if( 4 == $t_install_state ) {
 
-	/** @todo to be written */
-	// must post data gathered to preserve it
+	# @todo to be written
+	# must post data gathered to preserve it
 	?>
 		<input name="hostname" type="hidden" value="<?php echo $f_hostname?>">
 		<input name="db_type" type="hidden" value="<?php echo $f_db_type?>">

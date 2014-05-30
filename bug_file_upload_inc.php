@@ -77,7 +77,7 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 		<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
 <?php
-	// Display multiple file upload fields
+	# Display multiple file upload fields
 	for( $i = 0; $i < $t_file_upload_max_num; $i++ ) {
 ?>
 		<input id="ufile[]" name="ufile[]" type="file" size="50" />

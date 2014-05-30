@@ -192,7 +192,7 @@ foreach( $t_project_ids as $t_project_id ) {
 	$t_relation_table = db_get_table( 'bug_relationship' );
 
 	# grab version info for later use
-	$t_version_rows = version_get_all_rows( $t_project_id, /* released */ null, /* obsolete */ false );
+	$t_version_rows = version_get_all_rows( $t_project_id, null, false );
 
 	# cache category info, but ignore the results for now
 	category_get_all_rows( $t_project_id );

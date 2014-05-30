@@ -137,7 +137,7 @@ $num_notes = count( $t_bugnotes );
 
 		if ( 0 != $t_bugnote->time_tracking ) {
 			$t_time_tracking_hhmm = db_minutes_to_hhmm( $t_bugnote->time_tracking );
-			$t_bugnote->note_type = TIME_TRACKING;   // for older entries that didn't set the type @@@PLR FIXME
+			$t_bugnote->note_type = TIME_TRACKING;   # for older entries that didn't set the type @@@PLR FIXME
 			$t_total_time += $t_bugnote->time_tracking;
 		} else {
 			$t_time_tracking_hhmm = '';
@@ -168,7 +168,7 @@ $num_notes = count( $t_bugnotes );
 		<span class="small access-level"><?php
 			if ( user_exists( $t_bugnote->reporter_id ) ) {
 				$t_access_level = access_get_project_level( null, (int)$t_bugnote->reporter_id );
-				// Only display access level when higher than 0 (ANYBODY)
+				# Only display access level when higher than 0 (ANYBODY)
 				if( $t_access_level > ANYBODY ) {
 					echo '(', get_enum_element( 'access_levels', $t_access_level ), ')';
 				}

@@ -29,7 +29,7 @@
 require_once( 'core.php' );
 require_api( 'gpc_api.php' );
 
-// Copy 'bug_id' parameter into 'id' so it is found by the view page.
+# Copy 'bug_id' parameter into 'id' so it is found by the view page.
 $_GET['id'] = gpc_get_int( 'bug_id' );
 
 include 'view.php';

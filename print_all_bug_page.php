@@ -211,8 +211,8 @@ $t_icon_path = config_get( 'icon_path' );
 </tr>
 <tr class="row-category">
 	<?php
-		$t_sort = $f_sort;	// used within the custom function called in the loop (@todo cleanup)
-		$t_dir = $f_dir;    // used within the custom function called in the loop (@todo cleanup)
+		$t_sort = $f_sort;	# used within the custom function called in the loop (@todo cleanup)
+		$t_dir = $f_dir;    # used within the custom function called in the loop (@todo cleanup)
 
 		foreach( $t_columns as $t_column ) {
 			$t_title_function = 'print_column_title';

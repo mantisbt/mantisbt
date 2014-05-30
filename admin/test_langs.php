@@ -53,7 +53,7 @@ set_time_limit( 0 );
 
 html_page_top();
 
-// check core language files
+# check core language files
 if( function_exists( 'scandir' ) ) {
 	checklangdir( $t_mantis_dir );
 }
@@ -70,7 +70,7 @@ else {
 }
 
 
-// attempt to find plugin language files
+# attempt to find plugin language files
 echo "<br />Trying to find+check plugin language files...<br />";
 if( function_exists( 'scandir' ) ) {
 	checkplugins( config_get( 'plugin_path' ) );
@@ -124,7 +124,7 @@ function checklangdir( $p_path, $p_lang_files = null ) {
 			flush();
 			checkfile( $t_path, STRINGS_ENGLISH );
 		}
-		// Skipping english language, readme and hidden files
+		# Skipping english language, readme and hidden files
 		foreach( $t_lang_files as $key => $t_lang ) {
 			if( $t_lang[0] == '.'
 			 || $t_lang == 'langreadme.txt'
@@ -270,7 +270,7 @@ function checktoken( $file, $base = false ) {
 					break;
 			}
 		} else {
-			// token array
+			# token array
 			list( $id, $text, $line ) = $token;
 
 			if( $id == T_WHITESPACE || $id == T_COMMENT || $id == T_DOC_COMMENT || $id == T_ML_COMMENT ) {
@@ -348,16 +348,16 @@ function checktoken( $file, $base = false ) {
 						}
 
 						if( $base ) {
-							// english
-							//if( isset( $basevariables[$current_var] ) ) {
-							//	print_error( "WARN: english string redefined - plugin? $current_var" );
-							//}
+							# english
+							#if( isset( $basevariables[$current_var] ) ) {
+							#	print_error( "WARN: english string redefined - plugin? $current_var" );
+							#}
 							$basevariables[$current_var] = true;
 						} else {
 							if( !isset( $basevariables[$current_var] ) ) {
 								print_error( "'$current_var' is not defined in the English language file", 'WARNING' );
-							//} else {
-								// missing translation
+							#} else {
+							#  missing translation
 							}
 						}
 
@@ -371,7 +371,7 @@ function checktoken( $file, $base = false ) {
 					$need_end_variable = true;
 					break;
 				default:
-					// if (!$in_php_code)
+					# if (!$in_php_code)
 					print_error( "$id " . token_name( $id ) . " = $text (line $line)", 'PARSER' );
 					$pass = false;
 					break;

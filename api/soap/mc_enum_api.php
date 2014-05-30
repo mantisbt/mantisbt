@@ -216,7 +216,7 @@ function mc_enum_get( $p_username, $p_password, $p_enumeration ) {
 		return mci_soap_fault_login_failed();
 	}
 	
-	// safe to call directly after login checks
+	# safe to call directly after login checks
 	$t_user_id = auth_get_current_user_id();
 	$t_lang = mci_get_user_lang( $t_user_id );
 	
@@ -256,7 +256,7 @@ function mci_explode_to_objectref( $p_enumeration_name ) {
  *
  * @param string $p_username
  * @param string $p_password
- * @return boolean true if the user has access, false otherwise
+ * @return bool true if the user has access, false otherwise
  */
 function mci_validate_enum_access($p_username, $p_password) {
 
@@ -274,9 +274,9 @@ function mci_validate_enum_access($p_username, $p_password) {
 /**
  * Get a localized enumeration element.
  *
- * @param integer $p_enum_id  The id of the enumeration element to retrieve.
- * @param String $p_enum_type  The type of the enumeration element (e.g. 'status', 'reproducibility' etc.).
- * @param String $p_lang  The language for the name field.
+ * @param int $p_enum_id  The id of the enumeration element to retrieve.
+ * @param string $p_enum_type  The type of the enumeration element (e.g. 'status', 'reproducibility' etc.).
+ * @param string $p_lang  The language for the name field.
  * @return array an array containing the id and the name of the enumeration element.
  */
 function mci_enum_get_array_by_id( $p_enum_id, $p_enum_type, $p_lang ) {
@@ -289,10 +289,10 @@ function mci_enum_get_array_by_id( $p_enum_id, $p_enum_type, $p_lang ) {
 /**
  * Get the enum id given the enum label.
  *
- * @param $p_enum_string   The enum string to search in.
- * @param $p_label         The label to search for.
+ * @param string $p_enum_string   The enum string to search in.
+ * @param string $p_label         The label to search for.
  *
- * @return The id corresponding to the given label, or 0 if not found.
+ * @return int The id corresponding to the given label, or 0 if not found.
  */
 function mci_get_enum_value_from_label( $p_enum_string, $p_label ) {
 	$t_value = MantisEnum::getValue( $p_enum_string, $p_label );
@@ -308,11 +308,11 @@ function mci_get_enum_value_from_label( $p_enum_string, $p_label ) {
  * - id from objectref.
  * - id corresponding to name in object ref.
  * - default value for the specified enumeration, if exists in configuration.
- * - first id, if object ref doesn't contain an id or a name.
+ * - first id, if object ref does not contain an id or a name.
  *
  * @param string     $p_enum         The name of the enumeration as in the MantisBT configuration file
- * @param ObjectRef  $p_object_ref   An associate array with "id" and "name" keys.
- * @return enum id
+ * @param object $p_object_ref   An associate array with "id" and "name" keys.
+ * @return int enum id
  */
 function mci_get_enum_id_from_objectref( $p_enum, $p_object_ref ) {
 	

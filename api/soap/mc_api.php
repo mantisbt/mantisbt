@@ -178,7 +178,7 @@ function mc_login( $p_username, $p_password ) {
 function mci_user_get( $p_username, $p_password, $p_user_id ) {
 	$t_user_data = array();
 
-	// if user doesn't exist, then mci_account_get_array_by_id() will throw.
+	# if user doesn't exist, then mci_account_get_array_by_id() will throw.
 	$t_user_data['account_data'] = mci_account_get_array_by_id( $p_user_id );
 	$t_user_data['access_level'] = access_get_global_level( $p_user_id );
 	$t_user_data['timezone'] = user_pref_get_pref( $p_user_id, 'timezone' );
@@ -322,7 +322,7 @@ function mci_get_user_id( $p_user ) {
 
 /**
  * Return user's default language given a user id
- * @param object $p_user_id User id
+ * @param int $p_user_id User id
  * @return string language string
  */
 function mci_get_user_lang( $p_user_id ) {
@@ -408,8 +408,8 @@ function mci_get_view_state_id( $p_view_state ) {
 /**
  * Get null on empty value.
  *
- * @param object $p_value The value
- * @return object|null The value if not empty; null otherwise.
+ * @param string $p_value The value
+ * @return string|null The value if not empty; null otherwise.
  */
 function mci_null_if_empty( $p_value ) {
 	if( !is_blank( $p_value ) ) {
@@ -568,7 +568,7 @@ function mci_filter_db_get_available_queries( $p_project_id = null, $p_user_id =
 /**
  * Get a category definition.
  *
- * @param integer $p_category_id  The id of the category to retrieve.
+ * @param int $p_category_id  The id of the category to retrieve.
  * @return array an array containing the id and the name of the category.
  */
 function mci_category_as_array_by_id( $p_category_id ) {

@@ -310,7 +310,7 @@ function sponsorship_update_bug( $p_bug_id ) {
  * if sponsorship contains a non-zero id, then update the corresponding record.
  * if sponsorship contains a zero id, search for bug_id/user_id, if found, then update the entry
  * otherwise add a new entry
- * @param int $p_sponsorship
+ * @param SponsorshipData $p_sponsorship
  * @return int
  */
 function sponsorship_set( $p_sponsorship ) {

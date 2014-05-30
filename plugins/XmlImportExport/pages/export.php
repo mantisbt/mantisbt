@@ -77,7 +77,7 @@ $t_ignore = array(
 	'bug_text_id',
 );
 
-/* properties that we want to export are 'protected' */
+# properties that we want to export are 'protected'
 $t_columns = array_keys( getClassProperties('BugData', 'protected') );
 
 # export the rows
@@ -109,7 +109,7 @@ foreach( $t_result as $t_row ) {
 
 			case 'category_id':
 
-				// id for categories were introduced in 1.2
+				# id for categories were introduced in 1.2
 				$t_element_name = 'category';
 				$t_element_data = category_get_name( $t_value );
 
@@ -239,9 +239,9 @@ foreach( $t_result as $t_row ) {
 
 	$writer->endElement(); # issue
 
-	// Save memory by clearing cache
-	//bug_clear_cache();
-	//bug_text_clear_cache();
+	# Save memory by clearing cache
+	# bug_clear_cache();
+	# bug_text_clear_cache();
 }
 
 $writer->endElement(); # mantis

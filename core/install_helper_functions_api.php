@@ -231,7 +231,7 @@ function install_category_migrate() {
  * @return int
  */
 function install_date_migrate( $p_data ) {
-	// $p_data[0] = tablename, [1] id column, [2] = old column, [3] = new column
+	# $p_data[0] = tablename, [1] id column, [2] = old column, [3] = new column
 
 	# Disable query logging even if enabled in config, due to possibility of mass spam
 	$t_log_queries = install_set_log_queries();
@@ -294,7 +294,7 @@ function install_date_migrate( $p_data ) {
 					$t_old_value = $row[$p_data[2][$i]];
 
 					if( is_numeric( $t_old_value ) ) {
-						return 1; // Fatal: conversion may have already been run. If it has been run, proceeding will wipe timestamps from db
+						return 1; # Fatal: conversion may have already been run. If it has been run, proceeding will wipe timestamps from db
 					}
 
 					$t_new_value[$i] = db_unixtimestamp($t_old_value);
@@ -308,7 +308,7 @@ function install_date_migrate( $p_data ) {
 				$t_old_value = $row[$t_old_column];
 
 				if( is_numeric( $t_old_value ) ) {
-					return 1; // Fatal: conversion may have already been run. If it has been run, proceeding will wipe timestamps from db
+					return 1; # Fatal: conversion may have already been run. If it has been run, proceeding will wipe timestamps from db
 				}
 
 				$t_new_value = db_unixtimestamp($t_old_value);
@@ -548,7 +548,7 @@ function install_check_project_hierarchy() {
 			$query = 'SELECT inherit_parent, child_id, parent_id FROM ' . $t_project_hierarchy_table . ' WHERE child_id=' . db_param() . " AND parent_id=" . db_param();
 			$t_result2 = db_query_bound( $query, array( $child_id, $parent_id ) );
 
-			// get first result for inherit_parent, discard the rest
+			# get first result for inherit_parent, discard the rest
 			$t_row2 = db_fetch_array( $t_result2 );
 
 			$inherit = $t_row2['inherit_parent'];

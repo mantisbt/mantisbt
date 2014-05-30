@@ -28,10 +28,10 @@ require_once( dirname( __FILE__ ) . '/mc_core.php' );
 /**
  * Check if an issue with the given id exists.
  *
- * @param string $p_username  The name of the user trying to access the issue.
- * @param string $p_password  The password of the user.
- * @param integer $p_issue_id  The id of the issue to check.
- * @return boolean  true if there is an issue with the given id, false otherwise.
+ * @param string $p_username The name of the user trying to access the issue.
+ * @param string $p_password The password of the user.
+ * @param int $p_issue_id The id of the issue to check.
+ * @return bool true if there is an issue with the given id, false otherwise.
  */
 function mc_issue_exists( $p_username, $p_password, $p_issue_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
@@ -46,7 +46,7 @@ function mc_issue_exists( $p_username, $p_password, $p_issue_id ) {
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 	if( !mci_has_readonly_access( $t_user_id, $t_project_id ) ) {
 
-		// if we return an error here, then we answered the question!
+		# if we return an error here, then we answered the question!
 		return false;
 	}
 
@@ -58,7 +58,7 @@ function mc_issue_exists( $p_username, $p_password, $p_issue_id ) {
  *
  * @param string $p_username  The name of the user trying to access the issue.
  * @param string $p_password  The password of the user.
- * @param integer $p_issue_id  The id of the issue to retrieve.
+ * @param int $p_issue_id  The id of the issue to retrieve.
  * @return array that represents an IssueData structure
  */
 function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
@@ -145,7 +145,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 *
 * @param string $p_username  The name of the user trying to access the issue.
 * @param string $p_password  The password of the user.
-* @param integer $p_issue_id  The id of the issue to retrieve.
+* @param int $p_issue_id  The id of the issue to retrieve.
 * @return array that represents a HistoryDataArray structure
 */
 function mc_issue_get_history( $p_username, $p_password, $p_issue_id ) {
@@ -214,9 +214,9 @@ function mci_issue_get_due_date( $p_bug ) {
 /**
  * Sets the supplied array of custom field values to the specified issue id.
  *
- * @param $p_issue_id   Issue id to apply custom field values to.
- * @param $p_custom_fields  The array of custom field values as described in the webservice complex types.
- * @param boolean $p_log_insert create history logs for new values
+ * @param int $p_issue_id   Issue id to apply custom field values to.
+ * @param array $p_custom_fields  The array of custom field values as described in the webservice complex types.
+ * @param bool $p_log_insert create history logs for new values
  * @return mixed
  */
 function mci_issue_set_custom_fields( $p_issue_id, &$p_custom_fields, $p_log_insert ) {
@@ -254,7 +254,7 @@ function mci_issue_set_custom_fields( $p_issue_id, &$p_custom_fields, $p_log_ins
 /**
  * Get the custom field values associated with the specified issue id.
  *
- * @param $p_issue_id   Issue id to get the custom field values for.
+ * @param int $p_issue_id Issue id to get the custom field values for.
  *
  * @return null if no custom field defined for the project that contains the issue, or if no custom
  *              fields are accessible to the current user.
@@ -299,7 +299,7 @@ function mci_issue_get_custom_fields( $p_issue_id ) {
 /**
  * Get the attachments of an issue.
  *
- * @param integer $p_issue_id  The id of the issue to retrieve the attachments for
+ * @param int $p_issue_id The id of the issue to retrieve the attachments for
  * @return array that represents an AttachmentData structure
  */
 function mci_issue_get_attachments( $p_issue_id ) {
@@ -379,7 +379,7 @@ function mci_issue_get_notes( $p_issue_id ) {
 	$t_user_id = auth_get_current_user_id();
 	$t_lang = mci_get_user_lang( $t_user_id );
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
-	$t_user_bugnote_order = 'ASC'; // always get the notes in ascending order for consistency to the calling application.
+	$t_user_bugnote_order = 'ASC'; # always get the notes in ascending order for consistency to the calling application.
 	$t_has_time_tracking_access = access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $p_issue_id );
 
 	$t_result = array();
@@ -469,7 +469,7 @@ function mci_issue_set_monitors( $p_issue_id , $p_requesting_user_id, $p_monitor
  * @param string $p_username  The name of the user trying to retrieve the information
  * @param string $p_password  The password of the user.
  * @param int    $p_project_id	-1 default project, 0 for all projects, otherwise project id.
- * @return integer  The biggest used issue id.
+ * @return int  The biggest used issue id.
  */
 function mc_issue_get_biggest_id( $p_username, $p_password, $p_project_id ) {
 	global $g_project_override;
@@ -552,7 +552,7 @@ function mc_issue_get_biggest_id( $p_username, $p_password, $p_project_id ) {
  * @param string $p_username  The name of the user trying to delete the issue.
  * @param string $p_password  The password of the user.
  * @param string $p_summary  The summary of the issue to retrieve.
- * @return integer  The id of the issue with the given summary, 0 if there is no such issue.
+ * @return int  The id of the issue with the given summary, 0 if there is no such issue.
  */
 function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 	global $g_project_override;
@@ -584,7 +584,7 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 			}
 		}
 
-		// no issue found that belongs to a project that the user has read access to.
+		# no issue found that belongs to a project that the user has read access to.
 		return 0;
 	}
 }
@@ -595,7 +595,7 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
  * @param string $p_username  The name of the user trying to add the issue.
  * @param string $p_password  The password of the user.
  * @param array $p_issue  A IssueData structure containing information about the new issue.
- * @return integer  The id of the created issue.
+ * @return int  The id of the created issue.
  */
 function mc_issue_add( $p_username, $p_password, $p_issue ) {
 
@@ -610,7 +610,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 	$t_project = $p_issue['project'];
 
 	$t_project_id = mci_get_project_id( $t_project );
-	$g_project_override = $t_project_id; // ensure that helper_get_current_project() calls resolve to this project id
+	$g_project_override = $t_project_id; # ensure that helper_get_current_project() calls resolve to this project id
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
@@ -806,7 +806,7 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
  * @param string $p_password The password of the user.
  * @param int $p_issue_id The issue id of the existing issue being updated
  * @param array $p_issue A IssueData structure containing information about the new issue.
- * @return integer The id of the created issue.
+ * @return int The id of the created issue.
  */
 function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	global $g_project_override;
@@ -830,7 +830,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
-	$g_project_override = $t_project_id; // ensure that helper_get_current_project() calls resolve to this project id
+	$g_project_override = $t_project_id; # ensure that helper_get_current_project() calls resolve to this project id
 
 	$p_issue = SoapObjectsFactory::unwrapObject( $p_issue );
 
@@ -888,7 +888,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 		return SoapObjectsFactory::newSoapFault( 'Client', "Mandatory field 'description' is missing." );
 	}
 
-	// fields which we expect to always be set
+	# fields which we expect to always be set
 	$t_bug_data = bug_get( $p_issue_id, true );
 	$t_bug_data->project_id = $t_project_id;
 	$t_bug_data->reporter_id = $t_reporter_id;
@@ -897,7 +897,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	$t_bug_data->summary = $t_summary;
 	$t_bug_data->description = $t_description;
 
-	// fields which might not be set
+	# fields which might not be set
 	if ( isset ( $p_issue['steps_to_reproduce'] ) )
 		$t_bug_data->steps_to_reproduce = $p_issue['steps_to_reproduce'];
 	if ( isset ( $p_issue['additional_information'] ) )
@@ -1020,7 +1020,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 
 	# submit the issue
 	log_event(LOG_WEBSERVICE, "updating issue '$p_issue_id'");
-	return $t_bug_data->update( /* update_extended */ true, /* bypass_email */ true );
+	return $t_bug_data->update( true, true );
 
 }
 
@@ -1065,8 +1065,8 @@ function mc_issue_set_tags ( $p_username, $p_password, $p_issue_id, $p_tags ) {
  *
  * @param string $p_username  The name of the user trying to delete the issue.
  * @param string $p_password  The password of the user.
- * @param integer $p_issue_id  The id of the issue to delete.
- * @return boolean  True if the issue has been deleted successfully, false otherwise.
+ * @param int $p_issue_id  The id of the issue to delete.
+ * @return bool True if the issue has been deleted successfully, false otherwise.
  */
 function mc_issue_delete( $p_username, $p_password, $p_issue_id ) {
 	global $g_project_override;
@@ -1100,9 +1100,9 @@ function mc_issue_delete( $p_username, $p_password, $p_issue_id ) {
  *
  * @param string $p_username  The name of the user trying to add a note to an issue.
  * @param string $p_password  The password of the user.
- * @param integer $p_issue_id  The id of the issue to add the note to.
+ * @param int $p_issue_id  The id of the issue to add the note to.
  * @param IssueNoteData $p_note  The note to add.
- * @return integer The id of the added note.
+ * @return int The id of the added note.
  */
 function mc_issue_note_add( $p_username, $p_password, $p_issue_id, $p_note ) {
 	global $g_project_override;
@@ -1163,8 +1163,8 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, $p_note ) {
  *
  * @param string $p_username  The name of the user trying to add a note to an issue.
  * @param string $p_password  The password of the user.
- * @param integer $p_issue_note_id  The id of the note to be deleted.
- * @return true: success, false: failure
+ * @param int $p_issue_note_id  The id of the note to be deleted.
+ * @return bool true: success, false: failure
  */
 function mc_issue_note_delete( $p_username, $p_password, $p_issue_note_id ) {
 	global $g_project_override;
@@ -1191,7 +1191,7 @@ function mc_issue_note_delete( $p_username, $p_password, $p_issue_note_id ) {
 
 	$t_reporter_id = bugnote_get_field( $p_issue_note_id, 'reporter_id' );
 
-	// mirrors check from bugnote_delete.php
+	# mirrors check from bugnote_delete.php
 	if ( $t_user_id == $t_reporter_id ) {
 		$t_threshold_config_name =  'bugnote_user_delete_threshold';
 	} else {
@@ -1290,9 +1290,9 @@ function mc_issue_note_update( $p_username, $p_password, $p_note ) {
  *
  * @param string $p_username  The name of the user trying to add a note to an issue.
  * @param string $p_password  The password of the user.
- * @param integer $p_issue_id  The id of the issue of the source issue.
+ * @param int $p_issue_id  The id of the issue of the source issue.
  * @param RelationshipData $p_relationship  The relationship to add.
- * @return integer The id of the added relationship.
+ * @return int The id of the added relationship.
  */
 function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, $p_relationship ) {
 	global $g_project_override;
@@ -1344,8 +1344,8 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, $p_re
 		log_event(LOG_WEBSERVICE, "adding relationship type '${t_rel_type['id']}' between '$p_issue_id' and '$t_dest_issue_id'");
 		relationship_add( $p_issue_id, $t_dest_issue_id, $t_rel_type['id'] );
 
-		// The above function call into MantisBT does not seem to return a valid BugRelationshipData object.
-		// So we call db_insert_id in order to find the id of the created relationship.
+		# The above function call into MantisBT does not seem to return a valid BugRelationshipData object.
+		# So we call db_insert_id in order to find the id of the created relationship.
 		$t_relationship_id = db_insert_id( db_get_table( 'bug_relationship' ) );
 
 		# Add log line to the history (both bugs)
@@ -1371,9 +1371,9 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, $p_re
  *
  * @param string $p_username  The name of the user trying to add a note to an issue.
  * @param string $p_password  The password of the user.
- * @param integer $p_issue_id  The id of the source issue for the relationship
- * @param integer $p_relationship_id  The id of relationship to delete.
- * @return true: success, false: failure
+ * @param int $p_issue_id  The id of the source issue for the relationship
+ * @param int $p_relationship_id  The id of relationship to delete.
+ * @return bool true: success, false: failure
  */
 function mc_issue_relationship_delete( $p_username, $p_password, $p_issue_id, $p_relationship_id ) {
 	global $g_project_override;

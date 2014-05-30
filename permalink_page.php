@@ -59,10 +59,7 @@ echo "<a href=\"$t_safe_url\">$t_safe_url</a></p>";
 $t_create_short_url = config_get( 'create_short_url' );
 
 if ( !is_blank( $t_create_short_url ) ) {
-	print_bracket_link(
-		sprintf( $t_create_short_url, $f_url ),
-		lang_get( 'create_short_link' ),
-		/* new window = */ true );
+	print_bracket_link( sprintf( $t_create_short_url, $f_url ), lang_get( 'create_short_link' ), true );
 }
 ?>
 </div>

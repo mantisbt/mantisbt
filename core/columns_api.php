@@ -82,7 +82,7 @@ function columns_filter_disabled( $p_columns ) {
 				if( ! $t_enable_profiles ) {
 					continue 2;
 				}
-				/* don't filter */
+				# don't filter
 				break;
 
 			case 'eta':
@@ -104,11 +104,11 @@ function columns_filter_disabled( $p_columns ) {
 				break;
 
 			default:
-				/* don't filter */
+				# don't filter
 				break;
 		}
 		$t_columns[] = $t_column;
-	} /* continued 2 */
+	} # continued 2
 
 	return $t_columns;
 }

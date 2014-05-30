@@ -32,7 +32,7 @@ auth_reauthenticate( );
 $f_file = gpc_get_file( 'file', -1 );
 $f_strategy = gpc_get_string( 'strategy' );
 $f_fallback = gpc_get_string( 'fallback' );
-$f_project = gpc_get_int( 'project_id' ); // not used, but ensures a project is selected
+$f_project = gpc_get_int( 'project_id' ); # not used, but ensures a project is selected
 $f_keepcategory = gpc_get_bool( 'keepcategory' );
 $f_defaultcategory = gpc_get_int( 'defaultcategory' );
 

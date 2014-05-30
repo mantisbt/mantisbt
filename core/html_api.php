@@ -201,7 +201,7 @@ function html_page_top1( $p_page_title = null ) {
 		echo "\t", '<link rel="shortcut icon" href="', helper_mantis_url( $t_favicon_image ), '" type="image/x-icon" />', "\n";
 	}
 
-	// Advertise the availability of the browser search plug-ins.
+	# Advertise the availability of the browser search plug-ins.
 	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Text Search" href="' . string_sanitize_url( 'browser_search_plugin.php?type=text', true) . '" />' . "\n";
 	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Issue Id" href="' . string_sanitize_url( 'browser_search_plugin.php?type=id', true) . '" />' . "\n";
 
@@ -387,9 +387,9 @@ function html_css_link( $p_filename ) {
  * If we have handled any errors on this page return false and don't redirect.
  *
  * @param string $p_url The page to redirect: has to be a relative path
- * @param integer $p_time seconds to wait for before redirecting
- * @param boolean $p_sanitize apply string_sanitize_url to passed url
- * @return boolean
+ * @param int $p_time seconds to wait for before redirecting
+ * @param bool $p_sanitize apply string_sanitize_url to passed url
+ * @return bool
  */
 function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
 	if( ON == config_get_global( 'stop_on_errors' ) && error_handled() ) {
@@ -1006,7 +1006,7 @@ function print_summary_submenu() {
 
 	echo '<div id="summary-submenu">';
 	echo '<ul class="menu">';
-	// Plugins menu items - these are cooked links
+	# Plugins menu items - these are cooked links
 	foreach ( $t_menu_options as $t_menu_item ) {
 		echo '<li>', $t_menu_item, '</li>';
 	}
@@ -1078,7 +1078,7 @@ function print_manage_menu( $p_page = '' ) {
 		}
 	}
 
-	// Plugins menu items - these are cooked links
+	# Plugins menu items - these are cooked links
 	foreach( $t_menu_options as $t_menu_item ) {
 		echo '<li>', $t_menu_item, '</li>';
 	}
@@ -1210,7 +1210,7 @@ function print_account_menu( $p_page = '' ) {
 		}
 	}
 
-	// Plugins menu items - these are cooked links
+	# Plugins menu items - these are cooked links
 	foreach ( $t_menu_options as $t_menu_item ) {
 		echo '<li>', $t_menu_item, '</li>';
 	}
@@ -1288,7 +1288,7 @@ function print_summary_menu( $p_page = '' ) {
 		}
 	}
 
-	// Plugins menu items - these are cooked links
+	# Plugins menu items - these are cooked links
 	foreach ( $t_menu_options as $t_menu_item ) {
 		echo '<li>', $t_menu_item, '</li>';
 	}
