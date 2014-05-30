@@ -83,6 +83,20 @@ function plugin_pop_current() {
 }
 
 /**
+ * Returns the list of force-installed plugins
+ * @see $g_plugins_force_installed
+ * @return array List of plugins (basename => priority)
+ */
+function plugin_get_force_installed() {
+	$t_forced_plugins = config_get_global( 'plugins_force_installed' );
+
+	# MantisCore pseudo-plugin is force-installed by definition, with priority 3
+	$t_forced_plugins['MantisCore'] = 3;
+
+	return $t_forced_plugins;
+}
+
+/**
  * Returns an object representing the specified plugin
  * Triggers an error if the plugin is not registered
  * @param string|null $p_basename Plugin base name (defaults to current plugin)
