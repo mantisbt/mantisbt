@@ -595,11 +595,6 @@ function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) 
 function plugin_protected( $p_base_name ) {
 	global $g_plugin_cache_protected;
 
-	# Pseudo-plugin MantisCore is protected
-	if( $p_base_name == 'MantisCore' ) {
-		return true;
-	}
-
 	return $g_plugin_cache_protected[$p_base_name];
 }
 
@@ -611,11 +606,6 @@ function plugin_protected( $p_base_name ) {
 function plugin_priority( $p_base_name ) {
 	global $g_plugin_cache_priority;
 
-	# For pseudo-plugin MantisCore, return priority as 3.
-	if( $p_base_name == 'MantisCore' ) {
-		return 3;
-	}
-
 	return $g_plugin_cache_priority[$p_base_name];
 }
 
@@ -625,20 +615,13 @@ function plugin_priority( $p_base_name ) {
  * @return bool True if plugin is installed
  */
 function plugin_is_installed( $p_basename ) {
-	# Pseudo-plugin MantisCore is always installed
-	if( $p_basename == 'MantisCore' ) {
-		return true;
-	}
-
-	$t_plugin_table = db_get_table( 'plugin' );
-
-	$t_forced_plugins = config_get_global( 'plugins_force_installed' );
-	foreach( $t_forced_plugins as $t_basename => $t_priority ) {
+	foreach( plugin_get_force_installed() as $t_basename => $t_priority ) {
 		if ( $t_basename == $p_basename ) {
 			return true;
 		}
 	}
 
+	$t_plugin_table = db_get_table( 'plugin' );
 	$t_query = "SELECT COUNT(*) FROM $t_plugin_table WHERE basename=" . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_basename ) );
 	return( 0 < db_result( $t_result ) );
@@ -927,8 +910,7 @@ function plugin_register_installed() {
 	global $g_plugin_cache_priority, $g_plugin_cache_protected;
 
 	# register plugins specified in the site configuration
-	$t_forced_plugins = config_get_global( 'plugins_force_installed' );
-	foreach( $t_forced_plugins as $t_basename => $t_priority ) {
+	foreach( plugin_get_force_installed() as $t_basename => $t_priority ) {
 		plugin_register( $t_basename );
 		$g_plugin_cache_priority[$t_basename] = $t_priority;
 		$g_plugin_cache_protected[$t_basename] = true;
@@ -966,7 +948,7 @@ function plugin_init_installed() {
 	$g_plugin_cache_priority = array();
 	$g_plugin_cache_protected = array();
 
-	plugin_register( 'MantisCore' );
+#	plugin_register( 'MantisCore' );
 	plugin_register_installed();
 
 	$t_plugins = array_keys( $g_plugin_cache );
