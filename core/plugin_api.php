@@ -905,6 +905,7 @@ function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
 
 /**
  * Find and register all installed plugins.
+ * This includes the MantisCore pseudo-plugin.
  */
 function plugin_register_installed() {
 	global $g_plugin_cache_priority, $g_plugin_cache_protected;
