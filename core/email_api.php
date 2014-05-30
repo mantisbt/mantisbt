@@ -132,7 +132,7 @@ function email_is_valid( $p_email ) {
 		if( !empty( $t_limit_email_domains ) ) {
 			foreach( $t_limit_email_domains as $t_email_domain ) {
 				if( 0 == strcasecmp( $t_email_domain, $t_domain ) ) {
-					return true; // no need to check mx record details (below) if we've explicity allowed the domain
+					return true; # no need to check mx record details (below) if we've explicity allowed the domain
 				}
 			}
 				return false;
@@ -848,7 +848,7 @@ function email_send( $p_email_data ) {
 		case PHPMAILER_METHOD_SMTP:
 			$mail->IsSMTP();
 
-			// SMTP collection is always kept alive
+			# SMTP collection is always kept alive
 			$mail->SMTPKeepAlive = true;
 
 			if ( !is_blank( config_get( 'smtp_username' ) ) ) {
@@ -878,7 +878,7 @@ function email_send( $p_email_data ) {
 	$mail->AddCustomHeader('Auto-Submitted:auto-generated');
 	$mail->AddCustomHeader('X-Auto-Response-Suppress: All');
 
-	// Setup new line and encoding to avoid extra new lines with some smtp gateways like sendgrid.net
+	# Setup new line and encoding to avoid extra new lines with some smtp gateways like sendgrid.net
 	$mail->LE         = "\r\n";
 	$mail->Encoding   = "quoted-printable";
 
@@ -907,11 +907,11 @@ function email_send( $p_email_data ) {
 		foreach( $t_email_data->metadata['headers'] as $t_key => $t_value ) {
 			switch( $t_key ) {
 				case 'Message-ID':
-					/* Note: hostname can never be blank here as we set metadata['hostname']
-					   in email_store() where mail gets queued. */
-						if ( !strchr( $t_value, '@' ) && !is_blank( $mail->Hostname ) ) {
-							$t_value = $t_value . '@' . $mail->Hostname;
-						}
+					# Note: hostname can never be blank here as we set metadata['hostname']
+					# in email_store() where mail gets queued.
+					if ( !strchr( $t_value, '@' ) && !is_blank( $mail->Hostname ) ) {
+						$t_value = $t_value . '@' . $mail->Hostname;
+					}
 					$mail->set( 'MessageID', "<$t_value>" );
 					break;
 				case 'In-Reply-To':

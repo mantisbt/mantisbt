@@ -167,7 +167,7 @@ function multi_sort( $p_array, $p_key, $p_direction = ASCENDING ) {
 		trigger_error(ERROR_GENERIC, ERROR);
 	}
 
-	// Security measure: see http://www.mantisbt.org/bugs/view.php?id=9704 for details
+	# Security measure: see http://www.mantisbt.org/bugs/view.php?id=9704 for details
 	if( array_key_exists( $p_key, current($p_array) ) ) {
 		$t_function = create_function( '$a, $b', "return $t_factor * strnatcasecmp( \$a['" . $p_key . "'], \$b['" . $p_key . "'] );" );
 		uasort( $p_array, $t_function );
@@ -224,7 +224,7 @@ function is_windows_server() {
  * @param string $p_type property type - public/private/protected/static
  * @param bool $p_return_object whether to return array of property objects
  * @param bool $p_include_parent whether to include properties of parent classes
- * @return bool
+ * @return array
  * @access public
  */
 function getClassProperties($p_classname, $p_type='public', $p_return_object = false, $p_include_parent = false ) {
@@ -244,7 +244,7 @@ function getClassProperties($p_classname, $p_type='public', $p_return_object = f
 	}
 	if ( $p_include_parent ) {
 		if($t_parentclass = $t_ref->getParentClass()){
-			$t_parent_props_arr = getClassProperties($t_parentclass->getName());//RECURSION
+			$t_parent_props_arr = getClassProperties($t_parentclass->getName());
 			if(count($t_parent_props_arr) > 0)
 				$t_props_arr = array_merge($t_parent_props_arr, $t_props_arr);
 		}

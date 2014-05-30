@@ -23,9 +23,7 @@
  * @link http://www.mantisbt.org
  */
 
-/*
- * Start output buffering
- */
+# Start output buffering
 ob_start();
 
 /**

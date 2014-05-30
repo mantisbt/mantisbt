@@ -342,7 +342,7 @@ $t_user_count = count( $t_users );
 
 	<div class="pager-links">
 		<?php
-		/* @todo hack - pass in the hide inactive filter via cheating the actual filter value */
+		# @todo hack - pass in the hide inactive filter via cheating the actual filter value
 		print_page_links( 'manage_user_page.php', 1, $t_page_count, (int)$f_page_number, $c_filter . $t_hide_inactive_filter . $t_show_disabled_filter . "&amp;sort=$c_sort&amp;dir=$c_dir");
 		?>
 	</div>

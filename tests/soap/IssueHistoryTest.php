@@ -51,7 +51,7 @@ class IssueHistoryTest extends SoapBase {
 		$issueHistory = $this->getIssueHistory( $issueId );
 
 		$this->assertEquals(1, count($issueHistory) );
-		// validate the format of the initial history entry
+		# validate the format of the initial history entry
 		$historyData = $issueHistory[0];
 
 		$this->assertNotEmpty($historyData->date);
@@ -106,7 +106,7 @@ class IssueHistoryTest extends SoapBase {
 
 		$this->assertEquals(2, count($issueHistory) );
 
-		// validate the format of the history entry following the update
+		# validate the format of the history entry following the update
 		$this->assertPropertyHistoryEntry(
 			$issueHistory[1],
 			'summary',
@@ -123,8 +123,8 @@ class IssueHistoryTest extends SoapBase {
 	function testCreatedIssueWithNonDefaultStatusAndResolutionHasHistoryEntries() {
 
 		$issueToAdd = $this->getIssueToAdd( 'IssueHistoryTest.testCreatedIssueWithNonDefaultStatusAndResolutionHasHistoryEntries' );
-		$issueToAdd['status'] = array( 'id' => CONFIRMED ); // confirmed
-		$issueToAdd['resolution'] = array ( 'id' => REOPENED ); // reopened
+		$issueToAdd['status'] = array( 'id' => CONFIRMED ); # confirmed
+		$issueToAdd['resolution'] = array ( 'id' => REOPENED ); # reopened
 
 		$issueId = $this->client->mc_issue_add(
 				$this->userName,

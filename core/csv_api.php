@@ -151,6 +151,7 @@ function csv_format_handler_id( $p_bug ) {
 	if( $p_bug->handler_id > 0 ) {
 		return csv_escape_string( user_get_name( $p_bug->handler_id ) );
 	}
+	return '';
 }
 
 /**

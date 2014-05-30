@@ -243,8 +243,8 @@ if ( !isset( $g_login_anonymous ) ) {
 # used here so we just skip this action on RHEL/CentOS platforms.
 if ( function_exists( 'timezone_identifiers_list' ) ) {
 	if ( in_array ( config_get_global( 'default_timezone' ), timezone_identifiers_list() ) ) {
-		// if a default timezone is set in config, set it here, else we use php.ini's value
-		// having a timezone set avoids a php warning
+		# if a default timezone is set in config, set it here, else we use php.ini's value
+		# having a timezone set avoids a php warning
 		date_default_timezone_set( config_get_global( 'default_timezone' ) );
 	} else {
 		# To ensure proper detection of timezone settings issues, we must not

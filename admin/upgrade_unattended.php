@@ -39,20 +39,20 @@ $g_error_send_page_header = false; # suppress page headers in the error handler
 
 $g_failed = false;
 
-/* This script is probably meant to be executed from PHP CLI and hence should
- * not be interpreted as text/html. However saying that, we do call gpc_
- * functions that only make sense in PHP CGI mode. Given this mismatch we'll
- * just assume for now that this script is meant to be used from PHP CGI and
- * the output is meant to be text/plain. We also need to prevent Internet
- * Explorer from ignoring our MIME type and using it's own MIME sniffing.
- */
+
+# This script is probably meant to be executed from PHP CLI and hence should
+# not be interpreted as text/html. However saying that, we do call gpc_
+# functions that only make sense in PHP CGI mode. Given this mismatch we'll
+# just assume for now that this script is meant to be used from PHP CGI and
+# the output is meant to be text/plain. We also need to prevent Internet
+# Explorer from ignoring our MIME type and using it's own MIME sniffing.
 header( 'Content-Type: text/plain' );
 header( 'X-Content-Type-Options: nosniff' );
 
 /**
  * Print the result of an upgrade step.
  *
- * @param integer $p_result       GOOD or BAD.
+ * @param int $p_result       GOOD or BAD.
  * @param bool    $p_hard_fail  If result is BAD, sets the global failure flag.
  * @param string  $p_message    The message describing the upgrade step.
  * @access private
@@ -158,7 +158,7 @@ while(( $i <= $lastid ) && !$g_failed ) {
 		$t_sql = false;
 		$t_target = $upgrade[$i][1];
 	} else {
-		/* 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade. */
+		# 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade.
 		if ( isset( $upgrade[$i][2] ) ) {
 			if ( call_user_func_array( $upgrade[$i][2][0], $upgrade[$i][2][1] ) ) {
 				$sqlarray = call_user_func_array( Array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
@@ -201,5 +201,3 @@ if( false == $g_failed ) {
 
 echo "Failed.\n";
 exit( 1 );
-
-# vim: noexpandtab tabstop=4 softtabstop=0:

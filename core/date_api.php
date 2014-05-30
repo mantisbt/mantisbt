@@ -77,7 +77,7 @@ function date_set_timezone( $p_timezone ) {
 	array_push( $g_cache_timezone, date_default_timezone_get() );
 
 	if( !date_default_timezone_set( $p_timezone ) ) {
-		// unable to set timezone
+		# unable to set timezone
 		trigger_error( ERROR_UPDATING_TIMEZONE, WARNING );
 	}
 }
@@ -97,7 +97,7 @@ function date_restore_timezone( ) {
 	}
 
 	if( !date_default_timezone_set( $t_timezone ) ) {
-		// unable to set timezone
+		# unable to set timezone
 		trigger_error( ERROR_UPDATING_TIMEZONE, WARNING );
 	}
 }

@@ -64,14 +64,14 @@ class MantisEnumTest extends PHPUnit_Framework_TestCase {
 	 * Tests getLocalizedLabel() method.
 	 */
 	public function testGetLocalizedLabel() {
-		// Test existing case
+		# Test existing case
 		$this->assertEquals( 'viewer_x', MantisEnum::getLocalizedLabel( MantisEnumTest::ACCESS_LEVELS_ENUM, MantisEnumTest::ACCESS_LEVELS_LOCALIZED_ENUM, 10 ) );
 
-		// Test unknown case
+		# Test unknown case
 		$this->assertEquals( '@5@', MantisEnum::getLocalizedLabel( MantisEnumTest::ACCESS_LEVELS_ENUM, MantisEnumTest::ACCESS_LEVELS_LOCALIZED_ENUM, 5 ) );
 
-		// Test the case where the value is in the localized enum but not the standard one.  In this case it should be treated
-		// as unknown.
+		# Test the case where the value is in the localized enum but not the standard one.  In this case it should be treated
+		# as unknown.
 		$this->assertEquals( '@95@', MantisEnum::getLocalizedLabel( MantisEnumTest::ACCESS_LEVELS_ENUM, MantisEnumTest::ACCESS_LEVELS_LOCALIZED_ENUM, 95 ) );
 	}
 
@@ -114,8 +114,8 @@ class MantisEnumTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( 10, MantisEnum::getValue( MantisEnumTest::DUPLICATE_VALUES_ENUM, 'viewer1' ) );
 		$this->assertEquals( 20, MantisEnum::getValue( MantisEnumTest::NAME_WITH_SPACES_ENUM, 'second label' ) );
 
-		// This is not inconsisent with duplicate values behavior, however, it is considered correct since it simplies the code
-		// and it is not a real scenario.
+		# This is not inconsisent with duplicate values behavior, however, it is considered correct since it simplies the code
+		# and it is not a real scenario.
 		$this->assertEquals( 20, MantisEnum::getValue( MantisEnumTest::DUPLICATE_LABELS_ENUM, 'viewer' ) );
 	}
 

@@ -82,7 +82,7 @@ $g_cache_cookie_valid = null;
 
 /**
  *
- * @global array $g_cache_current_user_id
+ * @global int $g_cache_current_user_id
  */
 $g_cache_current_user_id = null;
 
@@ -119,7 +119,7 @@ function auth_ensure_user_authenticated( $p_return_page = '' ) {
 /**
  * Return true if there is a currently logged in and authenticated user, false otherwise
  *
- * @param boolean auto-login anonymous user
+ * @param bool auto-login anonymous user
  * @return bool
  * @access public
  */
@@ -136,7 +136,7 @@ function auth_is_user_authenticated() {
  * prepare/override the username provided from logon form (if necessary)
  * @todo when we rewrite authentication api for plugins, this should be merged with prepare_password and return some object
  * @param string $p_username
- * @return string prepared username
+ * @return string|null prepared username
  * @access public
  */
 function auth_prepare_username( $p_username ) {
@@ -153,8 +153,8 @@ function auth_prepare_username( $p_username ) {
 				auth_http_set_logout_pending( false );
 				auth_http_prompt();
 
-				/* calls exit */
-				return;
+				# calls exit
+				return null;
 			}
 			break;
 		default:
@@ -179,7 +179,7 @@ function auth_prepare_password( $p_password ) {
 		case HTTP_AUTH:
 			if( !auth_http_is_logout_pending() ) {
 
-				/* this will never get hit - see auth_prepare_username */
+				# this will never get hit - see auth_prepare_username
 				if( isset( $_SERVER['PHP_AUTH_PW'] ) ) {
 					$f_password = $_SERVER['PHP_AUTH_PW'];
 				}
@@ -187,8 +187,8 @@ function auth_prepare_password( $p_password ) {
 				auth_http_set_logout_pending( false );
 				auth_http_prompt();
 
-				/* calls exit */
-				return;
+				# calls exit
+				return null;
 			}
 			break;
 		default:
@@ -620,7 +620,7 @@ function auth_is_cookie_string_unique( $p_cookie_string ) {
  * if no user is logged in and anonymous login is enabled, returns cookie for anonymous user
  * otherwise returns '' (an empty string)
  *
- * @param boolean $p_login_anonymous auto-login anonymous user
+ * @param bool $p_login_anonymous auto-login anonymous user
  * @return string current user login cookie string
  * @access public
  */
@@ -664,7 +664,7 @@ function auth_get_current_user_cookie( $p_login_anonymous=true ) {
 
 /**
  * Set authentication tokens for secure session.
- * @param integer $p_user_id User ID
+ * @param int $p_user_id User ID
  * @access public
  */
 function auth_set_tokens( $p_user_id ) {
@@ -711,7 +711,7 @@ function auth_reauthenticate() {
 
 /**
  * Generate the intermediate authentication page.
- * @param integer $p_user_id User ID
+ * @param int $p_user_id User ID
  * @param string $p_username Username
  * @return bool
  * @access public

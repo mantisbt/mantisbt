@@ -257,10 +257,10 @@ if ( $f_master_bug_id > 0 ) {
 				$t_parent_bugnote->note_type,
 				$t_parent_bugnote->note_attr,
 				$t_parent_bugnote->reporter_id,
-				/* send_email */ FALSE,
-				/* date submitted */ 0,
-				/* date modified */ 0,
-				/* log history */ FALSE
+				FALSE,
+				0,
+				0,
+				FALSE
 			);
 		}
 	}
@@ -278,7 +278,7 @@ event_signal( 'EVENT_REPORT_BUG', array( $t_bug_data, $t_bug_id ) );
 
 email_generic( $t_bug_id, 'new', 'email_notification_title_for_action_bug_submitted' );
 
-// log status and resolution changes if they differ from the default
+# log status and resolution changes if they differ from the default
 if ( $t_bug_data->status != config_get('bug_submit_status') )
 	history_log_event($t_bug_id, 'status', config_get('bug_submit_status') );
 

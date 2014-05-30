@@ -95,7 +95,7 @@ if ( 0 < $f_tag_select && tag_exists( $f_tag_select ) ) {
 	$t_tags_attach[] = tag_get( $f_tag_select );
 }
 
-// failed to attach at least one tag
+# failed to attach at least one tag
 if ( count( $t_tags_failed ) > 0 ) {
 	html_page_top( lang_get( 'tag_attach_long' ) . ' ' . bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 ?>
@@ -141,7 +141,7 @@ if ( count( $t_tags_failed ) > 0 ) {
 </table>
 <?php
 	html_page_bottom();
-	// end failed to attach tag
+	# end failed to attach tag
 } else {
 	foreach( $t_tags_create as $t_tag_row ) {
 		$t_tag_row['id'] = tag_create( $t_tag_row['name'], $t_user_id );

@@ -175,7 +175,7 @@ print_manage_menu();
 </div>
 
 <?php
-// User action buttons: RESET/UNLOCK and DELETE
+# User action buttons: RESET/UNLOCK and DELETE
 
 $t_reset = $t_user['id'] != auth_get_current_user_id()
 	&& helper_call_custom_function( 'auth_can_change_password', array() );

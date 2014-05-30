@@ -185,7 +185,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 				<?php echo form_security_field( 'manage_proj_subproj_add' ) ?>
 				<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 				<select name="subproject_id"><?php
-				$t_all_subprojects = project_hierarchy_get_subprojects( $f_project_id, /* $p_show_disabled */ true );
+				$t_all_subprojects = project_hierarchy_get_subprojects( $f_project_id, true );
 				$t_all_subprojects[] = $f_project_id;
 				$t_manage_access = config_get( 'manage_project_threshold' );
 				$t_projects = project_get_all_rows();
@@ -204,7 +204,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 		</form>
 	<?php
 
-	$t_subproject_ids = current_user_get_accessible_subprojects( $f_project_id, /* show_disabled */ true );
+	$t_subproject_ids = current_user_get_accessible_subprojects( $f_project_id, true );
 	if ( array() != $t_subproject_ids ) { ?>
 	<form id="manage-project-update-subprojects-form" action="manage_proj_update_children.php" method="post">
 		<fieldset>
@@ -314,7 +314,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 			$t_inherited = ( $t_category['project_id'] != $f_project_id );
 ?>
 			<tr>
-				<td><?php echo string_display( category_full_name( $t_id, /* showProject */ $t_inherited, $f_project_id ) )  ?></td>
+				<td><?php echo string_display( category_full_name( $t_id, $t_inherited, $f_project_id ) )  ?></td>
 				<td><?php echo prepare_user_name( $t_category['user_id'] ) ?></td>
 				<td class="center">
 					<?php if ( !$t_inherited ) {
@@ -359,7 +359,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 		</fieldset>
 	</form><?php
 
-	$t_versions = version_get_all_rows( $f_project_id, /* released = */ null, /* obsolete = */ null );
+	$t_versions = version_get_all_rows( $f_project_id, null, null );
 	if ( count( $t_versions ) > 0 ) { ?>
 	<table id="versions">
 		<thead>
@@ -375,7 +375,7 @@ if ( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <?php
 		foreach ( $t_versions as $t_version ) {
 			$t_inherited = ( $t_version['project_id'] != $f_project_id ?  true : false );
-			$t_name = version_full_name( $t_version['id'], /* showProject */ $t_inherited, $f_project_id );
+			$t_name = version_full_name( $t_version['id'], $t_inherited, $f_project_id );
 			$t_released = $t_version['released'];
 			$t_obsolete = $t_version['obsolete'];
 			if( !date_is_null( $t_version['date_order'] ) ) {

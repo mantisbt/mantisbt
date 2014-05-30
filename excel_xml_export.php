@@ -109,9 +109,9 @@ do {
 		} #in_array
 	} #for loop
 
-	// Get the next page if we are not processing the last one
-	// @@@ Note that since we are not using a transaction, there is a risk that we get a duplicate record or we miss
-	// one due to a submit or update that happens in parallel.
+	# Get the next page if we are not processing the last one
+	# @@@ Note that since we are not using a transaction, there is a risk that we get a duplicate record or we miss
+	# one due to a submit or update that happens in parallel.
 	$t_more = ( $t_page_number < $t_page_count );
 	if ( $t_more ) {
 		$t_page_number++;

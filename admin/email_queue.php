@@ -45,7 +45,7 @@ if ( $f_to !== null ) {
 	} else {
 		$t_email_data = email_queue_get( (int) $f_to );
 
-		// check if email was found.  This can fail if another request picks up the email first and sends it.
+		# check if email was found.  This can fail if another request picks up the email first and sends it.
 		echo 'Sending email...<br />';
 		if( $t_email_data !== false ) {
 			if( !email_send( $t_email_data ) ) {

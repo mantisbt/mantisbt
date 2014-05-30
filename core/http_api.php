@@ -31,7 +31,7 @@ require_api( 'config_api.php' );
 
 /**
  * Checks to see if script was queried through the HTTPS protocol
- * @return boolean True if protocol is HTTPS
+ * @return bool True if protocol is HTTPS
  */
 function http_is_protocol_https() {
 	return !empty( $_SERVER['HTTPS'] ) && ( utf8_strtolower( $_SERVER['HTTPS'] ) != 'off' );
@@ -40,7 +40,7 @@ function http_is_protocol_https() {
 /**
  * Check to see if the client is using Microsoft Internet Explorer so we can
  * enable quirks and hacky non-standards-compliant workarounds.
- * @return boolean True if Internet Explorer is detected as the user agent
+ * @return bool True if Internet Explorer is detected as the user agent
  */
 function is_browser_internet_explorer() {
 	$t_user_agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : 'none';
@@ -55,7 +55,7 @@ function is_browser_internet_explorer() {
 /**
  * Checks to see if the client is using Google Chrome so we can enable quirks
  * and hacky non-standards-compliant workarounds.
- * @return boolean True if Chrome is detected as the user agent
+ * @return bool True if Chrome is detected as the user agent
  */
 function is_browser_chrome() {
 	$t_user_agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : 'none';
@@ -74,7 +74,7 @@ function is_browser_chrome() {
  * some hacky workarounds to get them to work 'nicely' with attachments and
  * inline files. See http://greenbytes.de/tech/tc2231/ for full reasoning.
  * @param string $p_filename Filename
- * @param boolean $p_inline Display file inline (optional, default = treat as attachment)
+ * @param bool $p_inline Display file inline (optional, default = treat as attachment)
  */
 function http_content_disposition_header( $p_filename, $p_inline = false ) {
 	if ( !headers_sent() ) {
@@ -84,15 +84,15 @@ function http_content_disposition_header( $p_filename, $p_inline = false ) {
 			$t_disposition = 'attachment;';
 		}
 		if ( is_browser_internet_explorer() || is_browser_chrome() ) {
-			// Internet Explorer does not support RFC2231 however it does
-			// incorrectly decode URL encoded filenames and we can use this to
-			// get UTF8 filenames to work with the file download dialog. Chrome
-			// behaves in the same was as Internet Explorer in this respect.
-			// See http://greenbytes.de/tech/tc2231/#attwithfnrawpctenclong
+			# Internet Explorer does not support RFC2231 however it does
+			# incorrectly decode URL encoded filenames and we can use this to
+			# get UTF8 filenames to work with the file download dialog. Chrome
+			# behaves in the same was as Internet Explorer in this respect.
+			# See http://greenbytes.de/tech/tc2231/#attwithfnrawpctenclong
 			header( 'Content-Disposition:' . $t_disposition . ' filename="' . $t_encoded_filename . '"' );
 		} else {
-			// For most other browsers, we can use this technique:
-			// http://greenbytes.de/tech/tc2231/#attfnboth2
+			# For most other browsers, we can use this technique:
+			# http://greenbytes.de/tech/tc2231/#attfnboth2
 			header( 'Content-Disposition:' . $t_disposition . ' filename*=UTF-8\'\'' . $t_encoded_filename . '; filename="' . $t_encoded_filename . '"' );
 		}
 	}
@@ -100,13 +100,13 @@ function http_content_disposition_header( $p_filename, $p_inline = false ) {
 
 /**
  * Set caching headers that will allow or prevent browser caching.
- * @param boolean $p_allow_caching Allow caching
+ * @param bool $p_allow_caching Allow caching
  */
 function http_caching_headers( $p_allow_caching=false ) {
 	global $g_allow_browser_cache;
 
-	// Headers to prevent caching
-	// with option to bypass if running from script
+	# Headers to prevent caching
+	# with option to bypass if running from script
 	if ( !headers_sent() ) {
 		if ( $p_allow_caching || ( isset( $g_allow_browser_cache ) && ON == $g_allow_browser_cache ) ) {
 			if ( is_browser_internet_explorer() ) {
@@ -129,8 +129,8 @@ function http_caching_headers( $p_allow_caching=false ) {
 function http_content_headers() {
 	if ( !headers_sent() ) {
 		header( 'Content-Type: text/html; charset=UTF-8' );
-		// Disallow Internet Explorer from attempting to second guess the Content-Type
-		// header as per http://blogs.msdn.com/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
+		# Disallow Internet Explorer from attempting to second guess the Content-Type
+		# header as per http://blogs.msdn.com/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
 		header( 'X-Content-Type-Options: nosniff' );
 	}
 }
@@ -161,7 +161,7 @@ function http_security_headers() {
  */
 function http_custom_headers() {
 	if ( !headers_sent() ) {
-		// send user-defined headers
+		# send user-defined headers
 		foreach( config_get_global( 'custom_headers' ) as $t_header ) {
 			header( $t_header );
 		}

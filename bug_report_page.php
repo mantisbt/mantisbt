@@ -512,7 +512,7 @@ print_recently_visited();
 	</tr>
 <?php } ?>
 
-<?php // Target Version (if permissions allow)
+<?php # Target Version (if permissions allow)
 	if ( $t_show_target_version ) { ?>
 	<tr>
 		<th class="category">
@@ -590,7 +590,7 @@ print_recently_visited();
 	} # foreach( $t_related_custom_field_ids as $t_id )
 ?>
 <?php
-	// File Upload (if enabled)
+	# File Upload (if enabled)
 	if ( $t_show_attachments ) {
 		$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 		$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
@@ -604,7 +604,7 @@ print_recently_visited();
 		<td>
 			<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
 <?php
-		// Display multiple file upload fields
+		# Display multiple file upload fields
 		for( $i = 0; $i < $t_file_upload_max_num; $i++ ) {
 ?>
 			<input <?php echo helper_get_tab_index() ?> id="ufile[]" name="ufile[]" type="file" size="60" />

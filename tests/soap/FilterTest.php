@@ -87,7 +87,7 @@ class FilterTest extends SoapBase {
 
 		$issueToAdd = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserForAssignedWithNoTargetUser' );
 
-		// Assign the issue to the reporter.
+		# Assign the issue to the reporter.
 		$issueToAdd['handler'] = array( 'name' => $this->userName );
 
 		$issueId = $this->client->mc_issue_add(
@@ -111,7 +111,7 @@ class FilterTest extends SoapBase {
 
 		$issueToAdd = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserForAssignedWithTargetUser' );
 
-		// Assign the issue to the reporter.
+		# Assign the issue to the reporter.
 		$issueToAdd['handler'] = $targetUser;
 
 		$issueId = $this->client->mc_issue_add(
@@ -137,7 +137,7 @@ class FilterTest extends SoapBase {
 
 		$issueToAdd = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserForAssignedWithTargetUserNoResolved' );
 
-		// Assign the issue to the reporter.
+		# Assign the issue to the reporter.
 		$issueToAdd['handler'] = $targetUser;
 
 		$issueId = $this->client->mc_issue_add(
@@ -255,7 +255,7 @@ class FilterTest extends SoapBase {
 			$this->password,
 			$issueId);		
 
-		// Monitor the issue so it matches the file.		
+		# Monitor the issue so it matches the file.		
         $issue->monitors = array( array( 'id' => $this->userId ) );
         $this->client->mc_issue_update( $this->userName, $this->password, $issueId, $issue );
 
@@ -443,12 +443,11 @@ class FilterTest extends SoapBase {
 	 * @param string $methodName Method name to call in client
 	 */
 	private function doTestGetPages( $methodName ) {
-
 		$currentIssues = count($this->getProjectIssues());
 		if ( $currentIssues >= 3) {
 			$issueCount = $currentIssues;
 		} else {
-			// need to add
+			# need to add
 				
 			$issueCount = 3;
 				
@@ -466,11 +465,11 @@ class FilterTest extends SoapBase {
 		
 		$pageSize = $issueCount - 1;
 		
-		// first page should be full
+		# first page should be full
 		self::assertEquals($pageSize, count(call_user_func_array(array($this->client, $methodName), array($this->userName, $this->password, $this->getProjectId(), 1, $pageSize ))));
-		// second page should get just one issue, as $pageSize = $issueCount - 1;
+		# second page should get just one issue, as $pageSize = $issueCount - 1;
 		self::assertEquals(1, count(call_user_func_array(array($this->client, $methodName), array($this->userName, $this->password, $this->getProjectId(), 2, $pageSize ))));
-		// third page should be empty
+		# third page should be empty
 		self::assertEquals(0, count(call_user_func_array(array($this->client, $methodName), array($this->userName, $this->password, $this->getProjectId(), 3, $pageSize ))));
 	}
 	
@@ -573,19 +572,19 @@ class FilterTest extends SoapBase {
 
 	/**
 	 * Gets the issues for the specified user.
-	 * @param $filterType The filter type ('assigned', 'monitored', 'reported')
-	 * @param $targetUser The target user object reference.
+	 * @param string $filterType The filter type ('assigned', 'monitored', 'reported')
+	 * @param array $targetUser The target user object reference.
 	 * @return array Matching issues
 	 */
 	private function getIssuesForUser( $filterType, $targetUser ) {
-		// mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id, $filterType, $p_target_user, $p_page_number, $p_per_page )
+		# mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id, $filterType, $p_target_user, $p_page_number, $p_per_page )
 		return $this->client->mc_project_get_issues_for_user(
 			$this->userName,
 			$this->password,
 			0,
 			$filterType,
 			$targetUser,
-			1, // page number
+			1, # page number
 			self::ISSUES_TO_RETRIEVE);
 	}
 

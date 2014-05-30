@@ -188,7 +188,7 @@ function lang_ensure_loaded( $p_lang ) {
 * Check if the given language exists
 *
 * @param string $p_lang the language name
-* @return boolean
+* @return bool
 */
 function lang_language_exists( $p_lang ) {
 	$t_valid_langs = config_get( 'language_choices_arr' );
@@ -271,9 +271,8 @@ function lang_get_current() {
 function lang_get( $p_string, $p_lang = null ) {
 	global $g_lang_strings;
 
-	# If no specific language is requested, we'll
-	#  try to determine the language from the users
-	#  preferences
+	# If no specific language is requested, we'll try to
+	# determine the language from the users preferences
 
 	$t_lang = $p_lang;
 
@@ -281,7 +280,7 @@ function lang_get( $p_string, $p_lang = null ) {
 		$t_lang = lang_get_current();
 	}
 
-	// Now we'll make sure that the requested language is loaded
+	# Now we'll make sure that the requested language is loaded
 	lang_ensure_loaded( $t_lang );
 
 	# note in the current implementation we always return the same value

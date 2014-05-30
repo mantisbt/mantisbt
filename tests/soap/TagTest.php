@@ -146,19 +146,19 @@ class TagTest extends SoapBase {
      */
     public function testSetTagsOnIssue() {
     	
-    	// create tag
+    	# create tag
     	$tagToCreate = array (
     	    		'name' => 'TagTest.testCreateTagWithExistingName'
     	);
     	$tagId = $this->client->mc_tag_add ( $this->userName, $this->password, $tagToCreate );
     	$this->deleteTagAfterRun( $tagId );
     	
-    	// create issue
+    	# create issue
     	$issueToCreate = $this->getIssueToAdd('testTestTagsOnIssue');
     	$issueId = $this->client->mc_issue_add ( $this->userName, $this->password, $issueToCreate );
     	$this->deleteAfterRun( $issueId );
     	
-    	// set tags
+    	# set tags
     	$this->client->mc_issue_set_tags ( $this->userName, $this->password, $issueId, array ( array ( 'id' => $tagId ) ) );
     	
     	$issue = $this->client->mc_issue_get( $this->userName, $this->password, $issueId );

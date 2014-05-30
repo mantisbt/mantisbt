@@ -1132,9 +1132,9 @@ function custom_field_distinct_values( $p_field_def, $p_project_id = ALL_PROJECT
 /**
  * Convert the value to save it into the database, depending of the type
  * return value for database
- * @param mixed $p_value
+ * @param bool|int|string $p_value
  * @param int $p_type
- * @return mixed
+ * @return bool|int|string
  * @access public
  */
 function custom_field_value_to_database( $p_value, $p_type ) {
@@ -1148,9 +1148,9 @@ function custom_field_value_to_database( $p_value, $p_type ) {
 /**
  * Convert the database-value to value, depending of the type
  * return value for further operation
- * @param mixed $p_value
+ * @param bool|int|string $p_value
  * @param int $p_type
- * @return mixed
+ * @return bool|int|string
  * @access public
  */
 function custom_field_database_to_value( $p_value, $p_type ) {
@@ -1164,9 +1164,9 @@ function custom_field_database_to_value( $p_value, $p_type ) {
 /**
  * Convert the default-value to value depending on the type.  For example, in case of date, this
  * would translate 'tomorrow' to tomorrow's date.
- * @param mixed $p_value
+ * @param bool|int|string $p_value
  * @param int $p_type
- * @return mixed
+ * @return bool|int|string
  * @access public
  */
 function custom_field_default_to_value( $p_value, $p_type ) {
@@ -1185,7 +1185,7 @@ function custom_field_default_to_value( $p_value, $p_type ) {
  * @param int $p_field_id custom field id
  * @param int $p_bug_id bug id
  * @param mixed $p_value new custom field value
- * @param boolean $p_log_insert create history logs for new values
+ * @param bool $p_log_insert create history logs for new values
  * @return bool
  * @access public
  */

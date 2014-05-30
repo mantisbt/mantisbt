@@ -254,6 +254,3 @@ abstract class MantisPlugin {
 		$this->init();
 	}
 }
-
-
-/* vim: set noexpandtab tabstop=4 shiftwidth=4: */

@@ -160,7 +160,7 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 	}
 
 	if( $t_result ) {
-		// For MySQL, the charset for the connection needs to be specified.
+		# For MySQL, the charset for the connection needs to be specified.
 		if( db_is_mysql() ) {
 			/** @todo Is there a way to translate any charset name to MySQL format? e.g. remote the dashes? */
 			/** @todo Is this needed for other databases? */
@@ -399,7 +399,7 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 							break;
 						}
 					} else {
-						echo( "Invalid argument type passed to query_bound(): " . $i + 1 );
+						echo( "Invalid argument type passed to query_bound(): " . ( $i + 1 ) );
 						exit( 1 );
 					}
 					$p_query = utf8_substr( $p_query, 0, $t_utf8_offset ) . $replace . utf8_substr( $p_query, $t_utf8_offset + utf8_strlen( $matches[0] ) );
@@ -497,7 +497,7 @@ function db_fetch_array( &$p_result ) {
 		}
 
 		if ($t_array_result != $p_result) {
-			// new query
+			# new query
 			$t_array_result = $p_result;
 			$t_array_fields = null;
 		} else {
@@ -557,8 +557,8 @@ function db_result( $p_result, $p_index1 = 0, $p_index2 = 0 ) {
 			return $t_result[0][$p_index2];
 		}
 
-		// The numeric index doesn't exist. FETCH_MODE_ASSOC may have been used.
-		// Get 2nd dimension and make it numerically indexed
+		# The numeric index doesn't exist. FETCH_MODE_ASSOC may have been used.
+		# Get 2nd dimension and make it numerically indexed
 		$t_result = array_values( $t_result[0] );
 		return $t_result[$p_index2];
 	}
@@ -635,7 +635,7 @@ function db_index_exists( $p_table_name, $p_index_name ) {
 
 	$t_indexes = $g_db->MetaIndexes( $p_table_name );
 	if( $t_indexes === false ) {
-		// no index found
+		# no index found
 		return false;
 	}
 
@@ -823,7 +823,7 @@ function db_prepare_double( $p_double ) {
 
 /**
  * prepare a boolean for database insertion.
- * @param boolean $p_bool boolean
+ * @param bool $p_bool boolean value
  * @return int integer representing boolean
  * @deprecated db_query_bound should be used in preference to this function. This function may be removed in 1.2.0 final
  * @todo Use/Behaviour of this function should be reviewed before 1.2.0 final
@@ -980,7 +980,7 @@ function db_get_table_list() {
 	global $g_db, $g_db_schema;
 
 	if( db_is_db2() ) {
-		// must pass schema
+		# must pass schema
 		$t_tables = $g_db->MetaTables( 'TABLE', false, '', $g_db_schema );
 	} else {
 		$t_tables = $g_db->MetaTables( 'TABLE' );

@@ -462,7 +462,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	print_custom_field_value( $t_def, $t_id, $f_bug_id );
 	echo '</td>';
 	echo '</tr>';
-}       // foreach
+}       # foreach
 
 echo '<tr><td class="print-spacer" colspan="6"><hr /></td></tr>';
 

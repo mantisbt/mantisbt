@@ -409,6 +409,6 @@ for( $i = 0;$i < $t_count; $i++ ) {
 </tbody>
 </table>
 <?php
-// Free the memory allocated for the rows in this box since it is not longer needed.
+# Free the memory allocated for the rows in this box since it is not longer needed.
 unset( $rows );
 

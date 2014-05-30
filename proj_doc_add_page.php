@@ -88,7 +88,7 @@ html_page_top();
 	<td class="category">
 		<span class="required">*</span><?php echo lang_get( 'select_file' ); ?>
 		<br />
-		<?php echo print_max_filesize( $t_max_file_size ); ?>
+		<?php print_max_filesize( $t_max_file_size ); ?>
 	</td>
 	<td>
 		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />

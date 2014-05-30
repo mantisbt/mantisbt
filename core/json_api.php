@@ -70,7 +70,7 @@ function json_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 		}
 	}
 
-	$t_error_code = ERROR_GENERIC; // default
+	$t_error_code = ERROR_GENERIC; # default
 	
 	# build an appropriate error string
 	switch( $p_type ) {

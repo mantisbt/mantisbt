@@ -215,9 +215,9 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 			}
 		}
 
-		// bugnotes
+		# bugnotes
 		if( $t_user_id != $v_user_id ) {
-			// bypass if user originated note
+			# bypass if user originated note
 			if(( $v_type == BUGNOTE_ADDED ) || ( $v_type == BUGNOTE_UPDATED ) || ( $v_type == BUGNOTE_DELETED ) ) {
 				if( !$t_private_bugnote_visible && ( bugnote_get_field( $v_old_value, 'view_state' ) == VS_PRIVATE ) ) {
 					continue;
@@ -231,14 +231,14 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 			}
 		}
 
-		// tags
+		# tags
 		if( $v_type == TAG_ATTACHED || $v_type == TAG_DETACHED || $v_type == TAG_RENAMED ) {
 			if( !access_has_bug_level( $t_tag_view_threshold, $p_bug_id, $t_user_id ) ) {
 				continue;
 			}
 		}
 
-		// monitoring
+		# monitoring
 		if( $v_type == BUG_MONITOR || $v_type == BUG_UNMONITOR ) {
 			if( !access_has_bug_level( $t_show_monitor_list_threshold, $p_bug_id, $t_user_id ) ) {
 				continue;

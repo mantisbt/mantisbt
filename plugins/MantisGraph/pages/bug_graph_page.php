@@ -88,7 +88,7 @@ $t_show = array(
 			</table>
 		</form>
 <?php
-// build the graphs if both an interval and graph type are selected
+# build the graphs if both an interval and graph type are selected
 if ( ( 0 != $f_type ) && ( $f_interval > 0 ) && ( gpc_get( 'show', '' ) != '') ) {
 	$t_width = plugin_config_get( 'window_width' );
 	$t_summary = ( $f_type % 2 ) != 0;

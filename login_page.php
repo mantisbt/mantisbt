@@ -63,9 +63,9 @@ $f_secure_session_cookie = gpc_get_cookie( config_get_global( 'cookie_prefix' ) 
 
 $t_session_validation = ( ON == config_get_global( 'session_validation' ) );
 
-// If user is already authenticated and not anonymous
+# If user is already authenticated and not anonymous
 if( auth_is_user_authenticated() && !current_user_is_anonymous() ) {
-	// If return URL is specified redirect to it; otherwise use default page
+	# If return URL is specified redirect to it; otherwise use default page
 	if( !is_blank( $f_return ) ) {
 		print_header_redirect( $f_return, false, false, true );
 	}

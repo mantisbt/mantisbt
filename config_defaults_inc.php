@@ -173,7 +173,7 @@ if ( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
 		$t_port = '';
 	}
 
-	if ( isset( $_SERVER['HTTP_X_FORWARDED_HOST'] ) ) { // Support ProxyPass
+	if ( isset( $_SERVER['HTTP_X_FORWARDED_HOST'] ) ) { # Support ProxyPass
 		$t_hosts = explode( ',', $_SERVER['HTTP_X_FORWARDED_HOST'] );
 		$t_host = $t_hosts[0];
 	} else if ( isset( $_SERVER['HTTP_HOST'] ) ) {
@@ -3022,13 +3022,13 @@ $g_set_configuration_threshold = ADMINISTRATOR;
  * @global array $g_status_colors
  */
 $g_status_colors = array(
-	'new'          => '#fcbdbd', // red    (scarlet red #ef2929)
-	'feedback'     => '#e3b7eb', // purple (plum        #75507b)
-	'acknowledged' => '#ffcd85', // orange (orango      #f57900)
-	'confirmed'    => '#fff494', // yellow (butter      #fce94f)
-	'assigned'     => '#c2dfff', // blue   (sky blue    #729fcf)
-	'resolved'     => '#d2f5b0', // green  (chameleon   #8ae234)
-	'closed'       => '#c9ccc4'  // grey   (aluminum    #babdb6)
+	'new'          => '#fcbdbd', # red    (scarlet red #ef2929)
+	'feedback'     => '#e3b7eb', # purple (plum        #75507b)
+	'acknowledged' => '#ffcd85', # orange (orango      #f57900)
+	'confirmed'    => '#fff494', # yellow (butter      #fce94f)
+	'assigned'     => '#c2dfff', # blue   (sky blue    #729fcf)
+	'resolved'     => '#d2f5b0', # green  (chameleon   #8ae234)
+	'closed'       => '#c9ccc4'  # grey   (aluminum    #babdb6)
 );
 
 /**
@@ -3426,14 +3426,14 @@ $g_custom_headers = array();
  *
  * @global int $g_allow_browser_cache
  */
-// $g_allow_browser_cache = ON;
+# $g_allow_browser_cache = ON;
 /**
  * File caching - This will allow the browser to cache downloaded files.
  * Without this set, there may be issues with IE receiving files, and launching
  * support programs.
  * @global int $g_allow_file_cache
  */
- // $g_allow_file_cache = ON;
+# $g_allow_file_cache = ON;
 
 /*****************
  * Custom Fields *
@@ -3755,7 +3755,7 @@ $g_forward_year_count = 4;
  * array(
  *	array(
  *		'action' => 'my_custom_action',
- *		'label' => 'my_label',   // string to be passed to lang_get_defaulted()
+ *		'label' => 'my_label',   # string to be passed to lang_get_defaulted()
  *		'form_page' => 'my_custom_action_page.php',
  *		'action_page' => 'my_custom_action.php'
  *	)
@@ -3765,8 +3765,8 @@ $g_forward_year_count = 4;
  *		'action_page' => 'my_custom_action2.php'
  *	)
  *	array(
- *		'action' => 'EXT_ADD_NOTE',  // you need to implement bug_actiongroup_<action_without_'EXT_')_inc.php
- *		'label' => 'actiongroup_menu_add_note' // see strings_english.txt for this label
+ *		'action' => 'EXT_ADD_NOTE',  # you need to implement bug_actiongroup_<action_without_'EXT_')_inc.php
+ *		'label' => 'actiongroup_menu_add_note' # see strings_english.txt for this label
  *	)
  * );
  *

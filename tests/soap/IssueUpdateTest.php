@@ -72,13 +72,13 @@ class IssueUpdateTest extends SoapBase {
 
 		$issue = $updatedIssue;
 
-		// explicitly specified fields
+		# explicitly specified fields
 		$this->assertEquals( $issueToAdd['category'], $issue->category );
 		$this->assertEquals( $t_summary_update, $issue->summary );
 		$this->assertEquals( $issueToAdd['description'], $issue->description );
 		$this->assertEquals( $issueToAdd['project']['id'], $issue->project->id );
 
-		// defaulted fields
+		# defaulted fields
 		$this->assertEquals( $issueId, $issue->id );
 		$this->assertEquals( 10, $issue->view_state->id );
 		$this->assertEquals( 'public', $issue->view_state->name );
@@ -132,14 +132,14 @@ class IssueUpdateTest extends SoapBase {
 
 		$issue = $updatedIssue;
 
-		// explicitly specified fields
+		# explicitly specified fields
 		$this->assertEquals( $issueToUpdate['category'], $issue->category );
 		$this->assertEquals( $issueToUpdate['summary'], $issue->summary );
 		$this->assertEquals( $issueToUpdate['description'], $issue->description );
 		$this->assertEquals( $issueToUpdate['project']['id'], $issue->project->id );
 		$this->assertEquals( $issueToUpdate['sticky'], $issue->sticky );
 
-		// defaulted fields
+		# defaulted fields
 		$this->assertEquals( $issueId, $issue->id );
 		$this->assertEquals( 10, $issue->view_state->id );
 		$this->assertEquals( 'public', $issue->view_state->name );
@@ -471,7 +471,7 @@ class IssueUpdateTest extends SoapBase {
 	 */
 	public function testUpdateWithTagOperations() {
 
-		// initialise tags
+		# initialise tags
 		$tagId1 = $this->client->mc_tag_add( $this->userName, $this->password, array (
 			'name' => 'IssueUpdateTest.testUpdateWithTagAdditions'
 		));
@@ -488,31 +488,31 @@ class IssueUpdateTest extends SoapBase {
 		$tag2 = new stdClass();
 		$tag2->id = $tagId2;
 
-		// create issue
+		# create issue
 		$issueToAdd = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateWithRareFields' );
 		$issueId = $this->client->mc_issue_add( $this->userName, $this->password, $issueToAdd);
 		$this->deleteAfterRun( $issueId );
 		$issue = $this->client->mc_issue_get( $this->userName, $this->password, $issueId );
 
-		// update from 0 to 2 tags -> test attaching tags
+		# update from 0 to 2 tags -> test attaching tags
 		$issue->tags = array ( $tag1, $tag2 );
 		$this->client->mc_issue_update( $this->userName, $this->password, $issueId, $issue);
 		$issue = $this->client->mc_issue_get( $this->userName, $this->password, $issueId );
 		self::assertEquals(2, count ( $issue->tags ) );
 
-		// update from 2 to 1 tags -> test partially detaching tags
+		# update from 2 to 1 tags -> test partially detaching tags
 		$issue->tags = array ( $tag1 );
 		$this->client->mc_issue_update( $this->userName, $this->password, $issueId, $issue);
 		$issue = $this->client->mc_issue_get( $this->userName, $this->password, $issueId );
 		self::assertEquals(1, count ( $issue->tags ) );
 
-		// update from 1 to 2 tags -> test partially attaching tags
+		# update from 1 to 2 tags -> test partially attaching tags
 		$issue->tags = array ( $tag1, $tag2 );
 		$this->client->mc_issue_update( $this->userName, $this->password, $issueId, $issue);
 		$issue = $this->client->mc_issue_get( $this->userName, $this->password, $issueId );
 		self::assertEquals(2, count ( $issue->tags ) );
 
-		// update from 2 to 0 tags -> test detaching tags
+		# update from 2 to 0 tags -> test detaching tags
 		$issue->tags = array();
 		$this->client->mc_issue_update( $this->userName, $this->password, $issueId, $issue);
 		$issue = $this->client->mc_issue_get( $this->userName, $this->password, $issueId );
@@ -523,30 +523,29 @@ class IssueUpdateTest extends SoapBase {
 	 * Tests for updating Monitors on issues
 	 */
 	public function testUpdateWithMonitors() {
-
-		// create issue
+		# create issue
 		$issueToAdd = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateWithMonitors' );
 		$issueId = $this->client->mc_issue_add( $this->userName, $this->password, $issueToAdd);
 		$this->deleteAfterRun( $issueId );
 
-		// fresh issue -> no monitors exist
+		# fresh issue -> no monitors exist
 		$issue = $this->client->mc_issue_get( $this->userName, $this->password, $issueId );
 		self::assertEquals(0, count ( $issue->monitors ));
 
-		// update with this user as monitor -> should be added
+		# update with this user as monitor -> should be added
 		$issue->monitors = array ( array ( 'id' => $this->userId));
 		$this->client->mc_issue_update ( $this->userName, $this->password, $issueId, $issue);
 		$issue = $this->client->mc_issue_get( $this->userName, $this->password, $issueId);
 		self::assertEquals( 1, count($issue->monitors) );
 		self::assertEquals($this->userId, $issue->monitors[0]->id );
 
-		// update with same monitor list -> should be preserved
+		# update with same monitor list -> should be preserved
 		$this->client->mc_issue_update ( $this->userName, $this->password, $issueId, $issue);
 		$issue = $this->client->mc_issue_get( $this->userName, $this->password, $issueId);
 		self::assertEquals( 1, count($issue->monitors) );
 		self::assertEquals($this->userId, $issue->monitors[0]->id );
 
-		// update with empty monitor list -> should be removed
+		# update with empty monitor list -> should be removed
 		$issue->monitors = array();
 		$this->client->mc_issue_update ( $this->userName, $this->password, $issueId, $issue);
 		$issue = $this->client->mc_issue_get( $this->userName, $this->password, $issueId);

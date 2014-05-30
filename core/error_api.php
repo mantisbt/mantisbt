@@ -370,7 +370,7 @@ function error_print_stack_trace() {
 
 /**
  * Build a string describing the parameters to a function
- * @param string $p_param
+ * @param string|array|object $p_param
  * @param bool $p_showtype default true
  * @param int $p_depth default 0
  * @return string

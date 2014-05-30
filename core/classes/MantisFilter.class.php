@@ -64,7 +64,7 @@ abstract class MantisFilter {
 	 * valid, or returning false if invalid.  Invalid inputs will
 	 * be replaced with the filter's default value.
 	 * @param mixed $p_filter_input Filter field input
-	 * @return boolean Input valid (true) or invalid (false)
+	 * @return bool Input valid (true) or invalid (false)
 	 */
 	public function validate( $p_filter_input ) {
 		return true;

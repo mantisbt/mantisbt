@@ -53,7 +53,7 @@ class IssueMonitorTest extends SoapBase {
 			$this->password,
 			$issueId);
 
-		// no monitors on new issue
+		# no monitors on new issue
 		$this->assertEquals(0, sizeof($issue->monitors));
 	}
 	

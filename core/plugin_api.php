@@ -166,8 +166,8 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
 		}
 	}
 
-	// allow overriding the content type for specific text and image extensions
-	// see bug #13193 for details
+	# allow overriding the content type for specific text and image extensions
+	# see bug #13193 for details
 	if ( strpos($t_content_type, 'text/') === 0 || strpos( $t_content_type, 'image/') === 0 ) {
 		$t_extension = pathinfo( $t_file_path, PATHINFO_EXTENSION );
 		if ( $t_extension && array_key_exists( $t_extension , $g_plugin_mime_types ) ) {
@@ -397,7 +397,7 @@ function plugin_child( $p_child ) {
  * Checks if a given plugin has been registered and initialized,
  * and returns a boolean value representing the "loaded" state.
  * @param string $p_base_name Plugin basename
- * @return boolean Plugin loaded
+ * @return bool Plugin loaded
  */
 function plugin_is_loaded( $p_base_name ) {
 	global $g_plugin_cache_init;
@@ -436,7 +436,7 @@ function plugin_version_array( $p_version ) {
  * Checks two version arrays sequentially for minimum or maximum version dependencies.
  * @param array $p_version1 Version array to check
  * @param array $p_version2 Version array required
- * @param boolean $p_maximum Minimum (false) or maximum (true) version check
+ * @param bool $p_maximum Minimum (false) or maximum (true) version check
  * @return int 1 if the version dependency succeeds, -1 if it fails
  */
 function plugin_version_check( $p_version1, $p_version2, $p_maximum = false ) {
@@ -501,7 +501,7 @@ function plugin_version_check( $p_version1, $p_version2, $p_maximum = false ) {
  * @param string $p_base_name Plugin base name
  * @param string $p_required Required version
  * @param bool $p_initialized whether plugin is initialized
- * @return integer Plugin dependency status
+ * @return int Plugin dependency status
  */
 function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) {
 	global $g_plugin_cache, $g_plugin_cache_init;
@@ -552,7 +552,7 @@ function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) 
 /**
  * Checks to see if a plugin is 'protected' from uninstall.
  * @param string $p_base_name Plugin base name
- * @return boolean True if plugin is protected
+ * @return bool True if plugin is protected
  */
 function plugin_protected( $p_base_name ) {
 	global $g_plugin_cache_protected;
@@ -584,7 +584,7 @@ function plugin_priority( $p_base_name ) {
 /**
  * Determine if a given plugin is installed.
  * @param string $p_basename Plugin basename
- * @return boolean True if plugin is installed
+ * @return bool True if plugin is installed
  */
 function plugin_is_installed( $p_basename ) {
 	$t_plugin_table = db_get_table( 'plugin' );
@@ -639,7 +639,7 @@ function plugin_install( $p_plugin ) {
 /**
  * Determine if an installed plugin needs to upgrade its schema.
  * @param string $p_plugin Plugin basename
- * @return boolean True if plugin needs schema ugrades.
+ * @return bool True if plugin needs schema ugrades.
  */
 function plugin_needs_upgrade( $p_plugin ) {
 	$t_plugin_schema = $p_plugin->schema();
@@ -669,7 +669,7 @@ function plugin_upgrade( $p_plugin ) {
 
 	plugin_push_current( $p_plugin->basename );
 
-	$t_schema_version = plugin_config_get( 'schema', -1 );
+	$t_schema_version = (int)plugin_config_get( 'schema', -1 );
 	$t_schema = $p_plugin->schema();
 
 	global $g_db;
@@ -938,7 +938,7 @@ function plugin_init_installed() {
 /**
  * Initialize a single plugin.
  * @param string $p_basename Plugin basename
- * @return boolean True if plugin initialized, false otherwise.
+ * @return bool True if plugin initialized, false otherwise.
  */
 function plugin_init( $p_basename ) {
 	global $g_plugin_cache, $g_plugin_cache_init;
