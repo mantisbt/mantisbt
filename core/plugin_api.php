@@ -923,14 +923,14 @@ function plugin_register_installed() {
 	$t_plugin_table = db_get_table( 'plugin' );
 
 	$t_query = "SELECT basename, priority, protected FROM $t_plugin_table WHERE enabled=" . db_param() . ' ORDER BY priority DESC';
-	$t_result = db_query_bound( $t_query, array( 1 ) );
+	$t_result = db_query_bound( $t_query, array( true ) );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_basename = $t_row['basename'];
 		if( !plugin_is_registered( $t_basename ) ) {
 			plugin_register( $t_basename );
-			$g_plugin_cache_priority[$t_basename] = $t_row['priority'];
-			$g_plugin_cache_protected[$t_basename] = $t_row['protected'];
+			$g_plugin_cache_priority[$t_basename] = (int)$t_row['priority'];
+			$g_plugin_cache_protected[$t_basename] = (bool)$t_row['protected'];
 		}
 	}
 }

@@ -1146,7 +1146,7 @@ function print_plugin_priority_list( $p_priority ) {
 	}
 
 	for( $i = 5;$i >= 1;$i-- ) {
-		echo '<option value="', $i, '" ', check_selected( $p_priority, (string)$i ), ' >', $i, '</option>';
+		echo '<option value="', $i, '" ', check_selected( $p_priority, $i ), ' >', $i, '</option>';
 	}
 }
 
