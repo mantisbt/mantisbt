@@ -947,7 +947,6 @@ function plugin_init_installed() {
 	$g_plugin_cache_priority = array();
 	$g_plugin_cache_protected = array();
 
-#	plugin_register( 'MantisCore' );
 	plugin_register_installed();
 
 	$t_plugins = array_keys( $g_plugin_cache );
