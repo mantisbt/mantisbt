@@ -100,18 +100,21 @@ function gpc_isset( $p_var_name ) {
  * @return string|null
  */
 function gpc_get_string( $p_var_name, $p_default = null ) {
-
 	# Don't pass along a default unless one was given to us
 	#  otherwise we prevent an error being triggered
-	$args = func_get_args();
-	$t_result = call_user_func_array( 'gpc_get', $args );
+	$t_args = func_get_args();
+	$t_result = call_user_func_array( 'gpc_get', $t_args );
 
 	if( is_array( $t_result ) ) {
 		error_parameters( $p_var_name );
 		trigger_error( ERROR_GPC_ARRAY_UNEXPECTED, ERROR );
 	}
 
-	return str_replace( "\0","",$t_result );
+	if( $t_result === null ) {
+		return null;
+	} else {
+		return str_replace( "\0", '', $t_result );
+	}
 }
 
 /**
@@ -247,8 +250,8 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 function gpc_get_string_array( $p_var_name, $p_default = null ) {
 	# Don't pass along a default unless one was given to us
 	#  otherwise we prevent an error being triggered
-	$args = func_get_args();
-	$t_result = call_user_func_array( 'gpc_get', $args );
+	$t_args = func_get_args();
+	$t_result = call_user_func_array( 'gpc_get', $t_args );
 
 	# If we the result isn't the default we were given or an array, error
 	if( !((( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
@@ -257,8 +260,12 @@ function gpc_get_string_array( $p_var_name, $p_default = null ) {
 	}
 
 	$t_array = array();
-	foreach( $t_result as $key => $val ) {
-		$t_array[$key] = str_replace( "\0", "", $val );
+	foreach( $t_result as $t_key => $t_value ) {
+		if( $t_value === null ) {
+			$t_array[$t_key] = null;
+		} else {
+			$t_array[$t_key] = str_replace( "\0", '', $t_value );
+		}
 	}
 	return $t_array;
 }
@@ -284,7 +291,7 @@ function gpc_get_int_array( $p_var_name, $p_default = null ) {
 	}
 
 	$t_count = count( $t_result );
-	for( $i = 0;$i < $t_count;$i++ ) {
+	for( $i = 0; $i < $t_count; $i++ ) {
 		$t_result[$i] = (int) $t_result[$i];
 	}
 
