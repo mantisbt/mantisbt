@@ -110,7 +110,11 @@ function gpc_get_string( $p_var_name, $p_default = null ) {
 		trigger_error( ERROR_GPC_ARRAY_UNEXPECTED, ERROR );
 	}
 
-	return str_replace( "\0","",$t_result );
+	if( $t_result === null ) {
+		return null;
+	} else {
+		return str_replace( "\0", '', $t_result );
+	}
 }
 
 /**
@@ -259,8 +263,12 @@ function gpc_get_string_array( $p_var_name, $p_default = null ) {
 		return $t_result;
 	}
 	$t_array = array();
-	foreach( $t_result as $key => $val ) {
-		$t_array[$key] = str_replace( "\0", "", $val );
+	foreach( $t_result as $t_key => $t_value ) {
+		if( $t_value === null ) {
+			$t_array[$t_key] = null;
+		} else {
+			$t_array[$t_key] = str_replace( "\0", '', $t_value );
+		}
 	}
 	return $t_array;
 }
