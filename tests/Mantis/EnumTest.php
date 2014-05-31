@@ -37,6 +37,7 @@ require_once 'MantisEnum.class.php';
  */
 class MantisEnumTest extends PHPUnit_Framework_TestCase {
 	const ACCESS_LEVELS_ENUM = '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator';
+	const ACCESS_LEVELS_ENUM_EXTRA = '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator,100:missing';
 	const ACCESS_LEVELS_LOCALIZED_ENUM = '10:viewer_x,25:reporter_x,40:updater_x,55:developer_x,70:manager_x,90:administrator_x,95:extra_x';
 	const EMPTY_ENUM = '';
 	const DUPLICATE_VALUES_ENUM = '10:viewer1,10:viewer2';
@@ -70,9 +71,15 @@ class MantisEnumTest extends PHPUnit_Framework_TestCase {
 		# Test unknown case
 		$this->assertEquals( '@5@', MantisEnum::getLocalizedLabel( MantisEnumTest::ACCESS_LEVELS_ENUM, MantisEnumTest::ACCESS_LEVELS_LOCALIZED_ENUM, 5 ) );
 
-		# Test the case where the value is in the localized enum but not the standard one.  In this case it should be treated
-		# as unknown.
+		# Test the case where the value is in the localized enumeration but not the standard one.  
+		# In this case it should be treated as unknown.
 		$this->assertEquals( '@95@', MantisEnum::getLocalizedLabel( MantisEnumTest::ACCESS_LEVELS_ENUM, MantisEnumTest::ACCESS_LEVELS_LOCALIZED_ENUM, 95 ) );
+
+		# Test the case where the value is in the standard enumeration but not in the localized one.  
+		# In this case we should fall back to the standard enumeration (as we do with language strings) 
+		# as the value is a known good value - just that it has not yet been localized.
+		$this->assertEquals( 'missing', MantisEnum::getLocalizedLabel( MantisEnumTest::ACCESS_LEVELS_ENUM_EXTRA, MantisEnumTest::ACCESS_LEVELS_LOCALIZED_ENUM, 100 ) );
+
 	}
 
 	/**
@@ -114,8 +121,8 @@ class MantisEnumTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( 10, MantisEnum::getValue( MantisEnumTest::DUPLICATE_VALUES_ENUM, 'viewer1' ) );
 		$this->assertEquals( 20, MantisEnum::getValue( MantisEnumTest::NAME_WITH_SPACES_ENUM, 'second label' ) );
 
-		# This is not inconsisent with duplicate values behavior, however, it is considered correct since it simplies the code
-		# and it is not a real scenario.
+		# This is not inconsistent with duplicate values behaviour, however, it is considered correct 
+		# since it simplifies the code and it is not a real scenario.
 		$this->assertEquals( 20, MantisEnum::getValue( MantisEnumTest::DUPLICATE_LABELS_ENUM, 'viewer' ) );
 	}
 
