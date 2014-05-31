@@ -1567,6 +1567,11 @@ function get_email_link( $p_email, $p_text ) {
  * @return void
  */
 function print_email_link_with_subject( $p_email, $p_text, $p_bug_id ) {
+	$t_bug = bug_get( $p_bug_id, true );
+	if( !access_has_project_level( config_get( 'show_user_email_threshold', null, null, $t_bug->project_id ), $t_bug->project_id ) ) {
+		echo $p_text;
+		return;
+	}
 	$t_subject = email_build_subject( $p_bug_id );
 	echo get_email_link_with_subject( $p_email, $p_text, $t_subject );
 }
@@ -1581,10 +1586,6 @@ function print_email_link_with_subject( $p_email, $p_text, $p_bug_id ) {
  * @return string
  */
 function get_email_link_with_subject( $p_email, $p_text, $p_subject ) {
-	if( !access_has_project_level( config_get( 'show_user_email_threshold' ) ) ) {
-		return $p_text;
-	}
-
 	# If we apply string_url() to the whole mailto: link then the @
 	# gets turned into a %40 and you can't right click in browsers to
 	# do Copy Email Address.  If we don't apply string_url() to the
