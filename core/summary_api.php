@@ -249,7 +249,7 @@ function summary_print_by_enum( $p_enum ) {
 function summary_new_bug_count_by_date( $p_num_days = 1 ) {
 	$t_mantis_bug_table = db_get_table( 'bug' );
 
-	$_time_length = (int) $p_num_days * SECONDS_PER_DAY;
+	$c_time_length = (int) $p_num_days * SECONDS_PER_DAY;
 
 	$t_project_id = helper_get_current_project();
 
