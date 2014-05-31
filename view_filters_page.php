@@ -460,7 +460,7 @@ foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
 		echo '<tr class="row-1">';
 		foreach( $t_row_filters as $t_row_field_name ) {
 			echo '<td class="small-caption" colspan="' . $t_custom_cols . '"> ';
-			print_filter_plugin_field( $t_row_field_name, $t_plugin_filters[ $t_row_field_name ] )
+			print_filter_plugin_field( $t_row_field_name, $t_plugin_filters[ $t_row_field_name ] );
 			echo '</td>';
 		}
 		echo '</tr>';
