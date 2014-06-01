@@ -49,6 +49,8 @@
  * @uses version_api.php
  */
 
+$g_allow_browser_cache = 1;
+
 require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -74,8 +76,6 @@ require_api( 'relationship_api.php' );
 require_api( 'string_api.php' );
 require_api( 'utility_api.php' );
 require_api( 'version_api.php' );
-
-$g_allow_browser_cache = 1;
 
 $f_master_bug_id = gpc_get_int( 'm_id', 0 );
 
