@@ -103,7 +103,7 @@ if ( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend
 <div>
 <?php include( $g_core_path . 'timeline_inc.php' ); ?>
 
-<div style="width:60%; align-self: left;">
+<div class="myview_boxes_area">
 
 <table class="hide" cellspacing="3" cellpadding="0">
 <?php
@@ -195,8 +195,6 @@ if ( ON == $t_boxes_position && $t_counter == $t_number_of_boxes && 1 == $t_coun
 
 </table>
 </div>
-
-<div style="clear: both;" />
 
 <?php
 if ( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {

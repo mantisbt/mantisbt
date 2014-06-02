@@ -420,6 +420,7 @@ div.error-info { text-align: center; margin: 1em; }
 }
 
 .myview-left-col, .myview-right-col { width: 50%; vertical-align: top; }
+.myview_boxes_area { width:60%; align-self: left; }
 #manage-overview-table th { width: 30%; }
 
 #action-group-issues-div,
