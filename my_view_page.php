@@ -72,6 +72,19 @@ if ( current_user_get_pref( 'refresh_delay' ) > 0 ) {
 	html_meta_redirect( 'my_view_page.php', current_user_get_pref( 'refresh_delay' )*60 );
 }
 
+echo '<style>';
+echo 'div.timeline { width: 35%; float: right; border: solid 1px #000000; margin-top: 10px; padding-left: 20px; margin-bottom: 10px; }';
+echo 'div.timeline div.entry { margin-bottom: -30px; position: relative; }';
+echo 'div.timeline div.entry img.avatar { float: none; width: 32px; height: 32px; }';
+echo 'div.timeline div.heading { font-size: x-large; }';
+echo 'div.timeline div.entry span.tag_name { background-color: green; color: white; border-radius: 5px; padding-left: 5px; padding-right: 5px; }';
+echo 'div.timeline div.entry span.username { font-weight:bold; }';
+echo 'div.timeline div.date_range { font-size: large; margin-bottom: 200px; }';
+echo 'div.timeline div.entry div.timestamp { position: relative; top: -35px; left: 40px; height: 15px; font-size: x-small; color: gray; }';
+echo 'div.timeline div.entry div.action { position: relative; top: -40px; left: 40px; padding-right: 50px; }';
+echo 'div.timeline p { margin-left: 3px; }';
+echo '</style>';
+
 html_page_top2();
 
 print_recently_visited();
@@ -99,6 +112,12 @@ if ( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend
 	echo '<br />';
 }
 ?>
+
+<div>
+<?php include( $g_core_path . 'timeline_inc.php' ); ?>
+
+<div style="width:60%; align-self: left;">
+
 <table class="hide" cellspacing="3" cellpadding="0">
 <?php
 $t_number_of_boxes = count ( $t_boxes );
@@ -144,12 +163,12 @@ while (list ($t_box_title, $t_box_display) = each ($t_boxes)) {
 			if ( 1 == $t_counter%2 ) {
 				echo '<tr><td class="myview-left-col">';
 				include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
-				echo '</td>';
+				echo '</td></tr>';
 			}
 
 			# for odd box number only start new column
 			else if ( 0 == $t_counter%2 ) {
-				echo '<td class="myview-right-col">';
+				echo '<tr><td class="myview-right-col">';
 				include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
 				echo '</td></tr>';
 			}
@@ -188,12 +207,15 @@ if ( ON == $t_boxes_position && $t_counter == $t_number_of_boxes && 1 == $t_coun
 ?>
 
 </table>
+</div>
+
+<div style="clear: both;" />
+
 <?php
 if ( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
 	html_status_legend();
 }
 ?>
-</div>
 
 <?php
 html_page_bottom();
