@@ -1628,6 +1628,14 @@ $g_assign_sponsored_bugs_threshold = MANAGER;
  */
 $g_minimum_sponsorship_amount = 5;
 
+/**
+ * URL to get more information about sponsorship for a given project
+ * If %s is specified in the string, it will include the active language of the user when calling the URL
+ * So for example: http://www.example.com/sponsorship/%s would go to /sponsorship/english for an english user.
+ * @global string $g_sponsorship_details_url
+ */
+$g_sponsorship_details_url = '';
+
 /*********************************
  * MantisBT File Upload Settings *
  *********************************/
