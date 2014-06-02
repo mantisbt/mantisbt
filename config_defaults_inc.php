@@ -3013,6 +3013,20 @@ $g_view_configuration_threshold = ADMINISTRATOR;
  */
 $g_set_configuration_threshold = ADMINISTRATOR;
 
+/**
+ * Ask for target version
+ * Set to ON if you wish to ask the target version when a bug is set to predefined status. Must be used combined with $g_ask_target_version_on_status
+ * @global int $g_ask_target_version
+ */
+$g_ask_target_version = OFF;
+
+/**
+ * Status where target_version is asked 
+ *  Must be used combined with $g_ask_target_version
+ * @global int $g_ask_target_version_on_status
+ */
+$g_ask_target_version_on_status = CONFIRMED;
+
 /************************************
  * MantisBT Look and Feel Variables *
  ************************************/
