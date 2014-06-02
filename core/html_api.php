@@ -1224,11 +1224,37 @@ function print_account_menu( $p_page = '' ) {
  * @return null
  */
 function print_doc_menu( $p_page = '' ) {
-	$t_documentation_html = config_get( 'manual_url' );
-	$t_pages[$t_documentation_html] = array( 'url'=>$t_documentation_html, 'label'=>'user_documentation' );
-	$t_pages['proj_doc_page.php'] = array( 'url'=>'proj_doc_page.php', 'label'=>'project_documentation' );
+	# User Documentation
+	$t_doc_url = config_get( 'manual_url' );
+	if( is_null( parse_url( $t_doc_url, PHP_URL_SCHEME ) ) ) {
+		# URL has no scheme, so it is relative to MantisBT root
+		if( is_blank( $t_doc_url ) ||
+			!file_exists( config_get_global( 'absolute_path' ) . $t_doc_url )
+		) {
+			# Local documentation not available, use online docs
+			$t_doc_url = 'http://www.mantisbt.org/documentation.php';
+		} else {
+			$t_doc_url = helper_mantis_url( $t_doc_url );
+		}
+	}
+
+	$t_pages[$t_doc_url] = array(
+		'url'   => $t_doc_url,
+		'label' => 'user_documentation'
+	);
+
+	# Project Documentation
+	$t_pages['proj_doc_page.php'] = array(
+		'url'   => helper_mantis_url( 'proj_doc_page.php' ),
+		'label' => 'project_documentation'
+	);
+
+	# Add File
 	if( file_allow_project_upload() ) {
-		$t_pages['proj_doc_add_page.php'] = array( 'url'=>'proj_doc_add_page.php', 'label'=>'add_file' );
+		$t_pages['proj_doc_add_page.php'] = array(
+			'url'   => helper_mantis_url( 'proj_doc_add_page.php' ),
+			'label' => 'add_file'
+		);
 	}
 
 	# Remove the link from the current page
@@ -1242,7 +1268,7 @@ function print_doc_menu( $p_page = '' ) {
 		if( $t_page['url'] == '' ) {
 			echo '<li>', lang_get( $t_page['label'] ), '</li>';
 		} else {
-			echo '<li><a href="'. helper_mantis_url( $t_page['url'] ) .'">' . lang_get( $t_page['label'] ) . '</a></li>';
+			echo '<li><a href="'. $t_page['url'] .'">' . lang_get( $t_page['label'] ) . '</a></li>';
 		}
 	}
 	echo '</ul>';
