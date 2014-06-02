@@ -738,3 +738,17 @@ div#summary			{ width: 100%; padding: 0 4px;}
 div#summary-left	{ float: left; }
 div#summary-right	{ float: right; }
 div#summary-bottom	{ width: 99.8%; clear: both; }
+
+/**
+ * Timeline Styles
+ */
+div.timeline { width: 35%; float: right; border: solid 1px #000000; margin-top: 10px; padding-left: 20px; margin-bottom: 10px; }
+div.timeline div.entry { margin-bottom: -30px; position: relative; }
+div.timeline div.entry img.avatar { float: none; width: 32px; height: 32px; }
+div.timeline div.heading { font-size: x-large; }
+div.timeline div.entry span.tag_name { background-color: green; color: white; border-radius: 5px; padding-left: 5px; padding-right: 5px; }
+div.timeline div.entry span.username { font-weight:bold; }
+div.timeline div.date_range { font-size: large; margin-bottom: 200px; }
+div.timeline div.entry div.timestamp { position: relative; top: -35px; left: 40px; height: 15px; font-size: x-small; color: gray; }
+div.timeline div.entry div.action { position: relative; top: -40px; left: 40px; padding-right: 50px; }
+div.timeline p { margin-left: 3px; }

@@ -72,19 +72,6 @@ if ( current_user_get_pref( 'refresh_delay' ) > 0 ) {
 	html_meta_redirect( 'my_view_page.php', current_user_get_pref( 'refresh_delay' )*60 );
 }
 
-echo '<style>';
-echo 'div.timeline { width: 35%; float: right; border: solid 1px #000000; margin-top: 10px; padding-left: 20px; margin-bottom: 10px; }';
-echo 'div.timeline div.entry { margin-bottom: -30px; position: relative; }';
-echo 'div.timeline div.entry img.avatar { float: none; width: 32px; height: 32px; }';
-echo 'div.timeline div.heading { font-size: x-large; }';
-echo 'div.timeline div.entry span.tag_name { background-color: green; color: white; border-radius: 5px; padding-left: 5px; padding-right: 5px; }';
-echo 'div.timeline div.entry span.username { font-weight:bold; }';
-echo 'div.timeline div.date_range { font-size: large; margin-bottom: 200px; }';
-echo 'div.timeline div.entry div.timestamp { position: relative; top: -35px; left: 40px; height: 15px; font-size: x-small; color: gray; }';
-echo 'div.timeline div.entry div.action { position: relative; top: -40px; left: 40px; padding-right: 50px; }';
-echo 'div.timeline p { margin-left: 3px; }';
-echo '</style>';
-
 html_page_top2();
 
 print_recently_visited();
