@@ -17,10 +17,6 @@
 require_once( 'core.php' );
 require_api( 'timeline_api.php');
 
-#
-# Page - TODO: move to my_view_page or keep as core/timeline_inc.php or core/timeline_view_inc.php
-#
-
 $f_days = gpc_get_int( 'days', 0 );
 
 $t_end_time = time() - ( $f_days * 24 * 60 * 60 );
