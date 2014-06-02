@@ -44,6 +44,26 @@ class TimelineEvent {
 		$t_normal_date_format = config_get( 'normal_date_format' );
 		return date( $t_normal_date_format, $p_timestamp );
 	}
+
+	public function html_start() {
+		$t_html = '<div class="entry">';
+
+		$t_avatar = user_get_avatar( $this->user_id, 32 );
+		if ( $t_avatar !== false ) {
+			$t_avatar_url = $t_avatar[0];
+			$t_html .= '<img class="avatar" src="' . $t_avatar_url . '"/>';
+		} else {
+			$t_html .= '<img class="avatar-disabled" />';
+		}
+
+		$t_html .= '<div class="timestamp">' .  $this->format_timestamp( $this->timestamp ) . '</div>';
+
+		return $t_html;
+	}
+
+	public function html_end() {
+		return '</div>';
+	}
 }
 
 class IssueCreatedTimelineEvent extends TimelineEvent {
@@ -54,14 +74,11 @@ class IssueCreatedTimelineEvent extends TimelineEvent {
 	}
 
 	public function html() {
-		$t_avatar = user_get_avatar( $this->user_id, 32 );
-		$t_avatar_url = $t_avatar[0];
+		$t_html = $this->html_start();
+		$t_html .= '<div class="action">' . sprintf( lang_get( 'timeline_issue_created' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) ) . '</div>';
+		$t_html .= $this->html_end();
 
-		echo '<div class="entry">';
-		echo '<img class="avatar" src="' . $t_avatar_url . '"/>';
-		echo '<div class="timestamp">' .  $this->format_timestamp( $this->timestamp ) . '</div>';
-		echo '<div class="action">' . sprintf( lang_get( 'timeline_issue_created' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) ) . '</div>';
-		echo '</div>';
+		return $t_html;
 	}
 }
 
@@ -74,14 +91,11 @@ class IssueNoteCreatedTimelineEvent extends TimelineEvent {
 	}
 
 	public function html() {
-		$t_avatar = user_get_avatar( $this->user_id, 32 );
-		$t_avatar_url = $t_avatar[0];
+		$t_html = $this->html_start();
+		$t_html .= '<div class="action">' . sprintf( lang_get( 'timeline_issue_note_created' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) ) . '</div>';
+		$t_html .= $this->html_end();
 
-		echo '<div class="entry">';
-		echo '<img class="avatar" src="' . $t_avatar_url . '"/>';
-		echo '<div class="timestamp">' .  $this->format_timestamp( $this->timestamp ) . '</div>';
-		echo '<div class="action">' . sprintf( lang_get( 'timeline_issue_note_created' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) ) . '</div>';
-		echo '</div>';
+		return $t_html;
 	}
 }
 
@@ -96,14 +110,11 @@ class IssueMonitorTimelineEvent extends TimelineEvent {
 	public function html() {
 		$t_string = $this->monitor ? lang_get( 'timeline_issue_monitor' ) : lang_get( 'timeline_issue_unmonitor' );
 
-		$t_avatar = user_get_avatar( $this->user_id, 32 );
-		$t_avatar_url = $t_avatar[0];
+		$t_html = $this->html_start();
+		$t_html .= '<div class="action">' . sprintf( $t_string, user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) ) . '</div>';
+		$t_html .= $this->html_end();
 
-		echo '<div class="entry">';
-		echo '<img class="avatar" src="' . $t_avatar_url . '"/>';
-		echo '<div class="timestamp">' .  $this->format_timestamp( $this->timestamp ) . '</div>';
-		echo '<div class="action">' . sprintf( $t_string, user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) ) . '</div>';
-		echo '</div>';
+		return $t_html;
 	}
 }
 
@@ -119,14 +130,11 @@ class IssueTagTimelineEvent extends TimelineEvent {
 	public function html() {
 		$t_string = $this->tag ? lang_get( 'timeline_issue_tagged' ) : lang_get( 'timeline_issue_tagged' );
 
-		$t_avatar = user_get_avatar( $this->user_id, 32 );
-		$t_avatar_url = $t_avatar[0];
+		$t_html = $this->html_start();
+		$t_html .= '<div class="action">' . sprintf( $t_string, user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ), $this->tag_name ) . '</div>';
+		$t_html .= $this->html_end();
 
-		echo '<div class="entry">';
-		echo '<img class="avatar" src="' . $t_avatar_url . '"/>';
-		echo '<div class="timestamp">' .  $this->format_timestamp( $this->timestamp ) . '</div>';
-		echo '<div class="action">' . sprintf( $t_string, user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ), $this->tag_name ) . '</div>';
-		echo '</div>';
+		return $t_html;
 	}
 }
 
@@ -153,14 +161,11 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 			return;
 		}
 
-		$t_avatar = user_get_avatar( $this->user_id, 32 );
-		$t_avatar_url = $t_avatar[0];
+		$t_html = $this->html_start();
+		$t_html .= '<div class="action">' . $t_string . '</div>';
+		$t_html .= $this->html_end();
 
-		echo '<div class="entry">';
-		echo '<img class="avatar" src="' . $t_avatar_url . '"/>';
-		echo '<div class="timestamp">' .  $this->format_timestamp( $this->timestamp ) . '</div>';
-		echo '<div class="action">' . $t_string . '</div>';
-		echo '</div>';
+		return $t_html;
 	}
 }
 
@@ -179,14 +184,11 @@ class IssueAssignedTimelineEvent extends TimelineEvent {
 			$t_string = sprintf( lang_get( 'timeline_issue_assigned' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ), user_get_name( $this->handler_id ) );
 		}
 
-		$t_avatar = user_get_avatar( $this->user_id, 32 );
-		$t_avatar_url = $t_avatar[0];
+		$t_html = $this->html_start();
+		$t_html .= '<div class="action">' . $t_string . '</div>';
+		$t_html .= $this->html_end();
 
-		echo '<div class="entry">';
-		echo '<img class="avatar" src="' . $t_avatar_url . '"/>';
-		echo '<div class="timestamp">' .  $this->format_timestamp( $this->timestamp ) . '</div>';
-		echo '<div class="action">' . $t_string . '</div>';
-		echo '</div>';
+		return $t_html;
 	}
 }
 
@@ -318,7 +320,7 @@ function timeline_print_events( $p_events ) {
 			continue;
 		}
 
-		$t_event->html();
+		echo $t_event->html();
 	}
 }
 

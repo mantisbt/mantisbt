@@ -752,3 +752,4 @@ div.timeline div.date_range { font-size: large; margin-bottom: 200px; }
 div.timeline div.entry div.timestamp { position: relative; top: -35px; left: 40px; height: 15px; font-size: x-small; color: gray; }
 div.timeline div.entry div.action { position: relative; top: -40px; left: 40px; padding-right: 50px; }
 div.timeline p { margin-left: 3px; }
+div.timeline div.entry img.avatar-disabled { float: none; width: 32px; height: 32px; }
