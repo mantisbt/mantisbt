@@ -46,7 +46,7 @@ $t_events = timeline_sort_events( $t_events );
 if ( count( $t_events ) > 0 ) {
 	timeline_print_events( $t_events );
 } else {
-	echo '<p>' . $s_timeline_no_activity . '</p>';
+	echo '<p>' . lang_get( 'timeline_no_activity' ) . '</p>';
 }
 
 echo '</div>';
