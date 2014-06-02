@@ -83,6 +83,43 @@ function plugin_pop_current() {
 }
 
 /**
+ * Returns the list of force-installed plugins
+ * @see $g_plugins_force_installed
+ * @return array List of plugins (basename => priority)
+ */
+function plugin_get_force_installed() {
+	$t_forced_plugins = config_get_global( 'plugins_force_installed' );
+
+	# MantisCore pseudo-plugin is force-installed by definition, with priority 3
+	$t_forced_plugins['MantisCore'] = 3;
+
+	return $t_forced_plugins;
+}
+
+/**
+ * Returns an object representing the specified plugin
+ * Triggers an error if the plugin is not registered
+ * @param string|null $p_basename Plugin base name (defaults to current plugin)
+ * @return object Plugin Object
+ */
+function plugin_get( $p_basename = null ) {
+	global $g_plugin_cache;
+
+	if( is_null( $p_basename ) ) {
+		$t_current = plugin_get_current();
+	} else {
+		$t_current = $p_basename;
+	}
+
+	if ( !plugin_is_registered( $t_current ) ) {
+		error_parameters( $t_current );
+		trigger_error( ERROR_PLUGIN_NOT_REGISTERED, ERROR );
+	}
+
+	return $g_plugin_cache[$p_basename];
+}
+
+/**
  * Get the URL to the plugin wrapper page.
  * @param string $p_page Page name
  * @param bool $p_redirect return url for redirection
@@ -143,7 +180,7 @@ function plugin_file( $p_file, $p_redirect = false, $p_base_name = null ) {
  */
 function plugin_file_include( $p_filename, $p_basename = null ) {
 
-    global $g_plugin_mime_types;
+	global $g_plugin_mime_types;
 
 	if( is_null( $p_basename ) ) {
 		$t_current = plugin_get_current();
@@ -153,7 +190,8 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
 
 	$t_file_path = plugin_file_path( $p_filename, $t_current );
 	if( false === $t_file_path ) {
-		trigger_error( ERROR_GENERIC, ERROR );
+		error_parameters( $t_current, $p_filename );
+		trigger_error( ERROR_PLUGIN_FILE_NOT_FOUND, ERROR );
 	}
 
 	$t_content_type = '';
@@ -176,7 +214,7 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
 	}
 
 	if ( $t_content_type )
-    	header('Content-Type: ' . $t_content_type );
+		header('Content-Type: ' . $t_content_type );
 
 	readfile( $t_file_path );
 }
@@ -557,11 +595,6 @@ function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) 
 function plugin_protected( $p_base_name ) {
 	global $g_plugin_cache_protected;
 
-	# For pseudo-plugin MantisCore, return protected as 1.
-	if( $p_base_name == 'MantisCore' ) {
-		return 1;
-	}
-
 	return $g_plugin_cache_protected[$p_base_name];
 }
 
@@ -573,11 +606,6 @@ function plugin_protected( $p_base_name ) {
 function plugin_priority( $p_base_name ) {
 	global $g_plugin_cache_priority;
 
-	# For pseudo-plugin MantisCore, return priority as 3.
-	if( $p_base_name == 'MantisCore' ) {
-		return 3;
-	}
-
 	return $g_plugin_cache_priority[$p_base_name];
 }
 
@@ -587,15 +615,13 @@ function plugin_priority( $p_base_name ) {
  * @return bool True if plugin is installed
  */
 function plugin_is_installed( $p_basename ) {
-	$t_plugin_table = db_get_table( 'plugin' );
-
-	$t_forced_plugins = config_get_global( 'plugins_force_installed' );
-	foreach( $t_forced_plugins as $t_basename => $t_priority ) {
+	foreach( plugin_get_force_installed() as $t_basename => $t_priority ) {
 		if ( $t_basename == $p_basename ) {
 			return true;
 		}
 	}
 
+	$t_plugin_table = db_get_table( 'plugin' );
 	$t_query = "SELECT COUNT(*) FROM $t_plugin_table WHERE basename=" . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_basename ) );
 	return( 0 < db_result( $t_result ) );
@@ -610,6 +636,7 @@ function plugin_install( $p_plugin ) {
 	access_ensure_global_level( config_get_global( 'manage_plugin_threshold' ) );
 
 	if( plugin_is_installed( $p_plugin->basename ) ) {
+		error_parameters( $p_plugin->basename );
 		trigger_error( ERROR_PLUGIN_ALREADY_INSTALLED, WARNING );
 		return null;
 	}
@@ -816,6 +843,17 @@ function plugin_require_api( $p_file, $p_basename = null ) {
 }
 
 /**
+ * Determine if a given plugin is registered.
+ * @param string $p_basename Plugin basename
+ * @return boolean True if plugin is registered
+ */
+function plugin_is_registered( $p_basename ) {
+	global $g_plugin_cache;
+
+	return isset( $g_plugin_cache[$p_basename] );
+}
+
+/**
  * Register a plugin with MantisBT.
  * The plugin class must already be loaded before calling.
  * @param string $p_basename Plugin classname without 'Plugin' postfix
@@ -867,13 +905,13 @@ function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
 
 /**
  * Find and register all installed plugins.
+ * This includes the MantisCore pseudo-plugin.
  */
 function plugin_register_installed() {
 	global $g_plugin_cache_priority, $g_plugin_cache_protected;
 
 	# register plugins specified in the site configuration
-	$t_forced_plugins = config_get_global( 'plugins_force_installed' );
-	foreach( $t_forced_plugins as $t_basename => $t_priority ) {
+	foreach( plugin_get_force_installed() as $t_basename => $t_priority ) {
 		plugin_register( $t_basename );
 		$g_plugin_cache_priority[$t_basename] = $t_priority;
 		$g_plugin_cache_protected[$t_basename] = true;
@@ -883,13 +921,15 @@ function plugin_register_installed() {
 	$t_plugin_table = db_get_table( 'plugin' );
 
 	$t_query = "SELECT basename, priority, protected FROM $t_plugin_table WHERE enabled=" . db_param() . ' ORDER BY priority DESC';
-	$t_result = db_query_bound( $t_query, array( 1 ) );
+	$t_result = db_query_bound( $t_query, array( true ) );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_basename = $t_row['basename'];
-		plugin_register( $t_basename );
-		$g_plugin_cache_priority[$t_basename] = $t_row['priority'];
-		$g_plugin_cache_protected[$t_basename] = $t_row['protected'];
+		if( !plugin_is_registered( $t_basename ) ) {
+			plugin_register( $t_basename );
+			$g_plugin_cache_priority[$t_basename] = (int)$t_row['priority'];
+			$g_plugin_cache_protected[$t_basename] = (bool)$t_row['protected'];
+		}
 	}
 }
 
@@ -909,7 +949,6 @@ function plugin_init_installed() {
 	$g_plugin_cache_priority = array();
 	$g_plugin_cache_protected = array();
 
-	plugin_register( 'MantisCore' );
 	plugin_register_installed();
 
 	$t_plugins = array_keys( $g_plugin_cache );
