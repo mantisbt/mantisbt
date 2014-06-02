@@ -18,24 +18,6 @@
 require_once( 'core.php' );
 
 #
-# Lang - TODO: move to strings_english.txt
-#
-
-$s_timeline_issue_created = '<span class="username">%1s</span> created issue <span class="issue_id">%2s</span>';
-$s_timeline_issue_note_created = '<span class="username">%1s</span> commented on issue <span class="issue_id">%2s</span>';
-$s_timeline_issue_monitor = '<span class="username">%1s</span> is monitoring issue <span class="issue_id">%2s</span>';
-$s_timeline_issue_unmonitor = '<span class="username">%1s</span> stopped monitoring issue <span class="issue_id">%2s</span>';
-$s_timeline_issue_tagged = '<span class="username">%1s</span> tagged issue <span class="issue_id">%2s</span> with <span class="tag_name">%3s</span>';
-$s_timeline_issue_untagged = '<span class="username">%1s</span> removed <span class="tag_name">%3s</span> from issue <span class="issue_id">%2s</span>';
-$s_timeline_issue_resolved = '<span class="username">%1s</span> resolved issue <span class="issue_id">%2s</span>';
-$s_timeline_issue_closed = '<span class="username">%1s</span> closed issue <span class="issue_id">%2s</span>';
-$s_timeline_issue_reopened = '<span class="username">%1s</span> reopened issue <span class="issue_id">%2s</span>';
-$s_timeline_issue_assigned = '<span class="username">%1s</span> assigned issue <span class="issue_id">%2s</span> to <span class="username">%3s</span>';
-$s_timeline_issue_assigned_to_self = '<span class="username">%1s</span> picked up issue <span class="issue_id">%2s</span>';
-$s_timeline_no_activity = 'No activity within time range.';
-$s_timeline_title = 'Timeline';
-
-#
 # Class - TODO: move to timeline_api.php
 #
 
@@ -61,15 +43,13 @@ class IssueCreatedTimelineEvent extends TimelineEvent {
 	}
 
 	public function html() {
-		global $s_timeline_issue_created;
-
 		$t_avatar = user_get_avatar( $this->user_id, 32 );
 		$t_avatar_url = $t_avatar[0];
 
 		echo '<div class="entry">';
 		echo '<img class="avatar" src="' . $t_avatar_url . '"/>';
 		echo '<div class="timestamp">' .  $this->format_timestamp( $this->timestamp ) . '</div>';
-		echo '<div class="action">' . sprintf( $s_timeline_issue_created, user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) ) . '</div>';
+		echo '<div class="action">' . sprintf( lang_get( 'timeline_issue_created' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) ) . '</div>';
 		echo '</div>';
 	}
 }
@@ -83,15 +63,13 @@ class IssueNoteCreatedTimelineEvent extends TimelineEvent {
 	}
 
 	public function html() {
-		global $s_timeline_issue_note_created;
-
 		$t_avatar = user_get_avatar( $this->user_id, 32 );
 		$t_avatar_url = $t_avatar[0];
 
 		echo '<div class="entry">';
 		echo '<img class="avatar" src="' . $t_avatar_url . '"/>';
 		echo '<div class="timestamp">' .  $this->format_timestamp( $this->timestamp ) . '</div>';
-		echo '<div class="action">' . sprintf( $s_timeline_issue_note_created, user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) ) . '</div>';
+		echo '<div class="action">' . sprintf( lang_get( 'timeline_issue_note_created' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) ) . '</div>';
 		echo '</div>';
 	}
 }
@@ -105,9 +83,7 @@ class IssueMonitorTimelineEvent extends TimelineEvent {
 	}
 
 	public function html() {
-		global $s_timeline_issue_monitor, $s_timeline_issue_unmonitor;
-
-		$t_string = $this->monitor ? $s_timeline_issue_monitor : $s_timeline_issue_unmonitor;
+		$t_string = $this->monitor ? lang_get( 'timeline_issue_monitor' ) : lang_get( 'timeline_issue_unmonitor' );
 
 		$t_avatar = user_get_avatar( $this->user_id, 32 );
 		$t_avatar_url = $t_avatar[0];
@@ -130,9 +106,7 @@ class IssueTagTimelineEvent extends TimelineEvent {
 	}
 
 	public function html() {
-		global $s_timeline_issue_tagged, $s_timeline_issue_untagged;
-
-		$t_string = $this->tag ? $s_timeline_issue_tagged : $s_timeline_issue_tagged;
+		$t_string = $this->tag ? lang_get( 'timeline_issue_tagged' ) : lang_get( 'timeline_issue_tagged' );
 
 		$t_avatar = user_get_avatar( $this->user_id, 32 );
 		$t_avatar_url = $t_avatar[0];
@@ -159,14 +133,11 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 		$t_closed = config_get( 'bug_closed_status_threshold' );
 
 		if ( $this->old_status < $t_closed && $this->new_status >= $t_closed ) {
-			global $s_timeline_issue_closed;
-			$t_string = sprintf( $s_timeline_issue_closed, user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
+			$t_string = sprintf( lang_get( 'timeline_issue_closed' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
 		} else if ( $this->old_status < $t_resolved && $this->new_status >= $t_resolved ) {
-			global $s_timeline_issue_resolved;
-			$t_string = sprintf( $s_timeline_issue_resolved, user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
+			$t_string = sprintf( lang_get( 'timeline_issue_resolved' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
 		} else if ( $this->old_status >= $t_resolved && $this->new_status < $t_resolved ) {
-			global $s_timeline_issue_reopened;
-			$t_string = sprintf( $s_timeline_issue_reopened, user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
+			$t_string = sprintf( lang_get( 'timeline_issue_reopened' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
 		} else {
 			return;
 		}
@@ -192,11 +163,9 @@ class IssueAssignedTimelineEvent extends TimelineEvent {
 
 	public function html() {
 		if ( $this->user_id == $this->handler_id ) {
-			global $s_timeline_issue_assigned_to_self;
-			$t_string = sprintf( $s_timeline_issue_assigned_to_self, user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
+			$t_string = sprintf( lang_get( 'timeline_issue_assigned_to_self' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
 		} else {
-			global $s_timeline_issue_assigned;
-			$t_string = sprintf( $s_timeline_issue_assigned, user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ), user_get_name( $this->handler_id ) );
+			$t_string = sprintf( lang_get( 'timeline_issue_assigned' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ), user_get_name( $this->handler_id ) );
 		}
 
 		$t_avatar = user_get_avatar( $this->user_id, 32 );
@@ -354,7 +323,7 @@ $t_events = timeline_events( $t_start_time, $t_end_time );
 
 echo '<div class="timeline">';
 
-$t_heading = $s_timeline_title;
+$t_heading = lang_get( 'timeline_title' );
 
 echo '<div class="heading">' . $t_heading . '</div>';
 
