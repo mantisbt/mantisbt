@@ -70,6 +70,7 @@ $t_project_id = file_get_field( $f_file_id, 'project_id', 'project' );
 access_ensure_project_level( config_get( 'upload_project_file_threshold' ), $t_project_id );
 
 if( is_blank( $f_title ) ) {
+	error_parameters( lang_get( 'title' ) );
 	trigger_error( ERROR_EMPTY_FIELD, ERROR );
 }
 
