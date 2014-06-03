@@ -56,7 +56,7 @@
 
 	extract( $f_file, EXTR_PREFIX_ALL, 'v' );
 
-	if ( is_uploaded_file( $v_tmp_name ) ) {
+	if ( isset( $f_file['tmp_name'] ) && is_uploaded_file( $f_file['tmp_name'] ) ) {
 		file_ensure_uploaded( $f_file );
 
 		$t_project_id = helper_get_current_project();
@@ -66,7 +66,7 @@
 		$t_file_path = dirname( $t_disk_file_name );
 
 		# prepare variables for insertion
-		$t_file_size = filesize( $v_tmp_name );
+		$t_file_size = filesize( $f_file['tmp_name'] );
 		$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 		if( $t_file_size > $t_max_file_size ) {
 			trigger_error( ERROR_FILE_TOO_BIG, ERROR );
@@ -87,7 +87,7 @@
 				if ( file_exists( $t_disk_file_name ) ) {
 					file_delete_local( $t_disk_file_name );
 				}
-				if ( !move_uploaded_file( $v_tmp_name, $t_disk_file_name ) ) {
+				if ( !move_uploaded_file( $f_file['tmp_name'], $t_disk_file_name ) ) {
 					trigger_error( ERROR_FILE_MOVE_FAILED, ERROR );
 				}
 				chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
@@ -95,7 +95,7 @@
 				$c_content = '';
 				break;
 			case DATABASE:
-				$c_content = db_prepare_binary_string( fread ( fopen( $v_tmp_name, 'rb' ), $v_size ) );
+				$c_content = db_prepare_binary_string( fread ( fopen( $f_file['tmp_name'], 'rb' ), $f_file['size'] ) );
 				break;
 			default:
 				/** @todo Such errors should be checked in the admin checks */
@@ -105,7 +105,7 @@
 			SET title=" . db_param() . ", description=" . db_param() . ", date_added=" . db_param() . ",
 				filename=" . db_param() . ", filesize=" . db_param() . ", file_type=" .db_param() . ", content=" .db_param() . "
 				WHERE id=" . db_param();
-		$result = db_query_bound( $query, Array( $f_title, $f_description, db_now(), $v_name, $t_file_size, $v_type, $c_content, $f_file_id ) );
+		$result = db_query_bound( $query, array( $f_title, $f_description, db_now(), $f_file['name'], $t_file_size, $f_file['type'], $c_content, $f_file_id ) );
 	} else {
 		$query = "UPDATE $t_project_file_table
 				SET title=" . db_param() . ", description=" . db_param() . "
