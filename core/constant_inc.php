@@ -573,6 +573,7 @@ define( 'EMAIL_SHUTDOWN_FORCE', 2 );
 define( 'EMAIL_VALIDATE_PHP', 1 );
 define( 'EMAIL_VALIDATE_AUTO', 2 );
 define( 'EMAIL_VALIDATE_RFC5322', 3 );
+define( 'EMAIL_VALIDATE_HTML5', 4 );
 
 # Lengths - NOTE: these may represent hard-coded values in db schema and should not be changed.
 define( 'DB_FIELD_SIZE_USERNAME', 255 );

@@ -534,29 +534,38 @@ $g_email_receive_own = OFF;
  *
  * Determines if and how email addresses are validated. Possible values for
  * this config are:
- * - EMAIL_VALIDATE_PHP (default): validate using PHP's built-in method (see
+ * - EMAIL_VALIDATE_HTML5 (default): validate using the pattern given by the
+ *   HTML5 specification for 'email' type form input elements
+ *   {@link http://www.w3.org/TR/html5/forms.html#valid-e-mail-address}
+ *   This is the more versatile and standard option, which should be used in
+ *   most situations.
+ * - EMAIL_VALIDATE_PHP: validate using PHP's built-in method (see
  *   {@link http://php.net/filter_var} with FILTER_SANITIZE_EMAIL filter
  *   {@link http://php.net/filter.filters.validate}
- *   This should be used with internet-facing installations.
- *   Emails must have the form 'user@domain.tld'
- * - EMAIL_VALIDATE_RFC5322: validate using an RFC5322-compliant regex
+ *   This considers addresses like 'user@domain' (i.e. without a top-level
+ *   domain) as invalid.
+ * - EMAIL_VALIDATE_RFC5322: validate using a fully RFC5322-compliant regex
  *   (see {@link http://squiloople.com/2009/12/20/email-address-validation/}.
- *   This is useful for intranet installations, when relying on addresses
- *   without a top-level domain (e.g. 'user@domain')
+ *   This probably overkill in most scenarios, but if you need to be fully
+ *   standard-compliant, with this you can.
  * - EMAIL_VALIDATE_AUTO: let PHPMailer's
  *   {@link http://phpmailer.github.io/PHPMailer/classes/PHPMailer.html#method_validateAddress validateAddress()}
- *   method pick the best validation pattern. On recent systems, this is
- *   generally the same as EMAIL_VALIDATE_RFC5322.
+ *   method pick the best validation pattern. As of PHPMailer v5.2.8 on recent
+ *   systems, this is generally the same as EMAIL_VALIDATE_RFC5322.
  * - OFF: disable email validation
  *
- * NOTE: Regardless of how this option is set, validation is not performed
+ * With internet-facing installations, it is strongly advised to use either
+ * the default HTML5 (recommended) or PHP methods (if you don't need to handle
+ * email addresses without a top-level domain).
+ *
+ * NOTE: Regardless of how this option is set, validation is never performed
  * when using LDAP email (i.e. when $g_use_ldap_email = ON), as we assume that
  * it is handled by the directory.
  * @see $g_use_ldap_email
  *
  * @global integer $g_validate_email
  */
-$g_validate_email = EMAIL_VALIDATE_PHP;
+$g_validate_email = EMAIL_VALIDATE_HTML5;
 
 /**
  * set to OFF to disable email check

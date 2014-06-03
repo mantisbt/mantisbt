@@ -131,6 +131,7 @@ function email_is_valid( $p_email ) {
 
 	# E-mail validation method
 	switch( $t_validate_email ) {
+		case EMAIL_VALIDATE_HTML5:   $t_method = 'html5'; break;
 		case EMAIL_VALIDATE_PHP:     $t_method = 'php';   break;
 		case EMAIL_VALIDATE_RFC5322: $t_method = 'pcre8'; break;
 		default:                     $t_method = 'auto';  break;

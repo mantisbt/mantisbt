@@ -141,24 +141,35 @@
 				</para>
 				<itemizedlist>
 					<listitem><para>
-						<literal>EMAIL_VALIDATE_PHP</literal> (default):
+						<literal>EMAIL_VALIDATE_HTML5</literal> (default):
+						validate using the pattern given by the
+						<ulink url="http://www.w3.org/TR/html5/forms.html#valid-e-mail-address">
+							HTML5 specification for <emphasis>email</emphasis>
+							type form input elements</ulink>.
+							This is the more versatile and standard option,
+							which should be used in most situations.
+					</para></listitem>
+					<listitem><para>
+						<literal>EMAIL_VALIDATE_PHP</literal>:
 						validate using PHP's built-in method (see
 						<ulink url="http://php.net/filter_var">
 							filter_var() function</ulink> with
 						<ulink url="http://php.net/filter.filters.validate">
 							FILTER_SANITIZE_EMAIL</ulink> filter).
-						This should be used with internet-facing
-						installations. Emails must have the form
+						Emails must have the form
 						<emphasis>user@domain.tld</emphasis>.
+						<note><para>This considers addresses like
+							<emphasis>user@domain</emphasis> (i.e. without a
+							top-level domain) as invalid.
+						</para></note>
 					</para></listitem>
 					<listitem><para>
 						<literal>EMAIL_VALIDATE_RFC5322</literal>:
 						validate using an
 						<ulink url="http://squiloople.com/2009/12/20/email-address-validation/">
 							RFC5322-compliant regex</ulink>.
-						This is useful for intranet installations, when
-						relying addresses without a top-level domain (e.g.
-						<emphasis>user@domain</emphasis>).
+						This probably overkill in most scenarios, but if you
+						need to be fully standard-compliant, with this you can.
 					</para></listitem>
 					<listitem><para>
 						<literal>EMAIL_VALIDATE_AUTO</literal>:
@@ -166,7 +177,8 @@
 						<ulink url="http://phpmailer.github.io/PHPMailer/classes/PHPMailer.html#method_validateAddress">
 							validateAddress() method</ulink>
 						pick the best validation pattern.
-						On recent systems, this is generally the same as
+						As of PHPMailer v5.2.8 on recent systems, this is
+						generally the same as
 						<literal>EMAIL_VALIDATE_RFC5322</literal>.
 					</para></listitem>
 					<listitem><para>
@@ -175,10 +187,18 @@
 					</para></listitem>
 				</itemizedlist>
 				<note><para>
+					With internet-facing installations, it is strongly advised
+					to use either the default <emphasis>HTML5</emphasis>
+					(recommended) or <emphasis>PHP</emphasis> methods (if you
+					don't need to handle email addresses without a top-level
+					domain).
+				</para></note>
+				<note><para>
 					Regardless of how this option is set, validation is
-					not performed when using LDAP email (i.e. when
-					$g_use_ldap_email = ON), as we assume that it is
-					handled by the directory.
+					never performed when using LDAP email
+					(i.e. when $g_use_ldap_email = ON,
+					see <xref linkend="admin.config.auth.ldap" />),
+					as we assume that it is handled by the directory.
 				</para></note>
 			</listitem>
 		</varlistentry>
