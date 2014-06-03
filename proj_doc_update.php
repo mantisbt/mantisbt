@@ -77,11 +77,10 @@ $t_project_file_table = db_get_table( 'project_file' );
 
 /** @todo (thraxisp) this code should probably be integrated into file_api to share methods used to store files */
 
-file_ensure_uploaded( $f_file );
-
 extract( $f_file, EXTR_PREFIX_ALL, 'v' );
 
 if( is_uploaded_file( $v_tmp_name ) ) {
+	file_ensure_uploaded( $f_file );
 
 	$t_project_id = helper_get_current_project();
 
