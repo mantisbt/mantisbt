@@ -5,7 +5,10 @@
 
 # Global variables initialization
 HOSTNAME=localhost
-PORT=80
+# Port 80 requires use of 'sudo' to run the PHP built-in web server, which
+# causes builds to fail due to a bug in Travis [1] so we use port 8080 instead.
+# [1] https://github.com/travis-ci/travis-ci/issues/2235
+PORT=8080
 MANTIS_DB_NAME=bugtracker
 MANTIS_BOOTSTRAP=tests/bootstrap.php
 
@@ -55,26 +58,42 @@ esac
 # -----------------------------------------------------------------------------
 step "Web server setup"
 
-sudo apt-get update -qq
-sudo apt-get install -qq apache2 libapache2-mod-php5 php5-mysql php5-pgsql
+if [ $TRAVIS_PHP_VERSION = '5.3' ]; then
+	# install Apache as PHP 5.3 does not come with an embedded web server
+	sudo apt-get update -qq
+	sudo apt-get install -qq apache2 libapache2-mod-php5 php5-mysql php5-pgsql
 
-cat <<-EOF | sudo tee /etc/apache2/sites-available/default >/dev/null
-    <VirtualHost *:$PORT>
-        DocumentRoot $PWD
-        <Directory />
-            Options FollowSymLinks
-            AllowOverride All
-        </Directory>
-        <Directory $PWD>
-            Options Indexes FollowSymLinks MultiViews
-            AllowOverride All
-            Order allow,deny
-            allow from all
-        </Directory>
-    </VirtualHost>
-EOF
+	cat <<-EOF | sudo tee /etc/apache2/sites-available/default >/dev/null
+		Listen $PORT
+		NameVirtualHost *:$PORT
+		<VirtualHost *:$PORT>
+		    DocumentRoot $PWD
+		    <Directory />
+		        Options FollowSymLinks
+		        AllowOverride All
+		    </Directory>
+		    <Directory $PWD>
+		        Options Indexes FollowSymLinks MultiViews
+		        AllowOverride All
+		        Order allow,deny
+		        allow from all
+		    </Directory>
+		</VirtualHost>
+		EOF
 
-sudo service apache2 restart
+	sudo service apache2 restart
+else
+	# use PHP's embedded server
+	if [[ $PORT = 80 ]]
+	then
+		# sudo required for port 80
+		# get path of PHP as the path is not in $PATH for sudo
+		myphp="sudo $(which php)"
+	else
+		myphp=php
+	fi
+	$myphp -S $HOSTNAME:$PORT &
+fi
 
 # needed to allow web server to create config_inc.php
 chmod 777 .
@@ -107,7 +126,7 @@ do
 done
 
 # trigger installation
-curl --data "${query_string:1}" http://$HOSTNAME/admin/install.php
+curl --data "${query_string:1}" http://$HOSTNAME:$PORT/admin/install.php
 
 
 # -----------------------------------------------------------------------------
@@ -122,7 +141,7 @@ echo "Creating PHPUnit Bootstrap file"
 cat <<-EOF >> $MANTIS_BOOTSTRAP
 	<?php
 		\$GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED'] = true;
-		\$GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'] = 'http://$HOSTNAME/api/soap/mantisconnect.php?wsdl';
+		\$GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'] = 'http://$HOSTNAME:$PORT/api/soap/mantisconnect.php?wsdl';
 	EOF
 
 step "Before-script execution completed successfully"
