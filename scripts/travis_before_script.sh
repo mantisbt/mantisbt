@@ -5,7 +5,10 @@
 
 # Global variables initialization
 HOSTNAME=localhost
-PORT=80
+# Port 80 requires use of 'sudo' to run the PHP built-in web server, which
+# causes builds to fail due to a bug in Travis [1]so we use port 8080 instead.
+# [1] https://github.com/travis-ci/travis-ci/issues/2235
+PORT=8080
 MANTIS_DB_NAME=bugtracker
 MANTIS_BOOTSTRAP=tests/bootstrap.php
 
@@ -61,6 +64,8 @@ if [ $TRAVIS_PHP_VERSION = '5.3' ]; then
 	sudo apt-get install -qq apache2 libapache2-mod-php5 php5-mysql php5-pgsql
 
 	cat <<-EOF | sudo tee /etc/apache2/sites-available/default >/dev/null
+		Listen $PORT
+		NameVirtualHost *:$PORT
 		<VirtualHost *:$PORT>
 		    DocumentRoot $PWD
 		    <Directory />
@@ -79,10 +84,15 @@ if [ $TRAVIS_PHP_VERSION = '5.3' ]; then
 	sudo service apache2 restart
 else
 	# use PHP's embedded server
-	# get path of PHP as the path is not in $PATH for sudo
-	myphp=$(which php)
-	# sudo needed for port 80
-	sudo $myphp -S $HOSTNAME:$PORT &
+	if [[ $PORT = 80 ]]
+	then
+		# sudo required for port 80
+		# get path of PHP as the path is not in $PATH for sudo
+		myphp="sudo $(which php)"
+	else
+		myphp=php
+	fi
+	$myphp -S $HOSTNAME:$PORT &
 fi
 
 # needed to allow web server to create config_inc.php
@@ -132,7 +142,7 @@ echo "Creating PHPUnit Bootstrap file"
 cat <<-EOF >> $MANTIS_BOOTSTRAP
 	<?php
 		\$GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED'] = true;
-		\$GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'] = 'http://$HOSTNAME/api/soap/mantisconnect.php?wsdl';
+		\$GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'] = 'http://$HOSTNAME:$PORT/api/soap/mantisconnect.php?wsdl';
 	EOF
 
 step "Before-script execution completed successfully"
