@@ -175,10 +175,15 @@ function timeline_get_affected_issues( $p_start_time, $p_end_time ) {
 
 	$t_current_project = helper_get_current_project();
 
-	$t_issue_ids = array();
+	$t_all_issue_ids = array();
 	while ( ( $t_row = db_fetch_array( $result ) ) !== false ) {
-		$t_issue_id = $t_row['bug_id'];
+		$t_all_issue_ids[] = $t_row['bug_id'];
+	}
 
+	bug_cache_array_rows( $t_all_issue_ids );
+
+	$t_issue_ids = array();
+	foreach ( $t_all_issue_ids as $t_issue_id ) {
 		if ( $t_current_project != ALL_PROJECTS && $t_current_project != bug_get_field( $t_issue_id, 'project_id' ) ) {
 			continue;
 		}
