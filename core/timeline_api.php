@@ -69,10 +69,6 @@ class TimelineEvent {
 class IssueCreatedTimelineEvent extends TimelineEvent {
 	public $issue_id;
 
-	public function valid() {
-		return bug_exists( $this->issue_id );
-	}
-
 	public function html() {
 		$t_html = $this->html_start();
 		$t_html .= '<div class="action">' . sprintf( lang_get( 'timeline_issue_created' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) ) . '</div>';
@@ -86,10 +82,6 @@ class IssueNoteCreatedTimelineEvent extends TimelineEvent {
 	public $issue_id;
 	public $issue_note_id;
 
-	public function valid() {
-		return bugnote_exists( $this->issue_note_id );
-	}
-
 	public function html() {
 		$t_html = $this->html_start();
 		$t_html .= '<div class="action">' . sprintf( lang_get( 'timeline_issue_note_created' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) ) . '</div>';
@@ -102,10 +94,6 @@ class IssueNoteCreatedTimelineEvent extends TimelineEvent {
 class IssueMonitorTimelineEvent extends TimelineEvent {
 	public $issue_id;
 	public $monitor;
-
-	public function valid() {
-		return bug_exists( $this->issue_id );
-	}
 
 	public function html() {
 		$t_string = $this->monitor ? lang_get( 'timeline_issue_monitor' ) : lang_get( 'timeline_issue_unmonitor' );
@@ -123,10 +111,6 @@ class IssueTagTimelineEvent extends TimelineEvent {
 	public $tag_name;
 	public $tag;
 
-	public function valid() {
-		return bug_exists( $this->issue_id );
-	}
-
 	public function html() {
 		$t_string = $this->tag ? lang_get( 'timeline_issue_tagged' ) : lang_get( 'timeline_issue_tagged' );
 
@@ -142,10 +126,6 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 	public $issue_id;
 	public $old_status;
 	public $new_status;
-
-	public function valid() {
-		return bug_exists( $this->issue_id );
-	}
 
 	public function html() {
 		$t_resolved = config_get( 'bug_resolved_status_threshold' );
@@ -172,10 +152,6 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 class IssueAssignedTimelineEvent extends TimelineEvent {
 	public $issue_id;
 	public $handler_id;
-
-	public function valid() {
-		return bug_exists( $this->issue_id );
-	}
 
 	public function html() {
 		if ( $this->user_id == $this->handler_id ) {
@@ -325,10 +301,6 @@ function timeline_sort_events( $p_events ) {
 
 function timeline_print_events( $p_events ) {
 	foreach ( $p_events as $t_event ) {
-		if ( !$t_event->valid() ) {
-			continue;
-		}
-
 		echo $t_event->html();
 	}
 }
