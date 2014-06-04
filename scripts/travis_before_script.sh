@@ -50,7 +50,7 @@ case $DB in
 		DB_CMD_SCHEMA="-d $MANTIS_DB_NAME"
 
 		# Wait a bit to make sure Postgres has started
-		sleep 2
+		sleep 5
 		$DB_CMD "$SQL_CREATE_DB"
 		$DB_CMD "ALTER USER $DB_USER SET bytea_output = 'escape';"
 		;;
