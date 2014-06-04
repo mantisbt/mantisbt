@@ -46,7 +46,7 @@ require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );
 require_api( 'profile_api.php' );
 
-if ( !config_get( 'enable_profiles' ) ) {
+if( !config_get( 'enable_profiles' ) ) {
 	trigger_error( ERROR_ACCESS_DENIED, ERROR );
 }
 
@@ -80,11 +80,11 @@ switch ( $f_action ) {
 		$f_description	= gpc_get_string( 'description' );
 
 		$t_user_id		= gpc_get_int( 'user_id' );
-		if ( ALL_USERS != $t_user_id ) {
+		if( ALL_USERS != $t_user_id ) {
 			$t_user_id = auth_get_current_user_id();
 		}
 
-		if ( ALL_USERS == $t_user_id ) {
+		if( ALL_USERS == $t_user_id ) {
 			access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
 		} else {
 			access_ensure_global_level( config_get( 'add_profile_threshold' ) );
@@ -93,7 +93,7 @@ switch ( $f_action ) {
 		profile_create( $t_user_id, $f_platform, $f_os, $f_os_build, $f_description );
 		form_security_purge('profile_update');
 
-		if ( ALL_USERS == $t_user_id ) {
+		if( ALL_USERS == $t_user_id ) {
 			print_header_redirect( 'manage_prof_menu_page.php' );
 		} else {
 			print_header_redirect( 'account_prof_menu_page.php' );
@@ -106,7 +106,7 @@ switch ( $f_action ) {
 		$f_os_build = gpc_get_string( 'os_build' );
 		$f_description = gpc_get_string( 'description' );
 
-		if ( profile_is_global( $f_profile_id ) ) {
+		if( profile_is_global( $f_profile_id ) ) {
 			access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
 
 			profile_update( ALL_USERS, $f_profile_id, $f_platform, $f_os, $f_os_build, $f_description );
@@ -120,7 +120,7 @@ switch ( $f_action ) {
 		break;
 
 	case 'delete':
-		if ( profile_is_global( $f_profile_id ) ) {
+		if( profile_is_global( $f_profile_id ) ) {
 			access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
 
 			profile_delete( ALL_USERS, $f_profile_id );

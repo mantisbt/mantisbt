@@ -61,7 +61,7 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 
 	log_event( LOG_LDAP, "Attempting connection to LDAP server/URI '{$t_ldap_server}'." );
 	$t_ds = @ldap_connect( $t_ldap_server );
-	if ( $t_ds !== false && $t_ds > 0 ) {
+	if( $t_ds !== false && $t_ds > 0 ) {
 		log_event( LOG_LDAP, "Connection accepted by LDAP server" );
 		$t_protocol_version = config_get( 'ldap_protocol_version' );
 
@@ -96,7 +96,7 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 			$t_br = @ldap_bind( $t_ds );
 		}
 
-		if ( !$t_br ) {
+		if( !$t_br ) {
 			ldap_log_error( $t_ds );
 			log_event( LOG_LDAP, "Bind to ldap server failed" );
 			trigger_error( ERROR_LDAP_SERVER_CONNECT_FAILED, ERROR );
@@ -138,12 +138,12 @@ function ldap_email( $p_user_id ) {
  * @return string
  */
 function ldap_email_from_username( $p_username ) {
-	if ( ldap_simulation_is_enabled() ) {
+	if( ldap_simulation_is_enabled() ) {
 		return ldap_simulation_email_from_username( $p_username );
 	}
 
 	$t_email = ldap_get_field_from_username( $p_username, 'mail' );
-	if ( $t_email === null ) {
+	if( $t_email === null ) {
 		return '';
 	}
 
@@ -168,13 +168,13 @@ function ldap_realname( $p_user_id ) {
  * @return string The user's real name.
  */
 function ldap_realname_from_username( $p_username ) {
-	if ( ldap_simulation_is_enabled() ) {
+	if( ldap_simulation_is_enabled() ) {
 		return ldap_simulatiom_realname_from_username( $p_username );
 	}
 
 	$t_ldap_realname_field	= config_get( 'ldap_realname_field' );
 	$t_realname = ldap_get_field_from_username( $p_username, $t_ldap_realname_field );
-	if ( $t_realname === null ) {
+	if( $t_realname === null ) {
 		return '';
 	}
 
@@ -220,7 +220,7 @@ function ldap_get_field_from_username( $p_username, $p_field ) {
 	# Bind
 	log_event( LOG_LDAP, "Binding to LDAP server" );
 	$t_ds = @ldap_connect_bind();
-	if ( $t_ds === false ) {
+	if( $t_ds === false ) {
 		ldap_log_error( $t_ds );
 		return null;
 	}
@@ -231,7 +231,7 @@ function ldap_get_field_from_username( $p_username, $p_field ) {
 
 	log_event( LOG_LDAP, "Searching for $t_search_filter" );
 	$t_sr = @ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
-	if ( $t_sr === false ) {
+	if( $t_sr === false ) {
 		ldap_log_error( $t_ds );
 		ldap_unbind( $t_ds );
 		log_event( LOG_LDAP, "ldap search failed" );
@@ -240,7 +240,7 @@ function ldap_get_field_from_username( $p_username, $p_field ) {
 
 	# Get results
 	$t_info = ldap_get_entries( $t_ds, $t_sr );
-	if ( $t_info === false ) {
+	if( $t_info === false ) {
 		ldap_log_error( $t_ds );
 		log_event( LOG_LDAP, "ldap_get_entries() returned false." );
 		return null;
@@ -252,7 +252,7 @@ function ldap_get_field_from_username( $p_username, $p_field ) {
 	ldap_unbind( $t_ds );
 
 	# If no matches, return null.
-	if ( $t_info['count'] == 0 ) {
+	if( $t_info['count'] == 0 ) {
 		log_event( LOG_LDAP, "No matches found." );
 		return null;
 	}
@@ -280,7 +280,7 @@ function ldap_authenticate( $p_user_id, $p_password ) {
 	# if password is empty and ldap allows anonymous login, then
 	# the user will be able to login, hence, we need to check
 	# for this special case.
-	if ( is_blank( $p_password ) ) {
+	if( is_blank( $p_password ) ) {
 		return false;
 	}
 
@@ -297,7 +297,7 @@ function ldap_authenticate( $p_user_id, $p_password ) {
  * @return true: authenticated, false: failed to authenticate.
  */
 function ldap_authenticate_by_username( $p_username, $p_password ) {
-	if ( ldap_simulation_is_enabled() ) {
+	if( ldap_simulation_is_enabled() ) {
 		log_event( LOG_LDAP, "Authenticating via LDAP simulation" );
 		$t_authenticated = ldap_simulation_authenticate_by_username( $p_username, $p_password );
 	} else {
@@ -316,7 +316,7 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 		# Bind
 		log_event( LOG_LDAP, "Binding to LDAP server" );
 		$t_ds = ldap_connect_bind();
-		if ( $t_ds === false ) {
+		if( $t_ds === false ) {
 			ldap_log_error( $t_ds );
 			trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
 		}
@@ -324,7 +324,7 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 		# Search for the user id
 		log_event( LOG_LDAP, "Searching for $t_search_filter" );
 		$t_sr = ldap_search( $t_ds, $t_ldap_root_dn, $t_search_filter, $t_search_attrs );
-		if ( $t_sr === false ) {
+		if( $t_sr === false ) {
 			ldap_log_error( $t_ds );
 			ldap_unbind( $t_ds );
 			log_event( LOG_LDAP, "ldap search failed" );
@@ -332,7 +332,7 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 		}
 
 		$t_info = @ldap_get_entries( $t_ds, $t_sr );
-		if ( $t_info === false ) {
+		if( $t_info === false ) {
 			ldap_log_error( $t_ds );
 			ldap_free_result( $t_sr );
 			ldap_unbind( $t_ds );
@@ -341,14 +341,14 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 
 		$t_authenticated = false;
 
-		if ( $t_info['count'] > 0 ) {
+		if( $t_info['count'] > 0 ) {
 			# Try to authenticate to each until we get a match
 			for ( $i = 0; $i < $t_info['count']; $i++ ) {
 				$t_dn = $t_info[$i]['dn'];
 				log_event( LOG_LDAP, "Checking {$t_info[$i]['dn']}" );
 
 				# Attempt to bind with the DN and password
-				if ( @ldap_bind( $t_ds, $t_dn, $p_password ) ) {
+				if( @ldap_bind( $t_ds, $t_dn, $p_password ) ) {
 					$t_authenticated = true;
 					break;
 				}
@@ -365,21 +365,21 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 	# If user authenticated successfully then update the local DB with information
 	# from LDAP.  This will allow us to use the local data after login without
 	# having to go back to LDAP.  This will also allow fallback to DB if LDAP is down.
-	if ( $t_authenticated ) {
+	if( $t_authenticated ) {
 		$t_user_id = user_get_id_by_name( $p_username );
 
-		if ( false !== $t_user_id ) {
-			
+		if( false !== $t_user_id ) {
+
 			$t_fields_to_update = array('password' => md5( $p_password ));
-			
-			if ( ON == config_get( 'use_ldap_realname' ) ) {
+
+			if( ON == config_get( 'use_ldap_realname' ) ) {
 				$t_fields_to_update['realname'] = ldap_realname( $t_user_id );
 			}
 
-			if ( ON == config_get( 'use_ldap_email' ) ) {
+			if( ON == config_get( 'use_ldap_email' ) ) {
 				$t_fields_to_update['email'] = ldap_email_from_username( $p_username );
 			}
-			
+
 			user_set_fields( $t_user_id, $t_fields_to_update );
 		}
 		log_event( LOG_LDAP, "User '$p_username' authenticated" );
@@ -409,7 +409,7 @@ function ldap_simulation_is_enabled() {
 function ldap_simulation_get_user( $p_username ) {
 	$t_filename = config_get( 'ldap_simulation_file_path' );
 	$t_lines = file( $t_filename );
-	if ( $t_lines === false ) {
+	if( $t_lines === false ) {
 		log_event( LOG_LDAP, "ldap_simulation_get_user: could not read simulation data from $t_filename." );
 		trigger_error( ERROR_LDAP_SERVER_CONNECT_FAILED, ERROR );
 	}
@@ -418,7 +418,7 @@ function ldap_simulation_get_user( $p_username ) {
 		$t_line = trim( $t_line, " \t\r\n" );
 		$t_row = explode( ',', $t_line );
 
-		if ( $t_row[0] != $p_username ) {
+		if( $t_row[0] != $p_username ) {
 			continue;
 		}
 
@@ -444,7 +444,7 @@ function ldap_simulation_get_user( $p_username ) {
  */
 function ldap_simulation_email_from_username( $p_username ) {
 	$t_user = ldap_simulation_get_user( $p_username );
-	if ( $t_user === null ) {
+	if( $t_user === null ) {
 		log_event( LOG_LDAP, "ldap_simulation_email_from_username: user '$p_username' not found." );
 		return '';
 	}
@@ -461,7 +461,7 @@ function ldap_simulation_email_from_username( $p_username ) {
  */
 function ldap_simulatiom_realname_from_username( $p_username ) {
 	$t_user = ldap_simulation_get_user( $p_username );
-	if ( $t_user === null ) {
+	if( $t_user === null ) {
 		log_event( LOG_LDAP, "ldap_simulatiom_realname_from_username: user '$p_username' not found." );
 		return '';
 	}
@@ -481,12 +481,12 @@ function ldap_simulation_authenticate_by_username( $p_username, $p_password ) {
 	$c_username = ldap_escape_string( $p_username );
 
 	$t_user = ldap_simulation_get_user( $c_username );
-	if ( $t_user === null ) {
+	if( $t_user === null ) {
 		log_event( LOG_LDAP, "ldap_simulation_authenticate: user '$p_username' not found." );
 		return false;
 	}
 
-	if ( $t_user['password'] != $p_password ) {
+	if( $t_user['password'] != $p_password ) {
 		log_event( LOG_LDAP, "ldap_simulation_authenticate: expected password '{$t_user['password']}' and got '$p_password'." );
 		return false;
 	}

@@ -54,7 +54,7 @@ require_api( 'utility_api.php' );
 form_security_validate( 'proj_doc_update' );
 
 # Check if project documentation feature is enabled.
-if ( OFF == config_get( 'enable_project_documentation' ) ||
+if( OFF == config_get( 'enable_project_documentation' ) ||
 	!file_is_uploading_enabled() ||
 	!file_allow_project_upload() ) {
 	access_denied();
@@ -69,7 +69,7 @@ $t_project_id = file_get_field( $f_file_id, 'project_id', 'project' );
 
 access_ensure_project_level( config_get( 'upload_project_file_threshold' ), $t_project_id );
 
-if ( is_blank( $f_title ) ) {
+if( is_blank( $f_title ) ) {
 	trigger_error( ERROR_EMPTY_FIELD, ERROR );
 }
 
@@ -81,7 +81,7 @@ file_ensure_uploaded( $f_file );
 
 extract( $f_file, EXTR_PREFIX_ALL, 'v' );
 
-if ( is_uploaded_file( $v_tmp_name ) ) {
+if( is_uploaded_file( $v_tmp_name ) ) {
 
 	$t_project_id = helper_get_current_project();
 
@@ -92,7 +92,7 @@ if ( is_uploaded_file( $v_tmp_name ) ) {
 	# prepare variables for insertion
 	$t_file_size = filesize( $v_tmp_name );
 	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
-	if ( $t_file_size > $t_max_file_size ) {
+	if( $t_file_size > $t_max_file_size ) {
 		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
 	}
 
@@ -101,10 +101,10 @@ if ( is_uploaded_file( $v_tmp_name ) ) {
 		case DISK:
 			file_ensure_valid_upload_path( $t_file_path );
 
-			if ( file_exists( $t_disk_file_name ) ) {
+			if( file_exists( $t_disk_file_name ) ) {
 				file_delete_local( $t_disk_file_name );
 			}
-			if ( !move_uploaded_file( $v_tmp_name, $t_disk_file_name ) ) {
+			if( !move_uploaded_file( $v_tmp_name, $t_disk_file_name ) ) {
 				trigger_error( ERROR_FILE_MOVE_FAILED, ERROR );
 			}
 			chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
@@ -130,7 +130,7 @@ if ( is_uploaded_file( $v_tmp_name ) ) {
 	$t_result = db_query_bound( $query, array( $f_title, $f_description, $f_file_id ) );
 }
 
-if ( !$t_result ) {
+if( !$t_result ) {
 	trigger_error( ERROR_GENERIC, ERROR  );
 }
 

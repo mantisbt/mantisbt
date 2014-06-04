@@ -51,7 +51,7 @@ require_api( 'string_api.php' );
 
 auth_reauthenticate();
 
-if ( !config_get( 'relationship_graph_enable' ) ) {
+if( !config_get( 'relationship_graph_enable' ) ) {
 	access_denied();
 }
 
@@ -62,7 +62,7 @@ print_manage_config_menu( 'manage_config_workflow_graph_page.php' );
 
 $t_project = helper_get_current_project();
 
-if ( $t_project == ALL_PROJECTS ) {
+if( $t_project == ALL_PROJECTS ) {
 	$t_project_title = lang_get( 'config_all_projects' );
 } else {
 	$t_project_title = sprintf( lang_get( 'config_project' ) , string_display( project_get_name( $t_project ) ) );

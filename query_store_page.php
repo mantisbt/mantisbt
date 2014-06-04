@@ -64,14 +64,14 @@ $t_query_arr = filter_db_get_available_queries();
 # Let's just see if any of the current filters are the
 # same as the one we're about the try and save
 foreach( $t_query_arr as $t_id => $t_name ) {
-	if ( filter_db_get_filter( $t_id ) == $t_query_to_store ) {
+	if( filter_db_get_filter( $t_id ) == $t_query_to_store ) {
 		print lang_get( 'query_exists' ) . ' (' . $t_name . ')<br />';
 	}
 }
 
 # Check for an error
 $t_error_msg = strip_tags( gpc_get_string( 'error_msg', null ) );
-if ( $t_error_msg != null ) {
+if( $t_error_msg != null ) {
 	print "<br />$t_error_msg<br /><br />";
 }
 
@@ -81,7 +81,7 @@ print lang_get( 'query_name_label' ) . lang_get( 'word_separator' );
 <?php echo form_security_field( 'query_store' ) ?>
 <input type="text" name="query_name" /><br />
 <?php
-if ( access_has_project_level( config_get( 'stored_query_create_shared_threshold' ) ) ) {
+if( access_has_project_level( config_get( 'stored_query_create_shared_threshold' ) ) ) {
 	print '<input type="checkbox" name="is_public" value="on" /> ';
 	print lang_get( 'make_public' );
 	print '<br />';

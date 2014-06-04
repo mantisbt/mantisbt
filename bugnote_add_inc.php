@@ -34,7 +34,7 @@
  * @uses lang_api.php
  */
 
-if ( !defined( 'BUGNOTE_ADD_INC_ALLOW' ) ) {
+if( !defined( 'BUGNOTE_ADD_INC_ALLOW' ) ) {
 	return;
 }
 
@@ -50,7 +50,7 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 
 ?>
-<?php if ( ( !bug_is_readonly( $f_bug_id ) ) &&
+<?php if( ( !bug_is_readonly( $f_bug_id ) ) &&
 		( access_has_bug_level( config_get( 'add_bugnote_threshold' ), $f_bug_id ) ) ) { ?>
 <?php # Bugnote Add Form BEGIN ?>
 <a id="addbugnote"></a> <br />
@@ -83,7 +83,7 @@ require_api( 'lang_api.php' );
 			</tr>
 
 <?php
-	if ( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
+	if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
 ?>
 			<tr class="row-1">
 				<th class="category">
@@ -92,7 +92,7 @@ require_api( 'lang_api.php' );
 				<td>
 <?php
 		$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
-		if ( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
+		if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
 ?>
 					<input type="checkbox" id="bugnote_add_view_status" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
 					<label for="bugnote_add_view_status"><?php echo lang_get( 'private' ) ?></label>
@@ -106,15 +106,15 @@ require_api( 'lang_api.php' );
 <?php
 	}
 
-	if ( config_get('time_tracking_enabled') ) {
-		if ( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $f_bug_id ) ) {
+	if( config_get('time_tracking_enabled') ) {
+		if( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $f_bug_id ) ) {
 ?>
 			<tr>
 				<th class="category">
 					<?php echo lang_get( 'time_tracking' ) ?>
 				</th>
 				<td>
-					<?php if ( config_get( 'time_tracking_stopwatch' ) && config_get( 'use_javascript' ) ) { ?>
+					<?php if( config_get( 'time_tracking_stopwatch' ) && config_get( 'use_javascript' ) ) { ?>
 					<input type="text" name="time_tracking" class="stopwatch_time" size="8" placeholder="hh:mm:ss" />
 					<input type="button" name="time_tracking_toggle" class="stopwatch_toggle" value="<?php echo lang_get( 'time_tracking_stopwatch_start' ) ?>" />
 					<input type="button" name="time_tracking_reset" class="stopwatch_reset" value="<?php echo lang_get( 'time_tracking_stopwatch_reset' ) ?>" />

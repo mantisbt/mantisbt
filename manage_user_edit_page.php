@@ -61,14 +61,14 @@ access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
 $f_username = gpc_get_string( 'username', '' );
 
-if ( is_blank( $f_username ) ) {
+if( is_blank( $f_username ) ) {
 	$t_user_id = gpc_get_int( 'user_id' );
 } else {
 	$t_user_id = user_get_id_by_name( $f_username );
-	if ( $t_user_id === false ) {
+	if( $t_user_id === false ) {
 		# If we can't find the user by name, attempt to find by email.
 		$t_user_id = user_get_id_by_email( $f_username );
-		if ( $t_user_id === false ) {
+		if( $t_user_id === false ) {
 			error_parameters( $f_username );
 			trigger_error( ERROR_USER_BY_NAME_NOT_FOUND, ERROR );
 		}
@@ -106,7 +106,7 @@ print_manage_menu();
 
 			<!-- Realname -->
 			<div class="field-container"><?php
-			if ( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
+			if( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
 				# With LDAP
 				echo '<span class="display-label"><span>' . lang_get( 'realname_label' ) . '</span></span>';
 				echo '<span class="input">';
@@ -122,7 +122,7 @@ print_manage_menu();
 			</div>
 			<!-- Email -->
 			<div class="field-container"><?php
-			if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
+			if( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
 				# With LDAP
 				echo '<span class="display-label"><span>' . lang_get( 'email_label' ) . '</span></span>';
 				echo '<span class="input">' . string_display_line( user_get_email( $t_user_id ) ) . '</span>';
@@ -141,7 +141,7 @@ print_manage_menu();
 				<span class="select">
 					<select id="edit-access-level" name="access_level"><?php
 						$t_access_level = $t_user['access_level'];
-						if ( !MantisEnum::hasValue( config_get( 'access_levels_enum_string' ), $t_access_level ) ) {
+						if( !MantisEnum::hasValue( config_get( 'access_levels_enum_string' ), $t_access_level ) ) {
 							$t_access_level = config_get( 'default_new_account_access_level' );
 						}
 						print_project_access_levels_option_list( (int)$t_access_level ); ?>
@@ -161,7 +161,7 @@ print_manage_menu();
 				<span class="checkbox"><input id="edit-protected" type="checkbox" name="protected" <?php check_checked( (int)$t_user['protected'], ON ); ?> /></span>
 				<span class="label-style"></span>
 			</div><?php
-			if ( config_get( 'enable_email_notification' ) == ON ) {
+			if( config_get( 'enable_email_notification' ) == ON ) {
 				echo '<div class="field-container">';
 				echo '<label for="send-email"><span>' . lang_get( 'notify_user' ) . '</span></label>';
 				echo '<span class="checkbox"><input id="send-email" type="checkbox" name="send_email_notification" checked="checked" /></span>';
@@ -202,7 +202,7 @@ if( $t_reset || $t_unlock || $t_delete ) {
 <?php } ?>
 
 <!-- Delete Button -->
-<?php if ( $t_delete ) { ?>
+<?php if( $t_delete ) { ?>
 	<form id="manage-user-delete-form" method="post" action="manage_user_delete.php" class="action-button">
 		<fieldset>
 			<?php echo form_security_field( 'manage_user_delete' ) ?>
@@ -217,7 +217,7 @@ if( $t_reset || $t_unlock || $t_delete ) {
 <?php if( $t_reset ) { ?>
 <div class="important-msg">
 <?php
-	if ( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
+	if( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 		echo lang_get( 'reset_password_msg' );
 	} else {
 		echo lang_get( 'reset_password_msg2' );
@@ -227,8 +227,8 @@ if( $t_reset || $t_unlock || $t_delete ) {
 <?php } ?>
 
 <!-- PROJECT ACCESS (if permissions allow) and user is not ADMINISTRATOR -->
-<?php if ( access_has_global_level( config_get( 'manage_user_threshold' ) ) &&
-    !user_is_administrator( $t_user_id ) ) {
+<?php if( access_has_global_level( config_get( 'manage_user_threshold' ) ) &&
+	!user_is_administrator( $t_user_id ) ) {
 ?>
 <div class="form-container">
 	<h2><?php echo lang_get( 'add_user_title' ) ?></h2>

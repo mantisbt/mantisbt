@@ -52,8 +52,8 @@ $f_sequence	= gpc_get_int( 'sequence' );
 $t_manage_project_threshold = config_get( 'manage_project_threshold' );
 
 foreach ( $f_project_id as $t_proj_id ) {
-	if ( access_has_project_level( $t_manage_project_threshold, $t_proj_id ) ) {
-		if ( !custom_field_is_linked( $f_field_id, $t_proj_id ) ) {
+	if( access_has_project_level( $t_manage_project_threshold, $t_proj_id ) ) {
+		if( !custom_field_is_linked( $f_field_id, $t_proj_id ) ) {
 			custom_field_link( $f_field_id, $t_proj_id );
 		}
 

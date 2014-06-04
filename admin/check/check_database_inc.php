@@ -28,7 +28,7 @@
  * @uses utility_api.php
  */
 
-if ( !defined( 'CHECK_DATABASE_INC_ALLOW' ) ) {
+if( !defined( 'CHECK_DATABASE_INC_ALLOW' ) ) {
 	return;
 }
 
@@ -99,7 +99,7 @@ if( db_is_mysql() ) {
 	);
 }
 
-if ( db_is_mssql() ) {
+if( db_is_mssql() ) {
 
 	check_print_test_warn_row(
 		'PHP support for Microsoft SQL Server driver',
@@ -410,7 +410,7 @@ if( db_is_mysql() ) {
 		if( preg_match( "/^$t_table_prefix_regex_safe.+?$t_table_suffix_regex_safe\$/", $t_table ) ) {
 			$t_result = db_query_bound( 'SHOW FULL FIELDS FROM ' . $t_table );
 			while( $t_row = db_fetch_array( $t_result ) ) {
-				if ( $t_row[$t_field_collation] === null ) {
+				if( $t_row[$t_field_collation] === null ) {
 					continue;
 				}
 				check_print_test_row(

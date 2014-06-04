@@ -37,7 +37,7 @@
  * @uses utility_api.php
  */
 
-if ( !defined( 'BUG_SPONSORSHIP_LIST_VIEW_INC_ALLOW' ) ) {
+if( !defined( 'BUG_SPONSORSHIP_LIST_VIEW_INC_ALLOW' ) ) {
 	return;
 }
 
@@ -58,7 +58,7 @@ require_api( 'utility_api.php' );
 # Determine whether the sponsorship section should be shown.
 #
 
-if ( ( config_get( 'enable_sponsorship' ) == ON ) && ( access_has_bug_level( config_get( 'view_sponsorship_total_threshold' ), $f_bug_id ) ) ) {
+if( ( config_get( 'enable_sponsorship' ) == ON ) && ( access_has_bug_level( config_get( 'view_sponsorship_total_threshold' ), $f_bug_id ) ) ) {
 	$t_sponsorship_ids = sponsorship_get_all_ids( $f_bug_id );
 
 	$t_sponsorships_exist = count( $t_sponsorship_ids ) > 0;
@@ -73,7 +73,7 @@ if ( ( config_get( 'enable_sponsorship' ) == ON ) && ( access_has_bug_level( con
 # Sponsorship Box
 #
 
-if ( $t_show_sponsorships ) {
+if( $t_show_sponsorships ) {
 ?>
 
 <a id="sponsorships"></a> <br />
@@ -94,7 +94,7 @@ if ( $t_show_sponsorships ) {
 			echo lang_get( 'users_sponsoring_bug' );
 
 			$t_details_url = lang_get( 'sponsorship_process_url' );
-			if ( !is_blank( $t_details_url ) ) {
+			if( !is_blank( $t_details_url ) ) {
 				echo '&#160;[<a href="' . $t_details_url . '" target="_blank">'
 					. lang_get( 'sponsorship_more_info' ) . '</a>]';
 			}
@@ -103,7 +103,7 @@ if ( $t_show_sponsorships ) {
 	</tr>
 
 <?php
-	if ( $t_can_sponsor ) {
+	if( $t_can_sponsor ) {
 ?>
 	<tr class="row-1">
 		<th class="category" width="15%"><?php echo lang_get( 'sponsor_issue' ) ?></th>
@@ -121,7 +121,7 @@ if ( $t_show_sponsorships ) {
 	}
 
 	$t_total_sponsorship = bug_get_field( $f_bug_id, 'sponsorship_total' );
-	if ( $t_total_sponsorship > 0 ) {
+	if( $t_total_sponsorship > 0 ) {
 ?>
 	<tr class="row-2">
 		<th class="category" width="15%"><?php echo lang_get( 'sponsors_list' ) ?></th>
@@ -130,7 +130,7 @@ if ( $t_show_sponsorships ) {
 			echo sprintf( lang_get( 'total_sponsorship_amount' ),
 				sponsorship_format_amount( $t_total_sponsorship ) );
 
-			if ( access_has_bug_level( config_get( 'view_sponsorship_details_threshold' )
+			if( access_has_bug_level( config_get( 'view_sponsorship_details_threshold' )
 				, $f_bug_id ) ) {
 				echo '<br /><br />';
 				$i = 0;
@@ -145,7 +145,7 @@ if ( $t_show_sponsorships ) {
 					echo sprintf( lang_get( 'label' ), $t_date_added ) . lang_get( 'word_separator' );
 					print_user( $t_sponsorship->user_id );
 					echo ' (' . sponsorship_format_amount( $t_sponsorship->amount ) . ')';
-					if ( access_has_bug_level( config_get( 'handle_sponsored_bugs_threshold' ), $f_bug_id ) ) {
+					if( access_has_bug_level( config_get( 'handle_sponsored_bugs_threshold' ), $f_bug_id ) ) {
 						echo ' ' . get_enum_element( 'sponsorship', $t_sponsorship->paid );
 					}
 				}
@@ -170,12 +170,12 @@ if ( $t_show_sponsorships ) {
 			echo lang_get( 'users_sponsoring_bug' );
 
 			$t_details_url = lang_get( 'sponsorship_process_url' );
-			if ( !is_blank( $t_details_url ) ) {
+			if( !is_blank( $t_details_url ) ) {
 				echo '&#160;[<a href="' . $t_details_url . '" target="_blank">'
 					. lang_get( 'sponsorship_more_info' ) . '</a>]';
 			}
 
-			if ( $t_total_sponsorship > 0 ) {
+			if( $t_total_sponsorship > 0 ) {
 				echo ' <span style="font-weight: normal;">(';
 				echo sprintf( lang_get( 'total_sponsorship_amount' ),
 				sponsorship_format_amount( $t_total_sponsorship ) );

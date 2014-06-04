@@ -67,7 +67,7 @@ html_page_top();
 
 $t_filter = filter_get_default();
 $t_target_field = rtrim( gpc_get_string( 'target_field', '' ), '[]');
-if ( !isset( $t_filter[ $t_target_field ] ) ) {
+if( !isset( $t_filter[ $t_target_field ] ) ) {
 	$t_target_field = '';
 }
 
@@ -92,18 +92,18 @@ $t_custom_rows = 0;
 $t_fields = helper_get_columns_to_view();
 $t_n_fields = count( $t_fields );
 for ( $i=0; $i < $t_n_fields; $i++ ) {
-	if ( in_array( $t_fields[$i], array( 'selection', 'edit', 'bugnotes_count', 'attachment_count' ) ) ) {
+	if( in_array( $t_fields[$i], array( 'selection', 'edit', 'bugnotes_count', 'attachment_count' ) ) ) {
 		unset( $t_fields[$i] );
 	}
 }
 
-if ( ON == config_get( 'filter_by_custom_fields' ) ) {
+if( ON == config_get( 'filter_by_custom_fields' ) ) {
 	$t_custom_cols = $t_filter_cols;
 	$t_custom_fields = custom_field_get_linked_ids( $t_project_id );
 
 	foreach ( $t_custom_fields as $t_cfid ) {
 		$t_field_info = custom_field_cache_row( $t_cfid, true );
-		if ( $t_field_info['access_level_r'] <= $t_current_user_access_level && $t_field_info['filter_by']) {
+		if( $t_field_info['access_level_r'] <= $t_current_user_access_level && $t_field_info['filter_by']) {
 			$t_accessible_custom_fields_ids[] = $t_cfid;
 			$t_accessible_custom_fields_names[] = $t_field_info['name'];
 			$t_accessible_custom_fields_types[] = $t_field_info['type'];
@@ -112,13 +112,13 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 		}
 	}
 
-	if ( count( $t_accessible_custom_fields_ids ) > 0 ) {
+	if( count( $t_accessible_custom_fields_ids ) > 0 ) {
 		$t_per_row = config_get( 'filter_custom_fields_per_row' );
 		$t_custom_rows = ceil( count( $t_accessible_custom_fields_ids ) / $t_per_row );
 	}
 }
 
-if ( !in_array( $t_target_field, $t_fields ) ) {
+if( !in_array( $t_target_field, $t_fields ) ) {
 	$t_target_field = '';
 }
 
@@ -126,28 +126,28 @@ $f_for_screen = gpc_get_bool( 'for_screen', true );
 
 $t_action  = "view_all_set.php?f=3";
 
-if ( $f_for_screen == false ) {
+if( $f_for_screen == false ) {
 	$t_action  = "view_all_set.php";
 }
 
 $f_default_view_type = 'simple';
-if ( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) {
+if( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) {
 	$f_default_view_type = 'advanced';
 }
 
 $f_view_type = gpc_get_string( 'view_type', $f_default_view_type );
-if ( ADVANCED_ONLY == config_get( 'view_filters' ) ) {
+if( ADVANCED_ONLY == config_get( 'view_filters' ) ) {
 	$f_view_type = 'advanced';
 }
-if ( SIMPLE_ONLY == config_get( 'view_filters' ) ) {
+if( SIMPLE_ONLY == config_get( 'view_filters' ) ) {
 	$f_view_type = 'simple';
 }
-if ( !in_array( $f_view_type, array( 'simple', 'advanced' ) ) ) {
+if( !in_array( $f_view_type, array( 'simple', 'advanced' ) ) ) {
 	$f_view_type = $f_default_view_type;
 }
 
 $t_select_modifier = '';
-if ( 'advanced' == $f_view_type ) {
+if( 'advanced' == $f_view_type ) {
 	$t_select_modifier = ' multiple="multiple" size="10"';
 }
 
@@ -164,7 +164,7 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 <input type="hidden" name="type" value="1" />
 <input type="hidden" name="view_type" value="<?php echo $f_view_type; ?>" />
 <?php
-	if ( $f_for_screen == false ) {
+	if( $f_for_screen == false ) {
 		print '<input type="hidden" name="print" value="1" />';
 		print '<input type="hidden" name="offset" value="0" />';
 	}
@@ -177,8 +177,8 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 	<?php
 		$f_switch_view_link = 'view_filters_page.php?target_field=' . $t_target_field . '&view_type=';
 
-		if ( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
-			if ( 'advanced' == $f_view_type ) {
+		if( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
+			if( 'advanced' == $f_view_type ) {
 				print_bracket_link( $f_switch_view_link . 'simple', lang_get( 'simple_filters' ) );
 			} else {
 				print_bracket_link( $f_switch_view_link . 'advanced', lang_get( 'advanced_filters' ) );
@@ -216,10 +216,10 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 	<td colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
 		<?php print_filter_show_category(); ?>
 	</td>
-    <!-- Severity -->
-    <td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+	<!-- Severity -->
+	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_show_severity(); ?>
-    </td>
+	</td>
 	<!-- Resolution -->
 	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_show_resolution(); ?>
@@ -237,13 +237,13 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php echo ( 'simple' == $f_view_type ) ? lang_get( 'hide_status' ) : '&#160;'; ?>
 	</th>
-<?php if ( $t_show_build ) { ?>
+<?php if( $t_show_build ) { ?>
 	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'product_build' ) ?></th>
 <?php } else { ?>
 	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">&#160;</th>
 <?php } ?>
 
-<?php if ( $t_show_product_version ) { ?>
+<?php if( $t_show_product_version ) { ?>
 	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'product_version' ) ?></th>
 	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'fixed_in_version' ) ?></th>
 <?php } else { ?>
@@ -253,7 +253,7 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 
 	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'priority' ) ?></th>
 
-<?php if ( $t_show_product_version ) { ?>
+<?php if( $t_show_product_version ) { ?>
 	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'target_version' ) ?></th>
 <?php } else { ?>
 	<th class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 8 ) * $t_custom_cols ); ?>">&#160;</th>
@@ -267,7 +267,7 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 	<!-- Hide Status -->
 	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 	<?php
-	if ( 'simple' == $f_view_type ) {
+	if( 'simple' == $f_view_type ) {
 		print_filter_hide_status();
 	} else {
 		echo '&#160;';
@@ -276,38 +276,38 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 	</td>
 	<!-- Build -->
 	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<?php if ( $t_show_build ) {
+		<?php if( $t_show_build ) {
 			print_filter_show_build();
 		} ?>
 	</td>
 	<!-- Version -->
 	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<?php if ( $t_show_product_version ) {
- 			print_filter_show_version();
- 		} else {
- 			echo "&#160;";
- 		} ?>
+		<?php if( $t_show_product_version ) {
+			print_filter_show_version();
+		} else {
+			echo "&#160;";
+		} ?>
 	</td>
 	<!-- Fixed in Version -->
 	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-		<?php if ( $t_show_product_version ) {
- 			print_filter_show_fixed_in_version();
- 		} else {
- 			echo "&#160;";
- 		} ?>
- 	</td>
+		<?php if( $t_show_product_version ) {
+			print_filter_show_fixed_in_version();
+		} else {
+			echo "&#160;";
+		} ?>
+	</td>
 	<!-- Priority -->
 	<td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
 		<?php print_filter_show_priority(); ?>
 	</td>
 	<!-- Target Version -->
 	<td colspan="<?php echo ( ( $t_filter_cols - 8 ) * $t_custom_cols ); ?>">
-		<?php if ( $t_show_product_version ) {
- 			print_filter_show_target_version();
- 		} else {
- 			echo "&#160;";
- 		} ?>
- 	</td>
+		<?php if( $t_show_product_version ) {
+			print_filter_show_target_version();
+		} else {
+			echo "&#160;";
+		} ?>
+	</td>
 </tr>
 
 <!-- Filter row 3 -->
@@ -343,7 +343,7 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 		<?php print_filter_sticky_issues(); ?>
 	</td>
 	<!-- Date filters -->
- 	<td class="left" colspan="<?php echo ( 3 * $t_custom_cols ); ?>">
+	<td class="left" colspan="<?php echo ( 3 * $t_custom_cols ); ?>">
 		<?php print_filter_do_filter_by_date( true ); # hide checkbox as it's already been shown ?>
 	</td>
 	<!-- Relationships -->
@@ -355,10 +355,10 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 <!-- Filter row 4 (custom fields) -->
 
 <?php
-if ( ON == config_get( 'filter_by_custom_fields' ) ) {
+if( ON == config_get( 'filter_by_custom_fields' ) ) {
 
 	# -- Custom Field Searching --
-	if ( count( $t_accessible_custom_fields_ids ) > 0 ) {
+	if( count( $t_accessible_custom_fields_ids ) > 0 ) {
 		$t_per_row = config_get( 'filter_custom_fields_per_row' );
 		$t_num_rows = ceil( count( $t_accessible_custom_fields_ids ) / $t_per_row );
 		$t_base = 0;
@@ -369,7 +369,7 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 			<?php
 			for( $j = 0; $j < $t_per_row; $j++ ) {
 				echo '<th class="small-caption" colspan="' . ( 1 * $t_filter_cols ) . '">';
-				if ( isset( $t_accessible_custom_fields_names[$t_base + $j] ) ) {
+				if( isset( $t_accessible_custom_fields_names[$t_base + $j] ) ) {
 					echo string_display( lang_get_defaulted( $t_accessible_custom_fields_names[$t_base + $j] ) );
 				} else {
 					echo '&#160;';
@@ -382,7 +382,7 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 			<?php
 			for ( $j = 0; $j < $t_per_row; $j++ ) {
 				echo '<td colspan="' . ( 1 * $t_filter_cols ) . '">';
-				if ( isset( $t_accessible_custom_fields_ids[$t_base + $j] ) ) {
+				if( isset( $t_accessible_custom_fields_ids[$t_base + $j] ) ) {
 					print_filter_custom_field($t_accessible_custom_fields_ids[$t_base + $j]);
 				} else {
 					echo '&#160;';
@@ -398,7 +398,7 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 	}
 }
 
-if ( 'simple' == $f_view_type ) {
+if( 'simple' == $f_view_type ) {
 	$t_project_cols = 0;
 } else {
 	$t_project_cols = 3;
@@ -423,7 +423,7 @@ if ( 'simple' == $f_view_type ) {
 	</td>
 
 	<?php
-		if ( 'advanced' == $f_view_type ) {
+		if( 'advanced' == $f_view_type ) {
 	?>
 	<!-- Projects -->
 			<th class="small-caption category2" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
@@ -455,7 +455,7 @@ foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
 	$t_column++;
 
 	# wrap at the appropriate column
-	if ( $t_column >= $t_filter_cols ) {
+	if( $t_column >= $t_filter_cols ) {
 		echo '<tr class="row-category2">', $t_fields, '</tr>';
 		echo '<tr class="row-1">';
 		foreach( $t_row_filters as $t_row_field_name ) {
@@ -471,8 +471,8 @@ foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
 }
 
 # output any remaining plugin filters
-if ( $t_column > 0 ) {
-	if ( $t_column < $t_filter_cols ) {
+if( $t_column > 0 ) {
+	if( $t_column < $t_filter_cols ) {
 		$t_fields .= '<td class="small-caption" colspan="' . ( $t_filter_cols - $t_column ) * $t_custom_cols . '">&#160;</td>';
 	}
 
@@ -484,7 +484,7 @@ if ( $t_column > 0 ) {
 		echo '</td>';
 	}
 
-	if ( $t_column < $t_filter_cols ) {
+	if( $t_column < $t_filter_cols ) {
 		echo '<td class="small-caption" colspan="' . ( $t_filter_cols - $t_column ) * $t_custom_cols . '">&#160;</td>';
 	}
 
@@ -497,7 +497,7 @@ if ( $t_column > 0 ) {
 
 <tr class="row-category2">
 	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'search' ) ?></th>
-	<th class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 2 ) * $t_custom_cols ); ?>"><?php if ( $t_show_tags ) { echo lang_get( 'tags' ); } ?></th>
+	<th class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 2 ) * $t_custom_cols ); ?>"><?php if( $t_show_tags ) { echo lang_get( 'tags' ); } ?></th>
 	<th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"></th>
 </tr>
 <tr class="row-1">
@@ -506,7 +506,7 @@ if ( $t_column > 0 ) {
 		<input type="text" size="16" name="search" value="<?php echo string_html_specialchars( $t_filter['search'] ); ?>" />
 	</td>
 
-	<td class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 2 ) * $t_custom_cols ); ?>"><?php if ( $t_show_tags ) { print_filter_tag_string(); } ?></td>
+	<td class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 2 ) * $t_custom_cols ); ?>"><?php if( $t_show_tags ) { print_filter_tag_string(); } ?></td>
 
 	<!-- Submit button -->
 	<td class="center" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">

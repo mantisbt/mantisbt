@@ -58,7 +58,7 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 	$g_project_override = $t_bug->project_id;
 }
 
-if ( bug_is_readonly( $f_bug_id ) ) {
+if( bug_is_readonly( $f_bug_id ) ) {
 	error_parameters( $f_bug_id );
 	trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 }
@@ -94,9 +94,9 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 			<?php
 				$t_project_id = bug_get_field( $f_bug_id, 'project_id' );
 				$t_access_level = config_get( 'reminder_receive_threshold' );
-				if ( $t_bug->view_state === VS_PRIVATE ) {
+				if( $t_bug->view_state === VS_PRIVATE ) {
 					$t_private_bug_threshold = config_get( 'private_bug_threshold' );
-					if ( $t_private_bug_threshold > $t_access_level ) {
+					if( $t_private_bug_threshold > $t_access_level ) {
 						$t_access_level = $t_private_bug_threshold;
 					}
 				}
@@ -122,10 +122,10 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 	<td>
 		<?php
 			echo lang_get( 'reminder_explain' ) . ' ';
-			if ( ON == config_get( 'reminder_recipients_monitor_bug' ) ) {
+			if( ON == config_get( 'reminder_recipients_monitor_bug' ) ) {
 				echo lang_get( 'reminder_monitor' ) . ' ';
 			}
-			if ( ON == config_get( 'store_reminders' ) ) {
+			if( ON == config_get( 'store_reminders' ) ) {
 				echo lang_get( 'reminder_store' );
 			}
 		?>

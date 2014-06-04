@@ -38,7 +38,7 @@
  * @uses string_api.php
  */
 
-if ( !defined( 'MY_VIEW_INC_ALLOW' ) ) {
+if( !defined( 'MY_VIEW_INC_ALLOW' ) ) {
 	return;
 }
 
@@ -288,7 +288,7 @@ $box_title = lang_get( 'my_view_title_' . $t_box_title );
 <?php
 # -- Navigation header row --?>
 <thead>
-    <tr class="my-buglist-nav">
+	<tr class="my-buglist-nav">
 <?php
 # -- Viewing range info --?>
 	<td class="form-title" colspan="2">
@@ -334,11 +334,11 @@ for( $i = 0;$i < $t_count; $i++ ) {
 	# grab the project name
 	$project_name = project_get_field( $t_bug->project_id, 'name' );
 
-	if ( VS_PRIVATE == $t_bug->view_state ) {
+	if( VS_PRIVATE == $t_bug->view_state ) {
 	    $t_bug_class = 'my-buglist-private';
-    } else {
-        $t_bug_class = '';
-    }
+	} else {
+		$t_bug_class = '';
+	}
 	?>
 
 <tr class="my-buglist-bug <?php echo $t_bug_class?> <?php echo $status_label; ?>">
@@ -361,7 +361,7 @@ for( $i = 0;$i < $t_count; $i++ ) {
 		print_status_icon( $t_bug->priority );
 	}
 
-	if ( $t_attachment_count > 0 ) {
+	if( $t_attachment_count > 0 ) {
 		$t_href = string_get_bug_view_url( $t_bug->id ) . '#attachments';
 		$t_href_title = sprintf( lang_get( 'view_attachments_for_issue' ), $t_attachment_count, $t_bug->id );
 		$t_alt_text = $t_attachment_count . lang_get( 'word_separator' ) . lang_get( 'attachments' );
@@ -390,7 +390,7 @@ for( $i = 0;$i < $t_count; $i++ ) {
 	# type project name if viewing 'all projects' or bug is in subproject
 	echo '<span class="small category">', string_display_line( category_full_name( $t_bug->category_id, true, $t_bug->project_id ) ), '</span>';
 
-    echo '<span class="small last-modified"> - ';
+	echo '<span class="small last-modified"> - ';
 	if( $t_bug->last_updated > strtotime( '-' . $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' ) ) {
 		echo '<strong>' . $t_last_updated . '</strong>';
 	} else {

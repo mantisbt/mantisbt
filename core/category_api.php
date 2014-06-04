@@ -78,7 +78,7 @@ function category_exists( $p_category_id ) {
  * @param int $p_category_id category id
  * @access public
  */
- function category_ensure_exists( $p_category_id ) {
+function category_ensure_exists( $p_category_id ) {
 	if( !category_exists( $p_category_id ) ) {
 		trigger_error( ERROR_CATEGORY_NOT_FOUND, ERROR );
 	}
@@ -91,7 +91,7 @@ function category_exists( $p_category_id ) {
  * @return bool Returns true if the category is unique, false otherwise
  * @access public
  */
- function category_is_unique( $p_project_id, $p_name ) {
+function category_is_unique( $p_project_id, $p_name ) {
 	$t_category_table = db_get_table( 'category' );
 	$query = "SELECT COUNT(*) FROM $t_category_table
 					WHERE project_id=" . db_param() . " AND " . db_helper_like( 'name' );
@@ -112,7 +112,7 @@ function category_exists( $p_category_id ) {
  * @return null
  * @access public
  */
- function category_ensure_unique( $p_project_id, $p_name ) {
+function category_ensure_unique( $p_project_id, $p_name ) {
 	if( !category_is_unique( $p_project_id, $p_name ) ) {
 		trigger_error( ERROR_CATEGORY_DUPLICATE, ERROR );
 	}
@@ -125,7 +125,7 @@ function category_exists( $p_category_id ) {
  * @return int Category ID
  * @access public
  */
- function category_add( $p_project_id, $p_name ) {
+function category_add( $p_project_id, $p_name ) {
 	if( is_blank( $p_name ) ) {
 		error_parameters( lang_get( 'category' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
@@ -150,7 +150,7 @@ function category_exists( $p_category_id ) {
  * @return bool
  * @access public
  */
- function category_update( $p_category_id, $p_name, $p_assigned_to ) {
+function category_update( $p_category_id, $p_name, $p_assigned_to ) {
 	if( is_blank( $p_name ) ) {
 		error_parameters( lang_get( 'category' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
@@ -185,7 +185,7 @@ function category_exists( $p_category_id ) {
  * @return bool
  * @access public
  */
- function category_remove( $p_category_id, $p_new_category_id = 0 ) {
+function category_remove( $p_category_id, $p_new_category_id = 0 ) {
 	$t_category_row = category_get_row( $p_category_id );
 
 	category_ensure_exists( $p_category_id );
@@ -222,7 +222,7 @@ function category_exists( $p_category_id ) {
  * @return bool
  * @access public
  */
- function category_remove_all( $p_project_id, $p_new_category_id = 0 ) {
+function category_remove_all( $p_project_id, $p_new_category_id = 0 ) {
 	project_ensure_exists( $p_project_id );
 	if( 0 != $p_new_category_id ) {
 		category_ensure_exists( $p_new_category_id );
@@ -274,7 +274,7 @@ function category_exists( $p_category_id ) {
  * @return array array containing category details
  * @access public
  */
- function category_get_row( $p_category_id ) {
+function category_get_row( $p_category_id ) {
 	global $g_category_cache;
 
 	$p_category_id = (int)$p_category_id;
@@ -304,7 +304,7 @@ function category_exists( $p_category_id ) {
  * @return int integer representing sort order
  * @access public
  */
- function category_sort_rows_by_project( $p_category1, $p_category2 = null ) {
+function category_sort_rows_by_project( $p_category1, $p_category2 = null ) {
 	static $p_project_id = null;
 	if( is_null( $p_category2 ) ) {
 		# Set a target project
@@ -426,7 +426,7 @@ function category_get_filter_list( $p_project_id = null ) {
  * @return array array of categories
  * @access public
  */
- function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_project = false ) {
+function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_project = false ) {
 	global $g_category_cache, $g_cache_category_project;
 
 	if( isset( $g_cache_category_project[ (int)$p_project_id ] ) ) {
@@ -451,17 +451,17 @@ function category_get_filter_list( $p_project_id = null ) {
 	$t_category_table = db_get_table( 'category' );
 	$t_project_table = db_get_table( 'project' );
 
-	if ( $c_project_id == ALL_PROJECTS ) {
+	if( $c_project_id == ALL_PROJECTS ) {
 		$t_inherit = false;
 	} else {
-		if ( $p_inherit === null ) {
+		if( $p_inherit === null ) {
 			$t_inherit = config_get( 'subprojects_inherit_categories' );
 		} else {
 			$t_inherit = $p_inherit;
 		}
 	}
 
-	if ( $t_inherit ) {
+	if( $t_inherit ) {
 		$t_project_ids = project_hierarchy_inheritance( $p_project_id );
 		$t_project_where = ' project_id IN ( ' . implode( ', ', $t_project_ids ) . ' ) ';
 	} else {
@@ -544,7 +544,7 @@ function category_get_field( $p_category_id, $p_field_name ) {
  * @return string category name
  * @access public
  */
- function category_get_name( $p_category_id ) {
+function category_get_name( $p_category_id ) {
 	return category_get_field( $p_category_id, 'name' );
 }
 
@@ -558,7 +558,7 @@ function category_get_field( $p_category_id, $p_field_name ) {
  * @return bool
  * @access public
  */
- function category_get_id_by_name( $p_category_name, $p_project_id, $p_trigger_errors = true ) {
+function category_get_id_by_name( $p_category_name, $p_project_id, $p_trigger_errors = true ) {
 	$t_category_table = db_get_table( 'category' );
 	$t_project_name = project_get_name( $p_project_id );
 

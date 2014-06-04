@@ -78,25 +78,25 @@ $t_tags_attach = array();
 $t_tags_failed = array();
 
 foreach ( $t_tags as $t_tag_row ) {
-	if ( -1 == $t_tag_row['id'] ) {
-		if ( $t_can_create ) {
+	if( -1 == $t_tag_row['id'] ) {
+		if( $t_can_create ) {
 			$t_tags_create[] = $t_tag_row;
 		} else {
 			$t_tags_failed[] = $t_tag_row;
 		}
-	} else if ( -2 == $t_tag_row['id'] ) {
+	} else if( -2 == $t_tag_row['id'] ) {
 		$t_tags_failed[] = $t_tag_row;
 	} else {
 		$t_tags_attach[] = $t_tag_row;
 	}
 }
 
-if ( 0 < $f_tag_select && tag_exists( $f_tag_select ) ) {
+if( 0 < $f_tag_select && tag_exists( $f_tag_select ) ) {
 	$t_tags_attach[] = tag_get( $f_tag_select );
 }
 
 # failed to attach at least one tag
-if ( count( $t_tags_failed ) > 0 ) {
+if( count( $t_tags_failed ) > 0 ) {
 	html_page_top( lang_get( 'tag_attach_long' ) . ' ' . bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 ?>
 <br/>
@@ -108,7 +108,7 @@ if ( count( $t_tags_failed ) > 0 ) {
 <?php
 	$t_tag_string = "";
 	foreach( $t_tags_attach as $t_tag_row ) {
-		if ( !is_blank( $t_tag_string ) ) {
+		if( !is_blank( $t_tag_string ) ) {
 			$t_tag_string .= config_get( 'tag_separator' );
 		}
 		$t_tag_string .= $t_tag_row['name'];
@@ -116,14 +116,14 @@ if ( count( $t_tags_failed ) > 0 ) {
 
 	foreach( $t_tags_failed as $t_tag_row ) {
 		echo '<tr>';
-		if ( -1 == $t_tag_row['id'] ) {
+		if( -1 == $t_tag_row['id'] ) {
 			echo '<th class="category">', lang_get( 'tag_create_denied' ), '</th>';
-		} else if ( -2 == $t_tag_row['id'] ) {
+		} else if( -2 == $t_tag_row['id'] ) {
 			echo '<th class="category">', lang_get( 'tag_invalid_name' ), '</th>';
 		}
 		echo '<td>', string_html_specialchars( $t_tag_row['name'] ), '</td></tr>';
 
-		if ( !is_blank( $t_tag_string ) ) {
+		if( !is_blank( $t_tag_string ) ) {
 			$t_tag_string .= config_get( 'tag_separator' );
 		}
 		$t_tag_string .= $t_tag_row['name'];
@@ -149,7 +149,7 @@ if ( count( $t_tags_failed ) > 0 ) {
 	}
 
 	foreach( $t_tags_attach as $t_tag_row ) {
-		if ( !tag_bug_is_attached( $t_tag_row['id'], $f_bug_id ) ) {
+		if( !tag_bug_is_attached( $t_tag_row['id'], $f_bug_id ) ) {
 			tag_bug_attach( $t_tag_row['id'], $f_bug_id, $t_user_id );
 		}
 	}

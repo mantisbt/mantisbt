@@ -68,7 +68,7 @@ function check_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) 
  */
 function check_unhandled_errors_exist() {
 	global $g_errors_raised;
-	if ( count( $g_errors_raised ) > 0 ) {
+	if( count( $g_errors_raised ) > 0 ) {
 		$t_type = E_ALL;
 		foreach( $g_errors_raised as $t_error ) {
 			$t_type = min( $t_type, $t_error['type'] );
@@ -188,7 +188,7 @@ function check_print_test_result( $p_result ) {
 function check_print_test_row( $p_description, $p_pass, $p_info = null ) {
 	global $g_alternate_row, $g_show_all;
 	$t_unhandled = check_unhandled_errors_exist();
-	if ( !$g_show_all && $p_pass && !$t_unhandled) {
+	if( !$g_show_all && $p_pass && !$t_unhandled) {
 		return $p_pass;
 	}
 
@@ -229,7 +229,7 @@ function check_print_test_row( $p_description, $p_pass, $p_info = null ) {
 function check_print_test_warn_row( $p_description, $p_pass, $p_info = null ) {
 	global $g_alternate_row, $g_show_all;
 	$t_unhandled = check_unhandled_errors_exist();
-	if ( !$g_show_all && $p_pass && !$t_unhandled) {
+	if( !$g_show_all && $p_pass && !$t_unhandled) {
 		return $p_pass;
 	}
 	echo "\t<tr>\n\t\t<td class=\"description$g_alternate_row\">$p_description";

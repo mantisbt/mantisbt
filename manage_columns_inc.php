@@ -34,7 +34,7 @@
  * @uses print_api.php
  */
 
-if ( !defined( 'MANAGE_COLUMNS_INC_ALLOW' ) ) {
+if( !defined( 'MANAGE_COLUMNS_INC_ALLOW' ) ) {
 	return;
 }
 
@@ -56,7 +56,7 @@ $t_account_page = defined( 'ACCOUNT_COLUMNS' );
 $t_project_id = helper_get_current_project();
 
 # Calculate the user id to set the configuration for.
-if ( $t_manage_page ) {
+if( $t_manage_page ) {
 	$t_user_id = NO_USER;
 } else {
 	$t_user_id = auth_get_current_user_id();
@@ -83,7 +83,7 @@ $t_excel = implode( ', ', $t_columns );
 		<fieldset class="has-required">
 			<legend><span><?php echo lang_get( 'manage_columns_config' ) ?></span></legend>
 			<?php
-			if ( $t_account_page ) {
+			if( $t_account_page ) {
 				print_account_menu( 'account_manage_columns_page.php' );
 			}
 			?>
@@ -117,8 +117,8 @@ $t_excel = implode( ', ', $t_columns );
 				<span class="label-style"></span>
 			</div>
 			<?php
-			if ( $t_account_page ) {
-				if ( $t_project_id == ALL_PROJECTS ) { ?>
+			if( $t_account_page ) {
+				if( $t_project_id == ALL_PROJECTS ) { ?>
 					<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_as_my_default" value="<?php echo lang_get( 'update_columns_as_my_default' ) ?>" /></span><?php
 				} else { ?>
 					<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_for_current_project" value="<?php echo lang_get( 'update_columns_for_current_project' ) ?>" /></span><?php
@@ -126,7 +126,7 @@ $t_excel = implode( ', ', $t_columns );
 			}
 		}
 
-		if ( $t_manage_page && current_user_is_administrator() ) { ?>
+		if( $t_manage_page && current_user_is_administrator() ) { ?>
 			<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_as_global_default" value="<?php echo lang_get( 'update_columns_as_global_default' ) ?>" /></span><?php
 		} ?>
 		</fieldset>
@@ -145,7 +145,7 @@ $t_excel = implode( ', ', $t_columns );
 			</select>
 
 			<?php # Skip "Copy From" if the current project is ALL PROJECTS, the current page is management page, and the user is not administrator
-			if ( !$t_manage_page || ( $t_project_id != ALL_PROJECTS ) || current_user_is_administrator() ) { ?>
+			if( !$t_manage_page || ( $t_project_id != ALL_PROJECTS ) || current_user_is_administrator() ) { ?>
 			<input type="submit" name="copy_from" class="button" value="<?php echo lang_get( 'copy_columns_from' ) ?>" /><?php
 			} ?>
 			<input type="submit" name="copy_to" class="button" value="<?php echo lang_get( 'copy_columns_to' ) ?>" />
@@ -154,7 +154,7 @@ $t_excel = implode( ', ', $t_columns );
 </div>
 
 <?php
-if ( $t_account_page ) {
+if( $t_account_page ) {
 ?>
 <div class="form-container">
 	<form method="post" action="manage_config_columns_reset.php">

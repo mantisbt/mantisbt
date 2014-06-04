@@ -47,7 +47,7 @@ function print_info_row( $p_description, $p_value ) {
 <div id="admin-menu">
 	<ul class="menu">
 		<li><a href="check/index.php">Check your installation</a></li>
-	<?php if ( count($upgrade) - 1 != config_get( 'database_version' ) ) { ?>
+	<?php if( count($upgrade) - 1 != config_get( 'database_version' ) ) { ?>
 		<li><a href="upgrade_warning.php"><span class="bold">Upgrade your installation</span></a></li>
 	<?php } ?>
 		<li><a href="system_utils.php">System Utilities</a></li>

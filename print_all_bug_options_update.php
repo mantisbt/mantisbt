@@ -67,7 +67,7 @@ for ($i=0 ; $i <$field_name_count ; $i++) {
 	$t_name='print_'.utf8_strtolower(str_replace(' ','_',$t_field_name_arr[$i]));
 	$t_flag = gpc_get( $t_name, null );
 
-	if ( $t_flag === null ) {
+	if( $t_flag === null ) {
 		$t_prefs_arr[$i] = 0;
 	} else {
 		$t_prefs_arr[$i] = 1;
@@ -91,13 +91,13 @@ form_security_purge( 'print_all_bug_options_update' );
 
 html_page_top( null, $f_redirect_url );
 
-if ( $t_result ) {
-    html_operation_successful( $f_redirect_url );
+if( $t_result ) {
+	html_operation_successful( $f_redirect_url );
 } else {
-    echo '<div class="failure-msg">';
-    print error_string( ERROR_GENERIC ) . '<br />';
-    print_bracket_link( $f_redirect_url, lang_get( 'proceed' ) );
-    echo '</div>';
+	echo '<div class="failure-msg">';
+	print error_string( ERROR_GENERIC ) . '<br />';
+	print_bracket_link( $f_redirect_url, lang_get( 'proceed' ) );
+	echo '</div>';
 }
 
 html_page_bottom();

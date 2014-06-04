@@ -37,9 +37,9 @@ $f_show_as_table = gpc_get_bool( 'show_table', FALSE );
 $f_summary = gpc_get_bool( 'summary', FALSE );
 
 $t_interval_days = $t_interval->get_elapsed_days();
-if ( $t_interval_days <= 14 ) {
+if( $t_interval_days <= 14 ) {
 	$t_incr = 60 * 60; # less than 14 days, use hourly
-} else if ( $t_interval_days <= 92 ) {
+} else if( $t_interval_days <= 92 ) {
 	$t_incr = 24 * 60 * 60; # less than three months, use daily
 } else {
 	$t_incr = 7 * 24 * 60 * 60; # otherwise weekly
@@ -56,7 +56,7 @@ $t_filter['_view_type']	= 'advanced';
 $t_filter[FILTER_PROPERTY_STATUS] = array(META_FILTER_ANY);
 $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME] = '';
 $rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $t_filter, null, null, true );
-if ( count($rows) == 0 ) {
+if( count($rows) == 0 ) {
 	# no data to graph
 	exit();
 }
@@ -84,7 +84,7 @@ $t_view_status = array();
 # walk through all issues and grab their status for 'now'
 $t_marker[$t_ptr] = time();
 foreach ($rows as $t_row) {
-	if ( isset( $t_data[$t_ptr][$t_row->status] ) ) {
+	if( isset( $t_data[$t_ptr][$t_row->status] ) ) {
 		$t_data[$t_ptr][$t_row->status] ++;
 	} else {
 		$t_data[$t_ptr][$t_row->status] = 1;
@@ -110,15 +110,15 @@ for ($t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr) {
 	while( ( $t_row !== false ) && ( $t_row['date_modified'] >= $t_now ) ) {
 		switch ($t_row['type']) {
 			case 0: # updated bug
-				if ( isset( $t_data[$t_ptr][$t_row['new_value']] ) ) {
-					if ( $t_data[$t_ptr][$t_row['new_value']] > 0 )
+				if( isset( $t_data[$t_ptr][$t_row['new_value']] ) ) {
+					if( $t_data[$t_ptr][$t_row['new_value']] > 0 )
 						$t_data[$t_ptr][$t_row['new_value']] --;
 				} else {
 					$t_data[$t_ptr][$t_row['new_value']] = 0;
 					$t_view_status[$t_row['new_value']] =
 						isset($t_status_arr[$t_row['new_value']]) ? $t_status_arr[$t_row['new_value']] : '@'.$t_row['new_value'].'@';
 				}
-				if ( isset( $t_data[$t_ptr][$t_row['old_value']] ) ) {
+				if( isset( $t_data[$t_ptr][$t_row['old_value']] ) ) {
 					$t_data[$t_ptr][$t_row['old_value']] ++;
 				} else {
 					$t_data[$t_ptr][$t_row['old_value']] = 1;
@@ -127,8 +127,8 @@ for ($t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr) {
 				}
 				break;
 			case 1: # new bug
-				if ( isset( $t_data[$t_ptr][$t_default_bug_status] ) ) {
-					if ( $t_data[$t_ptr][$t_default_bug_status] > 0 )
+				if( isset( $t_data[$t_ptr][$t_default_bug_status] ) ) {
+					if( $t_data[$t_ptr][$t_default_bug_status] > 0 )
 						$t_data[$t_ptr][$t_default_bug_status] --;
 				} else {
 					$t_data[$t_ptr][$t_default_bug_status] = 0;
@@ -200,15 +200,15 @@ $t_metrics = array();
 for ($t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++) {
 	$t = $t_bin_count - $t_ptr;
 	$t_metrics[0][$t_ptr] = $t_marker[$t];
-	if ($f_summary) {
+	if( $f_summary ) {
 		$t_metrics[1][$t_ptr] = 0;
 		$t_metrics[2][$t_ptr] = 0;
 		$t_metrics[3][$t_ptr] = 0;
 		foreach ( $t_view_status as $t_status => $t_label ) {
-			if ( isset( $t_data[$t][$t_status] ) ) {
-				if ( $t_status < $t_resolved )
+			if( isset( $t_data[$t][$t_status] ) ) {
+				if( $t_status < $t_resolved )
 					$t_metrics[1][$t_ptr] += $t_data[$t][$t_status];
-				else if ( $t_status < $t_closed )
+				else if( $t_status < $t_closed )
 					$t_metrics[2][$t_ptr] += $t_data[$t][$t_status];
 				else
 					$t_metrics[3][$t_ptr] += $t_data[$t][$t_status];
@@ -217,13 +217,13 @@ for ($t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++) {
 	} else {
 		$i = 0;
 		foreach ( $t_view_status as $t_status => $t_label ) {
-			if ( isset( $t_data[$t][$t_status] ) )
+			if( isset( $t_data[$t][$t_status] ) )
 				$t_metrics[++$i][$t_ptr] = $t_data[$t][$t_status];
 			else
 				$t_metrics[++$i][$t_ptr] = 0;
 		}
 	}
-	if ( $f_show_as_table ) {
+	if( $f_show_as_table ) {
 		echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('. date( $t_date_format, $t_metrics[0][$t_ptr] ) .')'.'</td>';
 		for ( $i=1; $i<=$t_label_count; $i++ ) {
 			echo '<td>'.$t_metrics[$i][$t_ptr].'</td>';

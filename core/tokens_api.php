@@ -49,7 +49,7 @@ function token_exists( $p_token_id ) {
 	$t_result = db_query_bound( $t_query, array( $p_token_id ), 1 );
 
 	$t_row = db_fetch_array( $t_result );
-	if ( $t_row ) {
+	if( $t_row ) {
 		return true;
 	}
 	return false;
@@ -87,7 +87,7 @@ function token_get( $p_type, $p_user_id = null ) {
 	$t_result = db_query_bound( $t_query, array( $c_type, $c_user_id ) );
 
 	$t_row = db_fetch_array( $t_result );
-	if ( $t_row ) {
+	if( $t_row ) {
 		return $t_row;
 	}
 
@@ -165,7 +165,6 @@ function token_delete_by_owner( $p_user_id = null ) {
 	} else {
 		$c_user_id = (int)$p_user_id;
 	}
-
 
 	# Remove
 	$t_tokens_table = db_get_table( 'tokens' );

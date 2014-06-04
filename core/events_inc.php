@@ -25,7 +25,6 @@
  * Please view the Plugin Events Reference for details on each event.
  * http://www.mantisbt.org/wiki/doku.php/mantisbt:plugins_events
  */
- 
 
 # Declare supported plugin events
 event_declare_many( array(

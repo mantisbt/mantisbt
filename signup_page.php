@@ -49,7 +49,7 @@ require_css( 'login.css' );
 require_js( 'login.js' );
 
 # Check for invalid access to signup page
-if ( OFF == config_get_global( 'allow_signup' ) || LDAP == config_get_global( 'login_method' ) ) {
+if( OFF == config_get_global( 'allow_signup' ) || LDAP == config_get_global( 'login_method' ) ) {
 	print_header_redirect( 'login_page.php' );
 }
 
@@ -72,7 +72,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 				<li><a href="login_page.php"><?php echo lang_get( 'login_link' ); ?></a></li>
 <?php
 			# lost password feature disabled or reset password via email disabled
-			if ( ( LDAP != config_get_global( 'login_method' ) ) &&
+			if( ( LDAP != config_get_global( 'login_method' ) ) &&
 				( ON == config_get( 'lost_password_feature' ) ) &&
 				( ON == config_get( 'send_reset_password' ) ) &&
 				( ON == config_get( 'enable_email_notification' ) ) ) {

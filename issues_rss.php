@@ -66,27 +66,27 @@ $f_username = gpc_get_string( 'username', null );
 $f_key = gpc_get_string( 'key', null );
 
 # make sure RSS syndication is enabled.
-if ( OFF == config_get( 'rss_enabled' ) ) {
+if( OFF == config_get( 'rss_enabled' ) ) {
 	access_denied();
 }
 
 # authenticate the user
-if ( $f_username !== null ) {
-	if ( !rss_login( $f_username, $f_key ) ) {
+if( $f_username !== null ) {
+	if( !rss_login( $f_username, $f_key ) ) {
 		access_denied();
 	}
 } else {
-	if ( OFF == config_get( 'allow_anonymous_login' ) ) {
+	if( OFF == config_get( 'allow_anonymous_login' ) ) {
 		access_denied();
 	}
 }
 
 # Make sure that the current user has access to the selected project (if not ALL PROJECTS).
-if ( $f_project_id != ALL_PROJECTS ) {
+if( $f_project_id != ALL_PROJECTS ) {
 	access_ensure_project_level( VIEWER, $f_project_id );
 }
 
-if ( $f_sort === 'update' ) {
+if( $f_sort === 'update' ) {
 	$c_sort_field = 'last_updated';
 } else {
 	$c_sort_field = 'date_submitted';
@@ -103,17 +103,17 @@ $image_link = $t_path . 'images/mantis_logo_button.gif';
 
 # only rss 2.0
 $category = project_get_name( $f_project_id );
-if ( $f_project_id !== 0 ) {
+if( $f_project_id !== 0 ) {
 	$title .= ' - ' . $category;
 }
 
 $title .= ' - ' . lang_get( 'issues' );
 
-if ( $f_username !== null ) {
+if( $f_username !== null ) {
 	$title .= " - ($f_username)";
 }
 
-if ( $f_filter_id !== 0 ) {
+if( $f_filter_id !== 0 ) {
 	$title .= ' (' . filter_get_field( $f_filter_id, 'name' ) . ')';
 }
 
@@ -163,20 +163,20 @@ $t_issues_per_page = 25;
 $t_page_count = 0;
 $t_issues_count = 0;
 $t_project_id = $f_project_id;
-if ( $f_username !== null ) {
+if( $f_username !== null ) {
 	$t_user_id = user_get_id_by_name( $f_username );
 } else {
 	$t_user_id = user_get_id_by_name( config_get( 'anonymous_account' ) );
 }
 $t_show_sticky = null;
 
-if ( $f_filter_id == 0 ) {
+if( $f_filter_id == 0 ) {
 	$t_custom_filter = filter_get_default();
 	$t_custom_filter['sort'] = $c_sort_field;
 } else {
 	# null will be returned if the user doesn't have access right to access the filter.
 	$t_custom_filter = filter_db_get_filter( $f_filter_id, $t_user_id );
-	if ( null === $t_custom_filter ) {
+	if( null === $t_custom_filter ) {
 		access_denied();
 	}
 
@@ -194,7 +194,7 @@ for ( $i = 0; $i < $t_issues_count; $i++ ) {
 	$about = $link = $t_path . "view.php?id=" . $t_bug->id;
 	$title = bug_format_id( $t_bug->id ) . ': ' . $t_bug->summary;
 
-	if ( $t_bug->view_state == VS_PRIVATE ) {
+	if( $t_bug->view_state == VS_PRIVATE ) {
 		$title .= ' [' . lang_get( 'private' ) . ']';
 	}
 
@@ -208,12 +208,12 @@ for ( $i = 0; $i < $t_issues_count; $i++ ) {
 
 	# author of item
 	$author = '';
-	if ( access_has_global_level( config_get( 'show_user_email_threshold' ) ) ) {
+	if( access_has_global_level( config_get( 'show_user_email_threshold' ) ) ) {
 		$t_author_name = user_get_name( $t_bug->reporter_id );
 		$t_author_email = user_get_field( $t_bug->reporter_id, 'email' );
 
-		if ( !is_blank( $t_author_email ) ) {
-			if ( !is_blank( $t_author_name ) ) {
+		if( !is_blank( $t_author_email ) ) {
+			if( !is_blank( $t_author_name ) ) {
 				$author = $t_author_name . ' <' . $t_author_email . '>';
 			} else {
 				$author = $t_author_email;

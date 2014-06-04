@@ -49,7 +49,7 @@ require_api( 'profile_api.php' );
 function xmlhttprequest_filter_by_prefix( $p_set, $p_prefix ) {
 	$t_matches = array();
 	foreach ( $p_set as $p_item ) {
-		if ( utf8_strtolower( utf8_substr( $p_item, 0, utf8_strlen( $p_prefix ) ) ) === utf8_strtolower( $p_prefix ) ) {
+		if( utf8_strtolower( utf8_substr( $p_item, 0, utf8_strlen( $p_prefix ) ) ) === utf8_strtolower( $p_prefix ) ) {
 			$t_matches[] = $p_item;
 		}
 	}
@@ -75,7 +75,7 @@ function xmlhttprequest_platform_get_with_prefix() {
  * @return null
  * @access public
  */
- function xmlhttprequest_os_get_with_prefix() {
+function xmlhttprequest_os_get_with_prefix() {
 	$f_os = gpc_get_string( 'os' );
 
 	$t_unique_entries = profile_get_field_all_for_user( 'os' );

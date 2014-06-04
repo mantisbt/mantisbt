@@ -58,7 +58,7 @@ function csv_get_newline() {
  */
 function csv_get_separator() {
 	static $s_seperator = null;
-	if ( $s_seperator === null )
+	if( $s_seperator === null )
 		$s_seperator = config_get( 'csv_separator' );
 	return $s_seperator;
 }
@@ -94,7 +94,7 @@ function csv_escape_string( $p_string ) {
 			$t_must_escape = strpos( $p_string, $t_char ) !== false;
 			next( $t_escaped );
 		}
-		if ( $t_must_escape ) {
+		if( $t_must_escape ) {
 			$p_string = '"' . str_replace( '"', '""', $p_string ) . '"';
 		}
 
@@ -242,7 +242,7 @@ function csv_format_category_id( $p_bug ) {
  */
 function csv_format_date_submitted( $p_bug ) {
 	static $s_date_format = null;
-	if ( $s_date_format === null )
+	if( $s_date_format === null )
 		$s_date_format = config_get( 'short_date_format' );
 	return date( $s_date_format, $p_bug->date_submitted );
 }
@@ -315,7 +315,7 @@ function csv_format_view_state( $p_bug ) {
  */
 function csv_format_last_updated( $p_bug ) {
 	static $s_date_format = null;
-	if ( $s_date_format === null )
+	if( $s_date_format === null )
 		$s_date_format = config_get( 'short_date_format' );
 	return date( $s_date_format, $p_bug->last_updated );
 }
@@ -408,7 +408,7 @@ function csv_format_selection( $p_bug ) {
  */
 function csv_format_due_date( $p_bug ) {
 	static $s_date_format = null;
-	if ( $s_date_format === null )
+	if( $s_date_format === null )
 		$s_date_format = config_get( 'short_date_format' );
 	return csv_escape_string( date( $s_date_format, $p_bug->due_date ) );
 }

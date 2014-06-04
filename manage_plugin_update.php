@@ -58,7 +58,7 @@ while ( $t_row = db_fetch_array( $t_result ) ) {
 
 	$f_change = gpc_get_bool( 'change_'.$t_basename, 0 );
 
-	if ( !$f_change ) { continue; }
+	if( !$f_change ) { continue; }
 
 	$f_priority = gpc_get_int( 'priority_'.$t_basename, 3 );
 	$f_protected = gpc_get_bool( 'protected_'.$t_basename, 0 );

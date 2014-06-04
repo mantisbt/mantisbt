@@ -40,7 +40,7 @@ function mc_issue_attachment_get( $p_username, $p_password, $p_issue_attachment_
 	}
 
 	$t_file = mci_file_get( $p_issue_attachment_id, 'bug', $t_user_id );
-	if ( SoapObjectsFactory::isSoapFault( $t_file ) ) {
+	if( SoapObjectsFactory::isSoapFault( $t_file ) ) {
 		return $t_file;
 	}
 	return SoapObjectsFactory::encodeBinary( $t_file );
@@ -92,9 +92,9 @@ function mc_issue_attachment_delete( $p_username, $p_password, $p_issue_attachme
 	$t_attachment_owner = file_get_field( $p_issue_attachment_id, 'user_id' );
 	$t_current_user_is_attachment_owner = $t_attachment_owner == $t_user_id;
 	# Factor in allow_delete_own_attachments=ON|OFF
-	if ( !$t_current_user_is_attachment_owner || ( $t_current_user_is_attachment_owner && !config_get( 'allow_delete_own_attachments' ) ) ) {
+	if( !$t_current_user_is_attachment_owner || ( $t_current_user_is_attachment_owner && !config_get( 'allow_delete_own_attachments' ) ) ) {
 		# Check access against delete_attachments_threshold
-		if ( !access_has_bug_level( config_get( 'delete_attachments_threshold' ), $t_bug_id, $t_user_id ) ) {
+		if( !access_has_bug_level( config_get( 'delete_attachments_threshold' ), $t_bug_id, $t_user_id ) ) {
 			return mci_soap_fault_access_denied( $t_user_id );
 		}
 	}

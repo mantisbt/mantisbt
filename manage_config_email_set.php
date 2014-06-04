@@ -100,23 +100,23 @@ foreach( $f_flags as $t_flag_value ) {
 }
 foreach( $f_thresholds as $t_threshold_value ) {
 	list( $t_action, $t_threshold ) = explode( ':', $t_threshold_value );
-	if ( $t_threshold < $t_thresholds_min[$t_action] ) {
+	if( $t_threshold < $t_thresholds_min[$t_action] ) {
 		$t_thresholds_min[$t_action] = $t_threshold;
 	}
-	if ( $t_threshold > $t_thresholds_max[$t_action] ) {
+	if( $t_threshold > $t_thresholds_max[$t_action] ) {
 		$t_thresholds_max[$t_action] = $t_threshold;
 	}
 }
 
 # if we can set defaults, find them
-if ( $t_can_change_defaults ) {
+if( $t_can_change_defaults ) {
 	$t_first = true;
 
 	# for flags, assume they are true, unless one of the actions has them off
 	foreach ( $t_valid_flags as $t_flag ) {
 		$t_default_flags[$t_flag] = ON;
 		foreach ( $t_valid_actions as $t_action ) {
-			if ( !isset( $t_flags[$t_action][$t_flag] ) ) {
+			if( !isset( $t_flags[$t_action][$t_flag] ) ) {
 				unset( $t_default_flags[$t_flag] );
 			}
 		}
@@ -125,10 +125,10 @@ if ( $t_can_change_defaults ) {
 	$t_default_min = ANYBODY;
 	$t_default_max = NOBODY;
 	foreach ( $t_valid_actions as $t_action ) {
-		if ( $t_default_max > $t_thresholds_max[$t_action] ) {
+		if( $t_default_max > $t_thresholds_max[$t_action] ) {
 			$t_default_max = $t_thresholds_max[$t_action];
 		}
-		if ( $t_default_min < $t_thresholds_min[$t_action] ) {
+		if( $t_default_min < $t_thresholds_min[$t_action] ) {
 			$t_default_min = $t_thresholds_min[$t_action];
 		}
 	}
@@ -137,7 +137,7 @@ if ( $t_can_change_defaults ) {
 
 	$t_existing_default_flags = config_get( 'default_notify_flags' );
 	$t_existing_default_access = config_get_access( 'default_notify_flags' );
-	if ( ( $t_existing_default_flags != $t_default_flags )
+	if( ( $t_existing_default_flags != $t_default_flags )
 			|| ( $t_existing_default_access != $f_actions_access ) ) { # only set the flags if they are different
 		config_set( 'default_notify_flags', $t_default_flags, NO_USER, $t_project, $f_actions_access );
 	}
@@ -150,24 +150,24 @@ $t_notify_flags = array();
 foreach ( $t_valid_actions as $t_action ) {
 	$t_action_printed = false;
 	foreach ( $t_valid_flags as $t_flag ) {
-		if ( !isset( $t_default_flags[$t_flag] ) ) {
+		if( !isset( $t_default_flags[$t_flag] ) ) {
 			$t_default_flags[$t_flag] = OFF;
 		}
-		if ( isset( $t_flags[$t_action][$t_flag] ) <> $t_default_flags[$t_flag] ) {
+		if( isset( $t_flags[$t_action][$t_flag] ) <> $t_default_flags[$t_flag] ) {
 			$t_notify_flags[$t_action][$t_flag] = isset( $t_flags[$t_action][$t_flag] ) ? ON : OFF;
 		}
 	}
-	if ( $t_default_flags['threshold_min'] <> $t_thresholds_min[$t_action] ) {
+	if( $t_default_flags['threshold_min'] <> $t_thresholds_min[$t_action] ) {
 		$t_notify_flags[$t_action]['threshold_min'] = $t_thresholds_min[$t_action];
 	}
-	if ( $t_default_flags['threshold_max'] <> $t_thresholds_max[$t_action] ) {
+	if( $t_default_flags['threshold_max'] <> $t_thresholds_max[$t_action] ) {
 		$t_notify_flags[$t_action]['threshold_max'] = $t_thresholds_max[$t_action];
 	}
 }
-if ( isset( $t_notify_flags ) ) {
+if( isset( $t_notify_flags ) ) {
 	$t_existing_flags = config_get( 'notify_flags' );
 	$t_existing_access = config_get_access( 'notify_flags' );
-	if ( ( $t_existing_flags != $t_notify_flags )
+	if( ( $t_existing_flags != $t_notify_flags )
 			|| ( $t_existing_access != $f_actions_access ) ) { # only set the flags if they are different
 		config_set( 'notify_flags', $t_notify_flags, NO_USER, $t_project, $f_actions_access );
 	}

@@ -88,7 +88,7 @@ function get_capability_row( $p_caption, $p_access_level ) {
 
 	$t_output = '<tr><td>' . string_display( $p_caption ) . '</td>';
 	foreach( $t_access_levels as $t_access_level ) {
-		if ( $t_access_level >= (int)$p_access_level ) {
+		if( $t_access_level >= (int)$p_access_level ) {
 			$t_value = '<img src="images/ok.gif" width="20" height="15" alt="X" title="X" />';
 		} else {
 			$t_value = '&#160;';

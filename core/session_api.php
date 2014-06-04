@@ -117,7 +117,7 @@ class MantisPHPSession extends MantisSession {
 		session_set_cookie_params( 0, config_get( 'cookie_path' ), config_get( 'cookie_domain' ), $g_cookie_secure_flag_enabled, true );
 
 		# Handle existent session ID
-		if ( !is_null( $p_session_id ) ) {
+		if( !is_null( $p_session_id ) ) {
 			session_id( $p_session_id );
 		}
 
@@ -126,7 +126,7 @@ class MantisPHPSession extends MantisSession {
 		$this->id = session_id();
 
 		# Initialize the keyed session store
-		if ( !isset( $_SESSION[ $this->key ] ) ) {
+		if( !isset( $_SESSION[ $this->key ] ) ) {
 			$_SESSION[ $this->key ] = array();
 		}
 	}
@@ -138,7 +138,7 @@ class MantisPHPSession extends MantisSession {
 	 * @return string
 	 */
 	function get( $p_name, $p_default=null ) {
-		if ( isset( $_SESSION[ $this->key ][ $p_name ] ) ) {
+		if( isset( $_SESSION[ $this->key ][ $p_name ] ) ) {
 			return unserialize( $_SESSION[ $this->key ][ $p_name ] );
 		}
 
@@ -202,7 +202,7 @@ function session_init( $p_session_id=null ) {
 			break;
 	}
 
-	if ( ON == config_get_global( 'session_validation' ) && session_get( 'secure_session', false ) ) {
+	if( ON == config_get_global( 'session_validation' ) && session_get( 'secure_session', false ) ) {
 		session_validate( $g_session );
 	}
 }
@@ -215,17 +215,17 @@ function session_init( $p_session_id=null ) {
  */
 function session_validate( $p_session ) {
 	$t_user_ip = '';
-	if ( isset( $_SERVER['REMOTE_ADDR'] ) ) {
+	if( isset( $_SERVER['REMOTE_ADDR'] ) ) {
 		$t_user_ip = trim( $_SERVER['REMOTE_ADDR'] );
 	}
 
-	if ( is_null( $t_last_ip = $p_session->get( 'last_ip', null ) ) ) {
+	if( is_null( $t_last_ip = $p_session->get( 'last_ip', null ) ) ) {
 		# First session usage
 		$p_session->set( 'last_ip', $t_user_ip );
 
 	} else {
 		# Check a continued session request
-		if ( $t_user_ip != $t_last_ip ) {
+		if( $t_user_ip != $t_last_ip ) {
 			session_clean();
 
 			trigger_error( ERROR_SESSION_NOT_VALID, WARNING );
@@ -312,10 +312,10 @@ function session_clean() {
 }
 
 # Initialize the session
-if ( PHP_CGI == php_mode() ) {
+if( PHP_CGI == php_mode() ) {
 	$t_session_id = gpc_get_string( 'session_id', '' );
 
-	if ( empty( $t_session_id ) ) {
+	if( empty( $t_session_id ) ) {
 		session_init();
 	} else {
 		session_init( $t_session_id );

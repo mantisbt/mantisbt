@@ -66,7 +66,7 @@ $t_access = current_user_get_access_level();
 function set_capability_row( $p_threshold, $p_all_projects_only=false ) {
 	global $t_access, $t_project;
 
-	if ( ( $t_access >= config_get_access( $p_threshold ) )
+	if( ( $t_access >= config_get_access( $p_threshold ) )
 			  && ( ( ALL_PROJECTS == $t_project ) || !$p_all_projects_only ) ) {
 		$f_threshold = gpc_get_int_array( 'flag_thres_' . $p_threshold, array() );
 		$f_access = gpc_get_int( 'access_' . $p_threshold );
@@ -79,13 +79,13 @@ function set_capability_row( $p_threshold, $p_all_projects_only=false ) {
 		$t_array_threshold = array();
 
 		foreach( $t_access_levels as $t_access_level => $t_level_name ) {
-			if ( in_array( $t_access_level, $f_threshold ) ) {
-				if ( NOBODY == $t_lower_threshold ) {
+			if( in_array( $t_access_level, $f_threshold ) ) {
+				if( NOBODY == $t_lower_threshold ) {
 					$t_lower_threshold = $t_access_level;
 				}
 				$t_array_threshold[] = $t_access_level;
 			} else {
-				if ( NOBODY <> $t_lower_threshold ) {
+				if( NOBODY <> $t_lower_threshold ) {
 					$t_lower_threshold = -1;
 				}
 			}
@@ -93,13 +93,13 @@ function set_capability_row( $p_threshold, $p_all_projects_only=false ) {
 		}
 		$t_existing_threshold = config_get( $p_threshold );
 		$t_existing_access = config_get_access( $p_threshold );
-		if ( -1 == $t_lower_threshold ) {
-			if ( ( $t_existing_threshold != $t_array_threshold )
+		if( -1 == $t_lower_threshold ) {
+			if( ( $t_existing_threshold != $t_array_threshold )
 					|| ( $t_existing_access != $f_access ) ) {
 				config_set( $p_threshold, $t_array_threshold, NO_USER, $t_project, $f_access );
 			}
 		} else {
-			if ( ( $t_existing_threshold != $t_lower_threshold )
+			if( ( $t_existing_threshold != $t_lower_threshold )
 					|| ( $t_existing_access != $f_access ) ) {
 				config_set( $p_threshold, $t_lower_threshold, NO_USER, $t_project, $f_access );
 			}
@@ -115,14 +115,14 @@ function set_capability_row( $p_threshold, $p_all_projects_only=false ) {
 function set_capability_boolean( $p_threshold, $p_all_projects_only=false ) {
 	global $t_access, $t_project;
 
-	if ( ( $t_access >= config_get_access( $p_threshold ) )
+	if( ( $t_access >= config_get_access( $p_threshold ) )
 			  && ( ( ALL_PROJECTS == $t_project ) || !$p_all_projects_only ) ) {
 		$f_flag = gpc_get( 'flag_' . $p_threshold, OFF );
 		$f_access = gpc_get_int( 'access_' . $p_threshold );
 		$f_flag = ( OFF == $f_flag ) ? OFF : ON;
 		# @@debug @@ echo "<br />for $p_threshold "; var_dump($f_flag, $f_access); echo '<br />';
 
-		if ( ( $f_flag != config_get( $p_threshold ) ) || ( $f_access != config_get_access( $p_threshold ) ) ) {
+		if( ( $f_flag != config_get( $p_threshold ) ) || ( $f_access != config_get_access( $p_threshold ) ) ) {
 			config_set( $p_threshold, $f_flag, NO_USER, $t_project, $f_access );
 		}
 	}
@@ -136,13 +136,13 @@ function set_capability_boolean( $p_threshold, $p_all_projects_only=false ) {
 function set_capability_enum( $p_threshold, $p_all_projects_only=false ) {
 	global $t_access, $t_project;
 
-	if ( ( $t_access >= config_get_access( $p_threshold ) )
+	if( ( $t_access >= config_get_access( $p_threshold ) )
 			  && ( ( ALL_PROJECTS == $t_project ) || !$p_all_projects_only ) ) {
 		$f_flag = gpc_get( 'flag_' . $p_threshold );
 		$f_access = gpc_get_int( 'access_' . $p_threshold );
 		# @@debug @@ echo "<br />for $p_threshold "; var_dump($f_flag, $f_access); echo '<br />';
 
-		if ( ( $f_flag != config_get( $p_threshold ) ) || ( $f_access != config_get_access( $p_threshold ) ) ) {
+		if( ( $f_flag != config_get( $p_threshold ) ) || ( $f_access != config_get_access( $p_threshold ) ) ) {
 			config_set( $p_threshold, $f_flag, NO_USER, $t_project, $f_access );
 		}
 	}

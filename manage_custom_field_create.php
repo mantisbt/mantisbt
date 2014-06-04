@@ -56,7 +56,7 @@ $f_name	= gpc_get_string( 'name' );
 
 $t_field_id = custom_field_create( $f_name );
 
-if ( ON == config_get( 'custom_field_edit_after_create' ) ) {
+if( ON == config_get( 'custom_field_edit_after_create' ) ) {
 	$t_redirect_url = "manage_custom_field_edit_page.php?field_id=$t_field_id";
 } else {
 	$t_redirect_url = 'manage_custom_field_page.php';

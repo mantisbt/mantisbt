@@ -90,7 +90,7 @@ function tag_is_unique( $p_name ) {
 	$t_query = 'SELECT id FROM ' . $t_tag_table . ' WHERE ' . db_helper_like( 'name' );
 	$t_result = db_query_bound( $t_query, array( $c_name ) );
 
-	if ( db_result( $t_result ) ) {
+	if( db_result( $t_result ) ) {
 		return false;
 	}
 	return true;
@@ -245,7 +245,7 @@ function tag_get_all( $p_name_filter, $p_count, $p_offset) {
 	$t_where = '';
 	$t_where_params = array();
 
-	if ( !is_blank( $p_name_filter ) ) {
+	if( !is_blank( $p_name_filter ) ) {
 		$t_where = 'WHERE '.db_helper_like('name');
 		$t_where_params[] = $p_name_filter.'%';
 	}
@@ -268,7 +268,7 @@ function tag_count ( $p_name_filter ) {
 	$t_where = '';
 	$t_where_params = array();
 
-	if ( $p_name_filter ) {
+	if( $p_name_filter ) {
 		$t_where = 'WHERE '.db_helper_like('name');
 		$t_where_params[] = $p_name_filter.'%';
 	}
@@ -469,12 +469,12 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 	$t_tag_table = db_get_table( 'tag' );
 
 	$t_params = array();
-	if ( 0 != $p_bug_id ) {
+	if( 0 != $p_bug_id ) {
 		$t_bug_tag_table = db_get_table( 'bug_tag' );
 
 		$t_params[] = $p_bug_id;
 
-		if ( config_get_global( 'db_type' ) == 'odbc_mssql' ) {
+		if( config_get_global( 'db_type' ) == 'odbc_mssql' ) {
 			$query = "SELECT t.id FROM $t_tag_table t
 					LEFT JOIN $t_bug_tag_table b ON t.id=b.tag_id
 					WHERE b.bug_id IS NULL OR b.bug_id != " . db_param();
@@ -488,7 +488,7 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 				$t_subquery_results[] = (int)$row['id'];
 			}
 
-			if ( count ( $t_subquery_results ) == 0 ) {
+			if( count ( $t_subquery_results ) == 0 ) {
 			    return array();
 			}
 

@@ -82,7 +82,7 @@ $f_show_flag	= gpc_get_bool( 'show_flag' );
 helper_begin_long_process();
 
 # word or html export
-if ( $f_type_page != 'html' ) {
+if( $f_type_page != 'html' ) {
 	$t_export_title = helper_get_default_export_filename( '' );
 	$t_export_title = preg_replace( '/[\/:*?"<>|]/', '', $t_export_title );
 	$t_export_title .= '.doc';
@@ -105,7 +105,7 @@ $t_result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_
 $t_row_count = count( $t_result );
 
 # Headers depending on intended output
-if ( $f_type_page == 'html' ) {
+if( $f_type_page == 'html' ) {
 	html_page_top1();
 	html_head_end();
 	html_body_begin();
@@ -159,7 +159,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 	$t_bug = $t_result[$j];
 	$t_id = $t_bug->id;
 
-	if ( $j % 50 == 0 ) {
+	if( $j % 50 == 0 ) {
 		# to save ram as report will list data once, clear cache after 50 bugs
 		bug_text_clear_cache();
 		bug_clear_cache();
@@ -167,8 +167,8 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 	}
 
 	# display the available and selected bugs
-	if ( in_array( $t_id, $f_bug_arr ) || !$f_show_flag ) {
-		if ( $t_count_exported > 0 ) {
+	if( in_array( $t_id, $f_bug_arr ) || !$f_show_flag ) {
+		if( $t_count_exported > 0 ) {
 			echo '<br style="mso-special-character: line-break; page-break-before: always" />';
 		}
 
@@ -250,19 +250,19 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 	<td class="print">
 		<?php echo string_display_line( $t_bug->platform ) ?>
 	</td>
-<?php if ( access_has_bug_level( config_get( 'due_date_view_threshold' ), $t_id ) ) { ?>
+<?php if( access_has_bug_level( config_get( 'due_date_view_threshold' ), $t_id ) ) { ?>
 	<td class="print-category">
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_due_date ) ?>
 	</td>
 <?php
-		if ( bug_is_overdue( $t_id ) ) { ?>
+		if( bug_is_overdue( $t_id ) ) { ?>
 		<td class="print-overdue">
 <?php
 		} else	{ ?>
 		<td class="print">
 <?php
 		}
-		if ( !date_is_null( $t_bug->due_date ) ) {
+		if( !date_is_null( $t_bug->due_date ) ) {
 				echo date( $t_short_date_format, $t_bug->due_date );
 		print "\t\t</td>\n";
 		}
@@ -277,7 +277,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 	</td>
 	<td class="print">
 		<?php
-			if ( access_has_bug_level( config_get( 'view_handler_threshold' ), $t_id ) ) {
+			if( access_has_bug_level( config_get( 'view_handler_threshold' ), $t_id ) ) {
 				print_user_with_subject( $t_bug->handler_id, $t_id );
 			}
 		?>
@@ -385,7 +385,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 $t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug->project_id );
 foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 	# Don't display the field if user does not have read access to it
-	if ( !custom_field_has_read_access_by_project_id( $t_custom_field_id, $t_bug->project_id ) ) {
+	if( !custom_field_has_read_access_by_project_id( $t_custom_field_id, $t_bug->project_id ) ) {
 		continue;
 	}
 
@@ -441,7 +441,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 </tr>
 <?php
 	# account profile description
-	if ( $t_bug->profile_id > 0 ) {
+	if( $t_bug->profile_id > 0 ) {
 		$t_profile_row = profile_get_row_direct( $t_bug->profile_id );
 		$t_profile_description = string_display( $t_profile_row['description'] );
 
@@ -468,7 +468,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 			$t_path = config_get_global( 'path' );
 
 			foreach ( $t_attachments as $t_attachment  ) {
-				if ( $t_first_attachment ) {
+				if( $t_first_attachment ) {
 					$t_first_attachment = false;
 				} else {
 					echo '<br />';
@@ -482,7 +482,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 					. '<span class="italic-small">' . $c_date_added . '</span><br />'
 					. string_display_links( $t_path . $c_download_url );
 
-				if ( $t_attachment['preview'] && $t_attachment['type'] == 'image' && $f_type_page == 'html' ) {
+				if( $t_attachment['preview'] && $t_attachment['type'] == 'image' && $f_type_page == 'html' ) {
 					echo '<br /><img src="', $c_download_url, '" alt="', $t_attachment['alt'], '" /><br />';
 				}
 			}
@@ -501,7 +501,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 <table class="width100" cellspacing="1">
 <?php
 	# no bugnotes
-	if ( 0 == count( $t_bugnotes ) ) {
+	if( 0 == count( $t_bugnotes ) ) {
 	?>
 <tr>
 	<td class="print" colspan="2">
@@ -545,7 +545,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 		<tr>
 			<td class="print">
 				<?php echo $t_date_submitted ?>&#160;&#160;&#160;
-				<?php if ( $t_bugnote->date_submitted != $t_bugnote->last_modified ) {
+				<?php if( $t_bugnote->date_submitted != $t_bugnote->last_modified ) {
 					echo '<br />(' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . $t_last_modified . ')';
 				} ?>
 			</td>

@@ -33,7 +33,7 @@ $f_width = gpc_get_int( 'width', 300 );
 $t_ar = plugin_config_get( 'bar_aspect' );
 
 $t_token = token_get_value( TOKEN_GRAPH );
-if ( $t_token == null ) {
+if( $t_token == null ) {
 	$t_metrics = enum_bug_group( lang_get( 'severity_enum_string' ), 'severity' );
 } else {
 	$t_metrics = unserialize( $t_token );

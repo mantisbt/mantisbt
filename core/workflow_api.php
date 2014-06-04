@@ -36,7 +36,7 @@ require_api( 'config_api.php' );
  * @return bool Whether a transition exists in the specified direction
  */
 function workflow_transition_edge_exists( $p_from_status_id, $p_to_status_id ) {
-	if ( $p_from_status_id == $p_to_status_id ) {
+	if( $p_from_status_id == $p_to_status_id ) {
 		return false;
 	}
 
@@ -52,12 +52,12 @@ function workflow_transition_edge_exists( $p_from_status_id, $p_to_status_id ) {
  */
 function workflow_parse( $p_enum_workflow ) {
 	$t_status_arr = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
-	if ( count( $p_enum_workflow ) == 0 ) {
+	if( count( $p_enum_workflow ) == 0 ) {
 		# workflow is not set, default it to all transitions
 		foreach ( $t_status_arr as $t_status => $t_label ) {
 			$t_temp_workflow = array();
 			foreach ( $t_status_arr as $t_next => $t_next_label ) {
-				if ( $t_status != $t_next ) {
+				if( $t_status != $t_next ) {
 					$t_temp_workflow[] = $t_next . ':' . $t_next_label;
 				}
 			}
@@ -71,7 +71,7 @@ function workflow_parse( $p_enum_workflow ) {
 	# prepopulate new bug state (bugs go from nothing to here)
 	$t_submit_status_array = config_get( 'bug_submit_status' );
 	$t_new_label = MantisEnum::getLabel( lang_get( 'status_enum_string' ), config_get( 'bug_submit_status' ) );
-	if ( is_array( $t_submit_status_array ) ) {
+	if( is_array( $t_submit_status_array ) ) {
 		# @@@ (thraxisp) this is not implemented in bug_api.php
 		foreach ($t_submit_status_array as $t_access => $t_status ) {
 			$t_entry[$t_status][0] = $t_new_label;
@@ -86,10 +86,10 @@ function workflow_parse( $p_enum_workflow ) {
 	# add user defined arcs
 	$t_default = array();
 	foreach ( $t_status_arr as $t_status => $t_status_label ) {
-		if ( isset( $p_enum_workflow[$t_status] ) ) {
+		if( isset( $p_enum_workflow[$t_status] ) ) {
 			$t_next_arr = MantisEnum::getAssocArrayIndexedByValues( $p_enum_workflow[$t_status] );
 			foreach ( $t_next_arr as $t_next => $t_next_label) {
-				if ( !isset( $t_default[$t_status] ) ) {
+				if( !isset( $t_default[$t_status] ) ) {
 					$t_default[$t_status] = $t_next;
 				}
 				$t_exit[$t_status][$t_next] = '';
@@ -98,7 +98,7 @@ function workflow_parse( $p_enum_workflow ) {
 		} else {
 			$t_exit[$t_status] = array();
 		}
-		if ( !isset( $t_entry[$t_status] ) ) {
+		if( !isset( $t_entry[$t_status] ) ) {
 			$t_entry[$t_status] = array();
 		}
 	}

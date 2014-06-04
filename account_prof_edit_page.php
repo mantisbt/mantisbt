@@ -50,7 +50,7 @@ require_api( 'lang_api.php' );
 require_api( 'profile_api.php' );
 require_api( 'string_api.php' );
 
-if ( !config_get( 'enable_profiles' ) ) {
+if( !config_get( 'enable_profiles' ) ) {
 	trigger_error( ERROR_ACCESS_DENIED, ERROR );
 }
 
@@ -60,7 +60,7 @@ current_user_ensure_unprotected();
 
 $f_profile_id	= gpc_get_int( 'profile_id' );
 
-if ( profile_is_global( $f_profile_id ) ) {
+if( profile_is_global( $f_profile_id ) ) {
 	access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
 
 	$row = profile_get_row( ALL_USERS, $f_profile_id );
@@ -72,7 +72,7 @@ extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 html_page_top();
 
-if ( profile_is_global( $f_profile_id ) ) {
+if( profile_is_global( $f_profile_id ) ) {
 	print_manage_menu();
 }
 ?>
@@ -91,7 +91,7 @@ if ( profile_is_global( $f_profile_id ) ) {
 	</td>
 	<td class="right">
 		<?php
-			if ( !profile_is_global( $f_profile_id ) ) {
+			if( !profile_is_global( $f_profile_id ) ) {
 				print_account_menu();
 			}
 		?>

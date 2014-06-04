@@ -67,11 +67,11 @@ foreach ( $t_revert_vars as $t_revert ) {
 	$t_access &= access_has_project_level( config_get_access( $t_revert ), $f_project_id );
 }
 
-if ( !$t_access ) {
+if( !$t_access ) {
 	access_denied();
 }
 
-if ( '' != $f_revert ) {
+if( '' != $f_revert ) {
 	# Confirm with the user
 	helper_ensure_confirmed( lang_get( 'config_delete_sure' ) . lang_get( 'word_separator' ) .
 		string_html_specialchars( implode( ', ', $t_revert_vars ) ) . lang_get( 'word_separator' ) . lang_get( 'in_project' ) . lang_get( 'word_separator' ) . project_get_name( $f_project_id ),

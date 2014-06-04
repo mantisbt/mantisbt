@@ -63,21 +63,21 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 	$g_project_override = $t_bug->project_id;
 }
 
-if ( bug_is_readonly( $t_bug->id ) ) {
+if( bug_is_readonly( $t_bug->id ) ) {
 	error_parameters( $t_bug->id );
 	trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 }
 
 access_ensure_bug_level( config_get( 'add_bugnote_threshold' ), $t_bug->id );
 
-if ( $f_private ) {
+if( $f_private ) {
 	access_ensure_bug_level( config_get( 'set_view_status_threshold' ), $t_bug->id );
 }
 
 # We always set the note time to BUGNOTE, and the API will overwrite it with TIME_TRACKING
 # if $f_time_tracking is not 0 and the time tracking feature is enabled.
 $t_bugnote_id = bugnote_add( $t_bug->id, $f_bugnote_text, $f_time_tracking, $f_private, BUGNOTE );
-if ( !$t_bugnote_id ) {
+if( !$t_bugnote_id ) {
 	error_parameters( lang_get( 'bugnote' ) );
 	trigger_error( ERROR_EMPTY_FIELD, ERROR );
 }
@@ -87,11 +87,11 @@ if ( !$t_bugnote_id ) {
 # that may not be true. It assumes you don't have any statuses in the workflow
 # between 'bug_submit_status' and 'bug_feedback_status'. It assumes you only
 # have one feedback, assigned and submitted status.
-if ( config_get( 'reassign_on_feedback' ) &&
-     $t_bug->status === config_get( 'bug_feedback_status' ) &&
-     $t_bug->handler_id !== auth_get_current_user_id() &&
-     $t_bug->reporter_id === auth_get_current_user_id() ) {
-	if ( $t_bug->handler_id !== NO_USER ) {
+if( config_get( 'reassign_on_feedback' ) &&
+	 $t_bug->status === config_get( 'bug_feedback_status' ) &&
+	 $t_bug->handler_id !== auth_get_current_user_id() &&
+	 $t_bug->reporter_id === auth_get_current_user_id() ) {
+	if( $t_bug->handler_id !== NO_USER ) {
 		bug_set_field( $t_bug->id, 'status', config_get( 'bug_assigned_status' ) );
 	} else {
 		bug_set_field( $t_bug->id, 'status', config_get( 'bug_submit_status' ) );

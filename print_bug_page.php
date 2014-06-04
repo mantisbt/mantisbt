@@ -82,7 +82,7 @@ bug_ensure_exists( $f_bug_id );
 $t_bug = bug_get( $f_bug_id, true );
 
 $t_selected_project = helper_get_current_project();
-if ( $t_bug->project_id != $t_selected_project ) {
+if( $t_bug->project_id != $t_selected_project ) {
 	# in case the current project is not the same project of the bug we are viewing...
 	# ... override the current project. This to avoid problems with categories and handlers lists etc.
 	$g_project_override = $t_bug->project_id;
@@ -151,8 +151,8 @@ $t_steps_to_reproduce = string_display_links( $t_bug->steps_to_reproduce );
 $t_additional_information = string_display_links( $t_bug->additional_information );
 $t_view_state = $t_show_view_state ? get_enum_element( 'view_state', $t_bug->view_state ) : '';
 
-if ( $t_show_due_date ) {
-	if ( !date_is_null( $t_bug->due_date ) ) {
+if( $t_show_due_date ) {
+	if( !date_is_null( $t_bug->due_date ) ) {
 		$t_due_date = date( config_get( 'normal_date_format' ), $t_bug->due_date );
 	} else {
 		$t_due_date = '';
@@ -182,7 +182,7 @@ echo '<tr>';
 echo '<td class="form-title" colspan="6">';
 echo '<div class="center">', $t_window_title;
 
-if ( !is_blank( $t_project_name ) ) {
+if( !is_blank( $t_project_name ) ) {
 	echo ' - ' . $t_project_name;
 }
 
@@ -195,7 +195,7 @@ echo '</tr>';
 
 echo '<tr><td class="print-spacer" colspan="6"><hr /></td></tr>';
 
-if ( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state ||
+if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state ||
 	 $t_show_date_submitted || $t_show_last_updated ) {
 	echo '<tr class="print-category">';
 	echo '<td class="print" width="16%">', $t_show_id ? lang_get( 'id' ) : '', '</td>';
@@ -222,7 +222,7 @@ if ( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state ||
 # Reporter
 #
 
-if ( $t_show_reporter ) {
+if( $t_show_reporter ) {
 	echo '<tr class="print">';
 	echo '<th class="print-category">', lang_get( 'reporter' ), '</th>';
 	echo '<td class="print">';
@@ -236,12 +236,12 @@ if ( $t_show_reporter ) {
 # Handler, Due Date
 #
 
-if ( $t_show_handler || $t_show_due_date ) {
+if( $t_show_handler || $t_show_due_date ) {
 	$t_spacer = 2;
 
 	echo '<tr class="print">';
 
-	if ( $t_show_handler ) {
+	if( $t_show_handler ) {
 		echo '<th class="print-category">', lang_get( 'assigned_to' ), '</th>';
 		echo '<td class="print">';
 		print_user_with_subject( $t_bug->handler_id, $f_bug_id );
@@ -250,7 +250,7 @@ if ( $t_show_handler || $t_show_due_date ) {
 		$t_spacer += 2;
 	}
 
-	if ( $t_show_due_date ) {
+	if( $t_show_due_date ) {
 		echo '<th class="print-category">', lang_get( 'due_date' ), '</th>';
 		echo '<td class="print">', $t_due_date, '</td>';
 	} else {
@@ -265,33 +265,33 @@ if ( $t_show_handler || $t_show_due_date ) {
 # Priority, Severity, Reproducibility
 #
 
-if ( $t_show_priority || $t_show_severity || $t_show_reproducibility ) {
+if( $t_show_priority || $t_show_severity || $t_show_reproducibility ) {
 	echo '<tr class="print">';
 
 	$t_spacer = 0;
 
-	if ( $t_show_priority ) {
+	if( $t_show_priority ) {
 		echo '<th class="print-category">', lang_get( 'priority' ), '</th>';
 		echo '<td class="print">', $t_priority, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
 
-	if ( $t_show_severity ) {
+	if( $t_show_severity ) {
 		echo '<th class="print-category">', lang_get( 'severity' ), '</th>';
 		echo '<td class="print">', $t_severity, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
 
-	if ( $t_show_reproducibility ) {
+	if( $t_show_reproducibility ) {
 		echo '<th class="print-category">', lang_get( 'reproducibility' ), '</th>';
 		echo '<td class="print">', $t_reproducibility, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
 
-	if ( $t_spacer > 0 ) {
+	if( $t_spacer > 0 ) {
 		echo '<td class="print" colspan="', $t_spacer, '">&#160;</td>';
 	}
 
@@ -302,19 +302,19 @@ if ( $t_show_priority || $t_show_severity || $t_show_reproducibility ) {
 # Status, Resolution
 #
 
-if ( $t_show_status || $t_show_resolution ) {
+if( $t_show_status || $t_show_resolution ) {
 	echo '<tr class="print">';
 
 	$t_spacer = 2;
 
-	if ( $t_show_status ) {
+	if( $t_show_status ) {
 		echo '<th class="print-category">', lang_get( 'status' ), '</th>';
 		echo '<td class="print">', $t_status, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
 
-	if ( $t_show_resolution ) {
+	if( $t_show_resolution ) {
 		echo '<th class="print-category">', lang_get( 'resolution' ), '</th>';
 		echo '<td class="print">', $t_resolution, '</td>';
 	} else {
@@ -329,19 +329,19 @@ if ( $t_show_status || $t_show_resolution ) {
 # Projection, ETA
 #
 
-if ( $t_show_projection || $t_show_eta ) {
+if( $t_show_projection || $t_show_eta ) {
 	$t_spacer = 2;
 
 	echo '<tr class="print">';
 
-	if ( $t_show_projection ) {
+	if( $t_show_projection ) {
 		echo '<th class="print-category">', lang_get( 'projection' ), '</th>';
 		echo '<td class="print">', $t_projection, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
 
-	if ( $t_show_eta ) {
+	if( $t_show_eta ) {
 		echo '<th class="print-category">', lang_get( 'eta' ), '</th>';
 		echo '<td class="print">', $t_eta, '</td>';
 	} else {
@@ -356,33 +356,33 @@ if ( $t_show_projection || $t_show_eta ) {
 # Platform, OS, OS Version
 #
 
-if ( $t_show_platform || $t_show_os || $t_show_os_version ) {
+if( $t_show_platform || $t_show_os || $t_show_os_version ) {
 	echo '<tr class="print">';
 
 	$t_spacer = 0;
 
-	if ( $t_show_platform ) {
+	if( $t_show_platform ) {
 		echo '<th class="print-category">', lang_get( 'platform' ), '</th>';
 		echo '<td class="print">', $t_platform, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
 
-	if ( $t_show_os ) {
+	if( $t_show_os ) {
 		echo '<th class="print-category">', lang_get( 'os' ), '</th>';
 		echo '<td class="print">', $t_os, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
 
-	if ( $t_show_os_version ) {
+	if( $t_show_os_version ) {
 		echo '<th class="print-category">', lang_get( 'os_version' ), '</th>';
 		echo '<td class="print">', $t_os_version, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
 
-	if ( $t_spacer > 0 ) {
+	if( $t_spacer > 0 ) {
 		echo '<td class="print" colspan="', $t_spacer, '">&#160;</td>';
 	}
 
@@ -393,19 +393,19 @@ if ( $t_show_platform || $t_show_os || $t_show_os_version ) {
 # Product Version, Product Build
 #
 
-if ( $t_show_product_version || $t_show_product_build ) {
+if( $t_show_product_version || $t_show_product_build ) {
 	echo '<tr class="print">';
 
 	$t_spacer = 2;
 
-	if ( $t_show_product_version ) {
+	if( $t_show_product_version ) {
 		echo '<th class="print-category">', lang_get( 'product_version' ), '</th>';
 		echo '<td class="print">', $t_product_version, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
 
-	if ( $t_show_product_build ) {
+	if( $t_show_product_build ) {
 		echo '<th class="print-category">', lang_get( 'product_build' ), '</th>';
 		echo '<td class="print">', $t_product_build, '</td>';
 	} else {
@@ -420,19 +420,19 @@ if ( $t_show_product_version || $t_show_product_build ) {
 # Target Version, Fixed in Version
 #
 
-if ( $t_show_target_version || $t_show_fixed_in_version ) {
+if( $t_show_target_version || $t_show_fixed_in_version ) {
 	echo '<tr>';
 
 	$t_spacer = 2;
 
-	if ( $t_show_target_version ) {
+	if( $t_show_target_version ) {
 		echo '<th class="print-category">', lang_get( 'target_version' ), '</th>';
 		echo '<td class="print">', $t_target_version, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
 
-	if ( $t_show_fixed_in_version ) {
+	if( $t_show_fixed_in_version ) {
 		echo '<th class="print-category">', lang_get( 'fixed_in_version' ), '</th>';
 		echo '<td class="print">', $t_fixed_in_version, '</td>';
 	} else {
@@ -450,7 +450,7 @@ if ( $t_show_target_version || $t_show_fixed_in_version ) {
 $t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug->project_id );
 foreach( $t_related_custom_field_ids as $t_id ) {
 	# Don't display the field if user does not have read access to it
-	if ( !custom_field_has_read_access_by_project_id( $t_id, $t_bug->project_id ) ) {
+	if( !custom_field_has_read_access_by_project_id( $t_id, $t_bug->project_id ) ) {
 		continue;
 	}
 
@@ -466,28 +466,28 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 
 echo '<tr><td class="print-spacer" colspan="6"><hr /></td></tr>';
 
-if ( $t_show_summary ) {
+if( $t_show_summary ) {
 	echo '<tr class="print">';
 	echo '<th class="print-category">', lang_get( 'summary' ), '</th>';
 	echo '<td class="print" colspan="5">', $t_summary, '</td>';
 	echo '</tr>';
 }
 
-if ( $t_show_description ) {
+if( $t_show_description ) {
 	echo '<tr class="print">';
 	echo '<th class="print-category">', lang_get( 'description' ), '</th>';
 	echo '<td class="print" colspan="5">', $t_description, '</td>';
 	echo '</tr>';
 }
 
-if ( $t_show_steps_to_reproduce ) {
+if( $t_show_steps_to_reproduce ) {
 	echo '<tr class="print">';
 	echo '<th class="print-category">', lang_get( 'steps_to_reproduce' ), '</th>';
 	echo '<td class="print" colspan="5">', $t_steps_to_reproduce, '</td>';
 	echo '</tr>';
 }
 
-if ( $t_show_additional_information ) {
+if( $t_show_additional_information ) {
 	echo '<tr class="print">';
 	echo '<th class="print-category">', lang_get( 'additional_information' ), '</th>';
 	echo '<td class="print" colspan="5">', $t_additional_information, '</td>';
@@ -495,7 +495,7 @@ if ( $t_show_additional_information ) {
 }
 
 # Tagging
-if ( $t_show_tags ) {
+if( $t_show_tags ) {
 	echo "<tr class=\"print\">";
 	echo '<th class="print-category">', lang_get( 'tags' ), '</th>';
 	echo '<td class="print" colspan="5">';
@@ -507,7 +507,7 @@ echo "<tr class=\"print\">";
 echo "<td class=\"print-category\">" . lang_get( 'bug_relationships' ) . "</td>";
 echo "<td class=\"print\" colspan=\"5\">" . relationship_get_summary_html_preview( $f_bug_id ) . "</td></tr>";
 
-if ( $t_show_attachments ) {
+if( $t_show_attachments ) {
 	echo '<tr class="print">';
 	echo '<th class="print-category">', lang_get( 'attached_files' ), '</th>';
 	echo '<td class="print" colspan="5">';
@@ -517,7 +517,7 @@ if ( $t_show_attachments ) {
 	$t_path = config_get_global( 'path' );
 
 	foreach ( $t_attachments as $t_attachment  ) {
-		if ( $t_first_attachment ) {
+		if( $t_first_attachment ) {
 			$t_first_attachment = false;
 		} else {
 			echo '<br />';
@@ -527,13 +527,13 @@ if ( $t_show_attachments ) {
 		$c_download_url = $t_path . htmlspecialchars( $t_attachment['download_url'] );
 		$c_filesize = number_format( $t_attachment['size'] );
 		$c_date_added = date( config_get( 'normal_date_format' ), $t_attachment['date_added'] );
-		if ( isset( $t_attachment['icon'] ) ) {
+		if( isset( $t_attachment['icon'] ) ) {
 			echo '<img src="', $t_attachment['icon']['url'], '" alt="', $t_attachment['icon']['alt'], '" />&#160;';
 		}
 
 		echo "$c_filename ($c_filesize) <span class=\"italic\">$c_date_added</span><br />$c_download_url";
 
-		if ( $t_attachment['preview'] && $t_attachment['type'] == 'image' ) {
+		if( $t_attachment['preview'] && $t_attachment['type'] == 'image' ) {
 			echo '<br /><img src="', $t_attachment['download_url'], '" alt="', $t_attachment['alt'], '" /><br />';
 		}
 	}
@@ -545,7 +545,7 @@ if ( $t_show_attachments ) {
 # Issue History
 #
 
-if ( $t_show_history ) {
+if( $t_show_history ) {
 	echo '<tr><td class="print-spacer" colspan="6"><hr /></td></tr>';
 
 	echo '<tr><th class="form-title">', lang_get( 'bug_history' ), '</th></tr>';

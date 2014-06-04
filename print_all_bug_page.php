@@ -74,10 +74,10 @@ $t_columns = helper_get_columns_to_view( COLUMNS_TARGET_PRINT_PAGE );
 $t_num_of_columns = count( $t_columns );
 
 # check to see if the cookie exists
-if ( !is_blank( $t_cookie_value ) ) {
+if( !is_blank( $t_cookie_value ) ) {
 
 	# check to see if new cookie is needed
-	if ( !filter_is_cookie_valid() ) {
+	if( !filter_is_cookie_valid() ) {
 		print_header_redirect( 'view_all_set.php?type=0&print=1' );
 	}
 
@@ -137,7 +137,7 @@ $f_bug_arr = gpc_get_int_array( 'bug_arr', array() );
 $f_bug_arr[$row_count]=-1;
 
 for( $i=0; $i < $row_count; $i++ ) {
-	if ( isset( $f_bug_arr[$i] ) ) {
+	if( isset( $f_bug_arr[$i] ) ) {
 		$index = $f_bug_arr[$i];
 		$t_bug_arr_sort[$index]=1;
 	}
@@ -150,7 +150,7 @@ $t_icon_path = config_get( 'icon_path' );
 <tr>
 	<td colspan="<?php echo $t_num_of_columns ?>">
 <?php
-	if ( 'DESC' == $f_dir ) {
+	if( 'DESC' == $f_dir ) {
 		$t_new_dir = 'ASC';
 	} else {
 		$t_new_dir = 'DESC';
@@ -191,7 +191,7 @@ $t_icon_path = config_get( 'icon_path' );
 		<?php
 			echo lang_get( 'viewing_bugs_title' );
 
-			if ( $row_count > 0 ) {
+			if( $row_count > 0 ) {
 				$v_start = $f_offset+1;
 				$v_end   = $f_offset+$row_count;
 			} else {
@@ -229,7 +229,7 @@ $t_icon_path = config_get( 'icon_path' );
 
 		# alternate row colors
 		$status_color = helper_alternate_colors( $i, '#ffffff', '#dddddd' );
-		if ( isset( $t_bug_arr_sort[ $t_row->id ] ) || ( $t_show_flag==0 ) ) {
+		if( isset( $t_bug_arr_sort[ $t_row->id ] ) || ( $t_show_flag==0 ) ) {
 ?>
 <tr bgcolor="<?php echo $status_color ?>">
 <?php

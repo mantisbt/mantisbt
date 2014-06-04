@@ -64,24 +64,24 @@ $f_temp_filter			= gpc_get_bool( 'temporary' );
 
 # validate filter type
 $f_default_view_type = 'simple';
-if ( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) {
+if( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) {
 	$f_default_view_type = 'advanced';
 }
 
 $f_view_type = gpc_get_string( 'view_type', $f_default_view_type );
-if ( ADVANCED_ONLY == config_get( 'view_filters' ) ) {
+if( ADVANCED_ONLY == config_get( 'view_filters' ) ) {
 	$f_view_type = 'advanced';
 }
-if ( SIMPLE_ONLY == config_get( 'view_filters' ) ) {
+if( SIMPLE_ONLY == config_get( 'view_filters' ) ) {
 	$f_view_type = 'simple';
 }
-if ( !in_array( $f_view_type, array( 'simple', 'advanced' ) ) ) {
+if( !in_array( $f_view_type, array( 'simple', 'advanced' ) ) ) {
 	$f_view_type = $f_default_view_type;
 }
 
 # these are all possibly multiple selections for advanced filtering
 $f_show_category = array();
-if ( is_array( gpc_get( FILTER_PROPERTY_CATEGORY_ID, null ) ) ) {
+if( is_array( gpc_get( FILTER_PROPERTY_CATEGORY_ID, null ) ) ) {
 	$f_show_category = gpc_get_string_array( FILTER_PROPERTY_CATEGORY_ID, META_FILTER_ANY );
 } else {
 	$f_show_category = gpc_get_string( FILTER_PROPERTY_CATEGORY_ID, META_FILTER_ANY );
@@ -89,7 +89,7 @@ if ( is_array( gpc_get( FILTER_PROPERTY_CATEGORY_ID, null ) ) ) {
 }
 
 $f_platform = array();
-if ( is_array( gpc_get( FILTER_PROPERTY_PLATFORM, null ) ) ) {
+if( is_array( gpc_get( FILTER_PROPERTY_PLATFORM, null ) ) ) {
 	$f_platform = gpc_get_string_array( FILTER_PROPERTY_PLATFORM, META_FILTER_ANY );
 } else {
 	$f_platform = gpc_get_string( FILTER_PROPERTY_PLATFORM, META_FILTER_ANY );
@@ -97,7 +97,7 @@ if ( is_array( gpc_get( FILTER_PROPERTY_PLATFORM, null ) ) ) {
 }
 
 $f_os = array();
-if ( is_array( gpc_get( FILTER_PROPERTY_OS, null ) ) ) {
+if( is_array( gpc_get( FILTER_PROPERTY_OS, null ) ) ) {
 	$f_os = gpc_get_string_array( FILTER_PROPERTY_OS, META_FILTER_ANY );
 } else {
 	$f_os = gpc_get_string( FILTER_PROPERTY_OS, META_FILTER_ANY );
@@ -105,7 +105,7 @@ if ( is_array( gpc_get( FILTER_PROPERTY_OS, null ) ) ) {
 }
 
 $f_os_build = array();
-if ( is_array( gpc_get( FILTER_PROPERTY_OS_BUILD, null ) ) ) {
+if( is_array( gpc_get( FILTER_PROPERTY_OS_BUILD, null ) ) ) {
 	$f_os_build = gpc_get_string_array( FILTER_PROPERTY_OS_BUILD, META_FILTER_ANY );
 } else {
 	$f_os_build = gpc_get_string( FILTER_PROPERTY_OS_BUILD, META_FILTER_ANY );
@@ -113,7 +113,7 @@ if ( is_array( gpc_get( FILTER_PROPERTY_OS_BUILD, null ) ) ) {
 }
 
 $f_show_severity = array();
-if ( is_array( gpc_get( FILTER_PROPERTY_SEVERITY, null ) ) ) {
+if( is_array( gpc_get( FILTER_PROPERTY_SEVERITY, null ) ) ) {
 	$f_show_severity = gpc_get_string_array( FILTER_PROPERTY_SEVERITY, META_FILTER_ANY );
 } else {
 	$f_show_severity = gpc_get_string( FILTER_PROPERTY_SEVERITY, META_FILTER_ANY );
@@ -121,7 +121,7 @@ if ( is_array( gpc_get( FILTER_PROPERTY_SEVERITY, null ) ) ) {
 }
 
 $f_show_status = array();
-if ( is_array( gpc_get( FILTER_PROPERTY_STATUS, null ) ) ) {
+if( is_array( gpc_get( FILTER_PROPERTY_STATUS, null ) ) ) {
 	$f_show_status = gpc_get_string_array( FILTER_PROPERTY_STATUS, META_FILTER_ANY );
 } else {
 	$f_show_status = gpc_get_string( FILTER_PROPERTY_STATUS, META_FILTER_ANY );
@@ -129,7 +129,7 @@ if ( is_array( gpc_get( FILTER_PROPERTY_STATUS, null ) ) ) {
 }
 
 $f_hide_status = array();
-if ( is_array( gpc_get( FILTER_PROPERTY_HIDE_STATUS, null ) ) ) {
+if( is_array( gpc_get( FILTER_PROPERTY_HIDE_STATUS, null ) ) ) {
 	$f_hide_status = gpc_get_string_array( FILTER_PROPERTY_HIDE_STATUS, META_FILTER_NONE );
 } else {
 	$f_hide_status = gpc_get_string( FILTER_PROPERTY_HIDE_STATUS, META_FILTER_NONE );
@@ -137,7 +137,7 @@ if ( is_array( gpc_get( FILTER_PROPERTY_HIDE_STATUS, null ) ) ) {
 }
 
 $f_reporter_id = array();
-if ( is_array( gpc_get( FILTER_PROPERTY_REPORTER_ID, null ) ) ) {
+if( is_array( gpc_get( FILTER_PROPERTY_REPORTER_ID, null ) ) ) {
 	$f_reporter_id = gpc_get_string_array( FILTER_PROPERTY_REPORTER_ID, META_FILTER_ANY );
 } else {
 	$f_reporter_id = gpc_get_string( FILTER_PROPERTY_REPORTER_ID, META_FILTER_ANY );
@@ -145,7 +145,7 @@ if ( is_array( gpc_get( FILTER_PROPERTY_REPORTER_ID, null ) ) ) {
 }
 
 $f_handler_id = array();
-if ( is_array( gpc_get( FILTER_PROPERTY_HANDLER_ID, null ) ) ) {
+if( is_array( gpc_get( FILTER_PROPERTY_HANDLER_ID, null ) ) ) {
 	$f_handler_id = gpc_get_string_array( FILTER_PROPERTY_HANDLER_ID, META_FILTER_ANY );
 } else {
 	$f_handler_id = gpc_get_string( FILTER_PROPERTY_HANDLER_ID, META_FILTER_ANY );
@@ -153,7 +153,7 @@ if ( is_array( gpc_get( FILTER_PROPERTY_HANDLER_ID, null ) ) ) {
 }
 
 $f_project_id = array();
-if ( is_array( gpc_get( FILTER_PROPERTY_PROJECT_ID, null ) ) ) {
+if( is_array( gpc_get( FILTER_PROPERTY_PROJECT_ID, null ) ) ) {
 	$f_project_id = gpc_get_int_array( FILTER_PROPERTY_PROJECT_ID, META_FILTER_CURRENT );
 } else {
 	$f_project_id = gpc_get_int( FILTER_PROPERTY_PROJECT_ID, META_FILTER_CURRENT );
@@ -161,7 +161,7 @@ if ( is_array( gpc_get( FILTER_PROPERTY_PROJECT_ID, null ) ) ) {
 }
 
 $f_show_resolution = array();
-if ( is_array( gpc_get( FILTER_PROPERTY_RESOLUTION, null ) ) ) {
+if( is_array( gpc_get( FILTER_PROPERTY_RESOLUTION, null ) ) ) {
 	$f_show_resolution = gpc_get_string_array( FILTER_PROPERTY_RESOLUTION, META_FILTER_ANY );
 } else {
 	$f_show_resolution = gpc_get_string( FILTER_PROPERTY_RESOLUTION, META_FILTER_ANY );
@@ -169,7 +169,7 @@ if ( is_array( gpc_get( FILTER_PROPERTY_RESOLUTION, null ) ) ) {
 }
 
 $f_show_build = array();
-if ( is_array( gpc_get( FILTER_PROPERTY_BUILD, null ) ) ) {
+if( is_array( gpc_get( FILTER_PROPERTY_BUILD, null ) ) ) {
 	$f_show_build = gpc_get_string_array( FILTER_PROPERTY_BUILD, META_FILTER_ANY );
 } else {
 	$f_show_build = gpc_get_string( FILTER_PROPERTY_BUILD, META_FILTER_ANY );
@@ -177,7 +177,7 @@ if ( is_array( gpc_get( FILTER_PROPERTY_BUILD, null ) ) ) {
 }
 
 $f_show_version = array();
-if ( is_array( gpc_get( FILTER_PROPERTY_VERSION, null ) ) ) {
+if( is_array( gpc_get( FILTER_PROPERTY_VERSION, null ) ) ) {
 	$f_show_version = gpc_get_string_array( FILTER_PROPERTY_VERSION, META_FILTER_ANY );
 } else {
 	$f_show_version = gpc_get_string( FILTER_PROPERTY_VERSION, META_FILTER_ANY );
@@ -185,7 +185,7 @@ if ( is_array( gpc_get( FILTER_PROPERTY_VERSION, null ) ) ) {
 }
 
 $f_fixed_in_version = array();
-if ( is_array( gpc_get( FILTER_PROPERTY_FIXED_IN_VERSION, null ) ) ) {
+if( is_array( gpc_get( FILTER_PROPERTY_FIXED_IN_VERSION, null ) ) ) {
 	$f_fixed_in_version = gpc_get_string_array( FILTER_PROPERTY_FIXED_IN_VERSION, META_FILTER_ANY );
 } else {
 	$f_fixed_in_version = gpc_get_string( FILTER_PROPERTY_FIXED_IN_VERSION, META_FILTER_ANY );
@@ -193,7 +193,7 @@ if ( is_array( gpc_get( FILTER_PROPERTY_FIXED_IN_VERSION, null ) ) ) {
 }
 
 $f_target_version = array();
-if ( is_array( gpc_get( FILTER_PROPERTY_TARGET_VERSION, null ) ) ) {
+if( is_array( gpc_get( FILTER_PROPERTY_TARGET_VERSION, null ) ) ) {
 	$f_target_version = gpc_get_string_array( FILTER_PROPERTY_TARGET_VERSION, META_FILTER_ANY );
 } else {
 	$f_target_version = gpc_get_string( FILTER_PROPERTY_TARGET_VERSION, META_FILTER_ANY );
@@ -201,7 +201,7 @@ if ( is_array( gpc_get( FILTER_PROPERTY_TARGET_VERSION, null ) ) ) {
 }
 
 $f_show_profile = array();
-if ( is_array( gpc_get( FILTER_PROPERTY_PROFILE_ID, null ) ) ) {
+if( is_array( gpc_get( FILTER_PROPERTY_PROFILE_ID, null ) ) ) {
 	$f_show_profile = gpc_get_string_array( FILTER_PROPERTY_PROFILE_ID, META_FILTER_ANY );
 } else {
 	$f_show_profile = gpc_get_string( FILTER_PROPERTY_PROFILE_ID, META_FILTER_ANY );
@@ -209,7 +209,7 @@ if ( is_array( gpc_get( FILTER_PROPERTY_PROFILE_ID, null ) ) ) {
 }
 
 $f_show_priority = array();
-if ( is_array( gpc_get( FILTER_PROPERTY_PRIORITY, null ) ) ) {
+if( is_array( gpc_get( FILTER_PROPERTY_PRIORITY, null ) ) ) {
 	$f_show_priority = gpc_get_string_array( FILTER_PROPERTY_PRIORITY, META_FILTER_ANY );
 } else {
 	$f_show_priority = gpc_get_string( FILTER_PROPERTY_PRIORITY, META_FILTER_ANY );
@@ -217,7 +217,7 @@ if ( is_array( gpc_get( FILTER_PROPERTY_PRIORITY, null ) ) ) {
 }
 
 $f_user_monitor = array();
-if ( is_array( gpc_get( FILTER_PROPERTY_MONITOR_USER_ID, null ) ) ) {
+if( is_array( gpc_get( FILTER_PROPERTY_MONITOR_USER_ID, null ) ) ) {
 	$f_user_monitor = gpc_get_string_array( FILTER_PROPERTY_MONITOR_USER_ID, META_FILTER_ANY );
 } else {
 	$f_user_monitor = gpc_get_string( FILTER_PROPERTY_MONITOR_USER_ID, META_FILTER_ANY );
@@ -225,7 +225,7 @@ if ( is_array( gpc_get( FILTER_PROPERTY_MONITOR_USER_ID, null ) ) ) {
 }
 
 $f_note_user_id = array();
-if ( is_array( gpc_get( FILTER_PROPERTY_NOTE_USER_ID, null ) ) ) {
+if( is_array( gpc_get( FILTER_PROPERTY_NOTE_USER_ID, null ) ) ) {
 	$f_note_user_id = gpc_get_string_array( FILTER_PROPERTY_NOTE_USER_ID, META_FILTER_ANY );
 } else {
 	$f_note_user_id = gpc_get_string( FILTER_PROPERTY_NOTE_USER_ID, META_FILTER_ANY );
@@ -292,7 +292,7 @@ foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
 # custom field updates
 $t_custom_fields 		= custom_field_get_ids(); /** @todo (thraxisp) This should really be the linked ids, but we don't know the project */
 $f_custom_fields_data 	= array();
-if ( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
+if( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 	foreach( $t_custom_fields as $t_cfid ) {
 		if (custom_field_type( $t_cfid ) == CUSTOM_FIELD_TYPE_DATE) {
 			$t_control = gpc_get_string( 'custom_field_' . $t_cfid . '_control', null);
@@ -344,7 +344,7 @@ if ( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 			$f_custom_fields_data[$t_cfid][1] = $t_start;
 			$f_custom_fields_data[$t_cfid][2] = $t_end;
 		} else {
-			if ( is_array( gpc_get( 'custom_field_' . $t_cfid, null ) ) ) {
+			if( is_array( gpc_get( 'custom_field_' . $t_cfid, null ) ) ) {
 				$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, META_FILTER_ANY );
 			} else {
 				$f_custom_fields_data[$t_cfid] = gpc_get_string( 'custom_field_' . $t_cfid, META_FILTER_ANY );
@@ -357,18 +357,18 @@ if ( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 $f_relationship_type = gpc_get_int( FILTER_PROPERTY_RELATIONSHIP_TYPE, -1 );
 $f_relationship_bug = gpc_get_int( FILTER_PROPERTY_RELATIONSHIP_BUG, 0 );
 
-if ( $f_temp_filter ) {
+if( $f_temp_filter ) {
 	$f_type = 1;
 }
 
-if ( $f_type < 0 ) {
+if( $f_type < 0 ) {
 	print_header_redirect( 'view_all_bug_page.php' );
 }
 
 $t_hide_status_default = config_get( 'hide_status_default' );
 
 # show bugs per page
-if ( $f_per_page < 0 ) {
+if( $f_per_page < 0 ) {
 	$f_per_page = config_get( 'default_limit_view' );
 }
 
@@ -378,7 +378,7 @@ $f_sort = ( ( $f_sort_d != "" ) ? $f_sort_d : $f_sort_0 ) . ( ( $f_sort_1 != "" 
 $f_dir = ( ( $f_dir_d != "" ) ? $f_dir_d : $f_dir_0 ) . ( ( $f_dir_1 != "" ) ? "," . $f_dir_1 : "" );
 
 # -1 is a special case stored query: it means we want to reset our filter
-if ( ( $f_type == 3 ) && ( $f_source_query_id == -1 ) ) {
+if( ( $f_type == 3 ) && ( $f_source_query_id == -1 ) ) {
 	$f_type = 0;
 }
 
@@ -417,12 +417,12 @@ $t_view_all_cookie_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
 $t_view_all_cookie = filter_db_get_filter( $t_view_all_cookie_id );
 
 # process the cookie if it exists, it may be blank in a new install
-if ( !is_blank( $t_view_all_cookie ) ) {
+if( !is_blank( $t_view_all_cookie ) ) {
 	$t_setting_arr = filter_deserialize( $t_view_all_cookie );
-	if ( false === $t_setting_arr ) {
+	if( false === $t_setting_arr ) {
 		# couldn't deserialize, if we were trying to use the filter, clear it and reload
 		# for ftype = 0, 1, or 3, we are going to re-write the filter anyways
-		if ( !in_array( $f_type, array( 0, 1, 3 ) ) ) {
+		if( !in_array( $f_type, array( 0, 1, 3 ) ) ) {
 			gpc_clear_cookie( 'view_all_cookie' );
 			error_proceed_url( 'view_all_set.php?type=0' );
 			trigger_error( ERROR_FILTER_TOO_OLD, ERROR );
@@ -511,7 +511,7 @@ switch ( $f_type ) {
 			# grab it. We will overwrite the current one at the
 			# bottom of this page
 			$t_setting_arr = filter_deserialize( $t_filter_string );
-			if ( false === $t_setting_arr ) {
+			if( false === $t_setting_arr ) {
 				# couldn't deserialize, if we were trying to use the filter, clear it and reload
 				gpc_clear_cookie( 'view_all_cookie' );
 				error_proceed_url( 'view_all_set.php?type=0' );
@@ -540,7 +540,7 @@ switch ( $f_type ) {
 
 			$t_custom_fields 		= custom_field_get_ids(); # @@@ (thraxisp) This should really be the linked ids, but we don't know the project
 			$t_custom_fields_data 	= array();
-			if ( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
+			if( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 				foreach( $t_custom_fields as $t_cfid ) {
 					$t_custom_fields_data[$t_cfid] =  array( META_FILTER_ANY );
 				}
@@ -595,7 +595,7 @@ $t_settings_serialized = serialize( $tc_setting_arr );
 $t_settings_string = $t_cookie_version . '#' . $t_settings_serialized;
 
 # If only using a temporary filter, don't store it in the database
-if ( !$f_temp_filter ) {
+if( !$f_temp_filter ) {
 	# Store the filter string in the database: its the current filter, so some values won't change
 	$t_project_id = helper_get_current_project();
 	$t_project_id = ( $t_project_id * -1 );
@@ -606,13 +606,13 @@ if ( !$f_temp_filter ) {
 }
 
 # redirect to print_all or view_all page
-if ( $f_print ) {
+if( $f_print ) {
 	$t_redirect_url = 'print_all_bug_page.php';
 } else {
 	$t_redirect_url = 'view_all_bug_page.php';
 }
 
-if ( $f_temp_filter ) {
+if( $f_temp_filter ) {
 	$t_token_id = token_set( TOKEN_FILTER, $t_settings_serialized );
 	$t_redirect_url = $t_redirect_url . '?filter=' . $t_token_id;
 }

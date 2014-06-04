@@ -71,7 +71,7 @@ function excel_get_header( $p_worksheet_title, $p_styles = array() ) {
  * @return null|string
  */
 function excel_get_styles( $p_styles ) {
-	if ( count ( $p_styles ) == 0 ) {
+	if( count ( $p_styles ) == 0 ) {
 		return null;
 	}
 
@@ -109,7 +109,7 @@ function excel_format_column_title( $p_column_title ) {
  * @return The Row tag.
  */
 function excel_get_start_row( $p_style_id = '') {
-	if ( $p_style_id != '' ) {
+	if( $p_style_id != '' ) {
 		return '<Row ss:StyleID="' . $p_style_id . '">';
 	} else {
 		return '<Row>';
@@ -501,7 +501,7 @@ function excel_format_custom_field( $p_issue_id, $p_project_id, $p_custom_field 
 function excel_format_plugin_column_value( $p_column, $p_bug ) {
 	$t_plugin_columns = columns_get_plugin_columns();
 
-	if ( !isset( $t_plugin_columns[$p_column] ) ) {
+	if( !isset( $t_plugin_columns[$p_column] ) ) {
 		return excel_prepare_string( '' );
 	} else {
 		$t_column_object = $t_plugin_columns[ $p_column ];
@@ -596,7 +596,7 @@ class ExcelStyle {
 	 */
 	function setBackgroundColor( $p_color, $p_pattern = 'Solid' ) {
 
-		if ( ! isset ( $this->interior ) ) {
+		if( ! isset ( $this->interior ) ) {
 			$this->interior = new Interior();
 		}
 
@@ -613,20 +613,20 @@ class ExcelStyle {
 	 */
 	function setFont( $p_bold, $p_color = '', $p_name = '', $p_italic = -1 ) {
 
-		if ( ! isset ( $this->font ) ) {
+		if( ! isset ( $this->font ) ) {
 			$this->font = new Font();
 		}
 
-		if ( $p_bold != -1 ) {
+		if( $p_bold != -1 ) {
 			$this->font->bold = $p_bold;
 		}
-		if ( $p_color != '' ) {
+		if( $p_color != '' ) {
 			$this->font->color = $p_color;
 		}
-		if ( $p_name != '' ) {
+		if( $p_name != '' ) {
 			$this->font->fontName = $p_name;
 		}
-		if ( $p_italic != -1 ) {
+		if( $p_italic != -1 ) {
 			$this->font->italic = $p_italic;
 		}
 	}
@@ -642,19 +642,19 @@ class ExcelStyle {
 	 * @param int $p_weight Thickness in points
 	 */
 	function setBorder( $p_color, $p_line_style = 'Continuous', $p_weight = 1) {
-		if ( ! isset ( $this->border ) ) {
+		if( ! isset ( $this->border ) ) {
 			$this->border = new Border();
 		}
 
-		if ( $p_color != '' ) {
+		if( $p_color != '' ) {
 			$this->border->color = $p_color;
 		}
 
-		if ( $p_line_style != '' ) {
+		if( $p_line_style != '' ) {
 			$this->border->lineStyle = $p_line_style;
 		}
 
-		if ( $p_weight != -1 ) {
+		if( $p_weight != -1 ) {
 			$this->border->weight = $p_weight;
 		}
 	}
@@ -667,19 +667,19 @@ class ExcelStyle {
 	 * @param string $p_vertical Automatic, Top, Bottom, Center, Justify, Distributed, and JustifyDistributed
 	 */
 	function setAlignment( $p_wrap_text, $p_horizontal = '', $p_vertical = '') {
-		if ( ! isset ( $this->alignment ) ) {
+		if( ! isset ( $this->alignment ) ) {
 			$this->alignment = new Alignment();
 		}
 
-		if ( $p_wrap_text != '' ) {
+		if( $p_wrap_text != '' ) {
 			$this->alignment->wrapText = $p_wrap_text;
 		}
 
-		if ( $p_horizontal != '' ) {
+		if( $p_horizontal != '' ) {
 			$this->alignment->horizontal = $p_horizontal;
 		}
 
-		if ( $p_vertical != '' ) {
+		if( $p_vertical != '' ) {
 			$this->alignment->vertical = $p_vertical;
 		}
 
@@ -690,20 +690,20 @@ class ExcelStyle {
 	 */
 	function asXml() {
 		$xml = '<ss:Style ss:ID="' . $this->id.'" ss:Name="'.$this->id.'" ';
-		if ( $this->parent_id != '' ) {
+		if( $this->parent_id != '' ) {
 			$xml .= 'ss:Parent="' . $this->parent_id .'" ';
 		}
 		$xml .= '>';
-		if ( $this->interior ) {
+		if( $this->interior ) {
 			$xml .= $this->interior->asXml();
 		}
-		if ( $this->font ) {
+		if( $this->font ) {
 			$xml .= $this->font->asXml();
 		}
-		if ( $this->border ) {
+		if( $this->border ) {
 			$xml .= $this->border->asXml();
 		}
-		if ( $this->alignment ) {
+		if( $this->alignment ) {
 			$xml .= $this->alignment->asXml();
 		}
 		$xml .= '</ss:Style>'."\n";
@@ -732,7 +732,7 @@ class Interior {
 	function asXml() {
 		$xml = '<ss:Interior ';
 
-		if ( $this->color ) {
+		if( $this->color ) {
 		   $xml .= 'ss:Color="' . $this->color .'" ss:Pattern="'. $this->pattern . '" ';
 		}
 
@@ -772,19 +772,19 @@ class Font {
 	function asXml() {
 		$xml = '<ss:Font ';
 
-		if ( $this->bold ) {
+		if( $this->bold ) {
 			$xml .= 'ss:Bold="' . $this->bold .'" ';
 		}
 
-		if ( $this->color ) {
+		if( $this->color ) {
 			$xml .= 'ss:Color="' . $this->color .'" ';
 		}
 
-		if ( $this->fontName) {
+		if( $this->fontName) {
 			$xml .= 'ss:FontName="' . $this->fontName .'" ';
 		}
 
-		if ( $this->italic ) {
+		if( $this->italic ) {
 			$xml .= 'ss:Italic="' . $this->italic .'" ';
 		}
 
@@ -827,15 +827,15 @@ class Border {
 		foreach ( $this->positions as $p_position ) {
 			$xml.= '<ss:Border ss:Position="' . $p_position .'" ';
 
-			if ( $this->lineStyle ) {
+			if( $this->lineStyle ) {
 				$xml .= 'ss:LineStyle="' . $this->lineStyle .'" ';
 			}
 
-			if ( $this->color ) {
+			if( $this->color ) {
 				$xml .= 'ss:Color="' . $this->color .'" ';
 			}
 
-			if ( $this->weight) {
+			if( $this->weight) {
 				$xml .= 'ss:Weight="' . $this->weight .'" ';
 			}
 
@@ -874,15 +874,15 @@ class Alignment {
 
 		$xml = '<ss:Alignment ';
 
-		if ( $this->wrapText ) {
+		if( $this->wrapText ) {
 			$xml .= 'ss:WrapText="' . $this->wrapText.'" ';
 		}
 
-		if ( $this->horizontal ) {
+		if( $this->horizontal ) {
 			$xml .= 'ss:Horizontal="' . $this->horizontal.'" ';
 		}
 
-		if ( $this->vertical ) {
+		if( $this->vertical ) {
 			$xml .= 'ss:Vertical="' . $this->vertical.'" ';
 		}
 

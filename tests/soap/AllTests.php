@@ -59,7 +59,7 @@ class Soap_AllTests extends PHPUnit_Framework_TestSuite
 	 */
 	protected function setUp()
 	{
-		if ( ! extension_loaded('soap') ) {
+		if( ! extension_loaded('soap') ) {
 			$this->markTestSuiteSkipped(
 				'The SOAP extension is not available.'
 			);

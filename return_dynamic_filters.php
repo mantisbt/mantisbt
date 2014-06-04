@@ -69,13 +69,13 @@ $t_filter_cols = 7;
 $t_custom_cols = 1;
 $t_custom_rows = 0;
 
-if ( ON == config_get( 'filter_by_custom_fields' ) ) {
+if( ON == config_get( 'filter_by_custom_fields' ) ) {
 	$t_custom_cols = config_get( 'filter_custom_fields_per_row' );
 	$t_custom_fields = custom_field_get_linked_ids( $t_project_id );
 
 	foreach ( $t_custom_fields as $t_cfid ) {
 		$t_field_info = custom_field_cache_row( $t_cfid, true );
-		if ( $t_field_info['access_level_r'] <= $t_current_user_access_level ) {
+		if( $t_field_info['access_level_r'] <= $t_current_user_access_level ) {
 			$t_accessible_custom_fields_ids[] = $t_cfid;
 			$t_accessible_custom_fields_names[] = $t_field_info['name'];
 			$t_accessible_custom_fields_types[] = $t_field_info['type'];
@@ -83,7 +83,7 @@ if ( ON == config_get( 'filter_by_custom_fields' ) ) {
 		}
 	}
 
-	if ( count( $t_accessible_custom_fields_ids ) > 0 ) {
+	if( count( $t_accessible_custom_fields_ids ) > 0 ) {
 		$t_per_row = config_get( 'filter_custom_fields_per_row' );
 		$t_custom_rows = ceil( count( $t_accessible_custom_fields_ids ) / $t_per_row );
 	}
@@ -95,25 +95,25 @@ $t_sort = $t_filter[ FILTER_PROPERTY_SORT_FIELD_NAME ];
 $t_dir = $t_filter[ FILTER_PROPERTY_SORT_DIRECTION ];
 $t_action  = "view_all_set.php?f=3";
 
-if ( $f_for_screen == false ) {
+if( $f_for_screen == false ) {
 	$t_action  = "view_all_set.php";
 }
 
 $f_default_view_type = 'simple';
-if ( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) {
+if( ADVANCED_DEFAULT == config_get( 'view_filters' ) ) {
 	$f_default_view_type = 'advanced';
 }
 
 $f_view_type = gpc_get_string( 'view_type', $f_default_view_type );
-if ( ADVANCED_ONLY == config_get( 'view_filters' ) ) {
+if( ADVANCED_ONLY == config_get( 'view_filters' ) ) {
 	$f_view_type = 'advanced';
 }
-if ( SIMPLE_ONLY == config_get( 'view_filters' ) ) {
+if( SIMPLE_ONLY == config_get( 'view_filters' ) ) {
 	$f_view_type = 'simple';
 }
 
 $t_select_modifier = '';
-if ( 'advanced' == $f_view_type ) {
+if( 'advanced' == $f_view_type ) {
 	$t_select_modifier = ' multiple="multiple" size="10"';
 }
 
@@ -121,17 +121,17 @@ if ( 'advanced' == $f_view_type ) {
  * Prepend headers to the dynamic filter forms that are sent as the response from this page.
  */
 function return_dynamic_filters_prepend_headers() {
-	if ( !headers_sent() ) {
+	if( !headers_sent() ) {
 		header( 'Content-Type: text/html; charset=utf-8' );
 	}
 }
 
 $f_filter_target = gpc_get_string( 'filter_target' );
 $t_function_name = 'print_filter_' . utf8_substr( $f_filter_target, 0, -7 );
-if ( function_exists( $t_function_name ) ) {
+if( function_exists( $t_function_name ) ) {
 	return_dynamic_filters_prepend_headers();
 	call_user_func( $t_function_name );
-} else if ( 'custom_field' == utf8_substr( $f_filter_target, 0, 12 ) ) {
+} else if( 'custom_field' == utf8_substr( $f_filter_target, 0, 12 ) ) {
 	# custom function
 	$t_custom_id = utf8_substr( $f_filter_target, 13, -7 );
 	return_dynamic_filters_prepend_headers();
@@ -140,7 +140,7 @@ if ( function_exists( $t_function_name ) ) {
 	$t_plugin_filters = filter_get_plugin_filters();
 	$t_found = false;
 	foreach ( $t_plugin_filters as $t_field_name => $t_filter_object ) {
-		if ( $t_field_name . '_filter' == $f_filter_target ) {
+		if( $t_field_name . '_filter' == $f_filter_target ) {
 			return_dynamic_filters_prepend_headers();
 			print_filter_plugin_field( $t_field_name, $t_filter_object );
 			$t_found = true;
@@ -148,7 +148,7 @@ if ( function_exists( $t_function_name ) ) {
 		}
 	}
 
-	if ( !$t_found ) {
+	if( !$t_found ) {
 		# error - no function to populate the target (e.g., print_filter_foo)
 		error_parameters( $f_filter_target );
 		trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );

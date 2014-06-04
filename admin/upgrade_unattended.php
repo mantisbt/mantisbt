@@ -92,9 +92,9 @@ if( false == $t_result ) {
 
 # TODO: Enhance this check to support the mode where this script is called on an empty database.
 # check to see if the new installer was used
-if ( -1 == config_get( 'database_version', -1 ) ) {
-        echo "Upgrade from the current installed MantisBT version is no longer supported.  If you are using MantisBT version older than 1.0.0, then upgrade to v1.0.0 first.";
-        exit( 1 );
+if( -1 == config_get( 'database_version', -1 ) ) {
+		echo "Upgrade from the current installed MantisBT version is no longer supported.  If you are using MantisBT version older than 1.0.0, then upgrade to v1.0.0 first.";
+		exit( 1 );
 }
 
 # read control variables with defaults
@@ -106,8 +106,8 @@ $f_db_password = gpc_get( 'db_password', config_get( 'db_password', '' ) );
 $f_db_exists = gpc_get_bool( 'db_exists', false );
 
 # install the tables
-if ( !preg_match( '/^[a-zA-Z0-9_]+$/', $f_db_type ) ||
-     !file_exists( dirname( dirname( __FILE__ ) ) . '/library/adodb/drivers/adodb-' . $f_db_type . '.inc.php' ) ) {
+if( !preg_match( '/^[a-zA-Z0-9_]+$/', $f_db_type ) ||
+	 !file_exists( dirname( dirname( __FILE__ ) ) . '/library/adodb/drivers/adodb-' . $f_db_type . '.inc.php' ) ) {
 	echo 'Invalid db type ' . htmlspecialchars( $f_db_type ) . '.';
 	exit;
 }
@@ -138,20 +138,20 @@ while(( $i <= $lastid ) && !$g_failed ) {
 	$t_sql = true;
 	$t_target = $upgrade[$i][1][0];
 
-	if ( $upgrade[$i][0] == 'InsertData' ) {
+	if( $upgrade[$i][0] == 'InsertData' ) {
 		$sqlarray = call_user_func_array( $upgrade[$i][0], $upgrade[$i][1] );
-	} else if ( $upgrade[$i][0] == 'UpdateSQL' ) {
+	} else if( $upgrade[$i][0] == 'UpdateSQL' ) {
 		$sqlarray = array(
 			$upgrade[$i][1],
 		);
 
 		$t_target = $upgrade[$i][1];
-	} else if ( $upgrade[$i][0] == 'UpdateFunction' ) {
+	} else if( $upgrade[$i][0] == 'UpdateFunction' ) {
 		$sqlarray = array(
 			$upgrade[$i][1],
 		);
 
-		if ( isset( $upgrade[$i][2] ) ) {
+		if( isset( $upgrade[$i][2] ) ) {
 			$sqlarray[] = $upgrade[$i][2];
 		}
 
@@ -159,8 +159,8 @@ while(( $i <= $lastid ) && !$g_failed ) {
 		$t_target = $upgrade[$i][1];
 	} else {
 		# 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade.
-		if ( isset( $upgrade[$i][2] ) ) {
-			if ( call_user_func_array( $upgrade[$i][2][0], $upgrade[$i][2][1] ) ) {
+		if( isset( $upgrade[$i][2] ) ) {
+			if( call_user_func_array( $upgrade[$i][2][0], $upgrade[$i][2][1] ) ) {
 				$sqlarray = call_user_func_array( Array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
 			} else {
 				$sqlarray = array();
@@ -171,17 +171,17 @@ while(( $i <= $lastid ) && !$g_failed ) {
 	}
 
 	echo 'Schema ' . $upgrade[$i][0] . ' ( ' . $t_target . ' ) ';
-	if ( $t_sql ) {
+	if( $t_sql ) {
 		$ret = $dict->ExecuteSQLArray( $sqlarray, false );
 	} else {
-		if ( isset( $sqlarray[1] ) ) {
+		if( isset( $sqlarray[1] ) ) {
 			$ret = call_user_func( 'install_' . $sqlarray[0], $sqlarray[1] );
 		} else {
 			$ret = call_user_func( 'install_' . $sqlarray[0] );
 		}
 	}
 
-	if ( $ret == 2 ) {
+	if( $ret == 2 ) {
 		print_test_result( GOOD );
 		config_set( 'database_version', $i );
 	} else {

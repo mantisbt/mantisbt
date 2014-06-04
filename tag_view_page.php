@@ -107,7 +107,7 @@ html_page_top( sprintf( lang_get( 'tag_details' ), $t_name ) ); ?>
 	# Related tags
 
 	$t_tags_related = tag_stats_related( $f_tag_id );
-	if ( count( $t_tags_related ) ) {
+	if( count( $t_tags_related ) ) {
 ?>
 	<div class="field-container">
 		<span class="display-label"><span><?php echo lang_get( 'tag_related' ); ?></span></span>
@@ -134,11 +134,11 @@ html_page_top( sprintf( lang_get( 'tag_details' ), $t_name ) ); ?>
 <?php
 	}
 
-	if ( $t_can_edit_own || $t_can_edit ) {
+	if( $t_can_edit_own || $t_can_edit ) {
 ?>
 	<div class="action-buttons center">
 <?php
-		if ( $t_can_edit_own ) {
+		if( $t_can_edit_own ) {
 ?>
 		<form class="action-button" action="tag_update_page.php" method="post">
 			<fieldset>
@@ -149,7 +149,7 @@ html_page_top( sprintf( lang_get( 'tag_details' ), $t_name ) ); ?>
 		</form><?php
 		}
 
-		if ( $t_can_edit ) { ?>
+		if( $t_can_edit ) { ?>
 		<form action="tag_delete.php" method="post" class="action-button">
 			<fieldset>
 				<?php echo form_security_field( 'tag_delete' ) ?>

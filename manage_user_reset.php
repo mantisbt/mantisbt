@@ -65,7 +65,7 @@ access_ensure_global_level( $t_user['access_level'] );
 # If the password can be changed, we reset it, otherwise we unlock
 # the account (i.e. reset failed login count)
 $t_reset = helper_call_custom_function( 'auth_can_change_password', array() );
-if ( $t_reset ) {
+if( $t_reset ) {
 	$t_result = user_reset_password( $f_user_id );
 } else {
 	$t_result = user_reset_failed_login_count_to_zero( $f_user_id );
@@ -80,12 +80,12 @@ html_page_top( null, $t_result ? $t_redirect_url : null );
 echo '<div class="success-msg">';
 
 if( $t_reset ) {
-	if ( false == $t_result ) {
+	if( false == $t_result ) {
 		# PROTECTED
 		echo lang_get( 'account_reset_protected_msg' );
 	} else {
 		# SUCCESSFUL RESET
-		if ( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
+		if( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 			# send the new random password via email
 			echo lang_get( 'account_reset_msg' );
 		} else {

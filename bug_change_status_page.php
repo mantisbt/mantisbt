@@ -92,13 +92,13 @@ if( $f_new_status == $t_reopen && $f_reopen_flag ) {
 else if( $f_new_status == $t_closed ) {
 	access_ensure_can_close_bug( $t_bug, $t_current_user_id );
 }
-else if ( bug_is_readonly( $f_bug_id )
+else if( bug_is_readonly( $f_bug_id )
 	|| !access_has_bug_level( access_get_status_threshold( $f_new_status, $t_bug->project_id ), $f_bug_id, $t_current_user_id ) ) {
 	access_denied();
 }
 
 $t_can_update_due_date = access_has_bug_level( config_get( 'due_date_update_threshold' ), $f_bug_id );
-if ( $t_can_update_due_date ) {
+if( $t_can_update_due_date ) {
 	require_js( 'jscalendar/calendar.js' );
 	require_js( 'jscalendar/lang/calendar-en.js' );
 	require_js( 'jscalendar/calendar-setup.js' );
@@ -108,21 +108,21 @@ if ( $t_can_update_due_date ) {
 # get new issue handler if set, otherwise default to original handler
 $f_handler_id = gpc_get_int( 'handler_id', $t_bug->handler_id );
 
-if ( config_get( 'bug_assigned_status' ) == $f_new_status ) {
+if( config_get( 'bug_assigned_status' ) == $f_new_status ) {
 	$t_bug_sponsored = sponsorship_get_amount( sponsorship_get_all_ids( $f_bug_id ) ) > 0;
-	if ( $t_bug_sponsored ) {
-		if ( !access_has_bug_level( config_get( 'assign_sponsored_bugs_threshold' ), $f_bug_id ) ) {
+	if( $t_bug_sponsored ) {
+		if( !access_has_bug_level( config_get( 'assign_sponsored_bugs_threshold' ), $f_bug_id ) ) {
 			trigger_error( ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW, ERROR );
 		}
 	}
 
-	if ( $f_handler_id != NO_USER ) {
-		if ( !access_has_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id, $f_handler_id ) ) {
+	if( $f_handler_id != NO_USER ) {
+		if( !access_has_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id, $f_handler_id ) ) {
 			trigger_error( ERROR_HANDLER_ACCESS_TOO_LOW, ERROR );
 		}
 
-		if ( $t_bug_sponsored ) {
-			if ( !access_has_bug_level( config_get( 'handle_sponsored_bugs_threshold' ), $f_bug_id, $f_handler_id ) ) {
+		if( $t_bug_sponsored ) {
+			if( !access_has_bug_level( config_get( 'handle_sponsored_bugs_threshold' ), $f_bug_id, $f_handler_id ) ) {
 				trigger_error( ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW, ERROR );
 			}
 		}
@@ -155,8 +155,8 @@ print_recently_visited();
 			</tr>
 
 <?php
-	if ( $f_new_status >= $t_resolved ) {
-		if ( relationship_can_resolve_bug( $f_bug_id ) == false ) {
+	if( $f_new_status >= $t_resolved ) {
+		if( relationship_can_resolve_bug( $f_bug_id ) == false ) {
 			echo "<tr><td colspan=\"2\">" . lang_get( 'relationship_warning_blocking_bugs_not_resolved_2' ) . "</td></tr>";
 		}
 	}
@@ -166,7 +166,7 @@ print_recently_visited();
 <?php
 $t_current_resolution = $t_bug->resolution;
 $t_bug_is_open = $t_current_resolution < $t_resolved;
-if ( ( $f_new_status >= $t_resolved ) && ( ( $f_new_status < $t_closed ) || ( $t_bug_is_open ) ) ) { ?>
+if( ( $f_new_status >= $t_resolved ) && ( ( $f_new_status < $t_closed ) || ( $t_bug_is_open ) ) ) { ?>
 <!-- Resolution -->
 			<tr>
 				<th class="category">
@@ -179,7 +179,7 @@ if ( ( $f_new_status >= $t_resolved ) && ( ( $f_new_status < $t_closed ) || ( $t
 
 				$t_relationships = relationship_get_all_src( $f_bug_id );
 				foreach( $t_relationships as $t_relationship ) {
-					if ( $t_relationship->type == BUG_DUPLICATE ) {
+					if( $t_relationship->type == BUG_DUPLICATE ) {
 						$t_resolution = config_get( 'bug_duplicate_resolution' );
 						break;
 					}
@@ -193,7 +193,7 @@ if ( ( $f_new_status >= $t_resolved ) && ( ( $f_new_status < $t_closed ) || ( $t
 <?php } ?>
 
 <?php
-if ( $f_new_status >= $t_resolved
+if( $f_new_status >= $t_resolved
 	&& $f_new_status < $t_closed
 	&& $t_resolution != config_get( 'bug_duplicate_resolution' ) ) { ?>
 <!-- Duplicate ID -->
@@ -208,10 +208,10 @@ if ( $f_new_status >= $t_resolved
 <?php } ?>
 
 <?php
-if ( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $f_bug_id ) ) {
+if( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $f_bug_id ) ) {
 	$t_suggested_handler_id = $t_bug->handler_id;
 
-	if ( $t_suggested_handler_id == NO_USER && access_has_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id ) ) {
+	if( $t_suggested_handler_id == NO_USER && access_has_bug_level( config_get( 'handle_bug_threshold' ), $f_bug_id ) ) {
 		$t_suggested_handler_id = $t_current_user_id;
 	}
 ?>
@@ -229,9 +229,9 @@ if ( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get
 			</tr>
 <?php } ?>
 
-<?php if ( $t_can_update_due_date ) {
+<?php if( $t_can_update_due_date ) {
 	$t_date_to_display = '';
-	if ( !date_is_null( $t_bug->due_date ) ) {
+	if( !date_is_null( $t_bug->due_date ) ) {
 			$t_date_to_display = date( config_get( 'calendar_date_format' ), $t_bug->due_date );
 	}
 ?>
@@ -254,11 +254,11 @@ if ( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get
  *  display or required fields on resolve or close
  */
 $t_custom_status_label = "update"; # Don't show custom fields by default
-if ( ( $f_new_status == $t_resolved ) &&
+if( ( $f_new_status == $t_resolved ) &&
 			( $f_new_status < $t_closed ) ) {
 	$t_custom_status_label = "resolved";
 }
-if ( $t_closed == $f_new_status ) {
+if( $t_closed == $f_new_status ) {
 	$t_custom_status_label = "closed";
 }
 
@@ -269,17 +269,17 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	$t_display = $t_def['display_' . $t_custom_status_label];
 	$t_require = $t_def['require_' . $t_custom_status_label];
 
-	if ( ( "update" == $t_custom_status_label ) && ( !$t_require ) ) {
+	if( ( "update" == $t_custom_status_label ) && ( !$t_require ) ) {
 		continue;
 	}
-	if ( in_array( $t_custom_status_label, array( "resolved", "closed" ) ) && !( $t_display || $t_require ) ) {
+	if( in_array( $t_custom_status_label, array( "resolved", "closed" ) ) && !( $t_display || $t_require ) ) {
 		continue;
 	}
-	if ( custom_field_has_write_access( $t_id, $f_bug_id ) ) {
+	if( custom_field_has_write_access( $t_id, $f_bug_id ) ) {
 ?>
 			<tr>
 				<th class="category">
-					<?php if ( $t_require ) {?><span class="required">*</span><?php } echo lang_get_defaulted( $t_def['name'] ) ?>
+					<?php if( $t_require ) {?><span class="required">*</span><?php } echo lang_get_defaulted( $t_def['name'] ) ?>
 				</th>
 				<td>
 					<?php
@@ -289,7 +289,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 			</tr>
 <?php
 	} #  custom_field_has_write_access( $t_id, $f_bug_id ) )
-	else if ( custom_field_has_read_access( $t_id, $f_bug_id ) ) {
+	else if( custom_field_has_read_access( $t_id, $f_bug_id ) ) {
 ?>
 			<tr>
 				<th class="category">
@@ -305,8 +305,8 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 ?>
 
 <?php
-if ( ( $f_new_status >= $t_resolved ) ) {
-	if (   version_should_show_product_version( $t_bug->project_id )
+if( ( $f_new_status >= $t_resolved ) ) {
+	if(   version_should_show_product_version( $t_bug->project_id )
 		&& !bug_is_readonly( $f_bug_id )
 		&& access_has_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id )
 	) {
@@ -328,7 +328,7 @@ if ( ( $f_new_status >= $t_resolved ) ) {
 ?>
 <?php event_signal( 'EVENT_UPDATE_BUG_STATUS_FORM', array( $f_bug_id ) ); ?>
 <?php
-if ( ON == $f_reopen_flag ) {
+if( ON == $f_reopen_flag ) {
 ?>
 <!-- Bug was re-opened -->
 <?php
@@ -345,7 +345,7 @@ if ( ON == $f_reopen_flag ) {
 					<textarea name="bugnote_text" cols="80" rows="10"></textarea>
 				</td>
 			</tr>
-<?php if ( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>
+<?php if( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>
 			<tr>
 				<th class="category">
 					<?php echo lang_get( 'view_status' ) ?>
@@ -353,7 +353,7 @@ if ( ON == $f_reopen_flag ) {
 				<td>
 <?php
 		$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
-		if ( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
+		if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
 ?>
 			<input type="checkbox" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
 <?php
@@ -366,9 +366,9 @@ if ( ON == $f_reopen_flag ) {
 			</tr>
 <?php } ?>
 
-<?php if ( config_get('time_tracking_enabled') ) { ?>
-<?php if ( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>
-<?php if ( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $f_bug_id ) ) { ?>
+<?php if( config_get('time_tracking_enabled') ) { ?>
+<?php if( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>
+<?php if( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $f_bug_id ) ) { ?>
 			<tr>
 				<th class="category">
 					<?php echo lang_get( 'time_tracking' ) ?>

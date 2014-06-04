@@ -59,7 +59,7 @@ $t_sep = csv_get_separator();
 
 # Get bug rows according to the current filter
 $t_rows = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
-if ( $t_rows === false ) {
+if( $t_rows === false ) {
 	print_header_redirect( 'view_all_set.php?type=0' );
 }
 
@@ -83,7 +83,7 @@ header( 'Content-Disposition: attachment; filename="' . urlencode( file_clean_na
 $t_columns = csv_get_columns();
 
 # export BOM
-if ( config_get( 'csv_add_bom' ) == ON ) {
+if( config_get( 'csv_add_bom' ) == ON ) {
 	echo "\xEF\xBB\xBF";
 }
 
@@ -92,7 +92,7 @@ $t_first_column = true;
 ob_start();
 $t_titles = array();
 foreach ( $t_columns as $t_column ) {
-	if ( !$t_first_column ) {
+	if( !$t_first_column ) {
 		echo $t_sep;
 	} else {
 		$t_first_column = false;
@@ -109,7 +109,7 @@ $t_header = ob_get_clean();
 # See Microsoft Knowledge Base Article - 323626
 # http://support.microsoft.com/default.aspx?scid=kb;en-us;323626&Product=xlw
 $t_first_three_chars = utf8_substr( $t_header, 0, 3 );
-if ( strcmp( $t_first_three_chars, 'ID' . $t_sep ) == 0 ) {
+if( strcmp( $t_first_three_chars, 'ID' . $t_sep ) == 0 ) {
 	$t_header = str_replace( 'ID' . $t_sep, 'Id' . $t_sep, $t_header );
 }
 # end of fix
@@ -121,13 +121,13 @@ foreach ( $t_rows as $t_row ) {
 	$t_first_column = true;
 
 	foreach ( $t_columns as $t_column ) {
-		if ( !$t_first_column ) {
+		if( !$t_first_column ) {
 			echo $t_sep;
 		} else {
 			$t_first_column = false;
 		}
 
-		if ( column_get_custom_field_name( $t_column ) !== null || column_is_plugin_column( $t_column ) ) {
+		if( column_get_custom_field_name( $t_column ) !== null || column_is_plugin_column( $t_column ) ) {
 			ob_start();
 			$t_column_value_function = 'print_column_value';
 			helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row, COLUMNS_TARGET_CSV_PAGE ) );

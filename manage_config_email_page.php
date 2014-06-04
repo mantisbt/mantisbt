@@ -87,9 +87,9 @@ function get_notify_flag( $p_action, $p_flag ) {
 	global $t_notify_flags, $t_default_notify_flags;
 
 	$t_val = OFF;
-	if ( isset ( $t_notify_flags[$p_action][$p_flag] ) ) {
+	if( isset ( $t_notify_flags[$p_action][$p_flag] ) ) {
 		$t_val = $t_notify_flags[$p_action][$p_flag];
-	} else if ( isset ( $t_default_notify_flags[$p_flag] ) ) {
+	} else if( isset ( $t_default_notify_flags[$p_flag] ) ) {
 		$t_val = $t_default_notify_flags[$p_flag];
 	}
 	return $t_val;
@@ -110,13 +110,13 @@ function colour_notify_flag ( $p_action, $p_flag ) {
 	$t_project = isset( $t_notify_flags[$p_action][$p_flag] ) ? ( $t_notify_flags[$p_action][$p_flag]  ? 1 : 0 ): -1;
 
 	$t_colour = '';
-	if ( $t_global >= 0 ) {
-		if ( $t_global != $t_file ) {
+	if( $t_global >= 0 ) {
+		if( $t_global != $t_file ) {
 			$t_colour = ' bgcolor="' . $t_colour_global . '" '; # all projects override
 		}
 	}
-	if ( $t_project >= 0 ) {
-		if ( $t_project != $t_global ) {
+	if( $t_project >= 0 ) {
+		if( $t_project != $t_global ) {
 			$t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
 		}
 	}
@@ -133,7 +133,7 @@ function colour_notify_flag ( $p_action, $p_flag ) {
 function show_notify_flag( $p_action, $p_flag ) {
 	global $t_can_change_flags , $t_can_change_defaults;
 	$t_flag = (bool)get_notify_flag( $p_action, $p_flag );
-	if ( $t_can_change_flags || $t_can_change_defaults ) {
+	if( $t_can_change_flags || $t_can_change_defaults ) {
 		$t_flag_name = $p_action . ':' . $p_flag;
 		$t_set = $t_flag ? 'checked="checked"' : '';
 		return '<input type="checkbox" name="flag[]" value="' . $t_flag_name. '" ' . $t_set . ' />';
@@ -160,10 +160,10 @@ function colour_threshold_flag ( $p_access, $p_action ) {
 					 && ( $p_access <= $t_notify_flags[$p_action]['threshold_max'] );
 
 	$t_colour = '';
-	if ( $t_global != $t_file ) {
+	if( $t_global != $t_file ) {
 		$t_colour = ' bgcolor="' . $t_colour_global . '" '; # all projects override
 	}
-	if ( $t_project != $t_global ) {
+	if( $t_project != $t_global ) {
 		$t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
 	}
 	return $t_colour;
@@ -180,7 +180,7 @@ function show_notify_threshold( $p_access, $p_action ) {
 	global $t_can_change_flags , $t_can_change_defaults;
 	$t_flag = ( $p_access >= get_notify_flag( $p_action, 'threshold_min' ) )
 		&& ( $p_access <= get_notify_flag( $p_action, 'threshold_max' ) );
-	if ( $t_can_change_flags  || $t_can_change_defaults ) {
+	if( $t_can_change_flags  || $t_can_change_defaults ) {
 		$t_flag_name = $p_action . ':' . $p_access;
 		$t_set = $t_flag ? "checked=\"checked\"" : "";
 		return "<input type=\"checkbox\" name=\"flag_threshold[]\" value=\"$t_flag_name\" $t_set />";
@@ -277,27 +277,27 @@ foreach( $t_statuses as $t_status ) {
 $t_global_default_notify_flags = config_get( 'default_notify_flags', null, null, ALL_PROJECTS );
 $t_global_notify_flags = array();
 foreach ( $t_global_default_notify_flags as $t_flag => $t_value ) {
-   foreach ($t_actions as $t_action ) {
-	   $t_global_notify_flags[$t_action][$t_flag] = $t_value;
-   }
+	foreach ($t_actions as $t_action ) {
+		$t_global_notify_flags[$t_action][$t_flag] = $t_value;
+	}
 }
 $t_global_notify_flags = array_merge_recursive2( $t_global_notify_flags, config_get( 'notify_flags', null, null, ALL_PROJECTS ) );
 
 $t_file_default_notify_flags = config_get_global( 'default_notify_flags' );
 $t_file_notify_flags = array();
 foreach ( $t_file_default_notify_flags as $t_flag => $t_value ) {
-   foreach ($t_actions as $t_action ) {
-	   $t_file_notify_flags[$t_action][$t_flag] = $t_value;
-   }
+	foreach ($t_actions as $t_action ) {
+		$t_file_notify_flags[$t_action][$t_flag] = $t_value;
+	}
 }
 $t_file_notify_flags = array_merge_recursive2( $t_file_notify_flags, config_get_global( 'notify_flags' ) );
 
 $t_default_notify_flags = config_get( 'default_notify_flags' );
 $t_notify_flags = array();
 foreach ( $t_default_notify_flags as $t_flag => $t_value ) {
-   foreach ($t_actions as $t_action ) {
-	   $t_notify_flags[$t_action][$t_flag] = $t_value;
-   }
+	foreach ($t_actions as $t_action ) {
+		$t_notify_flags[$t_action][$t_flag] = $t_value;
+	}
 }
 $t_notify_flags = array_merge_recursive2( $t_notify_flags, config_get( 'notify_flags' ) );
 
@@ -309,19 +309,19 @@ echo '<br /><br />';
 # Email notifications
 if( config_get( 'enable_email_notification' ) == ON ) {
 
-	if ( $t_can_change_flags  || $t_can_change_defaults ) {
+	if( $t_can_change_flags  || $t_can_change_defaults ) {
 		echo "<form name=\"mail_config_action\" method=\"post\" action=\"manage_config_email_set.php\">\n";
 		echo form_security_field( 'manage_config_email_set' );
 	}
 
-	if ( ALL_PROJECTS == $t_project ) {
+	if( ALL_PROJECTS == $t_project ) {
 		$t_project_title = lang_get( 'config_all_projects' );
 	} else {
 		$t_project_title = sprintf( lang_get( 'config_project' ) , string_display( project_get_name( $t_project ) ) );
 	}
 	echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
 	echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
-	if ( ALL_PROJECTS <> $t_project ) {
+	if( ALL_PROJECTS <> $t_project ) {
 		echo '<span style="background-color:' . $t_colour_project . '">' . lang_get( 'colour_project' ) . '</span><br />';
 	}
 	echo '<span style="background-color:' . $t_colour_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
@@ -345,7 +345,7 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 
 	get_section_end_for_email();
 
-	if ( $t_can_change_flags  || $t_can_change_defaults ) {
+	if( $t_can_change_flags  || $t_can_change_defaults ) {
 		echo '<p>' . lang_get( 'notify_actions_change_access' ) . "\n";
 		echo '<select name="notify_actions_access">' . "\n";
 		print_enum_string_option_list( 'access_levels', config_get_access( 'notify_flags' ) );
@@ -362,7 +362,7 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 		echo '<input name="project" type="hidden" value="' . $t_project . '" />' . "\n";
 		echo '<input name="return" type="hidden" value="' . string_attribute( form_action_self() ) . '" />' . "\n";
 		echo '<input type="submit" class="button" value="';
-		if ( ALL_PROJECTS == $t_project ) {
+		if( ALL_PROJECTS == $t_project ) {
 			echo lang_get( 'revert_to_system' );
 		} else {
 			echo lang_get( 'revert_to_all_project' );

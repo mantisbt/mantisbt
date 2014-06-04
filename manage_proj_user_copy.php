@@ -52,10 +52,10 @@ $f_other_project_id	= gpc_get_int( 'other_project_id' );
 $f_copy_from		= gpc_get_bool( 'copy_from' );
 $f_copy_to			= gpc_get_bool( 'copy_to' );
 
-if ( $f_copy_from ) {
+if( $f_copy_from ) {
 	$t_src_project_id = $f_other_project_id;
 	$t_dst_project_id = $f_project_id;
-} else if ( $f_copy_to ) {
+} else if( $f_copy_to ) {
 	$t_src_project_id = $f_project_id;
 	$t_dst_project_id = $f_other_project_id;
 } else {

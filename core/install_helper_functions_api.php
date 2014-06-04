@@ -153,7 +153,7 @@ function install_set_log_queries( $p_new_state = OFF ) {
 
 	$t_log_queries = $g_db_log_queries;
 
-	if ( $g_db_log_queries !== $p_new_state ) {
+	if( $g_db_log_queries !== $p_new_state ) {
 		$g_db_log_queries = $p_new_state;
 	}
 
@@ -192,7 +192,7 @@ function install_category_migrate() {
 		$t_project_id = $row['project_id'];
 		$t_name = $row['category'];
 
-		if ( !isset( $t_data[$t_project_id][$t_name] ) ) {
+		if( !isset( $t_data[$t_project_id][$t_name] ) ) {
 			$t_data[$t_project_id][$t_name] = 0;
 		}
 	}
@@ -202,7 +202,7 @@ function install_category_migrate() {
 		$t_inserted = array();
 		foreach( $t_categories as $t_name => $t_user_id ) {
 			$t_lower_name = utf8_strtolower( trim( $t_name ) );
-			if ( !isset( $t_inserted[$t_lower_name] ) ) {
+			if( !isset( $t_inserted[$t_lower_name] ) ) {
 				$query = "INSERT INTO $t_category_table ( name, project_id, user_id ) VALUES ( " .
 					db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 				db_query_bound( $query, array( $t_name, $t_project_id, $t_user_id ) );
@@ -240,7 +240,7 @@ function install_date_migrate( $p_data ) {
 	$t_id_column = $p_data[1];
 	$t_date_array = is_array( $p_data[2] );
 
-	if ( $t_date_array ) {
+	if( $t_date_array ) {
 		$t_old_column = implode( ',', $p_data[2] );
 		$t_cnt_fields = count( $p_data[2] );
 		$query = "SELECT $t_id_column, $t_old_column FROM $t_table";
@@ -251,7 +251,7 @@ function install_date_migrate( $p_data ) {
 		# start from the beginning everytime.  Here we will only pickup rows where at least one
 		# of the datetime fields wasn't upgraded yet and upgrade them all.
 		foreach ( $p_data[3] as $t_new_column_name ) {
-			if ( $t_first_column ) {
+			if( $t_first_column ) {
 				$t_first_column = false;
 				$query .= ' WHERE ';
 			} else {
@@ -274,7 +274,7 @@ function install_date_migrate( $p_data ) {
 	if( db_num_rows( $t_result ) > 0 ) {
 
 		# Build the update query
-		if ( $t_date_array ) {
+		if( $t_date_array ) {
 			$t_pairs = array();
 			foreach( $p_data[3] as $var ) {
 				array_push( $t_pairs, "$var=" . db_param() ) ;
@@ -427,7 +427,7 @@ function install_stored_filter_migrate() {
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_filter_arr = filter_deserialize( $t_row['filter_string'] );
 		foreach( $t_filter_fields AS $t_old=>$t_new ) {
-			if ( isset( $t_filter_arr[$t_old] ) ) {
+			if( isset( $t_filter_arr[$t_old] ) ) {
 				$t_value = $t_filter_arr[$t_old];
 				unset( $t_filter_arr[$t_old] );
 				if( !is_null( $t_new ) ) {

@@ -70,7 +70,7 @@ print_manage_menu();
 		<tr class="hidden"></tr>
 	<?php
 	$t_is_admin = current_user_is_administrator();
-	if ( $t_is_admin ) {
+	if( $t_is_admin ) {
 	?>
 		<tr>
 			<th class="category"><?php echo lang_get( 'site_path' ) ?></th>

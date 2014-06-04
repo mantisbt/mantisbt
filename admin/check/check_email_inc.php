@@ -27,7 +27,7 @@
  * @uses utility_api.php
  */
 
-if ( !defined( 'CHECK_EMAIL_INC_ALLOW' ) ) {
+if( !defined( 'CHECK_EMAIL_INC_ALLOW' ) ) {
 	return;
 }
 

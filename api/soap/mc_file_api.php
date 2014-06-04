@@ -201,15 +201,15 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 
 	$t_result = db_query_bound( $t_query, array( $p_file_id ) );
 
-	if ( $t_result->EOF ) {
+	if( $t_result->EOF ) {
 		return SoapObjectsFactory::newSoapFault( 'Client', 'Unable to find an attachment with type ' . $p_type. ' and id ' . $p_file_id . ' .' );
 	}
 
 	$row = db_fetch_array( $t_result );
 
-	if ( $p_type == 'doc' ) {
+	if( $p_type == 'doc' ) {
 		$t_project_id = $row['project_id'];
-	} else if ( $p_type == 'bug' ) {
+	} else if( $p_type == 'bug' ) {
 		$t_bug_id = $row['bug_id'];
 		$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
 	}

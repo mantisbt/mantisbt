@@ -78,12 +78,12 @@ require_api( 'version_api.php' );
 
 require_css( 'status_config.php' );
 
-if ( !config_get( 'enable_sponsorship' ) ) {
+if( !config_get( 'enable_sponsorship' ) ) {
 	trigger_error( ERROR_SPONSORSHIP_NOT_ENABLED, ERROR );
 }
 
 # anonymous users are not allowed to sponsor issues
-if ( current_user_is_anonymous() ) {
+if( current_user_is_anonymous() ) {
 	access_denied();
 }
 
@@ -130,7 +130,7 @@ while ( $t_row = db_fetch_array( $t_result ) ) {
 }
 
 $t_sponsor_count = count( $t_sponsors );
-if ( $t_sponsor_count === 0 ) {
+if( $t_sponsor_count === 0 ) {
 	echo '<p>' . lang_get( 'no_own_sponsored' ) . '</p>';
 } else {
 ?>
@@ -169,7 +169,7 @@ if ( $t_sponsor_count === 0 ) {
 		$t_status = string_attribute( get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id ) );
 		$t_resolution = string_attribute( get_enum_element( 'resolution', $t_bug->resolution, auth_get_current_user_id(), $t_bug->project_id ) );
 		$t_version_id = version_get_id( $t_bug->fixed_in_version, $t_project );
-		if ( ( false !== $t_version_id ) && ( VERSION_RELEASED == version_get_field( $t_version_id, 'released' ) ) ) {
+		if( ( false !== $t_version_id ) && ( VERSION_RELEASED == version_get_field( $t_version_id, 'released' ) ) ) {
 			$t_released_label = '<a title="' . lang_get( 'released' ) . '">' . $t_bug->fixed_in_version . '</a>';
 		} else {
 			$t_released_label = $t_bug->fixed_in_version;
@@ -189,7 +189,7 @@ if ( $t_sponsor_count === 0 ) {
 
 		# summary
 		echo '<td>' . string_display_line( $t_bug->summary );
-		if ( VS_PRIVATE == $t_bug->view_state ) {
+		if( VS_PRIVATE == $t_bug->view_state ) {
 			printf( ' <img src="%s" alt="(%s)" title="%s" />', $t_icon_path . 'protected.gif', lang_get( 'private' ), lang_get( 'private' ) );
 		}
 		echo '</td>';
@@ -198,14 +198,14 @@ if ( $t_sponsor_count === 0 ) {
 		echo '<td class="right">' . sponsorship_format_amount( $t_sponsor->amount ) . '</td>';
 		echo '<td>' . get_enum_element( 'sponsorship', $t_sponsor->paid ) . '</td>';
 
-		if ( SPONSORSHIP_PAID == $t_sponsor->paid ) {
+		if( SPONSORSHIP_PAID == $t_sponsor->paid ) {
 			$t_total_paid += $t_sponsor->amount;
 		} else {
 			$t_total_owing += $t_sponsor->amount;
 		}
 
 		echo '<td>';
-		if ( $t_payment ) {
+		if( $t_payment ) {
 			echo '(paypal button)';
 		} else {
 			echo '&#160;';
@@ -246,7 +246,7 @@ while ( $t_row = db_fetch_array( $t_result ) ) {
 }
 
 $t_sponsor_count = count( $t_sponsors );
-if ( $t_sponsor_count === 0 ) {
+if( $t_sponsor_count === 0 ) {
 	echo '<p>' . lang_get( 'no_sponsored' ) . '</p>';
 } else {
 ?>
@@ -288,7 +288,7 @@ if ( $t_sponsor_count === 0 ) {
 		$t_status = string_attribute( get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id ) );
 		$t_resolution = string_attribute( get_enum_element( 'resolution', $t_bug->resolution, auth_get_current_user_id(), $t_bug->project_id ) );
 		$t_version_id = version_get_id( $t_bug->fixed_in_version, $t_project );
-		if ( ( false !== $t_version_id ) && ( VERSION_RELEASED == version_get_field( $t_version_id, 'released' ) ) ) {
+		if( ( false !== $t_version_id ) && ( VERSION_RELEASED == version_get_field( $t_version_id, 'released' ) ) ) {
 			$t_released_label = '<a title="' . lang_get( 'released' ) . '">' . $t_bug->fixed_in_version . '</a>';
 		} else {
 			$t_released_label = $t_bug->fixed_in_version;
@@ -305,7 +305,7 @@ if ( $t_sponsor_count === 0 ) {
 
 		# summary
 		echo '<td>' . string_display_line( $t_bug->summary );
-		if ( VS_PRIVATE == $t_bug->view_state ) {
+		if( VS_PRIVATE == $t_bug->view_state ) {
 			printf( ' <img src="%s" alt="(%s)" title="%s" />', $t_icon_path . 'protected.gif', lang_get( 'private' ), lang_get( 'private' ) );
 		}
 		echo '</td>';
@@ -320,7 +320,7 @@ if ( $t_sponsor_count === 0 ) {
 		echo '</select></td>';
 
 		echo '</tr>';
-		if ( SPONSORSHIP_PAID == $t_sponsor->paid ) {
+		if( SPONSORSHIP_PAID == $t_sponsor->paid ) {
 			$t_total_paid += $t_sponsor->amount;
 		} else {
 			$t_total_owing += $t_sponsor->amount;

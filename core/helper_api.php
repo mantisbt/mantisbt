@@ -114,7 +114,7 @@ function get_status_color( $p_status, $p_user = null, $p_project = null ) {
 	$t_status_colors = config_get( 'status_colors', null, $p_user, $p_project );
 	$t_color = '#ffffff';
 
-	if ( isset( $t_status_colors[$t_status_label] ) ) {
+	if( isset( $t_status_colors[$t_status_label] ) ) {
 		$t_color = $t_status_colors[$t_status_label];
 	}
 
@@ -136,7 +136,7 @@ function get_percentage_by_status() {
 	$query = "SELECT status, COUNT(*) AS num
 				FROM $t_mantis_bug_table
 				WHERE $t_specific_where";
-	if ( !access_has_project_level( config_get( 'private_bug_threshold' ) ) ) {
+	if( !access_has_project_level( config_get( 'private_bug_threshold' ) ) ) {
 		$query .= ' AND view_state < ' . VS_PRIVATE;
 	}
 	$query .= ' GROUP BY status';
@@ -184,7 +184,7 @@ function get_enum_element( $p_enum_name, $p_val, $p_user = null, $p_project = nu
 function helper_check_variables_equal( $p_var1, $p_var2, $p_strict ) {
 
 	if( $p_strict ) {
-		if ( gettype( $p_var1 ) !== gettype( $p_var2 ) ) {
+		if( gettype( $p_var1 ) !== gettype( $p_var2 ) ) {
 			# Reaching this point is a a sign that you need to check the types
 			# of the parameters passed to this function. They should match.
 			trigger_error( ERROR_TYPE_MISMATCH, ERROR );
@@ -256,7 +256,7 @@ function check_checked( $p_var, $p_val = true, $p_strict = true ) {
  * @return null
  */
 function check_selected( $p_var, $p_val = true, $p_strict = true ) {
-	if ( is_array( $p_var ) ) {
+	if( is_array( $p_var ) ) {
 		foreach ( $p_var as $t_this_var ) {
 			if( helper_check_variables_equal( $t_this_var, $p_val, $p_strict ) ) {
 				echo ' selected="selected"';

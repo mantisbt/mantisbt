@@ -40,8 +40,8 @@ require_api( 'wiki_api.php' );
 $f_id = gpc_get_int( 'id' );
 $f_type = gpc_get_string( 'type', 'issue' );
 
-if ( $f_type == 'project' ) {
-	if ( $f_id !== 0 ) {
+if( $f_type == 'project' ) {
+	if( $f_id !== 0 ) {
 		project_ensure_exists( $f_id );
 	}
 

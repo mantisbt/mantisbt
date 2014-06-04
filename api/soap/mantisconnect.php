@@ -43,7 +43,7 @@ function mci_is_webservice_call()
 	global $QUERY_STRING;
 	global $_SERVER;
 
-	if ( isset( $_SERVER['QUERY_STRING'] ) ) {
+	if( isset( $_SERVER['QUERY_STRING'] ) ) {
 		$t_qs = $_SERVER['QUERY_STRING'];
 	} else if( isset( $GLOBALS['QUERY_STRING'] ) ) {
 		$t_qs = $GLOBALS['QUERY_STRING'];
@@ -51,7 +51,7 @@ function mci_is_webservice_call()
 		$t_qs = $QUERY_STRING;
 	}
 
-	if ( isset( $t_qs ) && preg_match( '/wsdl/', $t_qs ) ){
+	if( isset( $t_qs ) && preg_match( '/wsdl/', $t_qs ) ){
 		return false;
 	} else {
 		return true;
@@ -59,12 +59,12 @@ function mci_is_webservice_call()
 }
 
 # If SOAP extension is not enabled, error out.
-if ( !extension_loaded( 'soap' ) ) {
+if( !extension_loaded( 'soap' ) ) {
 	echo 'PHP SOAP extension is not enabled.';
 	exit();
 }
 
-if ( !mci_is_webservice_call() ) {
+if( !mci_is_webservice_call() ) {
 	# if we have a documentation request, do some tidy up to prevent lame bot loops e.g. /mantisconnect.php/mc_enum_etas/mc_project_get_versions/
 	$parts = explode ( 'mantisconnect.php/', strtolower($_SERVER['SCRIPT_NAME'] ), 2 );
 	if (isset( $parts[1] ) && (strlen ( $parts[1] ) > 0 ) ) {

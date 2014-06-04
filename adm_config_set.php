@@ -56,26 +56,26 @@ $f_config_option = gpc_get_string( 'config_option' );
 $f_type = gpc_get_string( 'type' );
 $f_value = gpc_get_string( 'value' );
 
-if ( is_blank( $f_config_option ) ) {
+if( is_blank( $f_config_option ) ) {
 	error_parameters( 'config_option' );
 	trigger_error( ERROR_EMPTY_FIELD, ERROR );
 }
 
 access_ensure_global_level( config_get( 'set_configuration_threshold' ) );
 
-if ( $f_project_id != ALL_PROJECTS ) {
+if( $f_project_id != ALL_PROJECTS ) {
 	project_ensure_exists( $f_project_id );
 }
 
 # make sure that configuration option specified is a valid one.
 $t_not_found_value = '***CONFIG OPTION NOT FOUND***';
-if ( config_get_global( $f_config_option, $t_not_found_value ) === $t_not_found_value ) {
+if( config_get_global( $f_config_option, $t_not_found_value ) === $t_not_found_value ) {
 	error_parameters( $f_config_option );
 	trigger_error( ERROR_CONFIG_OPT_NOT_FOUND, ERROR );
 }
 
 # make sure that configuration option specified can be stored in the database
-if ( !config_can_set_in_database( $f_config_option ) ) {
+if( !config_can_set_in_database( $f_config_option ) ) {
 	error_parameters( $f_config_option );
 	trigger_error( ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB, ERROR );
 }
@@ -83,9 +83,9 @@ if ( !config_can_set_in_database( $f_config_option ) ) {
 # For 'default', behavior is based on the global variable's type
 if( $f_type == CONFIG_TYPE_DEFAULT ) {
 	$t_config_global_value = config_get_global( $f_config_option );
-	if ( is_string( $t_config_global_value ) ) {
+	if( is_string( $t_config_global_value ) ) {
 		$t_type = CONFIG_TYPE_STRING;
-	} else if ( is_int( $t_config_global_value ) ) {
+	} else if( is_int( $t_config_global_value ) ) {
 		$t_type = CONFIG_TYPE_INT;
 	} else if( is_float( $t_config_global_value ) ) {
 		$t_type = CONFIG_TYPE_FLOAT;
@@ -174,7 +174,7 @@ function process_complex_value( $p_value, $p_trimquotes = false ) {
 
 		if( preg_match_all( "/$s_regex_element/", $t_match[1], $t_elements ) ) {
 			foreach( $t_elements[0] as $key => $element ) {
-				if ( !trim( $element ) ) {
+				if( !trim( $element ) ) {
 					# Empty element - skip it
 					continue;
 				}
@@ -253,7 +253,7 @@ function special_split ( $p_string ) {
  * @return mixed|string value of constant $p_name, or $p_name itself
  */
 function constant_replace( $p_name ) {
-	if ( is_string( $p_name ) && defined( $p_name ) ) {
+	if( is_string( $p_name ) && defined( $p_name ) ) {
 		# we have a constant
 		return constant( $p_name );
 	}

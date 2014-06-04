@@ -59,7 +59,7 @@ $g_cache_html_valid_tags_single_line = '';
  * @param string $p_string
  * @return string
  */
- function string_preserve_spaces_at_bol( $p_string ) {
+function string_preserve_spaces_at_bol( $p_string ) {
 	$lines = explode( "\n", $p_string );
 	$line_count = count( $lines );
 	for( $i = 0;$i < $line_count;$i++ ) {
@@ -256,16 +256,16 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 
 	# Break the given URL into pieces for path, script, query, and anchor
 	$t_type = 0;
-	if ( preg_match( '@^(?P<path>' . preg_quote( $t_path, '@' ) . ')' . $t_pattern . '$@', $t_url, $t_matches ) ) {
+	if( preg_match( '@^(?P<path>' . preg_quote( $t_path, '@' ) . ')' . $t_pattern . '$@', $t_url, $t_matches ) ) {
 		$t_type = 1;
-	} else if ( preg_match( '@^(?P<path>' . preg_quote( $t_short_path, '@' ) . ')' . $t_pattern . '$@', $t_url, $t_matches ) ) {
+	} else if( preg_match( '@^(?P<path>' . preg_quote( $t_short_path, '@' ) . ')' . $t_pattern . '$@', $t_url, $t_matches ) ) {
 		$t_type = 2;
-	} else if ( preg_match( '@^(?P<path>)' . $t_pattern . '$@', $t_url, $t_matches ) ) {
+	} else if( preg_match( '@^(?P<path>)' . $t_pattern . '$@', $t_url, $t_matches ) ) {
 		$t_type = 3;
 	}
 
 	# Check for URL's pointing to other domains
-	if ( 0 == $t_type || empty( $t_matches['script'] ) ||
+	if( 0 == $t_type || empty( $t_matches['script'] ) ||
 		3 == $t_type && preg_match( '@(?:[^:]*)?://@', $t_url ) > 0 ) {
 
 		return ( $p_return_absolute ? $t_path . '/' : '' ) . 'index.php';
@@ -277,13 +277,13 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 
 	# Clean/encode query params
 	$t_query = '';
-	if ( isset( $t_matches['query'] ) ) {
+	if( isset( $t_matches['query'] ) ) {
 		$t_pairs = array();
 		parse_str( html_entity_decode( $t_matches['query'] ), $t_pairs );
 
 		$t_clean_pairs = array();
 		foreach( $t_pairs as $t_key => $t_value ) {
-			if ( is_array( $t_value ) ) {
+			if( is_array( $t_value ) ) {
 				foreach( $t_value as $t_value_each ) {
 					$t_clean_pairs[] .= rawurlencode( $t_key ) . '[]=' . rawurlencode( $t_value_each );
 				}
@@ -292,19 +292,19 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 			}
 		}
 
-		if ( !empty( $t_clean_pairs ) ) {
+		if( !empty( $t_clean_pairs ) ) {
 			$t_query = '?' . join( '&', $t_clean_pairs );
 		}
 	}
 
 	# encode link anchor
 	$t_anchor = '';
-	if ( isset( $t_matches['anchor'] ) ) {
+	if( isset( $t_matches['anchor'] ) ) {
 		$t_anchor = '#' . rawurlencode( $t_matches['anchor'] );
 	}
 
 	# Return an appropriate re-combined URL string
-	if ( $p_return_absolute ) {
+	if( $p_return_absolute ) {
 		return $t_path . '/' . $t_script . $t_query . $t_anchor;
 	} else {
 		return ( !empty( $t_script_path ) ? $t_script_path . '/' : '' ) . $t_script . $t_query . $t_anchor;
@@ -345,7 +345,7 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 	if( !isset( $string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] ) ) {
 		if( $p_include_anchor ) {
 			$string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function( '$p_array', '
-										if ( bug_exists( (int)$p_array[2] ) && access_has_bug_level( VIEWER, (int)$p_array[2] ) ) {
+										if( bug_exists( (int)$p_array[2] ) && access_has_bug_level( VIEWER, (int)$p_array[2] ) ) {
 											return $p_array[1] . string_get_bug_view_link( (int)$p_array[2], null, ' . ( $p_detail_info ? 'true' : 'false' ) . ', ' . ( $p_fqdn ? 'true' : 'false' ) . ');
 										} else {
 											return $p_array[0];
@@ -402,11 +402,11 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 			$string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
 				create_function( '$p_array',
 					'
-					if ( bugnote_exists( (int)$p_array[2] ) ) {
+					if( bugnote_exists( (int)$p_array[2] ) ) {
 						$t_bug_id = bugnote_get_field( (int)$p_array[2], \'bug_id\' );
-						if ( bug_exists( $t_bug_id ) ) {
+						if( bug_exists( $t_bug_id ) ) {
 							$g_project_override = bug_get_field( $t_bug_id, \'project_id\' );
-							if (   access_compare_level(
+							if(   access_compare_level(
 										user_get_access_level( auth_get_current_user_id(),
 										bug_get_field( $t_bug_id, \'project_id\' ) ),
 										config_get( \'private_bugnote_threshold\' )
@@ -440,7 +440,7 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 					#  can create the link and by the time it is clicked on, the
 					#  bug may exist.
 					$t_bug_id = bugnote_get_field( (int)$p_array[2], \'bug_id\' );
-					if ( bug_exists( $t_bug_id ) ) {
+					if( bug_exists( $t_bug_id ) ) {
 						return $p_array[1] . string_get_bugnote_view_url_with_fqdn( $t_bug_id, (int)$p_array[2], null );
 					} else {
 						return $p_array[0];
@@ -474,7 +474,7 @@ function string_insert_hrefs( $p_string ) {
 	}
 
 	# Initialize static variables
-	if ( is_null( $s_url_regex ) ) {
+	if( is_null( $s_url_regex ) ) {
 		# URL regex
 		$t_url_protocol = '(?:[[:alpha:]][-+.[:alnum:]]*):\/\/';
 
@@ -625,8 +625,8 @@ function string_get_bug_view_link( $p_bug_id, $p_user_id = null, $p_detail_info 
 		$t_link .= string_get_bug_view_url( $p_bug_id, $p_user_id ) . '"';
 		if( $p_detail_info ) {
 			$t_summary = string_attribute( bug_get_field( $p_bug_id, 'summary' ) );
-            $t_project_id = bug_get_field( $p_bug_id, 'project_id' );
-            $t_status = string_attribute( get_enum_element( 'status', bug_get_field( $p_bug_id, 'status' ), $t_project_id ) );
+			$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+			$t_status = string_attribute( get_enum_element( 'status', bug_get_field( $p_bug_id, 'status' ), $t_project_id ) );
 			$t_link .= ' title="[' . $t_status . '] ' . $t_summary . '"';
 
 			$t_resolved = bug_get_field( $p_bug_id, 'status' ) >= config_get( 'bug_resolved_status_threshold', null, null, $t_project_id );

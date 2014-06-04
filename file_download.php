@@ -60,12 +60,12 @@ $f_show_inline = gpc_get_bool( 'show_inline', false );
 # attachment and direct a user to file_download.php?file_id=X&type=bug&show_inline=1
 # and the malicious HTML content would be rendered in the user's browser,
 # violating cross-domain security.
-if ( $f_show_inline ) {
+if( $f_show_inline ) {
 	# Disable errors for form_security_validate as we need to send HTTP
 	# headers prior to raising an error (the error handler
 	# doesn't check that headers have been sent, it just
 	# makes the assumption that they've been sent already).
-	if ( !@form_security_validate( 'file_show_inline' ) ) {
+	if( !@form_security_validate( 'file_show_inline' ) ) {
 		http_all_headers();
 		trigger_error( ERROR_FORM_TOKEN_INVALID, ERROR );
 	}
@@ -99,7 +99,7 @@ $t_result = db_query_bound( $query, array( $c_file_id ) );
 $row = db_fetch_array( $t_result );
 extract( $row, EXTR_PREFIX_ALL, 'v' );
 
-if ( $f_type == 'bug' ) {
+if( $f_type == 'bug' ) {
 	$t_project_id = bug_get_field( $v_bug_id, 'project_id' );
 } else {
 	$t_project_id = $v_project_id;
@@ -108,13 +108,13 @@ if ( $f_type == 'bug' ) {
 # Check access rights
 switch ( $f_type ) {
 	case 'bug':
-		if ( !file_can_download_bug_attachments( $v_bug_id, (int)$v_user_id ) ) {
+		if( !file_can_download_bug_attachments( $v_bug_id, (int)$v_user_id ) ) {
 			access_denied();
 		}
 		break;
 	case 'doc':
 		# Check if project documentation feature is enabled.
-		if ( OFF == config_get( 'enable_project_documentation' ) ) {
+		if( OFF == config_get( 'enable_project_documentation' ) ) {
 			access_denied();
 		}
 
@@ -125,7 +125,7 @@ switch ( $f_type ) {
 # throw away output buffer contents (and disable it) to protect download
 while ( @ob_end_clean() );
 
-if ( ini_get( 'zlib.output_compression' ) && function_exists( 'ini_set' ) ) {
+if( ini_get( 'zlib.output_compression' ) && function_exists( 'ini_set' ) ) {
 	ini_set( 'zlib.output_compression', false );
 }
 
@@ -138,10 +138,10 @@ header( 'Pragma: public' );
 # attached files via HTTPS, we disable the "Pragma: no-cache"
 # command when IE is used over HTTPS.
 global $g_allow_file_cache;
-if ( http_is_protocol_https() && is_browser_internet_explorer() ) {
+if( http_is_protocol_https() && is_browser_internet_explorer() ) {
 	# Suppress "Pragma: no-cache" header.
 } else {
-	if ( !isset( $g_allow_file_cache ) ) {
+	if( !isset( $g_allow_file_cache ) ) {
 		header( 'Pragma: no-cache' );
 	}
 }
@@ -171,20 +171,20 @@ switch ( config_get( 'file_upload_method' ) ) {
 	case DISK:
 		$t_local_disk_file = file_normalize_attachment_path( $v_diskfile, $t_project_id );
 
-		if ( file_exists( $t_local_disk_file ) ) {
-			if ( $finfo ) {
+		if( file_exists( $t_local_disk_file ) ) {
+			if( $finfo ) {
 				$t_file_info_type = $finfo->file( $t_local_disk_file );
 
-				if ( $t_file_info_type !== false ) {
+				if( $t_file_info_type !== false ) {
 					$t_content_type = $t_file_info_type;
 				}
 			}
 
-			if ( $t_content_type_override )
+			if( $t_content_type_override )
 				$t_content_type = $t_content_type_override;
 
 			header( 'Content-Type: ' . $t_content_type );
-			if ( config_get( 'file_download_xsendfile_enabled' ) ) {
+			if( config_get( 'file_download_xsendfile_enabled' ) ) {
 				$t_xsendfile_header_name = config_get( 'file_download_xsendfile_header_name' );
 				header( $t_xsendfile_header_name . ': ' . $t_local_disk_file );
 			} else {
@@ -193,15 +193,15 @@ switch ( config_get( 'file_upload_method' ) ) {
 		}
 		break;
 	case DATABASE:
-		if ( $finfo ) {
+		if( $finfo ) {
 			$t_file_info_type = $finfo->buffer( $v_content );
 
-			if ( $t_file_info_type !== false ) {
+			if( $t_file_info_type !== false ) {
 				$t_content_type = $t_file_info_type;
 			}
 		}
 
-		if ( $t_content_type_override )
+		if( $t_content_type_override )
 			$t_content_type = $t_content_type_override;
 
 		header( 'Content-Type: ' . $t_content_type );

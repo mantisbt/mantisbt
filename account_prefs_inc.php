@@ -36,7 +36,7 @@
  * @uses utility_api.php
  */
 
-if ( !defined( 'ACCOUNT_PREFS_INC_ALLOW' ) ) {
+if( !defined( 'ACCOUNT_PREFS_INC_ALLOW' ) ) {
 	return;
 }
 
@@ -62,18 +62,18 @@ require_api( 'utility_api.php' );
  * @param string $p_redirect_url redirect URI
  */
 function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_accounts_menu = true, $p_redirect_url = '') {
-	if ( null === $p_user_id ) {
+	if( null === $p_user_id ) {
 		$p_user_id = auth_get_current_user_id();
 	}
 
 	$t_redirect_url = $p_redirect_url;
-	if ( is_blank( $t_redirect_url ) ) {
+	if( is_blank( $t_redirect_url ) ) {
 		$t_redirect_url = 'account_prefs_page.php';
 	}
 
 	# protected account check
-	if ( user_is_protected( $p_user_id ) ) {
-		if ( $p_error_if_protected ) {
+	if( user_is_protected( $p_user_id ) ) {
+		if( $p_error_if_protected ) {
 			trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
 		} else {
 			return;
@@ -94,7 +94,7 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 			<input type="hidden" name="user_id" value="<?php echo $p_user_id ?>" />
 			<input type="hidden" name="redirect_url" value="<?php echo $t_redirect_url ?>" />
 		<?php
-			if ( $p_accounts_menu ) {
+			if( $p_accounts_menu ) {
 				print_account_menu( 'account_prefs_page.php' );
 			}
 		?>
@@ -134,7 +134,7 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 				<label for="bugnote-order-asc"><span><?php echo lang_get( 'bugnote_order_asc' ) ?></span></label>
 				<span class="label-style"></span>
 			</fieldset>
-			<?php if ( ON == config_get( 'enable_email_notification' ) ) { ?>
+			<?php if( ON == config_get( 'enable_email_notification' ) ) { ?>
 			<fieldset class="field-container">
 				<legend><label for="email-on-new"><?php echo lang_get( 'email_on_new' ) ?></label></legend>
 				<span class="checkbox"><input id="email-on-new" type="checkbox" name="email_on_new" <?php check_checked( (int)$t_pref->email_on_new, ON ); ?> /></span>

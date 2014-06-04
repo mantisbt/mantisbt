@@ -67,7 +67,7 @@ form_security_purge( 'manage_proj_delete' );
 
 # Don't leave the current project set to a deleted project -
 #  set it to All Projects
-if ( helper_get_current_project() == $f_project_id ) {
+if( helper_get_current_project() == $f_project_id ) {
 	helper_set_current_project( ALL_PROJECTS );
 }
 

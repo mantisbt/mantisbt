@@ -14,56 +14,56 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
-	/**
-	 * Constants used for Filters
-	 * @package MantisBT
-	 * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
-	 * @link http://www.mantisbt.org
-	 */
+/**
+ * Constants used for Filters
+ * @package MantisBT
+ * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ */
 
-    ###########################################################################
-    # Filter Property Names
-    ###########################################################################
+###########################################################################
+# Filter Property Names
+###########################################################################
 
-	# filter meta fields
-    define( 'FILTER_PROPERTY_SEARCH', 'search' );
-    define( 'FILTER_PROPERTY_HIGHLIGHT_CHANGED', 'highlight_changed' );
-    define( 'FILTER_PROPERTY_HIDE_STATUS', 'hide_status' ); # hide_status
-    define( 'FILTER_PROPERTY_SORT_FIELD_NAME', 'sort' );
-    define( 'FILTER_PROPERTY_SORT_DIRECTION', 'dir' );
-    define( 'FILTER_PROPERTY_ISSUES_PER_PAGE', 'per_page' ); # ?
-    define( 'FILTER_PROPERTY_START_DAY', 'start_day' );
-    define( 'FILTER_PROPERTY_START_MONTH', 'start_month' );
-    define( 'FILTER_PROPERTY_START_YEAR', 'start_year' );
-    define( 'FILTER_PROPERTY_END_DAY', 'end_day' );
-    define( 'FILTER_PROPERTY_END_MONTH', 'end_month' );
-    define( 'FILTER_PROPERTY_END_YEAR', 'end_year' );
-    define( 'FILTER_PROPERTY_FILTER_BY_DATE', 'filter_by_date' ); #do_filter_by_date
-    define( 'FILTER_PROPERTY_RELATIONSHIP_TYPE', 'relationship_type' );
-    define( 'FILTER_PROPERTY_RELATIONSHIP_BUG', 'relationship_bug' );
-    define( 'FILTER_PROPERTY_TAG_STRING', 'tag_string' );
-    define( 'FILTER_PROPERTY_TAG_SELECT', 'tag_select' );
-    define( 'FILTER_PROPERTY_MATCH_TYPE', 'match_type');
+# filter meta fields
+define( 'FILTER_PROPERTY_SEARCH', 'search' );
+define( 'FILTER_PROPERTY_HIGHLIGHT_CHANGED', 'highlight_changed' );
+define( 'FILTER_PROPERTY_HIDE_STATUS', 'hide_status' ); # hide_status
+define( 'FILTER_PROPERTY_SORT_FIELD_NAME', 'sort' );
+define( 'FILTER_PROPERTY_SORT_DIRECTION', 'dir' );
+define( 'FILTER_PROPERTY_ISSUES_PER_PAGE', 'per_page' ); # ?
+define( 'FILTER_PROPERTY_START_DAY', 'start_day' );
+define( 'FILTER_PROPERTY_START_MONTH', 'start_month' );
+define( 'FILTER_PROPERTY_START_YEAR', 'start_year' );
+define( 'FILTER_PROPERTY_END_DAY', 'end_day' );
+define( 'FILTER_PROPERTY_END_MONTH', 'end_month' );
+define( 'FILTER_PROPERTY_END_YEAR', 'end_year' );
+define( 'FILTER_PROPERTY_FILTER_BY_DATE', 'filter_by_date' ); #do_filter_by_date
+define( 'FILTER_PROPERTY_RELATIONSHIP_TYPE', 'relationship_type' );
+define( 'FILTER_PROPERTY_RELATIONSHIP_BUG', 'relationship_bug' );
+define( 'FILTER_PROPERTY_TAG_STRING', 'tag_string' );
+define( 'FILTER_PROPERTY_TAG_SELECT', 'tag_select' );
+define( 'FILTER_PROPERTY_MATCH_TYPE', 'match_type');
 
-    define( 'FILTER_PROPERTY_NOTE_USER_ID', 'note_user_id' );
-    define( 'FILTER_PROPERTY_MONITOR_USER_ID', 'monitor_user_id' ); # user_monitor
+define( 'FILTER_PROPERTY_NOTE_USER_ID', 'note_user_id' );
+define( 'FILTER_PROPERTY_MONITOR_USER_ID', 'monitor_user_id' ); # user_monitor
 
-	# bug fields
-    define( 'FILTER_PROPERTY_CATEGORY_ID', 'category_id' ); #show_category
-    define( 'FILTER_PROPERTY_SEVERITY', 'severity' ); #show_severity
-    define( 'FILTER_PROPERTY_STATUS', 'status' ); #show_status
-    define( 'FILTER_PROPERTY_PRIORITY', 'priority' ); #show_priority
-    define( 'FILTER_PROPERTY_REPORTER_ID', 'reporter_id' );
-    define( 'FILTER_PROPERTY_HANDLER_ID', 'handler_id' );
-    define( 'FILTER_PROPERTY_PROJECT_ID', 'project_id' );
-    define( 'FILTER_PROPERTY_RESOLUTION', 'resolution' ); #show_resolution
-    define( 'FILTER_PROPERTY_BUILD', 'build' ); #show_build
-    define( 'FILTER_PROPERTY_VERSION', 'version' ); #show_version
-    define( 'FILTER_PROPERTY_STICKY', 'sticky' );
-    define( 'FILTER_PROPERTY_VIEW_STATE', 'view_state' ); # view_state
-    define( 'FILTER_PROPERTY_FIXED_IN_VERSION', 'fixed_in_version' );
-    define( 'FILTER_PROPERTY_TARGET_VERSION', 'target_version' );
-    define( 'FILTER_PROPERTY_PROFILE_ID', 'profile_id' ); # show_profile
-    define( 'FILTER_PROPERTY_PLATFORM', 'platform' );
-    define( 'FILTER_PROPERTY_OS', 'os' );
-    define( 'FILTER_PROPERTY_OS_BUILD', 'os_build' );
+# bug fields
+define( 'FILTER_PROPERTY_CATEGORY_ID', 'category_id' ); #show_category
+define( 'FILTER_PROPERTY_SEVERITY', 'severity' ); #show_severity
+define( 'FILTER_PROPERTY_STATUS', 'status' ); #show_status
+define( 'FILTER_PROPERTY_PRIORITY', 'priority' ); #show_priority
+define( 'FILTER_PROPERTY_REPORTER_ID', 'reporter_id' );
+define( 'FILTER_PROPERTY_HANDLER_ID', 'handler_id' );
+define( 'FILTER_PROPERTY_PROJECT_ID', 'project_id' );
+define( 'FILTER_PROPERTY_RESOLUTION', 'resolution' ); #show_resolution
+define( 'FILTER_PROPERTY_BUILD', 'build' ); #show_build
+define( 'FILTER_PROPERTY_VERSION', 'version' ); #show_version
+define( 'FILTER_PROPERTY_STICKY', 'sticky' );
+define( 'FILTER_PROPERTY_VIEW_STATE', 'view_state' ); # view_state
+define( 'FILTER_PROPERTY_FIXED_IN_VERSION', 'fixed_in_version' );
+define( 'FILTER_PROPERTY_TARGET_VERSION', 'target_version' );
+define( 'FILTER_PROPERTY_PROFILE_ID', 'profile_id' ); # show_profile
+define( 'FILTER_PROPERTY_PLATFORM', 'platform' );
+define( 'FILTER_PROPERTY_OS', 'os' );
+define( 'FILTER_PROPERTY_OS_BUILD', 'os_build' );

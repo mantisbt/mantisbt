@@ -42,9 +42,9 @@ $g_cached_version = array();
 function php_mode() {
 	static $s_mode = null;
 
-	if ( is_null( $s_mode ) ) {
+	if( is_null( $s_mode ) ) {
 		# Check to see if this is CLI mode or CGI mode
-		if ( isset( $_SERVER['SERVER_ADDR'] )
+		if( isset( $_SERVER['SERVER_ADDR'] )
 			|| isset( $_SERVER['LOCAL_ADDR'] )
 			|| isset( $_SERVER['REMOTE_ADDR'] ) ) {
 			$s_mode = PHP_CGI;
@@ -92,7 +92,7 @@ function php_version_at_least( $p_version_string ) {
 }
 
 # If mb_* not defined, define it to map to standard methods.
-if ( !function_exists( 'mb_substr' ) ) {
+if( !function_exists( 'mb_substr' ) ) {
 	/**
 	 * Map mb_substr to utf8_substr if mb extension is not found
 	 * @param string $p_text text string

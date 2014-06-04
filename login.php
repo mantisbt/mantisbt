@@ -55,10 +55,10 @@ $f_password = auth_prepare_password($f_password);
 
 gpc_set_cookie( config_get_global( 'cookie_prefix' ) . '_secure_session', $f_secure_session ? '1' : '0' );
 
-if ( auth_attempt_login( $f_username, $f_password, $f_perm_login ) ) {
+if( auth_attempt_login( $f_username, $f_password, $f_perm_login ) ) {
 	session_set( 'secure_session', $f_secure_session );
 
-	if ( $f_username == 'administrator' && $f_password == 'root' && ( is_blank( $t_return ) || $t_return == 'index.php' ) ) {
+	if( $f_username == 'administrator' && $f_password == 'root' && ( is_blank( $t_return ) || $t_return == 'index.php' ) ) {
 		$t_return = 'account_page.php';
 	}
 
@@ -72,7 +72,7 @@ if ( auth_attempt_login( $f_username, $f_password, $f_perm_login ) ) {
 		$t_redirect_url .= '&perm_login=' . ( $f_perm_login ? 1 : 0 );
 	}
 
-	if ( HTTP_AUTH == config_get( 'login_method' ) ) {
+	if( HTTP_AUTH == config_get( 'login_method' ) ) {
 		auth_http_prompt();
 		exit;
 	}

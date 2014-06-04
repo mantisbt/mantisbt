@@ -63,7 +63,7 @@ $t_user = user_get_row( $f_user_id );
 # This page is currently called from the manage_* namespace and thus we
 # have to allow authorised users to update the accounts of other users.
 # TODO: split this functionality into manage_user_prefs_update.php
-if ( auth_get_current_user_id() != $f_user_id ) {
+if( auth_get_current_user_id() != $f_user_id ) {
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 	access_ensure_global_level( $t_user['access_level'] );
 } else {
@@ -80,7 +80,7 @@ $t_prefs->refresh_delay		= gpc_get_int( 'refresh_delay' );
 $t_prefs->default_project	= gpc_get_int( 'default_project' );
 
 $t_lang = gpc_get_string( 'language' );
-if ( lang_language_exists( $t_lang ) ) {
+if( lang_language_exists( $t_lang ) ) {
 	$t_prefs->language = $t_lang;
 }
 
@@ -107,15 +107,15 @@ $t_prefs->bugnote_order = gpc_get_string( 'bugnote_order' );
 $t_prefs->email_bugnote_limit = gpc_get_int( 'email_bugnote_limit' );
 
 # make sure the delay isn't too low
-if (( config_get( 'min_refresh_delay' ) > $t_prefs->refresh_delay )&&
+if(( config_get( 'min_refresh_delay' ) > $t_prefs->refresh_delay )&&
 	( $t_prefs->refresh_delay != 0 )) {
 	$t_prefs->refresh_delay = config_get( 'min_refresh_delay' );
 }
 
-if ( function_exists( 'timezone_identifiers_list' ) ) {
+if( function_exists( 'timezone_identifiers_list' ) ) {
 	$t_timezone = gpc_get_string( 'timezone' );
-	if ( in_array( $t_timezone, timezone_identifiers_list() ) ) {
-		if ( $t_timezone == config_get_global( 'default_timezone' ) ) {
+	if( in_array( $t_timezone, timezone_identifiers_list() ) ) {
+		if( $t_timezone == config_get_global( 'default_timezone' ) ) {
 			$t_prefs->timezone = '';
 		} else {
 			$t_prefs->timezone = $t_timezone;

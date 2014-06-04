@@ -55,14 +55,14 @@ $f_user_id = gpc_get_int( 'user_id', NO_USER );
 
 $t_logged_in_user_id = auth_get_current_user_id();
 
-if ( $f_user_id === NO_USER ) {
+if( $f_user_id === NO_USER ) {
 	$t_user_id = $t_logged_in_user_id;
 } else {
 	user_ensure_exists( $f_user_id );
 	$t_user_id = $f_user_id;
 }
 
-if ( user_is_anonymous( $t_user_id ) ) {
+if( user_is_anonymous( $t_user_id ) ) {
 	trigger_error( ERROR_PROTECTED_ACCOUNT, E_USER_ERROR );
 }
 
@@ -74,7 +74,7 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 	$g_project_override = $t_bug->project_id;
 }
 
-if ( $t_logged_in_user_id == $t_user_id ) {
+if( $t_logged_in_user_id == $t_user_id ) {
 	access_ensure_bug_level( config_get( 'monitor_bug_threshold' ), $f_bug_id );
 } else {
 	access_ensure_bug_level( config_get( 'monitor_delete_others_bug_threshold' ), $f_bug_id );

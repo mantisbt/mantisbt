@@ -68,7 +68,7 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 	$g_project_override = $t_bug->project_id;
 }
 
-if ( bug_is_readonly( $f_bug_id ) ) {
+if( bug_is_readonly( $f_bug_id ) ) {
 	error_parameters( $f_bug_id );
 	trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 }
@@ -82,7 +82,7 @@ $t_monitor_bug_threshold = config_get( 'monitor_bug_threshold' );
 $t_handler = bug_get_field( $f_bug_id, 'handler_id' );
 $t_reporter = bug_get_field( $f_bug_id, 'reporter_id' );
 foreach ( $f_to as $t_recipient ) {
-	if (   ON == $t_reminder_recipients_monitor_bug
+	if(   ON == $t_reminder_recipients_monitor_bug
 		&& access_has_bug_level( $t_monitor_bug_threshold, $f_bug_id )
 		&& $t_recipient != $t_handler
 		&& $t_recipient != $t_reporter
@@ -94,7 +94,7 @@ foreach ( $f_to as $t_recipient ) {
 $t_result = email_bug_reminder( $f_to, $f_bug_id, $f_body );
 
 # Add reminder as bugnote if store reminders option is ON.
-if ( ON == config_get( 'store_reminders' ) ) {
+if( ON == config_get( 'store_reminders' ) ) {
 	# Build list of recipients, truncated to note_attr fields's length
 	$t_attr = '|';
 	$t_length = 0;

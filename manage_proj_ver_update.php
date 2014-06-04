@@ -67,7 +67,7 @@ $f_obsolete	= gpc_get_bool( 'obsolete' );
 
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_version->project_id );
 
-if ( is_blank( $f_new_version ) ) {
+if( is_blank( $f_new_version ) ) {
 	trigger_error( ERROR_EMPTY_FIELD, ERROR );
 }
 

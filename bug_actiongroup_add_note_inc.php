@@ -34,7 +34,7 @@
  * @uses utility_api.php
  */
 
-if ( !defined( 'BUG_ACTIONGROUP_INC_ALLOW' ) ) {
+if( !defined( 'BUG_ACTIONGROUP_INC_ALLOW' ) ) {
 	return;
 }
 
@@ -85,7 +85,7 @@ function action_add_note_print_fields() {
 			<td>
 <?php
 	$t_default_state = config_get( 'default_bugnote_view_status' );
-	if ( access_has_project_level( config_get( 'set_view_status_threshold' ) ) ) { ?>
+	if( access_has_project_level( config_get( 'set_view_status_threshold' ) ) ) { ?>
 				<select name="view_state">
 					<?php print_enum_string_option_list( 'view_state', $t_default_state ) ?>
 				</select>
@@ -120,7 +120,7 @@ function action_add_note_print_fields() {
 function action_add_note_validate( $p_bug_id ) {
 	$f_bugnote_text = gpc_get_string( 'bugnote_text' );
 
-	if ( is_blank( $f_bugnote_text ) ) {
+	if( is_blank( $f_bugnote_text ) ) {
 		error_parameters( lang_get( 'bugnote' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
@@ -128,11 +128,11 @@ function action_add_note_validate( $p_bug_id ) {
 	$t_add_bugnote_threshold = config_get( 'add_bugnote_threshold' );
 	$t_bug_id = $p_bug_id;
 
-	if ( bug_is_readonly( $t_bug_id ) ) {
+	if( bug_is_readonly( $t_bug_id ) ) {
 		return lang_get( 'actiongroup_error_issue_is_readonly' );
 	}
 
-	if ( !access_has_bug_level( $t_add_bugnote_threshold, $t_bug_id ) ) {
+	if( !access_has_bug_level( $t_add_bugnote_threshold, $t_bug_id ) ) {
 		return lang_get( 'access_denied' );
 	}
 

@@ -180,7 +180,7 @@ class AttachmentTest extends SoapBase {
 
 		$configEnabled = $this->client->mc_config_get_string( $this->userName, $this->password, 'enable_project_documentation' );
 
-		if ( ! $configEnabled  ) {
+		if( ! $configEnabled  ) {
 			$this->markTestSkipped('Project documentation is not enabled.');
 		}
 	}

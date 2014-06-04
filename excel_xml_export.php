@@ -70,7 +70,7 @@ $t_page_number = gpc_get_int( 'page_number', 1 );
 $t_per_page = 100;
 
 $t_result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
-if ( $t_result === false ) {
+if( $t_result === false ) {
 	print_header_redirect( 'view_all_set.php?type=0&print=1' );
 }
 
@@ -90,14 +90,14 @@ do {
 	columns_plugin_cache_issue_data( $t_result );
 
 	foreach( $t_result as $t_row ) {
-		if ( is_blank( $f_export ) || in_array( $t_row->id, $f_bug_arr ) ) {
+		if( is_blank( $f_export ) || in_array( $t_row->id, $f_bug_arr ) ) {
 			echo excel_get_start_row();
 
 			foreach ( $t_columns as $t_column ) {
 				$t_custom_field = column_get_custom_field_name( $t_column );
-				if ( $t_custom_field !== null ) {
+				if( $t_custom_field !== null ) {
 					echo excel_format_custom_field( $t_row->id, $t_row->project_id, $t_custom_field );
-				} else if ( column_is_plugin_column( $t_column ) ) {
+				} else if( column_is_plugin_column( $t_column ) ) {
 					echo excel_format_plugin_column_value( $t_column, $t_row );
 				} else {
 					$t_function = 'excel_format_' . $t_column;
@@ -113,7 +113,7 @@ do {
 	# @@@ Note that since we are not using a transaction, there is a risk that we get a duplicate record or we miss
 	# one due to a submit or update that happens in parallel.
 	$t_more = ( $t_page_number < $t_page_count );
-	if ( $t_more ) {
+	if( $t_more ) {
 		$t_page_number++;
 		$t_result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
 	}

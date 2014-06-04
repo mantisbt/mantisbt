@@ -32,12 +32,12 @@ html_page_top();
 
 $f_to = gpc_get( 'send', null );
 
-if ( $f_to !== null ) {
-	if ( $f_to == 'all' ) {
+if( $f_to !== null ) {
+	if( $f_to == 'all' ) {
 		echo "Sending emails...<br />";
 		email_send_all();
 		echo "Done";
-	} else if ( $f_to == 'sendordelall' ) {
+	} else if( $f_to == 'sendordelall' ) {
 		echo "Sending or deleting emails...<br />";
 		email_send_all(true);
 		echo "Done";

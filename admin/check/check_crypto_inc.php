@@ -27,7 +27,7 @@
  * @uses constant_inc.php
  */
 
-if ( !defined( 'CHECK_CRYPTO_INC_ALLOW' ) ) {
+if( !defined( 'CHECK_CRYPTO_INC_ALLOW' ) ) {
 	return;
 }
 

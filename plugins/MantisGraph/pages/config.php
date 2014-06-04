@@ -42,7 +42,7 @@ $t_current_font_selected = array(
 );
 
 $t_current_font = plugin_config_get( 'font' );
-if ( isset( $t_current_font_selected[$t_current_font] ) ) {
+if( isset( $t_current_font_selected[$t_current_font] ) ) {
 	$t_current_font_selected[$t_current_font] = true;
 } else {
 	$t_current_font_selected['arial'] = true;
@@ -57,8 +57,8 @@ if ( isset( $t_current_font_selected[$t_current_font] ) ) {
 function print_font_checked( $p_font_name ) {
 	global $t_current_font_selected;
 
-	if ( isset( $t_current_font_selected[$p_font_name] ) ) {
-		if ( $t_current_font_selected[$p_font_name] ) {
+	if( isset( $t_current_font_selected[$p_font_name] ) ) {
+		if( $t_current_font_selected[$p_font_name] ) {
 			return ' checked="checked"';
 		}
 	}
@@ -144,7 +144,7 @@ function print_font_checked( $p_font_name ) {
 
 <tr class="spacer"><td></td></tr>
 
-<?php if ( current_user_is_administrator() ) {?>
+<?php if( current_user_is_administrator() ) {?>
 <tr>
 	<td class="category">
 		<?php echo plugin_lang_get( 'jpgraph_path' )?>

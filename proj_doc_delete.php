@@ -52,7 +52,7 @@ require_api( 'string_api.php' );
 form_security_validate( 'proj_doc_delete' );
 
 # Check if project documentation feature is enabled.
-if ( OFF == config_get( 'enable_project_documentation' ) ) {
+if( OFF == config_get( 'enable_project_documentation' ) ) {
 	access_denied();
 }
 

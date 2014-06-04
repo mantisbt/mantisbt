@@ -182,7 +182,7 @@ function print_successful_redirect( $p_redirect_to ) {
  * @param int $p_size Image pixel size
  */
 function print_avatar( $p_user_id, $p_size = 80 ) {
-	if ( OFF === config_get( 'show_avatar' ) ) {
+	if( OFF === config_get( 'show_avatar' ) ) {
 		return;
 	}
 
@@ -383,7 +383,7 @@ function print_tag_option_list( $p_bug_id = 0 ) {
 	echo '<option value="0">', string_html_specialchars( lang_get( 'tag_existing' ) ), '</option>';
 	foreach ( $t_rows as $row ) {
 		$t_string = $row['name'];
-		if ( !empty( $row['description'] ) ) {
+		if( !empty( $row['description'] ) ) {
 			$t_string .= ' - ' . utf8_substr( $row['description'], 0, 20 );
 		}
 		echo '<option value="', $row['id'], '" title="', string_attribute( $row['name'] ), '">', string_attribute( $t_string ), '</option>';
@@ -423,15 +423,15 @@ function print_news_item_option_list() {
 		$t_notes = array();
 		$t_note_string = '';
 
-		if ( 1 == $t_announcement ) {
+		if( 1 == $t_announcement ) {
 			array_push( $t_notes, lang_get( 'announcement' ) );
 		}
 
-		if ( VS_PRIVATE == $t_view_state ) {
+		if( VS_PRIVATE == $t_view_state ) {
 			array_push( $t_notes, lang_get( 'private' ) );
 		}
 
-		if ( count( $t_notes ) > 0 ) {
+		if( count( $t_notes ) > 0 ) {
 			$t_note_string = ' [' . implode( ' ', $t_notes ) . ']';
 		}
 
@@ -529,7 +529,7 @@ function print_assign_to_option_list( $p_user_id = '', $p_project_id = null, $p_
  * @param int $p_threshold access level
  */
 function print_note_option_list( $p_user_id = '', $p_project_id = null, $p_threshold = null ) {
-	if ( null === $p_threshold ) {
+	if( null === $p_threshold ) {
 		$p_threshold = config_get( 'add_bugnote_threshold' );
 	}
 
@@ -553,7 +553,7 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
 
 	if( $p_include_all_projects && $p_filter_project_id !== ALL_PROJECTS ) {
 		echo '<option value="' . ALL_PROJECTS . '"';
-		if ( $p_project_id !== null ) {
+		if( $p_project_id !== null ) {
 			check_selected( $p_project_id, ALL_PROJECTS, false );
 		}
 		echo '>' . lang_get( 'all_projects' ) . '</option>' . "\n";
@@ -664,7 +664,7 @@ function print_profile_option_list_from_profiles( $p_profiles, $p_select_id ) {
 		$t_os_build = string_attribute( $t_profile['os_build'] );
 
 		echo '<option value="' . $t_profile['id'] . '"';
-		if ( $p_select_id !== false ) {
+		if( $p_select_id !== false ) {
 			check_selected( $p_select_id, (int)$t_profile['id'] );
 		}
 		echo '>' . $t_platform . ' ' . $t_os . ' ' . $t_os_build . '</option>';
@@ -824,7 +824,7 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 
 		$t_version = string_attribute( $version['version'] );
 
-		if ( !in_array( $t_version, $t_listed, true ) ) {
+		if( !in_array( $t_version, $t_listed, true ) ) {
 			$t_listed[] = $t_version;
 			echo '<option value="' . $t_version . '"';
 			check_selected( $p_version, $version['version'] );
@@ -921,18 +921,18 @@ function get_status_option_list( $p_user_auth = 0, $p_current_value = 0, $p_show
 	$t_enum_list = array();
 
 	foreach ( $t_enum_values as $t_enum_value ) {
-		if (   ( $p_show_current || $p_current_value != $t_enum_value )
+		if(   ( $p_show_current || $p_current_value != $t_enum_value )
 			&& access_compare_level( $p_user_auth, access_get_status_threshold( $t_enum_value, $p_project_id ) )
 		) {
 			$t_enum_list[$t_enum_value] = get_enum_element( 'status', $t_enum_value );
 		}
 	}
 
-	if ( $p_show_current ) {
+	if( $p_show_current ) {
 		$t_enum_list[$p_current_value] = get_enum_element( 'status', $p_current_value );
 	}
 
-	if ( $p_add_close && access_compare_level( $p_current_value, config_get( 'bug_resolved_status_threshold', null, null, $p_project_id ) ) ) {
+	if( $p_add_close && access_compare_level( $p_current_value, config_get( 'bug_resolved_status_threshold', null, null, $p_project_id ) ) ) {
 		$t_closed = config_get( 'bug_closed_status_threshold', null, null, $p_project_id );
 		if( $p_show_current || $p_current_value != $t_closed ) {
 			$t_enum_list[$t_closed] = get_enum_element( 'status', $t_closed );
@@ -966,7 +966,7 @@ function print_status_option_list( $p_select_label, $p_current_value = 0, $p_all
 			echo '>' . string_html_specialchars( $val ) . '</option>';
 		}
 		echo '</select>';
-	} else if ( count( $t_enum_list ) == 1 ) {
+	} else if( count( $t_enum_list ) == 1 ) {
 		echo array_pop( $t_enum_list );
 	} else {
 		echo MantisEnum::getLabel( lang_get( 'status_enum_string' ), $p_current_value );
@@ -994,7 +994,7 @@ function print_project_access_levels_option_list( $p_val, $p_project_id = null )
 	$t_enum_values = MantisEnum::getValues( $t_access_levels_enum_string );
 	foreach ( $t_enum_values as $t_enum_value ) {
 		# a user must not be able to assign another user an access level that is higher than theirs.
-		if ( $t_enum_value > $t_current_user_access_level ) {
+		if( $t_enum_value > $t_current_user_access_level ) {
 			continue;
 		}
 		$t_access_level = get_enum_element( 'access_levels', $t_enum_value );
@@ -1608,7 +1608,7 @@ function print_documentation_link( $p_a_name = '' ) {
  * prints the signup link
  */
 function print_signup_link() {
-	if ( ( ON == config_get_global( 'allow_signup' ) ) &&
+	if( ( ON == config_get_global( 'allow_signup' ) ) &&
 		 ( LDAP != config_get_global( 'login_method' ) ) &&
 		 ( ON == config_get( 'enable_email_notification' ) )
 	   ) {
@@ -1628,7 +1628,7 @@ function print_login_link() {
  */
 function print_lost_password_link() {
 	# lost password feature disabled or reset password via email disabled -> stop here!
-	if ( ( LDAP != config_get_global( 'login_method' ) ) &&
+	if( ( LDAP != config_get_global( 'login_method' ) ) &&
 		 ( ON == config_get( 'lost_password_feature' ) ) &&
 		 ( ON == config_get( 'send_reset_password' ) ) &&
 		 ( ON == config_get( 'enable_email_notification' ) ) ) {
@@ -1748,19 +1748,19 @@ function print_bug_attachments_list( $p_bug_id ) {
  */
 function print_bug_attachment( $p_attachment ) {
 	$t_show_attachment_preview = $p_attachment['preview'] && $p_attachment['exists'] && ( $p_attachment['type'] == 'text' || $p_attachment['type'] == 'image' );
-	if ( $t_show_attachment_preview ) {
+	if( $t_show_attachment_preview ) {
 		$t_collapse_id = 'attachment_preview_' . $p_attachment['id'];
 		global $g_collapse_cache_token;
 		$g_collapse_cache_token[$t_collapse_id] = false;
 		collapse_open( $t_collapse_id );
 	}
 	print_bug_attachment_header( $p_attachment );
-	if ( $t_show_attachment_preview ) {
+	if( $t_show_attachment_preview ) {
 		echo lang_get( 'word_separator' );
 		collapse_icon( $t_collapse_id );
-		if ( $p_attachment['type'] == 'text' ) {
+		if( $p_attachment['type'] == 'text' ) {
 			print_bug_attachment_preview_text( $p_attachment );
-		} else if ( $p_attachment['type'] === 'image' ) {
+		} else if( $p_attachment['type'] === 'image' ) {
 			print_bug_attachment_preview_image( $p_attachment );
 		}
 		collapse_closed( $t_collapse_id );
@@ -1778,20 +1778,20 @@ function print_bug_attachment( $p_attachment ) {
  */
 function print_bug_attachment_header( $p_attachment ) {
 	echo "\n";
-	if ( $p_attachment['exists'] ) {
-		if ( $p_attachment['can_download'] ) {
+	if( $p_attachment['exists'] ) {
+		if( $p_attachment['can_download'] ) {
 			echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '">';
 		}
 		print_file_icon( $p_attachment['display_name'] );
-		if ( $p_attachment['can_download'] ) {
+		if( $p_attachment['can_download'] ) {
 			echo '</a>';
 		}
 		echo lang_get( 'word_separator' );
-		if ( $p_attachment['can_download'] ) {
+		if( $p_attachment['can_download'] ) {
 			echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '">';
 		}
 		echo string_display_line( $p_attachment['display_name'] );
-		if ( $p_attachment['can_download'] ) {
+		if( $p_attachment['can_download'] ) {
 			echo '</a>';
 		}
 		echo lang_get( 'word_separator' ) . '(' . number_format( $p_attachment['size'] ) . lang_get( 'word_separator' ) . lang_get( 'bytes' ) . ')';
@@ -1802,7 +1802,7 @@ function print_bug_attachment_header( $p_attachment ) {
 		echo lang_get( 'word_separator' ) . '<span class="strike">' . string_display_line( $p_attachment['display_name'] ) . '</span>' . lang_get( 'word_separator' ) . '(' . lang_get( 'attachment_missing' ) . ')';
 	}
 
-	if ( $p_attachment['can_delete'] ) {
+	if( $p_attachment['can_delete'] ) {
 		echo lang_get( 'word_separator' ) . '[';
 		print_link( 'bug_file_delete.php?file_id=' . $p_attachment['id'] . form_security_param( 'bug_file_delete' ), lang_get( 'delete_link' ), false, 'small' );
 		echo ']';
@@ -1814,13 +1814,13 @@ function print_bug_attachment_header( $p_attachment ) {
  * @param array $p_attachment An attachment arrray from within the array returned by the file_get_visible_attachments() function
  */
 function print_bug_attachment_preview_text( $p_attachment ) {
-	if ( !$p_attachment['exists'] ) {
+	if( !$p_attachment['exists'] ) {
 		return;
 	}
 	echo "\n<pre class=\"bug-attachment-preview-text\">";
 	switch( config_get( 'file_upload_method' ) ) {
 		case DISK:
-			if ( file_exists( $p_attachment['diskfile'] ) ) {
+			if( file_exists( $p_attachment['diskfile'] ) ) {
 				$t_content = file_get_contents( $p_attachment['diskfile'] );
 			}
 			break;
@@ -1846,12 +1846,12 @@ function print_bug_attachment_preview_text( $p_attachment ) {
 function print_bug_attachment_preview_image( $p_attachment ) {
 	$t_preview_style = 'border: 0;';
 	$t_max_width = config_get( 'preview_max_width' );
-	if ( $t_max_width > 0 ) {
+	if( $t_max_width > 0 ) {
 		$t_preview_style .= ' max-width:' . $t_max_width . 'px;';
 	}
 
 	$t_max_height = config_get( 'preview_max_height' );
-	if ( $t_max_height > 0 ) {
+	if( $t_max_height > 0 ) {
 		$t_preview_style .= ' max-height:' . $t_max_height . 'px;';
 	}
 
@@ -1869,7 +1869,7 @@ function print_bug_attachment_preview_image( $p_attachment ) {
  * @param string $p_timezone timezone
  */
 function print_timezone_option_list( $p_timezone ) {
-	if ( !function_exists( 'timezone_identifiers_list' ) ) {
+	if( !function_exists( 'timezone_identifiers_list' ) ) {
 		echo "\t<option value=\"$p_timezone\" selected=\"selected\">$p_timezone</option>\n";
 		return;
 	}

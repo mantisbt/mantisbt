@@ -33,7 +33,7 @@
  * - NEVER SKIP AN INDEX IN THE SEQUENCE!!!
  */
 
-if ( !function_exists( 'db_null_date' ) ) {
+if( !function_exists( 'db_null_date' ) ) {
 	/**
 	 * Legacy null date function for installer backwards compatibility
 	 */

@@ -239,7 +239,6 @@ class IssueAddTest extends SoapBase {
 			$this->password,
 			$issueId);
 
-
 		$this->assertEquals( $this->dateToUTC($date), $this->dateToUTC($issue->due_date), "due_date" );
 	}
 
@@ -316,7 +315,7 @@ class IssueAddTest extends SoapBase {
 			switch ( $reader->nodeType ) {
 
 				case XMLReader::ELEMENT:
-					if ( $reader->name == 'due_date') {
+					if( $reader->name == 'due_date') {
 						return $reader->getAttribute( 'xsi:nil' );
 					}
 					break;
@@ -448,7 +447,7 @@ class IssueAddTest extends SoapBase {
 	public function testGetBiggestId() {
 
 	    $firstIssueId = $this->client->mc_issue_add( $this->userName, $this->password, $this->getIssueToAdd( 'IssueAddTest.testGetBiggestId1'));
-        $this->deleteAfterRun( $firstIssueId );
+		$this->deleteAfterRun( $firstIssueId );
 
 	    $secondIssueId = $this->client->mc_issue_add( $this->userName, $this->password, $this->getIssueToAdd( 'IssueAddTest.testGetBiggestId2'));
 	    $this->deleteAfterRun( $secondIssueId );

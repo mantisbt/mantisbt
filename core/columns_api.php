@@ -170,15 +170,15 @@ function columns_get_standard( $p_enabled_columns_only = true ) {
 function columns_get_plugin_columns() {
 	static $s_column_array = null;
 
-	if ( is_null( $s_column_array ) ) {
+	if( is_null( $s_column_array ) ) {
 		$s_column_array = array();
 
 		$t_all_plugin_columns = event_signal( 'EVENT_FILTER_COLUMNS' );
 		foreach( $t_all_plugin_columns as $t_plugin => $t_plugin_columns ) {
 			foreach( $t_plugin_columns as $t_callback => $t_plugin_column_array ) {
-				if ( is_array( $t_plugin_column_array ) ) {
+				if( is_array( $t_plugin_column_array ) ) {
 					foreach( $t_plugin_column_array as $t_column_class ) {
-						if ( class_exists( $t_column_class ) && is_subclass_of( $t_column_class, 'MantisColumn' ) ) {
+						if( class_exists( $t_column_class ) && is_subclass_of( $t_column_class, 'MantisColumn' ) ) {
 							$t_column_object = new $t_column_class();
 							$t_column_name = utf8_strtolower( $t_plugin . '_' . $t_column_object->column );
 							$s_column_array[ $t_column_name ] = $t_column_object;
@@ -326,7 +326,7 @@ function column_get_title( $p_column ) {
 	}
 
 	$t_plugin_columns = columns_get_plugin_columns();
-	if ( isset( $t_plugin_columns[ $p_column ] ) ) {
+	if( isset( $t_plugin_columns[ $p_column ] ) ) {
 		$t_column_object = $t_plugin_columns[ $p_column ];
 		return $t_column_object->title;
 	}
@@ -1007,7 +1007,7 @@ function print_column_selection( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW
  */
 function print_column_title_plugin( $p_column, $p_column_object, $p_sort, $p_dir, $p_columns_target=COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<th class="column-plugin">';
-	if ( $p_column_object->sortable ) {
+	if( $p_column_object->sortable ) {
 		print_view_bug_sort_link( string_display_line( $p_column_object->title ), $p_column, $p_sort, $p_dir, $p_columns_target );
 		print_sort_icon( $p_dir, $p_sort, $p_column );
 	} else {
@@ -1024,7 +1024,7 @@ function print_column_title_plugin( $p_column, $p_column_object, $p_sort, $p_dir
  * @access public
  */
 function print_column_plugin( $p_column_object, $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	if ( $p_columns_target != COLUMNS_TARGET_CSV_PAGE ) {
+	if( $p_columns_target != COLUMNS_TARGET_CSV_PAGE ) {
 		echo '<td class="column-plugin">';
 		$p_column_object->display( $p_bug, $p_columns_target );
 		echo '</td>';
@@ -1165,7 +1165,7 @@ function print_column_attachment_count( $p_bug, $p_columns_target = COLUMNS_TARG
 
 	echo '<td class="column-attachments">';
 
-	if ( $t_attachment_count > 0 ) {
+	if( $t_attachment_count > 0 ) {
 		$t_href = string_get_bug_view_url( $p_bug->id ) . '#attachments';
 		$t_href_title = sprintf( lang_get( 'view_attachments_for_issue' ), $t_attachment_count, $p_bug->id );
 		echo "<a href=\"$t_href\" title=\"$t_href_title\">$t_attachment_count</a>";
@@ -1193,7 +1193,7 @@ function print_column_category_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VI
 	echo '<td class="column-category">';
 
 	# type project name if viewing 'all projects' or if issue is in a subproject
- 	if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project() != $p_bug->project_id ) {
+	if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project() != $p_bug->project_id ) {
 		echo '<small class="project">[';
 		print_view_bug_sort_link( string_display_line( $t_project_name ), 'project_id', $t_sort, $t_dir, $p_columns_target );
 		echo ']</small><br />';
@@ -1488,7 +1488,7 @@ function print_column_view_state( $p_bug, $p_columns_target = COLUMNS_TARGET_VIE
 function print_column_due_date( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	$t_overdue = '';
 
-	if ( !access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id ) ||
+	if( !access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id ) ||
 		date_is_null( $p_bug->due_date )
 	) {
 		$t_value = '&#160;';
@@ -1515,7 +1515,7 @@ function print_column_overdue( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_P
 
 	echo '<td class="column-overdue">';
 
-	if ( access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id ) &&
+	if( access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id ) &&
 		!date_is_null( $p_bug->due_date ) &&
 		bug_is_overdue( $p_bug->id ) ) {
 		$t_overdue_text = lang_get( 'overdue' );

@@ -37,7 +37,7 @@
  * @uses user_api.php
  */
 
-if ( !defined( 'PRINT_BUGNOTE_INC_ALLOW' ) ) {
+if( !defined( 'PRINT_BUGNOTE_INC_ALLOW' ) ) {
 	return;
 }
 
@@ -60,11 +60,11 @@ require_api( 'user_api.php' );
 	$t_user_id	= auth_get_current_user_id();
 	$c_bug_id		= (integer)$f_bug_id;
 
- 	if ( !access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) {
- 		$t_restriction = 'AND view_state=' . VS_PUBLIC;
- 	} else {
- 		$t_restriction = '';
- 	}
+	if( !access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) {
+		$t_restriction = 'AND view_state=' . VS_PUBLIC;
+	} else {
+		$t_restriction = '';
+	}
 
 	$t_bugnote_table		= db_get_table( 'bugnote' );
 	$t_bugnote_text_table	= db_get_table( 'bugnote_text' );
@@ -83,7 +83,7 @@ require_api( 'user_api.php' );
 <table class="width100" cellspacing="1">
 <?php
 	# no bugnotes
-	if ( 0 == $num_notes ) {
+	if( 0 == $num_notes ) {
 ?>
 <tr>
 	<td class="print" colspan="2">
@@ -137,7 +137,7 @@ require_api( 'user_api.php' );
 		<tr>
 			<td class="print">
 				<?php echo $v3_date_submitted ?>&#160;&#160;&#160;
-				<?php if ( $v3_date_submitted != $v3_last_modified ) {
+				<?php if( $v3_date_submitted != $v3_last_modified ) {
 					echo '<br />(' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . $v3_last_modified . ')';
 				} ?>
 			</td>

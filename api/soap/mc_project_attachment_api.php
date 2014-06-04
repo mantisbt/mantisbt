@@ -40,7 +40,7 @@ function mc_project_attachment_get( $p_username, $p_password, $p_project_attachm
 	}
 
 	$t_file = mci_file_get( $p_project_attachment_id, 'doc', $t_user_id );
-	if ( SoapObjectsFactory::isSoapFault( $t_file ) ) {
+	if( SoapObjectsFactory::isSoapFault( $t_file ) ) {
 		return $t_file;
 	}
 	return SoapObjectsFactory::encodeBinary( $t_file );

@@ -336,7 +336,7 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 	return $t_rows;
 }
 
-/** 
+/**
  * Checks if the news feature is enabled or not.
  * true: enabled, otherwise false.
  */
@@ -348,7 +348,7 @@ function news_is_enabled() {
  * Ensures that the news feature is enabled, otherwise generates an access denied error.
  */
 function news_ensure_enabled() {
-	if ( !news_is_enabled() ) {
+	if( !news_is_enabled() ) {
 		access_denied();
 	}
 }

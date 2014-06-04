@@ -64,7 +64,7 @@ $t_tag_row = tag_get( $f_tag_id );
 $t_name = string_display_line( $t_tag_row['name'] );
 $t_description = string_display( $t_tag_row['description'] );
 
-if ( !( access_has_global_level( config_get( 'tag_edit_threshold' ) )
+if( !( access_has_global_level( config_get( 'tag_edit_threshold' ) )
 	|| ( auth_get_current_user_id() == $t_tag_row['user_id'] )
 		&& access_has_global_level( config_get( 'tag_edit_own_threshold' ) ) ) )
 {
@@ -92,7 +92,7 @@ html_page_top( sprintf( lang_get( 'tag_update' ), $t_name ) );
 			</div>
 			<div class="field-container">
 				<?php
-					if ( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
+					if( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
 						echo '<label for="tag-user-id"><span>', lang_get( 'tag_creator' ), '</span></label>';
 						echo '<span class="select"><select ', helper_get_tab_index(), ' id="tag-user-id" name="user_id">';
 						print_user_option_list( (int)$t_tag_row['user_id'], ALL_PROJECTS, (int)config_get( 'tag_create_threshold' ) );

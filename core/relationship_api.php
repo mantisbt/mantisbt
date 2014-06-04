@@ -185,7 +185,7 @@ $g_relationships[BUG_RELATED] = array(
 	'#notify_deleted' => 'email_notification_title_for_action_related_to_relationship_deleted',
 );
 
-if ( file_exists( config_get_global( 'config_path' ) . 'custom_relationships_inc.php' ) ) {
+if( file_exists( config_get_global( 'config_path' ) . 'custom_relationships_inc.php' ) ) {
 	include_once( config_get_global( 'config_path' ) . 'custom_relationships_inc.php' );
 }
 
@@ -687,22 +687,22 @@ function relationship_get_details( $p_bug_id, $p_relationship, $p_html = false, 
 	}
 
 	# add summary
- 	if( $p_html == true ) {
- 		$t_relationship_info_html .= $t_td . string_display_line_links( $t_bug->summary );
- 		if( VS_PRIVATE == $t_bug->view_state ) {
- 			$t_relationship_info_html .= sprintf( ' <img src="%s" alt="(%s)" title="%s" />', $t_icon_path . 'protected.gif', lang_get( 'private' ), lang_get( 'private' ) );
- 		}
-  	} else {
- 		if( utf8_strlen( $t_bug->summary ) <= $t_summary_wrap_at ) {
- 			$t_relationship_info_text .= string_email_links( $t_bug->summary );
- 		} else {
- 			$t_relationship_info_text .= utf8_substr( string_email_links( $t_bug->summary ), 0, $t_summary_wrap_at - 3 ) . '...';
- 		}
+	if( $p_html == true ) {
+		$t_relationship_info_html .= $t_td . string_display_line_links( $t_bug->summary );
+		if( VS_PRIVATE == $t_bug->view_state ) {
+			$t_relationship_info_html .= sprintf( ' <img src="%s" alt="(%s)" title="%s" />', $t_icon_path . 'protected.gif', lang_get( 'private' ), lang_get( 'private' ) );
+		}
+	} else {
+		if( utf8_strlen( $t_bug->summary ) <= $t_summary_wrap_at ) {
+			$t_relationship_info_text .= string_email_links( $t_bug->summary );
+		} else {
+			$t_relationship_info_text .= utf8_substr( string_email_links( $t_bug->summary ), 0, $t_summary_wrap_at - 3 ) . '...';
+		}
 	}
 
 	# add delete link if bug not read only and user has access level
- 	if( !bug_is_readonly( $p_bug_id ) && !current_user_is_anonymous() && ( $p_html_preview == false ) ) {
- 		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
+	if( !bug_is_readonly( $p_bug_id ) && !current_user_is_anonymous() && ( $p_html_preview == false ) ) {
+		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
 			$t_relationship_info_html .= ' [<a class="small" href="bug_relationship_delete.php?bug_id=' . $p_bug_id . '&amp;rel_id=' . $p_relationship->id . htmlspecialchars( form_security_param( 'bug_relationship_delete' ) ) . '">' . lang_get( 'delete_link' ) . '</a>]';
 		}
 	}

@@ -29,7 +29,7 @@
  * @uses lang_api.php
  */
 
-if ( !defined( 'BUG_ACTIONGROUP_INC_ALLOW' ) ) {
+if( !defined( 'BUG_ACTIONGROUP_INC_ALLOW' ) ) {
 	return;
 }
 
@@ -86,11 +86,11 @@ function action_update_product_build_print_fields() {
 function action_update_product_build_validate( $p_bug_id ) {
 	$t_bug_id = (int)$p_bug_id;
 
-	if ( bug_is_readonly( $t_bug_id ) ) {
+	if( bug_is_readonly( $t_bug_id ) ) {
 		return lang_get( 'actiongroup_error_issue_is_readonly' );
 	}
 
-	if ( !access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) ) {
+	if( !access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) ) {
 		return lang_get( 'access_denied' );
 	}
 

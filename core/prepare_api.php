@@ -89,13 +89,13 @@ function prepare_user_name( $p_user_id ) {
  * @return string The formatted version string.
  */
 function prepare_version_string( $p_project_id, $p_version_id ) {
-	if ( $p_version_id === false ) {
+	if( $p_version_id === false ) {
 		return '';
 	}
 
 	$t_version_text = version_full_name( $p_version_id, null, $p_project_id );
 
-	if ( access_has_project_level( config_get( 'show_version_dates_threshold' ), $p_project_id ) ) {
+	if( access_has_project_level( config_get( 'show_version_dates_threshold' ), $p_project_id ) ) {
 		$t_short_date_format = config_get( 'short_date_format' );
 
 		$t_version = version_get( $p_version_id );

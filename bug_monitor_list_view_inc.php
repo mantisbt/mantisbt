@@ -34,7 +34,7 @@
  * @uses user_api.php
  */
 
-if ( !defined( 'BUG_MONITOR_LIST_VIEW_INC_ALLOW' ) ) {
+if( !defined( 'BUG_MONITOR_LIST_VIEW_INC_ALLOW' ) ) {
 	return;
 }
 
@@ -48,8 +48,7 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'user_api.php' );
 
-if ( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_id ) ) {
-	
+if( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_id ) ) {
 	$t_users = bug_get_monitors( $f_bug_id );
 	$num_users = sizeof ( $t_users );
 
@@ -62,7 +61,7 @@ if ( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_i
 	<td class="form-title" colspan="2">
 <?php
 	collapse_icon( 'monitoring' );
- ?>
+?>
 		<?php echo lang_get( 'users_monitoring_bug' ); ?>
 	</td>
 </tr>
@@ -72,20 +71,20 @@ if ( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_i
 	</th>
 	<td>
 <?php
-		if ( 0 == $num_users ) {
+		if( 0 == $num_users ) {
 			echo lang_get( 'no_users_monitoring_bug' );
 		} else {
 			$t_can_delete_others = access_has_bug_level( config_get( 'monitor_delete_others_bug_threshold' ), $f_bug_id );
 	 		for ( $i = 0; $i < $num_users; $i++ ) {
 				echo ($i > 0) ? ', ' : '';
 				print_user( $t_users[$i] );
-				if ( $t_can_delete_others ) {
+				if( $t_can_delete_others ) {
 					echo ' [<a class="small" href="' . helper_mantis_url( 'bug_monitor_delete.php' ) . '?bug_id=' . $f_bug_id . '&amp;user_id=' . $t_users[$i] . htmlspecialchars(form_security_param( 'bug_monitor_delete' )) . '">' . lang_get( 'delete_link' ) . '</a>]';
 				}
 	 		}
- 		}
+		}
 
-		if ( access_has_bug_level( config_get( 'monitor_add_others_bug_threshold' ), $f_bug_id ) ) {
+		if( access_has_bug_level( config_get( 'monitor_add_others_bug_threshold' ), $f_bug_id ) ) {
 ?>
 		<br /><br />
 		<form method="get" action="bug_monitor_add.php">

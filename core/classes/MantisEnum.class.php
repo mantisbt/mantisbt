@@ -57,7 +57,7 @@ class MantisEnum {
 		$assocArray = MantisEnum::getAssocArrayIndexedByValues( $enumString );
 		$valueAsInteger = (int)$value;
 
-		if ( isset( $assocArray[$valueAsInteger] ) ) {
+		if( isset( $assocArray[$valueAsInteger] ) ) {
 			return $assocArray[$valueAsInteger];
 		}
 
@@ -76,7 +76,7 @@ class MantisEnum {
 	 * @return string the label or the decorated value to represent not found.
 	 */
 	public static function getLocalizedLabel( $enumString, $localizedEnumString, $value ) {
-		if ( !MantisEnum::hasValue( $enumString, $value ) ) {
+		if( !MantisEnum::hasValue( $enumString, $value ) ) {
 			return MantisEnum::getLabelForUnknownValue( $value );
 		}
 
@@ -93,7 +93,7 @@ class MantisEnum {
 	public static function getValue( $enumString, $label ) {
 		$assocArrayByLabels = MantisEnum::getAssocArrayIndexedByLabels( $enumString );
 
-		if ( isset( $assocArrayByLabels[$label] ) ) {
+		if( isset( $assocArrayByLabels[$label] ) ) {
 			return $assocArrayByLabels[$label];
 		}
 
@@ -120,14 +120,14 @@ class MantisEnum {
 			$tupleTokens = MantisEnum::getArrayForTuple( $tuple );
 
 			# if not a proper tuple, skip.
-			if ( count( $tupleTokens ) != 2 ) {
+			if( count( $tupleTokens ) != 2 ) {
 				continue;
 			}
 
 			$value = (int) trim( $tupleTokens[0] );
 
 			# if already set, skip.
-			if ( isset( $assocArray[ $value ] ) ) {
+			if( isset( $assocArray[ $value ] ) ) {
 				continue;
 			}
 
@@ -182,7 +182,7 @@ class MantisEnum {
 	 * @return array array of num:value elements
 	 */
 	private static function getArrayOfTuples( $enumString ) {
-		if ( strlen( trim( $enumString ) ) == 0 ) {
+		if( strlen( trim( $enumString ) ) == 0 ) {
 			return array();
 		}
 

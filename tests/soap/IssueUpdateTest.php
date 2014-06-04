@@ -342,10 +342,10 @@ class IssueUpdateTest extends SoapBase {
 
 		$issueToAdd = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateBugWithNoCategory' );
 
-        $issueId = $this->client->mc_issue_add(
+		$issueId = $this->client->mc_issue_add(
 			$this->userName,
-            $this->password,
-            $issueToAdd);
+			$this->password,
+			$issueToAdd);
 
 		$this->deleteAfterRun( $issueId );
 
@@ -402,7 +402,7 @@ class IssueUpdateTest extends SoapBase {
 			)
 		);
 
- 		$this->client->mc_issue_update(
+		$this->client->mc_issue_update(
 			$this->userName,
 			$this->password,
 			$issueId,
@@ -449,7 +449,7 @@ class IssueUpdateTest extends SoapBase {
 		$issue->os_build = 'os_build';
 		$issue->os = 'os';
 
- 		$this->client->mc_issue_update(
+		$this->client->mc_issue_update(
 			$this->userName,
 			$this->password,
 			$issueId,

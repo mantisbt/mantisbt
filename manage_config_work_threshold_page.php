@@ -73,7 +73,7 @@ $t_overrides = array();
  */
 function set_overrides( $p_config ) {
 	global $t_overrides;
-	if ( !in_array( $p_config, $t_overrides ) ) {
+	if( !in_array( $p_config, $t_overrides ) ) {
 		$t_overrides[] = $p_config;
 	}
 }
@@ -117,17 +117,17 @@ function set_color( $p_threshold, $p_file, $p_global, $p_project, $p_set_overrid
 	$t_color = false;
 
 	# all projects override
-	if ( $p_global != $p_file ) {
+	if( $p_global != $p_file ) {
 		$t_color = $t_color_global;
-		if ( $p_set_override && ALL_PROJECTS == $t_project_id ) {
+		if( $p_set_override && ALL_PROJECTS == $t_project_id ) {
 			set_overrides( $p_threshold );
 		}
 	}
 
 	# project overrides
-	if ( $p_project != $p_global ) {
+	if( $p_project != $p_global ) {
 		$t_color = $t_color_project;
-		if ( $p_set_override && ALL_PROJECTS != $t_project_id ) {
+		if( $p_set_override && ALL_PROJECTS != $t_project_id ) {
 			set_overrides( $p_threshold );
 		}
 
@@ -157,7 +157,7 @@ function print_who_can_change( $p_threshold, $p_can_change ) {
 	$t_color = set_color( $p_threshold, $t_file_access, $t_global_access, $t_project_access, $p_can_change );
 
 	echo "\t<td $t_color>";
-	if ( $p_can_change ) {
+	if( $p_can_change ) {
 		echo '<select name="access_' . $p_threshold . '">';
 		print_enum_string_option_list( 'access_levels', $t_project_access );
 		echo '</select>';
@@ -177,10 +177,10 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only=fals
 	global $t_user, $t_project_id, $t_show_submit, $t_access_levels;
 
 	$t_file = config_get_global( $p_threshold );
-	if ( !is_array( $t_file ) ) {
+	if( !is_array( $t_file ) ) {
 		$t_file_exp = array();
 		foreach( $t_access_levels as $t_access_level => $t_label ) {
-			if ( $t_access_level >= $t_file ) {
+			if( $t_access_level >= $t_file ) {
 				$t_file_exp[] = $t_access_level;
 			}
 		}
@@ -189,10 +189,10 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only=fals
 	}
 
 	$t_global = config_get( $p_threshold, null, null, ALL_PROJECTS );
-	if ( !is_array( $t_global ) ) {
+	if( !is_array( $t_global ) ) {
 		$t_global_exp = array();
 		foreach( $t_access_levels as $t_access_level => $t_label ) {
-			if ( $t_access_level >= $t_global ) {
+			if( $t_access_level >= $t_global ) {
 				$t_global_exp[] = $t_access_level;
 			}
 		}
@@ -201,10 +201,10 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only=fals
 	}
 
 	$t_project = config_get( $p_threshold );
-	if ( !is_array( $t_project ) ) {
+	if( !is_array( $t_project ) ) {
 		$t_project_exp = array();
 		foreach( $t_access_levels as $t_access_level => $t_label ) {
-			if ( $t_access_level >= $t_project ) {
+			if( $t_access_level >= $t_project ) {
 				$t_project_exp[] = $t_access_level;
 			}
 		}
@@ -226,12 +226,12 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only=fals
 
 		$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
 
-		if ( $t_can_change ) {
+		if( $t_can_change ) {
 			$t_checked = $t_project ? "checked=\"checked\"" : "";
 			$t_value = "<input type=\"checkbox\" name=\"flag_thres_" . $p_threshold . "[]\" value=\"$t_access_level\" $t_checked />";
 			$t_show_submit = true;
 		} else {
-			if ( $t_project ) {
+			if( $t_project ) {
 				$t_value = '<img src="images/ok.gif" width="20" height="15" alt="X" title="X" />';
 			} else {
 				$t_value = '&#160;';
@@ -265,12 +265,12 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only=
 
 	# Value
 	$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
-	if ( $t_can_change ) {
+	if( $t_can_change ) {
 		$t_checked = ( ON == config_get( $p_threshold ) ) ? "checked=\"checked\"" : "";
 		$t_value = "<input type=\"checkbox\" name=\"flag_" . $p_threshold . "\" value=\"1\" $t_checked />";
 		$t_show_submit = true;
 	} else {
-		if ( ON == config_get( $p_threshold ) ) {
+		if( ON == config_get( $p_threshold ) ) {
 			$t_value = '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />';
 		} else {
 			$t_value = '&#160;';
@@ -306,7 +306,7 @@ function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects
 	# Value
 	$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
 	echo "\t" . '<td class="left" colspan="3"' . $t_color . '>';
-	if ( $t_can_change ) {
+	if( $t_can_change ) {
 		echo '<select name="flag_' . $p_threshold . '">';
 		print_enum_string_option_list( $p_enum, config_get( $p_threshold ) );
 		echo '</select>';
@@ -335,14 +335,14 @@ $t_color_global = config_get( 'colour_global' );
 
 echo "<br /><br />\n";
 
-if ( ALL_PROJECTS == $t_project_id ) {
+if( ALL_PROJECTS == $t_project_id ) {
 	$t_project_title = lang_get( 'config_all_projects' );
 } else {
 	$t_project_title = sprintf( lang_get( 'config_project' ) , string_display( project_get_name( $t_project_id ) ) );
 }
 echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
 echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
-if ( ALL_PROJECTS <> $t_project_id ) {
+if( ALL_PROJECTS <> $t_project_id ) {
 	echo '<span style="background-color:' . $t_color_project . '">' . lang_get( 'colour_project' ) .'</span><br />';
 }
 echo '<span style="background-color:' . $t_color_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
@@ -399,20 +399,20 @@ get_capability_row( lang_get( 'receive_reminders' ), 'reminder_receive_threshold
 get_section_end();
 
 
-if ( $t_show_submit ) {
+if( $t_show_submit ) {
 	echo "<input type=\"submit\" class=\"button\" value=\"" . lang_get( 'change_configuration' ) . "\" />\n";
 }
 
 echo "</form>\n";
 
-if ( $t_show_submit && ( 0 < count( $t_overrides ) ) ) {
+if( $t_show_submit && ( 0 < count( $t_overrides ) ) ) {
 	echo "<div class=\"right\"><form name=\"threshold_config_action\" method=\"post\" action=\"manage_config_revert.php\">\n";
 	echo form_security_field( 'manage_config_revert' );
 	echo "<input name=\"revert\" type=\"hidden\" value=\"" . implode( ',', $t_overrides ) . "\"></input>";
 	echo "<input name=\"project\" type=\"hidden\" value=\"$t_project_id\"></input>";
 	echo "<input name=\"return\" type=\"hidden\" value=\"" . string_attribute( form_action_self() ) ."\"></input>";
 	echo "<input type=\"submit\" class=\"button\" value=\"";
-	if ( ALL_PROJECTS == $t_project_id ) {
+	if( ALL_PROJECTS == $t_project_id ) {
 		echo lang_get( 'revert_to_system' );
 	} else {
 	echo lang_get( 'revert_to_all_project' );

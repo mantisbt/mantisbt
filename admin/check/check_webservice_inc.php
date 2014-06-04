@@ -26,7 +26,7 @@
  * @uses constant_inc.php
  */
 
-if ( !defined( 'CHECK_WEBSERVICE_INC_ALLOW' ) ) {
+if( !defined( 'CHECK_WEBSERVICE_INC_ALLOW' ) ) {
 	return;
 }
 

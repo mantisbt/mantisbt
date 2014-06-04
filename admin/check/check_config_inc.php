@@ -25,7 +25,7 @@
  * @uses check_api.php
  */
 
-if ( !defined( 'CHECK_CONFIG_INC_ALLOW' ) ) {
+if( !defined( 'CHECK_CONFIG_INC_ALLOW' ) ) {
 	return;
 }
 

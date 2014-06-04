@@ -68,7 +68,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 	bug_ensure_exists( $t_bug_id );
 	$t_bug = bug_get( $t_bug_id, true );
 
-	if ( isset( $t_projects_bugs[$t_bug->project_id] ) ) {
+	if( isset( $t_projects_bugs[$t_bug->project_id] ) ) {
 	  $t_projects_bugs[$t_bug->project_id][] = $t_bug_id;
 	} else {
 	  $t_projects_bugs[$t_bug->project_id] = array( $t_bug_id );
@@ -97,7 +97,7 @@ $g_project_override = null;
 
 form_security_purge( $t_form_name );
 
-if ( count( $t_failed_ids ) > 0 ) {
+if( count( $t_failed_ids ) > 0 ) {
 	html_page_top();
 
 	echo '<div>';

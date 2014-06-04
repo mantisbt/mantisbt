@@ -79,13 +79,13 @@ require_lib( 'phpmailer' . DIRECTORY_SEPARATOR . 'class.phpmailer.php' );
 /**
  * reusable object of class SMTP
  */
- $g_phpMailer = null;
+$g_phpMailer = null;
 
 /**
  * Indicates whether any emails are currently stored for process during this request.
  * Note: This is only used if not sending emails via cron job
  */
- $g_email_stored = false;
+$g_email_stored = false;
 
 /**
  * Use a simple perl regex for valid email addresses.  This is not a complete regex,
@@ -235,7 +235,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 	$t_recipients = array();
 
 	# add explicitly specified users
-	if ( ON == email_notify_flag( $p_notify_type, 'explicit' ) ) {
+	if( ON == email_notify_flag( $p_notify_type, 'explicit' ) ) {
 		foreach ( $p_extra_user_ids_to_email as $t_user_id ) {
 			$t_recipients[$t_user_id] = true;
 			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, add explicitly specified user = @U%d', $p_bug_id, $t_user_id );
@@ -315,7 +315,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 	foreach( $t_recipients_include_data as $t_plugin => $t_recipients_include_data2 ) {
 		foreach( $t_recipients_include_data2 as $t_callback => $t_recipients_included ) {
 			# only handle if we get an array from the callback
-			if ( is_array( $t_recipients_included ) ) {
+			if( is_array( $t_recipients_included ) ) {
 				foreach( $t_recipients_included as $t_user_id ) {
 					$t_recipients[ $t_user_id ] = true;
 					log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, %s plugin added user @U%d', $p_bug_id, $t_plugin, $t_user_id );
@@ -420,7 +420,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 		foreach( $t_recipient_exclude_data as $t_plugin => $t_recipient_exclude_data2 ) {
 			foreach( $t_recipient_exclude_data2 as $t_callback => $t_recipient_excluded ) {
 				# exclude if any plugin returns true (excludes the user)
-				if ( $t_recipient_excluded ) {
+				if( $t_recipient_excluded ) {
 					$t_exclude = true;
 					log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, %s plugin dropped user @U%d', $p_bug_id, $t_plugin, $t_id );
 				}
@@ -428,7 +428,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_
 		}
 
 		# user was excluded by a plugin
-		if ( $t_exclude ) {
+		if( $t_exclude ) {
 			continue;
 		}
 
@@ -494,7 +494,7 @@ function email_signup( $p_user_id, $p_password, $p_confirm_hash, $p_admin_name =
  * @return null
  */
 function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
-	if ( OFF == config_get( 'send_reset_password' ) ||
+	if( OFF == config_get( 'send_reset_password' ) ||
 		OFF == config_get( 'enable_email_notification' ) ) {
 		return;
 	}
@@ -816,7 +816,7 @@ function email_send( $p_email_data ) {
 	$t_log_msg = 'ERROR: Message could not be sent - ';
 
 	if( is_null( $g_phpMailer ) ) {
-		if ( $t_mailer_method == PHPMAILER_METHOD_SMTP ) {
+		if( $t_mailer_method == PHPMAILER_METHOD_SMTP ) {
 			register_shutdown_function( 'email_smtp_close' );
 		}
 		$mail = new PHPMailer(true);
@@ -851,14 +851,14 @@ function email_send( $p_email_data ) {
 			# SMTP collection is always kept alive
 			$mail->SMTPKeepAlive = true;
 
-			if ( !is_blank( config_get( 'smtp_username' ) ) ) {
+			if( !is_blank( config_get( 'smtp_username' ) ) ) {
 				# Use SMTP Authentication
 				$mail->SMTPAuth = true;
 				$mail->Username = config_get( 'smtp_username' );
 				$mail->Password = config_get( 'smtp_password' );
 			}
 
-			if ( !is_blank( config_get( 'smtp_connection_mode' ) ) ) {
+			if( !is_blank( config_get( 'smtp_connection_mode' ) ) ) {
 				$mail->SMTPSecure = config_get( 'smtp_connection_mode' );
 			}
 
@@ -909,7 +909,7 @@ function email_send( $p_email_data ) {
 				case 'Message-ID':
 					# Note: hostname can never be blank here as we set metadata['hostname']
 					# in email_store() where mail gets queued.
-					if ( !strchr( $t_value, '@' ) && !is_blank( $mail->Hostname ) ) {
+					if( !strchr( $t_value, '@' ) && !is_blank( $mail->Hostname ) ) {
 						$t_value = $t_value . '@' . $mail->Hostname;
 					}
 					$mail->set( 'MessageID', "<$t_value>" );
@@ -926,10 +926,10 @@ function email_send( $p_email_data ) {
 
 	try {
 		$t_success = $mail->Send();
-		if ( $t_success ) {
+		if( $t_success ) {
 			$t_success = true;
 
-			if ( $t_email_data->email_id > 0 ) {
+			if( $t_email_data->email_id > 0 ) {
 				email_queue_delete( $t_email_data->email_id );
 			}
 		} else {
@@ -1178,11 +1178,11 @@ function email_format_bug_message( $p_visible_bug_data ) {
 
 	$t_message .= lang_get( 'email_description' ) . ": \n" . $p_visible_bug_data['email_description'] . "\n";
 
-	if ( !is_blank( $p_visible_bug_data['email_steps_to_reproduce'] ) ) {
+	if( !is_blank( $p_visible_bug_data['email_steps_to_reproduce'] ) ) {
 		$t_message .= "\n" . lang_get( 'email_steps_to_reproduce' ) . ": \n" . $p_visible_bug_data['email_steps_to_reproduce'] . "\n";
 	}
 
-	if ( !is_blank( $p_visible_bug_data['email_additional_information'] ) ) {
+	if( !is_blank( $p_visible_bug_data['email_additional_information'] ) ) {
 		$t_message .= "\n" . lang_get( 'email_additional_information' ) . ": \n" . $p_visible_bug_data['email_additional_information'] . "\n";
 	}
 

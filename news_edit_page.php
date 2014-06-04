@@ -56,13 +56,13 @@ $f_news_id = gpc_get_int( 'news_id' );
 $f_action = gpc_get_string( 'action', '' );
 
 # If deleting item redirect to delete script
-if ( 'delete' == $f_action ) {
+if( 'delete' == $f_action ) {
 	form_security_validate( 'news_delete' );
 
 	$row = news_get_row( $f_news_id );
 
 	# This check is to allow deleting of news items that were left orphan due to bug #3723
-	if ( project_exists( $row['project_id'] ) ) {
+	if( project_exists( $row['project_id'] ) ) {
 		access_ensure_project_level( config_get( 'manage_news_threshold' ), $row['project_id'] );
 	}
 
@@ -77,7 +77,7 @@ if ( 'delete' == $f_action ) {
 
 # Retrieve news item data and prefix with v_
 $row = news_get_row( $f_news_id );
-if ( $row ) {
+if( $row ) {
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 }
 
@@ -113,7 +113,7 @@ html_page_top( lang_get( 'edit_news_title' ) );
 				<span class="select">
 					<select name="project_id"><?php
 						$t_sitewide = false;
-						if ( current_user_is_administrator() ) {
+						if( current_user_is_administrator() ) {
 							$t_sitewide = true;
 						}
 						print_project_option_list( $v_project_id, $t_sitewide ); ?>

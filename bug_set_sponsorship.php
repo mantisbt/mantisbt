@@ -58,7 +58,7 @@ require_api( 'utility_api.php' );
 form_security_validate( 'bug_set_sponsorship' );
 
 # anonymous users are not allowed to sponsor issues
-if ( current_user_is_anonymous() ) {
+if( current_user_is_anonymous() ) {
 	access_denied();
 }
 
@@ -72,7 +72,7 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 	$g_project_override = $t_bug->project_id;
 }
 
-if ( config_get( 'enable_sponsorship' ) == OFF ) {
+if( config_get( 'enable_sponsorship' ) == OFF ) {
 	trigger_error( ERROR_SPONSORSHIP_NOT_ENABLED, ERROR );
 }
 
@@ -82,16 +82,16 @@ helper_ensure_confirmed(
 	sprintf( lang_get( 'confirm_sponsorship' ), $f_bug_id, sponsorship_format_amount( $f_amount ) ),
 	lang_get( 'sponsor_issue' ) );
 
-if ( $f_amount == 0 ) {
+if( $f_amount == 0 ) {
 	# if amount == 0, delete sponsorship by current user (if any)
 	$t_sponsorship_id = sponsorship_get_id( $f_bug_id );
-	if ( $t_sponsorship_id !== false ) {
+	if( $t_sponsorship_id !== false ) {
 		sponsorship_delete( $t_sponsorship_id );
 	}
 } else {
 	# add sponsorship
 	$t_user = auth_get_current_user_id();
-	if ( is_blank( user_get_email( $t_user ) ) ) {
+	if( is_blank( user_get_email( $t_user ) ) ) {
 		trigger_error( ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL, ERROR );
 	} else {
 		$sponsorship = new SponsorshipData;

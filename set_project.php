@@ -61,12 +61,12 @@ $t_project = explode( ';', $f_project_id );
 $t_top     = $t_project[0];
 $t_bottom  = $t_project[ count( $t_project ) - 1 ];
 
-if ( ALL_PROJECTS != $t_bottom ) {
+if( ALL_PROJECTS != $t_bottom ) {
 	project_ensure_exists( $t_bottom );
 }
 
 # Set default project
-if ( $f_make_default ) {
+if( $f_make_default ) {
 	current_user_set_default_project( $t_top );
 }
 
@@ -75,28 +75,28 @@ helper_set_current_project( $f_project_id );
 # redirect to 'same page' when switching projects.
 
 # for proxies that clear out HTTP_REFERER
-if ( !is_blank( $c_ref ) ) {
+if( !is_blank( $c_ref ) ) {
 	$t_redirect_url = $c_ref;
-} else if ( !isset( $_SERVER['HTTP_REFERER'] ) || is_blank( $_SERVER['HTTP_REFERER'] ) ) {
+} else if( !isset( $_SERVER['HTTP_REFERER'] ) || is_blank( $_SERVER['HTTP_REFERER'] ) ) {
 	$t_redirect_url = config_get( 'default_home_page' );
 } else {
 	$t_home_page = config_get( 'default_home_page' );
 
 	# Check that referrer matches our address after squashing case (case insensitive compare)
 	$t_path = rtrim( config_get( 'path' ), '/' );
-	if ( preg_match( "@^($t_path)/(?:/*([^\?#]*))(.*)?\$@", $_SERVER['HTTP_REFERER'], $t_matches ) ) {
+	if( preg_match( "@^($t_path)/(?:/*([^\?#]*))(.*)?\$@", $_SERVER['HTTP_REFERER'], $t_matches ) ) {
 		$t_referrer_page = $t_matches[2];
 		$t_param = $t_matches[3];
 
 		# if view_all_bug_page, pass on filter
-		if ( strcasecmp( 'view_all_bug_page.php', $t_referrer_page ) == 0 ) {
+		if( strcasecmp( 'view_all_bug_page.php', $t_referrer_page ) == 0 ) {
 			$t_source_filter_id = filter_db_get_project_current( $f_project_id );
 			$t_redirect_url = 'view_all_set.php?type=4';
 
-			if ( $t_source_filter_id !== null ) {
+			if( $t_source_filter_id !== null ) {
 				$t_redirect_url = 'view_all_set.php?type=3&source_query_id=' . $t_source_filter_id;
 			}
-		} else if ( stripos( $t_referrer_page, '_page.php' ) !== false ) {
+		} else if( stripos( $t_referrer_page, '_page.php' ) !== false ) {
 			switch ( $t_referrer_page ) {
 				case 'bug_view_page.php':
 				case 'bug_view_advanced_page.php':
@@ -109,7 +109,7 @@ if ( !is_blank( $c_ref ) ) {
 					break;
 			}
 			$t_redirect_url = $t_path;
-		} else if ( $t_referrer_page == 'plugin.php' ) {
+		} else if( $t_referrer_page == 'plugin.php' ) {
 			$t_redirect_url = $t_referrer_page . $t_param; # redirect to same plugin page
 		} else {
 			$t_redirect_url = $t_home_page;

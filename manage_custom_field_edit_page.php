@@ -131,7 +131,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			</div>
 			<div class="field-container">
 				<label for="custom-field-filter-by"><span><?php echo lang_get( 'custom_field_filter_by' ) ?></span></label>
-				<span class="checkbox"><input type="checkbox" id="custom-field-filter-by" name="filter_by" <?php if ( $t_definition['filter_by'] ) { ?>checked="checked"<?php } ?>  /></span>
+				<span class="checkbox"><input type="checkbox" id="custom-field-filter-by" name="filter_by" <?php if( $t_definition['filter_by'] ) { ?>checked="checked"<?php } ?>  /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">

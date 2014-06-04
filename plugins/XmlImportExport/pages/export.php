@@ -153,7 +153,7 @@ foreach( $t_result as $t_row ) {
 
 	# fetch and export custom fields
 	$t_custom_fields = custom_field_get_all_linked_fields( $t_row->id );
-	if ( is_array( $t_custom_fields ) && count( $t_custom_fields ) > 0 ) {
+	if( is_array( $t_custom_fields ) && count( $t_custom_fields ) > 0 ) {
 		$writer->startElement( 'custom_fields' );
 		foreach ( $t_custom_fields as $custom_field_name => $t_custom_field ) {
 			$writer->startElement( 'custom_field' );
@@ -175,7 +175,7 @@ foreach( $t_result as $t_row ) {
 
 	# fetch and export bugnotes
 	$t_bugnotes = bugnote_get_all_bugnotes( $t_row->id );
-	if ( is_array( $t_bugnotes ) && count( $t_bugnotes ) > 0 ) {
+	if( is_array( $t_bugnotes ) && count( $t_bugnotes ) > 0 ) {
 		$writer->startElement( 'bugnotes' );
 		foreach ( $t_bugnotes as $t_bugnote ) {
 			$writer->startElement( 'bugnote' );
@@ -211,7 +211,7 @@ foreach( $t_result as $t_row ) {
 
 	# fetch and export attachments
 	$t_attachments = bug_get_attachments( $t_row->id );
-	if ( is_array( $t_attachments ) && count( $t_attachments ) > 0 ) {
+	if( is_array( $t_attachments ) && count( $t_attachments ) > 0 ) {
 		$writer->startElement( 'attachments' );
 		foreach ( $t_attachments as $t_attachment ) {
 			$writer->startElement( 'attachment' );

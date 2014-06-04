@@ -107,20 +107,20 @@ $t_verify = is_page_name( 'verify.php' );
 
 $t_force_pw_reset = false;
 
-if ( $t_verify || $t_reset_password ) {
+if( $t_verify || $t_reset_password ) {
 	$t_can_change_password = helper_call_custom_function( 'auth_can_change_password', array() );
 
 	echo '<div id="reset-passwd-msg" class="important-msg">';
 	echo '<ul>';
 
-	if ( $t_verify ) {
+	if( $t_verify ) {
 		echo '<li>' . lang_get( 'verify_warning' ) . '</li>';
 
-		if ( $t_can_change_password ) {
+		if( $t_can_change_password ) {
 			echo '<li>' . lang_get( 'verify_change_password' ) . '</li>';
 			$t_force_pw_reset = true;
 		}
-	} else if ( $t_reset_password && $t_can_change_password ) {
+	} else if( $t_reset_password && $t_can_change_password ) {
 		echo '<li>' . lang_get( 'warning_default_administrator_account_present' ) . '</li>';
 		$t_force_pw_reset = true;
 	}
@@ -132,12 +132,12 @@ if ( $t_verify || $t_reset_password ) {
 
 <div id="account-update-div" class="form-container">
 	<form id="account-update-form" method="post" action="account_update.php">
-		<fieldset <?php if ( $t_force_pw_reset ) { ?> class="has-required"<?php } ?>>
+		<fieldset <?php if( $t_force_pw_reset ) { ?> class="has-required"<?php } ?>>
 			<legend><span><?php echo lang_get( 'edit_account_title' ); ?></span></legend>
 			<?php echo form_security_field( 'account_update' );
 			print_account_menu( 'account_page.php' );
 
-		if ( !helper_call_custom_function( 'auth_can_change_password', array() ) ) {
+		if( !helper_call_custom_function( 'auth_can_change_password', array() ) ) {
 			# With LDAP --> ?>
 			<div class="field-container">
 				<span class="display-label"><span><?php echo lang_get( 'username' ) ?></span></span>
@@ -164,18 +164,18 @@ if ( $t_verify || $t_reset_password ) {
 			} else {
 			?>
 			<div class="field-container">
-				<label for="password" <?php if ( $t_force_pw_reset ) { ?> class="required" <?php } ?>><span><?php echo lang_get( 'current_password' ) ?></span></label>
+				<label for="password" <?php if( $t_force_pw_reset ) { ?> class="required" <?php } ?>><span><?php echo lang_get( 'current_password' ) ?></span></label>
 				<span class="input"><input id="password-current" type="password" name="password_current" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
 				<span class="label-style"></span>
 			</div><?php
 			} ?>
 			<div class="field-container">
-				<label for="password" <?php if ( $t_force_pw_reset ) { ?> class="required" <?php } ?>><span><?php echo lang_get( 'password' ) ?></span></label>
+				<label for="password" <?php if( $t_force_pw_reset ) { ?> class="required" <?php } ?>><span><?php echo lang_get( 'password' ) ?></span></label>
 				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="password-confirm" <?php if ( $t_force_pw_reset ) { ?> class="required" <?php } ?>><span><?php echo lang_get( 'confirm_password' ) ?></span></label>
+				<label for="password-confirm" <?php if( $t_force_pw_reset ) { ?> class="required" <?php } ?>><span><?php echo lang_get( 'confirm_password' ) ?></span></label>
 				<span class="input"><input id="password-confirm" type="password" name="password_confirm" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
 				<span class="label-style"></span>
 			</div><?php
@@ -183,7 +183,7 @@ if ( $t_verify || $t_reset_password ) {
 			<div class="field-container">
 				<span class="display-label"><span><?php echo lang_get( 'email' ) ?></span></span>
 				<span class="input"><?php
-				if ( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
+				if( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
 					# With LDAP
 					echo '<span class="field-value">' . string_display_line( $u_email ) . '</span>';
 				} else {
@@ -195,7 +195,7 @@ if ( $t_verify || $t_reset_password ) {
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container"><?php
-				if ( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
+				if( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
 					# With LDAP
 					echo '<span class="display-label"><span>' . lang_get( 'realname' ) . '</span></span>';
 					echo '<span class="input">';
@@ -245,14 +245,14 @@ if ( $t_verify || $t_reset_password ) {
 				echo '</div>';
 			}
 			?>
-	<?php if ( $t_show_update_button ) { ?>
+	<?php if( $t_show_update_button ) { ?>
 		<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'update_user_button' ) ?>" /></span>
 	<?php } ?>
 		</fieldset>
 	</form>
 </div>
 <?php # check if users can't delete their own accounts
-if ( ON == config_get( 'allow_account_delete' ) ) { ?>
+if( ON == config_get( 'allow_account_delete' ) ) { ?>
 
 <!-- Delete Button -->
 <div class="form-container">

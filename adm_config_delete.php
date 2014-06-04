@@ -55,7 +55,7 @@ $f_config_option = gpc_get_string( 'config_option' );
 
 access_ensure_global_level( config_get( 'set_configuration_threshold' ) );
 
-if ( $f_project_id != ALL_PROJECTS ) {
+if( $f_project_id != ALL_PROJECTS ) {
 	project_ensure_exists( $f_project_id );
 }
 

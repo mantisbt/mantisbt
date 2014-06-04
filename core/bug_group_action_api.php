@@ -186,7 +186,7 @@ function bug_group_action_process( $p_action, $p_bug_id ) {
  * @return null
  */
 function bug_group_action_get_commands( $p_project_ids = null ) {
-	if ( $p_project_ids === null || count( $p_project_ids ) == 0 ) {
+	if( $p_project_ids === null || count( $p_project_ids ) == 0 ) {
 		$p_project_ids = array( ALL_PROJECTS );
 	}
 

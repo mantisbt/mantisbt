@@ -202,7 +202,7 @@ function file_get_icon_url( $p_display_filename ) {
  */
 function file_path_combine( $p_path, $p_filename ) {
 	$t_path = $p_path;
-	if ( utf8_substr( $t_path, -1 ) != '/' && utf8_substr( $t_path, -1 ) != '\\' ) {
+	if( utf8_substr( $t_path, -1 ) != '/' && utf8_substr( $t_path, -1 ) != '\\' ) {
 		$t_path .= DIRECTORY_SEPARATOR;
 	}
 
@@ -224,7 +224,7 @@ function file_path_combine( $p_path, $p_filename ) {
  * @return string The normalized full path.
  */
 function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
-	if ( file_exists( $p_diskfile ) ) {
+	if( file_exists( $p_diskfile ) ) {
 		return $p_diskfile;
 	}
 
@@ -232,12 +232,12 @@ function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
 
 	$t_expected_file_path = '';
 
-	if ( $p_project_id != ALL_PROJECTS ) {
+	if( $p_project_id != ALL_PROJECTS ) {
 		$t_path = project_get_field( $p_project_id, 'file_path' );
-		if ( !is_blank( $t_path ) ) {
+		if( !is_blank( $t_path ) ) {
 			$t_diskfile = file_path_combine( $t_path, $t_basename );
 
-			if ( file_exists( $t_diskfile ) ) {
+			if( file_exists( $t_diskfile ) ) {
 				return $t_diskfile;
 			}
 
@@ -247,21 +247,21 @@ function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
 	}
 
 	$t_path = config_get( 'absolute_path_default_upload_folder' );
-	if ( !is_blank( $t_path ) ) {
+	if( !is_blank( $t_path ) ) {
 		$t_diskfile = file_path_combine( $t_path, $t_basename );
 
-		if ( file_exists( $t_diskfile ) ) {
+		if( file_exists( $t_diskfile ) ) {
 			return $t_diskfile;
 		}
 
 		# if the expected path not set to project directory, then set it to default directory.
-		if ( is_blank( $t_expected_file_path ) ) {
+		if( is_blank( $t_expected_file_path ) ) {
 			$t_expected_file_path = $t_diskfile;
 		}
 	}
 
 	# if diskfile doesn't include a path, then use the expected filename.
-	if ( ( strstr( $p_diskfile, DIRECTORY_SEPARATOR ) === false ||
+	if( ( strstr( $p_diskfile, DIRECTORY_SEPARATOR ) === false ||
 	       strstr( $p_diskfile, '\\' ) === false ) &&
 	     !is_blank( $t_expected_file_path ) ) {
 	    return $t_expected_file_path;
@@ -307,7 +307,7 @@ function file_get_visible_attachments( $p_bug_id ) {
 	for( $i = 0;$i < $t_attachments_count;$i++ ) {
 		$t_row = $t_attachment_rows[$i];
 
-		if ( !file_can_view_bug_attachments( $p_bug_id, (int)$t_row['user_id'] ) ) {
+		if( !file_can_view_bug_attachments( $p_bug_id, (int)$t_row['user_id'] ) ) {
 			continue;
 		}
 
@@ -344,11 +344,11 @@ function file_get_visible_attachments( $p_bug_id ) {
 		$t_ext = strtolower( pathinfo( $t_attachment['display_name'], PATHINFO_EXTENSION ) );
 		$t_attachment['alt'] = $t_ext;
 
-		if ( $t_attachment['exists'] && $t_attachment['can_download'] && $t_filesize != 0 && $t_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) {
-			if ( in_array( $t_ext, $t_preview_text_ext, true ) ) {
+		if( $t_attachment['exists'] && $t_attachment['can_download'] && $t_filesize != 0 && $t_filesize <= config_get( 'preview_attachments_inline_max_size' ) ) {
+			if( in_array( $t_ext, $t_preview_text_ext, true ) ) {
 				$t_attachment['preview'] = true;
 				$t_attachment['type'] = 'text';
-			} else if ( in_array( $t_ext, $t_preview_image_ext, true ) ) {
+			} else if( in_array( $t_ext, $t_preview_image_ext, true ) ) {
 				$t_attachment['preview'] = true;
 				$t_attachment['type'] = 'image';
 			}
@@ -380,7 +380,7 @@ function file_delete_attachments( $p_bug_id ) {
 		return true;
 	}
 
-	if ( DISK == $t_method ) {
+	if( DISK == $t_method ) {
 
 		for( $i = 0;$i < $file_count;$i++ ) {
 			$row = db_fetch_array( $t_result );
@@ -408,7 +408,7 @@ function file_delete_project_files( $p_project_id ) {
 	$t_method = config_get( 'file_upload_method' );
 
 	# Delete the file physically (if stored via DISK)
-	if ( DISK == $t_method ) {
+	if( DISK == $t_method ) {
 		# Delete files from disk
 		$query = "SELECT diskfile, filename
 					FROM $t_project_file_table
@@ -474,16 +474,16 @@ function file_delete( $p_file_id, $p_table = 'bug' ) {
 	$t_filename = file_get_field( $p_file_id, 'filename', $p_table );
 	$t_diskfile = file_get_field( $p_file_id, 'diskfile', $p_table );
 
-	if ( $p_table == 'bug' ) {
+	if( $p_table == 'bug' ) {
 		$t_bug_id = file_get_field( $p_file_id, 'bug_id', $p_table );
 		$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
 	} else {
 		$t_project_id = file_get_field( $p_file_id, 'project_id', $p_table );
 	}
 
-	if ( DISK == $t_upload_method ) {
+	if( DISK == $t_upload_method ) {
 		$t_local_disk_file = file_normalize_attachment_path( $t_diskfile, $t_project_id );
-		if ( file_exists( $t_local_disk_file ) ) {
+		if( file_exists( $t_local_disk_file ) ) {
 			file_delete_local( $t_local_disk_file );
 		}
 	}
@@ -762,7 +762,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 
 	if( 'bug' == $p_table ) {
 		# update the last_updated date
-		if ( !$p_skip_bug_update ) {
+		if( !$p_skip_bug_update ) {
 			bug_update_date( $p_bug_id );
 		}
 
@@ -925,16 +925,16 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 
 	# If finfo is available (always true for PHP >= 5.3.0) we can use it to determine the MIME type of files
 	$finfo_available = false;
-	if ( class_exists( 'finfo' ) ) {
+	if( class_exists( 'finfo' ) ) {
 		$t_info_file = config_get( 'fileinfo_magic_db_file' );
 
-		if ( is_blank( $t_info_file ) ) {
+		if( is_blank( $t_info_file ) ) {
 			$finfo = new finfo( FILEINFO_MIME );
 		} else {
 			$finfo = new finfo( FILEINFO_MIME, $t_info_file );
 		}
 
-		if ( $finfo ) {
+		if( $finfo ) {
 			$finfo_available = true;
 		}
 	}
@@ -945,11 +945,11 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 		case DISK:
 			$t_local_disk_file = file_normalize_attachment_path( $row['diskfile'], $t_project_id );
 
-			if ( file_exists( $t_local_disk_file ) ) {
-				if ( $finfo_available ) {
+			if( file_exists( $t_local_disk_file ) ) {
+				if( $finfo_available ) {
 					$t_file_info_type = $finfo->file( $t_local_disk_file );
 
-					if ( $t_file_info_type !== false ) {
+					if( $t_file_info_type !== false ) {
 						$t_content_type = $t_file_info_type;
 					}
 				}
@@ -958,10 +958,10 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 			return false;
 			break;
 		case DATABASE:
-			if ( $finfo_available ) {
+			if( $finfo_available ) {
 				$t_file_info_type = $finfo->buffer( $row['content'] );
 
-				if ( $t_file_info_type !== false ) {
+				if( $t_file_info_type !== false ) {
 					$t_content_type = $t_file_info_type;
 				}
 			}
@@ -983,30 +983,30 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
  */
 function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 	$t_project_id_from = bug_get_field( $p_bug_id, 'project_id' );
-	if ( $t_project_id_from == $p_project_id_to ) {
+	if( $t_project_id_from == $p_project_id_to ) {
 		return;
 	}
 
 	$t_method = config_get( 'file_upload_method' );
-	if ( $t_method != DISK ) {
+	if( $t_method != DISK ) {
 		return;
 	}
 
-	if ( !file_bug_has_attachments( $p_bug_id ) ) {
+	if( !file_bug_has_attachments( $p_bug_id ) ) {
 		return;
 	}
 
 	$t_path_from = project_get_field( $t_project_id_from, 'file_path' );
-	if ( is_blank( $t_path_from ) ) {
+	if( is_blank( $t_path_from ) ) {
 		$t_path_from = config_get( 'absolute_path_default_upload_folder', null, null, $t_project_id_from );
 	}
 	file_ensure_valid_upload_path( $t_path_from );
 	$t_path_to = project_get_field( $p_project_id_to, 'file_path' );
-	if ( is_blank( $t_path_to ) ) {
+	if( is_blank( $t_path_to ) ) {
 		$t_path_to = config_get( 'absolute_path_default_upload_folder', null, null, $p_project_id_to );
 	}
 	file_ensure_valid_upload_path( $t_path_to );
-	if ( $t_path_from == $t_path_to ) {
+	if( $t_path_from == $t_path_to ) {
 		return;
 	}
 
@@ -1027,10 +1027,10 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 		$t_disk_file_name_from = file_path_combine( $t_path_from, $t_basename );
 		$t_disk_file_name_to = file_path_combine( $t_path_to, $t_basename );
 
-		if ( !file_exists( $t_disk_file_name_to ) ) {
+		if( !file_exists( $t_disk_file_name_to ) ) {
 			chmod( $t_disk_file_name_from, 0775 );
-			if ( !rename( $t_disk_file_name_from, $t_disk_file_name_to ) ) {
-				if ( !copy( $t_disk_file_name_from, $t_disk_file_name_to ) ) {
+			if( !rename( $t_disk_file_name_from, $t_disk_file_name_to ) ) {
+				if( !copy( $t_disk_file_name_from, $t_disk_file_name_to ) ) {
 					trigger_error( ERROR_FILE_MOVE_FAILED, ERROR );
 				}
 				file_delete_local( $t_disk_file_name_from );
@@ -1112,7 +1112,7 @@ function file_get_content_type_override( $p_filename ) {
 
 	$t_extension = pathinfo( $p_filename, PATHINFO_EXTENSION );
 
-	if ( isset ( $g_file_download_content_type_overrides[$t_extension] ) ) {
+	if( isset ( $g_file_download_content_type_overrides[$t_extension] ) ) {
 		return $g_file_download_content_type_overrides[$t_extension];
 	}
 

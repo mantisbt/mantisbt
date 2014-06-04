@@ -58,23 +58,23 @@ $f_project_id = gpc_get_int( 'project_id', ALL_PROJECTS );
 news_ensure_enabled();
 
 # make sure RSS syndication is enabled.
-if ( OFF == config_get( 'rss_enabled' ) ) {
+if( OFF == config_get( 'rss_enabled' ) ) {
 	access_denied();
 }
 
 # authenticate the user
-if ( $f_username !== null ) {
-	if ( !rss_login( $f_username, $f_key ) ) {
+if( $f_username !== null ) {
+	if( !rss_login( $f_username, $f_key ) ) {
 		access_denied();
 	}
 } else {
-	if ( OFF == config_get( 'allow_anonymous_login' ) ) {
+	if( OFF == config_get( 'allow_anonymous_login' ) ) {
 		access_denied();
 	}
 }
 
 # Make sure that the current user has access to the selected project (if not ALL PROJECTS).
-if ( $f_project_id != ALL_PROJECTS ) {
+if( $f_project_id != ALL_PROJECTS ) {
 	access_ensure_project_level( VIEWER, $f_project_id );
 }
 
@@ -84,7 +84,7 @@ $encoding = 'utf-8';
 $about = config_get( 'path' );
 $title = string_rss_links( config_get( 'window_title' ) . ' - ' . lang_get( 'news' ) );
 
-if ( $f_username !== null ) {
+if( $f_username !== null ) {
 	$title .= " - ($f_username)";
 }
 
@@ -143,7 +143,7 @@ for ( $i = 0; $i < $t_news_count; $i++ ) {
 
 	# skip news item if private, or
 	# belongs to a private project (will only happen
-	if ( VS_PRIVATE == $v_view_state ) {
+	if( VS_PRIVATE == $v_view_state ) {
 		continue;
 	}
 
@@ -162,12 +162,12 @@ for ( $i = 0; $i < $t_news_count; $i++ ) {
 
 	# author of item
 	$author = '';
-	if ( access_has_global_level( config_get( 'show_user_email_threshold' ) ) ) {
+	if( access_has_global_level( config_get( 'show_user_email_threshold' ) ) ) {
 		$t_author_name = string_rss_links( user_get_name( $v_poster_id ) );
 		$t_author_email = user_get_field( $v_poster_id, 'email' );
 
-		if ( !is_blank( $t_author_email ) ) {
-			if ( !is_blank( $t_author_name ) ) {
+		if( !is_blank( $t_author_email ) ) {
+			if( !is_blank( $t_author_name ) ) {
 				$author = $t_author_name . ' &lt;' . $t_author_email . '&gt;';
 			} else {
 				$author = $t_author_email;

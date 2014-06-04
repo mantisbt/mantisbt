@@ -55,10 +55,10 @@ $f_copy_from		= gpc_get_bool( 'copy_from' );
 $f_copy_to			= gpc_get_bool( 'copy_to' );
 $f_manage_page		= gpc_get_bool( 'manage_page' );
 
-if ( $f_copy_from ) {
+if( $f_copy_from ) {
 	$t_src_project_id = $f_other_project_id;
 	$t_dst_project_id = $f_project_id;
-} else if ( $f_copy_to ) {
+} else if( $f_copy_to ) {
 	$t_src_project_id = $f_project_id;
 	$t_dst_project_id = $f_other_project_id;
 } else {
@@ -66,22 +66,22 @@ if ( $f_copy_from ) {
 }
 
 # only admins can set global defaults.for ALL_PROJECT
-if ( $f_manage_page && $t_dst_project_id == ALL_PROJECTS && !current_user_is_administrator() ) {
+if( $f_manage_page && $t_dst_project_id == ALL_PROJECTS && !current_user_is_administrator() ) {
 	access_denied();
 }
 
 # only MANAGERS can set global defaults.for a project
-if ( $f_manage_page && $t_dst_project_id != ALL_PROJECTS ) {
+if( $f_manage_page && $t_dst_project_id != ALL_PROJECTS ) {
 	access_ensure_project_level( MANAGER, $t_dst_project_id );
 }
 
 # user should only be able to set columns for a project that is accessible.
-if ( $t_dst_project_id != ALL_PROJECTS ) {
+if( $t_dst_project_id != ALL_PROJECTS ) {
 	access_ensure_project_level( VIEWER, $t_dst_project_id );
 }
 
 # Calculate the user id to set the configuration for.
-if ( $f_manage_page ) {
+if( $f_manage_page ) {
 	$t_user_id = NO_USER;
 } else {
 	$t_user_id = auth_get_current_user_id();

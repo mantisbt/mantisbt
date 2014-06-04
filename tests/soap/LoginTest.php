@@ -69,7 +69,7 @@ class LoginTest extends SoapBase {
 	}
 
 	/**
-	 * Tests issue_get fails with an invalid login 
+	 * Tests issue_get fails with an invalid login
 	 */
 	public function testGetIssueGetLoginFailed() {
 		try {
@@ -81,7 +81,7 @@ class LoginTest extends SoapBase {
 	}
 
 	/**
-	 * Tests project_get_users fails with an invalid login 
+	 * Tests project_get_users fails with an invalid login
 	 */
 	public function testProjectGetUsersLoginFailed() {
 		try {
@@ -93,7 +93,7 @@ class LoginTest extends SoapBase {
 	}
 
 	/**
-	 * Tests enum_status fails with an invalid login 
+	 * Tests enum_status fails with an invalid login
 	 */
 	public function testGetEnumStatusLoginFailed() {
 		try {
@@ -105,7 +105,7 @@ class LoginTest extends SoapBase {
 	}
 
 	/**
-	 * Tests project_get_issues fails with an invalid login 
+	 * Tests project_get_issues fails with an invalid login
 	 */
 	public function testProjectGetIssuesLoginFailed() {
 		try {
@@ -117,7 +117,7 @@ class LoginTest extends SoapBase {
 	}
 
 	/**
-	 * Tests filter_get_issues fails with an invalid login 
+	 * Tests filter_get_issues fails with an invalid login
 	 */
 	public function testFilterGetIssuesLoginFailed() {
 		try {
