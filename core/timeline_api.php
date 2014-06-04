@@ -233,13 +233,25 @@ function timeline_events( $p_start_time, $p_end_time ) {
 				continue;
 			}
 
+			$t_event = null;
+
 			if ( $t_history_event['type'] == NEW_BUG ) {
 				$t_event = new IssueCreatedTimelineEvent();
 				$t_event->issue_id = $t_issue_id;
 			} else if ( $t_history_event['type'] == BUGNOTE_ADDED ) {
+				$t_bugnote_id = $t_history_event['old_value'];
+
+				if ( !bugnote_exists( $t_bugnote_id ) ) {
+					continue;
+				}
+
+				if ( !access_has_bugnote_level( VIEWER, $t_bugnote_id ) ) {
+					continue;
+				}
+
 				$t_event = new IssueNoteCreatedTimelineEvent();
 				$t_event->issue_id = $t_issue_id;
-				$t_event->issue_note_id = $t_history_event['old_value'];
+				$t_event->issue_note_id = $t_bugnote_id;
 			} else if ( $t_history_event['type'] == BUG_MONITOR ) {
 				# Skip monitors added for others due to reminders, only add monitor events where added
 				# user is the same as the logged in user.
@@ -271,16 +283,13 @@ function timeline_events( $p_start_time, $p_end_time ) {
 						$t_event->new_status = $t_history_event['new_value'];
 						break;
 					case 'handler_id':
-						$t_event = new IssueAssignedTimelineEvent();
-						$t_event->issue_id = $t_issue_id;
-						$t_event->handler_id = $t_history_event['new_value'];
-						break;
-					default:
-						$t_event = null;
+						if ( access_has_bug_level( config_get( 'view_handler_threshold' ), $t_issue_id ) ) {
+							$t_event = new IssueAssignedTimelineEvent();
+							$t_event->issue_id = $t_issue_id;
+							$t_event->handler_id = $t_history_event['new_value'];
+						}
 						break;
 				}
-			} else {
-				$t_event = null;
 			}
 
 			if ( $t_event != null ) {
