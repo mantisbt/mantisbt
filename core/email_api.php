@@ -117,6 +117,7 @@ function email_is_valid( $p_email ) {
 		ON == config_get( 'use_ldap_email' ) ||
 		( is_blank( $p_email ) && ON == config_get( 'allow_blank_email' ) )
 	) {
+		log_event( LOG_EMAIL, "Email Validation: Skipped for '$p_email' (Is Email validation turned OFF? LDAP Email ON or blank email?)" );
 		return true;
 	}
 
@@ -124,6 +125,7 @@ function email_is_valid( $p_email ) {
 	$t_email = filter_var( $p_email, FILTER_SANITIZE_EMAIL );
 	if( $t_email === false || $t_email != $p_email ) {
 		# either filter_var returned an error or email address contained invalid characters so return false
+		log_event( LOG_EMAIL, "Email Validation: Failed for '$p_email' (Does address contain invalid characters?)" );
 		return false;
 	}
 
@@ -132,11 +134,14 @@ function email_is_valid( $p_email ) {
 		$t_parts = explode( '@', $t_email );
 		$t_domain = end( $t_parts );
 
+		log_event( LOG_EMAIL, "Email Validation: Signalling Validation Plugins for '$p_email'" );
 		$t_result = event_signal( 'EVENT_VALIDATE_EMAIL_ADDRESS', array( $t_email, $t_domain ) );
 
 		if( $t_result === true ) {
+			log_event( LOG_EMAIL, "Email Validation: Passed for '$p_email'" );
 			return true;
 		} elseif( $t_result === false ) {
+			log_event( LOG_EMAIL, "Email Validation: Failed for '$p_email' (Plugin Validation failed)" );
 			return false;
 		}
 
@@ -145,6 +150,7 @@ function email_is_valid( $p_email ) {
 		if( !empty( $t_blocked_email_domains ) ) {
 			foreach( $t_blocked_email_domains as $t_email_domain ) {
 				if( wildcard_match( $t_email_domain, $t_domain ) ) {
+					log_event( LOG_EMAIL, "Email Validation: Failed for '$p_email' (Domain is in blocked domain list)" );
 					return false; # email domain is blocked
 				}
 			}
@@ -155,6 +161,7 @@ function email_is_valid( $p_email ) {
 		if( !empty( $t_limit_email_domains ) ) {
 			foreach( $t_limit_email_domains as $t_email_domain ) {
 				if( wildcard_match( $t_email_domain, $t_domain ) ) {
+					log_event( LOG_EMAIL, "Email Validation: Passed for '$p_email' (Domain is in allowed domain list)" );
 					return true; # no need to check mx record details (below) if we've explicity allowed the domain
 				}
 			}
@@ -166,21 +173,26 @@ function email_is_valid( $p_email ) {
 
 			# Check for valid mx records
 			if( getmxrr( $t_domain, $t_mx ) ) {
+				log_event( LOG_EMAIL, "Email Validation: Passed for '$p_email' (MX Record Exists)" );
 				return true;
 			} else {
 				$t_host = $t_domain . '.';
 
 				# for no mx record... try dns check
 				if( checkdnsrr( $t_host, 'ANY' ) ) {
+					log_event( LOG_EMAIL, "Email Validation: Passed for '$p_email' (ANY Record Exists)" );
 					return true;
 				}
+				log_event( LOG_EMAIL, "Email Validation: Failed for '$p_email' (DNS check failed)" );
 			}
 		} else {
 			# Email format was valid but we did not check for valid mx records
+			log_event( LOG_EMAIL, "Email Validation: Passed for '$p_email' (DNS checks skipped)" );
 			return true;
 		}
 	}
 
+	log_event( LOG_EMAIL, "Email Validation: Failed for '$p_email' (Invalid Email Address)" );
 	# Everything failed.  The email is invalid
 	return false;
 }
