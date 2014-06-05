@@ -541,7 +541,7 @@ $g_allow_blank_email = OFF;
 $g_limit_email_domains = array();
 
 /**
- * Disallow users to user email addresses in the given domain(s) for accounts within Mantis
+ * Disallow users to use email addresses in the given domain(s) for accounts within Mantis
  * For example:
  * $g_blocked_email_domains		= array( 'localhost', 'users.sourceforge.net', 'sourceforge.net' );
  * @global array $g_blocked_email_domains
