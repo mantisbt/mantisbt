@@ -533,7 +533,10 @@ $g_check_mx_record = OFF;
 $g_allow_blank_email = OFF;
 
 /**
- * Only allow and send email to addresses in the given domain(s)
+ * Only allow and send email to addresses in the given domain(s).
+ * The domain may include wildcards to allow more complex matching as follows:
+ * i) a*@sourceforge.net would allow any sourceforge.net email address starting with the letter a
+ * ii) ???@sourceforge.net would allow any 3 letter sourceforge.net email address
  * For example:
  * $g_limit_email_domains		= array( 'users.sourceforge.net', 'sourceforge.net' );
  * @global array $g_limit_email_domains
@@ -542,6 +545,9 @@ $g_limit_email_domains = array();
 
 /**
  * Disallow users to use email addresses in the given domain(s) for accounts within Mantis
+ * The domain may include wildcards to allow more complex matching as follows:
+ * i) a*@sourceforge.net would allow any sourceforge.net email address starting with the letter a
+ * ii) ???@sourceforge.net would allow any 3 letter sourceforge.net email address
  * For example:
  * $g_blocked_email_domains		= array( 'localhost', 'users.sourceforge.net', 'sourceforge.net' );
  * @global array $g_blocked_email_domains
