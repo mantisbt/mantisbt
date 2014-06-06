@@ -38,6 +38,18 @@ class IssueNoteCreatedTimelineEvent extends TimelineEvent {
 		$this->issue_note_id = $p_issue_note_id;
 	}
 
+	public function skip() {
+		if ( !bugnote_exists( $this->issue_note_id ) ) {
+			return true;
+		}
+
+		if ( !access_has_bugnote_level( VIEWER, $this->issue_note_id ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
 	public function html() {
 		$t_html = $this->html_start();
 		$t_html .= '<div class="action">' . sprintf( lang_get( 'timeline_issue_note_created' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) ) . '</div>';

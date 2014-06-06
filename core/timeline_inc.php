@@ -22,7 +22,7 @@ $f_all = gpc_get_int( 'all', 0 );
 
 $t_end_time = time() - ( $f_days * 24 * 60 * 60 );
 $t_start_time = $t_end_time - ( 7 * 24 * 60 * 60 );
-$t_events = timeline_events( $t_start_time, $t_end_time, $f_all == 0 ? 50 : 0 );
+$t_events = timeline_events( $t_start_time, $t_end_time );
 
 echo '<div class="timeline">';
 
@@ -43,6 +43,7 @@ if ( $t_next_days != $f_days ) {
 
 echo '<div class="date-range">' . date( $t_short_date_format, $t_start_time ) . ' .. ' . date( $t_short_date_format, $t_end_time ) . $t_prev_link . $t_next_link . '</div>';
 $t_events = timeline_sort_events( $t_events );
+$t_events = timeline_filter_events( $t_events, $f_all == 0 ? 50 : 0 );
 
 if ( count( $t_events ) > 0 ) {
 	timeline_print_events( $t_events );

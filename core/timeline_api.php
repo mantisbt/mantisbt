@@ -62,7 +62,7 @@ function timeline_get_affected_issues( $p_start_time, $p_end_time ) {
 	return $t_issue_ids;
 }
 
-function timeline_events( $p_start_time, $p_end_time, $p_max_count = 0 ) {
+function timeline_events( $p_start_time, $p_end_time ) {
 	$t_issue_ids = timeline_get_affected_issues( $p_start_time, $p_end_time );
 
 	$t_timeline_events = array();
@@ -85,15 +85,6 @@ function timeline_events( $p_start_time, $p_end_time, $p_max_count = 0 ) {
 				$t_event = new IssueCreatedTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id );
 			} else if ( $t_history_event['type'] == BUGNOTE_ADDED ) {
 				$t_bugnote_id = $t_history_event['old_value'];
-
-				if ( !bugnote_exists( $t_bugnote_id ) ) {
-					continue;
-				}
-
-				if ( !access_has_bugnote_level( VIEWER, $t_bugnote_id ) ) {
-					continue;
-				}
-
 				$t_event = new IssueNoteCreatedTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, $t_bugnote_id );
 			} else if ( $t_history_event['type'] == BUG_MONITOR ) {
 				# Skip monitors added for others due to reminders, only add monitor events where added
@@ -113,19 +104,13 @@ function timeline_events( $p_start_time, $p_end_time, $p_max_count = 0 ) {
 						$t_event = new IssueStatusChangeTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, $t_history_event['old_value'], $t_history_event['new_value'] );
 						break;
 					case 'handler_id':
-						if ( access_has_bug_level( config_get( 'view_handler_threshold' ), $t_issue_id ) ) {
-							$t_event = new IssueAssignedTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, $t_history_event['new_value'] );
-						}
+						$t_event = new IssueAssignedTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, $t_history_event['new_value'] );
 						break;
 				}
 			}
 
 			if ( $t_event != null ) {
 				$t_timeline_events[] = $t_event;
-
-				if ( $p_max_count > 0 && count( $t_timeline_events ) >= $p_max_count ) {
-					return $t_timeline_events;
-				}
 			}
 		}
 	}
@@ -151,6 +136,24 @@ function timeline_sort_events( $p_events ) {
 	}
 
 	return $p_events;
+}
+
+function timeline_filter_events( $p_events, $p_max_count ) {
+	$t_events = array();
+
+	foreach ( $p_events as $t_event ) {
+		if ( $t_event->skip() ) {
+			continue;
+		}
+
+		$t_events[] = $t_event;
+
+		if ( $p_max_count > 0 && count( $t_events ) >= $p_max_count ) {
+			break;
+		}
+	}
+
+	return $t_events;
 }
 
 function timeline_print_events( $p_events ) {

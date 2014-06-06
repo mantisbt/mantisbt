@@ -38,6 +38,14 @@ class IssueAssignedTimelineEvent extends TimelineEvent {
 		$this->handler_id = $p_handler_id;
 	}
 
+	function skip() {
+		if ( !access_has_bug_level( config_get( 'view_handler_threshold' ), $this->issue_id ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
 	public function html() {
 		if ( $this->user_id == $this->handler_id ) {
 			$t_string = sprintf( lang_get( 'timeline_issue_assigned_to_self' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );

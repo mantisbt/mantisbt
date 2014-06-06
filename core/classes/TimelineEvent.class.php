@@ -38,6 +38,10 @@ class TimelineEvent {
 		$this->tie_breaker = $p_tie_breaker;
 	}
 
+	public function skip() {
+		return false;
+	}
+
 	public function compare( $p_other ) {
 		if ( $this->timestamp < $p_other->timestamp ) {
 			return -1;
