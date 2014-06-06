@@ -28,8 +28,15 @@
  * @subpackage classes
  */
 class IssueAssignedTimelineEvent extends TimelineEvent {
-	public $issue_id;
-	public $handler_id;
+	private $issue_id;
+	private $handler_id;
+
+	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_handler_id ) {
+		parent::__construct( $p_timestamp, $p_user_id, $p_issue_id );
+
+		$this->issue_id = $p_issue_id;
+		$this->handler_id = $p_handler_id;
+	}
 
 	public function html() {
 		if ( $this->user_id == $this->handler_id ) {

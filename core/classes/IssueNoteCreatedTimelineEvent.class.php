@@ -28,8 +28,15 @@
  * @subpackage classes
  */
 class IssueNoteCreatedTimelineEvent extends TimelineEvent {
-	public $issue_id;
-	public $issue_note_id;
+	private $issue_id;
+	private $issue_note_id;
+
+	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_issue_note_id ) {
+		parent::__construct( $p_timestamp, $p_user_id, $p_issue_id );
+
+		$this->issue_id = $p_issue_id;
+		$this->issue_note_id = $p_issue_note_id;
+	}
 
 	public function html() {
 		$t_html = $this->html_start();

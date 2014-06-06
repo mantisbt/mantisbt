@@ -28,9 +28,17 @@
  * @subpackage classes
  */
 class IssueTagTimelineEvent extends TimelineEvent {
-	public $issue_id;
-	public $tag_name;
-	public $tag;
+	private $issue_id;
+	private $tag_name;
+	private $tag;
+
+	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_tag_name, $p_tag ) {
+		parent::__construct( $p_timestamp, $p_user_id, $p_issue_id );
+
+		$this->issue_id = $p_issue_id;
+		$this->tag_name = $p_tag_name;
+		$this->tag = $p_tag;
+	}
 
 	public function html() {
 		$t_string = $this->tag ? lang_get( 'timeline_issue_tagged' ) : lang_get( 'timeline_issue_tagged' );

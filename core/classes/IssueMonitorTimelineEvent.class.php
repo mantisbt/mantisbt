@@ -28,8 +28,15 @@
  * @subpackage classes
  */
 class IssueMonitorTimelineEvent extends TimelineEvent {
-	public $issue_id;
-	public $monitor;
+	private $issue_id;
+	private $monitor;
+
+	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_monitor ) {
+		parent::__construct( $p_timestamp, $p_user_id, $p_issue_id );
+
+		$this->issue_id = $p_issue_id;
+		$this->monitor = $p_monitor;
+	}
 
 	public function html() {
 		$t_string = $this->monitor ? lang_get( 'timeline_issue_monitor' ) : lang_get( 'timeline_issue_unmonitor' );

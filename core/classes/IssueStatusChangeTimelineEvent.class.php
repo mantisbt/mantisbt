@@ -28,9 +28,17 @@
  * @subpackage classes
  */
 class IssueStatusChangeTimelineEvent extends TimelineEvent {
-	public $issue_id;
-	public $old_status;
-	public $new_status;
+	private $issue_id;
+	private $old_status;
+	private $new_status;
+
+	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_old_status, $p_new_status ) {
+		parent::__construct( $p_timestamp, $p_user_id, $p_issue_id );
+
+		$this->issue_id = $p_issue_id;
+		$this->old_status = $p_old_status;
+		$this->new_status = $p_new_status;
+	}
 
 	public function html() {
 		$t_resolved = config_get( 'bug_resolved_status_threshold' );

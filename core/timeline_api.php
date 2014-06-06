@@ -78,10 +78,11 @@ function timeline_events( $p_start_time, $p_end_time, $p_max_count = 0 ) {
 			}
 
 			$t_event = null;
+			$t_user_id = $t_history_event['userid'];
+			$t_timestamp = $t_history_event['date'];
 
 			if ( $t_history_event['type'] == NEW_BUG ) {
-				$t_event = new IssueCreatedTimelineEvent();
-				$t_event->issue_id = $t_issue_id;
+				$t_event = new IssueCreatedTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id );
 			} else if ( $t_history_event['type'] == BUGNOTE_ADDED ) {
 				$t_bugnote_id = $t_history_event['old_value'];
 
@@ -93,52 +94,33 @@ function timeline_events( $p_start_time, $p_end_time, $p_max_count = 0 ) {
 					continue;
 				}
 
-				$t_event = new IssueNoteCreatedTimelineEvent();
-				$t_event->issue_id = $t_issue_id;
-				$t_event->issue_note_id = $t_bugnote_id;
+				$t_event = new IssueNoteCreatedTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, $t_bugnote_id );
 			} else if ( $t_history_event['type'] == BUG_MONITOR ) {
 				# Skip monitors added for others due to reminders, only add monitor events where added
 				# user is the same as the logged in user.
 				if ( (int)$t_history_event['old_value'] == (int)$t_history_event['userid'] ) {
-					$t_event = new IssueMonitorTimelineEvent();
-					$t_event->issue_id = $t_issue_id;
-					$t_event->monitor = true;
+					$t_event = new IssueMonitorTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, true );
 				}
 			} else if ( $t_history_event['type'] == BUG_UNMONITOR ) {
-				$t_event = new IssueMonitorTimelineEvent();
-				$t_event->issue_id = $t_issue_id;
-				$t_event->monitor = false;
+				$t_event = new IssueMonitorTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, false );
 			} else if ( $t_history_event['type'] == TAG_ATTACHED ) {
-				$t_event = new IssueTagTimelineEvent();
-				$t_event->issue_id = $t_issue_id;
-				$t_event->tag_name = $t_history_event['old_value'];
-				$t_event->tag = true;
+				$t_event = new IssueTagTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, $t_history_event['old_value'], true );
 			} else if ( $t_history_event['type'] == TAG_DETACHED ) {
-				$t_event = new IssueTagTimelineEvent();
-				$t_event->issue_id = $t_issue_id;
-				$t_event->tag_name = $t_history_event['old_value'];
-				$t_event->tag = false;
+				$t_event = new IssueTagTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, $t_history_event['old_value'], false );
 			} else if ( $t_history_event['type'] == NORMAL_TYPE ) {
 				switch ( $t_history_event['field'] ) {
 					case 'status':
-						$t_event = new IssueStatusChangeTimelineEvent();
-						$t_event->issue_id = $t_issue_id;
-						$t_event->old_status = $t_history_event['old_value'];
-						$t_event->new_status = $t_history_event['new_value'];
+						$t_event = new IssueStatusChangeTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, $t_history_event['old_value'], $t_history_event['new_value'] );
 						break;
 					case 'handler_id':
 						if ( access_has_bug_level( config_get( 'view_handler_threshold' ), $t_issue_id ) ) {
-							$t_event = new IssueAssignedTimelineEvent();
-							$t_event->issue_id = $t_issue_id;
-							$t_event->handler_id = $t_history_event['new_value'];
+							$t_event = new IssueAssignedTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, $t_history_event['new_value'] );
 						}
 						break;
 				}
 			}
 
 			if ( $t_event != null ) {
-				$t_event->user_id = $t_history_event['userid'];
-				$t_event->timestamp = $t_history_event['date'];
 				$t_timeline_events[] = $t_event;
 
 				if ( $p_max_count > 0 && count( $t_timeline_events ) >= $p_max_count ) {
@@ -159,7 +141,7 @@ function timeline_sort_events( $p_events ) {
 		$t_stable = true;
 
 		for ( $i = 0; $i < $t_count - 1; ++$i ) {
-			if ( $p_events[$i]->timestamp < $p_events[$i + 1]->timestamp ) {
+			if ( $p_events[$i]->compare( $p_events[$i+1] ) < 0 ) {
 				$t_temp = $p_events[$i];
 				$p_events[$i] = $p_events[$i+1];
 				$p_events[$i+1] = $t_temp;

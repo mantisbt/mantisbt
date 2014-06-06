@@ -28,8 +28,35 @@
  * @subpackage classes
  */
 class TimelineEvent {
-	public $timestamp;
-	public $user_id;
+	protected $timestamp;
+	protected $user_id;
+	protected $tie_breaker;
+
+	public function __construct( $p_timestamp, $p_user_id, $p_tie_breaker ) {
+		$this->timestamp = $p_timestamp;
+		$this->user_id = $p_user_id;
+		$this->tie_breaker = $p_tie_breaker;
+	}
+
+	public function compare( $p_other ) {
+		if ( $this->timestamp < $p_other->timestamp ) {
+			return -1;
+		}
+
+		if ( $this->timestamp > $p_other->timestamp ) {
+			return 1;
+		}
+
+		if ( $this->tie_breaker < $p_other->tie_breaker ) {
+			return -1;
+		}
+
+		if ( $this->tie_breaker > $p_other->tie_breaker ) {
+			return 1;
+		}
+
+		return 0;
+	}
 
 	public function html() {
 		echo $timestamp;
