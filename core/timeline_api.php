@@ -62,7 +62,7 @@ function timeline_get_affected_issues( $p_start_time, $p_end_time ) {
 	return $t_issue_ids;
 }
 
-function timeline_events( $p_start_time, $p_end_time ) {
+function timeline_events( $p_start_time, $p_end_time, $p_max_count = 0 ) {
 	$t_issue_ids = timeline_get_affected_issues( $p_start_time, $p_end_time );
 
 	$t_timeline_events = array();
@@ -140,6 +140,10 @@ function timeline_events( $p_start_time, $p_end_time ) {
 				$t_event->user_id = $t_history_event['userid'];
 				$t_event->timestamp = $t_history_event['date'];
 				$t_timeline_events[] = $t_event;
+
+				if ( $p_max_count > 0 && count( $t_timeline_events ) >= $p_max_count ) {
+					return $t_timeline_events;
+				}
 			}
 		}
 	}

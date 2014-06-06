@@ -750,7 +750,7 @@ div.timeline div.heading { font-size: x-large; }
 div.timeline div.date_range { font-size: large; margin-bottom: 200px; }
 
 /* timeline entry styles */
-div.timeline div.entry { margin-bottom: -30px; position: relative; }
+div.timeline div.entry { margin-bottom: -30px; position: relative; z-index: -1; }
 div.timeline * span.tag_name { background-color: green; color: white; border-radius: 5px; padding-left: 5px; padding-right: 5px; }
 div.timeline * span.username { font-weight:bold; }
 

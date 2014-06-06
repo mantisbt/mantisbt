@@ -18,10 +18,11 @@ require_once( 'core.php' );
 require_api( 'timeline_api.php');
 
 $f_days = gpc_get_int( 'days', 0 );
+$f_all = gpc_get_int( 'all', 0 );
 
 $t_end_time = time() - ( $f_days * 24 * 60 * 60 );
 $t_start_time = $t_end_time - ( 7 * 24 * 60 * 60 );
-$t_events = timeline_events( $t_start_time, $t_end_time );
+$t_events = timeline_events( $t_start_time, $t_end_time, $f_all == 0 ? 50 : 0 );
 
 echo '<div class="timeline">';
 
@@ -47,6 +48,10 @@ if ( count( $t_events ) > 0 ) {
 	timeline_print_events( $t_events );
 } else {
 	echo '<p>' . lang_get( 'timeline_no_activity' ) . '</p>';
+}
+
+if ( $f_all == 0 ) {
+	echo '<p>' . $t_prev_link = ' [ <a href="my_view_page.php?days=' . $f_days . '&amp;all=1">' . lang_get( 'timeline_more' ) . '</a> ]</p>';
 }
 
 echo '</div>';
