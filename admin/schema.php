@@ -738,6 +738,5 @@ $upgrade[189] = array( 'AlterColumnSQL', array( db_get_table( 'project_hierarchy
 $upgrade[190] = array( 'UpdateFunction', "check_project_hierarchy", array() );
 $upgrade[191] = array( 'CreateIndexSQL', array('idx_project_hierarchy', db_get_table( 'project_hierarchy' ),'child_id,parent_id',array('UNIQUE')));
 $upgrade[192] = array( 'CreateIndexSQL', array('idx_bug_history_date_modified', db_get_table('bug_history'), 'date_modified' ) );
-$upgrade[193] = array( 'CreateIndexSQL', array('idx_user_date_created', db_get_table('user'), 'date_created' ) );
 
 # Release marker: 1.3.0
