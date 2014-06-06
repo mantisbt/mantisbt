@@ -45,14 +45,19 @@ class TimelineEvent {
 	}
 
 	public function html_start() {
-		$t_html = '<div class="entry">';
-
 		$t_avatar = user_get_avatar( $this->user_id, 32 );
+
+		if ( $t_avatar !== false ) {
+			$t_html = '<div class="entry">';
+		} else {
+			$t_html = '<div class="entry-no-avatar">';
+		}
+
 		if ( $t_avatar !== false ) {
 			$t_avatar_url = $t_avatar[0];
 			$t_html .= '<img class="avatar" src="' . $t_avatar_url . '"/>';
 		} else {
-			$t_html .= '<img class="avatar-disabled" />';
+			$t_html .= '<img class="avatar" />';
 		}
 
 		$t_html .= '<div class="timestamp">' .  $this->format_timestamp( $this->timestamp ) . '</div>';
