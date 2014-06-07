@@ -16,7 +16,7 @@
 
 /**
  * Timeline event class for users monitoring issues.
- * @copyright Copyright 20014 MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright 2014 MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  * @package MantisBT
  */
