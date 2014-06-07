@@ -63,7 +63,6 @@ class TimelineEvent {
 	}
 
 	public function html() {
-		echo $timestamp;
 	}
 
 	public function format_timestamp( $p_timestamp ) {
