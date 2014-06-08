@@ -104,6 +104,8 @@ function print_project_header_roadmap( $p_project_name ) {
 	echo '<br /><span class="pagetitle">', string_display( $p_project_name ), ' - ', lang_get( 'roadmap' ), '</span><br />';
 }
 
+$t_issues_found = false;
+
 $t_user_id = auth_get_current_user_id();
 
 $f_project = gpc_get_string( 'project', '' );
@@ -170,8 +172,6 @@ if ( ALL_PROJECTS == $t_project_id ) {
 }
 
 html_page_top( lang_get( 'roadmap' ) );
-
-$t_project_index = 0;
 
 version_cache_array_rows( $t_project_ids );
 category_cache_array_rows_by_project( $t_project_ids );
@@ -350,6 +350,8 @@ foreach( $t_project_ids as $t_project_id ) {
 			$t_issue_set_level = $t_issue_set_levels[$j];
 
 			helper_call_custom_function( 'roadmap_print_issue', array( $t_issue_set_id, $t_issue_set_level ) );
+
+			$t_issues_found = true;
 		}
 
 		if ( $t_issues_planned > 0 ) {
@@ -358,8 +360,10 @@ foreach( $t_project_ids as $t_project_id ) {
 			echo '<br /></tt>';
 		}
 	}
+}
 
-	$t_project_index++;
+if( !$t_issues_found ) {
+	echo '<br />' . lang_get( 'roadmap_empty' ) . '<br />';
 }
 
 html_page_bottom();

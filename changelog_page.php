@@ -108,6 +108,7 @@ function print_project_header_changelog ( $p_project_name ) {
 	echo '<tt>';
 }
 
+$t_issues_found = false;
 $t_user_id = auth_get_current_user_id();
 
 $f_project = gpc_get_string( 'project', '' );
@@ -174,8 +175,6 @@ if ( ALL_PROJECTS == $t_project_id ) {
 }
 
 html_page_top( lang_get( 'changelog' ) );
-
-$t_project_index = 0;
 
 version_cache_array_rows( $t_project_ids );
 category_cache_array_rows_by_project( $t_project_ids );
@@ -335,6 +334,8 @@ foreach( $t_project_ids as $t_project_id ) {
 			$t_issue_set_level = $t_issue_set_levels[$j];
 
 			helper_call_custom_function( 'changelog_print_issue', array( $t_issue_set_id, $t_issue_set_level ) );
+
+			$t_issues_found = true;
 		}
 
 		$t_bug_string = $t_issues_resolved == 1 ? 'bug' : 'bugs';
@@ -344,11 +345,10 @@ foreach( $t_project_ids as $t_project_id ) {
 	if ( $t_project_header_printed ) {
 		echo '</tt>';
 	}
-
-	$t_project_index++;
 }
 
-if ( $t_project_index == 0 ) {
-	echo '<br /><span class="pagetitle">' . lang_get('changelog_empty') . '</span>';
++if( !$t_issues_found ) {
+	echo '<br />' . lang_get('changelog_empty') . '<br />';
 }
+
 html_page_bottom();

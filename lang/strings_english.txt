@@ -1327,11 +1327,12 @@ $s_sponsorship_process_url = '';
 
 # Changelog
 $s_changelog = 'Change Log';
-$s_changelog_empty = 'No Change Log information available';
-
+$s_changelog_empty = 'No Change Log information available.  Issues are included once projects have versions and issues are resolved with "fixed in version" set.';
+ 
 # Roadmap
 $s_roadmap = 'Roadmap';
 $s_resolved_progress = '%1$d of %2$d issue(s) resolved. Progress (%3$d%%).';
+$s_roadmap_empty = 'No Roadmap information available.  Issues are included once projects have versions and issues have "target version" set.';
 
 # Http auth
 $s_http_auth_realm = 'MantisBT Login';
