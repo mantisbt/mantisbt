@@ -52,7 +52,7 @@ require_api( 'utility_api.php' );
 form_security_validate( 'proj_doc_add' );
 
 # Check if project documentation feature is enabled.
-if ( OFF == config_get( 'enable_project_documentation' ) ) {
+if( OFF == config_get( 'enable_project_documentation' ) ) {
 	access_denied();
 }
 
@@ -62,7 +62,7 @@ $f_title = gpc_get_string( 'title' );
 $f_description = gpc_get_string( 'description' );
 $f_file = gpc_get_file( 'file' );
 
-if ( is_blank( $f_title ) ) {
+if( is_blank( $f_title ) ) {
 	error_parameters( lang_get( 'title' ) );
 	trigger_error( ERROR_EMPTY_FIELD, ERROR );
 }

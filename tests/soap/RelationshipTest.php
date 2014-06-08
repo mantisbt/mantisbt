@@ -32,7 +32,7 @@ require_once 'SoapBase.php';
  * @group SOAP
  */
 class RelationshipTest extends SoapBase {
-	
+
 	/**
 	 * Creates two issues and adds a relationship between them
 	 */
@@ -40,39 +40,39 @@ class RelationshipTest extends SoapBase {
 	    $firstIssue = $this->getIssueToAdd( 'RelationshipTest.testCreateIssueAndAddRelation1' );
 
 		$firstIssueId = $this->client->mc_issue_add( $this->userName, $this->password, $firstIssue);
-			
+
 		$this->deleteAfterRun( $firstIssueId );
-		
+
 	    $secondIssue = $this->getIssueToAdd( 'RelationshipTest.testCreateIssueAndAddRelation2' );
 
 		$secondIssueId = $this->client->mc_issue_add( $this->userName, $this->password, $secondIssue);
-			
+
 		$this->deleteAfterRun( $secondIssueId );
-		
+
 		$relationship = array (
 		    'type' => array (
 		        'id' => 0 # BUG_DUPLICATE
 		    ),
 		    'target_id' => $secondIssueId
 		);
-		
+
 		$this->client->mc_issue_relationship_add( $this->userName, $this->password, $firstIssueId, $relationship );
-		
+
 		$retrievedFirstIssue = $this->client->mc_issue_get($this->userName, $this->password, $firstIssueId);
 		$retrievedSecondIssue = $this->client->mc_issue_get($this->userName, $this->password, $secondIssueId);
-		
+
 		$this->assertEquals(1, count ( $retrievedFirstIssue->relationships) );
-		
+
 		$firstRelationship = $retrievedFirstIssue->relationships[0];
 		$this->assertEquals($secondIssueId, $firstRelationship->target_id);
 		$this->assertEquals(0, $firstRelationship->type->id);
-		
+
 		$this->assertEquals(1, count ( $retrievedSecondIssue->relationships) );
 		$secondRelationship = $retrievedSecondIssue->relationships[0];
 		$this->assertEquals($firstIssueId, $secondRelationship->target_id);
 		$this->assertEquals(4, $secondRelationship->type->id); # BUG_HAS_DUPLICATE
 	}
-	
+
 	/**
 	 * Creates two issues, adds and then deletes a relationship between them
 	 */
@@ -80,28 +80,28 @@ class RelationshipTest extends SoapBase {
 	    $firstIssue = $this->getIssueToAdd( 'RelationshipTest.testCreateIssueAndAddRelation1' );
 
 		$firstIssueId = $this->client->mc_issue_add( $this->userName, $this->password, $firstIssue);
-			
+
 		$this->deleteAfterRun( $firstIssueId );
-		
+
 	    $secondIssue = $this->getIssueToAdd( 'RelationshipTest.testCreateIssueAndAddRelation2' );
 
 		$secondIssueId = $this->client->mc_issue_add( $this->userName, $this->password, $secondIssue);
-			
+
 		$this->deleteAfterRun( $secondIssueId );
-		
+
 		$relationship = array (
 		    'type' => array (
 		        'id' => 0 # BUG_DUPLICATE
 		    ),
 		    'target_id' => $secondIssueId
 		);
-		
+
 		$relationshipId = $this->client->mc_issue_relationship_add( $this->userName, $this->password, $firstIssueId, $relationship );
 		$this->client->mc_issue_relationship_delete ( $this->userName, $this->password, $firstIssueId, $relationshipId);
-		
+
 		$retrievedFirstIssue = $this->client->mc_issue_get($this->userName, $this->password, $firstIssueId);
 		$retrievedSecondIssue = $this->client->mc_issue_get($this->userName, $this->password, $secondIssueId);
-		
+
 		$this->assertObjectNotHasAttribute('relationships', $retrievedFirstIssue);
 		$this->assertObjectNotHasAttribute('relationships', $retrievedSecondIssue);
 	}

@@ -62,7 +62,7 @@ function compress_handler_is_enabled() {
 			return false;
 		}
 
-		if ( ini_get( 'zlib.output_compression' ) ) {
+		if( ini_get( 'zlib.output_compression' ) ) {
 			# zlib output compression is already enabled - we can't load the gzip output handler
 			return false;
 		}
@@ -90,7 +90,7 @@ function compress_start_handler() {
 		# Before doing anything else, start output buffering so we don't prevent
 		# headers from being sent if there's a blank line in an included file
 		ob_start( 'compress_handler' );
-	} else if ( ini_get_bool( 'zlib.output_compression' ) == true ) {
+	} else if( ini_get_bool( 'zlib.output_compression' ) == true ) {
 		if( defined( 'COMPRESSION_DISABLED' ) ) {
 			return;
 		}

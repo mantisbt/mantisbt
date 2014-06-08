@@ -31,7 +31,7 @@
  * @uses utility_api.php
  */
 
-if ( !defined( 'PRINT_ALL_BUG_OPTIONS_INC_ALLOW' ) ) {
+if( !defined( 'PRINT_ALL_BUG_OPTIONS_INC_ALLOW' ) ) {
 	return;
 }
 
@@ -89,20 +89,20 @@ function get_field_names()
  */
 function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $p_redirect_url = '' )
 {
-	if ( null === $p_user_id ) {
+	if( null === $p_user_id ) {
 		$p_user_id = auth_get_current_user_id();
 	}
 
 	$c_user_id = db_prepare_int( $p_user_id );
 
 	# protected account check
-	if ( $p_error_if_protected ) {
+	if( $p_error_if_protected ) {
 		user_ensure_unprotected( $p_user_id );
 	}
 
 	$t_user_print_pref_table = db_get_table( 'user_print_pref' );
 
-	if ( is_blank( $p_redirect_url ) ) {
+	if( is_blank( $p_redirect_url ) ) {
 		$p_redirect_url = 'print_all_bug_page.php';
 	}
 
@@ -117,7 +117,7 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 	$t_result = db_query_bound( $t_query, array( $c_user_id ) );
 
 	## OOPS, No entry in the database yet.  Lets make one
-	if ( 0 == db_num_rows( $t_result ) ) {
+	if( 0 == db_num_rows( $t_result ) ) {
 
 		# create a default array, same size than $t_field_name
 		for ($i=0 ; $i<$field_name_count ; $i++) {
@@ -173,7 +173,7 @@ for ($i=0 ; $i <$field_name_count ; $i++) {
 	</th>
 	<td>
 		<input type="checkbox" name="<?php echo 'print_' . $t_field_name_arr[$i]; ?>"
-		<?php if ( isset( $t_prefs[$i] ) && ( $t_prefs[$i]==1 ) ) echo 'checked="checked"' ?> />
+		<?php if( isset( $t_prefs[$i] ) && ( $t_prefs[$i]==1 ) ) echo 'checked="checked"' ?> />
 	</td>
 </tr>
 

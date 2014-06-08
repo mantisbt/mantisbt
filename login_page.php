@@ -75,14 +75,14 @@ if( auth_is_user_authenticated() && !current_user_is_anonymous() ) {
 }
 
 # Check for automatic logon methods where we want the logon to just be handled by login.php
-if ( auth_automatic_logon_bypass_form() ) {
+if( auth_automatic_logon_bypass_form() ) {
 	$t_uri = "login.php";
 
-	if ( ON == config_get( 'allow_anonymous_login' ) ) {
+	if( ON == config_get( 'allow_anonymous_login' ) ) {
 		$t_uri = "login_anon.php";
 	}
 
-	if ( !is_blank( $f_return ) ) {
+	if( !is_blank( $f_return ) ) {
 		$t_uri .= "?return=" . string_url( $f_return );
 	}
 
@@ -94,8 +94,8 @@ if ( auth_automatic_logon_bypass_form() ) {
 # - If no errors, and no cookies set, default to on.
 # - If no errors, but cookie is set, use the cookie value.
 # - If errors, use the value passed in.
-if ( $t_session_validation ) {
-	if ( !$f_error && !$f_cookie_error ) {
+if( $t_session_validation ) {
+	if( !$f_error && !$f_cookie_error ) {
 		$t_default_secure_session = ( is_null( $f_secure_session_cookie ) ? true : $f_secure_session_cookie );
 	} else {
 		$t_default_secure_session = $f_secure_session;
@@ -105,7 +105,7 @@ if ( $t_session_validation ) {
 # Determine whether the username or password field should receive automatic focus.
 $t_username_field_autofocus = 'autofocus';
 $t_password_field_autofocus = '';
-if ( $f_username ) {
+if( $f_username ) {
 	$t_username_field_autofocus = '';
 	$t_password_field_autofocus = 'autofocus';
 }
@@ -124,10 +124,10 @@ if( $f_error || $f_cookie_error ) {
 	# echo lang_get( 'login_page_info' ) . '<br />';
 
 	# Only echo error message if error variable is set
-	if ( $f_error ) {
+	if( $f_error ) {
 		echo '<li>' . lang_get( 'login_error' ) . '</li>';
 	}
-	if ( $f_cookie_error ) {
+	if( $f_cookie_error ) {
 		echo '<li>' . lang_get( 'login_cookies_disabled' ) . '</li>';
 	}
 	echo '</ul>';
@@ -141,24 +141,24 @@ if( $f_error || $f_cookie_error ) {
 		<fieldset>
 			<legend><span><?php echo lang_get( 'login_title' ) ?></span></legend>
 			<?php
-			if ( !is_blank( $f_return ) ) {
+			if( !is_blank( $f_return ) ) {
 				echo '<input type="hidden" name="return" value="', string_html_specialchars( $f_return ), '" />';
 			}
 			# CSRF protection not required here - form does not result in modifications
 			echo '<ul id="login-links">';
 
-			if ( ON == config_get( 'allow_anonymous_login' ) ) {
+			if( ON == config_get( 'allow_anonymous_login' ) ) {
 				echo '<li><a href="login_anon.php?return=' . string_url( $f_return ) . '">' . lang_get( 'login_anonymously' ) . '</a></li>';
 			}
 
-			if ( ( ON == config_get_global( 'allow_signup' ) ) &&
+			if( ( ON == config_get_global( 'allow_signup' ) ) &&
 				( LDAP != config_get_global( 'login_method' ) ) &&
 				( ON == config_get( 'enable_email_notification' ) )
 			) {
 				echo '<li><a href="signup_page.php">', lang_get( 'signup_link' ), '</a></li>';
 			}
 			# lost password feature disabled or reset password via email disabled -> stop here!
-			if ( ( LDAP != config_get_global( 'login_method' ) ) &&
+			if( ( LDAP != config_get_global( 'login_method' ) ) &&
 				( ON == config_get( 'lost_password_feature' ) ) &&
 				( ON == config_get( 'send_reset_password' ) ) &&
 				( ON == config_get( 'enable_email_notification' ) ) ) {
@@ -183,7 +183,7 @@ if( $f_error || $f_cookie_error ) {
 				<span class="label-style"></span>
 			</div>
 			<?php } ?>
-			<?php if ( $t_session_validation ) { ?>
+			<?php if( $t_session_validation ) { ?>
 			<div class="field-container">
 				<label id="secure-session-label" for="secure-session"><span><?php echo lang_get( 'secure_session' ) ?></span></label>
 				<span class="input">
@@ -203,13 +203,13 @@ if( $f_error || $f_cookie_error ) {
 # Do some checks to warn administrators of possible security holes.
 #
 
-if ( config_get_global( 'admin_checks' ) == ON ) {
+if( config_get_global( 'admin_checks' ) == ON ) {
 	$t_warnings = array();
 
 	# Generate a warning if default user administrator/root is valid.
 	$t_admin_user_id = user_get_id_by_name( 'administrator' );
-	if ( $t_admin_user_id !== false ) {
-		if ( user_is_enabled( $t_admin_user_id ) && auth_does_password_match( $t_admin_user_id, 'root' ) ) {
+	if( $t_admin_user_id !== false ) {
+		if( user_is_enabled( $t_admin_user_id ) && auth_does_password_match( $t_admin_user_id, 'root' ) ) {
 			$t_warnings[] = lang_get( 'warning_default_administrator_account_present' );
 		}
 	}
@@ -244,7 +244,7 @@ if ( config_get_global( 'admin_checks' ) == ON ) {
 	# since admin directory and db_upgrade lists are available check for missing db upgrades
 	# if db version is 0, we do not have a valid database.
 	$t_db_version = config_get( 'database_version' , 0 );
-	if ( $t_db_version == 0 ) {
+	if( $t_db_version == 0 ) {
 		$t_warnings[] = lang_get( 'error_database_no_schema_version' );
 	}
 
@@ -254,10 +254,10 @@ if ( config_get_global( 'admin_checks' ) == ON ) {
 	require_once( 'admin' . DIRECTORY_SEPARATOR . 'schema.php' );
 	$t_upgrades_reqd = count( $upgrade ) - 1;
 
-	if ( ( 0 < $t_db_version ) &&
+	if( ( 0 < $t_db_version ) &&
 			( $t_db_version != $t_upgrades_reqd ) ) {
 
-		if ( $t_db_version < $t_upgrades_reqd ) {
+		if( $t_db_version < $t_upgrades_reqd ) {
 			$t_warnings[] = lang_get( 'error_database_version_out_of_date_2' );
 		} else {
 			$t_warnings[] = lang_get( 'error_code_version_out_of_date' );

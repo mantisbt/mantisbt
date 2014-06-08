@@ -52,7 +52,7 @@ auth_ensure_user_authenticated();
 $t_query_arr = filter_db_get_available_queries();
 
 # Special case: if we've deleted our last query, we have nothing to show here.
-if ( count( $t_query_arr ) < 1 ) {
+if( count( $t_query_arr ) < 1 ) {
 	print_header_redirect( 'view_all_bug_page.php' );
 }
 
@@ -70,13 +70,13 @@ $t_column_count = 0;
 $t_max_column_count = 2;
 
 foreach( $t_query_arr as $t_id => $t_name ) {
-	if ( $t_column_count == 0 ) {
+	if( $t_column_count == 0 ) {
 		print '<tr>';
 	}
 
 	print '<td>';
 
-	if ( OFF != $t_rss_enabled ) {
+	if( OFF != $t_rss_enabled ) {
 		# Use the "new" RSS link style.
 		print_rss( rss_get_issues_feed_url( null, null, $t_id ), lang_get( 'rss' ) );
 		echo ' ';
@@ -85,7 +85,7 @@ foreach( $t_query_arr as $t_id => $t_name ) {
 	$t_query_id = db_prepare_int( $t_id );
 	print_link( "view_all_set.php?type=3&source_query_id=$t_query_id", $t_name );
 
-	if ( filter_db_can_delete_filter( $t_id ) ) {
+	if( filter_db_can_delete_filter( $t_id ) ) {
 		echo ' ';
 		print_button( "query_delete_page.php?source_query_id=$t_query_id", lang_get( 'delete_query' ) );
 	}
@@ -93,14 +93,14 @@ foreach( $t_query_arr as $t_id => $t_name ) {
 	print '</td>';
 
 	$t_column_count++;
-	if ( $t_column_count == $t_max_column_count ) {
+	if( $t_column_count == $t_max_column_count ) {
 		print '</tr>';
 		$t_column_count = 0;
 	}
 }
 
 # Tidy up this row
-if ( ( $t_column_count > 0 ) && ( $t_column_count < $t_max_column_count ) ) {
+if( ( $t_column_count > 0 ) && ( $t_column_count < $t_max_column_count ) ) {
 	for ( $i = $t_column_count; $i < $t_max_column_count; $i++ ) {
 		print '<td>&#160;</td>';
 	}

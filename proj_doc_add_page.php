@@ -42,7 +42,7 @@ require_api( 'lang_api.php' );
 require_api( 'utility_api.php' );
 
 # Check if project documentation feature is enabled.
-if ( OFF == config_get( 'enable_project_documentation' ) ||
+if( OFF == config_get( 'enable_project_documentation' ) ||
 	!file_is_uploading_enabled() ||
 	!file_allow_project_upload() ) {
 	access_denied();

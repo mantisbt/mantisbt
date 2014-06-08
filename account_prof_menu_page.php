@@ -50,11 +50,11 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'profile_api.php' );
 
-if ( !config_get( 'enable_profiles' ) ) {
+if( !config_get( 'enable_profiles' ) ) {
 	trigger_error( ERROR_ACCESS_DENIED, ERROR );
 }
 
-if ( isset( $g_global_profiles ) ) {
+if( isset( $g_global_profiles ) ) {
 	$g_global_profiles = true;
 } else {
 	$g_global_profiles = false;
@@ -64,7 +64,7 @@ auth_ensure_user_authenticated();
 
 current_user_ensure_unprotected();
 
-if ( $g_global_profiles ) {
+if( $g_global_profiles ) {
 	access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
 } else {
 	access_ensure_global_level( config_get( 'add_profile_threshold' ) );
@@ -72,11 +72,11 @@ if ( $g_global_profiles ) {
 
 html_page_top( lang_get( 'manage_profiles_link' ) );
 
-if ( $g_global_profiles ) {
+if( $g_global_profiles ) {
 	print_manage_menu( 'manage_prof_menu_page.php' );
 }
 
-if ( $g_global_profiles ) {
+if( $g_global_profiles ) {
 	$t_user_id = ALL_USERS;
 } else {
 	$t_user_id = auth_get_current_user_id();
@@ -92,7 +92,7 @@ if ( $g_global_profiles ) {
 			<input type="hidden" name="action" value="add" />
 			<input type="hidden" name="user_id" value="<?php echo $t_user_id ?>" />
 			<?php
-			if ( !$g_global_profiles ) {
+			if( !$g_global_profiles ) {
 				print_account_menu( 'account_prof_menu_page.php' );
 			}
 			?>
@@ -139,7 +139,7 @@ if ( $g_global_profiles ) {
 				<span class="label-style"></span>
 			</div>
 <?php
-	if ( !$g_global_profiles ) {
+	if( !$g_global_profiles ) {
 ?>
 			<div class="field-container">
 				<label for="action-default"><span><?php echo lang_get( 'make_default' ) ?></span></label>

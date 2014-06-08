@@ -58,12 +58,12 @@ html_page_top();
 $rows = news_get_rows( helper_get_current_project() );
 $t_count = count( $rows );
 
-if ( $t_count > 0 ) { ?>
+if( $t_count > 0 ) { ?>
 	<ul><?php
 	# Loop through results
 	for ( $i=0 ; $i < $t_count ; $i++ ) {
 		extract( $rows[$i], EXTR_PREFIX_ALL, 'v' );
-		if ( VS_PRIVATE == $v_view_state &&
+		if( VS_PRIVATE == $v_view_state &&
 			 ! access_has_project_level( config_get( 'private_news_threshold' ), $v_project_id ) ) 		{
 			continue;
 		}

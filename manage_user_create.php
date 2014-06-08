@@ -71,7 +71,7 @@ $f_enabled         = gpc_get_bool( 'enabled' );
 
 # check for empty username
 $f_username = trim( $f_username );
-if ( is_blank( $f_username ) ) {
+if( is_blank( $f_username ) ) {
 	trigger_error( ERROR_EMPTY_FIELD, ERROR );
 }
 
@@ -83,20 +83,20 @@ $t_realname = string_normalize( $f_realname );
 user_ensure_name_valid( $f_username );
 user_ensure_realname_unique( $f_username, $f_realname );
 
-if ( $f_password != $f_password_verify ) {
+if( $f_password != $f_password_verify ) {
 	trigger_error( ERROR_USER_CREATE_PASSWORD_MISMATCH, ERROR );
 }
 
 email_ensure_not_disposable( $f_email );
 
-if ( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
+if( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 	# Check code will be sent to the user directly via email. Dummy password set to random
 	# Create random password
 	$f_password	= auth_generate_random_password();
 } else {
 	# Password won't to be sent by email. It entered by the admin
 	# Now, if the password is empty, confirm that that is what we wanted
-	if ( is_blank( $f_password ) ) {
+	if( is_blank( $f_password ) ) {
 		helper_ensure_confirmed( lang_get( 'empty_password_sure_msg' ),
 				 lang_get( 'empty_password_button' ) );
 	}
@@ -119,7 +119,7 @@ lang_pop();
 
 form_security_purge( 'manage_user_create' );
 
-if ( $t_cookie === false ) {
+if( $t_cookie === false ) {
 	$t_redirect_url = 'manage_user_page.php';
 } else {
 	# ok, we created the user, get the row again

@@ -91,8 +91,8 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter, $p_project_id );
 
 	# the page number was moved back, so we have exceeded the actual page number, see bug #12991
-	if ( $t_orig_page_number > $p_page_number )
-	    return $t_result;	
+	if( $t_orig_page_number > $p_page_number )
+	    return $t_result;
 
 	foreach( $t_rows as $t_issue_data ) {
 		$t_result[] = mci_issue_data_as_array( $t_issue_data, $t_user_id, $t_lang );
@@ -136,8 +136,8 @@ function mc_filter_get_issue_headers( $p_username, $p_password, $p_project_id, $
 	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter, $p_project_id );
 
 	# the page number was moved back, so we have exceeded the actual page number, see bug #12991
-	if ( $t_orig_page_number > $p_page_number )
-	    return $t_result;	
+	if( $t_orig_page_number > $p_page_number )
+	    return $t_result;
 
 	foreach( $t_rows as $t_issue_data ) {
 		$t_result[] = mci_issue_data_as_header_array($t_issue_data);

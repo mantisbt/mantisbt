@@ -58,7 +58,7 @@ require_api( 'user_api.php' );
 $f_project_id = gpc_get_int( 'project_id', helper_get_current_project() );
 
 # Check if project documentation feature is enabled.
-if ( OFF == config_get( 'enable_project_documentation' ) || !file_is_uploading_enabled() ) {
+if( OFF == config_get( 'enable_project_documentation' ) || !file_is_uploading_enabled() ) {
 	access_denied();
 }
 
@@ -74,7 +74,7 @@ $t_pub = VS_PUBLIC;
 $t_priv = VS_PRIVATE;
 $t_admin = config_get_global( 'admin_site_threshold' );
 
-if ( $f_project_id == ALL_PROJECTS ) {
+if( $f_project_id == ALL_PROJECTS ) {
 	# Select all the projects that the user has access to
 	$t_projects = user_get_accessible_projects( $t_user_id );
 } else {
@@ -85,8 +85,8 @@ if ( $f_project_id == ALL_PROJECTS ) {
 $t_projects[] = ALL_PROJECTS; # add "ALL_PROJECTS to the list of projects to fetch
 
 $t_reqd_access = config_get( 'view_proj_doc_threshold' );
-if ( is_array( $t_reqd_access ) ) {
-	if ( 1 == count( $t_reqd_access ) ) {
+if( is_array( $t_reqd_access ) ) {
+	if( 1 == count( $t_reqd_access ) ) {
 		$t_access_clause = "= " . array_shift( $t_reqd_access ) . " ";
 	} else {
 		$t_access_clause = "IN (" . implode( ',', $t_reqd_access ) . ")";
@@ -166,7 +166,7 @@ while( $row = db_fetch_array( $t_result ) ) {
 		</span>
 		<span class="floatright">
 <?php
-	if ( access_has_project_level( config_get( 'upload_project_file_threshold', null, null, $v_project_id ), $v_project_id ) ) {
+	if( access_has_project_level( config_get( 'upload_project_file_threshold', null, null, $v_project_id ), $v_project_id ) ) {
 		echo '&#160;';
 		print_button( 'proj_doc_edit_page.php?file_id='.$v_id, lang_get( 'edit_link' ) );
 		echo '&#160;';

@@ -36,23 +36,23 @@ $f_summary_graphs_per_row = gpc_get_int( 'summary_graphs_per_row', 2 );
 $f_jpgraph_antialias = gpc_get_int( 'jpgraph_antialias', ON );
 $f_font = gpc_get_string( 'font', '' );
 
-if ( plugin_config_get( 'eczlibrary' ) != $f_library ) {
+if( plugin_config_get( 'eczlibrary' ) != $f_library ) {
 	plugin_config_set( 'eczlibrary', $f_library );
 }
 
-if ( plugin_config_get( 'window_width' ) != $f_window_width ) {
+if( plugin_config_get( 'window_width' ) != $f_window_width ) {
 	plugin_config_set( 'window_width', $f_window_width );
 }
 
-if ( plugin_config_get( 'bar_aspect' ) != $f_bar_aspect ) {
+if( plugin_config_get( 'bar_aspect' ) != $f_bar_aspect ) {
 	plugin_config_set( 'bar_aspect', $f_bar_aspect );
 }
 
-if ( plugin_config_get( 'summary_graphs_per_row' ) != $f_summary_graphs_per_row ) {
+if( plugin_config_get( 'summary_graphs_per_row' ) != $f_summary_graphs_per_row ) {
 	plugin_config_set( 'summary_graphs_per_row', $f_summary_graphs_per_row );
 }
 
-if ( plugin_config_get( 'font' ) != $f_font ) {
+if( plugin_config_get( 'font' ) != $f_font ) {
 	switch ( $f_font ) {
 		case 'arial':
 		case 'verdana':
@@ -70,14 +70,14 @@ if ( plugin_config_get( 'font' ) != $f_font ) {
 	}
 }
 
-if ( current_user_is_administrator() ) {
+if( current_user_is_administrator() ) {
 	$f_jpgraph_path = gpc_get_string( 'jpgraph_path', '' );
-	if ( plugin_config_get( 'jpgraph_path' ) != $f_jpgraph_path ) {
+	if( plugin_config_get( 'jpgraph_path' ) != $f_jpgraph_path ) {
 		plugin_config_set( 'jpgraph_path', $f_jpgraph_path );
 	}
 }
 
-if ( plugin_config_get( 'jpgraph_antialias' ) != $f_jpgraph_antialias ) {
+if( plugin_config_get( 'jpgraph_antialias' ) != $f_jpgraph_antialias ) {
 	plugin_config_set( 'jpgraph_antialias', $f_jpgraph_antialias );
 }
 

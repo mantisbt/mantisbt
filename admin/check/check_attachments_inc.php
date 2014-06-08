@@ -28,7 +28,7 @@
  * @uses utility_api.php
  */
 
-if ( !defined( 'CHECK_ATTACHMENTS_INC_ALLOW' ) ) {
+if( !defined( 'CHECK_ATTACHMENTS_INC_ALLOW' ) ) {
 	return;
 }
 

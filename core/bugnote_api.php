@@ -255,12 +255,12 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	$t_bugnote_id = db_insert_id( $t_bugnote_table );
 
 	# update bug last updated
-	if ( !$p_skip_bug_update ) {
+	if( !$p_skip_bug_update ) {
 		bug_update_date( $p_bug_id );
 	}
 
 	# log new bug
-	if ( TRUE == $p_log_history)
+	if( TRUE == $p_log_history)
 		history_log_event_special( $p_bug_id, BUGNOTE_ADDED, bugnote_format_id( $t_bugnote_id ) );
 
 	# Event integration
@@ -445,7 +445,7 @@ function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_
 	}
 
 	# reverse the list for users with ascending view preferences
-	if ( 'ASC' == $p_user_bugnote_order ) {
+	if( 'ASC' == $p_user_bugnote_order ) {
 		$t_bugnotes = array_reverse( $t_bugnotes );
 	}
 
@@ -557,7 +557,7 @@ function bugnote_date_update( $p_bugnote_id ) {
 function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
 	$t_old_text = bugnote_get_text( $p_bugnote_id );
 
-	if ( $t_old_text == $p_bugnote_text ) {
+	if( $t_old_text == $p_bugnote_text ) {
 		return true;
 	}
 
@@ -566,7 +566,7 @@ function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
 	$t_bugnote_text_table = db_get_table( 'bugnote_text' );
 
 	# insert an 'original' revision if needed
-	if ( bug_revision_count( $t_bug_id, REV_BUGNOTE, $p_bugnote_id ) < 1 ) {
+	if( bug_revision_count( $t_bug_id, REV_BUGNOTE, $p_bugnote_id ) < 1 ) {
 		$t_user_id = bugnote_get_field( $p_bugnote_id, 'reporter_id' );
 		$t_timestamp = bugnote_get_field( $p_bugnote_id, 'last_modified' );
 		bug_revision_add( $t_bug_id, $t_user_id, REV_BUGNOTE, $t_old_text, $p_bugnote_id, $t_timestamp );
@@ -684,11 +684,10 @@ function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost
 	$c_to = strtotime( $p_to ) + SECONDS_PER_DAY - 1;
 	$c_from = strtotime( $p_from );
 
-	if ( $c_to === false || $c_from === false ) {
+	if( $c_to === false || $c_from === false ) {
 		error_parameters( array( $p_from, $p_to ) );
 		trigger_error( ERROR_GENERIC, ERROR );
 	}
-
 
 	if( ALL_PROJECTS != $p_project_id ) {
 		$t_project_where = ' AND b.project_id = ' . db_param() . ' AND bn.bug_id = b.id ';

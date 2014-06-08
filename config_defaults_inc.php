@@ -32,9 +32,9 @@
  * @link http://www.mantisbt.org
  */
 
-/******************************
- * MantisBT Database Settings *
- ******************************/
+##############################
+# MantisBT Database Settings #
+##############################
 
 /**
  * hostname should be either a hostname or connection string to supply to adodb.
@@ -55,11 +55,11 @@ $g_db_username			= 'root';
  * @global string $g_db_password
  */
 $g_db_password			= '';
- /**
-  * Name of database that contains MantisBT tables.
-  * The default database name is "bugtracker".
-  * @global string $g_database_name
-  */
+/**
+ * Name of database that contains MantisBT tables.
+ * The default database name is "bugtracker".
+ * @global string $g_database_name
+ */
 $g_database_name		= 'bugtracker';
 
 /**
@@ -98,9 +98,9 @@ $g_db_type				= 'mysqli';
  */
 $g_dsn = '';
 
-/********************
- * Folder Locations *
- ********************/
+####################
+# Folder Locations #
+####################
 
 /**
  * Path to root MantisBT folder.  Requires trailing / or \
@@ -141,7 +141,7 @@ $g_language_path = $g_absolute_path . 'lang' . DIRECTORY_SEPARATOR;
  * @global string $g_config_path
  */
 $t_local_config = getenv( 'MANTIS_CONFIG_FOLDER' );
-if ( $t_local_config && is_dir( $t_local_config ) ) {
+if( $t_local_config && is_dir( $t_local_config ) ) {
 	$g_config_path = $t_local_config;
 } else {
 	$g_config_path = $g_absolute_path . 'config' . DIRECTORY_SEPARATOR;
@@ -149,23 +149,23 @@ if ( $t_local_config && is_dir( $t_local_config ) ) {
 
 unset( $t_local_config );
 
-/**************************
- * MantisBT Path Settings *
- **************************/
+##########################
+# MantisBT Path Settings #
+##########################
 
 $t_protocol = 'http';
 $t_host = 'localhost';
-if ( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
-	if ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
+if( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
+	if( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
 		$t_protocol= $_SERVER['HTTP_X_FORWARDED_PROTO'];
-	} else if ( !empty( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
+	} else if( !empty( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
 		$t_protocol = 'https';
 	}
 
 	# $_SERVER['SERVER_PORT'] is not defined in case of php-cgi.exe
-	if ( isset( $_SERVER['SERVER_PORT'] ) ) {
+	if( isset( $_SERVER['SERVER_PORT'] ) ) {
 		$t_port = ':' . $_SERVER['SERVER_PORT'];
-		if ( ( ':80' == $t_port && 'http' == $t_protocol )
+		if( ( ':80' == $t_port && 'http' == $t_protocol )
 		  || ( ':443' == $t_port && 'https' == $t_protocol )) {
 			$t_port = '';
 		}
@@ -173,23 +173,23 @@ if ( isset ( $_SERVER['SCRIPT_NAME'] ) ) {
 		$t_port = '';
 	}
 
-	if ( isset( $_SERVER['HTTP_X_FORWARDED_HOST'] ) ) { # Support ProxyPass
+	if( isset( $_SERVER['HTTP_X_FORWARDED_HOST'] ) ) { # Support ProxyPass
 		$t_hosts = explode( ',', $_SERVER['HTTP_X_FORWARDED_HOST'] );
 		$t_host = $t_hosts[0];
-	} else if ( isset( $_SERVER['HTTP_HOST'] ) ) {
+	} else if( isset( $_SERVER['HTTP_HOST'] ) ) {
 		$t_host = $_SERVER['HTTP_HOST'];
-	} else if ( isset( $_SERVER['SERVER_NAME'] ) ) {
+	} else if( isset( $_SERVER['SERVER_NAME'] ) ) {
 		$t_host = $_SERVER['SERVER_NAME'] . $t_port;
-	} else if ( isset( $_SERVER['SERVER_ADDR'] ) ) {
+	} else if( isset( $_SERVER['SERVER_ADDR'] ) ) {
 		$t_host = $_SERVER['SERVER_ADDR'] . $t_port;
 	}
 
-	if ( !isset( $_SERVER['SCRIPT_NAME'] )) {
+	if( !isset( $_SERVER['SCRIPT_NAME'] )) {
 		echo 'Invalid server configuration detected. Please set $g_path manually in ' . $g_config_path . 'config_inc.php.';
-		if ( isset( $_SERVER['SERVER_SOFTWARE'] ) && ( stripos($_SERVER['SERVER_SOFTWARE'], 'nginx') !== false ) )
+		if( isset( $_SERVER['SERVER_SOFTWARE'] ) && ( stripos($_SERVER['SERVER_SOFTWARE'], 'nginx') !== false ) )
 			echo ' Please try to add "fastcgi_param SCRIPT_NAME $fastcgi_script_name;" to the nginx server configuration.';
 		die;
-    }
+	}
 	$t_self = filter_var( $_SERVER['SCRIPT_NAME'], FILTER_SANITIZE_STRING );
 	$t_path = str_replace( basename( $t_self ), '', $t_self );
 	switch( basename( $t_path ) ) {
@@ -239,9 +239,9 @@ $g_short_path = $t_path;
  */
 $g_manual_url = 'http://www.mantisbt.org/docs/master-1.2.x/';
 
-/**************
- * Web Server *
- **************/
+##############
+# Web Server #
+##############
 
 /**
  * Session handler.  Possible values:
@@ -274,9 +274,9 @@ $g_session_validation = ON;
  */
 $g_form_security_validation = ON;
 
-/*****************************
- * Security and Cryptography *
- *****************************/
+#############################
+# Security and Cryptography #
+#############################
 
 /**
  * Master salt value used for cryptographic hashing throughout MantisBT. This
@@ -307,9 +307,9 @@ $g_form_security_validation = ON;
  */
 $g_crypto_master_salt = '';
 
-/****************************
- * Signup and Lost Password *
- ****************************/
+############################
+# Signup and Lost Password #
+############################
 
 /**
  * Allow users to signup for their own accounts.
@@ -380,9 +380,9 @@ $g_lost_password_feature = ON;
  */
 $g_max_lost_password_in_progress_count = 3;
 
-/***************************
- * MantisBT Email Settings *
- ***************************/
+###########################
+# MantisBT Email Settings #
+###########################
 
 /**
  * Webmaster email address. This is shown publicly at the bottom of each page
@@ -639,9 +639,9 @@ $g_email_separator2 = str_pad('', 70, '-');
  */
 $g_email_padding_length	= 28;
 
-/***************************
- * MantisBT Version String *
- ***************************/
+###########################
+# MantisBT Version String #
+###########################
 
 /**
  * Set to off by default to not expose version to users
@@ -663,9 +663,9 @@ $g_version_suffix = '';
  */
 $g_copyright_statement = '';
 
-/******************************
- * MantisBT Language Settings *
- ******************************/
+##############################
+# MantisBT Language Settings #
+##############################
 
 /**
  * If the language is set to 'auto', the actual language is determined by the
@@ -797,9 +797,9 @@ $g_language_auto_map = array(
  */
 $g_fallback_language = 'english';
 
-/*****************************
- * MantisBT Display Settings *
- *****************************/
+#############################
+# MantisBT Display Settings #
+#############################
 
 /**
  * browser window title
@@ -1061,9 +1061,9 @@ $g_show_changelog_dates = ON;
  */
 $g_show_roadmap_dates = ON;
 
-/**************************
- * MantisBT Time Settings *
- **************************/
+##########################
+# MantisBT Time Settings #
+##########################
 
 /**
  * time for 'permanent' cookie to live in seconds (1 year)
@@ -1095,9 +1095,9 @@ $g_content_expire = 0;
  */
 $g_long_process_timeout = 0;
 
-/**************************
- * MantisBT Date Settings *
- **************************/
+##########################
+# MantisBT Date Settings #
+##########################
 
 /**
  * date format strings defaults to ISO 8601 formatting
@@ -1139,9 +1139,9 @@ $g_calendar_js_date_format = '\%Y-\%m-\%d \%H:\%M';
  */
 $g_calendar_date_format = 'Y-m-d H:i';
 
-/******************************
- * MantisBT TimeZone Settings *
- ******************************/
+##############################
+# MantisBT TimeZone Settings #
+##############################
 
 /**
  * Default timezone to use in MantisBT
@@ -1156,9 +1156,9 @@ $g_calendar_date_format = 'Y-m-d H:i';
  */
 $g_default_timezone = '';
 
-/**************************
- * MantisBT News Settings *
- **************************/
+##########################
+# MantisBT News Settings #
+##########################
 
 /**
  * Indicates whether the news feature should be enabled or disabled.
@@ -1194,9 +1194,9 @@ $g_news_view_limit_days = 30;
  */
 $g_private_news_threshold = DEVELOPER;
 
-/********************************
- * MantisBT Default Preferences *
- ********************************/
+################################
+# MantisBT Default Preferences #
+################################
 
 /**
  * signup default
@@ -1447,9 +1447,9 @@ $g_default_email_on_priority_minimum_severity = OFF;
  */
 $g_default_email_bugnote_limit = 0;
 
-/*****************************
- * MantisBT Summary Settings *
- *****************************/
+#############################
+# MantisBT Summary Settings #
+#############################
 
 /**
  * how many reporters to show
@@ -1512,9 +1512,9 @@ $g_resolution_multipliers = array(
 	WONT_FIX            => 1
 );
 
-/*****************************
- * MantisBT Bugnote Settings *
- *****************************/
+#############################
+# MantisBT Bugnote Settings #
+#############################
 
 /**
  * bugnote ordering
@@ -1523,9 +1523,9 @@ $g_resolution_multipliers = array(
  */
 $g_bugnote_order = 'DESC';
 
-/*********************************
- * MantisBT Bug History Settings *
- *********************************/
+#################################
+# MantisBT Bug History Settings #
+#################################
 
 /**
  * bug history visible by default when you view a bug
@@ -1541,9 +1541,9 @@ $g_history_default_visible = ON;
  */
 $g_history_order = 'ASC';
 
-/******************************
- * MantisBT Reminder Settings *
- ******************************/
+##############################
+# MantisBT Reminder Settings #
+##############################
 
 /**
  * are reminders stored as bugnotes
@@ -1572,9 +1572,9 @@ $g_default_reminder_view_status = VS_PUBLIC;
  */
 $g_reminder_receive_threshold = DEVELOPER;
 
-/*********************************
- * MantisBT Sponsorship Settings *
- *********************************/
+#################################
+# MantisBT Sponsorship Settings #
+#################################
 
 /**
  * Whether to enable/disable the whole issue sponsorship feature
@@ -1628,9 +1628,9 @@ $g_assign_sponsored_bugs_threshold = MANAGER;
  */
 $g_minimum_sponsorship_amount = 5;
 
-/*********************************
- * MantisBT File Upload Settings *
- *********************************/
+#################################
+# MantisBT File Upload Settings #
+#################################
 
 /**
  * --- file upload settings --------
@@ -1725,9 +1725,9 @@ $g_file_download_xsendfile_enabled = OFF;
  */
 $g_file_download_xsendfile_header_name = 'X-Sendfile';
 
-/**************************
- * MantisBT HTML Settings *
- **************************/
+##########################
+# MantisBT HTML Settings #
+##########################
 
 /**
  * html tags
@@ -1768,9 +1768,9 @@ $g_max_dropdown_length = 40;
  */
 $g_wrap_in_preformatted_text = ON;
 
-/************************
- * MantisBT HR Settings *
- ************************/
+########################
+# MantisBT HR Settings #
+########################
 
 /**
  * Horizontal Rule Size
@@ -1784,9 +1784,9 @@ $g_hr_size = 1;
  */
 $g_hr_width = 50;
 
-/*********************************************
- * MantisBT Authentication and LDAP Settings *
- *********************************************/
+#############################################
+# MantisBT Authentication and LDAP Settings #
+#############################################
 
 /**
  * Login authentication method. Must be one of
@@ -1920,9 +1920,9 @@ $g_use_ldap_email = OFF;
  */
 $g_ldap_simulation_file_path = '';
 
-/*******************
- * Status Settings *
- *******************/
+###################
+# Status Settings #
+###################
 
 /**
  * Status to assign to the bug when submitted.
@@ -2037,9 +2037,9 @@ $g_auto_set_status_to_assigned	= ON;
  */
 $g_status_enum_workflow = array();
 
-/****************************
- * Bug Attachments Settings *
- ****************************/
+############################
+# Bug Attachments Settings #
+############################
 
 /**
  * Specify the filename of the magic database file. This is used by
@@ -2137,9 +2137,9 @@ $g_allow_download_own_attachments = ON;
  */
 $g_allow_delete_own_attachments = OFF;
 
-/**********************
- * Field Visibility
- **********************/
+####################
+# Field Visibility #
+####################
 
 /**
  * Enable or disable usage of the ETA field.
@@ -2509,9 +2509,9 @@ $g_bug_change_status_page_fields = array (
 	'view_state',
 );
 
-/**************************
- * MantisBT Misc Settings *
- **************************/
+##########################
+# MantisBT Misc Settings #
+##########################
 
 /**
  * access level needed to report a bug
@@ -3013,9 +3013,9 @@ $g_view_configuration_threshold = ADMINISTRATOR;
  */
 $g_set_configuration_threshold = ADMINISTRATOR;
 
-/************************************
- * MantisBT Look and Feel Variables *
- ************************************/
+####################################
+# MantisBT Look and Feel Variables #
+####################################
 
 /**
  * status color codes, using the Tango color palette
@@ -3064,9 +3064,9 @@ $g_colour_project = 'LightGreen';
  */
 $g_colour_global = 'LightBlue';
 
-/*****************************
- * MantisBT Cookie Variables *
- *****************************/
+#############################
+# MantisBT Cookie Variables #
+#############################
 
 /**
  * Specifies the path under which a cookie is visible
@@ -3145,9 +3145,9 @@ $g_logout_cookie = '%cookie_prefix%_LOGOUT_COOKIE';
  */
 $g_bug_list_cookie = '%cookie_prefix%_BUG_LIST_COOKIE';
 
-/*****************************
- * MantisBT Filter Variables *
- *****************************/
+#############################
+# MantisBT Filter Variables #
+#############################
 
 /**
  *
@@ -3190,9 +3190,9 @@ $g_create_permalink_threshold = DEVELOPER;
  */
 $g_create_short_url = 'http://tinyurl.com/create.php?url=%s';
 
-/*************************************
- * MantisBT Database Table Variables *
- *************************************/
+#####################################
+# MantisBT Database Table Variables #
+#####################################
 
 /**
  * table prefix
@@ -3218,9 +3218,9 @@ $g_db_table_plugin_prefix	= 'plugin';
  */
 $g_db_table_suffix = '_table';
 
-/*************************
- * MantisBT Enum Strings *
- *************************/
+#########################
+# MantisBT Enum Strings #
+#########################
 
 /**
  * status from $g_status_index-1 to 79 are used for the onboard customization
@@ -3304,9 +3304,9 @@ $g_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
  */
 $g_custom_field_type_enum_string = '0:string,1:numeric,2:float,3:enum,4:email,5:checkbox,6:list,7:multiselection list,8:date,9:radio,10:textarea';
 
-/*********************************
- * MantisBT Javascript Variables *
- *********************************/
+#################################
+# MantisBT Javascript Variables #
+#################################
 
 /**
  * allow the use of Javascript?
@@ -3314,9 +3314,9 @@ $g_custom_field_type_enum_string = '0:string,1:numeric,2:float,3:enum,4:email,5:
  */
 $g_use_javascript = ON;
 
-/*******************************
- * MantisBT Speed Optimisation *
- *******************************/
+###############################
+# MantisBT Speed Optimisation #
+###############################
 
 /**
  * Use compression of generated html if browser supports it. If you already
@@ -3339,9 +3339,9 @@ $g_compress_html = ON;
  */
 $g_use_persistent_connections = OFF;
 
-/*****************
- * Include files *
- *****************/
+#################
+# Include files #
+#################
 
 /**
  * Specify your top/bottom include file (logos, banners, etc)
@@ -3382,9 +3382,9 @@ $g_css_rtl_include_file = 'rtl.css';
  */
 $g_meta_include_file = '%absolute_path%meta_inc.php';
 
-/****************
- * Redirections *
- ****************/
+################
+# Redirections #
+################
 
 /**
  * Default page after Login or Set Project
@@ -3398,9 +3398,9 @@ $g_default_home_page = 'my_view_page.php';
  */
 $g_logout_redirect_page = 'login_page.php';
 
-/***********
- * Headers *
- ***********/
+###########
+# Headers #
+###########
 
 /**
  * An array of headers to be sent with each page.
@@ -3435,9 +3435,9 @@ $g_custom_headers = array();
  */
 # $g_allow_file_cache = ON;
 
-/*****************
- * Custom Fields *
- *****************/
+#################
+# Custom Fields #
+#################
 
 /**
  * Threshold needed to manage custom fields
@@ -3457,9 +3457,9 @@ $g_custom_field_link_threshold = MANAGER;
  */
 $g_custom_field_edit_after_create = ON;
 
-/****************
- * Custom Menus *
- ****************/
+################
+# Custom Menus #
+################
 
 /**
  * Add custom options to the main menu.  For example:
@@ -3475,9 +3475,9 @@ $g_custom_field_edit_after_create = ON;
  */
 $g_main_menu_custom_options = array();
 
-/*********
- * Icons *
- *********/
+#########
+# Icons #
+#########
 
 /**
  * Maps a file extension to a file type icon.  These icons are printed
@@ -3604,9 +3604,9 @@ $g_unread_icon_arr = array (
 	UNREAD => 'unread.gif'
 );
 
-/********************
- * My View Settings *
- ********************/
+####################
+# My View Settings #
+####################
 
 /**
  * Number of bugs shown in each box
@@ -3639,9 +3639,9 @@ $g_my_view_boxes = array (
 $g_my_view_boxes_fixed_position = ON;
 
 
-/*************
- * RSS Feeds *
- *************/
+#############
+# RSS Feeds #
+#############
 
 /**
  * This flag enables or disables RSS syndication.  In the case where RSS
@@ -3651,9 +3651,9 @@ $g_my_view_boxes_fixed_position = ON;
 $g_rss_enabled = ON;
 
 
-/*********************
- * Bug Relationships *
- *********************/
+#####################
+# Bug Relationships #
+#####################
 
 /**
  * Enable relationship graphs support.
@@ -3774,9 +3774,9 @@ $g_forward_year_count = 4;
  */
 $g_custom_group_actions = array();
 
-/********************
- * Wiki Integration *
- ********************/
+####################
+# Wiki Integration #
+####################
 
 /**
  * Wiki Integration Enabled?
@@ -3804,9 +3804,9 @@ $g_wiki_root_namespace = 'mantis';
  */
 $g_wiki_engine_url = $t_protocol . '://' . $t_host . '/%wiki_engine%/';
 
-/********************
- * Recently Visited *
- ********************/
+####################
+# Recently Visited #
+####################
 
 /**
  * Whether to show the most recently visited issues or not.  At the moment we always track them even if this flag is off.
@@ -3820,9 +3820,9 @@ $g_recently_visited = ON;
  */
 $g_recently_visited_count = 5;
 
-/***************
- * Bug Tagging *
- ***************/
+###############
+# Bug Tagging #
+###############
 
 /**
  * String that will separate tags as entered for input
@@ -3872,9 +3872,9 @@ $g_tag_edit_threshold = DEVELOPER;
  */
 $g_tag_edit_own_threshold = REPORTER;
 
-/*****************
- * Time tracking *
- *****************/
+#################
+# Time tracking #
+#################
 
 /**
  * Turn on Time Tracking accounting
@@ -3918,9 +3918,9 @@ $g_time_tracking_reporting_threshold = MANAGER;
  */
 $g_time_tracking_without_note = ON;
 
-/****************************
- * Profile Related Settings *
- ****************************/
+############################
+# Profile Related Settings #
+############################
 
 /**
  * Enable Profiles
@@ -3947,9 +3947,9 @@ $g_manage_global_profile_threshold = MANAGER;
  */
 $g_allow_freetext_in_profile_fields = ON;
 
-/*****************
- * Plugin System *
- *****************/
+#################
+# Plugin System #
+#################
 
 /**
  * enable/disable plugins
@@ -4002,9 +4002,9 @@ $g_plugin_mime_types = array(
  */
 $g_plugins_force_installed = array();
 
-/************
- * Due Date *
- ************/
+############
+# Due Date #
+############
 
 /**
  * threshold to update due date submitted
@@ -4018,9 +4018,9 @@ $g_due_date_update_threshold = NOBODY;
  */
 $g_due_date_view_threshold = NOBODY;
 
-/*****************
- * Sub-projects
- *****************
+################
+# Sub-projects #
+################
 
 /**
  * Sub-projects should inherit categories from parent projects.
@@ -4032,9 +4032,9 @@ $g_subprojects_inherit_categories = ON;
  */
 $g_subprojects_inherit_versions = ON;
 
-/**********************************
- * Debugging / Developer Settings *
- **********************************/
+##################################
+# Debugging / Developer Settings #
+##################################
 
 /**
  * Time page loads.
@@ -4169,9 +4169,9 @@ $g_log_destination = '';
  */
 $g_show_log_threshold = ADMINISTRATOR;
 
-/**************************
- * Configuration Settings *
- **************************/
+##########################
+# Configuration Settings #
+##########################
 
 /**
  * The following list of variables should never be in the database.
@@ -4202,9 +4202,9 @@ $g_global_settings = array(
 unset( $t_protocol, $t_host, $t_hosts, $t_port, $t_self, $t_path );
 
 
-/****************************
- * Webservice Configuration *
- ****************************/
+############################
+# Webservice Configuration #
+############################
 
 # Minimum global access level required to access webservice for readonly operations.
 $g_webservice_readonly_access_level_threshold = VIEWER;

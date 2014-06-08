@@ -30,7 +30,7 @@
  * @uses print_api.php
  */
 
-if ( !defined( 'BUG_ACTIONGROUP_INC_ALLOW' ) ) {
+if( !defined( 'BUG_ACTIONGROUP_INC_ALLOW' ) ) {
 	return;
 }
 
@@ -92,11 +92,11 @@ function action_update_severity_validate( $p_bug_id ) {
 	$t_update_severity_threshold = config_get( 'update_bug_threshold' );
 	$t_bug_id = $p_bug_id;
 
-	if ( bug_is_readonly( $t_bug_id ) ) {
+	if( bug_is_readonly( $t_bug_id ) ) {
 		return lang_get( 'actiongroup_error_issue_is_readonly' );
 	}
 
-	if ( !access_has_bug_level( $t_update_severity_threshold, $t_bug_id ) ) {
+	if( !access_has_bug_level( $t_update_severity_threshold, $t_bug_id ) ) {
 		return lang_get( 'access_denied' );
 	}
 

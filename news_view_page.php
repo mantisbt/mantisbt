@@ -50,9 +50,9 @@ html_page_top();
 ?>
 
 <?php
-if ( $f_news_id !== null ) {
+if( $f_news_id !== null ) {
 	$t_project_id = news_get_field( $f_news_id, 'project_id' );
-	if ( news_is_private( $f_news_id ) ) {
+	if( news_is_private( $f_news_id ) ) {
 		access_ensure_project_level(	config_get( 'private_news_threshold' ),
 						$t_project_id );
 	} else {

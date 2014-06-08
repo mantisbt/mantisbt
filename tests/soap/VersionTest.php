@@ -101,7 +101,7 @@ class VersionTest extends SoapBase {
 		$this->assertEquals(1, count($versions) - $initialVersions);
 
 		foreach ( $versions as $version ) {
-			if ( $version->id == $versionId ) {
+			if( $version->id == $versionId ) {
 				$versDate = $this->dateToUTC($version->date_order);
 
 				$this->assertEquals('1.1', $version->name);

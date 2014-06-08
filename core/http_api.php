@@ -45,7 +45,7 @@ function http_is_protocol_https() {
 function is_browser_internet_explorer() {
 	$t_user_agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : 'none';
 
-	if ( strpos( $t_user_agent, 'MSIE' ) ) {
+	if( strpos( $t_user_agent, 'MSIE' ) ) {
 		return true;
 	}
 
@@ -60,7 +60,7 @@ function is_browser_internet_explorer() {
 function is_browser_chrome() {
 	$t_user_agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : 'none';
 
-	if ( strpos( $t_user_agent, 'Chrome/' ) ) {
+	if( strpos( $t_user_agent, 'Chrome/' ) ) {
 		return true;
 	}
 
@@ -77,13 +77,13 @@ function is_browser_chrome() {
  * @param bool $p_inline Display file inline (optional, default = treat as attachment)
  */
 function http_content_disposition_header( $p_filename, $p_inline = false ) {
-	if ( !headers_sent() ) {
+	if( !headers_sent() ) {
 		$t_encoded_filename = rawurlencode( $p_filename );
 		$t_disposition = '';
-		if ( !$p_inline ) {
+		if( !$p_inline ) {
 			$t_disposition = 'attachment;';
 		}
-		if ( is_browser_internet_explorer() || is_browser_chrome() ) {
+		if( is_browser_internet_explorer() || is_browser_chrome() ) {
 			# Internet Explorer does not support RFC2231 however it does
 			# incorrectly decode URL encoded filenames and we can use this to
 			# get UTF8 filenames to work with the file download dialog. Chrome
@@ -107,9 +107,9 @@ function http_caching_headers( $p_allow_caching=false ) {
 
 	# Headers to prevent caching
 	# with option to bypass if running from script
-	if ( !headers_sent() ) {
-		if ( $p_allow_caching || ( isset( $g_allow_browser_cache ) && ON == $g_allow_browser_cache ) ) {
-			if ( is_browser_internet_explorer() ) {
+	if( !headers_sent() ) {
+		if( $p_allow_caching || ( isset( $g_allow_browser_cache ) && ON == $g_allow_browser_cache ) ) {
+			if( is_browser_internet_explorer() ) {
 				header( 'Cache-Control: private, proxy-revalidate' );
 			} else {
 				header( 'Cache-Control: private, must-revalidate' );
@@ -127,7 +127,7 @@ function http_caching_headers( $p_allow_caching=false ) {
  * Set content-type headers.
  */
 function http_content_headers() {
-	if ( !headers_sent() ) {
+	if( !headers_sent() ) {
 		header( 'Content-Type: text/html; charset=UTF-8' );
 		# Disallow Internet Explorer from attempting to second guess the Content-Type
 		# header as per http://blogs.msdn.com/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
@@ -139,18 +139,18 @@ function http_content_headers() {
  * Set security headers (frame busting, clickjacking/XSS/CSRF protection).
  */
 function http_security_headers() {
-	if ( !headers_sent() ) {
+	if( !headers_sent() ) {
 		header( 'X-Frame-Options: DENY' );
 		$t_avatar_img_allow = '';
-		if ( config_get_global( 'show_avatar' ) ) {
-			if ( http_is_protocol_https() ) {
+		if( config_get_global( 'show_avatar' ) ) {
+			if( http_is_protocol_https() ) {
 				$t_avatar_img_allow = "; img-src 'self' https://secure.gravatar.com:443";
 			} else {
 				$t_avatar_img_allow = "; img-src 'self' http://www.gravatar.com:80";
 			}
 		}
 		header( "X-Content-Security-Policy: allow 'self';$t_avatar_img_allow; frame-ancestors 'none'" );
-		if ( http_is_protocol_https() ) {
+		if( http_is_protocol_https() ) {
 			header( 'Strict-Transport-Security: max-age=7776000' );
 		}
 	}
@@ -160,7 +160,7 @@ function http_security_headers() {
  * Load and set any custom headers defined by the site configuration.
  */
 function http_custom_headers() {
-	if ( !headers_sent() ) {
+	if( !headers_sent() ) {
 		# send user-defined headers
 		foreach( config_get_global( 'custom_headers' ) as $t_header ) {
 			header( $t_header );
@@ -174,7 +174,7 @@ function http_custom_headers() {
 function http_all_headers() {
 	global $g_bypass_headers;
 
-	if ( !$g_bypass_headers && !headers_sent() ) {
+	if( !$g_bypass_headers && !headers_sent() ) {
 		http_content_headers();
 		http_caching_headers();
 		http_security_headers();

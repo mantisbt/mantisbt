@@ -60,14 +60,14 @@ $t_project_id = helper_get_current_project();
 
 $t_rss_enabled = config_get( 'rss_enabled' );
 
-if ( OFF != $t_rss_enabled && news_is_enabled() ) {
+if( OFF != $t_rss_enabled && news_is_enabled() ) {
 	$t_rss_link = rss_get_news_feed_url( $t_project_id );
 	html_set_rss_link( $t_rss_link );
 }
 
 html_page_top( lang_get( 'main_link' ) );
 
-if ( !current_user_is_anonymous() ) {
+if( !current_user_is_anonymous() ) {
 	$t_current_user_id = auth_get_current_user_id();
 	$t_hide_status = config_get( 'bug_resolved_status_threshold' );
 	echo '<div class="quick-summary-left">';
@@ -86,7 +86,7 @@ if ( !current_user_is_anonymous() ) {
 	echo '</div>';
 }
 
-if ( news_is_enabled() ) {
+if( news_is_enabled() ) {
 	$t_news_rows = news_get_limited_rows( $f_offset, $t_project_id );
 	$t_news_count = count( $t_news_rows );
 
@@ -97,7 +97,7 @@ if ( news_is_enabled() ) {
 			$t_row = $t_news_rows[$i];
 
 			# only show VS_PRIVATE posts to configured threshold and above
-			if ( ( VS_PRIVATE == $t_row[ 'view_state' ] ) &&
+			if( ( VS_PRIVATE == $t_row[ 'view_state' ] ) &&
 				 !access_has_project_level( config_get( 'private_news_threshold' ) ) ) {
 				continue;
 			}
@@ -114,15 +114,15 @@ if ( news_is_enabled() ) {
 	$f_offset_next = $f_offset + $t_news_view_limit;
 	$f_offset_prev = $f_offset - $t_news_view_limit;
 
-	if ( $f_offset_prev >= 0) {
+	if( $f_offset_prev >= 0) {
 		print_bracket_link( 'main_page.php?offset=' . $f_offset_prev, lang_get( 'newer_news_link' ) );
 	}
 
-	if ( $t_news_count == $t_news_view_limit ) {
+	if( $t_news_count == $t_news_view_limit ) {
 		print_bracket_link( 'main_page.php?offset=' . $f_offset_next, lang_get( 'older_news_link' ) );
 	}
 
-	if ( OFF != $t_rss_enabled ) {
+	if( OFF != $t_rss_enabled ) {
 		print_bracket_link( $t_rss_link, lang_get( 'rss' ) );
 	}
 

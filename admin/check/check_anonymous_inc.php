@@ -27,7 +27,7 @@
  * @uses user_api.php
  */
 
-if ( !defined( 'CHECK_ANONYMOUS_INC_ALLOW' ) ) {
+if( !defined( 'CHECK_ANONYMOUS_INC_ALLOW' ) ) {
 	return;
 }
 

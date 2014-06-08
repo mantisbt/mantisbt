@@ -115,7 +115,7 @@ if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 	foreach( $t_enum_status as $t_state => $t_label) {
 		$t_workflow_row = '';
 		$t_default = gpc_get_int( 'default_' . $t_state );
-		if ( isset( $t_matrix[$t_state] ) && isset( $t_matrix[$t_state][$t_default] ) ) {
+		if( isset( $t_matrix[$t_state] ) && isset( $t_matrix[$t_state][$t_default] ) ) {
 			$t_workflow_row .= $t_default . ':' . get_enum_element( 'status', $t_default );
 			unset( $t_matrix[$t_state][$t_default] );
 			$t_first = false;
@@ -124,16 +124,16 @@ if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 			echo '<p>' . sprintf( lang_get( 'default_not_in_flow' ), get_enum_element( 'status', $t_default ), get_enum_element( 'status', $t_state ) )  . '</p>';
 			$t_first = true;
 		}
-		if ( isset( $t_matrix[$t_state] ) ) {
+		if( isset( $t_matrix[$t_state] ) ) {
 			foreach ( $t_matrix[$t_state] as $t_next_state => $t_junk ) {
-				if ( false == $t_first ) {
+				if( false == $t_first ) {
 					$t_workflow_row .= ',';
 				}
 				$t_workflow_row .= $t_next_state . ':' . get_enum_element( 'status', $t_next_state );
 				$t_first = false;
 			}
 		}
-		if ( '' <> $t_workflow_row ) {
+		if( '' <> $t_workflow_row ) {
 			$t_workflow[$t_state] = $t_workflow_row;
 		}
 	}
@@ -141,7 +141,7 @@ if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 	# Get the parent's workflow, if not set default to all transitions
 	$t_access_current = config_get_access( 'status_enum_workflow' );
 	$t_workflow_parent = config_get_parent( $t_project, 'status_enum_workflow' );
-	if ( 0 == count( $t_workflow_parent ) ) {
+	if( 0 == count( $t_workflow_parent ) ) {
 		foreach( $t_enum_status as $t_status => $t_label ) {
 			$t_temp_workflow = array();
 			foreach( $t_enum_status as $t_next => $t_next_label ) {
@@ -193,8 +193,8 @@ if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 	$t_set_new = array();
 	foreach( $t_enum_status as $t_status_id => $t_status_label) {
 		$f_level = gpc_get_int( 'access_change_' . $t_status_id );
-		if ( config_get( 'bug_submit_status' ) == $t_status_id ) {
-			if ( $f_level != config_get( 'report_bug_threshold' ) ) {
+		if( config_get( 'bug_submit_status' ) == $t_status_id ) {
+			if( $f_level != config_get( 'report_bug_threshold' ) ) {
 				config_set( 'report_bug_threshold', (int)$f_level, ALL_USERS, $t_project, $f_access );
 			} else {
 				config_delete( 'report_bug_threshold', ALL_USERS , $t_project );

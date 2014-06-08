@@ -57,7 +57,7 @@ print_manage_menu( 'manage_proj_create_page.php' );
 
 $f_parent_id = gpc_get( 'parent_id', null );
 
-if ( project_table_empty() ) {
+if( project_table_empty() ) {
 	echo '<br />';
 	echo '<div id="create-first-project" class="important-msg">';
 	echo '<ul>';
@@ -71,12 +71,12 @@ if ( project_table_empty() ) {
 	<form method="post" id="manage-project-create-form" action="manage_proj_create.php">
 		<fieldset class="has-required"><?php
 			echo form_security_field( 'manage_proj_create' );
-			if ( null !== $f_parent_id ) {
+			if( null !== $f_parent_id ) {
 				$f_parent_id = (int) $f_parent_id; ?>
 				<input type="hidden" name="parent_id" value="<?php echo $f_parent_id ?>" /><?php
 			} ?>
 			<legend><span><?php
-			if ( null !== $f_parent_id ) {
+			if( null !== $f_parent_id ) {
 				echo lang_get( 'add_subproject_title' );
 			} else {
 				echo lang_get( 'add_project_title' );
@@ -101,7 +101,7 @@ if ( project_table_empty() ) {
 				<span class="checkbox"><input type="checkbox" id="project-inherit-global" name="inherit_global" checked="checked" /></span>
 				<span class="label-style"></span>
 			</div>
-			<?php if ( !is_null( $f_parent_id ) ) { ?>
+			<?php if( !is_null( $f_parent_id ) ) { ?>
 			<div class="field-container">
 				<label for="project-inherit-parent"><span><?php echo lang_get( 'inherit_parent' ) ?></span></label>
 				<span class="checkbox"><input type="checkbox" id="project-inherit-parent" name="inherit_parent" checked="checked" /></span>
@@ -124,7 +124,7 @@ if ( project_table_empty() ) {
 			if( file_is_uploading_enabled() && DATABASE !== config_get( 'file_upload_method' ) ) {
 				$t_file_path = '';
 				# Don't reveal the absolute path to non-administrators for security reasons
-				if ( current_user_is_administrator() ) {
+				if( current_user_is_administrator() ) {
 					$t_file_path = config_get( 'absolute_path_default_upload_folder' );
 				}
 				?>

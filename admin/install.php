@@ -223,7 +223,7 @@ if( $t_config_exists ) {
 		# Oracle supports binding in two ways:
 		#  - hostname, username/password and database name
 		#  - tns name (insert into hostname field) and username/password, database name is still empty
-		if ( $f_db_type == 'oci8' ) {
+		if( $f_db_type == 'oci8' ) {
 			$t_db_conn_exists = $t_db_conn_exists || ( $f_database_name == '' && $f_db_username !== '' && $f_hostname !== '' );
 		}
 		print_test( 'Checking Database connection settings exist',
@@ -814,7 +814,7 @@ if( 3 == $t_install_state ) {
 		}
 
 		# Make sure we do the upgrades using UTF-8 if needed
-		if ( $f_db_type === 'mysql' || $f_db_type === 'mysqli' ) {
+		if( $f_db_type === 'mysql' || $f_db_type === 'mysqli' ) {
 			$g_db->execute( 'SET NAMES UTF8' );
 		}
 
@@ -931,7 +931,7 @@ if( 3 == $t_install_state ) {
 				if( $t_sql ) {
 					foreach( $sqlarray as $sql ) {
 						# "CREATE OR REPLACE TRIGGER" statements must end with "END;\n/" for Oracle sqlplus
-						if ( $f_db_type == 'oci8' && stripos( $sql, 'CREATE OR REPLACE TRIGGER' ) === 0 ) {
+						if( $f_db_type == 'oci8' && stripos( $sql, 'CREATE OR REPLACE TRIGGER' ) === 0 ) {
 							$t_sql_end = PHP_EOL . "/";
 						} else {
 							$t_sql_end = ";";
@@ -1045,7 +1045,7 @@ if( 5 == $t_install_state ) {
 	# available the user will have to manually set this value post
 	# installation.
 	$t_crypto_master_salt = crypto_generate_random_string(32);
-	if ( $t_crypto_master_salt !== null ) {
+	if( $t_crypto_master_salt !== null ) {
 		$t_crypto_master_salt = base64_encode( $t_crypto_master_salt );
 	}
 
@@ -1099,7 +1099,7 @@ if( 5 == $t_install_state ) {
 		}
 	} else {
 		# already exists, see if the information is the same
-		if ( ( $f_hostname != config_get( 'hostname', '' ) ) ||
+		if( ( $f_hostname != config_get( 'hostname', '' ) ) ||
 			( $f_db_type != config_get( 'db_type', '' ) ) ||
 			( $f_database_name != config_get( 'database_name', '') ) ||
 			( $f_db_schema != config_get( 'db_schema', '') ) ||

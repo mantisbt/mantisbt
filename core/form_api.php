@@ -61,7 +61,7 @@ function form_action_self() {
  * @return string Security token string
  */
 function form_security_token( $p_form_name ) {
-	if ( PHP_CLI == php_mode() || OFF == config_get_global( 'form_security_validation' ) ) {
+	if( PHP_CLI == php_mode() || OFF == config_get_global( 'form_security_validation' ) ) {
 		return '';
 	}
 
@@ -79,7 +79,7 @@ function form_security_token( $p_form_name ) {
 	$t_string = $t_date . crypto_generate_uri_safe_nonce( 32 );
 
 	# Add the token to the user's session
-	if ( !isset( $t_tokens[$p_form_name][$t_date] ) ) {
+	if( !isset( $t_tokens[$p_form_name][$t_date] ) ) {
 		$t_tokens[$p_form_name][$t_date] = array();
 	}
 
@@ -97,7 +97,7 @@ function form_security_token( $p_form_name ) {
  * @return string Hidden form element to output
  */
 function form_security_field( $p_form_name, $p_security_token = null ) {
-	if ( PHP_CLI == php_mode() || OFF == config_get_global( 'form_security_validation' ) ) {
+	if( PHP_CLI == php_mode() || OFF == config_get_global( 'form_security_validation' ) ) {
 		return '';
 	}
 
@@ -122,7 +122,7 @@ function form_security_field( $p_form_name, $p_security_token = null ) {
  * @return string Hidden form element to output
  */
 function form_security_param( $p_form_name ) {
-	if ( PHP_CLI == php_mode() || OFF == config_get_global( 'form_security_validation' ) ) {
+	if( PHP_CLI == php_mode() || OFF == config_get_global( 'form_security_validation' ) ) {
 		return '';
 	}
 
@@ -144,7 +144,7 @@ function form_security_param( $p_form_name ) {
  * @return bool Form is valid
  */
 function form_security_validate( $p_form_name ) {
-	if ( PHP_CLI == php_mode() || OFF == config_get_global( 'form_security_validation' ) ) {
+	if( PHP_CLI == php_mode() || OFF == config_get_global( 'form_security_validation' ) ) {
 		return true;
 	}
 
@@ -171,7 +171,7 @@ function form_security_validate( $p_form_name ) {
 	$t_date = utf8_substr( $t_input, 0, 8 );
 
 	# Check if the token exists
-	if ( isset( $t_tokens[$p_form_name][$t_date][$t_input] ) ) {
+	if( isset( $t_tokens[$p_form_name][$t_date][$t_input] ) ) {
 		return true;
 	}
 
@@ -186,7 +186,7 @@ function form_security_validate( $p_form_name ) {
  * @param string $p_form_name Form name
  */
 function form_security_purge( $p_form_name ) {
-	if ( PHP_CLI == php_mode() || OFF == config_get_global( 'form_security_validation' ) ) {
+	if( PHP_CLI == php_mode() || OFF == config_get_global( 'form_security_validation' ) ) {
 		return;
 	}
 
@@ -212,7 +212,7 @@ function form_security_purge( $p_form_name ) {
 
 	foreach( $t_tokens as $t_form_name => $t_dates ) {
 		foreach( $t_dates as $t_date => $t_date_tokens ) {
-			if ( $t_date < $t_purge_date ) {
+			if( $t_date < $t_purge_date ) {
 				unset( $t_tokens[$t_form_name][$t_date] );
 			}
 		}

@@ -143,7 +143,7 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Returns an array of extra options to be passed to the Soap Client 
+	 * Returns an array of extra options to be passed to the Soap Client
 	 * @return array an array of extra options to be passed to the SoapClient constructor
 	 */
 	protected function extraSoapClientFlags() {
@@ -190,9 +190,8 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	 * Skip if time tracking is not enabled
 	 */
 	protected function skipIfTimeTrackingIsNotEnabled() {
-
 		$timeTrackingEnabled = $this->client->mc_config_get_string($this->userName, $this->password, 'time_tracking_enabled');
-		if ( !$timeTrackingEnabled ) {
+		if( !$timeTrackingEnabled ) {
 			$this->markTestSkipped('Time tracking is not enabled');
 		}
 	}
@@ -239,7 +238,6 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	 * @return void
 	 */
 	protected function deleteTagAfterRun ( $tagId ) {
-
 		$this->tagIdsToDelete[] = $tagId;
 	}
 
@@ -247,8 +245,7 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	 * Skip if due date thesholds are too high
 	 */
 	protected function skipIfDueDateIsNotEnabled() {
-
-		if ( $this->client->mc_config_get_string( $this->userName, $this->password, 'due_date_view_threshold' ) > 90  ||
+		if( $this->client->mc_config_get_string( $this->userName, $this->password, 'due_date_view_threshold' ) > 90  ||
 			 $this->client->mc_config_get_string( $this->userName, $this->password, 'due_date_update_threshold' ) > 90 ) {
 			 	$this->markTestSkipped('Due date thresholds are too high.');
 			 }
@@ -258,7 +255,7 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	 * Skip if no category is not on
 	 */
 	protected function skipIfAllowNoCategoryIsDisabled() {
-		if ( $this->client->mc_config_get_string($this->userName, $this->password, 'allow_no_category' ) != true ) {
+		if( $this->client->mc_config_get_string($this->userName, $this->password, 'allow_no_category' ) != true ) {
 			$this->markTestSkipped( 'g_allow_no_category is not ON.' );
 		}
 	}

@@ -161,7 +161,7 @@ class ImportXml_Issue implements ImportXml_Interface {
 						while ( $reader->read() &&
 						        ( $reader->depth > $depth_cf ||
 						          $reader->nodeType != XMLReader::END_ELEMENT ) ) {
-							if ( $reader->nodeType == XMLReader::ELEMENT ) {
+							if( $reader->nodeType == XMLReader::ELEMENT ) {
 								if ($reader->localName == 'custom_field') {
 									$t_custom_fields[++$i] = new stdClass();
 								}
@@ -182,7 +182,7 @@ class ImportXml_Issue implements ImportXml_Interface {
 						while ( $reader->read() &&
 						        ( $reader->depth > $depth_bn ||
 						          $reader->nodeType != XMLReader::END_ELEMENT ) ) {
-							if ( $reader->nodeType == XMLReader::ELEMENT ) {
+							if( $reader->nodeType == XMLReader::ELEMENT ) {
 								if ($reader->localName == 'bugnote') {
 									$t_bugnotes[++$i] = new stdClass();
 								}
@@ -215,7 +215,7 @@ class ImportXml_Issue implements ImportXml_Interface {
 						while ( $reader->read() &&
 						        ( $reader->depth > $depth_att ||
 						          $reader->nodeType != XMLReader::END_ELEMENT ) ) {
-							if ( $reader->nodeType == XMLReader::ELEMENT ) {
+							if( $reader->nodeType == XMLReader::ELEMENT ) {
 								if ($reader->localName == 'attachment') {
 									$t_attachments[++$i] = new stdClass();
 								}
@@ -243,10 +243,10 @@ class ImportXml_Issue implements ImportXml_Interface {
 		$this->new_id_ = $this->newbug_->create();
 
 		# add custom fields
-		if ( $this->new_id_ > 0 && is_array( $t_custom_fields ) && count( $t_custom_fields ) > 0 ) {
+		if( $this->new_id_ > 0 && is_array( $t_custom_fields ) && count( $t_custom_fields ) > 0 ) {
 			foreach ( $t_custom_fields as $t_custom_field) {
 				$t_custom_field_id = custom_field_get_id_from_name( $t_custom_field->name );
-				if ( custom_field_ensure_exists( $t_custom_field_id ) && custom_field_is_linked( $t_custom_field_id, $t_project_id ) ) {
+				if( custom_field_ensure_exists( $t_custom_field_id ) && custom_field_is_linked( $t_custom_field_id, $t_project_id ) ) {
 					custom_field_set_value( $t_custom_field->id, $this->new_id_, $t_custom_field->value );
 				}
 				else {
@@ -257,7 +257,7 @@ class ImportXml_Issue implements ImportXml_Interface {
 		}
 
 		# add bugnotes
-		if ( $this->new_id_ > 0 && is_array( $t_bugnotes ) && count( $t_bugnotes ) > 0 ) {
+		if( $this->new_id_ > 0 && is_array( $t_bugnotes ) && count( $t_bugnotes ) > 0 ) {
 			foreach ( $t_bugnotes as $t_bugnote) {
 				bugnote_add(
 					$this->new_id_,
@@ -276,7 +276,7 @@ class ImportXml_Issue implements ImportXml_Interface {
 		}
 
 		# add attachments
-		if ( $this->new_id_ > 0 && is_array( $t_attachments ) && count( $t_attachments ) > 0 ) {
+		if( $this->new_id_ > 0 && is_array( $t_attachments ) && count( $t_attachments ) > 0 ) {
 			foreach ( $t_attachments as $t_attachment) {
 				# Create a temporary file in the temporary files directory using sys_get_temp_dir()
 				$temp_file_name = tempnam( sys_get_temp_dir(), 'MantisImport' );
@@ -330,7 +330,7 @@ class ImportXml_Issue implements ImportXml_Interface {
 			# user not found by username -> check real name
 			# keep in mind that the setting config_get( 'show_user_realname_threshold' ) may differ between import and export system!
 			$t_user_id = user_get_id_by_realname( $p_username );
-			if ( $t_user_id === false ) {
+			if( $t_user_id === false ) {
 				# not found
 				$t_user_id = $p_squash_userid;
 			}

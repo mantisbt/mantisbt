@@ -88,7 +88,7 @@ category_remove( $f_category_id );
 
 form_security_purge( 'manage_proj_cat_delete' );
 
-if ( $f_project_id == ALL_PROJECTS ) {
+if( $f_project_id == ALL_PROJECTS ) {
 	$t_redirect_url = 'manage_proj_page.php';
 } else {
 	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;

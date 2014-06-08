@@ -60,7 +60,7 @@ if( !plugin_is_loaded( $t_basename ) ) {
 
 $t_page = $t_plugin_path . $t_basename . '/pages/' . $t_action . '.php';
 
-if ( !is_file( $t_page ) ) {
+if( !is_file( $t_page ) ) {
 	error_parameters( $t_basename, $t_action );
 	trigger_error( ERROR_PLUGIN_PAGE_NOT_FOUND, ERROR );
 }

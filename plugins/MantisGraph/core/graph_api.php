@@ -55,7 +55,7 @@ if( OFF == plugin_config_get( 'eczlibrary' ) ) {
 function graph_get_font() {
 	$t_font = plugin_config_get( 'font', 'arial' );
 
-	if ( plugin_config_get( 'eczlibrary' ) == ON ) {
+	if( plugin_config_get( 'eczlibrary' ) == ON ) {
 		$t_font_map = array(
 			'arial' => 'arial.ttf',
 			'verdana' => 'verdana.ttf',
@@ -116,7 +116,7 @@ function graph_bar( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_he
 
 	error_check( is_array( $p_metrics ) ? array_sum( $p_metrics ) : 0, $p_title );
 
-	if ( plugin_config_get( 'eczlibrary' ) == ON ) {
+	if( plugin_config_get( 'eczlibrary' ) == ON ) {
 		$graph = new ezcGraphBarChart();
 		$graph->title = $p_title;
 		$graph->background->color = '#FFFFFF';
@@ -207,7 +207,7 @@ function graph_group( $p_metrics, $p_title = '', $p_graph_width = 350, $p_graph_
 	# calculate totals
 	$total = graph_total_metrics( $p_metrics );
 
-	if ( plugin_config_get( 'eczlibrary' ) == ON ) {
+	if( plugin_config_get( 'eczlibrary' ) == ON ) {
 		$graph = new ezcGraphBarChart();
 		$graph->title = $p_title;
 		$graph->background->color = '#FFFFFF';
@@ -309,7 +309,7 @@ function graph_pie( $p_metrics, $p_title = '', $p_graph_width = 500, $p_graph_he
 
 	error_check( is_array( $p_metrics ) ? array_sum( $p_metrics ) : 0, $p_title );
 
-	if ( plugin_config_get( 'eczlibrary' ) == ON ) {
+	if( plugin_config_get( 'eczlibrary' ) == ON ) {
 		$graph = new ezcGraphPieChart();
 		$graph->title = $p_title;
 		$graph->background->color = '#FFFFFF';
@@ -383,7 +383,7 @@ function graph_cumulative_bydate( $p_metrics, $p_graph_width = 300, $p_graph_hei
 	$t_graph_font = graph_get_font();
 	error_check( is_array( $p_metrics ) ? count( $p_metrics ) : 0, plugin_lang_get( 'cumulative' ) . ' ' . lang_get( 'by_date' ) );
 
-	if ( plugin_config_get( 'eczlibrary' ) == ON ) {
+	if( plugin_config_get( 'eczlibrary' ) == ON ) {
 		$graph = new ezcGraphLineChart();
 
 		$graph->background->color = '#FFFFFF';
@@ -506,7 +506,7 @@ function graph_bydate( $p_metrics, $p_labels, $p_title, $p_graph_width = 300, $p
 	$t_graph_font = graph_get_font();
 	error_check( is_array( $p_metrics ) ? count( $p_metrics ) : 0, lang_get( 'by_date' ) );
 
-	if ( plugin_config_get( 'eczlibrary' ) == ON ) {
+	if( plugin_config_get( 'eczlibrary' ) == ON ) {
 		$t_metrics = array();
 		$t_dates = array_shift($p_metrics); # [0];
 		$t_cnt = count($p_metrics);
@@ -680,7 +680,6 @@ function enum_bug_group( $p_enum_string, $p_enum ) {
 		$t_result2 = db_query_bound( $query, array( $t_value, $t_clo_val ) );
 		$t_metrics['closed'][$t_label] = db_result( $t_result2, 0, 0 );
 
-
 		# Calculates the number of bugs resolved and puts the results in a table
 		$query = "SELECT COUNT(*)
 					FROM $t_bug_table
@@ -828,10 +827,10 @@ function create_category_summary() {
 					FROM $t_bug_table
 					WHERE category_id=" . db_param() . " AND $specific_where";
 		$t_result2 = db_query_bound( $query, array( $t_cat_id ) );
-		if ( isset($t_metrics[$t_cat_name]) ) {
+		if( isset($t_metrics[$t_cat_name]) ) {
 			$t_metrics[$t_cat_name] = $t_metrics[$t_cat_name] + db_result( $t_result2, 0, 0 );
 		} else {
-            if (db_result( $t_result2, 0, 0 ) > 0)
+			if (db_result( $t_result2, 0, 0 ) > 0)
 			    $t_metrics[$t_cat_name] = db_result( $t_result2, 0, 0 );
 		}
 	}

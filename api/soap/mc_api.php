@@ -50,7 +50,7 @@ class SoapObjectsFactory {
 	 * @return array
 	 */
 	static function unwrapObject( $p_object ) {
-		if ( is_object( $p_object ) ) {
+		if( is_object( $p_object ) ) {
 			return get_object_vars( $p_object );
 		}
 
@@ -74,7 +74,7 @@ class SoapObjectsFactory {
 	 * @return string
 	 */
 	static function newDateTimeString ( $p_timestamp ) {
-		if ( $p_timestamp == null || date_is_null( $p_timestamp ) ) {
+		if( $p_timestamp == null || date_is_null( $p_timestamp ) ) {
 			return null;
 		}
 
@@ -105,7 +105,7 @@ class SoapObjectsFactory {
 	 * @return bool
 	 */
 	static function isSoapFault ( $p_maybe_fault ) {
-		if ( !is_object( $p_maybe_fault ) ) {
+		if( !is_object( $p_maybe_fault ) ) {
 			return false;
 		}
 
@@ -132,7 +132,7 @@ class SoapActions {
 
 		global $l_oServer;
 
-		if ( $l_oServer ) {
+		if( $l_oServer ) {
 			$l_oServer->fault( $p_error_type,  $p_error_message);
 			$l_oServer->send_response();
 			exit();
@@ -159,7 +159,7 @@ function mc_version() {
  */
 function mc_login( $p_username, $p_password ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
-	if ( $t_user_id === false ) {
+	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
 	}
 
@@ -209,7 +209,7 @@ function mci_check_login( $p_username, $p_password ) {
 	# Must not pass in password, otherwise, authentication will be by-passed.
 	$t_password = ( $p_password === null ) ? '' : $p_password;
 
-	if ( false === auth_attempt_script_login( $p_username, $t_password ) ) {
+	if( false === auth_attempt_script_login( $p_username, $t_password ) ) {
 		return false;
 	}
 
@@ -267,12 +267,12 @@ function mci_has_administrator_access( $p_user_id, $p_project_id = ALL_PROJECTS 
  * @return int project id
  */
 function mci_get_project_id( $p_project ) {
-	if ( is_object( $p_project ) )
+	if( is_object( $p_project ) )
 		$p_project = get_object_vars( $p_project );
 
-	if ( isset( $p_project['id'] ) && (int) $p_project['id'] != 0 ) {
+	if( isset( $p_project['id'] ) && (int) $p_project['id'] != 0 ) {
 		$t_project_id = (int) $p_project['id'];
-	} else if ( isset( $p_project['name'] ) && !is_blank( $p_project['name'] ) ) {
+	} else if( isset( $p_project['name'] ) && !is_blank( $p_project['name'] ) ) {
 		$t_project_id = project_get_id_by_name( $p_project['name'] );
 	} else {
 		$t_project_id = ALL_PROJECTS;
@@ -309,11 +309,11 @@ function mci_get_user_id( $p_user ) {
 
 	$t_user_id = 0;
 
-	if ( isset( $p_user['id'] ) && (int) $p_user['id'] != 0 ) {
+	if( isset( $p_user['id'] ) && (int) $p_user['id'] != 0 ) {
 		$t_user_id = (int) $p_user['id'];
-	} elseif ( isset( $p_user['name'] ) ) {
+	} elseif( isset( $p_user['name'] ) ) {
 		$t_user_id = user_get_id_by_name( $p_user['name'] );
-	} elseif ( isset( $p_user['email'] ) ) {
+	} elseif( isset( $p_user['email'] ) ) {
 		$t_user_id = user_get_id_by_email( $p_user['email'] );
 	}
 
@@ -436,14 +436,13 @@ function mci_sanitize_xml_string ( $p_input ) {
  * @return MantisBT URL terminated by a /.
  */
 function mci_get_mantis_path() {
-
 	return config_get( 'path' );
 }
 
 /**
  * Given a enum string and num, return the appropriate localized string
  * @param string $p_enum_name enumeration name
- * @param string $p_val enumeration value 
+ * @param string $p_val enumeration value
  * @param string $p_lang language string
  * @return string
  */
@@ -494,7 +493,7 @@ function mci_user_get_accessible_subprojects( $p_user_id, $p_parent_project_id, 
  * @return int category id or 0 if not found
  */
 function translate_category_name_to_id( $p_category_name, $p_project_id ) {
-	if ( !isset( $p_category_name ) ) {
+	if( !isset( $p_category_name ) ) {
 		return 0;
 	}
 
@@ -553,7 +552,7 @@ function mci_filter_db_get_available_queries( $p_project_id = null, $p_user_id =
 		$row = db_fetch_array( $t_result );
 
 		$t_filter_detail = explode( '#', $row['filter_string'], 2 );
-		if ( !isset($t_filter_detail[1]) ) {
+		if( !isset($t_filter_detail[1]) ) {
 			continue;
 		}
 		$t_filter = unserialize( $t_filter_detail[1] );
@@ -585,14 +584,14 @@ function mci_category_as_array_by_id( $p_category_id ) {
  * @return array
  */
 function mci_project_version_as_array( $p_version ) {
-    return array(
+	return array(
 			'id' => $p_version['id'],
 			'name' => $p_version['version'],
 			'project_id' => $p_version['project_id'],
 			'date_order' => SoapObjectsFactory::newDateTimeVar( $p_version['date_order'] ),
 			'description' => mci_null_if_empty( $p_version['description'] ),
 			'released' => $p_version['released'],
-		    'obsolete' => $p_version['obsolete']
+			'obsolete' => $p_version['obsolete']
 		);
 }
 
@@ -605,10 +604,10 @@ function mci_project_version_as_array( $p_version ) {
  * @return String the string time entry to be added to the bugnote, in 'HH:mm' format
  */
 function mci_get_time_tracking_from_note( $p_issue_id, $p_note) {
-	if ( !access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $p_issue_id ) )
+	if( !access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $p_issue_id ) )
 		return '00:00';
 
-	if ( !isset( $p_note['time_tracking'] ))
+	if( !isset( $p_note['time_tracking'] ))
 		return '00:00';
 
 	return db_minutes_to_hhmm($p_note['time_tracking']);
@@ -684,7 +683,7 @@ function mc_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 function error_get_stack_trace() {
 	$t_trace = '';
 
-	if ( extension_loaded( 'xdebug' ) ) {
+	if( extension_loaded( 'xdebug' ) ) {
 
 		#check for xdebug presence
 		$t_stack = xdebug_get_function_stack();
@@ -699,7 +698,7 @@ function error_get_stack_trace() {
 			$t_trace .= ( isset( $t_frame['file'] ) ? basename( $t_frame['file'] ) : 'UnknownFile' ) . ' L' . ( isset( $t_frame['line'] ) ? $t_frame['line'] : '?' ) . ' ' . ( isset( $t_frame['function'] ) ? $t_frame['function'] : 'UnknownFunction' );
 
 			$t_args = array();
-			if ( isset( $t_frame['params'] ) && ( count( $t_frame['params'] ) > 0 ) ) {
+			if( isset( $t_frame['params'] ) && ( count( $t_frame['params'] ) > 0 ) ) {
 				$t_trace .= ' Params: ';
 				foreach( $t_frame['params'] as $t_value ) {
 					$t_args[] = error_build_parameter_string( $t_value );
@@ -758,14 +757,14 @@ function mci_soap_fault_login_failed() {
  * @return soap_fault
  */
 function mci_soap_fault_access_denied( $p_user_id = 0, $p_detail = '' ) {
-	if ( $p_user_id ) {
+	if( $p_user_id ) {
 		$t_user_name = user_get_name( $p_user_id );
 		$t_reason = 'Access denied for user '. $t_user_name . '.';
 	} else {
 		$t_reason = 'Access denied';
 	}
 
-	if ( !is_blank( $p_detail ))
+	if( !is_blank( $p_detail ))
 		$t_reason .= ' Reason: ' . $p_detail . '.';
 
 	return SoapObjectsFactory::newSoapFault('Client', $t_reason);

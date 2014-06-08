@@ -49,7 +49,7 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'sponsorship_api.php' );
 
-if ( !config_get( 'enable_sponsorship' ) ) {
+if( !config_get( 'enable_sponsorship' ) ) {
 	trigger_error( ERROR_SPONSORSHIP_NOT_ENABLED, ERROR );
 }
 
@@ -72,7 +72,7 @@ foreach ( $t_bug_list as $t_bug ) {
 	$t_sponsor = sponsorship_get( (int) $t_sponsor_id );
 
 	$t_new_payment = gpc_get_int( 'sponsor_' . $c_bug_id . '_' . $t_sponsor->id, $t_sponsor->paid );
-	if ( $t_new_payment != $t_sponsor->paid ) {
+	if( $t_new_payment != $t_sponsor->paid ) {
 		sponsorship_update_paid( $t_sponsor_id, $t_new_payment );
 	}
 }

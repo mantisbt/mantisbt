@@ -69,7 +69,7 @@ for ( $i = 'A'; $i != 'AA'; $i++ ) {
 for ( $i = 0; $i <= 9; $i++ ) {
 	$t_prefix_array[] = "$i";
 }
-if ( $f_filter === 'ALL' ) {
+if( $f_filter === 'ALL' ) {
 	$t_name_filter = '';
 } else {
 	$t_name_filter = $f_filter;
@@ -85,17 +85,17 @@ $t_total_tag_count = tag_count( $t_name_filter );
 #Number of pages from result
 $t_page_count = ceil( $t_total_tag_count / $t_per_page );
 
-if ( $t_page_count < 1 ) {
+if( $t_page_count < 1 ) {
 	$t_page_count = 1;
 }
 
 # Make sure $p_page_number isn't past the last page.
-if ( $f_page_number > $t_page_count ) {
+if( $f_page_number > $t_page_count ) {
 	$f_page_number = $t_page_count;
 }
 
 # Make sure $p_page_number isn't before the first page
-if ( $f_page_number < 1 ) {
+if( $f_page_number < 1 ) {
 	$f_page_number = 1;
 }
 
@@ -109,7 +109,7 @@ print_manage_menu( 'manage_tags_page.php' ); ?>
 	<ul class="menu"><?php
 	foreach ( $t_prefix_array as $t_prefix ) {
 		$t_caption = ( $t_prefix === 'ALL' ? lang_get( 'show_all_tags' ) : $t_prefix );
-		if ( $t_prefix == $f_filter ) {
+		if( $t_prefix == $f_filter ) {
 			$t_link = "<strong>$t_caption</strong>";
 		} else {
 			$t_link = '<a href="manage_tags_page.php?filter=' . $t_prefix .'">' . $t_caption . '</a>';
@@ -121,7 +121,7 @@ print_manage_menu( 'manage_tags_page.php' ); ?>
 
 <div class="table-container">
 	<h2><?php echo lang_get( 'manage_tags_link' ) ?> [<?php echo $t_total_tag_count ?>]</h2>
-	<?php if ( $t_can_edit ) { ?>
+	<?php if( $t_can_edit ) { ?>
 	<div class="section-link"><?php print_link( '#tagcreate', lang_get( 'tag_create' ) ) ?></div>
 	<?php } ?>
 	<table>
@@ -161,7 +161,7 @@ print_manage_menu( 'manage_tags_page.php' ); ?>
 	</div>
 </div>
 
-<?php if ( $t_can_edit ) { ?>
+<?php if( $t_can_edit ) { ?>
 <div id="manage-tags-create-div" class="form-container">
 	<a name="tagcreate" />
 	<form id="manage-tags-create-form" method="post" action="tag_create.php">

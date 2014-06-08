@@ -31,7 +31,7 @@ access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 $f_width = gpc_get_int( 'width', 300 );
 
 $t_token = token_get_value( TOKEN_GRAPH );
-if ( $t_token == null ) {
+if( $t_token == null ) {
 	$t_metrics = create_bug_enum_summary( lang_get( 'status_enum_string' ), 'status' );
 } else {
 	$t_metrics = unserialize( $t_token );

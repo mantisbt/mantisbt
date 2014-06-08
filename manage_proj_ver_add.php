@@ -61,7 +61,7 @@ $f_add_and_edit = gpc_get_bool( 'add_and_edit_version' );
 
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
-if ( is_blank( $f_version ) ) {
+if( is_blank( $f_version ) ) {
 	trigger_error( ERROR_EMPTY_FIELD, ERROR );
 }
 
@@ -74,15 +74,15 @@ $t_versions = array_reverse( explode( '|', $f_version ) );
 $t_version_count = count( $t_versions );
 
 foreach ( $t_versions as $t_version ) {
-	if ( is_blank( $t_version ) ) {
+	if( is_blank( $t_version ) ) {
 		continue;
 	}
 
 	$t_version = trim( $t_version );
-	if ( version_is_unique( $t_version, $f_project_id ) ) {
+	if( version_is_unique( $t_version, $f_project_id ) ) {
 		$t_version_id = version_add( $f_project_id, $t_version );
 		event_signal( 'EVENT_MANAGE_VERSION_CREATE', array( $t_version_id ) );
-	} else if ( 1 == $t_version_count ) {
+	} else if( 1 == $t_version_count ) {
 		# We only error out on duplicates when a single value was
 		#  given.  If multiple values were given, we just add the
 		#  ones we can.  The others already exist so it isn't really
@@ -94,7 +94,7 @@ foreach ( $t_versions as $t_version ) {
 
 form_security_purge( 'manage_proj_ver_add' );
 
-if ( true == $f_add_and_edit ) {
+if( true == $f_add_and_edit ) {
 	$t_redirect_url = 'manage_proj_ver_edit_page.php?version_id='.$t_version_id;
 } else {
 	$t_redirect_url = 'manage_proj_edit_page.php?project_id='  .$f_project_id;

@@ -33,15 +33,15 @@ require_once 'SoapBase.php';
  */
 class UserTest extends SoapBase {
 
-    /**
-     * Tests getting a user preference
-     */
-    public function testGetPreference() {
+	/**
+	 * Tests getting a user preference
+	 */
+	public function testGetPreference() {
 
-        $default_order = $this->client->mc_config_get_string( $this->userName, $this->password, 'default_bugnote_order' );
-        $bugnote_order = $this->client->mc_user_pref_get_pref( $this->userName, $this->password, 0, 'bugnote_order' );
+		$default_order = $this->client->mc_config_get_string( $this->userName, $this->password, 'default_bugnote_order' );
+		$bugnote_order = $this->client->mc_user_pref_get_pref( $this->userName, $this->password, 0, 'bugnote_order' );
 
-        $this->assertEquals( $default_order, $bugnote_order );
+		$this->assertEquals( $default_order, $bugnote_order );
 
-    }
+	}
 }

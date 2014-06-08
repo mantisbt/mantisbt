@@ -57,9 +57,7 @@ auth_ensure_user_authenticated();
 $f_page_number		= gpc_get_int( 'page_number', 1 );
 # Get Project Id and set it as current
 $t_project_id = gpc_get_int( 'project_id', helper_get_current_project() );
-if( ( ALL_PROJECTS == $t_project_id || project_exists( $t_project_id ) )
- && $t_project_id != helper_get_current_project()
-) {
+if( ( ALL_PROJECTS == $t_project_id || project_exists( $t_project_id ) ) && $t_project_id != helper_get_current_project() ) {
 	helper_set_current_project( $t_project_id );
 	# Reloading the page is required so that the project browser
 	# reflects the new current project
@@ -71,7 +69,7 @@ $t_bug_count = null;
 $t_page_count = null;
 
 $rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, null, null, null, true );
-if ( $rows === false ) {
+if( $rows === false ) {
 	print_header_redirect( 'view_all_set.php?type=0' );
 }
 
@@ -98,7 +96,7 @@ html_robots_noindex();
 
 html_page_top1( lang_get( 'view_bugs_link' ) );
 
-if ( current_user_get_pref( 'refresh_delay' ) > 0 ) {
+if( current_user_get_pref( 'refresh_delay' ) > 0 ) {
 	html_meta_redirect( 'view_all_bug_page.php?page_number='.$f_page_number, current_user_get_pref( 'refresh_delay' )*60 );
 }
 

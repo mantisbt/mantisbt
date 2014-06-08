@@ -189,7 +189,7 @@ class IssueNoteTest extends SoapBase {
 			$issueId);
 
 		$this->assertEquals( 1, count( $issueWithNote->notes ) );
-		
+
 		$noteDataNew = array(
 			'id' => $issueNoteId,
 			'text' => "some new note",

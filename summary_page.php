@@ -86,7 +86,7 @@ while( $row = db_fetch_array( $t_result ) ) {
 	$t_date_submitted = $row['date_submitted'];
 	$t_id = $row['id'];
 	$t_status = $row['status'];
-	if ( $row['hist_update'] !== NULL ) {
+	if( $row['hist_update'] !== NULL ) {
 		$t_last_updated   = $row['hist_update'];
 	} else {
 		$t_last_updated   = $row['last_updated'];
@@ -99,12 +99,12 @@ while( $row = db_fetch_array( $t_result ) ) {
 
 	$t_diff = $t_last_updated - $t_date_submitted;
 	$t_total_time = $t_total_time + $t_diff;
-	if ( $t_diff > $t_largest_diff ) {
+	if( $t_diff > $t_largest_diff ) {
 		$t_largest_diff = $t_diff;
 		$t_bug_id = $row['id'];
 	}
 }
-if ( $bug_count < 1 ) {
+if( $bug_count < 1 ) {
 	$bug_count = 1;
 }
 $t_average_time 	= $t_total_time / $bug_count;
@@ -139,7 +139,7 @@ print_summary_submenu(); ?>
 <!-- LEFT COLUMN -->
 <div id="summary-left" class="summary-container">
 
-	<?php if ( 1 < count( $t_project_ids ) ) { ?>
+	<?php if( 1 < count( $t_project_ids ) ) { ?>
 	<!-- BY PROJECT -->
 	<table>
 		<thead>

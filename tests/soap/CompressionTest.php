@@ -35,24 +35,24 @@ class CompressionTest extends SoapBase {
 
 	/**
 	 * A test case that tests the following:
-	 * 
+	 *
 	 * <ol>
 	 *   <li>Creating an issue.</li>
 	 *   <li>Retrieving an issue.</li>
 	 * </ol>
-	 * 
+	 *
 	 * <p>If any of the calls performed with compression enabled will
 	 * fail, the test will fail in turn with a SoapFault.</p>
 	 *
 	 */
 	public function testGetIssueWithCompressionEnabled() {
 		$issueToAdd = $this->getIssueToAdd( 'CompressionTest.testUpdateSummary' );
-		
+
 		$issueId = $this->client->mc_issue_add(
 			$this->userName,
 			$this->password,
 			$issueToAdd);
-			
+
 		$this->deleteAfterRun( $issueId );
 
 		$createdIssue = $this->client->mc_issue_get(
@@ -64,8 +64,8 @@ class CompressionTest extends SoapBase {
 	/**
 	 * Soap Client Flags for test
 	 */
-    protected function extraSoapClientFlags() {
-    	
-    	return array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP);
-    }
+	protected function extraSoapClientFlags() {
+
+		return array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP);
+	}
 }

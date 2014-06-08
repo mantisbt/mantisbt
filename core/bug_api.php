@@ -95,7 +95,7 @@ class BugData {
 	 * Bug Handler ID
 	 */
 	protected $handler_id = 0;
-	
+
 	/**
 	 * Duplicate ID
 	 */
@@ -256,7 +256,7 @@ class BugData {
 	 * @return int
 	 */
 	public function get_attachment_count() {
-		if ( $this->attachment_count === null ) {
+		if( $this->attachment_count === null ) {
 			$this->attachment_count = file_bug_attachment_count( $this->id );
 			return $this->attachment_count;
 		} else {
@@ -269,7 +269,7 @@ class BugData {
 	 * @return int
 	 */
 	public function get_bugnotes_count() {
-		if ( $this->bugnotes_count === null ) {
+		if( $this->bugnotes_count === null ) {
 			$this->bugnotes_count = self::bug_get_bugnote_count();
 			return $this->bugnotes_count;
 		} else {
@@ -302,7 +302,7 @@ class BugData {
 				$p_value = (int)$p_value;
 				break;
 			case 'target_version':
-				if ( !$this->loading && $this->$p_name != $p_value) {
+				if( !$this->loading && $this->$p_name != $p_value) {
 					# Only set target_version if user has access to do so
 					if( !access_has_project_level( config_get( 'roadmap_update_threshold' ) ) ) {
 						trigger_error( ERROR_ACCESS_DENIED, ERROR );
@@ -310,7 +310,7 @@ class BugData {
 				}
 				break;
 			case 'due_date':
-				if ( !is_numeric( $p_value ) ) {
+				if( !is_numeric( $p_value ) ) {
 					$p_value = strtotime($p_value);
 				}
 				break;
@@ -360,7 +360,7 @@ class BugData {
 	 * @return null
 	 */
 	private function fetch_extended_info() {
-		if ( $this->description == '' ) {
+		if( $this->description == '' ) {
 			$t_text = bug_text_cache_row($this->id);
 
 			$this->description = $t_text['description'];
@@ -658,7 +658,7 @@ class BugData {
 			$t_current_user = auth_get_current_user_id();
 
 			if( $t_old_data->description != $this->description ) {
-				if ( bug_revision_count( $c_bug_id, REV_DESCRIPTION ) < 1 ) {
+				if( bug_revision_count( $c_bug_id, REV_DESCRIPTION ) < 1 ) {
 					bug_revision_add( $c_bug_id, $t_old_data->reporter_id, REV_DESCRIPTION, $t_old_data->description, 0, $t_old_data->date_submitted );
 				}
 				$t_revision_id = bug_revision_add( $c_bug_id, $t_current_user, REV_DESCRIPTION, $this->description );
@@ -666,7 +666,7 @@ class BugData {
 			}
 
 			if( $t_old_data->steps_to_reproduce != $this->steps_to_reproduce ) {
-				if ( bug_revision_count( $c_bug_id, REV_STEPS_TO_REPRODUCE ) < 1 ) {
+				if( bug_revision_count( $c_bug_id, REV_STEPS_TO_REPRODUCE ) < 1 ) {
 					bug_revision_add( $c_bug_id, $t_old_data->reporter_id, REV_STEPS_TO_REPRODUCE, $t_old_data->steps_to_reproduce, 0, $t_old_data->date_submitted );
 				}
 				$t_revision_id = bug_revision_add( $c_bug_id, $t_current_user, REV_STEPS_TO_REPRODUCE, $this->steps_to_reproduce );
@@ -674,7 +674,7 @@ class BugData {
 			}
 
 			if( $t_old_data->additional_information != $this->additional_information ) {
-				if ( bug_revision_count( $c_bug_id, REV_ADDITIONAL_INFO ) < 1 ) {
+				if( bug_revision_count( $c_bug_id, REV_ADDITIONAL_INFO ) < 1 ) {
 					bug_revision_add( $c_bug_id, $t_old_data->reporter_id, REV_ADDITIONAL_INFO, $t_old_data->additional_information, 0, $t_old_data->date_submitted );
 				}
 				$t_revision_id = bug_revision_add( $c_bug_id, $t_current_user, REV_ADDITIONAL_INFO, $this->additional_information );
@@ -1042,13 +1042,13 @@ function bug_check_workflow( $p_bug_status, $p_wanted_status ) {
 		return true;
 	}
 
-	if ( $p_bug_status == $p_wanted_status ) {
+	if( $p_bug_status == $p_wanted_status ) {
 		# no change in state, allow the transition
 		return true;
 	}
 
 	# There should always be a possible next status, if not defined, then allow all.
-	if ( !isset( $t_status_enum_workflow[$p_bug_status] ) ) {
+	if( !isset( $t_status_enum_workflow[$p_bug_status] ) ) {
 		return true;
 	}
 
@@ -1246,13 +1246,13 @@ function bug_move( $p_bug_id, $p_target_project_id ) {
 	else {
 		$t_category_project_id = category_get_field( $t_category_id, 'project_id' );
 
-		if ( $t_category_project_id != ALL_PROJECTS
+		if( $t_category_project_id != ALL_PROJECTS
 		  && !in_array( $t_category_project_id , project_hierarchy_inheritance( $p_target_project_id ) )
 		) {
 			# Map by name
 			$t_category_name = category_get_field( $t_category_id, 'name' );
 			$t_target_project_category_id = category_get_id_by_name( $t_category_name, $p_target_project_id, false );
-			if ( $t_target_project_category_id === false ) {
+			if( $t_target_project_category_id === false ) {
 				# Use default category after moves, since there is no match by name.
 				$t_target_project_category_id = config_get( 'default_category_for_moves' );
 			}
@@ -1625,7 +1625,7 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 		case 'last_updated':
 		case 'date_submitted':
 		case 'due_date':
-			if ( !is_numeric( $p_value ) ) {
+			if( !is_numeric( $p_value ) ) {
 				trigger_error( ERROR_GENERIC, ERROR );
 			}
 			$c_value = $p_value;
@@ -1651,7 +1651,7 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 	db_query_bound( $query, array( $c_value, $c_bug_id ) );
 
 	# updated the last_updated date
-	if ( $p_field_name != 'last_updated' ) {
+	if( $p_field_name != 'last_updated' ) {
 		bug_update_date( $p_bug_id );
 	}
 
@@ -1796,7 +1796,7 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 			# Add log line to the history (both bugs)
 			history_log_event_special( $p_bug_id, BUG_REPLACE_RELATIONSHIP, BUG_DUPLICATE, $p_duplicate_id );
 			history_log_event_special( $p_duplicate_id, BUG_REPLACE_RELATIONSHIP, BUG_HAS_DUPLICATE, $p_bug_id );
-		} else if ( $t_id_relationship != -1 ) {
+		} else if( $t_id_relationship != -1 ) {
 			# Add the new relationship
 			relationship_add( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
 
@@ -1808,10 +1808,10 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 		# Copy list of users monitoring the duplicate bug to the original bug
 		$t_old_reporter_id = bug_get_field( $p_bug_id, 'reporter_id' );
 		$t_old_handler_id = bug_get_field( $p_bug_id, 'handler_id' );
-		if ( user_exists( $t_old_reporter_id ) ) {
+		if( user_exists( $t_old_reporter_id ) ) {
 			bug_monitor( $p_duplicate_id, $t_old_reporter_id );
 		}
-		if ( user_exists ( $t_old_handler_id ) ) {
+		if( user_exists ( $t_old_handler_id ) ) {
 			bug_monitor( $p_duplicate_id, $t_old_handler_id );
 		}
 		bug_monitor_copy( $p_bug_id, $p_duplicate_id );
@@ -1906,10 +1906,9 @@ function bug_monitor( $p_bug_id, $p_user_id ) {
 	}
 
 	# Don't let the anonymous user monitor bugs
-	if ( user_is_anonymous( $c_user_id ) ) {
+	if( user_is_anonymous( $c_user_id ) ) {
 		return false;
 	}
-
 
 	# Insert monitoring record
 	$t_bug_monitor_table = db_get_table( 'bug_monitor' );
@@ -1935,7 +1934,7 @@ function bug_monitor( $p_bug_id, $p_user_id ) {
  */
 function bug_get_monitors( $p_bug_id ) {
 
-	if ( ! access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $p_bug_id ) ) {
+	if( ! access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $p_bug_id ) ) {
 		return array();
 	}
 
@@ -1980,7 +1979,7 @@ function bug_monitor_copy( $p_source_bug_id, $p_dest_bug_id ) {
 	$t_result = db_query_bound( $query, array( $c_source_bug_id ) );
 
 	while( $t_bug_monitor = db_fetch_array( $t_result ) ) {
-		if ( user_exists( $t_bug_monitor['user_id'] ) &&
+		if( user_exists( $t_bug_monitor['user_id'] ) &&
 			!user_is_monitoring_bug( $t_bug_monitor['user_id'], $c_dest_bug_id ) ) {
 			$query = 'INSERT INTO ' . $t_bug_monitor_table . ' ( user_id, bug_id )
 				VALUES ( ' . db_param() . ', ' . db_param() . ' )';

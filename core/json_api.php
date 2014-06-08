@@ -54,7 +54,7 @@ function json_url( $p_url, $p_member = null ) {
 
 /**
  * JSON error handler
- * 
+ *
  * Ensures that all necessary headers are set and terminates processing after being invoked.
  * @param int $p_type contains the level of the error raised, as an integer.
  * @param string $p_error contains the error message, as a string.
@@ -71,7 +71,7 @@ function json_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 	}
 
 	$t_error_code = ERROR_GENERIC; # default
-	
+
 	# build an appropriate error string
 	switch( $p_type ) {
 		case E_WARNING:
@@ -110,19 +110,19 @@ function json_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 			'type' => $t_error_type,
 			'message' => $t_error_description
 		),
-		'contents' => $t_error_description 
+		'contents' => $t_error_description
 	));
 }
 /**
  * Outputs the specified contents inside a json response with OK status
- * 
+ *
  * <p>Ensures that all necessary headers are set and terminates processing.</p>
  * @param string $contents The contents to encode
  */
- function json_output_response ( $contents = '') {
- 	json_output_raw( array(
+function json_output_response ( $contents = '') {
+	json_output_raw( array(
 		'status' => 'OK',
-		'contents' => $contents	
+		'contents' => $contents
 	) );
 }
 

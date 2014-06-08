@@ -85,10 +85,10 @@ html_page_top();
 		<span class="display-label"><span><?php echo lang_get( 'email' ) ?></span></span>
 		<span class="display-value"><span>
 			<?php
-				if ( ! ( $t_can_manage || $t_can_see_email ) ) {
+				if( ! ( $t_can_manage || $t_can_see_email ) ) {
 					print error_string(ERROR_ACCESS_DENIED);
 				} else {
-					if ( !is_blank( $u_email ) ) {
+					if( !is_blank( $u_email ) ) {
 						print_email_link( $u_email, $u_email );
 					} else {
 						echo " - ";
@@ -100,7 +100,7 @@ html_page_top();
 	<div class="field-container">
 		<span class="display-label"><span><?php echo lang_get( 'realname' ) ?></span></span>
 		<span class="display-value"><span><?php
-			if ( ! ( $t_can_manage || $t_can_see_realname ) ) {
+			if( ! ( $t_can_manage || $t_can_see_realname ) ) {
 				print error_string(ERROR_ACCESS_DENIED);
 			} else {
 				echo string_display_line( $u_realname );
@@ -109,7 +109,7 @@ html_page_top();
 		<span class="label-style"></span>
 	</div>
 	<span class="section-links">
-	<?php if ( $t_can_manage ) { ?>
+	<?php if( $t_can_manage ) { ?>
 			<span id="manage-user-link"><a href="<?php echo string_html_specialchars( 'manage_user_edit_page.php?user_id=' . $f_user_id ); ?>"><?php echo lang_get( 'manage_user' ); ?></a></span>
 	<?php } ?>
 	</span>

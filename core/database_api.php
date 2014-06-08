@@ -501,7 +501,7 @@ function db_fetch_array( &$p_result ) {
 			$t_array_result = $p_result;
 			$t_array_fields = null;
 		} else {
-			if ( $t_array_fields === null ) {
+			if( $t_array_fields === null ) {
 				$p_result->MoveNext();
 				return $t_row;
 			}
@@ -533,7 +533,7 @@ function db_fetch_array( &$p_result ) {
 			}
 		}
 
-		if ( $t_convert == false ) {
+		if( $t_convert == false ) {
 			$t_array_fields = null;
 		}
 		$p_result->MoveNext();

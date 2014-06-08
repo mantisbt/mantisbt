@@ -34,14 +34,14 @@
  */
 function mc_tag_get_all( $p_username, $p_password, $p_page_number, $p_per_page) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
-	if ( $t_user_id === false ) {
+	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
 	}
 
-	if ( !access_has_global_level( config_get( 'tag_view_threshold' ) ) )
+	if( !access_has_global_level( config_get( 'tag_view_threshold' ) ) )
 		return mci_soap_fault_access_denied( $t_user_id , 'No rights to view tags');
 
-	if ( $p_per_page == 0 )
+	if( $p_per_page == 0 )
 		$p_per_page = 1;
 
 	$t_results = array();
@@ -78,11 +78,11 @@ function mc_tag_add( $p_username, $p_password, $p_tag ) {
 
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
-	if ( $t_user_id === false ) {
+	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
 	}
 
-	if ( !access_has_global_level( config_get( 'tag_create_threshold' ) ) )
+	if( !access_has_global_level( config_get( 'tag_create_threshold' ) ) )
 		return mci_soap_fault_access_denied( $t_user_id );
 
 	$t_valid_matches = array();
@@ -92,11 +92,11 @@ function mc_tag_add( $p_username, $p_password, $p_tag ) {
 	$t_tag_name = $p_tag['name'];
 	$t_tag_description = array_key_exists('description', $p_tag) ? $p_tag['description'] : '';
 
-	if ( !tag_name_is_valid($t_tag_name, $t_valid_matches))
+	if( !tag_name_is_valid($t_tag_name, $t_valid_matches))
 		return SoapObjectsFactory::newSoapFault('Client', 'Invalid tag name : "' . $t_tag_name .'"' );
 
 	$t_matching_by_name = tag_get_by_name( $t_tag_name);
-	if ( $t_matching_by_name != false )
+	if( $t_matching_by_name != false )
 		return SoapObjectsFactory::newSoapFault('Client', 'A tag with the same name already exists , id: ' . $t_matching_by_name['id']);
 
 	log_event(LOG_WEBSERVICE, "creating tag '$t_tag_name' for user '$t_user_id'");
@@ -116,14 +116,14 @@ function mc_tag_delete( $p_username, $p_password, $p_tag_id ) {
 
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
-	if ( $t_user_id === false ) {
+	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
 	}
 
-	if ( !access_has_global_level( config_get( 'tag_edit_threshold' ) ) )
+	if( !access_has_global_level( config_get( 'tag_edit_threshold' ) ) )
 		return mci_soap_fault_access_denied( $t_user_id );
 
-	if ( ! tag_exists( $p_tag_id ) )
+	if( ! tag_exists( $p_tag_id ) )
 		return SoapObjectsFactory::newSoapFault('Client', 'No tag with id ' . $p_tag_id);
 
 	log_event(LOG_WEBSERVICE, "deleting tag id '$p_tag_id'");
@@ -153,7 +153,7 @@ function mci_tag_set_for_issue ( $p_issue_id, $p_tags, $p_user_id ) {
 
 		$t_submitted_tag_ids[] = $t_tag['id'];
 
-		if ( in_array( $t_tag['id'], $t_attached_tag_ids) ) {
+		if( in_array( $t_tag['id'], $t_attached_tag_ids) ) {
 			continue;
 		} else {
 			$t_tag_ids_to_attach[] = $t_tag['id'];
@@ -170,14 +170,14 @@ function mci_tag_set_for_issue ( $p_issue_id, $p_tags, $p_user_id ) {
 	}
 
 	foreach ( $t_tag_ids_to_detach as $t_tag_id ) {
-		if ( access_has_bug_level ( config_get('tag_detach_threshold'), $p_issue_id, $p_user_id ) ) {
+		if( access_has_bug_level ( config_get('tag_detach_threshold'), $p_issue_id, $p_user_id ) ) {
 			log_event(LOG_WEBSERVICE, "detaching tag id '$t_tag_id' from issue '$p_issue_id'");
 			tag_bug_detach( $t_tag_id, $p_issue_id);
 		}
 	}
 
 	foreach ( $t_tag_ids_to_attach as $t_tag_id ) {
-		if ( access_has_bug_level ( config_get('tag_attach_threshold'), $p_issue_id, $p_user_id ) ) {
+		if( access_has_bug_level ( config_get('tag_attach_threshold'), $p_issue_id, $p_user_id ) ) {
 			log_event(LOG_WEBSERVICE, "attaching tag id '$t_tag_id' to issue '$p_issue_id'");
 			tag_bug_attach( $t_tag_id, $p_issue_id);
 		}

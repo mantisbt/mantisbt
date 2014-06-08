@@ -44,7 +44,7 @@ require_api( 'print_api.php' );
 require_api( 'user_api.php' );
 
 # check if at least one way to get here is enabled
-if ( OFF == config_get( 'allow_signup' ) &&
+if( OFF == config_get( 'allow_signup' ) &&
 	OFF == config_get( 'lost_password_feature' ) &&
 	OFF == config_get( 'send_reset_password' ) ) {
 	trigger_error( ERROR_LOST_PASSWORD_NOT_ENABLED, ERROR );
@@ -63,7 +63,7 @@ if( auth_is_user_authenticated() ) {
 
 $t_calculated_confirm_hash = auth_generate_confirm_hash( $f_user_id );
 
-if ( $f_confirm_hash != $t_calculated_confirm_hash ) {
+if( $f_confirm_hash != $t_calculated_confirm_hash ) {
 	trigger_error( ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID, ERROR );
 }
 

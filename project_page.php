@@ -53,7 +53,7 @@ $f_project_id	= gpc_get_int( 'project_id' );
 
 $t_view_issues_url = "set_project.php?project_id=$f_project_id&ref=view_all_bug_page.php";
 
-if ( $f_project_id == ALL_PROJECTS ) {
+if( $f_project_id == ALL_PROJECTS ) {
 	print_header_redirect( $t_view_issues_url );
 	exit;
 }
@@ -79,22 +79,22 @@ print_bracket_link( "changelog_page.php?project_id=$f_project_id", lang_get( 'ch
 print_bracket_link( "roadmap_page.php?project_id=$f_project_id", lang_get( 'roadmap_link' ) );
 
 # Documentation
-if ( config_get( 'enable_project_documentation' ) == ON ) {
+if( config_get( 'enable_project_documentation' ) == ON ) {
 	print_bracket_link( "proj_doc_page.php?project_id=$f_project_id", lang_get( 'docs_link' ) );
 }
 
 # Wiki
-if ( config_get( 'wiki_enable' ) == ON ) {
+if( config_get( 'wiki_enable' ) == ON ) {
 	print_bracket_link( "wiki.php?type=project&id=$f_project_id", lang_get( 'wiki' ) );
 }
 
 # Summary Page for Project
-if ( access_has_project_level( config_get( 'view_summary_threshold' ), $f_project_id ) ) {
+if( access_has_project_level( config_get( 'view_summary_threshold' ), $f_project_id ) ) {
 	print_bracket_link( "summary_page.php?project_id=$f_project_id", lang_get( 'summary_link' ) );
 }
 
 # Manage Project Page
-if ( access_has_project_level( config_get( 'manage_project_threshold' ), $f_project_id ) ) {
+if( access_has_project_level( config_get( 'manage_project_threshold' ), $f_project_id ) ) {
 	print_bracket_link( "manage_proj_edit_page.php?project_id=$f_project_id", lang_get( 'manage_link' ) );
 }
 
@@ -105,7 +105,7 @@ echo '</p>';
 
 $t_description = project_get_field( $f_project_id, 'description' );
 
-if ( !is_blank( $t_description ) ) {
+if( !is_blank( $t_description ) ) {
 	echo '<h2>', lang_get( 'description' ), '</h2>';
 	echo '<p>', string_display( $t_description ), '</p>';
 }
@@ -115,14 +115,14 @@ $t_access_level_for_dev_team = config_get( 'development_team_threshold' );
 $t_users = project_get_all_user_rows( $f_project_id, $t_access_level_for_dev_team );
 $t_show_real_names = config_get( 'show_realname' ) == ON;
 
-if ( count( $t_users ) > 0 ) {
+if( count( $t_users ) > 0 ) {
 	echo '<h2>', lang_get( 'development_team' ), '</h2>';
 
 	/** @todo sort users in DESC order by access level, then ASC by username/realname. */
 	foreach ( $t_users as $t_user_data ) {
 		$t_user_id = $t_user_data['id'];
 
-		if ( $t_show_real_names && !is_blank( $t_user_data['realname'] ) ) {
+		if( $t_show_real_names && !is_blank( $t_user_data['realname'] ) ) {
 			$t_user_name = $t_user_data['realname'];
 		} else {
 			$t_user_name = $t_user_data['username'];

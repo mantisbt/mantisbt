@@ -111,7 +111,7 @@ function plugin_get( $p_basename = null ) {
 		$t_current = $p_basename;
 	}
 
-	if ( !plugin_is_registered( $t_current ) ) {
+	if( !plugin_is_registered( $t_current ) ) {
 		error_parameters( $t_current );
 		trigger_error( ERROR_PLUGIN_NOT_REGISTERED, ERROR );
 	}
@@ -197,23 +197,23 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
 	$t_content_type = '';
 	$finfo = finfo_get_if_available();
 
-	if ( $finfo ) {
+	if( $finfo ) {
 		$t_file_info_type = $finfo->file( $t_file_path );
-		if ( $t_file_info_type !== false ) {
+		if( $t_file_info_type !== false ) {
 			$t_content_type = $t_file_info_type;
 		}
 	}
 
 	# allow overriding the content type for specific text and image extensions
 	# see bug #13193 for details
-	if ( strpos($t_content_type, 'text/') === 0 || strpos( $t_content_type, 'image/') === 0 ) {
+	if( strpos($t_content_type, 'text/') === 0 || strpos( $t_content_type, 'image/') === 0 ) {
 		$t_extension = pathinfo( $t_file_path, PATHINFO_EXTENSION );
-		if ( $t_extension && array_key_exists( $t_extension , $g_plugin_mime_types ) ) {
+		if( $t_extension && array_key_exists( $t_extension , $g_plugin_mime_types ) ) {
 			$t_content_type =  $g_plugin_mime_types [ $t_extension ];
 		}
 	}
 
-	if ( $t_content_type )
+	if( $t_content_type )
 		header('Content-Type: ' . $t_content_type );
 
 	readfile( $t_file_path );
@@ -508,17 +508,17 @@ function plugin_version_check( $p_version1, $p_version2, $p_maximum = false ) {
 	}
 
 	# Versions matched exactly
-	if ( count( $p_version1 ) == 0 && count( $p_version2 ) == 0 ) {
+	if( count( $p_version1 ) == 0 && count( $p_version2 ) == 0 ) {
 		return 1;
 	}
 
 	# Handle unmatched version bits
 	if( $p_maximum ) {
-		if ( count( $p_version2 ) > 0 ) {
+		if( count( $p_version2 ) > 0 ) {
 			return 1;
 		}
 	} else {
-		if ( count( $p_version1 ) > 0 ) {
+		if( count( $p_version1 ) > 0 ) {
 			return 1;
 		}
 	}
@@ -573,7 +573,7 @@ function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) 
 
 			$t_check = plugin_version_check( $t_version1, $t_version2, $t_maximum );
 
-			if ( $t_check < 1 ) {
+			if( $t_check < 1 ) {
 				return $t_check;
 			}
 		}
@@ -613,7 +613,7 @@ function plugin_priority( $p_base_name ) {
  */
 function plugin_is_installed( $p_basename ) {
 	foreach( plugin_get_force_installed() as $t_basename => $t_priority ) {
-		if ( $t_basename == $p_basename ) {
+		if( $t_basename == $p_basename ) {
 			return true;
 		}
 	}
@@ -999,14 +999,14 @@ function plugin_init( $p_basename ) {
 		# registered, but not yet initialized.
 		if( is_array( $t_plugin->uses ) ) {
 			foreach( $t_plugin->uses as $t_used => $t_version ) {
-				if ( isset( $g_plugin_cache[ $t_used ] ) && !isset( $g_plugin_cache_init[ $t_used ] ) ) {
+				if( isset( $g_plugin_cache[ $t_used ] ) && !isset( $g_plugin_cache_init[ $t_used ] ) ) {
 					return false;
 				}
 			}
 		}
 
 		# if plugin schema needs an upgrade, do not initialize
-		if ( plugin_needs_upgrade( $t_plugin ) ) {
+		if( plugin_needs_upgrade( $t_plugin ) ) {
 			return false;
 		}
 

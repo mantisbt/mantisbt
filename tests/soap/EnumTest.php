@@ -287,15 +287,15 @@ class EnumTest extends SoapBase {
 
 		return $assocArray;
 	}
-	
+
 	/**
 	 * Tests mc_enum_get with severities parameter
 	 *
 	 */
 	public function testEnumGet() {
-		
+
 		$t_result = $this->client->mc_enum_get($this->userName, $this->password, 'severity');
-		
+
 		$this->assertEquals( '10:feature,20:trivial,30:text,40:tweak,50:minor,60:major,70:crash,80:block', $t_result);
 	}
 }

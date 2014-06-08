@@ -163,7 +163,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
 		switch( $t_method ) {
 			case DISPLAY_ERROR_HALT:
 				# disable any further event callbacks
-				if ( function_exists( 'event_clear_callbacks' ) ) {
+				if( function_exists( 'event_clear_callbacks' ) ) {
 					event_clear_callbacks();
 				}
 

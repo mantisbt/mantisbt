@@ -55,10 +55,10 @@ $f_copy_to			= gpc_get_bool( 'copy_to' );
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_other_project_id );
 
-if ( $f_copy_from ) {
+if( $f_copy_from ) {
 	$t_src_project_id = $f_other_project_id;
 	$t_dst_project_id = $f_project_id;
-} else if ( $f_copy_to ) {
+} else if( $f_copy_to ) {
 	$t_src_project_id = $f_project_id;
 	$t_dst_project_id = $f_other_project_id;
 } else {

@@ -34,7 +34,7 @@
  * @uses utility_api.php
  */
 
-if ( !defined( 'BUGNOTE_STATS_INC_ALLOW' ) ) {
+if( !defined( 'BUGNOTE_STATS_INC_ALLOW' ) ) {
 	return;
 }
 
@@ -48,7 +48,7 @@ require_api( 'helper_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'utility_api.php' );
 
-if ( OFF == config_get('time_tracking_enabled') ) {
+if( OFF == config_get('time_tracking_enabled') ) {
 	return;
 }
 ?>
@@ -125,14 +125,14 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 <?php
 	# Print time tracking information if requested
 
-	if ( !is_blank( $f_get_bugnote_stats_button ) ) {
+	if( !is_blank( $f_get_bugnote_stats_button ) ) {
 		# Retrieve time tracking information
 		$t_from = "$t_bugnote_stats_from_y-$t_bugnote_stats_from_m-$t_bugnote_stats_from_d";
 		$t_to = "$t_bugnote_stats_to_y-$t_bugnote_stats_to_m-$t_bugnote_stats_to_d";
 		$t_bugnote_stats = bugnote_stats_get_events_array( $f_bug_id, $t_from, $t_to );
 
 		# Sort the array by user/real name
-		if ( ON == config_get( 'show_realname' ) ) {
+		if( ON == config_get( 'show_realname' ) ) {
 			$t_name_field = 'realname';
 		}
 		else {

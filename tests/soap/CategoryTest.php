@@ -36,7 +36,7 @@ class CategoryTest extends SoapBase {
 	 * @var array Category names to delete at end of test run
 	 */
 	private $categoryNamesToDelete = array();
-	
+
 	/**
 	 * A test case that tests the following:
 	 * 1. Get the project id.

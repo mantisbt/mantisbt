@@ -66,7 +66,7 @@ auth_reauthenticate();
 $f_sort	= gpc_get_string( 'sort', 'name' );
 $f_dir	= gpc_get_string( 'dir', 'ASC' );
 
-if ( 'ASC' == $f_dir ) {
+if( 'ASC' == $f_dir ) {
 	$t_direction = ASCENDING;
 } else {
 	$t_direction = DESCENDING;
@@ -82,7 +82,7 @@ print_manage_menu( 'manage_proj_page.php' );
 	<h2><?php echo lang_get( 'projects_title' ); ?></h2><?php
 
 	# Check the user's global access level before allowing project creation
-	if ( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
+	if( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
 		print_button( 'manage_proj_create_page.php', lang_get( 'create_new_project_link' ) );
 	} ?>
 
@@ -126,7 +126,7 @@ print_manage_menu( 'manage_proj_page.php' );
 		while ( 0 < count( $t_stack ) ) {
 			$t_projects   = array_shift( $t_stack );
 
-			if ( 0 == count( $t_projects ) ) {
+			if( 0 == count( $t_projects ) ) {
 				continue;
 			}
 
@@ -148,11 +148,11 @@ print_manage_menu( 'manage_proj_page.php' );
 			}
 			$t_subprojects = project_hierarchy_get_subprojects( $t_project_id, true );
 
-			if ( 0 < count( $t_projects ) || 0 < count( $t_subprojects ) ) {
+			if( 0 < count( $t_projects ) || 0 < count( $t_subprojects ) ) {
 				array_unshift( $t_stack, $t_projects );
 			}
 
-			if ( 0 < count( $t_subprojects ) ) {
+			if( 0 < count( $t_subprojects ) ) {
 				$t_full_projects = array();
 				foreach ( $t_subprojects as $t_project_id ) {
 					$t_full_projects[] = project_get_row( $t_project_id );
@@ -173,7 +173,7 @@ print_manage_menu( 'manage_proj_page.php' );
 		$t_categories = category_get_all_rows( ALL_PROJECTS );
 		$t_can_update_global_cat = access_has_global_level( config_get( 'manage_site_threshold' ) );
 
-		if ( count( $t_categories ) > 0 ) {
+		if( count( $t_categories ) > 0 ) {
 ?>
 		<thead>
 			<tr class="row-category">

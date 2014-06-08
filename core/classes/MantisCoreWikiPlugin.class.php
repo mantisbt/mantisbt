@@ -71,11 +71,11 @@ class MantisCoreDokuwikiPlugin extends MantisCoreWikiPlugin {
 		$t_base = plugin_config_get( 'engine_url' ) . 'doku.php?id=';
 
 		$t_namespace = plugin_config_get( 'root_namespace' );
-		if ( !is_blank( $t_namespace ) ) {
+		if( !is_blank( $t_namespace ) ) {
 			$t_base .= urlencode( $t_namespace ) . ':';
 		}
 
-		if ( !is_null( $p_project_id ) && $p_project_id != ALL_PROJECTS ) {
+		if( !is_null( $p_project_id ) && $p_project_id != ALL_PROJECTS ) {
 			$t_base .= urlencode( project_get_name( $p_project_id ) ) . ':';
 		}
 		return $t_base;
@@ -129,7 +129,7 @@ class MantisCoreMediaWikiPlugin extends MantisCoreWikiPlugin {
 	 */
 	function base_url( $p_project_id=null ) {
 		$t_base = plugin_config_get( 'engine_url' ) . 'index.php/';
-		if ( !is_null( $p_project_id ) && $p_project_id != ALL_PROJECTS ) {
+		if( !is_null( $p_project_id ) && $p_project_id != ALL_PROJECTS ) {
 			$t_base .= urlencode( project_get_name( $p_project_id ) ) . ':';
 		} else {
 			$t_base .= urlencode( plugin_config_get( 'root_namespace' ) );
@@ -187,11 +187,11 @@ class MantisCoreTwikiPlugin extends MantisCoreWikiPlugin {
 		$t_base = plugin_config_get( 'engine_url' );
 
 		$t_namespace = plugin_config_get( 'root_namespace' );
-		if ( !is_blank( $t_namespace ) ) {
+		if( !is_blank( $t_namespace ) ) {
 			$t_base .= urlencode( $t_namespace ) . '/';
 		}
 
-		if ( !is_null( $p_project_id ) && $p_project_id != ALL_PROJECTS ) {
+		if( !is_null( $p_project_id ) && $p_project_id != ALL_PROJECTS ) {
 			$t_base .= urlencode( project_get_name( $p_project_id ) ) . '/';
 		}
 		return $t_base;
@@ -247,11 +247,11 @@ class MantisCoreWikkaWikiPlugin extends MantisCoreWikiPlugin {
 		$t_base = plugin_config_get( 'engine_url' ) . 'wikka.php?wakka=';
 
 		$t_namespace = ucfirst( plugin_config_get( 'root_namespace' ) );
-		if ( !is_blank( $t_namespace ) ) {
+		if( !is_blank( $t_namespace ) ) {
 			$t_base .= urlencode( $t_namespace );
 		}
 
-		if ( !is_null( $p_project_id ) && $p_project_id != ALL_PROJECTS ) {
+		if( !is_null( $p_project_id ) && $p_project_id != ALL_PROJECTS ) {
 			$t_base .= urlencode( project_get_name( $p_project_id ) );
 		}
 		return $t_base;
@@ -305,7 +305,7 @@ class MantisCoreXwikiPlugin extends MantisCoreWikiPlugin {
 	 */
 	function base_url( $p_project_id=null ) {
 		$t_base = plugin_config_get( 'engine_url' );
-		if ( !is_null( $p_project_id ) && $p_project_id != ALL_PROJECTS ) {
+		if( !is_null( $p_project_id ) && $p_project_id != ALL_PROJECTS ) {
 			$t_base .= urlencode( project_get_name( $p_project_id ) ) . '/';
 		} else {
 			$t_base .= urlencode( plugin_config_get( 'root_namespace' ) );

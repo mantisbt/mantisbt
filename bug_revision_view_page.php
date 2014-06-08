@@ -61,14 +61,14 @@ $f_rev_id = gpc_get_int( 'rev_id', 0 );
 
 $t_title = '';
 
-if ( $f_bug_id ) {
+if( $f_bug_id ) {
 	$t_bug_id = $f_bug_id;
 	$t_bug_data = bug_get( $t_bug_id, true );
 	$t_bug_revisions = array_reverse( bug_revision_list( $t_bug_id ), true );
 
 	$t_title = lang_get( 'issue_id' ) . $t_bug_id;
 
-} else if ( $f_bugnote_id ) {
+} else if( $f_bugnote_id ) {
 	$t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
 	$t_bug_data = bug_get( $t_bug_id, true );
 
@@ -76,10 +76,10 @@ if ( $f_bug_id ) {
 
 	$t_title = lang_get( 'bugnote' ) . ' ' . $f_bugnote_id;
 
-} else if ( $f_rev_id ) {
+} else if( $f_rev_id ) {
 	$t_bug_revisions = bug_revision_like( $f_rev_id );
 
-	if ( count( $t_bug_revisions ) < 1 ) {
+	if( count( $t_bug_revisions ) < 1 ) {
 		trigger_error( ERROR_GENERIC, ERROR );
 	}
 
@@ -102,7 +102,7 @@ function show_revision( $p_revision ) {
 	static $s_can_drop = null;
 	static $s_drop_token = null;
 	static $s_user_access = null;
-	if ( is_null( $s_can_drop ) ) {
+	if( is_null( $s_can_drop ) ) {
 		$s_can_drop = access_has_bug_level( config_get( 'bug_revision_drop_threshold' ), $p_revision['bug_id'] );
 		$s_drop_token = form_security_param( 'bug_revision_drop' );
 	}
@@ -118,11 +118,11 @@ function show_revision( $p_revision ) {
 			$t_label = lang_get( 'additional_information' );
 			break;
 		case REV_BUGNOTE:
-			if ( is_null( $s_user_access ) ) {
+			if( is_null( $s_user_access ) ) {
 				$s_user_access = access_has_bug_level( config_get( 'private_bugnote_threshold' ), $p_revision['bug_id'] );
 			}
 
-			if ( !$s_user_access ) {
+			if( !$s_user_access ) {
 				return null;
 			}
 
@@ -141,7 +141,7 @@ function show_revision( $p_revision ) {
 <th class="category"><?php echo lang_get( 'revision' ) ?></th>
 <td colspan="2"><?php echo $t_by_string ?></td>
 <td class="center" width="5%">
-<?php if ( $s_can_drop ) {
+<?php if( $s_can_drop ) {
 	print_bracket_link( 'bug_revision_drop.php?id=' . $p_revision['id'] . $s_drop_token, lang_get( 'revision_drop' ) );
 } ?>
 </tr>
@@ -168,7 +168,7 @@ print_recently_visited();
 <td class="form-title" colspan="2"><?php echo lang_get( 'view_revisions' ), ': ', $t_title ?></td>
 <td class="right" colspan="2">
 <?php
-if ( !$f_bug_id && !$f_bugnote_id ) { print_bracket_link( '?bug_id=' . $t_bug_id, lang_get( 'all_revisions' ) ); }
+if( !$f_bug_id && !$f_bugnote_id ) { print_bracket_link( '?bug_id=' . $t_bug_id, lang_get( 'all_revisions' ) ); }
 print_bracket_link( 'view.php?id=' . $t_bug_id, lang_get( 'back_to_issue' ) );
 ?>
 </td>

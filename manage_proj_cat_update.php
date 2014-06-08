@@ -60,7 +60,7 @@ $f_assigned_to		= gpc_get_int( 'assigned_to', 0 );
 
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
-if ( is_blank( $f_name ) ) {
+if( is_blank( $f_name ) ) {
 	trigger_error( ERROR_EMPTY_FIELD, ERROR );
 }
 
@@ -69,7 +69,7 @@ $t_old_name = $t_row['name'];
 $t_project_id = $t_row['project_id'];
 
 # check for duplicate
-if ( utf8_strtolower( $f_name ) != utf8_strtolower( $t_old_name ) ) {
+if( utf8_strtolower( $f_name ) != utf8_strtolower( $t_old_name ) ) {
 	category_ensure_unique( $t_project_id, $f_name );
 }
 
@@ -77,7 +77,7 @@ category_update( $f_category_id, $f_name, $f_assigned_to );
 
 form_security_purge( 'manage_proj_cat_update' );
 
-if ( $f_project_id == ALL_PROJECTS ) {
+if( $f_project_id == ALL_PROJECTS ) {
 	$t_redirect_url = 'manage_proj_page.php';
 } else {
 	$t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;

@@ -32,7 +32,7 @@
  * @uses tag_api.php
  */
 
-if ( !defined( 'BUG_ACTIONGROUP_INC_ALLOW' ) ) {
+if( !defined( 'BUG_ACTIONGROUP_INC_ALLOW' ) ) {
 	return;
 }
 
@@ -87,7 +87,7 @@ function action_attach_tags_validate( $p_bug_id ) {
 		}
 		$g_action_attach_tags_tags = tag_parse_string( gpc_get_string( 'tag_string' ) );
 		foreach ( $g_action_attach_tags_tags as $t_tag_row ) {
-			if ( $t_tag_row['id'] == -1 ) {
+			if( $t_tag_row['id'] == -1 ) {
 				$g_action_attach_tags_create[$t_tag_row['name']] = $t_tag_row;
 			} else if( $t_tag_row['id'] >= 0 ) {
 				$g_action_attach_tags_attach[$t_tag_row['name']] = $t_tag_row;
@@ -125,7 +125,7 @@ function action_attach_tags_process( $p_bug_id ) {
 	$g_action_attach_tags_create = array();
 
 	foreach( $g_action_attach_tags_attach as $t_tag_row ) {
-		if ( !tag_bug_is_attached( $t_tag_row['id'], $p_bug_id ) ) {
+		if( !tag_bug_is_attached( $t_tag_row['id'], $p_bug_id ) ) {
 			tag_bug_attach( $t_tag_row['id'], $p_bug_id, $t_user_id );
 		}
 	}

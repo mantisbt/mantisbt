@@ -27,7 +27,7 @@
  * @uses utility_api.php
  */
 
-if ( !defined( 'CHECK_PHP_INC_ALLOW' ) ) {
+if( !defined( 'CHECK_PHP_INC_ALLOW' ) ) {
 	return;
 }
 
@@ -213,7 +213,7 @@ if( is_windows_server() ) {
 }
 
 check_print_test_warn_row(
-  'Check for php bug 61443 - php 5.4.0-5.4.3, trying to use compression with no output handler set',
-  !(ini_get( 'output_handler' ) == '' && function_exists( 'ini_set' ) &&
-    version_compare( PHP_VERSION, '5.4.0', '>=' ) && version_compare( PHP_VERSION, '5.4.4', '<' ) ),
-    array( false=> 'you should consider setting a php output handler, ensuring compression is disabled or upgrading to at least php 5.4.4' ) );
+	'Check for php bug 61443 - php 5.4.0-5.4.3, trying to use compression with no output handler set',
+	!(ini_get( 'output_handler' ) == '' && function_exists( 'ini_set' ) &&
+	version_compare( PHP_VERSION, '5.4.0', '>=' ) && version_compare( PHP_VERSION, '5.4.4', '<' ) ),
+	array( false=> 'you should consider setting a php output handler, ensuring compression is disabled or upgrading to at least php 5.4.4' ) );

@@ -110,14 +110,14 @@ $my_filter[FILTER_PROPERTY_SORT_DIRECTION] = gpc_get_string( FILTER_PROPERTY_SOR
 $my_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] = gpc_get_int( FILTER_PROPERTY_ISSUES_PER_PAGE, config_get( 'default_limit_view' ) );
 
 $t_highlight_changed = gpc_get_int( FILTER_PROPERTY_HIGHLIGHT_CHANGED, -1 );
-if ( $t_highlight_changed != -1 ) {
+if( $t_highlight_changed != -1 ) {
 	$my_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] = $t_highlight_changed;
 }
 
 # Handle custom fields.
 $t_custom_fields = array();
 foreach( $_GET as $t_var_name => $t_var_value ) {
-	if ( strpos( $t_var_name, 'custom_field_' ) === 0 ) {
+	if( strpos( $t_var_name, 'custom_field_' ) === 0 ) {
 		$t_custom_field_id = utf8_substr( $t_var_name, 13 );
 		$t_custom_fields[$t_custom_field_id] = $t_var_value;
 	}
@@ -143,7 +143,7 @@ $t_row_id = filter_db_set_for_current_user( $t_project_id, false, '', $t_setting
 gpc_set_cookie( config_get( 'view_all_cookie' ), $t_row_id, time()+config_get( 'cookie_time_length' ), config_get( 'cookie_path' ) );
 
 # redirect to print_all or view_all page
-if ( $f_print ) {
+if( $f_print ) {
 	$t_redirect_url = 'print_all_bug_page.php';
 } else {
 	$t_redirect_url = 'view_all_bug_page.php';

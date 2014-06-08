@@ -74,7 +74,7 @@ $t_user = user_get_row( $f_user_id );
 # This page is currently called from the manage_* namespace and thus we
 # have to allow authorised users to update the accounts of other users.
 # TODO: split this functionality into manage_user_prefs_reset.php
-if ( auth_get_current_user_id() != $f_user_id ) {
+if( auth_get_current_user_id() != $f_user_id ) {
 	access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 	access_ensure_global_level( $t_user['access_level'] );
 } else {

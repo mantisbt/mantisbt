@@ -31,7 +31,7 @@
  * @uses utility_api.php
  */
 
-if ( !defined( 'BUG_FILE_UPLOAD_INC_ALLOW' ) ) {
+if( !defined( 'BUG_FILE_UPLOAD_INC_ALLOW' ) ) {
 	return;
 }
 
@@ -43,7 +43,7 @@ require_api( 'lang_api.php' );
 require_api( 'utility_api.php' );
 
 # check if we can allow the upload... bail out if we can't
-if ( !file_allow_bug_upload( $f_bug_id ) ) {
+if( !file_allow_bug_upload( $f_bug_id ) ) {
 	return false;
 }
 

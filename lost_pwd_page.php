@@ -44,7 +44,7 @@ require_api( 'print_api.php' );
 require_css( 'login.css' );
 
 # lost password feature disabled or reset password via email disabled -> stop here!
-if ( LDAP == config_get_global( 'login_method' ) ||
+if( LDAP == config_get_global( 'login_method' ) ||
 	OFF == config_get( 'lost_password_feature' ) ||
 	OFF == config_get( 'send_reset_password' )  ||
 	OFF == config_get( 'enable_email_notification' ) ) {
@@ -69,7 +69,7 @@ html_page_top2a();
 			echo form_security_field( 'lost_pwd' );
 
 			$t_allow_passwd = helper_call_custom_function( 'auth_can_change_password', array() );
-			if ( $t_allow_passwd ) { ?>
+			if( $t_allow_passwd ) { ?>
 			<div class="field-container">
 				<label for="username"><span><?php echo lang_get( 'username' ) ?></span></label>
 				<span class="input"><input id="username" type="text" name="username" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" class="autofocus" /></span>

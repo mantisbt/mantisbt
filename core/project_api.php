@@ -69,7 +69,7 @@ function project_table_empty() {
 	global $g_cache_project;
 
 	# If projects already cached, use the cache.
-	if ( isset( $g_cache_project ) && count( $g_cache_project ) > 0 ) {
+	if( isset( $g_cache_project ) && count( $g_cache_project ) > 0 ) {
 		return false;
 	}
 
@@ -160,7 +160,7 @@ function project_cache_array_rows( $p_project_id_array ) {
 	}
 
 	foreach ( $c_project_id_array as $c_project_id ) {
-		if ( !isset( $t_projects_found[$c_project_id] ) ) {
+		if( !isset( $t_projects_found[$c_project_id] ) ) {
 			$g_cache_project_missing[(int) $c_project_id] = true;
 		}
 	}
@@ -313,7 +313,7 @@ function validate_project_file_path( $p_file_path ) {
 		# If the provided path is the same as the default, make the path blank.
 		# This means that if the default upload path is changed, you don't have
 		# to update the upload path for every single project.
-		if ( !strcmp( $p_file_path, config_get( 'absolute_path_default_upload_folder' ) ) ) {
+		if( !strcmp( $p_file_path, config_get( 'absolute_path_default_upload_folder' ) ) ) {
 			$p_file_path = '';
 		} else {
 			file_ensure_valid_upload_path( $p_file_path );
@@ -552,7 +552,7 @@ function project_get_field( $p_project_id, $p_field_name, $p_trigger_errors = tr
 
 	if( isset( $row[$p_field_name] ) ) {
 		return $row[$p_field_name];
-	} else if ( $p_trigger_errors ) {
+	} else if( $p_trigger_errors ) {
 		error_parameters( $p_field_name );
 		trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
 	}
@@ -887,7 +887,7 @@ function project_remove_all_users( $p_project_id, $p_access_level_limit = null )
 
 	$t_query = "DELETE FROM $t_project_user_list_table WHERE project_id = " . db_param();
 
-	if ( $p_access_level_limit !== null ) {
+	if( $p_access_level_limit !== null ) {
 		$t_query .= ' AND access_level <= ' . db_param();
 		db_query_bound( $t_query, array( $p_project_id, $p_access_level_limit ) );
 	} else {
@@ -917,7 +917,7 @@ function project_copy_users( $p_destination_id, $p_source_id, $p_access_level_li
 	for ( $i = 0; $i < $t_count; $i++ ) {
 		$t_row = $t_rows[$i];
 
-		if ( $p_access_level_limit !== null &&
+		if( $p_access_level_limit !== null &&
 			$t_row['access_level'] > $p_access_level_limit ) {
 			$t_destination_access_level = $p_access_level_limit;
 		} else {
@@ -926,7 +926,7 @@ function project_copy_users( $p_destination_id, $p_source_id, $p_access_level_li
 
 		# if there is no duplicate then add a new entry
 		# otherwise just update the access level for the existing entry
-		if ( project_includes_user( $p_destination_id, $t_row['user_id'] ) ) {
+		if( project_includes_user( $p_destination_id, $t_row['user_id'] ) ) {
 			project_update_user_access( $p_destination_id, $t_row['user_id'], $t_destination_access_level );
 		} else {
 			project_add_user( $p_destination_id, $t_row['user_id'], $t_destination_access_level );

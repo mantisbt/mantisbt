@@ -70,7 +70,7 @@ require_api( 'utility_api.php' );
  */
 function relgraph_bug_format_id( $p_bug_id ) {
 	$t_pretty_bug_id = bug_format_id( $p_bug_id );
-	if ( !preg_match( '/^(([a-zA-z_][0-9a-zA-Z_]*)|(\d+))$/', $t_pretty_bug_id ) ) {
+	if( !preg_match( '/^(([a-zA-z_][0-9a-zA-Z_]*)|(\d+))$/', $t_pretty_bug_id ) ) {
 		$t_pretty_bug_id = $p_bug_id;
 	}
 	return $t_pretty_bug_id;

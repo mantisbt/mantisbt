@@ -61,7 +61,7 @@ $f_user_id = gpc_get_int( 'user_id', 0 );
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 access_ensure_project_level( config_get( 'project_user_threshold' ), $f_project_id );
 
-if ( 0 == $f_user_id ) {
+if( 0 == $f_user_id ) {
 	# Confirm with the user
 	helper_ensure_confirmed( lang_get( 'remove_all_users_sure_msg' ), lang_get( 'remove_all_users_button' ) );
 

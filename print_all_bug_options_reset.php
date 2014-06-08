@@ -83,13 +83,13 @@ $t_redirect_url = 'print_all_bug_options_page.php';
 html_page_top( null, $t_redirect_url );
 
 
-if ( $t_result ) {
-    html_operation_successful( $t_redirect_url );
+if( $t_result ) {
+	html_operation_successful( $t_redirect_url );
 } else {
-    echo '<div class="failure-msg">';
-    echo error_string( ERROR_GENERIC ) . '<br />';
-    print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
-    echo '</div>';
+	echo '<div class="failure-msg">';
+	echo error_string( ERROR_GENERIC ) . '<br />';
+	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+	echo '</div>';
 }
 
 html_page_bottom();

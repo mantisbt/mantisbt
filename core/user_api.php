@@ -229,7 +229,7 @@ function user_exists( $p_user_id ) {
 function user_ensure_exists( $p_user_id ) {
 	$c_user_id = (integer)$p_user_id;
 
-	if ( !user_exists( $c_user_id ) ) {
+	if( !user_exists( $c_user_id ) ) {
 		error_parameters( $c_user_id );
 		trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR );
 	}
@@ -603,10 +603,10 @@ function user_signup( $p_username, $p_email = null ) {
 		#  I'll re-enable this once a plan has been properly formulated for LDAP
 		#  account management and creation.
 		#			$t_email = '';
-		#			if ( ON == config_get( 'use_ldap_email' ) ) {
+		#			if( ON == config_get( 'use_ldap_email' ) ) {
 		#				$t_email = ldap_email_from_username( $p_username );
 		#			}
-		#			if ( !is_blank( $t_email ) ) {
+		#			if( !is_blank( $t_email ) ) {
 		#				$p_email = $t_email;
 		#			}
 	}
@@ -876,11 +876,11 @@ function user_get_email( $p_user_id ) {
 function user_get_realname( $p_user_id ) {
 	$t_realname = '';
 
-	if ( LDAP == config_get( 'login_method' ) && ON == config_get( 'use_ldap_realname' ) ) {
+	if( LDAP == config_get( 'login_method' ) && ON == config_get( 'use_ldap_realname' ) ) {
 		$t_realname = ldap_realname( $p_user_id );
 	}
 
-	if ( is_blank( $t_realname ) ) {
+	if( is_blank( $t_realname ) ) {
 		$t_realname = user_get_field( $p_user_id, 'realname' );
 	}
 
@@ -1193,12 +1193,12 @@ function user_get_assigned_projects( $p_user_id ) {
 	$t_mantis_project_table = db_get_table( 'project' );
 
 	$t_query = "SELECT DISTINCT p.id, p.name, p.view_state, u.access_level
-                FROM $t_mantis_project_table p
-                LEFT JOIN $t_mantis_project_user_list_table u
-                ON p.id=u.project_id
-                WHERE p.enabled = '1' AND
-                    u.user_id=" . db_param() . "
-                ORDER BY p.name";
+				FROM $t_mantis_project_table p
+				LEFT JOIN $t_mantis_project_user_list_table u
+				ON p.id=u.project_id
+				WHERE p.enabled = '1' AND
+					u.user_id=" . db_param() . "
+				ORDER BY p.name";
 	$t_result = db_query_bound( $t_query, array( $p_user_id ) );
 	$t_projects = array();
 	while( $t_row = db_fetch_array( $t_result ) ) {
@@ -1216,51 +1216,51 @@ function user_get_assigned_projects( $p_user_id ) {
  * @return array List of users not assigned to the specified project
  */
 function user_get_unassigned_by_project_id( $p_project_id = null ) {
-    $t_mantis_project_user_list_table = db_get_table( 'project_user_list' );
-    $t_mantis_user_table = db_get_table( 'user' );
+	$t_mantis_project_user_list_table = db_get_table( 'project_user_list' );
+	$t_mantis_user_table = db_get_table( 'user' );
 
-    if( null === $p_project_id ) {
-        $p_project_id = helper_get_current_project();
-    }
+	if( null === $p_project_id ) {
+		$p_project_id = helper_get_current_project();
+	}
 
-    $t_adm = config_get_global( 'admin_site_threshold' );
-    $t_query = "SELECT DISTINCT u.id, u.username, u.realname
-                FROM $t_mantis_user_table u
-                LEFT JOIN $t_mantis_project_user_list_table p
-                ON p.user_id=u.id AND p.project_id=" . db_param() . "
-                WHERE u.access_level<" . db_param() . " AND
-                    u.enabled = " . db_param() . " AND
-                    p.user_id IS NULL
-                ORDER BY u.realname, u.username";
-    $t_result = db_query_bound( $t_query, array( $p_project_id, $t_adm, true ) );
-    $t_display = array();
-    $t_sort = array();
-    $t_users = array();
-    $t_show_realname = ( ON == config_get( 'show_realname' ) );
-    $t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
+	$t_adm = config_get_global( 'admin_site_threshold' );
+	$t_query = "SELECT DISTINCT u.id, u.username, u.realname
+				FROM $t_mantis_user_table u
+				LEFT JOIN $t_mantis_project_user_list_table p
+				ON p.user_id=u.id AND p.project_id=" . db_param() . "
+				WHERE u.access_level<" . db_param() . " AND
+					u.enabled = " . db_param() . " AND
+					p.user_id IS NULL
+				ORDER BY u.realname, u.username";
+	$t_result = db_query_bound( $t_query, array( $p_project_id, $t_adm, true ) );
+	$t_display = array();
+	$t_sort = array();
+	$t_users = array();
+	$t_show_realname = ( ON == config_get( 'show_realname' ) );
+	$t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
-        $t_users[] = $t_row['id'];
-        $t_user_name = string_attribute( $t_row['username'] );
-        $t_sort_name = $t_user_name;
-        if(( isset( $t_row['realname'] ) ) && ( $t_row['realname'] <> '' ) && $t_show_realname ) {
-            $t_user_name = string_attribute( $t_row['realname'] );
-            if( $t_sort_by_last_name ) {
-                $t_sort_name_bits = explode( ' ', utf8_strtolower( $t_user_name ), 2 );
-                $t_sort_name = ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
-            } else {
-                $t_sort_name = utf8_strtolower( $t_user_name );
-            }
-        }
-        $t_display[] = $t_user_name;
-        $t_sort[] = $t_sort_name;
-    }
-    array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
-    $t_count = count( $t_sort );
+		$t_users[] = $t_row['id'];
+		$t_user_name = string_attribute( $t_row['username'] );
+		$t_sort_name = $t_user_name;
+		if(( isset( $t_row['realname'] ) ) && ( $t_row['realname'] <> '' ) && $t_show_realname ) {
+			$t_user_name = string_attribute( $t_row['realname'] );
+			if( $t_sort_by_last_name ) {
+				$t_sort_name_bits = explode( ' ', utf8_strtolower( $t_user_name ), 2 );
+				$t_sort_name = ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
+			} else {
+				$t_sort_name = utf8_strtolower( $t_user_name );
+			}
+		}
+		$t_display[] = $t_user_name;
+		$t_sort[] = $t_sort_name;
+	}
+	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
+	$t_count = count( $t_sort );
 	$t_user_list = array();
-    for( $i = 0;$i < $t_count; $i++ ) {
+	for( $i = 0;$i < $t_count; $i++ ) {
 		$t_user_list[$t_users[$i]] = $t_display[$i];
-    }
+	}
 	return $t_user_list;
 }
 
@@ -1523,7 +1523,7 @@ function user_set_fields( $p_user_id, $p_fields ) {
 
 	$c_user_id = db_prepare_int( $p_user_id );
 
-	if ( !array_key_exists('protected', $p_fields) ) {
+	if( !array_key_exists('protected', $p_fields) ) {
 		user_ensure_unprotected( $p_user_id );
 	}
 
@@ -1536,7 +1536,7 @@ function user_set_fields( $p_user_id, $p_fields ) {
 
 		$c_field_name = db_prepare_string( $t_field_name );
 
-		if ( count ( $t_parameters) == 0 )
+		if( count ( $t_parameters) == 0 )
 			$t_query .= ' SET '. $c_field_name. '=' . db_param();
 		else
 			$t_query .= ' , ' . $c_field_name. '=' . db_param();

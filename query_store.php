@@ -59,14 +59,14 @@ $f_all_projects = gpc_get_bool( 'all_projects' );
 $t_query_redirect_url = 'query_store_page.php';
 
 # We can't have a blank name
-if ( is_blank( $f_query_name ) ) {
+if( is_blank( $f_query_name ) ) {
 	$t_query_redirect_url = $t_query_redirect_url . '?error_msg='
 		. urlencode( lang_get( 'query_blank_name' ) );
 	print_header_redirect( $t_query_redirect_url );
 }
 
 # mantis_filters_table.name has a length of 64. Not allowing longer.
-if ( !filter_name_valid_length( $f_query_name ) ) {
+if( !filter_name_valid_length( $f_query_name ) ) {
 	$t_query_redirect_url = $t_query_redirect_url . '?error_msg='
 		. urlencode( lang_get( 'query_name_too_long' ) );
 	print_header_redirect( $t_query_redirect_url );
@@ -76,7 +76,7 @@ if ( !filter_name_valid_length( $f_query_name ) ) {
 # query with the same name
 $t_query_arr = filter_db_get_available_queries();
 foreach( $t_query_arr as $t_id => $t_name )	{
-	if ( $f_query_name == $t_name ) {
+	if( $f_query_name == $t_name ) {
 		$t_query_redirect_url = $t_query_redirect_url . '?error_msg='
 			. urlencode( lang_get( 'query_dupe_name' ) );
 		print_header_redirect( $t_query_redirect_url );
@@ -85,7 +85,7 @@ foreach( $t_query_arr as $t_id => $t_name )	{
 }
 
 $t_project_id = helper_get_current_project();
-if ( $f_all_projects ) {
+if( $f_all_projects ) {
 	$t_project_id = 0;
 }
 
@@ -96,7 +96,7 @@ $t_new_row_id = filter_db_set_for_current_user($t_project_id, $f_is_public,
 
 form_security_purge( 'query_store' );
 
-if ( $t_new_row_id == -1 ) {
+if( $t_new_row_id == -1 ) {
 	$t_query_redirect_url = $t_query_redirect_url . '?error_msg='
 		. urlencode( lang_get( 'query_store_error' ) );
 	print_header_redirect( $t_query_redirect_url );

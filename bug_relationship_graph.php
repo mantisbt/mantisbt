@@ -55,14 +55,14 @@ require_api( 'relationship_graph_api.php' );
 
 auth_ensure_user_authenticated();
 
-if ( ON != config_get( 'relationship_graph_enable' ) )
+if( ON != config_get( 'relationship_graph_enable' ) )
 	access_denied();
 
 $f_bug_id		= gpc_get_int( 'bug_id' );
 $f_type			= gpc_get_string( 'graph', 'relation' );
 $f_orientation	= gpc_get_string( 'orientation', config_get( 'relationship_graph_orientation' ) );
 
-if ( 'relation' == $f_type ) {
+if( 'relation' == $f_type ) {
 	$t_graph_type = 'relation';
 	$t_graph_relation = true;
 } else {
@@ -70,7 +70,7 @@ if ( 'relation' == $f_type ) {
 	$t_graph_relation = false;
 }
 
-if ( 'horizontal' == $f_orientation ) {
+if( 'horizontal' == $f_orientation ) {
 	$t_graph_orientation = 'horizontal';
 	$t_graph_horizontal = true;
 } else {
@@ -100,7 +100,7 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 	<!-- Title -->
 	<td class="form-title">
 		<?php
-		if ( $t_graph_relation )
+		if( $t_graph_relation )
 			echo lang_get( 'viewing_bug_relationship_graph_title' );
 		else
 			echo lang_get( 'viewing_bug_dependency_graph_title' );
@@ -114,19 +114,19 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 		<!-- Relation/Dependency Graph Switch -->
 		<span class="small">
 <?php
-		if ( $t_graph_relation )
+		if( $t_graph_relation )
 			print_bracket_link( "bug_relationship_graph.php?bug_id=$f_bug_id&graph=dependency", lang_get( 'dependency_graph' ) );
 		else
 			print_bracket_link( "bug_relationship_graph.php?bug_id=$f_bug_id&graph=relation", lang_get( 'relation_graph' ) );
 ?>
 		</span>
 <?php
-		if ( !$t_graph_relation ) {
+		if( !$t_graph_relation ) {
 ?>
 		<!-- Horizontal/Vertical Switch -->
 		<span class="small">
 <?php
-			if ( $t_graph_horizontal )
+			if( $t_graph_horizontal )
 				print_bracket_link( "bug_relationship_graph.php?bug_id=$f_bug_id&graph=dependency&orientation=vertical", lang_get( 'vertical' ) );
 			else
 				print_bracket_link( "bug_relationship_graph.php?bug_id=$f_bug_id&graph=dependency&orientation=horizontal", lang_get( 'horizontal' ) );
@@ -142,7 +142,7 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 	<!-- Graph -->
 	<td colspan="2">
 <?php
-	if ( $t_graph_relation )
+	if( $t_graph_relation )
 		$t_graph = relgraph_generate_rel_graph( $f_bug_id );
 	else
 		$t_graph = relgraph_generate_dep_graph( $f_bug_id, $t_graph_horizontal );

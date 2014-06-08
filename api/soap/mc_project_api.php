@@ -43,15 +43,15 @@
  */
 function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id, $p_filter_type, $p_target_user, $p_page_number, $p_per_page ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
-	if ( $t_user_id === false ) {
+	if( $t_user_id === false ) {
 		return mci_soap_fault_login_failed();
 	}
 
-	if ( $p_project_id != ALL_PROJECTS && !project_exists( $p_project_id ) ) {
+	if( $p_project_id != ALL_PROJECTS && !project_exists( $p_project_id ) ) {
 		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
 	}
 
-	if ( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
+	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
@@ -63,16 +63,16 @@ function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id
 	$t_target_user_id = mci_get_user_id( $p_target_user );
 	$t_show_sticky = true;
 
-	if ( strcasecmp( $p_filter_type, 'assigned' ) == 0 ) {
+	if( strcasecmp( $p_filter_type, 'assigned' ) == 0 ) {
 		$t_filter = filter_create_assigned_to_unresolved( $p_project_id, $t_target_user_id );
-	} else if ( strcasecmp( $p_filter_type, 'reported' ) == 0 ) {
+	} else if( strcasecmp( $p_filter_type, 'reported' ) == 0 ) {
 		# target id 0 for reporter doesn't make sense.
-		if ( $t_target_user_id == 0 ) {
+		if( $t_target_user_id == 0 ) {
 			return SoapObjectsFactory::newSoapFault( 'Client', "Target user id must be specified for 'reported' filter." );
 		}
 
 		$t_filter = filter_create_reported_by( $p_project_id, $t_target_user_id );
-	} else if ( strcasecmp( $p_filter_type, 'monitored' ) == 0 ) {
+	} else if( strcasecmp( $p_filter_type, 'monitored' ) == 0 ) {
 		$t_filter = filter_create_monitored_by( $p_project_id, $t_target_user_id );
 	} else {
 		return SoapObjectsFactory::newSoapFault( 'Client', "Unknown filter type '$p_filter_type'." );
@@ -83,7 +83,7 @@ function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id
 	$t_result = array();
 
 	# the page number was moved back, so we have exceeded the actual page number, see bug #12991
-	if ( $t_orig_page_number > $p_page_number ) {
+	if( $t_orig_page_number > $p_page_number ) {
 		return $t_result;
 	}
 
@@ -130,7 +130,7 @@ function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page
 	$t_result = array();
 
 	# the page number was moved back, so we have exceeded the actual page number, see bug #12991
-	if ( $t_orig_page_number > $p_page_number )
+	if( $t_orig_page_number > $p_page_number )
 		return $t_result;
 
 	foreach( $t_rows as $t_issue_data ) {
@@ -289,7 +289,7 @@ function mc_project_rename_category_by_name( $p_username, $p_password, $p_projec
 	global $g_project_override;
 	$t_user_id = mci_check_login( $p_username, $p_password );
 
-	if ( null === $p_assigned_to ) {
+	if( null === $p_assigned_to ) {
 		return SoapObjectsFactory::newSoapFault( 'Client', 'p_assigned_to needed' );
 	}
 
@@ -440,44 +440,44 @@ function mc_project_version_add( $p_username, $p_password, $p_version ) {
 	$t_released = $p_version['released'];
 	$t_description = $p_version['description'];
 	$t_date_order =  $p_version['date_order'];
-	if ( is_blank( $t_date_order ) )
+	if( is_blank( $t_date_order ) )
 		$t_date_order = null;
 	else
 		$t_date_order = SoapObjectsFactory::parseDateTimeString($t_date_order);
 
 	$t_obsolete = isset ( $p_version['obsolete'] ) ? $p_version['obsolete'] : false;
 
-	if ( is_blank( $t_project_id ) ) {
+	if( is_blank( $t_project_id ) ) {
 		return SoapObjectsFactory::newSoapFault( 'Client', 'Mandatory field "project_id" was missing' );
 	}
 
-	if ( !project_exists( $t_project_id ) ) {
+	if( !project_exists( $t_project_id ) ) {
 		return SoapObjectsFactory::newSoapFault('Client', "Project '$t_project_id' does not exist." );
 	}
 
-	if ( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
+	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
-	if ( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $t_project_id ) ) {
+	if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $t_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
-	if ( is_blank( $t_name ) ) {
+	if( is_blank( $t_name ) ) {
 		return SoapObjectsFactory::newSoapFault( 'Client', 'Mandatory field "name" was missing' );
 	}
 
-	if ( !version_is_unique( $t_name, $t_project_id ) ) {
+	if( !version_is_unique( $t_name, $t_project_id ) ) {
 		return SoapObjectsFactory::newSoapFault( 'Client',  'Version exists for project');
 	}
 
-	if ( $t_released === false ) {
+	if( $t_released === false ) {
 		$t_released = VERSION_FUTURE;
 	} else {
 		$t_released = VERSION_RELEASED;
 	}
 
-	if ( version_add( $t_project_id, $t_name, $t_released, $t_description, $t_date_order, $t_obsolete ) )
+	if( version_add( $t_project_id, $t_name, $t_released, $t_description, $t_date_order, $t_obsolete ) )
 		return version_get_id( $t_name, $t_project_id );
 
 	return null;
@@ -519,33 +519,33 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, $p_
 	$t_date_order = isset ( $p_version['date_order']) ? SoapObjectsFactory::parseDateTimeString($p_version['date_order']) : null;
 	$t_obsolete = isset ( $p_version['obsolete'] ) ? $p_version['obsolete'] : false;
 
-	if ( is_blank( $t_project_id ) ) {
+	if( is_blank( $t_project_id ) ) {
 		return SoapObjectsFactory::newSoapFault( 'Client', 'Mandatory field "project_id" was missing' );
 	}
 
-	if ( !project_exists( $t_project_id ) ) {
+	if( !project_exists( $t_project_id ) ) {
 		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$t_project_id' does not exist." );
 	}
 
-	if ( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
+	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
-	if ( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $t_project_id ) ) {
+	if( !mci_has_access( config_get( 'manage_project_threshold' ), $t_user_id, $t_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
-	if ( is_blank( $t_name ) ) {
+	if( is_blank( $t_name ) ) {
 		return SoapObjectsFactory::newSoapFault( 'Client', 'Mandatory field "name" was missing' );
 	}
 
 	# check for duplicates
 	$t_old_version_name = version_get_field( $p_version_id, 'version' );
-	if ( ( strtolower( $t_old_version_name ) != strtolower( $t_name ) ) && !version_is_unique( $t_name, $t_project_id ) ) {
+	if( ( strtolower( $t_old_version_name ) != strtolower( $t_name ) ) && !version_is_unique( $t_name, $t_project_id ) ) {
 		return SoapObjectsFactory::newSoapFault( 'Client', 'Version exists for project' );
 	}
 
-	if ( $t_released === false ) {
+	if( $t_released === false ) {
 		$t_released = VERSION_FUTURE;
 	} else {
 		$t_released = VERSION_RELEASED;
@@ -714,7 +714,6 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 
 	$t_projects[] = ALL_PROJECTS; # add ALL_PROJECTS to the list of projects to fetch
 
-
 	$t_reqd_access = config_get( 'view_proj_doc_threshold' );
 	if( is_array( $t_reqd_access ) ) {
 		if( 1 == count( $t_reqd_access ) ) {
@@ -843,8 +842,7 @@ function mc_project_add( $p_username, $p_password, $p_project ) {
 
 	$p_project = SoapObjectsFactory::unwrapObject( $p_project );
 
-
-	if ( !isset( $p_project['name'] ) ) {
+	if( !isset( $p_project['name'] ) ) {
 		return SoapObjectsFactory::newSoapFault( 'Client', 'Required field "name" is missing' );
 	} else {
 		$t_name = $p_project['name'];
@@ -862,25 +860,25 @@ function mc_project_add( $p_username, $p_password, $p_project ) {
 		$t_view_state = array( 'id' => VS_PUBLIC );
 	}
 
-	if ( isset( $p_project['enabled'] ) ) {
+	if( isset( $p_project['enabled'] ) ) {
 		$t_enabled = $p_project['enabled'];
 	} else {
 		$t_enabled = true;
 	}
 
-	if ( isset( $p_project['description'] ) ) {
+	if( isset( $p_project['description'] ) ) {
 		$t_description = $p_project['description'];
 	} else {
 		$t_description = '';
 	}
 
-	if ( isset( $p_project['file_path'] ) ) {
+	if( isset( $p_project['file_path'] ) ) {
 		$t_file_path = $p_project['file_path'];
 	} else {
 		$t_file_path = '';
 	}
 
-	if ( isset( $p_project['inherit_global'] ) ) {
+	if( isset( $p_project['inherit_global'] ) ) {
 		$t_inherit_global = $p_project['inherit_global'];
 	} else {
 		$t_inherit_global = true;
@@ -927,50 +925,50 @@ function mc_project_update( $p_username, $p_password, $p_project_id, $p_project 
 
 	$p_project = SoapObjectsFactory::unwrapObject( $p_project );
 
-	if ( !isset( $p_project['name'] ) ) {
+	if( !isset( $p_project['name'] ) ) {
 		return SoapObjectsFactory::newSoapFault( 'Client', 'Missing required field \'name\'.');
 	} else {
 		$t_name = $p_project['name'];
 	}
 
 	# check to make sure project doesn't already exist
-	if ( $t_name != project_get_name( $p_project_id ) ) {
+	if( $t_name != project_get_name( $p_project_id ) ) {
 		if( !project_is_name_unique( $t_name ) ) {
 			return SoapObjectsFactory::newSoapFault('Client', 'Project name exists');
 		}
 	}
 
-	if ( !isset( $p_project['description'] ) ) {
+	if( !isset( $p_project['description'] ) ) {
 		$t_description = project_get_field( $p_project_id, 'description' );
 	} else {
 		$t_description = $p_project['description'];
 	}
 
-	if ( !isset( $p_project['status'] ) ) {
+	if( !isset( $p_project['status'] ) ) {
 		$t_status = project_get_field( $p_project_id, 'status' );
 	} else {
 		$t_status = $p_project['status'];
 	}
 
-	if ( !isset( $p_project['view_state'] ) ) {
+	if( !isset( $p_project['view_state'] ) ) {
 		$t_view_state = project_get_field( $p_project_id, 'view_state' );
 	} else {
 		$t_view_state = $p_project['view_state'];
 	}
 
-	if ( !isset( $p_project['file_path'] ) ) {
+	if( !isset( $p_project['file_path'] ) ) {
 		$t_file_path = project_get_field( $p_project_id, 'file_path' );
 	} else {
 		$t_file_path = $p_project['file_path'];
 	}
 
-	if ( !isset( $p_project['enabled'] ) ) {
+	if( !isset( $p_project['enabled'] ) ) {
 		$t_enabled = project_get_field( $p_project_id, 'enabled' );
 	} else {
 		$t_enabled = $p_project['enabled'];
 	}
 
-	if ( !isset( $p_project['inherit_global'] ) ) {
+	if( !isset( $p_project['inherit_global'] ) ) {
 		$t_inherit_global = project_get_field( $p_project_id, 'inherit_global' );
 	} else {
 		$t_inherit_global = $p_project['inherit_global'];
@@ -1045,7 +1043,7 @@ function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, 
 	$t_result = array();
 
 	# the page number was moved back, so we have exceeded the actual page number, see bug #12991
-	if ( $t_orig_page_number > $p_page_number )
+	if( $t_orig_page_number > $p_page_number )
 		return $t_result;
 
 	foreach( $t_rows as $t_issue_data ) {

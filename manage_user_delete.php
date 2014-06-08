@@ -64,7 +64,7 @@ access_ensure_global_level( $t_user['access_level'] );
 
 # check that we are not deleting the last administrator account
 $t_admin_threshold = config_get_global( 'admin_site_threshold' );
-if ( user_is_administrator( $f_user_id ) &&
+if( user_is_administrator( $f_user_id ) &&
 	 user_count_level( $t_admin_threshold ) <= 1 ) {
 	trigger_error( ERROR_USER_CHANGE_LAST_ADMIN, ERROR );
 }
@@ -72,7 +72,7 @@ if ( user_is_administrator( $f_user_id ) &&
 # If an administrator is trying to delete their own account, use
 # account_delete.php instead as it is handles logging out and redirection
 # of users who have just deleted their own accounts.
-if ( auth_get_current_user_id() == $f_user_id ) {
+if( auth_get_current_user_id() == $f_user_id ) {
 	form_security_purge( 'manage_user_delete' );
 	print_header_redirect( 'account_delete.php?account_delete_token=' . form_security_token( 'account_delete' ), true, false );
 }

@@ -170,7 +170,7 @@ function html_javascript_link( $p_filename) {
  */
 function html_page_top( $p_page_title = null, $p_redirect_url = null ) {
 	html_page_top1( $p_page_title );
-	if ( $p_redirect_url !== null ) {
+	if( $p_redirect_url !== null ) {
 		html_meta_redirect( $p_redirect_url );
 	}
 	html_page_top2();
@@ -188,7 +188,7 @@ function html_page_top1( $p_page_title = null ) {
 	html_content_type();
 	include( config_get( 'meta_include_file' ) );
 	global $g_robots_meta;
-	if ( !is_blank( $g_robots_meta ) ) {
+	if( !is_blank( $g_robots_meta ) ) {
 		echo "\t", '<meta name="robots" content="', $g_robots_meta, '" />', "\n";
 	}
 
@@ -362,7 +362,7 @@ function html_css() {
 	html_css_link( 'jquery-ui-1.10.0.custom.min.css' );
 	html_css_link( 'common_config.php' );
 	# Add right-to-left css if needed
-	if ( lang_get( 'directionality' ) == 'rtl' ) {
+	if( lang_get( 'directionality' ) == 'rtl' ) {
 		html_css_link( config_get( 'css_rtl_include_file' ) );
 	}
 	foreach ( $g_stylesheets_included as $t_stylesheet_path ) {
@@ -428,7 +428,7 @@ function require_js( $p_script_path ) {
  * @return null
  */
 function html_head_javascript() {
-	if ( config_get( 'use_javascript' ) ) {
+	if( config_get( 'use_javascript' ) ) {
 		global $g_scripts_included;
 		echo "\t<script type=\"text/javascript\" src=\"" . helper_mantis_url( 'javascript_config.php' ) . '"></script>' . "\n";
 		echo "\t<script type=\"text/javascript\" src=\"" . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
@@ -456,15 +456,15 @@ function html_head_end() {
  * @return null
  */
 function html_body_begin() {
-    $t_centered_page = is_page_name( 'login_page' ) || is_page_name( 'signup_page' ) || is_page_name( 'signup' ) || is_page_name( 'lost_pwd_page' );
+	$t_centered_page = is_page_name( 'login_page' ) || is_page_name( 'signup_page' ) || is_page_name( 'signup' ) || is_page_name( 'lost_pwd_page' );
 
-    echo '<body>', "\n";
+	echo '<body>', "\n";
 
-    if ( $t_centered_page ) {
-        echo '<div id="mantis" class="centered_page">', "\n";
-    } else {
-        echo '<div id="mantis">', "\n";
-    }
+	if( $t_centered_page ) {
+		echo '<div id="mantis" class="centered_page">', "\n";
+	} else {
+		echo '<div id="mantis">', "\n";
+	}
 
 	event_signal( 'EVENT_LAYOUT_BODY_BEGIN' );
 }
@@ -582,7 +582,7 @@ function html_login_info() {
 		if( ALL_PROJECTS == helper_get_current_project() ) {
 			helper_set_current_project( $t_project_id );
 
-			if ( !current_user_is_protected() ) {
+			if( !current_user_is_protected() ) {
 				current_user_set_default_project( $t_project_id );
 			}
 
@@ -617,15 +617,15 @@ function html_bottom_banner() {
  * @param string $p_message Message to display to the user
  */
 function html_operation_successful( $p_redirect_url, $p_message = '' ) {
-    echo '<div class="success-msg">';
+	echo '<div class="success-msg">';
 
-    if ( !is_blank( $p_message ) ) {
-        echo $p_message . '<br />';
-    }
+	if( !is_blank( $p_message ) ) {
+		echo $p_message . '<br />';
+	}
 
-    echo lang_get( 'operation_successful' ).'<br />';
-    print_bracket_link( $p_redirect_url, lang_get( 'proceed' ) );
-    echo '</div>';
+	echo lang_get( 'operation_successful' ).'<br />';
+	print_bracket_link( $p_redirect_url, lang_get( 'proceed' ) );
+	echo '</div>';
 }
 
 /**
@@ -642,7 +642,7 @@ function html_footer( $p_file = null ) {
 	#  2) we don't invalidate the user cache immediately after fetching it
 	#  3) don't do this on the password verification or update page, as it causes the
 	#    verification comparison to fail
-	if ( auth_is_user_authenticated() && !current_user_is_anonymous() && !( is_page_name( 'verify.php' ) || is_page_name( 'account_update.php' ) ) ) {
+	if( auth_is_user_authenticated() && !current_user_is_anonymous() && !( is_page_name( 'verify.php' ) || is_page_name( 'account_update.php' ) ) ) {
 		$t_user_id = auth_get_current_user_id();
 		user_update_last_visit( $t_user_id );
 	}
@@ -652,7 +652,7 @@ function html_footer( $p_file = null ) {
 
 	# We don't have a button anymore, so for now we will only show the resized
 	# version of the logo when not on login page.
-	if ( !is_page_name( 'login_page' ) ) {
+	if( !is_page_name( 'login_page' ) ) {
 		echo "\t<div id=\"powered-by-mantisbt-logo\">\n";
 		$t_mantisbt_logo_url = helper_mantis_url( 'images/mantis_logo.png' );
 		echo "\t\t<a href=\"http://www.mantisbt.org\" ".
@@ -666,7 +666,7 @@ function html_footer( $p_file = null ) {
 	# Show MantisBT version and copyright statement
 	$t_version_suffix = '';
 	$t_copyright_years = ' 2000 - ' . date('Y');
-	if ( config_get( 'show_version' ) == ON ) {
+	if( config_get( 'show_version' ) == ON ) {
 		$t_version_suffix = ' ' . htmlentities( MANTIS_VERSION . config_get_global( 'version_suffix' ) );
 	}
 
@@ -676,14 +676,14 @@ function html_footer( $p_file = null ) {
 
 	# Show optional user-specified custom copyright statement
 	$t_copyright_statement = config_get( 'copyright_statement' );
-	if ( $t_copyright_statement ) {
+	if( $t_copyright_statement ) {
 		echo "\t<address id=\"user-copyright\">$t_copyright_statement</address>\n";
 	}
 
 	echo "</address>\n";
 
 	# Show contact information
-	if ( !is_page_name( 'login_page' ) ) {
+	if( !is_page_name( 'login_page' ) ) {
 		$t_webmaster_contact_information = sprintf( lang_get( 'webmaster_contact_information' ), string_html_specialchars( config_get( 'webmaster_email' ) ) );
 		echo "\t<address id=\"webmaster-contact-information\">$t_webmaster_contact_information</address>\n";
 	}
@@ -691,30 +691,30 @@ function html_footer( $p_file = null ) {
 	event_signal( 'EVENT_LAYOUT_PAGE_FOOTER' );
 
 	# Print horizontal rule if any debugging stats follow
-	if ( config_get( 'show_timer' ) || config_get( 'show_memory_usage' ) || config_get( 'show_queries_count' ) ) {
+	if( config_get( 'show_timer' ) || config_get( 'show_memory_usage' ) || config_get( 'show_queries_count' ) ) {
 		echo "\t<hr />\n";
 	}
 
 	# Print the page execution time
-	if ( config_get( 'show_timer' ) ) {
+	if( config_get( 'show_timer' ) ) {
 		$t_page_execution_time = sprintf( lang_get( 'page_execution_time' ), number_format( microtime( true ) - $g_request_time, 4 ) );
 		echo "\t<p id=\"page-execution-time\">$t_page_execution_time</p>\n";
 	}
 
 	# Print the page memory usage
-	if ( config_get( 'show_memory_usage' ) ) {
+	if( config_get( 'show_memory_usage' ) ) {
 		$t_page_memory_usage = sprintf( lang_get( 'memory_usage_in_kb' ), number_format( memory_get_peak_usage() / 1024 ) );
 		echo "\t<p id=\"page-memory-usage\">$t_page_memory_usage</p>\n";
 	}
 
 	# Determine number of unique queries executed
-	if ( config_get( 'show_queries_count' ) ) {
+	if( config_get( 'show_queries_count' ) ) {
 		$t_total_queries_count = count( $g_queries_array );
 		$t_unique_queries_count = 0;
 		$t_total_query_execution_time = 0;
 		$t_unique_queries = array();
 		for ( $i = 0; $i < $t_total_queries_count; $i++ ) {
-			if ( !in_array( $g_queries_array[$i][0], $t_unique_queries ) ) {
+			if( !in_array( $g_queries_array[$i][0], $t_unique_queries ) ) {
 				$t_unique_queries_count++;
 				$g_queries_array[$i][3] = false;
 				array_push( $t_unique_queries, $g_queries_array[$i][0] );
@@ -726,7 +726,7 @@ function html_footer( $p_file = null ) {
 
 		$t_total_queries_executed = sprintf( lang_get( 'total_queries_executed' ), $t_total_queries_count );
 		echo "\t<p id=\"total-queries-count\">$t_total_queries_executed</p>\n";
-		if ( config_get_global( 'db_log_queries' ) ) {
+		if( config_get_global( 'db_log_queries' ) ) {
 			$t_unique_queries_executed = sprintf( lang_get( 'unique_queries_executed' ), $t_unique_queries_count );
 			echo "\t<p id=\"unique-queries-count\">$t_unique_queries_executed</p>\n";
 		}
@@ -802,7 +802,7 @@ function print_menu() {
 		$t_menu_options = array();
 
 		# Main Page
-		if ( config_get( 'news_enabled' ) == ON ) {
+		if( config_get( 'news_enabled' ) == ON ) {
 			$t_menu_options[] = '<a href="' . helper_mantis_url( 'main_page.php' ) . '">' . lang_get( 'main_link' ) . '</a>';
 		}
 
@@ -813,7 +813,7 @@ function print_menu() {
 				if( is_array( $t_callback_menu_options ) ) {
 					$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
 				} else {
-					if ( !is_null( $t_callback_menu_options ) ) {
+					if( !is_null( $t_callback_menu_options ) ) {
 						$t_menu_options[] = $t_callback_menu_options;
 					}
 				}
@@ -863,7 +863,7 @@ function print_menu() {
 				if( is_array( $t_callback_menu_options ) ) {
 					$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
 				} else {
-					if ( !is_null( $t_callback_menu_options ) ) {
+					if( !is_null( $t_callback_menu_options ) ) {
 						$t_menu_options[] = $t_callback_menu_options;
 					}
 				}
@@ -892,7 +892,7 @@ function print_menu() {
 		}
 
 		# News Page
-		if ( news_is_enabled() && access_has_project_level( config_get( 'manage_news_threshold' ) ) ) {
+		if( news_is_enabled() && access_has_project_level( config_get( 'manage_news_threshold' ) ) ) {
 
 			# Admin can edit news for All Projects (site-wide)
 			if( ALL_PROJECTS != helper_get_current_project() || current_user_is_administrator() ) {
@@ -997,7 +997,7 @@ function print_summary_submenu() {
 			if( is_array( $t_callback_menu_options ) ) {
 				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
 			} else {
-				if ( !is_null( $t_callback_menu_options ) ) {
+				if( !is_null( $t_callback_menu_options ) ) {
 					$t_menu_options[] = $t_callback_menu_options;
 				}
 			}
@@ -1041,15 +1041,15 @@ function print_manage_menu( $p_page = '' ) {
 		$t_pages['manage_plugin_page.php'] = array( 'url'   => 'manage_plugin_page.php', 'label' => 'manage_plugin_link' );
 	}
 
-	if ( access_has_project_level( config_get( 'manage_configuration_threshold' ) ) ) {
-		if ( access_has_global_level( config_get( 'view_configuration_threshold' ) ) ) {
+	if( access_has_project_level( config_get( 'manage_configuration_threshold' ) ) ) {
+		if( access_has_global_level( config_get( 'view_configuration_threshold' ) ) ) {
 			$t_pages['adm_config_report.php'] = array( 'url'   => 'adm_config_report.php', 'label' => 'manage_config_link' );
 		} else {
 			$t_pages['adm_permissions_report.php'] = array( 'url'   => 'adm_permissions_report.php', 'label' => 'manage_config_link' );
 		}
 	}
 	# Remove the link from the current page
-	if ( isset( $t_pages[$p_page] ) ) {
+	if( isset( $t_pages[$p_page] ) ) {
 		$t_pages[$p_page]['url'] = '';
 	}
 
@@ -1061,7 +1061,7 @@ function print_manage_menu( $p_page = '' ) {
 			if( is_array( $t_callback_menu_options ) ) {
 				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
 			} else {
-				if ( !is_null( $t_callback_menu_options ) ) {
+				if( !is_null( $t_callback_menu_options ) ) {
 					$t_menu_options[] = $t_callback_menu_options;
 				}
 			}
@@ -1093,13 +1093,13 @@ function print_manage_menu( $p_page = '' ) {
  * @return null
  */
 function print_manage_config_menu( $p_page = '' ) {
-	if ( !access_has_project_level( config_get( 'manage_configuration_threshold' ) ) ) {
+	if( !access_has_project_level( config_get( 'manage_configuration_threshold' ) ) ) {
 		return;
 	}
 
 	$t_pages = array();
 
-	if ( access_has_global_level( config_get( 'view_configuration_threshold' ) ) ) {
+	if( access_has_global_level( config_get( 'view_configuration_threshold' ) ) ) {
 		$t_pages['adm_config_report.php'] = array( 'url'   => 'adm_config_report.php',
 		                                           'label' => 'configuration_report' );
 	}
@@ -1113,7 +1113,7 @@ function print_manage_config_menu( $p_page = '' ) {
 	$t_pages['manage_config_workflow_page.php'] = array( 'url'   => 'manage_config_workflow_page.php',
 	                                                     'label' => 'manage_workflow_config' );
 
-	if ( config_get( 'relationship_graph_enable' ) ) {
+	if( config_get( 'relationship_graph_enable' ) ) {
 		$t_pages['manage_config_workflow_graph_page.php'] = array( 'url'   => 'manage_config_workflow_graph_page.php',
 		                                                           'label' => 'manage_workflow_graph' );
 	}
@@ -1125,7 +1125,7 @@ function print_manage_config_menu( $p_page = '' ) {
 	                                                    'label' => 'manage_columns_config' );
 
 	# Remove the link from the current page
-	if ( isset( $t_pages[$p_page] ) ) {
+	if( isset( $t_pages[$p_page] ) ) {
 		$t_pages[$p_page]['url'] = '';
 	}
 
@@ -1134,10 +1134,10 @@ function print_manage_config_menu( $p_page = '' ) {
 	$t_menu_options = array();
 	foreach ( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
 		foreach ( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-			if ( is_array( $t_callback_menu_options ) ) {
+			if( is_array( $t_callback_menu_options ) ) {
 				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
 			} else {
-				if ( !is_null( $t_callback_menu_options ) ) {
+				if( !is_null( $t_callback_menu_options ) ) {
 					$t_menu_options[] = $t_callback_menu_options;
 				}
 			}
@@ -1181,7 +1181,7 @@ function print_account_menu( $p_page = '' ) {
 	}
 
 	# Remove the link from the current page
-	if ( isset( $t_pages[$p_page] ) ) {
+	if( isset( $t_pages[$p_page] ) ) {
 		$t_pages[$p_page]['url'] = '';
 	}
 
@@ -1193,7 +1193,7 @@ function print_account_menu( $p_page = '' ) {
 			if( is_array( $t_callback_menu_options ) ) {
 				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
 			} else {
-				if ( !is_null( $t_callback_menu_options ) ) {
+				if( !is_null( $t_callback_menu_options ) ) {
 					$t_menu_options[] = $t_callback_menu_options;
 				}
 			}
@@ -1232,7 +1232,7 @@ function print_doc_menu( $p_page = '' ) {
 	}
 
 	# Remove the link from the current page
-	if ( isset( $t_pages[$p_page] ) ) {
+	if( isset( $t_pages[$p_page] ) ) {
 		$t_pages[$p_page]['url'] = '';
 	}
 
@@ -1263,7 +1263,7 @@ function print_summary_menu( $p_page = '' ) {
 			if( is_array( $t_callback_menu_options ) ) {
 				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
 			} else {
-				if ( !is_null( $t_callback_menu_options ) ) {
+				if( !is_null( $t_callback_menu_options ) ) {
 					$t_menu_options[] = $t_callback_menu_options;
 				}
 			}
@@ -1273,7 +1273,7 @@ function print_summary_menu( $p_page = '' ) {
 	$t_pages['print_all_bug_page.php'] = array( 'url'=>'print_all_bug_page.php', 'label'=>'print_all_bug_page_link' );
 	$t_pages['summary_page.php'] = array( 'url'=>'summary_page.php', 'label'=>'summary_link' );
 	# Remove the link from the current page
-	if ( isset( $t_pages[$p_page] ) ) {
+	if( isset( $t_pages[$p_page] ) ) {
 		$t_pages[$p_page]['url'] = '';
 	}
 
@@ -1303,7 +1303,7 @@ function print_summary_menu( $p_page = '' ) {
 function html_status_legend() {
 	# Don't show the legend if only one status is selected by the current filter
 	$t_current_filter = current_user_get_bug_filter();
-	if ( $t_current_filter === false ) {
+	if( $t_current_filter === false ) {
 		$t_current_filter = filter_get_default();
 	}
 	$t_simple_filter = $t_current_filter['_view_type'] == 'simple';
@@ -1429,7 +1429,7 @@ function html_button( $p_action, $p_button_text, $p_fields = null, $p_method = '
 	echo "<form method=\"$t_method\" action=\"$p_action\" class=\"action-button\">\n";
 	echo "\t<fieldset>";
 	# Add a CSRF token only when the form is being sent via the POST method
-	if ( $t_method == 'post' ) {
+	if( $t_method == 'post' ) {
 		echo form_security_field( $t_form_name[0] );
 	}
 
@@ -1695,7 +1695,7 @@ function html_button_bug_unmonitor( $p_bug_id ) {
  * @return null
  */
 function html_button_bug_stick( $p_bug_id ) {
-	if ( access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $p_bug_id ) ) {
+	if( access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $p_bug_id ) ) {
 		html_button( 'bug_stick.php', lang_get( 'stick_bug_button' ), array( 'bug_id' => $p_bug_id, 'action' => 'stick' ) );
 	}
 }
@@ -1706,7 +1706,7 @@ function html_button_bug_stick( $p_bug_id ) {
  * @return null
  */
 function html_button_bug_unstick( $p_bug_id ) {
-	if ( access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $p_bug_id ) ) {
+	if( access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $p_bug_id ) ) {
 		html_button( 'bug_stick.php', lang_get( 'unstick_bug_button' ), array( 'bug_id' => $p_bug_id, 'action' => 'unstick' ) );
 	}
 }
@@ -1760,7 +1760,7 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 	}
 
 	# Change status button/dropdown
-	if ( !$t_readonly ) {
+	if( !$t_readonly ) {
 		echo '<td class="center">';
 		html_button_bug_change_status( $t_bug );
 		echo '</td>';
@@ -1778,9 +1778,9 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 	}
 
 	# STICK/UNSTICK button
-	if ( access_has_bug_level( $t_sticky, $p_bug_id ) ) {
+	if( access_has_bug_level( $t_sticky, $p_bug_id ) ) {
 		echo '<td class="center">';
-		if ( !bug_get_field( $p_bug_id, 'sticky' ) ) {
+		if( !bug_get_field( $p_bug_id, 'sticky' ) ) {
 			html_button_bug_stick( $p_bug_id );
 		} else {
 			html_button_bug_unstick( $p_bug_id );
@@ -1804,7 +1804,6 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 	echo '<td class="center">';
 	html_button_bug_close( $t_bug );
 	echo '</td>';
-
 
 	# MOVE button
 	echo '<td class="center">';

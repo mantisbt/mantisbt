@@ -79,12 +79,12 @@ $g_allow_browser_cache = 1;
 
 $f_master_bug_id = gpc_get_int( 'm_id', 0 );
 
-if ( $f_master_bug_id > 0 ) {
+if( $f_master_bug_id > 0 ) {
 	# master bug exists...
 	bug_ensure_exists( $f_master_bug_id );
 
 	# master bug is not read-only...
-	if ( bug_is_readonly( $f_master_bug_id ) ) {
+	if( bug_is_readonly( $f_master_bug_id ) ) {
 		error_parameters( $f_master_bug_id );
 		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 	}
@@ -174,7 +174,7 @@ if ( $f_master_bug_id > 0 ) {
 	$f_view_state			= gpc_get_int( 'view_state', (int)config_get( 'default_bug_view_status' ) );
 	$f_due_date				= gpc_get_string( 'due_date', '');
 
-	if ( $f_due_date == '' ) {
+	if( $f_due_date == '' ) {
 		$f_due_date = date_get_null();
 	}
 
@@ -211,7 +211,7 @@ $t_show_due_date = in_array( 'due_date', $t_fields ) && access_has_project_level
 $t_show_attachments = in_array( 'attachments', $t_fields ) && file_allow_bug_upload();
 $t_show_view_state = in_array( 'view_state', $t_fields ) && access_has_project_level( config_get( 'set_view_status_threshold' ) );
 
-if ( $t_show_due_date ) {
+if( $t_show_due_date ) {
 	require_js( 'jscalendar/calendar.js' );
 	require_js( 'jscalendar/lang/calendar-en.js' );
 	require_js( 'jscalendar/calendar-setup.js' );
@@ -226,7 +226,7 @@ html_page_top( lang_get( 'report_bug_link' ) );
 print_recently_visited();
 ?>
 <br />
-<form name="report_bug_form" method="post" <?php if ( $t_show_attachments ) { echo 'enctype="multipart/form-data"'; } ?> action="bug_report.php">
+<form name="report_bug_form" method="post" <?php if( $t_show_attachments ) { echo 'enctype="multipart/form-data"'; } ?> action="bug_report.php">
 <?php echo form_security_field( 'bug_report' ) ?>
 <div class="table-container">
 <table cellspacing="1">
@@ -240,7 +240,7 @@ print_recently_visited();
 <?php
 	event_signal( 'EVENT_REPORT_BUG_FORM_TOP', array( $t_project_id ) );
 
-	if ( $t_show_category ) {
+	if( $t_show_category ) {
 ?>
 	<tr>
 		<th class="category" width="30%">
@@ -252,7 +252,7 @@ print_recently_visited();
 			?>
 		</th>
 		<td width="70%">
-			<?php if ( $t_changed_project ) {
+			<?php if( $t_changed_project ) {
 				echo "[" . project_get_field( $t_bug->project_id, 'name' ) . "] ";
 			} ?>
 			<select <?php echo helper_get_tab_index() ?> id="category_id" name="category_id" class="autofocus">
@@ -264,7 +264,7 @@ print_recently_visited();
 	</tr>
 <?php }
 
-	if ( $t_show_reproducibility ) {
+	if( $t_show_reproducibility ) {
 ?>
 
 	<tr>
@@ -280,7 +280,7 @@ print_recently_visited();
 <?php
 	}
 
-	if ( $t_show_eta ) {
+	if( $t_show_eta ) {
 ?>
 
 	<tr>
@@ -296,7 +296,7 @@ print_recently_visited();
 <?php
 	}
 
-	if ( $t_show_severity ) {
+	if( $t_show_severity ) {
 ?>
 	<tr>
 		<th class="category">
@@ -311,7 +311,7 @@ print_recently_visited();
 <?php
 	}
 
-	if ( $t_show_priority ) {
+	if( $t_show_priority ) {
 ?>
 	<tr>
 		<th class="category">
@@ -326,10 +326,10 @@ print_recently_visited();
 <?php
 	}
 
-	if ( $t_show_due_date ) {
+	if( $t_show_due_date ) {
 		$t_date_to_display = '';
 
-		if ( !date_is_null( $f_due_date ) ) {
+		if( !date_is_null( $f_due_date ) ) {
 			$t_date_to_display = date( config_get( 'calendar_date_format' ), $f_due_date );
 		}
 ?>
@@ -342,7 +342,7 @@ print_recently_visited();
 		</td>
 	</tr>
 <?php } ?>
-<?php if ( $t_show_platform || $t_show_os || $t_show_os_version ) { ?>
+<?php if( $t_show_platform || $t_show_os || $t_show_os_version ) { ?>
 	<tr>
 		<th class="category">
 			<label for="profile_id"><?php echo lang_get( 'select_profile' ) ?></label>
@@ -369,7 +369,7 @@ print_recently_visited();
 							<label for="platform"><?php echo lang_get( 'platform' ) ?></label>
 						</th>
 						<td>
-							<?php if ( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) { ?>
+							<?php if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) { ?>
 							<select id="platform" name="platform">
 								<option value=""></option>
 								<?php print_platform_option_list( $f_platform ); ?>
@@ -386,7 +386,7 @@ print_recently_visited();
 							<label for="os"><?php echo lang_get( 'os' ) ?></label>
 						</th>
 						<td>
-							<?php if ( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) { ?>
+							<?php if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) { ?>
 							<select id="os" name="os">
 								<option value=""></option>
 								<?php print_os_option_list( $f_os ); ?>
@@ -404,7 +404,7 @@ print_recently_visited();
 						</th>
 						<td>
 							<?php
-								if ( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) {
+								if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) {
 							?>
 							<select id="os_build" name="os_build">
 								<option value=""></option>
@@ -426,7 +426,7 @@ print_recently_visited();
 	</tr>
 <?php } ?>
 <?php
-	if ( $t_show_product_version ) {
+	if( $t_show_product_version ) {
 		$t_product_version_released_mask = VERSION_RELEASED;
 
 		if (access_has_project_level( config_get( 'report_issues_for_unreleased_versions_threshold' ) ) ) {
@@ -446,7 +446,7 @@ print_recently_visited();
 <?php
 	}
 ?>
-<?php if ( $t_show_product_build ) { ?>
+<?php if( $t_show_product_build ) { ?>
 	<tr>
 		<th class="category">
 			<label for="build"><?php echo lang_get( 'product_build' ) ?></label>
@@ -457,7 +457,7 @@ print_recently_visited();
 	</tr>
 <?php } ?>
 
-<?php if ( $t_show_handler ) { ?>
+<?php if( $t_show_handler ) { ?>
 	<tr>
 		<th class="category">
 			<label for="handler_id"><?php echo lang_get( 'assign_to' ) ?></label>
@@ -471,7 +471,7 @@ print_recently_visited();
 	</tr>
 <?php } ?>
 
-<?php if ( $t_show_status ) { ?>
+<?php if( $t_show_status ) { ?>
 	<tr>
 		<th class="category">
 			<label for="status"><?php echo lang_get( 'status' ) ?></label>
@@ -497,7 +497,7 @@ print_recently_visited();
 	</tr>
 <?php } ?>
 
-<?php if ( $t_show_resolution ) { ?>
+<?php if( $t_show_resolution ) { ?>
 	<tr>
 		<th class="category">
 			<label for="resolution"><?php echo lang_get( 'resolution' ) ?></label>
@@ -513,7 +513,7 @@ print_recently_visited();
 <?php } ?>
 
 <?php # Target Version (if permissions allow)
-	if ( $t_show_target_version ) { ?>
+	if( $t_show_target_version ) { ?>
 	<tr>
 		<th class="category">
 			<label for="target_version"><?php echo lang_get( 'target_version' ) ?></label>
@@ -543,7 +543,7 @@ print_recently_visited();
 		</td>
 	</tr>
 
-<?php if ( $t_show_steps_to_reproduce ) { ?>
+<?php if( $t_show_steps_to_reproduce ) { ?>
 		<tr>
 			<th class="category">
 				<label for="steps_to_reproduce"><?php print_documentation_link( 'steps_to_reproduce' ) ?></label>
@@ -554,7 +554,7 @@ print_recently_visited();
 		</tr>
 <?php } ?>
 
-<?php if ( $t_show_additional_info ) { ?>
+<?php if( $t_show_additional_info ) { ?>
 	<tr>
 		<th class="category">
 			<label for="additional_info"><?php print_documentation_link( 'additional_information' ) ?></label>
@@ -577,7 +577,7 @@ print_recently_visited();
 	<tr>
 		<th class="category">
 			<?php if($t_def['require_report']) {?><span class="required">*</span><?php } ?>
-			<?php if ( $t_def['type'] != CUSTOM_FIELD_TYPE_RADIO && $t_def['type'] != CUSTOM_FIELD_TYPE_CHECKBOX ) { ?>
+			<?php if( $t_def['type'] != CUSTOM_FIELD_TYPE_RADIO && $t_def['type'] != CUSTOM_FIELD_TYPE_CHECKBOX ) { ?>
 			<label for="custom_field_<?php echo string_attribute( $t_def['id'] ) ?>"><?php echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?></label>
 			<?php } else echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?>
 		</th>
@@ -591,7 +591,7 @@ print_recently_visited();
 ?>
 <?php
 	# File Upload (if enabled)
-	if ( $t_show_attachments ) {
+	if( $t_show_attachments ) {
 		$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 		$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
 ?>
@@ -619,7 +619,7 @@ print_recently_visited();
 	</tr>
 
 <?php
-	if ( $t_show_view_state ) {
+	if( $t_show_view_state ) {
 ?>
 	<tr>
 		<th class="category">

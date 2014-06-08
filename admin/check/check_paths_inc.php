@@ -26,7 +26,7 @@
  * @uses config_api.php
  */
 
-if ( !defined( 'CHECK_PATHS_INC_ALLOW' ) ) {
+if( !defined( 'CHECK_PATHS_INC_ALLOW' ) ) {
 	return;
 }
 

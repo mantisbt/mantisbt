@@ -77,7 +77,7 @@ $t_user_table = db_get_table( 'user' );
 $t_query = 'SELECT id FROM ' . $t_user_table . ' WHERE username = ' . db_param() . ' AND email = ' . db_param() . ' AND enabled=' . db_param();
 $t_result = db_query_bound( $t_query, array( $f_username, $f_email, true ) );
 
-if ( 0 == db_num_rows( $t_result ) ) {
+if( 0 == db_num_rows( $t_result ) ) {
 	trigger_error( ERROR_LOST_PASSWORD_NOT_MATCHING_DATA, ERROR );
 }
 

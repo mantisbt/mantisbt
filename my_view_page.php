@@ -68,7 +68,7 @@ html_robots_noindex();
 
 html_page_top1( lang_get( 'my_view_link' ) );
 
-if ( current_user_get_pref( 'refresh_delay' ) > 0 ) {
+if( current_user_get_pref( 'refresh_delay' ) > 0 ) {
 	html_meta_redirect( 'my_view_page.php', current_user_get_pref( 'refresh_delay' )*60 );
 }
 
@@ -94,7 +94,7 @@ $t_project_id = helper_get_current_project();
 <?php
 $t_status_legend_position = config_get( 'status_legend_position' );
 
-if ( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
+if( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
 	html_status_legend();
 	echo '<br />';
 }
@@ -124,12 +124,12 @@ while (list ($t_box_title, $t_box_display) = each ($t_boxes)) {
 	}
 
 	# don't display "Monitored by Me" bugs to users that can't monitor bugs
-	else if ( $t_box_title == 'monitored' && ( current_user_is_anonymous() OR !access_has_project_level( config_get( 'monitor_bug_threshold' ), $t_project_id, $t_current_user_id ) ) ) {
+	else if( $t_box_title == 'monitored' && ( current_user_is_anonymous() OR !access_has_project_level( config_get( 'monitor_bug_threshold' ), $t_project_id, $t_current_user_id ) ) ) {
 		$t_number_of_boxes = $t_number_of_boxes - 1;
 	}
 
 	# don't display "Reported by Me" bugs to users that can't report bugs
-	else if ( in_array( $t_box_title, array( 'reported', 'feedback', 'verify' ) ) &&
+	else if( in_array( $t_box_title, array( 'reported', 'feedback', 'verify' ) ) &&
 			( current_user_is_anonymous() OR !access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $t_current_user_id ) ) ) {
 		$t_number_of_boxes = $t_number_of_boxes - 1;
 	}
@@ -139,29 +139,29 @@ while (list ($t_box_title, $t_box_display) = each ($t_boxes)) {
 		$t_counter++;
 
 		# check the style of displaying boxes - fixed (ie. each box in a separate table cell) or not
-		if ( ON == $t_boxes_position ) {
+		if( ON == $t_boxes_position ) {
 			# for even box number start new row and column
-			if ( 1 == $t_counter%2 ) {
+			if( 1 == $t_counter%2 ) {
 				echo '<tr><td class="myview-left-col">';
 				include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
 				echo '</td>';
 			}
 
 			# for odd box number only start new column
-			else if ( 0 == $t_counter%2 ) {
+			else if( 0 == $t_counter%2 ) {
 				echo '<td class="myview-right-col">';
 				include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
 				echo '</td></tr>';
 			}
 		}
-		else if ( OFF == $t_boxes_position ) {
+		else if( OFF == $t_boxes_position ) {
 			# start new table row and column for first box
-			if ( 1 == $t_counter ) {
+			if( 1 == $t_counter ) {
 				echo '<tr><td class="myview-left-col">';
 			}
 
 			# start new table column for the second half of boxes
-			if ( $t_counter == ceil ($t_number_of_boxes/2) + 1 ) {
+			if( $t_counter == ceil ($t_number_of_boxes/2) + 1 ) {
 				echo '<td class="myview-right-col">';
 			}
 
@@ -170,7 +170,7 @@ while (list ($t_box_title, $t_box_display) = each ($t_boxes)) {
 			echo '<br />';
 
 			# close the first column for first half of boxes
-			if ( $t_counter == ceil ($t_number_of_boxes/2) ) {
+			if( $t_counter == ceil ($t_number_of_boxes/2) ) {
 				echo '</td>';
 			}
 		}
@@ -180,16 +180,16 @@ while (list ($t_box_title, $t_box_display) = each ($t_boxes)) {
 # Close the box groups depending on the layout mode and whether an empty cell
 # is required to pad the number of cells in the last row to the full width of
 # the table.
-if ( ON == $t_boxes_position && $t_counter == $t_number_of_boxes && 1 == $t_counter%2 ) {
+if( ON == $t_boxes_position && $t_counter == $t_number_of_boxes && 1 == $t_counter%2 ) {
 	echo '<td class="myview-right-col"></td></tr>';
-} else if ( OFF == $t_boxes_position && $t_counter == $t_number_of_boxes ) {
+} else if( OFF == $t_boxes_position && $t_counter == $t_number_of_boxes ) {
 	echo '</td></tr>';
 }
 ?>
 
 </table>
 <?php
-if ( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
+if( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
 	html_status_legend();
 }
 ?>

@@ -80,9 +80,9 @@ form_security_validate( 'bug_report' );
 $t_project_id = null;
 
 $f_master_bug_id = gpc_get_int( 'm_id', 0 );
-if ( $f_master_bug_id > 0 ) {
+if( $f_master_bug_id > 0 ) {
 	bug_ensure_exists( $f_master_bug_id );
-	if ( bug_is_readonly( $f_master_bug_id ) ) {
+	if( bug_is_readonly( $f_master_bug_id ) ) {
 		error_parameters( $f_master_bug_id );
 		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 	}
@@ -94,7 +94,7 @@ if ( $f_master_bug_id > 0 ) {
 }
 project_ensure_exists( $t_project_id );
 
-if ( $t_project_id != helper_get_current_project() ) {
+if( $t_project_id != helper_get_current_project() ) {
 	$g_project_override = $t_project_id;
 }
 
@@ -124,7 +124,7 @@ $t_bug_data->description            = gpc_get_string( 'description' );
 $t_bug_data->steps_to_reproduce     = gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
 $t_bug_data->additional_information = gpc_get_string( 'additional_info', config_get ( 'default_bug_additional_info' ) );
 $t_bug_data->due_date               = gpc_get_string( 'due_date', '');
-if ( is_blank ( $t_bug_data->due_date ) ) {
+if( is_blank ( $t_bug_data->due_date ) ) {
 	$t_bug_data->due_date = date_get_null();
 }
 
@@ -134,25 +134,25 @@ $f_report_stay                      = gpc_get_bool( 'report_stay', false );
 $f_copy_notes_from_parent           = gpc_get_bool( 'copy_notes_from_parent', false);
 $f_copy_attachments_from_parent     = gpc_get_bool( 'copy_attachments_from_parent', false);
 
-if ( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id ) ) {
+if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id ) ) {
 	$t_bug_data->target_version = gpc_get_string( 'target_version', '' );
 }
 
 # if a profile was selected then let's use that information
-if ( 0 != $t_bug_data->profile_id ) {
-	if ( profile_is_global( $t_bug_data->profile_id ) ) {
+if( 0 != $t_bug_data->profile_id ) {
+	if( profile_is_global( $t_bug_data->profile_id ) ) {
 		$row = user_get_profile_row( ALL_USERS, $t_bug_data->profile_id );
 	} else {
 		$row = user_get_profile_row( $t_bug_data->reporter_id, $t_bug_data->profile_id );
 	}
 
-	if ( is_blank( $t_bug_data->platform ) ) {
+	if( is_blank( $t_bug_data->platform ) ) {
 		$t_bug_data->platform = $row['platform'];
 	}
-	if ( is_blank( $t_bug_data->os ) ) {
+	if( is_blank( $t_bug_data->os ) ) {
 		$t_bug_data->os = $row['os'];
 	}
-	if ( is_blank( $t_bug_data->os_build ) ) {
+	if( is_blank( $t_bug_data->os_build ) ) {
 		$t_bug_data->os_build = $row['os_build'];
 	}
 }
@@ -171,7 +171,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	if ( !custom_field_validate( $t_id, gpc_get_custom_field( "custom_field_$t_id", $t_def['type'], NULL ) ) ) {
+	if( !custom_field_validate( $t_id, gpc_get_custom_field( "custom_field_$t_id", $t_def['type'], NULL ) ) ) {
 		error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
 	}
@@ -181,7 +181,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 $t_bug_data = event_signal( 'EVENT_REPORT_BUG_DATA', $t_bug_data );
 
 # Ensure that resolved bugs have a handler
-if ( $t_bug_data->handler_id == NO_USER && $t_bug_data->status >= config_get( 'bug_resolved_status_threshold' ) ) {
+if( $t_bug_data->handler_id == NO_USER && $t_bug_data->status >= config_get( 'bug_resolved_status_threshold' ) ) {
 	$t_bug_data->handler_id = auth_get_current_user_id();
 }
 
@@ -216,7 +216,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	}
 }
 
-if ( $f_master_bug_id > 0 ) {
+if( $f_master_bug_id > 0 ) {
 	# it's a child generation... let's create the relationship and add some lines in the history
 
 	# update master bug last updated
@@ -226,7 +226,7 @@ if ( $f_master_bug_id > 0 ) {
 	history_log_event_special( $t_bug_id, BUG_CREATED_FROM, '', $f_master_bug_id );
 	history_log_event_special( $f_master_bug_id, BUG_CLONED_TO, '', $t_bug_id );
 
-	if ( $f_rel_type > BUG_REL_ANY ) {
+	if( $f_rel_type > BUG_REL_ANY ) {
 		# Add the relationship
 		relationship_add( $t_bug_id, $f_master_bug_id, $f_rel_type );
 
@@ -242,7 +242,7 @@ if ( $f_master_bug_id > 0 ) {
 	}
 
 	# copy notes from parent
-	if ( $f_copy_notes_from_parent ) {
+	if( $f_copy_notes_from_parent ) {
 
 		$t_parent_bugnotes = bugnote_get_all_bugnotes( $f_master_bug_id );
 
@@ -266,7 +266,7 @@ if ( $f_master_bug_id > 0 ) {
 	}
 
 	# copy attachments from parent
-	if ( $f_copy_attachments_from_parent ) {
+	if( $f_copy_attachments_from_parent ) {
 		file_copy_attachments( $f_master_bug_id, $t_bug_id );
 	}
 }
@@ -279,10 +279,10 @@ event_signal( 'EVENT_REPORT_BUG', array( $t_bug_data, $t_bug_id ) );
 email_generic( $t_bug_id, 'new', 'email_notification_title_for_action_bug_submitted' );
 
 # log status and resolution changes if they differ from the default
-if ( $t_bug_data->status != config_get('bug_submit_status') )
+if( $t_bug_data->status != config_get('bug_submit_status') )
 	history_log_event($t_bug_id, 'status', config_get('bug_submit_status') );
 
-if ( $t_bug_data->resolution != config_get('default_bug_resolution') )
+if( $t_bug_data->resolution != config_get('default_bug_resolution') )
 	history_log_event($t_bug_id, 'resolution', config_get('default_bug_resolution') );
 
 
@@ -290,7 +290,7 @@ form_security_purge( 'bug_report' );
 
 html_page_top1();
 
-if ( !$f_report_stay ) {
+if( !$f_report_stay ) {
 	html_meta_redirect( 'view_all_bug_page.php' );
 }
 
@@ -301,7 +301,7 @@ echo lang_get( 'operation_successful' ) . '<br />';
 print_bracket_link( string_get_bug_view_url( $t_bug_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_bug_id ) );
 print_bracket_link( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
 
-if ( $f_report_stay ) {
+if( $f_report_stay ) {
 ?>
 	<p>
 	<form method="post" action="<?php echo string_get_bug_report_url() ?>">

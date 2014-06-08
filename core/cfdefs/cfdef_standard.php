@@ -222,7 +222,7 @@ function cfdef_prepare_date_value_for_email($p_value) {
  * @return string The calculated default date value if $p_value starts with '=', otherwise, returns $p_value.
  */
 function cfdef_prepare_date_default( $p_value ) {
-	if ( is_blank( $p_value ) ) {
+	if( is_blank( $p_value ) ) {
 		return '';
 	}
 
@@ -231,12 +231,12 @@ function cfdef_prepare_date_default( $p_value ) {
 
 	# We are expanding {tomorrow}, {yesterday}, {+3 days}, {-7 days}, {next week}
 	# See strtotime() for more details about supported formats.
-	if ( $t_value_length >= 3 && $t_value[0] == '{' && $t_value[$t_value_length - 1] == '}' ) {
+	if( $t_value_length >= 3 && $t_value[0] == '{' && $t_value[$t_value_length - 1] == '}' ) {
 		$t_value = utf8_substr( $t_value, 1, $t_value_length - 2 );
 		$t_value = @strtotime( $t_value );
 
 		# Different versions of PHP return different values in case of error.
-		if ( $t_value == -1 || $t_value === false ) {
+		if( $t_value == -1 || $t_value === false ) {
 			return '';
 		}
 	}
@@ -283,15 +283,15 @@ function cfdef_input_list($p_field_def, $p_custom_field_value) {
 	$t_values = explode( '|', custom_field_prepare_possible_values( $p_field_def['possible_values'] ) );
 	$t_list_size = $t_possible_values_count = count( $t_values );
 
-	if ( $t_possible_values_count > 5 ) {
+	if( $t_possible_values_count > 5 ) {
 		$t_list_size = 5;
 	}
 
-	if ( $p_field_def['type'] == CUSTOM_FIELD_TYPE_ENUM ) {
+	if( $p_field_def['type'] == CUSTOM_FIELD_TYPE_ENUM ) {
 		$t_list_size = 0;	# for enums the size is 0
 	}
 
-	if ( $p_field_def['type'] == CUSTOM_FIELD_TYPE_MULTILIST ) {
+	if( $p_field_def['type'] == CUSTOM_FIELD_TYPE_MULTILIST ) {
 		echo '<select ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '[]" size="' . $t_list_size . '" multiple="multiple">';
 	} else {
 		echo '<select ' . helper_get_tab_index() . ' id="custom_field_' . $p_field_def['id'] . '" name="custom_field_' . $p_field_def['id'] . '" size="' . $t_list_size . '">';
@@ -335,7 +335,7 @@ function cfdef_input_radio( $p_field_def, $p_custom_field_value ) {
 	$t_values = explode( '|', custom_field_prepare_possible_values( $p_field_def['possible_values'] ) );
 
 	$t_len = strlen( $p_custom_field_value );
-	if ( $t_len >= 2 && ( $p_custom_field_value[0] == '|' ) && ( $p_custom_field_value[$t_len-1] == '|' ) ) {
+	if( $t_len >= 2 && ( $p_custom_field_value[0] == '|' ) && ( $p_custom_field_value[$t_len-1] == '|' ) ) {
 		$t_checked_value = substr( $p_custom_field_value, 1, $t_len - 2 );
 	} else {
 		$t_checked_value = $p_custom_field_value;
@@ -392,7 +392,7 @@ function cfdef_input_date( $p_field_def, $p_custom_field_value ) {
  * @return string
  */
 function cfdef_prepare_list_value_to_database($p_value) {
-	if ( '' == $p_value ) {
+	if( '' == $p_value ) {
 		return '';
 	} else {
 		return '|' . $p_value . '|';
@@ -413,7 +413,7 @@ function cfdef_prepare_list_distinct_values($p_field_def) {
 	$t_result = db_query_bound( $t_query, array( $p_field_def['id'] ) );
 
 	$t_row = db_fetch_array( $t_result );
-	if ( !$t_row ) {
+	if( !$t_row ) {
 		return false;
 	}
 

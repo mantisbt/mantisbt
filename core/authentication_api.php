@@ -215,20 +215,20 @@ function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
 
 	$t_login_method = config_get( 'login_method' );
 
-	if ( false === $t_user_id ) {
-		if ( BASIC_AUTH == $t_login_method ) {
+	if( false === $t_user_id ) {
+		if( BASIC_AUTH == $t_login_method ) {
 			$t_auto_create = true;
-		} else if ( LDAP == $t_login_method && ldap_authenticate_by_username( $p_username, $p_password ) ) {
+		} else if( LDAP == $t_login_method && ldap_authenticate_by_username( $p_username, $p_password ) ) {
 			$t_auto_create = true;
 		} else {
 			$t_auto_create = false;
 		}
 
-		if ( $t_auto_create ) {
+		if( $t_auto_create ) {
 			# attempt to create the user
 			$t_cookie_string = user_create( $p_username, md5( $p_password ) );
 
-			if ( false === $t_cookie_string ) {
+			if( false === $t_cookie_string ) {
 				# it didn't work
 				return false;
 			}
@@ -303,15 +303,15 @@ function auth_attempt_script_login( $p_username, $p_password = null ) {
 	$t_password = $p_password;
 
 	$t_anon_allowed = config_get( 'allow_anonymous_login' );
-	if ( $t_anon_allowed == ON ) {
+	if( $t_anon_allowed == ON ) {
 		$t_anonymous_account = config_get( 'anonymous_account' );
 	} else {
 		$t_anonymous_account = '';
 	}
 
 	# if no user name supplied, then attempt to login as anonymous user.
-	if ( is_blank( $t_username ) || ( strcasecmp( $t_username, $t_anonymous_account ) == 0 ) ) {
-		if ( $t_anon_allowed == OFF ) {
+	if( is_blank( $t_username ) || ( strcasecmp( $t_username, $t_anonymous_account ) == 0 ) ) {
+		if( $t_anon_allowed == OFF ) {
 			return false;
 		}
 
@@ -335,8 +335,8 @@ function auth_attempt_script_login( $p_username, $p_password = null ) {
 	}
 
 	# validate password if supplied
-	if ( null !== $t_password ) {
-		if ( !auth_does_password_match( $t_user_id, $t_password ) ) {
+	if( null !== $t_password ) {
+		if( !auth_does_password_match( $t_user_id, $t_password ) ) {
 			return false;
 		}
 	}
@@ -474,7 +474,7 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
  * @return string processed password, maximum DB_FIELD_SIZE_PASSWORD chars in length
  * @access public
  */
- function auth_process_plain_password( $p_password, $p_salt = null, $p_method = null ) {
+function auth_process_plain_password( $p_password, $p_salt = null, $p_method = null ) {
 	$t_login_method = config_get( 'login_method' );
 	if( $p_method !== null ) {
 		$t_login_method = $p_method;
@@ -646,7 +646,7 @@ function auth_get_current_user_cookie( $p_login_anonymous=true ) {
 					$t_query = 'SELECT id, cookie_string FROM ' . db_get_table( 'user' ) . ' WHERE username = ' . db_param();
 					$t_result = db_query_bound( $t_query, array( config_get( 'anonymous_account' ) ) );
 
-					if( $t_row = db_fetch_array( $t_result ) ) {						
+					if( $t_row = db_fetch_array( $t_result ) ) {
 						$t_cookie = $t_row['cookie_string'];
 
 						$g_cache_anonymous_user_cookie_string = $t_cookie;

@@ -48,7 +48,7 @@ require_api( 'relationship_graph_api.php' );
 
 auth_ensure_user_authenticated();
 
-if ( ON != config_get( 'relationship_graph_enable' ) )
+if( ON != config_get( 'relationship_graph_enable' ) )
 	access_denied();
 
 $f_bug_id		= gpc_get_int( 'bug_id' );
@@ -64,7 +64,7 @@ compress_enable();
 $t_graph_relation = ( 'relation' == $f_type );
 $t_graph_horizontal = ( 'horizontal' == $f_orientation );
 
-if ( $t_graph_relation )
+if( $t_graph_relation )
 	$t_graph = relgraph_generate_rel_graph( $f_bug_id );
 else
 	$t_graph = relgraph_generate_dep_graph( $f_bug_id, $t_graph_horizontal );

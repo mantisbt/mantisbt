@@ -63,7 +63,7 @@ $f_action = gpc_get_string( 'action', '' );
 $f_bug_arr = gpc_get_int_array( 'bug_arr', array() );
 
 # redirects to all_bug_page if nothing is selected
-if ( is_blank( $f_action ) || ( 0 == count( $f_bug_arr ) ) ) {
+if( is_blank( $f_action ) || ( 0 == count( $f_bug_arr ) ) ) {
 	print_header_redirect( 'view_all_bug_page.php' );
 }
 
@@ -76,8 +76,8 @@ bug_cache_array_rows( $f_bug_arr );
 
 foreach( $f_bug_arr as $t_bug_id ) {
 	$t_bug = bug_get( $t_bug_id );
-	if ( $t_project_id != $t_bug->project_id ) {
-		if ( ( $t_project_id != ALL_PROJECTS ) && !$t_multiple_projects ) {
+	if( $t_project_id != $t_bug->project_id ) {
+		if( ( $t_project_id != ALL_PROJECTS ) && !$t_multiple_projects ) {
 			$t_multiple_projects = true;
 		} else {
 			$t_project_id = $t_bug->project_id;
@@ -85,7 +85,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 		}
 	}
 }
-if ( $t_multiple_projects ) {
+if( $t_multiple_projects ) {
 	$t_project_id = ALL_PROJECTS;
 	$t_projects[ALL_PROJECTS] = ALL_PROJECTS;
 }
@@ -102,7 +102,7 @@ $t_finished = false;
 $t_bugnote = false;
 
 $t_external_action_prefix = 'EXT_';
-if ( strpos( $f_action, $t_external_action_prefix ) === 0 ) {
+if( strpos( $f_action, $t_external_action_prefix ) === 0 ) {
 	$t_form_page = 'bug_actiongroup_ext_page.php';
 	require_once( $t_form_page );
 	exit;
@@ -111,7 +111,7 @@ if ( strpos( $f_action, $t_external_action_prefix ) === 0 ) {
 $t_custom_group_actions = config_get( 'custom_group_actions' );
 
 foreach( $t_custom_group_actions as $t_custom_group_action ) {
-	if ( $f_action == $t_custom_group_action['action'] ) {
+	if( $f_action == $t_custom_group_action['action'] ) {
 		require_once( $t_custom_group_action['form_page'] );
 		exit;
 	}
@@ -119,7 +119,7 @@ foreach( $t_custom_group_actions as $t_custom_group_action ) {
 
 # Check if user selected to update a custom field.
 $t_custom_fields_prefix = 'custom_field_';
-if ( strpos( $f_action, $t_custom_fields_prefix ) === 0 ) {
+if( strpos( $f_action, $t_custom_fields_prefix ) === 0 ) {
 	$t_custom_field_id = (int)substr( $f_action, utf8_strlen( $t_custom_fields_prefix ) );
 	$f_action = 'CUSTOM';
 }
@@ -171,7 +171,7 @@ switch ( $f_action )  {
 		$t_question_title 		= lang_get( 'resolve_bugs_conf_msg' );
 		$t_button_title 		= lang_get( 'resolve_group_bugs_button' );
 		$t_form 				= 'resolution';
-		if ( ALL_PROJECTS != $t_project_id ) {
+		if( ALL_PROJECTS != $t_project_id ) {
 			$t_question_title2 = lang_get( 'fixed_in_version' );
 			$t_form2 = 'fixed_in_version';
 		}
@@ -228,7 +228,7 @@ switch ( $f_action )  {
 
 bug_group_action_print_top();
 
-if ( $t_multiple_projects ) {
+if( $t_multiple_projects ) {
 	echo '<p class="bold">' . lang_get( 'multiple_projects' ) . '</p>';
 }
 ?>
@@ -243,7 +243,7 @@ if ( $t_multiple_projects ) {
 
 	bug_group_action_print_hidden_fields( $f_bug_arr );
 
-	if ( $f_action === 'CUSTOM' ) {
+	if( $f_action === 'CUSTOM' ) {
 		echo "<input type=\"hidden\" name=\"custom_field_id\" value=\"$t_custom_field_id\" />";
 	}
 ?>
@@ -251,7 +251,7 @@ if ( $t_multiple_projects ) {
 		<table>
 			<tbody>
 <?php
-	if ( !$t_finished ) {
+	if( !$t_finished ) {
 ?>
 				<tr class="row-1">
 					<th class="category">
@@ -259,14 +259,14 @@ if ( $t_multiple_projects ) {
 					</th>
 					<td>
 <?php
-		if ( $f_action === 'CUSTOM' ) {
+		if( $f_action === 'CUSTOM' ) {
 			$t_custom_field_def = custom_field_get_definition( $t_custom_field_id );
 
 			$t_bug_id = null;
 
 			# if there is only one issue, use its current value as default, otherwise,
 			# use the default value specified in custom field definition.
-			if ( count( $f_bug_arr ) == 1 ) {
+			if( count( $f_bug_arr ) == 1 ) {
 				$t_bug_id = $f_bug_arr[0];
 			}
 
@@ -317,7 +317,7 @@ if ( $t_multiple_projects ) {
 					$t_show_product_version = ( ON == config_get( 'show_product_version' ) )
 						|| ( ( AUTO == config_get( 'show_product_version' ) )
 									&& ( count( version_get_all_rows( $t_project_id ) ) > 0 ) );
-					if ( $t_show_product_version ) {
+					if( $t_show_product_version ) {
 ?>
 				<tr class="row-2">
 					<th class="category">
@@ -356,7 +356,7 @@ if ( $t_multiple_projects ) {
 					</td>
 				</tr>
 <?php
-		if ( access_has_project_level( config_get( 'private_bugnote_threshold' ), $t_project_id ) ) {
+		if( access_has_project_level( config_get( 'private_bugnote_threshold' ), $t_project_id ) ) {
 ?>
 				<tr>
 					<th class="category">
@@ -365,7 +365,7 @@ if ( $t_multiple_projects ) {
 					<td>
 <?php
 			$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
-			if ( access_has_project_level( config_get( 'set_view_status_threshold' ), $t_project_id ) ) {
+			if( access_has_project_level( config_get( 'set_view_status_threshold' ), $t_project_id ) ) {
 ?>
 						<input type="checkbox" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
 <?php

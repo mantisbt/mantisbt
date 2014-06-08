@@ -54,7 +54,7 @@ require_api( 'string_api.php' );
 $f_bug_id	= gpc_get_int( 'bug_id', -1 );
 $f_files		= gpc_get_file( 'ufile', -1 );
 
-if ( $f_bug_id == -1 && $f_files	== -1 ) {
+if( $f_bug_id == -1 && $f_files	== -1 ) {
 	# _POST/_FILES does not seem to get populated if you exceed size limit so check if bug_id is -1
 	trigger_error( ERROR_FILE_TOO_BIG, ERROR );
 }
@@ -68,7 +68,7 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 	$g_project_override = $t_bug->project_id;
 }
 
-if ( !file_allow_bug_upload( $f_bug_id ) ) {
+if( !file_allow_bug_upload( $f_bug_id ) ) {
 	access_denied();
 }
 

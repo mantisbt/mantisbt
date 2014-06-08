@@ -62,10 +62,10 @@ project_ensure_exists( $f_other_project_id );
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_other_project_id );
 
-if ( $f_copy_from ) {
+if( $f_copy_from ) {
 	$t_src_project_id = $f_other_project_id;
 	$t_dst_project_id = $f_project_id;
-} else if ( $f_copy_to ) {
+} else if( $f_copy_to ) {
 	$t_src_project_id = $f_project_id;
 	$t_dst_project_id = $f_other_project_id;
 } else {
@@ -75,7 +75,7 @@ if ( $f_copy_from ) {
 $t_rows = version_get_all_rows( $t_src_project_id );
 
 foreach ( $t_rows as $t_row ) {
-	if ( version_is_unique( $t_row['version'], $t_dst_project_id ) ) {
+	if( version_is_unique( $t_row['version'], $t_dst_project_id ) ) {
 		$t_version_id = version_add( $t_dst_project_id, $t_row['version'], $t_row['released'], $t_row['description'], $t_row['date_order'] );
 		event_signal( 'EVENT_MANAGE_VERSION_CREATE', array( $t_version_id ) );
 	}

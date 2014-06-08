@@ -84,7 +84,7 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 		if( $g_project_override !== null && $p_project === null ) {
 			$p_project = $g_project_override;
 		}
-		# @@ debug @@ if ( ! db_is_connected() ) { echo "no db "; }
+		# @@ debug @@ if( ! db_is_connected() ) { echo "no db "; }
 		# @@ debug @@ echo "lu table=" . ( db_table_exists( $t_config_table ) ? "yes " : "no " );
 		if( !$g_cache_db_table_exists ) {
 			$t_config_table = db_get_table( 'config' );
@@ -636,7 +636,7 @@ function config_obsolete( $p_var, $p_replace = '' ) {
  */
 function env_obsolete( $p_env_variable, $p_new_env_variable ) {
 	$t_env = getenv( $p_env_variable );
-	if ( $t_env ) {
+	if( $t_env ) {
 		$t_description = 'Environment variable <em>' . $p_env_variable . '</em> is obsolete.';
 		$t_info = 'please use ' . $p_new_env_variable . ' instead.';
 		check_print_test_warn_row( $t_description, false, $t_info );
