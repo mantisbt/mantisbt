@@ -371,7 +371,7 @@ if( !$t_issues_found ) {
 		$t_string = 'roadmap_empty';
 	}
 
-	echo '<br />' . lang_get( $t_string ) . '<br />';
+	echo '<p>' . lang_get( $t_string ) . '</p>';
 }
 
 html_page_bottom();
