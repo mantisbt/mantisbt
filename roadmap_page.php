@@ -171,6 +171,8 @@ if ( ALL_PROJECTS == $t_project_id ) {
 	array_unshift( $t_project_ids, $t_project_id );
 }
 
+$t_project_id_for_access_check = $t_project_id;
+
 html_page_top( lang_get( 'roadmap' ) );
 
 version_cache_array_rows( $t_project_ids );
@@ -363,7 +365,13 @@ foreach( $t_project_ids as $t_project_id ) {
 }
 
 if( !$t_issues_found ) {
-	echo '<br />' . lang_get( 'roadmap_empty' ) . '<br />';
+	if( access_has_project_level( config_get( 'manage_project_threshold' ), $t_project_id_for_access_check ) )  {
+		$t_string = 'roadmap_empty_manager';
+	} else {
+		$t_string = 'roadmap_empty';
+	}
+
+	echo '<br />' . lang_get( $t_string ) . '<br />';
 }
 
 html_page_bottom();
