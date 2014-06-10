@@ -1,0 +1,63 @@
+<?php
+# MantisBT - A PHP based bugtracking system
+
+# MantisBT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# MantisBT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Timeline event class for status change of issues.
+ * @copyright Copyright 2014 MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ * @package MantisBT
+ */
+
+/**
+ * Timeline event class for status change of issues.
+ *
+ * @package MantisBT
+ * @subpackage classes
+ */
+class IssueStatusChangeTimelineEvent extends TimelineEvent {
+	private $issue_id;
+	private $old_status;
+	private $new_status;
+
+	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_old_status, $p_new_status ) {
+		parent::__construct( $p_timestamp, $p_user_id, $p_issue_id );
+
+		$this->issue_id = $p_issue_id;
+		$this->old_status = $p_old_status;
+		$this->new_status = $p_new_status;
+	}
+
+	public function html() {
+		$t_resolved = config_get( 'bug_resolved_status_threshold' );
+		$t_closed = config_get( 'bug_closed_status_threshold' );
+
+		if( $this->old_status < $t_closed && $this->new_status >= $t_closed ) {
+			$t_string = sprintf( lang_get( 'timeline_issue_closed' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
+		} else if( $this->old_status < $t_resolved && $this->new_status >= $t_resolved ) {
+			$t_string = sprintf( lang_get( 'timeline_issue_resolved' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
+		} else if( $this->old_status >= $t_resolved && $this->new_status < $t_resolved ) {
+			$t_string = sprintf( lang_get( 'timeline_issue_reopened' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
+		} else {
+			return;
+		}
+
+		$t_html = $this->html_start();
+		$t_html .= '<div class="action">' . $t_string . '</div>';
+		$t_html .= $this->html_end();
+
+		return $t_html;
+	}
+}

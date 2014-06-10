@@ -99,6 +99,12 @@ if( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_
 	echo '<br />';
 }
 ?>
+
+<div>
+<?php include( $g_core_path . 'timeline_inc.php' ); ?>
+
+<div class="myview_boxes_area">
+
 <table class="hide" cellspacing="3" cellpadding="0">
 <?php
 $t_number_of_boxes = count ( $t_boxes );
@@ -144,12 +150,12 @@ while (list ($t_box_title, $t_box_display) = each ($t_boxes)) {
 			if( 1 == $t_counter%2 ) {
 				echo '<tr><td class="myview-left-col">';
 				include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
-				echo '</td>';
+				echo '</td></tr>';
 			}
 
 			# for odd box number only start new column
 			else if( 0 == $t_counter%2 ) {
-				echo '<td class="myview-right-col">';
+				echo '<tr><td class="myview-right-col">';
 				include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
 				echo '</td></tr>';
 			}
@@ -188,12 +194,13 @@ if( ON == $t_boxes_position && $t_counter == $t_number_of_boxes && 1 == $t_count
 ?>
 
 </table>
+</div>
+
 <?php
 if( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
 	html_status_legend();
 }
 ?>
-</div>
 
 <?php
 html_page_bottom();

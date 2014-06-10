@@ -420,6 +420,7 @@ div.error-info { text-align: center; margin: 1em; }
 }
 
 .myview-left-col, .myview-right-col { width: 50%; vertical-align: top; }
+.myview_boxes_area { width:60%; }
 #manage-overview-table th { width: 30%; }
 
 #action-group-issues-div,
@@ -738,3 +739,31 @@ div#summary			{ width: 100%; padding: 0 4px;}
 div#summary-left	{ float: left; }
 div#summary-right	{ float: right; }
 div#summary-bottom	{ width: 99.8%; clear: both; }
+
+/**
+ * Timeline Styles
+ */
+
+/* timeline header styles */
+div.timeline { width: 35%; float: right; border: solid 1px #000000; margin-top: 10px; padding-left: 20px; margin-bottom: 10px; }
+div.timeline div.heading { font-size: x-large; }
+div.timeline div.date_range { font-size: large; margin-bottom: 200px; }
+
+/* timeline entry styles */
+div.timeline div.entry { margin-bottom: -30px; position: relative; z-index: -1; }
+div.timeline * span.tag_name { background-color: green; color: white; border-radius: 5px; padding-left: 5px; padding-right: 5px; }
+div.timeline * span.username { font-weight:bold; }
+
+/* timeline avatar */
+div.timeline * img.avatar { float: none; width: 32px; height: 32px; }
+div.timeline div.entry-no-avatar img.avatar { display: none; }
+
+/* timeline timestamp */
+div.timeline * div.timestamp { position: relative; top: -38px; left: 40px; height: 15px; font-size: x-small; color: gray; }
+div.timeline div.entry-no-avatar div.timestamp { top: 5px; left: -2px; }
+
+/* timeline action */
+div.timeline * div.action { position: relative; top: -43px; left: 40px; padding-right: 50px; }
+div.timeline div.entry-no-avatar div.action { top: 0px; left: -2px; }
+
+div.timeline p { margin-left: 3px; }

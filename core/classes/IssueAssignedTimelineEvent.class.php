@@ -1,0 +1,62 @@
+<?php
+# MantisBT - A PHP based bugtracking system
+
+# MantisBT is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# MantisBT is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Timeline event class for assignment of issues.
+ * @copyright Copyright 2014 MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @link http://www.mantisbt.org
+ * @package MantisBT
+ */
+
+/**
+ * Timeline event class for assignment of issues.
+ *
+ * @package MantisBT
+ * @subpackage classes
+ */
+class IssueAssignedTimelineEvent extends TimelineEvent {
+	private $issue_id;
+	private $handler_id;
+
+	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_handler_id ) {
+		parent::__construct( $p_timestamp, $p_user_id, $p_issue_id );
+
+		$this->issue_id = $p_issue_id;
+		$this->handler_id = $p_handler_id;
+	}
+
+	function skip() {
+		if( !access_has_bug_level( config_get( 'view_handler_threshold' ), $this->issue_id ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public function html() {
+		if( $this->user_id == $this->handler_id ) {
+			$t_string = sprintf( lang_get( 'timeline_issue_assigned_to_self' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
+		} else {
+			$t_string = sprintf( lang_get( 'timeline_issue_assigned' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ), user_get_name( $this->handler_id ) );
+		}
+
+		$t_html = $this->html_start();
+		$t_html .= '<div class="action">' . $t_string . '</div>';
+		$t_html .= $this->html_end();
+
+		return $t_html;
+	}
+}
