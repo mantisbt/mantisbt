@@ -64,7 +64,7 @@ function log_event( $p_level, $p_msg ) {
 
 	if( is_array( $p_msg ) ) {
 		$t_event = $p_msg;
-		$s_msg = var_export( $p_msg, true );
+		$t_message = var_export( $p_msg, true );
 	} else {
 		$args = func_get_args();
 		array_shift($args); # skip level
@@ -72,7 +72,7 @@ function log_event( $p_level, $p_msg ) {
 		$p_msg = vsprintf( $p_msg, $args);
 
 		$t_event = array( $p_msg, 0 );
-		$s_msg = $p_msg;
+		$t_message = $p_msg;
 	}
 
 	$t_backtrace = debug_backtrace();
@@ -90,7 +90,7 @@ function log_event( $p_level, $p_msg ) {
 	$t_now = date( config_get_global( 'complete_date_format' ) );
 	$t_level = $g_log_levels[$p_level];
 
-	$t_plugin_event = '[' . $t_level . '] ' . $p_msg;
+	$t_plugin_event = '[' . $t_level . '] ' . $t_message;
 	if( function_exists( 'event_signal' ) ) {
 		event_signal( 'EVENT_LOG', array( $t_plugin_event ) );
 	}
@@ -107,7 +107,7 @@ function log_event( $p_level, $p_msg ) {
 		}
 	}
 
-	$t_php_event = $t_now . ' ' . $t_level . ' ' . $s_msg;
+	$t_php_event = $t_now . ' ' . $t_level . ' ' . $t_message;
 
 	switch( $t_destination ) {
 		case 'none':
@@ -130,7 +130,7 @@ function log_event( $p_level, $p_msg ) {
 				if( $firephp === null ) {
 					$firephp = FirePHP::getInstance(true);
 				}
-				$firephp->log( $p_msg, $t_php_event );
+				$firephp->log( $p_msg, $t_now . ' - ' . $t_level );
 				return;
 			}
 			# if firebug is not available, fall through
