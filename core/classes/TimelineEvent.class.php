@@ -43,19 +43,19 @@ class TimelineEvent {
 	}
 
 	public function compare( $p_other ) {
-		if ( $this->timestamp < $p_other->timestamp ) {
+		if( $this->timestamp < $p_other->timestamp ) {
 			return -1;
 		}
 
-		if ( $this->timestamp > $p_other->timestamp ) {
+		if( $this->timestamp > $p_other->timestamp ) {
 			return 1;
 		}
 
-		if ( $this->tie_breaker < $p_other->tie_breaker ) {
+		if( $this->tie_breaker < $p_other->tie_breaker ) {
 			return -1;
 		}
 
-		if ( $this->tie_breaker > $p_other->tie_breaker ) {
+		if( $this->tie_breaker > $p_other->tie_breaker ) {
 			return 1;
 		}
 
@@ -73,13 +73,13 @@ class TimelineEvent {
 	public function html_start() {
 		$t_avatar = user_get_avatar( $this->user_id, 32 );
 
-		if ( $t_avatar !== false ) {
+		if( $t_avatar !== false ) {
 			$t_html = '<div class="entry">';
 		} else {
 			$t_html = '<div class="entry-no-avatar">';
 		}
 
-		if ( $t_avatar !== false ) {
+		if( $t_avatar !== false ) {
 			$t_avatar_url = $t_avatar[0];
 			$t_html .= '<img class="avatar" src="' . $t_avatar_url . '"/>';
 		} else {
