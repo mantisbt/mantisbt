@@ -135,7 +135,7 @@ print_manage_menu( 'manage_proj_page.php' );
 			$t_level      = count( $t_stack );
 
 			# only print row if user has project management privileges
-			if (access_has_project_level( $t_manage_project_threshold, $t_project_id, auth_get_current_user_id() ) ) { ?>
+			if( access_has_project_level( $t_manage_project_threshold, $t_project_id, auth_get_current_user_id() ) ) { ?>
 			<tr>
 				<td>
 					<a href="manage_proj_edit_page.php?project_id=<?php echo $t_project['id'] ?>"><?php echo str_repeat( "&raquo; ", $t_level ) . string_display( $t_project['name'] ) ?></a>

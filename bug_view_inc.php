@@ -539,7 +539,7 @@ if( $t_show_projection || $t_show_eta ) {
 # Platform, OS, OS Version
 #
 
-if (( $t_show_platform || $t_show_os || $t_show_os_version ) &&
+if( ( $t_show_platform || $t_show_os || $t_show_os_version ) &&
 	( $t_platform || $t_os || $t_os_version )) {
 	$t_spacer = 0;
 

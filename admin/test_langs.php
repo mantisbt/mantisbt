@@ -371,7 +371,6 @@ function checktoken( $file, $base = false ) {
 					$need_end_variable = true;
 					break;
 				default:
-					# if (!$in_php_code)
 					print_error( "$id " . token_name( $id ) . " = $text (line $line)", 'PARSER' );
 					$pass = false;
 					break;

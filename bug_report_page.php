@@ -348,7 +348,7 @@ print_recently_visited();
 			<label for="profile_id"><?php echo lang_get( 'select_profile' ) ?></label>
 		</th>
 		<td>
-			<?php if (count(profile_get_all_for_user( auth_get_current_user_id() )) > 0) { ?>
+			<?php if( count(profile_get_all_for_user( auth_get_current_user_id() )) > 0 ) { ?>
 				<select <?php echo helper_get_tab_index() ?> id="profile_id" name="profile_id">
 					<?php print_profile_option_list( auth_get_current_user_id(), $f_profile_id ) ?>
 				</select>
@@ -429,7 +429,7 @@ print_recently_visited();
 	if( $t_show_product_version ) {
 		$t_product_version_released_mask = VERSION_RELEASED;
 
-		if (access_has_project_level( config_get( 'report_issues_for_unreleased_versions_threshold' ) ) ) {
+		if( access_has_project_level( config_get( 'report_issues_for_unreleased_versions_threshold' ) ) ) {
 			$t_product_version_released_mask = VERSION_ALL;
 		}
 ?>

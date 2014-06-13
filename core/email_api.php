@@ -779,7 +779,7 @@ function email_send_all($p_delete_on_failure = false) {
 		}
 
 		if( !$t_email_sent ) {
-			if ($p_delete_on_failure) {
+			if( $p_delete_on_failure ) {
 				email_queue_delete( $t_email_data->email_id );
 			}
 

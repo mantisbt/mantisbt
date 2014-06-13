@@ -365,7 +365,7 @@ function bugnote_get_field( $p_bugnote_id, $p_field_name ) {
 		return $g_cache_bugnote[(int)$p_bugnote_id]->$p_field_name;
 	}
 
-	if ($t_vars == null ) {
+	if( $t_vars == null ) {
 		$t_vars = getClassProperties( 'BugnoteData', 'public');
 	}
 

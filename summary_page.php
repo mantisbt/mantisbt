@@ -92,7 +92,7 @@ while( $row = db_fetch_array( $t_result ) ) {
 		$t_last_updated   = $row['last_updated'];
 	}
 
-	if ($t_last_updated < $t_date_submitted) {
+	if( $t_last_updated < $t_date_submitted ) {
 		$t_last_updated   = 0;
 		$t_date_submitted = 0;
 	}

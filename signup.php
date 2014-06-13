@@ -77,7 +77,7 @@ if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 	&&
 	require_lib( 'securimage/securimage.php' );
 
 	$securimage = new Securimage();
-	if ($securimage->check($f_captcha) == false) {
+	if( $securimage->check( $f_captcha ) == false ) {
 		trigger_error( ERROR_SIGNUP_NOT_MATCHING_CAPTCHA, ERROR );
 	}
 }

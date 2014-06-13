@@ -102,7 +102,7 @@ relationship_delete( $f_rel_id );
 bug_update_date( $f_bug_id );
 
 # set the rel_type for both bug and dest_bug based on $t_rel_type and on who is the dest bug
-if ($f_bug_id == $t_bug_relationship_data->src_bug_id) {
+if( $f_bug_id == $t_bug_relationship_data->src_bug_id ) {
 	$t_bug_rel_type = $t_rel_type;
 	$t_dest_bug_rel_type = relationship_get_complementary_type( $t_rel_type );
 } else {

@@ -426,7 +426,7 @@ function user_pref_insert( $p_user_id, $p_project_id, $p_prefs ) {
 
 	user_ensure_unprotected( $p_user_id );
 
-	if ($t_vars == null ) {
+	if( $t_vars == null ) {
 		$t_vars = getClassProperties( 'UserPreferences', 'protected');
 	}
 
@@ -465,7 +465,7 @@ function user_pref_update( $p_user_id, $p_project_id, $p_prefs ) {
 
 	user_ensure_unprotected( $p_user_id );
 
-	if ($t_vars == null ) {
+	if( $t_vars == null ) {
 		$t_vars = getClassProperties( 'UserPreferences', 'protected');
 	}
 
@@ -588,7 +588,7 @@ function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 		}
 	}
 
-	if ($t_vars == null ) {
+	if( $t_vars == null ) {
 		$t_vars = getClassProperties( 'UserPreferences', 'protected');
 	}
 
@@ -622,7 +622,7 @@ function user_pref_get_pref( $p_user_id, $p_pref_name, $p_project_id = ALL_PROJE
 
 	$t_prefs = user_pref_get( $p_user_id, $p_project_id );
 
-	if ($t_vars == null ) {
+	if( $t_vars == null ) {
 		$t_reflection = new ReflectionClass('UserPreferences');
 		$t_vars = $t_reflection->getDefaultProperties();
 	}

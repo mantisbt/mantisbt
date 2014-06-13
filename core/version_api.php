@@ -648,7 +648,7 @@ function version_get( $p_version_id ) {
 
 	$row = version_cache_row( $p_version_id );
 
-	if ($t_vars == null ) {
+	if( $t_vars == null ) {
 		$t_reflection = new ReflectionClass('VersionData');
 		$t_vars = $t_reflection->getDefaultProperties();
 	}

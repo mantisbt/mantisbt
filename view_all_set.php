@@ -294,7 +294,7 @@ $t_custom_fields 		= custom_field_get_ids(); /** @todo (thraxisp) This should re
 $f_custom_fields_data 	= array();
 if( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 	foreach( $t_custom_fields as $t_cfid ) {
-		if (custom_field_type( $t_cfid ) == CUSTOM_FIELD_TYPE_DATE) {
+		if( custom_field_type( $t_cfid ) == CUSTOM_FIELD_TYPE_DATE ) {
 			$t_control = gpc_get_string( 'custom_field_' . $t_cfid . '_control', null);
 
 			$t_year = gpc_get_int( 'custom_field_' . $t_cfid . '_start_year', null);

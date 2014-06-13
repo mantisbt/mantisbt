@@ -83,7 +83,7 @@ function crypto_generate_random_string( $p_bytes, $p_require_strong_generator = 
 			&& ( version_compare( PHP_VERSION, '5.3.7' ) >= 0 || !is_windows_server() )
 		) {
 			$t_random_bytes = mcrypt_create_iv( $p_bytes, MCRYPT_DEV_URANDOM );
-			if ($t_random_bytes !== false && strlen($t_random_bytes) === $p_bytes) {
+			if( $t_random_bytes !== false && strlen( $t_random_bytes ) === $p_bytes ) {
 				$t_random_string = $t_random_bytes;
 			}
 		}

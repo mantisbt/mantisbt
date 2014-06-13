@@ -87,7 +87,7 @@ foreach ($rows as $t_row) {
 	if( $t_cat == '' )
 		$t_cat = 'none';
 	if( !access_compare_level( $t_row->status, $t_resolved ) ) {
-		if (in_array($t_cat, $t_category)) {
+		if( in_array( $t_cat, $t_category ) ) {
 			$t_data[$t_ptr][$t_cat] ++;
 		} else {
 			$t_data[$t_ptr][$t_cat] = 1;
@@ -115,20 +115,20 @@ for ($t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr) {
 	while( ( $row !== false ) && ( $row['date_modified'] >= $t_now ) ) {
 		switch ($row['type']) {
 			case 0: # updated bug
-				if ($row['field_name'] == 'category') {
+				if( $row['field_name'] == 'category' ) {
 					$t_cat = $row['new_value'];
-					if ($t_cat == '')
+					if( $t_cat == '' )
 						$t_cat = 'none';
-					if (in_array($t_cat, $t_category)) {
+					if( in_array( $t_cat, $t_category ) ) {
 						$t_data[$t_ptr][$t_cat] --;
 					} else {
 						$t_data[$t_ptr][$t_cat] = 0;
 						$t_category[] = $t_cat;
 					}
 					$t_cat = $row['old_value'];
-					if ($t_cat == '')
+					if( $t_cat == '' )
 						$t_cat = 'none';
-					if (in_array($t_cat, $t_category)) {
+					if( in_array( $t_cat, $t_category ) ) {
 						$t_data[$t_ptr][$t_cat] ++;
 					} else {
 						$t_data[$t_ptr][$t_cat] = 1;
@@ -142,9 +142,9 @@ for ($t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr) {
 							!access_compare_level( $row['old_value'], $t_resolved ) ) {
 						# transition from open to closed
 						$t_cat = $t_bug_cat[$row['bug_id']];
-						if ($t_cat == '')
+						if( $t_cat == '' )
 							$t_cat = 'none';
-						if (in_array($t_cat, $t_category)) {
+						if( in_array( $t_cat, $t_category ) ) {
 							$t_data[$t_ptr][$t_cat] ++;
 						} else {
 							$t_data[$t_ptr][$t_cat] = 1;
@@ -155,9 +155,9 @@ for ($t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr) {
 				break;
 			case 1: # new bug
 				$t_cat = $t_bug_cat[$row['bug_id']];
-				if ($t_cat == '')
+				if( $t_cat == '' )
 					$t_cat = 'none';
-				if (in_array($t_cat, $t_category)) {
+				if( in_array( $t_cat, $t_category ) ) {
 					$t_data[$t_ptr][$t_cat] --;
 				} else {
 					$t_data[$t_ptr][$t_cat] = 0;
@@ -168,7 +168,7 @@ for ($t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr) {
 		$row = db_fetch_array( $t_result );
 	}
 
-	if ($t_now <= $t_end) {
+	if( $t_now <= $t_end ) {
 		$t_marker[$t_ptr] = $t_now;
 		$t_ptr++;
 		foreach ( $t_category as $t_cat ) {
@@ -195,7 +195,7 @@ for ( $t=0; $t<$t_count_cat; $t++ ) {
 }
 # sort and display the results
 sort($t_category);
-if ($f_show_as_table) {
+if( $f_show_as_table ) {
 	$t_date_format = config_get( 'short_date_format' );
 	html_begin();
 	html_head_begin();

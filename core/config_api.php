@@ -78,7 +78,7 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 	# bypass table lookup for certain options
 	$t_bypass_lookup = !config_can_set_in_database( $p_option );
 
-	# @@ debug @@ if ($t_bypass_lookup) { echo "bp=$p_option match=$t_match_pattern <br />"; }
+	# @@ debug @@ if( $t_bypass_lookup ) { echo "bp=$p_option match=$t_match_pattern <br />"; }
 
 	if( !$t_bypass_lookup ) {
 		if( $g_project_override !== null && $p_project === null ) {

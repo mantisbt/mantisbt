@@ -140,7 +140,7 @@ for ($t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr) {
 		$t_row = db_fetch_array( $t_result );
 	}
 
-	if ($t_now <= $t_end) {
+	if( $t_now <= $t_end ) {
 		$t_ptr++;
 		$t_marker[$t_ptr] = $t_now;
 		foreach ( $t_view_status as $t_status => $t_label ) {
@@ -156,7 +156,7 @@ $t_label_string = lang_get('orct'); # use the (open/resolved/closed/total) label
 $t_label_strings = explode('/', utf8_substr($t_label_string, 1, strlen($t_label_string)-2));
 
 # add headers for table
-if ($f_show_as_table) {
+if( $f_show_as_table ) {
 	$t_date_format = config_get( 'short_date_format' );
 	html_begin();
 	html_head_begin();
@@ -166,7 +166,7 @@ if ($f_show_as_table) {
 	html_head_end();
 	html_body_begin();
 	echo '<table class="width100"><tr><td></td>';
-	if ($f_summary) {
+	if( $f_summary ) {
 		echo '<th>' . $t_label_strings[0] . '</th>';
 		echo '<th>' . $t_label_strings[1] . '</th>';
 		echo '<th>' . $t_label_strings[2] . '</th>';
@@ -183,8 +183,7 @@ $t_closed = config_get( 'bug_closed_status_threshold' );
 $t_bin_count = $t_ptr;
 $t_labels = array();
 $i = 0;
-if ($f_summary) {
-
+if( $f_summary ) {
 	$t_labels[++$i] = $t_label_strings[0];
 	$t_labels[++$i] = $t_label_strings[1];
 	$t_labels[++$i] = $t_label_strings[2];
@@ -232,7 +231,7 @@ for ($t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++) {
 	}
 
 }
-if ($f_show_as_table) {
+if( $f_show_as_table ) {
 	echo '</table>';
 	html_body_end();
 	html_end();

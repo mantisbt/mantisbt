@@ -1360,7 +1360,7 @@ function print_bracket_link_prepared( $p_link ) {
  */
 function print_bracket_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' ) {
 	echo '<span class="bracket-link';
-	if ($p_class !== '') {
+	if( $p_class !== '' ) {
 		echo ' bracket-link-',$p_class; # prefix on a container allows styling of whole link, including brackets
 	}
 	echo '">[&#160;';

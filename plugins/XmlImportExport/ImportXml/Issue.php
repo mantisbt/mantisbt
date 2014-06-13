@@ -162,7 +162,7 @@ class ImportXml_Issue implements ImportXml_Interface {
 						        ( $reader->depth > $depth_cf ||
 						          $reader->nodeType != XMLReader::END_ELEMENT ) ) {
 							if( $reader->nodeType == XMLReader::ELEMENT ) {
-								if ($reader->localName == 'custom_field') {
+								if( $reader->localName == 'custom_field' ) {
 									$t_custom_fields[++$i] = new stdClass();
 								}
 								switch ( $reader->localName ) {
@@ -183,7 +183,7 @@ class ImportXml_Issue implements ImportXml_Interface {
 						        ( $reader->depth > $depth_bn ||
 						          $reader->nodeType != XMLReader::END_ELEMENT ) ) {
 							if( $reader->nodeType == XMLReader::ELEMENT ) {
-								if ($reader->localName == 'bugnote') {
+								if( $reader->localName == 'bugnote' ) {
 									$t_bugnotes[++$i] = new stdClass();
 								}
 								switch ( $reader->localName ) {
@@ -216,7 +216,7 @@ class ImportXml_Issue implements ImportXml_Interface {
 						        ( $reader->depth > $depth_att ||
 						          $reader->nodeType != XMLReader::END_ELEMENT ) ) {
 							if( $reader->nodeType == XMLReader::ELEMENT ) {
-								if ($reader->localName == 'attachment') {
+								if( $reader->localName == 'attachment' ) {
 									$t_attachments[++$i] = new stdClass();
 								}
 								switch ( $reader->localName ) {

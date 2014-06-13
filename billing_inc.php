@@ -216,7 +216,7 @@ if( ON == config_get( 'time_tracking_with_billing' ) ) {
 		<td class="small-caption">
 			<?php echo $t_item['sum_time_tracking'] ?>
 		</td>
-<?php		if ($t_cost_col) { ?>
+<?php		if( $t_cost_col ) { ?>
 		<td class="small-caption right">
 			<?php echo string_attribute( number_format( $t_item['cost'], 2 ) ); ?>
 		</td>

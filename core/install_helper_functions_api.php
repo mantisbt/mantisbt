@@ -298,7 +298,7 @@ function install_date_migrate( $p_data ) {
 					}
 
 					$t_new_value[$i] = db_unixtimestamp($t_old_value);
-					if ($t_new_value[$i] < 100000 ) {
+					if( $t_new_value[$i] < 100000 ) {
 						$t_new_value[$i] = 1;
 					}
 				}
@@ -312,7 +312,7 @@ function install_date_migrate( $p_data ) {
 				}
 
 				$t_new_value = db_unixtimestamp($t_old_value);
-				if ($t_new_value < 100000 ) {
+				if( $t_new_value < 100000 ) {
 					$t_new_value = 1;
 				}
 				$t_values = array( $t_new_value, $t_id);

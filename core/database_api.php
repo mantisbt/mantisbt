@@ -496,7 +496,7 @@ function db_fetch_array( &$p_result ) {
 			}
 		}
 
-		if ($t_array_result != $p_result) {
+		if( $t_array_result != $p_result ) {
 			# new query
 			$t_array_result = $p_result;
 			$t_array_fields = null;
@@ -510,7 +510,7 @@ function db_fetch_array( &$p_result ) {
 		$t_convert = false;
 		$t_fieldcount = $p_result->FieldCount();
 		for( $i = 0; $i < $t_fieldcount; $i++ ) {
-			if (isset( $t_array_fields[$i] ) ) {
+			if( isset( $t_array_fields[$i] ) ) {
 				$t_field = $t_array_fields[$i];
 			} else {
 				$t_field = $p_result->FetchField( $i );
