@@ -41,6 +41,7 @@
  * @author Changwoo
  * @author Priviet
  * @author Wtspout
+ * @author 고기랑
  * @author 관인생략
  * @author 아라
  */
@@ -269,11 +270,15 @@ $s_manage_profiles_link = '프로필';
 $s_change_preferences_link = '환경 설정';
 $s_edit_account_title = '계정 편집';
 $s_username = '사용자 이름';
+$s_username_label = '사용자 이름';
 $s_realname = '실명';
+$s_realname_label = '실명';
 $s_email = '이메일';
+$s_email_label = '이메일';
 $s_password = '비밀번호';
 $s_no_password_change = '비밀번호는 다른 시스템에서 관리하므로 여기서 바꿀 수 없습니다.';
 $s_confirm_password = '비밀번호 확인';
+$s_current_password = '현재 비밀번호';
 $s_access_level = '접근 레벨';
 $s_update_user_button = '정보 갱신';
 $s_verify_warning = '계정 정보를 확인했습니다. 수신했던 계정 확인 메시지는 이제 무효입니다.';
@@ -637,6 +642,7 @@ $s_add_project_title = '프로젝트 추가';
 $s_upload_file_path = '업로드 파일 경로';
 $s_add_project_button = '프로젝트 추가';
 $s_projects_title = '프로젝트';
+$s_projects_title_label = '프로젝트';
 $s_name = '이름';
 $s_project_updated_msg = '프로젝트가 갱신되었습니다....';
 $s_version_added_msg = '버전 정보가 추가되었습니다....';
@@ -895,6 +901,7 @@ $s_custom_field_require_closed = '이슈 폐쇄할 때 필요함';
 $s_link_custom_field_to_project_title = '사용자 정의 필드 프로젝트에 연결';
 $s_link_custom_field_to_project_button = '사용자 지정 필드 연결';
 $s_custom_field_sequence = '시퀀스';
+$s_custom_field_sequence_label = '시퀀스';
 $s_custom_field_type_enum_string = '0:문자열,1:숫자,2:부동 소수,3:열거,4:이메일,5:확인 상자,6:목록,7:다중 선택 목록,8:날짜,9:라디오,10:텍스트 영역';
 $s_confirm_used_custom_field_deletion = '이 필드는 적어도 하나의 프로젝트에 링크되어 있습니다.  이 필드와 관련된 모든 값은 삭제될 것입니다. 이 필드를 삭제하지 않으려면, 브라우저에서 뒤로 버튼을 누르시기 바랍니다. 삭제를 계속 진행하기 위해서는 아래의 버튼을 누르세요';
 $s_confirm_custom_field_deletion = '커스텀 필드와 모든 관련된 값을 삭제하시겠습니까?';
@@ -1092,6 +1099,7 @@ $s_manage_user = '사용자 관리';
 $s_install_information = 'MantisBT 설치 정보';
 $s_database_information = 'MantisBT 데이터베이스 정보';
 $s_path_information = 'MantisBT 경로 정보';
+$s_php_version = 'PHP 버전';
 $s_month_january = '1월';
 $s_month_february = '2월';
 $s_month_march = '3월';
@@ -1133,6 +1141,7 @@ $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = '브라우저에 저장된 로그인 
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = '이 사용자는 설정 화면이 없습니다.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = '뉴스를 찾을 수 없습니다.';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = '비밀번호가 일치하지 않습니다.';
+$MANTIS_ERROR[ERROR_USER_CURRENT_PASSWORD_MISMATCH] = '현재 비밀번호가 올바르지 않습니다.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_EXPECTED] = '%1$s에 대해 문자열이 아닌 배열이 입력되어야 합니다.';
 $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = '%1$s에 대해 문자열이 와야 하지만 배열이 입력되야 합니다.';
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = '숫자가 입력되어야 합니다.(%1$s).';

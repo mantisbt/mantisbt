@@ -470,7 +470,7 @@ $s_hide_content = 'Inhoud verbergen';
 $s_show_content = 'Inhoud weergeven';
 $s_webmaster_contact_information = 'Voor hulp neemt u contact op met de <a href="mailto:%1$s" title="Per e-mail contact opnemen met de webmaster.">beheerder</a>';
 $s_total_queries_executed = 'Totaal aantal uitgevoerde zoekopdrachten: %1$d';
-$s_unique_queries_executed = 'Aantal unieke uitgevoerd zoekopdrachten: %1$d';
+$s_unique_queries_executed = 'Aantal uitgevoerde unieke zoekopdrachten: %1$d';
 $s_total_query_execution_time = 'Totale uitvoertijd: %1$s seconden';
 $s_page_execution_time = 'Uitvoertijd voor pagina: %1$s seconden';
 $s_memory_usage_in_kb = 'Geheugengebruik: %1$s KiB';
@@ -487,7 +487,7 @@ $s_warning_change_setting = '<strong>Waarschuwing:</strong> "%1$s" is niet inges
 $s_warning_security_hazard = 'Dit is een mogelijk beveiligingsrisico omdat het gevoelige gegevens kan openbaren.';
 $s_warning_integrity_hazard = 'Dit zorgt ervoor dat programmacode van MantisBT blijft uitvoeren als er fouten optreden, en dit kan leiden tot problemen met de systeem- of gegevensintegriteit.';
 $s_warning_debug_email = '<strong>Waarschuwing:</strong> "<code>debug_email</code>" is niet ingesteld op <code>OFF</code>. Alle meldingen per e-mail worden verzonden aan "%1$s".';
-$s_error_database_no_schema_version = '<strong>Fout:</strong> De databasestructuur lijkt verouderd te zijn (config(databaseversion) is 0) of corrupt. Controleer of de databaseserver actief is. De versie van het databaseschema kan niet achterhaald worden. Config Table gaf geen geldige versie van het databaseschema terug. Vraag advies op de mailinglijst mantis-help als dat nodig is.';
+$s_error_database_no_schema_version = '<strong>Fout:</strong> De databasestructuur lijkt verouderd (config(databaseversion) is 0) of beschadigd te zijn. Controleer of de databaseserver actief is. De versie van het databaseschema kan niet achterhaald worden. Config Table gaf geen geldige versie van het databaseschema terug. Vraag advies op de mailinglijst mantis-help als dat nodig is.';
 $s_error_database_version_out_of_date_2 = '<strong>Waarschuwing:</strong> De databasestructuur is mogelijk verouderd. U moet deze <a href="admin/install.php">bijwerken</a> voordat u aanmeldt.';
 $s_error_code_version_out_of_date = '<strong>Waarschuwing:</strong> De databasestructuur is nieuwer dan de geïnstalleerde programmacode. Werk de code bij.';
 $s_login_page_info = 'Welkom bij het meldingvolgsysteem.';
