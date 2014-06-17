@@ -179,6 +179,7 @@ print_recently_visited();
 				<tr>
 					<td class="form-title" colspan="3">
 						<input type="hidden" name="bug_id" value="<?php echo $t_bug_id ?>" />
+						<input type="hidden" name="last_updated" value="<?php echo $t_bug->last_updated ?>" />
 						<?php echo lang_get( 'updating_bug_advanced_title' ); ?>
 					</td>
 					<td class="right" colspan="3">
