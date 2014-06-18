@@ -122,13 +122,6 @@ $t_bug_note->note = gpc_get_string( 'bugnote_text', '' );
 $t_bug_note->view_state = gpc_get_bool( 'private', config_get( 'default_bugnote_view_status' ) == VS_PRIVATE ) ? VS_PRIVATE : VS_PUBLIC;
 $t_bug_note->time_tracking = gpc_get_string( 'time_tracking', '0:00' );
 
-# Detect and prevent conflicting edits - this is a *very* blunt tool.
-/*echo "<pre>" . PHP_EOL;
-var_dump($t_existing_bug->last_updated);
-echo "<br />" . PHP_EOL;
-var_dump($t_updated_bug->last_updated);
-echo "</pre>" . PHP_EOL;
-die();*/
 if( $t_existing_bug->last_updated !== $t_updated_bug->last_updated ) {
     trigger_error( ERROR_BUG_CONFLICTING_EDIT, ERROR );
 }
