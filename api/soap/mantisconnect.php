@@ -82,8 +82,15 @@ if( !mci_is_webservice_call() ) {
 require_once( 'mc_core.php' );
 
 $server = new SoapServer("mantisconnect.wsdl",
-		array('features' => SOAP_USE_XSI_ARRAY_TYPE + SOAP_SINGLE_ELEMENT_ARRAYS)
+	array('features' => SOAP_USE_XSI_ARRAY_TYPE + SOAP_SINGLE_ELEMENT_ARRAYS)
 );
 
 $server->addFunction(SOAP_FUNCTIONS_ALL);
 $server->handle();
+
+if( $g_email_stored ) {
+	if( function_exists( 'fastcgi_finish_request' ) ) {
+		fastcgi_finish_request();
+	}
+	email_send_all();
+}
