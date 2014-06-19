@@ -1969,7 +1969,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			}
 
 			$c_search = '%' . $t_search_term . '%';
-			$t_textsearch_where_clause .= '( ' . db_helper_like( 'summary' ) .
+			$t_textsearch_where_clause .= '( ' . db_helper_like( "$t_bug_table.summary" ) .
 				' OR ' . db_helper_like( "$t_bug_text_table.description" ) .
 				' OR ' . db_helper_like( "$t_bug_text_table.steps_to_reproduce" ) .
 				' OR ' . db_helper_like( "$t_bug_text_table.additional_information" ) .
