@@ -159,7 +159,7 @@ function log_print_to_page() {
 		$t_total_queries_count = 0;
 		$t_total_event_count = count( $g_log_events );
 
-			echo "\n\n<!--Mantis Debug Log Output-->";
+		echo "\n\n<!--Mantis Debug Log Output-->";
 		if( $t_total_event_count == 0 ) {
 			echo "<!--END Mantis Debug Log Output-->\n\n";
 			return;
