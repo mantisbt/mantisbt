@@ -491,9 +491,10 @@ class BugData {
 						  FROM $t_category_table
 						  WHERE id=" . db_param();
 			$t_result = db_query_bound( $query, array( $this->category_id ) );
+			$t_handler = db_result( $t_result );
 
-			if( $t_result = db_result( $t_result ) ) {
-				$this->handler_id = db_result( $t_result );
+			if( $t_handler !== false ) {
+				$this->handler_id = $t_handler;
 			}
 		}
 
