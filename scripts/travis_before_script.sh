@@ -11,6 +11,7 @@ HOSTNAME=localhost
 PORT=8080
 MANTIS_DB_NAME=bugtracker
 MANTIS_BOOTSTRAP=tests/bootstrap.php
+MANTIS_CONFIG=config/config_inc.php
 
 SQL_CREATE_DB="CREATE DATABASE $MANTIS_DB_NAME;"
 SQL_CREATE_PROJECT="INSERT INTO mantis_project_table
@@ -144,6 +145,18 @@ cat <<-EOF >> $MANTIS_BOOTSTRAP
 	<?php
 		\$GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED'] = true;
 		\$GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'] = 'http://$HOSTNAME:$PORT/api/soap/mantisconnect.php?wsdl';
+	EOF
+
+echo "Adding custom configuration options"
+sudo chmod 777 $MANTIS_CONFIG
+cat <<-EOF >> $MANTIS_CONFIG
+
+	# Configs required to ensure all PHPUnit tests are executed
+	\$g_allow_no_category = ON;
+	\$g_due_date_update_threshold = DEVELOPER;
+	\$g_due_date_view_threshold = DEVELOPER;
+	\$g_enable_project_documentation = ON;
+	\$g_time_tracking_enabled = ON;
 	EOF
 
 step "Before-script execution completed successfully"
