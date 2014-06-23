@@ -1502,10 +1502,6 @@ $s_time_tracking_stopwatch_reset = 'Reset';
 
 $s_access_denied = 'Access Denied.';
 
-# Twitter Integration
-$s_twitter_resolved = '%1$d: [%2$s] %3$s (resolved by %4$s in %5$s)';
-$s_twitter_resolved_no_version = '%1$d: [%2$s] %3$s (resolved by %4$s)';
-
 # Project Page
 $s_development_team = 'Development Team';
 
