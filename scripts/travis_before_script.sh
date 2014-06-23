@@ -148,8 +148,6 @@ cat <<-EOF >> $MANTIS_BOOTSTRAP
 	EOF
 
 echo "Adding custom configuration options"
-pwd
-set +x
 sudo chmod 777 $MANTIS_CONFIG
 cat <<-EOF >> $MANTIS_CONFIG
 	\$g_allow_no_category = ON;
@@ -158,7 +156,5 @@ cat <<-EOF >> $MANTIS_CONFIG
 	\$g_enable_project_documentation = ON;
 	\$g_time_tracking_enabled = ON;
 	EOF
-
-cat $MANTIS_CONFIG
 
 step "Before-script execution completed successfully"
