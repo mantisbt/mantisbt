@@ -149,6 +149,7 @@ cat <<-EOF >> $MANTIS_BOOTSTRAP
 
 echo "Adding custom configuration options"
 sudo chmod 777 $MANTIS_CONFIG
+sed -i '/?>/d' $MANTIS_CONFIG
 cat <<-EOF >> $MANTIS_CONFIG
 	\$g_allow_no_category = ON;
 	\$g_due_date_update_threshold = DEVELOPER;
