@@ -14,10 +14,13 @@ script:
 # What to build, and on which platforms
 
 php:
+  - 5.3
+  - 5.4
   - 5.5
 
 env:
   - DB=mysql
+  - DB=pgsql
 
 branches:
   except:
