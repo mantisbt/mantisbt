@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Beta16
  * @author Massimo itaca
  * @author Nemo bis
  */
@@ -48,6 +49,6 @@ $s_plugin_format_config = 'Configurazione';
 $s_plugin_format_process_text = 'Elaborazione del Test';
 $s_plugin_format_process_text_warning_notice = 'Non disattivare a meno che tu non sappia cosa stai facendo. Nello stato "disattivo", sono possibili attacchi di tipo "crosso site scripting" (XSS).';
 $s_plugin_format_process_urls = 'Elaborazione URL';
-$s_plugin_format_process_buglinks = 'MantisBT Collegamenti (anomalie/Note anomalia)';
+$s_plugin_format_process_buglinks = 'Collegamenti interni MantisBT (anomalie e note anomalia)';
 $s_plugin_format_enabled = 'Attivo';
 $s_plugin_format_disabled = 'Disattivato';

@@ -750,8 +750,6 @@ $s_time_tracking_billing_link = 'Et Afräschne';
 $s_time_tracking_cost_per_hour = 'Koste pro Shtund';
 $s_time_tracking_cost = 'Koste';
 $s_total_time_for_issue = 'De jesampte Zick för di Saach = %1$s';
-$s_twitter_resolved = '%1$d: [%2$s] %3$s (äleedesch vum %4$s en %5$s)';
-$s_twitter_resolved_no_version = '%1$d: [%2$s] %3$s (äleedesch vum %4$s)';
 $s_development_team = 'Dä Entweckler-Schmolz';
 $s_manage_columns_config = 'Shpallde verwallde';
 $s_all_columns_title = 'All de Shpallde, di mer han';

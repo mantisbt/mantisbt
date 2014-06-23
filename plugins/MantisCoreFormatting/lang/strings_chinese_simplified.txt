@@ -39,6 +39,7 @@
  * @file
  *
  * @author Hydra
+ * @author Liuxinyu970226
  */
 
 $s_plugin_format_title = 'MantisBT格式化';
@@ -47,6 +48,6 @@ $s_plugin_format_config = '设置';
 $s_plugin_format_process_text = '文本处理';
 $s_plugin_format_process_text_warning_notice = '要关闭，除非你真的知道你在做什么。在断开状态跨站点脚本 (XSS) 攻击的可能。';
 $s_plugin_format_process_urls = 'URL 处理';
-$s_plugin_format_process_buglinks = 'MantisBT链接( 问题/问题注释 )';
+$s_plugin_format_process_buglinks = 'MantisBT内部链接（问题与问题注释）';
 $s_plugin_format_enabled = '开';
 $s_plugin_format_disabled = '关';
