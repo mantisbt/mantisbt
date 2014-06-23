@@ -149,13 +149,14 @@ cat <<-EOF >> $MANTIS_BOOTSTRAP
 
 echo "Adding custom configuration options"
 sudo chmod 777 $MANTIS_CONFIG
-cat  <<-EOF >> $MANTIS_CONFIG
+cat <<-EOF >> $MANTIS_CONFIG
 
-    \$g_allow_no_category = ON;
-    \$g_due_date_update_threshold = DEVELOPER;
-    \$g_due_date_view_threshold = DEVELOPER;
-    \$g_enable_project_documentation = ON;
-    \$g_time_tracking_enabled = ON;
+	# Configs required to ensure all PHPUnit tests are executed
+	\$g_allow_no_category = ON;
+	\$g_due_date_update_threshold = DEVELOPER;
+	\$g_due_date_view_threshold = DEVELOPER;
+	\$g_enable_project_documentation = ON;
+	\$g_time_tracking_enabled = ON;
 	EOF
 
 step "Before-script execution completed successfully"
