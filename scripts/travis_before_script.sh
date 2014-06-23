@@ -11,7 +11,7 @@ HOSTNAME=localhost
 PORT=8080
 MANTIS_DB_NAME=bugtracker
 MANTIS_BOOTSTRAP=tests/bootstrap.php
-MANTIS_CONFIG=config_inc.php
+MANTIS_CONFIG=config/config_inc.php
 
 SQL_CREATE_DB="CREATE DATABASE $MANTIS_DB_NAME;"
 SQL_CREATE_PROJECT="INSERT INTO mantis_project_table
