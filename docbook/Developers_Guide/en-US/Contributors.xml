@@ -439,7 +439,6 @@ phing test
 					and adjust it based on the skipped tests.</para>
 				</listitem>
 			</itemizedlist>
-
 		</section>
 	</section>
 
