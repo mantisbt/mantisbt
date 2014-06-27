@@ -438,6 +438,12 @@ div.table-container {
 	width: 90%; /* default width */
 }
 
+div.width100 { width: 100%; }
+div.width90 { width: 90%; }
+div.width75 { width: 74%; }
+div.width60 { width: 60%; }
+div.width50 { width: 50%; }
+
 #view-issue-details,
 #bug-update,
 #bugnote_add_open,
