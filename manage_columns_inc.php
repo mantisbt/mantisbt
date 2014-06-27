@@ -122,13 +122,18 @@ $t_excel = implode( ', ', $t_columns );
 					<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_as_my_default" value="<?php echo lang_get( 'update_columns_as_my_default' ) ?>" /></span><?php
 				} else { ?>
 					<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_for_current_project" value="<?php echo lang_get( 'update_columns_for_current_project' ) ?>" /></span><?php
-
+				}
 			}
-		}
 
-		if( $t_manage_page && current_user_is_administrator() ) { ?>
-			<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_as_global_default" value="<?php echo lang_get( 'update_columns_as_global_default' ) ?>" /></span><?php
-		} ?>
+			if( $t_manage_page ) {
+				if( $t_project_id != ALL_PROJECTS ) { ?>
+					<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_for_current_project" value="<?php echo lang_get( 'update_columns_for_current_project' ) ?>" /></span><?php
+				}
+
+				if( current_user_is_administrator() ) { ?>
+					<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_as_global_default" value="<?php echo lang_get( 'update_columns_as_global_default' ) ?>" /></span><?php
+				}
+			} ?>
 		</fieldset>
 	</form>
 </div>
