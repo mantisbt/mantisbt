@@ -644,6 +644,7 @@ div.form-container .file  input,
 .display-value span {
 	max-width: 98%;
 }
+div.form-container .spacer { margin-top: .5em; clear: both; }
 .label-style {
 	position: absolute;
 	top: 0em;
