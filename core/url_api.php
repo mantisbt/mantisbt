@@ -30,11 +30,10 @@
  * Retrieve the contents of a remote URL.
  * First tries using built-in PHP modules (OpenSSL and cURL), then attempts
  * system call as last resort.
- * @param string $p_url URL
+ * @param string $p_url The URL to fetch.
  * @return null|string URL contents (NULL in case of errors)
  */
 function url_get( $p_url ) {
-
 	# Generic PHP call
 	if( ini_get_bool( 'allow_url_fopen' ) ) {
 		$t_data = @file_get_contents( $p_url );

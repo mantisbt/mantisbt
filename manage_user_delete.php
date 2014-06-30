@@ -49,7 +49,7 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'user_api.php' );
 
-form_security_validate('manage_user_delete');
+form_security_validate( 'manage_user_delete' );
 
 auth_reauthenticate();
 access_ensure_global_level( config_get( 'manage_user_threshold' ) );
@@ -83,7 +83,7 @@ helper_ensure_confirmed( lang_get( 'delete_account_sure_msg' ) .
 
 user_delete( $f_user_id );
 
-form_security_purge('manage_user_delete');
+form_security_purge( 'manage_user_delete' );
 
 html_page_top( null, 'manage_user_page.php' );
 

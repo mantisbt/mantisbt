@@ -45,47 +45,34 @@ class AttachmentTest extends SoapBase {
 	 * 3. Get the issue.
 	 * 4. Verify that the attachment is present in the issue data
 	 * 5. Verify that the attachment contents is correct
-	 *
+	 * @return void
 	 */
 	public function testAttachmentIsAdded() {
-		$issueToAdd = $this->getIssueToAdd( 'AttachmentTest.testAttachmentIsAdded' );
+		$t_issue_to_add = $this->getIssueToAdd( 'AttachmentTest.testAttachmentIsAdded' );
 
-		$attachmentContents = 'Attachment contents.';
+		$t_attachment_contents = 'Attachment contents.';
 
-		$issueId = $this->client->mc_issue_add(
+		$t_issue_id = $this->client->mc_issue_add(	$this->userName, $this->password, $t_issue_to_add );
+
+		$this->deleteAfterRun( $t_issue_id );
+
+		$t_attachment_id = $this->client->mc_issue_attachment_add(
 			$this->userName,
 			$this->password,
-			$issueToAdd);
-
-		$this->deleteAfterRun( $issueId );
-
-		$attachmentId = $this->client->mc_issue_attachment_add(
-			$this->userName,
-			$this->password,
-			$issueId,
+			$t_issue_id,
 			'sample.txt',
 			'txt',
-			base64_encode( $attachmentContents )
-		);
+			base64_encode( $t_attachment_contents ) );
 
-		$issue = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId
-		);
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$attachment = $this->client->mc_issue_attachment_get(
-			$this->userName,
-			$this->password,
-			$attachmentId);
+		$t_attachment = $this->client->mc_issue_attachment_get( $this->userName, $this->password, $t_attachment_id );
 
-		$this->assertEquals( 1, count( $issue->attachments ), 'count($issue->attachments)' );
-		$this->assertEquals( $attachmentContents, base64_decode( $attachment ), '$attachmentContents' );
-		$this->assertEquals(
-			$this->mantisPath.'file_download.php?file_id='.$issue->attachments[0]->id.'&type=bug',
-			html_entity_decode( $issue->attachments[0]->download_url)
-		);
-		$this->assertEquals( $this->userId, $issue->attachments[0]->user_id);
+		$this->assertEquals( 1, count( $t_issue->attachments ), 'count($t_issue->attachments)' );
+		$this->assertEquals( $t_attachment_contents, base64_decode( $t_attachment ), '$t_attachment_contents' );
+		$this->assertEquals( $this->mantisPath . 'file_download.php?file_id=' . $t_issue->attachments[0]->id . '&type=bug',
+			html_entity_decode( $t_issue->attachments[0]->download_url ) );
+		$this->assertEquals( $this->userId, $t_issue->attachments[0]->user_id );
 	}
 
 
@@ -93,18 +80,17 @@ class AttachmentTest extends SoapBase {
 	 * A test case that tests the following:
 	 * 1. Gets a non-existing issue attachment
 	 * 2. Verifies that that an error is thrown
-	 *
+	 * @return void
 	 */
 	public function testIssueAttachmentNotFound() {
-
 		try {
 			$this->client->mc_issue_attachment_get(
 				$this->userName,
 				$this->password,
-				-1);
-			$this->fail("Should have failed.");
-		} catch ( SoapFault $e) {
-			$this->assertRegexp('/Unable to find an attachment/', $e->getMessage());
+				-1 );
+			$this->fail( "Should have failed." );
+		} catch ( SoapFault $e ) {
+			$this->assertRegexp( '/Unable to find an attachment/', $e->getMessage() );
 		}
 	}
 
@@ -115,15 +101,15 @@ class AttachmentTest extends SoapBase {
 	 * 3. Get the issue.
 	 * 4. Verify that the attachment is present in the issue data
 	 * 5. Verify that the attachment contents is correct
-	 *
+	 * @return void
 	 */
 	public function testProjectAttachmentIsAdded() {
 		$this->skipIfProjectDocumentationIsNotEnabled();
 
-		$attachmentContents = 'Attachment contents.';
-		$attachmentsCount = count( $this->client->mc_project_get_attachments( $this->userName, $this->password, $this->getProjectId() ) );
+		$t_attachment_contents = 'Attachment contents.';
+		$t_attachments_count = count( $this->client->mc_project_get_attachments( $this->userName, $this->password, $this->getProjectId() ) );
 
-		$attachmentId = $this->client->mc_project_attachment_add(
+		$t_attachment_id = $this->client->mc_project_attachment_add(
 			$this->userName,
 			$this->password,
 			$this->getProjectId(),
@@ -131,73 +117,70 @@ class AttachmentTest extends SoapBase {
 			'title',
 			'description',
 			'txt',
-			base64_encode( $attachmentContents )
-		);
+			base64_encode( $t_attachment_contents ) );
 
-		$this->projectAttachmentsToDelete[] = $attachmentId;
+		$this->projectAttachmentsToDelete[] = $t_attachment_id;
 
-		$attachment = $this->client->mc_project_attachment_get(
+		$t_attachment = $this->client->mc_project_attachment_get(
 			$this->userName,
 			$this->password,
-			$attachmentId);
+			$t_attachment_id );
 
-		$this->assertEquals( $attachmentContents, base64_decode( $attachment ), '$attachmentContents' );
+		$this->assertEquals( $t_attachment_contents, base64_decode( $t_attachment ), '$t_attachment_contents' );
 
-		$attachments = $this->client->mc_project_get_attachments( $this->userName, $this->password, $this->getProjectId() );
-		$this->assertEquals( $attachmentsCount + 1, count( $attachments ), "Check if we have 1 additional attachment" );
+		$t_attachments = $this->client->mc_project_get_attachments( $this->userName, $this->password, $this->getProjectId() );
+		$this->assertEquals( $t_attachments_count + 1, count( $t_attachments ), "Check if we have 1 additional attachment" );
 
 		# The attachment we just uploaded should be the last one
-		$attachment = end( $attachments );
-		$this->assertEquals($this->userId, $attachment->user_id, "Attachment's User Id should match current user" );
-		$this->assertEquals('description', $attachment->description);
+		$t_attachment = end( $t_attachments );
+		$this->assertEquals( $this->userId, $t_attachment->user_id, "Attachment's User Id should match current user" );
+		$this->assertEquals( 'description', $t_attachment->description );
 	}
 
 	/**
 	 * A test case that tests the following:
 	 * 1. Gets a non-existing project attachment
 	 * 2. Verifies that an error is thrown
-	 *
+	 * @return void
 	 */
 	public function testProjectAttachmentNotFound() {
-
 		$this->skipIfProjectDocumentationIsNotEnabled();
 
 		try {
 			$this->client->mc_project_attachment_get(
 				$this->userName,
 				$this->password,
-				-1);
-			$this->fail("Should have failed.");
-		} catch ( SoapFault $e) {
-			$this->assertRegexp('/Unable to find an attachment/', $e->getMessage());
+				-1 );
+			$this->fail( "Should have failed." );
+		} catch( SoapFault $e ) {
+			$this->assertRegexp( '/Unable to find an attachment/', $e->getMessage() );
 		}
 	}
 
 	/**
 	 * Skip test if enable_project_documentation is not enabled in the configuration
+	 * @return void
 	 */
 	private function skipIfProjectDocumentationIsNotEnabled() {
+		$t_config_enabled = $this->client->mc_config_get_string( $this->userName, $this->password, 'enable_project_documentation' );
 
-		$configEnabled = $this->client->mc_config_get_string( $this->userName, $this->password, 'enable_project_documentation' );
-
-		if( ! $configEnabled  ) {
-			$this->markTestSkipped('Project documentation is not enabled.');
+		if( !$t_config_enabled ) {
+			$this->markTestSkipped( 'Project documentation is not enabled.' );
 		}
 	}
 
 	/**
 	 * Tear Down: Remove project attachments added by test
+	 * @return void
 	 */
 	protected function tearDown() {
 		SoapBase::tearDown();
 
-		foreach ( $this->projectAttachmentsToDelete as $projectAttachmentId ) {
+		foreach( $this->projectAttachmentsToDelete as $t_project_attachment_id ) {
 			$this->client->mc_project_attachment_delete(
 				$this->userName,
 				$this->password,
-				$projectAttachmentId);
+				$t_project_attachment_id );
 		}
 	}
-
-
 }

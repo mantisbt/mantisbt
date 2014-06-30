@@ -76,9 +76,7 @@ if( is_blank( $f_title ) ) {
 
 $t_project_file_table = db_get_table( 'project_file' );
 
-/** @todo (thraxisp) this code should probably be integrated into file_api to share methods used to store files */
-
-extract( $f_file, EXTR_PREFIX_ALL, 'v' );
+# @todo (thraxisp) this code should probably be integrated into file_api to share methods used to store files
 
 if( isset( $f_file['tmp_name'] ) && is_uploaded_file( $f_file['tmp_name'] ) ) {
 	file_ensure_uploaded( $f_file );
@@ -112,26 +110,26 @@ if( isset( $f_file['tmp_name'] ) && is_uploaded_file( $f_file['tmp_name'] ) ) {
 			$c_content = '';
 			break;
 		case DATABASE:
-			$c_content = db_prepare_binary_string( fread ( fopen( $f_file['tmp_name'], 'rb' ), $f_file['size'] ) );
+			$c_content = db_prepare_binary_string( fread( fopen( $f_file['tmp_name'], 'rb' ), $f_file['size'] ) );
 			break;
 		default:
-			/** @todo Such errors should be checked in the admin checks */
+			# @todo Such errors should be checked in the admin checks
 			trigger_error( ERROR_GENERIC, ERROR );
 	}
-	$query = "UPDATE $t_project_file_table
+	$t_query = "UPDATE $t_project_file_table
 		SET title=" . db_param() . ", description=" . db_param() . ", date_added=" . db_param() . ",
 			filename=" . db_param() . ", filesize=" . db_param() . ", file_type=" .db_param() . ", content=" .db_param() . "
 			WHERE id=" . db_param();
-	$t_result = db_query_bound( $query, array( $f_title, $f_description, db_now(), $f_file['name'], $t_file_size, $f_file['type'], $c_content, $f_file_id ) );
+	$t_result = db_query_bound( $t_query, array( $f_title, $f_description, db_now(), $f_file['name'], $t_file_size, $f_file['type'], $c_content, $f_file_id ) );
 } else {
-	$query = "UPDATE $t_project_file_table
+	$t_query = "UPDATE $t_project_file_table
 			SET title=" . db_param() . ", description=" . db_param() . "
 			WHERE id=" . db_param();
-	$t_result = db_query_bound( $query, array( $f_title, $f_description, $f_file_id ) );
+	$t_result = db_query_bound( $t_query, array( $f_title, $f_description, $f_file_id ) );
 }
 
 if( !$t_result ) {
-	trigger_error( ERROR_GENERIC, ERROR  );
+	trigger_error( ERROR_GENERIC, ERROR );
 }
 
 form_security_purge( 'proj_doc_update' );

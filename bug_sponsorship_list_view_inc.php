@@ -130,14 +130,12 @@ if( $t_show_sponsorships ) {
 			echo sprintf( lang_get( 'total_sponsorship_amount' ),
 				sponsorship_format_amount( $t_total_sponsorship ) );
 
-			if( access_has_bug_level( config_get( 'view_sponsorship_details_threshold' )
-				, $f_bug_id ) ) {
+			if( access_has_bug_level( config_get( 'view_sponsorship_details_threshold' ), $f_bug_id ) ) {
 				echo '<br /><br />';
 				$i = 0;
 				foreach ( $t_sponsorship_ids as $id ) {
 					$t_sponsorship = sponsorship_get( $id );
-					$t_date_added = date( config_get( 'normal_date_format' )
-						, $t_sponsorship->date_submitted );
+					$t_date_added = date( config_get( 'normal_date_format' ), $t_sponsorship->date_submitted );
 
 					echo ($i > 0) ? '<br />' : '';
 					$i++;

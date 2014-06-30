@@ -60,11 +60,11 @@ $f_redirect_url	= gpc_get_string( 'redirect_url' );
 
 # get the fields list
 $t_field_name_arr = get_field_names();
-$field_name_count = count($t_field_name_arr);
+$t_field_name_count = count( $t_field_name_arr );
 
 # check the checkboxes
-for ($i=0 ; $i <$field_name_count ; $i++) {
-	$t_name='print_'.utf8_strtolower(str_replace(' ','_',$t_field_name_arr[$i]));
+for( $i=0; $i <$t_field_name_count; $i++ ) {
+	$t_name = 'print_' . utf8_strtolower( str_replace( ' ', '_', $t_field_name_arr[$i] ) );
 	$t_flag = gpc_get( $t_name, null );
 
 	if( $t_flag === null ) {
@@ -77,15 +77,15 @@ for ($i=0 ; $i <$field_name_count ; $i++) {
 # get user id
 $t_user_id = $f_user_id;
 
-$c_export = implode('',$t_prefs_arr);
+$c_export = implode( '', $t_prefs_arr );
 
 # update preferences
 $t_user_print_pref_table = db_get_table( 'user_print_pref' );
-$query = "UPDATE $t_user_print_pref_table
+$t_query = "UPDATE $t_user_print_pref_table
 		SET print_pref=" . db_param() . "
 		WHERE user_id=" . db_param();
 
-$t_result = db_query_bound( $query, array( $c_export, $t_user_id ) );
+$t_result = db_query_bound( $t_query, array( $c_export, $t_user_id ) );
 
 form_security_purge( 'print_all_bug_options_update' );
 

@@ -76,8 +76,8 @@ if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 	&&
 	# captcha image requires GD library and related option to ON
 	require_lib( 'securimage/securimage.php' );
 
-	$securimage = new Securimage();
-	if( $securimage->check( $f_captcha ) == false ) {
+	$t_securimage = new Securimage();
+	if( $t_securimage->check( $f_captcha ) == false ) {
 		trigger_error( ERROR_SIGNUP_NOT_MATCHING_CAPTCHA, ERROR );
 	}
 }
@@ -107,7 +107,7 @@ html_page_top2a();
 		<br />
 		<?php echo lang_get( 'password_emailed_msg' ) ?>
 		<br /><br />
-		<?php echo lang_get( 'no_reponse_msg') ?>
+		<?php echo lang_get( 'no_reponse_msg' ) ?>
 		<br /><br/>
 	</div>
 </div>

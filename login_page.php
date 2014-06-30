@@ -216,9 +216,9 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 
 	/**
 	 * Display Warnings for enabled debugging / developer settings
-	 * @param string $p_type
-	 * @param string $p_setting
-	 * @param string $p_value
+	 * @param string $p_type    Message Type.
+	 * @param string $p_setting Setting.
+	 * @param string $p_value   Value.
 	 * @return string
 	 */
 	function debug_setting_message ( $p_type, $p_setting, $p_value ) {
@@ -237,13 +237,12 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 		$t_warnings[] = debug_setting_message(
 			'integrity',
 			$t_config . '[E_USER_ERROR]',
-			DISPLAY_ERROR_HALT
-		);
+			DISPLAY_ERROR_HALT );
 	}
 
 	# since admin directory and db_upgrade lists are available check for missing db upgrades
 	# if db version is 0, we do not have a valid database.
-	$t_db_version = config_get( 'database_version' , 0 );
+	$t_db_version = config_get( 'database_version', 0 );
 	if( $t_db_version == 0 ) {
 		$t_warnings[] = lang_get( 'error_database_no_schema_version' );
 	}
@@ -252,7 +251,7 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 	# Note: install_helper_functions_api.php required for db_null_date() function definition
 	require_api( 'install_helper_functions_api.php' );
 	require_once( 'admin' . DIRECTORY_SEPARATOR . 'schema.php' );
-	$t_upgrades_reqd = count( $upgrade ) - 1;
+	$t_upgrades_reqd = count( $g_upgrade ) - 1;
 
 	if( ( 0 < $t_db_version ) &&
 			( $t_db_version != $t_upgrades_reqd ) ) {
@@ -266,7 +265,7 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 	if( count( $t_warnings ) > 0 ) {
 		echo '<div class="important-msg">';
 		echo '<ul>';
-		foreach( $t_warnings AS $t_warning ) {
+		foreach( $t_warnings as $t_warning ) {
 			echo '<li>' . $t_warning . '</li>';
 		}
 		echo '</ul>';

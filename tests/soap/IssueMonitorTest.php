@@ -36,25 +36,19 @@ class IssueMonitorTest extends SoapBase {
 	 * A test case that tests the following:
 	 * 1. Creates a new issue
 	 * 2. validates that the monitor list is empty
+	 * @return void
 	 */
 	public function testCreateIssueHasEmptyMonitorList() {
+	    $t_issue_to_add = $this->getIssueToAdd( 'IssueMonitorTest.testCreateIssueHasEmptyMonitorList' );
 
-	    $issueToAdd = $this->getIssueToAdd( 'IssueMonitorTest.testCreateIssueHasEmptyMonitorList' );
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$issueId = $this->client->mc_issue_add(
-			$this->userName,
-			$this->password,
-			$issueToAdd);
+		$this->deleteAfterRun( $t_issue_id );
 
-		$this->deleteAfterRun( $issueId );
-
-		$issue = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
 		# no monitors on new issue
-		$this->assertEquals(0, sizeof($issue->monitors));
+		$this->assertEquals( 0, sizeof( $t_issue->monitors ) );
 	}
 
 	/**
@@ -65,32 +59,26 @@ class IssueMonitorTest extends SoapBase {
 	 * 3. Retrieves the issue and verifies that the user is in the monitor list
 	 * 4. Removes a monitor from the issue
 	 * 5. Retrieves the issue and verifies that the user is not in the monitor list
+	 * @return void
 	 */
 	public function testAddMonitorWhenCreatingAnIssue() {
-
-	    $issueToAdd = $this->getIssueToAdd( 'IssueMonitorTest.testAddRemoveMonitorFromIssue' );
-	    $issueToAdd['monitors'] = array(
+	    $t_issue_to_add = $this->getIssueToAdd( 'IssueMonitorTest.testAddRemoveMonitorFromIssue' );
+	    $t_issue_to_add['monitors'] = array(
 	        array ('id' =>  $this->userId )
 		);
 
-		$issueId = $this->client->mc_issue_add(
-			$this->userName,
-			$this->password,
-			$issueToAdd);
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$this->deleteAfterRun( $issueId );
+		$this->deleteAfterRun( $t_issue_id );
 
-		$issue = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		self::assertEquals(1, sizeof($issue->monitors));
+		self::assertEquals( 1, sizeof( $t_issue->monitors ) );
 
-		$monitor = $issue->monitors[0];
+		$t_monitor = $t_issue->monitors[0];
 
-		self::assertEquals( $this->userId, $monitor->id );
-		self::assertEquals( $this->userName, $monitor->name );
+		self::assertEquals( $this->userId, $t_monitor->id );
+		self::assertEquals( $this->userName, $t_monitor->name );
 
 	}
 
@@ -100,37 +88,31 @@ class IssueMonitorTest extends SoapBase {
 	 * 1. Creates a new issue
 	 * 2. Adds a monitor to it
 	 * 3. Retrieves the issue and verifies that the user is in the monitor list
+	 * @return void
 	 */
 	public function testAddMonitorToExistingIssue() {
+	    $t_issue_to_add = $this->getIssueToAdd( 'IssueMonitorTest.testAddRemoveMonitorFromIssue' );
 
-	    $issueToAdd = $this->getIssueToAdd( 'IssueMonitorTest.testAddRemoveMonitorFromIssue' );
+	    $t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-	    $issueId = $this->client->mc_issue_add(
-			$this->userName,
-			$this->password,
-			$issueToAdd);
+		$this->deleteAfterRun( $t_issue_id );
 
-		$this->deleteAfterRun( $issueId );
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$issue = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId);
-
-		$issue->monitors = array(
+		$t_issue->monitors = array(
 	        array ('id' =>  $this->userId )
 		);
 
-		$this->client->mc_issue_update( $this->userName, $this->password, $issueId, $issue );
+		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 
-		$issue = $this->client->mc_issue_get( $this->userName, $this->password, $issueId);
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		self::assertEquals(1, sizeof($issue->monitors));
+		self::assertEquals( 1, sizeof( $t_issue->monitors ) );
 
-		$monitor = $issue->monitors[0];
+		$t_monitor = $t_issue->monitors[0];
 
-		self::assertEquals( $this->userId, $monitor->id );
-		self::assertEquals( $this->userName, $monitor->name );
+		self::assertEquals( $this->userId, $t_monitor->id );
+		self::assertEquals( $this->userName, $t_monitor->name );
 	}
 
 	/**
@@ -140,33 +122,27 @@ class IssueMonitorTest extends SoapBase {
 	 * 2. Retrieves the issue
 	 * 3. Updates the monitor list to be empty
 	 * 4. Retrieves the issue and verifies that the monitors list is empty
+	 * @return void
 	 */
 	public function testRemoveMonitor() {
-
-	    $issueToAdd = $this->getIssueToAdd( 'IssueMonitorTest.testAddRemoveMonitorFromIssue' );
-	    $issueToAdd['monitors'] = array(
+	    $t_issue_to_add = $this->getIssueToAdd( 'IssueMonitorTest.testAddRemoveMonitorFromIssue' );
+	    $t_issue_to_add['monitors'] = array(
 	        array ('id' =>  $this->userId )
 		);
 
-	    $issueId = $this->client->mc_issue_add(
-			$this->userName,
-			$this->password,
-			$issueToAdd);
+	    $t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$this->deleteAfterRun( $issueId );
+		$this->deleteAfterRun( $t_issue_id );
 
-		$issue = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$issue->monitors = array();
+		$t_issue->monitors = array();
 
-		$this->client->mc_issue_update( $this->userName, $this->password, $issueId, $issue );
+		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 
-		$issue = $this->client->mc_issue_get( $this->userName, $this->password, $issueId);
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		self::assertEquals(0, sizeof($issue->monitors));
+		self::assertEquals( 0, sizeof( $t_issue->monitors ) );
 	}
 
 	/**
@@ -176,30 +152,24 @@ class IssueMonitorTest extends SoapBase {
 	 * 2. Retrieves the issue
 	 * 3. Updates the issue ( no actual changes )
 	 * 4. Retrieves the issue and verifies that the monitors list is unchanged
+	 * @return void
 	 */
 	public function testUpdateKeepsMonitor() {
-
-	    $issueToAdd = $this->getIssueToAdd( 'IssueMonitorTest.testUpdateKeepsMonitor' );
-	    $issueToAdd['monitors'] = array(
+	    $t_issue_to_add = $this->getIssueToAdd( 'IssueMonitorTest.testUpdateKeepsMonitor' );
+	    $t_issue_to_add['monitors'] = array(
 	        array ('id' =>  $this->userId )
 		);
 
-	    $issueId = $this->client->mc_issue_add(
-			$this->userName,
-			$this->password,
-			$issueToAdd);
+	    $t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$this->deleteAfterRun( $issueId );
+		$this->deleteAfterRun( $t_issue_id );
 
-		$issue = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->client->mc_issue_update( $this->userName, $this->password, $issueId, $issue );
+		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 
-		$issue = $this->client->mc_issue_get( $this->userName, $this->password, $issueId);
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		self::assertEquals(1, sizeof($issue->monitors));
+		self::assertEquals( 1, sizeof( $t_issue->monitors ) );
 	}
 }

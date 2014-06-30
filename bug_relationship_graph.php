@@ -55,8 +55,9 @@ require_api( 'relationship_graph_api.php' );
 
 auth_ensure_user_authenticated();
 
-if( ON != config_get( 'relationship_graph_enable' ) )
+if( ON != config_get( 'relationship_graph_enable' ) ) {
 	access_denied();
+}
 
 $f_bug_id		= gpc_get_int( 'bug_id' );
 $f_type			= gpc_get_string( 'graph', 'relation' );
@@ -100,10 +101,11 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 	<!-- Title -->
 	<td class="form-title">
 		<?php
-		if( $t_graph_relation )
+		if( $t_graph_relation ) {
 			echo lang_get( 'viewing_bug_relationship_graph_title' );
-		else
+		} else {
 			echo lang_get( 'viewing_bug_dependency_graph_title' );
+		}
 		?>
 	</td>
 	<!-- Links -->
@@ -114,10 +116,11 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 		<!-- Relation/Dependency Graph Switch -->
 		<span class="small">
 <?php
-		if( $t_graph_relation )
+		if( $t_graph_relation ) {
 			print_bracket_link( "bug_relationship_graph.php?bug_id=$f_bug_id&graph=dependency", lang_get( 'dependency_graph' ) );
-		else
+		} else {
 			print_bracket_link( "bug_relationship_graph.php?bug_id=$f_bug_id&graph=relation", lang_get( 'relation_graph' ) );
+		}
 ?>
 		</span>
 <?php
@@ -126,10 +129,11 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 		<!-- Horizontal/Vertical Switch -->
 		<span class="small">
 <?php
-			if( $t_graph_horizontal )
-				print_bracket_link( "bug_relationship_graph.php?bug_id=$f_bug_id&graph=dependency&orientation=vertical", lang_get( 'vertical' ) );
-			else
-				print_bracket_link( "bug_relationship_graph.php?bug_id=$f_bug_id&graph=dependency&orientation=horizontal", lang_get( 'horizontal' ) );
+		if( $t_graph_horizontal ) {
+			print_bracket_link( "bug_relationship_graph.php?bug_id=$f_bug_id&graph=dependency&orientation=vertical", lang_get( 'vertical' ) );
+		} else {
+			print_bracket_link( "bug_relationship_graph.php?bug_id=$f_bug_id&graph=dependency&orientation=horizontal", lang_get( 'horizontal' ) );
+		}
 ?>
 		</span>
 <?php
@@ -142,10 +146,11 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 	<!-- Graph -->
 	<td colspan="2">
 <?php
-	if( $t_graph_relation )
+	if( $t_graph_relation ) {
 		$t_graph = relgraph_generate_rel_graph( $f_bug_id );
-	else
+	} else {
 		$t_graph = relgraph_generate_dep_graph( $f_bug_id, $t_graph_horizontal );
+	}
 
 	relgraph_output_map( $t_graph, 'relationship_graph_map' );
 ?>
@@ -190,5 +195,5 @@ $t_force_readonly = true;
 $t_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 $t_file = __FILE__;
 
-define ( 'BUG_VIEW_INC_ALLOW', true );
+define( 'BUG_VIEW_INC_ALLOW', true );
 include( dirname( __FILE__ ) . '/bug_view_inc.php' );

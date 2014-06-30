@@ -40,9 +40,7 @@
 require_api( 'constant_inc.php' );
 require_api( 'utility_api.php' );
 
-/**
- * constant(s) defining the output formats supported by dot and neato.
- */
+# constant(s) defining the output formats supported by dot and neato.
 define( 'GRAPHVIZ_ATTRIBUTED_DOT', 0 );
 define( 'GRAPHVIZ_PS', 1 );
 define( 'GRAPHVIZ_HPGL', 2 );
@@ -69,49 +67,47 @@ define( 'GRAPHVIZ_PDF', 28 );
  * Base class for graph creation and manipulation. By default,
  * undirected graphs are generated. For directed graphs, use Digraph
  * class.
- * @package MantisBT
- * @subpackage classes
  */
 class Graph {
 	/**
 	 * Name
 	 */
-	var $name = 'G';
+	public $name = 'G';
 
 	/**
 	 * Attributes
 	 */
-	var $attributes = array();
+	public $attributes = array();
 
 	/**
 	 * Default node
 	 */
-	var $default_node = null;
+	public $default_node = null;
 
 	/**
 	 * Default edge
 	 */
-	var $default_edge = null;
+	public $default_edge = null;
 
 	/**
 	 * Nodes
 	 */
-	var $nodes = array();
+	public $nodes = array();
 
 	/**
 	 * Edges
 	 */
-	var $edges = array();
+	public $edges = array();
 
 	/**
 	 * Graphviz tool
 	 */
-	var $graphviz_tool;
+	public $graphviz_tool;
 
 	/**
 	 * Formats
 	 */
-	var $formats = array(
+	public $formats = array(
 		'dot' => array(
 			'binary' => false,
 			'type' => GRAPHVIZ_ATTRIBUTED_DOT,
@@ -211,12 +207,11 @@ class Graph {
 
 	/**
 	 * Constructor for Graph objects.
-	 * @param string $p_name
-	 * @param array $p_attributes
-	 * @param string $p_tool
-	 * @return null
+	 * @param string $p_name       Graph name.
+	 * @param array  $p_attributes Attributes.
+	 * @param string $p_tool       Graph generation tool.
 	 */
-	function Graph( $p_name = 'G', $p_attributes = array(), $p_tool = 'neato' ) {
+	function Graph( $p_name = 'G', array $p_attributes = array(), $p_tool = 'neato' ) {
 		if( is_string( $p_name ) ) {
 			$this->name = $p_name;
 		}
@@ -228,10 +223,10 @@ class Graph {
 
 	/**
 	 * Sets graph attributes.
-	 * @param array $p_attributes
-	 * @return null
+	 * @param array $p_attributes Attributes.
+	 * @return void
 	 */
-	function set_attributes( $p_attributes ) {
+	function set_attributes( array $p_attributes ) {
 		if( is_array( $p_attributes ) ) {
 			$this->attributes = $p_attributes;
 		}
@@ -239,10 +234,10 @@ class Graph {
 
 	/**
 	 * Sets default attributes for all nodes of the graph.
-	 * @param array $p_attributes
-	 * @return null
+	 * @param array $p_attributes Attributes.
+	 * @return void
 	 */
-	function set_default_node_attr( $p_attributes ) {
+	function set_default_node_attr( array $p_attributes ) {
 		if( is_array( $p_attributes ) ) {
 			$this->default_node = $p_attributes;
 		}
@@ -250,10 +245,10 @@ class Graph {
 
 	/**
 	 * Sets default attributes for all edges of the graph.
-	 * @param array $p_attributes
-	 * @return null
+	 * @param array $p_attributes Attributes.
+	 * @return void
 	 */
-	 function set_default_edge_attr( $p_attributes ) {
+	 function set_default_edge_attr( array $p_attributes ) {
 		if( is_array( $p_attributes ) ) {
 			$this->default_edge = $p_attributes;
 		}
@@ -261,11 +256,11 @@ class Graph {
 
 	/**
 	 * Adds a node to the graph.
-	 * @param string $p_name
-	 * @param array $p_attributes
-	 * @return null
+	 * @param string $p_name       Node name.
+	 * @param array  $p_attributes Attributes.
+	 * @return void
 	 */
-	 function add_node( $p_name, $p_attributes = array() ) {
+	 function add_node( $p_name, array $p_attributes = array() ) {
 		if( is_array( $p_attributes ) ) {
 			$this->nodes[$p_name] = $p_attributes;
 		}
@@ -273,12 +268,12 @@ class Graph {
 
 	/**
 	 * Adds an edge to the graph.
-	 * @param string $p_src
-	 * @param string $p_dst
-	 * @param array $p_attributes
-	 * @return null
+	 * @param string $p_src        Source.
+	 * @param string $p_dst        Destination.
+	 * @param array  $p_attributes Attributes.
+	 * @return void
 	 */
-	 function add_edge( $p_src, $p_dst, $p_attributes = array() ) {
+	 function add_edge( $p_src, $p_dst, array $p_attributes = array() ) {
 		if( is_array( $p_attributes ) ) {
 			$this->edges[] = array(
 				'src' => $p_src,
@@ -290,9 +285,9 @@ class Graph {
 
 	/**
 	 * Check if an edge is already present.
-	 * @param string $p_src
-	 * @param string $p_dst
-	 * @return bool
+	 * @param string $p_src Source.
+	 * @param string $p_dst Destination.
+	 * @return boolean
 	 */
 	function is_edge_present( $p_src, $p_dst ) {
 		foreach( $this->edges as $t_edge ) {
@@ -305,7 +300,7 @@ class Graph {
 
 	/**
 	 * Generates an undirected graph representation (suitable for neato).
-	 * @return null
+	 * @return void
 	 */
 	function generate() {
 		echo 'graph ' . $this->name . ' {' . "\n";
@@ -331,9 +326,9 @@ class Graph {
 
 	/**
 	 * Outputs a graph image or map in the specified format.
-	 * @param string $p_format
-	 * @param bool $p_headers
-	 * @return null
+	 * @param string  $p_format  Graphviz output format.
+	 * @param boolean $p_headers Whether to sent http headers.
+	 * @return void
 	 */
 	function output( $p_format = 'dot', $p_headers = false ) {
 		# Check if it is a recognized format.
@@ -395,10 +390,10 @@ class Graph {
 
 	/**
 	 * PROTECTED function to build a node or edge attribute list.
-	 * @param array $p_attributes
+	 * @param array $p_attributes Attributes.
 	 * @return string
 	 */
-	function _build_attribute_list( $p_attributes ) {
+	function _build_attribute_list( array $p_attributes ) {
 		if( empty( $p_attributes ) ) {
 			return '';
 		}
@@ -414,7 +409,7 @@ class Graph {
 				$t_value = '"' . addcslashes( $t_value, "\0..\37\"\\" ) . '"';
 			}
 			else if( is_integer( $t_value ) or is_float( $t_value ) ) {
-				$t_value = (string) $t_value;
+				$t_value = (string)$t_value;
 			} else {
 				continue;
 			}
@@ -427,7 +422,7 @@ class Graph {
 
 	/**
 	 * PROTECTED function to print graph attributes and defaults.
-	 * @return null
+	 * @return void
 	 */
 	function _print_graph_defaults() {
 		foreach( $this->attributes as $t_name => $t_value ) {
@@ -439,7 +434,7 @@ class Graph {
 				$t_value = '"' . addcslashes( $t_value, "\0..\37\"\\" ) . '"';
 			}
 			else if( is_integer( $t_value ) or is_float( $t_value ) ) {
-				$t_value = (string) $t_value;
+				$t_value = (string)$t_value;
 			} else {
 				continue;
 			}
@@ -461,24 +456,22 @@ class Graph {
 
 /**
  * Directed graph creation and manipulation.
- * @package MantisBT
- * @subpackage classes
  */
 class Digraph extends Graph {
 	/**
 	 * Constructor for Digraph objects.
-	 * @param string $p_name
-	 * @param array $p_attributes
-	 * @param string $p_tool
-	 * @param string $p_com_module
-	 * @return null
+	 * @param string $p_name       Name of the graph.
+	 * @param array  $p_attributes Attributes.
+	 * @param string $p_tool       Graphviz tool.
+	 * @param string $p_com_module Name of the graphviz COM module.
 	 */
-	function Digraph( $p_name = 'G', $p_attributes = array(), $p_tool = 'dot', $p_com_module = 'WinGraphviz.DOT' ) {
+	function Digraph( $p_name = 'G', array $p_attributes = array(), $p_tool = 'dot', $p_com_module = 'WinGraphviz.DOT' ) {
 		parent::Graph( $p_name, $p_attributes, $p_tool, $p_com_module );
 	}
 
 	/**
 	 * Generates a directed graph representation (suitable for dot).
+	 * @return void
 	 */
 	function generate() {
 		echo 'digraph ' . $this->name . ' {' . "\n";

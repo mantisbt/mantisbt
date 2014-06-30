@@ -130,7 +130,7 @@ if( $t_show_product_version || $t_show_fixed_in_version || $t_show_target_versio
 	}
 
 	if( $t_show_target_version ) {
-		$t_target_version_string   = prepare_version_string( $t_bug->project_id, version_get_id( $t_bug->target_version, $t_bug->project_id) );
+		$t_target_version_string   = prepare_version_string( $t_bug->project_id, version_get_id( $t_bug->target_version, $t_bug->project_id ) );
 	}
 
 	if( $t_show_fixed_in_version ) {
@@ -304,7 +304,7 @@ echo '<td class="right alternate-views-links" colspan="2">';
 if( !is_blank( $t_history_link ) ) {
 	# History
 	echo '<span class="small">';
-	print_bracket_link( $t_history_link, lang_get( 'bug_history' ), false , 'bug-history' );
+	print_bracket_link( $t_history_link, lang_get( 'bug_history' ), false, 'bug-history' );
 	echo '</span>';
 }
 
@@ -483,9 +483,9 @@ if( $t_show_status || $t_show_resolution ) {
 		echo '<th class="bug-status category">', lang_get( 'status' ), '</th>';
 
 		# choose color based on status
-		$status_label = html_get_status_css_class( $t_bug->status );
+		$t_status_label = html_get_status_css_class( $t_bug->status );
 
-		echo '<td class="bug-status ', $status_label, '">', $t_status, '</td>';
+		echo '<td class="bug-status ', $t_status_label, '">', $t_status, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
@@ -752,7 +752,7 @@ if( $t_show_sponsorships_box ) {
 
 # Bug Relationships
 if( $t_show_relationships_box ) {
-	relationship_view_box ( $t_bug->id );
+	relationship_view_box( $t_bug->id );
 }
 
 # File upload box
@@ -792,7 +792,7 @@ event_signal( 'EVENT_VIEW_BUG_EXTRA', array( $f_bug_id ) );
 # Time tracking statistics
 if( config_get( 'time_tracking_enabled' ) &&
 	access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id ) ) {
-	define ( 'BUGNOTE_STATS_INC_ALLOW', true );
+	define( 'BUGNOTE_STATS_INC_ALLOW', true );
 	include( $t_mantis_dir . 'bugnote_stats_inc.php' );
 }
 

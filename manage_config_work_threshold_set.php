@@ -60,10 +60,11 @@ $t_access = current_user_get_access_level();
 
 /**
  * set row
- * @param string $p_threshold threshold
- * @param bool $p_all_projects_only all projects only
+ * @param string  $p_threshold         Threshold.
+ * @param boolean $p_all_projects_only All projects only.
+ * @return void
  */
-function set_capability_row( $p_threshold, $p_all_projects_only=false ) {
+function set_capability_row( $p_threshold, $p_all_projects_only = false ) {
 	global $t_access, $t_project;
 
 	if( ( $t_access >= config_get_access( $p_threshold ) )
@@ -109,10 +110,11 @@ function set_capability_row( $p_threshold, $p_all_projects_only=false ) {
 
 /**
  * Get capability boolean
- * @param string $p_threshold threshold
- * @param bool $p_all_projects_only all projects only
+ * @param string  $p_threshold         Threshold.
+ * @param boolean $p_all_projects_only All projects only.
+ * @return void
  */
-function set_capability_boolean( $p_threshold, $p_all_projects_only=false ) {
+function set_capability_boolean( $p_threshold, $p_all_projects_only = false ) {
 	global $t_access, $t_project;
 
 	if( ( $t_access >= config_get_access( $p_threshold ) )
@@ -130,10 +132,11 @@ function set_capability_boolean( $p_threshold, $p_all_projects_only=false ) {
 
 /**
  * Set capability enum
- * @param string $p_threshold threshold
- * @param bool $p_all_projects_only all projects only
+ * @param string  $p_threshold         Threshold.
+ * @param boolean $p_all_projects_only All projects only.
+ * @return void
  */
-function set_capability_enum( $p_threshold, $p_all_projects_only=false ) {
+function set_capability_enum( $p_threshold, $p_all_projects_only = false ) {
 	global $t_access, $t_project;
 
 	if( ( $t_access >= config_get_access( $p_threshold ) )

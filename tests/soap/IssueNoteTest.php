@@ -43,51 +43,39 @@ class IssueNoteTest extends SoapBase {
 	 * 7. Verify that submitted / last updated times are the same.
 	 * 8. Verify that submitted / last updated matches today.
 	 * 9. Delete the issue.
+	 * @return void
 	 */
 	public function testAddNote() {
-		$issueToAdd = $this->getIssueToAdd( 'IssueNoteTest.testAddNote' );
+		$t_issue_to_add = $this->getIssueToAdd( 'IssueNoteTest.testAddNote' );
 
-		$issueId = $this->client->mc_issue_add(
-			$this->userName,
-			$this->password,
-			$issueToAdd);
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$this->deleteAfterRun( $issueId );
+		$this->deleteAfterRun( $t_issue_id );
 
-		$createdIssue = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$t_created_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$noteData = array(
+		$t_note_data = array(
 			'text' => "first note",
 		    'note_type' => 2,
 		    'note_attr' => 'attr_value'
 		);
 
-		$issueNoteId = $this->client->mc_issue_note_add(
-			$this->userName,
-			$this->password,
-			$issueId,
-			$noteData);
+		$t_issue_note_id = $this->client->mc_issue_note_add( $this->userName, $this->password, $t_issue_id, $t_note_data );
 
-		$issueWithNote = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$t_issue_with_note = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertEquals( 1, count( $issueWithNote->notes ) );
+		$this->assertEquals( 1, count( $t_issue_with_note->notes ) );
 
-		$note = $issueWithNote->notes[0];
+		$t_note = $t_issue_with_note->notes[0];
 
-		$this->assertEquals( $issueNoteId, $note->id );
-		$this->assertEquals( $this->userName, $note->reporter->name );
-		$this->assertEquals( $noteData['text'], $note->text );
-		$this->assertEquals( 10, $note->view_state->id );
-		$this->assertEquals( 'public', $note->view_state->name );
-		$this->assertEquals( $note->date_submitted, $note->last_modified );
-		$this->assertEquals( 2, $note->note_type );
-		$this->assertEquals( 'attr_value', $note->note_attr );
+		$this->assertEquals( $t_issue_note_id, $t_note->id );
+		$this->assertEquals( $this->userName, $t_note->reporter->name );
+		$this->assertEquals( $t_note_data['text'], $t_note->text );
+		$this->assertEquals( 10, $t_note->view_state->id );
+		$this->assertEquals( 'public', $t_note->view_state->name );
+		$this->assertEquals( $t_note->date_submitted, $t_note->last_modified );
+		$this->assertEquals( 2, $t_note->note_type );
+		$this->assertEquals( 'attr_value', $t_note->note_attr );
 
 		# $timestamp = strtotime( $note->date_submitted );
 		# $t_submited_date = date( "ymd", $timestamp );
@@ -104,44 +92,31 @@ class IssueNoteTest extends SoapBase {
 	 * 4. Verify the note id against the one returned when adding the note.
 	 * 5. Verify the time_tracking entry
 	 * 6. Delete the issue.
+	 * @return void
 	 */
 	public function testAddNoteWithTimeTracking() {
-
 		$this->skipIfTimeTrackingIsNotEnabled();
 
-		$issueToAdd = $this->getIssueToAdd( 'IssueNoteTest.testAddNoteWithTimeTracking' );
+		$t_issue_to_add = $this->getIssueToAdd( 'IssueNoteTest.testAddNoteWithTimeTracking' );
 
-		$issueId = $this->client->mc_issue_add(
-			$this->userName,
-			$this->password,
-			$issueToAdd);
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$noteData = array(
+		$t_note_data = array(
 			'text' => "first note",
 			'time_tracking' => "30"
 		);
 
-		$issueNoteId = $this->client->mc_issue_note_add(
-			$this->userName,
-			$this->password,
-			$issueId,
-			$noteData);
+		$t_issue_note_id = $this->client->mc_issue_note_add( $this->userName, $this->password, $t_issue_id, $t_note_data );
 
-		$issueWithNote = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$t_issue_with_note = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertEquals( 1, count( $issueWithNote->notes ) );
+		$this->assertEquals( 1, count( $t_issue_with_note->notes ) );
 
-		$note = $issueWithNote->notes[0];
+		$t_note = $t_issue_with_note->notes[0];
 
-		$this->assertEquals( 30, $note->time_tracking );
+		$this->assertEquals( 30, $t_note->time_tracking );
 
-		$this->client->mc_issue_delete(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$this->client->mc_issue_delete( $this->userName, $this->password, $t_issue_id );
 
 	}
 
@@ -157,70 +132,46 @@ class IssueNoteTest extends SoapBase {
 	 * 8.  Get the issue.
 	 * 9.  Verify that the issue has no notes.
 	 * 10. Delete the issue.
+	 * @return void
 	 */
 	public function testAddThenUpdateThenDeleteNote() {
-		$issueToAdd = $this->getIssueToAdd( 'IssueNoteTest.testAddThenUpdateThenDeleteNote' );
+		$t_issue_to_add = $this->getIssueToAdd( 'IssueNoteTest.testAddThenUpdateThenDeleteNote' );
 
-		$issueId = $this->client->mc_issue_add(
-			$this->userName,
-			$this->password,
-			$issueToAdd);
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$this->deleteAfterRun( $issueId );
+		$this->deleteAfterRun( $t_issue_id );
 
-		$createdIssue = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$t_created_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$noteData = array(
+		$t_note_data = array(
 			'text' => "some note",
 		);
 
-		$issueNoteId = $this->client->mc_issue_note_add(
-			$this->userName,
-			$this->password,
-			$issueId,
-			$noteData);
+		$t_issue_note_id = $this->client->mc_issue_note_add( $this->userName, $this->password, $t_issue_id, $t_note_data );
 
-		$issueWithNote = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$t_issue_with_note = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertEquals( 1, count( $issueWithNote->notes ) );
+		$this->assertEquals( 1, count( $t_issue_with_note->notes ) );
 
-		$noteDataNew = array(
-			'id' => $issueNoteId,
+		$t_note_data_new = array(
+			'id' => $t_issue_note_id,
 			'text' => "some new note",
 			'view_state' => array ( 'id' => 10 ) # public
 		);
 
-		$this->client->mc_issue_note_update(
-			$this->userName,
-			$this->password,
-			$noteDataNew);
+		$this->client->mc_issue_note_update( $this->userName, $this->password, $t_note_data_new );
 
-		$issueWithNewNote = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$t_issue_with_new_note = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertEquals( 1, count( $issueWithNote->notes ) );
-		$this->assertEquals( $noteDataNew['text'], $issueWithNewNote->notes[0]->text );
-		$this->assertEquals( 'public', $issueWithNewNote->notes[0]->view_state->name );
+		$this->assertEquals( 1, count( $t_issue_with_note->notes ) );
+		$this->assertEquals( $t_note_data_new['text'], $t_issue_with_new_note->notes[0]->text );
+		$this->assertEquals( 'public', $t_issue_with_new_note->notes[0]->view_state->name );
 
-		$this->client->mc_issue_note_delete(
-			$this->userName,
-			$this->password,
-			$issueNoteId);
+		$this->client->mc_issue_note_delete( $this->userName, $this->password, $t_issue_note_id );
 
-		$issueWithNote = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$t_issue_with_note = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertFalse( isset( $issueWithNote->notes ) );
+		$this->assertFalse( isset( $t_issue_with_note->notes ) );
 	}
 
 	/**
@@ -229,33 +180,23 @@ class IssueNoteTest extends SoapBase {
 	 * 2. Attempt to add a note with no text.
 	 * 3. Make sure the SoapFault exception is thrown.
 	 * 4. Delete the issue.
+	 * @return void
 	 */
 	public function testAddNoteWithNoText() {
-		$issueToAdd = $this->getIssueToAdd( 'IssueNoteTest.testAddNote' );
+		$t_issue_to_add = $this->getIssueToAdd( 'IssueNoteTest.testAddNote' );
 
-		$issueId = $this->client->mc_issue_add(
-			$this->userName,
-			$this->password,
-			$issueToAdd);
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$this->deleteAfterRun( $issueId );
+		$this->deleteAfterRun( $t_issue_id );
 
-		$createdIssue = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$t_created_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$noteData = array(
-		);
+		$t_note = array();
 
 		try {
-			$issueNoteId = $this->client->mc_issue_note_add(
-				$this->userName,
-				$this->password,
-				$issueId,
-				$noteData);
+			$this->client->mc_issue_note_add( $this->userName, $this->password, $t_issue_id, $t_note );
 
-			$this->assertTrue(false);
+			$this->assertTrue( false );
 		} catch ( SoapFault $e ) {
 		}
 	}

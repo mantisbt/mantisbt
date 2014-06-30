@@ -44,139 +44,137 @@ require_api( 'utility_api.php' );
 
 /**
  * Preference Structure Definition
- * @package MantisBT
- * @subpackage classes
  */
 class UserPreferences {
 	/**
 	 * Default Profile
 	 */
-	protected $default_profile = NULL;
+	protected $default_profile = null;
 
 	/**
 	 * Default Project for user
 	 */
-	protected $default_project = NULL;
+	protected $default_project = null;
 
 	/**
 	 * Automatic Refresh delay
 	 */
-	protected $refresh_delay = NULL;
+	protected $refresh_delay = null;
 
 	/**
 	 * Automatic Redirect delay
 	 */
-	protected $redirect_delay = NULL;
+	protected $redirect_delay = null;
 
 	/**
 	 * Bugnote order - oldest/newest first
 	 */
-	protected $bugnote_order = NULL;
+	protected $bugnote_order = null;
 
 	/**
 	 * Receive email on new bugs
 	 */
-	protected $email_on_new = NULL;
+	protected $email_on_new = null;
 
 	/**
 	 * Receive email on assigned bugs
 	 */
-	protected $email_on_assigned = NULL;
+	protected $email_on_assigned = null;
 
 	/**
 	 * Receive email on feedback
 	 */
-	protected $email_on_feedback = NULL;
+	protected $email_on_feedback = null;
 
 	/**
 	 * Receive email on resolved bugs
 	 */
-	protected $email_on_resolved = NULL;
+	protected $email_on_resolved = null;
 
 	/**
 	 * Receive email on closed bugs
 	 */
-	protected $email_on_closed = NULL;
+	protected $email_on_closed = null;
 
 	/**
 	 * Receive email on reopened bugs
 	 */
-	protected $email_on_reopened = NULL;
+	protected $email_on_reopened = null;
 
 	/**
 	 * Receive email on new bugnote
 	 */
-	protected $email_on_bugnote = NULL;
+	protected $email_on_bugnote = null;
 
 	/**
 	 * Receive email on bug status change
 	 */
-	protected $email_on_status = NULL;
+	protected $email_on_status = null;
 
 	/**
 	 * Receive email on bug priority change
 	 */
-	protected $email_on_priority = NULL;
+	protected $email_on_priority = null;
 
 	/**
 	 * Minimum Severity on which to trigger email if set to receive
 	 */
-	protected $email_on_new_min_severity = NULL;
+	protected $email_on_new_min_severity = null;
 
 	/**
 	 * Minimum Severity on which to trigger email if set to receive
 	 */
-	protected $email_on_assigned_min_severity = NULL;
+	protected $email_on_assigned_min_severity = null;
 
 	/**
 	 * Minimum Severity on which to trigger email if set to receive
 	 */
-	protected $email_on_feedback_min_severity = NULL;
+	protected $email_on_feedback_min_severity = null;
 
 	/**
 	 * Minimum Severity on which to trigger email if set to receive
 	 */
-	protected $email_on_resolved_min_severity = NULL;
+	protected $email_on_resolved_min_severity = null;
 
 	/**
 	 * Minimum Severity on which to trigger email if set to receive
 	 */
-	protected $email_on_closed_min_severity = NULL;
+	protected $email_on_closed_min_severity = null;
 
 	/**
 	 * Minimum Severity on which to trigger email if set to receive
 	 */
-	protected $email_on_reopened_min_severity = NULL;
+	protected $email_on_reopened_min_severity = null;
 
 	/**
 	 * Minimum Severity on which to trigger email if set to receive
 	 */
-	protected $email_on_bugnote_min_severity = NULL;
+	protected $email_on_bugnote_min_severity = null;
 
 	/**
 	 * Minimum Severity on which to trigger email if set to receive
 	 */
-	protected $email_on_status_min_severity = NULL;
+	protected $email_on_status_min_severity = null;
 
 	/**
 	 * Minimum Severity on which to trigger email if set to receive
 	 */
-	protected $email_on_priority_min_severity = NULL;
+	protected $email_on_priority_min_severity = null;
 
 	/**
-	 * Number of bugnotes to include in generated emails
+	 * Number of bug notes to include in generated emails
 	 */
-	protected $email_bugnote_limit = NULL;
+	protected $email_bugnote_limit = null;
 
 	/**
 	 * Users language preference
 	 */
-	protected $language = NULL;
+	protected $language = null;
 
 	/**
 	 * User Timezone
 	 */
-	protected $timezone = NULL;
+	protected $timezone = null;
 
 	/**
 	 * User id
@@ -222,8 +220,8 @@ class UserPreferences {
 
 	/**
 	 * Constructor
-	 * @param int $p_user_id
-	 * @param int $p_project_id
+	 * @param integer $p_user_id    A valid user identifier.
+	 * @param integer $p_project_id A valid project identifier.
 	 */
 	function UserPreferences( $p_user_id, $p_project_id ) {
 		$this->default_profile = 0;
@@ -235,12 +233,13 @@ class UserPreferences {
 
 	/**
 	 * Overloaded function
-	 * @param string $p_name Property name
-	 * @param string $p_value Value
+	 * @param string $p_name  The Property name to set.
+	 * @param string $p_value A value to set the property to.
+	 * @return void
 	 * @access private
 	 */
-	public function __set($p_name, $p_value) {
-		switch ($p_name) {
+	public function __set( $p_name, $p_value ) {
+		switch ( $p_name ) {
 			case 'timezone':
 				if( $p_value == '' ) {
 					$p_value = null;
@@ -251,7 +250,7 @@ class UserPreferences {
 
 	/**
 	 * Overloaded function
-	 * @param string $p_string Property name
+	 * @param string $p_string Property name.
 	 * @access private
 	 * @return mixed
 	 */
@@ -259,7 +258,7 @@ class UserPreferences {
 		if( is_null( $this->$p_string ) ) {
 			$this->$p_string = config_get( self::$default_mapping[$p_string][0], null, $this->pref_user_id, $this->pref_project_id );
 		}
-		switch (self::$default_mapping[$p_string][1]) {
+		switch ( self::$default_mapping[$p_string][1] ) {
 			case 'int':
 				return (int)($this->$p_string);
 			default:
@@ -269,7 +268,7 @@ class UserPreferences {
 
 	/**
 	 * Public Get() function
-	 * @param string $p_string Property
+	 * @param string $p_string Property to get.
 	 * @return mixed
 	 */
 	function Get( $p_string ) {
@@ -293,10 +292,10 @@ $g_cache_current_user_pref = array();
  *  if the preferences can't be found.  If the second parameter is
  *  false, return false if the preferences can't be found.
  *
- * @param int $p_user_id
- * @param int $p_project_id
- * @param bool $p_trigger_errors
- * @return bool|array
+ * @param integer $p_user_id        A valid user identifier.
+ * @param integer $p_project_id     A valid project identifier.
+ * @param boolean $p_trigger_errors Whether to trigger error on failure.
+ * @return boolean|array
  */
 function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigger_errors = true ) {
 	global $g_cache_user_pref;
@@ -332,17 +331,17 @@ function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigg
 
 /**
  * Cache user preferences for a set of users
- * @param array $p_user_id_array
- * @param int $p_project_id
- * @return null
+ * @param array   $p_user_id_array An array of valid user identifiers.
+ * @param integer $p_project_id    A valid project identifier.
+ * @return void
  */
-function user_pref_cache_array_rows( $p_user_id_array, $p_project_id = ALL_PROJECTS ) {
+function user_pref_cache_array_rows( array $p_user_id_array, $p_project_id = ALL_PROJECTS ) {
 	global $g_cache_user_pref;
 	$c_user_id_array = array();
 
 	# identify the user ids that are not cached already.
 	foreach( $p_user_id_array as $t_user_id ) {
-		if( !isset( $g_cache_user_pref[(int) $t_user_id][(int)$p_project_id] ) ) {
+		if( !isset( $g_cache_user_pref[(int)$t_user_id][(int)$p_project_id] ) ) {
 			$c_user_id_array[(int)$t_user_id] = (int)$t_user_id;
 		}
 	}
@@ -354,34 +353,33 @@ function user_pref_cache_array_rows( $p_user_id_array, $p_project_id = ALL_PROJE
 
 	$t_user_pref_table = db_get_table( 'user_pref' );
 
-	$query = "SELECT *
-				  FROM $t_user_pref_table
+	$t_query = "SELECT * FROM $t_user_pref_table
 				  WHERE user_id IN (" . implode( ',', $c_user_id_array ) . ') AND project_id=' . db_param();
 
-	$t_result = db_query_bound( $query, array( (int)$p_project_id ) );
+	$t_result = db_query_bound( $t_query, array( (int)$p_project_id ) );
 
-	while( $row = db_fetch_array( $t_result ) ) {
-		if( !isset( $g_cache_user_pref[(int) $row['user_id']] ) ) {
-			$g_cache_user_pref[(int) $row['user_id']] = array();
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		if( !isset( $g_cache_user_pref[(int)$t_row['user_id']] ) ) {
+			$g_cache_user_pref[(int)$t_row['user_id']] = array();
 		}
 
-		$g_cache_user_pref[(int) $row['user_id']][(int)$p_project_id] = $row;
+		$g_cache_user_pref[(int)$t_row['user_id']][(int)$p_project_id] = $t_row;
 
 		# remove found users from required set.
-		unset( $c_user_id_array[(int) $row['user_id']] );
+		unset( $c_user_id_array[(int)$t_row['user_id']] );
 	}
 
 	# cache users that are not found as false (i.e. negative cache)
 	foreach( $c_user_id_array as $t_user_id ) {
-		$g_cache_user_pref[(int) $t_user_id][(int)$p_project_id] = false;
+		$g_cache_user_pref[(int)$t_user_id][(int)$p_project_id] = false;
 	}
 }
 
 /**
  * Clear the user preferences cache (or just the given id if specified)
- * @param $p_user_id
- * @param $p_project_id
- * @return bool
+ * @param integer $p_user_id    A valid user identifier.
+ * @param integer $p_project_id A valid project identifier.
+ * @return boolean
  */
 function user_pref_clear_cache( $p_user_id = null, $p_project_id = null ) {
 	global $g_cache_user_pref;
@@ -398,11 +396,11 @@ function user_pref_clear_cache( $p_user_id = null, $p_project_id = null ) {
 }
 
 /**
- * return true if the user has prefs assigned for the given project,
- *  false otherwise
- * @param int $p_user_id
- * @param int $p_project_id
- * @return bool
+ * return true if the user has preferences assigned for the given project,
+ * false otherwise
+ * @param integer $p_user_id    A valid user identifier.
+ * @param integer $p_project_id A valid project identifier.
+ * @return boolean
  */
 function user_pref_exists( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	if( false === user_pref_cache_row( $p_user_id, $p_project_id, false ) ) {
@@ -414,20 +412,20 @@ function user_pref_exists( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 
 /**
  * perform an insert of a preference object into the DB
- * @param int $p_user_id
- * @param int $p_project_id
- * @param UserPreferences $p_prefs
- * @return bool
+ * @param integer         $p_user_id    A valid user identifier.
+ * @param integer         $p_project_id A valid project identifier.
+ * @param UserPreferences $p_prefs      An UserPrefences Object.
+ * @return boolean
  */
-function user_pref_insert( $p_user_id, $p_project_id, $p_prefs ) {
-	static $t_vars;
+function user_pref_insert( $p_user_id, $p_project_id, UserPreferences $p_prefs ) {
+	static $s_vars;
 	$c_user_id = (int)$p_user_id;
 	$c_project_id = (int)$p_project_id;
 
 	user_ensure_unprotected( $p_user_id );
 
-	if( $t_vars == null ) {
-		$t_vars = getClassProperties( 'UserPreferences', 'protected');
+	if( $s_vars == null ) {
+		$s_vars = getClassProperties( 'UserPreferences', 'protected' );
 	}
 
 	$t_values = array();
@@ -436,45 +434,44 @@ function user_pref_insert( $p_user_id, $p_project_id, $p_prefs ) {
 	$t_values[] = $c_user_id;
 	$t_params[] = db_param(); # project_id
 	$t_values[] = $c_project_id;
-	foreach( $t_vars as $var => $val ) {
-		array_push( $t_params, db_param());
-		array_push( $t_values, $p_prefs->Get( $var ) );
+	foreach( $s_vars as $t_var => $t_val ) {
+		array_push( $t_params, db_param() );
+		array_push( $t_values, $p_prefs->Get( $t_var ) );
 	}
 
-	$t_vars_string = implode( ', ', array_keys( $t_vars ) );
+	$t_vars_string = implode( ', ', array_keys( $s_vars ) );
 	$t_params_string = implode( ',', $t_params );
 
 	$t_user_pref_table = db_get_table( 'user_pref' );
-	$query = 'INSERT INTO ' . $t_user_pref_table .
-			 ' (user_id, project_id, ' . $t_vars_string . ') ' .
-			 ' VALUES ( ' . $t_params_string . ')';
-	db_query_bound( $query, $t_values  );
+	$t_query = 'INSERT INTO ' . $t_user_pref_table .
+			 ' (user_id, project_id, ' . $t_vars_string . ') VALUES ( ' . $t_params_string . ')';
+	db_query_bound( $t_query, $t_values );
 
-	# db_query_bound() errors on failure so:
 	return true;
 }
 
 /**
  * perform an update of a preference object into the DB
- * @param int $p_user_id
- * @param int $p_project_id
- * @param UserPreferences $p_prefs
+ * @param integer         $p_user_id    A valid user identifier.
+ * @param integer         $p_project_id A valid project identifier.
+ * @param UserPreferences $p_prefs      An UserPrefences Object.
+ * @return void
  */
-function user_pref_update( $p_user_id, $p_project_id, $p_prefs ) {
-	static $t_vars;
+function user_pref_update( $p_user_id, $p_project_id, UserPreferences $p_prefs ) {
+	static $s_vars;
 
 	user_ensure_unprotected( $p_user_id );
 
-	if( $t_vars == null ) {
-		$t_vars = getClassProperties( 'UserPreferences', 'protected');
+	if( $s_vars == null ) {
+		$s_vars = getClassProperties( 'UserPreferences', 'protected' );
 	}
 
 	$t_pairs = array();
 	$t_values = array();
 
-	foreach( $t_vars as $var => $val ) {
-		array_push( $t_pairs, "$var = " . db_param() ) ;
-		array_push( $t_values, $p_prefs->$var );
+	foreach( $s_vars as $t_var => $t_val ) {
+		array_push( $t_pairs, "$t_var = " . db_param() ) ;
+		array_push( $t_values, $p_prefs->$t_var );
 	}
 
 	$t_pairs_string = implode( ', ', $t_pairs );
@@ -482,34 +479,30 @@ function user_pref_update( $p_user_id, $p_project_id, $p_prefs ) {
 	$t_values[] = $p_project_id;
 
 	$t_user_pref_table = db_get_table( 'user_pref' );
-	$query = "UPDATE $t_user_pref_table
-				  SET $t_pairs_string
+	$t_query = "UPDATE $t_user_pref_table SET $t_pairs_string
 				  WHERE user_id=" . db_param() . " AND project_id=" . db_param();
-	db_query_bound( $query, $t_values );
+	db_query_bound( $t_query, $t_values );
 
 	user_pref_clear_cache( $p_user_id, $p_project_id );
 }
 
 /**
- * delete a preferencess row
- * returns true if the prefs were successfully deleted
- * @param int $p_user_id
- * @param int $p_project_id
- * @return bool
+ * delete a preferences row
+ * returns true if the preferences were successfully deleted
+ * @param integer $p_user_id    A valid user identifier.
+ * @param integer $p_project_id A valid project identifier.
+ * @return void
  */
 function user_pref_delete( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	user_ensure_unprotected( $p_user_id );
 
 	$t_user_pref_table = db_get_table( 'user_pref' );
-	$query = "DELETE FROM $t_user_pref_table
+	$t_query = "DELETE FROM $t_user_pref_table
 				  WHERE user_id=" . db_param() . " AND
 				  		project_id=" . db_param();
-	db_query_bound( $query, array( $p_user_id, $p_project_id ) );
+	db_query_bound( $t_query, array( $p_user_id, $p_project_id ) );
 
 	user_pref_clear_cache( $p_user_id, $p_project_id );
-
-	# db_query_bound() errors on failure so:
-	return true;
 }
 
 /**
@@ -519,20 +512,17 @@ function user_pref_delete( $p_user_id, $p_project_id = ALL_PROJECTS ) {
  * It is far more efficient to delete them all in one query than to
  *  call user_pref_delete() for each one and the code is short so that's
  *  what we do
- * @param int $p_user_id
- * @return bool
+ * @param integer $p_user_id A valid user identifier.
+ * @return void
  */
 function user_pref_delete_all( $p_user_id ) {
 	user_ensure_unprotected( $p_user_id );
 
 	$t_user_pref_table = db_get_table( 'user_pref' );
-	$query = 'DELETE FROM ' . $t_user_pref_table . ' WHERE user_id=' . db_param();
-	db_query_bound( $query, array( $p_user_id ) );
+	$t_query = 'DELETE FROM ' . $t_user_pref_table . ' WHERE user_id=' . db_param();
+	db_query_bound( $t_query, array( $p_user_id ) );
 
 	user_pref_clear_cache( $p_user_id );
-
-	# db_query_bound() errors on failure so:
-	return true;
 }
 
 /**
@@ -540,28 +530,24 @@ function user_pref_delete_all( $p_user_id ) {
  * returns true if the prefs were successfully deleted
  *
  * It is far more efficient to delete them all in one query than to
- *  call user_pref_delete() for each one and the code is short so that's
- *  what we do
- * @param $p_project_id
- * @return bool
+ * call user_pref_delete() for each one and the code is short so that's what we do
+ * @param integer $p_project_id A valid project identifier.
+ * @return void
  */
 function user_pref_delete_project( $p_project_id ) {
 	$t_user_pref_table = db_get_table( 'user_pref' );
-	$query = 'DELETE FROM ' . $t_user_pref_table . ' WHERE project_id=' . db_param();
-	db_query_bound( $query, array( $p_project_id ) );
-
-	# db_query_bound() errors on failure so:
-	return true;
+	$t_query = 'DELETE FROM ' . $t_user_pref_table . ' WHERE project_id=' . db_param();
+	db_query_bound( $t_query, array( $p_project_id ) );
 }
 
 /**
  * return the user's preferences in a UserPreferences object
- * @param int $p_user_id
- * @param int $p_project_id
+ * @param integer $p_user_id    A valid user identifier.
+ * @param integer $p_project_id A valid project identifier.
  * @return UserPreferences
  */
 function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
-	static $t_vars;
+	static $s_vars;
 	global $g_cache_current_user_pref;
 
 	if( isset( $g_cache_current_user_pref[(int)$p_project_id] ) &&
@@ -588,22 +574,22 @@ function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 		}
 	}
 
-	if( $t_vars == null ) {
-		$t_vars = getClassProperties( 'UserPreferences', 'protected');
+	if( $s_vars == null ) {
+		$s_vars = getClassProperties( 'UserPreferences', 'protected' );
 	}
 
 	$t_row_keys = array_keys( $t_row );
 
 	# Check each variable in the class
-	foreach( $t_vars as $var => $val ) {
+	foreach( $s_vars as $t_var => $t_val ) {
 		# If we got a field from the DB with the same name
-		if( in_array( $var, $t_row_keys, true ) ) {
+		if( in_array( $t_var, $t_row_keys, true ) ) {
 			# Store that value in the object
-			$t_prefs->$var = $t_row[$var];
+			$t_prefs->$t_var = $t_row[$t_var];
 		}
 	}
 	if( auth_is_user_authenticated() && auth_get_current_user_id() == $p_user_id ) {
-		$g_cache_current_user_pref[ (int)$p_project_id ] = $t_prefs;
+		$g_cache_current_user_pref[(int)$p_project_id] = $t_prefs;
 	}
 	return $t_prefs;
 }
@@ -612,22 +598,22 @@ function user_pref_get( $p_user_id, $p_project_id = ALL_PROJECTS ) {
  * Return the specified preference field for the user id
  * If the preference can't be found try to return a defined default
  * If that fails, trigger a WARNING and return ''
- * @param int $p_user_id
- * @param string $p_pref_name
- * @param int $p_project_id
+ * @param integer $p_user_id    A valid user identifier.
+ * @param string  $p_pref_name  A valid user preference name.
+ * @param integer $p_project_id A valid project identifier.
  * @return string
  */
 function user_pref_get_pref( $p_user_id, $p_pref_name, $p_project_id = ALL_PROJECTS ) {
-	static $t_vars;
+	static $s_vars;
 
 	$t_prefs = user_pref_get( $p_user_id, $p_project_id );
 
-	if( $t_vars == null ) {
-		$t_reflection = new ReflectionClass('UserPreferences');
-		$t_vars = $t_reflection->getDefaultProperties();
+	if( $s_vars == null ) {
+		$t_reflection = new ReflectionClass( 'UserPreferences' );
+		$s_vars = $t_reflection->getDefaultProperties();
 	}
 
-	if( in_array( $p_pref_name, array_keys( $t_vars ), true ) ) {
+	if( in_array( $p_pref_name, array_keys( $s_vars ), true ) ) {
 		return $t_prefs->Get( $p_pref_name );
 	} else {
 		error_parameters( $p_pref_name );
@@ -638,8 +624,8 @@ function user_pref_get_pref( $p_user_id, $p_pref_name, $p_project_id = ALL_PROJE
 
 /**
  * returns user language
- * @param int $p_user_id
- * @param int $p_project_id
+ * @param integer $p_user_id    A valid user identifier.
+ * @param integer $p_project_id A valid project identifier.
  * @return string language name or null if invalid language specified
  */
 function user_pref_get_language( $p_user_id, $p_project_id = ALL_PROJECTS ) {
@@ -659,12 +645,12 @@ function user_pref_get_language( $p_user_id, $p_project_id = ALL_PROJECTS ) {
  * By getting the preferences for the project first we deal fairly well with defaults. If there are currently no
  * preferences for that project, the ALL_PROJECTS preferences will be returned so we end up storing a new set of
  * preferences for the given project based on the preferences for ALL_PROJECTS.  If there isn't even an entry for
- *  ALL_PROJECTS, we'd get returned a default UserPreferences object to modify.
- * @param int $p_user_id
- * @param string $p_pref_name
- * @param string $p_pref_value
- * @param int $p_project_id
- * @return bool
+ * ALL_PROJECTS, we'd get returned a default UserPreferences object to modify.
+ * @param integer $p_user_id    A valid user identifier.
+ * @param string  $p_pref_name  The name of the preference value to set.
+ * @param string  $p_pref_value A preference value to set.
+ * @param integer $p_project_id A valid project identifier.
+ * @return boolean
  */
 function user_pref_set_pref( $p_user_id, $p_pref_name, $p_pref_value, $p_project_id = ALL_PROJECTS ) {
 	$t_prefs = user_pref_get( $p_user_id, $p_project_id );
@@ -680,12 +666,12 @@ function user_pref_set_pref( $p_user_id, $p_pref_name, $p_pref_value, $p_project
 /**
  * set the user's preferences for the project from the given preferences object
  * Do the work by calling user_pref_update() or user_pref_insert() as appropriate
- * @param int $p_user_id
- * @param UserPreferences $p_prefs
- * @param int $p_project_id
+ * @param integer         $p_user_id    A valid user identifier.
+ * @param UserPreferences $p_prefs      A UserPreferences object containing settings to set.
+ * @param integer         $p_project_id A valid project identifier.
  * @return null
  */
-function user_pref_set( $p_user_id, $p_prefs, $p_project_id = ALL_PROJECTS ) {
+function user_pref_set( $p_user_id, UserPreferences $p_prefs, $p_project_id = ALL_PROJECTS ) {
 	if( user_pref_exists( $p_user_id, $p_project_id ) ) {
 		return user_pref_update( $p_user_id, $p_project_id, $p_prefs );
 	} else {

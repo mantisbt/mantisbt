@@ -32,9 +32,6 @@
  * @uses string_api.php
  */
 
-/**
- * MantisBT Core API's
- */
 require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
@@ -53,7 +50,7 @@ print_manage_config_menu( 'adm_permissions_report.php' );
 
 /**
  * return html for start of administration report section
- * @param string $p_section_name
+ * @param string $p_section_name Section name.
  * @return string
  */
 function get_section_begin_apr( $p_section_name ) {
@@ -79,8 +76,8 @@ function get_section_begin_apr( $p_section_name ) {
 
 /**
  * Return html for a row
- * @param string $p_caption
- * @param int $p_access_level
+ * @param string  $p_caption      Caption.
+ * @param integer $p_access_level Access level.
  * @return string
  */
 function get_capability_row( $p_caption, $p_access_level ) {
@@ -169,7 +166,7 @@ if( config_get( 'enable_sponsorship' ) == ON ) {
 }
 
 # Others
-echo get_section_begin_apr( lang_get('others') );
+echo get_section_begin_apr( lang_get( 'others' ) );
 echo get_capability_row( lang_get( 'view' ) . ' ' . lang_get( 'summary_link' ), config_get( 'view_summary_threshold' ) );
 echo get_capability_row( lang_get( 'see_email_addresses_of_other_users' ), config_get( 'show_user_email_threshold' ) );
 echo get_capability_row( lang_get( 'send_reminders' ), config_get( 'bug_reminder_threshold' ) );

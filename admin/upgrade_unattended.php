@@ -29,16 +29,12 @@
 # and plugins will not be loaded.
 define( 'MANTIS_MAINTENANCE_MODE', true );
 
-/**
- * MantisBT Core API's
- */
 require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 require_api( 'install_helper_functions_api.php' );
 require_api( 'crypto_api.php' );
 $g_error_send_page_header = false; # suppress page headers in the error handler
 
 $g_failed = false;
-
 
 # This script is probably meant to be executed from PHP CLI and hence should
 # not be interpreted as text/html. However saying that, we do call gpc_
@@ -52,10 +48,11 @@ header( 'X-Content-Type-Options: nosniff' );
 /**
  * Print the result of an upgrade step.
  *
- * @param int $p_result       GOOD or BAD.
- * @param bool    $p_hard_fail  If result is BAD, sets the global failure flag.
- * @param string  $p_message    The message describing the upgrade step.
+ * @param integer $p_result    GOOD or BAD.
+ * @param boolean $p_hard_fail If result is BAD, sets the global failure flag.
+ * @param string  $p_message   The message describing the upgrade step.
  * @access private
+ * @return void
  */
 function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
 	global $g_failed;
@@ -129,55 +126,55 @@ echo "OK\n";
 
 $g_db_connected = true; # fake out database access routines used by config_get
 $t_last_update = config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS );
-$lastid = count( $upgrade ) - 1;
+$lastid = count( $g_upgrade ) - 1;
 $i = $t_last_update + 1;
 $t_count_done = 0;
 
-while(( $i <= $lastid ) && !$g_failed ) {
+while( ( $i <= $lastid ) && !$g_failed ) {
 	$dict = NewDataDictionary( $g_db );
 	$t_sql = true;
-	$t_target = $upgrade[$i][1][0];
+	$t_target = $g_upgrade[$i][1][0];
 
-	if( $upgrade[$i][0] == 'InsertData' ) {
-		$sqlarray = call_user_func_array( $upgrade[$i][0], $upgrade[$i][1] );
-	} else if( $upgrade[$i][0] == 'UpdateSQL' ) {
-		$sqlarray = array(
-			$upgrade[$i][1],
+	if( $g_upgrade[$i][0] == 'InsertData' ) {
+		$t_sqlarray = call_user_func_array( $g_upgrade[$i][0], $g_upgrade[$i][1] );
+	} else if( $g_upgrade[$i][0] == 'UpdateSQL' ) {
+		$t_sqlarray = array(
+			$g_upgrade[$i][1],
 		);
 
-		$t_target = $upgrade[$i][1];
-	} else if( $upgrade[$i][0] == 'UpdateFunction' ) {
-		$sqlarray = array(
-			$upgrade[$i][1],
+		$t_target = $g_upgrade[$i][1];
+	} else if( $g_upgrade[$i][0] == 'UpdateFunction' ) {
+		$t_sqlarray = array(
+			$g_upgrade[$i][1],
 		);
 
-		if( isset( $upgrade[$i][2] ) ) {
-			$sqlarray[] = $upgrade[$i][2];
+		if( isset( $g_upgrade[$i][2] ) ) {
+			$t_sqlarray[] = $g_upgrade[$i][2];
 		}
 
 		$t_sql = false;
-		$t_target = $upgrade[$i][1];
+		$t_target = $g_upgrade[$i][1];
 	} else {
 		# 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade.
-		if( isset( $upgrade[$i][2] ) ) {
-			if( call_user_func_array( $upgrade[$i][2][0], $upgrade[$i][2][1] ) ) {
-				$sqlarray = call_user_func_array( Array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
+		if( isset( $g_upgrade[$i][2] ) ) {
+			if( call_user_func_array( $g_upgrade[$i][2][0], $g_upgrade[$i][2][1] ) ) {
+				$t_sqlarray = call_user_func_array( array( $dict, $g_upgrade[$i][0] ), $g_upgrade[$i][1] );
 			} else {
-				$sqlarray = array();
+				$t_sqlarray = array();
 			}
 		} else {
-			$sqlarray = call_user_func_array( Array( $dict, $upgrade[$i][0] ), $upgrade[$i][1] );
+			$t_sqlarray = call_user_func_array( array( $dict, $g_upgrade[$i][0] ), $g_upgrade[$i][1] );
 		}
 	}
 
-	echo 'Schema ' . $upgrade[$i][0] . ' ( ' . $t_target . ' ) ';
+	echo 'Schema ' . $g_upgrade[$i][0] . ' ( ' . $t_target . ' ) ';
 	if( $t_sql ) {
-		$ret = $dict->ExecuteSQLArray( $sqlarray, false );
+		$ret = $dict->ExecuteSQLArray( $t_sqlarray, false );
 	} else {
-		if( isset( $sqlarray[1] ) ) {
-			$ret = call_user_func( 'install_' . $sqlarray[0], $sqlarray[1] );
+		if( isset( $t_sqlarray[1] ) ) {
+			$ret = call_user_func( 'install_' . $t_sqlarray[0], $t_sqlarray[1] );
 		} else {
-			$ret = call_user_func( 'install_' . $sqlarray[0] );
+			$ret = call_user_func( 'install_' . $t_sqlarray[0] );
 		}
 	}
 
@@ -185,7 +182,7 @@ while(( $i <= $lastid ) && !$g_failed ) {
 		print_test_result( GOOD );
 		config_set( 'database_version', $i );
 	} else {
-		print_test_result( BAD, true, $sqlarray[0] . '<br />' . $g_db->ErrorMsg() );
+		print_test_result( BAD, true, $t_sqlarray[0] . '<br />' . $g_db->ErrorMsg() );
 	}
 
 	$i++;

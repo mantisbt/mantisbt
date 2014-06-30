@@ -306,7 +306,7 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 
 <?php
 if( ( $f_new_status >= $t_resolved ) ) {
-	if(   version_should_show_product_version( $t_bug->project_id )
+	if( version_should_show_product_version( $t_bug->project_id )
 		&& !bug_is_readonly( $f_bug_id )
 		&& access_has_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id )
 	) {
@@ -332,7 +332,7 @@ if( ON == $f_reopen_flag ) {
 ?>
 <!-- Bug was re-opened -->
 <?php
-	printf("	<input type=\"hidden\" name=\"resolution\" value=\"%s\" />\n",  config_get( 'bug_reopen_resolution' ) );
+	printf( "	<input type=\"hidden\" name=\"resolution\" value=\"%s\" />\n", config_get( 'bug_reopen_resolution' ) );
 }
 ?>
 
@@ -366,7 +366,7 @@ if( ON == $f_reopen_flag ) {
 			</tr>
 <?php } ?>
 
-<?php if( config_get('time_tracking_enabled') ) { ?>
+<?php if( config_get( 'time_tracking_enabled' ) ) { ?>
 <?php if( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>
 <?php if( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $f_bug_id ) ) { ?>
 			<tr>

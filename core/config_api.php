@@ -53,7 +53,6 @@ $g_cache_config_user = null;
 $g_cache_config_project = null;
 
 /**
- *
  * Retrieves the value of a config option
  *  This function will return one of (in order of preference):
  *    1. value from cache
@@ -64,10 +63,10 @@ $g_cache_config_project = null;
  *     if not found, config_id + default user + all_project.
  *    3.use GLOBAL[config_id]
  *
- * @param string $p_option Config option
- * @param string $p_default default value
- * @param int $p_user user id
- * @param int $p_project project id
+ * @param string  $p_option  The configuration option to retrieve.
+ * @param string  $p_default The default value to use if not set.
+ * @param integer $p_user    A user identifier.
+ * @param integer $p_project A project identifier.
  * @return mixed
  */
 function config_get( $p_option, $p_default = null, $p_user = null, $p_project = null ) {
@@ -88,7 +87,7 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 		# @@ debug @@ echo "lu table=" . ( db_table_exists( $t_config_table ) ? "yes " : "no " );
 		if( !$g_cache_db_table_exists ) {
 			$t_config_table = db_get_table( 'config' );
-			$g_cache_db_table_exists = ( TRUE === db_is_connected() ) && db_table_exists( $t_config_table );
+			$g_cache_db_table_exists = ( true === db_is_connected() ) && db_table_exists( $t_config_table );
 		}
 
 		if( $g_cache_db_table_exists ) {
@@ -116,7 +115,7 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 
 			# prepare the projects list
 			$t_projects = array();
-			if(( null === $p_project ) ) {
+			if( ( null === $p_project ) ) {
 				if( !isset( $g_cache_config_project ) ) {
 					$t_projects[] = auth_is_user_authenticated() ? helper_get_current_project() : ALL_PROJECTS;
 					if( !in_array( ALL_PROJECTS, $t_projects ) ) {
@@ -138,14 +137,14 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 
 			if( !$g_cache_filled ) {
 				$t_config_table = db_get_table( 'config' );
-				$query = "SELECT config_id, user_id, project_id, type, value, access_reqd FROM $t_config_table";
-				$t_result = db_query_bound( $query );
-				while( false <> ( $row = db_fetch_array( $t_result ) ) ) {
-					$t_config = $row['config_id'];
-					$t_user = $row['user_id'];
-					$t_project = $row['project_id'];
-					$g_cache_config[$t_config][$t_user][$t_project] = $row['type'] . ';' . $row['value'];
-					$g_cache_config_access[$t_config][$t_user][$t_project] = $row['access_reqd'];
+				$t_query = "SELECT config_id, user_id, project_id, type, value, access_reqd FROM $t_config_table";
+				$t_result = db_query_bound( $t_query );
+				while( false <> ( $t_row = db_fetch_array( $t_result ) ) ) {
+					$t_config = $t_row['config_id'];
+					$t_user = $t_row['user_id'];
+					$t_project = $t_row['project_id'];
+					$g_cache_config[$t_config][$t_user][$t_project] = $t_row['type'] . ';' . $t_row['value'];
+					$g_cache_config_access[$t_config][$t_user][$t_project] = $t_row['access_reqd'];
 				}
 				$g_cache_filled = true;
 			}
@@ -153,9 +152,9 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 			if( isset( $g_cache_config[$p_option] ) ) {
 				$t_found = false;
 				reset( $t_users );
-				while(( list(, $t_user ) = each( $t_users ) ) && !$t_found ) {
+				while( ( list(, $t_user ) = each( $t_users ) ) && !$t_found ) {
 					reset( $t_projects );
-					while(( list(, $t_project ) = each( $t_projects ) ) && !$t_found ) {
+					while( ( list(, $t_project ) = each( $t_projects ) ) && !$t_found ) {
 						if( isset( $g_cache_config[$p_option][$t_user][$t_project] ) ) {
 							$t_value = $g_cache_config[$p_option][$t_user][$t_project];
 							$t_found = true;
@@ -170,10 +169,10 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 
 					switch( $t_type ) {
 						case CONFIG_TYPE_FLOAT:
-							$t_value = (float) $t_raw_value;
+							$t_value = (float)$t_raw_value;
 							break;
 						case CONFIG_TYPE_INT:
-							$t_value = (int) $t_raw_value;
+							$t_value = (int)$t_raw_value;
 							break;
 						case CONFIG_TYPE_COMPLEX:
 							$t_value = unserialize( $t_raw_value );
@@ -193,8 +192,8 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 /**
  * force config variable from a global to avoid recursion
  *
- * @param string $p_option config option
- * @param string $p_default default value
+ * @param string $p_option  Configuration option to retrieve.
+ * @param string $p_default Default value if not set.
  * @return string
  */
 function config_get_global( $p_option, $p_default = null ) {
@@ -219,12 +218,12 @@ function config_get_global( $p_option, $p_default = null ) {
 }
 
 /**
- * Retrieves the access level needed to change a config value
+ * Retrieves the access level needed to change a configuration value
  *
- * @param string $p_option config option
- * @param int $p_user user id
- * @param int $p_project project id
- * @return int
+ * @param string  $p_option  Configuration option.
+ * @param integer $p_user    A user identifier.
+ * @param integer $p_project A project identifier.
+ * @return integer
  */
 function config_get_access( $p_option, $p_user = null, $p_project = null ) {
 	global $g_cache_config, $g_cache_config_access, $g_cache_filled;
@@ -235,7 +234,7 @@ function config_get_access( $p_option, $p_user = null, $p_project = null ) {
 
 	# prepare the user's list
 	$t_users = array();
-	if(( null === $p_user ) && ( auth_is_user_authenticated() ) ) {
+	if( ( null === $p_user ) && ( auth_is_user_authenticated() ) ) {
 		$t_users[] = auth_get_current_user_id();
 	}
 	else if( !in_array( $p_user, $t_users ) ) {
@@ -245,7 +244,7 @@ function config_get_access( $p_option, $p_user = null, $p_project = null ) {
 
 	# prepare the projects list
 	$t_projects = array();
-	if(( null === $p_project ) && ( auth_is_user_authenticated() ) ) {
+	if( ( null === $p_project ) && ( auth_is_user_authenticated() ) ) {
 		$t_selected_project = helper_get_current_project();
 		$t_projects[] = $t_selected_project;
 		if( ALL_PROJECTS <> $t_selected_project ) {
@@ -259,9 +258,9 @@ function config_get_access( $p_option, $p_user = null, $p_project = null ) {
 	$t_found = false;
 	if( isset( $g_cache_config[$p_option] ) ) {
 		reset( $t_users );
-		while(( list(, $t_user ) = each( $t_users ) ) && !$t_found ) {
+		while( ( list(, $t_user ) = each( $t_users ) ) && !$t_found ) {
 			reset( $t_projects );
-			while(( list(, $t_project ) = each( $t_projects ) ) && !$t_found ) {
+			while( ( list(, $t_project ) = each( $t_projects ) ) && !$t_found ) {
 				if( isset( $g_cache_config[$p_option][$t_user][$t_project] ) ) {
 					$t_access = $g_cache_config_access[$p_option][$t_user][$t_project];
 					$t_found = true;
@@ -274,13 +273,13 @@ function config_get_access( $p_option, $p_user = null, $p_project = null ) {
 }
 
 /**
- * Returns true if the specified config option exists (ie. a
+ * Returns true if the specified configuration option exists (Either a
  * value or default can be found), false otherwise
  *
- * @param string $p_option config option
- * @param int $p_user user id
- * @param int $p_project project id
- * @return bool
+ * @param string  $p_option  Configuration option.
+ * @param integer $p_user    A user identifier.
+ * @param integer $p_project A project identifier.
+ * @return boolean
  */
 function config_is_set( $p_option, $p_user = null, $p_project = null ) {
 	global $g_cache_config, $g_cache_filled;
@@ -291,7 +290,7 @@ function config_is_set( $p_option, $p_user = null, $p_project = null ) {
 
 	# prepare the user's list
 	$t_users = array( ALL_USERS );
-	if(( null === $p_user ) && ( auth_is_user_authenticated() ) ) {
+	if( ( null === $p_user ) && ( auth_is_user_authenticated() ) ) {
 		$t_users[] = auth_get_current_user_id();
 	}
 	else if( !in_array( $p_user, $t_users ) ) {
@@ -301,7 +300,7 @@ function config_is_set( $p_option, $p_user = null, $p_project = null ) {
 
 	# prepare the projects list
 	$t_projects = array( ALL_PROJECTS );
-	if(( null === $p_project ) && ( auth_is_user_authenticated() ) ) {
+	if( ( null === $p_project ) && ( auth_is_user_authenticated() ) ) {
 		$t_selected_project = helper_get_current_project();
 		if( ALL_PROJECTS <> $t_selected_project ) {
 			$t_projects[] = $t_selected_project;
@@ -313,9 +312,9 @@ function config_is_set( $p_option, $p_user = null, $p_project = null ) {
 
 	$t_found = false;
 	reset( $t_users );
-	while(( list(, $t_user ) = each( $t_users ) ) && !$t_found ) {
+	while( ( list(, $t_user ) = each( $t_users ) ) && !$t_found ) {
 		reset( $t_projects );
-		while(( list(, $t_project ) = each( $t_projects ) ) && !$t_found ) {
+		while( ( list(, $t_project ) = each( $t_projects ) ) && !$t_found ) {
 			if( isset( $g_cache_config[$p_option][$t_user][$t_project] ) ) {
 				$t_found = true;
 			}
@@ -330,15 +329,15 @@ function config_is_set( $p_option, $p_user = null, $p_project = null ) {
 }
 
 /**
- * Sets the value of the given config option to the given value
- *  If the config option does not exist, an ERROR is triggered
+ * Sets the value of the given configuration option to the given value
+ * If the configuration option does not exist, an ERROR is triggered
  *
- * @param string $p_option config option
- * @param string $p_value config value
- * @param int $p_user user id
- * @param int $p_project project id
- * @param int $p_access access level
- * @return bool
+ * @param string  $p_option  Configuration option name.
+ * @param string  $p_value   Configuration option value.
+ * @param integer $p_user    A user identifier. Defaults to NO_USER.
+ * @param integer $p_project A project identifier. Defaults to ALL_PROJECTS.
+ * @param integer $p_access  Access level. Defaults to DEFAULT_ACCESS_LEVEL.
+ * @return boolean
  */
 function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PROJECTS, $p_access = DEFAULT_ACCESS_LEVEL ) {
 	if( $p_access == DEFAULT_ACCESS_LEVEL ) {
@@ -349,10 +348,10 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 		$c_value = serialize( $p_value );
 	} else if( is_float( $p_value ) ) {
 		$t_type = CONFIG_TYPE_FLOAT;
-		$c_value = (float) $p_value;
+		$c_value = (float)$p_value;
 	} else if( is_int( $p_value ) || is_numeric( $p_value ) ) {
 		$t_type = CONFIG_TYPE_INT;
-		$c_value = (int) $p_value;
+		$c_value = (int)$p_value;
 	} else {
 		$t_type = CONFIG_TYPE_STRING;
 		$c_value = $p_value;
@@ -413,14 +412,14 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 }
 
 /**
- * Sets the value of the given config option in the global namespace.
+ * Sets the value of the given configuration option in the global namespace.
  * Does *not* persist the value between sessions. If override set to
  * false, then the value will only be set if not already existent.
  *
- * @param string $p_option config option
- * @param string $p_value config value
- * @param bool $p_override override existing value if already set
- * @return bool
+ * @param string  $p_option   Configuration option.
+ * @param string  $p_value    Configuration value.
+ * @param boolean $p_override Override existing value if already set.
+ * @return boolean
  */
 function config_set_global( $p_option, $p_value, $p_override = true ) {
 	global $g_cache_config_eval;
@@ -434,16 +433,16 @@ function config_set_global( $p_option, $p_value, $p_override = true ) {
 }
 
 /**
- * Sets the value of the given config option to the given value
- *  If the config option does not exist, an ERROR is triggered
+ * Sets the value of the given configuration option to the given value
+ *  If the configuration option does not exist, an ERROR is triggered
  *
- * @param string $p_option config option
- * @param string $p_value config value
- * @param int $p_type type
- * @param int $p_user user id
- * @param int $p_project project id
- * @param int $p_access access level
- * @return bool
+ * @param string  $p_option  Configuration option.
+ * @param string  $p_value   Configuration value.
+ * @param integer $p_type    Type.
+ * @param integer $p_user    A user identifier.
+ * @param integer $p_project A project identifier.
+ * @param integer $p_access  Access level.
+ * @return boolean
  */
 function config_set_cache( $p_option, $p_value, $p_type, $p_user = NO_USER, $p_project = ALL_PROJECTS, $p_access = DEFAULT_ACCESS_LEVEL ) {
 	global $g_cache_config, $g_cache_config_access;
@@ -462,8 +461,8 @@ function config_set_cache( $p_option, $p_value, $p_type, $p_user = NO_USER, $p_p
  * Checks if the specific configuration option can be set in the database, otherwise it can only be set
  * in the configuration file (config_inc.php / config_defaults_inc.php).
  *
- * @param string $p_option config option
- * @return bool
+ * @param string $p_option Configuration option.
+ * @return boolean
  */
 function config_can_set_in_database( $p_option ) {
 	global $g_cache_can_set_in_database, $g_cache_bypass_lookup;
@@ -486,35 +485,36 @@ function config_can_set_in_database( $p_option ) {
 /**
  * Checks if the specific configuration option can be deleted from the database.
  *
- * @param string $p_option config option
- * @return bool
+ * @param string $p_option Configuration option.
+ * @return boolean
  */
 function config_can_delete( $p_option ) {
 	return( strtolower( $p_option ) != 'database_version' );
 }
 
 /**
- * delete the config entry
+ * delete the configuration entry
  *
- * @param string $p_option config option
- * @param int $p_user user id
- * @param int $p_project project id
+ * @param string  $p_option  Configuration option.
+ * @param integer $p_user    A user identifier.
+ * @param integer $p_project A project identifier.
+ * @return void
  */
 function config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECTS ) {
 	# bypass table lookup for certain options
 	$t_bypass_lookup = !config_can_set_in_database( $p_option );
 
-	if(( !$t_bypass_lookup ) && ( TRUE === db_is_connected() ) && ( db_table_exists( db_get_table( 'config' ) ) ) ) {
+	if( ( !$t_bypass_lookup ) && ( true === db_is_connected() ) && ( db_table_exists( db_get_table( 'config' ) ) ) ) {
 		if( !config_can_delete( $p_option ) ) {
 			return;
 		}
 
 		$t_config_table = db_get_table( 'config' );
-		$query = "DELETE FROM $t_config_table
+		$t_query = "DELETE FROM $t_config_table
 				WHERE config_id = " . db_param() . " AND
 					project_id=" . db_param() . " AND
 					user_id=" . db_param();
-		db_query_bound( $query, array( $p_option, $p_project, $p_user ) );
+		db_query_bound( $t_query, array( $p_option, $p_project, $p_user ) );
 	}
 
 	config_flush_cache( $p_option, $p_user, $p_project );
@@ -523,8 +523,9 @@ function config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECT
 /**
  * Delete the specified option for the specified user across all projects.
  *
- * @param string $p_option - The configuration option to be deleted.
- * @param int $p_user_id - The user id
+ * @param string  $p_option  The configuration option to be deleted.
+ * @param integer $p_user_id The user id.
+ * @return void
  */
 function config_delete_for_user( $p_option, $p_user_id ) {
 	if( !config_can_delete( $p_option ) ) {
@@ -533,15 +534,15 @@ function config_delete_for_user( $p_option, $p_user_id ) {
 
 	# Delete the corresponding bugnote texts
 	$t_config_table = db_get_table( 'config' );
-	$query = "DELETE FROM $t_config_table
-					WHERE config_id=" . db_param() . " AND user_id=" . db_param();
-	db_query_bound( $query, array( $p_option, $p_user_id ) );
+	$t_query = "DELETE FROM $t_config_table WHERE config_id=" . db_param() . " AND user_id=" . db_param();
+	db_query_bound( $t_query, array( $p_option, $p_user_id ) );
 }
 
 /**
  * delete the config entry
  *
- * @param int $p_project project id
+ * @param integer $p_project A project identifier.
+ * @return void
  */
 function config_delete_project( $p_project = ALL_PROJECTS ) {
 	$t_config_table = db_get_table( 'config' );
@@ -553,12 +554,13 @@ function config_delete_project( $p_project = ALL_PROJECTS ) {
 }
 
 /**
- * delete the config entry from the cache
+ * delete the configuration entry from the cache
  * @@@ to be used sparingly
  *
- * @param string $p_option config option
- * @param int $p_user user id
- * @param int $p_project project id
+ * @param string  $p_option  Configuration option.
+ * @param integer $p_user    A user identifier.
+ * @param integer $p_project A project identifier.
+ * @return void
  */
 function config_flush_cache( $p_option = '', $p_user = ALL_USERS, $p_project = ALL_PROJECTS ) {
 	global $g_cache_filled;
@@ -577,8 +579,9 @@ function config_flush_cache( $p_option = '', $p_user = ALL_USERS, $p_project = A
  * Checks if an obsolete configuration variable is still in use.  If so, an error
  * will be generated and the script will exit.
  *
- * @param string $p_var old config option
- * @param string $p_replace new config option
+ * @param string $p_var     Old configuration option.
+ * @param string $p_replace New configuration option.
+ * @return void
  */
 function config_obsolete( $p_var, $p_replace = '' ) {
 	global $g_cache_config;
@@ -601,12 +604,12 @@ function config_obsolete( $p_var, $p_replace = '' ) {
 
 			foreach( $g_cache_config[$p_var] as $t_user_id => $t_user ) {
 				$t_info .= '<li>'
-					. (($t_user_id == 0)? lang_get('all_users') : user_get_name( $t_user_id ))
+					. ( ( $t_user_id == 0 ) ? lang_get( 'all_users' ) : user_get_name( $t_user_id ) )
 					. ': ';
 				foreach ( $t_user as $t_project_id => $t_project ) {
 					$t_info .= project_get_name( $t_project_id ) . ', ';
 				}
-				$t_info = rtrim( $t_info, ', ') . '</li>';
+				$t_info = rtrim( $t_info, ', ' ) . '</li>';
 			}
 			$t_info .= '</ul>';
 		}
@@ -631,8 +634,9 @@ function config_obsolete( $p_var, $p_replace = '' ) {
  * Checks if an obsolete environment variable is set.
  * If so, an error will be generated and the script will exit.
  *
- * @param string $p_env_variable old variable
- * @param string $p_new_env_variable new variable
+ * @param string $p_env_variable     Old variable.
+ * @param string $p_new_env_variable New variable.
+ * @return void
  */
 function env_obsolete( $p_env_variable, $p_new_env_variable ) {
 	$t_env = getenv( $p_env_variable );
@@ -644,11 +648,11 @@ function env_obsolete( $p_env_variable, $p_new_env_variable ) {
 }
 
 /**
- * check for recursion in defining config variables
+ * check for recursion in defining configuration variables
  * If there is a %text% in the returned value, re-evaluate the "text" part and replace the string
  *
- * @param string $p_value config variable to evaluate
- * @param bool $p_global if true, gets %text% as a global config, defaults to false
+ * @param string  $p_value  Configuration variable to evaluate.
+ * @param boolean $p_global If true, gets %text% as a global configuration, defaults to false.
  * @return string
  */
 function config_eval( $p_value, $p_global = false ) {
@@ -683,10 +687,10 @@ function config_eval( $p_value, $p_global = false ) {
 }
 
 /**
- * list of configuration variable which may expose webserver details and should not be exposed to users or webservices
+ * list of configuration variable which may expose web server details and should not be exposed to users or web services
  *
- * @param string $p_config_var config option
- * @return bool
+ * @param string $p_config_var Configuration option.
+ * @return boolean
  */
 function config_is_private( $p_config_var ) {
 	switch( $p_config_var ) {

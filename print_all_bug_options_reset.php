@@ -60,21 +60,21 @@ $t_user_id = auth_get_current_user_id();
 
 # get the fields list
 $t_field_name_arr = get_field_names();
-$field_name_count = count($t_field_name_arr);
+$t_field_name_count = count( $t_field_name_arr );
 
 # create a default array, same size than $t_field_name
-for ($i=0 ; $i<$field_name_count ; $i++) {
+for( $i=0; $i<$t_field_name_count; $i++ ) {
 	$t_default_arr[$i] = 0 ;
 }
-$t_default = implode('',$t_default_arr) ;
+$t_default = implode( '', $t_default_arr );
 
 # reset to defaults
 $t_user_print_pref_table = db_get_table( 'user_print_pref' );
-$query = "UPDATE $t_user_print_pref_table
+$t_query = "UPDATE $t_user_print_pref_table
 		SET print_pref=" . db_param() . "
 		WHERE user_id=" . db_param();
 
-$t_result = db_query_bound( $query, array( $t_default, $t_user_id ) );
+$t_result = db_query_bound( $t_query, array( $t_default, $t_user_id ) );
 
 form_security_purge( 'print_all_bug_options_reset' );
 

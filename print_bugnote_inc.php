@@ -71,19 +71,19 @@ require_api( 'user_api.php' );
 	# get the bugnote data
 	$t_bugnote_order = current_user_get_pref( 'bugnote_order' );
 
-	$query = "SELECT *
+	$t_query = "SELECT *
 			FROM $t_bugnote_table
 			WHERE bug_id=" . db_param() . " $t_restriction
 			ORDER BY date_submitted $t_bugnote_order";
-	$t_result = db_query_bound($query, array( $c_bug_id ) );
-	$num_notes = db_num_rows($t_result);
+	$t_result = db_query_bound( $t_query, array( $c_bug_id ) );
+	$t_num_notes = db_num_rows( $t_result );
 ?>
 
 <br />
 <table class="width100" cellspacing="1">
 <?php
 	# no bugnotes
-	if( 0 == $num_notes ) {
+	if( 0 == $t_num_notes ) {
 ?>
 <tr>
 	<td class="print" colspan="2">
@@ -97,18 +97,16 @@ require_api( 'user_api.php' );
 	</td>
 </tr>
 <?php
-	for ( $i=0; $i < $num_notes; $i++ ) {
+	for ( $i=0; $i < $t_num_notes; $i++ ) {
 		# prefix all bugnote data with v3_
-		$row = db_fetch_array( $t_result );
-		extract( $row, EXTR_PREFIX_ALL, 'v3' );
+		$t_row = db_fetch_array( $t_result );
+		extract( $t_row, EXTR_PREFIX_ALL, 'v3' );
 		$v3_date_submitted = date( config_get( 'normal_date_format' ), $v3_date_submitted );
 		$v3_last_modified = date( config_get( 'normal_date_format' ), $v3_last_modified );
 
 		# grab the bugnote text and id and prefix with v3_
-		$query = "SELECT note, id
-				FROM $t_bugnote_text_table
-				WHERE id=" . db_param();
-		$t_result2 = db_query_bound( $query, array( $v3_bugnote_text_id ) );
+		$t_query = "SELECT note, id FROM $t_bugnote_text_table WHERE id=" . db_param();
+		$t_result2 = db_query_bound( $t_query, array( $v3_bugnote_text_id ) );
 		$v3_note = db_result( $t_result2, 0, 0 );
 		$v3_bugnote_text_id = db_result( $t_result2, 0, 1 );
 
@@ -138,7 +136,7 @@ require_api( 'user_api.php' );
 			<td class="print">
 				<?php echo $v3_date_submitted ?>&#160;&#160;&#160;
 				<?php if( $v3_date_submitted != $v3_last_modified ) {
-					echo '<br />(' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . $v3_last_modified . ')';
+					echo '<br />(' . lang_get( 'last_edited' ) . lang_get( 'word_separator' ) . $v3_last_modified . ')';
 				} ?>
 			</td>
 		</tr>

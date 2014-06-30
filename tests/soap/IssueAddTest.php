@@ -38,98 +38,79 @@ class IssueAddTest extends SoapBase {
 	 * 2. mc_issue_get_biggest_id()
 	 * 3. mc_issue_get_id_from_summary()
 	 * 4. The defaulting of the non-mandatory parameters.
+	 * @return void
 	 */
 	public function testCreateIssue() {
-		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssue' );
+		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateIssue' );
 
-		$issueId = $this->client->mc_issue_add(
-			$this->userName,
-			$this->password,
-			$issueToAdd);
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$this->deleteAfterRun( $issueId );
+		$this->deleteAfterRun( $t_issue_id );
 
-		$issueExists = $this->client->mc_issue_exists(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$t_issue_exists = $this->client->mc_issue_exists( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertEquals( true, $issueExists );
+		$this->assertEquals( true, $t_issue_exists );
 
-		$biggestId = $this->client->mc_issue_get_biggest_id(
-			$this->userName,
-			$this->password,
-			$issueToAdd['project']['id']);
+		$t_biggest_id = $this->client->mc_issue_get_biggest_id( $this->userName, $this->password, $t_issue_to_add['project']['id'] );
 
-		$this->assertEquals( $issueId, $biggestId );
+		$this->assertEquals( $t_issue_id, $t_biggest_id );
 
-		$issueIdFromSummary = $this->client->mc_issue_get_id_from_summary(
-			$this->userName,
-			$this->password,
-			$issueToAdd['summary']);
+		$t_issue_id_from_summary = $this->client->mc_issue_get_id_from_summary( $this->userName, $this->password, $t_issue_to_add['summary'] );
 
-		$this->assertEquals( $issueId, $issueIdFromSummary );
+		$this->assertEquals( $t_issue_id, $t_issue_id_from_summary );
 
-		$issue = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
 		# explicitly specified fields
-		$this->assertEquals( $issueToAdd['category'], $issue->category );
-		$this->assertEquals( $issueToAdd['summary'], $issue->summary );
-		$this->assertEquals( $issueToAdd['description'], $issue->description );
-		$this->assertEquals( $issueToAdd['project']['id'], $issue->project->id );
+		$this->assertEquals( $t_issue_to_add['category'], $t_issue->category );
+		$this->assertEquals( $t_issue_to_add['summary'], $t_issue->summary );
+		$this->assertEquals( $t_issue_to_add['description'], $t_issue->description );
+		$this->assertEquals( $t_issue_to_add['project']['id'], $t_issue->project->id );
 
 		# defaulted fields
-		$this->assertEquals( $issueId, $issue->id );
-		$this->assertEquals( 10, $issue->view_state->id );
-		$this->assertEquals( 'public', $issue->view_state->name );
-		$this->assertEquals( 30, $issue->priority->id );
-		$this->assertEquals( 'normal', $issue->priority->name );
-		$this->assertEquals( 50, $issue->severity->id );
-		$this->assertEquals( 'minor', $issue->severity->name );
-		$this->assertEquals( 10, $issue->status->id );
-		$this->assertEquals( 'new', $issue->status->name );
-		$this->assertEquals( $this->userName, $issue->reporter->name );
-		$this->assertEquals( 70, $issue->reproducibility->id );
-		$this->assertEquals( 'have not tried', $issue->reproducibility->name );
-		$this->assertEquals( 0, $issue->sponsorship_total );
-		$this->assertEquals( 10, $issue->projection->id );
-		$this->assertEquals( 'none', $issue->projection->name );
-		$this->assertEquals( 10, $issue->eta->id );
-		$this->assertEquals( 'none', $issue->eta->name );
-		$this->assertEquals( 10, $issue->resolution->id );
-		$this->assertEquals( 'open', $issue->resolution->name );
-		$this->assertEquals( false, $issue->sticky );
+		$this->assertEquals( $t_issue_id, $t_issue->id );
+		$this->assertEquals( 10, $t_issue->view_state->id );
+		$this->assertEquals( 'public', $t_issue->view_state->name );
+		$this->assertEquals( 30, $t_issue->priority->id );
+		$this->assertEquals( 'normal', $t_issue->priority->name );
+		$this->assertEquals( 50, $t_issue->severity->id );
+		$this->assertEquals( 'minor', $t_issue->severity->name );
+		$this->assertEquals( 10, $t_issue->status->id );
+		$this->assertEquals( 'new', $t_issue->status->name );
+		$this->assertEquals( $this->userName, $t_issue->reporter->name );
+		$this->assertEquals( 70, $t_issue->reproducibility->id );
+		$this->assertEquals( 'have not tried', $t_issue->reproducibility->name );
+		$this->assertEquals( 0, $t_issue->sponsorship_total );
+		$this->assertEquals( 10, $t_issue->projection->id );
+		$this->assertEquals( 'none', $t_issue->projection->name );
+		$this->assertEquals( 10, $t_issue->eta->id );
+		$this->assertEquals( 'none', $t_issue->eta->name );
+		$this->assertEquals( 10, $t_issue->resolution->id );
+		$this->assertEquals( 'open', $t_issue->resolution->name );
+		$this->assertEquals( false, $t_issue->sticky );
 
 	}
 
 	/**
 	 * A test cases that tests the creation of issues with html markup in summary
 	 * and description.
+	 * @return void
 	 */
 	public function testCreateIssueWithHtmlMarkup() {
-		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithHtmlMarkup' );
+		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithHtmlMarkup' );
 
-		$issueToAdd['summary'] .= " <strong>WithHtmlMarkup</strong>";
-		$issueToAdd['description'] .= " <strong>WithHtmlMarkup</strong>";
+		$t_issue_to_add['summary'] .= " <strong>WithHtmlMarkup</strong>";
+		$t_issue_to_add['description'] .= " <strong>WithHtmlMarkup</strong>";
 
-		$issueId = $this->client->mc_issue_add(
-			$this->userName,
-			$this->password,
-			$issueToAdd);
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$this->deleteAfterRun( $issueId );
+		$this->deleteAfterRun( $t_issue_id );
 
-		$issue = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
 		# explicitly specified fields
-		$this->assertEquals( $issueToAdd['summary'], $issue->summary );
-		$this->assertEquals( $issueToAdd['description'], $issue->description );
+		$this->assertEquals( $t_issue_to_add['summary'], $t_issue->summary );
+		$this->assertEquals( $t_issue_to_add['description'], $t_issue->description );
 
 	}
 
@@ -141,38 +122,33 @@ class IssueAddTest extends SoapBase {
 	 * 3. Delete the issue.
 	 *
 	 * This test case was added for bug #9132.
+	 * @return void
 	 */
 	public function testCreateIssueWithRareFields() {
-		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithRareFields' );
+		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithRareFields' );
 
-		$issueToAdd['projection'] = array( 'id' => 90 );    # redesign
-		$issueToAdd['eta'] = array( 'id' => 60 );           # > 1 month
-		$issueToAdd['resolution'] = array( 'id' => 80 );    # suspended
-		$issueToAdd['status'] = array( 'id' => 40 );        # confirmed
-		$issueToAdd['fixed_in_version'] = 'fixed version';
-		$issueToAdd['target_version'] = 'target version';
-		$issueToAdd['sticky'] = true;
+		$t_issue_to_add['projection'] = array( 'id' => 90 );    # redesign
+		$t_issue_to_add['eta'] = array( 'id' => 60 );           # > 1 month
+		$t_issue_to_add['resolution'] = array( 'id' => 80 );    # suspended
+		$t_issue_to_add['status'] = array( 'id' => 40 );        # confirmed
+		$t_issue_to_add['fixed_in_version'] = 'fixed version';
+		$t_issue_to_add['target_version'] = 'target version';
+		$t_issue_to_add['sticky'] = true;
 
-		$issueId = $this->client->mc_issue_add(
-			$this->userName,
-			$this->password,
-			$issueToAdd);
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$this->deleteAfterRun( $issueId );
+		$this->deleteAfterRun( $t_issue_id );
 
-		$issue = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
 		# explicitly specified fields
-		$this->assertEquals( $issueToAdd['projection']['id'], $issue->projection->id );
-		$this->assertEquals( $issueToAdd['eta']['id'], $issue->eta->id );
-		$this->assertEquals( $issueToAdd['resolution']['id'], $issue->resolution->id );
-		$this->assertEquals( $issueToAdd['status']['id'], $issue->status->id );
-		$this->assertEquals( $issueToAdd['fixed_in_version'], $issue->fixed_in_version );
-		$this->assertEquals( $issueToAdd['target_version'], $issue->target_version );
-		$this->assertEquals( $issueToAdd['sticky'], $issue->sticky );
+		$this->assertEquals( $t_issue_to_add['projection']['id'], $t_issue->projection->id );
+		$this->assertEquals( $t_issue_to_add['eta']['id'], $t_issue->eta->id );
+		$this->assertEquals( $t_issue_to_add['resolution']['id'], $t_issue->resolution->id );
+		$this->assertEquals( $t_issue_to_add['status']['id'], $t_issue->status->id );
+		$this->assertEquals( $t_issue_to_add['fixed_in_version'], $t_issue->fixed_in_version );
+		$this->assertEquals( $t_issue_to_add['target_version'], $t_issue->target_version );
+		$this->assertEquals( $t_issue_to_add['sticky'], $t_issue->sticky );
 	}
 
 	/**
@@ -182,32 +158,26 @@ class IssueAddTest extends SoapBase {
 	 * 3. Retrieving the issue after it is created
 	 * 4. Verifying that the correct handler is passed
 	 * 5. Deleting the issue
+	 * @return void
 	 */
 	public function testCreateIssueWithHandler() {
+		$t_admin_users = $this->client->mc_project_get_users( $this->userName, $this->password, $this->getProjectId(), 90 );
 
-		$adminUsers = $this->client->mc_project_get_users($this->userName, $this->password, $this->getProjectId(), 90);
+		$this->assertTrue( count( $t_admin_users ) >= 1, "count(adminUsers) >= 1" );
 
-		$this->assertTrue(count($adminUsers) >= 1 , "count(adminUsers) >= 1");
+		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithHandler' );
 
-		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithHandler' );
+		$t_admin_user = $t_admin_users[0];
 
-		$adminUser = $adminUsers[0];
+		$t_issue_to_add['handler'] = $t_admin_user;
 
-		$issueToAdd['handler'] = $adminUser;
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$issueId = $this->client->mc_issue_add(
-			$this->userName,
-			$this->password,
-			$issueToAdd);
+		$this->deleteAfterRun( $t_issue_id );
 
-		$this->deleteAfterRun( $issueId );
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$issue = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId);
-
-		$this->assertEquals( $adminUser->id, $issue->handler->id, 'handler.id' );
+		$this->assertEquals( $t_admin_user->id, $t_issue->handler->id, 'handler.id' );
 	}
 
 	/**
@@ -216,30 +186,24 @@ class IssueAddTest extends SoapBase {
 	 * 1. Creating an issue with a due date
 	 * 2. Retrieving the issue
 	 * 3. Validating that the due date is properly set
+	 * @return void
 	 */
 	public function testCreateIssueWithDueDate() {
-
 		$this->skipIfDueDateIsNotEnabled();
 
-		$date = '2015-10-29T12:59:14+00:00';
+		$t_date = '2015-10-29T12:59:14+00:00';
 
-		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithDueDate' );
+		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithDueDate' );
 
-		$issueToAdd['due_date'] = $date;
+		$t_issue_to_add['due_date'] = $t_date;
 
-		$issueId = $this->client->mc_issue_add(
-			$this->userName,
-			$this->password,
-			$issueToAdd);
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$this->deleteAfterRun( $issueId );
+		$this->deleteAfterRun( $t_issue_id );
 
-		$issue = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertEquals( $this->dateToUTC($date), $this->dateToUTC($issue->due_date), "due_date" );
+		$this->assertEquals( $this->dateToUTC( $t_date ), $this->dateToUTC( $t_issue->due_date ), "due_date" );
 	}
 
 	/**
@@ -252,24 +216,19 @@ class IssueAddTest extends SoapBase {
 	 * This stricter verification originates in some SOAP frameworks, notably
 	 * Axis, not accepting the empty tag format, which is accepted by the PHP5
 	 * SOAP extension nevertheless.
+	 * @return void
 	 */
 	public function testCreateIssueWithNullDueDate() {
-		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithNullDueDate' );
+		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithNullDueDate' );
 
-		$issueId = $this->client->mc_issue_add(
-			$this->userName,
-			$this->password,
-			$issueToAdd);
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$this->deleteAfterRun( $issueId );
+		$this->deleteAfterRun( $t_issue_id );
 
-		$issue = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertNull( $issue->due_date , 'due_date is not null' );
-		$this->assertEquals( 'true', $this->readDueDate( $this->client->__getLastResponse() ) , 'xsi:nil not set to true' );
+		$this->assertNull( $t_issue->due_date, 'due_date is not null' );
+		$this->assertEquals( 'true', $this->readDueDate(), 'xsi:nil not set to true' );
 	}
 
 	/**
@@ -279,44 +238,37 @@ class IssueAddTest extends SoapBase {
 	 * 2. Retrieving the issue
 	 * 3. Verifying that the category is empty.
 	 *
+	 * @return void
 	 */
 	public function testCreateBugWithNoCategory() {
 		$this->skipIfAllowNoCategoryIsDisabled();
 
-		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateBugWithNoCategory' );
-		unset ( $issueToAdd['category'] );
+		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateBugWithNoCategory' );
+		unset( $t_issue_to_add['category'] );
 
-		$issueId = $this->client->mc_issue_add(
-			$this->userName,
-			$this->password,
-			$issueToAdd);
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$this->deleteAfterRun( $issueId );
+		$this->deleteAfterRun( $t_issue_id );
 
-		$issue = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertEquals( '', $issue->category, 'category' );
+		$this->assertEquals( '', $t_issue->category, 'category' );
 
 	}
 
 	/**
-	 * Reads a due date out of the soap response
-	 * @param string $issueDataXml
-	 * @return string the xsi:null value
+	 * Reads a due date out of the last soap response
+	 * @return string|null the xsi:null value
 	 */
-	private function readDueDate( $issueDataXml ) {
-		$reader = new XMLReader();
-		$reader->XML( $this->client->__getLastResponse());
+	private function readDueDate() {
+		$t_reader = new XMLReader();
+		$t_reader->XML( $this->client->__getLastResponse() );
 
-		while ( $reader->read() ) {
-			switch ( $reader->nodeType ) {
-
+		while( $t_reader->read() ) {
+			switch( $t_reader->nodeType ) {
 				case XMLReader::ELEMENT:
-					if( $reader->name == 'due_date') {
-						return $reader->getAttribute( 'xsi:nil' );
+					if( $t_reader->name == 'due_date' ) {
+						return $t_reader->getAttribute( 'xsi:nil' );
 					}
 					break;
 			}
@@ -327,40 +279,31 @@ class IssueAddTest extends SoapBase {
 	/**
 	 * A test cases that tests the creation of issues
 	 * with a note passed in which contains time tracking data.
+	 * @return void
 	 */
 	public function testCreateIssueWithTimeTrackingNote() {
-
 		$this->skipIfTimeTrackingIsNotEnabled();
 
-		$issueToAdd = $this->getIssueToAdd( 'testCreateIssueWithNote' );
-		$issueToAdd['notes'] = array(
+		$t_issue_to_add = $this->getIssueToAdd( 'testCreateIssueWithNote' );
+		$t_issue_to_add['notes'] = array(
 			array(
 				'text' => "first note",
 				'time_tracking' => "30"
 			)
 		);
 
-		$issueId = $this->client->mc_issue_add(
-			$this->userName,
-			$this->password,
-			$issueToAdd);
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$issue = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
 		# verify note existence and time tracking data
-		$this->assertEquals( 1, count( $issue->notes ) );
+		$this->assertEquals( 1, count( $t_issue->notes ) );
 
-		$note = $issue->notes[0];
+		$t_note = $t_issue->notes[0];
 
-		$this->assertEquals( 30, $note->time_tracking );
+		$this->assertEquals( 30, $t_note->time_tracking );
 
-		$this->client->mc_issue_delete(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$this->client->mc_issue_delete( $this->userName, $this->password, $t_issue_id );
 	}
 
 	/**
@@ -369,55 +312,46 @@ class IssueAddTest extends SoapBase {
 	 * 1. Creating an issue where the handler is given by name
 	 * 2. Retrieving the issue
 	 * 3. Verifying that the handler name is correctly set
+	 * @return void
 	 */
 	public function testCreateIssueWithHandlerByName() {
-
-		$issueToAdd = $this->getIssueToAdd( 'testCreateIssueWithHandlerByName' );
-		$issueToAdd['handler'] = array(
+		$t_issue_to_add = $this->getIssueToAdd( 'testCreateIssueWithHandlerByName' );
+		$t_issue_to_add['handler'] = array(
 			'name' => $this->userName
 		);
 
-		$issueId = $this->client->mc_issue_add(
-			$this->userName,
-			$this->password,
-			$issueToAdd);
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$this->deleteAfterRun( $issueId );
+		$this->deleteAfterRun( $t_issue_id );
 
-		$issue = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertEquals( $this->userName,  $issue->handler->name );
+		$this->assertEquals( $this->userName, $t_issue->handler->name );
 	}
 
 	/**
 	 * Tests that a created issue with a non-existent version returns the correct error message.
+	 * @return void
 	 */
 	public function testCreateIssueWithFaultyVersionGeneratesError() {
-
-		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithFaultyVersionGeneratesError' );
-		$issueToAdd['version'] = 'noSuchVersion';
+		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithFaultyVersionGeneratesError' );
+		$t_issue_to_add['version'] = 'noSuchVersion';
 
 		try {
-			$this->client->mc_issue_add(
-				$this->userName,
-				$this->password,
-				$issueToAdd);
+			$this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
 			$this->fail( "Invalid version did not raise error." );
-		} catch ( SoapFault $e) {
+		} catch ( SoapFault $e ) {
 			$this->assertContains( "Version 'noSuchVersion' does not exist in project", $e->getMessage() );
 		}
 	}
 
 	/**
 	 * Tests that an issue with a proper version set is correctly created
+	 * @return void
 	 */
 	public function testCreateIssueWithVersion() {
-
-		$version = array (
+		$t_version = array (
 			'project_id' => $this->getProjectId(),
 			'name' => '1.0',
 			'released' => 'true',
@@ -425,50 +359,50 @@ class IssueAddTest extends SoapBase {
 			'date_order' => ''
 		);
 
-		$versionId = $this->client->mc_project_version_add( $this->userName, $this->password, $version );
+		$t_version_id = $this->client->mc_project_version_add( $this->userName, $this->password, $t_version );
 
-		$this->deleteVersionAfterRun( $versionId );
+		$this->deleteVersionAfterRun( $t_version_id );
 
-		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithVersion' );
-		$issueToAdd['version'] = $version['name'];
+		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithVersion' );
+		$t_issue_to_add['version'] = $t_version['name'];
 
-		$issueId = $this->client->mc_issue_add( $this->userName, $this->password, $issueToAdd );
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$this->deleteAfterRun($issueId);
+		$this->deleteAfterRun( $t_issue_id );
 
-		$createdIssue = $this->client->mc_issue_get( $this->userName, $this->password, $issueId );
+		$t_created_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertEquals( $version['name'], $createdIssue->version );
+		$this->assertEquals( $t_version['name'], $t_created_issue->version );
 	}
 
 	/**
 	 * Test that the biggest id is correctly retrieved
+	 * @return void
 	 */
 	public function testGetBiggestId() {
+	    $t_first_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $this->getIssueToAdd( 'IssueAddTest.testGetBiggestId1' ) );
+		$this->deleteAfterRun( $t_first_issue_id );
 
-	    $firstIssueId = $this->client->mc_issue_add( $this->userName, $this->password, $this->getIssueToAdd( 'IssueAddTest.testGetBiggestId1'));
-		$this->deleteAfterRun( $firstIssueId );
+	    $t_second_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $this->getIssueToAdd( 'IssueAddTest.testGetBiggestId2' ) );
+	    $this->deleteAfterRun( $t_second_issue_id );
 
-	    $secondIssueId = $this->client->mc_issue_add( $this->userName, $this->password, $this->getIssueToAdd( 'IssueAddTest.testGetBiggestId2'));
-	    $this->deleteAfterRun( $secondIssueId );
-
-	    $firstIssue = $this->client->mc_issue_get( $this->userName, $this->password, $firstIssueId );
+	    $t_first_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_first_issue_id );
 
 	    # this update should trigger this issue's id to be returned as the biggest
 	    # reported as bug #12887
-		$this->client->mc_issue_update( $this->userName, $this->password, $firstIssueId, $firstIssue);
+		$this->client->mc_issue_update( $this->userName, $this->password, $t_first_issue_id, $t_first_issue );
 
-		$this->assertEquals( $secondIssueId, $this->client->mc_issue_get_biggest_id( $this->userName, $this->password, $this->getProjectId() ));
+		$this->assertEquals( $t_second_issue_id, $this->client->mc_issue_get_biggest_id( $this->userName, $this->password, $this->getProjectId() ) );
 	}
 
 	/**
 	 * A test cases that tests the creation of issues
 	 * with a note passed in which contains time tracking data.
+	 * @return void
 	 */
 	public function testCreateIssueWithMiscNote() {
-
-		$issueToAdd = $this->getIssueToAdd( 'testCreateIssueWithMiscNote' );
-		$issueToAdd['notes'] = array(
+		$t_issue_to_add = $this->getIssueToAdd( 'testCreateIssueWithMiscNote' );
+		$t_issue_to_add['notes'] = array(
 			array(
 				'text' => "first note",
 				'note_type' => 2,
@@ -476,104 +410,89 @@ class IssueAddTest extends SoapBase {
 			)
 		);
 
-		$issueId = $this->client->mc_issue_add(
-			$this->userName,
-			$this->password,
-			$issueToAdd);
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$this->deleteAfterRun($issueId);
+		$this->deleteAfterRun( $t_issue_id );
 
-		$issue = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
 		# verify note existence and time tracking data
-		$this->assertEquals( 1, count( $issue->notes ) );
+		$this->assertEquals( 1, count( $t_issue->notes ) );
 
-		$note = $issue->notes[0];
+		$t_note = $t_issue->notes[0];
 
-		$this->assertEquals( 2, $note->note_type );
-		$this->assertEquals( 'attr_value', $note->note_attr );
+		$this->assertEquals( 2, $t_note->note_type );
+		$this->assertEquals( 'attr_value', $t_note->note_attr );
 	}
 
 	/**
 	 * A test cases that tests the creation of issues with a tag
+	 * @return void
 	 */
 	public function testCreateIssueWithTags() {
 		# initialise tags
-		$tagId1 = $this->client->mc_tag_add( $this->userName, $this->password, array (
+		$t_tag_id1 = $this->client->mc_tag_add( $this->userName, $this->password, array(
 					'name' => 'IssueCreateTest.createIssueWithTags'
-		));
-		$this->deleteTagAfterRun( $tagId1 );
+		) );
+		$this->deleteTagAfterRun( $t_tag_id1 );
 
-		$tagId2 = $this->client->mc_tag_add( $this->userName, $this->password, array (
+		$t_tag_id2 = $this->client->mc_tag_add( $this->userName, $this->password, array(
 					'name' => 'IssueCreateTest.createIssueWithTags2'
-		));
-		$this->deleteTagAfterRun( $tagId2 );
+		) );
+		$this->deleteTagAfterRun( $t_tag_id2 );
 
 		# create issue
-		$issueToAdd = $this->getIssueToAdd( 'IssueCreateTest.createIssueWithTags' );
-		$issueToAdd['tags'] = array ( array( 'id' => $tagId1), array('id' => $tagId2 ) );
-		$issueId = $this->client->mc_issue_add( $this->userName, $this->password, $issueToAdd);
-		$this->deleteAfterRun( $issueId );
-		$issue = $this->client->mc_issue_get( $this->userName, $this->password, $issueId );
+		$t_issue_to_add = $this->getIssueToAdd( 'IssueCreateTest.createIssueWithTags' );
+		$t_issue_to_add['tags'] = array( array( 'id' => $t_tag_id1 ), array( 'id' => $t_tag_id2 ) );
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
+		$this->deleteAfterRun( $t_issue_id );
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		self::assertEquals ( 2, count ( $issue->tags ) );
+		self::assertEquals( 2, count( $t_issue->tags ) );
 	}
 
 	/**
 	 * Tests that an issue with enumerated fields set by name has the field values correctly set
 	 *
+	 * @return void
 	 */
 	public function testCreateIssueWithFieldsByName() {
-		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithFieldsByName' );
+		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithFieldsByName' );
 
-		$issueToAdd['view_state'] = array( 'name' => 'private');
-		$issueToAdd['resolution'] = array( 'name' => 'suspended');
-		$issueToAdd['status'] = array( 'name' => 'confirmed');
+		$t_issue_to_add['view_state'] = array( 'name' => 'private');
+		$t_issue_to_add['resolution'] = array( 'name' => 'suspended');
+		$t_issue_to_add['status'] = array( 'name' => 'confirmed');
 
-		$issueId = $this->client->mc_issue_add(
-				$this->userName,
-				$this->password,
-				$issueToAdd);
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$this->deleteAfterRun( $issueId );
+		$this->deleteAfterRun( $t_issue_id );
 
-		$issue = $this->client->mc_issue_get(
-				$this->userName,
-				$this->password,
-				$issueId);
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertEquals( $issueToAdd['view_state']['name'], $issue->view_state->name);
-		$this->assertEquals( $issueToAdd['resolution']['name'], $issue->resolution->name);
-		$this->assertEquals( $issueToAdd['status']['name'], $issue->status->name);
+		$this->assertEquals( $t_issue_to_add['view_state']['name'], $t_issue->view_state->name );
+		$this->assertEquals( $t_issue_to_add['resolution']['name'], $t_issue->resolution->name );
+		$this->assertEquals( $t_issue_to_add['status']['name'], $t_issue->status->name );
 	}
 
 	/**
 	 * A test cases that tests the creation of issues with non-latin text, to validate that
 	 * it is not stripped.
+	 * @return void
 	 */
 	public function testCreateIssueWithNonLatinText() {
-		$issueToAdd = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithNonLatinText' );
+		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithNonLatinText' );
 
-		$issueToAdd['summary'] = "Здравствуйте!"; # Russian, hello
-		$issueToAdd['description'] = "你好"; # Mandarin Chinese, hello
+		$t_issue_to_add['summary'] = "Здравствуйте!"; # Russian, hello
+		$t_issue_to_add['description'] = "你好"; # Mandarin Chinese, hello
 
-		$issueId = $this->client->mc_issue_add(
-				$this->userName,
-				$this->password,
-				$issueToAdd);
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$this->deleteAfterRun( $issueId );
+		$this->deleteAfterRun( $t_issue_id );
 
-		$issue = $this->client->mc_issue_get(
-				$this->userName,
-				$this->password,
-				$issueId);
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
 		# explicitly specified fields
-		$this->assertEquals( $issueToAdd['summary'], $issue->summary , 'summary is not correct');
-		$this->assertEquals( $issueToAdd['description'], $issue->description , 'description is not correct');
+		$this->assertEquals( $t_issue_to_add['summary'], $t_issue->summary, 'summary is not correct' );
+		$this->assertEquals( $t_issue_to_add['description'], $t_issue->description, 'description is not correct' );
 	}
 }

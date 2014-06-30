@@ -35,73 +35,73 @@ class TagTest extends SoapBase {
 
 	/**
 	 * Tests retrieving, creating and deleting tags
+	 * @return void
 	 */
 	public function testTagOperations() {
+		$t_current_tag_count = sizeof( $this->client->mc_tag_get_all( $this->userName, $this->password, 1, 500 )->results );
 
-		$currentTagCount = sizeof ( $this->client->mc_tag_get_all ( $this->userName, $this->password, 1, 500)->results );
-
-		$tagToCreate = array (
+		$t_tag_to_create = array (
 			'name' => 'TagTest.testTagOperations',
 			'description' => 'Tag created by unit test'
 		);
 
-		$newTagId = $this->client->mc_tag_add ( $this->userName, $this->password, $tagToCreate );
+		$t_new_tag_id = $this->client->mc_tag_add( $this->userName, $this->password, $t_tag_to_create );
 
-		$resultsWithCreatedTag = $this->client->mc_tag_get_all ( $this->userName, $this->password, 1, 500)->results;
+		$t_results_with_created_tag = $this->client->mc_tag_get_all( $this->userName, $this->password, 1, 500 )->results;
 
-		$newTagCount = sizeof (  $resultsWithCreatedTag );
+		$t_new_tag_count = sizeof( $t_results_with_created_tag );
 
-		$this->client->mc_tag_delete( $this->userName, $this->password, $newTagId );
+		$this->client->mc_tag_delete( $this->userName, $this->password, $t_new_tag_id );
 
-		$finalTagCount = sizeof ( $this->client->mc_tag_get_all ( $this->userName, $this->password, 1, 500)->results );
+		$t_final_tag_count = sizeof( $this->client->mc_tag_get_all( $this->userName, $this->password, 1, 500 )->results );
 
-		self::assertEquals ( $currentTagCount +1 , $newTagCount );
-		self::assertEquals ( $currentTagCount  , $finalTagCount );
+		self::assertEquals( $t_current_tag_count+1, $t_new_tag_count );
+		self::assertEquals( $t_current_tag_count, $t_final_tag_count );
 
-		$createdTag = null;
+		$t_created_tag = null;
 
-		foreach ( $resultsWithCreatedTag as $tag ) {
-			if( $tag->id == $newTagId ) {
-				$createdTag = $tag;
+		foreach ( $t_results_with_created_tag as $t_tag ) {
+			if( $t_tag->id == $t_new_tag_id ) {
+				$t_created_tag = $t_tag;
 				break;
 			}
 		}
 
-		self::assertNotNull( $createdTag );
-		self::assertEquals ( $createdTag->name, $tagToCreate['name']);
-		self::assertEquals ( $createdTag->description, $tagToCreate['description'] );
-		self::assertNotNull ( $createdTag->date_created );
-		self::assertNotNull ( $createdTag->date_updated );
-		self::assertEquals ( $createdTag->user_id->name, $this->userName );
+		self::assertNotNull( $t_created_tag );
+		self::assertEquals( $t_created_tag->name, $t_tag_to_create['name'] );
+		self::assertEquals( $t_created_tag->description, $t_tag_to_create['description'] );
+		self::assertNotNull( $t_created_tag->date_created );
+		self::assertNotNull( $t_created_tag->date_updated );
+		self::assertEquals( $t_created_tag->user_id->name, $this->userName );
 
 	}
 
 	/**
 	 * Tests that creating tags with invalid names is not allowed
+	 * @return void
 	 */
 	public function testCreateTagWithInvalidName() {
-
-		$tagToCreate = array (
+		$t_tag_to_create = array (
 		    		'name' => '',
 		    		'description' => ''
 		);
 
 		try {
-			$this->client->mc_tag_add ( $this->userName, $this->password, $tagToCreate );
-			self::fail("Expected an error");
+			$this->client->mc_tag_add( $this->userName, $this->password, $t_tag_to_create );
+			self::fail( 'Expected an error' );
 		} catch ( SoapFault $e ) {
-			$this->assertContains( "Invalid tag name", $e->getMessage() );
+			$this->assertContains( 'Invalid tag name', $e->getMessage() );
 		}
 	}
 
 	/**
 	 * Tests that creating tags with invalid names is not allowed
+	 * @return void
 	 */
 	public function testDeleteNonExistantTag() {
-
 		try {
-			$this->client->mc_tag_delete ( $this->userName, $this->password, -1 );
-			self::fail("Expected an error");
+			$this->client->mc_tag_delete( $this->userName, $this->password, -1 );
+			self::fail( 'Expected an error' );
 		} catch ( SoapFault $e ) {
 			$this->assertContains( "No tag with id", $e->getMessage() );
 		}
@@ -109,32 +109,32 @@ class TagTest extends SoapBase {
 
 	/**
 	 * Tests that creating a tag with no description works
+	 * @return void
 	 */
 	public function testCreateTagWithNoDescription() {
-
-		$tagToCreate = array (
+		$t_tag_to_create = array (
 			'name' => 'TagTest.testCreateTagWithNoDescription'
 		);
 
-		$tagId = $this->client->mc_tag_add ( $this->userName, $this->password, $tagToCreate );
+		$t_tag_id = $this->client->mc_tag_add( $this->userName, $this->password, $t_tag_to_create );
 
-		$this->deleteTagAfterRun( $tagId );
+		$this->deleteTagAfterRun( $t_tag_id );
 	}
 
 	/**
 	 * Tests that creating a tag with no description works
+	 * @return void
 	 */
 	public function testCreateTagWithExistingName() {
-
-		$tagToCreate = array (
+		$t_tag_to_create = array (
 			'name' => 'TagTest.testCreateTagWithExistingName'
 		);
-		$tagId = $this->client->mc_tag_add ( $this->userName, $this->password, $tagToCreate );
-		$this->deleteTagAfterRun( $tagId );
+		$t_tag_id = $this->client->mc_tag_add( $this->userName, $this->password, $t_tag_to_create );
+		$this->deleteTagAfterRun( $t_tag_id );
 
 		try {
-			$this->client->mc_tag_add ( $this->userName, $this->password, $tagToCreate );
-			self::fail("Expected an error");
+			$this->client->mc_tag_add( $this->userName, $this->password, $t_tag_to_create );
+			self::fail( "Expected an error" );
 		} catch ( SoapFault $e ) {
 			$this->assertContains( "A tag with the same name already exists", $e->getMessage() );
 		}
@@ -142,26 +142,26 @@ class TagTest extends SoapBase {
 
 	/**
 	 * Tests that setting tags on issues works
+	 * @return void
 	 */
 	public function testSetTagsOnIssue() {
-
 		# create tag
-		$tagToCreate = array (
+		$t_tag_to_create = array (
 		    		'name' => 'TagTest.testCreateTagWithExistingName'
 		);
-		$tagId = $this->client->mc_tag_add ( $this->userName, $this->password, $tagToCreate );
-		$this->deleteTagAfterRun( $tagId );
+		$t_tag_id = $this->client->mc_tag_add( $this->userName, $this->password, $t_tag_to_create );
+		$this->deleteTagAfterRun( $t_tag_id );
 
 		# create issue
-		$issueToCreate = $this->getIssueToAdd('testTestTagsOnIssue');
-		$issueId = $this->client->mc_issue_add ( $this->userName, $this->password, $issueToCreate );
-		$this->deleteAfterRun( $issueId );
+		$t_issue_to_create = $this->getIssueToAdd( 'testTestTagsOnIssue' );
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_create );
+		$this->deleteAfterRun( $t_issue_id );
 
 		# set tags
-		$this->client->mc_issue_set_tags ( $this->userName, $this->password, $issueId, array ( array ( 'id' => $tagId ) ) );
+		$this->client->mc_issue_set_tags( $this->userName, $this->password, $t_issue_id, array ( array ( 'id' => $t_tag_id ) ) );
 
-		$issue = $this->client->mc_issue_get( $this->userName, $this->password, $issueId );
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		self::assertEquals( 1, count ( $issue->tags ) );
+		self::assertEquals( 1, count( $t_issue->tags ) );
 	}
 }

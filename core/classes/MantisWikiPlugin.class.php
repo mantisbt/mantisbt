@@ -20,16 +20,16 @@
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  * @package MantisBT
+ * @subpackage classes
  */
 
 /**
  * Base class that implements the skeleton for a wiki plugin.
- * @package MantisBT
- * @subpackage classes
  */
 abstract class MantisWikiPlugin extends MantisPlugin {
 	/**
 	 * Hooks
+	 * @return array
 	 */
 	function hooks() {
 		return array(
@@ -40,23 +40,26 @@ abstract class MantisWikiPlugin extends MantisPlugin {
 	}
 
 	/**
-	 * Plugin init function
+	 * Plugin initialization function
+	 * @return boolean
 	 */
 	function wiki_init() {
 		return true;
 	}
 
 	/**
-	 * Generate url to Bug entry in wiki
-	 * @param int $p_event event
-	 * @param int $p_bug_id bug id
+	 * Generate URL to Bug entry in a wiki
+	 * @param integer $p_event  Event.
+	 * @param integer $p_bug_id A bug identifier.
+	 * @return string
 	 */
 	abstract function link_bug( $p_event, $p_bug_id );
 
 	/**
-	 * Generate url to Project entry in wiki
-	 * @param int $p_event event
-	 * @param int $p_project_id project id
+	 * Generate URL to Project entry in a wiki
+	 * @param integer $p_event      Event.
+	 * @param integer $p_project_id A project identifier.
+	 * @return string
 	 */
 	abstract function link_project( $p_event, $p_project_id );
 }

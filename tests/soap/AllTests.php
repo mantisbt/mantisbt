@@ -26,7 +26,7 @@
 /**
  * Test config
  */
-require_once dirname(__FILE__) . '/../TestConfig.php';
+require_once dirname( __FILE__ ) . '/../TestConfig.php';
 
 require_once 'EnumTest.php';
 require_once 'IssueAddTest.php';
@@ -56,39 +56,37 @@ class Soap_AllTests extends PHPUnit_Framework_TestSuite
 {
 	/**
 	 * setUp
+	 * @return void
 	 */
-	protected function setUp()
-	{
-		if( ! extension_loaded('soap') ) {
-			$this->markTestSuiteSkipped(
-				'The SOAP extension is not available.'
-			);
+	protected function setUp() {
+		if( ! extension_loaded( 'soap' ) ) {
+			$this->markTestSuiteSkipped( 'The SOAP extension is not available.' );
 		}
 	}
 
 	/**
 	 * Initialises Soap Test Suite
+	 * @return Soap_AllTests
 	 */
-	public static function suite()
-	{
-		$suite = new Soap_AllTests('SOAP Interface');
+	public static function suite() {
+		$t_suite = new Soap_AllTests( 'SOAP Interface' );
 
-		$suite->addTestSuite('EnumTest');
-		$suite->addTestSuite('IssueAddTest');
-		$suite->addTestSuite('IssueMonitorTest');
-		$suite->addTestSuite('IssueNoteTest');
-		$suite->addTestSuite('IssueUpdateTest');
-		$suite->addTestSuite('FilterTest');
-		$suite->addTestSuite('AttachmentTest');
-		$suite->addTestSuite('LoginTest');
-		$suite->addTestSuite('CategoryTest');
-		$suite->addTestSuite('CompressionTest');
-		$suite->addTestSuite('ProjectTest');
-		$suite->addTestSuite('VersionTest');
-		$suite->addTestSuite('RelationshipTest');
-		$suite->addTestSuite('UserTest');
-		$suite->addTestSuite('TagTest');
+		$t_suite->addTestSuite( 'EnumTest' );
+		$t_suite->addTestSuite( 'IssueAddTest' );
+		$t_suite->addTestSuite( 'IssueMonitorTest' );
+		$t_suite->addTestSuite( 'IssueNoteTest' );
+		$t_suite->addTestSuite( 'IssueUpdateTest' );
+		$t_suite->addTestSuite( 'FilterTest' );
+		$t_suite->addTestSuite( 'AttachmentTest' );
+		$t_suite->addTestSuite( 'LoginTest' );
+		$t_suite->addTestSuite( 'CategoryTest' );
+		$t_suite->addTestSuite( 'CompressionTest' );
+		$t_suite->addTestSuite( 'ProjectTest' );
+		$t_suite->addTestSuite( 'VersionTest' );
+		$t_suite->addTestSuite( 'RelationshipTest' );
+		$t_suite->addTestSuite( 'UserTest' );
+		$t_suite->addTestSuite( 'TagTest' );
 
-		return $suite;
+		return $t_suite;
 	}
 }

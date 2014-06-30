@@ -23,16 +23,11 @@
  * @link http://www.mantisbt.org
  */
 
-/**
- * Includes
- */
-require_once dirname( dirname(__FILE__) ) . '/TestConfig.php';
+# Includes
+require_once dirname( dirname( __FILE__ ) ) . '/TestConfig.php';
 
-/**
- * MantisBT Core API
- */
+# MantisBT Core API
 require_mantis_core();
-
 
 /**
  * Mantis string handling test cases
@@ -45,23 +40,23 @@ class Mantis_StringTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Tests string_sanitize_url()
-	  *
+	 *
 	 * @dataProvider provider
-	  * @param string $in input
-	  * @param string $out expected output
+	 * @param string $p_in  Input.
+	 * @param string $p_out Expected output.
+	 * @return void
 	 */
-	public function testStringSanitize( $in, $out )
-	{
-		$a = string_sanitize_url($in, false);
-		$this->assertEquals( $out, $a );
+	public function testStringSanitize( $p_in, $p_out ) {
+		$t_a = string_sanitize_url( $p_in, false );
+		$this->assertEquals( $p_out, $t_a );
 	}
 
 	/**
 	 * Data provider for string sanitize test
+	 * @return array
 	 */
-	public function provider()
-	{
-		$testStrings = array(
+	public function provider() {
+		$t_test_strings = array(
 			array( '', 'index.php' ),
 			array( 'abc.php', 'abc.php' ),
 			array( 'abc.php?', 'abc.php'),
@@ -96,7 +91,7 @@ class Mantis_StringTest extends PHPUnit_Framework_TestCase {
 		#	array( $my_path.'plugin.php?page=Source/list&id=1#abc',
 		#	array( 'http://www.test.my.url/'),
 
-		return $testStrings;
+		return $t_test_strings;
 	}
 
 }

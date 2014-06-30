@@ -74,7 +74,7 @@ require_api( 'string_api.php' );
 auth_ensure_user_authenticated();
 
 $f_type_page	= gpc_get_string( 'type_page', 'word' );
-$f_search		= gpc_get_string( 'search', false ); /** @todo need a better default */
+$f_search		= gpc_get_string( 'search', false ); # @todo need a better default
 $f_offset		= gpc_get_int( 'offset', 0 );
 $f_export		= gpc_get_string( 'export' );
 $f_show_flag	= gpc_get_bool( 'show_flag' );
@@ -153,7 +153,7 @@ $t_lang_system_profile = lang_get( 'system_profile' );
 $t_lang_attached_files = lang_get( 'attached_files' );
 
 $t_current_user_id = auth_get_current_user_id();
-$t_user_bugnote_order = user_pref_get_pref ( $t_current_user_id, 'bugnote_order' );
+$t_user_bugnote_order = user_pref_get_pref( $t_current_user_id, 'bugnote_order' );
 
 for( $j=0; $j < $t_row_count; $j++ ) {
 	$t_bug = $t_result[$j];
@@ -467,7 +467,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 			$t_first_attachment = true;
 			$t_path = config_get_global( 'path' );
 
-			foreach ( $t_attachments as $t_attachment  ) {
+			foreach ( $t_attachments as $t_attachment ) {
 				if( $t_first_attachment ) {
 					$t_first_attachment = false;
 				} else {
@@ -478,8 +478,8 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 				$c_download_url = htmlspecialchars( $t_attachment['download_url'] );
 				$c_filesize = number_format( $t_attachment['size'] );
 				$c_date_added = date( $t_date_format, $t_attachment['date_added'] );
-				echo "$c_filename ($c_filesize " . lang_get( 'bytes' ) . ') '
-					. '<span class="italic-small">' . $c_date_added . '</span><br />'
+				echo "$c_filename ($c_filesize " . lang_get( 'bytes' )
+					. ') <span class="italic-small">' . $c_date_added . '</span><br />'
 					. string_display_links( $t_path . $c_download_url );
 
 				if( $t_attachment['preview'] && $t_attachment['type'] == 'image' && $f_type_page == 'html' ) {
@@ -546,7 +546,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 			<td class="print">
 				<?php echo $t_date_submitted ?>&#160;&#160;&#160;
 				<?php if( $t_bugnote->date_submitted != $t_bugnote->last_modified ) {
-					echo '<br />(' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . $t_last_modified . ')';
+					echo '<br />(' . lang_get( 'last_edited' ) . lang_get( 'word_separator' ) . $t_last_modified . ')';
 				} ?>
 			</td>
 		</tr>

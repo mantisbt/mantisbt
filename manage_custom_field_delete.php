@@ -49,7 +49,7 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 
-form_security_validate('manage_custom_field_delete');
+form_security_validate( 'manage_custom_field_delete' );
 
 auth_reauthenticate();
 access_ensure_global_level( config_get( 'manage_custom_fields_threshold' ) );
@@ -71,7 +71,7 @@ if( 0 < count( custom_field_get_project_ids( $f_field_id ) ) ) {
 
 custom_field_destroy( $f_field_id );
 
-form_security_purge('manage_custom_field_delete');
+form_security_purge( 'manage_custom_field_delete' );
 
 html_page_top( null, $f_return );
 

@@ -63,8 +63,8 @@ $g_show_errors = gpc_get_bool( 'show_errors', false );
 /**
  * Returns a URL to implement filtering on the admin check page
  *
- * @param int $p_all whether to show all check out
- * @param int $p_errors whether to show all errors
+ * @param integer $p_all    Whether to show all check out.
+ * @param integer $p_errors Whether to show all errors.
  * @return string url
  */
 function mode_url( $p_all, $p_errors ) {

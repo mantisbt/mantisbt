@@ -69,8 +69,8 @@ require_api( 'version_api.php' );
 
 /**
  * Print header for the specified project version.
- * @param int $p_version_id a valid version id
- * @return null
+ * @param integer $p_version_id A valid version identifier.
+ * @return void
  */
 function print_version_header( $p_version_id ) {
 	$t_project_id   = version_get_field( $p_version_id, 'project_id' );
@@ -83,8 +83,8 @@ function print_version_header( $p_version_id ) {
 		$t_version_released = version_get_field( $p_version_id, 'released' );
 		$t_release_timestamp = version_get_field( $p_version_id, 'date_order' );
 
-		if( (bool) $t_version_released ) {
-			$t_release_date = ' (' . lang_get('released') . ' ' . string_display_line( date( config_get( 'short_date_format' ), $t_release_timestamp ) ) . ')';
+		if( (bool)$t_version_released ) {
+			$t_release_date = ' (' . lang_get( 'released' ) . ' ' . string_display_line( date( config_get( 'short_date_format' ), $t_release_timestamp ) ) . ')';
 		} else {
 			$t_release_date = ' (' . lang_get( 'not_released' ) . ')';
 		}
@@ -100,8 +100,8 @@ function print_version_header( $p_version_id ) {
 
 /**
  * Print header for the specified project
- * @param string $p_project_name project name to display
- * @return null
+ * @param string $p_project_name Project name to display.
+ * @return void
  */
 function print_project_header_changelog ( $p_project_name ) {
 	echo '<br /><span class="pagetitle">', string_display_line( $p_project_name ), ' - ', lang_get( 'changelog' ), '</span><br />';
@@ -211,7 +211,7 @@ foreach( $t_project_ids as $t_project_id ) {
 			continue;
 		}
 
-		$query = "SELECT sbt.*, dbt.fixed_in_version AS parent_version, rt.source_bug_id
+		$t_query = "SELECT sbt.*, dbt.fixed_in_version AS parent_version, rt.source_bug_id
 			FROM $t_bug_table AS sbt
 			LEFT JOIN $t_relation_table AS rt
 				ON sbt.id=rt.destination_bug_id AND rt.relationship_type=" . BUG_DEPENDANT . "
@@ -227,7 +227,7 @@ foreach( $t_project_ids as $t_project_id ) {
 		$t_issue_parents = array();
 		$t_issue_handlers = array();
 
-		$t_result = db_query_bound( $query, array( $t_project_id, $t_version ) );
+		$t_result = db_query_bound( $t_query, array( $t_project_id, $t_version ) );
 
 		while ( $t_row = db_fetch_array( $t_result ) ) {
 			# hide private bugs if user doesn't have access to view them.

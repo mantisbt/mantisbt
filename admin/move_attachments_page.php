@@ -23,10 +23,6 @@
  * @link http://www.mantisbt.org
  */
 
-
-/**
- * MantisBT Core API's
- */
 require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 
 access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
@@ -76,7 +72,7 @@ $t_result = db_query_bound( $t_query );
 # Build list, excluding projects having upload method other than DISK
 $t_projects = array();
 while( $t_row = db_fetch_array( $t_result ) ) {
-	$t_project_id = (int) $t_row['id'];
+	$t_project_id = (int)$t_row['id'];
 	$t_upload_method = config_get( 'file_upload_method', null, ALL_USERS, $t_project_id );
 	if( $t_upload_method == DISK ) {
 		$t_projects[$t_project_id] = $t_row;
@@ -121,8 +117,7 @@ if( count( $t_projects ) == 0 ) {
 			. '<input type="checkbox" name="to_disk[]" value="%d" /></td>',
 			$t_project['name'],
 			$t_project['disk'],
-			$t_id
-		);
+			$t_id );
 		echo "</tr>\n";
 	}
 

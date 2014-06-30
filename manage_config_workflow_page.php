@@ -66,7 +66,8 @@ $t_overrides = array();
 
 /**
  * Set overrides
- * @param string $p_config config value
+ * @param string $p_config Configuration value.
+ * @return void
  */
 function set_overrides( $p_config ) {
 	global $t_overrides;
@@ -78,9 +79,9 @@ function set_overrides( $p_config ) {
 /**
  * Returns a string to define the background color attribute depending
  * on the level where it's overridden
- * @param int $p_level_file config file's access level
- * @param int $p_level_global all projects' access level
- * @param int $p_level_project current project's access level
+ * @param integer $p_level_file    Config file's access level.
+ * @param integer $p_level_global  All projects' access level.
+ * @param integer $p_level_project Current project's access level.
  * @return string bgcolor attribute, or '' if no color
  */
 function set_colour_override( $p_level_file, $p_level_global, $p_level_project ) {
@@ -100,8 +101,8 @@ function set_colour_override( $p_level_file, $p_level_global, $p_level_project )
 
 /**
  * Get the value associated with the specific action and flag.
- * @param int $p_from_status_id from status id
- * @param int $p_to_status_id to status id
+ * @param integer $p_from_status_id From status id.
+ * @param integer $p_to_status_id   To status id.
  * @return string
  */
 function show_flag( $p_from_status_id, $p_to_status_id ) {
@@ -144,7 +145,8 @@ function show_flag( $p_from_status_id, $p_to_status_id ) {
 
 /**
  * section header
- * @param string $p_section_name section name
+ * @param string $p_section_name Section name.
+ * @return void
  */
 function section_begin( $p_section_name ) {
 	$t_enum_statuses = MantisEnum::getValues( config_get( 'status_enum_string' ) );
@@ -174,7 +176,8 @@ function section_begin( $p_section_name ) {
 
 /**
  * Print row
- * @param int $p_from_status from status
+ * @param integer $p_from_status From status.
+ * @return void
  */
 function capability_row( $p_from_status ) {
 	global $t_file_workflow, $t_global_workflow, $t_project_workflow, $t_can_change_workflow;
@@ -206,6 +209,7 @@ function capability_row( $p_from_status ) {
 
 /**
  * section footer
+ * @return void
  */
 function section_end() {
 	echo '</tbody></table></div><br />' . "\n";
@@ -213,7 +217,8 @@ function section_end() {
 
 /**
  * threshold section begin
- * @param string $p_section_name section name
+ * @param string $p_section_name Section name.
+ * @return void
  */
 function threshold_begin( $p_section_name ) {
 	echo '<div class="form-container">';
@@ -231,7 +236,8 @@ function threshold_begin( $p_section_name ) {
 
 /**
  * threshold section row
- * @param string $p_threshold threshold
+ * @param string $p_threshold Threshold.
+ * @return void
  */
 function threshold_row( $p_threshold ) {
 	global $t_access, $t_can_change_flags;
@@ -265,6 +271,7 @@ function threshold_row( $p_threshold ) {
 
 /**
  * threshold section end
+ * @return void
  */
 function threshold_end() {
 	echo '</tbody></table></div><br />' . "\n";
@@ -272,7 +279,8 @@ function threshold_end() {
 
 /**
  * access begin
- * @param string $p_section_name section name
+ * @param string $p_section_name Section name.
+ * @return void
  */
 function access_begin( $p_section_name ) {
 	echo '<div class="form-container">';
@@ -286,6 +294,7 @@ function access_begin( $p_section_name ) {
 
 /**
  * access row
+ * @return void
  */
 function access_row() {
 	global $t_access, $t_can_change_flags;
@@ -304,7 +313,6 @@ function access_row() {
 
 	# Print the table rows
 	foreach( $t_enum_status as $t_status => $t_status_label ) {
-
 		echo "\t\t" . '<tr><td class="width30">'
 			. string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_status ) ) . '</td>' . "\n";
 
@@ -324,7 +332,7 @@ function access_row() {
 			if( isset( $t_file_set[$t_status] ) ) {
 				$t_level_file = $t_file_set[$t_status];
 			} else {
-				$t_level_file = config_get_global('update_bug_status_threshold');
+				$t_level_file = config_get_global( 'update_bug_status_threshold' );
 			}
 
 			$t_level_global  = isset( $t_global_set[$t_status] ) ? $t_global_set[$t_status] : $t_level_file;
@@ -354,6 +362,7 @@ function access_row() {
 
 /**
  * access section end
+ * @return void
  */
 function access_end() {
 	echo '</tbody></table></div><br />' . "\n";
@@ -367,7 +376,7 @@ $t_status_arr  = MantisEnum::getAssocArrayIndexedByValues( $t_enum_status );
 
 $t_extra_enum_status = '0:non-existent,' . $t_enum_status;
 $t_lang_enum_status = '0:' . lang_get( 'non_existent' ) . ',' . lang_get( 'status_enum_string' );
-$t_all_status = explode( ',', $t_extra_enum_status);
+$t_all_status = explode( ',', $t_extra_enum_status );
 
 # gather all versions of the workflow
 $t_file_workflow = workflow_parse( config_get_global( 'status_enum_workflow' ) );
@@ -385,7 +394,7 @@ foreach ( $t_status_arr as $t_status => $t_label ) {
 }
 
 # check for entry == 0 without exit == 0, unreachable state
-foreach ( $t_status_arr as $t_status => $t_status_label) {
+foreach ( $t_status_arr as $t_status => $t_status_label ) {
 	if( ( 0 == count( $t_project_workflow['entry'][$t_status] ) ) && ( 0 < count( $t_project_workflow['exit'][$t_status] ) ) ){
 		$t_validation_result .= '<tr><td>'
 						. MantisEnum::getLabel( $t_lang_enum_status, $t_status )
@@ -411,8 +420,8 @@ foreach ( $t_status_arr as $t_status => $t_status_label ) {
 	}
 }
 
-$t_colour_project = config_get( 'colour_project');
-$t_colour_global = config_get( 'colour_global');
+$t_colour_project = config_get( 'colour_project' );
+$t_colour_global = config_get( 'colour_global' );
 
 echo "<form name=\"workflow_config_action\" method=\"post\" action=\"manage_config_workflow_set.php\">\n";
 echo form_security_field( 'manage_config_workflow_set' );
@@ -420,7 +429,7 @@ echo form_security_field( 'manage_config_workflow_set' );
 if( ALL_PROJECTS == $t_project ) {
 	$t_project_title = lang_get( 'config_all_projects' );
 } else {
-	$t_project_title = sprintf( lang_get( 'config_project' ) , string_display( project_get_name( $t_project ) ) );
+	$t_project_title = sprintf( lang_get( 'config_project' ), string_display( project_get_name( $t_project ) ) );
 }
 echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
 echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
@@ -456,7 +465,7 @@ $t_reopen_label = MantisEnum::getLabel( lang_get( 'resolution_enum_string' ), co
 
 # display the graph as a matrix
 section_begin( lang_get( 'workflow' ) );
-foreach ( $t_status_arr as $t_from_status => $t_from_label) {
+foreach ( $t_status_arr as $t_from_status => $t_from_label ) {
 	capability_row( $t_from_status );
 }
 section_end();

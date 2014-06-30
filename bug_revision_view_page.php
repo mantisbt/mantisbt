@@ -95,10 +95,10 @@ if( $f_bug_id ) {
 /**
  * Show Bug revision
  *
- * @param array $p_revision Bug Revision Data
+ * @param array $p_revision Bug Revision Data.
  * @return null
  */
-function show_revision( $p_revision ) {
+function show_revision( array $p_revision ) {
 	static $s_can_drop = null;
 	static $s_drop_token = null;
 	static $s_user_access = null;

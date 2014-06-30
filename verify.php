@@ -50,8 +50,8 @@ if( OFF == config_get( 'allow_signup' ) &&
 	trigger_error( ERROR_LOST_PASSWORD_NOT_ENABLED, ERROR );
 }
 
-$f_user_id = gpc_get_string('id');
-$f_confirm_hash = gpc_get_string('confirm_hash');
+$f_user_id = gpc_get_string( 'id' );
+$f_confirm_hash = gpc_get_string( 'confirm_hash' );
 
 # force logout on the current user if already authenticated
 if( auth_is_user_authenticated() ) {

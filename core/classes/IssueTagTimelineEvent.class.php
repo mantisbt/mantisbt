@@ -32,6 +32,13 @@ class IssueTagTimelineEvent extends TimelineEvent {
 	private $tag_name;
 	private $tag;
 
+	/**
+	 * @param integer $p_timestamp Timestamp representing the time the event occurred.
+	 * @param integer $p_user_id   An user identifier.
+	 * @param integer $p_issue_id  A issue identifier.
+	 * @param string  $p_tag_name  Tag name linked to the issue.
+	 * @param boolean $p_tag       Whether tag was being linked or unlinked from the issue.
+	 */
 	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_tag_name, $p_tag ) {
 		parent::__construct( $p_timestamp, $p_user_id, $p_issue_id );
 
@@ -40,6 +47,10 @@ class IssueTagTimelineEvent extends TimelineEvent {
 		$this->tag = $p_tag;
 	}
 
+	/**
+	 * Returns html string to display
+	 * @return string
+	 */
 	public function html() {
 		$t_string = $this->tag ? lang_get( 'timeline_issue_tagged' ) : lang_get( 'timeline_issue_tagged' );
 

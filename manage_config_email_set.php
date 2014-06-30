@@ -49,7 +49,7 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
-form_security_validate('manage_config_email_set');
+form_security_validate( 'manage_config_email_set' );
 
 auth_reauthenticate();
 
@@ -173,7 +173,7 @@ if( isset( $t_notify_flags ) ) {
 	}
 }
 
-form_security_purge('manage_config_email_set');
+form_security_purge( 'manage_config_email_set' );
 
 html_operation_successful( $t_redirect_url );
 

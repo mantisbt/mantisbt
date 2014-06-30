@@ -144,7 +144,7 @@ $t_priority = string_display_line( get_enum_element( 'priority', $t_bug->priorit
 $t_resolution = string_display_line( get_enum_element( 'resolution', $t_bug->resolution ) );
 $t_product_build = string_display_line( $t_bug->build );
 $t_projection = string_display_line( get_enum_element( 'projection', $t_bug->projection ) );
-$t_eta = string_display_line ( get_enum_element( 'eta', $t_bug->eta ) );
+$t_eta = string_display_line( get_enum_element( 'eta', $t_bug->eta ) );
 $t_summary = string_display_line_links( bug_format_summary( $f_bug_id, SUMMARY_FIELD ) );
 $t_description = string_display_links( $t_bug->description );
 $t_steps_to_reproduce = string_display_links( $t_bug->steps_to_reproduce );
@@ -516,7 +516,7 @@ if( $t_show_attachments ) {
 	$t_first_attachment = true;
 	$t_path = config_get_global( 'path' );
 
-	foreach ( $t_attachments as $t_attachment  ) {
+	foreach ( $t_attachments as $t_attachment ) {
 		if( $t_first_attachment ) {
 			$t_first_attachment = false;
 		} else {

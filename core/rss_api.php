@@ -45,8 +45,8 @@ require_api( 'user_api.php' );
  * Calculates a key to be used for RSS authentication based on user name,
  * cookie and password. If the user changes their user name or password, this
  * RSS authentication key will become invalidated.
- * @param int $p_user_id User ID for the user which the key is being calculated for
- * @return string RSS authentication key (384bit) encoded according to the base64 with URI safe alphabet approach described in RFC4648
+ * @param integer $p_user_id User ID for the user which the key is being calculated for.
+ * @return string RSS authentication key (384bit) encoded according to the base64 with URI safe alphabet approach described in RFC4648.
  */
 function rss_calculate_key( $p_user_id = null ) {
 	if( $p_user_id === null ) {
@@ -71,12 +71,12 @@ function rss_calculate_key( $p_user_id = null ) {
 /**
  * Given the user name and the rss key, this method attempts to login the user.  If successful, it
  * return true, otherwise, returns false.
- * @param string $p_username
- * @param string $p_key
- * @return bool
+ * @param string $p_username A user name to attempt to login as.
+ * @param string $p_key      The RSS key to use for the given user.
+ * @return boolean
  */
 function rss_login( $p_username, $p_key ) {
-	if(( $p_username === null ) || ( $p_key === null ) ) {
+	if( ( $p_username === null ) || ( $p_key === null ) ) {
 		return false;
 	}
 
@@ -99,11 +99,11 @@ function rss_login( $p_username, $p_key ) {
 }
 
 /**
- * return rss issues feed url
- * @param int $p_project_id
- * @param string $p_username
- * @param int $p_filter_id
- * @param bool $p_relative
+ * return RSS issues feed URL
+ * @param integer $p_project_id The project identifier to retrieve the news feed URL for.
+ * @param string  $p_username   The user name accessing the news feed.
+ * @param integer $p_filter_id  The filter identifier to generate a URL for.
+ * @param boolean $p_relative   Whether to return relative links.
  * @return string
  */
 function rss_get_issues_feed_url( $p_project_id = null, $p_username = null, $p_filter_id = null, $p_relative = true ) {
@@ -116,7 +116,7 @@ function rss_get_issues_feed_url( $p_project_id = null, $p_username = null, $p_f
 	if( $p_project_id === null ) {
 		$t_project_id = helper_get_current_project();
 	} else {
-		$t_project_id = (integer) $p_project_id;
+		$t_project_id = (integer)$p_project_id;
 	}
 
 	$t_user_id = user_get_id_by_name( $t_username );
@@ -149,10 +149,10 @@ function rss_get_issues_feed_url( $p_project_id = null, $p_username = null, $p_f
 }
 
 /**
- * return rss news feed url
- * @param int $p_project_id
- * @param string $p_username
- * @param bool $p_relative
+ * return RSS news feed URL
+ * @param integer $p_project_id The project identifier to retrieve the news feed URL for.
+ * @param string  $p_username   The user name accessing the news feed.
+ * @param boolean $p_relative   Whether to return relative links.
  * @return string
  */
 function rss_get_news_feed_url( $p_project_id = null, $p_username = null, $p_relative = true ) {
@@ -165,7 +165,7 @@ function rss_get_news_feed_url( $p_project_id = null, $p_username = null, $p_rel
 	if( $p_project_id === null ) {
 		$t_project_id = helper_get_current_project();
 	} else {
-		$t_project_id = (integer) $p_project_id;
+		$t_project_id = (integer)$p_project_id;
 	}
 
 	if( $p_relative ) {

@@ -106,7 +106,7 @@ require_api( 'lang_api.php' );
 <?php
 	}
 
-	if( config_get('time_tracking_enabled') ) {
+	if( config_get( 'time_tracking_enabled' ) ) {
 		if( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $f_bug_id ) ) {
 ?>
 			<tr>

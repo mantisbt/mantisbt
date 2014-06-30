@@ -265,12 +265,12 @@ $c_filter['my_comments'] = array(
 );
 
 $url_link_parameters['my_comments'] = FILTER_PROPERTY_NOTE_USER_ID. '=' . META_FILTER_MYSELF . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
-$rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $c_filter[$t_box_title] );
+$t_rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $c_filter[$t_box_title] );
 
 # Improve performance by caching category data in one pass
 if( helper_get_current_project() == 0 ) {
 	$t_categories = array();
-	foreach( $rows as $t_row ) {
+	foreach( $t_rows as $t_row ) {
 		$t_categories[] = $t_row->category_id;
 	}
 
@@ -295,9 +295,9 @@ $box_title = lang_get( 'my_view_title_' . $t_box_title );
 <?php
 print_link( html_entity_decode( config_get( 'bug_count_hyperlink_prefix' ) ).'&' . $url_link_parameters[$t_box_title], $box_title, false, 'subtle' );
 
-if( count( $rows ) > 0 ) {
+if( count( $t_rows ) > 0 ) {
 	$v_start = $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] * ( $f_page_number - 1 ) + 1;
-	$v_end = $v_start + count( $rows ) - 1;
+	$v_end = $v_start + count( $t_rows ) - 1;
 }
 else {
 	$v_start = 0;
@@ -310,12 +310,12 @@ echo " <span class=\"my-buglist-count\">($v_start - $v_end / $t_bug_count)</span
 </thead><tbody>
 <?php
 # -- Loop over bug rows and create $v_* variables --
-$t_count = count( $rows );
+$t_count = count( $t_rows );
 if( $t_count == 0 ) {
 	echo '<tr><td>&#160;</td></tr>';
 }
 for( $i = 0;$i < $t_count; $i++ ) {
-	$t_bug = $rows[$i];
+	$t_bug = $t_rows[$i];
 
 	$t_summary = string_display_line_links( $t_bug->summary );
 	$t_last_updated = date( config_get( 'normal_date_format' ), $t_bug->last_updated );
@@ -327,7 +327,7 @@ for( $i = 0;$i < $t_count; $i++ ) {
 	$t_attachment_count = 0;
 	# TODO: factor in the allow_view_own_attachments configuration option
 	# instead of just using a global check.
-	if(( file_can_view_bug_attachments( $t_bug->id, null ) ) ) {
+	if( ( file_can_view_bug_attachments( $t_bug->id, null ) ) ) {
 		$t_attachment_count = file_bug_attachment_count( $t_bug->id );
 	}
 
@@ -410,5 +410,5 @@ for( $i = 0;$i < $t_count; $i++ ) {
 </table>
 <?php
 # Free the memory allocated for the rows in this box since it is not longer needed.
-unset( $rows );
+unset( $t_rows );
 

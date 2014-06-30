@@ -125,7 +125,7 @@ $t_query = "SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_i
 $t_result = db_query_bound( $t_query, $t_show_all ? array( $t_user ) : array( $t_user , $t_resolved ) );
 
 $t_sponsors = array();
-while ( $t_row = db_fetch_array( $t_result ) ) {
+while( $t_row = db_fetch_array( $t_result ) ) {
 	$t_sponsors[] = $t_row;
 }
 
@@ -160,7 +160,7 @@ if( $t_sponsor_count === 0 ) {
 <?php
 	$t_total_owing = 0;
 	$t_total_paid = 0;
-	for ( $i = 0; $i < $t_sponsor_count; ++$i ) {
+	for( $i = 0; $i < $t_sponsor_count; ++$i ) {
 		$t_sponsor_row = $t_sponsors[$i];
 		$t_bug = bug_get( $t_sponsor_row['bug'] );
 		$t_sponsor = sponsorship_get( $t_sponsor_row['sponsor'] );
@@ -176,9 +176,9 @@ if( $t_sponsor_count === 0 ) {
 		}
 
 		# choose color based on status
-		$status_label = html_get_status_css_class( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
+		$t_status_label = html_get_status_css_class( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
 
-		echo '<tr class="' . $status_label .  '">';
+		echo '<tr class="' . $t_status_label .  '">';
 		echo '<td><a href="' . string_get_bug_view_url( $t_sponsor_row['bug'] ) . '">' . bug_format_id( $t_sponsor_row['bug'] ) . '</a></td>';
 		echo '<td>' . string_display_line( project_get_field( $t_bug->project_id, 'name' ) ) . '&#160;</td>';
 		echo '<td class="right">' . $t_released_label . '&#160;</td>';
@@ -241,7 +241,7 @@ $t_query = "SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_i
 $t_result = db_query_bound( $t_query, $t_show_all ? array( $t_user ) : array( $t_user , $t_resolved ) );
 
 $t_sponsors = array();
-while ( $t_row = db_fetch_array( $t_result ) ) {
+while( $t_row = db_fetch_array( $t_result ) ) {
 	$t_sponsors[] = $t_row;
 }
 
@@ -278,7 +278,7 @@ if( $t_sponsor_count === 0 ) {
 	$t_bug_list = array();
 	$t_total_owing = 0;
 	$t_total_paid = 0;
-	for ( $i = 0; $i < $t_sponsor_count; ++$i ) {
+	for( $i = 0; $i < $t_sponsor_count; ++$i ) {
 		$t_sponsor_row = $t_sponsors[$i];
 		$t_bug = bug_get( $t_sponsor_row['bug'] );
 		$t_sponsor = sponsorship_get( $t_sponsor_row['sponsor'] );
@@ -295,9 +295,9 @@ if( $t_sponsor_count === 0 ) {
 		}
 
 		# choose color based on status
-		$status_label = html_get_status_css_class( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
+		$t_status_label = html_get_status_css_class( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
 
-		echo '<tr class="' . $status_label .  '">';
+		echo '<tr class="' . $t_status_label .  '">';
 		echo '<td><a href="' . string_get_bug_view_url( $t_sponsor_row['bug'] ) . '">' . bug_format_id( $t_sponsor_row['bug'] ) . '</a></td>';
 		echo '<td>' . string_display_line( project_get_field( $t_bug->project_id, 'name' ) ) . '&#160;</td>';
 		echo '<td class="right">' . $t_released_label . '&#160;</td>';
@@ -315,7 +315,7 @@ if( $t_sponsor_count === 0 ) {
 		print_user( $t_sponsor->user_id );
 		echo '</td>';
 		echo '<td class="right">' . sponsorship_format_amount( $t_sponsor->amount ) . '</td>';
-		echo '<td><select name="sponsor_' . $row['bug'] . '_' . $t_sponsor->id . '">';
+		echo '<td><select name="sponsor_' . $t_row['bug'] . '_' . $t_sponsor->id . '">';
 		print_enum_string_option_list( 'sponsorship', $t_sponsor->paid );
 		echo '</select></td>';
 
@@ -359,7 +359,7 @@ if( $t_sponsor_count === 0 ) {
 <br />
 <div>
 <?php
-html_button ( 'account_sponsor_page.php',
+html_button( 'account_sponsor_page.php',
 	lang_get( ( $t_show_all ? 'sponsor_hide' : 'sponsor_show' ) ),
 	array( 'show_all' => ( $t_show_all ? 0 : 1 ) ) );
 ?>

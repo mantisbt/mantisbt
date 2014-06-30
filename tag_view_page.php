@@ -70,7 +70,7 @@ html_page_top( sprintf( lang_get( 'tag_details' ), $t_name ) ); ?>
 <div id="tag-view-div" class="form-container">
 	<h2><?php echo sprintf( lang_get( 'tag_details' ), $t_name ) ?></h2>
 	<div class="section-link">
-		<?php print_bracket_link( 'search.php?tag_string='.urlencode($t_tag_row['name']), sprintf( lang_get( 'tag_filter_default' ), tag_stats_attached( $f_tag_id ) ) ); ?>
+		<?php print_bracket_link( 'search.php?tag_string='.urlencode( $t_tag_row['name'] ), sprintf( lang_get( 'tag_filter_default' ), tag_stats_attached( $f_tag_id ) ) ); ?>
 	</div>
 	<div class="field-container">
 		<span class="display-label"><span><?php echo lang_get( 'tag_id' ) ?></span></span>
@@ -84,7 +84,7 @@ html_page_top( sprintf( lang_get( 'tag_details' ), $t_name ) ); ?>
 	</div>
 	<div class="field-container">
 		<span class="display-label"><span><?php echo lang_get( 'tag_creator' ) ?></span></span>
-		<span class="display-value"><span><?php echo string_display_line( user_get_name($t_tag_row['user_id']) ) ?></span></span>
+		<span class="display-value"><span><?php echo string_display_line( user_get_name( $t_tag_row['user_id'] ) ) ?></span></span>
 		<span class="label-style"></span>
 	</div>
 	<div class="field-container">
@@ -118,7 +118,7 @@ html_page_top( sprintf( lang_get( 'tag_details' ), $t_name ) ); ?>
 			$t_name = string_display_line( $t_tag['name'] );
 			$t_description = string_display_line( $t_tag['description'] );
 			$t_count = $t_tag['count'];
-			$t_link = string_html_specialchars( 'search.php?tag_string='.urlencode("+$t_tag_row[name]".config_get('tag_separator')."+$t_name") );
+			$t_link = string_html_specialchars( 'search.php?tag_string='.urlencode( "+$t_tag_row[name]" . config_get( 'tag_separator' ) . "+$t_name" ) );
 			$t_label = sprintf( lang_get( 'tag_related_issues' ), $t_tag['count'] ); ?>
 			<tr>
 				<td><span class="tag-link"><a href="tag_view_page.php?tag_id=<?php echo $t_tag['id']; ?>" title="<?php echo $t_description; ?>"><?php echo $t_name; ?></a></span></td>

@@ -39,11 +39,11 @@ if( $f_to !== null ) {
 		echo "Done";
 	} else if( $f_to == 'sendordelall' ) {
 		echo "Sending or deleting emails...<br />";
-		email_send_all(true);
+		email_send_all( true );
 		echo "Done";
 
 	} else {
-		$t_email_data = email_queue_get( (int) $f_to );
+		$t_email_data = email_queue_get( (int)$f_to );
 
 		# check if email was found.  This can fail if another request picks up the email first and sends it.
 		echo 'Sending email...<br />';
@@ -63,16 +63,15 @@ if( $f_to !== null ) {
 $t_ids = email_queue_get_ids();
 
 if( count( $t_ids ) > 0 ) {
-
-	echo '<table><tr><th>' . lang_get('id') . '</th><th>' . lang_get('email') . '</th><th>' . lang_get('timestamp') . '</th><th>Send Or Delete</th></tr>';
+	echo '<table><tr><th>' . lang_get( 'id' ) . '</th><th>' . lang_get( 'email' ) . '</th><th>' . lang_get( 'timestamp' ) . '</th><th>Send Or Delete</th></tr>';
 	foreach( $t_ids as $t_id ) {
-		$row = email_queue_get( $t_id );
+		$t_row = email_queue_get( $t_id );
 
 		echo '<tr><td>'
-			. $row->email_id . '</td><td>'
-			. $row->email . '</td><td>'
-			. date( config_get( 'complete_date_format' ), $row->submitted ) . '</td><td>'
-			, html_button( 'email_queue.php', 'Send Or Delete', array( 'send' => $row->email_id ) )
+			. $t_row->email_id . '</td><td>'
+			. $t_row->email . '</td><td>'
+			. date( config_get( 'complete_date_format' ), $t_row->submitted ) . '</td><td>'
+			, html_button( 'email_queue.php', 'Send Or Delete', array( 'send' => $t_row->email_id ) )
 			, '</td></tr>';
 	}
 	echo '</table>';

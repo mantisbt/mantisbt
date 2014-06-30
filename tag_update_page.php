@@ -99,7 +99,7 @@ html_page_top( sprintf( lang_get( 'tag_update' ), $t_name ) );
 						echo '</select></span>';
 					} else { ?>
 						<span class="display-label"><span><?php echo lang_get( 'tag_creator' ); ?></span></span>
-						<span class="display-value"><span><?php echo string_display_line( user_get_name($t_tag_row['user_id']) ); ?></span></span><?php
+						<span class="display-value"><span><?php echo string_display_line( user_get_name( $t_tag_row['user_id'] ) ); ?></span></span><?php
 					} ?>
 				<span class="label-style"></span>
 			</div>

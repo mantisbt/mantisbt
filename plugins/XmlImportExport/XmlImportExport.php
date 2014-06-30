@@ -27,11 +27,11 @@
  * XmlImportExportPlugin Class
  */
 class XmlImportExportPlugin extends MantisPlugin {
-
 	/**
-	 *  A method that populates the plugin information and minimum requirements.
+	 * A method that populates the plugin information and minimum requirements.
+	 * @return void
 	 */
-	function register( ) {
+	function register() {
 		$this->name = plugin_lang_get( 'title' );
 		$this->description = plugin_lang_get( 'description' );
 		$this->page = '';
@@ -48,36 +48,40 @@ class XmlImportExportPlugin extends MantisPlugin {
 
 	/**
 	 * Default plugin configuration.
+	 * @return array
 	 */
-	function hooks( ) {
-		$hooks = array(
+	function hooks() {
+		$t_hooks = array(
 			'EVENT_MENU_MANAGE' => 'import_issues_menu',
 			'EVENT_MENU_FILTER' => 'export_issues_menu',
 		);
-		return $hooks;
+		return $t_hooks;
 	}
 
 	/**
 	 * Import Issues Menu
+	 * @return array
 	 */
-	function import_issues_menu( ) {
+	function import_issues_menu() {
 		return array( '<a href="' . plugin_page( 'import' ) . '">' . plugin_lang_get( 'import' ) . '</a>', );
 	}
 
 	/**
 	 * Export Issues Menu
+	 * @return array
 	 */
-	function export_issues_menu( ) {
+	function export_issues_menu() {
 		return array( '<a href="' . plugin_page( 'export' ) . '">' . plugin_lang_get( 'export' ) . '</a>', );
 	}
 
 	/**
 	 * Plugin Installation
+	 * @return boolean
 	 */
 	function install() {
-		$t_result = extension_loaded("xmlreader") && extension_loaded("xmlwriter");
-		if( ! $t_result ) {
-			#\todo returning false should trigger some error reporting, needs rethinking error_api
+		$t_result = extension_loaded( 'xmlreader' ) && extension_loaded( 'xmlwriter' );
+		if( !$t_result ) {
+			# @todo returning false should trigger some error reporting, needs rethinking error_api
 			error_parameters( plugin_lang_get( 'error_no_xml' ) );
 			trigger_error( ERROR_PLUGIN_INSTALL_FAILED, ERROR );
 		}

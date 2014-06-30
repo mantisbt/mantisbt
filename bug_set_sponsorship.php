@@ -94,12 +94,12 @@ if( $f_amount == 0 ) {
 	if( is_blank( user_get_email( $t_user ) ) ) {
 		trigger_error( ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL, ERROR );
 	} else {
-		$sponsorship = new SponsorshipData;
-		$sponsorship->bug_id = $f_bug_id;
-		$sponsorship->user_id = $t_user;
-		$sponsorship->amount = $f_amount;
+		$t_sponsorship = new SponsorshipData;
+		$t_sponsorship->bug_id = $f_bug_id;
+		$t_sponsorship->user_id = $t_user;
+		$t_sponsorship->amount = $f_amount;
 
-		sponsorship_set( $sponsorship );
+		sponsorship_set( $t_sponsorship );
 	}
 }
 

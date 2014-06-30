@@ -34,7 +34,7 @@ echo '<br />';
 
 print_summary_submenu();
 $t_width = plugin_config_get( 'window_width' );
-$t_graph_width = (int) ( ( $t_width - 50 ) * 0.6 );
+$t_graph_width = (int)( ( $t_width - 50 ) * 0.6 );
 
 # gather the data for the graphs
 $t_metrics = create_bug_enum_summary( lang_get( 'status_enum_string' ), 'status' );
@@ -50,12 +50,12 @@ $t_token = token_set( TOKEN_GRAPH, serialize( $t_metrics ) );
 </tr>
 <tr>
 	<td class="center">
-		 <img src="<?php echo plugin_page( 'summary_graph_bystatus.php')?>&amp;width=<?php echo $t_graph_width?>" alt="" />
+		 <img src="<?php echo plugin_page( 'summary_graph_bystatus.php' )?>&amp;width=<?php echo $t_graph_width?>" alt="" />
 	</td>
 </tr>
 <tr>
 	<td class="center">
-		<img src="<?php echo plugin_page( 'summary_graph_bystatus_pct.php')?>&amp;width=<?php echo $t_graph_width?>" alt="" />
+		<img src="<?php echo plugin_page( 'summary_graph_bystatus_pct.php' )?>&amp;width=<?php echo $t_graph_width?>" alt="" />
 	</td>
 </tr>
 </table>

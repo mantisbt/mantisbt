@@ -52,7 +52,7 @@ $g_cache_file_count = array();
 
 /**
  * Gets the filename without the bug id prefix.
- * @param string $p_filename filename
+ * @param string $p_filename Filename.
  * @return string
  */
 function file_get_display_name( $p_filename ) {
@@ -77,8 +77,8 @@ function file_get_display_name( $p_filename ) {
 
 /**
  * Check the number of attachments a bug has (if any)
- * @param int $p_bug_id bug id
- * @return int
+ * @param integer $p_bug_id A bug identifier.
+ * @return integer
  */
 function file_bug_attachment_count( $p_bug_id ) {
 	global $g_cache_file_count;
@@ -122,8 +122,8 @@ function file_bug_attachment_count( $p_bug_id ) {
 
 /**
  * Check if a specific bug has attachments
- * @param int $p_bug_id bug id
- * @return bool
+ * @param integer $p_bug_id A bug identifier.
+ * @return boolean
  */
 function file_bug_has_attachments( $p_bug_id ) {
 	if( file_bug_attachment_count( $p_bug_id ) > 0 ) {
@@ -135,9 +135,9 @@ function file_bug_has_attachments( $p_bug_id ) {
 
 /**
  * Check if the current user can view attachments for the specified bug.
- * @param int $p_bug_id bug id
- * @param int $p_uploader_user_id user id
- * @return bool
+ * @param integer $p_bug_id           A bug identifier.
+ * @param integer $p_uploader_user_id An user identifier.
+ * @return boolean
  */
 function file_can_view_bug_attachments( $p_bug_id, $p_uploader_user_id = null ) {
 	$t_uploaded_by_me = auth_get_current_user_id() === $p_uploader_user_id;
@@ -148,9 +148,9 @@ function file_can_view_bug_attachments( $p_bug_id, $p_uploader_user_id = null ) 
 
 /**
  * Check if the current user can download attachments for the specified bug.
- * @param int $p_bug_id bug id
- * @param int $p_uploader_user_id user id
- * @return bool
+ * @param integer $p_bug_id           A bug identifier.
+ * @param integer $p_uploader_user_id An user identifier.
+ * @return boolean
  */
 function file_can_download_bug_attachments( $p_bug_id, $p_uploader_user_id = null ) {
 	$t_uploaded_by_me = auth_get_current_user_id() === $p_uploader_user_id;
@@ -161,9 +161,9 @@ function file_can_download_bug_attachments( $p_bug_id, $p_uploader_user_id = nul
 
 /**
  * Check if the current user can delete attachments from the specified bug.
- * @param int $p_bug_id bug id
- * @param int $p_uploader_user_id user id
- * @return bool
+ * @param integer $p_bug_id           A bug identifier.
+ * @param integer $p_uploader_user_id An user identifier.
+ * @return boolean
  */
 function file_can_delete_bug_attachments( $p_bug_id, $p_uploader_user_id = null ) {
 	if( bug_is_readonly( $p_bug_id ) ) {
@@ -178,33 +178,30 @@ function file_can_delete_bug_attachments( $p_bug_id, $p_uploader_user_id = null 
 /**
  * Get icon corresponding to the specified filename
  * returns an associative array with "url" and "alt" text.
- * @param string $p_display_filename filename
+ * @param string $p_display_filename Filename.
  * @return array
  */
 function file_get_icon_url( $p_display_filename ) {
 	$t_file_type_icons = config_get( 'file_type_icons' );
 
-	$ext = utf8_strtolower( pathinfo( $p_display_filename, PATHINFO_EXTENSION ) );
-	if( is_blank( $ext ) || !isset( $t_file_type_icons[$ext] ) ) {
-		$ext = '?';
+	$t_ext = utf8_strtolower( pathinfo( $p_display_filename, PATHINFO_EXTENSION ) );
+	if( is_blank( $t_ext ) || !isset( $t_file_type_icons[$t_ext] ) ) {
+		$t_ext = '?';
 	}
 
-	$t_name = $t_file_type_icons[$ext];
-	return array( 'url' => config_get( 'icon_path' ) . 'fileicons/' . $t_name, 'alt' => $ext );
+	$t_name = $t_file_type_icons[$t_ext];
+	return array( 'url' => config_get( 'icon_path' ) . 'fileicons/' . $t_name, 'alt' => $t_ext );
 }
 
 /**
  * Combines a path and a file name making sure that the separator exists.
  *
- * @param string $p_path       The path.
- * @param string $p_filename   The file name.
+ * @param string $p_path     The path.
+ * @param string $p_filename The file name.
  * @return string The combined full path.
  */
 function file_path_combine( $p_path, $p_filename ) {
-	$t_path = $p_path;
-	if( utf8_substr( $t_path, -1 ) != '/' && utf8_substr( $t_path, -1 ) != '\\' ) {
-		$t_path .= DIRECTORY_SEPARATOR;
-	}
+	$t_path = rtrim( $p_path, '/\\' ) . DIRECTORY_SEPARATOR;
 
 	$t_path .= $p_filename;
 
@@ -219,8 +216,8 @@ function file_path_combine( $p_path, $p_filename ) {
  * 4. If disk file does not include a path, then return expected path based on project path or default path.
  * 5. Otherwise return as is.
  *
- * @param string $p_diskfile  The disk file (full path or just filename).
- * @param int $p_project_id The project id - shouldn't be 0 (ALL_PROJECTS).
+ * @param string  $p_diskfile   The disk file (full path or just filename).
+ * @param integer $p_project_id The project id - shouldn't be 0 (ALL_PROJECTS).
  * @return string The normalized full path.
  */
 function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
@@ -286,7 +283,7 @@ function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
  * type - Can be "image", "text" or empty for other types.
  * alt - The alternate text to be associated with the icon.
  * icon - array with icon information, contains 'url' and 'alt' elements.
- * @param int $p_bug_id bug id
+ * @param integer $p_bug_id A bug identifier.
  * @return array
  */
 function file_get_visible_attachments( $p_bug_id ) {
@@ -303,7 +300,7 @@ function file_get_visible_attachments( $p_bug_id ) {
 	$t_preview_text_ext = config_get( 'preview_text_extensions' );
 	$t_preview_image_ext = config_get( 'preview_image_extensions' );
 
-	$image_previewed = false;
+	$t_image_previewed = false;
 	for( $i = 0;$i < $t_attachments_count;$i++ ) {
 		$t_row = $t_attachment_rows[$i];
 
@@ -331,8 +328,8 @@ function file_get_visible_attachments( $p_bug_id ) {
 			$t_attachment['download_url'] = "file_download.php?file_id=$t_id&type=bug";
 		}
 
-		if( $image_previewed ) {
-			$image_previewed = false;
+		if( $t_image_previewed ) {
+			$t_image_previewed = false;
 		}
 
 		$t_attachment['exists'] = config_get( 'file_upload_method' ) != DISK || file_exists( $t_diskfile );
@@ -362,38 +359,34 @@ function file_get_visible_attachments( $p_bug_id ) {
 
 /**
  * delete all files that are associated with the given bug
- * @param int $p_bug_id bug id
- * @return bool
+ * @param integer $p_bug_id A bug identifier.
+ * @return boolean
  */
 function file_delete_attachments( $p_bug_id ) {
 	$t_method = config_get( 'file_upload_method' );
 
 	# Delete files from disk
 	$t_bug_file_table = db_get_table( 'bug_file' );
-	$query = "SELECT diskfile, filename
-				FROM $t_bug_file_table
-				WHERE bug_id=" . db_param();
-	$t_result = db_query_bound( $query, array( $p_bug_id ) );
+	$t_query = "SELECT diskfile, filename FROM $t_bug_file_table WHERE bug_id=" . db_param();
+	$t_result = db_query_bound( $t_query, array( $p_bug_id ) );
 
-	$file_count = db_num_rows( $t_result );
-	if( 0 == $file_count ) {
+	$t_file_count = db_num_rows( $t_result );
+	if( 0 == $t_file_count ) {
 		return true;
 	}
 
 	if( DISK == $t_method ) {
+		for( $i = 0; $i < $t_file_count; $i++ ) {
+			$t_row = db_fetch_array( $t_result );
 
-		for( $i = 0;$i < $file_count;$i++ ) {
-			$row = db_fetch_array( $t_result );
-
-			$t_local_diskfile = file_normalize_attachment_path( $row['diskfile'], bug_get_field( $p_bug_id, 'project_id' ) );
+			$t_local_diskfile = file_normalize_attachment_path( $t_row['diskfile'], bug_get_field( $p_bug_id, 'project_id' ) );
 			file_delete_local( $t_local_diskfile );
 		}
 	}
 
 	# Delete the corresponding db records
-	$query = "DELETE FROM $t_bug_file_table
-				  WHERE bug_id=" . db_param();
-	db_query_bound( $query, array( $p_bug_id ) );
+	$t_query = "DELETE FROM $t_bug_file_table WHERE bug_id=" . db_param();
+	db_query_bound( $t_query, array( $p_bug_id ) );
 
 	# db_query_bound() errors on failure so:
 	return true;
@@ -401,7 +394,8 @@ function file_delete_attachments( $p_bug_id ) {
 
 /**
  * Delete files by project
- * @param int $p_project_id project id
+ * @param integer $p_project_id A project identifier.
+ * @return void
  */
 function file_delete_project_files( $p_project_id ) {
 	$t_project_file_table = db_get_table( 'project_file' );
@@ -410,30 +404,28 @@ function file_delete_project_files( $p_project_id ) {
 	# Delete the file physically (if stored via DISK)
 	if( DISK == $t_method ) {
 		# Delete files from disk
-		$query = "SELECT diskfile, filename
-					FROM $t_project_file_table
-					WHERE project_id=" . db_param();
-		$t_result = db_query_bound( $query, array( (int) $p_project_id ) );
+		$t_query = "SELECT diskfile, filename FROM $t_project_file_table WHERE project_id=" . db_param();
+		$t_result = db_query_bound( $t_query, array( (int)$p_project_id ) );
 
-		$file_count = db_num_rows( $t_result );
+		$t_file_count = db_num_rows( $t_result );
 
-		for( $i = 0;$i < $file_count;$i++ ) {
-			$row = db_fetch_array( $t_result );
+		for( $i = 0;$i < $t_file_count;$i++ ) {
+			$t_row = db_fetch_array( $t_result );
 
-			$t_local_diskfile = file_normalize_attachment_path( $row['diskfile'], $p_project_id );
+			$t_local_diskfile = file_normalize_attachment_path( $t_row['diskfile'], $p_project_id );
 			file_delete_local( $t_local_diskfile );
 		}
 	}
 
-	# Delete the corresponding db records
-	$query = "DELETE FROM $t_project_file_table
-				WHERE project_id=" . db_param();
-	db_query_bound( $query, array( (int) $p_project_id ) );
+	# Delete the corresponding database records
+	$t_query = "DELETE FROM $t_project_file_table WHERE project_id=" . db_param();
+	db_query_bound( $t_query, array( (int)$p_project_id ) );
 }
 
 /**
  * Delete a local file even if it is read-only.
- * @param string $p_filename
+ * @param string $p_filename File name.
+ * @return void
  */
 function file_delete_local( $p_filename ) {
 	if( file_exists( $p_filename ) ) {
@@ -444,9 +436,9 @@ function file_delete_local( $p_filename ) {
 
 /**
  * Return the specified field value
- * @param int $p_file_id file id
- * @param string $p_field_name field name
- * @param string $p_table table name
+ * @param integer $p_file_id    File identifier.
+ * @param string  $p_field_name Database field name to retrieve.
+ * @param string  $p_table      Database table name.
  * @return string
  */
 function file_get_field( $p_file_id, $p_field_name, $p_table = 'bug' ) {
@@ -455,17 +447,17 @@ function file_get_field( $p_file_id, $p_field_name, $p_table = 'bug' ) {
 		trigger_error( ERROR_DB_FIELD_NOT_FOUND, ERROR );
 	}
 
-	$query = "SELECT $p_field_name FROM $t_bug_file_table WHERE id=" . db_param();
-	$t_result = db_query_bound( $query, array( (int) $p_file_id ), 1 );
+	$t_query = "SELECT $p_field_name FROM $t_bug_file_table WHERE id=" . db_param();
+	$t_result = db_query_bound( $t_query, array( (int)$p_file_id ), 1 );
 
 	return db_result( $t_result );
 }
 
 /**
  * Delete File
- * @param int $p_file_id file id
- * @param string $p_table table id
- * @return bool
+ * @param integer $p_file_id File identifier.
+ * @param string  $p_table   Table identifier.
+ * @return boolean
  */
 function file_delete( $p_file_id, $p_table = 'bug' ) {
 	$t_upload_method = config_get( 'file_upload_method' );
@@ -494,16 +486,15 @@ function file_delete( $p_file_id, $p_table = 'bug' ) {
 	}
 
 	$t_file_table = db_get_table( $p_table . '_file' );
-	$query = "DELETE FROM $t_file_table
-				WHERE id=" . db_param();
-	db_query_bound( $query, array( $c_file_id ) );
+	$t_query = "DELETE FROM $t_file_table WHERE id=" . db_param();
+	db_query_bound( $t_query, array( $c_file_id ) );
 	return true;
 }
 
 /**
  * File type check
- * @param string $p_file_name filename
- * @return bool
+ * @param string $p_file_name File name.
+ * @return boolean
  */
 function file_type_check( $p_file_name ) {
 	$t_allowed_files = config_get( 'allowed_files' );
@@ -540,7 +531,7 @@ function file_type_check( $p_file_name ) {
 
 /**
  * clean file name by removing sensitive characters and replacing them with underscores
- * @param string $p_filename filename
+ * @param string $p_filename File name.
  * @return string
  */
 function file_clean_name( $p_filename ) {
@@ -551,7 +542,7 @@ function file_clean_name( $p_filename ) {
  * Generate a string to use as the identifier for the file
  * It is not guaranteed to be unique and should be checked
  * The string returned should be 32 characters in length
- * @param string $p_seed
+ * @param string $p_seed Seed.
  * @return string
  */
 function file_generate_name( $p_seed ) {
@@ -561,8 +552,8 @@ function file_generate_name( $p_seed ) {
 /**
  * Generate a UNIQUE string to use as the identifier for the file
  * The string returned should be 64 characters in length
- * @param string $p_seed seed
- * @param string $p_filepath filepath
+ * @param string $p_seed     Seed.
+ * @param string $p_filepath File path.
  * @return string
  */
 function file_generate_unique_name( $p_seed, $p_filepath ) {
@@ -580,9 +571,9 @@ function file_generate_unique_name( $p_seed, $p_filepath ) {
  * This ensures that in case a file has been deleted from disk but its record
  * remains in the DB, we never get in a situation where the DB points to a file
  * which is not the originally uploaded one.
- * @param string $p_name File name
- * @param string $p_filepath File path
- * @return bool true if unique
+ * @param string $p_name     File name.
+ * @param string $p_filepath File path.
+ * @return boolean true if unique
  */
 function diskfile_is_name_unique( $p_name, $p_filepath ) {
 	$t_bug_file_table = db_get_table( 'bug_file' );
@@ -606,17 +597,15 @@ function diskfile_is_name_unique( $p_name, $p_filepath ) {
 /**
  * Validates that the given file name is unique in the given context (we don't
  * allow multiple attachments with the same name for a given bug or project)
- * @param string $p_name File name
- * @param int $p_bug_id Bug ID (not used for project files)
- * @param string $p_table optional file table to check: 'project' or 'bug' (default)
- * @return bool true if unique
+ * @param string  $p_name   File name.
+ * @param integer $p_bug_id A bug identifier (not used for project files).
+ * @param string  $p_table  Optional file table to check: 'project' or 'bug' (default).
+ * @return boolean true if unique
  */
-function file_is_name_unique( $p_name, $p_bug_id, $p_table  = 'bug' ) {
+function file_is_name_unique( $p_name, $p_bug_id, $p_table = 'bug' ) {
 	$t_file_table = db_get_table( "${p_table}_file" );
 
-	$t_query = "SELECT COUNT(*)
-		FROM $t_file_table
-		WHERE filename=" . db_param();
+	$t_query = "SELECT COUNT(*) FROM $t_file_table WHERE filename=" . db_param();
 	$t_param = array( $p_name );
 	if( $p_table == 'bug' ) {
 		$t_query .= " AND bug_id=" . db_param();
@@ -632,17 +621,17 @@ function file_is_name_unique( $p_name, $p_bug_id, $p_table  = 'bug' ) {
 /**
  * Add a file to the system using the configured storage method
  *
- * @param int $p_bug_id the bug id (should be 0 when adding project doc)
- * @param array $p_file the uploaded file info, as retrieved from gpc_get_file()
- * @param string $p_table 'bug' or 'project' depending on attachment type
- * @param string $p_title file title
- * @param string $p_desc file description
- * @param int $p_user_id user id (defaults to current user)
- * @param int $p_date_added date added
- * @param bool $p_skip_bug_update skip bug last modification update (useful when importing bug attachments)
+ * @param integer $p_bug_id          The bug id (should be 0 when adding project doc).
+ * @param array   $p_file            The uploaded file info, as retrieved from gpc_get_file().
+ * @param string  $p_table           Either 'bug' or 'project' depending on attachment type.
+ * @param string  $p_title           File title.
+ * @param string  $p_desc            File description.
+ * @param integer $p_user_id         User id (defaults to current user).
+ * @param integer $p_date_added      Date added.
+ * @param boolean $p_skip_bug_update Skip bug last modification update (useful when importing bug attachments).
+ * @return void
  */
-function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc = '', $p_user_id = null, $p_date_added = 0, $p_skip_bug_update = false ) {
-
+function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p_desc = '', $p_user_id = null, $p_date_added = 0, $p_skip_bug_update = false ) {
 	file_ensure_uploaded( $p_file );
 	$t_file_name = $p_file['name'];
 	$t_tmp_file = $p_file['tmp_name'];
@@ -659,7 +648,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 	if( 0 == $t_file_size ) {
 		trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
 	}
-	$t_max_file_size = (int) min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 	if( $t_file_size > $t_max_file_size ) {
 		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
 	}
@@ -773,6 +762,7 @@ function file_add( $p_bug_id, $p_file, $p_table = 'bug', $p_title = '', $p_desc 
 
 /**
  * Return true if file uploading is enabled (in our config and PHP's), false otherwise
+ * @return boolean
  */
 function file_is_uploading_enabled() {
 	if( ini_get_bool( 'file_uploads' ) && ( ON == config_get( 'allow_file_upload' ) ) ) {
@@ -786,9 +776,9 @@ function file_is_uploading_enabled() {
  * Check if the user can upload files for this project
  * return true if they can, false otherwise
  * the project defaults to the current project and the user to the current user
- * @param int $p_project_id project id
- * @param int $p_user_id user id
- * @return bool
+ * @param integer $p_project_id A project identifier.
+ * @param integer $p_user_id    A user identifier.
+ * @return boolean
  */
 function file_allow_project_upload( $p_project_id = null, $p_user_id = null ) {
 	if( null === $p_project_id ) {
@@ -802,14 +792,14 @@ function file_allow_project_upload( $p_project_id = null, $p_user_id = null ) {
 
 /**
  * Check if the user can upload files for this bug
- *  return true if they can, false otherwise
- *  the user defaults to the current user
+ * return true if they can, false otherwise
+ * the user defaults to the current user
  *
- *  if the bug null (the default) we answer whether the user can
- *   upload a file to a new bug in the current project
- * @param int $p_bug_id Bug id
- * @param int $p_user_id user id
- * @return bool
+ * if the bug null (the default) we answer whether the user can
+ * upload a file to a new bug in the current project
+ * @param integer $p_bug_id  A bug identifier.
+ * @param integer $p_user_id A user identifier.
+ * @return boolean
  */
 function file_allow_bug_upload( $p_bug_id = null, $p_user_id = null ) {
 	if( null === $p_user_id ) {
@@ -822,14 +812,12 @@ function file_allow_bug_upload( $p_bug_id = null, $p_user_id = null ) {
 	}
 
 	if( null === $p_bug_id ) {
-
 		# new bug
 		$t_project_id = helper_get_current_project();
 
 		# the user must be the reporter if they're reporting a new bug
 		$t_reporter = true;
 	} else {
-
 		# existing bug
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 
@@ -837,7 +825,7 @@ function file_allow_bug_upload( $p_bug_id = null, $p_user_id = null ) {
 		$t_reporter = bug_is_user_reporter( $p_bug_id, $p_user_id );
 	}
 
-	# *** If we ever wanted to have a per-project setting enabling file
+	# @todo If we ever wanted to have a per-project setting enabling file
 	#     uploads, we'd want to check it here before exempting the reporter
 
 	if( $t_reporter && ( ON == config_get( 'allow_reporter_upload' ) ) ) {
@@ -850,7 +838,8 @@ function file_allow_bug_upload( $p_bug_id = null, $p_user_id = null ) {
 
 /**
  * checks whether the specified upload path exists and is writable
- * @param string $p_upload_path upload path
+ * @param string $p_upload_path Upload path.
+ * @return void
  */
 function file_ensure_valid_upload_path( $p_upload_path ) {
 	if( !file_exists( $p_upload_path ) || !is_dir( $p_upload_path ) || !is_writable( $p_upload_path ) || !is_readable( $p_upload_path ) ) {
@@ -863,9 +852,10 @@ function file_ensure_valid_upload_path( $p_upload_path ) {
  *
  * This function perform various checks for determining if the upload was successful
  *
- * @param array $p_file the uploaded file info, as retrieved from gpc_get_file()
+ * @param array $p_file The uploaded file info, as retrieved from gpc_get_file().
+ * @return void
  */
-function file_ensure_uploaded( $p_file ) {
+function file_ensure_uploaded( array $p_file ) {
 	switch( $p_file['error'] ) {
 		case UPLOAD_ERR_INI_SIZE:
 		case UPLOAD_ERR_FORM_SIZE:
@@ -879,7 +869,7 @@ function file_ensure_uploaded( $p_file ) {
 			break;
 	}
 
-	if(( '' == $p_file['tmp_name'] ) || ( '' == $p_file['name'] ) ) {
+	if( ( '' == $p_file['tmp_name'] ) || ( '' == $p_file['name'] ) ) {
 		trigger_error( ERROR_FILE_NO_UPLOAD_FAILURE, ERROR );
 	}
 	if( !is_readable( $p_file['tmp_name'] ) ) {
@@ -890,64 +880,60 @@ function file_ensure_uploaded( $p_file ) {
 /**
  * Get file content
  *
- * @param int $p_file_id file id
- * @param string $p_type file type (either 'bug' or 'doc')
- * @return array|bool array containing file type and content or false on failure to retrieve file
+ * @param integer $p_file_id File identifier.
+ * @param string  $p_type    File type (either 'bug' or 'doc').
+ * @return array|boolean array containing file type and content or false on failure to retrieve file
  */
 function file_get_content( $p_file_id, $p_type = 'bug' ) {
 	# we handle the case where the file is attached to a bug
 	# or attached to a project as a project doc.
-	$query = '';
+	$t_query = '';
 	switch ( $p_type ) {
 		case 'bug':
 			$t_bug_file_table = db_get_table( 'bug_file' );
-			$query = "SELECT *
-				FROM $t_bug_file_table
-				WHERE id=" . db_param();
+			$t_query = "SELECT * FROM $t_bug_file_table WHERE id=" . db_param();
 			break;
 		case 'doc':
 			$t_project_file_table = db_get_table( 'project_file' );
-			$query = "SELECT *
-				FROM $t_project_file_table
-				WHERE id=" . db_param();
+			$t_query = "SELECT * FROM $t_project_file_table WHERE id=" . db_param();
 			break;
 		default:
 			return false;
 	}
-	$t_result = db_query_bound( $query, array( $p_file_id ) );
-	$row = db_fetch_array( $t_result );
+	$t_result = db_query_bound( $t_query, array( $p_file_id ) );
+	$t_row = db_fetch_array( $t_result );
 
 	if( $p_type == 'bug' ) {
-		$t_project_id = bug_get_field( $row['bug_id'], 'project_id' );
+		$t_project_id = bug_get_field( $t_row['bug_id'], 'project_id' );
 	} else {
-		$t_project_id = $row['bug_id'];
+		$t_project_id = $t_row['bug_id'];
 	}
 
 	# If finfo is available (always true for PHP >= 5.3.0) we can use it to determine the MIME type of files
-	$finfo_available = false;
+	$t_finfo_available = false;
 	if( class_exists( 'finfo' ) ) {
 		$t_info_file = config_get( 'fileinfo_magic_db_file' );
 
 		if( is_blank( $t_info_file ) ) {
-			$finfo = new finfo( FILEINFO_MIME );
+			$t_finfo = new finfo( FILEINFO_MIME );
 		} else {
-			$finfo = new finfo( FILEINFO_MIME, $t_info_file );
+			$t_finfo = new finfo( FILEINFO_MIME, $t_info_file );
 		}
 
-		if( $finfo ) {
-			$finfo_available = true;
+		if( $t_finfo ) {
+			$t_finfo_available = true;
 		}
 	}
 
-	$t_content_type = $row['file_type'];
+	$t_content_type = $t_row['file_type'];
 
 	switch ( config_get( 'file_upload_method' ) ) {
 		case DISK:
-			$t_local_disk_file = file_normalize_attachment_path( $row['diskfile'], $t_project_id );
+			$t_local_disk_file = file_normalize_attachment_path( $t_row['diskfile'], $t_project_id );
 
 			if( file_exists( $t_local_disk_file ) ) {
-				if( $finfo_available ) {
-					$t_file_info_type = $finfo->file( $t_local_disk_file );
+				if( $t_finfo_available ) {
+					$t_file_info_type = $t_finfo->file( $t_local_disk_file );
 
 					if( $t_file_info_type !== false ) {
 						$t_content_type = $t_file_info_type;
@@ -958,14 +944,14 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 			return false;
 			break;
 		case DATABASE:
-			if( $finfo_available ) {
-				$t_file_info_type = $finfo->buffer( $row['content'] );
+			if( $t_finfo_available ) {
+				$t_file_info_type = $t_finfo->buffer( $t_row['content'] );
 
 				if( $t_file_info_type !== false ) {
 					$t_content_type = $t_file_info_type;
 				}
 			}
-			return array( 'type' => $t_content_type, 'content' => $row['content'] );
+			return array( 'type' => $t_content_type, 'content' => $t_row['content'] );
 			break;
 		default:
 			trigger_error( ERROR_GENERIC, ERROR );
@@ -975,9 +961,9 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 /**
  * Move any attachments as needed when a bug is moved from project to project.
  *
- * @param int $p_bug_id ID of bug containing attachments to be moved
- * @param int $p_project_id_to destination project ID for the bug
- * @return null
+ * @param integer $p_bug_id        ID of bug containing attachments to be moved.
+ * @param integer $p_project_id_to Destination project ID for the bug.
+ * @return void
  *
  * @todo: this function can't cope with source or target storing attachments in DB
  */
@@ -1013,7 +999,7 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 	# Initialize the update query to update a single row
 	$c_bug_id = (int)$p_bug_id;
 	$t_bug_file_table = db_get_table( 'bug_file' );
-	$query_disk_attachment_update = "UPDATE $t_bug_file_table
+	$t_query_disk_attachment_update = "UPDATE $t_bug_file_table
 	                                 SET folder=" . db_param() . "
 	                                 WHERE bug_id=" . db_param() . "
 	                                 AND id =" . db_param();
@@ -1036,7 +1022,7 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 				file_delete_local( $t_disk_file_name_from );
 			}
 			chmod( $t_disk_file_name_to, config_get( 'attachments_file_permissions' ) );
-			db_query_bound( $query_disk_attachment_update, array( db_prepare_string( $t_path_to ), $c_bug_id, db_prepare_int( $t_row['id'] ) ) );
+			db_query_bound( $t_query_disk_attachment_update, array( db_prepare_string( $t_path_to ), $c_bug_id, (int)$t_row['id'] ) );
 		} else {
 			trigger_error( ERROR_FILE_DUPLICATE, ERROR );
 		}
@@ -1049,14 +1035,15 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
  *
  * <p>Does not perform history logging and does not perform access checks.</p>
  *
- * @param int $p_source_bug_id
- * @param int $p_dest_bug_id
+ * @param integer $p_source_bug_id Source Bug.
+ * @param integer $p_dest_bug_id   Destination Bug.
+ * @return void
  */
 function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 	$t_mantis_bug_file_table = db_get_table( 'bug_file' );
 
-	$query = 'SELECT * FROM ' . $t_mantis_bug_file_table . ' WHERE bug_id = ' . db_param();
-	$t_result = db_query_bound( $query, array( $p_source_bug_id ) );
+	$t_query = 'SELECT * FROM ' . $t_mantis_bug_file_table . ' WHERE bug_id = ' . db_param();
+	$t_result = db_query_bound( $t_query, array( $p_source_bug_id ) );
 	$t_count = db_num_rows( $t_result );
 
 	$t_project_id = bug_get_field( $p_source_bug_id, 'project_id' );
@@ -1066,7 +1053,7 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 
 		# prepare the new diskfile name and then copy the file
 		$t_source_file = $t_bug_file['folder'] . $t_bug_file['diskfile'];
-		if(( config_get( 'file_upload_method' ) == DISK ) ) {
+		if( ( config_get( 'file_upload_method' ) == DISK ) ) {
 			$t_source_file = file_normalize_attachment_path( $t_source_file, $t_project_id );
 			$t_file_path = dirname( $t_source_file ) . DIRECTORY_SEPARATOR;
 		} else {
@@ -1075,7 +1062,7 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 		$t_new_diskfile_name = file_generate_unique_name( 'bug-' . $t_bug_file['filename'], $t_file_path );
 		$t_new_diskfile_location = $t_file_path . $t_new_diskfile_name;
 		$t_new_file_name = file_get_display_name( $t_bug_file['filename'] );
-		if(( config_get( 'file_upload_method' ) == DISK ) ) {
+		if( ( config_get( 'file_upload_method' ) == DISK ) ) {
 			# Skip copy operation if file does not exist (i.e. target bug will have missing attachment)
 			# @todo maybe we should trigger an error instead in this case ?
 			if( file_exists( $t_source_file ) ) {
@@ -1084,7 +1071,7 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 			}
 		}
 
-		$query = "INSERT INTO $t_mantis_bug_file_table
+		$t_query = "INSERT INTO $t_mantis_bug_file_table
 							( bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content )
 							VALUES ( " . db_param() . ",
 									 " . db_param() . ",
@@ -1096,23 +1083,22 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 									 " . db_param() . ",
 									 " . db_param() . ",
 									 " . db_param() . ");";
-		db_query_bound( $query, array( $p_dest_bug_id, $t_bug_file['title'], $t_bug_file['description'], $t_new_diskfile_name, $t_new_file_name, $t_file_path, $t_bug_file['filesize'], $t_bug_file['file_type'], $t_bug_file['date_added'], $t_bug_file['content'] ) );
+		db_query_bound( $t_query, array( $p_dest_bug_id, $t_bug_file['title'], $t_bug_file['description'], $t_new_diskfile_name, $t_new_file_name, $t_file_path, $t_bug_file['filesize'], $t_bug_file['file_type'], $t_bug_file['date_added'], $t_bug_file['content'] ) );
 	}
 }
 
 /**
  * Returns a possibly override content type for a file name
  *
- * @param string $p_filename the filename of the file which will be downloaded
+ * @param string $p_filename The filename of the file which will be downloaded.
  * @return string the content type, or empty if it should not be overriden
  */
 function file_get_content_type_override( $p_filename ) {
-
 	global $g_file_download_content_type_overrides;
 
 	$t_extension = pathinfo( $p_filename, PATHINFO_EXTENSION );
 
-	if( isset ( $g_file_download_content_type_overrides[$t_extension] ) ) {
+	if( isset( $g_file_download_content_type_overrides[$t_extension] ) ) {
 		return $g_file_download_content_type_overrides[$t_extension];
 	}
 

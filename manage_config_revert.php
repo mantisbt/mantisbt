@@ -52,7 +52,7 @@ require_api( 'print_api.php' );
 require_api( 'project_api.php' );
 require_api( 'string_api.php' );
 
-form_security_validate('manage_config_revert');
+form_security_validate( 'manage_config_revert' );
 
 auth_reauthenticate();
 
@@ -78,11 +78,11 @@ if( '' != $f_revert ) {
 		lang_get( 'delete_config_button' ) );
 
 	foreach ( $t_revert_vars as $t_revert ) {
-		config_delete( $t_revert, null , $f_project_id );
+		config_delete( $t_revert, null, $f_project_id );
 	}
 }
 
-form_security_purge('manage_config_revert');
+form_security_purge( 'manage_config_revert' );
 
 $t_redirect_url = $f_return;
 

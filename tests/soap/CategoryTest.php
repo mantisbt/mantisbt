@@ -35,7 +35,7 @@ class CategoryTest extends SoapBase {
 	/**
 	 * @var array Category names to delete at end of test run
 	 */
-	private $categoryNamesToDelete = array();
+	private $t_category_namesToDelete = array();
 
 	/**
 	 * A test case that tests the following:
@@ -48,74 +48,75 @@ class CategoryTest extends SoapBase {
 	 * 7. Verify the cateogory name in the list
 	 * 8. Delete the category
 	 * 9. Verify the category is not in the list anymore
+	 * @return void
 	 */
 	public function testAddRenameDeleteCategory() {
-		$projectId = $this->getProjectId();
-		$categoryName = $this->getOriginalNameCategory();
-		$categoryNewName = $this->getNewNameCategory();
+		$t_project_id = $this->getProjectId();
+		$t_category_name = $this->getOriginalNameCategory();
+		$t_category_new_name = $this->getNewNameCategory();
 
-		$categoryId = $this->client->mc_project_add_category(
+		$t_category_id = $this->client->mc_project_add_category(
 			$this->userName,
 			$this->password,
-			$projectId,
-			$categoryName);
+			$t_project_id,
+			$t_category_name );
 
-		$this->categoryNamesToDelete[] = $categoryName;
+		$this->categoryNamesToDelete[] = $t_category_name;
 
-		$categoryList = $this->client->mc_project_get_categories(
+		$t_category_list = $this->client->mc_project_get_categories(
 			$this->userName,
 			$this->password,
-			$projectId);
+			$t_project_id );
 
-		$this->assertContains($categoryName, $categoryList);
+		$this->assertContains( $t_category_name, $t_category_list );
 
-		$return_bool = $this->client->mc_project_rename_category_by_name (
+		$t_return_bool = $this->client->mc_project_rename_category_by_name(
 			$this->userName,
 			$this->password,
-			$projectId,
-			$categoryName,
-			$categoryNewName,
-			'');
+			$t_project_id,
+			$t_category_name,
+			$t_category_new_name,
+			'' );
 
-		$this->categoryNamesToDelete = array( $categoryNewName );
+		$this->categoryNamesToDelete = array( $t_category_new_name );
 
-		$categoryList = $this->client->mc_project_get_categories(
+		$t_category_list = $this->client->mc_project_get_categories(
 			$this->userName,
 			$this->password,
-			$projectId);
+			$t_project_id );
 
-		$this->assertNotContains($categoryName, $categoryList);
-		$this->assertContains($categoryNewName, $categoryList);
+		$this->assertNotContains( $t_category_name, $t_category_list );
+		$this->assertContains( $t_category_new_name, $t_category_list );
 
-		$return_bool = $this->client->mc_project_delete_category (
+		$t_return_bool = $this->client->mc_project_delete_category(
 			$this->userName,
 			$this->password,
-			$projectId,
-			$categoryNewName);
+			$t_project_id,
+			$t_category_new_name );
 
-		$this->categoryNamesToDelete = array() ;
+		$this->categoryNamesToDelete = array();
 
-		$categoryList = $this->client->mc_project_get_categories(
+		$t_category_list = $this->client->mc_project_get_categories(
 			$this->userName,
 			$this->password,
-			$projectId);
+			$t_project_id );
 
-		$this->assertNotContains($categoryNewName, $categoryList);
+		$this->assertNotContains( $t_category_new_name, $t_category_list );
 	}
 
 	/**
 	 * Tear Down: Remove categories created by tests
+	 * @return void
 	 */
 	protected function tearDown() {
-
 		parent::tearDown();
 
-		foreach ( $this->categoryNamesToDelete as $categoryName )  {
+		foreach( $this->categoryNamesToDelete as $t_category_name )  {
 			$this->client->mc_project_delete_category(
 				$this->userName,
 				$this->password,
 				$this->getProjectId(),
-				$categoryName);
+				$t_category_name );
 		}
 	}
 
@@ -124,7 +125,7 @@ class CategoryTest extends SoapBase {
 	 * @return string
 	 */
 	private function getOriginalNameCategory() {
-		return 'soaptest_' . date('Ymd_His');
+		return 'soaptest_' . date( 'Ymd_His' );
 	}
 
 	/**
@@ -132,7 +133,7 @@ class CategoryTest extends SoapBase {
 	 * @return string
 	 */
 	private function getNewNameCategory() {
-		return 'soaptest_renamed_' . date('Ymd_His');
+		return 'soaptest_renamed_' . date( 'Ymd_His' );
 	}
 
 }

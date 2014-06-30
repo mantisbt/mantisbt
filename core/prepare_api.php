@@ -42,8 +42,8 @@ require_api( 'version_api.php' );
 
 /**
  * return the mailto: href string link
- * @param string $p_email
- * @param string $p_text
+ * @param string $p_email Email address to prepare.
+ * @param string $p_text  Display text for the hyperlink.
  * @return string
  */
 function prepare_email_link( $p_email, $p_text ) {
@@ -62,7 +62,7 @@ function prepare_email_link( $p_email, $p_text ) {
 
 /**
  * prepares the name of the user given the id.  also makes it an email link.
- * @param int $p_user_id
+ * @param integer $p_user_id A valid user identifier.
  * @return string
  */
 function prepare_user_name( $p_user_id ) {
@@ -84,8 +84,8 @@ function prepare_user_name( $p_user_id ) {
  * A function that prepares the version string for outputting to the user on view / print issue pages.
  * This function would add the version date, if appropriate.
  *
- * @param int $p_project_id  The project id.
- * @param int $p_version_id  The version id.  If false then this method will return an empty string.
+ * @param integer $p_project_id The project id.
+ * @param integer $p_version_id The version id.  If false then this method will return an empty string.
  * @return string The formatted version string.
  */
 function prepare_version_string( $p_project_id, $p_version_id ) {

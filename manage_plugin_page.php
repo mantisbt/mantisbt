@@ -182,14 +182,12 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 	if( $t_upgrade ) {
 		print_bracket_link(
 			'manage_plugin_upgrade.php?name=' . $t_basename . form_security_param( 'manage_plugin_upgrade' ),
-			lang_get( 'plugin_upgrade' )
-		);
+			lang_get( 'plugin_upgrade' ) );
 	}
 	if( !$t_protected ) {
 		print_bracket_link(
 			'manage_plugin_uninstall.php?name=' . $t_basename . form_security_param( 'manage_plugin_uninstall' ),
-			lang_get( 'plugin_uninstall' )
-		);
+			lang_get( 'plugin_uninstall' ) );
 	}
 	echo '</td></tr>';
 } ?>
@@ -292,8 +290,7 @@ if( 0 < count( $t_plugins_available ) ) {
 		if( $t_ready ) {
 			print_bracket_link(
 				'manage_plugin_install.php?name=' . $t_basename . form_security_param( 'manage_plugin_install' ),
-				lang_get( 'plugin_install' )
-			);
+				lang_get( 'plugin_install' ) );
 		}
 		echo '</td></tr>';
 	}

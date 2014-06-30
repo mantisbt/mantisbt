@@ -33,8 +33,9 @@ html_page_top( 'MantisBT Administration' );
 /**
  * Print Check result - information only
  *
- * @param string $p_description description
- * @param string $p_value information
+ * @param string $p_description Description.
+ * @param string $p_value       Information.
+ * @return void
  */
 function print_info_row( $p_description, $p_value ) {
 	echo '<tr>';
@@ -47,7 +48,7 @@ function print_info_row( $p_description, $p_value ) {
 <div id="admin-menu">
 	<ul class="menu">
 		<li><a href="check/index.php">Check your installation</a></li>
-	<?php if( count($upgrade) - 1 != config_get( 'database_version' ) ) { ?>
+	<?php if( count( $g_upgrade ) - 1 != config_get( 'database_version' ) ) { ?>
 		<li><a href="upgrade_warning.php"><span class="bold">Upgrade your installation</span></a></li>
 	<?php } ?>
 		<li><a href="system_utils.php">System Utilities</a></li>
@@ -72,7 +73,7 @@ function print_info_row( $p_description, $p_value ) {
 		$t_version_suffix = '';
 	}
 	print_info_row( lang_get( 'mantis_version' ), MANTIS_VERSION, $t_version_suffix );
-	print_info_row( lang_get( 'php_version' ), phpversion());
+	print_info_row( lang_get( 'php_version' ), phpversion() );
 ?>
 		<tr>
 			<td class="form-title" width="30%" colspan="2">

@@ -45,7 +45,7 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
-form_security_validate('manage_custom_field_update');
+form_security_validate( 'manage_custom_field_update' );
 
 auth_reauthenticate();
 access_ensure_global_level( config_get( 'manage_custom_fields_threshold' ) );
@@ -73,7 +73,7 @@ $t_values['filter_by']			= gpc_get_bool( 'filter_by' );
 
 custom_field_update( $f_field_id, $t_values );
 
-form_security_purge('manage_custom_field_update');
+form_security_purge( 'manage_custom_field_update' );
 
 html_page_top( null, $f_return );
 

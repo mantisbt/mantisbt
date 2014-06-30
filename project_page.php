@@ -100,8 +100,8 @@ if( access_has_project_level( config_get( 'manage_project_threshold' ), $f_proje
 
 echo '</p>';
 
-/** @todo Add status, view state, versions, sub-projects, parent projects, and news. */
-/** @todo Schema change: add home page, license, */
+# @todo Add status, view state, versions, sub-projects, parent projects, and news.
+# @todo Schema change: add home page, license,
 
 $t_description = project_get_field( $f_project_id, 'description' );
 
@@ -118,7 +118,7 @@ $t_show_real_names = config_get( 'show_realname' ) == ON;
 if( count( $t_users ) > 0 ) {
 	echo '<h2>', lang_get( 'development_team' ), '</h2>';
 
-	/** @todo sort users in DESC order by access level, then ASC by username/realname. */
+	# @todo sort users in DESC order by access level, then ASC by username/realname.
 	foreach ( $t_users as $t_user_data ) {
 		$t_user_id = $t_user_data['id'];
 

@@ -45,18 +45,20 @@ class LoginTest extends SoapBase {
 
 	/**
 	 * Test Fake Login details fail
+	 * @return void
 	 */
 	public function testLoginFailed() {
 		try {
-			$this->client->mc_login( $this->dummyUser , $this->dummyPassword );
+			$this->client->mc_login( $this->dummyUser, $this->dummyPassword );
 			$this->fail( "Should have failed." );
-		} catch ( SoapFault $e) {
+		} catch ( SoapFault $e ) {
 			$this->assertIsLoginFailure( $e );
 		}
 	}
 
 	/**
 	 * Tests a client login and that account data returned is valid
+	 * @return void
 	 */
 	public function testLoginSuccessfully() {
 		$t_user_data = $this->client->mc_login( $this->userName, $this->password );
@@ -70,106 +72,114 @@ class LoginTest extends SoapBase {
 
 	/**
 	 * Tests issue_get fails with an invalid login
+	 * @return void
 	 */
 	public function testGetIssueGetLoginFailed() {
 		try {
-			$this->client->mc_issue_get( $this->dummyUser , $this->dummyPassword, 1 );
+			$this->client->mc_issue_get( $this->dummyUser, $this->dummyPassword, 1 );
 			$this->fail( "Should have failed." );
-		} catch ( SoapFault $e) {
+		} catch ( SoapFault $e ) {
 			$this->assertIsLoginFailure( $e );
 		}
 	}
 
 	/**
 	 * Tests project_get_users fails with an invalid login
+	 * @return void
 	 */
 	public function testProjectGetUsersLoginFailed() {
 		try {
-			$this->client->mc_project_get_users( $this->dummyUser , $this->dummyPassword, $this->getProjectId(), 0 );
+			$this->client->mc_project_get_users( $this->dummyUser, $this->dummyPassword, $this->getProjectId(), 0 );
 			$this->fail( "Should have failed." );
-		} catch ( SoapFault $e) {
+		} catch ( SoapFault $e ) {
 			$this->assertIsLoginFailure( $e );
 		}
 	}
 
 	/**
 	 * Tests enum_status fails with an invalid login
+	 * @return void
 	 */
 	public function testGetEnumStatusLoginFailed() {
 		try {
-			$this->client->mc_enum_status( $this->dummyUser , $this->dummyPassword);
+			$this->client->mc_enum_status( $this->dummyUser, $this->dummyPassword );
 			$this->fail( "Should have failed." );
-		} catch ( SoapFault $e) {
+		} catch ( SoapFault $e ) {
 			$this->assertIsLoginFailure( $e );
 		}
 	}
 
 	/**
 	 * Tests project_get_issues fails with an invalid login
+	 * @return void
 	 */
 	public function testProjectGetIssuesLoginFailed() {
 		try {
-			$this->client->mc_project_get_issues( $this->dummyUser , $this->dummyPassword, $this->getProjectId(), 0, 15 );
+			$this->client->mc_project_get_issues( $this->dummyUser, $this->dummyPassword, $this->getProjectId(), 0, 15 );
 			$this->fail( "Should have failed." );
-		} catch ( SoapFault $e) {
+		} catch ( SoapFault $e ) {
 			$this->assertIsLoginFailure( $e );
 		}
 	}
 
 	/**
 	 * Tests filter_get_issues fails with an invalid login
+	 * @return void
 	 */
 	public function testFilterGetIssuesLoginFailed() {
 		try {
-			$this->client->mc_filter_get_issues( $this->dummyUser , $this->dummyPassword, $this->getProjectId(), 1, 0, 15 );
+			$this->client->mc_filter_get_issues( $this->dummyUser, $this->dummyPassword, $this->getProjectId(), 1, 0, 15 );
 			$this->fail( "Should have failed." );
-		} catch ( SoapFault $e) {
+		} catch ( SoapFault $e ) {
 			$this->assertIsLoginFailure( $e );
 		}
 	}
 
 	/**
 	 * Tests Login with a null password is rejected
+	 * @return void
 	 */
 	public function testLoginWithNullPasswordIsRejected() {
 		try {
-			$this->client->mc_enum_status( $this->userName, null);
+			$this->client->mc_enum_status( $this->userName, null );
 			$this->fail( "Should have failed." );
-		} catch ( SoapFault $e) {
+		} catch ( SoapFault $e ) {
 			$this->assertIsLoginFailure( $e );
 		}
 	}
 
 	/**
 	 * Tests Login with an empty password is rejected
+	 * @return void
 	 */
 	public function testLoginWithEmptyPasswordIsRejected() {
 		try {
-			$this->client->mc_enum_status( $this->userName, '');
+			$this->client->mc_enum_status( $this->userName, '' );
 			$this->fail( "Should have failed." );
-		} catch ( SoapFault $e) {
+		} catch ( SoapFault $e ) {
 			$this->assertIsLoginFailure( $e );
 		}
 	}
 
 	/**
-	 * Tests Login with the wrond password is rejected
+	 * Tests Login with the wrong password is rejected
+	 * @return void
 	 */
 	public function testLoginWithIncorrectPasswordIsRejected() {
 		try {
-			$this->client->mc_enum_status( $this->userName, "This really should be incorrect");
+			$this->client->mc_enum_status( $this->userName, "This really should be incorrect" );
 			$this->fail( "Should have failed." );
-		} catch ( SoapFault $e) {
+		} catch ( SoapFault $e ) {
 			$this->assertIsLoginFailure( $e );
 		}
 	}
 
 	/**
 	 * Check SOAP login failure is an access denied
-	 * @param SoapFault $e SoapFault
-	 * @return null
+	 * @param SoapFault $e A SoapFault Exception.
+	 * @return void
 	 */
-	private function assertIsLoginFailure($e) {
-		$this->assertRegexp( '/Access denied/i' , $e->getMessage() );
+	private function assertIsLoginFailure( SoapFault $e ) {
+		$this->assertRegexp( '/Access denied/i', $e->getMessage() );
 	}
 }

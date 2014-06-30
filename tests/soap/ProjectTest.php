@@ -35,152 +35,156 @@ class ProjectTest extends SoapBase {
 	/**
 	 * Array of project ID's to delete
 	 */
-	private $projectIdToDelete = array();
+	private $t_project_idToDelete = array();
 
 	/**
 	 * A test case that tests the following:
 	 * 1. Create a project.
 	 * 2. Rename the project.
+	 * @return void
 	 */
 	public function testAddRenameDeleteProject() {
-		$projectName = $this->getOriginalNameProject();
-		$projectNewName = $this->getNewNameProject();
+		$t_project_name = $this->getOriginalNameProject();
+		$t_project_new_name = $this->getNewNameProject();
 
-		$projectDataStructure = $this->newProjectAsArray($projectName);
+		$t_project_data_structure = $this->newProjectAsArray( $t_project_name );
 
-		$projectId = $this->client->mc_project_add( $this->userName, $this->password, $projectDataStructure);
+		$t_project_id = $this->client->mc_project_add( $this->userName, $this->password, $t_project_data_structure );
 
-		$this->projectIdToDelete[] = $projectId;
+		$this->projectIdToDelete[] = $t_project_id;
 
-		$projectsArray = $this->client->mc_projects_get_user_accessible( $this->userName, $this->password);
+		$t_projects_array = $this->client->mc_projects_get_user_accessible( $this->userName, $this->password );
 
-		foreach( $projectsArray as $project ) {
-			if( $project->id == $projectId ) {
-				$this->assertEquals($projectName, $project->name);
+		foreach( $t_projects_array as $t_project ) {
+			if( $t_project->id == $t_project_id ) {
+				$this->assertEquals( $t_project_name, $t_project->name );
 			}
 		}
 
-		$projectDataStructure['name'] = $projectNewName;
+		$t_project_data_structure['name'] = $t_project_new_name;
 
-		$return_bool = $this->client->mc_project_update( $this->userName, $this->password, $projectId,
-														$projectDataStructure);
+		$t_return_bool = $this->client->mc_project_update( $this->userName, $this->password, $t_project_id,
+														$t_project_data_structure );
 
-		$projectsArray = $this->client->mc_projects_get_user_accessible( $this->userName, $this->password);
+		$t_projects_array = $this->client->mc_projects_get_user_accessible( $this->userName, $this->password );
 
-		foreach( $projectsArray as $project ) {
-			if( $project->id == $projectId ) {
-				$this->assertEquals($projectNewName, $project->name);
+		foreach( $t_projects_array as $t_project ) {
+			if( $t_project->id == $t_project_id ) {
+				$this->assertEquals( $t_project_new_name, $t_project->name );
 			}
 		}
 	}
 
 	/**
-	* A test case which does the following
-	*
-	* 1. Create a project
-	* 2. Retrieve the project id by name
-	*
-	*/
+	 * A test case which does the following
+	 *
+	 * 1. Create a project
+	 * 2. Retrieve the project id by name
+	 * @return void
+	 */
 	public function testGetIdFromName() {
-		$projectName = 'TestProjectForIdFromName';
+		$t_project_name = 'TestProjectForIdFromName';
 
-		$projectDataStructure = $this->newProjectAsArray($projectName);
+		$t_project_data_structure = $this->newProjectAsArray( $t_project_name );
 
-		$projectId = $this->client->mc_project_add( $this->userName, $this->password, $projectDataStructure);
+		$t_project_id = $this->client->mc_project_add( $this->userName, $this->password, $t_project_data_structure );
 
-		$this->projectIdToDelete[] = $projectId;
+		$this->projectIdToDelete[] = $t_project_id;
 
-		$projectIdFromName = $this->client->mc_project_get_id_from_name( $this->userName, $this->password,
-																		$projectName);
+		$t_project_idFromName = $this->client->mc_project_get_id_from_name( $this->userName, $this->password,
+																		$t_project_name );
 
-		$this->assertEquals($projectIdFromName, $projectId);
+		$this->assertEquals( $t_project_idFromName, $t_project_id );
 	}
 
 	/**
-	* A test case which does the following
-	*
-	* 1. Create a project
-	* 2. Retrieve the subproject ids. Must returns empty array.
-	*
-	*/
+	 * A test case which does the following
+	 *
+	 * 1. Create a project
+	 * 2. Retrieve the subproject ids. Must returns empty array.
+	 * @return void
+	 */
 	public function testGetSubprojects() {
-		$projectName = $this->getOriginalNameProject();
-		$projectDataStructure = $this->newProjectAsArray($projectName);
+		$t_project_name = $this->getOriginalNameProject();
+		$t_project_data_structure = $this->newProjectAsArray( $t_project_name );
 
-		$projectId = $this->client->mc_project_add( $this->userName, $this->password, $projectDataStructure);
+		$t_project_id = $this->client->mc_project_add( $this->userName, $this->password, $t_project_data_structure );
 
-		$this->projectIdToDelete[] = $projectId;
+		$this->projectIdToDelete[] = $t_project_id;
 
-		$projectsArray = $this->client->mc_project_get_all_subprojects( $this->userName, $this->password, $projectId);
+		$t_projects_array = $this->client->mc_project_get_all_subprojects( $this->userName, $this->password, $t_project_id );
 
-		$this->assertEquals(0, count($projectsArray));
+		$this->assertEquals( 0, count( $t_projects_array ) );
 	}
 
 	/**
-	* A test case which validates that managers do not lock themselves out when
-	* making a project Private.
-	*
-	* 1. Create a project
-	* 2. Create a test manager user (currently not implemented, see below)
-	* 3. Set project view state to private
-	* 4. Ensure user can still access the project
-	*
-	* @TODO for this to be a truly useful test case, the project update should
-	* actually be performed by a user with MANAGER role. However since the SOAP
-	* API does not provide user administration functions, it is currently not
-	* possible to properly implement this test.
-	*/
+	 * A test case which validates that managers do not lock themselves out when
+	 * making a project Private.
+	 *
+	 * 1. Create a project
+	 * 2. Create a test manager user (currently not implemented, see below)
+	 * 3. Set project view state to private
+	 * 4. Ensure user can still access the project
+	 *
+	 * @TODO for this to be a truly useful test case, the project update should
+	 * actually be performed by a user with MANAGER role. However since the SOAP
+	 * API does not provide user administration functions, it is currently not
+	 * possible to properly implement this test.
+	 * @return void
+	 */
 	public function testSetProjectPrivateLockout() {
-		$projectDataStructure = $this->newProjectAsArray( $this->getName() . "_" . rand() );
+		$t_project_data_structure = $this->newProjectAsArray( $this->getName() . "_" . rand() );
 
 		# step 1
-		$projectId = $this->client->mc_project_add( $this->userName, $this->password, $projectDataStructure );
-		$this->projectIdToDelete[] = $projectId;
+		$t_project_id = $this->client->mc_project_add( $this->userName, $this->password, $t_project_data_structure );
+		$this->projectIdToDelete[] = $t_project_id;
 
 		# step 3
-		$projectDataStructure['view_state'] = array( 'id' => VS_PRIVATE );
-		$updateOk = $this->client->mc_project_update( $this->userName, $this->password, $projectId, $projectDataStructure );
-		$this->assertTrue( $updateOk, "Project update failed");
+		$t_project_data_structure['view_state'] = array( 'id' => VS_PRIVATE );
+		$t_update_ok = $this->client->mc_project_update( $this->userName, $this->password, $t_project_id, $t_project_data_structure );
+		$this->assertTrue( $t_update_ok, "Project update failed" );
 
 		# step 4
-		$projList = $this->client->mc_projects_get_user_accessible( $this->userName, $this->password );
-		$found = false;
-		foreach( $projList as $proj ) {
-			if( $projectId == $proj->id ) {
-				$found = true;
+		$t_project_list = $this->client->mc_projects_get_user_accessible( $this->userName, $this->password );
+		$t_found = false;
+		foreach( $t_project_list as $t_project ) {
+			if( $t_project_id == $t_project->id ) {
+				$t_found = true;
 				break;
 			}
 		}
-		$this->assertTrue( $found, "User '$this->userName' no longer has access to the project" );
+		$this->assertTrue( $t_found, "User '$this->userName' no longer has access to the project" );
 	}
 
 	/**
 	 * New project Array
-	 * @param string $projectName
+	 * @param string $p_project_name Project Name.
 	 * @return array
 	 */
-	private function newProjectAsArray($projectName) {
-		$projectDataStructure = array();
-		$projectDataStructure['name'] = $projectName;
-		$projectDataStructure['status'] = array( 'name' => 'development' );
-		$projectDataStructure['view_state'] = array( 'id' => VS_PUBLIC );
+	private function newProjectAsArray( $p_project_name ) {
+		$t_project_data_structure = array();
+		$t_project_data_structure['name'] = $p_project_name;
+		$t_project_data_structure['status'] = array( 'name' => 'development' );
+		$t_project_data_structure['view_state'] = array( 'id' => VS_PUBLIC );
 
-		return $projectDataStructure;
+		return $t_project_data_structure;
 	}
 
 	/**
 	 * Tear Down
+	 * @return void
 	 */
 	protected function tearDown() {
 		parent::tearDown();
 
-		foreach( $this->projectIdToDelete as $projectId )  {
-			$this->client->mc_project_delete( $this->userName, $this->password, $projectId);
+		foreach( $this->projectIdToDelete as $t_project_id )  {
+			$this->client->mc_project_delete( $this->userName, $this->password, $t_project_id );
 		}
 	}
 
 	/**
 	 * Return old project name
+	 * @return string
 	 */
 	private function getOriginalNameProject() {
 		return 'my_project_name';
@@ -188,6 +192,7 @@ class ProjectTest extends SoapBase {
 
 	/**
 	 * Return new project name
+	 * @return string
 	 */
 	private function getNewNameProject() {
 		return 'my_new_project_name';

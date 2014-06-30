@@ -66,12 +66,12 @@ compress_enable();
 html_page_top();
 
 $t_filter = filter_get_default();
-$t_target_field = rtrim( gpc_get_string( 'target_field', '' ), '[]');
-if( !isset( $t_filter[ $t_target_field ] ) ) {
+$t_target_field = rtrim( gpc_get_string( 'target_field', '' ), '[]' );
+if( !isset( $t_filter[$t_target_field] ) ) {
 	$t_target_field = '';
 }
 
-/** @todo thraxisp - could this be replaced by a call to filter_draw_selection_area2 */
+# @todo thraxisp - could this be replaced by a call to filter_draw_selection_area2
 
 $t_filter = current_user_get_bug_filter();
 if( $t_filter === false ) {
@@ -103,7 +103,7 @@ if( ON == config_get( 'filter_by_custom_fields' ) ) {
 
 	foreach ( $t_custom_fields as $t_cfid ) {
 		$t_field_info = custom_field_cache_row( $t_cfid, true );
-		if( $t_field_info['access_level_r'] <= $t_current_user_access_level && $t_field_info['filter_by']) {
+		if( $t_field_info['access_level_r'] <= $t_current_user_access_level && $t_field_info['filter_by'] ) {
 			$t_accessible_custom_fields_ids[] = $t_cfid;
 			$t_accessible_custom_fields_names[] = $t_field_info['name'];
 			$t_accessible_custom_fields_types[] = $t_field_info['type'];
@@ -383,7 +383,7 @@ if( ON == config_get( 'filter_by_custom_fields' ) ) {
 			for ( $j = 0; $j < $t_per_row; $j++ ) {
 				echo '<td colspan="' . ( 1 * $t_filter_cols ) . '">';
 				if( isset( $t_accessible_custom_fields_ids[$t_base + $j] ) ) {
-					print_filter_custom_field($t_accessible_custom_fields_ids[$t_base + $j]);
+					print_filter_custom_field( $t_accessible_custom_fields_ids[$t_base + $j] );
 				} else {
 					echo '&#160;';
 				}
@@ -460,7 +460,7 @@ foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
 		echo '<tr class="row-1">';
 		foreach( $t_row_filters as $t_row_field_name ) {
 			echo '<td class="small-caption" colspan="' . $t_custom_cols . '"> ';
-			print_filter_plugin_field( $t_row_field_name, $t_plugin_filters[ $t_row_field_name ] );
+			print_filter_plugin_field( $t_row_field_name, $t_plugin_filters[$t_row_field_name] );
 			echo '</td>';
 		}
 		echo '</tr>';
@@ -480,7 +480,7 @@ if( $t_column > 0 ) {
 	echo '<tr class="row-1">';
 	foreach( $t_row_filters as $t_row_field_name ) {
 		echo '<td class="small-caption" colspan="' . $t_custom_cols . '"> ';
-		print_filter_plugin_field( $t_row_field_name, $t_plugin_filters[ $t_row_field_name ] );
+		print_filter_plugin_field( $t_row_field_name, $t_plugin_filters[$t_row_field_name] );
 		echo '</td>';
 	}
 

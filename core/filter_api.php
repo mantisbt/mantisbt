@@ -99,7 +99,7 @@ function filter_get_plugin_filters() {
 						if( class_exists( $t_filter_class ) && is_subclass_of( $t_filter_class, 'MantisFilter' ) ) {
 							$t_filter_object = new $t_filter_class();
 							$t_field_name = $t_plugin . '_' . $t_filter_object->field;
-							$s_field_array[ $t_field_name ] = $t_filter_object;
+							$s_field_array[$t_field_name] = $t_filter_object;
 						}
 					}
 				}
@@ -111,13 +111,13 @@ function filter_get_plugin_filters() {
 }
 
 /**
- *  Get a permalink for the current active filter.  The results of using these fields by other users
- *  can be inconsistent with the original results due to fields like "Myself", "Current Project",
- *  and due to access level.
- * @param array $p_custom_filter
+ * Get a permanent link for the current active filter.  The results of using these fields by other users
+ * can be inconsistent with the original results due to fields like "Myself", "Current Project",
+ * and due to access level.
+ * @param array $p_custom_filter Array containing a custom filter definition.
  * @return string the search.php?xxxx or an empty string if no criteria applied.
  */
-function filter_get_url( $p_custom_filter ) {
+function filter_get_url( array $p_custom_filter ) {
 	$t_query = array();
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_PROJECT_ID] ) ) {
@@ -179,8 +179,7 @@ function filter_get_url( $p_custom_filter ) {
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_STICKY] ) ) {
 		$t_query[] = filter_encode_field_and_value(
 			FILTER_PROPERTY_STICKY,
-			$p_custom_filter[FILTER_PROPERTY_STICKY] ? 'on' : 'off'
-		);
+			$p_custom_filter[FILTER_PROPERTY_STICKY] ? 'on' : 'off' );
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_VERSION] ) ) {
@@ -226,8 +225,7 @@ function filter_get_url( $p_custom_filter ) {
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) ) {
 		$t_query[] = filter_encode_field_and_value(
 			FILTER_PROPERTY_FILTER_BY_DATE,
-			$p_custom_filter[FILTER_PROPERTY_FILTER_BY_DATE] ? 'on' : 'off'
-		);
+			$p_custom_filter[FILTER_PROPERTY_FILTER_BY_DATE] ? 'on' : 'off' );
 
 		# The start and end dates are only applicable if filter by date is set.
 		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_DAY] ) ) {
@@ -298,8 +296,8 @@ function filter_get_url( $p_custom_filter ) {
 	# Allow plugins to add filter fields
 	$t_plugin_filter_array = filter_get_plugin_filters();
 	foreach( $t_plugin_filter_array as $t_field_name => $t_filter_object ) {
-		if( !filter_field_is_any( $p_custom_filter[ $t_field_name ] ) ) {
-			$t_query[] = filter_encode_field_and_value( $t_field_name, $p_custom_filter[ $t_field_name ], $t_filter_object->type );
+		if( !filter_field_is_any( $p_custom_filter[$t_field_name] ) ) {
+			$t_query[] = filter_encode_field_and_value( $t_field_name, $p_custom_filter[$t_field_name], $t_filter_object->type );
 		}
 	}
 
@@ -315,12 +313,12 @@ function filter_get_url( $p_custom_filter ) {
 
 /**
  * Encodes a field and it's value for the filter URL.  This handles the URL encoding and arrays.
- * @param string $p_field_name The field name.
- * @param string $p_field_value The field value (can be an array)
- * @param int $p_field_type Field Type e.g. FILTER_TYPE_MULTI_STRING
+ * @param string  $p_field_name  The field name.
+ * @param string  $p_field_value The field value (can be an array).
+ * @param integer $p_field_type  Field Type e.g. FILTER_TYPE_MULTI_STRING.
  * @return string url encoded string
  */
-function filter_encode_field_and_value( $p_field_name, $p_field_value, $p_field_type=null ) {
+function filter_encode_field_and_value( $p_field_name, $p_field_value, $p_field_type = null ) {
 	$t_query_array = array();
 	if( is_array( $p_field_value ) ) {
 		$t_count = count( $p_field_value );
@@ -340,9 +338,9 @@ function filter_encode_field_and_value( $p_field_name, $p_field_value, $p_field_
 }
 
 /**
- *  Checks the supplied value to see if it is an ANY value.
- * @param string $p_field_value - The value to check.
- * @return bool true for "ANY" values and false for others.  "ANY" means filter criteria not active.
+ * Checks the supplied value to see if it is an ANY value.
+ * @param string $p_field_value The value to check.
+ * @return boolean true for "ANY" values and false for others.  "ANY" means filter criteria not active.
  */
 function filter_field_is_any( $p_field_value ) {
 	if( is_array( $p_field_value ) ) {
@@ -351,7 +349,7 @@ function filter_field_is_any( $p_field_value ) {
 		}
 
 		foreach( $p_field_value as $t_value ) {
-			if(( META_FILTER_ANY == $t_value ) && ( is_numeric( $t_value ) ) ) {
+			if( ( META_FILTER_ANY == $t_value ) && ( is_numeric( $t_value ) ) ) {
 				return true;
 			}
 		}
@@ -364,7 +362,7 @@ function filter_field_is_any( $p_field_value ) {
 			return true;
 		}
 
-		if(( META_FILTER_ANY == $p_field_value ) && ( is_numeric( $p_field_value ) ) ) {
+		if( ( META_FILTER_ANY == $p_field_value ) && ( is_numeric( $p_field_value ) ) ) {
 			return true;
 		}
 	}
@@ -373,15 +371,15 @@ function filter_field_is_any( $p_field_value ) {
 }
 
 /**
- *  Checks the supplied value to see if it is a NONE value.
- * @param string $p_field_value - The value to check.
- * @return bool true for "NONE" values and false for others.
+ * Checks the supplied value to see if it is a NONE value.
+ * @param string $p_field_value The value to check.
+ * @return boolean true for "NONE" values and false for others.
  * @todo is a check for these necessary?  if( ( $t_filter_value === 'none' ) || ( $t_filter_value === '[none]' ) )
  */
 function filter_field_is_none( $p_field_value ) {
 	if( is_array( $p_field_value ) ) {
 		foreach( $p_field_value as $t_value ) {
-			if(( META_FILTER_NONE == $t_value ) && ( is_numeric( $t_value ) ) ) {
+			if( ( META_FILTER_NONE == $t_value ) && ( is_numeric( $t_value ) ) ) {
 				return true;
 			}
 		}
@@ -390,7 +388,7 @@ function filter_field_is_none( $p_field_value ) {
 			return false;
 		}
 
-		if(( META_FILTER_NONE == $p_field_value ) && ( is_numeric( $p_field_value ) ) ) {
+		if( ( META_FILTER_NONE == $p_field_value ) && ( is_numeric( $p_field_value ) ) ) {
 			return true;
 		}
 	}
@@ -400,33 +398,33 @@ function filter_field_is_none( $p_field_value ) {
 
 /**
  *  Checks the supplied value to see if it is a MYSELF value.
- * @param string $p_field_value - The value to check.
- * @return bool true for "MYSELF" values and false for others.
+ * @param string $p_field_value The value to check.
+ * @return boolean true for "MYSELF" values and false for others.
  */
 function filter_field_is_myself( $p_field_value ) {
-	return( META_FILTER_MYSELF == $p_field_value ? TRUE : FALSE );
+	return( META_FILTER_MYSELF == $p_field_value ? true : false );
 }
 
 /**
  * Filter per page
- * @param array $p_filter filter
- * @param int $p_count count
- * @param int $p_per_page per page
- * @return int
+ * @param array   $p_filter   Filter.
+ * @param integer $p_count    Count.
+ * @param integer $p_per_page Per page.
+ * @return integer
  */
-function filter_per_page( $p_filter, $p_count, $p_per_page ) {
-	$p_per_page = (( NULL == $p_per_page ) ? (int) $p_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] : $p_per_page );
+function filter_per_page( array $p_filter, $p_count, $p_per_page ) {
+	$p_per_page = (( null == $p_per_page ) ? (int)$p_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] : $p_per_page );
 	$p_per_page = (( 0 == $p_per_page || -1 == $p_per_page ) ? $p_count : $p_per_page );
 
-	return (int) abs( $p_per_page );
+	return (int)abs( $p_per_page );
 }
 
 /**
  *  Use $p_count and $p_per_page to determine how many pages to split this list up into.
  *  For the sake of consistency have at least one page, even if it is empty.
- * @param int $p_count count
- * @param int $p_per_page per page
- * @return int page count
+ * @param integer $p_count    Count.
+ * @param integer $p_per_page Per page.
+ * @return integer page count
  */
 function filter_page_count( $p_count, $p_per_page ) {
 	$t_page_count = ceil( $p_count / $p_per_page );
@@ -439,9 +437,9 @@ function filter_page_count( $p_count, $p_per_page ) {
 /**
  * Checks to make sure $p_page_number isn't past the last page.
  * and that $p_page_number isn't before the first page
- * @param int $p_page_number Page number
- * @param int $p_page_count Page count
- * @return int
+ * @param integer $p_page_number Page number.
+ * @param integer $p_page_count  Page count.
+ * @return integer
  */
 function filter_valid_page_number( $p_page_number, $p_page_count ) {
 	if( $p_page_number > $p_page_count ) {
@@ -456,30 +454,28 @@ function filter_valid_page_number( $p_page_number, $p_page_count ) {
 
 /**
  * Figure out the offset into the db query, offset is which record to start querying from
- * @param int $p_page_number Page number
- * @param int $p_per_page Per page
- * @return int
+ * @param integer $p_page_number Page number.
+ * @param integer $p_per_page    Per page.
+ * @return integer
  */
 function filter_offset( $p_page_number, $p_per_page ) {
-	return(( (int) $p_page_number -1 ) * (int) $p_per_page );
+	return(( (int)$p_page_number -1 ) * (int)$p_per_page );
 }
 
 /**
  * Make sure that our filters are entirely correct and complete (it is possible that they are not).
- * We need to do this to cover cases where we don't have complete control over the filters given.s
- * @param array $p_filter_arr
+ * We need to do this to cover cases where we don't have complete control over the filters given.
+ * @param array $p_filter_arr A Filter definition.
  * @return array
  * @todo function needs to be abstracted
  */
-function filter_ensure_valid_filter( $p_filter_arr ) {
-
+function filter_ensure_valid_filter( array $p_filter_arr ) {
 	# extend current filter to add information passed via POST
 	if( !isset( $p_filter_arr['_version'] ) ) {
 		$p_filter_arr['_version'] = config_get( 'cookie_version' );
 	}
-	$t_cookie_vers = (int) utf8_substr( $p_filter_arr['_version'], 1 );
-	if( utf8_substr( config_get( 'cookie_version' ), 1 ) > $t_cookie_vers ) {
-
+	$t_cookie_vers = (int)substr( $p_filter_arr['_version'], 1 );
+	if( substr( config_get( 'cookie_version' ), 1 ) > $t_cookie_vers ) {
 		# if the version is old, update it
 		$p_filter_arr['_version'] = config_get( 'cookie_version' );
 	}
@@ -578,35 +574,35 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 	# initialize plugin filters
 	$t_plugin_filters = filter_get_plugin_filters();
 	foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
-		if( !isset( $p_filter_arr[ $t_field_name ] ) ) {
+		if( !isset( $p_filter_arr[$t_field_name] ) ) {
 			switch( $t_filter_object->type ) {
 				case FILTER_TYPE_STRING:
-					$p_filter_arr[ $t_field_name ] = gpc_get_string( $t_field_name, $t_filter_object->default );
+					$p_filter_arr[$t_field_name] = gpc_get_string( $t_field_name, $t_filter_object->default );
 					break;
 
 				case FILTER_TYPE_INT:
-					$p_filter_arr[ $t_field_name ] = gpc_get_int( $t_field_name, (int)$t_filter_object->default );
+					$p_filter_arr[$t_field_name] = gpc_get_int( $t_field_name, (int)$t_filter_object->default );
 					break;
 
 				case FILTER_TYPE_BOOLEAN:
-					$p_filter_arr[ $t_field_name ] = gpc_get_bool( $t_field_name, (bool)$t_filter_object->default );
+					$p_filter_arr[$t_field_name] = gpc_get_bool( $t_field_name, (bool)$t_filter_object->default );
 					break;
 
 				case FILTER_TYPE_MULTI_STRING:
-					$p_filter_arr[ $t_field_name ] = gpc_get_string_array( $t_field_name, array( 0 => (string)META_FILTER_ANY ) );
+					$p_filter_arr[$t_field_name] = gpc_get_string_array( $t_field_name, array( 0 => (string)META_FILTER_ANY ) );
 					break;
 
 				case FILTER_TYPE_MULTI_INT:
-					$p_filter_arr[ $t_field_name ] = gpc_get_int_array( $t_field_name, array( 0 => META_FILTER_ANY ) );
+					$p_filter_arr[$t_field_name] = gpc_get_int_array( $t_field_name, array( 0 => META_FILTER_ANY ) );
 					break;
 
 				default:
-					$p_filter_arr[ $t_field_name ] = (string)META_FILTER_ANY;
+					$p_filter_arr[$t_field_name] = (string)META_FILTER_ANY;
 			}
 		}
 
-		if( ! $t_filter_object->validate( $p_filter_arr[ $t_field_name ] ) ) {
-			$p_filter_arr[ $t_field_name ] = $t_filter_object->default;
+		if( ! $t_filter_object->validate( $p_filter_arr[$t_field_name] ) ) {
+			$p_filter_arr[$t_field_name] = $t_filter_object->default;
 		}
 	}
 
@@ -710,10 +706,10 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 			$t_checked_array = array();
 			foreach( $p_filter_arr[$t_multi_field_name] as $t_filter_value ) {
 				$t_filter_value = stripslashes( $t_filter_value );
-				if(( $t_filter_value === 'any' ) || ( $t_filter_value === '[any]' ) ) {
+				if( ( $t_filter_value === 'any' ) || ( $t_filter_value === '[any]' ) ) {
 					$t_filter_value = META_FILTER_ANY;
 				}
-				if(( $t_filter_value === 'none' ) || ( $t_filter_value === '[none]' ) ) {
+				if( ( $t_filter_value === 'none' ) || ( $t_filter_value === '[none]' ) ) {
 					$t_filter_value = META_FILTER_NONE;
 				}
 				if( 'string' == $t_multi_field_type ) {
@@ -745,7 +741,7 @@ function filter_ensure_valid_filter( $p_filter_arr ) {
 				$t_checked_array = array();
 				foreach( $p_filter_arr['custom_fields'][$t_cfid] as $t_filter_value ) {
 					$t_filter_value = stripslashes( $t_filter_value );
-					if(( $t_filter_value === 'any' ) || ( $t_filter_value === '[any]' ) ) {
+					if( ( $t_filter_value === 'any' ) || ( $t_filter_value === '[any]' ) ) {
 						$t_filter_value = META_FILTER_ANY;
 					}
 					$t_checked_array[] = $t_filter_value;
@@ -814,8 +810,8 @@ function filter_get_default() {
 }
 
 /**
- *  Deserialize filter string
- * @param string $p_serialized_filter
+ * Deserialize filter string
+ * @param string $p_serialized_filter Serialized filter string.
  * @return mixed $t_filter array
  * @see filter_ensure_valid_filter
  */
@@ -826,8 +822,7 @@ function filter_deserialize( $p_serialized_filter ) {
 
 	# check to see if new cookie is needed
 	$t_setting_arr = explode( '#', $p_serialized_filter, 2 );
-	if(( $t_setting_arr[0] == 'v1' ) || ( $t_setting_arr[0] == 'v2' ) || ( $t_setting_arr[0] == 'v3' ) || ( $t_setting_arr[0] == 'v4' ) ) {
-
+	if( ( $t_setting_arr[0] == 'v1' ) || ( $t_setting_arr[0] == 'v2' ) || ( $t_setting_arr[0] == 'v3' ) || ( $t_setting_arr[0] == 'v4' ) ) {
 		# these versions can't be salvaged, they are too old to update
 		return false;
 	}
@@ -841,7 +836,6 @@ function filter_deserialize( $p_serialized_filter ) {
 		return false;
 	}
 	if( $t_filter_array['_version'] != config_get( 'cookie_version' ) ) {
-
 		# if the version is not new enough, update it using defaults
 		return filter_ensure_valid_filter( $t_filter_array );
 	}
@@ -850,8 +844,8 @@ function filter_deserialize( $p_serialized_filter ) {
 }
 
 /**
- *  Check if the filter cookie exists and is of the correct version.
- * @return bool
+ * Check if the filter cookie exists and is of the correct version.
+ * @return boolean
  */
 function filter_is_cookie_valid() {
 	$t_view_all_cookie_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
@@ -864,7 +858,7 @@ function filter_is_cookie_valid() {
 
 	# check to see if new cookie is needed
 	$t_setting_arr = explode( '#', $t_view_all_cookie, 2 );
-	if(( $t_setting_arr[0] == 'v1' ) || ( $t_setting_arr[0] == 'v2' ) || ( $t_setting_arr[0] == 'v3' ) || ( $t_setting_arr[0] == 'v4' ) ) {
+	if( ( $t_setting_arr[0] == 'v1' ) || ( $t_setting_arr[0] == 'v2' ) || ( $t_setting_arr[0] == 'v3' ) || ( $t_setting_arr[0] == 'v4' ) ) {
 		return false;
 	}
 
@@ -884,26 +878,26 @@ function filter_is_cookie_valid() {
 }
 
 /**
- *  Get the array fields specified by $p_filter_id
- *  using the cached row if it's available
- * @param int $p_filter_id
- * @return mixed a filter row
+ * Get the array fields specified by $p_filter_id
+ * using the cached row if it's available
+ * @param integer $p_filter_id A filter identifier to look up in the database.
+ * @return array a filter row
  */
 function filter_get_row( $p_filter_id ) {
 	return filter_cache_row( $p_filter_id );
 }
 
 /**
- *  Get the value of the filter field specified by filter id and field name
- * @param int $p_filter_id
- * @param string $p_field_name
+ * Get the value of the filter field specified by filter id and field name
+ * @param integer $p_filter_id  A filter identifier to look up in the database.
+ * @param string  $p_field_name Name of the filter field to retrieve.
  * @return string
  */
 function filter_get_field( $p_filter_id, $p_field_name ) {
-	$row = filter_get_row( $p_filter_id );
+	$t_row = filter_get_row( $p_filter_id );
 
-	if( isset( $row[$p_field_name] ) ) {
-		return $row[$p_field_name];
+	if( isset( $t_row[$p_field_name] ) ) {
+		return $t_row[$p_field_name];
 	} else {
 		error_parameters( $p_field_name );
 		trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
@@ -912,13 +906,13 @@ function filter_get_field( $p_filter_id, $p_field_name ) {
 }
 
 /**
- *  Add sort parameters to the query clauses
- * @param array $p_filter
- * @param bool $p_show_sticky
- * @param array $p_query_clauses
+ * Add sort parameters to the query clauses
+ * @param array   &$p_filter       Filter to sort.
+ * @param boolean $p_show_sticky   Whether to show sticky items.
+ * @param array   $p_query_clauses Array of query clauses.
  * @return array $p_query_clauses
  */
-function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clauses ) {
+function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_query_clauses ) {
 	$t_bug_table = db_get_table( 'bug' );
 	$t_custom_field_string_table = db_get_table( 'custom_field_string' );
 
@@ -936,7 +930,7 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 
 	$t_plugin_columns = columns_get_plugin_columns();
 
-	if( gpc_string_to_bool( $p_filter[FILTER_PROPERTY_STICKY] ) && ( NULL !== $p_show_sticky ) ) {
+	if( gpc_string_to_bool( $p_filter[FILTER_PROPERTY_STICKY] ) && ( null !== $p_show_sticky ) ) {
 		$p_query_clauses['order'][] = "$t_bug_table.sticky DESC";
 	}
 
@@ -946,7 +940,6 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 		$c_dir = 'DESC' == $t_dir_fields[$i] ? 'DESC' : 'ASC';
 
 		if( !in_array( $t_sort_fields[$i], array_slice( $t_sort_fields, $i + 1 ) ) ) {
-
 			# if sorting by a custom field
 			if( strpos( $c_sort, 'custom_' ) === 0 ) {
 				$t_custom_field = utf8_substr( $c_sort, utf8_strlen( 'custom_' ) );
@@ -966,8 +959,8 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 				$p_query_clauses['order'][] = "$c_cf_alias $c_dir";
 
 			# if sorting by plugin columns
-			} else if( isset( $t_plugin_columns[ $t_sort_fields[$i] ] ) ) {
-				$t_column_object = $t_plugin_columns[ $t_sort_fields[$i] ];
+			} else if( isset( $t_plugin_columns[$t_sort_fields[$i]] ) ) {
+				$t_column_object = $t_plugin_columns[$t_sort_fields[$i]];
 
 				if( $t_column_object->sortable ) {
 					$t_clauses = $t_column_object->sortquery( $c_dir );
@@ -1010,15 +1003,15 @@ function filter_get_query_sort_data( &$p_filter, $p_show_sticky, $p_query_clause
 }
 
 /**
- *  Remove any duplicate values in certain elements of query_clauses
- *  Do not loop over query clauses as some keys may contain valid duplicate values.
- *  We basically want unique values for just the base query elements select, from, and join
- *  'where' and 'where_values' key should not have duplicates as that is handled earlier and applying
- *  array_unique here could cause problems with the query.
- * @param $p_query_clauses
- * @return $p_query_clauses
+ * Remove any duplicate values in certain elements of query_clauses
+ * Do not loop over query clauses as some keys may contain valid duplicate values.
+ * We basically want unique values for just the base query elements select, from, and join
+ * 'where' and 'where_values' key should not have duplicates as that is handled earlier and applying
+ * array_unique here could cause problems with the query.
+ * @param array $p_query_clauses Array of query clauses.
+ * @return array
  */
-function filter_unique_query_clauses( $p_query_clauses ) {
+function filter_unique_query_clauses( array $p_query_clauses ) {
 	$p_query_clauses['select'] = array_unique( $p_query_clauses['select'] );
 	$p_query_clauses['from'] = array_unique( $p_query_clauses['from'] );
 	$p_query_clauses['join'] = array_unique( $p_query_clauses['join'] );
@@ -1027,16 +1020,16 @@ function filter_unique_query_clauses( $p_query_clauses ) {
 
 /**
  * Build a query with the query clauses array, query for bug count and return the result
- * @param array $p_query_clauses
- * @return int
+ * @param array $p_query_clauses Array of query clauses.
+ * @return integer
  */
-function filter_get_bug_count( $p_query_clauses ) {
+function filter_get_bug_count( array $p_query_clauses ) {
 	$t_bug_table = db_get_table( 'bug' );
 	$p_query_clauses = filter_unique_query_clauses( $p_query_clauses );
 	$t_select_string = "SELECT Count( DISTINCT $t_bug_table.id ) as idcnt ";
 	$t_from_string = " FROM " . implode( ', ', $p_query_clauses['from'] );
 	$t_join_string = (( count( $p_query_clauses['join'] ) > 0 ) ? implode( ' ', $p_query_clauses['join'] ) : '' );
-	$t_where_string = count( $p_query_clauses['project_where']) > 0 ? 'WHERE '. implode( ' AND ', $p_query_clauses['project_where'] ) : '';
+	$t_where_string = count( $p_query_clauses['project_where'] ) > 0 ? 'WHERE '. implode( ' AND ', $p_query_clauses['project_where'] ) : '';
 	if( count( $p_query_clauses['where'] ) > 0 ) {
 		$t_where_string .= ' AND ( ';
 		$t_where_string .= implode( $p_query_clauses['operator'], $p_query_clauses['where'] );
@@ -1050,19 +1043,19 @@ function filter_get_bug_count( $p_query_clauses ) {
  * Get set of bug rows from given filter
  * @todo Had to make all these parameters required because we can't use call-time pass by reference anymore.
  * I really preferred not having to pass all the params in if you didn't want to, but I wanted to get
- *  rid of the errors for now.  If we can think of a better way later (maybe return an object) that would be great.
+ * rid of the errors for now.  If we can think of a better way later (maybe return an object) that would be great.
  *
- * @param int $p_page_number Page number of the page you want to see (set to the actual page on return)
- * @param int $p_per_page The number of bugs to see per page (set to actual on return)
- *      -1   indicates you want to see all bugs
- *      null indicates you want to use the value specified in the filter
- * @param int $p_page_count you don't need to give a value here, the number of pages will be stored here on return
- * @param int $p_bug_count you don't need to give a value here, the number of bugs will be stored here on return
- * @param mixed $p_custom_filter Custom Filter to use.
- * @param int $p_project_id project id to use in filtering.
- * @param int $p_user_id user id to use as current user when filtering.
- * @param bool $p_show_sticky true/false - get sticky issues only.
- * @return bool|array
+ * @param integer &$p_page_number  Page number of the page you want to see (set to the actual page on return).
+ * @param integer &$p_per_page     The number of bugs to see per page (set to actual on return)
+ *                                 -1   indicates you want to see all bugs
+ *                                 null indicates you want to use the value specified in the filter.
+ * @param integer &$p_page_count   You don't need to give a value here, the number of pages will be stored here on return.
+ * @param integer &$p_bug_count    You don't need to give a value here, the number of bugs will be stored here on return.
+ * @param mixed   $p_custom_filter Custom Filter to use.
+ * @param integer $p_project_id    Project id to use in filtering.
+ * @param integer $p_user_id       User id to use as current user when filtering.
+ * @param boolean $p_show_sticky   True/false - get sticky issues only.
+ * @return boolean|array
  */
 function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p_bug_count, $p_custom_filter = null, $p_project_id = null, $p_user_id = null, $p_show_sticky = null ) {
 	log_event( LOG_FILTERING, 'START NEW FILTER QUERY' );
@@ -1091,7 +1084,6 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	$c_user_id = (int)$t_user_id;
 
 	if( null === $p_project_id ) {
-
 		# @@@ If project_id is not specified, then use the project id(s) in the filter if set, otherwise, use current project.
 		$t_project_id = helper_get_current_project();
 	} else {
@@ -1099,7 +1091,6 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	}
 
 	if( $p_custom_filter === null ) {
-
 		# Prefer current_user_get_bug_filter() over user_get_filter() when applicable since it supports
 		# cookies set by previous version of the code.
 		if( $t_user_id == $t_current_user_id ) {
@@ -1111,14 +1102,12 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		$t_filter = $p_custom_filter;
 	}
 
-	$t_filter = filter_ensure_valid_filter( $t_filter );
-
+	# if filter isn't return above, create a new filter from an empty array.
 	if( false === $t_filter ) {
-		return false;
-
-		# signify a need to create a cookie
-		# @@@ error instead?
+		$t_filter = array();
 	}
+
+	$t_filter = filter_ensure_valid_filter( $t_filter );
 
 	$t_view_type = $t_filter['_view_type'];
 
@@ -1203,7 +1192,6 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	}
 
 	if( $t_projects_query_required ) {
-
 		# expand project ids to include sub-projects
 		if( $t_include_sub_projects ) {
 			$t_top_project_ids = $t_project_ids;
@@ -1211,8 +1199,9 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			foreach( $t_top_project_ids as $t_pid ) {
 				log_event( LOG_FILTERING, 'Getting sub-projects for project id @P' . $t_pid );
 				$t_subproject_ids = user_get_all_accessible_subprojects( $t_user_id, $t_pid );
-				if( !$t_subproject_ids )
+				if( !$t_subproject_ids ) {
 					continue;
+				}
 				$t_project_ids = array_merge( $t_project_ids, $t_subproject_ids );
 			}
 
@@ -1282,7 +1271,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	}
 
 	# date filter
-	if(( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_YEAR] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_YEAR] ) ) {
+	if( ( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_YEAR] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_YEAR] ) ) {
 
 		$t_start_string = $t_filter[FILTER_PROPERTY_START_YEAR] . "-" . $t_filter[FILTER_PROPERTY_START_MONTH] . "-" . $t_filter[FILTER_PROPERTY_START_DAY] . " 00:00:00";
 		$t_end_string = $t_filter[FILTER_PROPERTY_END_YEAR] . "-" . $t_filter[FILTER_PROPERTY_END_MONTH] . "-" . $t_filter[FILTER_PROPERTY_END_DAY] . " 23:59:59";
@@ -1336,7 +1325,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	# @@@ thraxisp - access_has_project_level checks greater than or equal to,
 	#   this assumed that there aren't any holes above REPORTER where the limit would apply
 	#
-	if(( ON === $t_limit_reporters ) && ( !access_has_project_level( REPORTER + 1, $t_project_id, $t_user_id ) ) ) {
+	if( ( ON === $t_limit_reporters ) && ( !access_has_project_level( REPORTER + 1, $t_project_id, $t_user_id ) ) ) {
 		$c_reporter_id = $c_user_id;
 		$t_where_params[] = $c_reporter_id;
 		array_push( $t_where_clauses, "($t_bug_table.reporter_id=" . db_param() . ')' );
@@ -1614,7 +1603,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		}
 	}
 
-	# os
+	# Operating System (os)
 	if( !filter_field_is_any( $t_filter[FILTER_PROPERTY_OS] ) ) {
 		$t_clauses = array();
 
@@ -1641,7 +1630,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		}
 	}
 
-	# os_build
+	# Operating System Build (os_build)
 	if( !filter_field_is_any( $t_filter[FILTER_PROPERTY_OS_BUILD] ) ) {
 		$t_clauses = array();
 
@@ -1729,7 +1718,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		array_push( $t_join_clauses, "LEFT JOIN $t_bug_monitor_table $t_table_name ON $t_table_name.bug_id = $t_bug_table.id" );
 
 		foreach( $t_filter[FILTER_PROPERTY_MONITOR_USER_ID] as $t_filter_member ) {
-			$c_user_monitor = db_prepare_int( $t_filter_member );
+			$c_user_monitor = (int)$t_filter_member;
 			if( filter_field_is_myself( $c_user_monitor ) ) {
 				array_push( $t_clauses, $c_user_id );
 			} else {
@@ -1868,8 +1857,8 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	# plugin filters
 	$t_plugin_filters = filter_get_plugin_filters();
 	foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
-		if( !filter_field_is_any( $t_filter[ $t_field_name ] ) || $t_filter_object->type == FILTER_TYPE_BOOLEAN ) {
-			$t_filter_query = $t_filter_object->query( $t_filter[ $t_field_name ] );
+		if( !filter_field_is_any( $t_filter[$t_field_name] ) || $t_filter_object->type == FILTER_TYPE_BOOLEAN ) {
+			$t_filter_query = $t_filter_object->query( $t_filter[$t_field_name] );
 			if( is_array( $t_filter_query ) ) {
 				if( isset( $t_filter_query['join'] ) ) {
 					array_push( $t_join_clauses, $t_filter_query['join'] );
@@ -1886,7 +1875,6 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 	# custom field filters
 	if( ON == config_get( 'filter_by_custom_fields' ) ) {
-
 		# custom field filtering
 		# @@@ At the moment this gets the linked fields relating to the current project
 		#     It should get the ones relating to the project in the filter or all projects
@@ -1940,7 +1928,6 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 							break;
 					}
 				} else {
-
 					array_push( $t_join_clauses, $t_cf_join_clause );
 
 					$t_filter_array = array();
@@ -1981,14 +1968,13 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 	# Text search
 	if( !is_blank( $t_filter[FILTER_PROPERTY_SEARCH] ) ) {
-
 		# break up search terms by spacing or quoting
 		preg_match_all( "/-?([^'\"\s]+|\"[^\"]+\"|'[^']+')/", $t_filter[FILTER_PROPERTY_SEARCH], $t_matches, PREG_SET_ORDER );
 
 		# organize terms without quoting, paying attention to negation
 		$t_search_terms = array();
 		foreach( $t_matches as $t_match ) {
-			$t_search_terms[ trim( $t_match[1], "\'\"" ) ] = ( $t_match[0][0] == '-' );
+			$t_search_terms[trim( $t_match[1], "\'\"" )] = ( $t_match[0][0] == '-' );
 		}
 
 		# build a big where-clause and param list for all search terms, including negations
@@ -2025,7 +2011,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				}
 				# Note: no need to test negative values, '-' sign has been removed
 				if( $t_search_term <= $t_search_max ) {
-					$c_search_int = (int) $t_search_term;
+					$c_search_int = (int)$t_search_term;
 					$t_textsearch_where_clause .= " OR $t_bug_table.id = " . db_param();
 					$t_textsearch_where_clause .= " OR $t_bugnote_table.id = " . db_param();
 					$t_where_params[] = $c_search_int;
@@ -2051,12 +2037,13 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	# End text search
 
 	# Determine join operator
-	if( $t_filter[FILTER_PROPERTY_MATCH_TYPE] == FILTER_MATCH_ANY )
+	if( $t_filter[FILTER_PROPERTY_MATCH_TYPE] == FILTER_MATCH_ANY ) {
 		$t_join_operator = ' OR ';
-	else
+	} else {
 		$t_join_operator = ' AND ';
+	}
 
-	log_event(LOG_FILTERING, 'Join operator : ' . $t_join_operator);
+	log_event( LOG_FILTERING, 'Join operator : ' . $t_join_operator );
 
 	$t_query_clauses['select'] = $t_select_clauses;
 	$t_query_clauses['from'] = $t_from_clauses;
@@ -2095,7 +2082,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	$t_id_array_lastmod = array();
 	for( $i = 0;$i < $t_row_count;$i++ ) {
 		$t_row = db_fetch_array( $t_result );
-		$t_id_array_lastmod[] = (int) $t_row['id'];
+		$t_id_array_lastmod[] = (int)$t_row['id'];
 		$t_rows[] = $t_row;
 	}
 
@@ -2104,11 +2091,11 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 /**
  *  Cache the filter results with bugnote stats for later use
- * @param array $p_rows results of the filter query
- * @param array $p_id_array_lastmod array of bug ids
+ * @param array $p_rows             Results of the filter query.
+ * @param array $p_id_array_lastmod Array of bug ids.
  * @return array
  */
-function filter_cache_result( $p_rows, $p_id_array_lastmod ) {
+function filter_cache_result( array $p_rows, array $p_id_array_lastmod ) {
 	$t_bugnote_table = db_get_table( 'bugnote' );
 
 	$t_id_array_lastmod = array_unique( $p_id_array_lastmod );
@@ -2126,9 +2113,9 @@ function filter_cache_result( $p_rows, $p_id_array_lastmod ) {
 	$t_rows = array();
 	foreach( $p_rows as $t_row ) {
 		if( !isset( $t_stats[$t_row['id']] ) ) {
-			$t_rows[] = bug_row_to_object( bug_cache_database_result( $t_row, false ) );
+			$t_rows[] = bug_row_to_object( bug_cache_database_result( $t_row ) );
 		} else {
-			$t_rows[] = bug_row_to_object( bug_cache_database_result( $t_row, $t_stats[ $t_row['id'] ] ) );
+			$t_rows[] = bug_row_to_object( bug_cache_database_result( $t_row, $t_stats[$t_row['id']] ) );
 		}
 	}
 	return $t_rows;
@@ -2137,8 +2124,9 @@ function filter_cache_result( $p_rows, $p_id_array_lastmod ) {
 /**
  * Mainly based on filter_draw_selection_area2() but adds the support for the collapsible
  * filter display.
- * @param int $p_page_number
- * @param bool $p_for_screen
+ * @param integer $p_page_number Page number.
+ * @param boolean $p_for_screen  Whether output is for screen view.
+ * @return void
  * @see filter_draw_selection_area2
  */
 function filter_draw_selection_area( $p_page_number, $p_for_screen = true ) {
@@ -2153,9 +2141,10 @@ function filter_draw_selection_area( $p_page_number, $p_for_screen = true ) {
  * Prints the filter selection area for both the bug list view screen and
  * the bug list print screen. This function was an attempt to make it easier to
  * add new filters and rearrange them on screen for both pages.
- * @param int $p_page_number
- * @param bool $p_for_screen
- * @param bool $p_expanded
+ * @param integer $p_page_number Page number.
+ * @param boolean $p_for_screen  Whether output is for screen view.
+ * @param boolean $p_expanded    Whether to display expanded.
+ * @return void
  */
 function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_expanded = true ) {
 	$t_form_name_suffix = $p_expanded ? '_open' : '_closed';
@@ -2163,7 +2152,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	$t_filter = current_user_get_bug_filter();
 	$t_filter = filter_ensure_valid_filter( $t_filter );
 	$t_project_id = helper_get_current_project();
-	$t_page_number = (int) $p_page_number;
+	$t_page_number = (int)$p_page_number;
 
 	$t_view_type = $t_filter['_view_type'];
 
@@ -2947,7 +2936,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 			<td class="small-caption" colspan="2" id="relationship_type_filter_target">
 							<?php
-								echo '<input type="hidden" name="', FILTER_PROPERTY_RELATIONSHIP_TYPE, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE]), '" />';
+								echo '<input type="hidden" name="', FILTER_PROPERTY_RELATIONSHIP_TYPE, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] ), '" />';
 		echo '<input type="hidden" name="', FILTER_PROPERTY_RELATIONSHIP_BUG, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_RELATIONSHIP_BUG] ), '" />';
 		$c_rel_type = $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE];
 		$c_rel_bug = $t_filter[FILTER_PROPERTY_RELATIONSHIP_BUG];
@@ -3029,9 +3018,9 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		$t_plugin_filter_fields = array();
 		$t_column_count_by_row = array();
 		$t_row = 0;
-		foreach( $t_plugin_filters AS $t_field_name=>$t_filter_object ) {
+		foreach( $t_plugin_filters as $t_field_name=>$t_filter_object ) {
 			# be sure the colspan is an integer
-			$t_colspan = (int) $t_filter_object->colspan;
+			$t_colspan = (int)$t_filter_object->colspan;
 
 			# prevent silliness.
 			if( $t_colspan < 0 ) {
@@ -3054,7 +3043,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			} else {
 				$t_is_assigned = false;
 				# find a row with space
-				foreach( $t_column_count_by_row AS $t_row_num=>$t_col_count ) {
+				foreach( $t_column_count_by_row as $t_row_num=>$t_col_count ) {
 					if( $t_colspan <= ( $t_filter_cols - $t_col_count ) ) {
 						$t_assigned_row = $t_row_num;
 						$t_column_count_by_row[$t_row_num] += $t_colspan;
@@ -3073,23 +3062,23 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				'" id="' . string_attribute( $t_field_name ) . '_filter">' . string_display_line( $t_filter_object->title ) . '</a> </td>';
 			$t_values = '<td ' . $t_colspan_attr . 'class="small-caption" id="' . string_attribute( $t_field_name ) . '_filter_target"> ';
 
-			if( !isset( $t_filter[ $t_field_name ] ) ) {
+			if( !isset( $t_filter[$t_field_name] ) ) {
 				$t_values .= lang_get( 'any' );
 			} else {
 				switch( $t_filter_object->type ) {
 					case FILTER_TYPE_STRING:
 					case FILTER_TYPE_INT:
-						if( filter_field_is_any( $t_filter[ $t_field_name ] ) ) {
+						if( filter_field_is_any( $t_filter[$t_field_name] ) ) {
 							$t_values .= lang_get( 'any' );
 						} else {
-							$t_values .= string_display_line( $t_filter[ $t_field_name ] );
+							$t_values .= string_display_line( $t_filter[$t_field_name] );
 						}
-						$t_values .= '<input type="hidden" name="' . string_attribute( $t_field_name ) . '" value="' . string_attribute( $t_filter[ $t_field_name ] ) . '"/>';
+						$t_values .= '<input type="hidden" name="' . string_attribute( $t_field_name ) . '" value="' . string_attribute( $t_filter[$t_field_name] ) . '"/>';
 						break;
 
 					case FILTER_TYPE_BOOLEAN:
-						$t_values .= string_display_line( $t_filter_object->display( (bool)$t_filter[ $t_field_name ] ) );
-						$t_values .= '<input type="hidden" name="' . string_attribute( $t_field_name ) . '" value="' . (bool)$t_filter[ $t_field_name ] . '"/>';
+						$t_values .= string_display_line( $t_filter_object->display( (bool)$t_filter[$t_field_name] ) );
+						$t_values .= '<input type="hidden" name="' . string_attribute( $t_field_name ) . '" value="' . (bool)$t_filter[$t_field_name] . '"/>';
 						break;
 
 					case FILTER_TYPE_MULTI_STRING:
@@ -3097,11 +3086,11 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 						$t_first = true;
 						$t_output = '';
 
-						if( !is_array( $t_filter[ $t_field_name ] ) ) {
-							$t_filter[ $t_field_name ] = array( $t_filter[ $t_field_name ] );
+						if( !is_array( $t_filter[$t_field_name] ) ) {
+							$t_filter[$t_field_name] = array( $t_filter[$t_field_name] );
 						}
 
-						foreach( $t_filter[ $t_field_name ] as $t_current ) {
+						foreach( $t_filter[$t_field_name] as $t_current ) {
 							if( filter_field_is_any( $t_current ) ) {
 								$t_output .= lang_get( 'any' );
 							} else {
@@ -3414,11 +3403,11 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<?php
 				switch( $t_filter[FILTER_PROPERTY_MATCH_TYPE] ) {
 					case FILTER_MATCH_ANY:
-						echo lang_get ('filter_match_any');
+						echo lang_get( 'filter_match_any' );
 						break;
 					case FILTER_MATCH_ALL:
 					default:
-						echo lang_get ('filter_match_all');
+						echo lang_get( 'filter_match_all' );
 						break;
 				}
 			?>
@@ -3511,11 +3500,11 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		<?php
 		$f_switch_view_link = ( config_get( 'use_javascript' ) && config_get( 'use_dynamic_filters' ) ) ? 'view_all_set.php?type=6&amp;view_type=' : 'view_filters_page.php?view_type=';
 		$t_view_filters = config_get( 'view_filters' );
-		if(( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) {
+		if( ( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) {
 			if( 'advanced' == $t_view_type ) {
-				echo '<li><a href="', $f_switch_view_link, 'simple">', lang_get('simple_filters'), '</a></li>';
+				echo '<li><a href="', $f_switch_view_link, 'simple">', lang_get( 'simple_filters' ), '</a></li>';
 			} else {
-				echo '<li><a href="', $f_switch_view_link, 'advanced">', lang_get('advanced_filters'), '</a></li>';
+				echo '<li><a href="', $f_switch_view_link, 'advanced">', lang_get( 'advanced_filters' ), '</a></li>';
 			}
 		}
 
@@ -3550,7 +3539,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
  */
 
 /**
- *  Print the reporter field
+ * Print the reporter field
+ * @return void
  */
 function print_filter_reporter_id() {
 	global $t_select_modifier, $t_filter;
@@ -3561,12 +3551,12 @@ function print_filter_reporter_id() {
 	# @@@ thraxisp - access_has_project_level checks greater than or equal to,
 	#   this assumed that there aren't any holes above REPORTER where the limit would apply
 	#
-	if(( ON === config_get( 'limit_reporters' ) ) && ( !access_has_project_level( REPORTER + 1 ) ) ) {
+	if( ( ON === config_get( 'limit_reporters' ) ) && ( !access_has_project_level( REPORTER + 1 ) ) ) {
 		$t_id = auth_get_current_user_id();
 		$t_username = user_get_field( $t_id, 'username' );
 		$t_realname = user_get_field( $t_id, 'realname' );
 		$t_display_name = string_attribute( $t_username );
-		if(( isset( $t_realname ) ) && ( $t_realname > '' ) && ( ON == config_get( 'show_realname' ) ) ) {
+		if( ( isset( $t_realname ) ) && ( $t_realname > '' ) && ( ON == config_get( 'show_realname' ) ) ) {
 			$t_display_name = string_attribute( $t_realname );
 		}
 		echo '<option value="' . $t_id . '" selected="selected">' . $t_display_name . '</option>';
@@ -3586,7 +3576,8 @@ function print_filter_reporter_id() {
 }
 
 /**
- *  Print the user monitor field
+ * Print the user monitor field
+ * @return void
  */
 function print_filter_user_monitor() {
 	global $t_select_modifier, $t_filter;
@@ -3612,7 +3603,8 @@ function print_filter_user_monitor() {
 }
 
 /**
- *  print the handler field
+ * print the handler field
+ * @return void
  */
 function print_filter_handler_id() {
 	global $t_select_modifier, $t_filter, $f_view_type;
@@ -3636,7 +3628,8 @@ function print_filter_handler_id() {
 }
 
 /**
- *  print the category field
+ * print the category field
+ * @return void
  */
 function print_filter_show_category() {
 	global $t_select_modifier, $t_filter;
@@ -3650,7 +3643,8 @@ function print_filter_show_category() {
 }
 
 /**
- *  print the platform field
+ * print the platform field
+ * @return void
  */
 function print_filter_platform() {
 	global $t_select_modifier, $t_filter;
@@ -3668,7 +3662,8 @@ function print_filter_platform() {
 }
 
 /**
- *  print the os field
+ * print the os field
+ * @return void
  */
 function print_filter_os() {
 	global $t_select_modifier, $t_filter;
@@ -3683,7 +3678,8 @@ function print_filter_os() {
 }
 
 /**
- *  print the os build field
+ * print the os build field
+ * @return void
  */
 function print_filter_os_build() {
 	global $t_select_modifier, $t_filter;
@@ -3698,7 +3694,8 @@ function print_filter_os_build() {
 }
 
 /**
- *  print the severity field
+ * print the severity field
+ * @return void
  */
 function print_filter_show_severity() {
 	global $t_select_modifier, $t_filter;
@@ -3711,7 +3708,8 @@ function print_filter_show_severity() {
 }
 
 /**
- *  print resolution field
+ * print resolution field
+ * @return void
  */
 function print_filter_show_resolution() {
 	global $t_select_modifier, $t_filter;
@@ -3724,7 +3722,8 @@ function print_filter_show_resolution() {
 }
 
 /**
- *  print status field
+ * print status field
+ * @return void
  */
 function print_filter_show_status() {
 	global $t_select_modifier, $t_filter;
@@ -3737,7 +3736,8 @@ function print_filter_show_status() {
 }
 
 /**
- *  print hide status field
+ * print hide status field
+ * @return void
  */
 function print_filter_hide_status() {
 	global $t_select_modifier, $t_filter;
@@ -3750,7 +3750,8 @@ function print_filter_hide_status() {
 }
 
 /**
- *  print build field
+ * print build field
+ * @return void
  */
 function print_filter_show_build() {
 	global $t_select_modifier, $t_filter;
@@ -3764,7 +3765,8 @@ function print_filter_show_build() {
 }
 
 /**
- *  print version field
+ * print version field
+ * @return void
  */
 function print_filter_show_version() {
 	global $t_select_modifier, $t_filter;
@@ -3779,6 +3781,7 @@ function print_filter_show_version() {
 
 /**
  * print fixed in version field
+ * @return void
  */
 function print_filter_show_fixed_in_version() {
 	global $t_select_modifier, $t_filter;
@@ -3792,7 +3795,8 @@ function print_filter_show_fixed_in_version() {
 }
 
 /**
- *  print target version field
+ * print target version field
+ * @return void
  */
 function print_filter_show_target_version() {
 	global $t_select_modifier, $t_filter;
@@ -3806,7 +3810,8 @@ function print_filter_show_target_version() {
 }
 
 /**
- *  print priority field
+ * print priority field
+ * @return void
  */
 function print_filter_show_priority() {
 	global $t_select_modifier, $t_filter;
@@ -3819,7 +3824,8 @@ function print_filter_show_priority() {
 }
 
 /**
- *  print profile field
+ * print profile field
+ * @return void
  */
 function print_filter_show_profile() {
 	global $t_select_modifier, $t_filter;
@@ -3832,7 +3838,8 @@ function print_filter_show_profile() {
 }
 
 /**
- *  print issues per page field
+ * print issues per page field
+ * @return void
  */
 function print_filter_per_page() {
 	global $t_filter;
@@ -3842,7 +3849,8 @@ function print_filter_per_page() {
 }
 
 /**
- *  print view state field
+ * print view state field
+ * @return void
  */
 function print_filter_view_state() {
 	global $t_select_modifier, $t_filter;
@@ -3864,7 +3872,8 @@ function print_filter_view_state() {
 }
 
 /**
- *  print sticky issues field
+ * print sticky issues field
+ * @return void
  */
 function print_filter_sticky_issues() {
 	global $t_filter;
@@ -3874,7 +3883,8 @@ function print_filter_sticky_issues() {
 }
 
 /**
- *  print highlight changed field
+ * print highlight changed field
+ * @return void
  */
 function print_filter_highlight_changed() {
 	global $t_filter;
@@ -3885,7 +3895,8 @@ function print_filter_highlight_changed() {
 
 /**
  * Print filter by date fields
- * @param bool $p_hide_checkbox hide data filter checkbox
+ * @param boolean $p_hide_checkbox Hide data filter checkbox.
+ * @return void
  */
 function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 	global $t_filter;
@@ -3977,7 +3988,8 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 }
 
 /**
- *  print relationship fields
+ * print relationship fields
+ * @return void
  */
 function print_filter_relationship_type() {
 	global $t_filter;
@@ -3990,7 +4002,8 @@ function print_filter_relationship_type() {
 }
 
 /**
- *  print tag fields
+ * print tag fields
+ * @return void
  */
 function print_filter_tag_string() {
 	if( !access_has_global_level( config_get( 'tag_view_threshold' ) ) ) {
@@ -4013,7 +4026,8 @@ function print_filter_tag_string() {
 }
 
 /**
- *  print note reporter field
+ * print note reporter field
+ * @return void
  */
 function print_filter_note_user_id() {
 	global $t_select_modifier, $t_filter, $f_view_type;
@@ -4040,8 +4054,9 @@ function print_filter_note_user_id() {
 
 /**
  * Print plugin filter fields as defined by MantisFilter objects.
- * @param string $p_field_name Field name
- * @param object $p_filter_object Filter object
+ * @param string $p_field_name    Field name.
+ * @param object $p_filter_object Filter object.
+ * @return void
  */
 function print_filter_plugin_field( $p_field_name, $p_filter_object ) {
 	global $t_select_modifier, $t_filter, $f_view_type;
@@ -4052,28 +4067,28 @@ function print_filter_plugin_field( $p_field_name, $p_filter_object ) {
 		case FILTER_TYPE_STRING:
 			echo '<input name="', string_attribute( $p_field_name ), '"',
 				( $t_size > 0 ? " size=\"$t_size\"" : '' ), ' value="',
-				string_attribute( $t_filter[ $p_field_name ] ), '"/>';
+				string_attribute( $t_filter[$p_field_name] ), '"/>';
 			break;
 
 		case FILTER_TYPE_INT:
 			echo '<input name="', string_attribute( $p_field_name ), '"',
 				( $t_size > 0 ? " size=\"$t_size\"" : '' ), ' value="',
-				(int) $t_filter[ $p_field_name ], '"/>';
+				(int)$t_filter[$p_field_name], '"/>';
 			break;
 
 		case FILTER_TYPE_BOOLEAN:
 			echo '<input name="', string_attribute( $p_field_name ), '" type="checkbox"',
-				( $t_size > 0 ? " size=\"$t_size\"" : '' ), check_checked( (bool) $t_filter[ $p_field_name ] ) , '"/>';
+				( $t_size > 0 ? " size=\"$t_size\"" : '' ), check_checked( (bool)$t_filter[$p_field_name] ) , '"/>';
 			break;
 
 		case FILTER_TYPE_MULTI_STRING:
 			echo '<select', $t_select_modifier, ( $t_size > 0 ? " size=\"$t_size\"" : '' ), ' name="',
 				string_attribute( $p_field_name ), '[]">', '<option value="', META_FILTER_ANY, '"',
-				check_selected( $t_filter[ $p_field_name ], META_FILTER_ANY ), '>[', lang_get( 'any' ), ']</option>';
+				check_selected( $t_filter[$p_field_name], META_FILTER_ANY ), '>[', lang_get( 'any' ), ']</option>';
 
 			foreach( $p_filter_object->options() as $t_option_value => $t_option_name ) {
 				echo '<option value="', string_attribute( $t_option_value ), '" ',
-					check_selected( $t_filter[ $p_field_name ], $t_option_value ), '>',
+					check_selected( $t_filter[$p_field_name], $t_option_value ), '>',
 					string_display_line( $t_option_name ), '</option>';
 			}
 
@@ -4083,11 +4098,11 @@ function print_filter_plugin_field( $p_field_name, $p_filter_object ) {
 		case FILTER_TYPE_MULTI_INT:
 			echo '<select', $t_select_modifier, ( $t_size > 0 ? " size=\"$t_size\"" : '' ), ' name="',
 				string_attribute( $p_field_name ), '[]">', '<option value="', META_FILTER_ANY, '"',
-				check_selected( $t_filter[ $p_field_name ], META_FILTER_ANY ), '>[', lang_get( 'any' ), ']</option>';
+				check_selected( $t_filter[$p_field_name], META_FILTER_ANY ), '>[', lang_get( 'any' ), ']</option>';
 
 			foreach( $p_filter_object->options() as $t_option_value => $t_option_name ) {
 				echo '<option value="', (int)$t_option_value, '" ',
-					check_selected( $t_filter[ $p_field_name ], (int)$t_option_value ), '>',
+					check_selected( $t_filter[$p_field_name], (int)$t_option_value ), '>',
 					string_display_line( $t_option_name ), '</option>';
 			}
 
@@ -4098,8 +4113,9 @@ function print_filter_plugin_field( $p_field_name, $p_filter_object ) {
 }
 
 /**
- *  print custom fields
- * @param int $p_field_id
+ * print custom fields
+ * @param integer $p_field_id Custom field identifier.
+ * @return void
  */
 function print_filter_custom_field( $p_field_id ) {
 	global $t_filter, $t_accessible_custom_fields_names, $t_accessible_custom_fields_types, $t_accessible_custom_fields_values, $t_accessible_custom_fields_ids, $t_select_modifier;
@@ -4133,7 +4149,7 @@ function print_filter_custom_field( $p_field_id ) {
 			if( is_array( $t_accessible_custom_fields_values[$j] ) ) {
 				$t_max_length = config_get( 'max_dropdown_length' );
 				foreach( $t_accessible_custom_fields_values[$j] as $t_item ) {
-					if(( utf8_strtolower( $t_item ) !== META_FILTER_ANY ) && ( utf8_strtolower( $t_item ) !== META_FILTER_NONE ) ) {
+					if( ( strtolower( $t_item ) !== META_FILTER_ANY ) && ( strtolower( $t_item ) !== META_FILTER_NONE ) ) {
 						echo '<option value="' . string_attribute( $t_item ) . '"';
 						if( isset( $t_filter['custom_fields'][$p_field_id] ) ) {
 							check_selected( $t_filter['custom_fields'][$p_field_id], $t_item );
@@ -4149,6 +4165,7 @@ function print_filter_custom_field( $p_field_id ) {
 
 /**
  * Print sort fields
+ * @return void
  */
 function print_filter_show_sort() {
 	global $t_filter;
@@ -4184,18 +4201,18 @@ function print_filter_show_sort() {
 	if( count( $t_fields ) > 0 ) {
 		# display a primary and secondary sort fields
 		echo '<select name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_0">';
-		foreach( $t_shown_fields as $key => $val ) {
-			echo '<option value="' . $key . '"';
-			check_selected( $key, $t_sort_fields[0] );
-			echo '>' . $val . '</option>';
+		foreach( $t_shown_fields as $t_key => $t_val ) {
+			echo '<option value="' . $t_key . '"';
+			check_selected( $t_key, $t_sort_fields[0] );
+			echo '>' . $t_val . '</option>';
 		}
 		echo '</select>';
 
 		echo '<select name="', FILTER_PROPERTY_SORT_DIRECTION, '_0">';
-		foreach( $t_shown_dirs as $key => $val ) {
-			echo '<option value="' . $key . '"';
-			check_selected( $key, $t_dir_fields[0] );
-			echo '>' . $val . '</option>';
+		foreach( $t_shown_dirs as $t_key => $t_val ) {
+			echo '<option value="' . $t_key . '"';
+			check_selected( $t_key, $t_dir_fields[0] );
+			echo '>' . $t_val . '</option>';
 		}
 		echo '</select>';
 
@@ -4203,17 +4220,17 @@ function print_filter_show_sort() {
 
 		# for secondary sort
 		echo '<select name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_1">';
-		foreach( $t_shown_fields as $key => $val ) {
-			echo '<option value="' . $key . '"';
-			check_selected( $key, $t_sort_fields[1] );
-			echo '>' . $val . '</option>';
+		foreach( $t_shown_fields as $t_key => $t_val ) {
+			echo '<option value="' . $t_key . '"';
+			check_selected( $t_key, $t_sort_fields[1] );
+			echo '>' . $t_val . '</option>';
 		}
 		echo '</select>';
 		echo '<select name="', FILTER_PROPERTY_SORT_DIRECTION, '_1">';
-		foreach( $t_shown_dirs as $key => $val ) {
-			echo '<option value="' . $key . '"';
-			check_selected( $key, $t_dir_fields[1] );
-			echo '>' . $val . '</option>';
+		foreach( $t_shown_dirs as $t_key => $t_val ) {
+			echo '<option value="' . $t_key . '"';
+			check_selected( $t_key, $t_dir_fields[1] );
+			echo '>' . $t_val . '</option>';
 		}
 		echo '</select>';
 	} else {
@@ -4225,8 +4242,9 @@ function print_filter_show_sort() {
 
 /**
  * Print custom field date fields
- * @param int $p_field_num
- * @param int $p_field_id
+ * @param integer $p_field_num Field number.
+ * @param integer $p_field_id  Field identifier.
+ * @return void
  */
 function print_filter_custom_field_date( $p_field_num, $p_field_id ) {
 	global $t_filter, $t_accessible_custom_fields_values;
@@ -4345,6 +4363,7 @@ function print_filter_custom_field_date( $p_field_num, $p_field_id ) {
 
 /**
  * Print project field
+ * @return void
  */
 function print_filter_project_id() {
 	global $t_select_modifier, $t_filter;
@@ -4362,6 +4381,7 @@ function print_filter_project_id() {
 
 /**
  * Print filter match type selector
+ * @return void
  */
 function print_filter_match_type() {
 	global $t_select_modifier, $t_filter;
@@ -4375,9 +4395,10 @@ function print_filter_match_type() {
 }
 
 /**
- *  Prints a multi-value filter field.
- * @param string $p_field_name Field name
- * @param mixed $p_field_value field value
+ * Prints a multi-value filter field.
+ * @param string $p_field_name  Field name.
+ * @param mixed  $p_field_value Field value.
+ * @return void
  */
 function print_multivalue_field( $p_field_name, $p_field_value ) {
 	$t_output = '';
@@ -4397,7 +4418,7 @@ function print_multivalue_field( $p_field_name, $p_field_value ) {
 				<?php
 				$t_this_string = '';
 
-			if((( $t_current == META_FILTER_ANY ) && ( is_numeric( $t_current ) ) ) || ( is_blank( $t_current ) ) ) {
+			if( ( ( $t_current == META_FILTER_ANY ) && ( is_numeric( $t_current ) ) ) || ( is_blank( $t_current ) ) ) {
 				$t_any_found = true;
 			} else {
 				$t_this_string = string_display( $t_current );
@@ -4423,13 +4444,12 @@ function print_multivalue_field( $p_field_name, $p_field_value ) {
 # ==========================================================================
 # CACHING
 # ==========================================================================
-/**
- * @internal SECURITY NOTE: cache globals are initialized here to prevent them
- *      being spoofed if register_globals is turned on.
- * 	We cache filter requests to reduce the number of SQL queries
- * @global mixed $g_cache_filter
- * @global mixed $g_cache_filter_db_filters
- */
+
+# @internal SECURITY NOTE: cache globals are initialized here to prevent them
+# being spoofed if register_globals is turned on.
+# We cache filter requests to reduce the number of SQL queries
+# @global array $g_cache_filter
+# @global array $g_cache_filter_db_filters
 $g_cache_filter = array();
 $g_cache_filter_db_filters = array();
 
@@ -4438,9 +4458,9 @@ $g_cache_filter_db_filters = array();
  *  If the second parameter is true (default), trigger an error
  *  if the filter can't be found.  If the second parameter is
  *  false, return false if the filter can't be found.
- * @param int $p_filter_id
- * @param bool $p_trigger_errors
- * @return mixed
+ * @param integer $p_filter_id      A filter identifier to retrieve.
+ * @param boolean $p_trigger_errors Whether to trigger an error if the filter is not found.
+ * @return array|boolean
  */
 function filter_cache_row( $p_filter_id, $p_trigger_errors = true ) {
 	global $g_cache_filter;
@@ -4450,9 +4470,7 @@ function filter_cache_row( $p_filter_id, $p_trigger_errors = true ) {
 	}
 
 	$t_filters_table = db_get_table( 'filters' );
-	$t_query = 'SELECT *
-				  FROM ' . $t_filters_table . '
-				  WHERE id=' . db_param();
+	$t_query = 'SELECT * FROM ' . $t_filters_table . ' WHERE id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_filter_id ) );
 
 	if( 0 == db_num_rows( $t_result ) ) {
@@ -4464,17 +4482,17 @@ function filter_cache_row( $p_filter_id, $p_trigger_errors = true ) {
 		}
 	}
 
-	$row = db_fetch_array( $t_result );
+	$t_row = db_fetch_array( $t_result );
 
-	$g_cache_filter[$p_filter_id] = $row;
+	$g_cache_filter[$p_filter_id] = $t_row;
 
-	return $row;
+	return $t_row;
 }
 
 /**
- *  Clear the filter cache (or just the given id if specified)
- * @param int $p_filter_id filter id
- * @return bool
+ * Clear the filter cache (or just the given id if specified)
+ * @param integer $p_filter_id Filter id.
+ * @return boolean
  */
 function filter_clear_cache( $p_filter_id = null ) {
 	global $g_cache_filter;
@@ -4482,20 +4500,19 @@ function filter_clear_cache( $p_filter_id = null ) {
 	if( null === $p_filter_id ) {
 		$g_cache_filter = array();
 	} else {
-		$c_filter_id = db_prepare_int( $p_filter_id );
-		unset( $g_cache_filter[$c_filter_id] );
+		unset( $g_cache_filter[(int)$p_filter_id] );
 	}
 
 	return true;
 }
 
 /**
- *  Add a filter to the database for the current user
- * @param int $p_project_id Project id
- * @param bool $p_is_public whether filter is public or private
- * @param string $p_name filter name
- * @param string $p_filter_string filter string
- * @return int
+ * Add a filter to the database for the current user
+ * @param integer $p_project_id    Project id.
+ * @param boolean $p_is_public     Whether filter is public or private.
+ * @param string  $p_name          Filter name.
+ * @param string  $p_filter_string Filter string.
+ * @return integer
  */
 function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $p_filter_string ) {
 	$t_user_id = auth_get_current_user_id();
@@ -4504,7 +4521,7 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
 	$t_filters_table = db_get_table( 'filters' );
 
 	# check that the user can save non current filters (if required)
-	if(( ALL_PROJECTS <= $c_project_id ) && ( !is_blank( $p_name ) ) && ( !access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) ) {
+	if( ( ALL_PROJECTS <= $c_project_id ) && ( !is_blank( $p_name ) ) && ( !access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) ) {
 		return -1;
 	}
 
@@ -4514,40 +4531,40 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
 	}
 
 	# Do I need to update or insert this value?
-	$query = "SELECT id FROM $t_filters_table
+	$t_query = "SELECT id FROM $t_filters_table
 					WHERE user_id=" . db_param() . "
 					AND project_id=" . db_param() . "
 					AND name=" . db_param();
-	$t_result = db_query_bound( $query, array( $t_user_id, $c_project_id, $p_name ) );
+	$t_result = db_query_bound( $t_query, array( $t_user_id, $c_project_id, $p_name ) );
 
 	if( db_num_rows( $t_result ) > 0 ) {
-		$row = db_fetch_array( $t_result );
+		$t_row = db_fetch_array( $t_result );
 
-		$query = "UPDATE $t_filters_table
+		$t_query = "UPDATE $t_filters_table
 					  SET is_public=" . db_param() . ",
 						filter_string=" . db_param() . "
 					  WHERE id=" . db_param();
-		db_query_bound( $query, array( $p_is_public, $p_filter_string, $row['id'] ) );
+		db_query_bound( $t_query, array( $p_is_public, $p_filter_string, $t_row['id'] ) );
 
-		return $row['id'];
+		return $t_row['id'];
 	} else {
-		$query = "INSERT INTO $t_filters_table
+		$t_query = "INSERT INTO $t_filters_table
 						( user_id, project_id, is_public, name, filter_string )
 					  VALUES
 						( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-		db_query_bound( $query, array( $t_user_id, $c_project_id, $p_is_public, $p_name, $p_filter_string ) );
+		db_query_bound( $t_query, array( $t_user_id, $c_project_id, $p_is_public, $p_name, $p_filter_string ) );
 
 		# Recall the query, we want the filter ID
-		$query = "SELECT id
+		$t_query = "SELECT id
 						FROM $t_filters_table
 						WHERE user_id=" . db_param() . "
 						AND project_id=" . db_param() . "
 						AND name=" . db_param();
-		$t_result = db_query_bound( $query, array( $t_user_id, $c_project_id, $p_name ) );
+		$t_result = db_query_bound( $t_query, array( $t_user_id, $c_project_id, $p_name ) );
 
 		if( db_num_rows( $t_result ) > 0 ) {
-			$row = db_fetch_array( $t_result );
-			return $row['id'];
+			$t_row = db_fetch_array( $t_result );
+			return $t_row['id'];
 		}
 
 		return -1;
@@ -4556,9 +4573,9 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
 
 /**
  * This function returns the filter string that is tied to the unique id parameter. If the user
- * doesn't have permission to see this filter, the function returns null
- * @param int $p_filter_id
- * @param int $p_user_id
+ * does not have permission to see this filter, the function returns null
+ * @param integer $p_filter_id A Filter identifier.
+ * @param integer $p_user_id   A valid user identifier.
  * @return mixed
  */
 function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
@@ -4579,25 +4596,25 @@ function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
 	}
 
 	$t_filters_table = db_get_table( 'filters' );
-	$query = 'SELECT * FROM ' . $t_filters_table . ' WHERE id=' . db_param();
-	$t_result = db_query_bound( $query, array( $c_filter_id ) );
+	$t_query = 'SELECT * FROM ' . $t_filters_table . ' WHERE id=' . db_param();
+	$t_result = db_query_bound( $t_query, array( $c_filter_id ) );
 
 	if( db_num_rows( $t_result ) > 0 ) {
-		$row = db_fetch_array( $t_result );
+		$t_row = db_fetch_array( $t_result );
 
-		if( $row['user_id'] != $t_user_id ) {
-			if( $row['is_public'] != true ) {
+		if( $t_row['user_id'] != $t_user_id ) {
+			if( $t_row['is_public'] != true ) {
 				return null;
 			}
 		}
 
 		# check that the user has access to non current filters
-		if(( ALL_PROJECTS <= $row['project_id'] ) && ( !is_blank( $row['name'] ) ) && ( !access_has_project_level( config_get( 'stored_query_use_threshold', null, $t_user_id, $row['project_id'] ) ) ) ) {
+		if( ( ALL_PROJECTS <= $t_row['project_id'] ) && ( !is_blank( $t_row['name'] ) ) && ( !access_has_project_level( config_get( 'stored_query_use_threshold', null, $t_user_id, $t_row['project_id'] ) ) ) ) {
 			return null;
 		}
 
-		$g_cache_filter_db_filters[$p_filter_id] = $row['filter_string'];
-		return $row['filter_string'];
+		$g_cache_filter_db_filters[$p_filter_id] = $t_row['filter_string'];
+		return $t_row['filter_string'];
 	} else {
 		$g_cache_filter_db_filters[$p_filter_id] = false;
 		return false;
@@ -4606,9 +4623,9 @@ function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
 
 /**
  * get current filter for given project and user
- * @param int $p_project_id
- * @param int $p_user_id
- * @return int
+ * @param integer $p_project_id A project identifier.
+ * @param integer $p_user_id    A valid user identifier.
+ * @return integer
  */
 function filter_db_get_project_current( $p_project_id, $p_user_id = null ) {
 	$c_project_id = (int)$p_project_id;
@@ -4622,43 +4639,43 @@ function filter_db_get_project_current( $p_project_id, $p_user_id = null ) {
 
 	# we store current filters for each project with a special project index
 	$t_filters_table = db_get_table( 'filters' );
-	$query = "SELECT *
+	$t_query = "SELECT *
 				  FROM $t_filters_table
 				  WHERE user_id=" . db_param() . "
 					AND project_id=" . db_param() . "
 					AND name=" . db_param();
-	$t_result = db_query_bound( $query, array( $c_user_id, $c_project_id, '' ) );
+	$t_result = db_query_bound( $t_query, array( $c_user_id, $c_project_id, '' ) );
 
 	if( db_num_rows( $t_result ) > 0 ) {
-		$row = db_fetch_array( $t_result );
-		return $row['id'];
+		$t_row = db_fetch_array( $t_result );
+		return $t_row['id'];
 	}
 
 	return null;
 }
 
 /**
- *  Query for the filter name using the filter id
- * @param int $p_filter_id filter id
+ * Query for the filter name using the filter id
+ * @param integer $p_filter_id Filter id.
  * @return string
  */
 function filter_db_get_name( $p_filter_id ) {
 	$c_filter_id = (int)$p_filter_id;
 
 	$t_filters_table = db_get_table( 'filters' );
-	$query = 'SELECT * FROM ' . $t_filters_table . ' WHERE id=' . db_param();
-	$t_result = db_query_bound( $query, array( $c_filter_id ) );
+	$t_query = 'SELECT * FROM ' . $t_filters_table . ' WHERE id=' . db_param();
+	$t_result = db_query_bound( $t_query, array( $c_filter_id ) );
 
 	if( db_num_rows( $t_result ) > 0 ) {
-		$row = db_fetch_array( $t_result );
+		$t_row = db_fetch_array( $t_result );
 
-		if( $row['user_id'] != auth_get_current_user_id() ) {
-			if( $row['is_public'] != true ) {
+		if( $t_row['user_id'] != auth_get_current_user_id() ) {
+			if( $t_row['is_public'] != true ) {
 				return null;
 			}
 		}
 
-		return $row['name'];
+		return $t_row['name'];
 	}
 
 	return null;
@@ -4666,8 +4683,8 @@ function filter_db_get_name( $p_filter_id ) {
 
 /**
  * Check if the current user has permissions to delete the stored query
- * @param int $p_filter_id filter id
- * @return bool
+ * @param integer $p_filter_id Filter id.
+ * @return boolean
  */
 function filter_db_can_delete_filter( $p_filter_id ) {
 	$t_filters_table = db_get_table( 'filters' );
@@ -4679,13 +4696,13 @@ function filter_db_can_delete_filter( $p_filter_id ) {
 		return true;
 	}
 
-	$query = "SELECT id
+	$t_query = "SELECT id
 				  FROM $t_filters_table
 				  WHERE id=" . db_param() . "
 				  AND user_id=" . db_param() . "
 				  AND project_id!=" . db_param();
 
-	$t_result = db_query_bound( $query, array( $c_filter_id, $t_user_id, -1 ) );
+	$t_result = db_query_bound( $t_query, array( $c_filter_id, $t_user_id, -1 ) );
 
 	if( db_num_rows( $t_result ) > 0 ) {
 		return true;
@@ -4696,8 +4713,8 @@ function filter_db_can_delete_filter( $p_filter_id ) {
 
 /**
  * Delete the filter specified by $p_filter_id
- * @param int $p_filter_id filter id
- * @return bool
+ * @param integer $p_filter_id Filter identifier.
+ * @return boolean
  */
 function filter_db_delete_filter( $p_filter_id ) {
 	$t_filters_table = db_get_table( 'filters' );
@@ -4710,28 +4727,26 @@ function filter_db_delete_filter( $p_filter_id ) {
 	$t_query = 'DELETE FROM ' . $t_filters_table . ' WHERE id=' . db_param();
 	db_query_bound( $t_query, array( $c_filter_id ) );
 
-	# db_query_bound() errors on failure so:
 	return true;
 }
 
 /**
- *  Delete all the unnamed filters
+ * Delete all the unnamed filters
+ * @return void
  */
 function filter_db_delete_current_filters() {
 	$t_filters_table = db_get_table( 'filters' );
 	$t_all_id = ALL_PROJECTS;
 
-	$t_query = "DELETE FROM $t_filters_table
-					WHERE project_id<=" . db_param() . "
-					AND name=" . db_param();
+	$t_query = "DELETE FROM $t_filters_table WHERE project_id<=" . db_param() . " AND name=" . db_param();
 	db_query_bound( $t_query, array( $t_all_id, '' ) );
 }
 
 /**
  * Note: any changes made in this function should be reflected in
  * mci_filter_db_get_available_queries())
- * @param int $p_project_id
- * @param int $p_user_id
+ * @param integer $p_project_id A valid project identifier.
+ * @param integer $p_user_id    A valid user identifier.
  * @return mixed
  */
 function filter_db_get_available_queries( $p_project_id = null, $p_user_id = null ) {
@@ -4758,19 +4773,19 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
 	# Get the list of available queries. By sorting such that public queries are
 	# first, we can override any query that has the same name as a private query
 	# with that private one
-	$query = "SELECT * FROM $t_filters_table
+	$t_query = "SELECT * FROM $t_filters_table
 					WHERE (project_id=" . db_param() . "
 						OR project_id=0)
 					AND name!=''
-					AND (is_public = " . db_prepare_bool(true) . "
+					AND (is_public = " . db_param() . "
 						OR user_id = " . db_param() . ")
 					ORDER BY is_public DESC, name ASC";
-	$t_result = db_query_bound( $query, array( $t_project_id, $t_user_id ) );
-	$query_count = db_num_rows( $t_result );
+	$t_result = db_query_bound( $t_query, array( $t_project_id, true, $t_user_id ) );
+	$t_query_count = db_num_rows( $t_result );
 
-	for( $i = 0;$i < $query_count;$i++ ) {
-		$row = db_fetch_array( $t_result );
-		$t_overall_query_arr[$row['id']] = $row['name'];
+	for( $i = 0; $i < $t_query_count; $i++ ) {
+		$t_row = db_fetch_array( $t_result );
+		$t_overall_query_arr[$t_row['id']] = $t_row['name'];
 	}
 
 	$t_overall_query_arr = array_unique( $t_overall_query_arr );
@@ -4781,8 +4796,8 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
 
 /**
  * Check that the given filter name does not exceed the maximum filter length
- * @param string $p_name filter name
- * @return bool true when under max_length (64) and false when over
+ * @param string $p_name Filter name.
+ * @return boolean true when under max_length (64) and false when over
  */
 function filter_name_valid_length( $p_name ) {
 	if( utf8_strlen( $p_name ) > 64 ) {
@@ -4796,8 +4811,8 @@ function filter_name_valid_length( $p_name ) {
  * Create a filter for getting issues assigned to the specified project and user that
  * are not yet resolved.
  *
- * @param int $p_project_id the project id or ALL_PROJECTS.
- * @param int $p_user_id the user id or 0 to get unassigned issues.
+ * @param integer $p_project_id The project id or ALL_PROJECTS.
+ * @param integer $p_user_id    The user id or 0 to get unassigned issues.
  * @return mixed valid filter.
  */
 function filter_create_assigned_to_unresolved( $p_project_id, $p_user_id ) {
@@ -4821,8 +4836,8 @@ function filter_create_assigned_to_unresolved( $p_project_id, $p_user_id ) {
 
 /**
  * Create a filter for getting issues reported by the specified project and user.
- * @param int $p_project_id the project id or ALL_PROJECTS.
- * @param int $p_user_id the user id.
+ * @param integer $p_project_id The project id or ALL_PROJECTS.
+ * @param integer $p_user_id    A valid user identifier.
  * @return array a valid filter.
  */
 function filter_create_reported_by( $p_project_id, $p_user_id ) {
@@ -4838,8 +4853,8 @@ function filter_create_reported_by( $p_project_id, $p_user_id ) {
 
 /**
  * Create a filter for getting issues monitored by the specified project and user.
- * @param int $p_project_id the project id or ALL_PROJECTS.
- * @param int $p_user_id the user id.
+ * @param integer $p_project_id The project id or ALL_PROJECTS.
+ * @param integer $p_user_id    The user id.
  * @return array a valid filter.
  */
 function filter_create_monitored_by( $p_project_id, $p_user_id ) {

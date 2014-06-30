@@ -65,12 +65,13 @@ require_api( 'utility_api.php' );
 /**
  * log the changes (old / new value are supplied to reduce db access)
  * events should be logged *after* the modification
- * @param int $p_bug_id
- * @param string $p_field_name
- * @param string $p_old_value
- * @param string $p_new_value
- * @param int $p_user_id
- * @param int $p_type
+ * @param integer $p_bug_id     The bug identifier of the bug being modified.
+ * @param string  $p_field_name The field name of the field being modified.
+ * @param string  $p_old_value  The old value of the field.
+ * @param string  $p_new_value  The new value of the field.
+ * @param integer $p_user_id    The user identifier of the user modifying the bug.
+ * @param integer $p_type       The type of the modification.
+ * @return void
  */
 function history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_new_value, $p_user_id = null, $p_type = 0 ) {
 	# Only log events that change the value
@@ -95,10 +96,10 @@ function history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_ne
 /**
  * log the changes
  * events should be logged *after* the modification
- * @param int $p_bug_id
- * @param string $p_field_name
- * @param string $p_old_value
- * @return null
+ * @param integer $p_bug_id     The bug identifier of the bug being modified.
+ * @param string  $p_field_name The field name of the field being modified.
+ * @param string  $p_old_value  The old value of the field.
+ * @return void
  */
 function history_log_event( $p_bug_id, $p_field_name, $p_old_value ) {
 	history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, bug_get_field( $p_bug_id, $p_field_name ) );
@@ -108,11 +109,11 @@ function history_log_event( $p_bug_id, $p_field_name, $p_old_value ) {
  * log the changes
  * events should be logged *after* the modification
  * These are special case logs (new bug, deleted bugnote, etc.)
- * @param int $p_bug_id
- * @param int $p_type
- * @param string $p_optional
- * @param string $p_optional2
- * @return null
+ * @param integer $p_bug_id    The bug identifier of the bug being modified.
+ * @param integer $p_type      The type of the modification.
+ * @param string  $p_optional  The optional value to store in the old_value field.
+ * @param string  $p_optional2 The optional value to store in the new_value field.
+ * @return void
  */
 function history_log_event_special( $p_bug_id, $p_type, $p_optional = '', $p_optional2 = '' ) {
 	$c_optional = ( $p_optional );
@@ -121,19 +122,19 @@ function history_log_event_special( $p_bug_id, $p_type, $p_optional = '', $p_opt
 
 	$t_mantis_bug_history_table = db_get_table( 'bug_history' );
 
-	$query = "INSERT INTO $t_mantis_bug_history_table
+	$t_query = "INSERT INTO $t_mantis_bug_history_table
 					( user_id, bug_id, date_modified, type, old_value, new_value, field_name )
 				VALUES
 					( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ',' . db_param() . ', ' . db_param() . ')';
-	db_query_bound( $query, array( $t_user_id, $p_bug_id, db_now(), $p_type, $c_optional, $c_optional2, '' ) );
+	db_query_bound( $t_query, array( $t_user_id, $p_bug_id, db_now(), $p_type, $c_optional, $c_optional2, '' ) );
 }
 
 /**
  * Retrieves the history events for the specified bug id and returns it in an array
  * The array is indexed from 0 to N-1.  The second dimension is: 'date', 'username',
  * 'note', 'change'.
- * @param int $p_bug_id
- * @param int $p_user_id
+ * @param integer $p_bug_id  A valid bug identifier.
+ * @param integer $p_user_id A valid user identifier.
  * @return array
  */
 function history_get_events_array( $p_bug_id, $p_user_id = null ) {
@@ -157,8 +158,8 @@ function history_get_events_array( $p_bug_id, $p_user_id = null ) {
  * Retrieves the raw history events for the specified bug id and returns it in an array
  * The array is indexed from 0 to N-1.  The second dimension is: 'date', 'userid', 'username',
  * 'field','type','old_value','new_value'
- * @param int $p_bug_id
- * @param int $p_user_id
+ * @param integer $p_bug_id  A valid bug identifier.
+ * @param integer $p_user_id A valid user identifier.
  * @return array
  */
 function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
@@ -176,12 +177,12 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 	# bug we will find the line related to the relationship mixed with the custom fields (the history is creted
 	# for the new bug with the same timestamp...)
 	$t_mantis_bug_history_table = db_get_table( 'bug_history' );
-	$query = "SELECT *
+	$t_query = "SELECT *
 				FROM $t_mantis_bug_history_table
 				WHERE bug_id=" . db_param() . "
 				ORDER BY date_modified $t_history_order,id";
-	$t_result = db_query_bound( $query, array( $p_bug_id ) );
-	$raw_history = array();
+	$t_result = db_query_bound( $t_query, array( $p_bug_id ) );
+	$t_raw_history = array();
 
 	$t_private_bugnote_visible = access_has_bug_level( config_get( 'private_bugnote_threshold' ), $p_bug_id, $t_user_id );
 	$t_tag_view_threshold = config_get( 'tag_view_threshold' );
@@ -218,7 +219,7 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 		# bugnotes
 		if( $t_user_id != $v_user_id ) {
 			# bypass if user originated note
-			if(( $v_type == BUGNOTE_ADDED ) || ( $v_type == BUGNOTE_UPDATED ) || ( $v_type == BUGNOTE_DELETED ) ) {
+			if( ( $v_type == BUGNOTE_ADDED ) || ( $v_type == BUGNOTE_UPDATED ) || ( $v_type == BUGNOTE_DELETED ) ) {
 				if( !$t_private_bugnote_visible && ( bugnote_get_field( $v_old_value, 'view_state' ) == VS_PRIVATE ) ) {
 					continue;
 				}
@@ -245,36 +246,36 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 			}
 		}
 
-		$raw_history[$j]['date'] = $v_date_modified;
-		$raw_history[$j]['userid'] = $v_user_id;
+		$t_raw_history[$j]['date'] = $v_date_modified;
+		$t_raw_history[$j]['userid'] = $v_user_id;
 
 		# user_get_name handles deleted users, and username vs realname
-		$raw_history[$j]['username'] = user_get_name( $v_user_id );
+		$t_raw_history[$j]['username'] = user_get_name( $v_user_id );
 
-		$raw_history[$j]['field'] = $v_field_name;
-		$raw_history[$j]['type'] = $v_type;
-		$raw_history[$j]['old_value'] = $v_old_value;
-		$raw_history[$j]['new_value'] = $v_new_value;
+		$t_raw_history[$j]['field'] = $v_field_name;
+		$t_raw_history[$j]['type'] = $v_type;
+		$t_raw_history[$j]['old_value'] = $v_old_value;
+		$t_raw_history[$j]['new_value'] = $v_new_value;
 
 		$j++;
 	}
 
 	# end for loop
 
-	return $raw_history;
+	return $t_raw_history;
 }
 
 /**
  * Localizes one raw history item specified by set the next parameters: $p_field_name, $p_type, $p_old_value, $p_new_value
  * Returns array with two elements indexed as 'note' and 'change'
- * @param string $p_field_name
- * @param int $p_type
- * @param string $p_old_value
- * @param string $p_new_value
- * @param bool $p_linkify
+ * @param string  $p_field_name The field name of the field being localized.
+ * @param integer $p_type       The type of the history entry.
+ * @param string  $p_old_value  The old value of the field.
+ * @param string  $p_new_value  The new value of the field.
+ * @param boolean $p_linkify    Whether to return a string containing hyperlinks.
  * @return array
  */
-function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_value, $p_linkify=true ) {
+function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_value, $p_linkify = true ) {
 	$t_note = '';
 	$t_change = '';
 	$t_field_localized = $p_field_name;
@@ -412,10 +413,10 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 			break;
 		case 'due_date':
 			if( $p_old_value !== '' ) {
-				$p_old_value = date( config_get( 'normal_date_format' ), (int) $p_old_value );
+				$p_old_value = date( config_get( 'normal_date_format' ), (int)$p_old_value );
 			}
 			if( $p_new_value !== '' ) {
-				$p_new_value = date( config_get( 'normal_date_format' ), (int) $p_new_value );
+				$p_new_value = date( config_get( 'normal_date_format' ), (int)$p_new_value );
 			}
 			$t_field_localized = lang_get( 'due_date' );
 			break;
@@ -578,10 +579,11 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 
 /**
  * delete all history associated with a bug
- * @param int $p_bug_id
+ * @param integer $p_bug_id A valid bug identifier.
+ * @return void
  */
 function history_delete( $p_bug_id ) {
 	$t_bug_history_table = db_get_table( 'bug_history' );
-	$query = 'DELETE FROM ' . $t_bug_history_table . ' WHERE bug_id=' . db_param();
-	db_query_bound( $query, array( $p_bug_id ) );
+	$t_query = 'DELETE FROM ' . $t_bug_history_table . ' WHERE bug_id=' . db_param();
+	db_query_bound( $t_query, array( $p_bug_id ) );
 }

@@ -27,9 +27,7 @@
 
 $t_root_path = dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR;
 
-/**
- * MantisBT constants
- */
+# MantisBT constants
 require_once ( $t_root_path . DIRECTORY_SEPARATOR . 'core/constant_inc.php' );
 
 /**
@@ -96,26 +94,22 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * setUp
+	 * @return void
 	 */
-	protected function setUp()
-	{
+	protected function setUp() {
 		if( !isset( $GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED'] ) ||
 			!$GLOBALS['MANTIS_TESTSUITE_SOAP_ENABLED'] ) {
 			$this->markTestSkipped( 'The Soap tests are disabled.' );
 		}
 
-		$this->assertTrue(
-			array_key_exists('MANTIS_TESTSUITE_SOAP_HOST', $GLOBALS) &&
-			!empty($GLOBALS['MANTIS_TESTSUITE_SOAP_HOST']),
-			"You must define 'MANTIS_TESTSUITE_SOAP_HOST' in your bootstrap file"
-		);
-		$this->client = new SoapClient(
-			$GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'],
-			array_merge($this->defaultSoapClientOptions, $this->extraSoapClientFlags()
-			)
-		);
+		$this->assertTrue( array_key_exists( 'MANTIS_TESTSUITE_SOAP_HOST', $GLOBALS ) &&
+			!empty( $GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'] ),
+			"You must define 'MANTIS_TESTSUITE_SOAP_HOST' in your bootstrap file" );
 
-		$this->mantisPath = substr($GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'], 0, -strlen('api/soap/mantisconnect.php?wsdl'));
+		$this->client = new SoapClient( $GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'],
+			array_merge( $this->defaultSoapClientOptions, $this->extraSoapClientFlags() ) );
+
+		$this->mantisPath = substr( $GLOBALS['MANTIS_TESTSUITE_SOAP_HOST'], 0, -strlen( 'api/soap/mantisconnect.php?wsdl' ) );
 
 		if( array_key_exists( 'MANTIS_TESTSUITE_USERNAME', $GLOBALS ) ) {
 			$this->userName = $GLOBALS['MANTIS_TESTSUITE_USERNAME'];
@@ -147,40 +141,41 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	 * @return array an array of extra options to be passed to the SoapClient constructor
 	 */
 	protected function extraSoapClientFlags() {
-
 		return array();
 	}
 
 	/**
 	 * tearDown
+	 * @return void
 	 */
 	protected function tearDown() {
-
-		foreach ( $this->versionIdsToDelete as $versionIdToDelete ) {
-			$this->client->mc_project_version_delete($this->userName, $this->password, $versionIdToDelete);
+		foreach ( $this->versionIdsToDelete as $t_version_id_to_delete ) {
+			$this->client->mc_project_version_delete( $this->userName, $this->password, $t_version_id_to_delete );
 		}
 
-		foreach ( $this->issueIdsToDelete as $issueIdToDelete ) {
+		foreach ( $this->issueIdsToDelete as $t_issue_id_to_delete ) {
 			$this->client->mc_issue_delete(
 				$this->userName,
 				$this->password,
-				$issueIdToDelete);
+				$t_issue_id_to_delete );
 		}
 
-		foreach ( $this->tagIdsToDelete as $tagIdToDelete ) {
-			$this->client->mc_tag_delete ( $this->userName, $this->password, $tagIdToDelete );
+		foreach ( $this->tagIdsToDelete as $t_tag_id_to_delete ) {
+			$this->client->mc_tag_delete( $this->userName, $this->password, $t_tag_id_to_delete );
 		}
 	}
 
 	/**
-	 * return default project id
+	 * return integer The default project id.
+	 * @return integer
 	 */
 	protected function getProjectId() {
 		return $this->projectId;
 	}
 
 	/**
-	 * return default category
+	 * return string The default category.
+	 * @return string
 	 */
 	protected function getCategory() {
 		return 'General';
@@ -188,22 +183,23 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Skip if time tracking is not enabled
+	 * @return void
 	 */
 	protected function skipIfTimeTrackingIsNotEnabled() {
-		$timeTrackingEnabled = $this->client->mc_config_get_string($this->userName, $this->password, 'time_tracking_enabled');
-		if( !$timeTrackingEnabled ) {
-			$this->markTestSkipped('Time tracking is not enabled');
+		$t_time_tracking_enabled = $this->client->mc_config_get_string( $this->userName, $this->password, 'time_tracking_enabled' );
+		if( !$t_time_tracking_enabled ) {
+			$this->markTestSkipped( 'Time tracking is not enabled' );
 		}
 	}
 
 	/**
 	 * getIssueToAdd
-	 * @param string $testCase
+	 * @param string $p_test_case Test case identifier.
 	 * @return array
 	 */
-	protected function getIssueToAdd( $testCase ) {
+	protected function getIssueToAdd( $p_test_case ) {
 		return array(
-				'summary' => $testCase . ': test issue: ' . rand(1, 1000000),
+				'summary' => $p_test_case . ': test issue: ' . rand( 1, 1000000 ),
 				'description' => 'description of test issue.',
 				'project' => array( 'id' => $this->getProjectId() ),
 				'category' => $this->getCategory() );
@@ -212,72 +208,72 @@ class SoapBase extends PHPUnit_Framework_TestCase {
 	/**
 	 * Registers an issue for deletion after the test method has run
 	 *
-	 * @param int $issueId
+	 * @param integer $p_issue_id Issue identifier.
 	 * @return void
 	 */
-	protected function deleteAfterRun( $issueId ) {
-
-		$this->issueIdsToDelete[] = $issueId;
+	protected function deleteAfterRun( $p_issue_id ) {
+		$this->issueIdsToDelete[] = $p_issue_id;
 	}
 
 	/**
 	 * Registers an version for deletion after the test method has run
 	 *
-	 * @param int $versionId
+	 * @param integer $p_version_id A version identifier number.
 	 * @return void
 	 */
-	protected function deleteVersionAfterRun( $versionId ) {
-
-		$this->versionIdsToDelete[] = $versionId;
+	protected function deleteVersionAfterRun( $p_version_id ) {
+		$this->versionIdsToDelete[] = $p_version_id;
 	}
 
 	/**
 	 * Registers a tag for deletion after the test method has run
 	 *
-	 * @param int $tagId
+	 * @param integer $p_tag_id A tag identifier number.
 	 * @return void
 	 */
-	protected function deleteTagAfterRun ( $tagId ) {
-		$this->tagIdsToDelete[] = $tagId;
+	protected function deleteTagAfterRun ( $p_tag_id ) {
+		$this->tagIdsToDelete[] = $p_tag_id;
 	}
 
 	/**
-	 * Skip if due date thesholds are too high
+	 * Skip if due date thresholds are too high
+	 * @return void
 	 */
 	protected function skipIfDueDateIsNotEnabled() {
 		if( $this->client->mc_config_get_string( $this->userName, $this->password, 'due_date_view_threshold' ) > 90  ||
 			 $this->client->mc_config_get_string( $this->userName, $this->password, 'due_date_update_threshold' ) > 90 ) {
-			 	$this->markTestSkipped('Due date thresholds are too high.');
+			 	$this->markTestSkipped( 'Due date thresholds are too high.' );
 			 }
 	}
 
 	/**
 	 * Skip if no category is not on
+	 * @return void
 	 */
 	protected function skipIfAllowNoCategoryIsDisabled() {
-		if( $this->client->mc_config_get_string($this->userName, $this->password, 'allow_no_category' ) != true ) {
+		if( $this->client->mc_config_get_string( $this->userName, $this->password, 'allow_no_category' ) != true ) {
 			$this->markTestSkipped( 'g_allow_no_category is not ON.' );
 		}
 	}
 
 	/**
 	 * Skip if zlib extension not found
+	 * @return void
 	 */
 	protected function skipIsZlibIsNotAvailable() {
 		if( !extension_loaded( 'zlib' ) ) {
-			$this->markTestSkipped('zlib extension not found.');
+			$this->markTestSkipped( 'zlib extension not found.' );
 		}
 	}
 
 	/**
 	 * Converts date to UTC
-	 * @param string $p_date date string
+	 * @param string $p_date A valid date string.
 	 * @return DateTime object
-	 * Tests creating a new version
 	 */
-	protected function dateToUTC($p_date) {
-		$convDate = new DateTime($p_date);
-		return $convDate->setTimeZone(new DateTimeZone('UTC'));
+	protected function dateToUTC( $p_date ) {
+		$t_conv_date = new DateTime( $p_date );
+		return $t_conv_date->setTimeZone( new DateTimeZone( 'UTC' ) );
 	}
 
 }

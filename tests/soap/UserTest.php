@@ -35,13 +35,13 @@ class UserTest extends SoapBase {
 
 	/**
 	 * Tests getting a user preference
+	 * @return void
 	 */
 	public function testGetPreference() {
+		$t_default_order = $this->client->mc_config_get_string( $this->userName, $this->password, 'default_bugnote_order' );
+		$t_bugnote_order = $this->client->mc_user_pref_get_pref( $this->userName, $this->password, 0, 'bugnote_order' );
 
-		$default_order = $this->client->mc_config_get_string( $this->userName, $this->password, 'default_bugnote_order' );
-		$bugnote_order = $this->client->mc_user_pref_get_pref( $this->userName, $this->password, 0, 'bugnote_order' );
-
-		$this->assertEquals( $default_order, $bugnote_order );
+		$this->assertEquals( $t_default_order, $t_bugnote_order );
 
 	}
 }

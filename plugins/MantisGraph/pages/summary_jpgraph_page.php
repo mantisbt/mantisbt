@@ -38,7 +38,7 @@ $t_graphs = array( 'summary_graph_cumulative_bydate', 'summary_graph_bydeveloper
 		'summary_graph_bycategory', 'summary_graph_bypriority' );
 $t_wide = plugin_config_get( 'summary_graphs_per_row' );
 $t_width = plugin_config_get( 'window_width' );
-$t_graph_width = (int) ( ( $t_width - 50 ) / $t_wide );
+$t_graph_width = (int)( ( $t_width - 50 ) / $t_wide );
 
 token_delete( TOKEN_GRAPH );
 
@@ -52,13 +52,13 @@ token_delete( TOKEN_GRAPH );
 	</td>
 </tr>
 <?php
-	$t_graph_count = count($t_graphs );
+	$t_graph_count = count( $t_graphs );
 	for ( $t_pos = 0; $t_pos < $t_graph_count; $t_pos++ ) {
 		if( 0 == ( $t_pos % $t_wide ) ) {
 			print( "<tr>\n" );
 		}
 		echo '<td width="50%">';
-		printf("<img src=\"%s.php&amp;width=%d\" alt=\"\" />", plugin_page( $t_graphs[$t_pos] ), $t_graph_width );
+		printf( "<img src=\"%s.php&amp;width=%d\" alt=\"\" />", plugin_page( $t_graphs[$t_pos] ), $t_graph_width );
 		echo '</td>';
 		if( ( $t_wide - 1 ) == ( $t_pos % $t_wide ) ) {
 			print( "</tr>\n" );

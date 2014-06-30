@@ -22,9 +22,9 @@
  * Mantis Core Formatting plugin
  */
 class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
-
 	/**
-	 *  A method that populates the plugin information and minimum requirements.
+	 * A method that populates the plugin information and minimum requirements.
+	 * @return void
 	 */
 	function register() {
 		$this->name = lang_get( 'plugin_format_title' );
@@ -43,6 +43,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 
 	/**
 	 * Default plugin configuration.
+	 * @return array
 	 */
 	function config() {
 		return array(
@@ -55,9 +56,9 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 	/**
 	 * Plain text processing.
 	 *
-	 * @param string  $p_event     Event name
-	 * @param string  $p_string    Raw text to process
-	 * @param bool $p_multiline True for multiline text (default), false for single-line.
+	 * @param string  $p_event     Event name.
+	 * @param string  $p_string    Raw text to process.
+	 * @param boolean $p_multiline True for multiline text (default), false for single-line.
 	 *                             Determines which html tags are used.
 	 *
 	 * @return string Formatted text
@@ -93,15 +94,16 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 	 *
 	 * Performs plain text, URLs and bug links processing
 	 *
-	 * @param string  $p_event     Event name
-	 * @param string  $p_string    Raw text to process
-	 * @param bool $p_multiline True for multiline text (default), false for single-line.
+	 * @param string  $p_event     Event name.
+	 * @param string  $p_string    Raw text to process.
+	 * @param boolean $p_multiline True for multiline text (default), false for single-line.
 	 *                             Determines which html tags are used.
 	 *
 	 * @return string Formatted text
 	 */
 	function formatted( $p_event, $p_string, $p_multiline = true ) {
-		static $s_urls, $s_buglinks;
+		static $s_urls;
+		static $s_buglinks;
 
 		# Text processing
 		$t_string = $this->text( $p_event, $p_string, $p_multiline );
@@ -125,8 +127,8 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 
 	/**
 	 * RSS text processing.
-	 * @param string $p_event Event name
-	 * @param string $p_string Unformatted text
+	 * @param string $p_event  Event name.
+	 * @param string $p_string Unformatted text.
 	 * @return string Formatted text
 	 */
 	function rss( $p_event, $p_string ) {
@@ -161,8 +163,8 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 
 	/**
 	 * Email text processing.
-	 * @param string $p_event Event name
-	 * @param string $p_string Unformatted text
+	 * @param string $p_event  Event name.
+	 * @param string $p_string Unformatted text.
 	 * @return string Formatted text
 	 */
 	function email( $p_event, $p_string ) {

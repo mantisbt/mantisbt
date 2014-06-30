@@ -51,7 +51,7 @@ if( isset( $t_current_font_selected[$t_current_font] ) ) {
 /**
  * Prints checked="checked" to the end of a HTML <option> tag if the supplied
  * font name matches the current font configuration value.
- * @param string $p_font_name The name of the font to check
+ * @param string $p_font_name The name of the font to check.
  * @return string Either checked="checked" for a match or otherwise an empty string
  */
 function print_font_checked( $p_font_name ) {
@@ -84,7 +84,7 @@ function print_font_checked( $p_font_name ) {
 		<?php echo plugin_lang_get( 'library' )?>
 	</th>
 	<td class="center">
-		<label><input type="radio" name="eczlibrary" value="1" <?php echo( ON == plugin_config_get( 'eczlibrary' ) ) ? 'checked="checked" ' : ''?>/><?php echo plugin_lang_get('bundled')?></label>
+		<label><input type="radio" name="eczlibrary" value="1" <?php echo( ON == plugin_config_get( 'eczlibrary' ) ) ? 'checked="checked" ' : ''?>/><?php echo plugin_lang_get( 'bundled' )?></label>
 	</td>
 	<td class="center">
 		<label><input type="radio" name="eczlibrary" value="0" <?php echo( OFF == plugin_config_get( 'eczlibrary' ) ) ? 'checked="checked" ' : ''?>/>JpGraph</label>
@@ -162,10 +162,10 @@ function print_font_checked( $p_font_name ) {
 		<br /><span class="small"><?php echo plugin_lang_get( 'jpgraph_antialias_info' )?></span>
 	</td>
 	<td class="center">
-		<label><input type="radio" name="jpgraph_antialias" value="1" <?php echo( ON == plugin_config_get( 'jpgraph_antialias' ) ) ? 'checked="checked" ' : ''?>/><?php echo plugin_lang_get('enabled')?></label>
+		<label><input type="radio" name="jpgraph_antialias" value="1" <?php echo( ON == plugin_config_get( 'jpgraph_antialias' ) ) ? 'checked="checked" ' : ''?>/><?php echo plugin_lang_get( 'enabled' )?></label>
 	</td>
 	<td class="center">
-		<label><input type="radio" name="jpgraph_antialias" value="0" <?php echo( OFF == plugin_config_get( 'jpgraph_antialias' ) ) ? 'checked="checked" ' : ''?>/><?php echo plugin_lang_get('disabled')?></label>
+		<label><input type="radio" name="jpgraph_antialias" value="0" <?php echo( OFF == plugin_config_get( 'jpgraph_antialias' ) ) ? 'checked="checked" ' : ''?>/><?php echo plugin_lang_get( 'disabled' )?></label>
 	</td>
 </tr>
 

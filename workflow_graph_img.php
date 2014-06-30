@@ -71,7 +71,7 @@ $t_graph->set_default_edge_attr( array ( 'style' => 'solid',
 										 'color' => '#0000C0',
 										 'dir'   => 'forward' ) );
 
-foreach ( $t_status_arr as $t_from_status => $t_from_label) {
+foreach ( $t_status_arr as $t_from_status => $t_from_label ) {
 	$t_enum_status = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
 	foreach ( $t_enum_status as $t_to_status_id => $t_to_status_label ) {
 		if( workflow_transition_edge_exists( $t_from_status, $t_to_status_id ) ) {

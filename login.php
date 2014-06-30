@@ -50,8 +50,8 @@ $t_return		= string_url( string_sanitize_url( gpc_get_string( 'return', config_g
 $f_from			= gpc_get_string( 'from', '' );
 $f_secure_session = gpc_get_bool( 'secure_session', false );
 
-$f_username = auth_prepare_username($f_username);
-$f_password = auth_prepare_password($f_password);
+$f_username = auth_prepare_username( $f_username );
+$f_password = auth_prepare_password( $f_password );
 
 gpc_set_cookie( config_get_global( 'cookie_prefix' ) . '_secure_session', $f_secure_session ? '1' : '0' );
 

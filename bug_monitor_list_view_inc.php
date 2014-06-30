@@ -50,7 +50,7 @@ require_api( 'user_api.php' );
 
 if( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_id ) ) {
 	$t_users = bug_get_monitors( $f_bug_id );
-	$num_users = sizeof ( $t_users );
+	$num_users = sizeof( $t_users );
 
 	echo '<a id="monitors"></a><br />';
 
@@ -79,7 +79,7 @@ if( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_id
 				echo ($i > 0) ? ', ' : '';
 				print_user( $t_users[$i] );
 				if( $t_can_delete_others ) {
-					echo ' [<a class="small" href="' . helper_mantis_url( 'bug_monitor_delete.php' ) . '?bug_id=' . $f_bug_id . '&amp;user_id=' . $t_users[$i] . htmlspecialchars(form_security_param( 'bug_monitor_delete' )) . '">' . lang_get( 'delete_link' ) . '</a>]';
+					echo ' [<a class="small" href="' . helper_mantis_url( 'bug_monitor_delete.php' ) . '?bug_id=' . $f_bug_id . '&amp;user_id=' . $t_users[$i] . htmlspecialchars( form_security_param( 'bug_monitor_delete' ) ) . '">' . lang_get( 'delete_link' ) . '</a>]';
 				}
 	 		}
 		}

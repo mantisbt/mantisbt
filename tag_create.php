@@ -43,7 +43,7 @@ $f_tag_description = gpc_get_string( 'description' );
 
 $t_tag_user = auth_get_current_user_id();
 
-if( !is_null( $f_tag_name )) {
+if( !is_null( $f_tag_name ) ) {
 	$t_tags = tag_parse_string( $f_tag_name );
 	foreach ( $t_tags as $t_tag_row ) {
 		if( -1 == $t_tag_row['id'] ) {

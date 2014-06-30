@@ -89,8 +89,8 @@ $t_updated_bug->build = gpc_get_string( 'build', $t_existing_bug->build );
 $t_updated_bug->category_id = gpc_get_int( 'category_id', $t_existing_bug->category_id );
 $t_updated_bug->description = gpc_get_string( 'description', $t_existing_bug->description );
 $t_due_date = gpc_get_string( 'due_date', null );
-if( $t_due_date !== null) {
-	if( is_blank ( $t_due_date ) ) {
+if( $t_due_date !== null ) {
+	if( is_blank( $t_due_date ) ) {
 		$t_updated_bug->due_date = 1;
 	} else {
 		$t_updated_bug->due_date = strtotime( $t_due_date );
@@ -380,7 +380,7 @@ if( $t_updated_bug->duplicate_id !== 0 ) {
 	if( user_exists( $t_existing_bug->reporter_id ) ) {
 		bug_monitor( $f_bug_id, $t_existing_bug->reporter_id );
 	}
-	if( user_exists ( $t_existing_bug->handler_id ) ) {
+	if( user_exists( $t_existing_bug->handler_id ) ) {
 		bug_monitor( $f_bug_id, $t_existing_bug->handler_id );
 	}
 	bug_monitor_copy( $f_bug_id, $t_updated_bug->duplicate_id );

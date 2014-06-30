@@ -182,10 +182,7 @@ print_recently_visited();
 						<?php echo lang_get( 'updating_bug_advanced_title' ); ?>
 					</td>
 					<td class="right" colspan="3">
-						<?php print_bracket_link(
-							string_get_bug_view_url( $t_bug_id ),
-							lang_get( 'back_to_bug_link' )
-							);
+						<?php print_bracket_link( string_get_bug_view_url( $t_bug_id ), lang_get( 'back_to_bug_link' ) );
 						?>
 					</td>
 				</tr>
@@ -252,7 +249,7 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $
 
 	if( $t_can_change_view_state ) {
 		echo '<select ' . helper_get_tab_index() . ' id="view_state" name="view_state">';
-		print_enum_string_option_list( 'view_state', (int)$t_bug->view_state);
+		print_enum_string_option_list( 'view_state', (int)$t_bug->view_state );
 		echo '</select>';
 	} else if( $t_show_view_state ) {
 		echo $t_view_state;
@@ -352,7 +349,7 @@ if( $t_show_handler || $t_show_due_date ) {
 			echo "<input " . helper_get_tab_index() . " type=\"text\" id=\"due_date\" name=\"due_date\" class=\"datetime\" size=\"20\" maxlength=\"16\" value=\"" . $t_date_to_display . "\" />";
 		} else {
 			if( !date_is_null( $t_bug->due_date ) ) {
-				echo date( config_get( 'short_date_format' ), $t_bug->due_date  );
+				echo date( config_get( 'short_date_format' ), $t_bug->due_date );
 			}
 		}
 
@@ -433,8 +430,7 @@ if( $t_show_status || $t_show_resolution ) {
 		echo '<td class="' . $status_label .  '">';
 		print_status_option_list( 'status', $t_bug->status,
 			access_can_close_bug( $t_bug ),
-			$t_bug->project_id
-		);
+			$t_bug->project_id );
 		echo '</td>';
 	} else {
 		$t_spacer += 2;
@@ -733,7 +729,7 @@ if( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $t_bug_id )
 }
 
 # Time Tracking (if permitted)
-if( config_get('time_tracking_enabled') ) {
+if( config_get( 'time_tracking_enabled' ) ) {
 	if( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $t_bug_id ) ) {
 		echo '<tr>';
 		echo '<th class="category"><label for="time_tracking">' . lang_get( 'time_tracking' ) . '</label></th>';

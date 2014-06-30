@@ -33,8 +33,8 @@ $f_width = gpc_get_int( 'width', 600 );
 $t_ar = plugin_config_get( 'bar_aspect' );
 $t_interval = new Period();
 $t_interval->set_period_from_selector( 'interval' );
-$f_show_as_table = gpc_get_bool( 'show_table', FALSE );
-$f_summary = gpc_get_bool( 'summary', FALSE );
+$f_show_as_table = gpc_get_bool( 'show_table', false );
+$f_summary = gpc_get_bool( 'summary', false );
 
 $t_interval_days = $t_interval->get_elapsed_days();
 if( $t_interval_days <= 14 ) {
@@ -53,16 +53,16 @@ $t_page_count = 0;
 
 $t_filter = current_user_get_bug_filter();
 $t_filter['_view_type']	= 'advanced';
-$t_filter[FILTER_PROPERTY_STATUS] = array(META_FILTER_ANY);
+$t_filter[FILTER_PROPERTY_STATUS] = array( META_FILTER_ANY );
 $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME] = '';
-$rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $t_filter, null, null, true );
-if( count($rows) == 0 ) {
+$t_rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $t_filter, null, null, true );
+if( count( $t_rows ) == 0 ) {
 	# no data to graph
 	exit();
 }
 
-$t_bug_table			= db_get_table( 'bug' );
-$t_bug_hist_table			= db_get_table( 'bug_history' );
+$t_bug_table = db_get_table( 'bug' );
+$t_bug_hist_table = db_get_table( 'bug_history' );
 
 $t_marker = array();
 $t_data = array();
@@ -83,7 +83,7 @@ $t_view_status = array();
 
 # walk through all issues and grab their status for 'now'
 $t_marker[$t_ptr] = time();
-foreach ($rows as $t_row) {
+foreach ( $t_rows as $t_row ) {
 	if( isset( $t_data[$t_ptr][$t_row->status] ) ) {
 		$t_data[$t_ptr][$t_row->status] ++;
 	} else {
@@ -97,22 +97,23 @@ foreach ($rows as $t_row) {
 # get the history for these bugs over the interval required to offset the data
 # type = 0 and field=status are status changes
 # type = 1 are new bugs
-$t_select = 'SELECT bug_id, type, old_value, new_value, date_modified FROM '.$t_bug_hist_table.
-	' WHERE bug_id in ('.implode(',', $t_bug).
-	') and ( (type='.NORMAL_TYPE.' and field_name=\'status\')
-		or type='.NEW_BUG.' ) and date_modified >= ' . db_param() .
+$t_select = 'SELECT bug_id, type, old_value, new_value, date_modified FROM ' . $t_bug_hist_table .
+	' WHERE bug_id in ('. implode( ',', $t_bug ) .
+	') and ( (type=' . NORMAL_TYPE . ' and field_name=\'status\')
+		or type=' . NEW_BUG . ' ) and date_modified >= ' . db_param() .
 	' order by date_modified DESC';
 $t_result = db_query_bound( $t_select, array( $t_start ) );
 $t_row = db_fetch_array( $t_result );
 
-for ($t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr) {
+for ( $t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr ) {
 	# walk through the data points and use the data retrieved to update counts
 	while( ( $t_row !== false ) && ( $t_row['date_modified'] >= $t_now ) ) {
-		switch ($t_row['type']) {
+		switch ( $t_row['type'] ) {
 			case 0: # updated bug
 				if( isset( $t_data[$t_ptr][$t_row['new_value']] ) ) {
-					if( $t_data[$t_ptr][$t_row['new_value']] > 0 )
-						$t_data[$t_ptr][$t_row['new_value']] --;
+					if( $t_data[$t_ptr][$t_row['new_value']] > 0 ) {
+						$t_data[$t_ptr][$t_row['new_value']]--;
+					}
 				} else {
 					$t_data[$t_ptr][$t_row['new_value']] = 0;
 					$t_view_status[$t_row['new_value']] =
@@ -128,8 +129,9 @@ for ($t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr) {
 				break;
 			case 1: # new bug
 				if( isset( $t_data[$t_ptr][$t_default_bug_status] ) ) {
-					if( $t_data[$t_ptr][$t_default_bug_status] > 0 )
+					if( $t_data[$t_ptr][$t_default_bug_status] > 0 ) {
 						$t_data[$t_ptr][$t_default_bug_status] --;
+					}
 				} else {
 					$t_data[$t_ptr][$t_default_bug_status] = 0;
 					$t_view_status[$t_default_bug_status] =
@@ -149,11 +151,11 @@ for ($t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr) {
 	}
 }
 
-ksort($t_view_status);
+ksort( $t_view_status );
 # @todo - these should probably be separate strings, but in the summary page context,
 # the string is used as the title for all columns
-$t_label_string = lang_get('orct'); # use the (open/resolved/closed/total) label
-$t_label_strings = explode('/', utf8_substr($t_label_string, 1, strlen($t_label_string)-2));
+$t_label_string = lang_get( 'orct' ); # use the (open/resolved/closed/total) label
+$t_label_strings = explode( '/', utf8_substr( $t_label_string, 1, strlen( $t_label_string ) - 2 ) );
 
 # add headers for table
 if( $f_show_as_table ) {
@@ -189,14 +191,14 @@ if( $f_summary ) {
 	$t_labels[++$i] = $t_label_strings[2];
 } else {
 	foreach ( $t_view_status as $t_status => $t_label ) {
-		$t_labels[++$i] = isset($t_status_labels[$t_status]) ? $t_status_labels[$t_status] : lang_get_defaulted($t_label);
+		$t_labels[++$i] = isset( $t_status_labels[$t_status] ) ? $t_status_labels[$t_status] : lang_get_defaulted( $t_label );
 	}
 }
 $t_label_count = $i;
 
 # reverse the array and consolidate the data, if necessary
 $t_metrics = array();
-for ($t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++) {
+for ( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
 	$t = $t_bin_count - $t_ptr;
 	$t_metrics[0][$t_ptr] = $t_marker[$t];
 	if( $f_summary ) {
@@ -205,25 +207,27 @@ for ($t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++) {
 		$t_metrics[3][$t_ptr] = 0;
 		foreach ( $t_view_status as $t_status => $t_label ) {
 			if( isset( $t_data[$t][$t_status] ) ) {
-				if( $t_status < $t_resolved )
+				if( $t_status < $t_resolved ) {
 					$t_metrics[1][$t_ptr] += $t_data[$t][$t_status];
-				else if( $t_status < $t_closed )
+				} else if( $t_status < $t_closed ) {
 					$t_metrics[2][$t_ptr] += $t_data[$t][$t_status];
-				else
+				} else {
 					$t_metrics[3][$t_ptr] += $t_data[$t][$t_status];
+				}
 			}
 		}
 	} else {
 		$i = 0;
 		foreach ( $t_view_status as $t_status => $t_label ) {
-			if( isset( $t_data[$t][$t_status] ) )
+			if( isset( $t_data[$t][$t_status] ) ) {
 				$t_metrics[++$i][$t_ptr] = $t_data[$t][$t_status];
-			else
+			} else {
 				$t_metrics[++$i][$t_ptr] = 0;
+			}
 		}
 	}
 	if( $f_show_as_table ) {
-		echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('. date( $t_date_format, $t_metrics[0][$t_ptr] ) .')'.'</td>';
+		echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('. date( $t_date_format, $t_metrics[0][$t_ptr] ) .')' . '</td>';
 		for ( $i=1; $i<=$t_label_count; $i++ ) {
 			echo '<td>'.$t_metrics[$i][$t_ptr].'</td>';
 		}

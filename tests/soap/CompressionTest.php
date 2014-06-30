@@ -44,28 +44,23 @@ class CompressionTest extends SoapBase {
 	 * <p>If any of the calls performed with compression enabled will
 	 * fail, the test will fail in turn with a SoapFault.</p>
 	 *
+	 * @return void
 	 */
 	public function testGetIssueWithCompressionEnabled() {
-		$issueToAdd = $this->getIssueToAdd( 'CompressionTest.testUpdateSummary' );
+		$t_issue_to_add = $this->getIssueToAdd( 'CompressionTest.testUpdateSummary' );
 
-		$issueId = $this->client->mc_issue_add(
-			$this->userName,
-			$this->password,
-			$issueToAdd);
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$this->deleteAfterRun( $issueId );
+		$this->deleteAfterRun( $t_issue_id );
 
-		$createdIssue = $this->client->mc_issue_get(
-			$this->userName,
-			$this->password,
-			$issueId);
+		$t_created_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 	}
 
 	/**
 	 * Soap Client Flags for test
+	 * @return array
 	 */
 	protected function extraSoapClientFlags() {
-
 		return array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP);
 	}
 }

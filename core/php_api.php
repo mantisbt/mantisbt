@@ -59,8 +59,8 @@ function php_mode() {
 /**
  * Returns true if the current PHP version is higher than the one
  * specified in the given string
- * @param string $p_version_string version string to compare
- * @return bool
+ * @param string $p_version_string Version string to compare.
+ * @return boolean
  */
 function php_version_at_least( $p_version_string ) {
 	global $g_cached_version;
@@ -73,8 +73,8 @@ function php_version_at_least( $p_version_string ) {
 	$t_minver = array_pad( explode( '.', $p_version_string ), 3, 0 );
 
 	for( $i = 0;$i < 3;$i = $i + 1 ) {
-		$t_cur = (int) $t_curver[$i];
-		$t_min = (int) $t_minver[$i];
+		$t_cur = (int)$t_curver[$i];
+		$t_min = (int)$t_minver[$i];
 
 		if( $t_cur < $t_min ) {
 			$g_cached_version[$p_version_string] = false;
@@ -95,9 +95,9 @@ function php_version_at_least( $p_version_string ) {
 if( !function_exists( 'mb_substr' ) ) {
 	/**
 	 * Map mb_substr to utf8_substr if mb extension is not found
-	 * @param string $p_text text string
-	 * @param int $p_index start position
-	 * @param int $p_size size
+	 * @param string  $p_text  Text string.
+	 * @param integer $p_index Start position.
+	 * @param integer $p_size  Size.
 	 * @return string
 	 */
 	function mb_substr( $p_text, $p_index, $p_size ) {

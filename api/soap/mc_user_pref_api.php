@@ -26,11 +26,11 @@
 /**
  * Get the value for the specified user preference.
  *
- * @param string   $p_username    The user's username
- * @param string   $p_password    The user's password
- * @param int      $p_project_id  Project ID (0 = ALL_PROJECTS (mantisbt/core/constant_inc.php))
- * @param string   $p_pref_name   The name of the preference
- * @return string  $t_user_pref   The requested preference value
+ * @param string  $p_username   The user's username.
+ * @param string  $p_password   The user's password.
+ * @param integer $p_project_id Project ID (0 = ALL_PROJECTS (mantisbt/core/constant_inc.php)).
+ * @param string  $p_pref_name  The name of the preference.
+ * @return string $t_user_pref  The requested preference value.
  */
 function mc_user_pref_get_pref( $p_username, $p_password, $p_project_id, $p_pref_name ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );

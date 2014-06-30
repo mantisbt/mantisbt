@@ -36,7 +36,7 @@ require_api( 'plugin_api.php' );
 
 /**
  * Returns whether wiki functionality is enabled
- * @return bool indicating whether wiki is enabled
+ * @return boolean indicating whether wiki is enabled
  * @access public
  */
 function wiki_enabled() {
@@ -44,8 +44,8 @@ function wiki_enabled() {
 }
 
 /**
- * Initilise wiki engine
- * @return null
+ * Initialise wiki engine
+ * @return void
  * @access public
  */
 function wiki_init() {
@@ -79,7 +79,7 @@ function wiki_init() {
 
 /**
  * Generate wiki link to a bug
- * @param int $p_bug_id Bug ID
+ * @param integer $p_bug_id A valid bug identifier.
  * @return string url
  * @access public
  */
@@ -89,7 +89,7 @@ function wiki_link_bug( $p_bug_id ) {
 
 /**
  * Generate wiki link to a project
- * @param int $p_project_id
+ * @param integer $p_project_id A valid project identifier.
  * @return string url
  * @access public
  */

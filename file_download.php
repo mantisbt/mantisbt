@@ -78,26 +78,22 @@ $c_file_id = (integer)$f_file_id;
 
 # we handle the case where the file is attached to a bug
 # or attached to a project as a project doc.
-$query = '';
+$t_query = '';
 switch ( $f_type ) {
 	case 'bug':
 		$t_bug_file_table = db_get_table( 'bug_file' );
-		$query = "SELECT *
-			FROM $t_bug_file_table
-			WHERE id=" . db_param();
+		$t_query = "SELECT * FROM $t_bug_file_table WHERE id=" . db_param();
 		break;
 	case 'doc':
 		$t_project_file_table = db_get_table( 'project_file' );
-		$query = "SELECT *
-			FROM $t_project_file_table
-			WHERE id=" . db_param();
+		$t_query = "SELECT * FROM $t_project_file_table WHERE id=" . db_param();
 		break;
 	default:
 		access_denied();
 }
-$t_result = db_query_bound( $query, array( $c_file_id ) );
-$row = db_fetch_array( $t_result );
-extract( $row, EXTR_PREFIX_ALL, 'v' );
+$t_result = db_query_bound( $t_query, array( $c_file_id ) );
+$t_row = db_fetch_array( $t_result );
+extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
 if( $f_type == 'bug' ) {
 	$t_project_id = bug_get_field( $v_bug_id, 'project_id' );
@@ -123,7 +119,7 @@ switch ( $f_type ) {
 }
 
 # throw away output buffer contents (and disable it) to protect download
-while ( @ob_end_clean() );
+while ( @ob_end_clean() ) {}
 
 if( ini_get( 'zlib.output_compression' ) && function_exists( 'ini_set' ) ) {
 	ini_set( 'zlib.output_compression', false );
@@ -160,11 +156,11 @@ http_content_disposition_header( $t_filename, $f_show_inline );
 header( 'Content-Length: ' . $v_filesize );
 
 # If finfo is available (always true for PHP >= 5.3.0) we can use it to determine the MIME type of files
-$finfo = finfo_get_if_available();
+$t_finfo = finfo_get_if_available();
 
 $t_content_type = $v_file_type;
 
-$t_content_type_override = file_get_content_type_override ( $t_filename );
+$t_content_type_override = file_get_content_type_override( $t_filename );
 
 # dump file content to the connection.
 switch ( config_get( 'file_upload_method' ) ) {
@@ -172,16 +168,17 @@ switch ( config_get( 'file_upload_method' ) ) {
 		$t_local_disk_file = file_normalize_attachment_path( $v_diskfile, $t_project_id );
 
 		if( file_exists( $t_local_disk_file ) ) {
-			if( $finfo ) {
-				$t_file_info_type = $finfo->file( $t_local_disk_file );
+			if( $t_finfo ) {
+				$t_file_info_type = $t_finfo->file( $t_local_disk_file );
 
 				if( $t_file_info_type !== false ) {
 					$t_content_type = $t_file_info_type;
 				}
 			}
 
-			if( $t_content_type_override )
+			if( $t_content_type_override ) {
 				$t_content_type = $t_content_type_override;
+			}
 
 			header( 'Content-Type: ' . $t_content_type );
 			if( config_get( 'file_download_xsendfile_enabled' ) ) {
@@ -193,16 +190,17 @@ switch ( config_get( 'file_upload_method' ) ) {
 		}
 		break;
 	case DATABASE:
-		if( $finfo ) {
-			$t_file_info_type = $finfo->buffer( $v_content );
+		if( $t_finfo ) {
+			$t_file_info_type = $t_finfo->buffer( $v_content );
 
 			if( $t_file_info_type !== false ) {
 				$t_content_type = $t_file_info_type;
 			}
 		}
 
-		if( $t_content_type_override )
+		if( $t_content_type_override ) {
 			$t_content_type = $t_content_type_override;
+		}
 
 		header( 'Content-Type: ' . $t_content_type );
 		echo $v_content;

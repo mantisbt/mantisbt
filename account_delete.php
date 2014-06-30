@@ -63,7 +63,7 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'user_api.php' );
 
-form_security_validate('account_delete');
+form_security_validate( 'account_delete' );
 
 auth_ensure_user_authenticated();
 
@@ -86,7 +86,7 @@ if( current_user_is_administrator() &&
 helper_ensure_confirmed( lang_get( 'confirm_delete_msg' ),
 						 lang_get( 'delete_account_button' ) );
 
-form_security_purge('account_delete');
+form_security_purge( 'account_delete' );
 
 $t_user_id = auth_get_current_user_id();
 

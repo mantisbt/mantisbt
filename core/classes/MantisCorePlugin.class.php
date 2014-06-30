@@ -20,22 +20,22 @@
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  * @package MantisBT
+ * @subpackage classes
  */
 
 /**
  * MantisBT Core Plugin
  * Used to give other plugins a permanent core plugin to 'require' for compatibility.
  * Can/should not be used as a base class.
- * @package MantisBT
- * @subpackage classes
  */
 final class MantisCorePlugin extends MantisPlugin {
 	/**
 	 * Plugin registration
+	 * @return void
 	 */
 	function register() {
 		$this->name = 'MantisBT Core';
-		$this->description = 'Core plugin API for the Mantis Bug Tracker.';
+		$this->description = 'Core Plugin API for the Mantis Bug Tracker.';
 
 		$this->version = MANTIS_VERSION;
 

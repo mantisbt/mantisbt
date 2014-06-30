@@ -117,22 +117,22 @@ $t_bug_data->severity               = gpc_get_int( 'severity', config_get( 'defa
 $t_bug_data->priority               = gpc_get_int( 'priority', config_get( 'default_bug_priority' ) );
 $t_bug_data->projection             = gpc_get_int( 'projection', config_get( 'default_bug_projection' ) );
 $t_bug_data->eta                    = gpc_get_int( 'eta', config_get( 'default_bug_eta' ) );
-$t_bug_data->resolution             = gpc_get_string('resolution', config_get( 'default_bug_resolution' ) );
+$t_bug_data->resolution             = gpc_get_string( 'resolution', config_get( 'default_bug_resolution' ) );
 $t_bug_data->status                 = gpc_get_string( 'status', config_get( 'bug_submit_status' ) );
 $t_bug_data->summary                = trim( gpc_get_string( 'summary' ) );
 $t_bug_data->description            = gpc_get_string( 'description' );
 $t_bug_data->steps_to_reproduce     = gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
-$t_bug_data->additional_information = gpc_get_string( 'additional_info', config_get ( 'default_bug_additional_info' ) );
-$t_bug_data->due_date               = gpc_get_string( 'due_date', '');
-if( is_blank ( $t_bug_data->due_date ) ) {
+$t_bug_data->additional_information = gpc_get_string( 'additional_info', config_get( 'default_bug_additional_info' ) );
+$t_bug_data->due_date               = gpc_get_string( 'due_date', '' );
+if( is_blank( $t_bug_data->due_date ) ) {
 	$t_bug_data->due_date = date_get_null();
 }
 
 $f_rel_type                         = gpc_get_int( 'rel_type', BUG_REL_NONE );
-$f_files                            = gpc_get_file( 'ufile', null ); /** @todo (thraxisp) Note that this always returns a structure */
+$f_files                            = gpc_get_file( 'ufile', null ); # @todo (thraxisp) Note that this always returns a structure
 $f_report_stay                      = gpc_get_bool( 'report_stay', false );
-$f_copy_notes_from_parent           = gpc_get_bool( 'copy_notes_from_parent', false);
-$f_copy_attachments_from_parent     = gpc_get_bool( 'copy_attachments_from_parent', false);
+$f_copy_notes_from_parent           = gpc_get_bool( 'copy_notes_from_parent', false );
+$f_copy_attachments_from_parent     = gpc_get_bool( 'copy_attachments_from_parent', false );
 
 if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id ) ) {
 	$t_bug_data->target_version = gpc_get_string( 'target_version', '' );
@@ -141,19 +141,19 @@ if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_d
 # if a profile was selected then let's use that information
 if( 0 != $t_bug_data->profile_id ) {
 	if( profile_is_global( $t_bug_data->profile_id ) ) {
-		$row = user_get_profile_row( ALL_USERS, $t_bug_data->profile_id );
+		$t_row = user_get_profile_row( ALL_USERS, $t_bug_data->profile_id );
 	} else {
-		$row = user_get_profile_row( $t_bug_data->reporter_id, $t_bug_data->profile_id );
+		$t_row = user_get_profile_row( $t_bug_data->reporter_id, $t_bug_data->profile_id );
 	}
 
 	if( is_blank( $t_bug_data->platform ) ) {
-		$t_bug_data->platform = $row['platform'];
+		$t_bug_data->platform = $t_row['platform'];
 	}
 	if( is_blank( $t_bug_data->os ) ) {
-		$t_bug_data->os = $row['os'];
+		$t_bug_data->os = $t_row['os'];
 	}
 	if( is_blank( $t_bug_data->os_build ) ) {
-		$t_bug_data->os_build = $row['os_build'];
+		$t_bug_data->os_build = $t_row['os_build'];
 	}
 }
 helper_call_custom_function( 'issue_create_validate', array( $t_bug_data ) );
@@ -164,14 +164,14 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	$t_def = custom_field_get_definition( $t_id );
 
 	# Produce an error if the field is required but wasn't posted
-	if(   !gpc_isset_custom_field( $t_id, $t_def['type'] )
+	if( !gpc_isset_custom_field( $t_id, $t_def['type'] )
 	   && $t_def['require_report']
 	) {
 		error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	if( !custom_field_validate( $t_id, gpc_get_custom_field( "custom_field_$t_id", $t_def['type'], NULL ) ) ) {
+	if( !custom_field_validate( $t_id, gpc_get_custom_field( "custom_field_$t_id", $t_def['type'], null ) ) ) {
 		error_parameters( lang_get_defaulted( custom_field_get_field( $t_id, 'name' ) ) );
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_VALUE, ERROR );
 	}
@@ -257,11 +257,10 @@ if( $f_master_bug_id > 0 ) {
 				$t_parent_bugnote->note_type,
 				$t_parent_bugnote->note_attr,
 				$t_parent_bugnote->reporter_id,
-				FALSE,
+				false,
 				0,
 				0,
-				FALSE
-			);
+				false );
 		}
 	}
 
@@ -279,12 +278,13 @@ event_signal( 'EVENT_REPORT_BUG', array( $t_bug_data, $t_bug_id ) );
 email_generic( $t_bug_id, 'new', 'email_notification_title_for_action_bug_submitted' );
 
 # log status and resolution changes if they differ from the default
-if( $t_bug_data->status != config_get('bug_submit_status') )
-	history_log_event($t_bug_id, 'status', config_get('bug_submit_status') );
+if( $t_bug_data->status != config_get( 'bug_submit_status' ) ) {
+	history_log_event( $t_bug_id, 'status', config_get( 'bug_submit_status' ) );
+}
 
-if( $t_bug_data->resolution != config_get('default_bug_resolution') )
-	history_log_event($t_bug_id, 'resolution', config_get('default_bug_resolution') );
-
+if( $t_bug_data->resolution != config_get( 'default_bug_resolution' ) ) {
+	history_log_event( $t_bug_id, 'resolution', config_get( 'default_bug_resolution' ) );
+}
 
 form_security_purge( 'bug_report' );
 

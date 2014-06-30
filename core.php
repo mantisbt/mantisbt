@@ -89,7 +89,8 @@ if( $t_config_inc_found ) {
 /**
  * Define an API inclusion function to replace require_once
  *
- * @param string $p_api_name api file name
+ * @param string $p_api_name An API file name.
+ * @return void
  */
 function require_api( $p_api_name ) {
 	static $s_api_included;
@@ -109,7 +110,8 @@ function require_api( $p_api_name ) {
 /**
  * Define an API inclusion function to replace require_once
  *
- * @param string $p_library_name lib file name
+ * @param string $p_library_name A library file name.
+ * @return void
  */
 function require_lib( $p_library_name ) {
 	static $s_libraries_included;
@@ -136,7 +138,8 @@ function require_lib( $p_library_name ) {
 /**
  * Define an autoload function to automatically load classes when referenced
  *
- * @param string $p_class class name
+ * @param string $p_class Class name being autoloaded.
+ * @return void
  */
 function __autoload( $p_class ) {
 	global $g_class_path;
@@ -242,7 +245,7 @@ if( !isset( $g_login_anonymous ) ) {
 # Note that PHP 5.1 on RHEL/CentOS doesn't support the timezone functions
 # used here so we just skip this action on RHEL/CentOS platforms.
 if( function_exists( 'timezone_identifiers_list' ) ) {
-	if( in_array ( config_get_global( 'default_timezone' ), timezone_identifiers_list() ) ) {
+	if( in_array( config_get_global( 'default_timezone' ), timezone_identifiers_list() ) ) {
 		# if a default timezone is set in config, set it here, else we use php.ini's value
 		# having a timezone set avoids a php warning
 		date_default_timezone_set( config_get_global( 'default_timezone' ) );

@@ -40,28 +40,22 @@ require_api( 'utility_api.php' );
 define( 'ADODB_DIR', config_get( 'library_path' ) . 'adodb' );
 require_lib( 'adodb' . DIRECTORY_SEPARATOR . 'adodb.inc.php' );
 
-/**
- * An array in which all executed queries are stored.  This is used for profiling
- * @global array $g_queries_array
- */
+# An array in which all executed queries are stored.  This is used for profiling
+# @global array $g_queries_array
 $g_queries_array = array();
 
-/**
- * Stores whether a database connection was succesfully opened.
- * @global bool $g_db_connected
- */
+
+# Stores whether a database connection was succesfully opened.
+# @global bool $g_db_connected
 $g_db_connected = false;
 
-/**
- * Store whether to log queries ( used for show_queries_count/query list)
- * @global bool $g_db_log_queries
- */
+# Store whether to log queries ( used for show_queries_count/query list)
+# @global bool $g_db_log_queries
 $g_db_log_queries = ( 0 != ( config_get_global( 'log_level' ) & LOG_DATABASE ) );
 
-/**
- * set adodb fetch mode
- * @global bool $ADODB_FETCH_MODE
- */
+
+# set adodb fetch mode
+# @global bool $ADODB_FETCH_MODE
 if( db_is_oracle() ) {
 	# Due to oci8 returning column names in uppercase, the MantisBT
 	# default fetch mode (ADODB_FETCH_ASSOC) does not work properly
@@ -77,14 +71,16 @@ if( db_is_oracle() ) {
  * Stores the current parameter count, provides method to generate parameters
  * and a simple stack mechanism to enable the caller to build multiple queries
  * concurrently on RDBMS using positional parameters (e.g. PostgreSQL)
- * @package MantisBT
- * @subpackage classes
  */
 class MantisDbParam {
-	/** Current parameter count */
+	/**
+	 * Current parameter count
+	 */
 	public $count = 0;
 
-	/** Parameter count stack */
+	/**
+	 * Parameter count stack
+	 */
 	private $stack = array();
 
 	/**
@@ -98,6 +94,7 @@ class MantisDbParam {
 
 	/**
 	 * Pushes current parameter count onto stack and resets its value to 0
+	 * @return void
 	 */
 	public function push() {
 		$this->stack[] = $this->count;
@@ -108,6 +105,7 @@ class MantisDbParam {
 	 * Pops the previous value of param count from the stack
 	 * This function is called by {@see db_query_bound()} and should not need
 	 * to be executed directly
+	 * @return void
 	 */
 	public function pop() {
 		global $g_db;
@@ -120,22 +118,20 @@ class MantisDbParam {
 	}
 }
 
-/**
- * Tracks the query parameter count
- * @global object $g_db_param
- */
+# Tracks the query parameter count
+# @global object $g_db_param
 $g_db_param = new MantisDbParam();
 
 /**
  * Open a connection to the database.
- * @param string $p_dsn Database connection string ( specified instead of other params)
- * @param string $p_hostname Database server hostname
- * @param string $p_username database server username
- * @param string $p_password database server password
- * @param string $p_database_name database name
- * @param string $p_db_schema Schema name (only used if database type is DB2)
- * @param bool $p_pconnect Use a Persistent connection to database
- * @return bool indicating if the connection was successful
+ * @param string  $p_dsn           Database connection string ( specified instead of other params).
+ * @param string  $p_hostname      Database server hostname.
+ * @param string  $p_username      Database server username.
+ * @param string  $p_password      Database server password.
+ * @param string  $p_database_name Database name.
+ * @param string  $p_db_schema     Schema name (only used if database type is DB2).
+ * @param boolean $p_pconnect      Use a Persistent connection to database.
+ * @return boolean indicating if the connection was successful
  */
 function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password = null, $p_database_name = null, $p_db_schema = null, $p_pconnect = false ) {
 	global $g_db_connected, $g_db;
@@ -162,8 +158,8 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 	if( $t_result ) {
 		# For MySQL, the charset for the connection needs to be specified.
 		if( db_is_mysql() ) {
-			/** @todo Is there a way to translate any charset name to MySQL format? e.g. remote the dashes? */
-			/** @todo Is this needed for other databases? */
+			# @todo Is there a way to translate any charset name to MySQL format? e.g. remote the dashes?
+			# @todo Is this needed for other databases?
 			db_query_bound( 'SET NAMES UTF8' );
 		} else if( db_is_db2() && $p_db_schema !== null && !is_blank( $p_db_schema ) ) {
 			$t_result2 = db_query_bound( 'set schema ' . $p_db_schema );
@@ -187,7 +183,7 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 /**
  * Returns whether a connection to the database exists
  * @global stores database connection state
- * @return bool indicating if the a database connection has been made
+ * @return boolean indicating if the a database connection has been made
  */
 function db_is_connected() {
 	global $g_db_connected;
@@ -197,8 +193,8 @@ function db_is_connected() {
 
 /**
  * Returns whether php support for a database is enabled
- * @param string $p_db_type Database type
- * @return bool indicating if php current supports the given database type
+ * @param string $p_db_type Database type.
+ * @return boolean indicating if php current supports the given database type
  */
 function db_check_database_support( $p_db_type ) {
 	switch( $p_db_type ) {
@@ -234,7 +230,7 @@ function db_check_database_support( $p_db_type ) {
 
 /**
  * Checks if the database driver is MySQL
- * @return bool true if mysql
+ * @return boolean true if mysql
  */
 function db_is_mysql() {
 	$t_db_type = config_get_global( 'db_type' );
@@ -250,7 +246,7 @@ function db_is_mysql() {
 
 /**
  * Checks if the database driver is PostgreSQL
- * @return bool true if postgres
+ * @return boolean true if postgres
  */
 function db_is_pgsql() {
 	$t_db_type = config_get_global( 'db_type' );
@@ -267,7 +263,7 @@ function db_is_pgsql() {
 
 /**
  * Checks if the database driver is MS SQL
- * @return bool true if mssql
+ * @return boolean true if mssql
  */
 function db_is_mssql() {
 	$t_db_type = config_get_global( 'db_type' );
@@ -284,7 +280,7 @@ function db_is_mssql() {
 
 /**
  * Checks if the database driver is DB2
- * @return bool true if db2
+ * @return boolean true if db2
  */
 function db_is_db2() {
 	$t_db_type = config_get_global( 'db_type' );
@@ -299,7 +295,7 @@ function db_is_db2() {
 
 /**
  * Checks if the database driver is Oracle (oci8)
- * @return bool true if oracle
+ * @return boolean true if oracle
  */
 function db_is_oracle() {
 	$t_db_type = config_get_global( 'db_type' );
@@ -308,9 +304,10 @@ function db_is_oracle() {
 }
 
 /**
- * Validates that the given identifier's length is OK for the db platform
+ * Validates that the given identifier's length is OK for the database platform
  * Triggers an error if the identifier is too long
- * @param string $p_identifier Identifier to check
+ * @param string $p_identifier Identifier to check.
+ * @return void
  */
 function db_check_identifier_size( $p_identifier ) {
 	# Oracle does not support long object names (30 chars max)
@@ -327,13 +324,13 @@ function db_check_identifier_size( $p_identifier ) {
  * @global array of previous executed queries for profiling
  * @global adodb database connection object
  * @global boolean indicating whether queries array is populated
- * @param string $p_query Parameterlised Query string to execute
- * @param array $arr_parms array of parameters matching $p_query
- * @param int $p_limit Number of results to return
- * @param int $p_offset offset query results for paging
- * @return ADORecordSet|bool adodb result set or false if the query failed.
+ * @param string  $p_query     Parameterlised Query string to execute.
+ * @param array   $p_arr_parms Array of parameters matching $p_query.
+ * @param integer $p_limit     Number of results to return.
+ * @param integer $p_offset    Offset query results for paging.
+ * @return IteratorAggregate|boolean adodb result set or false if the query failed.
  */
-function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset = -1 ) {
+function db_query_bound( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset = -1 ) {
 	global $g_queries_array, $g_db, $g_db_log_queries, $g_db_param;
 
 	$t_db_type = config_get_global( 'db_type' );
@@ -343,69 +340,69 @@ function db_query_bound( $p_query, $arr_parms = null, $p_limit = -1, $p_offset =
 		$s_check_params = ( db_is_pgsql() || $t_db_type == 'odbc_mssql' || $t_db_type == 'mssqlnative');
 	}
 
-	$t_start = microtime(true);
+	$t_start = microtime( true );
 
-	if( $arr_parms != null && $s_check_params ) {
-		$params = count( $arr_parms );
-		for( $i = 0;$i < $params;$i++ ) {
-			if( $arr_parms[$i] === false ) {
-				$arr_parms[$i] = 0;
+	if( $p_arr_parms != null && $s_check_params ) {
+		$t_params = count( $p_arr_parms );
+		for( $i = 0;$i < $t_params;$i++ ) {
+			if( $p_arr_parms[$i] === false ) {
+				$p_arr_parms[$i] = 0;
 			}
-			elseif( $arr_parms[$i] === true && $t_db_type == 'mssqlnative' ) {
-				$arr_parms[$i] = 1;
+			elseif( $p_arr_parms[$i] === true && $t_db_type == 'mssqlnative' ) {
+				$p_arr_parms[$i] = 1;
 			}
 		}
 	}
 
 	if( db_is_oracle() ) {
-		$p_query = db_oracle_adapt_query_syntax( $p_query , $arr_parms );
+		$p_query = db_oracle_adapt_query_syntax( $p_query, $p_arr_parms );
 	}
 
-	if(( $p_limit != -1 ) || ( $p_offset != -1 ) ) {
-		$t_result = $g_db->SelectLimit( $p_query, $p_limit, $p_offset, $arr_parms );
+	if( ( $p_limit != -1 ) || ( $p_offset != -1 ) ) {
+		$t_result = $g_db->SelectLimit( $p_query, $p_limit, $p_offset, $p_arr_parms );
 	} else {
-		$t_result = $g_db->Execute( $p_query, $arr_parms );
+		$t_result = $g_db->Execute( $p_query, $p_arr_parms );
 	}
 
-	$t_elapsed = number_format( microtime(true) - $t_start, 4 );
+	$t_elapsed = number_format( microtime( true ) - $t_start, 4 );
 
 	if( ON == $g_db_log_queries ) {
-		$lastoffset = 0;
+		$t_lastoffset = 0;
 		$i = 0;
-		if( !( is_null( $arr_parms ) || empty( $arr_parms ) ) ) {
-			while( preg_match( '/\?/', $p_query, $matches, PREG_OFFSET_CAPTURE, $lastoffset ) ) {
-				$matches = $matches[0];
+		if( !( is_null( $p_arr_parms ) || empty( $p_arr_parms ) ) ) {
+			while( preg_match( '/\?/', $p_query, $t_matches, PREG_OFFSET_CAPTURE, $t_lastoffset ) ) {
+				$t_matches = $t_matches[0];
 				# Realign the offset returned by preg_match as it is byte-based,
 				# which causes issues with UTF-8 characters in the query string
 				# (e.g. from custom fields names)
-				$t_utf8_offset = utf8_strlen( substr( $p_query, 0, $matches[1]), mb_internal_encoding() );
-				if( $i <= count( $arr_parms ) ) {
-					if( is_null( $arr_parms[$i] ) ) {
-						$replace = 'NULL';
+				$t_utf8_offset = utf8_strlen( substr( $p_query, 0, $t_matches[1] ), mb_internal_encoding() );
+				if( $i <= count( $p_arr_parms ) ) {
+					if( is_null( $p_arr_parms[$i] ) ) {
+						$t_replace = 'NULL';
 					}
-					else if( is_string( $arr_parms[$i] ) ) {
-						$replace = "'" . $arr_parms[$i] . "'";
+					else if( is_string( $p_arr_parms[$i] ) ) {
+						$t_replace = "'" . $p_arr_parms[$i] . "'";
 					}
-					else if( is_integer( $arr_parms[$i] ) || is_float( $arr_parms[$i] ) ) {
-						$replace = (float) $arr_parms[$i];
+					else if( is_integer( $p_arr_parms[$i] ) || is_float( $p_arr_parms[$i] ) ) {
+						$t_replace = (float)$p_arr_parms[$i];
 					}
-					else if( is_bool( $arr_parms[$i] ) ) {
+					else if( is_bool( $p_arr_parms[$i] ) ) {
 						switch( $t_db_type ) {
 							case 'pgsql':
-								$replace = "'" . $arr_parms[$i] . "'";
+								$t_replace = "'" . $p_arr_parms[$i] . "'";
 							break;
 						default:
-							$replace = $arr_parms[$i];
+							$t_replace = $p_arr_parms[$i];
 							break;
 						}
 					} else {
 						echo( "Invalid argument type passed to query_bound(): " . ( $i + 1 ) );
 						exit( 1 );
 					}
-					$p_query = utf8_substr( $p_query, 0, $t_utf8_offset ) . $replace . utf8_substr( $p_query, $t_utf8_offset + utf8_strlen( $matches[0] ) );
-					$lastoffset = $matches[1] + strlen( $replace ) + 1;
+					$p_query = utf8_substr( $p_query, 0, $t_utf8_offset ) . $t_replace . utf8_substr( $p_query, $t_utf8_offset + utf8_strlen( $t_matches[0] ) );
+					$t_lastoffset = $t_matches[1] + strlen( $t_replace ) + 1;
 				} else {
-					$lastoffset = $matches[1] + 1;
+					$t_lastoffset = $t_matches[1] + 1;
 				}
 				$i++;
 			}
@@ -440,6 +437,7 @@ function db_param() {
  * Pushes current parameter count onto stack and resets its value
  * Allows the caller to build multiple queries concurrently on RDBMS using
  * positional parameters (e.g. PostgreSQL)
+ * @return void
  */
 function db_param_push() {
 	global $g_db_param;
@@ -448,16 +446,16 @@ function db_param_push() {
 
 /**
  * Retrieve number of rows returned for a specific database query
- * @param ADORecordSet $p_result Database Query Record Set to retrieve record count for.
- * @return int Record Count
+ * @param IteratorAggregate $p_result Database Query Record Set to retrieve record count for.
+ * @return integer Record Count
  */
-function db_num_rows( $p_result ) {
+function db_num_rows( IteratorAggregate $p_result ) {
 	return $p_result->RecordCount();
 }
 
 /**
  * Retrieve number of rows affected by a specific database query
- * @return int Affected Rows
+ * @return integer Affected Rows
  */
 function db_affected_rows() {
 	global $g_db;
@@ -467,10 +465,10 @@ function db_affected_rows() {
 
 /**
  * Retrieve the next row returned from a specific database query
- * @param bool|ADORecordSet $p_result Database Query Record Set to retrieve next result for.
+ * @param IteratorAggregate &$p_result Database Query Record Set to retrieve next result for.
  * @return array Database result
  */
-function db_fetch_array( &$p_result ) {
+function db_fetch_array( IteratorAggregate &$p_result ) {
 	global $g_db, $g_db_type;
 
 	if( $p_result->EOF ) {
@@ -484,8 +482,8 @@ function db_fetch_array( &$p_result ) {
 		return $t_array;
 	} else {
 		$t_row = $p_result->GetRowAssoc( false );
-		static $t_array_result;
-		static $t_array_fields;
+		static $s_array_result;
+		static $s_array_fields;
 
 		# Oci8 returns null values for empty strings
 		if( db_is_oracle() ) {
@@ -496,12 +494,12 @@ function db_fetch_array( &$p_result ) {
 			}
 		}
 
-		if( $t_array_result != $p_result ) {
+		if( $s_array_result != $p_result ) {
 			# new query
-			$t_array_result = $p_result;
-			$t_array_fields = null;
+			$s_array_result = $p_result;
+			$s_array_fields = null;
 		} else {
-			if( $t_array_fields === null ) {
+			if( $s_array_fields === null ) {
 				$p_result->MoveNext();
 				return $t_row;
 			}
@@ -510,11 +508,11 @@ function db_fetch_array( &$p_result ) {
 		$t_convert = false;
 		$t_fieldcount = $p_result->FieldCount();
 		for( $i = 0; $i < $t_fieldcount; $i++ ) {
-			if( isset( $t_array_fields[$i] ) ) {
-				$t_field = $t_array_fields[$i];
+			if( isset( $s_array_fields[$i] ) ) {
+				$t_field = $s_array_fields[$i];
 			} else {
 				$t_field = $p_result->FetchField( $i );
-				$t_array_fields[$i] = $t_field;
+				$s_array_fields[$i] = $t_field;
 			}
 			switch( $t_field->type ) {
 				case 'bool':
@@ -534,7 +532,7 @@ function db_fetch_array( &$p_result ) {
 		}
 
 		if( $t_convert == false ) {
-			$t_array_fields = null;
+			$s_array_fields = null;
 		}
 		$p_result->MoveNext();
 		return $t_row;
@@ -543,9 +541,9 @@ function db_fetch_array( &$p_result ) {
 
 /**
  * Retrieve a result returned from a specific database query
- * @param bool|ADORecordSet $p_result Database Query Record Set to retrieve next result for.
- * @param int $p_index1 Row to retrieve (optional)
- * @param int $p_index2 Column to retrieve (optional)
+ * @param boolean|IteratorAggregate $p_result Database Query Record Set to retrieve next result for.
+ * @param integer                   $p_index1 Row to retrieve (optional).
+ * @param integer                   $p_index2 Column to retrieve (optional).
  * @return mixed Database result
  */
 function db_result( $p_result, $p_index1 = 0, $p_index2 = 0 ) {
@@ -568,27 +566,27 @@ function db_result( $p_result, $p_index1 = 0, $p_index2 = 0 ) {
 
 /**
  * return the last inserted id for a specific database table
- * @param string $p_table a valid database table name
- * @param string $p_field a valid field name (default "id")
- * @return int last successful insert id
+ * @param string $p_table A valid database table name.
+ * @param string $p_field A valid field name (default "id").
+ * @return integer last successful insert id
  */
 function db_insert_id( $p_table = null, $p_field = "id" ) {
 	global $g_db;
 
 	if( isset( $p_table ) ) {
 		if( db_is_oracle() ) {
-			$query = "SELECT seq_" . $p_table . ".CURRVAL FROM DUAL";
+			$t_query = "SELECT seq_" . $p_table . ".CURRVAL FROM DUAL";
 		} elseif( db_is_pgsql() ) {
-			$query = "SELECT currval('" . $p_table . "_" . $p_field . "_seq')";
+			$t_query = "SELECT currval('" . $p_table . "_" . $p_field . "_seq')";
 		}
-		if( isset( $query ) ) {
-			$t_result = db_query_bound( $query );
+		if( isset( $t_query ) ) {
+			$t_result = db_query_bound( $t_query );
 			return db_result( $t_result );
 		}
 	}
 	if( db_is_mssql() ) {
-		$query = "SELECT IDENT_CURRENT('$p_table')";
-		$t_result = db_query_bound( $query );
+		$t_query = "SELECT IDENT_CURRENT('$p_table')";
+		$t_result = db_query_bound( $t_query );
 		return db_result( $t_result );
 	}
 	return $g_db->Insert_ID();
@@ -596,8 +594,8 @@ function db_insert_id( $p_table = null, $p_field = "id" ) {
 
 /**
  * Check if the specified table exists.
- * @param string $p_table_name a valid database table name
- * @return bool indicating whether the table exists
+ * @param string $p_table_name A valid database table name.
+ * @return boolean indicating whether the table exists
  */
 function db_table_exists( $p_table_name ) {
 	if( is_blank( $p_table_name ) ) {
@@ -622,9 +620,9 @@ function db_table_exists( $p_table_name ) {
 
 /**
  * Check if the specified table index exists.
- * @param string $p_table_name a valid database table name
- * @param string $p_index_name a valid database index name
- * @return bool indicating whether the index exists
+ * @param string $p_table_name A valid database table name.
+ * @param string $p_index_name A valid database index name.
+ * @return boolean indicating whether the index exists
  */
 function db_index_exists( $p_table_name, $p_index_name ) {
 	global $g_db;
@@ -653,24 +651,24 @@ function db_index_exists( $p_table_name, $p_index_name ) {
 
 /**
  * Check if the specified field exists in a given table
- * @param string $p_field_name a database field name
- * @param string $p_table_name a valid database table name
- * @return bool indicating whether the field exists
+ * @param string $p_field_name A database field name.
+ * @param string $p_table_name A valid database table name.
+ * @return boolean indicating whether the field exists
  */
 function db_field_exists( $p_field_name, $p_table_name ) {
-	$columns = db_field_names( $p_table_name );
-	return in_array( $p_field_name, $columns );
+	$t_columns = db_field_names( $p_table_name );
+	return in_array( $p_field_name, $t_columns );
 }
 
 /**
  * Retrieve list of fields for a given table
- * @param string $p_table_name a valid database table name
+ * @param string $p_table_name A valid database table name.
  * @return array array of fields on table
  */
 function db_field_names( $p_table_name ) {
 	global $g_db;
-	$columns = $g_db->MetaColumnNames( $p_table_name );
-	return is_array( $columns ) ? $columns : array();
+	$t_columns = $g_db->MetaColumnNames( $p_table_name );
+	return is_array( $t_columns ) ? $t_columns : array();
 }
 
 /**
@@ -698,7 +696,8 @@ function db_error_msg() {
 
 /**
  * send both the error number and error message and query (optional) as paramaters for a triggered error
- * @param string $p_query query that generated the error
+ * @param string $p_query Query that generated the error.
+ * @return void
  * @todo Use/Behaviour of this function should be reviewed before 1.2.0 final
  */
 function db_error( $p_query = null ) {
@@ -712,6 +711,7 @@ function db_error( $p_query = null ) {
 /**
  * close the connection.
  * Not really necessary most of the time since a connection is automatically closed when a page finishes loading.
+ * @return void
  */
 function db_close() {
 	global $g_db;
@@ -721,7 +721,7 @@ function db_close() {
 
 /**
  * prepare a string before DB insertion
- * @param string $p_string unprepared string
+ * @param string $p_string Unprepared string.
  * @return string prepared database query string
  * @deprecated db_query_bound should be used in preference to this function. This function may be removed in 1.2.0 final
  */
@@ -770,7 +770,7 @@ function db_prepare_string( $p_string ) {
  * Prepare a binary string before DB insertion
  * Use of this function is required for some DB types, to properly encode
  * BLOB fields prior to calling db_query_bound()
- * @param string $p_string raw binary data
+ * @param string $p_string Raw binary data.
  * @return string prepared database query string
  */
 function db_prepare_binary_string( $p_string ) {
@@ -782,8 +782,8 @@ function db_prepare_binary_string( $p_string ) {
 		case 'mssqlnative':
 		case 'odbc_mssql':
 		case 'ado_mssql':
-			$content = unpack( "H*hex", $p_string );
-			return '0x' . $content['hex'];
+			$t_content = unpack( "H*hex", $p_string );
+			return '0x' . $t_content['hex'];
 			break;
 		case 'postgres':
 		case 'postgres64':
@@ -801,30 +801,30 @@ function db_prepare_binary_string( $p_string ) {
 
 /**
  * prepare a int for database insertion.
- * @param int $p_int integer
- * @return int integer
+ * @param integer $p_int Integer.
+ * @return integer integer
  * @deprecated db_query_bound should be used in preference to this function. This function may be removed in 1.2.0 final
  * @todo Use/Behaviour of this function should be reviewed before 1.2.0 final
  */
 function db_prepare_int( $p_int ) {
-	return (int) $p_int;
+	return (int)$p_int;
 }
 
 /**
  * prepare a double for database insertion.
- * @param double $p_double double
+ * @param float $p_double Double.
  * @return double double
  * @deprecated db_query_bound should be used in preference to this function. This function may be removed in 1.2.0 final
  * @todo Use/Behaviour of this function should be reviewed before 1.2.0 final
  */
 function db_prepare_double( $p_double ) {
-	return (double) $p_double;
+	return (double)$p_double;
 }
 
 /**
  * prepare a boolean for database insertion.
- * @param bool $p_bool boolean value
- * @return int integer representing boolean
+ * @param boolean $p_bool Boolean value.
+ * @return integer integer representing boolean
  * @deprecated db_query_bound should be used in preference to this function. This function may be removed in 1.2.0 final
  * @todo Use/Behaviour of this function should be reviewed before 1.2.0 final
  */
@@ -833,7 +833,7 @@ function db_prepare_bool( $p_bool ) {
 	if( db_is_pgsql() ) {
 		return $g_db->qstr( $p_bool );
 	} else {
-		return (int) (bool) $p_bool;
+		return (int)(bool)$p_bool;
 	}
 }
 
@@ -848,7 +848,7 @@ function db_now() {
 
 /**
  * convert minutes to a time format [h]h:mm
- * @param int $p_min integer representing number of minutes
+ * @param integer $p_min Integer representing number of minutes.
  * @return string representing formatted duration string in hh:mm format.
  */
 function db_minutes_to_hhmm( $p_min = 0 ) {
@@ -858,8 +858,8 @@ function db_minutes_to_hhmm( $p_min = 0 ) {
 /**
  * A helper function that generates a case-sensitive or case-insensitive like phrase based on the current db type.
  * The field name and value are assumed to be safe to insert in a query (i.e. already cleaned).
- * @param string $p_field_name The name of the field to filter on.
- * @param bool $p_case_sensitive true: case sensitive, false: case insensitive
+ * @param string  $p_field_name     The name of the field to filter on.
+ * @param boolean $p_case_sensitive True: case sensitive, false: case insensitive.
  * @return string returns (field LIKE 'value') OR (field ILIKE 'value')
  */
 function db_helper_like( $p_field_name, $p_case_sensitive = false ) {
@@ -876,9 +876,9 @@ function db_helper_like( $p_field_name, $p_case_sensitive = false ) {
 
 /**
  * A helper function to compare two dates against a certain number of days
- * @param $p_date1_id_or_column
- * @param $p_date2_id_or_column
- * @param $p_limitstring
+ * @param string|integer $p_date1_id_or_column Column or value to compare.
+ * @param string|integer $p_date2_id_or_column Column or value to compare.
+ * @param string         $p_limitstring        Limit String.
  * @return string returns database query component to compare dates
  * @todo Check if there is a way to do that using ADODB rather than implementing it here.
  */
@@ -899,7 +899,7 @@ function db_helper_compare_days( $p_date1_id_or_column, $p_date2_id_or_column, $
 
 /**
  * count queries
- * @return int
+ * @return integer
  */
 function db_count_queries() {
 	global $g_queries_array;
@@ -909,7 +909,7 @@ function db_count_queries() {
 
 /**
  * count unique queries
- * @return int
+ * @return integer
  */
 function db_count_unique_queries() {
 	global $g_queries_array;
@@ -927,7 +927,7 @@ function db_count_unique_queries() {
 
 /**
  * get total time for queries
- * @return int
+ * @return integer
  */
 function db_time_queries() {
 	global $g_queries_array;
@@ -942,19 +942,16 @@ function db_time_queries() {
 /**
  * get database table name
  *
- * @param string $p_name can either be specified as 'XXX' (e.g. 'bug'), or
+ * @param string $p_name Can either be specified as 'XXX' (e.g. 'bug'), or
  *                       using the legacy style 'mantis_XXX_table'; in the
- *                       latter case, a deprecation warning will be issued
+ *                       latter case, a deprecation warning will be issued.
  * @return string containing full database table name (with prefix and suffix)
  */
 function db_get_table( $p_name ) {
-	if( strpos( $p_name, 'mantis_') === 0 ) {
+	if( strpos( $p_name, 'mantis_' ) === 0 ) {
 		$t_table = substr( $p_name, 7, strpos( $p_name, '_table' ) - 7 );
-		error_parameters(
-			"db_get_table( '$p_name' )",
-			"db_get_table( '$t_table' )"
-		);
-		trigger_error(ERROR_DEPRECATED_SUPERSEDED, WARNING );
+		error_parameters( "db_get_table( '$p_name' )", "db_get_table( '$t_table' )" );
+		trigger_error( ERROR_DEPRECATED_SUPERSEDED, WARNING );
 	} else {
 		$t_table = $p_name;
 	}
@@ -998,12 +995,12 @@ function db_get_table_list() {
  * This function is only needed for oci8; it will do nothing and return
  * false if used with another RDBMS.
  *
- * @param string $p_table
- * @param string $p_column The BLOB column to update
- * @param string $p_val Data to store into the BLOB
- * @param string $p_where Where clause to identify which record to update
- *                        if null, defaults to the last record inserted in $p_table
- * @return bool
+ * @param string $p_table  Table name.
+ * @param string $p_column The BLOB column to update.
+ * @param string $p_val    Data to store into the BLOB.
+ * @param string $p_where  Where clause to identify which record to update
+ *                         if null, defaults to the last record inserted in $p_table.
+ * @return boolean
  */
 function db_update_blob( $p_table, $p_column, $p_val, $p_where = null ) {
 	global $g_db, $g_db_log_queries, $g_queries_array;
@@ -1017,7 +1014,7 @@ function db_update_blob( $p_table, $p_column, $p_val, $p_where = null ) {
 	}
 
 	if( ON == $g_db_log_queries ) {
-		$t_start = microtime(true);
+		$t_start = microtime( true );
 
 		$t_backtrace = debug_backtrace();
 		$t_caller = basename( $t_backtrace[0]['file'] );
@@ -1035,7 +1032,7 @@ function db_update_blob( $p_table, $p_column, $p_val, $p_where = null ) {
 	$t_result = $g_db->UpdateBlob( $p_table, $p_column, $p_val, $p_where );
 
 	if( $g_db_log_queries ) {
-		$t_elapsed = number_format( microtime(true) - $t_start, 4 );
+		$t_elapsed = number_format( microtime( true ) - $t_start, 4 );
 		$t_log_data = array(
 			"Update BLOB in $p_table.$p_column where $p_where",
 			$t_elapsed,
@@ -1059,7 +1056,7 @@ function db_update_blob( $p_table, $p_column, $p_val, $p_where = null ) {
  * e.g. input:  "... WHERE F1=:12 and F2=:97 ",
  *      output: "... WHERE F1=:0 and F2=:1 ".
  * Used in db_oracle_adapt_query_syntax().
- * @param string $p_query Query string to sort
+ * @param string $p_query Query string to sort.
  * @return string Query string with sorted bind variable numbers.
  */
 function db_oracle_order_binds_sequentially( $p_query ) {
@@ -1069,18 +1066,18 @@ function db_oracle_order_binds_sequentially( $p_query ) {
 	$t_iter = 0;
 
 	# Divide statement to skip processing string literals
-	$t_p_query_arr = explode( '\'' , $p_query );
+	$t_p_query_arr = explode( '\'', $p_query );
 	foreach( $t_p_query_arr as $t_p_query_part ) {
 		if( $t_new_query != '' ) {
 			$t_new_query .= '\'';
 		}
 		if( $t_is_odd )   {
 			# Divide to process all bindvars
-			$t_p_query_subpart_arr = explode( ':' , $t_p_query_part );
+			$t_p_query_subpart_arr = explode( ':', $t_p_query_part );
 			if( count( $t_p_query_subpart_arr ) > 1 ) {
 				foreach( $t_p_query_subpart_arr as $t_p_query_subpart )  {
 					if( ( !$t_after_quote ) && ( $t_new_query != '' ) )	{
-						$t_new_query .= ":" . preg_replace( '/^(\d+?)/U' , strval( $t_iter ) , $t_p_query_subpart );
+						$t_new_query .= ":" . preg_replace( '/^(\d+?)/U', strval( $t_iter ), $t_p_query_subpart );
 						$t_iter++;
 					} else {
 						$t_new_query .= $t_p_query_subpart;
@@ -1108,21 +1105,22 @@ function db_oracle_order_binds_sequentially( $p_query ) {
  * 3. Remove null bind variables in insert statements for default values support
  * 4. Replace "tab.column=:bind" to "tab.column IS NULL" when :bind is empty string
  * 5. Replace "SET tab.column=:bind" to "SET tab.column=DEFAULT" when :bind is empty string
- * @param string $p_query Query string to sort
- * @param array $arr_parms Array of parameters matching $p_query, function sorts array keys
+ * @param string $p_query      Query string to sort.
+ * @param array  &$p_arr_parms Array of parameters matching $p_query, function sorts array keys.
  * @return string Query string with sorted bind variable numbers.
  */
-function db_oracle_adapt_query_syntax( $p_query , &$arr_parms = null )  {
+function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
 	# Remove "AS" keyword, because not supported with table aliasing
 	$t_is_odd = true;
 	$t_query = '';
 	# Divide statement to skip processing string literals
-	$t_p_query_arr = explode( '\'' , $p_query );
+	$t_p_query_arr = explode( '\'', $p_query );
 	foreach( $t_p_query_arr as $t_p_query_part ) {
-		if( $t_query != '' )
+		if( $t_query != '' ) {
 			$t_query .= '\'';
+		}
 		if( $t_is_odd ) {
-			$t_query .= preg_replace( '/ AS /im' , ' ' , $t_p_query_part );
+			$t_query .= preg_replace( '/ AS /im', ' ', $t_p_query_part );
 		} else {
 			$t_query .= $t_p_query_part;
 			$t_is_odd = true;
@@ -1131,48 +1129,48 @@ function db_oracle_adapt_query_syntax( $p_query , &$arr_parms = null )  {
 	$p_query = $t_query;
 
 	# Remove null bind variables in insert statements for default values support
-	if( is_array ( $arr_parms ) )        {
-		preg_match( '/^[\s\n\r]*insert[\s\n\r]+(into){0,1}[\s\n\r]+(?P<table>[a-z0-9_]+)[\s\n\r]*\([\s\n\r]*[\s\n\r]*(?P<fields>[a-z0-9_,\s\n\r]+)[\s\n\r]*\)[\s\n\r]*values[\s\n\r]*\([\s\n\r]*(?P<values>[:a-z0-9_,\s\n\r]+)\)/i' , $p_query , $t_matches );
+	if( is_array( $p_arr_parms ) ) {
+		preg_match( '/^[\s\n\r]*insert[\s\n\r]+(into){0,1}[\s\n\r]+(?P<table>[a-z0-9_]+)[\s\n\r]*\([\s\n\r]*[\s\n\r]*(?P<fields>[a-z0-9_,\s\n\r]+)[\s\n\r]*\)[\s\n\r]*values[\s\n\r]*\([\s\n\r]*(?P<values>[:a-z0-9_,\s\n\r]+)\)/i', $p_query, $t_matches );
 
-		if(isset($t_matches['values'])) { #if statement is a INSERT INTO ... (...) VALUES(...)
+		if( isset( $t_matches['values'] ) ) { #if statement is a INSERT INTO ... (...) VALUES(...)
 			# iterates non-empty bind variables
 			$i = 0;
 			$t_fields_left = $t_matches['fields'];
 			$t_values_left = $t_matches['values'];
 
-			for( $t_arr_index = 0 ; $t_arr_index < count($arr_parms) ; $t_arr_index++ ) {
+			for( $t_arr_index = 0; $t_arr_index < count( $p_arr_parms ); $t_arr_index++ ) {
 				# inserting fieldname search
-				if( preg_match( '/^[\s\n\r]*([a-z0-9_]+)[\s\n\r]*,{0,1}([\d\D]*)\z/i' , $t_fields_left , $t_fieldmatch ) ) {
+				if( preg_match( '/^[\s\n\r]*([a-z0-9_]+)[\s\n\r]*,{0,1}([\d\D]*)\z/i', $t_fields_left, $t_fieldmatch ) ) {
 					$t_fields_left = $t_fieldmatch[2];
 					$t_fields_arr[$i] = $t_fieldmatch[1];
 				}
 				# inserting bindvar name search
-				if( preg_match( '/^[\s\n\r]*(:[a-z0-9_]+)[\s\n\r]*,{0,1}([\d\D]*)\z/i' , $t_values_left , $t_valuematch ) ) {
+				if( preg_match( '/^[\s\n\r]*(:[a-z0-9_]+)[\s\n\r]*,{0,1}([\d\D]*)\z/i', $t_values_left, $t_valuematch ) ) {
 					$t_values_left = $t_valuematch[2];
 					$t_values_arr[$i] = $t_valuematch[1];
 				}
 				# skip unsetting if bind array value not empty
-				if( $arr_parms[$t_arr_index] !== '' ) {
+				if( $p_arr_parms[$t_arr_index] !== '' ) {
 					$i++;
 				} else {
 					$t_arr_index--;
 					# Shift array and unset bind array element
-					for( $n = $i + 1 ; $n < count( $arr_parms ) ; $n++ ) {
-						$arr_parms[$n-1] = $arr_parms[$n];
+					for( $n = $i + 1 ; $n < count( $p_arr_parms ) ; $n++ ) {
+						$p_arr_parms[$n-1] = $p_arr_parms[$n];
 					}
 					unset( $t_fields_arr[$i] );
 					unset( $t_values_arr[$i] );
-					unset( $arr_parms[count( $arr_parms ) - 1] );
+					unset( $p_arr_parms[count( $p_arr_parms ) - 1] );
 				}
 			}
 
 			# Combine statement from arrays
 			$p_query = 'INSERT INTO ' . $t_matches['table'] . ' (' . $t_fields_arr[0];
-			for( $i = 1 ; $i < count( $arr_parms ) ; $i++ ) {
+			for( $i = 1 ; $i < count( $p_arr_parms ) ; $i++ ) {
 				$p_query = $p_query . ', ' . $t_fields_arr[$i];
 			}
 			$p_query = $p_query . ') values (' . $t_values_arr[0];
-			for ( $i = 1 ; $i < count( $arr_parms ) ; $i++ ) {
+			for ( $i = 1 ; $i < count( $p_arr_parms ) ; $i++ ) {
 				$p_query = $p_query . ', ' . $t_values_arr[$i];
 			}
 			$p_query = $p_query . ')';
@@ -1180,14 +1178,14 @@ function db_oracle_adapt_query_syntax( $p_query , &$arr_parms = null )  {
 			# if input statement is NOT a INSERT INTO (...) VALUES(...)
 
 			# "IS NULL" adoptation here
-			$t_set_where_template_str = substr( md5( uniqid( rand() , true) ), 0, 50 );
+			$t_set_where_template_str = substr( md5( uniqid( rand(), true ) ), 0, 50 );
 			$t_removed_set_where = '';
 
 			# Need to order parameter array element correctly
 			$p_query = db_oracle_order_binds_sequentially( $p_query );
 
 			# Find and remove temporarily "SET var1=:bind1, var2=:bind2 WHERE" part
-			preg_match( '/^(?P<before_set_where>.*)(?P<set_where>[\s\n\r]*set[\s\n\r]+[\s\n\ra-z0-9_\.=,:\']+)(?P<after_set_where>where[\d\D]*)$/i' , $p_query, $t_matches );
+			preg_match( '/^(?P<before_set_where>.*)(?P<set_where>[\s\n\r]*set[\s\n\r]+[\s\n\ra-z0-9_\.=,:\']+)(?P<after_set_where>where[\d\D]*)$/i', $p_query, $t_matches );
 			$t_set_where_stmt = isset( $t_matches['after_set_where'] );
 
 			if( $t_set_where_stmt ) {
@@ -1199,64 +1197,64 @@ function db_oracle_adapt_query_syntax( $p_query , &$arr_parms = null )  {
 			}
 
 			# Replace "var1=''" by "var1 IS NULL"
-			while( preg_match( '/^(?P<before_empty_literal>[\d\D]*[\s\n\r(]+([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)[\s\n\r]*=[\s\n\r]*\'\'(?P<after_empty_literal>[\s\n\r]*[\d\D]*\z)/i' , $t_templated_query , $t_matches ) > 0 ) {
+			while( preg_match( '/^(?P<before_empty_literal>[\d\D]*[\s\n\r(]+([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)[\s\n\r]*=[\s\n\r]*\'\'(?P<after_empty_literal>[\s\n\r]*[\d\D]*\z)/i', $t_templated_query, $t_matches ) > 0 ) {
 				$t_templated_query = $t_matches['before_empty_literal'] . " IS NULL " . $t_matches['after_empty_literal'];
 			}
 			# Replace "var1!=''" and "var1<>''" by "var1 IS NOT NULL"
-			while( preg_match('/^(?P<before_empty_literal>[\d\D]*[\s\n\r(]+([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)[\s\n\r]*(![\s\n\r]*=|<[\s\n\r]*>)[\s\n\r]*\'\'(?P<after_empty_literal>[\s\n\r]*[\d\D]*\z)/i' , $t_templated_query , $t_matches ) > 0 ) {
+			while( preg_match( '/^(?P<before_empty_literal>[\d\D]*[\s\n\r(]+([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)[\s\n\r]*(![\s\n\r]*=|<[\s\n\r]*>)[\s\n\r]*\'\'(?P<after_empty_literal>[\s\n\r]*[\d\D]*\z)/i', $t_templated_query, $t_matches ) > 0 ) {
 				$t_templated_query = $t_matches['before_empty_literal'] . " IS NOT NULL " . $t_matches['after_empty_literal'];
 			}
 
 			$p_query = $t_templated_query;
 			# Process input bind variable array to replace "WHERE fld=:12"
 			# by "WHERE fld IS NULL" if :12 is empty
-			while( preg_match( '/^(?P<before_var>[\d\D]*[\s\n\r(]+)(?P<var_name>([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)(?P<dividers>[\s\n\r]*=[\s\n\r]*:)(?P<bind_name>[0-9]+)(?P<after_var>[\s\n\r]*[\d\D]*\z)/i' , $t_templated_query , $t_matches ) > 0 ) {
+			while( preg_match( '/^(?P<before_var>[\d\D]*[\s\n\r(]+)(?P<var_name>([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)(?P<dividers>[\s\n\r]*=[\s\n\r]*:)(?P<bind_name>[0-9]+)(?P<after_var>[\s\n\r]*[\d\D]*\z)/i', $t_templated_query, $t_matches ) > 0 ) {
 				$t_bind_num = $t_matches['bind_name'];
 
 				$t_search_substr = $t_matches['before_var'] . $t_matches['var_name'] . $t_matches['dividers'] . $t_matches['bind_name'] . $t_matches['after_var'];
 				$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . "=:" . $t_matches['bind_name']. $t_matches['after_var'];
 
-				if( $arr_parms[$t_bind_num] === '' ) {
-					for( $n = $t_bind_num + 1 ; $n < count($arr_parms) ; $n++ ) {
-						$arr_parms[$n - 1] = $arr_parms[$n];
+				if( $p_arr_parms[$t_bind_num] === '' ) {
+					for( $n = $t_bind_num + 1 ; $n < count( $p_arr_parms ) ; $n++ ) {
+						$p_arr_parms[$n - 1] = $p_arr_parms[$n];
 					}
-					unset( $arr_parms[count( $arr_parms ) - 1] );
+					unset( $p_arr_parms[count( $p_arr_parms ) - 1] );
 					$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . " IS NULL " . $t_matches['after_var'];
 				}
-				$p_query = str_replace( $t_search_substr , $t_replace_substr , $p_query );
+				$p_query = str_replace( $t_search_substr, $t_replace_substr, $p_query );
 
 				$t_templated_query = $t_matches['before_var'] . $t_matches['after_var'];
 			}
 
 			if( $t_set_where_stmt ) {
 				# Put temporarily removed "SET ... WHERE" part back
-				$p_query = str_replace( $t_set_where_template_str , $t_removed_set_where , $p_query );
+				$p_query = str_replace( $t_set_where_template_str, $t_removed_set_where, $p_query );
 				# Need to order parameter array element correctly
 				$p_query = db_oracle_order_binds_sequentially( $p_query );
 				# Find and remove temporary "SET var1=:bind1, var2=:bind2 WHERE" part again
-				preg_match( '/^(?P<before_set_where>.*)(?P<set_where>[\s\n\r]*set[\s\n\r]+[\s\n\ra-z0-9_\.=,:\']+)(?P<after_set_where>where[\d\D]*)$/i' , $p_query , $t_matches );
+				preg_match( '/^(?P<before_set_where>.*)(?P<set_where>[\s\n\r]*set[\s\n\r]+[\s\n\ra-z0-9_\.=,:\']+)(?P<after_set_where>where[\d\D]*)$/i', $p_query, $t_matches );
 				$t_removed_set_where = $t_matches['set_where'];
 				$p_query = $t_matches['before_set_where'] . $t_set_where_template_str . $t_matches['after_set_where'];
 
 				#Replace "SET fld1=:1" to "SET fld1=DEFAULT" if bind array value is empty
 				$t_removed_set_where_parsing = $t_removed_set_where;
 
-				while( preg_match( '/^(?P<before_var>[\d\D]*[\s\n\r,]+)(?P<var_name>([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)(?P<dividers>[\s\n\r]*=[\s\n\r]*:)(?P<bind_name>[0-9]+)(?P<after_var>[,\s\n\r]*[\d\D]*\z)/i' , $t_removed_set_where_parsing , $t_matches ) > 0 ) {
+				while( preg_match( '/^(?P<before_var>[\d\D]*[\s\n\r,]+)(?P<var_name>([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)(?P<dividers>[\s\n\r]*=[\s\n\r]*:)(?P<bind_name>[0-9]+)(?P<after_var>[,\s\n\r]*[\d\D]*\z)/i', $t_removed_set_where_parsing, $t_matches ) > 0 ) {
 					$t_bind_num = $t_matches['bind_name'];
 					$t_search_substr = $t_matches['before_var'] . $t_matches['var_name'] . $t_matches['dividers'] . $t_matches['bind_name'] ;
 					$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . $t_matches['dividers'] . $t_matches['bind_name'] ;
 
-					if( $arr_parms[$t_bind_num] === '' ) {
-						for( $n = $t_bind_num + 1 ; $n < count( $arr_parms ) ; $n++ ) {
-							$arr_parms[$n - 1] = $arr_parms[ $n ];
+					if( $p_arr_parms[$t_bind_num] === '' ) {
+						for( $n = $t_bind_num + 1 ; $n < count( $p_arr_parms ) ; $n++ ) {
+							$p_arr_parms[$n - 1] = $p_arr_parms[$n];
 						}
-						unset( $arr_parms[count( $arr_parms ) - 1] );
+						unset( $p_arr_parms[count( $p_arr_parms ) - 1] );
 						$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . "=DEFAULT ";
 					}
-					$t_removed_set_where = str_replace( $t_search_substr , $t_replace_substr , $t_removed_set_where );
+					$t_removed_set_where = str_replace( $t_search_substr, $t_replace_substr, $t_removed_set_where );
 					$t_removed_set_where_parsing = $t_matches['before_var'] . $t_matches['after_var'];
 				}
-				$p_query = str_replace( $t_set_where_template_str , $t_removed_set_where , $p_query );
+				$p_query = str_replace( $t_set_where_template_str, $t_removed_set_where, $p_query );
 			}
 		}
 	}

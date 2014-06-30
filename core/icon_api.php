@@ -36,7 +36,7 @@ require_api( 'utility_api.php' );
 
 /**
  * gets the status icon
- * @param string $p_icon
+ * @param string $p_icon Icon file name.
  * @return string html img tag containing status icon
  * @access public
  */
@@ -53,8 +53,8 @@ function icon_get_status_icon( $p_icon ) {
 
 /**
  * prints the status icon
- * @param string $p_icon
- * @return null
+ * @param string $p_icon Icon file name.
+ * @return void
  * @access public
  */
 function print_status_icon( $p_icon ) {
@@ -69,10 +69,10 @@ function print_status_icon( $p_icon ) {
  * page(s)
  * $p_field is a constant and $p_sort_by is whatever the page happens to be sorting by at the moment
  * Multiple sort keys are not supported
- * @param int $p_dir
- * @param string $p_sort_by
- * @param string $p_field
- * @return null
+ * @param integer $p_dir     Direction to sort by ( either ASC or DESC ).
+ * @param string  $p_sort_by Field.
+ * @param string  $p_field   Field to sort by.
+ * @return void
  * @access public
  */
 function print_sort_icon( $p_dir, $p_sort_by, $p_field ) {
@@ -84,7 +84,7 @@ function print_sort_icon( $p_dir, $p_sort_by, $p_field ) {
 		return;
 	}
 
-	if(( 'DESC' == $p_dir ) || ( DESCENDING == $p_dir ) ) {
+	if( ( 'DESC' == $p_dir ) || ( DESCENDING == $p_dir ) ) {
 		$t_dir = DESCENDING;
 	} else {
 		$t_dir = ASCENDING;

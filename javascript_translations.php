@@ -30,23 +30,20 @@ require_api( 'lang_api.php' );
 
 /**
  * Print Language translation for javascript
- * @param string $p_lang_key language string
+ * @param string $p_lang_key Language string being translated.
+ * @return void
  */
 function print_translation( $p_lang_key ) {
 	echo "translations['" . $p_lang_key . "'] = '" . addslashes( lang_get( $p_lang_key ) ) . "';\n";
 }
 
-/**
- * Send correct MIME Content-Type header for JavaScript content.
- * See http://www.rfc-editor.org/rfc/rfc4329.txt for details on why
- * application/javasscript is the correct MIME type.
- */
+# Send correct MIME Content-Type header for JavaScript content.
+# See http://www.rfc-editor.org/rfc/rfc4329.txt for details on why
+# application/javasscript is the correct MIME type.
 header( 'Content-Type: application/javascript; charset=UTF-8' );
 
-/**
- * Disallow Internet Explorer from attempting to second guess the Content-Type
- * header as per http://blogs.msdn.com/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
- */
+# Disallow Internet Explorer from attempting to second guess the Content-Type
+# header as per http://blogs.msdn.com/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
 header( 'X-Content-Type-Options: nosniff' );
 
 echo "var translations = new Array();\n";

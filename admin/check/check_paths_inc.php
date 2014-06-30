@@ -30,9 +30,7 @@ if( !defined( 'CHECK_PATHS_INC_ALLOW' ) ) {
 	return;
 }
 
-/**
- * MantisBT Check API
- */
+# MantisBT Check API
 require_once( 'check_api.php' );
 require_api( 'config_api.php' );
 

@@ -37,12 +37,13 @@ require_api( 'constant_inc.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 
-if( !config_get( 'time_tracking_enabled' ) )
+if( !config_get( 'time_tracking_enabled' ) ) {
 	trigger_error( ERROR_ACCESS_DENIED, ERROR );
+}
 
 access_ensure_global_level( config_get( 'time_tracking_reporting_threshold' ) );
 
-html_page_top( lang_get( 'time_tracking_billing_link' )  );
+html_page_top( lang_get( 'time_tracking_billing_link' ) );
 ?>
 
 <br />

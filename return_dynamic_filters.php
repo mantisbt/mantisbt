@@ -91,8 +91,8 @@ if( ON == config_get( 'filter_by_custom_fields' ) ) {
 
 $f_for_screen = gpc_get_bool( 'for_screen', true );
 
-$t_sort = $t_filter[ FILTER_PROPERTY_SORT_FIELD_NAME ];
-$t_dir = $t_filter[ FILTER_PROPERTY_SORT_DIRECTION ];
+$t_sort = $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME];
+$t_dir = $t_filter[FILTER_PROPERTY_SORT_DIRECTION];
 $t_action  = "view_all_set.php?f=3";
 
 if( $f_for_screen == false ) {
@@ -119,6 +119,7 @@ if( 'advanced' == $f_view_type ) {
 
 /**
  * Prepend headers to the dynamic filter forms that are sent as the response from this page.
+ * @return void
  */
 function return_dynamic_filters_prepend_headers() {
 	if( !headers_sent() ) {

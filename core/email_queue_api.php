@@ -38,50 +38,47 @@ require_api( 'utility_api.php' );
 
 /**
  * EmailData Structure Definition
- * @package MantisBT
- * @subpackage classes
  */
 class EmailData {
 	/**
 	 * Email address
 	 */
-	var $email = '';
+	public $email = '';
 
 	/**
 	 * Subject text
 	 */
+	public $subject = '';
 
-	var $subject = '';
 	/**
 	 * Body text
 	 */
-
-	var $body = '';
+	public $body = '';
 
 	/**
 	 * Meta Data array
 	 */
-	var $metadata = array(
+	public $metadata = array(
 		'headers' => array(),
 	);
 
 	/**
 	 * Email ID
 	 */
-	var $email_id = 0;
+	public $email_id = 0;
 
 	/**
 	 * Submitted
 	 */
-	var $submitted = '';
+	public $submitted = '';
 };
 
 /**
- * Return a copy of the bug structure with all the instvars prepared for db insertion
- * @param EmailData $p_email_data
+ * Return a copy of the bug structure with all the instvars prepared for database insertion
+ * @param EmailData $p_email_data Email Data structure to store.
  * @return EmailData
  */
-function email_queue_prepare_db( $p_email_data ) {
+function email_queue_prepare_db( EmailData $p_email_data ) {
 	$p_email_data->email_id = (int)$p_email_data->email_id;
 
 	return $p_email_data;
@@ -89,10 +86,10 @@ function email_queue_prepare_db( $p_email_data ) {
 
 /**
  * Add to email queue
- * @param EmailData $p_email_data
- * @return int
+ * @param EmailData $p_email_data Email Data structure.
+ * @return integer
  */
-function email_queue_add( $p_email_data ) {
+function email_queue_add( EmailData $p_email_data ) {
 	$t_email_data = email_queue_prepare_db( $p_email_data );
 
 	# email cannot be blank
@@ -120,20 +117,11 @@ function email_queue_add( $p_email_data ) {
 	$c_body = $t_email_data->body;
 	$c_metadata = serialize( $t_email_data->metadata );
 
-	$query = "INSERT INTO $t_email_table
-				    ( email,
-				      subject,
-					  body,
-					  submitted,
-					  metadata)
+	$t_query = "INSERT INTO $t_email_table
+				    ( email, subject, body, submitted, metadata)
 				  VALUES
-				    ( " . db_param() . ",
-				      " . db_param() . ",
-				      " . db_param() . ",
-					  " . db_param() . ",
-					  " . db_param() . "
-					)";
-	db_query_bound( $query, array( $c_email, $c_subject, $c_body, db_now(), $c_metadata ) );
+				    (" . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . ")";
+	db_query_bound( $t_query, array( $c_email, $c_subject, $c_body, db_now(), $c_metadata ) );
 	$t_id = db_insert_id( $t_email_table, 'email_id' );
 
 	log_event( LOG_EMAIL, "message #$t_id queued" );
@@ -143,8 +131,8 @@ function email_queue_add( $p_email_data ) {
 
 /**
  * Convert email db row to EmailData object
- * @param array $p_row
- * @return bool|EmailData
+ * @param array|false $p_row Database result row to convert.
+ * @return boolean|EmailData
  */
 function email_queue_row_to_object( $p_row ) {
 	# typically this function takes as an input the result of db_fetch_array() which can be false.
@@ -164,7 +152,6 @@ function email_queue_row_to_object( $p_row ) {
 	foreach( $t_vars as $t_var => $t_value ) {
 		# If we got a field from the DB with the same name
 		if( in_array( $t_var, $t_row_keys, true ) ) {
-
 			# Store that value in the object
 			$t_email_data->$t_var = $t_row[$t_var];
 		}
@@ -175,14 +162,14 @@ function email_queue_row_to_object( $p_row ) {
 
 /**
  * Get Corresponding EmailData object
- * @param int $p_email_id
- * @return bool|EmailData
+ * @param integer $p_email_id An email identifier.
+ * @return boolean|EmailData
  */
 function email_queue_get( $p_email_id ) {
 	$t_email_table = db_get_table( 'email' );
 
-	$query = 'SELECT * FROM ' . $t_email_table . ' WHERE email_id=' . db_param();
-	$t_result = db_query_bound( $query, array( $p_email_id ) );
+	$t_query = 'SELECT * FROM ' . $t_email_table . ' WHERE email_id=' . db_param();
+	$t_result = db_query_bound( $t_query, array( $p_email_id ) );
 
 	$t_row = db_fetch_array( $t_result );
 
@@ -191,31 +178,31 @@ function email_queue_get( $p_email_id ) {
 
 /**
  * Delete entry from email queue
- * @param int $p_email_id
- * @return null
+ * @param integer $p_email_id Email queue identifier.
+ * @return void
  */
 function email_queue_delete( $p_email_id ) {
 	$t_email_table = db_get_table( 'email' );
 
-	$query = 'DELETE FROM ' . $t_email_table . ' WHERE email_id=' . db_param();
-	db_query_bound( $query, array( $p_email_id ) );
+	$t_query = 'DELETE FROM ' . $t_email_table . ' WHERE email_id=' . db_param();
+	db_query_bound( $t_query, array( $p_email_id ) );
 
 	log_event( LOG_EMAIL, "message #$p_email_id deleted from queue" );
 }
 
 /**
  * Get array of email queue id's
- * @param string $p_sort_order 'ASC' or 'DESC' (defaults to DESC)
+ * @param string $p_sort_order Either 'ASC' or 'DESC' (defaults to DESC).
  * @return array
  */
 function email_queue_get_ids( $p_sort_order = 'DESC' ) {
 	$t_email_table = db_get_table( 'email' );
 
-	$query = "SELECT email_id FROM $t_email_table ORDER BY email_id $p_sort_order";
-	$t_result = db_query_bound( $query );
+	$t_query = "SELECT email_id FROM $t_email_table ORDER BY email_id $p_sort_order";
+	$t_result = db_query_bound( $t_query );
 
 	$t_ids = array();
-	while(( $t_row = db_fetch_array( $t_result ) ) !== false ) {
+	while( ( $t_row = db_fetch_array( $t_result ) ) !== false ) {
 		$t_ids[] = $t_row['email_id'];
 	}
 

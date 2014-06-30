@@ -56,43 +56,43 @@ $g_cache_html_valid_tags_single_line = '';
 /**
  * Preserve spaces at beginning of lines.
  * Lines must be separated by \n rather than <br />
- * @param string $p_string
+ * @param string $p_string String to be processed.
  * @return string
  */
 function string_preserve_spaces_at_bol( $p_string ) {
-	$lines = explode( "\n", $p_string );
-	$line_count = count( $lines );
-	for( $i = 0;$i < $line_count;$i++ ) {
-		$count = 0;
-		$prefix = '';
+	$t_lines = explode( "\n", $p_string );
+	$t_line_count = count( $t_lines );
+	for( $i = 0;$i < $t_line_count;$i++ ) {
+		$t_count = 0;
+		$t_prefix = '';
 
-		$t_char = utf8_substr( $lines[$i], $count, 1 );
-		$spaces = 0;
-		while(( $t_char == ' ' ) || ( $t_char == "\t" ) ) {
+		$t_char = utf8_substr( $t_lines[$i], $t_count, 1 );
+		$t_spaces = 0;
+		while( ( $t_char == ' ' ) || ( $t_char == "\t" ) ) {
 			if( $t_char == ' ' ) {
-				$spaces++;
+				$t_spaces++;
 			} else {
-				$spaces += 4;
+				$t_spaces += 4;
 			}
 
 			# 1 tab = 4 spaces, can be configurable.
 
-			$count++;
-			$t_char = utf8_substr( $lines[$i], $count, 1 );
+			$t_count++;
+			$t_char = utf8_substr( $t_lines[$i], $t_count, 1 );
 		}
 
-		for( $j = 0;$j < $spaces;$j++ ) {
-			$prefix .= '&#160;';
+		for( $j = 0;$j < $t_spaces;$j++ ) {
+			$t_prefix .= '&#160;';
 		}
 
-		$lines[$i] = $prefix . utf8_substr( $lines[$i], $count );
+		$t_lines[$i] = $t_prefix . utf8_substr( $t_lines[$i], $t_count );
 	}
-	return implode( "\n", $lines );
+	return implode( "\n", $t_lines );
 }
 
 /**
  * Prepare a string to be printed without being broken into multiple lines
- * @param string $p_string
+ * @param string $p_string String to be processed.
  * @return string
  */
 function string_no_break( $p_string ) {
@@ -107,31 +107,31 @@ function string_no_break( $p_string ) {
  * Similar to nl2br, but fixes up a problem where new lines are doubled between
  * html pre tags.
  * additionally, wrap the text an $p_wrap character intervals if the config is set
- * @param string $p_string
- * @param int $p_wrap
+ * @param string  $p_string String to be processed.
+ * @param integer $p_wrap   Number of characters to wrap text at.
  * @return string
  */
 function string_nl2br( $p_string, $p_wrap = 100 ) {
-	$output = '';
-	$pieces = preg_split( '/(<pre[^>]*>.*?<\/pre>)/is', $p_string, -1, PREG_SPLIT_DELIM_CAPTURE );
-	if( isset( $pieces[1] ) ) {
-		foreach( $pieces as $piece ) {
-			if( preg_match( '/(<pre[^>]*>.*?<\/pre>)/is', $piece ) ) {
-				$piece = preg_replace( "/<br[^>]*?>/", '', $piece );
+	$t_output = '';
+	$t_pieces = preg_split( '/(<pre[^>]*>.*?<\/pre>)/is', $p_string, -1, PREG_SPLIT_DELIM_CAPTURE );
+	if( isset( $t_pieces[1] ) ) {
+		foreach( $t_pieces as $t_piece ) {
+			if( preg_match( '/(<pre[^>]*>.*?<\/pre>)/is', $t_piece ) ) {
+				$t_piece = preg_replace( "/<br[^>]*?>/", '', $t_piece );
 
 				# @@@ thraxisp - this may want to be replaced by html_entity_decode (or equivalent)
 				#     if other encoded characters are a problem
-				$piece = preg_replace( '/&#160;/', ' ', $piece );
+				$t_piece = preg_replace( '/&#160;/', ' ', $t_piece );
 				if( ON == config_get( 'wrap_in_preformatted_text' ) ) {
-					$output .= preg_replace( '/([^\n]{' . $p_wrap . ',}?[\s]+)(?!<\/pre>)/', "$1\n", $piece );
+					$t_output .= preg_replace( '/([^\n]{' . $p_wrap . ',}?[\s]+)(?!<\/pre>)/', "$1\n", $t_piece );
 				} else {
-					$output .= $piece;
+					$t_output .= $t_piece;
 				}
 			} else {
-				$output .= nl2br( $piece );
+				$t_output .= nl2br( $t_piece );
 			}
 		}
-		return $output;
+		return $t_output;
 	} else {
 		return nl2br( $p_string );
 	}
@@ -139,7 +139,7 @@ function string_nl2br( $p_string, $p_wrap = 100 ) {
 
 /**
  * Prepare a multiple line string for display to HTML
- * @param string $p_string
+ * @param string $p_string String to be processed.
  * @return string
  */
 function string_display( $p_string ) {
@@ -149,7 +149,7 @@ function string_display( $p_string ) {
 
 /**
  * Prepare a single line string for display to HTML
- * @param string $p_string
+ * @param string $p_string String to be processed.
  * @return string
  */
 function string_display_line( $p_string ) {
@@ -160,7 +160,7 @@ function string_display_line( $p_string ) {
 /**
  * Prepare a string for display to HTML and add href anchors for URLs, emails
  * and bug references
- * @param string $p_string
+ * @param string $p_string String to be processed.
  * @return string
  */
 function string_display_links( $p_string ) {
@@ -171,7 +171,7 @@ function string_display_links( $p_string ) {
 /**
  * Prepare a single line string for display to HTML and add href anchors for
  * URLs, emails and bug references
- * @param string $p_string
+ * @param string $p_string String to be processed.
  * @return string
  */
 function string_display_line_links( $p_string ) {
@@ -181,7 +181,7 @@ function string_display_line_links( $p_string ) {
 
 /**
  * Prepare a string for display in rss
- * @param string $p_string
+ * @param string $p_string String to be processed.
  * @return string
  */
 function string_rss_links( $p_string ) {
@@ -196,7 +196,7 @@ function string_rss_links( $p_string ) {
 
 /**
  * Prepare a string for plain text display in email
- * @param string $p_string
+ * @param string $p_string String to be processed.
  * @return string
  */
 function string_email( $p_string ) {
@@ -206,7 +206,7 @@ function string_email( $p_string ) {
 /**
  * Prepare a string for plain text display in email and add URLs for bug
  * links
- * @param string $p_string
+ * @param string $p_string String to be processed.
  * @return string
  */
 function string_email_links( $p_string ) {
@@ -215,7 +215,7 @@ function string_email_links( $p_string ) {
 
 /**
  * Process a string for display in a textarea box
- * @param string $p_string
+ * @param string $p_string String to be processed.
  * @return string
  */
 function string_textarea( $p_string ) {
@@ -224,7 +224,7 @@ function string_textarea( $p_string ) {
 
 /**
  * Process a string for display in a text box
- * @param string $p_string
+ * @param string $p_string String to be processed.
  * @return string
  */
 function string_attribute( $p_string ) {
@@ -233,7 +233,7 @@ function string_attribute( $p_string ) {
 
 /**
  * Process a string for inclusion in a URL as a GET parameter
- * @param string $p_string
+ * @param string $p_string String to be processed.
  * @return string
  */
 function string_url( $p_string ) {
@@ -242,8 +242,8 @@ function string_url( $p_string ) {
 
 /**
  * validate the url as part of this site before continuing
- * @param string $p_url
- * @param bool $p_return_absolute
+ * @param string  $p_url             URL to be processed.
+ * @param boolean $p_return_absolute Whether to return the absolute URL to this Mantis instance.
  * @return string
  */
 function string_sanitize_url( $p_url, $p_return_absolute = false ) {
@@ -311,7 +311,7 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	}
 }
 
-$string_process_bug_link_callback = array();
+$g_string_process_bug_link_callback = array();
 
 /**
  * Process $p_string, looking for bug ID references and creating bug view
@@ -326,14 +326,14 @@ $string_process_bug_link_callback = array();
  * preceeded by a character that is not a letter, a number or an underscore
  *
  * if $p_include_anchor = false, $p_fqdn is ignored and assumed to true.
- * @param string $p_string
- * @param bool $p_include_anchor
- * @param bool $p_detail_info
- * @param bool $p_fqdn
+ * @param string  $p_string         String to be processed.
+ * @param boolean $p_include_anchor Whether to include the href tag or just the URL.
+ * @param boolean $p_detail_info    Whether to include more detailed information (e.g. title attribute / project) in the returned string.
+ * @param boolean $p_fqdn           Whether to return an absolute or relative link.
  * @return string
  */
 function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail_info = true, $p_fqdn = false ) {
-	global $string_process_bug_link_callback;
+	global $g_string_process_bug_link_callback;
 
 	$t_tag = config_get( 'bug_link_tag' );
 
@@ -342,9 +342,9 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 		return $p_string;
 	}
 
-	if( !isset( $string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] ) ) {
+	if( !isset( $g_string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] ) ) {
 		if( $p_include_anchor ) {
-			$string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function( '$p_array', '
+			$g_string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function( '$p_array', '
 										if( bug_exists( (int)$p_array[2] ) && access_has_bug_level( VIEWER, (int)$p_array[2] ) ) {
 											return $p_array[1] . string_get_bug_view_link( (int)$p_array[2], null, ' . ( $p_detail_info ? 'true' : 'false' ) . ', ' . ( $p_fqdn ? 'true' : 'false' ) . ');
 										} else {
@@ -352,7 +352,7 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 										}
 										' );
 		} else {
-			$string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function( '$p_array', '
+			$g_string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function( '$p_array', '
 										# We might as well create the link here even if the bug
 										#  doesnt exist.  In the case above we dont want to do
 										#  the summary lookup on a non-existant bug.  But here, we
@@ -363,11 +363,11 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 		}
 	}
 
-	$p_string = preg_replace_callback( '/(^|[^\w&])' . preg_quote( $t_tag, '/' ) . '(\d+)\b/', $string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn], $p_string );
+	$p_string = preg_replace_callback( '/(^|[^\w&])' . preg_quote( $t_tag, '/' ) . '(\d+)\b/', $g_string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn], $p_string );
 	return $p_string;
 }
 
-$string_process_bugnote_link_callback = array();
+$g_string_process_bugnote_link_callback = array();
 
 /**
  * Process $p_string, looking for bugnote ID references and creating bug view
@@ -382,14 +382,14 @@ $string_process_bugnote_link_callback = array();
  * preceeded by a character that is not a letter, a number or an underscore
  *
  * if $p_include_anchor = false, $p_fqdn is ignored and assumed to true.
- * @param string $p_string
- * @param bool $p_include_anchor
- * @param bool $p_detail_info
- * @param bool $p_fqdn
+ * @param string  $p_string         String to be processed.
+ * @param boolean $p_include_anchor Whether to include the href tag or just the URL.
+ * @param boolean $p_detail_info    Whether to include more detailed information (e.g. title attribute / project) in the returned string.
+ * @param boolean $p_fqdn           Whether to return an absolute or relative link.
  * @return string
  */
 function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_detail_info = true, $p_fqdn = false ) {
-	global $string_process_bugnote_link_callback;
+	global $g_string_process_bugnote_link_callback;
 	$t_tag = config_get( 'bugnote_link_tag' );
 
 	# bail if the link tag is blank
@@ -397,9 +397,9 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 		return $p_string;
 	}
 
-	if( !isset( $string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] ) ) {
+	if( !isset( $g_string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] ) ) {
 		if( $p_include_anchor ) {
-			$string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
+			$g_string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
 				create_function( '$p_array',
 					'
 					if( bugnote_exists( (int)$p_array[2] ) ) {
@@ -427,10 +427,9 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 						}
 					}
 					return $p_array[0];
-					'
-				);
+					' );
 		} else {
-			$string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
+			$g_string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
 				create_function(
 					'$p_array',
 					'
@@ -445,17 +444,16 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 					} else {
 						return $p_array[0];
 					}
-					'
-				);
+					' );
 		}
 	}
-	$p_string = preg_replace_callback( '/(^|[^\w])' . preg_quote( $t_tag, '/' ) . '(\d+)\b/', $string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn], $p_string );
+	$p_string = preg_replace_callback( '/(^|[^\w])' . preg_quote( $t_tag, '/' ) . '(\d+)\b/', $g_string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn], $p_string );
 	return $p_string;
 }
 
 /**
  * Detect URLs and email addresses in the string and replace them with href anchors
- * @param string $p_string
+ * @param string $p_string String to be processed.
  * @return string
  */
 function string_insert_hrefs( $p_string ) {
@@ -500,7 +498,7 @@ function string_insert_hrefs( $p_string ) {
 	# Find any URL in a string and replace it by a clickable link
 	$p_string = preg_replace_callback(
 		$s_url_regex,
-		function ($p_match) {
+		function ( $p_match ) {
 			$t_url_href = 'href="' . rtrim( $p_match[1], '.' ) . '"';
 			return "<a ${t_url_href}>${p_match[1]}</a> [<a ${t_url_href} target=\"_blank\">^</a>]";
 		},
@@ -516,12 +514,12 @@ function string_insert_hrefs( $p_string ) {
 	# http://user:password@example.com/ to be not treated as an email.
 	$t_pieces = preg_split( $s_anchor_regex, $p_string, null, PREG_SPLIT_DELIM_CAPTURE );
 	$p_string = '';
-	foreach( $t_pieces as $piece ) {
-		if( preg_match( $s_anchor_regex, $piece ) ) {
-			$p_string .= $piece;
-			} else {
-			$p_string .= preg_replace( $s_email_regex, '<a href="mailto:\0">\0</a>', $piece );
-			}
+	foreach( $t_pieces as $t_piece ) {
+		if( preg_match( $s_anchor_regex, $t_piece ) ) {
+			$p_string .= $t_piece;
+		} else {
+			$p_string .= preg_replace( $s_email_regex, '<a href="mailto:\0">\0</a>', $t_piece );
+		}
 	}
 
 	return $p_string;
@@ -529,7 +527,7 @@ function string_insert_hrefs( $p_string ) {
 
 /**
  * Detect href anchors in the string and replace them with URLs and email addresses
- * @param string $p_string
+ * @param string $p_string String to be processed.
  * @return string
  */
 function string_strip_hrefs( $p_string ) {
@@ -544,41 +542,41 @@ function string_strip_hrefs( $p_string ) {
 
 /**
  * This function looks for text with htmlentities
- * like &lt;b&gt; and converts is into corresponding
- * html < b > tag based on the configuration presets
- * @param string $p_string
- * @param bool $p_multiline
+ * like &lt;b&gt; and converts it into the corresponding
+ * html < b > tag based on the configuration information
+ * @param string  $p_string    String to be processed.
+ * @param boolean $p_multiline Whether the string being processed is a multi-line string.
  * @return string
  */
 function string_restore_valid_html_tags( $p_string, $p_multiline = true ) {
 	global $g_cache_html_valid_tags_single_line, $g_cache_html_valid_tags;
 
-	if( is_blank(( $p_multiline ? $g_cache_html_valid_tags : $g_cache_html_valid_tags_single_line ) ) ) {
+	if( is_blank( ( $p_multiline ? $g_cache_html_valid_tags : $g_cache_html_valid_tags_single_line ) ) ) {
 		$t_html_valid_tags = config_get( $p_multiline ? 'html_valid_tags' : 'html_valid_tags_single_line' );
 
 		if( OFF === $t_html_valid_tags || is_blank( $t_html_valid_tags ) ) {
 			return $p_string;
 		}
 
-		$tags = explode( ',', $t_html_valid_tags );
-		foreach( $tags as $key => $value ) {
-			if( !is_blank( $value ) ) {
-				$tags[$key] = trim( $value );
+		$t_tags = explode( ',', $t_html_valid_tags );
+		foreach( $t_tags as $t_key => $t_value ) {
+			if( !is_blank( $t_value ) ) {
+				$t_tags[$t_key] = trim( $t_value );
 			}
 		}
-		$tags = implode( '|', $tags );
+		$t_tags = implode( '|', $t_tags );
 		if( $p_multiline ) {
-			$g_cache_html_valid_tags = $tags;
+			$g_cache_html_valid_tags = $t_tags;
 		} else {
-			$g_cache_html_valid_tags_single_line = $tags;
+			$g_cache_html_valid_tags_single_line = $t_tags;
 		}
 	} else {
-		$tags = ( $p_multiline ? $g_cache_html_valid_tags : $g_cache_html_valid_tags_single_line );
+		$t_tags = ( $p_multiline ? $g_cache_html_valid_tags : $g_cache_html_valid_tags_single_line );
 	}
 
-	$p_string = preg_replace( '/&lt;(' . $tags . ')\s*&gt;/ui', '<\\1>', $p_string );
-	$p_string = preg_replace( '/&lt;\/(' . $tags . ')\s*&gt;/ui', '</\\1>', $p_string );
-	$p_string = preg_replace( '/&lt;(' . $tags . ')\s*\/&gt;/ui', '<\\1 />', $p_string );
+	$p_string = preg_replace( '/&lt;(' . $t_tags . ')\s*&gt;/ui', '<\\1>', $p_string );
+	$p_string = preg_replace( '/&lt;\/(' . $t_tags . ')\s*&gt;/ui', '</\\1>', $p_string );
+	$p_string = preg_replace( '/&lt;(' . $t_tags . ')\s*\/&gt;/ui', '<\\1 />', $p_string );
 
 	return $p_string;
 }
@@ -587,9 +585,9 @@ function string_restore_valid_html_tags( $p_string, $p_multiline = true ) {
  * return the name of a bug page for the user
  * account for the user preference and site override
  * $p_action should be something like 'view', 'update', or 'report'
- * If $p_user_id is null or not specified, use the current user * @param string $p_action
- * @param string $p_action
- * @param int $p_user_id
+ * If $p_user_id is null or not specified, use the current user
+ * @param string  $p_action  A valid action being performed - currently one of view, update or report.
+ * @param integer $p_user_id A valid user identifier.
  * @return string
  */
 function string_get_bug_page( $p_action, $p_user_id = null ) {
@@ -608,10 +606,10 @@ function string_get_bug_page( $p_action, $p_user_id = null ) {
 /**
  * return an href anchor that links to a bug VIEW page for the given bug
  * account for the user preference and site override
- * @param int $p_bug_id
- * @param int $p_user_id
- * @param bool $p_detail_info
- * @param bool $p_fqdn
+ * @param integer $p_bug_id	     A bug identifier.
+ * @param integer $p_user_id     A valid user identifier.
+ * @param boolean $p_detail_info Whether to include more detailed information (e.g. title attribute / project) in the returned string.
+ * @param boolean $p_fqdn        Whether to return an absolute or relative link.
  * @return string
  */
 function string_get_bug_view_link( $p_bug_id, $p_user_id = null, $p_detail_info = true, $p_fqdn = false ) {
@@ -645,11 +643,11 @@ function string_get_bug_view_link( $p_bug_id, $p_user_id = null, $p_detail_info 
 /**
  * return an href anchor that links to a bug VIEW page for the given bug
  * account for the user preference and site override
- * @param int $p_bug_id
- * @param int $p_bugnote_id
- * @param int $p_user_id
- * @param bool $p_detail_info
- * @param bool $p_fqdn
+ * @param integer $p_bug_id      A bug identifier.
+ * @param integer $p_bugnote_id  A bugnote identifier.
+ * @param integer $p_user_id     A valid user identifier.
+ * @param boolean $p_detail_info Whether to include more detailed information (e.g. title attribute / project) in the returned string.
+ * @param boolean $p_fqdn        Whether to return an absolute or relative link.
  * @return string
  */
 function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_user_id = null, $p_detail_info = true, $p_fqdn = false ) {
@@ -680,7 +678,7 @@ function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_user_id = nu
 
 /**
  * return the name and GET parameters of a bug VIEW page for the given bug
- * @param int $p_bug_id
+ * @param integer $p_bug_id A bug identifier.
  * @return string
  */
 function string_get_bug_view_url( $p_bug_id ) {
@@ -689,8 +687,8 @@ function string_get_bug_view_url( $p_bug_id ) {
 
 /**
  * return the name and GET parameters of a bug VIEW page for the given bug
- * @param int $p_bug_id
- * @param int $p_bugnote_id
+ * @param integer $p_bug_id     A bug identifier.
+ * @param integer $p_bugnote_id A bugnote identifier.
  * @return string
  */
 function string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id ) {
@@ -702,9 +700,9 @@ function string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id ) {
  * account for the user preference and site override
  * The returned url includes the fully qualified domain, hence it is suitable to be included
  * in emails.
- * @param int $p_bug_id
- * @param int $p_bugnote_id
- * @param int $p_user_id
+ * @param integer $p_bug_id     A bug identifier.
+ * @param integer $p_bugnote_id A bug note identifier.
+ * @param integer $p_user_id    A valid user identifier.
  * @return string
  */
 function string_get_bugnote_view_url_with_fqdn( $p_bug_id, $p_bugnote_id, $p_user_id = null ) {
@@ -715,8 +713,8 @@ function string_get_bugnote_view_url_with_fqdn( $p_bug_id, $p_bugnote_id, $p_use
  * return the name and GET parameters of a bug VIEW page for the given bug
  * account for the user preference and site override
  * The returned url includes the fully qualified domain, hence it is suitable to be included in emails.
- * @param int $p_bug_id
- * @param int $p_user_id
+ * @param integer $p_bug_id  A bug identifier.
+ * @param integer $p_user_id A valid user identifier.
  * @return string
  */
 function string_get_bug_view_url_with_fqdn( $p_bug_id, $p_user_id = null ) {
@@ -726,7 +724,7 @@ function string_get_bug_view_url_with_fqdn( $p_bug_id, $p_user_id = null ) {
 /**
  * return the name of a bug VIEW page for the user
  * account for the user preference and site override
- * @param int $p_user_id
+ * @param integer $p_user_id A valid user identifier.
  * @return string
  */
 function string_get_bug_view_page( $p_user_id = null ) {
@@ -736,8 +734,8 @@ function string_get_bug_view_page( $p_user_id = null ) {
 /**
  * return an href anchor that links to a bug UPDATE page for the given bug
  * account for the user preference and site override
- * @param int $p_bug_id
- * @param int $p_user_id
+ * @param integer $p_bug_id  A bug identifier.
+ * @param integer $p_user_id A valid user identifier.
  * @return string
  */
 function string_get_bug_update_link( $p_bug_id, $p_user_id = null ) {
@@ -748,8 +746,8 @@ function string_get_bug_update_link( $p_bug_id, $p_user_id = null ) {
 /**
  * return the name and GET parameters of a bug UPDATE page for the given bug
  * account for the user preference and site override
- * @param int $p_bug_id
- * @param int $p_user_id
+ * @param integer $p_bug_id  A bug identifier.
+ * @param integer $p_user_id A valid user identifier.
  * @return string
  */
 function string_get_bug_update_url( $p_bug_id, $p_user_id = null ) {
@@ -759,7 +757,7 @@ function string_get_bug_update_url( $p_bug_id, $p_user_id = null ) {
 /**
  * return the name of a bug UPDATE page for the user
  * account for the user preference and site override
- * @param int $p_user_id
+ * @param integer $p_user_id A valid user identifier.
  * @return string
  */
 function string_get_bug_update_page( $p_user_id = null ) {
@@ -769,7 +767,7 @@ function string_get_bug_update_page( $p_user_id = null ) {
 /**
  * return an href anchor that links to a bug REPORT page for the given bug
  * account for the user preference and site override
- * @param int $p_user_id
+ * @param integer $p_user_id A valid user identifier.
  * @return string
  */
 function string_get_bug_report_link( $p_user_id = null ) {
@@ -779,7 +777,7 @@ function string_get_bug_report_link( $p_user_id = null ) {
 /**
  * return the name and GET parameters of a bug REPORT page for the given bug
  * account for the user preference and site override
- * @param int $p_user_id
+ * @param integer $p_user_id A valid user identifier.
  * @return string
  */
 function string_get_bug_report_url( $p_user_id = null ) {
@@ -789,7 +787,7 @@ function string_get_bug_report_url( $p_user_id = null ) {
 /**
  * return the name of a bug REPORT page for the user
  * account for the user preference and site override
- * @param int $p_user_id
+ * @param integer $p_user_id A valid user identifier.
  * @return string
  */
 function string_get_bug_report_page( $p_user_id = null ) {
@@ -797,9 +795,9 @@ function string_get_bug_report_page( $p_user_id = null ) {
 }
 
 /**
- * return the complete url link to checkin using the confirm_hash
- * @param int $p_user_id
- * @param string $p_confirm_hash
+ * return the complete URL link to the verify page including the confirmation hash
+ * @param integer $p_user_id      A valid user identifier.
+ * @param string  $p_confirm_hash The confirmation hash value to include in the link.
  * @return string
  */
 function string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
@@ -809,7 +807,7 @@ function string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
 
 /**
  * Format date for display
- * @param int $p_date
+ * @param integer $p_date A date value to process.
  * @return string
  */
 function string_format_complete_date( $p_date ) {
@@ -819,15 +817,16 @@ function string_format_complete_date( $p_date ) {
 /**
  * Shorten a string for display on a dropdown to prevent the page rendering too wide
  * ref issues #4630, #5072, #5131
- * @param string $p_string
- * @param int $p_max
+ * @param string  $p_string The string to process.
+ * @param integer $p_max    The maximum length of the string to use.
+ *                          If not set, defaults to max_dropdown_length configuration variable.
  * @return string
  */
 function string_shorten( $p_string, $p_max = null ) {
 	if( $p_max === null ) {
 		$t_max = config_get( 'max_dropdown_length' );
 	} else {
-		$t_max = (int) $p_max;
+		$t_max = (int)$p_max;
 	}
 
 	if( ( $t_max > 0 ) && ( utf8_strlen( $p_string ) > $t_max ) ) {
@@ -843,7 +842,7 @@ function string_shorten( $p_string, $p_max = null ) {
 			$t_string .= '...';
 		} else {
 			foreach( $t_bits as $t_bit ) {
-				if(( utf8_strlen( $t_string ) + utf8_strlen( $t_bit ) + $t_last_len + 3 <= $t_max ) || ( strpos( $t_bit, '.,-/?' ) > 0 ) ) {
+				if( ( utf8_strlen( $t_string ) + utf8_strlen( $t_bit ) + $t_last_len + 3 <= $t_max ) || ( strpos( $t_bit, '.,-/?' ) > 0 ) ) {
 					$t_string .= $t_bit;
 				} else {
 					break;
@@ -860,7 +859,7 @@ function string_shorten( $p_string, $p_max = null ) {
 /**
  * Normalize a string by removing leading, trailing and excessive internal spaces
  * note a space is used as the pattern instead of '\s' to make it work with UTF-8 strings
- * @param string $p_string
+ * @param string $p_string The string to process.
  * @return string
  */
 function string_normalize( $p_string ) {
@@ -869,7 +868,7 @@ function string_normalize( $p_string ) {
 
 /**
  * remap a field name to a string name (for sort filter)
- * @param string $p_string
+ * @param string $p_string The string to process.
  * @return string
  */
 function string_get_field_name( $p_string ) {
@@ -893,8 +892,8 @@ function string_get_field_name( $p_string ) {
 
 /**
  * Calls htmlentities on the specified string, passing along
- * the current charset.
- * @param string $p_string
+ * the current character set.
+ * @param string $p_string The string to process.
  * @return string
  */
 function string_html_entities( $p_string ) {
@@ -903,7 +902,7 @@ function string_html_entities( $p_string ) {
 
 /**
  * Calls htmlspecialchars on the specified string, handling utf8
- * @param string $p_string
+ * @param string $p_string The string to process.
  * @return string
  */
 function string_html_specialchars( $p_string ) {
@@ -919,7 +918,7 @@ function string_html_specialchars( $p_string ) {
 
 /**
  * Prepares a string to be used as part of header().
- * @param string $p_string
+ * @param string $p_string The string to process.
  * @return string
  */
 function string_prepare_header( $p_string ) {

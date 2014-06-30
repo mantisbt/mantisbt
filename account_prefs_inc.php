@@ -56,12 +56,13 @@ require_api( 'utility_api.php' );
 /**
  * Display html form to edit account preferences
  *
- * @param int $p_user_id user id
- * @param bool $p_error_if_protected error if account is protected
- * @param bool $p_accounts_menu display account preferences menu
- * @param string $p_redirect_url redirect URI
+ * @param integer $p_user_id            A valid user identifier.
+ * @param boolean $p_error_if_protected Whether to error if the account is protected.
+ * @param boolean $p_accounts_menu      Display account preferences menu.
+ * @param string  $p_redirect_url       Redirect URI.
+ * @return void
  */
-function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_accounts_menu = true, $p_redirect_url = '') {
+function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p_accounts_menu = true, $p_redirect_url = '' ) {
 	if( null === $p_user_id ) {
 		$p_user_id = auth_get_current_user_id();
 	}
@@ -241,7 +242,7 @@ function edit_account_prefs($p_user_id = null, $p_error_if_protected = true, $p_
 			</fieldset>
 			<fieldset class="field-container">
 				<legend><label for="email-on-priority-change"><?php echo lang_get( 'email_on_priority_change' ) ?></label></legend>
-				<span class="checkbox"><input id="email-on-priority-change" type="checkbox" name="email_on_priority" <?php check_checked( (int)$t_pref->email_on_priority , ON); ?> /></span>
+				<span class="checkbox"><input id="email-on-priority-change" type="checkbox" name="email_on_priority" <?php check_checked( (int)$t_pref->email_on_priority, ON ); ?> /></span>
 				<label for="email-on-priority-min-severity" class="email-on-severity-label"><span><?php echo lang_get( 'with_minimum_severity' ) ?></span></label>
 				<span class="select email-on-severity">
 					<select id="email-on-priority-min-severity" name="email_on_priority_min_severity">

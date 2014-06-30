@@ -80,7 +80,7 @@ $t_bugnotes = bugnote_get_all_visible_bugnotes( $f_bug_id, $t_bugnote_order, 0, 
 
 #precache users
 $t_bugnote_users = array();
-foreach($t_bugnotes as $t_bugnote) {
+foreach( $t_bugnotes as $t_bugnote ) {
 	$t_bugnote_users[] = $t_bugnote->reporter_id;
 }
 user_cache_array_rows( $t_bugnote_users );
@@ -128,10 +128,11 @@ $num_notes = count( $t_bugnotes );
 	for ( $i=0; $i < $num_notes; $i++ ) {
 		$t_bugnote = $t_bugnotes[$i];
 
-		if( $t_bugnote->date_submitted != $t_bugnote->last_modified )
+		if( $t_bugnote->date_submitted != $t_bugnote->last_modified ) {
 			$t_bugnote_modified = true;
-		else
+		} else {
 			$t_bugnote_modified = false;
+		}
 
 		$t_bugnote_id_formatted = bugnote_format_id( $t_bugnote->id );
 
@@ -158,7 +159,7 @@ $num_notes = count( $t_bugnotes );
 <tr class="bugnote <?php echo $t_bugnote_css ?>" id="c<?php echo $t_bugnote->id ?>">
 		<td class="bugnote-meta">
 		<?php print_avatar( $t_bugnote->reporter_id ); ?>
-		<p class="compact"><span class="small bugnote-permalink"><a rel="bookmark" href="<?php echo string_get_bugnote_view_url($t_bugnote->bug_id, $t_bugnote->id) ?>" title="<?php echo lang_get( 'bugnote_link_title' ) ?>"><?php echo htmlentities( config_get_global( 'bugnote_link_tag' ) ) . $t_bugnote_id_formatted ?></a></span></p>
+		<p class="compact"><span class="small bugnote-permalink"><a rel="bookmark" href="<?php echo string_get_bugnote_view_url( $t_bugnote->bug_id, $t_bugnote->id ) ?>" title="<?php echo lang_get( 'bugnote_link_title' ) ?>"><?php echo htmlentities( config_get_global( 'bugnote_link_tag' ) ) . $t_bugnote_id_formatted ?></a></span></p>
 
 		<p class="compact">
 		<span class="bugnote-reporter">
@@ -183,9 +184,9 @@ $num_notes = count( $t_bugnotes );
 		<p class="compact"><span class="small bugnote-date-submitted"><?php echo date( $t_normal_date_format, $t_bugnote->date_submitted ); ?></span></p>
 		<?php
 		if( $t_bugnote_modified ) {
-			echo '<p class="compact"><span class="small bugnote-last-modified">' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . date( $t_normal_date_format, $t_bugnote->last_modified ) . '</span></p>';
+			echo '<p class="compact"><span class="small bugnote-last-modified">' . lang_get( 'last_edited' ) . lang_get( 'word_separator' ) . date( $t_normal_date_format, $t_bugnote->last_modified ) . '</span></p>';
 			$t_revision_count = bug_revision_count( $f_bug_id, REV_BUGNOTE, $t_bugnote->id );
-			if( $t_revision_count >= 1) {
+			if( $t_revision_count >= 1 ) {
 				$t_view_num_revisions_text = sprintf( lang_get( 'view_num_revisions' ), $t_revision_count );
 				echo '<p class="compact"><span class="small bugnote-revisions-link"><a href="bug_revision_view_page.php?bugnote_id=' . $t_bugnote->id . '">' . $t_view_num_revisions_text . '</a></span></p>';
 			}
@@ -270,7 +271,7 @@ $num_notes = count( $t_bugnotes );
 
 				case TIME_TRACKING:
 					if( access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id ) ) {
-						echo '<div class="time-tracked">', lang_get( 'time_tracking_time_spent') . ' ' . $t_time_tracking_hhmm, '</div>';
+						echo '<div class="time-tracked">', lang_get( 'time_tracking_time_spent' ) . ' ' . $t_time_tracking_hhmm, '</div>';
 					}
 					break;
 			}
@@ -292,7 +293,7 @@ $num_notes = count( $t_bugnotes );
 <?php
 
 if( $t_total_time > 0 && access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id ) ) {
-	echo '<p class="time-tracking-total">', sprintf ( lang_get( 'total_time_for_issue' ), '<span class="time-tracked">' . db_minutes_to_hhmm( $t_total_time ) . '</span>' ), '</p>';
+	echo '<p class="time-tracking-total">', sprintf( lang_get( 'total_time_for_issue' ), '<span class="time-tracked">' . db_minutes_to_hhmm( $t_total_time ) . '</span>' ), '</p>';
 }
 	collapse_closed( 'bugnotes' );
 ?>

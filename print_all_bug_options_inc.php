@@ -8,16 +8,16 @@
 #
 # MantisBT is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
+# along with MantisBT.	If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Print all bug options include file
  * @package MantisBT
- * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
+ * @copyright Copyright 2000 - 2002	 Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
@@ -46,54 +46,51 @@ require_api( 'utility_api.php' );
 
 /**
  * this function only gets the field names, by appending strings
+ * @return array
  */
-function get_field_names()
-{
-	#currently 27 fields
-	return $t_arr = array (
-	                       	'id',
-	                       	'category',
-	                       	'severity',
-	                       	'reproducibility',
-	                       	'date_submitted',
-	                       	'last_update',
-	                       	'reporter',
-	                       	'assigned_to',
-	                      	'priority',
-	                       	'status',
-	                       	'build',
-	                       	'projection',
-	                       	'eta',
-	                       	'platform',
-	                       	'os',
-	                       	'os_version',
-	                       	'product_version',
-	                       	'resolution',
-	                       	'duplicate_id',
-	                       	'summary',
-	                       	'description',
-	                       	'steps_to_reproduce',
-	                       	'additional_information',
-	                       	'attached_files',
-	                       	'bugnote_title',
-	                       	'bugnote_date',
-	                       	'bugnote_description',
+function get_field_names() {
+	return array (
+				'id',
+				'category',
+				'severity',
+				'reproducibility',
+				'date_submitted',
+				'last_update',
+				'reporter',
+					'assigned_to',
+							'priority',
+							'status',
+							'build',
+							'projection',
+							'eta',
+							'platform',
+							'os',
+							'os_version',
+							'product_version',
+							'resolution',
+							'duplicate_id',
+							'summary',
+							'description',
+							'steps_to_reproduce',
+							'additional_information',
+							'attached_files',
+							'bugnote_title',
+							'bugnote_date',
+							'bugnote_description',
 				'time_tracking' );
 }
 
 /**
  * Edit Printing preferences
- * @param int $p_user_id user id
- * @param bool $p_error_if_protected error if account protected
- * @param string $p_redirect_url redirect url
+ * @param integer $p_user_id            A valid user identifier.
+ * @param boolean $p_error_if_protected Error if account protected.
+ * @param string  $p_redirect_url       Redirect URL.
+ * @return void
  */
-function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $p_redirect_url = '' )
-{
+function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $p_redirect_url = '' ) {
 	if( null === $p_user_id ) {
 		$p_user_id = auth_get_current_user_id();
 	}
-
-	$c_user_id = db_prepare_int( $p_user_id );
 
 	# protected account check
 	if( $p_error_if_protected ) {
@@ -108,19 +105,16 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 
 	# get the fields list
 	$t_field_name_arr = get_field_names();
-	$field_name_count = count( $t_field_name_arr );
+	$t_field_name_count = count( $t_field_name_arr );
 
 	# Grab the data
-	$t_query = "SELECT print_pref
-			FROM $t_user_print_pref_table
-			WHERE user_id=" . db_param();
-	$t_result = db_query_bound( $t_query, array( $c_user_id ) );
+	$t_query = "SELECT print_pref FROM $t_user_print_pref_table WHERE user_id=" . db_param();
+	$t_result = db_query_bound( $t_query, array( $p_user_id ) );
 
-	## OOPS, No entry in the database yet.  Lets make one
+	## OOPS, No entry in the database yet.	Lets make one
 	if( 0 == db_num_rows( $t_result ) ) {
-
 		# create a default array, same size than $t_field_name
-		for ($i=0 ; $i<$field_name_count ; $i++) {
+		for( $i=0 ; $i<$t_field_name_count ; $i++ ) {
 			$t_default_arr[$i] = 1 ;
 		}
 		$t_default = implode( '', $t_default_arr ) ;
@@ -131,18 +125,16 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 				(user_id, print_pref)
 				VALUES
 				(" . db_param() . "," . db_param() . ")";
-		db_query_bound( $t_query, array( $c_user_id, $t_default ) );
+		db_query_bound( $t_query, array( $p_user_id, $t_default ) );
 
 		# Rerun select query
-		$t_query = "SELECT print_pref
-				FROM $t_user_print_pref_table
-				WHERE user_id=" . db_param();
-		$t_result = db_query_bound( $t_query, array( $c_user_id ) );
+		$t_query = "SELECT print_pref FROM $t_user_print_pref_table WHERE user_id=" . db_param();
+		$t_result = db_query_bound( $t_query, array( $p_user_id ) );
 	}
 
 	# putting the query result into an array with the same size as $t_fields_arr
-	$row = db_fetch_array( $t_result );
-	$t_prefs = $row['print_pref'];
+	$t_row = db_fetch_array( $t_result );
+	$t_prefs = $t_row['print_pref'];
 
 	# Account Preferences Form BEGIN
 ?>
@@ -163,7 +155,7 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 
 
 <?php # display the checkboxes
-for ($i=0 ; $i <$field_name_count ; $i++) {
+for( $i=0 ; $i <$t_field_name_count ; $i++ ) {
 
 	echo '<tr>';
 ?>
@@ -173,7 +165,7 @@ for ($i=0 ; $i <$field_name_count ; $i++) {
 	</th>
 	<td>
 		<input type="checkbox" name="<?php echo 'print_' . $t_field_name_arr[$i]; ?>"
-		<?php if( isset( $t_prefs[$i] ) && ( $t_prefs[$i]==1 ) ) echo 'checked="checked"' ?> />
+		<?php if( isset( $t_prefs[$i] ) && ( $t_prefs[$i]==1 ) ) { echo 'checked="checked"'; } ?> />
 	</td>
 </tr>
 

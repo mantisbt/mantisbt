@@ -15,7 +15,7 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 require_once( 'core.php' );
-require_api( 'timeline_api.php');
+require_api( 'timeline_api.php' );
 
 $f_days = gpc_get_int( 'days', 0 );
 $f_all = gpc_get_int( 'all', 0 );

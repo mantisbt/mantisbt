@@ -31,6 +31,12 @@ class IssueAssignedTimelineEvent extends TimelineEvent {
 	private $issue_id;
 	private $handler_id;
 
+	/**
+	 * @param integer $p_timestamp  Timestamp representing the time the event occurred.
+	 * @param integer $p_user_id    An user identifier.
+	 * @param integer $p_issue_id   A issue identifier.
+	 * @param integer $p_handler_id An user identifier.
+	 */
 	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_handler_id ) {
 		parent::__construct( $p_timestamp, $p_user_id, $p_issue_id );
 
@@ -38,6 +44,10 @@ class IssueAssignedTimelineEvent extends TimelineEvent {
 		$this->handler_id = $p_handler_id;
 	}
 
+	/**
+	 * Whether to skip this event after access checks
+	 * @return boolean
+	 */
 	function skip() {
 		if( !access_has_bug_level( config_get( 'view_handler_threshold' ), $this->issue_id ) ) {
 			return true;
@@ -46,6 +56,10 @@ class IssueAssignedTimelineEvent extends TimelineEvent {
 		return false;
 	}
 
+	/**
+	 * Returns html string to display
+	 * @return string
+	 */
 	public function html() {
 		if( $this->user_id == $this->handler_id ) {
 			$t_string = sprintf( lang_get( 'timeline_issue_assigned_to_self' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );

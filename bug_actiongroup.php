@@ -97,7 +97,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 		# in case the current project is not the same project of the bug we are viewing...
 		# ... override the current project. This to avoid problems with categories and handlers lists etc.
 		$g_project_override = $t_bug->project_id;
-		/** @todo (thraxisp) the next line goes away if the cache was smarter and used project */
+		# @todo (thraxisp) the next line goes away if the cache was smarter and used project
 		config_flush_cache(); # flush the config cache so that configs are refetched
 	}
 
@@ -111,7 +111,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			if( ( $t_status < $t_closed ) &&
 				bug_check_workflow( $t_status, $t_closed ) ) {
 
-			/** @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $f_bug_id, $t_bug_data, $f_bugnote_text ) ); */
+			# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $f_bug_id, $t_bug_data, $f_bugnote_text ) );
 			bug_close( $t_bug_id, $f_bug_notetext, $f_bug_noteprivate );
 			helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 		} else {
@@ -135,7 +135,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 		$f_project_id = gpc_get_int( 'project_id' );
 		if( access_has_bug_level( config_get( 'move_bug_threshold' ), $t_bug_id ) &&
 		    access_has_project_level( config_get( 'report_bug_threshold', null, null, $f_project_id ), $f_project_id ) ) {
-			/** @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) ); */
+			# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 			bug_move( $t_bug_id, $f_project_id );
 			helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 		} else {
@@ -167,7 +167,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 		if( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $t_bug_id ) ) {
 			if( access_has_bug_level( config_get( 'handle_bug_threshold' ), $t_bug_id, $f_assign ) ) {
 				if( bug_check_workflow( $t_status, $t_assign_status ) ) {
-					/** @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) ); */
+					# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 					bug_assign( $t_bug_id, $f_assign, $f_bug_notetext, $f_bug_noteprivate );
 					helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 				} else {
@@ -185,10 +185,10 @@ foreach( $f_bug_arr as $t_bug_id ) {
 		$t_resolved_status = config_get( 'bug_resolved_status_threshold' );
 			if( access_has_bug_level( access_get_status_threshold( $t_resolved_status, bug_get_field( $t_bug_id, 'project_id' ) ), $t_bug_id ) ) {
 				if( ( $t_status < $t_resolved_status ) &&
-					bug_check_workflow($t_status, $t_resolved_status ) ) {
+					bug_check_workflow( $t_status, $t_resolved_status ) ) {
 			$f_resolution = gpc_get_int( 'resolution' );
 			$f_fixed_in_version = gpc_get_string( 'fixed_in_version', '' );
-			/** @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) ); */
+			# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 			bug_resolve( $t_bug_id, $f_resolution, $f_fixed_in_version, $f_bug_notetext, null, null, $f_bug_noteprivate );
 			helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 		} else {
@@ -202,7 +202,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 	case 'UP_PRIOR':
 		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) ) {
 			$f_priority = gpc_get_int( 'priority' );
-			/** @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) ); */
+			# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 			bug_set_field( $t_bug_id, 'priority', $f_priority );
 			email_generic( $t_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
 			helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
@@ -215,8 +215,8 @@ foreach( $f_bug_arr as $t_bug_id ) {
 		$f_status = gpc_get_int( 'status' );
 		$t_project = bug_get_field( $t_bug_id, 'project_id' );
 		if( access_has_bug_level( access_get_status_threshold( $f_status, $t_project ), $t_bug_id ) ) {
-			if( TRUE == bug_check_workflow($t_status, $f_status ) ) {
-				/** @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) ); */
+			if( true == bug_check_workflow( $t_status, $f_status ) ) {
+				# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 				bug_set_field( $t_bug_id, 'status', $f_status );
 
 				# Add bugnote if supplied
@@ -240,7 +240,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 		$f_category_id = gpc_get_int( 'category' );
 		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) ) {
 			if( category_exists( $f_category_id ) ) {
-				/** @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) ); */
+				# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 				bug_set_field( $t_bug_id, 'category_id', $f_category_id );
 				email_generic( $t_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
 				helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
@@ -258,7 +258,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 
 		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) ) {
 			if( $f_fixed_in_version === '' || version_get_id( $f_fixed_in_version, $t_project_id ) !== false ) {
-				/** @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) ); */
+				# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 				bug_set_field( $t_bug_id, 'fixed_in_version', $f_fixed_in_version );
 				email_generic( $t_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
 				helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
@@ -276,7 +276,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 
 		if( access_has_bug_level( config_get( 'roadmap_update_threshold' ), $t_bug_id ) ) {
 			if( $f_target_version === '' || version_get_id( $f_target_version, $t_project_id ) !== false ) {
-				/** @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) ); */
+				# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 				bug_set_field( $t_bug_id, 'target_version', $f_target_version );
 				email_generic( $t_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
 				helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
@@ -291,7 +291,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 	case 'VIEW_STATUS':
 		if( access_has_bug_level( config_get( 'change_view_status_threshold' ), $t_bug_id ) ) {
 			$f_view_status = gpc_get_int( 'view_status' );
-			/** @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) ); */
+			# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 			bug_set_field( $t_bug_id, 'view_state', $f_view_status );
 			email_generic( $t_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
 			helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
@@ -317,7 +317,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			trigger_error( ERROR_GENERIC, ERROR );
 		}
 
-		/** @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) ); */
+		# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 		$t_form_var = "custom_field_$f_custom_field_id";
 		$t_custom_field_value = gpc_get_custom_field( $t_form_var, $t_custom_field_def['type'], null );
 		custom_field_set_value( $f_custom_field_id, $t_bug_id, $t_custom_field_value );

@@ -39,7 +39,7 @@ require_api( 'utility_api.php' );
  * salt is specified correctly within the configuration. If not, a fatal error
  * is produced to protect against invalid configuration impacting the security
  * of the MantisBT installation.
- * @return null
+ * @return void
  */
 function crypto_init() {
 	if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
@@ -58,12 +58,11 @@ function crypto_init() {
  * available. The use of weak randomness for cryptographic purposes is strongly
  * discouraged because it contains low entropy and is predictable.
  *
- * @param int $p_bytes Number of bytes of randomness required
- * @param bool $p_require_strong_generator Whether or not a weak source of randomness can be used by this function
+ * @param integer $p_bytes                    Number of bytes of randomness required.
+ * @param boolean $p_require_strong_generator Whether or not a weak source of randomness can be used by this function.
  * @return string|null Raw binary string containing the requested number of bytes of random output or null if the output couldn't be created
  */
 function crypto_generate_random_string( $p_bytes, $p_require_strong_generator = true ) {
-
 	# First we attempt to use the secure PRNG provided by OpenSSL in PHP
 	if( function_exists( 'openssl_random_pseudo_bytes' ) ) {
 		$t_random_bytes = openssl_random_pseudo_bytes( $p_bytes, $t_strong );
@@ -149,7 +148,7 @@ function crypto_generate_random_string( $p_bytes, $p_require_strong_generator = 
  * randomness generator doesn't produce predictable output and has much higher
  * entropy. Where randomness is being used for cryptographic purposes, a strong
  * source of randomness should always be used.
- * @param int $p_bytes Number of bytes of strong randomness required
+ * @param integer $p_bytes Number of bytes of strong randomness required.
  * @return string Raw binary string containing the requested number of bytes of random output
  */
 function crypto_generate_strong_random_string( $p_bytes ) {
@@ -169,7 +168,7 @@ function crypto_generate_strong_random_string( $p_bytes ) {
  * amount of entropy produced by this function for a given output string length
  * is 3/4 (0.75) that of raw unencoded output produced with the
  * crypto_generate_strong_random_string( $p_bytes ) function.
- * @param int $p_minimum_length Minimum number of characters required for the nonce
+ * @param integer $p_minimum_length Minimum number of characters required for the nonce.
  * @return string Nonce encoded according to the base64 with URI safe alphabet approach described in RFC4648
  */
 function crypto_generate_uri_safe_nonce( $p_minimum_length ) {

@@ -36,34 +36,31 @@ class IssueHistoryTest extends SoapBase {
 	 * A test case that tests the following:
 	 * 1. Creates a new issue
 	 * 2. validates that history entry is present
+	 * @return void
 	 */
 	public function testCreatedIssueHasHistoryEntry() {
+		$t_issue_to_add = $this->getIssueToAdd( 'IssueHistoryTest.testCreatedIssueHasHistoryEntry' );
 
-		$issueToAdd = $this->getIssueToAdd( 'IssueHistoryTest.testCreatedIssueHasHistoryEntry' );
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$issueId = $this->client->mc_issue_add(
-			$this->userName,
-			$this->password,
-			$issueToAdd);
+		$this->deleteAfterRun( $t_issue_id );
 
-		$this->deleteAfterRun( $issueId );
+		$t_issue_history = $this->getIssueHistory( $t_issue_id );
 
-		$issueHistory = $this->getIssueHistory( $issueId );
-
-		$this->assertEquals(1, count($issueHistory) );
+		$this->assertEquals( 1, count( $t_issue_history ) );
 		# validate the format of the initial history entry
-		$historyData = $issueHistory[0];
+		$t_history_data = $t_issue_history[0];
 
-		$this->assertNotEmpty($historyData->date);
+		$this->assertNotEmpty( $t_history_data->date );
 
-		$this->assertEquals($this->userId, $historyData->userid);
-		$this->assertEquals($this->userName, $historyData->username);
+		$this->assertEquals( $this->userId, $t_history_data->userid );
+		$this->assertEquals( $this->userName, $t_history_data->username );
 
-		$this->assertEquals(NEW_BUG, $historyData->type);
+		$this->assertEquals( NEW_BUG, $t_history_data->type );
 
-		$this->assertEmpty($historyData->field);
-		$this->assertEmpty($historyData->old_value);
-		$this->assertEmpty($historyData->new_value);
+		$this->assertEmpty( $t_history_data->field );
+		$this->assertEmpty( $t_history_data->old_value );
+		$this->assertEmpty( $t_history_data->new_value );
 	}
 
 	/**
@@ -71,75 +68,57 @@ class IssueHistoryTest extends SoapBase {
 	 * 1. Creates a new issue
 	 * 2. Updates the issue summary
 	 * 3. Validates that a history entry for the update was created
+	 * @return void
 	 */
 	public function testUpdatedIssueHasHistoryEntry() {
+		$t_issue_to_add = $this->getIssueToAdd( 'IssueHistoryTest.testUpdatedIssueHasHistoryEntry' );
 
-		$issueToAdd = $this->getIssueToAdd( 'IssueHistoryTest.testUpdatedIssueHasHistoryEntry' );
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$issueId = $this->client->mc_issue_add(
-			$this->userName,
-			$this->password,
-			$issueToAdd);
+		$this->deleteAfterRun( $t_issue_id );
 
-		$this->deleteAfterRun( $issueId );
+		$t_created_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$createdIssue = $this->client->mc_issue_get(
-				$this->userName,
-				$this->password,
-				$issueId);
+		$t_summary_update = $t_issue_to_add['summary'] . ' - updated';
 
-		$t_summary_update = $issueToAdd['summary'] . ' - updated';
-
-		$issueToUpdate = $createdIssue;
-		$issueToUpdate->summary = $t_summary_update;
+		$t_issue_to_update = $t_created_issue;
+		$t_issue_to_update->summary = $t_summary_update;
 
 		# Wait a sec before updating the issue to ensure that the
 		# history entries are in the correct sequence
-		sleep(1);
-		$this->client->mc_issue_update(
-				$this->userName,
-				$this->password,
-				$issueId,
-				$issueToUpdate);
+		sleep( 1 );
+		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue_to_update );
 
-		$issueHistory = $this->getIssueHistory( $issueId );
+		$t_issue_history = $this->getIssueHistory( $t_issue_id );
 
-		$this->assertEquals(2, count($issueHistory) );
+		$this->assertEquals( 2, count( $t_issue_history ) );
 
 		# validate the format of the history entry following the update
-		$this->assertPropertyHistoryEntry(
-			$issueHistory[1],
-			'summary',
-			$t_summary_update,
-			$issueToAdd['summary']
-		);
+		$this->assertPropertyHistoryEntry( $t_issue_history[1], 'summary', $t_summary_update, $t_issue_to_add['summary'] );
 	}
 
 	/**
 	 * A test case that tests the following:
 	 * 1. Creates a new issue with non-default status and resolution
 	 * 2. Validates that history entries are created for the status and resolution
+	 * @return void
 	 */
 	function testCreatedIssueWithNonDefaultStatusAndResolutionHasHistoryEntries() {
+		$t_issue_to_add = $this->getIssueToAdd( 'IssueHistoryTest.testCreatedIssueWithNonDefaultStatusAndResolutionHasHistoryEntries' );
+		$t_issue_to_add['status'] = array( 'id' => CONFIRMED ); # confirmed
+		$t_issue_to_add['resolution'] = array ( 'id' => REOPENED ); # reopened
 
-		$issueToAdd = $this->getIssueToAdd( 'IssueHistoryTest.testCreatedIssueWithNonDefaultStatusAndResolutionHasHistoryEntries' );
-		$issueToAdd['status'] = array( 'id' => CONFIRMED ); # confirmed
-		$issueToAdd['resolution'] = array ( 'id' => REOPENED ); # reopened
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-		$issueId = $this->client->mc_issue_add(
-				$this->userName,
-				$this->password,
-				$issueToAdd);
+		$this->deleteAfterRun( $t_issue_id );
 
-		$this->deleteAfterRun( $issueId );
+		$t_issue_history = $this->getIssueHistory( $t_issue_id );
 
-		$issueHistory = $this->getIssueHistory( $issueId );
-
-		$this->assertEquals(3, count($issueHistory) );
+		$this->assertEquals( 3, count( $t_issue_history ) );
 
 		# History entries logged simultaneously may not be returned in
 		# the same order, so we need to individually check for each one
-		foreach( $issueHistory as $t_entry ) {
+		foreach( $t_issue_history as $t_entry ) {
 			if( $t_entry->type != NORMAL_TYPE ) {
 				# Ignore unwanted history types
 				continue;
@@ -156,51 +135,47 @@ class IssueHistoryTest extends SoapBase {
 					# We shouldn't get there, but just in case...
 					continue 2;
 			}
-			$this->assertPropertyHistoryEntry(
-				$t_entry,
-				$t_field,
-				$issueToAdd[$t_field]['id'],
-				$t_old_value
-			);
+			$this->assertPropertyHistoryEntry( $t_entry, $t_field, $t_issue_to_add[$t_field]['id'], $t_old_value );
 		}
 	}
 
 	/**
 	 * Returns the issue's history in ascending order, regardless of the
 	 * default history sort order
-	 * @param int $issueId Issue Id
+	 * @param integer $p_issue_id Issue identifier.
 	 * @return array
 	 */
-	private function getIssueHistory( $issueId ) {
-		$issueHistory = $this->client->mc_issue_get_history( $this->userName, $this->password, $issueId );
+	private function getIssueHistory( $p_issue_id ) {
+		$p_issue_history = $this->client->mc_issue_get_history( $this->userName, $this->password, $p_issue_id );
 
 		# Get default order for history entries
 		$t_order = $this->client->mc_config_get_string( $this->userName, $this->password, 'history_order' );
 
 		if( $t_order == 'ASC' ) {
-			return $issueHistory;
+			return $p_issue_history;
 		} else {
-			return array_reverse( $issueHistory );
+			return array_reverse( $p_issue_history );
 		}
 	}
 
 	/**
 	 * Check History entry is valid
-	 * @param object $historyEntry
-	 * @param string $fieldName
-	 * @param mixed $fieldValue
-	 * @param mixed $oldValue
+	 * @param object $p_history_entry History object to check.
+	 * @param string $p_field_name    Field name.
+	 * @param mixed  $p_field_value   New field value.
+	 * @param mixed  $p_old_value     Old field value.
+	 * @return void
 	 */
-	private function assertPropertyHistoryEntry( $historyEntry, $fieldName, $fieldValue, $oldValue) {
-		$this->assertNotEmpty($historyEntry->date);
+	private function assertPropertyHistoryEntry( $p_history_entry, $p_field_name, $p_field_value, $p_old_value ) {
+		$this->assertNotEmpty( $p_history_entry->date );
 
-		$this->assertEquals($this->userId, $historyEntry->userid);
-		$this->assertEquals($this->userName, $historyEntry->username);
+		$this->assertEquals( $this->userId, $p_history_entry->userid );
+		$this->assertEquals( $this->userName, $p_history_entry->username );
 
-		$this->assertEquals(0, $historyEntry->type);
+		$this->assertEquals( 0, $p_history_entry->type );
 
-		$this->assertEquals($fieldName, $historyEntry->field);
-		$this->assertEquals($fieldValue, $historyEntry->new_value);
-		$this->assertEquals($oldValue, $historyEntry->old_value);
+		$this->assertEquals( $p_field_name, $p_history_entry->field );
+		$this->assertEquals( $p_field_value, $p_history_entry->new_value );
+		$this->assertEquals( $p_old_value, $p_history_entry->old_value );
 	}
 }

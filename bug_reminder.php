@@ -82,7 +82,7 @@ $t_monitor_bug_threshold = config_get( 'monitor_bug_threshold' );
 $t_handler = bug_get_field( $f_bug_id, 'handler_id' );
 $t_reporter = bug_get_field( $f_bug_id, 'reporter_id' );
 foreach ( $f_to as $t_recipient ) {
-	if(   ON == $t_reminder_recipients_monitor_bug
+	if( ON == $t_reminder_recipients_monitor_bug
 		&& access_has_bug_level( $t_monitor_bug_threshold, $f_bug_id )
 		&& $t_recipient != $t_handler
 		&& $t_recipient != $t_reporter
@@ -108,7 +108,7 @@ if( ON == config_get( 'store_reminders' ) ) {
 		}
 		$t_attr .= $t_recipient;
 	}
-	bugnote_add( $f_bug_id, $f_body, 0, config_get( 'default_reminder_view_status' ) == VS_PRIVATE, REMINDER, $t_attr, NULL, FALSE );
+	bugnote_add( $f_bug_id, $f_body, 0, config_get( 'default_reminder_view_status' ) == VS_PRIVATE, REMINDER, $t_attr, null, false );
 }
 
 form_security_purge( 'bug_reminder' );

@@ -52,14 +52,14 @@ require_api( 'string_api.php' );
 require_api( 'utility_api.php' );
 
 $f_project_id	= gpc_get_string( 'project_id' );
-$f_make_default	= gpc_get_bool  ( 'make_default' );
+$f_make_default	= gpc_get_bool( 'make_default' );
 $f_ref			= gpc_get_string( 'ref', '' );
 
 $c_ref = string_prepare_header( $f_ref );
 
 $t_project = explode( ';', $f_project_id );
 $t_top     = $t_project[0];
-$t_bottom  = $t_project[ count( $t_project ) - 1 ];
+$t_bottom  = $t_project[count( $t_project ) - 1];
 
 if( ALL_PROJECTS != $t_bottom ) {
 	project_ensure_exists( $t_bottom );

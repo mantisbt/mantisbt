@@ -20,17 +20,15 @@
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  * @package MantisBT
+ * @subpackage classes
  */
 
 /**
  * Base class that implements basic plugin functionality
  * and integration with MantisBT. See the Mantis wiki for
  * more information.
- * @package MantisBT
- * @subpackage classes
  */
 abstract class MantisPlugin {
-
 	/**
 	 * name - Your plugin's full name. Required value.
 	 */
@@ -71,6 +69,7 @@ abstract class MantisPlugin {
 
 	/**
 	 * this function registers your plugin - must set at least name and version
+	 * @return void
 	 */
 	abstract public function register();
 
@@ -79,13 +78,14 @@ abstract class MantisPlugin {
 	 * necessary API's, declare or hook events, etc.
 	 * Alternatively, your plugin can hook the EVENT_PLUGIN_INIT event
 	 * that will be called after all plugins have been initialized.
+	 * @return void
 	 */
 	public function init() {}
 
 	/**
 	 * This function allows plugins to add new error messages for Mantis usage
 	 *
-	 * @returns array The error_name=>error_message list to add
+	 * @return array The error_name=>error_message list to add
 	 */
 	public function errors() {
 		return array();
@@ -93,6 +93,7 @@ abstract class MantisPlugin {
 
 	/**
 	 * return an array of default configuration name/value pairs
+	 * @return array
 	 */
 	public function config() {
 		return array();
@@ -123,6 +124,7 @@ abstract class MantisPlugin {
 	 * its list of events, and will then allow other plugins or functions to hook them. Naming the
 	 * events "EVENT_PLUGINNAME_EVENTNAME" is not necessary, but is considered best practice to
 	 * avoid conflicts between plugins.
+	 * @return array
 	 */
 	public function events() {
 		return array();
@@ -158,6 +160,7 @@ abstract class MantisPlugin {
 	 * events).
 	 * The bar() * method also accepts and returns the chained parameter in order to match the
 	 * expectations of the "bar" event.
+	 * @return array
 	 */
 	public function hooks() {
 		return array();
@@ -186,6 +189,7 @@ abstract class MantisPlugin {
 	 *  );
 	 * }
 	 * </code>
+	 * @return array
 	 */
 	public function schema() {
 		return array();
@@ -197,7 +201,7 @@ abstract class MantisPlugin {
 	  * This method is called before installing the given plugin.
 	  * It can be used to add pre-install checks on external requirements
 	  *
-	  * @returns bool true if install can proceed
+	  * @return bool true if install can proceed
 	  */
 	public function install() {
 		return true;
@@ -209,8 +213,8 @@ abstract class MantisPlugin {
 	 *
 	 * @todo It is possible to call php functions from within the schema upgrade itself, so really needed?
 	 *
-	 * @param int $p_schema Schema Version ID
-	 * @return bool
+	 * @param integer $p_schema Schema Version ID.
+	 * @return boolean
 	 */
 	public function upgrade( $p_schema ) {
 		return true;
@@ -222,6 +226,7 @@ abstract class MantisPlugin {
 	 * etc. This callback should be used only if Mantis would break when this plugin
 	 * is uninstalled without any other actions taken, as users may not want to lose
 	 * data, or be able to re-install the plugin later.
+	 * @return void
 	 */
 	public function uninstall() {
 	}
@@ -236,7 +241,7 @@ abstract class MantisPlugin {
 	/**
 	 * Constructor
 	 *
-	 * @param string $p_basename basename
+	 * @param string $p_basename Plugin Basename.
 	 */
 	final public function __construct( $p_basename ) {
 		$this->basename = $p_basename;
@@ -245,6 +250,7 @@ abstract class MantisPlugin {
 
 	/**
 	 * Initialisation
+	 * @return void
 	 */
 	final public function __init() {
 		plugin_config_defaults( $this->config() );

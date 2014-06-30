@@ -24,9 +24,10 @@
 class MantisGraphPlugin extends MantisPlugin  {
 
 	/**
-	 *  A method that populates the plugin information and minimum requirements.
+	 * A method that populates the plugin information and minimum requirements.
+	 * @return void
 	 */
-	function register( ) {
+	function register() {
 		$this->name = lang_get( 'plugin_graph_title' );
 		$this->description = lang_get( 'plugin_graph_description' );
 		$this->page = 'config';
@@ -43,6 +44,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 
 	/**
 	 * Default plugin configuration.
+	 * @return array
 	 */
 	function config() {
 		return array(
@@ -60,6 +62,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 
 	/**
 	 * init function
+	 * @return void
 	 */
 	function init() {
 		spl_autoload_register( array( 'MantisGraphPlugin', 'autoload' ) );
@@ -67,7 +70,8 @@ class MantisGraphPlugin extends MantisPlugin  {
 
 	/**
 	 * class auto loader
-	 * @param string $p_class class name
+	 * @param string $p_class Class name to autoload.
+	 * @return void
 	 */
 	public static function autoload( $p_class ) {
 		if( class_exists( 'ezcBase' ) ) {
@@ -77,34 +81,38 @@ class MantisGraphPlugin extends MantisPlugin  {
 
 	/**
 	 * plugin hooks
+	 * @return array
 	 */
-	function hooks( ) {
-		$hooks = array(
+	function hooks() {
+		$t_hooks = array(
 			'EVENT_MENU_SUMMARY' => 'summary_menu',
 			'EVENT_SUBMENU_SUMMARY' => 'summary_submenu',
 			'EVENT_MENU_FILTER' => 'graph_filter_menu',
 		);
-		return $hooks;
+		return $t_hooks;
 	}
 
 	/**
 	 * generate summary menu
+	 * @return array
 	 */
-	function summary_menu( ) {
+	function summary_menu() {
 		return array( '<a href="' . plugin_page( 'summary_jpgraph_page' ) . '">' . plugin_lang_get( 'menu_advanced_summary' ) . '</a>', );
 	}
 
 	/**
 	 * generate graph filter menu
+	 * @return array
 	 */
-	function graph_filter_menu( ) {
+	function graph_filter_menu() {
 		return array( '<a href="' . plugin_page( 'bug_graph_page.php' ) . '">' . plugin_lang_get( 'graph_bug_page_link' ) . '</a>', );
 	}
 
 	/**
 	 * generate summary submenu
+	 * @return array
 	 */
-	function summary_submenu( ) {
+	function summary_submenu() {
 		$t_icon_path = config_get( 'icon_path' );
 		return array( '<a href="' . helper_mantis_url( 'summary_page.php' ) . '"><img src="' . $t_icon_path . 'synthese.gif" alt="" />' . plugin_lang_get( 'synthesis_link' ) . '</a>',
 			'<a href="' . plugin_page( 'summary_graph_imp_status.php' ) . '"><img src="' . $t_icon_path . 'synthgraph.gif" alt="" />' . plugin_lang_get( 'status_link' ) . '</a>',

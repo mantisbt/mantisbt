@@ -31,9 +31,7 @@ if( !defined( 'CHECK_ANONYMOUS_INC_ALLOW' ) ) {
 	return;
 }
 
-/**
- * MantisBT Check API
- */
+# MantisBT Check API
 require_once( 'check_api.php' );
 require_api( 'config_api.php' );
 require_api( 'user_api.php' );

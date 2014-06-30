@@ -38,7 +38,7 @@ $f_defaultcategory = gpc_get_int( 'defaultcategory' );
 
 file_ensure_uploaded( $f_file );
 
-$importer = new ImportXML( $f_file, $f_strategy, $f_fallback, $f_keepcategory, $f_defaultcategory );
+$t_importer = new ImportXML( $f_file, $f_strategy, $f_fallback, $f_keepcategory, $f_defaultcategory );
 
 form_security_purge( 'plugin_xml_import_action' );
 
@@ -53,7 +53,7 @@ print_manage_menu( 'manage_import_issues_page.php' );
 <pre>
 
 <?php
-$importer->import( );
+$t_importer->import( );
 ?>
 
 </pre>

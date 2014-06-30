@@ -91,8 +91,8 @@ if( $f_all_projects ) {
 
 $t_filter_string = filter_db_get_filter( gpc_get_cookie( config_get( 'view_all_cookie' ), '' ) );
 
-$t_new_row_id = filter_db_set_for_current_user($t_project_id, $f_is_public,
-												$f_query_name, $t_filter_string);
+$t_new_row_id = filter_db_set_for_current_user( $t_project_id, $f_is_public,
+												$f_query_name, $t_filter_string );
 
 form_security_purge( 'query_store' );
 

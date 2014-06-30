@@ -80,7 +80,7 @@ project_ensure_exists( $f_project_id );
 $g_project_override = $f_project_id;
 access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
 
-$row = project_get_row( $f_project_id );
+$t_row = project_get_row( $f_project_id );
 
 $t_can_manage_users = access_has_project_level( config_get( 'project_user_threshold' ), $f_project_id );
 
@@ -98,33 +98,33 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<div class="field-container">
 				<label for="project-name" class="required"><span><?php echo lang_get( 'project_name' ) ?></span></label>
-				<span class="input"><input type="text" id="project-name" name="name" size="60" maxlength="128" value="<?php echo string_attribute( $row['name'] ) ?>" /></span>
+				<span class="input"><input type="text" id="project-name" name="name" size="60" maxlength="128" value="<?php echo string_attribute( $t_row['name'] ) ?>" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
 				<label for="project-status"><span><?php echo lang_get( 'status' ) ?></span></label>
 				<span class="select">
 					<select id="project-status" name="status">
-						<?php print_enum_string_option_list( 'project_status', (int)$row['status'] ) ?>
+						<?php print_enum_string_option_list( 'project_status', (int)$t_row['status'] ) ?>
 					</select>
 				</span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
 				<label for="project-enabled"><span><?php echo lang_get( 'enabled' ) ?></span></label>
-				<span class="checkbox"><input type="checkbox" id="project-enabled" name="enabled" <?php check_checked( (int)$row['enabled'], ON ); ?> /></span>
+				<span class="checkbox"><input type="checkbox" id="project-enabled" name="enabled" <?php check_checked( (int)$t_row['enabled'], ON ); ?> /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
 				<label for="project-inherit-global"><span><?php echo lang_get( 'inherit_global' ) ?></span></label>
-				<span class="checkbox"><input type="checkbox" id="project-inherit-global" name="inherit_global" <?php check_checked( (int)$row['inherit_global'], ON ); ?> /></span>
+				<span class="checkbox"><input type="checkbox" id="project-inherit-global" name="inherit_global" <?php check_checked( (int)$t_row['inherit_global'], ON ); ?> /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
 				<label for="project-view-state"><span><?php echo lang_get( 'view_status' ) ?></span></label>
 				<span class="select">
 					<select id="project-view-state" name="view_state">
-						<?php print_enum_string_option_list( 'view_state', (int)$row['view_state']) ?>
+						<?php print_enum_string_option_list( 'view_state', (int)$t_row['view_state'] ) ?>
 					</select>
 				</span>
 				<span class="label-style"></span>
@@ -132,7 +132,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			<?php
 			$g_project_override = $f_project_id;
 			if( file_is_uploading_enabled() && DATABASE !== config_get( 'file_upload_method' ) ) {
-				$t_file_path = $row['file_path'];
+				$t_file_path = $t_row['file_path'];
 				# Don't reveal the absolute path to non-administrators for security reasons
 				if( is_blank( $t_file_path ) && current_user_is_administrator() ) {
 					$t_file_path = config_get( 'absolute_path_default_upload_folder' );
@@ -146,7 +146,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			} ?>
 			<div class="field-container">
 				<label for="project-description"><span><?php echo lang_get( 'description' ) ?></span></label>
-				<span class="textarea"><textarea id="project-description" name="description" cols="70" rows="5"><?php echo string_textarea( $row['description'] ) ?></textarea></span>
+				<span class="textarea"><textarea id="project-description" name="description" cols="70" rows="5"><?php echo string_textarea( $t_row['description'] ) ?></textarea></span>
 				<span class="label-style"></span>
 			</div>
 
@@ -160,7 +160,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 <!-- PROJECT DELETE -->
 <?php
 # You must have global permissions to delete projects
-if( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
+if( access_has_global_level( config_get( 'delete_project_threshold' ) ) ) { ?>
 <div id="project-delete-div" class="form-container">
 	<form id="project-delete-form" method="post" action="manage_proj_delete.php" class="action-button">
 		<fieldset>
@@ -177,7 +177,7 @@ if( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 	<h2><?php echo lang_get( 'subprojects' ); ?></h2>
 	<?php
 		# Check the user's global access level before allowing project creation
-		if( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
+		if( access_has_global_level( config_get( 'create_project_threshold' ) ) ) {
 			print_button( 'manage_proj_create_page.php?parent_id=' . $f_project_id, lang_get( 'create_new_subproject_link' ) );
 		} ?>
 		<form id="manage-project-subproject-add-form" method="post" action="manage_proj_subproj_add.php">
@@ -254,13 +254,11 @@ if( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 						<td class="center">
 							<?php print_bracket_link(
 								'manage_proj_edit_page.php?project_id=' . $t_subproject['id'],
-								lang_get( 'edit_link' )
-								);
+								lang_get( 'edit_link' ) );
 							?>
 							<?php print_bracket_link(
 								"manage_proj_subproj_delete.php?project_id=$f_project_id&subproject_id=" . $t_subproject['id'] . form_security_param( 'manage_proj_subproj_delete' ),
-								lang_get( 'unlink_link' )
-								);
+								lang_get( 'unlink_link' ) );
 							?>
 						</td>
 					</tr>
@@ -550,7 +548,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 		$t_sort_name = utf8_strtolower( $t_user_name );
 		if( ( isset( $t_user['realname'] ) ) && ( $t_user['realname'] > "" ) && ( ON == config_get( 'show_realname' ) ) ){
 			$t_user_name = string_attribute( $t_user['realname'] ) . " (" . $t_user_name . ")";
-			if( ON == config_get( 'sort_by_last_name') ) {
+			if( ON == config_get( 'sort_by_last_name' ) ) {
 				$t_sort_name_bits = explode( ' ', utf8_strtolower( $t_user_name ), 2 );
 				$t_sort_name = $t_sort_name_bits[1] . ', ' . $t_sort_name_bits[1];
 			} else {
@@ -586,7 +584,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 					# You need global or project-specific permissions to remove users
 					#  from this project
 					if( $t_can_manage_users && access_has_project_level( $t_user['access_level'], $f_project_id ) ) {
-						if( project_includes_user( $f_project_id, $t_user['id'] )  ) {
+						if( project_includes_user( $f_project_id, $t_user['id'] ) ) {
 							print_button( "manage_proj_user_remove.php?project_id=$f_project_id&user_id=" . $t_user['id'], lang_get( 'remove_link' ) );
 							$t_removable_users_exist = true;
 						}
@@ -626,7 +624,7 @@ if( $t_can_manage_users ) {
 				<label for="project-add-users-username"><span><?php echo lang_get( 'username' ) ?></span></label>
 				<span class="select">
 					<select id="project-add-users-username" name="user_id[]" multiple="multiple" size="10"><?php
-						foreach( $t_users AS $t_user_id=>$t_display_name ) {
+						foreach( $t_users as $t_user_id=>$t_display_name ) {
 							echo '<option value="', $t_user_id, '">', $t_display_name, '</option>';
 						} ?>
 					</select>

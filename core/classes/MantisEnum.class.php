@@ -16,9 +16,10 @@
 
 /**
  * MantisBT Enumeration Handling
- * @package MantisBT
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ * @package MantisBT
+ * @subpackage classes
  */
 
 /**
@@ -26,8 +27,6 @@
  *
  * For example: 10:lablel1,20:label2
  *
- * @package MantisBT
- * @subpackage classes
  */
 class MantisEnum {
 	/**
@@ -49,8 +48,8 @@ class MantisEnum {
 	/**
 	 * Get the string associated with the $p_enum value
 	 *
-	 * @param string $enumString
-	 * @param int $value
+	 * @param string  $enumString The enumerated string.
+	 * @param integer $value      The value to lookup.
 	 * @return string
 	 */
 	public static function getLabel( $enumString, $value ) {
@@ -69,9 +68,9 @@ class MantisEnum {
 	 * takes in the standard / localized enums so that if the value is in the localized
 	 * enum but not the standard one, then it returns not found.
 	 *
-	 * @param string $enumString The standard enum string.
-	 * @param string $localizedEnumString  The localized enum string.
-	 * @param int $value  The value to lookup.
+	 * @param string  $enumString          The standard enum string.
+	 * @param string  $localizedEnumString The localized enum string.
+	 * @param integer $value               The value to lookup.
 	 *
 	 * @return string the label or the decorated value to represent not found.
 	 */
@@ -86,9 +85,9 @@ class MantisEnum {
 	/**
 	 * Gets the value associated with the specified label.
 	 *
-	 * @param string $enumString  The enumerated string.
-	 * @param string $label       The label to map.
-	 * @return int value of the enum or false if not found.
+	 * @param string $enumString The enumerated string.
+	 * @param string $label      The label to map.
+	 * @return integer value of the enumeration or false if not found.
 	 */
 	public static function getValue( $enumString, $label ) {
 		$assocArrayByLabels = MantisEnum::getAssocArrayIndexedByLabels( $enumString );
@@ -104,7 +103,7 @@ class MantisEnum {
 	 * Get an associate array for the tuples of the enum where the values
 	 * are the array indices and the labels are the array values.
 	 *
-	 * @param string $enumString
+	 * @param string $enumString The enumerated string.
 	 * @return array associate array indexed by labels.
 	 */
 	public static function getAssocArrayIndexedByValues( $enumString ) {
@@ -124,10 +123,10 @@ class MantisEnum {
 				continue;
 			}
 
-			$value = (int) trim( $tupleTokens[0] );
+			$value = (int)trim( $tupleTokens[0] );
 
 			# if already set, skip.
-			if( isset( $assocArray[ $value ] ) ) {
+			if( isset( $assocArray[$value] ) ) {
 				continue;
 			}
 
@@ -142,10 +141,10 @@ class MantisEnum {
 	}
 
 	/**
-	 * Get an associate array for the tuples of the enum where the labels
+	 * Get an associate array for the tuples of the enumeration where the labels
 	 * are the array indices and the values are the array values.
 	 *
-	 * @param string $enumString
+	 * @param string $enumString The enumerated string.
 	 * @return array associate array indexed by labels.
 	 */
 	public static function getAssocArrayIndexedByLabels( $enumString ) {
@@ -155,7 +154,7 @@ class MantisEnum {
 	/**
 	 * Gets an array with all values in the enum.
 	 *
-	 * @param $enumString
+	 * @param string $enumString The enumerated string.
 	 * @return array array of unique values.
 	 */
 	public static function getValues( $enumString ) {
@@ -165,9 +164,9 @@ class MantisEnum {
 	/**
 	 * Checks if the specified enum string contains the specified value.
 	 *
-	 * @param string $enumString  The enumeration string.
-	 * @param int $value      The value to chec,
-	 * @return bool true if found, false otherwise.
+	 * @param string  $enumString The enumeration string.
+	 * @param integer $value      The value to check.
+	 * @return boolean true if found, false otherwise.
 	 */
 	public static function hasValue( $enumString, $value ) {
 		$assocArray = MantisEnum::getAssocArrayIndexedByValues( $enumString );
@@ -178,7 +177,7 @@ class MantisEnum {
 	/**
 	 * Breaks up an enum string into num:value elements
 	 *
-	 * @param string $enumString enum string
+	 * @param string $enumString The enumerated string.
 	 * @return array array of num:value elements
 	 */
 	private static function getArrayOfTuples( $enumString ) {
@@ -200,8 +199,8 @@ class MantisEnum {
 	 * Given one num:value pair it will return both in an array
 	 * num will be first (element 0) value second (element 1)
 	 *
-	 * @param string $tuple a num:value pair
-	 * @return array array(value, label)
+	 * @param string $tuple A num:value pair.
+	 * @return array An array with of value, label.
 	 */
 	private static function getArrayForTuple( $tuple ) {
 		return explode( MantisEnum::VALUE_LABEL_SEPARATOR, $tuple );
@@ -210,7 +209,7 @@ class MantisEnum {
 	/**
 	 * Given a value it decorates it and returns it as the label.
 	 *
-	 * @param int $p_value The value (e.g. 50).
+	 * @param integer $p_value The value (e.g. 50).
 	 * @return string The decorated value (e.g. @50@).
 	 */
 	private static function getLabelForUnknownValue( $p_value ) {

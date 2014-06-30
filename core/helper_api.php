@@ -57,19 +57,19 @@ require_api( 'utility_api.php' );
 /**
  * alternate color function
  * If no index is given, continue alternating based on the last index given
- * @param int $p_index
- * @param string $p_odd_color
- * @param string $p_even_color
+ * @param integer $p_index      Current index position.
+ * @param string  $p_odd_color  Color to use for odd rows.
+ * @param string  $p_even_color Color to use for even rows.
  * @return string
  */
 function helper_alternate_colors( $p_index, $p_odd_color, $p_even_color ) {
-	static $t_index = 1;
+	static $s_index = 1;
 
 	if( null !== $p_index ) {
-		$t_index = $p_index;
+		$s_index = $p_index;
 	}
 
-	if( 1 == $t_index++ % 2 ) {
+	if( 1 == $s_index++ % 2 ) {
 		return $p_odd_color;
 	} else {
 		return $p_even_color;
@@ -82,21 +82,21 @@ function helper_alternate_colors( $p_index, $p_odd_color, $p_even_color ) {
  * e.g. array('a'=>array('k1'=>1,'k2'=>2),'b'=>array('k1'=>3,'k2'=>4))
  * becomes array('k1'=>array('a'=>1,'b'=>3),'k2'=>array('a'=>2,'b'=>4))
  *
- * @param array $p_array
+ * @param array $p_array The array to transpose.
  * @return array|mixed transposed array or $p_array if not 2-dimensional array
  */
-function helper_array_transpose( $p_array ) {
+function helper_array_transpose( array $p_array ) {
 	if( !is_array( $p_array ) ) {
 		return $p_array;
 	}
 	$t_out = array();
-	foreach( $p_array as $key => $sub ) {
-		if( !is_array( $sub ) ) {
+	foreach( $p_array as $t_key => $t_sub ) {
+		if( !is_array( $t_sub ) ) {
 			return $p_array;
 		}
 
-		foreach( $sub as $subkey => $value ) {
-			$t_out[$subkey][$key] = $value;
+		foreach( $t_sub as $t_subkey => $t_value ) {
+			$t_out[$t_subkey][$t_key] = $t_value;
 		}
 	}
 	return $t_out;
@@ -104,9 +104,9 @@ function helper_array_transpose( $p_array ) {
 
 /**
  * get the color string for the given status, user and project
- * @param int $p_status
- * @param int|null $p_user user id, defaults to null (all users)
- * @param int|null $p_project project id, defaults to null (all projects)
+ * @param integer      $p_status  Status value.
+ * @param integer|null $p_user    User id, defaults to null (all users).
+ * @param integer|null $p_project Project id, defaults to null (all projects).
  * @return string
  */
 function get_status_color( $p_status, $p_user = null, $p_project = null ) {
@@ -133,42 +133,42 @@ function get_percentage_by_status() {
 	# checking if it's a per project statistic or all projects
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
-	$query = "SELECT status, COUNT(*) AS num
+	$t_query = "SELECT status, COUNT(*) AS num
 				FROM $t_mantis_bug_table
 				WHERE $t_specific_where";
 	if( !access_has_project_level( config_get( 'private_bug_threshold' ) ) ) {
-		$query .= ' AND view_state < ' . VS_PRIVATE;
+		$t_query .= ' AND view_state < ' . VS_PRIVATE;
 	}
-	$query .= ' GROUP BY status';
-	$t_result = db_query_bound( $query );
+	$t_query .= ' GROUP BY status';
+	$t_result = db_query_bound( $t_query );
 
 	$t_status_count_array = array();
 
-	while( $row = db_fetch_array( $t_result ) ) {
-		$t_status_count_array[$row['status']] = $row['num'];
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_status_count_array[$t_row['status']] = $t_row['num'];
 	}
 	$t_bug_count = array_sum( $t_status_count_array );
-	foreach( $t_status_count_array AS $t_status=>$t_value ) {
-		$t_status_count_array[$t_status] = round(( $t_value / $t_bug_count ) * 100 );
+	foreach( $t_status_count_array as $t_status=>$t_value ) {
+		$t_status_count_array[$t_status] = round( ( $t_value / $t_bug_count ) * 100 );
 	}
 
 	return $t_status_count_array;
 }
 
 /**
- * Given a enum string and num, return the appropriate string for the
+ * Given a enumeration string and number, return the appropriate string for the
  * specified user/project
- * @param string $p_enum_name
- * @param int $p_val
- * @param int|null $p_user user id, defaults to null (all users)
- * @param int|null $p_project project id, defaults to null (all projects)
+ * @param string       $p_enum_name An enumeration string name.
+ * @param integer      $p_val       An enumeration string value.
+ * @param integer|null $p_user      A user identifier, defaults to null (all users).
+ * @param integer|null $p_project   A project identifier, defaults to null (all projects).
  * @return string
  */
 function get_enum_element( $p_enum_name, $p_val, $p_user = null, $p_project = null ) {
-	$config_var = config_get( $p_enum_name . '_enum_string', null, $p_user, $p_project );
-	$string_var = lang_get( $p_enum_name . '_enum_string' );
+	$t_config_var = config_get( $p_enum_name . '_enum_string', null, $p_user, $p_project );
+	$t_string_var = lang_get( $p_enum_name . '_enum_string' );
 
-	return MantisEnum::getLocalizedLabel( $config_var, $string_var, $p_val );
+	return MantisEnum::getLocalizedLabel( $t_config_var, $t_string_var, $p_val );
 }
 
 /**
@@ -176,13 +176,12 @@ function get_enum_element( $p_enum_name, $p_val, $p_user = null, $p_project = nu
  * With strict type checking, will trigger an error if the types of the compared
  * variables don't match.
  * This helper function is used by {@link check_checked()} and {@link check_selected()}
- * @param mixed $p_var1
- * @param mixed $p_var2
- * @param bool $p_strict Set to true for strict type checking, false for loose
- * @return bool
+ * @param mixed   $p_var1   The variable to compare.
+ * @param mixed   $p_var2   The second variable to compare.
+ * @param boolean $p_strict Set to true for strict type checking, false for loose.
+ * @return boolean
  */
 function helper_check_variables_equal( $p_var1, $p_var2, $p_strict ) {
-
 	if( $p_strict ) {
 		if( gettype( $p_var1 ) !== gettype( $p_var2 ) ) {
 			# Reaching this point is a a sign that you need to check the types
@@ -222,10 +221,10 @@ function helper_check_variables_equal( $p_var1, $p_var2, $p_strict ) {
  * If the second parameter is not given, the first parameter is compared to
  * the boolean value true.
  *
- * @param mixed $p_var
- * @param mixed $p_val
- * @param bool $p_strict Set to false to bypass strict type checking (defaults to true)
- * @return null
+ * @param mixed   $p_var    The variable to compare.
+ * @param mixed   $p_val    The value to compare $p_var with.
+ * @param boolean $p_strict Set to false to bypass strict type checking (defaults to true).
+ * @return void
  */
 function check_checked( $p_var, $p_val = true, $p_strict = true ) {
 	if( is_array( $p_var ) ) {
@@ -250,10 +249,10 @@ function check_checked( $p_var, $p_val = true, $p_strict = true ) {
  * If the second parameter is not given, the first parameter is compared to
  * the boolean value true.
  *
- * @param mixed $p_var the variable to compare
- * @param mixed $p_val the value to compare $p_var with
- * @param bool $p_strict Set to false to bypass strict type checking (defaults to true)
- * @return null
+ * @param mixed   $p_var    The variable to compare.
+ * @param mixed   $p_val    The value to compare $p_var with.
+ * @param boolean $p_strict Set to false to bypass strict type checking (defaults to true).
+ * @return void
  */
 function check_selected( $p_var, $p_val = true, $p_strict = true ) {
 	if( is_array( $p_var ) ) {
@@ -274,7 +273,8 @@ function check_selected( $p_var, $p_val = true, $p_strict = true ) {
  * If $p_val is true then we PRINT DISABLED to prevent selection of the
  * current option list item
  *
- * @param bool $p_val
+ * @param boolean $p_val Whether to disable the current option value.
+ * @return void
  */
 function check_disabled( $p_val = true ) {
 	if( $p_val ) {
@@ -287,8 +287,8 @@ function check_disabled( $p_val = true ) {
  * The script timeout is set based on the value of the long_process_timeout config option.
  * $p_ignore_abort specified whether to ignore user aborts by hitting
  * the Stop button (the default is not to ignore user aborts)
- * @param bool $p_ignore_abort
- * @return int
+ * @param boolean $p_ignore_abort Whether to ignore user aborts from the web browser.
+ * @return integer
  */
 function helper_begin_long_process( $p_ignore_abort = false ) {
 	$t_timeout = config_get( 'long_process_timeout' );
@@ -301,15 +301,15 @@ function helper_begin_long_process( $p_ignore_abort = false ) {
 }
 
 # this allows pages to override the current project settings.
-#  This typically applies to the view bug pages where the "current"
-#  project as used by the filters, etc, does not match the bug being viewed.
+# This typically applies to the view bug pages where the "current"
+# project as used by the filters, etc, does not match the bug being viewed.
 $g_project_override = null;
 $g_cache_current_project = null;
 
 /**
  * Return the current project id as stored in a cookie
- *  If no cookie exists, the user's default project is returned
- * @return int
+ * If no cookie exists, the user's default project is returned
+ * @return integer
  */
 function helper_get_current_project() {
 	global $g_project_override, $g_cache_current_project;
@@ -334,7 +334,7 @@ function helper_get_current_project() {
 		if( !project_exists( $t_project_id ) || ( 0 == project_get_field( $t_project_id, 'enabled' ) ) || !access_has_project_level( VIEWER, $t_project_id ) ) {
 			$t_project_id = ALL_PROJECTS;
 		}
-		$g_cache_current_project = (int) $t_project_id;
+		$g_cache_current_project = (int)$t_project_id;
 	}
 	return $g_cache_current_project;
 }
@@ -363,7 +363,7 @@ function helper_get_current_project_trace() {
 			if( 0 == $t_parent ) {
 				break;
 			}
-			array_unshift($t_project_id, $t_parent);
+			array_unshift( $t_project_id, $t_parent );
 		}
 
 	} else {
@@ -382,8 +382,8 @@ function helper_get_current_project_trace() {
 
 /**
  * Set the current project id (stored in a cookie)
- * @param int $p_project_id
- * @return bool always true
+ * @param integer $p_project_id A valid project identifier.
+ * @return boolean always true
  */
 function helper_set_current_project( $p_project_id ) {
 	global $g_cache_current_project;
@@ -398,7 +398,7 @@ function helper_set_current_project( $p_project_id ) {
 
 /**
  * Clear all known user preference cookies
- * @return null
+ * @return void
  */
 function helper_clear_pref_cookies() {
 	gpc_clear_cookie( config_get( 'project_cookie' ) );
@@ -412,9 +412,9 @@ function helper_clear_pref_cookies() {
  * If the user has not confirmed the action, generate a page which asks the user to confirm and
  * then submits a form back to the current page with all the GET and POST data and an additional
  * field called _confirmed to indicate that confirmation has been done.
- * @param string $p_message
- * @param string $p_button_label
- * @return bool
+ * @param string $p_message      Confirmation message to display to the end user.
+ * @param string $p_button_label Button label to display to the end user.
+ * @return boolean
  */
 function helper_ensure_confirmed( $p_message, $p_button_label ) {
 	if( true == gpc_get_bool( '_confirmed' ) ) {
@@ -447,11 +447,11 @@ function helper_ensure_confirmed( $p_message, $p_button_label ) {
  * $p_function - Name of function to call (eg: do_stuff).  The function will call custom_function_override_do_stuff()
  *		if found, otherwise, will call custom_function_default_do_stuff().
  * $p_args_array - Parameters to function as an array
- * @param string $p_function
- * @param array $p_args_array
+ * @param string $p_function   Custom function name.
+ * @param array  $p_args_array An array of arguments to pass to the custom function.
  * @return mixed
  */
-function helper_call_custom_function( $p_function, $p_args_array ) {
+function helper_call_custom_function( $p_function, array $p_args_array ) {
 	$t_function = 'custom_function_override_' . $p_function;
 
 	if( !function_exists( $t_function ) ) {
@@ -463,8 +463,8 @@ function helper_call_custom_function( $p_function, $p_args_array ) {
 
 /**
  * return string to use in db queries containing projects of given user
- * @param int $p_project_id
- * @param int $p_user_id
+ * @param integer $p_project_id A valid project identifier.
+ * @param integer $p_user_id    A valid user identifier.
  * @return string
  */
 function helper_project_specific_where( $p_project_id, $p_user_id = null ) {
@@ -487,9 +487,9 @@ function helper_project_specific_where( $p_project_id, $p_user_id = null ) {
 
 /**
  * Get array of columns for given target
- * @param int $p_columns_target
- * @param bool $p_viewable_only
- * @param int $p_user_id
+ * @param integer $p_columns_target Target view for the columns.
+ * @param boolean $p_viewable_only  Whether to return viewable columns only.
+ * @param integer $p_user_id        A valid user identifier.
  * @return array
  */
 function helper_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAGE, $p_viewable_only = true, $p_user_id = null ) {
@@ -539,9 +539,9 @@ function helper_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAG
 /**
  * if all projects selected, default to <prefix><username><suffix><extension>, otherwise default to
  * <prefix><projectname><suffix><extension>.
- * @param string $p_extension_with_dot
- * @param string $p_prefix
- * @param string $p_suffix
+ * @param string $p_extension_with_dot File name Extension.
+ * @param string $p_prefix             File name Prefix.
+ * @param string $p_suffix             File name suffix.
  * @return string
  */
 function helper_get_default_export_filename( $p_extension_with_dot, $p_prefix = '', $p_suffix = '' ) {
@@ -560,11 +560,11 @@ function helper_get_default_export_filename( $p_extension_with_dot, $p_prefix = 
 
 /**
  * returns a tab index value and increments it by one.  This is used to give sequential tab index on a form.
- * @return int
+ * @return integer
  */
 function helper_get_tab_index_value() {
-	static $tab_index = 0;
-	return ++$tab_index;
+	static $s_tab_index = 0;
+	return ++$s_tab_index;
 }
 
 /**
@@ -578,7 +578,7 @@ function helper_get_tab_index() {
 
 /**
  * returns a boolean indicating whether SQL queries executed should be shown or not.
- * @return bool
+ * @return boolean
  */
 function helper_log_to_page() {
 	# Check is authenticated before checking access level, otherwise user gets
@@ -588,7 +588,7 @@ function helper_log_to_page() {
 
 /**
  * returns a boolean indicating whether SQL queries executed should be shown or not.
- * @return bool
+ * @return boolean
  */
 function helper_show_query_count() {
 	return ON == config_get( 'show_queries_count' );
@@ -596,7 +596,7 @@ function helper_show_query_count() {
 
 /**
  * Return a URL relative to the web root, compatible with other applications
- * @param string $p_url
+ * @param string $p_url A relative URL to a page within Mantis.
  * @return string
  */
 function helper_mantis_url( $p_url ) {
@@ -608,8 +608,8 @@ function helper_mantis_url( $p_url ) {
 
 /**
  * convert a duration string in "[h]h:mm" to an integer (minutes)
- * @param string $p_hhmm
- * @return int
+ * @param string $p_hhmm A string in [h]h:mm format to convert.
+ * @return integer
  */
 function helper_duration_to_minutes( $p_hhmm ) {
 	if( is_blank( $p_hhmm ) ) {
@@ -628,13 +628,13 @@ function helper_duration_to_minutes( $p_hhmm ) {
 	$t_count = count( $t_a );
 	for( $i = 0;$i < $t_count;$i++ ) {
 		# all time parts should be integers and non-negative.
-		if( !is_numeric( $t_a[$i] ) || ( (integer) $t_a[$i] < 0 ) ) {
+		if( !is_numeric( $t_a[$i] ) || ( (integer)$t_a[$i] < 0 ) ) {
 			error_parameters( 'p_hhmm', $p_hhmm );
 			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
 		}
 
 		# minutes and seconds are not allowed to exceed 59.
-		if(( $i > 0 ) && ( $t_a[$i] > 59 ) ) {
+		if( ( $i > 0 ) && ( $t_a[$i] > 59 ) ) {
 			error_parameters( 'p_hhmm', $p_hhmm );
 			trigger_error( ERROR_CONFIG_OPT_INVALID, ERROR );
 		}
@@ -642,20 +642,20 @@ function helper_duration_to_minutes( $p_hhmm ) {
 
 	switch( $t_count ) {
 		case 1:
-			$t_min = (integer) $t_a[0];
+			$t_min = (integer)$t_a[0];
 			break;
 		case 2:
-			$t_min = (integer) $t_a[0] * 60 + (integer) $t_a[1];
+			$t_min = (integer)$t_a[0] * 60 + (integer)$t_a[1];
 			break;
 		case 3:
 			# if seconds included, approximate it to minutes
-			$t_min = (integer) $t_a[0] * 60 + (integer) $t_a[1];
+			$t_min = (integer)$t_a[0] * 60 + (integer)$t_a[1];
 
-			if( (integer) $t_a[2] >= 30 ) {
+			if( (integer)$t_a[2] >= 30 ) {
 				$t_min++;
 			}
 			break;
 	}
 
-	return (int) $t_min;
+	return (int)$t_min;
 }

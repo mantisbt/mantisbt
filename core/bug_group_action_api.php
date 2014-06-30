@@ -44,11 +44,12 @@ require_css( 'status_config.php' );
 
 /**
  * Initialise bug action group api
- * @param string $p_action custom action to run
+ * @param string $p_action Custom action to run.
+ * @return void
  */
 function bug_group_action_init( $p_action ) {
 	$t_valid_actions = bug_group_action_get_commands( current_user_get_accessible_projects() );
-	$t_action = strtoupper($p_action);
+	$t_action = strtoupper( $p_action );
 
 	if( !isset( $t_valid_actions[$t_action] ) &&
 		!isset( $t_valid_actions['EXT_' . $t_action] )
@@ -66,6 +67,7 @@ function bug_group_action_init( $p_action ) {
 
 /**
  * Print the top part for the bug action group page.
+ * @return void
  */
 function bug_group_action_print_top() {
 	html_page_top();
@@ -73,6 +75,7 @@ function bug_group_action_print_top() {
 
 /**
  * Print the bottom part for the bug action group page.
+ * @return void
  */
 function bug_group_action_print_bottom() {
 	html_page_bottom();
@@ -82,8 +85,9 @@ function bug_group_action_print_bottom() {
  * Print the list of selected issues and the legend for the status colors.
  *
  * @param array $p_bug_ids_array An array of issue ids.
+ * @return void
  */
-function bug_group_action_print_bug_list( $p_bug_ids_array ) {
+function bug_group_action_print_bug_list( array $p_bug_ids_array ) {
 	$t_legend_position = config_get( 'status_legend_position' );
 
 	if( STATUS_LEGEND_POSITION_TOP == $t_legend_position ) {
@@ -103,9 +107,9 @@ function bug_group_action_print_bug_list( $p_bug_ids_array ) {
 
 	foreach( $p_bug_ids_array as $t_bug_id ) {
 		# choose color based on status
-		$status_label = html_get_status_css_class( bug_get_field( $t_bug_id, 'status' ), auth_get_current_user_id(), bug_get_field( $t_bug_id, 'project_id' ) );
+		$t_status_label = html_get_status_css_class( bug_get_field( $t_bug_id, 'status' ), auth_get_current_user_id(), bug_get_field( $t_bug_id, 'project_id' ) );
 
-		echo sprintf( "<tr class=\"%s\"> <td>%s</td> <td>%s</td> </tr>\n", $status_label, string_get_bug_view_link( $t_bug_id ), string_attribute( bug_get_field( $t_bug_id, 'summary' ) ) );
+		echo sprintf( "<tr class=\"%s\"> <td>%s</td> <td>%s</td> </tr>\n", $t_status_label, string_get_bug_view_link( $t_bug_id ), string_attribute( bug_get_field( $t_bug_id, 'summary' ) ) );
 	}
 
 	echo '</table>';
@@ -122,8 +126,9 @@ function bug_group_action_print_bug_list( $p_bug_ids_array ) {
  * the bug action group action page.
  *
  * @param array $p_bug_ids_array An array of issue ids.
+ * @return void
  */
-function bug_group_action_print_hidden_fields( $p_bug_ids_array ) {
+function bug_group_action_print_hidden_fields( array $p_bug_ids_array ) {
 	foreach( $p_bug_ids_array as $t_bug_id ) {
 		echo '<input type="hidden" name="bug_arr[]" value="' . $t_bug_id . '" />' . "\n";
 	}
@@ -135,6 +140,7 @@ function bug_group_action_print_hidden_fields( $p_bug_ids_array ) {
  * from bug_actiongroup_<action>_inc.php
  *
  * @param string $p_action The custom action name without the "EXT_" prefix.
+ * @return void
  */
 function bug_group_action_print_action_fields( $p_action ) {
 	$t_function_name = 'action_' . $p_action . '_print_fields';
@@ -146,6 +152,7 @@ function bug_group_action_print_action_fields( $p_action ) {
  * action_<action>_print_title() from bug_actiongroup_<action>_inc.php
  *
  * @param string $p_action The custom action name without the "EXT_" prefix.
+ * @return void
  */
 function bug_group_action_print_title( $p_action ) {
 	$t_function_name = 'action_' . $p_action . '_print_title';
@@ -156,10 +163,10 @@ function bug_group_action_print_title( $p_action ) {
  * Validates the combination of an action and a bug.  This ends up calling
  * action_<action>_validate() from bug_actiongroup_<action>_inc.php
  *
- * @param string $p_action The custom action name without the "EXT_" prefix.
- * @param int $p_bug_id The id of the bug to validate the action on.
+ * @param string  $p_action The custom action name without the "EXT_" prefix.
+ * @param integer $p_bug_id The id of the bug to validate the action on.
  *
- * @returns bool|array true if action can be applied or array of ( bug_id => reason for failure to validate )
+ * @return boolean|array true if action can be applied or array of ( bug_id => reason for failure to validate )
  */
 function bug_group_action_validate( $p_action, $p_bug_id ) {
 	$t_function_name = 'action_' . $p_action . '_validate';
@@ -170,9 +177,9 @@ function bug_group_action_validate( $p_action, $p_bug_id ) {
  * Executes an action on a bug.  This ends up calling
  * action_<action>_process() from bug_actiongroup_<action>_inc.php
  *
- * @param string $p_action The custom action name without the "EXT_" prefix.
- * @param int $p_bug_id The id of the bug to validate the action on.
- * @returns bool|array Action can be applied., ( bug_id => reason for failure to process )
+ * @param string  $p_action The custom action name without the "EXT_" prefix.
+ * @param integer $p_bug_id The id of the bug to validate the action on.
+ * @return boolean|array Action can be applied., ( bug_id => reason for failure to process )
  */
 function bug_group_action_process( $p_action, $p_bug_id ) {
 	$t_function_name = 'action_' . $p_action . '_process';
@@ -182,10 +189,10 @@ function bug_group_action_process( $p_action, $p_bug_id ) {
 /**
  * Get a list of bug group actions available to the current user for one or
  * more projects.
- * @param array $p_project_ids An array containing one or more project IDs
- * @return null
+ * @param array $p_project_ids An array containing one or more project IDs.
+ * @return array
  */
-function bug_group_action_get_commands( $p_project_ids = null ) {
+function bug_group_action_get_commands( array $p_project_ids = null ) {
 	if( $p_project_ids === null || count( $p_project_ids ) == 0 ) {
 		$p_project_ids = array( ALL_PROJECTS );
 	}

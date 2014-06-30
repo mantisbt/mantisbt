@@ -37,9 +37,6 @@
  * @uses user_api.php
  */
 
-/**
- * MantisBT Core API's
- */
 require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -57,7 +54,7 @@ require_api( 'user_api.php' );
 
 access_ensure_global_level( config_get( 'view_configuration_threshold' ) );
 
-$t_read_write_access = access_has_global_level( config_get('set_configuration_threshold' ) );
+$t_read_write_access = access_has_global_level( config_get( 'set_configuration_threshold' ) );
 
 html_page_top( lang_get( 'configuration_report' ) );
 
@@ -74,7 +71,7 @@ $t_config_types = array(
 
 /**
  * returns the configuration type for a given configuration type id
- * @param int $p_type configuration type id to check
+ * @param integer $p_type Configuration type identifier to check.
  * @return string configuration type
  */
 function get_config_type( $p_type ) {
@@ -89,10 +86,10 @@ function get_config_type( $p_type ) {
 
 /**
  * Display a given config value appropriately
- * @param int $p_type configuration type id
- * @param mixed $p_value configuration value
- * @param bool $p_for_display whether to pass the value via string attribute for web browser display
- * @return null
+ * @param integer $p_type        Configuration type id.
+ * @param mixed   $p_value       Configuration value.
+ * @param boolean $p_for_display Whether to pass the value via string attribute for web browser display.
+ * @return void
  */
 function print_config_value_as_string( $p_type, $p_value, $p_for_display = true ) {
 	$t_corrupted = false;
@@ -139,11 +136,11 @@ function print_config_value_as_string( $p_type, $p_value, $p_for_display = true 
 
 /**
  * Generate an html option list for the given array
- * @param array $p_array
- * @param string $p_filter_value the selected value
- * @return null
+ * @param array  $p_array        Array.
+ * @param string $p_filter_value The selected value.
+ * @return void
  */
-function print_option_list_from_array( $p_array, $p_filter_value ) {
+function print_option_list_from_array( array $p_array, $p_filter_value ) {
 	foreach( $p_array as $t_key => $t_value ) {
 		echo "<option value='$t_key'";
 		check_selected( (string)$p_filter_value, (string)$t_key );
@@ -210,18 +207,16 @@ $t_config_table  = db_get_table( 'config' );
 $t_project_table = db_get_table( 'project' );
 
 # Get users in db having specific configs
-$query = "SELECT DISTINCT user_id
-	FROM $t_config_table
-	WHERE user_id <> " . db_param() ;
-$t_result = db_query_bound( $query, array( ALL_USERS ) );
+$t_query = "SELECT DISTINCT user_id FROM $t_config_table WHERE user_id <> " . db_param() ;
+$t_result = db_query_bound( $t_query, array( ALL_USERS ) );
 if( $t_filter_user_value != META_FILTER_NONE && $t_filter_user_value != ALL_USERS ) {
 	# Make sure the filter value exists in the list
 	$t_users_list[$t_filter_user_value] = user_get_name( $t_filter_user_value );
 } else {
 	$t_users_list = array();
 }
-while( $row = db_fetch_array( $t_result ) ) {
-	$t_user_id = $row['user_id'];
+while( $t_row = db_fetch_array( $t_result ) ) {
+	$t_user_id = $t_row['user_id'];
 	$t_users_list[$t_user_id] = user_get_name( $t_user_id );
 }
 asort( $t_users_list );
@@ -233,31 +228,29 @@ $t_users_list = array(
 	+ $t_users_list;
 
 # Get projects in db with specific configs
-$query = "SELECT DISTINCT project_id, pt.name as project_name
+$t_query = "SELECT DISTINCT project_id, pt.name as project_name
 	FROM $t_config_table as ct
 	JOIN $t_project_table as pt ON pt.id = ct.project_id
 	WHERE project_id!=0
 	ORDER BY project_name";
-$t_result = db_query_bound( $query );
+$t_result = db_query_bound( $t_query );
 $t_projects_list[META_FILTER_NONE] = '[' . lang_get( 'any' ) . ']';
 $t_projects_list[ALL_PROJECTS] = lang_get( 'all_projects' );
-while( $row = db_fetch_array( $t_result ) ) {
-	extract( $row, EXTR_PREFIX_ALL, 'v' );
+while( $t_row = db_fetch_array( $t_result ) ) {
+	extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 	$t_projects_list[$v_project_id] = $v_project_name;
 }
 
 # Get config list used in db
-$query = "SELECT DISTINCT config_id
-	FROM $t_config_table
-	ORDER BY config_id";
-$t_result = db_query_bound( $query );
+$t_query = "SELECT DISTINCT config_id FROM $t_config_table ORDER BY config_id";
+$t_result = db_query_bound( $t_query );
 $t_configs_list[META_FILTER_NONE] = '[' . lang_get( 'any' ) . ']';
 if( $t_filter_config_value != META_FILTER_NONE ) {
 	# Make sure the filter value exists in the list
 	$t_configs_list[$t_filter_config_value] = $t_filter_config_value;
 }
-while( $row = db_fetch_array( $t_result ) ) {
-	extract( $row, EXTR_PREFIX_ALL, 'v' );
+while( $t_row = db_fetch_array( $t_result ) ) {
+	extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 	$t_configs_list[$v_config_id] = $v_config_id;
 }
 
@@ -280,11 +273,11 @@ if( $t_where != '' ) {
 	$t_where = " WHERE 1=1 " . $t_where;
 }
 
-$query = "SELECT config_id, user_id, project_id, type, value, access_reqd
+$t_query = "SELECT config_id, user_id, project_id, type, value, access_reqd
 	FROM $t_config_table
 	$t_where
 	ORDER BY user_id, project_id, config_id ";
-$t_result = db_query_bound( $query, $t_param );
+$t_result = db_query_bound( $t_query, $t_param );
 ?>
 
 <!-- FILTER FORM -->
@@ -377,8 +370,8 @@ $t_result = db_query_bound( $query, $t_param );
 # db contains a large number of configurations
 $t_form_security_token = form_security_token( 'adm_config_delete' );
 
-while( $row = db_fetch_array( $t_result ) ) {
-	extract( $row, EXTR_PREFIX_ALL, 'v' );
+while( $t_row = db_fetch_array( $t_result ) ) {
+	extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
 ?>
 <!-- Repeated Info Rows -->
@@ -408,8 +401,7 @@ while( $row = db_fetch_array( $t_result ) ) {
 					'type'          => $v_type,
 					'value'         => $v_value,
 				),
-				OFF
-			);
+				OFF );
 
 			# Delete button
 			print_button(
@@ -420,8 +412,7 @@ while( $row = db_fetch_array( $t_result ) ) {
 					'project_id'    => $v_project_id,
 					'config_option' => $v_config_id,
 				),
-				$t_form_security_token
-			);
+				$t_form_security_token );
 		} else {
 			echo '&#160;';
 		}

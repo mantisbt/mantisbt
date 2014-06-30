@@ -19,13 +19,12 @@
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  * @package MantisBT
+ * @subpackage classes
  */
 
 /**
  * Base class that implements basic filter functionality
  * and integration with MantisBT.
- * @package MantisBT
- * @subpackage classes
  */
 abstract class MantisFilter {
 
@@ -63,8 +62,8 @@ abstract class MantisFilter {
 	 * Validate the filter input, returning true if input is
 	 * valid, or returning false if invalid.  Invalid inputs will
 	 * be replaced with the filter's default value.
-	 * @param mixed $p_filter_input Filter field input
-	 * @return bool Input valid (true) or invalid (false)
+	 * @param mixed $p_filter_input Filter field input.
+	 * @return boolean Input valid (true) or invalid (false)
 	 */
 	public function validate( $p_filter_input ) {
 		return true;
@@ -73,14 +72,14 @@ abstract class MantisFilter {
 	/**
 	 * Build the SQL query elements 'join', 'where', and 'params'
 	 * as used by core/filter_api.php to create the filter query.
-	 * @param mixed $p_filter_input Filter field input
+	 * @param mixed $p_filter_input Filter field input.
 	 * @return array Keyed-array with query elements; see developer guide
 	 */
 	abstract function query( $p_filter_input );
 
 	/**
 	 * Display the current value of the filter field.
-	 * @param mixed $p_filter_value Filter field input
+	 * @param mixed $p_filter_value Filter field input.
 	 * @return string Current value output
 	 */
 	abstract function display( $p_filter_value );
@@ -90,6 +89,8 @@ abstract class MantisFilter {
 	 * filter options, not including an 'any' value.
 	 * @return array Filter options keyed by value=>display
 	 */
-	public function options() {}
+	public function options() {
+		return array()
+	}
 }
 

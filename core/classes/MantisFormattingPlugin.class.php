@@ -20,17 +20,16 @@
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  * @package MantisBT
+ * @subpackage classes
  */
 
 /**
  * Abstract class for any plugin that's modifying textual output.
- * @package MantisBT
- * @subpackage classes
  */
 abstract class MantisFormattingPlugin extends MantisPlugin {
-
 	/**
 	 * Event hook declaration.
+	 * @return array
 	 */
 	function hooks() {
 		return array(
@@ -43,9 +42,9 @@ abstract class MantisFormattingPlugin extends MantisPlugin {
 
 	/**
 	 * Plain text processing.
-	 * @param string $p_event Event name
-	 * @param string $p_string Un-formatted text
-	 * @param bool $p_multiline Multi-line text
+	 * @param string  $p_event     Event name.
+	 * @param string  $p_string    Un-formatted text.
+	 * @param boolean $p_multiline Multi-line text.
 	 * @return string plain text
 	 */
 	function text( $p_event, $p_string, $p_multiline = true ) {
@@ -54,9 +53,9 @@ abstract class MantisFormattingPlugin extends MantisPlugin {
 
 	/**
 	 * Formatted text processing.
-	 * @param string $p_event Event name
-	 * @param string $p_string Un-formatted text
-	 * @param bool $p_multiline Multi-line text
+	 * @param string  $p_event     Event name.
+	 * @param string  $p_string    Un-formatted text.
+	 * @param boolean $p_multiline Multi-line text.
 	 * @return string formatted text
 	 */
 	function formatted( $p_event, $p_string, $p_multiline = true ) {
@@ -65,9 +64,9 @@ abstract class MantisFormattingPlugin extends MantisPlugin {
 
 	/**
 	 * RSS text processing.
-	 * @param string $p_event Event name
-	 * @param string $p_string Un-formatted text
-	 * @return string Formatted RSS text
+	 * @param string $p_event  Event name.
+	 * @param string $p_string Un-formatted text.
+	 * @return string Formatted RSS text.
 	 */
 	function rss( $p_event, $p_string ) {
 		return $p_string;
@@ -75,8 +74,8 @@ abstract class MantisFormattingPlugin extends MantisPlugin {
 
 	/**
 	 * Email text processing.
-	 * @param string $p_event Event name
-	 * @param string $p_string Un-formatted text
+	 * @param string $p_event  Event name.
+	 * @param string $p_string Un-formatted text.
 	 * @return string Formatted email text
 	 */
 	function email( $p_event, $p_string ) {

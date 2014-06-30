@@ -32,6 +32,13 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 	private $old_status;
 	private $new_status;
 
+	/**
+	 * @param integer $p_timestamp  Timestamp representing the time the event occurred.
+	 * @param integer $p_user_id    An user identifier.
+	 * @param integer $p_issue_id   A issue identifier.
+	 * @param integer $p_old_status Old status value of issue.
+	 * @param integer $p_new_status New status value of issue.
+	 */
 	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_old_status, $p_new_status ) {
 		parent::__construct( $p_timestamp, $p_user_id, $p_issue_id );
 
@@ -40,6 +47,10 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 		$this->new_status = $p_new_status;
 	}
 
+	/**
+	 * Returns html string to display
+	 * @return string
+	 */
 	public function html() {
 		$t_resolved = config_get( 'bug_resolved_status_threshold' );
 		$t_closed = config_get( 'bug_closed_status_threshold' );
@@ -51,7 +62,7 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 		} else if( $this->old_status >= $t_resolved && $this->new_status < $t_resolved ) {
 			$t_string = sprintf( lang_get( 'timeline_issue_reopened' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
 		} else {
-			return;
+			return '';
 		}
 
 		$t_html = $this->html_start();

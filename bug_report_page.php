@@ -170,9 +170,9 @@ if( $f_master_bug_id > 0 ) {
 	$f_summary				= gpc_get_string( 'summary', '' );
 	$f_description			= gpc_get_string( 'description', '' );
 	$f_steps_to_reproduce	= gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
-	$f_additional_info		= gpc_get_string( 'additional_info', config_get ( 'default_bug_additional_info' ) );
+	$f_additional_info		= gpc_get_string( 'additional_info', config_get( 'default_bug_additional_info' ) );
 	$f_view_state			= gpc_get_int( 'view_state', (int)config_get( 'default_bug_view_status' ) );
-	$f_due_date				= gpc_get_string( 'due_date', '');
+	$f_due_date				= gpc_get_string( 'due_date', '' );
 
 	if( $f_due_date == '' ) {
 		$f_due_date = date_get_null();
@@ -182,8 +182,8 @@ if( $f_master_bug_id > 0 ) {
 }
 
 $f_report_stay			= gpc_get_bool( 'report_stay', false );
-$f_copy_notes_from_parent         = gpc_get_bool( 'copy_notes_from_parent', false);
-$f_copy_attachments_from_parent   = gpc_get_bool( 'copy_attachments_from_parent', false);
+$f_copy_notes_from_parent         = gpc_get_bool( 'copy_notes_from_parent', false );
+$f_copy_attachments_from_parent   = gpc_get_bool( 'copy_attachments_from_parent', false );
 
 $t_fields = config_get( 'bug_report_page_fields' );
 $t_fields = columns_filter_disabled( $t_fields );
@@ -348,7 +348,7 @@ print_recently_visited();
 			<label for="profile_id"><?php echo lang_get( 'select_profile' ) ?></label>
 		</th>
 		<td>
-			<?php if( count(profile_get_all_for_user( auth_get_current_user_id() )) > 0 ) { ?>
+			<?php if( count( profile_get_all_for_user( auth_get_current_user_id() ) ) > 0 ) { ?>
 				<select <?php echo helper_get_tab_index() ?> id="profile_id" name="profile_id">
 					<?php print_profile_option_list( auth_get_current_user_id(), $f_profile_id ) ?>
 				</select>
@@ -358,7 +358,7 @@ print_recently_visited();
 	<tr>
 		<td colspan="2" class="none">
 			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_open( 'profile' ); collapse_icon('profile'); ?>
+				<?php collapse_open( 'profile' ); collapse_icon( 'profile' ); ?>
 				<?php echo lang_get( 'or_fill_in' ); ?>
 			<table class="width100" cellspacing="0">
 					<?php } else { ?>
@@ -393,7 +393,7 @@ print_recently_visited();
 							</select>
 							<?php
 								} else {
-									echo '<input type="text" id="os" name="os" class="autocomplete" size="32" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_os) . '" />';
+									echo '<input type="text" id="os" name="os" class="autocomplete" size="32" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_os ) . '" />';
 								}
 							?>
 						</td>
@@ -419,7 +419,7 @@ print_recently_visited();
 					</tr>
 			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
 			</table>
-			<?php collapse_closed( 'profile' ); collapse_icon('profile'); echo lang_get( 'or_fill_in' );?>
+			<?php collapse_closed( 'profile' ); collapse_icon( 'profile' ); echo lang_get( 'or_fill_in' );?>
 			<?php collapse_end( 'profile' ); ?>
 		<?php } ?>
 		</td>
@@ -484,11 +484,10 @@ print_recently_visited();
 				config_get( 'bug_submit_status' ),
 				true,
 				ON == config_get( 'allow_reporter_close' ),
-				$t_project_id
-			);
+				$t_project_id );
 			foreach ( $resolution_options as $key => $value ) {
 			?>
-				<option value="<?php echo $key ?>" <?php check_selected( $key, config_get( 'bug_submit_status') ); ?> >
+				<option value="<?php echo $key ?>" <?php check_selected( $key, config_get( 'bug_submit_status' ) ); ?> >
 					<?php echo $value ?>
 				</option>
 			<?php } ?>
@@ -576,10 +575,10 @@ print_recently_visited();
 ?>
 	<tr>
 		<th class="category">
-			<?php if($t_def['require_report']) {?><span class="required">*</span><?php } ?>
+			<?php if( $t_def['require_report'] ) {?><span class="required">*</span><?php } ?>
 			<?php if( $t_def['type'] != CUSTOM_FIELD_TYPE_RADIO && $t_def['type'] != CUSTOM_FIELD_TYPE_CHECKBOX ) { ?>
 			<label for="custom_field_<?php echo string_attribute( $t_def['id'] ) ?>"><?php echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?></label>
-			<?php } else echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?>
+			<?php } else { echo string_display( lang_get_defaulted( $t_def['name'] ) ); } ?>
 		</th>
 		<td>
 			<?php print_custom_field_input( $t_def, ( $f_master_bug_id === 0 ) ? null : $f_master_bug_id ) ?>

@@ -34,9 +34,6 @@
  * @uses utility_api.php
  */
 
-/**
- * MantisBT Core API's
- */
 require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
@@ -103,10 +100,10 @@ switch( $t_type ) {
 		$t_value = $f_value;
 		break;
 	case CONFIG_TYPE_INT:
-		$t_value = (integer) constant_replace( trim( $f_value ) );
+		$t_value = (integer)constant_replace( trim( $f_value ) );
 		break;
 	case CONFIG_TYPE_FLOAT:
-		$t_value = (float) constant_replace( trim( $f_value ) );
+		$t_value = (float)constant_replace( trim( $f_value ) );
 		break;
 	case CONFIG_TYPE_COMPLEX:
 	default:
@@ -130,8 +127,8 @@ print_successful_redirect( 'adm_config_report.php' );
  * 4. multi-dimensional arrays
  * commas and '=>' within strings are handled
  *
- * @param string $p_value Complex value to process
- * @param bool $p_trimquotes
+ * @param string  $p_value      Complex value to process.
+ * @param boolean $p_trimquotes Whether to trim quotes.
  * @return parsed variable
  */
 function process_complex_value( $p_value, $p_trimquotes = false ) {
@@ -173,13 +170,13 @@ function process_complex_value( $p_value, $p_trimquotes = false ) {
 		$t_processed = array();
 
 		if( preg_match_all( "/$s_regex_element/", $t_match[1], $t_elements ) ) {
-			foreach( $t_elements[0] as $key => $element ) {
-				if( !trim( $element ) ) {
+			foreach( $t_elements[0] as $t_key => $t_element ) {
+				if( !trim( $t_element ) ) {
 					# Empty element - skip it
 					continue;
 				}
 				# Check if element is associative array
-				preg_match_all( "/($s_regex_string)\s*=>\s*(.*)/", $element, $t_split );
+				preg_match_all( "/($s_regex_string)\s*=>\s*(.*)/", $t_element, $t_split );
 				if( !empty( $t_split[0] ) ) {
 					# associative array
 					$t_new_key = constant_replace( trim( $t_split[1][0], " \t\n\r\0\x0B\"'" ) );
@@ -187,8 +184,8 @@ function process_complex_value( $p_value, $p_trimquotes = false ) {
 					$t_processed[$t_new_key] = $t_new_value;
 				} else {
 					# regular array
-					$t_new_value = process_complex_value( $element );
-					$t_processed[$key] = $t_new_value;
+					$t_new_value = process_complex_value( $t_element );
+					$t_processed[$t_key] = $t_new_value;
 				}
 			}
 		}
@@ -205,40 +202,40 @@ function process_complex_value( $p_value, $p_trimquotes = false ) {
 /**
  * Split by commas, but ignore commas that are within quotes or parenthesis.
  * Ignoring commas within parenthesis helps allow for multi-dimensional arrays.
- * @param $p_string string to split
+ * @param string $p_string String to split.
  * @return array
  */
 function special_split ( $p_string ) {
 	$t_values = array();
 	$t_array_element = "";
 	$t_paren_level = 0;
-	$t_inside_quote = False;
-	$t_escape_next = False;
+	$t_inside_quote = false;
+	$t_escape_next = false;
 
-	foreach( str_split( trim( $p_string ) ) as $character ) {
+	foreach( str_split( trim( $p_string ) ) as $t_character ) {
 		if( $t_escape_next ) {
-			$t_array_element .= $character;
-			$t_escape_next = False;
-		} else if( $character == "," && $t_paren_level==0 && !$t_inside_quote ) {
+			$t_array_element .= $t_character;
+			$t_escape_next = false;
+		} else if( $t_character == "," && $t_paren_level==0 && !$t_inside_quote ) {
 			array_push( $t_values, $t_array_element );
 			$t_array_element = "";
 		} else {
-			if( $character == "(" && !$t_inside_quote ) {
-				$t_paren_level ++;
-			} else if( $character == ")" && !$t_inside_quote ) {
-				$t_paren_level --;
-			} else if( $character == "'" ) {
+			if( $t_character == "(" && !$t_inside_quote ) {
+				$t_paren_level++;
+			} else if( $t_character == ")" && !$t_inside_quote ) {
+				$t_paren_level--;
+			} else if( $t_character == "'" ) {
 				$t_inside_quote = !$t_inside_quote;
-			} else if( $character == "\\" ) {
+			} else if( $t_character == "\\" ) {
 				# escape character
 				$t_escape_next = true;
 				# keep the escape if the string will be going through another recursion
 				if( $t_paren_level > 0 ) {
-					$t_array_element .= $character;
+					$t_array_element .= $t_character;
 				}
 				continue;
 			}
-			$t_array_element .= $character;
+			$t_array_element .= $t_character;
 		}
 	}
 	array_push( $t_values, $t_array_element );
@@ -249,7 +246,7 @@ function special_split ( $p_string ) {
 /**
  * Check if the passed string is a constant and returns its value
  * if yes, or the string itself if not
- * @param $p_name string to check
+ * @param string $p_name String to check.
  * @return mixed|string value of constant $p_name, or $p_name itself
  */
 function constant_replace( $p_name ) {

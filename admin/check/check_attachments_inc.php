@@ -32,9 +32,7 @@ if( !defined( 'CHECK_ATTACHMENTS_INC_ALLOW' ) ) {
 	return;
 }
 
-/**
- * MantisBT Check API
- */
+# MantisBT Check API
 require_once( 'check_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -86,8 +84,7 @@ if( $t_use_xsendfile ) {
 	if( $t_xsendfile_header_name !== 'X-Sendfile' ) {
 		check_print_info_row(
 			'Alternative header name to use for X-Sendfile-like functionality',
-			$t_xsendfile_header_name
-		);
+			$t_xsendfile_header_name );
 	}
 }
 
@@ -103,12 +100,10 @@ if( $t_finfo_exists ) {
 	if( $t_fileinfo_magic_db_file ) {
 		check_print_info_row(
 			'Name of magic.db file set with the fileinfo_magic_db_file configuration value',
-			config_get_global( 'fileinfo_magic_db_file' )
-		);
+			config_get_global( 'fileinfo_magic_db_file' ) );
 		check_print_test_row(
 			'fileinfo_magic_db_file configuration value points to an existing magic.db file',
-			file_exists( $t_fileinfo_magic_db_file )
-		);
+			file_exists( $t_fileinfo_magic_db_file ) );
 		$t_finfo = new finfo( FILEINFO_MIME, $t_fileinfo_magic_db_file );
 	} else {
 		$t_finfo = new finfo( FILEINFO_MIME );

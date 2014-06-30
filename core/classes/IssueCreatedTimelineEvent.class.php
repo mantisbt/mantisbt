@@ -30,12 +30,21 @@
 class IssueCreatedTimelineEvent extends TimelineEvent {
 	private $issue_id;
 
+	/**
+	 * @param integer $p_timestamp Timestamp representing the time the event occurred.
+	 * @param integer $p_user_id   An user identifier.
+	 * @param integer $p_issue_id  A issue identifier.
+	 */
 	public function __construct( $p_timestamp, $p_user_id, $p_issue_id ) {
 		parent::__construct( $p_timestamp, $p_user_id, $p_issue_id );
 
 		$this->issue_id = $p_issue_id;
 	}
 
+	/**
+	 * Returns html string to display
+	 * @return string
+	 */
 	public function html() {
 		$t_html = $this->html_start();
 		$t_html .= '<div class="action">' . sprintf( lang_get( 'timeline_issue_created' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) ) . '</div>';

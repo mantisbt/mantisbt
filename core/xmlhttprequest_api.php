@@ -42,11 +42,11 @@ require_api( 'profile_api.php' );
 
 /**
  * Filter a set of strings by finding strings that start with a case-insensitive prefix.
- * @param array $p_set An array of strings to search through.
+ * @param array  $p_set    An array of strings to search through.
  * @param string $p_prefix The prefix to filter by.
  * @return array An array of strings which match the supplied prefix.
  */
-function xmlhttprequest_filter_by_prefix( $p_set, $p_prefix ) {
+function xmlhttprequest_filter_by_prefix( array $p_set, $p_prefix ) {
 	$t_matches = array();
 	foreach ( $p_set as $p_item ) {
 		if( utf8_strtolower( utf8_substr( $p_item, 0, utf8_strlen( $p_prefix ) ) ) === utf8_strtolower( $p_prefix ) ) {
@@ -57,8 +57,8 @@ function xmlhttprequest_filter_by_prefix( $p_set, $p_prefix ) {
 }
 
 /**
- * Echos a serialized list of platforms starting with the prefix specified in the $_POST
- * @return null
+ * Outputs a serialized list of platforms starting with the prefix specified in the $_POST
+ * @return void
  * @access public
  */
 function xmlhttprequest_platform_get_with_prefix() {
@@ -71,8 +71,8 @@ function xmlhttprequest_platform_get_with_prefix() {
 }
 
 /**
- * Echos a serialized list of OSes starting with the prefix specified in the $_POST
- * @return null
+ * Outputs a serialized list of Operating Systems starting with the prefix specified in the $_POST
+ * @return void
  * @access public
  */
 function xmlhttprequest_os_get_with_prefix() {
@@ -85,8 +85,8 @@ function xmlhttprequest_os_get_with_prefix() {
 }
 
 /**
- * Echos a serialized list of OS Versions starting with the prefix specified in the $_POST
- * @return null
+ * Outputs a serialized list of Operating System Versions starting with the prefix specified in the $_POST
+ * @return void
  * @access public
  */
 function xmlhttprequest_os_build_get_with_prefix() {

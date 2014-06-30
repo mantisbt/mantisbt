@@ -55,7 +55,7 @@ require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 
-form_security_validate('account_update');
+form_security_validate( 'account_update' );
 
 $t_user_id = auth_get_current_user_id();
 
@@ -78,7 +78,7 @@ $f_password_confirm	= gpc_get_string( 'password_confirm', '' );
 
 $t_redirect_url = 'index.php';
 
-/** @todo Listing what fields were updated is not standard behaviour of MantisBT - it also complicates the code. */
+# @todo Listing what fields were updated is not standard behaviour of MantisBT - it also complicates the code.
 $t_email_updated = false;
 $t_password_updated = false;
 $t_realname_updated = false;
@@ -125,7 +125,7 @@ if( !is_blank( $f_password ) ) {
 	}
 }
 
-form_security_purge('account_update');
+form_security_purge( 'account_update' );
 
 # Clear the verification token
 if( $t_account_verification ) {

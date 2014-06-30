@@ -25,9 +25,9 @@
 
 /**
  * Get config string
- * @param string $p_username username
- * @param string $p_password password
- * @param string $p_config_var config variable
+ * @param string $p_username   Username.
+ * @param string $p_password   Password.
+ * @param string $p_config_var A configuration variable.
  * @return mixed
  */
 function mc_config_get_string( $p_username, $p_password, $p_config_var ) {

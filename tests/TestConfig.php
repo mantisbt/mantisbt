@@ -26,19 +26,18 @@
 # Start output buffering
 ob_start();
 
-/**
- * Include PHPUnit dependencies ; ensure compatibility with 3.5 and 3.6
- */
+# Include PHPUnit dependencies ; ensure compatibility with 3.5 and 3.6
 @include_once 'PHPUnit/Framework.php';
 
 
 /**
  * Parse file and retrieve distinct T_VARIABLE tokens with 'g_' prefix
- * @param string $p_file
- * @param array $p_var_list
- * @return bool false if file can't be parsed
+ *
+ * @param string $p_file      Configuration filename.
+ * @param array  &$p_var_list An array of variables to update.
+ * @return boolean false if file can't be parsed
  */
-function parse_config_global_vars( $p_file, &$p_var_list ) {
+function parse_config_global_vars( $p_file, array &$p_var_list ) {
 	# Parse the file
 	$t_contents = file_get_contents( $p_file, true );
 	if( false === $t_contents ) {
@@ -52,7 +51,7 @@ function parse_config_global_vars( $p_file, &$p_var_list ) {
 
 	# Store all distinct T_VARIABLE tokens with 'g_' prefix
 	foreach( $t_tokens as $t ) {
-		if( is_array($t) && $t[0] == T_VARIABLE ) {
+		if( is_array( $t ) && $t[0] == T_VARIABLE ) {
 			$t_var = ltrim( $t[1], '$' );
 			if( substr( $t_var, 0, 2 ) == 'g_' ) {
 				$p_var_list[$t_var] = $t_var;
@@ -72,8 +71,11 @@ function parse_config_global_vars( $p_file, &$p_var_list ) {
  * This is required because when running PHPUnit, config_defaults_inc.php is
  * not in the global scope, therefore 'global' variables are not properly
  * initialized.
+ *
+ * @return void
  */
 function require_mantis_core() {
+	$t_var_list = array();
 	parse_config_global_vars( 'config_defaults_inc.php', $t_var_list );
 	parse_config_global_vars( 'config/config_inc.php', $t_var_list );
 
@@ -83,9 +85,9 @@ function require_mantis_core() {
 
 	# Global declaration for all variables
 	$t_decl = '';
-	foreach( $t_var_list as $v ) {
-		global $$v;
-		$t_decl .= "global $v;\n";
+	foreach( $t_var_list as $t_var ) {
+		global $$t_var;
+		$t_decl .= "global $t_var;\n";
 	}
 
 	$$t_bypass_headers = true;
@@ -98,22 +100,22 @@ error_reporting( E_ALL | E_STRICT );
 
 # Determine the root, library, and tests directories of the framework
 # distribution.
-$mantisRoot = dirname( dirname(__FILE__) );
-$mantisCore = "$mantisRoot/core";
-$mantisLibrary = "$mantisRoot/library";
-$mantisClasses = "$mantisRoot/core/classes";
-$mantisTests = "$mantisRoot/tests";
+$g_mantisRoot = dirname( dirname( __FILE__ ) );
+$g_mantisCore = "$g_mantisRoot/core";
+$g_mantisLibrary = "$g_mantisRoot/library";
+$g_mantisClasses = "$g_mantisRoot/core/classes";
+$g_mantisTests = "$g_mantisRoot/tests";
 
 
 # Prepend the application/ and tests/ directories to the include_path.
-$path = array(
-	$mantisRoot,
-	$mantisCore,
-	$mantisLibrary,
-	$mantisClasses,
+$g_path = array(
+	$g_mantisRoot,
+	$g_mantisCore,
+	$g_mantisLibrary,
+	$g_mantisClasses,
 	get_include_path()
 );
-set_include_path( implode( PATH_SEPARATOR, $path ) );
+set_include_path( implode( PATH_SEPARATOR, $g_path ) );
 
 # Unset global variables that are no longer needed.
-unset($mantisRoot, $mantisLibrary, $mantisTests, $path);
+unset($g_mantisRoot, $g_mantisLibrary, $g_mantisTests, $g_path);

@@ -32,17 +32,33 @@ class TimelineEvent {
 	protected $user_id;
 	protected $tie_breaker;
 
+	/**
+	 * @param integer $p_timestamp   Timestamp representing the time the event occurred.
+	 * @param integer $p_user_id     An user identifier.
+	 * @param boolean $p_tie_breaker A value to sort events by if timestamp matches (generally issue identifier).
+	 */
 	public function __construct( $p_timestamp, $p_user_id, $p_tie_breaker ) {
 		$this->timestamp = $p_timestamp;
 		$this->user_id = $p_user_id;
 		$this->tie_breaker = $p_tie_breaker;
 	}
 
+	/**
+	 * Whether to skip this timeline event.
+	 * This normally implements access checks for the event.
+	 * @return boolean
+	 */
 	public function skip() {
 		return false;
 	}
 
-	public function compare( $p_other ) {
+	/**
+	 * Comparision function for ordering of timeline events.
+	 * We compare first by timestamp, then by the tie_breaker field.
+	 * @param TimelineEvent $p_other An instance of TimelineEvent to compare against.
+	 * @return integer
+	 */
+	public function compare( TimelineEvent $p_other ) {
 		if( $this->timestamp < $p_other->timestamp ) {
 			return -1;
 		}
@@ -62,14 +78,28 @@ class TimelineEvent {
 		return 0;
 	}
 
+	/**
+	 * Returns html string to display
+	 * @return string
+	 */
 	public function html() {
+		return '';
 	}
 
+	/**
+	 * Formats a timestamp in the timeline for display.
+	 * @param integer $p_timestamp Integer representing timestamp to format.
+	 * @return string
+	 */
 	public function format_timestamp( $p_timestamp ) {
 		$t_normal_date_format = config_get( 'normal_date_format' );
 		return date( $t_normal_date_format, $p_timestamp );
 	}
 
+	/**
+	 * Returns html string representing the beginning block of a timeline entry
+	 * @return string
+	 */
 	public function html_start() {
 		$t_avatar = user_get_avatar( $this->user_id, 32 );
 
@@ -91,6 +121,10 @@ class TimelineEvent {
 		return $t_html;
 	}
 
+	/**
+	 * Returns html string representing the ending block of a timeline entry
+	 * @return string
+	 */
 	public function html_end() {
 		return '</div>';
 	}

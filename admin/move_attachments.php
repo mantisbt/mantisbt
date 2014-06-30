@@ -22,10 +22,6 @@
  * @link http://www.mantisbt.org
  */
 
-
-/**
- * MantisBT Core API's
- */
 require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 
 form_security_validate( 'move_attachments_project_select' );
@@ -39,11 +35,11 @@ $f_projects_to_disk  = gpc_get( 'to_disk', null );
 
 /**
  * Moves attachments from the specified list of projects from database to disk
- * @param string $p_type Attachment type ('bug' or 'project')
- * @param array $p_projects List of projects to process
+ * @param string $p_type     Attachment type ('bug' or 'project').
+ * @param array  $p_projects List of projects to process.
  * @return array summary of moves per project
  */
-function move_attachments_to_disk( $p_type, $p_projects ) {
+function move_attachments_to_disk( $p_type, array $p_projects ) {
 	if( empty( $p_projects ) ) {
 		return array();
 	}
@@ -52,7 +48,6 @@ function move_attachments_to_disk( $p_type, $p_projects ) {
 	$t_file_table = db_get_table( "mantis_${p_type}_file_table" );
 	switch( $p_type ) {
 		case 'project':
-
 			$t_query = "SELECT f.*
 				FROM $t_file_table f
 				WHERE content <> ''
@@ -79,7 +74,7 @@ function move_attachments_to_disk( $p_type, $p_projects ) {
 
 		# Project upload path
 		$t_upload_path = project_get_upload_path( $t_project );
-		if(    is_blank( $t_upload_path )
+		if( is_blank( $t_upload_path )
 			|| !file_exists( $t_upload_path )
 			|| !is_dir( $t_upload_path )
 			|| !is_writable( $t_upload_path )
@@ -108,14 +103,9 @@ function move_attachments_to_disk( $p_type, $p_projects ) {
 					# successful, update database
 					# @todo do we want to check the size of data transfer matches here?
 					$t_update_query = "UPDATE $t_file_table
-						SET diskfile = " . db_param() . ",
-							folder = " . db_param() . ",
-							content = ''
+						SET diskfile = " . db_param() . ", folder = " . db_param() . ", content = ''
 						WHERE id = " . db_param();
-					$t_update_result = db_query_bound(
-						$t_update_query,
-						array( $t_filename, $t_upload_path, $t_row['id'] )
-					);
+					$t_update_result = db_query_bound( $t_update_query, array( $t_filename, $t_upload_path, $t_row['id'] ) );
 
 					if( !$t_update_result ) {
 						$t_status = 'Database update failed';
@@ -183,8 +173,7 @@ if( empty( $t_moved ) ) {
 			$t_row['rows'],
 			( 0 == $t_row['failed']
 				? 'moved successfully'
-				: 'to move, ' . $t_row['failed'] . ' failures')
-		);
+				: 'to move, ' . $t_row['failed'] . ' failures') );
 
 		if( is_array( $t_row['data'] ) ) {
 			# Display details of moved attachments
@@ -201,8 +190,7 @@ if( empty( $t_moved ) ) {
 				printf( '<td class="right">%s</td><td>%s</td><td>%s</td></tr>' . "\n",
 					$t_data['id'],
 					$t_data['filename'],
-					$t_data['status']
-				);
+					$t_data['status'] );
 			}
 			echo '</table><br /></div>';
 		} else {

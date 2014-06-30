@@ -31,6 +31,7 @@ if( !defined( 'CHECK_PHP_INC_ALLOW' ) ) {
 	return;
 }
 
+# MantisBT Check API
 require_once( 'check_api.php' );
 require_api( 'config_api.php' );
 require_api( 'utility_api.php' );
@@ -170,8 +171,7 @@ foreach( $t_disabled_functions as $t_disabled_function ) {
 		check_print_test_warn_row(
 			'<em>' . $t_disabled_function . '</em> function is enabled',
 			false,
-			'This function has been disabled by the disable_functions php.ini directive. MantisBT may not operate correctly with this function disabled.'
-		);
+			'This function has been disabled by the disable_functions php.ini directive. MantisBT may not operate correctly with this function disabled.' );
 	}
 }
 
@@ -182,9 +182,7 @@ foreach( $t_disabled_classes as $t_disabled_class ) {
 		check_print_test_warn_row(
 			'<em>' . $t_disabled_class . '</em> class is enabled',
 			false,
-			'This class has been disabled by the disable_classes php.ini directive. MantisBT may not operate correctly with this class disabled.'
-
-		);
+			'This class has been disabled by the disable_classes php.ini directive. MantisBT may not operate correctly with this class disabled.' );
 	}
 }
 
@@ -206,7 +204,7 @@ while( list( $t_foo, $t_var ) = each( $t_vars ) ) {
 
 if( is_windows_server() ) {
 	check_print_test_warn_row(
-		'There is a performance issue on windows for PHP versions &lt; 5.4 in openssl_random_pseudo_bytes' ,
+		'There is a performance issue on windows for PHP versions &lt; 5.4 in openssl_random_pseudo_bytes',
 		version_compare( phpversion(), '5.4.0', '>=' ),
 		array( false => 'For best performance upgrade to PHP > 5.4.0.' )
 	);

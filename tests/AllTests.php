@@ -37,14 +37,14 @@ class AllTests
 {
 	/**
 	 * Test suite
+	 * @return PHPUnit_Framework_TestSuite
 	 */
-	public static function suite()
-	{
-		$suite = new PHPUnit_Framework_TestSuite('Mantis Bug Tracker');
+	public static function suite() {
+		$t_suite = new PHPUnit_Framework_TestSuite( 'Mantis Bug Tracker' );
 
-		$suite->addTest(Mantis_AllTests::suite());
-		$suite->addTest(Soap_AllTests::suite());
+		$t_suite->addTest( Mantis_AllTests::suite() );
+		$t_suite->addTest( Soap_AllTests::suite() );
 
-		return $suite;
+		return $t_suite;
 	}
 }

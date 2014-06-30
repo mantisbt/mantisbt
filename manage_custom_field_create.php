@@ -47,7 +47,7 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
-form_security_validate('manage_custom_field_create');
+form_security_validate( 'manage_custom_field_create' );
 
 auth_reauthenticate();
 access_ensure_global_level( config_get( 'manage_custom_fields_threshold' ) );
@@ -62,7 +62,7 @@ if( ON == config_get( 'custom_field_edit_after_create' ) ) {
 	$t_redirect_url = 'manage_custom_field_page.php';
 }
 
-form_security_purge('manage_custom_field_create');
+form_security_purge( 'manage_custom_field_create' );
 
 html_page_top( null, $t_redirect_url );
 

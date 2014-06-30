@@ -54,11 +54,11 @@ form_security_validate( 'manage_config_workflow_set' );
 auth_reauthenticate();
 
 /**
- * Retrieves the value of config option for the project's parent
+ * Retrieves the value of configuration option for the project's parent
  * (ALL_PROJECTS level if project, or file-level if all projects)
- * @param $p_project project
- * @param $p_option config option to retrieve
- * @return mixed config option value
+ * @param integer $p_project Project.
+ * @param string  $p_option  Configuration option to retrieve.
+ * @return mixed configuration option value
  */
 function config_get_parent( $p_project, $p_option ) {
 	if( $p_project == ALL_PROJECTS ) {
@@ -93,7 +93,7 @@ foreach( $t_valid_thresholds as $t_threshold ) {
 		$f_access = gpc_get( 'access_' . $t_threshold );
 		if( $f_value == $t_value_current && $f_access == $t_access_current ) {
 			# If new value is equal to parent and access has not changed
-			config_delete( $t_threshold, ALL_USERS , $t_project );
+			config_delete( $t_threshold, ALL_USERS, $t_project );
 		} else if( $f_value != $t_value_current || $f_access != $t_access_current ) {
 			# Set config if value or access have changed
 			config_set( $t_threshold, $f_value, NO_USER, $t_project, $f_access );
@@ -112,7 +112,7 @@ if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 		$t_matrix[$t_from][$t_to] = '';
 	}
 	$t_enum_status = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
-	foreach( $t_enum_status as $t_state => $t_label) {
+	foreach( $t_enum_status as $t_state => $t_label ) {
 		$t_workflow_row = '';
 		$t_default = gpc_get_int( 'default_' . $t_state );
 		if( isset( $t_matrix[$t_state] ) && isset( $t_matrix[$t_state][$t_default] ) ) {
@@ -155,7 +155,7 @@ if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 
 	if( $t_workflow == $t_workflow_parent && $f_access == $t_access_current ) {
 		# If new value is equal to parent and access has not changed
-		config_delete( 'status_enum_workflow', ALL_USERS , $t_project );
+		config_delete( 'status_enum_workflow', ALL_USERS, $t_project );
 	} else if( $t_workflow != config_get( 'status_enum_workflow' ) || $f_access != $t_access_current ) {
 		# Set config if value or access have changed
 		config_set( 'status_enum_workflow', $t_workflow, NO_USER, $t_project, $f_access );
@@ -191,13 +191,13 @@ if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 
 	# walk through the status labels to set the status threshold
 	$t_set_new = array();
-	foreach( $t_enum_status as $t_status_id => $t_status_label) {
+	foreach( $t_enum_status as $t_status_id => $t_status_label ) {
 		$f_level = gpc_get_int( 'access_change_' . $t_status_id );
 		if( config_get( 'bug_submit_status' ) == $t_status_id ) {
 			if( $f_level != config_get( 'report_bug_threshold' ) ) {
 				config_set( 'report_bug_threshold', (int)$f_level, ALL_USERS, $t_project, $f_access );
 			} else {
-				config_delete( 'report_bug_threshold', ALL_USERS , $t_project );
+				config_delete( 'report_bug_threshold', ALL_USERS, $t_project );
 			}
 			unset( $t_set_parent[$t_status_id] );
 			unset( $t_set_current[$t_status_id] );
@@ -208,7 +208,7 @@ if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 
 	if( $t_set_new == $t_set_parent && $f_access == $t_access_current ) {
 		# If new value is equal to parent and access has not changed
-		config_delete( 'set_status_threshold', ALL_USERS , $t_project );
+		config_delete( 'set_status_threshold', ALL_USERS, $t_project );
 	} else if( $t_set_new != $t_set_current || $f_access != $t_access_current ) {
 		# Set config if value or access have changed
 		config_set( 'set_status_threshold', $t_set_new, ALL_USERS, $t_project, $f_access );

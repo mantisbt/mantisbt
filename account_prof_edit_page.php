@@ -63,12 +63,12 @@ $f_profile_id	= gpc_get_int( 'profile_id' );
 if( profile_is_global( $f_profile_id ) ) {
 	access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
 
-	$row = profile_get_row( ALL_USERS, $f_profile_id );
+	$t_row = profile_get_row( ALL_USERS, $f_profile_id );
 } else {
-	$row = profile_get_row( auth_get_current_user_id(), $f_profile_id );
+	$t_row = profile_get_row( auth_get_current_user_id(), $f_profile_id );
 }
 
-extract( $row, EXTR_PREFIX_ALL, 'v' );
+extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
 html_page_top();
 

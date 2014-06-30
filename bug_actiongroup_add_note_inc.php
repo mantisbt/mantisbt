@@ -51,6 +51,7 @@ require_api( 'utility_api.php' );
 
 /**
  * Prints the title for the custom action page.
+ * @return void
  */
 function action_add_note_print_title() {
 	echo '<tr>';
@@ -64,6 +65,7 @@ function action_add_note_print_title() {
  * every field the user need to supply + the submit button.  The fields are
  * added as rows in a table that is already created by the calling code.
  * A row has two columns.
+ * @return void
  */
 function action_add_note_print_fields() {
 ?>
@@ -114,7 +116,7 @@ function action_add_note_print_fields() {
 /**
  * Validates the action on the specified bug id.
  *
- * @param int $p_bug_id bug id
+ * @param integer $p_bug_id A bug identifier.
  * @return string|null On failure: the reason why the action could not be validated. On success: null.
  */
 function action_add_note_validate( $p_bug_id ) {
@@ -142,12 +144,12 @@ function action_add_note_validate( $p_bug_id ) {
 /**
  * Executes the custom action on the specified bug id.
  *
- * @param int $p_bug_id The bug id to execute the custom action on.
+ * @param integer $p_bug_id The bug id to execute the custom action on.
  * @return null Previous validation ensures that this function doesn't fail. Therefore we can always return null to indicate no errors occurred.
  */
 function action_add_note_process( $p_bug_id ) {
 	$f_bugnote_text = gpc_get_string( 'bugnote_text' );
 	$f_view_state = gpc_get_int( 'view_state' );
-	bugnote_add ( $p_bug_id, $f_bugnote_text, '0:00', $f_view_state != VS_PUBLIC  );
+	bugnote_add( $p_bug_id, $f_bugnote_text, '0:00', $f_view_state != VS_PUBLIC );
 	return null;
 }

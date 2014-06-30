@@ -28,35 +28,32 @@ require_once( 'core.php' );
 require_api( 'config_api.php' );
 
 /**
- * Print array of config option->values for javascript
- * @param string $p_config_key config option
+ * Print array of configuration option->values for javascript.
+ * @param string $p_config_key Configuration option.
+ * @return void
  */
 function print_config_value( $p_config_key ) {
 	echo "config['" . $p_config_key . "'] = '" . addslashes( config_get( $p_config_key ) ) . "';\n";
 }
 
-/**
- * Send correct MIME Content-Type header for JavaScript content.
- * See http://www.rfc-editor.org/rfc/rfc4329.txt for details on why application/javascript is the correct MIME type.
- */
+# Send correct MIME Content-Type header for JavaScript content.
+# See http://www.rfc-editor.org/rfc/rfc4329.txt for details on why application/javascript is the correct MIME type.
 header( 'Content-Type: application/javascript; charset=UTF-8' );
 
-/**
- * Disallow Internet Explorer from attempting to second guess the Content-Type
- * header as per http://blogs.msdn.com/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
- */
+
+# Disallow Internet Explorer from attempting to second guess the Content-Type
+# header as per http://blogs.msdn.com/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
 header( 'X-Content-Type-Options: nosniff' );
 
-/**
- * WARNING: DO NOT EXPOSE SENSITIVE CONFIGURATION VALUES!
- *
- * All configuration values below are publicly available to visitors of the bug
- * tracker regardless of whether they're authenticated. Server paths should not
- * be exposed. It is OK to expose paths that the user sees directly (short
- * paths) but you do need to be careful in your selections. Consider servers
- * using URL rewriting engines to mask/convert user-visible paths to paths that
- * should only be known internally to the server.
- */
+
+# WARNING: DO NOT EXPOSE SENSITIVE CONFIGURATION VALUES!
+#
+# All configuration values below are publicly available to visitors of the bug
+# tracker regardless of whether they're authenticated. Server paths should not
+# be exposed. It is OK to expose paths that the user sees directly (short
+# paths) but you do need to be careful in your selections. Consider servers
+# using URL rewriting engines to mask/convert user-visible paths to paths that
+# should only be known internally to the server.
 
 echo "var config = new Array();\n";
 print_config_value( 'calendar_js_date_format' );

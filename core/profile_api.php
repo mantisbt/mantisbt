@@ -44,12 +44,12 @@ require_api( 'utility_api.php' );
 
 /**
  * Create a new profile for the user, return the ID of the new profile
- * @param int $p_user_id
- * @param string $p_platform
- * @param string $p_os
- * @param string $p_os_build
- * @param string $p_description
- * @return int
+ * @param integer $p_user_id     A valid user identifier.
+ * @param string  $p_platform    Value for profile platform.
+ * @param string  $p_os          Value for profile operating system.
+ * @param string  $p_os_build    Value for profile operation system build.
+ * @param string  $p_description Description of profile.
+ * @return integer
  */
 function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_description ) {
 	$p_user_id = (int)$p_user_id;
@@ -79,11 +79,11 @@ function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_descrip
 	$t_user_profile_table = db_get_table( 'user_profile' );
 
 	# Add profile
-	$query = "INSERT INTO $t_user_profile_table
+	$t_query = "INSERT INTO $t_user_profile_table
 				    ( user_id, platform, os, os_build, description )
 				  VALUES
 				    ( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-	db_query_bound( $query, array( $p_user_id, $p_platform, $p_os, $p_os_build, $p_description ) );
+	db_query_bound( $t_query, array( $p_user_id, $p_platform, $p_os, $p_os_build, $p_description ) );
 
 	return db_insert_id( $t_user_profile_table );
 }
@@ -94,9 +94,9 @@ function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_descrip
  * Note that although profile IDs are currently globally unique, the existing
  * code included the user_id in the query and I have chosen to keep that for
  * this API as it hides the details of id implementation from users of the API
- * @param int $p_user_id
- * @param int $p_profile_id
- * @return true
+ * @param integer $p_user_id    A valid user identifier.
+ * @param integer $p_profile_id A profile identifier.
+ * @return void
  */
 function profile_delete( $p_user_id, $p_profile_id ) {
 	if( ALL_USERS != $p_user_id ) {
@@ -106,23 +106,19 @@ function profile_delete( $p_user_id, $p_profile_id ) {
 	$t_user_profile_table = db_get_table( 'user_profile' );
 
 	# Delete the profile
-	$query = "DELETE FROM $t_user_profile_table
-				  WHERE id=" . db_param() . " AND user_id=" . db_param();
-	db_query_bound( $query, array( $p_profile_id, $p_user_id ) );
-
-	# db_query_bound() errors on failure so:
-	return true;
+	$t_query = "DELETE FROM $t_user_profile_table WHERE id=" . db_param() . " AND user_id=" . db_param();
+	db_query_bound( $t_query, array( $p_profile_id, $p_user_id ) );
 }
 
 /**
  * Update a profile for the user
- * @param int $p_user_id
- * @param int $p_profile_id
- * @param string $p_platform
- * @param string $p_os
- * @param string $p_os_build
- * @param string $p_description
- * @return true
+ * @param integer $p_user_id     A valid user identifier.
+ * @param integer $p_profile_id  A profile identifier.
+ * @param string  $p_platform    Value for profile platform.
+ * @param string  $p_os          Value for profile operating system.
+ * @param string  $p_os_build    Value for profile operation system build.
+ * @param string  $p_description Description of profile.
+ * @return void
  */
 function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_build, $p_description ) {
 	if( ALL_USERS != $p_user_id ) {
@@ -150,69 +146,66 @@ function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_bu
 	$t_user_profile_table = db_get_table( 'user_profile' );
 
 	# Add item
-	$query = "UPDATE $t_user_profile_table
+	$t_query = "UPDATE $t_user_profile_table
 				  SET platform=" . db_param() . ",
 				  	  os=" . db_param() . ",
 					  os_build=" . db_param() . ",
 					  description=" . db_param() . "
 				  WHERE id=" . db_param() . " AND user_id=" . db_param();
-	db_query_bound( $query, array( $p_platform, $p_os, $p_os_build, $p_description, $p_profile_id, $p_user_id ) );
+	db_query_bound( $t_query, array( $p_platform, $p_os, $p_os_build, $p_description, $p_profile_id, $p_user_id ) );
 }
 
 /**
  * Return a profile row from the database
- * @param int $p_user_id
- * @param int $p_profile_id
+ * @param integer $p_user_id    A valid user identifier.
+ * @param integer $p_profile_id A profile identifier.
  * @return array
  */
 function profile_get_row( $p_user_id, $p_profile_id ) {
 	$t_user_profile_table = db_get_table( 'user_profile' );
 
-	$query = "SELECT *
-				  FROM $t_user_profile_table
-				  WHERE id=" . db_param() . " AND user_id=" . db_param();
-	$t_result = db_query_bound( $query, array( $p_profile_id, $p_user_id ) );
+	$t_query = "SELECT * FROM $t_user_profile_table WHERE id=" . db_param() . " AND user_id=" . db_param();
+	$t_result = db_query_bound( $t_query, array( $p_profile_id, $p_user_id ) );
 
 	return db_fetch_array( $t_result );
 }
 
 /**
  * Return a profile row from the database
- * @param int $p_profile_id
+ * @param integer $p_profile_id A profile identifier.
  * @return array
  * @todo relationship of this function to profile_get_row?
  */
 function profile_get_row_direct( $p_profile_id ) {
 	$t_user_profile_table = db_get_table( 'user_profile' );
 
-	$query = "SELECT * FROM $t_user_profile_table WHERE id=" . db_param();
-	$t_result = db_query_bound( $query, array( $p_profile_id ) );
+	$t_query = "SELECT * FROM $t_user_profile_table WHERE id=" . db_param();
+	$t_result = db_query_bound( $t_query, array( $p_profile_id ) );
 
 	return db_fetch_array( $t_result );
 }
 
 /**
  * Return an array containing all rows for a given user
- * @param int $p_user_id
- * @param bool $p_all_users Include profiles for all users
+ * @param integer $p_user_id   A valid user identifier.
+ * @param boolean $p_all_users Include profiles for all users.
  * @return array
  */
 function profile_get_all_rows( $p_user_id, $p_all_users = false ) {
 	$t_user_profile_table = db_get_table( 'user_profile' );
 
-	$query_where = 'user_id = ' . db_param();
-	$param[] = db_prepare_int( $p_user_id );
+	$t_query_where = 'user_id = ' . db_param();
+	$t_param[] = (int)$p_user_id;
 
 	if( $p_all_users && ALL_USERS != $p_user_id ) {
-		$query_where .= ' OR user_id = ' . db_param();
-		$param[] = ALL_USERS;
+		$t_query_where .= ' OR user_id = ' . db_param();
+		$t_param[] = ALL_USERS;
 	}
 
-	$query = "SELECT *
-				  FROM $t_user_profile_table
-				  WHERE $query_where
+	$t_query = "SELECT * FROM $t_user_profile_table
+				  WHERE $t_query_where
 				  ORDER BY platform, os, os_build";
-	$t_result = db_query_bound( $query, $param );
+	$t_result = db_query_bound( $t_query, $t_param );
 
 	$t_rows = array();
 
@@ -226,7 +219,7 @@ function profile_get_all_rows( $p_user_id, $p_all_users = false ) {
 /**
  * Return an array containing all profiles for a given user,
  * including global profiles
- * @param int $p_user_id
+ * @param integer $p_user_id A valid user identifier.
  * @return array
  */
 function profile_get_all_for_user( $p_user_id ) {
@@ -236,8 +229,8 @@ function profile_get_all_for_user( $p_user_id ) {
 /**
  * Return an array of strings containing unique values for the specified field based
  * on private and public profiles accessible to the specified user.
- * @param string $p_field
- * @param int $p_user_id
+ * @param string  $p_field   Field name of the profile to retrieve.
+ * @param integer $p_user_id A valid user identifier.
  * @return array
  */
 function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
@@ -258,11 +251,11 @@ function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
 
 	$t_user_profile_table = db_get_table( 'user_profile' );
 
-	$query = "SELECT DISTINCT $c_field
+	$t_query = "SELECT DISTINCT $c_field
 				  FROM $t_user_profile_table
 				  WHERE ( user_id=" . db_param() . " ) OR ( user_id = 0 )
 				  ORDER BY $c_field";
-	$t_result = db_query_bound( $query, array( $c_user_id ) );
+	$t_result = db_query_bound( $t_query, array( $c_user_id ) );
 
 	$t_rows = array();
 
@@ -275,7 +268,7 @@ function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
 
 /**
  * Return an array containing all profiles used in a given project
- * @param int $p_project_id
+ * @param integer $p_project_id A valid project identifier.
  * @return array
  */
 function profile_get_all_for_project( $p_project_id ) {
@@ -284,13 +277,12 @@ function profile_get_all_for_project( $p_project_id ) {
 	$t_bug_table = db_get_table( 'bug' );
 	$t_user_profile_table = db_get_table( 'user_profile' );
 
-	# using up.* causes an SQL error on MS SQL since up.description is of type text
-	$query = "SELECT DISTINCT(up.id), up.user_id, up.platform, up.os, up.os_build
+	$t_query = "SELECT DISTINCT(up.id), up.user_id, up.platform, up.os, up.os_build
 				  FROM $t_user_profile_table up, $t_bug_table b
 				  WHERE $t_project_where
 				  AND up.id = b.profile_id
 				  ORDER BY platform, os, os_build";
-	$t_result = db_query_bound( $query );
+	$t_result = db_query_bound( $t_query );
 
 	$t_rows = array();
 
@@ -303,16 +295,14 @@ function profile_get_all_for_project( $p_project_id ) {
 
 /**
  * Returns the default profile
- * @param int $p_user_id
+ * @param integer $p_user_id A valid user identifier.
  * @return string
  */
 function profile_get_default( $p_user_id ) {
 	$t_mantis_user_pref_table = db_get_table( 'user_pref' );
 
-	$query = "SELECT default_profile
-			FROM $t_mantis_user_pref_table
-			WHERE user_id=" . db_param();
-	$t_result = db_query_bound( $query, array( $p_user_id ) );
+	$t_query = "SELECT default_profile FROM $t_mantis_user_pref_table WHERE user_id=" . db_param();
+	$t_result = db_query_bound( $t_query, array( $p_user_id ) );
 
 	$t_default_profile = (int)db_result( $t_result, 0, 0 );
 
@@ -321,8 +311,8 @@ function profile_get_default( $p_user_id ) {
 
 /**
  * Returns whether the specified profile is global
- * @param int $p_profile_id
- * @return bool
+ * @param integer $p_profile_id A valid profile identifier.
+ * @return boolean
  */
 function profile_is_global( $p_profile_id ) {
 	$t_row = profile_get_row( ALL_USERS, $p_profile_id );

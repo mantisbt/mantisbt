@@ -268,44 +268,44 @@ $f_filter_input = array();
 foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
 	switch( $t_filter_object->type ) {
 		case FILTER_TYPE_STRING:
-			$f_filter_input[ $t_field_name ] = gpc_get_string( $t_field_name, $t_filter_object->default );
+			$f_filter_input[$t_field_name] = gpc_get_string( $t_field_name, $t_filter_object->default );
 			break;
 
 		case FILTER_TYPE_INT:
-			$f_filter_input[ $t_field_name ] = gpc_get_int( $t_field_name, $t_filter_object->default );
+			$f_filter_input[$t_field_name] = gpc_get_int( $t_field_name, $t_filter_object->default );
 			break;
 
 		case FILTER_TYPE_BOOLEAN:
-			$f_filter_input[ $t_field_name ] = gpc_get_bool( $t_field_name, OFF );
+			$f_filter_input[$t_field_name] = gpc_get_bool( $t_field_name, OFF );
 			break;
 
 		case FILTER_TYPE_MULTI_STRING:
-			$f_filter_input[ $t_field_name ] = gpc_get_string_array( $t_field_name, $t_filter_object->default );
+			$f_filter_input[$t_field_name] = gpc_get_string_array( $t_field_name, $t_filter_object->default );
 			break;
 
 		case FILTER_TYPE_MULTI_INT:
-			$f_filter_input[ $t_field_name ] = gpc_get_int_array( $t_field_name, $t_filter_object->default );
+			$f_filter_input[$t_field_name] = gpc_get_int_array( $t_field_name, $t_filter_object->default );
 			break;
 	}
 }
 
 # custom field updates
-$t_custom_fields 		= custom_field_get_ids(); /** @todo (thraxisp) This should really be the linked ids, but we don't know the project */
+$t_custom_fields 		= custom_field_get_ids(); # @todo (thraxisp) This should really be the linked ids, but we don't know the project
 $f_custom_fields_data 	= array();
 if( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 	foreach( $t_custom_fields as $t_cfid ) {
 		if( custom_field_type( $t_cfid ) == CUSTOM_FIELD_TYPE_DATE ) {
-			$t_control = gpc_get_string( 'custom_field_' . $t_cfid . '_control', null);
+			$t_control = gpc_get_string( 'custom_field_' . $t_cfid . '_control', null );
 
-			$t_year = gpc_get_int( 'custom_field_' . $t_cfid . '_start_year', null);
-			$t_month = gpc_get_int( 'custom_field_' . $t_cfid . '_start_month', null);
-			$t_day = gpc_get_int( 'custom_field_' . $t_cfid . '_start_day', null);
-			$t_start_date = mktime(0, 0, 0, $t_month, $t_day, $t_year);
+			$t_year = gpc_get_int( 'custom_field_' . $t_cfid . '_start_year', null );
+			$t_month = gpc_get_int( 'custom_field_' . $t_cfid . '_start_month', null );
+			$t_day = gpc_get_int( 'custom_field_' . $t_cfid . '_start_day', null );
+			$t_start_date = mktime( 0, 0, 0, $t_month, $t_day, $t_year );
 
-			$t_year = gpc_get_int( 'custom_field_' . $t_cfid . '_end_year', null);
-			$t_month = gpc_get_int( 'custom_field_' . $t_cfid . '_end_month', null);
-			$t_day = gpc_get_int( 'custom_field_' . $t_cfid . '_end_day', null);
-			$t_end_date = mktime(0, 0, 0, $t_month, $t_day, $t_year);
+			$t_year = gpc_get_int( 'custom_field_' . $t_cfid . '_end_year', null );
+			$t_month = gpc_get_int( 'custom_field_' . $t_cfid . '_end_month', null );
+			$t_day = gpc_get_int( 'custom_field_' . $t_cfid . '_end_day', null );
+			$t_end_date = mktime( 0, 0, 0, $t_month, $t_day, $t_year );
 
 			$f_custom_fields_data[$t_cfid] = array();
 			$f_custom_fields_data[$t_cfid][0] = $t_control;
@@ -313,33 +313,32 @@ if( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 			$t_end = 1;
 			$t_one_day = 86399;
 
-			switch ($t_control)
-			{
-			case CUSTOM_FIELD_DATE_ANY:
-			case CUSTOM_FIELD_DATE_NONE:
-				break ;
-			case CUSTOM_FIELD_DATE_BETWEEN:
-				$t_start = $t_start_date;
-				$t_end = $t_end_date + $t_one_day - 1;
-				break ;
-			case CUSTOM_FIELD_DATE_ONORBEFORE:
-				$t_end = $t_start_date + $t_one_day - 1;
-				break;
-			case CUSTOM_FIELD_DATE_BEFORE:
-				$t_end = $t_start_date;
-				break ;
-			case CUSTOM_FIELD_DATE_ON:
-				$t_start = $t_start_date;
-				$t_end = $t_start_date + $t_one_day - 1;
-				break;
-			case CUSTOM_FIELD_DATE_AFTER:
-				$t_start = $t_start_date + $t_one_day - 1;
-				$t_end = 2147483647; # Some time in 2038, max value of a signed int.
-				break;
-			case CUSTOM_FIELD_DATE_ONORAFTER:
-				$t_start = $t_start_date;
-				$t_end = 2147483647; # Some time in 2038, max value of a signed int.
-				break;
+			switch ( $t_control ) {
+				case CUSTOM_FIELD_DATE_ANY:
+				case CUSTOM_FIELD_DATE_NONE:
+					break ;
+				case CUSTOM_FIELD_DATE_BETWEEN:
+					$t_start = $t_start_date;
+					$t_end = $t_end_date + $t_one_day - 1;
+					break ;
+				case CUSTOM_FIELD_DATE_ONORBEFORE:
+					$t_end = $t_start_date + $t_one_day - 1;
+					break;
+				case CUSTOM_FIELD_DATE_BEFORE:
+					$t_end = $t_start_date;
+					break ;
+				case CUSTOM_FIELD_DATE_ON:
+					$t_start = $t_start_date;
+					$t_end = $t_start_date + $t_one_day - 1;
+					break;
+				case CUSTOM_FIELD_DATE_AFTER:
+					$t_start = $t_start_date + $t_one_day - 1;
+					$t_end = 2147483647; # Some time in 2038, max value of a signed int.
+					break;
+				case CUSTOM_FIELD_DATE_ONORAFTER:
+					$t_start = $t_start_date;
+					$t_end = 2147483647; # Some time in 2038, max value of a signed int.
+					break;
 			}
 			$f_custom_fields_data[$t_cfid][1] = $t_start;
 			$f_custom_fields_data[$t_cfid][2] = $t_end;
@@ -451,45 +450,45 @@ switch ( $f_type ) {
 			log_event( LOG_FILTERING, 'view_all_set.php: Update filters' );
 			$t_setting_arr['_version'] 								= $t_cookie_version;
 			$t_setting_arr['_view_type'] 							= $f_view_type;
-			$t_setting_arr[ FILTER_PROPERTY_CATEGORY_ID ] 			= $f_show_category;
-			$t_setting_arr[ FILTER_PROPERTY_SEVERITY ] 				= $f_show_severity;
-			$t_setting_arr[ FILTER_PROPERTY_STATUS ] 				= $f_show_status;
-			$t_setting_arr[ FILTER_PROPERTY_ISSUES_PER_PAGE ] 		= $f_per_page;
-			$t_setting_arr[ FILTER_PROPERTY_HIGHLIGHT_CHANGED ] 	= $f_highlight_changed;
-			$t_setting_arr[ FILTER_PROPERTY_REPORTER_ID ] 			= $f_reporter_id;
-			$t_setting_arr[ FILTER_PROPERTY_HANDLER_ID ] 			= $f_handler_id;
-			$t_setting_arr[ FILTER_PROPERTY_PROJECT_ID ] 			= $f_project_id;
-			$t_setting_arr[ FILTER_PROPERTY_SORT_FIELD_NAME ] 		= $f_sort;
-			$t_setting_arr[ FILTER_PROPERTY_SORT_DIRECTION ] 		= $f_dir;
-			$t_setting_arr[ FILTER_PROPERTY_START_MONTH ] 			= $f_start_month;
-			$t_setting_arr[ FILTER_PROPERTY_START_DAY ] 			= $f_start_day;
-			$t_setting_arr[ FILTER_PROPERTY_START_YEAR ] 			= $f_start_year;
-			$t_setting_arr[ FILTER_PROPERTY_END_MONTH ] 			= $f_end_month;
-			$t_setting_arr[ FILTER_PROPERTY_END_DAY ] 				= $f_end_day;
-			$t_setting_arr[ FILTER_PROPERTY_END_YEAR ] 				= $f_end_year;
-			$t_setting_arr[ FILTER_PROPERTY_SEARCH] 				= $f_search;
-			$t_setting_arr[ FILTER_PROPERTY_HIDE_STATUS ] 			= $f_hide_status;
-			$t_setting_arr[ FILTER_PROPERTY_RESOLUTION ] 			= $f_show_resolution;
-			$t_setting_arr[ FILTER_PROPERTY_BUILD ] 				= $f_show_build;
-			$t_setting_arr[ FILTER_PROPERTY_VERSION ] 				= $f_show_version;
-			$t_setting_arr[ FILTER_PROPERTY_FILTER_BY_DATE ] 		= $f_do_filter_by_date;
-			$t_setting_arr[ FILTER_PROPERTY_FIXED_IN_VERSION ] 		= $f_fixed_in_version;
-			$t_setting_arr[ FILTER_PROPERTY_TARGET_VERSION ] 		= $f_target_version;
-			$t_setting_arr[ FILTER_PROPERTY_PRIORITY ] 				= $f_show_priority;
-			$t_setting_arr[ FILTER_PROPERTY_MONITOR_USER_ID ] 		= $f_user_monitor;
-			$t_setting_arr[ FILTER_PROPERTY_VIEW_STATE ] 			= $f_view_state;
+			$t_setting_arr[FILTER_PROPERTY_CATEGORY_ID] 			= $f_show_category;
+			$t_setting_arr[FILTER_PROPERTY_SEVERITY] 				= $f_show_severity;
+			$t_setting_arr[FILTER_PROPERTY_STATUS] 					= $f_show_status;
+			$t_setting_arr[FILTER_PROPERTY_ISSUES_PER_PAGE] 		= $f_per_page;
+			$t_setting_arr[FILTER_PROPERTY_HIGHLIGHT_CHANGED] 		= $f_highlight_changed;
+			$t_setting_arr[FILTER_PROPERTY_REPORTER_ID] 			= $f_reporter_id;
+			$t_setting_arr[FILTER_PROPERTY_HANDLER_ID] 				= $f_handler_id;
+			$t_setting_arr[FILTER_PROPERTY_PROJECT_ID] 				= $f_project_id;
+			$t_setting_arr[FILTER_PROPERTY_SORT_FIELD_NAME] 		= $f_sort;
+			$t_setting_arr[FILTER_PROPERTY_SORT_DIRECTION] 			= $f_dir;
+			$t_setting_arr[FILTER_PROPERTY_START_MONTH] 			= $f_start_month;
+			$t_setting_arr[FILTER_PROPERTY_START_DAY] 				= $f_start_day;
+			$t_setting_arr[FILTER_PROPERTY_START_YEAR] 				= $f_start_year;
+			$t_setting_arr[FILTER_PROPERTY_END_MONTH] 				= $f_end_month;
+			$t_setting_arr[FILTER_PROPERTY_END_DAY] 				= $f_end_day;
+			$t_setting_arr[FILTER_PROPERTY_END_YEAR] 				= $f_end_year;
+			$t_setting_arr[FILTER_PROPERTY_SEARCH] 					= $f_search;
+			$t_setting_arr[FILTER_PROPERTY_HIDE_STATUS] 			= $f_hide_status;
+			$t_setting_arr[FILTER_PROPERTY_RESOLUTION] 				= $f_show_resolution;
+			$t_setting_arr[FILTER_PROPERTY_BUILD] 					= $f_show_build;
+			$t_setting_arr[FILTER_PROPERTY_VERSION] 				= $f_show_version;
+			$t_setting_arr[FILTER_PROPERTY_FILTER_BY_DATE] 			= $f_do_filter_by_date;
+			$t_setting_arr[FILTER_PROPERTY_FIXED_IN_VERSION] 		= $f_fixed_in_version;
+			$t_setting_arr[FILTER_PROPERTY_TARGET_VERSION] 			= $f_target_version;
+			$t_setting_arr[FILTER_PROPERTY_PRIORITY] 				= $f_show_priority;
+			$t_setting_arr[FILTER_PROPERTY_MONITOR_USER_ID] 		= $f_user_monitor;
+			$t_setting_arr[FILTER_PROPERTY_VIEW_STATE] 				= $f_view_state;
 			$t_setting_arr['custom_fields'] 						= $f_custom_fields_data;
-			$t_setting_arr[ FILTER_PROPERTY_STICKY ] 				= $f_sticky_issues;
-			$t_setting_arr[ FILTER_PROPERTY_RELATIONSHIP_TYPE ] 	= $f_relationship_type;
-			$t_setting_arr[ FILTER_PROPERTY_RELATIONSHIP_BUG ] 		= $f_relationship_bug;
-			$t_setting_arr[ FILTER_PROPERTY_PROFILE_ID ] 			= $f_show_profile;
-			$t_setting_arr[ FILTER_PROPERTY_PLATFORM ] 				= $f_platform;
-			$t_setting_arr[ FILTER_PROPERTY_OS ] 					= $f_os;
-			$t_setting_arr[ FILTER_PROPERTY_OS_BUILD ] 				= $f_os_build;
-			$t_setting_arr[ FILTER_PROPERTY_TAG_STRING ] 			= $f_tag_string;
-			$t_setting_arr[ FILTER_PROPERTY_TAG_SELECT ] 			= $f_tag_select;
-			$t_setting_arr[ FILTER_PROPERTY_NOTE_USER_ID ] 			= $f_note_user_id;
-			$t_setting_arr[ FILTER_PROPERTY_MATCH_TYPE ] 			= $f_match_type;
+			$t_setting_arr[FILTER_PROPERTY_STICKY] 					= $f_sticky_issues;
+			$t_setting_arr[FILTER_PROPERTY_RELATIONSHIP_TYPE] 		= $f_relationship_type;
+			$t_setting_arr[FILTER_PROPERTY_RELATIONSHIP_BUG] 		= $f_relationship_bug;
+			$t_setting_arr[FILTER_PROPERTY_PROFILE_ID] 				= $f_show_profile;
+			$t_setting_arr[FILTER_PROPERTY_PLATFORM] 				= $f_platform;
+			$t_setting_arr[FILTER_PROPERTY_OS] 						= $f_os;
+			$t_setting_arr[FILTER_PROPERTY_OS_BUILD] 				= $f_os_build;
+			$t_setting_arr[FILTER_PROPERTY_TAG_STRING] 				= $f_tag_string;
+			$t_setting_arr[FILTER_PROPERTY_TAG_SELECT] 				= $f_tag_select;
+			$t_setting_arr[FILTER_PROPERTY_NOTE_USER_ID] 			= $f_note_user_id;
+			$t_setting_arr[FILTER_PROPERTY_MATCH_TYPE] 				= $f_match_type;
 			$t_setting_arr = array_merge( $t_setting_arr, $f_filter_input );
 			break;
 	# Set the sort order and direction
@@ -497,8 +496,8 @@ switch ( $f_type ) {
 			log_event( LOG_FILTERING, 'view_all_set.php: Set the sort order and direction.' );
 
 			# We only need to set those fields that we are overriding
-			$t_setting_arr[ FILTER_PROPERTY_SORT_FIELD_NAME ] = $f_sort;
-			$t_setting_arr[ FILTER_PROPERTY_SORT_DIRECTION ] = $f_dir;
+			$t_setting_arr[FILTER_PROPERTY_SORT_FIELD_NAME] = $f_sort;
+			$t_setting_arr[FILTER_PROPERTY_SORT_DIRECTION] = $f_dir;
 
 			break;
 	# This is when we want to copy another query from the
@@ -525,18 +524,18 @@ switch ( $f_type ) {
 	case '4':
 			log_event( LOG_FILTERING, 'view_all_set.php: Generalise the filter' );
 
-			$t_setting_arr[ FILTER_PROPERTY_CATEGORY_ID ]		= array( META_FILTER_ANY );
-			$t_setting_arr[ FILTER_PROPERTY_REPORTER_ID ] 		= array( META_FILTER_ANY );
-			$t_setting_arr[ FILTER_PROPERTY_HANDLER_ID ] 		= array( META_FILTER_ANY );
-			$t_setting_arr[ FILTER_PROPERTY_BUILD ] 			= array( META_FILTER_ANY );
-			$t_setting_arr[ FILTER_PROPERTY_VERSION ] 			= array( META_FILTER_ANY );
-			$t_setting_arr[ FILTER_PROPERTY_PRIORITY ]			= array( META_FILTER_ANY );
-			$t_setting_arr[ FILTER_PROPERTY_FIXED_IN_VERSION ]	= array( META_FILTER_ANY );
-			$t_setting_arr[ FILTER_PROPERTY_TARGET_VERSION ]	= array( META_FILTER_ANY );
-			$t_setting_arr[ FILTER_PROPERTY_MONITOR_USER_ID ] 	= array( META_FILTER_ANY );
-			$t_setting_arr[ FILTER_PROPERTY_NOTE_USER_ID ]  	= array( META_FILTER_ANY );
-			$t_setting_arr[ FILTER_PROPERTY_RELATIONSHIP_TYPE ] = -1;
-			$t_setting_arr[ FILTER_PROPERTY_RELATIONSHIP_BUG ] 	= 0;
+			$t_setting_arr[FILTER_PROPERTY_CATEGORY_ID]			= array( META_FILTER_ANY );
+			$t_setting_arr[FILTER_PROPERTY_REPORTER_ID] 		= array( META_FILTER_ANY );
+			$t_setting_arr[FILTER_PROPERTY_HANDLER_ID] 			= array( META_FILTER_ANY );
+			$t_setting_arr[FILTER_PROPERTY_BUILD] 				= array( META_FILTER_ANY );
+			$t_setting_arr[FILTER_PROPERTY_VERSION] 			= array( META_FILTER_ANY );
+			$t_setting_arr[FILTER_PROPERTY_PRIORITY]			= array( META_FILTER_ANY );
+			$t_setting_arr[FILTER_PROPERTY_FIXED_IN_VERSION]	= array( META_FILTER_ANY );
+			$t_setting_arr[FILTER_PROPERTY_TARGET_VERSION]		= array( META_FILTER_ANY );
+			$t_setting_arr[FILTER_PROPERTY_MONITOR_USER_ID] 	= array( META_FILTER_ANY );
+			$t_setting_arr[FILTER_PROPERTY_NOTE_USER_ID]  		= array( META_FILTER_ANY );
+			$t_setting_arr[FILTER_PROPERTY_RELATIONSHIP_TYPE] = -1;
+			$t_setting_arr[FILTER_PROPERTY_RELATIONSHIP_BUG] 	= 0;
 
 			$t_custom_fields 		= custom_field_get_ids(); # @@@ (thraxisp) This should really be the linked ids, but we don't know the project
 			$t_custom_fields_data 	= array();
@@ -551,7 +550,7 @@ switch ( $f_type ) {
 	# Just set the search string value
 	case '5':
 			log_event( LOG_FILTERING, 'view_all_set.php: Search Text' );
-			$t_setting_arr[ FILTER_PROPERTY_SEARCH ] = $f_search;
+			$t_setting_arr[FILTER_PROPERTY_SEARCH] = $f_search;
 
 			break;
 	# Just set the view_state (simple / advanced) value
@@ -566,32 +565,32 @@ switch ( $f_type ) {
 			break;
 }
 
-$tc_setting_arr = filter_ensure_valid_filter( $t_setting_arr );
+$t_setting_arr = filter_ensure_valid_filter( $t_setting_arr );
 
 # Remove any statuses that should be excluded by the hide_status field
 if( $f_view_type == "advanced" ) {
-	if( $tc_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] > 0 ) {
+	if( $t_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] > 0 ) {
 		$t_statuses = MantisEnum::getValues( config_get( 'status_enum_string' ) );
 		foreach( $t_statuses as $t_key=>$t_val ) {
-			if( $t_val < $tc_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] ) {
+			if( $t_val < $t_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] ) {
 				$t_keep_statuses[$t_key] = $t_val;
 			}
 		}
-		$tc_setting_arr[FILTER_PROPERTY_STATUS] = $t_keep_statuses;
+		$t_setting_arr[FILTER_PROPERTY_STATUS] = $t_keep_statuses;
 	}
 }
 
 # If a status is selected in the status and the hide_status field,
 # remove it from hide status
-if( $f_view_type == "simple" && $tc_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] > 0 ) {
-	foreach( $tc_setting_arr[FILTER_PROPERTY_STATUS] as $t_key => $t_val ) {
-		if( $tc_setting_arr[FILTER_PROPERTY_STATUS][$t_key] == $tc_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] ) {
-			unset( $tc_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] );
+if( $f_view_type == "simple" && $t_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] > 0 ) {
+	foreach( $t_setting_arr[FILTER_PROPERTY_STATUS] as $t_key => $t_val ) {
+		if( $t_setting_arr[FILTER_PROPERTY_STATUS][$t_key] == $t_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] ) {
+			unset( $t_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] );
 		}
 	}
 }
 
-$t_settings_serialized = serialize( $tc_setting_arr );
+$t_settings_serialized = serialize( $t_setting_arr );
 $t_settings_string = $t_cookie_version . '#' . $t_settings_serialized;
 
 # If only using a temporary filter, don't store it in the database

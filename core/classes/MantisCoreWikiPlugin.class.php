@@ -20,6 +20,7 @@
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  * @package MantisBT
+ * @subpackage classes
  */
 
 /**
@@ -29,12 +30,11 @@ require_once( 'MantisWikiPlugin.class.php' );
 
 /**
  * Base that uses the old style wiki definitions from config_inc.php
- * @package MantisBT
- * @subpackage classes
  */
 abstract class MantisCoreWikiPlugin extends MantisWikiPlugin {
 	/**
 	 * Config Function
+	 * @return array
 	 */
 	function config() {
 		return array(
@@ -46,12 +46,11 @@ abstract class MantisCoreWikiPlugin extends MantisWikiPlugin {
 
 /**
  * Basic Dokuwiki support with old-style wiki integration.
- * @package MantisBT
- * @subpackage classes
  */
 class MantisCoreDokuwikiPlugin extends MantisCoreWikiPlugin {
 	/**
 	 * Plugin Registration
+	 * @return void
 	 */
 	function register() {
 		$this->name = 'MantisBT Dokuwiki Integration';
@@ -64,10 +63,10 @@ class MantisCoreDokuwikiPlugin extends MantisCoreWikiPlugin {
 	/**
 	 * Wiki base url
 	 *
-	 * @param int $p_project_id project id
-	* @return string
+	 * @param integer $p_project_id A project identifier.
+	 * @return string
 	 */
-	function base_url( $p_project_id=null ) {
+	function base_url( $p_project_id = null ) {
 		$t_base = plugin_config_get( 'engine_url' ) . 'doku.php?id=';
 
 		$t_namespace = plugin_config_get( 'root_namespace' );
@@ -84,8 +83,8 @@ class MantisCoreDokuwikiPlugin extends MantisCoreWikiPlugin {
 	/**
 	 * Wiki link to a bug
 	 *
-	 * @param int $p_event event
-	 * @param int $p_bug_id bug id
+	 * @param integer $p_event  Event.
+	 * @param integer $p_bug_id A bug identifier.
 	 * @return string
 	 */
 	function link_bug( $p_event, $p_bug_id ) {
@@ -95,8 +94,8 @@ class MantisCoreDokuwikiPlugin extends MantisCoreWikiPlugin {
 	/**
 	 * Wiki link to a project
 	 *
-	 * @param int $p_event event
-	 * @param int $p_project_id project id
+	 * @param integer $p_event      Event.
+	 * @param integer $p_project_id A project identifier.
 	 * @return string
 	 */
 	function link_project( $p_event, $p_project_id ) {
@@ -106,12 +105,11 @@ class MantisCoreDokuwikiPlugin extends MantisCoreWikiPlugin {
 
 /**
  * Basic MediaWiki support with old-style wiki integration.
- * @package MantisBT
- * @subpackage classes
  */
 class MantisCoreMediaWikiPlugin extends MantisCoreWikiPlugin {
 	/**
 	 * Plugin Registration
+	 * @return void
 	 */
 	function register() {
 		$this->name = 'MantisBT MediaWiki Integration';
@@ -124,10 +122,10 @@ class MantisCoreMediaWikiPlugin extends MantisCoreWikiPlugin {
 	/**
 	 * Wiki base url
 	 *
-	 * @param int $p_project_id project id
+	 * @param integer $p_project_id A project identifier.
 	 * @return string
 	 */
-	function base_url( $p_project_id=null ) {
+	function base_url( $p_project_id = null ) {
 		$t_base = plugin_config_get( 'engine_url' ) . 'index.php/';
 		if( !is_null( $p_project_id ) && $p_project_id != ALL_PROJECTS ) {
 			$t_base .= urlencode( project_get_name( $p_project_id ) ) . ':';
@@ -140,8 +138,8 @@ class MantisCoreMediaWikiPlugin extends MantisCoreWikiPlugin {
 	/**
 	 * Wiki link to a bug
 	 *
-	 * @param int $p_event event
-	 * @param int $p_bug_id bug id
+	 * @param integer $p_event  Event.
+	 * @param integer $p_bug_id A bug identifier.
 	 * @return string
 	 */
 	function link_bug( $p_event, $p_bug_id ) {
@@ -151,8 +149,8 @@ class MantisCoreMediaWikiPlugin extends MantisCoreWikiPlugin {
 	/**
 	 * Wiki link to a project
 	 *
-	 * @param int $p_event event
-	 * @param int $p_project_id project id
+	 * @param integer $p_event      Event.
+	 * @param integer $p_project_id A project identifier.
 	 * @return string
 	 */
 	function link_project( $p_event, $p_project_id ) {
@@ -162,12 +160,11 @@ class MantisCoreMediaWikiPlugin extends MantisCoreWikiPlugin {
 
 /**
  * Basic Twiki support with old-style wiki integration.
- * @package MantisBT
- * @subpackage classes
  */
 class MantisCoreTwikiPlugin extends MantisCoreWikiPlugin {
 	/**
 	 * Plugin Registration
+	 * @return void
 	 */
 	function register() {
 		$this->name = 'MantisBT Twiki Integration';
@@ -180,10 +177,10 @@ class MantisCoreTwikiPlugin extends MantisCoreWikiPlugin {
 	/**
 	 * Wiki base url
 	 *
-	 * @param int $p_project_id project id
+	 * @param integer $p_project_id A project identifier.
 	 * @return string
 	 */
-	function base_url( $p_project_id=null ) {
+	function base_url( $p_project_id = null ) {
 		$t_base = plugin_config_get( 'engine_url' );
 
 		$t_namespace = plugin_config_get( 'root_namespace' );
@@ -200,8 +197,8 @@ class MantisCoreTwikiPlugin extends MantisCoreWikiPlugin {
 	/**
 	 * Wiki link to a bug
 	 *
-	 * @param int $p_event event
-	 * @param int $p_bug_id bug id
+	 * @param integer $p_event  Event.
+	 * @param integer $p_bug_id A bug identifier.
 	 * @return string
 	 */
 	function link_bug( $p_event, $p_bug_id ) {
@@ -211,8 +208,8 @@ class MantisCoreTwikiPlugin extends MantisCoreWikiPlugin {
 	/**
 	 * Wiki link to a project
 	 *
-	 * @param int $p_event event
-	 * @param int $p_project_id project id
+	 * @param integer $p_event 	    Event.
+	 * @param integer $p_project_id A project identifier.
 	 * @return string
 	 */
 	function link_project( $p_event, $p_project_id ) {
@@ -222,12 +219,11 @@ class MantisCoreTwikiPlugin extends MantisCoreWikiPlugin {
 
 /**
  * Basic WikkaWiki support with old-style wiki integration.
- * @package MantisBT
- * @subpackage classes
  */
 class MantisCoreWikkaWikiPlugin extends MantisCoreWikiPlugin {
 	/**
 	 * Plugin Registration
+	 * @return void
 	 */
 	function register() {
 		$this->name = 'MantisBT WikkaWiki Integration';
@@ -240,10 +236,10 @@ class MantisCoreWikkaWikiPlugin extends MantisCoreWikiPlugin {
 	/**
 	 * Wiki base url
 	 *
-	 * @param int $p_project_id project id
+	 * @param integer $p_project_id A project identifier.
 	 * @return string
 	 */
-	function base_url( $p_project_id=null ) {
+	function base_url( $p_project_id = null ) {
 		$t_base = plugin_config_get( 'engine_url' ) . 'wikka.php?wakka=';
 
 		$t_namespace = ucfirst( plugin_config_get( 'root_namespace' ) );
@@ -260,8 +256,8 @@ class MantisCoreWikkaWikiPlugin extends MantisCoreWikiPlugin {
 	/**
 	 * Wiki link to a bug
 	 *
-	 * @param int $p_event event
-	 * @param int $p_bug_id bug id
+	 * @param integer $p_event  Event.
+	 * @param integer $p_bug_id A bug identifier.
 	 * @return string
 	 */
 	function link_bug( $p_event, $p_bug_id ) {
@@ -271,8 +267,8 @@ class MantisCoreWikkaWikiPlugin extends MantisCoreWikiPlugin {
 	/**
 	 * Wiki link to a project
 	 *
-	 * @param int $p_event event
-	 * @param int $p_project_id project id
+	 * @param integer $p_event      Event.
+	 * @param integer $p_project_id A project identifier.
 	 * @return string
 	 */
 	function link_project( $p_event, $p_project_id ) {
@@ -282,12 +278,11 @@ class MantisCoreWikkaWikiPlugin extends MantisCoreWikiPlugin {
 
 /**
  * Basic Xwiki support with old-style wiki integration.
- * @package MantisBT
- * @subpackage classes
  */
 class MantisCoreXwikiPlugin extends MantisCoreWikiPlugin {
 	/**
 	 * Plugin Registration
+	 * @return void
 	 */
 	function register() {
 		$this->name = 'MantisBT Xwiki Integration';
@@ -300,10 +295,10 @@ class MantisCoreXwikiPlugin extends MantisCoreWikiPlugin {
 	/**
 	 * Wiki base url
 	 *
-	 * @param int $p_project_id project id
+	 * @param integer $p_project_id A project identifier.
 	 * @return string
 	 */
-	function base_url( $p_project_id=null ) {
+	function base_url( $p_project_id = null ) {
 		$t_base = plugin_config_get( 'engine_url' );
 		if( !is_null( $p_project_id ) && $p_project_id != ALL_PROJECTS ) {
 			$t_base .= urlencode( project_get_name( $p_project_id ) ) . '/';
@@ -316,8 +311,8 @@ class MantisCoreXwikiPlugin extends MantisCoreWikiPlugin {
 	/**
 	 * Wiki link to a bug
 	 *
-	 * @param int $p_event event
-	 * @param int $p_bug_id bug id
+	 * @param integer $p_event  Event.
+	 * @param integer $p_bug_id A bug identifier.
 	 * @return string
 	 */
 	function link_bug( $p_event, $p_bug_id ) {
@@ -327,8 +322,8 @@ class MantisCoreXwikiPlugin extends MantisCoreWikiPlugin {
 	/**
 	 * Wiki link to a project
 	 *
-	 * @param int $p_event event
-	 * @param int $p_project_id project id
+	 * @param integer $p_event      Event.
+	 * @param integer $p_project_id A project identifier.
 	 * @return string
 	 */
 	function link_project( $p_event, $p_project_id ) {

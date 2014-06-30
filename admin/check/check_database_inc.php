@@ -32,9 +32,7 @@ if( !defined( 'CHECK_DATABASE_INC_ALLOW' ) ) {
 	return;
 }
 
-/**
- * MantisBT Check API
- */
+# MantisBT Check API
 require_once( 'check_api.php' );
 require_api( 'config_api.php' );
 require_api( 'database_api.php' );
@@ -170,7 +168,7 @@ if( !db_is_connected() ) {
 
 $t_database_server_info = $g_db->ServerInfo();
 $t_db_version = $t_database_server_info['version'];
-preg_match('/^[0-9]+\.[0-9+]/', $t_db_version, $t_matches );
+preg_match( '/^[0-9]+\.[0-9+]/', $t_db_version, $t_matches );
 $t_db_major_version = $t_matches[0];
 
 # MantisBT minimum version
@@ -228,8 +226,7 @@ if( db_is_mysql() ) {
 			array(
 				false => 'Release information for MySQL ' . $t_db_major_version
 					. ' series is not available, unable to perform the lifecycle checks.'
-			)
-		);
+			) );
 	} else {
 		if( 'GA' == $t_versions[$t_db_major_version][0] ) {
 			$t_mysql_ga_release = version_compare( $t_database_server_info['version'], $t_versions[$t_db_major_version][1], '>=' );
@@ -251,8 +248,7 @@ if( db_is_mysql() ) {
 					. '. This is a development or pre-GA version which '
 					. ( $t_versions[$t_db_major_version][0] == 'Discontinued' ? 'has been discontinued and ' : '' )
 					. 'is not recommended for Production use. You should upgrade to a supported GA release.'
-			)
-		);
+			) );
 
 		# Within lifecycle 'Extended' support
 		check_print_test_row(
@@ -264,8 +260,7 @@ if( db_is_mysql() ) {
 					. htmlentities( $t_db_version )
 					. ') ended on ' . $t_date_extended_end
 					. '. It should not be used, as security flaws discovered in this version will not be fixed.'
-			)
-		);
+			) );
 
 		# Within lifecycle 'Premier' support
 		check_print_test_warn_row(
@@ -279,8 +274,7 @@ if( db_is_mysql() ) {
 					. '. The release is in its Extended support period, which ends on '
 					. $t_date_extended_end
 					. '. You should upgrade to a newer version of MySQL which is still within its Premier support period to benefit from bug fixes and security patches.'
-			)
-		);
+			) );
 	}
 }
 
@@ -303,7 +297,7 @@ elseif( db_is_pgsql() ) {
 		$t_date_eol = $t_versions[$t_db_major_version];
 	} else {
 		$t_version = key( $t_versions );
-		if( version_compare( $t_db_major_version, $t_version , '>' ) ) {
+		if( version_compare( $t_db_major_version, $t_version, '>' ) ) {
 			# Major version is higher than the most recent in array - assume we're supported
 			$t_date_eol = new DateTime;
 			$t_date_eol = $t_date_eol->add( new DateInterval( 'P1Y' ) )->format( $t_date_format );
@@ -320,14 +314,10 @@ elseif( db_is_pgsql() ) {
 			false,
 			array(
 				false => "Release information for version $t_db_major_version is not available. "
-					. vsprintf(
-						'Since it is %s than %s, we assume it is %s. ',
-						$t_assume
-					)
+					. vsprintf( 'Since it is %s than %s, we assume it is %s. ', $t_assume )
 					. 'Please refer to the <a href="' . $t_support_url
 					. '">PostgreSQL release support policy</a> to make sure.'
-			)
-		);
+			) );
 	}
 
 	check_print_test_row(
@@ -336,8 +326,7 @@ elseif( db_is_pgsql() ) {
 		array(
 			false => 'PostgreSQL version ' . htmlentities( $t_db_version )
 				. ' is no longer supported and should not be used, as security flaws discovered in this version will not be fixed.'
-		)
-	);
+		) );
 }
 
 $t_table_prefix = config_get_global( 'db_table_prefix' );
@@ -360,14 +349,13 @@ check_print_info_row(
 
 check_print_test_warn_row(
 	'Plugin table prefix should not be empty',
-	!empty($t_table_plugin_prefix),
+	!empty( $t_table_plugin_prefix ),
 	array(
 		false => 'Defining $g_db_table_plugin_prefix allows easy identification of plugin-specific vs MantisBT core tables',
 	)
 );
 
 if( db_is_mysql() ) {
-
 	$t_table_prefix_regex_safe = preg_quote( $t_table_prefix, '/' );
 	$t_table_suffix_regex_safe = preg_quote( $t_table_suffix, '/' );
 
@@ -401,8 +389,7 @@ if( db_is_mysql() ) {
 				substr( $t_row[$t_field_collation], 0, 5 ) === 'utf8_',
 				array( false => 'Table ' . htmlentities( $t_row[$t_field_name] )
 					. ' is using ' . htmlentities( $t_row[$t_field_collation] )
-					. ' collation where UTF-8 collation is required.' )
-			);
+					. ' collation where UTF-8 collation is required.' ) );
 		}
 	}
 
@@ -423,10 +410,8 @@ if( db_is_mysql() ) {
 						. ' of type ' . $t_row[$t_field_type]
 						. ' on table ' . htmlentities( $t_table )
 						. ' is using ' . htmlentities( $t_row[$t_field_collation] )
-						. ' collation where UTF-8 collation is required.' )
-				);
+						. ' collation where UTF-8 collation is required.' ) );
 			}
 		}
 	}
-
 }

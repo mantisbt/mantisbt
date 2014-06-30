@@ -31,9 +31,9 @@ require_api( 'config_api.php' );
 /**
  * Determine if there is a transition possible between two workflow states. The
  * direction of the transition is factored into this check.
- * @param int $p_from_status_id Source status ID
- * @param int $p_to_status_id Destination status ID
- * @return bool Whether a transition exists in the specified direction
+ * @param integer $p_from_status_id Source status ID.
+ * @param integer $p_to_status_id   Destination status ID.
+ * @return boolean Whether a transition exists in the specified direction
  */
 function workflow_transition_edge_exists( $p_from_status_id, $p_to_status_id ) {
 	if( $p_from_status_id == $p_to_status_id ) {
@@ -50,7 +50,7 @@ function workflow_transition_edge_exists( $p_from_status_id, $p_to_status_id ) {
  * @param array $p_enum_workflow The workflow enumeration to parse.
  * @return array The parsed workflow graph.
  */
-function workflow_parse( $p_enum_workflow ) {
+function workflow_parse( array $p_enum_workflow ) {
 	$t_status_arr = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
 	if( count( $p_enum_workflow ) == 0 ) {
 		# workflow is not set, default it to all transitions
@@ -73,7 +73,7 @@ function workflow_parse( $p_enum_workflow ) {
 	$t_new_label = MantisEnum::getLabel( lang_get( 'status_enum_string' ), config_get( 'bug_submit_status' ) );
 	if( is_array( $t_submit_status_array ) ) {
 		# @@@ (thraxisp) this is not implemented in bug_api.php
-		foreach ($t_submit_status_array as $t_access => $t_status ) {
+		foreach ( $t_submit_status_array as $t_access => $t_status ) {
 			$t_entry[$t_status][0] = $t_new_label;
 			$t_exit[0][$t_status] = $t_new_label;
 		}
@@ -88,7 +88,7 @@ function workflow_parse( $p_enum_workflow ) {
 	foreach ( $t_status_arr as $t_status => $t_status_label ) {
 		if( isset( $p_enum_workflow[$t_status] ) ) {
 			$t_next_arr = MantisEnum::getAssocArrayIndexedByValues( $p_enum_workflow[$t_status] );
-			foreach ( $t_next_arr as $t_next => $t_next_label) {
+			foreach ( $t_next_arr as $t_next => $t_next_label ) {
 				if( !isset( $t_default[$t_status] ) ) {
 					$t_default[$t_status] = $t_next;
 				}

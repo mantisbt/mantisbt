@@ -47,7 +47,7 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'user_api.php' );
 
-form_security_validate('manage_user_reset');
+form_security_validate( 'manage_user_reset' );
 
 auth_reauthenticate();
 access_ensure_global_level( config_get( 'manage_user_threshold' ) );
@@ -73,7 +73,7 @@ if( $t_reset ) {
 
 $t_redirect_url = 'manage_user_page.php';
 
-form_security_purge('manage_user_reset');
+form_security_purge( 'manage_user_reset' );
 
 html_page_top( null, $t_result ? $t_redirect_url : null );
 

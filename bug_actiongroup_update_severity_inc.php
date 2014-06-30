@@ -43,6 +43,7 @@ require_api( 'print_api.php' );
 
 /**
  * Prints the title for the custom action page.
+ * @return void
  */
 function action_update_severity_print_title() {
 	echo '<tr>';
@@ -56,6 +57,7 @@ function action_update_severity_print_title() {
  * every field the user need to supply + the submit button.  The fields are
  * added as rows in a table that is already created by the calling code.
  * A row has two columns.
+ * @return void
  */
 function action_update_severity_print_fields() {
 ?>
@@ -85,7 +87,7 @@ function action_update_severity_print_fields() {
 /**
  * Validates the action on the specified bug id.
  *
- * @param int $p_bug_id bug id
+ * @param integer $p_bug_id A bug identifier.
  * @return string|null On failure: the reason why the action could not be validated. On success: null.
  */
 function action_update_severity_validate( $p_bug_id ) {
@@ -106,7 +108,7 @@ function action_update_severity_validate( $p_bug_id ) {
 /**
  * Executes the custom action on the specified bug id.
  *
- * @param int $p_bug_id The bug id to execute the custom action on.
+ * @param integer $p_bug_id The bug id to execute the custom action on.
  * @return null Previous validation ensures that this function doesn't fail. Therefore we can always return null to indicate no errors occurred.
  */
 function action_update_severity_process( $p_bug_id ) {

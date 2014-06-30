@@ -82,7 +82,7 @@ print_manage_menu( 'manage_proj_page.php' );
 	<h2><?php echo lang_get( 'projects_title' ); ?></h2><?php
 
 	# Check the user's global access level before allowing project creation
-	if( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
+	if( access_has_global_level( config_get( 'create_project_threshold' ) ) ) {
 		print_button( 'manage_proj_create_page.php', lang_get( 'create_new_project_link' ) );
 	} ?>
 

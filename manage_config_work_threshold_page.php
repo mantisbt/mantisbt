@@ -69,7 +69,8 @@ $t_overrides = array();
 
 /**
  * Set overrides
- * @param string $p_config config value
+ * @param string $p_config Configuration value.
+ * @return void
  */
 function set_overrides( $p_config ) {
 	global $t_overrides;
@@ -80,7 +81,8 @@ function set_overrides( $p_config ) {
 
 /**
  * Section header
- * @param string $p_section_name section name
+ * @param string $p_section_name Section name.
+ * @return void
  */
 function get_section_begin_mcwt( $p_section_name ) {
 	global $t_access_levels;
@@ -104,11 +106,11 @@ function get_section_begin_mcwt( $p_section_name ) {
 
 /**
  * Defines the cell's background color and sets the overrides
- * @param string $p_threshold  Config option
- * @param string $p_file       System default value
- * @param string $p_global     All projects value
- * @param string $p_project    Current project value
- * @param bool $p_set_override If true, will define an override if needed
+ * @param string  $p_threshold    Configuration option.
+ * @param string  $p_file         System default value.
+ * @param string  $p_global       All projects value.
+ * @param string  $p_project      Current project value.
+ * @param boolean $p_set_override If true, will define an override if needed.
  * @return string HTML tag attribute for background color override
  */
 function set_color( $p_threshold, $p_file, $p_global, $p_project, $p_set_override ) {
@@ -142,8 +144,9 @@ function set_color( $p_threshold, $p_file, $p_global, $p_project, $p_set_overrid
 
 /**
  * Prints selection list or value of who is allowed to change the capability
- * @param string $p_threshold  Capability
- * @param bool   $p_can_change If true, prints a selection list otherwise just display value
+ * @param string  $p_threshold  Capability.
+ * @param boolean $p_can_change If true, prints a selection list otherwise just display value.
+ * @return void
  */
 function print_who_can_change( $p_threshold, $p_can_change ) {
 	static $s_file_access = null;
@@ -169,11 +172,12 @@ function print_who_can_change( $p_threshold, $p_can_change ) {
 
 /**
  * Get row
- * @param string $p_caption caption
- * @param string $p_threshold threshold
- * @param bool $p_all_projects_only all projects only
+ * @param string  $p_caption           Caption.
+ * @param string  $p_threshold         Threshold.
+ * @param boolean $p_all_projects_only All projects only.
+ * @return void
  */
-function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only=false ) {
+function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only = false ) {
 	global $t_user, $t_project_id, $t_show_submit, $t_access_levels;
 
 	$t_file = config_get_global( $p_threshold );
@@ -247,11 +251,12 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only=fals
 
 /**
  * Get boolean row
- * @param string $p_caption caption
- * @param string $p_threshold threshold
- * @param bool $p_all_projects_only all projects only
+ * @param string  $p_caption           Caption.
+ * @param string  $p_threshold         Threshold.
+ * @param boolean $p_all_projects_only All projects only.
+ * @return void
  */
-function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only=false ) {
+function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only = false ) {
 	global $t_user, $t_project_id, $t_show_submit, $t_access_levels;
 
 	$t_file = config_get_global( $p_threshold );
@@ -285,13 +290,14 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only=
 }
 
 /**
- * Get enum row
- * @param string $p_caption caption
- * @param string $p_threshold threshold
- * @param string $p_enum enum
- * @param bool $p_all_projects_only all projects only
+ * Get enumeration row
+ * @param string  $p_caption           Caption.
+ * @param string  $p_threshold         Threshold.
+ * @param string  $p_enum              Enumeration.
+ * @param boolean $p_all_projects_only All projects only.
+ * @return void
  */
-function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects_only=false ) {
+function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects_only = false ) {
 	global $t_user, $t_project_id, $t_show_submit, $t_access_levels;
 
 	$t_file = config_get_global( $p_threshold );
@@ -324,6 +330,7 @@ function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects
 
 /**
  * Print section end
+ * @return void
  */
 function get_section_end() {
 	echo '</tbody></table></div><br />' . "\n";
@@ -338,7 +345,7 @@ echo "<br /><br />\n";
 if( ALL_PROJECTS == $t_project_id ) {
 	$t_project_title = lang_get( 'config_all_projects' );
 } else {
-	$t_project_title = sprintf( lang_get( 'config_project' ) , string_display( project_get_name( $t_project_id ) ) );
+	$t_project_title = sprintf( lang_get( 'config_project' ), string_display( project_get_name( $t_project_id ) ) );
 }
 echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
 echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
@@ -390,7 +397,7 @@ get_capability_row( lang_get( 'change_view_state_own_bugnotes' ), 'bugnote_user_
 get_section_end();
 
 # Others
-get_section_begin_mcwt( lang_get('others' ) );
+get_section_begin_mcwt( lang_get( 'others' ) );
 get_capability_row( lang_get( 'view' ) . ' ' . lang_get( 'changelog_link' ), 'view_changelog_threshold' );
 get_capability_row( lang_get( 'view' ) . ' ' . lang_get( 'assigned_to' ), 'view_handler_threshold' );
 get_capability_row( lang_get( 'view' ) . ' ' . lang_get( 'bug_history' ), 'view_history_threshold' );

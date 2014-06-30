@@ -41,7 +41,7 @@ require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );
 require_api( 'project_api.php' );
 
-form_security_validate('manage_user_proj_add');
+form_security_validate( 'manage_user_proj_add' );
 
 auth_reauthenticate();
 
@@ -59,6 +59,6 @@ foreach ( $f_project_id as $t_proj_id ) {
 	}
 }
 
-form_security_purge('manage_user_proj_add');
+form_security_purge( 'manage_user_proj_add' );
 
 print_header_redirect( 'manage_user_edit_page.php?user_id=' . $f_user_id );

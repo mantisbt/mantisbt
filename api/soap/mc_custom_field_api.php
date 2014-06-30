@@ -29,15 +29,14 @@
  * - id corresponding to name in object ref.
  * - 0, if object ref doesn't contain an id or a name.
  *
- * @param ObjectRef  $p_object_ref   An associate array with "id" and "name" keys.
- * @return int
+ * @param stdClass $p_object_ref An associate array with "id" and "name" keys.
+ * @return integer
  */
-function mci_get_custom_field_id_from_objectref( $p_object_ref ) {
-
+function mci_get_custom_field_id_from_objectref( stdClass $p_object_ref ) {
 	$p_object_ref = SoapObjectsFactory::unwrapObject( $p_object_ref );
 
-	if( (int) $p_object_ref['id'] != 0 ) {
-		$t_id = (int) $p_object_ref['id'];
+	if( (int)$p_object_ref['id'] != 0 ) {
+		$t_id = (int)$p_object_ref['id'];
 	} else {
 		if( !is_blank( $p_object_ref['name'] ) ) {
 			$t_id = custom_field_get_id_from_name( $p_object_ref['name'] );

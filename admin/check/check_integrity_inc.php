@@ -30,9 +30,7 @@ if( !defined( 'CHECK_INTEGRITY_INC_ALLOW' ) ) {
 	return;
 }
 
-/**
- * MantisBT Check API
- */
+# MantisBT Check API
 require_once( 'check_api.php' );
 require_api( 'config_api.php' );
 
@@ -47,7 +45,7 @@ if( file_exists( $t_this_directory . 'integrity_commit_blobs.php' ) ) {
 /**
  * Returns the Git Object hash for given file
  *
- * @param string $p_file filename of file contained in git repository
+ * @param string $p_file Filename of file contained in git repository.
  * @return string
  */
 function create_git_object_hash( $p_file ) {
@@ -60,8 +58,8 @@ function create_git_object_hash( $p_file ) {
 
 /**
  * Get git tag of object hash for given file
- * @param string $p_filename filename of file contained in git repository
- * @param string $p_object_hash object hash
+ * @param string $p_filename    Filename of file contained in git repository.
+ * @param string $p_object_hash Object hash.
  * @return string
  */
 function get_release_containing_object_hash( $p_filename, $p_object_hash ) {
@@ -81,8 +79,8 @@ function get_release_containing_object_hash( $p_filename, $p_object_hash ) {
 
 /**
  * Get commit of object hash for given file
- * @param string $p_filename filename of file contained in git repository
- * @param string $p_object_hash object hash
+ * @param string $p_filename    Filename of file contained in git repository.
+ * @param string $p_object_hash Object hash.
  * @return string
  */
 function get_commit_containing_object_hash( $p_filename, $p_object_hash ) {
@@ -102,13 +100,13 @@ function get_commit_containing_object_hash( $p_filename, $p_object_hash ) {
 /**
  * Check File integrity of local files against release
  *
- * @param string $p_directory directory
- * @param string $p_base_directory base directory
- * @param string $p_relative_path_prefix relative path prefix
- * @param array $p_ignore_files files to ignore
- * @return null;
+ * @param string $p_directory            Directory.
+ * @param string $p_base_directory       Base directory.
+ * @param string $p_relative_path_prefix Relative path prefix.
+ * @param array  $p_ignore_files         Files to ignore.
+ * @return void
  */
-function check_file_integrity_recursive( $p_directory, $p_base_directory, $p_relative_path_prefix = '', $p_ignore_files = array() ) {
+function check_file_integrity_recursive( $p_directory, $p_base_directory, $p_relative_path_prefix = '', array $p_ignore_files = array() ) {
 	global $g_integrity_blobs, $g_integrity_release_blobs;
 	if( $t_handle = opendir( $p_directory ) ) {
 		while( false !== ( $t_file = readdir( $t_handle ) ) ) {
@@ -148,8 +146,7 @@ function check_file_integrity_recursive( $p_directory, $p_base_directory, $p_rel
 				check_print_test_warn_row(
 					htmlentities( $t_file_absolute ),
 					$t_integrity_ok,
-					$t_integrity_info
-				);
+					$t_integrity_info );
 			}
 		}
 	}
@@ -211,7 +208,7 @@ $t_builtin_plugins = array(
 	'XmlImportExport'
 );
 $t_plugins_dir = $t_absolute_base_dir . 'plugins' . DIRECTORY_SEPARATOR;
-foreach( $t_builtin_plugins as $t_builtin_plugin) {
+foreach( $t_builtin_plugins as $t_builtin_plugin ) {
 	$t_base_dir = $t_plugins_dir . $t_builtin_plugin . DIRECTORY_SEPARATOR;
 	check_file_integrity_recursive( $t_base_dir, $t_base_dir, 'plugins/' . $t_builtin_plugin . DIRECTORY_SEPARATOR );
 }

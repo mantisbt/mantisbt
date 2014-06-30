@@ -37,9 +37,9 @@ require_once( $t_mantis_dir . 'core.php' );
 /**
  * Checks if the request for the webservice is a documentation request (eg:
  * WSDL) or an actual webservice call.
+ * @return boolean
  */
-function mci_is_webservice_call()
-{
+function mci_is_webservice_call() {
 	global $QUERY_STRING;
 	global $_SERVER;
 
@@ -66,26 +66,26 @@ if( !extension_loaded( 'soap' ) ) {
 
 if( !mci_is_webservice_call() ) {
 	# if we have a documentation request, do some tidy up to prevent lame bot loops e.g. /mantisconnect.php/mc_enum_etas/mc_project_get_versions/
-	$parts = explode ( 'mantisconnect.php/', strtolower($_SERVER['SCRIPT_NAME'] ), 2 );
-	if (isset( $parts[1] ) && (strlen ( $parts[1] ) > 0 ) ) {
+	$parts = explode( 'mantisconnect.php/', strtolower( $_SERVER['SCRIPT_NAME'] ), 2 );
+	if( isset( $parts[1] ) && (strlen( $parts[1] ) > 0 ) ) {
 		echo 'This is not a SOAP webservice request, for documentation, see ' .  $parts[0] . 'mantisconnect.php';
 		exit();
 	}
 
-	header('Content-Type: text/xml');
-	$wsdl = file_get_contents('mantisconnect.wsdl');
-	$wsdl = str_replace('http://www.mantisbt.org/bugs/api/soap/mantisconnect.php', config_get('path').'api/soap/mantisconnect.php', $wsdl);
+	header( 'Content-Type: text/xml' );
+	$wsdl = file_get_contents( 'mantisconnect.wsdl' );
+	$wsdl = str_replace( 'http://www.mantisbt.org/bugs/api/soap/mantisconnect.php', config_get( 'path' ).'api/soap/mantisconnect.php', $wsdl );
 	echo $wsdl;
 	exit();
 }
 
 require_once( 'mc_core.php' );
 
-$server = new SoapServer("mantisconnect.wsdl",
-	array('features' => SOAP_USE_XSI_ARRAY_TYPE + SOAP_SINGLE_ELEMENT_ARRAYS)
+$server = new SoapServer( "mantisconnect.wsdl",
+	array( 'features' => SOAP_USE_XSI_ARRAY_TYPE + SOAP_SINGLE_ELEMENT_ARRAYS )
 );
 
-$server->addFunction(SOAP_FUNCTIONS_ALL);
+$server->addFunction( SOAP_FUNCTIONS_ALL );
 $server->handle();
 
 if( $g_email_stored ) {

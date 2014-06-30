@@ -32,8 +32,9 @@ html_page_top();
 /**
  * Output HTML Table Row
  *
- * @param string $p_description Row Description
- * @param string $p_value Row Value
+ * @param string $p_description Row Description.
+ * @param string $p_value       Row Value.
+ * @return void
  */
 function print_info_row( $p_description, $p_value ) {
 	echo '<tr>';
@@ -45,8 +46,8 @@ function print_info_row( $p_description, $p_value ) {
 /**
  * Function to get row count for a given table
  *
- * @param string $p_table table name
- * @return int row count
+ * @param string $p_table Table name.
+ * @return integer row count
  */
 function helper_table_row_count( $p_table ) {
 	$t_table = $p_table;
@@ -65,7 +66,7 @@ function helper_table_row_count( $p_table ) {
 <?php
 foreach( db_get_table_list() as $t_table ) {
 	if( db_table_exists( $t_table ) ) {
-			print_info_row( $t_table, helper_table_row_count($t_table) . ' records' );
+			print_info_row( $t_table, helper_table_row_count( $t_table ) . ' records' );
 	}
 }
 ?>

@@ -57,7 +57,7 @@ function form_action_self() {
  * Generate a random security token, prefixed by date, store it in the
  * user's session, and then return the string to be used as a form element
  * element with the security token as the value.
- * @param string $p_form_name Form name
+ * @param string $p_form_name Form name.
  * @return string Security token string
  */
 function form_security_token( $p_form_name ) {
@@ -92,8 +92,8 @@ function form_security_token( $p_form_name ) {
 
 /**
  * Get a hidden form element containing a generated form security token.
- * @param string $p_form_name Form name
- * @param string $p_security_token Optional security token, previously generated for the same form
+ * @param string $p_form_name      Form name.
+ * @param string $p_security_token Optional security token, previously generated for the same form.
  * @return string Hidden form element to output
  */
 function form_security_field( $p_form_name, $p_security_token = null ) {
@@ -118,7 +118,7 @@ function form_security_field( $p_form_name, $p_security_token = null ) {
 
 /**
  * Get a URL parameter containing a generated form security token.
- * @param string $p_form_name Form name
+ * @param string $p_form_name Form name.
  * @return string Hidden form element to output
  */
 function form_security_param( $p_form_name ) {
@@ -140,8 +140,8 @@ function form_security_param( $p_form_name ) {
  * Validate the security token for the given form name based on tokens
  * stored in the user's session.  While checking stored tokens, any that
  * are more than 3 days old will be purged.
- * @param string $p_form_name Form name
- * @return bool Form is valid
+ * @param string $p_form_name Form name.
+ * @return boolean Form is valid
  */
 function form_security_validate( $p_form_name ) {
 	if( PHP_CLI == php_mode() || OFF == config_get_global( 'form_security_validation' ) ) {
@@ -183,7 +183,8 @@ function form_security_validate( $p_form_name ) {
 /**
  * Purge form security tokens that are older than 3 days, or used
  * for form validation.
- * @param string $p_form_name Form name
+ * @param string $p_form_name Form name.
+ * @return void
  */
 function form_security_purge( $p_form_name ) {
 	if( PHP_CLI == php_mode() || OFF == config_get_global( 'form_security_validation' ) ) {

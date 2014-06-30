@@ -65,8 +65,8 @@ require_api( 'version_api.php' );
  * Checks the provided bug and determines whether it should be included in the changelog or not.
  * returns true: to include, false: to exclude.
  *
- * @param int $p_issue_id issue id
- * @return bool
+ * @param integer $p_issue_id Issue id.
+ * @return boolean
  */
 function custom_function_default_changelog_include_issue( $p_issue_id ) {
 	$t_issue = bug_get( $p_issue_id );
@@ -79,11 +79,12 @@ function custom_function_default_changelog_include_issue( $p_issue_id ) {
 /**
  * Prints one entry in the changelog.
  *
- * @param int $p_issue_id issue id
- * @param int $p_issue_level issue level
+ * @param integer $p_issue_id    Issue id.
+ * @param integer $p_issue_level Issue level.
+ * @return void
  */
 function custom_function_default_changelog_print_issue( $p_issue_id, $p_issue_level = 0 ) {
-	static $t_status;
+	static $s_status;
 
 	$t_bug = bug_get( $p_issue_id );
 
@@ -100,18 +101,18 @@ function custom_function_default_changelog_print_issue( $p_issue_id, $p_issue_le
 		echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
 	}
 
-	if( !isset( $t_status[$t_bug->status] ) ) {
-		$t_status[$t_bug->status] = get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
+	if( !isset( $s_status[$t_bug->status] ) ) {
+		$s_status[$t_bug->status] = get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
 	}
-	echo ' - ', $t_status[$t_bug->status], '.<br />';
+	echo ' - ', $s_status[$t_bug->status], '.<br />';
 }
 
 /**
  * Checks the provided bug and determines whether it should be included in the roadmap or not.
  * returns true: to include, false: to exclude.
  *
- * @param int $p_issue_id issue id
- * @return bool
+ * @param integer $p_issue_id Issue id.
+ * @return boolean
  */
 function custom_function_default_roadmap_include_issue( $p_issue_id ) {
 	return true;
@@ -120,11 +121,12 @@ function custom_function_default_roadmap_include_issue( $p_issue_id ) {
 /**
  * Prints one entry in the roadmap.
  *
- * @param int $p_issue_id issue id
- * @param int $p_issue_level issue level
+ * @param integer $p_issue_id    Issue id.
+ * @param integer $p_issue_level Issue level.
+ * @return void
  */
 function custom_function_default_roadmap_print_issue( $p_issue_id, $p_issue_level = 0 ) {
-	static $t_status;
+	static $s_status;
 
 	$t_bug = bug_get( $p_issue_id );
 
@@ -149,17 +151,17 @@ function custom_function_default_roadmap_print_issue( $p_issue_id, $p_issue_leve
 		echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
 	}
 
-	if( !isset( $t_status[$t_bug->status] ) ) {
-		$t_status[$t_bug->status] = get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
+	if( !isset( $s_status[$t_bug->status] ) ) {
+		$s_status[$t_bug->status] = get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
 	}
-	echo ' - ', $t_status[$t_bug->status], $t_strike_end, '.<br />';
+	echo ' - ', $s_status[$t_bug->status], $t_strike_end, '.<br />';
 }
 
 /**
  * format the bug summary.
  *
- * @param int $p_issue_id issue id
- * @param int $p_context context SUMMARY_CAPTION | SUMMARY_FIELD | SUMMARY_EMAIL
+ * @param integer $p_issue_id Issue id.
+ * @param integer $p_context  Context SUMMARY_CAPTION | SUMMARY_FIELD | SUMMARY_EMAIL.
  * @return string
  */
 function custom_function_default_format_issue_summary( $p_issue_id, $p_context = 0 ) {
@@ -186,18 +188,20 @@ function custom_function_default_format_issue_summary( $p_issue_id, $p_context =
  * to change the status.
  * In case of invalid data, this function should call trigger_error()
  *
- * @param int $p_issue_id issue number that can be used to get the existing state
- * @param MantisBug $p_new_issue_data is an object (MantisBug) with the appropriate fields updated
- * @param string $p_bugnote_text Bugnote text
+ * @param integer $p_issue_id       Issue number that can be used to get the existing state.
+ * @param BugData $p_new_issue_data Is an object (BugData) with the appropriate fields updated.
+ * @param string  $p_bugnote_text   Bugnote text.
+ * @return void
  */
-function custom_function_default_issue_update_validate( $p_issue_id, $p_new_issue_data, $p_bugnote_text ) {
+function custom_function_default_issue_update_validate( $p_issue_id, BugData $p_new_issue_data, $p_bugnote_text ) {
 }
 
 /**
  * Hook to notify after an issue has been updated.
  * In case of errors, this function should call trigger_error()
  *
- * @param int $p_issue_id the issue number that can be used to get the existing state
+ * @param integer $p_issue_id The issue number that can be used to get the existing state.
+ * @return void
  */
 function custom_function_default_issue_update_notify( $p_issue_id ) {
 }
@@ -207,16 +211,18 @@ function custom_function_default_issue_update_notify( $p_issue_id ) {
  * Verify that the proper fields are set before proceeding to create an issue
  * In case of errors, this function should call trigger_error()
  *
- * @param BugData $p_new_issue_data object (BugData) with the appropriate fields updated
+ * @param BugData $p_new_issue_data Object (BugData) with the appropriate fields updated.
+ * @return void
  */
-function custom_function_default_issue_create_validate( $p_new_issue_data ) {
+function custom_function_default_issue_create_validate( BugData $p_new_issue_data ) {
 }
 
 /**
  * Hook to notify after aa issue has been created.
  * In case of errors, this function should call trigger_error()
  *
- * @param int $p_issue_id the issue number that can be used to get the existing state
+ * @param integer $p_issue_id The issue number that can be used to get the existing state.
+ * @return void
  */
 function custom_function_default_issue_create_notify( $p_issue_id ) {
 }
@@ -226,7 +232,8 @@ function custom_function_default_issue_create_notify( $p_issue_id ) {
  * Verify that the issue can be deleted before the actual deletion.
  * In the case that the issue should not be deleted, this function should call trigger_error().
  *
- * @param int $p_issue_id the issue number that can be used to get the existing state
+ * @param integer $p_issue_id The issue number that can be used to get the existing state.
+ * @return void
  */
 function custom_function_default_issue_delete_validate( $p_issue_id ) {
 }
@@ -234,15 +241,19 @@ function custom_function_default_issue_delete_validate( $p_issue_id ) {
 /**
  * Hook to notify after an issue has been deleted.
  *
- * @param MantisBug $p_issue_data Issue data (MantisBug) that reflects the last status of the
- * issue before it was deleted.
+ * Note: this actually gets called after the deletion is logged,
+ * but before the actual delete so the bug data can be accessed.
+ *
+ * @param integer $p_issue_id The issue number that can be used to get the existing state before it is deleted.
+ * @return void
  */
-function custom_function_default_issue_delete_notify( $p_issue_data ) {
+function custom_function_default_issue_delete_notify( $p_issue_id ) {
 }
 
 /**
  * Hook for authentication
  * can MantisBT update the password
+ * @return boolean
  */
 function custom_function_default_auth_can_change_password() {
 	$t_can_change = array(
@@ -268,8 +279,8 @@ function custom_function_default_auth_can_change_password() {
  *   current project.  In case of "All Projects, the field will be empty where it is
  *   not applicable.
  *
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @param int $p_user_id The user id or null for current logged in user.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @param integer $p_user_id        The user id or null for current logged in user.
  * @return array
  */
 function custom_function_default_get_columns_to_view( $p_columns_target = COLUMNS_TARGET_VIEW_PAGE, $p_user_id = null ) {
@@ -293,8 +304,9 @@ function custom_function_default_get_columns_to_view( $p_columns_target = COLUMN
 /**
  * Print the title of a column given its name.
  *
- * @param string $p_column custom_xxx for custom field xxx, or otherwise field name as in bug table.
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
+ * @param string  $p_column         Custom_xxx for custom field xxx, or otherwise field name as in bug table.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  */
 function custom_function_default_print_column_title( $p_column, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_sort, $t_dir;
@@ -330,8 +342,8 @@ function custom_function_default_print_column_title( $p_column, $p_columns_targe
 		if( function_exists( $t_function ) ) {
 			$t_function( $t_sort, $t_dir, $p_columns_target );
 
-		} else if( isset( $t_plugin_columns[ $p_column ] ) ) {
-			$t_column_object = $t_plugin_columns[ $p_column ];
+		} else if( isset( $t_plugin_columns[$p_column] ) ) {
+			$t_column_object = $t_plugin_columns[$p_column];
 			print_column_title_plugin( $p_column, $t_column_object, $t_sort, $t_dir, $p_columns_target );
 
 		} else {
@@ -347,11 +359,12 @@ function custom_function_default_print_column_title( $p_column, $p_columns_targe
  * Print the value of the custom field (if the field is applicable to the project of
  * the specified issue and the current user has read access to it.
  * see custom_function_default_print_column_title() for rules about column names.
- * @param string $p_column name of field to show in the column.
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
+ * @param string  $p_column         Name of field to show in the column.
+ * @param BugData $p_bug            Bug object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  */
-function custom_function_default_print_column_value( $p_column, $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function custom_function_default_print_column_value( $p_column, BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	if( COLUMNS_TARGET_CSV_PAGE == $p_columns_target ) {
 		$t_column_start = '';
 		$t_column_end = '';
@@ -398,8 +411,8 @@ function custom_function_default_print_column_value( $p_column, $p_bug, $p_colum
 				$t_function( $p_bug );
 			}
 
-		} else if( isset( $t_plugin_columns[ $p_column ] ) ) {
-			$t_column_object = $t_plugin_columns[ $p_column ];
+		} else if( isset( $t_plugin_columns[$p_column] ) ) {
+			$t_column_object = $t_plugin_columns[$p_column];
 			print_column_plugin( $t_column_object, $p_bug, $p_columns_target );
 
 		} else {
@@ -418,6 +431,7 @@ function custom_function_default_print_column_value( $p_column, $p_bug, $p_colum
  * The enumeration will be empty if current project is ALL PROJECTS.
  * Enumerations format is: "abc|lmn|xyz"
  * To use this in a custom field type "=versions" in the possible values field.
+ * @return string
  */
 function custom_function_default_enum_versions() {
 	$t_versions = version_get_all_rows( helper_get_current_project() );
@@ -437,6 +451,7 @@ function custom_function_default_enum_versions() {
  * The enumeration will be empty if current project is ALL PROJECTS.
  * Enumerations format is: "abc|lmn|xyz"
  * To use this in a custom field type "=released_versions" in the possible values field.
+ * @return string
  */
 function custom_function_default_enum_released_versions() {
 	$t_versions = version_get_all_rows( helper_get_current_project() );
@@ -458,6 +473,7 @@ function custom_function_default_enum_released_versions() {
  * The enumeration will be empty if current project is ALL PROJECTS.
  * Enumerations format is: "abc|lmn|xyz"
  * To use this in a custom field type "=future_versions" in the possible values field.
+ * @return string
  */
 function custom_function_default_enum_future_versions() {
 	$t_versions = version_get_all_rows( helper_get_current_project() );
@@ -479,6 +495,7 @@ function custom_function_default_enum_future_versions() {
  * The enumeration will be empty if current project is ALL PROJECTS.
  * Enumerations format is: "abc|lmn|xyz"
  * To use this in a custom field type "=categories" in the possible values field.
+ * @return string
  */
 function custom_function_default_enum_categories() {
 	$t_categories = category_get_all_rows( helper_get_current_project() );
@@ -498,7 +515,8 @@ function custom_function_default_enum_categories() {
  * and the context.  The printing of the buttons will typically call html_button() from
  * html_api.php.  For each button, this function needs to generate the enclosing '<td>' and '</td>'.
  *
- * @param int $p_bug_id bug id
+ * @param integer $p_bug_id A bug identifier.
+ * @return void
  */
 function custom_function_default_print_bug_view_page_custom_buttons( $p_bug_id ) {
 }

@@ -26,31 +26,29 @@
 /**
  * Includes
  */
-require_once dirname( dirname(__FILE__) ) . '/TestConfig.php';
+require_once dirname( dirname( __FILE__ ) ) . '/TestConfig.php';
 
 require_once 'EnumTest.php';
 require_once 'HelperTest.php';
 require_once 'StringTest.php';
-
 
 /**
  * All Test Cases
  * @package    Tests
  * @subpackage UnitTests
  */
-class Mantis_AllTests extends PHPUnit_Framework_TestSuite
-{
+class Mantis_AllTests extends PHPUnit_Framework_TestSuite {
 	/**
 	 * Defines test suite
+	 * @return Mantis_AllTests
 	 */
-	public static function suite()
-	{
-		$suite = new Mantis_AllTests('Main Code');
+	public static function suite() {
+		$t_suite = new Mantis_AllTests( 'Main Code' );
 
-		$suite->addTestSuite('MantisEnumTest');
-		$suite->addTestSuite('Mantis_HelperTest');
-		$suite->addTestSuite('Mantis_StringTest');
+		$t_suite->addTestSuite( 'MantisEnumTest' );
+		$t_suite->addTestSuite( 'Mantis_HelperTest' );
+		$t_suite->addTestSuite( 'Mantis_StringTest' );
 
-		return $suite;
+		return $t_suite;
 	}
 }

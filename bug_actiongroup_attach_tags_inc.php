@@ -47,6 +47,7 @@ require_api( 'tag_api.php' );
 
 /**
  * Prints the title for the custom action page.
+ * @return void
  */
 function action_attach_tags_print_title() {
 	echo '<tr>';
@@ -57,9 +58,10 @@ function action_attach_tags_print_title() {
 
 /**
  * Prints the table and form for the Attach Tags group action page.
+ * @return void
  */
 function action_attach_tags_print_fields() {
-	echo '<tr><th class="category">',lang_get('tag_attach_long'),'</th><td>';
+	echo '<tr><th class="category">', lang_get( 'tag_attach_long' ), '</th><td>';
 	print_tag_input();
 	echo '<input type="submit" class="button" value="' . lang_get( 'tag_attach' ) . ' " /></td></tr>';
 }
@@ -67,7 +69,7 @@ function action_attach_tags_print_fields() {
 /**
  * Validates the Attach Tags group action.
  * Checks if a user can attach the requested tags to a given bug.
- * @param int $p_bug_id Bug ID
+ * @param integer $p_bug_id A bug identifier.
  * @return string|null On failure: the reason for tags failing validation for the given bug. On success: null.
  */
 function action_attach_tags_validate( $p_bug_id ) {
@@ -110,7 +112,7 @@ function action_attach_tags_validate( $p_bug_id ) {
 
 /**
  * Attaches all the tags to each bug in the group action.
- * @param int $p_bug_id Bug ID
+ * @param integer $p_bug_id A bug identifier.
  * @return null Previous validation ensures that this function doesn't fail. Therefore we can always return null to indicate no errors occurred.
  */
 function action_attach_tags_process( $p_bug_id ) {

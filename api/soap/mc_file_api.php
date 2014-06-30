@@ -25,9 +25,9 @@
 
 /**
  * Check if the current user can download attachments for the specified bug.
- * @param int $p_bug_id Bug id
- * @param int $p_user_id User id
- * @return bool
+ * @param integer $p_bug_id  A bug identifier.
+ * @param integer $p_user_id An user identifier.
+ * @return boolean
  */
 function mci_file_can_download_bug_attachments( $p_bug_id, $p_user_id ) {
 	$t_can_download = access_has_bug_level( config_get( 'download_attachments_threshold' ), $p_bug_id );
@@ -41,7 +41,7 @@ function mci_file_can_download_bug_attachments( $p_bug_id, $p_user_id ) {
 
 /**
  * Read a local file and return its content.
- * @param string $p_diskfile name of file on disk
+ * @param string $p_diskfile Name of file on disk.
  * @return string
  */
 function mci_file_read_local( $p_diskfile ) {
@@ -53,8 +53,9 @@ function mci_file_read_local( $p_diskfile ) {
 
 /**
  * Write a local file.
- * @param string $p_diskfile name of file on disk
- * @param string $p_content file content to write
+ * @param string $p_diskfile Name of file on disk.
+ * @param string $p_content  File content to write.
+ * @return void
  */
 function mci_file_write_local( $p_diskfile, $p_content ) {
 	$t_handle = fopen( $p_diskfile, "w" );
@@ -64,28 +65,28 @@ function mci_file_write_local( $p_diskfile, $p_content ) {
 
 /**
  * Add a file
- * @param int $p_id file id
- * @param string $p_name file name
- * @param string $p_content file content to write
- * @param string $p_file_type file type
- * @param string $p_table database table name
- * @param string $p_title title
- * @param string $p_desc description
- * @param string $p_user_id user id
+ * @param integer $p_id        File id.
+ * @param string  $p_name      File name.
+ * @param string  $p_content   File content to write.
+ * @param string  $p_file_type File type.
+ * @param string  $p_table     Database table name.
+ * @param string  $p_title     Title.
+ * @param string  $p_desc      Description.
+ * @param string  $p_user_id   User id.
  * @return mixed
  */
 function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_title = '', $p_desc = '', $p_user_id = null ) {
 	if( !file_type_check( $p_name ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client',  'File type not allowed.' );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'File type not allowed.' );
 	}
 	if( !file_is_name_unique( $p_name, $p_id ) ) {
 		return SoapObjectsFactory::newSoapFault( 'Client', 'Duplicate filename.' );
 	}
 
 	$t_file_size = strlen( $p_content );
-	$t_max_file_size = (int) min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 	if( $t_file_size > $t_max_file_size ) {
-		return SoapObjectsFactory::newSoapFault( 'Client',  'File is too big.' );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'File is too big.' );
 	}
 
 	if( 'bug' == $p_table ) {
@@ -120,7 +121,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	switch( $t_method ) {
 		case DISK:
 			if( !file_exists( $t_file_path ) || !is_dir( $t_file_path ) || !is_writable( $t_file_path ) || !is_readable( $t_file_path ) ) {
-				return SoapObjectsFactory::newSoapFault( 'Server', "Upload folder '{$t_file_path}' doesn't exist.");
+				return SoapObjectsFactory::newSoapFault( 'Server', "Upload folder '{$t_file_path}' doesn't exist." );
 			}
 
 			file_ensure_valid_upload_path( $t_file_path );
@@ -139,14 +140,14 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	$t_file_table = db_get_table( $p_table . '_file' );
 	$t_id_col = $p_table . "_id";
 
-	$query = "INSERT INTO $t_file_table
+	$t_query = "INSERT INTO $t_file_table
 				( $t_id_col, title, description, diskfile, filename, folder, filesize, file_type, date_added, content, user_id )
 		VALUES
 				( " . db_param() . ", " . db_param() . ", " . db_param() . ", "
 				    . db_param() . ", " . db_param() . ", " . db_param() . ", "
 				    . db_param() . ", " . db_param() . ", " . db_param() . ", "
 				    . db_param() . ", " . db_param() . " )";
-	db_query_bound( $query, array(
+	db_query_bound( $t_query, array(
 		$t_id,
 		$p_title,
 		$p_desc,
@@ -177,9 +178,9 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 /**
  * Returns the attachment contents
  *
- * @param int $p_file_id
- * @param string $p_type The file type, bug or doc
- * @param int $p_user_id
+ * @param integer $p_file_id File identifier.
+ * @param string  $p_type    The file type, bug or doc.
+ * @param integer $p_user_id A valid user identifier.
  * @return string|soap_fault the string contents, or a soap_fault
  */
 function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
@@ -205,17 +206,17 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 		return SoapObjectsFactory::newSoapFault( 'Client', 'Unable to find an attachment with type ' . $p_type. ' and id ' . $p_file_id . ' .' );
 	}
 
-	$row = db_fetch_array( $t_result );
+	$t_row = db_fetch_array( $t_result );
 
 	if( $p_type == 'doc' ) {
-		$t_project_id = $row['project_id'];
+		$t_project_id = $t_row['project_id'];
 	} else if( $p_type == 'bug' ) {
-		$t_bug_id = $row['bug_id'];
+		$t_bug_id = $t_row['bug_id'];
 		$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
 	}
 
-	$t_diskfile = file_normalize_attachment_path( $row['diskfile'], $t_project_id );
-	$t_content = $row['content'];
+	$t_diskfile = file_normalize_attachment_path( $t_row['diskfile'], $t_project_id );
+	$t_content = $t_row['content'];
 
 	# Check access rights
 	switch( $p_type ) {
@@ -241,7 +242,7 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 			if( file_exists( $t_diskfile ) ) {
 				return mci_file_read_local( $t_diskfile ) ;
 			} else {
-				return SoapObjectsFactory::newSoapFault(  'Client', 'Unable to find an attachment with type ' . $p_type. ' and id ' . $p_file_id . ' .' );
+				return SoapObjectsFactory::newSoapFault( 'Client', 'Unable to find an attachment with type ' . $p_type. ' and id ' . $p_file_id . ' .' );
 			}
 		case DATABASE:
 			return $t_content;

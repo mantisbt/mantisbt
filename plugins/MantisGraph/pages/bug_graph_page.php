@@ -47,7 +47,7 @@ access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 $f_interval = gpc_get_int( 'interval', 0 );
 $t_today = date( 'Y-m-d' );
 $f_type = gpc_get_int( 'graph_type', 0 );
-$f_show_as_table = gpc_get_bool( 'show_table', FALSE );
+$f_show_as_table = gpc_get_bool( 'show_table', false );
 
 html_page_top1( plugin_lang_get( 'graph_page' ) );
 $t_path = config_get( 'path' );
@@ -57,10 +57,10 @@ $t_period = new Period();
 $t_period->set_period_from_selector( 'interval' );
 $t_types = array(
 				0 => plugin_lang_get( 'select' ),
-				2 => plugin_lang_get( 'select_bystatus'),
-				3 => plugin_lang_get( 'select_summbystatus'),
-				4 => plugin_lang_get( 'select_bycat'),
-				6 => plugin_lang_get( 'select_both'),
+				2 => plugin_lang_get( 'select_bystatus' ),
+				3 => plugin_lang_get( 'select_summbystatus' ),
+				4 => plugin_lang_get( 'select_bycat' ),
+				6 => plugin_lang_get( 'select_both' ),
 		   );
 
 $t_show = array(
@@ -98,7 +98,7 @@ if( ( 0 != $f_type ) && ( $f_interval > 0 ) && ( gpc_get( 'show', '' ) != '') ) 
 	if( ($t_body == 1 ) || ($t_body == 3) ) {
 		if( $f_show_as_table ) {
 			include(
-				config_get_global('plugin_path' ) . plugin_get_current() . '/pages/bug_graph_bystatus.php'
+				config_get_global( 'plugin_path' ) . plugin_get_current() . '/pages/bug_graph_bystatus.php'
 			);
 		} else {
 			echo '<br /><img src="' . plugin_page( 'bug_graph_bystatus.php' )
@@ -109,7 +109,7 @@ if( ( 0 != $f_type ) && ( $f_interval > 0 ) && ( gpc_get( 'show', '' ) != '') ) 
 	}
 	if( ($t_body == 2 ) || ($t_body == 3) ) {
 		if( $f_show_as_table ) {
-			include(  config_get_global('plugin_path' ). plugin_get_current() .  '/pages/bug_graph_bycategory.php' );
+			include( config_get_global( 'plugin_path' ) . plugin_get_current() .  '/pages/bug_graph_bycategory.php' );
 		} else {
 			echo '<br /><img src="' . plugin_page( 'bug_graph_bycategory.php' )
 				. '&amp;width=600&amp;interval=' . $f_interval

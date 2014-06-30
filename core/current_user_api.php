@@ -103,30 +103,31 @@ function current_user_get_pref( $p_pref_name ) {
 /**
  * Sets the specified preference for the current logged in user.
  *
- * @param string $p_pref_name The name of the preference as in the preferences table.
- * @param bool|int|string $p_pref_value The preference new value.
+ * @param string                 $p_pref_name  The name of the preference as in the preferences table.
+ * @param boolean|integer|string $p_pref_value The preference new value.
  * @access public
- * @return bool
+ * @return boolean
  */
 function current_user_set_pref( $p_pref_name, $p_pref_value ) {
 	return user_pref_set_pref( auth_get_current_user_id(), $p_pref_name, $p_pref_value );
 }
 
 /**
- * Return the specified field of the currently logged in user
+ * Set Current Users Default project in preferences
  *
- * @param int $p_project_id The new default project id.
+ * @param integer $p_project_id The new default project id.
+ * @return void
  * @access public
  */
 function current_user_set_default_project( $p_project_id ) {
-	return user_set_default_project( auth_get_current_user_id(), $p_project_id );
+	user_set_default_project( auth_get_current_user_id(), $p_project_id );
 }
 
 /**
  * Returns an array of projects that are accessible to the current logged in
  * user.
  *
- * @param bool $p_show_disabled	Include disabled projects.
+ * @param boolean $p_show_disabled	Include disabled projects.
  * @return array an array of accessible project ids.
  * @access public
  */
@@ -138,8 +139,8 @@ function current_user_get_accessible_projects( $p_show_disabled = false ) {
  * Returns an array of subprojects of the specified project to which the
  * currently logged in user has access to.
  *
- * @param int $p_project_id Parent project id.
- * @param bool $p_show_disabled Include disabled projects.
+ * @param integer $p_project_id    Parent project id.
+ * @param boolean $p_show_disabled Include disabled projects.
  * @return array an array of accessible sub-project ids.
  * @access public
  */
@@ -151,7 +152,7 @@ function current_user_get_accessible_subprojects( $p_project_id, $p_show_disable
  * Returns an array of subprojects of the specified project to which the
  * currently logged in user has access, including subprojects of subprojects
  *
- * @param int $p_project_id Parent project id.
+ * @param integer $p_project_id Parent project id.
  * @return array an array of accessible sub-project ids.
  * @access public
  */
@@ -163,7 +164,7 @@ function current_user_get_all_accessible_subprojects( $p_project_id ) {
  * Returns true if the currently logged in user is has a role of administrator
  * or higher, false otherwise
  *
- * @return bool true: administrator; false: otherwise.
+ * @return boolean true: administrator; false: otherwise.
  * @access public
  */
 function current_user_is_administrator() {
@@ -196,6 +197,7 @@ function current_user_is_anonymous() {
  * The $g_anonymous_account user is always considered protected.
  *
  * @access public
+ * @return void
  */
 function current_user_ensure_unprotected() {
 	user_ensure_unprotected( auth_get_current_user_id() );
@@ -204,8 +206,9 @@ function current_user_ensure_unprotected() {
 /**
  * Returns the issue filter parameters for the current user
  *
- * @param int $p_project_id project id. This argument is only used if a 'filter' string is not passed via the web request.
- *            The default value is null meaning return the current filter for user's current project if a filter string is not supplied.
+ * @param integer $p_project_id Project id. This argument is only used if a 'filter' string is not passed via the web request.
+ *                              The default value is null meaning return the current filter for user's current project
+                                if a filter string is not supplied.
  * @return mixed Active issue filter for current user or false if no filter is currently defined.
  * @access public
  */

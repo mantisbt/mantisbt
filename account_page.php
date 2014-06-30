@@ -78,7 +78,7 @@ $t_account_verification = defined( 'ACCOUNT_VERIFICATION_INC' );
 #============ Permissions ============
 auth_ensure_user_authenticated();
 
-if( !$t_account_verification  ) {
+if( !$t_account_verification ) {
 	auth_reauthenticate();
 }
 
@@ -88,9 +88,9 @@ html_page_top( lang_get( 'account_link' ) );
 
 # extracts the user information for the currently logged in user
 # and prefixes it with u_
-$row = user_get_row( auth_get_current_user_id() );
+$t_row = user_get_row( auth_get_current_user_id() );
 
-extract( $row, EXTR_PREFIX_ALL, 'u' );
+extract( $t_row, EXTR_PREFIX_ALL, 'u' );
 
 $t_ldap = ( LDAP == config_get( 'login_method' ) );
 
@@ -230,7 +230,7 @@ if( $t_verify || $t_reset_password ) {
 				echo '<span class="display-label"><span>' . lang_get( 'assigned_projects' ) . '</span></span>';
 				echo '<div class="input">';
 				echo '<ul class="project-list">';
-				foreach( $t_projects AS $t_project_id=>$t_project ) {
+				foreach( $t_projects as $t_project_id=>$t_project ) {
 					$t_project_name = string_attribute( $t_project['name'] );
 					$t_view_state = $t_project['view_state'];
 					$t_access_level = $t_project['access_level'];

@@ -56,20 +56,17 @@ if( OFF == config_get( 'enable_project_documentation' ) ||
 	access_denied();
 }
 
-$f_file_id = gpc_get_int( 'file_id' );
+$t_file_id = gpc_get_int( 'file_id' );
 
-$c_file_id = db_prepare_int( $f_file_id );
 $t_project_id = file_get_field( $f_file_id, 'project_id', 'project' );
 
 access_ensure_project_level( config_get( 'upload_project_file_threshold' ), $t_project_id );
 
 $t_proj_file_table = db_get_table( 'project_file' );
-$query = "SELECT *
-		FROM $t_proj_file_table
-		WHERE id=" . db_param();
-$t_result = db_query_bound( $query, array( $c_file_id ) );
-$row = db_fetch_array( $t_result );
-extract( $row, EXTR_PREFIX_ALL, 'v' );
+$t_query = "SELECT * FROM $t_proj_file_table WHERE id=" . db_param();
+$t_result = db_query_bound( $t_query, array( $t_file_id ) );
+$t_row = db_fetch_array( $t_result );
+extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
 $v_title = string_attribute( $v_title );
 $v_description = string_textarea( $v_description );

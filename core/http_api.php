@@ -31,7 +31,7 @@ require_api( 'config_api.php' );
 
 /**
  * Checks to see if script was queried through the HTTPS protocol
- * @return bool True if protocol is HTTPS
+ * @return boolean True if protocol is HTTPS
  */
 function http_is_protocol_https() {
 	return !empty( $_SERVER['HTTPS'] ) && ( utf8_strtolower( $_SERVER['HTTPS'] ) != 'off' );
@@ -40,7 +40,7 @@ function http_is_protocol_https() {
 /**
  * Check to see if the client is using Microsoft Internet Explorer so we can
  * enable quirks and hacky non-standards-compliant workarounds.
- * @return bool True if Internet Explorer is detected as the user agent
+ * @return boolean True if Internet Explorer is detected as the user agent
  */
 function is_browser_internet_explorer() {
 	$t_user_agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : 'none';
@@ -55,7 +55,7 @@ function is_browser_internet_explorer() {
 /**
  * Checks to see if the client is using Google Chrome so we can enable quirks
  * and hacky non-standards-compliant workarounds.
- * @return bool True if Chrome is detected as the user agent
+ * @return boolean True if Chrome is detected as the user agent
  */
 function is_browser_chrome() {
 	$t_user_agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : 'none';
@@ -73,8 +73,9 @@ function is_browser_chrome() {
  * which are behind the times or are otherwise broken, we need to use
  * some hacky workarounds to get them to work 'nicely' with attachments and
  * inline files. See http://greenbytes.de/tech/tc2231/ for full reasoning.
- * @param string $p_filename Filename
- * @param bool $p_inline Display file inline (optional, default = treat as attachment)
+ * @param string  $p_filename Filename.
+ * @param boolean $p_inline   Display file inline (optional, default = treat as attachment).
+ * @return void
  */
 function http_content_disposition_header( $p_filename, $p_inline = false ) {
 	if( !headers_sent() ) {
@@ -100,9 +101,10 @@ function http_content_disposition_header( $p_filename, $p_inline = false ) {
 
 /**
  * Set caching headers that will allow or prevent browser caching.
- * @param bool $p_allow_caching Allow caching
+ * @param boolean $p_allow_caching Allow caching.
+ * @return void
  */
-function http_caching_headers( $p_allow_caching=false ) {
+function http_caching_headers( $p_allow_caching = false ) {
 	global $g_allow_browser_cache;
 
 	# Headers to prevent caching
@@ -125,6 +127,7 @@ function http_caching_headers( $p_allow_caching=false ) {
 
 /**
  * Set content-type headers.
+ * @return void
  */
 function http_content_headers() {
 	if( !headers_sent() ) {
@@ -137,6 +140,7 @@ function http_content_headers() {
 
 /**
  * Set security headers (frame busting, clickjacking/XSS/CSRF protection).
+ * @return void
  */
 function http_security_headers() {
 	if( !headers_sent() ) {
@@ -158,6 +162,7 @@ function http_security_headers() {
 
 /**
  * Load and set any custom headers defined by the site configuration.
+ * @return void
  */
 function http_custom_headers() {
 	if( !headers_sent() ) {
@@ -170,6 +175,7 @@ function http_custom_headers() {
 
 /**
  * Set all headers used by a normal page load.
+ * @return void
  */
 function http_all_headers() {
 	global $g_bypass_headers;

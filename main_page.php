@@ -97,7 +97,7 @@ if( news_is_enabled() ) {
 			$t_row = $t_news_rows[$i];
 
 			# only show VS_PRIVATE posts to configured threshold and above
-			if( ( VS_PRIVATE == $t_row[ 'view_state' ] ) &&
+			if( ( VS_PRIVATE == $t_row['view_state'] ) &&
 				 !access_has_project_level( config_get( 'private_news_threshold' ) ) ) {
 				continue;
 			}
@@ -114,7 +114,7 @@ if( news_is_enabled() ) {
 	$f_offset_next = $f_offset + $t_news_view_limit;
 	$f_offset_prev = $f_offset - $t_news_view_limit;
 
-	if( $f_offset_prev >= 0) {
+	if( $f_offset_prev >= 0 ) {
 		print_bracket_link( 'main_page.php?offset=' . $f_offset_prev, lang_get( 'newer_news_link' ) );
 	}
 

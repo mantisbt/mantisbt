@@ -453,8 +453,8 @@ define( 'FILTER_TYPE_MULTI_STRING', 3 );
 define( 'FILTER_TYPE_MULTI_INT', 4 );
 
 # Filter match types
-define( 'FILTER_MATCH_ALL', 0);
-define( 'FILTER_MATCH_ANY', 1);
+define( 'FILTER_MATCH_ALL', 0 );
+define( 'FILTER_MATCH_ANY', 1 );
 
 # Versions
 define( 'VERSION_ALL', null );
@@ -520,15 +520,15 @@ define( 'DISPLAY_ERROR_NONE', 'none' );
 
 # system logging
 # The logging levels can be combined using bitwise operators
-define( 'LOG_ALL',                     ~0 );  # All possible log levels
-define( 'LOG_NONE',                     0 );  # no logging
-define( 'LOG_EMAIL',                    1 );  # all emails sent
-define( 'LOG_EMAIL_RECIPIENT',          2 );  # details of email recipient determination
-define( 'LOG_FILTERING',                4 );  # logging for filtering.
-define( 'LOG_AJAX',                     8 );  # logging for AJAX / XmlHttpRequests
-define( 'LOG_LDAP',                     16 );  # logging for ldap
-define( 'LOG_DATABASE',                 32 );  # logging for Database
-define( 'LOG_WEBSERVICE',               64 );  # logging for Web Service Requests
+define( 'LOG_ALL', ~0 );            # All possible log levels
+define( 'LOG_NONE', 0 );            # no logging
+define( 'LOG_EMAIL', 1 );           # all emails sent
+define( 'LOG_EMAIL_RECIPIENT', 2 ); # details of email recipient determination
+define( 'LOG_FILTERING', 4 );       # logging for filtering.
+define( 'LOG_AJAX', 8 );            # logging for AJAX / XmlHttpRequests
+define( 'LOG_LDAP', 16 );           # logging for LDAP
+define( 'LOG_DATABASE', 32 );       # logging for Database
+define( 'LOG_WEBSERVICE', 64 );     # logging for Web Service Requests
 
 # COLUMNS_TARGET_*
 define( 'COLUMNS_TARGET_VIEW_PAGE', 1 );
@@ -553,14 +553,14 @@ define( 'TIMELINE_TARGETTED', 1 );
 define( 'TIMELINE_FIXED', 2 );
 
 # PHPMailer Methods
-define( 'PHPMAILER_METHOD_MAIL',		0 );
-define( 'PHPMAILER_METHOD_SENDMAIL',	1 );
-define( 'PHPMAILER_METHOD_SMTP',		2 );
+define( 'PHPMAILER_METHOD_MAIL', 0 );
+define( 'PHPMAILER_METHOD_SENDMAIL', 1 );
+define( 'PHPMAILER_METHOD_SMTP', 2 );
 
 # Lengths - NOTE: these may represent hard-coded values in db schema and should not be changed.
-define( 'DB_FIELD_SIZE_USERNAME', 32);
-define( 'DB_FIELD_SIZE_REALNAME', 64);
-define( 'DB_FIELD_SIZE_PASSWORD', 32);
+define( 'DB_FIELD_SIZE_USERNAME', 32 );
+define( 'DB_FIELD_SIZE_REALNAME', 64 );
+define( 'DB_FIELD_SIZE_PASSWORD', 32 );
 
 # Maximum size for the user's password when storing it as a hash
 define( 'PASSWORD_MAX_SIZE_BEFORE_HASH', 1024 );

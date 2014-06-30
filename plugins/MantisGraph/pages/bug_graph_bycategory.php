@@ -34,8 +34,8 @@ $f_width = gpc_get_int( 'width', 600 );
 $t_ar = plugin_config_get( 'bar_aspect' );
 $t_interval = new Period();
 $t_interval->set_period_from_selector( 'interval' );
-$f_show_as_table = gpc_get_bool( 'show_table', FALSE );
-$f_summary = gpc_get_bool( 'summary', FALSE );
+$f_show_as_table = gpc_get_bool( 'show_table', false );
+$f_summary = gpc_get_bool( 'summary', false );
 
 $t_interval_days = $t_interval->get_elapsed_days();
 if( $t_interval_days <= 14 ) {
@@ -56,8 +56,8 @@ $t_filter = current_user_get_bug_filter();
 $t_filter['_view_type']	= 'advanced';
 $t_filter[FILTER_PROPERTY_STATUS] = array(META_FILTER_ANY);
 $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME] = '';
-$rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $t_filter, null, null, true );
-if( count($rows) == 0 ) {
+$t_rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $t_filter, null, null, true );
+if( count( $t_rows ) == 0 ) {
 	# no data to graph
 	exit();
 }
@@ -81,11 +81,12 @@ $t_category = array();
 # walk through all issues and grab their category for 'now'
 $t_marker[$t_ptr] = time();
 $t_data[$t_ptr] = array();
-foreach ($rows as $t_row) {
+foreach ( $t_rows as $t_row ) {
 	# the following function can treat the resolved parameter as an array to match
 	$t_cat = category_get_name( $t_row->category_id );
-	if( $t_cat == '' )
+	if( $t_cat == '' ) {
 		$t_cat = 'none';
+	}
 	if( !access_compare_level( $t_row->status, $t_resolved ) ) {
 		if( in_array( $t_cat, $t_category ) ) {
 			$t_data[$t_ptr][$t_cat] ++;
@@ -102,32 +103,34 @@ foreach ($rows as $t_row) {
 # type = 0 and field=status are status changes
 # type = 1 are new bugs
 $t_select = 'SELECT bug_id, type, field_name, old_value, new_value, date_modified FROM '.$t_bug_hist_table.
-	' WHERE bug_id in ('.implode(',', $t_bug).') and '.
-		'( (type='.NORMAL_TYPE.' and field_name=\'category\') or '.
-			'(type='.NORMAL_TYPE.' and field_name=\'status\') or type='.NEW_BUG.' ) and '.
+	' WHERE bug_id in (' . implode( ',', $t_bug ) . ') and '.
+		'( (type=' . NORMAL_TYPE . ' and field_name=\'category\') or '.
+			'(type=' . NORMAL_TYPE . ' and field_name=\'status\') or type='.NEW_BUG.' ) and '.
 			'date_modified >= ' . db_param() .
 		' order by date_modified DESC';
 $t_result = db_query_bound( $t_select, array( $t_start ) );
-$row = db_fetch_array( $t_result );
+$t_row = db_fetch_array( $t_result );
 
-for ($t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr) {
+for ( $t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr ) {
 	# walk through the data points and use the data retrieved to update counts
-	while( ( $row !== false ) && ( $row['date_modified'] >= $t_now ) ) {
-		switch ($row['type']) {
+	while( ( $t_row !== false ) && ( $t_row['date_modified'] >= $t_now ) ) {
+		switch ( $t_row['type'] ) {
 			case 0: # updated bug
-				if( $row['field_name'] == 'category' ) {
-					$t_cat = $row['new_value'];
-					if( $t_cat == '' )
+				if( $t_row['field_name'] == 'category' ) {
+					$t_cat = $t_row['new_value'];
+					if( $t_cat == '' ) {
 						$t_cat = 'none';
+					}
 					if( in_array( $t_cat, $t_category ) ) {
 						$t_data[$t_ptr][$t_cat] --;
 					} else {
 						$t_data[$t_ptr][$t_cat] = 0;
 						$t_category[] = $t_cat;
 					}
-					$t_cat = $row['old_value'];
-					if( $t_cat == '' )
+					$t_cat = $t_row['old_value'];
+					if( $t_cat == '' ) {
 						$t_cat = 'none';
+					}
 					if( in_array( $t_cat, $t_category ) ) {
 						$t_data[$t_ptr][$t_cat] ++;
 					} else {
@@ -136,14 +139,15 @@ for ($t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr) {
 					}
 					# change the category associated with the bug to match in case the bug was
 					#  created during the scan
-					$t_bug_cat[$row['bug_id']] = $t_cat;
+					$t_bug_cat[$t_row['bug_id']] = $t_cat;
 				} else { # change of status access_compare_level( $t_row['status'], $t_resolved )
-					if( access_compare_level( $row['new_value'], $t_resolved ) &&
-							!access_compare_level( $row['old_value'], $t_resolved ) ) {
+					if( access_compare_level( $t_row['new_value'], $t_resolved ) &&
+							!access_compare_level( $t_row['old_value'], $t_resolved ) ) {
 						# transition from open to closed
-						$t_cat = $t_bug_cat[$row['bug_id']];
-						if( $t_cat == '' )
+						$t_cat = $t_bug_cat[$t_row['bug_id']];
+						if( $t_cat == '' ) {
 							$t_cat = 'none';
+						}
 						if( in_array( $t_cat, $t_category ) ) {
 							$t_data[$t_ptr][$t_cat] ++;
 						} else {
@@ -154,9 +158,10 @@ for ($t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr) {
 				}
 				break;
 			case 1: # new bug
-				$t_cat = $t_bug_cat[$row['bug_id']];
-				if( $t_cat == '' )
+				$t_cat = $t_bug_cat[$t_row['bug_id']];
+				if( $t_cat == '' ) {
 					$t_cat = 'none';
+				}
 				if( in_array( $t_cat, $t_category ) ) {
 					$t_data[$t_ptr][$t_cat] --;
 				} else {
@@ -165,7 +170,7 @@ for ($t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr) {
 				}
 				break;
 		}
-		$row = db_fetch_array( $t_result );
+		$t_row = db_fetch_array( $t_result );
 	}
 
 	if( $t_now <= $t_end ) {
@@ -180,21 +185,21 @@ $t_bin_count = $t_ptr;
 # drop any categories that have no counts
 # These arise when bugs are opened and closed within the data intervals
 $t_count_cat = count( $t_category );
-for ( $t=0; $t<$t_count_cat; $t++ ) {
-	$t_cat = $t_category[ $t ];
+for ( $i=0; $i<$t_count_cat; $i++ ) {
+	$t_cat = $t_category[$i];
 	$t_not_zero = false;
-	for ($t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++) {
+	for ( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
 		if( isset( $t_data[$t_ptr][$t_cat] ) && ( $t_data[$t_ptr][$t_cat] > 0 ) ) {
 			$t_not_zero = true;
 			break;
 		}
 	}
 	if( !$t_not_zero ) {
-		unset( $t_category[ $t ] );
+		unset( $t_category[$i] );
 	}
 }
 # sort and display the results
-sort($t_category);
+sort( $t_category );
 if( $f_show_as_table ) {
 	$t_date_format = config_get( 'short_date_format' );
 	html_begin();
@@ -209,7 +214,7 @@ if( $f_show_as_table ) {
 		echo '<th>'.$t_cat.'</th>';
 	}
 	echo '</tr>';
-	for ($t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++) {
+	for ( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
 		echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('. date( $t_date_format, $t_marker[$t_ptr] ) .')'.'</td>';
 		foreach ( $t_category as $t_cat ) {
 			echo '<td>'.(isset($t_data[$t_ptr][$t_cat]) ? $t_data[$t_ptr][$t_cat] : 0).'</td>';
@@ -222,12 +227,12 @@ if( $f_show_as_table ) {
 } else {
 	# reverse the array and reorder the data, if necessary
 	$t_metrics = array();
-	for ($t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++) {
-		$t = $t_bin_count - $t_ptr - 1;
-		$t_metrics[0][$t_ptr] = $t_marker[$t];
+	for ( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
+		$j = $t_bin_count - $t_ptr - 1;
+		$t_metrics[0][$t_ptr] = $t_marker[$j];
 		$i = 0;
 		foreach ( $t_category as $t_cat ) {
-			$t_metrics[++$i][$t_ptr] = isset($t_data[$t][$t_cat]) ? $t_data[$t][$t_cat] : 0;
+			$t_metrics[++$i][$t_ptr] = isset($t_data[$j][$t_cat]) ? $t_data[$j][$t_cat] : 0;
 		}
 	}
 	array_unshift( $t_category, '' ); # add placeholder

@@ -96,7 +96,7 @@ $t_path = config_get( 'path' );
 
 # construct rss file
 
-$encoding = 'utf-8';
+$t_encoding = 'utf-8';
 $about = $t_path;
 $title = config_get( 'window_title' );
 $image_link = $t_path . 'images/mantis_logo_button.gif';
@@ -122,8 +122,7 @@ $description = $title;
 # in minutes (only rss 2.0)
 $cache = '10';
 
-$rssfile = new RSSBuilder(	$encoding, $about, $title, $description,
-				$image_link, $category, $cache);
+$rssfile = new RSSBuilder(	$t_encoding, $about, $title, $description, $image_link, $category, $cache );
 
 # person, an organization, or a service
 $publisher = '';
@@ -131,25 +130,25 @@ $publisher = '';
 # person, an organization, or a service
 $creator = '';
 
-$date = (string) date( 'r' );
+$date = date( 'r' );
 $language = lang_get( 'phpmailer_language' );
 $rights = '';
 
 # spatial location , temporal period or jurisdiction
-$coverage = (string) '';
+$coverage = '';
 
 # person, an organization, or a service
-$contributor = (string) '';
+$contributor = '';
 
 $rssfile->addDCdata( $publisher, $creator, $date, $language, $rights, $coverage, $contributor );
 
 # hourly / daily / weekly / ...
-$period = (string) 'hourly';
+$period = 'hourly';
 
 # every X hours/days/...
-$frequency = (int) 1;
+$frequency = 1;
 
-$base = (string) date( 'Y-m-d\TH:i:sO' );
+$base = date( 'Y-m-d\TH:i:sO' );
 
 # add missing : in the O part of the date.  PHP 5 supports a 'c' format which will output the format
 # exactly as we want it.
@@ -231,8 +230,8 @@ for ( $i = 0; $i < $t_issues_count; $i++ ) {
 						$author, $comments, $image );
 }
 
-/** @todo consider making this a configuration option - 0.91 / 1.0 / 2.0 */
-$version = '2.0';
+# @todo consider making this a configuration option - 0.91 / 1.0 / 2.0
+$t_version = '2.0';
 
-$rssfile->outputRSS( $version );
+$rssfile->outputRSS( $t_version );
 

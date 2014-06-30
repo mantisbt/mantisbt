@@ -58,16 +58,16 @@ auth_reauthenticate();
  * Priority goes to the 2nd array.
  *
  * @public yes
- * @param $p_array1 array
- * @param $p_array2 array
+ * @param array|string|integer $p_array1 Array.
+ * @param array|string|integer $p_array2 Array.
  * @return array
  */
-function array_merge_recursive2($p_array1, $p_array2) {
+function array_merge_recursive2( $p_array1, $p_array2 ) {
 	if( !is_array( $p_array1 ) || !is_array( $p_array2 ) ) {
 		return $p_array2;
 	}
-	foreach ( $p_array2 as $t_key2 => $t_value2) {
-		$p_array1[$t_key2] = array_merge_recursive2( @$p_array1[$t_key2], $t_value2);
+	foreach ( $p_array2 as $t_key2 => $t_value2 ) {
+		$p_array1[$t_key2] = array_merge_recursive2( @$p_array1[$t_key2], $t_value2 );
 	}
 	return $p_array1;
 }
@@ -79,17 +79,17 @@ function array_merge_recursive2($p_array1, $p_array2) {
  * on action "new", i.e. notify administrators on new bugs which can be
  * ON or OFF.
  *
- * @param string $p_action action
- * @param string $p_flag flag
+ * @param string $p_action Action.
+ * @param string $p_flag   Flag.
  * @return string
  */
 function get_notify_flag( $p_action, $p_flag ) {
 	global $t_notify_flags, $t_default_notify_flags;
 
 	$t_val = OFF;
-	if( isset ( $t_notify_flags[$p_action][$p_flag] ) ) {
+	if( isset( $t_notify_flags[$p_action][$p_flag] ) ) {
 		$t_val = $t_notify_flags[$p_action][$p_flag];
-	} else if( isset ( $t_default_notify_flags[$p_flag] ) ) {
+	} else if( isset( $t_default_notify_flags[$p_flag] ) ) {
 		$t_val = $t_default_notify_flags[$p_flag];
 	}
 	return $t_val;
@@ -98,8 +98,8 @@ function get_notify_flag( $p_action, $p_flag ) {
 /**
  * Return CSS for flag
  *
- * @param string $p_action action
- * @param string $p_flag flag
+ * @param string $p_action Action.
+ * @param string $p_flag   Flag.
  * @return string
  */
 function colour_notify_flag ( $p_action, $p_flag ) {
@@ -126,8 +126,8 @@ function colour_notify_flag ( $p_action, $p_flag ) {
 /**
  * Get the value associated with the specific action and flag.
  *
- * @param string $p_action action
- * @param string $p_flag flag
+ * @param string $p_action Action.
+ * @param string $p_flag   Flag.
  * @return string
  */
 function show_notify_flag( $p_action, $p_flag ) {
@@ -145,8 +145,8 @@ function show_notify_flag( $p_action, $p_flag ) {
 /**
  * Get CSS for threshold flags
  *
- * @param string $p_access access
- * @param string $p_action action
+ * @param string $p_access Access.
+ * @param string $p_action Action.
  * @return string
  */
 function colour_threshold_flag ( $p_access, $p_action ) {
@@ -172,8 +172,8 @@ function colour_threshold_flag ( $p_access, $p_action ) {
 /**
  * HTML for Show notify threshold
  *
- * @param string $p_access access
- * @param string $p_action action
+ * @param string $p_access Access.
+ * @param string $p_action Action.
  * @return string
  */
 function show_notify_threshold( $p_access, $p_action ) {
@@ -192,7 +192,8 @@ function show_notify_threshold( $p_access, $p_action ) {
 /**
  * HTML for email section
  *
- * @param string $p_section_name section name
+ * @param string $p_section_name Section name.
+ * @return void
  */
 function get_section_begin_for_email( $p_section_name ) {
 	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
@@ -221,8 +222,9 @@ function get_section_begin_for_email( $p_section_name ) {
 /**
  * HTML for Row
  *
- * @param string $p_caption caption
- * @param string $p_message_type message type
+ * @param string $p_caption      Caption.
+ * @param string $p_message_type Message type.
+ * @return void
  */
 function get_capability_row_for_email( $p_caption, $p_message_type ) {
 	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
@@ -242,7 +244,7 @@ function get_capability_row_for_email( $p_caption, $p_message_type ) {
 
 /**
  * HTML for email section end
- *
+ * @return void
  */
 function get_section_end_for_email() {
 	echo '</tbody></table></div><br />' . "\n";
@@ -257,8 +259,8 @@ print_manage_config_menu( 'manage_config_email_page.php' );
 $t_access = current_user_get_access_level();
 $t_project = helper_get_current_project();
 
-$t_colour_project = config_get( 'colour_project');
-$t_colour_global = config_get( 'colour_global');
+$t_colour_project = config_get( 'colour_project' );
+$t_colour_global = config_get( 'colour_global' );
 
 # build a list of all of the actions
 $t_actions = array( 'owner', 'reopened', 'deleted', 'bugnote' );
@@ -277,7 +279,7 @@ foreach( $t_statuses as $t_status ) {
 $t_global_default_notify_flags = config_get( 'default_notify_flags', null, null, ALL_PROJECTS );
 $t_global_notify_flags = array();
 foreach ( $t_global_default_notify_flags as $t_flag => $t_value ) {
-	foreach ($t_actions as $t_action ) {
+	foreach ( $t_actions as $t_action ) {
 		$t_global_notify_flags[$t_action][$t_flag] = $t_value;
 	}
 }
@@ -286,7 +288,7 @@ $t_global_notify_flags = array_merge_recursive2( $t_global_notify_flags, config_
 $t_file_default_notify_flags = config_get_global( 'default_notify_flags' );
 $t_file_notify_flags = array();
 foreach ( $t_file_default_notify_flags as $t_flag => $t_value ) {
-	foreach ($t_actions as $t_action ) {
+	foreach ( $t_actions as $t_action ) {
 		$t_file_notify_flags[$t_action][$t_flag] = $t_value;
 	}
 }
@@ -295,7 +297,7 @@ $t_file_notify_flags = array_merge_recursive2( $t_file_notify_flags, config_get_
 $t_default_notify_flags = config_get( 'default_notify_flags' );
 $t_notify_flags = array();
 foreach ( $t_default_notify_flags as $t_flag => $t_value ) {
-	foreach ($t_actions as $t_action ) {
+	foreach ( $t_actions as $t_action ) {
 		$t_notify_flags[$t_action][$t_flag] = $t_value;
 	}
 }
@@ -317,7 +319,7 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 	if( ALL_PROJECTS == $t_project ) {
 		$t_project_title = lang_get( 'config_all_projects' );
 	} else {
-		$t_project_title = sprintf( lang_get( 'config_project' ) , string_display( project_get_name( $t_project ) ) );
+		$t_project_title = sprintf( lang_get( 'config_project' ), string_display( project_get_name( $t_project ) ) );
 	}
 	echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
 	echo '<p>' . lang_get( 'colour_coding' ) . '<br />';

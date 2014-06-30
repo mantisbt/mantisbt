@@ -26,7 +26,7 @@
 require_once 'SoapBase.php';
 
 /**
- * Test fixture for version methods
+ * Test fixture for version methods.
  *
  * @requires extension soap
  * @group SOAP
@@ -37,6 +37,7 @@ class VersionTest extends SoapBase {
 
 	/**
 	 * Test Version
+	 * @return array
 	 */
 	private function getTestVersion() {
 		return array (
@@ -51,73 +52,73 @@ class VersionTest extends SoapBase {
 
 	/**
 	 * Tests creating a new version
+	 * @return void
 	 */
 	public function testAddVersion() {
+		$t_initial_versions = $this->countVersions();
 
-		$initialVersions  = $this->countVersions();
+		$t_version_id = $this->client->mc_project_version_add( $this->userName, $this->password, $this->getTestVersion() );
 
-		$versionId = $this->client->mc_project_version_add($this->userName, $this->password, $this->getTestVersion() );
+		$this->assertNotNull( $t_version_id );
 
-		$this->assertNotNull( $versionId );
+		$this->deleteVersionAfterRun( $t_version_id );
 
-		$this->deleteVersionAfterRun( $versionId );
+		$t_versions = $this->client->mc_project_get_versions( $this->userName, $this->password, $this->getProjectId() );
 
-		$versions = $this->client->mc_project_get_versions( $this->userName, $this->password, $this->getProjectId() );
+		$this->assertEquals( 1, count( $t_versions ) - $t_initial_versions );
 
-		$this->assertEquals(1, count($versions) - $initialVersions);
+		$t_version = $t_versions[0];
+		$t_version_date = $this->dateToUTC( $t_version->date_order );
 
-		$version = $versions[0];
-		$versDate = $this->dateToUTC($version->date_order);
-
-		$this->assertEquals('1.0', $version->name);
-		$this->assertEquals(true, $version->released);
-		$this->assertEquals('Test version', $version->description);
-		$this->assertEquals($this->getProjectId(), $version->project_id);
-		$this->assertEquals($this->dateToUTC(self::DATE_ORDER), $versDate);
-		$this->assertEquals(false, $version->obsolete);
+		$this->assertEquals( '1.0', $t_version->name );
+		$this->assertEquals( true, $t_version->released );
+		$this->assertEquals( 'Test version', $t_version->description );
+		$this->assertEquals( $this->getProjectId(), $t_version->project_id );
+		$this->assertEquals( $this->dateToUTC( self::DATE_ORDER ), $t_version_date );
+		$this->assertEquals( false, $t_version->obsolete );
 	}
 
 
 	/**
 	 * Tests updating a version
+	 * @return void
 	 */
 	public function testUpdateVersion() {
+		$t_initial_versions = $this->countVersions();
 
-		$initialVersions  = $this->countVersions();
+		$t_version_id = $this->client->mc_project_version_add( $this->userName, $this->password, $this->getTestVersion() );
 
-		$versionId = $this->client->mc_project_version_add($this->userName, $this->password, $this->getTestVersion() );
+		$this->assertNotNull( $t_version_id );
 
-		$this->assertNotNull( $versionId );
+		$this->deleteVersionAfterRun( $t_version_id );
 
-		$this->deleteVersionAfterRun( $versionId );
+		$t_updated_version = $this->getTestVersion();
+		$t_updated_version['name'] = '1.1';
 
-		$updatedVersion = $this->getTestVersion();
-		$updatedVersion['name'] = '1.1';
+		$this->client->mc_project_version_update( $this->userName, $this->password, $t_version_id, $t_updated_version );
 
-		$this->client->mc_project_version_update ( $this->userName, $this->password, $versionId, $updatedVersion );
+		$t_versions = $this->client->mc_project_get_versions( $this->userName, $this->password, $this->getProjectId() );
 
-		$versions = $this->client->mc_project_get_versions( $this->userName, $this->password, $this->getProjectId() );
+		$this->assertEquals( 1, count( $t_versions ) - $t_initial_versions );
 
-		$this->assertEquals(1, count($versions) - $initialVersions);
+		foreach ( $t_versions as $t_version ) {
+			if( $t_version->id == $t_version_id ) {
+				$t_version_date = $this->dateToUTC( $t_version->date_order );
 
-		foreach ( $versions as $version ) {
-			if( $version->id == $versionId ) {
-				$versDate = $this->dateToUTC($version->date_order);
-
-				$this->assertEquals('1.1', $version->name);
-				$this->assertEquals($this->dateToUTC(self::DATE_ORDER), $versDate);
+				$this->assertEquals( '1.1', $t_version->name );
+				$this->assertEquals( $this->dateToUTC( self::DATE_ORDER ), $t_version_date );
 				return;
 			}
 		}
 
-		self::fail('Did not find version with id ' . $versionId . ' in the reply');
+		self::fail( 'Did not find version with id ' . $t_version_id . ' in the reply' );
 	}
 
 	/**
 	 * Return Number of versions
+	 * @return integer
 	 */
 	private function countVersions() {
-
-		return count ( $this->client->mc_project_get_versions( $this->userName, $this->password, $this->getProjectId() ) );
+		return count( $this->client->mc_project_get_versions( $this->userName, $this->password, $this->getProjectId() ) );
 	}
 }

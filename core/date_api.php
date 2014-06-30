@@ -36,18 +36,18 @@ require_api( 'helper_api.php' );
 require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 
-/**
- * Keeps track of whether the external files required for jscalendar to work
- * have already been included in the output sent to the client. jscalendar
- * will not work correctly if it is included multiple times on the same page.
- * @global bool $g_jscalendar_included_already
- */
+# Keeps track of whether the external files required for jscalendar to work
+# have already been included in the output sent to the client. jscalendar
+# will not work correctly if it is included multiple times on the same page.
+# @global bool $g_jscalendar_included_already
 $g_calendar_already_imported = false;
+
+$g_cache_timezone = array();
 
 /**
  * checks if date is null
- * @param int $p_date
- * @return bool
+ * @param integer $p_date Date.
+ * @return boolean
  * @access public
  */
 function date_is_null( $p_date ) {
@@ -56,19 +56,17 @@ function date_is_null( $p_date ) {
 
 /**
  * gets null date
- * @return int
+ * @return integer
  * @access public
  */
 function date_get_null() {
 	return 1;
 }
 
-$g_cache_timezone = array();
-
 /**
  * set new timezone
- * @param string $p_timezone PHP timezone to set
- * @return null
+ * @param string $p_timezone PHP timezone to set.
+ * @return void
  * @access public
  */
 function date_set_timezone( $p_timezone ) {
@@ -84,10 +82,10 @@ function date_set_timezone( $p_timezone ) {
 
 /**
  * restore previous timezone
- * @return null
+ * @return void
  * @access public
  */
-function date_restore_timezone( ) {
+function date_restore_timezone() {
 	global $g_cache_timezone;
 
 	$t_timezone = array_pop( $g_cache_timezone );
@@ -104,17 +102,17 @@ function date_restore_timezone( ) {
 
 /**
  * Print html option tags for month in a select list - in user's language
- * @param int $p_month
- * @return null
+ * @param integer $p_month Integer representing month of the year.
+ * @return void
  * @access public
  */
 function print_month_option_list( $p_month = 0 ) {
 	for( $i = 1;$i <= 12;$i++ ) {
-		$month_name = date( 'F', mktime( 0, 0, 0, $i, 1, 2000 ) );
+		$t_month_name = date( 'F', mktime( 0, 0, 0, $i, 1, 2000 ) );
 		if( $i == $p_month ) {
-			echo "<option value=\"$i\" selected=\"selected\">" . lang_get( 'month_' . utf8_strtolower($month_name)) . "</option>";
+			echo "<option value=\"$i\" selected=\"selected\">" . lang_get( 'month_' . strtolower( $t_month_name ) ) . "</option>";
 		} else {
-			echo "<option value=\"$i\">" . lang_get( 'month_' . utf8_strtolower($month_name)) . "</option>";
+			echo "<option value=\"$i\">" . lang_get( 'month_' . strtolower( $t_month_name ) ) . "</option>";
 		}
 	}
 }
@@ -122,8 +120,8 @@ function print_month_option_list( $p_month = 0 ) {
 /**
  * Print numeric month html option tags for select list
  *
- * @param int $p_month
- * @return null
+ * @param integer $p_month Integer representing month of the year.
+ * @return void
  * @access public
  */
 function print_numeric_month_option_list( $p_month = 0 ) {
@@ -138,8 +136,8 @@ function print_numeric_month_option_list( $p_month = 0 ) {
 
 /**
  * Print html option tags for Day of month in a select list
- * @param int $p_day
- * @return null
+ * @param integer $p_day Integer representing day of the month.
+ * @return void
  * @access public
  */
 function print_day_option_list( $p_day = 0 ) {
@@ -155,14 +153,14 @@ function print_day_option_list( $p_day = 0 ) {
 /**
  * Print html option tags for year since 1999 in a select list
  * @todo deprecate this for year_range
- * @param int $p_year
- * @return null
+ * @param integer $p_year Integer representing year.
+ * @return void
  * @access public
  */
 function print_year_option_list( $p_year = 0 ) {
-	$current_year = date( "Y" );
+	$t_current_year = date( "Y" );
 
-	for( $i = $current_year;$i > 1999;$i-- ) {
+	for( $i = $t_current_year;$i > 1999;$i-- ) {
 		if( $i == $p_year ) {
 			echo "<option value=\"$i\" selected=\"selected\">$i</option>";
 		} else {
@@ -173,10 +171,10 @@ function print_year_option_list( $p_year = 0 ) {
 
 /**
  * Print html option tags for year in a select list
- * @param int $p_year Current Year
- * @param int $p_start First Year to display
- * @param int $p_end Last Year to display
- * @return null
+ * @param integer $p_year  Current Year.
+ * @param integer $p_start First Year to display.
+ * @param integer $p_end   Last Year to display.
+ * @return void
  * @access public
  */
 function print_year_range_option_list( $p_year = 0, $p_start = 0, $p_end = 0 ) {
@@ -189,7 +187,7 @@ function print_year_range_option_list( $p_year = 0, $p_start = 0, $p_end = 0 ) {
 		$t_start_year = $t_current - $t_backward_years;
 	}
 
-	if(( $p_year < $t_start_year ) && ( $p_year != 0 ) ) {
+	if( ( $p_year < $t_start_year ) && ( $p_year != 0 ) ) {
 		$t_start_year = $p_year;
 	}
 
@@ -212,14 +210,14 @@ function print_year_range_option_list( $p_year = 0, $p_start = 0, $p_end = 0 ) {
 
 /**
  * Print <select> tag for selecting a date
- * @param string $p_name
- * @param string $p_format
- * @param int $p_date
- * @param bool $p_default_disable
- * @param bool $p_allow_blank
- * @param int $p_year_start
- * @param int $p_year_end
- * @return null
+ * @param string  $p_name            Name for html select field attribute.
+ * @param string  $p_format          Date format e.g. YmD.
+ * @param integer $p_date            Integer timestamp representing date.
+ * @param boolean $p_default_disable Whether date selector is disabled.
+ * @param boolean $p_allow_blank     Whether blank/null date is allowed.
+ * @param integer $p_year_start      First year to display in drop down.
+ * @param integer $p_year_end        Last year to display in drop down.
+ * @return void
  * @access public
  */
 function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_disable = false, $p_allow_blank = false, $p_year_start = 0, $p_year_end = 0 ) {

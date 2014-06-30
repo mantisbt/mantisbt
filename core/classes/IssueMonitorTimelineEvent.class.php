@@ -31,6 +31,12 @@ class IssueMonitorTimelineEvent extends TimelineEvent {
 	private $issue_id;
 	private $monitor;
 
+	/**
+	 * @param integer $p_timestamp Timestamp representing the time the event occurred.
+	 * @param integer $p_user_id   An user identifier.
+	 * @param integer $p_issue_id  A issue identifier.
+	 * @param boolean $p_monitor   Whether issue was being monitored or unmonitored.
+	 */
 	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_monitor ) {
 		parent::__construct( $p_timestamp, $p_user_id, $p_issue_id );
 
@@ -38,6 +44,10 @@ class IssueMonitorTimelineEvent extends TimelineEvent {
 		$this->monitor = $p_monitor;
 	}
 
+	/**
+	 * Returns html string to display
+	 * @return string
+	 */
 	public function html() {
 		$t_string = $this->monitor ? lang_get( 'timeline_issue_monitor' ) : lang_get( 'timeline_issue_unmonitor' );
 

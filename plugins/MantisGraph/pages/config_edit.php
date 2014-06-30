@@ -30,7 +30,7 @@ access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 $f_library = gpc_get_int( 'eczlibrary', ON );
 
 $f_window_width = gpc_get_int( 'window_width', 800 );
-$f_bar_aspect = (float) gpc_get_string( 'bar_aspect', '0.9' );
+$f_bar_aspect = (float)gpc_get_string( 'bar_aspect', '0.9' );
 $f_summary_graphs_per_row = gpc_get_int( 'summary_graphs_per_row', 2 );
 
 $f_jpgraph_antialias = gpc_get_int( 'jpgraph_antialias', ON );

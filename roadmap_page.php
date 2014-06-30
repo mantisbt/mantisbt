@@ -69,9 +69,10 @@ require_api( 'version_api.php' );
 
 /**
  * Print header for the specified project version.
- * @param array $p_version_row array contain project version data
+ * @param array $p_version_row Array containing project version data.
+ * @return void
  */
-function print_version_header( $p_version_row ) {
+function print_version_header( array $p_version_row ) {
 	$t_project_id   = $p_version_row['project_id'];
 	$t_version_id   = $p_version_row['id'];
 	$t_version_name = $p_version_row['version'];
@@ -98,7 +99,8 @@ function print_version_header( $p_version_row ) {
 
 /**
  * print project header
- * @param string $p_project_name project name
+ * @param string $p_project_name Project name.
+ * @return void
  */
 function print_project_header_roadmap( $p_project_name ) {
 	echo '<br /><span class="pagetitle">', string_display( $p_project_name ), ' - ', lang_get( 'roadmap' ), '</span><br />';
@@ -214,7 +216,7 @@ foreach( $t_project_ids as $t_project_id ) {
 
 		$t_version = $t_version_row['version'];
 
-		$query = "SELECT sbt.*, $t_relation_table.source_bug_id, dbt.target_version as parent_version FROM $t_bug_table sbt
+		$t_query = "SELECT sbt.*, $t_relation_table.source_bug_id, dbt.target_version as parent_version FROM $t_bug_table sbt
 					LEFT JOIN $t_relation_table ON sbt.id=$t_relation_table.destination_bug_id AND $t_relation_table.relationship_type=2
 					LEFT JOIN $t_bug_table dbt ON dbt.id=$t_relation_table.source_bug_id
 					WHERE sbt.project_id=" . db_param() . " AND sbt.target_version=" . db_param() . " ORDER BY sbt.status ASC, sbt.last_updated DESC";
@@ -223,7 +225,7 @@ foreach( $t_project_ids as $t_project_id ) {
 
 		$t_first_entry = true;
 
-		$t_result = db_query_bound( $query, array( $t_project_id, $t_version ) );
+		$t_result = db_query_bound( $t_query, array( $t_project_id, $t_version ) );
 
 		$t_issue_ids = array();
 		$t_issue_parents = array();
@@ -275,10 +277,10 @@ foreach( $t_project_ids as $t_project_id ) {
 
 		user_cache_array_rows( array_unique( $t_issue_handlers ) );
 
-		$t_progress = $t_issues_planned > 0 ? ( (integer) ( $t_issues_resolved * 100 / $t_issues_planned ) ) : 0;
+		$t_progress = $t_issues_planned > 0 ? ( (integer)( $t_issues_resolved * 100 / $t_issues_planned ) ) : 0;
 
 		if( $t_issues_planned > 0 ) {
-			$t_progress = (integer) ( $t_issues_resolved * 100 / $t_issues_planned );
+			$t_progress = (integer)( $t_issues_resolved * 100 / $t_issues_planned );
 
 			if( !$t_project_header_printed ) {
 				print_project_header_roadmap( $t_project_name );

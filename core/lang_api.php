@@ -50,9 +50,9 @@ $g_active_language = '';
 
 /**
  * Loads the specified language and stores it in $g_lang_strings, to be used by lang_get
- * @param string $p_lang
- * @param string $p_dir
- * @return null
+ * @param string $p_lang Name of Language to load.
+ * @param string $p_dir  Directory Containing language file.
+ * @return void
  */
 function lang_load( $p_lang, $p_dir = null ) {
 	global $g_lang_strings, $g_active_language;
@@ -92,8 +92,8 @@ function lang_load( $p_lang, $p_dir = null ) {
 		}
 		else if( 'MANTIS_ERROR' == $t_var ) {
 			if( isset( $g_lang_strings[$p_lang][$t_lang_var] ) ) {
-				foreach( $$t_var as $key => $val ) {
-					$g_lang_strings[$p_lang][$t_lang_var][$key] = $val;
+				foreach( $$t_var as $t_key => $t_val ) {
+					$g_lang_strings[$p_lang][$t_lang_var][$t_key] = $t_val;
 				}
 			} else {
 				$g_lang_strings[$p_lang][$t_lang_var] = $$t_var;
@@ -173,8 +173,8 @@ function lang_map_auto() {
 
 /**
  * Ensures that a language file has been loaded
- * @param string $p_lang the language name
- * @return null
+ * @param string $p_lang The language name.
+ * @return void
  */
 function lang_ensure_loaded( $p_lang ) {
 	global $g_lang_strings;
@@ -187,8 +187,8 @@ function lang_ensure_loaded( $p_lang ) {
 /**
 * Check if the given language exists
 *
-* @param string $p_lang the language name
-* @return bool
+* @param string $p_lang The language name.
+* @return boolean
 */
 function lang_language_exists( $p_lang ) {
 	$t_valid_langs = config_get( 'language_choices_arr' );
@@ -199,8 +199,8 @@ function lang_language_exists( $p_lang ) {
 /**
  * language stack implementation
  * push a language onto the stack
- * @param string $p_lang
- * @return null
+ * @param string $p_lang The language name.
+ * @return void
  */
 function lang_push( $p_lang = null ) {
 	global $g_lang_overrides;
@@ -218,7 +218,7 @@ function lang_push( $p_lang = null ) {
 	# don't allow 'auto' as a language to be pushed onto the stack
 	#  The results from auto are always the local user, not what the
 	#  override wants, unless this is the first language setting
-	if(( 'auto' == $t_lang ) && ( 0 < count( $g_lang_overrides ) ) ) {
+	if( ( 'auto' == $t_lang ) && ( 0 < count( $g_lang_overrides ) ) ) {
 		$t_lang = config_get( 'fallback_language' );
 	}
 
@@ -264,8 +264,8 @@ function lang_get_current() {
  * This function will return one of (in order of preference):
  *  1. The string in the current user's preferred language (if defined)
  *  2. The string in English
- * @param string $p_string
- * @param string $p_lang
+ * @param string $p_string The language string to retrieve.
+ * @param string $p_lang   The language name.
  * @return string
  */
 function lang_get( $p_string, $p_lang = null ) {
@@ -315,9 +315,9 @@ function lang_get( $p_string, $p_lang = null ) {
 
 /**
  * Check the language entry, if found return true, otherwise return false.
- * @param string $p_string
- * @param string $p_lang
- * @return bool
+ * @param string $p_string The language string to retrieve.
+ * @param string $p_lang   The language name.
+ * @return boolean
  */
 function lang_exists( $p_string, $p_lang ) {
 	global $g_lang_strings;
@@ -330,9 +330,9 @@ function lang_exists( $p_string, $p_lang ) {
  * - If found, return the appropriate string (as lang_get()).
  * - If not found, no default supplied, return the supplied string as is.
  * - If not found, default supplied, return default.
- * @param string $p_string
- * @param string $p_default
- * @param string $p_lang
+ * @param string $p_string  The language string to retrieve.
+ * @param string $p_default The default value to return.
+ * @param string $p_lang    The language name.
  * @return string
  */
 function lang_get_defaulted( $p_string, $p_default = null, $p_lang = null ) {

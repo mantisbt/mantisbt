@@ -55,20 +55,21 @@ require_api( 'utility_api.php' );
 
 /**
  * Determine if a tag exists with the given ID.
- * @param int $p_tag_id Tag ID
- * @return bool True if tag exists
+ * @param integer $p_tag_id A tag ID to check.
+ * @return boolean True if tag exists
  */
 function tag_exists( $p_tag_id ) {
 	$t_tag_table = db_get_table( 'tag' );
-	$query = "SELECT * FROM $t_tag_table WHERE id=" . db_param();
-	$t_result = db_query_bound( $query, array( $p_tag_id ) );
+	$t_query = "SELECT * FROM $t_tag_table WHERE id=" . db_param();
+	$t_result = db_query_bound( $t_query, array( $p_tag_id ) );
 
 	return db_num_rows( $t_result ) > 0;
 }
 
 /**
  * Ensure a tag exists with the given ID.
- * @param int $p_tag_id Tag ID
+ * @param integer $p_tag_id A tag ID to check.
+ * @return void
  */
 function tag_ensure_exists( $p_tag_id ) {
 	if( !tag_exists( $p_tag_id ) ) {
@@ -80,8 +81,8 @@ function tag_ensure_exists( $p_tag_id ) {
 /**
  * Determine if a given name is unique (not already used).
  * Uses a case-insensitive search of the database for existing tags with the same name.
- * @param string $p_name Tag name
- * @return bool True if name is unique
+ * @param string $p_name The tag name to check.
+ * @return boolean True if name is unique
  */
 function tag_is_unique( $p_name ) {
 	$c_name = trim( $p_name );
@@ -98,7 +99,8 @@ function tag_is_unique( $p_name ) {
 
 /**
  * Ensure that a name is unique.
- * @param string $p_name Tag name
+ * @param string $p_name The tag name to check.
+ * @return void
  */
 function tag_ensure_unique( $p_name ) {
 	if( !tag_is_unique( $p_name ) ) {
@@ -115,12 +117,12 @@ function tag_ensure_unique( $p_name ) {
  * which by default only includes the valid tag name itself.
  * The prefix parameter is optional, but allows you to prefix the regex
  * check, which is useful for filters, etc.
- * @param string $p_name Tag name
- * @param array $p_matches Array reference for regex matches
- * @param string $p_prefix Prefix regex pattern
- * @return bool True if the name is valid
+ * @param string $p_name     The tag name to check.
+ * @param array  &$p_matches Array reference for regex matches.
+ * @param string $p_prefix   The regex pattern to use as a prefix.
+ * @return boolean True if the name is valid.
  */
-function tag_name_is_valid( $p_name, &$p_matches, $p_prefix = '' ) {
+function tag_name_is_valid( $p_name, array &$p_matches, $p_prefix = '' ) {
 	$t_separator = config_get( 'tag_separator' );
 	$t_pattern = "/^$p_prefix([^\+\-{$t_separator}][^{$t_separator}]*)$/";
 	return preg_match( $t_pattern, $p_name, $p_matches );
@@ -128,7 +130,8 @@ function tag_name_is_valid( $p_name, &$p_matches, $p_prefix = '' ) {
 
 /**
  * Ensure a tag name is valid.
- * @param string $p_name Tag name
+ * @param string $p_name The tag name to check.
+ * @return void
  */
 function tag_ensure_name_is_valid( $p_name ) {
 	$t_matches = array();
@@ -139,11 +142,11 @@ function tag_ensure_name_is_valid( $p_name ) {
 
 /**
  * Compare two tag rows based on tag name.
- * @param array $p_tag1 Tag row 1
- * @param array $p_tag2 Tag row 2
+ * @param array $p_tag1 The first tag row to compare.
+ * @param array $p_tag2 The second tag row to compare.
  * @return int -1 when Tag 1 < Tag 2, 1 when Tag 1 > Tag 2, 0 otherwise
  */
-function tag_cmp_name( $p_tag1, $p_tag2 ) {
+function tag_cmp_name( array $p_tag1, array $p_tag2 ) {
 	return strcasecmp( $p_tag1['name'], $p_tag2['name'] );
 }
 
@@ -154,7 +157,7 @@ function tag_cmp_name( $p_tag1, $p_tag2 ) {
  * row of information returned.  If the tag does not exist, a row is returned with
  * id = -1 and the tag name, and if the name is invalid, a row is returned with
  * id = -2 and the tag name.  The resulting array is then sorted by tag name.
- * @param string $p_string Input string to parse
+ * @param string $p_string Input string to parse.
  * @return array Rows of tags parsed from input string
  */
 function tag_parse_string( $p_string ) {
@@ -194,7 +197,7 @@ function tag_parse_string( $p_string ) {
  * row of information returned.  If the tag does not exist, a row is returned with
  * id = -1 and the tag name, and if the name is invalid, a row is returned with
  * id = -2 and the tag name.  The resulting array is then sorted by tag name.
- * @param string $p_string Filter string to parse
+ * @param string $p_string Filter string to parse.
  * @return array Rows of tags parsed from filter string
  */
 function tag_parse_filters( $p_string ) {
@@ -232,45 +235,42 @@ function tag_parse_filters( $p_string ) {
 /**
  * Returns all available tags
  *
- * @param int $p_name_filter A string to match the beginning of the tag name
- * @param int $p_count the number of tags to return
- * @param int $p_offset the offset of the result
+ * @param integer $p_name_filter A string to match the beginning of the tag name.
+ * @param integer $p_count       The number of tags to return.
+ * @param integer $p_offset      The offset of the result.
  *
- * @return ADORecordSet|bool Tags sorted by name, or false if the query failed.
+ * @return ADORecordSet|boolean Tags sorted by name, or false if the query failed.
  */
-function tag_get_all( $p_name_filter, $p_count, $p_offset) {
-
+function tag_get_all( $p_name_filter, $p_count, $p_offset ) {
 	$t_tag_table = db_get_table( 'tag' );
 
 	$t_where = '';
 	$t_where_params = array();
 
 	if( !is_blank( $p_name_filter ) ) {
-		$t_where = 'WHERE '.db_helper_like('name');
-		$t_where_params[] = $p_name_filter.'%';
+		$t_where = 'WHERE ' . db_helper_like( 'name' );
+		$t_where_params[] = $p_name_filter . '%';
 	}
 
-	$t_query = "SELECT * FROM $t_tag_table
-		$t_where ORDER BY name";
+	$t_query = "SELECT * FROM $t_tag_table $t_where ORDER BY name";
 
-	return db_query_bound( $t_query, $t_where_params, $p_count, $p_offset);
+	return db_query_bound( $t_query, $t_where_params, $p_count, $p_offset );
 }
 
 /**
  * Counts all available tags
- * @param int $p_name_filter A string to match the beginning of the tag name
- * @return int
+ * @param integer $p_name_filter A string to match the beginning of the tag name.
+ * @return integer
  */
-function tag_count ( $p_name_filter ) {
-
+function tag_count( $p_name_filter ) {
 	$t_tag_table = db_get_table( 'tag' );
 
 	$t_where = '';
 	$t_where_params = array();
 
 	if( $p_name_filter ) {
-		$t_where = 'WHERE '.db_helper_like('name');
-		$t_where_params[] = $p_name_filter.'%';
+		$t_where = 'WHERE ' . db_helper_like( 'name' );
+		$t_where_params[] = $p_name_filter . '%';
 	}
 
 	$t_query = "SELECT count(*) FROM $t_tag_table $t_where";
@@ -283,15 +283,15 @@ function tag_count ( $p_name_filter ) {
 
 /**
  * Return a tag row for the given ID.
- * @param int $p_tag_id Tag ID
+ * @param integer $p_tag_id The tag ID to retrieve from the database.
  * @return array Tag row
  */
 function tag_get( $p_tag_id ) {
 	tag_ensure_exists( $p_tag_id );
 
 	$t_tag_table = db_get_table( 'tag' );
-	$query = "SELECT * FROM $t_tag_table WHERE id=" . db_param();
-	$t_result = db_query_bound( $query, array( $p_tag_id ) );
+	$t_query = "SELECT * FROM $t_tag_table WHERE id=" . db_param();
+	$t_result = db_query_bound( $t_query, array( $p_tag_id ) );
 
 	$t_row = db_fetch_array( $t_result );
 
@@ -304,14 +304,13 @@ function tag_get( $p_tag_id ) {
 
 /**
  * Return a tag row for the given name.
- * @param string $p_name Tag name
- * @return array|bool Tag row
+ * @param string $p_name The tag name to retrieve from the database.
+ * @return array|boolean Tag row
  */
 function tag_get_by_name( $p_name ) {
 	$t_tag_table = db_get_table( 'tag' );
-	$query = "SELECT * FROM $t_tag_table
-					WHERE " . db_helper_like( 'name' );
-	$t_result = db_query_bound( $query, array( $p_name ) );
+	$t_query = "SELECT * FROM $t_tag_table WHERE " . db_helper_like( 'name' );
+	$t_result = db_query_bound( $t_query, array( $p_name ) );
 
 	$t_row = db_fetch_array( $t_result );
 
@@ -324,15 +323,15 @@ function tag_get_by_name( $p_name ) {
 
 /**
  * Return a single field from a tag row for the given ID.
- * @param int $p_tag_id Tag ID
- * @param string $p_field_name Field name
+ * @param integer $p_tag_id     The tag id to lookup.
+ * @param string  $p_field_name The field name to retrieve from the tag.
  * @return array Field value
  */
 function tag_get_field( $p_tag_id, $p_field_name ) {
-	$row = tag_get( $p_tag_id );
+	$t_row = tag_get( $p_tag_id );
 
-	if( isset( $row[$p_field_name] ) ) {
-		return $row[$p_field_name];
+	if( isset( $t_row[$p_field_name] ) ) {
+		return $t_row[$p_field_name];
 	} else {
 		error_parameters( $p_field_name );
 		trigger_error( ERROR_DB_FIELD_NOT_FOUND, WARNING );
@@ -343,9 +342,9 @@ function tag_get_field( $p_tag_id, $p_field_name ) {
 /**
  * Create a tag with the given name, creator, and description.
  * Defaults to the currently logged in user, and a blank description.
- * @param string $p_name Tag name
- * @param int $p_user_id User ID
- * @param string $p_description Description
+ * @param string  $p_name        The tag name to create.
+ * @param integer $p_user_id     The user ID to link the new tag to.
+ * @param string  $p_description A Description for the tag.
  * @return int Tag ID
  */
 function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
@@ -364,32 +363,22 @@ function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
 
 	$t_tag_table = db_get_table( 'tag' );
 
-	$query = "INSERT INTO $t_tag_table
-				( user_id,
-				  name,
-				  description,
-				  date_created,
-				  date_updated
-				)
+	$t_query = "INSERT INTO $t_tag_table
+				( user_id, name, description, date_created, date_updated )
 				VALUES
-				( " . db_param() . ",
-				  " . db_param() . ",
-				  " . db_param() . ",
-				  " . db_param() . ",
-				  " . db_param() . "
-				)";
+				( " . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . ")";
 
-	db_query_bound( $query, array( $p_user_id, trim( $p_name ), trim( $p_description ), $c_date_created, $c_date_created ) );
+	db_query_bound( $t_query, array( $p_user_id, trim( $p_name ), trim( $p_description ), $c_date_created, $c_date_created ) );
 	return db_insert_id( $t_tag_table );
 }
 
 /**
  * Update a tag with given name, creator, and description.
- * @param int $p_tag_id Tag ID
- * @param string $p_name Tag name
- * @param int $p_user_id User ID
- * @param string $p_description Description
- * @return bool
+ * @param integer $p_tag_id      The tag ID which is being updated.
+ * @param string  $p_name        The name of the tag.
+ * @param integer $p_user_id     The user ID to set when updating the tag. Note: This replaces the existing user id.
+ * @param string  $p_description An updated description for the tag.
+ * @return boolean
  */
 function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 	user_ensure_exists( $p_user_id );
@@ -416,13 +405,13 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 
 	$t_tag_table = db_get_table( 'tag' );
 
-	$query = "UPDATE $t_tag_table
+	$t_query = "UPDATE $t_tag_table
 					SET user_id=" . db_param() . ",
 						name=" . db_param() . ",
 						description=" . db_param() . ",
 						date_updated=" . db_param() . "
 					WHERE id=" . db_param();
-	db_query_bound( $query, array( (int)$p_user_id, $p_name, $p_description, $c_date_updated, $p_tag_id ) );
+	db_query_bound( $t_query, array( (int)$p_user_id, $p_name, $p_description, $c_date_updated, $p_tag_id ) );
 
 	if( $t_rename ) {
 		$t_bugs = tag_get_bugs_attached( $p_tag_id );
@@ -437,8 +426,8 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 
 /**
  * Delete a tag with the given ID.
- * @param int $p_tag_id Tag ID
- * @return bool
+ * @param integer $p_tag_id The tag ID to delete.
+ * @return boolean
  */
 function tag_delete( $p_tag_id ) {
 	tag_ensure_exists( $p_tag_id );
@@ -452,8 +441,8 @@ function tag_delete( $p_tag_id ) {
 
 	$t_tag_table = db_get_table( 'tag' );
 
-	$query = "DELETE FROM $t_tag_table WHERE id=" . db_param();
-	db_query_bound( $query, array( $p_tag_id ) );
+	$t_query = "DELETE FROM $t_tag_table WHERE id=" . db_param();
+	db_query_bound( $t_query, array( $p_tag_id ) );
 
 	return true;
 }
@@ -462,7 +451,7 @@ function tag_delete( $p_tag_id ) {
  * Gets the candidates for the specified bug.  These are existing tags
  * that are not associated with the bug already.
  *
- * @param int $p_bug_id  The bug id, if 0 returns all tags.
+ * @param integer $p_bug_id The bug id, if 0 returns all tags.
  * @return array The array of tag rows, each with id, name, and description.
  */
 function tag_get_candidates_for_bug( $p_bug_id ) {
@@ -475,42 +464,42 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 		$t_params[] = $p_bug_id;
 
 		if( config_get_global( 'db_type' ) == 'odbc_mssql' ) {
-			$query = "SELECT t.id FROM $t_tag_table t
+			$t_query = "SELECT t.id FROM $t_tag_table t
 					LEFT JOIN $t_bug_tag_table b ON t.id=b.tag_id
 					WHERE b.bug_id IS NULL OR b.bug_id != " . db_param();
-			$t_result = db_query_bound( $query, $t_params );
+			$t_result = db_query_bound( $t_query, $t_params );
 
 			$t_params = null;
 
 			$t_subquery_results = array();
 
-			while( $row = db_fetch_array( $t_result ) ) {
-				$t_subquery_results[] = (int)$row['id'];
+			while( $t_row = db_fetch_array( $t_result ) ) {
+				$t_subquery_results[] = (int)$t_row['id'];
 			}
 
-			if( count ( $t_subquery_results ) == 0 ) {
+			if( count( $t_subquery_results ) == 0 ) {
 			    return array();
 			}
 
-			$query = "SELECT id, name, description FROM $t_tag_table WHERE id IN ( " . implode( ', ', $t_subquery_results ) . ')';
+			$t_query = "SELECT id, name, description FROM $t_tag_table WHERE id IN ( " . implode( ', ', $t_subquery_results ) . ')';
 		} else {
-			$query = "SELECT id, name, description FROM $t_tag_table WHERE id IN (
+			$t_query = "SELECT id, name, description FROM $t_tag_table WHERE id IN (
 					SELECT t.id FROM $t_tag_table t
 					LEFT JOIN $t_bug_tag_table b ON t.id=b.tag_id
 					WHERE b.bug_id IS NULL OR b.bug_id != " . db_param() .
 				')';
 		}
 	} else {
-		$query = 'SELECT id, name, description FROM ' . $t_tag_table;
+		$t_query = 'SELECT id, name, description FROM ' . $t_tag_table;
 	}
 
-	$query .= ' ORDER BY name ASC ';
-	$t_result = db_query_bound( $query, $t_params );
+	$t_query .= ' ORDER BY name ASC ';
+	$t_result = db_query_bound( $t_query, $t_params );
 
 	$t_results_to_return = array();
 
-	while( $row = db_fetch_array( $t_result ) ) {
-		$t_results_to_return[] = $row;
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_results_to_return[] = $t_row;
 	}
 
 	return $t_results_to_return;
@@ -518,29 +507,27 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 
 /**
  * Determine if a tag is attached to a bug.
- * @param int $p_tag_id Tag ID
- * @param int $p_bug_id Bug ID
- * @return bool True if the tag is attached
+ * @param integer $p_tag_id The tag ID to check.
+ * @param integer $p_bug_id The bug ID to check.
+ * @return boolean True if the tag is attached
  */
 function tag_bug_is_attached( $p_tag_id, $p_bug_id ) {
 	$t_bug_tag_table = db_get_table( 'bug_tag' );
-	$query = "SELECT bug_id FROM $t_bug_tag_table
-					WHERE tag_id=" . db_param() . " AND bug_id=" . db_param();
-	$t_result = db_query_bound( $query, array( $p_tag_id, $p_bug_id ) );
+	$t_query = "SELECT bug_id FROM $t_bug_tag_table WHERE tag_id=" . db_param() . " AND bug_id=" . db_param();
+	$t_result = db_query_bound( $t_query, array( $p_tag_id, $p_bug_id ) );
 	return( db_result( $t_result ) !== false );
 }
 
 /**
  * Return the tag attachment row.
- * @param int $p_tag_id Tag ID
- * @param int $p_bug_id Bug ID
+ * @param integer $p_tag_id The tag ID to check.
+ * @param integer $p_bug_id The bug ID to check.
  * @return array Tag attachment row
  */
 function tag_bug_get_row( $p_tag_id, $p_bug_id ) {
 	$t_bug_tag_table = db_get_table( 'bug_tag' );
-	$query = "SELECT * FROM $t_bug_tag_table
-					WHERE tag_id=" . db_param() . " AND bug_id=" . db_param();
-	$t_result = db_query_bound( $query, array( $p_tag_id, $p_bug_id ) );
+	$t_query = "SELECT * FROM $t_bug_tag_table WHERE tag_id=" . db_param() . " AND bug_id=" . db_param();
+	$t_result = db_query_bound( $t_query, array( $p_tag_id, $p_bug_id ) );
 
 	$t_row = db_fetch_array( $t_result );
 	if( !$t_row ) {
@@ -551,55 +538,54 @@ function tag_bug_get_row( $p_tag_id, $p_bug_id ) {
 
 /**
  * Return an array of tags attached to a given bug sorted by tag name.
- * @param int $p_bug_id Bug ID
- * @return array Array of tag rows with attachement information
+ * @param integer $p_bug_id The bug ID to check.
+ * @return array Array of tag rows with attachment information
  */
 function tag_bug_get_attached( $p_bug_id ) {
 	$t_tag_table = db_get_table( 'tag' );
 	$t_bug_tag_table = db_get_table( 'bug_tag' );
 
-	$query = "SELECT t.*, b.user_id as user_attached, b.date_attached
+	$t_query = "SELECT t.*, b.user_id as user_attached, b.date_attached
 					FROM $t_tag_table as t
 					LEFT JOIN $t_bug_tag_table as b
 						on t.id=b.tag_id
 					WHERE b.bug_id=" . db_param();
-	$t_result = db_query_bound( $query, array( $p_bug_id ) );
+	$t_result = db_query_bound( $t_query, array( $p_bug_id ) );
 
-	$rows = array();
-	while( $row = db_fetch_array( $t_result ) ) {
-		$rows[] = $row;
+	$t_rows = array();
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_rows[] = $t_row;
 	}
 
-	usort( $rows, 'tag_cmp_name' );
-	return $rows;
+	usort( $t_rows, 'tag_cmp_name' );
+	return $t_rows;
 }
 
 /**
  * Return an array of bugs that a tag is attached to.
- * @param int $p_tag_id Tag ID
+ * @param integer $p_tag_id The tag ID to check.
  * @return array Array of bug ID's.
  */
 function tag_get_bugs_attached( $p_tag_id ) {
 	$t_bug_tag_table = db_get_table( 'bug_tag' );
 
-	$query = "SELECT bug_id FROM $t_bug_tag_table
-					WHERE tag_id=" . db_param();
-	$t_result = db_query_bound( $query, array( $p_tag_id ) );
+	$t_query = "SELECT bug_id FROM $t_bug_tag_table WHERE tag_id=" . db_param();
+	$t_result = db_query_bound( $t_query, array( $p_tag_id ) );
 
-	$bugs = array();
-	while( $row = db_fetch_array( $t_result ) ) {
-		$bugs[] = $row['bug_id'];
+	$t_bugs = array();
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_bugs[] = $t_row['bug_id'];
 	}
 
-	return $bugs;
+	return $t_bugs;
 }
 
 /**
  * Attach a tag to a bug.
- * @param int $p_tag_id Tag ID
- * @param int $p_bug_id Bug ID
- * @param int $p_user_id User ID
- * @return bool
+ * @param integer $p_tag_id  The tag ID to attach.
+ * @param integer $p_bug_id  The bug ID to attach.
+ * @param integer $p_user_id The user ID to attach.
+ * @return boolean
  */
 function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
 	access_ensure_bug_level( config_get( 'tag_attach_threshold' ), $p_bug_id, $p_user_id );
@@ -618,19 +604,11 @@ function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
 
 	$t_bug_tag_table = db_get_table( 'bug_tag' );
 
-	$query = "INSERT INTO $t_bug_tag_table
-					( tag_id,
-					  bug_id,
-					  user_id,
-					  date_attached
-					)
+	$t_query = "INSERT INTO $t_bug_tag_table
+					( tag_id, bug_id, user_id, date_attached )
 					VALUES
-					( " . db_param() . ",
-					  " . db_param() . ",
-					  " . db_param() . ",
-					  " . db_param() . "
-					)";
-	db_query_bound( $query, array( $p_tag_id, $p_bug_id, $p_user_id, db_now() ) );
+					( " . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . ")";
+	db_query_bound( $t_query, array( $p_tag_id, $p_bug_id, $p_user_id, db_now() ) );
 
 	$t_tag_name = tag_get_field( $p_tag_id, 'name' );
 	history_log_event_special( $p_bug_id, TAG_ATTACHED, $t_tag_name );
@@ -643,11 +621,11 @@ function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
 
 /**
  * Detach a tag from a bug.
- * @param int $p_tag_id Tag ID
- * @param int $p_bug_id Bug ID
- * @param bool $p_add_history Add history entries to bug
- * @param int $p_user_id User Id (or null for current logged in user)
- * @return bool
+ * @param integer $p_tag_id      The tag ID to detach.
+ * @param integer $p_bug_id      The bug ID to detach.
+ * @param boolean $p_add_history Add history entries to bug.
+ * @param integer $p_user_id     User Id (or null for current logged in user).
+ * @return boolean
  */
 function tag_bug_detach( $p_tag_id, $p_bug_id, $p_add_history = true, $p_user_id = null ) {
 	if( $p_user_id === null ) {
@@ -660,8 +638,8 @@ function tag_bug_detach( $p_tag_id, $p_bug_id, $p_add_history = true, $p_user_id
 		trigger_error( TAG_NOT_ATTACHED, ERROR );
 	}
 
-	$t_tag_row = tag_bug_get_row( $p_tag_id, $p_bug_id);
-	if( $t_user_id == tag_get_field( $p_tag_id, 'user_id' ) || $t_user_id == $t_tag_row[ 'user_id' ] ) {
+	$t_tag_row = tag_bug_get_row( $p_tag_id, $p_bug_id );
+	if( $t_user_id == tag_get_field( $p_tag_id, 'user_id' ) || $t_user_id == $t_tag_row['user_id'] ) {
 		$t_detach_level = config_get( 'tag_detach_own_threshold' );
 	} else {
 		$t_detach_level = config_get( 'tag_detach_threshold' );
@@ -670,9 +648,8 @@ function tag_bug_detach( $p_tag_id, $p_bug_id, $p_add_history = true, $p_user_id
 	access_ensure_bug_level( $t_detach_level, $p_bug_id, $t_user_id );
 
 	$t_bug_tag_table = db_get_table( 'bug_tag' );
-	$query = "DELETE FROM $t_bug_tag_table
-					WHERE tag_id=" . db_param() . ' AND bug_id=' . db_param();
-	db_query_bound( $query, array( $p_tag_id, $p_bug_id ) );
+	$t_query = "DELETE FROM $t_bug_tag_table WHERE tag_id=" . db_param() . ' AND bug_id=' . db_param();
+	db_query_bound( $t_query, array( $p_tag_id, $p_bug_id ) );
 
 	if( $p_add_history ) {
 		$t_tag_name = tag_get_field( $p_tag_id, 'name' );
@@ -687,9 +664,10 @@ function tag_bug_detach( $p_tag_id, $p_bug_id, $p_add_history = true, $p_user_id
 
 /**
  * Detach all tags from a given bug.
- * @param int $p_bug_id Bug ID
- * @param bool $p_add_history Add history entries to bug
- * @param int $p_user_id User Id (or null for current logged in user)
+ * @param integer $p_bug_id      The bug ID to detach.
+ * @param boolean $p_add_history Add history entries to bug.
+ * @param integer $p_user_id     User Id (or null for current logged in user).
+ * @return void
  */
 function tag_bug_detach_all( $p_bug_id, $p_add_history = true, $p_user_id = null ) {
 	$t_tags = tag_bug_get_attached( $p_bug_id );
@@ -702,14 +680,14 @@ function tag_bug_detach_all( $p_bug_id, $p_add_history = true, $p_user_id = null
  * Display a tag hyperlink.
  * If a bug ID is passed, the tag link will include a detach link if the
  * user has appropriate privileges.
- * @param array $p_tag_row Tag row
- * @param int $p_bug_id Bug ID
- * @return bool
+ * @param array   $p_tag_row Tag row.
+ * @param integer $p_bug_id  The bug ID to display.
+ * @return boolean
  */
-function tag_display_link( $p_tag_row, $p_bug_id = 0 ) {
-	static $t_security_token = null;
-	if( is_null( $t_security_token ) ) {
-		$t_security_token = htmlspecialchars( form_security_param( 'tag_detach' ) );
+function tag_display_link( array $p_tag_row, $p_bug_id = 0 ) {
+	static $s_security_token = null;
+	if( is_null( $s_security_token ) ) {
+		$s_security_token = htmlspecialchars( form_security_param( 'tag_detach' ) );
 	}
 
 	if( auth_get_current_user_id() == $p_tag_row['user_attached'] || auth_get_current_user_id() == $p_tag_row['user_id'] ) {
@@ -725,7 +703,7 @@ function tag_display_link( $p_tag_row, $p_bug_id = 0 ) {
 
 	if( $p_bug_id > 0 && access_has_bug_level( $t_detach, $p_bug_id ) ) {
 		$t_tooltip = string_html_specialchars( sprintf( lang_get( 'tag_detach' ), $t_name ) );
-		echo " <a href='tag_detach.php?bug_id=$p_bug_id&amp;tag_id=$p_tag_row[id]$t_security_token'><img src='images/delete.png' class='delete-icon' title=\"$t_tooltip\" alt=\"X\"/></a>";
+		echo " <a href='tag_detach.php?bug_id=$p_bug_id&amp;tag_id=$p_tag_row[id]$s_security_token'><img src='images/delete.png' class='delete-icon' title=\"$t_tooltip\" alt=\"X\"/></a>";
 	}
 
 	return true;
@@ -733,8 +711,8 @@ function tag_display_link( $p_tag_row, $p_bug_id = 0 ) {
 
 /**
  * Display a list of attached tag hyperlinks separated by the configured hyperlinks.
- * @param int $p_bug_id Bug ID
- * @return bool
+ * @param integer $p_bug_id The bug ID to display.
+ * @return boolean
  */
 function tag_display_attached( $p_bug_id ) {
 	$t_tag_rows = tag_bug_get_attached( $p_bug_id );
@@ -755,15 +733,14 @@ function tag_display_attached( $p_bug_id ) {
 
 /**
  * Get the number of bugs a given tag is attached to.
- * @param int $p_tag_id Tag ID
+ * @param integer $p_tag_id The tag ID to retrieve statistics on.
  * @return int Number of attached bugs
  */
 function tag_stats_attached( $p_tag_id ) {
 	$t_bug_tag_table = db_get_table( 'bug_tag' );
 
-	$query = "SELECT COUNT(*) FROM $t_bug_tag_table
-					WHERE tag_id=" . db_param();
-	$t_result = db_query_bound( $query, array( $p_tag_id ) );
+	$t_query = "SELECT COUNT(*) FROM $t_bug_tag_table WHERE tag_id=" . db_param();
+	$t_result = db_query_bound( $t_query, array( $p_tag_id ) );
 
 	return db_result( $t_result );
 }
@@ -773,8 +750,8 @@ function tag_stats_attached( $p_tag_id ) {
  * Returns a list of tags that are the most related to the given tag,
  * based on the number of times they have been attached to the same bugs.
  * Defaults to a list of five tags.
- * @param int $p_tag_id Tag ID
- * @param int $p_limit List size
+ * @param integer $p_tag_id The tag ID to retrieve statistics on.
+ * @param integer $p_limit  List size.
  * @return array Array of tag rows, with share count added
  */
 function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
@@ -786,7 +763,7 @@ function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
 
 	$c_user_id = auth_get_current_user_id();
 
-	$subquery = "SELECT b.id FROM $t_bug_table AS b
+	$t_subquery = "SELECT b.id FROM $t_bug_table AS b
 					LEFT JOIN $t_project_user_list_table AS p
 						ON p.project_id=b.project_id AND p.user_id=" . db_param() . # 2nd Param
 					" JOIN $t_user_table AS u
@@ -796,18 +773,18 @@ function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
 					WHERE ( p.access_level>b.view_state OR u.access_level>b.view_state )
 						AND t.tag_id=" . db_param(); # 4th Param
 
-	$query = "SELECT * FROM $t_bug_tag_table
+	$t_query = "SELECT * FROM $t_bug_tag_table
 					WHERE tag_id != " . db_param() . # 1st Param
-						" AND bug_id IN ( $subquery ) ";
+						" AND bug_id IN ( $t_subquery ) ";
 
-	$t_result = db_query_bound( $query, array( $p_tag_id, $c_user_id, $c_user_id, $p_tag_id ) );
+	$t_result = db_query_bound( $t_query, array( $p_tag_id, $c_user_id, $c_user_id, $p_tag_id ) );
 
 	$t_tag_counts = array();
-	while( $row = db_fetch_array( $t_result ) ) {
-		if( !isset( $t_tag_counts[$row['tag_id']] ) ) {
-			$t_tag_counts[$row['tag_id']] = 1;
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		if( !isset( $t_tag_counts[$t_row['tag_id']] ) ) {
+			$t_tag_counts[$t_row['tag_id']] = 1;
 		} else {
-			$t_tag_counts[$row['tag_id']]++;
+			$t_tag_counts[$t_row['tag_id']]++;
 		}
 	}
 

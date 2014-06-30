@@ -52,7 +52,7 @@ class SourceData {
 
 	/**
 	 * Get url to view issue
-	 * @param int $p_issue_id issue id
+	 * @param integer $p_issue_id An issue identifier.
      * @return string
 	 */
 	public function get_issue_url( $p_issue_id ) {
@@ -61,8 +61,8 @@ class SourceData {
 
 	/**
 	 * Get url to view bugnote
-	 * @param int $p_issue_id issue id
-	 * @param int $p_note_id note id
+	 * @param integer $p_issue_id An issue identifier.
+	 * @param integer $p_note_id  A note identifier.
      * @return string
 	 */
 	public function get_note_url( $p_issue_id, $p_note_id ) {
@@ -114,28 +114,29 @@ class ImportXML {
 	/**
 	  * Constructor
 	  *
-	  * @param string $p_filename name of the file to read
-	  * @param string $strategy conversion strategy; one of "renumber", "link" or "disable"
-	  * @param string $fallback alternative conversion strategy when "renumber" does not apply
-	  * @param string $keepCategory keep category
-	  * @param string $defaultCategory default category
+	  * @param string $p_filename         Name of the file to read.
+	  * @param string $p_strategy         Conversion strategy; one of "renumber", "link" or "disable".
+	  * @param string $p_fallback         Alternative conversion strategy when "renumber" does not apply.
+	  * @param string $p_keep_category    Keep category.
+	  * @param string $p_default_category Default category.
 	  */
-	public function __construct( $p_filename, $strategy, $fallback, $keepCategory, $defaultCategory ) {
+	public function __construct( $p_filename, $p_strategy, $p_fallback, $p_keep_category, $p_default_category ) {
 		$this->source_ = new SourceData;
 		$this->reader_ = new XMLReader( );
 		$this->itemsMap_ = new ImportXml_Mapper;
-		$this->strategy_ = $strategy;
-		$this->fallback_ = $fallback;
-		$this->keepCategory_ = $keepCategory;
-		$this->defaultCategory_ = $defaultCategory;
+		$this->strategy_ = $p_strategy;
+		$this->fallback_ = $p_fallback;
+		$this->keepCategory_ = $p_keep_category;
+		$this->defaultCategory_ = $p_default_category;
 
 		$this->reader_->open( $p_filename['tmp_name'] );
 	}
 
 	/**
 	 * Perform import from an XML file
+	 * @return void
 	 */
-	public function import( ) {
+	public function import() {
 		# Read the <mantis> element and it's attributes
 		while( $this->reader_->read( ) && $this->reader_->name == 'mantis' ) {
 			$this->source_->version = $this->reader_->getAttribute( 'version' );
@@ -166,32 +167,32 @@ class ImportXML {
 		echo " Done\n";
 
 		# replace references in bug description and additional information
-		$importedIssues = $this->itemsMap_->getall( 'issue' );
-		printf( "Processing cross-references for %s issues...", count( $importedIssues ) );
-		foreach( $importedIssues as $oldId => $newId ) {
-			$bugData = bug_get( $newId, true );
-			$content_replaced = false;
+		$t_imported_issues = $this->itemsMap_->getall( 'issue' );
+		printf( "Processing cross-references for %s issues...", count( $t_imported_issues ) );
+		foreach( $t_imported_issues as $t_old_id => $t_new_id ) {
+			$t_bug = bug_get( $t_new_id, true );
+			$t_content_replaced = false;
 
-			$bugLinkRegexp = '/(^|[^\w])(' . preg_quote( $this->source_->issuelink, '/' ) . ')(\d+)\b/e';
+			$t_bug_link_regexp = '/(^|[^\w])(' . preg_quote( $this->source_->issuelink, '/' ) . ')(\d+)\b/e';
 			# replace links in description
-			preg_match_all( $bugLinkRegexp, $bugData->description, $matches );
-			if( is_array( $matches[3] && count( $matches[3] ) > 0 ) ) {
-				$content_replaced = true;
-				foreach ( $matches[3] as $old_id ) {
-					$bugData->description = str_replace( $this->source_->issuelink . $old_id, $this->getReplacementString( $this->source_->issuelink, $old_id ), $bugData->description);
+			preg_match_all( $t_bug_link_regexp, $t_bug->description, $t_matches );
+			if( is_array( $t_matches[3] && count( $t_matches[3] ) > 0 ) ) {
+				$t_content_replaced = true;
+				foreach ( $t_matches[3] as $t_old_id2 ) {
+					$t_bug->description = str_replace( $this->source_->issuelink . $t_old_id2, $this->getReplacementString( $this->source_->issuelink, $t_old_id2 ), $t_bug->description );
 				}
 			}
 			# replace links in additional information
-			preg_match_all( $bugLinkRegexp, $bugData->additional_information, $matches );
-			if( is_array( $matches[3] && count( $matches[3] ) > 0 ) ) {
-				$content_replaced = true;
-				foreach ( $matches[3] as $old_id ) {
-					$bugData->additional_information = str_replace( $this->source_->issuelink . $old_id, $this->getReplacementString( $this->source_->issuelink, $old_id ), $bugData->additional_information);
+			preg_match_all( $t_bug_link_regexp, $t_bug->additional_information, $t_matches );
+			if( is_array( $t_matches[3] && count( $t_matches[3] ) > 0 ) ) {
+				$t_content_replaced = true;
+				foreach ( $t_matches[3] as $t_old_id3 ) {
+					$t_bug->additional_information = str_replace( $this->source_->issuelink . $t_old_id3, $this->getReplacementString( $this->source_->issuelink, $t_old_id3 ), $t_bug->additional_information );
 				}
 			}
-			if( $content_replaced ) {
+			if( $t_content_replaced ) {
 				# only update bug if necessary (otherwise last update date would be unnecessarily overwritten)
-				$bugData->update( true );
+				$t_bug->update( true );
 			}
 		}
 
@@ -202,34 +203,34 @@ class ImportXML {
 	/**
 	 * Compute and return the new link
 	 *
-	 * @param string $p_oldLinkTag old link tag
-	 * @param string $p_oldId old issue id
+	 * @param string $p_oldLinkTag Old link tag.
+	 * @param string $p_oldId      Old issue identifier.
      * @return string
 	 */
 	private function getReplacementString( $p_oldLinkTag, $p_oldId ) {
 		$linkTag = config_get( 'bug_link_tag' );
 
-		$replacement = '';
+		$t_replacement = '';
 		switch( $this->strategy_ ) {
 			case 'link':
-				$replacement = $this->source_->get_issue_url( $p_oldId );
+				$t_replacement = $this->source_->get_issue_url( $p_oldId );
 				break;
 
 			case 'disable':
-				$replacement = htmlFullEntities( $p_oldLinkTag ) . $p_oldId;
+				$t_replacement = htmlFullEntities( $p_oldLinkTag ) . $p_oldId;
 				break;
 
 			case 'renumber':
 				if( $this->itemsMap_->exists( 'issue', $p_oldId ) ) {
 					# regular renumber
-					$replacement = $linkTag . $this->itemsMap_->getNewID( 'issue', $p_oldId );
+					$t_replacement = $linkTag . $this->itemsMap_->getNewID( 'issue', $p_oldId );
 				} else {
 					# fallback strategy
 					if( $this->fallback_ == 'link' ) {
-						$replacement = $this->source_->get_issue_url( $p_oldId );
+						$t_replacement = $this->source_->get_issue_url( $p_oldId );
 					}
 					if( $this->fallback_ == 'disable' ) {
-						$replacement = htmlFullEntities( $p_oldLinkTag ) . $p_oldId;
+						$t_replacement = htmlFullEntities( $p_oldLinkTag ) . $p_oldId;
 					}
 				}
 				break;
@@ -238,12 +239,12 @@ class ImportXML {
 				echo "Unknown method";
 		}
 
-		return $replacement;
+		return $t_replacement;
 	}
 
 	/**
 	 * Get importer object
-	 * @param string $p_element_name name
+	 * @param string $p_element_name Name.
      * @return ImportXml_Issue
 	 */
 	private function get_importer_object( $p_element_name ) {
@@ -257,11 +258,9 @@ class ImportXML {
 	}
 }
 
-/** candidates for string api **/
-
 /**
  * Convert each character of the passed string to the corresponding HTML entity.
- * @param string $p_string string to convert
+ * @param string $p_string String to convert.
  * @return string
  */
 function htmlFullEntities( $p_string ) {
@@ -272,7 +271,7 @@ function htmlFullEntities( $p_string ) {
 
 /**
  * Get entity
- * @param string $char character to convert
+ * @param string $char Character to convert.
  * @return string
  */
 function getEntity( $char ) {

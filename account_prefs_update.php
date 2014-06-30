@@ -107,7 +107,7 @@ $t_prefs->bugnote_order = gpc_get_string( 'bugnote_order' );
 $t_prefs->email_bugnote_limit = gpc_get_int( 'email_bugnote_limit' );
 
 # make sure the delay isn't too low
-if(( config_get( 'min_refresh_delay' ) > $t_prefs->refresh_delay )&&
+if( ( config_get( 'min_refresh_delay' ) > $t_prefs->refresh_delay )&&
 	( $t_prefs->refresh_delay != 0 )) {
 	$t_prefs->refresh_delay = config_get( 'min_refresh_delay' );
 }

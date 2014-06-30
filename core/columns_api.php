@@ -67,10 +67,10 @@ require_api( 'string_api.php' );
  * Filters an array of columns based on configuration options.  The filtering can remove
  * columns whose features are disabled.
  *
- * @param array(string) $p_columns  The columns proposed for display.
- * @return array(string) The columns array after removing the disabled features.
+ * @param array $p_columns The columns proposed for display.
+ * @return array The columns array after removing the disabled features.
  */
-function columns_filter_disabled( $p_columns ) {
+function columns_filter_disabled( array $p_columns ) {
 	$t_columns = array();
 	$t_enable_profiles = ( config_get( 'enable_profiles' ) == ON );
 
@@ -115,11 +115,11 @@ function columns_filter_disabled( $p_columns ) {
 
 /**
  * Get a list of standard columns.
- * @param bool $p_enabled_columns_only default true, if false returns all columns regardless of config settings
+ * @param boolean $p_enabled_columns_only Default true, if false returns all columns regardless of configuration settings.
  * @return array of column names
  */
 function columns_get_standard( $p_enabled_columns_only = true ) {
-	$t_reflection = new ReflectionClass('BugData');
+	$t_reflection = new ReflectionClass( 'BugData' );
 	$t_columns = $t_reflection->getDefaultProperties();
 
 	$t_columns['selection'] = null;
@@ -181,7 +181,7 @@ function columns_get_plugin_columns() {
 						if( class_exists( $t_column_class ) && is_subclass_of( $t_column_class, 'MantisColumn' ) ) {
 							$t_column_object = new $t_column_class();
 							$t_column_name = utf8_strtolower( $t_plugin . '_' . $t_column_object->column );
-							$s_column_array[ $t_column_name ] = $t_column_object;
+							$s_column_array[$t_column_name] = $t_column_object;
 						}
 					}
 				}
@@ -195,19 +195,20 @@ function columns_get_plugin_columns() {
 /**
  * Returns true if the specified $p_column is a plugin column.
  * @param string $p_column A column name.
- * @return bool
+ * @return boolean
  */
 function column_is_plugin_column( $p_column ) {
 	$t_plugin_columns = columns_get_plugin_columns();
-	return isset( $t_plugin_columns[ $p_column ] );
+	return isset( $t_plugin_columns[$p_column] );
 }
 
 /**
  * Allow plugin columns to pre-cache data for a set of issues
  * rather than requiring repeated queries for each issue.
- * @param array $p_bugs Bug objects
+ * @param array $p_bugs Array of BugData objects.
+ * @return void
  */
-function columns_plugin_cache_issue_data( $p_bugs ) {
+function columns_plugin_cache_issue_data( array $p_bugs ) {
 	$t_columns = columns_get_plugin_columns();
 
 	foreach( $t_columns as $t_column_object ) {
@@ -216,8 +217,8 @@ function columns_plugin_cache_issue_data( $p_bugs ) {
 }
 
 /**
- * Get all accessible columns for the current project / current user..
- * @param int $p_project_id project id
+ * Get all accessible columns for the current project / current user.
+ * @param integer $p_project_id A project identifier.
  * @return array array of columns
  * @access public
  */
@@ -250,8 +251,8 @@ function columns_get_all( $p_project_id = null ) {
 /**
  * Checks if the specified column is an extended column.  Extended columns are native columns that are
  * associated with the issue but are saved in mantis_bug_text_table.
- * @param string $p_column The column name
- * @return bool true for extended; false otherwise.
+ * @param string $p_column The column name.
+ * @return boolean true for extended; false otherwise.
  * @access public
  */
 function column_is_extended( $p_column ) {
@@ -284,8 +285,8 @@ function column_get_custom_field_name( $p_column ) {
 
 /**
  * Converts a string of comma separate column names to an array.
- * @param string $p_string - Comma separate column name (not case sensitive)
  *
+ * @param string $p_string Comma separate column name (not case sensitive).
  * @return array The array with all column names lower case.
  * @access public
  */
@@ -293,10 +294,10 @@ function columns_string_to_array( $p_string ) {
 	$t_string = utf8_strtolower( $p_string );
 
 	$t_columns = explode( ',', $t_string );
-	$t_count = count($t_columns);
+	$t_count = count( $t_columns );
 
-	for($i = 0; $i < $t_count; $i++) {
-		$t_columns[$i] = trim($t_columns[$i]);
+	for( $i = 0; $i < $t_count; $i++ ) {
+		$t_columns[$i] = trim( $t_columns[$i] );
 	}
 
 	return $t_columns;
@@ -306,7 +307,7 @@ function columns_string_to_array( $p_string ) {
  * Gets the localized title for the specified column.  The column can be native or custom.
  * The custom fields must contain the 'custom_' prefix.
  *
- * @param string $p_column - The column name.
+ * @param string $p_column The column name.
  * @return string The column localized name.
  * @access public
  */
@@ -326,8 +327,8 @@ function column_get_title( $p_column ) {
 	}
 
 	$t_plugin_columns = columns_get_plugin_columns();
-	if( isset( $t_plugin_columns[ $p_column ] ) ) {
-		$t_column_object = $t_plugin_columns[ $p_column ];
+	if( isset( $t_plugin_columns[$p_column] ) ) {
+		$t_column_object = $t_plugin_columns[$p_column];
 		return $t_column_object->title;
 	}
 
@@ -366,13 +367,13 @@ function column_get_title( $p_column ) {
 /**
  * Checks an array of columns for duplicate or invalid fields.
  *
- * @param string $p_field_name - The logic name of the array being validated.  Used when triggering errors.
- * @param array $p_columns_to_validate - The array of columns to validate.
- * @param array $p_columns_all - The list of all valid columns.
- * @return bool
+ * @param string $p_field_name          The logic name of the array being validated.  Used when triggering errors.
+ * @param array  $p_columns_to_validate The array of columns to validate.
+ * @param array  $p_columns_all         The list of all valid columns.
+ * @return boolean
  * @access public
  */
-function columns_ensure_valid( $p_field_name, $p_columns_to_validate, $p_columns_all ) {
+function columns_ensure_valid( $p_field_name, array $p_columns_to_validate, array $p_columns_all ) {
 	$t_columns_all_lower = array_map( 'utf8_strtolower', $p_columns_all );
 
 	# Check for invalid fields
@@ -403,12 +404,12 @@ function columns_ensure_valid( $p_field_name, $p_columns_to_validate, $p_columns
  * Validates an array of column names and removes ones that are not valid.  The validation
  * is not case sensitive.
  *
- * @param array $p_columns - The array of column names to be validated.
- * @param array $p_columns_all - The array of all valid column names.
+ * @param array $p_columns     The array of column names to be validated.
+ * @param array $p_columns_all The array of all valid column names.
  * @return array The array of valid column names found in $p_columns.
  * @access public
  */
-function columns_remove_invalid( $p_columns, $p_columns_all ) {
+function columns_remove_invalid( array $p_columns, array $p_columns_all ) {
 	$t_columns_all_lower = array_values( array_map( 'utf8_strtolower', $p_columns_all ) );
 	$t_columns = array();
 
@@ -424,10 +425,10 @@ function columns_remove_invalid( $p_columns, $p_columns_all ) {
 /**
  * Print table header for selection column
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_selection( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -436,10 +437,10 @@ function print_column_title_selection( $p_sort, $p_dir, $p_columns_target = COLU
 
 /**
  * Print table header for edit column
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_edit( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -449,9 +450,10 @@ function print_column_title_edit( $p_sort, $p_dir, $p_columns_target = COLUMNS_T
 /**
  * Print table header for column ID
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_id( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -464,10 +466,10 @@ function print_column_title_id( $p_sort, $p_dir, $p_columns_target = COLUMNS_TAR
 /**
  * Print table header for column project id
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_project_id( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -480,10 +482,10 @@ function print_column_title_project_id( $p_sort, $p_dir, $p_columns_target = COL
 /**
  * Print table header for column reporter id
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_reporter_id( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -496,10 +498,10 @@ function print_column_title_reporter_id( $p_sort, $p_dir, $p_columns_target = CO
 /**
  * Print table header for column handler id
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_handler_id( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -512,10 +514,10 @@ function print_column_title_handler_id( $p_sort, $p_dir, $p_columns_target = COL
 /**
  * Print table header for column priority
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_priority( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -530,10 +532,10 @@ function print_column_title_priority( $p_sort, $p_dir, $p_columns_target = COLUM
 /**
  * Print table header for column reproducibility
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_reproducibility( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -546,10 +548,10 @@ function print_column_title_reproducibility( $p_sort, $p_dir, $p_columns_target 
 /**
  * Print table header for column projection
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_projection( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -562,10 +564,10 @@ function print_column_title_projection( $p_sort, $p_dir, $p_columns_target = COL
 /**
  * Print table header for column ETA
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_eta( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -578,10 +580,10 @@ function print_column_title_eta( $p_sort, $p_dir, $p_columns_target = COLUMNS_TA
 /**
  * Print table header for column resolution
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_resolution( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -594,10 +596,10 @@ function print_column_title_resolution( $p_sort, $p_dir, $p_columns_target = COL
 /**
  * Print table header for column fixed in version
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_fixed_in_version( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -610,10 +612,10 @@ function print_column_title_fixed_in_version( $p_sort, $p_dir, $p_columns_target
 /**
  * Print table header for column target version
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_target_version( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -626,10 +628,10 @@ function print_column_title_target_version( $p_sort, $p_dir, $p_columns_target =
 /**
  * Print table header for column view state
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_view_state( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -645,10 +647,10 @@ function print_column_title_view_state( $p_sort, $p_dir, $p_columns_target = COL
 /**
  * Print table header for column OS
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_os( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -661,10 +663,10 @@ function print_column_title_os( $p_sort, $p_dir, $p_columns_target = COLUMNS_TAR
 /**
  * Print table header for column OS Build
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_os_build( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -677,10 +679,10 @@ function print_column_title_os_build( $p_sort, $p_dir, $p_columns_target = COLUM
 /**
  * Print table header for column Build
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_build( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -697,10 +699,10 @@ function print_column_title_build( $p_sort, $p_dir, $p_columns_target = COLUMNS_
 /**
  * Print table header for column Platform
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_platform( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -713,10 +715,10 @@ function print_column_title_platform( $p_sort, $p_dir, $p_columns_target = COLUM
 /**
  * Print table header for column version
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_version( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -729,10 +731,10 @@ function print_column_title_version( $p_sort, $p_dir, $p_columns_target = COLUMN
 /**
  * Print table header for column date submitted
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_date_submitted( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -745,10 +747,10 @@ function print_column_title_date_submitted( $p_sort, $p_dir, $p_columns_target =
 /**
  * Print table header for column attachment count
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_attachment_count( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -761,10 +763,10 @@ function print_column_title_attachment_count( $p_sort, $p_dir, $p_columns_target
 /**
  * Print table header for column category
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_category_id( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -778,24 +780,24 @@ function print_column_title_category_id( $p_sort, $p_dir, $p_columns_target = CO
  * Prints Category column header
  * The actual column is 'category_id', this function is just here for backwards
  * compatibility
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_category( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	trigger_error(ERROR_GENERIC, WARNING);
+	trigger_error( ERROR_GENERIC, WARNING );
 	print_column_title_category_id( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE );
 }
 
 /**
  * Print table header for column sponsorship total
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_sponsorship_total( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -808,10 +810,10 @@ function print_column_title_sponsorship_total( $p_sort, $p_dir, $p_columns_targe
 /**
  * Print table header for column severity
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_severity( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -824,10 +826,10 @@ function print_column_title_severity( $p_sort, $p_dir, $p_columns_target = COLUM
 /**
  * Print table header for column status
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_status( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -840,10 +842,10 @@ function print_column_title_status( $p_sort, $p_dir, $p_columns_target = COLUMNS
 /**
  * Print table header for column last updated
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_last_updated( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -856,10 +858,10 @@ function print_column_title_last_updated( $p_sort, $p_dir, $p_columns_target = C
 /**
  * Print table header for column summary
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_summary( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -872,10 +874,10 @@ function print_column_title_summary( $p_sort, $p_dir, $p_columns_target = COLUMN
 /**
  * Print table header for column bugnotes count
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_bugnotes_count( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -885,10 +887,10 @@ function print_column_title_bugnotes_count( $p_sort, $p_dir, $p_columns_target =
 /**
  * Print table header for column description
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_description( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -900,10 +902,10 @@ function print_column_title_description( $p_sort, $p_dir, $p_columns_target = CO
 /**
  * Print table header for column steps to reproduce
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_steps_to_reproduce( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -915,10 +917,10 @@ function print_column_title_steps_to_reproduce( $p_sort, $p_dir, $p_columns_targ
 /**
  * Print table header for column additional information
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_additional_information( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -929,10 +931,10 @@ function print_column_title_additional_information( $p_sort, $p_dir, $p_columns_
 
 /**
  * Prints Due Date column header
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_due_date( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -945,10 +947,10 @@ function print_column_title_due_date( $p_sort, $p_dir, $p_columns_target = COLUM
 /**
  * Print table header for column overdue
  *
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
 function print_column_title_overdue( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
@@ -964,12 +966,12 @@ function print_column_title_overdue( $p_sort, $p_dir, $p_columns_target = COLUMN
 /**
  * Print table data for column selection
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_selection( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_selection( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $g_checkboxes_exist;
 
 	echo '<td class="column-selection">';
@@ -998,14 +1000,15 @@ function print_column_selection( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW
 /**
  * Print column title for a specific custom column.
  *
- * @param string $p_column Active column
- * @param object $p_column_object Column object
- * @param string $p_sort sort
- * @param string $p_dir direction
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
+ * @param string  $p_column         Active column.
+ * @param object  $p_column_object  Column object.
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_title_plugin( $p_column, $p_column_object, $p_sort, $p_dir, $p_columns_target=COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_title_plugin( $p_column, $p_column_object, $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<th class="column-plugin">';
 	if( $p_column_object->sortable ) {
 		print_view_bug_sort_link( string_display_line( $p_column_object->title ), $p_column, $p_sort, $p_dir, $p_columns_target );
@@ -1018,12 +1021,13 @@ function print_column_title_plugin( $p_column, $p_column_object, $p_sort, $p_dir
 
 /**
  * Print custom column content for a specific bug.
- * @param object $p_column_object Column object
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
+ * @param object  $p_column_object  Column object.
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_plugin( $p_column_object, $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_plugin( $p_column_object, BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	if( $p_columns_target != COLUMNS_TARGET_CSV_PAGE ) {
 		echo '<td class="column-plugin">';
 		$p_column_object->display( $p_bug, $p_columns_target );
@@ -1036,12 +1040,12 @@ function print_column_plugin( $p_column_object, $p_bug, $p_columns_target = COLU
 /**
  * Print column content for column edit
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_edit( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_edit( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_icon_path;
 
 	echo '<td class="column-edit">';
@@ -1061,12 +1065,12 @@ function print_column_edit( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE
 /**
  * Print column content for column priority
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_priority( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_priority( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="column-priority">';
 	if( ON == config_get( 'show_priority_text' ) ) {
 		print_formatted_priority_string( $p_bug );
@@ -1079,12 +1083,12 @@ function print_column_priority( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_
 /**
  * Print column content for column id
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_id( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="column-id">';
 	print_bug_link( $p_bug->id, false );
 	echo '</td>';
@@ -1093,12 +1097,12 @@ function print_column_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE )
 /**
  * Print column content for column sponsorship total
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_sponsorship_total( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_sponsorship_total( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo "\t<td class=\"right column-sponsorship\">";
 
 	if( $p_bug->sponsorship_total > 0 ) {
@@ -1112,30 +1116,30 @@ function print_column_sponsorship_total( $p_bug, $p_columns_target = COLUMNS_TAR
 /**
  * Print column content for column bugnotes count
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_bugnotes_count( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_bugnotes_count( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_filter;
 
 	# grab the bugnote count
 	$t_bugnote_stats = bug_get_bugnote_stats( $p_bug->id );
-	if( NULL !== $t_bugnote_stats ) {
-		$bugnote_count = $t_bugnote_stats['count'];
+	if( null !== $t_bugnote_stats ) {
+		$t_bugnote_count = $t_bugnote_stats['count'];
 		$v_bugnote_updated = $t_bugnote_stats['last_modified'];
 	} else {
-		$bugnote_count = 0;
+		$t_bugnote_count = 0;
 	}
 
 	echo '<td class="column-bugnotes-count">';
-	if( $bugnote_count > 0 ) {
+	if( $t_bugnote_count > 0 ) {
 		$t_show_in_bold = $v_bugnote_updated > strtotime( '-' . $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' );
 		if( $t_show_in_bold ) {
 			echo '<span class="bold">';
 		}
-		print_link( string_get_bug_view_url( $p_bug->id ) . "&nbn=$bugnote_count#bugnotes", $bugnote_count );
+		print_link( string_get_bug_view_url( $p_bug->id ) . "&nbn=$t_bugnote_count#bugnotes", $t_bugnote_count );
 		if( $t_show_in_bold ) {
 			echo '</span>';
 		}
@@ -1149,12 +1153,12 @@ function print_column_bugnotes_count( $p_bug, $p_columns_target = COLUMNS_TARGET
 /**
  * Print column content for column attachment count
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_attachment_count( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_attachment_count( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_icon_path;
 
 	# Check for attachments
@@ -1179,12 +1183,12 @@ function print_column_attachment_count( $p_bug, $p_columns_target = COLUMNS_TARG
 /**
  * Print column content for column category id
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_category_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_category_id( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_sort, $t_dir;
 
 	# grab the project name
@@ -1207,12 +1211,12 @@ function print_column_category_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VI
 /**
  * Print column content for column severity
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_severity( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_severity( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="column-severity">';
 	print_formatted_severity_string( $p_bug );
 	echo '</td>';
@@ -1221,48 +1225,48 @@ function print_column_severity( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_
 /**
  * Print column content for column eta
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_eta( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_eta( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="column-eta">', get_enum_element( 'eta', $p_bug->eta, auth_get_current_user_id(), $p_bug->project_id ), '</td>';
 }
 
 /**
  * Print column content for column projection
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_projection( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_projection( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="column-projection">', get_enum_element( 'projection', $p_bug->projection, auth_get_current_user_id(), $p_bug->project_id ), '</td>';
 }
 
 /**
  * Print column content for column reproducibility
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_reproducibility( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_reproducibility( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="column-reproducibility">', get_enum_element( 'reproducibility', $p_bug->reproducibility, auth_get_current_user_id(), $p_bug->project_id ), '</td>';
 }
 
 /**
  * Print column content for column resolution
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_resolution( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_resolution( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="column-resolution">',
 		get_enum_element( 'resolution', $p_bug->resolution, auth_get_current_user_id(), $p_bug->project_id ),
 		'</td>';
@@ -1271,12 +1275,12 @@ function print_column_resolution( $p_bug, $p_columns_target = COLUMNS_TARGET_VIE
 /**
  * Print column content for column status
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_status( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_status( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="column-status">';
 	printf( '<span class="issue-status" title="%s">%s</span>',
 		get_enum_element( 'resolution', $p_bug->resolution, auth_get_current_user_id(), $p_bug->project_id ),
@@ -1284,7 +1288,7 @@ function print_column_status( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PA
 	);
 
 	# print username instead of status
-	if(( ON == config_get( 'show_assigned_names' ) ) && ( $p_bug->handler_id > 0 ) && ( access_has_project_level( config_get( 'view_handler_threshold' ), $p_bug->project_id ) ) ) {
+	if( ( ON == config_get( 'show_assigned_names' ) ) && ( $p_bug->handler_id > 0 ) && ( access_has_project_level( config_get( 'view_handler_threshold' ), $p_bug->project_id ) ) ) {
 		printf( ' (%s)', prepare_user_name( $p_bug->handler_id ) );
 	}
 	echo '</td>';
@@ -1293,12 +1297,12 @@ function print_column_status( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PA
 /**
  * Print column content for column handler id
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_handler_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_handler_id( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="column-assigned-to">';
 
 	# In case of a specific project, if the current user has no access to the field, then it would have been excluded from the
@@ -1313,12 +1317,12 @@ function print_column_handler_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VIE
 /**
  * Print column content for column reporter id
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_reporter_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_reporter_id( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="column-reporter">';
 	echo prepare_user_name( $p_bug->reporter_id );
 	echo '</td>';
@@ -1327,12 +1331,12 @@ function print_column_reporter_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VI
 /**
  * Print column content for column project id
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_project_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_project_id( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="column-project-id">';
 	echo string_display_line( project_get_name( $p_bug->project_id ) );
 	echo '</td>';
@@ -1341,12 +1345,12 @@ function print_column_project_id( $p_bug, $p_columns_target = COLUMNS_TARGET_VIE
 /**
  * Print column content for column last updated
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_last_updated( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_last_updated( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_filter;
 
 	$t_last_updated = string_display_line( date( config_get( 'short_date_format' ), $p_bug->last_updated ) );
@@ -1363,12 +1367,12 @@ function print_column_last_updated( $p_bug, $p_columns_target = COLUMNS_TARGET_V
 /**
  * Print column content for column date submitted
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_date_submitted( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_date_submitted( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	$t_date_submitted = string_display_line( date( config_get( 'short_date_format' ), $p_bug->date_submitted ) );
 
 	echo '<td class="column-date-submitted">', $t_date_submitted, '</td>';
@@ -1377,12 +1381,12 @@ function print_column_date_submitted( $p_bug, $p_columns_target = COLUMNS_TARGET
 /**
  * Print column content for column summary
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_summary( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_summary( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	if( $p_columns_target == COLUMNS_TARGET_CSV_PAGE ) {
 		$t_summary = string_attribute( $p_bug->summary );
 	} else {
@@ -1395,12 +1399,12 @@ function print_column_summary( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_P
 /**
  * Print column content for column description
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_description( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_description( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	$t_description = string_display_links( $p_bug->description );
 
 	echo '<td class="column-description">', $t_description, '</td>';
@@ -1409,12 +1413,12 @@ function print_column_description( $p_bug, $p_columns_target = COLUMNS_TARGET_VI
 /**
  * Print column content for column steps to reproduce
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_steps_to_reproduce( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_steps_to_reproduce( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	$t_steps_to_reproduce = string_display_links( $p_bug->steps_to_reproduce );
 
 	echo '<td class="column-steps-to-reproduce">', $t_steps_to_reproduce, '</td>';
@@ -1423,12 +1427,12 @@ function print_column_steps_to_reproduce( $p_bug, $p_columns_target = COLUMNS_TA
 /**
  * Print column content for column additional information
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_additional_information( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_additional_information( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	$t_additional_information = string_display_links( $p_bug->additional_information );
 
 	echo '<td class="column-additional-information">', $t_additional_information, '</td>';
@@ -1437,12 +1441,12 @@ function print_column_additional_information( $p_bug, $p_columns_target = COLUMN
 /**
  * Print column content for column target version
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_target_version( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_target_version( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="column-target-version">';
 
 	# In case of a specific project, if the current user has no access to the field, then it would have been excluded from the
@@ -1457,12 +1461,12 @@ function print_column_target_version( $p_bug, $p_columns_target = COLUMNS_TARGET
 /**
  * Print column content for view state column
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_view_state( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_view_state( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_icon_path;
 
 	echo '<td class="column-view-state">';
@@ -1480,12 +1484,12 @@ function print_column_view_state( $p_bug, $p_columns_target = COLUMNS_TARGET_VIE
 /**
  * Print column content for column due date
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_due_date( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_due_date( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	$t_overdue = '';
 
 	if( !access_has_bug_level( config_get( 'due_date_view_threshold' ), $p_bug->id ) ||
@@ -1505,12 +1509,12 @@ function print_column_due_date( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_
 /**
  * Print column content for column overdue
  *
- * @param BugData $p_bug bug object
- * @param int $p_columns_target see COLUMNS_TARGET_* in constant_inc.php
- * @return null
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
  * @access public
  */
-function print_column_overdue( $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+function print_column_overdue( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_icon_path;
 
 	echo '<td class="column-overdue">';

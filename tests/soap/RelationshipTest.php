@@ -35,74 +35,76 @@ class RelationshipTest extends SoapBase {
 
 	/**
 	 * Creates two issues and adds a relationship between them
+	 * @return void
 	 */
 	public function testCreateIssuesAndAddRelation() {
-	    $firstIssue = $this->getIssueToAdd( 'RelationshipTest.testCreateIssueAndAddRelation1' );
+	    $t_first_issue = $this->getIssueToAdd( 'RelationshipTest.testCreateIssueAndAddRelation1' );
 
-		$firstIssueId = $this->client->mc_issue_add( $this->userName, $this->password, $firstIssue);
+		$t_first_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_first_issue );
 
-		$this->deleteAfterRun( $firstIssueId );
+		$this->deleteAfterRun( $t_first_issue_id );
 
-	    $secondIssue = $this->getIssueToAdd( 'RelationshipTest.testCreateIssueAndAddRelation2' );
+	    $t_second_issue = $this->getIssueToAdd( 'RelationshipTest.testCreateIssueAndAddRelation2' );
 
-		$secondIssueId = $this->client->mc_issue_add( $this->userName, $this->password, $secondIssue);
+		$t_second_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_second_issue );
 
-		$this->deleteAfterRun( $secondIssueId );
+		$this->deleteAfterRun( $t_second_issue_id );
 
-		$relationship = array (
+		$t_relationship = array (
 		    'type' => array (
 		        'id' => 0 # BUG_DUPLICATE
 		    ),
-		    'target_id' => $secondIssueId
+		    'target_id' => $t_second_issue_id
 		);
 
-		$this->client->mc_issue_relationship_add( $this->userName, $this->password, $firstIssueId, $relationship );
+		$this->client->mc_issue_relationship_add( $this->userName, $this->password, $t_first_issue_id, $t_relationship );
 
-		$retrievedFirstIssue = $this->client->mc_issue_get($this->userName, $this->password, $firstIssueId);
-		$retrievedSecondIssue = $this->client->mc_issue_get($this->userName, $this->password, $secondIssueId);
+		$t_retrieved_first_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_first_issue_id );
+		$t_retrieved_second_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_second_issue_id );
 
-		$this->assertEquals(1, count ( $retrievedFirstIssue->relationships) );
+		$this->assertEquals( 1, count( $t_retrieved_first_issue->relationships ) );
 
-		$firstRelationship = $retrievedFirstIssue->relationships[0];
-		$this->assertEquals($secondIssueId, $firstRelationship->target_id);
-		$this->assertEquals(0, $firstRelationship->type->id);
+		$t_first_relationship = $t_retrieved_first_issue->relationships[0];
+		$this->assertEquals( $t_second_issue_id, $t_first_relationship->target_id );
+		$this->assertEquals( 0, $t_first_relationship->type->id );
 
-		$this->assertEquals(1, count ( $retrievedSecondIssue->relationships) );
-		$secondRelationship = $retrievedSecondIssue->relationships[0];
-		$this->assertEquals($firstIssueId, $secondRelationship->target_id);
-		$this->assertEquals(4, $secondRelationship->type->id); # BUG_HAS_DUPLICATE
+		$this->assertEquals( 1, count( $t_retrieved_second_issue->relationships ) );
+		$t_second_relationship = $t_retrieved_second_issue->relationships[0];
+		$this->assertEquals( $t_first_issue_id, $t_second_relationship->target_id );
+		$this->assertEquals( 4, $t_second_relationship->type->id ); # BUG_HAS_DUPLICATE
 	}
 
 	/**
 	 * Creates two issues, adds and then deletes a relationship between them
+	 * @return void
 	 */
 	public function testDeleteRelation() {
-	    $firstIssue = $this->getIssueToAdd( 'RelationshipTest.testCreateIssueAndAddRelation1' );
+	    $t_first_issue = $this->getIssueToAdd( 'RelationshipTest.testCreateIssueAndAddRelation1' );
 
-		$firstIssueId = $this->client->mc_issue_add( $this->userName, $this->password, $firstIssue);
+		$t_first_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_first_issue );
 
-		$this->deleteAfterRun( $firstIssueId );
+		$this->deleteAfterRun( $t_first_issue_id );
 
-	    $secondIssue = $this->getIssueToAdd( 'RelationshipTest.testCreateIssueAndAddRelation2' );
+	    $t_second_issue = $this->getIssueToAdd( 'RelationshipTest.testCreateIssueAndAddRelation2' );
 
-		$secondIssueId = $this->client->mc_issue_add( $this->userName, $this->password, $secondIssue);
+		$t_second_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_second_issue );
 
-		$this->deleteAfterRun( $secondIssueId );
+		$this->deleteAfterRun( $t_second_issue_id );
 
-		$relationship = array (
+		$t_relationship = array (
 		    'type' => array (
 		        'id' => 0 # BUG_DUPLICATE
 		    ),
-		    'target_id' => $secondIssueId
+		    'target_id' => $t_second_issue_id
 		);
 
-		$relationshipId = $this->client->mc_issue_relationship_add( $this->userName, $this->password, $firstIssueId, $relationship );
-		$this->client->mc_issue_relationship_delete ( $this->userName, $this->password, $firstIssueId, $relationshipId);
+		$t_relationship_id = $this->client->mc_issue_relationship_add( $this->userName, $this->password, $t_first_issue_id, $t_relationship );
+		$this->client->mc_issue_relationship_delete( $this->userName, $this->password, $t_first_issue_id, $t_relationship_id );
 
-		$retrievedFirstIssue = $this->client->mc_issue_get($this->userName, $this->password, $firstIssueId);
-		$retrievedSecondIssue = $this->client->mc_issue_get($this->userName, $this->password, $secondIssueId);
+		$t_retrieved_first_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_first_issue_id );
+		$t_retrieved_second_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_second_issue_id );
 
-		$this->assertObjectNotHasAttribute('relationships', $retrievedFirstIssue);
-		$this->assertObjectNotHasAttribute('relationships', $retrievedSecondIssue);
+		$this->assertObjectNotHasAttribute( 'relationships', $t_retrieved_first_issue );
+		$this->assertObjectNotHasAttribute( 'relationships', $t_retrieved_second_issue );
 	}
 }
