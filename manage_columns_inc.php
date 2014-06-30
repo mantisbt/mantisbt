@@ -125,14 +125,16 @@ $t_excel = implode( ', ', $t_columns );
 				}
 			}
 
-			if( $t_manage_page ) {
+			if( $t_manage_page ) { ?>
+				<div class="submit-button"><?php
 				if( $t_project_id != ALL_PROJECTS ) { ?>
-					<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_for_current_project" value="<?php echo lang_get( 'update_columns_for_current_project' ) ?>" /></span><?php
+					<input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_for_current_project" value="<?php echo lang_get( 'update_columns_for_current_project' ) ?>" /><?php
 				}
 
 				if( current_user_is_administrator() ) { ?>
-					<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_as_global_default" value="<?php echo lang_get( 'update_columns_as_global_default' ) ?>" /></span><?php
-				}
+					<input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_as_global_default" value="<?php echo lang_get( 'update_columns_as_global_default' ) ?>" /><?php
+				} ?>
+				</div><?php
 			} ?>
 		</fieldset>
 	</form>
