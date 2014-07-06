@@ -1485,13 +1485,8 @@ function bug_get_bugnote_stats( $p_bug_id ) {
 	global $g_cache_bug;
 	$c_bug_id = (int)$p_bug_id;
 
-	if( !is_null( $g_cache_bug[$c_bug_id]['_stats'] ) ) {
-		if( $g_cache_bug[$c_bug_id]['_stats'] === false ) {
-			return false;
-		} else {
-			$t_stats = $g_cache_bug[$c_bug_id]['_stats'];
-		}
-		return $t_stats;
+	if( array_key_exists( '_stats', $g_cache_bug[$c_bug_id] ) ) {
+		return $g_cache_bug[$c_bug_id]['_stats'];
 	}
 
 	$t_bugnote_table = db_get_table( 'bugnote' );
