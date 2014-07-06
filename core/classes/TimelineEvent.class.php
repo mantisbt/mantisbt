@@ -103,22 +103,17 @@ class TimelineEvent {
 	public function html_start() {
 		$t_avatar = user_get_avatar( $this->user_id, 32 );
 
-		if( $t_avatar !== false ) {
-			$t_html = '<div class="entry">';
+		if( !empty( $t_avatar ) ) {
+			$t_class = 'entry';
+			$t_src = 'src="' . $t_avatar[0] . '" ';
 		} else {
-			$t_html = '<div class="entry-no-avatar">';
+			$t_class = 'entry-no-avatar';
+			$t_src = '';
 		}
 
-		if( $t_avatar !== false ) {
-			$t_avatar_url = $t_avatar[0];
-			$t_html .= '<img class="avatar" src="' . $t_avatar_url . '"/>';
-		} else {
-			$t_html .= '<img class="avatar" />';
-		}
+		$t_html = '<div class="%s"><img class="avatar" %s/><div class="timestamp">%s</div>';
 
-		$t_html .= '<div class="timestamp">' .  $this->format_timestamp( $this->timestamp ) . '</div>';
-
-		return $t_html;
+		return sprintf( $t_html, $t_class, $t_src, $this->format_timestamp( $this->timestamp ) );
 	}
 
 	/**
