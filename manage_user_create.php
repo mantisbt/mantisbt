@@ -138,7 +138,9 @@ layout_page_begin( 'manage_overview_page.php' );
         $t_access_level = get_enum_element( 'access_levels', $f_access_level );
         echo lang_get( 'created_user_part1' ) . ' <span class="bold">' . $f_username . '</span> ' . lang_get( 'created_user_part2' ) . ' <span class="bold">' . $t_access_level . '</span><br />';
 
-        print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+		echo '<div class="space-10"></div>';
+        print_link( $t_redirect_url, lang_get( 'proceed' ),
+			false, 'btn btn-primary btn-white btn-round' );
         ?>
     </div>
 

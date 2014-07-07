@@ -91,3 +91,7 @@ pre {
 .light-login {
     background: none repeat scroll 0 0 #ffffff !important;
 }
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    cursor: pointer !important;
+}
