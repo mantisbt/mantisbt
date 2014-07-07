@@ -472,7 +472,7 @@ function db_fetch_array( IteratorAggregate &$p_result ) {
 		$p_result->MoveNext();
 		return $t_array;
 	} else {
-		$t_row = $p_result->GetRowAssoc( false );
+		$t_row = $p_result->GetRowAssoc( ADODB_ASSOC_CASE_LOWER );
 		static $s_array_result;
 		static $s_array_fields;
 
