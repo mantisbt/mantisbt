@@ -100,6 +100,7 @@ $t_updated_bug->duplicate_id = gpc_get_int( 'duplicate_id', 0 );
 $t_updated_bug->eta = gpc_get_int( 'eta', $t_existing_bug->eta );
 $t_updated_bug->fixed_in_version = gpc_get_string( 'fixed_in_version', $t_existing_bug->fixed_in_version );
 $t_updated_bug->handler_id = gpc_get_int( 'handler_id', $t_existing_bug->handler_id );
+$t_updated_bug->last_updated = gpc_get_string( 'last_updated' );
 $t_updated_bug->os = gpc_get_string( 'os', $t_existing_bug->os );
 $t_updated_bug->os_build = gpc_get_string( 'os_build', $t_existing_bug->os_build );
 $t_updated_bug->platform = gpc_get_string( 'platform', $t_existing_bug->platform );
@@ -120,6 +121,10 @@ $t_bug_note = new BugNoteData();
 $t_bug_note->note = gpc_get_string( 'bugnote_text', '' );
 $t_bug_note->view_state = gpc_get_bool( 'private', config_get( 'default_bugnote_view_status' ) == VS_PRIVATE ) ? VS_PRIVATE : VS_PUBLIC;
 $t_bug_note->time_tracking = gpc_get_string( 'time_tracking', '0:00' );
+
+if( $t_existing_bug->last_updated !== $t_updated_bug->last_updated ) {
+    trigger_error( ERROR_BUG_CONFLICTING_EDIT, ERROR );
+}
 
 # Determine whether the new status will reopen, resolve or close the issue.
 # Note that multiple resolved or closed states can exist and thus we need to
