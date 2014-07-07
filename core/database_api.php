@@ -328,7 +328,7 @@ function db_query_bound( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_
 
 	static $s_check_params;
 	if( $s_check_params === null ) {
-		$s_check_params = ( db_is_pgsql() || $t_db_type == 'odbc_mssql' || $t_db_type == 'mssqlnative');
+		$s_check_params = ( db_is_pgsql() || $t_db_type == 'odbc_mssql' || $t_db_type == 'mssqlnative' );
 	}
 
 	$t_start = microtime( true );
