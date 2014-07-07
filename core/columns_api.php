@@ -1289,7 +1289,7 @@ function print_column_status( BugData $p_bug, $p_columns_target = COLUMNS_TARGET
     $status_label = html_get_status_css_class( $p_bug->status, auth_get_current_user_id(), $p_bug->project_id );
     echo '<td class="column-status">';
     echo '<div class="align-left">';
-    echo '<i class="fa fa-square-o fa-lg ' . $status_label . '"></i> ';
+    echo '<i class="fa fa-square-o fa-xlg ' . $status_label . '"></i> ';
     printf( '<span title="%s">%s</span>',
 		get_enum_element( 'resolution', $p_bug->resolution, auth_get_current_user_id(), $p_bug->project_id ),
 		get_enum_element( 'status', $p_bug->status, auth_get_current_user_id(), $p_bug->project_id )

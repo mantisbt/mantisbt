@@ -365,7 +365,7 @@ $t_bug_string = $t_bug_count == 1 ? 'bug' : 'bugs';
                                 # choose color based on status
                                 $status_label = html_get_status_css_class( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
                                 $t_status = string_attribute( get_enum_element( 'status', bug_get_field( $t_bug->id, 'status' ), $t_bug->project_id ) );
-                                echo '<i class="fa fa-square-o fa-lg ' . $status_label . '" title="' . $t_status . '"></i> ';
+                                echo '<i class="fa fa-square-o fa-xlg ' . $status_label . '" title="' . $t_status . '"></i> ';
 
                                 if( !bug_is_readonly( $t_bug->id ) && access_has_bug_level( $t_update_bug_threshold, $t_bug->id ) ) {
                                     echo '<a class="edit" href="' . string_get_bug_update_url( $t_bug->id ) . '"><img src="' . $t_icon_path . 'update.png' . '" alt="' . lang_get( 'update_bug_button' ) . '" /></a>';

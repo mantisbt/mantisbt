@@ -75,15 +75,17 @@
     font-weight: bold;
 }
 
-/*Disable printing of link urls*/
+/* Disable printing of link urls */
 a:link:after, a:visited:after {
     content: normal !important;
 }
 
+/* Prevent horizontal scrolling when displaying db commands in install screen */
 pre {
     word-break: break-all !important;
 }
 
+/* Disable theme backgrounds */
 .skin-3 .main-container:before {
     background: none repeat scroll 0 0 #ffffff !important;
 }
@@ -92,6 +94,13 @@ pre {
     background: none repeat scroll 0 0 #ffffff !important;
 }
 
+/* Show pointer for active nav tabs */
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
     cursor: pointer !important;
+}
+
+.fa-xlg {
+    font-size: 1.6em;
+    line-height: 0.73em;
+    vertical-align: -15%;
 }
