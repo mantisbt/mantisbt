@@ -87,14 +87,7 @@ function print_sort_icon( $p_dir, $p_sort_by, $p_field ) {
 	if( ( 'DESC' == $p_dir ) || ( DESCENDING == $p_dir ) ) {
 		$t_dir = DESCENDING;
 	} else {
-		$t_dir = ASCENDING;
-	}
-
-	$t_none = NONE;
-	if( !is_blank( $t_sort_icon_arr[$t_dir] ) ) {
-		echo "<img src=\"$t_icon_path$t_sort_icon_arr[$t_dir]\" alt=\"\" />";
-	} else {
-		echo "<img src=\"$t_icon_path$t_status_icon_arr[$t_none]\" alt=\"\" />";
+    echo '&#160;<i class="fa fa-caret-up fa-lg blue"></i>';
 	}
 }
 

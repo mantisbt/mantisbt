@@ -72,19 +72,19 @@ current_user_ensure_unprotected();
 # Only allow users to delete their own accounts if allow_account_delete = ON or
 # the user has permission to manage user accounts.
 if( OFF == config_get( 'allow_account_delete' ) &&
-	 !access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
-	print_header_redirect( 'account_page.php' );
+    !access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
+    print_header_redirect( 'account_page.php' );
 }
 
 # check that we are not deleting the last administrator account
 $t_admin_threshold = config_get_global( 'admin_site_threshold' );
 if( current_user_is_administrator() &&
-	 user_count_level( $t_admin_threshold ) <= 1 ) {
-	trigger_error( ERROR_USER_CHANGE_LAST_ADMIN, ERROR );
+    user_count_level( $t_admin_threshold ) <= 1 ) {
+    trigger_error( ERROR_USER_CHANGE_LAST_ADMIN, ERROR );
 }
 
 helper_ensure_confirmed( lang_get( 'confirm_delete_msg' ),
-						 lang_get( 'delete_account_button' ) );
+    lang_get( 'delete_account_button' ) );
 
 form_security_purge( 'account_delete' );
 
@@ -94,18 +94,19 @@ auth_logout();
 
 user_delete( $t_user_id );
 
-html_page_top1();
-html_page_top2a();
+layout_page_header();
 
+layout_page_begin();
 ?>
 
-<br />
-<div>
-<?php
-echo lang_get( 'account_removed_msg' ) . '<br />';
-print_bracket_link( config_get( 'logout_redirect_page' ), lang_get( 'proceed' ) );
-?>
-</div>
+    <div class="col-md-12 col-sm-12">
+        <div class="space-10"></div>
+        <?php
+        echo lang_get( 'account_removed_msg' ) . '<br />';
+        print_link( config_get( 'logout_redirect_page' ), lang_get( 'proceed' ),
+            false, 'btn btn-primary btn-white btn-round');
+        ?>
+    </div>
 
 <?php
-	html_page_bottom1a();
+layout_page_end();

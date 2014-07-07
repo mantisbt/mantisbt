@@ -71,7 +71,7 @@ class XmlImportExportPlugin extends MantisPlugin {
 	 * @return array
 	 */
 	function export_issues_menu() {
-		return array( '<a href="' . plugin_page( 'export' ) . '">' . plugin_lang_get( 'export' ) . '</a>', );
+		return array( '<a class="btn btn-sm btn-primary btn-white btn-round" href="' . plugin_page( 'export' ) . '">' . plugin_lang_get( 'export' ) . '</a>', );
 	}
 
 	/**

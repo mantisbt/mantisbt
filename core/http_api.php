@@ -150,7 +150,7 @@ function http_security_headers() {
 			if( http_is_protocol_https() ) {
 				$t_avatar_img_allow = "; img-src 'self' https://secure.gravatar.com:443";
 			} else {
-				$t_avatar_img_allow = "; img-src 'self' http://www.gravatar.com:80";
+				$t_avatar_img_allow = "; img-src 'self' https://www.gravatar.com:80";
 			}
 		}
 		header( "X-Content-Security-Policy: allow 'self';$t_avatar_img_allow; frame-ancestors 'none'" );

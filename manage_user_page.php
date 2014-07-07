@@ -72,9 +72,9 @@ $c_filter = '';
 
 # Clean up the form variables
 if( !db_field_exists( $f_sort, $t_user_table ) ) {
-	$c_sort = 'username';
+    $c_sort = 'username';
 } else {
-	$c_sort = addslashes( $f_sort );
+    $c_sort = addslashes( $f_sort );
 }
 
 $c_dir = ( $f_dir == 'ASC' ) ? 'ASC' : 'DESC';
@@ -89,35 +89,37 @@ $t_show_disabled_filter = '&amp;showdisabled=' . $c_show_disabled;
 
 # set cookie values for hide inactive, sort by, dir and show disabled
 if( $f_save ) {
-	$t_manage_string = $c_hide_inactive.':'.$c_sort.':'.$c_dir.':'.$c_show_disabled;
-	gpc_set_cookie( $t_cookie_name, $t_manage_string, true );
+    $t_manage_string = $c_hide_inactive.':'.$c_sort.':'.$c_dir.':'.$c_show_disabled;
+    gpc_set_cookie( $t_cookie_name, $t_manage_string, true );
 } else if( !is_blank( gpc_get_cookie( $t_cookie_name, '' ) ) ) {
-	$t_manage_arr = explode( ':', gpc_get_cookie( $t_cookie_name ) );
+    $t_manage_arr = explode( ':', gpc_get_cookie( $t_cookie_name ) );
 
-	# Hide Inactive
-	$c_hide_inactive = $t_manage_arr[0];
+    # Hide Inactive
+    $c_hide_inactive = $t_manage_arr[0];
 
-	# Sort field
-	if( isset( $t_manage_arr[1] ) ) {
-		$c_sort = $t_manage_arr[1];
-	} else {
-		$c_sort = 'username';
-	}
+    # Sort field
+    if( isset( $t_manage_arr[1] ) ) {
+        $c_sort = $t_manage_arr[1];
+    } else {
+        $c_sort = 'username';
+    }
 
-	# Sort order
-	if( isset( $t_manage_arr[2] ) ) {
-		$c_dir  = $t_manage_arr[2];
-	} else {
-		$c_dir = 'DESC';
-	}
+    # Sort order
+    if( isset( $t_manage_arr[2] ) ) {
+        $c_dir  = $t_manage_arr[2];
+    } else {
+        $c_dir = 'DESC';
+    }
 
-	# Show Disabled
-	if( isset( $t_manage_arr[3] ) ) {
-		$c_show_disabled = $t_manage_arr[3];
-	}
+    # Show Disabled
+    if( isset( $t_manage_arr[3] ) ) {
+        $c_show_disabled = $t_manage_arr[3];
+    }
 }
 
-html_page_top( lang_get( 'manage_users_link' ) );
+layout_page_header( lang_get( 'manage_users_link' ) );
+
+layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'manage_user_page.php' );
 
@@ -145,50 +147,53 @@ $t_prefix_array = array();
 $t_prefix_array['ALL'] = lang_get( 'show_all_users' );
 
 for ( $i = 'A'; $i != 'AA'; $i++ ) {
-	$t_prefix_array[$i] = $i;
+    $t_prefix_array[$i] = $i;
 }
 
 for ( $i = 0; $i <= 9; $i++ ) {
-	$t_prefix_array["$i"] = "$i";
+    $t_prefix_array["$i"] = "$i";
 }
 $t_prefix_array['UNUSED'] = lang_get( 'users_unused' );
 $t_prefix_array['NEW'] = lang_get( 'users_new' );
 
-echo '<div id="manage-user-filter-menu">';
-echo '<ul class="menu">';
+echo '<div class="col-md-12 col-sm-12">';
+echo '<div class = "space-10"></div>';
+echo '<div class="center" >';
+echo '  <div class="btn-toolbar inline" >';
+echo '    <div class="btn-group" >';
+
 foreach ( $t_prefix_array as $t_prefix => $t_caption ) {
-	echo '<li>';
-	if( $t_prefix === 'UNUSED' ) {
-		$t_title = ' title="[' . $t_unused_user_count . '] (' . lang_get( 'never_logged_in_title' ) . ')"';
-	} else if( $t_prefix === 'NEW' ) {
-		$t_title = ' title="[' . $t_new_user_count . '] (' . lang_get( '1_week_title' ) . ')"';
-	} else {
-		$t_title = '';
-	}
-	if( $t_prefix === $f_filter ) {
-		$c_filter = $f_filter;
-		echo '<span class="current-filter">' . $t_caption . '</span>';
-	} else {
-		print_manage_user_sort_link( 'manage_user_page.php',
-			$t_caption,
-			$c_sort,
-			$c_dir, null, $c_hide_inactive, $t_prefix, $c_show_disabled );
-	}
-	echo '</li>';
+    if( $t_prefix === 'UNUSED' ) {
+        $t_title = ' title="[' . $t_unused_user_count . '] (' . lang_get( 'never_logged_in_title' ) . ')"';
+    } else if( $t_prefix === 'NEW' ) {
+        $t_title = ' title="[' . $t_new_user_count . '] (' . lang_get( '1_week_title' ) . ')"';
+    } else {
+        $t_title = '';
+    }
+
+    $t_active = $t_prefix == $f_filter ? 'active' : '';
+    print_manage_user_sort_link( 'manage_user_page.php',
+        $t_caption,
+        $c_sort,
+        $c_dir, null, $c_hide_inactive, $t_prefix, $c_show_disabled,
+        'btn btn-xs btn-white btn-primary ' . $t_active
+    );
 }
-echo '</ul>';
 echo '</div>';
+echo '</div>';
+echo '</div>';
+echo '<div class="space-10"></div >';
 
 $t_where_params = null;
 if( $f_filter === 'ALL' ) {
-	$t_where = '(1 = 1)';
+    $t_where = '(1 = 1)';
 } else if( $f_filter === 'UNUSED' ) {
-	$t_where = '(login_count = 0) AND ( date_created = last_visit )';
+    $t_where = '(login_count = 0) AND ( date_created = last_visit )';
 } else if( $f_filter === 'NEW' ) {
-	$t_where = db_helper_compare_days( '' . db_now() . '', "date_created", "<= $t_days_old" );
+    $t_where = db_helper_compare_days( '' . db_now() . '', 'date_created', "<= $t_days_old" );
 } else {
-	$t_where_params[] = $f_filter . '%';
-	$t_where = db_helper_like( 'UPPER(username)' );
+    $t_where_params[] = $f_filter . '%';
+    $t_where = db_helper_like( 'UPPER(username)' );
 }
 
 $p_per_page = 50;
@@ -201,160 +206,183 @@ $t_total_user_count = 0;
 $t_result = '';
 
 if( 1 == $c_show_disabled ) {
-	$t_show_disabled_cond = '';
+    $t_show_disabled_cond = '';
 } else {
-	$t_show_disabled_cond = ' AND enabled = ' . db_prepare_bool( true );
+    $t_show_disabled_cond = ' AND enabled = ' . db_prepare_bool( true );
 }
 
 if( 0 == $c_hide_inactive ) {
-	$t_query = "SELECT count(*) as user_count FROM $t_user_table WHERE $t_where $t_show_disabled_cond";
-	$t_result = db_query_bound( $t_query, $t_where_params );
-	$t_row = db_fetch_array( $t_result );
-	$t_total_user_count = $t_row['user_count'];
+    $t_query = "SELECT count(*) as user_count FROM $t_user_table WHERE $t_where $t_show_disabled_cond";
+    $t_result = db_query_bound( $t_query, $t_where_params );
+    $t_row = db_fetch_array( $t_result );
+    $t_total_user_count = $t_row['user_count'];
 } else {
-	$t_query = "SELECT count(*) as user_count FROM $t_user_table
+    $t_query = "SELECT count(*) as user_count FROM $t_user_table
 			WHERE $t_where AND " . db_helper_compare_days( '' . db_now() . '', "last_visit", "< $t_days_old" )
-			. $t_show_disabled_cond;
-	$t_result = db_query_bound( $t_query, $t_where_params );
-	$t_row = db_fetch_array( $t_result );
-	$t_total_user_count = $t_row['user_count'];
+        . $t_show_disabled_cond;
+    $t_result = db_query_bound( $t_query, $t_where_params );
+    $t_row = db_fetch_array( $t_result );
+    $t_total_user_count = $t_row['user_count'];
 }
 
 $t_page_count = ceil( $t_total_user_count / $p_per_page );
 if( $t_page_count < 1 ) {
-	$t_page_count = 1;
+    $t_page_count = 1;
 }
 
 # Make sure $p_page_number isn't past the last page.
 if( $f_page_number > $t_page_count ) {
-	$f_page_number = $t_page_count;
+    $f_page_number = $t_page_count;
 }
 
 # Make sure $p_page_number isn't before the first page
 if( $f_page_number < 1 ) {
-	$f_page_number = 1;
+    $f_page_number = 1;
 }
 
 
 if( 0 == $c_hide_inactive ) {
-	$t_query = "SELECT * FROM $t_user_table WHERE $t_where $t_show_disabled_cond ORDER BY $c_sort $c_dir";
-	$t_result = db_query_bound( $t_query, $t_where_params, $p_per_page, $t_offset );
+    $t_query = "SELECT * FROM $t_user_table WHERE $t_where $t_show_disabled_cond ORDER BY $c_sort $c_dir";
+    $t_result = db_query_bound( $t_query, $t_where_params, $p_per_page, $t_offset );
 } else {
-	$t_query = "SELECT * FROM $t_user_table
+    $t_query = "SELECT * FROM $t_user_table
 			WHERE $t_where AND " . db_helper_compare_days( "" . db_now() . "", "last_visit", "< $t_days_old" ) . "
 			$t_show_disabled_cond
 			ORDER BY $c_sort $c_dir";
-	$t_result = db_query_bound( $t_query, $t_where_params, $p_per_page, $t_offset );
+    $t_result = db_query_bound( $t_query, $t_where_params, $p_per_page, $t_offset );
 }
 
 $t_users = array();
 while ( $t_row = db_fetch_array( $t_result ) ) {
-	$t_users[] = $t_row;
+    $t_users[] = $t_row;
 }
 
 $t_user_count = count( $t_users );
 ?>
-<div id="manage-user-div" class="form-container">
-	<h2><?php echo lang_get( 'manage_accounts_title' ) ?></h2> [<?php echo $t_total_user_count ?>]
-	<?php print_button( 'manage_user_create_page.php', lang_get( 'create_new_account_link' ) ) ?>
-	<?php if( $f_filter === 'UNUSED' ) { print_button( 'manage_user_prune.php', lang_get( 'prune_accounts' ) ); } ?>
-	<form id="manage-user-filter" method="post" action="manage_user_page.php">
-		<fieldset>
-			<?php # CSRF protection not required here - form does not result in modifications ?>
-			<input type="hidden" name="sort" value="<?php echo $c_sort ?>" />
-			<input type="hidden" name="dir" value="<?php echo $c_dir ?>" />
-			<input type="hidden" name="save" value="1" />
-			<input type="hidden" name="filter" value="<?php echo $c_filter ?>" />
-			<input type="checkbox" name="hideinactive" value="1" <?php check_checked( (int)$c_hide_inactive, 1 ); ?> /> <?php echo lang_get( 'hide_inactive' ) ?>
-			<input type="checkbox" name="showdisabled" value="1" <?php check_checked( (int)$c_show_disabled, 1 ); ?> /> <?php echo lang_get( 'show_disabled' ) ?>
-			<input type="submit" class="button" value="<?php echo lang_get( 'filter_button' ) ?>" />
-		</fieldset>
-	</form>
 
-	<table>
-		<thead>
-			<tr class="row-category">
+    <div class="widget-box widget-color-blue2">
+        <div class="widget-header widget-header-small">
+            <h4 class="widget-title lighter">
+                <i class="ace-icon fa fa-users"></i>
+                <?php echo lang_get('manage_accounts_title') ?>
+                <span class="badge"><?php echo $t_total_user_count ?></span>
+            </h4>
+        </div>
+
+        <div class="widget-body">
+            <div class="widget-toolbox padding-8 clearfix">
+                <div id="manage-user-div" class="form-container">
+                    <?php print_button( 'manage_user_create_page.php', lang_get( 'create_new_account_link' ), null, null, 'btn btn-primary btn-white btn-round' ) ?>
+                    <?php if( $f_filter === 'UNUSED' ) print_button( 'manage_user_prune.php', lang_get( 'prune_accounts' ) , null, null, 'btn btn-primary btn-white btn-round' ); ?>
+                    <form id="manage-user-filter" method="post" action="manage_user_page.php" class="form-inline pull-right">
+                        <fieldset>
+                            <?php # CSRF protection not required here - form does not result in modifications ?>
+                            <input type="hidden" name="sort" value="<?php echo $c_sort ?>" />
+                            <input type="hidden" name="dir" value="<?php echo $c_dir ?>" />
+                            <input type="hidden" name="save" value="1" />
+                            <input type="hidden" name="filter" value="<?php echo $c_filter ?>" />
+                            <div class="checkbox"><label>
+                                    <input type="checkbox" class="ace" name="hideinactive" value="1" <?php check_checked( (int)$c_hide_inactive, 1 ); ?> />
+                                    <span class="lbl"> <?php echo lang_get( 'hide_inactive' ) ?></span>
+                            </div>
+                            <div class="checkbox"><label>
+                                    <input type="checkbox" class="ace" name="showdisabled" value="1" <?php check_checked( (int)$c_show_disabled, 1 ); ?> />
+                                    <span class="lbl"> <?php echo lang_get( 'show_disabled' ) ?></span>
+                            </div>
+                            <input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'filter_button' ) ?>" />
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+
+            <div class="widget-main no-padding">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-condensed table-hover">
+                        <thead>
+                        <tr class="row-category">
+                            <?php
+                            # Print column headers with sort links
+                            $t_columns = array(
+                                'username', 'realname', 'email', 'access_level',
+                                'enabled', 'protected', 'date_created', 'last_visit'
+                            );
+
+                            foreach( $t_columns as $t_col ) {
+                                echo "\t<th>";
+                                print_manage_user_sort_link( 'manage_user_page.php',
+                                    lang_get( $t_col ),
+                                    $t_col,
+                                    $c_dir, $c_sort, $c_hide_inactive, $c_filter, $c_show_disabled
+                                );
+                                print_sort_icon( $c_dir, $c_sort, $t_col );
+                                echo "</th>\n";
+                            }
+                            ?>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <?php
+                        $t_date_format = config_get( 'normal_date_format' );
+                        $t_access_level = array();
+                        for ($i=0;$i<$t_user_count;$i++) {
+                            # prefix user data with u_
+                            $t_user = $t_users[$i];
+                            extract( $t_user, EXTR_PREFIX_ALL, 'u' );
+
+                            $u_date_created  = date( $t_date_format, $u_date_created );
+                            $u_last_visit    = date( $t_date_format, $u_last_visit );
+
+                            if( !isset( $t_access_level[$u_access_level] ) ) {
+                                $t_access_level[$u_access_level] = get_enum_element( 'access_levels', $u_access_level );
+                            } ?>
+                            <tr>
+                                <td><?php
+                                    if( access_has_global_level( $u_access_level ) ) { ?>
+                                        <a href="manage_user_edit_page.php?user_id=<?php echo $u_id ?>"><?php echo string_display_line( $u_username ) ?></a><?php
+                                    } else {
+                                        echo string_display_line( $u_username );
+                                    } ?>
+                                </td>
+                                <td><?php echo string_display_line( $u_realname ) ?></td>
+                                <td><?php print_email_link( $u_email, $u_email ) ?></td>
+                                <td><?php echo $t_access_level[$u_access_level] ?></td>
+                                <td class="center"><?php echo trans_bool( $u_enabled ) ?></td>
+                                <td class="center"><?php
+                                    if( $u_protected ) {
+                                        echo " $t_lock_image";
+                                    } else {
+                                        echo '&#160;';
+                                    } ?>
+                                </td>
+                                <td><?php echo $u_date_created ?></td>
+                                <td><?php echo $u_last_visit ?></td>
+                            </tr>
+                        <?php
+                        }  # end for
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="widget-toolbox padding-8 clearfix">
+                <div id="manage-user-edit-div" class="form-inline pull-left">
+                    <form id="manage-user-edit-form" method="get" action="manage_user_edit_page.php"<?php # CSRF protection not required here - form does not result in modifications ?>>
+                        <label for="username"><?php echo lang_get( 'search' ) ?></label>
+                        <input id="username" type="text" name="username" class="form-control input-sm" value="" />
+                        <input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'manage_user' ) ?>" />
+                    </form>
+                </div>
+                <div class="btn-toolbar pull-right">
+                    <?php
+                    # @todo hack - pass in the hide inactive filter via cheating the actual filter value
+                    print_page_links( 'manage_user_page.php', 1, $t_page_count, (int)$f_page_number, $c_filter . $t_hide_inactive_filter . $t_show_disabled_filter . "&amp;sort=$c_sort&amp;dir=$c_dir");
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
 <?php
-	# Print column headers with sort links
-	$t_columns = array(
-		'username', 'realname', 'email', 'access_level',
-		'enabled', 'protected', 'date_created', 'last_visit'
-	);
-
-	foreach( $t_columns as $t_col ) {
-		echo "\t<th>";
-		print_manage_user_sort_link( 'manage_user_page.php',
-			lang_get( $t_col ),
-			$t_col,
-			$c_dir, $c_sort, $c_hide_inactive, $c_filter, $c_show_disabled );
-		print_sort_icon( $c_dir, $c_sort, $t_col );
-		echo "</th>\n";
-	}
-?>
-			</tr>
-		</thead>
-
-		<tbody>
-<?php
-	$t_date_format = config_get( 'normal_date_format' );
-	$t_access_level = array();
-	for ( $i=0; $i<$t_user_count; $i++ ) {
-		# prefix user data with u_
-		$t_user = $t_users[$i];
-		extract( $t_user, EXTR_PREFIX_ALL, 'u' );
-
-		$u_date_created  = date( $t_date_format, $u_date_created );
-		$u_last_visit    = date( $t_date_format, $u_last_visit );
-
-		if( !isset( $t_access_level[$u_access_level] ) ) {
-			$t_access_level[$u_access_level] = get_enum_element( 'access_levels', $u_access_level );
-		} ?>
-			<tr>
-				<td><?php
-					if( access_has_global_level( $u_access_level ) ) { ?>
-						<a href="manage_user_edit_page.php?user_id=<?php echo $u_id ?>"><?php echo string_display_line( $u_username ) ?></a><?php
-					} else {
-						echo string_display_line( $u_username );
-					} ?>
-				</td>
-				<td><?php echo string_display_line( $u_realname ) ?></td>
-				<td><?php print_email_link( $u_email, $u_email ) ?></td>
-				<td><?php echo $t_access_level[$u_access_level] ?></td>
-				<td class="center"><?php echo trans_bool( $u_enabled ) ?></td>
-				<td class="center"><?php
-					if( $u_protected ) {
-						echo " $t_lock_image";
-					} else {
-						echo '&#160;';
-					} ?>
-				</td>
-				<td><?php echo $u_date_created ?></td>
-				<td><?php echo $u_last_visit ?></td>
-			</tr>
-<?php
-	}  # end for
-?>
-		</tbody>
-	</table>
-
-	<div class="pager-links">
-		<?php
-		# @todo hack - pass in the hide inactive filter via cheating the actual filter value
-		print_page_links( 'manage_user_page.php', 1, $t_page_count, (int)$f_page_number, $c_filter . $t_hide_inactive_filter . $t_show_disabled_filter . "&amp;sort=$c_sort&amp;dir=$c_dir" );
-		?>
-	</div>
-</div>
-<div id="manage-user-edit-div" class="form-container">
-	<form id="manage-user-edit-form" method="get" action="manage_user_edit_page.php"<?php # CSRF protection not required here - form does not result in modifications ?>>
-		<fieldset>
-			<div class="field-container">
-				<label for="username"><span><?php echo lang_get( 'search' ) ?></span></label>
-				<span class="input"><input id="username" type="text" name="username" value="" /></span>
-				<span class="label-style"></span>
-			</div>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'manage_user' ) ?>" /></span>
-		</fieldset>
-	</form>
-</div>
-<?php
-html_page_bottom();
+layout_page_end();

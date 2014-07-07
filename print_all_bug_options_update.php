@@ -64,14 +64,14 @@ $t_field_name_count = count( $t_field_name_arr );
 
 # check the checkboxes
 for( $i=0; $i <$t_field_name_count; $i++ ) {
-	$t_name = 'print_' . utf8_strtolower( str_replace( ' ', '_', $t_field_name_arr[$i] ) );
-	$t_flag = gpc_get( $t_name, null );
+    $t_name = 'print_' . utf8_strtolower( str_replace( ' ', '_', $t_field_name_arr[$i] ) );
+    $t_flag = gpc_get( $t_name, null );
 
-	if( $t_flag === null ) {
-		$t_prefs_arr[$i] = 0;
-	} else {
-		$t_prefs_arr[$i] = 1;
-	}
+    if( $t_flag === null ) {
+        $t_prefs_arr[$i] = 0;
+    } else {
+        $t_prefs_arr[$i] = 1;
+    }
 }
 
 # get user id
@@ -89,15 +89,17 @@ $t_result = db_query_bound( $t_query, array( $c_export, $t_user_id ) );
 
 form_security_purge( 'print_all_bug_options_update' );
 
-html_page_top( null, $f_redirect_url );
+layout_page_header( null, $f_redirect_url );
+
+layout_page_begin();
 
 if( $t_result ) {
-	html_operation_successful( $f_redirect_url );
+    html_operation_successful( $f_redirect_url );
 } else {
-	echo '<div class="failure-msg">';
-	print error_string( ERROR_GENERIC ) . '<br />';
-	print_bracket_link( $f_redirect_url, lang_get( 'proceed' ) );
-	echo '</div>';
+    echo '<div class="failure-msg">';
+    print error_string( ERROR_GENERIC ) . '<br />';
+    print_bracket_link( $f_redirect_url, lang_get( 'proceed' ) );
+    echo '</div>';
 }
 
-html_page_bottom();
+layout_page_end();

@@ -62,7 +62,7 @@ function filter_highlight_changes(item) {
 function filter_named_filter_clean() {
 	/* be sure it's clean whether it's stored filter or not */
 	var selected_text = $('[name=source_query_id] option:selected').html();
-	if( selected_text.charAt(0) == '*' ) {
+	if(selected_text && selected_text.charAt(0) == '*' ) {
 		$('[name=source_query_id]').removeClass('tainted');
 		var reset_text = selected_text.substring(2,selected_text.length);
 		$('[name=source_query_id] option:selected').html(reset_text);

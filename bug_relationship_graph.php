@@ -91,7 +91,9 @@ access_ensure_bug_level( VIEWER, $f_bug_id );
 
 compress_enable();
 
-html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
+layout_page_header( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
+
+layout_page_begin();
 ?>
 <br />
 

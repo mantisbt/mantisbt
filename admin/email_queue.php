@@ -28,8 +28,17 @@ require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 
 access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 
-html_page_top();
+layout_page_header();
 
+layout_admin_page_begin();
+
+print_admin_menu_bar( 'email_queue.php' );
+?>
+
+<div class="col-md-12 col-sm-12">
+    <div class="space-10"></div>
+
+<?php
 $f_to = gpc_get( 'send', null );
 
 if( $f_to !== null ) {
@@ -63,7 +72,19 @@ if( $f_to !== null ) {
 $t_ids = email_queue_get_ids();
 
 if( count( $t_ids ) > 0 ) {
-	echo '<table><tr><th>' . lang_get( 'id' ) . '</th><th>' . lang_get( 'email' ) . '</th><th>' . lang_get( 'timestamp' ) . '</th><th>Send Or Delete</th></tr>';
+    echo '<div class="widget-box widget-color-blue2">';
+    echo '<div class="widget-header widget-header-small">';
+    echo '<h4 class="widget-title lighter">';
+    echo '<i class="ace-icon fa fa-envelope"></i>';
+    echo 'Email Queue';
+    echo '</h4>';
+    echo '</div>';
+    echo '<div class="widget-body">';
+    echo '<div class="widget-main no-padding">';
+
+    echo '<div class="table-responsive">';
+    echo '<table class="table table-bordered table-striped table-condensed table-hover">';
+	echo '<tr><th>' . lang_get( 'id' ) . '</th><th>' . lang_get( 'email' ) . '</th><th>' . lang_get( 'timestamp' ) . '</th><th>Send Or Delete</th></tr>';
 	foreach( $t_ids as $t_id ) {
 		$t_row = email_queue_get( $t_id );
 
@@ -75,11 +96,14 @@ if( count( $t_ids ) > 0 ) {
 			, '</td></tr>';
 	}
 	echo '</table>';
+    echo '</div></div></div></div>';
 
 	html_button( 'email_queue.php', 'Send All', array( 'send' => 'all') );
 	html_button( 'email_queue.php', 'Send Or Delete All', array( 'send' => 'sendordelall') );
 } else {
-	echo 'Email Queue Empty';
+	echo '<p class="lead">Email Queue Empty</div>';
 }
-
-html_page_bottom();
+?>
+</div>
+<?php
+layout_admin_page_end();

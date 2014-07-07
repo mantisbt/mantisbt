@@ -28,128 +28,145 @@ require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 
 # Page header, menu
-html_page_top( 'MantisBT Administration - Moving Attachments' );
-echo '<div align="center"><p>';
-print_bracket_link( helper_mantis_url( 'admin/system_utils.php' ), 'Back to System Utilities' );
-echo '</p></div>';
+layout_page_header( 'MantisBT Administration - Moving Attachments' );
 
+layout_admin_page_begin();
+?>
 
-# File type should be 'bug' (default) or 'project'
-$f_file_type = gpc_get( 'type', 'bug' );
+    <div class="col-md-12 col-sm-12">
+        <div class="space-10"></div>
+        <?php
 
-$t_bug_table = db_get_table( 'mantis_bug_table' );
-$t_project_table = db_get_table( 'mantis_project_table' );
+        # File type should be 'bug' (default) or 'project'
+        $f_file_type = gpc_get( 'type', 'bug' );
 
-switch( $f_file_type ) {
-	case 'project':
-		$t_type = 'Project Files';
-		$t_file_table = db_get_table( 'mantis_project_file_table' );
-		$t_query = "SELECT p.id, p.name, COUNT(f.id) disk
+        $t_bug_table = db_get_table( 'mantis_bug_table' );
+        $t_project_table = db_get_table( 'mantis_project_table' );
+
+        switch( $f_file_type ) {
+            case 'project':
+                $t_type = 'Project Files';
+                $t_file_table = db_get_table( 'mantis_project_file_table' );
+                $t_query = "SELECT p.id, p.name, COUNT(f.id) disk
 			FROM $t_file_table f
 			LEFT JOIN $t_project_table p ON p.id = f.project_id
 			WHERE content <> ''
 			GROUP BY p.id, p.name
 			ORDER BY p.name";
-		break;
+                break;
 
-	case 'bug':
-	default:
-		$t_type = 'Attachments';
-		$t_file_table = db_get_table( 'mantis_bug_file_table' );
-		$t_query = "SELECT p.id, p.name, COUNT(f.id) disk
+            case 'bug':
+            default:
+                $t_type = 'Attachments';
+                $t_file_table = db_get_table( 'mantis_bug_file_table' );
+                $t_query = "SELECT p.id, p.name, COUNT(f.id) disk
 			FROM $t_file_table f
 			JOIN $t_bug_table b ON b.id = f.bug_id
 			JOIN $t_project_table p ON p.id = b.project_id
 			WHERE content <> ''
 			GROUP BY p.id, p.name
 			ORDER BY p.name";
-		break;
-}
+                break;
+        }
 
-# Move to disk: projects having non-empty attachments in the DB
-$t_result = db_query_bound( $t_query );
+        # Move to disk: projects having non-empty attachments in the DB
+        $t_result = db_query_bound( $t_query );
 
-# Build list, excluding projects having upload method other than DISK
-$t_projects = array();
-while( $t_row = db_fetch_array( $t_result ) ) {
-	$t_project_id = (int)$t_row['id'];
-	$t_upload_method = config_get( 'file_upload_method', null, ALL_USERS, $t_project_id );
-	if( $t_upload_method == DISK ) {
-		$t_projects[$t_project_id] = $t_row;
-	}
-}
+        # Build list, excluding projects having upload method other than DISK
+        $t_projects = array();
+        while( $t_row = db_fetch_array( $t_result ) ) {
+            $t_project_id = (int)$t_row['id'];
+            $t_upload_method = config_get( 'file_upload_method', null, ALL_USERS, $t_project_id );
+            if( $t_upload_method == DISK ) {
+                $t_projects[$t_project_id] = $t_row;
+            }
+        }
+        ?>
+        <div>
+            <p>
+                <?php print_link( helper_mantis_url( 'admin/system_utils.php' ), 'Back to System Utilities',
+                    false, 'btn btn-primary btn-white btn-round' ); ?>
+            </p>
+        </div>
 
-if( count( $t_projects ) == 0 ) {
-	# Nothing to do
-	echo '<div align="center"><p>No attachments need to be moved.</p></div>';
-} else {
-	# Display name for All Projects
-	if( isset( $t_projects[ALL_PROJECTS] ) ) {
-		$t_projects[ALL_PROJECTS]['name'] = 'All Projects';
-	}
+        <div class="widget-box widget-color-blue2">
+            <div class="widget-header widget-header-small">
+                <h4 class="widget-title lighter">
+                    <i class="ace-icon fa fa-paperclip"></i>
+                    <?php echo "$t_type to move"; ?>
+                </h4>
+            </div>
+            <div class="widget-body">
+                <div class="widget-main">
 
-	# Display table of projects for user selection
+                    <?php
+                    if( count( $t_projects ) == 0 ) {
+                        # Nothing to do
+                        echo '<p class="lead">No attachments need to be moved.</p>';
+                    } else {
+                        # Display name for All Projects
+                        if( isset( $t_projects[ALL_PROJECTS] ) ) {
+                            $t_projects[ALL_PROJECTS]['name'] = 'All Projects';
+                        }
 
-?>
+                        # Display table of projects for user selection
+                        ?>
 
-<div align="center">
+                        <form name="move_attachments_project_select" method="post" action="move_attachments.php">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-condensed">
+                                    <tr class="row-category">
+                                        <th>Project name</th>
+                                        <th width="18%">Attachments</th>
+                                        <th width="7%">To Disk</th>
+                                    </tr>
 
-<form name="move_attachments_project_select" method="post" action="move_attachments.php">
-<table class="width50">
-	<tr>
-		<td class="form-title" colspan="2">
-			<?php echo "$t_type to move"; ?>
-		</td>
-	</tr>
+                                    <?php
+                                    # Printing rows of projects with attachments to move
+                                    foreach( $t_projects as $t_id => $t_project ) {
+                                        echo '<tr>';
+                                        printf(
+                                            '<td>%s</td><td class="center">%s</td><td class="center">'
+                                            . '<input type="checkbox" name="to_disk[]" value="%d" /></td>',
+                                            $t_project['name'],
+                                            $t_project['disk'],
+                                            $t_id );
+                                        echo "</tr>\n";
+                                    }
 
-	<tr class="row-category">
-		<th>Project name</th>
-		<th width="18%">Attachments</th>
-		<th width="7%">To Disk</th>
-	</tr>
+                                    if( ON == config_get( 'use_javascript' ) ) {
+                                        ?>
+
+                                        <tr>
+                                            <td class="right" colspan="2">Select All</td>
+                                            <td class="center">
+                                                <input name="all_proj"
+                                                       type="checkbox" value="all"
+                                                       onclick="checkall('move_attachments_project_select', this.form.all_proj.checked)"
+                                                    />
+                                            </td>
+                                        </tr>
+
+                                    <?php
+                                    }
+                                    echo form_security_field( 'move_attachments_project_select' );
+                                    ?>
+
+                                </table>
+                                <div class="widget-toolbox padding-8 clearfix">
+                                    <input name="type" type="hidden" value="<?php echo $f_file_type ?>" />
+                                    <input type="submit" class="btn btn-primary btn-white btn-round" value="Move Attachments" />
+                                </div>
+                            </div>
+                        </form>
+
+                    <?php
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <?php
-	# Printing rows of projects with attachments to move
-	foreach( $t_projects as $t_id => $t_project ) {
-		echo '<tr>';
-		printf(
-			'<td>%s</td><td class="center">%s</td><td class="center">'
-			. '<input type="checkbox" name="to_disk[]" value="%d" /></td>',
-			$t_project['name'],
-			$t_project['disk'],
-			$t_id );
-		echo "</tr>\n";
-	}
-
-	if( ON == config_get( 'use_javascript' ) ) {
-?>
-
-	<tr>
-		<td class="right" colspan="2">Select All</td>
-		<td class="center">
-			<input name="all_proj"
-				type="checkbox" value="all"
-				onclick="checkall('move_attachments_project_select', this.form.all_proj.checked)"
-			/>
-		</td>
-	</tr>
-
-<?php
-	}
-	echo form_security_field( 'move_attachments_project_select' );
-?>
-
-</table>
-<span class="center">
-	<br />
-	<input name="type" type="hidden" value="<?php echo $f_file_type ?>" />
-	<input type="submit" class="button" value="Move Attachments" />
-</span>
-
-</form>
-</div>
-
-<?php
-}
-
-html_page_bottom();
+layout_admin_page_end();

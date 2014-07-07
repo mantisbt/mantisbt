@@ -35,20 +35,44 @@ if (a!= -1) {
 style_display = 'block';
 
 $(document).ready( function() {
-	$('.collapse-open').show();
-	$('.collapse-closed').hide();
-	$('.collapse-link').click( function(event) {
-		event.preventDefault();
-		var id = $(this).attr('id');
-		var t_pos = id.indexOf('_closed_link' );
-		if( t_pos == -1 ) {
-			t_pos = id.indexOf('_open_link' );
-		}
-		var t_div = id.substring(0, t_pos );
-		ToggleDiv( t_div );
+    $('.collapse-open').show();
+    $('.collapse-closed').hide();
+    $('.collapse-link').click( function(event) {
+        event.preventDefault();
+        var id = $(this).attr('id');
+        var t_pos = id.indexOf('_closed_link' );
+        if( t_pos == -1 ) {
+            t_pos = id.indexOf('_open_link' );
+        }
+        var t_div = id.substring(0, t_pos );
+        ToggleDiv( t_div );
+    });
+
+    $('.widget-box').on('shown.ace.widget' , function(event) {
+       var t_id = $(this).attr('id');
+       var t_cookie = GetCookie( "collapse_settings" );
+        if ( 1 == g_collapse_clear ) {
+            t_cookie = "";
+            g_collapse_clear = 0;
+        }
+        t_cookie = t_cookie + "|" + t_id + ",0";
+
+        SetCookie( "collapse_settings", t_cookie );
 	});
 
-	$('input[type=text].autocomplete').autocomplete({
+    $('.widget-box').on('hidden.ace.widget' , function(event) {
+        var t_id = $(this).attr('id');
+        var t_cookie = GetCookie( "collapse_settings" );
+        if ( 1 == g_collapse_clear ) {
+            t_cookie = "";
+            g_collapse_clear = 0;
+        }
+        t_cookie = t_cookie + "|" + t_id + ",1";
+        SetCookie( "collapse_settings", t_cookie );
+    });
+
+
+    $('input[type=text].autocomplete').autocomplete({
 		source: function(request, callback) {
 			var fieldName = $(this).attr('element').attr('id');
 			var postData = {};

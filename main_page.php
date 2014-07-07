@@ -61,72 +61,99 @@ $t_project_id = helper_get_current_project();
 $t_rss_enabled = config_get( 'rss_enabled' );
 
 if( OFF != $t_rss_enabled && news_is_enabled() ) {
-	$t_rss_link = rss_get_news_feed_url( $t_project_id );
-	html_set_rss_link( $t_rss_link );
+    $t_rss_link = rss_get_news_feed_url( $t_project_id );
+    html_set_rss_link( $t_rss_link );
 }
 
-html_page_top( lang_get( 'main_link' ) );
+layout_page_header( lang_get( 'main_link' ) );
+
+layout_page_begin();
+
+echo '<div class="col-md-6 col-sm-12">';
 
 if( !current_user_is_anonymous() ) {
-	$t_current_user_id = auth_get_current_user_id();
-	$t_hide_status = config_get( 'bug_resolved_status_threshold' );
-	echo '<div class="quick-summary-left">';
-	echo lang_get( 'open_and_assigned_to_me_label' ) . lang_get( 'word_separator' );
-	print_link( "view_all_set.php?type=1&handler_id=$t_current_user_id&hide_status=$t_hide_status", current_user_get_assigned_open_bug_count(), false, 'subtle' );
-	echo '</div>';
+    $t_current_user_id = auth_get_current_user_id();
+    $t_hide_status = config_get( 'bug_resolved_status_threshold' );
+    echo '<span class="bigger-120">';
+    echo lang_get( 'open_and_assigned_to_me_label' ) . lang_get( 'word_separator' );
+    print_link( "view_all_set.php?type=1&handler_id=$t_current_user_id&hide_status=$t_hide_status", current_user_get_assigned_open_bug_count(), false, 'subtle' );
 
-	echo '<div class="quick-summary-right">';
-	echo lang_get( 'open_and_reported_to_me_label' ) . lang_get( 'word_separator' );
-	print_link( "view_all_set.php?type=1&reporter_id=$t_current_user_id&hide_status=$t_hide_status", current_user_get_reported_open_bug_count(), false, 'subtle' );
-	echo '</div>';
+    echo '<br />';
 
-	echo '<div class="quick-summary-left">';
-	echo lang_get( 'last_visit_label' ) . lang_get( 'word_separator' );
-	echo date( config_get( 'normal_date_format' ), current_user_get_field( 'last_visit' ) );
-	echo '</div>';
+    echo lang_get( 'open_and_reported_to_me_label' ) . lang_get( 'word_separator' );
+    print_link( "view_all_set.php?type=1&reporter_id=$t_current_user_id&hide_status=$t_hide_status", current_user_get_reported_open_bug_count(), false, 'subtle' );
+
+    echo '<br />';
+
+    echo lang_get( 'last_visit_label' ) . lang_get( 'word_separator' );
+    echo date( config_get( 'normal_date_format' ), current_user_get_field( 'last_visit' ) );
+    echo '</span>';
 }
+
+echo '</div>';
+echo '<div class="col-md-6 col-sm-12">';
+
+if( news_is_enabled() && access_has_project_level( config_get( 'manage_news_threshold' ) ) ) {
+
+    # Admin can edit news for All Projects (site-wide)
+    if( ALL_PROJECTS != helper_get_current_project() || current_user_is_administrator() ) {
+        print_link( 'news_menu_page.php', lang_get( 'edit_news_link' ),
+            false, 'btn btn-primary btn-white btn-round pull-right');
+    } else {
+        print_link( 'login_select_proj_page.php', lang_get( 'edit_news_link' ),
+            false, 'btn btn-primary btn-white btn-round pull-right');
+    }
+}
+echo '</div>';
+
+echo '<div class="col-md-12 col-sm-12">';
 
 if( news_is_enabled() ) {
-	$t_news_rows = news_get_limited_rows( $f_offset, $t_project_id );
-	$t_news_count = count( $t_news_rows );
+    $t_news_rows = news_get_limited_rows( $f_offset, $t_project_id );
+    $t_news_count = count( $t_news_rows );
 
-	if( $t_news_count ) {
-		echo '<div id="news-items">';
-		# Loop through results
-		for ( $i = 0; $i < $t_news_count; $i++ ) {
-			$t_row = $t_news_rows[$i];
+    if( $t_news_count ) {
+        echo '<div id="news-items">';
+        # Loop through results
+        for ( $i = 0; $i < $t_news_count; $i++ ) {
+            $t_row = $t_news_rows[$i];
 
-			# only show VS_PRIVATE posts to configured threshold and above
-			if( ( VS_PRIVATE == $t_row['view_state'] ) &&
-				 !access_has_project_level( config_get( 'private_news_threshold' ) ) ) {
-				continue;
-			}
+            # only show VS_PRIVATE posts to configured threshold and above
+            if( ( VS_PRIVATE == $t_row['view_state'] ) &&
+                !access_has_project_level( config_get( 'private_news_threshold' ) ) ) {
+                continue;
+            }
 
-			print_news_entry_from_row( $t_row );
-		}  # end for loop
-		echo '</div>';
-	}
+            print_news_entry_from_row( $t_row );
+        }  # end for loop
+        echo '</div>';
+    }
 
-	echo '<div id="news-menu">';
+    echo '<div class="space-10"></div>';
+    echo '<div class="btn-group">';
 
-	print_bracket_link( 'news_list_page.php', lang_get( 'archives' ) );
-	$t_news_view_limit = config_get( 'news_view_limit' );
-	$f_offset_next = $f_offset + $t_news_view_limit;
-	$f_offset_prev = $f_offset - $t_news_view_limit;
+    print_link( 'news_list_page.php', lang_get( 'archives' ),
+        false, 'btn btn-primary btn-white btn-round' );
 
-	if( $f_offset_prev >= 0 ) {
-		print_bracket_link( 'main_page.php?offset=' . $f_offset_prev, lang_get( 'newer_news_link' ) );
-	}
+    $t_news_view_limit = config_get( 'news_view_limit' );
+    $f_offset_next = $f_offset + $t_news_view_limit;
+    $f_offset_prev = $f_offset - $t_news_view_limit;
 
-	if( $t_news_count == $t_news_view_limit ) {
-		print_bracket_link( 'main_page.php?offset=' . $f_offset_next, lang_get( 'older_news_link' ) );
-	}
+    if( $f_offset_prev >= 0 ) {
+        print_link( 'main_page.php?offset=' . $f_offset_prev, lang_get( 'newer_news_link' ),
+            false, 'btn btn-primary btn-white btn-round' );
+    }
 
-	if( OFF != $t_rss_enabled ) {
-		print_bracket_link( $t_rss_link, lang_get( 'rss' ) );
-	}
+    if( $t_news_count == $t_news_view_limit ) {
+        print_link( 'main_page.php?offset=' . $f_offset_next, lang_get( 'older_news_link' ),
+            false, 'btn btn-primary btn-white btn-round' );
+    }
 
-	echo '</div>';
+    if( OFF != $t_rss_enabled ) {
+        print_link( $t_rss_link, lang_get( 'rss' ),
+            false, 'btn btn-primary btn-white btn-round' );
+    }
+    echo '</div>';
 }
-
-html_page_bottom();
+echo '</div>';
+layout_page_end();

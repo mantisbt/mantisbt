@@ -49,51 +49,69 @@ access_ensure_global_level( config_get( 'manage_site_threshold' ) );
 
 $t_version_suffix = config_get_global( 'version_suffix' );
 
-html_page_top( lang_get( 'manage_link' ) );
+layout_page_header( lang_get( 'manage_link' ) );
 
-print_manage_menu();
+layout_page_begin( __FILE__ );
+
+print_manage_menu( 'manage_overview_page.php' );
 ?>
-<div id="manage-overview-div" class="table-container">
-	<h2><?php echo lang_get( 'site_information' ) ?></h2>
-	<table id="manage-overview-table" cellspacing="1" cellpadding="5" border="1">
-		<tr>
-			<th class="category"><?php echo lang_get( 'mantis_version' ) ?></th>
-			<td><?php echo MANTIS_VERSION, ( $t_version_suffix ? " $t_version_suffix" : '' ) ?></td>
-		</tr>
-		<tr>
-			<th class="category"><?php echo lang_get( 'schema_version' ) ?></th>
-			<td><?php echo config_get( 'database_version' ) ?></td>
-		</tr>
-		<tr class="spacer">
-			<td colspan="2"></td>
-		</tr>
-		<tr class="hidden"></tr>
-	<?php
-	$t_is_admin = current_user_is_administrator();
-	if( $t_is_admin ) {
-	?>
-		<tr>
-			<th class="category"><?php echo lang_get( 'site_path' ) ?></th>
-			<td><?php echo config_get( 'absolute_path' ) ?></td>
-		</tr>
-		<tr>
-			<th class="category"><?php echo lang_get( 'core_path' ) ?></th>
-			<td><?php echo config_get( 'core_path' ) ?></td>
-		</tr>
-		<tr>
-			<th class="category"><?php echo lang_get( 'plugin_path' ) ?></th>
-			<td><?php echo config_get( 'plugin_path' ) ?></td>
-		</tr>
-		<tr class="spacer">
-			<td colspan="2"></td>
-		</tr>
-	<?php
-	}
 
-	event_signal( 'EVENT_MANAGE_OVERVIEW_INFO', array( $t_is_admin ) )
-	?>
-	</table>
-</div>
+    <div class="col-md-12 col-sm-12">
+        <div class="space-10"></div>
+
+        <div class="widget-box widget-color-blue2">
+            <div class="widget-header widget-header-small">
+                <h4 class="widget-title lighter">
+                    <i class="ace-icon fa fa-info"></i>
+                    <?php echo lang_get('site_information') ?>
+                </h4>
+            </div>
+
+            <div class="widget-body">
+                <div class="widget-main no-padding">
+
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered table-condensed">
+                            <tr>
+                                <th class="category"><?php echo lang_get( 'mantis_version' ) ?></th>
+                                <td><?php echo MANTIS_VERSION, ( $t_version_suffix ? " $t_version_suffix" : '' ) ?></td>
+                            </tr>
+                            <tr>
+                                <th class="category"><?php echo lang_get( 'schema_version' ) ?></th>
+                                <td><?php echo config_get( 'database_version' ) ?></td>
+                            </tr>
+                            <tr class="spacer">
+                                <td colspan="2"></td>
+                            </tr>
+                            <tr class="hidden"></tr>
+                            <?php
+                            $t_is_admin = current_user_is_administrator();
+                            if( $t_is_admin ) {
+                                ?>
+                                <tr>
+                                    <th class="category"><?php echo lang_get( 'site_path' ) ?></th>
+                                    <td><?php echo config_get( 'absolute_path' ) ?></td>
+                                </tr>
+                                <tr>
+                                    <th class="category"><?php echo lang_get( 'core_path' ) ?></th>
+                                    <td><?php echo config_get( 'core_path' ) ?></td>
+                                </tr>
+                                <tr>
+                                    <th class="category"><?php echo lang_get( 'plugin_path' ) ?></th>
+                                    <td><?php echo config_get( 'plugin_path' ) ?></td>
+                                </tr>
+                            <?php
+                            }
+
+                            event_signal( 'EVENT_MANAGE_OVERVIEW_INFO', array( $t_is_admin ) )
+                            ?>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <?php
-html_page_bottom();
+layout_page_end();
 

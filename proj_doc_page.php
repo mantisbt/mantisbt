@@ -59,7 +59,7 @@ $f_project_id = gpc_get_int( 'project_id', helper_get_current_project() );
 
 # Check if project documentation feature is enabled.
 if( OFF == config_get( 'enable_project_documentation' ) || !file_is_uploading_enabled() ) {
-	access_denied();
+    access_denied();
 }
 
 # Override the current page to make sure we get the appropriate project-specific configuration
@@ -75,24 +75,24 @@ $t_priv = VS_PRIVATE;
 $t_admin = config_get_global( 'admin_site_threshold' );
 
 if( $f_project_id == ALL_PROJECTS ) {
-	# Select all the projects that the user has access to
-	$t_projects = user_get_accessible_projects( $t_user_id );
+    # Select all the projects that the user has access to
+    $t_projects = user_get_accessible_projects( $t_user_id );
 } else {
-	# Select the specific project
-	$t_projects = array( $f_project_id );
+    # Select the specific project
+    $t_projects = array( $f_project_id );
 }
 
 $t_projects[] = ALL_PROJECTS; # add "ALL_PROJECTS to the list of projects to fetch
 
 $t_reqd_access = config_get( 'view_proj_doc_threshold' );
 if( is_array( $t_reqd_access ) ) {
-	if( 1 == count( $t_reqd_access ) ) {
-		$t_access_clause = "= " . array_shift( $t_reqd_access ) . " ";
-	} else {
-		$t_access_clause = "IN (" . implode( ',', $t_reqd_access ) . ")";
-	}
+    if( 1 == count( $t_reqd_access ) ) {
+        $t_access_clause = "= " . array_shift( $t_reqd_access ) . " ";
+    } else {
+        $t_access_clause = "IN (" . implode( ',', $t_reqd_access ) . ")";
+    }
 } else {
-	$t_access_clause = ">= $t_reqd_access ";
+    $t_access_clause = ">= $t_reqd_access ";
 }
 
 $t_query = "SELECT pft.id, pft.project_id, pft.filename, pft.filesize, pft.title, pft.description, pft.date_added
@@ -108,82 +108,84 @@ $t_query = "SELECT pft.id, pft.project_id, pft.filename, pft.filesize, pft.title
 			ORDER BY pt.name ASC, pft.title ASC";
 $t_result = db_query_bound( $t_query, array( $t_user_id, $t_user_id, $t_pub, $t_user_id, $t_admin ) );
 
-html_page_top( lang_get( 'docs_link' ) );
+layout_page_header( lang_get( 'docs_link' ) );
+
+layout_page_begin( 'proj_doc_page.php' );
 ?>
-<br />
-<div class="table-container">
-<table>
-<thead>
+    <br />
+    <div class="table-container">
+        <table>
+            <thead>
 
-<tr>
-	<td class="form-title">
-		<?php echo lang_get( 'project_documentation_title' ) ?>
-	</td>
-	<td class="right">
-		<?php print_doc_menu( 'proj_doc_page.php' ) ?>
-	</td>
-</tr>
+            <tr>
+                <td class="form-title">
+                    <?php echo lang_get( 'project_documentation_title' ) ?>
+                </td>
+                <td class="right">
+                    <?php print_doc_menu( 'proj_doc_page.php' ) ?>
+                </td>
+            </tr>
 
-<tr class="row-category2">
-	<th><?php echo lang_get( 'filename' ); ?></th>
-	<th><?php echo lang_get( 'description' ); ?></th>
-</tr>
-</thead>
+            <tr class="row-category2">
+                <th><?php echo lang_get( 'filename' ); ?></th>
+                <th><?php echo lang_get( 'description' ); ?></th>
+            </tr>
+            </thead>
 
-<?php
-$i = 0;
-while( $t_row = db_fetch_array( $t_result ) ) {
-	$i++;
-	extract( $t_row, EXTR_PREFIX_ALL, 'v' );
-	$v_filesize = number_format( $v_filesize );
-	$v_title = string_display( $v_title );
-	$v_description = string_display_links( $v_description );
-	$v_date_added = date( config_get( 'normal_date_format' ), $v_date_added );
+            <?php
+            $i = 0;
+            while( $t_row = db_fetch_array( $t_result ) ) {
+                $i++;
+                extract( $t_row, EXTR_PREFIX_ALL, 'v' );
+                $v_filesize = number_format( $v_filesize );
+                $v_title = string_display( $v_title );
+                $v_description = string_display_links( $v_description );
+                $v_date_added = date( config_get( 'normal_date_format' ), $v_date_added );
 
-?>
-<tr>
-	<td>
+                ?>
+                <tr>
+                    <td>
 		<span class="floatleft">
 <?php
-	$t_href = '<a href="file_download.php?file_id='.$v_id.'&amp;type=doc">';
-	echo $t_href;
-	print_file_icon( $v_filename );
-	echo '</a>&#160;' . $t_href . $v_title . '</a> (' . $v_filesize . lang_get( 'word_separator' ) . lang_get( 'bytes' ) . ')';
+$t_href = '<a href="file_download.php?file_id='.$v_id.'&amp;type=doc">';
+echo $t_href;
+print_file_icon( $v_filename );
+echo '</a>&#160;' . $t_href . $v_title . '</a> (' . $v_filesize . lang_get( 'word_separator' ) . lang_get( 'bytes' ) . ')';
 ?>
-			<br />
+            <br />
 			<span class="small">
 <?php
-	if( $v_project_id == ALL_PROJECTS ) {
-		echo lang_get( 'all_projects' ) . '<br/>';
-	}
-	else if( $v_project_id != $f_project_id ) {
-		$t_project_name = project_get_name( $v_project_id );
-		echo $t_project_name . '<br/>';
-	}
-	echo '(' . $v_date_added . ')';
+if( $v_project_id == ALL_PROJECTS ) {
+    echo lang_get( 'all_projects' ) . '<br/>';
+}
+else if( $v_project_id != $f_project_id ) {
+    $t_project_name = project_get_name( $v_project_id );
+    echo $t_project_name . '<br/>';
+}
+echo '(' . $v_date_added . ')';
 ?>
 			</span>
 		</span>
 		<span class="floatright">
 <?php
-	if( access_has_project_level( config_get( 'upload_project_file_threshold', null, null, $v_project_id ), $v_project_id ) ) {
-		echo '&#160;';
-		print_button( 'proj_doc_edit_page.php?file_id='.$v_id, lang_get( 'edit_link' ) );
-		echo '&#160;';
-		print_button( 'proj_doc_delete.php?file_id=' . $v_id, lang_get( 'delete_link' ) );
-	}
+if( access_has_project_level( config_get( 'upload_project_file_threshold', null, null, $v_project_id ), $v_project_id ) ) {
+    echo '&#160;';
+    print_button( 'proj_doc_edit_page.php?file_id='.$v_id, lang_get( 'edit_link' ) );
+    echo '&#160;';
+    print_button( 'proj_doc_delete.php?file_id=' . $v_id, lang_get( 'delete_link' ) );
+}
 ?>
 		</span>
-	</td>
-	<td>
-		<?php echo $v_description ?>
-	</td>
-</tr>
-<?php
-} # end for loop
-?>
-</table>
-</div>
+                    </td>
+                    <td>
+                        <?php echo $v_description ?>
+                    </td>
+                </tr>
+            <?php
+            } # end for loop
+            ?>
+        </table>
+    </div>
 
 <?php
-html_page_bottom();
+layout_page_end();

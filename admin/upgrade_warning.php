@@ -79,4 +79,5 @@ else {?>
 	</table>
 </div>
 </body>
-</html>
+<?php
+html_end();

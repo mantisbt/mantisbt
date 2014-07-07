@@ -94,17 +94,17 @@ compress_enable();
 # don't index view issues pages
 html_robots_noindex();
 
-html_page_top1( lang_get( 'view_bugs_link' ) );
+layout_page_header_begin( lang_get( 'view_bugs_link' ) );
 
 if( current_user_get_pref( 'refresh_delay' ) > 0 ) {
 	html_meta_redirect( 'view_all_bug_page.php?page_number='.$f_page_number, current_user_get_pref( 'refresh_delay' )*60 );
 }
 
-html_page_top2();
+layout_page_header_end();
 
-print_recently_visited();
+layout_page_begin( __FILE__ );
 
 define( 'VIEW_ALL_INC_ALLOW', true );
 include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'view_all_inc.php' );
 
-html_page_bottom();
+layout_page_end();

@@ -62,30 +62,32 @@ access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_projec
 access_ensure_project_level( config_get( 'project_user_threshold' ), $f_project_id );
 
 if( 0 == $f_user_id ) {
-	# Confirm with the user
-	helper_ensure_confirmed( lang_get( 'remove_all_users_sure_msg' ), lang_get( 'remove_all_users_button' ) );
+    # Confirm with the user
+    helper_ensure_confirmed( lang_get( 'remove_all_users_sure_msg' ), lang_get( 'remove_all_users_button' ) );
 
-	project_remove_all_users( $f_project_id, access_get_project_level( $f_project_id ) );
+    project_remove_all_users( $f_project_id, access_get_project_level( $f_project_id ) );
 } else {
-	# Don't allow removal of users from the project who have a higher access level than the current user
-	access_ensure_project_level( access_get_project_level( $f_project_id, $f_user_id ), $f_project_id );
+    # Don't allow removal of users from the project who have a higher access level than the current user
+    access_ensure_project_level( access_get_project_level( $f_project_id, $f_user_id ), $f_project_id );
 
-	$t_user = user_get_row( $f_user_id );
+    $t_user = user_get_row( $f_user_id );
 
-	# Confirm with the user
-	helper_ensure_confirmed( lang_get( 'remove_user_sure_msg' ) .
-		'<br/>' . lang_get( 'username_label' ) . lang_get( 'word_separator' ) . $t_user['username'],
-		lang_get( 'remove_user_button' ) );
+    # Confirm with the user
+    helper_ensure_confirmed( lang_get( 'remove_user_sure_msg' ) .
+        '<br/>' . lang_get( 'username_label' ) . lang_get( 'word_separator' ) . $t_user['username'],
+        lang_get( 'remove_user_button' ) );
 
-	project_remove_user( $f_project_id, $f_user_id );
+    project_remove_user( $f_project_id, $f_user_id );
 }
 
 form_security_purge( 'manage_proj_user_remove' );
 
 $t_redirect_url = 'manage_proj_edit_page.php?project_id=' . $f_project_id;
 
-html_page_top( null, $t_redirect_url );
+layout_page_header( null, $t_redirect_url );
+
+layout_page_begin( 'manage_overview_page.php' );
 
 html_operation_successful( $t_redirect_url );
 
-html_page_bottom();
+layout_page_end();

@@ -46,26 +46,29 @@ news_ensure_enabled();
 
 $f_news_id = gpc_get_int( 'news_id', null );
 
-html_page_top();
+layout_page_header();
+
+layout_page_begin( 'main_page.php' );
 ?>
+    <div class="col-md-12 col-sm-12">
+        <?php
+        if( $f_news_id !== null ) {
+            $t_project_id = news_get_field( $f_news_id, 'project_id' );
+            if( news_is_private( $f_news_id ) ) {
+                access_ensure_project_level(	config_get( 'private_news_threshold' ),
+                    $t_project_id );
+            } else {
+                access_ensure_project_level( VIEWER, $t_project_id );
+            }
 
+            print_news_string_by_news_id( $f_news_id );
+        }
+        ?>
+
+        <div class="space-10"></div>
+        <?php print_link( 'news_list_page.php', lang_get( 'archives' ),
+            false, 'btn btn-primary btn-white btn-round' ); ?>
+
+    </div>
 <?php
-if( $f_news_id !== null ) {
-	$t_project_id = news_get_field( $f_news_id, 'project_id' );
-	if( news_is_private( $f_news_id ) ) {
-		access_ensure_project_level(	config_get( 'private_news_threshold' ),
-						$t_project_id );
-	} else {
-		access_ensure_project_level( VIEWER, $t_project_id );
-	}
-
-	print_news_string_by_news_id( $f_news_id );
-}
-?>
-
-<div id="news-menu">
-	<?php print_bracket_link( 'news_list_page.php', lang_get( 'archives' ) ); ?>
-</div>
-
-<?php
-html_page_bottom();
+layout_page_end();

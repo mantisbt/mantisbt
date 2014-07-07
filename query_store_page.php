@@ -53,48 +53,72 @@ auth_ensure_user_authenticated();
 
 compress_enable();
 
-html_page_top();
-?>
-<br />
-<div id="save-filter">
-<?php
-$t_query_to_store = filter_db_get_filter( gpc_get_cookie( config_get( 'view_all_cookie' ), '' ) );
-$t_query_arr = filter_db_get_available_queries();
+layout_page_header();
 
-# Let's just see if any of the current filters are the
-# same as the one we're about the try and save
-foreach( $t_query_arr as $t_id => $t_name ) {
-	if( filter_db_get_filter( $t_id ) == $t_query_to_store ) {
-		print lang_get( 'query_exists' ) . ' (' . $t_name . ')<br />';
-	}
-}
-
-# Check for an error
-$t_error_msg = strip_tags( gpc_get_string( 'error_msg', null ) );
-if( $t_error_msg != null ) {
-	print "<br />$t_error_msg<br /><br />";
-}
-
-print lang_get( 'query_name_label' ) . lang_get( 'word_separator' );
+layout_page_begin();
 ?>
-<form method="post" action="query_store.php">
-<?php echo form_security_field( 'query_store' ) ?>
-<input type="text" name="query_name" /><br />
-<?php
-if( access_has_project_level( config_get( 'stored_query_create_shared_threshold' ) ) ) {
-	print '<input type="checkbox" name="is_public" value="on" /> ';
-	print lang_get( 'make_public' );
-	print '<br />';
-}
-?>
-<input type="checkbox" name="all_projects" value="on" <?php check_checked( ALL_PROJECTS == helper_get_current_project() ) ?> />
-<?php print lang_get( 'all_projects' ); ?><br /><br />
-<input type="submit" class="button" value="<?php print lang_get( 'save_query' ); ?>" />
-</form>
-<form action="view_all_bug_page.php">
-<?php # CSRF protection not required here - form does not result in modifications ?>
-<input type="submit" class="button" value="<?php print lang_get( 'go_back' ); ?>" />
-</form>
+<div class="col-md-12 col-sm-12">
+    <div id="save-filter" class="widget-box widget-color-blue2">
+    <div class="widget-header widget-header-small">
+        <h4 class="widget-title lighter">
+            <i class="ace-icon fa fa-filter"></i>
+            <?php echo lang_get( 'save_query' ) ?>
+        </h4>
+    </div>
+    <?php
+    $t_query_to_store = filter_db_get_filter( gpc_get_cookie( config_get( 'view_all_cookie' ), '' ) );
+    $t_query_arr = filter_db_get_available_queries();
+
+    # Let's just see if any of the current filters are the
+    # same as the one we're about the try and save
+    foreach( $t_query_arr as $t_id => $t_name ) {
+        if( filter_db_get_filter( $t_id ) == $t_query_to_store ) {
+            print lang_get( 'query_exists' ) . ' (' . $t_name . ')<br />';
+        }
+    }
+
+    # Check for an error
+    $t_error_msg = strip_tags( gpc_get_string( 'error_msg', null ) );
+    if( $t_error_msg != null ) {
+        print "<br />$t_error_msg<br /><br />";
+    }
+    ?>
+    <div class="widget-body">
+        <div class="widget-main center">
+            <form method="post" action="query_store.php" class="form-inline">
+                <?php echo form_security_field( 'query_store' ) ?>
+                <div class="space-10"></div>
+                <label class="bold"> <?php echo lang_get( 'query_name_label' ) . lang_get( 'word_separator' ); ?> </label>
+                <input type="text" name="query_name" class="form-control form-sm" />
+                <div class="space-10"></div>
+                <?php
+                if( access_has_project_level( config_get( 'stored_query_create_shared_threshold' ) ) ) { ?>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" class="ace" name="is_public" value="on" />
+                            <span class="lbl"> <?php print lang_get( 'make_public' ); ?> </span>
+                        </label>
+                    </div>
+                    &#160;&#160;&#160;&#160;
+                <?php }
+                ?>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" class="ace" name="all_projects" value="on" <?php check_checked( ALL_PROJECTS == helper_get_current_project() ) ?> />
+                        <span class="lbl"> <?php print lang_get( 'all_projects' ); ?> </span>
+                    </label>
+                </div>
+
+                <div class="space-10"></div>
+                <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php print lang_get( 'save_query' ); ?>" />
+            </form>
+            <form action="view_all_bug_page.php">
+                <?php # CSRF protection not required here - form does not result in modifications ?>
+                <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php print lang_get( 'go_back' ); ?>" />
+            </form>
+        </div>
+    </div>
 <?php
 echo '</div>';
-html_page_bottom();
+echo '</div>';
+layout_page_end();

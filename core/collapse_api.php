@@ -182,7 +182,7 @@ function collapse_display( $p_block ) {
 	global $g_collapse_cache_token;
 
 	if( !isset( $g_collapse_cache_token[$p_block] ) || OFF == config_get( 'use_javascript' ) ) {
-		return true;
+		return false;
 	}
 
 	return( true == $g_collapse_cache_token[$p_block] );

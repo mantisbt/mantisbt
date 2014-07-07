@@ -64,30 +64,32 @@ $t_access = true;
 $t_revert_vars = explode( ',', $f_revert );
 array_walk( $t_revert_vars, 'trim' );
 foreach ( $t_revert_vars as $t_revert ) {
-	$t_access &= access_has_project_level( config_get_access( $t_revert ), $f_project_id );
+    $t_access &= access_has_project_level( config_get_access( $t_revert ), $f_project_id );
 }
 
 if( !$t_access ) {
-	access_denied();
+    access_denied();
 }
 
 if( '' != $f_revert ) {
-	# Confirm with the user
-	helper_ensure_confirmed( lang_get( 'config_delete_sure' ) . lang_get( 'word_separator' ) .
-		string_html_specialchars( implode( ', ', $t_revert_vars ) ) . lang_get( 'word_separator' ) . lang_get( 'in_project' ) . lang_get( 'word_separator' ) . project_get_name( $f_project_id ),
-		lang_get( 'delete_config_button' ) );
+    # Confirm with the user
+    helper_ensure_confirmed( lang_get( 'config_delete_sure' ) . lang_get( 'word_separator' ) .
+        string_html_specialchars( implode( ', ', $t_revert_vars ) ) . lang_get( 'word_separator' ) . lang_get( 'in_project' ) . lang_get( 'word_separator' ) . project_get_name( $f_project_id ),
+        lang_get( 'delete_config_button' ) );
 
-	foreach ( $t_revert_vars as $t_revert ) {
-		config_delete( $t_revert, null, $f_project_id );
-	}
+    foreach ( $t_revert_vars as $t_revert ) {
+        config_delete( $t_revert, null, $f_project_id );
+    }
 }
 
 form_security_purge( 'manage_config_revert' );
 
 $t_redirect_url = $f_return;
 
-html_page_top( null, $t_redirect_url );
+layout_page_header( null, $t_redirect_url );
+
+layout_page_begin();
 
 html_operation_successful( $t_redirect_url );
 
-html_page_bottom();
+layout_page_end();

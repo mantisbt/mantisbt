@@ -1,0 +1,85 @@
+.footer .footer-inner {
+    text-align: left;
+    left: 0px;
+}
+.nav-search .nav-search-input {
+    width: 120px;
+}
+
+.rtl .pull-right {
+    float: left !important;
+}
+
+.rtl .pull-left {
+    float: right !important;
+}
+
+.rtl .footer .footer-inner {
+    text-align: right;
+}
+.rtl .navbar-right {
+    float: left !important;
+}
+
+.rtl .navbar-left {
+    float: right !important;
+}
+
+.nav-recent {
+    line-height: 14px;
+    position: absolute;
+    right: 150px;
+    top: 13px;
+    font-size: x-small;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.widget-title .badge {
+    padding:4px 10px;
+    line-height:12px;
+    margin: 0 0 0 5px;
+}
+
+.profile-activity {
+    padding: 10px;
+}
+
+.pagination > li > a, .pagination > li > span {
+    padding: 6px 8px;
+}
+
+.width-13 {
+    width: 13%
+}
+
+.login-container {
+    width: 100%;
+}
+
+.signup-box .toolbar {
+    background: none repeat scroll 0 0 #393939;
+}
+
+#filter .widget-toolbar > .widget-menu > a,
+#bug-update .widget-toolbar > .widget-menu > a {
+    display: inline-block;
+    font-size: 11px;
+    padding: 0 5px;
+    line-height: 20px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+/*Disable printing of link urls*/
+a:link:after, a:visited:after {
+    content: normal !important;
+}
+
+pre {
+    word-break: break-all !important;
+}

@@ -69,19 +69,19 @@ $f_inherit_parent = gpc_get_bool( 'inherit_parent', 0 );
 $f_parent_id	= gpc_get_int( 'parent_id', 0 );
 
 if( 0 != $f_parent_id ) {
-	project_ensure_exists( $f_parent_id );
+    project_ensure_exists( $f_parent_id );
 }
 
 $t_project_id = project_create( strip_tags( $f_name ), $f_description, $f_status, $f_view_state, $f_file_path, true, $f_inherit_global );
 
 if( ( $f_view_state == VS_PRIVATE ) && ( false === current_user_is_administrator() ) ) {
-	$t_access_level = access_get_global_level();
-	$t_current_user_id = auth_get_current_user_id();
-	project_add_user( $t_project_id, $t_current_user_id, $t_access_level );
+    $t_access_level = access_get_global_level();
+    $t_current_user_id = auth_get_current_user_id();
+    project_add_user( $t_project_id, $t_current_user_id, $t_access_level );
 }
 
 if( 0 != $f_parent_id ) {
-	project_hierarchy_add( $t_project_id, $f_parent_id, $f_inherit_parent );
+    project_hierarchy_add( $t_project_id, $f_parent_id, $f_inherit_parent );
 }
 
 event_signal( 'EVENT_MANAGE_PROJECT_CREATE', array( $t_project_id ) );
@@ -90,8 +90,10 @@ form_security_purge( 'manage_proj_create' );
 
 $t_redirect_url = 'manage_proj_page.php';
 
-html_page_top( null, $t_redirect_url );
+layout_page_header( null, $t_redirect_url );
+
+layout_page_begin( 'manage_overview_page.php' );
 
 html_operation_successful( $t_redirect_url );
 
-html_page_bottom();
+layout_page_end();

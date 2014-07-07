@@ -136,9 +136,9 @@ function show_notify_flag( $p_action, $p_flag ) {
 	if( $t_can_change_flags || $t_can_change_defaults ) {
 		$t_flag_name = $p_action . ':' . $p_flag;
 		$t_set = $t_flag ? 'checked="checked"' : '';
-		return '<input type="checkbox" name="flag[]" value="' . $t_flag_name. '" ' . $t_set . ' />';
+		return '<label><input type="checkbox" class="ace" name="flag[]" value="' . $t_flag_name. '" ' . $t_set . ' /><span class="lbl"></span></label>';
 	} else {
-		return ( $t_flag ? '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />' : '&#160;' );
+		return ( $t_flag ? '<i class="fa fa-check fa-lg blue"></i>' : '&#160;' );
 	}
 }
 
@@ -183,9 +183,9 @@ function show_notify_threshold( $p_access, $p_action ) {
 	if( $t_can_change_flags  || $t_can_change_defaults ) {
 		$t_flag_name = $p_action . ':' . $p_access;
 		$t_set = $t_flag ? "checked=\"checked\"" : "";
-		return "<input type=\"checkbox\" name=\"flag_threshold[]\" value=\"$t_flag_name\" $t_set />";
+		return "<label><input type=\"checkbox\" class=\"ace\" name=\"flag_threshold[]\" value=\"$t_flag_name\" $t_set />" . '<span class="lbl"></span></label>';
 	} else {
-		return $t_flag ? '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />' : '&#160;';
+		return $t_flag ? '<i class="fa fa-check fa-lg blue"></i>' : '&#160;';
 	}
 }
 
@@ -197,10 +197,22 @@ function show_notify_threshold( $p_access, $p_action ) {
  */
 function get_section_begin_for_email( $p_section_name ) {
 	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
-	echo '<div class="form-container">'. "\n";
-	echo '<table>' . "\n";
+
+    echo '<div class="space-10"></div>';
+
+    echo '<div class="widget-box widget-color-blue2">';
+    echo '   <div class="widget-header widget-header-small">';
+    echo '        <h4 class="widget-title lighter uppercase">';
+    echo '            <i class="ace-icon fa fa-envelope"></i>';
+    echo $p_section_name;
+    echo '       </h4>';
+    echo '   </div>';
+    echo '   <div class="widget-body">';
+    echo '   <div class="widget-main no-padding">';
+    echo '       <div class="table-responsive">';
+
+	echo '<table class="table table-striped table-bordered table-condensed">' . "\n";
 	echo '<thead>' . "\n";
-	echo '<tr><td class="form-title-caps" colspan="' . ( count( $t_access_levels ) + 7 ) . '">' . $p_section_name . '</td></tr>' . "\n";
 	echo '<tr class="row-category2">' . "\n";
 	echo '<th width="30%" rowspan="2">' . lang_get( 'message' ) . '</th>';
 	echo '<th class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'issue_reporter' ) . '&#160;</th>' . "\n";
@@ -247,13 +259,17 @@ function get_capability_row_for_email( $p_caption, $p_message_type ) {
  * @return void
  */
 function get_section_end_for_email() {
-	echo '</tbody></table></div><br />' . "\n";
+	echo '</tbody></table></div>' . "\n";
+    echo '</div></div></div> ' . "\n";
+    echo '<div class="space-10"></div>';
 }
 
 
-html_page_top( lang_get( 'manage_email_config' ) );
+layout_page_header( lang_get( 'manage_email_config' ) );
 
-print_manage_menu( 'adm_permissions_report.php' );
+layout_page_begin( 'manage_overview_page.php' );
+
+print_manage_menu( 'adm_config_report.php' );
 print_manage_config_menu( 'manage_config_email_page.php' );
 
 $t_access = current_user_get_access_level();
@@ -306,7 +322,8 @@ $t_notify_flags = array_merge_recursive2( $t_notify_flags, config_get( 'notify_f
 $t_can_change_flags = $t_access >= config_get_access( 'notify_flags' );
 $t_can_change_defaults = $t_access >= config_get_access( 'default_notify_flags' );
 
-echo '<br /><br />';
+echo '<div class="col-md-12 col-sm-12">' . "\n";
+echo '<div class="space-10"></div>';
 
 # Email notifications
 if( config_get( 'enable_email_notification' ) == ON ) {
@@ -321,12 +338,15 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 	} else {
 		$t_project_title = sprintf( lang_get( 'config_project' ), string_display( project_get_name( $t_project ) ) );
 	}
-	echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
+
+    echo '<div class="well">' . "\n";
+	echo '<p class="bold"><i class="fa fa-info-circle"></i> ' . $t_project_title . '</p>' . "\n";
 	echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 	if( ALL_PROJECTS <> $t_project ) {
 		echo '<span style="background-color:' . $t_colour_project . '">' . lang_get( 'colour_project' ) . '</span><br />';
 	}
 	echo '<span style="background-color:' . $t_colour_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
+    echo '</div>' . "\n";
 
 	get_section_begin_for_email( lang_get( 'email_notification' ) );
 #		get_capability_row_for_email( lang_get( 'email_on_new' ), 'new' );  # duplicate of status change to 'new'
@@ -353,7 +373,7 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 		print_enum_string_option_list( 'access_levels', config_get_access( 'notify_flags' ) );
 		echo "\n</select></p>";
 
-		echo '<input type="submit" class="button" value="' . lang_get( 'change_configuration' ) . '" />' . "\n";
+		echo '<input type="submit" class="btn btn-primary btn-white btn-round" value="' . lang_get( 'change_configuration' ) . '" />' . "\n";
 
 		echo "</form>\n";
 
@@ -363,7 +383,7 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 		echo '<input name="revert" type="hidden" value="notify_flags,default_notify_flags" />' . "\n";
 		echo '<input name="project" type="hidden" value="' . $t_project . '" />' . "\n";
 		echo '<input name="return" type="hidden" value="' . string_attribute( form_action_self() ) . '" />' . "\n";
-		echo '<input type="submit" class="button" value="';
+		echo '<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="';
 		if( ALL_PROJECTS == $t_project ) {
 			echo lang_get( 'revert_to_system' );
 		} else {
@@ -374,5 +394,5 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 	}
 
 }
-
-html_page_bottom();
+echo '</div>';
+layout_page_end();

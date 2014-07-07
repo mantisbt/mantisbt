@@ -62,60 +62,64 @@ $f_captcha = utf8_strtolower( trim( $f_captcha ) );
 
 # force logout on the current user if already authenticated
 if( auth_is_user_authenticated() ) {
-	auth_logout();
+    auth_logout();
 }
 
 # Check to see if signup is allowed
 if( OFF == config_get_global( 'allow_signup' ) ) {
-	print_header_redirect( 'login_page.php' );
-	exit;
+    print_header_redirect( 'login_page.php' );
+    exit;
 }
 
 if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 	&&
-			helper_call_custom_function( 'auth_can_change_password', array() ) ) {
-	# captcha image requires GD library and related option to ON
-	require_lib( 'securimage/securimage.php' );
+    helper_call_custom_function( 'auth_can_change_password', array() ) ) {
+    # captcha image requires GD library and related option to ON
+    require_lib( 'securimage/securimage.php' );
 
-	$t_securimage = new Securimage();
-	if( $t_securimage->check( $f_captcha ) == false ) {
-		trigger_error( ERROR_SIGNUP_NOT_MATCHING_CAPTCHA, ERROR );
-	}
+    $t_securimage = new Securimage();
+    if( $t_securimage->check( $f_captcha ) == false ) {
+        trigger_error( ERROR_SIGNUP_NOT_MATCHING_CAPTCHA, ERROR );
+    }
 }
 
 email_ensure_not_disposable( $f_email );
 
 # notify the selected group a new user has signed-up
 if( user_signup( $f_username, $f_email ) ) {
-	email_notify_new_account( $f_username, $f_email );
+    email_notify_new_account( $f_username, $f_email );
 }
 
 form_security_purge( 'signup' );
 
-html_page_top1();
-html_page_top2a();
+layout_page_header();
+
+layout_page_begin();
 ?>
 
-<br />
+    <div class="col-md-12 col-sm-12">
+        <div class="space-10"></div>
 
-<div id="error-msg">
-	<div class="center">
-		<strong><?php echo lang_get( 'signup_done_title' ) ?></strong><br/>
-		<?php echo "[$f_username - $f_email] " ?>
-	</div>
+        <div id="error-msg">
+            <div class="center">
+                <strong><?php echo lang_get( 'signup_done_title' ) ?></strong><br/>
+                <?php echo "[$f_username - $f_email] " ?>
+            </div>
 
-	<div>
-		<br />
-		<?php echo lang_get( 'password_emailed_msg' ) ?>
-		<br /><br />
-		<?php echo lang_get( 'no_reponse_msg' ) ?>
-		<br /><br/>
-	</div>
-</div>
+            <div>
+                <br />
+                <?php echo lang_get( 'password_emailed_msg' ) ?>
+                <br /><br />
+                <?php echo lang_get( 'no_reponse_msg' ) ?>
+                <br /><br/>
+            </div>
+        </div>
 
-<br />
-<div class="center">
-	<?php print_bracket_link( 'login_page.php', lang_get( 'proceed' ) ); ?>
-</div>
+        <br />
+        <div class="center">
+            <?php print_bracket_link( 'login_page.php', lang_get( 'proceed' ) ); ?>
+        </div>
+
+    </div>
 
 <?php
-html_page_bottom1a( __FILE__ );
+layout_page_end( __FILE__ );

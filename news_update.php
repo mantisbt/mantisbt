@@ -63,10 +63,13 @@ news_update( $f_news_id, $f_project_id, $f_view_state, $f_announcement, $f_headl
 
 form_security_purge( 'news_update' );
 
-html_page_top();
+layout_page_header();
 
-echo '<div class="success-msg">';
-echo lang_get( 'operation_successful' )
+layout_page_begin( 'main_page.php' );
+
+echo '<div class="space-20"></div>';
+echo '<div class="alert alert-success">';
+echo lang_get( 'operation_successful' ) ?>
 
 echo '<br />';
 
@@ -79,4 +82,4 @@ print_news_entry( $f_headline, $f_body, $t_row['poster_id'], $f_view_state, $f_a
 
 echo '</div>';
 
-html_page_bottom();
+layout_page_end();

@@ -72,7 +72,7 @@ $f_enabled         = gpc_get_bool( 'enabled' );
 # check for empty username
 $f_username = trim( $f_username );
 if( is_blank( $f_username ) ) {
-	trigger_error( ERROR_EMPTY_FIELD, ERROR );
+    trigger_error( ERROR_EMPTY_FIELD, ERROR );
 }
 
 # Check the name for validity here so we do it before promting to use a
@@ -84,22 +84,22 @@ user_ensure_name_valid( $f_username );
 user_ensure_realname_unique( $f_username, $f_realname );
 
 if( $f_password != $f_password_verify ) {
-	trigger_error( ERROR_USER_CREATE_PASSWORD_MISMATCH, ERROR );
+    trigger_error( ERROR_USER_CREATE_PASSWORD_MISMATCH, ERROR );
 }
 
 email_ensure_not_disposable( $f_email );
 
 if( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
-	# Check code will be sent to the user directly via email. Dummy password set to random
-	# Create random password
-	$f_password	= auth_generate_random_password();
+    # Check code will be sent to the user directly via email. Dummy password set to random
+    # Create random password
+    $f_password	= auth_generate_random_password();
 } else {
-	# Password won't to be sent by email. It entered by the admin
-	# Now, if the password is empty, confirm that that is what we wanted
-	if( is_blank( $f_password ) ) {
-		helper_ensure_confirmed( lang_get( 'empty_password_sure_msg' ),
-				 lang_get( 'empty_password_button' ) );
-	}
+    # Password won't to be sent by email. It entered by the admin
+    # Now, if the password is empty, confirm that that is what we wanted
+    if( is_blank( $f_password ) ) {
+        helper_ensure_confirmed( lang_get( 'empty_password_sure_msg' ),
+            lang_get( 'empty_password_button' ) );
+    }
 }
 
 # Don't allow the creation of accounts with access levels higher than that of
@@ -120,24 +120,27 @@ lang_pop();
 form_security_purge( 'manage_user_create' );
 
 if( $t_cookie === false ) {
-	$t_redirect_url = 'manage_user_page.php';
+    $t_redirect_url = 'manage_user_page.php';
 } else {
-	# ok, we created the user, get the row again
-	$t_user_id = user_get_id_by_name( $f_username );
-	$t_redirect_url = 'manage_user_edit_page.php?user_id=' . $t_user_id;
+    # ok, we created the user, get the row again
+    $t_user_id = user_get_id_by_name( $f_username );
+    $t_redirect_url = 'manage_user_edit_page.php?user_id=' . $t_user_id;
 }
 
-html_page_top( null, $t_redirect_url );
+layout_page_header( null, $t_redirect_url );
+
+layout_page_begin( 'manage_overview_page.php' );
 ?>
 
-<br />
-<div class="success-msg">
+    <div class="space-20"></div>
+    <div class="alert alert-success">
+        <?php
+        $t_access_level = get_enum_element( 'access_levels', $f_access_level );
+        echo lang_get( 'created_user_part1' ) . ' <span class="bold">' . $f_username . '</span> ' . lang_get( 'created_user_part2' ) . ' <span class="bold">' . $t_access_level . '</span><br />';
+
+        print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+        ?>
+    </div>
+
 <?php
-$t_access_level = get_enum_element( 'access_levels', $f_access_level );
-echo lang_get( 'created_user_part1' ) . ' <span class="bold">' . $f_username . '</span> ' . lang_get( 'created_user_part2' ) . ' <span class="bold">' . $t_access_level . '</span><br />';
-
-print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
-?>
-</div>
-
-<?php html_page_bottom();
+layout_page_end();

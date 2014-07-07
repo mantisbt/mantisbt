@@ -55,9 +55,9 @@ form_security_validate( 'proj_doc_update' );
 
 # Check if project documentation feature is enabled.
 if( OFF == config_get( 'enable_project_documentation' ) ||
-	!file_is_uploading_enabled() ||
-	!file_allow_project_upload() ) {
-	access_denied();
+    !file_is_uploading_enabled() ||
+    !file_allow_project_upload() ) {
+    access_denied();
 }
 
 $f_file_id = gpc_get_int( 'file_id' );
@@ -70,8 +70,8 @@ $t_project_id = file_get_field( $f_file_id, 'project_id', 'project' );
 access_ensure_project_level( config_get( 'upload_project_file_threshold' ), $t_project_id );
 
 if( is_blank( $f_title ) ) {
-	error_parameters( lang_get( 'title' ) );
-	trigger_error( ERROR_EMPTY_FIELD, ERROR );
+    error_parameters( lang_get( 'title' ) );
+    trigger_error( ERROR_EMPTY_FIELD, ERROR );
 }
 
 $t_project_file_table = db_get_table( 'project_file' );
@@ -79,65 +79,67 @@ $t_project_file_table = db_get_table( 'project_file' );
 # @todo (thraxisp) this code should probably be integrated into file_api to share methods used to store files
 
 if( isset( $f_file['tmp_name'] ) && is_uploaded_file( $f_file['tmp_name'] ) ) {
-	file_ensure_uploaded( $f_file );
+    file_ensure_uploaded( $f_file );
 
-	$t_project_id = helper_get_current_project();
+    $t_project_id = helper_get_current_project();
 
-	# grab the original file path and name
-	$t_disk_file_name = file_get_field( $f_file_id, 'diskfile', 'project' );
-	$t_file_path = dirname( $t_disk_file_name );
+    # grab the original file path and name
+    $t_disk_file_name = file_get_field( $f_file_id, 'diskfile', 'project' );
+    $t_file_path = dirname( $t_disk_file_name );
 
-	# prepare variables for insertion
-	$t_file_size = filesize( $f_file['tmp_name'] );
-	$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
-	if( $t_file_size > $t_max_file_size ) {
-		trigger_error( ERROR_FILE_TOO_BIG, ERROR );
-	}
+    # prepare variables for insertion
+    $t_file_size = filesize( $f_file['tmp_name'] );
+    $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+    if( $t_file_size > $t_max_file_size ) {
+        trigger_error( ERROR_FILE_TOO_BIG, ERROR );
+    }
 
-	$t_method = config_get( 'file_upload_method' );
-	switch ( $t_method ) {
-		case DISK:
-			file_ensure_valid_upload_path( $t_file_path );
+    $t_method = config_get( 'file_upload_method' );
+    switch ( $t_method ) {
+        case DISK:
+            file_ensure_valid_upload_path( $t_file_path );
 
-			if( file_exists( $t_disk_file_name ) ) {
-				file_delete_local( $t_disk_file_name );
-			}
-			if( !move_uploaded_file( $f_file['tmp_name'], $t_disk_file_name ) ) {
-				trigger_error( ERROR_FILE_MOVE_FAILED, ERROR );
-			}
-			chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
+            if( file_exists( $t_disk_file_name ) ) {
+                file_delete_local( $t_disk_file_name );
+            }
+            if( !move_uploaded_file( $f_file['tmp_name'], $t_disk_file_name ) ) {
+                trigger_error( ERROR_FILE_MOVE_FAILED, ERROR );
+            }
+            chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
 
-			$c_content = '';
-			break;
-		case DATABASE:
-			$c_content = db_prepare_binary_string( fread( fopen( $f_file['tmp_name'], 'rb' ), $f_file['size'] ) );
-			break;
-		default:
-			# @todo Such errors should be checked in the admin checks
-			trigger_error( ERROR_GENERIC, ERROR );
-	}
-	$t_query = "UPDATE $t_project_file_table
+            $c_content = '';
+            break;
+        case DATABASE:
+            $c_content = db_prepare_binary_string( fread( fopen( $f_file['tmp_name'], 'rb' ), $f_file['size'] ) );
+            break;
+        default:
+            # @todo Such errors should be checked in the admin checks
+            trigger_error( ERROR_GENERIC, ERROR );
+    }
+    $t_query = "UPDATE $t_project_file_table
 		SET title=" . db_param() . ", description=" . db_param() . ", date_added=" . db_param() . ",
 			filename=" . db_param() . ", filesize=" . db_param() . ", file_type=" .db_param() . ", content=" .db_param() . "
 			WHERE id=" . db_param();
-	$t_result = db_query_bound( $t_query, array( $f_title, $f_description, db_now(), $f_file['name'], $t_file_size, $f_file['type'], $c_content, $f_file_id ) );
+    $t_result = db_query_bound( $t_query, array( $f_title, $f_description, db_now(), $f_file['name'], $t_file_size, $f_file['type'], $c_content, $f_file_id ) );
 } else {
-	$t_query = "UPDATE $t_project_file_table
+    $t_query = "UPDATE $t_project_file_table
 			SET title=" . db_param() . ", description=" . db_param() . "
 			WHERE id=" . db_param();
-	$t_result = db_query_bound( $t_query, array( $f_title, $f_description, $f_file_id ) );
+    $t_result = db_query_bound( $t_query, array( $f_title, $f_description, $f_file_id ) );
 }
 
 if( !$t_result ) {
-	trigger_error( ERROR_GENERIC, ERROR );
+    trigger_error( ERROR_GENERIC, ERROR );
 }
 
 form_security_purge( 'proj_doc_update' );
 
 $t_redirect_url = 'proj_doc_page.php';
 
-html_page_top( null, $t_redirect_url );
+layout_page_header( null, $t_redirect_url );
+
+layout_page_begin( 'proj_doc_page.php' );
 
 html_operation_successful( $t_redirect_url );
 
-html_page_bottom();
+layout_page_end();

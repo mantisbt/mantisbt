@@ -42,21 +42,24 @@ $t_importer = new ImportXML( $f_file, $f_strategy, $f_fallback, $f_keepcategory,
 
 form_security_purge( 'plugin_xml_import_action' );
 
-html_page_top( plugin_lang_get( 'import' ) );
+layout_page_header( plugin_lang_get( 'import' ) );
 
-print_manage_menu( 'manage_import_issues_page.php' );
+layout_page_begin( 'manage_overview_page.php' );
+
+print_manage_menu( 'manage_plugin_page.php' );
 
 ?>
 
-<br />
+    <div class="col-md-12 col-sm-12">
+        <div class="space-10"></div>
+        <pre>
 
-<pre>
+        <?php
+        $t_importer->import( );
+        ?>
+
+        </pre>
+    </div>
 
 <?php
-$t_importer->import( );
-?>
-
-</pre>
-
-<?php
-html_page_bottom();
+layout_page_end();

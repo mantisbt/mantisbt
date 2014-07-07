@@ -57,28 +57,28 @@ $f_action = gpc_get_string( 'action', '' );
 
 # If deleting item redirect to delete script
 if( 'delete' == $f_action ) {
-	form_security_validate( 'news_delete' );
+    form_security_validate( 'news_delete' );
 
-	$t_row = news_get_row( $f_news_id );
+    $t_row = news_get_row( $f_news_id );
 
-	# This check is to allow deleting of news items that were left orphan due to bug #3723
-	if( project_exists( $t_row['project_id'] ) ) {
-		access_ensure_project_level( config_get( 'manage_news_threshold' ), $t_row['project_id'] );
-	}
+    # This check is to allow deleting of news items that were left orphan due to bug #3723
+    if( project_exists( $t_row['project_id'] ) ) {
+        access_ensure_project_level( config_get( 'manage_news_threshold' ), $t_row['project_id'] );
+    }
 
-	helper_ensure_confirmed( lang_get( 'delete_news_sure_msg' ), lang_get( 'delete_news_item_button' ) );
+    helper_ensure_confirmed( lang_get( 'delete_news_sure_msg' ), lang_get( 'delete_news_item_button' ) );
 
-	news_delete( $f_news_id );
+    news_delete( $f_news_id );
 
-	form_security_purge( 'news_delete' );
+    form_security_purge( 'news_delete' );
 
-	print_header_redirect( 'news_menu_page.php', true );
+    print_header_redirect( 'main_page.php', true );
 }
 
 # Retrieve news item data and prefix with v_
 $t_row = news_get_row( $f_news_id );
 if( $t_row ) {
-	extract( $t_row, EXTR_PREFIX_ALL, 'v' );
+    extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 }
 
 access_ensure_project_level( config_get( 'manage_news_threshold' ), $v_project_id );
@@ -86,59 +86,83 @@ access_ensure_project_level( config_get( 'manage_news_threshold' ), $v_project_i
 $v_headline = string_attribute( $v_headline );
 $v_body 	= string_textarea( $v_body );
 
-html_page_top( lang_get( 'edit_news_title' ) );
+layout_page_header( lang_get( 'edit_news_title' ) );
+
+layout_page_begin( 'main_page.php' );
 
 # Edit News Form BEGIN
 ?>
 
-<div id="news-update-div" class="form-container">
-	<form id="news-update-form" method="post" action="news_update.php">
-		<fieldset class="has-required">
-			<legend><span><?php echo lang_get( 'headline' ) ?></span></legend>
-			<div class="section-link"><?php print_bracket_link( 'news_menu_page.php', lang_get( 'go_back' ) ) ?></div>
-			<?php echo form_security_field( 'news_update' ); ?>
-			<input type="hidden" name="news_id" value="<?php echo $v_id ?>" />
-			<div class="field-container">
-				<label for="news-update-headline" class="required"><span><?php echo lang_get( 'headline' ) ?></span></label>
-				<span class="input"><input type="text" id="news-update-headline" name="headline" size="64" maxlength="64" value="<?php echo $v_headline ?>" /></span>
-				<span class="label-style"></span>
-			</div>
-			<div class="field-container">
-				<label for="news-update-body" class="required"><span><?php echo lang_get( 'body' ) ?></span></label>
-				<span class="textarea"><textarea id="news-update-body" name="body" cols="60" rows="10"><?php echo $v_body ?></textarea></span>
-				<span class="label-style"></span>
-			</div>
-			<div class="field-container">
-				<label for=""><span><?php echo lang_get( 'post_to' ) ?></span></label>
-				<span class="select">
-					<select name="project_id"><?php
-						$t_sitewide = false;
-						if( current_user_is_administrator() ) {
-							$t_sitewide = true;
-						}
-						print_project_option_list( $v_project_id, $t_sitewide ); ?>
-					</select>
-				</span>
-				<span class="label-style"></span>
-			</div>
-			<div class="field-container">
-				<label for="news-update-announcement"><span><?php echo lang_get( 'announcement' ) ?></span> <span class="help-text"><?php echo lang_get( 'stays_on_top' ) ?></span></label>
-				<span class="checkbox"><input type="checkbox" id="news-update-announcement" name="announcement" <?php check_checked( $v_announcement, 1 ); ?> /></span>
-				<span class="label-style"></span>
-			</div>
-			<div class="field-container">
-				<label for=""><span><?php echo lang_get( 'view_status' ) ?></span></label>
-				<span class="select">
-					<select name="view_state">
-						<?php print_enum_string_option_list( 'view_state', $v_view_state ) ?>
-					</select>
-				</span>
-				<span class="label-style"></span>
-			</div>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'update_news_button' ) ?>" /></span>
-		</fieldset>
-	</form>
-</div><?php
+    <div class="col-md-12 col-sm-12">
+        <div class="space-10"></div>
+        <div id="news-update-div" class="form-container">
+            <form id="news-update-form" method="post" action="news_update.php">
+                <div class="widget-box widget-color-blue2">
+                    <div class="widget-header widget-header-small">
+                        <h4 class="widget-title lighter">
+                            <i class="ace-icon fa fa-edit"></i>
+                            <?php echo lang_get( 'edit_post' ) ?>
+                        </h4>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main no-padding">
+                            <fieldset>
+                                <?php echo form_security_field( 'news_update' ); ?>
+                                <input type="hidden" name="news_id" value="<?php echo $v_id ?>" />
+                                <div class="field-container">
+                                    <label for="news-update-headline" class="required"><span><?php echo lang_get( 'headline' ) ?></span></label>
+                                    <span class="input"><input type="text" id="news-update-headline" name="headline" size="64" maxlength="64" value="<?php echo $v_headline ?>" /></span>
+                                    <span class="label-style"></span>
+                                </div>
+                                <div class="field-container">
+                                    <label for="news-update-body" class="required"><span><?php echo lang_get( 'body' ) ?></span></label>
+                                    <span class="textarea"><textarea class="form-control" id="news-update-body" name="body" cols="60" rows="10"><?php echo $v_body ?></textarea></span>
+                                    <span class="label-style"></span>
+                                </div>
+                                <div class="field-container">
+                                    <label for=""><span><?php echo lang_get( 'post_to' ) ?></span></label>
+                                <span class="select">
+                                    <select name="project_id"><?php
+                                        $t_sitewide = false;
+                                        if( current_user_is_administrator() ) {
+                                            $t_sitewide = true;
+                                        }
+                                        print_project_option_list( $v_project_id, $t_sitewide ); ?>
+                                    </select>
+                                </span>
+                                    <span class="label-style"></span>
+                                </div>
+                                <div class="field-container">
+                                    <label for="news-update-announcement"><span><?php echo lang_get( 'announcement' ) ?></span> <span class="help-text"><?php echo lang_get( 'stays_on_top' ) ?></span></label>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" class="ace" id="news-update-announcement" name="announcement" <?php check_checked( (int)$v_announcement, 1 ); ?> />
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                    <span class="label-style"></span>
+                                </div>
+                                <div class="field-container">
+                                    <label for=""><span><?php echo lang_get( 'view_status' ) ?></span></label>
+                                <span class="select">
+                                    <select name="view_state">
+                                        <?php print_enum_string_option_list( 'view_state', $v_view_state ) ?>
+                                    </select>
+                                </span>
+                                    <span class="label-style"></span>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="widget-toolbox padding-8 clearfix">
+                            <span class="required pull-right"> * required</span>
+                            <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_news_button' ) ?>" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+<?php
 # Edit News Form END
 
-html_page_bottom();
+layout_page_end();

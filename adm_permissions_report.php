@@ -43,9 +43,11 @@ require_api( 'string_api.php' );
 
 access_ensure_project_level( config_get( 'manage_configuration_threshold' ) );
 
-html_page_top( lang_get( 'permissions_summary_report' ) );
+layout_page_header( lang_get( 'permissions_summary_report' ) );
 
-print_manage_menu( 'adm_permissions_report.php' );
+layout_page_begin( 'manage_overview_page.php' );
+
+print_manage_menu( 'adm_config_report.php' );
 print_manage_config_menu( 'adm_permissions_report.php' );
 
 /**
@@ -54,24 +56,37 @@ print_manage_config_menu( 'adm_permissions_report.php' );
  * @return string
  */
 function get_section_begin_apr( $p_section_name ) {
-	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
+    $t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 
-	$t_output = '<div class="table-container">';
-	$t_output .= '<table>';
-	$t_output .= '<thead>';
-	$t_output .= '<tr><td class="form-title-caps" colspan="' . ( count( $t_access_levels ) + 1 ) . '">' . $p_section_name . '</td></tr>' . "\n";
-	$t_output .= '<tr class="row-category2">';
-	$t_output .= '<th class="form-title">' . lang_get( 'perm_rpt_capability' ) . '</th>';
+    $t_output = '<div class="col-md-12 col-sm-12">';
+    $t_output .= '<div class="space-10"></div>';
 
-	foreach( $t_access_levels as $t_access_level ) {
-		$t_output .= '<th class="form-title" style="text-align:center">&#160;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&#160;</th>';
-	}
+    $t_output .= '<div class="widget-box widget-color-blue2">';
+    $t_output .= '   <div class="widget-header widget-header-small">';
+    $t_output .= '        <h4 class="widget-title lighter uppercase">';
+    $t_output .= '            <i class="ace-icon fa fa-lock"></i>';
+    $t_output .= $p_section_name;
+    $t_output .= '       </h4>';
+    $t_output .= '   </div>';
+    $t_output .= '   <div class="widget-body">';
+    $t_output .= '   <div class="widget-main no-padding">';
 
-	$t_output .= '</tr>' . "\n";
-	$t_output .= '</thead>';
-	$t_output .= '<tbody>';
+    $t_output .= '       <div class="table-responsive">';
+    $t_output .= '           <table class="table table-striped table-hover table-bordered table-condensed">';
 
-	return $t_output;
+    $t_output .= '<thead>';
+    $t_output .= '<tr class="row-category2">';
+    $t_output .= '<th class="form-title">' . lang_get( 'perm_rpt_capability' ) . '</th>';
+
+    foreach( $t_access_levels as $t_access_level ) {
+        $t_output .= '<th class="form-title" style="text-align:center">&#160;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&#160;</th>';
+    }
+
+    $t_output .= '</tr>' . "\n";
+    $t_output .= '</thead>';
+    $t_output .= '<tbody>';
+
+    return $t_output;
 }
 
 /**
@@ -81,22 +96,22 @@ function get_section_begin_apr( $p_section_name ) {
  * @return string
  */
 function get_capability_row( $p_caption, $p_access_level ) {
-	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
+    $t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 
-	$t_output = '<tr><td>' . string_display( $p_caption ) . '</td>';
-	foreach( $t_access_levels as $t_access_level ) {
-		if( $t_access_level >= (int)$p_access_level ) {
-			$t_value = '<img src="images/ok.gif" width="20" height="15" alt="X" title="X" />';
-		} else {
-			$t_value = '&#160;';
-		}
+    $t_output = '<tr><td>' . string_display( $p_caption ) . '</td>';
+    foreach( $t_access_levels as $t_access_level ) {
+        if( $t_access_level >= (int)$p_access_level ) {
+            $t_value = '<i class="fa fa-check fa-lg blue"></i>';
+        } else {
+            $t_value = '&#160;';
+        }
 
-		$t_output .= '<td class="center">' . $t_value . '</td>';
-	}
+        $t_output .= '<td class="center">' . $t_value . '</td>';
+    }
 
-	$t_output .= '</tr>' . "\n";
+    $t_output .= '</tr>' . "\n";
 
-	return $t_output;
+    return $t_output;
 }
 
 /**
@@ -104,8 +119,10 @@ function get_capability_row( $p_caption, $p_access_level ) {
  * @return string
  */
 function get_section_end() {
-	$t_output = '</tbody></table></div><br />' . "\n";
-	return $t_output;
+    $t_output = '</tbody></table></div> ' . "\n";
+    $t_output .= '</div></div></div></div> ' . "\n";
+    $t_output .= '<div class="space-10"></div>';
+    return $t_output;
 }
 
 # News
@@ -116,12 +133,12 @@ echo get_section_end();
 
 # Attachments
 if( config_get( 'allow_file_upload' ) == ON ) {
-	echo get_section_begin_apr( lang_get( 'attachments' ) );
-	echo get_capability_row( lang_get( 'view_list_of_attachments' ), config_get( 'view_attachments_threshold' ) );
-	echo get_capability_row( lang_get( 'download_attachments' ), config_get( 'download_attachments_threshold' ) );
-	echo get_capability_row( lang_get( 'delete_attachments' ), config_get( 'delete_attachments_threshold' ) );
-	echo get_capability_row( lang_get( 'upload_issue_attachments' ), config_get( 'upload_bug_file_threshold' ) );
-	echo get_section_end();
+    echo get_section_begin_apr( lang_get( 'attachments' ) );
+    echo get_capability_row( lang_get( 'view_list_of_attachments' ), config_get( 'view_attachments_threshold' ) );
+    echo get_capability_row( lang_get( 'download_attachments' ), config_get( 'download_attachments_threshold' ) );
+    echo get_capability_row( lang_get( 'delete_attachments' ), config_get( 'delete_attachments_threshold' ) );
+    echo get_capability_row( lang_get( 'upload_issue_attachments' ), config_get( 'upload_bug_file_threshold' ) );
+    echo get_section_end();
 }
 
 # Filters
@@ -142,10 +159,10 @@ echo get_section_end();
 
 # Project Documents
 if( config_get( 'enable_project_documentation' ) == ON ) {
-	echo get_section_begin_apr( lang_get( 'project_documents' ) );
-	echo get_capability_row( lang_get( 'view_project_documents' ), config_get( 'view_proj_doc_threshold' ) );
-	echo get_capability_row( lang_get( 'upload_project_documents' ), config_get( 'upload_project_file_threshold' ) );
-	echo get_section_end();
+    echo get_section_begin_apr( lang_get( 'project_documents' ) );
+    echo get_capability_row( lang_get( 'view_project_documents' ), config_get( 'view_proj_doc_threshold' ) );
+    echo get_capability_row( lang_get( 'upload_project_documents' ), config_get( 'upload_project_file_threshold' ) );
+    echo get_section_end();
 }
 
 # Custom Fields
@@ -156,13 +173,13 @@ echo get_section_end();
 
 # Sponsorships
 if( config_get( 'enable_sponsorship' ) == ON ) {
-	echo get_section_begin_apr( lang_get( 'sponsorships' ) );
-	echo get_capability_row( lang_get( 'view_sponsorship_details' ), config_get( 'view_sponsorship_details_threshold' ) );
-	echo get_capability_row( lang_get( 'view_sponsorship_total' ), config_get( 'view_sponsorship_total_threshold' ) );
-	echo get_capability_row( lang_get( 'sponsor_issue' ), config_get( 'sponsor_threshold' ) );
-	echo get_capability_row( lang_get( 'assign_sponsored_issue' ), config_get( 'assign_sponsored_bugs_threshold' ) );
-	echo get_capability_row( lang_get( 'handle_sponsored_issue' ), config_get( 'handle_sponsored_bugs_threshold' ) );
-	echo get_section_end();
+    echo get_section_begin_apr( lang_get( 'sponsorships' ) );
+    echo get_capability_row( lang_get( 'view_sponsorship_details' ), config_get( 'view_sponsorship_details_threshold' ) );
+    echo get_capability_row( lang_get( 'view_sponsorship_total' ), config_get( 'view_sponsorship_total_threshold' ) );
+    echo get_capability_row( lang_get( 'sponsor_issue' ), config_get( 'sponsor_threshold' ) );
+    echo get_capability_row( lang_get( 'assign_sponsored_issue' ), config_get( 'assign_sponsored_bugs_threshold' ) );
+    echo get_capability_row( lang_get( 'handle_sponsored_issue' ), config_get( 'handle_sponsored_bugs_threshold' ) );
+    echo get_section_end();
 }
 
 # Others
@@ -175,4 +192,4 @@ echo get_capability_row( lang_get( 'manage_users_link' ), config_get( 'manage_us
 echo get_capability_row( lang_get( 'notify_of_new_user_created' ), config_get( 'notify_new_user_created_threshold_min' ) );
 echo get_section_end();
 
-html_page_bottom();
+layout_page_end();

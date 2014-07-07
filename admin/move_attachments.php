@@ -151,10 +151,12 @@ form_security_purge( 'move_attachments_project_select' );
 $t_redirect_url = 'admin/system_utils.php';
 
 # Page header, menu
-html_page_top(
-	'MantisBT Administration - Moving Attachments',
-	empty( $t_result ) ? $t_redirect_url : null
+layout_page_header(
+    'MantisBT Administration - Moving Attachments',
+    empty( $t_result ) ? $t_redirect_url : null
 );
+
+layout_admin_page_begin();
 
 ?>
 
@@ -203,4 +205,4 @@ if( empty( $t_moved ) ) {
 
 print_bracket_link( $t_redirect_url, 'Back to System Utilities' );
 
-html_page_bottom();
+layout_admin_page_end();

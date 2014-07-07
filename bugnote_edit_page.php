@@ -73,9 +73,9 @@ $t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
 
 $t_bug = bug_get( $t_bug_id, true );
 if( $t_bug->project_id != helper_get_current_project() ) {
-	# in case the current project is not the same project of the bug we are viewing...
-	# ... override the current project. This to avoid problems with categories and handlers lists etc.
-	$g_project_override = $t_bug->project_id;
+    # in case the current project is not the same project of the bug we are viewing...
+    # ... override the current project. This to avoid problems with categories and handlers lists etc.
+    $g_project_override = $t_bug->project_id;
 }
 
 # Check if the current user is allowed to edit the bugnote
@@ -83,70 +83,79 @@ $t_user_id = auth_get_current_user_id();
 $t_reporter_id = bugnote_get_field( $f_bugnote_id, 'reporter_id' );
 
 if( $t_user_id == $t_reporter_id ) {
-	access_ensure_bugnote_level( config_get( 'bugnote_user_edit_threshold' ), $f_bugnote_id );
+    access_ensure_bugnote_level( config_get( 'bugnote_user_edit_threshold' ), $f_bugnote_id );
 } else {
-	access_ensure_bugnote_level( config_get( 'update_bugnote_threshold' ), $f_bugnote_id );
+    access_ensure_bugnote_level( config_get( 'update_bugnote_threshold' ), $f_bugnote_id );
 }
 
 # Check if the bug is readonly
 if( bug_is_readonly( $t_bug_id ) ) {
-	error_parameters( $t_bug_id );
-	trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+    error_parameters( $t_bug_id );
+    trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 }
 
 $t_bugnote_text = string_textarea( bugnote_get_text( $f_bugnote_id ) );
 
 # No need to gather the extra information if not used
 if( config_get( 'time_tracking_enabled' ) &&
-	access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $t_bug_id ) ) {
-	$t_time_tracking = bugnote_get_field( $f_bugnote_id, "time_tracking" );
-	$t_time_tracking = db_minutes_to_hhmm( $t_time_tracking );
+    access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $t_bug_id ) ) {
+    $t_time_tracking = bugnote_get_field( $f_bugnote_id, "time_tracking" );
+    $t_time_tracking = db_minutes_to_hhmm( $t_time_tracking );
 }
 
 # Determine which view page to redirect back to.
 $t_redirect_url = string_get_bug_view_url( $t_bug_id );
 
-html_page_top( bug_format_summary( $t_bug_id, SUMMARY_CAPTION ) );
+layout_page_header( bug_format_summary( $t_bug_id, SUMMARY_CAPTION ) );
+
+layout_page_begin();
 ?>
-<br />
-<div>
-<form method="post" action="bugnote_update.php">
-<?php echo form_security_field( 'bugnote_update' ) ?>
-<table class="width75" cellspacing="1">
-<tr>
-	<td class="form-title">
-		<input type="hidden" name="bugnote_id" value="<?php echo $f_bugnote_id ?>" />
-		<?php echo lang_get( 'edit_bugnote_title' ) ?>
-	</td>
-	<td class="right">
-		<?php print_bracket_link( $t_redirect_url, lang_get( 'go_back' ) ) ?>
-	</td>
-</tr>
-<tr class="row-1">
-	<td class="center" colspan="2">
-		<textarea cols="80" rows="10" name="bugnote_text"><?php echo $t_bugnote_text ?></textarea>
-	</td>
-</tr>
-<?php if( config_get( 'time_tracking_enabled' ) ) { ?>
-<?php if( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $t_bug_id ) ) { ?>
-<tr class="row-2">
-	<td class="center" colspan="2">
-		<strong><?php echo lang_get( 'time_tracking' ) ?> (HH:MM)</strong><br />
-		<input type="text" name="time_tracking" size="5" value="<?php echo $t_time_tracking ?>" />
-	</td>
-</tr>
-<?php } ?>
-<?php } ?>
+    <div class="col-md-12 col-sm-12">
 
-<?php event_signal( 'EVENT_BUGNOTE_EDIT_FORM', array( $t_bug_id, $f_bugnote_id ) ); ?>
+        <form method="post" action="bugnote_update.php">
+            <?php echo form_security_field( 'bugnote_update' ) ?>
+            <input type="hidden" name="bugnote_id" value="<?php echo $f_bugnote_id ?>" />
 
-<tr>
-	<td class="center" colspan="2">
-		<input type="submit" class="button" value="<?php echo lang_get( 'update_information_button' ) ?>" />
-	</td>
-</tr>
-</table>
-</form>
-</div>
+            <div class="widget-box widget-color-blue2">
+                <div class="widget-header widget-header-small">
+                    <h4 class="widget-title lighter">
+                        <i class="ace-icon fa fa-comment"></i>
+                        <?php echo lang_get( 'edit_bugnote_title' ) ?>
+                    </h4>
+                </div>
+                <div class="widget-body">
+                    <div class="widget-main no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-condensed table-striped">
+                                <tr class="row-1">
+                                    <td class="center" colspan="2">
+                                        <textarea class="form-control" cols="80" rows="10" name="bugnote_text"><?php echo $t_bugnote_text ?></textarea>
+                                    </td>
+                                </tr>
+                                <?php if( config_get( 'time_tracking_enabled' ) ) { ?>
+                                    <?php if( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $t_bug_id ) ) { ?>
+                                        <tr class="row-2">
+                                            <td class="center" colspan="2">
+                                                <strong><?php echo lang_get( 'time_tracking' ) ?> (HH:MM)</strong><br />
+                                                <input type="text" name="time_tracking" size="5" value="<?php echo $t_time_tracking ?>" />
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                <?php } ?>
 
-<?php html_page_bottom();
+                                <?php event_signal( 'EVENT_BUGNOTE_EDIT_FORM', array( $t_bug_id, $f_bugnote_id ) ); ?>
+
+                            </table>
+                        </div>
+                    </div>
+                    <div class="widget-toolbox padding-8 clearfix">
+                        <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_information_button' ) ?>" />
+                        <?php print_link( $t_redirect_url, lang_get( 'go_back' ), false, 'btn btn-sm btn-primary btn-white btn-round pull-right' ) ?>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+<?php
+layout_page_end();

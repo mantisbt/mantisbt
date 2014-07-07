@@ -756,7 +756,7 @@ function print_column_title_date_submitted( $p_sort, $p_dir, $p_columns_target =
 function print_column_title_attachment_count( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $t_icon_path;
 	$t_attachment_count_text = lang_get( 'attachment_count' );
-	$t_attachment_count_icon = "<img src=\"${t_icon_path}attachment.png\" alt=\"$t_attachment_count_text\" title=\"$t_attachment_count_text\" />";
+	$t_attachment_count_icon = "<i class=\"fa fa-paperclip blue\" alt=\"$t_attachment_count_text\" title=\"$t_attachment_count_text\" />";
 	echo "\t<th class=\"column-attachments\">$t_attachment_count_icon</th>\n";
 }
 
@@ -881,7 +881,7 @@ function print_column_title_summary( $p_sort, $p_dir, $p_columns_target = COLUMN
  * @access public
  */
 function print_column_title_bugnotes_count( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<th class="column-bugnotes-count"> # </th>';
+	echo '<th class="column-bugnotes-count"> <i class="fa fa-comments blue"></i> </th>';
 }
 
 /**
@@ -990,7 +990,10 @@ function print_column_selection( BugData $p_bug, $p_columns_target = COLUMNS_TAR
 		access_has_project_level( config_get( 'tag_attach_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ||
 		access_has_project_level( config_get( 'roadmap_update_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ) {
 		$g_checkboxes_exist = true;
-		printf( "<input type=\"checkbox\" name=\"bug_arr[]\" value=\"%d\" />", $p_bug->id );
+    echo '<div class="checkbox no-padding no-margin"><label>';
+		printf( "<input type=\"checkbox\" name=\"bug_arr[]\" value=\"%d\" class=\"ace\" />", $p_bug->id );
+    echo '<span class="lbl"></span>';
+    echo '</label></div>';
 	} else {
 		echo "&#160;";
 	}
@@ -1195,16 +1198,17 @@ function print_column_category_id( BugData $p_bug, $p_columns_target = COLUMNS_T
 	$t_project_name = project_get_field( $p_bug->project_id, 'name' );
 
 	echo '<td class="column-category">';
+    echo '<div class="align-left">';
 
 	# type project name if viewing 'all projects' or if issue is in a subproject
 	if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project() != $p_bug->project_id ) {
-		echo '<small class="project">[';
+		echo '<span class="small project">[';
 		print_view_bug_sort_link( string_display_line( $t_project_name ), 'project_id', $t_sort, $t_dir, $p_columns_target );
-		echo ']</small><br />';
+		echo ']</span>&#160;&#160;';
 	}
 
 	echo string_display_line( category_full_name( $p_bug->category_id, false ) );
-
+    echo '</div>';
 	echo '</td>';
 }
 
@@ -1281,8 +1285,12 @@ function print_column_resolution( BugData $p_bug, $p_columns_target = COLUMNS_TA
  * @access public
  */
 function print_column_status( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="column-status">';
-	printf( '<span class="issue-status" title="%s">%s</span>',
+    # choose color based on status
+    $status_label = html_get_status_css_class( $p_bug->status, auth_get_current_user_id(), $p_bug->project_id );
+    echo '<td class="column-status">';
+    echo '<div class="align-left">';
+    echo '<i class="fa fa-square-o fa-lg ' . $status_label . '"></i> ';
+    printf( '<span title="%s">%s</span>',
 		get_enum_element( 'resolution', $p_bug->resolution, auth_get_current_user_id(), $p_bug->project_id ),
 		get_enum_element( 'status', $p_bug->status, auth_get_current_user_id(), $p_bug->project_id )
 	);
@@ -1291,7 +1299,7 @@ function print_column_status( BugData $p_bug, $p_columns_target = COLUMNS_TARGET
 	if( ( ON == config_get( 'show_assigned_names' ) ) && ( $p_bug->handler_id > 0 ) && ( access_has_project_level( config_get( 'view_handler_threshold' ), $p_bug->project_id ) ) ) {
 		printf( ' (%s)', prepare_user_name( $p_bug->handler_id ) );
 	}
-	echo '</td>';
+	echo '</div></td>';
 }
 
 /**

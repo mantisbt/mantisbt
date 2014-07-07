@@ -436,7 +436,8 @@ $s_plugin_Example_reset = "Reset Value";
 			<programlisting><filename>Example/pages/config_page.php</filename>
 &lt;?php
 
-html_page_top( plugin_lang_get( 'configuration' ) );
+layout_page_header( plugin_lang_get( 'configuration' ) );
+layout_page_begin();
 $t_foo_or_bar = plugin_config_get( 'foo_or_bar' );
 
 ?&gt;
@@ -470,15 +471,15 @@ $t_foo_or_bar = plugin_config_get( 'foo_or_bar' );
 
 &lt;?php
 
-html_page_bottom();
+layout_page_end();
 			</programlisting>
 
 			<para>
-				The two calls to <function>html_page_top()</function> and
-				<function>html_page_bottom()</function> trigger the standard MantisBT header and
+				The two calls to <function>layout_page_being()</function> and
+				<function>layout_page_end()</function> trigger the standard MantisBT header and
 				footer portions, respectively, which also displays things such as the menus and
-				triggers other layout-related events.  <function>helper_alternate_class()</function>
-				generates the CSS classes for alternating row colors in the table.  The rest of the
+				triggers other layout-related events.  <function>layout_page_header()</function>
+				pulls in the CSS classes for alternating row colors in the table.  The rest of the
 				HTML and CSS follows the "standard" MantisBT markup styles for content and layout.
 			</para>
 		</section>
