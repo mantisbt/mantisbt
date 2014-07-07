@@ -714,24 +714,19 @@ function print_doc_menu( $p_page = '' ) {
         );
     }
 
-    echo '<div class="space-10"></div>' . "\n";
+	echo '<ul class="nav nav-tabs padding-18">' . "\n";
 
-    echo '<div class="center">' . "\n";
-    echo '<div class="btn-toolbar inline">' . "\n";
-    echo '<div class="btn-group">' . "\n";
+    foreach ( $t_pages as $key => $t_page ) {
+        $t_active =  $key == $p_page ? 'active' : '';
+		echo '<li class="' . $t_active . '">' . "\n";
+		echo '<a href="' . $t_page['url'] . '">' . "\n";
+		echo lang_get($t_page['label']);
 
-    foreach ( $t_pages as $t_page ) {
-        $t_active =  $t_page['url'] == $p_page ? 'active' : '';
-        echo '<a class="btn btn-sm btn-white btn-primary ' . $t_active . '" href="'. helper_mantis_url( $t_page['url'] ) .'">' . "\n";
-        echo lang_get( $t_page['label'] );
-        echo '</a>' . "\n";
+		echo '</a>' . "\n";
+		echo '</li>' . "\n";
     }
 
-    echo '</div>' . "\n";
-    echo '</div>' . "\n";
-    echo '</div>' . "\n";
-
-    echo '<div class="space-10"></div>' . "\n";
+	echo '</ul>' . "\n";
 }
 
 /**

@@ -95,10 +95,18 @@ function access_denied() {
 				echo '</p>';
 			}
 		} else {
-			echo '<p class="center">' . error_string( ERROR_ACCESS_DENIED ) . '</p>';
+			layout_page_header();
+			layout_admin_page_begin();
+			echo '<div class="col-md-12 col-sm-12">';
+			echo '<div class="space-10"></div>';
+			echo '<div class="alert alert-danger">';
+			echo '<div class="center bigger-130">' . error_string( ERROR_ACCESS_DENIED ) . '</p>';
 			echo '<p class="center">';
-			print_bracket_link( helper_mantis_url( 'main_page.php' ), lang_get( 'proceed' ) );
+			print_link( helper_mantis_url( 'main_page.php' ), lang_get( 'proceed' ), false,
+				'btn btn-primary btn-white btn-round');
 			echo '</p>';
+			echo '</div></div>';
+			layout_admin_page_end();
 		}
 	}
 	exit;
