@@ -130,7 +130,8 @@ function log_event( $p_level, $p_msg ) {
 				if( $s_firephp === null ) {
 					$s_firephp = FirePHP::getInstance( true );
 				}
-				$s_firephp->log( $t_msg, $t_php_event );
+				# Don't use $t_msg, let FirePHP format the message
+				$s_firephp->log( $p_msg, $t_now . ' ' . $t_level );
 				return;
 			}
 			# if firebug is not available, fall through
