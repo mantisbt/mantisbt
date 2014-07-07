@@ -1873,7 +1873,7 @@ function print_bug_attachment_header( array $p_attachment ) {
         event_signal( 'EVENT_VIEW_BUG_ATTACHMENT', array( $p_attachment ) );
     } else {
         print_file_icon( $p_attachment['display_name'] );
-        echo lang_get( 'word_separator' ) . '<span class="strike">' . string_display_line( $p_attachment['display_name'] ) . '</span>' . lang_get( 'word_separator' ) . '(' . lang_get( 'attachment_missing' ) . ')';
+        echo lang_get( 'word_separator' ) . '<s>' . string_display_line( $p_attachment['display_name'] ) . '</s>' . lang_get( 'word_separator' ) . '(' . lang_get( 'attachment_missing' ) . ')';
     }
 
     if( $p_attachment['can_delete'] ) {

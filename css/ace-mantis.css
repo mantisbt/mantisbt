@@ -104,3 +104,12 @@ pre {
     line-height: 0.73em;
     vertical-align: -15%;
 }
+
+.skin-3 .navbar .navbar-toggle {
+    background-color:  #777 !important;
+}
+
+.user-info {
+    line-height: inherit !important;
+    position: unset !important;
+}

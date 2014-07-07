@@ -349,39 +349,39 @@ function layout_login_page_end() {
 function layout_navbar() {
     $t_logo_url = config_get( 'logo_url' );
 
-    echo '<div id="navbar" class="navbar navbar-default navbar-fixed-top">';
+    echo '<div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top">';
 
     echo '<div id="navbar-container" class="navbar-container">';
 
-    echo '<button type="button" class="navbar-toggle menu-toggler navbar-left" id="menu-toggler">';
+
+    echo '<div class="navbar-header pull-left">';
+    echo '<a href="' . $t_logo_url . '" class="navbar-brand">';
+    echo '<small>';
+    echo ' Mantis Bug Tracker ';
+    echo '</small>';
+    echo '</a>';
+
+    echo '<button type="button" class="navbar-toggle navbar-toggle-img collapsed pull-right" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">';
+	echo '<span class="sr-only">Toggle user menu</span>';
+    layout_navbar_user_avatar();
+	echo '</button>';
+
+    echo '<button type="button" class="navbar-toggle menu-toggler pull-right grey" id="menu-toggler">';
     echo '<span class="sr-only">Toggle sidebar</span>';
     echo '<span class="icon-bar"></span>';
     echo '<span class="icon-bar"></span>';
     echo '<span class="icon-bar"></span>';
     echo '</button>';
 
-    echo '<div class="navbar-header navbar-left">';
-    echo '<a href="' . $t_logo_url . '" class="navbar-brand">';
-    echo '<small>';
-    echo ' Mantis Bug Tracker ';
-    echo '</small>';
-    echo '</a>';
     echo '</div>';
 
-    echo '<div class="navbar-buttons navbar-header navbar-right">';
+    echo '<div class="navbar-buttons navbar-header pull-right navbar-collapse collapse">';
     echo '<ul class="nav ace-nav">';
+    layout_navbar_projects_menu();
     # user buttons such as messages, notifications and user menu
     layout_navbar_user_menu();
     echo '</ul>';
     echo '</div>';
-
-    echo '<nav class="navbar-menu navbar-right" role="navigation">';
-    echo '<ul class="nav navbar-nav">';
-    # optional menu & form inside navbar
-    layout_navbar_projects_menu();
-    echo '</ul>';
-    #layout_navbar_search_box();
-    echo '</nav>';
 
     echo '</div>';
     echo '</div>';
@@ -413,13 +413,13 @@ function layout_navbar_user_menu() {
 
     $t_username = current_user_get_field( 'username' );
 
-    echo '<li class="light-blue">';
+    echo '<li class="grey">';
     echo '<a data-toggle="dropdown" href="#" class="dropdown-toggle">';
 
-    layout_navbar_user_avatar();
+    layout_navbar_user_avatar( 'nav-user-photo' );
 
     echo '<span class="user-info">';
-    echo '<small>Welcome,</small>', $t_username, '&#160;&#160;';
+    echo $t_username;
     echo '</span>';
     echo '<i class="ace-icon fa fa-angle-down"></i>';
     echo '</a>';
@@ -462,7 +462,7 @@ function layout_navbar_projects_menu() {
     }
 
     if( $t_show_project_selector ) {
-        echo '<li>' . "\n";
+        echo '<li class="grey">' . "\n";
         echo '<a data-toggle="dropdown" href="#" class="dropdown-toggle">' . "\n";
 
         $t_current_project_id = helper_get_current_project();
@@ -498,25 +498,6 @@ function layout_navbar_projects_menu() {
     }
 }
 
-/**
- * Print navbar projects menu at the top right of the page
- * @return null
- */
-function layout_navbar_search_box() {
-    if( !auth_is_user_authenticated() ) {
-        return;
-    }
-
-    echo '<form role="search" class="navbar-form navbar-left form-search">';
-    echo '<div class="form-group">';
-    echo '<input type="text" placeholder="search">';
-    echo '</div>';
-
-    echo '<button class="btn btn-xs btn-grey" type="button">';
-    echo '<i class="ace-icon fa fa-search icon-only bigger-110"></i>';
-    echo '</button>';
-    echo '</form>';
-}
 
 /**
  * Print projects that the current user has access to.
@@ -569,15 +550,20 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
 
 /**
  * Print user avatar in the navbar
+ * @param string $p_img_class css class to use with the img tag
  * @return null
  */
-function layout_navbar_user_avatar() {
-    if( OFF === config_get( 'show_avatar' ) ) {
+function layout_navbar_user_avatar( $p_img_class = '' ) {
+    $t_default_avatar = '<i class="ace-icon fa fa-user fa-3x white"></i> ';
+
+    if( ON === config_get( 'show_avatar' ) ) {
+        echo $t_default_avatar;
         return;
     }
 
     $p_user_id = auth_get_current_user_id();
     if( !user_exists( $p_user_id ) ) {
+        echo $t_default_avatar;
         return;
     }
 
@@ -585,11 +571,12 @@ function layout_navbar_user_avatar() {
         $t_avatar = user_get_avatar( $p_user_id, 40 );
         if( false !== $t_avatar ) {
             $t_avatar_url = htmlspecialchars( $t_avatar[0] );
-            $t_width = $t_avatar[1];
-            $t_height = $t_avatar[2];
-            echo '<img class="nav-user-photo" src="' . $t_avatar_url . '" alt="User avatar" width="' . $t_width . '" height="' . $t_height . '" />';
+            echo '<img class="' . $p_img_class .  '" src="' . $t_avatar_url . '" alt="User avatar" />';
+            return;
         }
     }
+
+    echo $t_default_avatar;
 }
 
 /**
