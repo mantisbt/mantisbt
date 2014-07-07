@@ -459,8 +459,8 @@ define( 'FILTER_MATCH_ANY', 1 );
 
 # Versions
 define( 'VERSION_ALL', null );
-define( 'VERSION_FUTURE', 0 );
-define( 'VERSION_RELEASED', 1 );
+define( 'VERSION_FUTURE', false );
+define( 'VERSION_RELEASED', true );
 
 # Contexts for bug summary
 define( 'SUMMARY_CAPTION', 1 );

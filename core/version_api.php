@@ -218,7 +218,8 @@ function version_ensure_unique( $p_version, $p_project_id = null ) {
  */
 function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $p_description = '', $p_date_order = null, $p_obsolete = false ) {
 	$c_project_id = (int)$p_project_id ;
-	$c_released = (int)$p_released;
+	$c_released = db_prepare_bool( $p_released );
+	$c_obsolete = db_prepare_bool( $p_obsolete );
 
 	if( null === $p_date_order ) {
 		$c_date_order = db_now();
@@ -234,7 +235,7 @@ function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $
 					( project_id, version, date_order, description, released, obsolete )
 				  VALUES
 					(" . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-	db_query_bound( $t_query, array( $c_project_id, $p_version, $c_date_order, $p_description, $c_released, $p_obsolete ) );
+	db_query_bound( $t_query, array( $c_project_id, $p_version, $c_date_order, $p_description, $c_released, $c_obsolete ) );
 
 	$t_version_id = db_insert_id( $t_project_version_table );
 
@@ -260,8 +261,8 @@ function version_update( VersionData $p_version_info ) {
 	$c_version_name = $p_version_info->version;
 	$c_old_version_name = $t_old_version_name;
 	$c_description = $p_version_info->description;
-	$c_released = (int)$p_version_info->released;
-	$c_obsolete = (bool)$p_version_info->obsolete;
+	$c_released = db_prepare_bool( $p_version_info->released );
+	$c_obsolete = db_prepare_bool( $p_version_info->obsolete );
 	$c_date_order = $p_version_info->date_order;
 	$c_project_id = (int)$p_version_info->project_id;
 
@@ -474,12 +475,12 @@ function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = 
 
 	if( $p_released !== null ) {
 		$t_query .= " AND released = " . db_param();
-		$t_query_params[] = (int)$p_released;
+		$t_query_params[] = db_prepare_bool( $p_released );
 	}
 
 	if( $p_obsolete !== null ) {
 		$t_query .= " AND obsolete = " . db_param();
-		$t_query_params[] = (bool)$p_obsolete;
+		$t_query_params[] = db_prepare_bool( $p_obsolete );
 	}
 
 	$t_query .= " ORDER BY date_order DESC";
@@ -509,7 +510,7 @@ function version_get_all_rows_with_subs( $p_project_id, $p_released = null, $p_o
 	if( $p_released === null ) {
 		$t_released_where = '';
 	} else {
-		$c_released = (int)$p_released;
+		$c_released = db_prepare_bool( $p_released );
 		$t_released_where = "AND ( released = " . db_param() . " )";
 		$t_query_params[] = $c_released;
 	}
@@ -518,7 +519,7 @@ function version_get_all_rows_with_subs( $p_project_id, $p_released = null, $p_o
 		$t_obsolete_where = '';
 	} else {
 		$t_obsolete_where = "AND ( obsolete = " . db_param() . " )";
-		$t_query_params[] = $p_obsolete;
+		$t_query_params[] = db_prepare_bool( $p_obsolete );
 	}
 
 	$t_project_version_table = db_get_table( 'project_version' );
@@ -666,7 +667,8 @@ function version_get( $p_version_id ) {
 function version_prepare_db( VersionData $p_version_info ) {
 	$p_version_info->id = (int)$p_version_info->id;
 	$p_version_info->project_id = (int)$p_version_info->project_id;
-	$p_version_info->released = (int)$p_version_info->released;
+	$p_version_info->released = db_prepare_bool( $p_version_info->released );
+	$p_version_info->obsolete = db_prepare_bool( $p_version_info->obsolete );
 
 	return $p_version_info;
 }
