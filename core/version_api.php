@@ -261,7 +261,7 @@ function version_update( VersionData $p_version_info ) {
 	$c_old_version_name = $t_old_version_name;
 	$c_description = $p_version_info->description;
 	$c_released = (int)$p_version_info->released;
-	$c_obsolete = (bool)$p_version_info->obsolete;
+	$c_obsolete = db_prepare_bool( $p_version_info->obsolete );
 	$c_date_order = $p_version_info->date_order;
 	$c_project_id = (int)$p_version_info->project_id;
 
@@ -479,7 +479,7 @@ function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = 
 
 	if( $p_obsolete !== null ) {
 		$t_query .= " AND obsolete = " . db_param();
-		$t_query_params[] = (bool)$p_obsolete;
+		$t_query_params[] = db_prepare_bool( $p_obsolete );
 	}
 
 	$t_query .= " ORDER BY date_order DESC";
