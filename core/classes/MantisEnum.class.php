@@ -79,7 +79,13 @@ class MantisEnum {
 			return MantisEnum::getLabelForUnknownValue( $value );
 		}
 
-		return MantisEnum::getLabel( $localizedEnumString, $value );
+		$t_assoc_array = MantisEnum::getAssocArrayIndexedByValues( $localizedEnumString );
+
+		if( isset( $t_assoc_array[(int)$value] ) ) {
+			return $t_assoc_array[(int)$value];
+		}
+
+		return MantisEnum::getLabel( $enumString, $value );
 	}
 
 	/**
