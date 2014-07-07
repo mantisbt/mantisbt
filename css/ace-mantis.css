@@ -83,3 +83,11 @@ a:link:after, a:visited:after {
 pre {
     word-break: break-all !important;
 }
+
+.skin-3 .main-container:before {
+    background: none repeat scroll 0 0 #ffffff !important;
+}
+
+.light-login {
+    background: none repeat scroll 0 0 #ffffff !important;
+}
