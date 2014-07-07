@@ -1074,7 +1074,7 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 					  WHERE $t_enabled_clause
 					  	 ph.parent_id IS NOT NULL
 					  ORDER BY p.name";
-		$t_result = db_query_bound( $t_query, ( $p_show_disabled ? null : array( true ) ) );
+		$t_result = db_query_bound( $t_query, ( $p_show_disabled ? array() : array( true ) ) );
 	} else {
 		$t_query = "SELECT DISTINCT p.id, p.name, ph.parent_id
 					  FROM $t_project_table p

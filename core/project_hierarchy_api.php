@@ -172,7 +172,7 @@ function project_hierarchy_cache( $p_show_disabled = false ) {
 				  WHERE $t_enabled_clause
 				  ORDER BY p.name";
 
-	$t_result = db_query_bound( $t_query, ( $p_show_disabled ? null : array( true ) ) );
+	$t_result = db_query_bound( $t_query, ( $p_show_disabled ? array() : array( true ) ) );
 
 	$g_cache_project_hierarchy = array();
 	$g_cache_project_inheritance = array();
