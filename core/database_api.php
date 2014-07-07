@@ -333,7 +333,14 @@ function db_query_bound( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_
 
 	$t_start = microtime( true );
 
-	if( $p_arr_parms != null && $s_check_params ) {
+	# This ensures that we don't get an error from ADOdb if $p_arr_parms == null,
+	# as Execute() expects either an array or false if there are no parameters -
+	# null actually gets treated as array( 0 => null )
+	if( is_null( $p_arr_parms ) ) {
+		$p_arr_parms = array();
+	}
+
+	if( !empty( $p_arr_parms ) && $s_check_params ) {
 		$t_params = count( $p_arr_parms );
 		for( $i = 0;$i < $t_params;$i++ ) {
 			if( $p_arr_parms[$i] === false ) {
@@ -360,7 +367,7 @@ function db_query_bound( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_
 	if( ON == $g_db_log_queries ) {
 		$t_lastoffset = 0;
 		$i = 0;
-		if( !( is_null( $p_arr_parms ) || empty( $p_arr_parms ) ) ) {
+		if( !empty( $p_arr_parms ) ) {
 			while( preg_match( '/\?/', $p_query, $t_matches, PREG_OFFSET_CAPTURE, $t_lastoffset ) ) {
 				$t_matches = $t_matches[0];
 				# Realign the offset returned by preg_match as it is byte-based,
