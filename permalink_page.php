@@ -52,7 +52,7 @@ access_ensure_project_level( config_get( 'create_permalink_threshold' ) );
 $f_url = string_sanitize_url( gpc_get_string( 'url' ) );
 ?>
 
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <div class="space-10"></div>
         <p class="lead">
             <?php

@@ -205,7 +205,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
                     }
                 }
 
-                echo '<div class="col-md-12 col-sm-12">';
+                echo '<div class="col-md-12 col-xs-12">';
                 echo '<div class="space-20"></div>';
                 echo '<div class="alert alert-danger">';
 
@@ -231,7 +231,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
                 echo '</div></div>';
 
                 if( isset( $t_old_contents ) ) {
-                    echo '<div class="col-md-12 col-sm-12">';
+                    echo '<div class="col-md-12 col-xs-12">';
                     echo '<div class="space-20"></div>';
                     echo '<div class="alert alert-warning">';
                     echo '<div class="warning">Previous non-fatal errors occurred.  Page contents follow.</div>';

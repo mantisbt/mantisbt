@@ -112,3 +112,31 @@ pre {
 .user-info {
     line-height: 33px !important;
 }
+
+.page-content {
+    background-color: #fff;
+    margin: 0 0 10px;
+    padding: 8px 8px 24px;
+    position: relative;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .page-content {
+        padding: 8px 16px 24px;
+    }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .page-content {
+        padding: 8px 20px 24px;
+    }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .page-content {
+        padding: 8px 20px 24px;
+    }
+}

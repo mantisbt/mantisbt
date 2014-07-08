@@ -232,7 +232,7 @@ layout_page_header( lang_get( 'changelog' ) );
 
 layout_page_begin( __FILE__ );
 
-echo '<div class="col-md-12 col-sm-12">';
+echo '<div class="col-md-12 col-xs-12">';
 
 $t_project_index = 0;
 

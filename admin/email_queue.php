@@ -35,7 +35,7 @@ layout_admin_page_begin();
 print_admin_menu_bar( 'email_queue.php' );
 ?>
 
-<div class="col-md-12 col-sm-12">
+<div class="col-md-12 col-xs-12">
     <div class="space-10"></div>
 
 <?php

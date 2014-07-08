@@ -59,7 +59,7 @@ layout_page_begin( 'proj_doc_page.php' );
 print_doc_menu('proj_doc_add_page.php');
 ?>
 
-	<div class="col-md-12 col-sm-12">
+	<div class="col-md-12 col-xs-12">
 		<div class="space-10"></div>
 		<div class="form-container">
 			<form method="post" enctype="multipart/form-data" action="proj_doc_add.php">

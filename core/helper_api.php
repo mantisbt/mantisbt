@@ -424,7 +424,7 @@ function helper_ensure_confirmed( $p_message, $p_button_label ) {
     layout_page_header();
     layout_page_begin();
 
-    echo '<div class="col-md-12 col-sm-12">';
+    echo '<div class="col-md-12 col-xs-12">';
     echo '<div class="space-10"></div>';
     echo '<div class="alert alert-warning center">';
     echo '<p class="bigger-110">';

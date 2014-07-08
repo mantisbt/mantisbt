@@ -43,7 +43,7 @@ $t_metrics = enum_bug_group( lang_get( 'severity_enum_string' ), 'severity' );
 $t_token = token_set( TOKEN_GRAPH, serialize( $t_metrics ) );
 ?>
 
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <div class="space-10"></div>
 
         <div class="widget-box widget-color-blue2">

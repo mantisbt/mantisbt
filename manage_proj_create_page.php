@@ -69,7 +69,7 @@ if( project_table_empty() ) {
 }
 ?>
 
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <div class="space-10"></div>
         <div id="manage-project-create-div" class="form-container">
             <form method="post" id="manage-project-create-form" action="manage_proj_create.php">

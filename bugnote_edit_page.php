@@ -110,7 +110,7 @@ layout_page_header( bug_format_summary( $t_bug_id, SUMMARY_CAPTION ) );
 
 layout_page_begin();
 ?>
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
 
         <form method="post" action="bugnote_update.php">
             <?php echo form_security_field( 'bugnote_update' ) ?>

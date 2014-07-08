@@ -49,7 +49,7 @@ if( !file_allow_bug_upload( $f_bug_id ) ) {
 
 $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 ?>
-    <div class="col-md-6 col-sm-12">
+    <div class="col-md-6 col-xs-12">
         <div class="space-10"></div>
         <?php
         $t_collapse_block = collapse_display( 'upload_form' );

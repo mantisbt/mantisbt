@@ -78,7 +78,7 @@ foreach( $t_plugins as $t_basename => $t_plugin ) {
 if( 0 < count( $t_plugins_installed ) ) {
     ?>
 
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
     <div class="space-10"></div>
 
     <div class="form-container">

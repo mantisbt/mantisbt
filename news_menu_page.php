@@ -54,7 +54,7 @@ layout_page_header( lang_get( 'edit_news_link' ) );
 layout_page_begin( 'main_page.php' );
 ?>
 
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <div id="news-add-div" class="form-container">
             <form id="news-add-form" method="post" action="news_add.php">
                 <div class="widget-box widget-color-blue2">
@@ -113,7 +113,7 @@ layout_page_begin( 'main_page.php' );
 # Add News Form END
 # Edit/Delete News Form BEGIN
 if( news_get_count( helper_get_current_project(), current_user_is_administrator() ) > 0 ) { ?>
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <div class="space-10"></div>
         <div id="news-edit-div" class="form-container">
             <form id="news-edit-form" method="post" action="news_edit_page.php">

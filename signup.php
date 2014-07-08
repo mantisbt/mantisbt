@@ -96,7 +96,7 @@ layout_page_header();
 layout_page_begin();
 ?>
 
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <div class="space-10"></div>
 
         <div id="error-msg">

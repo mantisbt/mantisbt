@@ -339,7 +339,7 @@ function html_top_banner() {
  * @return void
  */
 function html_operation_successful( $p_redirect_url, $p_message = '' ) {
-    echo '<div class="col-md-12 col-sm-12">';
+    echo '<div class="col-md-12 col-xs-12">';
     echo '<div class="space-0"></div>';
     echo '<div class="alert alert-success center">';
 

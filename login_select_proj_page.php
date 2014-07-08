@@ -62,7 +62,7 @@ layout_page_header( lang_get( 'select_project_button' ) );
 layout_page_begin();
 ?>
 
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
 
         <!-- Project Select Form BEGIN -->
         <div id="select-project-div" class="form-container">

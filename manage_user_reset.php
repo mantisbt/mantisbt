@@ -79,7 +79,7 @@ layout_page_header( null, $t_result ? $t_redirect_url : null );
 
 layout_page_begin( 'manage_overview_page.php' );
 
-echo '<div class="col-md-12 col-sm-12">';
+echo '<div class="col-md-12 col-xs-12">';
 echo '<div class="space-10"></div>';
 echo '<div class="alert alert-success">';
 

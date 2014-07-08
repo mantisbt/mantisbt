@@ -725,7 +725,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
     layout_page_begin();
 
     ?>
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <div class="space-10"></div>
         <?php
         if( $t_error != false ) {

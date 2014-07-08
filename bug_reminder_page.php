@@ -72,7 +72,7 @@ layout_page_begin();
 
 <?php # Send reminder Form BEGIN ?>
 
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
 
         <form method="post" action="bug_reminder.php">
             <?php echo form_security_field( 'bug_reminder' ) ?>

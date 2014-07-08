@@ -97,7 +97,7 @@ function access_denied() {
 		} else {
 			layout_page_header();
 			layout_admin_page_begin();
-			echo '<div class="col-md-12 col-sm-12">';
+			echo '<div class="col-md-12 col-xs-12">';
 			echo '<div class="space-10"></div>';
 			echo '<div class="alert alert-danger">';
 			echo '<div class="center bigger-130">' . error_string( ERROR_ACCESS_DENIED ) . '</p>';

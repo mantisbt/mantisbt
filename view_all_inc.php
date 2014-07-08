@@ -90,7 +90,7 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 # -- ====================== BUG LIST ============================ --
 
 ?>
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <div class="space-10"></div>
         <form name="bug_action" method="get" action="bug_actiongroup_page.php">
             <?php # CSRF protection not required here - form does not result in modifications ?>

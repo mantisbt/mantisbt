@@ -322,7 +322,7 @@ $t_notify_flags = array_merge_recursive2( $t_notify_flags, config_get( 'notify_f
 $t_can_change_flags = $t_access >= config_get_access( 'notify_flags' );
 $t_can_change_defaults = $t_access >= config_get_access( 'default_notify_flags' );
 
-echo '<div class="col-md-12 col-sm-12">' . "\n";
+echo '<div class="col-md-12 col-xs-12">' . "\n";
 echo '<div class="space-10"></div>';
 
 # Email notifications

@@ -356,9 +356,9 @@ function layout_navbar() {
 
     echo '<div class="navbar-header pull-left">';
     echo '<a href="' . $t_logo_url . '" class="navbar-brand">';
-    echo '<small>';
+    echo '<span class="smaller-75">';
     echo ' Mantis Bug Tracker ';
-    echo '</small>';
+    echo '</span>';
     echo '</a>';
 
     echo '<button type="button" class="navbar-toggle navbar-toggle-img collapsed pull-right" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">';
@@ -375,12 +375,22 @@ function layout_navbar() {
 
     echo '</div>';
 
-    echo '<div class="navbar-buttons navbar-header pull-right navbar-collapse collapse">';
+    echo '<div class="hidden-xs navbar-buttons navbar-header pull-right navbar-collapse collapse">';
     echo '<ul class="nav ace-nav">';
     layout_navbar_projects_menu();
     # user buttons such as messages, notifications and user menu
     layout_navbar_user_menu();
     echo '</ul>';
+    echo '</div>';
+
+    # mobile view
+    echo '<div class="hidden-sm hidden-md hidden-lg">';
+    echo '<div class="navbar-buttons navbar-header pull-right navbar-collapse collapse">';
+    echo '<ul class="nav navbar-nav">';
+    layout_navbar_projects_menu();
+    layout_navbar_user_menu( false );
+    echo '</ul>';
+    echo '</div>';
     echo '</div>';
 
     echo '</div>';
@@ -404,9 +414,10 @@ function layout_navbar_menu_item( $p_url, $p_title, $p_icon ) {
 
 /**
  * Print navbar user menu at the top right of the page
+ * @param bool $p_show_avatar decide whether to show logged in user avatar
  * @return null
  */
-function layout_navbar_user_menu() {
+function layout_navbar_user_menu( $p_show_avatar = true ) {
     if( !auth_is_user_authenticated() ) {
         return;
     }
@@ -415,13 +426,16 @@ function layout_navbar_user_menu() {
 
     echo '<li class="grey">';
     echo '<a data-toggle="dropdown" href="#" class="dropdown-toggle">';
-
-    layout_navbar_user_avatar( 'nav-user-photo' );
-
-    echo '<span class="user-info">';
-    echo $t_username;
-    echo '</span>';
-    echo '<i class="ace-icon fa fa-angle-down"></i>';
+    if( $p_show_avatar ) {
+        layout_navbar_user_avatar( 'nav-user-photo' );
+        echo '<span class="user-info">';
+        echo $t_username;
+        echo '</span>';
+        echo '<i class="ace-icon fa fa-angle-down"></i>';
+    } else {
+        echo '&#160;' . $t_username . '&#160;' . "\n";
+        echo '<i class="ace-icon fa fa-angle-down bigger-110"></i>';
+    }
     echo '</a>';
     echo '<ul class="user-menu dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close">';
 
@@ -968,7 +982,7 @@ function layout_footer() {
     if( config_get( 'show_version' ) == ON ) {
         $t_version_suffix = ' ' . htmlentities( MANTIS_VERSION . config_get_global( 'version_suffix' ) );
     }
-    echo '<div class="col-md-6 col-sm-12">' . "\n";
+    echo '<div class="col-md-6 col-xs-12 no-padding">' . "\n";
     echo '<address>' . "\n";
     echo '<strong>Powered by <a href="http://www.mantisbt.org" title="bug tracking software">MantisBT ' . $t_version_suffix . '</a></strong> <br>' . "\n";
     echo "<small>Copyright &copy;$t_copyright_years MantisBT Team</small>" . '<br>';
@@ -992,7 +1006,7 @@ function layout_footer() {
     # We don't have a button anymore, so for now we will only show the resized
     # version of the logo when not on login page.
     if( !is_page_name( 'login_page' ) ) {
-        echo '<div class="col-md-6 col-sm-12">' . "\n";
+        echo '<div class="col-md-6 col-xs-12">' . "\n";
         echo '<div class="pull-right" id="powered-by-mantisbt-logo">' . "\n";
         $t_mantisbt_logo_url = helper_mantis_url( 'images/mantis_logo.png' );
         echo '<a href="http://www.mantisbt.org" '.

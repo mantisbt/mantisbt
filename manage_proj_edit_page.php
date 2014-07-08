@@ -92,7 +92,7 @@ print_manage_menu( 'manage_proj_page.php' );
 ?>
 
     <!-- PROJECT PROPERTIES -->
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <div class="space-10"></div>
         <div id="manage-proj-update-div" class="form-container">
             <form id="manage-proj-update-form" method="post" action="manage_proj_update.php">
@@ -188,7 +188,7 @@ print_manage_menu( 'manage_proj_page.php' );
 
 
     <!-- PROJECT DELETE -->
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <?php
         # You must have global permissions to delete projects
         if( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
@@ -205,7 +205,7 @@ print_manage_menu( 'manage_proj_page.php' );
     </div>
 
     <!-- SUBPROJECTS -->
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <div class="space-10"></div>
         <div id="manage-project-update-subprojects-div" class="form-container">
             <div class="widget-box widget-color-blue2">
@@ -256,7 +256,7 @@ print_manage_menu( 'manage_proj_page.php' );
 <?php
 $t_subproject_ids = current_user_get_accessible_subprojects( $f_project_id, true );
 if( array() != $t_subproject_ids ) { ?>
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <div class="space-10"></div>
         <form id="manage-project-update-subprojects-form" action="manage_proj_update_children.php" method="post">
             <div class="widget-box widget-color-blue2">
@@ -348,7 +348,7 @@ if( array() != $t_subproject_ids ) { ?>
     # If there are no subprojects, clear floats to h2 overlap on div border
 } ?>
 
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <div class="space-10"></div>
         <div id="categories" class="form-container">
             <div class="widget-box widget-color-blue2">
@@ -431,7 +431,7 @@ if( array() != $t_subproject_ids ) { ?>
     </div>
 
 
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <div class="space-10"></div>
         <div id="project-versions-div" class="form-container">
             <div class="widget-box widget-color-blue2">
@@ -529,7 +529,7 @@ $t_custom_field_count = count( custom_field_get_ids() );
 if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_project_id ) &&
     ( $t_custom_field_count > 0 ) ) {
     ?>
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
     <div class="space-10"></div>
     <div id="customfields" class="form-container">
         <div class="widget-box widget-color-blue2">
@@ -632,7 +632,7 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
 event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 ?>
 
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <div class="space-10"></div>
         <div class="alert alert-info">
             <div class="center bigger-110">
@@ -647,7 +647,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
         </div>
     </div>
 
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <div class="space-10"></div>
         <div id="manage-project-users-div" class="form-container">
             <div class="widget-box widget-color-blue2">
@@ -774,7 +774,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 if( $t_can_manage_users ) {
     $t_users = user_get_unassigned_by_project_id( $f_project_id );
     if( count( $t_users ) > 0 ) { ?>
-        <div class="col-md-12 col-sm-12">
+        <div class="col-md-12 col-xs-12">
             <div class="space-10"></div>
             <div class="form-container">
                 <form id="manage-project-add-user-form" method="post" action="manage_proj_user_add.php">

@@ -60,7 +60,7 @@ function helper_table_row_count( $p_table ) {
     return $t_count;
 }
 ?>
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <div class="space-10"></div>
 
         <div class="widget-box widget-color-blue2">

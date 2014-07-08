@@ -70,7 +70,7 @@ layout_page_header( sprintf( lang_get( 'tag_details' ), $t_name ) );
 layout_page_begin();
 ?>
 
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <div class="space-10"></div>
         <div class="widget-box widget-color-blue2">
             <div class="widget-header widget-header-small">

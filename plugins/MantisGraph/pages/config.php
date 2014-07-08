@@ -70,7 +70,7 @@ function print_font_checked( $p_font_name ) {
 
 ?>
 
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <div class="space-10"></div>
         <div class="form-container" >
             <form action="<?php echo plugin_page( 'config_edit' )?>" method="post">

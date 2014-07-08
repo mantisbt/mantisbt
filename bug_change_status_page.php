@@ -137,7 +137,7 @@ layout_page_begin();
 
 ?>
 
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
 
     <div id="bug-change-status-div" class="form-container">
     <form id="bug-change-status-form" name="bug_change_status_form" method="post" action="bug_update.php">

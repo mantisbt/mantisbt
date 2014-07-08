@@ -66,7 +66,7 @@ print_manage_menu( 'manage_custom_field_page.php' );
 
 $t_definition = custom_field_get_definition( $f_field_id );
 ?>
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <div class="space-10"></div>
 
         <div id="manage-custom-field-update-div" class="form-container">
@@ -244,7 +244,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
         </form>
     </div>
 
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <div class="space-10"></div>
         <form method="post" action="manage_custom_field_delete.php" class="pull-right">
             <fieldset>
@@ -261,7 +261,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
  * can't link/unlink fields from/to. */
 ?>
 
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <div class="space-10"></div>
         <form method="post" action="manage_custom_field_proj_add.php">
             <div class="widget-box widget-color-blue2">

@@ -58,7 +58,7 @@ print_manage_config_menu( 'adm_permissions_report.php' );
 function get_section_begin_apr( $p_section_name ) {
     $t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 
-    $t_output = '<div class="col-md-12 col-sm-12">';
+    $t_output = '<div class="col-md-12 col-xs-12">';
     $t_output .= '<div class="space-10"></div>';
 
     $t_output .= '<div class="widget-box widget-color-blue2">';

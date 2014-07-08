@@ -821,7 +821,7 @@ function relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_select_nam
  */
 function relationship_view_box( $p_bug_id ) {
 	?>
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
     <div class="space-10"></div>
 
     <?php

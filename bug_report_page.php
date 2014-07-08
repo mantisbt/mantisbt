@@ -227,7 +227,7 @@ layout_page_begin( __FILE__ );
 
 ?>
 
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
     <form name="report_bug_form" method="post" <?php if( $t_show_attachments ) { echo 'enctype="multipart/form-data"'; } ?> action="bug_report.php">
     <?php echo form_security_field( 'bug_report' ) ?>
     <input type="hidden" name="m_id" value="<?php echo $f_master_bug_id ?>" />

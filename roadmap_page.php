@@ -237,7 +237,7 @@ layout_page_header( lang_get( 'roadmap' ) );
 
 layout_page_begin( __FILE__ );
 
-echo '<div class="col-md-12 col-sm-12">';
+echo '<div class="col-md-12 col-xs-12">';
 
 $t_project_index = 0;
 
@@ -361,7 +361,7 @@ foreach( $t_project_ids as $t_project_id ) {
             }
 
             echo '<div class="space-4"></div>';
-            echo '<div class="col-md-7 col-sm-12 no-padding">';
+            echo '<div class="col-md-7 col-xs-12 no-padding">';
             echo '<div class="progress progress-striped" data-percent="' . $t_progress . '%" >';
             echo '<div style="width:' . $t_progress . '%;" class="progress-bar progress-bar-success"></div>';
             echo '</div></div>';

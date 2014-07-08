@@ -93,7 +93,7 @@ layout_page_begin( 'main_page.php' );
 # Edit News Form BEGIN
 ?>
 
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <div class="space-10"></div>
         <div id="news-update-div" class="form-container">
             <form id="news-update-form" method="post" action="news_update.php">

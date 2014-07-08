@@ -80,7 +80,7 @@ if( profile_is_global( $f_profile_id ) ) {
 ?>
 
 <?php # Edit Profile Form BEGIN ?>
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <div class="space-10"></div>
         <form method="post" action="account_prof_update.php">
             <div class="widget-box widget-color-blue2">

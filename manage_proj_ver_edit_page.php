@@ -71,7 +71,7 @@ layout_page_begin( 'manage_overview_page.php' );
 print_manage_menu( 'manage_proj_page.php' );
 ?>
 
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <div class="space-10"></div>
         <div id="manage-proj-version-update-div" class="form-container">
             <form id="manage-proj-version-update-form" method="post" action="manage_proj_ver_update.php">
@@ -138,7 +138,7 @@ print_manage_menu( 'manage_proj_page.php' );
         </div>
     </div>
 
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <form method="post" action="manage_proj_ver_delete.php" class="pull-right">
             <fieldset>
                 <?php echo form_security_field( 'manage_proj_ver_delete' ) ?>

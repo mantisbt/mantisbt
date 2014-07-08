@@ -229,7 +229,7 @@ switch ( $f_action )  {
 bug_group_action_print_top();
 ?>
 
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
         <?php
         if( $t_multiple_projects ) {
             echo '<div class="alert alert-warning"> <p class="bold">' . lang_get( 'multiple_projects' ) . '</p> </div>';

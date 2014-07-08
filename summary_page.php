@@ -133,7 +133,7 @@ print_summary_menu( 'summary_page.php' );
 echo '<div class="space-10"></div>';
 print_summary_submenu(); ?>
 
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
     <div class="space-10"></div>
 
     <div class="widget-box widget-color-blue2">
@@ -149,7 +149,7 @@ print_summary_submenu(); ?>
 
 
     <!-- LEFT COLUMN -->
-    <div class="col-md-6 col-sm-12">
+    <div class="col-md-6 col-xs-12">
 
         <?php if( 1 < count( $t_project_ids ) ) { ?>
             <!-- BY PROJECT -->
@@ -257,7 +257,7 @@ print_summary_submenu(); ?>
     </div>
 
     <!-- RIGHT COLUMN -->
-    <div class="col-md-6 col-sm-12">
+    <div class="col-md-6 col-xs-12">
 
         <!-- DEVELOPER STATS -->
         <div class="space-10"></div>
@@ -364,7 +364,7 @@ print_summary_submenu(); ?>
     </div>
 
     <!-- BOTTOM -->
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-xs-12">
 
         <!-- REPORTER BY RESOLUTION -->
         <div class="space-10"></div>
