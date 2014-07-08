@@ -79,7 +79,7 @@ function bug_group_action_print_top() {
  * @return void
  */
 function bug_group_action_print_bottom() {
-    html_page_end();
+   layout_page_end();
 }
 
 /**

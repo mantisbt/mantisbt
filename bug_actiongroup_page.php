@@ -259,7 +259,7 @@ bug_group_action_print_top();
                                     <?php
                                     if( !$t_finished ) {
                                         ?>
-                                        <tr class="row-1">
+                                        <tr>
                                             <th class="category">
                                                 <?php echo $t_question_title ?>
                                             </th>
@@ -325,7 +325,7 @@ bug_group_action_print_top();
                                                             && ( count( version_get_all_rows( $t_project_id ) ) > 0 ) );
                                                     if( $t_show_product_version ) {
                                                         ?>
-                                                        <tr class="row-2">
+                                                        <tr>
                                                             <th class="category">
                                                                 <?php echo $t_question_title2 ?>
                                                             </th>
@@ -342,7 +342,7 @@ bug_group_action_print_top();
                                         }
                                     } else {
                                         ?>
-                                        <tr class="row-1">
+                                        <tr>
                                             <th class="category" colspan="2">
                                                 <?php echo $t_question_title; ?>
                                             </th>
@@ -352,7 +352,7 @@ bug_group_action_print_top();
 
                                     if( $t_bugnote ) {
                                         ?>
-                                        <tr class="row-1">
+                                        <tr>
                                             <th class="category">
                                                 <?php echo lang_get( 'add_bugnote_title' ); ?>
                                             </th>
