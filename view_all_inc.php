@@ -236,7 +236,7 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
                                 <?php
                                 if ($g_checkboxes_exist && ON == config_get('use_javascript')) {
                                     echo '<div class="checkbox"><label>';
-                                    echo '<input class="ace" type="checkbox" id="bug_arr_all" name="bug_arr_all" value="all" class="check_all" />';
+                                    echo '<input class="ace check_all" type="checkbox" id="bug_arr_all" name="bug_arr_all" value="all" class="check_all" />';
                                     echo '<span class="lbl"> ' . lang_get( 'select_all' ) . ' </span > ';
                                     echo '</label></div>';
                                 }

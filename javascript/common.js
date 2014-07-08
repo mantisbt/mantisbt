@@ -111,7 +111,7 @@ $(document).ready( function() {
 	$('input.autofocus:first, select.autofocus:first, textarea.autofocus:first').focus();
 
 	var checkAllSelectors = '';
-	$(':checkbox#bug_arr_all').each(function() {
+	$(':checkbox.check_all').each(function() {
 		var baseFieldName = $(this).attr('name').replace(/_all$/, '');
 		if (checkAllSelectors.length > 0) {
 			checkAllSelectors += ', ';
