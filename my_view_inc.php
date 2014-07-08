@@ -360,7 +360,7 @@ $t_bug_string = $t_bug_count == 1 ? 'bug' : 'bugs';
                                 <?php
                                 print_bug_link( $t_bug->id );
 
-                                echo '<br /><span class="small">';
+                                echo '<br />';
 
                                 # choose color based on status
                                 $status_label = html_get_status_css_class( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
@@ -388,7 +388,6 @@ $t_bug_string = $t_bug_count == 1 ? 'bug' : 'bugs';
                                     echo '<img src="' . $t_icon_path . 'protected.gif" width="8" height="15" alt="' . lang_get( 'private' ) . '" />';
                                 }
                                 ?>
-                                </span>
                                 </td>
 
                                 <?php

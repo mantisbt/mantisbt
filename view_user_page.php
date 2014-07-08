@@ -85,40 +85,50 @@ layout_page_begin();
             </div>
             <div class="widget-body">
                 <div class="widget-main no-padding">
-                    <fieldset>
-                        <div class="field-container">
-                            <span class="display-label"><span><?php echo lang_get( 'username' ) ?></span></span>
-                            <span class="display-value"><span><?php echo string_display_line( $u_username ) ?></span></span>
-                            <span class="label-style"></span>
-                        </div>
-                        <div class="field-container">
-                            <span class="display-label"><span><?php echo lang_get( 'email' ) ?></span></span>
-                    <span class="display-value"><span>
-                        <?php
-                        if( ! ( $t_can_manage || $t_can_see_email ) ) {
-                            print error_string(ERROR_ACCESS_DENIED);
-                        } else {
-                            if( !is_blank( $u_email ) ) {
-                                print_email_link( $u_email, $u_email );
-                            } else {
-                                echo " - ";
-                            }
-                        } ?>
-                    </span></span>
-                            <span class="label-style"></span>
-                        </div>
-                        <div class="field-container">
-                            <span class="display-label"><span><?php echo lang_get( 'realname' ) ?></span></span>
-                    <span class="display-value"><span><?php
-                            if( ! ( $t_can_manage || $t_can_see_realname ) ) {
-                                print error_string(ERROR_ACCESS_DENIED);
-                            } else {
-                                echo string_display_line( $u_realname );
-                            } ?>
-                    </span></span>
-                            <span class="label-style"></span>
-                        </div>
-                    </fieldset>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-condensed table-striped">
+                            <fieldset>
+                                <tr>
+                                    <th class="category">
+                                        <?php echo lang_get( 'username' ) ?>
+                                    </th>
+                                    <td>
+                                        <?php echo string_display_line( $u_username ) ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="category">
+                                        <?php echo lang_get( 'email' ) ?>
+                                    </th>
+                                    <td>
+                                        <?php
+                                        if( ! ( $t_can_manage || $t_can_see_email ) ) {
+                                            print error_string(ERROR_ACCESS_DENIED);
+                                        } else {
+                                            if( !is_blank( $u_email ) ) {
+                                                print_email_link( $u_email, $u_email );
+                                            } else {
+                                                echo " - ";
+                                            }
+                                        } ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="category">
+                                        <?php echo lang_get( 'realname' ) ?>
+                                    </th>
+                                    <td>
+                                        <?php
+                                        if( ! ( $t_can_manage || $t_can_see_realname ) ) {
+                                            print error_string(ERROR_ACCESS_DENIED);
+                                        } else {
+                                            echo string_display_line( $u_realname );
+                                        } ?>
+                                    </td>
+                                </tr>
+                            </fieldset>
+                        </table>
+                    </div>
                 </div>
                 <div class="widget-toolbox padding-8 clearfix">
                     <?php if( $t_can_manage ) { ?>

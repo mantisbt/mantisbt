@@ -105,35 +105,47 @@ if( !$g_global_profiles ) {
 
                 <div class="widget-body">
                     <div class="widget-main no-padding">
-
-                        <fieldset>
-                            <?php  echo form_security_field( 'profile_update' )?>
-                            <input type="hidden" name="action" value="add" />
-                            <input type="hidden" name="user_id" value="<?php echo $t_user_id ?>" />
-
-                            <div class="field-container">
-                                <label for="platform" class="required"><span><?php echo lang_get( 'platform' ) ?></span></label>
-                                <span class="input"><input id="platform" type="text" name="platform" size="32" maxlength="32" /></span>
-                                <span class="label-style"></span>
-                            </div>
-                            <div class="field-container">
-                                <label for="os" class="required"><span><?php echo lang_get( 'os' ) ?></span></label>
-                                <span class="input"><input id="os" type="text" name="os" size="32" maxlength="32" /></span>
-                                <span class="label-style"></span>
-                            </div>
-                            <div class="field-container">
-                                <label for="os-version" class="required"><span><?php echo lang_get( 'os_version' ) ?></span></label>
-                                <span class="input"><input id="os-version" type="text" name="os_build" size="16" maxlength="16" /></span>
-                                <span class="label-style"></span>
-                            </div>
-                            <div class="field-container">
-                                <label for="description"><span><?php echo lang_get( 'additional_description' ) ?></span></label>
-                                <span class="textarea"><textarea class="form-control" id="description" name="description" cols="80" rows="8"></textarea></span>
-                                <span class="label-style"></span>
-                            </div>
-
-                        </fieldset>
-
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-condensed table-striped">
+                                <fieldset>
+                                    <?php  echo form_security_field( 'profile_update' )?>
+                                    <input type="hidden" name="action" value="add" />
+                                    <input type="hidden" name="user_id" value="<?php echo $t_user_id ?>" />
+                                    <tr>
+                                        <td class="category">
+                                            <span class="required">*</span> <?php echo lang_get( 'platform' ) ?>
+                                        </td>
+                                        <td>
+                                            <input id="platform" type="text" name="platform" size="32" maxlength="32" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="category">
+                                            <span class="required">*</span> <?php echo lang_get( 'os' ) ?>
+                                        </td>
+                                        <td>
+                                            <input id="os" type="text" name="os" size="32" maxlength="32" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="category">
+                                            <span class="required">*</span> <?php echo lang_get( 'os_version' ) ?>
+                                        </td>
+                                        <td>
+                                            <input id="os-version" type="text" name="os_build" size="16" maxlength="16" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="category">
+                                            <?php echo lang_get( 'additional_description' ) ?>
+                                        </td>
+                                        <td>
+                                            <textarea class="form-control" id="description" name="description" cols="80" rows="8"></textarea>
+                                        </td>
+                                    </tr>
+                                </fieldset>
+                            </table>
+                        </div>
                     </div>
                     <div class="widget-toolbox padding-8 clearfix">
                         <span class="required pull-right"> * required</span>
@@ -168,56 +180,67 @@ if( $t_profiles ) {
 
                 <div class="widget-body">
                     <div class="widget-main no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-condensed table-striped">
+                                <fieldset>
+                                    <?php  echo form_security_field( 'profile_update' )?>
 
-                        <fieldset>
-                            <?php  echo form_security_field( 'profile_update' )?>
-                            <div class="field-container">
-                                <label for="action-edit"><span><?php echo lang_get( 'edit_profile' ) ?></span></label>
-                                <div class="radio">
-                                    <label>
-                                        <input id="action-edit" type="radio" class="ace" name="action" value="edit" />
-                                        <span class="lbl"></span>
-                                    </label>
-                                </div>
-                                <span class="label-style"></span>
-                            </div>
-                            <?php
-                            if( !$g_global_profiles ) {
-                                ?>
-                                <div class="field-container">
-                                    <label for="action-default"><span><?php echo lang_get( 'make_default' ) ?></span></label>
-                                    <div class="radio">
-                                        <label>
-                                            <input id="action-default" type="radio" class="ace" name="action" value="make_default" />
-                                            <span class="lbl"></span>
-                                        </label>
-                                    </div>
-                                    <span class="label-style"></span>
-                                </div>
-                            <?php
-                            }
-                            ?>
-                            <div class="field-container">
-                                <label for="action-delete"><span><?php echo lang_get( 'delete_profile' ) ?></span></label>
-                                <div class="radio">
-                                    <label>
-                                        <input id="action-delete" type="radio" class="ace" name="action" value="delete" />
-                                        <span class="lbl"></span>
-                                    </label>
-                                </div>
-                                <span class="label-style"></span>
-                            </div>
-                            <div class="field-container">
-                                <label for="select-profile"><span><?php echo lang_get( 'select_profile' ) ?></span></label>
-                                <span class="input">
-                                    <select id="select-profile" name="profile_id">
-                                        <?php print_profile_option_list( $t_user_id, '', $t_profiles ) ?>
-                                    </select>
-                                </span>
-                                <span class="label-style"></span>
-                            </div>
-                        </fieldset>
+                                    <tr>
+                                        <td class="category">
+                                            <?php echo lang_get( 'edit_profile' ) ?>
+                                        </td>
+                                        <td>
+                                            <label>
+                                                <input id="action-edit" type="radio" class="ace" name="action" value="edit" />
+                                                <span class="lbl"></span>
+                                            </label>
+                                        </td>
+                                    </tr>
 
+                                    <?php
+                                    if( !$g_global_profiles ) {
+                                        ?>
+
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'make_default' ) ?>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    <input id="action-default" type="radio" class="ace" name="action" value="make_default" />
+                                                    <span class="lbl"></span>
+                                                </label>
+                                            </td>
+                                        </tr>
+
+                                    <?php
+                                    }
+                                    ?>
+
+                                    <tr>
+                                        <td class="category">
+                                            <?php echo lang_get( 'delete_profile' ) ?>
+                                        </td>
+                                        <td>
+                                            <label>
+                                                <input id="action-delete" type="radio" class="ace" name="action" value="delete" />
+                                                <span class="lbl"></span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="category">
+                                            <?php echo lang_get( 'select_profile' ) ?>
+                                        </td>
+                                        <td>
+                                            <select id="select-profile" name="profile_id">
+                                                <?php print_profile_option_list( $t_user_id, '', $t_profiles ) ?>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </fieldset>
+                            </table>
+                        </div>
                     </div>
                     <div class="widget-toolbox padding-8 clearfix">
                         <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'submit_button' ) ?>" />

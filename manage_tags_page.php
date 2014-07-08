@@ -206,23 +206,30 @@ print_manage_menu( 'manage_tags_page.php' );
                 <a name="tagcreate"></a>
                 <div class="widget-main no-padding">
                     <div class="form-container">
-
-                        <fieldset>
-                            <?php echo form_security_field( 'tag_create' ); ?>
-                            <div class="field-container">
-                                <label for="tag-name" class="required"><span><?php echo lang_get( 'tag_name' ) ?></span></label>
-				                <span class="input"><input type="text" id="tag-name" name="name"  size="40" maxlength="100" />
-				                    <small><?php echo sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) ); ?></small>
-				                </span>
-                                <span class="label-style"></span>
-                            </div>
-                            <div class="field-container">
-                                <label for="tag-description"><span><?php echo lang_get( 'tag_description' ) ?></span></label>
-                                <span class="textarea"><textarea class="form-control" id="tag-description" class="form-control" name="description" cols="80" rows="6"></textarea></span>
-                                <span class="label-style"></span>
-                            </div>
-                        </fieldset>
-
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-condensed table-striped">
+                                <fieldset>
+                                    <?php echo form_security_field( 'tag_create' ); ?>
+                                    <tr>
+                                        <td class="category">
+                                            <span class="required">*</span> <?php echo lang_get( 'tag_name' ) ?>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="tag-name" name="name"  size="40" maxlength="100" />
+                                            <small><?php echo sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) ); ?></small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="category">
+                                            <?php echo lang_get( 'tag_description' ) ?>
+                                        </td>
+                                        <td>
+                                            <textarea class="form-control" id="tag-description" class="form-control" name="description" cols="80" rows="6"></textarea>
+                                        </td>
+                                    </tr>
+                                </fieldset>
+                            </table>
+                        </div>
                     </div>
                 </div>
 

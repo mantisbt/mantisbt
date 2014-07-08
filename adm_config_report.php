@@ -489,80 +489,86 @@ if( $t_read_write_access ) {
                 <div class="widget-main no-padding">
 
                     <div id="config-edit-div" class="form-container">
-                        <fieldset>
-                            <?php echo form_security_field( 'adm_config_set' ) ?>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-condensed table-striped">
+                                <fieldset>
+                                    <?php echo form_security_field( 'adm_config_set' ) ?>
 
-                            <!-- Username -->
-                            <div class="field-container">
-                                <label for="config-user-id"><span><?php echo lang_get( 'username' ) ?></span></label>
-			                <span class="select">
-				                <select id="config-user-id" name="user_id">
-                                    <option value="<?php echo ALL_USERS; ?>"
-                                        <?php check_selected( $t_edit_user_id, ALL_USERS ) ?>>
-                                        <?php echo lang_get( 'all_users' ); ?>
-                                    </option>
-                                    <?php print_user_option_list( $t_edit_user_id ) ?>
-                                </select>
-			                </span>
-                                <span class="label-style"></span>
-                            </div>
+                                    <!-- Username -->
+                                    <tr>
+                                        <td class="category">
+                                            <?php echo lang_get( 'username' ) ?>
+                                        </td>
+                                        <td>
+                                            <select id="config-user-id" name="user_id">
+                                                <option value="<?php echo ALL_USERS; ?>"
+                                                    <?php check_selected( $t_edit_user_id, ALL_USERS ) ?>>
+                                                    <?php echo lang_get( 'all_users' ); ?>
+                                                </option>
+                                                <?php print_user_option_list( $t_edit_user_id ) ?>
+                                            </select>
+                                        </td>
+                                    </tr>
 
-                            <!-- Project -->
-                            <div class="field-container">
-                                <label for="config-project-id"><span><?php echo lang_get( 'project_name' ) ?></span></label>
-				            <span class="select">
-					            <select id="config-project-id" name="project_id">
-                                    <option value="<?php echo ALL_PROJECTS; ?>"
-                                        <?php check_selected( $t_edit_project_id, ALL_PROJECTS ); ?>>
-                                        <?php echo lang_get( 'all_projects' ); ?>
-                                    </option>
-                                    <?php print_project_option_list( $t_edit_project_id, false ) ?>
-                                </select>
-				            </span>
-                                <span class="label-style"></span>
-                            </div>
+                                    <!-- Project -->
+                                    <tr>
+                                        <td class="category">
+                                            <?php echo lang_get( 'project_name' ) ?>
+                                        </td>
+                                        <td>
+                                            <select id="config-project-id" name="project_id">
+                                                <option value="<?php echo ALL_PROJECTS; ?>"
+                                                    <?php check_selected( $t_edit_project_id, ALL_PROJECTS ); ?>>
+                                                    <?php echo lang_get( 'all_projects' ); ?>
+                                                </option>
+                                                <?php print_project_option_list( $t_edit_project_id, false ) ?>
+                                            </select>
+                                        </td>
+                                    </tr>
 
-                            <!-- Config option name -->
-                            <div class="field-container">
-                                <label for="config-option"><span><?php echo lang_get( 'configuration_option' ) ?></span></label>
-				            <span class="input">
-					            <input type="text" name="config_option"
-                                       value="<?php echo $t_edit_option; ?>"
-                                       size="64" maxlength="64" />
-				            </span>
-                                <span class="label-style"></span>
-                            </div>
+                                    <!-- Config option name -->
+                                    <tr>
+                                        <td class="category">
+                                            <?php echo lang_get( 'configuration_option' ) ?>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="config_option"
+                                                   value="<?php echo $t_edit_option; ?>"
+                                                   size="64" maxlength="64" />
+                                        </td>
+                                    </tr>
 
-                            <!-- Option type -->
-                            <div class="field-container">
-                                <label for="config-type"><span><?php echo lang_get( 'configuration_option_type' ) ?></span></label>
-				            <span class="select">
-					            <select id="config-type" name="type">
-                                    <?php print_option_list_from_array( $t_config_types, $t_edit_type ); ?>
-                                </select>
-				            </span>
-                                <span class="label-style"></span>
-                            </div>
+                                    <!-- Option type -->
+                                    <tr>
+                                        <td class="category">
+                                            <?php echo lang_get( 'configuration_option_type' ) ?>
+                                        </td>
+                                        <td>
+                                            <select id="config-type" name="type">
+                                                <?php print_option_list_from_array( $t_config_types, $t_edit_type ); ?>
+                                            </select>
+                                        </td>
+                                    </tr>
 
-                            <!-- Option Value -->
-                            <div class="field-container">
-                                <label for="config-value"><span><?php echo lang_get( 'configuration_option_value' ) ?></span></label>
-				            <span class="textarea">
-					            <textarea class="form-control" name="value" cols="80" rows="10"><?php
-                                    print_config_value_as_string( $t_edit_type, $t_edit_value, false );
-                                    ?></textarea>
-				            </span>
-                                <span class="label-style"></span>
-                            </div>
-                        </fieldset>
+                                    <!-- Option Value -->
+                                    <tr>
+                                        <td class="category">
+                                            <?php echo lang_get( 'configuration_option_value' ) ?>
+                                        </td>
+                                        <td>
+                                            <textarea class="form-control" name="value" cols="80" rows="10"><?php
+                                                print_config_value_as_string( $t_edit_type, $t_edit_value, false );
+                                                ?></textarea>
+                                        </td>
+                                    </tr>
+                                </fieldset>
+                            </table>
+                        </div>
 
                     </div>
                     <div class="widget-toolbox padding-4 clearfix">
-                        <!-- Submit button -->
-                <span class="submit-button">
-                    <input type="submit" name="config_set" class="btn btn-primary btn-white btn-round"
-                           value="<?php echo lang_get('set_configuration_option') ?>"/>
-                </span>
+                        <input type="submit" name="config_set" class="btn btn-primary btn-white btn-round"
+                               value="<?php echo lang_get('set_configuration_option') ?>"/>
                     </div>
                 </div>
             </div>

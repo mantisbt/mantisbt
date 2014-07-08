@@ -98,38 +98,55 @@ if( $t_account_page ) {
 
                 <div class="widget-body">
                     <div class="widget-main no-padding">
-                        <fieldset class="">
-
-                            <?php echo form_security_field( 'manage_config_columns_set' ) ?>
-                            <input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
-                            <input type="hidden" name="form_page" value="<?php echo $t_account_page ? 'account' : 'manage'; ?>" />
-
-                            <div class="field-container">
-                                <label for="all-columns"><span><?php echo lang_get( 'all_columns_title' )?></span></label>
-                                <span class="textarea"><textarea class="form-control"  id="all-columns" <?php echo helper_get_tab_index() ?> name="all_columns" readonly="readonly" cols="80" rows="5"><?php echo $t_all ?></textarea></span>
-                                <span class="label-style"></span>
-                            </div>
-                            <div class="field-container">
-                                <label for="view-issues-columns" class="required"><span><?php echo lang_get( 'view_issues_columns_title' )?></span></label>
-                                <span class="textarea"><textarea class="form-control" id="view-issues-columns" <?php echo helper_get_tab_index() ?> name="view_issues_columns" cols="80" rows="5"><?php echo $t_view_issues ?></textarea></span>
-                                <span class="label-style"></span>
-                            </div>
-                            <div class="field-container">
-                                <label for="print-issues-columns" class="required"><span><?php echo lang_get( 'print_issues_columns_title' )?></span></label>
-                                <span class="textarea"><textarea class="form-control" id="print-issues-columns" <?php echo helper_get_tab_index() ?> name="print_issues_columns" cols="80" rows="5"><?php echo $t_print_issues ?></textarea></span>
-                                <span class="label-style"></span>
-                            </div>
-                            <div class="field-container">
-                                <label for="csv-columns" class="required"><span><?php echo lang_get( 'csv_columns_title' )?></span></label>
-                                <span class="textarea"><textarea class="form-control" id="csv-columns" <?php echo helper_get_tab_index() ?> name="csv_columns" cols="80" rows="5"><?php echo $t_csv ?></textarea></span>
-                                <span class="label-style"></span>
-                            </div>
-                            <div class="field-container">
-                                <label for="excel-columns" class="required"><span><?php echo lang_get( 'excel_columns_title' )?></span></label>
-                                <span class="textarea"><textarea class="form-control" id="excel-columns" <?php echo helper_get_tab_index() ?> name="excel_columns" cols="80" rows="5"><?php echo $t_excel ?></textarea></span>
-                                <span class="label-style"></span>
-                            </div>
-                        </fieldset>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-condensed table-striped">
+                                <fieldset>
+                                    <?php echo form_security_field( 'manage_config_columns_set' ) ?>
+                                    <input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
+                                    <input type="hidden" name="form_page" value="<?php echo $t_account_page ? 'account' : 'manage'; ?>" />
+                                    <tr>
+                                        <td class="category">
+                                            <?php echo lang_get( 'all_columns_title' )?>
+                                        </td>
+                                        <td>
+                                            <textarea class="form-control"  id="all-columns" <?php echo helper_get_tab_index() ?> name="all_columns" readonly="readonly" cols="80" rows="5"><?php echo $t_all ?></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="category">
+                                            <?php echo lang_get( 'view_issues_columns_title' )?>
+                                        </td>
+                                        <td>
+                                            <textarea class="form-control" id="view-issues-columns" <?php echo helper_get_tab_index() ?> name="view_issues_columns" cols="80" rows="5"><?php echo $t_view_issues ?></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="category">
+                                            <?php echo lang_get( 'print_issues_columns_title' )?>
+                                        </td>
+                                        <td>
+                                            <textarea class="form-control" id="print-issues-columns" <?php echo helper_get_tab_index() ?> name="print_issues_columns" cols="80" rows="5"><?php echo $t_print_issues ?></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="category">
+                                            <?php echo lang_get( 'csv_columns_title' )?>
+                                        </td>
+                                        <td>
+                                            <textarea class="form-control" id="csv-columns" <?php echo helper_get_tab_index() ?> name="csv_columns" cols="80" rows="5"><?php echo $t_csv ?></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="category">
+                                            <?php echo lang_get( 'excel_columns_title' )?>
+                                        </td>
+                                        <td>
+                                            <textarea class="form-control" id="excel-columns" <?php echo helper_get_tab_index() ?> name="excel_columns" cols="80" rows="5"><?php echo $t_excel ?></textarea>
+                                        </td>
+                                    </tr>
+                                </fieldset>
+                            </table>
+                        </div>
                     </div>
                     <div class="widget-toolbox padding-8 clearfix">
                         <span class="required pull-right"> * required</span>
@@ -148,7 +165,7 @@ if( $t_account_page ) {
                         } ?>
                     </div>
                 </div>
-            </div>
+        </div>
         </form>
     </div>
 

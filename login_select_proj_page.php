@@ -78,31 +78,39 @@ layout_page_begin();
                     </div>
                     <div class="widget-body">
                         <div class="widget-main no-padding">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-condensed table-striped">
 
-                            <fieldset>
-                                <input type="hidden" name="ref" value="<?php echo string_html_specialchars( $f_ref ) ?>" />
-                                <div class="field-container">
-                                    <label for="select-project-id"><span><?php echo lang_get( 'select_project_button' ) ?></span></label>
-                                <span class="select">
-                                    <select id="select-project-id" name="project_id" >
-                                        <?php print_project_option_list( ALL_PROJECTS, false, null, true, true ) ?>
-                                    </select>
-                                </span>
-                                    <span class="label-style"></span>
-                                </div>
-                                <div class="field-container">
-                                    <label for="set-default"><span><?php echo lang_get( 'make_default' ) ?></span></label>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" class="ace" id="set-default" name="make_default" />
-                                            <span class="lbl"></span>
-                                        </label>
-                                    </div>
-                                    <span class="label-style"></span>
-                                </div>
-                            </fieldset>
+                                    <fieldset>
+                                        <input type="hidden" name="ref" value="<?php echo string_html_specialchars( $f_ref ) ?>" />
+
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'select_project_button' ) ?>
+                                            </td>
+                                            <td>
+                                                <select id="select-project-id" name="project_id" >
+                                                    <?php print_project_option_list( ALL_PROJECTS, false, null, true, true ) ?>
+                                                </select>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'make_default' ) ?>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    <input type="checkbox" class="ace" id="set-default" name="make_default" />
+                                                    <span class="lbl"></span>
+                                                </label>
+                                            </td>
+                                        </tr>
+
+                                    </fieldset>
+                                </table>
+                            </div>
                         </div>
-
                         <div class="widget-toolbox padding-8 clearfix">
                             <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'select_project_button') ?>" />
                         </div>

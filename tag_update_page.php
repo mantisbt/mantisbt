@@ -94,48 +94,60 @@ layout_page_begin();
                                 false, 'btn btn-sm btn-primary btn-white btn-round pull-right' ); ?>
                         </div>
                         <div class="form-container">
-                            <fieldset>
-                                <input type="hidden" name="tag_id" value="<?php echo $f_tag_id ?>"/>
-                                <?php echo form_security_field( 'tag_update' ) ?>
-                                <div class="field-container">
-                                    <span class="display-label"><span><?php echo lang_get( 'tag_id' ) ?></span></span>
-                                    <span class="display-value"><span><?php echo $t_tag_row['id'] ?></span></span>
-                                    <span class="label-style"></span>
-                                </div>
-                                <div class="field-container">
-                                    <label for="tag-name"><span><?php echo lang_get( 'tag_name' ) ?></span></label>
-                                    <span class="input"><input type="text" <?php echo helper_get_tab_index() ?> id="tag-name" name="name" value="<?php echo $t_name ?>"/></span>
-                                    <span class="label-style"></span>
-                                </div>
-                                <div class="field-container">
-                                    <?php
-                                    if( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
-                                        echo '<label for="tag-user-id"><span>', lang_get( 'tag_creator' ), '</span></label>';
-                                        echo '<span class="select"><select ', helper_get_tab_index(), ' id="tag-user-id" name="user_id">';
-                                        print_user_option_list( (int)$t_tag_row['user_id'], ALL_PROJECTS, (int)config_get( 'tag_create_threshold' ) );
-                                        echo '</select></span>';
-                                    } else { ?>
-                                        <span class="display-label"><span><?php echo lang_get( 'tag_creator' ); ?></span></span>
-                                        <span class="display-value"><span><?php echo string_display_line( user_get_name($t_tag_row['user_id']) ); ?></span></span><?php
-                                    } ?>
-                                    <span class="label-style"></span>
-                                </div>
-                                <div class="field-container">
-                                    <span class="display-label"><span><?php echo lang_get( 'tag_created' ) ?></span></span>
-                                    <span class="display-value"><span><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></span></span>
-                                    <span class="label-style"></span>
-                                </div>
-                                <div class="field-container">
-                                    <span class="display-label"><span><?php echo lang_get( 'tag_updated' ) ?></span></span>
-                                    <span class="display-value"><span><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></span></span>
-                                    <span class="label-style"></span>
-                                </div>
-                                <div class="field-container">
-                                    <label for="tag-description"><span><?php echo lang_get( 'tag_description' ) ?></span></label>
-                                    <span class="textarea"><textarea class="form-control" id="tag-description" name="description" <?php echo helper_get_tab_index() ?> cols="80" rows="6"><?php echo string_textarea( $t_description ) ?></textarea></span>
-                                    <span class="label-style"></span>
-                                </div>
-                            </fieldset>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-condensed table-striped">
+                                    <fieldset>
+                                        <input type="hidden" name="tag_id" value="<?php echo $f_tag_id ?>"/>
+                                        <?php echo form_security_field( 'tag_update' ) ?>
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'tag_id' ) ?>
+                                            </td>
+                                            <td><?php echo $t_tag_row['id'] ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'tag_name' ) ?>
+                                            </td>
+                                            <td>
+                                                <input type="text" <?php echo helper_get_tab_index() ?> id="tag-name" name="name" value="<?php echo $t_name ?>"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <?php
+                                            if( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
+                                                echo '<td class="category">', lang_get( 'tag_creator' ), '</td>';
+                                                echo '<td><select ', helper_get_tab_index(), ' id="tag-user-id" name="user_id">';
+                                                print_user_option_list( (int)$t_tag_row['user_id'], ALL_PROJECTS, (int)config_get( 'tag_create_threshold' ) );
+                                                echo '</select></td>';
+                                            } else { ?>
+                                                <td class="category"><?php echo lang_get( 'tag_creator' ); ?></td>
+                                                <td><?php echo string_display_line( user_get_name($t_tag_row['user_id']) ); ?></td><?php
+                                            } ?>
+                                        </tr>
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'tag_created' ) ?>
+                                            </td>
+                                            <td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'tag_updated' ) ?>
+                                            </td>
+                                            <td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'tag_description' ) ?>
+                                            </td>
+                                            <td>
+                                                <textarea class="form-control" id="tag-description" name="description" <?php echo helper_get_tab_index() ?> cols="80" rows="6"><?php echo string_textarea( $t_description ) ?></textarea>
+                                            </td>
+                                        </tr>
+                                    </fieldset>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

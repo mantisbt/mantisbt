@@ -385,10 +385,10 @@ function layout_navbar() {
 
     # mobile view
     echo '<div class="hidden-sm hidden-md hidden-lg">';
-    echo '<div class="navbar-buttons navbar-header pull-right navbar-collapse collapse">';
+    echo '<nav class="navbar-menu pull-left navbar-collapse collapse" role="navigation" style="height: auto;">';
     echo '<ul class="nav navbar-nav">';
-    layout_navbar_projects_menu();
     layout_navbar_user_menu( false );
+    layout_navbar_projects_menu();
     echo '</ul>';
     echo '</div>';
     echo '</div>';

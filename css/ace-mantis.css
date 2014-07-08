@@ -120,6 +120,27 @@ pre {
     position: relative;
 }
 
+.ace-nav .nav-user-photo {
+    border-radius: 4px !important;
+}
+.profile-activity img {
+    border-radius: 4px !important;
+    margin-bottom: 6px !important;
+}
+
+.table-responsive {
+    margin-bottom: 0 !important;
+}
+
+.avatar
+{
+    border: 2px solid #c9d6e5;
+    border-radius: 4px;
+    box-shadow: none;
+    margin:0;
+    max-width: 80px;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .page-content {

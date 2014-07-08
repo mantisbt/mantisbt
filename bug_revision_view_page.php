@@ -161,9 +161,8 @@ layout_page_begin();
 ?>
 
     <br/>
-    <div class="table-container">
-        <table class="width100" cellspacing="1">
-
+    <div class="table-responsive">
+        <table class="table table-bordered table-condensed table-striped">
             <tr>
                 <td class="form-title" colspan="2"><?php echo lang_get( 'view_revisions' ), ': ', $t_title ?></td>
                 <td class="right" colspan="2">

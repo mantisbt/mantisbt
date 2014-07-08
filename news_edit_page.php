@@ -106,52 +106,66 @@ layout_page_begin( 'main_page.php' );
                     </div>
                     <div class="widget-body">
                         <div class="widget-main no-padding">
-                            <fieldset>
-                                <?php echo form_security_field( 'news_update' ); ?>
-                                <input type="hidden" name="news_id" value="<?php echo $v_id ?>" />
-                                <div class="field-container">
-                                    <label for="news-update-headline" class="required"><span><?php echo lang_get( 'headline' ) ?></span></label>
-                                    <span class="input"><input type="text" id="news-update-headline" name="headline" size="64" maxlength="64" value="<?php echo $v_headline ?>" /></span>
-                                    <span class="label-style"></span>
-                                </div>
-                                <div class="field-container">
-                                    <label for="news-update-body" class="required"><span><?php echo lang_get( 'body' ) ?></span></label>
-                                    <span class="textarea"><textarea class="form-control" id="news-update-body" name="body" cols="60" rows="10"><?php echo $v_body ?></textarea></span>
-                                    <span class="label-style"></span>
-                                </div>
-                                <div class="field-container">
-                                    <label for=""><span><?php echo lang_get( 'post_to' ) ?></span></label>
-                                <span class="select">
-                                    <select name="project_id"><?php
-                                        $t_sitewide = false;
-                                        if( current_user_is_administrator() ) {
-                                            $t_sitewide = true;
-                                        }
-                                        print_project_option_list( $v_project_id, $t_sitewide ); ?>
-                                    </select>
-                                </span>
-                                    <span class="label-style"></span>
-                                </div>
-                                <div class="field-container">
-                                    <label for="news-update-announcement"><span><?php echo lang_get( 'announcement' ) ?></span> <span class="help-text"><?php echo lang_get( 'stays_on_top' ) ?></span></label>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" class="ace" id="news-update-announcement" name="announcement" <?php check_checked( (int)$v_announcement, 1 ); ?> />
-                                            <span class="lbl"></span>
-                                        </label>
-                                    </div>
-                                    <span class="label-style"></span>
-                                </div>
-                                <div class="field-container">
-                                    <label for=""><span><?php echo lang_get( 'view_status' ) ?></span></label>
-                                <span class="select">
-                                    <select name="view_state">
-                                        <?php print_enum_string_option_list( 'view_state', $v_view_state ) ?>
-                                    </select>
-                                </span>
-                                    <span class="label-style"></span>
-                                </div>
-                            </fieldset>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-condensed table-striped">
+
+                                    <fieldset>
+                                        <?php echo form_security_field( 'news_update' ); ?>
+                                        <input type="hidden" name="news_id" value="<?php echo $v_id ?>" />
+                                        <tr>
+                                            <td class="category">
+                                                <span class="required">*</span> <?php echo lang_get( 'headline' ) ?>
+                                            </td>
+                                            <td>
+                                                <input type="text" id="news-update-headline" name="headline" size="64" maxlength="64" value="<?php echo $v_headline ?>" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="category">
+                                                <span class="required">*</span> <?php echo lang_get( 'body' ) ?>
+                                            </td>
+                                            <td>
+                                                <textarea class="form-control" id="news-update-body" name="body" cols="60" rows="10"><?php echo $v_body ?></textarea>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'post_to' ) ?>
+                                            </td>
+                                            <td>
+                                                <select name="project_id"><?php
+                                                    $t_sitewide = false;
+                                                    if( current_user_is_administrator() ) {
+                                                        $t_sitewide = true;
+                                                    }
+                                                    print_project_option_list( $v_project_id, $t_sitewide ); ?>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'announcement' ) ?> <span class="help-text"><?php echo lang_get( 'stays_on_top' ) ?></span>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    <input type="checkbox" class="ace" id="news-update-announcement" name="announcement" <?php check_checked( (int)$v_announcement, 1 ); ?> />
+                                                    <span class="lbl"></span>
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'view_status' ) ?>
+                                            </td>
+                                            <td>
+                                                <select name="view_state">
+                                                    <?php print_enum_string_option_list( 'view_state', $v_view_state ) ?>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </fieldset>
+                                </table>
+                            </div>
                         </div>
                         <div class="widget-toolbox padding-8 clearfix">
                             <span class="required pull-right"> * required</span>

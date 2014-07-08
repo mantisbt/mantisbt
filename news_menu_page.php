@@ -66,38 +66,50 @@ layout_page_begin( 'main_page.php' );
                     </div>
                     <div class="widget-body">
                         <div class="widget-main no-padding">
-                            <fieldset>
-                                <?php echo form_security_field( 'news_add' ); ?>
-                                <div class="field-container">
-                                    <label for="news-headline" class="required"><span><?php echo lang_get( 'headline' ) ?></span></label>
-                                    <span class="input"><input type="text" id="news-headline" name="headline" size="64" maxlength="64" /></span>
-                                    <span class="label-style"></span>
-                                </div>
-                                <div class="field-container">
-                                    <label for="news-body" class="required"><span><?php echo lang_get( 'body' ) ?></span></label>
-                                    <span class="textarea"><textarea class="form-control" id="news-body" name="body" cols="60" rows="8"></textarea></span>
-                                    <span class="label-style"></span>
-                                </div>
-                                <div class="field-container">
-                                    <label for="news-announcement"><span><?php echo lang_get( 'announcement' ) ?></span> <span class="help-text"><?php echo lang_get( 'stays_on_top' ) ?></span></label>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" class="ace" id="news-announcement" name="announcement" />
-                                            <span class="lbl"></span>
-                                        </label>
-                                    </div>
-                                    <span class="label-style"></span>
-                                </div>
-                                <div class="field-container">
-                                    <label for="news-view-status"><span><?php echo lang_get( 'view_status' ) ?></span></label>
-                                <span class="select">
-                                    <select id="news-view-status" name="view_state">
-                                        <?php print_enum_string_option_list( 'view_state' ) ?>
-                                    </select>
-                                </span>
-                                    <span class="label-style"></span>
-                                </div>
-                            </fieldset>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-condensed table-striped">
+                                    <fieldset>
+                                        <?php echo form_security_field( 'news_add' ); ?>
+                                        <tr>
+                                            <td class="category">
+                                                <span class="required">*</span> <?php echo lang_get( 'headline' ) ?>
+                                            </td>
+                                            <td>
+                                                <input type="text" id="news-headline" name="headline" size="64" maxlength="64" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="category">
+                                                <span class="required">*</span> <?php echo lang_get( 'body' ) ?>
+                                            </td>
+                                            <td>
+                                                <textarea class="form-control" id="news-body" name="body" cols="60" rows="8"></textarea>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'announcement' ) ?> <span class="help-text"><?php echo lang_get( 'stays_on_top' ) ?></span>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    <input type="checkbox" class="ace" id="news-announcement" name="announcement" />
+                                                    <span class="lbl"></span>
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'view_status' ) ?>
+                                            </td>
+                                            <td>
+                                                <select id="news-view-status" name="view_state">
+                                                    <?php print_enum_string_option_list( 'view_state' ) ?>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </fieldset>
+                                </table>
+                            </div>
                         </div>
                         <div class="widget-toolbox padding-8 clearfix">
                             <span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>
@@ -126,38 +138,45 @@ if( news_get_count( helper_get_current_project(), current_user_is_administrator(
                     </div>
                     <div class="widget-body">
                         <div class="widget-main no-padding">
-                            <fieldset>
-                                <?php echo form_security_field( 'news_delete' ); ?>
-                                <div class="field-container">
-                                    <label for="news-edit-action"><span><?php echo lang_get( 'edit_post' ) ?></span></label>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" class="ace" id="news-edit-action" name="action" value="edit" checked="checked">
-                                            <span class="lbl"></span>
-                                        </label>
-                                    </div>
-                                    <span class="label-style"></span>
-                                </div>
-                                <div class="field-container">
-                                    <label for="news-delete-action"><span><?php echo lang_get( 'delete_post' ) ?></span></label>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" class="ace" id="news-delete-action" name="action" value="delete">
-                                            <span class="lbl"></span>
-                                        </label>
-                                    </div>
-                                    <span class="label-style"></span>
-                                </div>
-                                <div class="field-container">
-                                    <label for="news-edit-id"><span><?php echo lang_get( 'select_post' ) ?></span></label>
-                                    <span class="input">
-                                        <select id="news-edit-id" name="news_id">
-                                            <?php print_news_item_option_list() ?>
-                                        </select>
-                                    </span>
-                                    <span class="label-style"></span>
-                                </div>
-                            </fieldset>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-condensed table-striped">
+                                    <fieldset>
+                                        <?php echo form_security_field( 'news_delete' ); ?>
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'edit_post' ) ?>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    <input type="radio" class="ace" id="news-edit-action" name="action" value="edit" checked="checked">
+                                                    <span class="lbl"></span>
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'delete_post' ) ?>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    <input type="radio" class="ace" id="news-delete-action" name="action" value="delete">
+                                                    <span class="lbl"></span>
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'select_post' ) ?>
+                                            </td>
+                                            <td>
+                                                <select id="news-edit-id" name="news_id">
+                                                    <?php print_news_item_option_list() ?>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </fieldset>
+                                </table>
+                            </div>
                         </div>
                         <div class="widget-toolbox padding-8 clearfix">
                             <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'submit_button' ) ?>" />

@@ -87,67 +87,77 @@ layout_page_begin();
                             sprintf( lang_get( 'tag_filter_default' ), tag_stats_attached( $f_tag_id ) ),
                             false, 'btn btn-primary btn-sm btn-white btn-round pull-right'); ?>
                     </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-condensed table-striped">
 
-                    <div id="tag-view-div" class="form-container">
-                        <div class="field-container">
-                            <span class="display-label"><span><?php echo lang_get( 'tag_id' ) ?></span></span>
-                            <span class="display-value"><span><?php echo $t_tag_row['id'] ?></span></span>
-                            <span class="label-style"></span>
-                        </div>
-                        <div class="field-container">
-                            <span class="display-label"><span><?php echo lang_get( 'tag_name' ) ?></span></span>
-                            <span class="display-value"><span><?php echo $t_name ?></span></span>
-                            <span class="label-style"></span>
-                        </div>
-                        <div class="field-container">
-                            <span class="display-label"><span><?php echo lang_get( 'tag_creator' ) ?></span></span>
-                            <span class="display-value"><span><?php echo string_display_line( user_get_name($t_tag_row['user_id']) ) ?></span></span>
-                            <span class="label-style"></span>
-                        </div>
-                        <div class="field-container">
-                            <span class="display-label"><span><?php echo lang_get( 'tag_created' ) ?></span></span>
-                            <span class="display-value"><span><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></span></span>
-                            <span class="label-style"></span>
-                        </div>
-                        <div class="field-container">
-                            <span class="display-label"><span><?php echo lang_get( 'tag_updated' ) ?></span></span>
-                            <span class="display-value"><span><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></span></span>
-                            <span class="label-style"></span>
-                        </div>
-                        <div class="field-container">
-                            <span class="display-label"><span><?php echo lang_get( 'tag_description' ) ?></span></span>
-                            <span class="display-value"><span><?php echo $t_description ?></span></span>
-                            <span class="label-style"></span>
-                        </div>
+                            <tr>
+                                <td class="category">
+                                    <?php echo lang_get( 'tag_id' ) ?>
+                                </td>
+                                <td><?php echo $t_tag_row['id'] ?></td>
+                            </tr>
+                            <tr>
+                                <td class="category">
+                                    <?php echo lang_get( 'tag_name' ) ?>
+                                </td>
+                                <td><?php echo $t_name ?></td>
+                            </tr>
+                            <tr>
+                                <td class="category">
+                                    <?php echo lang_get( 'tag_creator' ) ?>
+                                </td>
+                                <td><?php echo string_display_line( user_get_name($t_tag_row['user_id']) ) ?></td>
+                            </tr>
+                            <tr>
+                                <td class="category">
+                                    <?php echo lang_get( 'tag_created' ) ?>
+                                </td>
+                                <td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></td>
+                            </tr>
+                            <tr>
+                                <td class="category">
+                                    <?php echo lang_get( 'tag_updated' ) ?>
+                                </td>
+                                <td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></td>
+                            </tr>
+                            <tr>
+                                <td class="category">
+                                    <?php echo lang_get( 'tag_description' ) ?>
+                                </td>
+                                <td><?php echo $t_description ?></td>
+                            </tr>
 
-                        <?php
-                        # Related tags
+                            <?php
+                            # Related tags
 
-                        $t_tags_related = tag_stats_related( $f_tag_id );
-                        if( count( $t_tags_related ) ) {
-                        ?>
-                        <div class="field-container">
-                            <span class="display-label"><span><?php echo lang_get( 'tag_related' ); ?></span></span>
-                        <span class="display-value">
-                            <table id="related-tags" class="tag-list">
-                                <?php
-                                foreach( $t_tags_related as $t_tag ) {
-                                    $t_name = string_display_line( $t_tag['name'] );
-                                    $t_description = string_display_line( $t_tag['description'] );
-                                    $t_count = $t_tag['count'];
-                                    $t_link = string_html_specialchars( 'search.php?tag_string='.urlencode("+$t_tag_row[name]".config_get('tag_separator')."+$t_name") );
-                                    $t_label = sprintf( lang_get( 'tag_related_issues' ), $t_tag['count'] ); ?>
-                                    <tr>
-                                        <td><span class="tag-link"><a href="tag_view_page.php?tag_id=<?php echo $t_tag['id']; ?>" title="<?php echo $t_description; ?>"><?php echo $t_name; ?></a></span></td>
-                                        <td><span class="tag-filter"><a href="<?php echo $t_link; ?>"><?php echo $t_label; ?></a></span></td>
-                                    </tr>
-                                <?php
-                                }
-                                ?>
-                            </table>
-                        </span>
-                            <span class="label-style"></span>
-                        </div>
+                            $t_tags_related = tag_stats_related( $f_tag_id );
+                            if( count( $t_tags_related ) ) {
+                            ?>
+
+                            <tr>
+                                <td class="category">
+                                    <?php echo lang_get( 'tag_related' ) ?>
+                                </td>
+                                <td>
+                                    <table id="related-tags" class="tag-list">
+                                        <?php
+                                        foreach( $t_tags_related as $t_tag ) {
+                                            $t_name = string_display_line( $t_tag['name'] );
+                                            $t_description = string_display_line( $t_tag['description'] );
+                                            $t_count = $t_tag['count'];
+                                            $t_link = string_html_specialchars( 'search.php?tag_string='.urlencode("+$t_tag_row[name]".config_get('tag_separator')."+$t_name") );
+                                            $t_label = sprintf( lang_get( 'tag_related_issues' ), $t_tag['count'] ); ?>
+                                            <tr>
+                                                <td><span class="tag-link"><a href="tag_view_page.php?tag_id=<?php echo $t_tag['id']; ?>" title="<?php echo $t_description; ?>"><?php echo $t_name; ?></a></span></td>
+                                                <td><span class="tag-filter"><a href="<?php echo $t_link; ?>"><?php echo $t_label; ?></a></span></td>
+                                            </tr>
+                                        <?php
+                                        }
+                                        ?>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                     <?php
                     }
@@ -179,6 +189,7 @@ layout_page_begin();
                         </div>
                     <?php
                     } ?>
+
                 </div>
             </div>
         </div>

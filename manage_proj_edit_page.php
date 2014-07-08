@@ -106,75 +106,101 @@ print_manage_menu( 'manage_proj_page.php' );
 
                     <div class="widget-body">
                         <div class="widget-main no-padding">
-                            <fieldset>
-                                <?php echo form_security_field( 'manage_proj_update' ) ?>
-                                <input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-                                <div class="field-container">
-                                    <label for="project-name" class="required"><span><?php echo lang_get( 'project_name' ) ?></span></label>
-                                    <span class="input"><input type="text" id="project-name" name="name" size="60" maxlength="128" value="<?php echo string_attribute( $t_row['name'] ) ?>" /></span>
-                                    <span class="label-style"></span>
-                                </div>
-                                <div class="field-container">
-                                    <label for="project-status"><span><?php echo lang_get( 'status' ) ?></span></label>
-                                <span class="select">
-                                    <select id="project-status" name="status">
-                                        <?php print_enum_string_option_list( 'project_status', (int)$t_row['status'] ) ?>
-                                    </select>
-                                </span>
-                                    <span class="label-style"></span>
-                                </div>
-                                <div class="field-container">
-                                    <label for="project-enabled"><span><?php echo lang_get( 'enabled' ) ?></span></label>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" class="ace" id="project-enabled" name="enabled" <?php check_checked( (int)$t_row['enabled'], ON ); ?> />
-                                            <span class="lbl"></span>
-                                        </label>
-                                    </div>
-                                    <span class="label-style"></span>
-                                </div>
-                                <div class="field-container">
-                                    <label for="project-inherit-global"><span><?php echo lang_get( 'inherit_global' ) ?></span></label>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" class="ace" id="project-inherit-global" name="inherit_global" <?php check_checked( (int)$t_row['inherit_global'], ON ); ?> />
-                                            <span class="lbl"></span>
-                                        </label>
-                                    </div>
-                                    <span class="label-style"></span>
-                                </div>
-                                <div class="field-container">
-                                    <label for="project-view-state"><span><?php echo lang_get( 'view_status' ) ?></span></label>
-                                <span class="select">
-                                    <select id="project-view-state" name="view_state">
-                                        <?php print_enum_string_option_list( 'view_state', (int)$t_row['view_state']) ?>
-                                    </select>
-                                </span>
-                                    <span class="label-style"></span>
-                                </div>
-                                <?php
-                                $g_project_override = $f_project_id;
-                                if( file_is_uploading_enabled() && DATABASE !== config_get( 'file_upload_method' ) ) {
-                                    $t_file_path = $t_row['file_path'];
-                                    # Don't reveal the absolute path to non-administrators for security reasons
-                                    if( is_blank( $t_file_path ) && current_user_is_administrator() ) {
-                                        $t_file_path = config_get( 'absolute_path_default_upload_folder' );
-                                    }
-                                    ?>
-                                    <div class="field-container">
-                                    <label for="project-file-path"><span><?php echo lang_get( 'upload_file_path' ) ?></span></label>
-                                    <span class="input"><input type="text" id="project-file-path" name="file_path" size="60" maxlength="250" value="<?php echo string_attribute( $t_file_path ) ?>" /></span>
-                                    <span class="label-style"></span>
-                                    </div><?php
-                                } ?>
-                                <div class="field-container">
-                                    <label for="project-description"><span><?php echo lang_get( 'description' ) ?></span></label>
-                                    <span class="textarea"><textarea class="form-control" id="project-description" name="description" cols="70" rows="5"><?php echo string_textarea( $row['description'] ) ?></textarea></span>
-                                    <span class="label-style"></span>
-                                </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-condensed table-striped">
+                                    <fieldset>
+                                        <?php echo form_security_field( 'manage_proj_update' ) ?>
+                                        <input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 
-                                <?php event_signal( 'EVENT_MANAGE_PROJECT_UPDATE_FORM', array( $f_project_id ) ); ?>
-                            </fieldset>
+                                        <tr>
+                                            <td class="category">
+                                                <span class="required">*</span> <?php echo lang_get( 'project_name' ) ?>
+                                            </td>
+                                            <td>
+                                                <input type="text" id="project-name" name="name" size="60" maxlength="128" value="<?php echo string_attribute( $t_row['name'] ) ?>" />
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'status' ) ?>
+                                            </td>
+                                            <td>
+                                                <select id="project-status" name="status">
+                                                    <?php print_enum_string_option_list( 'project_status', (int)$t_row['status'] ) ?>
+                                                </select>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'enabled' ) ?>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    <input type="checkbox" class="ace" id="project-enabled" name="enabled" <?php check_checked( (int)$t_row['enabled'], ON ); ?> />
+                                                    <span class="lbl"></span>
+                                                </label>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'inherit_global' ) ?>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    <input type="checkbox" class="ace" id="project-inherit-global" name="inherit_global" <?php check_checked( (int)$t_row['inherit_global'], ON ); ?> />
+                                                    <span class="lbl"></span>
+                                                </label>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'view_status' ) ?>
+                                            </td>
+                                            <td>
+                                                <select id="project-view-state" name="view_state">
+                                                    <?php print_enum_string_option_list( 'view_state', (int)$t_row['view_state']) ?>
+                                                </select>
+                                            </td>
+                                        </tr>
+
+                                        <?php
+                                        $g_project_override = $f_project_id;
+                                        if( file_is_uploading_enabled() && DATABASE !== config_get( 'file_upload_method' ) ) {
+                                            $t_file_path = $t_row['file_path'];
+                                            # Don't reveal the absolute path to non-administrators for security reasons
+                                            if( is_blank( $t_file_path ) && current_user_is_administrator() ) {
+                                                $t_file_path = config_get( 'absolute_path_default_upload_folder' );
+                                            }
+                                            ?>
+
+                                            <tr>
+                                                <td class="category">
+                                                    <?php echo lang_get( 'upload_file_path' ) ?>
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="project-file-path" name="file_path" size="60" maxlength="250" value="<?php echo string_attribute( $t_file_path ) ?>" />
+                                                </td>
+                                            </tr>
+                                        <?php
+                                        } ?>
+
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'description' ) ?>
+                                            </td>
+                                            <td>
+                                                <textarea class="form-control" id="project-description" name="description" cols="70" rows="5"><?php echo string_textarea( $row['description'] ) ?></textarea>
+                                            </td>
+                                        </tr>
+
+                                        <?php event_signal( 'EVENT_MANAGE_PROJECT_UPDATE_FORM', array( $f_project_id ) ); ?>
+                                    </fieldset>
+                                </table>
+                            </div>
                         </div>
                     </div>
                     <div class="widget-toolbox padding-8 clearfix">
@@ -787,31 +813,39 @@ if( $t_can_manage_users ) {
                         </div>
                         <div class="widget-body">
                             <div class="widget-main no-padding">
-                                <fieldset>
-                                    <?php echo form_security_field( 'manage_proj_user_add' ) ?>
-                                    <input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-                                    <div class="field-container">
-                                        <label for="project-add-users-username"><span><?php echo lang_get( 'username' ) ?></span></label>
-                                    <span class="select">
-                                        <select id="project-add-users-username" name="user_id[]" multiple="multiple" size="10"><?php
-                                            foreach( $t_users AS $t_user_id=>$t_display_name ) {
-                                                echo '<option value="', $t_user_id, '">', $t_display_name, '</option>';
-                                            } ?>
-                                        </select>
-                                    </span>
-                                        <span class="label-style"></span>
-                                    </div>
-                                    <div class="field-container">
-                                        <label for="project-add-users-access-level"><span><?php echo lang_get( 'access_level' ) ?></span></label>
-                                    <span class="select">
-                                        <select id="project-add-users-access-level" name="access_level"><?php
-                                            # only access levels that are less than or equal current user access level for current project
-                                            print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ), $f_project_id ); ?>
-                                        </select>
-                                    </span>
-                                        <span class="label-style"></span>
-                                    </div>
-                                </fieldset>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-condensed table-striped">
+                                        <fieldset>
+                                            <?php echo form_security_field( 'manage_proj_user_add' ) ?>
+                                            <input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+
+                                            <tr>
+                                                <td class="category">
+                                                   <span class="required">*</span> <?php echo lang_get( 'username' ) ?>
+                                                </td>
+                                                <td>
+                                                    <select id="project-add-users-username" name="user_id[]" multiple="multiple" size="10"><?php
+                                                        foreach( $t_users AS $t_user_id=>$t_display_name ) {
+                                                            echo '<option value="', $t_user_id, '">', $t_display_name, '</option>';
+                                                        } ?>
+                                                    </select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="category">
+                                                    <?php echo lang_get( 'access_level' ) ?>
+                                                </td>
+                                                <td>
+                                                    <select id="project-add-users-access-level" name="access_level"><?php
+                                                        # only access levels that are less than or equal current user access level for current project
+                                                        print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ), $f_project_id ); ?>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </fieldset>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         <div class="widget-toolbox padding-8 clearfix">

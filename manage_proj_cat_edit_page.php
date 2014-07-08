@@ -68,7 +68,7 @@ layout_page_begin( 'manage_overview_page.php' );
 print_manage_menu( 'manage_proj_page.php' );
 ?>
 
-    <div class="col-md-12 col-xs-12">
+    <div class="col-md-12 col-xs-12" xmlns="http://www.w3.org/1999/html">
         <div class="space-10"></div>
         <div id="manage-proj-category-update-div" class="form-container">
             <form id="manage-proj-category-update-form" method="post" action="manage_proj_cat_update.php">
@@ -81,26 +81,34 @@ print_manage_menu( 'manage_proj_page.php' );
                     </div>
                     <div class="widget-body">
                         <div class="widget-main no-padding">
-                            <fieldset>
-                                <?php echo form_security_field( 'manage_proj_cat_update' ) ?>
-                                <input type="hidden" name="project_id" value="<?php echo $f_project_id ?>"/>
-                                <input type="hidden" name="category_id" value="<?php echo string_attribute( $f_category_id ) ?>" />
-                                <div class="field-container">
-                                    <label for="proj-category-name"><span><?php echo lang_get( 'category' ) ?></span></label>
-                                    <span class="input"><input type="text" id="proj-category-name" name="name" size="32" maxlength="128" value="<?php echo string_attribute( $t_name ) ?>" /></span>
-                                    <span class="label-style"></span>
-                                </div>
-                                <div class="field-container">
-                                    <label for="proj-category-assigned-to"><span><?php echo lang_get( 'assigned_to' ) ?></span></label>
-                                <span class="select">
-                                    <select id="proj-category-assigned-to" name="assigned_to">
-                                        <option value="0"></option>
-                                        <?php print_assign_to_option_list( $t_assigned_to, $t_project_id ) ?>
-                                    </select>
-                                </span>
-                                    <span class="label-style"></span>
-                                </div>
-                            </fieldset>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-condensed table-striped">
+                                    <fieldset>
+                                        <?php echo form_security_field( 'manage_proj_cat_update' ) ?>
+                                        <input type="hidden" name="project_id" value="<?php echo $f_project_id ?>"/>
+                                        <input type="hidden" name="category_id" value="<?php echo string_attribute( $f_category_id ) ?>" />
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'category' ) ?>
+                                            </td>
+                                            <td>
+                                                <input type="text" id="proj-category-name" name="name" size="32" maxlength="128" value="<?php echo string_attribute( $t_name ) ?>" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'assigned_to' ) ?>
+                                            </td>
+                                            <td>
+                                                <select id="proj-category-assigned-to" name="assigned_to">
+                                                    <option value="0"></option>
+                                                    <?php print_assign_to_option_list( $t_assigned_to, $t_project_id ) ?>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </fieldset>
+                                </table>
+                            </div>
                         </div>
                     </div>
                     <div class="widget-toolbox padding-8 clearfix">

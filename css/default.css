@@ -62,101 +62,6 @@ tr.bugnote .time-tracked,
 .time-tracking-total .time-tracked { font-weight:bold; margin: 0 0 1em; padding:0; }
 .time-tracking-total { text-align:right; }
 
-/* sub-menus */
-
-#manage-menu,
-#summary-menu,
-#summary-submenu,
-#manage-config-menu,
-#manage-user-filter-menu,
-#manage-tags-filter-menu,
-#admin-menu
-	{ float: left; width: 100%; padding: 0; overflow: hidden; font-size: 1em; position: relative; margin-bottom: 0.5em }
-
-#manage-menu { margin-top: 0.5em; }
-
-#filter-links ul,
-#manage-menu ul,
-#manage-config-menu ul,
-#summary-menu ul,
-#summary-submenu ul,
-#manage-user-filter-menu ul,
-#manage-tags-filter-menu ul,
-#admin-menu ul
-	{ clear: left; float: left; list-style: none; position: relative; left: 50%; padding: 0; margin: 0; text-align: center; }
-#filter-links ul { left: 0; }
-
-#filter-links ul li,
-#manage-menu ul li,
-#manage-config-menu ul li,
-#summary-menu ul li,
-#summary-submenu ul li,
-#manage-user-filter-menu ul li,
-#manage-tags-filter-menu ul li,
-#admin-menu ul li
-	 { display:block; float: left; list-style: none; margin: .5em 0; padding: 0 .25em; position: relative; right: 50%; }
-#filter-links ul li { right: 0; }
-
-#filter-links ul a,
-#manage-menu ul a,
-#manage-config-menu ul a,
-#summary-menu ul a,
-#summary-submenu ul a,
-#account-menu ul a,
-#doc-menu ul a,
-#manage-user-filter-menu ul a,
-#manage-tags-filter-menu ul a,
-#admin-menu ul a
-	{ text-decoration: underline; padding: 0 .25em; }
-
-#filter-links ul span,
-#manage-menu ul span,
-#manage-config-menu ul span,
-#summary-menu ul span,
-#summary-submenu ul span,
-#account-menu ul span,
-#doc-menu ul span,
-#manage-user-filter-menu ul span,
-#manage-tags-filter-menu ul span,
-#admin-menu ul span
-	{ padding: 0 .25em; }
-
-#account-menu, #doc-menu { top: 0; }
-#account-menu ul, #doc-menu ul { margin: 0 auto; padding: .25em; float: right; text-align: center; }
-#account-menu ul li, #doc-menu ul li { display: block; float: left; padding: 0; margin: 0; }
-
-/* bracket links */
-#filter-links ul li:before,
-#manage-user-link:before,
-#manage-menu ul li:before,
-#manage-config-menu ul li:before,
-#summary-menu ul li:before,
-#summary-submenu ul li:before,
-#account-menu ul li:before,
-#doc-menu ul li:before,
-#admin-menu ul li:before,
-span.permalink:before,
-span.switch-view:before
-	{ content: "[" }
-
-#filter-links ul li:after,
-#manage-user-link:after,
-#manage-menu ul li:after,
-#manage-config-menu ul li:after,
-#summary-menu ul li:after,
-#summary-submenu ul li:after,
-#account-menu ul li:after,
-#doc-menu ul li:after,
-#admin-menu ul li:after,
-span.permalink:after,
-span.switch-view:after
-	{ content: "]" }
-
-#content { clear: both; position: relative; top: 0; margin: 0; padding: .5em; }
-.recently-visited { position: relative; text-align: right; font-size: x-small; }
-
-br { clear:both; }
-
 .field-default { color: #999; }
 
 td.menu
@@ -196,15 +101,6 @@ td.news-body			{ background-color: #ffffff;         color: #000000; padding: 16p
 {
 	border-bottom: 1px dotted black;
 }
-
-.avatar
-{
-	float: right;
-	margin-right: 3px;
-	border: 0;
-	border-radius: 5px;
-}
-
 
 td.tainted { color: red; }
 td.tainted input[type="text"], td.tainted select { background-color: #ffffff; color: red; border: 1px solid red; }
@@ -363,70 +259,32 @@ div.form-container fieldset label.required:before {
 }
 
 /* Even/odd rows for tables and forms */
-fieldset > .field-container:nth-child(odd),
 form > table > tr:nth-child(odd),
-div.table-container > table > tbody > tr:nth-child(odd),
-div.table-container > table > tr:nth-child(odd),
 div.summary-container > table > tbody > tr:nth-child(odd),
 div.form-container > form > table > tbody > tr:nth-child(odd),
 div.form-container > form > fieldset > table > tbody > tr:nth-child(odd),
 div.form-container > table > tbody > tr:nth-child(odd),
 div.form-container > table > tr:nth-child(odd),
-div.form-container div.field-container:nth-child(odd),
 table#manage-overview-table > tr:nth-child(odd) {
     background-color: #ffffff;
 }
 
-fieldset > .field-container:nth-child(even),
 form > table > tr:nth-child(even),
 table#manage-overview-table > tr:nth-child(even),
-div.table-container > table > tbody > tr:nth-child(even),
-div.table-container > table > tr:nth-child(even),
 div.summary-container > table > tbody > tr:nth-child(even),
 div.form-container > form > table > tbody > tr:nth-child(even),
 div.form-container > form > fieldset > table > tbody > tr:nth-child(even),
 div.form-container > table > tbody > tr:nth-child(even),
-div.form-container div.field-container:nth-child(even),
 div.form-container > table > tr:nth-child(even),
 #custom-field-link-project {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
 }
 
-form > table > tr:last-child,
-div.table-container > table > tbody > tr > td.right {
+form > table > tr:last-child {
 	background-color: white;
 }
 
-fieldset fieldset.field-container,
-div.field-container {
-	position: relative;
-	display:block;
-	width: 100%;
-	float: left;
-	margin: 0em 0em 1px 0em;
-	padding: 0em;
-}
-.field-container>.display-label,
-div.form-container .field-container>label,
-div.form-container fieldset fieldset legend {
-	position: relative;
-	float: left;
-	margin: 0em;
-	padding: .5em;
-	font-weight: bold;
-	text-indent: 0em;
-	white-space: normal;
-	z-index: 9999;
-}
-.field-container>label span.help-text {
-	clear: both;
-	display: block;
-	font-size: .8em;
-	font-weight: normal;
-}
-div.form-container .field-container>label span.help-text:before { content: '('; }
-div.form-container .field-container>label span.help-text:after { content: ')'; }
 div#news-edit-div fieldset fieldset>label,
 div#account-prefs-update-div fieldset fieldset>label {
 	width: auto;
@@ -482,7 +340,7 @@ div.form-container .submit-button {
 div.form-container label,
 .display-label,
 #account-prefs-update-div legend {
-	width: 30%;
+	padding-right: 10px;
 }
 div.form-container .textarea,
 div.form-container .input,

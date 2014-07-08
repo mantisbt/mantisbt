@@ -108,101 +108,109 @@ print_manage_menu( 'manage_user_page.php' );
                 <div class="widget-body">
                     <div class="widget-main no-padding">
                         <div class="form-container">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-condensed table-striped">
+                                    <fieldset>
 
-                            <fieldset>
+                                        <?php echo form_security_field( 'manage_user_update' ) ?>
+                                        <!-- Title -->
+                                        <input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
 
-                                <?php echo form_security_field( 'manage_user_update' ) ?>
-                                <!-- Title -->
-                                <input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
+                                        <!-- Username -->
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'username_label' ) ?>
+                                            </td>
+                                            <td>
+                                                <input id="edit-username" type="text" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" name="username" value="<?php echo string_attribute( $t_user['username'] ) ?>" />
+                                            </td>
+                                        </tr>
 
-                                <!-- Username -->
-                                <div class="field-container">
-                                    <label for="edit-username"><span><?php echo lang_get( 'username_label' ) ?></span></label>
-                                    <span class="input"><input id="edit-username" type="text" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" name="username" value="<?php echo string_attribute( $t_user['username'] ) ?>" /></span>
-                                    <span class="label-style"></span>
-                                </div>
-
-                                <!-- Realname -->
-                                <div class="field-container"><?php
-                                    if( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
-                                        # With LDAP
-                                        echo '<span class="display-label"><span>' . lang_get( 'realname_label' ) . '</span></span>';
-                                        echo '<span class="input">';
-                                        echo string_display_line( user_get_realname( $t_user_id ) );
-                                        echo '</span>';
-                                    } else {
-                                        # Without LDAP ?>
-                                        <label for="edit-realname"><span><?php echo lang_get( 'realname_label' ) ?></span></label>
-                                        <span class="input"><input id="edit-realname" type="text" size="32" maxlength="<?php echo DB_FIELD_SIZE_REALNAME;?>" name="realname" value="<?php echo string_attribute( $t_user['realname'] ) ?>" /></span><?php
-                                    }
-                                    ?>
-                                    <span class="label-style"></span>
-                                </div>
-                                <!-- Email -->
-                                <div class="field-container"><?php
-                                    if( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
-                                        # With LDAP
-                                        echo '<span class="display-label"><span>' . lang_get( 'email_label' ) . '</span></span>';
-                                        echo '<span class="input">' . string_display_line( user_get_email( $t_user_id ) ) . '</span>';
-                                    } else {
-                                        # Without LDAP
-                                        echo '<label for="email-field"><span>' . lang_get( 'email_label' ) . '</span></label>';
-                                        echo '<span class="input">';
-                                        print_email_input( 'email', $t_user['email'] );
-                                        echo '</span>';
-                                    } ?>
-                                    <span class="label-style"></span>
-                                </div>
-                                <!-- Access Level -->
-                                <div class="field-container">
-                                    <label for="edit-access-level"><span><?php echo lang_get( 'access_level_label' ) ?></span></label>
-                                    <span class="select">
-                                        <select id="edit-access-level" name="access_level"><?php
-                                            $t_access_level = $t_user['access_level'];
-                                            if( !MantisEnum::hasValue( config_get( 'access_levels_enum_string' ), $t_access_level ) ) {
-                                                $t_access_level = config_get( 'default_new_account_access_level' );
+                                        <!-- Realname -->
+                                        <tr>
+                                            <?php
+                                            if( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
+                                                # With LDAP
+                                                echo '<td class="category">' . lang_get( 'realname_label' ) . '</td>';
+                                                echo '<td>';
+                                                echo string_display_line( user_get_realname( $t_user_id ) );
+                                                echo '</td>';
+                                            } else {
+                                                # Without LDAP ?>
+                                                <td class="category"><?php echo lang_get( 'realname_label' ) ?></td>
+                                                <td><input id="edit-realname" type="text" size="32" maxlength="<?php echo DB_FIELD_SIZE_REALNAME;?>" name="realname" value="<?php echo string_attribute( $t_user['realname'] ) ?>" /></td><?php
                                             }
-                                            print_project_access_levels_option_list( (int)$t_access_level ); ?>
-                                        </select>
-                                    </span>
-                                    <span class="label-style"></span>
-                                </div>
-                                <!-- Enabled Checkbox -->
-                                <div class="field-container">
-                                    <label for="edit-enabled"><span><?php echo lang_get( 'enabled_label' ) ?></span></label>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" class="ace" id="edit-enabled" name="enabled" <?php check_checked( (int)$t_user['enabled'], ON ); ?>>
-                                            <span class="lbl"></span>
-                                        </label>
-                                    </div>
-                                    <span class="label-style"></span>
-                                </div>
-                                <!-- Protected Checkbox -->
-                                <div class="field-container">
-                                    <label for="edit-protected"><span><?php echo lang_get( 'protected_label' ) ?></span></label>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" class="ace" id="edit-protected" name="protected" <?php check_checked( (int)$t_user['protected'], ON ); ?>>
-                                            <span class="lbl"></span>
-                                        </label>
-                                    </div>
-                                    <span class="label-style"></span>
-                                </div><?php
-                                if( config_get( 'enable_email_notification' ) == ON ) { ?>
-                                    <div class="field-container">
-                                        <label for="send-email"><span> <?php echo lang_get( 'notify_user' ) ?> </span></label>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" class="ace" id="send-email" name="send_email_notification" checked="checked" ?>
-                                                <span class="lbl"></span>
-                                            </label>
-                                        </div>
-                                        <span class="label-style"></span>
-                                    </div>
-                                <?php } ?>
-                                <!-- Submit Button -->
-                            </fieldset>
+                                            ?>
+                                        </tr>
+                                        <!-- Email -->
+                                        <tr><?php
+                                            if( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
+                                                # With LDAP
+                                                echo '<td class="category">' . lang_get( 'email_label' ) . '</td';
+                                                echo '<td>' . string_display_line( user_get_email( $t_user_id ) ) . '</td>';
+                                            } else {
+                                                # Without LDAP
+                                                echo '<td class="category">' . lang_get( 'email_label' ) . '</td>';
+                                                echo '<td>';
+                                                print_email_input( 'email', $t_user['email'] );
+                                                echo '<td>';
+                                            } ?>
+                                        </tr>
+                                        <!-- Access Level -->
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'access_level_label' ) ?>
+                                            </td>
+                                            <td>
+                                                <select id="edit-access-level" name="access_level"><?php
+                                                    $t_access_level = $t_user['access_level'];
+                                                    if( !MantisEnum::hasValue( config_get( 'access_levels_enum_string' ), $t_access_level ) ) {
+                                                        $t_access_level = config_get( 'default_new_account_access_level' );
+                                                    }
+                                                    print_project_access_levels_option_list( (int)$t_access_level ); ?>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <!-- Enabled Checkbox -->
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'enabled_label' ) ?>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    <input type="checkbox" class="ace" id="edit-enabled" name="enabled" <?php check_checked( (int)$t_user['enabled'], ON ); ?>>
+                                                    <span class="lbl"></span>
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <!-- Protected Checkbox -->
+                                        <tr>
+                                            <td class="category">
+                                                <?php echo lang_get( 'protected_label' ) ?>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    <input type="checkbox" class="ace" id="edit-protected" name="protected" <?php check_checked( (int)$t_user['protected'], ON ); ?>>
+                                                    <span class="lbl"></span>
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                        if( config_get( 'enable_email_notification' ) == ON ) { ?>
+                                            <tr>
+                                                <td class="category"> <?php echo lang_get( 'notify_user' ) ?> </td>
+                                                <td>
+                                                    <label>
+                                                        <input type="checkbox" class="ace" id="send-email" name="send_email_notification" checked="checked" ?>
+                                                        <span class="lbl"></span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
+                                        <!-- Submit Button -->
+                                    </fieldset>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
@@ -294,33 +302,40 @@ if( $t_reset || $t_unlock || $t_delete ) {
             <div class="widget-body">
                 <div class="widget-main no-padding">
                     <div class="form-container">
-                        <fieldset>
-                            <?php echo form_security_field( 'manage_user_proj_add' ) ?>
-                            <input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
-                            <div class="field-container">
-                                <span class="display-label"><span><?php echo lang_get( 'assigned_projects_label' ) ?></span></span>
-                                <div class="input"><?php print_project_user_list( $t_user['id'] ) ?></div>
-                                <span class="label-style"></span>
-                            </div>
-                            <div class="field-container">
-                                <label for="add-user-project-id"><span><?php echo lang_get( 'unassigned_projects_label' ) ?></span></label>
-                                <span class="select">
-                                    <select id="add-user-project-id" name="project_id[]" multiple="multiple" size="5">
-                                        <?php print_project_user_list_option_list2( $t_user['id'] ) ?>
-                                    </select>
-                                </span>
-                                <span class="label-style"></span>
-                            </div>
-                            <div class="field-container">
-                                <label for="add-user-project-access"><span><?php echo lang_get( 'access_level_label' ) ?></span></label>
-                                <span class="select">
-                                    <select id="add-user-project-access" name="access_level">
-                                        <?php print_project_access_levels_option_list( (int)config_get( 'default_new_account_access_level' ) ) ?>
-                                    </select>
-                                </span>
-                                <span class="label-style"></span>
-                            </div>
-                        </fieldset>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-condensed table-striped">
+                                <fieldset>
+                                    <?php echo form_security_field( 'manage_user_proj_add' ) ?>
+                                    <input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
+                                    <tr>
+                                        <td class="category">
+                                            <?php echo lang_get( 'assigned_projects_label' ) ?>
+                                        </td>
+                                        <td><?php print_project_user_list( $t_user['id'] ) ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="category">
+                                            <?php echo lang_get( 'unassigned_projects_label' ) ?>
+                                        </td>
+                                        <td>
+                                            <select id="add-user-project-id" name="project_id[]" multiple="multiple" size="5">
+                                                <?php print_project_user_list_option_list2( $t_user['id'] ) ?>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="category">
+                                            <?php echo lang_get( 'access_level_label' ) ?>
+                                        </td>
+                                        <td>
+                                            <select id="add-user-project-access" name="access_level">
+                                                <?php print_project_access_levels_option_list( (int)config_get( 'default_new_account_access_level' ) ) ?>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </fieldset>
+                            </table>
+                        </div>
                     </div>
                 </div>
 

@@ -201,7 +201,7 @@ function print_avatar( $p_user_id, $p_size = 80 ) {
             $t_avatar_url = htmlspecialchars( $t_avatar[0] );
             $t_width = $t_avatar[1];
             $t_height = $t_avatar[2];
-            echo '<a rel="nofollow" href="http://site.gravatar.com"><img class="avatar" src="' . $t_avatar_url . '" alt="User avatar" width="' . $t_width . '" height="' . $t_height . '" /></a>';
+            echo '<a rel="nofollow" href="http://site.gravatar.com"><img class="avatar pull-right" src="' . $t_avatar_url . '" alt="User avatar" width="' . $t_width . '" height="' . $t_height . '" /></a>';
         }
     }
 }
