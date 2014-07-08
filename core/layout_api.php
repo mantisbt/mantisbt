@@ -543,7 +543,54 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
             echo '><i class="ace-icon fa fa-circle-o"></i> ';
         }
         echo string_attribute( project_get_field( $t_id, 'name' ) ) . ' </a></li>' . "\n";
-        #print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only );
+        layout_navbar_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only );
+    }
+}
+
+/**
+ * List projects that the current user has access to
+ *
+ * @param integer $p_parent_id         A parent project identifier.
+ * @param integer $p_project_id        A project identifier.
+ * @param integer $p_filter_project_id A filter project identifier.
+ * @param boolean $p_trace             Whether to trace parent projects.
+ * @param boolean $p_can_report_only   If true, disables projects in which user can't report issues; defaults to false (all projects enabled).
+ * @param array   $p_parents           Array of parent projects.
+ * @return void
+ */
+function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_can_report_only = false, array $p_parents = array() ) {
+    array_push( $p_parents, $p_parent_id );
+    $t_user_id = auth_get_current_user_id();
+    $t_project_ids = user_get_accessible_subprojects( $t_user_id, $p_parent_id );
+    $t_can_report = true;
+
+    foreach( $t_project_ids as $t_id ) {
+        if( $p_can_report_only ) {
+            $t_report_bug_threshold = config_get( 'report_bug_threshold', null, $t_user_id, $t_id );
+            $t_can_report = access_has_project_level( $t_report_bug_threshold, $t_id, $t_user_id );
+        }
+
+        if( $p_trace ) {
+            $t_full_id = join( $p_parents, ";" ) . ';' . $t_id;
+        } else {
+            $t_full_id = $t_id;
+        }
+
+        echo '<li>';
+        echo '<a href="' . helper_mantis_url( 'set_project.php' ) . '?project_id=' . $t_full_id . '"';
+        check_selected( $p_project_id, $t_full_id, false );
+        check_disabled( $t_id == $p_filter_project_id || !$t_can_report );
+        echo '>';
+        echo str_repeat( '&#160;', count( $p_parents ) * 4 );
+        if( $t_full_id == $p_project_id ) {
+            echo '<i class="ace-icon fa fa-dot-circle-o"></i> ';
+        } else {
+            echo '<i class="ace-icon fa fa-circle-o"></i> ';
+        }
+        echo string_attribute( project_get_field( $t_id, 'name' ) )
+            . '</a></li>' . "\n";
+
+        layout_navbar_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only, $p_parents );
     }
 }
 
