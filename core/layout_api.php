@@ -614,7 +614,7 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
         }
 
         # My View
-        layout_sidebar_menu( 'my_view_page.php', 'my_view_link', 'fa-desktop', $p_active_sidebar_page );
+        layout_sidebar_menu( 'my_view_page.php', 'my_view_link', 'fa-dashboard', $p_active_sidebar_page );
 
         # View Bugs
         layout_sidebar_menu( 'view_all_bug_page.php', 'view_bugs_link', 'fa-list-alt', $p_active_sidebar_page );
@@ -708,11 +708,16 @@ function layout_sidebar_begin() {
     # Shortcut buttons
     echo '<div class="sidebar-shortcuts" id="sidebar-shortcuts">';
     echo '<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">';
-    echo '<button class="btn btn-primary btn-white"><i class="ace-icon fa fa-signal red"> </i></button>';
-    echo '<button class="btn btn-primary btn-white"><i class="ace-icon fa fa-pencil green"> </i></button>';
+
+    echo '<a class="btn btn-primary btn-white" href="bug_report_page.php"><i class="ace-icon fa fa-pencil green"> </i></a>';
+    echo '<a class="btn btn-primary btn-white" href="query_view_page.php"><i class="ace-icon fa fa-filter red"> </i></a>';
+    echo '<a class="btn btn-primary btn-white" href="summary_page.php"><i class="ace-icon fa fa-bar-chart-o blue"> </i></a>';
+    echo '<a class="btn btn-primary btn-white" href="account_page.php"><i class="ace-icon fa fa-user dark"> </i></a>';
     echo '</div>';
 
     echo '<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">';
+    echo '<span class="btn btn-primary btn-white"></span>';
+    echo '<span class="btn btn-primary btn-white"></span>';
     echo '<span class="btn btn-primary btn-white"></span>';
     echo '<span class="btn btn-primary btn-white"></span>';
     echo '</div>';
