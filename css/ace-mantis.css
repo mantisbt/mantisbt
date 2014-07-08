@@ -110,6 +110,5 @@ pre {
 }
 
 .user-info {
-    line-height: inherit !important;
-    position: unset !important;
+    line-height: 33px !important;
 }

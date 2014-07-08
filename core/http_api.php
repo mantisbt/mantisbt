@@ -183,7 +183,7 @@ function http_all_headers() {
 	if( !$g_bypass_headers && !headers_sent() ) {
 		http_content_headers();
 		http_caching_headers();
-		http_security_headers();
+		#http_security_headers();
 		http_custom_headers();
 	}
 }

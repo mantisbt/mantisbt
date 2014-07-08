@@ -556,7 +556,7 @@ function layout_navbar_projects_list( $p_project_id = null, $p_include_all_proje
 function layout_navbar_user_avatar( $p_img_class = '' ) {
     $t_default_avatar = '<i class="ace-icon fa fa-user fa-3x white"></i> ';
 
-    if( ON === config_get( 'show_avatar' ) ) {
+    if( OFF === config_get( 'show_avatar' ) ) {
         echo $t_default_avatar;
         return;
     }
@@ -569,7 +569,7 @@ function layout_navbar_user_avatar( $p_img_class = '' ) {
 
     if( access_has_project_level( config_get( 'show_avatar_threshold' ), null, $p_user_id ) ) {
         $t_avatar = user_get_avatar( $p_user_id, 40 );
-        if( false !== $t_avatar && false != $t_avatar[0] ) {
+        if( false !== $t_avatar ) {
             $t_avatar_url = htmlspecialchars( $t_avatar[0] );
             echo '<img class="' . $p_img_class .  '" src="' . $t_avatar_url . '" alt="User avatar" />';
             return;
