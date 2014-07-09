@@ -91,6 +91,9 @@ function helper_alternate_class( $p_index = null, $p_odd_class = 'row-1', $p_eve
 		$t_index = $p_index;
 	}
 
+	error_parameters( __FUNCTION__, 'CSS' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
 	if( 1 == $t_index++ % 2 ) {
 		return "class=\"$p_odd_class\"";
 	} else {
