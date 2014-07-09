@@ -137,7 +137,6 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 
 			# used for debugging
 			$t_error_type = 'DEBUG';
-			$t_error_description = $p_error;
 			break;
 		default:
 			# shouldn't happen, just display the error just in case
