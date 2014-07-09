@@ -179,7 +179,7 @@ foreach ( $t_prefix_array as $t_prefix => $t_caption ) {
 echo '</ul>';
 echo '</div>';
 
-$t_where_params = null;
+$t_where_params = array();
 if( $f_filter === 'ALL' ) {
 	$t_where = '(1 = 1)';
 } else if( $f_filter === 'UNUSED' ) {

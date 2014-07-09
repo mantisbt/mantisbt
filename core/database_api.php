@@ -53,18 +53,9 @@ $g_db_connected = false;
 # @global bool $g_db_log_queries
 $g_db_log_queries = ( 0 != ( config_get_global( 'log_level' ) & LOG_DATABASE ) );
 
-
 # set adodb fetch mode
 # @global bool $ADODB_FETCH_MODE
-if( db_is_oracle() ) {
-	# Due to oci8 returning column names in uppercase, the MantisBT
-	# default fetch mode (ADODB_FETCH_ASSOC) does not work properly
-	# in the current version of ADOdb (5.18) so we override it.
-	# See #15426
-	$ADODB_FETCH_MODE = ADODB_FETCH_NUM;
-} else {
-	$ADODB_FETCH_MODE = ADODB_FETCH_ASSOC;
-}
+$ADODB_FETCH_MODE = ADODB_FETCH_ASSOC;
 
 /**
  * Mantis Database Parameters Count class
@@ -337,12 +328,19 @@ function db_query_bound( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_
 
 	static $s_check_params;
 	if( $s_check_params === null ) {
-		$s_check_params = ( db_is_pgsql() || $t_db_type == 'odbc_mssql' || $t_db_type == 'mssqlnative');
+		$s_check_params = ( db_is_pgsql() || $t_db_type == 'odbc_mssql' || $t_db_type == 'mssqlnative' );
 	}
 
 	$t_start = microtime( true );
 
-	if( $p_arr_parms != null && $s_check_params ) {
+	# This ensures that we don't get an error from ADOdb if $p_arr_parms == null,
+	# as Execute() expects either an array or false if there are no parameters -
+	# null actually gets treated as array( 0 => null )
+	if( is_null( $p_arr_parms ) ) {
+		$p_arr_parms = array();
+	}
+
+	if( !empty( $p_arr_parms ) && $s_check_params ) {
 		$t_params = count( $p_arr_parms );
 		for( $i = 0;$i < $t_params;$i++ ) {
 			if( $p_arr_parms[$i] === false ) {
@@ -369,7 +367,7 @@ function db_query_bound( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_
 	if( ON == $g_db_log_queries ) {
 		$t_lastoffset = 0;
 		$i = 0;
-		if( !( is_null( $p_arr_parms ) || empty( $p_arr_parms ) ) ) {
+		if( !empty( $p_arr_parms ) ) {
 			while( preg_match( '/\?/', $p_query, $t_matches, PREG_OFFSET_CAPTURE, $t_lastoffset ) ) {
 				$t_matches = $t_matches[0];
 				# Realign the offset returned by preg_match as it is byte-based,
@@ -481,7 +479,7 @@ function db_fetch_array( IteratorAggregate &$p_result ) {
 		$p_result->MoveNext();
 		return $t_array;
 	} else {
-		$t_row = $p_result->GetRowAssoc( false );
+		$t_row = $p_result->GetRowAssoc( ADODB_ASSOC_CASE_LOWER );
 		static $s_array_result;
 		static $s_array_fields;
 

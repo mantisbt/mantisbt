@@ -569,7 +569,7 @@ function summary_print_by_reporter() {
 				WHERE $t_specific_where
 				GROUP BY reporter_id
 				ORDER BY num DESC";
-	$t_result = db_query_bound( $t_query, null, $t_reporter_summary_limit );
+	$t_result = db_query_bound( $t_query, array(), $t_reporter_summary_limit );
 
 	$t_reporters = array();
 	while( $t_row = db_fetch_array( $t_result ) ) {
