@@ -124,7 +124,7 @@ pre {
     border-radius: 4px !important;
 }
 .profile-activity img {
-    border-radius: 4px !important;
+    border-radius: 15% !important;
     margin-bottom: 6px !important;
 }
 
@@ -135,7 +135,7 @@ pre {
 .avatar
 {
     border: 2px solid #c9d6e5;
-    border-radius: 4px;
+    border-radius: 15%;
     box-shadow: none;
     margin:0;
     max-width: 80px;

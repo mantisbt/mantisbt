@@ -362,7 +362,8 @@ function layout_navbar() {
     echo '</span>';
     echo '</a>';
 
-    echo '<button type="button" class="navbar-toggle navbar-toggle-img collapsed pull-right" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">';
+	$t_toggle_class = (OFF == config_get( 'show_avatar' ) ? 'navbar-toggle' : 'navbar-toggle-img');
+    echo '<button type="button" class="navbar-toggle ' . $t_toggle_class . ' collapsed pull-right" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">';
 	echo '<span class="sr-only">Toggle user menu</span>';
     layout_navbar_user_avatar();
 	echo '</button>';
@@ -376,13 +377,15 @@ function layout_navbar() {
 
     echo '</div>';
 
-    echo '<div class="hidden-xs navbar-buttons navbar-header pull-right navbar-collapse collapse">';
+	echo '<div class="hidden-xs">';
+    echo '<div class="navbar-buttons navbar-header pull-right navbar-collapse collapse">';
     echo '<ul class="nav ace-nav">';
     layout_navbar_projects_menu();
     # user buttons such as messages, notifications and user menu
     layout_navbar_user_menu();
     echo '</ul>';
     echo '</div>';
+	echo '</div>';
 
     # mobile view
     echo '<div class="hidden-sm hidden-md hidden-lg">';
@@ -616,7 +619,7 @@ function layout_navbar_subproject_option_list( $p_parent_id, $p_project_id = nul
  * @return null
  */
 function layout_navbar_user_avatar( $p_img_class = '' ) {
-    $t_default_avatar = '<i class="ace-icon fa fa-user fa-3x white"></i> ';
+    $t_default_avatar = '<i class="ace-icon fa fa-user fa-2x white"></i> ';
 
     if( OFF === config_get( 'show_avatar' ) ) {
         echo $t_default_avatar;

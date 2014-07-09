@@ -104,7 +104,7 @@ class TimelineEvent {
 		$t_avatar = user_get_avatar( $this->user_id, 40 );
         $t_html = '<div class="profile-activity clearfix">';
 		
-		if( $t_avatar !== false ) {
+		if( $t_avatar !== false && $t_avatar[0] != false) {
 			$t_avatar_url = $t_avatar[0];
 			$t_html .= '<img class="pull-left" src="' . $t_avatar_url . '"/>';
 		} else {
