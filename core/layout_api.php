@@ -305,6 +305,7 @@ function layout_login_page_begin() {
     }
 
     html_title();
+    layout_head_meta();
     html_css();
     layout_head_css();
     html_rss_link();
