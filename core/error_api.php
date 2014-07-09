@@ -134,9 +134,12 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 			$t_error_description = error_string( $p_error );
 			break;
 		case E_USER_NOTICE:
-
 			# used for debugging
 			$t_error_type = 'DEBUG';
+			break;
+		case E_USER_DEPRECATED:
+			$t_error_type = 'WARNING';
+			$t_error_description =  error_string( $p_error ) ." (in $p_file line $p_line)";
 			break;
 		default:
 			# shouldn't happen, just display the error just in case

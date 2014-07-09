@@ -49,6 +49,7 @@ define( 'DB_MIN_VERSION_PGSQL', '9.0' );     # Earliest supported version as of 
 define( 'ERROR', E_USER_ERROR );
 define( 'WARNING', E_USER_WARNING );
 define( 'NOTICE', E_USER_NOTICE );
+define( 'DEPRECATED', E_USER_DEPRECATED );
 
 # access levels
 define( 'ANYBODY', 0 );
