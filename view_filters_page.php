@@ -345,7 +345,7 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
             <?php print_filter_sticky_issues(); ?>
         </td>
         <!-- Date filters -->
-        <td class="left" colspan="<?php echo ( 3 * $t_custom_cols ); ?>">
+        <td class="pull-left" colspan="<?php echo ( 3 * $t_custom_cols ); ?>">
             <?php print_filter_do_filter_by_date( true ); # hide checkbox as it's already been shown ?>
         </td>
         <!-- Relationships -->

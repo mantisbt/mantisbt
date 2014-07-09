@@ -691,7 +691,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
                             <select name="other_project_id" class="form-control input-sm">
                                 <?php print_project_option_list( null, false, $f_project_id ); ?>
                             </select>
-                        <span class="action-button">
+                        <span class=form-inline">
                             <input type="submit" name="copy_from" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'copy_users_from' ) ?>" />
                             <input type="submit" name="copy_to" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'copy_users_to' ) ?>" />
                         </span>

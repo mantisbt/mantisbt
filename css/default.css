@@ -1,18 +1,11 @@
-form				{ display: inline; }
-
 span.print			{ font-size: 8pt; }
 span.required 		{ font-size: 8pt; color: #bb0000; }
-span.small 			{ font-size: 8pt; font-weight: normal; }
-span.bracket-link	{ white-space: nowrap; }
 
-td.left				{ text-align: left; }
 td.right			{ text-align: right; }
 td.category, th.category		{ background-color: #edf3f4 !important; color: #000000; font-weight: bold; vertical-align : top; }
 td.category2, th.category2		{ background-color: #edf3f4 !important; color: #000000; vertical-align : top; }
 td.overdue			{ background-color: #ff0000; color: #000000; font-weight: bold; }
-td.width30			{ width: 30%; }
-td.col-1			{ background-color: #d8d8d8; color: #000000; }
-td.col-2			{ background-color: #e8e8e8; color: #000000; }
+
 td.form-title		{ background-color: #ffffff; color: #000000; font-weight: bold; text-align: left; }
 td.form-title-caps	{ background-color: #ffffff; color: #000000; font-weight: bold; text-align: left; text-transform: uppercase; }
 td.nopad			{ padding: 0px; }
@@ -28,7 +21,6 @@ td.print-bottom		{ border-bottom: 1px solid #000000; }
 td.print-spacer		{ background-color: #ffffff; color: #000000; font-size: 1pt; line-height: 0.1; padding: 0px;}
 td.print > a:link.user { text-decoration: none; color: black; }
 
-tr					{ background-color: #ffffff }
 tr.spacer			{ background-color: #ffffff !important; color: #000000; height: 5px; }
 tr.row-1			{ background-color: #f9f9f9; color: #000000; }
 tr.row-2			{ background-color: #f9f9f9; color: #000000; }
@@ -37,8 +29,6 @@ tr.row-category td  {  text-align:center; }
 tr.row-category2	{ background-color: #edf3f4; color: #000000; }
 tr.row-category-history { background-color: #c8c8e8; color: #000000; font-weight: bold;}
 tr.row-category-history td {  text-align: left; }
-tr.vtop			{ vertical-align: top; }
-tr.vcenter			{ vertical-align: middle; }
 tr.print-category	{ color: #000000; font-weight: bold; }
 
 td.my-buglist-bug	{ width: 0; }
@@ -64,37 +54,10 @@ tr.bugnote .time-tracked,
 
 .field-default { color: #999; }
 
-td.menu
-{
-	background-color: #e8e8e8;
-	color: #000000;
-	text-align: center;
-	width: 100%;
-	padding: 5px;
-}
-
-td.menu a
-{
-	white-space: nowrap;
-}
-
-td.news-heading-public	{ background-color: #c8c8e8; color: #000000; text-align: left; border-bottom: 1px solid #000000; }
-td.news-heading-private	{ background-color: #d8d8d8;       color: #000000; text-align: left; border-bottom: 1px solid #000000; }
-td.news-body			{ background-color: #ffffff;         color: #000000; padding: 16px; }
 
 .nowrap
 {
 	white-space: nowrap;
-}
-
-.positive
-{
-	color: green;
-}
-
-.negative
-{
-	color: red;
 }
 
 .issue-status
@@ -159,218 +122,6 @@ div.error-info { text-align: center; margin: 1em; }
 	width: 3em;
 }
 
-.myview-left-col, .myview-right-col { width: 50%; vertical-align: top; }
-.myview_boxes_area { width:60%; }
-#manage-overview-table th { width: 30%; }
-
-
-#view-issue-details,
-#bug-update,
-#bugnote_add_open,
-#history_open
-	{ width: 100%; margin: 3px; }
-
-#history_open table 	{ border-spacing: 0; }
-
-#action-group-issues-div
-	{ width: 75%; margin: 0 auto; }
-#manage-user-div 		{ min-width: 57em; }
-
-div.section-container h2,
-div.form-container h2,
-div.table-container h2 {
-	float: left;
-	background-color: #fff;
-	color: #000;
-	font-size: 1em;
-	font-weight: bold;
-	text-align: left;
-	padding: .5em;
-	margin: 0em;
-}
-div.section-container table,
-div.form-container table,
-div.table-container table,
-#action-group-issues-div table {
-	width: 100%;
-	border-spacing: 1px;
-}
-div.section-container table th,
-div.form-container table th,
-div.table-container table th {
-	text-align: center;
-}
-div#adm-config-div {
-	max-width: 95%;
-	display: table;
-}
-p#adm-config-value {
-	max-width: 400px;
-	word-wrap: break-word;
-}
-pre#adm-config-value {
-	max-width: 400px;
-	overflow: auto
-}
-div#project-delete-div {
-	text-align: center;
-}
-fieldset {
-	border: none;
-	margin: 0em;
-	padding: 0em;
-}
-.action-buttons {
-	clear:both;
-}
-.action-button fieldset {
-	display: inline;
-}
-div.form-container fieldset {
-	clear: both;
-	margin: 0em;
-	padding: 0em;
-	border: none;
-}
-div#form-container fieldset fieldset {
-	margin: 0em 0em 1px 0em;
-}
-div.form-container fieldset legend {
-	float: left;
-	margin: 0em;
-	padding: .5em .15em;
-	text-indent: .5em;
-	border: none;
-	font-weight: bold;
-}
-div.form-container fieldset label.required:before {
-	font-size: 8pt;
-	content: '* ';
-	color: red;
-}
-.pager-links {
-	font-size: 8pt;
-	font-weight: normal;
-	text-align: right;
-}
-.section-link {
-	padding: .5em;
-	float: right;
-}
-
-/* Even/odd rows for tables and forms */
-form > table > tr:nth-child(odd),
-div.summary-container > table > tbody > tr:nth-child(odd),
-div.form-container > form > table > tbody > tr:nth-child(odd),
-div.form-container > form > fieldset > table > tbody > tr:nth-child(odd),
-div.form-container > table > tbody > tr:nth-child(odd),
-div.form-container > table > tr:nth-child(odd),
-table#manage-overview-table > tr:nth-child(odd) {
-    background-color: #ffffff;
-}
-
-form > table > tr:nth-child(even),
-table#manage-overview-table > tr:nth-child(even),
-div.summary-container > table > tbody > tr:nth-child(even),
-div.form-container > form > table > tbody > tr:nth-child(even),
-div.form-container > form > fieldset > table > tbody > tr:nth-child(even),
-div.form-container > table > tbody > tr:nth-child(even),
-div.form-container > table > tr:nth-child(even),
-#custom-field-link-project {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-}
-
-form > table > tr:last-child {
-	background-color: white;
-}
-
-div#news-edit-div fieldset fieldset>label,
-div#account-prefs-update-div fieldset fieldset>label {
-	width: auto;
-	font-weight: normal;
-}
-div#manage-user-actions-div {
-	text-align: center;
-}
-fieldset fieldset legend label {
-	z-index: 9999;
-}
-div.form-container .radio,
-div.form-container .checkbox,
-div.form-container .select,
-div.form-container .textarea,
-div.form-container .input,
-.display-value {
-	position: relative;
-	float: left;
-	padding: 0.4em;
-	margin: 0em 1.25em;
-}
-div.form-container .radio input,
-div.form-container .checkbox input,
-div.form-container .select select,
-div.form-container .textarea textarea,
-div.form-container .input  input,
-.display-value span {
-	max-width: 98%;
-}
-.label-style {
-	position: absolute;
-	top: 0em;
-	left: 0em;
-	padding: 0em;
-	margin: 0em;
-	background-color: #edf3f4;
-	height: 100%;
-	border-right: 1px solid #fff;
-	z-index: 0;
-}
-.section-links,
-div.form-container .submit-button {
-	clear: both;
-	display: block;
-	padding: .5em;
-	text-align: center;
-}
-/* 30% label width - these are the defaults */
-.label-style {
-	width: 31%;
-}
-div.form-container label,
-.display-label,
-#account-prefs-update-div legend {
-	padding-right: 10px;
-}
-div.form-container .textarea,
-div.form-container .input,
-.display-value {
-	width: 65%;
-}
-div.success-msg,
-div.failure-msg,
-div.important-msg {
-	display: block;
-	width: 60%;
-	margin: 2em auto;
-}
-div.success-msg,
-div.failure-msg {
-	text-align: center;
-}
-div.important-msg {
-	color: red;
-	border: 1px solid red;
-	background-color: #fceded;
-}
-div.important-msg ul, .success-msg, .failure-msg {
-	margin: 0em;
-	padding: 2em 2em 2em 4em;
-}
-div.important-msg ul li {
-	margin-left: 2em;
-	background-color: #fceded;
-}
 
 ul.project-list { list-style: none; margin: .5em 0em 2em 0em; padding: 0em .5em; }
 ul.project-list li { margin: 0em; line-height: 1.25em; clear: both; min-width: 30em; }
@@ -381,18 +132,5 @@ ul.project-list li span.view-state:after { content: ') '; }
 ul.project-list li span.project-name { display: block; float: left; min-width: 15em; }
 ul.project-list li span.access-level, ul.project-list li span.view-state { display: block; float: left; margin: 0em .25em; }
 
-.tag-list td span.tag-filter:before { content: ' ['; padding: 0em .5em; }
-.tag-list td span.tag-filter:after { content: '] '; padding: 0em .5em; }
-.tag-link {
-	margin: 0em .5em;
-}
 
-tr.bugnote-private td.bugnote-meta { background-color: #e8e8e8; }
 
-div#mantis.centered_page div#banner { text-align: center; }
-
-/* manage_plugin_page.php */
-span.dependency_dated		{ color: maroon; }
-span.dependency_met			{ color: green; }
-span.dependency_unmet		{ color: red; }
-span.dependency_upgrade		{ color: orange; }

@@ -62,7 +62,7 @@ $t_name = string_display_line( $t_tag_row['name'] );
 $t_description = string_display( $t_tag_row['description'] );
 $t_can_edit = access_has_global_level( config_get( 'tag_edit_threshold' ) );
 $t_can_edit_own = $t_can_edit || auth_get_current_user_id() == tag_get_field( $f_tag_id, 'user_id' )
-    && access_has_global_level( config_get( 'tag_edit_own_threshold' ) );
+	&& access_has_global_level( config_get( 'tag_edit_own_threshold' ) );
 
 
 layout_page_header( sprintf( lang_get( 'tag_details' ), $t_name ) );
@@ -70,130 +70,131 @@ layout_page_header( sprintf( lang_get( 'tag_details' ), $t_name ) );
 layout_page_begin();
 ?>
 
-    <div class="col-md-12 col-xs-12">
-        <div class="space-10"></div>
-        <div class="widget-box widget-color-blue2">
-            <div class="widget-header widget-header-small">
-                <h4 class="widget-title lighter">
-                    <i class="ace-icon fa fa-tag"></i>
-                    <?php echo sprintf( lang_get( 'tag_details' ), $t_name ) ?>
-                </h4>
-            </div>
+	<div class="col-md-12 col-xs-12">
+		<div class="space-10"></div>
+		<div class="widget-box widget-color-blue2">
+			<div class="widget-header widget-header-small">
+				<h4 class="widget-title lighter">
+					<i class="ace-icon fa fa-tag"></i>
+					<?php echo sprintf( lang_get( 'tag_details' ), $t_name ) ?>
+				</h4>
+			</div>
 
-            <div class="widget-body">
-                <div class="widget-main no-padding">
-                    <div class="widget-toolbox padding-8 clearfix">
-                        <?php print_link( 'search.php?tag_string='.urlencode($t_tag_row['name']),
-                            sprintf( lang_get( 'tag_filter_default' ), tag_stats_attached( $f_tag_id ) ),
-                            false, 'btn btn-primary btn-sm btn-white btn-round pull-right'); ?>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-condensed table-striped">
+			<div class="widget-body">
+				<div class="widget-main no-padding">
+					<div class="widget-toolbox padding-8 clearfix">
+						<?php print_link( 'search.php?tag_string='.urlencode($t_tag_row['name']),
+							sprintf( lang_get( 'tag_filter_default' ), tag_stats_attached( $f_tag_id ) ),
+							false, 'btn btn-primary btn-sm btn-white btn-round pull-right'); ?>
+					</div>
+					<div class="table-responsive">
+						<table class="table table-bordered table-condensed table-striped">
 
-                            <tr>
-                                <td class="category">
-                                    <?php echo lang_get( 'tag_id' ) ?>
-                                </td>
-                                <td><?php echo $t_tag_row['id'] ?></td>
-                            </tr>
-                            <tr>
-                                <td class="category">
-                                    <?php echo lang_get( 'tag_name' ) ?>
-                                </td>
-                                <td><?php echo $t_name ?></td>
-                            </tr>
-                            <tr>
-                                <td class="category">
-                                    <?php echo lang_get( 'tag_creator' ) ?>
-                                </td>
-                                <td><?php echo string_display_line( user_get_name($t_tag_row['user_id']) ) ?></td>
-                            </tr>
-                            <tr>
-                                <td class="category">
-                                    <?php echo lang_get( 'tag_created' ) ?>
-                                </td>
-                                <td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></td>
-                            </tr>
-                            <tr>
-                                <td class="category">
-                                    <?php echo lang_get( 'tag_updated' ) ?>
-                                </td>
-                                <td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></td>
-                            </tr>
-                            <tr>
-                                <td class="category">
-                                    <?php echo lang_get( 'tag_description' ) ?>
-                                </td>
-                                <td><?php echo $t_description ?></td>
-                            </tr>
+							<tr>
+								<td class="category">
+									<?php echo lang_get( 'tag_id' ) ?>
+								</td>
+								<td><?php echo $t_tag_row['id'] ?></td>
+							</tr>
+							<tr>
+								<td class="category">
+									<?php echo lang_get( 'tag_name' ) ?>
+								</td>
+								<td><?php echo $t_name ?></td>
+							</tr>
+							<tr>
+								<td class="category">
+									<?php echo lang_get( 'tag_creator' ) ?>
+								</td>
+								<td><?php echo string_display_line( user_get_name($t_tag_row['user_id']) ) ?></td>
+							</tr>
+							<tr>
+								<td class="category">
+									<?php echo lang_get( 'tag_created' ) ?>
+								</td>
+								<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_created'] ) ?></td>
+							</tr>
+							<tr>
+								<td class="category">
+									<?php echo lang_get( 'tag_updated' ) ?>
+								</td>
+								<td><?php echo date( config_get( 'normal_date_format' ), $t_tag_row['date_updated'] ) ?></td>
+							</tr>
+							<tr>
+								<td class="category">
+									<?php echo lang_get( 'tag_description' ) ?>
+								</td>
+								<td><?php echo $t_description ?></td>
+							</tr>
 
-                            <?php
-                            # Related tags
+							<?php
+							# Related tags
 
-                            $t_tags_related = tag_stats_related( $f_tag_id );
-                            if( count( $t_tags_related ) ) {
-                            ?>
+							$t_tags_related = tag_stats_related( $f_tag_id );
+							if( count( $t_tags_related ) ) {
+								?>
 
-                            <tr>
-                                <td class="category">
-                                    <?php echo lang_get( 'tag_related' ) ?>
-                                </td>
-                                <td>
-                                    <table id="related-tags" class="tag-list">
-                                        <?php
-                                        foreach( $t_tags_related as $t_tag ) {
-                                            $t_name = string_display_line( $t_tag['name'] );
-                                            $t_description = string_display_line( $t_tag['description'] );
-                                            $t_count = $t_tag['count'];
-                                            $t_link = string_html_specialchars( 'search.php?tag_string='.urlencode("+$t_tag_row[name]".config_get('tag_separator')."+$t_name") );
-                                            $t_label = sprintf( lang_get( 'tag_related_issues' ), $t_tag['count'] ); ?>
-                                            <tr>
-                                                <td><span class="tag-link"><a href="tag_view_page.php?tag_id=<?php echo $t_tag['id']; ?>" title="<?php echo $t_description; ?>"><?php echo $t_name; ?></a></span></td>
-                                                <td><span class="tag-filter"><a href="<?php echo $t_link; ?>"><?php echo $t_label; ?></a></span></td>
-                                            </tr>
-                                        <?php
-                                        }
-                                        ?>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <?php
-                    }
+								<tr>
+									<td class="category">
+										<?php echo lang_get( 'tag_related' ) ?>
+									</td>
+									<td>
+										<table>
+											<?php
+											foreach( $t_tags_related as $t_tag ) {
+												$t_name = string_display_line( $t_tag['name'] );
+												$t_description = string_display_line( $t_tag['description'] );
+												$t_count = $t_tag['count'];
+												$t_link = string_html_specialchars( 'search.php?tag_string='.urlencode("+$t_tag_row[name]".config_get('tag_separator')."+$t_name") );
+												$t_label = sprintf( lang_get( 'tag_related_issues' ), $t_tag['count'] ); ?>
+												<tr>
+													<td><a href="tag_view_page.php?tag_id=<?php echo $t_tag['id']; ?>" title="<?php echo $t_description; ?>"><?php echo $t_name; ?></td>
+													<td><a href="<?php echo $t_link; ?>"><?php echo $t_label; ?></td>
+												</tr>
+											<?php
+											}
+											?>
+										</table>
+									</td>
+								</tr>
+							<?php
+							} ?>
+						</table >
+					</div >
 
-                    if( $t_can_edit_own || $t_can_edit ) {
-                        ?>
-                        <div class="widget-toolbox padding-8 clearfix">
-                            <?php
-                            if( $t_can_edit_own ) {
-                                ?>
-                                <form class="action-button" action="tag_update_page.php" method="post">
-                                <fieldset>
-                                    <?php # CSRF protection not required here - form does not result in modifications ?>
-                                    <input type="hidden" name="tag_id" value="<?php echo $f_tag_id ?>" />
-                                    <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'tag_update_button' ) ?>" />
-                                </fieldset>
-                                </form><?php
-                            }
+					<?php
+					if( $t_can_edit_own || $t_can_edit ) {
+						?>
+						<div class="widget-toolbox padding-8 clearfix">
+							<?php
+							if( $t_can_edit_own ) {
+								?>
+								<form class="form-inline pull-left" action="tag_update_page.php" method="post">
+								<fieldset>
+									<?php # CSRF protection not required here - form does not result in modifications ?>
+									<input type="hidden" name="tag_id" value="<?php echo $f_tag_id ?>" />
+									<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'tag_update_button' ) ?>" />
+								</fieldset>
+								</form><?php
+							}
 
-                            if( $t_can_edit ) { ?>
-                                <form action="tag_delete.php" method="post" class="action-button">
-                                <fieldset>
-                                    <?php echo form_security_field( 'tag_delete' ) ?>
-                                    <input type="hidden" name="tag_id" value="<?php echo $f_tag_id ?>" />
-                                    <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'tag_delete_button' ) ?>" />
-                                </fieldset>
-                                </form><?php
-                            } ?>
-                        </div>
-                    <?php
-                    } ?>
+							if( $t_can_edit ) { ?>
+								<form class="form-inline pull-left" action="tag_delete.php" method="post">
+								<fieldset>
+									<?php echo form_security_field( 'tag_delete' ) ?>
+									<input type="hidden" name="tag_id" value="<?php echo $f_tag_id ?>" />
+									<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'tag_delete_button' ) ?>" />
+								</fieldset>
+								</form><?php
+							} ?>
+						</div>
+					<?php
+					} ?>
 
-                </div>
-            </div>
-        </div>
-    </div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 <?php
 layout_page_end();

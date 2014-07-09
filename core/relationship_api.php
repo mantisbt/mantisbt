@@ -860,12 +860,13 @@ function relationship_view_box( $p_bug_id ) {
                 # user access level at least updater
                 if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
                     ?>
-                <?php echo lang_get( 'this_bug' )?>&#160;&#160;
+                
                     <form method="post" action="bug_relationship_add.php" class="form-inline" >
                         <?php echo form_security_field( 'bug_relationship_add' ) ?>
                         <input type="hidden" name="src_bug_id" value="<?php echo $p_bug_id?>" size="4" />
+						<label class="inline"><?php echo lang_get( 'this_bug' ) ?>&#160;&#160;</label>
                         <?php relationship_list_box( config_get( 'default_bug_relationship' ) )?>
-                        <input type="text" class="form-control input-sm" name="dest_bug_id" value="" />
+                        <input type="text" class="input-sm" name="dest_bug_id" value="" />
                         <input type="submit" class="btn btn-primary btn-sm btn-white btn-round" name="add_relationship" value="<?php echo lang_get( 'add_new_relationship_button' )?>" />
                     </form>
                 <?php

@@ -324,7 +324,7 @@ echo '</thead>';
 
 if( $t_bottom_buttons_enabled ) {
 	echo '<tfoot>';
-	echo '<tr class="bottom-buttons"><td colspan="6">';
+	echo '<tr><td colspan="6">';
 	html_buttons_view_bug_page( $t_bug_id );
 	echo '</td></tr>';
 	echo '</tfoot>';

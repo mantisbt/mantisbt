@@ -833,7 +833,7 @@ function html_button( $p_action, $p_button_text, array $p_fields = array(), $p_m
         $t_method = 'post';
     }
 
-    echo "<form method=\"$t_method\" action=\"$p_action\" class=\"action-button\">\n";
+    echo "<form method=\"$t_method\" action=\"$p_action\" class=\"form-inline\">\n";
     echo "\t<fieldset>";
     # Add a CSRF token only when the form is being sent via the POST method
     if( $t_method == 'post' ) {
@@ -899,7 +899,7 @@ function html_button_bug_change_status( BugData $p_bug ) {
         ksort( $t_enum_list );
         reset( $t_enum_list );
 
-        echo "<form method=\"post\" action=\"bug_change_status_page.php\">";
+        echo "<form method=\"post\" action=\"bug_change_status_page.php\" class=\"form-inline\">";
         # CSRF protection not required here - form does not result in modifications
 
         $t_button_text = lang_get( 'bug_status_to_button' );
@@ -969,7 +969,7 @@ function html_button_bug_assign_to( BugData $p_bug ) {
         }
     }
 
-    echo "<form method=\"post\" action=\"bug_update.php\">";
+    echo "<form method=\"post\" action=\"bug_update.php\" class=\"form-inline\">";
     echo form_security_field( 'bug_update' );
 
     $t_button_text = lang_get( 'bug_assign_to_button' );
@@ -1149,7 +1149,7 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 
     $t_bug = bug_get( $p_bug_id );
 
-    echo '<table><tr class="vcenter">';
+    echo '<table><tr>';
     if( !$t_readonly ) {
         # UPDATE button
         echo '<td class="center">';

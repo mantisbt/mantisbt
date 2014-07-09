@@ -209,7 +209,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
                         }
                         ?>
                         <div class="space-2"></div>
-                        <div class="small">
+                        <div class="btn-group-sm">
                             <?php
                             # bug must be open to be editable
                             if( !bug_is_readonly( $f_bug_id ) ) {
