@@ -32,52 +32,49 @@ $g_error_send_page_header = false; # suppress page headers in the error handler
 
 $f_advanced = gpc_get_bool( 'advanced', false );
 
-html_begin();
+layout_page_header( 'MantisBT Administration - Check Installation' );
+
+layout_admin_page_begin();
 ?>
-<head>
-<title>MantisBT Administration - Check Installation </title>
-<link rel="stylesheet" type="text/css" href="admin.css" />
-</head>
-<body>
 
-<table width="100%" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
-	<tr class="top-bar">
-		<td class="links">
-			[ <a href="index.php">Back to Administration</a> ]
-		</td>
-		<td class="title">
-			Upgrade Installation
-		</td>
-	</tr>
-</table>
-<br /><br />
+    <div class="col-md-12 col-xs-12">
+        <div class="space-10"></div>
 
-<p><strong>WARNING:</strong> - Always backup your database data before upgrading.  For example, if you use a mysql database, From the command line you can do this with the mysqldump command.</p>
-<p>eg:</p>
-<p><tt>mysqldump -u[username] -p[password] [database_name] &gt; [filename]</tt></p>
-<p>This will dump the contents of the specified database into the specified filename.</p>
-<p>If an error occurs you can re-create your previous database by just importing your backed up database data.  You'll need to drop and recreate your database (or remove each table).</p>
-<p><tt>mysql -u[username] -p[password] [database_name] &lt; [filename]</tt></p>
+        <div class="page-header">
+            <h1>
+                Upgrade Installation
+                <div class="btn-group pull-right">
+                    <a class="btn btn-sm btn-primary btn-white btn-round" href="index.php">Back to Administration</a>
+                </div>
+            </h1>
+        </div>
 
-<p>Upgrades may take several minutes depending on the size of your database.</p>
+        <div class="well">
 
-<div>
-	<table width="80%" bgcolor="#222222" cellpadding="10" cellspacing="1">
-		<tr bgcolor="#ffffff">
-				<?php
-# check to see if the new installer was used
-if( -1 != config_get( 'database_version', -1 ) ) {
-	?>
-				<td class="nowrap"><p>When you have backed up your database click the link below to continue</p>[ <a href="install.php">Upgrade Now</a> ]</td>
-				<?php
-}
-else {?>
-				<td class="nowrap"><p>You aware to be running an old (pre 1.1.0) release of MantisBT. To update to this release of mantis, you must first update your installation to 1.1</td>
-				<?php
-}?>
-		</tr>
-	</table>
-</div>
-</body>
+            <p><strong>WARNING:</strong> - Always backup your database data before upgrading.  For example, if you use a mysql database, From the command line you can do this with the mysqldump command.</p>
+            <p>eg:</p>
+            <p><tt>mysqldump -u[username] -p[password] [database_name] &gt; [filename]</tt></p>
+            <p>This will dump the contents of the specified database into the specified filename.</p>
+            <p>If an error occurs you can re-create your previous database by just importing your backed up database data.  You'll need to drop and recreate your database (or remove each table).</p>
+            <p><tt>mysql -u[username] -p[password] [database_name] &lt; [filename]</tt></p>
+
+            <p>Upgrades may take several minutes depending on the size of your database.</p>
+
+        </div>
+
+        <?php
+        # check to see if the new installer was used
+        if( -1 != config_get( 'database_version', -1 ) ) {
+            ?>
+            <p class="lead">When you have backed up your database click the link below to continue</p>
+            <a class="btn btn-primary btn-lg btn-white btn-round" href="install.php">Upgrade Now</a>
+        <?php
+        }
+        else {?>
+            <p class="lead">You aware to be running an old (pre 1.1.0) release of MantisBT. To update to this release of mantis, you must first update your installation to 1.1</p>
+        <?php
+        }?>
+
+    </div>
 <?php
-html_end();
+layout_admin_page_end();

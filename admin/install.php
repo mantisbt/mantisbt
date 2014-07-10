@@ -1076,9 +1076,9 @@ if( 5 == $t_install_state ) {
                                     if( !$t_config_exists ) {
                                         ?>
                                         Creating Configuration File (config/config_inc.php)<br />
-                                        <span class="error-msg">
+                                        <div class="alert alert-danger">
                                             (if this file is not created, create it manually with the contents below)
-                                        </span>
+                                        </div>
                                     <?php
                                     } else {
                                         ?>

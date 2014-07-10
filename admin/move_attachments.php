@@ -166,7 +166,7 @@ layout_admin_page_begin();
 
 # Display results
 if( empty( $t_moved ) ) {
-	echo "<p>Nothing to do.</p>\n";
+	echo '<p class="lead">Nothing to do.</p>'. "\n";
 } else {
 	foreach( $t_moved as $t_row ) {
 		printf(
@@ -179,7 +179,7 @@ if( empty( $t_moved ) ) {
 
 		if( is_array( $t_row['data'] ) ) {
 			# Display details of moved attachments
-			echo '<div><table class="width75">', "\n",
+			echo '<div><table class="width-70">', "\n",
 				'<tr>',
 				$f_file_type == 'bug' ? '<th>Bug ID</th>' : '',
 				'<th>File</th><th>Filename</th><th>Status</th>',
@@ -189,7 +189,7 @@ if( empty( $t_moved ) ) {
 				if( $f_file_type == 'bug' ) {
 					printf( '<td>%s</td>', bug_format_id( $t_data['bug_id'] ) );
 				}
-				printf( '<td class="right">%s</td><td>%s</td><td>%s</td></tr>' . "\n",
+				printf( '<td class="pull-right">%s</td><td>%s</td><td>%s</td></tr>' . "\n",
 					$t_data['id'],
 					$t_data['filename'],
 					$t_data['status'] );

@@ -452,7 +452,7 @@ function lang_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
  * @return void
  */
 function print_error( $p_string, $p_type = 'ERROR' ) {
-    echo '<p class="error-msg">', "$p_type: $p_string", '</p>';
+    echo '<div class="alert alert-danger">', "$p_type: $p_string", '</div>';
 }
 
 layout_admin_page_end();

@@ -98,8 +98,14 @@ if( count( $t_ids ) > 0 ) {
 	echo '</table>';
     echo '</div></div></div></div>';
 
+    echo '<div class="btn-group inline">';
+    echo '<div class="pull-left">';
 	html_button( 'email_queue.php', 'Send All', array( 'send' => 'all') );
+    echo '</div>';
+    echo '<div class="pull-left">';
 	html_button( 'email_queue.php', 'Send Or Delete All', array( 'send' => 'sendordelall') );
+    echo '</div>';
+    echo '</div>';
 } else {
 	echo '<p class="lead">Email Queue Empty</div>';
 }

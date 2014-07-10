@@ -99,19 +99,17 @@ layout_page_begin();
     <div class="col-md-12 col-xs-12">
         <div class="space-10"></div>
 
-        <div id="error-msg">
-            <div class="center">
-                <strong><?php echo lang_get( 'signup_done_title' ) ?></strong><br/>
-                <?php echo "[$f_username - $f_email] " ?>
-            </div>
+        <div class="center">
+            <strong><?php echo lang_get( 'signup_done_title' ) ?></strong><br/>
+            <?php echo "[$f_username - $f_email] " ?>
+        </div>
 
-            <div>
-                <br />
-                <?php echo lang_get( 'password_emailed_msg' ) ?>
-                <br /><br />
-                <?php echo lang_get( 'no_reponse_msg' ) ?>
-                <br /><br/>
-            </div>
+        <div>
+            <br />
+            <?php echo lang_get( 'password_emailed_msg' ) ?>
+            <br /><br />
+            <?php echo lang_get( 'no_reponse_msg' ) ?>
+            <br /><br/>
         </div>
 
         <br />

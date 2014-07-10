@@ -35,10 +35,6 @@ tr.bugnote .bugnote-note { background-color: #e8e8e8; color: #000000; width: 75%
 	border-bottom: 1px dotted black;
 }
 
-#error-msg { clear: both; }
-.error-msg { color: red; text-align: center; }
-div#error-msg { width: 60%; margin: 0em auto; border: 1px solid #000; }
-
 .bug-attachments {
 	margin: 0;
 	padding: 0;

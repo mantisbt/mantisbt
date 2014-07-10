@@ -68,123 +68,136 @@ $g_show_errors = gpc_get_bool( 'show_errors', false );
  * @return string url
  */
 function mode_url( $p_all, $p_errors ) {
-	return basename( __FILE__ ) . '?' . http_build_query(
-		array(
-			'show_all' => (int)$p_all,
-			'show_errors' => (int)$p_errors,
-		)
-	);
+    return basename( __FILE__ ) . '?' . http_build_query(
+        array(
+            'show_all' => (int)$p_all,
+            'show_errors' => (int)$p_errors,
+        )
+    );
 }
 
 $t_link = '<a href="%s">%s %s</a>';
 $t_show_all_mode_link = sprintf( $t_link,
-	mode_url( !$g_show_all, $g_show_errors ),
-	($g_show_all ? 'Hide' : 'Show'),
-	'passed tests'
+    mode_url( !$g_show_all, $g_show_errors ),
+    ($g_show_all ? 'Hide' : 'Show'),
+    'passed tests'
 );
 $t_show_errors_mode_link = sprintf( $t_link,
-	mode_url( $g_show_all, !$g_show_errors ),
-	($g_show_errors ? 'Hide' : 'Show'),
-	'verbose error messages'
+    mode_url( $g_show_all, !$g_show_errors ),
+    ($g_show_errors ? 'Hide' : 'Show'),
+    'verbose error messages'
 );
 
-http_content_headers();
 
-html_begin();
+layout_page_header( 'MantisBT Administration - Check Installation' );
 
-html_head_begin();
-html_css_link( 'admin.css' );
-html_content_type();
-html_title( 'MantisBT Administration - Check Installation' );
-html_head_end();
+layout_admin_page_begin();
 ?>
 
-<body>
+<div class="col-md-12 col-xs-12">
+    <div class="space-10"></div>
 
-<?php html_top_banner(); ?>
+    <div class="widget-box widget-color-blue2">
+        <div class="widget-header widget-header-small">
+            <h4 class="widget-title lighter">
+                Checking your MantisBT installation...
+            </h4>
+        </div>
 
-<p class="notice">Verbosity: <?php echo $t_show_all_mode_link ?> | <?php echo $t_show_errors_mode_link ?></p>
-<table id="check-results">
-	<thead>
-		<tr>
-			<th colspan="2" class="thead1">
-				<strong>Checking your MantisBT installation...</strong>
-			</th>
-		</tr>
-	</thead>
+        <div class="widget-body">
+            <div class="widget-toolbox padding-8 clearfix">
+                Verbosity: <?php echo $t_show_all_mode_link ?> | <?php echo $t_show_errors_mode_link ?>
+            </div>
+            <div class="widget-main no-padding">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-condensed">
 
-<?php
+                        <?php
 
-define( 'CHECK_PHP_INC_ALLOW', true );
-include( 'check_php_inc.php' );
+                        define( 'CHECK_PHP_INC_ALLOW', true );
+                        include( 'check_php_inc.php' );
 
-if( !$g_failed_test ) {
-	define( 'CHECK_DATABASE_INC_ALLOW', true );
-	include( 'check_database_inc.php' );
-}
+                        if( !$g_failed_test ) {
+                            define( 'CHECK_DATABASE_INC_ALLOW', true );
+                            include( 'check_database_inc.php' );
+                        }
 
-if( !$g_failed_test ) {
-	define( 'CHECK_CONFIG_INC_ALLOW', true );
-	include( 'check_config_inc.php' );
-}
+                        if( !$g_failed_test ) {
+                            define( 'CHECK_CONFIG_INC_ALLOW', true );
+                            include( 'check_config_inc.php' );
+                        }
 
-if( !$g_failed_test ) {
-	define( 'CHECK_PATHS_INC_ALLOW', true );
-	include( 'check_paths_inc.php' );
-}
+                        if( !$g_failed_test ) {
+                            define( 'CHECK_PATHS_INC_ALLOW', true );
+                            include( 'check_paths_inc.php' );
+                        }
 
-if( !$g_failed_test ) {
-	define( 'CHECK_WEBSERVICE_INC_ALLOW', true );
-	include( 'check_webservice_inc.php' );
-}
+                        if( !$g_failed_test ) {
+                            define( 'CHECK_WEBSERVICE_INC_ALLOW', true );
+                            include( 'check_webservice_inc.php' );
+                        }
 
-if( !$g_failed_test ) {
-	define( 'CHECK_INTEGRITY_INC_ALLOW', true );
-	include( 'check_integrity_inc.php' );
-}
+                        if( !$g_failed_test ) {
+                            define( 'CHECK_INTEGRITY_INC_ALLOW', true );
+                            include( 'check_integrity_inc.php' );
+                        }
 
-if( !$g_failed_test ) {
-	define( 'CHECK_CRYPTO_INC_ALLOW', true );
-	include( 'check_crypto_inc.php' );
-}
+                        if( !$g_failed_test ) {
+                            define( 'CHECK_CRYPTO_INC_ALLOW', true );
+                            include( 'check_crypto_inc.php' );
+                        }
 
-if( !$g_failed_test ) {
-	define( 'CHECK_I18N_INC_ALLOW', true );
-	include( 'check_i18n_inc.php' );
-}
+                        if( !$g_failed_test ) {
+                            define( 'CHECK_I18N_INC_ALLOW', true );
+                            include( 'check_i18n_inc.php' );
+                        }
 
-if( !$g_failed_test ) {
-	define( 'CHECK_L10N_INC_ALLOW', true );
-	include( 'check_L10n_inc.php' );
-}
+                        if( !$g_failed_test ) {
+                            define( 'CHECK_L10N_INC_ALLOW', true );
+                            include( 'check_L10n_inc.php' );
+                        }
 
-if( !$g_failed_test ) {
-	define( 'CHECK_EMAIL_INC_ALLOW', true );
-	include( 'check_email_inc.php' );
-}
+                        if( !$g_failed_test ) {
+                            define( 'CHECK_EMAIL_INC_ALLOW', true );
+                            include( 'check_email_inc.php' );
+                        }
 
-if( !$g_failed_test ) {
-	define( 'CHECK_ANONYMOUS_INC_ALLOW', true );
-	include( 'check_anonymous_inc.php' );
-}
+                        if( !$g_failed_test ) {
+                            define( 'CHECK_ANONYMOUS_INC_ALLOW', true );
+                            include( 'check_anonymous_inc.php' );
+                        }
 
-if( !$g_failed_test ) {
-	define( 'CHECK_ATTACHMENTS_INC_ALLOW', true );
-	include( 'check_attachments_inc.php' );
-}
+                        if( !$g_failed_test ) {
+                            define( 'CHECK_ATTACHMENTS_INC_ALLOW', true );
+                            include( 'check_attachments_inc.php' );
+                        }
 
-if( !$g_failed_test ) {
-	define( 'CHECK_DISPLAY_INC_ALLOW', true );
-	include( 'check_display_inc.php' );
-}
-?>
-</table>
-<?php if( $g_failed_test ) { ?>
-<p class="notice fail2" id="check-notice-failed">Some tests failed. Please review and correct these failed tests before using MantisBT.</p>
-<?php } else if( $g_passed_test_with_warnings ) { ?>
-<p class="notice warn2" id="check-notice-warnings">Some warnings were encountered. Please review and consider correcting these warnings before using MantisBT.</p>
-<?php } else { ?>
-<p class="notice pass2" id="check-notice-passed">All tests passed.</p>
-<?php } ?>
-</body>
-</html>
+                        if( !$g_failed_test ) {
+                            define( 'CHECK_DISPLAY_INC_ALLOW', true );
+                            include( 'check_display_inc.php' );
+                        }
+                        ?>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="space-10"></div>
+
+    <?php if( $g_failed_test ) { ?>
+        <div class="alert alert-danger" id="check-notice-failed">
+            Some tests failed. Please review and correct these failed tests before using MantisBT.
+        </div>
+    <?php } else if( $g_passed_test_with_warnings ) { ?>
+        <div class="alert alert-warning" id="check-notice-warnings">
+            Some warnings were encountered. Please review and consider correcting these warnings before using MantisBT.
+        </div>
+    <?php } else { ?>
+    <div class="alert alert-success"  id="check-notice-passed">
+        All tests passed.
+    </div>
+
+</div>
+<?php }
+layout_admin_page_end();

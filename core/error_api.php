@@ -209,8 +209,8 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
                 echo '<div class="space-20"></div>';
                 echo '<div class="alert alert-danger">';
 
-                echo '<div class="error-type">' . $t_error_type . '</div>';
-                echo '<div class="error-description">', $t_error_description, '</div>';
+                echo '<p class="bold">' . $t_error_type . '</p>';
+                echo '<p>', $t_error_description, '</p>';
 
                 echo '<div class="error-info">';
                 if( null === $g_error_proceed_url ) {
@@ -221,12 +221,12 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
                 echo '</div>';
 
                 if( ON == config_get_global( 'show_detailed_errors' ) ) {
-                    echo '<div class="error-details">';
+                    echo '<p>';
                     error_print_details( $p_file, $p_line, $p_context );
-                    echo '</div>';
-                    echo '<div class="error-trace">';
+                    echo '</p>';
+                    echo '<p>';
                     error_print_stack_trace();
-                    echo '</div>';
+                    echo '</p>';
                 }
                 echo '</div></div>';
 
@@ -235,9 +235,9 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
                     echo '<div class="space-20"></div>';
                     echo '<div class="alert alert-warning">';
                     echo '<div class="warning">Previous non-fatal errors occurred.  Page contents follow.</div>';
-                    echo '<div id="old-contents">';
+                    echo '<p>';
                     echo $t_old_contents;
-                    echo '</div></div></div>';
+                    echo '</p></div></div>';
                 }
 
                 if( $t_html_api ) {
@@ -279,7 +279,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
  */
 function error_print_details( $p_file, $p_line, array $p_context ) {
     ?>
-    <table class="width90">
+    <table class="width-100">
         <tr>
             <td>Full path: <?php echo htmlentities( $p_file, ENT_COMPAT, 'UTF-8' );?></td>
         </tr>
