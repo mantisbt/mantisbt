@@ -54,7 +54,7 @@ auth_ensure_user_authenticated();
 compress_enable();
 
 global $t_filter;
-global $t_select_modifier;
+global $g_select_modifier;
 $t_filter = current_user_get_bug_filter();
 if( $t_filter === false ) {
 	$t_filter = filter_get_default();
@@ -93,10 +93,10 @@ $f_for_screen = gpc_get_bool( 'for_screen', true );
 
 $t_sort = $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME];
 $t_dir = $t_filter[FILTER_PROPERTY_SORT_DIRECTION];
-$t_action  = "view_all_set.php?f=3";
+$t_action  = 'view_all_set.php?f=3';
 
 if( $f_for_screen == false ) {
-	$t_action  = "view_all_set.php";
+	$t_action  = 'view_all_set.php';
 }
 
 $f_default_view_type = 'simple';
@@ -112,9 +112,9 @@ if( SIMPLE_ONLY == config_get( 'view_filters' ) ) {
 	$f_view_type = 'simple';
 }
 
-$t_select_modifier = '';
+$g_select_modifier = '';
 if( 'advanced' == $f_view_type ) {
-	$t_select_modifier = ' multiple="multiple" size="10"';
+	$g_select_modifier = ' multiple="multiple" size="10"';
 }
 
 /**

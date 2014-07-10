@@ -83,11 +83,11 @@ foreach( $t_query_arr as $t_id => $t_name ) {
 	}
 
 	$t_query_id = (int)$t_id;
-	print_link( "view_all_set.php?type=3&source_query_id=$t_query_id", $t_name );
+	print_link( 'view_all_set.php?type=3&source_query_id=' . $t_query_id, $t_name );
 
 	if( filter_db_can_delete_filter( $t_id ) ) {
 		echo ' ';
-		print_button( "query_delete_page.php?source_query_id=$t_query_id", lang_get( 'delete_query' ) );
+		print_button( 'query_delete_page.php?source_query_id=' . $t_query_id, lang_get( 'delete_query' ) );
 	}
 
 	print '</td>';
@@ -101,7 +101,7 @@ foreach( $t_query_arr as $t_id => $t_name ) {
 
 # Tidy up this row
 if( ( $t_column_count > 0 ) && ( $t_column_count < $t_max_column_count ) ) {
-	for ( $i = $t_column_count; $i < $t_max_column_count; $i++ ) {
+	for( $i = $t_column_count; $i < $t_max_column_count; $i++ ) {
 		print '<td>&#160;</td>';
 	}
 	print '</tr>';

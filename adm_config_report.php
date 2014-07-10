@@ -106,7 +106,7 @@ function print_config_value_as_string( $p_type, $p_value, $p_for_display = true 
 		case CONFIG_TYPE_STRING:
 			$t_value = string_nl2br( string_html_specialchars( config_eval( $p_value ) ) );
 			if( $p_for_display ) {
-				$t_value = '<p id="adm-config-value">' . "'$t_value'" . '</p>';
+				$t_value = '<p id="adm-config-value">\'' . $t_value . '\'</p>';
 			}
 			echo $t_value;
 			return;
@@ -142,9 +142,9 @@ function print_config_value_as_string( $p_type, $p_value, $p_for_display = true 
  */
 function print_option_list_from_array( array $p_array, $p_filter_value ) {
 	foreach( $p_array as $t_key => $t_value ) {
-		echo "<option value='$t_key'";
+		echo '<option value="' . $t_key . '"';
 		check_selected( (string)$p_filter_value, (string)$t_key );
-		echo '>' . string_attribute( $t_value ) . "</option>\n";
+		echo '>' . string_attribute( $t_value ) . '</option>' . "\n";
 	}
 }
 
@@ -258,19 +258,19 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 $t_where = '';
 $t_param = array();
 if( $t_filter_user_value != META_FILTER_NONE ) {
-	$t_where .= " AND user_id = " . db_param();
+	$t_where .= ' AND user_id = ' . db_param();
 	$t_param[] = $t_filter_user_value;
 }
 if( $t_filter_project_value != META_FILTER_NONE ) {
-	$t_where .= " AND project_id = " . db_param();
+	$t_where .= ' AND project_id = ' . db_param();
 	$t_param[] = $t_filter_project_value;
 }
 if( $t_filter_config_value != META_FILTER_NONE ) {
-	$t_where .= " AND config_id = " . db_param();
+	$t_where .= ' AND config_id = ' . db_param();
 	$t_param[] = $t_filter_config_value;
 }
 if( $t_where != '' ) {
-	$t_where = " WHERE 1=1 " . $t_where;
+	$t_where = ' WHERE 1=1 ' . $t_where;
 }
 
 $t_query = "SELECT config_id, user_id, project_id, type, value, access_reqd
@@ -313,23 +313,23 @@ $t_result = db_query_bound( $t_query, $t_param );
 			<tr class="row-1">
 				<td>
 					<select name="filter_user_id">
-					<?php
-					print_option_list_from_array( $t_users_list, $t_filter_user_value );
-					?>
+						<?php
+						print_option_list_from_array( $t_users_list, $t_filter_user_value );
+						?>
 					</select>
 				</td>
 				<td>
 					<select name="filter_project_id">
-					<?php
-					print_option_list_from_array( $t_projects_list, $t_filter_project_value );
-					?>
+						<?php
+						print_option_list_from_array( $t_projects_list, $t_filter_project_value );
+						?>
 					</select>
 				</td>
 				<td>
 					<select name="filter_config_id">
-					<?php
-					print_option_list_from_array( $t_configs_list, $t_filter_config_value );
-					?>
+						<?php
+						print_option_list_from_array( $t_configs_list, $t_filter_config_value );
+						?>
 					</select>
 				</td>
 			</tr>

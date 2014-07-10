@@ -97,7 +97,7 @@ function string_preserve_spaces_at_bol( $p_string ) {
  */
 function string_no_break( $p_string ) {
 	if( strpos( $p_string, ' ' ) !== false ) {
-		return '<span class="nowrap">' . $p_string . "</span>";
+		return '<span class="nowrap">' . $p_string . '</span>';
 	} else {
 		return $p_string;
 	}
@@ -117,7 +117,7 @@ function string_nl2br( $p_string, $p_wrap = 100 ) {
 	if( isset( $t_pieces[1] ) ) {
 		foreach( $t_pieces as $t_piece ) {
 			if( preg_match( '/(<pre[^>]*>.*?<\/pre>)/is', $t_piece ) ) {
-				$t_piece = preg_replace( "/<br[^>]*?>/", '', $t_piece );
+				$t_piece = preg_replace( '/<br[^>]*?>/', '', $t_piece );
 
 				# @@@ thraxisp - this may want to be replaced by html_entity_decode (or equivalent)
 				#     if other encoded characters are a problem
@@ -802,7 +802,7 @@ function string_get_bug_report_page( $p_user_id = null ) {
  */
 function string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
 	$t_path = config_get( 'path' );
-	return $t_path . "verify.php?id=" . string_url( $p_user_id ) . "&confirm_hash=" . string_url( $p_confirm_hash );
+	return $t_path . 'verify.php?id=' . string_url( $p_user_id ) . '&confirm_hash=' . string_url( $p_confirm_hash );
 }
 
 /**
@@ -913,7 +913,7 @@ function string_html_specialchars( $p_string ) {
 	# achumakov: @ added to avoid warning output in unsupported codepages
 	# e.g. 8859-2, windows-1257, Korean, which are treated as 8859-1.
 	# This is VERY important for Eastern European, Baltic and Korean languages
-	return preg_replace( "/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", @htmlspecialchars( $p_string, ENT_COMPAT, 'utf-8' ) );
+	return preg_replace( '/&amp;(#[0-9]+|[a-z]+);/i', '&$1;', @htmlspecialchars( $p_string, ENT_COMPAT, 'utf-8' ) );
 }
 
 /**

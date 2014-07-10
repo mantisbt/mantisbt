@@ -61,7 +61,7 @@ function excel_get_header( $p_worksheet_title, array $p_styles = array() ) {
  <Workbook xmlns=\"urn:schemas-microsoft-com:office:spreadsheet\"
  xmlns:x=\"urn:schemas-microsoft-com:office:excel\"
  xmlns:ss=\"urn:schemas-microsoft-com:office:spreadsheet\"
- xmlns:html=\"http://www.w3.org/TR/REC-html40\">\n ". excel_get_styles( $p_styles ). "<Worksheet ss:Name=\"" . urlencode( $p_worksheet_title ) . "\">\n<Table>\n<Column ss:Index=\"1\" ss:AutoFitWidth=\"0\" ss:Width=\"110\"/>\n";
+ xmlns:html=\"http://www.w3.org/TR/REC-html40\">\n ". excel_get_styles( $p_styles ). '<Worksheet ss:Name="' . urlencode( $p_worksheet_title ) . "\">\n<Table>\n<Column ss:Index=\"1\" ss:AutoFitWidth=\"0\" ss:Width=\"110\"/>\n";
 }
 
 /**
@@ -185,15 +185,15 @@ function excel_prepare_string( $p_value ) {
  * @return string
  */
 function excel_get_cell( $p_value, $p_type, array $p_attributes = array() ) {
-	$t_ret = "<Cell ";
+	$t_ret = '<Cell ';
 
 	foreach ( $p_attributes as $t_attribute_name => $t_attribute_value ) {
 		$t_ret .= $t_attribute_name. '="' . $t_attribute_value . '" ';
 	}
 
-	$t_ret .= ">";
+	$t_ret .= '>';
 
-	$t_ret .= "<Data ss:Type=\"$p_type\">" . $p_value . "</Data></Cell>\n";
+	$t_ret .= '<Data ss:Type="' . $p_type . '">' . $p_value . "</Data></Cell>\n";
 
 	return $t_ret;
 }
@@ -495,7 +495,7 @@ function excel_format_custom_field( $p_issue_id, $p_project_id, $p_custom_field 
 /**
  * Gets the formatted value for the specified plugin column value.
  * @param string  $p_column The plugin column name.
- * @param BugData $p_bug    A bug object to print the column for (needed for the display function of the plugin column).
+ * @param BugData $p_bug    A bug object to print the column for - needed for the display function of the plugin column.
  * @return string The plugin column value.
  */
 function excel_format_plugin_column_value( $p_column, BugData $p_bug ) {

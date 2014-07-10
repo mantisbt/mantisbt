@@ -573,8 +573,7 @@ function auth_clear_cookies() {
 function auth_generate_unique_cookie_string() {
 	do {
 		$t_cookie_string = crypto_generate_uri_safe_nonce( 64 );
-	}
-	while( !auth_is_cookie_string_unique( $t_cookie_string ) );
+	} while( !auth_is_cookie_string_unique( $t_cookie_string ) );
 
 	return $t_cookie_string;
 }
@@ -587,7 +586,7 @@ function auth_generate_unique_cookie_string() {
  */
 function auth_is_cookie_string_unique( $p_cookie_string ) {
 	$t_user_table = db_get_table( 'user' );
-	$t_query = "SELECT COUNT(*) FROM $t_user_table WHERE cookie_string=" . db_param();
+	$t_query = 'SELECT COUNT(*) FROM ' . $t_user_table . ' WHERE cookie_string=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_cookie_string ) );
 
 	$t_count = db_result( $t_result );
@@ -795,7 +794,7 @@ function auth_is_cookie_valid( $p_cookie_string ) {
 	# look up cookie in the database to see if it is valid
 	$t_user_table = db_get_table( 'user' );
 
-	$t_query = "SELECT * FROM $t_user_table WHERE cookie_string=" . db_param();
+	$t_query = 'SELECT * FROM ' . $t_user_table . ' WHERE cookie_string=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_cookie_string ) );
 
 	# return true if a matching cookie was found
@@ -830,7 +829,7 @@ function auth_get_current_user_id() {
 	$t_user_table = db_get_table( 'user' );
 
 	# @todo error with an error saying they aren't logged in? Or redirect to the login page maybe?
-	$t_query = "SELECT id FROM $t_user_table WHERE cookie_string=" . db_param();
+	$t_query = 'SELECT id FROM ' . $t_user_table . ' WHERE cookie_string=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $t_cookie_string ) );
 
 	$t_user_id = (int)db_result( $t_result );

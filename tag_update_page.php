@@ -66,8 +66,7 @@ $t_description = string_display( $t_tag_row['description'] );
 
 if( !( access_has_global_level( config_get( 'tag_edit_threshold' ) )
 	|| ( auth_get_current_user_id() == $t_tag_row['user_id'] )
-		&& access_has_global_level( config_get( 'tag_edit_own_threshold' ) ) ) )
-{
+		&& access_has_global_level( config_get( 'tag_edit_own_threshold' ) ) ) ) {
 	access_denied();
 }
 

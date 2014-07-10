@@ -68,22 +68,21 @@ if( auth_is_user_authenticated() && !current_user_is_anonymous() ) {
 	# If return URL is specified redirect to it; otherwise use default page
 	if( !is_blank( $f_return ) ) {
 		print_header_redirect( $f_return, false, false, true );
-	}
-	else {
+	} else {
 		print_header_redirect( config_get( 'default_home_page' ) );
 	}
 }
 
 # Check for automatic logon methods where we want the logon to just be handled by login.php
 if( auth_automatic_logon_bypass_form() ) {
-	$t_uri = "login.php";
+	$t_uri = 'login.php';
 
 	if( ON == config_get( 'allow_anonymous_login' ) ) {
-		$t_uri = "login_anon.php";
+		$t_uri = 'login_anon.php';
 	}
 
 	if( !is_blank( $f_return ) ) {
-		$t_uri .= "?return=" . string_url( $f_return );
+		$t_uri .= '?return=' . string_url( $f_return );
 	}
 
 	print_header_redirect( $t_uri );

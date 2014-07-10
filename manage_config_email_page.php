@@ -182,8 +182,8 @@ function show_notify_threshold( $p_access, $p_action ) {
 		&& ( $p_access <= get_notify_flag( $p_action, 'threshold_max' ) );
 	if( $t_can_change_flags  || $t_can_change_defaults ) {
 		$t_flag_name = $p_action . ':' . $p_access;
-		$t_set = $t_flag ? "checked=\"checked\"" : "";
-		return "<input type=\"checkbox\" name=\"flag_threshold[]\" value=\"$t_flag_name\" $t_set />";
+		$t_set = $t_flag ? 'checked="checked"' : '';
+		return '<input type="checkbox" name="flag_threshold[]" value="' . $t_flag_name . '" ' . $t_set . ' />';
 	} else {
 		return $t_flag ? '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />' : '&#160;';
 	}
@@ -199,23 +199,24 @@ function get_section_begin_for_email( $p_section_name ) {
 	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 	echo '<div class="form-container">'. "\n";
 	echo '<table>' . "\n";
-	echo '<thead>' . "\n";
-	echo '<tr><td class="form-title-caps" colspan="' . ( count( $t_access_levels ) + 7 ) . '">' . $p_section_name . '</td></tr>' . "\n";
-	echo '<tr class="row-category2">' . "\n";
-	echo '<th width="30%" rowspan="2">' . lang_get( 'message' ) . '</th>';
-	echo '<th class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'issue_reporter' ) . '&#160;</th>' . "\n";
-	echo '<th class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'issue_handler' ) . '&#160;</th>' . "\n";
-	echo '<th class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'users_monitoring_bug' ) . '&#160;</th>' . "\n";
-	echo '<th class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'users_added_bugnote' ) . '&#160;</th>' . "\n";
-	echo '<th class="form-title" style="text-align:center" colspan="' . count( $t_access_levels ) . '">&#160;' . lang_get( 'access_levels' ) . '&#160;</th>' . "\n";
-	echo '  </tr><tr class="row-category2">' . "\n";
+	echo '  <thead>' . "\n";
+	echo '    <tr>' . "\n";
+	echo '      <td class="form-title-caps" colspan="' . ( count( $t_access_levels ) + 7 ) . '">' . $p_section_name . '</td></tr>' . "\n";
+	echo '    <tr class="row-category2">' . "\n";
+	echo '      <th width="30%" rowspan="2">' . lang_get( 'message' ) . '</th>';
+	echo '      <th class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'issue_reporter' ) . '&#160;</th>' . "\n";
+	echo '      <th class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'issue_handler' ) . '&#160;</th>' . "\n";
+	echo '      <th class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'users_monitoring_bug' ) . '&#160;</th>' . "\n";
+	echo '      <th class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'users_added_bugnote' ) . '&#160;</th>' . "\n";
+	echo '      <th class="form-title" style="text-align:center" colspan="' . count( $t_access_levels ) . '">&#160;' . lang_get( 'access_levels' ) . '&#160;</th>' . "\n";
+	echo '    </tr><tr class="row-category2">' . "\n";
 
 	foreach( $t_access_levels as $t_access_level ) {
-		echo '  <th>&#160;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&#160;</th>' . "\n";
+		echo '      <th>&#160;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&#160;</th>' . "\n";
 	}
 
-	echo '</tr>' . "\n";
-	echo '</thead>' . "\n";
+	echo '    </tr>' . "\n";
+	echo '  </thead>' . "\n";
 	echo '<tbody>' . "\n";
 }
 

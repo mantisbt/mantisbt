@@ -48,7 +48,7 @@ function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id
 	}
 
 	if( $p_project_id != ALL_PROJECTS && !project_exists( $p_project_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
@@ -68,14 +68,14 @@ function mc_project_get_issues_for_user( $p_username, $p_password, $p_project_id
 	} else if( strcasecmp( $p_filter_type, 'reported' ) == 0 ) {
 		# target id 0 for reporter doesn't make sense.
 		if( $t_target_user_id == 0 ) {
-			return SoapObjectsFactory::newSoapFault( 'Client', "Target user id must be specified for 'reported' filter." );
+			return SoapObjectsFactory::newSoapFault( 'Client', 'Target user id must be specified for \'reported\' filter.' );
 		}
 
 		$t_filter = filter_create_reported_by( $p_project_id, $t_target_user_id );
 	} else if( strcasecmp( $p_filter_type, 'monitored' ) == 0 ) {
 		$t_filter = filter_create_monitored_by( $p_project_id, $t_target_user_id );
 	} else {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Unknown filter type '$p_filter_type'." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Unknown filter type \'' . $p_filter_type . '\'.' );
 	}
 
 	$t_rows = filter_get_bug_rows( $p_page_number, $p_per_page, $t_page_count, $t_bug_count, $t_filter, $p_project_id, $t_target_user_id, $t_show_sticky );
@@ -170,8 +170,8 @@ function mc_projects_get_user_accessible( $p_username, $p_password ) {
 		$t_project['enabled'] = $t_project_row['enabled'];
 		$t_project['view_state'] = mci_enum_get_array_by_id( $t_project_row['view_state'], 'project_view_state', $t_lang );
 		$t_project['access_min'] = mci_enum_get_array_by_id( $t_project_row['access_min'], 'access_levels', $t_lang );
-		$t_project['file_path'] = array_key_exists( 'file_path', $t_project_row ) ? $t_project_row['file_path'] : "";
-		$t_project['description'] = array_key_exists( 'description', $t_project_row ) ? $t_project_row['description'] : "";
+		$t_project['file_path'] = array_key_exists( 'file_path', $t_project_row ) ? $t_project_row['file_path'] : '';
+		$t_project['description'] = array_key_exists( 'description', $t_project_row ) ? $t_project_row['description'] : '';
 		$t_project['subprojects'] = mci_user_get_accessible_subprojects( $t_user_id, $t_project_id, $t_lang );
 		$t_result[] = $t_project;
 	}
@@ -718,9 +718,9 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 	$t_reqd_access = config_get( 'view_proj_doc_threshold' );
 	if( is_array( $t_reqd_access ) ) {
 		if( 1 == count( $t_reqd_access ) ) {
-			$t_access_clause = "= " . array_shift( $t_reqd_access ) . " ";
+			$t_access_clause = '= ' . array_shift( $t_reqd_access ) . ' ';
 		} else {
-			$t_access_clause = "IN (" . implode( ',', $t_reqd_access ) . ")";
+			$t_access_clause = 'IN (' . implode( ',', $t_reqd_access ) . ')';
 		}
 	} else {
 		$t_access_clause = ">= $t_reqd_access ";
@@ -731,12 +731,12 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		LEFT JOIN $t_project_table pt ON pft.project_id = pt.id
 		LEFT JOIN $t_project_user_list_table pult
 		ON pft.project_id = pult.project_id AND pult.user_id = " . db_param() . "
-		LEFT JOIN $t_user_table ut ON ut.id = " . db_param() . "
-		WHERE pft.project_id in (" . implode( ',', $t_projects ) . ") AND
-		( ( ( pt.view_state = " . db_param() . " OR pt.view_state is null ) AND pult.user_id is null AND ut.access_level $t_access_clause ) OR
+		LEFT JOIN $t_user_table ut ON ut.id = " . db_param() . '
+		WHERE pft.project_id in (' . implode( ',', $t_projects ) . ') AND
+		( ( ( pt.view_state = ' . db_param() . " OR pt.view_state is null ) AND pult.user_id is null AND ut.access_level $t_access_clause ) OR
 		( ( pult.user_id = " . db_param() . " ) AND ( pult.access_level $t_access_clause ) ) OR
-		( ut.access_level = " . db_param() . " ) )
-		ORDER BY pt.name ASC, pft.title ASC";
+		( ut.access_level = " . db_param() . ' ) )
+		ORDER BY pt.name ASC, pft.title ASC';
 
 	$t_result = db_query_bound( $t_query, array( $t_user_id, $t_user_id, $t_pub, $t_user_id, $t_admin ) );
 	$t_num_files = db_num_rows( $t_result );
@@ -919,7 +919,7 @@ function mc_project_update( $p_username, $p_password, $p_project_id, stdClass $p
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return SoapObjectsFactory::newSoapFault( "Client", "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
 	}
 
 	$g_project_override = $p_project_id;
@@ -1088,7 +1088,7 @@ function mc_project_get_users( $p_username, $p_password, $p_project_id, $p_acces
 	foreach( $t_users as $t_user ) {
 		$t_user_name = string_attribute( $t_user['username'] );
 		$t_sort_name = strtolower( $t_user_name );
-		if( $t_show_realname && ( $t_user['realname'] <> "" ) ) {
+		if( $t_show_realname && ( $t_user['realname'] <> '' ) ) {
 			$t_user_name = string_attribute( $t_user['realname'] );
 			if( $t_sort_by_last_name ) {
 				$t_sort_name_bits = explode( ' ', strtolower( $t_user_name ), 2 );

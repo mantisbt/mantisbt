@@ -77,7 +77,7 @@ function log_event( $p_level, $p_msg ) {
 
 	$t_backtrace = debug_backtrace();
 	$t_caller = basename( $t_backtrace[0]['file'] );
-	$t_caller .= ":" . $t_backtrace[0]['line'];
+	$t_caller .= ':' . $t_backtrace[0]['line'];
 
 	# Is this called from another function?
 	if( isset( $t_backtrace[1] ) ) {
@@ -183,7 +183,7 @@ function log_print_to_page() {
 		echo "\t</thead>\n";
 		echo "\t<tbody>\n";
 
-		for ( $i = 0; $i < $t_total_event_count; $i++ ) {
+		for( $i = 0; $i < $t_total_event_count; $i++ ) {
 			if( $g_log_events[$i][1] == LOG_DATABASE ) {
 				if( !in_array( $g_log_events[$i][2][0], $t_unique_queries ) ) {
 					$t_unique_queries_count++;
@@ -204,17 +204,17 @@ function log_print_to_page() {
 			} else {
 				$t_count[$t_log_event[1]] = 1;
 			}
-			switch ( $t_log_event[1] ) {
+			switch( $t_log_event[1] ) {
 				case LOG_DATABASE:
 					$t_total_queries_count++;
 					$t_query_duplicate_class = '';
 					if( $t_log_event[2][2] ) {
 						$t_query_duplicate_class = ' class="duplicate-query"';
 					}
-					echo "\t\t<tr$t_query_duplicate_class><td>" . $t_level . '-' . $t_count[$t_log_event[1]] . "</td><td>" . $t_log_event[2][1] . "</td><td>" . string_html_specialchars( $t_log_event[3] ) . "</td><td>" . string_html_specialchars( $t_log_event[2][0] ) . "</td></tr>\n";
+					echo "\t\t<tr$t_query_duplicate_class><td>" . $t_level . '-' . $t_count[$t_log_event[1]] . '</td><td>' . $t_log_event[2][1] . '</td><td>' . string_html_specialchars( $t_log_event[3] ) . '</td><td>' . string_html_specialchars( $t_log_event[2][0] ) . "</td></tr>\n";
 					break;
 				default:
-					echo "\t\t<tr><td>" . $t_level . '-' . $t_count[$t_log_event[1]] . "</td><td>" . $t_log_event[2][1] . "</td><td>" . string_html_specialchars( $t_log_event[3] ) . "</td><td>" . string_html_specialchars( $t_log_event[2][0] ) . "</td></tr>\n";
+					echo "\t\t<tr><td>" . $t_level . '-' . $t_count[$t_log_event[1]] . '</td><td>' . $t_log_event[2][1] . '</td><td>' . string_html_specialchars( $t_log_event[3] ) . '</td><td>' . string_html_specialchars( $t_log_event[2][0] ) . "</td></tr>\n";
 			}
 		}
 

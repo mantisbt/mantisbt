@@ -74,15 +74,15 @@ function news_create( $p_project_id, $p_poster_id, $p_view_state, $p_announcemen
 	    		  ( project_id, poster_id, date_posted, last_modified,
 	    		    view_state, announcement, headline, body )
 				VALUES
-				    ( " . db_param() . ",
-				      " . db_param() . ",
-				      " . db_param() . ",
-				      " . db_param() . ",
-				      " . db_param() . ",
-				      " . db_param() . ",
-				      " . db_param() . ",
-				      " . db_param() . "
-					)";
+				    ( " . db_param() . ',
+				      ' . db_param() . ',
+				      ' . db_param() . ',
+				      ' . db_param() . ',
+				      ' . db_param() . ',
+				      ' . db_param() . ',
+				      ' . db_param() . ',
+				      ' . db_param() . '
+					)';
 	db_query_bound( $t_query, array( (int)$p_project_id, (int)$p_poster_id, db_now(), db_now(), (int)$p_view_state, $p_announcement, $p_headline, $p_body ) );
 
 	$t_news_id = db_insert_id( $t_news_table );
@@ -140,13 +140,13 @@ function news_update( $p_news_id, $p_project_id, $p_view_state, $p_announcement,
 
 	# Update entry
 	$t_query = "UPDATE $t_news_table
-				  SET view_state=" . db_param() . ",
-					announcement=" . db_param() . ",
-					headline=" . db_param() . ",
-					body=" . db_param() . ",
-					project_id=" . db_param() . ",
-					last_modified= " . db_param() . "
-				  WHERE id=" . db_param();
+				  SET view_state=" . db_param() . ',
+					announcement=' . db_param() . ',
+					headline=' . db_param() . ',
+					body=' . db_param() . ',
+					project_id=' . db_param() . ',
+					last_modified= ' . db_param() . '
+				  WHERE id=' . db_param();
 
 	db_query_bound( $t_query, array( $p_view_state, $p_announcement, $p_headline, $p_body, $p_project_id, db_now(), $p_news_id ) );
 }
@@ -218,7 +218,7 @@ function news_get_rows( $p_project_id, $p_global = true ) {
 		$t_query .= ' WHERE project_id IN (' . join( $t_projects, ',' ) . ')';
 	}
 
-	$t_query .= " ORDER BY date_posted DESC";
+	$t_query .= ' ORDER BY date_posted DESC';
 
 	$t_result = db_query_bound( $t_query, array() );
 
@@ -285,7 +285,7 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 
 			if( 1 == count( $t_projects ) ) {
 				$c_project_id = $t_projects[0];
-				$t_query .= " WHERE project_id=" . db_param();
+				$t_query .= ' WHERE project_id=' . db_param();
 				$t_params = array( $c_project_id );
 			} else {
 				$t_query .= ' WHERE project_id IN (' . join( $t_projects, ',' ) . ')';
@@ -299,20 +299,20 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 			# BY_DATE - Select the news posts
 			$t_query = "SELECT *
 						FROM $t_news_table WHERE
-						( " . db_helper_compare_days( 0, 'date_posted', "< $t_news_view_limit_days" ) . "
-						 OR announcement = " . db_param() . " ) ";
+						( " . db_helper_compare_days( 0, 'date_posted', "< $t_news_view_limit_days" ) . '
+						 OR announcement = ' . db_param() . ' ) ';
 			$t_params = array(
 				db_now(),
 				1,
 			);
 			if( 1 == count( $t_projects ) ) {
 				$c_project_id = $t_projects[0];
-				$t_query .= " AND project_id=" . db_param();
+				$t_query .= ' AND project_id=' . db_param();
 				$t_params[] = $c_project_id;
 			} else {
 				$t_query .= ' AND project_id IN (' . join( $t_projects, ',' ) . ')';
 			}
-			$t_query .= " ORDER BY announcement DESC, id DESC";
+			$t_query .= ' ORDER BY announcement DESC, id DESC';
 			$t_result = db_query_bound( $t_query, $t_params, $t_news_view_limit, $c_offset );
 			break;
 	}

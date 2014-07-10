@@ -258,7 +258,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		if( bug_is_overdue( $t_id ) ) { ?>
 		<td class="print-overdue">
 <?php
-		} else	{ ?>
+		} else { ?>
 		<td class="print">
 <?php
 		}
@@ -478,7 +478,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 				$c_download_url = htmlspecialchars( $t_attachment['download_url'] );
 				$c_filesize = number_format( $t_attachment['size'] );
 				$c_date_added = date( $t_date_format, $t_attachment['date_added'] );
-				echo "$c_filename ($c_filesize " . lang_get( 'bytes' )
+				echo $c_filename . ' (' . $c_filesize . ' ' . lang_get( 'bytes' )
 					. ') <span class="italic-small">' . $c_date_added . '</span><br />'
 					. string_display_links( $t_path . $c_download_url );
 
@@ -557,7 +557,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 		<tr>
 			<td class="print">
 				<?php
-					switch ( $t_bugnote->note_type ) {
+					switch( $t_bugnote->note_type ) {
 						case REMINDER:
 							echo lang_get( 'reminder_sent_to' ) . ': ';
 							$t_note_attr = utf8_substr( $t_bugnote->note_attr, 1, utf8_strlen( $t_bugnote->note_attr ) - 2 );

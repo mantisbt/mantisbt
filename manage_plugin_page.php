@@ -57,8 +57,8 @@ print_manage_menu( 'manage_plugin_page.php' );
 
 $t_plugins = plugin_find_all();
 uasort( $t_plugins,
-	function ( $p1, $p2 ) {
-		return strcasecmp( $p1->name, $p2->name );
+	function ( $p_p1, $p_p2 ) {
+		return strcasecmp( $p_p1->name, $p_p2->name );
 	}
 );
 

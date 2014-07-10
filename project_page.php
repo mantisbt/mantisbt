@@ -51,7 +51,7 @@ require_api( 'utility_api.php' );
 
 $f_project_id	= gpc_get_int( 'project_id' );
 
-$t_view_issues_url = "set_project.php?project_id=$f_project_id&ref=view_all_bug_page.php";
+$t_view_issues_url = 'set_project.php?project_id=' . $f_project_id . '&ref=view_all_bug_page.php';
 
 if( $f_project_id == ALL_PROJECTS ) {
 	print_header_redirect( $t_view_issues_url );
@@ -73,29 +73,29 @@ echo '<p>';
 print_bracket_link( $t_view_issues_url, lang_get( 'view_bugs_link' ) );
 
 # Changelog
-print_bracket_link( "changelog_page.php?project_id=$f_project_id", lang_get( 'changelog_link' ) );
+print_bracket_link( 'changelog_page.php?project_id=' . $f_project_id, lang_get( 'changelog_link' ) );
 
 # Roadmap
-print_bracket_link( "roadmap_page.php?project_id=$f_project_id", lang_get( 'roadmap_link' ) );
+print_bracket_link( 'roadmap_page.php?project_id=' . $f_project_id, lang_get( 'roadmap_link' ) );
 
 # Documentation
 if( config_get( 'enable_project_documentation' ) == ON ) {
-	print_bracket_link( "proj_doc_page.php?project_id=$f_project_id", lang_get( 'docs_link' ) );
+	print_bracket_link( 'proj_doc_page.php?project_id=' . $f_project_id, lang_get( 'docs_link' ) );
 }
 
 # Wiki
 if( config_get( 'wiki_enable' ) == ON ) {
-	print_bracket_link( "wiki.php?type=project&id=$f_project_id", lang_get( 'wiki' ) );
+	print_bracket_link( 'wiki.php?type=project&id=' . $f_project_id, lang_get( 'wiki' ) );
 }
 
 # Summary Page for Project
 if( access_has_project_level( config_get( 'view_summary_threshold' ), $f_project_id ) ) {
-	print_bracket_link( "summary_page.php?project_id=$f_project_id", lang_get( 'summary_link' ) );
+	print_bracket_link( 'summary_page.php?project_id=' . $f_project_id, lang_get( 'summary_link' ) );
 }
 
 # Manage Project Page
 if( access_has_project_level( config_get( 'manage_project_threshold' ), $f_project_id ) ) {
-	print_bracket_link( "manage_proj_edit_page.php?project_id=$f_project_id", lang_get( 'manage_link' ) );
+	print_bracket_link( 'manage_proj_edit_page.php?project_id=' . $f_project_id, lang_get( 'manage_link' ) );
 }
 
 echo '</p>';

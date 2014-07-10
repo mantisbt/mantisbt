@@ -107,7 +107,6 @@ if( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_
 		<span class="floatleft">
 		<?php
 			# -- Viewing range info --
-
 			$v_start = 0;
 			$v_end   = 0;
 
@@ -117,7 +116,7 @@ if( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_
 			}
 
 			echo lang_get( 'viewing_bugs_title' );
-			echo " ($v_start - $v_end / $t_bug_count)";
+			echo ' (' . $v_start . ' - ' . $v_end . ' / ' . $t_bug_count . ')';
 		?> </span>
 
 		<span class="floatleft small">
@@ -177,7 +176,7 @@ if( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_
  * @param array $p_rows An array of bug objects.
  * @return void
  */
-function write_bug_rows ( array $p_rows ) {
+function write_bug_rows( array $p_rows ) {
 	global $t_columns, $t_filter;
 
 	$t_in_stickies = ( $t_filter && ( 'on' == $t_filter[FILTER_PROPERTY_STICKY] ) );

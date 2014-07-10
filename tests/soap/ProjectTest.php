@@ -133,7 +133,7 @@ class ProjectTest extends SoapBase {
 	 * @return void
 	 */
 	public function testSetProjectPrivateLockout() {
-		$t_project_data_structure = $this->newProjectAsArray( $this->getName() . "_" . rand() );
+		$t_project_data_structure = $this->newProjectAsArray( $this->getName() . '_' . rand() );
 
 		# step 1
 		$t_project_id = $this->client->mc_project_add( $this->userName, $this->password, $t_project_data_structure );
@@ -142,7 +142,7 @@ class ProjectTest extends SoapBase {
 		# step 3
 		$t_project_data_structure['view_state'] = array( 'id' => VS_PRIVATE );
 		$t_update_ok = $this->client->mc_project_update( $this->userName, $this->password, $t_project_id, $t_project_data_structure );
-		$this->assertTrue( $t_update_ok, "Project update failed" );
+		$this->assertTrue( $t_update_ok, 'Project update failed' );
 
 		# step 4
 		$t_project_list = $this->client->mc_projects_get_user_accessible( $this->userName, $this->password );
@@ -153,7 +153,7 @@ class ProjectTest extends SoapBase {
 				break;
 			}
 		}
-		$this->assertTrue( $t_found, "User '$this->userName' no longer has access to the project" );
+		$this->assertTrue( $t_found, 'User \'' . $this->userName . '\' no longer has access to the project' );
 	}
 
 	/**

@@ -58,7 +58,7 @@ function installer_db_now() {
 # - Oci uses a different date literal syntax
 # - Default BLOBs to empty_blob() function
 if( db_is_oracle() ) {
-	$t_notnull = "";
+	$t_notnull = '';
 	$t_timestamp = "timestamp" . installer_db_now();
 	$t_blob_default = 'DEFAULT " empty_blob() "';
 } else {

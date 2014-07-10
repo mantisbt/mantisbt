@@ -38,7 +38,7 @@ $t_max_file_size = (int)min(
 # We need a project to import into
 $t_project_id = helper_get_current_project( );
 if( ALL_PROJECTS == $t_project_id ) {
-	print_header_redirect( "login_select_proj_page.php?ref=$t_this_page" );
+	print_header_redirect( 'login_select_proj_page.php?ref=' . $t_this_page );
 }
 
 ?>

@@ -260,7 +260,7 @@ function cfdef_prepare_list_value( $p_value ) {
  * @return string
  */
 function cfdef_prepare_email_value( $p_value ) {
-	return "<a href=\"mailto:" . string_attribute( $p_value ) . "\">" . string_display_line( $p_value ) . "</a>";
+	return '<a href="mailto:' . string_attribute( $p_value ) . '">' . string_display_line( $p_value ) . '</a>';
 }
 
 /**

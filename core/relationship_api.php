@@ -260,10 +260,10 @@ function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id,
 	}
 
 	$t_query = "UPDATE $t_mantis_bug_relationship_table
-				SET source_bug_id=" . db_param() . ",
-					destination_bug_id=" . db_param() . ",
-					relationship_type=" . db_param() . "
-				WHERE id=" . db_param();
+				SET source_bug_id=" . db_param() . ',
+					destination_bug_id=' . db_param() . ',
+					relationship_type=' . db_param() . '
+				WHERE id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $c_src_bug_id, $c_dest_bug_id, $c_relationship_type, (int)$p_relationship_id ) );
 	$t_relationship = db_fetch_array( $t_result );
 
@@ -297,8 +297,8 @@ function relationship_delete_all( $p_bug_id ) {
 	$t_mantis_bug_relationship_table = db_get_table( 'bug_relationship' );
 
 	$t_query = "DELETE FROM $t_mantis_bug_relationship_table
-				WHERE source_bug_id=" . db_param() . " OR
-				destination_bug_id=" . db_param();
+				WHERE source_bug_id=" . db_param() . ' OR
+				destination_bug_id=' . db_param();
 	db_query_bound( $t_query, array( (int)$p_bug_id, (int)$p_bug_id ) );
 }
 
@@ -467,10 +467,10 @@ function relationship_exists( $p_src_bug_id, $p_dest_bug_id ) {
 	$t_mantis_bug_relationship_table = db_get_table( 'bug_relationship' );
 
 	$t_query = "SELECT * FROM $t_mantis_bug_relationship_table
-				WHERE (source_bug_id=" . db_param() . " AND destination_bug_id=" . db_param() . ")
+				WHERE (source_bug_id=" . db_param() . ' AND destination_bug_id=' . db_param() . ')
 				OR
-				(source_bug_id=" . db_param() . "
-				AND destination_bug_id=" . db_param() . ')';
+				(source_bug_id=' . db_param() . '
+				AND destination_bug_id=' . db_param() . ')';
 	$t_result = db_query_bound( $t_query, array( $c_src_bug_id, $c_dest_bug_id, $c_dest_bug_id, $c_src_bug_id ), 1 );
 
 	if( $t_row = db_fetch_array( $t_result ) ) {
@@ -793,7 +793,7 @@ function relationship_get_summary_text( $p_bug_id ) {
  * @param boolean $p_include_none     Include a NONE option in list box (default false).
  * @return void
  */
-function relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_select_name = "rel_type", $p_include_any = false, $p_include_none = false ) {
+function relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_select_name = 'rel_type', $p_include_any = false, $p_include_none = false ) {
 	global $g_relationships;
 	?>
 <select name="<?php echo $p_select_name?>">

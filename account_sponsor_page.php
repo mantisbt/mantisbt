@@ -115,12 +115,12 @@ $t_payment = config_get( 'payment_enable', 0 );
 
 $t_project_clause = helper_project_specific_where( $t_project );
 
-$t_query = "SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_in_version, b.status
-	FROM $t_bug_table b, $t_sponsor_table s
-	WHERE s.user_id=" . db_param() . " AND s.bug_id = b.id " .
-	( $t_show_all ? '' : 'AND ( b.status < ' . db_param() . ' OR s.paid < ' . SPONSORSHIP_PAID . ')' ) . "
-	AND $t_project_clause
-	ORDER BY s.paid ASC, b.project_id ASC, b.fixed_in_version ASC, b.status ASC, b.id DESC";
+$t_query = 'SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_in_version, b.status
+	FROM ' . $t_bug_table . ' b, ' . $t_sponsor_table . ' s
+	WHERE s.user_id=' . db_param() . ' AND s.bug_id = b.id ' .
+	( $t_show_all ? '' : 'AND ( b.status < ' . db_param() . ' OR s.paid < ' . SPONSORSHIP_PAID . ')' ) . '
+	AND ' . $t_project_clause . '
+	ORDER BY s.paid ASC, b.project_id ASC, b.fixed_in_version ASC, b.status ASC, b.id DESC';
 
 $t_result = db_query_bound( $t_query, $t_show_all ? array( $t_user ) : array( $t_user , $t_resolved ) );
 
@@ -139,7 +139,6 @@ if( $t_sponsor_count === 0 ) {
 <br />
 <div>
 <table class="width100" cellspacing="1">
-
 	<!-- Headings -->
 	<tr>
 		<td class="form-title" colspan="9">
@@ -233,7 +232,7 @@ if( $t_sponsor_count === 0 ) {
 
 $t_query = "SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_in_version, b.status
 	FROM $t_bug_table b, $t_sponsor_table s
-	WHERE b.handler_id=" . db_param() . " AND s.bug_id = b.id " .
+	WHERE b.handler_id=" . db_param() . ' AND s.bug_id = b.id ' .
 	( $t_show_all ? '' : 'AND ( b.status < ' . db_param() . ' OR s.paid < ' . SPONSORSHIP_PAID . ')' ) . "
 	AND $t_project_clause
 	ORDER BY s.paid ASC, b.project_id ASC, b.fixed_in_version ASC, b.status ASC, b.id DESC";

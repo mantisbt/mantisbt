@@ -169,7 +169,7 @@ function check_print_info_row( $p_description, $p_info = null ) {
  */
 function check_print_test_result( $p_result ) {
 	global $g_alternate_row, $g_failed_test, $g_passed_test_with_warnings;
-	switch ( $p_result ) {
+	switch( $p_result ) {
 		case BAD:
 			echo "\t\t<td class=\"fail$g_alternate_row\">FAIL</td>\n";
 			$g_failed_test = true;

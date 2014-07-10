@@ -50,7 +50,7 @@ require_api( 'user_api.php' );
 
 if( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_id ) ) {
 	$t_users = bug_get_monitors( $f_bug_id );
-	$num_users = sizeof( $t_users );
+	$t_num_users = sizeof( $t_users );
 
 	echo '<a id="monitors"></a><br />';
 
@@ -71,11 +71,11 @@ if( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_id
 	</th>
 	<td>
 <?php
-		if( 0 == $num_users ) {
+		if( 0 == $t_num_users ) {
 			echo lang_get( 'no_users_monitoring_bug' );
 		} else {
 			$t_can_delete_others = access_has_bug_level( config_get( 'monitor_delete_others_bug_threshold' ), $f_bug_id );
-	 		for ( $i = 0; $i < $num_users; $i++ ) {
+	 		for( $i = 0; $i < $t_num_users; $i++ ) {
 				echo ($i > 0) ? ', ' : '';
 				print_user( $t_users[$i] );
 				if( $t_can_delete_others ) {

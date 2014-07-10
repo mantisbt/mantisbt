@@ -114,26 +114,26 @@ html_head_end();
 		<?php
 switch( $t_install_state ) {
 	case 6:
-		echo "Post Installation Checks";
+		echo 'Post Installation Checks';
 		break;
 	case 5:
-		echo "Install Configuration File";
+		echo 'Install Configuration File';
 		break;
 	case 4:
-		echo "Additional Configuration Information";
+		echo 'Additional Configuration Information';
 		break;
 	case 3:
-		echo "Install Database";
+		echo 'Install Database';
 		break;
 	case 2:
-		echo "Check and Install Database";
+		echo 'Check and Install Database';
 		break;
 	case 1:
-		echo "Database Parameters";
+		echo 'Database Parameters';
 		break;
 	case 0:
 	default:
-		echo "Pre-Installation Check";
+		echo 'Pre-Installation Check';
 		break;
 }
 ?>
@@ -215,7 +215,7 @@ $f_db_exists      = gpc_get_bool( 'db_exists', false );
 
 if( $t_config_exists ) {
 	if( 0 == $t_install_state ) {
-		print_test( "Config File Exists - Upgrade", true );
+		print_test( 'Config File Exists - Upgrade', true );
 
 		print_test( 'Setting Database Type', '' !== $f_db_type, true, 'database type is blank?' );
 
@@ -316,7 +316,7 @@ if( 2 == $t_install_state ) {
 	# PostgreSQL, Oracle and MSSQL require at least 5.19. MySQL should be fine
 	# with 5.10 but to simplify we align to the requirement of the others.
 	$t_adodb_version = substr( $ADODB_vers, 1, strpos( $ADODB_vers, ' ' ) - 1 );
-	print_test( "Checking ADOdb Library version is at least " . DB_MIN_VERSION_ADODB,
+	print_test( 'Checking ADOdb Library version is at least ' . DB_MIN_VERSION_ADODB,
 		version_compare( $t_adodb_version, DB_MIN_VERSION_ADODB, '>=' ),
 		true,
 		'Current version: ' . $ADODB_vers
@@ -695,7 +695,7 @@ if( 3 == $t_install_state ) {
 		if( $f_db_type == 'db2' ) {
 			$t_rs = $g_db->Execute( "select * from SYSIBM.SCHEMATA WHERE SCHEMA_NAME = '" . $f_db_schema . "' AND SCHEMA_OWNER = '" . $f_db_username . "'" );
 			if( $t_rs === false ) {
-				echo "<br />false";
+				echo '<br />false';
 			}
 
 			if( $t_rs->EOF ) {
@@ -719,7 +719,7 @@ if( 3 == $t_install_state ) {
 			$t_dict = NewDataDictionary( $g_db );
 
 			if( $f_db_type == 'db2' ) {
-				$t_rs = $g_db->Execute( "CREATE SCHEMA " . $f_db_schema );
+				$t_rs = $g_db->Execute( 'CREATE SCHEMA ' . $f_db_schema );
 
 				if( !$t_rs ) {
 					$t_result = false;
@@ -927,9 +927,9 @@ if( 3 == $t_install_state ) {
 					foreach( $t_sqlarray as $sql ) {
 						# "CREATE OR REPLACE TRIGGER" statements must end with "END;\n/" for Oracle sqlplus
 						if( $f_db_type == 'oci8' && stripos( $sql, 'CREATE OR REPLACE TRIGGER' ) === 0 ) {
-							$t_sql_end = PHP_EOL . "/";
+							$t_sql_end = PHP_EOL . '/';
 						} else {
-							$t_sql_end = ";";
+							$t_sql_end = ';';
 						}
 						echo htmlentities( $sql ) . $t_sql_end . PHP_EOL . PHP_EOL;
 					}

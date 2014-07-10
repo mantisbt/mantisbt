@@ -86,7 +86,7 @@ function summary_helper_get_developer_label ( $p_user_id ) {
 			&amp;".FILTER_PROPERTY_REPORTER_ID."=$p_user_id
 			&amp;".FILTER_PROPERTY_HANDLER_ID."=$p_user_id
 			&amp;".FILTER_PROPERTY_NOTE_USER_ID."=$p_user_id
-			&amp;".FILTER_PROPERTY_MATCH_TYPE."=".FILTER_MATCH_ANY."'>$t_user</a>";
+			&amp;".FILTER_PROPERTY_MATCH_TYPE.'='.FILTER_MATCH_ANY."'>$t_user</a>";
 
 }
 
@@ -182,8 +182,7 @@ function summary_print_by_enum( $p_enum ) {
 		$t_bugs_total += $t_row['bugcount'];
 		if( $t_closed_val <= $t_row['status'] ) {
 			$t_bugs_closed += $t_row['bugcount'];
-		}
-		else if( $t_resolved_val <= $t_row['status'] ) {
+		} else if( $t_resolved_val <= $t_row['status'] ) {
 			$t_bugs_resolved += $t_row['bugcount'];
 		} else {
 			$t_bugs_open += $t_row['bugcount'];
@@ -259,7 +258,7 @@ function summary_new_bug_count_by_date( $p_num_days = 1 ) {
 	}
 
 	$t_query = "SELECT COUNT(*) FROM $t_mantis_bug_table
-				WHERE " . db_helper_compare_days( "" . db_now() . "", "date_submitted", "<= $c_time_length" ) . " AND $t_specific_where";
+				WHERE " . db_helper_compare_days( '' . db_now() . '', 'date_submitted', "<= $c_time_length" ) . " AND $t_specific_where";
 	$t_result = db_query_bound( $t_query );
 	return db_result( $t_result, 0 );
 }
@@ -290,10 +289,10 @@ function summary_resolved_bug_count_by_date( $p_num_days = 1 ) {
 				ON b.id = h.bug_id
 				AND h.type = " . NORMAL_TYPE . "
 				AND h.field_name = 'status'
-				WHERE b.status >= " . db_param() . "
-				AND h.old_value < " . db_param() . "
-				AND h.new_value >= " . db_param() . "
-				AND " . db_helper_compare_days( "" . db_now() . "", "date_modified", "<= $c_time_length" ) . "
+				WHERE b.status >= " . db_param() . '
+				AND h.old_value < ' . db_param() . '
+				AND h.new_value >= ' . db_param() . '
+				AND ' . db_helper_compare_days( '' . db_now() . '', 'date_modified', "<= $c_time_length" ) . "
 				AND $t_specific_where";
 	$t_result = db_query_bound( $t_query, array( $t_resolved, $t_resolved, $t_resolved ) );
 	return db_result( $t_result, 0 );
@@ -314,7 +313,7 @@ function summary_print_by_date( array $p_date_array ) {
 		$t_new_bugs_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_FILTER_BY_DATE . '=on&amp;' . FILTER_PROPERTY_START_YEAR . '=' . date( 'Y', $t_start_date ) . '&amp;' . FILTER_PROPERTY_START_MONTH . '=' . date( 'm', $t_start_date ) . '&amp;' . FILTER_PROPERTY_START_DAY . '=' . date( 'd', $t_start_date ) . '&amp;' . FILTER_PROPERTY_HIDE_STATUS . '=">';
 
 		print( "<tr>\n" );
-		print( "    <td width=\"50%\">" . $t_days . "</td>\n" );
+		print( '    <td width="50%">' . $t_days . "</td>\n" );
 
 		if( $t_new_count > 0 ) {
 			print( "    <td class=\"right\">$t_new_bugs_link$t_new_count</a></td>\n" );
@@ -328,12 +327,11 @@ function summary_print_by_date( array $p_date_array ) {
 		if( $t_balance > 0 ) {
 
 			# we are talking about bugs: a balance > 0 is "negative" for the project...
-			$t_style = " negative";
+			$t_style = ' negative';
 			$t_balance = sprintf( '%+d', $t_balance );
 
 			# "+" modifier added in PHP >= 4.3.0
-		}
-		else if( $t_balance < 0 ) {
+		} else if( $t_balance < 0 ) {
 			$t_style = ' positive';
 			$t_balance = sprintf( '%+d', $t_balance );
 		}
@@ -519,8 +517,7 @@ function summary_print_by_developer() {
 		$t_bugs_total += $v_bugcount;
 		if( $t_closed_val <= $t_row['status'] ) {
 			$t_bugs_closed += $v_bugcount;
-		}
-		else if( $t_resolved_val <= $t_row['status'] ) {
+		} else if( $t_resolved_val <= $t_row['status'] ) {
 			$t_bugs_resolved += $v_bugcount;
 		} else {
 			$t_bugs_open += $v_bugcount;
@@ -599,8 +596,7 @@ function summary_print_by_reporter() {
 			$t_bugs_total += $t_row2['bugcount'];
 			if( $t_closed_val <= $t_row2['status'] ) {
 				$t_bugs_closed += $t_row2['bugcount'];
-			}
-			else if( $t_resolved_val <= $t_row2['status'] ) {
+			} else if( $t_resolved_val <= $t_row2['status'] ) {
 				$t_bugs_resolved += $t_row2['bugcount'];
 			} else {
 				$t_bugs_open += $t_row2['bugcount'];
@@ -701,8 +697,7 @@ function summary_print_by_category() {
 		$t_bugs_total += $t_row['bugcount'];
 		if( $t_closed_val <= $t_row['status'] ) {
 			$t_bugs_closed += $t_row['bugcount'];
-		}
-		else if( $t_resolved_val <= $t_row['status'] ) {
+		} else if( $t_resolved_val <= $t_row['status'] ) {
 			$t_bugs_resolved += $t_row['bugcount'];
 		} else {
 			$t_bugs_open += $t_row['bugcount'];
@@ -805,7 +800,7 @@ function summary_print_by_project( array $p_projects = array(), $p_level = 0, ar
 	}
 
 	foreach( $p_projects as $t_project ) {
-		$t_name = str_repeat( "&raquo; ", $p_level ) . project_get_name( $t_project );
+		$t_name = str_repeat( '&raquo; ', $p_level ) . project_get_name( $t_project );
 
 		$t_pdata = isset( $p_cache[$t_project] ) ? $p_cache[$t_project] : array( 'open' => 0, 'resolved' => 0, 'closed' => 0 );
 

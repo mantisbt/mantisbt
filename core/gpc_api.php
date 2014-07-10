@@ -60,8 +60,7 @@ function gpc_get( $p_var_name, $p_default = null ) {
 		$t_result = $_POST[$p_var_name];
 	} else if( isset( $_GET[$p_var_name] ) ) {
 		$t_result = $_GET[$p_var_name];
-	}
-	else if( func_num_args() > 1 ) {
+	} else if( func_num_args() > 1 ) {
 		# check for a default passed in (allowing null)
 		$t_result = $p_default;
 	} else {
@@ -81,8 +80,7 @@ function gpc_get( $p_var_name, $p_default = null ) {
 function gpc_isset( $p_var_name ) {
 	if( isset( $_POST[$p_var_name] ) ) {
 		return true;
-	}
-	else if( isset( $_GET[$p_var_name] ) ) {
+	} else if( isset( $_GET[$p_var_name] ) ) {
 		return true;
 	}
 
@@ -134,7 +132,7 @@ function gpc_get_int( $p_var_name, $p_default = null ) {
 		trigger_error( ERROR_GPC_ARRAY_UNEXPECTED, ERROR );
 	}
 	$t_val = str_replace( ' ', '', trim( $t_result ) );
-	if( !preg_match( "/^-?([0-9])*$/", $t_val ) ) {
+	if( !preg_match( '/^-?([0-9])*$/', $t_val ) ) {
 		error_parameters( $p_var_name );
 		trigger_error( ERROR_GPC_NOT_NUMBER, ERROR );
 	}
@@ -173,7 +171,7 @@ function gpc_get_bool( $p_var_name, $p_default = false ) {
 function gpc_isset_custom_field( $p_var_name, $p_custom_field_type ) {
 	$t_field_name = 'custom_field_' . $p_var_name;
 
-	switch ( $p_custom_field_type ) {
+	switch( $p_custom_field_type ) {
 		case CUSTOM_FIELD_TYPE_DATE:
 			# date field is three dropdowns that default to 0
 			# Dropdowns are always present, so check if they are set
@@ -334,8 +332,7 @@ function gpc_get_bool_array( $p_var_name, array $p_default = null ) {
 function gpc_get_cookie( $p_var_name, $p_default = null ) {
 	if( isset( $_COOKIE[$p_var_name] ) ) {
 		$t_result = $_COOKIE[$p_var_name];
-	}
-	else if( func_num_args() > 1 ) {
+	} else if( func_num_args() > 1 ) {
 		# check for a default passed in (allowing null)
 		$t_result = $p_default;
 	} else {
@@ -368,8 +365,7 @@ function gpc_set_cookie( $p_name, $p_value, $p_expire = false, $p_path = null, $
 	global $g_cookie_secure_flag_enabled;
 	if( false === $p_expire ) {
 		$p_expire = 0;
-	}
-	else if( true === $p_expire ) {
+	} else if( true === $p_expire ) {
 		$t_cookie_length = config_get( 'cookie_time_length' );
 		$p_expire = time() + $t_cookie_length;
 	}

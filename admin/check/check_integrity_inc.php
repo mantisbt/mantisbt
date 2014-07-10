@@ -134,13 +134,13 @@ function check_file_integrity_recursive( $p_directory, $p_base_directory, $p_rel
 				if( $t_release !== null ) {
 					$t_integrity_ok = true;
 					$t_release_sanitised = htmlentities( $t_release );
-					$t_integrity_info = "Matches file from release <a href=\"http://git.mantisbt.org/?p=mantisbt.git;a=commit;h=release-$t_release_sanitised\">$t_release_sanitised</a>.";
+					$t_integrity_info = 'Matches file from release <a href="http://git.mantisbt.org/?p=mantisbt.git;a=commit;h=release-' . $t_release_sanitised . '">' . $t_release_sanitised . '</a>.';
 				} else {
 					$t_commit = get_commit_containing_object_hash( $t_file_relative, $t_file_hash );
 					if( $t_commit !== null ) {
 						$t_integrity_ok = true;
 						$t_commit_sanitised = htmlentities( $t_commit );
-						$t_integrity_info = "Matches file introduced or modified in commit <a href=\"http://git.mantisbt.org/?p=mantisbt.git;a=commit;h=$t_commit_sanitised\">$t_commit_sanitised</a>.";
+						$t_integrity_info = 'Matches file introduced or modified in commit <a href="http://git.mantisbt.org/?p=mantisbt.git;a=commit;h=' . $t_commit_sanitised . '">' . $t_commit_sanitised . '</a>.';
 					}
 				}
 				check_print_test_warn_row(

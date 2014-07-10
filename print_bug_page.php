@@ -496,16 +496,16 @@ if( $t_show_additional_information ) {
 
 # Tagging
 if( $t_show_tags ) {
-	echo "<tr class=\"print\">";
+	echo '<tr class="print">';
 	echo '<th class="print-category">', lang_get( 'tags' ), '</th>';
 	echo '<td class="print" colspan="5">';
 	tag_display_attached( $f_bug_id );
 	echo '</td></tr>';
 }
 
-echo "<tr class=\"print\">";
-echo "<td class=\"print-category\">" . lang_get( 'bug_relationships' ) . "</td>";
-echo "<td class=\"print\" colspan=\"5\">" . relationship_get_summary_html_preview( $f_bug_id ) . "</td></tr>";
+echo '<tr class="print">';
+echo '<td class="print-category">' . lang_get( 'bug_relationships' ) . '</td>';
+echo '<td class="print" colspan="5">' . relationship_get_summary_html_preview( $f_bug_id ) . '</td></tr>';
 
 if( $t_show_attachments ) {
 	echo '<tr class="print">';
@@ -531,7 +531,7 @@ if( $t_show_attachments ) {
 			echo '<img src="', $t_attachment['icon']['url'], '" alt="', $t_attachment['icon']['alt'], '" />&#160;';
 		}
 
-		echo "$c_filename ($c_filesize) <span class=\"italic\">$c_date_added</span><br />$c_download_url";
+		echo $c_filename . ' (' .$c_filesize . ') <span class="italic">' . $c_date_added . '</span><br />' . $c_download_url;
 
 		if( $t_attachment['preview'] && $t_attachment['type'] == 'image' ) {
 			echo '<br /><img src="', $t_attachment['download_url'], '" alt="', $t_attachment['alt'], '" /><br />';

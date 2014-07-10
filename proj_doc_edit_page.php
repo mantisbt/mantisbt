@@ -63,7 +63,7 @@ $t_project_id = file_get_field( $f_file_id, 'project_id', 'project' );
 access_ensure_project_level( config_get( 'upload_project_file_threshold' ), $t_project_id );
 
 $t_proj_file_table = db_get_table( 'project_file' );
-$t_query = "SELECT * FROM $t_proj_file_table WHERE id=" . db_param();
+$t_query = 'SELECT * FROM ' . $t_proj_file_table . ' WHERE id=' . db_param();
 $t_result = db_query_bound( $t_query, array( $t_file_id ) );
 $t_row = db_fetch_array( $t_result );
 extract( $t_row, EXTR_PREFIX_ALL, 'v' );

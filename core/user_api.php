@@ -292,13 +292,11 @@ function user_is_realname_unique( $p_username, $p_realname ) {
 
 		# check to see if the realname is unique
 		$t_user_table = db_get_table( 'user' );
-		$t_query = "SELECT id
-				FROM $t_user_table
-				WHERE realname=" . db_param();
+		$t_query = "SELECT id FROM $t_user_table WHERE realname=" . db_param();
 		$t_result = db_query_bound( $t_query, array( $p_realname ) );
 
 		$t_users = array();
-		while ( $t_row = db_fetch_array( $t_result ) ) {
+		while( $t_row = db_fetch_array( $t_result ) ) {
 			$t_users[] = $t_row;
 		}
 		$t_duplicate_count = count( $t_users );
@@ -377,7 +375,7 @@ function user_is_monitoring_bug( $p_user_id, $p_bug_id ) {
 	$t_bug_monitor_table = db_get_table( 'bug_monitor' );
 
 	$t_query = "SELECT COUNT(*) FROM $t_bug_monitor_table
-				  WHERE user_id=" . db_param() . " AND bug_id=" . db_param();
+				  WHERE user_id=" . db_param() . ' AND bug_id=' . db_param();
 
 	$t_result = db_query_bound( $t_query, array( (int)$p_user_id, (int)$p_bug_id ) );
 
@@ -550,8 +548,8 @@ function user_create( $p_username, $p_password, $p_email = '',
 				    ( username, email, password, date_created, last_visit,
 				     enabled, access_level, login_count, cookie_string, realname )
 				  VALUES
-				    ( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param()  . ",
-				     " . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ', ' . db_param() . ')';
+				    ( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param()  . ',
+				     ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ', ' . db_param() . ')';
 	db_query_bound( $t_query, array( $p_username, $p_email, $t_password, db_now(), db_now(), $c_enabled, (int)$p_access_level, 0, $t_cookie_string, $p_realname ) );
 
 	# Create preferences for the user
@@ -683,7 +681,7 @@ function user_delete( $p_user_id ) {
 		$t_result = db_query_bound( $t_query, array( $c_realname ) );
 
 		$t_users = array();
-		while ( $t_row = db_fetch_array( $t_result ) ) {
+		while( $t_row = db_fetch_array( $t_result ) ) {
 			$t_users[] = $t_row;
 		}
 
@@ -1005,18 +1003,18 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 						    ON p.id=u.project_id AND u.user_id=" . db_param() . "
 						  LEFT JOIN $t_project_hierarchy_table ph
 						    ON ph.child_id = p.id
-						  WHERE " . ( $p_show_disabled ? '' : ( 'p.enabled = ' . db_param() . ' AND ' ) ) . "
-							( p.view_state=" . db_param() . "
-							    OR (p.view_state=" . db_param() . "
+						  WHERE " . ( $p_show_disabled ? '' : ( 'p.enabled = ' . db_param() . ' AND ' ) ) . '
+							( p.view_state=' . db_param() . '
+							    OR (p.view_state=' . db_param() . '
 								    AND
-							        u.user_id=" . db_param() . " )
+							        u.user_id=' . db_param() . ' )
 							)
-			  ORDER BY p.name";
+			  ORDER BY p.name';
 		$t_result = db_query_bound( $t_query, ( $p_show_disabled ? array( $p_user_id, $t_public, $t_private, $p_user_id ) : array( $p_user_id, true, $t_public, $t_private, $p_user_id ) ) );
 
 		$t_projects = array();
 
-		while ( $t_row = db_fetch_array( $t_result ) ) {
+		while( $t_row = db_fetch_array( $t_result ) ) {
 			$t_projects[(int)$t_row['id']] = ( $t_row['parent_id'] === null ) ? 0 : (int)$t_row['parent_id'];
 		}
 
@@ -1192,8 +1190,8 @@ function user_get_assigned_projects( $p_user_id ) {
 				LEFT JOIN $t_mantis_project_user_list_table u
 				ON p.id=u.project_id
 				WHERE p.enabled = '1' AND
-					u.user_id=" . db_param() . "
-				ORDER BY p.name";
+					u.user_id=" . db_param() . '
+				ORDER BY p.name';
 	$t_result = db_query_bound( $t_query, array( $p_user_id ) );
 	$t_projects = array();
 	while( $t_row = db_fetch_array( $t_result ) ) {
@@ -1222,11 +1220,11 @@ function user_get_unassigned_by_project_id( $p_project_id = null ) {
 	$t_query = "SELECT DISTINCT u.id, u.username, u.realname
 				FROM $t_mantis_user_table u
 				LEFT JOIN $t_mantis_project_user_list_table p
-				ON p.user_id=u.id AND p.project_id=" . db_param() . "
-				WHERE u.access_level<" . db_param() . " AND
-					u.enabled = " . db_param() . " AND
+				ON p.user_id=u.id AND p.project_id=" . db_param() . '
+				WHERE u.access_level<' . db_param() . ' AND
+					u.enabled = ' . db_param() . ' AND
 					p.user_id IS NULL
-				ORDER BY u.realname, u.username";
+				ORDER BY u.realname, u.username';
 	$t_result = db_query_bound( $t_query, array( $p_project_id, $t_adm, true ) );
 	$t_display = array();
 	$t_sort = array();
@@ -1315,8 +1313,8 @@ function user_get_reported_open_bug_count( $p_user_id, $p_project_id = ALL_PROJE
 function user_get_profile_row( $p_user_id, $p_profile_id ) {
 	$t_user_profile_table = db_get_table( 'user_profile' );
 	$t_query = "SELECT * FROM $t_user_profile_table
-				  WHERE id=" . db_param() . " AND
-				  		user_id=" . db_param();
+				  WHERE id=" . db_param() . ' AND
+				  		user_id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_profile_id, $p_user_id ) );
 
 	$t_row = db_fetch_array( $t_result );
@@ -1396,7 +1394,7 @@ function user_update_last_visit( $p_user_id ) {
 
 	$t_user_table = db_get_table( 'user' );
 
-	$t_query = "UPDATE $t_user_table SET last_visit= " . db_param() . " WHERE id=" . db_param();
+	$t_query = "UPDATE $t_user_table SET last_visit= " . db_param() . ' WHERE id=' . db_param();
 
 	db_query_bound( $t_query, array( $c_value, $c_user_id ) );
 
@@ -1576,8 +1574,8 @@ function user_set_password( $p_user_id, $p_password, $p_allow_protected = false 
 	$c_user_table = db_get_table( 'user' );
 
 	$t_query = "UPDATE $c_user_table
-				  SET password=" . db_param() . ", cookie_string=" . db_param() . "
-				  WHERE id=" . db_param();
+				  SET password=" . db_param() . ', cookie_string=' . db_param() . '
+				  WHERE id=' . db_param();
 	db_query_bound( $t_query, array( $c_password, $c_cookie_string, (int)$p_user_id ) );
 
 	return true;

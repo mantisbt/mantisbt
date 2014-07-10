@@ -106,7 +106,7 @@ function profile_delete( $p_user_id, $p_profile_id ) {
 	$t_user_profile_table = db_get_table( 'user_profile' );
 
 	# Delete the profile
-	$t_query = "DELETE FROM $t_user_profile_table WHERE id=" . db_param() . " AND user_id=" . db_param();
+	$t_query = "DELETE FROM $t_user_profile_table WHERE id=" . db_param() . ' AND user_id=' . db_param();
 	db_query_bound( $t_query, array( $p_profile_id, $p_user_id ) );
 }
 
@@ -147,11 +147,11 @@ function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_bu
 
 	# Add item
 	$t_query = "UPDATE $t_user_profile_table
-				  SET platform=" . db_param() . ",
-				  	  os=" . db_param() . ",
-					  os_build=" . db_param() . ",
-					  description=" . db_param() . "
-				  WHERE id=" . db_param() . " AND user_id=" . db_param();
+				  SET platform=" . db_param() . ',
+				  	  os=' . db_param() . ',
+					  os_build=' . db_param() . ',
+					  description=' . db_param() . '
+				  WHERE id=' . db_param() . ' AND user_id=' . db_param();
 	db_query_bound( $t_query, array( $p_platform, $p_os, $p_os_build, $p_description, $p_profile_id, $p_user_id ) );
 }
 
@@ -164,7 +164,7 @@ function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_bu
 function profile_get_row( $p_user_id, $p_profile_id ) {
 	$t_user_profile_table = db_get_table( 'user_profile' );
 
-	$t_query = "SELECT * FROM $t_user_profile_table WHERE id=" . db_param() . " AND user_id=" . db_param();
+	$t_query = "SELECT * FROM $t_user_profile_table WHERE id=" . db_param() . ' AND user_id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_profile_id, $p_user_id ) );
 
 	return db_fetch_array( $t_result );

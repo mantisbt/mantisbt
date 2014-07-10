@@ -990,9 +990,9 @@ function print_column_selection( BugData $p_bug, $p_columns_target = COLUMNS_TAR
 		access_has_project_level( config_get( 'tag_attach_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ||
 		access_has_project_level( config_get( 'roadmap_update_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ) {
 		$g_checkboxes_exist = true;
-		printf( "<input type=\"checkbox\" name=\"bug_arr[]\" value=\"%d\" />", $p_bug->id );
+		printf( '<input type="checkbox" name="bug_arr[]" value="%d" />', $p_bug->id );
 	} else {
-		echo "&#160;";
+		echo '&#160;';
 	}
 	echo '</td>';
 }

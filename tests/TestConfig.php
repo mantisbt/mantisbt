@@ -87,7 +87,7 @@ function require_mantis_core() {
 	$t_decl = '';
 	foreach( $t_var_list as $t_var ) {
 		global $$t_var;
-		$t_decl .= "global $t_var;\n";
+		$t_decl .= 'global ' . $t_var . ";\n";
 	}
 
 	$$t_bypass_headers = true;
@@ -101,10 +101,10 @@ error_reporting( E_ALL | E_STRICT );
 # Determine the root, library, and tests directories of the framework
 # distribution.
 $g_mantisRoot = dirname( dirname( __FILE__ ) );
-$g_mantisCore = "$g_mantisRoot/core";
-$g_mantisLibrary = "$g_mantisRoot/library";
-$g_mantisClasses = "$g_mantisRoot/core/classes";
-$g_mantisTests = "$g_mantisRoot/tests";
+$g_mantisCore = $g_mantisRoot . '/core';
+$g_mantisLibrary = $g_mantisRoot . '/library';
+$g_mantisClasses = $g_mantisRoot . '/core/classes';
+$g_mantisTests = $g_mantisRoot . '/tests';
 
 
 # Prepend the application/ and tests/ directories to the include_path.

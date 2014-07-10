@@ -257,7 +257,7 @@ if( access_has_global_level( config_get( 'delete_project_threshold' ) ) ) { ?>
 								lang_get( 'edit_link' ) );
 							?>
 							<?php print_bracket_link(
-								"manage_proj_subproj_delete.php?project_id=$f_project_id&subproject_id=" . $t_subproject['id'] . form_security_param( 'manage_proj_subproj_delete' ),
+								'manage_proj_subproj_delete.php?project_id=' . $f_project_id . '&subproject_id=' . $t_subproject['id'] . form_security_param( 'manage_proj_subproj_delete' ),
 								lang_get( 'unlink_link' ) );
 							?>
 						</td>
@@ -467,7 +467,7 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
 				</td>
 				<td class="center"><?php
 					# You need global permissions to edit custom field defs
-					print_button( "manage_proj_custom_field_remove.php?field_id=$t_field_id&project_id=$f_project_id", lang_get( 'remove_link' ) ); ?>
+					print_button( 'manage_proj_custom_field_remove.php?field_id=' . $t_field_id . '&project_id=' . $f_project_id, lang_get( 'remove_link' ) ); ?>
 				</td>
 			</tr>
 <?php
@@ -491,7 +491,7 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
 					{
 						if( !custom_field_is_linked( $t_field_id, $f_project_id ) ) {
 							$t_desc = custom_field_get_definition( $t_field_id );
-							echo "<option value=\"$t_field_id\">" . string_attribute( lang_get_defaulted( $t_desc['name'] ) ) . '</option>' ;
+							echo '<option value="' . $t_field_id . '">' . string_attribute( lang_get_defaulted( $t_desc['name'] ) ) . '</option>' ;
 						}
 					}
 				?>
@@ -546,8 +546,8 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 	foreach ( $t_users as $t_user ) {
 		$t_user_name = string_attribute( $t_user['username'] );
 		$t_sort_name = utf8_strtolower( $t_user_name );
-		if( ( isset( $t_user['realname'] ) ) && ( $t_user['realname'] > "" ) && ( ON == config_get( 'show_realname' ) ) ){
-			$t_user_name = string_attribute( $t_user['realname'] ) . " (" . $t_user_name . ")";
+		if( ( isset( $t_user['realname'] ) ) && ( $t_user['realname'] > '' ) && ( ON == config_get( 'show_realname' ) ) ) {
+			$t_user_name = string_attribute( $t_user['realname'] ) . ' (' . $t_user_name . ')';
 			if( ON == config_get( 'sort_by_last_name' ) ) {
 				$t_sort_name_bits = explode( ' ', utf8_strtolower( $t_user_name ), 2 );
 				$t_sort_name = $t_sort_name_bits[1] . ', ' . $t_sort_name_bits[1];
@@ -564,7 +564,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 	$t_users_count = count( $t_sort );
 	$t_removable_users_exist = false;
 
-	for ( $i = 0; $i < $t_users_count; $i++ ) {
+	for( $i = 0; $i < $t_users_count; $i++ ) {
 		$t_user = $t_users[$i];
 ?>
 			<tr>
@@ -585,7 +585,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 					#  from this project
 					if( $t_can_manage_users && access_has_project_level( $t_user['access_level'], $f_project_id ) ) {
 						if( project_includes_user( $f_project_id, $t_user['id'] ) ) {
-							print_button( "manage_proj_user_remove.php?project_id=$f_project_id&user_id=" . $t_user['id'], lang_get( 'remove_link' ) );
+							print_button( 'manage_proj_user_remove.php?project_id=' . $f_project_id . '&user_id=' . $t_user['id'], lang_get( 'remove_link' ) );
 							$t_removable_users_exist = true;
 						}
 					} ?>
@@ -600,14 +600,14 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 	# You need global or project-specific permissions to remove users
 	#  from this project
 	if( !$f_show_global_users ) {
-		print_button( "manage_proj_edit_page.php?project_id=$f_project_id&show_global_users=true", lang_get( 'show_global_users' ) );
+		print_button( 'manage_proj_edit_page.php?project_id=' . $f_project_id . '&show_global_users=true', lang_get( 'show_global_users' ) );
 	} else {
-		print_button( "manage_proj_edit_page.php?project_id=$f_project_id", lang_get( 'hide_global_users' ) );
+		print_button( 'manage_proj_edit_page.php?project_id=' . $f_project_id, lang_get( 'hide_global_users' ) );
 	}
 
 	if( $t_removable_users_exist ) {
 		echo '&#160;';
-		print_button( "manage_proj_user_remove.php?project_id=$f_project_id", lang_get( 'remove_all_link' ) );
+		print_button( 'manage_proj_user_remove.php?project_id=' . $f_project_id, lang_get( 'remove_all_link' ) );
 	}
 
 # We want to allow people with global permissions and people with high enough

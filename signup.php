@@ -100,7 +100,7 @@ html_page_top2a();
 <div id="error-msg">
 	<div class="center">
 		<strong><?php echo lang_get( 'signup_done_title' ) ?></strong><br/>
-		<?php echo "[$f_username - $f_email] " ?>
+		<?php echo '[' . $f_username . ' - ' . $f_email . '] ' ?>
 	</div>
 
 	<div>

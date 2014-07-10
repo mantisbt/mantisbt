@@ -62,12 +62,12 @@ $t_tag_table = db_get_table( 'tag' );
 # Start Index Menu
 $t_prefix_array = array( 'ALL' );
 
-for ( $i = 'A'; $i != 'AA'; $i++ ) {
+for( $i = 'A'; $i != 'AA'; $i++ ) {
 	$t_prefix_array[] = $i;
 }
 
-for ( $i = 0; $i <= 9; $i++ ) {
-	$t_prefix_array[] = "$i";
+for( $i = 0; $i <= 9; $i++ ) {
+	$t_prefix_array[] = (string)$i;
 }
 if( $f_filter === 'ALL' ) {
 	$t_name_filter = '';
@@ -110,11 +110,11 @@ print_manage_menu( 'manage_tags_page.php' ); ?>
 	foreach ( $t_prefix_array as $t_prefix ) {
 		$t_caption = ( $t_prefix === 'ALL' ? lang_get( 'show_all_tags' ) : $t_prefix );
 		if( $t_prefix == $f_filter ) {
-			$t_link = "<strong>$t_caption</strong>";
+			$t_link = '<strong>' . $t_caption . '</strong>';
 		} else {
 			$t_link = '<a href="manage_tags_page.php?filter=' . $t_prefix .'">' . $t_caption . '</a>';
 		}
-		echo "<li>$t_link </li>";
+		echo '<li>' . $t_link . '</li>';
 	} ?>
 	</ul>
 </div>

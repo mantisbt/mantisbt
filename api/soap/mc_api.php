@@ -477,8 +477,8 @@ function mci_user_get_accessible_subprojects( $p_user_id, $p_parent_project_id, 
 		$t_subproject['enabled'] = $t_subproject_row['enabled'];
 		$t_subproject['view_state'] = mci_enum_get_array_by_id( $t_subproject_row['view_state'], 'project_view_state', $t_lang );
 		$t_subproject['access_min'] = mci_enum_get_array_by_id( $t_subproject_row['access_min'], 'access_levels', $t_lang );
-		$t_subproject['file_path'] = array_key_exists( 'file_path', $t_subproject_row ) ? $t_subproject_row['file_path'] : "";
-		$t_subproject['description'] = array_key_exists( 'description', $t_subproject_row ) ? $t_subproject_row['description'] : "";
+		$t_subproject['file_path'] = array_key_exists( 'file_path', $t_subproject_row ) ? $t_subproject_row['file_path'] : '';
+		$t_subproject['description'] = array_key_exists( 'description', $t_subproject_row ) ? $t_subproject_row['description'] : '';
 		$t_subproject['subprojects'] = mci_user_get_accessible_subprojects( $p_user_id, $t_subproject_id, $t_lang );
 		$t_result[] = $t_subproject;
 	}
@@ -542,9 +542,9 @@ function mci_filter_db_get_available_queries( $p_project_id = null, $p_user_id =
 					WHERE (project_id=" . db_param() . "
 						OR project_id=0)
 					AND name!=''
-					AND (is_public = " . db_param() . "
-						OR user_id = " . db_param() . ")
-					ORDER BY is_public DESC, name ASC";
+					AND (is_public = " . db_param() . '
+						OR user_id = ' . db_param() . ')
+					ORDER BY is_public DESC, name ASC';
 	$t_result = db_query_bound( $t_query, array( $t_project_id, db_prepare_bool( true ), $t_user_id ) );
 	$t_query_count = db_num_rows( $t_result );
 

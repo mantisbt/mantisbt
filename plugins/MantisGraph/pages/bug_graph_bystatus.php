@@ -105,10 +105,10 @@ $t_select = 'SELECT bug_id, type, old_value, new_value, date_modified FROM ' . $
 $t_result = db_query_bound( $t_select, array( $t_start ) );
 $t_row = db_fetch_array( $t_result );
 
-for ( $t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr ) {
+for( $t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr ) {
 	# walk through the data points and use the data retrieved to update counts
 	while( ( $t_row !== false ) && ( $t_row['date_modified'] >= $t_now ) ) {
-		switch ( $t_row['type'] ) {
+		switch( $t_row['type'] ) {
 			case 0: # updated bug
 				if( isset( $t_data[$t_ptr][$t_row['new_value']] ) ) {
 					if( $t_data[$t_ptr][$t_row['new_value']] > 0 ) {
@@ -198,7 +198,7 @@ $t_label_count = $i;
 
 # reverse the array and consolidate the data, if necessary
 $t_metrics = array();
-for ( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
+for( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
 	$t = $t_bin_count - $t_ptr;
 	$t_metrics[0][$t_ptr] = $t_marker[$t];
 	if( $f_summary ) {
@@ -228,7 +228,7 @@ for ( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
 	}
 	if( $f_show_as_table ) {
 		echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('. date( $t_date_format, $t_metrics[0][$t_ptr] ) .')' . '</td>';
-		for ( $i=1; $i<=$t_label_count; $i++ ) {
+		for( $i=1; $i<=$t_label_count; $i++ ) {
 			echo '<td>'.$t_metrics[$i][$t_ptr].'</td>';
 		}
 		echo '</tr>';

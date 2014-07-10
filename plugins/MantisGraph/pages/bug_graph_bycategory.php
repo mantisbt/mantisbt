@@ -111,10 +111,10 @@ $t_select = 'SELECT bug_id, type, field_name, old_value, new_value, date_modifie
 $t_result = db_query_bound( $t_select, array( $t_start ) );
 $t_row = db_fetch_array( $t_result );
 
-for ( $t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr ) {
+for( $t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr ) {
 	# walk through the data points and use the data retrieved to update counts
 	while( ( $t_row !== false ) && ( $t_row['date_modified'] >= $t_now ) ) {
-		switch ( $t_row['type'] ) {
+		switch( $t_row['type'] ) {
 			case 0: # updated bug
 				if( $t_row['field_name'] == 'category' ) {
 					$t_cat = $t_row['new_value'];
@@ -185,10 +185,10 @@ $t_bin_count = $t_ptr;
 # drop any categories that have no counts
 # These arise when bugs are opened and closed within the data intervals
 $t_count_cat = count( $t_category );
-for ( $i=0; $i<$t_count_cat; $i++ ) {
+for( $i=0; $i<$t_count_cat; $i++ ) {
 	$t_cat = $t_category[$i];
 	$t_not_zero = false;
-	for ( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
+	for( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
 		if( isset( $t_data[$t_ptr][$t_cat] ) && ( $t_data[$t_ptr][$t_cat] > 0 ) ) {
 			$t_not_zero = true;
 			break;
@@ -214,7 +214,7 @@ if( $f_show_as_table ) {
 		echo '<th>'.$t_cat.'</th>';
 	}
 	echo '</tr>';
-	for ( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
+	for( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
 		echo '<tr class="row-'.($t_ptr%2+1).'"><td>'.$t_ptr.' ('. date( $t_date_format, $t_marker[$t_ptr] ) .')'.'</td>';
 		foreach ( $t_category as $t_cat ) {
 			echo '<td>'.(isset($t_data[$t_ptr][$t_cat]) ? $t_data[$t_ptr][$t_cat] : 0).'</td>';
@@ -227,7 +227,7 @@ if( $f_show_as_table ) {
 } else {
 	# reverse the array and reorder the data, if necessary
 	$t_metrics = array();
-	for ( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
+	for( $t_ptr=0; $t_ptr<$t_bin_count; $t_ptr++ ) {
 		$j = $t_bin_count - $t_ptr - 1;
 		$t_metrics[0][$t_ptr] = $t_marker[$j];
 		$i = 0;

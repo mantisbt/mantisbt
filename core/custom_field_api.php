@@ -960,7 +960,7 @@ function custom_field_validate( $p_field_id, $p_value ) {
 
 	$t_valid = true;
 	$t_length = utf8_strlen( $p_value );
-	switch ( $t_type ) {
+	switch( $t_type ) {
 		case CUSTOM_FIELD_TYPE_STRING:
 			# Empty fields are valid
 			if( $t_length == 0 ) {

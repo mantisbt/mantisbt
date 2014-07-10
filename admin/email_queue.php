@@ -34,13 +34,13 @@ $f_to = gpc_get( 'send', null );
 
 if( $f_to !== null ) {
 	if( $f_to == 'all' ) {
-		echo "Sending emails...<br />";
+		echo 'Sending emails...<br />';
 		email_send_all();
-		echo "Done";
+		echo 'Done';
 	} else if( $f_to == 'sendordelall' ) {
-		echo "Sending or deleting emails...<br />";
+		echo 'Sending or deleting emails...<br />';
 		email_send_all( true );
-		echo "Done";
+		echo 'Done';
 
 	} else {
 		$t_email_data = email_queue_get( (int)$f_to );

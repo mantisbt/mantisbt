@@ -72,12 +72,12 @@ if( !current_user_is_anonymous() ) {
 	$t_hide_status = config_get( 'bug_resolved_status_threshold' );
 	echo '<div class="quick-summary-left">';
 	echo lang_get( 'open_and_assigned_to_me_label' ) . lang_get( 'word_separator' );
-	print_link( "view_all_set.php?type=1&handler_id=$t_current_user_id&hide_status=$t_hide_status", current_user_get_assigned_open_bug_count(), false, 'subtle' );
+	print_link( 'view_all_set.php?type=1&handler_id=' . $t_current_user_id . '&hide_status=' . $t_hide_status, current_user_get_assigned_open_bug_count(), false, 'subtle' );
 	echo '</div>';
 
 	echo '<div class="quick-summary-right">';
 	echo lang_get( 'open_and_reported_to_me_label' ) . lang_get( 'word_separator' );
-	print_link( "view_all_set.php?type=1&reporter_id=$t_current_user_id&hide_status=$t_hide_status", current_user_get_reported_open_bug_count(), false, 'subtle' );
+	print_link( 'view_all_set.php?type=1&reporter_id=' . $t_current_user_id . '&hide_status=' .$t_hide_status, current_user_get_reported_open_bug_count(), false, 'subtle' );
 	echo '</div>';
 
 	echo '<div class="quick-summary-left">';
@@ -93,7 +93,7 @@ if( news_is_enabled() ) {
 	if( $t_news_count ) {
 		echo '<div id="news-items">';
 		# Loop through results
-		for ( $i = 0; $i < $t_news_count; $i++ ) {
+		for( $i = 0; $i < $t_news_count; $i++ ) {
 			$t_row = $t_news_rows[$i];
 
 			# only show VS_PRIVATE posts to configured threshold and above

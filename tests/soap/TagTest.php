@@ -103,7 +103,7 @@ class TagTest extends SoapBase {
 			$this->client->mc_tag_delete( $this->userName, $this->password, -1 );
 			self::fail( 'Expected an error' );
 		} catch ( SoapFault $e ) {
-			$this->assertContains( "No tag with id", $e->getMessage() );
+			$this->assertContains( 'No tag with id', $e->getMessage() );
 		}
 	}
 
@@ -134,9 +134,9 @@ class TagTest extends SoapBase {
 
 		try {
 			$this->client->mc_tag_add( $this->userName, $this->password, $t_tag_to_create );
-			self::fail( "Expected an error" );
+			self::fail( 'Expected an error' );
 		} catch ( SoapFault $e ) {
-			$this->assertContains( "A tag with the same name already exists", $e->getMessage() );
+			$this->assertContains( 'A tag with the same name already exists', $e->getMessage() );
 		}
 	}
 

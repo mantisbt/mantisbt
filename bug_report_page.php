@@ -253,7 +253,7 @@ print_recently_visited();
 		</th>
 		<td width="70%">
 			<?php if( $t_changed_project ) {
-				echo "[" . project_get_field( $t_bug->project_id, 'name' ) . "] ";
+				echo '[' . project_get_field( $t_bug->project_id, 'name' ) . '] ';
 			} ?>
 			<select <?php echo helper_get_tab_index() ?> id="category_id" name="category_id" class="autofocus">
 				<?php
@@ -338,7 +338,7 @@ print_recently_visited();
 			<label for="due_date"><?php print_documentation_link( 'due_date' ) ?></label>
 		</th>
 		<td>
-			<?php echo "<input " . helper_get_tab_index() . " type=\"text\" id=\"due_date\" name=\"due_date\" class=\"datetime\" size=\"20\" maxlength=\"16\" value=\"" . $t_date_to_display . "\" />" ?>
+			<?php echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetime" size="20" maxlength="16" value="' . $t_date_to_display . '" />' ?>
 		</td>
 	</tr>
 <?php } ?>
@@ -640,7 +640,7 @@ print_recently_visited();
 			<?php echo lang_get( 'relationship_with_parent' ) ?>
 		</th>
 		<td>
-			<?php relationship_list_box( config_get( 'default_bug_relationship_clone' ), "rel_type", false, true ) ?>
+			<?php relationship_list_box( config_get( 'default_bug_relationship_clone' ), 'rel_type', false, true ) ?>
 			<?php echo '<strong>' . lang_get( 'bug' ) . ' ' . bug_format_id( $f_master_bug_id ) . '</strong>' ?>
 		</td>
 	</tr>

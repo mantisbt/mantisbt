@@ -29,7 +29,7 @@ html_page_top( plugin_lang_get( 'title' ) );
 
 print_manage_menu( );
 
-$t_current_font_selected = array(
+$g_current_font_selected = array(
 	'arial' => false,
 	'verdana' => false,
 	'trebuchet' => false,
@@ -42,10 +42,10 @@ $t_current_font_selected = array(
 );
 
 $t_current_font = plugin_config_get( 'font' );
-if( isset( $t_current_font_selected[$t_current_font] ) ) {
-	$t_current_font_selected[$t_current_font] = true;
+if( isset( $g_current_font_selected[$t_current_font] ) ) {
+	$g_current_font_selected[$t_current_font] = true;
 } else {
-	$t_current_font_selected['arial'] = true;
+	$g_current_font_selected['arial'] = true;
 }
 
 /**
@@ -55,10 +55,10 @@ if( isset( $t_current_font_selected[$t_current_font] ) ) {
  * @return string Either checked="checked" for a match or otherwise an empty string
  */
 function print_font_checked( $p_font_name ) {
-	global $t_current_font_selected;
+	global $g_current_font_selected;
 
-	if( isset( $t_current_font_selected[$p_font_name] ) ) {
-		if( $t_current_font_selected[$p_font_name] ) {
+	if( isset( $g_current_font_selected[$p_font_name] ) ) {
+		if( $g_current_font_selected[$p_font_name] ) {
 			return ' checked="checked"';
 		}
 	}

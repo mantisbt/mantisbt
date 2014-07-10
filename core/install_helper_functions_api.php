@@ -280,7 +280,7 @@ function install_date_migrate( array $p_data ) {
 			}
 			$t_new_column = implode( ',', $t_pairs );
 		} else {
-			$t_new_column = $p_data[3] . "=" . db_param();
+			$t_new_column = $p_data[3] . '=' . db_param();
 		}
 		$t_query = "UPDATE $t_table SET $t_new_column WHERE $t_id_column=" . db_param();
 
@@ -349,7 +349,7 @@ function install_correct_multiselect_custom_fields_db_format() {
 	$t_query = "SELECT v.field_id, v.bug_id, v.value from $t_value_table v
 		LEFT JOIN $t_field_table c
 		ON v.field_id = c.id
-		WHERE (c.type = " . CUSTOM_FIELD_TYPE_MULTILIST . " OR c.type = " . CUSTOM_FIELD_TYPE_CHECKBOX . ")
+		WHERE (c.type = " . CUSTOM_FIELD_TYPE_MULTILIST . ' OR c.type = ' . CUSTOM_FIELD_TYPE_CHECKBOX . ")
 			AND v.value != ''
 			AND v.value NOT LIKE '|%|'";
 	$t_result = db_query_bound( $t_query );
@@ -499,7 +499,7 @@ function install_update_history_long_custom_fields() {
 		array( 'category_id' ),
 		array('category' )
 	);
-	$t_field_list = "";
+	$t_field_list = '';
 	foreach( $t_standard_fields as $t_field ) {
 		$t_field_list .= "'$t_field', ";
 	}
@@ -520,8 +520,8 @@ function install_update_history_long_custom_fields() {
 		if( utf8_strlen( $t_field[0] ) == 32 && array_key_exists( $t_field[0], $t_custom_fields ) ) {
 			# Match found, update all history records with this field name
 			$t_update_query = "UPDATE $t_history_table
-				SET field_name = " . db_param() . "
-				WHERE field_name = " . db_param();
+				SET field_name = " . db_param() . '
+				WHERE field_name = ' . db_param();
 			db_query_bound( $t_update_query, array( $t_custom_fields[$t_field[0]], $t_field[0] ) );
 		}
 	}
@@ -547,7 +547,7 @@ function install_check_project_hierarchy() {
 		$t_parent_id = (int)$t_row['parent_id'];
 
 		if( $t_count > 1 ) {
-			$t_query = 'SELECT inherit_parent, child_id, parent_id FROM ' . $t_project_hierarchy_table . ' WHERE child_id=' . db_param() . " AND parent_id=" . db_param();
+			$t_query = 'SELECT inherit_parent, child_id, parent_id FROM ' . $t_project_hierarchy_table . ' WHERE child_id=' . db_param() . ' AND parent_id=' . db_param();
 			$t_result2 = db_query_bound( $t_query, array( $t_child_id, $t_parent_id ) );
 
 			# get first result for inherit_parent, discard the rest
@@ -555,10 +555,10 @@ function install_check_project_hierarchy() {
 
 			$t_inherit = $t_row2['inherit_parent'];
 
-			$t_query_delete = 'DELETE FROM ' . $t_project_hierarchy_table . ' WHERE child_id=' . db_param() . " AND parent_id=" . db_param();
+			$t_query_delete = 'DELETE FROM ' . $t_project_hierarchy_table . ' WHERE child_id=' . db_param() . ' AND parent_id=' . db_param();
 			db_query_bound( $t_query_delete, array( $t_child_id, $t_parent_id ) );
 
-			$t_query_insert = 'INSERT INTO ' . $t_project_hierarchy_table . ' (child_id, parent_id, inherit_parent) VALUES (' . db_param() . "," . db_param() . "," . db_param() . ')';
+			$t_query_insert = 'INSERT INTO ' . $t_project_hierarchy_table . ' (child_id, parent_id, inherit_parent) VALUES (' . db_param() . ',' . db_param() . ',' . db_param() . ')';
 			db_query_bound( $t_query_insert, array( $t_child_id, $t_parent_id, $t_inherit ) );
 		}
 	}
@@ -575,6 +575,6 @@ function install_check_project_hierarchy() {
  * @return array
  */
 function InsertData( $p_table, $p_data ) {
-	$t_query = "INSERT INTO " . $p_table . $p_data;
+	$t_query = 'INSERT INTO ' . $p_table . $p_data;
 	return array( $t_query );
 }

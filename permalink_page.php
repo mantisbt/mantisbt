@@ -54,7 +54,7 @@ $f_url = string_sanitize_url( gpc_get_string( 'url' ) );
 <?php
 echo lang_get( 'filter_permalink' ), '<br />';
 $t_safe_url = string_display_line( $f_url );
-echo "<a href=\"$t_safe_url\">$t_safe_url</a></p>";
+echo '<a href="' . $t_safe_url . '">' . $t_safe_url . '</a></p>';
 
 $t_create_short_url = config_get( 'create_short_url' );
 

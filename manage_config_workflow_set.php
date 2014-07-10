@@ -146,7 +146,7 @@ if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 			$t_temp_workflow = array();
 			foreach( $t_enum_status as $t_next => $t_next_label ) {
 				if( $t_status != $t_next ) {
-					$t_temp_workflow[] = "$t_next:$t_next_label";
+					$t_temp_workflow[] = $t_next . ':' . $t_next_label;
 				}
 			}
 			$t_workflow_parent[$t_status] = implode( ',', $t_temp_workflow );

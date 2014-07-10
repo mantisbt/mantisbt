@@ -499,15 +499,13 @@ function plugin_version_check( array $p_version1, array $p_version2, $p_maximum 
 		if( $p_maximum ) {
 			if( $t_version1 < $t_version2 ) {
 				return 1;
-			}
-			else if( $t_version1 > $t_version2 ) {
+			} else if( $t_version1 > $t_version2 ) {
 				return -1;
 			}
 		} else {
 			if( $t_version1 > $t_version2 ) {
 				return 1;
-			}
-			else if( $t_version1 < $t_version2 ) {
+			} else if( $t_version1 < $t_version2 ) {
 				return -1;
 			}
 		}
@@ -977,8 +975,7 @@ function plugin_init_installed() {
 		}
 
 		$t_plugins = $t_plugins_retry;
-	}
-	while( $t_continue );
+	} while( $t_continue );
 
 	event_signal( 'EVENT_PLUGIN_INIT' );
 }

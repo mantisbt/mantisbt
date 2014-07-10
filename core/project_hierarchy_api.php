@@ -84,8 +84,8 @@ function project_hierarchy_remove( $p_child_id, $p_parent_id ) {
 	$t_project_hierarchy_table = db_get_table( 'project_hierarchy' );
 
 	$t_query = "DELETE FROM $t_project_hierarchy_table
-		                WHERE child_id = " . db_param() . "
-						AND parent_id = " . db_param();
+		                WHERE child_id = " . db_param() . '
+						AND parent_id = ' . db_param();
 
 	db_query_bound( $t_query, array( $p_child_id, $p_parent_id ) );
 }
@@ -99,8 +99,8 @@ function project_hierarchy_remove_all( $p_project_id ) {
 	$t_project_hierarchy_table = db_get_table( 'project_hierarchy' );
 
 	$t_query = "DELETE FROM $t_project_hierarchy_table
-		                WHERE child_id = " . db_param() . "
-						  OR parent_id = " . db_param();
+		                WHERE child_id = " . db_param() . '
+						  OR parent_id = ' . db_param();
 
 	db_query_bound( $t_query, array( $p_project_id, $p_project_id ) );
 }
@@ -177,7 +177,7 @@ function project_hierarchy_cache( $p_show_disabled = false ) {
 	$g_cache_project_hierarchy = array();
 	$g_cache_project_inheritance = array();
 
-	while ( $t_row = db_fetch_array( $t_result ) ) {
+	while( $t_row = db_fetch_array( $t_result ) ) {
 		if( null === $t_row['parent_id'] ) {
 			$t_row['parent_id'] = ALL_PROJECTS;
 		}

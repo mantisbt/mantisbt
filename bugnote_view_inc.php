@@ -85,7 +85,7 @@ foreach( $t_bugnotes as $t_bugnote ) {
 }
 user_cache_array_rows( $t_bugnote_users );
 
-$num_notes = count( $t_bugnotes );
+$t_num_notes = count( $t_bugnotes );
 ?>
 
 <?php # Bugnotes BEGIN ?>
@@ -104,7 +104,7 @@ $num_notes = count( $t_bugnotes );
 </tr>
 <?php
 	# no bugnotes
-	if( 0 == $num_notes ) {
+	if( 0 == $t_num_notes ) {
 ?>
 <tr class="bugnotes-empty">
 	<td class="center" colspan="2">
@@ -125,7 +125,7 @@ $num_notes = count( $t_bugnotes );
 	$t_can_delete_all_bugnotes = access_has_bug_level( config_get( 'delete_bugnote_threshold' ), $f_bug_id );
 	$t_can_change_view_state_all_bugnotes = $t_can_edit_all_bugnotes && access_has_bug_level( config_get( 'change_view_status_threshold' ), $f_bug_id );
 
-	for ( $i=0; $i < $num_notes; $i++ ) {
+	for( $i=0; $i < $t_num_notes; $i++ ) {
 		$t_bugnote = $t_bugnotes[$i];
 
 		if( $t_bugnote->date_submitted != $t_bugnote->last_modified ) {
@@ -242,7 +242,7 @@ $num_notes = count( $t_bugnotes );
 	</td>
 	<td class="bugnote-note">
 		<?php
-			switch ( $t_bugnote->note_type ) {
+			switch( $t_bugnote->note_type ) {
 				case REMINDER:
 					echo '<em>';
 

@@ -70,8 +70,7 @@ if( -1 != config_get( 'database_version', -1 ) ) {
 	?>
 				<td class="nowrap"><p>When you have backed up your database click the link below to continue</p>[ <a href="install.php">Upgrade Now</a> ]</td>
 				<?php
-}
-else {?>
+} else {?>
 				<td class="nowrap"><p>You aware to be running an old (pre 1.1.0) release of MantisBT. To update to this release of mantis, you must first update your installation to 1.1</td>
 				<?php
 }?>

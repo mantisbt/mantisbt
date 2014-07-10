@@ -105,7 +105,7 @@ if( count( $t_tags_failed ) > 0 ) {
 	</tr>
 	<tr class="spacer"><td colspan="2"></td></tr>
 <?php
-	$t_tag_string = "";
+	$t_tag_string = '';
 	foreach( $t_tags_attach as $t_tag_row ) {
 		if( !is_blank( $t_tag_string ) ) {
 			$t_tag_string .= config_get( 'tag_separator' );

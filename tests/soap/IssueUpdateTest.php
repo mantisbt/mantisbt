@@ -159,7 +159,7 @@ class IssueUpdateTest extends SoapBase {
 		$t_created_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
 		$t_note_data = array(
-			'text' => "first note",
+			'text' => 'first note',
 		);
 
 		$this->client->mc_issue_note_add( $this->userName, $this->password, $t_issue_id, $t_note_data );
@@ -203,7 +203,7 @@ class IssueUpdateTest extends SoapBase {
 	public function testUpdateIssueWithHandler() {
 		$t_admin_users = $this->client->mc_project_get_users( $this->userName, $this->password, $this->getProjectId(), 90 );
 
-		$this->assertTrue( count( $t_admin_users ) >= 1, "count(adminUsers) >= 1" );
+		$this->assertTrue( count( $t_admin_users ) >= 1, 'count(adminUsers) >= 1' );
 
 		$t_issue_to_add = $this->getIssueToAdd( 'IssueUpdateTest.testUpdateIssueWithHandler' );
 
@@ -253,7 +253,7 @@ class IssueUpdateTest extends SoapBase {
 
 		$t_updated_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertEquals( $this->dateToUTC( $t_date ), $this->dateToUTC( $t_updated_issue->due_date ), "due_date" );
+		$this->assertEquals( $this->dateToUTC( $t_date ), $this->dateToUTC( $t_updated_issue->due_date ), 'due_date' );
 	}
 
 	/**
@@ -306,8 +306,8 @@ class IssueUpdateTest extends SoapBase {
 
 		$t_issue->notes = array(
 			array (
-				'text' => "first note",
-				'time_tracking' => "30"
+				'text' => 'first note',
+				'time_tracking' => '30'
 			)
 		);
 

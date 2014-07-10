@@ -68,7 +68,7 @@ if( $f_action != 'add' ) {
 	}
 }
 
-switch ( $f_action ) {
+switch( $f_action ) {
 	case 'edit':
 		form_security_purge( 'profile_update' );
 		print_header_redirect( 'account_prof_edit_page.php?profile_id=' . $f_profile_id );

@@ -99,8 +99,7 @@ function project_cache_row( $p_project_id, $p_trigger_errors = true ) {
 
 	if( isset( $g_cache_project[(int)$p_project_id] ) ) {
 		return $g_cache_project[(int)$p_project_id];
-	}
-	else if( isset( $g_cache_project_missing[(int)$p_project_id] ) ) {
+	} else if( isset( $g_cache_project_missing[(int)$p_project_id] ) ) {
 		return false;
 	}
 
@@ -281,8 +280,8 @@ function project_includes_user( $p_project_id, $p_user_id ) {
 	$t_project_user_list_table = db_get_table( 'project_user_list' );
 
 	$t_query = "SELECT COUNT(*) FROM $t_project_user_list_table
-				  WHERE project_id=" . db_param() . " AND
-						user_id=" . db_param();
+				  WHERE project_id=" . db_param() . ' AND
+						user_id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_project_id, $p_user_id ) );
 
 	if( 0 == db_result( $t_result ) ) {
@@ -454,14 +453,14 @@ function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_v
 	$t_project_table = db_get_table( 'project' );
 
 	$t_query = "UPDATE $t_project_table
-				  SET name=" . db_param() . ",
-					status=" . db_param() . ",
-					enabled=" . db_param() . ",
-					view_state=" . db_param() . ",
-					file_path=" . db_param() . ",
-					description=" . db_param() . ",
-					inherit_global=" . db_param() . "
-				  WHERE id=" . db_param();
+				  SET name=" . db_param() . ',
+					status=' . db_param() . ',
+					enabled=' . db_param() . ',
+					view_state=' . db_param() . ',
+					file_path=' . db_param() . ',
+					description=' . db_param() . ',
+					inherit_global=' . db_param() . '
+				  WHERE id=' . db_param();
 	db_query_bound( $t_query, array( $p_name, (int)$p_status, $c_enabled, (int)$p_view_state, $p_file_path, $p_description, $c_inherit_global, $p_project_id ) );
 
 	project_clear_cache( $p_project_id );
@@ -579,7 +578,7 @@ function project_get_local_user_access_level( $p_project_id, $p_user_id ) {
 
 	$t_query = "SELECT access_level
 				  FROM $t_project_user_list_table
-				  WHERE user_id=" . db_param() . " AND project_id=" . db_param();
+				  WHERE user_id=" . db_param() . ' AND project_id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( (int)$p_user_id, $p_project_id ) );
 
 	if( db_num_rows( $t_result ) > 0 ) {
@@ -709,8 +708,8 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 		$t_query = "SELECT u.id, u.username, u.realname, l.access_level
 				FROM $t_project_user_list_table l, $t_user_table u
 				WHERE l.user_id = u.id
-				AND u.enabled = " . db_param() . "
-				AND l.project_id = " . db_param();
+				AND u.enabled = " . db_param() . '
+				AND l.project_id = ' . db_param();
 
 		$t_result = db_query_bound( $t_query, array( $t_on, $c_project_id ) );
 		$t_row_count = db_num_rows( $t_result );
@@ -797,9 +796,9 @@ function project_update_user_access( $p_project_id, $p_user_id, $p_access_level 
 	$t_project_user_list_table = db_get_table( 'project_user_list' );
 
 	$t_query = "UPDATE $t_project_user_list_table
-				  SET access_level=" . db_param() . "
-				  WHERE	project_id=" . db_param() . " AND
-						user_id=" . db_param();
+				  SET access_level=" . db_param() . '
+				  WHERE	project_id=' . db_param() . ' AND
+						user_id=' . db_param();
 
 	db_query_bound( $t_query, array( (int)$p_access_level, (int)$p_project_id, (int)$p_user_id ) );
 }
@@ -830,7 +829,7 @@ function project_remove_user( $p_project_id, $p_user_id ) {
 	$t_project_user_list_table = db_get_table( 'project_user_list' );
 
 	$t_query = "DELETE FROM $t_project_user_list_table
-				  WHERE project_id=" . db_param() . " AND user_id=" . db_param();
+				  WHERE project_id=" . db_param() . ' AND user_id=' . db_param();
 
 	db_query_bound( $t_query, array( (int)$p_project_id, (int)$p_user_id ) );
 }
@@ -873,7 +872,7 @@ function project_copy_users( $p_destination_id, $p_source_id, $p_access_level_li
 	$t_rows = project_get_local_user_rows( $p_source_id );
 
 	$t_count = count( $t_rows );
-	for ( $i = 0; $i < $t_count; $i++ ) {
+	for( $i = 0; $i < $t_count; $i++ ) {
 		$t_row = $t_rows[$i];
 
 		if( $p_access_level_limit !== null &&

@@ -55,11 +55,11 @@ require_api( 'utility_api.php' );
 <?php
 collapse_open( 'bugnotestats' );
 
-$t_today = date( "d:m:Y" );
-$t_date_submitted = isset( $t_bug ) ? date( "d:m:Y", $t_bug->date_submitted ) : $t_today;
+$t_today = date( 'd:m:Y' );
+$t_date_submitted = isset( $t_bug ) ? date( 'd:m:Y', $t_bug->date_submitted ) : $t_today;
 
 $t_bugnote_stats_from_def = $t_date_submitted;
-$t_bugnote_stats_from_def_ar = explode( ":", $t_bugnote_stats_from_def );
+$t_bugnote_stats_from_def_ar = explode( ':', $t_bugnote_stats_from_def );
 $t_bugnote_stats_from_def_d = $t_bugnote_stats_from_def_ar[0];
 $t_bugnote_stats_from_def_m = $t_bugnote_stats_from_def_ar[1];
 $t_bugnote_stats_from_def_y = $t_bugnote_stats_from_def_ar[2];
@@ -69,7 +69,7 @@ $t_bugnote_stats_from_m = gpc_get_int( 'start_month', $t_bugnote_stats_from_def_
 $t_bugnote_stats_from_y = gpc_get_int( 'start_year', $t_bugnote_stats_from_def_y );
 
 $t_bugnote_stats_to_def = $t_today;
-$t_bugnote_stats_to_def_ar = explode( ":", $t_bugnote_stats_to_def );
+$t_bugnote_stats_to_def_ar = explode( ':', $t_bugnote_stats_to_def );
 $t_bugnote_stats_to_def_d = $t_bugnote_stats_to_def_ar[0];
 $t_bugnote_stats_to_def_m = $t_bugnote_stats_to_def_ar[1];
 $t_bugnote_stats_to_def_y = $t_bugnote_stats_to_def_ar[2];
@@ -205,7 +205,7 @@ if( ON == config_get( 'time_tracking_with_billing' ) ) {
 			$t_item['sum_time_tracking'] = db_minutes_to_hhmm( $t_item['sum_time_tracking'] );
 			if( $t_item['bug_id'] != $t_prev_id ) {
 				$t_link = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_item['bug_id'] ) ) . lang_get( 'word_separator' ) . string_display( $t_item['summary'] );
-				echo '<tr class="row-category-history"><td colspan="4">' . $t_link . "</td></tr>";
+				echo '<tr class="row-category-history"><td colspan="4">' . $t_link . '</td></tr>';
 				$t_prev_id = $t_item['bug_id'];
 			}
 ?>

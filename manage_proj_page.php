@@ -121,10 +121,10 @@ print_manage_menu( 'manage_proj_page.php' );
 			$t_full_projects[] = project_get_row( $t_project_id );
 		}
 		$t_projects = multi_sort( $t_full_projects, $f_sort, $t_direction );
-		$t_stack 	= array( $t_projects );
+		$t_stack = array( $t_projects );
 
-		while ( 0 < count( $t_stack ) ) {
-			$t_projects   = array_shift( $t_stack );
+		while( 0 < count( $t_stack ) ) {
+			$t_projects = array_shift( $t_stack );
 
 			if( 0 == count( $t_projects ) ) {
 				continue;
@@ -138,7 +138,7 @@ print_manage_menu( 'manage_proj_page.php' );
 			if( access_has_project_level( $t_manage_project_threshold, $t_project_id, auth_get_current_user_id() ) ) { ?>
 			<tr>
 				<td>
-					<a href="manage_proj_edit_page.php?project_id=<?php echo $t_project['id'] ?>"><?php echo str_repeat( "&raquo; ", $t_level ) . string_display( $t_project['name'] ) ?></a>
+					<a href="manage_proj_edit_page.php?project_id=<?php echo $t_project['id'] ?>"><?php echo str_repeat( '&raquo; ', $t_level ) . string_display( $t_project['name'] ) ?></a>
 				</td>
 				<td><?php echo get_enum_element( 'project_status', $t_project['status'] ) ?></td>
 				<td><?php echo trans_bool( $t_project['enabled'] ) ?></td>
@@ -199,9 +199,9 @@ print_manage_menu( 'manage_proj_page.php' );
 					$t_id = urlencode( $t_id );
 					$t_project_id = urlencode( ALL_PROJECTS );
 
-					print_button( "manage_proj_cat_edit_page.php?id=$t_id&project_id=$t_project_id", lang_get( 'edit_link' ) );
+					print_button( 'manage_proj_cat_edit_page.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'edit_link' ) );
 					echo '&#160;';
-					print_button( "manage_proj_cat_delete.php?id=$t_id&project_id=$t_project_id", lang_get( 'delete_link' ) );
+					print_button( 'manage_proj_cat_delete.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'delete_link' ) );
 ?>
 				</td>
 			<?php } ?>

@@ -81,7 +81,7 @@ if( !mci_is_webservice_call() ) {
 
 require_once( 'mc_core.php' );
 
-$server = new SoapServer( "mantisconnect.wsdl",
+$server = new SoapServer( 'mantisconnect.wsdl',
 	array( 'features' => SOAP_USE_XSI_ARRAY_TYPE + SOAP_SINGLE_ELEMENT_ARRAYS )
 );
 

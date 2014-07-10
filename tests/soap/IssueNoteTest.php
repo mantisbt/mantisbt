@@ -55,7 +55,7 @@ class IssueNoteTest extends SoapBase {
 		$t_created_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
 		$t_note_data = array(
-			'text' => "first note",
+			'text' => 'first note',
 		    'note_type' => 2,
 		    'note_attr' => 'attr_value'
 		);
@@ -102,8 +102,8 @@ class IssueNoteTest extends SoapBase {
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
 		$t_note_data = array(
-			'text' => "first note",
-			'time_tracking' => "30"
+			'text' => 'first note',
+			'time_tracking' => '30'
 		);
 
 		$t_issue_note_id = $this->client->mc_issue_note_add( $this->userName, $this->password, $t_issue_id, $t_note_data );
@@ -144,7 +144,7 @@ class IssueNoteTest extends SoapBase {
 		$t_created_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
 		$t_note_data = array(
-			'text' => "some note",
+			'text' => 'some note',
 		);
 
 		$t_issue_note_id = $this->client->mc_issue_note_add( $this->userName, $this->password, $t_issue_id, $t_note_data );
@@ -155,7 +155,7 @@ class IssueNoteTest extends SoapBase {
 
 		$t_note_data_new = array(
 			'id' => $t_issue_note_id,
-			'text' => "some new note",
+			'text' => 'some new note',
 			'view_state' => array ( 'id' => 10 ) # public
 		);
 

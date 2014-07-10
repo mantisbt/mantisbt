@@ -99,7 +99,7 @@ $t_bugnote_text = string_textarea( bugnote_get_text( $f_bugnote_id ) );
 # No need to gather the extra information if not used
 if( config_get( 'time_tracking_enabled' ) &&
 	access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $t_bug_id ) ) {
-	$t_time_tracking = bugnote_get_field( $f_bugnote_id, "time_tracking" );
+	$t_time_tracking = bugnote_get_field( $f_bugnote_id, 'time_tracking' );
 	$t_time_tracking = db_minutes_to_hhmm( $t_time_tracking );
 }
 

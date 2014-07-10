@@ -71,7 +71,7 @@ else {
 
 
 # attempt to find plugin language files
-echo "<br />Trying to find+check plugin language files...<br />";
+echo '<br />Trying to find+check plugin language files...<br />';
 if( function_exists( 'scandir' ) ) {
 	checkplugins( config_get( 'plugin_path' ) );
 } else {
@@ -122,7 +122,7 @@ function checklangdir( $p_path, $p_lang_files = null ) {
 	}
 	else {
 		if( in_array( STRINGS_ENGLISH, $t_lang_files ) ) {
-			echo "Testing English language file...<br />";
+			echo 'Testing English language file...<br />';
 			flush();
 			checkfile( $t_path, STRINGS_ENGLISH );
 		}
@@ -194,7 +194,7 @@ function checkfile( $p_path, $p_file, $p_quiet = false ) {
 		}
 
 		if( !empty( $t_data ) ) {
-			print_error( "Language file '$p_file' failed at require_once (data output: " . var_export( $t_data, true ) . ")", 'FAILED' );
+			print_error( "Language file '$p_file' failed at require_once (data output: " . var_export( $t_data, true ) . ')', 'FAILED' );
 			if( $p_quiet ) {
 				return false;
 			}
@@ -400,7 +400,7 @@ function checktoken( $file, $base = false ) {
  * @return void
  */
 function lang_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
-	print_error( "error handler thrown: " . $p_type . '<br />' . $p_error . '<br />' . $p_file . '<br />' . $p_line . '<br />' . $p_context );
+	print_error( 'error handler thrown: ' . $p_type . '<br />' . $p_error . '<br />' . $p_file . '<br />' . $p_line . '<br />' . $p_context );
 }
 
 /**

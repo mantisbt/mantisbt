@@ -43,7 +43,7 @@ require_api( 'utility_api.php' );
  * @return void
  */
 function ldap_log_error( $p_ds ) {
-	log_event( LOG_LDAP, "ERROR #" . ldap_errno( $p_ds ) . ": " . ldap_error( $p_ds ) );
+	log_event( LOG_LDAP, 'ERROR #' . ldap_errno( $p_ds ) . ': ' . ldap_error( $p_ds ) );
 }
 
 /**
@@ -54,7 +54,7 @@ function ldap_log_error( $p_ds ) {
  */
 function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 	if( !extension_loaded( 'ldap' ) ) {
-		log_event( LOG_LDAP, "Error: LDAP extension missing in php" );
+		log_event( LOG_LDAP, 'Error: LDAP extension missing in php' );
 		trigger_error( ERROR_LDAP_EXTENSION_NOT_LOADED, ERROR );
 	}
 
@@ -63,11 +63,11 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 	log_event( LOG_LDAP, "Attempting connection to LDAP server/URI '{$t_ldap_server}'." );
 	$t_ds = @ldap_connect( $t_ldap_server );
 	if( $t_ds !== false && $t_ds > 0 ) {
-		log_event( LOG_LDAP, "Connection accepted by LDAP server" );
+		log_event( LOG_LDAP, 'Connection accepted by LDAP server' );
 		$t_protocol_version = config_get( 'ldap_protocol_version' );
 
 		if( $t_protocol_version > 0 ) {
-			log_event( LOG_LDAP, "Setting LDAP protocol version to " . $t_protocol_version );
+			log_event( LOG_LDAP, 'Setting LDAP protocol version to ' . $t_protocol_version );
 			$t_result = @ldap_set_option( $t_ds, LDAP_OPT_PROTOCOL_VERSION, $t_protocol_version );
 			if( !$t_result ) {
 				ldap_log_error( $t_ds );
@@ -89,23 +89,23 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 		}
 
 		if( !is_blank( $p_binddn ) && !is_blank( $p_password ) ) {
-			log_event( LOG_LDAP, "Attempting bind to ldap server with username and password" );
+			log_event( LOG_LDAP, 'Attempting bind to ldap server with username and password' );
 			$t_br = @ldap_bind( $t_ds, $p_binddn, $p_password );
 		} else {
 			# Either the Bind DN or the Password are empty, so attempt an anonymous bind.
-			log_event( LOG_LDAP, "Attempting anonymous bind to ldap server" );
+			log_event( LOG_LDAP, 'Attempting anonymous bind to ldap server' );
 			$t_br = @ldap_bind( $t_ds );
 		}
 
 		if( !$t_br ) {
 			ldap_log_error( $t_ds );
-			log_event( LOG_LDAP, "Bind to ldap server failed" );
+			log_event( LOG_LDAP, 'Bind to ldap server failed' );
 			trigger_error( ERROR_LDAP_SERVER_CONNECT_FAILED, ERROR );
 		} else {
-			log_event( LOG_LDAP, "Bind to ldap server successful" );
+			log_event( LOG_LDAP, 'Bind to ldap server successful' );
 		}
 	} else {
-		log_event( LOG_LDAP, "Connection to ldap server failed" );
+		log_event( LOG_LDAP, 'Connection to ldap server failed' );
 		trigger_error( ERROR_LDAP_SERVER_CONNECT_FAILED, ERROR );
 	}
 
@@ -218,7 +218,7 @@ function ldap_get_field_from_username( $p_username, $p_field ) {
 	log_event( LOG_LDAP, "Retrieving field '$p_field' for '$p_username'" );
 
 	# Bind
-	log_event( LOG_LDAP, "Binding to LDAP server" );
+	log_event( LOG_LDAP, 'Binding to LDAP server' );
 	$t_ds = @ldap_connect_bind();
 	if( $t_ds === false ) {
 		ldap_log_error( $t_ds );
@@ -234,7 +234,7 @@ function ldap_get_field_from_username( $p_username, $p_field ) {
 	if( $t_sr === false ) {
 		ldap_log_error( $t_ds );
 		ldap_unbind( $t_ds );
-		log_event( LOG_LDAP, "ldap search failed" );
+		log_event( LOG_LDAP, 'ldap search failed' );
 		return null;
 	}
 
@@ -242,18 +242,18 @@ function ldap_get_field_from_username( $p_username, $p_field ) {
 	$t_info = ldap_get_entries( $t_ds, $t_sr );
 	if( $t_info === false ) {
 		ldap_log_error( $t_ds );
-		log_event( LOG_LDAP, "ldap_get_entries() returned false." );
+		log_event( LOG_LDAP, 'ldap_get_entries() returned false.' );
 		return null;
 	}
 
 	# Free results / unbind
-	log_event( LOG_LDAP, "Unbinding from LDAP server" );
+	log_event( LOG_LDAP, 'Unbinding from LDAP server' );
 	ldap_free_result( $t_sr );
 	ldap_unbind( $t_ds );
 
 	# If no matches, return null.
 	if( $t_info['count'] == 0 ) {
-		log_event( LOG_LDAP, "No matches found." );
+		log_event( LOG_LDAP, 'No matches found.' );
 		return null;
 	}
 
@@ -298,7 +298,7 @@ function ldap_authenticate( $p_user_id, $p_password ) {
  */
 function ldap_authenticate_by_username( $p_username, $p_password ) {
 	if( ldap_simulation_is_enabled() ) {
-		log_event( LOG_LDAP, "Authenticating via LDAP simulation" );
+		log_event( LOG_LDAP, 'Authenticating via LDAP simulation' );
 		$t_authenticated = ldap_simulation_authenticate_by_username( $p_username, $p_password );
 	} else {
 		$c_username = ldap_escape_string( $p_username );
@@ -314,7 +314,7 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 		);
 
 		# Bind
-		log_event( LOG_LDAP, "Binding to LDAP server" );
+		log_event( LOG_LDAP, 'Binding to LDAP server' );
 		$t_ds = ldap_connect_bind();
 		if( $t_ds === false ) {
 			ldap_log_error( $t_ds );
@@ -327,7 +327,7 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 		if( $t_sr === false ) {
 			ldap_log_error( $t_ds );
 			ldap_unbind( $t_ds );
-			log_event( LOG_LDAP, "ldap search failed" );
+			log_event( LOG_LDAP, 'ldap search failed' );
 			trigger_error( ERROR_LDAP_AUTH_FAILED, ERROR );
 		}
 
@@ -343,7 +343,7 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 
 		if( $t_info['count'] > 0 ) {
 			# Try to authenticate to each until we get a match
-			for ( $i = 0; $i < $t_info['count']; $i++ ) {
+			for( $i = 0; $i < $t_info['count']; $i++ ) {
 				$t_dn = $t_info[$i]['dn'];
 				log_event( LOG_LDAP, "Checking {$t_info[$i]['dn']}" );
 
@@ -354,10 +354,10 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 				}
 			}
 		} else {
-			log_event( LOG_LDAP, "No matching entries found" );
+			log_event( LOG_LDAP, 'No matching entries found' );
 		}
 
-		log_event( LOG_LDAP, "Unbinding from LDAP server" );
+		log_event( LOG_LDAP, 'Unbinding from LDAP server' );
 		ldap_free_result( $t_sr );
 		ldap_unbind( $t_ds );
 	}
@@ -384,7 +384,7 @@ function ldap_authenticate_by_username( $p_username, $p_password ) {
 		}
 		log_event( LOG_LDAP, "User '$p_username' authenticated" );
 	} else {
-		log_event( LOG_LDAP, "Authentication failed" );
+		log_event( LOG_LDAP, 'Authentication failed' );
 	}
 
 	return $t_authenticated;

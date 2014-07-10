@@ -401,14 +401,13 @@ class Graph {
 		$t_result = array();
 
 		foreach( $p_attributes as $t_name => $t_value ) {
-			if( !preg_match( "/[a-zA-Z]+/", $t_name ) ) {
+			if( !preg_match( '/[a-zA-Z]+/', $t_name ) ) {
 				continue;
 			}
 
 			if( is_string( $t_value ) ) {
 				$t_value = '"' . addcslashes( $t_value, "\0..\37\"\\" ) . '"';
-			}
-			else if( is_integer( $t_value ) or is_float( $t_value ) ) {
+			} else if( is_integer( $t_value ) or is_float( $t_value ) ) {
 				$t_value = (string)$t_value;
 			} else {
 				continue;
@@ -426,14 +425,13 @@ class Graph {
 	 */
 	function _print_graph_defaults() {
 		foreach( $this->attributes as $t_name => $t_value ) {
-			if( !preg_match( "/[a-zA-Z]+/", $t_name ) ) {
+			if( !preg_match( '/[a-zA-Z]+/', $t_name ) ) {
 				continue;
 			}
 
 			if( is_string( $t_value ) ) {
 				$t_value = '"' . addcslashes( $t_value, "\0..\37\"\\" ) . '"';
-			}
-			else if( is_integer( $t_value ) or is_float( $t_value ) ) {
+			} else if( is_integer( $t_value ) or is_float( $t_value ) ) {
 				$t_value = (string)$t_value;
 			} else {
 				continue;

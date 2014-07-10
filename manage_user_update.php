@@ -158,19 +158,19 @@ if( ( $f_access_level >= $t_admin_threshold ) && ( !user_is_administrator( $f_us
 #  then proceed with a full update.
 $t_query_params = array();
 if( $f_protected && $t_old_protected ) {
-	$t_query = "UPDATE $t_user_table
-			SET username=" . db_param() . ", email=" . db_param() . ",
-				protected=" . db_param() . ", realname=" . db_param() . "
-			WHERE id=" . db_param();
+	$t_query = 'UPDATE ' . $t_user_table . '
+			SET username=' . db_param() . ', email=' . db_param() . ',
+				protected=' . db_param() . ', realname=' . db_param() . '
+			WHERE id=' . db_param();
 	$t_query_params = array( $c_username, $c_email, $c_protected, $c_realname, $c_user_id );
 	# Prevent e-mail notification for a change that did not happen
 	$f_access_level = $t_old_access_level;
 } else {
-	$t_query = "UPDATE $t_user_table
-			SET username=" . db_param() . ", email=" . db_param() . ",
-				access_level=" . db_param() . ", enabled=" . db_param() . ",
-				protected=" . db_param() . ", realname=" . db_param() . "
-			WHERE id=" . db_param();
+	$t_query = 'UPDATE ' . $t_user_table . '
+			SET username=' . db_param() . ', email=' . db_param() . ',
+				access_level=' . db_param() . ', enabled=' . db_param() . ',
+				protected=' . db_param() . ', realname=' . db_param() . '
+			WHERE id=' . db_param();
 	$t_query_params = array( $c_username, $c_email, $c_access_level, $c_enabled, $c_protected, $c_realname, $c_user_id );
 }
 
@@ -178,7 +178,7 @@ $t_result = db_query_bound( $t_query, $t_query_params );
 
 if( $f_send_email_notification ) {
 	lang_push( user_pref_get_language( $f_user_id ) );
-	$t_changes = "";
+	$t_changes = '';
 	if( strcmp( $f_username, $t_old_username ) ) {
 		$t_changes .= lang_get( 'username_label' ) . lang_get( 'word_separator' ) . $t_old_username . ' => ' . $f_username . "\n";
 	}

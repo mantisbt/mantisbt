@@ -216,10 +216,10 @@ foreach( $t_project_ids as $t_project_id ) {
 
 		$t_version = $t_version_row['version'];
 
-		$t_query = "SELECT sbt.*, $t_relation_table.source_bug_id, dbt.target_version as parent_version FROM $t_bug_table sbt
-					LEFT JOIN $t_relation_table ON sbt.id=$t_relation_table.destination_bug_id AND $t_relation_table.relationship_type=2
-					LEFT JOIN $t_bug_table dbt ON dbt.id=$t_relation_table.source_bug_id
-					WHERE sbt.project_id=" . db_param() . " AND sbt.target_version=" . db_param() . " ORDER BY sbt.status ASC, sbt.last_updated DESC";
+		$t_query = 'SELECT sbt.*, ' . $t_relation_table . '.source_bug_id, dbt.target_version as parent_version FROM ' . $t_bug_table . ' sbt
+					LEFT JOIN ' . $t_relation_table . ' ON sbt.id=' . $t_relation_table . '.destination_bug_id AND ' . $t_relation_table . '.relationship_type=2
+					LEFT JOIN ' . $t_bug_table . ' dbt ON dbt.id=' . $t_relation_table . '.source_bug_id
+					WHERE sbt.project_id=' . db_param() . ' AND sbt.target_version=' . db_param() . ' ORDER BY sbt.status ASC, sbt.last_updated DESC';
 
 		$t_description = $t_version_row['description'];
 
@@ -231,7 +231,7 @@ foreach( $t_project_ids as $t_project_id ) {
 		$t_issue_parents = array();
 		$t_issue_handlers = array();
 
-		while ( $t_row = db_fetch_array( $t_result ) ) {
+		while( $t_row = db_fetch_array( $t_result ) ) {
 			# hide private bugs if user doesn't have access to view them.
 			if( !$t_can_view_private && ( $t_row['view_state'] == VS_PRIVATE ) ) {
 				continue;
@@ -309,7 +309,7 @@ foreach( $t_project_ids as $t_project_id ) {
 		$t_cycle = false;
 		$t_cycle_ids = array();
 
-		while ( 0 < count( $t_issue_ids ) ) {
+		while( 0 < count( $t_issue_ids ) ) {
 			$t_issue_id = $t_issue_ids[$k];
 			$t_issue_parent = $t_issue_parents[$k];
 
@@ -323,7 +323,7 @@ foreach( $t_project_ids as $t_project_id ) {
 			if( $t_cycle || !in_array( $t_issue_parent, $t_issue_ids ) ) {
 				$l = array_search( $t_issue_parent, $t_issue_set_ids );
 				if( $l !== false ) {
-					for ( $m = $l+1; $m < count( $t_issue_set_ids ) && $t_issue_set_levels[$m] > $t_issue_set_levels[$l]; $m++ ) {
+					for( $m = $l+1; $m < count( $t_issue_set_ids ) && $t_issue_set_levels[$m] > $t_issue_set_levels[$l]; $m++ ) {
 						#do nothing
 					}
 					$t_issue_set_ids_end = array_splice( $t_issue_set_ids, $m );
@@ -349,7 +349,7 @@ foreach( $t_project_ids as $t_project_id ) {
 		}
 
 		$t_count_ids = count( $t_issue_set_ids );
-		for ( $j = 0; $j < $t_count_ids; $j++ ) {
+		for( $j = 0; $j < $t_count_ids; $j++ ) {
 			$t_issue_set_id = $t_issue_set_ids[$j];
 			$t_issue_set_level = $t_issue_set_levels[$j];
 
@@ -367,7 +367,7 @@ foreach( $t_project_ids as $t_project_id ) {
 }
 
 if( !$t_issues_found ) {
-	if( access_has_project_level( config_get( 'manage_project_threshold' ), $t_project_id_for_access_check ) )  {
+	if( access_has_project_level( config_get( 'manage_project_threshold' ), $t_project_id_for_access_check ) ) {
 		$t_string = 'roadmap_empty_manager';
 	} else {
 		$t_string = 'roadmap_empty';

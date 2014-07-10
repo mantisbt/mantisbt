@@ -366,7 +366,7 @@ function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
 	$t_query = "INSERT INTO $t_tag_table
 				( user_id, name, description, date_created, date_updated )
 				VALUES
-				( " . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . ")";
+				( " . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
 
 	db_query_bound( $t_query, array( $p_user_id, trim( $p_name ), trim( $p_description ), $c_date_created, $c_date_created ) );
 	return db_insert_id( $t_tag_table );
@@ -406,11 +406,11 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 	$t_tag_table = db_get_table( 'tag' );
 
 	$t_query = "UPDATE $t_tag_table
-					SET user_id=" . db_param() . ",
-						name=" . db_param() . ",
-						description=" . db_param() . ",
-						date_updated=" . db_param() . "
-					WHERE id=" . db_param();
+					SET user_id=" . db_param() . ',
+						name=' . db_param() . ',
+						description=' . db_param() . ',
+						date_updated=' . db_param() . '
+					WHERE id=' . db_param();
 	db_query_bound( $t_query, array( (int)$p_user_id, $p_name, $p_description, $c_date_updated, $p_tag_id ) );
 
 	if( $t_rename ) {
@@ -513,7 +513,7 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
  */
 function tag_bug_is_attached( $p_tag_id, $p_bug_id ) {
 	$t_bug_tag_table = db_get_table( 'bug_tag' );
-	$t_query = "SELECT bug_id FROM $t_bug_tag_table WHERE tag_id=" . db_param() . " AND bug_id=" . db_param();
+	$t_query = "SELECT bug_id FROM $t_bug_tag_table WHERE tag_id=" . db_param() . ' AND bug_id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_tag_id, $p_bug_id ) );
 	return( db_result( $t_result ) !== false );
 }
@@ -526,7 +526,7 @@ function tag_bug_is_attached( $p_tag_id, $p_bug_id ) {
  */
 function tag_bug_get_row( $p_tag_id, $p_bug_id ) {
 	$t_bug_tag_table = db_get_table( 'bug_tag' );
-	$t_query = "SELECT * FROM $t_bug_tag_table WHERE tag_id=" . db_param() . " AND bug_id=" . db_param();
+	$t_query = "SELECT * FROM $t_bug_tag_table WHERE tag_id=" . db_param() . ' AND bug_id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_tag_id, $p_bug_id ) );
 
 	$t_row = db_fetch_array( $t_result );
@@ -607,7 +607,7 @@ function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
 	$t_query = "INSERT INTO $t_bug_tag_table
 					( tag_id, bug_id, user_id, date_attached )
 					VALUES
-					( " . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . ")";
+					( " . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
 	db_query_bound( $t_query, array( $p_tag_id, $p_bug_id, $p_user_id, db_now() ) );
 
 	$t_tag_name = tag_get_field( $p_tag_id, 'name' );

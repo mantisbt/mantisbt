@@ -99,8 +99,8 @@ class IssueAddTest extends SoapBase {
 	public function testCreateIssueWithHtmlMarkup() {
 		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithHtmlMarkup' );
 
-		$t_issue_to_add['summary'] .= " <strong>WithHtmlMarkup</strong>";
-		$t_issue_to_add['description'] .= " <strong>WithHtmlMarkup</strong>";
+		$t_issue_to_add['summary'] .= ' <strong>WithHtmlMarkup</strong>';
+		$t_issue_to_add['description'] .= ' <strong>WithHtmlMarkup</strong>';
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
@@ -163,7 +163,7 @@ class IssueAddTest extends SoapBase {
 	public function testCreateIssueWithHandler() {
 		$t_admin_users = $this->client->mc_project_get_users( $this->userName, $this->password, $this->getProjectId(), 90 );
 
-		$this->assertTrue( count( $t_admin_users ) >= 1, "count(adminUsers) >= 1" );
+		$this->assertTrue( count( $t_admin_users ) >= 1, 'count(adminUsers) >= 1' );
 
 		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithHandler' );
 
@@ -203,7 +203,7 @@ class IssueAddTest extends SoapBase {
 
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 
-		$this->assertEquals( $this->dateToUTC( $t_date ), $this->dateToUTC( $t_issue->due_date ), "due_date" );
+		$this->assertEquals( $this->dateToUTC( $t_date ), $this->dateToUTC( $t_issue->due_date ), 'due_date' );
 	}
 
 	/**
@@ -287,8 +287,8 @@ class IssueAddTest extends SoapBase {
 		$t_issue_to_add = $this->getIssueToAdd( 'testCreateIssueWithNote' );
 		$t_issue_to_add['notes'] = array(
 			array(
-				'text' => "first note",
-				'time_tracking' => "30"
+				'text' => 'first note',
+				'time_tracking' => '30'
 			)
 		);
 
@@ -340,7 +340,7 @@ class IssueAddTest extends SoapBase {
 		try {
 			$this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 
-			$this->fail( "Invalid version did not raise error." );
+			$this->fail( 'Invalid version did not raise error.' );
 		} catch ( SoapFault $e ) {
 			$this->assertContains( "Version 'noSuchVersion' does not exist in project", $e->getMessage() );
 		}
@@ -404,7 +404,7 @@ class IssueAddTest extends SoapBase {
 		$t_issue_to_add = $this->getIssueToAdd( 'testCreateIssueWithMiscNote' );
 		$t_issue_to_add['notes'] = array(
 			array(
-				'text' => "first note",
+				'text' => 'first note',
 				'note_type' => 2,
 			    'note_attr' => 'attr_value'
 			)
@@ -482,8 +482,8 @@ class IssueAddTest extends SoapBase {
 	public function testCreateIssueWithNonLatinText() {
 		$t_issue_to_add = $this->getIssueToAdd( 'IssueAddTest.testCreateIssueWithNonLatinText' );
 
-		$t_issue_to_add['summary'] = "Здравствуйте!"; # Russian, hello
-		$t_issue_to_add['description'] = "你好"; # Mandarin Chinese, hello
+		$t_issue_to_add['summary'] = 'Здравствуйте!'; # Russian, hello
+		$t_issue_to_add['description'] = '你好'; # Mandarin Chinese, hello
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
 

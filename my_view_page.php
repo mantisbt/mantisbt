@@ -113,11 +113,11 @@ $t_counter = 0;
 
 define( 'MY_VIEW_INC_ALLOW', true );
 
-while ( list( $t_box_title, $t_box_display ) = each( $t_boxes ) ) {
+while( list( $t_box_title, $t_box_display ) = each( $t_boxes ) ) {
 	if( $t_box_display == 0 ) {
 		# don't display bugs that are set as 0
 		$t_number_of_boxes = $t_number_of_boxes - 1;
-	} else if (	$t_box_title == 'assigned' && ( current_user_is_anonymous()
+	} else if( $t_box_title == 'assigned' && ( current_user_is_anonymous()
 		|| !access_has_project_level( config_get( 'handle_bug_threshold' ), $t_project_id, $t_current_user_id ) ) ) {
 		# don't display "Assigned to Me" bugs to users that bugs can't be assigned to
 		$t_number_of_boxes = $t_number_of_boxes - 1;
@@ -134,21 +134,18 @@ while ( list( $t_box_title, $t_box_display ) = each( $t_boxes ) ) {
 
 		# check the style of displaying boxes - fixed (ie. each box in a separate table cell) or not
 		if( ON == $t_boxes_position ) {
-			# for even box number start new row and column
 			if( 1 == $t_counter%2 ) {
+				# for even box number start new row and column
 				echo '<tr><td class="myview-left-col">';
 				include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
 				echo '</td></tr>';
-			}
-
-			# for odd box number only start new column
-			else if( 0 == $t_counter%2 ) {
+			} else if( 0 == $t_counter%2 ) {
+				# for odd box number only start new column
 				echo '<tr><td class="myview-right-col">';
 				include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
 				echo '</td></tr>';
 			}
-		}
-		else if( OFF == $t_boxes_position ) {
+		} else if( OFF == $t_boxes_position ) {
 			# start new table row and column for first box
 			if( 1 == $t_counter ) {
 				echo '<tr><td class="myview-left-col">';

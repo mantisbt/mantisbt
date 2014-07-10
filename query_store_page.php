@@ -72,7 +72,7 @@ foreach( $t_query_arr as $t_id => $t_name ) {
 # Check for an error
 $t_error_msg = strip_tags( gpc_get_string( 'error_msg', null ) );
 if( $t_error_msg != null ) {
-	print "<br />$t_error_msg<br /><br />";
+	print '<br />' . $t_error_msg . '<br /><br />';
 }
 
 print lang_get( 'query_name_label' ) . lang_get( 'word_separator' );

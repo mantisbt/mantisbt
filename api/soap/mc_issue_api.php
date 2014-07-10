@@ -635,7 +635,7 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 			# Make sure that active user has access level required to specify a different reporter.
 			$t_specify_reporter_access_level = config_get( 'webservice_specify_reporter_on_add_access_level_threshold' );
 			if( !access_has_project_level( $t_specify_reporter_access_level, $t_project_id, $t_user_id ) ) {
-				return mci_soap_fault_access_denied( $t_user_id, "Active user does not have access level required to specify a different issue reporter" );
+				return mci_soap_fault_access_denied( $t_user_id, 'Active user does not have access level required to specify a different issue reporter' );
 			}
 		}
 	}
@@ -666,7 +666,7 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 	$t_category_id = translate_category_name_to_id( $t_category, $t_project_id );
 	if( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
 		if( !isset( $p_issue['category'] ) || is_blank( $p_issue['category'] ) ) {
-			return SoapObjectsFactory::newSoapFault( 'Client', "Category field must be supplied." );
+			return SoapObjectsFactory::newSoapFault( 'Client', 'Category field must be supplied.' );
 		} else {
 			return SoapObjectsFactory::newSoapFault( 'Client', "Category '" . $p_issue['category'] . "' not found for project '$t_project_id'." );
 		}
@@ -849,7 +849,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	}
 
 	if( !access_has_bug_level( config_get( 'update_bug_threshold' ), $p_issue_id, $t_user_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, "Not enough rights to update issues" );
+		return mci_soap_fault_access_denied( $t_user_id, 'Not enough rights to update issues' );
 	}
 
 	if( ( $t_handler_id != 0 ) && !user_exists( $t_handler_id ) ) {
@@ -861,7 +861,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	$t_category_id = translate_category_name_to_id( $t_category, $t_project_id );
 	if( $t_category_id == 0 && !config_get( 'allow_no_category' ) ) {
 		if( isset( $p_issue['category'] ) && !is_blank( $p_issue['category'] ) ) {
-			return SoapObjectsFactory::newSoapFault( 'Client', "Category field must be supplied." );
+			return SoapObjectsFactory::newSoapFault( 'Client', 'Category field must be supplied.' );
 		} else {
 			$t_project_name = project_get_name( $t_project_id );
 			return SoapObjectsFactory::newSoapFault( 'Client', "Category '" . $p_issue['category'] . "' not found for project '$t_project_name'." );
@@ -1141,7 +1141,7 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
 	$p_note = SoapObjectsFactory::unwrapObject( $p_note );
 
 	if( !isset( $p_note['text'] ) || is_blank( $p_note['text'] ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Issue note text must not be blank." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Issue note text must not be blank.' );
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
@@ -1152,7 +1152,7 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
 	}
 
 	if( !access_has_bug_level( config_get( 'add_bugnote_threshold' ), $p_issue_id, $t_user_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, "You do not have access rights to add notes to this issue" );
+		return mci_soap_fault_access_denied( $t_user_id, 'You do not have access rights to add notes to this issue' );
 	}
 
 	if( bug_is_readonly( $p_issue_id ) ) {
@@ -1248,11 +1248,11 @@ function mc_issue_note_update( $p_username, $p_password, stdClass $p_note ) {
 	$p_note = SoapObjectsFactory::unwrapObject( $p_note );
 
 	if( !isset( $p_note['id'] ) || is_blank( $p_note['id'] ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Issue note id must not be blank." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Issue note id must not be blank.' );
 	}
 
 	if( !isset( $p_note['text'] ) || is_blank( $p_note['text'] ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Issue note text must not be blank." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Issue note text must not be blank.' );
 	}
 
 	$t_issue_note_id = $p_note['id'];
@@ -1333,7 +1333,7 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, stdCl
 
 	# user has access to update the bug...
 	if( !access_has_bug_level( config_get( 'update_bug_threshold' ), $p_issue_id, $t_user_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, "Active user does not have access level required to add a relationship to this issue" );
+		return mci_soap_fault_access_denied( $t_user_id, 'Active user does not have access level required to add a relationship to this issue' );
 	}
 
 	# source and destination bugs are the same bug...
@@ -1380,7 +1380,7 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, stdCl
 
 		return $t_relationship_id;
 	} else {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Relationship already exists." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Relationship already exists.' );
 	}
 }
 
@@ -1410,7 +1410,7 @@ function mc_issue_relationship_delete( $p_username, $p_password, $p_issue_id, $p
 
 	# user has access to update the bug...
 	if( !access_has_bug_level( config_get( 'update_bug_threshold' ), $p_issue_id, $t_user_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, "Active user does not have access level required to remove a relationship from this issue." );
+		return mci_soap_fault_access_denied( $t_user_id, 'Active user does not have access level required to remove a relationship from this issue.' );
 	}
 
 	# bug is not read-only...

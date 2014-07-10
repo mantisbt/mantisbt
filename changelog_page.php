@@ -211,14 +211,14 @@ foreach( $t_project_ids as $t_project_id ) {
 			continue;
 		}
 
-		$t_query = "SELECT sbt.*, dbt.fixed_in_version AS parent_version, rt.source_bug_id
-			FROM $t_bug_table AS sbt
-			LEFT JOIN $t_relation_table AS rt
-				ON sbt.id=rt.destination_bug_id AND rt.relationship_type=" . BUG_DEPENDANT . "
-			LEFT JOIN $t_bug_table AS dbt ON dbt.id=rt.source_bug_id
-			WHERE sbt.project_id=" . db_param() . "
-			  AND sbt.fixed_in_version=" . db_param() . "
-			ORDER BY sbt.status ASC, sbt.last_updated DESC";
+		$t_query = 'SELECT sbt.*, dbt.fixed_in_version AS parent_version, rt.source_bug_id
+			FROM ' . $t_bug_table . ' AS sbt
+			LEFT JOIN ' . $t_relation_table . ' AS rt
+				ON sbt.id=rt.destination_bug_id AND rt.relationship_type=' . BUG_DEPENDANT . '
+			LEFT JOIN ' . $t_bug_table . ' AS dbt ON dbt.id=rt.source_bug_id
+			WHERE sbt.project_id=' . db_param() . '
+			  AND sbt.fixed_in_version=' . db_param() . '
+			ORDER BY sbt.status ASC, sbt.last_updated DESC';
 
 		$t_description = version_get_field( $t_version_id, 'description' );
 
@@ -229,7 +229,7 @@ foreach( $t_project_ids as $t_project_id ) {
 
 		$t_result = db_query_bound( $t_query, array( $t_project_id, $t_version ) );
 
-		while ( $t_row = db_fetch_array( $t_result ) ) {
+		while( $t_row = db_fetch_array( $t_result ) ) {
 			# hide private bugs if user doesn't have access to view them.
 			if( !$t_can_view_private && ( $t_row['view_state'] == VS_PRIVATE ) ) {
 				continue;
@@ -292,7 +292,7 @@ foreach( $t_project_ids as $t_project_id ) {
 		$t_cycle = false;
 		$t_cycle_ids = array();
 
-		while ( !empty( $t_issue_ids ) ) {
+		while( !empty( $t_issue_ids ) ) {
 			$t_issue_id = $t_issue_ids[$k];
 			$t_issue_parent = $t_issue_parents[$k];
 
@@ -306,7 +306,7 @@ foreach( $t_project_ids as $t_project_id ) {
 			if( $t_cycle || !in_array( $t_issue_parent, $t_issue_ids ) ) {
 				$l = array_search( $t_issue_parent, $t_issue_set_ids );
 				if( $l !== false ) {
-					for ( $m = $l+1; $m < count( $t_issue_set_ids ) && $t_issue_set_levels[$m] > $t_issue_set_levels[$l]; $m++ ) {
+					for( $m = $l+1; $m < count( $t_issue_set_ids ) && $t_issue_set_levels[$m] > $t_issue_set_levels[$l]; $m++ ) {
 						#do nothing
 					}
 					$t_issue_set_ids_end = array_splice( $t_issue_set_ids, $m );
@@ -331,7 +331,7 @@ foreach( $t_project_ids as $t_project_id ) {
 			}
 		}
 
-		for ( $j = 0; $j < count( $t_issue_set_ids ); $j++ ) {
+		for( $j = 0; $j < count( $t_issue_set_ids ); $j++ ) {
 			$t_issue_set_id = $t_issue_set_ids[$j];
 			$t_issue_set_level = $t_issue_set_levels[$j];
 

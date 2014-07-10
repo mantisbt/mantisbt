@@ -57,26 +57,26 @@ function get_field_names() {
 				'date_submitted',
 				'last_update',
 				'reporter',
-					'assigned_to',
-							'priority',
-							'status',
-							'build',
-							'projection',
-							'eta',
-							'platform',
-							'os',
-							'os_version',
-							'product_version',
-							'resolution',
-							'duplicate_id',
-							'summary',
-							'description',
-							'steps_to_reproduce',
-							'additional_information',
-							'attached_files',
-							'bugnote_title',
-							'bugnote_date',
-							'bugnote_description',
+				'assigned_to',
+				'priority',
+				'status',
+				'build',
+				'projection',
+				'eta',
+				'platform',
+				'os',
+				'os_version',
+				'product_version',
+				'resolution',
+				'duplicate_id',
+				'summary',
+				'description',
+				'steps_to_reproduce',
+				'additional_information',
+				'attached_files',
+				'bugnote_title',
+				'bugnote_date',
+				'bugnote_description',
 				'time_tracking' );
 }
 
@@ -108,27 +108,27 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 	$t_field_name_count = count( $t_field_name_arr );
 
 	# Grab the data
-	$t_query = "SELECT print_pref FROM $t_user_print_pref_table WHERE user_id=" . db_param();
+	$t_query = 'SELECT print_pref FROM ' . $t_user_print_pref_table . ' WHERE user_id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_user_id ) );
 
 	## OOPS, No entry in the database yet.	Lets make one
 	if( 0 == db_num_rows( $t_result ) ) {
 		# create a default array, same size than $t_field_name
-		for( $i=0 ; $i<$t_field_name_count ; $i++ ) {
+		for( $i=0; $i<$t_field_name_count; $i++ ) {
 			$t_default_arr[$i] = 1 ;
 		}
 		$t_default = implode( '', $t_default_arr ) ;
 
 		# all fields are added by default
-		$t_query = "INSERT
-				INTO $t_user_print_pref_table
+		$t_query = 'INSERT
+				INTO ' . $t_user_print_pref_table . '
 				(user_id, print_pref)
 				VALUES
-				(" . db_param() . "," . db_param() . ")";
+				(' . db_param() . ',' . db_param() . ')';
 		db_query_bound( $t_query, array( $p_user_id, $t_default ) );
 
 		# Rerun select query
-		$t_query = "SELECT print_pref FROM $t_user_print_pref_table WHERE user_id=" . db_param();
+		$t_query = 'SELECT print_pref FROM ' . $t_user_print_pref_table . ' WHERE user_id=' . db_param();
 		$t_result = db_query_bound( $t_query, array( $p_user_id ) );
 	}
 
@@ -155,7 +155,7 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 
 
 <?php # display the checkboxes
-for( $i=0 ; $i <$t_field_name_count ; $i++ ) {
+for( $i=0; $i <$t_field_name_count; $i++ ) {
 
 	echo '<tr>';
 ?>
@@ -165,7 +165,12 @@ for( $i=0 ; $i <$t_field_name_count ; $i++ ) {
 	</th>
 	<td>
 		<input type="checkbox" name="<?php echo 'print_' . $t_field_name_arr[$i]; ?>"
-		<?php if( isset( $t_prefs[$i] ) && ( $t_prefs[$i]==1 ) ) { echo 'checked="checked"'; } ?> />
+		<?php
+			if( isset( $t_prefs[$i] ) && ( $t_prefs[$i]==1 ) ) {
+				echo 'checked="checked"';
+			}
+		?>
+		/>
 	</td>
 </tr>
 

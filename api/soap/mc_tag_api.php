@@ -58,7 +58,7 @@ function mc_tag_get_all( $p_username, $p_password, $p_page_number, $p_per_page )
 	}
 
 	log_event( LOG_WEBSERVICE,
-		"retrieved " . count( $t_results ) .
+		'retrieved ' . count( $t_results ) .
 		"/$t_total_results tags (page #$p_page_number)"
 	);
 

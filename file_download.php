@@ -79,7 +79,7 @@ $c_file_id = (integer)$f_file_id;
 # we handle the case where the file is attached to a bug
 # or attached to a project as a project doc.
 $t_query = '';
-switch ( $f_type ) {
+switch( $f_type ) {
 	case 'bug':
 		$t_bug_file_table = db_get_table( 'bug_file' );
 		$t_query = "SELECT * FROM $t_bug_file_table WHERE id=" . db_param();
@@ -102,7 +102,7 @@ if( $f_type == 'bug' ) {
 }
 
 # Check access rights
-switch ( $f_type ) {
+switch( $f_type ) {
 	case 'bug':
 		if( !file_can_download_bug_attachments( $v_bug_id, (int)$v_user_id ) ) {
 			access_denied();
@@ -119,7 +119,8 @@ switch ( $f_type ) {
 }
 
 # throw away output buffer contents (and disable it) to protect download
-while ( @ob_end_clean() ) {}
+while( @ob_end_clean() ) {
+}
 
 if( ini_get( 'zlib.output_compression' ) && function_exists( 'ini_set' ) ) {
 	ini_set( 'zlib.output_compression', false );
@@ -163,7 +164,7 @@ $t_content_type = $v_file_type;
 $t_content_type_override = file_get_content_type_override( $t_filename );
 
 # dump file content to the connection.
-switch ( config_get( 'file_upload_method' ) ) {
+switch( config_get( 'file_upload_method' ) ) {
 	case DISK:
 		$t_local_disk_file = file_normalize_attachment_path( $v_diskfile, $t_project_id );
 

@@ -345,8 +345,7 @@ function db_query_bound( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_
 		for( $i = 0;$i < $t_params;$i++ ) {
 			if( $p_arr_parms[$i] === false ) {
 				$p_arr_parms[$i] = 0;
-			}
-			elseif( $p_arr_parms[$i] === true && $t_db_type == 'mssqlnative' ) {
+			} elseif( $p_arr_parms[$i] === true && $t_db_type == 'mssqlnative' ) {
 				$p_arr_parms[$i] = 1;
 			}
 		}
@@ -377,24 +376,21 @@ function db_query_bound( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_
 				if( $i <= count( $p_arr_parms ) ) {
 					if( is_null( $p_arr_parms[$i] ) ) {
 						$t_replace = 'NULL';
-					}
-					else if( is_string( $p_arr_parms[$i] ) ) {
+					} else if( is_string( $p_arr_parms[$i] ) ) {
 						$t_replace = "'" . $p_arr_parms[$i] . "'";
-					}
-					else if( is_integer( $p_arr_parms[$i] ) || is_float( $p_arr_parms[$i] ) ) {
+					} else if( is_integer( $p_arr_parms[$i] ) || is_float( $p_arr_parms[$i] ) ) {
 						$t_replace = (float)$p_arr_parms[$i];
-					}
-					else if( is_bool( $p_arr_parms[$i] ) ) {
+					} else if( is_bool( $p_arr_parms[$i] ) ) {
 						switch( $t_db_type ) {
 							case 'pgsql':
-								$t_replace = "'" . $p_arr_parms[$i] . "'";
+								$t_replace = '\'' . $p_arr_parms[$i] . '\'';
 							break;
 						default:
 							$t_replace = $p_arr_parms[$i];
 							break;
 						}
 					} else {
-						echo( "Invalid argument type passed to query_bound(): " . ( $i + 1 ) );
+						echo( 'Invalid argument type passed to query_bound(): ' . ( $i + 1 ) );
 						exit( 1 );
 					}
 					$p_query = utf8_substr( $p_query, 0, $t_utf8_offset ) . $t_replace . utf8_substr( $p_query, $t_utf8_offset + utf8_strlen( $t_matches[0] ) );
@@ -485,8 +481,8 @@ function db_fetch_array( IteratorAggregate &$p_result ) {
 
 		# Oci8 returns null values for empty strings
 		if( db_is_oracle() ) {
-			foreach( $t_row as &$t_value )	{
-				if( !isset( $t_value ) )	{
+			foreach( $t_row as &$t_value ) {
+				if( !isset( $t_value ) ) {
 					$t_value = '';
 				}
 			}
@@ -573,9 +569,9 @@ function db_insert_id( $p_table = null, $p_field = "id" ) {
 
 	if( isset( $p_table ) ) {
 		if( db_is_oracle() ) {
-			$t_query = "SELECT seq_" . $p_table . ".CURRVAL FROM DUAL";
+			$t_query = 'SELECT seq_' . $p_table . '.CURRVAL FROM DUAL';
 		} elseif( db_is_pgsql() ) {
-			$t_query = "SELECT currval('" . $p_table . "_" . $p_field . "_seq')";
+			$t_query = 'SELECT currval(\'' . $p_table . '_' . $p_field . '_seq\')';
 		}
 		if( isset( $t_query ) ) {
 			$t_result = db_query_bound( $t_query );
@@ -583,7 +579,7 @@ function db_insert_id( $p_table = null, $p_field = "id" ) {
 		}
 	}
 	if( db_is_mssql() ) {
-		$t_query = "SELECT IDENT_CURRENT('$p_table')";
+		$t_query = 'SELECT IDENT_CURRENT(\'' . $p_table . '\')';
 		$t_result = db_query_bound( $t_query );
 		return db_result( $t_result );
 	}
@@ -948,7 +944,7 @@ function db_time_queries() {
 function db_get_table( $p_name ) {
 	if( strpos( $p_name, 'mantis_' ) === 0 ) {
 		$t_table = substr( $p_name, 7, strpos( $p_name, '_table' ) - 7 );
-		error_parameters( "db_get_table( '$p_name' )", "db_get_table( '$t_table' )" );
+		error_parameters( 'db_get_table( \'' . $p_name . '\' )', 'db_get_table( \'' . $t_table . '\' )' );
 		trigger_error( ERROR_DEPRECATED_SUPERSEDED, WARNING );
 	} else {
 		$t_table = $p_name;
@@ -1032,7 +1028,7 @@ function db_update_blob( $p_table, $p_column, $p_val, $p_where = null ) {
 	if( $g_db_log_queries ) {
 		$t_elapsed = number_format( microtime( true ) - $t_start, 4 );
 		$t_log_data = array(
-			"Update BLOB in $p_table.$p_column where $p_where",
+			'Update BLOB in ' . $p_table . '.' . $p_column . ' where ' . $p_where,
 			$t_elapsed,
 			$t_caller
 		);
@@ -1069,12 +1065,12 @@ function db_oracle_order_binds_sequentially( $p_query ) {
 		if( $t_new_query != '' ) {
 			$t_new_query .= '\'';
 		}
-		if( $t_is_odd )   {
+		if( $t_is_odd ) {
 			# Divide to process all bindvars
 			$t_p_query_subpart_arr = explode( ':', $t_p_query_part );
 			if( count( $t_p_query_subpart_arr ) > 1 ) {
-				foreach( $t_p_query_subpart_arr as $t_p_query_subpart )  {
-					if( ( !$t_after_quote ) && ( $t_new_query != '' ) )	{
+				foreach( $t_p_query_subpart_arr as $t_p_query_subpart ) {
+					if( ( !$t_after_quote ) && ( $t_new_query != '' ) ) {
 						$t_new_query .= ":" . preg_replace( '/^(\d+?)/U', strval( $t_iter ), $t_p_query_subpart );
 						$t_iter++;
 					} else {
@@ -1082,7 +1078,7 @@ function db_oracle_order_binds_sequentially( $p_query ) {
 					}
 					$t_after_quote = false;
 				}
-			} else	{
+			} else {
 				$t_new_query .= $t_p_query_part;
 			}
 			$t_is_odd = false;
@@ -1153,7 +1149,7 @@ function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
 				} else {
 					$t_arr_index--;
 					# Shift array and unset bind array element
-					for( $n = $i + 1 ; $n < count( $p_arr_parms ) ; $n++ ) {
+					for( $n = $i + 1; $n < count( $p_arr_parms ); $n++ ) {
 						$p_arr_parms[$n-1] = $p_arr_parms[$n];
 					}
 					unset( $t_fields_arr[$i] );
@@ -1164,11 +1160,11 @@ function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
 
 			# Combine statement from arrays
 			$p_query = 'INSERT INTO ' . $t_matches['table'] . ' (' . $t_fields_arr[0];
-			for( $i = 1 ; $i < count( $p_arr_parms ) ; $i++ ) {
+			for( $i = 1; $i < count( $p_arr_parms ); $i++ ) {
 				$p_query = $p_query . ', ' . $t_fields_arr[$i];
 			}
 			$p_query = $p_query . ') values (' . $t_values_arr[0];
-			for ( $i = 1 ; $i < count( $p_arr_parms ) ; $i++ ) {
+			for( $i = 1; $i < count( $p_arr_parms ); $i++ ) {
 				$p_query = $p_query . ', ' . $t_values_arr[$i];
 			}
 			$p_query = $p_query . ')';
@@ -1210,14 +1206,14 @@ function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
 				$t_bind_num = $t_matches['bind_name'];
 
 				$t_search_substr = $t_matches['before_var'] . $t_matches['var_name'] . $t_matches['dividers'] . $t_matches['bind_name'] . $t_matches['after_var'];
-				$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . "=:" . $t_matches['bind_name']. $t_matches['after_var'];
+				$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . '=:' . $t_matches['bind_name']. $t_matches['after_var'];
 
 				if( $p_arr_parms[$t_bind_num] === '' ) {
-					for( $n = $t_bind_num + 1 ; $n < count( $p_arr_parms ) ; $n++ ) {
+					for( $n = $t_bind_num + 1; $n < count( $p_arr_parms ); $n++ ) {
 						$p_arr_parms[$n - 1] = $p_arr_parms[$n];
 					}
 					unset( $p_arr_parms[count( $p_arr_parms ) - 1] );
-					$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . " IS NULL " . $t_matches['after_var'];
+					$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . ' IS NULL ' . $t_matches['after_var'];
 				}
 				$p_query = str_replace( $t_search_substr, $t_replace_substr, $p_query );
 
@@ -1243,11 +1239,11 @@ function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
 					$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . $t_matches['dividers'] . $t_matches['bind_name'] ;
 
 					if( $p_arr_parms[$t_bind_num] === '' ) {
-						for( $n = $t_bind_num + 1 ; $n < count( $p_arr_parms ) ; $n++ ) {
+						for( $n = $t_bind_num + 1; $n < count( $p_arr_parms ); $n++ ) {
 							$p_arr_parms[$n - 1] = $p_arr_parms[$n];
 						}
 						unset( $p_arr_parms[count( $p_arr_parms ) - 1] );
-						$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . "=DEFAULT ";
+						$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . '=DEFAULT ';
 					}
 					$t_removed_set_where = str_replace( $t_search_substr, $t_replace_substr, $t_removed_set_where );
 					$t_removed_set_where_parsing = $t_matches['before_var'] . $t_matches['after_var'];

@@ -715,7 +715,7 @@ function html_footer() {
 		$t_unique_queries_count = 0;
 		$t_total_query_execution_time = 0;
 		$t_unique_queries = array();
-		for ( $i = 0; $i < $t_total_queries_count; $i++ ) {
+		for( $i = 0; $i < $t_total_queries_count; $i++ ) {
 			if( !in_array( $g_queries_array[$i][0], $t_unique_queries ) ) {
 				$t_unique_queries_count++;
 				$g_queries_array[$i][3] = false;
@@ -1517,13 +1517,13 @@ function html_button_bug_change_status( BugData $p_bug ) {
 		ksort( $t_enum_list );
 		reset( $t_enum_list );
 
-		echo "<form method=\"post\" action=\"bug_change_status_page.php\">";
+		echo '<form method="post" action="bug_change_status_page.php">';
 		# CSRF protection not required here - form does not result in modifications
 
 		$t_button_text = lang_get( 'bug_status_to_button' );
 		echo "<input type=\"submit\" class=\"button\" value=\"$t_button_text\" />";
 
-		echo " <select name=\"new_status\">";
+		echo ' <select name="new_status">';
 
 		# space at beginning of line is important
 		foreach( $t_enum_list as $t_key => $t_val ) {
@@ -1587,13 +1587,13 @@ function html_button_bug_assign_to( BugData $p_bug ) {
 		}
 	}
 
-	echo "<form method=\"post\" action=\"bug_update.php\">";
+	echo '<form method="post" action="bug_update.php">';
 	echo form_security_field( 'bug_update' );
 
 	$t_button_text = lang_get( 'bug_assign_to_button' );
 	echo "<input type=\"submit\" class=\"button\" value=\"$t_button_text\" />";
 
-	echo " <select name=\"handler_id\">";
+	echo ' <select name="handler_id">';
 
 	# space at beginning of line is important
 
@@ -1621,12 +1621,12 @@ function html_button_bug_assign_to( BugData $p_bug ) {
 
 	# allow un-assigning if already assigned.
 	if( $p_bug->handler_id != 0 ) {
-		echo "<option value=\"0\"></option>";
+		echo '<option value="0"></option>';
 	}
 
 	# 0 means currently selected
 	print_assign_to_option_list( 0, $p_bug->project_id );
-	echo "</select>";
+	echo '</select>';
 
 	$t_bug_id = string_attribute( $p_bug->id );
 	echo "<input type=\"hidden\" name=\"bug_id\" value=\"$t_bug_id\" />\n";

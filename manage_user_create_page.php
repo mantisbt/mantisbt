@@ -58,7 +58,9 @@ print_manage_menu( 'manage_user_create_page.php' );
 <div id="manage-user-create-div" class="form-container">
 	<form id="manage-user-create-form" method="post" action="manage_user_create.php">
 		<fieldset>
-			<legend><span><?php echo lang_get( 'create_new_account_title' ) ?></span></legend>
+			<legend>
+				<span><?php echo lang_get( 'create_new_account_title' ) ?></span>
+			</legend>
 			<?php echo form_security_field( 'manage_user_create' ) ?>
 			<div class="field-container">
 				<label for="user-username"><span><?php echo lang_get( 'username' ) ?></span></label>
@@ -80,7 +82,7 @@ print_manage_menu( 'manage_user_create_page.php' );
 			</div><?php
 			}
 
-			if( OFF == config_get( 'send_reset_password' ) )  { ?>
+			if( OFF == config_get( 'send_reset_password' ) ) { ?>
 			<div class="field-container">
 				<label for="user-password"><span><?php echo lang_get( 'password' ) ?></span></label>
 				<span class="input"><input type="password" id="user-password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>

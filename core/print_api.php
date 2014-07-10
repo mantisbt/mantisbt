@@ -417,8 +417,8 @@ function print_news_item_option_list() {
 	} else {
 		$t_query = "SELECT id, headline, announcement, view_state
 				FROM $t_mantis_news_table
-				WHERE project_id=" . db_param() . "
-				ORDER BY date_posted DESC";
+				WHERE project_id=" . db_param() . '
+				ORDER BY date_posted DESC';
 	}
 	$t_result = db_query_bound( $t_query, ($t_global == true ? array() : array( $t_project_id ) ) );
 	$t_news_count = db_num_rows( $t_result );
@@ -613,7 +613,7 @@ function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_fi
 		}
 
 		if( $p_trace ) {
-			$t_full_id = join( $p_parents, ";" ) . ';' . $t_id;
+			$t_full_id = join( $p_parents, ';' ) . ';' . $t_id;
 		} else {
 			$t_full_id = $t_id;
 		}
@@ -709,11 +709,11 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 	}
 
 	if( config_get( 'allow_no_category' ) ) {
-		echo "<option value=\"0\"", check_selected( $p_category_id, 0 ), '>';
+		echo '<option value="0\', check_selected( $p_category_id, 0 ), '>';
 		echo category_full_name( 0, false ), '</option>';
 	} else {
 		if( 0 == $p_category_id ) {
-			echo "<option value=\"0\"", check_selected( $p_category_id, 0 ), '>';
+			echo '<option value="0\', check_selected( $p_category_id, 0 ), '>';
 			echo string_attribute( lang_get( 'select_option' ) ), '</option>';
 		}
 	}
@@ -895,7 +895,7 @@ function print_build_option_list( $p_build = '' ) {
 		$t_build = string_attribute( $t_build_unescaped );
 		echo "<option value=\"$t_build\"";
 		check_selected( $p_build, $t_build_unescaped );
-		echo ">" . string_shorten( $t_build, $t_max_length ) . "</option>";
+		echo '>' . string_shorten( $t_build, $t_max_length ) . '</option>';
 	}
 }
 
@@ -1090,10 +1090,10 @@ function print_project_user_list_option_list2( $p_user_id ) {
 	$t_query = "SELECT DISTINCT p.id, p.name
 				FROM $t_mantis_project_table p
 				LEFT JOIN $t_mantis_project_user_list_table u
-				ON p.id=u.project_id AND u.user_id=" . db_param() . "
-				WHERE p.enabled = " . db_param() . " AND
+				ON p.id=u.project_id AND u.user_id=" . db_param() . '
+				WHERE p.enabled = ' . db_param() . ' AND
 					u.user_id IS NULL
-				ORDER BY p.name";
+				ORDER BY p.name';
 	$t_result = db_query_bound( $t_query, array( (int)$p_user_id, true ) );
 	$t_category_count = db_num_rows( $t_result );
 	for( $i = 0;$i < $t_category_count;$i++ ) {
@@ -1266,8 +1266,7 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 
 		$t_sort_field = rawurlencode( $p_sort_field );
 		print_link( "view_all_set.php?sort=$t_sort_field&dir=$p_dir&type=2&print=1", $p_string );
-	}
-	else if( $p_columns_target == COLUMNS_TARGET_VIEW_PAGE ) {
+	} else if( $p_columns_target == COLUMNS_TARGET_VIEW_PAGE ) {
 		if( $p_sort_field == $p_sort ) {
 
 			# we toggle between ASC and DESC if the user clicks the same sort order
@@ -1450,7 +1449,7 @@ function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur
 	}
 
 	if( ( 0 < $p_page_no ) && ( $p_page_no != $p_page_cur ) ) {
-		$t_delimiter = ( strpos( $p_page_url, "?" ) ? "&" : "?" );
+		$t_delimiter = ( strpos( $p_page_url, '?' ) ? '&' : '?' );
 		if( $p_temp_filter_id !== 0 ) {
 			print_link( "$p_page_url${t_delimiter}filter=$p_temp_filter_id&page_number=$p_page_no", $p_text );
 		} else {
@@ -1488,7 +1487,7 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 
 	$t_page_links = 10;
 
-	print( "[ " );
+	print( '[ ' );
 
 	# First and previous links
 	print_page_link( $p_page, $t_first, 1, $p_current, $p_temp_filter_id );
@@ -1503,7 +1502,7 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 	$t_first_page = max( $t_first_page, $p_start );
 
 	if( $t_first_page > 1 ) {
-		print( " ... " );
+		print( ' ... ' );
 	}
 
 	$t_last_page = $t_first_page + $t_page_links;
@@ -1513,7 +1512,7 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 		if( $i == $p_current ) {
 			array_push( $t_items, $i );
 		} else {
-			$t_delimiter = ( strpos( $p_page, "?" ) ? "&" : "?" ) ;
+			$t_delimiter = ( strpos( $p_page, '?' ) ? '&' : '?' ) ;
 			if( $p_temp_filter_id !== 0 ) {
 				array_push( $t_items, "<a href=\"$p_page${t_delimiter}filter=$p_temp_filter_id&amp;page_number=$i\">$i</a>" );
 			} else {
@@ -1759,7 +1758,7 @@ function get_dropdown( array $p_control_array, $p_control_name, $p_match = '', $
 		$t_size = '';
 		$t_multiple = '';
 	}
-	$t_info = sprintf( "<select %s name=\"%s\" id=\"%s\"%s>", $t_multiple, $p_control_name, $p_control_name, $t_size );
+	$t_info = sprintf( '<select %s name="%s" id="%s"%s>', $t_multiple, $p_control_name, $p_control_name, $t_size );
 	if( $p_add_any ) {
 		array_unshift_assoc( $p_control_array, META_FILTER_ANY, lang_trans( '[any]' ) );
 	}
@@ -1774,7 +1773,7 @@ function get_dropdown( array $p_control_array, $p_control_name, $p_match = '', $
 				$t_sel = ' selected="selected"';
 			}
 		}
-		$t_info .= sprintf( "<option%s value=\"%s\">%s</option>", $t_sel, $t_name, $t_desc );
+		$t_info .= sprintf( '<option%s value="%s">%s</option>', $t_sel, $t_name, $t_desc );
 	}
 	$t_info .= "</select>\n";
 	return $t_info;

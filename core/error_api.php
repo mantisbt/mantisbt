@@ -111,7 +111,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 	}
 
 	# build an appropriate error string
-	$t_error_description = "'$p_error' in '$p_file' line $p_line";
+	$t_error_description = '\'' . $p_error . '\' in \'' . $p_file .'\' line ' . $p_line;
 	switch( $p_type ) {
 		case E_WARNING:
 			$t_error_type = 'SYSTEM WARNING';
@@ -123,14 +123,14 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 			$t_error_type = 'DEPRECATED';
 			break;
 		case E_USER_ERROR:
-			$t_error_type = "APPLICATION ERROR #$p_error";
+			$t_error_type = 'APPLICATION ERROR #' . $p_error;
 			$t_error_description = error_string( $p_error );
 			if( $t_method == DISPLAY_ERROR_INLINE ) {
 				$t_error_description .= "\n" . error_string( ERROR_DISPLAY_USER_ERROR_INLINE );
 			}
 			break;
 		case E_USER_WARNING:
-			$t_error_type = "APPLICATION WARNING #$p_error";
+			$t_error_type = 'APPLICATION WARNING #' . $p_error;
 			$t_error_description = error_string( $p_error );
 			break;
 		case E_USER_NOTICE:
@@ -140,7 +140,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 			break;
 		default:
 			# shouldn't happen, just display the error just in case
-			$t_error_type = "UNHANDLED ERROR TYPE ($p_type)";
+			$t_error_type = 'UNHANDLED ERROR TYPE (' . $p_type . ')';
 			$t_error_description = $p_error;
 	}
 
@@ -148,7 +148,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 
 	if( php_sapi_name() == 'cli' ) {
 		if( DISPLAY_ERROR_NONE != $t_method ) {
-			echo $t_error_type . ": " . $t_error_description . "\n";
+			echo $t_error_type . ': ' . $t_error_description . "\n";
 
 			if( ON == config_get_global( 'show_detailed_errors' ) ) {
 				echo "\n";
@@ -387,8 +387,7 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 		}
 
 		return '<array> { ' . implode( $t_results, ', ' ) . ' }';
-	}
-	else if( is_object( $p_param ) ) {
+	} else if( is_object( $p_param ) ) {
 		$t_results = array();
 
 		$t_class_name = get_class( $p_param );
@@ -441,7 +440,7 @@ function error_string( $p_error ) {
 
 	# ripped from string_api
 	$t_string = vsprintf( $t_error, array_merge( $g_error_parameters, $t_padding ) );
-	return preg_replace( "/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", @htmlspecialchars( $t_string, ENT_COMPAT, 'UTF-8' ) );
+	return preg_replace( '/&amp;(#[0-9]+|[a-z]+);/i', '&$1;', @htmlspecialchars( $t_string, ENT_COMPAT, 'UTF-8' ) );
 }
 
 /**

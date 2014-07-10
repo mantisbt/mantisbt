@@ -91,7 +91,7 @@ html_page_top();
 					if( !is_blank( $u_email ) ) {
 						print_email_link( $u_email, $u_email );
 					} else {
-						echo " - ";
+						echo ' - ';
 					}
 				} ?>
 		</span></span>

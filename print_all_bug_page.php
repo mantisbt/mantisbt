@@ -163,12 +163,12 @@ $t_icon_path = config_get( 'icon_path' );
 		array( 'print_all_bug_page_word', 'html', 'target="_blank"', 'ie.gif', 'Word View' ) );
 
 	foreach ( $t_icons as $t_icon ) {
-		echo '<a href="' . $t_icon[0] . '.php?' . FILTER_PROPERTY_SEARCH. "=$t_search" .
-			'&amp;' . FILTER_PROPERTY_SORT_FIELD_NAME . "=$f_sort" .
-			'&amp;' . FILTER_PROPERTY_SORT_DIRECTION . "=$t_new_dir" .
+		echo '<a href="' . $t_icon[0] . '.php?' . FILTER_PROPERTY_SEARCH. '=' . $t_search .
+			'&amp;' . FILTER_PROPERTY_SORT_FIELD_NAME . '=' . $f_sort .
+			'&amp;' . FILTER_PROPERTY_SORT_DIRECTION . '=' . $t_new_dir .
 			'&amp;type_page=' . $t_icon[1] .
-			"&amp;export=$f_export" .
-			"&amp;show_flag=$t_show_flag" .
+			'&amp;export=' . $f_export .
+			'&amp;show_flag=' . $t_show_flag .
 			'" ' . $t_icon[2] . '>' .
 			'<img src="' . $t_icon_path . $t_icon[3] . '" alt="' . $t_icon[4] . '" /></a> ';
 	}
@@ -197,7 +197,7 @@ $t_icon_path = config_get( 'icon_path' );
 				$v_start = 0;
 				$v_end   = 0;
 			}
-			echo "( $v_start - $v_end )";
+			echo '( ' . $v_start . ' - ' . $v_end . ' )';
 		?>
 	</td>
 	<td class="right" colspan="<?php echo $t_num_of_columns / 2 ?>">
