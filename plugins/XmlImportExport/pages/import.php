@@ -83,7 +83,7 @@ if( ALL_PROJECTS == $t_project_id ) {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="form-title" colspan="2">
+                                        <td class="bold" colspan="2">
                                             <?php
                                             echo plugin_lang_get( 'import_options' );
                                             ?>

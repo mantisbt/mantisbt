@@ -98,7 +98,7 @@ print_manage_menu( 'manage_proj_page.php' );
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-condensed table-hover">
                         <thead>
-                        <tr class="row-category">
+                        <tr>
                             <td><?php
                                 print_manage_project_sort_link( 'manage_proj_page.php', lang_get( 'name' ), 'name', $t_direction, $f_sort );
                                 print_sort_icon( $t_direction, $f_sort, 'name' ); ?>
@@ -209,7 +209,7 @@ print_manage_menu( 'manage_proj_page.php' );
                             if( count( $t_categories ) > 0 ) {
                                 ?>
                                 <thead>
-                                <tr class="row-category">
+                                <tr>
                                     <td><?php echo lang_get( 'category' ) ?></td>
                                     <td><?php echo lang_get( 'assign_to' ) ?></td>
                                     <?php if( $t_can_update_global_cat ) { ?>

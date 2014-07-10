@@ -47,7 +47,7 @@ require_api( 'print_api.php' );
  */
 function action_update_severity_print_title() {
 	echo '<tr>';
-	echo '<td class="form-title" colspan="2">';
+	echo '<td class="bold" colspan="2">';
 	echo lang_get( 'update_severity_title' );
 	echo '</td></tr>';
 }

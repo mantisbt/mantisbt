@@ -300,7 +300,7 @@ if( array() != $t_subproject_ids ) { ?>
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-condensed">
                                     <thead>
-                                    <tr class="row-category">
+                                    <tr>
                                         <th><?php echo lang_get( 'name' ) ?></th>
                                         <th><?php echo lang_get( 'status' ) ?></th>
                                         <th><?php echo lang_get( 'enabled' ) ?></th>
@@ -407,7 +407,7 @@ if( array() != $t_subproject_ids ) { ?>
                             <div class="table-responsive">
                             <table class="table table-striped table-bordered table-condensed">
                                 <thead>
-                                <tr class="row-category">
+                                <tr>
                                     <th><?php echo lang_get( 'category' ) ?></th>
                                     <th><?php echo lang_get( 'assign_to' ) ?></th>
                                     <th colspan="2" class="center"><?php echo lang_get( 'actions' ) ?></th>
@@ -496,7 +496,7 @@ if( array() != $t_subproject_ids ) { ?>
                                 <table id="versions" class="table table-striped table-bordered table-condensed">
 
                                     <thead>
-                                    <tr class="row-category">
+                                    <tr>
                                         <th><?php echo lang_get( 'version' ) ?></th>
                                         <th><?php echo lang_get( 'released' ) ?></th>
                                         <th><?php echo lang_get( 'obsolete' ) ?></th>
@@ -602,7 +602,7 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-condensed">
                                 <thead>
-                                <tr class="row-category">
+                                <tr>
                                     <th><?php echo lang_get( 'custom_field' ) ?></th>
                                     <th><?php echo lang_get( 'custom_field_sequence' ) ?></th>
                                     <th><?php echo lang_get( 'actions' ); ?></th>
@@ -718,7 +718,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-condensed">
                                 <thead>
-                                <tr class="row-category">
+                                <tr>
                                     <th><?php echo lang_get( 'username' ) ?></th>
                                     <th><?php echo lang_get( 'email' ) ?></th>
                                     <th><?php echo lang_get( 'access_level' ) ?></th>

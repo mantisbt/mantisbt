@@ -10,7 +10,7 @@ td.left {
 	text-align: right;
 }
 
-td.right {
+td.pull-right {
 	text-align: left;
 }
 
@@ -56,7 +56,7 @@ div.quick-summary-right {
 	text-align: right;
 }
 
-.right {
+.pull-right {
 	text-align: left;
 }
 

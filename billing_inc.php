@@ -99,7 +99,7 @@ if( ON == config_get( 'time_tracking_with_billing' ) ) {
 	<input type="hidden" name="id" value="<?php echo isset( $f_bug_id ) ? $f_bug_id : 0 ?>" />
 	<table class="width100" cellspacing="0">
 		<tr>
-			<td class="form-title" colspan="4">
+			<td class="bold" colspan="4">
 				<?php
 					collapse_icon( 'bugnotestats' );
 					echo lang_get( 'time_tracking' )
@@ -174,15 +174,15 @@ if( ON == config_get( 'time_tracking_with_billing' ) ) {
 ?>
 <br />
 <table class="width100" cellspacing="0">
-	<tr class="row-category2">
-		<td class="small-caption bold">
+	<tr>
+		<td class="small-caption">
 			<?php echo lang_get( $t_name_field ) ?>
 		</td>
-		<td class="small-caption bold">
+		<td class="small-caption">
 			<?php echo lang_get( 'time_tracking' ) ?>
 		</td>
 <?php	if( $t_cost_col ) { ?>
-		<td class="small-caption bold right">
+		<td class="small-caption pull-right">
 			<?php echo lang_get( 'time_tracking_cost' ) ?>
 		</td>
 <?php	} ?>
@@ -205,7 +205,7 @@ if( ON == config_get( 'time_tracking_with_billing' ) ) {
 			$t_item['sum_time_tracking'] = db_minutes_to_hhmm( $t_item['sum_time_tracking'] );
 			if( $t_item['bug_id'] != $t_prev_id ) {
 				$t_link = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_item['bug_id'] ) ) . lang_get( 'word_separator' ) . string_display( $t_item['summary'] );
-				echo '<tr class="row-category-history"><td colspan="4">' . $t_link . "</td></tr>";
+				echo '<tr><td colspan="4">' . $t_link . "</td></tr>";
 				$t_prev_id = $t_item['bug_id'];
 			}
 ?>
@@ -217,7 +217,7 @@ if( ON == config_get( 'time_tracking_with_billing' ) ) {
 			<?php echo $t_item['sum_time_tracking'] ?>
 		</td>
 <?php		if( $t_cost_col ) { ?>
-		<td class="small-caption right">
+		<td class="small-caption pull-right">
 			<?php echo string_attribute( number_format( $t_item['cost'], 2 ) ); ?>
 		</td>
 <?php		} ?>
@@ -225,15 +225,15 @@ if( ON == config_get( 'time_tracking_with_billing' ) ) {
 
 <?php	} # end for loop ?>
 
-	<tr class="row-category2">
-		<td class="small-caption bold">
+	<tr>
+		<td class="small-caption">
 			<?php echo lang_get( 'total_time' ); ?>
 		</td>
-		<td class="small-caption bold">
+		<td class="small-caption">
 			<?php echo db_minutes_to_hhmm( $t_sum_in_minutes ); ?>
 		</td>
 <?php	if( $t_cost_col ) { ?>
-		<td class="small-caption bold right">
+		<td class="small-caption pull-right">
 			<?php echo string_attribute( number_format( $t_sum_in_minutes * $f_bugnote_cost / 60, 2 ) ); ?>
 		</td>
 <?php 	} ?>
@@ -244,15 +244,15 @@ if( ON == config_get( 'time_tracking_with_billing' ) ) {
 <br />
 
 <table class="width100" cellspacing="0">
-	<tr class="row-category2">
-		<td class="small-caption bold">
+	<tr>
+		<td class="small-caption">
 			<?php echo lang_get( $t_name_field ) ?>
 		</td>
-		<td class="small-caption bold">
+		<td class="small-caption">
 			<?php echo lang_get( 'time_tracking' ) ?>
 		</td>
 <?php	if( $t_cost_col ) { ?>
-		<td class="small-caption bold right">
+		<td class="small-caption pull-right">
 			<?php echo lang_get( 'time_tracking_cost' ) ?>
 		</td>
 <?php	} ?>
@@ -269,21 +269,21 @@ if( ON == config_get( 'time_tracking_with_billing' ) ) {
 			<?php echo db_minutes_to_hhmm( $t_total_time ); ?>
 		</td>
 <?php		if( $t_cost_col ) { ?>
-		<td class="small-caption right">
+		<td class="small-caption pull-right">
 			<?php echo string_attribute( number_format( $t_total_time * $f_bugnote_cost / 60, 2 ) ); ?>
 		</td>
 <?php		} ?>
 	</tr>
 <?php	} ?>
-	<tr class="row-category2">
-		<td class="small-caption bold">
+	<tr>
+		<td class="small-caption">
 			<?php echo lang_get( 'total_time' ); ?>
 		</td>
-		<td class="small-caption bold">
+		<td class="small-caption">
 			<?php echo db_minutes_to_hhmm( $t_sum_in_minutes ); ?>
 		</td>
 <?php	if( $t_cost_col ) { ?>
-		<td class="small-caption bold right">
+		<td class="small-caption pull-right">
 			<?php echo string_attribute( number_format( $t_sum_in_minutes * $f_bugnote_cost / 60, 2 ) ); ?>
 		</td>
 <?php	} ?>
@@ -297,7 +297,7 @@ if( ON == config_get( 'time_tracking_with_billing' ) ) {
 
 <table class="width100" cellspacing="0">
 	<tr>
-		<td class="form-title" colspan="4">
+		<td class="bold" colspan="4">
 			<?php
 				collapse_icon( 'bugnotestats' );
 				echo lang_get( 'time_tracking' )

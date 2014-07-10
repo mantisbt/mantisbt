@@ -74,7 +74,7 @@ function print_info_row( $p_description, $p_value ) {
                             print_info_row( lang_get( 'php_version' ), phpversion() );
                             ?>
                             <tr>
-                                <td class="form-title" width="30%" colspan="2">
+                                <td class="bold" width="30%" colspan="2">
                                     <?php echo lang_get( 'database_information' ) ?>
                                 </td>
                             </tr>
@@ -83,7 +83,7 @@ function print_info_row( $p_description, $p_value ) {
                             print_info_row( lang_get( 'adodb_version' ), $g_db->Version() );
                             ?>
                             <tr>
-                                <td class="form-title" width="30%" colspan="2">
+                                <td class="bold" width="30%" colspan="2">
                                     <?php echo lang_get( 'path_information' ) ?>
                                 </td>
                             </tr>

@@ -180,7 +180,7 @@ if( empty( $t_moved ) ) {
 		if( is_array( $t_row['data'] ) ) {
 			# Display details of moved attachments
 			echo '<div><table class="width75">', "\n",
-				'<tr class="row-category">',
+				'<tr>',
 				$f_file_type == 'bug' ? '<th>Bug ID</th>' : '',
 				'<th>File</th><th>Filename</th><th>Status</th>',
 				'</tr>';

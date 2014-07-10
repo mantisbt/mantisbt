@@ -91,7 +91,7 @@ $t_num_notes = db_num_rows( $t_result );
         </tr>
     <?php } else { # print bugnotes ?>
         <tr>
-            <td class="form-title bigger-110" colspan="2">
+            <td class="bold bigger-110" colspan="2">
                 <?php echo lang_get( 'bug_notes_title' ) ?>
             </td>
         </tr>

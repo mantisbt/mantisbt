@@ -164,8 +164,8 @@ layout_page_begin();
     <div class="table-responsive">
         <table class="table table-bordered table-condensed table-striped">
             <tr>
-                <td class="form-title" colspan="2"><?php echo lang_get( 'view_revisions' ), ': ', $t_title ?></td>
-                <td class="right" colspan="2">
+                <td class="bold" colspan="2"><?php echo lang_get( 'view_revisions' ), ': ', $t_title ?></td>
+                <td class="pull-right" colspan="2">
                     <?php
                     if( !$f_bug_id && !$f_bugnote_id ) { print_bracket_link( '?bug_id=' . $t_bug_id, lang_get( 'all_revisions' ) ); }
                     print_bracket_link( 'view.php?id=' . $t_bug_id, lang_get( 'back_to_issue' ) );

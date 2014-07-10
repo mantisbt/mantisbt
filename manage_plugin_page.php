@@ -104,7 +104,7 @@ if( 0 < count( $t_plugins_installed ) ) {
 
                                 <thead>
                                 <!-- Info -->
-                                <tr class="row-category">
+                                <tr>
                                     <th width="20%"><?php echo lang_get( 'plugin' ) ?></th>
                                     <th width="35%"><?php echo lang_get( 'plugin_description' ) ?></th>
                                     <th width="20%"><?php echo lang_get( 'plugin_depends' ) ?></th>
@@ -243,7 +243,7 @@ if( 0 < count( $t_plugins_available ) ) {
 
                         <thead>
                         <!-- Info -->
-                        <tr class="row-category">
+                        <tr>
                             <td width="25%"><?php echo lang_get( 'plugin' ) ?></td>
                             <td width="45%"><?php echo lang_get( 'plugin_description' ) ?></td>
                             <td width="20%"><?php echo lang_get( 'plugin_depends' ) ?></td>

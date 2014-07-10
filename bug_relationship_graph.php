@@ -101,7 +101,7 @@ layout_page_begin();
 
 <tr>
 	<!-- Title -->
-	<td class="form-title">
+	<td class="bold">
 		<?php
 		if( $t_graph_relation ) {
 			echo lang_get( 'viewing_bug_relationship_graph_title' );
@@ -111,7 +111,7 @@ layout_page_begin();
 		?>
 	</td>
 	<!-- Links -->
-	<td class="right">
+	<td class="pull-right">
 		<!-- View Issue -->
 		<span class="small"><?php print_bracket_link( 'view.php?id=' . $f_bug_id, lang_get( 'view_issue' ) ) ?></span>
 

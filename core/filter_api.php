@@ -2154,7 +2154,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 	$t_view_type = $t_filter['_view_type'];
 
-	$t_trclass = 'row-category2';
+	$t_trclass = '';
 	$t_action = 'view_all_set.php?f=3';
 
 	if( $p_for_screen == false ) {
@@ -2228,7 +2228,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
         <div class="table-responsive">
 
-		<table width="100%" cellspacing="1">
+		<table width="100%" cellspacing="1" class="small">
 		<?php
 		$t_custom_cols = $t_filter_cols;
 
@@ -2278,25 +2278,25 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		?>
 
 		<tr <?php echo "class=\"" . $t_trclass . "\"";?>>
-			<td class="small-caption">
+			<td class="small-caption category">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_REPORTER_ID . '[]';?>" id="reporter_id_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'reporter_label' )?></a>
 			</td>
-			<td class="small-caption">
+			<td class="small-caption category">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_MONITOR_USER_ID . '[]';?>" id="user_monitor_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'monitored_by_label' )?></a>
 			</td>
-			<td class="small-caption">
+			<td class="small-caption category">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_HANDLER_ID . '[]';?>" id="handler_id_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'assigned_to_label' )?></a>
 			</td>
-			<td colspan="2" class="small-caption">
+			<td colspan="2" class="small-caption category">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_CATEGORY_ID . '[]';?>" id="show_category_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'category_label' )?></a>
 			</td>
-			<td class="small-caption">
+			<td class="small-caption category">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_SEVERITY . '[]';?>" id="show_severity_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'severity_label' )?></a>
 			</td>
-			<td class="small-caption">
+			<td class="small-caption category">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_RESOLUTION . '[]';?>" id="show_resolution_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'resolution_label' )?></a>
 			</td>
-			<td class="small-caption">
+			<td class="small-caption category">
 				<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
 					<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PROFILE_ID . '[]';?>" id="show_profile_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'profile_label' )?></a>
 				<?php } ?>
@@ -2559,25 +2559,25 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			</tr>
 
 		<tr <?php echo "class=\"" . $t_trclass . "\"";?>>
-			<td class="small-caption">
+			<td class="small-caption category">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_STATUS . '[]';?>" id="show_status_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'status_label' )?></a>
 			</td>
-			<td class="small-caption">
+			<td class="small-caption category">
 				<?php if( 'simple' == $t_view_type ) {?>
 					<a href="<?php echo $t_filters_url . FILTER_PROPERTY_HIDE_STATUS . '[]';?>" id="hide_status_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'hide_status_label' )?></a>
 				<?php
 		}?>
 			</td>
-			<td class="small-caption">
+			<td class="small-caption category">
 			<?php if( $t_show_build ) { ?>
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_BUILD . '[]';?>" id="show_build_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'product_build_label' )?></a>
 			<?php } ?>
 			</td>
 			<?php if( $t_show_product_version ) {?>
-			<td colspan="2" class="small-caption">
+			<td colspan="2" class="small-caption category">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_VERSION . '[]';?>" id="show_version_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'product_version_label' )?></a>
 			</td>
-			<td colspan="1" class="small-caption">
+			<td colspan="1" class="small-caption category">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_FIXED_IN_VERSION . '[]';?>" id="show_fixed_in_version_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'fixed_in_version_label' )?></a>
 			</td>
 			<?php
@@ -2590,11 +2590,11 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			</td>
 			<?php
 		}?>
-			<td colspan="1" class="small-caption">
+			<td colspan="1" class="small-caption category">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PRIORITY . '[]';?>" id="show_priority_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'priority_label' )?></a>
 			</td>
 			<?php if( $t_show_product_version ) {?>
-			<td colspan="1" class="small-caption">
+			<td colspan="1" class="small-caption category">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_TARGET_VERSION . '[]';?>" id="show_target_version_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'target_version_label' )?></a>
 			</td>
 			<?php
@@ -2876,21 +2876,21 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		</tr>
 
 		<tr <?php echo "class=\"" . $t_trclass . "\"";?>>
-			<td class="small-caption">
+			<td class="small-caption category">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_ISSUES_PER_PAGE;?>" id="per_page_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'show_label' )?></a>
 			</td>
-			<td class="small-caption">
+			<td class="small-caption category">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_VIEW_STATE;?>" id="view_state_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'view_status_label' )?></a>
 			</td>
-			<td class="small-caption">
+			<td class="small-caption category">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_STICKY;?>" id="sticky_issues_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'sticky_label' )?></a>
 			</td>
 			<td class="small-caption" colspan="2">
 			</td>
-			<td class="small-caption" >
+			<td class="small-caption category" >
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_FILTER_BY_DATE;?>" id="do_filter_by_date_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'use_date_filters_label' )?></a>
 			</td>
-			<td class="small-caption" colspan="2">
+			<td class="small-caption category" colspan="2">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_RELATIONSHIP_TYPE;?>" id="relationship_type_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'bug_relationships_label' )?></a>
 			</td>
 			<?php if( $t_filter_cols > 8 ) {
@@ -2998,22 +2998,22 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		}?>
 		</tr>
 		<tr <?php echo "class=\"" . $t_trclass . "\"";?>>
-			<td class="small-caption">
+			<td class="small-caption category">
 				<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
 					<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PLATFORM;?>" id="platform_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'platform_label' )?></a>
 				<?php } ?>
 			</td>
-			<td class="small-caption">
+			<td class="small-caption category">
 				<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
 					<a href="<?php echo $t_filters_url . FILTER_PROPERTY_OS;?>" id="os_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'os_label' )?></a>
 				<?php } ?>
 			</td>
-			<td class="small-caption">
+			<td class="small-caption category">
 				<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
 					<a href="<?php echo $t_filters_url . FILTER_PROPERTY_OS_BUILD;?>" id="os_build_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'os_version_label' )?></a>
 				<?php } ?>
 			</td>
-			<td class="small-caption" colspan="5">
+			<td class="small-caption category" colspan="5">
 				<?php if( access_has_global_level( config_get( 'tag_view_threshold' ) ) ) { ?>
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_TAG_STRING;?>" id="tag_string_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'tags_label' )?></a>
 				<?php } ?>
@@ -3187,7 +3187,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					}
 
 					if( isset( $t_accessible_custom_fields_names[$i] ) ) {
-						$t_fields .= '<td class="small-caption"> ';
+						$t_fields .= '<td class="small-caption category"> ';
 						$t_fields .= '<a href="' . $t_filters_url . 'custom_field_' . $t_accessible_custom_fields_ids[$i] . '[]" id="custom_field_' . $t_accessible_custom_fields_ids[$i] . '_filter"' . $t_dynamic_filter_expander_class . '>';
 						$t_fields .= string_display_line( lang_get_defaulted( $t_accessible_custom_fields_names[$i] ) );
 						$t_fields .= '</a> </td> ';
@@ -3314,7 +3314,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		}
 		?>
 		<tr>
-			<td class="small-caption category2">
+			<td class="small-caption category">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_NOTE_USER_ID;?>" id="note_user_id_filter"<?php echo $t_dynamic_filter_expander_class ?>>
 					<?php echo lang_get( 'note_user_id_label' )?>
 				</a>
@@ -3360,7 +3360,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			</td>
 
 			<!-- Sort by -->
-			<td class="small-caption category2">
+			<td class="small-caption category">
 				<a href="<?php echo $t_filters_url . 'show_sort';?>" id="show_sort_filter"<?php echo $t_dynamic_filter_expander_class ?>>
 					<?php echo lang_get( 'sort_label' )?>
 				</a>
@@ -3393,7 +3393,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		if( 'advanced' == $t_view_type ) {
 ?>
 			<!-- Project -->
-			<td class="small-caption category2" colspan="2">
+			<td class="small-caption category" colspan="2">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PROJECT_ID;?>" id="project_id_filter"<?php echo $t_dynamic_filter_expander_class ?>>
 					<?php echo lang_get( 'email_project_label' )?>
 				</a>
@@ -3443,7 +3443,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 		<!-- Match Type -->
 		<tr>
-			<td class="small-caption category2"><a href="<?php echo $t_filters_url . FILTER_PROPERTY_MATCH_TYPE;?>" id="match_type_filter"><?php echo lang_get( 'filter_match_type' )?>:</a></td>
+			<td class="small-caption category"><a href="<?php echo $t_filters_url . FILTER_PROPERTY_MATCH_TYPE;?>" id="match_type_filter"><?php echo lang_get( 'filter_match_type' )?>:</a></td>
 			<td class="small-caption" id="match_type_filter_target">
 			<?php
 				switch( $t_filter[FILTER_PROPERTY_MATCH_TYPE] ) {
@@ -3459,7 +3459,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<input type="hidden" name="match_type" value="<?php echo $t_filter[FILTER_PROPERTY_MATCH_TYPE] ?>"/>
 			</td>
 
-			<td class="small-caption category2">
+			<td class="small-caption category">
 				<a id="highlight_changed_filter"
 					href="<?php echo $t_filters_url . FILTER_PROPERTY_HIGHLIGHT_CHANGED; ?>"
 					<?php #echo $t_dynamic_filter_expander_class; ?>>

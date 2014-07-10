@@ -45,7 +45,7 @@ require_api( 'lang_api.php' );
  */
 function action_update_product_build_print_title() {
 	echo '<tr>';
-	echo '<td class="form-title" colspan="2">';
+	echo '<td class="bold" colspan="2">';
 	echo lang_get( 'product_build' );
 	echo '</td></tr>';
 }

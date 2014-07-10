@@ -102,7 +102,7 @@ print_account_menu( 'account_sponsor_page.php' );
     <br />
     <table class="width100" cellspacing="1">
         <tr>
-            <td class="form-title">
+            <td class="bold">
                 <?php echo lang_get( 'my_sponsorship' ) ?>
             </td>
         </tr>
@@ -144,20 +144,20 @@ if( $t_sponsor_count === 0 ) {
 
             <!-- Headings -->
             <tr>
-                <td class="form-title" colspan="9">
+                <td class="bold" colspan="9">
                     <?php echo lang_get( 'own_sponsored' ) ?>
                 </td>
             </tr>
             <tr>
-                <td class="form-title" width="10%"><?php echo lang_get( 'email_bug' ) ?></td>
-                <td class="form-title" width="8%"><?php echo lang_get( 'email_project' ) ?></td>
-                <td class="form-title" width="7%"><?php echo lang_get( 'fixed_in_version' ) ?></td>
-                <td class="form-title" width="10%"><?php echo lang_get( 'email_status' ) ?></td>
-                <td class="form-title" width="10%"><?php echo lang_get( 'email_handler' ) ?></td>
-                <td class="form-title" width="30%"><?php echo lang_get( 'email_summary' ) ?></td>
-                <td class="form-title" width="8%"><?php echo lang_get( 'amount' ) ?></td>
-                <td class="form-title" width="7%"><?php echo lang_get( 'status' ) ?></td>
-                <td class="form-title" width="10%">&#160;</td>
+                <td class="bold" width="10%"><?php echo lang_get( 'email_bug' ) ?></td>
+                <td class="bold" width="8%"><?php echo lang_get( 'email_project' ) ?></td>
+                <td class="bold" width="7%"><?php echo lang_get( 'fixed_in_version' ) ?></td>
+                <td class="bold" width="10%"><?php echo lang_get( 'email_status' ) ?></td>
+                <td class="bold" width="10%"><?php echo lang_get( 'email_handler' ) ?></td>
+                <td class="bold" width="30%"><?php echo lang_get( 'email_summary' ) ?></td>
+                <td class="bold" width="8%"><?php echo lang_get( 'amount' ) ?></td>
+                <td class="bold" width="7%"><?php echo lang_get( 'status' ) ?></td>
+                <td class="bold" width="10%">&#160;</td>
             </tr>
             <?php
             $t_total_owing = 0;
@@ -220,13 +220,13 @@ if( $t_sponsor_count === 0 ) {
             <tr>
                 <td colspan="5"></td>
                 <td><?php echo lang_get( 'total_owing' ) ?></td>
-                <td class="right"><?php echo sponsorship_format_amount( $t_total_owing ) ?></td>
+                <td class="pull-right"><?php echo sponsorship_format_amount( $t_total_owing ) ?></td>
                 <td colspan="2"></td>
             </tr>
             <tr>
                 <td colspan="5"></td>
                 <td><?php echo lang_get( 'total_paid' ) ?></td>
-                <td class="right"><?php echo sponsorship_format_amount( $t_total_paid ) ?></td>
+                <td class="pull-right"><?php echo sponsorship_format_amount( $t_total_paid ) ?></td>
                 <td colspan="2"></td>
             </tr>
         </table>
@@ -262,19 +262,19 @@ if( $t_sponsor_count === 0 ) {
 
                 <!-- Headings -->
                 <tr>
-                    <td class="form-title" colspan="8">
+                    <td class="bold" colspan="8">
                         <?php echo lang_get( 'issues_handled' ) ?>
                     </td>
                 </tr>
                 <tr>
-                    <td class="form-title" width="10%"><?php echo lang_get( 'email_bug' ) ?></td>
-                    <td class="form-title" width="8%"><?php echo lang_get( 'email_project' ) ?></td>
-                    <td class="form-title" width="7%"><?php echo lang_get( 'fixed_in_version' ) ?></td>
-                    <td class="form-title" width="10%"><?php echo lang_get( 'email_status' ) ?></td>
-                    <td class="form-title" width="35%"><?php echo lang_get( 'email_summary' ) ?></td>
-                    <td class="form-title" width="10%"><?php echo lang_get( 'sponsor' ) ?></td>
-                    <td class="form-title" width="10%"><?php echo lang_get( 'amount' ) ?></td>
-                    <td class="form-title" width="10%"><?php echo lang_get( 'status' ) ?></td>
+                    <td class="bold" width="10%"><?php echo lang_get( 'email_bug' ) ?></td>
+                    <td class="bold" width="8%"><?php echo lang_get( 'email_project' ) ?></td>
+                    <td class="bold" width="7%"><?php echo lang_get( 'fixed_in_version' ) ?></td>
+                    <td class="bold" width="10%"><?php echo lang_get( 'email_status' ) ?></td>
+                    <td class="bold" width="35%"><?php echo lang_get( 'email_summary' ) ?></td>
+                    <td class="bold" width="10%"><?php echo lang_get( 'sponsor' ) ?></td>
+                    <td class="bold" width="10%"><?php echo lang_get( 'amount' ) ?></td>
+                    <td class="bold" width="10%"><?php echo lang_get( 'status' ) ?></td>
                 </tr>
                 <?php
                 $t_bug_list = array();
@@ -335,13 +335,13 @@ if( $t_sponsor_count === 0 ) {
                 <tr>
                     <td colspan="5"></td>
                     <td><?php echo lang_get( 'total_owing' ) ?></td>
-                    <td class="right"><?php echo sponsorship_format_amount( $t_total_owing ) ?></td>
+                    <td class="pull-right"><?php echo sponsorship_format_amount( $t_total_owing ) ?></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td colspan="5"></td>
                     <td><?php echo lang_get( 'total_paid' ) ?></td>
-                    <td class="right"><?php echo sponsorship_format_amount( $t_total_paid ) ?></td>
+                    <td class="pull-right"><?php echo sponsorship_format_amount( $t_total_paid ) ?></td>
                     <td></td>
                 </tr>
                 <input type="hidden" name="buglist" value="<?php echo $t_hidden_bug_list ?>" />

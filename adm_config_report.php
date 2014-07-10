@@ -304,7 +304,7 @@ $t_result = db_query_bound( $t_query, $t_param );
                         <table class="table table-striped table-bordered table-condensed">
                             <!-- Title -->
                             <thead>
-                            <tr class="row-category2">
+                            <tr>
                                 <th>
                                     <?php echo lang_get( 'username' ); ?><br />
                                 </th>
@@ -381,7 +381,7 @@ $t_result = db_query_bound( $t_query, $t_param );
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-condensed table-hover">
                         <thead>
-                        <tr class="row-category">
+                        <tr>
                             <th><?php echo lang_get( 'username' ) ?></th>
                             <th><?php echo lang_get( 'project_name' ) ?></th>
                             <th><?php echo lang_get( 'configuration_option' ) ?></th>

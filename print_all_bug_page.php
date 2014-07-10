@@ -110,7 +110,7 @@ layout_page_header();
 
     <table class="table table-condensed no-margin">
         <tr>
-            <td class="form-title bigger-120">
+            <td class="bold bigger-120">
                 <div class="center">
                     <?php echo string_display( config_get( 'window_title' ) ) . ' - ' . string_display( project_get_name( $t_project_id ) ); ?>
                 </div>
@@ -120,7 +120,7 @@ layout_page_header();
 
     <table class="table table-striped table-bordered table-condensed no-margin">
         <tr>
-            <td class="form-title bigger-110" colspan="<?php echo $t_num_of_columns / 2 + $t_num_of_columns % 2; ?>">
+            <td class="bold bigger-110" colspan="<?php echo $t_num_of_columns / 2 + $t_num_of_columns % 2; ?>">
                 <?php
                 echo lang_get( 'viewing_bugs_title' );
 
@@ -134,7 +134,7 @@ layout_page_header();
                 echo " ( $v_start - $v_end )";
                 ?>
             </td>
-            <td class="right" colspan="<?php echo $t_num_of_columns / 2 ?>">
+            <td class="pull-right" colspan="<?php echo $t_num_of_columns / 2 ?>">
                 <form method="post" action="view_all_set.php">
                     <?php # CSRF protection not required here - form does not result in modifications ?>
                     <input type="hidden" name="type" value="1" />
@@ -194,7 +194,7 @@ layout_page_header();
 
         <?php # CSRF protection not required here - form does not result in modifications ?>
         <form method="post" action="print_all_bug_page.php">
-            <tr class="row-category">
+            <tr>
                 <?php
                 $t_sort = $f_sort;	# used within the custom function called in the loop (@todo cleanup)
                 $t_dir = $f_dir;    # used within the custom function called in the loop (@todo cleanup)

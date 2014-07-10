@@ -88,7 +88,7 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 	<input type="hidden" name="id" value="<?php echo $f_bug_id ?>" />
 	<table class="width100" cellspacing="0">
 		<tr>
-			<td class="form-title" colspan="4">
+			<td class="bold" colspan="4">
 				<?php
 					collapse_icon( 'bugnotestats' );
 					echo lang_get( 'time_tracking' )
@@ -175,11 +175,11 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 <?php
 		} # end for loop
 ?>
-	<tr class="row-category2">
-		<td class="small-caption bold">
+	<tr>
+		<td class="small-caption">
 			<?php echo lang_get( 'total_time' ) ?>
 		</td>
-		<td class="small-caption bold">
+		<td class="small-caption">
 			<?php echo db_minutes_to_hhmm( $t_sum_in_minutes ) ?>
 		</td>
 	</tr>
@@ -193,7 +193,7 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 
 <table class="width100" cellspacing="0">
 	<tr>
-		<td class="form-title" colspan="4">
+		<td class="bold" colspan="4">
 			<?php
 				collapse_icon( 'bugnotestats' );
 				echo lang_get( 'time_tracking' )

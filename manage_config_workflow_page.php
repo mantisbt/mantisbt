@@ -168,20 +168,20 @@ function section_begin( $p_section_name ) {
 
     echo "\t<table  class=\"table table-striped table-bordered table-condensed\">\n";
     echo "\t\t<thead>\n";
-    echo "\t\t" . '<tr class="row-category2">' . "\n";
-    echo "\t\t\t" . '<th class="form-title width30" rowspan="2">' . lang_get( 'current_status' ) . '</th>'. "\n";
-    echo "\t\t\t" . '<th class="form-title" style="text-align:center" colspan="' . ( count( $t_enum_statuses ) + 1 ) . '">'
+    echo "\t\t" . '<tr>' . "\n";
+    echo "\t\t\t" . '<th class="bold width30" rowspan="2">' . lang_get( 'current_status' ) . '</th>'. "\n";
+    echo "\t\t\t" . '<th class="bold" style="text-align:center" colspan="' . ( count( $t_enum_statuses ) + 1 ) . '">'
         . lang_get( 'next_status' ) . '</th>';
     echo "\n\t\t" . '</tr>'. "\n";
-    echo "\t\t" . '<tr class="row-category2">' . "\n";
+    echo "\t\t" . '<tr>' . "\n";
 
     foreach( $t_enum_statuses as $t_status ) {
-        echo "\t\t\t" . '<th class="form-title" style="text-align:center">&#160;'
+        echo "\t\t\t" . '<th class="bold" style="text-align:center">&#160;'
             . string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_status ) )
             . '&#160;</th>' ."\n";
     }
 
-    echo "\t\t\t" . '<th class="form-title" style="text-align:center">' . lang_get( 'custom_field_default_value' ) . '</th>' . "\n";
+    echo "\t\t\t" . '<th class="bold" style="text-align:center">' . lang_get( 'custom_field_default_value' ) . '</th>' . "\n";
     echo "\t\t" . '</tr>' . "\n";
     echo "\t\t</thead>\n";
     echo "\t\t<tbody>\n";
@@ -251,10 +251,10 @@ function threshold_begin( $p_section_name ) {
 
     echo '<table class="table table-striped table-bordered table-condensed">';
     echo '<thead>';
-    echo "\t" . '<tr class="row-category2">';
-    echo "\t\t" . '<th class="form-title width30">' . lang_get( 'threshold' ) . '</th>' . "\n";
-    echo "\t\t" . '<th class="form-title" >' . lang_get( 'status_level' ) . '</th>' . "\n";
-    echo "\t\t" . '<th class="form-title" >' . lang_get( 'alter_level' ) . '</th></tr>' . "\n";
+    echo "\t" . '<tr>';
+    echo "\t\t" . '<th class="bold width30">' . lang_get( 'threshold' ) . '</th>' . "\n";
+    echo "\t\t" . '<th class="bold" >' . lang_get( 'status_level' ) . '</th>' . "\n";
+    echo "\t\t" . '<th class="bold" >' . lang_get( 'alter_level' ) . '</th></tr>' . "\n";
     echo "\n";
     echo '</thead>';
     echo '<tbody>';
@@ -326,7 +326,7 @@ function access_begin( $p_section_name ) {
 
     echo '<table class="table table-striped table-bordered table-condensed">';
     echo '<thead>';
-    echo "\t\t" . '<tr class="row-category2"><th class="form-title" colspan="2">' . lang_get( 'access_change' ) . '</th></tr>' . "\n";
+    echo "\t\t" . '<tr><th class="bold" colspan="2">' . lang_get( 'access_change' ) . '</th></tr>' . "\n";
     echo '</thead>';
     echo '<tbody>';
 }
@@ -494,9 +494,9 @@ threshold_end();
 
 if( '' <> $t_validation_result ) {
     echo '<table class="width100">';
-    echo '<tr><td class="form-title" colspan="3">' . lang_get( 'validation' ) . '</td></tr>' . "\n";
-    echo '<tr><td class="form-title width30">' . lang_get( 'status' ) . '</td>';
-    echo '<td class="form-title" >' . lang_get( 'comment' ) . '</td></tr>';
+    echo '<tr><td class="bold" colspan="3">' . lang_get( 'validation' ) . '</td></tr>' . "\n";
+    echo '<tr><td class="bold width30">' . lang_get( 'status' ) . '</td>';
+    echo '<td class="bold" >' . lang_get( 'comment' ) . '</td></tr>';
     echo "\n";
     echo $t_validation_result;
     echo '</table><br /><br />';

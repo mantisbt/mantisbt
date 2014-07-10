@@ -160,7 +160,7 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
                             <table id="buglist" class="table table-bordered table-condensed table-hover table-striped">
                                 <thead>
                                 <?php # -- Bug list column header row -- ?>
-                                <tr class="buglist-headers row-category">
+                                <tr class="buglist-headers">
                                     <?php
                                     $t_title_function = 'print_column_title';
                                     foreach( $t_columns as $t_column ) {

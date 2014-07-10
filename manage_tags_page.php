@@ -148,7 +148,7 @@ print_manage_menu( 'manage_tags_page.php' );
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-condensed table-hover">
                         <thead>
-                        <tr class="row-category">
+                        <tr>
                             <td><?php echo lang_get( 'tag_name' ) ?></td>
                             <td><?php echo lang_get( 'tag_creator' ) ?></td>
                             <td><?php echo lang_get( 'tag_created' ) ?></td>

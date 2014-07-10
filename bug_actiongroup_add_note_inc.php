@@ -55,7 +55,7 @@ require_api( 'utility_api.php' );
  */
 function action_add_note_print_title() {
 	echo '<tr>';
-	echo '<td class="form-title" colspan="2">';
+	echo '<td class="bold" colspan="2">';
 	echo lang_get( 'add_bugnote_title' );
 	echo '</td></tr>';
 }

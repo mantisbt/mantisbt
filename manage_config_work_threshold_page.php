@@ -104,13 +104,13 @@ function get_section_begin_mcwt( $p_section_name ) {
 
     echo '<table class="table table-striped table-bordered table-condensed">';
     echo '<thead>';
-    echo '<tr class="row-category2">';
-    echo '<th class="form-title" width="40%" rowspan="2">' . lang_get( 'perm_rpt_capability' ) . '</th>';
-    echo '<th class="form-title" style="text-align:center"  width="40%" colspan="' . count( $t_access_levels ) . '">' . lang_get( 'access_levels' ) . '</th>';
-    echo '<th class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'alter_level' ) . '&#160;</th>';
-    echo '</tr><tr class="row-category2">';
+    echo '<tr>';
+    echo '<th class="bold" width="40%" rowspan="2">' . lang_get( 'perm_rpt_capability' ) . '</th>';
+    echo '<th class="bold" style="text-align:center"  width="40%" colspan="' . count( $t_access_levels ) . '">' . lang_get( 'access_levels' ) . '</th>';
+    echo '<th class="bold" style="text-align:center" rowspan="2">&#160;' . lang_get( 'alter_level' ) . '&#160;</th>';
+    echo '</tr><tr>';
     foreach( $t_access_levels as $t_access_level => $t_access_label ) {
-        echo '<th class="form-title" style="text-align:center">&#160;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&#160;</th>';
+        echo '<th class="bold" style="text-align:center">&#160;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&#160;</th>';
     }
     echo '</tr>' . "\n";
     echo '</thead>';

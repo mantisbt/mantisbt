@@ -176,7 +176,7 @@ layout_page_header( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 
     <table class="table table-condensed no-margin">
         <tr>
-            <td class="form-title bigger-120">
+            <td class="bold bigger-120">
                 <div class="center">
                     <?php
                     echo $t_window_title;
@@ -193,7 +193,7 @@ layout_page_header( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 
 echo '<table class="table table-striped table-bordered table-condensed no-margin small">';
 echo '<tr>';
-echo '<td class="form-title bigger-120" colspan="6">', lang_get( 'bug_view_title' ), '</td>';
+echo '<td class="bold bigger-120" colspan="6">', lang_get( 'bug_view_title' ), '</td>';
 echo '</tr>';
 
 if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state ||
@@ -551,13 +551,13 @@ echo '</table>';
 if( $t_show_history ) {
     echo '<table class="table table-striped table-bordered table-condensed no-margin small">';
 
-    echo '<tr class=""><td colspan="6" class="form-title bigger-110">', lang_get( 'bug_history' ), '</td></tr>';
+    echo '<tr class=""><td colspan="6" class="bold bigger-110">', lang_get( 'bug_history' ), '</td></tr>';
 
     echo '<tr class="bold">';
-    echo '<th class="row-category-history">', lang_get( 'date_modified' ), '</th>';
-    echo '<th class="row-category-history">', lang_get( 'username' ), '</th>';
-    echo '<th class="row-category-history">', lang_get( 'field' ), '</th>';
-    echo '<th class="row-category-history">', lang_get( 'change' ), '</th>';
+    echo '<th>', lang_get( 'date_modified' ), '</th>';
+    echo '<th>', lang_get( 'username' ), '</th>';
+    echo '<th>', lang_get( 'field' ), '</th>';
+    echo '<th>', lang_get( 'change' ), '</th>';
     echo '</tr>';
 
     $t_history = history_get_events_array( $f_bug_id );

@@ -175,7 +175,7 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
     <table class="width100" cellspacing="1">
 
     <tr>
-        <td class="right" colspan="<?php echo ( 8 * $t_custom_cols ); ?>">
+        <td class="pull-right" colspan="<?php echo ( 8 * $t_custom_cols ); ?>">
             <?php
             $f_switch_view_link = 'view_filters_page.php?target_field=' . $t_target_field . '&view_type=';
 
@@ -192,7 +192,7 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 
     <!-- Filter row 1 -->
 
-    <tr class="row-category2">
+    <tr>
         <th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'reporter' ) ?></th>
         <th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'monitored_by' ) ?></th>
         <th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'assigned_to' ) ?></th>
@@ -234,7 +234,7 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 
     <!-- Filter row 2 -->
 
-    <tr class="row-category2">
+    <tr>
         <th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'status' ) ?></th>
         <th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
             <?php echo ( 'simple' == $f_view_type ) ? lang_get( 'hide_status' ) : '&#160;'; ?>
@@ -314,7 +314,7 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 
     <!-- Filter row 3 -->
 
-    <tr class="row-category2">
+    <tr>
         <th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'show' ) ?></th>
         <th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'view_status' ) ?></th>
         <th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'sticky' ) ?></th>
@@ -367,7 +367,7 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 
             for ( $i = 0; $i < $t_num_rows; $i++ ) {
                 ?>
-                <tr class="row-category2">
+                <tr>
                     <?php
                     for( $j = 0; $j < $t_per_row; $j++ ) {
                         echo '<th class="small-caption" colspan="' . ( 1 * $t_filter_cols ) . '">';
@@ -409,7 +409,7 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 
     <tr>
         <!-- Sort by -->
-        <th class="small-caption category2" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+        <th class="small-caption category" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
             <?php echo lang_get( 'sort_label' ) ?>
         </th>
         <td colspan="<?php echo ( 2 * $t_custom_cols ); ?>">
@@ -419,7 +419,7 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
         </td>
 
         <!-- Highlight changed bugs -->
-        <th class="small-caption category2" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'changed' ) ?></th>
+        <th class="small-caption category" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'changed' ) ?></th>
         <td colspan="<?php echo ( $t_filter_cols - 4 - $t_project_cols ) * $t_custom_cols ; ?>">
             <?php print_filter_highlight_changed(); ?>
         </td>
@@ -428,7 +428,7 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
         if( 'advanced' == $f_view_type ) {
             ?>
             <!-- Projects -->
-            <th class="small-caption category2" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
+            <th class="small-caption category" colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
                 <?php echo lang_get( 'email_project_label' ) ?>
             </th>
             <td colspan="<?php echo( 2 * $t_custom_cols ); ?>">
@@ -458,7 +458,7 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 
         # wrap at the appropriate column
         if( $t_column >= $t_filter_cols ) {
-            echo '<tr class="row-category2">', $t_fields, '</tr>';
+            echo '<tr>', $t_fields, '</tr>';
             echo '<tr>';
             foreach( $t_row_filters as $t_row_field_name ) {
                 echo '<td class="small-caption" colspan="' . $t_custom_cols . '"> ';
@@ -478,7 +478,7 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
             $t_fields .= '<td class="small-caption" colspan="' . ( $t_filter_cols - $t_column ) * $t_custom_cols . '">&#160;</td>';
         }
 
-        echo '<tr class="row-category2">', $t_fields, '</tr>';
+        echo '<tr>', $t_fields, '</tr>';
         echo '<tr>';
         foreach( $t_row_filters as $t_row_field_name ) {
             echo '<td class="small-caption" colspan="' . $t_custom_cols . '"> ';
@@ -497,7 +497,7 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 
     <!-- Last Filter row (Search/tags) -->
 
-    <tr class="row-category2">
+    <tr>
         <th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"><?php echo lang_get( 'search' ) ?></th>
         <th class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 2 ) * $t_custom_cols ); ?>"><?php if( $t_show_tags ) { echo lang_get( 'tags' ); } ?></th>
         <th class="small-caption" colspan="<?php echo ( 1 * $t_custom_cols ); ?>"></th>

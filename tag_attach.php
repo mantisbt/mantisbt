@@ -101,7 +101,7 @@ if( count( $t_tags_failed ) > 0 ) {
     ?>
     <br/>
     <table class="width75">
-        <tr class="row-category">
+        <tr>
             <td colspan="2"><?php echo lang_get( 'tag_attach_failed' ) ?></td>
         </tr>
         <tr class="spacer"><td colspan="2"></td></tr>

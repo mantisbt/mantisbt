@@ -180,7 +180,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
         ?>
         <table class="table table-striped table-bordered table-condensed no-margin small">
         <tr>
-            <td class="form-title" colspan="6">
+            <td class="bold" colspan="6">
                 <?php echo $t_lang_bug_view_title ?>
             </td>
         </tr>
@@ -496,14 +496,14 @@ for( $j=0; $j < $t_row_count; $j++ ) {
             if( 0 == count( $t_bugnotes ) ) {
                 ?>
                 <tr>
-                    <td class="form-title" colspan="2">
+                    <td class="bold" colspan="2">
                         <?php echo $t_lang_no_bugnotes_msg ?>
                     </td>
                 </tr>
             <?php
             } else { # print bugnotes ?>
                 <tr>
-                    <td class="form-title" colspan="2">
+                    <td class="bold" colspan="2">
                         <?php echo $t_lang_bug_notes_title ?>
                     </td>
                 </tr>

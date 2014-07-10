@@ -130,7 +130,7 @@ print_doc_menu( 'proj_doc_page.php' );
 				<div class="widget-main">
 					<div class="table-responsive">
 						<table class="table table-bordered table-condensed table-striped">
-							<tr class="row-category2">
+							<tr>
 								<th><?php echo lang_get( 'filename' ); ?></th>
 								<th><?php echo lang_get( 'description' ); ?></th>
 							</tr>

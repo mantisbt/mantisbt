@@ -50,7 +50,7 @@ print_admin_menu_bar( 'system_utils.php' );
                 <div class="widget-main no-padding">
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped table-condensed table-hover">
-                            <tr class="row-category">
+                            <tr>
                                 <th width="70%">Description</th><th width="30%" class="center">Execute</th>
                             </tr>
 

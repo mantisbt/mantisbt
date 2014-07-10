@@ -266,9 +266,9 @@ print_summary_submenu(); ?>
                 <thead>
                 <tr>
                     <th><?php echo lang_get( 'by_date' ) ?></th>
-                    <td class="right"><?php echo lang_get( 'opened' ); ?></td>
-                    <td class="right"><?php echo lang_get( 'resolved' ); ?></td>
-                    <td class="right"><?php echo lang_get( 'balance' ); ?></td>
+                    <td class="pull-right"><?php echo lang_get( 'opened' ); ?></td>
+                    <td class="pull-right"><?php echo lang_get( 'resolved' ); ?></td>
+                    <td class="pull-right"><?php echo lang_get( 'balance' ); ?></td>
                 </tr>
                 </thead>
                 <?php summary_print_by_date( config_get( 'date_partitions' ) ) ?>
@@ -282,7 +282,7 @@ print_summary_submenu(); ?>
                 <thead>
                 <tr>
                     <th><?php echo lang_get( 'most_active' ) ?></th>
-                    <td class="right" width="14%"><?php echo lang_get( 'score' ); ?></td>
+                    <td class="pull-right" width="14%"><?php echo lang_get( 'score' ); ?></td>
                 </tr>
                 </thead>
                 <?php summary_print_by_activity() ?>
@@ -296,7 +296,7 @@ print_summary_submenu(); ?>
                 <thead>
                 <tr>
                     <th><?php echo lang_get( 'longest_open' ) ?></th>
-                    <td class="right" width="14%"><?php echo lang_get( 'days' ); ?></td>
+                    <td class="pull-right" width="14%"><?php echo lang_get( 'days' ); ?></td>
                 </tr>
                 </thead>
                 <?php summary_print_by_age() ?>
@@ -352,9 +352,9 @@ print_summary_submenu(); ?>
                 <thead>
                 <tr>
                     <th><?php echo lang_get( 'reporter_effectiveness' ) ?></th>
-                    <td class="right"><?php echo lang_get( 'severity' ); ?></td>
-                    <td class="right"><?php echo lang_get( 'errors' ); ?></td>
-                    <td class="right"><?php echo lang_get( 'total' ); ?></td>
+                    <td class="pull-right"><?php echo lang_get( 'severity' ); ?></td>
+                    <td class="pull-right"><?php echo lang_get( 'errors' ); ?></td>
+                    <td class="pull-right"><?php echo lang_get( 'total' ); ?></td>
                 </tr>
                 </thead>
                 <?php summary_print_reporter_effectiveness( config_get( 'severity_enum_string' ), config_get( 'resolution_enum_string' ) ) ?>

@@ -51,7 +51,7 @@ require_api( 'tag_api.php' );
  */
 function action_attach_tags_print_title() {
 	echo '<tr>';
-	echo '<td class="form-title" colspan="2">';
+	echo '<td class="bold" colspan="2">';
 	echo lang_get( 'tag_attach_long' );
 	echo '</td></tr>';
 }

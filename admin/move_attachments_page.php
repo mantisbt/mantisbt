@@ -115,7 +115,7 @@ layout_admin_page_begin();
                         <form name="move_attachments_project_select" method="post" action="move_attachments.php">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-condensed">
-                                    <tr class="row-category">
+                                    <tr>
                                         <th>Project name</th>
                                         <th width="18%">Attachments</th>
                                         <th width="7%">To Disk</th>
@@ -138,7 +138,7 @@ layout_admin_page_begin();
                                         ?>
 
                                         <tr>
-                                            <td class="right" colspan="2">Select All</td>
+                                            <td class="pull-right" colspan="2">Select All</td>
                                             <td class="center">
                                                 <input name="all_proj"
                                                        type="checkbox" value="all"
