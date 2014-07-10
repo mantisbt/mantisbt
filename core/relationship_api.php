@@ -727,7 +727,7 @@ function relationship_get_summary_html( $p_bug_id ) {
 
 	if( !is_blank( $t_summary ) ) {
 		if( relationship_can_resolve_bug( $p_bug_id ) == false ) {
-			$t_summary .= '<tr class="row-2"><td colspan="' . ( 5 + $t_show_project ) . '"><strong>' .
+			$t_summary .= '<tr<td><td colspan="' . ( 5 + $t_show_project ) . '"><strong>' .
                 lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</strong></td></tr>';
 		}
 		$t_summary = '<table class="table table-bordered table-condensed table-hover">' . $t_summary . '</table>';

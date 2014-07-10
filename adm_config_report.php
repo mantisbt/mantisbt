@@ -318,23 +318,23 @@ $t_result = db_query_bound( $t_query, $t_param );
                             </thead>
 
                             <tbody>
-                            <tr class="row-1">
+                            <tr>
                                 <td>
-                                    <select name="filter_user_id">
+                                    <select name="filter_user_id" class="input-sm">
                                         <?php
                                         print_option_list_from_array( $t_users_list, $t_filter_user_value );
                                         ?>
                                     </select>
                                 </td>
                                 <td>
-                                    <select name="filter_project_id">
+                                    <select name="filter_project_id" class="input-sm">
                                         <?php
                                         print_option_list_from_array( $t_projects_list, $t_filter_project_value );
                                         ?>
                                     </select>
                                 </td>
                                 <td>
-                                    <select name="filter_config_id">
+                                    <select name="filter_config_id" class="input-sm">
                                         <?php
                                         print_option_list_from_array( $t_configs_list, $t_filter_config_value );
                                         ?>
@@ -418,10 +418,11 @@ $t_result = db_query_bound( $t_query, $t_param );
                                 if( $t_read_write_access ) {
                                     ?>
                                     <td class="center">
-                                        <div class="btn-group">
+                                        <div class="btn-group inline">
                                             <?php
                                             if( config_can_delete( $v_config_id ) ) {
                                                 # Update button (will populate edit form at page bottom)
+                                                echo '<div class="pull-left">';
                                                 print_button(
                                                     '#config_set_form',
                                                     lang_get( 'edit_link' ),
@@ -434,8 +435,10 @@ $t_result = db_query_bound( $t_query, $t_param );
                                                     ),
                                                     OFF
                                                 );
+                                                echo '</div>';
 
                                                 # Delete button
+                                                echo '<div class="pull-left">';
                                                 print_button(
                                                     'adm_config_delete.php',
                                                     lang_get( 'delete_link' ),
@@ -446,6 +449,7 @@ $t_result = db_query_bound( $t_query, $t_param );
                                                     ),
                                                     $t_form_security_token
                                                 );
+                                                echo '</div>';
                                             } else {
                                                 echo '&#160;';
                                             }

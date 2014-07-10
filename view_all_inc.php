@@ -235,14 +235,14 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
                             <div class="form-inline pull-left">
                                 <?php
                                 if ($g_checkboxes_exist && ON == config_get('use_javascript')) {
-                                    echo '<div class="checkbox"><label>';
-                                    echo '<input class="ace check_all" type="checkbox" id="bug_arr_all" name="bug_arr_all" value="all" class="check_all" />';
+                                    echo '<label class="inline">';
+                                    echo '<input class="ace check_all" type="checkbox" id="bug_arr_all" name="bug_arr_all" value="all" class="check_all input-small" />';
                                     echo '<span class="lbl"> ' . lang_get( 'select_all' ) . ' </span > ';
-                                    echo '</label></div>';
+                                    echo '</label>';
                                 }
                                 if ($g_checkboxes_exist) {
                                     ?>
-                                    <select name="action">
+                                    <select name="action" class="input-sm">
                                         <?php print_all_bug_action_option_list($t_unique_project_ids) ?>
                                     </select>
                                     <input type="submit" class="btn btn-primary btn-white btn-sm btn-round" value="<?php echo lang_get('ok'); ?>"/>

@@ -127,14 +127,14 @@ layout_page_begin();
                     <div class="widget-main no-padding">
                         <div class="table-responsive">
                             <table class="table table-bordered table-condensed table-striped">
-                                <tr class="row-1">
+                                <tr>
                                     <td class="center" colspan="2">
                                         <textarea class="form-control" cols="80" rows="10" name="bugnote_text"><?php echo $t_bugnote_text ?></textarea>
                                     </td>
                                 </tr>
                                 <?php if( config_get( 'time_tracking_enabled' ) ) { ?>
                                     <?php if( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $t_bug_id ) ) { ?>
-                                        <tr class="row-2">
+                                        <tr<td>
                                             <td class="center" colspan="2">
                                                 <strong><?php echo lang_get( 'time_tracking' ) ?> (HH:MM)</strong><br />
                                                 <input type="text" name="time_tracking" size="5" value="<?php echo $t_time_tracking ?>" />

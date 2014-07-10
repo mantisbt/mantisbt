@@ -89,7 +89,7 @@ function bug_group_action_print_bottom() {
  * @return void
  */
 function bug_group_action_print_bug_list( array $p_bug_ids_array ) {
-    echo '<tr class="row-1">';
+    echo '<tr>';
     echo '<th class="category" colspan="2">';
     echo lang_get( 'actiongroup_bugs' );
     echo '</th>';

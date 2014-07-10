@@ -85,7 +85,7 @@ require_api( 'lang_api.php' );
                     <div class="table-responsive">
                         <table class="table table-bordered table-condensed">
                             <tbody>
-                            <tr class="row-2">
+                            <tr<td>
                                 <th class="category" width="15%">
                                     <?php echo lang_get( 'bugnote' ) ?>
                                 </th>
@@ -97,7 +97,7 @@ require_api( 'lang_api.php' );
                             <?php
                             if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
                                 ?>
-                                <tr class="row-1">
+                                <tr>
                                     <th class="category">
                                         <?php echo lang_get( 'view_status' ) ?>
                                     </th>
@@ -148,9 +148,7 @@ require_api( 'lang_api.php' );
                     </div>
                 </div>
                 <div class="widget-toolbox padding-8 clearfix">
-                    <div class="center">
-                        <input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'add_bugnote_button' ) ?>" />
-                    </div>
+                    <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_bugnote_button' ) ?>" />
                 </div>
             </div>
         </div>

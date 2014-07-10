@@ -60,7 +60,7 @@ function action_update_product_build_print_title() {
 function action_update_product_build_print_fields() {
 ?>
 	<tbody>
-		<tr class="row-1">
+		<tr>
 			<th class="category">
 				<?php echo lang_get( 'product_build' ); ?>
 			</th>

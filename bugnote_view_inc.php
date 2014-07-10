@@ -172,10 +172,10 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
                 ?>
                 <tr class="bugnote <?php echo $t_bugnote_css ?>" id="c<?php echo $t_bugnote->id ?>">
                     <td class="category">
-                        <?php print_avatar( $t_bugnote->reporter_id ); ?>
-                        <p class="no-margin"><i class="fa fa-link grey"></i> <a rel="bookmark" href="<?php echo string_get_bugnote_view_url($t_bugnote->bug_id, $t_bugnote->id) ?>" class="lighter" title="<?php echo lang_get( 'bugnote_link_title' ) ?>"><?php echo htmlentities( config_get_global( 'bugnote_link_tag' ) ) . $t_bugnote_id_formatted ?></a></p>
-
-                        <p class="no-margin">
+                        <div class="pull-right"><?php print_avatar( $t_bugnote->reporter_id ); ?></div>
+                        <div class="pull-left">
+                            <p class="no-margin"><i class="fa fa-link grey"></i> <a rel="bookmark" href="<?php echo string_get_bugnote_view_url($t_bugnote->bug_id, $t_bugnote->id) ?>" class="lighter" title="<?php echo lang_get( 'bugnote_link_title' ) ?>"><?php echo htmlentities( config_get_global( 'bugnote_link_tag' ) ) . $t_bugnote_id_formatted ?></a></p>
+                            <p class="no-margin">
                             <span class="bugnote-reporter">
                             <?php
                             echo '<i class="fa fa-user grey"></i> ';
@@ -193,68 +193,76 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
                                     ?></span>
                             </span>
 
-                            <?php if( VS_PRIVATE == $t_bugnote->view_state ) { ?>
-                                <span class="small bugnote-view-state">[ <?php echo lang_get( 'private' ) ?> ]</span>
-                            <?php } ?>
-                        </p>
-                        <p class="no-margin small lighter"><i class="fa fa-clock-o grey"></i> <?php echo date( $t_normal_date_format, $t_bugnote->date_submitted ); ?></p>
-                        <?php
-                        if( $t_bugnote_modified ) {
-                            echo '<p class="no-margin small lighter"><i class="fa fa-retweet"></i> ' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . date( $t_normal_date_format, $t_bugnote->last_modified ) . '</p>';
-                            $t_revision_count = bug_revision_count( $f_bug_id, REV_BUGNOTE, $t_bugnote->id );
-                            if( $t_revision_count >= 1) {
-                                $t_view_num_revisions_text = sprintf( lang_get( 'view_num_revisions' ), $t_revision_count );
-                                echo '<p class="no-margin"><span class="small bugnote-revisions-link"><a href="bug_revision_view_page.php?bugnote_id=' . $t_bugnote->id . '">' . $t_view_num_revisions_text . '</a></span></p>';
-                            }
-                        }
-                        ?>
-                        <div class="space-2"></div>
-                        <div class="btn-group-sm">
+                                <?php if( VS_PRIVATE == $t_bugnote->view_state ) { ?>
+                                    <span class="small bugnote-view-state">[ <?php echo lang_get( 'private' ) ?> ]</span>
+                                <?php } ?>
+                            </p>
+                            <p class="no-margin small lighter"><i class="fa fa-clock-o grey"></i> <?php echo date( $t_normal_date_format, $t_bugnote->date_submitted ); ?></p>
                             <?php
-                            # bug must be open to be editable
-                            if( !bug_is_readonly( $f_bug_id ) ) {
-
-                                # check if the user can edit this bugnote
-                                if( $t_user_id == $t_bugnote->reporter_id ) {
-                                    $t_can_edit_bugnote = access_has_bugnote_level( $t_bugnote_user_edit_threshold, $t_bugnote->id );
-                                } else {
-                                    $t_can_edit_bugnote = $t_can_edit_all_bugnotes;
-                                }
-
-                                # check if the user can delete this bugnote
-                                if( $t_user_id == $t_bugnote->reporter_id ) {
-                                    $t_can_delete_bugnote = access_has_bugnote_level( $t_bugnote_user_delete_threshold, $t_bugnote->id );
-                                } else {
-                                    $t_can_delete_bugnote = $t_can_delete_all_bugnotes;
-                                }
-
-                                # check if the user can make this bugnote private
-                                if( $t_user_id == $t_bugnote->reporter_id ) {
-                                    $t_can_change_view_state = access_has_bugnote_level( $t_bugnote_user_change_view_state_threshold, $t_bugnote->id );
-                                } else {
-                                    $t_can_change_view_state = $t_can_change_view_state_all_bugnotes;
-                                }
-
-                                # show edit button if the user is allowed to edit this bugnote
-                                if( $t_can_edit_bugnote ) {
-                                    print_button( 'bugnote_edit_page.php?bugnote_id='.$t_bugnote->id, lang_get( 'bugnote_edit_link' ) );
-                                }
-
-                                # show delete button if the user is allowed to delete this bugnote
-                                if( $t_can_delete_bugnote ) {
-                                    print_button( 'bugnote_delete.php?bugnote_id='.$t_bugnote->id, lang_get( 'delete_link' ) );
-                                }
-
-                                # show make public or make private button if the user is allowed to change the view state of this bugnote
-                                if( $t_can_change_view_state ) {
-                                    if( VS_PRIVATE == $t_bugnote->view_state ) {
-                                        print_button( 'bugnote_set_view_state.php?private=0&bugnote_id=' . $t_bugnote->id, lang_get( 'make_public' ) );
-                                    } else {
-                                        print_button( 'bugnote_set_view_state.php?private=1&bugnote_id=' . $t_bugnote->id, lang_get( 'make_private' ) );
-                                    }
+                            if( $t_bugnote_modified ) {
+                                echo '<p class="no-margin small lighter"><i class="fa fa-retweet"></i> ' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . date( $t_normal_date_format, $t_bugnote->last_modified ) . '</p>';
+                                $t_revision_count = bug_revision_count( $f_bug_id, REV_BUGNOTE, $t_bugnote->id );
+                                if( $t_revision_count >= 1) {
+                                    $t_view_num_revisions_text = sprintf( lang_get( 'view_num_revisions' ), $t_revision_count );
+                                    echo '<p class="no-margin"><span class="small bugnote-revisions-link"><a href="bug_revision_view_page.php?bugnote_id=' . $t_bugnote->id . '">' . $t_view_num_revisions_text . '</a></span></p>';
                                 }
                             }
                             ?>
+                            <div class="clearfix"></div>
+                            <div class="space-2"></div>
+                            <div class="btn-group-sm">
+                                <?php
+                                # bug must be open to be editable
+                                if( !bug_is_readonly( $f_bug_id ) ) {
+
+                                    # check if the user can edit this bugnote
+                                    if( $t_user_id == $t_bugnote->reporter_id ) {
+                                        $t_can_edit_bugnote = access_has_bugnote_level( $t_bugnote_user_edit_threshold, $t_bugnote->id );
+                                    } else {
+                                        $t_can_edit_bugnote = $t_can_edit_all_bugnotes;
+                                    }
+
+                                    # check if the user can delete this bugnote
+                                    if( $t_user_id == $t_bugnote->reporter_id ) {
+                                        $t_can_delete_bugnote = access_has_bugnote_level( $t_bugnote_user_delete_threshold, $t_bugnote->id );
+                                    } else {
+                                        $t_can_delete_bugnote = $t_can_delete_all_bugnotes;
+                                    }
+
+                                    # check if the user can make this bugnote private
+                                    if( $t_user_id == $t_bugnote->reporter_id ) {
+                                        $t_can_change_view_state = access_has_bugnote_level( $t_bugnote_user_change_view_state_threshold, $t_bugnote->id );
+                                    } else {
+                                        $t_can_change_view_state = $t_can_change_view_state_all_bugnotes;
+                                    }
+
+                                    # show edit button if the user is allowed to edit this bugnote
+                                    if( $t_can_edit_bugnote ) {
+                                        echo '<div class="pull-left">';
+                                        print_button( 'bugnote_edit_page.php?bugnote_id='.$t_bugnote->id, lang_get( 'bugnote_edit_link' ) );
+                                        echo '</div>';
+                                    }
+
+                                    # show delete button if the user is allowed to delete this bugnote
+                                    if( $t_can_delete_bugnote ) {
+                                        echo '<div class="pull-left">';
+                                        print_button( 'bugnote_delete.php?bugnote_id='.$t_bugnote->id, lang_get( 'delete_link' ) );
+                                        echo '</div>';
+                                    }
+
+                                    # show make public or make private button if the user is allowed to change the view state of this bugnote
+                                    if( $t_can_change_view_state ) {
+                                        echo '<div class="pull-left">';
+                                        if( VS_PRIVATE == $t_bugnote->view_state ) {
+                                            print_button( 'bugnote_set_view_state.php?private=0&bugnote_id=' . $t_bugnote->id, lang_get( 'make_public' ) );
+                                        } else {
+                                            print_button( 'bugnote_set_view_state.php?private=1&bugnote_id=' . $t_bugnote->id, lang_get( 'make_private' ) );
+                                        }
+                                        echo '</div>';
+                                    }
+                                }
+                                ?>
+                            </div>
                         </div>
                     </td>
                     <td class="bugnote-note">

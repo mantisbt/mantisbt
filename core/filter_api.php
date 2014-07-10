@@ -2306,7 +2306,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		}?>
 		</tr>
 
-		<tr class="row-1">
+		<tr>
 			<td class="small-caption" id="reporter_id_filter_target">
 							<?php
 								$t_output = '';
@@ -2609,7 +2609,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		}?>
 		</tr>
 
-		<tr class="row-1">
+		<tr>
 			<td class="small-caption" id="show_status_filter_target">
 							<?php
 								$t_output = '';
@@ -2897,7 +2897,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			echo '<td class="small-caption" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';
 		}?>
 		</tr>
-		<tr class="row-1">
+		<tr>
 			<td class="small-caption" id="per_page_filter_target">
 				<?php
 					echo( $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] == 0 ) ? lang_get( 'all' ) : string_display_line( $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] );
@@ -3022,7 +3022,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			echo '<td class="small-caption" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';
 		}?>
 		</tr>
-		<tr class="row-1">
+		<tr>
 			<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
 			<td class="small-caption" id="platform_filter_target">
 				<?php
@@ -3164,7 +3164,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			$t_links_row = "\n\t\t" . join( "\n\t\t", $t_plugin_filter_links[$i] );
 			$t_values_row = "\n\t\t" . join( "\n\t\t", $t_plugin_filter_fields[$i] );
 			echo "\n\t" . '<tr class="', $t_trclass, '">', $t_links_row, "\n\t</tr>";
-			echo "\n\t" . '<tr class="row-1">', $t_values_row, "\n\t</tr>\n\t";
+			echo "\n\t" . '<tr>', $t_values_row, "\n\t</tr>\n\t";
 		}
 
 		if( ON == config_get( 'filter_by_custom_fields' ) ) {
@@ -3183,7 +3183,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				for( $i = 0;$i < $t_num_fields;$i++ ) {
 					if( $t_col_idx == 0 ) {
 						$t_fields = '<tr class="' . $t_trclass . '">';
-						$t_values = '<tr class="row-1">';
+						$t_values = '<tr>';
 					}
 
 					if( isset( $t_accessible_custom_fields_names[$i] ) ) {
@@ -3313,7 +3313,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			}
 		}
 		?>
-		<tr class="row-1">
+		<tr>
 			<td class="small-caption category2">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_NOTE_USER_ID;?>" id="note_user_id_filter"<?php echo $t_dynamic_filter_expander_class ?>>
 					<?php echo lang_get( 'note_user_id_label' )?>
@@ -3442,7 +3442,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		</tr>
 
 		<!-- Match Type -->
-		<tr class="row-1">
+		<tr>
 			<td class="small-caption category2"><a href="<?php echo $t_filters_url . FILTER_PROPERTY_MATCH_TYPE;?>" id="match_type_filter"><?php echo lang_get( 'filter_match_type' )?>:</a></td>
 			<td class="small-caption" id="match_type_filter_target">
 			<?php
@@ -3488,7 +3488,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	# expanded
     echo '<div class="form-inline">';
 	echo '<label>', lang_get( 'search' ) . '&#160', '</label>';
-	echo '<input type="text" class="form-control input-sm" size="16" name="', FILTER_PROPERTY_SEARCH, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_SEARCH] ), '" />';
+	echo '<input type="text" class="input-sm" size="16" name="', FILTER_PROPERTY_SEARCH, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_SEARCH] ), '" />';
 	?>
 	<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" name="filter" value="<?php echo lang_get( 'filter_button' )?>" />
     </div>
@@ -3502,7 +3502,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	if( access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) { ?>
     <div class="btn-group">
 
-		<form method="post" name="save_query" action="query_store_page.php">
+		<form class="form-inline pull-left" method="post" name="save_query" action="query_store_page.php">
 			<?php # CSRF protection not required here - form does not result in modifications ?>
 			<input type="submit" name="save_query_button" class="btn btn-primary btn-white btn-sm btn-round"
                    value="<?php echo lang_get( 'save_query' )?>" />
@@ -3511,13 +3511,13 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	}
 	if( count( $t_stored_queries_arr ) > 0 ) { ?>
 
-		<form method="post" name="open_queries" action="query_view_page.php">
+		<form class="form-inline pull-left" method="post" name="open_queries" action="query_view_page.php">
 			<?php # CSRF protection not required here - form does not result in modifications ?>
 			<input type="submit" name="switch_to_query_button" class="btn btn-primary btn-white btn-sm btn-round"
                    value="<?php echo lang_get( 'open_queries' )?>" />
 		</form>
 
-		<form method="get" class="form-inline" name="list_queries<?php echo $t_form_name_suffix;?>" action="view_all_set.php">
+		<form class="form-inline pull-left padding-left-8"  method="get" name="list_queries<?php echo $t_form_name_suffix;?>" action="view_all_set.php">
 			<?php # CSRF protection not required here - form does not result in modifications ?>
 			<input type="hidden" name="type" value="3" />
 			<select name="source_query_id">
@@ -3538,7 +3538,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	    <?php
 	} else { ?>
 
-        <form method="get" name="reset_query" action="view_all_set.php">
+        <form class="form-inline pull-left" method="get" name="reset_query" action="view_all_set.php">
             <?php # CSRF protection not required here - form does not result in modifications ?>
             <input type="hidden" name="type" value="3" />
             <input type="hidden" name="source_query_id" value="-1" />

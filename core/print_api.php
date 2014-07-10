@@ -353,10 +353,11 @@ function print_reporter_option_list( $p_user_id, $p_project_id = null ) {
  */
 function print_tag_attach_form( $p_bug_id, $p_string = '' ) {
     ?>
-    <small><?php echo sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) )?></small>
+
     <form method="post" action="tag_attach.php" class="form-inline">
         <?php echo form_security_field( 'tag_attach' )?>
-        <input type="hidden" name="bug_id" value="<?php echo $p_bug_id?>" />
+        <label class="inline small"><?php echo sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) )?></label>
+        <input type="hidden" name="bug_id" value="<?php echo $p_bug_id?>" class="input-sm" />
         <?php
         print_tag_input( $p_bug_id, $p_string );
         ?>
@@ -375,8 +376,8 @@ function print_tag_attach_form( $p_bug_id, $p_string = '' ) {
 function print_tag_input( $p_bug_id = 0, $p_string = '' ) {
     ?>
     <input type="hidden" id="tag_separator" value="<?php echo config_get( 'tag_separator' )?>" />
-    <input type="text" name="tag_string" id="tag_string" class="form-control input-sm" size="40" value="<?php echo string_attribute( $p_string )?>" />
-    <select <?php echo helper_get_tab_index()?> name="tag_select" id="tag_select">
+    <input type="text" name="tag_string" id="tag_string" class="input-sm" size="40" value="<?php echo string_attribute( $p_string )?>" />
+    <select <?php echo helper_get_tab_index()?> name="tag_select" id="tag_select" class="input-sm">
         <?php print_tag_option_list( $p_bug_id );?>
     </select>
 <?php

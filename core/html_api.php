@@ -1149,76 +1149,77 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 
     $t_bug = bug_get( $p_bug_id );
 
-    echo '<table><tr>';
+    echo '<div class="btn-group">';
+
     if( !$t_readonly ) {
         # UPDATE button
-        echo '<td class="center">';
+        echo '<div class="pull-left padding-right-8">';
         html_button_bug_update( $p_bug_id );
-        echo '&#160;&#160;&#160;</td>';
+        echo '</div>';
 
         # ASSIGN button
-        echo '<td class="center">';
+        echo '<div class="pull-left padding-right-8">';
         html_button_bug_assign_to( $t_bug );
-        echo '&#160;&#160;&#160;</td>';
+        echo '</div>';
 
         # Change status button/dropdown
-        echo '<td class="center">';
+        echo '<div class="pull-left padding-right-8">';
         html_button_bug_change_status( $t_bug );
-        echo '&#160;&#160;&#160;</td>';
+        echo '</div>';
     }
 
     # MONITOR/UNMONITOR button
     if( !current_user_is_anonymous() ) {
-        echo '<td class="center">';
+        echo '<div class="pull-left">';
         if( user_is_monitoring_bug( auth_get_current_user_id(), $p_bug_id ) ) {
             html_button_bug_unmonitor( $p_bug_id );
         } else {
             html_button_bug_monitor( $p_bug_id );
         }
-        echo '</td>';
+        echo '</div>';
     }
 
     # STICK/UNSTICK button
     if( access_has_bug_level( $t_sticky, $p_bug_id ) ) {
-        echo '<td class="center">';
+        echo '<div class="pull-left">';
         if( !bug_get_field( $p_bug_id, 'sticky' ) ) {
             html_button_bug_stick( $p_bug_id );
         } else {
             html_button_bug_unstick( $p_bug_id );
         }
-        echo '</td>';
+        echo '</div>';
     }
 
     # CLONE button
     if( !$t_readonly ) {
-        echo '<td class="center">';
+        echo '<div class="pull-left">';
         html_button_bug_create_child( $p_bug_id );
-        echo '</td>';
+        echo '</div>';
     }
 
     # REOPEN button
-    echo '<td class="center">';
+    echo '<div class="pull-left">';
     html_button_bug_reopen( $t_bug );
-    echo '</td>';
+    echo '</div>';
 
     # CLOSE button
-    echo '<td class="center">';
+    echo '<div class="pull-left">';
     html_button_bug_close( $t_bug );
-    echo '</td>';
+    echo '</div>';
 
     # MOVE button
-    echo '<td class="center">';
+    echo '<div class="pull-left">';
     html_button_bug_move( $p_bug_id );
-    echo '</td>';
+    echo '</div>';
 
     # DELETE button
-    echo '<td class="center">';
+    echo '<div class="pull-left">';
     html_button_bug_delete( $p_bug_id );
-    echo '</td>';
+    echo '</div>';
 
     helper_call_custom_function( 'print_bug_view_page_custom_buttons', array( $p_bug_id ) );
 
-    echo '</tr></table>';
+    echo '</div>';
 }
 
 /**

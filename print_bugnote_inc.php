@@ -113,7 +113,7 @@ $t_num_notes = db_num_rows( $t_result );
             ?>
 
             <tr>
-                <td class="nopad" width="20%">
+                <td class="no-pading" width="20%">
                     <div class="small">
                         (<?php echo bugnote_format_id( $v3_id ) ?>)
                         <br/>
@@ -127,7 +127,7 @@ $t_num_notes = db_num_rows( $t_result );
                         } ?>
                     </div>
                 </td>
-                <td class="nopad" width="85%">
+                <td class="no-padding" width="85%">
                     <?php
                     switch ( $v3_note_type ) {
                         case REMINDER:

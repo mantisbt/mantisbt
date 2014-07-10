@@ -105,7 +105,7 @@ if( $t_show_sponsorships ) {
 <?php
 	if( $t_can_sponsor ) {
 ?>
-	<tr class="row-1">
+	<tr>
 		<th class="category" width="15%"><?php echo lang_get( 'sponsor_issue' ) ?></th>
 		<td>
 			<form method="post" action="bug_set_sponsorship.php">
@@ -123,7 +123,7 @@ if( $t_show_sponsorships ) {
 	$t_total_sponsorship = bug_get_field( $f_bug_id, 'sponsorship_total' );
 	if( $t_total_sponsorship > 0 ) {
 ?>
-	<tr class="row-2">
+	<tr<td>
 		<th class="category" width="15%"><?php echo lang_get( 'sponsors_list' ) ?></th>
 		<td>
 		<?php

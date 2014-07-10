@@ -55,6 +55,26 @@
     width: 13%
 }
 
+.padding-4 {
+    padding:4px;
+}
+.padding-right-4 {
+    padding-left:4px;
+}
+.padding-left-4 {
+    padding-right:4px;
+}
+
+.padding-8 {
+    padding:8px;
+}
+.padding-left-8 {
+    padding-left:8px;
+}
+.padding-right-8 {
+    padding-right:8px;
+}
+
 .login-container {
     width: 100%;
 }
@@ -143,12 +163,19 @@ pre {
 
 .input-sm {
     width: 90px !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+    padding: 4px 6px !important;
 }
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .page-content {
         padding: 8px 16px 24px;
+    }
+
+    .input-sm {
+        width: 120px !important;
     }
 }
 
@@ -157,11 +184,19 @@ pre {
     .page-content {
         padding: 8px 20px 24px;
     }
+
+    .input-sm {
+        width: auto !important;
+    }
 }
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
     .page-content {
         padding: 8px 20px 24px;
+    }
+
+    .input-sm {
+        width: auto !important;
     }
 }

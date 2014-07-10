@@ -106,7 +106,7 @@ if( ON == config_get( 'time_tracking_with_billing' ) ) {
 				?>
 			</td>
 		</tr>
-		<tr class="row-2">
+		<tr<td>
 			<td class="category" width="25%">
 				<?php
 					$t_filter = array();
@@ -124,7 +124,7 @@ if( ON == config_get( 'time_tracking_with_billing' ) ) {
 <?php
 	if( $t_cost_col ) {
 ?>
-		<tr class="row-1">
+		<tr>
 			<td>
 				<?php echo lang_get( 'time_tracking_cost_per_hour_label' ) ?>
 				<input type="text" name="bugnote_cost" value="<?php echo $f_bugnote_cost ?>" />

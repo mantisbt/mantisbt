@@ -8,7 +8,6 @@ td.overdue			{ background-color: #ff0000; color: #000000; font-weight: bold; }
 
 td.form-title		{ background-color: #ffffff; color: #000000; font-weight: bold; text-align: left; }
 td.form-title-caps	{ background-color: #ffffff; color: #000000; font-weight: bold; text-align: left; text-transform: uppercase; }
-td.nopad			{ padding: 0px; }
 td.small-caption, th.small-caption	{
     border: 1px solid #fff;
     font-size: 8pt;
@@ -22,8 +21,6 @@ td.print-spacer		{ background-color: #ffffff; color: #000000; font-size: 1pt; li
 td.print > a:link.user { text-decoration: none; color: black; }
 
 tr.spacer			{ background-color: #ffffff !important; color: #000000; height: 5px; }
-tr.row-1			{ background-color: #f9f9f9; color: #000000; }
-tr.row-2			{ background-color: #f9f9f9; color: #000000; }
 tr.row-category		{ background-color: #c8c8e8; color: #000000; font-weight: bold;}
 tr.row-category td  {  text-align:center; }
 tr.row-category2	{ background-color: #edf3f4; color: #000000; }

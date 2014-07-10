@@ -104,7 +104,7 @@ print_manage_menu( 'manage_custom_field_page.php' );
                     <form method="post" action="manage_custom_field_create.php" class="form-inline">
                         <fieldset>
                             <?php echo form_security_field( 'manage_custom_field_create' ); ?>
-                            <input type="text" class="form-control input-sm" name="name" size="32" maxlength="64" />
+                            <input type="text" class="input-sm" name="name" size="32" maxlength="64" />
                             <input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'add_custom_field_button' ) ?>" />
                         </fieldset>
                     </form>

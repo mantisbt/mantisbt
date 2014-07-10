@@ -231,10 +231,13 @@ print_manage_menu( 'manage_proj_page.php' );
                                                 <?php
                                                 $t_id = urlencode( $t_id );
                                                 $t_project_id = urlencode( ALL_PROJECTS );
-
+                                                echo '<div class="btn-group inline">';
+                                                echo '<div class="pull-left">';
                                                 print_button( "manage_proj_cat_edit_page.php?id=$t_id&project_id=$t_project_id", lang_get( 'edit_link' ) );
-                                                echo '&#160;';
+                                                echo '</div>';
+                                                echo '<div class="pull-left">';
                                                 print_button( "manage_proj_cat_delete.php?id=$t_id&project_id=$t_project_id", lang_get( 'delete_link' ) );
+                                                echo '</div>';
                                                 ?>
                                             </td>
                                         <?php } ?>
@@ -255,7 +258,7 @@ print_manage_menu( 'manage_proj_page.php' );
                         <div class="widget-toolbox padding-8 clearfix">
                             <?php echo form_security_field( 'manage_proj_cat_add' ) ?>
                             <input type="hidden" name="project_id" value="<?php echo ALL_PROJECTS ?>" />
-                            <input type="text" name="name" class="form-control input-sm" size="32" maxlength="128" />
+                            <input type="text" name="name" class="input-sm" size="32" maxlength="128" />
                             <input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'add_category_button' ) ?>" />
                         </div>
                     </form>
