@@ -187,7 +187,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
         <tr class="spacer" >
             <td colspan="6"></td>
         </tr>
-        <tr class="print-category">
+        <tr class="bold">
             <td width="16%">
                 <?php echo sprintf( lang_get( 'label' ), $t_lang_id ) ?>
             </td>
@@ -231,25 +231,25 @@ for( $j=0; $j < $t_row_count; $j++ ) {
             <td colspan="6"></td>
         </tr>
         <tr>
-            <td class="print-category">
+            <td class="bold">
                 <?php echo sprintf( lang_get( 'label' ), $t_lang_reporter ) ?>
             </td>
             <td>
                 <?php print_user_with_subject( $t_bug->reporter_id, $t_id ) ?>
             </td>
-            <td class="print-category">
+            <td class="bold">
                 <?php echo sprintf( lang_get( 'label' ), $t_lang_platform ) ?>
             </td>
             <td>
                 <?php echo string_display_line( $t_bug->platform ) ?>
             </td>
             <?php if( access_has_bug_level( config_get( 'due_date_view_threshold' ), $t_id ) ) { ?>
-                <td class="print-category">
+                <td class="bold">
                     <?php echo sprintf( lang_get( 'label' ), $t_lang_due_date ) ?>
                 </td>
                 <?php
                 if( bug_is_overdue( $t_id ) ) { ?>
-                    <td class="print-overdue">
+                    <td class="bold">
                 <?php
                 } else	{ ?>
                     <td>
@@ -265,7 +265,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
             <?php } ?>
         </tr>
         <tr>
-            <td class="print-category">
+            <td class="bold">
                 <?php echo sprintf( lang_get( 'label' ), $t_lang_assigned_to ) ?>
             </td>
             <td>
@@ -275,7 +275,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
                 }
                 ?>
             </td>
-            <td class="print-category">
+            <td class="bold">
                 <?php echo sprintf( lang_get( 'label' ), $t_lang_os ) ?>
             </td>
             <td>
@@ -284,13 +284,13 @@ for( $j=0; $j < $t_row_count; $j++ ) {
             <td colspan="2">&#160;</td>
         </tr>
         <tr>
-            <td class="print-category">
+            <td class="bold">
                 <?php echo sprintf( lang_get( 'label' ), $t_lang_priority ) ?>
             </td>
             <td>
                 <?php echo get_enum_element( 'priority', $t_bug->priority, auth_get_current_user_id(), $t_bug->project_id ) ?>
             </td>
-            <td class="print-category">
+            <td class="bold">
                 <?php echo sprintf( lang_get( 'label' ), $t_lang_os_version ) ?>
             </td>
             <td>
@@ -299,13 +299,13 @@ for( $j=0; $j < $t_row_count; $j++ ) {
             <td colspan="2">&#160;</td>
         </tr>
         <tr>
-            <td class="print-category">
+            <td class="bold">
                 <?php echo sprintf( lang_get( 'label' ), $t_lang_status ) ?>
             </td>
             <td>
                 <?php echo get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id ) ?>
             </td>
-            <td class="print-category">
+            <td class="bold">
                 <?php echo sprintf( lang_get( 'label' ), $t_lang_product_version ) ?>
             </td>
             <td>
@@ -314,13 +314,13 @@ for( $j=0; $j < $t_row_count; $j++ ) {
             <td colspan="2">&#160;</td>
         </tr>
         <tr>
-            <td class="print-category">
+            <td class="bold">
                 <?php echo sprintf( lang_get( 'label' ), $t_lang_product_build ) ?>
             </td>
             <td>
                 <?php echo string_display_line( $t_bug->build ) ?>
             </td>
-            <td class="print-category">
+            <td class="bold">
                 <?php echo sprintf( lang_get( 'label' ), $t_lang_resolution ) ?>
             </td>
             <td>
@@ -329,13 +329,13 @@ for( $j=0; $j < $t_row_count; $j++ ) {
             <td colspan="2">&#160;</td>
         </tr>
         <tr>
-            <td class="print-category">
+            <td class="bold">
                 <?php echo sprintf( lang_get( 'label' ), $t_lang_projection ) ?>
             </td>
             <td>
                 <?php echo get_enum_element( 'projection', $t_bug->projection, auth_get_current_user_id(), $t_bug->project_id ) ?>
             </td>
-            <td class="print-category">
+            <td class="bold">
                 &#160;
             </td>
             <td>
@@ -344,13 +344,13 @@ for( $j=0; $j < $t_row_count; $j++ ) {
             <td colspan="2">&#160;</td>
         </tr>
         <tr>
-            <td class="print-category">
+            <td class="bold">
                 <?php echo sprintf( lang_get( 'label' ), $t_lang_eta ) ?>
             </td>
             <td>
                 <?php echo get_enum_element( 'eta', $t_bug->eta, auth_get_current_user_id(), $t_bug->project_id ) ?>
             </td>
-            <td class="print-category">
+            <td class="bold">
                 <?php echo sprintf( lang_get( 'label' ), $t_lang_fixed_in_version ) ?>
             </td>
             <td>
@@ -360,13 +360,13 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 
         </tr>
         <tr>
-            <td class="print-category">
+            <td class="bold">
                 &#160;
             </td>
             <td>
                 &#160;
             </td>
-            <td class="print-category">
+            <td class="bold">
                 <?php echo sprintf( lang_get( 'label' ), $t_lang_target_version ) ?>
             </td>
             <td>
@@ -385,7 +385,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
             $t_def = custom_field_get_definition( $t_custom_field_id );
             ?>
             <tr>
-                <td class="print-category">
+                <td class="bold">
                     <?php echo string_display_line( sprintf( lang_get( 'label' ), lang_get_defaulted( $t_def['name'] ) ) ) ?>
                 </td>
                 <td colspan="5">
@@ -399,7 +399,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
             <td colspan="6"></td>
         </tr>
         <tr>
-            <td class="print-category">
+            <td class="bold">
                 <?php echo sprintf( lang_get( 'label' ), $t_lang_summary ) ?>
             </td>
             <td colspan="5">
@@ -407,7 +407,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
             </td>
         </tr>
         <tr>
-            <td class="print-category">
+            <td class="bold">
                 <?php echo sprintf( lang_get( 'label' ), $t_lang_description ) ?>
             </td>
             <td colspan="5">
@@ -415,7 +415,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
             </td>
         </tr>
         <tr>
-            <td class="print-category">
+            <td class="bold">
                 <?php echo sprintf( lang_get( 'label' ), $t_lang_steps_to_reproduce ) ?>
             </td>
             <td colspan="5">
@@ -423,7 +423,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
             </td>
         </tr>
         <tr>
-            <td class="print-category">
+            <td class="bold">
                 <?php echo sprintf( lang_get( 'label' ), $t_lang_additional_information ) ?>
             </td>
             <td colspan="5">
@@ -438,7 +438,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 
             ?>
             <tr>
-                <td class="print-category">
+                <td class="bold">
                     <?php echo $t_lang_system_profile ?>
                 </td>
                 <td colspan="5">
@@ -449,7 +449,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
         } # profile description
         ?>
         <tr>
-            <td class="print-category">
+            <td class="bold">
                 <?php echo sprintf( lang_get( 'label' ), $t_lang_attached_files ) ?>
             </td>
             <td colspan="5">

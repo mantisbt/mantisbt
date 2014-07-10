@@ -75,7 +75,7 @@ layout_page_begin( 'main_page.php' );
                                                 <span class="required">*</span> <?php echo lang_get( 'headline' ) ?>
                                             </td>
                                             <td>
-                                                <input type="text" id="news-headline" name="headline" size="64" maxlength="64" />
+                                                <input type="text" id="news-headline" name="headline" class="input-sm" size="64" maxlength="64" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -102,7 +102,7 @@ layout_page_begin( 'main_page.php' );
                                                 <?php echo lang_get( 'view_status' ) ?>
                                             </td>
                                             <td>
-                                                <select id="news-view-status" name="view_state">
+                                                <select id="news-view-status" name="view_state" class="input-sm">
                                                     <?php print_enum_string_option_list( 'view_state' ) ?>
                                                 </select>
                                             </td>
@@ -169,7 +169,7 @@ if( news_get_count( helper_get_current_project(), current_user_is_administrator(
                                                 <?php echo lang_get( 'select_post' ) ?>
                                             </td>
                                             <td>
-                                                <select id="news-edit-id" name="news_id">
+                                                <select id="news-edit-id" name="news_id" class="input-sm">
                                                     <?php print_news_item_option_list() ?>
                                                 </select>
                                             </td>

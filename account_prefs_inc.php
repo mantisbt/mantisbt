@@ -367,7 +367,7 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
             <?php echo lang_get( 'language' ) ?>
         </td>
         <td>
-            <select id="language" name="language">
+            <select id="language" name="language" class="input-sm">
                 <?php print_language_option_list( $t_pref->language ) ?>
             </select>
         </td>

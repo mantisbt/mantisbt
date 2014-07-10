@@ -137,7 +137,7 @@ layout_page_begin();
                                         <tr<td>
                                             <td class="center" colspan="2">
                                                 <strong><?php echo lang_get( 'time_tracking' ) ?> (HH:MM)</strong><br />
-                                                <input type="text" name="time_tracking" size="5" value="<?php echo $t_time_tracking ?>" />
+                                                <input type="text" name="time_tracking" class="input-sm" size="5" value="<?php echo $t_time_tracking ?>" />
                                             </td>
                                         </tr>
                                     <?php } ?>

@@ -147,11 +147,11 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 ?>
 <br />
 <table class="width100" cellspacing="0">
-	<tr class="row-category-history">
-		<td class="small-caption">
+	<tr>
+		<td class="small-caption align-left">
 			<?php echo lang_get( $t_name_field ) ?>
 		</td>
-		<td class="small-caption">
+		<td class="small-caption align-left">
 			<?php echo lang_get( 'time_tracking' ) ?>
 		</td>
 	</tr>

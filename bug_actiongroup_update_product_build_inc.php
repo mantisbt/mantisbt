@@ -65,7 +65,7 @@ function action_update_product_build_print_fields() {
 				<?php echo lang_get( 'product_build' ); ?>
 			</th>
 			<td>
-				<input type="text" name="build" size="32" maxlength="32" />
+				<input type="text" name="build" class="input-sm" size="32" maxlength="32" />
 			</td>
 		</tr>
 	</tbody>

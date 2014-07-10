@@ -103,7 +103,7 @@ if( profile_is_global( $f_profile_id ) ) {
                                         <span class="required">*</span><?php echo lang_get( 'platform' ) ?>
                                     </th>
                                     <td width="75%">
-                                        <input type="text" name="platform" size="32" maxlength="32" value="<?php echo string_attribute( $v_platform ) ?>" />
+                                        <input type="text" name="platform" class="input-sm" size="32" maxlength="32" value="<?php echo string_attribute( $v_platform ) ?>" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -111,7 +111,7 @@ if( profile_is_global( $f_profile_id ) ) {
                                         <span class="required">*</span><?php echo lang_get( 'os' ) ?>
                                     </th>
                                     <td>
-                                        <input type="text" name="os" size="32" maxlength="32" value="<?php echo string_attribute( $v_os ) ?>" />
+                                        <input type="text" name="os" class="input-sm"  size="32" maxlength="32" value="<?php echo string_attribute( $v_os ) ?>" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -119,7 +119,7 @@ if( profile_is_global( $f_profile_id ) ) {
                                         <span class="required">*</span><?php echo lang_get( 'os_version' ) ?>
                                     </th>
                                     <td>
-                                        <input type="text" name="os_build" size="16" maxlength="16" value="<?php echo string_attribute( $v_os_build ) ?>" />
+                                        <input type="text" name="os_build" class="input-sm" size="16" maxlength="16" value="<?php echo string_attribute( $v_os_build ) ?>" />
                                     </td>
                                 </tr>
                                 <tr>

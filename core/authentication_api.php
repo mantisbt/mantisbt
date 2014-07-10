@@ -766,7 +766,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
                                                 <?php echo lang_get( 'username' );?>
                                             </th>
                                             <td>
-                                                <input id="username" type="text" disabled="disabled" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" value="<?php echo string_attribute( $p_username );?>" />
+                                                <input id="username" type="text" disabled="disabled" class="input-sm" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" value="<?php echo string_attribute( $p_username );?>" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -774,7 +774,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
                                                 <?php echo lang_get( 'password' );?>
                                             </th>
                                             <td>
-                                                <input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" class="autofocus" />
+                                                <input id="password" type="password" name="password" class="input-sm" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" class="autofocus" />
                                             </td>
                                         </tr>
                                     </table>

@@ -116,7 +116,7 @@ if( !$g_global_profiles ) {
                                             <span class="required">*</span> <?php echo lang_get( 'platform' ) ?>
                                         </td>
                                         <td>
-                                            <input id="platform" type="text" name="platform" size="32" maxlength="32" />
+                                            <input id="platform" type="text" name="platform" class="input-sm" size="32" maxlength="32" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -124,7 +124,7 @@ if( !$g_global_profiles ) {
                                             <span class="required">*</span> <?php echo lang_get( 'os' ) ?>
                                         </td>
                                         <td>
-                                            <input id="os" type="text" name="os" size="32" maxlength="32" />
+                                            <input id="os" type="text" name="os" class="input-sm" size="32" maxlength="32" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -132,7 +132,7 @@ if( !$g_global_profiles ) {
                                             <span class="required">*</span> <?php echo lang_get( 'os_version' ) ?>
                                         </td>
                                         <td>
-                                            <input id="os-version" type="text" name="os_build" size="16" maxlength="16" />
+                                            <input id="os-version" type="text" name="os_build" class="input-sm" size="16" maxlength="16" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -233,7 +233,7 @@ if( $t_profiles ) {
                                             <?php echo lang_get( 'select_profile' ) ?>
                                         </td>
                                         <td>
-                                            <select id="select-profile" name="profile_id">
+                                            <select id="select-profile" name="profile_id" class="input-sm">
                                                 <?php print_profile_option_list( $t_user_id, '', $t_profiles ) ?>
                                             </select>
                                         </td>

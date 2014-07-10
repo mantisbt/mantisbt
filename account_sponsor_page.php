@@ -317,7 +317,7 @@ if( $t_sponsor_count === 0 ) {
                     print_user( $t_sponsor->user_id );
                     echo '</td>';
                     echo '<td class="right">' . sponsorship_format_amount( $t_sponsor->amount ) . '</td>';
-                    echo '<td><select name="sponsor_' . $t_row['bug'] . '_' . $t_sponsor->id . '">';
+                    echo '<td><select class="input-sm" name="sponsor_' . $t_row['bug'] . '_' . $t_sponsor->id . '">';
                     print_enum_string_option_list( 'sponsorship', $t_sponsor->paid );
                     echo '</select></td>';
 

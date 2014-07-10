@@ -122,7 +122,7 @@ print_manage_menu( 'manage_user_page.php' );
                                                 <?php echo lang_get( 'username_label' ) ?>
                                             </td>
                                             <td>
-                                                <input id="edit-username" type="text" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" name="username" value="<?php echo string_attribute( $t_user['username'] ) ?>" />
+                                                <input id="edit-username" type="text" class="input-sm" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" name="username" value="<?php echo string_attribute( $t_user['username'] ) ?>" />
                                             </td>
                                         </tr>
 
@@ -138,7 +138,7 @@ print_manage_menu( 'manage_user_page.php' );
                                             } else {
                                                 # Without LDAP ?>
                                                 <td class="category"><?php echo lang_get( 'realname_label' ) ?></td>
-                                                <td><input id="edit-realname" type="text" size="32" maxlength="<?php echo DB_FIELD_SIZE_REALNAME;?>" name="realname" value="<?php echo string_attribute( $t_user['realname'] ) ?>" /></td><?php
+                                                <td><input id="edit-realname" type="text" class="input-sm" size="32" maxlength="<?php echo DB_FIELD_SIZE_REALNAME;?>" name="realname" value="<?php echo string_attribute( $t_user['realname'] ) ?>" /></td><?php
                                             }
                                             ?>
                                         </tr>
@@ -162,7 +162,7 @@ print_manage_menu( 'manage_user_page.php' );
                                                 <?php echo lang_get( 'access_level_label' ) ?>
                                             </td>
                                             <td>
-                                                <select id="edit-access-level" name="access_level"><?php
+                                                <select id="edit-access-level" name="access_level" class="input-sm"><?php
                                                     $t_access_level = $t_user['access_level'];
                                                     if( !MantisEnum::hasValue( config_get( 'access_levels_enum_string' ), $t_access_level ) ) {
                                                         $t_access_level = config_get( 'default_new_account_access_level' );
@@ -318,7 +318,7 @@ if( $t_reset || $t_unlock || $t_delete ) {
                                             <?php echo lang_get( 'unassigned_projects_label' ) ?>
                                         </td>
                                         <td>
-                                            <select id="add-user-project-id" name="project_id[]" multiple="multiple" size="5">
+                                            <select id="add-user-project-id" name="project_id[]" class="input-sm" multiple="multiple" size="5">
                                                 <?php print_project_user_list_option_list2( $t_user['id'] ) ?>
                                             </select>
                                         </td>
@@ -328,7 +328,7 @@ if( $t_reset || $t_unlock || $t_delete ) {
                                             <?php echo lang_get( 'access_level_label' ) ?>
                                         </td>
                                         <td>
-                                            <select id="add-user-project-access" name="access_level">
+                                            <select id="add-user-project-access" name="access_level" class="input-sm">
                                                 <?php print_project_access_levels_option_list( (int)config_get( 'default_new_account_access_level' ) ) ?>
                                             </select>
                                         </td>

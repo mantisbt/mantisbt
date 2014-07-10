@@ -540,7 +540,7 @@ if( 1 == $t_install_state ) {
                                         ?>
                                     </div>
 
-                                    <select id="db_type" name="db_type">
+                                    <select id="db_type" name="db_type" class="input-sm">
                                         <?php
                                         # Build selection list of available DB types
                                         $t_db_list = array(
@@ -662,7 +662,7 @@ if( 1 == $t_install_state ) {
                                     Default Time Zone
                                 </td>
                                 <td>
-                                    <select id="timezone" name="timezone">
+                                    <select id="timezone" name="timezone" class="input-sm">
                                         <?php print_timezone_option_list( config_get_global( 'default_timezone' ) ) ?>
                                     </select>
                                 </td>

@@ -112,7 +112,7 @@ function print_font_checked( $p_font_name ) {
                                             <?php echo plugin_lang_get( 'window_width' )?>
                                         </th>
                                         <td class="center" colspan="2">
-                                            <input type="text" name="window_width" value="<?php echo plugin_config_get( 'window_width' )?>" />
+                                            <input type="text" name="window_width" class="input-sm" value="<?php echo plugin_config_get( 'window_width' )?>" />
                                         </td>
                                     </tr>
 
@@ -121,7 +121,7 @@ function print_font_checked( $p_font_name ) {
                                             <?php echo plugin_lang_get( 'bar_aspect' )?>
                                         </th>
                                         <td class="center" colspan="2">
-                                            <input type="text" name="bar_aspect" value="<?php echo plugin_config_get( 'bar_aspect' )?>" />
+                                            <input type="text" name="bar_aspect" class="input-sm" value="<?php echo plugin_config_get( 'bar_aspect' )?>" />
                                         </td>
                                     </tr>
 
@@ -130,7 +130,7 @@ function print_font_checked( $p_font_name ) {
                                             <?php echo plugin_lang_get( 'summary_graphs_per_row' )?>
                                         </th>
                                         <td class="center" colspan="2">
-                                            <input type="text" name="summary_graphs_per_row" value="<?php echo plugin_config_get( 'summary_graphs_per_row' )?>" />
+                                            <input type="text" name="summary_graphs_per_row" class="input-sm" value="<?php echo plugin_config_get( 'summary_graphs_per_row' )?>" />
                                         </td>
                                     </tr>
 
@@ -199,7 +199,7 @@ function print_font_checked( $p_font_name ) {
                                                 <br /><span class="small"><?php echo plugin_lang_get( 'jpgraph_path_default' )?></span>
                                             </td>
                                             <td class="center" colspan="2">
-                                                <input type="text" name="jpgraph_path" value="<?php echo plugin_config_get( 'jpgraph_path' )?>" />
+                                                <input type="text" name="jpgraph_path" class="input-sm" value="<?php echo plugin_config_get( 'jpgraph_path' )?>" />
                                             </td>
                                         </tr>
                                     <?php } ?>

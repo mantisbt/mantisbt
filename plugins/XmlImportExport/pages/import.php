@@ -96,7 +96,7 @@ if( ALL_PROJECTS == $t_project_id ) {
                                         </th>
                                         <td>
                                             <?php echo plugin_lang_get( 'default_strategy' );?>
-                                            <select name="strategy">
+                                            <select class="input-sm" name="strategy">
                                                 <option value="renumber" title="<?php echo plugin_lang_get( 'renumber_desc' );?>">
                                                     <?php echo plugin_lang_get( 'renumber' );?></option>
                                                 <option value="link" title="<?php echo plugin_lang_get( 'link_desc' );?>">
@@ -107,7 +107,7 @@ if( ALL_PROJECTS == $t_project_id ) {
                                             <br><br>
 
                                             <?php echo plugin_lang_get( 'fallback' );?>
-                                            <select name="fallback">
+                                            <select class="input-sm" name="fallback">
                                                 <option value="link" title="<?php echo plugin_lang_get( 'link_desc' );?>">
                                                     <?php echo plugin_lang_get( 'link' );?></option>
                                                 <option value="disable" title="<?php echo plugin_lang_get( 'disable_desc' );?>">
@@ -128,7 +128,7 @@ if( ALL_PROJECTS == $t_project_id ) {
                                             <br><br>
 
                                             <?php echo plugin_lang_get( 'fallback_category' );?>
-                                            <select name="defaultcategory">
+                                            <select class="input-sm" name="defaultcategory">
                                                 <?php print_category_option_list( );?>
                                             </select>
                                         </td>

@@ -201,7 +201,7 @@ print_account_menu( 'account_page.php' );
                                                     <span class="required"><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'current_password' ) ?>
                                                 </td>
                                                 <td>
-                                                    <input id="password-current" type="password" name="password_current" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" />
+                                                    <input class="input-sm" id="password-current" type="password" name="password_current" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" />
                                                 </td>
                                             </tr>
                                         <?php
@@ -211,7 +211,7 @@ print_account_menu( 'account_page.php' );
                                                 <span class="required"><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'password' ) ?>
                                             </td>
                                             <td>
-                                                <input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" />
+                                                <input class="input-sm" id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -219,7 +219,7 @@ print_account_menu( 'account_page.php' );
                                                 <span class="required"><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'confirm_password' ) ?>
                                             </td>
                                             <td>
-                                                <input id="password-confirm" type="password" name="password_confirm" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" />
+                                                <input class="input-sm" id="password-confirm" type="password" name="password_confirm" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" />
                                             </td>
                                         </tr>
                                     <?php
@@ -252,8 +252,8 @@ print_account_menu( 'account_page.php' );
                                             $t_show_update_button = true;
                                             echo '<td class="category">' . lang_get( 'realname' ) . '</td>';
                                             echo '<td>';
-                                            echo '<input id="realname" type="text" size="32" maxlength="' . DB_FIELD_SIZE_REALNAME . '" name="realname" value="' . string_attribute( $u_realname ) . '" />';
-                                            echo '<td>';
+                                            echo '<input class="input-sm" id="realname" type="text" size="32" maxlength="' . DB_FIELD_SIZE_REALNAME . '" name="realname" value="' . string_attribute( $u_realname ) . '" />';
+                                            echo '</td>';
                                         } ?>
                                     </tr>
                                     <tr>
@@ -278,7 +278,6 @@ print_account_menu( 'account_page.php' );
                                         echo '<tr>';
                                         echo '<td class="category">' . lang_get( 'assigned_projects' ) . '</td>';
                                         echo '<td>';
-                                        echo '<ul class="project-list">';
                                         foreach( $t_projects AS $t_project_id=>$t_project ) {
                                             $t_project_name = string_attribute( $t_project['name'] );
                                             $t_view_state = $t_project['view_state'];
@@ -286,9 +285,10 @@ print_account_menu( 'account_page.php' );
                                             $t_access_level = get_enum_element( 'access_levels', $t_access_level );
                                             $t_view_state = get_enum_element( 'project_view_state', $t_view_state );
 
-                                            echo '<li><span class="project-name">' . $t_project_name . '</span> <span class="access-level">' . $t_access_level . '</span> <span class="view-state">' . $t_view_state . '</span></li>';
+                                            echo '<div class="col-md-3 col-xs-6 no-padding">' . $t_project_name . '</div> <div class="col-md-9 col-xs-6"><span class="label label-default">' . $t_access_level . '</span><span class="bold padding-left-4">' . $t_view_state . '</span></div>';
+                                            echo '<div class="clearfix"></div>';
+                                            echo '<div class="space-4"></div>';
                                         }
-                                        echo '</ul>';
                                         echo '</td>';
                                         echo '</tr>';
                                     }
@@ -318,7 +318,7 @@ if( ON == config_get( 'allow_account_delete' ) ) { ?>
         <form method="post" action="account_delete.php">
             <fieldset>
                 <?php echo form_security_field( 'account_delete' ) ?>
-                <span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'delete_account_button' ) ?>" /></span>
+                <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'delete_account_button' ) ?>" />
             </fieldset>
         </form>
     </div>

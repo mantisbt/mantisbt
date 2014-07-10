@@ -110,14 +110,14 @@ layout_page_begin();
                                                 <?php echo lang_get( 'tag_name' ) ?>
                                             </td>
                                             <td>
-                                                <input type="text" <?php echo helper_get_tab_index() ?> id="tag-name" name="name" value="<?php echo $t_name ?>"/>
+                                                <input type="text" <?php echo helper_get_tab_index() ?> id="tag-name" name="name" class="input-sm" value="<?php echo $t_name ?>"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <?php
                                             if( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
                                                 echo '<td class="category">', lang_get( 'tag_creator' ), '</td>';
-                                                echo '<td><select ', helper_get_tab_index(), ' id="tag-user-id" name="user_id">';
+                                                echo '<td><select ', helper_get_tab_index(), ' id="tag-user-id" name="user_id" class="input-sm">';
                                                 print_user_option_list( (int)$t_tag_row['user_id'], ALL_PROJECTS, (int)config_get( 'tag_create_threshold' ) );
                                                 echo '</select></td>';
                                             } else { ?>

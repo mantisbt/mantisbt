@@ -180,7 +180,7 @@ layout_page_begin();
                 <?php echo lang_get( 'resolution' ) ?>
             </th>
             <td>
-                <select name="resolution">
+                <select name="resolution" class="input-sm">
                     <?php
                     $t_resolution = $t_bug_is_open ? config_get( 'bug_resolution_fixed_threshold' ) : $t_current_resolution;
 
@@ -209,7 +209,7 @@ layout_page_begin();
                 <?php echo lang_get( 'duplicate_id' ) ?>
             </th>
             <td>
-                <input type="text" name="duplicate_id" maxlength="10" />
+                <input type="text" class="input-sm" name="duplicate_id" maxlength="10" />
             </td>
         </tr>
     <?php } ?>
@@ -228,7 +228,7 @@ layout_page_begin();
                 <?php echo lang_get( 'assigned_to' ) ?>
             </th>
             <td>
-                <select name="handler_id">
+                <select name="handler_id" class="input-sm">
                     <option value="0"></option>
                     <?php print_assign_to_option_list( $t_suggested_handler_id, $t_bug->project_id ) ?>
                 </select>
@@ -324,7 +324,7 @@ layout_page_begin();
                     <?php echo lang_get( 'fixed_in_version' ) ?>
                 </th>
                 <td>
-                    <select name="fixed_in_version">
+                    <select name="fixed_in_version" class="input-sm">
                         <?php print_version_option_list( $t_bug->fixed_in_version, $t_bug->project_id, VERSION_ALL ) ?>
                     </select>
                 </td>
@@ -381,7 +381,7 @@ layout_page_begin();
                         <?php echo lang_get( 'time_tracking' ) ?>
                     </th>
                     <td>
-                        <input type="text" name="time_tracking" size="5" placeholder="hh:mm" />
+                        <input type="text" name="time_tracking" class="input-sm" size="5" placeholder="hh:mm" />
                     </td>
                 </tr>
             <?php } ?>

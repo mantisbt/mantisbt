@@ -380,7 +380,7 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
                     }
                     ?>
                 </tr>
-                <tr<td>
+                <tr>
                     <?php
                     for ( $j = 0; $j < $t_per_row; $j++ ) {
                         echo '<td colspan="' . ( 1 * $t_filter_cols ) . '">';
@@ -505,7 +505,7 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
     <tr>
         <!-- Search field -->
         <td colspan="<?php echo ( 1 * $t_custom_cols ); ?>">
-            <input type="text" size="16" name="search" value="<?php echo string_html_specialchars( $t_filter['search'] ); ?>" />
+            <input type="text" size="16" name="search" class="input-sm" value="<?php echo string_html_specialchars( $t_filter['search'] ); ?>" />
         </td>
 
         <td class="small-caption" colspan="<?php echo ( ( $t_filter_cols - 2 ) * $t_custom_cols ); ?>"><?php if( $t_show_tags ) { print_filter_tag_string(); } ?></td>

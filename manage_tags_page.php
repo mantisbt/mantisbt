@@ -215,7 +215,7 @@ print_manage_menu( 'manage_tags_page.php' );
                                             <span class="required">*</span> <?php echo lang_get( 'tag_name' ) ?>
                                         </td>
                                         <td>
-                                            <input type="text" id="tag-name" name="name"  size="40" maxlength="100" />
+                                            <input type="text" id="tag-name" name="name" class="input-sm" size="40" maxlength="100" />
                                             <small><?php echo sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) ); ?></small>
                                         </td>
                                     </tr>

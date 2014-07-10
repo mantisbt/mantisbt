@@ -245,7 +245,7 @@ layout_page_begin();
         echo '<td>';
 
         if( $t_show_category ) {
-            echo '<select ' . helper_get_tab_index() . ' id="category_id" name="category_id">';
+            echo '<select ' . helper_get_tab_index() . ' id="category_id" name="category_id" class="input-sm">';
             print_category_option_list( $t_bug->category_id, $t_bug->project_id );
             echo '</select>';
         }
@@ -256,7 +256,7 @@ layout_page_begin();
         echo '<td>';
 
         if( $t_can_change_view_state ) {
-            echo '<select ' . helper_get_tab_index() . ' id="view_state" name="view_state">';
+            echo '<select ' . helper_get_tab_index() . ' id="view_state" name="view_state" class="input-sm">';
             print_enum_string_option_list( 'view_state', (int)$t_bug->view_state );
             echo '</select>';
         } else if( $t_show_view_state ) {
@@ -299,7 +299,7 @@ layout_page_begin();
             ) {
                 echo string_attribute( user_get_name( $t_bug->reporter_id ) );
             } else {
-                echo '<select ' . helper_get_tab_index() . ' id="reporter_id" name="reporter_id">';
+                echo '<select ' . helper_get_tab_index() . ' id="reporter_id" name="reporter_id" class="input-sm">';
                 print_reporter_option_list( $t_bug->reporter_id, $t_bug->project_id );
                 echo '</select>';
             }
@@ -328,7 +328,7 @@ layout_page_begin();
         echo '<td>';
 
         if( access_has_project_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ) ) ) {
-            echo '<select ' . helper_get_tab_index() . ' id="handler_id" name="handler_id">';
+            echo '<select ' . helper_get_tab_index() . ' id="handler_id" name="handler_id" class="input-sm">';
             echo '<option value="0"></option>';
             print_assign_to_option_list( $t_bug->handler_id, $t_bug->project_id );
             echo '</select>';
@@ -384,7 +384,7 @@ layout_page_begin();
         if( $t_show_priority ) {
             # Priority
             echo '<th class="category"><label for="priority">' . lang_get( 'priority' ) . '</label></th>';
-            echo '<td><select ' . helper_get_tab_index() . ' id="priority" name="priority">';
+            echo '<td><select ' . helper_get_tab_index() . ' id="priority" name="priority" class="input-sm">';
             print_enum_string_option_list( 'priority', $t_bug->priority );
             echo '</select></td>';
         } else {
@@ -394,7 +394,7 @@ layout_page_begin();
         if( $t_show_severity ) {
             # Severity
             echo '<th class="category"><label for="severity">' . lang_get( 'severity' ) . '</label></th>';
-            echo '<td><select ' . helper_get_tab_index() . ' id="severity" name="severity">';
+            echo '<td><select ' . helper_get_tab_index() . ' id="severity" name="severity" class="input-sm">';
             print_enum_string_option_list( 'severity', $t_bug->severity );
             echo '</select></td>';
         } else {
@@ -404,7 +404,7 @@ layout_page_begin();
         if( $t_show_reproducibility ) {
             # Reproducibility
             echo '<th class="category"><label for="reproducibility">' . lang_get( 'reproducibility' ) . '</label></th>';
-            echo '<td><select ' . helper_get_tab_index() . ' id="reproducibility" name="reproducibility">';
+            echo '<td><select ' . helper_get_tab_index() . ' id="reproducibility" name="reproducibility" class="input-sm">';
             print_enum_string_option_list( 'reproducibility', $t_bug->reproducibility );
             echo '</select></td>';
         } else {
@@ -447,7 +447,7 @@ layout_page_begin();
         if( $t_show_resolution ) {
             # Resolution
             echo '<th class="category"><label for="resolution">' . lang_get( 'resolution' ) . '</label></th>';
-            echo '<td><select ' . helper_get_tab_index() . ' id="resolution" name="resolution">';
+            echo '<td><select ' . helper_get_tab_index() . ' id="resolution" name="resolution" class="input-sm">';
             print_enum_string_option_list( 'resolution', $t_bug->resolution );
             echo '</select></td>';
         } else {
@@ -474,7 +474,7 @@ layout_page_begin();
         if( $t_show_projection ) {
             # Projection
             echo '<th class="category"><label for="projection">' . lang_get( 'projection' ) . '</label></th>';
-            echo '<td><select ' . helper_get_tab_index() . ' id="projection" name="projection">';
+            echo '<td><select ' . helper_get_tab_index() . ' id="projection" name="projection" class="input-sm">';
             print_enum_string_option_list( 'projection', $t_bug->projection );
             echo '</select></td>';
         } else {
@@ -484,7 +484,7 @@ layout_page_begin();
         # ETA
         if( $t_show_eta ) {
             echo '<th class="category"><label for="eta">' . lang_get( 'eta' ) . '</label></th>';
-            echo '<td><select ' . helper_get_tab_index() . ' id="eta" name="eta">';
+            echo '<td><select ' . helper_get_tab_index() . ' id="eta" name="eta" class="input-sm">';
             print_enum_string_option_list( 'eta', (int)$t_bug->eta );
             echo '</select></td>';
         } else {
@@ -512,11 +512,11 @@ layout_page_begin();
             echo '<td>';
 
             if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) {
-                echo '<select ' . helper_get_tab_index() . ' id="platform" name="platform"><option value=""></option>';
+                echo '<select ' . helper_get_tab_index() . ' id="platform" name="platform" class="input-sm"><option value=""></option>';
                 print_platform_option_list( $t_bug->platform );
                 echo '</select>';
             } else {
-                echo '<input type="text" id="platform" name="platform" class="autocomplete" size="16" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $t_bug->platform ) . '" />';
+                echo '<input type="text" id="platform" name="platform" class="autocomplete input-sm" size="16" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $t_bug->platform ) . '" />';
             }
 
             echo '</td>';
@@ -530,11 +530,11 @@ layout_page_begin();
             echo '<td>';
 
             if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) {
-                echo '<select ' . helper_get_tab_index() . ' id="os" name="os"><option value=""></option>';
+                echo '<select ' . helper_get_tab_index() . ' id="os" name="os" class="input-sm"><option value=""></option>';
                 print_os_option_list( $t_bug->os );
                 echo '</select>';
             } else {
-                echo '<input type="text" id="os" name="os" class="autocomplete" size="16" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $t_bug->os ) . '" />';
+                echo '<input type="text" id="os" name="os" class="autocomplete input-sm" size="16" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $t_bug->os ) . '" />';
             }
 
             echo '</td>';
@@ -548,11 +548,11 @@ layout_page_begin();
             echo '<td>';
 
             if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) {
-                echo '<select ' . helper_get_tab_index() . ' id="os_build" name="os_build"><option value=""></option>';
+                echo '<select ' . helper_get_tab_index() . ' id="os_build" name="os_build" class="input-sm"><option value=""></option>';
                 print_os_build_option_list( $t_bug->os_build );
                 echo '</select>';
             } else {
-                echo '<input type="text" id="os_build" name="os_build" class="autocomplete" size="16" maxlength="16" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $t_bug->os_build ) . '" />';
+                echo '<input type="text" id="os_build" name="os_build" class="autocomplete input-sm" size="16" maxlength="16" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $t_bug->os_build ) . '" />';
             }
 
             echo '</td>';
@@ -580,7 +580,7 @@ layout_page_begin();
         # Product Version  or Product Build, if version is suppressed
         if( $t_show_product_version ) {
             echo '<th class="category"><label for="version">' . lang_get( 'product_version' ) . '</label></th>';
-            echo '<td>', '<select ', helper_get_tab_index(), ' id="version" name="version">';
+            echo '<td>', '<select ', helper_get_tab_index(), ' id="version" name="version" class="input-sm">';
             print_version_option_list( $t_bug->version, $t_bug->project_id, $t_product_version_released_mask );
             echo '</select></td>';
         } else {
@@ -590,7 +590,7 @@ layout_page_begin();
         if( $t_show_product_build ) {
             echo '<th class="category"><label for="build">' . lang_get( 'product_build' ) . '</label></th>';
             echo '<td>';
-            echo '<input type="text" id="build" name="build" size="16" maxlength="32" ' . helper_get_tab_index() . ' value="' . $t_product_build_attribute . '" />';
+            echo '<input type="text" id="build" name="build" class="input-sm" size="16" maxlength="32" ' . helper_get_tab_index() . ' value="' . $t_product_build_attribute . '" />';
             echo '</td>';
         } else {
             $t_spacer += 2;
@@ -614,7 +614,7 @@ layout_page_begin();
         # Target Version
         if( $t_show_target_version ) {
             echo '<th class="category"><label for="target_version">' . lang_get( 'target_version' ) . '</label></th>';
-            echo '<td><select ' . helper_get_tab_index() . ' id="target_version" name="target_version">';
+            echo '<td><select ' . helper_get_tab_index() . ' id="target_version" name="target_version" class="input-sm">';
             print_version_option_list( $t_bug->target_version, $t_bug->project_id, VERSION_FUTURE );
             echo '</select></td>';
         } else {
@@ -625,7 +625,7 @@ layout_page_begin();
         if( $t_show_fixed_in_version ) {
             echo '<th class="category"><label for="fixed_in_version">' . lang_get( 'fixed_in_version' ) . '</label></th>';
             echo '<td>';
-            echo '<select ' . helper_get_tab_index() . ' id="fixed_in_version" name="fixed_in_version">';
+            echo '<select ' . helper_get_tab_index() . ' id="fixed_in_version" name="fixed_in_version" class="input-sm">';
             print_version_option_list( $t_bug->fixed_in_version, $t_bug->project_id, VERSION_ALL );
             echo '</select>';
             echo '</td>';
@@ -743,7 +743,7 @@ layout_page_begin();
         if( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $t_bug_id ) ) {
             echo '<tr>';
             echo '<th class="category"><label for="time_tracking">' . lang_get( 'time_tracking' ) . '</label></th>';
-            echo '<td colspan="5"><input type="text" id="time_tracking" name="time_tracking" size="5" placeholder="hh:mm" /></td></tr>';
+            echo '<td colspan="5"><input type="text" id="time_tracking" name="time_tracking" class="input-sm" size="5" placeholder="hh:mm" /></td></tr>';
         }
     }
 

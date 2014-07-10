@@ -68,7 +68,7 @@ function action_update_severity_print_fields() {
 				<?php echo lang_get( 'update_severity_msg' ); ?>
 			</th>
 			<td>
-				<select name="severity">';
+				<select name="severity" class="input-sm">';
 					<?php print_enum_string_option_list( 'severity' ); ?>
 				</select>
 			</td>

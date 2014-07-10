@@ -59,10 +59,10 @@
     padding:4px;
 }
 .padding-right-4 {
-    padding-left:4px;
+    padding-right:4px;
 }
 .padding-left-4 {
-    padding-right:4px;
+    padding-left:4px;
 }
 
 .padding-8 {
@@ -93,6 +93,10 @@
 
 .bold {
     font-weight: bold;
+}
+
+table {
+    background-color: #ffffff !important;
 }
 
 /* Disable printing of link urls */

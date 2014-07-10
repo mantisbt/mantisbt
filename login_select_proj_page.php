@@ -89,7 +89,7 @@ layout_page_begin();
                                                 <?php echo lang_get( 'select_project_button' ) ?>
                                             </td>
                                             <td>
-                                                <select id="select-project-id" name="project_id" >
+                                                <select id="select-project-id" name="project_id" class="input-sm">
                                                     <?php print_project_option_list( ALL_PROJECTS, false, null, true, true ) ?>
                                                 </select>
                                             </td>

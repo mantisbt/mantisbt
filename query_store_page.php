@@ -88,8 +88,8 @@ layout_page_begin();
             <form method="post" action="query_store.php" class="form-inline">
                 <?php echo form_security_field( 'query_store' ) ?>
                 <div class="space-10"></div>
-                <label class="bold"> <?php echo lang_get( 'query_name_label' ) . lang_get( 'word_separator' ); ?> </label>
-                <input type="text" name="query_name" class="form-control form-sm" />
+                <label class="bold inline"> <?php echo lang_get( 'query_name_label' ) . lang_get( 'word_separator' ); ?> </label>
+                <input type="text" name="query_name" class="input-sm" />
                 <div class="space-10"></div>
                 <?php
                 if( access_has_project_level( config_get( 'stored_query_create_shared_threshold' ) ) ) { ?>
@@ -112,6 +112,7 @@ layout_page_begin();
                 <div class="space-10"></div>
                 <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php print lang_get( 'save_query' ); ?>" />
             </form>
+            <div class="space-10"></div>
             <form action="view_all_bug_page.php">
                 <?php # CSRF protection not required here - form does not result in modifications ?>
                 <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php print lang_get( 'go_back' ); ?>" />

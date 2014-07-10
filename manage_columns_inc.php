@@ -178,7 +178,7 @@ if( $t_account_page ) {
                 <input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
                 <input type="hidden" name="manage_page" value="<?php echo $t_manage_page ?>" />
 
-                <select name="other_project_id">
+                <select name="other_project_id" class="input-sm">
                     <?php print_project_option_list( null, true, $t_project_id ); ?>
                 </select>
 

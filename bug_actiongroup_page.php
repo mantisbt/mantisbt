@@ -278,7 +278,7 @@ bug_group_action_print_top();
 
                                                     print_custom_field_input( $t_custom_field_def, $t_bug_id );
                                                 } else {
-                                                    echo "<select name=\"$t_form\">";
+                                                    echo "<select name=\"$t_form\" class=\"input-sm\">";
 
                                                     switch ( $f_action ) {
                                                         case 'COPY':
@@ -330,7 +330,7 @@ bug_group_action_print_top();
                                                                 <?php echo $t_question_title2 ?>
                                                             </th>
                                                             <td>
-                                                                <select name="<?php echo $t_form2 ?>">
+                                                                <select name="<?php echo $t_form2 ?>" class="input-sm">
                                                                     <?php print_version_option_list( '', null, VERSION_ALL );?>
                                                                 </select>
                                                             </td>

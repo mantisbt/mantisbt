@@ -94,7 +94,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
                 <?php echo lang_get( 'custom_field_name' ) ?>
             </td>
             <td>
-                <input type="text" id="custom-field-name" name="name" size="32" maxlength="64" value="<?php echo string_attribute( $t_definition['name'] ) ?>" />
+                <input type="text" id="custom-field-name" name="name" class="input-sm" size="32" maxlength="64" value="<?php echo string_attribute( $t_definition['name'] ) ?>" />
             </td>
         </tr>
 
@@ -103,7 +103,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
                 <?php echo lang_get( 'custom_field_type' ) ?>
             </td>
             <td>
-                <select id="custom-field-type" name="type">
+                <select id="custom-field-type" name="type" class="input-sm">
                     <?php print_enum_string_option_list( 'custom_field_type', (int)$t_definition['type'] ) ?>
                 </select>
             </td>
@@ -114,7 +114,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
                 <?php echo lang_get( 'custom_field_possible_values' ) ?>
             </td>
             <td>
-                <input type="text" id="custom-field-possible-values" name="possible_values" class="form-control" value="<?php echo string_attribute( $t_definition['possible_values'] ) ?>" />
+                <input type="text" id="custom-field-possible-values" name="possible_values" class="input-sm" value="<?php echo string_attribute( $t_definition['possible_values'] ) ?>" />
             </td>
         </tr>
 
@@ -123,7 +123,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
                 <?php echo lang_get( 'custom_field_default_value' ) ?>
             </td>
             <td>
-                <input type="text" id="custom-field-default-value" name="default_value" size="32" maxlength="255" value="<?php echo string_attribute( $t_definition['default_value'] ) ?>" />
+                <input type="text" id="custom-field-default-value" name="default_value" class="input-sm" size="32" maxlength="255" value="<?php echo string_attribute( $t_definition['default_value'] ) ?>" />
             </td>
         </tr>
 
@@ -132,7 +132,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
                 <?php echo lang_get( 'custom_field_valid_regexp' ) ?>
             </td>
             <td>
-                <input type="text" id="custom-field-valid-regexp" name="valid_regexp" size="32" maxlength="255" value="<?php echo string_attribute( $t_definition['valid_regexp'] ) ?>" />
+                <input type="text" id="custom-field-valid-regexp" name="valid_regexp" class="input-sm" size="32" maxlength="255" value="<?php echo string_attribute( $t_definition['valid_regexp'] ) ?>" />
             </td>
         </tr>
 
@@ -141,7 +141,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
                 <?php echo lang_get( 'custom_field_access_level_r' ) ?>
             </td>
             <td>
-                <select id="custom-field-access-level-r" name="access_level_r">
+                <select id="custom-field-access-level-r" name="access_level_r" class="input-sm">
                     <?php print_enum_string_option_list( 'access_levels', (int)$t_definition['access_level_r'] ) ?>
                 </select>
             </td>
@@ -152,7 +152,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
                 <?php echo lang_get( 'custom_field_access_level_rw' ) ?>
             </td>
             <td>
-                <select id="custom-field-access-level-rw" name="access_level_rw">
+                <select id="custom-field-access-level-rw" name="access_level_rw" class="input-sm">
                     <?php print_enum_string_option_list( 'access_levels', (int)$t_definition['access_level_rw'] ) ?>
                 </select>
             </td>
@@ -163,7 +163,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
                 <?php echo lang_get( 'custom_field_length_min' ) ?>
             </td>
             <td>
-                <input type="text" id="custom-field-length-min" name="length_min" size="32" maxlength="64" value="<?php echo $t_definition['length_min'] ?>" />
+                <input type="text" id="custom-field-length-min" name="length_min" class="input-sm" size="32" maxlength="64" value="<?php echo $t_definition['length_min'] ?>" />
             </td>
         </tr>
 
@@ -172,7 +172,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
                 <?php echo lang_get( 'custom_field_length_max' ) ?>
             </td>
             <td>
-                <input type="text" id="custom-field-length-max" name="length_max" size="32" maxlength="64" value="<?php echo $t_definition['length_max'] ?>" />
+                <input type="text" id="custom-field-length-max" name="length_max" class="input-sm" size="32" maxlength="64" value="<?php echo $t_definition['length_max'] ?>" />
             </td>
         </tr>
 
@@ -338,7 +338,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
                                                 <?php echo lang_get( 'projects_title_label' ) ?>
                                             </td>
                                             <td>
-                                                <select id="custom-field-project-id" name="project_id[]" multiple="multiple" size="5">
+                                                <select id="custom-field-project-id" name="project_id[]" class="input-sm" multiple="multiple" size="5">
                                                     <?php print_project_option_list( null, false ); ?>
                                                 </select>
                                             </td>
@@ -348,7 +348,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
                                                 <?php echo lang_get( 'custom_field_sequence_label' ) ?>
                                             </td>
                                             <td>
-                                                <input type="text" id="custom-field-sequence" name="sequence" value="0" />
+                                                <input type="text" id="custom-field-sequence" name="sequence" class="input-sm" value="0" />
                                             </td>
                                         </tr>
                                     </fieldset>

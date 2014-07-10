@@ -117,7 +117,7 @@ print_manage_menu( 'manage_proj_page.php' );
                                                 <span class="required">*</span> <?php echo lang_get( 'project_name' ) ?>
                                             </td>
                                             <td>
-                                                <input type="text" id="project-name" name="name" size="60" maxlength="128" value="<?php echo string_attribute( $t_row['name'] ) ?>" />
+                                                <input type="text" id="project-name" name="name" class="input-sm" size="60" maxlength="128" value="<?php echo string_attribute( $t_row['name'] ) ?>" />
                                             </td>
                                         </tr>
 
@@ -126,7 +126,7 @@ print_manage_menu( 'manage_proj_page.php' );
                                                 <?php echo lang_get( 'status' ) ?>
                                             </td>
                                             <td>
-                                                <select id="project-status" name="status">
+                                                <select id="project-status" name="status" class="input-sm">
                                                     <?php print_enum_string_option_list( 'project_status', (int)$t_row['status'] ) ?>
                                                 </select>
                                             </td>
@@ -161,7 +161,7 @@ print_manage_menu( 'manage_proj_page.php' );
                                                 <?php echo lang_get( 'view_status' ) ?>
                                             </td>
                                             <td>
-                                                <select id="project-view-state" name="view_state">
+                                                <select id="project-view-state" name="view_state" class="input-sm">
                                                     <?php print_enum_string_option_list( 'view_state', (int)$t_row['view_state']) ?>
                                                 </select>
                                             </td>
@@ -182,7 +182,7 @@ print_manage_menu( 'manage_proj_page.php' );
                                                     <?php echo lang_get( 'upload_file_path' ) ?>
                                                 </td>
                                                 <td>
-                                                    <input type="text" id="project-file-path" name="file_path" size="60" maxlength="250" value="<?php echo string_attribute( $t_file_path ) ?>" />
+                                                    <input type="text" id="project-file-path" name="file_path" class="input-sm" size="60" maxlength="250" value="<?php echo string_attribute( $t_file_path ) ?>" />
                                                 </td>
                                             </tr>
                                         <?php
@@ -255,7 +255,7 @@ print_manage_menu( 'manage_proj_page.php' );
                             <fieldset>
                                 <?php echo form_security_field( 'manage_proj_subproj_add' ) ?>
                                 <input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-                                <select name="subproject_id" class="form-control input-sm"><?php
+                                <select name="subproject_id" class="input-sm"><?php
                                     $t_all_subprojects = project_hierarchy_get_subprojects( $f_project_id, true );
                                     $t_all_subprojects[] = $f_project_id;
                                     $t_manage_access = config_get( 'manage_project_threshold' );
@@ -341,16 +341,18 @@ if( array() != $t_subproject_ids ) { ?>
                                                 <?php echo string_display_links( $t_subproject['description'] ) ?>
                                             </td>
                                             <td class="center">
-                                                <?php print_bracket_link(
+                                                <div class="inline">
+                                                <?php print_link(
                                                     'manage_proj_edit_page.php?project_id=' . $t_subproject['id'],
-                                                    lang_get( 'edit_link' )
+                                                    lang_get( 'edit_link' ), false, 'btn btn-xs btn-primary btn-white btn-round pull-left'
                                                 );
                                                 ?>
-                                                <?php print_bracket_link(
+                                                <?php print_link(
                                                     "manage_proj_subproj_delete.php?project_id=$f_project_id&subproject_id=" . $t_subproject['id'] . form_security_param( 'manage_proj_subproj_delete' ),
-                                                    lang_get( 'unlink_link' )
+                                                    lang_get( 'unlink_link' ), false, 'btn btn-xs btn-primary btn-white btn-round pull-left'
                                                 );
                                                 ?>
+                                                </div>
                                             </td>
                                         </tr>
                                     <?php
@@ -389,7 +391,7 @@ if( array() != $t_subproject_ids ) { ?>
                         <fieldset>
                             <?php echo form_security_field( 'manage_proj_cat_copy' ) ?>
                             <input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-                            <select name="other_project_id" class="form-control input-sm">
+                            <select name="other_project_id" class="input-sm">
                                 <?php print_project_option_list( null, false, $f_project_id ); ?>
                             </select>
                             <input type="submit" name="copy_from" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'copy_categories_from' ) ?>" />
@@ -421,17 +423,22 @@ if( array() != $t_subproject_ids ) { ?>
                                         <td><?php echo string_display( category_full_name( $t_id, $t_inherited, $f_project_id ) )  ?></td>
                                         <td><?php echo prepare_user_name( $t_category['user_id'] ) ?></td>
                                         <td class="center">
+                                            <div class="inline">
                                             <?php if( !$t_inherited ) {
                                                 $t_id = urlencode( $t_id );
                                                 $t_project_id = urlencode( $f_project_id );
-
+                                                echo '<div class="pull-left">';
                                                 print_button( 'manage_proj_cat_edit_page.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'edit_link' ),
                                                     null, null, 'btn btn-xs btn-primary btn-white btn-round' );
+                                                echo '</div>';
                                             } ?>
                                             <?php if( !$t_inherited ) {
+                                                echo '<div class="pull-left">';
                                                 print_button( 'manage_proj_cat_delete.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'delete_link' ),
                                                     null, null, 'btn btn-xs btn-primary btn-white btn-round' );
+                                                echo '</div>';
                                             } ?>
+                                            </div>
                                         </td>
                                     </tr>
                                 <?php
@@ -447,7 +454,7 @@ if( array() != $t_subproject_ids ) { ?>
                         <fieldset>
                             <?php echo form_security_field( 'manage_proj_cat_add' ) ?>
                             <input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-                            <input type="text" name="name" size="32" maxlength="128" class="form-control input-sm" />
+                            <input type="text" name="name" size="32" maxlength="128" class="input-sm" />
                             <input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_category_button' ) ?>" />
                         </fieldset>
                     </form>
@@ -472,7 +479,7 @@ if( array() != $t_subproject_ids ) { ?>
                         <fieldset>
                             <?php echo form_security_field( 'manage_proj_ver_copy' ) ?>
                             <input type="hidden" class="form-control input-sm" name="project_id" value="<?php echo $f_project_id ?>" />
-                            <select name="other_project_id" class="form-control input-sm">
+                            <select name="other_project_id" class="input-sm">
                                 <?php print_project_option_list( null, false, $f_project_id ); ?>
                             </select>
                             <input type="submit" name="copy_from" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'copy_versions_from' ) ?>" />
@@ -515,12 +522,20 @@ if( array() != $t_subproject_ids ) { ?>
                                             <td class="center"><?php echo trans_bool( $t_released ) ?></td>
                                             <td class="center"><?php echo trans_bool( $t_obsolete ) ?></td>
                                             <td class="center"><?php echo $t_date_formatted ?></td>
-                                            <td class="center"><?php
+                                            <td class="center">
+                                                <div class="inline">
+                                                <?php
                                                 $t_version_id = version_get_id( $t_name, $f_project_id );
                                                 if( !$t_inherited ) {
+                                                    echo '<div class="pull-left">';
                                                     print_button( 'manage_proj_ver_edit_page.php?version_id=' . $t_version_id, lang_get( 'edit_link' ) );
+                                                    echo '</div>';
+
+                                                    echo '<div class="pull-left">';
                                                     print_button( 'manage_proj_ver_delete.php?version_id=' . $t_version_id, lang_get( 'delete_link' ) );
+                                                    echo '</div>';
                                                 } ?>
+                                                </div>
                                             </td>
                                         </tr>
                                     <?php
@@ -538,7 +553,7 @@ if( array() != $t_subproject_ids ) { ?>
                         <fieldset>
                             <?php echo form_security_field( 'manage_proj_ver_add' ) ?>
                             <input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-                            <input type="text" class="form-control input-sm" name="version" size="32" maxlength="64" />
+                            <input type="text" class="input-sm" name="version" size="32" maxlength="64" />
                             <input type="submit" name="add_version" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_version_button' ) ?>" />
                             <input type="submit" name="add_and_edit_version" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_and_edit_version_button' ) ?>" />
                         </fieldset>
@@ -570,7 +585,7 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
                     <fieldset>
                         <?php echo form_security_field( 'manage_proj_custom_field_copy' ) ?>
                         <input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-                        <select name="other_project_id" class="form-control input-sm">
+                        <select name="other_project_id" class="input-sm">
                             <?php print_project_option_list( null, false, $f_project_id ); ?>
                         </select>
                         <input type="submit" name="copy_from" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'copy_from' ) ?>" />
@@ -605,7 +620,7 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
                                                     <?php echo form_security_field( 'manage_proj_custom_field_update' ) ?>
                                                     <input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
                                                     <input type="hidden" name="field_id" value="<?php echo $t_field_id ?>" />
-                                                    <input type="text" class="form-control input-sm" name="sequence" value="<?php echo custom_field_get_sequence( $t_field_id, $f_project_id ) ?>" size="2" />
+                                                    <input type="text" class="input-sm" name="sequence" value="<?php echo custom_field_get_sequence( $t_field_id, $f_project_id ) ?>" size="2" />
                                                     <input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'update' ) ?>" />
                                                 </fieldset>
                                             </form>
@@ -632,7 +647,7 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
                     <fieldset>
                         <?php echo form_security_field( 'manage_proj_custom_field_add_existing' ) ?>
                         <input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-                        <select name="field_id" class="form-control input-sm">
+                        <select name="field_id" class="input-sm">
                             <?php
                             $t_custom_fields = custom_field_get_ids();
 
@@ -688,7 +703,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
                         <fieldset>
                             <?php echo form_security_field( 'manage_proj_user_copy' ) ?>
                             <input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
-                            <select name="other_project_id" class="form-control input-sm">
+                            <select name="other_project_id" class="input-sm">
                                 <?php print_project_option_list( null, false, $f_project_id ); ?>
                             </select>
                         <span class=form-inline">
@@ -824,7 +839,7 @@ if( $t_can_manage_users ) {
                                                    <span class="required">*</span> <?php echo lang_get( 'username' ) ?>
                                                 </td>
                                                 <td>
-                                                    <select id="project-add-users-username" name="user_id[]" multiple="multiple" size="10"><?php
+                                                    <select id="project-add-users-username" name="user_id[]" class="input-sm" multiple="multiple" size="10"><?php
                                                         foreach( $t_users AS $t_user_id=>$t_display_name ) {
                                                             echo '<option value="', $t_user_id, '">', $t_display_name, '</option>';
                                                         } ?>
@@ -837,7 +852,7 @@ if( $t_can_manage_users ) {
                                                     <?php echo lang_get( 'access_level' ) ?>
                                                 </td>
                                                 <td>
-                                                    <select id="project-add-users-access-level" name="access_level"><?php
+                                                    <select id="project-add-users-access-level" name="access_level" class="input-sm"><?php
                                                         # only access levels that are less than or equal current user access level for current project
                                                         print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ), $f_project_id ); ?>
                                                     </select>

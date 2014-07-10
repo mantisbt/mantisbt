@@ -96,7 +96,7 @@ print_manage_menu( 'manage_proj_page.php' );
                                                 <?php echo lang_get( 'version' ) ?>
                                             </td>
                                             <td>
-                                                <input type="text" id="proj-version-new-version" name="new_version" size="32" maxlength="64" value="<?php echo string_attribute( $t_version->version ) ?>" />
+                                                <input type="text" id="proj-version-new-version" name="new_version" class="input-sm" size="32" maxlength="64" value="<?php echo string_attribute( $t_version->version ) ?>" />
                                             </td>
                                         </tr>
 
@@ -105,7 +105,7 @@ print_manage_menu( 'manage_proj_page.php' );
                                                 <?php echo lang_get( 'date_order' ) ?>
                                             </td>
                                             <td>
-                                                <input type="text" id="proj-version-date-order" name="date_order" class="datetime" size="32" value="<?php echo (date_is_null( $t_version->date_order ) ? '' : string_attribute( date( config_get( 'calendar_date_format' ), $t_version->date_order ) ) ) ?>" />
+                                                <input type="text" id="proj-version-date-order" name="date_order" class="datetime input-sm" size="32" value="<?php echo (date_is_null( $t_version->date_order ) ? '' : string_attribute( date( config_get( 'calendar_date_format' ), $t_version->date_order ) ) ) ?>" />
                                             </td>
                                         </tr>
 

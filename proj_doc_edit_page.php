@@ -103,7 +103,7 @@ print_doc_menu();
 											<span class="required">*</span> <?php echo lang_get( 'title' ) ?>
 										</th>
 										<td width="80%">
-											<input type="text" name="title" size="70" maxlength="250" value="<?php echo $v_title ?>" />
+											<input type="text" name="title" class="input-sm" size="70" maxlength="250" value="<?php echo $v_title ?>" />
 										</td>
 									</tr>
 									<tr>

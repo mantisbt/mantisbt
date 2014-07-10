@@ -504,7 +504,7 @@ if( $t_read_write_access ) {
                                             <?php echo lang_get( 'username' ) ?>
                                         </td>
                                         <td>
-                                            <select id="config-user-id" name="user_id">
+                                            <select id="config-user-id" name="user_id" class="input-sm">
                                                 <option value="<?php echo ALL_USERS; ?>"
                                                     <?php check_selected( $t_edit_user_id, ALL_USERS ) ?>>
                                                     <?php echo lang_get( 'all_users' ); ?>
@@ -520,7 +520,7 @@ if( $t_read_write_access ) {
                                             <?php echo lang_get( 'project_name' ) ?>
                                         </td>
                                         <td>
-                                            <select id="config-project-id" name="project_id">
+                                            <select id="config-project-id" name="project_id" class="input-sm">
                                                 <option value="<?php echo ALL_PROJECTS; ?>"
                                                     <?php check_selected( $t_edit_project_id, ALL_PROJECTS ); ?>>
                                                     <?php echo lang_get( 'all_projects' ); ?>
@@ -536,7 +536,7 @@ if( $t_read_write_access ) {
                                             <?php echo lang_get( 'configuration_option' ) ?>
                                         </td>
                                         <td>
-                                            <input type="text" name="config_option"
+                                            <input type="text" name="config_option" class="input-sm"
                                                    value="<?php echo $t_edit_option; ?>"
                                                    size="64" maxlength="64" />
                                         </td>
@@ -548,7 +548,7 @@ if( $t_read_write_access ) {
                                             <?php echo lang_get( 'configuration_option_type' ) ?>
                                         </td>
                                         <td>
-                                            <select id="config-type" name="type">
+                                            <select id="config-type" name="type" class="input-sm">
                                                 <?php print_option_list_from_array( $t_config_types, $t_edit_type ); ?>
                                             </select>
                                         </td>

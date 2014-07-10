@@ -103,7 +103,7 @@ if( project_table_empty() ) {
                                                 <span class="required">*</span> <?php echo lang_get( 'project_name' ) ?>
                                             </td>
                                             <td>
-                                                <input type="text" id="project-name" name="name" size="60" maxlength="128" />
+                                                <input type="text" id="project-name" name="name" class="input-sm" size="60" maxlength="128" />
                                             </td>
                                         </tr>
 
@@ -112,7 +112,7 @@ if( project_table_empty() ) {
                                                 <?php echo lang_get( 'status' ) ?>
                                             </td>
                                             <td>
-                                                <select id="project-status" name="status">
+                                                <select id="project-status" name="status" class="input-sm">
                                                     <?php print_enum_string_option_list( 'project_status' ) ?>
                                                 </select>
                                             </td>
@@ -150,7 +150,7 @@ if( project_table_empty() ) {
                                                 <?php echo lang_get( 'view_status' ) ?>
                                             </td>
                                             <td>
-                                                <select id="project-view-state" name="view_state">
+                                                <select id="project-view-state" name="view_state" class="input-sm">
                                                     <?php print_enum_string_option_list( 'view_state' ) ?>
                                                 </select>
                                             </td>
@@ -172,7 +172,7 @@ if( project_table_empty() ) {
                                                     <?php echo lang_get( 'upload_file_path' ) ?>
                                                 </td>
                                                 <td>
-                                                    <input type="text" id="project-file-path" name="file_path" size="60" maxlength="250" value="<?php echo $t_file_path ?>" />
+                                                    <input type="text" id="project-file-path" name="file_path" class="input-sm" size="60" maxlength="250" value="<?php echo $t_file_path ?>" />
                                                 </td>
                                             </tr>
                                         <?php

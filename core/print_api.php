@@ -247,7 +247,7 @@ function print_user_with_subject( $p_user_id, $p_bug_id ) {
  * @return void
  */
 function print_email_input( $p_field_name, $p_email ) {
-    echo '<input id="email-field" type="text" name="' . string_attribute( $p_field_name ) . '" size="32" maxlength="64" value="' . string_attribute( $p_email ) . '" />';
+    echo '<input class="input-sm" id="email-field" type="text" name="' . string_attribute( $p_field_name ) . '" size="32" maxlength="64" value="' . string_attribute( $p_email ) . '" />';
 }
 
 /**
@@ -257,7 +257,7 @@ function print_email_input( $p_field_name, $p_email ) {
  * @return void
  */
 function print_captcha_input( $p_field_name ) {
-    echo '<input id="captcha-field" type="text" name="' . $p_field_name . '" size="6" maxlength="6" value="" />';
+    echo '<input class="input-sm" id="captcha-field" type="text" name="' . $p_field_name . '" size="6" maxlength="6" value="" />';
 }
 
 /**
@@ -377,7 +377,7 @@ function print_tag_input( $p_bug_id = 0, $p_string = '' ) {
     ?>
     <input type="hidden" id="tag_separator" value="<?php echo config_get( 'tag_separator' )?>" />
     <input type="text" name="tag_string" id="tag_string" class="input-sm" size="40" value="<?php echo string_attribute( $p_string )?>" />
-    <select <?php echo helper_get_tab_index()?> name="tag_select" id="tag_select" class="input-sm">
+    <select class="input-sm" <?php echo helper_get_tab_index()?> name="tag_select" id="tag_select" class="input-sm">
         <?php print_tag_option_list( $p_bug_id );?>
     </select>
 <?php
@@ -1002,7 +1002,7 @@ function print_status_option_list( $p_select_label, $p_current_value = 0, $p_all
         # resort the list into ascending order
         ksort( $t_enum_list );
         reset( $t_enum_list );
-        echo '<select ' . helper_get_tab_index() . ' id="' . $p_select_label . '" name="' . $p_select_label . '">';
+        echo '<select class="input-sm" ' . helper_get_tab_index() . ' id="' . $p_select_label . '" name="' . $p_select_label . '">';
         foreach( $t_enum_list as $t_key => $t_val ) {
             echo '<option value="' . $t_key . '"';
             check_selected( $t_key, $p_current_value );
@@ -1776,7 +1776,7 @@ function get_dropdown( array $p_control_array, $p_control_name, $p_match = '', $
         $t_size = '';
         $t_multiple = '';
     }
-    $t_info = sprintf( "<select %s name=\"%s\" id=\"%s\"%s>", $t_multiple, $p_control_name, $p_control_name, $t_size );
+    $t_info = sprintf( "<select class=\"input-sm\" %s name=\"%s\" id=\"%s\"%s>", $t_multiple, $p_control_name, $p_control_name, $t_size );
     if( $p_add_any ) {
         array_unshift_assoc( $p_control_array, META_FILTER_ANY, lang_trans( '[any]' ) );
     }

@@ -265,7 +265,7 @@ layout_page_begin( __FILE__ );
                 <?php if( $t_changed_project ) {
                     echo "[" . project_get_field( $t_bug->project_id, 'name' ) . "] ";
                 } ?>
-                <select <?php echo helper_get_tab_index() ?> id="category_id" name="category_id" class="autofocus">
+                <select <?php echo helper_get_tab_index() ?> id="category_id" name="category_id" class="autofocus input-sm">
                     <?php
                     print_category_option_list( $f_category_id );
                     ?>
@@ -282,7 +282,7 @@ layout_page_begin( __FILE__ );
                 <label for="reproducibility"><?php print_documentation_link( 'reproducibility' ) ?></label>
             </th>
             <td>
-                <select <?php echo helper_get_tab_index() ?> id="reproducibility" name="reproducibility">
+                <select <?php echo helper_get_tab_index() ?> id="reproducibility" name="reproducibility" class="input-sm">
                     <?php print_enum_string_option_list( 'reproducibility', $f_reproducibility ) ?>
                 </select>
             </td>
@@ -298,7 +298,7 @@ layout_page_begin( __FILE__ );
                 <label for="eta"><?php print_documentation_link( 'eta' ) ?></label>
             </th>
             <td>
-                <select <?php echo helper_get_tab_index() ?> id="eta" name="eta">
+                <select <?php echo helper_get_tab_index() ?> id="eta" name="eta" class="input-sm">
                     <?php print_enum_string_option_list( 'eta', $f_eta ) ?>
                 </select>
             </td>
@@ -313,7 +313,7 @@ layout_page_begin( __FILE__ );
                 <label for="severity"><?php print_documentation_link( 'severity' ) ?></label>
             </th>
             <td>
-                <select <?php echo helper_get_tab_index() ?> id="severity" name="severity">
+                <select <?php echo helper_get_tab_index() ?> id="severity" name="severity" class="input-sm">
                     <?php print_enum_string_option_list( 'severity', $f_severity ) ?>
                 </select>
             </td>
@@ -328,7 +328,7 @@ layout_page_begin( __FILE__ );
                 <label for="priority"><?php print_documentation_link( 'priority' ) ?></label>
             </th>
             <td>
-                <select <?php echo helper_get_tab_index() ?> id="priority" name="priority">
+                <select <?php echo helper_get_tab_index() ?> id="priority" name="priority" class="input-sm">
                     <?php print_enum_string_option_list( 'priority', $f_priority ) ?>
                 </select>
             </td>
@@ -359,7 +359,7 @@ layout_page_begin( __FILE__ );
             </th>
             <td>
                 <?php if( count( profile_get_all_for_user( auth_get_current_user_id() ) ) > 0 ) { ?>
-                    <select <?php echo helper_get_tab_index() ?> id="profile_id" name="profile_id">
+                    <select <?php echo helper_get_tab_index() ?> id="profile_id" name="profile_id" class="input-sm">
                         <?php print_profile_option_list( auth_get_current_user_id(), $f_profile_id ) ?>
                     </select>
                 <?php } ?>
@@ -380,13 +380,13 @@ layout_page_begin( __FILE__ );
                         </th>
                         <td>
                             <?php if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) { ?>
-                                <select id="platform" name="platform">
+                                <select id="platform" name="platform" class="input-sm">
                                     <option value=""></option>
                                     <?php print_platform_option_list( $f_platform ); ?>
                                 </select>
                             <?php
                             } else {
-                                echo '<input type="text" id="platform" name="platform" class="autocomplete" size="32" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_platform ) . '" />';
+                                echo '<input type="text" id="platform" name="platform" class="autocomplete input-sm" size="32" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_platform ) . '" />';
                             }
                             ?>
                         </td>
@@ -397,13 +397,13 @@ layout_page_begin( __FILE__ );
                         </th>
                         <td>
                             <?php if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) { ?>
-                                <select id="os" name="os">
+                                <select id="os" name="os" class="input-sm">
                                     <option value=""></option>
                                     <?php print_os_option_list( $f_os ); ?>
                                 </select>
                             <?php
                             } else {
-                                echo '<input type="text" id="os" name="os" class="autocomplete" size="32" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_os ) . '" />';
+                                echo '<input type="text" id="os" name="os" class="autocomplete input-sm" size="32" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_os ) . '" />';
                             }
                             ?>
                         </td>
@@ -416,13 +416,13 @@ layout_page_begin( __FILE__ );
                             <?php
                             if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) {
                                 ?>
-                                <select id="os_build" name="os_build">
+                                <select id="os_build" name="os_build" class="input-sm">
                                     <option value=""></option>
                                     <?php print_os_build_option_list( $f_os_build ); ?>
                                 </select>
                             <?php
                             } else {
-                                echo '<input type="text" id="os_build" name="os_build" class="autocomplete" size="16" maxlength="16" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_os_build ) . '" />';
+                                echo '<input type="text" id="os_build" name="os_build" class="autocomplete input-sm" size="16" maxlength="16" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_os_build ) . '" />';
                             }
                             ?>
                         </td>
@@ -448,7 +448,7 @@ layout_page_begin( __FILE__ );
                 <label for="product_version"><?php echo lang_get( 'product_version' ) ?></label>
             </th>
             <td>
-                <select <?php echo helper_get_tab_index() ?> id="product_version" name="product_version">
+                <select <?php echo helper_get_tab_index() ?> id="product_version" name="product_version" class="input-sm">
                     <?php print_version_option_list( $f_product_version, $t_project_id, $t_product_version_released_mask ) ?>
                 </select>
             </td>
@@ -473,7 +473,7 @@ layout_page_begin( __FILE__ );
                 <label for="handler_id"><?php echo lang_get( 'assign_to' ) ?></label>
             </th>
             <td>
-                <select <?php echo helper_get_tab_index() ?> id="handler_id" name="handler_id">
+                <select <?php echo helper_get_tab_index() ?> id="handler_id" name="handler_id" class="input-sm">
                     <option value="0" selected="selected"></option>
                     <?php print_assign_to_option_list( $f_handler_id ) ?>
                 </select>
@@ -487,7 +487,7 @@ layout_page_begin( __FILE__ );
                 <label for="status"><?php echo lang_get( 'status' ) ?></label>
             </th>
             <td>
-                <select <?php echo helper_get_tab_index() ?> name="status">
+                <select <?php echo helper_get_tab_index() ?> name="status" class="input-sm">
                     <?php
                     $resolution_options = get_status_option_list(
                         access_get_project_level( $t_project_id ),
@@ -512,7 +512,7 @@ layout_page_begin( __FILE__ );
                 <label for="resolution"><?php echo lang_get( 'resolution' ) ?></label>
             </th>
             <td>
-                <select <?php echo helper_get_tab_index() ?> name="resolution">
+                <select <?php echo helper_get_tab_index() ?> name="resolution" class="input-sm">
                     <?php
                     print_enum_string_option_list( 'resolution', config_get( 'default_bug_resolution' ) );
                     ?>
@@ -528,7 +528,7 @@ layout_page_begin( __FILE__ );
                 <label for="target_version"><?php echo lang_get( 'target_version' ) ?></label>
             </th>
             <td>
-                <select <?php echo helper_get_tab_index() ?> id="target_version" name="target_version">
+                <select <?php echo helper_get_tab_index() ?> id="target_version" name="target_version" class="input-sm">
                     <?php print_version_option_list( '', null, VERSION_FUTURE ) ?>
                 </select>
             </td>

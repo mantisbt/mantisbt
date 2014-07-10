@@ -174,7 +174,7 @@ function print_who_can_change( $p_threshold, $p_can_change ) {
 
     echo "\t<td $t_color>";
     if( $p_can_change ) {
-        echo '<select name="access_' . $p_threshold . '">';
+        echo '<select name="access_' . $p_threshold . '" class="input-sm">';
         print_enum_string_option_list( 'access_levels', $t_project_access );
         echo '</select>';
     } else {
@@ -328,7 +328,7 @@ function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects
     $t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
     echo "\t" . '<td class="left" colspan="3"' . $t_color . '>';
     if( $t_can_change ) {
-        echo '<select name="flag_' . $p_threshold . '">';
+        echo '<select name="flag_' . $p_threshold . '" class="input-sm">';
         print_enum_string_option_list( $p_enum, config_get( $p_threshold ) );
         echo '</select>';
         $t_show_submit = true;

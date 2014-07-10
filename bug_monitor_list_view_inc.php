@@ -104,7 +104,7 @@ if( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_id
                                         <?php echo form_security_field( 'bug_monitor_add' ) ?>
                                         <input type="hidden" name="bug_id" value="<?php echo (integer)$f_bug_id; ?>" />
                                         <label for="bug_monitor_list_username"><?php echo lang_get( 'username' ) ?></label>
-                                        <input type="text" class="form-control input-sm" id="bug_monitor_list_username" name="username" />
+                                        <input type="text" class="input-sm" id="bug_monitor_list_username" name="username" />
                                         <input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'add_user_to_monitor' ) ?>" />
                                     </form>
                                 <?php } ?>

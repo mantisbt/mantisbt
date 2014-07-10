@@ -82,7 +82,7 @@ print_doc_menu('proj_doc_add_page.php');
 											<span class="required">*</span> <?php echo lang_get( 'title' ) ?>
 										</th>
 										<td width="75%">
-											<input type="text" name="title" size="70" maxlength="250" />
+											<input type="text" name="title" class="input-sm" size="70" maxlength="250" />
 										</td>
 									</tr>
 									<tr>

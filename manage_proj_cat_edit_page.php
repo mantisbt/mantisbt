@@ -92,7 +92,7 @@ print_manage_menu( 'manage_proj_page.php' );
                                                 <?php echo lang_get( 'category' ) ?>
                                             </td>
                                             <td>
-                                                <input type="text" id="proj-category-name" name="name" size="32" maxlength="128" value="<?php echo string_attribute( $t_name ) ?>" />
+                                                <input type="text" id="proj-category-name" name="name" class="input-sm" size="32" maxlength="128" value="<?php echo string_attribute( $t_name ) ?>" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -100,7 +100,7 @@ print_manage_menu( 'manage_proj_page.php' );
                                                 <?php echo lang_get( 'assigned_to' ) ?>
                                             </td>
                                             <td>
-                                                <select id="proj-category-assigned-to" name="assigned_to">
+                                                <select id="proj-category-assigned-to" name="assigned_to" class="input-sm">
                                                     <option value="0"></option>
                                                     <?php print_assign_to_option_list( $t_assigned_to, $t_project_id ) ?>
                                                 </select>

@@ -88,7 +88,7 @@ function action_add_note_print_fields() {
 <?php
 	$t_default_state = config_get( 'default_bugnote_view_status' );
 	if( access_has_project_level( config_get( 'set_view_status_threshold' ) ) ) { ?>
-				<select name="view_state">
+				<select name="view_state" class="input-sm">
 					<?php print_enum_string_option_list( 'view_state', $t_default_state ) ?>
 				</select>
 <?php

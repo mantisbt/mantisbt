@@ -210,7 +210,7 @@ function capability_row( $p_from_status ) {
     }
     echo "\t\t\t" . '<td class="center"' . $t_colour . '>';
     if( $t_can_change_workflow ) {
-        echo '<select name="default_' . $p_from_status . '">';
+        echo '<select name="default_' . $p_from_status . '" class="input-sm">';
         print_enum_string_option_list( 'status', $t_project );
         echo '</select>';
     } else {
@@ -280,10 +280,10 @@ function threshold_row( $p_threshold ) {
 
     echo '<tr><td>' . lang_get( 'desc_' . $p_threshold ) . '</td>' . "\n";
     if( $t_can_change_threshold ) {
-        echo '<td' . $t_colour . '><select name="threshold_' . $p_threshold . '">';
+        echo '<td' . $t_colour . '><select name="threshold_' . $p_threshold . '" class="input-sm">';
         print_enum_string_option_list( 'status', $t_project );
         echo '</select> </td>' . "\n";
-        echo '<td><select name="access_' . $p_threshold . '">';
+        echo '<td><select name="access_' . $p_threshold . '" class="input-sm">';
         print_enum_string_option_list( 'access_levels', config_get_access( $p_threshold ) );
         echo '</select> </td>' . "\n";
         $t_can_change_flags = true;
@@ -385,7 +385,7 @@ function access_row() {
         }
 
         if( $t_can_change ) {
-            echo '<td' . $t_colour . '><select name="access_change_' . $t_status . '">' . "\n";
+            echo '<td' . $t_colour . '><select name="access_change_' . $t_status . '" class="input-sm">' . "\n";
             print_enum_string_option_list( 'access_levels', $t_level_project );
             echo '</select> </td>' . "\n";
             $t_can_change_flags = true;
@@ -516,7 +516,7 @@ section_end();
 
 if( $t_can_change_workflow ) {
     echo '<p>' . lang_get( 'workflow_change_access_label' );
-    echo '&#160;<select name="workflow_access">';
+    echo '&#160;<select name="workflow_access" class="input-sm">';
     print_enum_string_option_list( 'access_levels', config_get_access( 'status_enum_workflow' ) );
     echo '</select> </p><br />';
 }
@@ -528,7 +528,7 @@ access_end();
 
 if( $t_access >= config_get_access( 'set_status_threshold' ) ) {
     echo '<p>' . lang_get( 'access_change_access_label' );
-    echo '&#160;<select name="status_access">';
+    echo '&#160;<select name="status_access" class="input-sm">';
     print_enum_string_option_list( 'access_levels', config_get_access( 'set_status_threshold' ) );
     echo '</select> </p><br />';
 }

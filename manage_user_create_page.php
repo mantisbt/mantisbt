@@ -81,7 +81,7 @@ print_manage_menu( 'manage_user_page.php' );
                                                 <?php echo lang_get( 'username' ) ?>
                                             </td>
                                             <td>
-                                                <input type="text" id="user-username" name="username" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" />
+                                                <input type="text" id="user-username" name="username" class="input-sm" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" />
                                             </td>
                                         </tr>
                                         <?php
@@ -91,7 +91,7 @@ print_manage_menu( 'manage_user_page.php' );
                                                     <?php echo lang_get( 'realname' ) ?>
                                                 </td>
                                                 <td>
-                                                    <input type="text" id="user-realname" name="realname" size="32" maxlength="<?php echo DB_FIELD_SIZE_REALNAME;?>" />
+                                                    <input type="text" id="user-realname" name="realname" class="input-sm" size="32" maxlength="<?php echo DB_FIELD_SIZE_REALNAME;?>" />
                                                 </td>
                                             </tr>
                                         <?php
@@ -131,7 +131,7 @@ print_manage_menu( 'manage_user_page.php' );
                                                 <?php echo lang_get( 'access_level' ) ?>
                                             </td>
                                             <td>
-                                                <select id="user-access-level" name="access_level">
+                                                <select id="user-access-level" name="access_level" class="input-sm">
                                                     <?php print_project_access_levels_option_list( config_get( 'default_new_account_access_level' ) ) ?>
                                                 </select>
                                             </td>

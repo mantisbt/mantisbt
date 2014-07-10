@@ -112,8 +112,8 @@ if( $t_show_sponsorships ) {
 				<?php echo form_security_field( 'bug_set_sponsorship' ) ?>
 				<?php echo sponsorship_get_currency() ?>
 				<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" size="4" />
-				<input type="text" name="amount" value="<?php echo config_get( 'minimum_sponsorship_amount' )  ?>" size="4" />
-				<input type="submit" class="button" name="sponsor" value="<?php echo lang_get( 'sponsor_verb' ) ?>" />
+				<input type="text" name="amount" class="input-sm" value="<?php echo config_get( 'minimum_sponsorship_amount' )  ?>" size="4" />
+				<input type="submit" class="btn btn-primary btn-white btn-round" name="sponsor" value="<?php echo lang_get( 'sponsor_verb' ) ?>" />
 			</form>
 		</td>
 	</tr>
