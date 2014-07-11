@@ -360,8 +360,10 @@ function ToggleDiv( p_div ) {
 	}
 
 	if ( t_open_display == "none" ) {
+        t_cookie = t_cookie.replace( "|" + p_div + ",0", '' );
 		t_cookie = t_cookie + "|" + p_div + ",1";
 	} else {
+        t_cookie = t_cookie.replace( "|" + p_div + ",1", '' );
 		t_cookie = t_cookie + "|" + p_div + ",0";
 	}
 
