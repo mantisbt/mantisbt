@@ -55,8 +55,8 @@ $(document).ready( function() {
             t_cookie = "";
             g_collapse_clear = 0;
         }
+        t_cookie = t_cookie.replace("|" + t_id + ",1", '' );
         t_cookie = t_cookie + "|" + t_id + ",0";
-
         SetCookie( "collapse_settings", t_cookie );
 	});
 
@@ -67,6 +67,7 @@ $(document).ready( function() {
             t_cookie = "";
             g_collapse_clear = 0;
         }
+        t_cookie = t_cookie.replace( "|" + t_id + ",0", '' );
         t_cookie = t_cookie + "|" + t_id + ",1";
         SetCookie( "collapse_settings", t_cookie );
     });
