@@ -768,7 +768,10 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
  * @return null
  */
 function layout_sidebar_begin() {
-    echo '<div class="sidebar sidebar-fixed responsive compact" id="sidebar">';
+	$t_collapse_block = collapse_display( 'sidebar' );
+	$t_block_css = $t_collapse_block ? 'menu-min' : '';
+
+    echo '<div id="sidebar" class="sidebar sidebar-fixed responsive compact ' . $t_block_css . '" >';
 
     # Shortcut buttons
     echo '<div class="sidebar-shortcuts" id="sidebar-shortcuts">';
@@ -824,10 +827,17 @@ function layout_sidebar_end() {
     echo '</ul>';
 
     $t_collapse_block = collapse_display( 'sidebar' );
-    $t_sidebar_css = $t_collapse_block ? 'menu-min' : '';
 
     echo '<div id="sidebar" class="sidebar-toggle sidebar-collapse">';
-    echo '<i data-icon2="ace-icon fa fa-angle-double-right" data-icon1="ace-icon fa fa-angle-double-left" class="ace-icon fa fa-angle-double-left"></i>';
+	if( layout_is_rtl() ) {
+		$t_block_icon = $t_collapse_block ? 'fa-angle-double-left' : 'fa-angle-double-right';
+    	echo '<i data-icon2="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-right"
+    	class="ace-icon fa ' . $t_block_icon . '"></i>';
+	} else {
+		$t_block_icon = $t_collapse_block ? 'fa-angle-double-right' : 'fa-angle-double-left';
+		echo '<i data-icon2="ace-icon fa fa-angle-double-right" data-icon1="ace-icon fa fa-angle-double-left"
+		class="ace-icon fa ' . $t_block_icon . '"></i>';
+	}
     echo '</div>';
     echo '</div>';
 }
