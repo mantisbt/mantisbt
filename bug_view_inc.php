@@ -252,11 +252,11 @@ echo '<div class="widget-toolbox padding-8 clearfix">';
 echo '<div class="btn-group pull-left">';
 
 # Jump to Bugnotes
-print_link( "#bugnotes", lang_get( 'jump_to_bugnotes' ), false, 'btn btn-primary btn-sm btn-white btn-round' );
+print_small_button( "#bugnotes", lang_get( 'jump_to_bugnotes' ) );
 
 # Send Bug Reminder
 if( $t_show_reminder_link ) {
-	print_link( $t_bug_reminder_link, lang_get( 'bug_reminder' ), false, 'btn btn-primary btn-sm btn-white btn-round' );
+    print_small_button( $t_bug_reminder_link, lang_get( 'bug_reminder' ) );
 }
 
 if( !is_blank( $t_wiki_link ) ) {
@@ -270,7 +270,7 @@ foreach ( $t_links as $t_plugin => $t_hooks ) {
 				if( is_numeric( $t_label ) ) {
 					print_bracket_link_prepared( $t_href );
 				} else {
-					print_link( $t_href, $t_label, false, 'btn btn-primary btn-sm btn-white btn-round' );
+                    print_small_button( $t_href, $t_label );
 				}
 			}
 		} else {
@@ -282,11 +282,11 @@ foreach ( $t_links as $t_plugin => $t_hooks ) {
 # Links
 if( !is_blank( $t_history_link ) ) {
     # History
-    print_link( $t_history_link, lang_get( 'bug_history' ), false, 'btn btn-primary btn-sm btn-white btn-round' );
+    print_small_button( $t_history_link, lang_get( 'bug_history' ) );
 }
 
 # Print Bug
-print_link( $t_print_link, lang_get( 'print' ), false, 'btn btn-primary btn-sm btn-white btn-round' );
+print_small_button( $t_print_link, lang_get( 'print' ) );
 echo '</div>';
 
 # prev/next links
@@ -296,11 +296,11 @@ if( $t_bugslist ) {
 	$t_index = array_search( $f_bug_id, $t_bugslist );
 	if( false !== $t_index ) {
 		if( isset( $t_bugslist[$t_index-1] ) ) {
-			print_link( 'view.php?id='.$t_bugslist[$t_index-1], '&lt;&lt;', false, 'btn btn-primary btn-sm btn-white btn-round' );
+            print_small_button( 'view.php?id='.$t_bugslist[$t_index-1], '&lt;&lt;' );
 		}
 
 		if( isset( $t_bugslist[$t_index+1] ) ) {
-			print_link( 'view.php?id='.$t_bugslist[$t_index+1], '&gt;&gt;', false, 'btn btn-primary btn-sm btn-white btn-round' );
+            print_small_button( 'view.php?id='.$t_bugslist[$t_index+1], '&gt;&gt;' );
 		}
 	}
 }

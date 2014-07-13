@@ -348,7 +348,7 @@ function html_operation_successful( $p_redirect_url, $p_message = '' ) {
     }
 
     echo '<p class="bold bigger-110">' . lang_get( 'operation_successful' ).'</p><br />';
-    print_link( $p_redirect_url, lang_get( 'proceed' ), false, 'btn btn-primary btn-white btn-round' );
+    print_button( $p_redirect_url, lang_get( 'proceed' ) );
     echo '</div></div>';
 }
 

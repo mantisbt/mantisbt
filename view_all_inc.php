@@ -119,12 +119,9 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
                             <div class="btn-group pull-left">
                                 <?php
                                 # -- Print and Export links --
-                                print_link( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ),
-                                    false, 'btn btn-primary btn-sm btn-white btn-round' );
-                                print_link( 'csv_export.php', lang_get( 'csv_export' ),
-                                    false, 'btn btn-primary btn-sm btn-white btn-round' );
-                                print_link( 'excel_xml_export.php', lang_get( 'excel_export' ),
-                                    false, 'btn btn-primary btn-sm btn-white btn-round');
+                                print_small_button( 'print_all_bug_page.php', lang_get( 'print_all_bug_page_link' ) );
+                                print_small_button( 'csv_export.php', lang_get( 'csv_export' ) );
+                                print_small_button( 'excel_xml_export.php', lang_get( 'excel_export' ) );
 
                                 $t_event_menu_options = $t_links = event_signal('EVENT_MENU_FILTER');
 

@@ -305,10 +305,8 @@ layout_page_begin( 'bug_report_page.php' );
 
             <?php
             echo '<p>' . lang_get( 'operation_successful' ) . '</p><br />';
-            print_link( string_get_bug_view_url( $t_bug_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_bug_id ),
-                false, 'btn btn-sm btn-primary btn-white btn-round' );
-            print_link( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ),
-                false, 'btn btn-sm btn-primary btn-white btn-round' );
+            print_button( string_get_bug_view_url( $t_bug_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_bug_id ) );
+            print_button( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
 
             if( $f_report_stay ) {
                 ?>

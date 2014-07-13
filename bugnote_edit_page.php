@@ -150,7 +150,7 @@ layout_page_begin();
                     </div>
                     <div class="widget-toolbox padding-8 clearfix">
                         <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_information_button' ) ?>" />
-                        <?php print_link( $t_redirect_url, lang_get( 'go_back' ), false, 'btn btn-sm btn-primary btn-white btn-round pull-right' ) ?>
+                        <?php print_small_button( $t_redirect_url, lang_get( 'go_back' ) ) ?>
                     </div>
                 </div>
             </div>

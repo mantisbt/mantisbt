@@ -76,12 +76,12 @@ if( !current_user_is_anonymous() ) {
     $t_hide_status = config_get( 'bug_resolved_status_threshold' );
     echo '<span class="bigger-120">';
     echo lang_get( 'open_and_assigned_to_me_label' ) . lang_get( 'word_separator' );
-    print_link( "view_all_set.php?type=1&handler_id=$t_current_user_id&hide_status=$t_hide_status", current_user_get_assigned_open_bug_count(), false, 'subtle' );
+    print_link( "view_all_set.php?type=1&handler_id=$t_current_user_id&hide_status=$t_hide_status", current_user_get_assigned_open_bug_count() );
 
     echo '<br />';
 
     echo lang_get( 'open_and_reported_to_me_label' ) . lang_get( 'word_separator' );
-    print_link( "view_all_set.php?type=1&reporter_id=$t_current_user_id&hide_status=$t_hide_status", current_user_get_reported_open_bug_count(), false, 'subtle' );
+    print_link( "view_all_set.php?type=1&reporter_id=$t_current_user_id&hide_status=$t_hide_status", current_user_get_reported_open_bug_count() );
 
     echo '<br />';
 
@@ -97,11 +97,9 @@ if( news_is_enabled() && access_has_project_level( config_get( 'manage_news_thre
 
     # Admin can edit news for All Projects (site-wide)
     if( ALL_PROJECTS != helper_get_current_project() || current_user_is_administrator() ) {
-        print_link( 'news_menu_page.php', lang_get( 'edit_news_link' ),
-            false, 'btn btn-primary btn-white btn-round pull-right');
+        print_button( 'news_menu_page.php', lang_get( 'edit_news_link' ), 'pull-right');
     } else {
-        print_link( 'login_select_proj_page.php', lang_get( 'edit_news_link' ),
-            false, 'btn btn-primary btn-white btn-round pull-right');
+        print_button( 'login_select_proj_page.php', lang_get( 'edit_news_link' ), 'pull-right');
     }
 }
 echo '</div>';
@@ -132,26 +130,22 @@ if( news_is_enabled() ) {
     echo '<div class="space-10"></div>';
     echo '<div class="btn-group">';
 
-    print_link( 'news_list_page.php', lang_get( 'archives' ),
-        false, 'btn btn-primary btn-white btn-round' );
+    print_button( 'news_list_page.php', lang_get( 'archives' ) );
 
     $t_news_view_limit = config_get( 'news_view_limit' );
     $f_offset_next = $f_offset + $t_news_view_limit;
     $f_offset_prev = $f_offset - $t_news_view_limit;
 
     if( $f_offset_prev >= 0 ) {
-        print_link( 'main_page.php?offset=' . $f_offset_prev, lang_get( 'newer_news_link' ),
-            false, 'btn btn-primary btn-white btn-round' );
+        print_button( 'main_page.php?offset=' . $f_offset_prev, lang_get( 'newer_news_link' ) );
     }
 
     if( $t_news_count == $t_news_view_limit ) {
-        print_link( 'main_page.php?offset=' . $f_offset_next, lang_get( 'older_news_link' ),
-            false, 'btn btn-primary btn-white btn-round' );
+        print_button( 'main_page.php?offset=' . $f_offset_next, lang_get( 'older_news_link' ) );
     }
 
     if( OFF != $t_rss_enabled ) {
-        print_link( $t_rss_link, lang_get( 'rss' ),
-            false, 'btn btn-primary btn-white btn-round' );
+        print_button( $t_rss_link, lang_get( 'rss' ) );
     }
     echo '</div>';
 }

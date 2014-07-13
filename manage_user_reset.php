@@ -104,6 +104,6 @@ if( $t_reset ) {
 }
 echo '</p>';
 echo '<div class="space-10"></div>';
-print_link( $t_redirect_url, lang_get( 'proceed' ), false, 'btn btn-primary btn-white btn-round' );
+print_button( $t_redirect_url, lang_get( 'proceed' ) );
 echo '</div></div>';
 layout_page_end();

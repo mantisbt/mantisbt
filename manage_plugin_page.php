@@ -195,15 +195,15 @@ if( 0 < count( $t_plugins_installed ) ) {
                                     }
                                     echo '<td class="center">';
                                     if( $t_upgrade ) {
-                                        print_link(
+                                        print_button(
                                             'manage_plugin_upgrade.php?name=' . $t_basename . form_security_param( 'manage_plugin_upgrade' ),
-                                            lang_get( 'plugin_upgrade' ), false, 'btn btn-xs btn-primary btn-white btn-round'
+                                            lang_get( 'plugin_upgrade' ), 'btn-xs'
                                         );
                                     }
                                     if( !$t_protected ) {
-                                        print_link(
+                                        print_button(
                                             'manage_plugin_uninstall.php?name=' . $t_basename . form_security_param( 'manage_plugin_uninstall' ),
-                                            lang_get( 'plugin_uninstall' ),  false, 'btn btn-xs btn-primary btn-white btn-round'
+                                            lang_get( 'plugin_uninstall' ),  'btn-xs'
                                         );
                                     }
                                     echo '</td></tr>';
@@ -307,9 +307,9 @@ if( 0 < count( $t_plugins_available ) ) {
                             echo '<td class="center">',$t_depends,'</td>';
                             echo '<td class="center">';
                             if( $t_ready ) {
-                                print_link(
+                                print_small_button(
                                     'manage_plugin_install.php?name=' . $t_basename . form_security_param( 'manage_plugin_install' ),
-                                    lang_get( 'plugin_install' ), false, 'btn btn-sm btn-primary btn-white btn-round'
+                                    lang_get( 'plugin_install' )
                                 );
                             }
                             echo '</td></tr>';

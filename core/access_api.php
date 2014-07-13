@@ -102,8 +102,7 @@ function access_denied() {
 			echo '<div class="alert alert-danger">';
 			echo '<div class="center bigger-130">' . error_string( ERROR_ACCESS_DENIED ) . '</p>';
 			echo '<p class="center">';
-			print_link( helper_mantis_url( 'main_page.php' ), lang_get( 'proceed' ), false,
-				'btn btn-primary btn-white btn-round');
+			print_button( helper_mantis_url( 'main_page.php' ), lang_get( 'proceed' ) );
 			echo '</p>';
 			echo '</div></div>';
 			layout_admin_page_end();

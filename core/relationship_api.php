@@ -848,8 +848,8 @@ function relationship_view_box( $p_bug_id ) {
             if( ON == config_get( 'relationship_graph_enable' ) ) {
                 ?>
             <div class="btn-group pull-right">
-                <span class="small"><?php print_link( "bug_relationship_graph.php?bug_id=$p_bug_id&graph=relation", lang_get( 'relation_graph' ), false, 'btn btn-primary btn-sm btn-white btn-round' )?></span>
-                <span class="small"><?php print_link( "bug_relationship_graph.php?bug_id=$p_bug_id&graph=dependency", lang_get( 'dependency_graph' ), falase, 'btn btn-primary btn-sm btn-white btn-round' )?></span>
+                <span class="small"><?php print_small_button( "bug_relationship_graph.php?bug_id=$p_bug_id&graph=relation", lang_get( 'relation_graph' ) )?></span>
+                <span class="small"><?php print_small_button( "bug_relationship_graph.php?bug_id=$p_bug_id&graph=dependency", lang_get( 'dependency_graph' ) )?></span>
             </div>
             <?php
             }

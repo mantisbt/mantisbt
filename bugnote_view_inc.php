@@ -239,14 +239,14 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
                                     # show edit button if the user is allowed to edit this bugnote
                                     if( $t_can_edit_bugnote ) {
                                         echo '<div class="pull-left">';
-                                        print_button( 'bugnote_edit_page.php?bugnote_id='.$t_bugnote->id, lang_get( 'bugnote_edit_link' ) );
+                                        print_form_button( 'bugnote_edit_page.php?bugnote_id='.$t_bugnote->id, lang_get( 'bugnote_edit_link' ) );
                                         echo '</div>';
                                     }
 
                                     # show delete button if the user is allowed to delete this bugnote
                                     if( $t_can_delete_bugnote ) {
                                         echo '<div class="pull-left">';
-                                        print_button( 'bugnote_delete.php?bugnote_id='.$t_bugnote->id, lang_get( 'delete_link' ) );
+                                        print_form_button( 'bugnote_delete.php?bugnote_id='.$t_bugnote->id, lang_get( 'delete_link' ) );
                                         echo '</div>';
                                     }
 
@@ -254,9 +254,9 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
                                     if( $t_can_change_view_state ) {
                                         echo '<div class="pull-left">';
                                         if( VS_PRIVATE == $t_bugnote->view_state ) {
-                                            print_button( 'bugnote_set_view_state.php?private=0&bugnote_id=' . $t_bugnote->id, lang_get( 'make_public' ) );
+                                            print_form_button( 'bugnote_set_view_state.php?private=0&bugnote_id=' . $t_bugnote->id, lang_get( 'make_public' ) );
                                         } else {
-                                            print_button( 'bugnote_set_view_state.php?private=1&bugnote_id=' . $t_bugnote->id, lang_get( 'make_private' ) );
+                                            print_form_button( 'bugnote_set_view_state.php?private=1&bugnote_id=' . $t_bugnote->id, lang_get( 'make_private' ) );
                                         }
                                         echo '</div>';
                                     }

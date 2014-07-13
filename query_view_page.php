@@ -102,7 +102,7 @@ $t_rss_enabled = config_get( 'rss_enabled' );
 
                                 if( filter_db_can_delete_filter( $t_id ) ) {
                                     echo ' ';
-                                    print_button( "query_delete_page.php?source_query_id=$t_query_id", lang_get( 'delete_query' ) );
+                                    print_form_button( "query_delete_page.php?source_query_id=$t_query_id", lang_get( 'delete_query' ) );
                                 }
 
                                 print '</td>';

@@ -174,9 +174,9 @@ print_doc_menu( 'proj_doc_page.php' );
 								<?php
 								if( access_has_project_level( config_get( 'upload_project_file_threshold', null, null, $v_project_id ), $v_project_id ) ) {
 									echo '&#160;';
-									print_button( 'proj_doc_edit_page.php?file_id='.$v_id, lang_get( 'edit_link' ) );
+									print_form_button( 'proj_doc_edit_page.php?file_id='.$v_id, lang_get( 'edit_link' ) );
 									echo '&#160;';
-									print_button( 'proj_doc_delete.php?file_id=' . $v_id, lang_get( 'delete_link' ) );
+									print_form_button( 'proj_doc_delete.php?file_id=' . $v_id, lang_get( 'delete_link' ) );
 								}
 								?>
 										</span>

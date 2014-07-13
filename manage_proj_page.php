@@ -179,7 +179,7 @@ print_manage_menu( 'manage_proj_page.php' );
                 <?php
                 # Check the user's global access level before allowing project creation
                 if( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
-                    print_button( 'manage_proj_create_page.php', lang_get( 'create_new_project_link' ), null, null, 'btn btn-primary btn-white btn-round' );
+                    print_form_button( 'manage_proj_create_page.php', lang_get( 'create_new_project_link' ), null, null, 'btn btn-primary btn-white btn-round' );
                 } ?>
             </div>
         </div>
@@ -233,10 +233,10 @@ print_manage_menu( 'manage_proj_page.php' );
                                                 $t_project_id = urlencode( ALL_PROJECTS );
                                                 echo '<div class="btn-group inline">';
                                                 echo '<div class="pull-left">';
-                                                print_button( "manage_proj_cat_edit_page.php?id=$t_id&project_id=$t_project_id", lang_get( 'edit_link' ) );
+                                                print_form_button( "manage_proj_cat_edit_page.php?id=$t_id&project_id=$t_project_id", lang_get( 'edit_link' ) );
                                                 echo '</div>';
                                                 echo '<div class="pull-left">';
-                                                print_button( "manage_proj_cat_delete.php?id=$t_id&project_id=$t_project_id", lang_get( 'delete_link' ) );
+                                                print_form_button( "manage_proj_cat_delete.php?id=$t_id&project_id=$t_project_id", lang_get( 'delete_link' ) );
                                                 echo '</div>';
                                                 ?>
                                             </td>

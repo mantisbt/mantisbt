@@ -183,9 +183,8 @@ layout_page_begin();
         </h4>
         <div class="widget-toolbar no-border">
             <div class="widget-menu">
-                <?php print_link(
-                    string_get_bug_view_url( $t_bug_id ), lang_get( 'back_to_bug_link' ),
-                    false, 'btn btn-sm btn-primary btn-white btn-round' ); ?>
+                <?php print_small_button(
+                    string_get_bug_view_url( $t_bug_id ), lang_get( 'back_to_bug_link' ) ); ?>
             </div>
         </div>
     </div>

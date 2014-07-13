@@ -66,8 +66,7 @@ layout_page_begin( 'main_page.php' );
         ?>
 
         <div class="space-10"></div>
-        <?php print_link( 'news_list_page.php', lang_get( 'archives' ),
-            false, 'btn btn-primary btn-white btn-round' ); ?>
+        <?php print_button( 'news_list_page.php', lang_get( 'archives' ) ); ?>
 
     </div>
 <?php

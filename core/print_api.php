@@ -1373,7 +1373,7 @@ function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $
  * @see form_security_token()
  * @return void
  */
-function print_button( $p_action_page, $p_label, $p_args_to_post = null, $p_security_token = null, $p_class = '' ) {
+function print_form_button( $p_action_page, $p_label, $p_args_to_post = null, $p_security_token = null, $p_class = '' ) {
     $t_form_name = explode( '.php', $p_action_page, 2 );
     # TODO: ensure all uses of print_button supply arguments via $p_args_to_post (POST)
     # instead of via $p_action_page (GET). Then only add the CSRF form token if
@@ -1452,6 +1452,38 @@ function print_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' 
             }
         }
     }
+}
+
+/**
+ * print a HTML link with a button look
+ * @param string  $p_link       The page URL.
+ * @param string  $p_url_text   The displayed text for the link.
+ * @param boolean $p_new_window Whether to open in a new window.
+ * @param string  $p_class      The CSS class of the link.
+ * @return void
+ */
+function print_button( $p_link, $p_url_text, $p_class = '', $p_new_window = false ) {
+    if( is_blank( $p_link ) ) {
+        echo $p_url_text;
+    } else {
+        $t_link = htmlspecialchars( $p_link );
+        if( $p_new_window === true ) {
+            echo "<a class=\"btn btn-primary btn-white btn-round $p_class\" href=\"$t_link\" target=\"_blank\">$p_url_text</a>";
+        } else {
+            echo "<a class=\"btn btn-primary btn-white btn-round $p_class\" href=\"$t_link\">$p_url_text</a>";
+        }
+    }
+}
+
+/**
+ * shortcut for printing a HTML link with a small button look
+ * @param string  $p_link       The page URL.
+ * @param string  $p_url_text   The displayed text for the link.
+ * @param boolean $p_new_window Whether to open in a new window.
+ * @return void
+ */
+function print_small_button( $p_link, $p_url_text, $p_new_window = false ) {
+    print_button( $p_link, $p_url_text, 'btn-sm', $p_new_window );
 }
 
 /**
@@ -1879,7 +1911,8 @@ function print_bug_attachment_header( array $p_attachment ) {
 
     if( $p_attachment['can_delete'] ) {
         echo lang_get( 'word_separator' ) . '&#160;&#160;';
-        print_link( 'bug_file_delete.php?file_id=' . $p_attachment['id'] . form_security_param( 'bug_file_delete' ), lang_get( 'delete_link' ), false, 'btn btn-primary btn-xs btn-white btn-round' );
+        print_button( 'bug_file_delete.php?file_id=' . $p_attachment['id'] . form_security_param( 'bug_file_delete' ),
+            lang_get( 'delete_link' ), 'btn-xs' );
     }
 }
 

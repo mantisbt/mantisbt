@@ -423,7 +423,7 @@ $t_result = db_query_bound( $t_query, $t_param );
                                             if( config_can_delete( $v_config_id ) ) {
                                                 # Update button (will populate edit form at page bottom)
                                                 echo '<div class="pull-left">';
-                                                print_button(
+                                                print_form_button(
                                                     '#config_set_form',
                                                     lang_get( 'edit_link' ),
                                                     array(
@@ -439,7 +439,7 @@ $t_result = db_query_bound( $t_query, $t_param );
 
                                                 # Delete button
                                                 echo '<div class="pull-left">';
-                                                print_button(
+                                                print_form_button(
                                                     'adm_config_delete.php',
                                                     lang_get( 'delete_link' ),
                                                     array(

@@ -84,8 +84,7 @@ layout_admin_page_begin();
         ?>
         <div>
             <p>
-                <?php print_link( helper_mantis_url( 'admin/system_utils.php' ), 'Back to System Utilities',
-                    false, 'btn btn-primary btn-white btn-round' ); ?>
+                <?php print_button( helper_mantis_url( 'admin/system_utils.php' ), 'Back to System Utilities' ); ?>
             </p>
         </div>
 

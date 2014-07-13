@@ -245,7 +245,7 @@ print_manage_menu( 'manage_proj_page.php' );
                     <?php
                     # Check the user's global access level before allowing project creation
                     if( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
-                        print_button( 'manage_proj_create_page.php?parent_id=' . $f_project_id, lang_get( 'create_new_subproject_link' ),
+                        print_form_button( 'manage_proj_create_page.php?parent_id=' . $f_project_id, lang_get( 'create_new_subproject_link' ),
                             null, null, 'btn btn-sm btn-primary btn-white btn-round' );
                     } ?>
                 </div>
@@ -342,14 +342,14 @@ if( array() != $t_subproject_ids ) { ?>
                                             </td>
                                             <td class="center">
                                                 <div class="inline">
-                                                <?php print_link(
+                                                <?php print_button(
                                                     'manage_proj_edit_page.php?project_id=' . $t_subproject['id'],
-                                                    lang_get( 'edit_link' ), false, 'btn btn-xs btn-primary btn-white btn-round pull-left'
+                                                    lang_get( 'edit_link' ), 'btn-xs'
                                                 );
                                                 ?>
-                                                <?php print_link(
+                                                <?php print_button(
                                                     "manage_proj_subproj_delete.php?project_id=$f_project_id&subproject_id=" . $t_subproject['id'] . form_security_param( 'manage_proj_subproj_delete' ),
-                                                    lang_get( 'unlink_link' ), false, 'btn btn-xs btn-primary btn-white btn-round pull-left'
+                                                    lang_get( 'unlink_link' ), 'btn-xs'
                                                 );
                                                 ?>
                                                 </div>
@@ -428,13 +428,13 @@ if( array() != $t_subproject_ids ) { ?>
                                                 $t_id = urlencode( $t_id );
                                                 $t_project_id = urlencode( $f_project_id );
                                                 echo '<div class="pull-left">';
-                                                print_button( 'manage_proj_cat_edit_page.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'edit_link' ),
+                                                print_form_button( 'manage_proj_cat_edit_page.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'edit_link' ),
                                                     null, null, 'btn btn-xs btn-primary btn-white btn-round' );
                                                 echo '</div>';
                                             } ?>
                                             <?php if( !$t_inherited ) {
                                                 echo '<div class="pull-left">';
-                                                print_button( 'manage_proj_cat_delete.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'delete_link' ),
+                                                print_form_button( 'manage_proj_cat_delete.php?id=' . $t_id . '&project_id=' . $t_project_id, lang_get( 'delete_link' ),
                                                     null, null, 'btn btn-xs btn-primary btn-white btn-round' );
                                                 echo '</div>';
                                             } ?>
@@ -528,11 +528,11 @@ if( array() != $t_subproject_ids ) { ?>
                                                 $t_version_id = version_get_id( $t_name, $f_project_id );
                                                 if( !$t_inherited ) {
                                                     echo '<div class="pull-left">';
-                                                    print_button( 'manage_proj_ver_edit_page.php?version_id=' . $t_version_id, lang_get( 'edit_link' ) );
+                                                    print_form_button( 'manage_proj_ver_edit_page.php?version_id=' . $t_version_id, lang_get( 'edit_link' ) );
                                                     echo '</div>';
 
                                                     echo '<div class="pull-left">';
-                                                    print_button( 'manage_proj_ver_delete.php?version_id=' . $t_version_id, lang_get( 'delete_link' ) );
+                                                    print_form_button( 'manage_proj_ver_delete.php?version_id=' . $t_version_id, lang_get( 'delete_link' ) );
                                                     echo '</div>';
                                                 } ?>
                                                 </div>
@@ -627,7 +627,7 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
                                         </td>
                                         <td class="center"><?php
                                             # You need global permissions to edit custom field defs
-                                            print_button( "manage_proj_custom_field_remove.php?field_id=$t_field_id&project_id=$f_project_id", lang_get( 'remove_link' ) ); ?>
+                                            print_form_button( "manage_proj_custom_field_remove.php?field_id=$t_field_id&project_id=$f_project_id", lang_get( 'remove_link' ) ); ?>
                                         </td>
                                     </tr>
                                 <?php
@@ -772,7 +772,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
                                             #  from this project
                                             if( $t_can_manage_users && access_has_project_level( $t_user['access_level'], $f_project_id ) ) {
                                                 if( project_includes_user( $f_project_id, $t_user['id'] )  ) {
-                                                    print_button( "manage_proj_user_remove.php?project_id=$f_project_id&user_id=" . $t_user['id'], lang_get( 'remove_link' ) );
+                                                    print_form_button( "manage_proj_user_remove.php?project_id=$f_project_id&user_id=" . $t_user['id'], lang_get( 'remove_link' ) );
                                                     $t_removable_users_exist = true;
                                                 }
                                             } ?>
@@ -791,16 +791,16 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
                     # You need global or project-specific permissions to remove users
                     #  from this project
                     if( !$f_show_global_users ) {
-                        print_button( "manage_proj_edit_page.php?project_id=$f_project_id&show_global_users=true", lang_get( 'show_global_users' ),
+                        print_form_button( "manage_proj_edit_page.php?project_id=$f_project_id&show_global_users=true", lang_get( 'show_global_users' ),
                             null, null, 'btn btn-sm btn-primary btn-white btn-round' );
                     } else {
-                        print_button( "manage_proj_edit_page.php?project_id=$f_project_id", lang_get( 'hide_global_users' ),
+                        print_form_button( "manage_proj_edit_page.php?project_id=$f_project_id", lang_get( 'hide_global_users' ),
                             null, null, 'btn btn-sm btn-primary btn-white btn-round' );
                     }
 
                     if( $t_removable_users_exist ) {
                         echo '&#160;';
-                        print_button( "manage_proj_user_remove.php?project_id=$f_project_id", lang_get( 'remove_all_link' ),
+                        print_form_button( "manage_proj_user_remove.php?project_id=$f_project_id", lang_get( 'remove_all_link' ),
                             null, null, 'btn btn-sm btn-primary btn-white btn-round' );
                     }
                     ?>

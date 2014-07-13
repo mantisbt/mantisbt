@@ -70,8 +70,7 @@ $f_url = string_sanitize_url( gpc_get_string( 'url' ) );
         $t_create_short_url = config_get( 'create_short_url' );
 
         if( !is_blank( $t_create_short_url ) ) {
-            print_link( sprintf( $t_create_short_url, $f_url ), lang_get( 'create_short_link' ), true,
-                'btn btn-primary btn-white btn-round btn-sm');
+            print_small_button( sprintf( $t_create_short_url, $f_url ), lang_get( 'create_short_link' ), true );
         }
         ?>
     </div>
