@@ -72,14 +72,15 @@ $(document).ready( function() {
         SetCookie( "collapse_settings", t_cookie );
     });
 
-    $('#sidebar').on('click', function (event) {
+    $('#sidebar.sidebar-toggle').on('click', function (event) {
+        alert('sidebar clicked');
         var t_id = $(this).attr('id');
         var t_cookie = GetCookie("collapse_settings");
         if (1 == g_collapse_clear) {
             t_cookie = "";
             g_collapse_clear = 0;
         }
-        if( $(this).hasClass( "menu-min" ) ) {
+        if( $(this).parent().hasClass( "menu-min" ) ) {
             t_cookie = t_cookie.replace("|" + t_id + ",1", '');
             t_cookie = t_cookie + "|" + t_id + ",0";
         } else {
