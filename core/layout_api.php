@@ -773,7 +773,6 @@ function layout_sidebar_begin() {
 
     echo '<div id="sidebar" class="sidebar sidebar-fixed responsive compact ' . $t_block_css . '">';
 
-    echo '<div class="space-24"></div>';
     echo '<ul class="nav nav-list">';
 }
 
