@@ -73,7 +73,6 @@ $(document).ready( function() {
     });
 
     $('#sidebar.sidebar-toggle').on('click', function (event) {
-        alert('sidebar clicked');
         var t_id = $(this).attr('id');
         var t_cookie = GetCookie("collapse_settings");
         if (1 == g_collapse_clear) {
