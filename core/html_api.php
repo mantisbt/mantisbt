@@ -149,7 +149,7 @@ function html_rss_link() {
 	global $g_rss_feed_url;
 
 	if( $g_rss_feed_url !== null ) {
-		echo '<link rel="alternate" type="application/rss+xml" title="RSS" href="' . string_attribute( $g_rss_feed_url ) . "\" />\n";
+		echo '<link rel="alternate" type="application/rss+xml" title="RSS" href="' . string_attribute( $g_rss_feed_url ) . '" />' . "\n";
 	}
 }
 
@@ -410,7 +410,7 @@ function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
 
 	$t_url = htmlspecialchars( $t_url );
 
-	echo "\t<meta http-equiv=\"Refresh\" content=\"$p_time;URL=$t_url\" />\n";
+	echo "\t" . '<meta http-equiv="Refresh" content="' . $p_time . ';URL=' . $t_url . '" />' . "\n";
 
 	return true;
 }
@@ -432,8 +432,8 @@ function require_js( $p_script_path ) {
 function html_head_javascript() {
 	if( config_get( 'use_javascript' ) ) {
 		global $g_scripts_included;
-		echo "\t<script type=\"text/javascript\" src=\"" . helper_mantis_url( 'javascript_config.php' ) . '"></script>' . "\n";
-		echo "\t<script type=\"text/javascript\" src=\"" . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
+		echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_config.php' ) . '"></script>' . "\n";
+		echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
 		html_javascript_link( 'jquery-1.9.1.min.js' );
 		html_javascript_link( 'jquery-ui-1.10.0.custom.min.js' );
 		html_javascript_link( 'common.js' );
@@ -649,20 +649,20 @@ function html_footer() {
 		user_update_last_visit( $t_user_id );
 	}
 
-	echo "<div id=\"footer\">\n";
-	echo "\t<hr />\n";
+	echo '<div id="footer">' . "\n";
+	echo '<hr />' . "\n";
 
 	# We don't have a button anymore, so for now we will only show the resized
 	# version of the logo when not on login page.
 	if( !is_page_name( 'login_page' ) ) {
-		echo "\t<div id=\"powered-by-mantisbt-logo\">\n";
+		echo "\t" . '<div id="powered-by-mantisbt-logo">' . "\n";
 		$t_mantisbt_logo_url = helper_mantis_url( 'images/mantis_logo.png' );
-		echo "\t\t<a href=\"http://www.mantisbt.org\"
-			title=\"Mantis Bug Tracker: a free and open source web based bug tracking system.\">
-			<img src=\"$t_mantisbt_logo_url\" width=\"102\" height=\"35\" 
-				alt=\"Powered by Mantis Bug Tracker: a free and open source web based bug tracking system.\" />
-			</a>\n";
-		echo "\t</div>\n";
+		echo "\t\t" . '<a href="http://www.mantisbt.org"
+			title="Mantis Bug Tracker: a free and open source web based bug tracking system.">
+			<img src="' . $t_mantisbt_logo_url . '" width="102" height="35" 
+				alt="Powered by Mantis Bug Tracker: a free and open source web based bug tracking system." />
+			</a>' . "\n";
+		echo "\t" . '</div>' . "\n";
 	}
 
 	# Show MantisBT version and copyright statement
@@ -674,39 +674,39 @@ function html_footer() {
 
 	echo '<address id="mantisbt-copyright">' . "\n";
 	echo '<address id="version">Powered by <a href="http://www.mantisbt.org" title="bug tracking software">MantisBT ' . $t_version_suffix . "</a></address>\n";
-	echo "Copyright &copy;$t_copyright_years MantisBT Team";
+	echo 'Copyright &copy;' . $t_copyright_years . ' MantisBT Team';
 
 	# Show optional user-specified custom copyright statement
 	$t_copyright_statement = config_get( 'copyright_statement' );
 	if( $t_copyright_statement ) {
-		echo "\t<address id=\"user-copyright\">$t_copyright_statement</address>\n";
+		echo "\t" . '<address id="user-copyright">' . $t_copyright_statement . '</address>' . "\n";
 	}
 
-	echo "</address>\n";
+	echo '</address>' . "\n";
 
 	# Show contact information
 	if( !is_page_name( 'login_page' ) ) {
 		$t_webmaster_contact_information = sprintf( lang_get( 'webmaster_contact_information' ), string_html_specialchars( config_get( 'webmaster_email' ) ) );
-		echo "\t<address id=\"webmaster-contact-information\">$t_webmaster_contact_information</address>\n";
+		echo "\t" . '<address id="webmaster-contact-information">' . $t_webmaster_contact_information . '</address>' . "\n";
 	}
 
 	event_signal( 'EVENT_LAYOUT_PAGE_FOOTER' );
 
-	# Print horizontal rule if any debugging stats follow
+	# Print horizontal rule if any debugging statistics follow
 	if( config_get( 'show_timer' ) || config_get( 'show_memory_usage' ) || config_get( 'show_queries_count' ) ) {
-		echo "\t<hr />\n";
+		echo "\t" . '<hr />' . "\n";
 	}
 
 	# Print the page execution time
 	if( config_get( 'show_timer' ) ) {
 		$t_page_execution_time = sprintf( lang_get( 'page_execution_time' ), number_format( microtime( true ) - $g_request_time, 4 ) );
-		echo "\t<p id=\"page-execution-time\">$t_page_execution_time</p>\n";
+		echo "\t" . '<p id="page-execution-time">' . $t_page_execution_time . '</p>' . "\n";
 	}
 
 	# Print the page memory usage
 	if( config_get( 'show_memory_usage' ) ) {
 		$t_page_memory_usage = sprintf( lang_get( 'memory_usage_in_kb' ), number_format( memory_get_peak_usage() / 1024 ) );
-		echo "\t<p id=\"page-memory-usage\">$t_page_memory_usage</p>\n";
+		echo "\t" . '<p id="page-memory-usage">' . $t_page_memory_usage . '</p>' . "\n";
 	}
 
 	# Determine number of unique queries executed
@@ -727,19 +727,19 @@ function html_footer() {
 		}
 
 		$t_total_queries_executed = sprintf( lang_get( 'total_queries_executed' ), $t_total_queries_count );
-		echo "\t<p id=\"total-queries-count\">$t_total_queries_executed</p>\n";
+		echo "\t" . '<p id="total-queries-count">' . $t_total_queries_executed . '</p>' . "\n";
 		if( config_get_global( 'db_log_queries' ) ) {
 			$t_unique_queries_executed = sprintf( lang_get( 'unique_queries_executed' ), $t_unique_queries_count );
-			echo "\t<p id=\"unique-queries-count\">$t_unique_queries_executed</p>\n";
+			echo "\t" . '<p id="unique-queries-count">' . $t_unique_queries_executed . '</p>' . "\n";
 		}
 		$t_total_query_time = sprintf( lang_get( 'total_query_execution_time' ), $t_total_query_execution_time );
-		echo "\t<p id=\"total-query-execution-time\">$t_total_query_time</p>\n";
+		echo "\t" . '<p id="total-query-execution-time">' . $t_total_query_time . '</p>' . "\n";
 	}
 
 	# Print table of log events
 	log_print_to_page();
 
-	echo "</div>\n";
+	echo '</div>' . "\n";
 }
 
 /**
@@ -785,7 +785,7 @@ function prepare_custom_menu_options( $p_config ) {
 		if( access_has_project_level( $t_access_level ) ) {
 			$t_caption = string_html_specialchars( lang_get_defaulted( $t_custom_option[0] ) );
 			$t_link = string_attribute( $t_custom_option[2] );
-			$t_options[] = "<a href=\"$t_link\">$t_caption</a>";
+			$t_options[] = '<a href="' . $t_link . '">' . $t_caption . '</a>';
 		}
 	}
 
@@ -889,13 +889,12 @@ function print_menu() {
 						$t_link = helper_mantis_url( 'manage_proj_page.php' );
 					}
 				}
-				$t_menu_options[] = "<a href=\"$t_link\">" . lang_get( 'manage_link' ) . '</a>';
+				$t_menu_options[] = '<a href="' . $t_link . '">' . lang_get( 'manage_link' ) . '</a>';
 			}
 		}
 
 		# News Page
 		if( news_is_enabled() && access_has_project_level( config_get( 'manage_news_threshold' ) ) ) {
-
 			# Admin can edit news for All Projects (site-wide)
 			if( ALL_PROJECTS != helper_get_current_project() || current_user_is_administrator() ) {
 				$t_menu_options[] = '<a href="' . helper_mantis_url( 'news_menu_page.php">' ) . lang_get( 'edit_news_link' ) . '</a>';
@@ -928,8 +927,8 @@ function print_menu() {
 
 		# Menu items
 		echo '<ul id="menu-items">' . "\n";
-		echo "\t<li>" . implode( $t_menu_options, "</li>\n\t<li>" ) . "</li>\n";
-		echo "</ul>\n";
+		echo "\t" . '<li>' . implode( $t_menu_options, '</li>' . "\n\t" . '<li>' ) . '</li>' . "\n";
+		echo '</ul>' . "\n";
 
 		# Bug Jump form
 		echo '<div id="bug-jump" >';
@@ -941,9 +940,9 @@ function print_menu() {
 		echo '<input type="submit" value="' . lang_get( 'jump' ) . '" />&#160;';
 		echo '</fieldset>';
 		echo '</form>';
-		echo "</div>\n";
+		echo '</div>' . "\n";
 
-		echo "</div>\n";
+		echo '</div>' . "\n";
 	}
 }
 
@@ -1388,7 +1387,7 @@ function html_status_legend() {
 		$t_val = isset( $t_status_names[$t_status] ) ? $t_status_names[$t_status] : $t_status_array[$t_status];
 		$t_status_label = MantisEnum::getLabel( $t_status_enum_string, $t_status );
 
-		echo "<td class=\"small-caption $t_status_label-color\">$t_val</td>";
+		echo '<td class="small-caption ' . $t_status_label . '-color">' . $t_val . '</td>';
 	}
 
 	echo '</tr>';
@@ -1423,7 +1422,7 @@ function html_status_percentage_legend() {
 
 			if( $t_percent > 0 ) {
 				$t_status_label = MantisEnum::getLabel( $t_status_enum_string, $t_status );
-				echo "<td class=\"small-caption-center $t_status_label-color $t_status_label-percentage\">$t_percent%</td>";
+				echo '<td class="small-caption-center ' . $t_status_label . '-color ' . $t_status_label . '-percentage">' . $t_percent . '%</td>';
 			}
 		}
 
@@ -1451,8 +1450,8 @@ function html_button( $p_action, $p_button_text, array $p_fields = array(), $p_m
 		$t_method = 'post';
 	}
 
-	echo "<form method=\"$t_method\" action=\"$p_action\" class=\"action-button\">\n";
-	echo "\t<fieldset>";
+	echo '<form method="' . $t_method . '" action="' . $p_action . '" class="action-button">' . "\n";
+	echo "\t" . '<fieldset>';
 	# Add a CSRF token only when the form is being sent via the POST method
 	if( $t_method == 'post' ) {
 		echo form_security_field( $t_form_name[0] );
@@ -1462,12 +1461,12 @@ function html_button( $p_action, $p_button_text, array $p_fields = array(), $p_m
 		$t_key = string_attribute( $t_key );
 		$t_val = string_attribute( $t_val );
 
-		echo "\t\t<input type=\"hidden\" name=\"$t_key\" value=\"$t_val\" />\n";
+		echo "\t\t" . '<input type="hidden" name="' . $t_key . '" value="' . $t_val . '" />' . "\n";
 	}
 
-	echo "\t\t<input type=\"submit\" class=\"button\" value=\"$p_button_text\" />\n";
-	echo "\t</fieldset>";
-	echo "</form>\n";
+	echo "\t\t" . '<input type="submit" class="button" value="' . $p_button_text . '" />' . "\n";
+	echo "\t" . '</fieldset>';
+	echo '</form>' . "\n";
 }
 
 /**
@@ -1521,22 +1520,22 @@ function html_button_bug_change_status( BugData $p_bug ) {
 		# CSRF protection not required here - form does not result in modifications
 
 		$t_button_text = lang_get( 'bug_status_to_button' );
-		echo "<input type=\"submit\" class=\"button\" value=\"$t_button_text\" />";
+		echo '<input type="submit" class="button" value="' . $t_button_text . '" />';
 
 		echo ' <select name="new_status">';
 
 		# space at beginning of line is important
 		foreach( $t_enum_list as $t_key => $t_val ) {
-			echo "<option value=\"$t_key\" ";
+			echo '<option value="' . $t_key . '" ';
 			check_selected( $t_key, $t_default );
-			echo ">$t_val</option>";
+			echo '>' . $t_val . '</option>';
 		}
 		echo '</select>';
 
 		$t_bug_id = string_attribute( $p_bug->id );
-		echo "<input type=\"hidden\" name=\"id\" value=\"$t_bug_id\" />\n";
+		echo '<input type="hidden" name="id" value="' . $t_bug_id . '" />' . "\n";
 
-		echo "</form>\n";
+		echo '</form>' . "\n";
 	}
 }
 
@@ -1591,7 +1590,7 @@ function html_button_bug_assign_to( BugData $p_bug ) {
 	echo form_security_field( 'bug_update' );
 
 	$t_button_text = lang_get( 'bug_assign_to_button' );
-	echo "<input type=\"submit\" class=\"button\" value=\"$t_button_text\" />";
+	echo '<input type="submit" class="button" value="' . $t_button_text . '" />';
 
 	echo ' <select name="handler_id">';
 
@@ -1629,9 +1628,9 @@ function html_button_bug_assign_to( BugData $p_bug ) {
 	echo '</select>';
 
 	$t_bug_id = string_attribute( $p_bug->id );
-	echo "<input type=\"hidden\" name=\"bug_id\" value=\"$t_bug_id\" />\n";
+	echo '<input type="hidden" name="bug_id" value="' . $t_bug_id . '" />' . "\n";
 
-	echo "</form>\n";
+	echo '</form>' . "\n";
 }
 
 /**

@@ -118,20 +118,20 @@ echo 'Connecting to database... ';
 $t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
 
 if( false == $t_result ) {
-	echo "Failed.\n";
+	echo 'Failed.' . "\n";
 	exit( 1 );
 }
 
-echo "OK\n";
+echo 'OK' . "\n";
 
 $g_db_connected = true; # fake out database access routines used by config_get
 $t_last_update = config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS );
-$lastid = count( $g_upgrade ) - 1;
+$t_last_id = count( $g_upgrade ) - 1;
 $i = $t_last_update + 1;
 $t_count_done = 0;
 
-while( ( $i <= $lastid ) && !$g_failed ) {
-	$dict = NewDataDictionary( $g_db );
+while( ( $i <= $t_last_id ) && !$g_failed ) {
+	$t_dict = NewDataDictionary( $g_db );
 	$t_sql = true;
 	$t_target = $g_upgrade[$i][1][0];
 
@@ -158,27 +158,27 @@ while( ( $i <= $lastid ) && !$g_failed ) {
 		# 0: function to call, 1: function params, 2: function to evaluate before calling upgrade, if false, skip upgrade.
 		if( isset( $g_upgrade[$i][2] ) ) {
 			if( call_user_func_array( $g_upgrade[$i][2][0], $g_upgrade[$i][2][1] ) ) {
-				$t_sqlarray = call_user_func_array( array( $dict, $g_upgrade[$i][0] ), $g_upgrade[$i][1] );
+				$t_sqlarray = call_user_func_array( array( $t_dict, $g_upgrade[$i][0] ), $g_upgrade[$i][1] );
 			} else {
 				$t_sqlarray = array();
 			}
 		} else {
-			$t_sqlarray = call_user_func_array( array( $dict, $g_upgrade[$i][0] ), $g_upgrade[$i][1] );
+			$t_sqlarray = call_user_func_array( array( $t_dict, $g_upgrade[$i][0] ), $g_upgrade[$i][1] );
 		}
 	}
 
 	echo 'Schema ' . $g_upgrade[$i][0] . ' ( ' . $t_target . ' ) ';
 	if( $t_sql ) {
-		$ret = $dict->ExecuteSQLArray( $t_sqlarray, false );
+		$t_ret = $t_dict->ExecuteSQLArray( $t_sqlarray, false );
 	} else {
 		if( isset( $t_sqlarray[1] ) ) {
-			$ret = call_user_func( 'install_' . $t_sqlarray[0], $t_sqlarray[1] );
+			$t_ret = call_user_func( 'install_' . $t_sqlarray[0], $t_sqlarray[1] );
 		} else {
-			$ret = call_user_func( 'install_' . $t_sqlarray[0] );
+			$t_ret = call_user_func( 'install_' . $t_sqlarray[0] );
 		}
 	}
 
-	if( $ret == 2 ) {
+	if( $t_ret == 2 ) {
 		print_test_result( GOOD );
 		config_set( 'database_version', $i );
 	} else {
@@ -189,10 +189,10 @@ while( ( $i <= $lastid ) && !$g_failed ) {
 	$t_count_done++;
 }
 
-echo "$t_count_done schema upgrades executed.\n";
+echo $t_count_done . ' schema upgrades executed.' . "\n";
 
 if( false == $g_failed ) {
-	echo "Done.\n";
+	echo 'Done.' . "\n";
 	exit( 0 );
 }
 

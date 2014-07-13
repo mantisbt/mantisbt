@@ -169,7 +169,7 @@ function process_complex_value( $p_value, $p_trimquotes = false ) {
 		# It's an array - process each element
 		$t_processed = array();
 
-		if( preg_match_all( "/$s_regex_element/", $t_match[1], $t_elements ) ) {
+		if( preg_match_all( '/' . $s_regex_element . '/', $t_match[1], $t_elements ) ) {
 			foreach( $t_elements[0] as $t_key => $t_element ) {
 				if( !trim( $t_element ) ) {
 					# Empty element - skip it

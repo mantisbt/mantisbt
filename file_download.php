@@ -82,11 +82,11 @@ $t_query = '';
 switch( $f_type ) {
 	case 'bug':
 		$t_bug_file_table = db_get_table( 'bug_file' );
-		$t_query = "SELECT * FROM $t_bug_file_table WHERE id=" . db_param();
+		$t_query = 'SELECT * FROM ' . $t_bug_file_table . ' WHERE id=' . db_param();
 		break;
 	case 'doc':
 		$t_project_file_table = db_get_table( 'project_file' );
-		$t_query = "SELECT * FROM $t_project_file_table WHERE id=" . db_param();
+		$t_query = 'SELECT * FROM ' . $t_project_file_table . ' WHERE id=' . db_param();
 		break;
 	default:
 		access_denied();

@@ -117,16 +117,16 @@ function check_pgsql_bool_columns() {
 	$t_where = '';
 	foreach( $t_bool_columns as $t_table_name => $t_columns ) {
 		$t_table = db_get_table( $t_table_name );
-		$t_where .= "table_name = '$t_table' AND column_name IN ( '"
-			. implode( $t_columns, "', '" )
-			. "' ) OR\n";
+		$t_where .= 'table_name = \'' . $t_table . '\' AND column_name IN ( \''
+			. implode( $t_columns, '\', \'' )
+			. '\' ) OR ';
 	}
-	$t_sql = "SELECT table_name, column_name, data_type, column_default, is_nullable
+	$t_sql = 'SELECT table_name, column_name, data_type, column_default, is_nullable
 		FROM information_schema.columns
 		WHERE
-			table_catalog = '$f_database_name' AND
-			data_type <> 'boolean' AND
-			(\n" . rtrim( $t_where, " OR\n" ) . "\n)";
+			table_catalog = \'' . $f_database_name . '\' AND
+			data_type <> \'boolean\' AND
+			(' . rtrim( $t_where, ' OR' ) . ')';
 
 	$t_result = @$g_db->Execute( $t_sql );
 	if( $t_result === false ) {
@@ -172,10 +172,10 @@ function install_category_migrate() {
 	# Disable query logging even if enabled in config, due to possibility of mass spam
 	$t_log_queries = install_set_log_queries();
 
-	$t_query = "SELECT project_id, category, user_id FROM $t_project_category_table ORDER BY project_id, category";
+	$t_query = 'SELECT project_id, category, user_id FROM ' . $t_project_category_table . ' ORDER BY project_id, category';
 	$t_category_result = db_query_bound( $t_query );
 
-	$t_query = "SELECT project_id, category FROM $t_bug_table ORDER BY project_id, category";
+	$t_query = 'SELECT project_id, category FROM ' . $t_bug_table . ' ORDER BY project_id, category';
 	$t_bug_result = db_query_bound( $t_query );
 
 	$t_data = array();
@@ -203,7 +203,7 @@ function install_category_migrate() {
 		foreach( $t_categories as $t_name => $t_user_id ) {
 			$t_lower_name = utf8_strtolower( trim( $t_name ) );
 			if( !isset( $t_inserted[$t_lower_name] ) ) {
-				$t_query = "INSERT INTO $t_category_table ( name, project_id, user_id ) VALUES ( " .
+				$t_query = 'INSERT INTO ' . $t_category_table . ' ( name, project_id, user_id ) VALUES ( ' .
 					db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 				db_query_bound( $t_query, array( $t_name, $t_project_id, $t_user_id ) );
 				$t_category_id = db_insert_id( $t_category_table );
@@ -212,7 +212,7 @@ function install_category_migrate() {
 				$t_category_id = $t_inserted[$t_lower_name];
 			}
 
-			$t_query = "UPDATE $t_bug_table SET category_id=" . db_param() . '
+			$t_query = 'UPDATE ' . $t_bug_table . ' SET category_id=' . db_param() . '
 						WHERE project_id=' . db_param() . ' AND category=' . db_param();
 			db_query_bound( $t_query, array( $t_category_id, $t_project_id, $t_name ) );
 		}
@@ -243,7 +243,7 @@ function install_date_migrate( array $p_data ) {
 	if( $t_date_array ) {
 		$t_old_column = implode( ',', $p_data[2] );
 		$t_cnt_fields = count( $p_data[2] );
-		$t_query = "SELECT $t_id_column, $t_old_column FROM $t_table";
+		$t_query = 'SELECT ' . $t_id_column . ', ' . $t_old_column . ' FROM ' . $t_table;
 
 		$t_first_column = true;
 
@@ -258,7 +258,7 @@ function install_date_migrate( array $p_data ) {
 				$t_query .= ' OR ';
 			}
 
-			$t_query .= "$t_new_column_name = 1";
+			$t_query .= $t_new_column_name. ' = 1';
 		}
 	} else {
 		$t_old_column = $p_data[2];
@@ -266,7 +266,7 @@ function install_date_migrate( array $p_data ) {
 		# The check for timestamp being = 1 is to make sure the field wasn't upgraded
 		# already in a previous run - see bug #12601 for more details.
 		$t_new_column_name = $p_data[3];
-		$t_query = "SELECT $t_id_column, $t_old_column FROM $t_table WHERE $t_new_column_name = 1";
+		$t_query = 'SELECT ' . $t_id_column . ', ' . $t_old_column . ' FROM ' . $t_table . ' WHERE ' . $t_new_column_name . ' = 1';
 	}
 
 	$t_result = db_query_bound( $t_query );
@@ -276,13 +276,13 @@ function install_date_migrate( array $p_data ) {
 		if( $t_date_array ) {
 			$t_pairs = array();
 			foreach( $p_data[3] as $t_var ) {
-				array_push( $t_pairs, "$t_var=" . db_param() ) ;
+				array_push( $t_pairs, $t_var . '=' . db_param() ) ;
 			}
 			$t_new_column = implode( ',', $t_pairs );
 		} else {
 			$t_new_column = $p_data[3] . '=' . db_param();
 		}
-		$t_query = "UPDATE $t_table SET $t_new_column WHERE $t_id_column=" . db_param();
+		$t_query = 'UPDATE ' . $t_table . ' SET ' . $t_new_column . ' WHERE ' . $t_id_column . '=' . db_param();
 
 		while( $t_row = db_fetch_array( $t_result ) ) {
 			$t_id = (int)$t_row[$t_id_column];
@@ -346,10 +346,10 @@ function install_correct_multiselect_custom_fields_db_format() {
 
 	# Ensure multilist and checkbox custom field values have a vertical pipe |
 	# as a prefix and suffix.
-	$t_query = "SELECT v.field_id, v.bug_id, v.value from $t_value_table v
-		LEFT JOIN $t_field_table c
+	$t_query = 'SELECT v.field_id, v.bug_id, v.value from ' . $t_value_table . ' v
+		LEFT JOIN ' . $t_field_table . ' c
 		ON v.field_id = c.id
-		WHERE (c.type = " . CUSTOM_FIELD_TYPE_MULTILIST . ' OR c.type = ' . CUSTOM_FIELD_TYPE_CHECKBOX . ")
+		WHERE (c.type = ' . CUSTOM_FIELD_TYPE_MULTILIST . ' OR c.type = ' . CUSTOM_FIELD_TYPE_CHECKBOX . ")
 			AND v.value != ''
 			AND v.value NOT LIKE '|%|'";
 	$t_result = db_query_bound( $t_query );
@@ -358,18 +358,18 @@ function install_correct_multiselect_custom_fields_db_format() {
 		$c_field_id = (int)$t_row['field_id'];
 		$c_bug_id = (int)$t_row['bug_id'];
 		$c_value = '|' . rtrim( ltrim( $t_row['value'], '|' ), '|' ) . '|';
-		$t_update_query = "UPDATE $t_value_table
-			SET value = '$c_value'
-			WHERE field_id = $c_field_id
-				AND bug_id = $c_bug_id";
+		$t_update_query = 'UPDATE ' . $t_value_table . '
+			SET value = \'' . $c_value . '\'
+			WHERE field_id = ' . $c_field_id . '
+				AND bug_id = ' . $c_bug_id;
 		db_query_bound( $t_update_query );
 	}
 
 	# Remove vertical pipe | prefix and suffix from radio custom field values.
-	$t_query = "SELECT v.field_id, v.bug_id, v.value from $t_value_table v
-		LEFT JOIN $t_field_table c
+	$t_query = 'SELECT v.field_id, v.bug_id, v.value from ' . $t_value_table . ' v
+		LEFT JOIN ' . $t_field_table . ' c
 		ON v.field_id = c.id
-		WHERE c.type = " . CUSTOM_FIELD_TYPE_RADIO . "
+		WHERE c.type = ' . CUSTOM_FIELD_TYPE_RADIO . "
 			AND v.value != ''
 			AND v.value LIKE '|%|'";
 	$t_result = db_query_bound( $t_query );
@@ -378,10 +378,10 @@ function install_correct_multiselect_custom_fields_db_format() {
 		$c_field_id = (int)$t_row['field_id'];
 		$c_bug_id = (int)$t_row['bug_id'];
 		$c_value = rtrim( ltrim( $t_row['value'], '|' ), '|' );
-		$t_update_query = "UPDATE $t_value_table
-			SET value = '$c_value'
-			WHERE field_id = $c_field_id
-				AND bug_id = $c_bug_id";
+		$t_update_query = 'UPDATE ' . $t_value_table . '
+			SET value = \'' . $c_value . '\'
+			WHERE field_id = ' . $c_field_id . '
+				AND bug_id = ' . $c_bug_id;
 		db_query_bound( $t_update_query );
 	}
 
@@ -422,7 +422,7 @@ function install_stored_filter_migrate() {
 	$t_filter_fields['sticky_issues'] = 'sticky';
 
 	$t_filters_table = db_get_table( 'filters' );
-	$t_query = "SELECT * FROM $t_filters_table";
+	$t_query = 'SELECT * FROM ' . $t_filters_table;
 	$t_result = db_query_bound( $t_query );
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_filter_arr = filter_deserialize( $t_row['filter_string'] );
@@ -439,7 +439,7 @@ function install_stored_filter_migrate() {
 		$t_filter_serialized = serialize( $t_filter_arr );
 		$t_filter_string = $t_cookie_version . '#' . $t_filter_serialized;
 
-		$t_update_query = "UPDATE $t_filters_table SET filter_string=" . db_param() . ' WHERE id=' . db_param();
+		$t_update_query = 'UPDATE ' . $t_filters_table . ' SET filter_string=' . db_param() . ' WHERE id=' . db_param();
 		$t_update_result = db_query_bound( $t_update_query, array( $t_filter_string, $t_row['id'] ) );
 	}
 
@@ -477,7 +477,7 @@ function install_update_history_long_custom_fields() {
 
 	# Build list of custom field names longer than 32 chars for reference
 	$t_custom_field_table = db_get_table( 'custom_field' );
-	$t_query = "SELECT name FROM $t_custom_field_table";
+	$t_query = 'SELECT name FROM ' . $t_custom_field_table;
 	$t_result = db_query_bound( $t_query );
 	while( $t_field = db_fetch_array( $t_result ) ) {
 		if( utf8_strlen( $t_field[0] ) > 32 ) {
@@ -501,16 +501,16 @@ function install_update_history_long_custom_fields() {
 	);
 	$t_field_list = '';
 	foreach( $t_standard_fields as $t_field ) {
-		$t_field_list .= "'$t_field', ";
+		$t_field_list .= '\'' . $t_field . '\', ';
 	}
 	$t_field_list = rtrim( $t_field_list, ', ' );
 
 	# Get the list of custom fields from the history table
 	$t_history_table = db_get_table( 'bug_history' );
-	$t_query = "SELECT DISTINCT field_name
-		FROM $t_history_table
-		WHERE type = " . NORMAL_TYPE . "
-		AND   field_name NOT IN ( $t_field_list )";
+	$t_query = 'SELECT DISTINCT field_name
+		FROM ' . $t_history_table . '
+		WHERE type = ' . NORMAL_TYPE . '
+		AND field_name NOT IN ( ' . $t_field_list . ' )';
 	$t_result = db_query_bound( $t_query );
 
 	# For each entry, update the truncated custom field name with its full name
@@ -519,8 +519,8 @@ function install_update_history_long_custom_fields() {
 		# If field name's length is 32, then likely it was truncated so we try to match
 		if( utf8_strlen( $t_field[0] ) == 32 && array_key_exists( $t_field[0], $t_custom_fields ) ) {
 			# Match found, update all history records with this field name
-			$t_update_query = "UPDATE $t_history_table
-				SET field_name = " . db_param() . '
+			$t_update_query = 'UPDATE ' . $t_history_table . '
+				SET field_name = ' . db_param() . '
 				WHERE field_name = ' . db_param();
 			db_query_bound( $t_update_query, array( $t_custom_fields[$t_field[0]], $t_field[0] ) );
 		}

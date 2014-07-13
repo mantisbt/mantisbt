@@ -37,8 +37,7 @@ if( function_exists( 'xdebug_disable' ) ) {
 
 if( !defined( 'T_ML_COMMENT' ) ) {
 	define( 'T_ML_COMMENT', T_COMMENT );
-}
-else {
+} else {
 	define( 'T_DOC_COMMENT', T_ML_COMMENT );
 }
 
@@ -56,8 +55,7 @@ html_page_top();
 # check core language files
 if( function_exists( 'scandir' ) ) {
 	checklangdir( $t_mantis_dir );
-}
-else {
+} else {
 	$t_lang_files = array();
 	foreach( $g_language_choices_arr as $t_lang ) {
 		if( $t_lang == 'auto' ) {
@@ -88,14 +86,13 @@ function checkplugins( $p_path ) {
 
 	$t_plugins = @scandir( $t_path );
 	if( false == $t_plugins ) {
-		print_error( "plugin path $t_path not found or not accessible" );
-	}
-	else {
+		print_error( 'plugin path ' . $t_path . ' not found or not accessible' );
+	} else {
 		foreach( $t_plugins as $t_plugin ) {
 			if( $t_plugin[0] == '.' ) {
 				continue;
 			}
-			echo "<br />Checking language files for plugin $t_plugin:<br />";
+			echo '<br />Checking language files for plugin ' . $t_plugin . ':<br />';
 			checklangdir( $t_path . $t_plugin );
 		}
 	}
@@ -113,27 +110,25 @@ function checklangdir( $p_path, $p_lang_files = null ) {
 
 	if( is_array( $p_lang_files ) ) {
 		$t_lang_files = $p_lang_files;
-	}
-	else {
+	} else {
 		$t_lang_files = @scandir( $t_path );
 	}
 	if( false == $t_lang_files ) {
-		print_error( "language dir $t_path not found or not accessible" );
-	}
-	else {
+		print_error( 'language dir ' . $t_path . ' not found or not accessible' );
+	} else {
 		if( in_array( STRINGS_ENGLISH, $t_lang_files ) ) {
 			echo 'Testing English language file...<br />';
 			flush();
 			checkfile( $t_path, STRINGS_ENGLISH );
 		}
 		# Skipping english language, readme and hidden files
-		foreach( $t_lang_files as $key => $t_lang ) {
+		foreach( $t_lang_files as $t_key => $t_lang ) {
 			if( $t_lang[0] == '.'
 			 || $t_lang == 'langreadme.txt'
 			 || $t_lang == 'README'
 			 || $t_lang == STRINGS_ENGLISH
 			) {
-				unset( $t_lang_files[$key] );
+				unset( $t_lang_files[$t_key] );
 			}
 		}
 		if( !empty( $t_lang_files ) ) {
@@ -155,25 +150,25 @@ function checklangdir( $p_path, $p_lang_files = null ) {
  */
 function checkfile( $p_path, $p_file, $p_quiet = false ) {
 		if( !$p_quiet ) {
-			echo "Testing language file '$p_file' (phase 1)...<br />";
+			echo 'Testing language file \'' . $p_file . '\' (phase 1)...<br />';
 			flush();
 		}
 
-		$file = $p_path . $p_file;
+		$t_file = $p_path . $p_file;
 
 		set_error_handler( 'lang_error_handler' );
-		$t_result = checktoken( $file, ($p_file == STRINGS_ENGLISH ) );
+		$t_result = checktoken( $t_file, ($p_file == STRINGS_ENGLISH ) );
 		restore_error_handler();
 
 		if( !$t_result ) {
-			print_error( "Language file '$p_file' failed at phase 1.", 'FAILED' );
+			print_error( 'Language file \'' . $p_file . '\' failed at phase 1.', 'FAILED' );
 			if( $p_quiet ) {
 				return false;
 			}
 		}
 
 		if( !$p_quiet ) {
-			echo "Testing language file '$p_file' (phase 2)...<br />";
+			echo 'Testing language file \'' . $p_file . '\' (phase 2)...<br />';
 			flush();
 		} else {
 			return true;
@@ -181,20 +176,20 @@ function checkfile( $p_path, $p_file, $p_quiet = false ) {
 
 		set_error_handler( 'lang_error_handler' );
 		ob_start();
-		$t_result = eval( "require_once( '$file' );" );
+		$t_result = eval( 'require_once( \'' . $t_file . '\' );' );
 		$t_data = ob_get_contents();
 		ob_end_clean();
 		restore_error_handler();
 
 		if( $t_result === false ) {
-			print_error( "Language file '$p_file' failed at eval", 'FAILED' );
+			print_error( 'Language file \'' . $p_file . '\' failed at eval', 'FAILED' );
 			if( $p_quiet ) {
 				return false;
 			}
 		}
 
 		if( !empty( $t_data ) ) {
-			print_error( "Language file '$p_file' failed at require_once (data output: " . var_export( $t_data, true ) . ')', 'FAILED' );
+			print_error( 'Language file \'' . $p_file . '\' failed at require_once (data output: ' . var_export( $t_data, true ) . ')', 'FAILED' );
 			if( $p_quiet ) {
 				return false;
 			}
@@ -205,149 +200,149 @@ function checkfile( $p_path, $p_file, $p_quiet = false ) {
 /**
  * Check Language File Tokens
  *
- * @param string  $file Language file to tokenize.
- * @param boolean $base Whether language file is default (aka english).
+ * @param string  $p_file Language file to tokenize.
+ * @param boolean $p_base Whether language file is default (aka english).
  * @return boolean
  */
-function checktoken( $file, $base = false ) {
-	$in_php_code = false;
-	$variables = array();
+function checktoken( $p_file, $p_base = false ) {
+	$t_in_php_code = false;
+	$t_variables = array();
 	static $s_basevariables;
 	$t_current_var = null;
-	$last_token = 0;
-	$set_variable = false;
-	$variablearr = false;
-	$twopartstring = false;
-	$need_end_variable = false;
-	$source = file_get_contents( $file );
-	$tokens = @token_get_all( $source );
-	$expectendarr = false;
-	$settingvariable = false;
+	$t_last_token = 0;
+	$t_set_variable = false;
+	$t_variable_array = false;
+	$t_two_part_string = false;
+	$t_need_end_variable = false;
+	$t_source = file_get_contents( $p_file );
+	$t_tokens = @token_get_all( $t_source );
+	$t_expect_end_array = false;
+	$t_setting_variable = false;
 	$t_pass = true;
 	$t_fatal = false;
-	foreach( $tokens as $token ) {
-		$last_token2 = 0;
-		if( is_string( $token ) ) {
-			switch( $token ) {
+	foreach( $t_tokens as $t_token ) {
+		$t_last_token2 = 0;
+		if( is_string( $t_token ) ) {
+			switch( $t_token ) {
 				case '=':
-					if( $last_token != T_VARIABLE ) {
-						print_error( "'=' sign without variable (line $t_line)" );
+					if( $t_last_token != T_VARIABLE ) {
+						print_error( '\'=\' sign without variable (line ' . $t_line . ')' );
 						$t_pass = false;
 					}
-					$set_variable = true;
+					$t_set_variable = true;
 					break;
 				case '[':
-					if( $last_token != T_VARIABLE ) {
+					if( $t_last_token != T_VARIABLE ) {
 						$t_pass = false;
 					}
-					$variablearr = true;
+					$t_variable_array = true;
 					break;
 				case ']':
-					if( !$expectendarr ) {
+					if( !$t_expect_end_array ) {
 						$t_pass = false;
 					}
-					$expectendarr = false;
-					$variablearr = false;
+					$t_expect_end_array = false;
+					$t_variable_array = false;
 					break;
 				case ';':
-					if( !$need_end_variable ) {
-						print_error( "function separator found at unexpected location (line $t_line)" );
+					if( !$t_need_end_variable ) {
+						print_error( 'function separator found at unexpected location (line ' . $t_line . ')' );
 						$t_pass = false;
 					}
-					$need_end_variable = false;
+					$t_need_end_variable = false;
 					break;
 				case '.':
-					if( $last_token == T_CONSTANT_ENCAPSED_STRING ) {
-						$twopartstring = true;
+					if( $t_last_token == T_CONSTANT_ENCAPSED_STRING ) {
+						$t_two_part_string = true;
 					} else {
-						print_error( "string concatenation found at unexpected location (line $t_line)" );
+						print_error( 'string concatenation found at unexpected location (line ' . $t_line . ')' );
 						$t_pass = false;
 					}
 					break;
 				default:
-					print_error( "unknown token $token" );
+					print_error( 'unknown token ' . $t_token );
 					$t_pass = false;
 					break;
 			}
 		} else {
 			# token array
-			list( $id, $text, $t_line ) = $token;
+			list( $t_id, $t_text, $t_line ) = $t_token;
 
-			if( $id == T_WHITESPACE || $id == T_COMMENT || $id == T_DOC_COMMENT || $id == T_ML_COMMENT ) {
+			if( $t_id == T_WHITESPACE || $t_id == T_COMMENT || $t_id == T_DOC_COMMENT || $t_id == T_ML_COMMENT ) {
 				continue;
 			}
-			if( $need_end_variable ) {
-				if( $twopartstring && $id == T_CONSTANT_ENCAPSED_STRING ) {
-					$twopartstring = false;
+			if( $t_need_end_variable ) {
+				if( $t_two_part_string && $t_id == T_CONSTANT_ENCAPSED_STRING ) {
+					$t_two_part_string = false;
 					continue;
 				}
-				if( $settingvariable && $id == T_STRING ) {
-					$last_token = T_VARIABLE;
-					$expectendarr = true;
+				if( $t_setting_variable && $t_id == T_STRING ) {
+					$t_last_token = T_VARIABLE;
+					$t_expect_end_array = true;
 					continue;
 				}
 
-				print_error( "token# $id: " . token_name( $id ) . " = $text (line $t_line)" );
+				print_error( 'token# ' . $t_id . ': ' . token_name( $t_id ) . ' = ' . $t_text . ' (line ' . $t_line . ')' );
 				$t_pass = false;
 			}
 
-			switch( $id ) {
+			switch( $t_id ) {
 				case T_OPEN_TAG:
-					$in_php_code = true;
+					$t_in_php_code = true;
 					break;
 				case T_CLOSE_TAG:
-					$in_php_code = false;
+					$t_in_php_code = false;
 					break;
 				case T_INLINE_HTML:
-					print_error( "Whitespace in language file outside of PHP code block (line $t_line)" );
+					print_error( 'Whitespace in language file outside of PHP code block (line ' . $t_line . ')' );
 					$t_pass = false;
 					break;
 				case T_VARIABLE:
-					if( $set_variable && $t_current_var != null ) {
-						$need_end_variable = true;
-						$settingvariable = true;
+					if( $t_set_variable && $t_current_var != null ) {
+						$t_need_end_variable = true;
+						$t_setting_variable = true;
 						$t_current_var = null;
 						break;
 					}
-					$t_current_var = $text;
+					$t_current_var = $t_text;
 					break;
 				case T_STRING:
-					if( $variablearr ) {
-						$t_current_var .= $text;
-						if( !defined( $text ) ) {
-							print_error( "undefined constant: $text (line $t_line)" );
+					if( $t_variable_array ) {
+						$t_current_var .= $t_text;
+						if( !defined( $t_text ) ) {
+							print_error( 'undefined constant: ' . $t_text . ' (line ' . $t_line . ')' );
 						}
 					} else {
-						print_error( "T_STRING found at unexpected location (line $t_line)" );
+						print_error( 'T_STRING found at unexpected location (line ' . $t_line . ')' );
 						$t_pass = false;
 					}
 					if( strpos( $t_current_var, "\n" ) !== false ) {
-						print_error( "NEW LINE in string: $id " . token_name( $id ) . " = $text (line $t_line)", 'PARSER' );
+						print_error( 'NEW LINE in string: ' . $t_id . ' ' . token_name( $t_id ) . ' = ' . $t_text . ' (line ' . $t_line . ')', 'PARSER' );
 						$t_pass = false;
 						$t_fatal = true;
 					}
-					$last_token2 = T_VARIABLE;
-					$expectendarr = true;
+					$t_last_token2 = T_VARIABLE;
+					$t_expect_end_array = true;
 					break;
 				case T_CONSTANT_ENCAPSED_STRING:
-					if( $token[1][0] != '\'' ) {
-							print_error( "Language strings should be single-quoted (line $t_line)" );
+					if( $t_token[1][0] != '\'' ) {
+							print_error( 'Language strings should be single-quoted (line ' . $t_line . ')' );
 					}
-					if( $variablearr ) {
-						$t_current_var .= $text;
-						$last_token2 = T_VARIABLE;
-						$expectendarr = true;
+					if( $t_variable_array ) {
+						$t_current_var .= $t_text;
+						$t_last_token2 = T_VARIABLE;
+						$t_expect_end_array = true;
 						break;
 					}
 
-					if( $last_token == T_VARIABLE && $set_variable && $t_current_var != null ) {
-						if( isset( $variables[$t_current_var] ) ) {
-							print_error( "duplicate language string ($t_current_var ) (line $t_line)" );
+					if( $t_last_token == T_VARIABLE && $t_set_variable && $t_current_var != null ) {
+						if( isset( $t_variables[$t_current_var] ) ) {
+							print_error( 'duplicate language string (' . $t_current_var . ' ) (line ' . $t_line . ')' );
 						} else {
-							$variables[$t_current_var] = $text;
+							$t_variables[$t_current_var] = $t_text;
 						}
 
-						if( $base ) {
+						if( $p_base ) {
 							# english
 							#if( isset( $s_basevariables[$t_current_var] ) ) {
 							#	print_error( "WARN: english string redefined - plugin? $t_current_var" );
@@ -355,7 +350,7 @@ function checktoken( $file, $base = false ) {
 							$s_basevariables[$t_current_var] = true;
 						} else {
 							if( !isset( $s_basevariables[$t_current_var] ) ) {
-								print_error( "'$t_current_var' is not defined in the English language file", 'WARNING' );
+								print_error( '\'' . $t_current_var . '\' is not defined in the English language file', 'WARNING' );
 							#} else {
 							#  missing translation
 							}
@@ -363,22 +358,22 @@ function checktoken( $file, $base = false ) {
 
 					}
 					if( strpos( $t_current_var, "\n" ) !== false ) {
-						print_error( "NEW LINE in string: $id " . token_name( $id ) . " = $text (line $t_line)", 'PARSER' );
+						print_error( 'NEW LINE in string: ' . $t_id . ' ' . token_name( $t_id ) . ' = ' . $t_text . ' (line ' . $t_line . ')', 'PARSER' );
 						$t_pass = false;
 						$t_fatal = true;
 					}
 					$t_current_var = null;
-					$need_end_variable = true;
+					$t_need_end_variable = true;
 					break;
 				default:
-					print_error( "$id " . token_name( $id ) . " = $text (line $t_line)", 'PARSER' );
+					print_error( $t_id . ' ' . token_name( $t_id ) . ' = ' . $t_text . ' (line ' . $t_line . ')', 'PARSER' );
 					$t_pass = false;
 					break;
 			}
 
-			$last_token = $id;
-			if( $last_token2 > 0 ) {
-				$last_token = $last_token2;
+			$t_last_token = $t_id;
+			if( $t_last_token2 > 0 ) {
+				$t_last_token = $t_last_token2;
 			}
 		}
 
@@ -411,7 +406,7 @@ function lang_error_handler( $p_type, $p_error, $p_file, $p_line, $p_context ) {
  * @return void
  */
 function print_error( $p_string, $p_type = 'ERROR' ) {
-	echo '<p class="error-msg">', "$p_type: $p_string", '</p>';
+	echo '<p class="error-msg">', $p_type . ': ' . $p_string, '</p>';
 }
 
 html_page_bottom();

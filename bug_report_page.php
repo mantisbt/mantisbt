@@ -224,9 +224,14 @@ html_robots_noindex();
 html_page_top( lang_get( 'report_bug_link' ) );
 
 print_recently_visited();
+
+$t_form_encoding = '';
+if( $t_show_attachments ) {
+	$t_form_encoding = 'enctype="multipart/form-data"';
+}
 ?>
 <br />
-<form name="report_bug_form" method="post" <?php if( $t_show_attachments ) { echo 'enctype="multipart/form-data"'; } ?> action="bug_report.php">
+<form name="report_bug_form" method="post" <?php echo $t_form_encoding; ?> action="bug_report.php">
 <?php echo form_security_field( 'bug_report' ) ?>
 <div class="table-container">
 <table cellspacing="1">
@@ -479,16 +484,16 @@ print_recently_visited();
 		<td>
 			<select <?php echo helper_get_tab_index() ?> name="status">
 			<?php
-			$resolution_options = get_status_option_list(
+			$t_resolution_options = get_status_option_list(
 				access_get_project_level( $t_project_id ),
 				config_get( 'bug_submit_status' ),
 				true,
 				ON == config_get( 'allow_reporter_close' ),
 				$t_project_id );
-			foreach ( $resolution_options as $key => $value ) {
+			foreach ( $t_resolution_options as $t_key => $t_value ) {
 			?>
-				<option value="<?php echo $key ?>" <?php check_selected( $key, config_get( 'bug_submit_status' ) ); ?> >
-					<?php echo $value ?>
+				<option value="<?php echo $t_key ?>" <?php check_selected( $t_key, config_get( 'bug_submit_status' ) ); ?> >
+					<?php echo $t_value ?>
 				</option>
 			<?php } ?>
 			</select>
@@ -575,10 +580,14 @@ print_recently_visited();
 ?>
 	<tr>
 		<th class="category">
-			<?php if( $t_def['require_report'] ) {?><span class="required">*</span><?php } ?>
+			<?php if( $t_def['require_report'] ) { ?>
+				<span class="required">*</span>
+			<?php } ?>
 			<?php if( $t_def['type'] != CUSTOM_FIELD_TYPE_RADIO && $t_def['type'] != CUSTOM_FIELD_TYPE_CHECKBOX ) { ?>
-			<label for="custom_field_<?php echo string_attribute( $t_def['id'] ) ?>"><?php echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?></label>
-			<?php } else { echo string_display( lang_get_defaulted( $t_def['name'] ) ); } ?>
+				<label for="custom_field_<?php echo string_attribute( $t_def['id'] ) ?>"><?php echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?></label>
+			<?php } else {
+				echo string_display( lang_get_defaulted( $t_def['name'] ) );
+			} ?>
 		</th>
 		<td>
 			<?php print_custom_field_input( $t_def, ( $f_master_bug_id === 0 ) ? null : $f_master_bug_id ) ?>

@@ -287,7 +287,7 @@ function version_update( VersionData $p_version_info ) {
 		$t_project_list = implode( ',', $t_project_list );
 
 		$t_query = 'UPDATE ' . $t_bug_table . ' SET version=' . db_param() .
-				 " WHERE ( project_id IN ( $t_project_list ) ) AND ( version=" . db_param() . ')';
+				 ' WHERE ( project_id IN ( ' . $t_project_list . ' ) ) AND ( version=' . db_param() . ')';
 		db_query_bound( $t_query, array( $c_version_name, $c_old_version_name ) );
 
 		$t_query = 'UPDATE ' . $t_bug_table . ' SET fixed_in_version=' . db_param() . '

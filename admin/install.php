@@ -78,9 +78,9 @@ function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
  * @return void
  */
 function print_test( $p_test_description, $p_result, $p_hard_fail = true, $p_message = '' ) {
-	echo "\n<tr><td bgcolor=\"#ffffff\">$p_test_description</td>";
+	echo '<tr><td bgcolor="#ffffff">' . $p_test_description . '</td>';
 	print_test_result( $p_result, $p_hard_fail, $p_message );
-	echo "</tr>\n";
+	echo '</tr>' . "\n";
 }
 
 # install_state
@@ -625,7 +625,7 @@ if( !$g_database_upgrade ) {
 	);
 	foreach( $t_prefix_defaults[$t_prefix_type] as $t_key => $t_value ) {
 		echo "<tr>\n\t<td>\n";
-		echo "\t\t${t_prefix_labels[$t_key]}\n";
+		echo "\t\t" . $t_prefix_labels[$t_key] . "\n";
 		echo "\t</td>\n\t<td>\n\t\t";
 		echo '<input id="' . $t_key . '" name="' . $t_key . '" type="textbox" value="' . $f_db_table_prefix . '">';
 		echo "\n\t</td>\n</tr>\n\n";
@@ -731,8 +731,8 @@ if( 3 == $t_install_state ) {
 				}
 			} else {
 				$t_sqlarray = $t_dict->CreateDatabase( $f_database_name, array( 'mysql' => 'DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci' ) );
-				$ret = $t_dict->ExecuteSQLArray( $t_sqlarray, false );
-				if( $ret == 2 ) {
+				$t_ret = $t_dict->ExecuteSQLArray( $t_sqlarray, false );
+				if( $t_ret == 2 ) {
 					print_test_result( GOOD );
 					$t_db_open = true;
 				} else {
@@ -806,7 +806,7 @@ if( 3 == $t_install_state ) {
 			# fake out database access routines used by config_get
 		}
 		$t_last_update = config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS );
-		$lastid = count( $g_upgrade ) - 1;
+		$t_last_id = count( $g_upgrade ) - 1;
 		$i = $t_last_update + 1;
 		if( $f_log_queries ) {
 			echo '<tr><td bgcolor="#ffffff" col_span="2"> Database Creation Suppressed, SQL Queries follow <pre>';
@@ -857,9 +857,9 @@ if( 3 == $t_install_state ) {
 					$t_default = is_null( $v_column_default ) ? 'NULL' : $v_column_default;
 					$t_sqlarray = $t_dict->AlterColumnSQL(
 						$v_table_name,
-						"$v_column_name L $t_null DEFAULT $t_default" );
+						$v_column_name . ' L ' . $t_null . ' DEFAULT ' . $t_default );
 					print_test(
-						"Converting column $v_table_name.$v_column_name to BOOLEAN",
+						'Converting column ' . $v_table_name . '.' . $v_column_name . ' to BOOLEAN',
 						2 == $t_dict->ExecuteSQLArray( $t_sqlarray, false ),
 						true,
 						print_r( $t_sqlarray, true ) );
@@ -872,7 +872,7 @@ if( 3 == $t_install_state ) {
 		}
 		# End of special processing for specific schema versions
 
-		while( ( $i <= $lastid ) && !$g_failed ) {
+		while( ( $i <= $t_last_id ) && !$g_failed ) {
 			if( !$f_log_queries ) {
 				echo '<tr><td bgcolor="#ffffff">';
 			}
@@ -924,43 +924,43 @@ if( 3 == $t_install_state ) {
 			}
 			if( $f_log_queries ) {
 				if( $t_sql ) {
-					foreach( $t_sqlarray as $sql ) {
+					foreach( $t_sqlarray as $t_sql ) {
 						# "CREATE OR REPLACE TRIGGER" statements must end with "END;\n/" for Oracle sqlplus
-						if( $f_db_type == 'oci8' && stripos( $sql, 'CREATE OR REPLACE TRIGGER' ) === 0 ) {
+						if( $f_db_type == 'oci8' && stripos( $t_sql, 'CREATE OR REPLACE TRIGGER' ) === 0 ) {
 							$t_sql_end = PHP_EOL . '/';
 						} else {
 							$t_sql_end = ';';
 						}
-						echo htmlentities( $sql ) . $t_sql_end . PHP_EOL . PHP_EOL;
+						echo htmlentities( $t_sql ) . $t_sql_end . PHP_EOL . PHP_EOL;
 					}
 				}
 			} else {
-				echo "Schema step $i: ";
+				echo 'Schema step ' . $i . ': ';
 				if( is_null( $g_upgrade[$i][0] ) ) {
 					echo 'No operation';
-					$ret = 2;
+					$t_ret = 2;
 				} else {
-					echo $g_upgrade[$i][0] . " ( $t_target )";
+					echo $g_upgrade[$i][0] . ' ( ' . $t_target . ' )';
 					if( $t_sql ) {
-						$ret = $t_dict->ExecuteSQLArray( $t_sqlarray, false );
+						$t_ret = $t_dict->ExecuteSQLArray( $t_sqlarray, false );
 					} else {
 						if( isset( $t_sqlarray[1] ) ) {
-							$ret = call_user_func( 'install_' . $t_sqlarray[0], $t_sqlarray[1] );
+							$t_ret = call_user_func( 'install_' . $t_sqlarray[0], $t_sqlarray[1] );
 						} else {
-							$ret = call_user_func( 'install_' . $t_sqlarray[0] );
+							$t_ret = call_user_func( 'install_' . $t_sqlarray[0] );
 						}
 					}
 				}
 				echo '</td>';
-				if( $ret == 2 ) {
+				if( $t_ret == 2 ) {
 					print_test_result( GOOD );
 					config_set( 'database_version', $i );
 				} else {
-					$all_sql = '';
-					foreach ( $t_sqlarray as $single_sql ) {
-						$all_sql .= $single_sql . '<br />';
+					$t_all_sql = '';
+					foreach ( $t_sqlarray as $t_single_sql ) {
+						$t_all_sql .= $t_single_sql . '<br />';
 					}
-					print_test_result( BAD, true, $all_sql  . $g_db->ErrorMsg() );
+					print_test_result( BAD, true, $t_all_sql  . $g_db->ErrorMsg() );
 				}
 				echo '</tr>';
 			}
@@ -968,7 +968,7 @@ if( 3 == $t_install_state ) {
 		}
 		if( $f_log_queries ) {
 			# add a query to set the database version
-			echo 'INSERT INTO ' . db_get_table( 'config' ) . ' ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'' . $lastid . '\', 1, 90, \'database_version\', 0, 0 );' . PHP_EOL;
+			echo 'INSERT INTO ' . db_get_table( 'config' ) . ' ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'' . $t_last_id . '\', 1, 90, \'database_version\', 0, 0 );' . PHP_EOL;
 			echo '</pre><br /><p style="color:red">Your database has not been created yet. Please create the database, then install the tables and data using the information above before proceeding.</p></td></tr>';
 		}
 	}
@@ -1046,15 +1046,15 @@ if( 5 == $t_install_state ) {
 	}
 
 	$t_config = '<?php' . PHP_EOL
-		. "\$g_hostname               = '$f_hostname';" . PHP_EOL
-		. "\$g_db_type                = '$f_db_type';" . PHP_EOL
-		. "\$g_database_name          = '" . addslashes( $f_database_name ) . "';" . PHP_EOL
-		. "\$g_db_username            = '" . addslashes( $f_db_username ) . "';" . PHP_EOL
-		. "\$g_db_password            = '" . addslashes( $f_db_password ) . "';" . PHP_EOL;
+		. '$g_hostname               = \'' . $f_hostname . '\';' . PHP_EOL
+		. '$g_db_type                = \'' . $f_db_type . '\';' . PHP_EOL
+		. '$g_database_name          = \'' . addslashes( $f_database_name ) . '\';' . PHP_EOL
+		. '$g_db_username            = \'' . addslashes( $f_db_username ) . '\';' . PHP_EOL
+		. '$g_db_password            = \'' . addslashes( $f_db_password ) . '\';' . PHP_EOL;
 
 	switch( $f_db_type ) {
 		case 'db2':
-			$t_config .=  "\$g_db_schema              = '$f_db_schema';" . PHP_EOL;
+			$t_config .=  '$g_db_schema              = \'' . $f_db_schema . '\';' . PHP_EOL;
 			break;
 		default:
 			break;
@@ -1066,7 +1066,7 @@ if( 5 == $t_install_state ) {
 	foreach( $t_prefix_defaults['other'] as $t_key => $t_value ) {
 		$t_new_value = ${'f_' . $t_key};
 		if( $t_new_value != $t_value ) {
-			$t_config .= '$g_' . str_pad( $t_key, 25 ) . "= '" . ${'f_' . $t_key} . "';" . PHP_EOL;
+			$t_config .= '$g_' . str_pad( $t_key, 25 ) . '= \'' . ${'f_' . $t_key} . '\';' . PHP_EOL;
 			$t_insert_line = true;
 		}
 	}
@@ -1075,16 +1075,16 @@ if( 5 == $t_install_state ) {
 	}
 
 	$t_config .=
-		  "\$g_default_timezone       = '$f_timezone';" . PHP_EOL
+		  '$g_default_timezone       = \'' . $f_timezone . '\';' . PHP_EOL
 		. PHP_EOL
 		. "\$g_crypto_master_salt     = '" . addslashes( $t_crypto_master_salt ) . "';" . PHP_EOL;
 
 	$t_write_failed = true;
 
 	if( !$t_config_exists ) {
-		if( $fd = @fopen( $t_config_filename, 'w' ) ) {
-			fwrite( $fd, $t_config );
-			fclose( $fd );
+		if( $t_fd = @fopen( $t_config_filename, 'w' ) ) {
+			fwrite( $t_fd, $t_config );
+			fclose( $t_fd );
 		}
 
 		if( file_exists( $t_config_filename ) ) {
@@ -1175,7 +1175,7 @@ if( 6 == $t_install_state ) {
 	if( $t_result == true ) {
 		print_test_result( GOOD );
 	} else {
-		print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . db_error_msg() . ' )' );
+		print_test_result( BAD, false, 'Database user does not have access to the database ( ' . db_error_msg() . ' )' );
 	}
 
 	if( $f_db_type == 'db2' ) {
@@ -1192,13 +1192,13 @@ if( 6 == $t_install_state ) {
 	</td>
 	<?php
 		$t_mantis_config_table = db_get_table( 'config' );
-	$t_query = "SELECT COUNT(*) FROM $t_mantis_config_table";
+	$t_query = 'SELECT COUNT(*) FROM ' . $t_mantis_config_table;
 	$t_result = @$g_db->Execute( $t_query );
 
 	if( $t_result != false ) {
 		print_test_result( GOOD );
 	} else {
-		print_test_result( BAD, true, 'Database user doesn\'t have SELECT access to the database ( ' . db_error_msg() . ' )' );
+		print_test_result( BAD, true, 'Database user does not have SELECT access to the database ( ' . db_error_msg() . ' )' );
 	}
 	?>
 </tr>
@@ -1207,13 +1207,13 @@ if( 6 == $t_install_state ) {
 		checking ability to INSERT records
 	</td>
 	<?php
-		$t_query = "INSERT INTO $t_mantis_config_table ( value, type, access_reqd, config_id, project_id, user_id ) VALUES ('test', 1, 90, 'database_test', 20, 0 )";
+		$t_query = 'INSERT INTO ' . $t_mantis_config_table . ' ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'test\', 1, 90, \'database_test\', 20, 0 )';
 	$t_result = @$g_db->Execute( $t_query );
 
 	if( $t_result != false ) {
 		print_test_result( GOOD );
 	} else {
-		print_test_result( BAD, true, 'Database user doesn\'t have INSERT access to the database ( ' . db_error_msg() . ' )' );
+		print_test_result( BAD, true, 'Database user does not have INSERT access to the database ( ' . db_error_msg() . ' )' );
 	}
 	?>
 </tr>
@@ -1222,13 +1222,13 @@ if( 6 == $t_install_state ) {
 		checking ability to UPDATE records
 	</td>
 	<?php
-		$t_query = "UPDATE $t_mantis_config_table SET value='test_update' WHERE config_id='database_test'";
+		$t_query = 'UPDATE ' . $t_mantis_config_table . ' SET value=\'test_update\' WHERE config_id=\'database_test\'';
 	$t_result = @$g_db->Execute( $t_query );
 
 	if( $t_result != false ) {
 		print_test_result( GOOD );
 	} else {
-		print_test_result( BAD, true, 'Database user doesn\'t have UPDATE access to the database ( ' . db_error_msg() . ' )' );
+		print_test_result( BAD, true, 'Database user does not have UPDATE access to the database ( ' . db_error_msg() . ' )' );
 	}
 	?>
 </tr>
@@ -1237,13 +1237,13 @@ if( 6 == $t_install_state ) {
 		checking ability to DELETE records
 	</td>
 	<?php
-		$t_query = "DELETE FROM $t_mantis_config_table WHERE config_id='database_test'";
+		$t_query = 'DELETE FROM ' . $t_mantis_config_table . ' WHERE config_id=\'database_test\'';
 	$t_result = @$g_db->Execute( $t_query );
 
 	if( $t_result != false ) {
 		print_test_result( GOOD );
 	} else {
-		print_test_result( BAD, true, 'Database user doesn\'t have DELETE access to the database ( ' . db_error_msg() . ' )' );
+		print_test_result( BAD, true, 'Database user does not have DELETE access to the database ( ' . db_error_msg() . ' )' );
 	}
 	?>
 </tr>

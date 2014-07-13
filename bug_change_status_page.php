@@ -88,11 +88,9 @@ $t_current_user_id = auth_get_current_user_id();
 # Ensure user has proper access level before proceeding
 if( $f_new_status == $t_reopen && $f_reopen_flag ) {
 	access_ensure_can_reopen_bug( $t_bug, $t_current_user_id );
-}
-else if( $f_new_status == $t_closed ) {
+} else if( $f_new_status == $t_closed ) {
 	access_ensure_can_close_bug( $t_bug, $t_current_user_id );
-}
-else if( bug_is_readonly( $f_bug_id )
+} else if( bug_is_readonly( $f_bug_id )
 	|| !access_has_bug_level( access_get_status_threshold( $f_new_status, $t_bug->project_id ), $f_bug_id, $t_current_user_id ) ) {
 	access_denied();
 }
@@ -129,7 +127,7 @@ if( config_get( 'bug_assigned_status' ) == $f_new_status ) {
 	}
 }
 
-$t_status_label = str_replace( " ", "_", MantisEnum::getLabel( config_get( 'status_enum_string' ), $f_new_status ) );
+$t_status_label = str_replace( ' ', '_', MantisEnum::getLabel( config_get( 'status_enum_string' ), $f_new_status ) );
 
 html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 
@@ -143,7 +141,6 @@ print_recently_visited();
 
 	<?php echo form_security_field( 'bug_update' ) ?>
 	<table>
-
 		<thead>
 			<!-- Title -->
 			<tr>
@@ -154,11 +151,10 @@ print_recently_visited();
 					<?php echo lang_get( $t_status_label . '_bug_title' ) ?>
 				</td>
 			</tr>
-
 <?php
 	if( $f_new_status >= $t_resolved ) {
 		if( relationship_can_resolve_bug( $f_bug_id ) == false ) {
-			echo "<tr><td colspan=\"2\">" . lang_get( 'relationship_warning_blocking_bugs_not_resolved_2' ) . "</td></tr>";
+			echo '<tr><td colspan="2">' . lang_get( 'relationship_warning_blocking_bugs_not_resolved_2' ) . '</td></tr>';
 		}
 	}
 ?>
@@ -233,7 +229,7 @@ if( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get(
 <?php if( $t_can_update_due_date ) {
 	$t_date_to_display = '';
 	if( !date_is_null( $t_bug->due_date ) ) {
-			$t_date_to_display = date( config_get( 'calendar_date_format' ), $t_bug->due_date );
+		$t_date_to_display = date( config_get( 'calendar_date_format' ), $t_bug->due_date );
 	}
 ?>
 <!-- Due date -->
@@ -242,7 +238,7 @@ if( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get(
 					<?php print_documentation_link( 'due_date' ) ?>
 				</th>
 				<td>
-					<?php echo "<input " . helper_get_tab_index() . " type=\"text\" id=\"due_date\" name=\"due_date\" class=\"datetime\" size=\"20\" maxlength=\"16\" value=\"" . $t_date_to_display . "\" />" ?>
+					<?php echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetime" size="20" maxlength="16" value="' . $t_date_to_display . '" />' ?>
 				</td>
 			</tr>
 <?php } ?>
@@ -254,13 +250,12 @@ if( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get(
  * this page will show required custom fields in update mode, or
  *  display or required fields on resolve or close
  */
-$t_custom_status_label = "update"; # Don't show custom fields by default
-if( ( $f_new_status == $t_resolved ) &&
-			( $f_new_status < $t_closed ) ) {
-	$t_custom_status_label = "resolved";
+$t_custom_status_label = 'update'; # Don't show custom fields by default
+if( ( $f_new_status == $t_resolved ) && ( $f_new_status < $t_closed ) ) {
+	$t_custom_status_label = 'resolved';
 }
 if( $t_closed == $f_new_status ) {
-	$t_custom_status_label = "closed";
+	$t_custom_status_label = 'closed';
 }
 
 $t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug->project_id );
@@ -270,17 +265,21 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 	$t_display = $t_def['display_' . $t_custom_status_label];
 	$t_require = $t_def['require_' . $t_custom_status_label];
 
-	if( ( "update" == $t_custom_status_label ) && ( !$t_require ) ) {
+	if( ( 'update' == $t_custom_status_label ) && ( !$t_require ) ) {
 		continue;
 	}
-	if( in_array( $t_custom_status_label, array( "resolved", "closed" ) ) && !( $t_display || $t_require ) ) {
+	if( in_array( $t_custom_status_label, array( 'resolved', 'closed' ) ) && !( $t_display || $t_require ) ) {
 		continue;
 	}
 	if( custom_field_has_write_access( $t_id, $f_bug_id ) ) {
 ?>
 			<tr>
 				<th class="category">
-					<?php if( $t_require ) {?><span class="required">*</span><?php } echo lang_get_defaulted( $t_def['name'] ) ?>
+					<?php if( $t_require ) { ?>
+						<span class="required">*</span>
+					<?php }
+					echo lang_get_defaulted( $t_def['name'] )
+					?>
 				</th>
 				<td>
 					<?php
@@ -289,8 +288,8 @@ foreach( $t_related_custom_field_ids as $t_id ) {
 				</td>
 			</tr>
 <?php
-	} #  custom_field_has_write_access( $t_id, $f_bug_id ) )
-	else if( custom_field_has_read_access( $t_id, $f_bug_id ) ) {
+	} else if( custom_field_has_read_access( $t_id, $f_bug_id ) ) {
+		#  custom_field_has_write_access( $t_id, $f_bug_id ) )
 ?>
 			<tr>
 				<th class="category">
@@ -328,15 +327,12 @@ if( ( $f_new_status >= $t_resolved ) ) {
 }
 ?>
 <?php event_signal( 'EVENT_UPDATE_BUG_STATUS_FORM', array( $f_bug_id ) ); ?>
-<?php
-if( ON == $f_reopen_flag ) {
-?>
+<?php if( ON == $f_reopen_flag ) { ?>
 <!-- Bug was re-opened -->
 <?php
-	printf( "	<input type=\"hidden\" name=\"resolution\" value=\"%s\" />\n", config_get( 'bug_reopen_resolution' ) );
+	printf( '	<input type="hidden" name="resolution" value="%s" />' . "\n", config_get( 'bug_reopen_resolution' ) );
 }
 ?>
-
 			<!-- Bugnote -->
 			<tr id="bug-change-status-note">
 				<th class="category">
@@ -368,8 +364,8 @@ if( ON == $f_reopen_flag ) {
 <?php } ?>
 
 <?php if( config_get( 'time_tracking_enabled' ) ) { ?>
-<?php if( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>
-<?php if( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $f_bug_id ) ) { ?>
+<?php 	if( access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id ) ) { ?>
+<?php 		if( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $f_bug_id ) ) { ?>
 			<tr>
 				<th class="category">
 					<?php echo lang_get( 'time_tracking' ) ?>
@@ -378,8 +374,8 @@ if( ON == $f_reopen_flag ) {
 					<input type="text" name="time_tracking" size="5" placeholder="hh:mm" />
 				</td>
 			</tr>
-<?php } ?>
-<?php } ?>
+<?php 		} ?>
+<?php 	} ?>
 <?php } ?>
 
 <?php event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $f_bug_id ) ); ?>
@@ -390,9 +386,7 @@ if( ON == $f_reopen_flag ) {
 					<input type="submit" class="button" value="<?php echo lang_get( $t_status_label . '_bug_button' ) ?>" />
 				</td>
 			</tr>
-
 		</tbody>
-
 	</table>
 </form>
 

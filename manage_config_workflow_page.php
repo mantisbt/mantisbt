@@ -63,8 +63,8 @@ $t_project = helper_get_current_project();
 $g_can_change_workflow = ( $g_access >= config_get_access( 'status_enum_workflow' ) );
 $g_can_change_flags = $g_can_change_workflow;
 $g_overrides = array();
-$t_colour_project = config_get( 'colour_project' );
-$t_colour_global = config_get( 'colour_global' );
+$g_colour_project = config_get( 'colour_project' );
+$g_colour_global = config_get( 'colour_global' );
 
 
 /**
@@ -88,12 +88,12 @@ function set_overrides( $p_config ) {
  * @return string bgcolor attribute, or '' if no color
  */
 function set_colour_override( $p_level_file, $p_level_global, $p_level_project ) {
-	global $t_colour_global, $t_colour_project;
+	global $g_colour_global, $g_colour_project;
 
 	if( $p_level_project != $p_level_global ) {
-		$t_colour = $t_colour_project;
+		$t_colour = $g_colour_project;
 	} else if( $p_level_global != $p_level_file ) {
-		$t_colour = $t_colour_global;
+		$t_colour = $g_colour_global;
 	} else {
 		return '';
 	}
@@ -127,15 +127,15 @@ function show_flag( $p_from_status_id, $p_to_status_id ) {
 
 		if( $g_can_change_workflow ) {
 			$t_flag_name = $p_from_status_id . ':' . $p_to_status_id;
-			$t_set = $t_flag ? "checked=\"checked\"" : "";
-			$t_value .= "<input type=\"checkbox\" name=\"flag[]\" value=\"$t_flag_name\" $t_set />";
+			$t_set = $t_flag ? 'checked="checked"' : '';
+			$t_value .= '<input type="checkbox" name="flag[]" value="' . $t_flag_name . '" ' . $t_set . ' />';
 		} else {
 			$t_value .= $t_flag ? '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />' : '&#160;';
 		}
 
 		# Add 'reopened' label
 		if( $p_from_status_id >= $t_resolved_status && $p_to_status_id == $t_reopen_status ) {
-			$t_value .= "<br />($t_reopen_label)";
+			$t_value .= '<br />(' . $t_reopen_label . ')';
 		}
 	} else {
 		$t_value = '<td>&#160;';
@@ -183,16 +183,16 @@ function section_begin( $p_section_name ) {
  * @return void
  */
 function capability_row( $p_from_status ) {
-	global $t_file_workflow, $t_global_workflow, $t_project_workflow, $g_can_change_workflow;
+	global $g_file_workflow, $g_global_workflow, $g_project_workflow, $g_can_change_workflow;
 	$t_enum_status = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
 	echo "\t\t" .'<tr><td>' . string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $p_from_status ) ) . '</td>' . "\n";
 	foreach ( $t_enum_status as $t_to_status_id => $t_to_status_label ) {
 		echo show_flag( $p_from_status, $t_to_status_id );
 	}
 
-	$t_file = isset( $t_file_workflow['default'][$p_from_status] ) ? $t_file_workflow['default'][$p_from_status] : 0 ;
-	$t_global = isset( $t_global_workflow['default'][$p_from_status] ) ? $t_global_workflow['default'][$p_from_status] : 0 ;
-	$t_project = isset( $t_project_workflow['default'][$p_from_status] ) ? $t_project_workflow['default'][$p_from_status] : 0;
+	$t_file = isset( $g_file_workflow['default'][$p_from_status] ) ? $g_file_workflow['default'][$p_from_status] : 0 ;
+	$t_global = isset( $g_global_workflow['default'][$p_from_status] ) ? $g_global_workflow['default'][$p_from_status] : 0 ;
+	$t_project = isset( $g_project_workflow['default'][$p_from_status] ) ? $g_project_workflow['default'][$p_from_status] : 0;
 
 	$t_colour = set_colour_override( $t_file, $t_global, $t_project );
 	if( $g_can_change_workflow && $t_colour != '' ) {
@@ -382,14 +382,14 @@ $t_lang_enum_status = '0:' . lang_get( 'non_existent' ) . ',' . lang_get( 'statu
 $t_all_status = explode( ',', $t_extra_enum_status );
 
 # gather all versions of the workflow
-$t_file_workflow = workflow_parse( config_get_global( 'status_enum_workflow' ) );
-$t_global_workflow = workflow_parse( config_get( 'status_enum_workflow', null, null, ALL_PROJECTS ) );
-$t_project_workflow = workflow_parse( config_get( 'status_enum_workflow' ) );
+$g_file_workflow = workflow_parse( config_get_global( 'status_enum_workflow' ) );
+$g_global_workflow = workflow_parse( config_get( 'status_enum_workflow', null, null, ALL_PROJECTS ) );
+$g_project_workflow = workflow_parse( config_get( 'status_enum_workflow' ) );
 
 # validate the project workflow
 $t_validation_result = '';
 foreach( $t_status_arr as $t_status => $t_label ) {
-	if( isset( $t_project_workflow['exit'][$t_status][$t_status] ) ) {
+	if( isset( $g_project_workflow['exit'][$t_status][$t_status] ) ) {
 		$t_validation_result .= '<tr><td>'
 						. MantisEnum::getLabel( $t_lang_enum_status, $t_status )
 						. '</td><td bgcolor="#FFED4F">' . lang_get( 'superfluous' ) . '</td></tr>';
@@ -398,7 +398,7 @@ foreach( $t_status_arr as $t_status => $t_label ) {
 
 # check for entry == 0 without exit == 0, unreachable state
 foreach( $t_status_arr as $t_status => $t_status_label ) {
-	if( ( 0 == count( $t_project_workflow['entry'][$t_status] ) ) && ( 0 < count( $t_project_workflow['exit'][$t_status] ) ) ){
+	if( ( 0 == count( $g_project_workflow['entry'][$t_status] ) ) && ( 0 < count( $g_project_workflow['exit'][$t_status] ) ) ) {
 		$t_validation_result .= '<tr><td>'
 						. MantisEnum::getLabel( $t_lang_enum_status, $t_status )
 						. '</td><td bgcolor="#FF0088">' . lang_get( 'unreachable' ) . '</td></tr>';
@@ -407,7 +407,7 @@ foreach( $t_status_arr as $t_status => $t_status_label ) {
 
 # check for exit == 0 without entry == 0, unleaveable state
 foreach( $t_status_arr as $t_status => $t_status_label ) {
-	if( ( 0 == count( $t_project_workflow['exit'][$t_status] ) ) && ( 0 < count( $t_project_workflow['entry'][$t_status] ) ) ){
+	if( ( 0 == count( $g_project_workflow['exit'][$t_status] ) ) && ( 0 < count( $g_project_workflow['entry'][$t_status] ) ) ) {
 		$t_validation_result .= '<tr><td>'
 						. MantisEnum::getLabel( $t_lang_enum_status, $t_status )
 						. '</td><td bgcolor="#FF0088">' . lang_get( 'no_exit' ) . '</td></tr>';
@@ -416,7 +416,7 @@ foreach( $t_status_arr as $t_status => $t_status_label ) {
 
 # check for exit == 0 and entry == 0, isolated state
 foreach ( $t_status_arr as $t_status => $t_status_label ) {
-	if( ( 0 == count( $t_project_workflow['exit'][$t_status] ) ) && ( 0 == count( $t_project_workflow['entry'][$t_status] ) ) ){
+	if( ( 0 == count( $g_project_workflow['exit'][$t_status] ) ) && ( 0 == count( $g_project_workflow['entry'][$t_status] ) ) ) {
 		$t_validation_result .= '<tr><td>'
 						. MantisEnum::getLabel( $t_lang_enum_status, $t_status )
 						. '</td><td bgcolor="#FF0088">' . lang_get( 'unreachable' ) . '<br />' . lang_get( 'no_exit' ) . '</td></tr>';
@@ -434,9 +434,9 @@ if( ALL_PROJECTS == $t_project ) {
 echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
 echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 if( ALL_PROJECTS <> $t_project ) {
-	echo '<span style="background-color:' . $t_colour_project . '">' . lang_get( 'colour_project' ) .'</span><br />';
+	echo '<span style="background-color:' . $g_colour_project . '">' . lang_get( 'colour_project' ) .'</span><br />';
 }
-echo '<span style="background-color:' . $t_colour_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
+echo '<span style="background-color:' . $g_colour_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
 
 # show the settings used to derive the table
 threshold_begin( lang_get( 'workflow_thresholds' ) );
@@ -490,27 +490,27 @@ if( $g_access >= config_get_access( 'set_status_threshold' ) ) {
 }
 
 if( $g_can_change_flags ) {
-	echo "<input type=\"submit\" class=\"button\" value=\"" . lang_get( 'change_configuration' ) . "\" />\n";
-	echo "</form>\n";
+	echo '<input type="submit" class="button" value="' . lang_get( 'change_configuration' ) . '" />' . "\n";
+	echo '</form>' . "\n";
 
 	if( 0 < count( $g_overrides ) ) {
-		echo "<div class=\"right\"><form name=\"mail_config_action\" method=\"post\" action=\"manage_config_revert.php\">\n";
+		echo '<div class="right"><form name="mail_config_action" method="post" action="manage_config_revert.php">' ."\n";
 		echo form_security_field( 'manage_config_revert' );
-		echo "<input name=\"revert\" type=\"hidden\" value=\"" . implode( ',', $g_overrides ) . "\"></input>";
-		echo "<input name=\"project\" type=\"hidden\" value=\"$t_project\"></input>";
-		echo "<input name=\"return\" type=\"hidden\" value=\"" . string_attribute( form_action_self() ) ."\"></input>";
-		echo "<input type=\"submit\" class=\"button\" value=\"";
+		echo '<input name="revert" type="hidden" value="' . implode( ',', $g_overrides ) . '"></input>';
+		echo '<input name="project" type="hidden" value="' . $t_project . '"></input>';
+		echo '<input name="return" type="hidden" value="' . string_attribute( form_action_self() ) .'"></input>';
+		echo '<input type="submit" class="button" value=';
 		if( ALL_PROJECTS == $t_project ) {
 			echo lang_get( 'revert_to_system' );
 		} else {
 			echo lang_get( 'revert_to_all_project' );
 		}
-		echo "\" />\n";
-		echo "</form></div>\n";
+		echo '" />' . "\n";
+		echo '</form></div>' . "\n";
 	}
 
 } else {
-	echo "</form>\n";
+	echo '</form>' . "\n";
 }
 
 html_page_bottom();

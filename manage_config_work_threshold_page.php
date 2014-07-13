@@ -270,8 +270,8 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only 
 	# Value
 	$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
 	if( $t_can_change ) {
-		$t_checked = ( ON == config_get( $p_threshold ) ) ? "checked=\"checked\"" : "";
-		$t_value = "<input type=\"checkbox\" name=\"flag_" . $p_threshold . "\" value=\"1\" $t_checked />";
+		$t_checked = ( ON == config_get( $p_threshold ) ) ? 'checked="checked"' : '';
+		$t_value = '<input type="checkbox" name="flag_' . $p_threshold . '" value="1" ' . $t_checked . ' />';
 		$g_show_submit = true;
 	} else {
 		if( ON == config_get( $p_threshold ) ) {
@@ -280,12 +280,12 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only 
 			$t_value = '&#160;';
 		}
 	}
-	echo "\t<td $t_color>" . $t_value . "</td>\n\t"
+	echo "\t" . '<td ' . $t_color . '>' . $t_value . '</td>' . "\n\t"
 		. '<td class="left" colspan="' . ( count( $g_access_levels ) - 1 ). '"></td>';
 
 	print_who_can_change( $p_threshold, $t_can_change );
 
-	echo "</tr>\n";
+	echo '</tr>' . "\n";
 }
 
 /**
@@ -306,7 +306,8 @@ function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects
 	$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $g_project_id, $g_user )
 			  && ( ( ALL_PROJECTS == $g_project_id ) || !$p_all_projects_only );
 
-	echo "<tr>\n\t<td>" . string_display( $p_caption ) . "</td>\n";
+	echo '<tr>' . "\n";
+	echo "\t" . '<td>' . string_display( $p_caption ) . '</td>' . "\n";
 
 	# Value
 	$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
@@ -320,7 +321,7 @@ function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects
 		$t_value = MantisEnum::getLabel( lang_get( $p_enum . '_enum_string' ), config_get( $p_threshold ) ) . '&#160;';
 		echo $t_value;
 	}
-	echo "</td>\n\t" . '<td colspan="' . ( count( $g_access_levels ) - 3 ) . '"></td>' . "\n";
+	echo '</td>' . "\n\t" . '<td colspan="' . ( count( $g_access_levels ) - 3 ) . '"></td>' . "\n";
 
 	print_who_can_change( $p_threshold, $t_can_change );
 
@@ -404,18 +405,18 @@ get_section_end();
 
 
 if( $t_show_submit ) {
-	echo "<input type=\"submit\" class=\"button\" value=\"" . lang_get( 'change_configuration' ) . "\" />\n";
+	echo '<input type="submit" class="button" value="' . lang_get( 'change_configuration' ) . '" />' . "\n";
 }
 
 echo '</form>' . "\n";
 
 if( $t_show_submit && ( 0 < count( $g_overrides ) ) ) {
-	echo "<div class=\"right\"><form name=\"threshold_config_action\" method=\"post\" action=\"manage_config_revert.php\">\n";
+	echo '<div class="right"><form name="threshold_config_action" method="post" action="manage_config_revert.php">' . "\n";
 	echo form_security_field( 'manage_config_revert' );
-	echo "<input name=\"revert\" type=\"hidden\" value=\"" . implode( ',', $g_overrides ) . "\"></input>";
-	echo "<input name=\"project\" type=\"hidden\" value=\"$g_project_id\"></input>";
-	echo "<input name=\"return\" type=\"hidden\" value=\"" . string_attribute( form_action_self() ) ."\"></input>";
-	echo "<input type=\"submit\" class=\"button\" value=\"";
+	echo '<input name="revert" type="hidden" value="' . implode( ',', $g_overrides ) . '"></input>';
+	echo '<input name="project" type="hidden" value="' . $g_project_id . '"></input>';
+	echo '<input name="return" type="hidden" value="' . string_attribute( form_action_self() ) .'"></input>';
+	echo '<input type="submit" class="button" value="';
 	if( ALL_PROJECTS == $g_project_id ) {
 		echo lang_get( 'revert_to_system' );
 	} else {

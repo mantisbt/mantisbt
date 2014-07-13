@@ -128,17 +128,23 @@ if( $t_verify || $t_reset_password ) {
 	echo '</ul>';
 	echo '</div>';
 }
+
+$t_force_pw_reset_html = '';
+if( $t_force_pw_reset ) {
+	$t_force_pw_reset_html = ' class="has-required"';
+}
 ?>
 
 <div id="account-update-div" class="form-container">
 	<form id="account-update-form" method="post" action="account_update.php">
-		<fieldset <?php if( $t_force_pw_reset ) { ?> class="has-required"<?php } ?>>
+		<fieldset <?php echo $t_force_pw_reset_html ?>>
 			<legend><span><?php echo lang_get( 'edit_account_title' ); ?></span></legend>
 			<?php echo form_security_field( 'account_update' );
 			print_account_menu( 'account_page.php' );
 
-		if( !helper_call_custom_function( 'auth_can_change_password', array() ) ) {
-			# With LDAP --> ?>
+			if( !helper_call_custom_function( 'auth_can_change_password', array() ) ) {
+				# With LDAP -->
+			?>
 			<div class="field-container">
 				<span class="display-label"><span><?php echo lang_get( 'username' ) ?></span></span>
 				<span class="input"><span class="field-value"><?php echo string_display_line( $u_username ) ?></span></span>
@@ -149,9 +155,9 @@ if( $t_verify || $t_reset_password ) {
 				<span class="input"><span class="field-value"><?php echo lang_get( 'no_password_change' ) ?></span></span>
 				<span class="label-style"></span>
 			</div><?php
-		} else {
-			# Without LDAP
-			$t_show_update_button = true;
+			} else {
+				# Without LDAP
+				$t_show_update_button = true;
 			?>
 			<div class="field-container">
 				<span class="display-label"><span><?php echo lang_get( 'username' ) ?></span></span>
@@ -164,22 +170,22 @@ if( $t_verify || $t_reset_password ) {
 			} else {
 			?>
 			<div class="field-container">
-				<label for="password" <?php if( $t_force_pw_reset ) { ?> class="required" <?php } ?>><span><?php echo lang_get( 'current_password' ) ?></span></label>
+				<label for="password" <?php echo $t_force_pw_reset_html ?>><span><?php echo lang_get( 'current_password' ) ?></span></label>
 				<span class="input"><input id="password-current" type="password" name="password_current" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
 				<span class="label-style"></span>
-			</div><?php
-			} ?>
+			</div>
+			<?php } ?>
 			<div class="field-container">
-				<label for="password" <?php if( $t_force_pw_reset ) { ?> class="required" <?php } ?>><span><?php echo lang_get( 'password' ) ?></span></label>
+				<label for="password" <?php echo $t_force_pw_reset_html ?>><span><?php echo lang_get( 'password' ) ?></span></label>
 				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
-				<label for="password-confirm" <?php if( $t_force_pw_reset ) { ?> class="required" <?php } ?>><span><?php echo lang_get( 'confirm_password' ) ?></span></label>
+				<label for="password-confirm" <?php echo $t_force_pw_reset_html ?>><span><?php echo lang_get( 'confirm_password' ) ?></span></label>
 				<span class="input"><input id="password-confirm" type="password" name="password_confirm" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
 				<span class="label-style"></span>
-			</div><?php
-		} ?>
+			</div>
+			<?php } ?>
 			<div class="field-container">
 				<span class="display-label"><span><?php echo lang_get( 'email' ) ?></span></span>
 				<span class="input"><?php

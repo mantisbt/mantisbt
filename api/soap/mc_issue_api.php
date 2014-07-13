@@ -81,11 +81,11 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
-	if( !access_has_bug_level( VIEWER, $p_issue_id, $t_user_id ) ){
+	if( !access_has_bug_level( VIEWER, $p_issue_id, $t_user_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
-	log_event( LOG_WEBSERVICE, "getting details for issue '$p_issue_id'" );
+	log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $p_issue_id . '\'' );
 
 	$t_bug = bug_get( $p_issue_id, true );
 	$t_issue_data = array();
@@ -166,16 +166,16 @@ function mc_issue_get_history( $p_username, $p_password, $p_issue_id ) {
 	}
 	$g_project_override = $t_project_id;
 
-	if( !access_has_bug_level( VIEWER, $p_issue_id, $t_user_id ) ){
+	if( !access_has_bug_level( VIEWER, $p_issue_id, $t_user_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
 	$t_user_access_level = user_get_access_level( $t_user_id, $t_project_id );
-	if( !access_compare_level( $t_user_access_level, config_get( 'view_history_threshold' ) ) ){
+	if( !access_compare_level( $t_user_access_level, config_get( 'view_history_threshold' ) ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
-	log_event( LOG_WEBSERVICE, "retrieving history for issue '$p_issue_id'" );
+	log_event( LOG_WEBSERVICE, 'retrieving history for issue \'' . $p_issue_id . '\'' );
 
 	$t_bug_history = history_get_raw_events_array( $p_issue_id, $t_user_id );
 
@@ -412,7 +412,7 @@ function mci_issue_get_notes( $p_issue_id ) {
  */
 function mci_issue_set_monitors( $p_issue_id, $p_requesting_user_id, array $p_monitors ) {
 	if( bug_is_readonly( $p_issue_id ) ) {
-		return mci_soap_fault_access_denied( $p_requesting_user_id, "Issue '$p_issue_id' is readonly" );
+		return mci_soap_fault_access_denied( $p_requesting_user_id, 'Issue \'' . $p_issue_id . '\' is readonly' );
 	}
 
 	# 1. get existing monitor ids
@@ -532,7 +532,7 @@ function mc_issue_get_biggest_id( $p_username, $p_password, $p_project_id ) {
 	$g_project_override = $t_project_id;
 
 	if( ( $t_project_id > 0 ) && !project_exists( $t_project_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$t_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Project \'' . $t_project_id . '\' does not exist.' );
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $t_project_id ) ) {
@@ -565,7 +565,7 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 
 	$t_bug_table = db_get_table( 'bug' );
 
-	$t_query = "SELECT id FROM $t_bug_table WHERE summary = " . db_param();
+	$t_query = 'SELECT id FROM ' . $t_bug_table . ' WHERE summary = ' . db_param();
 
 	$t_result = db_query_bound( $t_query, array( $p_summary ), 1 );
 
@@ -649,7 +649,7 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 	}
 
 	if( !access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $t_user_id ) ) {
-		return mci_soap_fault_access_denied( "User '$t_user_id' does not have access right to report issues" );
+		return mci_soap_fault_access_denied( 'User \'' . $t_user_id . '\' does not have access right to report issues' );
 	}
 
 	#if( !access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id ) ||
@@ -658,7 +658,7 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 	#}
 
 	if( ( $t_handler_id != 0 ) && !user_exists( $t_handler_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "User '$t_handler_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'User \'' . $t_handler_id . '\' does not exist.' );
 	}
 
 	$t_category = isset( $p_issue['category'] ) ? $p_issue['category'] : null;
@@ -668,7 +668,7 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 		if( !isset( $p_issue['category'] ) || is_blank( $p_issue['category'] ) ) {
 			return SoapObjectsFactory::newSoapFault( 'Client', 'Category field must be supplied.' );
 		} else {
-			return SoapObjectsFactory::newSoapFault( 'Client', "Category '" . $p_issue['category'] . "' not found for project '$t_project_id'." );
+			return SoapObjectsFactory::newSoapFault( 'Client', 'Category \'' . $p_issue['category'] . '\' not found for project \'' . $t_project_id . '\'.' );
 		}
 	}
 
@@ -678,7 +678,7 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 		$t_error_when_version_not_found = config_get( 'webservice_error_when_version_not_found' );
 		if( $t_error_when_version_not_found == ON ) {
 			$t_project_name = project_get_name( $t_project_id );
-			return SoapObjectsFactory::newSoapFault( 'Client', "Version '$t_version' does not exist in project '$t_project_name'." );
+			return SoapObjectsFactory::newSoapFault( 'Client', 'Version \'' . $t_version . '\' does not exist in project \'' . $t_project_name . '\'.' );
 		} else {
 			$t_version_when_not_found = config_get( 'webservice_version_when_not_found' );
 			$t_version = $t_version_when_not_found;
@@ -686,11 +686,11 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 	}
 
 	if( is_blank( $t_summary ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Mandatory field 'summary' is missing." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Mandatory field \'summary\' is missing.' );
 	}
 
 	if( is_blank( $t_description ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Mandatory field 'description' is missing." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Mandatory field \'description\' is missing.' );
 	}
 
 	$t_bug_data = new BugData;
@@ -743,7 +743,7 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 
 	# submit the issue
 	$t_issue_id = $t_bug_data->create();
-	log_event( LOG_WEBSERVICE, "created new issue id '$t_issue_id'" );
+	log_event( LOG_WEBSERVICE, 'created new issue id \'' . $t_issue_id . '\'' );
 
 	$t_set_custom_field_error = mci_issue_set_custom_fields( $t_issue_id, $p_issue['custom_fields'], false );
 	if( $t_set_custom_field_error != null ) {
@@ -764,8 +764,8 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 				$t_view_state = config_get( 'default_bugnote_view_status' );
 			}
 
-			$note_type = isset( $t_note['note_type'] ) ? (int)$t_note['note_type'] : BUGNOTE;
-			$note_attr = isset( $t_note['note_type'] ) ? $t_note['note_attr'] : '';
+			$t_note_type = isset( $t_note['note_type'] ) ? (int)$t_note['note_type'] : BUGNOTE;
+			$t_note_attr = isset( $t_note['note_type'] ) ? $t_note['note_attr'] : '';
 
 			$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
 			$t_note_id = bugnote_add(
@@ -773,11 +773,11 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 				$t_note['text'],
 				mci_get_time_tracking_from_note( $t_issue_id, $t_note ),
 				$t_view_state_id == VS_PRIVATE,
-				$note_type,
-				$note_attr,
+				$t_note_type,
+				$t_note_attr,
 				$t_user_id,
 				false ); # don't send mail
-			log_event( LOG_WEBSERVICE, "bugnote id '$t_note_id' added to issue '$t_issue_id'" );
+			log_event( LOG_WEBSERVICE, 'bugnote id \'' . $t_note_id . '\' added to issue \'' . $t_issue_id . '\'' );
 		}
 	}
 
@@ -817,11 +817,11 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Issue '$p_issue_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Issue \'' . $p_issue_id . '\' does not exist.' );
 	}
 
 	if( bug_is_readonly( $p_issue_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Issue '$p_issue_id' is readonly" );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Issue \'' . $p_issue_id . '\' is readonly' );
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
@@ -843,9 +843,9 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 
 	if( ( $t_project_id == 0 ) || !project_exists( $t_project_id ) ) {
 		if( $t_project_id == 0 ) {
-			return SoapObjectsFactory::newSoapFault( 'Client', "Project '" . $t_project['name'] . "' does not exist." );
+			return SoapObjectsFactory::newSoapFault( 'Client', 'Project \'' . $t_project['name'] . '\' does not exist.' );
 		}
-		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$t_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Project \'' . $t_project_id . '\' does not exist.' );
 	}
 
 	if( !access_has_bug_level( config_get( 'update_bug_threshold' ), $p_issue_id, $t_user_id ) ) {
@@ -853,7 +853,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	}
 
 	if( ( $t_handler_id != 0 ) && !user_exists( $t_handler_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "User '$t_handler_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'User \'' . $t_handler_id . '\' does not exist.' );
 	}
 
 	$t_category = isset( $p_issue['category'] ) ? $p_issue['category'] : null;
@@ -864,7 +864,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 			return SoapObjectsFactory::newSoapFault( 'Client', 'Category field must be supplied.' );
 		} else {
 			$t_project_name = project_get_name( $t_project_id );
-			return SoapObjectsFactory::newSoapFault( 'Client', "Category '" . $p_issue['category'] . "' not found for project '$t_project_name'." );
+			return SoapObjectsFactory::newSoapFault( 'Client', 'Category \'' . $p_issue['category'] . '\' not found for project \'' . $t_project_name . '\'.' );
 		}
 	}
 
@@ -872,7 +872,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 		$t_error_when_version_not_found = config_get( 'webservice_error_when_version_not_found' );
 		if( $t_error_when_version_not_found == ON ) {
 			$t_project_name = project_get_name( $t_project_id );
-			return SoapObjectsFactory::newSoapFault( 'Client', "Version '" . $p_issue['version'] . "' does not exist in project '$t_project_name'." );
+			return SoapObjectsFactory::newSoapFault( 'Client', 'Version \'' . $p_issue['version'] . '\' does not exist in project \'' . $t_project_name . '\'.' );
 		} else {
 			$t_version_when_not_found = config_get( 'webservice_version_when_not_found' );
 			$p_issue['version'] = $t_version_when_not_found;
@@ -880,11 +880,11 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	}
 
 	if( is_blank( $t_summary ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Mandatory field 'summary' is missing." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Mandatory field \'summary\' is missing.' );
 	}
 
 	if( is_blank( $t_description ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Mandatory field 'description' is missing." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Mandatory field \'description\' is missing.' );
 	}
 
 	# fields which we expect to always be set
@@ -1024,10 +1024,10 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 			} else {
 				$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
 
-				$note_type = isset( $t_note['note_type'] ) ? (int)$t_note['note_type'] : BUGNOTE;
-				$note_attr = isset( $t_note['note_type'] ) ? $t_note['note_attr'] : '';
+				$t_note_type = isset( $t_note['note_type'] ) ? (int)$t_note['note_type'] : BUGNOTE;
+				$t_note_attr = isset( $t_note['note_type'] ) ? $t_note['note_attr'] : '';
 
-				bugnote_add( $p_issue_id, $t_note['text'], mci_get_time_tracking_from_note( $p_issue_id, $t_note ), $t_view_state_id == VS_PRIVATE, $note_type, $note_attr, $t_user_id, false );
+				bugnote_add( $p_issue_id, $t_note['text'], mci_get_time_tracking_from_note( $p_issue_id, $t_note ), $t_view_state_id == VS_PRIVATE, $t_note_type, $t_note_attr, $t_user_id, false );
 			}
 		}
 	}
@@ -1037,7 +1037,7 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	}
 
 	# submit the issue
-	log_event( LOG_WEBSERVICE, "updating issue '$p_issue_id'" );
+	log_event( LOG_WEBSERVICE, 'updating issue \'' . $p_issue_id . '\'' );
 	return $t_bug_data->update( true, true );
 
 }
@@ -1059,7 +1059,7 @@ function mc_issue_set_tags ( $p_username, $p_password, $p_issue_id, array $p_tag
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Issue '$p_issue_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Issue \'' . $p_issue_id . '\' does not exist.' );
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
@@ -1070,7 +1070,7 @@ function mc_issue_set_tags ( $p_username, $p_password, $p_issue_id, array $p_tag
 	}
 
 	if( bug_is_readonly( $p_issue_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, "Issue '$p_issue_id' is readonly" );
+		return mci_soap_fault_access_denied( $t_user_id, 'Issue \'' . $p_issue_id . '\' is readonly' );
 	}
 
 	mci_tag_set_for_issue( $p_issue_id, $p_tags, $t_user_id );
@@ -1095,7 +1095,7 @@ function mc_issue_delete( $p_username, $p_password, $p_issue_id ) {
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Issue '$p_issue_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Issue \'' . $p_issue_id . '\' does not exist.' );
 	}
 
 	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
@@ -1109,7 +1109,7 @@ function mc_issue_delete( $p_username, $p_password, $p_issue_id ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
-	log_event( LOG_WEBSERVICE, "deleting issue '$p_issue_id'" );
+	log_event( LOG_WEBSERVICE, 'deleting issue \'' . $p_issue_id . '\'' );
 	return bug_delete( $p_issue_id );
 }
 
@@ -1131,11 +1131,11 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
 	}
 
 	if( (integer)$p_issue_id < 1 ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Invalid issue id '$p_issue_id'" );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Invalid issue id \'' . $p_issue_id . '\'' );
 	}
 
 	if( !bug_exists( $p_issue_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Issue '$p_issue_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Issue \'' . $p_issue_id . '\' does not exist.' );
 	}
 
 	$p_note = SoapObjectsFactory::unwrapObject( $p_note );
@@ -1156,7 +1156,7 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
 	}
 
 	if( bug_is_readonly( $p_issue_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, "Issue '$p_issue_id' is readonly" );
+		return mci_soap_fault_access_denied( $t_user_id, 'Issue \'' . $p_issue_id . '\' is readonly' );
 	}
 
 	if( isset( $p_note['view_state'] ) ) {
@@ -1172,7 +1172,7 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
 	$t_note_type = isset( $p_note['note_type'] ) ? (int)$p_note['note_type'] : BUGNOTE;
 	$t_note_attr = isset( $p_note['note_type'] ) ? $p_note['note_attr'] : '';
 
-	log_event( LOG_WEBSERVICE, "adding bugnote to issue '$p_issue_id'" );
+	log_event( LOG_WEBSERVICE, 'adding bugnote to issue \'' . $p_issue_id . '\'' );
 	return bugnote_add( $p_issue_id, $p_note['text'], mci_get_time_tracking_from_note( $p_issue_id, $p_note ), $t_view_state_id == VS_PRIVATE, $t_note_type, $t_note_attr, $t_user_id );
 }
 
@@ -1193,11 +1193,11 @@ function mc_issue_note_delete( $p_username, $p_password, $p_issue_note_id ) {
 	}
 
 	if( (integer)$p_issue_note_id < 1 ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Invalid issue note id '$p_issue_note_id'." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Invalid issue note id \'' . $p_issue_note_id . '\'.' );
 	}
 
 	if( !bugnote_exists( $p_issue_note_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Issue note '$p_issue_note_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Issue note \'' . $p_issue_note_id . '\' does not exist.' );
 	}
 
 	$t_issue_id = bugnote_get_field( $p_issue_note_id, 'bug_id' );
@@ -1221,10 +1221,10 @@ function mc_issue_note_delete( $p_username, $p_password, $p_issue_note_id ) {
 	}
 
 	if( bug_is_readonly( $t_issue_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, "Issue '$t_issue_id' is readonly" );
+		return mci_soap_fault_access_denied( $t_user_id, 'Issue \'' . $t_issue_id . '\' is readonly' );
 	}
 
-	log_event( LOG_WEBSERVICE, "deleting bugnote id '$p_issue_note_id'" );
+	log_event( LOG_WEBSERVICE, 'deleting bugnote id \'' . $p_issue_note_id . '\'' );
 	return bugnote_delete( $p_issue_note_id );
 }
 
@@ -1258,7 +1258,7 @@ function mc_issue_note_update( $p_username, $p_password, stdClass $p_note ) {
 	$t_issue_note_id = $p_note['id'];
 
 	if( !bugnote_exists( $t_issue_note_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Issue note '$t_issue_note_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Issue note \'' . $t_issue_note_id . '\' does not exist.' );
 	}
 
 	$t_issue_id = bugnote_get_field( $t_issue_note_id, 'bug_id' );
@@ -1288,7 +1288,7 @@ function mc_issue_note_update( $p_username, $p_password, stdClass $p_note ) {
 
 	# Check if the bug is readonly
 	if( bug_is_readonly( $t_issue_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, "Issue ' . $t_issue_id . ' is readonly" );
+		return mci_soap_fault_access_denied( $t_user_id, 'Issue \'' . $t_issue_id . '\' is readonly' );
 	}
 
 	if( isset( $p_note['view_state'] ) ) {
@@ -1297,7 +1297,7 @@ function mc_issue_note_update( $p_username, $p_password, stdClass $p_note ) {
 		bugnote_set_view_state( $t_issue_note_id, $t_view_state_id == VS_PRIVATE );
 	}
 
-	log_event( LOG_WEBSERVICE, "updating bugnote id '$t_issue_note_id'" );
+	log_event( LOG_WEBSERVICE, 'updating bugnote id \'' . $t_issue_note_id . '\'' );
 	bugnote_set_text( $t_issue_note_id, $p_note['text'] );
 
 	return bugnote_date_update( $t_issue_note_id );
@@ -1338,28 +1338,28 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, stdCl
 
 	# source and destination bugs are the same bug...
 	if( $p_issue_id == $t_dest_issue_id ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "An issue can't be related to itself." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'An issue can\'t be related to itself.' );
 	}
 
 	# the related bug exists...
 	if( !bug_exists( $t_dest_issue_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Issue '$t_dest_issue_id' not found." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Issue \'' . $t_dest_issue_id . '\' not found.' );
 	}
 
 	# bug is not read-only...
 	if( bug_is_readonly( $p_issue_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, "Issue '$p_issue_id' is readonly" );
+		return mci_soap_fault_access_denied( $t_user_id, 'Issue \'' . $p_issue_id . '\' is readonly' );
 	}
 
 	# user can access to the related bug at least as viewer...
 	if( !access_has_bug_level( VIEWER, $t_dest_issue_id, $t_user_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, "The issue '$t_dest_issue_id' requires higher access level" );
+		return mci_soap_fault_access_denied( $t_user_id, 'The issue \'' . $t_dest_issue_id . '\' requires higher access level' );
 	}
 
 	$t_old_id_relationship = relationship_same_type_exists( $p_issue_id, $t_dest_issue_id, $t_rel_type['id'] );
 
 	if( $t_old_id_relationship == 0 ) {
-		log_event( LOG_WEBSERVICE, "adding relationship type '${t_rel_type['id']}' between '$p_issue_id' and '$t_dest_issue_id'" );
+		log_event( LOG_WEBSERVICE, 'adding relationship type \'' . $t_rel_type['id'] . '\' between \'' . $p_issue_id . '\' and \'' . $t_dest_issue_id . '\'' );
 		relationship_add( $p_issue_id, $t_dest_issue_id, $t_rel_type['id'] );
 
 		# The above function call into MantisBT does not seem to return a valid BugRelationshipData object.
@@ -1415,7 +1415,7 @@ function mc_issue_relationship_delete( $p_username, $p_password, $p_issue_id, $p
 
 	# bug is not read-only...
 	if( bug_is_readonly( $p_issue_id ) ) {
-		return mci_soap_fault_access_denied( $t_user_id, "Issue '$p_issue_id' is readonly." );
+		return mci_soap_fault_access_denied( $t_user_id, 'Issue \'' . $p_issue_id . '\' is readonly.' );
 	}
 
 	# retrieve the destination bug of the relationship
@@ -1424,7 +1424,7 @@ function mc_issue_relationship_delete( $p_username, $p_password, $p_issue_id, $p
 	# user can access to the related bug at least as viewer, if it's exist...
 	if( bug_exists( $t_dest_issue_id ) ) {
 		if( !access_has_bug_level( VIEWER, $t_dest_issue_id, $t_user_id ) ) {
-			return mci_soap_fault_access_denied( $t_user_id, "The issue '$t_dest_issue_id' requires higher access level." );
+			return mci_soap_fault_access_denied( $t_user_id, 'The issue \'' . $t_dest_issue_id . '\' requires higher access level.' );
 		}
 	}
 
@@ -1432,7 +1432,7 @@ function mc_issue_relationship_delete( $p_username, $p_password, $p_issue_id, $p
 	$t_rel_type = $t_bug_relationship_data->type;
 
 	# delete relationship from the DB
-	log_event( LOG_WEBSERVICE, "deleting relationship id '$p_relationship_id'" );
+	log_event( LOG_WEBSERVICE, 'deleting relationship id \'' . $p_relationship_id . '\'' );
 	relationship_delete( $p_relationship_id );
 
 	# update bug last updated

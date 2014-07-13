@@ -394,7 +394,7 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
 		$t_inst_vars = get_object_vars( $p_param );
 
 		foreach( $t_inst_vars as $t_name => $t_value ) {
-			$t_results[] = "[$t_name]" . ' => ' . error_build_parameter_string( $t_value, false, $p_depth );
+			$t_results[] = '[' . $t_name . '] => ' . error_build_parameter_string( $t_value, false, $p_depth );
 		}
 
 		return '<Object><' . $t_class_name . '> ( ' . implode( $t_results, ', ' ) . ' )';

@@ -207,7 +207,7 @@ $t_config_table  = db_get_table( 'config' );
 $t_project_table = db_get_table( 'project' );
 
 # Get users in db having specific configs
-$t_query = "SELECT DISTINCT user_id FROM $t_config_table WHERE user_id <> " . db_param() ;
+$t_query = 'SELECT DISTINCT user_id FROM ' . $t_config_table . ' WHERE user_id <> ' . db_param() ;
 $t_result = db_query_bound( $t_query, array( ALL_USERS ) );
 if( $t_filter_user_value != META_FILTER_NONE && $t_filter_user_value != ALL_USERS ) {
 	# Make sure the filter value exists in the list
@@ -228,11 +228,11 @@ $t_users_list = array(
 	+ $t_users_list;
 
 # Get projects in db with specific configs
-$t_query = "SELECT DISTINCT project_id, pt.name as project_name
-	FROM $t_config_table as ct
-	JOIN $t_project_table as pt ON pt.id = ct.project_id
+$t_query = 'SELECT DISTINCT project_id, pt.name as project_name
+	FROM ' . $t_config_table . ' as ct
+	JOIN ' . $t_project_table . ' as pt ON pt.id = ct.project_id
 	WHERE project_id!=0
-	ORDER BY project_name";
+	ORDER BY project_name';
 $t_result = db_query_bound( $t_query );
 $t_projects_list[META_FILTER_NONE] = '[' . lang_get( 'any' ) . ']';
 $t_projects_list[ALL_PROJECTS] = lang_get( 'all_projects' );
@@ -242,7 +242,7 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 }
 
 # Get config list used in db
-$t_query = "SELECT DISTINCT config_id FROM $t_config_table ORDER BY config_id";
+$t_query = 'SELECT DISTINCT config_id FROM ' . $t_config_table . ' ORDER BY config_id';
 $t_result = db_query_bound( $t_query );
 $t_configs_list[META_FILTER_NONE] = '[' . lang_get( 'any' ) . ']';
 if( $t_filter_config_value != META_FILTER_NONE ) {
@@ -273,10 +273,8 @@ if( $t_where != '' ) {
 	$t_where = ' WHERE 1=1 ' . $t_where;
 }
 
-$t_query = "SELECT config_id, user_id, project_id, type, value, access_reqd
-	FROM $t_config_table
-	$t_where
-	ORDER BY user_id, project_id, config_id ";
+$t_query = 'SELECT config_id, user_id, project_id, type, value, access_reqd
+	FROM ' . $t_config_table . $t_where . ' ORDER BY user_id, project_id, config_id ';
 $t_result = db_query_bound( $t_query, $t_param );
 ?>
 

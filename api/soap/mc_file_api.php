@@ -140,10 +140,10 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	$t_file_table = db_get_table( $p_table . '_file' );
 	$t_id_col = $p_table . '_id';
 
-	$t_query = "INSERT INTO $t_file_table
-				( $t_id_col, title, description, diskfile, filename, folder, filesize, file_type, date_added, content, user_id )
+	$t_query = 'INSERT INTO ' . $t_file_table . '
+				( ' . $t_id_col . ', title, description, diskfile, filename, folder, filesize, file_type, date_added, content, user_id )
 		VALUES
-				( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', '
+				( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', '
 				    . db_param() . ', ' . db_param() . ', ' . db_param() . ', '
 				    . db_param() . ', ' . db_param() . ', ' . db_param() . ', '
 				    . db_param() . ', ' . db_param() . ' )';

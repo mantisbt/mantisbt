@@ -374,7 +374,7 @@ function bugnote_get_field( $p_bugnote_id, $p_field_name ) {
  */
 function bugnote_get_latest_id( $p_bug_id ) {
 	$t_bugnote_table = db_get_table( 'bugnote' );
-	$t_query = 'SELECT id FROM ' . $t_bugnote_table . 'WHERE bug_id=' . db_param() . ' ORDER by last_modified DESC';
+	$t_query = 'SELECT id FROM ' . $t_bugnote_table . ' WHERE bug_id=' . db_param() . ' ORDER by last_modified DESC';
 	$t_result = db_query_bound( $t_query, array( (int)$p_bug_id ), 1 );
 
 	return (int)db_result( $t_result );

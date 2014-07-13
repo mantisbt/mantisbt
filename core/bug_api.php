@@ -401,8 +401,8 @@ class BugData {
 		}
 
 		$t_bugnote_table = db_get_table( 'bugnote' );
-		$t_query = "SELECT COUNT(*) FROM $t_bugnote_table
-					  WHERE bug_id =" . db_param() . " $t_restriction";
+		$t_query = 'SELECT COUNT(*) FROM ' . $t_bugnote_table . '
+					  WHERE bug_id =' . db_param() . ' ' . $t_restriction;
 		$t_result = db_query_bound( $t_query, array( $this->id ) );
 
 		return db_result( $t_result );
@@ -748,7 +748,7 @@ function bug_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 	$c_bug_id = (int)$p_bug_id;
 	$t_bug_table = db_get_table( 'bug' );
 
-	$t_query = "SELECT * FROM $t_bug_table WHERE id=" . db_param();
+	$t_query = 'SELECT * FROM ' . $t_bug_table . ' WHERE id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $c_bug_id ) );
 
 	if( 0 == db_num_rows( $t_result ) ) {
@@ -1299,11 +1299,11 @@ function bug_delete( $p_bug_id ) {
 	# Delete the bugnote text
 	$t_bug_text_id = bug_get_field( $p_bug_id, 'bug_text_id' );
 
-	$t_query = "DELETE FROM $t_bug_text_table WHERE id=" . db_param();
+	$t_query = 'DELETE FROM ' . $t_bug_text_table . ' WHERE id=' . db_param();
 	db_query_bound( $t_query, array( $t_bug_text_id ) );
 
 	# Delete the bug entry
-	$t_query = "DELETE FROM $t_bug_table WHERE id=" . db_param();
+	$t_query = 'DELETE FROM ' . $t_bug_table . ' WHERE id=' . db_param();
 	db_query_bound( $t_query, array( $c_bug_id ) );
 
 	bug_clear_cache( $p_bug_id );
@@ -1838,7 +1838,7 @@ function bug_reopen( $p_bug_id, $p_bugnote_text = '', $p_time_tracking = '0:00',
  */
 function bug_update_date( $p_bug_id ) {
 	$t_bug_table = db_get_table( 'bug' );
-	$t_query = "UPDATE $t_bug_table SET last_updated= " . db_param() . ' WHERE id=' . db_param();
+	$t_query = 'UPDATE ' . $t_bug_table . ' SET last_updated=' . db_param() . ' WHERE id=' . db_param();
 	db_query_bound( $t_query, array( db_now(), $p_bug_id ) );
 
 	bug_clear_cache( $p_bug_id );

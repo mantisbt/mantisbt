@@ -211,7 +211,7 @@ function log_print_to_page() {
 					if( $t_log_event[2][2] ) {
 						$t_query_duplicate_class = ' class="duplicate-query"';
 					}
-					echo "\t\t<tr$t_query_duplicate_class><td>" . $t_level . '-' . $t_count[$t_log_event[1]] . '</td><td>' . $t_log_event[2][1] . '</td><td>' . string_html_specialchars( $t_log_event[3] ) . '</td><td>' . string_html_specialchars( $t_log_event[2][0] ) . "</td></tr>\n";
+					echo "\t\t<tr " . $t_query_duplicate_class . '><td>' . $t_level . '-' . $t_count[$t_log_event[1]] . '</td><td>' . $t_log_event[2][1] . '</td><td>' . string_html_specialchars( $t_log_event[3] ) . '</td><td>' . string_html_specialchars( $t_log_event[2][0] ) . "</td></tr>\n";
 					break;
 				default:
 					echo "\t\t<tr><td>" . $t_level . '-' . $t_count[$t_log_event[1]] . '</td><td>' . $t_log_event[2][1] . '</td><td>' . string_html_specialchars( $t_log_event[3] ) . '</td><td>' . string_html_specialchars( $t_log_event[2][0] ) . "</td></tr>\n";

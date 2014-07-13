@@ -93,13 +93,13 @@ function email_regex_simple() {
 	static $s_email_regex = null;
 
 	if( is_null( $s_email_regex ) ) {
-		$t_recipient = "([a-z0-9!#*+\/=?^_{|}~-]+(?:\.[a-z0-9!#*+\/=?^_{|}~-]+)*)";
+		$t_recipient = '([a-z0-9!#*+\/=?^_{|}~-]+(?:\.[a-z0-9!#*+\/=?^_{|}~-]+)*)';
 
 		# a domain is one or more subdomains
-		$t_subdomain = "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)";
-		$t_domain    = "(${t_subdomain}(?:\.${t_subdomain})*)";
+		$t_subdomain = '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
+		$t_domain    = '(' . $t_subdomain . '(?:\.' . $t_subdomain . ')*)';
 
-		$s_email_regex = "/${t_recipient}\@${t_domain}/i";
+		$s_email_regex = '/' . $t_recipient . '\@' . $t_domain . '/i';
 	}
 	return $s_email_regex;
 }
@@ -258,7 +258,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 	# add users monitoring the bug
 	if( ON == email_notify_flag( $p_notify_type, 'monitor' ) ) {
 		$t_bug_monitor_table = db_get_table( 'bug_monitor' );
-		$t_query = "SELECT DISTINCT user_id FROM $t_bug_monitor_table WHERE bug_id=" . db_param();
+		$t_query = 'SELECT DISTINCT user_id FROM ' . $t_bug_monitor_table . ' WHERE bug_id=' . db_param();
 		$t_result = db_query_bound( $t_query, array( $p_bug_id ) );
 
 		while( $t_row = db_fetch_array( $t_result ) ) {
@@ -277,7 +277,7 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 
 	if( ON == email_notify_flag( $p_notify_type, 'bugnotes' ) ) {
 		$t_bugnote_table = db_get_table( 'bugnote' );
-		$t_query = "SELECT DISTINCT reporter_id FROM $t_bugnote_table WHERE bug_id = " . db_param();
+		$t_query = 'SELECT DISTINCT reporter_id FROM ' . $t_bugnote_table . ' WHERE bug_id = ' . db_param();
 		$t_result = db_query_bound( $t_query, array( $p_bug_id ) );
 		while( $t_row = db_fetch_array( $t_result ) ) {
 			$t_user_id = $t_row['reporter_id'];
@@ -527,7 +527,7 @@ function email_notify_new_account( $p_username, $p_email ) {
 		$t_recipient_email = user_get_email( $t_user['id'] );
 		$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'new_account_subject' );
 
-		$t_message = lang_get( 'new_account_signup_msg' ) . "\n\n" . lang_get( 'new_account_username' ) . ' ' . $p_username . "\n" . lang_get( 'new_account_email' ) . ' ' . $p_email . "\n" . lang_get( 'new_account_IP' ) . ' ' . $_SERVER["REMOTE_ADDR"] . "\n" . $g_path . "\n\n" . lang_get( 'new_account_do_not_reply' );
+		$t_message = lang_get( 'new_account_signup_msg' ) . "\n\n" . lang_get( 'new_account_username' ) . ' ' . $p_username . "\n" . lang_get( 'new_account_email' ) . ' ' . $p_email . "\n" . lang_get( 'new_account_IP' ) . ' ' . $_SERVER['REMOTE_ADDR'] . "\n" . $g_path . "\n\n" . lang_get( 'new_account_do_not_reply' );
 
 		if( !is_blank( $t_recipient_email ) ) {
 			email_store( $t_recipient_email, $t_subject, $t_message );
@@ -569,7 +569,7 @@ function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, array $
 	if( is_array( $t_recipients ) ) {
 		# send email to every recipient
 		foreach( $t_recipients as $t_user_id => $t_user_email ) {
-			log_event( LOG_EMAIL, "Issue = #%d, Type = %s, Msg = '%s', User = @U%d, Email = '%s'.", $p_bug_id, $p_notify_type, $p_message_id, $t_user_id, $t_user_email );
+			log_event( LOG_EMAIL, 'Issue = #%d, Type = %s, Msg = \'%s\', User = @U%d, Email = \'%s\'.', $p_bug_id, $p_notify_type, $p_message_id, $t_user_id, $t_user_email );
 
 			# load (push) user language here as build_visible_bug_data assumes current language
 			lang_push( user_pref_get_language( $t_user_id, $t_project_id ) );
@@ -751,7 +751,7 @@ function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = n
 function email_send_all( $p_delete_on_failure = false ) {
 	$t_ids = email_queue_get_ids();
 
-	log_event( LOG_EMAIL, "Processing e-mail queue (" . count( $t_ids ) . " messages)" );
+	log_event( LOG_EMAIL, 'Processing e-mail queue (' . count( $t_ids ) . ' messages)' );
 
 	foreach( $t_ids as $t_id ) {
 		$t_email_data = email_queue_get( $t_id );
@@ -762,7 +762,7 @@ function email_send_all( $p_delete_on_failure = false ) {
 			$t_email_sent = true;
 			log_event( LOG_EMAIL, 'Message #$t_id has already been sent' );
 		} else {
-			log_event( LOG_EMAIL, "Sending message #$t_id" );
+			log_event( LOG_EMAIL, 'Sending message #' . $t_id );
 			$t_email_sent = email_send( $t_email_data );
 		}
 
@@ -868,7 +868,7 @@ function email_send( EmailData $p_email_data ) {
 
 	# Setup new line and encoding to avoid extra new lines with some smtp gateways like sendgrid.net
 	$t_mail->LE         = "\r\n";
-	$t_mail->Encoding   = "quoted-printable";
+	$t_mail->Encoding   = 'quoted-printable';
 
 	if( !empty( $t_debug_email ) ) {
 		$t_message = 'To: ' . $t_recipient . "\n\n" . $t_message;
@@ -900,13 +900,13 @@ function email_send( EmailData $p_email_data ) {
 					if( !strchr( $t_value, '@' ) && !is_blank( $t_mail->Hostname ) ) {
 						$t_value = $t_value . '@' . $t_mail->Hostname;
 					}
-					$t_mail->set( 'MessageID', "<$t_value>" );
+					$t_mail->set( 'MessageID', '<' . $t_value . '>' );
 					break;
 				case 'In-Reply-To':
-					$t_mail->AddCustomHeader( "$t_key: <{$t_value}@{$t_mail->Hostname}>" );
+					$t_mail->AddCustomHeader( $t_key . ': <' . $t_value . '@' . $t_mail->Hostname . '>' );
 					break;
 				default:
-					$t_mail->AddCustomHeader( "$t_key: $t_value" );
+					$t_mail->AddCustomHeader( $t_key . ': ' . $t_value );
 					break;
 			}
 		}
@@ -974,7 +974,7 @@ function email_build_subject( $p_bug_id ) {
 	$t_bug_id = bug_format_id( $p_bug_id );
 
 	# build standard subject string
-	$t_email_subject = "[$p_project_name $t_bug_id]: $p_subject";
+	$t_email_subject = '[' . $p_project_name . ' ' . $t_bug_id . ']: ' . $p_subject;
 
 	# update subject as defined by plugins
 	$t_email_subject = event_signal( 'EVENT_DISPLAY_EMAIL_BUILD_SUBJECT', $t_email_subject, array( 'bug_id' => $p_bug_id ) );
@@ -1030,14 +1030,14 @@ function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
 		} else {
 			$t_sender_email = '';
 		}
-		$t_header = "\n" . lang_get( 'on_date' ) . " $t_date, $t_sender $t_sender_email " . lang_get( 'sent_you_this_reminder_about' ) . ": \n\n";
-		$t_contents = $t_header . string_get_bug_view_url_with_fqdn( $p_bug_id, $t_recipient ) . " \n\n$p_message";
+		$t_header = "\n" . lang_get( 'on_date' ) . ' ' . $t_date . ', ' . $t_sender . ' ' . $t_sender_email . lang_get( 'sent_you_this_reminder_about' ) . ': ' . "\n\n";
+		$t_contents = $t_header . string_get_bug_view_url_with_fqdn( $p_bug_id, $t_recipient ) . " \n\n" . $p_message;
 
 		$t_id = email_store( $t_email, $t_subject, $t_contents );
 		if( $t_id !== null ) {
 			$t_result[] = $t_recipient;
 		}
-		log_event( LOG_EMAIL, "queued reminder email #$t_id for U$t_recipient" );
+		log_event( LOG_EMAIL, 'queued reminder email #' . $t_id . ' for U' . $t_recipient );
 
 		lang_pop();
 	}

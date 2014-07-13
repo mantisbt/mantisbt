@@ -321,10 +321,10 @@ function cfdef_input_checkbox( array $p_field_def, $p_custom_field_value ) {
 	for( $i = 0; $i < count( $t_values ); $i++ ) {
 		$t_input_id = 'custom_field_' . $p_field_def['id'] . '_value_' . $i;
 		$t_input_name = 'custom_field_' . $p_field_def['id'] . '[]';
-		echo "<input id=\"$t_input_id\" " . helper_get_tab_index() . " type=\"checkbox\" name=\"$t_input_name\" value=\"" . string_attribute( $t_values[$i] ) . '"';
+		echo '<input id="$t_input_id" ' . helper_get_tab_index() . ' type="checkbox" name="' . $t_input_name . '" value="' . string_attribute( $t_values[$i] ) . '"';
 		check_checked( $t_checked_values, $t_values[$i] );
 		echo " />\n";
-		echo "<label for=\"$t_input_id\">" . string_display_line( $t_values[$i] ) . "</label>\n";
+		echo '<label for="' . $t_input_id . '">"' . string_display_line( $t_values[$i] ) . '</label>' . "\n";
 	}
 }
 
@@ -347,10 +347,10 @@ function cfdef_input_radio( array $p_field_def, $p_custom_field_value ) {
 	for( $i = 0; $i < count( $t_values ); $i++ ) {
 		$t_input_id = 'custom_field_' . $p_field_def['id'] . '_value_' . $i;
 		$t_input_name = 'custom_field_' . $p_field_def['id'];
-		echo "<input id=\"$t_input_id\" " . helper_get_tab_index() . " type=\"radio\" name=\"$t_input_name\" value=\"" . string_attribute( $t_values[$i] ) . '"';
+		echo '<input id="' . $t_input_id . '" ' . helper_get_tab_index() . ' type="radio" name="' . $t_input_name . '" value="' . string_attribute( $t_values[$i] ) . '"';
 		check_checked( $t_checked_value, $t_values[$i] );
 		echo " />\n";
-		echo "<label for=\"$t_input_id\">" . string_display_line( $t_values[$i] ) . "</label>\n";
+		echo '<label for="' . $t_input_id . '">' . string_display_line( $t_values[$i] ) . '</label>' . "\n";
 	}
 }
 
@@ -413,7 +413,7 @@ function cfdef_prepare_list_value_to_database( $p_value ) {
 function cfdef_prepare_list_distinct_values( array $p_field_def ) {
 	$t_custom_field_table = db_get_table( 'custom_field' );
 
-	$t_query = "SELECT possible_values FROM $t_custom_field_table WHERE id=" . db_param();
+	$t_query = 'SELECT possible_values FROM ' . $t_custom_field_table . ' WHERE id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_field_def['id'] ) );
 
 	$t_row = db_fetch_array( $t_result );

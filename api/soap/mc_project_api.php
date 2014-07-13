@@ -113,7 +113,7 @@ function mc_project_get_issues( $p_username, $p_password, $p_project_id, $p_page
 
 	$t_lang = mci_get_user_lang( $t_user_id );
 	if( $p_project_id != ALL_PROJECTS && !project_exists( $p_project_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
@@ -196,7 +196,7 @@ function mc_project_get_categories( $p_username, $p_password, $p_project_id ) {
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 	$g_project_override = $p_project_id;
 
@@ -229,7 +229,7 @@ function mc_project_add_category( $p_username, $p_password, $p_project_id, $p_ca
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 	$g_project_override = $p_project_id;
 
@@ -257,7 +257,7 @@ function mc_project_delete_category ( $p_username, $p_password, $p_project_id, $
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 
 	$g_project_override = $p_project_id;
@@ -296,7 +296,7 @@ function mc_project_rename_category_by_name( $p_username, $p_password, $p_projec
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 
 	$g_project_override = $p_project_id;
@@ -329,7 +329,7 @@ function mc_project_get_versions( $p_username, $p_password, $p_project_id ) {
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 	$g_project_override = $p_project_id;
 
@@ -362,7 +362,7 @@ function mc_project_get_released_versions( $p_username, $p_password, $p_project_
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 
 	$g_project_override = $p_project_id;
@@ -397,7 +397,7 @@ function mc_project_get_unreleased_versions( $p_username, $p_password, $p_projec
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 	$g_project_override = $p_project_id;
 
@@ -452,7 +452,7 @@ function mc_project_version_add( $p_username, $p_password, stdClass $p_version )
 	}
 
 	if( !project_exists( $t_project_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$t_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Project \'' . $t_project_id . '\' does not exist.' );
 	}
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
@@ -507,7 +507,7 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, std
 	}
 
 	if( !version_exists( $p_version_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Version '$p_version_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Version \'' . $p_version_id . '\' does not exist.' );
 	}
 
 	$p_version = SoapObjectsFactory::unwrapObject( $p_version );
@@ -525,7 +525,7 @@ function mc_project_version_update( $p_username, $p_password, $p_version_id, std
 	}
 
 	if( !project_exists( $t_project_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$t_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Project \'' . $t_project_id . '\' does not exist.' );
 	}
 
 	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
@@ -586,7 +586,7 @@ function mc_project_version_delete( $p_username, $p_password, $p_version_id ) {
 	}
 
 	if( !version_exists( $p_version_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Version '$p_version_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Version \'' . $p_version_id . '\' does not exist.' );
 	}
 
 	$t_project_id = version_get_field( $p_version_id, 'project_id' );
@@ -621,7 +621,7 @@ function mc_project_get_custom_fields( $p_username, $p_password, $p_project_id )
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 
 	$g_project_override = $p_project_id;
@@ -688,7 +688,7 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
@@ -723,19 +723,19 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 			$t_access_clause = 'IN (' . implode( ',', $t_reqd_access ) . ')';
 		}
 	} else {
-		$t_access_clause = ">= $t_reqd_access ";
+		$t_access_clause = '>= ' . $t_reqd_access;
 	}
 
-	$t_query = "SELECT pft.id, pft.project_id, pft.filename, pft.file_type, pft.filesize, pft.title, pft.description, pft.date_added, pft.user_id
-		FROM $t_project_file_table pft
-		LEFT JOIN $t_project_table pt ON pft.project_id = pt.id
-		LEFT JOIN $t_project_user_list_table pult
-		ON pft.project_id = pult.project_id AND pult.user_id = " . db_param() . "
-		LEFT JOIN $t_user_table ut ON ut.id = " . db_param() . '
+	$t_query = 'SELECT pft.id, pft.project_id, pft.filename, pft.file_type, pft.filesize, pft.title, pft.description, pft.date_added, pft.user_id
+		FROM ' . $t_project_file_table . ' pft
+		LEFT JOIN ' . $t_project_table . ' pt ON pft.project_id = pt.id
+		LEFT JOIN ' . $t_project_user_list_table . ' pult
+		ON pft.project_id = pult.project_id AND pult.user_id = ' . db_param() . '
+		LEFT JOIN ' . $t_user_table . ' ut ON ut.id = ' . db_param() . '
 		WHERE pft.project_id in (' . implode( ',', $t_projects ) . ') AND
-		( ( ( pt.view_state = ' . db_param() . " OR pt.view_state is null ) AND pult.user_id is null AND ut.access_level $t_access_clause ) OR
-		( ( pult.user_id = " . db_param() . " ) AND ( pult.access_level $t_access_clause ) ) OR
-		( ut.access_level = " . db_param() . ' ) )
+		( ( ( pt.view_state = ' . db_param() . ' OR pt.view_state is null ) AND pult.user_id is null AND ut.access_level ' . $t_access_clause . ' ) OR
+		( ( pult.user_id = ' . db_param() . ' ) AND ( pult.access_level ' . $t_access_clause . ' ) ) OR
+		( ut.access_level = ' . db_param() . ' ) )
 		ORDER BY pt.name ASC, pft.title ASC';
 
 	$t_result = db_query_bound( $t_query, array( $t_user_id, $t_user_id, $t_pub, $t_user_id, $t_admin ) );
@@ -778,7 +778,7 @@ function mc_project_get_all_subprojects( $p_username, $p_password, $p_project_id
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 
 	$g_project_override = $p_project_id;
@@ -919,7 +919,7 @@ function mc_project_update( $p_username, $p_password, $p_project_id, stdClass $p
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 
 	$g_project_override = $p_project_id;
@@ -1000,7 +1000,7 @@ function mc_project_delete( $p_username, $p_password, $p_project_id ) {
 	}
 
 	if( !project_exists( $p_project_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 
 	$g_project_override = $p_project_id;
@@ -1029,7 +1029,7 @@ function mc_project_get_issue_headers( $p_username, $p_password, $p_project_id, 
 		return mci_soap_fault_login_failed();
 	}
 	if( $p_project_id != ALL_PROJECTS && !project_exists( $p_project_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "Project '$p_project_id' does not exist." );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Project \'' . $p_project_id . '\' does not exist.' );
 	}
 
 	$g_project_override = $p_project_id;

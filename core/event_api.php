@@ -275,7 +275,7 @@ function event_type_output( $p_event, array $p_callbacks, $p_params = null ) {
  * @return string Output string
  * @access public
  */
-function event_type_chain( $p_event, array $p_callbacks, $p_input, array $p_params = null) {
+function event_type_chain( $p_event, array $p_callbacks, $p_input, array $p_params = null ) {
 	$t_output = $p_input;
 
 	foreach( $p_callbacks as $t_plugin => $t_callbacks ) {

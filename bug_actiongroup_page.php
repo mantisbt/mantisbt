@@ -127,7 +127,7 @@ if( strpos( $f_action, $t_custom_fields_prefix ) === 0 ) {
 # Form name
 $t_form_name = 'bug_actiongroup_' . $f_action;
 
-switch ( $f_action )  {
+switch( $f_action ) {
 	# Use a simple confirmation page, if close or delete...
 	case 'CLOSE' :
 		$t_finished 			= true;
@@ -258,7 +258,7 @@ if( $t_multiple_projects ) {
 		} else {
 			echo '<select name="' . $t_form . '">';
 
-			switch ( $f_action ) {
+			switch( $f_action ) {
 				case 'COPY':
 				case 'MOVE':
 					print_project_option_list( null, false );
@@ -296,7 +296,7 @@ if( $t_multiple_projects ) {
 				</tr>
 <?php
 		if( isset( $t_question_title2 ) ) {
-			switch ( $f_action ) {
+			switch( $f_action ) {
 				case 'RESOLVE':
 					$t_show_product_version = ( ON == config_get( 'show_product_version' ) )
 						|| ( ( AUTO == config_get( 'show_product_version' ) )

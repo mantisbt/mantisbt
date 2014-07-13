@@ -53,14 +53,14 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
-$t_filter = current_user_get_bug_filter();
+$g_filter = current_user_get_bug_filter();
 # NOTE: this check might be better placed in current_user_get_bug_filter()
-if( $t_filter === false ) {
-	$t_filter = filter_get_default();
+if( $g_filter === false ) {
+	$g_filter = filter_get_default();
 }
 
-list( $t_sort, ) = explode( ',', $t_filter['sort'] );
-list( $t_dir, ) = explode( ',', $t_filter['dir'] );
+list( $t_sort, ) = explode( ',', $g_filter['sort'] );
+list( $t_dir, ) = explode( ',', $g_filter['dir'] );
 
 $g_checkboxes_exist = false;
 
@@ -76,9 +76,9 @@ if( helper_get_current_project() > 0 ) {
 	}
 	category_cache_array_rows( array_unique( $t_categories ) );
 }
-$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_VIEW_PAGE );
+$g_columns = helper_get_columns_to_view( COLUMNS_TARGET_VIEW_PAGE );
 
-$t_col_count = count( $t_columns );
+$t_col_count = count( $g_columns );
 
 $t_filter_position = config_get( 'filter_position' );
 
@@ -111,7 +111,7 @@ if( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_
 			$v_end   = 0;
 
 			if( count( $t_rows ) > 0 ) {
-				$v_start = $t_filter['per_page'] * ($f_page_number - 1) + 1;
+				$v_start = $g_filter['per_page'] * ($f_page_number - 1) + 1;
 				$v_end = $v_start + count( $t_rows ) - 1;
 			}
 
@@ -157,7 +157,7 @@ if( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_
 <tr class="buglist-headers row-category">
 <?php
 	$t_title_function = 'print_column_title';
-	foreach( $t_columns as $t_column ) {
+	foreach( $g_columns as $t_column ) {
 		helper_call_custom_function( $t_title_function, array( $t_column ) );
 	}
 ?>
@@ -177,9 +177,9 @@ if( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_
  * @return void
  */
 function write_bug_rows( array $p_rows ) {
-	global $t_columns, $t_filter;
+	global $g_columns, $g_filter;
 
-	$t_in_stickies = ( $t_filter && ( 'on' == $t_filter[FILTER_PROPERTY_STICKY] ) );
+	$t_in_stickies = ( $g_filter && ( 'on' == $g_filter[FILTER_PROPERTY_STICKY] ) );
 
 	# pre-cache custom column data
 	columns_plugin_cache_issue_data( $p_rows );
@@ -196,7 +196,7 @@ function write_bug_rows( array $p_rows ) {
 		if( ( 0 == $t_row->sticky ) && $t_in_stickies ) {	# demarcate stickies, if any have been shown
 ?>
 		   <tr>
-				   <td class="left" colspan="<?php echo count( $t_columns ); ?>" bgcolor="#999999">&#160;</td>
+				   <td class="left" colspan="<?php echo count( $g_columns ); ?>" bgcolor="#999999">&#160;</td>
 		   </tr>
 <?php
 			$t_in_stickies = false;
@@ -208,7 +208,7 @@ function write_bug_rows( array $p_rows ) {
 		echo '<tr class="' . $t_status_label . '">';
 
 		$t_column_value_function = 'print_column_value';
-		foreach( $t_columns as $t_column ) {
+		foreach( $g_columns as $t_column ) {
 			helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row ) );
 		}
 

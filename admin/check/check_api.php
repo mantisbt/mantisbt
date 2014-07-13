@@ -124,7 +124,7 @@ function check_print_error_rows() {
 				$t_error_description = htmlentities( $t_error['error'] );
 		}
 		echo "\t<tr>\n\t\t<td colspan=\"2\" class=\"error\">";
-		echo "<strong>$t_error_type:</strong> $t_error_description<br />";
+		echo '<strong>' . $t_error_type . ':</strong> ' . $t_error_description . '<br />';
 		echo '<em>Raised in file ' . htmlentities( $t_error['file'] ) . ' on line ' . htmlentities( $t_error['line'] ) . '</em>';
 		echo "</td>\n\t</tr>\n";
 	}
@@ -157,8 +157,10 @@ function check_print_info_row( $p_description, $p_info = null ) {
 	if( !$g_show_all ) {
 		return;
 	}
-	echo "\t<tr>\n\t\t<td class=\"description$g_alternate_row\">$p_description</td>\n";
-	echo "\t\t<td class=\"info$g_alternate_row\">$p_info</td>\n\t</tr>\n";
+	echo "\t" . '<tr>' . "\n\t\t";
+	echo '<td class="description' . $g_alternate_row . '">' . $p_description . '</td>' . "\n";
+	echo "\t\t" . '<td class="info' . $g_alternate_row . '">' . $p_info . '</td>' . "\n";
+	echo "\t" . '</tr>' . "\n";
 	$g_alternate_row = $g_alternate_row === 1 ? 2 : 1;
 }
 
@@ -171,14 +173,14 @@ function check_print_test_result( $p_result ) {
 	global $g_alternate_row, $g_failed_test, $g_passed_test_with_warnings;
 	switch( $p_result ) {
 		case BAD:
-			echo "\t\t<td class=\"fail$g_alternate_row\">FAIL</td>\n";
+			echo "\t\t" . '<td class="fail' . $g_alternate_row . '">FAIL</td>' . "\n";
 			$g_failed_test = true;
 			break;
 		case GOOD:
-			echo "\t\t<td class=\"pass$g_alternate_row\">PASS</td>\n";
+			echo "\t\t" . '<td class="pass' . $g_alternate_row . '">PASS</td>' . "\n";
 			break;
 		case WARN:
-			echo "\t\t<td class=\"warn$g_alternate_row\">WARN</td>\n";
+			echo "\t\t" . '<td class="warn' . $g_alternate_row . '">WARN</td>' . "\n";
 			$g_passed_test_with_warnings = true;
 			break;
 	}
@@ -198,7 +200,7 @@ function check_print_test_row( $p_description, $p_pass, $p_info = null ) {
 		return $p_pass;
 	}
 
-	echo "\t<tr>\n\t\t<td class=\"description$g_alternate_row\">$p_description";
+	echo "\t<tr>\n\t\t<td class=\"description" . $g_alternate_row . '\">' . $p_description;
 	if( $p_info !== null ) {
 		if( is_array( $p_info ) && isset( $p_info[$p_pass] ) ) {
 			echo '<br /><em>' . $p_info[$p_pass] . '</em>';
@@ -238,7 +240,7 @@ function check_print_test_warn_row( $p_description, $p_pass, $p_info = null ) {
 	if( !$g_show_all && $p_pass && !$t_unhandled ) {
 		return $p_pass;
 	}
-	echo "\t<tr>\n\t\t<td class=\"description$g_alternate_row\">$p_description";
+	echo "\t<tr>\n\t\t<td class=\"description" . $g_alternate_row . '">' . $p_description;
 	if( $p_info !== null ) {
 		if( is_array( $p_info ) && isset( $p_info[$p_pass] ) ) {
 			echo '<br /><em>' . $p_info[$p_pass] . '</em>';

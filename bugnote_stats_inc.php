@@ -122,7 +122,6 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 
 <?php
 	# Print time tracking information if requested
-
 	if( !is_blank( $f_get_bugnote_stats_button ) ) {
 		# Retrieve time tracking information
 		$t_from = $t_bugnote_stats_from_y . '-' . $t_bugnote_stats_from_m . '-' . $t_bugnote_stats_from_d;
@@ -132,8 +131,7 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 		# Sort the array by user/real name
 		if( ON == config_get( 'show_realname' ) ) {
 			$t_name_field = 'realname';
-		}
-		else {
+		} else {
 			$t_name_field = 'username';
 		}
 		$t_sort_name = array();

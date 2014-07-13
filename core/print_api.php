@@ -120,7 +120,7 @@ function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_a
 	# don't send more headers if they have already been sent
 	if( !headers_sent() ) {
 		header( 'Content-Type: text/html; charset=utf-8' );
-		header( "Location: $t_url" );
+		header( 'Location: ' . $t_url );
 	} else {
 		trigger_error( ERROR_PAGE_REDIRECTION, ERROR );
 		return false;
@@ -351,18 +351,16 @@ function print_reporter_option_list( $p_user_id, $p_project_id = null ) {
  * @return boolean
  */
 function print_tag_attach_form( $p_bug_id, $p_string = '' ) {
-	?>
-		<small><?php echo sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) )?></small>
-		<form method="post" action="tag_attach.php">
-		<?php echo form_security_field( 'tag_attach' )?>
-		<input type="hidden" name="bug_id" value="<?php echo $p_bug_id?>" />
-		<?php
-			print_tag_input( $p_bug_id, $p_string );
-	?>
-		<input type="submit" value="<?php echo lang_get( 'tag_attach' )?>" class="button" />
-		</form>
-		<?php
-		return true;
+?>
+	<small><?php echo sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) )?></small>
+	<form method="post" action="tag_attach.php">
+	<?php echo form_security_field( 'tag_attach' )?>
+	<input type="hidden" name="bug_id" value="<?php echo $p_bug_id?>" />
+	<?php print_tag_input( $p_bug_id, $p_string ); ?>
+	<input type="submit" value="<?php echo lang_get( 'tag_attach' )?>" class="button" />
+	</form>
+<?php
+	return true;
 }
 
 /**
@@ -372,13 +370,13 @@ function print_tag_attach_form( $p_bug_id, $p_string = '' ) {
  * @return void
  */
 function print_tag_input( $p_bug_id = 0, $p_string = '' ) {
-	?>
-		<input type="hidden" id="tag_separator" value="<?php echo config_get( 'tag_separator' )?>" />
-		<input type="text" name="tag_string" id="tag_string" size="40" value="<?php echo string_attribute( $p_string )?>" />
-		<select <?php echo helper_get_tab_index()?> name="tag_select" id="tag_select">
-			<?php print_tag_option_list( $p_bug_id );?>
-		</select>
-		<?php
+?>
+	<input type="hidden" id="tag_separator" value="<?php echo config_get( 'tag_separator' )?>" />
+	<input type="text" name="tag_string" id="tag_string" size="40" value="<?php echo string_attribute( $p_string )?>" />
+	<select <?php echo helper_get_tab_index()?> name="tag_select" id="tag_select">
+		<?php print_tag_option_list( $p_bug_id );?>
+	</select>
+<?php
 }
 
 /**
@@ -411,13 +409,13 @@ function print_news_item_option_list() {
 
 	$t_global = access_has_global_level( config_get_global( 'admin_site_threshold' ) );
 	if( $t_global ) {
-		$t_query = "SELECT id, headline, announcement, view_state
-				FROM $t_mantis_news_table
-				ORDER BY date_posted DESC";
+		$t_query = 'SELECT id, headline, announcement, view_state
+				FROM ' . $t_mantis_news_table . '
+				ORDER BY date_posted DESC';
 	} else {
-		$t_query = "SELECT id, headline, announcement, view_state
-				FROM $t_mantis_news_table
-				WHERE project_id=" . db_param() . '
+		$t_query = 'SELECT id, headline, announcement, view_state
+				FROM ' . $t_mantis_news_table . '
+				WHERE project_id=' . db_param() . '
 				ORDER BY date_posted DESC';
 	}
 	$t_result = db_query_bound( $t_query, ($t_global == true ? array() : array( $t_project_id ) ) );
@@ -446,7 +444,7 @@ function print_news_item_option_list() {
 			$t_note_string = ' [' . implode( ' ', $t_notes ) . ']';
 		}
 
-		echo "<option value=\"$t_id\">$t_headline$t_note_string</option>";
+		echo '<option value="' . $t_id . '">' . $t_headline . $t_note_string . '</option>';
 	}
 }
 
@@ -709,12 +707,12 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 	}
 
 	if( config_get( 'allow_no_category' ) ) {
-		echo '<option value="0\', check_selected( $p_category_id, 0 ), '>';
+		echo '<option value="0' . check_selected( $p_category_id, 0 ) . '>';
 		echo category_full_name( 0, false ), '</option>';
 	} else {
 		if( 0 == $p_category_id ) {
-			echo '<option value="0\', check_selected( $p_category_id, 0 ), '>';
-			echo string_attribute( lang_get( 'select_option' ) ), '</option>';
+			echo '<option value="0' . check_selected( $p_category_id, 0 ) . '>';
+			echo string_attribute( lang_get( 'select_option' ) ) . '</option>';
 		}
 	}
 
@@ -722,7 +720,7 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 
 	foreach( $t_cat_arr as $t_category_row ) {
 		$t_category_id = (int)$t_category_row['id'];
-		echo "<option value=\"$t_category_id\"";
+		echo '<option value="' . $t_category_id . '"';
 		check_selected( $p_category_id, $t_category_id );
 		echo '>' . string_attribute( category_full_name( $t_category_id, $t_category_row['project_id'] != $t_project_id ) ) . '</option>';
 	}
@@ -877,10 +875,10 @@ function print_build_option_list( $p_build = '' ) {
 	$t_project_where = helper_project_specific_where( $t_project_id );
 
 	# Get the "found in" build list
-	$t_query = "SELECT DISTINCT build
-				FROM $t_bug_table
-				WHERE $t_project_where
-				ORDER BY build DESC";
+	$t_query = 'SELECT DISTINCT build
+				FROM ' . $t_bug_table . '
+				WHERE ' . $t_project_where . '
+				ORDER BY build DESC';
 	$t_result = db_query_bound( $t_query );
 	$t_option_count = db_num_rows( $t_result );
 
@@ -893,7 +891,7 @@ function print_build_option_list( $p_build = '' ) {
 
 	foreach( $t_overall_build_arr as $t_build_unescaped ) {
 		$t_build = string_attribute( $t_build_unescaped );
-		echo "<option value=\"$t_build\"";
+		echo '<option value="' . $t_build . '"';
 		check_selected( $p_build, $t_build_unescaped );
 		echo '>' . string_shorten( $t_build, $t_max_length ) . '</option>';
 	}
@@ -1087,10 +1085,10 @@ function print_project_user_list_option_list2( $p_user_id ) {
 	$t_mantis_project_user_list_table = db_get_table( 'project_user_list' );
 	$t_mantis_project_table = db_get_table( 'project' );
 
-	$t_query = "SELECT DISTINCT p.id, p.name
-				FROM $t_mantis_project_table p
-				LEFT JOIN $t_mantis_project_user_list_table u
-				ON p.id=u.project_id AND u.user_id=" . db_param() . '
+	$t_query = 'SELECT DISTINCT p.id, p.name
+				FROM ' . $t_mantis_project_table . ' p
+				LEFT JOIN ' . $t_mantis_project_user_list_table . ' u
+				ON p.id=u.project_id AND u.user_id=' . db_param() . '
 				WHERE p.enabled = ' . db_param() . ' AND
 					u.user_id IS NULL
 				ORDER BY p.name';
@@ -1100,7 +1098,7 @@ function print_project_user_list_option_list2( $p_user_id ) {
 		$t_row = db_fetch_array( $t_result );
 		$t_project_name = string_attribute( $t_row['name'] );
 		$t_user_id = $t_row['id'];
-		echo "<option value=\"$t_user_id\">$t_project_name</option>";
+		echo '<option value="' . $t_user_id . '">' . $t_project_name . '</option>';
 	}
 }
 
@@ -1147,7 +1145,7 @@ function print_custom_field_projects_list( $p_field_id ) {
 		$t_project_name = project_get_field( $t_project_id, 'name' );
 		$t_sequence = custom_field_get_sequence( $p_field_id, $t_project_id );
 		echo '<strong>', string_display_line( $t_project_name ), '</strong>: ';
-		print_bracket_link( "manage_proj_custom_field_remove.php?field_id=$c_field_id&project_id=$t_project_id&return=custom_field$t_security_token", lang_get( 'remove_link' ) );
+		print_bracket_link( 'manage_proj_custom_field_remove.php?field_id=' . $c_field_id . '&project_id=' . $t_project_id . '&return=custom_field' . $t_security_token, lang_get( 'remove_link' ) );
 		echo '<br />- ';
 
 		$t_linked_field_ids = custom_field_get_linked_ids( $t_project_id );
@@ -1215,7 +1213,7 @@ function print_formatted_priority_string( BugData $p_bug ) {
 	if( $t_priority_threshold >= 0 &&
 		$p_bug->priority >= $t_priority_threshold &&
 		$p_bug->status < config_get( 'bug_closed_status_threshold' ) ) {
-		echo "<span class=\"bold\">$t_pri_str</span>";
+		echo '<span class="bold">' . $t_pri_str . '</span>';
 	} else {
 		echo $t_pri_str;
 	}
@@ -1234,7 +1232,7 @@ function print_formatted_severity_string( BugData $p_bug ) {
 	if( $t_severity_threshold >= 0 &&
 		$p_bug->severity >= $t_severity_threshold &&
 		$p_bug->status < config_get( 'bug_closed_status_threshold' ) ) {
-		echo "<span class=\"bold\">$t_sev_str</span>";
+		echo '<span class="bold">' . $t_sev_str . '</span>';
 	} else {
 		echo $t_sev_str;
 	}
@@ -1265,7 +1263,7 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 		}
 
 		$t_sort_field = rawurlencode( $p_sort_field );
-		print_link( "view_all_set.php?sort=$t_sort_field&dir=$p_dir&type=2&print=1", $p_string );
+		print_link( 'view_all_set.php?sort=' . $t_sort_field . '&dir=' . $p_dir . '&type=2&print=1', $p_string );
 	} else if( $p_columns_target == COLUMNS_TARGET_VIEW_PAGE ) {
 		if( $p_sort_field == $p_sort ) {
 
@@ -1280,7 +1278,7 @@ function print_view_bug_sort_link( $p_string, $p_sort_field, $p_sort, $p_dir, $p
 			$p_dir = 'ASC';
 		}
 		$t_sort_field = rawurlencode( $p_sort_field );
-		print_link( "view_all_set.php?sort=$t_sort_field&dir=$p_dir&type=2", $p_string );
+		print_link( 'view_all_set.php?sort=' . $t_sort_field . '&dir=' . $p_dir . '&type=2', $p_string );
 	} else {
 		echo $p_string;
 	}
@@ -1312,7 +1310,7 @@ function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_s
 	}
 
 	$t_field = rawurlencode( $p_field );
-	print_link( "$p_page?sort=$t_field&dir=$t_dir&save=1&hideinactive=$p_hide_inactive&showdisabled=$p_show_disabled&filter=$p_filter", $p_string );
+	print_link( $p_page . '?sort=' . $t_field . '&dir=' . $t_dir . '&save=1&hideinactive=' . $p_hide_inactive . '&showdisabled=' . $p_show_disabled . '&filter=' . $p_filter, $p_string );
 }
 
 /**
@@ -1338,7 +1336,7 @@ function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $
 	}
 
 	$t_field = rawurlencode( $p_field );
-	print_link( "$p_page?sort=$t_field&dir=$t_dir", $p_string );
+	print_link( $p_page . '?sort=' . $t_field . '&dir=' . $t_dir, $p_string );
 }
 
 /**
@@ -1423,12 +1421,12 @@ function print_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' 
 	} else {
 		$t_link = htmlspecialchars( $p_link );
 		if( $p_new_window === true ) {
-			echo "<a class=\"new-window $p_class\" href=\"$t_link\" target=\"_blank\">$p_url_text</a>";
+			echo '<a class="new-window ' . $p_class . '" href="' . $t_link . '" target="_blank">' . $p_url_text . '</a>';
 		} else {
 			if( $p_class !== '' ) {
-				echo "<a class=\"$p_class\" href=\"$t_link\">$p_url_text</a>";
+				echo '<a class="' . $p_class . '" href="' . $t_link . '">' . $p_url_text . '</a>';
 			} else {
-				echo "<a href=\"$t_link\">$p_url_text</a>";
+				echo '<a href="' . $t_link . '">' . $p_url_text . '</a>';
 			}
 		}
 	}
@@ -1451,9 +1449,9 @@ function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur
 	if( ( 0 < $p_page_no ) && ( $p_page_no != $p_page_cur ) ) {
 		$t_delimiter = ( strpos( $p_page_url, '?' ) ? '&' : '?' );
 		if( $p_temp_filter_id !== 0 ) {
-			print_link( "$p_page_url${t_delimiter}filter=$p_temp_filter_id&page_number=$p_page_no", $p_text );
+			print_link( $p_page_url . $t_delimiter . 'filter=' . $p_temp_filter_id . '&page_number=' . $p_page_no, $p_text );
 		} else {
-			print_link( "$p_page_url${t_delimiter}page_number=$p_page_no", $p_text );
+			print_link( $p_page_url . $t_delimiter . 'page_number=' . $p_page_no, $p_text );
 		}
 	} else {
 		echo $p_text;
@@ -1514,9 +1512,9 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 		} else {
 			$t_delimiter = ( strpos( $p_page, '?' ) ? '&' : '?' ) ;
 			if( $p_temp_filter_id !== 0 ) {
-				array_push( $t_items, "<a href=\"$p_page${t_delimiter}filter=$p_temp_filter_id&amp;page_number=$i\">$i</a>" );
+				array_push( $t_items, '<a href="' . $p_page . $t_delimiter . 'filter=' . $p_temp_filter_id . '&amp;page_number=' . $i . '">' . $i . '</a>' );
 			} else {
-				array_push( $t_items, "<a href=\"$p_page${t_delimiter}page_number=$i\">$i</a>" );
+				array_push( $t_items, '<a href="' . $p_page . $t_delimiter . 'page_number=' . $i . '">' . $i . '</a>' );
 			}
 		}
 	}
@@ -1594,10 +1592,10 @@ function get_email_link_with_subject( $p_email, $p_text, $p_subject ) {
 	# subject text then an ampersand (for example) will truncate the text
 	$t_subject = string_url( $p_subject );
 	$t_email = string_url( $p_email );
-	$t_mailto = string_attribute( "mailto:$t_email?subject=$t_subject" );
+	$t_mailto = string_attribute( 'mailto:' . $t_email . '?subject=' . $t_subject );
 	$t_text = string_display( $p_text );
 
-	return "<a class=\"user\" href=\"$t_mailto\">$t_text</a>";
+	return '<a class="user" href="' . $t_mailto . '">' . $t_text . '</a>';
 }
 
 /**
@@ -1638,7 +1636,7 @@ function print_hidden_input( $p_field_key, $p_field_val ) {
 	} else {
 		$t_key = string_html_entities( $p_field_key );
 		$t_val = string_html_entities( $p_field_val );
-		echo "<input type=\"hidden\" name=\"$t_key\" value=\"$t_val\" />\n";
+		echo '<input type="hidden" name="' . $t_key . '" value="' . $t_val . '" />' . "\n";
 	}
 }
 
@@ -1884,7 +1882,7 @@ function print_bug_attachment_preview_text( array $p_attachment ) {
 			break;
 		case DATABASE:
 			$t_bug_file_table = db_get_table( 'bug_file' );
-			$t_query = "SELECT * FROM $t_bug_file_table WHERE id=" . db_param();
+			$t_query = 'SELECT * FROM ' . $t_bug_file_table . ' WHERE id=' . db_param();
 			$t_result = db_query_bound( $t_query, array( (int)$p_attachment['id'] ) );
 			$t_row = db_fetch_array( $t_result );
 			$t_content = $t_row['content'];
@@ -1929,7 +1927,7 @@ function print_bug_attachment_preview_image( array $p_attachment ) {
  */
 function print_timezone_option_list( $p_timezone ) {
 	if( !function_exists( 'timezone_identifiers_list' ) ) {
-		echo "\t<option value=\"$p_timezone\" selected=\"selected\">$p_timezone</option>\n";
+		echo "\t" . '<option value="' . $p_timezone . '" selected="selected">' . $p_timezone . '</option>' . "\n";
 		return;
 	}
 
@@ -1943,13 +1941,13 @@ function print_timezone_option_list( $p_timezone ) {
 	}
 
 	foreach( $t_locations as $t_continent => $t_locations ) {
-		echo "\t<optgroup label=\"$t_continent\">\n";
+		echo "\t" . '<optgroup label="' . $t_continent . '">' . "\n";
 		foreach ( $t_locations as $t_location ) {
-			echo "\t\t<option value=\"" . $t_location[1] . '"';
+			echo "\t\t" . '<option value="' . $t_location[1] . '"';
 			check_selected( $p_timezone, $t_location[1] );
-			echo '>' . $t_location[0] . "</option>\n";
+			echo '>' . $t_location[0] . '</option>' . "\n";
 		}
-		echo "\t</optgroup>\n";
+		echo "\t" . '</optgroup>' . "\n";
 	}
 }
 

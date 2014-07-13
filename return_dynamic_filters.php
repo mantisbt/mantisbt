@@ -53,11 +53,11 @@ auth_ensure_user_authenticated();
 
 compress_enable();
 
-global $t_filter;
+global $g_filter;
 global $g_select_modifier;
-$t_filter = current_user_get_bug_filter();
-if( $t_filter === false ) {
-	$t_filter = filter_get_default();
+$g_filter = current_user_get_bug_filter();
+if( $g_filter === false ) {
+	$g_filter = filter_get_default();
 }
 $t_project_id = helper_get_current_project();
 $t_current_user_access_level = current_user_get_access_level();
@@ -91,8 +91,8 @@ if( ON == config_get( 'filter_by_custom_fields' ) ) {
 
 $f_for_screen = gpc_get_bool( 'for_screen', true );
 
-$t_sort = $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME];
-$t_dir = $t_filter[FILTER_PROPERTY_SORT_DIRECTION];
+$t_sort = $g_filter[FILTER_PROPERTY_SORT_FIELD_NAME];
+$t_dir = $g_filter[FILTER_PROPERTY_SORT_DIRECTION];
 $t_action  = 'view_all_set.php?f=3';
 
 if( $f_for_screen == false ) {

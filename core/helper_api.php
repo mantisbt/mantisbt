@@ -133,9 +133,9 @@ function get_percentage_by_status() {
 	# checking if it's a per project statistic or all projects
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
-	$t_query = "SELECT status, COUNT(*) AS num
-				FROM $t_mantis_bug_table
-				WHERE $t_specific_where";
+	$t_query = 'SELECT status, COUNT(*) AS num
+				FROM ' . $t_mantis_bug_table . '
+				WHERE ' . $t_specific_where;
 	if( !access_has_project_level( config_get( 'private_bug_threshold' ) ) ) {
 		$t_query .= ' AND view_state < ' . VS_PRIVATE;
 	}
@@ -423,8 +423,10 @@ function helper_ensure_confirmed( $p_message, $p_button_label ) {
 
 	html_page_top();
 
-	echo "<br />\n<div class=\"center\">\n<hr />";
-	echo "\n$p_message\n";
+	echo '<br />';
+	echo '<div class="center">';
+	echo '<hr />';
+	echo "\n" . $p_message . "\n";
 
 	echo '<form method="post" action="">' . "\n";
 	# CSRF protection not required here - user needs to confirm action
@@ -436,7 +438,7 @@ function helper_ensure_confirmed( $p_message, $p_button_label ) {
 	echo '<br /><br /><input type="submit" class="button" value="' . $p_button_label . '" />';
 	echo "\n</form>\n";
 
-	echo "<hr /></div>\n";
+	echo '<hr /></div>' . "\n";
 	html_page_bottom();
 	exit;
 }

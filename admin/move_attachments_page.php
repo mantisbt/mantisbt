@@ -44,25 +44,25 @@ switch( $f_file_type ) {
 	case 'project':
 		$t_type = 'Project Files';
 		$t_file_table = db_get_table( 'mantis_project_file_table' );
-		$t_query = "SELECT p.id, p.name, COUNT(f.id) disk
-			FROM $t_file_table f
-			LEFT JOIN $t_project_table p ON p.id = f.project_id
-			WHERE content <> ''
+		$t_query = 'SELECT p.id, p.name, COUNT(f.id) disk
+			FROM ' . $t_file_table . ' f
+			LEFT JOIN ' . $t_project_table . ' p ON p.id = f.project_id
+			WHERE content <> \'\'
 			GROUP BY p.id, p.name
-			ORDER BY p.name";
+			ORDER BY p.name';
 		break;
 
 	case 'bug':
 	default:
 		$t_type = 'Attachments';
 		$t_file_table = db_get_table( 'mantis_bug_file_table' );
-		$t_query = "SELECT p.id, p.name, COUNT(f.id) disk
-			FROM $t_file_table f
-			JOIN $t_bug_table b ON b.id = f.bug_id
-			JOIN $t_project_table p ON p.id = b.project_id
-			WHERE content <> ''
+		$t_query = 'SELECT p.id, p.name, COUNT(f.id) disk
+			FROM ' . $t_file_table . ' f
+			JOIN ' . $t_bug_table . ' b ON b.id = f.bug_id
+			JOIN ' . $t_project_table . ' p ON p.id = b.project_id
+			WHERE content <> \'\'
 			GROUP BY p.id, p.name
-			ORDER BY p.name";
+			ORDER BY p.name';
 		break;
 }
 
@@ -98,7 +98,7 @@ if( count( $t_projects ) == 0 ) {
 <table class="width50">
 	<tr>
 		<td class="form-title" colspan="2">
-			<?php echo "$t_type to move"; ?>
+			<?php echo $t_type . ' to move'; ?>
 		</td>
 	</tr>
 

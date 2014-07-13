@@ -556,7 +556,7 @@ function category_get_id_by_name( $p_category_name, $p_project_id, $p_trigger_er
 	$t_category_table = db_get_table( 'category' );
 	$t_project_name = project_get_name( $p_project_id );
 
-	$t_query = "SELECT id FROM $t_category_table WHERE name=" . db_param() . ' AND project_id=' . db_param();
+	$t_query = 'SELECT id FROM ' . $t_category_table . ' WHERE name=' . db_param() . ' AND project_id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_category_name, (int)$p_project_id ) );
 	$t_id = db_result( $t_result );
 	if( $t_id === false ) {

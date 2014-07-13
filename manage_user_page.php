@@ -125,7 +125,7 @@ print_manage_menu( 'manage_user_page.php' );
 
 $t_days_old = 7 * SECONDS_PER_DAY;
 $t_query = 'SELECT COUNT(*) AS new_user_count FROM ' . $t_user_table . '
-	WHERE '.db_helper_compare_days( db_now(), 'date_created', '<= ' . $t_days_old );
+	WHERE '.db_helper_compare_days( (string)db_now(), 'date_created', '<= ' . $t_days_old );
 $t_result = db_query_bound( $t_query );
 $t_row = db_fetch_array( $t_result );
 $t_new_user_count = $t_row['new_user_count'];
@@ -207,7 +207,7 @@ if( 1 == $c_show_disabled ) {
 }
 
 if( 0 == $c_hide_inactive ) {
-	$t_query = 'SELECT count(*) as user_count FROM ' . $t_user_table . ' WHERE ' . $t_where $t_show_disabled_cond;
+	$t_query = 'SELECT count(*) as user_count FROM ' . $t_user_table . ' WHERE ' . $t_where . $t_show_disabled_cond;
 	$t_result = db_query_bound( $t_query, $t_where_params );
 	$t_row = db_fetch_array( $t_result );
 	$t_total_user_count = $t_row['user_count'];

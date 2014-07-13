@@ -561,10 +561,10 @@ function db_result( $p_result, $p_index1 = 0, $p_index2 = 0 ) {
 /**
  * return the last inserted id for a specific database table
  * @param string $p_table A valid database table name.
- * @param string $p_field A valid field name (default "id").
+ * @param string $p_field A valid field name (default 'id').
  * @return integer last successful insert id
  */
-function db_insert_id( $p_table = null, $p_field = "id" ) {
+function db_insert_id( $p_table = null, $p_field = 'id' ) {
 	global $g_db;
 
 	if( isset( $p_table ) ) {
@@ -776,7 +776,7 @@ function db_prepare_binary_string( $p_string ) {
 		case 'mssqlnative':
 		case 'odbc_mssql':
 		case 'ado_mssql':
-			$t_content = unpack( "H*hex", $p_string );
+			$t_content = unpack( 'H*hex', $p_string );
 			return '0x' . $t_content['hex'];
 			break;
 		case 'postgres':
@@ -857,15 +857,15 @@ function db_minutes_to_hhmm( $p_min = 0 ) {
  * @return string returns (field LIKE 'value') OR (field ILIKE 'value')
  */
 function db_helper_like( $p_field_name, $p_case_sensitive = false ) {
-	$t_like_keyword = 'LIKE';
+	$t_like_keyword = ' LIKE ';
 
 	if( $p_case_sensitive === false ) {
 		if( db_is_pgsql() ) {
-			$t_like_keyword = 'ILIKE';
+			$t_like_keyword = ' ILIKE ';
 		}
 	}
 
-	return "($p_field_name $t_like_keyword " . db_param() . ')';
+	return '(' . $p_field_name . $t_like_keyword . db_param() . ')';
 }
 
 /**
@@ -1012,7 +1012,7 @@ function db_update_blob( $p_table, $p_column, $p_val, $p_where = null ) {
 
 		$t_backtrace = debug_backtrace();
 		$t_caller = basename( $t_backtrace[0]['file'] );
-		$t_caller .= ":" . $t_backtrace[0]['line'];
+		$t_caller .= ':' . $t_backtrace[0]['line'];
 
 		# Is this called from another function?
 		if( isset( $t_backtrace[1] ) ) {
@@ -1071,7 +1071,7 @@ function db_oracle_order_binds_sequentially( $p_query ) {
 			if( count( $t_p_query_subpart_arr ) > 1 ) {
 				foreach( $t_p_query_subpart_arr as $t_p_query_subpart ) {
 					if( ( !$t_after_quote ) && ( $t_new_query != '' ) ) {
-						$t_new_query .= ":" . preg_replace( '/^(\d+?)/U', strval( $t_iter ), $t_p_query_subpart );
+						$t_new_query .= ':' . preg_replace( '/^(\d+?)/U', strval( $t_iter ), $t_p_query_subpart );
 						$t_iter++;
 					} else {
 						$t_new_query .= $t_p_query_subpart;
@@ -1192,11 +1192,11 @@ function db_oracle_adapt_query_syntax( $p_query, array &$p_arr_parms = null ) {
 
 			# Replace "var1=''" by "var1 IS NULL"
 			while( preg_match( '/^(?P<before_empty_literal>[\d\D]*[\s\n\r(]+([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)[\s\n\r]*=[\s\n\r]*\'\'(?P<after_empty_literal>[\s\n\r]*[\d\D]*\z)/i', $t_templated_query, $t_matches ) > 0 ) {
-				$t_templated_query = $t_matches['before_empty_literal'] . " IS NULL " . $t_matches['after_empty_literal'];
+				$t_templated_query = $t_matches['before_empty_literal'] . ' IS NULL ' . $t_matches['after_empty_literal'];
 			}
 			# Replace "var1!=''" and "var1<>''" by "var1 IS NOT NULL"
 			while( preg_match( '/^(?P<before_empty_literal>[\d\D]*[\s\n\r(]+([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)[\s\n\r]*(![\s\n\r]*=|<[\s\n\r]*>)[\s\n\r]*\'\'(?P<after_empty_literal>[\s\n\r]*[\d\D]*\z)/i', $t_templated_query, $t_matches ) > 0 ) {
-				$t_templated_query = $t_matches['before_empty_literal'] . " IS NOT NULL " . $t_matches['after_empty_literal'];
+				$t_templated_query = $t_matches['before_empty_literal'] . ' IS NOT NULL ' . $t_matches['after_empty_literal'];
 			}
 
 			$p_query = $t_templated_query;

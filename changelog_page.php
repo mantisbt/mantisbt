@@ -279,7 +279,7 @@ foreach( $t_project_ids as $t_project_id ) {
 			}
 
 			if( !is_blank( $t_description ) ) {
-				echo string_display( "<br />$t_description<br /><br />" );
+				echo string_display( '<br />' . $t_description . '<br /><br />' );
 			}
 		} else {
 			continue;
@@ -341,7 +341,7 @@ foreach( $t_project_ids as $t_project_id ) {
 		}
 
 		$t_bug_string = $t_issues_resolved == 1 ? 'bug' : 'bugs';
-		echo "<br />[$t_issues_resolved " . lang_get( $t_bug_string ) . ']<br />';
+		echo '<br />[' . $t_issues_resolved . ' ' . lang_get( $t_bug_string ) . ']<br />';
 
 	}
 	if( $t_project_header_printed ) {
@@ -350,7 +350,7 @@ foreach( $t_project_ids as $t_project_id ) {
 }
 
 if( !$t_issues_found ) {
-	if( access_has_project_level( config_get( 'manage_project_threshold' ), $t_project_id_for_access_check ) )  {
+	if( access_has_project_level( config_get( 'manage_project_threshold' ), $t_project_id_for_access_check ) ) {
 		$t_string = 'changelog_empty_manager';
 	} else {
 		$t_string = 'changelog_empty';
