@@ -368,7 +368,7 @@ function layout_navbar() {
     layout_navbar_user_avatar();
 	echo '</button>';
 
-    echo '<button type="button" class="navbar-toggle menu-toggler pull-right grey" id="menu-toggler">';
+    echo '<button type="button" class="small navbar-toggle menu-toggler pull-right grey" id="menu-toggler">';
     echo '<span class="sr-only">Toggle sidebar</span>';
     echo '<span class="icon-bar"></span>';
     echo '<span class="icon-bar"></span>';
@@ -771,26 +771,9 @@ function layout_sidebar_begin() {
 	$t_collapse_block = collapse_display( 'sidebar' );
 	$t_block_css = $t_collapse_block ? 'menu-min' : '';
 
-    echo '<div id="sidebar" class="sidebar sidebar-fixed responsive compact ' . $t_block_css . '" >';
+    echo '<div id="sidebar" class="sidebar sidebar-fixed responsive compact ' . $t_block_css . '">';
 
-    # Shortcut buttons
-    echo '<div class="sidebar-shortcuts" id="sidebar-shortcuts">';
-    echo '<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">';
-
-    echo '<a class="btn btn-primary btn-white" href="bug_report_page.php"><i class="ace-icon fa fa-pencil green"> </i></a>';
-    echo '<a class="btn btn-primary btn-white" href="query_view_page.php"><i class="ace-icon fa fa-filter red"> </i></a>';
-    echo '<a class="btn btn-primary btn-white" href="summary_page.php"><i class="ace-icon fa fa-bar-chart-o blue"> </i></a>';
-    echo '<a class="btn btn-primary btn-white" href="account_page.php"><i class="ace-icon fa fa-user dark"> </i></a>';
-    echo '</div>';
-
-    echo '<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">';
-    echo '<span class="btn btn-primary btn-white"></span>';
-    echo '<span class="btn btn-primary btn-white"></span>';
-    echo '<span class="btn btn-primary btn-white"></span>';
-    echo '<span class="btn btn-primary btn-white"></span>';
-    echo '</div>';
-    echo '</div>';
-
+    echo '<div class="space-24"></div>';
     echo '<ul class="nav nav-list">';
 }
 

@@ -172,6 +172,10 @@ pre {
     padding: 4px 6px !important;
 }
 
+.scroll-bar {
+    width: auto !important;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .page-content {
