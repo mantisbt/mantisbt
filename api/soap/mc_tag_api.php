@@ -95,7 +95,7 @@ function mc_tag_add( $p_username, $p_password, stdClass $p_tag ) {
 	$t_tag_description = array_key_exists( 'description', $p_tag ) ? $p_tag['description'] : '';
 
 	if( !tag_name_is_valid( $t_tag_name, $t_valid_matches ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', 'Invalid tag name : "' . $t_tag_name .'"' );
+		return SoapObjectsFactory::newSoapFault( 'Client', 'Invalid tag name : "' . $t_tag_name . '"' );
 	}
 
 	$t_matching_by_name = tag_get_by_name( $t_tag_name );
@@ -103,7 +103,7 @@ function mc_tag_add( $p_username, $p_password, stdClass $p_tag ) {
 		return SoapObjectsFactory::newSoapFault( 'Client', 'A tag with the same name already exists , id: ' . $t_matching_by_name['id'] );
 	}
 
-	log_event( LOG_WEBSERVICE, 'creating tag \'' . $t_tag_name . '\' for user \'' . $t_user_id '\'' );
+	log_event( LOG_WEBSERVICE, 'creating tag \'' . $t_tag_name . '\' for user \'' . $t_user_id . '\'' );
 	return tag_create( $t_tag_name, $t_user_id, $t_tag_description );
 }
 
@@ -175,7 +175,7 @@ function mci_tag_set_for_issue ( $p_issue_id, array $p_tags, $p_user_id ) {
 
 	foreach( $t_tag_ids_to_detach as $t_tag_id ) {
 		if( access_has_bug_level( config_get( 'tag_detach_threshold' ), $p_issue_id, $p_user_id ) ) {
-			log_event( LOG_WEBSERVICE, 'detaching tag id \'' . $t_tag_id . '\' from issue \'' . $p_issue_id '\'' );
+			log_event( LOG_WEBSERVICE, 'detaching tag id \'' . $t_tag_id . '\' from issue \'' . $p_issue_id . '\'' );
 			tag_bug_detach( $t_tag_id, $p_issue_id );
 		}
 	}

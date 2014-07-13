@@ -187,10 +187,10 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 			break;
 		case 'doc':
 			$t_project_file_table = db_get_table( 'project_file' );
-			$t_query = 'SELECT * FROM ' . $t_project_file_table ' WHERE id=' . db_param();
+			$t_query = 'SELECT * FROM ' . $t_project_file_table . ' WHERE id=' . db_param();
 			break;
 		default:
-			return SoapObjectsFactory::newSoapFault( 'Server', 'Invalid file type '.$p_type. ' .' );
+			return SoapObjectsFactory::newSoapFault( 'Server', 'Invalid file type '. $p_type . ' .' );
 	}
 
 	$t_result = db_query_bound( $t_query, array( $p_file_id ) );
