@@ -87,16 +87,8 @@ function move_attachments_to_disk( $p_type, array $p_projects ) {
 			$t_failures = 0;
 			$t_data = array();
 
-			if( $p_type == 'project' ) {
-				$t_seed = config_get( 'document_files_prefix', null, ALL_USERS, $t_project ) . $t_project;
-			}
-
 			while( $t_row = db_fetch_array( $t_result ) ) {
-				if( $p_type == 'bug' ) {
-					$t_seed = $t_row['bug_id'] . $t_row['filename'];
-				}
-
-				$t_filename = $t_upload_path . file_generate_unique_name( $t_seed, $t_upload_path );
+				$t_filename = $t_upload_path . file_generate_unique_name( $t_upload_path );
 
 				# write file to disk
 				if( file_put_contents( $t_filename, $t_row['content'] ) ) {
