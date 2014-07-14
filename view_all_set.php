@@ -591,7 +591,7 @@ if( $f_view_type == 'simple' && $t_setting_arr[FILTER_PROPERTY_HIDE_STATUS][0] >
 	}
 }
 
-$t_settings_serialized = serialize( $t_setting_arr );
+$t_settings_serialized = json_encode( $t_setting_arr );
 $t_settings_string = $t_cookie_version . '#' . $t_settings_serialized;
 
 # If only using a temporary filter, don't store it in the database

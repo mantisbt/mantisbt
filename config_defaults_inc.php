@@ -3093,7 +3093,7 @@ $g_cookie_domain = '';
  * @see $g_view_all_cookie
  * @global string $g_cookie_version
  */
-$g_cookie_version = 'v8';
+$g_cookie_version = 'v9';
 
 /**
  * Prefix for all MantisBT cookies

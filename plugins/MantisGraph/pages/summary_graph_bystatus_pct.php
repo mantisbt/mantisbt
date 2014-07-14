@@ -34,7 +34,7 @@ $t_token = token_get_value( TOKEN_GRAPH );
 if( $t_token == null ) {
 	$t_metrics = create_bug_enum_summary( lang_get( 'status_enum_string' ), 'status' );
 } else {
-	$t_metrics = unserialize( $t_token );
+	$t_metrics = json_decode( $t_token, true );
 }
 
 graph_pie( $t_metrics, plugin_lang_get( 'by_status_pct' ), $f_width, $f_width );

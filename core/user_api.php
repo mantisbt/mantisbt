@@ -1374,7 +1374,7 @@ function user_get_bug_filter( $p_user_id, $p_project_id = null ) {
 		return false;
 	}
 
-	$t_filter = unserialize( $t_cookie_detail[1] );
+	$t_filter = json_decode( $t_cookie_detail[1], true );
 
 	$t_filter = filter_ensure_valid_filter( $t_filter );
 

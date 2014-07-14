@@ -82,7 +82,7 @@ if( !is_blank( $t_cookie_value ) ) {
 	}
 
 	$t_setting_arr = explode( '#', $t_cookie_value, 2 );
-	$t_filter_cookie_arr = unserialize( $t_setting_arr[1] );
+	$t_filter_cookie_arr = json_decode( $t_setting_arr[1], true );
 
 	$f_highlight_changed 	= $t_filter_cookie_arr[FILTER_PROPERTY_HIGHLIGHT_CHANGED];
 	$f_sort 				= $t_filter_cookie_arr[FILTER_PROPERTY_SORT_FIELD_NAME];

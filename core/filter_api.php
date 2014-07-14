@@ -826,7 +826,7 @@ function filter_deserialize( $p_serialized_filter ) {
 	# filter indices dynamically
 	$t_filter_array = array();
 	if( isset( $t_setting_arr[1] ) ) {
-		$t_filter_array = unserialize( $t_setting_arr[1] );
+		$t_filter_array = json_decode( $t_setting_arr[1], true );
 	} else {
 		return false;
 	}
@@ -861,7 +861,7 @@ function filter_is_cookie_valid() {
 	# filter indices dynamically
 	$t_filter_cookie_arr = array();
 	if( isset( $t_setting_arr[1] ) ) {
-		$t_filter_cookie_arr = unserialize( $t_setting_arr[1] );
+		$t_filter_cookie_arr = json_decode( $t_setting_arr[1], true );
 	} else {
 		return false;
 	}

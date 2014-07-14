@@ -111,7 +111,7 @@ function print_config_value_as_string( $p_type, $p_value, $p_for_display = true 
 			echo $t_value;
 			return;
 		case CONFIG_TYPE_COMPLEX:
-			$t_value = @unserialize( $p_value );
+			$t_value = @json_decode( $p_value, true );
 			if( $t_value === false ) {
 				$t_corrupted = true;
 			}

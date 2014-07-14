@@ -555,7 +555,7 @@ function mci_filter_db_get_available_queries( $p_project_id = null, $p_user_id =
 		if( !isset($t_filter_detail[1]) ) {
 			continue;
 		}
-		$t_filter = unserialize( $t_filter_detail[1] );
+		$t_filter = json_decode( $t_filter_detail[1], true );
 		$t_filter = filter_ensure_valid_filter( $t_filter );
 		$t_row['url'] = filter_get_url( $t_filter );
 		$t_overall_query_arr[$t_row['name']] = $t_row;

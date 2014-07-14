@@ -40,10 +40,9 @@ $t_graph_width = (int)( ( $t_width - 50 ) * 0.6 );
 
 # gather the data for the graphs
 $t_metrics = enum_bug_group( lang_get( 'priority_enum_string' ), 'priority' );
-$t_token = token_set( TOKEN_GRAPH, serialize( $t_metrics ) );
+$t_token = token_set( TOKEN_GRAPH, json_encode( $t_metrics ) );
 
 ?>
-
 <br />
 <table class="width100" cellspacing="1">
 <tr>

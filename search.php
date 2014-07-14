@@ -135,7 +135,7 @@ $t_my_filter['_view_type'] = 'advanced';
 
 $t_setting_arr = filter_ensure_valid_filter( $t_my_filter );
 
-$t_settings_serialized = serialize( $t_setting_arr );
+$t_settings_serialized = json_encode( $t_setting_arr );
 $t_settings_string = config_get( 'cookie_version' ) . '#' . $t_settings_serialized;
 
 # Store the filter string in the database: its the current filter, so some values won't change
