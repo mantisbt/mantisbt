@@ -354,8 +354,16 @@ function db_query_bound( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_
 	static $s_prefix;
 	static $s_suffix;
 	if( $s_prefix === null ) {
-		$s_prefix = config_get_global( 'db_table_prefix' );
-		$s_suffix = config_get_global( 'db_table_suffix' );
+		# Determine table prefix and suffixes including trailing and leading '_'
+		$s_prefix = trim( config_get_global( 'db_table_prefix' ) );
+		$s_suffix = trim( config_get_global( 'db_table_suffix' ) );
+
+		if( !empty( $s_prefix ) && '_' != substr( $s_prefix, -1 ) ) {
+			$s_prefix .= '_';
+		}
+		if( !empty( $s_suffix ) && '_' != substr( $s_suffix, 0, 1 ) ) {
+			$s_suffix = '_' . $s_suffix;
+		}
 	}
 
 	$p_query = strtr($p_query, array(

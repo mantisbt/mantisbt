@@ -3203,7 +3203,7 @@ $g_create_short_url = 'http://tinyurl.com/create.php?url=%s';
  * should be set to blank or kept as short as possible (e.g. 'm')
  * @global string $g_db_table_prefix
  */
-$g_db_table_prefix = 'mantis_';
+$g_db_table_prefix = 'mantis';
 
 /**
  * plugin table prefix
