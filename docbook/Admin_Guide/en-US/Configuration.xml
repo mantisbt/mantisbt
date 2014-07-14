@@ -1673,17 +1673,6 @@ $g_resolution_multipliers = array( UNABLE_TO_DUPLICATE =&gt; 2,
                 </listitem>
             </varlistentry>
             <varlistentry>
-                <term>$g_document_files_prefix</term>
-                <listitem>
-                    <para>Prefix to give to uploaded files when saved to the upload
-                        directory. This is used for documents that are attached to projects
-                        in order to be able to differentiate them from files that are
-                        attached to bugs. The name of the file has the following format
-                        prefix-projectcode-filename. The default value is 'doc'.
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
                 <term>$g_preview_attachments_inline_max_size</term>
                 <listitem>
                     <para>This limit applies to previewing of image / text attachments.
