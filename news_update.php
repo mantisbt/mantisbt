@@ -66,7 +66,7 @@ form_security_purge( 'news_update' );
 html_page_top();
 
 echo '<div class="success-msg">';
-echo lang_get( 'operation_successful' )
+echo lang_get( 'operation_successful' );
 
 echo '<br />';
 
