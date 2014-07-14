@@ -102,7 +102,7 @@ function set_capability_row( $p_threshold, $p_all_projects_only = false ) {
 		} else {
 			if( ( $t_existing_threshold != $t_lower_threshold )
 					|| ( $t_existing_access != $f_access ) ) {
-				config_set( $p_threshold, $t_lower_threshold, NO_USER, $t_project, $f_access );
+				config_set( $p_threshold, $t_lower_threshold, NO_USER, $g_project, $f_access );
 			}
 		}
 	}

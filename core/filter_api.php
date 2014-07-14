@@ -4053,12 +4053,12 @@ function print_filter_plugin_field( $p_field_name, $p_filter_object ) {
 		case FILTER_TYPE_INT:
 			echo '<input name="', string_attribute( $p_field_name ), '"',
 				( $t_size > 0 ? ' size="' . $t_size . '"' : '' ), ' value="',
-				(int)$t_filter[$p_field_name], '"/>';
+				(int)$g_filter[$p_field_name], '"/>';
 			break;
 
 		case FILTER_TYPE_BOOLEAN:
 			echo '<input name="', string_attribute( $p_field_name ), '" type="checkbox"',
-				( $t_size > 0 ? ' size="' . $t_size . '"' : '' ), check_checked( (bool)$t_filter[$p_field_name] ) , '"/>';
+				( $t_size > 0 ? ' size="' . $t_size . '"' : '' ), check_checked( (bool)$g_filter[$p_field_name] ) , '"/>';
 			break;
 
 		case FILTER_TYPE_MULTI_STRING:
