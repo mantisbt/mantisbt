@@ -40,15 +40,10 @@ require_once( $t_mantis_dir . 'core.php' );
  * @return boolean
  */
 function mci_is_webservice_call() {
-	global $QUERY_STRING;
-	global $_SERVER;
-
 	if( isset( $_SERVER['QUERY_STRING'] ) ) {
 		$t_qs = $_SERVER['QUERY_STRING'];
 	} else if( isset( $GLOBALS['QUERY_STRING'] ) ) {
 		$t_qs = $GLOBALS['QUERY_STRING'];
-	} else if( isset( $QUERY_STRING ) && $QUERY_STRING != '' ) {
-		$t_qs = $QUERY_STRING;
 	}
 
 	if( isset( $t_qs ) && preg_match( '/wsdl/', $t_qs ) ) {
