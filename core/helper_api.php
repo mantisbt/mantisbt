@@ -55,28 +55,6 @@ require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
 /**
- * alternate color function
- * If no index is given, continue alternating based on the last index given
- * @param integer $p_index      Current index position.
- * @param string  $p_odd_color  Color to use for odd rows.
- * @param string  $p_even_color Color to use for even rows.
- * @return string
- */
-function helper_alternate_colors( $p_index, $p_odd_color, $p_even_color ) {
-	static $s_index = 1;
-
-	if( null !== $p_index ) {
-		$s_index = $p_index;
-	}
-
-	if( 1 == $s_index++ % 2 ) {
-		return $p_odd_color;
-	} else {
-		return $p_even_color;
-	}
-}
-
-/**
  * alternate classes for table rows
  * If no index is given, continue alternating based on the last index given
  * @param int $p_index
