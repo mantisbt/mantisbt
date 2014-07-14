@@ -45,11 +45,11 @@ html_page_top( 'MantisBT Administration - System Utilities' );
 		<th width="70%">Description</th><th width="30%">Execute</th>
 	</tr>
 
-	<tr class="row-1"><td>Move attachments stored in database schema to disk files.</td><td class="center">
+	<tr class="row-1"><td>Move attachments stored between database schema and disk files.</td><td class="center">
 	<?php html_button( 'move_attachments_page.php', 'Move Attachments to Disk', array( 'type' => 'bug' ) );?>
 	</td></tr>
 
-	<tr class="row-2"><td>Move project files stored in database schema to disk.</td><td class="center">
+	<tr class="row-2"><td>Move project files stored between database schema and disk.</td><td class="center">
 	<?php html_button( 'move_attachments_page.php', 'Move Project Files to Disk', array( 'type' => 'project' ) );?>
 	</td></tr>
 

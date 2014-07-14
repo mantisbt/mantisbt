@@ -666,14 +666,13 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 	}
 
 	$t_unique_name = file_generate_unique_name( $t_file_path );
-	$t_disk_file_name = $t_file_path . $t_unique_name;
-
 	$t_method = config_get( 'file_upload_method' );
 
 	switch( $t_method ) {
 		case DISK:
 			file_ensure_valid_upload_path( $t_file_path );
 
+			$t_disk_file_name = $t_file_path . $t_unique_name;
 			if( !file_exists( $t_disk_file_name ) ) {
 				if( !move_uploaded_file( $t_tmp_file, $t_disk_file_name ) ) {
 					trigger_error( ERROR_FILE_MOVE_FAILED, ERROR );
@@ -688,6 +687,7 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 			break;
 		case DATABASE:
 			$c_content = db_prepare_binary_string( fread( fopen( $t_tmp_file, 'rb' ), $t_file_size ) );
+			$t_file_path = '';
 			break;
 		default:
 			trigger_error( ERROR_GENERIC, ERROR );
@@ -696,39 +696,20 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 	$t_file_table = db_get_table( $p_table . '_file' );
 	$t_id_col = $p_table . '_id';
 
-	$t_query_fields = $t_id_col . ', title, description, diskfile, filename, folder,
-		filesize, file_type, date_added, user_id';
-	$t_param = array(
-		$t_id,
-		$p_title,
-		$p_desc,
-		$t_unique_name,
-		$t_file_name,
-		$t_file_path,
-		$t_file_size,
-		$p_file['type'],
-		$p_date_added,
-		(int)$p_user_id,
-	);
-
-	# oci8 stores contents in a BLOB, which is updated separately
-	if( !db_is_oracle() ) {
-		$t_query_fields .= ', content';
-		$t_param[] = $c_content;
-	}
-
-	$t_query_param = db_param();
-	for( $i = 1; $i < count( $t_param ); $i++ ) {
-		$t_query_param .= ', ' . db_param();
-	}
-
-	$t_query = 'INSERT INTO ' . $t_file_table . ' ( ' . $t_query_fields . ' )
-	VALUES ( ' . $t_query_param . ' )';
-
-	db_query_bound( $t_query, $t_param );
+	$t_query = 'INSERT INTO ' . $t_file_table . ' ( ' . $t_id_col . ', title, description, diskfile, filename, folder,
+		filesize, file_type, date_added, user_id )
+	VALUES
+		( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() .
+		  ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
+	db_query_bound( $t_query, array( $t_id, $p_title, $p_desc, $t_unique_name, $t_file_name, $t_file_path,
+									 $t_file_size, $p_file['type'], $p_date_added, (int)$p_user_id ) );
+	$t_attachment_id = db_insert_id( $t_file_table );
 
 	if( db_is_oracle() ) {
 		db_update_blob( $t_file_table, 'content', $c_content, 'diskfile=\'$t_unique_name\'' );
+	} else {
+		$t_query = 'UPDATE ' . $t_file_table . ' SET content=' . db_param() . ' WHERE id = ' . db_param();
+		db_query_bound( $t_query, array( $c_content, $t_attachment_id ) );
 	}
 
 	if( 'bug' == $p_table ) {
