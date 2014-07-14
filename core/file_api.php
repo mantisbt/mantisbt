@@ -665,7 +665,6 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 		}
 	}
 
-	$t_file_hash = ( 'bug' == $p_table ) ? $t_bug_id : config_get( 'document_files_prefix' ) . '-' . $t_project_id;
 	$t_unique_name = file_generate_unique_name( $t_file_path );
 	$t_disk_file_name = $t_file_path . $t_unique_name;
 

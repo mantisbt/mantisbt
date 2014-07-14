@@ -1699,6 +1699,7 @@ $g_disallowed_files = '';
  * prefix to be used for the file system names of files uploaded to projects.
  * Eg: doc-001-myprojdoc.zip
  * @global string $g_document_files_prefix
+ * @deprecated since 1.0, file names have been stored in a new format
  */
 $g_document_files_prefix = 'doc';
 
