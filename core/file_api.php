@@ -537,26 +537,14 @@ function file_clean_name( $p_filename ) {
 }
 
 /**
- * Generate a string to use as the identifier for the file
- * It is not guaranteed to be unique and should be checked
+ * Generate a UNIQUE string for a given file path to use as the identifier for the file
  * The string returned should be 32 characters in length
- * @param string $p_seed Seed.
- * @return string
- */
-function file_generate_name( $p_seed ) {
-	return md5( $p_seed . time() );
-}
-
-/**
- * Generate a UNIQUE string to use as the identifier for the file
- * The string returned should be 64 characters in length
- * @param string $p_seed     Seed.
  * @param string $p_filepath File path.
  * @return string
  */
-function file_generate_unique_name( $p_seed, $p_filepath ) {
+function file_generate_unique_name( $p_filepath ) {
 	do {
-		$t_string = file_generate_name( $p_seed );
+		$t_string = md5( crypto_generate_random_string( 32, false ) );
 	} while( !diskfile_is_name_unique( $t_string, $p_filepath ) );
 
 	return $t_string;
@@ -678,7 +666,7 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 	}
 
 	$t_file_hash = ( 'bug' == $p_table ) ? $t_bug_id : config_get( 'document_files_prefix' ) . '-' . $t_project_id;
-	$t_unique_name = file_generate_unique_name( $t_file_hash . '-' . $t_file_name, $t_file_path );
+	$t_unique_name = file_generate_unique_name( $t_file_path );
 	$t_disk_file_name = $t_file_path . $t_unique_name;
 
 	$t_method = config_get( 'file_upload_method' );
@@ -1054,7 +1042,7 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 		} else {
 			$t_file_path = $t_bug_file['folder'];
 		}
-		$t_new_diskfile_name = file_generate_unique_name( 'bug-' . $t_bug_file['filename'], $t_file_path );
+		$t_new_diskfile_name = file_generate_unique_name( $t_file_path );
 		$t_new_diskfile_location = $t_file_path . $t_new_diskfile_name;
 		$t_new_file_name = file_get_display_name( $t_bug_file['filename'] );
 		if( ( config_get( 'file_upload_method' ) == DISK ) ) {
