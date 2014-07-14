@@ -45,7 +45,7 @@ function move_attachments_to_disk( $p_type, array $p_projects ) {
 	}
 
 	# Build the SQL query based on attachment type
-	$t_file_table = db_get_table( "mantis_${p_type}_file_table" );
+	$t_file_table = db_get_table( "${p_type}_file" );
 	switch( $p_type ) {
 		case 'project':
 			$t_query = 'SELECT f.*
@@ -56,7 +56,7 @@ function move_attachments_to_disk( $p_type, array $p_projects ) {
 			break;
 
 		case 'bug':
-			$t_bug_table = db_get_table( 'mantis_bug_table' );
+			$t_bug_table = db_get_table( 'bug' );
 
 			$t_query = 'SELECT f.*
 				FROM ' . $t_file_table . ' f
