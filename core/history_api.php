@@ -81,8 +81,8 @@ function history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_ne
 		}
 
 		$c_field_name = $p_field_name;
-		$c_old_value = ( is_null( $p_old_value ) ? '' : $p_old_value );
-		$c_new_value = ( is_null( $p_new_value ) ? '' : $p_new_value );
+		$c_old_value = ( is_null( $p_old_value ) ? '' : (string)$p_old_value );
+		$c_new_value = ( is_null( $p_new_value ) ? '' : (string)$p_new_value );
 
 		$t_mantis_bug_history_table = db_get_table( 'bug_history' );
 		$t_query = 'INSERT INTO ' . $t_mantis_bug_history_table . '
