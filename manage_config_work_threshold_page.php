@@ -177,7 +177,7 @@ function print_who_can_change( $p_threshold, $p_can_change ) {
  * @return void
  */
 function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only = false ) {
-	global $g_user, $g_project_id, $g_show_submit, $g_access_levels;
+	global $g_user, $g_project_id, $t_show_submit, $g_access_levels;
 
 	$t_file = config_get_global( $p_threshold );
 	if( !is_array( $t_file ) ) {
@@ -232,7 +232,7 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only = fa
 		if( $t_can_change ) {
 			$t_checked = $t_project ? 'checked="checked"' : '';
 			$t_value = '<input type="checkbox" name="flag_thres_' . $p_threshold . '[]" value="' . $t_access_level . '" ' . $t_checked . '/>';
-			$g_show_submit = true;
+			$t_show_submit = true;
 		} else {
 			if( $t_project ) {
 				$t_value = '<img src="images/ok.gif" width="20" height="15" alt="X" title="X" />';
@@ -256,7 +256,7 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only = fa
  * @return void
  */
 function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only = false ) {
-	global $g_user, $g_project_id, $g_show_submit, $g_access_levels;
+	global $g_user, $g_project_id, $t_show_submit, $g_access_levels;
 
 	$t_file = config_get_global( $p_threshold );
 	$t_global = config_get( $p_threshold, null, null, ALL_PROJECTS );
@@ -272,7 +272,7 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only 
 	if( $t_can_change ) {
 		$t_checked = ( ON == config_get( $p_threshold ) ) ? 'checked="checked"' : '';
 		$t_value = '<input type="checkbox" name="flag_' . $p_threshold . '" value="1" ' . $t_checked . ' />';
-		$g_show_submit = true;
+		$t_show_submit = true;
 	} else {
 		if( ON == config_get( $p_threshold ) ) {
 			$t_value = '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />';
@@ -297,7 +297,7 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only 
  * @return void
  */
 function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects_only = false ) {
-	global $g_user, $g_project_id, $g_show_submit, $g_access_levels;
+	global $g_user, $g_project_id, $t_show_submit, $g_access_levels;
 
 	$t_file = config_get_global( $p_threshold );
 	$t_global = config_get( $p_threshold, null, null, ALL_PROJECTS );
@@ -316,7 +316,7 @@ function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects
 		echo '<select name="flag_' . $p_threshold . '">';
 		print_enum_string_option_list( $p_enum, config_get( $p_threshold ) );
 		echo '</select>';
-		$g_show_submit = true;
+		$t_show_submit = true;
 	} else {
 		$t_value = MantisEnum::getLabel( lang_get( $p_enum . '_enum_string' ), config_get( $p_threshold ) ) . '&#160;';
 		echo $t_value;
