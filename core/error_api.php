@@ -159,7 +159,8 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 			break;
 		default:
 			# shouldn't happen, just display the error just in case
-			$t_error_type = 'UNHANDLED ERROR TYPE (' . $p_type . ')';
+			$t_error_type = 'UNHANDLED ERROR TYPE (' .
+				'<a href="http://php.net/errorfunc.constants">' . $p_type. '</a>)';
 			$t_error_description = $p_error;
 	}
 
