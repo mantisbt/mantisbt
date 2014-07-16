@@ -3527,6 +3527,13 @@ $g_display_errors = array(
 );
 </programlisting>
 					</para>
+					<note>
+						<para>The system automatically sets
+							<emphasis>$g_display_errors</emphasis>
+							to the above recommended development values when
+							the server's name is <emphasis>localhost</emphasis>.
+						</para>
+					</note>
 					<para>Less intrusive settings, recommended for testing purposes:
 <programlisting>
 $g_display_errors = array(
