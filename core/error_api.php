@@ -39,6 +39,7 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 
 $g_error_parameters = array();
+$g_errors_delayed = array();
 $g_error_handled = false;
 $g_error_proceed_url = null;
 $g_error_send_page_header = true;
@@ -138,8 +139,23 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 			$t_error_type = 'DEBUG';
 			break;
 		case E_USER_DEPRECATED:
+			# Get the parent of the call that triggered the error to facilitate
+			# debugging with a more useful filename and line number
+			$t_stack = debug_backtrace();
+			$t_caller = $t_stack[2];
+
 			$t_error_type = 'WARNING';
-			$t_error_description =  error_string( $p_error ) ." (in $p_file line $p_line)";
+			$t_error_description =  error_string( $p_error )
+				. ' (in ' . $t_caller['file']
+				. ' line ' . $t_caller['line'] . ')';
+
+			if( $t_method == DISPLAY_ERROR_INLINE && php_sapi_name() != 'cli') {
+				# Enqueue messages for later display with error_print_delayed()
+				global $g_errors_delayed;
+				$g_errors_delayed[] = $t_error_description;
+				$g_error_handled = true;
+				return;
+			}
 			break;
 		default:
 			# shouldn't happen, just display the error just in case
@@ -267,6 +283,26 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 
 	$g_error_parameters = array();
 	$g_error_proceed_url = null;
+}
+
+/**
+ * Prints messages from the delayed errors queue
+ * The error handler enqueues deprecation warnings that would be printed inline,
+ * to avoid display issues when they are triggered within html tags.
+ * @return void
+ */
+function error_print_delayed() {
+	global $g_errors_delayed;
+
+	if( !empty( $g_errors_delayed ) ) {
+		echo '<div id="delayed-errors">';
+		foreach( $g_errors_delayed as $t_error ) {
+			echo "\n" . '<div class="error-inline">', $t_error, '</div>';
+		}
+		echo "\n" . '</div>';
+
+		$g_errors_delayed = array();
+	}
 }
 
 /**

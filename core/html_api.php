@@ -294,6 +294,8 @@ function html_page_bottom1a( $p_file = null ) {
 		$p_file = basename( $_SERVER['SCRIPT_NAME'] );
 	}
 
+	error_print_delayed();
+
 	html_bottom_banner();
 	html_footer();
 	html_body_end();
@@ -676,7 +678,7 @@ function html_footer() {
 		$t_mantisbt_logo_url = helper_mantis_url( 'images/mantis_logo.png' );
 		echo "\t\t" . '<a href="http://www.mantisbt.org"
 			title="Mantis Bug Tracker: a free and open source web based bug tracking system.">
-			<img src="' . $t_mantisbt_logo_url . '" width="102" height="35" 
+			<img src="' . $t_mantisbt_logo_url . '" width="102" height="35"
 				alt="Powered by Mantis Bug Tracker: a free and open source web based bug tracking system." />
 			</a>' . "\n";
 		echo "\t" . '</div>' . "\n";
