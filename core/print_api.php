@@ -705,13 +705,12 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 	} else {
 		$t_project_id = $p_project_id;
 	}
-
 	if( config_get( 'allow_no_category' ) ) {
-		echo '<option value="0' . check_selected( $p_category_id, 0 ) . '>';
+		echo '<option value="0"' . check_selected( $p_category_id, 0 ) . '>';
 		echo category_full_name( 0, false ), '</option>';
 	} else {
 		if( 0 == $p_category_id ) {
-			echo '<option value="0' . check_selected( $p_category_id, 0 ) . '>';
+			echo '<option value="0"' . check_selected( $p_category_id, 0 ) . '>';
 			echo string_attribute( lang_get( 'select_option' ) ) . '</option>';
 		}
 	}
