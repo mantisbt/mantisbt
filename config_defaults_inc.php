@@ -4084,7 +4084,8 @@ $g_show_queries_count = OFF;
  * The default settings are recommended for use in Production, and will only
  * display MantisBT fatal errors, suppressing output of all other error types.
  *
- * Recommended config_inc.php settings for developers:
+ * Recommended config_inc.php settings for developers (these are automatically
+ * set if the server is localhost):
  * $g_display_errors = array(
  *     E_USER_ERROR   => DISPLAY_ERROR_HALT,
  *     E_WARNING      => DISPLAY_ERROR_HALT,
@@ -4100,6 +4101,15 @@ $g_show_queries_count = OFF;
 $g_display_errors = array(
 	E_USER_ERROR   => DISPLAY_ERROR_HALT,
 );
+
+# Add developers defaults when server is localhost
+# Note: intentionally not using SERVER_ADDR as it's not guaranteed to exist
+if( strcasecmp( $_SERVER['SERVER_NAME'], 'localhost' ) == 0
+ || $_SERVER['SERVER_NAME'] == '127.0.0.1'
+) {
+	$g_display_errors[E_WARNING] = DISPLAY_ERROR_HALT;
+	$g_display_errors[E_ALL]     = DISPLAY_ERROR_INLINE;
+}
 
 /**
  * Detailed error messages
