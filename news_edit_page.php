@@ -123,7 +123,7 @@ html_page_top( lang_get( 'edit_news_title' ) );
 			</div>
 			<div class="field-container">
 				<label for="news-update-announcement"><span><?php echo lang_get( 'announcement' ) ?></span> <span class="help-text"><?php echo lang_get( 'stays_on_top' ) ?></span></label>
-				<span class="checkbox"><input type="checkbox" id="news-update-announcement" name="announcement" <?php check_checked( $v_announcement, 1 ); ?> /></span>
+				<span class="checkbox"><input type="checkbox" id="news-update-announcement" name="announcement" <?php check_checked( (int)$v_announcement, 1 ); ?> /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
