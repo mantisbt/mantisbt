@@ -108,6 +108,7 @@ $t_show_flag = gpc_get_int( 'show_flag', 0 );
 html_page_top();
 ?>
 
+<br>
 <table class="width100"><tr><td class="form-title">
 	<div class="center">
 		<?php echo string_display( config_get( 'window_title' ) ) . ' - ' . string_display( project_get_name( $t_project_id ) ); ?>
@@ -125,7 +126,7 @@ html_page_top();
 	<input type="hidden" name="<?php echo FILTER_PROPERTY_SORT_FIELD_NAME; ?>" value="<?php echo $f_sort ?>" />
 	<input type="hidden" name="<?php echo FILTER_PROPERTY_SORT_DIRECTION; ?>" value="<?php echo $f_dir ?>" />
 </fieldset>
-<table class="width100" cellpadding="2px">
+<table class="width100">
 <?php
 #<SQLI> Excel & Print export
 #$f_bug_array stores the number of the selected rows
@@ -159,7 +160,8 @@ $t_icon_path = config_get( 'icon_path' );
 
 	$t_icons = array(
 		array( 'print_all_bug_page_word', 'word', 'fileicons/doc.gif', 'Word 2000' ),
-		array( 'print_all_bug_page_word', 'html', 'ie.gif', 'Word View' ) );
+		array( 'print_all_bug_page_word', 'html', 'ie.gif', 'Word View' )
+	);
 
 	foreach ( $t_icons as $t_icon ) {
 		echo '<a href="' . $t_icon[0] . '.php?' . FILTER_PROPERTY_SEARCH. '=' . $t_search .
@@ -179,13 +181,11 @@ $t_icon_path = config_get( 'icon_path' );
 
 </form>
 
-<br />
-
+<div class="form-container width100">
 <form method="post" action="print_all_bug_page.php">
 <?php # CSRF protection not required here - form does not result in modifications ?>
-<table id="buglist" class="width100" cellspacing="1" cellpadding="2px">
-<tr>
-	<td class="form-title" colspan="<?php echo $t_num_of_columns / 2 + $t_num_of_columns % 2; ?>">
+
+	<h2>
 		<?php
 			echo lang_get( 'viewing_bugs_title' );
 
@@ -196,31 +196,33 @@ $t_icon_path = config_get( 'icon_path' );
 				$v_start = 0;
 				$v_end   = 0;
 			}
-			echo '( ' . $v_start . ' - ' . $v_end . ' )';
-		?>
-	</td>
-	<td class="right" colspan="<?php echo $t_num_of_columns / 2 ?>">
-		<?php
+			echo ' ( ' . $v_start . ' - ' . $v_end . ' )';
+
 			# print_bracket_link( 'print_all_bug_options_page.php', lang_get( 'printing_options_link' ) );
 			# print_bracket_link( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
 			# print_bracket_link( 'summary_page.php', lang_get( 'summary' ) );
 		?>
-	</td>
-</tr>
+	</h2>
+
+<table id="buglist">
+
+<thead>
 <tr class="row-category">
 	<?php
 		$t_sort = $f_sort;	# used within the custom function called in the loop (@todo cleanup)
 		$t_dir = $f_dir;    # used within the custom function called in the loop (@todo cleanup)
 
 		foreach( $t_columns as $t_column ) {
-			$t_title_function = 'print_column_title';
-			helper_call_custom_function( $t_title_function, array( $t_column, COLUMNS_TARGET_PRINT_PAGE ) );
+			helper_call_custom_function( 'print_column_title', array( $t_column, COLUMNS_TARGET_PRINT_PAGE ) );
 		}
 	?>
 </tr>
 <tr class="spacer">
-	<td colspan="9"></td>
+	<td colspan="<?php echo $t_num_of_columns; ?>"></td>
 </tr>
+</thead>
+
+<tbody>
 <?php
 	for( $i=0; $i < $t_row_count; $i++ ) {
 		$t_row = $t_result[$i];
@@ -229,25 +231,27 @@ $t_icon_path = config_get( 'icon_path' );
 ?>
 <tr>
 <?php
-		foreach( $t_columns as $t_column ) {
-			$t_column_value_function = 'print_column_value';
-			helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row, COLUMNS_TARGET_PRINT_PAGE ) );
-		}
+			foreach( $t_columns as $t_column ) {
+				helper_call_custom_function( 'print_column_value', array( $t_column, $t_row, COLUMNS_TARGET_PRINT_PAGE ) );
+			}
 ?>
 </tr>
 <?php
-	} # isset_loop
-} # for_loop
+		} # isset_loop
+	} # for_loop
 ?>
+</tbody>
 </table>
 
-<fieldset style="display: none">
-	<input type="hidden" name="show_flag" value="1" />
-</fieldset>
-<p>
+<div class="footer">
+	<fieldset style="display: none">
+		<input type="hidden" name="show_flag" value="1" />
+	</fieldset>
 	<input type="submit" class="button" value="<?php echo lang_get( 'hide_button' ) ?>" />
-</p>
+</div>
+
 </form>
+</div>
 
 <?php
 html_page_bottom();
