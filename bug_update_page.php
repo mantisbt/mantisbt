@@ -194,9 +194,9 @@ if( $t_top_buttons_enabled ) {
 ?>
 				<tr>
 					<td class="center" colspan="6">
-						<input ', helper_get_tab_index(), '
+						<input <?php helper_get_tab_index(); ?>
 							type="submit" class="button"
-							value="', lang_get( 'update_information_button' ), '" />
+							value="<?php echo lang_get( 'update_information_button' ); ?>" />
 					</td>
 				</tr>
 			</thead>
