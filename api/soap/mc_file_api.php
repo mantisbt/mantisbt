@@ -134,6 +134,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 			break;
 		case DATABASE:
 			$c_content = db_prepare_binary_string( $p_content );
+			$t_file_path = '';
 			break;
 	}
 
@@ -141,21 +142,28 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	$t_id_col = $p_table . '_id';
 
 	$t_query = 'INSERT INTO ' . $t_file_table . '
-				( ' . $t_id_col . ', title, description, diskfile, filename, folder, filesize, file_type, date_added, content, user_id )
+				( ' . $t_id_col . ', title, description, diskfile, filename, folder, filesize, file_type, date_added, user_id )
 		VALUES
 				( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', '
 				    . db_param() . ', ' . db_param() . ', ' . db_param() . ', '
 				    . db_param() . ', ' . db_param() . ', ' . db_param() . ', '
-				    . db_param() . ', ' . db_param() . ' )';
+				    . db_param() . ' )';
 	db_query_bound( $t_query, array(
 		$t_id, $p_title, $p_desc,
 		$t_unique_name, $p_name, $t_file_path,
 		$t_file_size, $p_file_type, db_now(),
-		$c_content, (int)$p_user_id,
+		(int)$p_user_id,
 	) );
 
 	# get attachment id
 	$t_attachment_id = db_insert_id( $t_file_table );
+
+	if( db_is_oracle() ) {
+		db_update_blob( $t_file_table, 'content', $c_content, "diskfile='$t_unique_name'" );
+	} else {
+		$t_query = "UPDATE $t_file_table SET content=" . db_param() . " WHERE id = " . db_param();
+		db_query_bound( $t_query, array( $c_content, $t_attachment_id ) );
+	}
 
 	if( 'bug' == $p_table ) {
 		# bump the last_updated date
