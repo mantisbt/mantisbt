@@ -172,7 +172,7 @@ if( $f_error || $f_cookie_error ) {
 			</div>
 			<div class="field-container">
 				<label for="password"><span><?php echo lang_get( 'password' ) ?></span></label>
-				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" class="<?php echo $t_password_field_autofocus ?>" /></span>
+				<span class="input"><input id="password" type="password" autocomplete="off" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" class="<?php echo $t_password_field_autofocus ?>" /></span>
 				<span class="label-style"></span>
 			</div>
 			<?php if( ON == config_get( 'allow_permanent_cookie' ) ) { ?>

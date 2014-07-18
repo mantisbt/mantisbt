@@ -750,7 +750,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 			</div>
 			<div class="field-container">
 				<label for="password"><span><?php echo lang_get( 'password' );?></span></label>
-				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" class="autofocus" /></span>
+				<span class="input"><input id="password" type="password" autocomplete="off" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" class="autofocus" /></span>
 				<span class="label-style"></span>
 			</div>
 			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'login_button' );?>" /></span>

@@ -171,18 +171,18 @@ if( $t_force_pw_reset ) {
 			?>
 			<div class="field-container">
 				<label for="password" <?php echo $t_force_pw_reset_html ?>><span><?php echo lang_get( 'current_password' ) ?></span></label>
-				<span class="input"><input id="password-current" type="password" name="password_current" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
+				<span class="input"><input id="password-current" autocomplete="off" type="password" name="password_current" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
 				<span class="label-style"></span>
 			</div>
 			<?php } ?>
 			<div class="field-container">
 				<label for="password" <?php echo $t_force_pw_reset_html ?>><span><?php echo lang_get( 'password' ) ?></span></label>
-				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
+				<span class="input"><input id="password" type="password" autocomplete="off" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
 				<label for="password-confirm" <?php echo $t_force_pw_reset_html ?>><span><?php echo lang_get( 'confirm_password' ) ?></span></label>
-				<span class="input"><input id="password-confirm" type="password" name="password_confirm" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
+				<span class="input"><input id="password-confirm" type="password" autocomplete="off" name="password_confirm" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" /></span>
 				<span class="label-style"></span>
 			</div>
 			<?php } ?>

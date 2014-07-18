@@ -571,7 +571,7 @@ if( !$g_database_upgrade ) {
 		Password (for Database)
 	</td>
 	<td>
-		<input name="db_password" type="password" value="<?php
+		<input name="db_password" type="password" autocomplete="off" value="<?php
 			echo !is_blank( $f_db_password ) && $t_config_exists
 				? CONFIGURED_PASSWORD
 				: $f_db_password;
@@ -607,7 +607,7 @@ if( !$g_database_upgrade ) {
 		Admin Password (to <?php echo( !$g_database_upgrade ) ? 'create Database' : 'update Database'?> if required)
 	</td>
 	<td>
-		<input name="admin_password" type="password" value="<?php
+		<input name="admin_password" type="password" autocomplete="off" value="<?php
 			echo !is_blank( $f_admin_password ) && $f_admin_password == $f_db_password
 				? CONFIGURED_PASSWORD
 				: $f_admin_password;
