@@ -608,10 +608,10 @@ function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) 
 				}
 			}
 
-			$t_version1 = plugin_version_array( $g_plugin_cache[$p_base_name]->version );
-			$t_version2 = plugin_version_array( $t_required );
+			$t_version_installed = plugin_version_array( $g_plugin_cache[$p_base_name]->version );
+			$t_version_required = plugin_version_array( $t_required );
 
-			$t_check = plugin_version_check( $t_version1, $t_version2, $t_maximum );
+			$t_check = plugin_version_check( $t_version_installed, $t_version_required, $t_maximum );
 
 			if( $t_check < 1 ) {
 				return $t_check;
