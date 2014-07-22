@@ -555,6 +555,42 @@ function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) 
 
 		$t_required_array = explode( ',', $p_required );
 
+		# If the plugin's minimum dependency for MantisCore is unspecified or
+		# lower than the current release (i.e. the plugin does not specifically
+		# list the current core version as supported) and the plugin does not
+		# define a maximum dependency, we add one with the current version's
+		# minor release (i.e. for 1.3.1 we would add '<1.3').
+		# The purpose of this is to avoid compatibility issues by disabling
+		# plugins which have not been updated for a new Mantis release; authors
+		# have to revise their code (if necessary), and release a new version
+		# of the plugin with updated dependencies.
+		# To indicate compatibility (e.g. with release 1.3), one can either:
+		# 1. update the minimum required version (i.e. plugin only works with
+		#    1.3; 1.2-compatible code is maintained separately):
+		#    $this->requires = array( 'MantisCore' => '1.3' );
+		# 2. add the new release as a 2nd minimum version (i.e. the plugin is
+		#    compatible with both versions):
+		#    $this->requires = array( 'MantisCore' => '1.2, 1.3' );
+		# 3. add a maximum version higher than the new release:
+		#    $this->requires = array( 'MantisCore' => '1.2, <2.0' );
+		#    Note that this may cause the plugin to face compatibility issues
+		#    if and when a version 1.4 is released.
+		if( $p_base_name == 'MantisCore' && strpos( $p_required, '<' ) === false ) {
+			$t_version_core = substr(
+				MANTIS_VERSION,
+				0,
+				strpos( MANTIS_VERSION, '.', strpos( MANTIS_VERSION, '.' ) + 1 )
+			);
+			$t_is_current_core_supported = false;
+			foreach( $t_required_array as $t_version_required ) {
+				$t_is_current_core_supported = $t_is_current_core_supported
+					|| version_compare( trim( $t_version_required ), $t_version_core, ">=" );
+			}
+			if( !$t_is_current_core_supported ) {
+				$t_required_array[] = '<' . $t_version_core;
+			}
+		}
+
 		foreach( $t_required_array as $t_required ) {
 			$t_required = trim( $t_required );
 			$t_maximum = false;
