@@ -1806,7 +1806,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			if( count( $t_tags_any ) ) {
 				$t_clauses = array();
 				foreach( $t_tags_any as $t_tag_row ) {
-					array_push( $t_clauses, $t_bug_tag_table . '.tag_id = ' . $t_tag_row[id] );
+					array_push( $t_clauses, $t_bug_tag_table . '.tag_id = ' . $t_tag_row['id'] );
 				}
 				array_push( $t_where_clauses, $t_bug_table . '.id IN ( SELECT bug_id FROM ' . $t_bug_tag_table . ' WHERE ( ' . implode( ' OR ', $t_clauses ) . ') )' );
 			}
@@ -1814,7 +1814,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			if( count( $t_tags_none ) ) {
 				$t_clauses = array();
 				foreach( $t_tags_none as $t_tag_row ) {
-					array_push( $t_clauses, $t_bug_tag_table . '.tag_id = ' . $t_tag_row[id] );
+					array_push( $t_clauses, $t_bug_tag_table . '.tag_id = ' . $t_tag_row['id'] );
 				}
 				array_push( $t_where_clauses, $t_bug_table . '.id NOT IN ( SELECT bug_id FROM ' . $t_bug_tag_table . ' WHERE ( ' . implode( ' OR ', $t_clauses ) . ') )' );
 			}
