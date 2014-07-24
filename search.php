@@ -67,27 +67,31 @@ gpc_make_array( FILTER_PROPERTY_MONITOR_USER_ID );
 gpc_make_array( FILTER_PROPERTY_VIEW_STATE );
 
 $t_my_filter = filter_get_default();
+
+# gpc_get_*_array functions expect 2nd param to be an array
+$t_meta_filter_any_array = array( META_FILTER_ANY );
+
 $t_my_filter[FILTER_PROPERTY_SEARCH] = gpc_get_string( FILTER_PROPERTY_SEARCH, '' );
-$t_my_filter[FILTER_PROPERTY_CATEGORY_ID] = gpc_get_string_array( FILTER_PROPERTY_CATEGORY_ID, META_FILTER_ANY );
-$t_my_filter[FILTER_PROPERTY_REPORTER_ID] = gpc_get_string_array( FILTER_PROPERTY_REPORTER_ID, META_FILTER_ANY );
-$t_my_filter[FILTER_PROPERTY_HANDLER_ID] = gpc_get_string_array( FILTER_PROPERTY_HANDLER_ID, META_FILTER_ANY );
-$t_my_filter[FILTER_PROPERTY_SEVERITY] = gpc_get_string_array( FILTER_PROPERTY_SEVERITY, META_FILTER_ANY );
+$t_my_filter[FILTER_PROPERTY_CATEGORY_ID] = gpc_get_string_array( FILTER_PROPERTY_CATEGORY_ID, $t_meta_filter_any_array );
+$t_my_filter[FILTER_PROPERTY_REPORTER_ID] = gpc_get_string_array( FILTER_PROPERTY_REPORTER_ID, $t_meta_filter_any_array );
+$t_my_filter[FILTER_PROPERTY_HANDLER_ID] = gpc_get_string_array( FILTER_PROPERTY_HANDLER_ID, $t_meta_filter_any_array );
+$t_my_filter[FILTER_PROPERTY_SEVERITY] = gpc_get_string_array( FILTER_PROPERTY_SEVERITY, $t_meta_filter_any_array );
 
-$t_my_filter[FILTER_PROPERTY_STATUS] = gpc_get_string_array( FILTER_PROPERTY_STATUS, META_FILTER_ANY );
+$t_my_filter[FILTER_PROPERTY_STATUS] = gpc_get_string_array( FILTER_PROPERTY_STATUS, $t_meta_filter_any_array );
 
-$t_my_filter[FILTER_PROPERTY_PROJECT_ID] = gpc_get_string_array( FILTER_PROPERTY_PROJECT_ID, META_FILTER_ANY );
-$t_my_filter[FILTER_PROPERTY_RESOLUTION] = gpc_get_string_array( FILTER_PROPERTY_RESOLUTION, META_FILTER_ANY );
-$t_my_filter[FILTER_PROPERTY_BUILD] = gpc_get_string_array( FILTER_PROPERTY_BUILD, META_FILTER_ANY );
-$t_my_filter[FILTER_PROPERTY_FIXED_IN_VERSION] = gpc_get_string_array( FILTER_PROPERTY_FIXED_IN_VERSION, META_FILTER_ANY );
-$t_my_filter[FILTER_PROPERTY_TARGET_VERSION] = gpc_get_string_array( FILTER_PROPERTY_TARGET_VERSION, META_FILTER_ANY );
-$t_my_filter[FILTER_PROPERTY_PRIORITY] = gpc_get_string_array( FILTER_PROPERTY_PRIORITY, META_FILTER_ANY );
-$t_my_filter[FILTER_PROPERTY_MONITOR_USER_ID] = gpc_get_string_array( FILTER_PROPERTY_MONITOR_USER_ID, META_FILTER_ANY );
-$t_my_filter[FILTER_PROPERTY_PROFILE_ID] = gpc_get_string_array( FILTER_PROPERTY_PROFILE_ID, META_FILTER_ANY );
-$t_my_filter[FILTER_PROPERTY_PLATFORM] = gpc_get_string_array( FILTER_PROPERTY_PLATFORM, META_FILTER_ANY );
-$t_my_filter[FILTER_PROPERTY_OS] = gpc_get_string_array( FILTER_PROPERTY_OS, META_FILTER_ANY );
-$t_my_filter[FILTER_PROPERTY_OS_BUILD] = gpc_get_string_array( FILTER_PROPERTY_OS_BUILD, META_FILTER_ANY );
-$t_my_filter[FILTER_PROPERTY_VIEW_STATE] = gpc_get_string_array( FILTER_PROPERTY_VIEW_STATE, META_FILTER_ANY );
-$t_my_filter[FILTER_PROPERTY_VERSION] = gpc_get_string_array( FILTER_PROPERTY_VERSION, META_FILTER_ANY );
+$t_my_filter[FILTER_PROPERTY_PROJECT_ID] = gpc_get_string_array( FILTER_PROPERTY_PROJECT_ID, $t_meta_filter_any_array );
+$t_my_filter[FILTER_PROPERTY_RESOLUTION] = gpc_get_string_array( FILTER_PROPERTY_RESOLUTION, $t_meta_filter_any_array );
+$t_my_filter[FILTER_PROPERTY_BUILD] = gpc_get_string_array( FILTER_PROPERTY_BUILD, $t_meta_filter_any_array );
+$t_my_filter[FILTER_PROPERTY_FIXED_IN_VERSION] = gpc_get_string_array( FILTER_PROPERTY_FIXED_IN_VERSION, $t_meta_filter_any_array );
+$t_my_filter[FILTER_PROPERTY_TARGET_VERSION] = gpc_get_string_array( FILTER_PROPERTY_TARGET_VERSION, $t_meta_filter_any_array );
+$t_my_filter[FILTER_PROPERTY_PRIORITY] = gpc_get_string_array( FILTER_PROPERTY_PRIORITY, $t_meta_filter_any_array );
+$t_my_filter[FILTER_PROPERTY_MONITOR_USER_ID] = gpc_get_string_array( FILTER_PROPERTY_MONITOR_USER_ID, $t_meta_filter_any_array );
+$t_my_filter[FILTER_PROPERTY_PROFILE_ID] = gpc_get_string_array( FILTER_PROPERTY_PROFILE_ID, $t_meta_filter_any_array );
+$t_my_filter[FILTER_PROPERTY_PLATFORM] = gpc_get_string_array( FILTER_PROPERTY_PLATFORM, $t_meta_filter_any_array );
+$t_my_filter[FILTER_PROPERTY_OS] = gpc_get_string_array( FILTER_PROPERTY_OS, $t_meta_filter_any_array );
+$t_my_filter[FILTER_PROPERTY_OS_BUILD] = gpc_get_string_array( FILTER_PROPERTY_OS_BUILD, $t_meta_filter_any_array );
+$t_my_filter[FILTER_PROPERTY_VIEW_STATE] = gpc_get_string_array( FILTER_PROPERTY_VIEW_STATE, $t_meta_filter_any_array );
+$t_my_filter[FILTER_PROPERTY_VERSION] = gpc_get_string_array( FILTER_PROPERTY_VERSION, $t_meta_filter_any_array );
 $t_my_filter[FILTER_PROPERTY_MATCH_TYPE] = gpc_get_int( FILTER_PROPERTY_MATCH_TYPE, FILTER_MATCH_ALL );
 
 # Filtering by Date
