@@ -699,11 +699,11 @@ function tag_display_link( array $p_tag_row, $p_bug_id = 0 ) {
 	$t_name = string_display_line( $p_tag_row['name'] );
 	$t_description = string_display_line( $p_tag_row['description'] );
 
-	echo '<a href="tag_view_page.php?tag_id=' . $p_tag_row[id] . '" title="' . $t_description . '">' . $t_name . '</a>';
+	echo '<a href="tag_view_page.php?tag_id=' . $p_tag_row['id'] . '" title="' . $t_description . '">' . $t_name . '</a>';
 
 	if( $p_bug_id > 0 && access_has_bug_level( $t_detach, $p_bug_id ) ) {
 		$t_tooltip = string_html_specialchars( sprintf( lang_get( 'tag_detach' ), $t_name ) );
-		echo '<a href="tag_detach.php?bug_id=' . $p_bug_id . '&amp;tag_id=' . $p_tag_row[id] . $s_security_token . '"><img src="images/delete.png" class="delete-icon" title="' . $t_tooltip . '" alt="X"/></a>';
+		echo '<a href="tag_detach.php?bug_id=' . $p_bug_id . '&amp;tag_id=' . $p_tag_row['id'] . $s_security_token . '"><img src="images/delete.png" class="delete-icon" title="' . $t_tooltip . '" alt="X"/></a>';
 	}
 
 	return true;
