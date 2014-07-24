@@ -1168,7 +1168,8 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		}
 
 		# filter out inaccessible projects.
-		if( !access_has_project_level( VIEWER, $t_pid, $t_user_id ) ) {
+		if( !project_exists( $t_pid ) || !access_has_project_level( VIEWER, $t_pid, $t_user_id ) ) {
+			log_event( LOG_FILTERING, 'Invalid or inaccessible project: ' . $t_pid );
 			continue;
 		}
 
