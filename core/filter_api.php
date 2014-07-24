@@ -2145,7 +2145,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	$t_form_name_suffix = $p_expanded ? '_open' : '_closed';
 
 	$t_filter = current_user_get_bug_filter();
-	$t_filter = filter_ensure_valid_filter( $t_filter );
+	$t_filter = filter_ensure_valid_filter( $t_filter === false ? array() : $t_filter );
 	$t_project_id = helper_get_current_project();
 	$t_page_number = (int)$p_page_number;
 
