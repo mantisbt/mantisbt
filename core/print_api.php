@@ -631,12 +631,12 @@ function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_fi
 /**
  * prints the profiles given the user id
  * @param integer $p_user_id   A user identifier.
- * @param string  $p_select_id ID to mark as selected by default.
+ * @param integer $p_select_id ID to mark as selected; if 0, gets the user's default profile.
  * @param array   $p_profiles  Array of profiles.
  * @return void
  */
-function print_profile_option_list( $p_user_id, $p_select_id = '', array $p_profiles = null ) {
-	if( '' === $p_select_id ) {
+function print_profile_option_list( $p_user_id, $p_select_id = 0, array $p_profiles = null ) {
+	if( 0 == $p_select_id ) {
 		$p_select_id = profile_get_default( $p_user_id );
 	}
 	if( $p_profiles != null ) {
@@ -650,12 +650,12 @@ function print_profile_option_list( $p_user_id, $p_select_id = '', array $p_prof
 /**
  * prints the profiles used in a certain project
  * @param integer $p_project_id A project identifier.
- * @param string  $p_select_id  ID to mark as selected by default.
+ * @param integer $p_select_id  ID to mark as selected; if 0, gets the user's default profile.
  * @param array   $p_profiles   Array of profiles.
  * @return void
  */
-function print_profile_option_list_for_project( $p_project_id, $p_select_id = '', array $p_profiles = null ) {
-	if( '' === $p_select_id ) {
+function print_profile_option_list_for_project( $p_project_id, $p_select_id = 0, array $p_profiles = null ) {
+	if( 0 == $p_select_id ) {
 		$p_select_id = profile_get_default( auth_get_current_user_id() );
 	}
 	if( $p_profiles != null ) {
@@ -670,7 +670,7 @@ function print_profile_option_list_for_project( $p_project_id, $p_select_id = ''
  * print the profile option list from profiles array
  *
  * @param array   $p_profiles  Array of Operating System Profiles (ID, platform, os, os_build).
- * @param integer $p_select_id ID to mark as selected by default.
+ * @param integer $p_select_id ID to mark as selected.
  * @return void
  */
 function print_profile_option_list_from_profiles( array $p_profiles, $p_select_id ) {
