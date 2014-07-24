@@ -326,8 +326,7 @@ function filter_encode_field_and_value( $p_field_name, $p_field_value, $p_field_
 			foreach( $p_field_value as $t_value ) {
 				$t_query_array[] = urlencode( $p_field_name . '[]' ) . '=' . urlencode( $t_value );
 			}
-		}
-		else if( $t_count == 1 ) {
+		} else if( $t_count == 1 ) {
 			$t_query_array[] = urlencode( $p_field_name ) . '=' . urlencode( $p_field_value[0] );
 		}
 	} else {
@@ -492,10 +491,10 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		$p_filter_arr[FILTER_PROPERTY_STICKY] = gpc_string_to_bool( config_get( 'show_sticky_issues' ) );
 	}
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] = "last_updated";
+		$p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] = 'last_updated';
 	}
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_SORT_DIRECTION] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_SORT_DIRECTION] = "DESC";
+		$p_filter_arr[FILTER_PROPERTY_SORT_DIRECTION] = 'DESC';
 	}
 
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_PLATFORM] ) ) {
@@ -548,8 +547,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	}
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_VIEW_STATE] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_VIEW_STATE] = gpc_get( FILTER_PROPERTY_VIEW_STATE, '' );
-	}
-	else if( filter_field_is_any( $p_filter_arr[FILTER_PROPERTY_VIEW_STATE] ) ) {
+	} else if( filter_field_is_any( $p_filter_arr[FILTER_PROPERTY_VIEW_STATE] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_VIEW_STATE] = META_FILTER_ANY;
 	}
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_RELATIONSHIP_TYPE] ) ) {
@@ -646,7 +644,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 					$t_drop = true;
 				}
 			}
-			if( !in_array( $t_dir_fields[$i], array( "ASC", "DESC" ) ) ) {
+			if( !in_array( $t_dir_fields[$i], array( 'ASC', 'DESC' ) ) ) {
 				$t_drop = true;
 			}
 			if( $t_drop ) {
@@ -659,8 +657,8 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		$p_filter_arr['sort'] = implode( ',', $t_sort_fields );
 		$p_filter_arr['dir'] = implode( ',', $t_dir_fields );
 	} else {
-		$p_filter_arr['sort'] = "last_updated";
-		$p_filter_arr['dir'] = "DESC";
+		$p_filter_arr['sort'] = 'last_updated';
+		$p_filter_arr['dir'] = 'DESC';
 	}
 
 	# validate or filter junk from other fields
@@ -687,8 +685,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 				$p_filter_arr[$t_multi_field_name] = array(
 					config_get( 'hide_status_default' ),
 				);
-			}
-			else if( 'custom_fields' == $t_multi_field_name ) {
+			} else if( 'custom_fields' == $t_multi_field_name ) {
 				$p_filter_arr[$t_multi_field_name] = array(
 					$f_custom_fields_data,
 				);
@@ -714,11 +711,9 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 				}
 				if( 'string' == $t_multi_field_type ) {
 					$t_checked_array[] = $t_filter_value;
-				}
-				else if( 'int' == $t_multi_field_type ) {
+				} else if( 'int' == $t_multi_field_type ) {
 					$t_checked_array[] = (int)$t_filter_value;
-				}
-				else if( 'array' == $t_multi_field_type ) {
+				} else if( 'array' == $t_multi_field_type ) {
 					$t_checked_array[] = $t_filter_value;
 				}
 			}
@@ -931,7 +926,7 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 	$t_plugin_columns = columns_get_plugin_columns();
 
 	if( gpc_string_to_bool( $p_filter[FILTER_PROPERTY_STICKY] ) && ( null !== $p_show_sticky ) ) {
-		$p_query_clauses['order'][] = "$t_bug_table.sticky DESC";
+		$p_query_clauses['order'][] = $t_bug_table . '.sticky DESC';
 	}
 
 	$t_count = count( $t_sort_fields );
@@ -948,15 +943,16 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 				$t_value_field = ( $t_def['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ? 'text' : 'value' );
 				$c_cf_alias = 'custom_field_' . $t_custom_field_id;
 				$t_cf_table_alias = $t_custom_field_string_table . '_' . $t_custom_field_id;
-				$t_cf_select = "$t_cf_table_alias.$t_value_field $c_cf_alias";
+				$t_cf_select = $t_cf_table_alias . '.' . $t_value_field . ' ' . $c_cf_alias;
 
 				# check to be sure this field wasn't already added to the query.
 				if( !in_array( $t_cf_select, $p_query_clauses['select'] ) ) {
 					$p_query_clauses['select'][] = $t_cf_select;
-					$p_query_clauses['join'][] = "LEFT JOIN $t_custom_field_string_table $t_cf_table_alias ON $t_bug_table.id = $t_cf_table_alias.bug_id AND $t_cf_table_alias.field_id = $t_custom_field_id";
+					$p_query_clauses['join'][] = 'LEFT JOIN ' . $t_custom_field_string_table . ' ' . $t_cf_table_alias . ' ON ' .
+												$t_bug_table . '.id = ' . $t_cf_table_alias . '.bug_id AND ' . $t_cf_table_alias . '.field_id = ' . $t_custom_field_id;
 				}
 
-				$p_query_clauses['order'][] = "$c_cf_alias $c_dir";
+				$p_query_clauses['order'][] = $c_cf_alias . ' ' . $c_dir;
 
 			# if sorting by plugin columns
 			} else if( isset( $t_plugin_columns[$t_sort_fields[$i]] ) ) {
@@ -977,26 +973,26 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 
 			# standard column
 			} else {
-				$t_sort_col = "$t_bug_table.$c_sort";
+				$t_sort_col = $t_bug_table . '.' . $c_sort;
 
 				# when sorting by due_date, always display undefined dates last
 				if( 'due_date' == $c_sort && 'ASC' == $c_dir ) {
-					$t_sort_due_date = "$t_sort_col = 1";
+					$t_sort_due_date = $t_sort_col . ' = 1';
 					$p_query_clauses['select'][] = $t_sort_due_date;
-					$t_sort_col = "$t_sort_due_date, $t_sort_col";
+					$t_sort_col = $t_sort_due_date . ', ' . $t_sort_col;
 				}
 
-				$p_query_clauses['order'][] = "$t_sort_col $c_dir";
+				$p_query_clauses['order'][] = $t_sort_col . ' ' .$c_dir;
 			}
 		}
 	}
 
 	# add basic sorting if necessary
 	if( !in_array( 'last_updated', $t_sort_fields ) ) {
-		$p_query_clauses['order'][] = "$t_bug_table.last_updated DESC";
+		$p_query_clauses['order'][] = $t_bug_table . '.last_updated DESC';
 	}
 	if( !in_array( 'date_submitted', $t_sort_fields ) ) {
-		$p_query_clauses['order'][] = "$t_bug_table.date_submitted DESC";
+		$p_query_clauses['order'][] = $t_bug_table . '.date_submitted DESC';
 	}
 
 	return $p_query_clauses;
@@ -1026,8 +1022,8 @@ function filter_unique_query_clauses( array $p_query_clauses ) {
 function filter_get_bug_count( array $p_query_clauses ) {
 	$t_bug_table = db_get_table( 'bug' );
 	$p_query_clauses = filter_unique_query_clauses( $p_query_clauses );
-	$t_select_string = "SELECT Count( DISTINCT $t_bug_table.id ) as idcnt ";
-	$t_from_string = " FROM " . implode( ', ', $p_query_clauses['from'] );
+	$t_select_string = 'SELECT Count( DISTINCT ' . $t_bug_table . '.id ) as idcnt ';
+	$t_from_string = ' FROM ' . implode( ', ', $p_query_clauses['from'] );
 	$t_join_string = (( count( $p_query_clauses['join'] ) > 0 ) ? implode( ' ', $p_query_clauses['join'] ) : '' );
 	$t_where_string = count( $p_query_clauses['project_where'] ) > 0 ? 'WHERE '. implode( ' AND ', $p_query_clauses['project_where'] ) : '';
 	if( count( $p_query_clauses['where'] ) > 0 ) {
@@ -1035,7 +1031,7 @@ function filter_get_bug_count( array $p_query_clauses ) {
 		$t_where_string .= implode( $p_query_clauses['operator'], $p_query_clauses['where'] );
 		$t_where_string .= ' ) ';
 	}
-	$t_result = db_query_bound( "$t_select_string $t_from_string $t_join_string $t_where_string", $p_query_clauses['where_values'] );
+	$t_result = db_query_bound( $t_select_string . ' ' . $t_from_string . ' ' . $t_join_string . ' ' . $t_where_string, $p_query_clauses['where_values'] );
 	return db_result( $t_result );
 }
 
@@ -1116,13 +1112,13 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	$t_where_clauses = array();
 
 	$t_project_where_clauses =  array(
-		"$t_project_table.enabled = " . db_param(),
+		$t_project_table . '.enabled = ' . db_param(),
 	);
 	$t_where_params = array(
 		1,
 	);
 	$t_select_clauses = array(
-		"$t_bug_table.*",
+		$t_bug_table . '.*',
 	);
 
 	$t_from_clauses = array(
@@ -1130,7 +1126,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	);
 
 	$t_join_clauses = array(
-		"JOIN $t_project_table ON $t_project_table.id = $t_bug_table.project_id",
+		' JOIN ' . $t_project_table . ' ON ' . $t_project_table . '.id = ' . $t_bug_table . '.project_id',
 	);
 
 	# normalize the project filtering into an array $t_project_ids
@@ -1237,21 +1233,19 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 		$t_count_private_and_public_project_ids = count( $t_private_and_public_project_ids );
 		if( $t_count_private_and_public_project_ids == 1 ) {
-			$t_private_and_public_query = "( $t_bug_table.project_id = " . $t_private_and_public_project_ids[0] . " )";
-		}
-		else if( $t_count_private_and_public_project_ids > 1 ) {
-			$t_private_and_public_query = "( $t_bug_table.project_id in (" . implode( ', ', $t_private_and_public_project_ids ) . ") )";
+			$t_private_and_public_query = '( ' . $t_bug_table . '.project_id = ' . $t_private_and_public_project_ids[0] . ' )';
+		} else if( $t_count_private_and_public_project_ids > 1 ) {
+			$t_private_and_public_query = '( ' . $t_bug_table . '.project_id in (' . implode( ', ', $t_private_and_public_project_ids ) . ') )';
 		} else {
 			$t_private_and_public_query = null;
 		}
 
 		$t_count_public_only_project_ids = count( $t_public_only_project_ids );
-		$t_public_view_state_check = "( ( $t_bug_table.view_state = " . VS_PUBLIC . " ) OR ( $t_bug_table.reporter_id = $t_user_id ) )";
+		$t_public_view_state_check = '( ( ' . $t_bug_table . '.view_state = ' . VS_PUBLIC . ' ) OR ( ' . $t_bug_table . '.reporter_id = ' . $t_user_id . ') )';
 		if( $t_count_public_only_project_ids == 1 ) {
-			$t_public_only_query = "( ( $t_bug_table.project_id = " . $t_public_only_project_ids[0] . " ) AND $t_public_view_state_check )";
-		}
-		else if( $t_count_public_only_project_ids > 1 ) {
-			$t_public_only_query = "( ( $t_bug_table.project_id in (" . implode( ', ', $t_public_only_project_ids ) . ") ) AND $t_public_view_state_check )";
+			$t_public_only_query = '( ( ' . $t_bug_table . '.project_id = ' . $t_public_only_project_ids[0] . ' ) AND ' . $t_public_view_state_check . ')';
+		} else if( $t_count_public_only_project_ids > 1 ) {
+			$t_public_only_query = '( ( ' . $t_bug_table . '.project_id in (' . implode( ', ', $t_public_only_project_ids ) . ') ) AND ' . $t_public_view_state_check . ')';
 		} else {
 			$t_public_only_query = null;
 		}
@@ -1263,7 +1257,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		} else if( $t_public_only_query === null ) {
 			$t_project_query = $t_private_and_public_query;
 		} else {
-			$t_project_query = "( $t_public_only_query OR $t_private_and_public_query )";
+			$t_project_query = '( ' . $t_public_only_query . ' OR ' . $t_private_and_public_query . ' )';
 		}
 
 		log_event( LOG_FILTERING, 'project query = ' . $t_project_query );
@@ -1273,18 +1267,18 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	# date filter
 	if( ( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_YEAR] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_YEAR] ) ) {
 
-		$t_start_string = $t_filter[FILTER_PROPERTY_START_YEAR] . "-" . $t_filter[FILTER_PROPERTY_START_MONTH] . "-" . $t_filter[FILTER_PROPERTY_START_DAY] . " 00:00:00";
-		$t_end_string = $t_filter[FILTER_PROPERTY_END_YEAR] . "-" . $t_filter[FILTER_PROPERTY_END_MONTH] . "-" . $t_filter[FILTER_PROPERTY_END_DAY] . " 23:59:59";
+		$t_start_string = $t_filter[FILTER_PROPERTY_START_YEAR] . '-' . $t_filter[FILTER_PROPERTY_START_MONTH] . '-' . $t_filter[FILTER_PROPERTY_START_DAY] . ' 00:00:00';
+		$t_end_string = $t_filter[FILTER_PROPERTY_END_YEAR] . '-' . $t_filter[FILTER_PROPERTY_END_MONTH] . '-' . $t_filter[FILTER_PROPERTY_END_DAY] . ' 23:59:59';
 
 		$t_where_params[] = strtotime( $t_start_string );
 		$t_where_params[] = strtotime( $t_end_string );
-		array_push( $t_project_where_clauses, "($t_bug_table.date_submitted BETWEEN " . db_param() . " AND " . db_param() . " )" );
+		array_push( $t_project_where_clauses, '(' . $t_bug_table . '.date_submitted BETWEEN ' . db_param() . ' AND ' . db_param() . ' )' );
 	}
 
 	# view state
 	$t_view_state = (int)$t_filter[FILTER_PROPERTY_VIEW_STATE];
 	if( !filter_field_is_any( $t_filter[FILTER_PROPERTY_VIEW_STATE] ) ) {
-		$t_view_state_query = "($t_bug_table.view_state=" . db_param() . ')';
+		$t_view_state_query = '(' . $t_bug_table . '.view_state=' . db_param() . ')';
 		log_event( LOG_FILTERING, 'view_state query = ' . $t_view_state_query );
 		$t_where_params[] = $t_view_state;
 		array_push( $t_where_clauses, $t_view_state_query );
@@ -1298,7 +1292,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 		foreach( $t_filter[FILTER_PROPERTY_REPORTER_ID] as $t_filter_member ) {
 			if( filter_field_is_none( $t_filter_member ) ) {
-				array_push( $t_clauses, "0" );
+				array_push( $t_clauses, '0' );
 			} else {
 				$c_reporter_id = (int)$t_filter_member;
 				if( filter_field_is_myself( $c_reporter_id ) ) {
@@ -1310,9 +1304,9 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		}
 
 		if( 1 < count( $t_clauses ) ) {
-			$t_reporter_query = "( $t_bug_table.reporter_id in (" . implode( ', ', $t_clauses ) . ") )";
+			$t_reporter_query = '( ' . $t_bug_table . '.reporter_id in (' . implode( ', ', $t_clauses ) . ') )';
 		} else {
-			$t_reporter_query = "( $t_bug_table.reporter_id=$t_clauses[0] )";
+			$t_reporter_query = '( ' . $t_bug_table . '.reporter_id=' . $t_clauses[0] . ' )';
 		}
 
 		log_event( LOG_FILTERING, 'reporter query = ' . $t_reporter_query );
@@ -1328,7 +1322,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	if( ( ON === $t_limit_reporters ) && ( !access_has_project_level( REPORTER + 1, $t_project_id, $t_user_id ) ) ) {
 		$c_reporter_id = $c_user_id;
 		$t_where_params[] = $c_reporter_id;
-		array_push( $t_where_clauses, "($t_bug_table.reporter_id=" . db_param() . ')' );
+		array_push( $t_where_clauses, '(' . $t_bug_table . '.reporter_id=' . db_param() . ')' );
 	}
 
 	# handler
@@ -1349,9 +1343,9 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		}
 
 		if( 1 < count( $t_clauses ) ) {
-			$t_handler_query = "( $t_bug_table.handler_id in (" . implode( ', ', $t_clauses ) . ") )";
+			$t_handler_query = '( ' . $t_bug_table . '.handler_id in (' . implode( ', ', $t_clauses ) . ') )';
 		} else {
-			$t_handler_query = "( $t_bug_table.handler_id=$t_clauses[0] )";
+			$t_handler_query = '( ' . $t_bug_table . '.handler_id=' . $t_clauses[0] . ' )';
 		}
 
 		log_event( LOG_FILTERING, 'handler query = ' . $t_handler_query );
@@ -1376,10 +1370,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_tmp[] = db_param();
 				$t_where_params[] = $t_clause;
 			}
-			array_push( $t_where_clauses, "( $t_bug_table.category_id in ( SELECT id FROM $t_category_table WHERE name in (" . implode( ', ', $t_where_tmp ) . ") ) )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.category_id in ( SELECT id FROM ' . $t_category_table . ' WHERE name in (' . implode( ', ', $t_where_tmp ) . ') ) )' );
 		} else {
 			$t_where_params[] = $t_clauses[0];
-			array_push( $t_where_clauses, "( $t_bug_table.category_id in ( SELECT id FROM $t_category_table WHERE name=" . db_param() . ") )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.category_id in ( SELECT id FROM ' . $t_category_table . ' WHERE name=' . db_param() . ') )' );
 		}
 	}
 
@@ -1397,10 +1391,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_tmp[] = db_param();
 				$t_where_params[] = $t_clause;
 			}
-			array_push( $t_where_clauses, "( $t_bug_table.severity in (" . implode( ', ', $t_where_tmp ) . ") )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.severity in (' . implode( ', ', $t_where_tmp ) . ') )' );
 		} else {
 			$t_where_params[] = $t_clauses[0];
-			array_push( $t_where_clauses, "( $t_bug_table.severity=" . db_param() . " )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.severity=' . db_param() . ' )' );
 		}
 	}
 
@@ -1448,10 +1442,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_tmp[] = db_param();
 				$t_where_params[] = $t_clause;
 			}
-			array_push( $t_where_clauses, "( $t_bug_table.status in (" . implode( ', ', $t_where_tmp ) . ") )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.status in (' . implode( ', ', $t_where_tmp ) . ') )' );
 		} else {
 			$t_where_params[] = $t_clauses[0];
-			array_push( $t_where_clauses, "( $t_bug_table.status=" . db_param() . " )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.status=' . db_param() . ' )' );
 		}
 	}
 
@@ -1469,10 +1463,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_tmp[] = db_param();
 				$t_where_params[] = $t_clause;
 			}
-			array_push( $t_where_clauses, "( $t_bug_table.resolution in (" . implode( ', ', $t_where_tmp ) . ") )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.resolution in (' . implode( ', ', $t_where_tmp ) . ') )' );
 		} else {
 			$t_where_params[] = $t_clauses[0];
-			array_push( $t_where_clauses, "( $t_bug_table.resolution=" . db_param() . " )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.resolution=' . db_param() . ' )' );
 		}
 	}
 
@@ -1490,10 +1484,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_tmp[] = db_param();
 				$t_where_params[] = $t_clause;
 			}
-			array_push( $t_where_clauses, "( $t_bug_table.priority in (" . implode( ', ', $t_where_tmp ) . ") )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.priority in (' . implode( ', ', $t_where_tmp ) . ') )' );
 		} else {
 			$t_where_params[] = $t_clauses[0];
-			array_push( $t_where_clauses, "( $t_bug_table.priority=" . db_param() . " )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.priority=' . db_param() . ' )' );
 		}
 	}
 
@@ -1516,10 +1510,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_tmp[] = db_param();
 				$t_where_params[] = $t_clause;
 			}
-			array_push( $t_where_clauses, "( $t_bug_table.build in (" . implode( ', ', $t_where_tmp ) . ") )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.build in (' . implode( ', ', $t_where_tmp ) . ') )' );
 		} else {
 			$t_where_params[] = $t_clauses[0];
-			array_push( $t_where_clauses, "( $t_bug_table.build=" . db_param() . " )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.build=' . db_param() . ' )' );
 		}
 	}
 
@@ -1543,10 +1537,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_tmp[] = db_param();
 				$t_where_params[] = $t_clause;
 			}
-			array_push( $t_where_clauses, "( $t_bug_table.version in (" . implode( ', ', $t_where_tmp ) . ") )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.version in (' . implode( ', ', $t_where_tmp ) . ') )' );
 		} else {
 			$t_where_params[] = $t_clauses[0];
-			array_push( $t_where_clauses, "( $t_bug_table.version=" . db_param() . " )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.version=' . db_param() . ' )' );
 		}
 	}
 
@@ -1557,10 +1551,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		foreach( $t_filter[FILTER_PROPERTY_PROFILE_ID] as $t_filter_member ) {
 			$t_filter_member = stripslashes( $t_filter_member );
 			if( filter_field_is_none( $t_filter_member ) ) {
-				array_push( $t_clauses, "0" );
+				array_push( $t_clauses, '0' );
 			} else {
 				$c_show_profile = (int)$t_filter_member;
-				array_push( $t_clauses, "$c_show_profile" );
+				array_push( $t_clauses, $c_show_profile );
 			}
 		}
 		if( 1 < count( $t_clauses ) ) {
@@ -1569,10 +1563,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_tmp[] = db_param();
 				$t_where_params[] = $t_clause;
 			}
-			array_push( $t_where_clauses, "( $t_bug_table.profile_id in (" . implode( ', ', $t_where_tmp ) . ") )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.profile_id in (' . implode( ', ', $t_where_tmp ) . ') )' );
 		} else {
 			$t_where_params[] = $t_clauses[0];
-			array_push( $t_where_clauses, "( $t_bug_table.profile_id=" . db_param() . " )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.profile_id=' . db_param() . ' )' );
 		}
 	}
 
@@ -1596,10 +1590,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_tmp[] = db_param();
 				$t_where_params[] = $t_clause;
 			}
-			array_push( $t_where_clauses, "( $t_bug_table.platform in (" . implode( ', ', $t_where_tmp ) . ") )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.platform in (' . implode( ', ', $t_where_tmp ) . ') )' );
 		} else {
 			$t_where_params[] = $t_clauses[0];
-			array_push( $t_where_clauses, "( $t_bug_table.platform = " . db_param() . " )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.platform = ' . db_param() . ' )' );
 		}
 	}
 
@@ -1623,10 +1617,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_tmp[] = db_param();
 				$t_where_params[] = $t_clause;
 			}
-			array_push( $t_where_clauses, "( $t_bug_table.os in (" . implode( ', ', $t_where_tmp ) . ") )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.os in (' . implode( ', ', $t_where_tmp ) . ') )' );
 		} else {
 			$t_where_params[] = $t_clauses[0];
-			array_push( $t_where_clauses, "( $t_bug_table.os = " . db_param() . " )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.os = ' . db_param() . ' )' );
 		}
 	}
 
@@ -1650,10 +1644,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_tmp[] = db_param();
 				$t_where_params[] = $t_clause;
 			}
-			array_push( $t_where_clauses, "( $t_bug_table.os_build in (" . implode( ', ', $t_where_tmp ) . ") )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.os_build in (' . implode( ', ', $t_where_tmp ) . ') )' );
 		} else {
 			$t_where_params[] = $t_clauses[0];
-			array_push( $t_where_clauses, "( $t_bug_table.os_build = " . db_param() . " )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.os_build = ' . db_param() . ' )' );
 		}
 	}
 
@@ -1676,10 +1670,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_tmp[] = db_param();
 				$t_where_params[] = $t_clause;
 			}
-			array_push( $t_where_clauses, "( $t_bug_table.fixed_in_version in (" . implode( ', ', $t_where_tmp ) . ") )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.fixed_in_version in (' . implode( ', ', $t_where_tmp ) . ') )' );
 		} else {
 			$t_where_params[] = $t_clauses[0];
-			array_push( $t_where_clauses, "( $t_bug_table.fixed_in_version=" . db_param() . " )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.fixed_in_version=' . db_param() . ' )' );
 		}
 	}
 
@@ -1704,10 +1698,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_tmp[] = db_param();
 				$t_where_params[] = $t_clause;
 			}
-			array_push( $t_where_clauses, "( $t_bug_table.target_version in (" . implode( ', ', $t_where_tmp ) . ") )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.target_version in (' . implode( ', ', $t_where_tmp ) . ') )' );
 		} else {
 			$t_where_params[] = $t_clauses[0];
-			array_push( $t_where_clauses, "( $t_bug_table.target_version=" . db_param() . " )" );
+			array_push( $t_where_clauses, '( ' . $t_bug_table . '.target_version=' . db_param() . ' )' );
 		}
 	}
 
@@ -1715,7 +1709,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	if( !filter_field_is_any( $t_filter[FILTER_PROPERTY_MONITOR_USER_ID] ) ) {
 		$t_clauses = array();
 		$t_table_name = 'user_monitor';
-		array_push( $t_join_clauses, "LEFT JOIN $t_bug_monitor_table $t_table_name ON $t_table_name.bug_id = $t_bug_table.id" );
+		array_push( $t_join_clauses, 'LEFT JOIN ' . $t_bug_monitor_table . ' ' . $t_table_name . ' ON ' . $t_table_name . '.bug_id = ' . $t_bug_table . '.id' );
 
 		foreach( $t_filter[FILTER_PROPERTY_MONITOR_USER_ID] as $t_filter_member ) {
 			$c_user_monitor = (int)$t_filter_member;
@@ -1731,10 +1725,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_tmp[] = db_param();
 				$t_where_params[] = $t_clause;
 			}
-			array_push( $t_where_clauses, "( $t_table_name.user_id in (" . implode( ', ', $t_where_tmp ) . ") )" );
+			array_push( $t_where_clauses, '( ' . $t_table_name . '.user_id in (' . implode( ', ', $t_where_tmp ) . ') )' );
 		} else {
 			$t_where_params[] = $t_clauses[0];
-			array_push( $t_where_clauses, "( $t_table_name.user_id=" . db_param() . " )" );
+			array_push( $t_where_clauses, '( ' . $t_table_name . '.user_id=' . db_param() . ' )' );
 		}
 	}
 
@@ -1751,16 +1745,16 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		$t_clauses = array();
 		$t_table_dst = 'rel_dst';
 		$t_table_src = 'rel_src';
-		array_push( $t_join_clauses, "LEFT JOIN $t_bug_relationship_table $t_table_dst ON $t_table_dst.destination_bug_id = $t_bug_table.id" );
-		array_push( $t_join_clauses, "LEFT JOIN $t_bug_relationship_table $t_table_src ON $t_table_src.source_bug_id = $t_bug_table.id" );
+		array_push( $t_join_clauses, 'LEFT JOIN ' . $t_bug_relationship_table . ' ' . $t_table_dst . ' ON ' . $t_table_dst . '.destination_bug_id = ' . $t_bug_table . '.id' );
+		array_push( $t_join_clauses, 'LEFT JOIN ' . $t_bug_relationship_table . ' ' . $t_table_src . ' ON ' . $t_table_src . '.source_bug_id = ' . $t_bug_table . '.id' );
 
 		# get reverse relationships
 		$t_where_params[] = $t_comp_type;
 		$t_where_params[] = $c_rel_bug;
 		$t_where_params[] = $c_rel_type;
 		$t_where_params[] = $c_rel_bug;
-		array_push( $t_clauses, "($t_table_dst.relationship_type=" . db_param() . " AND $t_table_dst.source_bug_id=" . db_param() . ')' );
-		array_push( $t_clauses, "($t_table_src.relationship_type=" . db_param() . " AND $t_table_src.destination_bug_id=" . db_param() . ')' );
+		array_push( $t_clauses, '(' . $t_table_dst . '.relationship_type=' . db_param() . ' AND ' . $t_table_dst . '.source_bug_id=' . db_param() . ')' );
+		array_push( $t_clauses, '(' . $t_table_src . '.relationship_type=' . db_param() . ' AND ' . $t_table_src . '.destination_bug_id=' . db_param() . ')' );
 		array_push( $t_where_clauses, '(' . implode( ' OR ', $t_clauses ) . ')' );
 	}
 
@@ -1804,7 +1798,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			if( count( $t_tags_all ) ) {
 				$t_clauses = array();
 				foreach( $t_tags_all as $t_tag_row ) {
-					array_push( $t_clauses, "$t_bug_table.id IN ( SELECT bug_id FROM $t_bug_tag_table WHERE $t_bug_tag_table.tag_id = $t_tag_row[id] )" );
+					array_push( $t_clauses, $t_bug_table . '.id IN ( SELECT bug_id FROM ' . $t_bug_tag_table . ' WHERE ' . $t_bug_tag_table . '.tag_id = ' . $t_tag_row[id] . ')' );
 				}
 				array_push( $t_where_clauses, '(' . implode( ' AND ', $t_clauses ) . ')' );
 			}
@@ -1812,17 +1806,17 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			if( count( $t_tags_any ) ) {
 				$t_clauses = array();
 				foreach( $t_tags_any as $t_tag_row ) {
-					array_push( $t_clauses, "$t_bug_tag_table.tag_id = $t_tag_row[id]" );
+					array_push( $t_clauses, $t_bug_tag_table . '.tag_id = ' . $t_tag_row[id] );
 				}
-				array_push( $t_where_clauses, "$t_bug_table.id IN ( SELECT bug_id FROM $t_bug_tag_table WHERE ( " . implode( ' OR ', $t_clauses ) . ') )' );
+				array_push( $t_where_clauses, $t_bug_table . '.id IN ( SELECT bug_id FROM ' . $t_bug_tag_table . ' WHERE ( ' . implode( ' OR ', $t_clauses ) . ') )' );
 			}
 
 			if( count( $t_tags_none ) ) {
 				$t_clauses = array();
 				foreach( $t_tags_none as $t_tag_row ) {
-					array_push( $t_clauses, "$t_bug_tag_table.tag_id = $t_tag_row[id]" );
+					array_push( $t_clauses, $t_bug_tag_table . '.tag_id = ' . $t_tag_row[id] );
 				}
-				array_push( $t_where_clauses, "$t_bug_table.id NOT IN ( SELECT bug_id FROM $t_bug_tag_table WHERE ( " . implode( ' OR ', $t_clauses ) . ') )' );
+				array_push( $t_where_clauses, $t_bug_table . '.id NOT IN ( SELECT bug_id FROM ' . $t_bug_tag_table . ' WHERE ( ' . implode( ' OR ', $t_clauses ) . ') )' );
 			}
 		}
 	}
@@ -1831,7 +1825,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	if( !filter_field_is_any( $t_filter[FILTER_PROPERTY_NOTE_USER_ID] ) ) {
 		$t_bugnote_table_alias = 'mbnt';
 		$t_clauses = array();
-		array_push( $t_join_clauses, "LEFT JOIN $t_bugnote_table  $t_bugnote_table_alias ON $t_bug_table.id = $t_bugnote_table_alias.bug_id" );
+		array_push( $t_join_clauses, 'LEFT JOIN ' . $t_bugnote_table . ' ' . $t_bugnote_table_alias . ' ON ' . $t_bug_table . '.id = ' . $t_bugnote_table_alias . '.bug_id' );
 
 		foreach( $t_filter[FILTER_PROPERTY_NOTE_USER_ID] as $t_filter_member ) {
 			$c_note_user_id = (int)$t_filter_member;
@@ -1847,10 +1841,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				$t_where_tmp[] = db_param();
 				$t_where_params[] = $t_clause;
 			}
-			array_push( $t_where_clauses, "( $t_bugnote_table_alias.reporter_id in (" . implode( ', ', $t_where_tmp ) . ") )" );
+			array_push( $t_where_clauses, '( ' . $t_bugnote_table_alias . '.reporter_id in (' . implode( ', ', $t_where_tmp ) . ') )' );
 		} else {
 			$t_where_params[] = $t_clauses[0];
-			array_push( $t_where_clauses, "( $t_bugnote_table_alias.reporter_id=" . db_param() . " )" );
+			array_push( $t_where_clauses, '( ' . $t_bugnote_table_alias . '.reporter_id=' . db_param() . ' )' );
 		}
 	}
 
@@ -1901,30 +1895,30 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				# Each custom field will result in a exponential growth like Number_of_Issues^Number_of_Custom_Fields
 				# and only after this process ends (if it is able to) the result query will be filtered
 				# by the WHERE clause and by the DISTINCT clause
-				$t_cf_join_clause = "LEFT JOIN $t_custom_field_string_table $t_table_name ON $t_bug_table.id = $t_table_name.bug_id AND $t_table_name.field_id = $t_cfid";
+				$t_cf_join_clause = 'LEFT JOIN ' . $t_custom_field_string_table . ' ' . $t_table_name . ' ON ' . $t_bug_table . '.id = ' . $t_table_name . '.bug_id AND ' . $t_table_name . '.field_id = ' . $t_cfid;
 
 				if( $t_def['type'] == CUSTOM_FIELD_TYPE_DATE ) {
 					# Define the value field with type cast to integer
-					$t_value_field = "CAST(COALESCE(NULLIF($t_table_name.value, ''), '0') AS DECIMAL)";
+					$t_value_field = 'CAST(COALESCE(NULLIF(' . $t_table_name . '.value, \'\'), \'0\') AS DECIMAL)';
 					switch( $t_field[0] ) {
 						# Closing parenthesis intentionally omitted, will be added later on
 						case CUSTOM_FIELD_DATE_ANY:
 							break;
 						case CUSTOM_FIELD_DATE_NONE:
 							array_push( $t_join_clauses, $t_cf_join_clause );
-							$t_custom_where_clause = "( $t_table_name.bug_id is null OR $t_value_field = 0 ";
+							$t_custom_where_clause = '( ' . $t_table_name . '.bug_id is null OR ' . $t_value_field . ' = 0 ';
 							break;
 						case CUSTOM_FIELD_DATE_BEFORE:
 							array_push( $t_join_clauses, $t_cf_join_clause );
-							$t_custom_where_clause = "( $t_value_field != 0 AND $t_value_field < " . $t_field[2];
+							$t_custom_where_clause = '( ' . $t_value_field . ' != 0 AND ' . $t_value_field . ' < ' . $t_field[2];
 							break;
 						case CUSTOM_FIELD_DATE_AFTER:
 							array_push( $t_join_clauses, $t_cf_join_clause );
-							$t_custom_where_clause = "( $t_value_field > " . ( $t_field[1] + 1 );
+							$t_custom_where_clause = '( ' . $t_value_field . ' > ' . ( $t_field[1] + 1 );
 							break;
 						default:
 							array_push( $t_join_clauses, $t_cf_join_clause );
-							$t_custom_where_clause = "( $t_value_field BETWEEN " . $t_field[1] . ' AND ' . $t_field[2];
+							$t_custom_where_clause = '( ' . $t_value_field . ' BETWEEN ' . $t_field[1] . ' AND ' . $t_field[2];
 							break;
 					}
 				} else {
@@ -1934,27 +1928,26 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 					foreach( $t_field as $t_filter_member ) {
 						$t_filter_member = stripslashes( $t_filter_member );
 						if( filter_field_is_none( $t_filter_member ) ) {
-
 							# coerce filter value if selecting META_FILTER_NONE so it will match empty fields
 							$t_filter_member = '';
 
 							# but also add those _not_ present in the custom field string table
-							array_push( $t_filter_array, "$t_bug_table.id NOT IN (SELECT bug_id FROM $t_custom_field_string_table WHERE field_id=$t_cfid)" );
+							array_push( $t_filter_array, $t_bug_table . '.id NOT IN (SELECT bug_id FROM ' . $t_custom_field_string_table . ' WHERE field_id=' . $t_cfid . ')' );
 						}
 
 						switch( $t_def['type'] ) {
 							case CUSTOM_FIELD_TYPE_CHECKBOX:
 							case CUSTOM_FIELD_TYPE_MULTILIST:
 								$t_where_params[] = '%|' . $t_filter_member . '|%';
-								array_push( $t_filter_array, db_helper_like( "$t_table_name.value" ) );
+								array_push( $t_filter_array, db_helper_like( $t_table_name . '.value' ) );
 								break;
 							case CUSTOM_FIELD_TYPE_TEXTAREA:
 								$t_where_params[] = '%' . $t_filter_member . '%';
-								array_push( $t_filter_array, db_helper_like( "$t_table_name.text" ) );
+								array_push( $t_filter_array, db_helper_like( $t_table_name . '.text' ) );
 								break;
 							default:
 								$t_where_params[] = $t_filter_member;
-								array_push( $t_filter_array, "$t_table_name.value = " . db_param() );
+								array_push( $t_filter_array, $t_table_name . '.value = ' . db_param() );
 						}
 					}
 					$t_custom_where_clause .= '(' . implode( ' OR ', $t_filter_array );
@@ -1979,7 +1972,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 		# build a big where-clause and param list for all search terms, including negations
 		$t_first = true;
-		$t_textsearch_where_clause = "( ";
+		$t_textsearch_where_clause = '( ';
 		foreach( $t_search_terms as $t_search_term => $t_negate ) {
 			if( !$t_first ) {
 				$t_textsearch_where_clause .= ' AND ';
@@ -1990,11 +1983,11 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			}
 
 			$c_search = '%' . $t_search_term . '%';
-			$t_textsearch_where_clause .= '( ' . db_helper_like( "$t_bug_table.summary" ) .
-				' OR ' . db_helper_like( "$t_bug_text_table.description" ) .
-				' OR ' . db_helper_like( "$t_bug_text_table.steps_to_reproduce" ) .
-				' OR ' . db_helper_like( "$t_bug_text_table.additional_information" ) .
-				' OR ' . db_helper_like( "$t_bugnote_text_table.note" );
+			$t_textsearch_where_clause .= '( ' . db_helper_like( $t_bug_table . '.summary' ) .
+				' OR ' . db_helper_like( $t_bug_text_table . '.description' ) .
+				' OR ' . db_helper_like( $t_bug_text_table . '.steps_to_reproduce' ) .
+				' OR ' . db_helper_like( $t_bug_text_table . '.additional_information' ) .
+				' OR ' . db_helper_like( $t_bugnote_text_table . '.note' );
 
 			$t_where_params[] = $c_search;
 			$t_where_params[] = $c_search;
@@ -2012,8 +2005,8 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				# Note: no need to test negative values, '-' sign has been removed
 				if( $t_search_term <= $t_search_max ) {
 					$c_search_int = (int)$t_search_term;
-					$t_textsearch_where_clause .= " OR $t_bug_table.id = " . db_param();
-					$t_textsearch_where_clause .= " OR $t_bugnote_table.id = " . db_param();
+					$t_textsearch_where_clause .= ' OR ' . $t_bug_table . '.id = ' . db_param();
+					$t_textsearch_where_clause .= ' OR ' . $t_bugnote_table . '.id = ' . db_param();
 					$t_where_params[] = $c_search_int;
 					$t_where_params[] = $c_search_int;
 				}
@@ -2026,10 +2019,10 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 		# add text query elements to arrays
 		if( !$t_first ) {
-			$t_join_clauses[] = "JOIN $t_bug_text_table ON $t_bug_table.bug_text_id = $t_bug_text_table.id";
-			$t_join_clauses[] = "LEFT JOIN $t_bugnote_table ON $t_bug_table.id = $t_bugnote_table.bug_id";
+			$t_join_clauses[] = 'JOIN ' . $t_bug_text_table . ' ON ' . $t_bug_table . '.bug_text_id = ' . $t_bug_text_table . '.id';
+			$t_join_clauses[] = 'LEFT JOIN ' . $t_bugnote_table . ' ON ' . $t_bug_table . '.id = ' . $t_bugnote_table . '.bug_id';
 			# Outer join required otherwise we don't retrieve issues without notes
-			$t_join_clauses[] = "LEFT JOIN $t_bugnote_text_table ON $t_bugnote_table.bugnote_text_id = $t_bugnote_text_table.id";
+			$t_join_clauses[] = 'LEFT JOIN ' . $t_bugnote_text_table . ' ON ' . $t_bugnote_table . '.bugnote_text_id = ' . $t_bugnote_text_table . '.id';
 			$t_where_clauses[] = $t_textsearch_where_clause;
 		}
 	}
@@ -2065,18 +2058,18 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	$p_page_number = filter_valid_page_number( $p_page_number, $p_page_count );
 	$t_offset = filter_offset( $p_page_number, $p_per_page );
 	$t_query_clauses = filter_unique_query_clauses( $t_query_clauses );
-	$t_select_string = "SELECT DISTINCT " . implode( ', ', $t_query_clauses['select'] );
-	$t_from_string = " FROM " . implode( ', ', $t_query_clauses['from'] );
-	$t_order_string = " ORDER BY " . implode( ', ', $t_query_clauses['order'] );
-	$t_join_string = count( $t_query_clauses['join'] ) > 0 ? implode( ' ', $t_query_clauses['join'] ) : '';
-	$t_where_string = 'WHERE '. implode( ' AND ', $t_query_clauses['project_where'] );
+	$t_select_string = 'SELECT DISTINCT ' . implode( ', ', $t_query_clauses['select'] );
+	$t_from_string = ' FROM ' . implode( ', ', $t_query_clauses['from'] );
+	$t_order_string = ' ORDER BY ' . implode( ', ', $t_query_clauses['order'] );
+	$t_join_string = count( $t_query_clauses['join'] ) > 0 ? implode( ' ', $t_query_clauses['join'] ) : ' ';
+	$t_where_string = ' WHERE '. implode( ' AND ', $t_query_clauses['project_where'] );
 	if( count( $t_query_clauses['where'] ) > 0 ) {
 		$t_where_string .= ' AND ( ';
 		$t_where_string .= implode( $t_join_operator, $t_query_clauses['where'] );
 		$t_where_string .= ' ) ';
 	}
 
-	$t_result = db_query_bound( "$t_select_string $t_from_string $t_join_string $t_where_string $t_order_string", $t_query_clauses['where_values'], $p_per_page, $t_offset );
+	$t_result = db_query_bound( $t_select_string . $t_from_string . $t_join_string . $t_where_string . $t_order_string, $t_query_clauses['where_values'], $p_per_page, $t_offset );
 	$t_row_count = db_num_rows( $t_result );
 
 	$t_id_array_lastmod = array();
@@ -2099,8 +2092,8 @@ function filter_cache_result( array $p_rows, array $p_id_array_lastmod ) {
 	$t_bugnote_table = db_get_table( 'bugnote' );
 
 	$t_id_array_lastmod = array_unique( $p_id_array_lastmod );
-	$t_where_string = "WHERE $t_bugnote_table.bug_id in (" . implode( ", ", $t_id_array_lastmod ) . ')';
-	$t_query = "SELECT DISTINCT bug_id,MAX(last_modified) as last_modified, COUNT(last_modified) as count FROM $t_bugnote_table $t_where_string GROUP BY bug_id";
+	$t_where_string = ' WHERE ' . $t_bugnote_table . '.bug_id in (' . implode( ', ', $t_id_array_lastmod ) . ')';
+	$t_query = 'SELECT DISTINCT bug_id,MAX(last_modified) as last_modified, COUNT(last_modified) as count FROM ' . $t_bugnote_table . $t_where_string . ' GROUP BY bug_id';
 
 	# perform query
 	$t_result = db_query_bound( $t_query );
@@ -2130,9 +2123,9 @@ function filter_cache_result( array $p_rows, array $p_id_array_lastmod ) {
  * @see filter_draw_selection_area2
  */
 function filter_draw_selection_area( $p_page_number, $p_for_screen = true ) {
-  echo '<div class="col-md-12 col-xs-12">';
+    echo '<div class="col-md-12 col-xs-12">';
 	filter_draw_selection_area2( $p_page_number, $p_for_screen, true );
-  echo '</div>';
+    echo '</div>';
 }
 
 /**
@@ -2277,7 +2270,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		$t_dynamic_filter_expander_class = ( config_get( 'use_javascript' ) && config_get( 'use_dynamic_filters' ) ) ? ' class="dynamic-filter-expander"' : '';
 		?>
 
-		<tr <?php echo "class=\"" . $t_trclass . "\"";?>>
+		<tr <?php echo 'class="' . $t_trclass . '"';?>>
 			<td class="small-caption category">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_REPORTER_ID . '[]';?>" id="reporter_id_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'reporter_label' )?></a>
 			</td>
@@ -2320,8 +2313,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				echo '<input type="hidden" name="', FILTER_PROPERTY_REPORTER_ID, '[]" value="', string_attribute( $t_current ), '" />';
 				if( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
-				}
-				else if( filter_field_is_myself( $t_current ) ) {
+				} else if( filter_field_is_myself( $t_current ) ) {
 					if( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
 						$t_this_name = '[' . lang_get( 'myself' ) . ']';
 					} else {
@@ -2348,8 +2340,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		?>
 			</td>
 			<td class="small-caption" id="user_monitor_filter_target">
-							<?php
-								$t_output = '';
+		<?php
+		$t_output = '';
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_MONITOR_USER_ID] ) == 0 ) {
 			echo lang_get( 'any' );
@@ -2360,8 +2352,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				$t_this_name = '';
 				if( filter_field_is_any( $t_current ) ) {
 					$t_any_found = true;
-				}
-				else if( filter_field_is_myself( $t_current ) ) {
+				} else if( filter_field_is_myself( $t_current ) ) {
 					if( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
 						$t_this_name = '[' . lang_get( 'myself' ) . ']';
 					} else {
@@ -2425,8 +2416,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		?>
 			</td>
 			<td colspan="2" class="small-caption" id="show_category_filter_target">
-							<?php
-								$t_output = '';
+		<?php
+		$t_output = '';
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_CATEGORY_ID] ) == 0 ) {
 			echo lang_get( 'any' );
@@ -2456,8 +2447,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		?>
 			</td>
 			<td class="small-caption" id="show_severity_filter_target">
-							<?php
-								$t_output = '';
+		<?php
+		$t_output = '';
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_SEVERITY] ) == 0 ) {
 			echo lang_get( 'any' );
@@ -2487,8 +2478,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		?>
 			</td>
 			<td class="small-caption" id="show_resolution_filter_target">
-							<?php
-								$t_output = '';
+		<?php
+		$t_output = '';
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_RESOLUTION] ) == 0 ) {
 			echo lang_get( 'any' );
@@ -2519,8 +2510,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			</td>
 			<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
 			<td class="small-caption" id="show_profile_filter_target">
-							<?php
-								$t_output = '';
+		<?php
+		$t_output = '';
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_PROFILE_ID] ) == 0 ) {
 			echo lang_get( 'any' );
@@ -2553,20 +2544,18 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<?php } else { ?>
 				<td></td>
 			<?php }
-				  if( $t_filter_cols > 8 ) {
-			echo '<td class="small-caption" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';
-		}?>
-			</tr>
-
-		<tr <?php echo "class=\"" . $t_trclass . "\"";?>>
-			<td class="small-caption category">
+				if( $t_filter_cols > 8 ) {
+					echo '<td class="small-caption" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';
+				}?>
+		</tr>
+		<tr <?php echo 'class="' . $t_trclass . '"';?>>
+			<td class="small-caption">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_STATUS . '[]';?>" id="show_status_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'status_label' )?></a>
 			</td>
 			<td class="small-caption category">
 				<?php if( 'simple' == $t_view_type ) {?>
 					<a href="<?php echo $t_filters_url . FILTER_PROPERTY_HIDE_STATUS . '[]';?>" id="hide_status_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'hide_status_label' )?></a>
-				<?php
-		}?>
+				<?php } ?>
 			</td>
 			<td class="small-caption category">
 			<?php if( $t_show_build ) { ?>
@@ -2580,16 +2569,14 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<td colspan="1" class="small-caption category">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_FIXED_IN_VERSION . '[]';?>" id="show_fixed_in_version_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'fixed_in_version_label' )?></a>
 			</td>
-			<?php
-		} else {?>
+			<?php } else {?>
 			<td colspan="2" class="small-caption">
 				&#160;
 			</td>
 			<td colspan="1" class="small-caption">
 				&#160;
 			</td>
-			<?php
-		}?>
+			<?php } ?>
 			<td colspan="1" class="small-caption category">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PRIORITY . '[]';?>" id="show_priority_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'priority_label' )?></a>
 			</td>
@@ -2611,8 +2598,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 		<tr>
 			<td class="small-caption" id="show_status_filter_target">
-							<?php
-								$t_output = '';
+		<?php
+		$t_output = '';
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_STATUS] ) == 0 ) {
 			echo lang_get( 'any' );
@@ -2642,8 +2629,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		?>
 			</td>
 			<td class="small-caption" id="hide_status_filter_target">
-							<?php
-								if( 'simple' == $t_view_type ) {
+		<?php
+		if( 'simple' == $t_view_type ) {
 			$t_output = '';
 			$t_none_found = false;
 			if( count( $t_filter[FILTER_PROPERTY_HIDE_STATUS] ) == 0 ) {
@@ -2678,40 +2665,42 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		}
 		?>
 			</td>
-			<?php if( $t_show_build ) { ?>
+		<?php
+		if( $t_show_build ) {
+		?>
 			<td class="small-caption" id="show_build_filter_target">
-							<?php
-								$t_output = '';
-		$t_any_found = false;
-		if( count( $t_filter[FILTER_PROPERTY_BUILD] ) == 0 ) {
-			echo lang_get( 'any' );
-		} else {
-			$t_first_flag = true;
-			foreach( $t_filter[FILTER_PROPERTY_BUILD] as $t_current ) {
-				$t_current = stripslashes( $t_current );
-				echo '<input type="hidden" name="', FILTER_PROPERTY_BUILD, '[]" value="', string_attribute( $t_current ), '" />';
-				$t_this_string = '';
-				if( filter_field_is_any( $t_current ) ) {
-					$t_any_found = true;
-				} else if( filter_field_is_none( $t_current ) ) {
-					$t_this_string = lang_get( 'none' );
-				} else {
-					$t_this_string = $t_current;
-				}
-				if( $t_first_flag != true ) {
-					$t_output = $t_output . '<br />';
-				} else {
-					$t_first_flag = false;
-				}
-				$t_output = $t_output . string_display_line( $t_this_string );
-			}
-			if( true == $t_any_found ) {
+		<?php
+			$t_output = '';
+			$t_any_found = false;
+			if( count( $t_filter[FILTER_PROPERTY_BUILD] ) == 0 ) {
 				echo lang_get( 'any' );
 			} else {
-				echo $t_output;
+				$t_first_flag = true;
+				foreach( $t_filter[FILTER_PROPERTY_BUILD] as $t_current ) {
+					$t_current = stripslashes( $t_current );
+					echo '<input type="hidden" name="', FILTER_PROPERTY_BUILD, '[]" value="', string_attribute( $t_current ), '" />';
+					$t_this_string = '';
+					if( filter_field_is_any( $t_current ) ) {
+						$t_any_found = true;
+					} else if( filter_field_is_none( $t_current ) ) {
+						$t_this_string = lang_get( 'none' );
+					} else {
+						$t_this_string = $t_current;
+					}
+					if( $t_first_flag != true ) {
+						$t_output = $t_output . '<br />';
+					} else {
+						$t_first_flag = false;
+					}
+					$t_output = $t_output . string_display_line( $t_this_string );
+				}
+				if( true == $t_any_found ) {
+					echo lang_get( 'any' );
+				} else {
+					echo $t_output;
+				}
 			}
-		}
-		?>
+			?>
 			</td>
 			<?php } else { ?>
 			<td class="small-caption"></td>
@@ -2732,8 +2721,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					$t_this_string = '';
 					if( filter_field_is_any( $t_current ) ) {
 						$t_any_found = true;
-					}
-					else if( filter_field_is_none( $t_current ) ) {
+					} else if( filter_field_is_none( $t_current ) ) {
 						$t_this_string = lang_get( 'none' );
 					} else {
 						$t_this_string = $t_current;
@@ -2787,18 +2775,16 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			}
 			?>
 			</td>
-			<?php
-		} else {?>
+		<?php } else { ?>
 			<td colspan="2" class="small-caption">
 				&#160;
 			</td>
 			<td colspan="1" class="small-caption">
 				&#160;
 			</td>
-			<?php
-		}?>
+		<?php } ?>
 			<td colspan="1" class="small-caption" id="show_priority_filter_target">
-<?php
+		<?php
 		$t_output = '';
 		$t_any_found = false;
 		if( count( $t_filter[FILTER_PROPERTY_PRIORITY] ) == 0 ) {
@@ -2875,7 +2861,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 		</tr>
 
-		<tr <?php echo "class=\"" . $t_trclass . "\"";?>>
+		<tr <?php echo 'class="' . $t_trclass . '"';?>>
 			<td class="small-caption category">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_ISSUES_PER_PAGE;?>" id="per_page_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'show_label' )?></a>
 			</td>
@@ -2942,15 +2928,15 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 			$t_time = mktime( 0, 0, 0, $t_filter[FILTER_PROPERTY_START_MONTH], $t_filter[FILTER_PROPERTY_START_DAY], $t_filter[FILTER_PROPERTY_START_YEAR] );
 			foreach( $t_chars as $t_char ) {
-				if( strcasecmp( $t_char, "M" ) == 0 ) {
+				if( strcasecmp( $t_char, 'M' ) == 0 ) {
 					echo ' ';
 					echo date( 'F', $t_time );
 				}
-				if( strcasecmp( $t_char, "D" ) == 0 ) {
+				if( strcasecmp( $t_char, 'D' ) == 0 ) {
 					echo ' ';
 					echo date( 'd', $t_time );
 				}
-				if( strcasecmp( $t_char, "Y" ) == 0 ) {
+				if( strcasecmp( $t_char, 'Y' ) == 0 ) {
 					echo ' ';
 					echo date( 'Y', $t_time );
 				}
@@ -2960,15 +2946,15 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 			$t_time = mktime( 0, 0, 0, $t_filter[FILTER_PROPERTY_END_MONTH], $t_filter[FILTER_PROPERTY_END_DAY], $t_filter[FILTER_PROPERTY_END_YEAR] );
 			foreach( $t_chars as $t_char ) {
-				if( strcasecmp( $t_char, "M" ) == 0 ) {
+				if( strcasecmp( $t_char, 'M' ) == 0 ) {
 					echo ' ';
 					echo date( 'F', $t_time );
 				}
-				if( strcasecmp( $t_char, "D" ) == 0 ) {
+				if( strcasecmp( $t_char, 'D' ) == 0 ) {
 					echo ' ';
 					echo date( 'd', $t_time );
 				}
-				if( strcasecmp( $t_char, "Y" ) == 0 ) {
+				if( strcasecmp( $t_char, 'Y' ) == 0 ) {
 					echo ' ';
 					echo date( 'Y', $t_time );
 				}
@@ -2980,8 +2966,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			</td>
 
 			<td class="small-caption" colspan="2" id="relationship_type_filter_target">
-							<?php
-								echo '<input type="hidden" name="', FILTER_PROPERTY_RELATIONSHIP_TYPE, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] ), '" />';
+		<?php
+		echo '<input type="hidden" name="', FILTER_PROPERTY_RELATIONSHIP_TYPE, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE] ), '" />';
 		echo '<input type="hidden" name="', FILTER_PROPERTY_RELATIONSHIP_BUG, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_RELATIONSHIP_BUG] ), '" />';
 		$c_rel_type = $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE];
 		$c_rel_bug = $t_filter[FILTER_PROPERTY_RELATIONSHIP_BUG];
@@ -2997,7 +2983,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			echo '<td class="small-caption" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';
 		}?>
 		</tr>
-		<tr <?php echo "class=\"" . $t_trclass . "\"";?>>
+		<tr <?php echo 'class="' . $t_trclass . '"';?>>
 			<td class="small-caption category">
 				<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
 					<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PLATFORM;?>" id="platform_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'platform_label' )?></a>
@@ -3025,19 +3011,13 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		<tr>
 			<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
 			<td class="small-caption" id="platform_filter_target">
-				<?php
-					print_multivalue_field( FILTER_PROPERTY_PLATFORM, $t_filter[FILTER_PROPERTY_PLATFORM] );
-		?>
+				<?php print_multivalue_field( FILTER_PROPERTY_PLATFORM, $t_filter[FILTER_PROPERTY_PLATFORM] ); ?>
 			</td>
 			<td class="small-caption" id="os_filter_target">
-				<?php
-					print_multivalue_field( FILTER_PROPERTY_OS, $t_filter[FILTER_PROPERTY_OS] );
-		?>
+				<?php print_multivalue_field( FILTER_PROPERTY_OS, $t_filter[FILTER_PROPERTY_OS] ); ?>
 			</td>
 			<td class="small-caption" id="os_build_filter_target">
-				<?php
-					print_multivalue_field( FILTER_PROPERTY_OS_BUILD, $t_filter[FILTER_PROPERTY_OS_BUILD] );
-		?>
+				<?php print_multivalue_field( FILTER_PROPERTY_OS_BUILD, $t_filter[FILTER_PROPERTY_OS_BUILD] ); ?>
 			</td>
 			<?php } else {?>
 				<td colspan="3">&#160;</td>
@@ -3581,9 +3561,9 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
  * @return void
  */
 function print_filter_reporter_id() {
-	global $t_select_modifier, $t_filter;
+	global $g_select_modifier, $g_filter;
 	?>
-		<select class="input-sm" <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_REPORTER_ID;?>[]">
+		<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_REPORTER_ID;?>[]">
 		<?php
 	# if current user is a reporter, and limited reports set to ON, only display that name
 	# @@@ thraxisp - access_has_project_level checks greater than or equal to,
@@ -3600,14 +3580,14 @@ function print_filter_reporter_id() {
 		echo '<option value="' . $t_id . '" selected="selected">' . $t_display_name . '</option>';
 	} else {
 		?>
-		<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $t_filter[FILTER_PROPERTY_REPORTER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+		<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_REPORTER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 		<?php
 			if( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
 				echo '<option value="' . META_FILTER_MYSELF . '" ';
-				check_selected( $t_filter[FILTER_PROPERTY_REPORTER_ID], META_FILTER_MYSELF );
+				check_selected( $g_filter[FILTER_PROPERTY_REPORTER_ID], META_FILTER_MYSELF );
 				echo '>[' . lang_get( 'myself' ) . ']</option>';
 			}
-		print_reporter_option_list( $t_filter[FILTER_PROPERTY_REPORTER_ID] );
+		print_reporter_option_list( $g_filter[FILTER_PROPERTY_REPORTER_ID] );
 	}?>
 		</select>
 		<?php
@@ -3618,22 +3598,22 @@ function print_filter_reporter_id() {
  * @return void
  */
 function print_filter_user_monitor() {
-	global $t_select_modifier, $t_filter;
+	global $g_select_modifier, $g_filter;
 	?>
 	<!-- Monitored by -->
-		<select class="input-sm" <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_MONITOR_USER_ID;?>[]">
-			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $t_filter[FILTER_PROPERTY_MONITOR_USER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+		<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_MONITOR_USER_ID;?>[]">
+			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_MONITOR_USER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<?php
 				if( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
 		echo '<option value="' . META_FILTER_MYSELF . '" ';
-		check_selected( $t_filter[FILTER_PROPERTY_MONITOR_USER_ID], META_FILTER_MYSELF );
+		check_selected( $g_filter[FILTER_PROPERTY_MONITOR_USER_ID], META_FILTER_MYSELF );
 		echo '>[' . lang_get( 'myself' ) . ']</option>';
 	}
 	$t_threshold = config_get( 'show_monitor_list_threshold' );
 	$t_has_project_level = access_has_project_level( $t_threshold );
 
 	if( $t_has_project_level ) {
-		print_reporter_option_list( $t_filter[FILTER_PROPERTY_MONITOR_USER_ID] );
+		print_reporter_option_list( $g_filter[FILTER_PROPERTY_MONITOR_USER_ID] );
 	}
 	?>
 		</select>
@@ -3645,21 +3625,21 @@ function print_filter_user_monitor() {
  * @return void
  */
 function print_filter_handler_id() {
-	global $t_select_modifier, $t_filter, $f_view_type;
+	global $g_select_modifier, $g_filter, $f_view_type;
 	?>
 		<!-- Handler -->
-		<select class="input-sm" <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_HANDLER_ID;?>[]">
-			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $t_filter[FILTER_PROPERTY_HANDLER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+		<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_HANDLER_ID;?>[]">
+			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_HANDLER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<?php if( access_has_project_level( config_get( 'view_handler_threshold' ) ) ) {?>
-			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $t_filter[FILTER_PROPERTY_HANDLER_ID], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
+			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $g_filter[FILTER_PROPERTY_HANDLER_ID], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
 			<?php
 				if( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
 			echo '<option value="' . META_FILTER_MYSELF . '" ';
-			check_selected( $t_filter[FILTER_PROPERTY_HANDLER_ID], META_FILTER_MYSELF );
+			check_selected( $g_filter[FILTER_PROPERTY_HANDLER_ID], META_FILTER_MYSELF );
 			echo '>[' . lang_get( 'myself' ) . ']</option>';
 		}
 
-		print_assign_to_option_list( $t_filter[FILTER_PROPERTY_HANDLER_ID] );
+		print_assign_to_option_list( $g_filter[FILTER_PROPERTY_HANDLER_ID] );
 	}?>
 		</select>
 		<?php
@@ -3670,12 +3650,12 @@ function print_filter_handler_id() {
  * @return void
  */
 function print_filter_show_category() {
-	global $t_select_modifier, $t_filter;
+	global $g_select_modifier, $g_filter;
 	?>
 		<!-- Category -->
-		<select class="input-sm" <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_CATEGORY_ID;?>[]">
-			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $t_filter[FILTER_PROPERTY_CATEGORY_ID], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
-			<?php print_category_filter_option_list( $t_filter[FILTER_PROPERTY_CATEGORY_ID] )?>
+		<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_CATEGORY_ID;?>[]">
+			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_CATEGORY_ID], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+			<?php print_category_filter_option_list( $g_filter[FILTER_PROPERTY_CATEGORY_ID] )?>
 		</select>
 		<?php
 }
@@ -3685,15 +3665,15 @@ function print_filter_show_category() {
  * @return void
  */
 function print_filter_platform() {
-	global $t_select_modifier, $t_filter;
+	global $g_select_modifier, $g_filter;
 
 	?>
 		<!-- Platform -->
-		<select class="input-sm" <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_PLATFORM;?>[]">
-			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $t_filter[FILTER_PROPERTY_PLATFORM], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+		<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_PLATFORM;?>[]">
+			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_PLATFORM], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<?php
-				log_event( LOG_FILTERING, 'Platform = ' . var_export( $t_filter[FILTER_PROPERTY_PLATFORM], true ) );
-	print_platform_option_list( $t_filter[FILTER_PROPERTY_PLATFORM] );
+				log_event( LOG_FILTERING, 'Platform = ' . var_export( $g_filter[FILTER_PROPERTY_PLATFORM], true ) );
+	print_platform_option_list( $g_filter[FILTER_PROPERTY_PLATFORM] );
 	?>
 		</select>
 		<?php
@@ -3704,13 +3684,13 @@ function print_filter_platform() {
  * @return void
  */
 function print_filter_os() {
-	global $t_select_modifier, $t_filter;
+	global $g_select_modifier, $g_filter;
 
 	?>
 		<!-- OS -->
-		<select class="input-sm" <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_OS;?>[]">
-			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $t_filter[FILTER_PROPERTY_OS], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
-			<?php print_os_option_list( $t_filter[FILTER_PROPERTY_OS] )?>
+		<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_OS;?>[]">
+			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_OS], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+			<?php print_os_option_list( $g_filter[FILTER_PROPERTY_OS] )?>
 		</select>
 		<?php
 }
@@ -3720,13 +3700,13 @@ function print_filter_os() {
  * @return void
  */
 function print_filter_os_build() {
-	global $t_select_modifier, $t_filter;
+	global $g_select_modifier, $g_filter;
 
 	?>
 		<!-- OS Build -->
-		<select class="input-sm" <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_OS_BUILD;?>[]">
-			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $t_filter[FILTER_PROPERTY_OS_BUILD], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
-			<?php print_os_build_option_list( $t_filter[FILTER_PROPERTY_OS_BUILD] )?>
+		<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_OS_BUILD;?>[]">
+			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_OS_BUILD], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+			<?php print_os_build_option_list( $g_filter[FILTER_PROPERTY_OS_BUILD] )?>
 		</select>
 		<?php
 }
@@ -3736,11 +3716,11 @@ function print_filter_os_build() {
  * @return void
  */
 function print_filter_show_severity() {
-	global $t_select_modifier, $t_filter;
+	global $g_select_modifier, $g_filter;
 	?><!-- Severity -->
-			<select class="input-sm" <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_SEVERITY;?>[]">
-				<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $t_filter[FILTER_PROPERTY_SEVERITY], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
-				<?php print_enum_string_option_list( 'severity', $t_filter[FILTER_PROPERTY_SEVERITY] )?>
+			<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_SEVERITY;?>[]">
+				<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_SEVERITY], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+				<?php print_enum_string_option_list( 'severity', $g_filter[FILTER_PROPERTY_SEVERITY] )?>
 			</select>
 		<?php
 }
@@ -3750,11 +3730,11 @@ function print_filter_show_severity() {
  * @return void
  */
 function print_filter_show_resolution() {
-	global $t_select_modifier, $t_filter;
+	global $g_select_modifier, $g_filter;
 	?><!-- Resolution -->
-			<select class="input-sm" <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_RESOLUTION;?>[]">
-				<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $t_filter[FILTER_PROPERTY_RESOLUTION], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
-				<?php print_enum_string_option_list( 'resolution', $t_filter[FILTER_PROPERTY_RESOLUTION] )?>
+			<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_RESOLUTION;?>[]">
+				<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_RESOLUTION], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+				<?php print_enum_string_option_list( 'resolution', $g_filter[FILTER_PROPERTY_RESOLUTION] )?>
 			</select>
 		<?php
 }
@@ -3764,11 +3744,11 @@ function print_filter_show_resolution() {
  * @return void
  */
 function print_filter_show_status() {
-	global $t_select_modifier, $t_filter;
+	global $g_select_modifier, $g_filter;
 	?>	<!-- Status -->
-			<select class="input-sm" <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_STATUS;?>[]">
-				<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $t_filter[FILTER_PROPERTY_STATUS], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
-				<?php print_enum_string_option_list( 'status', $t_filter[FILTER_PROPERTY_STATUS] )?>
+			<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_STATUS;?>[]">
+				<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_STATUS], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+				<?php print_enum_string_option_list( 'status', $g_filter[FILTER_PROPERTY_STATUS] )?>
 			</select>
 		<?php
 }
@@ -3778,11 +3758,11 @@ function print_filter_show_status() {
  * @return void
  */
 function print_filter_hide_status() {
-	global $t_select_modifier, $t_filter;
+	global $g_select_modifier, $g_filter;
 	?><!-- Hide Status -->
-			<select class="input-sm" <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_HIDE_STATUS;?>[]">
+			<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_HIDE_STATUS;?>[]">
 				<option value="<?php echo META_FILTER_NONE?>">[<?php echo lang_get( 'none' )?>]</option>
-				<?php print_enum_string_option_list( 'status', $t_filter[FILTER_PROPERTY_HIDE_STATUS] )?>
+				<?php print_enum_string_option_list( 'status', $g_filter[FILTER_PROPERTY_HIDE_STATUS] )?>
 			</select>
 		<?php
 }
@@ -3792,12 +3772,12 @@ function print_filter_hide_status() {
  * @return void
  */
 function print_filter_show_build() {
-	global $t_select_modifier, $t_filter;
+	global $g_select_modifier, $g_filter;
 	?><!-- Build -->
-		<select class="input-sm" <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_BUILD;?>[]">
-			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $t_filter[FILTER_PROPERTY_BUILD], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
-			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $t_filter[FILTER_PROPERTY_BUILD], (string)META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
-			<?php print_build_option_list( $t_filter[FILTER_PROPERTY_BUILD] )?>
+		<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_BUILD;?>[]">
+			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_BUILD], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $g_filter[FILTER_PROPERTY_BUILD], (string)META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
+			<?php print_build_option_list( $g_filter[FILTER_PROPERTY_BUILD] )?>
 		</select>
 		<?php
 }
@@ -3807,12 +3787,12 @@ function print_filter_show_build() {
  * @return void
  */
 function print_filter_show_version() {
-	global $t_select_modifier, $t_filter;
+	global $g_select_modifier, $g_filter;
 	?><!-- Version -->
-		<select class="input-sm" <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_VERSION;?>[]">
-			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $t_filter[FILTER_PROPERTY_VERSION], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
-			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $t_filter[FILTER_PROPERTY_VERSION], (string)META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
-			<?php print_version_option_list( $t_filter[FILTER_PROPERTY_VERSION], null, VERSION_ALL, false, true )?>
+		<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_VERSION;?>[]">
+			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_VERSION], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $g_filter[FILTER_PROPERTY_VERSION], (string)META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
+			<?php print_version_option_list( $g_filter[FILTER_PROPERTY_VERSION], null, VERSION_ALL, false, true )?>
 		</select>
 		<?php
 }
@@ -3822,12 +3802,12 @@ function print_filter_show_version() {
  * @return void
  */
 function print_filter_show_fixed_in_version() {
-	global $t_select_modifier, $t_filter;
+	global $g_select_modifier, $g_filter;
 	?><!-- Fixed in Version -->
-		<select class="input-sm" <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_FIXED_IN_VERSION;?>[]">
-			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $t_filter[FILTER_PROPERTY_FIXED_IN_VERSION], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
-			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $t_filter[FILTER_PROPERTY_FIXED_IN_VERSION], (string)META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
-			<?php print_version_option_list( $t_filter[FILTER_PROPERTY_FIXED_IN_VERSION], null, VERSION_ALL, false, true )?>
+		<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_FIXED_IN_VERSION;?>[]">
+			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_FIXED_IN_VERSION], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $g_filter[FILTER_PROPERTY_FIXED_IN_VERSION], (string)META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
+			<?php print_version_option_list( $g_filter[FILTER_PROPERTY_FIXED_IN_VERSION], null, VERSION_ALL, false, true )?>
 		</select>
 		<?php
 }
@@ -3837,12 +3817,12 @@ function print_filter_show_fixed_in_version() {
  * @return void
  */
 function print_filter_show_target_version() {
-	global $t_select_modifier, $t_filter;
+	global $g_select_modifier, $g_filter;
 	?><!-- Fixed in Version -->
-		<select class="input-sm" <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_TARGET_VERSION;?>[]">
-			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $t_filter[FILTER_PROPERTY_TARGET_VERSION], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
-			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $t_filter[FILTER_PROPERTY_TARGET_VERSION], (string)META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
-			<?php print_version_option_list( $t_filter[FILTER_PROPERTY_TARGET_VERSION], null, VERSION_ALL, false, true )?>
+		<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_TARGET_VERSION;?>[]">
+			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_TARGET_VERSION], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $g_filter[FILTER_PROPERTY_TARGET_VERSION], (string)META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
+			<?php print_version_option_list( $g_filter[FILTER_PROPERTY_TARGET_VERSION], null, VERSION_ALL, false, true )?>
 		</select>
 		<?php
 }
@@ -3852,11 +3832,11 @@ function print_filter_show_target_version() {
  * @return void
  */
 function print_filter_show_priority() {
-	global $t_select_modifier, $t_filter;
+	global $g_select_modifier, $g_filter;
 	?><!-- Priority -->
-	<select class="input-sm" <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_PRIORITY;?>[]">
-			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $t_filter[FILTER_PROPERTY_PRIORITY], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
-			<?php print_enum_string_option_list( 'priority', $t_filter[FILTER_PROPERTY_PRIORITY] )?>
+	<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_PRIORITY;?>[]">
+			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_PRIORITY], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+			<?php print_enum_string_option_list( 'priority', $g_filter[FILTER_PROPERTY_PRIORITY] )?>
 	</select>
 		<?php
 }
@@ -3866,11 +3846,11 @@ function print_filter_show_priority() {
  * @return void
  */
 function print_filter_show_profile() {
-	global $t_select_modifier, $t_filter;
+	global $g_select_modifier, $g_filter;
 	?><!-- Profile -->
-		<select class="input-sm" <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_PROFILE_ID;?>[]">
-			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $t_filter[FILTER_PROPERTY_PROFILE_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
-			<?php print_profile_option_list_for_project( helper_get_current_project(), $t_filter[FILTER_PROPERTY_PROFILE_ID] );?>
+		<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_PROFILE_ID;?>[]">
+			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_PROFILE_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+			<?php print_profile_option_list_for_project( helper_get_current_project(), $g_filter[FILTER_PROPERTY_PROFILE_ID] );?>
 		</select>
 		<?php
 }
@@ -3880,9 +3860,9 @@ function print_filter_show_profile() {
  * @return void
  */
 function print_filter_per_page() {
-	global $t_filter;
+	global $g_filter;
 	?><!-- Number of bugs per page -->
-		<input type="text" name="<?php echo FILTER_PROPERTY_ISSUES_PER_PAGE;?>" class="input-sm" size="3" maxlength="7" value="<?php echo $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE]?>" />
+		<input type="text" name="<?php echo FILTER_PROPERTY_ISSUES_PER_PAGE;?>" class="input-sm" size="3" maxlength="7" value="<?php echo $g_filter[FILTER_PROPERTY_ISSUES_PER_PAGE]?>" />
 		<?php
 }
 
@@ -3891,18 +3871,18 @@ function print_filter_per_page() {
  * @return void
  */
 function print_filter_view_state() {
-	global $t_select_modifier, $t_filter;
+	global $g_select_modifier, $g_filter;
 	?><!-- View Status -->
 		<select class="input-sm" name="<?php echo FILTER_PROPERTY_VIEW_STATE;?>">
 			<?php
 			echo '<option value="' . META_FILTER_ANY . '"';
-	check_selected( $t_filter[FILTER_PROPERTY_VIEW_STATE], META_FILTER_ANY );
+	check_selected( $g_filter[FILTER_PROPERTY_VIEW_STATE], META_FILTER_ANY );
 	echo '>[' . lang_get( 'any' ) . ']</option>';
 	echo '<option value="' . VS_PUBLIC . '"';
-	check_selected( $t_filter[FILTER_PROPERTY_VIEW_STATE], VS_PUBLIC );
+	check_selected( $g_filter[FILTER_PROPERTY_VIEW_STATE], VS_PUBLIC );
 	echo '>' . lang_get( 'public' ) . '</option>';
 	echo '<option value="' . VS_PRIVATE . '"';
-	check_selected( $t_filter[FILTER_PROPERTY_VIEW_STATE], VS_PRIVATE );
+	check_selected( $g_filter[FILTER_PROPERTY_VIEW_STATE], VS_PRIVATE );
 	echo '>' . lang_get( 'private' ) . '</option>';
 	?>
 		</select>
@@ -3914,9 +3894,9 @@ function print_filter_view_state() {
  * @return void
  */
 function print_filter_sticky_issues() {
-	global $t_filter;
+	global $g_filter;
 	?><!-- Show or hide sticky bugs -->
-			<input type="checkbox" name="<?php echo FILTER_PROPERTY_STICKY;?>"<?php check_checked( gpc_string_to_bool( $t_filter[FILTER_PROPERTY_STICKY] ), true );?> />
+			<input type="checkbox" name="<?php echo FILTER_PROPERTY_STICKY;?>"<?php check_checked( gpc_string_to_bool( $g_filter[FILTER_PROPERTY_STICKY] ), true );?> />
 		<?php
 }
 
@@ -3925,9 +3905,9 @@ function print_filter_sticky_issues() {
  * @return void
  */
 function print_filter_highlight_changed() {
-	global $t_filter;
+	global $g_filter;
 	?><!-- Highlight changed bugs -->
-			<input type="text" name="<?php echo FILTER_PROPERTY_HIGHLIGHT_CHANGED;?>" class="input-sm" size="3" maxlength="7" value="<?php echo $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED]?>" />
+			<input type="text" name="<?php echo FILTER_PROPERTY_HIGHLIGHT_CHANGED;?>" class="input-sm" size="3" maxlength="7" value="<?php echo $g_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED]?>" />
 		<?php
 }
 
@@ -3937,7 +3917,7 @@ function print_filter_highlight_changed() {
  * @return void
  */
 function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
-	global $t_filter;
+	global $g_filter;
 ?>
 		<table cellspacing="0" cellpadding="0">
 <?php
@@ -3948,7 +3928,7 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 				<label>
 					<input type="checkbox" id="use_date_filters" name="<?php
 						echo FILTER_PROPERTY_FILTER_BY_DATE ?>"<?php
-						check_checked( gpc_string_to_bool( $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ), true ) ?> />
+						check_checked( gpc_string_to_bool( $g_filter[FILTER_PROPERTY_FILTER_BY_DATE] ), true ) ?> />
 					<?php echo lang_get( 'use_date_filters' )?>
 				</label>
 			</td>
@@ -3960,7 +3940,7 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 	# if we do not use javascript
 	$t_menu_disabled =
 		   !config_get( 'use_javascript' )
-		|| 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE]
+		|| 'on' == $g_filter[FILTER_PROPERTY_FILTER_BY_DATE]
 		? ''
 		: ' disabled="disabled" ';
 ?>
@@ -3974,19 +3954,19 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 			<?php
 			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 	foreach( $t_chars as $t_char ) {
-		if( strcasecmp( $t_char, "M" ) == 0 ) {
+		if( strcasecmp( $t_char, 'M' ) == 0 ) {
 			echo '<select class="input-sm" name="', FILTER_PROPERTY_START_MONTH, '"', $t_menu_disabled, '>';
-			print_month_option_list( $t_filter[FILTER_PROPERTY_START_MONTH] );
+			print_month_option_list( $g_filter[FILTER_PROPERTY_START_MONTH] );
 			print "</select>\n";
 		}
-		if( strcasecmp( $t_char, "D" ) == 0 ) {
+		if( strcasecmp( $t_char, 'D' ) == 0 ) {
 			echo '<select class="input-sm" name="', FILTER_PROPERTY_START_DAY, '"', $t_menu_disabled, '>';
-			print_day_option_list( $t_filter[FILTER_PROPERTY_START_DAY] );
+			print_day_option_list( $g_filter[FILTER_PROPERTY_START_DAY] );
 			print "</select>\n";
 		}
-		if( strcasecmp( $t_char, "Y" ) == 0 ) {
+		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
 			echo '<select class="input-sm" name="', FILTER_PROPERTY_START_YEAR, '"', $t_menu_disabled, '>';
-			print_year_option_list( $t_filter[FILTER_PROPERTY_START_YEAR] );
+			print_year_option_list( $g_filter[FILTER_PROPERTY_START_YEAR] );
 			print "</select>\n";
 		}
 	}
@@ -4002,19 +3982,19 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 			<?php
 			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 	foreach( $t_chars as $t_char ) {
-		if( strcasecmp( $t_char, "M" ) == 0 ) {
+		if( strcasecmp( $t_char, 'M' ) == 0 ) {
 			echo '<select class="input-sm" name="', FILTER_PROPERTY_END_MONTH, '"', $t_menu_disabled, '>';
-			print_month_option_list( $t_filter[FILTER_PROPERTY_END_MONTH] );
+			print_month_option_list( $g_filter[FILTER_PROPERTY_END_MONTH] );
 			print "</select>\n";
 		}
-		if( strcasecmp( $t_char, "D" ) == 0 ) {
-			echo '<select class="input-sm"  name="', FILTER_PROPERTY_END_DAY, '"', $t_menu_disabled, '>';
-			print_day_option_list( $t_filter[FILTER_PROPERTY_END_DAY] );
+		if( strcasecmp( $t_char, 'D' ) == 0 ) {
+			echo '<select class="input-sm" name="', FILTER_PROPERTY_END_DAY, '"', $t_menu_disabled, '>';
+			print_day_option_list( $g_filter[FILTER_PROPERTY_END_DAY] );
 			print "</select>\n";
 		}
-		if( strcasecmp( $t_char, "Y" ) == 0 ) {
+		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
 			echo '<select class="input-sm" name="', FILTER_PROPERTY_END_YEAR, '"', $t_menu_disabled, '>';
-			print_year_option_list( $t_filter[FILTER_PROPERTY_END_YEAR] );
+			print_year_option_list( $g_filter[FILTER_PROPERTY_END_YEAR] );
 			print "</select>\n";
 		}
 	}
@@ -4030,13 +4010,13 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
  * @return void
  */
 function print_filter_relationship_type() {
-	global $t_filter;
-	$c_reltype_value = $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE];
+	global $g_filter;
+	$c_reltype_value = $g_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE];
 	if( !$c_reltype_value ) {
 		$c_reltype_value = -1;
 	}
-	relationship_list_box( $c_reltype_value, "relationship_type", true );
-	echo '<input type="text" name="', FILTER_PROPERTY_RELATIONSHIP_BUG, '" class="input-sm" size="5" maxlength="10" value="', $t_filter[FILTER_PROPERTY_RELATIONSHIP_BUG], '" />';
+	relationship_list_box( $c_reltype_value, 'relationship_type', true );
+	echo '<input type="text" name="', FILTER_PROPERTY_RELATIONSHIP_BUG, '" class="input-sm" size="5" maxlength="10" value="', $g_filter[FILTER_PROPERTY_RELATIONSHIP_BUG], '" />';
 }
 
 /**
@@ -4048,11 +4028,11 @@ function print_filter_tag_string() {
 		return;
 	}
 
-	global $t_filter;
-	$t_tag_string = $t_filter[FILTER_PROPERTY_TAG_STRING];
-	if( $t_filter[FILTER_PROPERTY_TAG_SELECT] != 0 && tag_exists( $t_filter[FILTER_PROPERTY_TAG_SELECT] ) ) {
+	global $g_filter;
+	$t_tag_string = $g_filter[FILTER_PROPERTY_TAG_STRING];
+	if( $g_filter[FILTER_PROPERTY_TAG_SELECT] != 0 && tag_exists( $g_filter[FILTER_PROPERTY_TAG_SELECT] ) ) {
 		$t_tag_string .= ( is_blank( $t_tag_string ) ? '' : config_get( 'tag_separator' ) );
-		$t_tag_string .= tag_get_field( $t_filter[FILTER_PROPERTY_TAG_SELECT], 'name' );
+		$t_tag_string .= tag_get_field( $g_filter[FILTER_PROPERTY_TAG_SELECT], 'name' );
 	}
 	?>
 		<input type="hidden" id="tag_separator" value="<?php echo config_get( 'tag_separator' )?>" />
@@ -4068,21 +4048,21 @@ function print_filter_tag_string() {
  * @return void
  */
 function print_filter_note_user_id() {
-	global $t_select_modifier, $t_filter, $f_view_type;
+	global $g_select_modifier, $g_filter, $f_view_type;
 	?>
 	<!-- BUGNOTE REPORTER -->
-	<select class="input-sm" <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_NOTE_USER_ID;?>[]">
-		<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $t_filter[FILTER_PROPERTY_NOTE_USER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+	<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_NOTE_USER_ID;?>[]">
+		<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_NOTE_USER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 		<?php if( access_has_project_level( config_get( 'view_handler_threshold' ) ) ) {?>
-		<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $t_filter[FILTER_PROPERTY_NOTE_USER_ID], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
+		<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $g_filter[FILTER_PROPERTY_NOTE_USER_ID], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
 		<?php
 			if( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
 				echo '<option value="' . META_FILTER_MYSELF . '"';
-				check_selected( $t_filter[FILTER_PROPERTY_NOTE_USER_ID], META_FILTER_MYSELF );
+				check_selected( $g_filter[FILTER_PROPERTY_NOTE_USER_ID], META_FILTER_MYSELF );
 				echo '>[' . lang_get( 'myself' ) . ']</option>';
 			}
 
-			print_note_option_list( $t_filter[FILTER_PROPERTY_NOTE_USER_ID] );
+			print_note_option_list( $g_filter[FILTER_PROPERTY_NOTE_USER_ID] );
 		}
 	?>
 	</select>
@@ -4097,36 +4077,36 @@ function print_filter_note_user_id() {
  * @return void
  */
 function print_filter_plugin_field( $p_field_name, $p_filter_object ) {
-	global $t_select_modifier, $t_filter, $f_view_type;
+	global $g_select_modifier, $g_filter, $f_view_type;
 
 	$t_size = (int)$p_filter_object->size;
 
 	switch( $p_filter_object->type ) {
 		case FILTER_TYPE_STRING:
-			echo '<input name="', string_attribute( $p_field_name ), '"',
-				( $t_size > 0 ? " size=\"$t_size\"" : '' ), ' value="',
-				string_attribute( $t_filter[$p_field_name] ), '"/>';
+			echo '<input class="input-sm" name="', string_attribute( $p_field_name ), '"',
+				( $t_size > 0 ? ' size="' . $t_size . '"' : '' ), ' value="',
+				string_attribute( $g_filter[$p_field_name] ), '"/>';
 			break;
 
 		case FILTER_TYPE_INT:
-			echo '<input name="', string_attribute( $p_field_name ), '"',
-				( $t_size > 0 ? " size=\"$t_size\"" : '' ), ' value="',
-				(int)$t_filter[$p_field_name], '"/>';
+			echo '<input class="input-sm" name="', string_attribute( $p_field_name ), '"',
+				( $t_size > 0 ? ' size="' . $t_size . '"' : '' ), ' value="',
+				(int)$g_filter[$p_field_name], '"/>';
 			break;
 
 		case FILTER_TYPE_BOOLEAN:
-			echo '<input name="', string_attribute( $p_field_name ), '" type="checkbox"',
-				( $t_size > 0 ? " size=\"$t_size\"" : '' ), check_checked( (bool)$t_filter[$p_field_name] ) , '"/>';
+			echo '<input class="input-sm" name="', string_attribute( $p_field_name ), '" type="checkbox"',
+				( $t_size > 0 ? ' size="' . $t_size . '"' : '' ), check_checked( (bool)$g_filter[$p_field_name] ) , '"/>';
 			break;
 
 		case FILTER_TYPE_MULTI_STRING:
-			echo '<select class="input-sm" ', $t_select_modifier, ( $t_size > 0 ? " size=\"$t_size\"" : '' ), ' name="',
+			echo '<select class="input-sm" ', $g_select_modifier, ( $t_size > 0 ? ' size="' . $t_size . '"' : '' ), ' name="',
 				string_attribute( $p_field_name ), '[]">', '<option value="', META_FILTER_ANY, '"',
-				check_selected( $t_filter[$p_field_name], META_FILTER_ANY ), '>[', lang_get( 'any' ), ']</option>';
+				check_selected( $g_filter[$p_field_name], META_FILTER_ANY ), '>[', lang_get( 'any' ), ']</option>';
 
 			foreach( $p_filter_object->options() as $t_option_value => $t_option_name ) {
 				echo '<option value="', string_attribute( $t_option_value ), '" ',
-					check_selected( $t_filter[$p_field_name], $t_option_value ), '>',
+					check_selected( $g_filter[$p_field_name], $t_option_value ), '>',
 					string_display_line( $t_option_name ), '</option>';
 			}
 
@@ -4134,13 +4114,13 @@ function print_filter_plugin_field( $p_field_name, $p_filter_object ) {
 			break;
 
 		case FILTER_TYPE_MULTI_INT:
-			echo '<select class="input-sm" ', $t_select_modifier, ( $t_size > 0 ? " size=\"$t_size\"" : '' ), ' name="',
+			echo '<select class="input-sm" ', $g_select_modifier, ( $t_size > 0 ? ' size="' . $t_size . '"' : '' ), ' name="',
 				string_attribute( $p_field_name ), '[]">', '<option value="', META_FILTER_ANY, '"',
-				check_selected( $t_filter[$p_field_name], META_FILTER_ANY ), '>[', lang_get( 'any' ), ']</option>';
+				check_selected( $g_filter[$p_field_name], META_FILTER_ANY ), '>[', lang_get( 'any' ), ']</option>';
 
 			foreach( $p_filter_object->options() as $t_option_value => $t_option_name ) {
 				echo '<option value="', (int)$t_option_value, '" ',
-					check_selected( $t_filter[$p_field_name], (int)$t_option_value ), '>',
+					check_selected( $g_filter[$p_field_name], (int)$t_option_value ), '>',
 					string_display_line( $t_option_name ), '</option>';
 			}
 
@@ -4156,7 +4136,7 @@ function print_filter_plugin_field( $p_field_name, $p_filter_object ) {
  * @return void
  */
 function print_filter_custom_field( $p_field_id ) {
-	global $t_filter, $t_accessible_custom_fields_names, $t_accessible_custom_fields_types, $t_accessible_custom_fields_values, $t_accessible_custom_fields_ids, $t_select_modifier;
+	global $g_filter, $t_accessible_custom_fields_names, $t_accessible_custom_fields_types, $t_accessible_custom_fields_values, $t_accessible_custom_fields_ids, $g_select_modifier;
 
 	$j = array_search( $p_field_id, $t_accessible_custom_fields_ids );
 	if( $j === null || $j === false ) {
@@ -4173,15 +4153,15 @@ function print_filter_custom_field( $p_field_id ) {
 		} else if( $t_accessible_custom_fields_types[$j] == CUSTOM_FIELD_TYPE_TEXTAREA ) {
 			echo '<input type="text" name="custom_field_', $p_field_id, '" class="input-sm" size="10" value="" />';
 		} else {
-			echo '<select class="input-sm" ' . $t_select_modifier . ' name="custom_field_' . $p_field_id . '[]">';
+			echo '<select class="input-sm" ' . $g_select_modifier . ' name="custom_field_' . $p_field_id . '[]">';
 			echo '<option value="' . META_FILTER_ANY . '"';
-			check_selected( $t_filter['custom_fields'][$p_field_id], (string)META_FILTER_ANY );
+			check_selected( $g_filter['custom_fields'][$p_field_id], (string)META_FILTER_ANY );
 			echo '>[' . lang_get( 'any' ) . ']</option>';
 
 			# don't show META_FILTER_NONE for enumerated types as it's not possible for them to be blank
 			if( !in_array( $t_accessible_custom_fields_types[$j], array( CUSTOM_FIELD_TYPE_ENUM, CUSTOM_FIELD_TYPE_LIST, CUSTOM_FIELD_TYPE_MULTILIST ) ) ) {
 				echo '<option value="' . META_FILTER_NONE . '"';
-				check_selected( $t_filter['custom_fields'][$p_field_id], (string)META_FILTER_NONE );
+				check_selected( $g_filter['custom_fields'][$p_field_id], (string)META_FILTER_NONE );
 				echo '>[' . lang_get( 'none' ) . ']</option>';
 			}
 			if( is_array( $t_accessible_custom_fields_values[$j] ) ) {
@@ -4189,8 +4169,8 @@ function print_filter_custom_field( $p_field_id ) {
 				foreach( $t_accessible_custom_fields_values[$j] as $t_item ) {
 					if( ( strtolower( $t_item ) !== META_FILTER_ANY ) && ( strtolower( $t_item ) !== META_FILTER_NONE ) ) {
 						echo '<option value="' . string_attribute( $t_item ) . '"';
-						if( isset( $t_filter['custom_fields'][$p_field_id] ) ) {
-							check_selected( $t_filter['custom_fields'][$p_field_id], $t_item );
+						if( isset( $g_filter['custom_fields'][$p_field_id] ) ) {
+							check_selected( $g_filter['custom_fields'][$p_field_id], $t_item );
 						}
 						echo '>' . string_attribute( string_shorten( $t_item, $t_max_length ) ) . '</option>' . "\n";
 					}
@@ -4206,7 +4186,7 @@ function print_filter_custom_field( $p_field_id ) {
  * @return void
  */
 function print_filter_show_sort() {
-	global $t_filter;
+	global $g_filter;
 
 	# get all of the displayed fields for sort, then drop ones that
 	#  are not appropriate and translate the rest
@@ -4228,8 +4208,8 @@ function print_filter_show_sort() {
 	$t_shown_dirs['DESC'] = lang_get( 'bugnote_order_desc' );
 
 	# get default values from filter structure
-	$t_sort_fields = explode( ',', $t_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
-	$t_dir_fields = explode( ',', $t_filter[FILTER_PROPERTY_SORT_DIRECTION] );
+	$t_sort_fields = explode( ',', $g_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
+	$t_dir_fields = explode( ',', $g_filter[FILTER_PROPERTY_SORT_DIRECTION] );
 	if( !isset( $t_sort_fields[1] ) ) {
 		$t_sort_fields[1] = '';
 		$t_dir_fields[1] = '';
@@ -4285,7 +4265,7 @@ function print_filter_show_sort() {
  * @return void
  */
 function print_filter_custom_field_date( $p_field_num, $p_field_id ) {
-	global $t_filter, $t_accessible_custom_fields_values;
+	global $g_filter, $t_accessible_custom_fields_values;
 
 	# Resort the values so there ordered numerically, they are sorted as strings otherwise which
 	# may be wrong for dates before early 2001.
@@ -4308,14 +4288,14 @@ function print_filter_custom_field_date( $p_field_num, $p_field_id ) {
 	# Default to today in filters..
 	$t_end = $t_start;
 
-	if( isset( $t_filter['custom_fields'][$p_field_id][1] ) ) {
-		$t_start_time = $t_filter['custom_fields'][$p_field_id][1];
+	if( isset( $g_filter['custom_fields'][$p_field_id][1] ) ) {
+		$t_start_time = $g_filter['custom_fields'][$p_field_id][1];
 	} else {
 		$t_start_time = 0;
 	}
 
-	if( isset( $t_filter['custom_fields'][$p_field_id][2] ) ) {
-		$t_end_time = $t_filter['custom_fields'][$p_field_id][2];
+	if( isset( $g_filter['custom_fields'][$p_field_id][2] ) ) {
+		$t_end_time = $g_filter['custom_fields'][$p_field_id][2];
 	} else {
 		$t_end_time = 0;
 	}
@@ -4327,10 +4307,10 @@ function print_filter_custom_field_date( $p_field_num, $p_field_id ) {
 		$t_start_disable = true;
 		$t_end_disable = true;
 
-		# if $t_filter['custom_fields'][$p_field_id][0] is not set (ie no filter),
+		# if $g_filter['custom_fields'][$p_field_id][0] is not set (ie no filter),
 		# we will drop through the following switch and use the default values
 		# above, so no need to check if stuff is set or not.
-		switch( $t_filter['custom_fields'][$p_field_id][0] ) {
+		switch( $g_filter['custom_fields'][$p_field_id][0] ) {
 			case CUSTOM_FIELD_DATE_ANY:
 			case CUSTOM_FIELD_DATE_NONE:
 				break;
@@ -4363,31 +4343,31 @@ function print_filter_custom_field_date( $p_field_num, $p_field_id ) {
 		}
 	}
 
-	echo "\n<table cellspacing=\"0\" cellpadding=\"0\"><tr><td>\n";
-	echo "<select class=\"input-sm\" size=\"1\" name=\"custom_field_" . $p_field_id . "_control\">\n";
+	echo '<table cellspacing="0" cellpadding="0"><tr><td>' . "\n";
+	echo '<select class="input-sm" size="1" name="custom_field_' . $p_field_id . '_control">' . "\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_ANY . '"';
-	check_selected( (int)$t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ANY );
+	check_selected( (int)$g_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ANY );
 	echo '>' . lang_get( 'any' ) . '</option>' . "\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_NONE . '"';
-	check_selected( (int)$t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_NONE );
+	check_selected( (int)$g_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_NONE );
 	echo '>' . lang_get( 'none' ) . '</option>' . "\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_BETWEEN . '"';
-	check_selected( (int)$t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_BETWEEN );
+	check_selected( (int)$g_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_BETWEEN );
 	echo '>' . lang_get( 'between_date' ) . '</option>' . "\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_ONORBEFORE . '"';
-	check_selected( (int)$t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ONORBEFORE );
+	check_selected( (int)$g_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ONORBEFORE );
 	echo '>' . lang_get( 'on_or_before_date' ) . '</option>' . "\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_BEFORE . '"';
-	check_selected( (int)$t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_BEFORE );
+	check_selected( (int)$g_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_BEFORE );
 	echo '>' . lang_get( 'before_date' ) . '</option>' . "\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_ON . '"';
-	check_selected( (int)$t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ON );
+	check_selected( (int)$g_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ON );
 	echo '>' . lang_get( 'on_date' ) . '</option>' . "\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_AFTER . '"';
-	check_selected( (int)$t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_AFTER );
+	check_selected( (int)$g_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_AFTER );
 	echo '>' . lang_get( 'after_date' ) . '</option>' . "\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_ONORAFTER . '"';
-	check_selected( (int)$t_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ONORAFTER );
+	check_selected( (int)$g_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ONORAFTER );
 	echo '>' . lang_get( 'on_or_after_date' ) . '</option>' . "\n";
 	echo '</select>' . "\n";
 
@@ -4404,15 +4384,15 @@ function print_filter_custom_field_date( $p_field_num, $p_field_id ) {
  * @return void
  */
 function print_filter_project_id() {
-	global $t_select_modifier, $t_filter;
+	global $g_select_modifier, $g_filter;
 	?>
 		<!-- Project -->
-		<select class="input-sm" <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_PROJECT_ID;?>[]">
+		<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_PROJECT_ID;?>[]">
 			<option value="<?php echo META_FILTER_CURRENT ?>"
-				<?php check_selected( $t_filter[FILTER_PROPERTY_PROJECT_ID], META_FILTER_CURRENT );?>>
+				<?php check_selected( $g_filter[FILTER_PROPERTY_PROJECT_ID], META_FILTER_CURRENT );?>>
 				[<?php echo lang_get( 'current' )?>]
 			</option>
-			<?php print_project_option_list( $t_filter[FILTER_PROPERTY_PROJECT_ID] )?>
+			<?php print_project_option_list( $g_filter[FILTER_PROPERTY_PROJECT_ID] )?>
 		</select>
 		<?php
 }
@@ -4422,12 +4402,12 @@ function print_filter_project_id() {
  * @return void
  */
 function print_filter_match_type() {
-	global $t_select_modifier, $t_filter;
+	global $g_select_modifier, $g_filter;
 ?>
 		<!-- Project -->
-		<select class="input-sm" <?php echo $t_select_modifier;?> name="<?php echo FILTER_PROPERTY_MATCH_TYPE;?>">
-			<option value="<?php echo FILTER_MATCH_ALL?>" <?php check_selected( $t_filter[FILTER_PROPERTY_MATCH_TYPE], FILTER_MATCH_ALL );?>>[<?php echo lang_get( 'filter_match_all' )?>]</option>
-			<option value="<?php echo FILTER_MATCH_ANY?>" <?php check_selected( $t_filter[FILTER_PROPERTY_MATCH_TYPE], FILTER_MATCH_ANY );?>>[<?php echo lang_get( 'filter_match_any' )?>]</option>
+		<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_MATCH_TYPE;?>">
+			<option value="<?php echo FILTER_MATCH_ALL?>" <?php check_selected( $g_filter[FILTER_PROPERTY_MATCH_TYPE], FILTER_MATCH_ALL );?>>[<?php echo lang_get( 'filter_match_all' )?>]</option>
+			<option value="<?php echo FILTER_MATCH_ANY?>" <?php check_selected( $g_filter[FILTER_PROPERTY_MATCH_TYPE], FILTER_MATCH_ANY );?>>[<?php echo lang_get( 'filter_match_any' )?>]</option>
 		</select>
 		<?php
 }
@@ -4569,35 +4549,35 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
 	}
 
 	# Do I need to update or insert this value?
-	$t_query = "SELECT id FROM $t_filters_table
-					WHERE user_id=" . db_param() . "
-					AND project_id=" . db_param() . "
-					AND name=" . db_param();
+	$t_query = 'SELECT id FROM ' . $t_filters_table . '
+					WHERE user_id=' . db_param() . '
+					AND project_id=' . db_param() . '
+					AND name=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $t_user_id, $c_project_id, $p_name ) );
 
 	if( db_num_rows( $t_result ) > 0 ) {
 		$t_row = db_fetch_array( $t_result );
 
-		$t_query = "UPDATE $t_filters_table
-					  SET is_public=" . db_param() . ",
-						filter_string=" . db_param() . "
-					  WHERE id=" . db_param();
+		$t_query = 'UPDATE ' . $t_filters_table . '
+					  SET is_public=' . db_param() . ',
+						filter_string=' . db_param() . '
+					  WHERE id=' . db_param();
 		db_query_bound( $t_query, array( $p_is_public, $p_filter_string, $t_row['id'] ) );
 
 		return $t_row['id'];
 	} else {
-		$t_query = "INSERT INTO $t_filters_table
+		$t_query = 'INSERT INTO ' . $t_filters_table . '
 						( user_id, project_id, is_public, name, filter_string )
 					  VALUES
-						( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
+						( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 		db_query_bound( $t_query, array( $t_user_id, $c_project_id, $p_is_public, $p_name, $p_filter_string ) );
 
 		# Recall the query, we want the filter ID
-		$t_query = "SELECT id
-						FROM $t_filters_table
-						WHERE user_id=" . db_param() . "
-						AND project_id=" . db_param() . "
-						AND name=" . db_param();
+		$t_query = 'SELECT id
+						FROM ' . $t_filters_table . '
+						WHERE user_id=' . db_param() . '
+						AND project_id=' . db_param() . '
+						AND name=' . db_param();
 		$t_result = db_query_bound( $t_query, array( $t_user_id, $c_project_id, $p_name ) );
 
 		if( db_num_rows( $t_result ) > 0 ) {
@@ -4677,11 +4657,11 @@ function filter_db_get_project_current( $p_project_id, $p_user_id = null ) {
 
 	# we store current filters for each project with a special project index
 	$t_filters_table = db_get_table( 'filters' );
-	$t_query = "SELECT *
-				  FROM $t_filters_table
-				  WHERE user_id=" . db_param() . "
-					AND project_id=" . db_param() . "
-					AND name=" . db_param();
+	$t_query = 'SELECT *
+				  FROM ' . $t_filters_table . '
+				  WHERE user_id=' . db_param() . '
+					AND project_id=' . db_param() . '
+					AND name=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $c_user_id, $c_project_id, '' ) );
 
 	if( db_num_rows( $t_result ) > 0 ) {
@@ -4734,11 +4714,11 @@ function filter_db_can_delete_filter( $p_filter_id ) {
 		return true;
 	}
 
-	$t_query = "SELECT id
-				  FROM $t_filters_table
-				  WHERE id=" . db_param() . "
-				  AND user_id=" . db_param() . "
-				  AND project_id!=" . db_param();
+	$t_query = 'SELECT id
+				  FROM ' . $t_filters_table . '
+				  WHERE id=' . db_param() . '
+				  AND user_id=' . db_param() . '
+				  AND project_id!=' . db_param();
 
 	$t_result = db_query_bound( $t_query, array( $c_filter_id, $t_user_id, -1 ) );
 
@@ -4776,7 +4756,7 @@ function filter_db_delete_current_filters() {
 	$t_filters_table = db_get_table( 'filters' );
 	$t_all_id = ALL_PROJECTS;
 
-	$t_query = "DELETE FROM $t_filters_table WHERE project_id<=" . db_param() . " AND name=" . db_param();
+	$t_query = 'DELETE FROM ' . $t_filters_table . ' WHERE project_id<=' . db_param() . ' AND name=' . db_param();
 	db_query_bound( $t_query, array( $t_all_id, '' ) );
 }
 
@@ -4811,14 +4791,14 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
 	# Get the list of available queries. By sorting such that public queries are
 	# first, we can override any query that has the same name as a private query
 	# with that private one
-	$t_query = "SELECT * FROM $t_filters_table
-					WHERE (project_id=" . db_param() . "
+	$t_query = 'SELECT * FROM ' . $t_filters_table . '
+					WHERE (project_id=' . db_param() . '
 						OR project_id=0)
-					AND name!=''
-					AND (is_public = " . db_param() . "
-						OR user_id = " . db_param() . ")
-					ORDER BY is_public DESC, name ASC";
-	$t_result = db_query_bound( $t_query, array( $t_project_id, true, $t_user_id ) );
+					AND name!=\'\'
+					AND (is_public = ' . db_param() . '
+						OR user_id = ' . db_param() . ')
+					ORDER BY is_public DESC, name ASC';
+	$t_result = db_query_bound( $t_query, array( $t_project_id, db_prepare_bool( true ), $t_user_id ) );
 	$t_query_count = db_num_rows( $t_result );
 
 	for( $i = 0; $i < $t_query_count; $i++ ) {

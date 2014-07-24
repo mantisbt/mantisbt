@@ -64,7 +64,7 @@ $f_bug_arr = gpc_get_int_array( 'bug_arr', array() );
 
 # redirects to all_bug_page if nothing is selected
 if( is_blank( $f_action ) || ( 0 == count( $f_bug_arr ) ) ) {
-    print_header_redirect( 'view_all_bug_page.php' );
+	print_header_redirect( 'view_all_bug_page.php' );
 }
 
 # run through the issues to see if they are all from one project
@@ -75,25 +75,25 @@ $t_projects = array();
 bug_cache_array_rows( $f_bug_arr );
 
 foreach( $f_bug_arr as $t_bug_id ) {
-    $t_bug = bug_get( $t_bug_id );
-    if( $t_project_id != $t_bug->project_id ) {
-        if( ( $t_project_id != ALL_PROJECTS ) && !$t_multiple_projects ) {
-            $t_multiple_projects = true;
-        } else {
-            $t_project_id = $t_bug->project_id;
-            $t_projects[$t_project_id] = $t_project_id;
-        }
-    }
+	$t_bug = bug_get( $t_bug_id );
+	if( $t_project_id != $t_bug->project_id ) {
+		if( ( $t_project_id != ALL_PROJECTS ) && !$t_multiple_projects ) {
+			$t_multiple_projects = true;
+		} else {
+			$t_project_id = $t_bug->project_id;
+			$t_projects[$t_project_id] = $t_project_id;
+		}
+	}
 }
 if( $t_multiple_projects ) {
-    $t_project_id = ALL_PROJECTS;
-    $t_projects[ALL_PROJECTS] = ALL_PROJECTS;
+	$t_project_id = ALL_PROJECTS;
+	$t_projects[ALL_PROJECTS] = ALL_PROJECTS;
 }
 # override the project if necessary
 if( $t_project_id != helper_get_current_project() ) {
-    # in case the current project is not the same project of the bug we are viewing...
-    # ... override the current project. This to avoid problems with categories and handlers lists etc.
-    $g_project_override = $t_project_id;
+	# in case the current project is not the same project of the bug we are viewing...
+	# ... override the current project. This to avoid problems with categories and handlers lists etc.
+	$g_project_override = $t_project_id;
 }
 
 define( 'BUG_ACTIONGROUP_INC_ALLOW', true );
@@ -103,127 +103,113 @@ $t_bugnote = false;
 
 $t_external_action_prefix = 'EXT_';
 if( strpos( $f_action, $t_external_action_prefix ) === 0 ) {
-    $t_form_page = 'bug_actiongroup_ext_page.php';
-    require_once( $t_form_page );
-    exit;
+	$t_form_page = 'bug_actiongroup_ext_page.php';
+	require_once( $t_form_page );
+	exit;
 }
 
 $t_custom_group_actions = config_get( 'custom_group_actions' );
 
 foreach( $t_custom_group_actions as $t_custom_group_action ) {
-    if( $f_action == $t_custom_group_action['action'] ) {
-        require_once( $t_custom_group_action['form_page'] );
-        exit;
-    }
+	if( $f_action == $t_custom_group_action['action'] ) {
+		require_once( $t_custom_group_action['form_page'] );
+		exit;
+	}
 }
 
 # Check if user selected to update a custom field.
 $t_custom_fields_prefix = 'custom_field_';
 if( strpos( $f_action, $t_custom_fields_prefix ) === 0 ) {
-    $t_custom_field_id = (int)substr( $f_action, utf8_strlen( $t_custom_fields_prefix ) );
-    $f_action = 'CUSTOM';
+	$t_custom_field_id = (int)substr( $f_action, utf8_strlen( $t_custom_fields_prefix ) );
+	$f_action = 'CUSTOM';
 }
 
 # Form name
 $t_form_name = 'bug_actiongroup_' . $f_action;
 
-switch ( $f_action )  {
-    # Use a simple confirmation page, if close or delete...
-    case 'CLOSE' :
-        $t_finished 			= true;
-        $t_question_title 		= lang_get( 'close_bugs_conf_msg' );
-        $t_button_title 		= lang_get( 'close_group_bugs_button' );
-        $t_bugnote				= true;
-        break;
-
-    case 'DELETE' :
-        $t_finished 			= true;
-        $t_question_title		= lang_get( 'delete_bugs_conf_msg' );
-        $t_button_title 		= lang_get( 'delete_group_bugs_button' );
-        break;
-
-    case 'SET_STICKY' :
-        $t_finished 			= true;
-        $t_question_title		= lang_get( 'set_sticky_bugs_conf_msg' );
-        $t_button_title 		= lang_get( 'set_sticky_group_bugs_button' );
-        break;
-
-    # ...else we define the variables used in the form
-    case 'MOVE' :
-        $t_question_title 		= lang_get( 'move_bugs_conf_msg' );
-        $t_button_title 		= lang_get( 'move_group_bugs_button' );
-        $t_form					= 'project_id';
-        break;
-
-    case 'COPY' :
-        $t_question_title 		= lang_get( 'copy_bugs_conf_msg' );
-        $t_button_title 		= lang_get( 'copy_group_bugs_button' );
-        $t_form					= 'project_id';
-        break;
-
-    case 'ASSIGN' :
-        $t_question_title 		= lang_get( 'assign_bugs_conf_msg' );
-        $t_button_title 		= lang_get( 'assign_group_bugs_button' );
-        $t_form 				= 'assign';
-        break;
-
-    case 'RESOLVE' :
-        $t_question_title 		= lang_get( 'resolve_bugs_conf_msg' );
-        $t_button_title 		= lang_get( 'resolve_group_bugs_button' );
-        $t_form 				= 'resolution';
-        if( ALL_PROJECTS != $t_project_id ) {
-            $t_question_title2 = lang_get( 'fixed_in_version' );
-            $t_form2 = 'fixed_in_version';
-        }
-        $t_bugnote				= true;
-        break;
-
-    case 'UP_PRIOR' :
-        $t_question_title 		= lang_get( 'priority_bugs_conf_msg' );
-        $t_button_title 		= lang_get( 'priority_group_bugs_button' );
-        $t_form 				= 'priority';
-        break;
-
-    case 'UP_STATUS' :
-        $t_question_title 		= lang_get( 'status_bugs_conf_msg' );
-        $t_button_title 		= lang_get( 'status_group_bugs_button' );
-        $t_form 				= 'status';
-        $t_bugnote				= true;
-        break;
-
-    case 'UP_CATEGORY' :
-        $t_question_title		= lang_get( 'category_bugs_conf_msg' );
-        $t_button_title			= lang_get( 'category_group_bugs_button' );
-        $t_form					= 'category';
-        break;
-
-    case 'VIEW_STATUS' :
-        $t_question_title		= lang_get( 'view_status_bugs_conf_msg' );
-        $t_button_title			= lang_get( 'view_status_group_bugs_button' );
-        $t_form					= 'view_status';
-        break;
-
-    case 'UP_FIXED_IN_VERSION':
-        $t_question_title		= lang_get( 'fixed_in_version_bugs_conf_msg' );
-        $t_button_title			= lang_get( 'fixed_in_version_group_bugs_button' );
-        $t_form					= 'fixed_in_version';
-        break;
-
-    case 'UP_TARGET_VERSION':
-        $t_question_title		= lang_get( 'target_version_bugs_conf_msg' );
-        $t_button_title			= lang_get( 'target_version_group_bugs_button' );
-        $t_form					= 'target_version';
-        break;
-
-    case 'CUSTOM' :
-        $t_custom_field_def = custom_field_get_definition( $t_custom_field_id );
-        $t_question_title = sprintf( lang_get( 'actiongroup_menu_update_field' ), lang_get_defaulted( $t_custom_field_def['name'] ) );
-        $t_button_title = $t_question_title;
-        $t_form = "custom_field_$t_custom_field_id";
-        break;
-
-    default:
-        trigger_error( ERROR_GENERIC, ERROR );
+switch( $f_action ) {
+	# Use a simple confirmation page, if close or delete...
+	case 'CLOSE' :
+		$t_finished 			= true;
+		$t_question_title 		= lang_get( 'close_bugs_conf_msg' );
+		$t_button_title 		= lang_get( 'close_group_bugs_button' );
+		$t_bugnote				= true;
+		break;
+	case 'DELETE' :
+		$t_finished 			= true;
+		$t_question_title		= lang_get( 'delete_bugs_conf_msg' );
+		$t_button_title 		= lang_get( 'delete_group_bugs_button' );
+		break;
+	case 'SET_STICKY' :
+		$t_finished 			= true;
+		$t_question_title		= lang_get( 'set_sticky_bugs_conf_msg' );
+		$t_button_title 		= lang_get( 'set_sticky_group_bugs_button' );
+		break;
+	# ...else we define the variables used in the form
+	case 'MOVE' :
+		$t_question_title 		= lang_get( 'move_bugs_conf_msg' );
+		$t_button_title 		= lang_get( 'move_group_bugs_button' );
+		$t_form					= 'project_id';
+		break;
+	case 'COPY' :
+		$t_question_title 		= lang_get( 'copy_bugs_conf_msg' );
+		$t_button_title 		= lang_get( 'copy_group_bugs_button' );
+		$t_form					= 'project_id';
+		break;
+	case 'ASSIGN' :
+		$t_question_title 		= lang_get( 'assign_bugs_conf_msg' );
+		$t_button_title 		= lang_get( 'assign_group_bugs_button' );
+		$t_form 				= 'assign';
+		break;
+	case 'RESOLVE' :
+		$t_question_title 		= lang_get( 'resolve_bugs_conf_msg' );
+		$t_button_title 		= lang_get( 'resolve_group_bugs_button' );
+		$t_form 				= 'resolution';
+		if( ALL_PROJECTS != $t_project_id ) {
+			$t_question_title2 = lang_get( 'fixed_in_version' );
+			$t_form2 = 'fixed_in_version';
+		}
+		$t_bugnote				= true;
+		break;
+	case 'UP_PRIOR' :
+		$t_question_title 		= lang_get( 'priority_bugs_conf_msg' );
+		$t_button_title 		= lang_get( 'priority_group_bugs_button' );
+		$t_form 				= 'priority';
+		break;
+	case 'UP_STATUS' :
+		$t_question_title 		= lang_get( 'status_bugs_conf_msg' );
+		$t_button_title 		= lang_get( 'status_group_bugs_button' );
+		$t_form 				= 'status';
+		$t_bugnote				= true;
+		break;
+	case 'UP_CATEGORY' :
+		$t_question_title		= lang_get( 'category_bugs_conf_msg' );
+		$t_button_title			= lang_get( 'category_group_bugs_button' );
+		$t_form					= 'category';
+		break;
+	case 'VIEW_STATUS' :
+		$t_question_title		= lang_get( 'view_status_bugs_conf_msg' );
+		$t_button_title			= lang_get( 'view_status_group_bugs_button' );
+		$t_form					= 'view_status';
+		break;
+	case 'UP_FIXED_IN_VERSION':
+		$t_question_title		= lang_get( 'fixed_in_version_bugs_conf_msg' );
+		$t_button_title			= lang_get( 'fixed_in_version_group_bugs_button' );
+		$t_form					= 'fixed_in_version';
+		break;
+	case 'UP_TARGET_VERSION':
+		$t_question_title		= lang_get( 'target_version_bugs_conf_msg' );
+		$t_button_title			= lang_get( 'target_version_group_bugs_button' );
+		$t_form					= 'target_version';
+		break;
+	case 'CUSTOM' :
+		$t_custom_field_def = custom_field_get_definition( $t_custom_field_id );
+		$t_question_title = sprintf( lang_get( 'actiongroup_menu_update_field' ), lang_get_defaulted( $t_custom_field_def['name'] ) );
+		$t_button_title = $t_question_title;
+		$t_form = 'custom_field_' . $t_custom_field_id;
+		break;
+	default:
+		trigger_error( ERROR_GENERIC, ERROR );
 }
 
 bug_group_action_print_top();
@@ -278,7 +264,7 @@ bug_group_action_print_top();
 
                                                     print_custom_field_input( $t_custom_field_def, $t_bug_id );
                                                 } else {
-                                                    echo "<select name=\"$t_form\" class=\"input-sm\">";
+                                                    echo '<select name="' . $t_form . '" class="input-sm">';
 
                                                     switch ( $f_action ) {
                                                         case 'COPY':

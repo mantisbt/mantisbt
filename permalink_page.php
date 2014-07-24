@@ -62,7 +62,7 @@ $f_url = string_sanitize_url( gpc_get_string( 'url' ) );
         <p>
             <?php
             $t_safe_url = string_display_line( $f_url );
-            echo "<a href=\"$t_safe_url\">$t_safe_url</a>";
+            echo '<a href="' . $t_safe_url . '">' . $t_safe_url . '</a>';
             ?>
         </p>
         <div class="space-10"></div>

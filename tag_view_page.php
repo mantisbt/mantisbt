@@ -62,7 +62,7 @@ $t_name = string_display_line( $t_tag_row['name'] );
 $t_description = string_display( $t_tag_row['description'] );
 $t_can_edit = access_has_global_level( config_get( 'tag_edit_threshold' ) );
 $t_can_edit_own = $t_can_edit || auth_get_current_user_id() == tag_get_field( $f_tag_id, 'user_id' )
-    && access_has_global_level( config_get( 'tag_edit_own_threshold' ) );
+	&& access_has_global_level( config_get( 'tag_edit_own_threshold' ) );
 
 
 layout_page_header( sprintf( lang_get( 'tag_details' ), $t_name ) );

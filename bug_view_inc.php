@@ -147,7 +147,7 @@ $t_form_title = lang_get( 'bug_view_title' );
 $t_wiki_link = config_get_global( 'wiki_enable' ) == ON ? 'wiki.php?id=' . $f_bug_id : '';
 
 if( access_has_bug_level( config_get( 'view_history_threshold' ), $f_bug_id ) ) {
-	$t_history_link = "view.php?id=$f_bug_id&history=1#history";
+	$t_history_link = 'view.php?id=' . $f_bug_id . '&history=1#history';
 } else {
 	$t_history_link = '';
 }
@@ -252,7 +252,7 @@ echo '<div class="widget-toolbox padding-8 clearfix">';
 echo '<div class="btn-group pull-left">';
 
 # Jump to Bugnotes
-print_small_button( "#bugnotes", lang_get( 'jump_to_bugnotes' ) );
+print_small_button( '#bugnotes', lang_get( 'jump_to_bugnotes' ) );
 
 # Send Bug Reminder
 if( $t_show_reminder_link ) {

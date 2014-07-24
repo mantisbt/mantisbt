@@ -39,7 +39,7 @@
  */
 
 if( !defined( 'MY_VIEW_INC_ALLOW' ) ) {
-    return;
+	return;
 }
 
 require_api( 'access_api.php' );
@@ -60,7 +60,7 @@ require_api( 'string_api.php' );
 
 $t_filter = current_user_get_bug_filter();
 if( $t_filter === false ) {
-    $t_filter = filter_get_default();
+	$t_filter = filter_get_default();
 }
 
 $t_sort = $t_filter['sort'];
@@ -73,198 +73,198 @@ $t_hide_status_default = config_get( 'hide_status_default' );
 $t_default_show_changed = config_get( 'default_show_changed' );
 
 $c_filter['assigned'] = filter_create_assigned_to_unresolved( helper_get_current_project(), $t_current_user_id );
-$url_link_parameters['assigned'] = FILTER_PROPERTY_HANDLER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_bug_resolved_status_threshold;
+$t_url_link_parameters['assigned'] = FILTER_PROPERTY_HANDLER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_bug_resolved_status_threshold;
 
 $c_filter['recent_mod'] = array(
-    FILTER_PROPERTY_CATEGORY_ID => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_SEVERITY => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_STATUS => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
-    FILTER_PROPERTY_REPORTER_ID => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_HANDLER_ID => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_RESOLUTION => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_BUILD => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_VERSION => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_HIDE_STATUS => array(
-        '0' => META_FILTER_NONE,
-    ),
-    FILTER_PROPERTY_MONITOR_USER_ID => array(
-        '0' => META_FILTER_ANY,
-    ),
+	FILTER_PROPERTY_CATEGORY_ID => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_SEVERITY => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_STATUS => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
+	FILTER_PROPERTY_REPORTER_ID => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_HANDLER_ID => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_RESOLUTION => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_BUILD => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_VERSION => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_HIDE_STATUS => array(
+		'0' => META_FILTER_NONE,
+	),
+	FILTER_PROPERTY_MONITOR_USER_ID => array(
+		'0' => META_FILTER_ANY,
+	),
 );
-$url_link_parameters['recent_mod'] = FILTER_PROPERTY_HIDE_STATUS . '=none';
+$t_url_link_parameters['recent_mod'] = FILTER_PROPERTY_HIDE_STATUS . '=none';
 
 $c_filter['reported'] = filter_create_reported_by( helper_get_current_project(), $t_current_user_id );
-$url_link_parameters['reported'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
+$t_url_link_parameters['reported'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
 
 $c_filter['resolved'] = array(
-    FILTER_PROPERTY_CATEGORY_ID => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_SEVERITY => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_STATUS => array(
-        '0' => $t_bug_resolved_status_threshold,
-    ),
-    FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
-    FILTER_PROPERTY_REPORTER_ID => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_HANDLER_ID => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_RESOLUTION => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_BUILD => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_VERSION => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_HIDE_STATUS => array(
-        '0' => $t_hide_status_default,
-    ),
-    FILTER_PROPERTY_MONITOR_USER_ID => array(
-        '0' => META_FILTER_ANY,
-    ),
+	FILTER_PROPERTY_CATEGORY_ID => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_SEVERITY => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_STATUS => array(
+		'0' => $t_bug_resolved_status_threshold,
+	),
+	FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
+	FILTER_PROPERTY_REPORTER_ID => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_HANDLER_ID => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_RESOLUTION => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_BUILD => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_VERSION => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_HIDE_STATUS => array(
+		'0' => $t_hide_status_default,
+	),
+	FILTER_PROPERTY_MONITOR_USER_ID => array(
+		'0' => META_FILTER_ANY,
+	),
 );
-$url_link_parameters['resolved'] = FILTER_PROPERTY_STATUS . '=' . $t_bug_resolved_status_threshold . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_bug_resolved_status_threshold;
+$t_url_link_parameters['resolved'] = FILTER_PROPERTY_STATUS . '=' . $t_bug_resolved_status_threshold . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_bug_resolved_status_threshold;
 
 
 $c_filter['unassigned'] = filter_create_assigned_to_unresolved( helper_get_current_project(), 0 );
-$url_link_parameters['unassigned'] = FILTER_PROPERTY_HANDLER_ID . '=[none]' . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
+$t_url_link_parameters['unassigned'] = FILTER_PROPERTY_HANDLER_ID . '=[none]' . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
 
 # TODO: check. handler value looks wrong
 
 $c_filter['monitored'] = filter_create_monitored_by( helper_get_current_project(), $t_current_user_id );
-$url_link_parameters['monitored'] = FILTER_PROPERTY_MONITOR_USER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
+$t_url_link_parameters['monitored'] = FILTER_PROPERTY_MONITOR_USER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
 
 $c_filter['feedback'] = array(
-    FILTER_PROPERTY_CATEGORY_ID => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_SEVERITY => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_STATUS => array(
-        '0' => config_get( 'bug_feedback_status' ),
-    ),
-    FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
-    FILTER_PROPERTY_REPORTER_ID => array(
-        '0' => $t_current_user_id,
-    ),
-    FILTER_PROPERTY_HANDLER_ID => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_RESOLUTION => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_BUILD => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_VERSION => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_HIDE_STATUS => array(
-        '0' => $t_hide_status_default,
-    ),
-    FILTER_PROPERTY_MONITOR_USER_ID => array(
-        '0' => META_FILTER_ANY,
-    ),
+	FILTER_PROPERTY_CATEGORY_ID => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_SEVERITY => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_STATUS => array(
+		'0' => config_get( 'bug_feedback_status' ),
+	),
+	FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
+	FILTER_PROPERTY_REPORTER_ID => array(
+		'0' => $t_current_user_id,
+	),
+	FILTER_PROPERTY_HANDLER_ID => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_RESOLUTION => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_BUILD => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_VERSION => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_HIDE_STATUS => array(
+		'0' => $t_hide_status_default,
+	),
+	FILTER_PROPERTY_MONITOR_USER_ID => array(
+		'0' => META_FILTER_ANY,
+	),
 );
-$url_link_parameters['feedback'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_STATUS . '=' . config_get( 'bug_feedback_status' ) . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
+$t_url_link_parameters['feedback'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_STATUS . '=' . config_get( 'bug_feedback_status' ) . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
 
 $c_filter['verify'] = array(
-    FILTER_PROPERTY_CATEGORY_ID => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_SEVERITY => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_STATUS => array(
-        '0' => $t_bug_resolved_status_threshold,
-    ),
-    FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
-    FILTER_PROPERTY_REPORTER_ID => array(
-        '0' => $t_current_user_id,
-    ),
-    FILTER_PROPERTY_HANDLER_ID => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_RESOLUTION => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_BUILD => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_VERSION => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_HIDE_STATUS => array(
-        '0' => $t_hide_status_default,
-    ),
-    FILTER_PROPERTY_MONITOR_USER_ID => array(
-        '0' => META_FILTER_ANY,
-    ),
+	FILTER_PROPERTY_CATEGORY_ID => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_SEVERITY => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_STATUS => array(
+		'0' => $t_bug_resolved_status_threshold,
+	),
+	FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
+	FILTER_PROPERTY_REPORTER_ID => array(
+		'0' => $t_current_user_id,
+	),
+	FILTER_PROPERTY_HANDLER_ID => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_RESOLUTION => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_BUILD => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_VERSION => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_HIDE_STATUS => array(
+		'0' => $t_hide_status_default,
+	),
+	FILTER_PROPERTY_MONITOR_USER_ID => array(
+		'0' => META_FILTER_ANY,
+	),
 );
-$url_link_parameters['verify'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_STATUS . '=' . $t_bug_resolved_status_threshold;
+$t_url_link_parameters['verify'] = FILTER_PROPERTY_REPORTER_ID . '=' . $t_current_user_id . '&' . FILTER_PROPERTY_STATUS . '=' . $t_bug_resolved_status_threshold;
 
 $c_filter['my_comments'] = array(
-    FILTER_PROPERTY_CATEGORY_ID => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_SEVERITY => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_STATUS => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
-    FILTER_PROPERTY_REPORTER_ID => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_HANDLER_ID => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_RESOLUTION => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_BUILD => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_VERSION => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_HIDE_STATUS => array(
-        '0' => $t_hide_status_default,
-    ),
-    FILTER_PROPERTY_MONITOR_USER_ID => array(
-        '0' => META_FILTER_ANY,
-    ),
-    FILTER_PROPERTY_NOTE_USER_ID=> array(
-        '0' => META_FILTER_MYSELF,
-    ),
+	FILTER_PROPERTY_CATEGORY_ID => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_SEVERITY => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_STATUS => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
+	FILTER_PROPERTY_REPORTER_ID => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_HANDLER_ID => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_RESOLUTION => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_BUILD => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_VERSION => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_HIDE_STATUS => array(
+		'0' => $t_hide_status_default,
+	),
+	FILTER_PROPERTY_MONITOR_USER_ID => array(
+		'0' => META_FILTER_ANY,
+	),
+	FILTER_PROPERTY_NOTE_USER_ID=> array(
+		'0' => META_FILTER_MYSELF,
+	),
 );
 
-$url_link_parameters['my_comments'] = FILTER_PROPERTY_NOTE_USER_ID. '=' . META_FILTER_MYSELF . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
+$t_url_link_parameters['my_comments'] = FILTER_PROPERTY_NOTE_USER_ID. '=' . META_FILTER_MYSELF . '&' . FILTER_PROPERTY_HIDE_STATUS . '=' . $t_hide_status_default;
 $t_rows = filter_get_bug_rows( $f_page_number, $t_per_page, $t_page_count, $t_bug_count, $c_filter[$t_box_title] );
 
 # Improve performance by caching category data in one pass
@@ -274,11 +274,12 @@ if( helper_get_current_project() == 0 ) {
 		$t_categories[] = $t_row->category_id;
 	}
 
-    category_cache_array_rows( array_unique( $t_categories ) );
+	category_cache_array_rows( array_unique( $t_categories ) );
 }
 
 $t_filter = array_merge( $c_filter[$t_box_title], $t_filter );
-$box_title = lang_get( 'my_view_title_' . $t_box_title );
+
+$t_box_title_label = lang_get( 'my_view_title_' . $t_box_title );
 
 $t_collapse_block = collapse_display( $box_title );
 $t_block_css = $t_collapse_block ? 'collapsed' : '';
@@ -357,38 +358,40 @@ $t_bug_string = $t_bug_count == 1 ? 'bug' : 'bugs';
                                 # -- Bug ID and details link + Pencil shortcut --?>
                                 <td class="center nowrap width-13 my-buglist-id">
 
-                                <?php
-                                print_bug_link( $t_bug->id );
+                                    <?php
+                                    print_bug_link( $t_bug->id );
 
-                                echo '<br />';
+                                    echo '<br />';
 
-                                # choose color based on status
-                                $status_label = html_get_status_css_class( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
-                                $t_status = string_attribute( get_enum_element( 'status', bug_get_field( $t_bug->id, 'status' ), $t_bug->project_id ) );
-                                echo '<i class="fa fa-square-o fa-xlg ' . $status_label . '" title="' . $t_status . '"></i> ';
+                                    # choose color based on status
+                                    $status_label = html_get_status_css_class( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
+                                    $t_status = string_attribute( get_enum_element( 'status', bug_get_field( $t_bug->id, 'status' ), $t_bug->project_id ) );
+                                    echo '<i class="fa fa-square-o fa-xlg ' . $status_label . '" title="' . $t_status . '"></i> ';
 
-                                if( !bug_is_readonly( $t_bug->id ) && access_has_bug_level( $t_update_bug_threshold, $t_bug->id ) ) {
-                                    echo '<a class="edit" href="' . string_get_bug_update_url( $t_bug->id ) . '"><img src="' . $t_icon_path . 'update.png' . '" alt="' . lang_get( 'update_bug_button' ) . '" /></a>';
-                                }
+                                    if( !bug_is_readonly( $t_bug->id ) && access_has_bug_level( $t_update_bug_threshold, $t_bug->id ) ) {
+                                        echo '<a class="edit" href="' . string_get_bug_update_url( $t_bug->id ) . '"><img src="' . $t_icon_path . 'update.png' . '" alt="' . lang_get( 'update_bug_button' ) . '" /></a>';
+                                    }
 
-                                if( ON == config_get( 'show_priority_text' ) ) {
-                                    print_formatted_priority_string( $t_bug );
-                                } else {
-                                    print_status_icon( $t_bug->priority );
-                                }
+                                    if( ON == config_get( 'show_priority_text' ) ) {
+                                        print_formatted_priority_string( $t_bug );
+                                    } else {
+                                        print_status_icon( $t_bug->priority );
+                                    }
 
-                                if( $t_attachment_count > 0 ) {
-                                    $t_href = string_get_bug_view_url( $t_bug->id ) . '#attachments';
-                                    $t_href_title = sprintf( lang_get( 'view_attachments_for_issue' ), $t_attachment_count, $t_bug->id );
-                                    $t_alt_text = $t_attachment_count . lang_get( 'word_separator' ) . lang_get( 'attachments' );
-                                    echo "<a class=\"attachments\" href=\"$t_href\" title=\"$t_href_title\"><img src=\"${t_icon_path}attachment.png\" alt=\"$t_alt_text\" title=\"$t_alt_text\" /></a>";
-                                }
+                                    if( $t_attachment_count > 0 ) {
+                                        $t_href = string_get_bug_view_url( $t_bug->id ) . '#attachments';
+                                        $t_href_title = sprintf( lang_get( 'view_attachments_for_issue' ), $t_attachment_count, $t_bug->id );
+                                        $t_alt_text = $t_attachment_count . lang_get( 'word_separator' ) . lang_get( 'attachments' );
+                                        echo '<a class="attachments" href="' . $t_href . '" title="' . $t_href_title . '">';
+                                        echo '<img src="' . ${t_icon_path} . 'attachment.png" alt="' . $t_alt_text . '" title="' . $t_alt_text . '" /></a>';
+                                    }
 
-                                if( VS_PRIVATE == $t_bug->view_state ) {
-                                    echo '<img src="' . $t_icon_path . 'protected.gif" width="8" height="15" alt="' . lang_get( 'private' ) . '" />';
-                                }
-                                ?>
+                                    if( VS_PRIVATE == $t_bug->view_state ) {
+                                        echo '<img src="' . $t_icon_path . 'protected.gif" width="8" height="15" alt="' . lang_get( 'private' ) . '" />';
+                                    }
+                                    ?>
                                 </td>
+
 
                                 <?php
                                 # -- Summary --?>
@@ -399,7 +402,7 @@ $t_bug_string = $t_bug_count == 1 ? 'bug' : 'bugs';
                                     }
                                     $t_bug_url = string_get_bug_view_url( $t_bug->id, null );
                                     $t_bug_url_title = string_html_specialchars( sprintf( lang_get( 'label' ), lang_get( 'issue_id' ) . $t_bug->id ) . lang_get( 'word_separator' ) . $t_bug->summary );
-                                    echo "<span><a href=\"$t_bug_url\" title=\"$t_bug_url_title\">$t_summary</a></span><br />";
+                                    echo '<span><a href="' . $t_bug_url . '" title="' . $t_bug_url_title . '">' . $t_summary . '</a></span><br />';
                                     ?>
                                     <?php
                                     # type project name if viewing 'all projects' or bug is in subproject

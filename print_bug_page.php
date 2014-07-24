@@ -83,9 +83,9 @@ $t_bug = bug_get( $f_bug_id, true );
 
 $t_selected_project = helper_get_current_project();
 if( $t_bug->project_id != $t_selected_project ) {
-    # in case the current project is not the same project of the bug we are viewing...
-    # ... override the current project. This to avoid problems with categories and handlers lists etc.
-    $g_project_override = $t_bug->project_id;
+	# in case the current project is not the same project of the bug we are viewing...
+	# ... override the current project. This to avoid problems with categories and handlers lists etc.
+	$g_project_override = $t_bug->project_id;
 }
 
 access_ensure_bug_level( VIEWER, $f_bug_id );
@@ -152,24 +152,24 @@ $t_additional_information = string_display_links( $t_bug->additional_information
 $t_view_state = $t_show_view_state ? get_enum_element( 'view_state', $t_bug->view_state ) : '';
 
 if( $t_show_due_date ) {
-    if( !date_is_null( $t_bug->due_date ) ) {
-        $t_due_date = date( config_get( 'normal_date_format' ), $t_bug->due_date );
-    } else {
-        $t_due_date = '';
-    }
+	if( !date_is_null( $t_bug->due_date ) ) {
+		$t_due_date = date( config_get( 'normal_date_format' ), $t_bug->due_date );
+	} else {
+		$t_due_date = '';
+	}
 }
 
 $t_product_version  =
-    $t_show_product_version ?
-        string_display_line( prepare_version_string( $t_bug->project_id, version_get_id( $t_bug->version, $t_bug->project_id ) ) ) : '';
+	$t_show_product_version ?
+		string_display_line( prepare_version_string( $t_bug->project_id, version_get_id( $t_bug->version, $t_bug->project_id ) ) ) : '';
 
 $t_target_version =
-    $t_show_target_version ?
-        string_display_line( prepare_version_string( $t_bug->project_id, version_get_id( $t_bug->target_version, $t_bug->project_id ) ) ) : '';
+	$t_show_target_version ?
+		string_display_line( prepare_version_string( $t_bug->project_id, version_get_id( $t_bug->target_version, $t_bug->project_id ) ) ) : '';
 
 $t_fixed_in_version =
-    $t_show_fixed_in_version ?
-        string_display_line( prepare_version_string( $t_bug->project_id, version_get_id( $t_bug->fixed_in_version, $t_bug->project_id ) ) ) : '';
+	$t_show_fixed_in_version ?
+		string_display_line( prepare_version_string( $t_bug->project_id, version_get_id( $t_bug->fixed_in_version, $t_bug->project_id ) ) ) : '';
 
 layout_page_header( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 ?>
@@ -238,7 +238,7 @@ if( $t_show_reporter ) {
 #
 
 if( $t_show_handler || $t_show_due_date ) {
-    $t_spacer = 2;
+	$t_spacer = 2;
 
     echo '<tr>';
 
@@ -269,7 +269,7 @@ if( $t_show_handler || $t_show_due_date ) {
 if( $t_show_priority || $t_show_severity || $t_show_reproducibility ) {
     echo '<tr>';
 
-    $t_spacer = 0;
+	$t_spacer = 0;
 
     if( $t_show_priority ) {
         echo '<th class="bold">', lang_get( 'priority' ), '</th>';
@@ -497,16 +497,16 @@ if( $t_show_additional_information ) {
 
 # Tagging
 if( $t_show_tags ) {
-    echo "<tr>";
+    echo '<tr>';
     echo '<th class="bold">', lang_get( 'tags' ), '</th>';
     echo '<td colspan="5">';
     tag_display_attached( $f_bug_id );
     echo '</td></tr>';
 }
 
-echo "<tr>";
-echo "<td class=\"print-category\">" . lang_get( 'bug_relationships' ) . "</td>";
-echo "<td colspan=\"5\">" . relationship_get_summary_html_preview( $f_bug_id ) . "</td></tr>";
+echo '<tr class="print">';
+echo '<td class="print-category">' . lang_get( 'bug_relationships' ) . '</td>';
+echo '<td class="print" colspan="5">' . relationship_get_summary_html_preview( $f_bug_id ) . '</td></tr>';
 
 if( $t_show_attachments ) {
     echo '<tr>';
@@ -532,7 +532,7 @@ if( $t_show_attachments ) {
             echo '<img src="', $t_attachment['icon']['url'], '" alt="', $t_attachment['icon']['alt'], '" />&#160;';
         }
 
-        echo "$c_filename ($c_filesize) <span class=\"italic\">$c_date_added</span><br />$c_download_url";
+		echo $c_filename . ' (' .$c_filesize . ') <span class="italic">' . $c_date_added . '</span><br />' . $c_download_url;
 
         if( $t_attachment['preview'] && $t_attachment['type'] == 'image' ) {
             echo '<br /><img src="', $t_attachment['download_url'], '" alt="', $t_attachment['alt'], '" /><br />';

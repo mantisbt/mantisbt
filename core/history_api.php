@@ -85,10 +85,10 @@ function history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_ne
 		$c_new_value = ( is_null( $p_new_value ) ? '' : $p_new_value );
 
 		$t_mantis_bug_history_table = db_get_table( 'bug_history' );
-		$t_query = "INSERT INTO $t_mantis_bug_history_table
+		$t_query = 'INSERT INTO ' . $t_mantis_bug_history_table . '
 						( user_id, bug_id, date_modified, field_name, old_value, new_value, type )
 					VALUES
-						( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
+						( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 		db_query_bound( $t_query, array( $p_user_id, $p_bug_id, db_now(), $c_field_name, $c_old_value, $c_new_value, $p_type ) );
 	}
 }
@@ -122,10 +122,10 @@ function history_log_event_special( $p_bug_id, $p_type, $p_optional = '', $p_opt
 
 	$t_mantis_bug_history_table = db_get_table( 'bug_history' );
 
-	$t_query = "INSERT INTO $t_mantis_bug_history_table
+	$t_query = 'INSERT INTO ' . $t_mantis_bug_history_table . '
 					( user_id, bug_id, date_modified, type, old_value, new_value, field_name )
 				VALUES
-					( " . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ',' . db_param() . ', ' . db_param() . ')';
+					( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ',' . db_param() . ', ' . db_param() . ')';
 	db_query_bound( $t_query, array( $t_user_id, $p_bug_id, db_now(), $p_type, $c_optional, $c_optional2, '' ) );
 }
 
@@ -177,10 +177,8 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 	# bug we will find the line related to the relationship mixed with the custom fields (the history is creted
 	# for the new bug with the same timestamp...)
 	$t_mantis_bug_history_table = db_get_table( 'bug_history' );
-	$t_query = "SELECT *
-				FROM $t_mantis_bug_history_table
-				WHERE bug_id=" . db_param() . "
-				ORDER BY date_modified $t_history_order,id";
+	$t_query = 'SELECT * FROM ' . $t_mantis_bug_history_table . ' WHERE bug_id=' . db_param() . '
+				ORDER BY date_modified ' . $t_history_order . ',id';
 	$t_result = db_query_bound( $t_query, array( $p_bug_id ) );
 	$t_raw_history = array();
 
@@ -282,8 +280,8 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
 	$t_raw = true;
 
 	if( PLUGIN_HISTORY == $p_type ) {
-		$t_note = lang_get_defaulted( "plugin_$p_field_name", $p_field_name );
-		$t_change = ( isset( $p_new_value ) ? "$p_old_value => $p_new_value" : $p_old_value );
+		$t_note = lang_get_defaulted( 'plugin_' . $p_field_name, $p_field_name );
+		$t_change = ( isset( $p_new_value ) ? $p_old_value . ' => ' . $p_new_value : $p_old_value );
 
 		return array( 'note' => $t_note, 'change' => $t_change, 'raw' => true );
 	}

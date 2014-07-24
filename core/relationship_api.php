@@ -221,10 +221,10 @@ function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type )
 		$c_relationship_type = (int)$p_relationship_type;
 	}
 
-	$t_query = "INSERT INTO $t_mantis_bug_relationship_table
+	$t_query = 'INSERT INTO ' . $t_mantis_bug_relationship_table . '
 				( source_bug_id, destination_bug_id, relationship_type )
 				VALUES
-				( " . db_param() . ',' . db_param() . ',' . db_param() . ')';
+				( ' . db_param() . ',' . db_param() . ',' . db_param() . ')';
 	$t_result = db_query_bound( $t_query, array( $c_src_bug_id, $c_dest_bug_id, $c_relationship_type ) );
 	$t_relationship = db_fetch_array( $t_result );
 
@@ -259,11 +259,11 @@ function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id,
 		$c_relationship_type = (int)$p_relationship_type;
 	}
 
-	$t_query = "UPDATE $t_mantis_bug_relationship_table
-				SET source_bug_id=" . db_param() . ",
-					destination_bug_id=" . db_param() . ",
-					relationship_type=" . db_param() . "
-				WHERE id=" . db_param();
+	$t_query = 'UPDATE ' . $t_mantis_bug_relationship_table . '
+				SET source_bug_id=' . db_param() . ',
+					destination_bug_id=' . db_param() . ',
+					relationship_type=' . db_param() . '
+				WHERE id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $c_src_bug_id, $c_dest_bug_id, $c_relationship_type, (int)$p_relationship_id ) );
 	$t_relationship = db_fetch_array( $t_result );
 
@@ -284,7 +284,7 @@ function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id,
 function relationship_delete( $p_relationship_id ) {
 	$t_mantis_bug_relationship_table = db_get_table( 'bug_relationship' );
 
-	$t_query = "DELETE FROM $t_mantis_bug_relationship_table WHERE id=" . db_param();
+	$t_query = 'DELETE FROM ' . $t_mantis_bug_relationship_table . ' WHERE id=' . db_param();
 	db_query_bound( $t_query, array( (int)$p_relationship_id ) );
 }
 
@@ -296,9 +296,9 @@ function relationship_delete( $p_relationship_id ) {
 function relationship_delete_all( $p_bug_id ) {
 	$t_mantis_bug_relationship_table = db_get_table( 'bug_relationship' );
 
-	$t_query = "DELETE FROM $t_mantis_bug_relationship_table
-				WHERE source_bug_id=" . db_param() . " OR
-				destination_bug_id=" . db_param();
+	$t_query = 'DELETE FROM ' . $t_mantis_bug_relationship_table . '
+				WHERE source_bug_id=' . db_param() . ' OR
+				destination_bug_id=' . db_param();
 	db_query_bound( $t_query, array( (int)$p_bug_id, (int)$p_bug_id ) );
 }
 
@@ -329,7 +329,7 @@ function relationship_copy_all( $p_bug_id, $p_new_bug_id ) {
  */
 function relationship_get( $p_relationship_id ) {
 	$t_mantis_bug_relationship_table = db_get_table( 'bug_relationship' );
-	$t_query = "SELECT * FROM $t_mantis_bug_relationship_table WHERE id=" . db_param();
+	$t_query = 'SELECT * FROM ' . $t_mantis_bug_relationship_table . ' WHERE id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( (int)$p_relationship_id ) );
 
 	$t_relationship = db_fetch_array( $t_result );
@@ -355,13 +355,13 @@ function relationship_get( $p_relationship_id ) {
 function relationship_get_all_src( $p_src_bug_id ) {
 	$t_mantis_bug_relationship_table = db_get_table( 'bug_relationship' );
 	$t_mantis_bug_table = db_get_table( 'bug' );
-	$t_query = "SELECT $t_mantis_bug_relationship_table.id, $t_mantis_bug_relationship_table.relationship_type,
-				$t_mantis_bug_relationship_table.source_bug_id, $t_mantis_bug_relationship_table.destination_bug_id,
-				$t_mantis_bug_table.project_id
-				FROM $t_mantis_bug_relationship_table
-				INNER JOIN $t_mantis_bug_table ON $t_mantis_bug_relationship_table.destination_bug_id = $t_mantis_bug_table.id
-				WHERE source_bug_id=" . db_param() . "
-				ORDER BY relationship_type, $t_mantis_bug_relationship_table.id";
+	$t_query = 'SELECT ' . $t_mantis_bug_relationship_table . '.id, ' . $t_mantis_bug_relationship_table . '.relationship_type,
+				' . $t_mantis_bug_relationship_table . '.source_bug_id, ' . $t_mantis_bug_relationship_table . '.destination_bug_id,
+				' . $t_mantis_bug_table . '.project_id
+				FROM ' . $t_mantis_bug_relationship_table . '
+				INNER JOIN ' . $t_mantis_bug_table . ' ON ' . $t_mantis_bug_relationship_table . '.destination_bug_id = ' . $t_mantis_bug_table . '.id
+				WHERE source_bug_id=' . db_param() . '
+				ORDER BY relationship_type, ' . $t_mantis_bug_relationship_table . '.id';
 	$t_result = db_query_bound( $t_query, array( $p_src_bug_id ) );
 
 	$t_src_project_id = bug_get_field( $p_src_bug_id, 'project_id' );
@@ -400,13 +400,13 @@ function relationship_get_all_dest( $p_dest_bug_id ) {
 	$t_mantis_bug_relationship_table = db_get_table( 'bug_relationship' );
 	$t_mantis_bug_table = db_get_table( 'bug' );
 
-	$t_query = "SELECT $t_mantis_bug_relationship_table.id, $t_mantis_bug_relationship_table.relationship_type,
-				$t_mantis_bug_relationship_table.source_bug_id, $t_mantis_bug_relationship_table.destination_bug_id,
-				$t_mantis_bug_table.project_id
-				FROM $t_mantis_bug_relationship_table
-				INNER JOIN $t_mantis_bug_table ON $t_mantis_bug_relationship_table.source_bug_id = $t_mantis_bug_table.id
-				WHERE destination_bug_id=" . db_param() . "
-				ORDER BY relationship_type, $t_mantis_bug_relationship_table.id";
+	$t_query = 'SELECT ' . $t_mantis_bug_relationship_table . '.id, ' . $t_mantis_bug_relationship_table . '.relationship_type,
+				' . $t_mantis_bug_relationship_table . '.source_bug_id, ' . $t_mantis_bug_relationship_table . '.destination_bug_id,
+				' . $t_mantis_bug_table . '.project_id
+				FROM ' . $t_mantis_bug_relationship_table . '
+				INNER JOIN ' . $t_mantis_bug_table . ' ON ' . $t_mantis_bug_relationship_table . '.source_bug_id = ' . $t_mantis_bug_table . '.id
+				WHERE destination_bug_id=' . db_param() . '
+				ORDER BY relationship_type, ' . $t_mantis_bug_relationship_table . '.id';
 	$t_result = db_query_bound( $t_query, array( (int)$p_dest_bug_id ) );
 
 	$t_dest_project_id = bug_get_field( $p_dest_bug_id, 'project_id' );
@@ -466,11 +466,11 @@ function relationship_exists( $p_src_bug_id, $p_dest_bug_id ) {
 
 	$t_mantis_bug_relationship_table = db_get_table( 'bug_relationship' );
 
-	$t_query = "SELECT * FROM $t_mantis_bug_relationship_table
-				WHERE (source_bug_id=" . db_param() . " AND destination_bug_id=" . db_param() . ")
+	$t_query = 'SELECT * FROM ' . $t_mantis_bug_relationship_table . '
+				WHERE (source_bug_id=' . db_param() . ' AND destination_bug_id=' . db_param() . ')
 				OR
-				(source_bug_id=" . db_param() . "
-				AND destination_bug_id=" . db_param() . ')';
+				(source_bug_id=' . db_param() . '
+				AND destination_bug_id=' . db_param() . ')';
 	$t_result = db_query_bound( $t_query, array( $c_src_bug_id, $c_dest_bug_id, $c_dest_bug_id, $c_src_bug_id ), 1 );
 
 	if( $t_row = db_fetch_array( $t_result ) ) {
@@ -727,7 +727,7 @@ function relationship_get_summary_html( $p_bug_id ) {
 
 	if( !is_blank( $t_summary ) ) {
 		if( relationship_can_resolve_bug( $p_bug_id ) == false ) {
-			$t_summary .= '<tr<td><td colspan="' . ( 5 + $t_show_project ) . '"><strong>' .
+			$t_summary .= '<tr><td colspan="' . ( 5 + $t_show_project ) . '"><strong>' .
                 lang_get( 'relationship_warning_blocking_bugs_not_resolved' ) . '</strong></td></tr>';
 		}
 		$t_summary = '<table class="table table-bordered table-condensed table-hover">' . $t_summary . '</table>';
@@ -791,7 +791,7 @@ function relationship_get_summary_text( $p_bug_id ) {
  * @param boolean $p_include_none     Include a NONE option in list box (default false).
  * @return void
  */
-function relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_select_name = "rel_type", $p_include_any = false, $p_include_none = false ) {
+function relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_select_name = 'rel_type', $p_include_any = false, $p_include_none = false ) {
 	global $g_relationships;
 	?>
 <select class="input-sm" name="<?php echo $p_select_name?>">
@@ -848,8 +848,8 @@ function relationship_view_box( $p_bug_id ) {
             if( ON == config_get( 'relationship_graph_enable' ) ) {
                 ?>
             <div class="btn-group pull-right">
-                <span class="small"><?php print_small_button( "bug_relationship_graph.php?bug_id=$p_bug_id&graph=relation", lang_get( 'relation_graph' ) )?></span>
-                <span class="small"><?php print_small_button( "bug_relationship_graph.php?bug_id=$p_bug_id&graph=dependency", lang_get( 'dependency_graph' ) )?></span>
+                <span class="small"><?php print_small_button( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=relation', lang_get( 'relation_graph' ) )?></span>
+                <span class="small"><?php print_small_button( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=dependency', lang_get( 'dependency_graph' ) )?></span>
             </div>
             <?php
             }

@@ -499,15 +499,13 @@ function plugin_version_check( array $p_version1, array $p_version2, $p_maximum 
 		if( $p_maximum ) {
 			if( $t_version1 < $t_version2 ) {
 				return 1;
-			}
-			else if( $t_version1 > $t_version2 ) {
+			} else if( $t_version1 > $t_version2 ) {
 				return -1;
 			}
 		} else {
 			if( $t_version1 > $t_version2 ) {
 				return 1;
-			}
-			else if( $t_version1 < $t_version2 ) {
+			} else if( $t_version1 < $t_version2 ) {
 				return -1;
 			}
 		}
@@ -625,7 +623,7 @@ function plugin_is_installed( $p_basename ) {
 	}
 
 	$t_plugin_table = db_get_table( 'plugin' );
-	$t_query = "SELECT COUNT(*) FROM $t_plugin_table WHERE basename=" . db_param();
+	$t_query = 'SELECT COUNT(*) FROM ' . $t_plugin_table . ' WHERE basename=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_basename ) );
 	return( 0 < db_result( $t_result ) );
 }
@@ -653,8 +651,8 @@ function plugin_install( MantisPlugin $p_plugin ) {
 
 	$t_plugin_table = db_get_table( 'plugin' );
 
-	$t_query = "INSERT INTO $t_plugin_table ( basename, enabled )
-				VALUES ( " . db_param() . ", '1' )";
+	$t_query = 'INSERT INTO ' . $t_plugin_table . ' ( basename, enabled )
+				VALUES ( ' . db_param() . ', \'1\' )';
 	db_query_bound( $t_query, array( $p_plugin->basename ) );
 
 	if( false === ( plugin_config_get( 'schema', false ) ) ) {
@@ -770,7 +768,7 @@ function plugin_uninstall( MantisPlugin $p_plugin ) {
 
 	$t_plugin_table = db_get_table( 'plugin' );
 
-	$t_query = "DELETE FROM $t_plugin_table WHERE basename=" . db_param();
+	$t_query = 'DELETE FROM ' . $t_plugin_table . ' WHERE basename=' . db_param();
 	db_query_bound( $t_query, array( $p_plugin->basename ) );
 
 	plugin_push_current( $p_plugin->basename );
@@ -928,7 +926,7 @@ function plugin_register_installed() {
 	# register plugins installed via the interface/database
 	$t_plugin_table = db_get_table( 'plugin' );
 
-	$t_query = "SELECT basename, priority, protected FROM $t_plugin_table WHERE enabled=" . db_param() . ' ORDER BY priority DESC';
+	$t_query = 'SELECT basename, priority, protected FROM ' . $t_plugin_table . ' WHERE enabled=' . db_param() . ' ORDER BY priority DESC';
 	$t_result = db_query_bound( $t_query, array( true ) );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
@@ -977,8 +975,7 @@ function plugin_init_installed() {
 		}
 
 		$t_plugins = $t_plugins_retry;
-	}
-	while( $t_continue );
+	} while( $t_continue );
 
 	event_signal( 'EVENT_PLUGIN_INIT' );
 }

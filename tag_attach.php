@@ -77,21 +77,21 @@ $t_tags_attach = array();
 $t_tags_failed = array();
 
 foreach ( $t_tags as $t_tag_row ) {
-    if( -1 == $t_tag_row['id'] ) {
-        if( $t_can_create ) {
-            $t_tags_create[] = $t_tag_row;
-        } else {
-            $t_tags_failed[] = $t_tag_row;
-        }
-    } else if( -2 == $t_tag_row['id'] ) {
-        $t_tags_failed[] = $t_tag_row;
-    } else {
-        $t_tags_attach[] = $t_tag_row;
-    }
+	if( -1 == $t_tag_row['id'] ) {
+		if( $t_can_create ) {
+			$t_tags_create[] = $t_tag_row;
+		} else {
+			$t_tags_failed[] = $t_tag_row;
+		}
+	} else if( -2 == $t_tag_row['id'] ) {
+		$t_tags_failed[] = $t_tag_row;
+	} else {
+		$t_tags_attach[] = $t_tag_row;
+	}
 }
 
 if( 0 < $f_tag_select && tag_exists( $f_tag_select ) ) {
-    $t_tags_attach[] = tag_get( $f_tag_select );
+	$t_tags_attach[] = tag_get( $f_tag_select );
 }
 
 # failed to attach at least one tag
@@ -106,7 +106,7 @@ if( count( $t_tags_failed ) > 0 ) {
         </tr>
         <tr class="spacer"><td colspan="2"></td></tr>
         <?php
-        $t_tag_string = "";
+        $t_tag_string = '';
         foreach( $t_tags_attach as $t_tag_row ) {
             if( !is_blank( $t_tag_string ) ) {
                 $t_tag_string .= config_get( 'tag_separator' );
@@ -114,49 +114,49 @@ if( count( $t_tags_failed ) > 0 ) {
             $t_tag_string .= $t_tag_row['name'];
         }
 
-        foreach( $t_tags_failed as $t_tag_row ) {
-            echo '<tr>';
-            if( -1 == $t_tag_row['id'] ) {
-                echo '<th class="category">', lang_get( 'tag_create_denied' ), '</th>';
-            } else if( -2 == $t_tag_row['id'] ) {
-                echo '<th class="category">', lang_get( 'tag_invalid_name' ), '</th>';
-            }
-            echo '<td>', string_html_specialchars( $t_tag_row['name'] ), '</td></tr>';
+	foreach( $t_tags_failed as $t_tag_row ) {
+		echo '<tr>';
+		if( -1 == $t_tag_row['id'] ) {
+			echo '<th class="category">', lang_get( 'tag_create_denied' ), '</th>';
+		} else if( -2 == $t_tag_row['id'] ) {
+			echo '<th class="category">', lang_get( 'tag_invalid_name' ), '</th>';
+		}
+		echo '<td>', string_html_specialchars( $t_tag_row['name'] ), '</td></tr>';
 
-            if( !is_blank( $t_tag_string ) ) {
-                $t_tag_string .= config_get( 'tag_separator' );
-            }
-            $t_tag_string .= $t_tag_row['name'];
-        }
-        ?>
-        <tr class="spacer"><td colspan="2"></td></tr>
-        <tr>
-            <th class="category"><?php echo lang_get( 'tag_attach_long' ) ?></th>
-            <td>
-                <?php
-                print_tag_attach_form( $f_bug_id, $t_tag_string );
-                ?>
-            </td>
-        </tr>
-    </table>
-    <?php
-    layout_page_end();
-    # end failed to attach tag
+		if( !is_blank( $t_tag_string ) ) {
+			$t_tag_string .= config_get( 'tag_separator' );
+		}
+		$t_tag_string .= $t_tag_row['name'];
+	}
+?>
+	<tr class="spacer"><td colspan="2"></td></tr>
+	<tr>
+	<th class="category"><?php echo lang_get( 'tag_attach_long' ) ?></th>
+	<td>
+<?php
+	print_tag_attach_form( $f_bug_id, $t_tag_string );
+?>
+	</td>
+	</tr>
+</table>
+<?php
+	html_page_bottom();
+	# end failed to attach tag
 } else {
-    foreach( $t_tags_create as $t_tag_row ) {
-        $t_tag_row['id'] = tag_create( $t_tag_row['name'], $t_user_id );
-        $t_tags_attach[] = $t_tag_row;
-    }
+	foreach( $t_tags_create as $t_tag_row ) {
+		$t_tag_row['id'] = tag_create( $t_tag_row['name'], $t_user_id );
+		$t_tags_attach[] = $t_tag_row;
+	}
 
-    foreach( $t_tags_attach as $t_tag_row ) {
-        if( !tag_bug_is_attached( $t_tag_row['id'], $f_bug_id ) ) {
-            tag_bug_attach( $t_tag_row['id'], $f_bug_id, $t_user_id );
-        }
-    }
+	foreach( $t_tags_attach as $t_tag_row ) {
+		if( !tag_bug_is_attached( $t_tag_row['id'], $f_bug_id ) ) {
+			tag_bug_attach( $t_tag_row['id'], $f_bug_id, $t_user_id );
+		}
+	}
 
-    event_signal( 'EVENT_TAG_ATTACHED', array( $f_bug_id, $t_tags_attach ) );
+	event_signal( 'EVENT_TAG_ATTACHED', array( $f_bug_id, $t_tags_attach ) );
 
-    form_security_purge( 'tag_attach' );
+	form_security_purge( 'tag_attach' );
 
-    print_successful_redirect_to_bug( $f_bug_id );
+	print_successful_redirect_to_bug( $f_bug_id );
 }

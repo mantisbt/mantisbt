@@ -65,10 +65,9 @@ $t_name = string_display_line( $t_tag_row['name'] );
 $t_description = string_display( $t_tag_row['description'] );
 
 if( !( access_has_global_level( config_get( 'tag_edit_threshold' ) )
-    || ( auth_get_current_user_id() == $t_tag_row['user_id'] )
-    && access_has_global_level( config_get( 'tag_edit_own_threshold' ) ) ) )
-{
-    access_denied();
+	|| ( auth_get_current_user_id() == $t_tag_row['user_id'] )
+		&& access_has_global_level( config_get( 'tag_edit_own_threshold' ) ) ) ) {
+	access_denied();
 }
 
 layout_page_header( sprintf( lang_get( 'tag_update' ), $t_name ) );

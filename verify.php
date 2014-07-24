@@ -58,7 +58,7 @@ if( auth_is_user_authenticated() ) {
 	auth_logout();
 
 	# reload the page after logout
-	print_header_redirect( "verify.php?id=$f_user_id&confirm_hash=$f_confirm_hash" );
+	print_header_redirect( 'verify.php?id=' . $f_user_id . '&confirm_hash=' . $f_confirm_hash );
 }
 
 $t_calculated_confirm_hash = auth_generate_confirm_hash( $f_user_id );

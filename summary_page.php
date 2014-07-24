@@ -69,12 +69,12 @@ $t_resolved = config_get( 'bug_resolved_status_threshold' );
 #  will look up the most recent 'resolved' status change and return it as well
 $t_bug_table = db_get_table( 'bug' );
 $t_history_table = db_get_table( 'bug_history' );
-$t_query = "SELECT b.id, b.date_submitted, b.last_updated, MAX(h.date_modified) as hist_update, b.status
-	FROM $t_bug_table b LEFT JOIN $t_history_table h
-		ON b.id = h.bug_id  AND h.type=0 AND h.field_name='status' AND h.new_value=" . db_param() . "
-		WHERE b.status >=" . db_param() . " AND $t_specific_where
+$t_query = 'SELECT b.id, b.date_submitted, b.last_updated, MAX(h.date_modified) as hist_update, b.status
+	FROM ' . $t_bug_table . ' b LEFT JOIN ' . $t_history_table . ' h
+		ON b.id = h.bug_id  AND h.type=0 AND h.field_name=\'status\' AND h.new_value=' . db_param() . '
+		WHERE b.status >=' . db_param() . ' AND ' . $t_specific_where . '
 		GROUP BY b.id, b.status, b.date_submitted, b.last_updated
-		ORDER BY b.id ASC";
+		ORDER BY b.id ASC';
 $t_result = db_query_bound( $t_query, array( $t_resolved, $t_resolved ) );
 $t_bug_count = 0;
 
@@ -115,7 +115,7 @@ $t_average_time 	= number_format( $t_average_time / SECONDS_PER_DAY, 2 );
 
 $t_orct_arr = preg_split( '/[\)\/\(]/', lang_get( 'orct' ), -1, PREG_SPLIT_NO_EMPTY );
 
-$t_orcttab = "";
+$t_orcttab = '';
 foreach ( $t_orct_arr as $t_orct_s ) {
     $t_orcttab .= '<td class="right">';
     $t_orcttab .= $t_orct_s;

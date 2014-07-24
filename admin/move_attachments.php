@@ -48,22 +48,22 @@ function move_attachments_to_disk( $p_type, array $p_projects ) {
 	$t_file_table = db_get_table( "mantis_${p_type}_file_table" );
 	switch( $p_type ) {
 		case 'project':
-			$t_query = "SELECT f.*
-				FROM $t_file_table f
-				WHERE content <> ''
-				  AND f.project_id = " . db_param() . "
-				ORDER BY f.filename";
+			$t_query = 'SELECT f.*
+				FROM ' . $t_file_table . ' f
+				WHERE content <> \'\'
+				  AND f.project_id = ' . db_param() . '
+				ORDER BY f.filename';
 			break;
 
 		case 'bug':
 			$t_bug_table = db_get_table( 'mantis_bug_table' );
 
-			$t_query = "SELECT f.*
-				FROM $t_file_table f
-				JOIN $t_bug_table b ON b.id = f.bug_id
-				WHERE content <> ''
-				  AND b.project_id = " . db_param() . "
-				ORDER BY f.bug_id, f.filename";
+			$t_query = 'SELECT f.*
+				FROM ' . $t_file_table . ' f
+				JOIN ' . $t_bug_table . ' b ON b.id = f.bug_id
+				WHERE content <> \'\'
+				  AND b.project_id = ' . db_param() . '
+				ORDER BY f.bug_id, f.filename';
 			break;
 	}
 
@@ -81,7 +81,7 @@ function move_attachments_to_disk( $p_type, array $p_projects ) {
 		) {
 			# Invalid path
 			$t_failures = db_num_rows( $t_result );
-			$t_data = "ERROR: Upload path '$t_upload_path' does not exist or is not writable";
+			$t_data = 'ERROR: Upload path \'' . $t_upload_path . '\' does not exist or is not writeable';
 		} else {
 			# Process attachments
 			$t_failures = 0;
@@ -102,8 +102,8 @@ function move_attachments_to_disk( $p_type, array $p_projects ) {
 				if( file_put_contents( $t_filename, $t_row['content'] ) ) {
 					# successful, update database
 					# @todo do we want to check the size of data transfer matches here?
-					$t_update_query = "UPDATE $t_file_table
-						SET diskfile = " . db_param() . ", folder = " . db_param() . ", content = ''
+					$t_update_query = 'UPDATE ' . $t_file_table . '
+						SET diskfile = ' . db_param() . ', folder = ' . db_param() . ", content = ''
 						WHERE id = " . db_param();
 					$t_update_result = db_query_bound( $t_update_query, array( $t_filename, $t_upload_path, $t_row['id'] ) );
 
@@ -111,10 +111,10 @@ function move_attachments_to_disk( $p_type, array $p_projects ) {
 						$t_status = 'Database update failed';
 						$t_failures++;
 					} else {
-						$t_status = "Moved to '$t_filename'";
+						$t_status = 'Moved to \'$t_filename\'';
 					}
 				} else {
-					$t_status = "Copy to '$t_filename' failed";
+					$t_status = 'Copy to \'$t_filename\' failed';
 					$t_failures++;
 				}
 

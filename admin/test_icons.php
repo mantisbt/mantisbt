@@ -54,7 +54,7 @@ print_admin_menu_bar( 'test_icons.php' );
                                 $t_file_path = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'fileicons' . DIRECTORY_SEPARATOR . $t_filename;
 
                                 echo '<tr><td>';
-                                echo "Testing icon for extension '$t_ext'... $t_file_path ... ";
+                                echo 'Testing icon for extension \'' . $t_ext . '\'... ' . $t_file_path . '... ';
                                 flush();
 
                                 if( file_exists( $t_file_path ) ) {

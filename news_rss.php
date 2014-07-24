@@ -85,7 +85,7 @@ $t_about = config_get( 'path' );
 $t_title = string_rss_links( config_get( 'window_title' ) . ' - ' . lang_get( 'news' ) );
 
 if( $f_username !== null ) {
-	$title .= " - ($f_username)";
+	$t_title .= ' - (' . $f_username . ')';
 }
 
 $t_description = $t_title;
@@ -134,7 +134,7 @@ $t_base = utf8_substr( $t_base, 0, 22 ) . ':' . utf8_substr( $t_base, -2 );
 $t_rssfile->addSYdata( $t_period, $t_frequency, $t_base );
 
 $t_news_rows = news_get_limited_rows( 0, $f_project_id );
-$t_news_count = count( $news_rows );
+$t_news_count = count( $t_news_rows );
 
 # Loop through results
 for( $i = 0; $i < $t_news_count; $i++ ) {
@@ -150,7 +150,7 @@ for( $i = 0; $i < $t_news_count; $i++ ) {
 	$v_headline 	= string_rss_links( $v_headline );
 	$v_body 	= string_rss_links( $v_body );
 
-	$t_about = $t_link = config_get( 'path' ) . "news_view_page.php?news_id=$v_id";
+	$t_about = $t_link = config_get( 'path' ) . 'news_view_page.php?news_id=' . $v_id;
 	$t_title = $v_headline;
 	$t_description = $v_body;
 

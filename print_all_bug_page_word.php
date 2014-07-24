@@ -83,16 +83,16 @@ helper_begin_long_process();
 
 # word or html export
 if( $f_type_page != 'html' ) {
-    $t_export_title = helper_get_default_export_filename( '' );
-    $t_export_title = preg_replace( '/[\/:*?"<>|]/', '', $t_export_title );
-    $t_export_title .= '.doc';
+	$t_export_title = helper_get_default_export_filename( '' );
+	$t_export_title = preg_replace( '/[\/:*?"<>|]/', '', $t_export_title );
+	$t_export_title .= '.doc';
 
-    # Make sure that IE can download the attachments under https.
-    header( 'Pragma: public' );
+	# Make sure that IE can download the attachments under https.
+	header( 'Pragma: public' );
 
-    header( 'Content-Type: application/msword' );
+	header( 'Content-Type: application/msword' );
 
-    http_content_disposition_header( $t_export_title );
+	http_content_disposition_header( $t_export_title );
 }
 
 # This is where we used to do the entire actual filter ourselves
@@ -108,7 +108,7 @@ $t_row_count = count( $t_result );
 if( $f_type_page == 'html' ) {
     layout_page_header();
 } else {
-    echo '<html xmlns:o="urn:schemas-microsoft-com:office:office"
+	echo '<html xmlns:o="urn:schemas-microsoft-com:office:office"
 		xmlns:w="urn:schemas-microsoft-com:office:word"
 		xmlns="http://www.w3.org/TR/REC-html40">';
     echo '<body>';
@@ -151,28 +151,28 @@ $t_lang_system_profile = lang_get( 'system_profile' );
 $t_lang_attached_files = lang_get( 'attached_files' );
 
 $t_current_user_id = auth_get_current_user_id();
-$t_user_bugnote_order = user_pref_get_pref ( $t_current_user_id, 'bugnote_order' );
+$t_user_bugnote_order = user_pref_get_pref( $t_current_user_id, 'bugnote_order' );
 
 for( $j=0; $j < $t_row_count; $j++ ) {
-    $t_bug = $t_result[$j];
-    $t_id = $t_bug->id;
+	$t_bug = $t_result[$j];
+	$t_id = $t_bug->id;
 
-    if( $j % 50 == 0 ) {
-        # to save ram as report will list data once, clear cache after 50 bugs
-        bug_text_clear_cache();
-        bug_clear_cache();
-        bugnote_clear_cache();
-    }
+	if( $j % 50 == 0 ) {
+		# to save ram as report will list data once, clear cache after 50 bugs
+		bug_text_clear_cache();
+		bug_clear_cache();
+		bugnote_clear_cache();
+	}
 
-    # display the available and selected bugs
-    if( in_array( $t_id, $f_bug_arr ) || !$f_show_flag ) {
-        if( $t_count_exported > 0 ) {
-            echo '<br style="mso-special-character: line-break; page-break-before: always" />';
-        }
+	# display the available and selected bugs
+	if( in_array( $t_id, $f_bug_arr ) || !$f_show_flag ) {
+		if( $t_count_exported > 0 ) {
+			echo '<br style="mso-special-character: line-break; page-break-before: always" />';
+		}
 
-        $t_count_exported++;
+		$t_count_exported++;
 
-        $t_last_updated = date( $g_short_date_format, $t_bug->last_updated );
+		$t_last_updated = date( $g_short_date_format, $t_bug->last_updated );
 
         # grab the project name
         $t_project_name = project_get_field( $t_bug->project_id, 'name' );
@@ -469,9 +469,10 @@ for( $j=0; $j < $t_row_count; $j++ ) {
                     $c_download_url = htmlspecialchars( $t_attachment['download_url'] );
                     $c_filesize = number_format( $t_attachment['size'] );
                     $c_date_added = date( $t_date_format, $t_attachment['date_added'] );
-                    echo "$c_filename ($c_filesize " . lang_get( 'bytes' ) . ') '
-                        . '<span class="italic-small">' . $c_date_added . '</span><br />'
+                    echo $c_filename . ' (' . $c_filesize . ' ' . lang_get( 'bytes' )
+                        . ') <span class="italic-small">' . $c_date_added . '</span><br />'
                         . string_display_links( $t_path . $c_download_url );
+
 
                     if( $t_attachment['preview'] && $t_attachment['type'] == 'image' && $f_type_page == 'html' ) {
                         echo '<br /><img src="', $c_download_url, '" alt="', $t_attachment['alt'], '" /><br />';

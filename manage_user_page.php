@@ -126,16 +126,16 @@ print_manage_menu( 'manage_user_page.php' );
 # New Accounts Form BEGIN
 
 $t_days_old = 7 * SECONDS_PER_DAY;
-$t_query = "SELECT COUNT(*) AS new_user_count FROM $t_user_table
-	WHERE ".db_helper_compare_days( "" . db_now() . "", "date_created", "<= $t_days_old" );
+$t_query = 'SELECT COUNT(*) AS new_user_count FROM ' . $t_user_table . '
+	WHERE '.db_helper_compare_days( (string)db_now(), 'date_created', '<= ' . $t_days_old );
 $t_result = db_query_bound( $t_query );
 $t_row = db_fetch_array( $t_result );
 $t_new_user_count = $t_row['new_user_count'];
 
 # Never Logged In Form BEGIN
 
-$t_query = "SELECT COUNT(*) AS unused_user_count FROM $t_user_table
-	WHERE ( login_count = 0 ) AND ( date_created = last_visit )";
+$t_query = 'SELECT COUNT(*) AS unused_user_count FROM ' . $t_user_table . '
+	WHERE ( login_count = 0 ) AND ( date_created = last_visit )';
 $t_result = db_query_bound( $t_query );
 $t_row = db_fetch_array( $t_result );
 $t_unused_user_count = $t_row['unused_user_count'];
@@ -146,12 +146,12 @@ $t_prefix_array = array();
 
 $t_prefix_array['ALL'] = lang_get( 'show_all_users' );
 
-for ( $i = 'A'; $i != 'AA'; $i++ ) {
+for( $i = 'A'; $i != 'AA'; $i++ ) {
 	$t_prefix_array[$i] = $i;
 }
 
-for ( $i = 0; $i <= 9; $i++ ) {
-	$t_prefix_array["$i"] = "$i";
+for( $i = 0; $i <= 9; $i++ ) {
+	$t_prefix_array[(string)$i] = (string)$i;
 }
 $t_prefix_array['UNUSED'] = lang_get( 'users_unused' );
 $t_prefix_array['NEW'] = lang_get( 'users_new' );
@@ -184,13 +184,13 @@ echo '</div>';
 echo '</div>';
 echo '<div class="space-10"></div >';
 
-$t_where_params = null;
+$t_where_params = array();
 if( $f_filter === 'ALL' ) {
 	$t_where = '(1 = 1)';
 } else if( $f_filter === 'UNUSED' ) {
 	$t_where = '(login_count = 0) AND ( date_created = last_visit )';
 } else if( $f_filter === 'NEW' ) {
-	$t_where = db_helper_compare_days( '' . db_now() . '', 'date_created', "<= $t_days_old" );
+	$t_where = db_helper_compare_days( '' . db_now() . '', 'date_created', '<= ' . $t_days_old );
 } else {
 	$t_where_params[] = $f_filter . '%';
 	$t_where = db_helper_like( 'UPPER(username)' );
@@ -212,14 +212,14 @@ if( 1 == $c_show_disabled ) {
 }
 
 if( 0 == $c_hide_inactive ) {
-	$t_query = "SELECT count(*) as user_count FROM $t_user_table WHERE $t_where $t_show_disabled_cond";
+	$t_query = 'SELECT count(*) as user_count FROM ' . $t_user_table . ' WHERE ' . $t_where . $t_show_disabled_cond;
 	$t_result = db_query_bound( $t_query, $t_where_params );
 	$t_row = db_fetch_array( $t_result );
 	$t_total_user_count = $t_row['user_count'];
 } else {
-	$t_query = "SELECT count(*) as user_count FROM $t_user_table
-			WHERE $t_where AND " . db_helper_compare_days( '' . db_now() . '', "last_visit", "< $t_days_old" )
-		. $t_show_disabled_cond;
+	$t_query = 'SELECT count(*) as user_count FROM ' . $t_user_table . '
+			WHERE ' . $t_where . ' AND ' . db_helper_compare_days( '' . db_now() . '', 'last_visit', '< ' . $t_days_old )
+			. $t_show_disabled_cond;
 	$t_result = db_query_bound( $t_query, $t_where_params );
 	$t_row = db_fetch_array( $t_result );
 	$t_total_user_count = $t_row['user_count'];
@@ -242,18 +242,17 @@ if( $f_page_number < 1 ) {
 
 
 if( 0 == $c_hide_inactive ) {
-	$t_query = "SELECT * FROM $t_user_table WHERE $t_where $t_show_disabled_cond ORDER BY $c_sort $c_dir";
+	$t_query = 'SELECT * FROM ' . $t_user_table . ' WHERE ' . $t_where . ' ' . $t_show_disabled_cond . ' ORDER BY ' . $c_sort . ' ' . $c_dir;
 	$t_result = db_query_bound( $t_query, $t_where_params, $p_per_page, $t_offset );
 } else {
-	$t_query = "SELECT * FROM $t_user_table
-			WHERE $t_where AND " . db_helper_compare_days( "" . db_now() . "", "last_visit", "< $t_days_old" ) . "
-			$t_show_disabled_cond
-			ORDER BY $c_sort $c_dir";
+	$t_query = 'SELECT * FROM ' . $t_user_table . '
+			WHERE ' . $t_where . ' AND ' . db_helper_compare_days( '' . db_now() . '', 'last_visit', '< ' . $t_days_old ) . '
+			' . $t_show_disabled_cond . ' ORDER BY ' . $c_sort . ' ' . $c_dir;
 	$t_result = db_query_bound( $t_query, $t_where_params, $p_per_page, $t_offset );
 }
 
 $t_users = array();
-while ( $t_row = db_fetch_array( $t_result ) ) {
+while( $t_row = db_fetch_array( $t_result ) ) {
 	$t_users[] = $t_row;
 }
 
@@ -354,7 +353,7 @@ $t_user_count = count( $t_users );
 								<td class="center"><?php echo trans_bool( $u_enabled ) ?></td>
 								<td class="center"><?php
 									if( $u_protected ) {
-										echo " $t_lock_image";
+                                        echo ' ' . $t_lock_image;
 									} else {
 										echo '&#160;';
 									} ?>

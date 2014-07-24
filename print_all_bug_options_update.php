@@ -81,9 +81,7 @@ $c_export = implode( '', $t_prefs_arr );
 
 # update preferences
 $t_user_print_pref_table = db_get_table( 'user_print_pref' );
-$t_query = "UPDATE $t_user_print_pref_table
-		SET print_pref=" . db_param() . "
-		WHERE user_id=" . db_param();
+$t_query = 'UPDATE ' . $t_user_print_pref_table . ' SET print_pref=' . db_param() . ' WHERE user_id=' . db_param();
 
 $t_result = db_query_bound( $t_query, array( $c_export, $t_user_id ) );
 

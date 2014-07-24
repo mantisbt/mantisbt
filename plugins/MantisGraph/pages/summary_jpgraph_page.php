@@ -37,8 +37,8 @@ layout_page_begin( 'summary_page.php' );
 print_summary_menu( 'summary_jpgraph_page.php' );
 
 $t_graphs = array( 'summary_graph_cumulative_bydate', 'summary_graph_bydeveloper', 'summary_graph_byreporter',
-    'summary_graph_byseverity', 'summary_graph_bystatus', 'summary_graph_byresolution',
-    'summary_graph_bycategory', 'summary_graph_bypriority' );
+		'summary_graph_byseverity', 'summary_graph_bystatus', 'summary_graph_byresolution',
+		'summary_graph_bycategory', 'summary_graph_bypriority' );
 $t_wide = plugin_config_get( 'summary_graphs_per_row' );
 $t_width = plugin_config_get( 'window_width' );
 $t_graph_width = (int)( ( $t_width - 50 ) / $t_wide );
@@ -70,7 +70,7 @@ token_delete( TOKEN_GRAPH );
                                     print( "<tr>\n" );
                                 }
                                 echo '<td width="50%">';
-                                printf("<img src=\"%s.php&amp;width=%d\" alt=\"\" />", plugin_page( $t_graphs[$t_pos] ), $t_graph_width );
+                                printf( '<img src="%s.php&amp;width=%d" alt="" />', plugin_page( $t_graphs[$t_pos] ), $t_graph_width );
                                 echo '</td>';
                                 if( ( $t_wide - 1 ) == ( $t_pos % $t_wide ) ) {
                                     print( "</tr>\n" );

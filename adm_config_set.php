@@ -165,18 +165,18 @@ function process_complex_value( $p_value, $p_trimquotes = false ) {
 			')';
 	}
 
-	if( preg_match( "/$s_regex_array/s", $t_value, $t_match ) === 1 ) {
+	if( preg_match( '/' . $s_regex_array . '/s', $t_value, $t_match ) === 1 ) {
 		# It's an array - process each element
 		$t_processed = array();
 
-		if( preg_match_all( "/$s_regex_element/", $t_match[1], $t_elements ) ) {
+		if( preg_match_all( '/' . $s_regex_element . '/', $t_match[1], $t_elements ) ) {
 			foreach( $t_elements[0] as $t_key => $t_element ) {
 				if( !trim( $t_element ) ) {
 					# Empty element - skip it
 					continue;
 				}
 				# Check if element is associative array
-				preg_match_all( "/($s_regex_string)\s*=>\s*(.*)/", $t_element, $t_split );
+				preg_match_all( '/(' . $s_regex_string . ')\s*=>\s*(.*)/', $t_element, $t_split );
 				if( !empty( $t_split[0] ) ) {
 					# associative array
 					$t_new_key = constant_replace( trim( $t_split[1][0], " \t\n\r\0\x0B\"'" ) );
@@ -207,7 +207,7 @@ function process_complex_value( $p_value, $p_trimquotes = false ) {
  */
 function special_split ( $p_string ) {
 	$t_values = array();
-	$t_array_element = "";
+	$t_array_element = '';
 	$t_paren_level = 0;
 	$t_inside_quote = false;
 	$t_escape_next = false;
@@ -216,17 +216,17 @@ function special_split ( $p_string ) {
 		if( $t_escape_next ) {
 			$t_array_element .= $t_character;
 			$t_escape_next = false;
-		} else if( $t_character == "," && $t_paren_level==0 && !$t_inside_quote ) {
+		} else if( $t_character == ',' && $t_paren_level==0 && !$t_inside_quote ) {
 			array_push( $t_values, $t_array_element );
-			$t_array_element = "";
+			$t_array_element = '';
 		} else {
-			if( $t_character == "(" && !$t_inside_quote ) {
+			if( $t_character == '(' && !$t_inside_quote ) {
 				$t_paren_level++;
-			} else if( $t_character == ")" && !$t_inside_quote ) {
+			} else if( $t_character == ')' && !$t_inside_quote ) {
 				$t_paren_level--;
-			} else if( $t_character == "'" ) {
+			} else if( $t_character == '\'' ) {
 				$t_inside_quote = !$t_inside_quote;
-			} else if( $t_character == "\\" ) {
+			} else if( $t_character == '\\' ) {
 				# escape character
 				$t_escape_next = true;
 				# keep the escape if the string will be going through another recursion

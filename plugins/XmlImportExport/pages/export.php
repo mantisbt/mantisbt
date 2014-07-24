@@ -40,7 +40,7 @@ if( $t_result === false ) {
 	$t_result = array( );
 }
 
-$t_filename = "exported_issues.xml";
+$t_filename = 'exported_issues.xml';
 
 # Send headers to browser to activate mime loading
 # Make sure that IE can download the attachments under https.

@@ -44,9 +44,9 @@ $f_entrypoint = gpc_get_string( 'entrypoint' );
 
 $t_function = 'xmlhttprequest_' . $f_entrypoint;
 if( function_exists( $t_function ) ) {
-	log_event( LOG_AJAX, "Calling {$t_function}..." );
+	log_event( LOG_AJAX, 'Calling {' . $t_function . '}...' );
 	call_user_func( $t_function );
 } else {
-	log_event( LOG_AJAX, "Unknown function for entry point = " . $t_function );
+	log_event( LOG_AJAX, 'Unknown function for entry point = ' . $t_function );
 	echo 'unknown entry point';
 }

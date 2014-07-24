@@ -64,11 +64,11 @@ print_manage_menu( 'adm_config_report.php' );
 print_manage_config_menu( 'adm_config_report.php' );
 
 $t_config_types = array(
-    CONFIG_TYPE_DEFAULT => 'default',
-    CONFIG_TYPE_INT     => 'integer',
-    CONFIG_TYPE_FLOAT   => 'float',
-    CONFIG_TYPE_COMPLEX => 'complex',
-    CONFIG_TYPE_STRING  => 'string',
+	CONFIG_TYPE_DEFAULT => 'default',
+	CONFIG_TYPE_INT     => 'integer',
+	CONFIG_TYPE_FLOAT   => 'float',
+	CONFIG_TYPE_COMPLEX => 'complex',
+	CONFIG_TYPE_STRING  => 'string',
 );
 
 /**
@@ -77,13 +77,13 @@ $t_config_types = array(
  * @return string configuration type
  */
 function get_config_type( $p_type ) {
-    global $t_config_types;
+	global $t_config_types;
 
-    if( array_key_exists( $p_type, $t_config_types ) ) {
-        return $t_config_types[$p_type];
-    } else {
-        return $t_config_types[CONFIG_TYPE_DEFAULT];
-    }
+	if( array_key_exists( $p_type, $t_config_types ) ) {
+		return $t_config_types[$p_type];
+	} else {
+		return $t_config_types[CONFIG_TYPE_DEFAULT];
+	}
 }
 
 /**
@@ -94,46 +94,46 @@ function get_config_type( $p_type ) {
  * @return void
  */
 function print_config_value_as_string( $p_type, $p_value, $p_for_display = true ) {
-    $t_corrupted = false;
+	$t_corrupted = false;
 
-    switch( $p_type ) {
-        case CONFIG_TYPE_DEFAULT:
-            return;
-        case CONFIG_TYPE_FLOAT:
-            echo (float)$p_value;
-            return;
-        case CONFIG_TYPE_INT:
-            echo (integer)$p_value;
-            return;
-        case CONFIG_TYPE_STRING:
-            $t_value = string_nl2br( string_html_specialchars( config_eval( $p_value ) ) );
-            if( $p_for_display ) {
-                $t_value = '<p id="adm-config-value">' . "'$t_value'" . '</p>';
-            }
-            echo $t_value;
-            return;
-        case CONFIG_TYPE_COMPLEX:
-            $t_value = @unserialize( $p_value );
-            if( $t_value === false ) {
-                $t_corrupted = true;
-            }
-            break;
-        default:
-            $t_value = config_eval( $p_value );
-            break;
-    }
+	switch( $p_type ) {
+		case CONFIG_TYPE_DEFAULT:
+			return;
+		case CONFIG_TYPE_FLOAT:
+			echo (float)$p_value;
+			return;
+		case CONFIG_TYPE_INT:
+			echo (integer)$p_value;
+			return;
+		case CONFIG_TYPE_STRING:
+			$t_value = string_nl2br( string_html_specialchars( config_eval( $p_value ) ) );
+			if( $p_for_display ) {
+				$t_value = '<p id="adm-config-value">\'' . $t_value . '\'</p>';
+			}
+			echo $t_value;
+			return;
+		case CONFIG_TYPE_COMPLEX:
+			$t_value = @unserialize( $p_value );
+			if( $t_value === false ) {
+				$t_corrupted = true;
+			}
+			break;
+		default:
+			$t_value = config_eval( $p_value );
+			break;
+	}
 
-    if( $t_corrupted ) {
-        $t_output = $p_for_display ? lang_get( 'configuration_corrupted' ) : '';
-    } else {
-        $t_output = var_export( $t_value, true );
-    }
+	if( $t_corrupted ) {
+		$t_output = $p_for_display ? lang_get( 'configuration_corrupted' ) : '';
+	} else {
+		$t_output = var_export( $t_value, true );
+	}
 
-    if( $p_for_display ) {
-        echo '<pre id="adm-config-value">' . string_attribute( $t_output ) . '</pre>';
-    } else {
-        echo $t_output;
-    }
+	if( $p_for_display ) {
+		echo '<pre id="adm-config-value">' . string_attribute( $t_output ) . '</pre>';
+	} else {
+		echo $t_output;
+	}
 }
 
 /**
@@ -143,11 +143,11 @@ function print_config_value_as_string( $p_type, $p_value, $p_for_display = true 
  * @return void
  */
 function print_option_list_from_array( array $p_array, $p_filter_value ) {
-    foreach( $p_array as $t_key => $t_value ) {
-        echo "<option value='$t_key'";
-        check_selected( (string)$p_filter_value, (string)$t_key );
-        echo '>' . string_attribute( $t_value ) . "</option>\n";
-    }
+	foreach( $p_array as $t_key => $t_value ) {
+		echo '<option value="' . $t_key . '"';
+		check_selected( (string)$p_filter_value, (string)$t_key );
+		echo '>' . string_attribute( $t_value ) . '</option>' . "\n";
+	}
 }
 
 # Get filter values
@@ -155,46 +155,46 @@ $t_filter_save          = gpc_get_bool( 'save' );
 $t_filter_default       = gpc_get_bool( 'default_filter_button', false );
 $t_filter_reset         = gpc_get_bool( 'reset_filter_button', false );
 if( $t_filter_default ) {
-    $t_filter_user_value    = ALL_USERS;
-    $t_filter_project_value = ALL_PROJECTS;
-    $t_filter_config_value  = META_FILTER_NONE;
+	$t_filter_user_value    = ALL_USERS;
+	$t_filter_project_value = ALL_PROJECTS;
+	$t_filter_config_value  = META_FILTER_NONE;
 } else if( $t_filter_reset ) {
-    $t_filter_user_value    = META_FILTER_NONE;
-    $t_filter_project_value = META_FILTER_NONE;
-    $t_filter_config_value  = META_FILTER_NONE;
+	$t_filter_user_value    = META_FILTER_NONE;
+	$t_filter_project_value = META_FILTER_NONE;
+	$t_filter_config_value  = META_FILTER_NONE;
 } else {
-    $t_filter_user_value    = gpc_get_int( 'filter_user_id', ALL_USERS );
-    $t_filter_project_value = gpc_get_int( 'filter_project_id', ALL_PROJECTS );
-    $t_filter_config_value  = gpc_get_string( 'filter_config_id', META_FILTER_NONE );
+	$t_filter_user_value    = gpc_get_int( 'filter_user_id', ALL_USERS );
+	$t_filter_project_value = gpc_get_int( 'filter_project_id', ALL_PROJECTS );
+	$t_filter_config_value  = gpc_get_string( 'filter_config_id', META_FILTER_NONE );
 }
 
 # Manage filter's persistency through cookie
 $t_cookie_name = config_get( 'manage_config_cookie' );
 if( $t_filter_save ) {
-    # Save user's filter to the cookie
-    $t_cookie_string = implode(
-        ':',
-        array(
-            $t_filter_user_value,
-            $t_filter_project_value,
-            $t_filter_config_value,
-        )
-    );
-    gpc_set_cookie( $t_cookie_name, $t_cookie_string, true );
+	# Save user's filter to the cookie
+	$t_cookie_string = implode(
+		':',
+		array(
+			$t_filter_user_value,
+			$t_filter_project_value,
+			$t_filter_config_value,
+		)
+	);
+	gpc_set_cookie( $t_cookie_name, $t_cookie_string, true );
 } else {
-    # Retrieve the filter from the cookie if it exists
-    $t_cookie_string = gpc_get_cookie( $t_cookie_name, null );
-    if( null !== $t_cookie_string ) {
-        $t_cookie_contents = explode( ':', $t_cookie_string );
+	# Retrieve the filter from the cookie if it exists
+	$t_cookie_string = gpc_get_cookie( $t_cookie_name, null );
+	if( null !== $t_cookie_string ) {
+		$t_cookie_contents = explode( ':', $t_cookie_string );
 
-        $t_filter_user_value    = $t_cookie_contents[0];
-        $t_filter_project_value = $t_cookie_contents[1];
-        $t_filter_config_value  = $t_cookie_contents[2];
+		$t_filter_user_value    = $t_cookie_contents[0];
+		$t_filter_project_value = $t_cookie_contents[1];
+		$t_filter_config_value  = $t_cookie_contents[2];
 
-        if( $t_filter_project_value != META_FILTER_NONE && !project_exists( $t_filter_project_value ) ) {
-            $t_filter_project_value = ALL_PROJECTS;
-        }
-    }
+		if( $t_filter_project_value != META_FILTER_NONE && !project_exists( $t_filter_project_value ) ) {
+			$t_filter_project_value = ALL_PROJECTS;
+		}
+	}
 }
 
 # Get config edit values
@@ -209,76 +209,74 @@ $t_config_table  = db_get_table( 'config' );
 $t_project_table = db_get_table( 'project' );
 
 # Get users in db having specific configs
-$t_query = "SELECT DISTINCT user_id FROM $t_config_table WHERE user_id <> " . db_param() ;
+$t_query = 'SELECT DISTINCT user_id FROM ' . $t_config_table . ' WHERE user_id <> ' . db_param() ;
 $t_result = db_query_bound( $t_query, array( ALL_USERS ) );
 if( $t_filter_user_value != META_FILTER_NONE && $t_filter_user_value != ALL_USERS ) {
-    # Make sure the filter value exists in the list
-    $t_users_list[$t_filter_user_value] = user_get_name( $t_filter_user_value );
+	# Make sure the filter value exists in the list
+	$t_users_list[$t_filter_user_value] = user_get_name( $t_filter_user_value );
 } else {
-    $t_users_list = array();
+	$t_users_list = array();
 }
 while( $t_row = db_fetch_array( $t_result ) ) {
-    $t_user_id = $t_row['user_id'];
-    $t_users_list[$t_user_id] = user_get_name( $t_user_id );
+	$t_user_id = $t_row['user_id'];
+	$t_users_list[$t_user_id] = user_get_name( $t_user_id );
 }
 asort( $t_users_list );
 # Prepend '[any]' and 'All Users' to the list
 $t_users_list = array(
-        META_FILTER_NONE => '[' . lang_get( 'any' ) . ']',
-        ALL_USERS        => lang_get( 'all_users' ),
-    )
-    + $t_users_list;
+		META_FILTER_NONE => '[' . lang_get( 'any' ) . ']',
+		ALL_USERS        => lang_get( 'all_users' ),
+	)
+	+ $t_users_list;
 
 # Get projects in db with specific configs
-$t_query = "SELECT DISTINCT project_id, pt.name as project_name
-	FROM $t_config_table as ct
-	JOIN $t_project_table as pt ON pt.id = ct.project_id
+$t_query = 'SELECT DISTINCT project_id, pt.name as project_name
+	FROM ' . $t_config_table . ' as ct
+	JOIN ' . $t_project_table . ' as pt ON pt.id = ct.project_id
 	WHERE project_id!=0
-	ORDER BY project_name";
+	ORDER BY project_name';
 $t_result = db_query_bound( $t_query );
 $t_projects_list[META_FILTER_NONE] = '[' . lang_get( 'any' ) . ']';
 $t_projects_list[ALL_PROJECTS] = lang_get( 'all_projects' );
 while( $t_row = db_fetch_array( $t_result ) ) {
-    extract( $t_row, EXTR_PREFIX_ALL, 'v' );
-    $t_projects_list[$v_project_id] = $v_project_name;
+	extract( $t_row, EXTR_PREFIX_ALL, 'v' );
+	$t_projects_list[$v_project_id] = $v_project_name;
 }
 
 # Get config list used in db
-$t_query = "SELECT DISTINCT config_id FROM $t_config_table ORDER BY config_id";
+$t_query = 'SELECT DISTINCT config_id FROM ' . $t_config_table . ' ORDER BY config_id';
 $t_result = db_query_bound( $t_query );
 $t_configs_list[META_FILTER_NONE] = '[' . lang_get( 'any' ) . ']';
 if( $t_filter_config_value != META_FILTER_NONE ) {
-    # Make sure the filter value exists in the list
-    $t_configs_list[$t_filter_config_value] = $t_filter_config_value;
+	# Make sure the filter value exists in the list
+	$t_configs_list[$t_filter_config_value] = $t_filter_config_value;
 }
 while( $t_row = db_fetch_array( $t_result ) ) {
-    extract( $t_row, EXTR_PREFIX_ALL, 'v' );
-    $t_configs_list[$v_config_id] = $v_config_id;
+	extract( $t_row, EXTR_PREFIX_ALL, 'v' );
+	$t_configs_list[$v_config_id] = $v_config_id;
 }
 
 # Build filter's where clause
 $t_where = '';
 $t_param = array();
 if( $t_filter_user_value != META_FILTER_NONE ) {
-    $t_where .= " AND user_id = " . db_param();
-    $t_param[] = $t_filter_user_value;
+	$t_where .= ' AND user_id = ' . db_param();
+	$t_param[] = $t_filter_user_value;
 }
 if( $t_filter_project_value != META_FILTER_NONE ) {
-    $t_where .= " AND project_id = " . db_param();
-    $t_param[] = $t_filter_project_value;
+	$t_where .= ' AND project_id = ' . db_param();
+	$t_param[] = $t_filter_project_value;
 }
 if( $t_filter_config_value != META_FILTER_NONE ) {
-    $t_where .= " AND config_id = " . db_param();
-    $t_param[] = $t_filter_config_value;
+	$t_where .= ' AND config_id = ' . db_param();
+	$t_param[] = $t_filter_config_value;
 }
 if( $t_where != '' ) {
-    $t_where = " WHERE 1=1 " . $t_where;
+	$t_where = ' WHERE 1=1 ' . $t_where;
 }
 
-$t_query = "SELECT config_id, user_id, project_id, type, value, access_reqd
-	FROM $t_config_table
-	$t_where
-	ORDER BY user_id, project_id, config_id ";
+$t_query = 'SELECT config_id, user_id, project_id, type, value, access_reqd
+	FROM ' . $t_config_table . $t_where . ' ORDER BY user_id, project_id, config_id ';
 $t_result = db_query_bound( $t_query, $t_param );
 ?>
 

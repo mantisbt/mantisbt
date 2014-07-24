@@ -84,12 +84,12 @@ function json_error_handler( $p_type, $p_error, $p_file, $p_line, array $p_conte
 			$t_error_description = $p_error;
 			break;
 		case E_USER_ERROR:
-			$t_error_type = "APPLICATION ERROR #$p_error";
+			$t_error_type = 'APPLICATION ERROR #' . $p_error;
 			$t_error_code = $p_error;
 			$t_error_description = error_string( $p_error );
 			break;
 		case E_USER_WARNING:
-			$t_error_type = "APPLICATION WARNING #$p_error";
+			$t_error_type = 'APPLICATION WARNING #' . $p_error;
 			$t_error_code = $p_error;
 			$t_error_description = error_string( $p_error );
 			break;

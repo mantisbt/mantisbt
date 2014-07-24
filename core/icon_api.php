@@ -45,9 +45,9 @@ function icon_get_status_icon( $p_icon ) {
 	$t_status_icon_arr = config_get( 'status_icon_arr' );
 	$t_priotext = get_enum_element( 'priority', $p_icon );
 	if( isset( $t_status_icon_arr[$p_icon] ) && !is_blank( $t_status_icon_arr[$p_icon] ) ) {
-		return "<img src=\"$t_icon_path$t_status_icon_arr[$p_icon]\" alt=\"\" title=\"$t_priotext\" />";
+		return '<img src="' . $t_icon_path . $t_status_icon_arr[$p_icon] . '" alt="" title="' . $t_priotext . '" />';
 	} else {
-		return "&#160;";
+		return '&#160;';
 	}
 }
 
@@ -87,7 +87,7 @@ function print_sort_icon( $p_dir, $p_sort_by, $p_field ) {
 	if( ( 'DESC' == $p_dir ) || ( DESCENDING == $p_dir ) ) {
 		$t_dir = DESCENDING;
 	} else {
-    echo '&#160;<i class="fa fa-caret-up fa-lg blue"></i>';
+    	echo '&#160;<i class="fa fa-caret-up fa-lg blue"></i>';
 	}
 }
 

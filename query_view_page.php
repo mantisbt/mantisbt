@@ -53,7 +53,7 @@ $t_query_arr = filter_db_get_available_queries();
 
 # Special case: if we've deleted our last query, we have nothing to show here.
 if( count( $t_query_arr ) < 1 ) {
-    print_header_redirect( 'view_all_bug_page.php' );
+	print_header_redirect( 'view_all_bug_page.php' );
 }
 
 compress_enable();

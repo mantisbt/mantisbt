@@ -32,15 +32,15 @@ $t_this_page = plugin_page( 'import' ); # FIXME with plugins this does not work.
 print_manage_menu( $t_this_page );
 
 $t_max_file_size = (int)min(
-    ini_get_number( 'upload_max_filesize' ),
-    ini_get_number( 'post_max_size' ),
-    config_get( 'max_file_size' )
+	ini_get_number( 'upload_max_filesize' ),
+	ini_get_number( 'post_max_size' ),
+	config_get( 'max_file_size' )
 );
 
 # We need a project to import into
 $t_project_id = helper_get_current_project( );
 if( ALL_PROJECTS == $t_project_id ) {
-    print_header_redirect( "login_select_proj_page.php?ref=$t_this_page" );
+	print_header_redirect( 'login_select_proj_page.php?ref=' . $t_this_page );
 }
 
 ?>

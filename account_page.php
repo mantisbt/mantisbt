@@ -79,7 +79,7 @@ $t_account_verification = defined( 'ACCOUNT_VERIFICATION_INC' );
 auth_ensure_user_authenticated();
 
 if( !$t_account_verification ) {
-    auth_reauthenticate();
+	auth_reauthenticate();
 }
 
 current_user_ensure_unprotected();
@@ -110,7 +110,7 @@ $t_verify = is_page_name( 'verify.php' );
 $t_force_pw_reset = false;
 
 if( $t_verify || $t_reset_password ) {
-    $t_can_change_password = helper_call_custom_function( 'auth_can_change_password', array() );
+	$t_can_change_password = helper_call_custom_function( 'auth_can_change_password', array() );
 
     echo '<div class="alert alert-danger">';
     echo '<ul>';

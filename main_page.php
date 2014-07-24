@@ -110,11 +110,11 @@ if( news_is_enabled() ) {
     $t_news_rows = news_get_limited_rows( $f_offset, $t_project_id );
     $t_news_count = count( $t_news_rows );
 
-    if( $t_news_count ) {
-        echo '<div id="news-items">';
-        # Loop through results
-        for ( $i = 0; $i < $t_news_count; $i++ ) {
-            $t_row = $t_news_rows[$i];
+	if( $t_news_count ) {
+		echo '<div id="news-items">';
+		# Loop through results
+		for( $i = 0; $i < $t_news_count; $i++ ) {
+			$t_row = $t_news_rows[$i];
 
             # only show VS_PRIVATE posts to configured threshold and above
             if( ( VS_PRIVATE == $t_row['view_state'] ) &&

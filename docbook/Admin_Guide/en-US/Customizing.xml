@@ -1128,7 +1128,7 @@ $g_status_enum_workflow[CLOSED]       ='20:feedback,50:assigned';
  */
 function custom_function_override_issue_update_validate( $p_issue_id, $p_bug_data, $p_bugnote_text ) {
 	if( $p_bug_data->status == RESOLVED ) {
-		if ( $p_bug_data->resolution == OPEN ) {
+		if( $p_bug_data->resolution == OPEN ) {
 			error_parameters( 'the resolution cannot be open to resolve the issue' );
 			trigger_error( ERROR_VALIDATE_FAILURE, ERROR );
 		}

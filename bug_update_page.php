@@ -46,6 +46,8 @@
  * @uses version_api.php
  */
 
+$g_allow_browser_cache = 1;
+
 require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -71,24 +73,22 @@ require_api( 'version_api.php' );
 
 require_css( 'status_config.php' );
 
-$g_allow_browser_cache = 1;
-
 $f_bug_id = gpc_get_int( 'bug_id' );
 
 $t_bug = bug_get( $f_bug_id, true );
 
 if( $t_bug->project_id != helper_get_current_project() ) {
-    # in case the current project is not the same project of the bug we are viewing...
-    # ... override the current project. This to avoid problems with categories and handlers lists etc.
-    $g_project_override = $t_bug->project_id;
-    $t_changed_project = true;
+	# in case the current project is not the same project of the bug we are viewing...
+	# ... override the current project. This to avoid problems with categories and handlers lists etc.
+	$g_project_override = $t_bug->project_id;
+	$t_changed_project = true;
 } else {
-    $t_changed_project = false;
+	$t_changed_project = false;
 }
 
 if( bug_is_readonly( $f_bug_id ) ) {
-    error_parameters( $f_bug_id );
-    trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+	error_parameters( $f_bug_id );
+	trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 }
 
 access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
@@ -139,29 +139,29 @@ $t_additional_information_textarea = $t_show_additional_information ? string_tex
 $t_show_steps_to_reproduce = in_array( 'steps_to_reproduce', $t_fields );
 $t_steps_to_reproduce_textarea = $t_show_steps_to_reproduce ? string_textarea( $t_bug->steps_to_reproduce ) : '';
 if( NO_USER == $t_bug->handler_id ) {
-    $t_handler_name =  '';
+	$t_handler_name =  '';
 } else {
-    $t_handler_name = string_display_line( user_get_name( $t_bug->handler_id ) );
+	$t_handler_name = string_display_line( user_get_name( $t_bug->handler_id ) );
 }
 
 $t_can_change_view_state = $t_show_view_state && access_has_project_level( config_get( 'change_view_status_threshold' ) );
 
 if( $t_show_product_version ) {
-    $t_product_version_released_mask = VERSION_RELEASED;
+	$t_product_version_released_mask = VERSION_RELEASED;
 
-    if( access_has_project_level( config_get( 'report_issues_for_unreleased_versions_threshold' ) ) ) {
-        $t_product_version_released_mask = VERSION_ALL;
-    }
+	if( access_has_project_level( config_get( 'report_issues_for_unreleased_versions_threshold' ) ) ) {
+		$t_product_version_released_mask = VERSION_ALL;
+	}
 }
 
 $t_formatted_bug_id = $t_show_id ? bug_format_id( $f_bug_id ) : '';
 $t_project_name = $t_show_project ? string_display_line( project_get_name( $t_bug->project_id ) ) : '';
 
 if( $t_show_due_date ) {
-    require_js( 'jscalendar/calendar.js' );
-    require_js( 'jscalendar/lang/calendar-en.js' );
-    require_js( 'jscalendar/calendar-setup.js' );
-    require_css( 'calendar-blue.css' );
+	require_js( 'jscalendar/calendar.js' );
+	require_js( 'jscalendar/lang/calendar-en.js' );
+	require_js( 'jscalendar/calendar-setup.js' );
+	require_css( 'calendar-blue.css' );
 }
 
 layout_page_header( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
@@ -200,9 +200,9 @@ layout_page_begin();
     ?>
     <tr>
         <td class="center" colspan="6">
-            <input ', helper_get_tab_index(), '
-            type="submit" class="button"
-            value="', lang_get( 'update_information_button' ), '" />
+            <input <?php helper_get_tab_index(); ?>
+                type="submit" class="button"
+                value="<?php echo lang_get( 'update_information_button' ); ?>" />
         </td>
     </tr>
     </thead>
@@ -350,15 +350,15 @@ layout_page_begin();
             if( access_has_bug_level( config_get( 'due_date_update_threshold' ), $t_bug_id ) ) {
                 $t_date_to_display = '';
 
-                if( !date_is_null( $t_bug->due_date ) ) {
-                    $t_date_to_display = date( config_get( 'calendar_date_format' ), $t_bug->due_date );
-                }
-                echo "<input " . helper_get_tab_index() . " type=\"text\" id=\"due_date\" name=\"due_date\" class=\"datetime\" size=\"20\" maxlength=\"16\" value=\"" . $t_date_to_display . "\" />";
-            } else {
-                if( !date_is_null( $t_bug->due_date ) ) {
-                    echo date( config_get( 'short_date_format' ), $t_bug->due_date );
-                }
-            }
+				if( !date_is_null( $t_bug->due_date ) ) {
+					$t_date_to_display = date( config_get( 'calendar_date_format' ), $t_bug->due_date );
+				}
+				echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetime" size="20" maxlength="16" value="' . $t_date_to_display . '" />';
+			} else {
+				if( !date_is_null( $t_bug->due_date ) ) {
+					echo date( config_get( 'short_date_format' ), $t_bug->due_date );
+				}
+			}
 
             echo '</td>';
         } else {

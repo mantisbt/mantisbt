@@ -62,12 +62,12 @@ $t_tag_table = db_get_table( 'tag' );
 # Start Index Menu
 $t_prefix_array = array( 'ALL' );
 
-for ( $i = 'A'; $i != 'AA'; $i++ ) {
-    $t_prefix_array[] = $i;
+for( $i = 'A'; $i != 'AA'; $i++ ) {
+	$t_prefix_array[] = $i;
 }
 
-for ( $i = 0; $i <= 9; $i++ ) {
-    $t_prefix_array[] = "$i";
+for( $i = 0; $i <= 9; $i++ ) {
+	$t_prefix_array[] = (string)$i;
 }
 if( $f_filter === 'ALL' ) {
     $t_name_filter = '';

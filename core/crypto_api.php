@@ -122,9 +122,9 @@ function crypto_generate_random_string( $p_bytes, $p_require_strong_generator = 
 	if( !isset( $t_random_string ) ) {
 		$t_secret_key = 'prng' . config_get_global( 'crypto_master_salt' );
 		$t_random_bytes = '';
-		for ( $i = 0; $i < $p_bytes; $i += 64 ) {
+		for( $i = 0; $i < $p_bytes; $i += 64 ) {
 			$t_random_segment = '';
-			for ( $j = 0; $j < 64; $j++ ) {
+			for( $j = 0; $j < 64; $j++ ) {
 				$t_random_segment .= base_convert( mt_rand(), 10, 36 );
 			}
 			$t_random_segment .= $i;

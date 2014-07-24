@@ -83,8 +83,8 @@ $t_bug_count = null;
 $t_page_count = null;
 
 $t_boxes = config_get( 'my_view_boxes' );
-asort ($t_boxes);
-reset ($t_boxes);
+asort( $t_boxes );
+reset( $t_boxes );
 #print_r ($t_boxes);
 
 $t_project_id = helper_get_current_project();

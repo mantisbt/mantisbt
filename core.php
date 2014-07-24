@@ -121,7 +121,7 @@ function require_lib( $p_library_name ) {
 
 		$t_library_file_path = $g_library_path . $p_library_name;
 		if( !file_exists( $t_library_file_path ) ) {
-			echo "External library '$t_library_file_path' not found.";
+			echo 'External library \'' . $t_library_file_path . '\' not found.';
 			exit;
 		}
 
@@ -195,7 +195,7 @@ compress_start_handler();
 # they can complete installation and configuration of MantisBT
 if( false === $t_config_inc_found ) {
 	if( php_sapi_name() == 'cli' ) {
-		echo "Error: " . $g_config_path . "config_inc.php file not found; ensure MantisBT is properly setup.\n";
+		echo 'Error: ' . $g_config_path . "config_inc.php file not found; ensure MantisBT is properly setup.\n";
 		exit(1);
 	}
 

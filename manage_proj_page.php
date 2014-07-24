@@ -67,9 +67,9 @@ $f_sort	= gpc_get_string( 'sort', 'name' );
 $f_dir	= gpc_get_string( 'dir', 'ASC' );
 
 if( 'ASC' == $f_dir ) {
-    $t_direction = ASCENDING;
+	$t_direction = ASCENDING;
 } else {
-    $t_direction = DESCENDING;
+	$t_direction = DESCENDING;
 }
 
 layout_page_header( lang_get( 'manage_projects_link' ) );

@@ -87,25 +87,25 @@ $t_projects[] = ALL_PROJECTS; # add "ALL_PROJECTS to the list of projects to fet
 $t_reqd_access = config_get( 'view_proj_doc_threshold' );
 if( is_array( $t_reqd_access ) ) {
 	if( 1 == count( $t_reqd_access ) ) {
-		$t_access_clause = "= " . array_shift( $t_reqd_access ) . " ";
+		$t_access_clause = '= ' . array_shift( $t_reqd_access ) . ' ';
 	} else {
-		$t_access_clause = "IN (" . implode( ',', $t_reqd_access ) . ")";
+		$t_access_clause = 'IN (' . implode( ',', $t_reqd_access ) . ')';
 	}
 } else {
-	$t_access_clause = ">= $t_reqd_access ";
+	$t_access_clause = '>= ' . $t_reqd_access . ' ';
 }
 
-$t_query = "SELECT pft.id, pft.project_id, pft.filename, pft.filesize, pft.title, pft.description, pft.date_added
-			FROM $t_project_file_table pft
-				LEFT JOIN $t_project_table pt ON pft.project_id = pt.id
-				LEFT JOIN $t_project_user_list_table pult
-					ON pft.project_id = pult.project_id AND pult.user_id = " . db_param() . "
-				LEFT JOIN $t_user_table ut ON ut.id = " . db_param() . "
-			WHERE pft.project_id in (" . implode( ',', $t_projects ) . ") AND
-				( ( ( pt.view_state = " . db_param() . " OR pt.view_state is null ) AND pult.user_id is null AND ut.access_level $t_access_clause ) OR
-					( ( pult.user_id = " . db_param() . " ) AND ( pult.access_level $t_access_clause ) ) OR
-					( ut.access_level >= " . db_param() . " ) )
-			ORDER BY pt.name ASC, pft.title ASC";
+$t_query = 'SELECT pft.id, pft.project_id, pft.filename, pft.filesize, pft.title, pft.description, pft.date_added
+			FROM ' . $t_project_file_table . ' pft
+				LEFT JOIN ' . $t_project_table . ' pt ON pft.project_id = pt.id
+				LEFT JOIN ' . $t_project_user_list_table . ' pult
+					ON pft.project_id = pult.project_id AND pult.user_id = ' . db_param() . '
+				LEFT JOIN ' . $t_user_table . ' ut ON ut.id = ' . db_param() . '
+			WHERE pft.project_id in (' . implode( ',', $t_projects ) . ') AND
+				( ( ( pt.view_state = ' . db_param() . ' OR pt.view_state is null ) AND pult.user_id is null AND ut.access_level ' . $t_access_clause . ' ) OR
+					( ( pult.user_id = ' . db_param() . ' ) AND ( pult.access_level ' . $t_access_clause . ' ) ) OR
+					( ut.access_level >= ' . db_param() . ' ) )
+			ORDER BY pt.name ASC, pft.title ASC';
 $t_result = db_query_bound( $t_query, array( $t_user_id, $t_user_id, $t_pub, $t_user_id, $t_admin ) );
 
 layout_page_header( lang_get( 'docs_link' ) );

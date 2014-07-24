@@ -78,9 +78,9 @@ function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
  * @return void
  */
 function print_test( $p_test_description, $p_result, $p_hard_fail = true, $p_message = '' ) {
-    echo "\n<tr><td>$p_test_description</td>";
-    print_test_result( $p_result, $p_hard_fail, $p_message );
-    echo "</tr>\n";
+	echo '<tr><td>' . $p_test_description . '</td>';
+	print_test_result( $p_result, $p_hard_fail, $p_message );
+	echo '</tr>' . "\n";
 }
 
 # install_state
@@ -108,26 +108,26 @@ layout_admin_page_begin();
                 <?php
                 switch( $t_install_state ) {
                     case 6:
-                        echo "Post Installation Checks";
+                        echo 'Post Installation Checks';
                         break;
                     case 5:
-                        echo "Install Configuration File";
+                        echo 'Install Configuration File';
                         break;
                     case 4:
-                        echo "Additional Configuration Information";
+                        echo 'Additional Configuration Information';
                         break;
                     case 3:
-                        echo "Install Database";
+                        echo 'Install Database';
                         break;
                     case 2:
-                        echo "Check and Install Database";
+                        echo 'Check and Install Database';
                         break;
                     case 1:
-                        echo "Database Parameters";
+                        echo 'Database Parameters';
                         break;
                     case 0:
                     default:
-                        echo "Pre-Installation Check";
+                        echo 'Pre-Installation Check';
                         break;
                 }
                 ?>
@@ -170,131 +170,131 @@ $t_prefix_defaults = array(
     ) ,
 );
 foreach( $t_prefix_defaults['oci8'] as $t_key => $t_value ) {
-    $t_prefix_defaults['other'][$t_key] = config_get( $t_key, '' );
+	$t_prefix_defaults['other'][$t_key] = config_get( $t_key, '' );
 }
 
 if( $t_config_exists && $t_install_state <= 1 ) {
-    # config already exists - probably an upgrade
-    $f_dsn                    = config_get( 'dsn', '' );
-    $f_hostname               = config_get( 'hostname', '' );
-    $f_db_type                = config_get( 'db_type', '' );
-    $f_database_name          = config_get( 'database_name', '' );
-    $f_db_schema              = config_get( 'db_schema', '' );
-    $f_db_username            = config_get( 'db_username', '' );
-    $f_db_password            = config_get( 'db_password', '' );
-    $f_timezone               = config_get( 'default_timezone', '' );
+	# config already exists - probably an upgrade
+	$f_dsn                    = config_get( 'dsn', '' );
+	$f_hostname               = config_get( 'hostname', '' );
+	$f_db_type                = config_get( 'db_type', '' );
+	$f_database_name          = config_get( 'database_name', '' );
+	$f_db_schema              = config_get( 'db_schema', '' );
+	$f_db_username            = config_get( 'db_username', '' );
+	$f_db_password            = config_get( 'db_password', '' );
+	$f_timezone               = config_get( 'default_timezone', '' );
 
-    # Set default prefix/suffix form variables ($f_db_table_XXX)
-    foreach( $t_prefix_defaults['other'] as $t_key => $t_value ) {
-        ${'f_' . $t_key} = $t_value;
-    }
+	# Set default prefix/suffix form variables ($f_db_table_XXX)
+	foreach( $t_prefix_defaults['other'] as $t_key => $t_value ) {
+		${'f_' . $t_key} = $t_value;
+	}
 } else {
-    # read control variables with defaults
-    $f_dsn                = gpc_get( 'dsn', config_get( 'dsn', '' ) );
-    $f_hostname           = gpc_get( 'hostname', config_get( 'hostname', 'localhost' ) );
-    $f_db_type            = gpc_get( 'db_type', config_get( 'db_type', '' ) );
-    $f_database_name      = gpc_get( 'database_name', config_get( 'database_name', 'bugtracker' ) );
-    $f_db_schema          = gpc_get( 'db_schema', config_get( 'db_schema', '' ) );
-    $f_db_username        = gpc_get( 'db_username', config_get( 'db_username', '' ) );
-    $f_db_password        = gpc_get( 'db_password', config_get( 'db_password', '' ) );
-    if( CONFIGURED_PASSWORD == $f_db_password ) {
-        $f_db_password = config_get( 'db_password' );
-    }
-    $f_timezone           = gpc_get( 'timezone', config_get( 'default_timezone' ) );
+	# read control variables with defaults
+	$f_dsn                = gpc_get( 'dsn', config_get( 'dsn', '' ) );
+	$f_hostname           = gpc_get( 'hostname', config_get( 'hostname', 'localhost' ) );
+	$f_db_type            = gpc_get( 'db_type', config_get( 'db_type', '' ) );
+	$f_database_name      = gpc_get( 'database_name', config_get( 'database_name', 'bugtracker' ) );
+	$f_db_schema          = gpc_get( 'db_schema', config_get( 'db_schema', '' ) );
+	$f_db_username        = gpc_get( 'db_username', config_get( 'db_username', '' ) );
+	$f_db_password        = gpc_get( 'db_password', config_get( 'db_password', '' ) );
+	if( CONFIGURED_PASSWORD == $f_db_password ) {
+		$f_db_password = config_get( 'db_password' );
+	}
+	$f_timezone           = gpc_get( 'timezone', config_get( 'default_timezone' ) );
 
-    # Set default prefix/suffix form variables ($f_db_table_XXX)
-    $t_prefix_type = $f_db_type == 'oci8' ? $f_db_type : 'other';
-    foreach( $t_prefix_defaults[$t_prefix_type] as $t_key => $t_value ) {
-        ${'f_' . $t_key} = gpc_get( $t_key, $t_value );
-    }
+	# Set default prefix/suffix form variables ($f_db_table_XXX)
+	$t_prefix_type = $f_db_type == 'oci8' ? $f_db_type : 'other';
+	foreach( $t_prefix_defaults[$t_prefix_type] as $t_key => $t_value ) {
+		${'f_' . $t_key} = gpc_get( $t_key, $t_value );
+	}
 }
 $f_admin_username = gpc_get( 'admin_username', '' );
 $f_admin_password = gpc_get( 'admin_password', '' );
 if( CONFIGURED_PASSWORD == $f_admin_password ) {
-    $f_admin_password = '';
+	$f_admin_password = '';
 }
 $f_log_queries    = gpc_get_bool( 'log_queries', false );
 $f_db_exists      = gpc_get_bool( 'db_exists', false );
 
 if( $t_config_exists ) {
-    if( 0 == $t_install_state ) {
-        print_test( "Config File Exists - Upgrade", true );
+	if( 0 == $t_install_state ) {
+		print_test( 'Config File Exists - Upgrade', true );
 
-        print_test( 'Setting Database Type', '' !== $f_db_type, true, 'database type is blank?' );
+		print_test( 'Setting Database Type', '' !== $f_db_type, true, 'database type is blank?' );
 
-        # @TODO: dsn config seems to be undefined, remove ?
-        $t_db_conn_exists = ( $f_dsn !== '' || ( $f_database_name !== '' && $f_db_username !== '' && $f_hostname !== '' ) );
-        # Oracle supports binding in two ways:
-        #  - hostname, username/password and database name
-        #  - tns name (insert into hostname field) and username/password, database name is still empty
-        if( $f_db_type == 'oci8' ) {
-            $t_db_conn_exists = $t_db_conn_exists || ( $f_database_name == '' && $f_db_username !== '' && $f_hostname !== '' );
-        }
-        print_test( 'Checking Database connection settings exist',
-            $t_db_conn_exists,
-            true,
-            'database connection settings do not exist?' );
+		# @TODO: dsn config seems to be undefined, remove ?
+		$t_db_conn_exists = ( $f_dsn !== '' || ( $f_database_name !== '' && $f_db_username !== '' && $f_hostname !== '' ) );
+		# Oracle supports binding in two ways:
+		#  - hostname, username/password and database name
+		#  - tns name (insert into hostname field) and username/password, database name is still empty
+		if( $f_db_type == 'oci8' ) {
+			$t_db_conn_exists = $t_db_conn_exists || ( $f_database_name == '' && $f_db_username !== '' && $f_hostname !== '' );
+		}
+		print_test( 'Checking Database connection settings exist',
+			$t_db_conn_exists,
+			true,
+			'database connection settings do not exist?' );
 
-        print_test( 'Checking PHP support for database type',
-            db_check_database_support( $f_db_type ), true,
-            'database is not supported by PHP. Check that it has been compiled into your server.' );
+		print_test( 'Checking PHP support for database type',
+			db_check_database_support( $f_db_type ), true,
+			'database is not supported by PHP. Check that it has been compiled into your server.' );
 
-        if( $f_db_type == 'mssql' ) {
-            print_test( 'Checking PHP support for Microsoft SQL Server driver',
-                version_compare( phpversion(), '5.3' ) < 0, true,
-                'mssql driver is no longer supported in PHP >= 5.3, please use mssqlnative instead' );
-        }
-    }
+		if( $f_db_type == 'mssql' ) {
+			print_test( 'Checking PHP support for Microsoft SQL Server driver',
+				version_compare( phpversion(), '5.3' ) < 0, true,
+				'mssql driver is no longer supported in PHP >= 5.3, please use mssqlnative instead' );
+		}
+	}
 
-    $g_db = ADONewConnection( $f_db_type );
-    $t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
-    if( $g_db->IsConnected() ) {
-        $g_db_connected = true;
-    }
+	$g_db = ADONewConnection( $f_db_type );
+	$t_result = @$g_db->Connect( $f_hostname, $f_db_username, $f_db_password, $f_database_name );
+	if( $g_db->IsConnected() ) {
+		$g_db_connected = true;
+	}
 
-    $t_cur_version = config_get( 'database_version', -1 );
+	$t_cur_version = config_get( 'database_version', -1 );
 
-    if( $t_cur_version > 1 ) {
-        $g_database_upgrade = true;
-        $f_db_exists = true;
-    } else {
-        if( 0 == $t_install_state ) {
-            print_test( 'Config File Exists but Database does not', false, false, 'Bad config_inc.php?' );
-        }
-    }
+	if( $t_cur_version > 1 ) {
+		$g_database_upgrade = true;
+		$f_db_exists = true;
+	} else {
+		if( 0 == $t_install_state ) {
+			print_test( 'Config File Exists but Database does not', false, false, 'Bad config_inc.php?' );
+		}
+	}
 }
 
 if( $f_db_type == 'db2' ) {
 
-    # If schema name is supplied, then separate it from database name.
-    if( strpos( $f_database_name, '/' ) != false ) {
-        $f_db2AS400 = $f_database_name;
-        list( $f_database_name, $f_db_schema ) = explode( '/', $f_db2AS400, 2 );
-    }
+	# If schema name is supplied, then separate it from database name.
+	if( strpos( $f_database_name, '/' ) != false ) {
+		$f_db2AS400 = $f_database_name;
+		list( $f_database_name, $f_db_schema ) = explode( '/', $f_db2AS400, 2 );
+	}
 }
 
 if( 0 == $t_install_state ) {
-    ?>
+	?>
 
-    <!-- Check PHP Version -->
-    <?php print_test( ' Checking PHP version (your version is ' . phpversion() . ')', check_php_version( phpversion() ), true, 'Upgrade to a more recent version of PHP' );?>
+<!-- Check PHP Version -->
+<?php print_test( ' Checking PHP version (your version is ' . phpversion() . ')', check_php_version( phpversion() ), true, 'Upgrade to a more recent version of PHP' );?>
 
-    <!-- Check Safe Mode -->
-    <?php
-    print_test( 'Checking if safe mode is enabled for install script',
-        !ini_get( 'SAFE_MODE' ),
-        true,
-        'Disable safe_mode in php.ini before proceeding' ) ?>
+<!-- Check Safe Mode -->
+<?php
+print_test( 'Checking if safe mode is enabled for install script',
+	!ini_get( 'SAFE_MODE' ),
+	true,
+	'Disable safe_mode in php.ini before proceeding' ) ?>
 
-    <?php
-    print_test( 'Checking there is no config_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/config_inc.php' ), true, 'Move config_inc.php to config/config_inc.php.' );
-    print_test( 'Checking there is no custom_constants_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/custom_constants_inc.php' ), true, 'Move custom_constants_inc.php to config/custom_constants_inc.php.' );
-    print_test( 'Checking there is no custom_strings_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/custom_strings_inc.php' ), true, 'Move custom_strings_inc.php to config/custom_strings_inc.php.' );
-    print_test( 'Checking there is no custom_functions_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/custom_functions_inc.php' ), true, 'Move custom_functions_inc.php to config/custom_functions_inc.php.' );
-    print_test( 'Checking there is no custom_relationships_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/custom_relationships_inc.php' ), true, 'Move custom_relationships_inc.php to config/custom_relationships_inc.php.' );
-    print_test( 'Checking there is no mc_config_defaults_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/api/soap/mc_config_defaults_inc.php' ), true, 'Delete this file.' );
-    print_test( 'Checking there is no mc_config_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/api/soap/mc_config_inc.php' ), true, 'Move contents to config_inc.php file.' );
-    ?>
+<?php
+	print_test( 'Checking there is no config_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/config_inc.php' ), true, 'Move config_inc.php to config/config_inc.php.' );
+	print_test( 'Checking there is no custom_constants_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/custom_constants_inc.php' ), true, 'Move custom_constants_inc.php to config/custom_constants_inc.php.' );
+	print_test( 'Checking there is no custom_strings_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/custom_strings_inc.php' ), true, 'Move custom_strings_inc.php to config/custom_strings_inc.php.' );
+	print_test( 'Checking there is no custom_functions_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/custom_functions_inc.php' ), true, 'Move custom_functions_inc.php to config/custom_functions_inc.php.' );
+	print_test( 'Checking there is no custom_relationships_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/custom_relationships_inc.php' ), true, 'Move custom_relationships_inc.php to config/custom_relationships_inc.php.' );
+	print_test( 'Checking there is no mc_config_defaults_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/api/soap/mc_config_defaults_inc.php' ), true, 'Delete this file.' );
+	print_test( 'Checking there is no mc_config_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/api/soap/mc_config_inc.php' ), true, 'Move contents to config_inc.php file.' );
+?>
 
     </table>
     </div>
@@ -310,7 +310,7 @@ if( 0 == $t_install_state ) {
 
 # got database information, check and install
 if( 2 == $t_install_state ) {
-    ?>
+	?>
 
     <div class="col-md-12 col-xs-12">
         <div class="widget-box widget-color-blue2">
@@ -330,7 +330,7 @@ if( 2 == $t_install_state ) {
                             # PostgreSQL, Oracle and MSSQL require at least 5.19. MySQL should be fine
                             # with 5.10 but to simplify we align to the requirement of the others.
                             $t_adodb_version = substr( $ADODB_vers, 1, strpos( $ADODB_vers, ' ' ) - 1 );
-                            print_test( "Checking ADOdb Library version is at least " . DB_MIN_VERSION_ADODB,
+                            print_test( 'Checking ADOdb Library version is at least ' . DB_MIN_VERSION_ADODB,
                                 version_compare( $t_adodb_version, DB_MIN_VERSION_ADODB, '>=' ),
                                 true,
                                 'Current version: ' . $ADODB_vers
@@ -735,7 +735,7 @@ if( 3 == $t_install_state ) {
             if( $f_db_type == 'db2' ) {
                 $t_rs = $g_db->Execute( "select * from SYSIBM.SCHEMATA WHERE SCHEMA_NAME = '" . $f_db_schema . "' AND SCHEMA_OWNER = '" . $f_db_username . "'" );
                 if( $t_rs === false ) {
-                    echo "<br />false";
+                    echo '<br />false';
                 }
 
                 if( $t_rs->EOF ) {
@@ -759,7 +759,7 @@ if( 3 == $t_install_state ) {
                 $t_dict = NewDataDictionary( $g_db );
 
                 if( $f_db_type == 'db2' ) {
-                    $t_rs = $g_db->Execute( "CREATE SCHEMA " . $f_db_schema );
+                    $t_rs = $g_db->Execute( 'CREATE SCHEMA ' . $f_db_schema );
 
                     if( !$t_rs ) {
                         $t_result = false;
@@ -899,7 +899,7 @@ if( 3 == $t_install_state ) {
                         $v_table_name,
                         "$v_column_name L $t_null DEFAULT $t_default" );
                     print_test(
-                        "Converting column $v_table_name.$v_column_name to BOOLEAN",
+                        'Converting column ' . $v_table_name.$v_column_name . ' to BOOLEAN',
                         2 == $t_dict->ExecuteSQLArray( $t_sqlarray, false ),
                         true,
                         print_r( $t_sqlarray, true ) );
@@ -1100,15 +1100,15 @@ if( 5 == $t_install_state ) {
                                 }
 
                                 $t_config = '<?php' . PHP_EOL
-                                    . "\$g_hostname               = '$f_hostname';" . PHP_EOL
-                                    . "\$g_db_type                = '$f_db_type';" . PHP_EOL
-                                    . "\$g_database_name          = '" . addslashes( $f_database_name ) . "';" . PHP_EOL
-                                    . "\$g_db_username            = '" . addslashes( $f_db_username ) . "';" . PHP_EOL
-                                    . "\$g_db_password            = '" . addslashes( $f_db_password ) . "';" . PHP_EOL;
+                                    . '$g_hostname               = \'' . $f_hostname . '\';' . PHP_EOL
+                                    . '$g_db_type                = \'' . $f_db_type . '\';' . PHP_EOL
+                                    . '$g_database_name          = \'' . addslashes( $f_database_name ) . '\';' . PHP_EOL
+                                    . '$g_db_username            = \'' . addslashes( $f_db_username ) . '\';' . PHP_EOL
+                                    . '$g_db_password            = \'' . addslashes( $f_db_password ) . '\';' . PHP_EOL;
 
                                 switch( $f_db_type ) {
                                     case 'db2':
-                                        $t_config .=  "\$g_db_schema              = '$f_db_schema';" . PHP_EOL;
+                                        $t_config .=  '$g_db_schema              = \'' . $f_db_schema . '\';' . PHP_EOL;
                                         break;
                                     default:
                                         break;
@@ -1120,7 +1120,7 @@ if( 5 == $t_install_state ) {
                                 foreach( $t_prefix_defaults['other'] as $t_key => $t_value ) {
                                     $t_new_value = ${'f_' . $t_key};
                                     if( $t_new_value != $t_value ) {
-                                        $t_config .= '$g_' . str_pad( $t_key, 25 ) . "= '" . ${'f_' . $t_key} . "';" . PHP_EOL;
+                                        $t_config .= '$g_' . str_pad( $t_key, 25 ) . '= \'' . ${'f_' . $t_key} . '\';' . PHP_EOL;
                                         $t_insert_line = true;
                                     }
                                 }
@@ -1129,16 +1129,16 @@ if( 5 == $t_install_state ) {
                                 }
 
                                 $t_config .=
-                                    "\$g_default_timezone       = '$f_timezone';" . PHP_EOL
+                                    '$g_default_timezone       = \'' . $f_timezone . '\';' . PHP_EOL
                                     . PHP_EOL
                                     . "\$g_crypto_master_salt     = '" . addslashes( $t_crypto_master_salt ) . "';" . PHP_EOL;
 
                                 $t_write_failed = true;
 
                                 if( !$t_config_exists ) {
-                                    if( $fd = @fopen( $t_config_filename, 'w' ) ) {
-                                        fwrite( $fd, $t_config );
-                                        fclose( $fd );
+                                    if( $t_fd = @fopen( $t_config_filename, 'w' ) ) {
+                                        fwrite( $t_fd, $t_config );
+                                        fclose( $t_fd );
                                     }
 
                                     if( file_exists( $t_config_filename ) ) {

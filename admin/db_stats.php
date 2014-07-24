@@ -39,10 +39,10 @@ layout_admin_page_begin();
  * @return void
  */
 function print_info_row( $p_description, $p_value ) {
-    echo '<tr>';
-    echo '<th class="category">' . $p_description . '</th>';
-    echo '<td>' . $p_value . '</td>';
-    echo '</tr>';
+	echo '<tr>';
+	echo '<th class="category">' . $p_description . '</th>';
+	echo '<td>' . $p_value . '</td>';
+	echo '</tr>';
 }
 
 /**
@@ -52,12 +52,12 @@ function print_info_row( $p_description, $p_value ) {
  * @return integer row count
  */
 function helper_table_row_count( $p_table ) {
-    $t_table = $p_table;
-    $t_query = "SELECT COUNT(*) FROM $t_table";
-    $t_result = db_query_bound( $t_query );
-    $t_count = db_result( $t_result );
+	$t_table = $p_table;
+	$t_query = 'SELECT COUNT(*) FROM ' . $t_table;
+	$t_result = db_query_bound( $t_query );
+	$t_count = db_result( $t_result );
 
-    return $t_count;
+	return $t_count;
 }
 ?>
     <div class="col-md-12 col-xs-12">

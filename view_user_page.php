@@ -62,7 +62,7 @@ $t_row = user_get_row( $f_user_id );
 extract( $t_row, EXTR_PREFIX_ALL, 'u' );
 
 $t_can_manage = access_has_global_level( config_get( 'manage_user_threshold' ) ) &&
-    access_has_global_level( $u_access_level );
+	access_has_global_level( $u_access_level );
 $t_can_see_realname = access_has_project_level( config_get( 'show_user_realname_threshold' ) );
 $t_can_see_email = access_has_project_level( config_get( 'show_user_email_threshold' ) );
 
@@ -103,7 +103,7 @@ layout_page_begin();
                                     <td>
                                         <?php
                                         if( ! ( $t_can_manage || $t_can_see_email ) ) {
-                                            print error_string(ERROR_ACCESS_DENIED);
+                                            print error_string( ERROR_ACCESS_DENIED );
                                         } else {
                                             if( !is_blank( $u_email ) ) {
                                                 print_email_link( $u_email, $u_email );
@@ -120,7 +120,7 @@ layout_page_begin();
                                     <td>
                                         <?php
                                         if( ! ( $t_can_manage || $t_can_see_realname ) ) {
-                                            print error_string(ERROR_ACCESS_DENIED);
+                                            print error_string( ERROR_ACCESS_DENIED );
                                         } else {
                                             echo string_display_line( $u_realname );
                                         } ?>

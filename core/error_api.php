@@ -72,84 +72,83 @@ set_error_handler( 'error_handler' );
  * @uses html_api.php (optional)
  */
 function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) {
-    global $g_error_parameters, $g_error_handled, $g_error_proceed_url;
-    global $g_error_send_page_header;
+	global $g_error_parameters, $g_error_handled, $g_error_proceed_url;
+	global $g_error_send_page_header;
 
-    # check if errors were disabled with @ somewhere in this call chain
-    if( 0 == error_reporting() ) {
-        return;
-    }
+	# check if errors were disabled with @ somewhere in this call chain
+	if( 0 == error_reporting() ) {
+		return;
+	}
 
-    $t_lang_pushed = false;
+	$t_lang_pushed = false;
 
-    $t_db_connected = false;
-    if( function_exists( 'db_is_connected' ) ) {
-        if( db_is_connected() ) {
-            $t_db_connected = true;
-        }
-    }
-    $t_html_api = false;
-    if( function_exists( 'html_end' ) ) {
-        $t_html_api = true;
-    }
+	$t_db_connected = false;
+	if( function_exists( 'db_is_connected' ) ) {
+		if( db_is_connected() ) {
+			$t_db_connected = true;
+		}
+	}
+	$t_html_api = false;
+	if( function_exists( 'html_end' ) ) {
+		$t_html_api = true;
+	}
 
-    # flush any language overrides to return to user's natural default
-    if( $t_db_connected ) {
-        lang_push( lang_get_default() );
-        $t_lang_pushed = true;
-    }
+	# flush any language overrides to return to user's natural default
+	if( $t_db_connected ) {
+		lang_push( lang_get_default() );
+		$t_lang_pushed = true;
+	}
 
-    $t_method_array = config_get_global( 'display_errors' );
-    if( isset( $t_method_array[$p_type] ) ) {
-        $t_method = $t_method_array[$p_type];
-    } else {
-        if( isset( $t_method_array[E_ALL] ) ) {
-            $t_method = $t_method_array[E_ALL];
-        } else {
-            $t_method = 'none';
-        }
-    }
+	$t_method_array = config_get_global( 'display_errors' );
+	if( isset( $t_method_array[$p_type] ) ) {
+		$t_method = $t_method_array[$p_type];
+	} else {
+		if( isset( $t_method_array[E_ALL] ) ) {
+			$t_method = $t_method_array[E_ALL];
+		} else {
+			$t_method = 'none';
+		}
+	}
 
-    # build an appropriate error string
-    $t_error_description = "'$p_error' in '$p_file' line $p_line";
-    switch( $p_type ) {
-        case E_WARNING:
-            $t_error_type = 'SYSTEM WARNING';
-            break;
-        case E_NOTICE:
-            $t_error_type = 'SYSTEM NOTICE';
-            break;
-        case E_DEPRECATED:
-            $t_error_type = 'DEPRECATED';
-            break;
-        case E_USER_ERROR:
-            $t_error_type = "APPLICATION ERROR #$p_error";
-            $t_error_description = error_string( $p_error );
-            if( $t_method == DISPLAY_ERROR_INLINE ) {
-                $t_error_description .= "\n" . error_string( ERROR_DISPLAY_USER_ERROR_INLINE );
-            }
-            break;
-        case E_USER_WARNING:
-            $t_error_type = "APPLICATION WARNING #$p_error";
-            $t_error_description = error_string( $p_error );
-            break;
-        case E_USER_NOTICE:
+	# build an appropriate error string
+	$t_error_description = '\'' . $p_error . '\' in \'' . $p_file .'\' line ' . $p_line;
+	switch( $p_type ) {
+		case E_WARNING:
+			$t_error_type = 'SYSTEM WARNING';
+			break;
+		case E_NOTICE:
+			$t_error_type = 'SYSTEM NOTICE';
+			break;
+		case E_DEPRECATED:
+			$t_error_type = 'DEPRECATED';
+			break;
+		case E_USER_ERROR:
+			$t_error_type = 'APPLICATION ERROR #' . $p_error;
+			$t_error_description = error_string( $p_error );
+			if( $t_method == DISPLAY_ERROR_INLINE ) {
+				$t_error_description .= "\n" . error_string( ERROR_DISPLAY_USER_ERROR_INLINE );
+			}
+			break;
+		case E_USER_WARNING:
+			$t_error_type = 'APPLICATION WARNING #' . $p_error;
+			$t_error_description = error_string( $p_error );
+			break;
+		case E_USER_NOTICE:
 
-            # used for debugging
-            $t_error_type = 'DEBUG';
-            $t_error_description = $p_error;
-            break;
-        default:
-            # shouldn't happen, just display the error just in case
-            $t_error_type = "UNHANDLED ERROR TYPE ($p_type)";
-            $t_error_description = $p_error;
-    }
+			# used for debugging
+			$t_error_type = 'DEBUG';
+			break;
+		default:
+			# shouldn't happen, just display the error just in case
+			$t_error_type = 'UNHANDLED ERROR TYPE (' . $p_type . ')';
+			$t_error_description = $p_error;
+	}
 
-    $t_error_description = nl2br( $t_error_description );
+	$t_error_description = nl2br( $t_error_description );
 
-    if( php_sapi_name() == 'cli' ) {
-        if( DISPLAY_ERROR_NONE != $t_method ) {
-            echo $t_error_type . ": " . $t_error_description . "\n";
+	if( php_sapi_name() == 'cli' ) {
+		if( DISPLAY_ERROR_NONE != $t_method ) {
+			echo $t_error_type . ': ' . $t_error_description . "\n";
 
             if( ON == config_get_global( 'show_detailed_errors' ) ) {
                 echo "\n";
@@ -380,37 +379,36 @@ function error_print_stack_trace() {
  * @return string
  */
 function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 0 ) {
-    if( $p_depth++ > 10 ) {
-        return '<strong>***Nesting Level Too Deep***</strong>';
-    }
+	if( $p_depth++ > 10 ) {
+		return '<strong>***Nesting Level Too Deep***</strong>';
+	}
 
-    if( is_array( $p_param ) ) {
-        $t_results = array();
+	if( is_array( $p_param ) ) {
+		$t_results = array();
 
-        foreach( $p_param as $t_key => $t_value ) {
-            $t_results[] = '[' . error_build_parameter_string( $t_key, false, $p_depth ) . '] => ' . error_build_parameter_string( $t_value, false, $p_depth );
-        }
+		foreach( $p_param as $t_key => $t_value ) {
+			$t_results[] = '[' . error_build_parameter_string( $t_key, false, $p_depth ) . '] => ' . error_build_parameter_string( $t_value, false, $p_depth );
+		}
 
-        return '<array> { ' . implode( $t_results, ', ' ) . ' }';
-    }
-    else if( is_object( $p_param ) ) {
-        $t_results = array();
+		return '<array> { ' . implode( $t_results, ', ' ) . ' }';
+	} else if( is_object( $p_param ) ) {
+		$t_results = array();
 
-        $t_class_name = get_class( $p_param );
-        $t_inst_vars = get_object_vars( $p_param );
+		$t_class_name = get_class( $p_param );
+		$t_inst_vars = get_object_vars( $p_param );
 
-        foreach( $t_inst_vars as $t_name => $t_value ) {
-            $t_results[] = "[$t_name]" . ' => ' . error_build_parameter_string( $t_value, false, $p_depth );
-        }
+		foreach( $t_inst_vars as $t_name => $t_value ) {
+			$t_results[] = '[' . $t_name . '] => ' . error_build_parameter_string( $t_value, false, $p_depth );
+		}
 
-        return '<Object><' . $t_class_name . '> ( ' . implode( $t_results, ', ' ) . ' )';
-    } else {
-        if( $p_showtype ) {
-            return '<' . gettype( $p_param ) . '>' . var_export( $p_param, true );
-        } else {
-            return var_export( $p_param, true );
-        }
-    }
+		return '<Object><' . $t_class_name . '> ( ' . implode( $t_results, ', ' ) . ' )';
+	} else {
+		if( $p_showtype ) {
+			return '<' . gettype( $p_param ) . '>' . var_export( $p_param, true );
+		} else {
+			return var_export( $p_param, true );
+		}
+	}
 }
 
 /**
@@ -420,33 +418,33 @@ function error_build_parameter_string( $p_param, $p_showtype = true, $p_depth = 
  * @access public
  */
 function error_string( $p_error ) {
-    global $g_error_parameters;
+	global $g_error_parameters;
 
-    $t_lang = null;
-    while( true ) {
-        $t_err_msg = lang_get( 'MANTIS_ERROR', $t_lang );
-        if( array_key_exists( $p_error, $t_err_msg ) ) {
-            $t_error = $t_err_msg[$p_error];
-            break;
-        } elseif( is_null( $t_lang ) ) {
-            # Error string not found, fall back to English
-            $t_lang = 'english';
-        } else {
-            # Error string not found
-            $t_error = lang_get( 'missing_error_string' );
-            # Prepend the error number
-            array_unshift( $g_error_parameters, $p_error );
-            break;
-        }
-    }
+	$t_lang = null;
+	while( true ) {
+		$t_err_msg = lang_get( 'MANTIS_ERROR', $t_lang );
+		if( array_key_exists( $p_error, $t_err_msg ) ) {
+			$t_error = $t_err_msg[$p_error];
+			break;
+		} elseif( is_null( $t_lang ) ) {
+			# Error string not found, fall back to English
+			$t_lang = 'english';
+		} else {
+			# Error string not found
+			$t_error = lang_get( 'missing_error_string' );
+			# Prepend the error number
+			array_unshift( $g_error_parameters, $p_error );
+			break;
+		}
+	}
 
-    # We pad the parameter array to make sure that we don't get errors if
-    #  the caller didn't give enough parameters for the error string
-    $t_padding = array_pad( array(), 10, '' );
+	# We pad the parameter array to make sure that we don't get errors if
+	#  the caller didn't give enough parameters for the error string
+	$t_padding = array_pad( array(), 10, '' );
 
-    # ripped from string_api
-    $t_string = vsprintf( $t_error, array_merge( $g_error_parameters, $t_padding ) );
-    return preg_replace( "/&amp;(#[0-9]+|[a-z]+);/i", "&$1;", @htmlspecialchars( $t_string, ENT_COMPAT, 'UTF-8' ) );
+	# ripped from string_api
+	$t_string = vsprintf( $t_error, array_merge( $g_error_parameters, $t_padding ) );
+	return preg_replace( '/&amp;(#[0-9]+|[a-z]+);/i', '&$1;', @htmlspecialchars( $t_string, ENT_COMPAT, 'UTF-8' ) );
 }
 
 /**
@@ -455,9 +453,9 @@ function error_string( $p_error ) {
  * @return boolean
  */
 function error_handled() {
-    global $g_error_handled;
+	global $g_error_handled;
 
-    return( true == $g_error_handled );
+	return( true == $g_error_handled );
 }
 
 /**
@@ -471,9 +469,9 @@ function error_handled() {
  * @return void
  */
 function error_parameters() {
-    global $g_error_parameters;
+	global $g_error_parameters;
 
-    $g_error_parameters = func_get_args();
+	$g_error_parameters = func_get_args();
 }
 
 /**
@@ -483,9 +481,9 @@ function error_parameters() {
  * @return void
  */
 function error_proceed_url( $p_url ) {
-    global $g_error_proceed_url;
+	global $g_error_proceed_url;
 
-    $g_error_proceed_url = $p_url;
+	$g_error_proceed_url = $p_url;
 }
 
 /**
@@ -494,11 +492,11 @@ function error_proceed_url( $p_url ) {
  * @return string representing css class
  */
 function error_alternate_class() {
-    static $s_errindex = 1;
+	static $s_errindex = 1;
 
-    if( 1 == $s_errindex++ % 2 ) {
-        return 'class="row-1"';
-    } else {
-        return 'class="row-2"';
-    }
+	if( 1 == $s_errindex++ % 2 ) {
+		return 'class="row-1"';
+	} else {
+		return 'class="row-2"';
+	}
 }

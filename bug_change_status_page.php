@@ -41,6 +41,8 @@
  * @uses version_api.php
  */
 
+$g_allow_browser_cache = 1;
+
 require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -59,8 +61,6 @@ require_api( 'print_api.php' );
 require_api( 'relationship_api.php' );
 require_api( 'sponsorship_api.php' );
 require_api( 'version_api.php' );
-
-$g_allow_browser_cache = 1;
 
 $f_bug_id = gpc_get_int( 'id' );
 $t_bug = bug_get( $f_bug_id );
@@ -88,11 +88,9 @@ $t_current_user_id = auth_get_current_user_id();
 # Ensure user has proper access level before proceeding
 if( $f_new_status == $t_reopen && $f_reopen_flag ) {
 	access_ensure_can_reopen_bug( $t_bug, $t_current_user_id );
-}
-else if( $f_new_status == $t_closed ) {
+} else if( $f_new_status == $t_closed ) {
 	access_ensure_can_close_bug( $t_bug, $t_current_user_id );
-}
-else if( bug_is_readonly( $f_bug_id )
+} else if( bug_is_readonly( $f_bug_id )
 	|| !access_has_bug_level( access_get_status_threshold( $f_new_status, $t_bug->project_id ), $f_bug_id, $t_current_user_id ) ) {
 	access_denied();
 }
@@ -129,7 +127,7 @@ if( config_get( 'bug_assigned_status' ) == $f_new_status ) {
 	}
 }
 
-$t_status_label = str_replace( " ", "_", MantisEnum::getLabel( config_get( 'status_enum_string' ), $f_new_status ) );
+$t_status_label = str_replace( ' ', '_', MantisEnum::getLabel( config_get( 'status_enum_string' ), $f_new_status ) );
 
 layout_page_header( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 
@@ -164,7 +162,7 @@ layout_page_begin();
     <?php
     if( $f_new_status >= $t_resolved ) {
         if( relationship_can_resolve_bug( $f_bug_id ) == false ) {
-            echo "<tr><td colspan=\"2\">" . lang_get( 'relationship_warning_blocking_bugs_not_resolved_2' ) . "</td></tr>";
+            echo '<tr><td colspan="2">' . lang_get( 'relationship_warning_blocking_bugs_not_resolved_2' ) . '</td></tr>';
         }
     }
     ?>
@@ -248,7 +246,7 @@ layout_page_begin();
                 <?php print_documentation_link( 'due_date' ) ?>
             </th>
             <td>
-                <?php echo "<input " . helper_get_tab_index() . " type=\"text\" id=\"due_date\" name=\"due_date\" class=\"datetime\" size=\"20\" maxlength=\"16\" value=\"" . $t_date_to_display . "\" />" ?>
+                <?php echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetime" size="20" maxlength="16" value="' . $t_date_to_display . '" />' ?>
             </td>
         </tr>
     <?php } ?>
@@ -260,13 +258,13 @@ layout_page_begin();
      * this page will show required custom fields in update mode, or
      *  display or required fields on resolve or close
      */
-    $t_custom_status_label = "update"; # Don't show custom fields by default
+    $t_custom_status_label = 'update'; # Don't show custom fields by default
     if( ( $f_new_status == $t_resolved ) &&
         ( $f_new_status < $t_closed ) ) {
-        $t_custom_status_label = "resolved";
+        $t_custom_status_label = 'resolved';
     }
     if( $t_closed == $f_new_status ) {
-        $t_custom_status_label = "closed";
+        $t_custom_status_label = 'closed';
     }
 
     $t_related_custom_field_ids = custom_field_get_linked_ids( $t_bug->project_id );
@@ -339,7 +337,7 @@ layout_page_begin();
         ?>
         <!-- Bug was re-opened -->
         <?php
-        printf("	<input type=\"hidden\" name=\"resolution\" value=\"%s\" />\n",  config_get( 'bug_reopen_resolution' ) );
+        printf( '	<input type="hidden" name="resolution" value="%s" />' . "\n", config_get( 'bug_reopen_resolution' ) );
     }
     ?>
 

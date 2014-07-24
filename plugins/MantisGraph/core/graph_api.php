@@ -207,7 +207,7 @@ function graph_group( array $p_metrics, $p_title = '', $p_graph_width = 350, $p_
 	error_check( $t_count, $p_title );
 
 	# calculate totals
-	$total = graph_total_metrics( $p_metrics );
+	$t_total = graph_total_metrics( $p_metrics );
 
 	if( plugin_config_get( 'eczlibrary' ) == ON ) {
 		$t_graph = new ezcGraphBarChart();
@@ -220,7 +220,7 @@ function graph_group( array $p_metrics, $p_title = '', $p_graph_width = 350, $p_
 		foreach( array( 'open', 'resolved', 'closed' ) as $t_label ) {
 			$t_graph->data[$t_label] = new ezcGraphArrayDataSet( $p_metrics[$t_label] );
 		}
-		$t_graph->data['total'] = new ezcGraphArrayDataSet( $total );
+		$t_graph->data['total'] = new ezcGraphArrayDataSet( $t_total );
 		# $t_graph->data['total']->displayType = ezcGraph::LINE;
 		# $t_graph->data['total']->barMargin = -20;
 		$t_graph->options->fillLines = 210;
@@ -263,11 +263,11 @@ function graph_group( array $p_metrics, $p_title = '', $p_graph_width = 350, $p_
 		$t_graph->yscale->SetGrace( 10 );
 
 		# adds on the same graph
-		$tot = new BarPlot( array_values( $total ) );
-		$tot->SetFillColor( 'lightblue' );
-		$tot->SetWidth( 0.7 );
-		$tot->SetLegend( plugin_lang_get( 'legend_total' ) );
-		$t_graph->Add( $tot );
+		$t_tot = new BarPlot( array_values( $t_total ) );
+		$t_tot->SetFillColor( 'lightblue' );
+		$t_tot->SetWidth( 0.7 );
+		$t_tot->SetLegend( plugin_lang_get( 'legend_total' ) );
+		$t_graph->Add( $t_tot );
 
 		$t_plot1 = new BarPlot( array_values( $p_metrics['open'] ) );
 		$t_plot1->SetFillColor( 'yellow' );
@@ -284,8 +284,8 @@ function graph_group( array $p_metrics, $p_title = '', $p_graph_width = 350, $p_
 		$t_plot3->SetWidth( 1 );
 		$t_plot3->SetLegend( plugin_lang_get( 'legend_resolved' ) );
 
-		$gbplot = new GroupBarPlot( array( $t_plot1, $t_plot3, $t_plot2 ) );
-		$t_graph->Add( $gbplot );
+		$t_gbplot = new GroupBarPlot( array( $t_plot1, $t_plot3, $t_plot2 ) );
+		$t_graph->Add( $t_gbplot );
 
 		if( helper_show_query_count() ) {
 			$t_graph->subtitle->Set( db_count_queries() . ' queries (' . db_time_queries() . 'sec)' );
@@ -405,12 +405,12 @@ function graph_cumulative_bydate( array $p_metrics, $p_graph_width = 300, $p_gra
 		$t_graph->data[2]->label = plugin_lang_get( 'legend_still_open' );
 		$t_graph->data[2]->color = '#000000';
 
-		$t_graph->additionalAxis[2] = $nAxis = new ezcGraphChartElementNumericAxis();
-		$nAxis->chartPosition = 1;
-		$nAxis->background = '#005500';
-		$nAxis->border = '#005500';
-		$nAxis->position = ezcGraph::BOTTOM;
-		$t_graph->data[2]->yAxis = $nAxis;
+		$t_graph->additionalAxis[2] = $t_n_axis = new ezcGraphChartElementNumericAxis();
+		$t_n_axis->chartPosition = 1;
+		$t_n_axis->background = '#005500';
+		$t_n_axis->border = '#005500';
+		$t_n_axis->position = ezcGraph::BOTTOM;
+		$t_graph->data[2]->yAxis = $t_n_axis;
 
 		$t_graph->xAxis->labelCallback =  'graph_date_format';
 		$t_graph->xAxis->axisLabelRenderer = new ezcGraphAxisRotatedLabelRenderer();
@@ -429,12 +429,12 @@ function graph_cumulative_bydate( array $p_metrics, $p_graph_width = 300, $p_gra
 
 		$t_graph->renderToOutput( $p_graph_width, $p_graph_height );
 	} else {
-		foreach( $p_metrics[0] as $i => $vals ) {
+		foreach( $p_metrics[0] as $i => $t_values ) {
 			if( $i > 0 ) {
-				$plot_date[] = $i;
-				$reported_plot[] = $p_metrics[0][$i];
-				$resolved_plot[] = $p_metrics[1][$i];
-				$still_open_plot[] = $p_metrics[2][$i];
+				$t_plot_date[] = $i;
+				$t_reported_plot[] = $p_metrics[0][$i];
+				$t_resolved_plot[] = $p_metrics[1][$i];
+				$t_still_open_plot[] = $p_metrics[2][$i];
 			}
 		}
 
@@ -470,19 +470,19 @@ function graph_cumulative_bydate( array $p_metrics, $p_graph_width = 300, $p_gra
 		$t_graph->xaxis->SetLabelFormatCallback( 'graph_date_format' );
 		$t_graph->xaxis->SetFont( $t_graph_font );
 
-		$t_plot1 = new LinePlot( $reported_plot, $plot_date );
+		$t_plot1 = new LinePlot( $t_reported_plot, $t_plot_date );
 		$t_plot1->SetColor( 'blue' );
 		$t_plot1->SetCenter();
 		$t_plot1->SetLegend( plugin_lang_get( 'legend_reported' ) );
 		$t_graph->AddY2( $t_plot1 );
 
-		$t_plot3 = new LinePlot( $still_open_plot, $plot_date );
+		$t_plot3 = new LinePlot( $t_still_open_plot, $t_plot_date );
 		$t_plot3->SetColor( 'red' );
 		$t_plot3->SetCenter();
 		$t_plot3->SetLegend( plugin_lang_get( 'legend_still_open' ) );
 		$t_graph->Add( $t_plot3 );
 
-		$t_plot2 = new LinePlot( $resolved_plot, $plot_date );
+		$t_plot2 = new LinePlot( $t_resolved_plot, $t_plot_date );
 		$t_plot2->SetColor( 'black' );
 		$t_plot2->SetCenter();
 		$t_plot2->SetLegend( plugin_lang_get( 'legend_resolved' ) );
@@ -512,14 +512,13 @@ function graph_bydate( array $p_metrics, array $p_labels, $p_title, $p_graph_wid
 
 	if( plugin_config_get( 'eczlibrary' ) == ON ) {
 		$t_metrics = array();
-		$t_dates = array_shift( $p_metrics ); # [0];
+		$t_dates = array_shift( $p_metrics );
 		$t_cnt = count( $p_metrics );
 
-		foreach( $t_dates as $i => $val ) {
-				# $t_metrics[$val]
-				for( $j = 0; $j < $t_cnt; $j++ ) {
-					$t_metrics[$j][$val] = $p_metrics[$j][$i];
-				}
+		foreach( $t_dates as $i => $t_value ) {
+			for( $j = 0; $j < $t_cnt; $j++ ) {
+				$t_metrics[$j][$t_value] = $p_metrics[$j][$i];
+			}
 		}
 
 		$t_graph = new ezcGraphLineChart();
@@ -608,9 +607,9 @@ function graph_bydate( array $p_metrics, array $p_labels, $p_title, $p_graph_wid
  */
 function graph_total_metrics( array $p_metrics ) {
 	foreach( $p_metrics['open'] as $t_enum => $t_value ) {
-		$total[$t_enum] = $t_value + $p_metrics['resolved'][$t_enum] + $p_metrics['closed'][$t_enum];
+		$t_total[$t_enum] = $t_value + $p_metrics['resolved'][$t_enum] + $p_metrics['closed'][$t_enum];
 	}
-	return $total;
+	return $t_total;
 }
 
 /**
@@ -624,7 +623,7 @@ function create_bug_enum_summary( $p_enum_string, $p_enum ) {
 	$t_project_id = helper_get_current_project();
 	$t_bug_table = db_get_table( 'bug' );
 	$t_user_id = auth_get_current_user_id();
-	$t_specific_where = " AND " . helper_project_specific_where( $t_project_id, $t_user_id );
+	$t_specific_where = ' AND ' . helper_project_specific_where( $t_project_id, $t_user_id );
 
 	$t_metrics = array();
 	$t_assoc_array = MantisEnum::getAssocArrayIndexedByValues( $p_enum_string );
@@ -634,7 +633,7 @@ function create_bug_enum_summary( $p_enum_string, $p_enum ) {
 	}
 
 	foreach ( $t_assoc_array as $t_value => $t_label ) {
-		$t_query = "SELECT COUNT(*) FROM $t_bug_table WHERE $p_enum=" . db_param() . " $t_specific_where";
+		$t_query = 'SELECT COUNT(*) FROM ' . $t_bug_table . ' WHERE ' . $p_enum . '=' . db_param() . ' ' . $t_specific_where;
 		$t_result = db_query_bound( $t_query, array( $t_value ) );
 		$t_metrics[$t_label] = db_result( $t_result, 0 );
 	}
@@ -657,37 +656,33 @@ function enum_bug_group( $p_enum_string, $p_enum ) {
 	$t_user_id = auth_get_current_user_id();
 	$t_res_val = config_get( 'bug_resolved_status_threshold' );
 	$t_clo_val = config_get( 'bug_closed_status_threshold' );
-	$t_specific_where = " AND " . helper_project_specific_where( $t_project_id, $t_user_id );
+	$t_specific_where = ' AND ' . helper_project_specific_where( $t_project_id, $t_user_id );
 
 	if( !db_field_exists( $p_enum, $t_bug_table ) ) {
 		trigger_error( ERROR_DB_FIELD_NOT_FOUND, ERROR );
 	}
 
 	$t_array_indexed_by_enum_values = MantisEnum::getAssocArrayIndexedByValues( $p_enum_string );
-	$enum_count = count( $t_array_indexed_by_enum_values );
 	foreach ( $t_array_indexed_by_enum_values as $t_value => $t_label ) {
 		# Calculates the number of bugs opened and puts the results in a table
-		$t_query = "SELECT COUNT(*)
-					FROM $t_bug_table
-					WHERE $p_enum=" . db_param() . " AND
-						status<" . db_param() . " $t_specific_where";
+		$t_query = 'SELECT COUNT(*) FROM ' . $t_bug_table . '
+					WHERE ' . $p_enum . '=' . db_param() . ' AND
+						status<' . db_param() . ' ' . $t_specific_where;
 		$t_result2 = db_query_bound( $t_query, array( $t_value, $t_res_val ) );
 		$t_metrics['open'][$t_label] = db_result( $t_result2, 0, 0 );
 
 		# Calculates the number of bugs closed and puts the results in a table
-		$t_query = "SELECT COUNT(*)
-					FROM $t_bug_table
-					WHERE $p_enum=" . db_param() . " AND
-						status>=" . db_param() . " $t_specific_where";
+		$t_query = 'SELECT COUNT(*) FROM ' . $t_bug_table . '
+					WHERE ' . $p_enum . '=' . db_param() . ' AND
+						status>=' . db_param() . ' ' . $t_specific_where;
 		$t_result2 = db_query_bound( $t_query, array( $t_value, $t_clo_val ) );
 		$t_metrics['closed'][$t_label] = db_result( $t_result2, 0, 0 );
 
 		# Calculates the number of bugs resolved and puts the results in a table
-		$t_query = "SELECT COUNT(*)
-					FROM $t_bug_table
-					WHERE $p_enum=" . db_param() . " AND
-						status>=" . db_param() . " AND
-						status<" . db_param() . " $t_specific_where";
+		$t_query = 'SELECT COUNT(*) FROM ' . $t_bug_table . '
+					WHERE ' . $p_enum . '=' . db_param() . ' AND
+						status>=' . db_param() . ' AND
+						status<' . db_param() . ' ' . $t_specific_where;
 		$t_result2 = db_query_bound( $t_query, array(  $t_value, $t_res_val, $t_clo_val ) );
 		$t_metrics['resolved'][$t_label] = db_result( $t_result2, 0, 0 );
 	}
@@ -704,14 +699,12 @@ function create_developer_summary() {
 	$t_user_table = db_get_table( 'user' );
 	$t_bug_table = db_get_table( 'bug' );
 	$t_user_id = auth_get_current_user_id();
-	$t_specific_where = " AND " . helper_project_specific_where( $t_project_id, $t_user_id );
+	$t_specific_where = ' AND ' . helper_project_specific_where( $t_project_id, $t_user_id );
 
 	$t_res_val = config_get( 'bug_resolved_status_threshold' );
 	$t_clo_val = config_get( 'bug_closed_status_threshold' );
 
-	$t_query = "SELECT handler_id, status
-				 FROM $t_bug_table
-				 WHERE handler_id > 0 $t_specific_where";
+	$t_query = 'SELECT handler_id, status FROM ' . $t_bug_table . ' WHERE handler_id > 0 ' . $t_specific_where;
 	$t_result = db_query_bound( $t_query );
 	$t_total_handled = db_num_rows( $t_result );
 
@@ -759,15 +752,13 @@ function create_developer_summary() {
  * @return array
  */
 function create_reporter_summary() {
-	global $reporter_name, $reporter_count;
-
 	$t_project_id = helper_get_current_project();
 	$t_user_table = db_get_table( 'user' );
 	$t_bug_table = db_get_table( 'bug' );
 	$t_user_id = auth_get_current_user_id();
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
-	$t_query = "SELECT reporter_id FROM $t_bug_table WHERE $t_specific_where";
+	$t_query = 'SELECT reporter_id FROM ' . $t_bug_table . ' WHERE ' . $t_specific_where;
 	$t_result = db_query_bound( $t_query );
 	$t_total_reported = db_num_rows( $t_result );
 
@@ -803,29 +794,24 @@ function create_reporter_summary() {
  * @return array
  */
 function create_category_summary() {
-	global $category_name, $category_bug_count;
-
 	$t_project_id = helper_get_current_project();
 	$t_cat_table = db_get_table( 'category' );
 	$t_bug_table = db_get_table( 'bug' );
 	$t_user_id = auth_get_current_user_id();
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
-	$t_query = "SELECT id, name
-				FROM $t_cat_table
-				WHERE $t_specific_where OR project_id=" . ALL_PROJECTS . "
-				ORDER BY name";
+	$t_query = 'SELECT id, name FROM ' . $t_cat_table . '
+				WHERE ' . $t_specific_where . ' OR project_id=' . ALL_PROJECTS . '
+				ORDER BY name';
 	$t_result = db_query_bound( $t_query );
-	$category_count = db_num_rows( $t_result );
+	$t_category_count = db_num_rows( $t_result );
 
 	$t_metrics = array();
-	for( $i = 0;$i < $category_count;$i++ ) {
+	for( $i = 0;$i < $t_category_count;$i++ ) {
 		$t_row = db_fetch_array( $t_result );
 		$t_cat_name = $t_row['name'];
 		$t_cat_id = $t_row['id'];
-		$t_query = "SELECT COUNT(*)
-					FROM $t_bug_table
-					WHERE category_id=" . db_param() . " AND $t_specific_where";
+		$t_query = 'SELECT COUNT(*) FROM ' . $t_bug_table . ' WHERE category_id=' . db_param() . ' AND ' . $t_specific_where;
 		$t_result2 = db_query_bound( $t_query, array( $t_cat_id ) );
 		if( isset($t_metrics[$t_cat_name]) ) {
 			$t_metrics[$t_cat_name] = $t_metrics[$t_cat_name] + db_result( $t_result2, 0, 0 );
@@ -854,45 +840,42 @@ function create_cumulative_bydate() {
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
 	# Get all the submitted dates
-	$t_query = "SELECT date_submitted
-				FROM $t_bug_table
-				WHERE $t_specific_where
-				ORDER BY date_submitted";
+	$t_query = 'SELECT date_submitted FROM ' . $t_bug_table . ' WHERE ' . $t_specific_where . ' ORDER BY date_submitted';
 	$t_result = db_query_bound( $t_query );
-	$bug_count = db_num_rows( $t_result );
+	$t_bug_count = db_num_rows( $t_result );
 
-	for( $i = 0;$i < $bug_count;$i++ ) {
+	for( $i = 0; $i < $t_bug_count; $i++ ) {
 		$t_row = db_fetch_array( $t_result );
 
 		# rationalise the timestamp to a day to reduce the amount of data
 		$t_date = $t_row['date_submitted'];
 		$t_date = (int)( $t_date / SECONDS_PER_DAY );
 
-		if( isset( $metrics[$t_date] ) ) {
-			$metrics[$t_date][0]++;
+		if( isset( $t_calc_metrics[$t_date] ) ) {
+			$t_calc_metrics[$t_date][0]++;
 		} else {
-			$metrics[$t_date] = array( 1, 0, 0, );
+			$t_calc_metrics[$t_date] = array( 1, 0, 0, );
 		}
 	}
 
 	# ## Get all the dates where a transition from not resolved to resolved may have happened
 	#    also, get the last updated date for the bug as this may be all the information we have
-	$t_query = "SELECT $t_bug_table.id, last_updated, date_modified, new_value, old_value
-			FROM $t_bug_table LEFT JOIN $t_history_table
-			ON $t_bug_table.id = $t_history_table.bug_id
-			WHERE $t_specific_where
-						AND $t_bug_table.status >= " . db_param() . "
-						AND ( ( $t_history_table.new_value >= " . db_param() . "
-								AND $t_history_table.field_name = 'status' )
-						OR $t_history_table.id is NULL )
-			ORDER BY $t_bug_table.id, date_modified ASC";
+	$t_query = 'SELECT ' . $t_bug_table . '.id, last_updated, date_modified, new_value, old_value
+			FROM ' . $t_bug_table . ' LEFT JOIN ' . $t_history_table . '
+			ON ' . $t_bug_table . '.id = ' . $t_history_table . '.bug_id
+			WHERE ' . $t_specific_where . '
+						AND ' . $t_bug_table . '.status >= ' . db_param() . '
+						AND ( ( ' . $t_history_table . '.new_value >= ' . db_param() . '
+								AND ' . $t_history_table . '.field_name = \'status\' )
+						OR ' . $t_history_table . '.id is NULL )
+			ORDER BY ' . $t_bug_table . '.id, date_modified ASC';
 	$t_result = db_query_bound( $t_query, array( $t_res_val, (string)$t_res_val ) );
-	$bug_count = db_num_rows( $t_result );
+	$t_bug_count = db_num_rows( $t_result );
 
 	$t_last_id = 0;
 	$t_last_date = 0;
 
-	for( $i = 0;$i < $bug_count;$i++ ) {
+	for( $i = 0;$i < $t_bug_count;$i++ ) {
 		$t_row = db_fetch_array( $t_result );
 		$t_id = $t_row['id'];
 
@@ -911,10 +894,10 @@ function create_cumulative_bydate() {
 				# rationalise the timestamp to a day to reduce the amount of data
 				$t_date_index = (int)( $t_last_date / SECONDS_PER_DAY );
 
-				if( isset( $metrics[$t_date_index] ) ) {
-					$metrics[$t_date_index][1]++;
+				if( isset( $t_calc_metrics[$t_date_index] ) ) {
+					$t_calc_metrics[$t_date_index][1]++;
 				} else {
-					$metrics[$t_date_index] = array(
+					$t_calc_metrics[$t_date_index] = array(
 						0,
 						1,
 						0,
@@ -926,15 +909,14 @@ function create_cumulative_bydate() {
 		$t_last_date = $t_date;
 	}
 
-	ksort( $metrics );
+	ksort( $t_calc_metrics );
 
-	$metrics_count = count( $metrics );
 	$t_last_opened = 0;
 	$t_last_resolved = 0;
-	foreach( $metrics as $i => $vals ) {
+	foreach( $t_calc_metrics as $i => $t_values ) {
 		$t_date = $i * SECONDS_PER_DAY;
-		$t_metrics[0][$t_date] = $t_last_opened = $metrics[$i][0] + $t_last_opened;
-		$t_metrics[1][$t_date] = $t_last_resolved = $metrics[$i][1] + $t_last_resolved;
+		$t_metrics[0][$t_date] = $t_last_opened = $t_calc_metrics[$i][0] + $t_last_opened;
+		$t_metrics[1][$t_date] = $t_last_resolved = $t_calc_metrics[$i][1] + $t_last_resolved;
 		$t_metrics[2][$t_date] = $t_metrics[0][$t_date] - $t_metrics[1][$t_date];
 	}
 	return $t_metrics;
@@ -976,21 +958,20 @@ function error_text( $p_title, $p_text ) {
 		$t_graph = new CanvasGraph( 300, 380 );
 		$t_graph_font = graph_get_font();
 
-		$txt = new Text( $p_text, 150, 100 );
-		$txt->Align( "center", "center", "center" );
-		$txt->SetFont( $t_graph_font, FS_BOLD );
+		$t_text = new Text( $p_text, 150, 100 );
+		$t_text->Align( 'center', 'center', 'center' );
+		$t_text->SetFont( $t_graph_font, FS_BOLD );
 		$t_graph->title->Set( $p_title );
 		$t_graph->title->SetFont( $t_graph_font, FS_BOLD );
-		$t_graph->AddText( $txt );
+		$t_graph->AddText( $t_text );
 		$t_graph->Stroke();
 	} else {
-		$im = imagecreate( 300, 300 );
-		$bg = imagecolorallocate( $im, 255, 255, 255 );
-		$t_text_color = imagecolorallocate( $im, 0, 0, 0 );
-		imagestring( $im, 5, 0, 0, $p_text, $t_text_color );
+		$t_image = imagecreate( 300, 300 );
+		$t_text_color = imagecolorallocate( $t_image, 0, 0, 0 );
+		imagestring( $t_image, 5, 0, 0, $p_text, $t_text_color );
 		header( 'Content-type: image/png' );
-		imagepng( $im );
-		imagedestroy( $im );
+		imagepng( $t_image );
+		imagedestroy( $t_image );
 	}
 	die;
 }

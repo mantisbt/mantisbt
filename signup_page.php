@@ -50,7 +50,7 @@ require_js( 'login.js' );
 
 # Check for invalid access to signup page
 if( OFF == config_get_global( 'allow_signup' ) || LDAP == config_get_global( 'login_method' ) ) {
-    print_header_redirect( 'login_page.php' );
+	print_header_redirect( 'login_page.php' );
 }
 
 # signup page shouldn't be indexed by search engines
@@ -109,9 +109,9 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
                                 if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 && $t_allow_passwd_change ) {
                                     $t_securimage_path = 'library/securimage';
                                     $t_securimage_show = "$t_securimage_path/securimage_show.php";
-                                    $t_securimage_play = "$t_securimage_path/securimage_play.swf?"
+                                    $t_securimage_play = $t_securimage_path . '/securimage_play.swf?'
                                         . http_build_query( array(
-                                            'audio_file' => "$t_securimage_path/securimage_play.php",
+                                            'audio_file' => $t_securimage_path . '/securimage_play.php',
                                             'bgColor1=' => '#fff',
                                             'bgColor2=' => '#fff',
                                             'iconColor=' => '#777',

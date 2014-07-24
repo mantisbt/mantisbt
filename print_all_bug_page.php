@@ -76,18 +76,18 @@ $t_num_of_columns = count( $t_columns );
 # check to see if the cookie exists
 if( !is_blank( $t_cookie_value ) ) {
 
-    # check to see if new cookie is needed
-    if( !filter_is_cookie_valid() ) {
-        print_header_redirect( 'view_all_set.php?type=0&print=1' );
-    }
+	# check to see if new cookie is needed
+	if( !filter_is_cookie_valid() ) {
+		print_header_redirect( 'view_all_set.php?type=0&print=1' );
+	}
 
-    $t_setting_arr = explode( '#', $t_cookie_value, 2 );
-    $t_filter_cookie_arr = unserialize( $t_setting_arr[1] );
+	$t_setting_arr = explode( '#', $t_cookie_value, 2 );
+	$t_filter_cookie_arr = unserialize( $t_setting_arr[1] );
 
-    $f_highlight_changed 	= $t_filter_cookie_arr[FILTER_PROPERTY_HIGHLIGHT_CHANGED];
-    $f_sort 				= $t_filter_cookie_arr[FILTER_PROPERTY_SORT_FIELD_NAME];
-    $f_dir		 			= $t_filter_cookie_arr[FILTER_PROPERTY_SORT_DIRECTION];
-    $t_project_id 			= helper_get_current_project();
+	$f_highlight_changed 	= $t_filter_cookie_arr[FILTER_PROPERTY_HIGHLIGHT_CHANGED];
+	$f_sort 				= $t_filter_cookie_arr[FILTER_PROPERTY_SORT_FIELD_NAME];
+	$f_dir		 			= $t_filter_cookie_arr[FILTER_PROPERTY_SORT_DIRECTION];
+	$t_project_id 			= helper_get_current_project();
 }
 
 # This replaces the actual search that used to be here
@@ -177,13 +177,12 @@ layout_page_header();
                         array( 'print_all_bug_page_word', 'html', 'target="_blank"', 'ie.gif', 'Word View' ) );
 
                     foreach ( $t_icons as $t_icon ) {
-                        echo '<a href="' . $t_icon[0] . '.php' .
-                            '?' . FILTER_PROPERTY_SEARCH. "=$t_search" .
-                            '&amp;' . FILTER_PROPERTY_SORT_FIELD_NAME . "=$f_sort" .
-                            '&amp;' . FILTER_PROPERTY_SORT_DIRECTION . "=$t_new_dir" .
+                        echo '<a href="' . $t_icon[0] . '.php?' . FILTER_PROPERTY_SEARCH. '=' . $t_search .
+                            '&amp;' . FILTER_PROPERTY_SORT_FIELD_NAME . '=' . $f_sort .
+                            '&amp;' . FILTER_PROPERTY_SORT_DIRECTION . '=' . $t_new_dir .
                             '&amp;type_page=' . $t_icon[1] .
-                            "&amp;export=$f_export" .
-                            "&amp;show_flag=$t_show_flag" .
+                            '&amp;export=' . $f_export .
+                            '&amp;show_flag=' . $t_show_flag .
                             '" ' . $t_icon[2] . '>' .
                             '<img src="' . $t_icon_path . $t_icon[3] . '" alt="' . $t_icon[4] . '" /></a> ';
                     }

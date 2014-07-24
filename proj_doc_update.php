@@ -94,10 +94,10 @@ if( isset( $f_file['tmp_name'] ) && is_uploaded_file( $f_file['tmp_name'] ) ) {
         trigger_error( ERROR_FILE_TOO_BIG, ERROR );
     }
 
-    $t_method = config_get( 'file_upload_method' );
-    switch ( $t_method ) {
-        case DISK:
-            file_ensure_valid_upload_path( $t_file_path );
+	$t_method = config_get( 'file_upload_method' );
+	switch( $t_method ) {
+		case DISK:
+			file_ensure_valid_upload_path( $t_file_path );
 
             if( file_exists( $t_disk_file_name ) ) {
                 file_delete_local( $t_disk_file_name );
@@ -107,25 +107,25 @@ if( isset( $f_file['tmp_name'] ) && is_uploaded_file( $f_file['tmp_name'] ) ) {
             }
             chmod( $t_disk_file_name, config_get( 'attachments_file_permissions' ) );
 
-            $c_content = '';
-            break;
-        case DATABASE:
-            $c_content = db_prepare_binary_string( fread( fopen( $f_file['tmp_name'], 'rb' ), $f_file['size'] ) );
-            break;
-        default:
-            # @todo Such errors should be checked in the admin checks
-            trigger_error( ERROR_GENERIC, ERROR );
-    }
-    $t_query = "UPDATE $t_project_file_table
-		SET title=" . db_param() . ", description=" . db_param() . ", date_added=" . db_param() . ",
-			filename=" . db_param() . ", filesize=" . db_param() . ", file_type=" .db_param() . ", content=" .db_param() . "
-			WHERE id=" . db_param();
-    $t_result = db_query_bound( $t_query, array( $f_title, $f_description, db_now(), $f_file['name'], $t_file_size, $f_file['type'], $c_content, $f_file_id ) );
+			$c_content = '';
+			break;
+		case DATABASE:
+			$c_content = db_prepare_binary_string( fread( fopen( $f_file['tmp_name'], 'rb' ), $f_file['size'] ) );
+			break;
+		default:
+			# @todo Such errors should be checked in the admin checks
+			trigger_error( ERROR_GENERIC, ERROR );
+	}
+	$t_query = 'UPDATE ' . $t_project_file_table . '
+		SET title=' . db_param() . ', description=' . db_param() . ', date_added=' . db_param() . ',
+			filename=' . db_param() . ', filesize=' . db_param() . ', file_type=' .db_param() . ', content=' .db_param() . '
+			WHERE id=' . db_param();
+	$t_result = db_query_bound( $t_query, array( $f_title, $f_description, db_now(), $f_file['name'], $t_file_size, $f_file['type'], $c_content, $f_file_id ) );
 } else {
-    $t_query = "UPDATE $t_project_file_table
-			SET title=" . db_param() . ", description=" . db_param() . "
-			WHERE id=" . db_param();
-    $t_result = db_query_bound( $t_query, array( $f_title, $f_description, $f_file_id ) );
+	$t_query = 'UPDATE ' . $t_project_file_table . '
+			SET title=' . db_param() . ', description=' . db_param() . '
+			WHERE id=' . db_param();
+	$t_result = db_query_bound( $t_query, array( $f_title, $f_description, $f_file_id ) );
 }
 
 if( !$t_result ) {

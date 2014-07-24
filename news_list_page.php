@@ -74,10 +74,9 @@ layout_page_begin( 'main_page.php' );
                     if( $t_count > 0 ) { ?>
                         <?php
                         # Loop through results
-                        for ( $i=0 ; $i < $t_count ; $i++ ) {
+                        for( $i=0; $i < $t_count; $i++ ) {
                             extract( $t_rows[$i], EXTR_PREFIX_ALL, 'v' );
-                            if( VS_PRIVATE == $v_view_state &&
-                                ! access_has_project_level( config_get( 'private_news_threshold' ), $v_project_id ) ) 		{
+                            if( VS_PRIVATE == $v_view_state && !access_has_project_level( config_get( 'private_news_threshold' ), $v_project_id ) ) {
                                 continue;
                             }
 

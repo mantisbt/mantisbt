@@ -79,12 +79,12 @@ require_api( 'version_api.php' );
 require_css( 'status_config.php' );
 
 if( !config_get( 'enable_sponsorship' ) ) {
-    trigger_error( ERROR_SPONSORSHIP_NOT_ENABLED, ERROR );
+	trigger_error( ERROR_SPONSORSHIP_NOT_ENABLED, ERROR );
 }
 
 # anonymous users are not allowed to sponsor issues
 if( current_user_is_anonymous() ) {
-    access_denied();
+	access_denied();
 }
 
 $t_show_all = gpc_get_bool( 'show_all', false );
@@ -117,68 +117,67 @@ $t_payment = config_get( 'payment_enable', 0 );
 
 $t_project_clause = helper_project_specific_where( $t_project );
 
-$t_query = "SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_in_version, b.status
-	FROM $t_bug_table b, $t_sponsor_table s
-	WHERE s.user_id=" . db_param() . " AND s.bug_id = b.id " .
-    ( $t_show_all ? '' : 'AND ( b.status < ' . db_param() . ' OR s.paid < ' . SPONSORSHIP_PAID . ')' ) . "
-	AND $t_project_clause
-	ORDER BY s.paid ASC, b.project_id ASC, b.fixed_in_version ASC, b.status ASC, b.id DESC";
+$t_query = 'SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_in_version, b.status
+	FROM ' . $t_bug_table . ' b, ' . $t_sponsor_table . ' s
+	WHERE s.user_id=' . db_param() . ' AND s.bug_id = b.id ' .
+	( $t_show_all ? '' : 'AND ( b.status < ' . db_param() . ' OR s.paid < ' . SPONSORSHIP_PAID . ')' ) . '
+	AND ' . $t_project_clause . '
+	ORDER BY s.paid ASC, b.project_id ASC, b.fixed_in_version ASC, b.status ASC, b.id DESC';
 
 $t_result = db_query_bound( $t_query, $t_show_all ? array( $t_user ) : array( $t_user , $t_resolved ) );
 
 $t_sponsors = array();
 while( $t_row = db_fetch_array( $t_result ) ) {
-    $t_sponsors[] = $t_row;
+	$t_sponsors[] = $t_row;
 }
 
 $t_sponsor_count = count( $t_sponsors );
 if( $t_sponsor_count === 0 ) {
-    echo '<p>' . lang_get( 'no_own_sponsored' ) . '</p>';
+	echo '<p>' . lang_get( 'no_own_sponsored' ) . '</p>';
 } else {
-    ?>
+?>
 
-    <!-- # Edit own sponsorship Form BEGIN -->
-    <br />
-    <div>
-        <table class="width100" cellspacing="1">
-
-            <!-- Headings -->
-            <tr>
-                <td class="bold" colspan="9">
-                    <?php echo lang_get( 'own_sponsored' ) ?>
-                </td>
-            </tr>
-            <tr>
-                <td class="bold" width="10%"><?php echo lang_get( 'email_bug' ) ?></td>
-                <td class="bold" width="8%"><?php echo lang_get( 'email_project' ) ?></td>
-                <td class="bold" width="7%"><?php echo lang_get( 'fixed_in_version' ) ?></td>
-                <td class="bold" width="10%"><?php echo lang_get( 'email_status' ) ?></td>
-                <td class="bold" width="10%"><?php echo lang_get( 'email_handler' ) ?></td>
-                <td class="bold" width="30%"><?php echo lang_get( 'email_summary' ) ?></td>
-                <td class="bold" width="8%"><?php echo lang_get( 'amount' ) ?></td>
-                <td class="bold" width="7%"><?php echo lang_get( 'status' ) ?></td>
-                <td class="bold" width="10%">&#160;</td>
-            </tr>
-            <?php
-            $t_total_owing = 0;
-            $t_total_paid = 0;
-            for( $i = 0; $i < $t_sponsor_count; ++$i ) {
-                $t_sponsor_row = $t_sponsors[$i];
-                $t_bug = bug_get( $t_sponsor_row['bug'] );
-                $t_sponsor = sponsorship_get( $t_sponsor_row['sponsor'] );
-
-                # describe bug
-                $t_status = string_attribute( get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id ) );
-                $t_resolution = string_attribute( get_enum_element( 'resolution', $t_bug->resolution, auth_get_current_user_id(), $t_bug->project_id ) );
-                $t_version_id = version_get_id( $t_bug->fixed_in_version, $t_project );
-                if( ( false !== $t_version_id ) && ( VERSION_RELEASED == version_get_field( $t_version_id, 'released' ) ) ) {
-                    $t_released_label = '<a title="' . lang_get( 'released' ) . '">' . $t_bug->fixed_in_version . '</a>';
-                } else {
-                    $t_released_label = $t_bug->fixed_in_version;
-                }
-
-                # choose color based on status
-                $t_status_label = html_get_status_css_class( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
+	<!-- # Edit own sponsorship Form BEGIN -->
+	<br />
+	<div>
+		<table class="width100" cellspacing="1">
+			<!-- Headings -->
+			<tr>
+				<td class="bold" colspan="9">
+					<?php echo lang_get( 'own_sponsored' ) ?>
+				</td>
+			</tr>
+			<tr>
+				<td class="bold" width="10%"><?php echo lang_get( 'email_bug' ) ?></td>
+				<td class="bold" width="8%"><?php echo lang_get( 'email_project' ) ?></td>
+				<td class="bold" width="7%"><?php echo lang_get( 'fixed_in_version' ) ?></td>
+				<td class="bold" width="10%"><?php echo lang_get( 'email_status' ) ?></td>
+				<td class="bold" width="10%"><?php echo lang_get( 'email_handler' ) ?></td>
+				<td class="bold" width="30%"><?php echo lang_get( 'email_summary' ) ?></td>
+				<td class="bold" width="8%"><?php echo lang_get( 'amount' ) ?></td>
+				<td class="bold" width="7%"><?php echo lang_get( 'status' ) ?></td>
+				<td class="bold" width="10%">&#160;</td>
+			</tr>
+		<?php
+			$t_total_owing = 0;
+			$t_total_paid = 0;
+			for( $i = 0; $i < $t_sponsor_count; ++$i ) {
+				$t_sponsor_row = $t_sponsors[$i];
+				$t_bug = bug_get( $t_sponsor_row['bug'] );
+				$t_sponsor = sponsorship_get( $t_sponsor_row['sponsor'] );
+		
+				# describe bug
+				$t_status = string_attribute( get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id ) );
+				$t_resolution = string_attribute( get_enum_element( 'resolution', $t_bug->resolution, auth_get_current_user_id(), $t_bug->project_id ) );
+				$t_version_id = version_get_id( $t_bug->fixed_in_version, $t_project );
+				if( ( false !== $t_version_id ) && ( VERSION_RELEASED == version_get_field( $t_version_id, 'released' ) ) ) {
+					$t_released_label = '<a title="' . lang_get( 'released' ) . '">' . $t_bug->fixed_in_version . '</a>';
+				} else {
+					$t_released_label = $t_bug->fixed_in_version;
+				}
+	
+				# choose color based on status
+				$t_status_label = html_get_status_css_class( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
 
                 echo '<tr class="' . $t_status_label .  '">';
                 echo '<td><a href="' . string_get_bug_view_url( $t_sponsor_row['bug'] ) . '">' . bug_format_id( $t_sponsor_row['bug'] ) . '</a></td>';
@@ -197,7 +196,7 @@ if( $t_sponsor_count === 0 ) {
                 echo '</td>';
 
                 # describe sponsorship amount
-                echo '<td class="right">' . sponsorship_format_amount( $t_sponsor->amount ) . '</td>';
+                echo '<td class="pull-right">' . sponsorship_format_amount( $t_sponsor->amount ) . '</td>';
                 echo '<td>' . get_enum_element( 'sponsorship', $t_sponsor->paid ) . '</td>';
 
                 if( SPONSORSHIP_PAID == $t_sponsor->paid ) {
@@ -233,12 +232,12 @@ if( $t_sponsor_count === 0 ) {
     </div>
 <?php } # end sponsored issues
 
-$t_query = "SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_in_version, b.status
-	FROM $t_bug_table b, $t_sponsor_table s
-	WHERE b.handler_id=" . db_param() . " AND s.bug_id = b.id " .
-    ( $t_show_all ? '' : 'AND ( b.status < ' . db_param() . ' OR s.paid < ' . SPONSORSHIP_PAID . ')' ) . "
-	AND $t_project_clause
-	ORDER BY s.paid ASC, b.project_id ASC, b.fixed_in_version ASC, b.status ASC, b.id DESC";
+$t_query = 'SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_in_version, b.status
+	FROM ' . $t_bug_table . ' b, ' . $t_sponsor_table . ' s
+	WHERE b.handler_id=' . db_param() . ' AND s.bug_id = b.id ' .
+	( $t_show_all ? '' : 'AND ( b.status < ' . db_param() . ' OR s.paid < ' . SPONSORSHIP_PAID . ')' ) . '
+	AND ' . $t_project_clause . '
+	ORDER BY s.paid ASC, b.project_id ASC, b.fixed_in_version ASC, b.status ASC, b.id DESC';
 
 $t_result = db_query_bound( $t_query, $t_show_all ? array( $t_user ) : array( $t_user , $t_resolved ) );
 

@@ -73,9 +73,9 @@ $t_bug_id = bugnote_get_field( $f_bugnote_id, 'bug_id' );
 
 $t_bug = bug_get( $t_bug_id, true );
 if( $t_bug->project_id != helper_get_current_project() ) {
-    # in case the current project is not the same project of the bug we are viewing...
-    # ... override the current project. This to avoid problems with categories and handlers lists etc.
-    $g_project_override = $t_bug->project_id;
+	# in case the current project is not the same project of the bug we are viewing...
+	# ... override the current project. This to avoid problems with categories and handlers lists etc.
+	$g_project_override = $t_bug->project_id;
 }
 
 # Check if the current user is allowed to edit the bugnote
@@ -83,24 +83,24 @@ $t_user_id = auth_get_current_user_id();
 $t_reporter_id = bugnote_get_field( $f_bugnote_id, 'reporter_id' );
 
 if( $t_user_id == $t_reporter_id ) {
-    access_ensure_bugnote_level( config_get( 'bugnote_user_edit_threshold' ), $f_bugnote_id );
+	access_ensure_bugnote_level( config_get( 'bugnote_user_edit_threshold' ), $f_bugnote_id );
 } else {
-    access_ensure_bugnote_level( config_get( 'update_bugnote_threshold' ), $f_bugnote_id );
+	access_ensure_bugnote_level( config_get( 'update_bugnote_threshold' ), $f_bugnote_id );
 }
 
 # Check if the bug is readonly
 if( bug_is_readonly( $t_bug_id ) ) {
-    error_parameters( $t_bug_id );
-    trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+	error_parameters( $t_bug_id );
+	trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 }
 
 $t_bugnote_text = string_textarea( bugnote_get_text( $f_bugnote_id ) );
 
 # No need to gather the extra information if not used
 if( config_get( 'time_tracking_enabled' ) &&
-    access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $t_bug_id ) ) {
-    $t_time_tracking = bugnote_get_field( $f_bugnote_id, "time_tracking" );
-    $t_time_tracking = db_minutes_to_hhmm( $t_time_tracking );
+	access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $t_bug_id ) ) {
+	$t_time_tracking = bugnote_get_field( $f_bugnote_id, 'time_tracking' );
+	$t_time_tracking = db_minutes_to_hhmm( $t_time_tracking );
 }
 
 # Determine which view page to redirect back to.

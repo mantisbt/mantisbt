@@ -53,7 +53,7 @@ if( plugin_config_get( 'summary_graphs_per_row' ) != $f_summary_graphs_per_row )
 }
 
 if( plugin_config_get( 'font' ) != $f_font ) {
-	switch ( $f_font ) {
+	switch( $f_font ) {
 		case 'arial':
 		case 'verdana':
 		case 'trebuchet':

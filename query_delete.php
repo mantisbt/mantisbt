@@ -55,9 +55,7 @@ $t_redirect_url = 'query_view_page.php';
 
 if( !filter_db_can_delete_filter( $f_query_id ) ) {
     print_header_redirect( $t_redirect_url );
-}
-else
-{
+} else {
     layout_page_header();
     layout_page_begin();
     filter_db_delete_filter( $f_query_id );

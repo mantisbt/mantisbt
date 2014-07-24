@@ -84,13 +84,13 @@ function array_merge_recursive2( $p_array1, $p_array2 ) {
  * @return string
  */
 function get_notify_flag( $p_action, $p_flag ) {
-	global $t_notify_flags, $t_default_notify_flags;
+	global $g_notify_flags, $g_default_notify_flags;
 
 	$t_val = OFF;
-	if( isset( $t_notify_flags[$p_action][$p_flag] ) ) {
-		$t_val = $t_notify_flags[$p_action][$p_flag];
-	} else if( isset( $t_default_notify_flags[$p_flag] ) ) {
-		$t_val = $t_default_notify_flags[$p_flag];
+	if( isset( $g_notify_flags[$p_action][$p_flag] ) ) {
+		$t_val = $g_notify_flags[$p_action][$p_flag];
+	} else if( isset( $g_default_notify_flags[$p_flag] ) ) {
+		$t_val = $g_default_notify_flags[$p_flag];
 	}
 	return $t_val;
 }
@@ -103,21 +103,21 @@ function get_notify_flag( $p_action, $p_flag ) {
  * @return string
  */
 function colour_notify_flag ( $p_action, $p_flag ) {
-	global $t_notify_flags, $t_global_notify_flags, $t_file_notify_flags, $t_colour_project, $t_colour_global;
+	global $g_notify_flags, $g_global_notify_flags, $g_file_notify_flags, $g_colour_project, $g_colour_global;
 
-	$t_file = isset( $t_file_notify_flags[$p_action][$p_flag] ) ? ( $t_file_notify_flags[$p_action][$p_flag] ? 1 : 0 ): -1;
-	$t_global = isset( $t_global_notify_flags[$p_action][$p_flag] ) ? ( $t_global_notify_flags[$p_action][$p_flag]  ? 1 : 0 ): -1;
-	$t_project = isset( $t_notify_flags[$p_action][$p_flag] ) ? ( $t_notify_flags[$p_action][$p_flag]  ? 1 : 0 ): -1;
+	$t_file = isset( $g_file_notify_flags[$p_action][$p_flag] ) ? ( $g_file_notify_flags[$p_action][$p_flag] ? 1 : 0 ): -1;
+	$t_global = isset( $g_global_notify_flags[$p_action][$p_flag] ) ? ( $g_global_notify_flags[$p_action][$p_flag]  ? 1 : 0 ): -1;
+	$t_project = isset( $g_notify_flags[$p_action][$p_flag] ) ? ( $g_notify_flags[$p_action][$p_flag]  ? 1 : 0 ): -1;
 
 	$t_colour = '';
 	if( $t_global >= 0 ) {
 		if( $t_global != $t_file ) {
-			$t_colour = ' bgcolor="' . $t_colour_global . '" '; # all projects override
+			$t_colour = ' bgcolor="' . $g_colour_global . '" '; # all projects override
 		}
 	}
 	if( $t_project >= 0 ) {
 		if( $t_project != $t_global ) {
-			$t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
+			$t_colour = ' bgcolor="' . $g_colour_project . '" '; # project overrides
 		}
 	}
 	return $t_colour;
@@ -131,9 +131,9 @@ function colour_notify_flag ( $p_action, $p_flag ) {
  * @return string
  */
 function show_notify_flag( $p_action, $p_flag ) {
-	global $t_can_change_flags , $t_can_change_defaults;
+	global $g_can_change_flags , $g_can_change_defaults;
 	$t_flag = (bool)get_notify_flag( $p_action, $p_flag );
-	if( $t_can_change_flags || $t_can_change_defaults ) {
+	if( $g_can_change_flags || $g_can_change_defaults ) {
 		$t_flag_name = $p_action . ':' . $p_flag;
 		$t_set = $t_flag ? 'checked="checked"' : '';
 		return '<label><input type="checkbox" class="ace" name="flag[]" value="' . $t_flag_name. '" ' . $t_set . ' /><span class="lbl"></span></label>';
@@ -150,21 +150,21 @@ function show_notify_flag( $p_action, $p_flag ) {
  * @return string
  */
 function colour_threshold_flag ( $p_access, $p_action ) {
-	global $t_notify_flags, $t_global_notify_flags, $t_file_notify_flags, $t_colour_project, $t_colour_global;
+	global $g_notify_flags, $g_global_notify_flags, $g_file_notify_flags, $g_colour_project, $g_colour_global;
 
-	$t_file = ( $p_access >= $t_file_notify_flags[$p_action]['threshold_min'] )
-					 && ( $p_access <= $t_file_notify_flags[$p_action]['threshold_max'] );
-	$t_global = ( $p_access >= $t_global_notify_flags[$p_action]['threshold_min'] )
-					 && ( $p_access <= $t_global_notify_flags[$p_action]['threshold_max'] );
-	$t_project = ( $p_access >= $t_notify_flags[$p_action]['threshold_min'] )
-					 && ( $p_access <= $t_notify_flags[$p_action]['threshold_max'] );
+	$t_file = ( $p_access >= $g_file_notify_flags[$p_action]['threshold_min'] )
+					 && ( $p_access <= $g_file_notify_flags[$p_action]['threshold_max'] );
+	$t_global = ( $p_access >= $g_global_notify_flags[$p_action]['threshold_min'] )
+					 && ( $p_access <= $g_global_notify_flags[$p_action]['threshold_max'] );
+	$t_project = ( $p_access >= $g_notify_flags[$p_action]['threshold_min'] )
+					 && ( $p_access <= $g_notify_flags[$p_action]['threshold_max'] );
 
 	$t_colour = '';
 	if( $t_global != $t_file ) {
-		$t_colour = ' bgcolor="' . $t_colour_global . '" '; # all projects override
+		$t_colour = ' bgcolor="' . $g_colour_global . '" '; # all projects override
 	}
 	if( $t_project != $t_global ) {
-		$t_colour = ' bgcolor="' . $t_colour_project . '" '; # project overrides
+		$t_colour = ' bgcolor="' . $g_colour_project . '" '; # project overrides
 	}
 	return $t_colour;
 }
@@ -177,13 +177,13 @@ function colour_threshold_flag ( $p_access, $p_action ) {
  * @return string
  */
 function show_notify_threshold( $p_access, $p_action ) {
-	global $t_can_change_flags , $t_can_change_defaults;
+	global $g_can_change_flags , $g_can_change_defaults;
 	$t_flag = ( $p_access >= get_notify_flag( $p_action, 'threshold_min' ) )
 		&& ( $p_access <= get_notify_flag( $p_action, 'threshold_max' ) );
-	if( $t_can_change_flags  || $t_can_change_defaults ) {
+	if( $g_can_change_flags  || $g_can_change_defaults ) {
 		$t_flag_name = $p_action . ':' . $p_access;
-		$t_set = $t_flag ? "checked=\"checked\"" : "";
-		return "<label><input type=\"checkbox\" class=\"ace\" name=\"flag_threshold[]\" value=\"$t_flag_name\" $t_set />" . '<span class="lbl"></span></label>';
+		$t_set = $t_flag ? 'checked="checked"' : '';
+		return '<label><input type="checkbox" name="flag_threshold[]" value="' . $t_flag_name . '" ' . $t_set . ' />' . '<span class="lbl"></span></label>';
 	} else {
 		return $t_flag ? '<i class="fa fa-check fa-lg blue"></i>' : '&#160;';
 	}
@@ -275,8 +275,8 @@ print_manage_config_menu( 'manage_config_email_page.php' );
 $t_access = current_user_get_access_level();
 $t_project = helper_get_current_project();
 
-$t_colour_project = config_get( 'colour_project' );
-$t_colour_global = config_get( 'colour_global' );
+$g_colour_project = config_get( 'colour_project' );
+$g_colour_global = config_get( 'colour_global' );
 
 # build a list of all of the actions
 $t_actions = array( 'owner', 'reopened', 'deleted', 'bugnote' );
@@ -293,34 +293,34 @@ foreach( $t_statuses as $t_status ) {
 
 # build a composite of the status flags, exploding the defaults
 $t_global_default_notify_flags = config_get( 'default_notify_flags', null, null, ALL_PROJECTS );
-$t_global_notify_flags = array();
+$g_global_notify_flags = array();
 foreach ( $t_global_default_notify_flags as $t_flag => $t_value ) {
 	foreach ( $t_actions as $t_action ) {
-		$t_global_notify_flags[$t_action][$t_flag] = $t_value;
+		$g_global_notify_flags[$t_action][$t_flag] = $t_value;
 	}
 }
-$t_global_notify_flags = array_merge_recursive2( $t_global_notify_flags, config_get( 'notify_flags', null, null, ALL_PROJECTS ) );
+$g_global_notify_flags = array_merge_recursive2( $g_global_notify_flags, config_get( 'notify_flags', null, null, ALL_PROJECTS ) );
 
 $t_file_default_notify_flags = config_get_global( 'default_notify_flags' );
-$t_file_notify_flags = array();
+$g_file_notify_flags = array();
 foreach ( $t_file_default_notify_flags as $t_flag => $t_value ) {
 	foreach ( $t_actions as $t_action ) {
-		$t_file_notify_flags[$t_action][$t_flag] = $t_value;
+		$g_file_notify_flags[$t_action][$t_flag] = $t_value;
 	}
 }
-$t_file_notify_flags = array_merge_recursive2( $t_file_notify_flags, config_get_global( 'notify_flags' ) );
+$g_file_notify_flags = array_merge_recursive2( $g_file_notify_flags, config_get_global( 'notify_flags' ) );
 
-$t_default_notify_flags = config_get( 'default_notify_flags' );
-$t_notify_flags = array();
-foreach ( $t_default_notify_flags as $t_flag => $t_value ) {
+$g_default_notify_flags = config_get( 'default_notify_flags' );
+$g_notify_flags = array();
+foreach ( $g_default_notify_flags as $t_flag => $t_value ) {
 	foreach ( $t_actions as $t_action ) {
-		$t_notify_flags[$t_action][$t_flag] = $t_value;
+		$g_notify_flags[$t_action][$t_flag] = $t_value;
 	}
 }
-$t_notify_flags = array_merge_recursive2( $t_notify_flags, config_get( 'notify_flags' ) );
+$g_notify_flags = array_merge_recursive2( $g_notify_flags, config_get( 'notify_flags' ) );
 
-$t_can_change_flags = $t_access >= config_get_access( 'notify_flags' );
-$t_can_change_defaults = $t_access >= config_get_access( 'default_notify_flags' );
+$g_can_change_flags = $t_access >= config_get_access( 'notify_flags' );
+$g_can_change_defaults = $t_access >= config_get_access( 'default_notify_flags' );
 
 echo '<div class="col-md-12 col-xs-12">' . "\n";
 echo '<div class="space-10"></div>';
@@ -328,7 +328,7 @@ echo '<div class="space-10"></div>';
 # Email notifications
 if( config_get( 'enable_email_notification' ) == ON ) {
 
-	if( $t_can_change_flags  || $t_can_change_defaults ) {
+	if( $g_can_change_flags  || $g_can_change_defaults ) {
 		echo "<form name=\"mail_config_action\" method=\"post\" action=\"manage_config_email_set.php\">\n";
 		echo form_security_field( 'manage_config_email_set' );
 	}
@@ -343,7 +343,7 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 	echo '<p class="bold"><i class="fa fa-info-circle"></i> ' . $t_project_title . '</p>' . "\n";
 	echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 	if( ALL_PROJECTS <> $t_project ) {
-		echo '<span style="background-color:' . $t_colour_project . '">' . lang_get( 'colour_project' ) . '</span><br />';
+		echo '<span style="background-color:' . $g_colour_project . '">' . lang_get( 'colour_project' ) . '</span><br />';
 	}
 	echo '<span style="background-color:' . $t_colour_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
     echo '</div>' . "\n";
@@ -367,7 +367,7 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 
 	get_section_end_for_email();
 
-	if( $t_can_change_flags  || $t_can_change_defaults ) {
+	if( $g_can_change_flags  || $g_can_change_defaults ) {
 		echo '<p>' . lang_get( 'notify_actions_change_access' ) . "\n";
 		echo '<select name="notify_actions_access" class="input-sm">' . "\n";
 		print_enum_string_option_list( 'access_levels', config_get_access( 'notify_flags' ) );

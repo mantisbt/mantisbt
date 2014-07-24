@@ -17,7 +17,7 @@
 /**
  * HTML API
  *
- * These functions are used by layout api to construct the HTML element used in every page.
+ * These functions control the HTML output of each page.
  *
  *
  * @package CoreAPI
@@ -94,10 +94,10 @@ $g_scripts_included = array();
  * @return void
  */
 function html_set_rss_link( $p_rss_feed_url ) {
-    if( OFF != config_get( 'rss_enabled' ) ) {
-        global $g_rss_feed_url;
-        $g_rss_feed_url = $p_rss_feed_url;
-    }
+	if( OFF != config_get( 'rss_enabled' ) ) {
+		global $g_rss_feed_url;
+		$g_rss_feed_url = $p_rss_feed_url;
+	}
 }
 
 /**
@@ -106,8 +106,8 @@ function html_set_rss_link( $p_rss_feed_url ) {
  * @return void
  */
 function html_robots_noindex() {
-    global $g_robots_meta;
-    $g_robots_meta = 'noindex,follow';
+	global $g_robots_meta;
+	$g_robots_meta = 'noindex,follow';
 }
 
 /**
@@ -115,11 +115,11 @@ function html_robots_noindex() {
  * @return void
  */
 function html_rss_link() {
-    global $g_rss_feed_url;
+	global $g_rss_feed_url;
 
-    if( $g_rss_feed_url !== null ) {
-        echo '<link rel="alternate" type="application/rss+xml" title="RSS" href="' . string_attribute( $g_rss_feed_url ) . "\" />\n";
-    }
+	if( $g_rss_feed_url !== null ) {
+		echo '<link rel="alternate" type="application/rss+xml" title="RSS" href="' . string_attribute( $g_rss_feed_url ) . "\" />\n";
+	}
 }
 
 /**
@@ -245,6 +245,7 @@ function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
     $t_url = htmlspecialchars( $t_url );
 
     echo "\t<meta http-equiv=\"Refresh\" content=\"$p_time;URL=$t_url\" />\n";
+	echo "\t" . '<meta http-equiv="Refresh" content="' . $p_time . ';URL=' . $t_url . '" />' . "\n";
 
     return true;
 }
@@ -266,8 +267,8 @@ function require_js( $p_script_path ) {
 function html_head_javascript() {
     if( config_get( 'use_javascript' ) ) {
         global $g_scripts_included;
-        echo "\t<script type=\"text/javascript\" src=\"" . helper_mantis_url( 'javascript_config.php' ) . '"></script>' . "\n";
-        echo "\t<script type=\"text/javascript\" src=\"" . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
+        echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_config.php' ) . '"></script>' . "\n";
+        echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
         html_javascript_link( 'jquery.min.js' );
         html_javascript_link( 'jquery-ui.min.js' );
         layout_head_javascript();
@@ -391,7 +392,7 @@ function prepare_custom_menu_options( $p_config ) {
         if( access_has_project_level( $t_access_level ) ) {
             $t_caption = string_html_specialchars( lang_get_defaulted( $t_custom_option[0] ) );
             $t_link = string_attribute( $t_custom_option[2] );
-            $t_options[] = "<a href=\"$t_link\">$t_caption</a>";
+            $t_options[] = '<a href="' . $t_link . '">' . $t_caption . '</a>';
         }
     }
 
@@ -833,7 +834,7 @@ function html_button( $p_action, $p_button_text, array $p_fields = array(), $p_m
         $t_method = 'post';
     }
 
-    echo "<form method=\"$t_method\" action=\"$p_action\" class=\"form-inline\">\n";
+    echo '<form method="' . $t_method . '" action="' . $p_action . '" class="form-inline">' . "\n";
     echo "\t<fieldset>";
     # Add a CSRF token only when the form is being sent via the POST method
     if( $t_method == 'post' ) {
@@ -844,10 +845,10 @@ function html_button( $p_action, $p_button_text, array $p_fields = array(), $p_m
         $t_key = string_attribute( $t_key );
         $t_val = string_attribute( $t_val );
 
-        echo "\t\t<input type=\"hidden\" name=\"$t_key\" value=\"$t_val\" />\n";
+        echo "\t\t" . '<input type="hidden" name="' . $t_key . '" value="' . $t_val . '" />' . "\n";
     }
 
-    echo "\t\t<input type=\"submit\" class=\"btn btn-primary btn-sm btn-white btn-round\" value=\"$p_button_text\" />\n";
+    echo "\t\t" . '<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="' . $p_button_text . '" />' . "\n";
     echo "\t</fieldset>";
     echo "</form>\n";
 }
@@ -899,27 +900,27 @@ function html_button_bug_change_status( BugData $p_bug ) {
         ksort( $t_enum_list );
         reset( $t_enum_list );
 
-        echo "<form method=\"post\" action=\"bug_change_status_page.php\" class=\"form-inline\">";
-        # CSRF protection not required here - form does not result in modifications
+		echo '<form method="post" action="bug_change_status_page.php" class="form-inline">';
+		# CSRF protection not required here - form does not result in modifications
 
         $t_button_text = lang_get( 'bug_status_to_button' );
-        echo "<input type=\"submit\" class=\"btn btn-primary btn-sm btn-white btn-round\" value=\"$t_button_text\" />";
+        echo '<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="' . $t_button_text . '" />';
 
-        echo " <select class=\"input-sm\" name=\"new_status\">";
+		echo ' <select name="new_status">';
 
-        # space at beginning of line is important
-        foreach( $t_enum_list as $t_key => $t_val ) {
-            echo "<option value=\"$t_key\" ";
-            check_selected( $t_key, $t_default );
-            echo ">$t_val</option>";
-        }
-        echo '</select>';
+		# space at beginning of line is important
+		foreach( $t_enum_list as $t_key => $t_val ) {
+			echo '<option value="' . $t_key . '" ';
+			check_selected( $t_key, $t_default );
+			echo '>' . $t_val . '</option>';
+		}
+		echo '</select>';
 
-        $t_bug_id = string_attribute( $p_bug->id );
-        echo "<input type=\"hidden\" name=\"id\" value=\"$t_bug_id\" />\n";
+		$t_bug_id = string_attribute( $p_bug->id );
+		echo '<input type="hidden" name="id" value="' . $t_bug_id . '" />' . "\n";
 
-        echo "</form>\n";
-    }
+		echo '</form>' . "\n";
+	}
 }
 
 /**
@@ -969,13 +970,13 @@ function html_button_bug_assign_to( BugData $p_bug ) {
         }
     }
 
-    echo "<form method=\"post\" action=\"bug_update.php\" class=\"form-inline\">";
-    echo form_security_field( 'bug_update' );
+	echo '<form method="post" action="bug_update.php" class="form-inline">';
+	echo form_security_field( 'bug_update' );
 
-    $t_button_text = lang_get( 'bug_assign_to_button' );
-    echo "<input type=\"submit\" class=\"btn btn-primary btn-sm btn-white btn-round\" value=\"$t_button_text\" />";
+	$t_button_text = lang_get( 'bug_assign_to_button' );
+	echo '<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="' . $t_button_text . '" />';
 
-    echo " <select class=\"input-sm\" name=\"handler_id\">";
+	echo ' <select class="input-sm" name="handler_id">';
 
     # space at beginning of line is important
 
@@ -1001,19 +1002,19 @@ function html_button_bug_assign_to( BugData $p_bug ) {
         echo '>' . $t_caption . '</option>';
     }
 
-    # allow un-assigning if already assigned.
-    if( $p_bug->handler_id != 0 ) {
-        echo "<option value=\"0\"></option>";
-    }
+	# allow un-assigning if already assigned.
+	if( $p_bug->handler_id != 0 ) {
+		echo '<option value="0"></option>';
+	}
 
-    # 0 means currently selected
-    print_assign_to_option_list( 0, $p_bug->project_id );
-    echo "</select>";
+	# 0 means currently selected
+	print_assign_to_option_list( 0, $p_bug->project_id );
+	echo '</select>';
 
-    $t_bug_id = string_attribute( $p_bug->id );
-    echo "<input type=\"hidden\" name=\"bug_id\" value=\"$t_bug_id\" />\n";
+	$t_bug_id = string_attribute( $p_bug->id );
+	echo '<input type="hidden" name="bug_id" value="' . $t_bug_id . '" />' . "\n";
 
-    echo "</form>\n";
+	echo '</form>' . "\n";
 }
 
 /**

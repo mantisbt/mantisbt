@@ -59,20 +59,20 @@ print_manage_menu( 'manage_plugin_page.php' );
 
 $t_plugins = plugin_find_all();
 uasort( $t_plugins,
-    function ( $p1, $p2 ) {
-        return strcasecmp( $p1->name, $p2->name );
-    }
+	function ( $p_p1, $p_p2 ) {
+		return strcasecmp( $p_p1->name, $p_p2->name );
+	}
 );
 
 $t_plugins_installed = array();
 $t_plugins_available = array();
 
 foreach( $t_plugins as $t_basename => $t_plugin ) {
-    if( plugin_is_registered( $t_basename ) ) {
-        $t_plugins_installed[$t_basename] = $t_plugin;
-    } else {
-        $t_plugins_available[$t_basename] = $t_plugin;
-    }
+	if( plugin_is_registered( $t_basename ) ) {
+		$t_plugins_installed[$t_basename] = $t_plugin;
+	} else {
+		$t_plugins_available[$t_basename] = $t_plugin;
+	}
 }
 
 if( 0 < count( $t_plugins_installed ) ) {
@@ -276,7 +276,7 @@ if( 0 < count( $t_plugins_available ) ) {
                             }
 
                             if( !is_blank( $t_url ) ) {
-                                $t_url = '<br/>' . lang_get( 'plugin_url' ) . lang_get( 'word_separator' ) . "<a href=\"$t_url\">$t_url</a>";
+                                $t_url = '<br/>' . lang_get( 'plugin_url' ) . lang_get( 'word_separator' ) . '<a href="' . $t_url . '">' . $t_url . '</a>';
                             }
 
                             $t_ready = true;

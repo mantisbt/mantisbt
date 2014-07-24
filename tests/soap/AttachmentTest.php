@@ -88,7 +88,7 @@ class AttachmentTest extends SoapBase {
 				$this->userName,
 				$this->password,
 				-1 );
-			$this->fail( "Should have failed." );
+			$this->fail( 'Should have failed.' );
 		} catch ( SoapFault $e ) {
 			$this->assertRegexp( '/Unable to find an attachment/', $e->getMessage() );
 		}
@@ -129,7 +129,7 @@ class AttachmentTest extends SoapBase {
 		$this->assertEquals( $t_attachment_contents, base64_decode( $t_attachment ), '$t_attachment_contents' );
 
 		$t_attachments = $this->client->mc_project_get_attachments( $this->userName, $this->password, $this->getProjectId() );
-		$this->assertEquals( $t_attachments_count + 1, count( $t_attachments ), "Check if we have 1 additional attachment" );
+		$this->assertEquals( $t_attachments_count + 1, count( $t_attachments ), 'Check if we have 1 additional attachment' );
 
 		# The attachment we just uploaded should be the last one
 		$t_attachment = end( $t_attachments );
@@ -151,7 +151,7 @@ class AttachmentTest extends SoapBase {
 				$this->userName,
 				$this->password,
 				-1 );
-			$this->fail( "Should have failed." );
+			$this->fail( 'Should have failed.' );
 		} catch( SoapFault $e ) {
 			$this->assertRegexp( '/Unable to find an attachment/', $e->getMessage() );
 		}

@@ -189,7 +189,7 @@ class UserPreferences {
 	/**
 	 * Default Values - Config Field Mappings
 	 */
-	private static $default_mapping = array(
+	private static $_default_mapping = array(
 	'default_profile' => array( 'default_profile', 'int' ),
 	'default_project' => array( 'default_project', 'int' ),
 	'refresh_delay' => array( 'default_refresh_delay', 'int' ),
@@ -239,7 +239,7 @@ class UserPreferences {
 	 * @access private
 	 */
 	public function __set( $p_name, $p_value ) {
-		switch ( $p_name ) {
+		switch( $p_name ) {
 			case 'timezone':
 				if( $p_value == '' ) {
 					$p_value = null;
@@ -256,9 +256,9 @@ class UserPreferences {
 	 */
 	public function __get( $p_string ) {
 		if( is_null( $this->$p_string ) ) {
-			$this->$p_string = config_get( self::$default_mapping[$p_string][0], null, $this->pref_user_id, $this->pref_project_id );
+			$this->$p_string = config_get( self::$_default_mapping[$p_string][0], null, $this->pref_user_id, $this->pref_project_id );
 		}
-		switch ( self::$default_mapping[$p_string][1] ) {
+		switch( self::$_default_mapping[$p_string][1] ) {
 			case 'int':
 				return (int)($this->$p_string);
 			default:
@@ -273,7 +273,7 @@ class UserPreferences {
 	 */
 	function Get( $p_string ) {
 		if( is_null( $this->$p_string ) ) {
-			$this->$p_string = config_get( self::$default_mapping[$p_string][0], null, $this->pref_user_id, $this->pref_project_id );
+			$this->$p_string = config_get( self::$_default_mapping[$p_string][0], null, $this->pref_user_id, $this->pref_project_id );
 		}
 		return $this->$p_string;
 	}
@@ -305,8 +305,7 @@ function user_pref_cache_row( $p_user_id, $p_project_id = ALL_PROJECTS, $p_trigg
 	}
 
 	$t_user_pref_table = db_get_table( 'user_pref' );
-	$t_query = "SELECT * FROM $t_user_pref_table
-				  WHERE user_id=" . db_param() . " AND project_id=" . db_param();
+	$t_query = 'SELECT * FROM ' . $t_user_pref_table . ' WHERE user_id=' . db_param() . ' AND project_id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( (int)$p_user_id, (int)$p_project_id ) );
 
 	$t_row = db_fetch_array( $t_result );
@@ -353,8 +352,7 @@ function user_pref_cache_array_rows( array $p_user_id_array, $p_project_id = ALL
 
 	$t_user_pref_table = db_get_table( 'user_pref' );
 
-	$t_query = "SELECT * FROM $t_user_pref_table
-				  WHERE user_id IN (" . implode( ',', $c_user_id_array ) . ') AND project_id=' . db_param();
+	$t_query = 'SELECT * FROM ' . $t_user_pref_table . ' WHERE user_id IN (' . implode( ',', $c_user_id_array ) . ') AND project_id=' . db_param();
 
 	$t_result = db_query_bound( $t_query, array( (int)$p_project_id ) );
 
@@ -470,7 +468,7 @@ function user_pref_update( $p_user_id, $p_project_id, UserPreferences $p_prefs )
 	$t_values = array();
 
 	foreach( $s_vars as $t_var => $t_val ) {
-		array_push( $t_pairs, "$t_var = " . db_param() ) ;
+		array_push( $t_pairs, $t_var . ' = ' . db_param() ) ;
 		array_push( $t_values, $p_prefs->$t_var );
 	}
 
@@ -479,8 +477,8 @@ function user_pref_update( $p_user_id, $p_project_id, UserPreferences $p_prefs )
 	$t_values[] = $p_project_id;
 
 	$t_user_pref_table = db_get_table( 'user_pref' );
-	$t_query = "UPDATE $t_user_pref_table SET $t_pairs_string
-				  WHERE user_id=" . db_param() . " AND project_id=" . db_param();
+	$t_query = 'UPDATE ' . $t_user_pref_table . ' SET ' . $t_pairs_string . '
+				  WHERE user_id=' . db_param() . ' AND project_id=' . db_param();
 	db_query_bound( $t_query, $t_values );
 
 	user_pref_clear_cache( $p_user_id, $p_project_id );
@@ -497,9 +495,9 @@ function user_pref_delete( $p_user_id, $p_project_id = ALL_PROJECTS ) {
 	user_ensure_unprotected( $p_user_id );
 
 	$t_user_pref_table = db_get_table( 'user_pref' );
-	$t_query = "DELETE FROM $t_user_pref_table
-				  WHERE user_id=" . db_param() . " AND
-				  		project_id=" . db_param();
+	$t_query = 'DELETE FROM ' . $t_user_pref_table . '
+				  WHERE user_id=' . db_param() . ' AND
+				  		project_id=' . db_param();
 	db_query_bound( $t_query, array( $p_user_id, $p_project_id ) );
 
 	user_pref_clear_cache( $p_user_id, $p_project_id );

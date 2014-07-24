@@ -45,7 +45,7 @@ function mci_file_can_download_bug_attachments( $p_bug_id, $p_user_id ) {
  * @return string
  */
 function mci_file_read_local( $p_diskfile ) {
-	$t_handle = fopen( $p_diskfile, "r" );
+	$t_handle = fopen( $p_diskfile, 'r' );
 	$t_content = fread( $t_handle, filesize( $p_diskfile ) );
 	fclose( $t_handle );
 	return $t_content;
@@ -58,7 +58,7 @@ function mci_file_read_local( $p_diskfile ) {
  * @return void
  */
 function mci_file_write_local( $p_diskfile, $p_content ) {
-	$t_handle = fopen( $p_diskfile, "w" );
+	$t_handle = fopen( $p_diskfile, 'w' );
 	fwrite( $t_handle, $p_content );
 	fclose( $t_handle );
 }
@@ -121,7 +121,7 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	switch( $t_method ) {
 		case DISK:
 			if( !file_exists( $t_file_path ) || !is_dir( $t_file_path ) || !is_writable( $t_file_path ) || !is_readable( $t_file_path ) ) {
-				return SoapObjectsFactory::newSoapFault( 'Server', "Upload folder '{$t_file_path}' doesn't exist." );
+				return SoapObjectsFactory::newSoapFault( 'Server', 'Upload folder \'' . $t_file_path . '\' doesn\'t exist.' );
 			}
 
 			file_ensure_valid_upload_path( $t_file_path );
@@ -138,27 +138,20 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 	}
 
 	$t_file_table = db_get_table( $p_table . '_file' );
-	$t_id_col = $p_table . "_id";
+	$t_id_col = $p_table . '_id';
 
-	$t_query = "INSERT INTO $t_file_table
-				( $t_id_col, title, description, diskfile, filename, folder, filesize, file_type, date_added, content, user_id )
+	$t_query = 'INSERT INTO ' . $t_file_table . '
+				( ' . $t_id_col . ', title, description, diskfile, filename, folder, filesize, file_type, date_added, content, user_id )
 		VALUES
-				( " . db_param() . ", " . db_param() . ", " . db_param() . ", "
-				    . db_param() . ", " . db_param() . ", " . db_param() . ", "
-				    . db_param() . ", " . db_param() . ", " . db_param() . ", "
-				    . db_param() . ", " . db_param() . " )";
+				( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', '
+				    . db_param() . ', ' . db_param() . ', ' . db_param() . ', '
+				    . db_param() . ', ' . db_param() . ', ' . db_param() . ', '
+				    . db_param() . ', ' . db_param() . ' )';
 	db_query_bound( $t_query, array(
-		$t_id,
-		$p_title,
-		$p_desc,
-		$t_unique_name,
-		$p_name,
-		$t_file_path,
-		$t_file_size,
-		$p_file_type,
-		db_now(),
-		$c_content,
-		(int)$p_user_id,
+		$t_id, $p_title, $p_desc,
+		$t_unique_name, $p_name, $t_file_path,
+		$t_file_size, $p_file_type, db_now(),
+		$c_content, (int)$p_user_id,
 	) );
 
 	# get attachment id
@@ -190,14 +183,14 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 	switch( $p_type ) {
 		case 'bug':
 			$t_bug_file_table = db_get_table( 'bug_file' );
-			$t_query = "SELECT * FROM $t_bug_file_table WHERE id=" . db_param();
+			$t_query = 'SELECT * FROM ' . $t_bug_file_table . ' WHERE id=' . db_param();
 			break;
 		case 'doc':
 			$t_project_file_table = db_get_table( 'project_file' );
-			$t_query = "SELECT * FROM $t_project_file_table WHERE id=" . db_param();
+			$t_query = 'SELECT * FROM ' . $t_project_file_table . ' WHERE id=' . db_param();
 			break;
 		default:
-			return SoapObjectsFactory::newSoapFault( 'Server', 'Invalid file type '.$p_type. ' .' );
+			return SoapObjectsFactory::newSoapFault( 'Server', 'Invalid file type '. $p_type . ' .' );
 	}
 
 	$t_result = db_query_bound( $t_query, array( $p_file_id ) );

@@ -37,7 +37,7 @@
  */
 
 if( !defined( 'VIEW_ALL_INC_ALLOW' ) ) {
-    return;
+	return;
 }
 
 require_api( 'category_api.php' );
@@ -53,14 +53,14 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
-$t_filter = current_user_get_bug_filter();
+$g_filter = current_user_get_bug_filter();
 # NOTE: this check might be better placed in current_user_get_bug_filter()
-if( $t_filter === false ) {
-    $t_filter = filter_get_default();
+if( $g_filter === false ) {
+	$g_filter = filter_get_default();
 }
 
-list( $t_sort, ) = explode( ',', $t_filter['sort'] );
-list( $t_dir, ) = explode( ',', $t_filter['dir'] );
+list( $t_sort, ) = explode( ',', $g_filter['sort'] );
+list( $t_dir, ) = explode( ',', $g_filter['dir'] );
 
 $g_checkboxes_exist = false;
 
@@ -68,21 +68,21 @@ $t_icon_path = config_get( 'icon_path' );
 
 # Improve performance by caching category data in one pass
 if( helper_get_current_project() > 0 ) {
-    category_get_all_rows( helper_get_current_project() );
+	category_get_all_rows( helper_get_current_project() );
 } else {
-    $t_categories = array();
-    foreach ( $t_rows as $t_row ) {
-        $t_categories[] = $t_row->category_id;
-    }
-    category_cache_array_rows( array_unique( $t_categories ) );
+	$t_categories = array();
+	foreach ( $t_rows as $t_row ) {
+		$t_categories[] = $t_row->category_id;
+	}
+	category_cache_array_rows( array_unique( $t_categories ) );
 }
-$t_columns = helper_get_columns_to_view( COLUMNS_TARGET_VIEW_PAGE );
+$g_columns = helper_get_columns_to_view( COLUMNS_TARGET_VIEW_PAGE );
 
 $t_filter_position = config_get( 'filter_position' );
 
 # -- ====================== FILTER FORM ========================= --
 if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
-    filter_draw_selection_area( $f_page_number );
+	filter_draw_selection_area( $f_page_number );
 }
 # -- ====================== end of FILTER FORM ================== --
 
@@ -104,10 +104,10 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
                         $v_start = 0;
                         $v_end = 0;
                         if (count($t_rows) > 0) {
-                            $v_start = $t_filter['per_page'] * ($f_page_number - 1) + 1;
+                            $v_start = $g_filter['per_page'] * ($f_page_number - 1) + 1;
                             $v_end = $v_start + count($t_rows) - 1;
                         }
-                        echo '<span class="badge"> ', "$v_start - $v_end / $t_bug_count" , '</span>' ;
+                        echo '<span class="badge"> ' . $v_start . ' - ' . $v_end . ' / ' . $t_bug_count . '</span>' ;
                         ?>
                     </h4>
                 </div>
@@ -160,7 +160,7 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
                                 <tr class="buglist-headers">
                                     <?php
                                     $t_title_function = 'print_column_title';
-                                    foreach( $t_columns as $t_column ) {
+                                    foreach( $g_columns as $t_column ) {
                                         helper_call_custom_function( $t_title_function, array( $t_column ) );
                                     }
                                     ?>
@@ -174,12 +174,12 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
                                  * Output Bug Rows
                                  *
                                  * @param array $p_rows array of bug objects
+                                 * @return void
                                  */
-                                function write_bug_rows ( $p_rows )
-                                {
-                                    global $t_columns, $t_filter;
+                                function write_bug_rows ( $p_rows ) {
+                                    global $g_columns, $g_filter;
 
-                                    $t_in_stickies = ( $t_filter && ( 'on' == $t_filter[FILTER_PROPERTY_STICKY] ) );
+                                    $t_in_stickies = ( $g_filter && ( 'on' == $g_filter[FILTER_PROPERTY_STICKY] ) );
 
                                     # pre-cache custom column data
                                     columns_plugin_cache_issue_data( $p_rows );
@@ -196,7 +196,7 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
                                         if( ( 0 == $t_row->sticky ) && $t_in_stickies ) {	# demarcate stickies, if any have been shown
                                             ?>
                                             <tr>
-                                                <td colspan="<?php echo count( $t_columns ); ?>" bgcolor="#d3d3d3"></td>
+                                                <td colspan="<?php echo count( $g_columns ); ?>" bgcolor="#d3d3d3"></td>
                                             </tr>
                                             <?php
                                             $t_in_stickies = false;
@@ -204,11 +204,10 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 
                                         echo '<tr>';
 
-                                        $t_column_value_function = 'print_column_value';
-                                        foreach( $t_columns as $t_column ) {
-                                            helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row ) );
-                                        }
-
+										$t_column_value_function = 'print_column_value';
+										foreach( $g_columns as $t_column ) {
+											helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row ) );
+										}
                                         echo '</tr>';
                                     }
                                 }

@@ -38,8 +38,8 @@ define( 'PHP_CLI', 0 );
 define( 'PHP_CGI', 1 );
 
 # installation
-define( 'CONFIGURED_PASSWORD', "______" );
-define( 'DB_MIN_VERSION_ADODB', '5.19dev' ); # For mssql, oracle and pgsql
+define( 'CONFIGURED_PASSWORD', '______' );
+define( 'DB_MIN_VERSION_ADODB', '5.19' ); # For mssql, oracle and pgsql
 define( 'DB_MIN_VERSION_MSSQL', '9.0.0' );
 define( 'DB_MIN_VERSION_MYSQL', '5.0.8' );   # See #16584
 define( 'DB_MIN_VERSION_PGSQL', '8.4' );     # Earliest supported version as of Jan 2014
@@ -304,6 +304,7 @@ define( 'ERROR_BUG_NOT_FOUND', 1100 );
 define( 'ERROR_BUG_DUPLICATE_SELF', 1101 );
 define( 'ERROR_BUG_READ_ONLY_ACTION_DENIED', 1103 );
 define( 'ERROR_BUG_RESOLVE_DEPENDANTS_BLOCKING', 1104 );
+define( 'ERROR_BUG_CONFLICTING_EDIT', 1105 );
 define( 'ERROR_BUG_REVISION_NOT_FOUND', 1150 );
 
 # ERROR_EMAIL_*
@@ -458,8 +459,8 @@ define( 'FILTER_MATCH_ANY', 1 );
 
 # Versions
 define( 'VERSION_ALL', null );
-define( 'VERSION_FUTURE', 0 );
-define( 'VERSION_RELEASED', 1 );
+define( 'VERSION_FUTURE', false );
+define( 'VERSION_RELEASED', true );
 
 # Contexts for bug summary
 define( 'SUMMARY_CAPTION', 1 );

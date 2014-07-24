@@ -57,7 +57,7 @@ if( isset( $ADODB_vers ) ) {
 	check_print_test_row(
 		'Checking use of the <a href="http://adodb.sourceforge.net/#extension">ADOdb extension</a>',
 		!extension_loaded( 'ADOdb' ),
-		"The ADOdb extension is not supported and must be disabled"
+		'The ADOdb extension is not supported and must be disabled'
 	);
 }
 check_print_test_row(
@@ -192,7 +192,7 @@ check_print_test_row(
 	array(
 		true => 'You are using version ' . htmlentities( $t_db_version ) . '.',
 		false => 'The database version you are using is ' . htmlentities( $t_db_version )
-			. ". The minimum requirement for MantisBT on your database platform is $t_db_min_version."
+			. '. The minimum requirement for MantisBT on your database platform is ' . $t_db_min_version . '.'
 	)
 );
 
@@ -255,7 +255,7 @@ if( db_is_mysql() ) {
 			'MySQL version is within the <a href="' . $t_support_url . '">Extended Support</a> period (GA + 8 years)',
 			date_create( $t_date_extended_end ) > date_create( 'now' ),
 			array(
-				true => "Extended support for MySQL $t_db_major_version series ends on " . $t_date_extended_end,
+				true => 'Extended support for MySQL ' . $t_db_major_version . ' series ends on ' . $t_date_extended_end,
 				false => 'Support for the release of MySQL you are using ('
 					. htmlentities( $t_db_version )
 					. ') ended on ' . $t_date_extended_end
@@ -267,7 +267,7 @@ if( db_is_mysql() ) {
 			'Version of MySQL being used is within the <a href="' . $t_support_url . '">Premier Support</a> period (GA + 5 years)',
 			date_create( $t_date_premier_end ) > date_create( 'now' ),
 			array(
-				true => "Premier support for MySQL $t_db_major_version series ends on " . $t_date_premier_end,
+				true => 'Premier support for MySQL ' . $t_db_major_version . ' series ends on ' . $t_date_premier_end,
 				false => 'Premier Support for the release of MySQL you are using ('
 					. htmlentities( $t_db_version )
 					. ') ended on ' . $t_date_premier_end
@@ -276,10 +276,8 @@ if( db_is_mysql() ) {
 					. '. You should upgrade to a newer version of MySQL which is still within its Premier support period to benefit from bug fixes and security patches.'
 			) );
 	}
-}
-
-# PostgreSQL support checking
-elseif( db_is_pgsql() ) {
+} else if( db_is_pgsql() ) {
+	# PostgreSQL support checking
 
 	# Version support information
 	$t_versions = array(
@@ -313,7 +311,7 @@ elseif( db_is_pgsql() ) {
 			'PostgreSQL version support information availability',
 			false,
 			array(
-				false => "Release information for version $t_db_major_version is not available. "
+				false => 'Release information for version ' . $t_db_major_version . ' is not available. '
 					. vsprintf( 'Since it is %s than %s, we assume it is %s. ', $t_assume )
 					. 'Please refer to the <a href="' . $t_support_url
 					. '">PostgreSQL release support policy</a> to make sure.'
@@ -382,7 +380,7 @@ if( db_is_mysql() ) {
 	$t_result = db_query_bound( 'SHOW TABLE STATUS' );
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		if( $t_row[$t_field_comment] !== 'VIEW' &&
-		    preg_match( "/^$t_table_prefix_regex_safe.+?$t_table_suffix_regex_safe\$/", $t_row[$t_field_name] )
+		    preg_match( '/^' . $t_table_prefix_regex_safe . '.+?' . $t_table_suffix_regex_safe . '$/', $t_row[$t_field_name] )
 		) {
 			check_print_test_row(
 				'Table <em>' . htmlentities( $t_row[$t_field_name] ) . '</em> is using UTF-8 collation',
@@ -394,7 +392,7 @@ if( db_is_mysql() ) {
 	}
 
 	foreach( db_get_table_list() as $t_table ) {
-		if( preg_match( "/^$t_table_prefix_regex_safe.+?$t_table_suffix_regex_safe\$/", $t_table ) ) {
+		if( preg_match( '/^' . $t_table_prefix_regex_safe . '.+?' . $t_table_suffix_regex_safe . '$/', $t_table ) ) {
 			$t_result = db_query_bound( 'SHOW FULL FIELDS FROM ' . $t_table );
 			while( $t_row = db_fetch_array( $t_result ) ) {
 				if( $t_row[$t_field_collation] === null ) {

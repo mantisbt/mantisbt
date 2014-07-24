@@ -153,7 +153,7 @@ function http_security_headers() {
 				$t_avatar_img_allow = "; img-src 'self' https://www.gravatar.com:80";
 			}
 		}
-		header( "Content-Security-Policy: default-src 'self';$t_avatar_img_allow; frame-ancestors 'none'" );
+		header( 'X-Content-Security-Policy: default-src \'self\';' . $t_avatar_img_allow . '; frame-ancestors \'none\'' );
 		if( http_is_protocol_https() ) {
 			header( 'Strict-Transport-Security: max-age=7776000' );
 		}

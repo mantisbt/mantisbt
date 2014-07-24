@@ -168,7 +168,7 @@ class ImportXML {
 
 		# replace references in bug description and additional information
 		$t_imported_issues = $this->itemsMap_->getall( 'issue' );
-		printf( "Processing cross-references for %s issues...", count( $t_imported_issues ) );
+		printf( 'Processing cross-references for %s issues...', count( $t_imported_issues ) );
 		foreach( $t_imported_issues as $t_old_id => $t_new_id ) {
 			$t_bug = bug_get( $t_new_id, true );
 			$t_content_replaced = false;
@@ -208,7 +208,7 @@ class ImportXML {
      * @return string
 	 */
 	private function getReplacementString( $p_oldLinkTag, $p_oldId ) {
-		$linkTag = config_get( 'bug_link_tag' );
+		$t_link_tag = config_get( 'bug_link_tag' );
 
 		$t_replacement = '';
 		switch( $this->strategy_ ) {
@@ -223,7 +223,7 @@ class ImportXML {
 			case 'renumber':
 				if( $this->itemsMap_->exists( 'issue', $p_oldId ) ) {
 					# regular renumber
-					$t_replacement = $linkTag . $this->itemsMap_->getNewID( 'issue', $p_oldId );
+					$t_replacement = $t_link_tag . $this->itemsMap_->getNewID( 'issue', $p_oldId );
 				} else {
 					# fallback strategy
 					if( $this->fallback_ == 'link' ) {
@@ -236,7 +236,7 @@ class ImportXML {
 				break;
 
 			default:
-				echo "Unknown method";
+				echo 'Unknown method';
 		}
 
 		return $t_replacement;
@@ -248,13 +248,13 @@ class ImportXML {
      * @return ImportXml_Issue
 	 */
 	private function get_importer_object( $p_element_name ) {
-		$importer = null;
+		$t_importer = null;
 		switch( $p_element_name ) {
 			case 'issue':
-				$importer = new ImportXml_Issue( $this->keepCategory_, $this->defaultCategory_ );
+				$t_importer = new ImportXml_Issue( $this->keepCategory_, $this->defaultCategory_ );
 				break;
 		}
-		return $importer;
+		return $t_importer;
 	}
 }
 
@@ -264,16 +264,16 @@ class ImportXML {
  * @return string
  */
 function htmlFullEntities( $p_string ) {
-	$chars = str_split( $p_string );
-	$escaped = array_map( 'getEntity', $chars );
-	return implode( '', $escaped );
+	$t_chars = str_split( $p_string );
+	$t_escaped = array_map( 'getEntity', $t_chars );
+	return implode( '', $t_escaped );
 }
 
 /**
  * Get entity
- * @param string $char Character to convert.
+ * @param string $p_char Character to convert.
  * @return string
  */
-function getEntity( $char ) {
-	return '&#' . ord( $char ) . ';';
+function getEntity( $p_char ) {
+	return '&#' . ord( $p_char ) . ';';
 }

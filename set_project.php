@@ -84,7 +84,7 @@ if( !is_blank( $c_ref ) ) {
 
 	# Check that referrer matches our address after squashing case (case insensitive compare)
 	$t_path = rtrim( config_get( 'path' ), '/' );
-	if( preg_match( "@^($t_path)/(?:/*([^\?#]*))(.*)?\$@", $_SERVER['HTTP_REFERER'], $t_matches ) ) {
+	if( preg_match( '@^(' . $t_path . ')/(?:/*([^\?#]*))(.*)?\$@', $_SERVER['HTTP_REFERER'], $t_matches ) ) {
 		$t_referrer_page = $t_matches[2];
 		$t_param = $t_matches[3];
 
@@ -97,7 +97,7 @@ if( !is_blank( $c_ref ) ) {
 				$t_redirect_url = 'view_all_set.php?type=3&source_query_id=' . $t_source_filter_id;
 			}
 		} else if( stripos( $t_referrer_page, '_page.php' ) !== false ) {
-			switch ( $t_referrer_page ) {
+			switch( $t_referrer_page ) {
 				case 'bug_view_page.php':
 				case 'bug_view_advanced_page.php':
 				case 'bug_update_page.php':

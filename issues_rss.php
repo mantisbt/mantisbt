@@ -97,65 +97,65 @@ $t_path = config_get( 'path' );
 # construct rss file
 
 $t_encoding = 'utf-8';
-$about = $t_path;
-$title = config_get( 'window_title' );
-$image_link = $t_path . 'images/mantis_logo_button.gif';
+$t_about = $t_path;
+$t_title = config_get( 'window_title' );
+$t_image_link = $t_path . 'images/mantis_logo_button.gif';
 
 # only rss 2.0
-$category = project_get_name( $f_project_id );
+$t_category = project_get_name( $f_project_id );
 if( $f_project_id !== 0 ) {
-	$title .= ' - ' . $category;
+	$t_title .= ' - ' . $t_category;
 }
 
-$title .= ' - ' . lang_get( 'issues' );
+$t_title .= ' - ' . lang_get( 'issues' );
 
 if( $f_username !== null ) {
-	$title .= " - ($f_username)";
+	$t_title .= ' - (' . $f_username . ')';
 }
 
 if( $f_filter_id !== 0 ) {
-	$title .= ' (' . filter_get_field( $f_filter_id, 'name' ) . ')';
+	$t_title .= ' (' . filter_get_field( $f_filter_id, 'name' ) . ')';
 }
 
-$description = $title;
+$t_description = $t_title;
 
 # in minutes (only rss 2.0)
-$cache = '10';
+$t_cache = '10';
 
-$rssfile = new RSSBuilder(	$t_encoding, $about, $title, $description, $image_link, $category, $cache );
-
-# person, an organization, or a service
-$publisher = '';
+$t_rssfile = new RSSBuilder(	$t_encoding, $t_about, $t_title, $t_description, $t_image_link, $t_category, $t_cache );
 
 # person, an organization, or a service
-$creator = '';
+$t_publisher = '';
 
-$date = date( 'r' );
-$language = lang_get( 'phpmailer_language' );
-$rights = '';
+# person, an organization, or a service
+$t_creator = '';
+
+$t_date = date( 'r' );
+$t_language = lang_get( 'phpmailer_language' );
+$t_rights = '';
 
 # spatial location , temporal period or jurisdiction
-$coverage = '';
+$t_coverage = '';
 
 # person, an organization, or a service
-$contributor = '';
+$t_contributor = '';
 
-$rssfile->addDCdata( $publisher, $creator, $date, $language, $rights, $coverage, $contributor );
+$t_rssfile->addDCdata( $t_publisher, $t_creator, $t_date, $t_language, $t_rights, $t_coverage, $t_contributor );
 
 # hourly / daily / weekly / ...
-$period = 'hourly';
+$t_period = 'hourly';
 
 # every X hours/days/...
-$frequency = 1;
+$t_frequency = 1;
 
-$base = date( 'Y-m-d\TH:i:sO' );
+$t_base = date( 'Y-m-d\TH:i:sO' );
 
 # add missing : in the O part of the date.  PHP 5 supports a 'c' format which will output the format
 # exactly as we want it.
 # 2002-10-02T10:00:00-0500 -> 2002-10-02T10:00:00-05:00
-$base = utf8_substr( $base, 0, 22 ) . ':' . utf8_substr( $base, -2 );
+$t_base = utf8_substr( $t_base, 0, 22 ) . ':' . utf8_substr( $t_base, -2 );
 
-$rssfile->addSYdata( $period, $frequency, $base );
+$t_rssfile->addSYdata( $t_period, $t_frequency, $t_base );
 
 $t_page_number = 1;
 $t_issues_per_page = 25;
@@ -187,51 +187,51 @@ $t_issues = filter_get_bug_rows( $t_page_number, $t_issues_per_page, $t_page_cou
 $t_issues_count = count( $t_issues );
 
 # Loop through results
-for ( $i = 0; $i < $t_issues_count; $i++ ) {
+for( $i = 0; $i < $t_issues_count; $i++ ) {
 	$t_bug = $t_issues[$i];
 
-	$about = $link = $t_path . "view.php?id=" . $t_bug->id;
-	$title = bug_format_id( $t_bug->id ) . ': ' . $t_bug->summary;
+	$t_about = $t_link = $t_path . 'view.php?id=' . $t_bug->id;
+	$t_title = bug_format_id( $t_bug->id ) . ': ' . $t_bug->summary;
 
 	if( $t_bug->view_state == VS_PRIVATE ) {
-		$title .= ' [' . lang_get( 'private' ) . ']';
+		$t_title .= ' [' . lang_get( 'private' ) . ']';
 	}
 
-	$description = string_rss_links( $t_bug->description );
+	$t_description = string_rss_links( $t_bug->description );
 
 	# subject is category.
-	$subject = category_full_name( $t_bug->category_id, false );
+	$t_subject = category_full_name( $t_bug->category_id, false );
 
 	# optional DC value
-	$date = $t_bug->last_updated;
+	$t_date = $t_bug->last_updated;
 
 	# author of item
-	$author = '';
+	$t_author = '';
 	if( access_has_global_level( config_get( 'show_user_email_threshold' ) ) ) {
 		$t_author_name = user_get_name( $t_bug->reporter_id );
 		$t_author_email = user_get_field( $t_bug->reporter_id, 'email' );
 
 		if( !is_blank( $t_author_email ) ) {
 			if( !is_blank( $t_author_name ) ) {
-				$author = $t_author_name . ' <' . $t_author_email . '>';
+				$t_author = $t_author_name . ' <' . $t_author_email . '>';
 			} else {
-				$author = $t_author_email;
+				$t_author = $t_author_email;
 			}
 		}
 	}
 
 	# $comments = 'http://www.example.com/sometext.php?somevariable=somevalue&comments=1';	# url to comment page rss 2.0 value
-	$comments = $t_path . 'view.php?id=' . $t_bug->id . '#bugnotes';
+	$t_comments = $t_path . 'view.php?id=' . $t_bug->id . '#bugnotes';
 
 	# optional mod_im value for dispaying a different pic for every item
-	$image = '';
+	$t_image = '';
 
-	$rssfile->addRSSItem( $about, $title, $link, $description, $subject, $date,
-						$author, $comments, $image );
+	$t_rssfile->addRSSItem( $t_about, $t_title, $t_link, $t_description, $t_subject, $t_date,
+						$t_author, $t_comments, $t_image );
 }
 
 # @todo consider making this a configuration option - 0.91 / 1.0 / 2.0
 $t_version = '2.0';
 
-$rssfile->outputRSS( $t_version );
+$t_rssfile->outputRSS( $t_version );
 

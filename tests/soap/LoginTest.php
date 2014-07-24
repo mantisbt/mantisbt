@@ -50,7 +50,7 @@ class LoginTest extends SoapBase {
 	public function testLoginFailed() {
 		try {
 			$this->client->mc_login( $this->dummyUser, $this->dummyPassword );
-			$this->fail( "Should have failed." );
+			$this->fail( 'Should have failed.' );
 		} catch ( SoapFault $e ) {
 			$this->assertIsLoginFailure( $e );
 		}
@@ -77,7 +77,7 @@ class LoginTest extends SoapBase {
 	public function testGetIssueGetLoginFailed() {
 		try {
 			$this->client->mc_issue_get( $this->dummyUser, $this->dummyPassword, 1 );
-			$this->fail( "Should have failed." );
+			$this->fail( 'Should have failed.' );
 		} catch ( SoapFault $e ) {
 			$this->assertIsLoginFailure( $e );
 		}
@@ -90,7 +90,7 @@ class LoginTest extends SoapBase {
 	public function testProjectGetUsersLoginFailed() {
 		try {
 			$this->client->mc_project_get_users( $this->dummyUser, $this->dummyPassword, $this->getProjectId(), 0 );
-			$this->fail( "Should have failed." );
+			$this->fail( 'Should have failed.' );
 		} catch ( SoapFault $e ) {
 			$this->assertIsLoginFailure( $e );
 		}
@@ -103,7 +103,7 @@ class LoginTest extends SoapBase {
 	public function testGetEnumStatusLoginFailed() {
 		try {
 			$this->client->mc_enum_status( $this->dummyUser, $this->dummyPassword );
-			$this->fail( "Should have failed." );
+			$this->fail( 'Should have failed.' );
 		} catch ( SoapFault $e ) {
 			$this->assertIsLoginFailure( $e );
 		}
@@ -116,7 +116,7 @@ class LoginTest extends SoapBase {
 	public function testProjectGetIssuesLoginFailed() {
 		try {
 			$this->client->mc_project_get_issues( $this->dummyUser, $this->dummyPassword, $this->getProjectId(), 0, 15 );
-			$this->fail( "Should have failed." );
+			$this->fail( 'Should have failed.' );
 		} catch ( SoapFault $e ) {
 			$this->assertIsLoginFailure( $e );
 		}
@@ -129,7 +129,7 @@ class LoginTest extends SoapBase {
 	public function testFilterGetIssuesLoginFailed() {
 		try {
 			$this->client->mc_filter_get_issues( $this->dummyUser, $this->dummyPassword, $this->getProjectId(), 1, 0, 15 );
-			$this->fail( "Should have failed." );
+			$this->fail( 'Should have failed.' );
 		} catch ( SoapFault $e ) {
 			$this->assertIsLoginFailure( $e );
 		}
@@ -142,7 +142,7 @@ class LoginTest extends SoapBase {
 	public function testLoginWithNullPasswordIsRejected() {
 		try {
 			$this->client->mc_enum_status( $this->userName, null );
-			$this->fail( "Should have failed." );
+			$this->fail( 'Should have failed.' );
 		} catch ( SoapFault $e ) {
 			$this->assertIsLoginFailure( $e );
 		}
@@ -155,7 +155,7 @@ class LoginTest extends SoapBase {
 	public function testLoginWithEmptyPasswordIsRejected() {
 		try {
 			$this->client->mc_enum_status( $this->userName, '' );
-			$this->fail( "Should have failed." );
+			$this->fail( 'Should have failed.' );
 		} catch ( SoapFault $e ) {
 			$this->assertIsLoginFailure( $e );
 		}
@@ -167,8 +167,8 @@ class LoginTest extends SoapBase {
 	 */
 	public function testLoginWithIncorrectPasswordIsRejected() {
 		try {
-			$this->client->mc_enum_status( $this->userName, "This really should be incorrect" );
-			$this->fail( "Should have failed." );
+			$this->client->mc_enum_status( $this->userName, 'This really should be incorrect' );
+			$this->fail( 'Should have failed.' );
 		} catch ( SoapFault $e ) {
 			$this->assertIsLoginFailure( $e );
 		}

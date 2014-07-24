@@ -80,7 +80,7 @@ layout_page_begin();
     # Check for an error
     $t_error_msg = strip_tags( gpc_get_string( 'error_msg', null ) );
     if( $t_error_msg != null ) {
-        print "<br />$t_error_msg<br /><br />";
+        print '<br />' . $t_error_msg . '<br /><br />';
     }
     ?>
     <div class="widget-body">

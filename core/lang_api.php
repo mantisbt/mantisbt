@@ -89,8 +89,7 @@ function lang_load( $p_lang, $p_dir = null ) {
 		$t_lang_var = preg_replace( '/^s_/', '', $t_var );
 		if( $t_lang_var != $t_var ) {
 			$g_lang_strings[$p_lang][$t_lang_var] = $$t_var;
-		}
-		else if( 'MANTIS_ERROR' == $t_var ) {
+		} else if( 'MANTIS_ERROR' == $t_var ) {
 			if( isset( $g_lang_strings[$p_lang][$t_lang_var] ) ) {
 				foreach( $$t_var as $t_key => $t_val ) {
 					$g_lang_strings[$p_lang][$t_lang_var][$t_key] = $t_val;

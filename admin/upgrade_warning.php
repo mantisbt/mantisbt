@@ -69,8 +69,7 @@ layout_admin_page_begin();
             <p class="lead">When you have backed up your database click the link below to continue</p>
             <a class="btn btn-primary btn-lg btn-white btn-round" href="install.php">Upgrade Now</a>
         <?php
-        }
-        else {?>
+        } else {?>
             <p class="lead">You aware to be running an old (pre 1.1.0) release of MantisBT. To update to this release of mantis, you must first update your installation to 1.1</p>
         <?php
         }?>

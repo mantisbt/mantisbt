@@ -757,7 +757,7 @@ function print_column_title_attachment_count( $p_sort, $p_dir, $p_columns_target
 	global $t_icon_path;
 	$t_attachment_count_text = lang_get( 'attachment_count' );
 	$t_attachment_count_icon = "<i class=\"fa fa-paperclip blue\" alt=\"$t_attachment_count_text\" title=\"$t_attachment_count_text\" />";
-	echo "\t<th class=\"column-attachments\">$t_attachment_count_icon</th>\n";
+    echo "\t" . '<th class="column-attachments">' . $t_attachment_count_icon . '</th>' . "\n";
 }
 
 /**
@@ -990,12 +990,12 @@ function print_column_selection( BugData $p_bug, $p_columns_target = COLUMNS_TAR
 		access_has_project_level( config_get( 'tag_attach_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ||
 		access_has_project_level( config_get( 'roadmap_update_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ) {
 		$g_checkboxes_exist = true;
-    echo '<div class="checkbox no-padding no-margin"><label>';
-		printf( "<input type=\"checkbox\" name=\"bug_arr[]\" value=\"%d\" class=\"ace\" />", $p_bug->id );
-    echo '<span class="lbl"></span>';
-    echo '</label></div>';
+    	echo '<div class="checkbox no-padding no-margin"><label>';
+		printf( '<input type="checkbox" name="bug_arr[]" value="%d" class="ace" />', $p_bug->id );
+    	echo '<span class="lbl"></span>';
+    	echo '</label></div>';
 	} else {
-		echo "&#160;";
+		echo '&#160;';
 	}
 	echo '</td>';
 }
@@ -1125,7 +1125,7 @@ function print_column_sponsorship_total( BugData $p_bug, $p_columns_target = COL
  * @access public
  */
 function print_column_bugnotes_count( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	global $t_filter;
+	global $g_filter;
 
 	# grab the bugnote count
 	$t_bugnote_stats = bug_get_bugnote_stats( $p_bug->id );
@@ -1138,11 +1138,11 @@ function print_column_bugnotes_count( BugData $p_bug, $p_columns_target = COLUMN
 
 	echo '<td class="column-bugnotes-count">';
 	if( $t_bugnote_count > 0 ) {
-		$t_show_in_bold = $v_bugnote_updated > strtotime( '-' . $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' );
+		$t_show_in_bold = $v_bugnote_updated > strtotime( '-' . $g_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' );
 		if( $t_show_in_bold ) {
 			echo '<span class="bold">';
 		}
-		print_link( string_get_bug_view_url( $p_bug->id ) . "&nbn=$t_bugnote_count#bugnotes", $t_bugnote_count );
+		print_link( string_get_bug_view_url( $p_bug->id ) . '&nbn=' . $t_bugnote_count . '#bugnotes', $t_bugnote_count );
 		if( $t_show_in_bold ) {
 			echo '</span>';
 		}
@@ -1175,7 +1175,7 @@ function print_column_attachment_count( BugData $p_bug, $p_columns_target = COLU
 	if( $t_attachment_count > 0 ) {
 		$t_href = string_get_bug_view_url( $p_bug->id ) . '#attachments';
 		$t_href_title = sprintf( lang_get( 'view_attachments_for_issue' ), $t_attachment_count, $p_bug->id );
-		echo "<a href=\"$t_href\" title=\"$t_href_title\">$t_attachment_count</a>";
+		echo '<a href="' . $t_href . '" title="' . $t_href_title . '">' . $t_attachment_count . '</a>';
 	} else {
 		echo ' &#160; ';
 	}
@@ -1359,12 +1359,12 @@ function print_column_project_id( BugData $p_bug, $p_columns_target = COLUMNS_TA
  * @access public
  */
 function print_column_last_updated( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	global $t_filter;
+	global $g_filter;
 
 	$t_last_updated = string_display_line( date( config_get( 'short_date_format' ), $p_bug->last_updated ) );
 
 	echo '<td class="column-last-modified">';
-	if( $p_bug->last_updated > strtotime( '-' . $t_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' ) ) {
+	if( $p_bug->last_updated > strtotime( '-' . $g_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' ) ) {
 		printf( '<span class="bold">%s</span>', $t_last_updated );
 	} else {
 		echo $t_last_updated;

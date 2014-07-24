@@ -43,7 +43,7 @@
  */
 
 if( !defined( 'BUGNOTE_VIEW_INC_ALLOW' ) ) {
-    return;
+	return;
 }
 
 require_api( 'access_api.php' );
@@ -69,9 +69,9 @@ $t_user_id = auth_get_current_user_id();
 
 #precache access levels
 if( isset( $g_project_override ) ) {
-    access_cache_matrix_project( $g_project_override );
+	access_cache_matrix_project( $g_project_override );
 } else {
-    access_cache_matrix_project( helper_get_current_project() );
+	access_cache_matrix_project( helper_get_current_project() );
 }
 
 # get the bugnote data
@@ -85,7 +85,7 @@ foreach( $t_bugnotes as $t_bugnote ) {
 }
 user_cache_array_rows( $t_bugnote_users );
 
-$num_notes = count( $t_bugnotes );
+$t_num_notes = count( $t_bugnotes );
 ?>
 
 <?php # Bugnotes BEGIN ?>
@@ -119,7 +119,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
         <table class="table table-bordered table-condensed table-striped">
             <?php
             # no bugnotes
-            if( 0 == $num_notes ) {
+            if( 0 == $t_num_notes ) {
                 ?>
                 <tr class="bugnotes-empty">
                     <td class="center" colspan="2">
@@ -140,7 +140,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
             $t_can_delete_all_bugnotes = access_has_bug_level( config_get( 'delete_bugnote_threshold' ), $f_bug_id );
             $t_can_change_view_state_all_bugnotes = $t_can_edit_all_bugnotes && access_has_bug_level( config_get( 'change_view_status_threshold' ), $f_bug_id );
 
-            for ( $i=0; $i < $num_notes; $i++ ) {
+            for ( $i=0; $i < $t_num_notes; $i++ ) {
                 $t_bugnote = $t_bugnotes[$i];
 
                 if( $t_bugnote->date_submitted != $t_bugnote->last_modified )
