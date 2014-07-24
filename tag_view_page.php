@@ -118,7 +118,7 @@ html_page_top( sprintf( lang_get( 'tag_details' ), $t_name ) ); ?>
 			$t_name = string_display_line( $t_tag['name'] );
 			$t_description = string_display_line( $t_tag['description'] );
 			$t_count = $t_tag['count'];
-			$t_link = string_html_specialchars( 'search.php?tag_string='.urlencode( '+' . $t_tag_row[name] . config_get( 'tag_separator' ) . '+' . $t_name ) );
+			$t_link = string_html_specialchars( 'search.php?tag_string='.urlencode( '+' . $t_tag_row['name'] . config_get( 'tag_separator' ) . '+' . $t_name ) );
 			$t_label = sprintf( lang_get( 'tag_related_issues' ), $t_tag['count'] ); ?>
 			<tr>
 				<td><span class="tag-link"><a href="tag_view_page.php?tag_id=<?php echo $t_tag['id']; ?>" title="<?php echo $t_description; ?>"><?php echo $t_name; ?></a></span></td>
