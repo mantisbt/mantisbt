@@ -205,10 +205,10 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 	switch( $p_custom_field_type ) {
 		case CUSTOM_FIELD_TYPE_MULTILIST:
 		case CUSTOM_FIELD_TYPE_CHECKBOX:
-		    # ensure that the default is an array, if set
-		    if( ( $p_default !== null ) && !is_array( $p_default ) ) {
-		        $p_default = array( $p_default );
-		    }
+			# ensure that the default is an array, if set
+			if( ( $p_default !== null ) && !is_array( $p_default ) ) {
+				$p_default = array( $p_default );
+			}
 			$t_values = gpc_get_string_array( $p_var_name, $p_default );
 			if( is_array( $t_values ) ) {
 				return implode( '|', $t_values );
