@@ -79,10 +79,13 @@ if( !in_array( $f_view_type, array( 'simple', 'advanced' ) ) ) {
 	$f_view_type = $f_default_view_type;
 }
 
+# gpc_get_*_array functions expect 2nd param to be an array
+$t_meta_filter_any_array = array( META_FILTER_ANY );
+
 # these are all possibly multiple selections for advanced filtering
 $f_show_category = array();
 if( is_array( gpc_get( FILTER_PROPERTY_CATEGORY_ID, null ) ) ) {
-	$f_show_category = gpc_get_string_array( FILTER_PROPERTY_CATEGORY_ID, META_FILTER_ANY );
+	$f_show_category = gpc_get_string_array( FILTER_PROPERTY_CATEGORY_ID, $t_meta_filter_any_array );
 } else {
 	$f_show_category = gpc_get_string( FILTER_PROPERTY_CATEGORY_ID, META_FILTER_ANY );
 	$f_show_category = array( $f_show_category );
@@ -90,7 +93,7 @@ if( is_array( gpc_get( FILTER_PROPERTY_CATEGORY_ID, null ) ) ) {
 
 $f_platform = array();
 if( is_array( gpc_get( FILTER_PROPERTY_PLATFORM, null ) ) ) {
-	$f_platform = gpc_get_string_array( FILTER_PROPERTY_PLATFORM, META_FILTER_ANY );
+	$f_platform = gpc_get_string_array( FILTER_PROPERTY_PLATFORM, $t_meta_filter_any_array );
 } else {
 	$f_platform = gpc_get_string( FILTER_PROPERTY_PLATFORM, META_FILTER_ANY );
 	$f_platform = array( $f_platform );
@@ -98,7 +101,7 @@ if( is_array( gpc_get( FILTER_PROPERTY_PLATFORM, null ) ) ) {
 
 $f_os = array();
 if( is_array( gpc_get( FILTER_PROPERTY_OS, null ) ) ) {
-	$f_os = gpc_get_string_array( FILTER_PROPERTY_OS, META_FILTER_ANY );
+	$f_os = gpc_get_string_array( FILTER_PROPERTY_OS, $t_meta_filter_any_array );
 } else {
 	$f_os = gpc_get_string( FILTER_PROPERTY_OS, META_FILTER_ANY );
 	$f_os = array( $f_os );
@@ -106,7 +109,7 @@ if( is_array( gpc_get( FILTER_PROPERTY_OS, null ) ) ) {
 
 $f_os_build = array();
 if( is_array( gpc_get( FILTER_PROPERTY_OS_BUILD, null ) ) ) {
-	$f_os_build = gpc_get_string_array( FILTER_PROPERTY_OS_BUILD, META_FILTER_ANY );
+	$f_os_build = gpc_get_string_array( FILTER_PROPERTY_OS_BUILD, $t_meta_filter_any_array );
 } else {
 	$f_os_build = gpc_get_string( FILTER_PROPERTY_OS_BUILD, META_FILTER_ANY );
 	$f_os_build = array( $f_os_build );
@@ -114,7 +117,7 @@ if( is_array( gpc_get( FILTER_PROPERTY_OS_BUILD, null ) ) ) {
 
 $f_show_severity = array();
 if( is_array( gpc_get( FILTER_PROPERTY_SEVERITY, null ) ) ) {
-	$f_show_severity = gpc_get_string_array( FILTER_PROPERTY_SEVERITY, META_FILTER_ANY );
+	$f_show_severity = gpc_get_string_array( FILTER_PROPERTY_SEVERITY, $t_meta_filter_any_array );
 } else {
 	$f_show_severity = gpc_get_string( FILTER_PROPERTY_SEVERITY, META_FILTER_ANY );
 	$f_show_severity = array( $f_show_severity );
@@ -122,7 +125,7 @@ if( is_array( gpc_get( FILTER_PROPERTY_SEVERITY, null ) ) ) {
 
 $f_show_status = array();
 if( is_array( gpc_get( FILTER_PROPERTY_STATUS, null ) ) ) {
-	$f_show_status = gpc_get_string_array( FILTER_PROPERTY_STATUS, META_FILTER_ANY );
+	$f_show_status = gpc_get_string_array( FILTER_PROPERTY_STATUS, $t_meta_filter_any_array );
 } else {
 	$f_show_status = gpc_get_string( FILTER_PROPERTY_STATUS, META_FILTER_ANY );
 	$f_show_status = array( $f_show_status );
@@ -130,7 +133,7 @@ if( is_array( gpc_get( FILTER_PROPERTY_STATUS, null ) ) ) {
 
 $f_hide_status = array();
 if( is_array( gpc_get( FILTER_PROPERTY_HIDE_STATUS, null ) ) ) {
-	$f_hide_status = gpc_get_string_array( FILTER_PROPERTY_HIDE_STATUS, META_FILTER_NONE );
+	$f_hide_status = gpc_get_string_array( FILTER_PROPERTY_HIDE_STATUS, array( META_FILTER_NONE ) );
 } else {
 	$f_hide_status = gpc_get_string( FILTER_PROPERTY_HIDE_STATUS, META_FILTER_NONE );
 	$f_hide_status = array( $f_hide_status );
@@ -138,7 +141,7 @@ if( is_array( gpc_get( FILTER_PROPERTY_HIDE_STATUS, null ) ) ) {
 
 $f_reporter_id = array();
 if( is_array( gpc_get( FILTER_PROPERTY_REPORTER_ID, null ) ) ) {
-	$f_reporter_id = gpc_get_string_array( FILTER_PROPERTY_REPORTER_ID, META_FILTER_ANY );
+	$f_reporter_id = gpc_get_string_array( FILTER_PROPERTY_REPORTER_ID, $t_meta_filter_any_array );
 } else {
 	$f_reporter_id = gpc_get_string( FILTER_PROPERTY_REPORTER_ID, META_FILTER_ANY );
 	$f_reporter_id = array( $f_reporter_id );
@@ -146,7 +149,7 @@ if( is_array( gpc_get( FILTER_PROPERTY_REPORTER_ID, null ) ) ) {
 
 $f_handler_id = array();
 if( is_array( gpc_get( FILTER_PROPERTY_HANDLER_ID, null ) ) ) {
-	$f_handler_id = gpc_get_string_array( FILTER_PROPERTY_HANDLER_ID, META_FILTER_ANY );
+	$f_handler_id = gpc_get_string_array( FILTER_PROPERTY_HANDLER_ID, $t_meta_filter_any_array );
 } else {
 	$f_handler_id = gpc_get_string( FILTER_PROPERTY_HANDLER_ID, META_FILTER_ANY );
 	$f_handler_id = array( $f_handler_id );
@@ -154,7 +157,7 @@ if( is_array( gpc_get( FILTER_PROPERTY_HANDLER_ID, null ) ) ) {
 
 $f_project_id = array();
 if( is_array( gpc_get( FILTER_PROPERTY_PROJECT_ID, null ) ) ) {
-	$f_project_id = gpc_get_int_array( FILTER_PROPERTY_PROJECT_ID, META_FILTER_CURRENT );
+	$f_project_id = gpc_get_int_array( FILTER_PROPERTY_PROJECT_ID, array( META_FILTER_CURRENT ) );
 } else {
 	$f_project_id = gpc_get_int( FILTER_PROPERTY_PROJECT_ID, META_FILTER_CURRENT );
 	$f_project_id = array( $f_project_id );
@@ -162,7 +165,7 @@ if( is_array( gpc_get( FILTER_PROPERTY_PROJECT_ID, null ) ) ) {
 
 $f_show_resolution = array();
 if( is_array( gpc_get( FILTER_PROPERTY_RESOLUTION, null ) ) ) {
-	$f_show_resolution = gpc_get_string_array( FILTER_PROPERTY_RESOLUTION, META_FILTER_ANY );
+	$f_show_resolution = gpc_get_string_array( FILTER_PROPERTY_RESOLUTION, $t_meta_filter_any_array );
 } else {
 	$f_show_resolution = gpc_get_string( FILTER_PROPERTY_RESOLUTION, META_FILTER_ANY );
 	$f_show_resolution = array( $f_show_resolution );
@@ -170,7 +173,7 @@ if( is_array( gpc_get( FILTER_PROPERTY_RESOLUTION, null ) ) ) {
 
 $f_show_build = array();
 if( is_array( gpc_get( FILTER_PROPERTY_BUILD, null ) ) ) {
-	$f_show_build = gpc_get_string_array( FILTER_PROPERTY_BUILD, META_FILTER_ANY );
+	$f_show_build = gpc_get_string_array( FILTER_PROPERTY_BUILD, $t_meta_filter_any_array );
 } else {
 	$f_show_build = gpc_get_string( FILTER_PROPERTY_BUILD, META_FILTER_ANY );
 	$f_show_build = array( $f_show_build );
@@ -178,7 +181,7 @@ if( is_array( gpc_get( FILTER_PROPERTY_BUILD, null ) ) ) {
 
 $f_show_version = array();
 if( is_array( gpc_get( FILTER_PROPERTY_VERSION, null ) ) ) {
-	$f_show_version = gpc_get_string_array( FILTER_PROPERTY_VERSION, META_FILTER_ANY );
+	$f_show_version = gpc_get_string_array( FILTER_PROPERTY_VERSION, $t_meta_filter_any_array );
 } else {
 	$f_show_version = gpc_get_string( FILTER_PROPERTY_VERSION, META_FILTER_ANY );
 	$f_show_version = array( $f_show_version );
@@ -186,7 +189,7 @@ if( is_array( gpc_get( FILTER_PROPERTY_VERSION, null ) ) ) {
 
 $f_fixed_in_version = array();
 if( is_array( gpc_get( FILTER_PROPERTY_FIXED_IN_VERSION, null ) ) ) {
-	$f_fixed_in_version = gpc_get_string_array( FILTER_PROPERTY_FIXED_IN_VERSION, META_FILTER_ANY );
+	$f_fixed_in_version = gpc_get_string_array( FILTER_PROPERTY_FIXED_IN_VERSION, $t_meta_filter_any_array );
 } else {
 	$f_fixed_in_version = gpc_get_string( FILTER_PROPERTY_FIXED_IN_VERSION, META_FILTER_ANY );
 	$f_fixed_in_version = array( $f_fixed_in_version );
@@ -194,7 +197,7 @@ if( is_array( gpc_get( FILTER_PROPERTY_FIXED_IN_VERSION, null ) ) ) {
 
 $f_target_version = array();
 if( is_array( gpc_get( FILTER_PROPERTY_TARGET_VERSION, null ) ) ) {
-	$f_target_version = gpc_get_string_array( FILTER_PROPERTY_TARGET_VERSION, META_FILTER_ANY );
+	$f_target_version = gpc_get_string_array( FILTER_PROPERTY_TARGET_VERSION, $t_meta_filter_any_array );
 } else {
 	$f_target_version = gpc_get_string( FILTER_PROPERTY_TARGET_VERSION, META_FILTER_ANY );
 	$f_target_version = array( $f_target_version );
@@ -202,7 +205,7 @@ if( is_array( gpc_get( FILTER_PROPERTY_TARGET_VERSION, null ) ) ) {
 
 $f_show_profile = array();
 if( is_array( gpc_get( FILTER_PROPERTY_PROFILE_ID, null ) ) ) {
-	$f_show_profile = gpc_get_string_array( FILTER_PROPERTY_PROFILE_ID, META_FILTER_ANY );
+	$f_show_profile = gpc_get_string_array( FILTER_PROPERTY_PROFILE_ID, $t_meta_filter_any_array );
 } else {
 	$f_show_profile = gpc_get_string( FILTER_PROPERTY_PROFILE_ID, META_FILTER_ANY );
 	$f_show_profile = array( $f_show_profile );
@@ -210,7 +213,7 @@ if( is_array( gpc_get( FILTER_PROPERTY_PROFILE_ID, null ) ) ) {
 
 $f_show_priority = array();
 if( is_array( gpc_get( FILTER_PROPERTY_PRIORITY, null ) ) ) {
-	$f_show_priority = gpc_get_string_array( FILTER_PROPERTY_PRIORITY, META_FILTER_ANY );
+	$f_show_priority = gpc_get_string_array( FILTER_PROPERTY_PRIORITY, $t_meta_filter_any_array );
 } else {
 	$f_show_priority = gpc_get_string( FILTER_PROPERTY_PRIORITY, META_FILTER_ANY );
 	$f_show_priority = array( $f_show_priority );
@@ -218,7 +221,7 @@ if( is_array( gpc_get( FILTER_PROPERTY_PRIORITY, null ) ) ) {
 
 $f_user_monitor = array();
 if( is_array( gpc_get( FILTER_PROPERTY_MONITOR_USER_ID, null ) ) ) {
-	$f_user_monitor = gpc_get_string_array( FILTER_PROPERTY_MONITOR_USER_ID, META_FILTER_ANY );
+	$f_user_monitor = gpc_get_string_array( FILTER_PROPERTY_MONITOR_USER_ID, $t_meta_filter_any_array );
 } else {
 	$f_user_monitor = gpc_get_string( FILTER_PROPERTY_MONITOR_USER_ID, META_FILTER_ANY );
 	$f_user_monitor = array( $f_user_monitor );
@@ -226,7 +229,7 @@ if( is_array( gpc_get( FILTER_PROPERTY_MONITOR_USER_ID, null ) ) ) {
 
 $f_note_user_id = array();
 if( is_array( gpc_get( FILTER_PROPERTY_NOTE_USER_ID, null ) ) ) {
-	$f_note_user_id = gpc_get_string_array( FILTER_PROPERTY_NOTE_USER_ID, META_FILTER_ANY );
+	$f_note_user_id = gpc_get_string_array( FILTER_PROPERTY_NOTE_USER_ID, $t_meta_filter_any_array );
 } else {
 	$f_note_user_id = gpc_get_string( FILTER_PROPERTY_NOTE_USER_ID, META_FILTER_ANY );
 	$f_note_user_id = array( $f_note_user_id );
@@ -344,7 +347,7 @@ if( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 			$f_custom_fields_data[$t_cfid][2] = $t_end;
 		} else {
 			if( is_array( gpc_get( 'custom_field_' . $t_cfid, null ) ) ) {
-				$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, META_FILTER_ANY );
+				$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, $t_meta_filter_any_array );
 			} else {
 				$f_custom_fields_data[$t_cfid] = gpc_get_string( 'custom_field_' . $t_cfid, META_FILTER_ANY );
 				$f_custom_fields_data[$t_cfid] = array( $f_custom_fields_data[$t_cfid] );

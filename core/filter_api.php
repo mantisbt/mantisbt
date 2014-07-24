@@ -611,7 +611,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	if( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 		foreach( $t_custom_fields as $t_cfid ) {
 			if( is_array( gpc_get( 'custom_field_' . $t_cfid, null ) ) ) {
-				$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, (string)META_FILTER_ANY );
+				$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, array( META_FILTER_ANY ) );
 			} else {
 				$f_custom_fields_data[$t_cfid] = gpc_get_string( 'custom_field_' . $t_cfid, (string)META_FILTER_ANY );
 				$f_custom_fields_data[$t_cfid] = array(
