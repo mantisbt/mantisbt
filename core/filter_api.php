@@ -1407,7 +1407,9 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	if( 'simple' == $t_filter['_view_type'] ) {
 		# simple filtering: if showing any, restrict by the hide status value, otherwise ignore the hide
 		$t_this_status = $t_filter[FILTER_PROPERTY_STATUS][0];
-		$t_this_hide_status = $t_filter[FILTER_PROPERTY_HIDE_STATUS][0];
+		$t_this_hide_status = isset( $t_filter[FILTER_PROPERTY_HIDE_STATUS][0] )
+			? $t_filter[FILTER_PROPERTY_HIDE_STATUS][0]
+			: null;
 
 		if( filter_field_is_any( $t_this_status ) ) {
 			foreach( $t_available_statuses as $t_this_available_status ) {
