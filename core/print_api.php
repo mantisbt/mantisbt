@@ -640,8 +640,8 @@ function print_extended_project_browser_subproject_javascript( $p_trace ) {
 
 # --------------------
 # prints the profiles given the user id
-function print_profile_option_list( $p_user_id, $p_select_id = '', $p_profiles = null ) {
-	if( '' === $p_select_id ) {
+function print_profile_option_list( $p_user_id, $p_select_id = 0, $p_profiles = null ) {
+	if( 0 === $p_select_id ) {
 		$p_select_id = profile_get_default( $p_user_id );
 	}
 	if( $p_profiles != null ) {
@@ -654,8 +654,8 @@ function print_profile_option_list( $p_user_id, $p_select_id = '', $p_profiles =
 
 # --------------------
 # prints the profiles used in a certain project
-function print_profile_option_list_for_project( $p_project_id, $p_select_id = '', $p_profiles = null ) {
-	if( '' === $p_select_id ) {
+function print_profile_option_list_for_project( $p_project_id, $p_select_id = 0, $p_profiles = null ) {
+	if( 0 === $p_select_id ) {
 		$p_select_id = profile_get_default( auth_get_current_user_id() );
 	}
 	if( $p_profiles != null ) {
