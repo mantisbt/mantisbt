@@ -566,7 +566,7 @@ function html_login_info() {
 	}
 
 	if( $t_show_project_selector ) {
-		echo '<div id="project-selector">';
+		echo '<div id="project-selector-div">';
 		echo '<form method="post" id="form-set-project" action="' . helper_mantis_url( 'set_project.php' ) . '">';
 		echo '<fieldset id="project-selector">';
 		# CSRF protection not required here - form does not result in modifications
