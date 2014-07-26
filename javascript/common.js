@@ -194,10 +194,13 @@ $(document).ready( function() {
 	$('[name=source_query_id]').change( function() {
 		$(this).parent().submit();
 	});
-	$('#project-selector').children('[name=project_id]').change( function() {
+
+	/* Project selector: auto-switch on select */
+	$('#form-set-project-id').change( function() {
 		$('#form-set-project').submit();
 	});
 	$('#project-selector').children('.button').hide();
+
 	setBugLabel();
 
 	$(document).on('click', 'input[type=checkbox]#use_date_filters', function() {
