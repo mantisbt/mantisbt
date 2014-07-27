@@ -20,7 +20,6 @@
 .rtl .navbar-right {
     float: left !important;
 }
-
 .rtl .navbar-left {
     float: right !important;
 }
@@ -196,6 +195,41 @@ pre {
     .input-sm {
         width: auto !important;
     }
+
+    .sidebar.compact + .main-content {
+        margin-right: auto !important;
+        margin-left: 125px !important;
+    }
+
+    .sidebar.menu-min + .main-content {
+        margin-right: auto  !important;
+        margin-left: 43px !important;
+    }
+
+    .sidebar.compact, .sidebar.compact.navbar-collapse {
+        width: 125px;
+    }
+
+    .footer .footer-inner .footer-content {
+        left: 32px !important;
+    }
+
+    .rtl .sidebar.compact + .main-content {
+        margin-left: auto !important;
+        margin-right: 125px !important;
+    }
+    .rtl .sidebar.menu-min + .main-content {
+        margin-left: auto  !important;
+        margin-right: 43px !important;
+    }
+    .rtl .footer .footer-inner .footer-content {
+        left: 12px !important;
+        right: 32px !important;
+    }
+
+    .rtl .footer .footer-inner .footer-content {
+        right: 32px !important;
+    }
 }
 
 /* Large devices (large desktops, 1200px and up) */
@@ -207,4 +241,40 @@ pre {
     .input-sm {
         width: auto !important;
     }
+
+    .sidebar.compact + .main-content {
+        margin-right: auto !important;
+        margin-left: 125px !important;
+    }
+
+    .sidebar.menu-min + .main-content {
+        margin-right: auto  !important;
+        margin-left: 43px !important;
+    }
+
+    .sidebar.compact, .sidebar.compact.navbar-collapse {
+        width: 125px;
+    }
+
+    .footer .footer-inner .footer-content {
+        left: 32px !important;
+    }
+
+    .rtl .sidebar.compact + .main-content {
+        margin-left: auto !important;
+        margin-right: 125px !important;
+    }
+    .rtl .sidebar.menu-min + .main-content {
+        margin-left: auto  !important;
+        margin-right: 43px !important;
+    }
+    .rtl .footer .footer-inner .footer-content {
+        left: 12px !important;
+        right: 32px !important;
+    }
+
+    .rtl .footer .footer-inner .footer-content {
+        right: 32px !important;
+    }
 }
+
