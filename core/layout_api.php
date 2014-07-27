@@ -912,7 +912,7 @@ function layout_breadcrumbs() {
         $t_page = ( OFF == $t_protected ) ? 'account_page.php' : 'my_view_page.php';
         echo '  <a href="' . helper_mantis_url( $t_page ) . '">' . string_html_specialchars( $t_username ) . '</a></li>' .  "\n";
 
-        $t_label = layout_is_rtl() ? 'arrowed-in' : 'arrowed-in-right';
+        $t_label = layout_is_rtl() ? 'arrowed-right' : 'arrowed';
         echo '  <span class="label hidden-xs label-default ' . $t_label . '">' . $t_access_level . '</span>' , "\n";
     }
     echo '</ul>' , "\n";
