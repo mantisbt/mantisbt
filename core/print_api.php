@@ -283,12 +283,10 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 			$t_project_users_list = project_get_all_user_rows( $t_project_id, $p_access );
 			# Do a 'smart' merge of the project's user list, into an
 			# associative array (to remove duplicates)
-			# Use a while loop for better performance
-			$i = 0;
-			while( isset( $t_project_users_list[$i] ) ) {
-				$t_users[$t_project_users_list[$i]['id']] = $t_project_users_list[$i];
-				$i++;
-		}
+			# Use a foreach loop for better performance vs array_merge()
+			foreach( $t_project_users_list as $t_user ) {
+				$t_users[$t_user['id']] = $t_user;
+			}
 			unset( $t_project_users_list );
 		}
 		unset( $t_projects );
@@ -317,12 +315,11 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 	}
 	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
 	unset( $t_sort );
-	$t_count = count( $t_users );
-	for( $i = 0;$i < $t_count;$i++ ) {
-		$t_row = $t_users[$i];
-		echo '<option value="' . $t_row['id'] . '" ';
-		check_selected( $p_user_id, (int)$t_row['id'] );
-		echo '>' . $t_display[$i] . '</option>';
+
+	foreach( $t_users as $t_key => $t_user ) {
+		echo '<option value="' . $t_user['id'] . '" ';
+		check_selected( $p_user_id, (int)$t_user['id'] );
+		echo '>' . $t_display[$t_key] . '</option>';
 	}
 }
 
