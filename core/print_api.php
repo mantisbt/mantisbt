@@ -274,24 +274,23 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 		$p_project_id = helper_get_current_project();
 	}
 
+	$t_users = project_get_all_user_rows_assoc( $p_project_id, $p_access );
 	if( $p_project_id === ALL_PROJECTS ) {
 		$t_projects = user_get_accessible_projects( $t_current_user );
 
 		# Get list of users having access level for all accessible projects
-		$t_users = array();
 		foreach( $t_projects as $t_project_id ) {
-			$t_project_users_list = project_get_all_user_rows( $t_project_id, $p_access );
+			# We don't need to include global users again as we already got them
+			$t_project_users_list = project_get_all_user_rows_assoc( $t_project_id, $p_access, false );
 			# Do a 'smart' merge of the project's user list, into an
 			# associative array (to remove duplicates)
 			# Use a foreach loop for better performance vs array_merge()
-			foreach( $t_project_users_list as $t_user ) {
-				$t_users[$t_user['id']] = $t_user;
+			foreach( $t_project_users_list as $t_key => $t_user ) {
+				$t_users[$t_key] = $t_user;
 			}
 			unset( $t_project_users_list );
 		}
 		unset( $t_projects );
-	} else {
-		$t_users = project_get_all_user_rows( $p_project_id, $p_access );
 	}
 
 	$t_display = array();
