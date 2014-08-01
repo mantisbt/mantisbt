@@ -383,6 +383,21 @@ $g_lost_password_feature = ON;
  */
 $g_max_lost_password_in_progress_count = 3;
 
+/**
+ * Configuration for the password security.
+ * If NUMBER_REQUIRED = true at least one number is required
+ * IF UPPERCASE_REQUIRED = true at least one uppercase character is required
+ * IF LOWERCASE_REQUIRED = true at least one lowercase character is required
+ * MIN_CHARACTERS defines the minumum characters
+ * @global mixed $g_password_security
+ */
+$g_password_security = array (
+		"NUMBER_REQUIRED" => true,
+		"UPPERCASE_REQUIRED" => true,
+		"LOWERCASE_REQUIRED" => true,
+		"MIN_CHARACTERS" => 8
+);
+
 ###########################
 # MantisBT Email Settings #
 ###########################

@@ -113,11 +113,13 @@ if (! is_blank ( $f_password )) {
 	if ($f_password != $f_password_confirm) {
 		trigger_error ( ERROR_USER_CREATE_PASSWORD_MISMATCH, ERROR );
 	} else {
-		$uppercase = preg_match ( '/[A-Z]/', $f_password );
-		$lowercase = preg_match ( '/[a-z]/', $f_password );
-		$number = preg_match ( '/[0-9]/', $f_password );
+		$f_password_security = config_get ( 'password_security' );
+		$f_uppercase = $f_password_security ["UPPERCASE_REQUIRED"] ? preg_match ( '/[A-Z]/', $f_password ) : 1;
+		$f_lowercase = $f_password_security ["LOWERCASE_REQUIRED"] ? preg_match ( '/[a-z]/', $f_password ) : 1;
+		$f_number = $f_password_security ["NUMBER_REQUIRED"] ? preg_match ( '/[0-9]/', $f_password ) : 1;
+		$f_length = $f_password_security ["MIN_CHARACTERS"];
 		
-		if (! $uppercase || ! $lowercase || ! $number || strlen ( $f_password ) < 8) {
+		if (! $f_uppercase || ! $f_lowercase || ! $f_number || strlen ( $f_password ) < $f_length) {
 			trigger_error ( ERROR_USER_CREATE_PASSWORD_PATTERN_NO_MATCH, ERROR );
 		} else if (! auth_does_password_match ( $t_user_id, $f_password )) {
 			user_set_password ( $t_user_id, $f_password );
