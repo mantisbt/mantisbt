@@ -183,7 +183,7 @@ function show_notify_threshold( $p_access, $p_action ) {
 	if( $g_can_change_flags  || $g_can_change_defaults ) {
 		$t_flag_name = $p_action . ':' . $p_access;
 		$t_set = $t_flag ? 'checked="checked"' : '';
-		return '<label><input type="checkbox" name="flag_threshold[]" value="' . $t_flag_name . '" ' . $t_set . ' />' . '<span class="lbl"></span></label>';
+		return '<label><input class="ace" type="checkbox" name="flag_threshold[]" value="' . $t_flag_name . '" ' . $t_set . ' />' . '<span class="lbl"></span></label>';
 	} else {
 		return $t_flag ? '<i class="fa fa-check fa-lg blue"></i>' : '&#160;';
 	}
