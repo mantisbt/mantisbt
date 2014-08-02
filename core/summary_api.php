@@ -316,11 +316,11 @@ function summary_print_by_date( array $p_date_array ) {
 		echo '    <td width="50%">' . $t_days . '</td>' . "\n";
 
 		if( $t_new_count > 0 ) {
-			echo '    <td class="right">' . $t_new_bugs_link . $t_new_count . '</a></td>' . "\n";
+			echo '    <td>' . $t_new_bugs_link . $t_new_count . '</a></td>' . "\n";
 		} else {
-			echo '    <td class="right">' . $t_new_count . '</td>' . "\n";
+			echo '    <td>' . $t_new_count . '</td>' . "\n";
 		}
-		echo '    <td class="right">' . $t_resolved_count . '</td>' . "\n";
+		echo '    <td>' . $t_resolved_count . '</td>' . "\n";
 
 		$t_balance = $t_new_count - $t_resolved_count;
 		$t_style = '';
@@ -396,7 +396,7 @@ function summary_print_by_activity() {
 		$t_notescount = $t_row['count'];
 
 		echo '<tr>' . "\n";
-		echo '<td class="small">' . $t_bugid . ' - ' . $t_summary . '</td><td class="right">' . $t_notescount . '</td>' . "\n";
+		echo '<td class="small">' . $t_bugid . ' - ' . $t_summary . '</td><td>' . $t_notescount . '</td>' . "\n";
 		echo '</tr>' . "\n";
 	}
 }
@@ -442,7 +442,7 @@ function summary_print_by_age() {
 		$t_days_open = intval( ( time() - $t_row['date_submitted'] ) / SECONDS_PER_DAY );
 
 		echo '<tr>' . "\n";
-		echo '<td class="small">' . $t_bugid . ' - ' . $t_summary . '</td><td class="right">' . $t_days_open . '</td>' . "\n";
+		echo '<td class="small">' . $t_bugid . ' - ' . $t_summary . '</td><td>' . $t_days_open . '</td>' . "\n";
 		echo '</tr>' . "\n";
 	}
 }
@@ -895,7 +895,7 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 					$t_res_bug_count = $t_arr2[$c_res_s[$j]];
 				}
 
-				echo '<td class="right">';
+				echo '<td>';
 				if( 0 < $t_res_bug_count ) {
 					$t_bug_link = '<a class="subtle" href="' . $t_filter_prefix . '&amp;' . FILTER_PROPERTY_HANDLER_ID . '=' . $t_handler_id;
 					$t_bug_link = $t_bug_link . '&amp;' . FILTER_PROPERTY_RESOLUTION . '=' . $c_res_s[$j] . '">';
@@ -921,7 +921,7 @@ function summary_print_developer_resolution( $p_resolution_enum_string ) {
 			if( ( $t_arr2['total'] - $t_bugs_notbugs ) > 0 ) {
 				$t_percent_fixed = ( $t_bugs_fixed / ( $t_arr2['total'] - $t_bugs_notbugs ) );
 			}
-			echo '<td class="right">';
+			echo '<td>';
 			printf( '% 1.0f%%', ( $t_percent_fixed * 100 ) );
 			echo "</td>\n";
 			echo '</tr>';
@@ -1011,7 +1011,7 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 					$t_res_bug_count = $t_arr2[$c_res_s[$j]];
 				}
 
-				echo '<td class="right">';
+				echo '<td>';
 				if( 0 < $t_res_bug_count ) {
 					$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_REPORTER_ID . '=' . $t_reporter_id;
 					$t_bug_link = $t_bug_link . '&amp;' . FILTER_PROPERTY_RESOLUTION . '=' . $c_res_s[$j] . '">';
@@ -1037,7 +1037,7 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
 			if( $t_total_user_bugs > 0 ) {
 				$t_percent_errors = ( $t_bugs_notbugs / $t_total_user_bugs );
 			}
-			echo '<td class="right">';
+			echo '<td>';
 			printf( '% 1.0f%%', ( $t_percent_errors * 100 ) );
 			echo "</td>\n";
 			echo '</tr>';
