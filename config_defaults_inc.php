@@ -3605,6 +3605,21 @@ $g_status_icon_arr = array (
 );
 
 /**
+ * Associative Array for icons for custom fields
+ * <Custom Field Name> => array ("Single Values" => "Picuture"). Always add ShowText as an option. If it is set to ON the text is displayed in addition to the icon.
+ * @global array $g_custom_status_icon_arr
+ */
+$g_custom_status_icon_arr = array (
+		"Effort" => array(
+				"" => "none.png",
+				"Low" => "low.png",
+				"Medium" => "medium.png",
+				"High" => "high.png",
+				"ShowText" => OFF
+		)
+);
+
+/**
  * Sort direction to icon mapping
  * @global array $g_sort_icon_arr
  */
