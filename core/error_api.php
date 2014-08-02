@@ -338,11 +338,10 @@ function error_print_context( array $p_context ) {
 
 /**
  * Print out a stack trace
- * @return void
- * @uses error_alternate_class
  */
 function error_print_stack_trace() {
-    echo '<table class="width90">';
+    echo '<div class="table-responsive">';
+    echo '<table class="table table-bordered table-striped table-condensed">';
     echo '<tr><th>Filename</th><th>Line</th><th></th><th></th><th>Function</th><th>Args</th></tr>';
 
     $t_stack = debug_backtrace();
@@ -355,7 +354,7 @@ function error_print_stack_trace() {
     # remove the call to the error handler from the stack trace
 
     foreach( $t_stack as $t_frame ) {
-        echo '<tr ', error_alternate_class(), '>';
+        echo '<tr>';
         echo '<td>', ( isset( $t_frame['file'] ) ? htmlentities( $t_frame['file'], ENT_COMPAT, 'UTF-8' ) : '-' ), '</td><td>', ( isset( $t_frame['line'] ) ? $t_frame['line'] : '-' ), '</td><td>', ( isset( $t_frame['class'] ) ? $t_frame['class'] : '-' ), '</td><td>', ( isset( $t_frame['type'] ) ? $t_frame['type'] : '-' ), '</td><td>', ( isset( $t_frame['function'] ) ? $t_frame['function'] : '-' ), '</td>';
 
         $t_args = array();
@@ -486,17 +485,3 @@ function error_proceed_url( $p_url ) {
 	$g_error_proceed_url = $p_url;
 }
 
-/**
- * Simple version of helper_alternate_class for use by error api only.
- * @access private
- * @return string representing css class
- */
-function error_alternate_class() {
-	static $s_errindex = 1;
-
-	if( 1 == $s_errindex++ % 2 ) {
-		return 'class="row-1"';
-	} else {
-		return 'class="row-2"';
-	}
-}

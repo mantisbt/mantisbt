@@ -142,7 +142,7 @@ function show_revision( array $p_revision ) {
         <td colspan="2"><?php echo $t_by_string ?></td>
         <td class="center" width="5%">
             <?php if( $s_can_drop ) {
-                print_bracket_link( 'bug_revision_drop.php?id=' . $p_revision['id'] . $s_drop_token, lang_get( 'revision_drop' ) );
+                print_small_button( 'bug_revision_drop.php?id=' . $p_revision['id'] . $s_drop_token, lang_get( 'revision_drop' ) );
             } ?>
     </tr>
 
@@ -160,31 +160,44 @@ layout_page_begin();
 
 ?>
 
-    <br/>
-    <div class="table-responsive">
-        <table class="table table-bordered table-condensed table-striped">
-            <tr>
-                <td class="bold" colspan="2"><?php echo lang_get( 'view_revisions' ), ': ', $t_title ?></td>
-                <td class="pull-right" colspan="2">
-                    <?php
-                    if( !$f_bug_id && !$f_bugnote_id ) { print_bracket_link( '?bug_id=' . $t_bug_id, lang_get( 'all_revisions' ) ); }
-                    print_bracket_link( 'view.php?id=' . $t_bug_id, lang_get( 'back_to_issue' ) );
-                    ?>
-                </td>
-            </tr>
+    <div class="col-md-12 col-xs-12">
+        <div class="widget-box widget-color-blue2">
+            <div class="widget-header widget-header-small">
+                <h4 class="widget-title lighter">
+                    <i class="ace-icon fa fa-history"></i>
+                    <?php echo lang_get( 'view_revisions' ), ': ', $t_title ?>
+                </h4>
+            </div>
 
-            <tr>
-                <th class="category" width="15%"><?php echo lang_get( 'summary' ) ?></th>
-                <td colspan="3"><?php echo bug_format_summary( $t_bug_id, SUMMARY_FIELD ) ?></td>
-            </tr>
+            <div class="widget-body">
+                <div class="widget-toolbox">
+                    <div class="btn-toolbar">
+                        <div class="btn-group pull-right">
+                            <?php
+                            if( !$f_bug_id && !$f_bugnote_id ) { print_small_button( '?bug_id=' . $t_bug_id, lang_get( 'all_revisions' ) ); }
+                            print_small_button( 'view.php?id=' . $t_bug_id, lang_get( 'back_to_issue' ) );
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-main no-padding">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-condensed table-striped">
+                            <tr>
+                                <th class="category" width="15%"><?php echo lang_get( 'summary' ) ?></th>
+                                <td colspan="3"><?php echo bug_format_summary( $t_bug_id, SUMMARY_FIELD ) ?></td>
+                            </tr>
 
-            <?php foreach( $t_bug_revisions as $t_rev ) {
-                show_revision( $t_rev );
-            } ?>
+                            <?php foreach( $t_bug_revisions as $t_rev ) {
+                                show_revision( $t_rev );
+                            } ?>
 
-        </table>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
 <?php
 layout_page_end();
 

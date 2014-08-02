@@ -183,20 +183,21 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
                 <div class="widget-body">
                     <div class="widget-main no-padding">
                         <div class="widget-toolbox">
-                            <div class="pull-right">
-                            <?php
-                            $f_switch_view_link = 'view_filters_page.php?target_field=' . $t_target_field . '&view_type=';
+                            <div class="btn-toolbar">
+                                <div class="btn-group pull-right">
+                                    <?php
+                                    $f_switch_view_link = 'view_filters_page.php?target_field=' . $t_target_field . '&view_type=';
 
-                            if( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
-                                if( 'advanced' == $f_view_type ) {
-                                    print_small_button( $f_switch_view_link . 'simple', lang_get( 'simple_filters' ) );
-                                } else {
-                                    print_small_button( $f_switch_view_link . 'advanced', lang_get( 'advanced_filters' ) );
-                                }
-                            }
-                            ?>
+                                    if( ( SIMPLE_ONLY != config_get( 'view_filters' ) ) && ( ADVANCED_ONLY != config_get( 'view_filters' ) ) ) {
+                                        if( 'advanced' == $f_view_type ) {
+                                            print_small_button( $f_switch_view_link . 'simple', lang_get( 'simple_filters' ) );
+                                        } else {
+                                            print_small_button( $f_switch_view_link . 'advanced', lang_get( 'advanced_filters' ) );
+                                        }
+                                    }
+                                    ?>
+                                </div>
                             </div>
-                            <div class="clearfix"></div>
                         </div>
 
                         <div class="table-responsive">
