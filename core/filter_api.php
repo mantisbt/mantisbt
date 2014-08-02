@@ -3580,17 +3580,17 @@ function print_filter_reporter_id() {
 		echo '<option value="' . $t_id . '" selected="selected">' . $t_display_name . '</option>';
 	} else {
 		?>
-		<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_REPORTER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+		<option value="<?php echo META_FILTER_ANY?>" <?php check_selected( (int)$g_filter[FILTER_PROPERTY_REPORTER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 		<?php
 			if( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
 				echo '<option value="' . META_FILTER_MYSELF . '" ';
-				check_selected( $g_filter[FILTER_PROPERTY_REPORTER_ID], META_FILTER_MYSELF );
+				check_selected( (int)$g_filter[FILTER_PROPERTY_REPORTER_ID], META_FILTER_MYSELF );
 				echo '>[' . lang_get( 'myself' ) . ']</option>';
 			}
-		print_reporter_option_list( $g_filter[FILTER_PROPERTY_REPORTER_ID] );
+		print_reporter_option_list( (int)$g_filter[FILTER_PROPERTY_REPORTER_ID] );
 	}?>
 		</select>
-		<?php
+	<?php
 }
 
 /**
@@ -3602,18 +3602,18 @@ function print_filter_user_monitor() {
 	?>
 	<!-- Monitored by -->
 		<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_MONITOR_USER_ID;?>[]">
-			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_MONITOR_USER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( (int)$g_filter[FILTER_PROPERTY_MONITOR_USER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<?php
 				if( access_has_project_level( config_get( 'monitor_bug_threshold' ) ) ) {
 		echo '<option value="' . META_FILTER_MYSELF . '" ';
-		check_selected( $g_filter[FILTER_PROPERTY_MONITOR_USER_ID], META_FILTER_MYSELF );
+		check_selected( (int)$g_filter[FILTER_PROPERTY_MONITOR_USER_ID], META_FILTER_MYSELF );
 		echo '>[' . lang_get( 'myself' ) . ']</option>';
 	}
 	$t_threshold = config_get( 'show_monitor_list_threshold' );
 	$t_has_project_level = access_has_project_level( $t_threshold );
 
 	if( $t_has_project_level ) {
-		print_reporter_option_list( $g_filter[FILTER_PROPERTY_MONITOR_USER_ID] );
+		//print_reporter_option_list( (int)$g_filter[FILTER_PROPERTY_MONITOR_USER_ID] );
 	}
 	?>
 		</select>
@@ -3629,17 +3629,17 @@ function print_filter_handler_id() {
 	?>
 		<!-- Handler -->
 		<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_HANDLER_ID;?>[]">
-			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_HANDLER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( (int)$g_filter[FILTER_PROPERTY_HANDLER_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<?php if( access_has_project_level( config_get( 'view_handler_threshold' ) ) ) {?>
-			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( $g_filter[FILTER_PROPERTY_HANDLER_ID], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
+			<option value="<?php echo META_FILTER_NONE?>"<?php check_selected( (int)$g_filter[FILTER_PROPERTY_HANDLER_ID], META_FILTER_NONE );?>>[<?php echo lang_get( 'none' )?>]</option>
 			<?php
 				if( access_has_project_level( config_get( 'handle_bug_threshold' ) ) ) {
 			echo '<option value="' . META_FILTER_MYSELF . '" ';
-			check_selected( $g_filter[FILTER_PROPERTY_HANDLER_ID], META_FILTER_MYSELF );
+			check_selected( (int)$g_filter[FILTER_PROPERTY_HANDLER_ID], META_FILTER_MYSELF );
 			echo '>[' . lang_get( 'myself' ) . ']</option>';
 		}
 
-		print_assign_to_option_list( $g_filter[FILTER_PROPERTY_HANDLER_ID] );
+		print_assign_to_option_list( (int)$g_filter[FILTER_PROPERTY_HANDLER_ID] );
 	}?>
 		</select>
 		<?php
@@ -3654,7 +3654,7 @@ function print_filter_show_category() {
 	?>
 		<!-- Category -->
 		<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_CATEGORY_ID;?>[]">
-			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_CATEGORY_ID], (string)META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( (int)$g_filter[FILTER_PROPERTY_CATEGORY_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
 			<?php print_category_filter_option_list( $g_filter[FILTER_PROPERTY_CATEGORY_ID] )?>
 		</select>
 		<?php
@@ -3719,8 +3719,8 @@ function print_filter_show_severity() {
 	global $g_select_modifier, $g_filter;
 	?><!-- Severity -->
 			<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_SEVERITY;?>[]">
-				<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_SEVERITY], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
-				<?php print_enum_string_option_list( 'severity', $g_filter[FILTER_PROPERTY_SEVERITY] )?>
+				<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( (int)$g_filter[FILTER_PROPERTY_SEVERITY], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+				<?php print_enum_string_option_list( 'severity', (int)$g_filter[FILTER_PROPERTY_SEVERITY] )?>
 			</select>
 		<?php
 }
@@ -3733,8 +3733,8 @@ function print_filter_show_resolution() {
 	global $g_select_modifier, $g_filter;
 	?><!-- Resolution -->
 			<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_RESOLUTION;?>[]">
-				<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_RESOLUTION], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
-				<?php print_enum_string_option_list( 'resolution', $g_filter[FILTER_PROPERTY_RESOLUTION] )?>
+				<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( (int)$g_filter[FILTER_PROPERTY_RESOLUTION], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+				<?php print_enum_string_option_list( 'resolution', (int)$g_filter[FILTER_PROPERTY_RESOLUTION] )?>
 			</select>
 		<?php
 }
@@ -3849,8 +3849,8 @@ function print_filter_show_profile() {
 	global $g_select_modifier, $g_filter;
 	?><!-- Profile -->
 		<select class="input-sm" <?php echo $g_select_modifier;?> name="<?php echo FILTER_PROPERTY_PROFILE_ID;?>[]">
-			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $g_filter[FILTER_PROPERTY_PROFILE_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
-			<?php print_profile_option_list_for_project( helper_get_current_project(), $g_filter[FILTER_PROPERTY_PROFILE_ID] );?>
+			<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( (int)$g_filter[FILTER_PROPERTY_PROFILE_ID], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+			<?php print_profile_option_list_for_project( helper_get_current_project(), (int)$g_filter[FILTER_PROPERTY_PROFILE_ID] );?>
 		</select>
 		<?php
 }
