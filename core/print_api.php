@@ -1496,7 +1496,7 @@ function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur
 	}
 
 	if( ( 0 < $p_page_no ) && ( $p_page_no != $p_page_cur ) ) {
-        echo '<li> ';
+        echo '<li class="pull-right"> ';
 		$t_delimiter = ( strpos( $p_page_url, '?' ) ? '&' : '?' );
 		if( $p_temp_filter_id !== 0 ) {
 			print_link( $p_page_url . $t_delimiter . 'filter=' . $p_temp_filter_id . '&page_number=' . $p_page_no, $p_text );
@@ -1505,7 +1505,7 @@ function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur
 		}
         echo ' </li>';
 	} else {
-        echo '<li class="disabled"><a>' . $p_text . '</a></li>';
+        echo '<li class="disabled pull-right"><a>' . $p_text . '</a></li>';
 	}
 }
 
@@ -1549,7 +1549,7 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
     $t_first_page = max( $t_first_page, $p_start );
 
     if( $t_first_page > 1 ) {
-        print( '<li><a> ... </a></li>' );
+        print( '<li class="pull-right"><a> ... </a></li>' );
     }
 
     $t_last_page = $t_first_page + $t_page_links;
@@ -1557,20 +1557,20 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
 
     for( $i = $t_first_page;$i <= $t_last_page;$i++ ) {
         if( $i == $p_current ) {
-            array_push( $t_items, '<li class="active"><a>' . $i . '</a></li>' );
+            array_push( $t_items, '<li class="active pull-right"><a>' . $i . '</a></li>' );
         } else {
             $t_delimiter = ( strpos( $p_page, '?' ) ? '&' : '?' ) ;
             if( $p_temp_filter_id !== 0 ) {
-                array_push( $t_items, '<li><a href="' . $p_page . $t_delimiter . 'filter=' . $p_temp_filter_id . '&amp;page_number=' . $i . '">' . $i . '</a></li>' );
+                array_push( $t_items, '<li class="pull-right"><a href="' . $p_page . $t_delimiter . 'filter=' . $p_temp_filter_id . '&amp;page_number=' . $i . '">' . $i . '</a></li>' );
             } else {
-                array_push( $t_items, '<li><a href="' . $p_page . $t_delimiter . 'page_number=' . $i . '">' . $i . '</a></li>' );
+                array_push( $t_items, '<li class="pull-right"><a href="' . $p_page . $t_delimiter . 'page_number=' . $i . '">' . $i . '</a></li>' );
             }
         }
     }
     echo implode( '&#160;', $t_items );
 
     if( $t_last_page < $p_end ) {
-        print( '<li><a> ... </a></li>' );
+        print( '<li class="pull-right"><a> ... </a></li>' );
     }
 
     # Next and Last links

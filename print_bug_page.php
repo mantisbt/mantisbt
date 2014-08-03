@@ -216,7 +216,7 @@ if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state ||
     echo '<td>', $t_last_updated, '</td>';
     echo '</tr>';
 
-    echo '<tr class="spacer" ><td colspan="6" class=""></td></tr>';
+    echo '<tr class="spacer" ><td colspan="6"></td></tr>';
 }
 
 #
@@ -540,7 +540,7 @@ if( $t_show_attachments ) {
     }
 
     echo '</td></tr>';
-    echo '<tr class="spacer"><td class="" colspan="6"></td></tr>';
+    echo '<tr class="spacer"><td colspan="6"></td></tr>';
 }
 echo '</table>';
 
@@ -551,7 +551,7 @@ echo '</table>';
 if( $t_show_history ) {
     echo '<table class="table table-striped table-bordered table-condensed no-margin small">';
 
-    echo '<tr class=""><td colspan="6" class="bold bigger-110">', lang_get( 'bug_history' ), '</td></tr>';
+    echo '<tr><td colspan="6" class="bold bigger-110">', lang_get( 'bug_history' ), '</td></tr>';
 
     echo '<tr class="bold">';
     echo '<th>', lang_get( 'date_modified' ), '</th>';
@@ -572,7 +572,7 @@ if( $t_show_history ) {
         echo '<td class="print">', string_display_line_links( $t_item['change'] ), '</td>';
         echo '</tr>';
     }
-    echo '<tr class="spacer"><td class="" colspan="4"></td></tr>';
+    echo '<tr class="spacer"><td colspan="4"></td></tr>';
     echo '</table>';
 }
 

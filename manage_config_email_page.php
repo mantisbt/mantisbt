@@ -377,7 +377,7 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 
 		echo "</form>\n";
 
-		echo '<div class="right">' . "\n";
+		echo '<div>' . "\n";
 		echo '<form name="mail_config_action" method="post" action="manage_config_revert.php">' . "\n";
 		echo form_security_field( 'manage_config_revert' ) . "\n";
 		echo '<input name="revert" type="hidden" value="notify_flags,default_notify_flags" />' . "\n";

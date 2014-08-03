@@ -117,7 +117,7 @@ $t_orct_arr = preg_split( '/[\)\/\(]/', lang_get( 'orct' ), -1, PREG_SPLIT_NO_EM
 
 $t_orcttab = '';
 foreach ( $t_orct_arr as $t_orct_s ) {
-    $t_orcttab .= '<td class="right">';
+    $t_orcttab .= '<td>';
     $t_orcttab .= $t_orct_s;
     $t_orcttab .= '</td>';
 }

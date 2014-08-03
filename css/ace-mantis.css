@@ -175,6 +175,15 @@ pre {
     width: auto !important;
 }
 
+.table-condensed2 > thead > tr > th,
+.table-condensed2 > tbody > tr > th,
+.table-condensed2 > tfoot > tr > th,
+.table-condensed2 > thead > tr > td,
+.table-condensed2 > tbody > tr > td,
+.table-condensed2 > tfoot > tr > td {
+    padding: 1px 3px;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .page-content {

@@ -182,7 +182,7 @@ if( $t_sponsor_count === 0 ) {
                 echo '<tr class="' . $t_status_label .  '">';
                 echo '<td><a href="' . string_get_bug_view_url( $t_sponsor_row['bug'] ) . '">' . bug_format_id( $t_sponsor_row['bug'] ) . '</a></td>';
                 echo '<td>' . string_display_line( project_get_field( $t_bug->project_id, 'name' ) ) . '&#160;</td>';
-                echo '<td class="right">' . $t_released_label . '&#160;</td>';
+                echo '<td>' . $t_released_label . '&#160;</td>';
                 echo '<td><span class="issue-status" title="' . $t_resolution . '">' . $t_status . '</span></td>';
                 echo '<td>';
                 print_user( $t_bug->handler_id );
@@ -301,7 +301,7 @@ if( $t_sponsor_count === 0 ) {
                     echo '<tr class="' . $t_status_label .  '">';
                     echo '<td><a href="' . string_get_bug_view_url( $t_sponsor_row['bug'] ) . '">' . bug_format_id( $t_sponsor_row['bug'] ) . '</a></td>';
                     echo '<td>' . string_display_line( project_get_field( $t_bug->project_id, 'name' ) ) . '&#160;</td>';
-                    echo '<td class="right">' . $t_released_label . '&#160;</td>';
+                    echo '<td>' . $t_released_label . '&#160;</td>';
                     echo '<td><a title="' . $t_resolution . '"><span class="underline">' . $t_status . '</span>&#160;</a></td>';
 
                     # summary
@@ -315,7 +315,7 @@ if( $t_sponsor_count === 0 ) {
                     echo '<td>';
                     print_user( $t_sponsor->user_id );
                     echo '</td>';
-                    echo '<td class="right">' . sponsorship_format_amount( $t_sponsor->amount ) . '</td>';
+                    echo '<td>' . sponsorship_format_amount( $t_sponsor->amount ) . '</td>';
                     echo '<td><select class="input-sm" name="sponsor_' . $t_row['bug'] . '_' . $t_sponsor->id . '">';
                     print_enum_string_option_list( 'sponsorship', $t_sponsor->paid );
                     echo '</select></td>';
