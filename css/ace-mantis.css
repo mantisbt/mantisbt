@@ -237,25 +237,26 @@ select.input-xs option, select.form-control.input-xs option {
         width: 125px;
     }
 
-    .footer .footer-inner .footer-content {
-        left: 32px !important;
+    .sidebar.compact ~ .footer .footer-inner {
+        left: 125px;
     }
 
     .rtl .sidebar.compact + .main-content {
         margin-left: auto !important;
         margin-right: 125px !important;
     }
+
     .rtl .sidebar.menu-min + .main-content {
-        margin-left: auto  !important;
+        margin-left: auto !important;
         margin-right: 43px !important;
     }
-    .rtl .footer .footer-inner .footer-content {
-        left: 12px !important;
-        right: 32px !important;
+
+    .rtl .sidebar.compact ~ .footer .footer-inner {
+        right: 125px !important;
     }
 
-    .rtl .footer .footer-inner .footer-content {
-        right: 32px !important;
+    .rtl .sidebar.menu-min ~ .footer .footer-inner {
+        right: 43px !important;
     }
 }
 
