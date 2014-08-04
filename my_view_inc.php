@@ -281,7 +281,7 @@ $t_filter = array_merge( $c_filter[$t_box_title], $t_filter );
 
 $t_box_title_label = lang_get( 'my_view_title_' . $t_box_title );
 
-$t_collapse_block = collapse_display( $box_title );
+$t_collapse_block = collapse_display( $t_box_title_label );
 $t_block_css = $t_collapse_block ? 'collapsed' : '';
 $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
@@ -289,15 +289,14 @@ $t_bug_string = $t_bug_count == 1 ? 'bug' : 'bugs';
 
 # -- ====================== BUG LIST ========================= --
 ?>
-    <div id="<?php echo $box_title ?>" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
+    <div id="<?php echo $t_box_title ?>" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
         <div class="widget-header widget-header-small">
             <h4 class="widget-title lighter">
                 <i class="ace-icon fa fa-list-alt"></i>
                 <?php
                 #-- Box title
-                $t_box_url = html_entity_decode( config_get( 'bug_count_hyperlink_prefix' ) ).'&' .
-                $url_link_parameters[$t_box_title];
-                print_link( $t_box_url, $box_title, false, 'white' );
+                $t_box_url = html_entity_decode( config_get( 'bug_count_hyperlink_prefix' ) ).'&' . $t_url_link_parameters[$t_box_title];
+                print_link( $t_box_url, $t_box_title_label, false, 'white' );
 
                 # -- Viewing range info
                 if( count( $t_rows ) > 0 ) {
