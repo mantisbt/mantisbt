@@ -357,9 +357,9 @@ function layout_navbar() {
 
     echo '<div class="navbar-header pull-left">';
     echo '<a href="' . $t_logo_url . '" class="navbar-brand">';
-    echo '<span class="smaller-75">';
-    echo ' Mantis Bug Tracker ';
-    echo '</span>';
+    echo '<span class="smaller-75"> ';
+    echo config_get( 'window_title' );
+    echo ' </span>';
     echo '</a>';
 
 	$t_toggle_class = (OFF == config_get( 'show_avatar' ) ? 'navbar-toggle' : 'navbar-toggle-img');
@@ -1016,21 +1016,22 @@ function layout_footer() {
 
     event_signal( 'EVENT_LAYOUT_PAGE_FOOTER' );
 
-    # Print horizontal rule if any debugging stats follow
     if( config_get( 'show_timer' ) || config_get( 'show_memory_usage' ) || config_get( 'show_queries_count' ) ) {
-        echo "\t<hr />\n";
+        echo '<div class="col-xs-12 no-padding grey">' . "\n";
+        echo '<address class="no-margin pull-right">' . "\n";
     }
+
 
     # Print the page execution time
     if( config_get( 'show_timer' ) ) {
         $t_page_execution_time = sprintf( lang_get( 'page_execution_time' ), number_format( microtime( true ) - $g_request_time, 4 ) );
-        echo "\t<p id=\"page-execution-time\">$t_page_execution_time</p>\n";
+        echo '<small><i class="fa fa-clock-o"></i> ' . $t_page_execution_time . '</small>&#160;&#160;&#160;&#160;' . "\n";
     }
 
     # Print the page memory usage
     if( config_get( 'show_memory_usage' ) ) {
         $t_page_memory_usage = sprintf( lang_get( 'memory_usage_in_kb' ), number_format( memory_get_peak_usage() / 1024 ) );
-        echo "\t<p id=\"page-memory-usage\">$t_page_memory_usage</p>\n";
+        echo '<small><i class="fa fa-bolt"></i> ' . $t_page_memory_usage . '</small>&#160;&#160;&#160;&#160;' . "\n";
     }
 
     # Determine number of unique queries executed
@@ -1051,13 +1052,18 @@ function layout_footer() {
         }
 
         $t_total_queries_executed = sprintf( lang_get( 'total_queries_executed' ), $t_total_queries_count );
-        echo "\t<p id=\"total-queries-count\">$t_total_queries_executed</p>\n";
+        echo '<small><i class="fa fa-database"></i> ' . $t_total_queries_executed . '</small>&#160;&#160;&#160;&#160;' . "\n";
         if( config_get_global( 'db_log_queries' ) ) {
             $t_unique_queries_executed = sprintf( lang_get( 'unique_queries_executed' ), $t_unique_queries_count );
-            echo "\t<p id=\"unique-queries-count\">$t_unique_queries_executed</p>\n";
+            echo '<small><i class="fa fa-database"></i> ' . $t_unique_queries_executed . '</small>&#160;&#160;&#160;&#160;' . "\n";
         }
         $t_total_query_time = sprintf( lang_get( 'total_query_execution_time' ), $t_total_query_execution_time );
-        echo "\t<p id=\"total-query-execution-time\">$t_total_query_time</p>\n";
+        echo '<small><i class="fa fa-clock-o"></i> ' . $t_total_query_time . '</small>&#160;&#160;&#160;&#160;' . "\n";
+    }
+
+    if( config_get( 'show_timer' ) || config_get( 'show_memory_usage' ) || config_get( 'show_queries_count' ) ) {
+        echo '</address>' . "\n";
+        echo '</div>' . "\n";
     }
 
     # Print table of log events
