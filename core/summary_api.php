@@ -64,11 +64,11 @@ require_api( 'utility_api.php' );
  */
 function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p_total ) {
 	printf( '<tr>' );
-	printf( '<td width="50%">%s</td>', $p_label );
-	printf( '<td width="12%">%s</td>', $p_open );
-	printf( '<td width="12%">%s</td>', $p_resolved );
-	printf( '<td width="12%">%s</td>', $p_closed );
-	printf( '<td width="12%">%s</td>', $p_total );
+	printf( '<td width="50%%">%s</td>', $p_label );
+	printf( '<td width="12%%">%s</td>', $p_open );
+	printf( '<td width="12%%">%s</td>', $p_resolved );
+	printf( '<td width="12%%">%s</td>', $p_closed );
+	printf( '<td width="12%%">%s</td>', $p_total );
 	echo '</tr>';
 }
 
