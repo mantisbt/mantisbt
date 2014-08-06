@@ -185,3 +185,7 @@ config_obsolete( 'mc_eta_enum_default_when_not_found', 'webservice_eta_enum_defa
 config_obsolete( 'mc_error_when_version_not_found', 'webservice_error_when_version_not_found' );
 config_obsolete( 'mc_version_when_not_found', 'webservice_version_when_not_found' );
 env_obsolete( 'MANTIS_CONFIG', 'MANTIS_CONFIG_FOLDER' );
+config_obsolete( 'show_footer_menu' );
+config_obsolete( 'status_legend_position' );
+config_obsolete( 'status_percentage_legend' );
+
