@@ -1529,18 +1529,22 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
     }
 
     # Get localized strings
-    $t_first = lang_get( 'first' );
-    $t_last = lang_get( 'last' );
-    $t_prev = lang_get( 'prev' );
-    $t_next = lang_get( 'next' );
+    $t_first = '<i class="fa fa-fast-backward"></i>';
+    $t_last = '<i class="fa fa-fast-forward"></i>';
+    $t_prev = '<i class="fa fa-backward"></i>';
+    $t_next = '<i class="fa fa-forward"></i>';
 
     $t_page_links = 10;
 
     print( '<ul class="pagination small no-margin"> ' );
 
-    # First and previous links
-    print_page_link( $p_page, $t_first, 1, $p_current, $p_temp_filter_id );
-    print_page_link( $p_page, $t_prev, $p_current - 1, $p_current, $p_temp_filter_id );
+    # Next and Last links
+    print_page_link( $p_page, $t_last, $p_end, $p_current, $p_temp_filter_id );
+    if( $p_current < $p_end ) {
+        print_page_link( $p_page, $t_next, $p_current + 1, $p_current, $p_temp_filter_id );
+    } else {
+        print_page_link( $p_page, $t_next, null, null, $p_temp_filter_id );
+    }
 
     # Page numbers ...
 
@@ -1548,14 +1552,14 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
     $t_first_page = min( $t_first_page, $p_end - $t_page_links );
     $t_first_page = max( $t_first_page, $p_start );
 
-    if( $t_first_page > 1 ) {
-        print( '<li class="pull-right"><a> ... </a></li>' );
-    }
-
     $t_last_page = $t_first_page + $t_page_links;
     $t_last_page = min( $t_last_page, $p_end );
 
-    for( $i = $t_first_page;$i <= $t_last_page;$i++ ) {
+    if( $t_last_page < $p_end ) {
+        print( '<li class="pull-right"><a> ... </a></li>' );
+    }
+
+    for( $i = $t_last_page;$i >= $t_first_page;$i-- ) {
         if( $i == $p_current ) {
             array_push( $t_items, '<li class="active pull-right"><a>' . $i . '</a></li>' );
         } else {
@@ -1569,17 +1573,14 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
     }
     echo implode( '&#160;', $t_items );
 
-    if( $t_last_page < $p_end ) {
+    if( $t_first_page > 1 ) {
         print( '<li class="pull-right"><a> ... </a></li>' );
     }
 
-    # Next and Last links
-    if( $p_current < $p_end ) {
-        print_page_link( $p_page, $t_next, $p_current + 1, $p_current, $p_temp_filter_id );
-    } else {
-        print_page_link( $p_page, $t_next, null, null, $p_temp_filter_id );
-    }
-    print_page_link( $p_page, $t_last, $p_end, $p_current, $p_temp_filter_id );
+
+    # First and previous links
+    print_page_link( $p_page, $t_prev, $p_current - 1, $p_current, $p_temp_filter_id );
+    print_page_link( $p_page, $t_first, 1, $p_current, $p_temp_filter_id );
 
     print( ' </ul>' );
 }
