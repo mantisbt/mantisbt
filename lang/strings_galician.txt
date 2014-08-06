@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Bithunter
  * @author Fitoschido
  * @author McDutchie
  * @author Toliño
@@ -859,7 +860,7 @@ $s_updated = 'Actualizado';
 $s_sticky = 'Mostrar os problemas fixos';
 $s_sticky_label = 'Mostrar os problemas fixos:';
 $s_sort_label = 'Ordenar por:';
-$s_issue_id = 'Problema #';
+$s_issue_id = 'Incidencia nº';
 $s_recently_visited = 'Visitados recentemente';
 $s_note_user_id_label = 'Por nota:';
 $s_filter_match_type = 'Tipo de coincidencia';
@@ -987,7 +988,7 @@ $s_changelog_empty = 'Non hai dispoñible ningunha información do rexistro de c
 $s_roadmap = 'Roteiro';
 $s_resolved_progress = '%1$d problema(s) de %2$d resolto(s). Progreso (%3$d%%).';
 $s_http_auth_realm = 'Rexistro MantisBT';
-$s_bug = 'problema';
+$s_bug = 'incidencia';
 $s_bugs = 'problemas';
 $s_add_new_relationship = 'Nova relación';
 $s_add_new_relationship_button = 'Engadir';

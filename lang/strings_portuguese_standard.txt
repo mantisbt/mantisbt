@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Bithunter
  * @author Crazymadlover
  * @author Giro720
  * @author Gusta

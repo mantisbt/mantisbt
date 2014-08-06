@@ -42,6 +42,7 @@
  * @author Baonguyen21022003
  * @author Duongnvm
  * @author Minh Nguyen
+ * @author Trần Nguyễn Minh Huy
  * @author Tuankiet65
  */
 
@@ -261,7 +262,7 @@ $s_email_summary = 'Tóm tắt';
 $s_email_description = 'Mô tả';
 $s_email_additional_information = 'Thông tin bổ sung';
 $s_email_steps_to_reproduce = 'Các bước tái sản xuất';
-$s_account_protected_msg = 'Tài khoản được bảo vệ. Không có thể thay đổi thiết lập...';
+$s_account_protected_msg = 'Tài khoản được bảo vệ. Không thể thay đổi thiết lập...';
 $s_account_removed_msg = 'Tài khoản của bạn đã được gỡ bỏ...';
 $s_confirm_delete_msg = 'Bạn có chắc chắn xóa tài khoản của bạn?';
 $s_delete_account_button = 'Xóa tài khoản';

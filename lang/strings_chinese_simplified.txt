@@ -39,6 +39,7 @@
  * @file
  *
  * @author Bbqyee
+ * @author Duolaimi
  * @author Fengchao
  * @author Fwolf
  * @author Gaoxuewei
@@ -176,7 +177,7 @@ $s_assign_group_bugs_button = '分派问题';
 $s_resolve_group_bugs_button = '解决问题';
 $s_priority_group_bugs_button = '修改优先级别';
 $s_status_group_bugs_button = '修改状态';
-$s_category_group_bugs_button = '更新类别';
+$s_category_group_bugs_button = '更新分类';
 $s_view_status_group_bugs_button = '修改查看权限';
 $s_set_sticky_group_bugs_button = '设置/取消置顶';
 $s_fixed_in_version_group_bugs_button = '更改修正版本';
@@ -217,7 +218,7 @@ $s_sponsorship_enum_string = '0:未支付,1:已请求,2:已支付';
 $s_new_account_subject = '问题管理系统帐号注册';
 $s_new_account_greeting = '谢谢你注册本系统. 你的登陆帐号名称是“%1$s”。为了完成你的注册，请访问以下网页设置新的密码：';
 $s_new_account_greeting_admincreated = '用户%1$s为你创建了用户名为"%2$s"的帐号. 请访问下面的地址以完成你的注册并设置自己的访问密码:';
-$s_new_account_username = '用户名:';
+$s_new_account_username = '用户名：';
 $s_new_account_message = '如果你从未申请过注册本系统，请忽略此消息';
 $s_new_account_do_not_reply = '此邮件由系统自动生成，请勿回复';
 $s_new_account_email = '电子邮箱:';
@@ -285,7 +286,7 @@ $s_username = '帐号';
 $s_username_label = '用户名';
 $s_realname = '姓名';
 $s_realname_label = '真实姓名';
-$s_email = 'Email';
+$s_email = '电子邮件';
 $s_email_label = '电子邮箱';
 $s_password = '密码';
 $s_no_password_change = '该密码被另一个系统所控制，因此不能在这里修改。';
@@ -641,7 +642,7 @@ $s_plugin_url = '网址：';
 $s_plugin_depends = '依赖于';
 $s_plugin_no_depends = '没有依赖项';
 $s_plugin_priority = '优先级';
-$s_plugin_protected = '已保护';
+$s_plugin_protected = '受保护';
 $s_plugin_update = '升级';
 $s_plugin_actions = '操作';
 $s_plugin_install = '安装';
@@ -978,7 +979,7 @@ $s_custom_field_type_enum_string = '0:字符串,1:数值,2:浮点数,3:枚举类
 $s_confirm_used_custom_field_deletion = '当前有至少一个项目链接到了这个字段，如果继续，这个字段的所有值都将被永久删除；删除操作无法恢复。如果你不想删除这个字段，请点击浏览器的“返回”按钮；点击下面的按钮继续删除。';
 $s_confirm_custom_field_deletion = '你确定要删除这个自定义字段和所有相关联的值吗？';
 $s_field_delete_button = '删除字段';
-$s_confirm_custom_field_unlinking = '确实要取消链接此自定义的字段，从项目吗？将删除的值，只要自定义字段本身不会被删除。';
+$s_confirm_custom_field_unlinking = '您确信您要从项目移除（取消连接）此自定义字段表并删除所有关联值么？';
 $s_field_remove_button = '移除字段';
 $s_hide_status = '隐藏状态';
 $s_hide_status_label = '隐藏状态：';
@@ -1192,6 +1193,17 @@ $s_month_september = '9月';
 $s_month_october = '10月';
 $s_month_november = '11月';
 $s_month_december = '12月';
+$s_timeline_issue_created = '<span class="username">%1s</span>创建了问题<span class="issue_id">%2s</span>';
+$s_timeline_issue_note_created = '<span class="username">%1s</span>在问题<span class="issue_id">%2s</span>做出评论';
+$s_timeline_issue_monitor = '<span class="username">%1s</span>监视问题<span class="issue_id">%2s</span>';
+$s_timeline_issue_unmonitor = '<span class="username">%1s</span>停止监视问题<span class="issue_id">%2s</span>';
+$s_timeline_issue_tagged = '<span class="username">%1s</span>将问题<span class="issue_id">%2s</span>标记<span class="tag_name">%3s</span>';
+$s_timeline_issue_untagged = '<span class="username">%1s</span>从问题<span class="issue_id">%2s</span>移除<span class="tag_name">%3s</span>';
+$s_timeline_issue_resolved = '<span class="username">%1s</span>解决了问题<span class="issue_id">%2s</span>';
+$s_timeline_issue_closed = '<span class="username">%1s</span>关闭了问题<span class="issue_id">%2s</span>';
+$s_timeline_issue_reopened = '<span class="username">%1s</span>重启了问题<span class="issue_id">%2s</span>';
+$s_timeline_issue_assigned = '<span class="username">%1s</span>将问题<span class="issue_id">%2s</span>分配给<span class="username">%3s</span>';
+$s_timeline_issue_assigned_to_self = '<span class="username">%1s</span>开始解决问题<span class="issue_id">%2s</span>';
 $s_timeline_title = '时间轴';
 $s_timeline_more = '更多事件…';
 $s_missing_error_string = '缺少错误字符串：%1$s';
@@ -1298,8 +1310,10 @@ $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = '标签已添加到该问题上';
 $MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = '找不到权标。';
 $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = '事件"%1$s"未声明';
 $MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = '插件“%1$s”未注册。';
-$MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = '插件已安装';
-$MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = '插件页面未找到';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_LOADED] = '插件“%1$s”未载入，请确保其满足依赖环境。';
+$MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = '插件“%1$s”已安装。';
+$MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = '在插件“%1$s”中不存在页面“%2$s”。';
+$MANTIS_ERROR[ERROR_PLUGIN_FILE_NOT_FOUND] = '在插件“%1$s”中不存在文件“%2$s”。';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = '插件安装失败：%1$s。';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = '升级插件方案失败于块 #%1$s。';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = '在连接此页面之前“%1$s”插件需要更新。';

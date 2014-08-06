@@ -49,6 +49,6 @@ $s_plugin_format_config = 'Konfiguration';
 $s_plugin_format_process_text = 'Textbehandling';
 $s_plugin_format_process_text_warning_notice = 'Stäng inte av såvida du inte verkligen vet vad du gör. Cross site scripting (XSS) attacker är möjliga när avstängt.';
 $s_plugin_format_process_urls = 'URL-bearbetning';
-$s_plugin_format_process_buglinks = 'MantisBT-länkar (bugg/buggkommentar)';
+$s_plugin_format_process_buglinks = 'MantisBT-interna länkar (Buggar och buggkommentarer)';
 $s_plugin_format_enabled = 'På';
 $s_plugin_format_disabled = 'Av';
