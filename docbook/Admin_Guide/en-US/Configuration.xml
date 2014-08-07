@@ -3471,7 +3471,9 @@ $g_main_menu_custom_options = array(
 				<term>$g_display_errors</term>
 				<listitem>
 					<para>Errors Display Method.
-						Defines what errors are displayed and how.
+						Defines what <ulink url="http://php.net/errorfunc.constants">
+							errors</ulink>
+						are displayed and how.
 						Available options are:
 					</para>
 
@@ -3479,53 +3481,70 @@ $g_main_menu_custom_options = array(
 						<varlistentry>
 							<term>DISPLAY_ERROR_HALT</term>
 							<listitem>
-								<para>stop and display error message
+								<para>Stop and display the error message
 									(including variables and backtrace if
 									<emphasis>$g_show_detailed_errors</emphasis>
-									is ON)
+									is ON).
 								</para>
 							</listitem>
 						</varlistentry>
 						<varlistentry>
 							<term>DISPLAY_ERROR_INLINE</term>
 							<listitem>
-								<para>display 1 line error and continue
-									execution
+								<para>Display a one line error and continue
+									execution.
 								</para>
 							</listitem>
 						</varlistentry>
 						<varlistentry>
 							<term>DISPLAY_ERROR_NONE</term>
 							<listitem>
-								<para>no error displayed</para>
+								<para>Suppress the error (no display).
+									This is the default behavior for unspecified
+									<ulink url="http://php.net/errorfunc.constants">
+										errors constants</ulink>.
+								</para>
 							</listitem>
 						</varlistentry>
 					</variablelist>
 
-					<para>Default is</para>
+					<para>The default settings, recommended for use in Production,
+						will only display MantisBT fatal errors and suppress
+						output of all other error types:
 <programlisting>
 $g_display_errors = array(
-	E_WARNING      => DISPLAY_ERROR_INLINE,
-	E_NOTICE       => DISPLAY_ERROR_NONE,
 	E_USER_ERROR   => DISPLAY_ERROR_HALT,
-	E_USER_WARNING => DISPLAY_ERROR_INLINE,
-	E_USER_NOTICE  => DISPLAY_ERROR_NONE
-);
-</programlisting>
-					<para>A developer might set this in their
-						<filename>config_inc.php</filename> as:
-<programlisting>
-$g_display_errors = array(
-	E_WARNING      => DISPLAY_ERROR_HALT,
-	E_NOTICE       => DISPLAY_ERROR_INLINE,
-	E_USER_ERROR   => DISPLAY_ERROR_HALT,
-	E_USER_WARNING => DISPLAY_ERROR_INLINE,
-	E_USER_NOTICE  => DISPLAY_ERROR_INLINE
 );
 </programlisting>
 					</para>
-					<warning><para><emphasis>E_USER_ERROR</emphasis>
-						should always be set to
+					<para>Recommended <filename>config_inc.php</filename>
+						settings for developers:
+<programlisting>
+$g_display_errors = array(
+	E_USER_ERROR   => DISPLAY_ERROR_HALT,
+	E_WARNING      => DISPLAY_ERROR_HALT,
+	E_ALL          => DISPLAY_ERROR_INLINE,
+);
+</programlisting>
+					</para>
+					<note>
+						<para>The system automatically sets
+							<emphasis>$g_display_errors</emphasis>
+							to the above recommended development values when
+							the server's name is <emphasis>localhost</emphasis>.
+						</para>
+					</note>
+					<para>Less intrusive settings, recommended for testing purposes:
+<programlisting>
+$g_display_errors = array(
+	E_USER_ERROR   => DISPLAY_ERROR_HALT,
+	E_USER_WARNING => DISPLAY_ERROR_INLINE,
+	E_WARNING      => DISPLAY_ERROR_INLINE,
+);
+</programlisting>
+					</para>
+					<warning><para><literal>E_USER_ERROR</literal>
+						should <emphasis>always</emphasis> be set to
 						<literal>DISPLAY_ERROR_HALT</literal>.
 						Using any other value will cause program execution
 						to continue despite the error, which may lead to data
