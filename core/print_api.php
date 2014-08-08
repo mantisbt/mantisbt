@@ -1529,10 +1529,10 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
     }
 
     # Get localized strings
-    $t_first = '<i class="fa fa-fast-backward"></i>';
-    $t_last = '<i class="fa fa-fast-forward"></i>';
-    $t_prev = '<i class="fa fa-backward"></i>';
-    $t_next = '<i class="fa fa-forward"></i>';
+    $t_first = lang_get( 'first' );
+    $t_last = lang_get( 'last' );
+    $t_prev = lang_get( 'prev' );
+    $t_next = lang_get( 'next' );
 
     $t_page_links = 10;
 
