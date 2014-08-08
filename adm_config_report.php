@@ -193,16 +193,13 @@ if( $t_filter_save ) {
 		if( $t_filter_project_value != META_FILTER_NONE && !project_exists( $t_filter_project_value ) ) {
 			$t_filter_project_value = ALL_PROJECTS;
 		}
-	}
-}
 
-if( !is_blank( $t_filter_config_value ) && (int)$t_filter_config_value !== META_FILTER_NONE ) {
-	// check that config value exists
-	if( @config_get_global( $t_filter_config_value ) === null ) {
-		$t_cookie_path = config_get( 'cookie_path' );
-		gpc_clear_cookie( $t_cookie_name, $t_cookie_path );
-
-		trigger_error( ERROR_GENERIC, ERROR );
+		if(    $t_filter_config_value != META_FILTER_NONE
+			&& !is_blank( $t_filter_config_value )
+			&& @config_get_global( $t_filter_config_value ) === null
+		) {
+			$t_filter_config_value = META_FILTER_NONE;
+		}
 	}
 }
 
