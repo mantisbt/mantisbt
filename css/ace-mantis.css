@@ -54,6 +54,22 @@
     width: 13%
 }
 
+.padding-2 {
+    padding:2px;
+}
+.padding-right-2 {
+    padding-right:2px;
+}
+.padding-left-2 {
+    padding-left:2px;
+}
+.rtl .padding-right-2 {
+    padding-left:2px;
+}
+.rtl .padding-left-2 {
+    padding-right:2px;
+}
+
 .padding-4 {
     padding:4px;
 }
@@ -62,6 +78,12 @@
 }
 .padding-left-4 {
     padding-left:4px;
+}
+.rtl .padding-right-4 {
+    padding-left:4px;
+}
+.rtl .padding-left-4 {
+    padding-right:4px;
 }
 
 .padding-8 {
@@ -72,6 +94,12 @@
 }
 .padding-right-8 {
     padding-right:8px;
+}
+.rtl .padding-left-8 {
+    padding-right:8px;
+}
+.rtl .padding-right-8 {
+    padding-left:8px;
 }
 
 .login-container {
