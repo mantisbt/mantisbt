@@ -650,7 +650,7 @@ function install_check_token_serialization() {
  * Schema update to migrate filters  data from php serialization to json.
  * This ensures it is not possible to execute code during un-serialization
  */
-function install_check_filtesr_serialization() {
+function install_check_filters_serialization() {
 	$t_filters_table = db_get_table( 'filters' );
 	$query = 'SELECT * FROM ' . $t_filters_table;
 
