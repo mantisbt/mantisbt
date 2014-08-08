@@ -737,7 +737,7 @@ $g_upgrade[190] = array( 'UpdateFunction', 'check_project_hierarchy', array() );
 $g_upgrade[191] = array( 'CreateIndexSQL', array('idx_project_hierarchy', db_get_table( 'project_hierarchy' ),'child_id,parent_id',array('UNIQUE')));
 $g_upgrade[192] = array( 'CreateIndexSQL', array('idx_bug_history_date_modified', db_get_table( 'bug_history' ), 'date_modified' ) );
 $g_upgrade[193] = array( 'UpdateFunction', 'check_config_serialization', array() );
-$g_upgrade[194] = array( 'UpdateFunction', "check_token_serialization", array() );
-$g_upgrade[195] = array( 'UpdateFunction', "check_filtesr_serialization", array() );
+$g_upgrade[194] = array( 'UpdateFunction', 'check_token_serialization', array() );
+$g_upgrade[195] = array( 'UpdateFunction', 'check_filtesr_serialization', array() );
 
 # Release marker: 1.3.0
