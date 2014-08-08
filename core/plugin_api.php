@@ -584,7 +584,7 @@ function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) 
 			$t_is_current_core_supported = false;
 			foreach( $t_required_array as $t_version_required ) {
 				$t_is_current_core_supported = $t_is_current_core_supported
-					|| version_compare( trim( $t_version_required ), $t_version_core, ">=" );
+					|| version_compare( trim( $t_version_required ), $t_version_core, '>=' );
 			}
 			if( !$t_is_current_core_supported ) {
 				$t_required_array[] = '<' . $t_version_core;
