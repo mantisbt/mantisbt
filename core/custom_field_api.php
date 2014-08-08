@@ -442,8 +442,35 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 	# Build fields update statement
 	$t_update = '';
 	foreach( $p_def_array as $t_field => $t_value ) {
-		$t_update .= $t_field . ' = ' . db_param() . ', ';
-		$t_params[] = is_bool( $t_value ) ? db_prepare_bool( $t_value ) : $t_value;
+		switch( $t_field ) {
+			case 'name':
+			case 'possible_values':
+			case 'default_value':
+			case 'valid_regexp':
+				$t_update .= $t_field . '=' . db_param() . ', ';
+				$t_params[] = (string)$t_value;
+				break;
+			case 'type':
+			case 'access_level_r':
+			case 'access_level_rw':
+			case 'length_min':
+			case 'length_max':
+				$t_update .= $t_field  . '=' . db_param() . ', ';
+				$t_params[] = (int)$t_value;
+				break;
+			case 'filter_by':
+			case 'display_report':
+			case 'display_update':
+			case 'display_resolved':
+			case 'display_closed':
+			case 'require_report':
+			case 'require_update':
+			case 'require_resolved':
+			case 'require_closed':
+				$t_update .= $t_field . '=' . db_param() . ', ';
+				$t_params[] = db_prepare_bool( $t_value );
+				break;
+		}
 	}
 
 	# If there are fields to update, execute SQL
