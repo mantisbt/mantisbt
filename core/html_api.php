@@ -686,8 +686,11 @@ function html_footer() {
 
 	# Show contact information
 	if( !is_page_name( 'login_page' ) ) {
-		$t_webmaster_contact_information = sprintf( lang_get( 'webmaster_contact_information' ), string_html_specialchars( config_get( 'webmaster_email' ) ) );
-		echo "\t" . '<address id="webmaster-contact-information">' . $t_webmaster_contact_information . '</address>' . "\n";
+		$t_webmaster_email = config_get( 'webmaster_email' );
+		if( !is_blank( $t_webmaster_email ) ) {
+			$t_webmaster_contact_information = sprintf( lang_get( 'webmaster_contact_information' ), string_html_specialchars( $t_webmaster_email ) );
+			echo "\t" . '<address id="webmaster-contact-information">' . $t_webmaster_contact_information . '</address>' . "\n";
+		}
 	}
 
 	event_signal( 'EVENT_LAYOUT_PAGE_FOOTER' );
