@@ -992,7 +992,6 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 	} else {
 		$t_project_table = db_get_table( 'project' );
 		$t_project_user_list_table = db_get_table( 'project_user_list' );
-		$t_project_hierarchy_table = db_get_table( 'project_hierarchy' );
 
 		$t_public = VS_PUBLIC;
 		$t_private = VS_PRIVATE;
@@ -1001,7 +1000,7 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 						  FROM ' . $t_project_table . ' p
 						  LEFT JOIN ' . $t_project_user_list_table . ' u
 						    ON p.id=u.project_id AND u.user_id=' . db_param() . '
-						  LEFT JOIN ' . $t_project_hierarchy_table. ' ph
+						  LEFT JOIN {project_hierarchy} ph
 						    ON ph.child_id = p.id
 						  WHERE ' . ( $p_show_disabled ? '' : ( 'p.enabled = ' . db_param() . ' AND ' ) ) . '
 							( p.view_state=' . db_param() . '
@@ -1058,7 +1057,6 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 
 	$t_project_table = db_get_table( 'project' );
 	$t_project_user_list_table = db_get_table( 'project_user_list' );
-	$t_project_hierarchy_table = db_get_table( 'project_hierarchy' );
 
 	db_param_push();
 
@@ -1066,7 +1064,7 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 		$t_enabled_clause = $p_show_disabled ? '' : 'p.enabled = ' . db_param() . ' AND';
 		$t_query = 'SELECT DISTINCT p.id, p.name, ph.parent_id
 					  FROM ' . $t_project_table . ' p
-					  LEFT JOIN ' . $t_project_hierarchy_table . ' ph
+					  LEFT JOIN {project_hierarchy} ph
 					    ON ph.child_id = p.id
 					  WHERE ' . $t_enabled_clause . '
 					  	 ph.parent_id IS NOT NULL
@@ -1077,7 +1075,7 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 					  FROM ' . $t_project_table . ' p
 					  LEFT JOIN ' . $t_project_user_list_table . ' u
 					    ON p.id = u.project_id AND u.user_id=' . db_param() . '
-					  LEFT JOIN ' . $t_project_hierarchy_table . ' ph
+					  LEFT JOIN {project_hierarchy} ph
 					    ON ph.child_id = p.id
 					  WHERE ' . ( $p_show_disabled ? '' : ( 'p.enabled = ' . db_param() . ' AND ' ) ) . '
 					  	ph.parent_id IS NOT NULL AND
