@@ -557,8 +557,7 @@ function install_update_history_long_custom_fields() {
  * @return integer
  */
 function install_check_project_hierarchy() {
-	$t_project_hierarchy_table = db_get_table( 'project_hierarchy' );
-	$t_query = 'SELECT count(child_id) as count, child_id, parent_id FROM ' . $t_project_hierarchy_table . ' GROUP BY child_id, parent_id';
+	$t_query = 'SELECT count(child_id) as count, child_id, parent_id FROM {project_hierarchy} GROUP BY child_id, parent_id';
 
 	$t_result = db_query_bound( $t_query );
 	while( $t_row = db_fetch_array( $t_result ) ) {
@@ -567,7 +566,7 @@ function install_check_project_hierarchy() {
 		$t_parent_id = (int)$t_row['parent_id'];
 
 		if( $t_count > 1 ) {
-			$t_query = 'SELECT inherit_parent, child_id, parent_id FROM ' . $t_project_hierarchy_table . ' WHERE child_id=' . db_param() . ' AND parent_id=' . db_param();
+			$t_query = 'SELECT inherit_parent, child_id, parent_id FROM {project_hierarchy} WHERE child_id=' . db_param() . ' AND parent_id=' . db_param();
 			$t_result2 = db_query_bound( $t_query, array( $t_child_id, $t_parent_id ) );
 
 			# get first result for inherit_parent, discard the rest
@@ -575,10 +574,10 @@ function install_check_project_hierarchy() {
 
 			$t_inherit = $t_row2['inherit_parent'];
 
-			$t_query_delete = 'DELETE FROM ' . $t_project_hierarchy_table . ' WHERE child_id=' . db_param() . ' AND parent_id=' . db_param();
+			$t_query_delete = 'DELETE FROM {project_hierarchy} WHERE child_id=' . db_param() . ' AND parent_id=' . db_param();
 			db_query_bound( $t_query_delete, array( $t_child_id, $t_parent_id ) );
 
-			$t_query_insert = 'INSERT INTO ' . $t_project_hierarchy_table . ' (child_id, parent_id, inherit_parent) VALUES (' . db_param() . ',' . db_param() . ',' . db_param() . ')';
+			$t_query_insert = 'INSERT INTO {project_hierarchy} (child_id, parent_id, inherit_parent) VALUES (' . db_param() . ',' . db_param() . ',' . db_param() . ')';
 			db_query_bound( $t_query_insert, array( $t_child_id, $t_parent_id, $t_inherit ) );
 		}
 	}
