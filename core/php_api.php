@@ -32,9 +32,6 @@
  */
 define( 'PHP_MIN_VERSION', '5.3.2' );
 
-# cache array of comparisons
-$g_cached_version = array();
-
 /**
  * Determine if PHP is running in CLI or CGI mode and return the mode.
  * @return int PHP mode
@@ -63,10 +60,10 @@ function php_mode() {
  * @return boolean
  */
 function php_version_at_least( $p_version_string ) {
-	global $g_cached_version;
+	static $s_cached_version;
 
-	if( isset( $g_cached_version[$p_version_string] ) ) {
-		return $g_cached_version[$p_version_string];
+	if( isset( $s_cached_version[$p_version_string] ) ) {
+		return $s_cached_version[$p_version_string];
 	}
 
 	$t_curver = array_pad( explode( '.', phpversion() ), 3, 0 );
@@ -77,16 +74,16 @@ function php_version_at_least( $p_version_string ) {
 		$t_min = (int)$t_minver[$i];
 
 		if( $t_cur < $t_min ) {
-			$g_cached_version[$p_version_string] = false;
+			$s_cached_version[$p_version_string] = false;
 			return false;
 		} else if( $t_cur > $t_min ) {
-			$g_cached_version[$p_version_string] = true;
+			$s_cached_version[$p_version_string] = true;
 			return true;
 		}
 	}
 
 	# if we get here, the versions must match exactly so:
-	$g_cached_version[$p_version_string] = true;
+	$s_cached_version[$p_version_string] = true;
 	return true;
 }
 
