@@ -52,7 +52,6 @@ function print_info_row( $p_description, $p_value ) {
 		<li><a href="upgrade_warning.php"><span class="bold">Upgrade your installation</span></a></li>
 	<?php } ?>
 		<li><a href="system_utils.php">System Utilities</a></li>
-		<li><a href="test_icons.php">Test Icons</a></li>
 		<li><a href="test_langs.php">Test Langs</a></li>
 		<li><a href="test_email.php">Test Email</a></li>
 		<li><a href="email_queue.php">Email Queue</a></li>
