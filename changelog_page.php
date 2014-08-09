@@ -212,10 +212,10 @@ foreach( $t_project_ids as $t_project_id ) {
 		}
 
 		$t_query = 'SELECT sbt.*, dbt.fixed_in_version AS parent_version, rt.source_bug_id
-			FROM ' . $t_bug_table . ' AS sbt
-			LEFT JOIN ' . $t_relation_table . ' AS rt
+			FROM ' . $t_bug_table . ' sbt
+			LEFT JOIN ' . $t_relation_table . ' rt
 				ON sbt.id=rt.destination_bug_id AND rt.relationship_type=' . BUG_DEPENDANT . '
-			LEFT JOIN ' . $t_bug_table . ' AS dbt ON dbt.id=rt.source_bug_id
+			LEFT JOIN ' . $t_bug_table . ' dbt ON dbt.id=rt.source_bug_id
 			WHERE sbt.project_id=' . db_param() . '
 			  AND sbt.fixed_in_version=' . db_param() . '
 			ORDER BY sbt.status ASC, sbt.last_updated DESC';
