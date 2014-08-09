@@ -696,7 +696,6 @@ function enum_bug_group( $p_enum_string, $p_enum ) {
  */
 function create_developer_summary() {
 	$t_project_id = helper_get_current_project();
-	$t_user_table = db_get_table( 'user' );
 	$t_bug_table = db_get_table( 'bug' );
 	$t_user_id = auth_get_current_user_id();
 	$t_specific_where = ' AND ' . helper_project_specific_where( $t_project_id, $t_user_id );
@@ -753,7 +752,6 @@ function create_developer_summary() {
  */
 function create_reporter_summary() {
 	$t_project_id = helper_get_current_project();
-	$t_user_table = db_get_table( 'user' );
 	$t_bug_table = db_get_table( 'bug' );
 	$t_user_id = auth_get_current_user_id();
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );

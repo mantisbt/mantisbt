@@ -1053,7 +1053,6 @@ function summary_print_reporter_resolution( $p_resolution_enum_string ) {
  */
 function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resolution_enum_string ) {
 	$t_mantis_bug_table = db_get_table( 'bug' );
-	$t_mantis_user_table = db_get_table( 'user' );
 	$t_reporter_summary_limit = config_get( 'reporter_summary_limit' );
 
 	$t_project_id = helper_get_current_project();
