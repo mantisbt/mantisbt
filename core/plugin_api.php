@@ -686,8 +686,8 @@ function plugin_install( MantisPlugin $p_plugin ) {
 	}
 
 	$t_query = 'INSERT INTO {plugin} ( basename, enabled )
-				VALUES ( ' . db_param() . ', \'1\' )';
-	db_query( $t_query, array( $p_plugin->basename ) );
+				VALUES ( ' . db_param() . ', ' . db_param() . ' )';
+	db_query( $t_query, array( $p_plugin->basename, true ) );
 
 	if( false === ( plugin_config_get( 'schema', false ) ) ) {
 		plugin_config_set( 'schema', -1 );
