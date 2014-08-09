@@ -237,8 +237,8 @@ $t_users_list = array(
 
 # Get projects in db with specific configs
 $t_query = 'SELECT DISTINCT project_id, pt.name as project_name
-	FROM ' . $t_config_table . ' as ct
-	JOIN ' . $t_project_table . ' as pt ON pt.id = ct.project_id
+	FROM ' . $t_config_table . ' ct
+	JOIN ' . $t_project_table . ' pt ON pt.id = ct.project_id
 	WHERE project_id!=0
 	ORDER BY project_name';
 $t_result = db_query_bound( $t_query );
