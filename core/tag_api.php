@@ -763,12 +763,12 @@ function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
 
 	$c_user_id = auth_get_current_user_id();
 
-	$t_subquery = 'SELECT b.id FROM ' . $t_bug_table . ' AS b
-					LEFT JOIN ' . $t_project_user_list_table . ' AS p
+	$t_subquery = 'SELECT b.id FROM ' . $t_bug_table . ' b
+					LEFT JOIN ' . $t_project_user_list_table . ' p
 						ON p.project_id=b.project_id AND p.user_id=' . db_param() . # 2nd Param
-					' JOIN ' . $t_user_table . ' AS u
+					' JOIN ' . $t_user_table . ' u
 						ON u.id=' . db_param() . # 3rd Param
-					' JOIN ' . $t_bug_tag_table . ' AS t
+					' JOIN ' . $t_bug_tag_table . ' t
 						ON t.bug_id=b.id
 					WHERE ( p.access_level>b.view_state OR u.access_level>b.view_state )
 						AND t.tag_id=' . db_param(); # 4th Param
