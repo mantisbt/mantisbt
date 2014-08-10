@@ -995,7 +995,6 @@ $s_sponsorship_deleted = 'Sponsring borttagen';
 $s_sponsorship_paid = 'Sponsring betald';
 $s_sponsorship_more_info = 'Mer information om sponsring';
 $s_sponsorship_total = 'Sponsring totalt';
-$s_sponsorship_process_url = '';
 $s_changelog = 'Versionshistorik';
 $s_changelog_empty = 'Det finns inte någon versionshistorik';
 $s_roadmap = 'Tidslinje';

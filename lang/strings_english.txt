@@ -1320,11 +1320,6 @@ $s_sponsorship_paid = 'Sponsorship Paid';
 $s_sponsorship_more_info = 'More information about sponsorship';
 $s_sponsorship_total = 'Sponsorship Total';
 
-# URL explaining the process of sponsoring an issue. This is defined here rather than
-# in the config to allow for a URL per language. This can be set to an empty string if there
-# is not need to provide such process information.
-$s_sponsorship_process_url = '';
-
 # Changelog
 $s_changelog = 'Change Log';
 $s_changelog_empty = 'No Change Log information available';
