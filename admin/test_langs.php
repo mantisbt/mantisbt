@@ -89,7 +89,7 @@ function checkplugins( $p_path ) {
 		print_error( 'plugin path ' . $t_path . ' not found or not accessible' );
 	} else {
 		foreach( $t_plugins as $t_plugin ) {
-			if( $t_plugin[0] == '.' ) {
+			if( $t_plugin[0] == '.' || $t_plugin == 'Web.config' ) {
 				continue;
 			}
 			echo '<br />Checking language files for plugin ' . $t_plugin . ':<br />';
@@ -124,7 +124,7 @@ function checklangdir( $p_path, $p_lang_files = null ) {
 		# Skipping english language, readme and hidden files
 		foreach( $t_lang_files as $t_key => $t_lang ) {
 			if( $t_lang[0] == '.'
-			 || $t_lang == 'langreadme.txt'
+			 || $t_lang == 'Web.config'
 			 || $t_lang == 'README'
 			 || $t_lang == STRINGS_ENGLISH
 			) {
