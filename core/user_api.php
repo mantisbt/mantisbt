@@ -78,9 +78,7 @@ function user_cache_row( $p_user_id, $p_trigger_errors = true ) {
 		return $g_cache_user[$p_user_id];
 	}
 
-	$t_user_table = db_get_table( 'user' );
-
-	$t_query = 'SELECT * FROM ' . $t_user_table . ' WHERE id=' . db_param();
+	$t_query = 'SELECT * FROM {user} WHERE id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_user_id ) );
 
 	if( 0 == db_num_rows( $t_result ) ) {
@@ -121,8 +119,7 @@ function user_cache_array_rows( array $p_user_id_array ) {
 		return;
 	}
 
-	$t_user_table = db_get_table( 'user' );
-	$t_query = 'SELECT * FROM ' . $t_user_table . ' WHERE id IN (' . implode( ',', $c_user_id_array ) . ')';
+	$t_query = 'SELECT * FROM {user} WHERE id IN (' . implode( ',', $c_user_id_array ) . ')';
 	$t_result = db_query_bound( $t_query );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
@@ -239,9 +236,7 @@ function user_ensure_exists( $p_user_id ) {
  * @return boolean
  */
 function user_is_name_unique( $p_username ) {
-	$t_user_table = db_get_table( 'user' );
-
-	$t_query = 'SELECT username FROM ' . $t_user_table . ' WHERE username=' . db_param();
+	$t_query = 'SELECT username FROM {user} WHERE username=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_username ), 1 );
 
 	if( db_num_rows( $t_result ) > 0 ) {
@@ -291,8 +286,7 @@ function user_is_realname_unique( $p_username, $p_realname ) {
 		}
 
 		# check to see if the realname is unique
-		$t_user_table = db_get_table( 'user' );
-		$t_query = 'SELECT id FROM ' . $t_user_table . ' WHERE realname=' . db_param();
+		$t_query = 'SELECT id FROM {user} WHERE realname=' . db_param();
 		$t_result = db_query_bound( $t_query, array( $p_realname ) );
 
 		$t_users = array();
@@ -467,8 +461,7 @@ function user_is_enabled( $p_user_id ) {
  * @return integer
  */
 function user_count_level( $p_level = ANYBODY ) {
-	$t_user_table = db_get_table( 'user' );
-	$t_query = 'SELECT COUNT(id) FROM ' . $t_user_table . ' WHERE access_level>=' . db_param();
+	$t_query = 'SELECT COUNT(id) FROM {user} WHERE access_level>=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_level ) );
 
 	# Get the list of connected users
@@ -496,10 +489,8 @@ function user_get_logged_in_user_ids( $p_session_duration_in_minutes ) {
 	# Generate timestamp
 	$t_last_timestamp_threshold = mktime( date( 'H' ), date( 'i' ) - 1 * $t_session_duration_in_minutes, date( 's' ), date( 'm' ), date( 'd' ), date( 'Y' ) );
 
-	$t_user_table = db_get_table( 'user' );
-
 	# Execute query
-	$t_query = 'SELECT id FROM ' . $t_user_table . ' WHERE last_visit > ' . db_param();
+	$t_query = 'SELECT id FROM {user} WHERE last_visit > ' . db_param();
 	$t_result = db_query_bound( $t_query, array( $t_last_timestamp_threshold ), 1 );
 
 	# Get the list of connected users
@@ -544,7 +535,7 @@ function user_create( $p_username, $p_password, $p_email = '',
 	$t_cookie_string = auth_generate_unique_cookie_string();
 	$t_user_table = db_get_table( 'user' );
 
-	$t_query = 'INSERT INTO ' . $t_user_table . '
+	$t_query = 'INSERT INTO {user}
 				    ( username, email, password, date_created, last_visit,
 				     enabled, access_level, login_count, cookie_string, realname )
 				  VALUES
@@ -672,12 +663,10 @@ function user_delete( $p_user_id ) {
 	# Remove project specific access levels
 	user_delete_project_specific_access_levels( $p_user_id );
 
-	$t_user_table = db_get_table( 'user' );
-
 	# unset non-unique realname flags if necessary
 	if( config_get( 'differentiate_duplicates' ) ) {
 		$c_realname = user_get_field( $p_user_id, 'realname' );
-		$t_query = 'SELECT id FROM ' . $t_user_table . ' WHERE realname=' . db_param();
+		$t_query = 'SELECT id FROM {user} WHERE realname=' . db_param();
 		$t_result = db_query_bound( $t_query, array( $c_realname ) );
 
 		$t_users = array();
@@ -699,7 +688,7 @@ function user_delete( $p_user_id ) {
 	user_clear_cache( $p_user_id );
 
 	# Remove account
-	$t_query = 'DELETE FROM ' . $t_user_table . ' WHERE id=' . db_param();
+	$t_query = 'DELETE FROM {user} WHERE id=' . db_param();
 	db_query_bound( $t_query, array( $c_user_id ) );
 
 	return true;
@@ -717,9 +706,7 @@ function user_get_id_by_name( $p_username ) {
 		return $t_user['id'];
 	}
 
-	$t_user_table = db_get_table( 'user' );
-
-	$t_query = 'SELECT * FROM ' . $t_user_table . ' WHERE username=' . db_param();
+	$t_query = 'SELECT * FROM {user} WHERE username=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_username ) );
 
 	$t_row = db_fetch_array( $t_result );
@@ -742,9 +729,7 @@ function user_get_id_by_email( $p_email ) {
 		return $t_user['id'];
 	}
 
-	$t_user_table = db_get_table( 'user' );
-
-	$t_query = 'SELECT * FROM ' . $t_user_table . ' WHERE email=' . db_param();
+	$t_query = 'SELECT * FROM {user} WHERE email=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_email ) );
 
 	$t_row = db_fetch_array( $t_result );
@@ -768,8 +753,7 @@ function user_get_id_by_realname( $p_realname ) {
 		return $t_user['id'];
 	}
 
-	$t_user_table = db_get_table( 'user' );
-	$t_query = 'SELECT * FROM ' . $t_user_table . ' WHERE realname=' . db_param();
+	$t_query = 'SELECT * FROM {user} WHERE realname=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_realname ) );
 
 	$t_row = db_fetch_array( $t_result );
@@ -1209,7 +1193,6 @@ function user_get_assigned_projects( $p_user_id ) {
  */
 function user_get_unassigned_by_project_id( $p_project_id = null ) {
 	$t_mantis_project_user_list_table = db_get_table( 'project_user_list' );
-	$t_mantis_user_table = db_get_table( 'user' );
 
 	if( null === $p_project_id ) {
 		$p_project_id = helper_get_current_project();
@@ -1217,7 +1200,7 @@ function user_get_unassigned_by_project_id( $p_project_id = null ) {
 
 	$t_adm = config_get_global( 'admin_site_threshold' );
 	$t_query = 'SELECT DISTINCT u.id, u.username, u.realname
-				FROM ' . $t_mantis_user_table . ' u
+				FROM {user} u
 				LEFT JOIN ' . $t_mantis_project_user_list_table . ' p
 				ON p.user_id=u.id AND p.project_id=' . db_param() . '
 				WHERE u.access_level<' . db_param() . ' AND
@@ -1391,9 +1374,7 @@ function user_update_last_visit( $p_user_id ) {
 	$c_user_id = (int)$p_user_id;
 	$c_value = db_now();
 
-	$t_user_table = db_get_table( 'user' );
-
-	$t_query = 'UPDATE ' . $t_user_table . ' SET last_visit=' . db_param() . ' WHERE id=' . db_param();
+	$t_query = 'UPDATE {user} SET last_visit=' . db_param() . ' WHERE id=' . db_param();
 
 	db_query_bound( $t_query, array( $c_value, $c_user_id ) );
 
@@ -1410,9 +1391,7 @@ function user_update_last_visit( $p_user_id ) {
  * @return boolean always true
  */
 function user_increment_login_count( $p_user_id ) {
-	$t_user_table = db_get_table( 'user' );
-
-	$t_query = 'UPDATE ' . $t_user_table . ' SET login_count=login_count+1 WHERE id=' . db_param();
+	$t_query = 'UPDATE {user} SET login_count=login_count+1 WHERE id=' . db_param();
 
 	db_query_bound( $t_query, array( (int)$p_user_id ) );
 
@@ -1428,9 +1407,7 @@ function user_increment_login_count( $p_user_id ) {
  * @return boolean always true
  */
 function user_reset_failed_login_count_to_zero( $p_user_id ) {
-	$t_user_table = db_get_table( 'user' );
-
-	$t_query = 'UPDATE ' . $t_user_table . ' SET failed_login_count=0 WHERE id=' . db_param();
+	$t_query = 'UPDATE {user} SET failed_login_count=0 WHERE id=' . db_param();
 	db_query_bound( $t_query, array( (int)$p_user_id ) );
 
 	user_clear_cache( $p_user_id );
@@ -1445,9 +1422,7 @@ function user_reset_failed_login_count_to_zero( $p_user_id ) {
  * @return boolean always true
  */
 function user_increment_failed_login_count( $p_user_id ) {
-	$t_user_table = db_get_table( 'user' );
-
-	$t_query = 'UPDATE ' . $t_user_table . ' SET failed_login_count=failed_login_count+1 WHERE id=' . db_param();
+	$t_query = 'UPDATE {user} SET failed_login_count=failed_login_count+1 WHERE id=' . db_param();
 	db_query_bound( $t_query, array( $p_user_id ) );
 
 	user_clear_cache( $p_user_id );
@@ -1462,9 +1437,7 @@ function user_increment_failed_login_count( $p_user_id ) {
  * @return boolean always true
  */
 function user_reset_lost_password_in_progress_count_to_zero( $p_user_id ) {
-	$t_user_table = db_get_table( 'user' );
-
-	$t_query = 'UPDATE ' . $t_user_table . ' SET lost_password_request_count=0 WHERE id=' . db_param();
+	$t_query = 'UPDATE {user} SET lost_password_request_count=0 WHERE id=' . db_param();
 	db_query_bound( $t_query, array( $p_user_id ) );
 
 	user_clear_cache( $p_user_id );
@@ -1479,9 +1452,7 @@ function user_reset_lost_password_in_progress_count_to_zero( $p_user_id ) {
  * @return boolean always true
  */
 function user_increment_lost_password_in_progress_count( $p_user_id ) {
-	$t_user_table = db_get_table( 'user' );
-
-	$t_query = 'UPDATE ' . $t_user_table . '
+	$t_query = 'UPDATE {user}
 				SET lost_password_request_count=lost_password_request_count+1
 				WHERE id=' . db_param();
 	db_query_bound( $t_query, array( $p_user_id ) );
@@ -1503,9 +1474,7 @@ function user_set_fields( $p_user_id, array $p_fields ) {
 		user_ensure_unprotected( $p_user_id );
 	}
 
-	$t_user_table = db_get_table( 'user' );
-
-	$t_query = 'UPDATE ' . $t_user_table;
+	$t_query = 'UPDATE {user}';
 	$t_parameters = array();
 
 	foreach ( $p_fields as $t_field_name => $t_field_value ) {
@@ -1570,9 +1539,8 @@ function user_set_password( $p_user_id, $p_password, $p_allow_protected = false 
 	$c_cookie_string = auth_generate_unique_cookie_string();
 
 	$c_password = auth_process_plain_password( $p_password );
-	$c_user_table = db_get_table( 'user' );
 
-	$t_query = 'UPDATE ' . $c_user_table . '
+	$t_query = 'UPDATE {user}
 				  SET password=' . db_param() . ', cookie_string=' . db_param() . '
 				  WHERE id=' . db_param();
 	db_query_bound( $t_query, array( $c_password, $c_cookie_string, (int)$p_user_id ) );

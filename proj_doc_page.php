@@ -69,7 +69,6 @@ $t_user_id = auth_get_current_user_id();
 $t_project_file_table = db_get_table( 'project_file' );
 $t_project_table = db_get_table( 'project' );
 $t_project_user_list_table = db_get_table( 'project_user_list' );
-$t_user_table = db_get_table( 'user' );
 $t_pub = VS_PUBLIC;
 $t_priv = VS_PRIVATE;
 $t_admin = config_get_global( 'admin_site_threshold' );
@@ -100,7 +99,7 @@ $t_query = 'SELECT pft.id, pft.project_id, pft.filename, pft.filesize, pft.title
 				LEFT JOIN ' . $t_project_table . ' pt ON pft.project_id = pt.id
 				LEFT JOIN ' . $t_project_user_list_table . ' pult
 					ON pft.project_id = pult.project_id AND pult.user_id = ' . db_param() . '
-				LEFT JOIN ' . $t_user_table . ' ut ON ut.id = ' . db_param() . '
+				LEFT JOIN {user} ut ON ut.id = ' . db_param() . '
 			WHERE pft.project_id in (' . implode( ',', $t_projects ) . ') AND
 				( ( ( pt.view_state = ' . db_param() . ' OR pt.view_state is null ) AND pult.user_id is null AND ut.access_level ' . $t_access_clause . ' ) OR
 					( ( pult.user_id = ' . db_param() . ' ) AND ( pult.access_level ' . $t_access_clause . ' ) ) OR

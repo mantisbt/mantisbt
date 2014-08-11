@@ -759,14 +759,13 @@ function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
 	$t_tag_table = db_get_table( 'tag' );
 	$t_bug_tag_table = db_get_table( 'bug_tag' );
 	$t_project_user_list_table = db_get_table( 'project_user_list' );
-	$t_user_table = db_get_table( 'user' );
 
 	$c_user_id = auth_get_current_user_id();
 
 	$t_subquery = 'SELECT b.id FROM ' . $t_bug_table . ' b
 					LEFT JOIN ' . $t_project_user_list_table . ' p
 						ON p.project_id=b.project_id AND p.user_id=' . db_param() . # 2nd Param
-					' JOIN ' . $t_user_table . ' u
+					' JOIN {user} u
 						ON u.id=' . db_param() . # 3rd Param
 					' JOIN ' . $t_bug_tag_table . ' t
 						ON t.bug_id=b.id

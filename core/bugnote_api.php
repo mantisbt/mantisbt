@@ -630,10 +630,9 @@ function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
 
 	$t_results = array();
 
-	$t_user_table = db_get_table( 'user' );
 	$t_bugnote_table = db_get_table( 'bugnote' );
 	$t_query = 'SELECT username, realname, SUM(time_tracking) AS sum_time_tracking
-				FROM ' . $t_user_table . ' u, ' . $t_bugnote_table . ' bn
+				FROM {user} u, ' . $t_bugnote_table . ' bn
 				WHERE u.id = bn.reporter_id AND bn.time_tracking != 0 AND
 				bn.bug_id = ' . db_param() . $t_from_where . $t_to_where .
 				' GROUP BY u.username, u.realname';
@@ -690,10 +689,9 @@ function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost
 	$t_results = array();
 
 	$t_bug_table = db_get_table( 'bug' );
-	$t_user_table = db_get_table( 'user' );
 	$t_bugnote_table = db_get_table( 'bugnote' );
 	$t_query = 'SELECT username, realname, summary, bn.bug_id, SUM(time_tracking) AS sum_time_tracking
-			FROM ' . $t_user_table . ' u, ' . $t_bugnote_table . ' bn, ' . $t_bug_table . ' b
+			FROM {user} u, ' . $t_bugnote_table . ' bn, ' . $t_bug_table . ' b
 			WHERE u.id = bn.reporter_id AND bn.time_tracking != 0 AND bn.bug_id = b.id
 			' . $t_project_where . $t_from_where . $t_to_where . '
 			GROUP BY bn.bug_id, u.username, u.realname, b.summary

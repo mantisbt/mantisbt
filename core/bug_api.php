@@ -1898,11 +1898,10 @@ function bug_get_monitors( $p_bug_id ) {
 	}
 
 	$t_bug_monitor_table = db_get_table( 'bug_monitor' );
-	$t_user_table = db_get_table( 'user' );
 
 	# get the bugnote data
 	$t_query = 'SELECT user_id, enabled
-			FROM ' . $t_bug_monitor_table . ' m, ' . $t_user_table . ' u
+			FROM ' . $t_bug_monitor_table . ' m, {user} u
 			WHERE m.bug_id=' . db_param() . ' AND m.user_id = u.id
 			ORDER BY u.realname, u.username';
 	$t_result = db_query_bound( $t_query, array( $p_bug_id ) );

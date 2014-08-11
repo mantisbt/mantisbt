@@ -71,10 +71,8 @@ $f_email = gpc_get_string( 'email' );
 
 email_ensure_valid( $f_email );
 
-$t_user_table = db_get_table( 'user' );
-
 # @todo Consider moving this query to user_api.php
-$t_query = 'SELECT id FROM ' . $t_user_table . ' WHERE username = ' . db_param() . ' AND email = ' . db_param() . ' AND enabled=' . db_param();
+$t_query = 'SELECT id FROM {user} WHERE username = ' . db_param() . ' AND email = ' . db_param() . ' AND enabled=' . db_param();
 $t_result = db_query_bound( $t_query, array( $f_username, $f_email, true ) );
 
 if( 0 == db_num_rows( $t_result ) ) {

@@ -631,7 +631,6 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 		return array();
 	}
 
-	$t_user_table = db_get_table( 'user' );
 	$t_project_user_list_table = db_get_table( 'project_user_list' );
 
 	$t_on = ON;
@@ -691,7 +690,7 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 
 	if( $p_include_global_users ) {
 		$t_query = 'SELECT id, username, realname, access_level
-				FROM ' . $t_user_table . '
+				FROM {user}
 				WHERE enabled = ' . db_param() . '
 					AND access_level ' . $t_global_access_clause;
 
@@ -706,7 +705,7 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 	if( $c_project_id != ALL_PROJECTS ) {
 		# Get the project overrides
 		$t_query = 'SELECT u.id, u.username, u.realname, l.access_level
-				FROM ' . $t_project_user_list_table . ' l, ' . $t_user_table . ' u
+				FROM ' . $t_project_user_list_table . ' l, {user} u
 				WHERE l.user_id = u.id
 				AND u.enabled = ' . db_param() . '
 				AND l.project_id = ' . db_param();
