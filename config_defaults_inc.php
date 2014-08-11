@@ -4105,7 +4105,7 @@ $g_display_errors = array(
 
 # Add developers defaults when server is localhost
 # Note: intentionally not using SERVER_ADDR as it's not guaranteed to exist
-if( strcasecmp( $_SERVER['SERVER_NAME'], 'localhost' ) == 0
+if( isset( $_SERVER['SERVER_NAME'] ) && strcasecmp( $_SERVER['SERVER_NAME'], 'localhost' ) == 0
  || $_SERVER['SERVER_NAME'] == '127.0.0.1'
 ) {
 	$g_display_errors[E_WARNING] = DISPLAY_ERROR_HALT;
