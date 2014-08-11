@@ -631,10 +631,8 @@ function user_delete_project_specific_access_levels( $p_user_id ) {
 function user_delete_profiles( $p_user_id ) {
 	user_ensure_unprotected( $p_user_id );
 
-	$t_user_profile_table = db_get_table( 'user_profile' );
-
 	# Remove associated profiles
-	$t_query = 'DELETE FROM ' . $t_user_profile_table . ' WHERE user_id=' . db_param();
+	$t_query = 'DELETE FROM {user_profile} WHERE user_id=' . db_param();
 	db_query_bound( $t_query, array( (int)$p_user_id ) );
 
 	user_clear_cache( $p_user_id );
@@ -1293,8 +1291,7 @@ function user_get_reported_open_bug_count( $p_user_id, $p_project_id = ALL_PROJE
  * @return array
  */
 function user_get_profile_row( $p_user_id, $p_profile_id ) {
-	$t_user_profile_table = db_get_table( 'user_profile' );
-	$t_query = 'SELECT * FROM ' . $t_user_profile_table . '
+	$t_query = 'SELECT * FROM {user_profile}
 				  WHERE id=' . db_param() . ' AND
 						user_id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_profile_id, $p_user_id ) );
