@@ -421,14 +421,13 @@ function install_stored_filter_migrate() {
 	$t_filter_fields['and_not_assigned'] = null;
 	$t_filter_fields['sticky_issues'] = 'sticky';
 
-	$t_filters_table = db_get_table( 'filters' );
-	$t_query = 'SELECT * FROM ' . $t_filters_table;
+	$t_query = 'SELECT * FROM {filters}';
 	$t_result = db_query_bound( $t_query );
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_setting_arr = explode( '#', $t_row['filter_string'], 2 );
 
 		if(( $t_setting_arr[0] == 'v1' ) || ( $t_setting_arr[0] == 'v2' ) || ( $t_setting_arr[0] == 'v3' ) || ( $t_setting_arr[0] == 'v4' ) ) {
-			$t_delete_query = 'DELETE FROM ' . $t_filters_table . ' WHERE id=' . db_param();
+			$t_delete_query = 'DELETE FROM {filters} WHERE id=' . db_param();
 			$t_delete_result = db_query_bound( $t_delete_query, array( $t_row['id'] ) );
 			continue;
 		}
@@ -436,7 +435,7 @@ function install_stored_filter_migrate() {
 		if( isset( $t_setting_arr[1] ) ) {
 			$t_filter_arr = unserialize( $t_setting_arr[1] );
 		} else {
-			$t_delete_query = 'DELETE FROM ' . $t_filters_table . ' WHERE id=' . db_param();
+			$t_delete_query = 'DELETE FROM {filters} WHERE id=' . db_param();
 			$t_delete_result = db_query_bound( $t_delete_query, array( $t_row['id'] ) );
 			continue;
 		}
@@ -459,7 +458,7 @@ function install_stored_filter_migrate() {
 		$t_filter_serialized = json_encode( $t_filter_arr );
 		$t_filter_string = $t_cookie_version . '#' . $t_filter_serialized;
 
-		$t_update_query = 'UPDATE ' . $t_filters_table . ' SET filter_string=' . db_param() . ' WHERE id=' . db_param();
+		$t_update_query = 'UPDATE {filters} SET filter_string=' . db_param() . ' WHERE id=' . db_param();
 		$t_update_result = db_query_bound( $t_update_query, array( $t_filter_string, $t_row['id'] ) );
 	}
 
@@ -650,8 +649,7 @@ function install_check_token_serialization() {
  * This ensures it is not possible to execute code during un-serialization
  */
 function install_check_filters_serialization() {
-	$t_filters_table = db_get_table( 'filters' );
-	$query = 'SELECT * FROM ' . $t_filters_table;
+	$query = 'SELECT * FROM {filters}';
 
 	$t_result = db_query_bound( $query );
 	while( $t_row = db_fetch_array( $t_result ) ) {
@@ -670,7 +668,7 @@ function install_check_filters_serialization() {
 		$t_json_filter = json_encode( $t_filter, true );
 		$t_filter_string = 'v9' . '#' . $t_json_filter;
 
-		$t_query = 'UPDATE ' . $t_filters_table . ' SET filter_string=' .db_param() . ' WHERE id=' .db_param();
+		$t_query = 'UPDATE {filters} SET filter_string=' .db_param() . ' WHERE id=' .db_param();
 		db_query_bound( $t_query, array( $t_filter_string, $t_id ) );
 	}
 

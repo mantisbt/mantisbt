@@ -4452,8 +4452,7 @@ function filter_cache_row( $p_filter_id, $p_trigger_errors = true ) {
 		return $g_cache_filter[$p_filter_id];
 	}
 
-	$t_filters_table = db_get_table( 'filters' );
-	$t_query = 'SELECT * FROM ' . $t_filters_table . ' WHERE id=' . db_param();
+	$t_query = 'SELECT * FROM {filters} WHERE id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_filter_id ) );
 
 	if( 0 == db_num_rows( $t_result ) ) {
@@ -4501,8 +4500,6 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
 	$t_user_id = auth_get_current_user_id();
 	$c_project_id = (int)$p_project_id;
 
-	$t_filters_table = db_get_table( 'filters' );
-
 	# check that the user can save non current filters (if required)
 	if( ( ALL_PROJECTS <= $c_project_id ) && ( !is_blank( $p_name ) ) && ( !access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) ) {
 		return -1;
@@ -4514,7 +4511,7 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
 	}
 
 	# Do I need to update or insert this value?
-	$t_query = 'SELECT id FROM ' . $t_filters_table . '
+	$t_query = 'SELECT id FROM {filters}
 					WHERE user_id=' . db_param() . '
 					AND project_id=' . db_param() . '
 					AND name=' . db_param();
@@ -4523,7 +4520,7 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
 	if( db_num_rows( $t_result ) > 0 ) {
 		$t_row = db_fetch_array( $t_result );
 
-		$t_query = 'UPDATE ' . $t_filters_table . '
+		$t_query = 'UPDATE {filters}
 					  SET is_public=' . db_param() . ',
 						filter_string=' . db_param() . '
 					  WHERE id=' . db_param();
@@ -4531,7 +4528,7 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
 
 		return $t_row['id'];
 	} else {
-		$t_query = 'INSERT INTO ' . $t_filters_table . '
+		$t_query = 'INSERT INTO {filters}
 						( user_id, project_id, is_public, name, filter_string )
 					  VALUES
 						( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
@@ -4539,7 +4536,7 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
 
 		# Recall the query, we want the filter ID
 		$t_query = 'SELECT id
-						FROM ' . $t_filters_table . '
+						FROM {filters}
 						WHERE user_id=' . db_param() . '
 						AND project_id=' . db_param() . '
 						AND name=' . db_param();
@@ -4578,8 +4575,7 @@ function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
 		$t_user_id = $p_user_id;
 	}
 
-	$t_filters_table = db_get_table( 'filters' );
-	$t_query = 'SELECT * FROM ' . $t_filters_table . ' WHERE id=' . db_param();
+	$t_query = 'SELECT * FROM {filters} WHERE id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $c_filter_id ) );
 
 	if( db_num_rows( $t_result ) > 0 ) {
@@ -4621,9 +4617,8 @@ function filter_db_get_project_current( $p_project_id, $p_user_id = null ) {
 	}
 
 	# we store current filters for each project with a special project index
-	$t_filters_table = db_get_table( 'filters' );
 	$t_query = 'SELECT *
-				  FROM ' . $t_filters_table . '
+				  FROM {filters}
 				  WHERE user_id=' . db_param() . '
 					AND project_id=' . db_param() . '
 					AND name=' . db_param();
@@ -4645,8 +4640,7 @@ function filter_db_get_project_current( $p_project_id, $p_user_id = null ) {
 function filter_db_get_name( $p_filter_id ) {
 	$c_filter_id = (int)$p_filter_id;
 
-	$t_filters_table = db_get_table( 'filters' );
-	$t_query = 'SELECT * FROM ' . $t_filters_table . ' WHERE id=' . db_param();
+	$t_query = 'SELECT * FROM {filters} WHERE id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $c_filter_id ) );
 
 	if( db_num_rows( $t_result ) > 0 ) {
@@ -4670,7 +4664,6 @@ function filter_db_get_name( $p_filter_id ) {
  * @return boolean
  */
 function filter_db_can_delete_filter( $p_filter_id ) {
-	$t_filters_table = db_get_table( 'filters' );
 	$c_filter_id = (int)$p_filter_id;
 	$t_user_id = auth_get_current_user_id();
 
@@ -4680,7 +4673,7 @@ function filter_db_can_delete_filter( $p_filter_id ) {
 	}
 
 	$t_query = 'SELECT id
-				  FROM ' . $t_filters_table . '
+				  FROM {filters}
 				  WHERE id=' . db_param() . '
 				  AND user_id=' . db_param() . '
 				  AND project_id!=' . db_param();
@@ -4700,14 +4693,13 @@ function filter_db_can_delete_filter( $p_filter_id ) {
  * @return boolean
  */
 function filter_db_delete_filter( $p_filter_id ) {
-	$t_filters_table = db_get_table( 'filters' );
 	$c_filter_id = (int)$p_filter_id;
 
 	if( !filter_db_can_delete_filter( $c_filter_id ) ) {
 		return false;
 	}
 
-	$t_query = 'DELETE FROM ' . $t_filters_table . ' WHERE id=' . db_param();
+	$t_query = 'DELETE FROM {filters} WHERE id=' . db_param();
 	db_query_bound( $t_query, array( $c_filter_id ) );
 
 	return true;
@@ -4718,10 +4710,9 @@ function filter_db_delete_filter( $p_filter_id ) {
  * @return void
  */
 function filter_db_delete_current_filters() {
-	$t_filters_table = db_get_table( 'filters' );
 	$t_all_id = ALL_PROJECTS;
 
-	$t_query = 'DELETE FROM ' . $t_filters_table . ' WHERE project_id<=' . db_param() . ' AND name=' . db_param();
+	$t_query = 'DELETE FROM {filters} WHERE project_id<=' . db_param() . ' AND name=' . db_param();
 	db_query_bound( $t_query, array( $t_all_id, '' ) );
 }
 
@@ -4733,7 +4724,6 @@ function filter_db_delete_current_filters() {
  * @return mixed
  */
 function filter_db_get_available_queries( $p_project_id = null, $p_user_id = null ) {
-	$t_filters_table = db_get_table( 'filters' );
 	$t_overall_query_arr = array();
 
 	if( null === $p_project_id ) {
@@ -4756,7 +4746,7 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
 	# Get the list of available queries. By sorting such that public queries are
 	# first, we can override any query that has the same name as a private query
 	# with that private one
-	$t_query = 'SELECT * FROM ' . $t_filters_table . '
+	$t_query = 'SELECT * FROM {filters}
 					WHERE (project_id=' . db_param() . '
 						OR project_id=0)
 					AND name!=\'\'
