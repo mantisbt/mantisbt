@@ -347,10 +347,9 @@ function category_cache_array_rows_by_project( array $p_project_id_array ) {
 	}
 
 	$t_category_table = db_get_table( 'category' );
-	$t_project_table = db_get_table( 'project' );
 
 	$t_query = 'SELECT c.*, p.name AS project_name FROM ' . $t_category_table . ' c
-				LEFT JOIN ' . $t_project_table . ' p
+				LEFT JOIN {project} p
 					ON c.project_id=p.id
 				WHERE project_id IN ( ' . implode( ', ', $c_project_id_array ) . ' )
 				ORDER BY c.name ';
@@ -444,7 +443,6 @@ function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_pro
 	$c_project_id = (int)$p_project_id;
 
 	$t_category_table = db_get_table( 'category' );
-	$t_project_table = db_get_table( 'project' );
 
 	if( $c_project_id == ALL_PROJECTS ) {
 		$t_inherit = false;
@@ -464,7 +462,7 @@ function category_get_all_rows( $p_project_id, $p_inherit = null, $p_sort_by_pro
 	}
 
 	$t_query = 'SELECT c.*, p.name AS project_name FROM ' . $t_category_table . ' c
-				LEFT JOIN ' . $t_project_table . ' p
+				LEFT JOIN {project} p
 					ON c.project_id=p.id
 				WHERE ' . $t_project_where . ' ORDER BY c.name';
 	$t_result = db_query_bound( $t_query );
@@ -504,10 +502,9 @@ function category_cache_array_rows( array $p_cat_id_array ) {
 	}
 
 	$t_category_table = db_get_table( 'category' );
-	$t_project_table = db_get_table( 'project' );
 
 	$t_query = 'SELECT c.*, p.name AS project_name FROM ' . $t_category_table . ' c
-				LEFT JOIN ' . $t_project_table . ' p
+				LEFT JOIN {project} p
 					ON c.project_id=p.id
 				WHERE c.id IN (' . implode( ',', $c_cat_id_array ) . ')';
 	$t_result = db_query_bound( $t_query );

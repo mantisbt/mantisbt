@@ -155,9 +155,8 @@ function project_hierarchy_cache( $p_show_disabled = false ) {
 
 	$t_enabled_clause = $p_show_disabled ? '1=1' : 'p.enabled = ' . db_param();
 
-	$t_project_table = db_get_table( 'project' );
 	$t_query = 'SELECT DISTINCT p.id, ph.parent_id, p.name, p.inherit_global, ph.inherit_parent
-				  FROM ' . $t_project_table . ' p
+				  FROM {project} p
 				  LEFT JOIN {project_hierarchy} ph
 				    ON ph.child_id = p.id
 				  WHERE ' . $t_enabled_clause . '

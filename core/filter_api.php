@@ -1062,7 +1062,6 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	$t_category_table = db_get_table( 'category' );
 	$t_custom_field_string_table = db_get_table( 'custom_field_string' );
 	$t_bugnote_text_table = db_get_table( 'bugnote_text' );
-	$t_project_table = db_get_table( 'project' );
 	$t_bug_monitor_table = db_get_table( 'bug_monitor' );
 	$t_limit_reporters = config_get( 'limit_reporters' );
 	$t_bug_relationship_table = db_get_table( 'bug_relationship' );
@@ -1111,9 +1110,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	# clauses are requested by the user ( all matching -> AND, any matching -> OR )
 	$t_where_clauses = array();
 
-	$t_project_where_clauses =  array(
-		$t_project_table . '.enabled = ' . db_param(),
-	);
+	$t_project_where_clauses =  array( '{project}.enabled = ' . db_param() );
 	$t_where_params = array(
 		1,
 	);
@@ -1126,7 +1123,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	);
 
 	$t_join_clauses = array(
-		' JOIN ' . $t_project_table . ' ON ' . $t_project_table . '.id = ' . $t_bug_table . '.project_id',
+		' JOIN {project} ON {project}.id = ' . $t_bug_table . '.project_id',
 	);
 
 	# normalize the project filtering into an array $t_project_ids

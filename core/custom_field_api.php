@@ -643,7 +643,6 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 
 		if( ALL_PROJECTS == $p_project_id ) {
 			$t_project_user_list_table = db_get_table( 'project_user_list' );
-			$t_project_table = db_get_table( 'project' );
 			$t_user_id = auth_get_current_user_id();
 
 			# Select only the ids of custom fields in projects the user has access to
@@ -653,7 +652,7 @@ function custom_field_get_linked_ids( $p_project_id = ALL_PROJECTS ) {
 			$t_query = 'SELECT DISTINCT cft.id
 				FROM ' . $t_custom_field_table . ' cft
 					JOIN ' . $t_custom_field_project_table . ' cfpt ON cfpt.field_id = cft.id
-					JOIN ' . $t_project_table . ' pt
+					JOIN {project} pt
 						ON pt.id = cfpt.project_id AND pt.enabled = ' . db_prepare_bool( true ) . '
 					LEFT JOIN ' . $t_project_user_list_table . ' pult
 						ON pult.project_id = cfpt.project_id AND pult.user_id = ' . db_param() . '

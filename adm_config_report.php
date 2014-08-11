@@ -212,7 +212,6 @@ $t_edit_value           = gpc_get_string( 'value', '' );
 
 # Apply filters
 $t_config_table  = db_get_table( 'config' );
-$t_project_table = db_get_table( 'project' );
 
 # Get users in db having specific configs
 $t_query = 'SELECT DISTINCT user_id FROM ' . $t_config_table . ' WHERE user_id <> ' . db_param() ;
@@ -238,7 +237,7 @@ $t_users_list = array(
 # Get projects in db with specific configs
 $t_query = 'SELECT DISTINCT project_id, pt.name as project_name
 	FROM ' . $t_config_table . ' ct
-	JOIN ' . $t_project_table . ' pt ON pt.id = ct.project_id
+	JOIN {project} pt ON pt.id = ct.project_id
 	WHERE project_id!=0
 	ORDER BY project_name';
 $t_result = db_query_bound( $t_query );

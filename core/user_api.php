@@ -972,14 +972,13 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 	if( access_has_global_level( config_get( 'private_project_threshold' ), $p_user_id ) ) {
 		$t_projects = project_hierarchy_get_subprojects( ALL_PROJECTS, $p_show_disabled );
 	} else {
-		$t_project_table = db_get_table( 'project' );
 		$t_project_user_list_table = db_get_table( 'project_user_list' );
 
 		$t_public = VS_PUBLIC;
 		$t_private = VS_PRIVATE;
 
 		$t_query = 'SELECT p.id, p.name, ph.parent_id
-						  FROM ' . $t_project_table . ' p
+						  FROM {project} p
 						  LEFT JOIN ' . $t_project_user_list_table . ' u
 						    ON p.id=u.project_id AND u.user_id=' . db_param() . '
 						  LEFT JOIN {project_hierarchy} ph
@@ -1037,7 +1036,6 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 		}
 	}
 
-	$t_project_table = db_get_table( 'project' );
 	$t_project_user_list_table = db_get_table( 'project_user_list' );
 
 	db_param_push();
@@ -1045,7 +1043,7 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 	if( access_has_global_level( config_get( 'private_project_threshold' ), $p_user_id ) ) {
 		$t_enabled_clause = $p_show_disabled ? '' : 'p.enabled = ' . db_param() . ' AND';
 		$t_query = 'SELECT DISTINCT p.id, p.name, ph.parent_id
-					  FROM ' . $t_project_table . ' p
+					  FROM {project} p
 					  LEFT JOIN {project_hierarchy} ph
 					    ON ph.child_id = p.id
 					  WHERE ' . $t_enabled_clause . '
@@ -1054,7 +1052,7 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 		$t_result = db_query_bound( $t_query, ( $p_show_disabled ? array() : array( true ) ) );
 	} else {
 		$t_query = 'SELECT DISTINCT p.id, p.name, ph.parent_id
-					  FROM ' . $t_project_table . ' p
+					  FROM {project} p
 					  LEFT JOIN ' . $t_project_user_list_table . ' u
 					    ON p.id = u.project_id AND u.user_id=' . db_param() . '
 					  LEFT JOIN {project_hierarchy} ph
@@ -1162,10 +1160,9 @@ function user_get_all_accessible_projects( $p_user_id, $p_project_id ) {
  */
 function user_get_assigned_projects( $p_user_id ) {
 	$t_mantis_project_user_list_table = db_get_table( 'project_user_list' );
-	$t_mantis_project_table = db_get_table( 'project' );
 
 	$t_query = 'SELECT DISTINCT p.id, p.name, p.view_state, u.access_level
-				FROM ' . $t_mantis_project_table . ' p
+				FROM {project} p
 				LEFT JOIN ' . $t_mantis_project_user_list_table . ' u
 				ON p.id=u.project_id
 				WHERE p.enabled = \'1\' AND

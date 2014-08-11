@@ -695,7 +695,6 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
-	$t_project_table = db_get_table( 'project' );
 	$t_project_user_list_table = db_get_table( 'project_user_list' );
 	$t_user_table = db_get_table( 'user' );
 	$t_pub = VS_PUBLIC;
@@ -727,7 +726,7 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 
 	$t_query = 'SELECT pft.id, pft.project_id, pft.filename, pft.file_type, pft.filesize, pft.title, pft.description, pft.date_added, pft.user_id
 		FROM {project_file} pft
-		LEFT JOIN ' . $t_project_table . ' pt ON pft.project_id = pt.id
+		LEFT JOIN {project} pt ON pft.project_id = pt.id
 		LEFT JOIN ' . $t_project_user_list_table . ' pult
 		ON pft.project_id = pult.project_id AND pult.user_id = ' . db_param() . '
 		LEFT JOIN ' . $t_user_table . ' ut ON ut.id = ' . db_param() . '

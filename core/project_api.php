@@ -74,8 +74,7 @@ function project_table_empty() {
 	}
 
 	# Otherwise, check if the projects table contains at least one project.
-	$t_project_table = db_get_table( 'project' );
-	$t_query = 'SELECT * FROM ' . $t_project_table;
+	$t_query = 'SELECT * FROM {project}';
 	$t_result = db_query_bound( $t_query, array(), 1 );
 
 	return db_num_rows( $t_result ) == 0;
@@ -103,9 +102,7 @@ function project_cache_row( $p_project_id, $p_trigger_errors = true ) {
 		return false;
 	}
 
-	$t_project_table = db_get_table( 'project' );
-
-	$t_query = 'SELECT * FROM ' . $t_project_table . ' WHERE id=' . db_param();
+	$t_query = 'SELECT * FROM {project} WHERE id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_project_id ) );
 
 	if( 0 == db_num_rows( $t_result ) ) {
@@ -146,9 +143,7 @@ function project_cache_array_rows( array $p_project_id_array ) {
 		return;
 	}
 
-	$t_project_table = db_get_table( 'project' );
-
-	$t_query = 'SELECT * FROM ' . $t_project_table . ' WHERE id IN (' . implode( ',', $c_project_id_array ) . ')';
+	$t_query = 'SELECT * FROM {project} WHERE id IN (' . implode( ',', $c_project_id_array ) . ')';
 	$t_result = db_query_bound( $t_query );
 
 	$t_projects_found = array();
@@ -172,9 +167,7 @@ function project_cache_all() {
 	global $g_cache_project, $g_cache_project_all;
 
 	if( !$g_cache_project_all ) {
-		$t_project_table = db_get_table( 'project' );
-
-		$t_query = 'SELECT * FROM ' . $t_project_table;
+		$t_query = 'SELECT * FROM {project}';
 		$t_result = db_query_bound( $t_query );
 		$t_count = db_num_rows( $t_result );
 		for( $i = 0;$i < $t_count;$i++ ) {
@@ -244,9 +237,7 @@ function project_ensure_exists( $p_project_id ) {
  * @return boolean
  */
 function project_is_name_unique( $p_name ) {
-	$t_project_table = db_get_table( 'project' );
-
-	$t_query = 'SELECT COUNT(*) FROM ' . $t_project_table . ' WHERE name=' . db_param();
+	$t_query = 'SELECT COUNT(*) FROM {project} WHERE name=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_name ) );
 
 	if( 0 == db_result( $t_result ) ) {
@@ -345,7 +336,7 @@ function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_
 
 	$t_project_table = db_get_table( 'project' );
 
-	$t_query = 'INSERT INTO ' . $t_project_table . '
+	$t_query = 'INSERT INTO {project}
 					( name, status, enabled, view_state, file_path, description, inherit_global )
 				  VALUES
 					( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ')';
@@ -398,8 +389,7 @@ function project_delete( $p_project_id ) {
 	user_pref_delete_project( $p_project_id );
 
 	# Delete the project entry
-	$t_project_table = db_get_table( 'project' );
-	$t_query = 'DELETE FROM ' . $t_project_table . ' WHERE id=' . db_param();
+	$t_query = 'DELETE FROM {project} WHERE id=' . db_param();
 
 	db_query_bound( $t_query, array( $p_project_id ) );
 
@@ -450,9 +440,7 @@ function project_update( $p_project_id, $p_name, $p_description, $p_status, $p_v
 		$p_file_path = validate_project_file_path( $p_file_path );
 	}
 
-	$t_project_table = db_get_table( 'project' );
-
-	$t_query = 'UPDATE ' . $t_project_table . '
+	$t_query = 'UPDATE {project}
 				  SET name=' . db_param() . ',
 					status=' . db_param() . ',
 					enabled=' . db_param() . ',
@@ -495,9 +483,7 @@ function project_copy_custom_fields( $p_destination_id, $p_source_id ) {
  * @return integer
  */
 function project_get_id_by_name( $p_project_name ) {
-	$t_project_table = db_get_table( 'project' );
-
-	$t_query = 'SELECT id FROM ' . $t_project_table . ' WHERE name = ' . db_param();
+	$t_query = 'SELECT id FROM {project} WHERE name = ' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_project_name ), 1 );
 
 	if( db_num_rows( $t_result ) == 0 ) {
