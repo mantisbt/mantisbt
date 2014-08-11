@@ -1076,11 +1076,9 @@ function print_project_user_list_option_list( $p_project_id = null ) {
  * @return void
  */
 function print_project_user_list_option_list2( $p_user_id ) {
-	$t_mantis_project_user_list_table = db_get_table( 'project_user_list' );
-
 	$t_query = 'SELECT DISTINCT p.id, p.name
 				FROM {project} p
-				LEFT JOIN ' . $t_mantis_project_user_list_table . ' u
+				LEFT JOIN {project_user_list} u
 				ON p.id=u.project_id AND u.user_id=' . db_param() . '
 				WHERE p.enabled = ' . db_param() . ' AND
 					u.user_id IS NULL

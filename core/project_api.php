@@ -268,9 +268,7 @@ function project_ensure_name_unique( $p_name ) {
  * @return boolean
  */
 function project_includes_user( $p_project_id, $p_user_id ) {
-	$t_project_user_list_table = db_get_table( 'project_user_list' );
-
-	$t_query = 'SELECT COUNT(*) FROM ' . $t_project_user_list_table . '
+	$t_query = 'SELECT COUNT(*) FROM {project_user_list}
 				  WHERE project_id=' . db_param() . ' AND
 						user_id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_project_id, $p_user_id ) );
@@ -560,10 +558,8 @@ function project_get_local_user_access_level( $p_project_id, $p_user_id ) {
 		return false;
 	}
 
-	$t_project_user_list_table = db_get_table( 'project_user_list' );
-
 	$t_query = 'SELECT access_level
-				  FROM ' . $t_project_user_list_table . '
+				  FROM {project_user_list}
 				  WHERE user_id=' . db_param() . ' AND project_id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( (int)$p_user_id, $p_project_id ) );
 
@@ -581,9 +577,7 @@ function project_get_local_user_access_level( $p_project_id, $p_user_id ) {
  * @return array
  */
 function project_get_local_user_rows( $p_project_id ) {
-	$t_project_user_list_table = db_get_table( 'project_user_list' );
-
-	$t_query = 'SELECT * FROM ' . $t_project_user_list_table . ' WHERE project_id=' . db_param();
+	$t_query = 'SELECT * FROM {project_user_list} WHERE project_id=' . db_param();
 
 	$t_result = db_query_bound( $t_query, array( (int)$p_project_id ) );
 
@@ -616,8 +610,6 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 	if( NOBODY == $p_access_level ) {
 		return array();
 	}
-
-	$t_project_user_list_table = db_get_table( 'project_user_list' );
 
 	$t_on = ON;
 	$t_users = array();
@@ -691,7 +683,7 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 	if( $c_project_id != ALL_PROJECTS ) {
 		# Get the project overrides
 		$t_query = 'SELECT u.id, u.username, u.realname, l.access_level
-				FROM ' . $t_project_user_list_table . ' l, {user} u
+				FROM {project_user_list} l, {user} u
 				WHERE l.user_id = u.id
 				AND u.enabled = ' . db_param() . '
 				AND l.project_id = ' . db_param();
@@ -752,15 +744,13 @@ function project_get_upload_path( $p_project_id ) {
  * @return void
  */
 function project_add_user( $p_project_id, $p_user_id, $p_access_level ) {
-	$t_project_user_list_table = db_get_table( 'project_user_list' );
-
 	$t_access_level = (int)$p_access_level;
 	if( DEFAULT_ACCESS_LEVEL == $t_access_level ) {
 		# Default access level for this user
 		$t_access_level = user_get_access_level( $p_user_id );
 	}
 
-	$t_query = 'INSERT INTO ' . $t_project_user_list_table . '
+	$t_query = 'INSERT INTO {project_user_list}
 				    ( project_id, user_id, access_level )
 				  VALUES
 				    ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ')';
@@ -777,9 +767,7 @@ function project_add_user( $p_project_id, $p_user_id, $p_access_level ) {
  * @return void
  */
 function project_update_user_access( $p_project_id, $p_user_id, $p_access_level ) {
-	$t_project_user_list_table = db_get_table( 'project_user_list' );
-
-	$t_query = 'UPDATE ' . $t_project_user_list_table . '
+	$t_query = 'UPDATE {project_user_list}
 				  SET access_level=' . db_param() . '
 				  WHERE	project_id=' . db_param() . ' AND
 						user_id=' . db_param();
@@ -810,9 +798,7 @@ function project_set_user_access( $p_project_id, $p_user_id, $p_access_level ) {
  * @return void
  */
 function project_remove_user( $p_project_id, $p_user_id ) {
-	$t_project_user_list_table = db_get_table( 'project_user_list' );
-
-	$t_query = 'DELETE FROM ' . $t_project_user_list_table . '
+	$t_query = 'DELETE FROM {project_user_list}
 				  WHERE project_id=' . db_param() . ' AND user_id=' . db_param();
 
 	db_query_bound( $t_query, array( (int)$p_project_id, (int)$p_user_id ) );
@@ -828,9 +814,7 @@ function project_remove_user( $p_project_id, $p_user_id ) {
  * @return void
  */
 function project_remove_all_users( $p_project_id, $p_access_level_limit = null ) {
-	$t_project_user_list_table = db_get_table( 'project_user_list' );
-
-	$t_query = 'DELETE FROM ' . $t_project_user_list_table . ' WHERE project_id = ' . db_param();
+	$t_query = 'DELETE FROM {project_user_list} WHERE project_id = ' . db_param();
 
 	if( $p_access_level_limit !== null ) {
 		$t_query .= ' AND access_level <= ' . db_param();

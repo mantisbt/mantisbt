@@ -612,9 +612,7 @@ function user_signup( $p_username, $p_email = null ) {
 function user_delete_project_specific_access_levels( $p_user_id ) {
 	user_ensure_unprotected( $p_user_id );
 
-	$t_project_user_list_table = db_get_table( 'project_user_list' );
-
-	$t_query = 'DELETE FROM ' . $t_project_user_list_table . ' WHERE user_id=' . db_param();
+	$t_query = 'DELETE FROM {project_user_list} WHERE user_id=' . db_param();
 	db_query_bound( $t_query, array( (int)$p_user_id ) );
 
 	user_clear_cache( $p_user_id );
@@ -972,14 +970,12 @@ function user_get_accessible_projects( $p_user_id, $p_show_disabled = false ) {
 	if( access_has_global_level( config_get( 'private_project_threshold' ), $p_user_id ) ) {
 		$t_projects = project_hierarchy_get_subprojects( ALL_PROJECTS, $p_show_disabled );
 	} else {
-		$t_project_user_list_table = db_get_table( 'project_user_list' );
-
 		$t_public = VS_PUBLIC;
 		$t_private = VS_PRIVATE;
 
 		$t_query = 'SELECT p.id, p.name, ph.parent_id
 						  FROM {project} p
-						  LEFT JOIN ' . $t_project_user_list_table . ' u
+						  LEFT JOIN {project_user_list} u
 						    ON p.id=u.project_id AND u.user_id=' . db_param() . '
 						  LEFT JOIN {project_hierarchy} ph
 						    ON ph.child_id = p.id
@@ -1036,8 +1032,6 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 		}
 	}
 
-	$t_project_user_list_table = db_get_table( 'project_user_list' );
-
 	db_param_push();
 
 	if( access_has_global_level( config_get( 'private_project_threshold' ), $p_user_id ) ) {
@@ -1053,7 +1047,7 @@ function user_get_accessible_subprojects( $p_user_id, $p_project_id, $p_show_dis
 	} else {
 		$t_query = 'SELECT DISTINCT p.id, p.name, ph.parent_id
 					  FROM {project} p
-					  LEFT JOIN ' . $t_project_user_list_table . ' u
+					  LEFT JOIN {project_user_list} u
 					    ON p.id = u.project_id AND u.user_id=' . db_param() . '
 					  LEFT JOIN {project_hierarchy} ph
 					    ON ph.child_id = p.id
@@ -1159,11 +1153,9 @@ function user_get_all_accessible_projects( $p_user_id, $p_project_id ) {
  *		The array contains the id, name, view state, and project access level for the user.
  */
 function user_get_assigned_projects( $p_user_id ) {
-	$t_mantis_project_user_list_table = db_get_table( 'project_user_list' );
-
 	$t_query = 'SELECT DISTINCT p.id, p.name, p.view_state, u.access_level
 				FROM {project} p
-				LEFT JOIN ' . $t_mantis_project_user_list_table . ' u
+				LEFT JOIN {project_user_list} u
 				ON p.id=u.project_id
 				WHERE p.enabled = \'1\' AND
 					u.user_id=' . db_param() . '
@@ -1185,8 +1177,6 @@ function user_get_assigned_projects( $p_user_id ) {
  * @return array List of users not assigned to the specified project
  */
 function user_get_unassigned_by_project_id( $p_project_id = null ) {
-	$t_mantis_project_user_list_table = db_get_table( 'project_user_list' );
-
 	if( null === $p_project_id ) {
 		$p_project_id = helper_get_current_project();
 	}
@@ -1194,7 +1184,7 @@ function user_get_unassigned_by_project_id( $p_project_id = null ) {
 	$t_adm = config_get_global( 'admin_site_threshold' );
 	$t_query = 'SELECT DISTINCT u.id, u.username, u.realname
 				FROM {user} u
-				LEFT JOIN ' . $t_mantis_project_user_list_table . ' p
+				LEFT JOIN {project_user_list} p
 				ON p.user_id=u.id AND p.project_id=' . db_param() . '
 				WHERE u.access_level<' . db_param() . ' AND
 					u.enabled = ' . db_param() . ' AND
