@@ -463,7 +463,7 @@ function custom_field_update( $p_field_id, array $p_def_array ) {
 			case 'require_resolved':
 			case 'require_closed':
 				$t_update .= $t_field . '=' . db_param() . ', ';
-				$t_params[] = db_prepare_bool( $t_value );
+				$t_params[] = (bool)$t_value;
 				break;
 		}
 	}

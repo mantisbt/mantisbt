@@ -519,7 +519,7 @@ function user_create( $p_username, $p_password, $p_email = '',
 
 	$t_password = auth_process_plain_password( $p_password );
 
-	$c_enabled = db_prepare_bool( $p_enabled );
+	$c_enabled = (bool)$p_enabled;
 
 	user_ensure_name_valid( $p_username );
 	user_ensure_name_unique( $p_username );
@@ -542,7 +542,7 @@ function user_create( $p_username, $p_password, $p_email = '',
 	# Users are added with protected set to FALSE in order to be able to update
 	# preferences.  Now set the real value of protected.
 	if( $p_protected ) {
-		user_set_field( $t_user_id, 'protected', db_prepare_bool( $p_protected ) );
+		user_set_field( $t_user_id, 'protected', (bool)$p_protected );
 	}
 
 	# Send notification email
