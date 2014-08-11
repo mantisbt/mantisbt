@@ -299,9 +299,7 @@ function profile_get_all_for_project( $p_project_id ) {
  * @return string
  */
 function profile_get_default( $p_user_id ) {
-	$t_mantis_user_pref_table = db_get_table( 'user_pref' );
-
-	$t_query = 'SELECT default_profile FROM ' . $t_mantis_user_pref_table . ' WHERE user_id=' . db_param();
+	$t_query = 'SELECT default_profile FROM {user_pref} WHERE user_id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_user_id ) );
 
 	$t_default_profile = (int)db_result( $t_result, 0, 0 );
