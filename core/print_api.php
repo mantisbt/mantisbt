@@ -403,18 +403,13 @@ function print_tag_option_list( $p_bug_id = 0 ) {
  * @return void
  */
 function print_news_item_option_list() {
-	$t_mantis_news_table = db_get_table( 'news' );
-
 	$t_project_id = helper_get_current_project();
 
 	$t_global = access_has_global_level( config_get_global( 'admin_site_threshold' ) );
 	if( $t_global ) {
-		$t_query = 'SELECT id, headline, announcement, view_state
-				FROM ' . $t_mantis_news_table . '
-				ORDER BY date_posted DESC';
+		$t_query = 'SELECT id, headline, announcement, view_state FROM {news} ORDER BY date_posted DESC';
 	} else {
-		$t_query = 'SELECT id, headline, announcement, view_state
-				FROM ' . $t_mantis_news_table . '
+		$t_query = 'SELECT id, headline, announcement, view_state FROM {news}
 				WHERE project_id=' . db_param() . '
 				ORDER BY date_posted DESC';
 	}
