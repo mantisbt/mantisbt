@@ -97,8 +97,7 @@ function file_bug_attachment_count( $p_bug_id ) {
 
 	# Otherwise build the cache and return the attachment count
 	#   for the given bug (if any).
-	$t_bug_file_table = db_get_table( 'bug_file' );
-	$t_query = 'SELECT bug_id, COUNT(bug_id) AS attachments FROM ' . $t_bug_file_table . ' GROUP BY bug_id';
+	$t_query = 'SELECT bug_id, COUNT(bug_id) AS attachments FROM {bug_file} GROUP BY bug_id';
 	$t_result = db_query_bound( $t_query );
 
 	$t_file_count = 0;
@@ -364,8 +363,7 @@ function file_delete_attachments( $p_bug_id ) {
 	$t_method = config_get( 'file_upload_method' );
 
 	# Delete files from disk
-	$t_bug_file_table = db_get_table( 'bug_file' );
-	$t_query = 'SELECT diskfile, filename FROM ' . $t_bug_file_table . ' WHERE bug_id=' . db_param();
+	$t_query = 'SELECT diskfile, filename FROM {bug_file} WHERE bug_id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_bug_id ) );
 
 	$t_file_count = db_num_rows( $t_result );
@@ -396,13 +394,12 @@ function file_delete_attachments( $p_bug_id ) {
  * @return void
  */
 function file_delete_project_files( $p_project_id ) {
-	$t_project_file_table = db_get_table( 'project_file' );
 	$t_method = config_get( 'file_upload_method' );
 
 	# Delete the file physically (if stored via DISK)
 	if( DISK == $t_method ) {
 		# Delete files from disk
-		$t_query = 'SELECT diskfile, filename FROM ' . $t_project_file_table . ' WHERE project_id=' . db_param();
+		$t_query = 'SELECT diskfile, filename FROM {project_file} WHERE project_id=' . db_param();
 		$t_result = db_query_bound( $t_query, array( (int)$p_project_id ) );
 
 		$t_file_count = db_num_rows( $t_result );
@@ -416,7 +413,7 @@ function file_delete_project_files( $p_project_id ) {
 	}
 
 	# Delete the corresponding database records
-	$t_query = 'DELETE FROM ' . $t_project_file_table . ' WHERE project_id=' . db_param();
+	$t_query = 'DELETE FROM {project_file} WHERE project_id=' . db_param();
 	db_query_bound( $t_query, array( (int)$p_project_id ) );
 }
 
@@ -561,16 +558,13 @@ function file_generate_unique_name( $p_filepath ) {
  * @return boolean true if unique
  */
 function diskfile_is_name_unique( $p_name, $p_filepath ) {
-	$t_bug_file_table = db_get_table( 'bug_file' );
-	$t_project_file_table = db_get_table( 'project_file' );
-
 	$c_name = $p_filepath . $p_name;
 
 	$t_query = 'SELECT count(*)
 		FROM (
-			SELECT diskfile FROM ' . $t_bug_file_table . '
+			SELECT diskfile FROM {bug_file}
 			UNION
-			SELECT diskfile FROM ' . $t_project_file_table . '
+			SELECT diskfile FROM {project_file}
 			) f
 		WHERE diskfile=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $c_name ) );
@@ -853,12 +847,10 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 	$t_query = '';
 	switch( $p_type ) {
 		case 'bug':
-			$t_bug_file_table = db_get_table( 'bug_file' );
-			$t_query = 'SELECT * FROM ' . $t_bug_file_table . ' WHERE id=' . db_param();
+			$t_query = 'SELECT * FROM {bug_file} WHERE id=' . db_param();
 			break;
 		case 'doc':
-			$t_project_file_table = db_get_table( 'project_file' );
-			$t_query = 'SELECT * FROM ' . $t_project_file_table . ' WHERE id=' . db_param();
+			$t_query = 'SELECT * FROM {project_file} WHERE id=' . db_param();
 			break;
 		default:
 			return false;
@@ -961,8 +953,7 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 
 	# Initialize the update query to update a single row
 	$c_bug_id = (int)$p_bug_id;
-	$t_bug_file_table = db_get_table( 'bug_file' );
-	$t_query_disk_attachment_update = 'UPDATE ' . $t_bug_file_table . '
+	$t_query_disk_attachment_update = 'UPDATE {bug_file}
 	                                 SET folder=' . db_param() . '
 	                                 WHERE bug_id=' . db_param() . '
 	                                 AND id =' . db_param();
@@ -1003,9 +994,7 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
  * @return void
  */
 function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
-	$t_mantis_bug_file_table = db_get_table( 'bug_file' );
-
-	$t_query = 'SELECT * FROM ' . $t_mantis_bug_file_table . ' WHERE bug_id = ' . db_param();
+	$t_query = 'SELECT * FROM {bug_file} WHERE bug_id = ' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_source_bug_id ) );
 	$t_count = db_num_rows( $t_result );
 

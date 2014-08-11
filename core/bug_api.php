@@ -1516,10 +1516,8 @@ function bug_get_bugnote_stats( $p_bug_id ) {
  * @uses file_api.php
  */
 function bug_get_attachments( $p_bug_id ) {
-	$t_bug_file_table = db_get_table( 'bug_file' );
-
 	$t_query = 'SELECT id, title, diskfile, filename, filesize, file_type, date_added, user_id
-		                FROM ' . $t_bug_file_table . '
+		                FROM {bug_file}
 		                WHERE bug_id=' . db_param() . '
 		                ORDER BY date_added';
 	$t_db_result = db_query_bound( $t_query, array( $p_bug_id ) );

@@ -66,7 +66,6 @@ if( OFF == config_get( 'enable_project_documentation' ) || !file_is_uploading_en
 $g_project_override = $f_project_id;
 
 $t_user_id = auth_get_current_user_id();
-$t_project_file_table = db_get_table( 'project_file' );
 $t_project_table = db_get_table( 'project' );
 $t_project_user_list_table = db_get_table( 'project_user_list' );
 $t_pub = VS_PUBLIC;
@@ -95,7 +94,7 @@ if( is_array( $t_reqd_access ) ) {
 }
 
 $t_query = 'SELECT pft.id, pft.project_id, pft.filename, pft.filesize, pft.title, pft.description, pft.date_added
-			FROM ' . $t_project_file_table . ' pft
+			FROM {project_file} pft
 				LEFT JOIN ' . $t_project_table . ' pt ON pft.project_id = pt.id
 				LEFT JOIN ' . $t_project_user_list_table . ' pult
 					ON pft.project_id = pult.project_id AND pult.user_id = ' . db_param() . '

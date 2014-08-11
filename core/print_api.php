@@ -1876,8 +1876,7 @@ function print_bug_attachment_preview_text( array $p_attachment ) {
 			}
 			break;
 		case DATABASE:
-			$t_bug_file_table = db_get_table( 'bug_file' );
-			$t_query = 'SELECT * FROM ' . $t_bug_file_table . ' WHERE id=' . db_param();
+			$t_query = 'SELECT * FROM {bug_file} WHERE id=' . db_param();
 			$t_result = db_query_bound( $t_query, array( (int)$p_attachment['id'] ) );
 			$t_row = db_fetch_array( $t_result );
 			$t_content = $t_row['content'];
