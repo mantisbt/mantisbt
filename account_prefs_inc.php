@@ -81,7 +81,6 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 		}
 	}
 
-	# prefix data with u_
 	$t_pref = user_pref_get( $p_user_id );
 
 # Account Preferences Form BEGIN
