@@ -491,8 +491,9 @@ function install_update_history_long_custom_fields() {
 	$t_query = 'SELECT name FROM {custom_field}';
 	$t_result = db_query_bound( $t_query );
 	while( $t_field = db_fetch_array( $t_result ) ) {
-		if( utf8_strlen( $t_field[0] ) > 32 ) {
-			$t_custom_fields[utf8_substr( $t_field[0], 0, 32 )] = $t_field[0];
+		$t_name = $t_field['name'];
+		if( utf8_strlen( $t_name ) > 32 ) {
+			$t_custom_fields[utf8_substr( $t_name, 0, 32 )] = $t_name;
 		}
 	}
 	if( !isset( $t_custom_fields ) ) {
