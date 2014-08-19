@@ -635,13 +635,16 @@ function install_check_token_serialization() {
 
 
 /**
- * Schema update to migrate filters  data from php serialization to json.
+ * Schema update to migrate filters data from php serialization to json.
  * This ensures it is not possible to execute code during un-serialization
  */
 function install_check_filters_serialization() {
-	$query = 'SELECT * FROM {filters}';
+	$t_new_filter_version = 'v9';
 
-	$t_result = db_query_bound( $query );
+	$query = 'SELECT * FROM {filters}
+		WHERE filter_string NOT LIKE ' . db_param();
+
+	$t_result = db_query_bound( $query, array( $t_new_filter_version . '%' )  );
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_id = $t_row['id'];
 		$t_value = $t_row['filter_string'];
@@ -653,10 +656,10 @@ function install_check_filters_serialization() {
 		if( $t_filter === false ) {
 			return 1; # Fatal: invalid data found in tokens table
 		}
-		$t_filter['_version'] = 'v9'; // bump version
+		$t_filter['_version'] = $t_new_filter_version; // bump version
 
 		$t_json_filter = json_encode( $t_filter, true );
-		$t_filter_string = 'v9' . '#' . $t_json_filter;
+		$t_filter_string = $t_new_filter_version . '#' . $t_json_filter;
 
 		$t_query = 'UPDATE {filters} SET filter_string=' .db_param() . ' WHERE id=' .db_param();
 		db_query_bound( $t_query, array( $t_filter_string, $t_id ) );
