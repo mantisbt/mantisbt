@@ -291,7 +291,7 @@ form_security_purge( 'bug_report' );
 layout_page_header_begin();
 
 if( !$f_report_stay ) {
-    html_meta_redirect( 'view_all_bug_page.php' );
+	html_meta_redirect( 'view_all_bug_page.php' );
 }
 
 layout_page_header_end();
@@ -299,41 +299,41 @@ layout_page_header_end();
 layout_page_begin( 'bug_report_page.php' );
 ?>
 
-    <div class="col-md-12 col-xs-12">
-        <div class="space-10"></div>
-        <div class="alert alert-success">
+<div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
+	<div class="alert alert-success">
 
-            <?php
-            echo '<p>' . lang_get( 'operation_successful' ) . '</p><br />';
-            print_button( string_get_bug_view_url( $t_bug_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_bug_id ) );
-            print_button( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
+<?php
+echo '<p>' . lang_get( 'operation_successful' ) . '</p><br />';
+print_button( string_get_bug_view_url( $t_bug_id ), sprintf( lang_get( 'view_submitted_bug_link' ), $t_bug_id ) );
+print_button( 'view_all_bug_page.php', lang_get( 'view_bugs_link' ) );
 
-            if( $f_report_stay ) {
-                ?>
-                <p>
-                <form method="post" action="<?php echo string_get_bug_report_url() ?>">
-                    <?php # CSRF protection not required here - form does not result in modifications ?>
-                    <input type="hidden" name="category_id" value="<?php echo string_attribute( $t_bug_data->category_id ) ?>" />
-                    <input type="hidden" name="severity" value="<?php echo string_attribute( $t_bug_data->severity ) ?>" />
-                    <input type="hidden" name="reproducibility" value="<?php echo string_attribute( $t_bug_data->reproducibility ) ?>" />
-                    <input type="hidden" name="profile_id" value="<?php echo string_attribute( $t_bug_data->profile_id ) ?>" />
-                    <input type="hidden" name="platform" value="<?php echo string_attribute( $t_bug_data->platform ) ?>" />
-                    <input type="hidden" name="os" value="<?php echo string_attribute( $t_bug_data->os ) ?>" />
-                    <input type="hidden" name="os_build" value="<?php echo string_attribute( $t_bug_data->os_build ) ?>" />
-                    <input type="hidden" name="product_version" value="<?php echo string_attribute( $t_bug_data->version ) ?>" />
-                    <input type="hidden" name="target_version" value="<?php echo string_attribute( $t_bug_data->target_version ) ?>" />
-                    <input type="hidden" name="build" value="<?php echo string_attribute( $t_bug_data->build ) ?>" />
-                    <input type="hidden" name="report_stay" value="1" />
-                    <input type="hidden" name="view_state" value="<?php echo string_attribute( $t_bug_data->view_state ) ?>" />
-                    <input type="hidden" name="due_date" value="<?php echo string_attribute( $t_bug_data->due_date ) ?>" />
-                    <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'report_more_bugs' ) ?>" />
-                </form>
-                </p>
-            <?php
-            }
-            ?>
-        </div>
-    </div>
+if( $f_report_stay ) {
+?>
+	<p>
+	<form method="post" action="<?php echo string_get_bug_report_url() ?>">
+	<?php # CSRF protection not required here - form does not result in modifications ?>
+		<input type="hidden" name="category_id" value="<?php echo string_attribute( $t_bug_data->category_id ) ?>" />
+		<input type="hidden" name="severity" value="<?php echo string_attribute( $t_bug_data->severity ) ?>" />
+		<input type="hidden" name="reproducibility" value="<?php echo string_attribute( $t_bug_data->reproducibility ) ?>" />
+		<input type="hidden" name="profile_id" value="<?php echo string_attribute( $t_bug_data->profile_id ) ?>" />
+		<input type="hidden" name="platform" value="<?php echo string_attribute( $t_bug_data->platform ) ?>" />
+		<input type="hidden" name="os" value="<?php echo string_attribute( $t_bug_data->os ) ?>" />
+		<input type="hidden" name="os_build" value="<?php echo string_attribute( $t_bug_data->os_build ) ?>" />
+		<input type="hidden" name="product_version" value="<?php echo string_attribute( $t_bug_data->version ) ?>" />
+		<input type="hidden" name="target_version" value="<?php echo string_attribute( $t_bug_data->target_version ) ?>" />
+		<input type="hidden" name="build" value="<?php echo string_attribute( $t_bug_data->build ) ?>" />
+		<input type="hidden" name="report_stay" value="1" />
+		<input type="hidden" name="view_state" value="<?php echo string_attribute( $t_bug_data->view_state ) ?>" />
+		<input type="hidden" name="due_date" value="<?php echo string_attribute( $t_bug_data->due_date ) ?>" />
+		<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'report_more_bugs' ) ?>" />
+	</form>
+	</p>
+<?php
+}
+?>
+</div>
+</div>
 
 <?php
 layout_page_end();

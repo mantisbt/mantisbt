@@ -63,14 +63,14 @@ $f_body			= gpc_get_string( 'body' );
 
 $t_bug = bug_get( $f_bug_id, true );
 if( $t_bug->project_id != helper_get_current_project() ) {
-    # in case the current project is not the same project of the bug we are viewing...
-    # ... override the current project. This to avoid problems with categories and handlers lists etc.
-    $g_project_override = $t_bug->project_id;
+	# in case the current project is not the same project of the bug we are viewing...
+	# ... override the current project. This to avoid problems with categories and handlers lists etc.
+	$g_project_override = $t_bug->project_id;
 }
 
 if( bug_is_readonly( $f_bug_id ) ) {
-    error_parameters( $f_bug_id );
-    trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+	error_parameters( $f_bug_id );
+	trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 }
 
 access_ensure_bug_level( config_get( 'bug_reminder_threshold' ), $f_bug_id );
@@ -82,33 +82,33 @@ $t_monitor_bug_threshold = config_get( 'monitor_bug_threshold' );
 $t_handler = bug_get_field( $f_bug_id, 'handler_id' );
 $t_reporter = bug_get_field( $f_bug_id, 'reporter_id' );
 foreach ( $f_to as $t_recipient ) {
-    if( ON == $t_reminder_recipients_monitor_bug
-        && access_has_bug_level( $t_monitor_bug_threshold, $f_bug_id )
-        && $t_recipient != $t_handler
-        && $t_recipient != $t_reporter
-    ) {
-        bug_monitor( $f_bug_id, $t_recipient );
-    }
+	if( ON == $t_reminder_recipients_monitor_bug
+		&& access_has_bug_level( $t_monitor_bug_threshold, $f_bug_id )
+		&& $t_recipient != $t_handler
+		&& $t_recipient != $t_reporter
+	) {
+		bug_monitor( $f_bug_id, $t_recipient );
+	}
 }
 
 $t_result = email_bug_reminder( $f_to, $f_bug_id, $f_body );
 
 # Add reminder as bugnote if store reminders option is ON.
 if( ON == config_get( 'store_reminders' ) ) {
-    # Build list of recipients, truncated to note_attr fields's length
-    $t_attr = '|';
-    $t_length = 0;
-    foreach( $t_result as $t_id ) {
-        $t_recipient = $t_id . '|';
-        $t_length += strlen( $t_recipient );
-        if( $t_length > 250 ) {
-            # Remove trailing delimiter to indicate truncation
-            $t_attr = rtrim( $t_attr, '|' );
-            break;
-        }
-        $t_attr .= $t_recipient;
-    }
-    bugnote_add( $f_bug_id, $f_body, 0, config_get( 'default_reminder_view_status' ) == VS_PRIVATE, REMINDER, $t_attr, null, false );
+	# Build list of recipients, truncated to note_attr fields's length
+	$t_attr = '|';
+	$t_length = 0;
+	foreach( $t_result as $t_id ) {
+		$t_recipient = $t_id . '|';
+		$t_length += strlen( $t_recipient );
+		if( $t_length > 250 ) {
+			# Remove trailing delimiter to indicate truncation
+			$t_attr = rtrim( $t_attr, '|' );
+			break;
+		}
+		$t_attr .= $t_recipient;
+	}
+	bugnote_add( $f_bug_id, $f_body, 0, config_get( 'default_reminder_view_status' ) == VS_PRIVATE, REMINDER, $t_attr, null, false );
 }
 
 form_security_purge( 'bug_reminder' );

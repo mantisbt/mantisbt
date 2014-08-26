@@ -35,7 +35,7 @@
  */
 
 if( !defined( 'BUGNOTE_ADD_INC_ALLOW' ) ) {
-    return;
+	return;
 }
 
 require_api( 'access_api.php' );
@@ -51,108 +51,108 @@ require_api( 'lang_api.php' );
 
 ?>
 <?php if( ( !bug_is_readonly( $f_bug_id ) ) &&
-    ( access_has_bug_level( config_get( 'add_bugnote_threshold' ), $f_bug_id ) ) ) { ?>
-    <?php # Bugnote Add Form BEGIN ?>
+		( access_has_bug_level( config_get( 'add_bugnote_threshold' ), $f_bug_id ) ) ) { ?>
+<?php # Bugnote Add Form BEGIN ?>
 
-    <div class="col-md-12 col-xs-12">
-    <a id="addbugnote"></a>
-    <div class="space-10"></div>
+<div class="col-md-12 col-xs-12">
+<a id="addbugnote"></a>
+<div class="space-10"></div>
 
-    <?php
+<?php
     $t_collapse_block = collapse_display( 'bugnote_add' );
     $t_block_css = $t_collapse_block ? 'collapsed' : '';
     $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
-    ?>
-    <form name="bugnoteadd" method="post" action="bugnote_add.php">
-        <?php echo form_security_field( 'bugnote_add' ) ?>
-        <input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
-        <div id="bugnote_add" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
-            <div class="widget-header widget-header-small">
-                <h4 class="widget-title lighter">
-                    <i class="ace-icon fa fa-comment"></i>
-                    <?php echo lang_get( 'add_bugnote_title' ) ?>
-                </h4>
-                <div class="widget-toolbar">
-                    <a data-action="collapse" href="#">
-                        <i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
-                    </a>
-                </div>
-            </div>
+?>
+<form name="bugnoteadd" method="post" action="bugnote_add.php">
+	<?php echo form_security_field( 'bugnote_add' ) ?>
+	<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
+	<div id="bugnote_add" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-comment"></i>
+				<?php echo lang_get( 'add_bugnote_title' ) ?>
+			</h4>
+			<div class="widget-toolbar">
+				<a data-action="collapse" href="#">
+					<i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
+				</a>
+			</div>
+		</div>
 
-            <div class="widget-body">
-                <div class="widget-main no-padding">
+		<div class="widget-body">
+			<div class="widget-main no-padding">
 
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-condensed">
-                            <tbody>
-                            <tr<td>
-                                <th class="category" width="15%">
-                                    <?php echo lang_get( 'bugnote' ) ?>
-                                </th>
-                                <td width="85%">
-                                    <textarea name="bugnote_text" class="form-control" rows="7"></textarea>
-                                </td>
-                            </tr>
+				<div class="table-responsive">
+		<table class="table table-bordered table-condensed">
+			<tbody>
+			<tr>
+				<th class="category" width="15%">
+					<?php echo lang_get( 'bugnote' ) ?>
+				</th>
+				<td width="85%">
+					<textarea name="bugnote_text" class="form-control" rows="7"></textarea>
+				</td>
+			</tr>
 
-                            <?php
-                            if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
-                                ?>
-                                <tr>
-                                    <th class="category">
-                                        <?php echo lang_get( 'view_status' ) ?>
-                                    </th>
-                                    <td>
-                                        <?php
-                                        $t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
-                                        if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
-                                            ?>
-                                            <label for="bugnote_add_view_status">
-                                                <input type="checkbox" class="ace" id="bugnote_add_view_status" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
-                                                <span class="lbl"> <?php echo lang_get( 'private' ) ?> </span>
-                                            </label>
-                                        <?php
-                                        } else {
-                                            echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
-                                        }
-                                        ?>
-                                    </td>
-                                </tr>
-                            <?php
-                            }
+<?php
+	if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
+?>
+			<tr>
+				<th class="category">
+					<?php echo lang_get( 'view_status' ) ?>
+				</th>
+				<td>
+<?php
+		$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
+		if( access_has_bug_level( config_get( 'set_view_status_threshold' ), $f_bug_id ) ) {
+?>
+				<label for="bugnote_add_view_status">
+					<input type="checkbox" class="ace" id="bugnote_add_view_status" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
+					<span class="lbl"> <?php echo lang_get( 'private' ) ?> </span>
+				</label>
+<?php
+		} else {
+			echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
+		}
+		?>
+				</td>
+			</tr>
+<?php
+	}
 
-                            if( config_get( 'time_tracking_enabled' ) ) {
-                                if( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $f_bug_id ) ) {
-                                    ?>
-                                    <tr>
-                                        <th class="category">
-                                            <?php echo lang_get( 'time_tracking' ) ?>
-                                        </th>
-                                        <td>
-                                            <?php if( config_get( 'time_tracking_stopwatch' ) && config_get( 'use_javascript' ) ) { ?>
-                                                <input type="text" name="time_tracking" class="stopwatch_time input-sm" size="8" placeholder="hh:mm:ss" />
-                                                <input type="button" name="time_tracking_toggle" class="stopwatch_toggle" value="<?php echo lang_get( 'time_tracking_stopwatch_start' ) ?>" />
-                                                <input type="button" name="time_tracking_reset" class="stopwatch_reset" value="<?php echo lang_get( 'time_tracking_stopwatch_reset' ) ?>" />
-                                            <?php } else { ?>
-                                                <input type="text" name="time_tracking" class="input-sm" size="5" placeholder="hh:mm" />
-                                            <?php } ?>
-                                        </td>
-                                    </tr>
-                                <?php
-                                }
-                            }
+	if( config_get( 'time_tracking_enabled' ) ) {
+		if( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $f_bug_id ) ) {
+?>
+			<tr>
+				<th class="category">
+					<?php echo lang_get( 'time_tracking' ) ?>
+				</th>
+				<td>
+					<?php if( config_get( 'time_tracking_stopwatch' ) && config_get( 'use_javascript' ) ) { ?>
+					<input type="text" name="time_tracking" class="stopwatch_time input-sm" size="8" placeholder="hh:mm:ss" />
+					<input type="button" name="time_tracking_toggle" class="stopwatch_toggle" value="<?php echo lang_get( 'time_tracking_stopwatch_start' ) ?>" />
+					<input type="button" name="time_tracking_reset" class="stopwatch_reset" value="<?php echo lang_get( 'time_tracking_stopwatch_reset' ) ?>" />
+					<?php } else { ?>
+					<input type="text" name="time_tracking" class="input-sm" size="5" placeholder="hh:mm" />
+					<?php } ?>
+				</td>
+			</tr>
+<?php
+		}
+	}
 
-                            event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $f_bug_id ) );
-                            ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="widget-toolbox padding-8 clearfix">
-                    <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_bugnote_button' ) ?>" />
-                </div>
-            </div>
-        </div>
-    </form>
-    </div>
+	event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $f_bug_id ) );
+?>
+		</tbody>
+</table>
+</div>
+</div>
+	<div class="widget-toolbox padding-8 clearfix">
+		<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_bugnote_button' ) ?>" />
+	</div>
+</div>
+</div>
+</form>
+</div>
 <?php
 }

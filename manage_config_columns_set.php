@@ -67,31 +67,31 @@ $f_form_page = gpc_get_string( 'form_page' );
 
 # only admins can set global defaults.for ALL_PROJECT
 if( $f_update_columns_as_global_default && $f_project_id == ALL_PROJECTS && !current_user_is_administrator() ) {
-    access_denied();
+	access_denied();
 }
 
 # only MANAGERS can set global defaults.for a project
 if( $f_update_columns_as_global_default && $f_project_id != ALL_PROJECTS ) {
-    access_ensure_project_level( MANAGER, $f_project_id );
+	access_ensure_project_level( MANAGER, $f_project_id );
 }
 
 # user should only be able to set columns for a project that is accessible.
 if( $f_update_columns_for_current_project && $f_project_id != ALL_PROJECTS ) {
-    access_ensure_project_level( VIEWER, $f_project_id );
+	access_ensure_project_level( VIEWER, $f_project_id );
 }
 
 if( $f_update_columns_as_my_default || $f_update_columns_as_global_default ) {
-    $t_project_id = ALL_PROJECTS;
+	$t_project_id = ALL_PROJECTS;
 } else {
-    $t_project_id = $f_project_id;
-    project_ensure_exists( $t_project_id );
+	$t_project_id = $f_project_id;
+	project_ensure_exists( $t_project_id );
 }
 
 # Calculate the user id to set the configuration for.
 if( $f_update_columns_as_my_default || $f_update_columns_for_current_project ) {
-    $t_user_id = auth_get_current_user_id();
+	$t_user_id = auth_get_current_user_id();
 } else {
-    $t_user_id = NO_USER;
+	$t_user_id = NO_USER;
 }
 
 $t_all_columns = columns_get_all();
@@ -109,16 +109,16 @@ $t_excel_columns = columns_string_to_array( $f_excel_columns );
 columns_ensure_valid( 'excel', $t_excel_columns, $t_all_columns );
 
 if( serialize( config_get( 'view_issues_page_columns', '', $t_user_id, $t_project_id ) ) !== serialize( $t_view_issues_columns ) ) {
-    config_set( 'view_issues_page_columns', $t_view_issues_columns, $t_user_id, $t_project_id );
+	config_set( 'view_issues_page_columns', $t_view_issues_columns, $t_user_id, $t_project_id );
 }
 if( serialize( config_get( 'print_issues_page_columns', '', $t_user_id, $t_project_id ) ) !== serialize( $t_print_issues_columns ) ) {
-    config_set( 'print_issues_page_columns', $t_print_issues_columns, $t_user_id, $t_project_id );
+	config_set( 'print_issues_page_columns', $t_print_issues_columns, $t_user_id, $t_project_id );
 }
 if( serialize( config_get( 'csv_columns', '', $t_user_id, $t_project_id ) ) !== serialize( $t_csv_columns ) ) {
-    config_set( 'csv_columns', $t_csv_columns, $t_user_id, $t_project_id );
+	config_set( 'csv_columns', $t_csv_columns, $t_user_id, $t_project_id );
 }
 if( serialize( config_get( 'excel_columns', '', $t_user_id, $t_project_id ) ) !== serialize( $t_excel_columns ) ) {
-    config_set( 'excel_columns', $t_excel_columns, $t_user_id, $t_project_id );
+	config_set( 'excel_columns', $t_excel_columns, $t_user_id, $t_project_id );
 }
 
 form_security_purge( 'manage_config_columns_set' );

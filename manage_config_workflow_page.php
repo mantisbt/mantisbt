@@ -154,40 +154,40 @@ function show_flag( $p_from_status_id, $p_to_status_id ) {
  * @return void
  */
 function section_begin( $p_section_name ) {
-    $t_enum_statuses = MantisEnum::getValues( config_get( 'status_enum_string' ) );
+	$t_enum_statuses = MantisEnum::getValues( config_get( 'status_enum_string' ) );
 
-    echo '<div class="space-10"></div>';
+	echo '<div class="space-10"></div>';
 
-    echo '<div class="widget-box widget-color-blue2">';
-    echo '   <div class="widget-header widget-header-small">';
-    echo '        <h4 class="widget-title lighter uppercase">';
-    echo '            <i class="ace-icon fa fa-random"></i>';
-    echo $p_section_name;
-    echo '       </h4>';
-    echo '   </div>';
-    echo '   <div class="widget-body">';
-    echo '   <div class="widget-main no-padding">';
-    echo '       <div class="table-responsive">';
+	echo '<div class="widget-box widget-color-blue2">';
+	echo '   <div class="widget-header widget-header-small">';
+	echo '        <h4 class="widget-title lighter uppercase">';
+	echo '            <i class="ace-icon fa fa-random"></i>';
+	echo $p_section_name;
+	echo '       </h4>';
+	echo '   </div>';
+	echo '   <div class="widget-body">';
+	echo '   <div class="widget-main no-padding">';
+	echo '       <div class="table-responsive">';
 
-    echo "\t<table  class=\"table table-striped table-bordered table-condensed\">\n";
-    echo "\t\t<thead>\n";
-    echo "\t\t" . '<tr>' . "\n";
-    echo "\t\t\t" . '<th class="bold width30" rowspan="2">' . lang_get( 'current_status' ) . '</th>'. "\n";
-    echo "\t\t\t" . '<th class="bold" style="text-align:center" colspan="' . ( count( $t_enum_statuses ) + 1 ) . '">'
-        . lang_get( 'next_status' ) . '</th>';
-    echo "\n\t\t" . '</tr>'. "\n";
-    echo "\t\t" . '<tr>' . "\n";
+	echo "\t<table  class=\"table table-striped table-bordered table-condensed\">\n";
+	echo "\t\t<thead>\n";
+	echo "\t\t" . '<tr>' . "\n";
+	echo "\t\t\t" . '<th class="bold width30" rowspan="2">' . lang_get( 'current_status' ) . '</th>'. "\n";
+	echo "\t\t\t" . '<th class="bold" style="text-align:center" colspan="' . ( count( $t_enum_statuses ) + 1 ) . '">'
+		. lang_get( 'next_status' ) . '</th>';
+	echo "\n\t\t" . '</tr>'. "\n";
+	echo "\t\t" . '<tr>' . "\n";
 
-    foreach( $t_enum_statuses as $t_status ) {
-        echo "\t\t\t" . '<th class="bold" style="text-align:center">&#160;'
-            . string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_status ) )
-            . '&#160;</th>' ."\n";
-    }
+	foreach( $t_enum_statuses as $t_status ) {
+		echo "\t\t\t" . '<th class="bold" style="text-align:center">&#160;'
+			. string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_status ) )
+			. '&#160;</th>' ."\n";
+	}
 
-    echo "\t\t\t" . '<th class="bold" style="text-align:center">' . lang_get( 'custom_field_default_value' ) . '</th>' . "\n";
-    echo "\t\t" . '</tr>' . "\n";
-    echo "\t\t</thead>\n";
-    echo "\t\t<tbody>\n";
+	echo "\t\t\t" . '<th class="bold" style="text-align:center">' . lang_get( 'custom_field_default_value' ) . '</th>' . "\n";
+	echo "\t\t" . '</tr>' . "\n";
+	echo "\t\t</thead>\n";
+	echo "\t\t<tbody>\n";
 }
 
 /**
@@ -228,7 +228,7 @@ function capability_row( $p_from_status ) {
  * @return void
  */
 function section_end() {
-    echo '</tbody></table></div>' . "\n";
+	echo '</tbody></table></div>' . "\n";
     echo '</div></div></div>' . "\n";
     echo '<div class="space-10"></div>';
 }
@@ -239,9 +239,9 @@ function section_end() {
  * @return void
  */
 function threshold_begin( $p_section_name ) {
-    echo '<div class="space-10"></div>';
+	echo '<div class="space-10"></div>';
 
-    echo '<div class="widget-box widget-color-blue2">';
+	echo '<div class="widget-box widget-color-blue2">';
     echo '   <div class="widget-header widget-header-small">';
     echo '        <h4 class="widget-title lighter uppercase">';
     echo '            <i class="ace-icon fa fa-sliders"></i>';
@@ -253,14 +253,14 @@ function threshold_begin( $p_section_name ) {
     echo '       <div class="table-responsive">';
 
     echo '<table class="table table-striped table-bordered table-condensed">';
-    echo '<thead>';
-    echo "\t" . '<tr>';
-    echo "\t\t" . '<th class="bold width30">' . lang_get( 'threshold' ) . '</th>' . "\n";
-    echo "\t\t" . '<th class="bold" >' . lang_get( 'status_level' ) . '</th>' . "\n";
-    echo "\t\t" . '<th class="bold" >' . lang_get( 'alter_level' ) . '</th></tr>' . "\n";
-    echo "\n";
-    echo '</thead>';
-    echo '<tbody>';
+	echo '<thead>';
+	echo "\t" . '<tr>';
+	echo "\t\t" . '<th class="bold width30">' . lang_get( 'threshold' ) . '</th>' . "\n";
+	echo "\t\t" . '<th class="bold" >' . lang_get( 'status_level' ) . '</th>' . "\n";
+	echo "\t\t" . '<th class="bold" >' . lang_get( 'alter_level' ) . '</th></tr>' . "\n";
+	echo "\n";
+	echo '</thead>';
+	echo '<tbody>';
 }
 
 /**
@@ -303,7 +303,7 @@ function threshold_row( $p_threshold ) {
  * @return void
  */
 function threshold_end() {
-    echo '</tbody></table></div>' . "\n";
+	echo '</tbody></table></div>' . "\n";
     echo '</div></div></div>' . "\n";
     echo '<div class="space-10"></div>';
 }
@@ -314,9 +314,9 @@ function threshold_end() {
  * @return void
  */
 function access_begin( $p_section_name ) {
-    echo '<div class="space-10"></div>';
+	echo '<div class="space-10"></div>';
 
-    echo '<div class="widget-box widget-color-blue2">';
+	echo '<div class="widget-box widget-color-blue2">';
     echo '   <div class="widget-header widget-header-small">';
     echo '        <h4 class="widget-title lighter uppercase">';
     echo '            <i class="ace-icon fa fa-lock"></i>';
@@ -328,10 +328,10 @@ function access_begin( $p_section_name ) {
     echo '       <div class="table-responsive">';
 
     echo '<table class="table table-striped table-bordered table-condensed">';
-    echo '<thead>';
-    echo "\t\t" . '<tr><th class="bold" colspan="2">' . lang_get( 'access_change' ) . '</th></tr>' . "\n";
-    echo '</thead>';
-    echo '<tbody>';
+	echo '<thead>';
+	echo "\t\t" . '<tr><th class="bold" colspan="2">' . lang_get( 'access_change' ) . '</th></tr>' . "\n";
+	echo '</thead>';
+	echo '<tbody>';
 }
 
 /**
@@ -407,7 +407,7 @@ function access_row() {
  * @return void
  */
 function access_end() {
-    echo '</tbody></table></div>' . "\n";
+	echo '</tbody></table></div>' . "\n";
     echo '</div></div></div>' . "\n";
     echo '<div class="space-10"></div>';
 }
@@ -492,13 +492,13 @@ threshold_row( 'bug_reopen_status' );
 threshold_end();
 
 if( '' <> $t_validation_result ) {
-    echo '<table class="width100">';
-    echo '<tr><td class="bold" colspan="3">' . lang_get( 'validation' ) . '</td></tr>' . "\n";
-    echo '<tr><td class="bold width30">' . lang_get( 'status' ) . '</td>';
-    echo '<td class="bold" >' . lang_get( 'comment' ) . '</td></tr>';
-    echo "\n";
-    echo $t_validation_result;
-    echo '</table><br /><br />';
+	echo '<table class="width100">';
+	echo '<tr><td class="bold" colspan="3">' . lang_get( 'validation' ) . '</td></tr>' . "\n";
+	echo '<tr><td class="bold width30">' . lang_get( 'status' ) . '</td>';
+	echo '<td class="bold" >' . lang_get( 'comment' ) . '</td></tr>';
+	echo "\n";
+	echo $t_validation_result;
+	echo '</table><br /><br />';
 }
 
 # Initialization for 'reopened' label handling

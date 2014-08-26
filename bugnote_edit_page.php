@@ -110,52 +110,52 @@ layout_page_header( bug_format_summary( $t_bug_id, SUMMARY_CAPTION ) );
 
 layout_page_begin();
 ?>
-    <div class="col-md-12 col-xs-12">
+<div class="col-md-12 col-xs-12">
 
-        <form method="post" action="bugnote_update.php">
-            <?php echo form_security_field( 'bugnote_update' ) ?>
-            <input type="hidden" name="bugnote_id" value="<?php echo $f_bugnote_id ?>" />
+<form method="post" action="bugnote_update.php">
+<?php echo form_security_field( 'bugnote_update' ) ?>
+<input type="hidden" name="bugnote_id" value="<?php echo $f_bugnote_id ?>" />
 
-            <div class="widget-box widget-color-blue2">
-                <div class="widget-header widget-header-small">
-                    <h4 class="widget-title lighter">
-                        <i class="ace-icon fa fa-comment"></i>
-                        <?php echo lang_get( 'edit_bugnote_title' ) ?>
-                    </h4>
-                </div>
-                <div class="widget-body">
-                    <div class="widget-main no-padding">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-condensed table-striped">
-                                <tr>
-                                    <td class="center" colspan="2">
-                                        <textarea class="form-control" cols="80" rows="10" name="bugnote_text"><?php echo $t_bugnote_text ?></textarea>
-                                    </td>
-                                </tr>
-                                <?php if( config_get( 'time_tracking_enabled' ) ) { ?>
-                                    <?php if( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $t_bug_id ) ) { ?>
-                                        <tr<td>
-                                            <td class="center" colspan="2">
-                                                <strong><?php echo lang_get( 'time_tracking' ) ?> (HH:MM)</strong><br />
-                                                <input type="text" name="time_tracking" class="input-sm" size="5" value="<?php echo $t_time_tracking ?>" />
-                                            </td>
-                                        </tr>
-                                    <?php } ?>
-                                <?php } ?>
+<div class="widget-box widget-color-blue2">
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<i class="ace-icon fa fa-comment"></i>
+			<?php echo lang_get( 'edit_bugnote_title' ) ?>
+		</h4>
+	</div>
+	<div class="widget-body">
+		<div class="widget-main no-padding">
+			<div class="table-responsive">
+<table class="table table-bordered table-condensed table-striped">
+<tr>
+	<td class="center" colspan="2">
+		<textarea class="form-control" cols="80" rows="10" name="bugnote_text"><?php echo $t_bugnote_text ?></textarea>
+	</td>
+</tr>
+<?php if( config_get( 'time_tracking_enabled' ) ) { ?>
+<?php if( access_has_bug_level( config_get( 'time_tracking_edit_threshold' ), $t_bug_id ) ) { ?>
+<tr>
+	<td class="center" colspan="2">
+		<strong><?php echo lang_get( 'time_tracking' ) ?> (HH:MM)</strong><br />
+		<input type="text" name="time_tracking" class="input-sm" size="5" value="<?php echo $t_time_tracking ?>" />
+	</td>
+</tr>
+<?php } ?>
+<?php } ?>
 
-                                <?php event_signal( 'EVENT_BUGNOTE_EDIT_FORM', array( $t_bug_id, $f_bugnote_id ) ); ?>
+<?php event_signal( 'EVENT_BUGNOTE_EDIT_FORM', array( $t_bug_id, $f_bugnote_id ) ); ?>
 
-                            </table>
-                        </div>
-                    </div>
-                    <div class="widget-toolbox padding-8 clearfix">
-                        <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_information_button' ) ?>" />
-                        <?php print_button( $t_redirect_url, lang_get( 'go_back' ) ) ?>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
+</table>
+			</div>
+		</div>
+		<div class="widget-toolbox padding-8 clearfix">
+			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_information_button' ) ?>" />
+			<?php print_button( $t_redirect_url, lang_get( 'go_back' ) ) ?>
+		</div>
+	</div>
+</div>
+</form>
+</div>
 
 <?php
 layout_page_end();

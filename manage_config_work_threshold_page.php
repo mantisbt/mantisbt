@@ -89,9 +89,8 @@ function set_overrides( $p_config ) {
 function get_section_begin_mcwt( $p_section_name ) {
 	global $g_access_levels;
 
-    echo '<div class="space-10"></div>';
-
-    echo '<div class="widget-box widget-color-blue2">';
+	echo '<div class="space-10"></div>';
+	echo '<div class="widget-box widget-color-blue2">';
     echo '   <div class="widget-header widget-header-small">';
     echo '        <h4 class="widget-title lighter uppercase">';
     echo '            <i class="ace-icon fa fa-sliders"></i>';
@@ -103,18 +102,18 @@ function get_section_begin_mcwt( $p_section_name ) {
     echo '       <div class="table-responsive">';
 
     echo '<table class="table table-striped table-bordered table-condensed">';
-    echo '<thead>';
-    echo '<tr>';
-    echo '<th class="bold" width="40%" rowspan="2">' . lang_get( 'perm_rpt_capability' ) . '</th>';
-    echo '<th class="bold" style="text-align:center"  width="40%" colspan="' . count( $g_access_levels ) . '">' . lang_get( 'access_levels' ) . '</th>';
-    echo '<th class="bold" style="text-align:center" rowspan="2">&#160;' . lang_get( 'alter_level' ) . '&#160;</th>';
-    echo '</tr><tr>';
-    foreach( $g_access_levels as $t_access_level => $t_access_label ) {
-        echo '<th class="bold" style="text-align:center">&#160;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&#160;</th>';
-    }
-    echo '</tr>' . "\n";
-    echo '</thead>';
-    echo '<tbody>';
+	echo '<thead>';
+	echo '<tr>';
+	echo '<th class="bold" width="40%" rowspan="2">' . lang_get( 'perm_rpt_capability' ) . '</th>';
+	echo '<th class="bold" style="text-align:center"  width="40%" colspan="' . count( $g_access_levels ) . '">' . lang_get( 'access_levels' ) . '</th>';
+	echo '<th class="bold" style="text-align:center" rowspan="2">&#160;' . lang_get( 'alter_level' ) . '&#160;</th>';
+	echo '</tr><tr>';
+	foreach( $g_access_levels as $t_access_level => $t_access_label ) {
+		echo '<th class="bold" style="text-align:center">&#160;' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) . '&#160;</th>';
+	}
+	echo '</tr>' . "\n";
+	echo '</thead>';
+	echo '<tbody>';
 }
 
 /**
@@ -171,15 +170,15 @@ function print_who_can_change( $p_threshold, $p_can_change ) {
 
 	$t_color = set_color( $p_threshold, $t_file_access, $t_global_access, $t_project_access, $p_can_change );
 
-    echo '<td ' . $t_color . '>';
-    if( $p_can_change ) {
-        echo '<select name="access_' . $p_threshold . '" class="input-sm">';
-        print_enum_string_option_list( 'access_levels', $t_project_access );
-        echo '</select>';
-    } else {
-        echo MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_project_access ) . '&#160;';
-    }
-    echo "</td>\n";
+	echo '<td ' . $t_color . '>';
+	if( $p_can_change ) {
+		echo '<select name="access_' . $p_threshold . '" class="input-sm">';
+		print_enum_string_option_list( 'access_levels', $t_project_access );
+		echo '</select>';
+	} else {
+		echo MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_project_access ) . '&#160;';
+	}
+	echo "</td>\n";
 }
 
 /**
@@ -242,20 +241,20 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only = fa
 
 		$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
 
-        if( $t_can_change ) {
-            $t_checked = $t_project ? 'checked="checked"' : '';
-            $t_value = '<label><input type="checkbox" class="ace" name="flag_thres_' . $p_threshold .
-                '[]" value="' . $t_access_level . '" ' . $t_checked . ' /><span class="lbl"></span></label>';
-            $t_show_submit = true;
-        } else {
-            if( $t_project ) {
-                $t_value = '<i class="fa fa-check fa-lg blue"></i>';
-            } else {
-                $t_value = '&#160;';
-            }
-        }
-        echo '  <td class="center"' . $t_color . '>' . $t_value . "</td>\n";
-    }
+		if( $t_can_change ) {
+			$t_checked = $t_project ? 'checked="checked"' : '';
+			$t_value = '<label><input type="checkbox" class="ace" name="flag_thres_' . $p_threshold .
+				'[]" value="' . $t_access_level . '" ' . $t_checked . ' /><span class="lbl"></span></label>';
+			$t_show_submit = true;
+		} else {
+			if( $t_project ) {
+				$t_value = '<i class="fa fa-check fa-lg blue"></i>';
+			} else {
+				$t_value = '&#160;';
+			}
+		}
+		echo '  <td class="center"' . $t_color . '>' . $t_value . "</td>\n";
+	}
 
 	print_who_can_change( $p_threshold, $t_can_change );
 
@@ -279,24 +278,24 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only 
 	$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $g_project_id, $g_user )
 			  && ( ( ALL_PROJECTS == $g_project_id ) || !$p_all_projects_only );
 
-    echo '<tr>' . "\n\t" . '<td>' . string_display( $p_caption ) . "</td>\n";
+	echo '<tr>' . "\n\t" . '<td>' . string_display( $p_caption ) . "</td>\n";
 
-    # Value
-    $t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
-    if( $t_can_change ) {
-        $t_checked = ( ON == config_get( $p_threshold ) ) ? "checked=\"checked\"" : "";
-        $t_value = '<label><input type="checkbox" class="ace" name="flag_' . $p_threshold . '" value="1" ' .
-            $t_checked . ' /><span class="lbl"></span></label>';
-        $t_show_submit = true;
-    } else {
-        if( ON == config_get( $p_threshold ) ) {
-            $t_value = '<i class="fa fa-check fa-lg blue"></i>';
-        } else {
-            $t_value = '&#160;';
-        }
-    }
-    echo "\t" . '<td class="center" ' . $t_color . '>' . $t_value . '</td>' . "\n\t"
-        . '<td class="left" colspan="' . ( count( $g_access_levels ) - 1 ). '"></td>';
+	# Value
+	$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
+	if( $t_can_change ) {
+		$t_checked = ( ON == config_get( $p_threshold ) ) ? "checked=\"checked\"" : "";
+		$t_value = '<label><input type="checkbox" class="ace" name="flag_' . $p_threshold . '" value="1" ' .
+			$t_checked . ' /><span class="lbl"></span></label>';
+		$t_show_submit = true;
+	} else {
+		if( ON == config_get( $p_threshold ) ) {
+			$t_value = '<i class="fa fa-check fa-lg blue"></i>';
+		} else {
+			$t_value = '&#160;';
+		}
+	}
+	echo "\t" . '<td class="center" ' . $t_color . '>' . $t_value . '</td>' . "\n\t"
+		. '<td class="left" colspan="' . ( count( $g_access_levels ) - 1 ). '"></td>';
 
 	print_who_can_change( $p_threshold, $t_can_change );
 
@@ -348,7 +347,7 @@ function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects
  * @return void
  */
 function get_section_end() {
-    echo '</tbody></table></div>' . "\n";
+	echo '</tbody></table></div>' . "\n";
     echo '</div></div></div> ' . "\n";
     echo '<div class="space-10"></div>';
 }

@@ -103,7 +103,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 <div class="widget-header widget-header-small">
     <h4 class="widget-title lighter">
         <i class="ace-icon fa fa-comments"></i>
-        <?php echo lang_get( 'bug_notes_title' ) ?>
+		<?php echo lang_get( 'bug_notes_title' ) ?>
     </h4>
     <div class="widget-toolbar">
         <a data-action="collapse" href="#">
@@ -117,163 +117,176 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
     <div class="table-responsive">
         <table class="table table-bordered table-condensed table-striped">
-            <?php
-            # no bugnotes
-            if( 0 == $t_num_notes ) {
-                ?>
-                <tr class="bugnotes-empty">
-                    <td class="center" colspan="2">
-                        <?php echo lang_get( 'no_bugnotes_msg' ) ?>
-                    </td>
-                </tr>
-            <?php }
+<?php
+	# no bugnotes
+	if( 0 == $t_num_notes ) {
+?>
+<tr class="bugnotes-empty">
+	<td class="center" colspan="2">
+		<?php echo lang_get( 'no_bugnotes_msg' ) ?>
+	</td>
+</tr>
+<?php }
 
-            event_signal( 'EVENT_VIEW_BUGNOTES_START', array( $f_bug_id, $t_bugnotes ) );
+	event_signal( 'EVENT_VIEW_BUGNOTES_START', array( $f_bug_id, $t_bugnotes ) );
 
-            $t_normal_date_format = config_get( 'normal_date_format' );
-            $t_total_time = 0;
+	$t_normal_date_format = config_get( 'normal_date_format' );
+	$t_total_time = 0;
 
-            $t_bugnote_user_edit_threshold = config_get( 'bugnote_user_edit_threshold' );
-            $t_bugnote_user_delete_threshold = config_get( 'bugnote_user_delete_threshold' );
-            $t_bugnote_user_change_view_state_threshold = config_get( 'bugnote_user_change_view_state_threshold' );
-            $t_can_edit_all_bugnotes = access_has_bug_level( config_get( 'update_bugnote_threshold' ), $f_bug_id );
-            $t_can_delete_all_bugnotes = access_has_bug_level( config_get( 'delete_bugnote_threshold' ), $f_bug_id );
-            $t_can_change_view_state_all_bugnotes = $t_can_edit_all_bugnotes && access_has_bug_level( config_get( 'change_view_status_threshold' ), $f_bug_id );
+	$t_bugnote_user_edit_threshold = config_get( 'bugnote_user_edit_threshold' );
+	$t_bugnote_user_delete_threshold = config_get( 'bugnote_user_delete_threshold' );
+	$t_bugnote_user_change_view_state_threshold = config_get( 'bugnote_user_change_view_state_threshold' );
+	$t_can_edit_all_bugnotes = access_has_bug_level( config_get( 'update_bugnote_threshold' ), $f_bug_id );
+	$t_can_delete_all_bugnotes = access_has_bug_level( config_get( 'delete_bugnote_threshold' ), $f_bug_id );
+	$t_can_change_view_state_all_bugnotes = $t_can_edit_all_bugnotes && access_has_bug_level( config_get( 'change_view_status_threshold' ), $f_bug_id );
 
-            for ( $i=0; $i < $t_num_notes; $i++ ) {
-                $t_bugnote = $t_bugnotes[$i];
+	for( $i=0; $i < $t_num_notes; $i++ ) {
+		$t_bugnote = $t_bugnotes[$i];
 
-                if( $t_bugnote->date_submitted != $t_bugnote->last_modified )
-                    $t_bugnote_modified = true;
-                else
-                    $t_bugnote_modified = false;
+		if( $t_bugnote->date_submitted != $t_bugnote->last_modified ) {
+			$t_bugnote_modified = true;
+		} else {
+			$t_bugnote_modified = false;
+		}
 
-                $t_bugnote_id_formatted = bugnote_format_id( $t_bugnote->id );
+		$t_bugnote_id_formatted = bugnote_format_id( $t_bugnote->id );
 
-                if( 0 != $t_bugnote->time_tracking ) {
-                    $t_time_tracking_hhmm = db_minutes_to_hhmm( $t_bugnote->time_tracking );
-                    $t_bugnote->note_type = TIME_TRACKING;   # for older entries that didn't set the type @@@PLR FIXME
-                    $t_total_time += $t_bugnote->time_tracking;
-                } else {
-                    $t_time_tracking_hhmm = '';
-                }
+		if( 0 != $t_bugnote->time_tracking ) {
+			$t_time_tracking_hhmm = db_minutes_to_hhmm( $t_bugnote->time_tracking );
+			$t_bugnote->note_type = TIME_TRACKING;   # for older entries that didn't set the type @@@PLR FIXME
+			$t_total_time += $t_bugnote->time_tracking;
+		} else {
+			$t_time_tracking_hhmm = '';
+		}
 
-                if( VS_PRIVATE == $t_bugnote->view_state ) {
-                    $t_bugnote_css		= 'bugnote-private';
-                } else {
-                    $t_bugnote_css		= 'bugnote-public';
-                }
+		if( VS_PRIVATE == $t_bugnote->view_state ) {
+			$t_bugnote_css		= 'bugnote-private';
+		} else {
+			$t_bugnote_css		= 'bugnote-public';
+		}
 
-                if( TIME_TRACKING == $t_bugnote->note_type ) {
-                    $t_bugnote_css    .= ' bugnote-time-tracking';
-                } else if( REMINDER == $t_bugnote->note_type ) {
-                    $t_bugnote_css    .= ' bugnote-reminder';
-                }
-                ?>
-                <tr class="bugnote <?php echo $t_bugnote_css ?>" id="c<?php echo $t_bugnote->id ?>">
-                    <td class="category">
-                        <div class="pull-right"><?php print_avatar( $t_bugnote->reporter_id ); ?>
+		if( TIME_TRACKING == $t_bugnote->note_type ) {
+		    $t_bugnote_css    .= ' bugnote-time-tracking';
+	    } else if( REMINDER == $t_bugnote->note_type ) {
+	        $t_bugnote_css    .= ' bugnote-reminder';
+		}
+?>
+<tr class="bugnote <?php echo $t_bugnote_css ?>" id="c<?php echo $t_bugnote->id ?>">
+		<td class="category">
+		<div class="pull-right"><?php print_avatar( $t_bugnote->reporter_id ); ?>
 
-                        </div>
-                        <div class="pull-left">
-                            <p class="no-margin">
-                                <i class="fa fa-link grey"></i>
-                                <a rel="bookmark" href="<?php echo string_get_bugnote_view_url($t_bugnote->bug_id, $t_bugnote->id) ?>" class="lighter" title="<?php echo lang_get( 'bugnote_link_title' ) ?>">
-                                    <?php echo htmlentities( config_get_global( 'bugnote_link_tag' ) ) . $t_bugnote_id_formatted ?>
-                                </a>
-                                <?php if( VS_PRIVATE == $t_bugnote->view_state ) { ?>
-                                    <i class="fa fa-eye red"></i> <?php echo lang_get( 'private' ) ?>
-                                <?php } ?>
-                            </p>
-                            <p class="no-margin">
-                                <?php
-                                echo '<i class="fa fa-user grey"></i> ';
-                                print_user( $t_bugnote->reporter_id );
-                                ?>
-                                <?php
-                                if( user_exists( $t_bugnote->reporter_id ) ) {
-                                    $t_access_level = access_get_project_level( null, (int)$t_bugnote->reporter_id );
-                                    # Only display access level when higher than 0 (ANYBODY)
-                                    if( $t_access_level > ANYBODY ) {
-                                        $t_label = layout_is_rtl() ? 'arrowed-right' : 'arrowed';
-                                        echo '<span class="label label-sm label-default ' . $t_label . '">', get_enum_element( 'access_levels', $t_access_level ), '</span>';
-                                    }
-                                }
-                                ?>
-                            </p>
-                            <p class="no-margin small lighter"><i class="fa fa-clock-o grey"></i> <?php echo date( $t_normal_date_format, $t_bugnote->date_submitted ); ?></p>
-                            <?php
-                            if( $t_bugnote_modified ) {
-                                echo '<p class="no-margin small lighter"><i class="fa fa-retweet"></i> ' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . date( $t_normal_date_format, $t_bugnote->last_modified ) . '</p>';
-                                $t_revision_count = bug_revision_count( $f_bug_id, REV_BUGNOTE, $t_bugnote->id );
-                                if( $t_revision_count >= 1) {
-                                    $t_view_num_revisions_text = sprintf( lang_get( 'view_num_revisions' ), $t_revision_count );
-                                    echo '<p class="no-margin"><span class="small bugnote-revisions-link"><a href="bug_revision_view_page.php?bugnote_id=' . $t_bugnote->id . '">' . $t_view_num_revisions_text . '</a></span></p>';
-                                }
-                            }
-                            ?>
-                            <div class="clearfix"></div>
-                            <div class="space-2"></div>
-                            <div class="btn-group-sm">
-                                <?php
-                                # bug must be open to be editable
-                                if( !bug_is_readonly( $f_bug_id ) ) {
+		</div>
+		<div class="pull-left">
+		<p class="no-margin">
+			<i class="fa fa-link grey"></i>
+			<a rel="bookmark" href="<?php echo string_get_bugnote_view_url($t_bugnote->bug_id, $t_bugnote->id) ?>" class="lighter" title="<?php echo lang_get( 'bugnote_link_title' ) ?>">
+				<?php echo htmlentities( config_get_global( 'bugnote_link_tag' ) ) . $t_bugnote_id_formatted ?>
+			</a>
+			<?php if( VS_PRIVATE == $t_bugnote->view_state ) { ?>
+				<i class="fa fa-eye red"></i> <?php echo lang_get( 'private' ) ?>
+			<?php } ?>
+		</p>
+		<p class="no-margin">
+		<?php
+			echo '<i class="fa fa-user grey"></i> ';
+			print_user( $t_bugnote->reporter_id );
+		?>
+		<?php
+			if( user_exists( $t_bugnote->reporter_id ) ) {
+				$t_access_level = access_get_project_level( null, (int)$t_bugnote->reporter_id );
+				# Only display access level when higher than 0 (ANYBODY)
+				if( $t_access_level > ANYBODY ) {
+					$t_label = layout_is_rtl() ? 'arrowed-right' : 'arrowed';
+					echo '<span class="label label-sm label-default ' . $t_label . '">', get_enum_element( 'access_levels', $t_access_level ), '</span>';
+				}
+			}
+		?>
+		</p>
+		<p class="no-margin small lighter"><i class="fa fa-clock-o grey"></i> <?php echo date( $t_normal_date_format, $t_bugnote->date_submitted ); ?></p>
+		<?php
+		if( $t_bugnote_modified ) {
+			echo '<p class="no-margin small lighter"><i class="fa fa-retweet"></i> ' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . date( $t_normal_date_format, $t_bugnote->last_modified ) . '</p>';
+			$t_revision_count = bug_revision_count( $f_bug_id, REV_BUGNOTE, $t_bugnote->id );
+			if( $t_revision_count >= 1) {
+				$t_view_num_revisions_text = sprintf( lang_get( 'view_num_revisions' ), $t_revision_count );
+				echo '<p class="no-margin"><span class="small bugnote-revisions-link"><a href="bug_revision_view_page.php?bugnote_id=' . $t_bugnote->id . '">' . $t_view_num_revisions_text . '</a></span></p>';
+			}
+		}
+		?>
+		<div class="clearfix"></div>
+		<div class="space-2"></div>
+		<div class="btn-group-sm">
+			<?php
+			# bug must be open to be editable
+			if( !bug_is_readonly( $f_bug_id ) ) {
 
-                                    # check if the user can edit this bugnote
-                                    if( $t_user_id == $t_bugnote->reporter_id ) {
-                                        $t_can_edit_bugnote = access_has_bugnote_level( $t_bugnote_user_edit_threshold, $t_bugnote->id );
-                                    } else {
-                                        $t_can_edit_bugnote = $t_can_edit_all_bugnotes;
-                                    }
+				# check if the user can edit this bugnote
+				if( $t_user_id == $t_bugnote->reporter_id ) {
+					$t_can_edit_bugnote = access_has_bugnote_level( $t_bugnote_user_edit_threshold, $t_bugnote->id );
+				} else {
+					$t_can_edit_bugnote = $t_can_edit_all_bugnotes;
+				}
 
-                                    # check if the user can delete this bugnote
-                                    if( $t_user_id == $t_bugnote->reporter_id ) {
-                                        $t_can_delete_bugnote = access_has_bugnote_level( $t_bugnote_user_delete_threshold, $t_bugnote->id );
-                                    } else {
-                                        $t_can_delete_bugnote = $t_can_delete_all_bugnotes;
-                                    }
+				# check if the user can delete this bugnote
+				if( $t_user_id == $t_bugnote->reporter_id ) {
+					$t_can_delete_bugnote = access_has_bugnote_level( $t_bugnote_user_delete_threshold, $t_bugnote->id );
+				} else {
+					$t_can_delete_bugnote = $t_can_delete_all_bugnotes;
+				}
 
-                                    # check if the user can make this bugnote private
-                                    if( $t_user_id == $t_bugnote->reporter_id ) {
-                                        $t_can_change_view_state = access_has_bugnote_level( $t_bugnote_user_change_view_state_threshold, $t_bugnote->id );
-                                    } else {
-                                        $t_can_change_view_state = $t_can_change_view_state_all_bugnotes;
-                                    }
+				# check if the user can make this bugnote private
+				if( $t_user_id == $t_bugnote->reporter_id ) {
+					$t_can_change_view_state = access_has_bugnote_level( $t_bugnote_user_change_view_state_threshold, $t_bugnote->id );
+				} else {
+					$t_can_change_view_state = $t_can_change_view_state_all_bugnotes;
+				}
 
-                                    # show edit button if the user is allowed to edit this bugnote
-                                    if( $t_can_edit_bugnote ) {
-                                        echo '<div class="pull-left">';
-                                        print_form_button( 'bugnote_edit_page.php?bugnote_id='.$t_bugnote->id, lang_get( 'bugnote_edit_link' ) );
-                                        echo '</div>';
-                                    }
+				# show edit button if the user is allowed to edit this bugnote
+				if( $t_can_edit_bugnote ) {
+					echo '<div class="pull-left">';
+					print_form_button( 'bugnote_edit_page.php?bugnote_id='.$t_bugnote->id, lang_get( 'bugnote_edit_link' ) );
+					echo '</div>';
+				}
 
-                                    # show delete button if the user is allowed to delete this bugnote
-                                    if( $t_can_delete_bugnote ) {
-                                        echo '<div class="pull-left">';
-                                        print_form_button( 'bugnote_delete.php?bugnote_id='.$t_bugnote->id, lang_get( 'delete_link' ) );
-                                        echo '</div>';
-                                    }
+				# show delete button if the user is allowed to delete this bugnote
+				if( $t_can_delete_bugnote ) {
+					echo '<div class="pull-left">';
+					print_form_button( 'bugnote_delete.php?bugnote_id='.$t_bugnote->id, lang_get( 'delete_link' ) );
+					echo '</div>';
+				}
 
-                                    # show make public or make private button if the user is allowed to change the view state of this bugnote
-                                    if( $t_can_change_view_state ) {
-                                        echo '<div class="pull-left">';
-                                        if( VS_PRIVATE == $t_bugnote->view_state ) {
-                                            print_form_button( 'bugnote_set_view_state.php?private=0&bugnote_id=' . $t_bugnote->id, lang_get( 'make_public' ) );
-                                        } else {
-                                            print_form_button( 'bugnote_set_view_state.php?private=1&bugnote_id=' . $t_bugnote->id, lang_get( 'make_private' ) );
-                                        }
-                                        echo '</div>';
-                                    }
-                                }
-                                ?>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="bugnote-note">
-                        <?php
-                        switch ( $t_bugnote->note_type ) {
-                            case REMINDER:
-                                echo '<em>';
+				# show make public or make private button if the user is allowed to change the view state of this bugnote
+				if( $t_can_change_view_state ) {
+					echo '<div class="pull-left">';
+					if( VS_PRIVATE == $t_bugnote->view_state ) {
+						print_form_button( 'bugnote_set_view_state.php?private=0&bugnote_id=' . $t_bugnote->id, lang_get( 'make_public' ) );
+					} else {
+						print_form_button( 'bugnote_set_view_state.php?private=1&bugnote_id=' . $t_bugnote->id, lang_get( 'make_private' ) );
+					}
+					echo '</div>';
+				}
+			}
+		?>
+		</div>
+		</div>
+	</td>
+	<td class="bugnote-note">
+		<?php
+			switch ( $t_bugnote->note_type ) {
+				case REMINDER:
+					echo '<em>';
+
+					# Build recipients list for display
+					$t_to = array();
+					foreach ( explode( '|', $t_recipients ) as $t_recipient ) {
+						$t_to[] = prepare_user_name( $t_recipient );
+					}
+
+					if( empty( $t_recipients ) ) {
+						echo lang_get( 'reminder_sent_none' );
+					} else {
+						# If recipients list's last char is not a delimiter, it was truncated
+						$t_truncated = ( '|' != utf8_substr( $t_bugnote->note_attr, utf8_strlen( $t_bugnote->note_attr ) - 1 ) );
 
 						# Build recipients list for display
 						$t_to = array();
@@ -281,48 +294,36 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 							$t_to[] = prepare_user_name( $t_recipient );
 						}
 
-                                if( empty( $t_recipients ) ) {
-                                    echo lang_get( 'reminder_sent_none' );
-                                } else {
-                                    # If recipients list's last char is not a delimiter, it was truncated
-                                    $t_truncated = ( '|' != utf8_substr( $t_bugnote->note_attr, utf8_strlen( $t_bugnote->note_attr ) - 1 ) );
+						echo lang_get( 'reminder_sent_to' ) . ': '
+							. implode( ', ', $t_to )
+							. ( $t_truncated ? ' (' . lang_get( 'reminder_list_truncated' ) . ')' : '' );
+					}
 
-                                    # Build recipients list for display
-                                    $t_to = array();
-                                    foreach ( explode( '|', $t_recipients ) as $t_recipient ) {
-                                        $t_to[] = prepare_user_name( $t_recipient );
-                                    }
+					echo '</em><br /><br />';
+					break;
 
-                                    echo lang_get( 'reminder_sent_to' ) . ': '
-                                        . implode( ', ', $t_to )
-                                        . ( $t_truncated ? ' (' . lang_get( 'reminder_list_truncated' ) . ')' : '' );
-                                }
+				case TIME_TRACKING:
+					if( access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id ) ) {
+						echo '<div class="time-tracked">', lang_get( 'time_tracking_time_spent') . ' ' . $t_time_tracking_hhmm, '</div>';
+					}
+					break;
+			}
 
-                                echo '</em><br /><br />';
-                                break;
+			echo string_display_links( $t_bugnote->note );
+		?>
+	</td>
+</tr>
+<?php event_signal( 'EVENT_VIEW_BUGNOTE', array( $f_bug_id, $t_bugnote->id, VS_PRIVATE == $t_bugnote->view_state ) ); ?>
+<tr class="spacer">
+	<td colspan="2"></td>
+</tr>
+<?php
+	} # end for loop
 
-                            case TIME_TRACKING:
-                                if( access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id ) ) {
-                                    echo '<div class="time-tracked">', lang_get( 'time_tracking_time_spent') . ' ' . $t_time_tracking_hhmm, '</div>';
-                                }
-                                break;
-                        }
-
-                        echo string_display_links( $t_bugnote->note );
-                        ?>
-                    </td>
-                </tr>
-                <?php event_signal( 'EVENT_VIEW_BUGNOTE', array( $f_bug_id, $t_bugnote->id, VS_PRIVATE == $t_bugnote->view_state ) ); ?>
-                <tr class="spacer">
-                    <td colspan="2"></td>
-                </tr>
-            <?php
-            } # end for loop
-
-            event_signal( 'EVENT_VIEW_BUGNOTES_END', $f_bug_id );
-            ?>
-        </table>
-    </div>
+	event_signal( 'EVENT_VIEW_BUGNOTES_END', $f_bug_id );
+?>
+</table>
+</div>
 </div>
 </div>
 </div>

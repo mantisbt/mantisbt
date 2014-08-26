@@ -123,7 +123,7 @@ if( $t_show_sponsorships ) {
 	$t_total_sponsorship = bug_get_field( $f_bug_id, 'sponsorship_total' );
 	if( $t_total_sponsorship > 0 ) {
 ?>
-	<tr<td>
+	<tr>
 		<th class="category" width="15%"><?php echo lang_get( 'sponsors_list' ) ?></th>
 		<td>
 		<?php

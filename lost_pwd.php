@@ -56,14 +56,14 @@ form_security_validate( 'lost_pwd' );
 
 # lost password feature disabled or reset password via email disabled -> stop here!
 if( OFF == config_get( 'lost_password_feature' ) ||
-    OFF == config_get( 'send_reset_password' ) ||
-    OFF == config_get( 'enable_email_notification' ) ) {
-    trigger_error( ERROR_LOST_PASSWORD_NOT_ENABLED, ERROR );
+	OFF == config_get( 'send_reset_password' ) ||
+	OFF == config_get( 'enable_email_notification' ) ) {
+	trigger_error( ERROR_LOST_PASSWORD_NOT_ENABLED, ERROR );
 }
 
 # force logout on the current user if already authenticated
 if( auth_is_user_authenticated() ) {
-    auth_logout();
+	auth_logout();
 }
 
 $f_username = gpc_get_string( 'username' );
@@ -78,22 +78,22 @@ $t_query = 'SELECT id FROM ' . $t_user_table . ' WHERE username = ' . db_param()
 $t_result = db_query_bound( $t_query, array( $f_username, $f_email, true ) );
 
 if( 0 == db_num_rows( $t_result ) ) {
-    trigger_error( ERROR_LOST_PASSWORD_NOT_MATCHING_DATA, ERROR );
+	trigger_error( ERROR_LOST_PASSWORD_NOT_MATCHING_DATA, ERROR );
 }
 
 if( is_blank( $f_email ) ) {
-    trigger_error( ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED, ERROR );
+	trigger_error( ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED, ERROR );
 }
 
 $t_row = db_fetch_array( $t_result );
 $t_user_id = $t_row['id'];
 
 if( user_is_protected( $t_user_id ) ) {
-    trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
+	trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
 }
 
 if( !user_is_lost_password_request_allowed( $t_user_id ) ) {
-    trigger_error( ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED, ERROR );
+	trigger_error( ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED, ERROR );
 }
 
 $t_confirm_hash = auth_generate_confirm_hash( $t_user_id );
@@ -110,26 +110,26 @@ layout_page_header();
 layout_page_begin();
 ?>
 
-    <div class="col-md-12 col-xs-12">
-        <div class="space-10"></div>
+<div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
 
-        <table class="width50" cellspacing="1">
-            <tr>
-                <td class="center">
-                    <strong><?php echo lang_get( 'lost_password_done_title' ) ?></strong>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <br/>
-                    <?php echo lang_get( 'reset_request_in_progress_msg' ) ?>
-                    <br/><br/>
-                </td>
-            </tr>
-        </table>
-        <br />
-        <?php print_bracket_link( 'login_page.php', lang_get( 'proceed' ) ); ?>
-    </div>
+<table class="width50" cellspacing="1">
+<tr>
+	<td class="center">
+		<strong><?php echo lang_get( 'lost_password_done_title' ) ?></strong>
+	</td>
+</tr>
+<tr>
+	<td>
+		<br/>
+		<?php echo lang_get( 'reset_request_in_progress_msg' ) ?>
+		<br/><br/>
+	</td>
+</tr>
+</table>
+<br />
+<?php print_bracket_link( 'login_page.php', lang_get( 'proceed' ) ); ?>
+</div>
 
 <?php
 layout_page_end( __FILE__ );

@@ -77,7 +77,7 @@ function print_version_header( $p_version_id ) {
 	$t_version_name = version_get_field( $p_version_id, 'version' );
 	$t_project_name = project_get_field( $t_project_id, 'name' );
 
-    $t_release_title = '<a class="white" href="changelog_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a>';
+	$t_release_title = '<a class="white" href="changelog_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a>';
     $t_release_title .= ' - <a class="white" href="changelog_page.php?version_id=' . $p_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
 
 	if( config_get( 'show_changelog_dates' ) ) {
@@ -155,9 +155,9 @@ function print_version_footer( $p_version_id, $p_issues_resolved ) {
  * @return void
  */
 function print_project_header_changelog( $p_project_name ) {
-    echo '<div class="page-header">';
-    echo '<h1><strong>' . string_display_line( $p_project_name ), '</strong> - ', lang_get( 'changelog' ) . '</h1>';
-    echo '</div>';
+	echo '<div class="page-header">';
+	echo '<h1><strong>' . string_display_line( $p_project_name ), '</strong> - ', lang_get( 'changelog' ) . '</h1>';
+	echo '</div>';
 }
 
 $t_issues_found = false;
@@ -336,12 +336,12 @@ foreach( $t_project_ids as $t_project_id ) {
 				$t_version_header_printed = true;
 			}
 
-            if( !is_blank( $t_description ) ) {
-                echo '<div class="alert alert-warning">', string_display( "$t_description" ), '</div>';
-            }
-        } else {
-            continue;
-        }
+			if( !is_blank( $t_description ) ) {
+				echo '<div class="alert alert-warning">', string_display( "$t_description" ), '</div>';
+			}
+		} else {
+			continue;
+		}
 
 		$t_issue_set_ids = array();
 		$t_issue_set_levels = array();
@@ -398,10 +398,10 @@ foreach( $t_project_ids as $t_project_id ) {
 			$t_issues_found = true;
 		}
 
-        if( $t_version_header_printed ) {
-            print_version_footer( $t_version_id,  $t_issues_resolved);
-        }
-    }
+	if( $t_version_header_printed ) {
+		print_version_footer( $t_version_id,  $t_issues_resolved);
+	}
+}
 
     $t_project_index++;
 }

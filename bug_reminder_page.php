@@ -53,94 +53,92 @@ $f_bug_id = gpc_get_int( 'bug_id' );
 
 $t_bug = bug_get( $f_bug_id, true );
 if( $t_bug->project_id != helper_get_current_project() ) {
-    # in case the current project is not the same project of the bug we are viewing...
-    # ... override the current project. This to avoid problems with categories and handlers lists etc.
-    $g_project_override = $t_bug->project_id;
+	# in case the current project is not the same project of the bug we are viewing...
+	# ... override the current project. This to avoid problems with categories and handlers lists etc.
+	$g_project_override = $t_bug->project_id;
 }
 
 if( bug_is_readonly( $f_bug_id ) ) {
-    error_parameters( $f_bug_id );
-    trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+	error_parameters( $f_bug_id );
+	trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
 }
 
 access_ensure_bug_level( config_get( 'bug_reminder_threshold' ), $f_bug_id );
 
 layout_page_header( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
-
 layout_page_begin();
 ?>
 
 <?php # Send reminder Form BEGIN ?>
 
-    <div class="col-md-12 col-xs-12">
+<div class="col-md-12 col-xs-12">
+<form method="post" action="bug_reminder.php">
+	<?php echo form_security_field( 'bug_reminder' ) ?>
+	<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 
-        <form method="post" action="bug_reminder.php">
-            <?php echo form_security_field( 'bug_reminder' ) ?>
-            <input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
-
-            <div class="widget-box widget-color-blue2">
-                <div class="widget-header widget-header-small">
-                    <h4 class="widget-title lighter">
-                        <i class="ace-icon fa fa-envelope"></i>
-                        <?php echo lang_get( 'bug_reminder' ) ?>
-                    </h4>
-                </div>
-                <div class="widget-body">
-                    <div class="widget-main no-padding">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-condensed table-striped">
-                                <tr>
-                                    <th class="category">
-                                        <?php echo lang_get( 'to' ) ?>
-                                    </th>
-                                    <th class="category">
-                                        <?php echo lang_get( 'reminder' ) ?>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <select name="to[]" multiple="multiple" size="10" class="input-sm">
-                                            <?php
-                                            $t_project_id = bug_get_field( $f_bug_id, 'project_id' );
-                                            $t_access_level = config_get( 'reminder_receive_threshold' );
-                                            if( $t_bug->view_state === VS_PRIVATE ) {
-                                                $t_private_bug_threshold = config_get( 'private_bug_threshold' );
-                                                if( $t_private_bug_threshold > $t_access_level ) {
-                                                    $t_access_level = $t_private_bug_threshold;
-                                                }
-                                            }
-                                            $t_selected_user_id = 0;
-                                            print_user_option_list( $t_selected_user_id, $t_project_id, $t_access_level );
-                                            ?>
-                                        </select>
-                                    </td>
-                                    <td class="center">
-                                        <textarea class="form-control" name="body" cols="65" rows="10"></textarea>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="widget-toolbox padding-8 clearfix">
-                        <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'bug_send_button' ) ?>" />
-                    </div>
-                </div>
-            </div>
-        </form>
-        <div class="alert alert-info">
-            <p><i class="fa fa-info-circle fa-lg"> </i>
-                <?php
-                echo lang_get( 'reminder_explain' ) . ' ';
-                if( ON == config_get( 'reminder_recipients_monitor_bug' ) ) {
-                    echo lang_get( 'reminder_monitor' ) . ' ';
-                }
-                if( ON == config_get( 'store_reminders' ) ) {
-                    echo lang_get( 'reminder_store' );
-                }
-                ?>
-            </p>
-        </div>
-    </div>
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-envelope"></i>
+				<?php echo lang_get( 'bug_reminder' ) ?>
+			</h4>
+		</div>
+		<div class="widget-body">
+			<div class="widget-main no-padding">
+				<div class="table-responsive">
+<table class="table table-bordered table-condensed table-striped">
+<tr>
+	<th class="category">
+		<?php echo lang_get( 'to' ) ?>
+	</th>
+	<th class="category">
+		<?php echo lang_get( 'reminder' ) ?>
+	</th>
+</tr>
+<tr>
+	<td>
+		<select name="to[]" multiple="multiple" size="10" class="input-sm">
+			<?php
+				$t_project_id = bug_get_field( $f_bug_id, 'project_id' );
+				$t_access_level = config_get( 'reminder_receive_threshold' );
+				if( $t_bug->view_state === VS_PRIVATE ) {
+					$t_private_bug_threshold = config_get( 'private_bug_threshold' );
+					if( $t_private_bug_threshold > $t_access_level ) {
+						$t_access_level = $t_private_bug_threshold;
+					}
+				}
+				$t_selected_user_id = 0;
+				print_user_option_list( $t_selected_user_id, $t_project_id, $t_access_level );
+			?>
+		</select>
+	</td>
+	<td class="center">
+		<textarea class="form-control" name="body" cols="65" rows="10"></textarea>
+	</td>
+</tr>
+</table>
+					</div>
+				</div>
+				<div class="widget-toolbox padding-8 clearfix">
+					<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'bug_send_button' ) ?>" />
+				</div>
+			</div>
+		</div>
+	</form>
+	<div class="alert alert-info">
+		<p><i class="fa fa-info-circle fa-lg"> </i>
+		<?php
+			echo lang_get( 'reminder_explain' ) . ' ';
+			if( ON == config_get( 'reminder_recipients_monitor_bug' ) ) {
+				echo lang_get( 'reminder_monitor' ) . ' ';
+			}
+			if( ON == config_get( 'store_reminders' ) ) {
+				echo lang_get( 'reminder_store' );
+			}
+		?>
+		</p>
+	</div>
+</div>
 
 <?php
 $_GET['id'] = $f_bug_id;
