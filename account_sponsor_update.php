@@ -50,7 +50,7 @@ require_api( 'print_api.php' );
 require_api( 'sponsorship_api.php' );
 
 if( !config_get( 'enable_sponsorship' ) ) {
-    trigger_error( ERROR_SPONSORSHIP_NOT_ENABLED, ERROR );
+	trigger_error( ERROR_SPONSORSHIP_NOT_ENABLED, ERROR );
 }
 
 form_security_validate( 'account_sponsor_update' );
@@ -61,20 +61,20 @@ $f_bug_list = gpc_get_string( 'buglist', '' );
 $t_bug_list = explode( ',', $f_bug_list );
 
 foreach( $t_bug_list as $t_bug ) {
-    list( $t_bug_id, $t_sponsor_id ) = explode( ':', $t_bug );
-    $c_bug_id = (int)$t_bug_id;
+	list( $t_bug_id, $t_sponsor_id ) = explode( ':', $t_bug );
+	$c_bug_id = (int)$t_bug_id;
 
-    bug_ensure_exists( $c_bug_id ); # dies if bug doesn't exist
+	bug_ensure_exists( $c_bug_id ); # dies if bug doesn't exist
 
-    access_ensure_bug_level( config_get( 'handle_sponsored_bugs_threshold' ), $c_bug_id ); # dies if user can't handle bug
+	access_ensure_bug_level( config_get( 'handle_sponsored_bugs_threshold' ), $c_bug_id ); # dies if user can't handle bug
 
-    $t_bug = bug_get( $c_bug_id );
-    $t_sponsor = sponsorship_get( (int)$t_sponsor_id );
+	$t_bug = bug_get( $c_bug_id );
+	$t_sponsor = sponsorship_get( (int)$t_sponsor_id );
 
-    $t_new_payment = gpc_get_int( 'sponsor_' . $c_bug_id . '_' . $t_sponsor->id, $t_sponsor->paid );
-    if( $t_new_payment != $t_sponsor->paid ) {
-        sponsorship_update_paid( $t_sponsor_id, $t_new_payment );
-    }
+	$t_new_payment = gpc_get_int( 'sponsor_' . $c_bug_id . '_' . $t_sponsor->id, $t_sponsor->paid );
+	if( $t_new_payment != $t_sponsor->paid ) {
+		sponsorship_update_paid( $t_sponsor_id, $t_new_payment );
+	}
 }
 
 form_security_purge( 'account_sponsor_update' );

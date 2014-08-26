@@ -32,7 +32,7 @@
  */
 
 if( !defined( 'BUG_FILE_UPLOAD_INC_ALLOW' ) ) {
-    return;
+	return;
 }
 
 require_api( 'collapse_api.php' );
@@ -44,72 +44,70 @@ require_api( 'utility_api.php' );
 
 # check if we can allow the upload... bail out if we can't
 if( !file_allow_bug_upload( $f_bug_id ) ) {
-    return false;
+	return false;
 }
 
 $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 ?>
-    <div class="col-md-6 col-xs-12">
-        <div class="space-10"></div>
-        <?php
-        $t_collapse_block = collapse_display( 'upload_form' );
-        $t_block_css = $t_collapse_block ? 'collapsed' : '';
-        $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
-        $t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
-        ?>
-        <form method="post" enctype="multipart/form-data" action="bug_file_add.php" class="form-inline">
-            <?php echo form_security_field( 'bug_file_add' ) ?>
-
-            <div id="upload_form" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
-                <div class="widget-header widget-header-small">
-                    <h4 class="widget-title lighter">
-                        <i class="ace-icon fa fa-upload"></i>
-                        <?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?>
-                    </h4>
-                    <div class="widget-toolbar">
-                        <a data-action="collapse" class="collapse-link" href="#">
-                            <i class="1 ace-icon <?php echo $t_block_icon ?> fa  bigger-125"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="widget-body">
-                    <div class="widget-main no-padding">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-condensed table-striped">
-                                <tr>
-                                    <td class="category" width="15%">
-                                        <?php echo lang_get( $t_file_upload_max_num == 1 ? 'select_file' : 'select_files' ) ?>
-                                        <br />
-                                        <?php echo print_max_filesize( $t_max_file_size ); ?>
-                                    </td>
-                                    <td width="85%">
-                                        <input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
-                                        <input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
-                                        <?php
-                                        # Display multiple file upload fields
-                                        for( $i = 0; $i < $t_file_upload_max_num; $i++ ) {
-                                            ?>
-                                            <input id="ufile[]" name="ufile[]" type="file" size="50" />
-                                            <?php
-                                            if( $t_file_upload_max_num > 1 ) {
-                                                echo '<br />';
-                                            }
-                                        }
-                                        ?>
-                                        <br/>
-                                        <input type="submit" class="btn btn-primary btn-sm btn-white btn-round"
-                                               value="<?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file_button' : 'upload_files_button' ) ?>"
-                                            />
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
+<div class="col-md-6 col-xs-12">
+	<div class="space-10"></div>
 <?php
+	$t_collapse_block = collapse_display( 'upload_form' );
+	$t_block_css = $t_collapse_block ? 'collapsed' : '';
+	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
+	$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
+?>
+<form method="post" enctype="multipart/form-data" action="bug_file_add.php" class="form-inline">
+<?php echo form_security_field( 'bug_file_add' ) ?>
 
+<div id="upload_form" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<i class="ace-icon fa fa-upload"></i>
+			<?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?>
+		</h4>
+		<div class="widget-toolbar">
+			<a data-action="collapse" class="collapse-link" href="#">
+				<i class="1 ace-icon <?php echo $t_block_icon ?> fa  bigger-125"></i>
+			</a>
+		</div>
+	</div>
 
+	<div class="widget-body">
+		<div class="widget-main no-padding">
+			<div class="table-responsive">
+				<table class="table table-bordered table-condensed table-striped">
+<tr>
+	<td class="category" width="15%">
+		<?php echo lang_get( $t_file_upload_max_num == 1 ? 'select_file' : 'select_files' ) ?>
+		<br />
+		<?php echo print_max_filesize( $t_max_file_size ); ?>
+	</td>
+	<td width="85%">
+		<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
+		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
+<?php
+	# Display multiple file upload fields
+	for( $i = 0; $i < $t_file_upload_max_num; $i++ ) {
+?>
+		<input id="ufile[]" name="ufile[]" type="file" size="50" />
+<?php
+		if( $t_file_upload_max_num > 1 ) {
+			echo '<br />';
+		}
+	}
+?>
+	<br/>
+		<input type="submit" class="btn btn-primary btn-sm btn-white btn-round"
+			value="<?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file_button' : 'upload_files_button' ) ?>"
+		/>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</form>
+</div>
+<?php

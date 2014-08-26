@@ -113,22 +113,22 @@ if( $t_verify || $t_reset_password ) {
 	$t_can_change_password = helper_call_custom_function( 'auth_can_change_password', array() );
 
     echo '<div class="alert alert-danger">';
-    echo '<ul>';
+	echo '<ul>';
 
-    if( $t_verify ) {
-        echo '<li>' . lang_get( 'verify_warning' ) . '</li>';
+	if( $t_verify ) {
+		echo '<li>' . lang_get( 'verify_warning' ) . '</li>';
 
-        if( $t_can_change_password ) {
-            echo '<li>' . lang_get( 'verify_change_password' ) . '</li>';
-            $t_force_pw_reset = true;
-        }
-    } else if( $t_reset_password && $t_can_change_password ) {
-        echo '<li>' . lang_get( 'warning_default_administrator_account_present' ) . '</li>';
-        $t_force_pw_reset = true;
-    }
+		if( $t_can_change_password ) {
+			echo '<li>' . lang_get( 'verify_change_password' ) . '</li>';
+			$t_force_pw_reset = true;
+		}
+	} else if( $t_reset_password && $t_can_change_password ) {
+		echo '<li>' . lang_get( 'warning_default_administrator_account_present' ) . '</li>';
+		$t_force_pw_reset = true;
+	}
 
-    echo '</ul>';
-    echo '</div>';
+	echo '</ul>';
+	echo '</div>';
 }
 
 print_account_menu( 'account_page.php' );

@@ -51,13 +51,13 @@ require_api( 'print_api.php' );
 require_api( 'profile_api.php' );
 
 if( !config_get( 'enable_profiles' ) ) {
-    trigger_error( ERROR_ACCESS_DENIED, ERROR );
+	trigger_error( ERROR_ACCESS_DENIED, ERROR );
 }
 
 if( isset( $g_global_profiles ) ) {
-    $g_global_profiles = true;
+	$g_global_profiles = true;
 } else {
-    $g_global_profiles = false;
+	$g_global_profiles = false;
 }
 
 auth_ensure_user_authenticated();
@@ -65,9 +65,9 @@ auth_ensure_user_authenticated();
 current_user_ensure_unprotected();
 
 if( $g_global_profiles ) {
-    access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
+	access_ensure_global_level( config_get( 'manage_global_profile_threshold' ) );
 } else {
-    access_ensure_global_level( config_get( 'add_profile_threshold' ) );
+	access_ensure_global_level( config_get( 'add_profile_threshold' ) );
 }
 
 layout_page_header( lang_get( 'manage_profiles_link' ) );
@@ -75,13 +75,13 @@ layout_page_header( lang_get( 'manage_profiles_link' ) );
 layout_page_begin( 'manage_overview_page.php' );
 
 if( $g_global_profiles ) {
-    print_manage_menu( 'manage_prof_menu_page.php' );
+	print_manage_menu( 'manage_prof_menu_page.php' );
 }
 
 if( $g_global_profiles ) {
-    $t_user_id = ALL_USERS;
+	$t_user_id = ALL_USERS;
 } else {
-    $t_user_id = auth_get_current_user_id();
+	$t_user_id = auth_get_current_user_id();
 }
 if( !$g_global_profiles ) {
     print_account_menu( 'account_prof_menu_page.php' );

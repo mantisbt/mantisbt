@@ -77,31 +77,31 @@ form_security_validate( $t_form_name );
 $t_custom_group_actions = config_get( 'custom_group_actions' );
 
 foreach( $t_custom_group_actions as $t_custom_group_action ) {
-    if( $f_action == $t_custom_group_action['action'] ) {
-        require_once( $t_custom_group_action['action_page'] );
-        exit;
-    }
+	if( $f_action == $t_custom_group_action['action'] ) {
+		require_once( $t_custom_group_action['action_page'] );
+		exit;
+	}
 }
 
 $t_failed_ids = array();
 
 if( 0 != $f_custom_field_id ) {
-    $t_custom_field_def = custom_field_get_definition( $f_custom_field_id );
+	$t_custom_field_def = custom_field_get_definition( $f_custom_field_id );
 }
 
 foreach( $f_bug_arr as $t_bug_id ) {
-    bug_ensure_exists( $t_bug_id );
-    $t_bug = bug_get( $t_bug_id, true );
+	bug_ensure_exists( $t_bug_id );
+	$t_bug = bug_get( $t_bug_id, true );
 
-    if( $t_bug->project_id != helper_get_current_project() ) {
-        # in case the current project is not the same project of the bug we are viewing...
-        # ... override the current project. This to avoid problems with categories and handlers lists etc.
-        $g_project_override = $t_bug->project_id;
-        # @todo (thraxisp) the next line goes away if the cache was smarter and used project
-        config_flush_cache(); # flush the config cache so that configs are refetched
-    }
+	if( $t_bug->project_id != helper_get_current_project() ) {
+		# in case the current project is not the same project of the bug we are viewing...
+		# ... override the current project. This to avoid problems with categories and handlers lists etc.
+		$g_project_override = $t_bug->project_id;
+		# @todo (thraxisp) the next line goes away if the cache was smarter and used project
+		config_flush_cache(); # flush the config cache so that configs are refetched
+	}
 
-    $t_status = $t_bug->status;
+	$t_status = $t_bug->status;
 
 	switch( $f_action ) {
 		case 'CLOSE':
@@ -315,8 +315,8 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			trigger_error( ERROR_GENERIC, ERROR );
 	}
 
-    # Bug Action Event
-    event_signal( 'EVENT_BUG_ACTION', array( $f_action, $t_bug_id ) );
+	# Bug Action Event
+	event_signal( 'EVENT_BUG_ACTION', array( $f_action, $t_bug_id ) );
 }
 
 form_security_purge( $t_form_name );
@@ -328,18 +328,18 @@ if( count( $t_failed_ids ) > 0 ) {
 
     layout_page_begin();
 
-    echo '<div><br />';
-    echo '<table class="width75">';
-    $separator = lang_get( 'word_separator' );
-    foreach( $t_failed_ids as $t_id => $t_reason ) {
-        $label = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_id ) ) . $separator;
-        printf( "<tr><td width=\"50%%\">%s%s</td><td>%s</td></tr>\n", $label, bug_get_field( $t_id, 'summary' ), $t_reason );
-    }
-    echo '</table><br />';
-    print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
-    echo '</div>';
+	echo '<div><br />';
+	echo '<table class="width75">';
+	$separator = lang_get( 'word_separator' );
+	foreach( $t_failed_ids as $t_id => $t_reason ) {
+		$label = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_id ) ) . $separator;
+		printf( "<tr><td width=\"50%%\">%s%s</td><td>%s</td></tr>\n", $label, bug_get_field( $t_id, 'summary' ), $t_reason );
+	}
+	echo '</table><br />';
+	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+	echo '</div>';
 
     layout_page_end();
 } else {
-    print_header_redirect( $t_redirect_url );
+	print_header_redirect( $t_redirect_url );
 }

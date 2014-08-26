@@ -38,7 +38,7 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 
 if( !config_get( 'time_tracking_enabled' ) ) {
-    trigger_error( ERROR_ACCESS_DENIED, ERROR );
+	trigger_error( ERROR_ACCESS_DENIED, ERROR );
 }
 
 access_ensure_global_level( config_get( 'time_tracking_reporting_threshold' ) );
@@ -48,7 +48,7 @@ layout_page_header( lang_get( 'time_tracking_billing_link' ) );
 layout_page_begin();
 ?>
 
-    <br />
+<br />
 
 <?php
 # Work break-down

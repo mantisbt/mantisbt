@@ -63,7 +63,7 @@ $t_user_id = auth_get_current_user_id();
 # not we need to reauthenticate the user
 $t_account_verification = token_get_value( TOKEN_ACCOUNT_VERIFY, $t_user_id );
 if( !$t_account_verification ) {
-    auth_reauthenticate();
+	auth_reauthenticate();
 }
 
 auth_ensure_user_authenticated();
@@ -87,49 +87,49 @@ $t_ldap = ( LDAP == config_get( 'login_method' ) );
 
 # Update email (but only if LDAP isn't being used)
 if( !( $t_ldap && config_get( 'use_ldap_email' ) ) ) {
-    email_ensure_valid( $f_email );
-    email_ensure_not_disposable( $f_email );
+	email_ensure_valid( $f_email );
+	email_ensure_not_disposable( $f_email );
 
-    if( $f_email != user_get_email( $t_user_id ) ) {
-        user_set_email( $t_user_id, $f_email );
-        $t_email_updated = true;
-    }
+	if( $f_email != user_get_email( $t_user_id ) ) {
+		user_set_email( $t_user_id, $f_email );
+		$t_email_updated = true;
+	}
 }
 
 # Update real name (but only if LDAP isn't being used)
 if( !( $t_ldap && config_get( 'use_ldap_realname' ) ) ) {
-    # strip extra spaces from real name
-    $t_realname = string_normalize( $f_realname );
-    if( $t_realname != user_get_field( $t_user_id, 'realname' ) ) {
-        # checks for problems with realnames
-        $t_username = user_get_field( $t_user_id, 'username' );
-        user_ensure_realname_unique( $t_username, $t_realname );
-        user_set_realname( $t_user_id, $t_realname );
-        $t_realname_updated = true;
-    }
+	# strip extra spaces from real name
+	$t_realname = string_normalize( $f_realname );
+	if( $t_realname != user_get_field( $t_user_id, 'realname' ) ) {
+		# checks for problems with realnames
+		$t_username = user_get_field( $t_user_id, 'username' );
+		user_ensure_realname_unique( $t_username, $t_realname );
+		user_set_realname( $t_user_id, $t_realname );
+		$t_realname_updated = true;
+	}
 }
 
 # Update password if the two match and are not empty
 if( !is_blank( $f_password ) ) {
-    if( $f_password != $f_password_confirm ) {
-        trigger_error( ERROR_USER_CREATE_PASSWORD_MISMATCH, ERROR );
-    } else {
-        if( !$t_account_verification && !auth_does_password_match( $t_user_id, $f_password_current ) ) {
-            trigger_error( ERROR_USER_CURRENT_PASSWORD_MISMATCH, ERROR );
-        }
+	if( $f_password != $f_password_confirm ) {
+		trigger_error( ERROR_USER_CREATE_PASSWORD_MISMATCH, ERROR );
+	} else {
+		if( !$t_account_verification && !auth_does_password_match( $t_user_id, $f_password_current ) ) {
+			trigger_error( ERROR_USER_CURRENT_PASSWORD_MISMATCH, ERROR );
+		}
 
-        if( !auth_does_password_match( $t_user_id, $f_password ) ) {
-            user_set_password( $t_user_id, $f_password );
-            $t_password_updated = true;
-        }
-    }
+		if( !auth_does_password_match( $t_user_id, $f_password ) ) {
+			user_set_password( $t_user_id, $f_password );
+			$t_password_updated = true;
+		}
+	}
 }
 
 form_security_purge( 'account_update' );
 
 # Clear the verification token
 if( $t_account_verification ) {
-    token_delete( TOKEN_ACCOUNT_VERIFY, $t_user_id );
+	token_delete( TOKEN_ACCOUNT_VERIFY, $t_user_id );
 }
 
 layout_page_header( null, $t_redirect_url );
@@ -139,17 +139,17 @@ layout_page_begin();
 $t_message = '';
 
 if( $t_email_updated ) {
-    $t_message .= lang_get( 'email_updated' );
+	$t_message .= lang_get( 'email_updated' );
 }
 
 if( $t_password_updated ) {
-    $t_message = is_blank( $t_message ) ? '' : $t_message . '<br />';
-    $t_message .= lang_get( 'password_updated' );
+	$t_message = is_blank( $t_message ) ? '' : $t_message . '<br />';
+	$t_message .= lang_get( 'password_updated' );
 }
 
 if( $t_realname_updated ) {
-    $t_message = is_blank( $t_message ) ? '' : $t_message . '<br />';
-    $t_message .= lang_get( 'realname_updated' );
+	$t_message = is_blank( $t_message ) ? '' : $t_message . '<br />';
+	$t_message .= lang_get( 'realname_updated' );
 }
 
 html_operation_successful( $t_redirect_url, $t_message );

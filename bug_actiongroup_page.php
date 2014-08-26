@@ -215,177 +215,177 @@ switch( $f_action ) {
 bug_group_action_print_top();
 ?>
 
-    <div class="col-md-12 col-xs-12">
-        <?php
-        if( $t_multiple_projects ) {
-            echo '<div class="alert alert-warning"> <p class="bold">' . lang_get( 'multiple_projects' ) . '</p> </div>';
-        }
-        ?>
-        <div id="action-group-div" class="form-container">
-            <form method="post" action="bug_actiongroup.php">
-                <?php echo form_security_field( $t_form_name ); ?>
-                <input type="hidden" name="action" value="<?php echo string_attribute( $f_action ) ?>" />
-                <?php
-                bug_group_action_print_hidden_fields( $f_bug_arr );
-                if( $f_action === 'CUSTOM' ) {
-                    echo "<input type=\"hidden\" name=\"custom_field_id\" value=\"$t_custom_field_id\" />";
-                }
-                ?>
-                <div class="widget-box widget-color-blue2">
-                    <div class="widget-header widget-header-small">
-                        <h4 class="widget-title lighter">
-                            <?php echo $t_question_title ?>
-                        </h4>
-                    </div>
-                    <div class="widget-body">
-                        <div class="widget-main no-padding">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-condensed table-striped">
-                                    <tbody>
-                                    <?php
-                                    if( !$t_finished ) {
-                                        ?>
-                                        <tr>
-                                            <th class="category">
-                                                <?php echo $t_question_title ?>
-                                            </th>
-                                            <td>
-                                                <?php
-                                                if( $f_action === 'CUSTOM' ) {
-                                                    $t_custom_field_def = custom_field_get_definition( $t_custom_field_id );
+<div class="col-md-12 col-xs-12">
+<?php
+if( $t_multiple_projects ) {
+	echo '<div class="alert alert-warning"> <p class="bold">' . lang_get( 'multiple_projects' ) . '</p> </div>';
+}
+?>
+<div id="action-group-div" class="form-container">
+	<form method="post" action="bug_actiongroup.php">
+		<?php echo form_security_field( $t_form_name ); ?>
+		<input type="hidden" name="action" value="<?php echo string_attribute( $f_action ) ?>" />
+<?php
+	bug_group_action_print_hidden_fields( $f_bug_arr );
+	if( $f_action === 'CUSTOM' ) {
+		echo "<input type=\"hidden\" name=\"custom_field_id\" value=\"$t_custom_field_id\" />";
+	}
+?>
+		<div class="widget-box widget-color-blue2">
+			<div class="widget-header widget-header-small">
+				<h4 class="widget-title lighter">
+					<?php echo $t_question_title ?>
+				</h4>
+			</div>
+			<div class="widget-body">
+				<div class="widget-main no-padding">
+					<div class="table-responsive">
+						<table class="table table-bordered table-condensed table-striped">
+			<tbody>
+<?php
+	if( !$t_finished ) {
+?>
+				<tr>
+					<th class="category">
+						<?php echo $t_question_title ?>
+					</th>
+					<td>
+<?php
+		if( $f_action === 'CUSTOM' ) {
+			$t_custom_field_def = custom_field_get_definition( $t_custom_field_id );
 
-                                                    $t_bug_id = null;
+			$t_bug_id = null;
 
-                                                    # if there is only one issue, use its current value as default, otherwise,
-                                                    # use the default value specified in custom field definition.
-                                                    if( count( $f_bug_arr ) == 1 ) {
-                                                        $t_bug_id = $f_bug_arr[0];
-                                                    }
+			# if there is only one issue, use its current value as default, otherwise,
+			# use the default value specified in custom field definition.
+			if( count( $f_bug_arr ) == 1 ) {
+				$t_bug_id = $f_bug_arr[0];
+			}
 
-                                                    print_custom_field_input( $t_custom_field_def, $t_bug_id );
-                                                } else {
-                                                    echo '<select name="' . $t_form . '" class="input-sm">';
+			print_custom_field_input( $t_custom_field_def, $t_bug_id );
+		} else {
+			echo '<select name="' . $t_form . '" class="input-sm">';
 
-                                                    switch ( $f_action ) {
-                                                        case 'COPY':
-                                                        case 'MOVE':
-                                                            print_project_option_list( null, false );
-                                                            break;
-                                                        case 'ASSIGN':
-                                                            print_assign_to_option_list( 0, $t_project_id );
-                                                            break;
-                                                        case 'RESOLVE':
-                                                            print_enum_string_option_list( 'resolution', config_get( 'bug_resolution_fixed_threshold' ) );
-                                                            break;
-                                                        case 'UP_PRIOR':
-                                                            print_enum_string_option_list( 'priority', config_get( 'default_bug_priority' ) );
-                                                            break;
-                                                        case 'UP_STATUS':
-                                                            print_enum_string_option_list( 'status', config_get( 'bug_submit_status' ) );
-                                                            break;
-                                                        case 'UP_CATEGORY':
-                                                            print_category_option_list();
-                                                            break;
-                                                        case 'VIEW_STATUS':
-                                                            print_enum_string_option_list( 'view_state', config_get( 'default_bug_view_status' ) );
-                                                            break;
-                                                        case 'UP_TARGET_VERSION':
-                                                            print_version_option_list( '', $t_project_id, VERSION_FUTURE, true, true );
-                                                            break;
-                                                        case 'UP_FIXED_IN_VERSION':
-                                                            print_version_option_list( '', $t_project_id, VERSION_ALL, true, true );
-                                                            break;
-                                                    }
+			switch ( $f_action ) {
+				case 'COPY':
+				case 'MOVE':
+					print_project_option_list( null, false );
+					break;
+				case 'ASSIGN':
+					print_assign_to_option_list( 0, $t_project_id );
+					break;
+				case 'RESOLVE':
+					print_enum_string_option_list( 'resolution', config_get( 'bug_resolution_fixed_threshold' ) );
+					break;
+				case 'UP_PRIOR':
+					print_enum_string_option_list( 'priority', config_get( 'default_bug_priority' ) );
+					break;
+				case 'UP_STATUS':
+					print_enum_string_option_list( 'status', config_get( 'bug_submit_status' ) );
+					break;
+				case 'UP_CATEGORY':
+					print_category_option_list();
+					break;
+				case 'VIEW_STATUS':
+					print_enum_string_option_list( 'view_state', config_get( 'default_bug_view_status' ) );
+					break;
+				case 'UP_TARGET_VERSION':
+					print_version_option_list( '', $t_project_id, VERSION_FUTURE, true, true );
+					break;
+				case 'UP_FIXED_IN_VERSION':
+					print_version_option_list( '', $t_project_id, VERSION_ALL, true, true );
+					break;
+			}
 
-                                                    echo '</select>';
-                                                }
-                                                ?>
-                                            </td>
-                                        </tr>
-                                        <?php
-                                        if( isset( $t_question_title2 ) ) {
-                                            switch ( $f_action ) {
-                                                case 'RESOLVE':
-                                                    $t_show_product_version = ( ON == config_get( 'show_product_version' ) )
-                                                        || ( ( AUTO == config_get( 'show_product_version' ) )
-                                                            && ( count( version_get_all_rows( $t_project_id ) ) > 0 ) );
-                                                    if( $t_show_product_version ) {
-                                                        ?>
-                                                        <tr>
-                                                            <th class="category">
-                                                                <?php echo $t_question_title2 ?>
-                                                            </th>
-                                                            <td>
-                                                                <select name="<?php echo $t_form2 ?>" class="input-sm">
-                                                                    <?php print_version_option_list( '', null, VERSION_ALL );?>
-                                                                </select>
-                                                            </td>
-                                                        </tr>
-                                                    <?php
-                                                    }
-                                                    break;
-                                            }
-                                        }
-                                    } else {
-                                        ?>
-                                        <tr>
-                                            <th class="category" colspan="2">
-                                                <?php echo $t_question_title; ?>
-                                            </th>
-                                        </tr>
-                                    <?php
-                                    }
+			echo '</select>';
+		}
+?>
+					</td>
+				</tr>
+<?php
+		if( isset( $t_question_title2 ) ) {
+			switch ( $f_action ) {
+				case 'RESOLVE':
+					$t_show_product_version = ( ON == config_get( 'show_product_version' ) )
+						|| ( ( AUTO == config_get( 'show_product_version' ) )
+									&& ( count( version_get_all_rows( $t_project_id ) ) > 0 ) );
+					if( $t_show_product_version ) {
+?>
+				<tr>
+					<th class="category">
+						<?php echo $t_question_title2 ?>
+					</th>
+					<td>
+						<select name="<?php echo $t_form2 ?>" class="input-sm">
+							<?php print_version_option_list( '', null, VERSION_ALL );?>
+						</select>
+					</td>
+				</tr>
+<?php
+					}
+					break;
+			}
+		}
+	} else {
+?>
+				<tr>
+					<th class="category" colspan="2">
+						<?php echo $t_question_title; ?>
+					</th>
+				</tr>
+<?php
+	}
 
-                                    if( $t_bugnote ) {
-                                        ?>
-                                        <tr>
-                                            <th class="category">
-                                                <?php echo lang_get( 'add_bugnote_title' ); ?>
-                                            </th>
-                                            <td>
-                                                <textarea class="form-control" name="bugnote_text" cols="80" rows="10"></textarea>
-                                            </td>
-                                        </tr>
-                                        <?php
-                                        if( access_has_project_level( config_get( 'private_bugnote_threshold' ), $t_project_id ) ) {
-                                            ?>
-                                            <tr>
-                                                <th class="category">
-                                                    <?php echo lang_get( 'view_status' ) ?>
-                                                </th>
-                                                <td>
-                                                    <?php
-                                                    $t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
-                                                    if( access_has_project_level( config_get( 'set_view_status_threshold' ), $t_project_id ) ) {
-                                                        ?>
-                                                        <input type="checkbox" class="ace" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
-                                                        <label class="lbl"> <?php echo lang_get( 'private' ); ?> </label>
-                                                    <?php
-                                                    } else {
-                                                        echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
-                                                    }
-                                                    ?>
-                                                </td>
-                                            </tr>
-                                        <?php
-                                        }
-                                    }
-                                    ?>
-                                    <tr class="spacer"></tr>
-                                    <?php bug_group_action_print_bug_list( $f_bug_arr ); ?>
-                                    <tr class="spacer"></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="widget-toolbox padding-8 clearfix">
-                            <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo $t_button_title ?>" />
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+	if( $t_bugnote ) {
+?>
+				<tr>
+					<th class="category">
+						<?php echo lang_get( 'add_bugnote_title' ); ?>
+					</th>
+					<td>
+						<textarea class="form-control" name="bugnote_text" cols="80" rows="10"></textarea>
+					</td>
+				</tr>
+<?php
+		if( access_has_project_level( config_get( 'private_bugnote_threshold' ), $t_project_id ) ) {
+?>
+				<tr>
+					<th class="category">
+						<?php echo lang_get( 'view_status' ) ?>
+					</th>
+					<td>
+<?php
+			$t_default_bugnote_view_status = config_get( 'default_bugnote_view_status' );
+			if( access_has_project_level( config_get( 'set_view_status_threshold' ), $t_project_id ) ) {
+?>
+						<input type="checkbox" class="ace" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
+						<label class="lbl"> <?php echo lang_get( 'private' ); ?> </label>
+<?php
+			} else {
+				echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
+			}
+?>
+					</td>
+				</tr>
+			<?php
+		}
+	}
+		?>
+		<tr class="spacer"></tr>
+		<?php bug_group_action_print_bug_list( $f_bug_arr ); ?>
+		<tr class="spacer"></tr>
+			</tbody>
+		</table>
+					</div>
+				</div>
+				<div class="widget-toolbox padding-8 clearfix">
+					<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo $t_button_title ?>" />
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+</div>
 
 <?php
 

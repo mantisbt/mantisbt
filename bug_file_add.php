@@ -55,33 +55,33 @@ $f_bug_id	= gpc_get_int( 'bug_id', -1 );
 $f_files		= gpc_get_file( 'ufile', -1 );
 
 if( $f_bug_id == -1 && $f_files	== -1 ) {
-    # _POST/_FILES does not seem to get populated if you exceed size limit so check if bug_id is -1
-    trigger_error( ERROR_FILE_TOO_BIG, ERROR );
+	# _POST/_FILES does not seem to get populated if you exceed size limit so check if bug_id is -1
+	trigger_error( ERROR_FILE_TOO_BIG, ERROR );
 }
 
 form_security_validate( 'bug_file_add' );
 
 $t_bug = bug_get( $f_bug_id, true );
 if( $t_bug->project_id != helper_get_current_project() ) {
-    # in case the current project is not the same project of the bug we are viewing...
-    # ... override the current project. This to avoid problems with categories and handlers lists etc.
-    $g_project_override = $t_bug->project_id;
+	# in case the current project is not the same project of the bug we are viewing...
+	# ... override the current project. This to avoid problems with categories and handlers lists etc.
+	$g_project_override = $t_bug->project_id;
 }
 
 if( !file_allow_bug_upload( $f_bug_id ) ) {
-    access_denied();
+	access_denied();
 }
 
 access_ensure_bug_level( config_get( 'upload_bug_file_threshold' ), $f_bug_id );
 
 # Process array of files to upload
 if( -1 != $f_files ) {
-    $t_files = helper_array_transpose( $f_files );
-    foreach( $t_files as $t_file ) {
-        if( !empty( $t_file['name'] ) ) {
-            file_add( $f_bug_id, $t_file, 'bug' );
-        }
-    }
+	$t_files = helper_array_transpose( $f_files );
+	foreach( $t_files as $t_file ) {
+		if( !empty( $t_file['name'] ) ) {
+			file_add( $f_bug_id, $t_file, 'bug' );
+		}
+	}
 }
 
 form_security_purge( 'bug_file_add' );

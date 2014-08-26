@@ -65,32 +65,32 @@ bug_group_action_init( $f_action );
 # group bugs by project
 $t_projects_bugs = array();
 foreach( $f_bug_arr as $t_bug_id ) {
-    bug_ensure_exists( $t_bug_id );
-    $t_bug = bug_get( $t_bug_id, true );
+	bug_ensure_exists( $t_bug_id );
+	$t_bug = bug_get( $t_bug_id, true );
 
-    if( isset( $t_projects_bugs[$t_bug->project_id] ) ) {
-        $t_projects_bugs[$t_bug->project_id][] = $t_bug_id;
-    } else {
-        $t_projects_bugs[$t_bug->project_id] = array( $t_bug_id );
-    }
+	if( isset( $t_projects_bugs[$t_bug->project_id] ) ) {
+	  $t_projects_bugs[$t_bug->project_id][] = $t_bug_id;
+	} else {
+	  $t_projects_bugs[$t_bug->project_id] = array( $t_bug_id );
+	}
 }
 
 $t_failed_ids = array();
 
 foreach( $t_projects_bugs as $t_project_id => $t_bugs ) {
-    $g_project_override = $t_project_id;
-    foreach( $t_bugs as $t_bug_id ) {
-        $t_fail_reason = bug_group_action_validate( $f_action, $t_bug_id );
-        if( $t_fail_reason !== null ) {
-            $t_failed_ids[$t_bug_id] = $t_fail_reason;
-        }
-        if( !isset( $t_failed_ids[$t_bug_id] ) ) {
-            $t_fail_reason = bug_group_action_process( $f_action, $t_bug_id );
-            if( $t_fail_reason !== null ) {
-                $t_failed_ids[$t_bug_id] = $t_fail_reason;
-            }
-        }
-    }
+	$g_project_override = $t_project_id;
+	foreach( $t_bugs as $t_bug_id ) {
+		$t_fail_reason = bug_group_action_validate( $f_action, $t_bug_id );
+		if( $t_fail_reason !== null ) {
+			$t_failed_ids[$t_bug_id] = $t_fail_reason;
+		}
+		if( !isset( $t_failed_ids[$t_bug_id] ) ) {
+			$t_fail_reason = bug_group_action_process( $f_action, $t_bug_id );
+			if( $t_fail_reason !== null ) {
+				$t_failed_ids[$t_bug_id] = $t_fail_reason;
+			}
+		}
+	}
 }
 
 $g_project_override = null;
@@ -102,18 +102,18 @@ if( count( $t_failed_ids ) > 0 ) {
 
     layout_page_begin();
 
-    echo '<div>';
+	echo '<div>';
 
-    $t_word_separator = lang_get( 'word_separator' );
-    foreach( $t_failed_ids as $t_id => $t_reason ) {
-        $t_label = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_id ) ) . $t_word_separator;
-        printf( "<p>%s%s</p>\n", $t_label, $t_reason );
-    }
+	$t_word_separator = lang_get( 'word_separator' );
+	foreach( $t_failed_ids as $t_id => $t_reason ) {
+		$t_label = sprintf( lang_get( 'label' ), string_get_bug_view_link( $t_id ) ) . $t_word_separator;
+		printf( "<p>%s%s</p>\n", $t_label, $t_reason );
+	}
 
-    print_bracket_link( 'view_all_bug_page.php', lang_get( 'proceed' ) );
-    echo '</div>';
+	print_bracket_link( 'view_all_bug_page.php', lang_get( 'proceed' ) );
+	echo '</div>';
 
-    layout_page_end();
+	layout_page_end();
 } else {
-    print_header_redirect( 'view_all_bug_page.php' );
+	print_header_redirect( 'view_all_bug_page.php' );
 }
