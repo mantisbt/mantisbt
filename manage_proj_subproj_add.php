@@ -62,7 +62,7 @@ project_ensure_exists( $f_project_id );
 project_ensure_exists( $f_subproject_id );
 
 if( $f_project_id == $f_subproject_id ) {
-    trigger_error( ERROR_GENERIC, ERROR );
+	trigger_error( ERROR_GENERIC, ERROR );
 }
 project_hierarchy_add( $f_subproject_id, $f_project_id );
 

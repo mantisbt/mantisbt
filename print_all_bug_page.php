@@ -108,134 +108,134 @@ $t_show_flag = gpc_get_int( 'show_flag', 0 );
 layout_page_header();
 ?>
 
-    <table class="table table-condensed no-margin">
-        <tr>
-            <td class="bold bigger-120">
-                <div class="center">
-                    <?php echo string_display( config_get( 'window_title' ) ) . ' - ' . string_display( project_get_name( $t_project_id ) ); ?>
-                </div>
-            </td>
-        </tr>
-    </table>
+<table class="table table-condensed no-margin">
+<tr>
+<td class="bold bigger-120">
+	<div class="center">
+		<?php echo string_display( config_get( 'window_title' ) ) . ' - ' . string_display( project_get_name( $t_project_id ) ); ?>
+	</div>
+</td>
+</tr>
+</table>
 
-    <table class="table table-striped table-bordered table-condensed no-margin">
-        <tr>
-            <td class="bold bigger-110" colspan="<?php echo $t_num_of_columns / 2 + $t_num_of_columns % 2; ?>">
-                <?php
-                echo lang_get( 'viewing_bugs_title' );
+<table class="table table-striped table-bordered table-condensed no-margin">
+	<tr>
+		<td class="bold bigger-110" colspan="<?php echo $t_num_of_columns / 2 + $t_num_of_columns % 2; ?>">
+			<?php
+			echo lang_get( 'viewing_bugs_title' );
 
-                if( $row_count > 0 ) {
-                    $v_start = $f_offset+1;
-                    $v_end   = $f_offset+$row_count;
-                } else {
-                    $v_start = 0;
-                    $v_end   = 0;
-                }
-                echo " ( $v_start - $v_end )";
-                ?>
-            </td>
-            <td class="pull-right" colspan="<?php echo $t_num_of_columns / 2 ?>">
-                <form method="post" action="view_all_set.php">
-                    <?php # CSRF protection not required here - form does not result in modifications ?>
-                    <input type="hidden" name="type" value="1" />
-                    <input type="hidden" name="print" value="1" />
-                    <input type="hidden" name="offset" value="0" />
-                    <input type="hidden" name="<?php echo FILTER_PROPERTY_SORT_FIELD_NAME; ?>" value="<?php echo $f_sort ?>" />
-                    <input type="hidden" name="<?php echo FILTER_PROPERTY_SORT_DIRECTION; ?>" value="<?php echo $f_dir ?>" />
+			if( $row_count > 0 ) {
+				$v_start = $f_offset+1;
+				$v_end   = $f_offset+$row_count;
+			} else {
+				$v_start = 0;
+				$v_end   = 0;
+			}
+			echo " ( $v_start - $v_end )";
+			?>
+		</td>
+		<td class="pull-right" colspan="<?php echo $t_num_of_columns / 2 ?>">
+<form method="post" action="view_all_set.php">
+<?php # CSRF protection not required here - form does not result in modifications ?>
+<input type="hidden" name="type" value="1" />
+<input type="hidden" name="print" value="1" />
+<input type="hidden" name="offset" value="0" />
+<input type="hidden" name="<?php echo FILTER_PROPERTY_SORT_FIELD_NAME; ?>" value="<?php echo $f_sort ?>" />
+<input type="hidden" name="<?php echo FILTER_PROPERTY_SORT_DIRECTION; ?>" value="<?php echo $f_dir ?>" />
 
-                    <?php
-                    #<SQLI> Excel & Print export
-                    #$f_bug_array stores the number of the selected rows
-                    #$t_bug_arr_sort is used for displaying
-                    #$f_export is a string for the word and excel pages
+<?php
+#<SQLI> Excel & Print export
+#$f_bug_array stores the number of the selected rows
+#$t_bug_arr_sort is used for displaying
+#$f_export is a string for the word and excel pages
 
-                    $f_bug_arr = gpc_get_int_array( 'bug_arr', array() );
-                    $f_bug_arr[$t_row_count]=-1;
+$f_bug_arr = gpc_get_int_array( 'bug_arr', array() );
+$f_bug_arr[$t_row_count]=-1;
 
-                    for( $i=0; $i < $t_row_count; $i++ ) {
-                        if( isset( $f_bug_arr[$i] ) ) {
-                            $t_index = $f_bug_arr[$i];
-                            $t_bug_arr_sort[$t_index]=1;
-                        }
-                    }
-                    $f_export = implode( ',', $f_bug_arr );
+for( $i=0; $i < $t_row_count; $i++ ) {
+	if( isset( $f_bug_arr[$i] ) ) {
+		$t_index = $f_bug_arr[$i];
+		$t_bug_arr_sort[$t_index]=1;
+	}
+}
+$f_export = implode( ',', $f_bug_arr );
 
-                    $t_icon_path = config_get( 'icon_path' );
-                    ?>
+$t_icon_path = config_get( 'icon_path' );
+?>
 
-                    <?php
-                    if( 'DESC' == $f_dir ) {
-                        $t_new_dir = 'ASC';
-                    } else {
-                        $t_new_dir = 'DESC';
-                    }
+<?php
+	if( 'DESC' == $f_dir ) {
+		$t_new_dir = 'ASC';
+	} else {
+		$t_new_dir = 'DESC';
+	}
 
-                    $t_search = urlencode( $f_search );
+	$t_search = urlencode( $f_search );
 
-                    $t_icons = array(
-                        array( 'print_all_bug_page_word', 'word', '', 'fileicons/doc.gif', 'Word 2000' ),
-                        array( 'print_all_bug_page_word', 'html', 'target="_blank"', 'ie.gif', 'Word View' ) );
+	$t_icons = array(
+		array( 'print_all_bug_page_word', 'word', '', 'fileicons/doc.gif', 'Word 2000' ),
+		array( 'print_all_bug_page_word', 'html', 'target="_blank"', 'ie.gif', 'Word View' ) );
 
-                    foreach ( $t_icons as $t_icon ) {
-                        echo '<a href="' . $t_icon[0] . '.php?' . FILTER_PROPERTY_SEARCH. '=' . $t_search .
-                            '&amp;' . FILTER_PROPERTY_SORT_FIELD_NAME . '=' . $f_sort .
-                            '&amp;' . FILTER_PROPERTY_SORT_DIRECTION . '=' . $t_new_dir .
-                            '&amp;type_page=' . $t_icon[1] .
-                            '&amp;export=' . $f_export .
-                            '&amp;show_flag=' . $t_show_flag .
-                            '" ' . $t_icon[2] . '>' .
-                            '<img src="' . $t_icon_path . $t_icon[3] . '" alt="' . $t_icon[4] . '" /></a> ';
-                    }
-                    ?>
-                </form>
-            </td>
-        </tr>
+	foreach ( $t_icons as $t_icon ) {
+		echo '<a href="' . $t_icon[0] . '.php?' . FILTER_PROPERTY_SEARCH. '=' . $t_search .
+			'&amp;' . FILTER_PROPERTY_SORT_FIELD_NAME . '=' . $f_sort .
+			'&amp;' . FILTER_PROPERTY_SORT_DIRECTION . '=' . $t_new_dir .
+			'&amp;type_page=' . $t_icon[1] .
+			'&amp;export=' . $f_export .
+			'&amp;show_flag=' . $t_show_flag .
+			'" ' . $t_icon[2] . '>' .
+			'<img src="' . $t_icon_path . $t_icon[3] . '" alt="' . $t_icon[4] . '" /></a> ';
+	}
+?>
+</form>
+	</td>
+</tr>
 
-        <?php # CSRF protection not required here - form does not result in modifications ?>
-        <form method="post" action="print_all_bug_page.php">
-            <tr>
-                <?php
-                $t_sort = $f_sort;	# used within the custom function called in the loop (@todo cleanup)
-                $t_dir = $f_dir;    # used within the custom function called in the loop (@todo cleanup)
+<?php # CSRF protection not required here - form does not result in modifications ?>
+<form method="post" action="print_all_bug_page.php">
+<tr>
+		<?php
+		$t_sort = $f_sort;	# used within the custom function called in the loop (@todo cleanup)
+		$t_dir = $f_dir;    # used within the custom function called in the loop (@todo cleanup)
 
-                foreach( $t_columns as $t_column ) {
-                    $t_title_function = 'print_column_title';
-                    helper_call_custom_function( $t_title_function, array( $t_column, COLUMNS_TARGET_PRINT_PAGE ) );
-                }
-                ?>
-            </tr>
-            <tr class="spacer">
-                <td colspan="<?php echo $t_num_of_columns ?>"></td>
-            </tr>
-            <?php
-            for( $i=0; $i < $t_row_count; $i++ ) {
-                $t_row = $t_result[$i];
+		foreach( $t_columns as $t_column ) {
+			$t_title_function = 'print_column_title';
+			helper_call_custom_function( $t_title_function, array( $t_column, COLUMNS_TARGET_PRINT_PAGE ) );
+		}
+	?>
+</tr>
+<tr class="spacer">
+	<td colspan="<?php echo $t_num_of_columns ?>"></td>
+</tr>
+<?php
+	for( $i=0; $i < $t_row_count; $i++ ) {
+		$t_row = $t_result[$i];
 
-                if( isset( $t_bug_arr_sort[ $t_row->id ] ) || ( $t_show_flag==0 ) ) {
-                    ?>
-                    <tr>
-                        <?php
-                        foreach( $t_columns as $t_column ) {
-                            $t_column_value_function = 'print_column_value';
-                            helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row, COLUMNS_TARGET_PRINT_PAGE ) );
-                        }
-                        ?>
-                    </tr>
-                <?php
-                } # isset_loop
-            } # for_loop
-            ?>
-            <tr class="spacer">
-                <td colspan="<?php echo $t_num_of_columns ?>"></td>
-            </tr>
-            <tr>
-                <td colspan="<?php echo $t_num_of_columns ?>">
-                    <input type="hidden" name="show_flag" value="1" />
-                    <input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'hide_button' ) ?>" />
-                </td>
-            </tr>
-        </form>
-    </table>
+		if( isset( $t_bug_arr_sort[ $t_row->id ] ) || ( $t_show_flag==0 ) ) {
+?>
+<tr>
+<?php
+		foreach( $t_columns as $t_column ) {
+			$t_column_value_function = 'print_column_value';
+			helper_call_custom_function( $t_column_value_function, array( $t_column, $t_row, COLUMNS_TARGET_PRINT_PAGE ) );
+		}
+?>
+</tr>
+<?php
+	} # isset_loop
+} # for_loop
+?>
+<tr class="spacer">
+	<td colspan="<?php echo $t_num_of_columns ?>"></td>
+</tr>
+<tr>
+	<td colspan="<?php echo $t_num_of_columns ?>">
+<input type="hidden" name="show_flag" value="1" />
+<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'hide_button' ) ?>" />
+	</td>
+</tr>
+</form>
+</table>
 <?php
 html_body_end();
 html_end();

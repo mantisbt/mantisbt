@@ -64,7 +64,7 @@ $t_field_name_count = count( $t_field_name_arr );
 
 # create a default array, same size than $t_field_name
 for( $i=0; $i<$t_field_name_count; $i++ ) {
-    $t_default_arr[$i] = 0 ;
+	$t_default_arr[$i] = 0 ;
 }
 $t_default = implode( '', $t_default_arr );
 
@@ -83,12 +83,12 @@ layout_page_header( null, $t_redirect_url );
 layout_page_begin();
 
 if( $t_result ) {
-    html_operation_successful( $t_redirect_url );
+	html_operation_successful( $t_redirect_url );
 } else {
-    echo '<div class="failure-msg">';
-    echo error_string( ERROR_GENERIC ) . '<br />';
-    print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
-    echo '</div>';
+	echo '<div class="failure-msg">';
+	echo error_string( ERROR_GENERIC ) . '<br />';
+	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+	echo '</div>';
 }
 
 layout_page_end();

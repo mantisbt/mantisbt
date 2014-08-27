@@ -78,7 +78,7 @@ function print_version_header( array $p_version_row ) {
 	$t_version_name = $p_version_row['version'];
 	$t_project_name = project_get_field( $t_project_id, 'name' );
 
-    $t_release_title = '<a class="white" href="roadmap_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a>';
+	$t_release_title = '<a class="white" href="roadmap_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a>';
     $t_release_title .= ' - <a class="white" href="roadmap_page.php?version_id=' . $t_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
 
 	if( config_get( 'show_roadmap_dates' ) ) {
@@ -89,38 +89,38 @@ function print_version_header( array $p_version_row ) {
 		$t_scheduled_release_date = '';
 	}
 
-    $t_block_id = 'roadmap_' . $t_version_id;
-    $t_collapse_block = collapse_display( $t_block_id );
-    $t_block_css = $t_collapse_block ? 'collapsed' : '';
-    $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
+	$t_block_id = 'roadmap_' . $t_version_id;
+	$t_collapse_block = collapse_display( $t_block_id );
+	$t_block_css = $t_collapse_block ? 'collapsed' : '';
+	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
-    echo '<div id="' . $t_block_id . '" class="widget-box widget-color-blue2 ' . $t_block_css . '">';
-    echo '<div class="widget-header widget-header-small">';
-    echo '<h4 class="widget-title lighter">';
-    echo '<i class="ace-icon fa fa-road"></i>';
-    echo $t_release_title, lang_get( 'word_separator' );
-    echo '</h4>';
-    echo '<div class="widget-toolbar">';
-    echo '<a data-action="collapse" href="#">';
-    echo '<i class="1 ace-icon fa ' . $t_block_icon . ' bigger-125"></i>';
-    echo '</a>';
-    echo '</div>';
-    echo '</div>';
+	echo '<div id="' . $t_block_id . '" class="widget-box widget-color-blue2 ' . $t_block_css . '">';
+	echo '<div class="widget-header widget-header-small">';
+	echo '<h4 class="widget-title lighter">';
+	echo '<i class="ace-icon fa fa-road"></i>';
+	echo $t_release_title, lang_get( 'word_separator' );
+	echo '</h4>';
+	echo '<div class="widget-toolbar">';
+	echo '<a data-action="collapse" href="#">';
+	echo '<i class="1 ace-icon fa ' . $t_block_icon . ' bigger-125"></i>';
+	echo '</a>';
+	echo '</div>';
+	echo '</div>';
 
-    echo '<div class="widget-body">';
-    echo '<div class="widget-toolbox padding-8 clearfix">';
-    echo '<div class="pull-left"><i class="fa fa-clock-o fa-lg"> </i> ' . $t_scheduled_release_date . '</div>';
-    echo '<div class="btn-toolbar pull-right">';
-    echo '<a class="btn btn-xs btn-primary btn-white btn-round" ';
-    echo 'href="view_all_set.php?type=1&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id . '&' . filter_encode_field_and_value( FILTER_PROPERTY_TARGET_VERSION, $t_version_name ) . '">';
-    echo lang_get( 'view_bugs_link' );
-    echo '<a class="btn btn-xs btn-primary btn-white btn-round" href="roadmap_page.php?version_id=' . $t_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
-    echo '<a class="btn btn-xs btn-primary btn-white btn-round" href="roadmap_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a>';
-    echo '</a>';
-    echo '</div>';
+	echo '<div class="widget-body">';
+	echo '<div class="widget-toolbox padding-8 clearfix">';
+	echo '<div class="pull-left"><i class="fa fa-clock-o fa-lg"> </i> ' . $t_scheduled_release_date . '</div>';
+	echo '<div class="btn-toolbar pull-right">';
+	echo '<a class="btn btn-xs btn-primary btn-white btn-round" ';
+	echo 'href="view_all_set.php?type=1&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id . '&' . filter_encode_field_and_value( FILTER_PROPERTY_TARGET_VERSION, $t_version_name ) . '">';
+	echo lang_get( 'view_bugs_link' );
+	echo '<a class="btn btn-xs btn-primary btn-white btn-round" href="roadmap_page.php?version_id=' . $t_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
+	echo '<a class="btn btn-xs btn-primary btn-white btn-round" href="roadmap_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a>';
+	echo '</a>';
+	echo '</div>';
 
-    echo '</div>';
-    echo '<div class="widget-main">';
+	echo '</div>';
+	echo '<div class="widget-main">';
 
 }
 
@@ -159,9 +159,9 @@ function print_version_footer( $p_version_row, $p_issues_resolved, $p_issues_pla
  * @return void
  */
 function print_project_header_roadmap( $p_project_name ) {
-    echo '<div class="page-header">';
-    echo '<h1><strong>' . string_display_line( $p_project_name ), '</strong> - ', lang_get( 'roadmap' ) . '</h1>';
-    echo '</div>';
+	echo '<div class="page-header">';
+	echo '<h1><strong>' . string_display_line( $p_project_name ), '</strong> - ', lang_get( 'roadmap' ) . '</h1>';
+	echo '</div>';
 }
 
 $t_issues_found = false;
@@ -357,16 +357,16 @@ foreach( $t_project_ids as $t_project_id ) {
 			}
 
 			if( !is_blank( $t_description ) ) {
-                echo '<div class="alert alert-warning">', string_display( "$t_description" ), '</div>';
-            }
+				echo '<div class="alert alert-warning">', string_display( "$t_description" ), '</div>';
+			}
 
-            echo '<div class="space-4"></div>';
-            echo '<div class="col-md-7 col-xs-12 no-padding">';
-            echo '<div class="progress progress-striped" data-percent="' . $t_progress . '%" >';
-            echo '<div style="width:' . $t_progress . '%;" class="progress-bar progress-bar-success"></div>';
-            echo '</div></div>';
-            echo '<div class="clearfix"></div>';
-        }
+			echo '<div class="space-4"></div>';
+			echo '<div class="col-md-7 col-xs-12 no-padding">';
+			echo '<div class="progress progress-striped" data-percent="' . $t_progress . '%" >';
+			echo '<div style="width:' . $t_progress . '%;" class="progress-bar progress-bar-success"></div>';
+			echo '</div></div>';
+			echo '<div class="clearfix"></div>';
+		}
 
 		$t_issue_set_ids = array();
 		$t_issue_set_levels = array();
@@ -424,9 +424,9 @@ foreach( $t_project_ids as $t_project_id ) {
 			$t_issues_found = true;
 		}
 
-        if( $t_version_header_printed ) {
-            print_version_footer( $t_version_row,  $t_issues_resolved, $t_issues_planned, $t_progress);
-        }
+		if( $t_version_header_printed ) {
+			print_version_footer( $t_version_row,  $t_issues_resolved, $t_issues_planned, $t_progress);
+		}
 	}
 }
 
@@ -437,8 +437,8 @@ if( !$t_issues_found ) {
 		$t_string = 'roadmap_empty';
 	}
 
-    echo '<br />';
-    echo '<p class="lead">' . lang_get( $t_string ) . '</p>';
+	echo '<br />';
+	echo '<p class="lead">' . lang_get( $t_string ) . '</p>';
 }
 echo '</div>';
 layout_page_end();

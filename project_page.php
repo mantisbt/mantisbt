@@ -54,8 +54,8 @@ $f_project_id	= gpc_get_int( 'project_id' );
 $t_view_issues_url = 'set_project.php?project_id=' . $f_project_id . '&ref=view_all_bug_page.php';
 
 if( $f_project_id == ALL_PROJECTS ) {
-    print_header_redirect( $t_view_issues_url );
-    exit;
+	print_header_redirect( $t_view_issues_url );
+	exit;
 }
 
 # Override the current page to make sure we get the appropriate project-specific configuration
@@ -106,8 +106,8 @@ echo '</p>';
 $t_description = project_get_field( $f_project_id, 'description' );
 
 if( !is_blank( $t_description ) ) {
-    echo '<h2>', lang_get( 'description' ), '</h2>';
-    echo '<p>', string_display( $t_description ), '</p>';
+	echo '<h2>', lang_get( 'description' ), '</h2>';
+	echo '<p>', string_display( $t_description ), '</p>';
 }
 
 $t_access_level_for_dev_team = config_get( 'development_team_threshold' );
@@ -116,20 +116,20 @@ $t_users = project_get_all_user_rows( $f_project_id, $t_access_level_for_dev_tea
 $t_show_real_names = config_get( 'show_realname' ) == ON;
 
 if( count( $t_users ) > 0 ) {
-    echo '<h2>', lang_get( 'development_team' ), '</h2>';
+	echo '<h2>', lang_get( 'development_team' ), '</h2>';
 
-    # @todo sort users in DESC order by access level, then ASC by username/realname.
-    foreach ( $t_users as $t_user_data ) {
-        $t_user_id = $t_user_data['id'];
+	# @todo sort users in DESC order by access level, then ASC by username/realname.
+	foreach ( $t_users as $t_user_data ) {
+		$t_user_id = $t_user_data['id'];
 
-        if( $t_show_real_names && !is_blank( $t_user_data['realname'] ) ) {
-            $t_user_name = $t_user_data['realname'];
-        } else {
-            $t_user_name = $t_user_data['username'];
-        }
+		if( $t_show_real_names && !is_blank( $t_user_data['realname'] ) ) {
+			$t_user_name = $t_user_data['realname'];
+		} else {
+			$t_user_name = $t_user_data['username'];
+		}
 
-        echo $t_user_name, ' (', get_enum_element( 'access_levels', $t_user_data['access_level'] ), ')<br />';
-    }
+		echo $t_user_name, ' (', get_enum_element( 'access_levels', $t_user_data['access_level'] ), ')<br />';
+	}
 }
 
 layout_page_end();

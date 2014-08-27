@@ -53,29 +53,29 @@ $t_redirect_url = 'query_view_page.php';
 $t_delete_url = 'query_delete.php';
 
 if( !filter_db_can_delete_filter( $f_query_id ) ) {
-    print_header_redirect( $t_redirect_url );
+	print_header_redirect( $t_redirect_url );
 }
 
 layout_page_header();
 
 layout_page_begin();
 ?>
-    <br />
-    <div class="center">
-        <strong><?php print string_display( filter_db_get_name( $f_query_id ) ); ?></strong>
-        <?php echo lang_get( 'query_delete_msg' ); ?>
+<br />
+<div class="center">
+<strong><?php print string_display( filter_db_get_name( $f_query_id ) ); ?></strong>
+<?php echo lang_get( 'query_delete_msg' ); ?>
 
-        <form method="post" action="<?php print $t_delete_url; ?>">
-            <?php echo form_security_field( 'query_delete' ) ?>
-            <br /><br />
-            <input type="hidden" name="source_query_id" value="<?php print $f_query_id; ?>"/>
-            <input type="submit" class="button" value="<?php print lang_get( 'delete_query' ); ?>"/>
-        </form>
+<form method="post" action="<?php print $t_delete_url; ?>">
+<?php echo form_security_field( 'query_delete' ) ?>
+<br /><br />
+<input type="hidden" name="source_query_id" value="<?php print $f_query_id; ?>"/>
+<input type="submit" class="button" value="<?php print lang_get( 'delete_query' ); ?>"/>
+</form>
 
-        <form method="post" action="<?php print $t_redirect_url; ?>">
-            <?php # CSRF protection not required here - form does not result in modifications ?>
-            <input type="submit" class="button" value="<?php print lang_get( 'go_back' ); ?>"/>
-        </form>
-    </div>;
+<form method="post" action="<?php print $t_redirect_url; ?>">
+<?php # CSRF protection not required here - form does not result in modifications ?>
+<input type="submit" class="button" value="<?php print lang_get( 'go_back' ); ?>"/>
+</form>
+</div>
 <?php
 layout_page_end();

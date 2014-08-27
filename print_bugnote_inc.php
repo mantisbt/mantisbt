@@ -79,26 +79,26 @@ $t_num_notes = db_num_rows( $t_result );
 ?>
 
 <table class="table table-striped table-bordered table-condensed no-margin">
-    <?php
-    # no bugnotes
-    if( 0 == $t_num_notes ) {
-        ?>
-        <tr>
-            <td colspan="2">
-                <?php echo lang_get( 'no_bugnotes_msg' ) ?>
-            </td>
-        </tr>
-    <?php } else { # print bugnotes ?>
-        <tr>
-            <td class="bold bigger-110" colspan="2">
-                <?php echo lang_get( 'bug_notes_title' ) ?>
-            </td>
-        </tr>
-        <?php
-        for ( $i=0; $i < $t_num_notes; $i++ ) {
-            # prefix all bugnote data with v3_
-            $t_row = db_fetch_array( $t_result );
-            
+	<?php
+		# no bugnotes
+		if( 0 == $t_num_notes ) {
+	?>
+	<tr>
+		<td colspan="2">
+			<?php echo lang_get( 'no_bugnotes_msg' ) ?>
+		</td>
+	</tr>
+	<?php } else { # print bugnotes ?>
+	<tr>
+		<td class="bold bigger-110" colspan="2">
+			<?php echo lang_get( 'bug_notes_title' ) ?>
+		</td>
+	</tr>
+	<?php
+		for ( $i=0; $i < $t_num_notes; $i++ ) {
+			# prefix all bugnote data with v3_
+			$t_row = db_fetch_array( $t_result );
+
 			$t_date_submitted = date( config_get( 'normal_date_format' ), $t_row['date_submitted'] );
 			$t_last_modified = date( config_get( 'normal_date_format' ), $t_row['last_modified'] );
 
@@ -112,35 +112,35 @@ $t_num_notes = db_num_rows( $t_result );
 	?>
 	<tr>
 		<td class="no-padding" width="20%">
-            <div class="small">
-                (<?php echo bugnote_format_id( $t_row['id'] ) ?>)
-                <br/>
-                <?php
-                print_user( $t_row['reporter_id'] );
-                ?>&#160;&#160;&#160;
-                <br/>
-                <?php echo $t_date_submitted ?>&#160;&#160;&#160;
-                <?php if( $t_date_submitted != $t_last_modified ) {
-                    echo '<br />(' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . $t_last_modified . ')';
-                } ?>
+			<div class="small">
+						(<?php echo bugnote_format_id( $t_row['id'] ) ?>)
+               		 	<br/>
+						<?php
+						print_user( $t_row['reporter_id'] );
+						?>&#160;&#160;&#160;
+                		<br/>
+						<?php echo $t_date_submitted ?>&#160;&#160;&#160;
+						<?php if( $t_date_submitted != $t_last_modified ) {
+							echo '<br />(' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . $t_last_modified . ')';
+						} ?>
             </div>
+					</td>
+		<td class="no-padding" width="85%">
+					<?php
+						switch ( $t_row['note_type'] ) {
+							case REMINDER:
+								echo '<div class="italic">' . lang_get( 'reminder_sent_to' ) . ': ';
+								$t_note_attr = utf8_substr( $t_row['note_attr'], 1, utf8_strlen( $t_row['note_attr'] ) - 2 );
+								$t_to = array();
+								foreach ( explode( '|', $t_note_attr ) as $t_recipient ) {
+									$t_to[] = string_display_line( user_get_name( $t_recipient ) );
+								}
+								echo implode( ', ', $t_to ) . '</div><br />';
+							default:
+								echo $t_note;
+						}
+					?>
 		</td>
-        <td class="no-padding" width="85%">
-            <?php
-            switch ( $t_row['note_type'] ) {
-                case REMINDER:
-                    echo '<div class="italic">' . lang_get( 'reminder_sent_to' ) . ': ';
-                    $t_note_attr = utf8_substr( $t_row['note_attr'], 1, utf8_strlen( $t_row['note_attr'] ) - 2 );
-                    $t_to = array();
-                    foreach ( explode( '|', $t_note_attr ) as $t_recipient ) {
-                        $t_to[] = string_display_line( user_get_name( $t_recipient ) );
-                    }
-                    echo implode( ', ', $t_to ) . '</div><br />';
-                default:
-                    echo $t_note;
-            }
-            ?>
-        </td>
 	</tr>
 	<?php
 			} # end for loop

@@ -161,7 +161,6 @@ echo '<div class = "space-10"></div>';
 echo '<div class="center" >';
 echo '  <div class="btn-toolbar inline" >';
 echo '    <div class="btn-group" >';
-
 foreach ( $t_prefix_array as $t_prefix => $t_caption ) {
 	if( $t_prefix === 'UNUSED' ) {
 		$t_title = ' title="[' . $t_unused_user_count . '] (' . lang_get( 'never_logged_in_title' ) . ')"';
@@ -170,14 +169,12 @@ foreach ( $t_prefix_array as $t_prefix => $t_caption ) {
 	} else {
 		$t_title = '';
 	}
-
 	$t_active = $t_prefix == $f_filter ? 'active' : '';
-	print_manage_user_sort_link( 'manage_user_page.php',
-		$t_caption,
-		$c_sort,
-		$c_dir, null, $c_hide_inactive, $t_prefix, $c_show_disabled,
-		'btn btn-xs btn-white btn-primary ' . $t_active
-	);
+		print_manage_user_sort_link( 'manage_user_page.php',
+			$t_caption,
+			$c_sort,
+			$c_dir, null, $c_hide_inactive, $t_prefix, $c_show_disabled,
+			'btn btn-xs btn-white btn-primary ' . $t_active );
 }
 echo '</div>';
 echo '</div>';
@@ -258,135 +255,135 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 
 $t_user_count = count( $t_users );
 ?>
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+<h4 class="widget-title lighter">
+	<i class="ace-icon fa fa-users"></i>
+	<?php echo lang_get('manage_accounts_title') ?>
+	<span class="badge"><?php echo $t_total_user_count ?></span>
+</h4>
+</div>
 
-	<div class="widget-box widget-color-blue2">
-		<div class="widget-header widget-header-small">
-			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-users"></i>
-				<?php echo lang_get('manage_accounts_title') ?>
-				<span class="badge"><?php echo $t_total_user_count ?></span>
-			</h4>
+<div class="widget-body">
+<div class="widget-toolbox padding-8 clearfix">
+	<div id="manage-user-div" class="form-container">
+		<div class="pull-left">
+			<?php print_form_button( 'manage_user_create_page.php', lang_get( 'create_new_account_link' ), null, null, 'btn btn-primary btn-white btn-round' ) ?>
 		</div>
-
-		<div class="widget-body">
-			<div class="widget-toolbox padding-8 clearfix">
-				<div id="manage-user-div" class="form-container">
-					<div class="pull-left">
-						<?php print_form_button( 'manage_user_create_page.php', lang_get( 'create_new_account_link' ), null, null, 'btn btn-primary btn-white btn-round' ) ?>
-					</div>
-					<?php if( $f_filter === 'UNUSED' ) print_form_button( 'manage_user_prune.php', lang_get( 'prune_accounts' ) , null, null, 'btn btn-primary btn-white btn-round' ); ?>
-					<div class="pull-right">
-						<form id="manage-user-filter" method="post" action="manage_user_page.php" class="form-inline">
-							<fieldset>
-								<?php # CSRF protection not required here - form does not result in modifications ?>
-								<input type="hidden" name="sort" value="<?php echo $c_sort ?>" />
-								<input type="hidden" name="dir" value="<?php echo $c_dir ?>" />
-								<input type="hidden" name="save" value="1" />
-								<input type="hidden" name="filter" value="<?php echo $c_filter ?>" />
-								<label class="inline">
-									<input type="checkbox" class="ace" name="hideinactive" value="1" <?php check_checked( (int)$c_hide_inactive, 1 ); ?> />
-									<span class="lbl"> <?php echo lang_get( 'hide_inactive' ) ?></span>
-								</label>
-								<label class="inline">
-									<input type="checkbox" class="ace" name="showdisabled" value="1" <?php check_checked( (int)$c_show_disabled, 1 ); ?> />
-									<span class="lbl"> <?php echo lang_get( 'show_disabled' ) ?></span>
-								</label>
-								<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'filter_button' ) ?>" />
-							</fieldset>
-						</form>
-					</div>
-				</div>
-			</div>
-
-			<div class="widget-main no-padding">
-				<div class="table-responsive">
-					<table class="table table-striped table-bordered table-condensed table-hover">
-						<thead>
-						<tr>
-							<?php
-							# Print column headers with sort links
-							$t_columns = array(
-								'username', 'realname', 'email', 'access_level',
-								'enabled', 'protected', 'date_created', 'last_visit'
-							);
-
-							foreach( $t_columns as $t_col ) {
-								echo "\t<th>";
-								print_manage_user_sort_link( 'manage_user_page.php',
-									lang_get( $t_col ),
-									$t_col,
-									$c_dir, $c_sort, $c_hide_inactive, $c_filter, $c_show_disabled
-								);
-								print_sort_icon( $c_dir, $c_sort, $t_col );
-								echo "</th>\n";
-							}
-							?>
-						</tr>
-						</thead>
-
-						<tbody>
-						<?php
-						$t_date_format = config_get( 'normal_date_format' );
-						$t_access_level = array();
-						for ($i=0;$i<$t_user_count;$i++) {
-							# prefix user data with u_
-							$t_user = $t_users[$i];
-							extract( $t_user, EXTR_PREFIX_ALL, 'u' );
-
-							$u_date_created  = date( $t_date_format, $u_date_created );
-							$u_last_visit    = date( $t_date_format, $u_last_visit );
-
-							if( !isset( $t_access_level[$u_access_level] ) ) {
-								$t_access_level[$u_access_level] = get_enum_element( 'access_levels', $u_access_level );
-							} ?>
-							<tr>
-								<td><?php
-									if( access_has_global_level( $u_access_level ) ) { ?>
-										<a href="manage_user_edit_page.php?user_id=<?php echo $u_id ?>"><?php echo string_display_line( $u_username ) ?></a><?php
-									} else {
-										echo string_display_line( $u_username );
-									} ?>
-								</td>
-								<td><?php echo string_display_line( $u_realname ) ?></td>
-								<td><?php print_email_link( $u_email, $u_email ) ?></td>
-								<td><?php echo $t_access_level[$u_access_level] ?></td>
-								<td class="center"><?php echo trans_bool( $u_enabled ) ?></td>
-								<td class="center"><?php
-									if( $u_protected ) {
-                                        echo ' ' . $t_lock_image;
-									} else {
-										echo '&#160;';
-									} ?>
-								</td>
-								<td><?php echo $u_date_created ?></td>
-								<td><?php echo $u_last_visit ?></td>
-							</tr>
-						<?php
-						}  # end for
-						?>
-						</tbody>
-					</table>
-				</div>
-			</div>
-
-			<div class="widget-toolbox padding-8 clearfix">
-				<div id="manage-user-edit-div" class="form-inline pull-left">
-					<form id="manage-user-edit-form" method="get" action="manage_user_edit_page.php" class="form-inline"
-						<?php # CSRF protection not required here - form does not result in modifications ?>>
-						<label class="inline" for="username"><?php echo lang_get( 'search' ) ?></label>
-						<input id="username" type="text" name="username" class="input-sm" value="" />
-						<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'manage_user' ) ?>" />
-					</form>
-				</div>
-				<div class="btn-toolbar pull-right">
-					<?php
-					# @todo hack - pass in the hide inactive filter via cheating the actual filter value
-					print_page_links( 'manage_user_page.php', 1, $t_page_count, (int)$f_page_number, $c_filter . $t_hide_inactive_filter . $t_show_disabled_filter . "&amp;sort=$c_sort&amp;dir=$c_dir");
-					?>
-				</div>
-			</div>
+		<?php if( $f_filter === 'UNUSED' )
+            print_form_button( 'manage_user_prune.php', lang_get( 'prune_accounts' ) , null, null, 'btn btn-primary btn-white btn-round' );
+        ?>
+		<div class="pull-right">
+	<form id="manage-user-filter" method="post" action="manage_user_page.php" class="form-inline">
+		<fieldset>
+			<?php # CSRF protection not required here - form does not result in modifications ?>
+			<input type="hidden" name="sort" value="<?php echo $c_sort ?>" />
+			<input type="hidden" name="dir" value="<?php echo $c_dir ?>" />
+			<input type="hidden" name="save" value="1" />
+			<input type="hidden" name="filter" value="<?php echo $c_filter ?>" />
+			<label class="inline">
+				<input type="checkbox" class="ace" name="hideinactive" value="1" <?php check_checked( (int)$c_hide_inactive, 1 ); ?> />
+				<span class="lbl"> <?php echo lang_get( 'hide_inactive' ) ?></span>
+			</label>
+			<label class="inline">
+				<input type="checkbox" class="ace" name="showdisabled" value="1" <?php check_checked( (int)$c_show_disabled, 1 ); ?> />
+				<span class="lbl"> <?php echo lang_get( 'show_disabled' ) ?></span>
+			</label>
+			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'filter_button' ) ?>" />
+		</fieldset>
+	</form>
 		</div>
 	</div>
+</div>
+
+<div class="widget-main no-padding">
+	<div class="table-responsive">
+		<table class="table table-striped table-bordered table-condensed table-hover">
+			<thead>
+			<tr>
+<?php
+	# Print column headers with sort links
+	$t_columns = array(
+		'username', 'realname', 'email', 'access_level',
+		'enabled', 'protected', 'date_created', 'last_visit'
+	);
+
+	foreach( $t_columns as $t_col ) {
+		echo "\t<th>";
+		print_manage_user_sort_link( 'manage_user_page.php',
+			lang_get( $t_col ),
+			$t_col,
+			$c_dir, $c_sort, $c_hide_inactive, $c_filter, $c_show_disabled );
+		print_sort_icon( $c_dir, $c_sort, $t_col );
+		echo "</th>\n";
+	}
+?>
+			</tr>
+		</thead>
+
+		<tbody>
+<?php
+	$t_date_format = config_get( 'normal_date_format' );
+	$t_access_level = array();
+	for( $i=0; $i<$t_user_count; $i++ ) {
+		# prefix user data with u_
+		$t_user = $t_users[$i];
+		extract( $t_user, EXTR_PREFIX_ALL, 'u' );
+
+		$u_date_created  = date( $t_date_format, $u_date_created );
+		$u_last_visit    = date( $t_date_format, $u_last_visit );
+
+		if( !isset( $t_access_level[$u_access_level] ) ) {
+			$t_access_level[$u_access_level] = get_enum_element( 'access_levels', $u_access_level );
+		} ?>
+			<tr>
+				<td><?php
+					if( access_has_global_level( $u_access_level ) ) { ?>
+						<a href="manage_user_edit_page.php?user_id=<?php echo $u_id ?>"><?php echo string_display_line( $u_username ) ?></a><?php
+					} else {
+						echo string_display_line( $u_username );
+					} ?>
+				</td>
+				<td><?php echo string_display_line( $u_realname ) ?></td>
+				<td><?php print_email_link( $u_email, $u_email ) ?></td>
+				<td><?php echo $t_access_level[$u_access_level] ?></td>
+				<td class="center"><?php echo trans_bool( $u_enabled ) ?></td>
+				<td class="center"><?php
+					if( $u_protected ) {
+						echo ' ' . $t_lock_image;
+					} else {
+						echo '&#160;';
+					} ?>
+				</td>
+				<td><?php echo $u_date_created ?></td>
+				<td><?php echo $u_last_visit ?></td>
+			</tr>
+<?php
+	}  # end for
+?>
+		</tbody>
+	</table>
+</div>
+</div>
+
+<div class="widget-toolbox padding-8 clearfix">
+	<div id="manage-user-edit-div" class="form-inline pull-left">
+		<form id="manage-user-edit-form" method="get" action="manage_user_edit_page.php" class="form-inline"
+			<?php # CSRF protection not required here - form does not result in modifications ?>>
+			<label class="inline" for="username"><?php echo lang_get( 'search' ) ?></label>
+			<input id="username" type="text" name="username" class="input-sm" value="" />
+			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'manage_user' ) ?>" />
+		</form>
 	</div>
+	<div class="btn-toolbar pull-right">
+		<?php
+		# @todo hack - pass in the hide inactive filter via cheating the actual filter value
+		print_page_links( 'manage_user_page.php', 1, $t_page_count, (int)$f_page_number, $c_filter . $t_hide_inactive_filter . $t_show_disabled_filter . "&amp;sort=$c_sort&amp;dir=$c_dir");
+		?>
+	</div>
+</div>
+</div>
+</div>
+</div>
 <?php
 layout_page_end();

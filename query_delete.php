@@ -54,23 +54,21 @@ $f_query_id = gpc_get_int( 'source_query_id' );
 $t_redirect_url = 'query_view_page.php';
 
 if( !filter_db_can_delete_filter( $f_query_id ) ) {
-    print_header_redirect( $t_redirect_url );
+	print_header_redirect( $t_redirect_url );
 } else {
-    layout_page_header();
-    layout_page_begin();
-    filter_db_delete_filter( $f_query_id );
-    form_security_purge( 'query_delete' );
-    ?>
-
-    <br />
-    <div class="center">
-    <strong><?php print filter_db_get_name( $f_query_id ) . ' ' . lang_get( 'query_deleted' ); ?></strong>
-    <form method="post" action="<?php print $t_redirect_url; ?>">
-        <?php # CSRF protection not required here - form does not result in modifications ?>
-        <input type="submit" class="button" value="<?php print lang_get( 'go_back' ); ?>"/>
-    </form>
-
-    <?php
-    echo '</div>';
-    layout_page_end();
+	layout_page_header();
+	layout_page_begin();
+	filter_db_delete_filter( $f_query_id );
+	form_security_purge( 'query_delete' );
+	?>
+	<br />
+	<div class="center">
+		<strong><?php print filter_db_get_name( $f_query_id ) . ' ' . lang_get( 'query_deleted' ); ?></strong>
+		<form method="post" action="<?php print $t_redirect_url; ?>">
+			<?php # CSRF protection not required here - form does not result in modifications ?>
+			<input type="submit" class="button" value="<?php print lang_get( 'go_back' ); ?>"/>
+		</form>
+	</div>
+	<?php
+	layout_page_end();
 }

@@ -141,9 +141,9 @@ access_ensure_global_level( $f_access_level );
 # check that we are not downgrading the last administrator
 $t_admin_threshold = config_get_global( 'admin_site_threshold' );
 if( user_is_administrator( $f_user_id ) &&
-    $f_access_level < $t_admin_threshold &&
-    user_count_level( $t_admin_threshold ) <= 1 ) {
-    trigger_error( ERROR_USER_CHANGE_LAST_ADMIN, ERROR );
+	 $f_access_level < $t_admin_threshold &&
+	 user_count_level( $t_admin_threshold ) <= 1 ) {
+	trigger_error( ERROR_USER_CHANGE_LAST_ADMIN, ERROR );
 }
 
 # Project specific access rights override global levels, hence, for users who are changed
@@ -198,16 +198,16 @@ if( $f_send_email_notification ) {
 		$t_updated_msg = lang_get( 'email_user_updated_msg' );
 		$t_message = $t_updated_msg . "\n\n" . config_get( 'path' ) . 'account_page.php' . "\n\n" . $t_changes;
 
-        if( null === email_store( $t_email, $t_subject, $t_message ) ) {
-            log_event( LOG_EMAIL, 'Notification was NOT sent to ' . $f_username );
-        } else {
-            log_event( LOG_EMAIL, 'Account update notification sent to ' . $f_username . ' (' . $t_email . ')' );
-            if( config_get( 'email_send_using_cronjob' ) == OFF ) {
-                email_send_all();
-            }
-        }
-    }
-    lang_pop();
+		if( null === email_store( $t_email, $t_subject, $t_message ) ) {
+			log_event( LOG_EMAIL, 'Notification was NOT sent to ' . $f_username );
+		} else {
+			log_event( LOG_EMAIL, 'Account update notification sent to ' . $f_username . ' (' . $t_email . ')' );
+			if( config_get( 'email_send_using_cronjob' ) == OFF ) {
+				email_send_all();
+			}
+		}
+	}
+	lang_pop();
 }
 
 $t_redirect_url = 'manage_user_edit_page.php?user_id=' . $c_user_id;
@@ -219,12 +219,12 @@ layout_page_header( null, $t_result ? $t_redirect_url : null );
 layout_page_begin( 'manage_overview_page.php' );
 
 if( $f_protected && $t_old_protected ) {				# PROTECTED
-    echo '<div class="failure-msg">';
-    echo lang_get( 'manage_user_protected_msg' ) . '<br />';
-    print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
-    echo '</div>';
+	echo '<div class="failure-msg">';
+	echo lang_get( 'manage_user_protected_msg' ) . '<br />';
+	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
+	echo '</div>';
 } else if( $t_result ) {					# SUCCESS
-    html_operation_successful( $t_redirect_url );
+	html_operation_successful( $t_redirect_url );
 }
 
 layout_page_end();

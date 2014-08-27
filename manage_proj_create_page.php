@@ -60,147 +60,143 @@ print_manage_menu( 'manage_proj_page.php' );
 $f_parent_id = gpc_get( 'parent_id', null );
 
 if( project_table_empty() ) {
-    echo '<br />';
-    echo '<div id="create-first-project" class="important-msg">';
-    echo '<ul>';
-    echo '<li>' . lang_get( 'create_first_project' ) . '</li>';
-    echo '</ul>';
-    echo '</div>';
+	echo '<br />';
+	echo '<div id="create-first-project" class="important-msg">';
+	echo '<ul>';
+	echo '<li>' . lang_get( 'create_first_project' ) . '</li>';
+	echo '</ul>';
+	echo '</div>';
 }
 ?>
 
-    <div class="col-md-12 col-xs-12">
-        <div class="space-10"></div>
-        <div id="manage-project-create-div" class="form-container">
-            <form method="post" id="manage-project-create-form" action="manage_proj_create.php">
-                <div class="widget-box widget-color-blue2">
-                    <div class="widget-header widget-header-small">
-                        <h4 class="widget-title lighter">
-                            <i class="ace-icon fa fa-puzzle-piece"></i>
-                            <?php
-                            if( null !== $f_parent_id ) {
-                                echo lang_get( 'add_subproject_title' );
-                            } else {
-                                echo lang_get( 'add_project_title' );
-                            } ?>
-                        </h4>
-                    </div>
+<div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
+	<div id="manage-project-create-div" class="form-container">
+	<form method="post" id="manage-project-create-form" action="manage_proj_create.php">
+		<div class="widget-box widget-color-blue2">
+			<div class="widget-header widget-header-small">
+				<h4 class="widget-title lighter">
+					<i class="ace-icon fa fa-puzzle-piece"></i>
+					<?php
+					if( null !== $f_parent_id ) {
+						echo lang_get( 'add_subproject_title' );
+					} else {
+						echo lang_get( 'add_project_title' );
+					} ?>
+				</h4>
+			</div>
 
-                    <div class="widget-body">
-                        <div class="widget-main no-padding">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-condensed table-striped">
-                                    <fieldset>
-                                        <?php
-                                        echo form_security_field( 'manage_proj_create' );
-                                        if( null !== $f_parent_id ) {
-                                            $f_parent_id = (int) $f_parent_id; ?>
-                                            <input type="hidden" name="parent_id" value="<?php echo $f_parent_id ?>" /><?php
-                                        } ?>
+			<div class="widget-body">
+				<div class="widget-main no-padding">
+					<div class="table-responsive">
+						<table class="table table-bordered table-condensed table-striped">
+							<fieldset>
+			<?php
+			echo form_security_field( 'manage_proj_create' );
+			if( null !== $f_parent_id ) {
+				$f_parent_id = (int) $f_parent_id; ?>
+				<input type="hidden" name="parent_id" value="<?php echo $f_parent_id ?>" /><?php
+			} ?>
 
-                                        <tr>
-                                            <td class="category">
-                                                <span class="required">*</span> <?php echo lang_get( 'project_name' ) ?>
-                                            </td>
-                                            <td>
-                                                <input type="text" id="project-name" name="name" class="input-sm" size="60" maxlength="128" />
-                                            </td>
-                                        </tr>
+			<tr>
+				<td class="category">
+					<span class="required">*</span> <?php echo lang_get( 'project_name' ) ?>
+				</td>
+				<td>
+					<input type="text" id="project-name" name="name" class="input-sm" size="60" maxlength="128" />
+				</td>
+			</tr>
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'status' ) ?>
+				</td>
+				<td>
+					<select id="project-status" name="status" class="input-sm">
+						<?php print_enum_string_option_list( 'project_status' ) ?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'inherit_global' ) ?>
+				</td>
+				<td>
+					<label>
+						<input type="checkbox" class="ace" id="project-inherit-global" name="inherit_global" checked="checked">
+						<span class="lbl"></span>
+					</label>
+				</td>
+			</tr>
+			<?php if( !is_null( $f_parent_id ) ) { ?>
+				<tr>
+					<td class="category">
+						<?php echo lang_get( 'inherit_parent' ) ?>
+					</td>
+					<td>
+						<label>
+							<input type="checkbox" class="ace" id="project-inherit-parent" name="inherit_parent" checked="checked">
+							<span class="lbl"></span>
+						</label>
+					</td>
+				</tr>
+			<?php
+			} ?>
 
-                                        <tr>
-                                            <td class="category">
-                                                <?php echo lang_get( 'status' ) ?>
-                                            </td>
-                                            <td>
-                                                <select id="project-status" name="status" class="input-sm">
-                                                    <?php print_enum_string_option_list( 'project_status' ) ?>
-                                                </select>
-                                            </td>
-                                        </tr>
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'view_status' ) ?>
+				</td>
+				<td>
+					<select id="project-view-state" name="view_state" class="input-sm">
+						<?php print_enum_string_option_list( 'view_state' ) ?>
+					</select>
+				</td>
+			</tr>
 
-                                        <tr>
-                                            <td class="category">
-                                                <?php echo lang_get( 'inherit_global' ) ?>
-                                            </td>
-                                            <td>
-                                                <label>
-                                                    <input type="checkbox" class="ace" id="project-inherit-global" name="inherit_global" checked="checked">
-                                                    <span class="lbl"></span>
-                                                </label>
-                                            </td>
-                                        </tr>
+			<?php
 
-                                        <?php if( !is_null( $f_parent_id ) ) { ?>
-                                            <tr>
-                                                <td class="category">
-                                                    <?php echo lang_get( 'inherit_parent' ) ?>
-                                                </td>
-                                                <td>
-                                                    <label>
-                                                        <input type="checkbox" class="ace" id="project-inherit-parent" name="inherit_parent" checked="checked">
-                                                        <span class="lbl"></span>
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                        <?php
-                                        } ?>
+			$g_project_override = ALL_PROJECTS;
+			if( file_is_uploading_enabled() && DATABASE !== config_get( 'file_upload_method' ) ) {
+				$t_file_path = '';
+				# Don't reveal the absolute path to non-administrators for security reasons
+				if( current_user_is_administrator() ) {
+					$t_file_path = config_get( 'absolute_path_default_upload_folder' );
+				}
+				?>
+				<tr>
+					<td class="category">
+						<?php echo lang_get( 'upload_file_path' ) ?>
+					</td>
+					<td>
+						<input type="text" id="project-file-path" name="file_path" class="input-sm" size="60" maxlength="250" value="<?php echo $t_file_path ?>" />
+					</td>
+				</tr>
+			<?php
+			} ?>
 
-                                        <tr>
-                                            <td class="category">
-                                                <?php echo lang_get( 'view_status' ) ?>
-                                            </td>
-                                            <td>
-                                                <select id="project-view-state" name="view_state" class="input-sm">
-                                                    <?php print_enum_string_option_list( 'view_state' ) ?>
-                                                </select>
-                                            </td>
-                                        </tr>
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'description' ) ?>
+				</td>
+				<td>
+					<textarea class="form-control" id="project-description" name="description" cols="70" rows="5"></textarea>
+				</td>
+			</tr>
 
-                                        <?php
-
-                                        $g_project_override = ALL_PROJECTS;
-                                        if( file_is_uploading_enabled() && DATABASE !== config_get( 'file_upload_method' ) ) {
-                                            $t_file_path = '';
-                                            # Don't reveal the absolute path to non-administrators for security reasons
-                                            if( current_user_is_administrator() ) {
-                                                $t_file_path = config_get( 'absolute_path_default_upload_folder' );
-                                            }
-                                            ?>
-
-                                            <tr>
-                                                <td class="category">
-                                                    <?php echo lang_get( 'upload_file_path' ) ?>
-                                                </td>
-                                                <td>
-                                                    <input type="text" id="project-file-path" name="file_path" class="input-sm" size="60" maxlength="250" value="<?php echo $t_file_path ?>" />
-                                                </td>
-                                            </tr>
-                                        <?php
-                                        } ?>
-
-                                        <tr>
-                                            <td class="category">
-                                                <?php echo lang_get( 'description' ) ?>
-                                            </td>
-                                            <td>
-                                                <textarea class="form-control" id="project-description" name="description" cols="70" rows="5"></textarea>
-                                            </td>
-                                        </tr>
-
-                                        <?php event_signal( 'EVENT_MANAGE_PROJECT_CREATE_FORM' ) ?>
-                                    </fieldset>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="widget-toolbox padding-8 clearfix">
-                        <span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>
-                        <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_project_button' ) ?>" />
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
+			<?php event_signal( 'EVENT_MANAGE_PROJECT_CREATE_FORM' ) ?>
+		</fieldset>
+			</table>
+			</div>
+			</div>
+			</div>
+			<div class="widget-toolbox padding-8 clearfix">
+				<span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>
+				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_project_button' ) ?>" />
+			</div>
+		</div>
+	</div>
+	</form>
+</div>
 
 <?php
 layout_page_end();

@@ -75,68 +75,67 @@ layout_page_header();
 
 layout_page_begin();
 ?>
-    <div class="col-md-12 col-xs-12" xmlns="http://www.w3.org/1999/html">
-        <div class="widget-box widget-color-blue2">
-            <div class="widget-header widget-header-small">
-                <h4 class="widget-title lighter">
-                    <i class="ace-icon fa fa-user"></i>
-                    <?php echo lang_get('view_account_title') ?>
-                </h4>
-            </div>
-            <div class="widget-body">
-                <div class="widget-main no-padding">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-condensed table-striped">
-                            <fieldset>
-                                <tr>
-                                    <th class="category">
-                                        <?php echo lang_get( 'username' ) ?>
-                                    </th>
-                                    <td>
-                                        <?php echo string_display_line( $u_username ) ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="category">
-                                        <?php echo lang_get( 'email' ) ?>
-                                    </th>
-                                    <td>
-                                        <?php
-                                        if( ! ( $t_can_manage || $t_can_see_email ) ) {
-                                            print error_string( ERROR_ACCESS_DENIED );
-                                        } else {
-                                            if( !is_blank( $u_email ) ) {
-                                                print_email_link( $u_email, $u_email );
-                                            } else {
-                                                echo " - ";
-                                            }
-                                        } ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="category">
-                                        <?php echo lang_get( 'realname' ) ?>
-                                    </th>
-                                    <td>
-                                        <?php
-                                        if( ! ( $t_can_manage || $t_can_see_realname ) ) {
-                                            print error_string( ERROR_ACCESS_DENIED );
-                                        } else {
-                                            echo string_display_line( $u_realname );
-                                        } ?>
-                                    </td>
-                                </tr>
-                            </fieldset>
-                        </table>
-                    </div>
-                </div>
-                <div class="widget-toolbox padding-8 clearfix">
-                    <?php if( $t_can_manage ) { ?>
-                        <a class="btn btn-primary btn-white btn-round" href="<?php echo string_html_specialchars( 'manage_user_edit_page.php?user_id=' . $f_user_id ); ?>"><?php echo lang_get( 'manage_user' ); ?></a>
-                    <?php } ?>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="col-md-12 col-xs-12" xmlns="http://www.w3.org/1999/html">
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-user"></i>
+		<?php echo lang_get('view_account_title') ?>
+	</h4>
+</div>
+<div class="widget-body">
+<div class="widget-main no-padding">
+<div class="table-responsive">
+<table class="table table-bordered table-condensed table-striped">
+	<fieldset>
+	<tr>
+		<th class="category">
+			<?php echo lang_get( 'username' ) ?>
+		</th>
+		<td>
+			<?php echo string_display_line( $u_username ) ?>
+		</td>
+	</tr>
+	<tr>
+		<th class="category">
+			<?php echo lang_get( 'email' ) ?>
+		</th>
+		<td>
+			<?php
+				if( ! ( $t_can_manage || $t_can_see_email ) ) {
+					print error_string( ERROR_ACCESS_DENIED );
+				} else {
+					if( !is_blank( $u_email ) ) {
+						print_email_link( $u_email, $u_email );
+					} else {
+						echo " - ";
+					}
+				} ?>
+	</td>
+	</tr>
+	<tr>
+	<th class="category">
+		<?php echo lang_get( 'realname' ) ?>
+		</th>
+		<td><?php
+			if( ! ( $t_can_manage || $t_can_see_realname ) ) {
+				print error_string( ERROR_ACCESS_DENIED );
+			} else {
+				echo string_display_line( $u_realname );
+			} ?>
+		</td>
+	</tr>
+	</fieldset>
+</table>
+	</div>
+	</div>
+	<div class="widget-toolbox padding-8 clearfix">
+	<?php if( $t_can_manage ) { ?>
+			<a class="btn btn-primary btn-white btn-round" href="<?php echo string_html_specialchars( 'manage_user_edit_page.php?user_id=' . $f_user_id ); ?>"><?php echo lang_get( 'manage_user' ); ?></a>
+	<?php } ?>
+	</div>
+</div>
+</div>
+</div>
 <?php
 layout_page_end();

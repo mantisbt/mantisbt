@@ -69,7 +69,7 @@ html_robots_noindex();
 layout_page_header_begin( lang_get( 'my_view_link' ) );
 
 if( current_user_get_pref( 'refresh_delay' ) > 0 ) {
-    html_meta_redirect( 'my_view_page.php', current_user_get_pref( 'refresh_delay' )*60 );
+	html_meta_redirect( 'my_view_page.php', current_user_get_pref( 'refresh_delay' )*60 );
 }
 
 layout_page_header_end();
@@ -89,54 +89,51 @@ reset( $t_boxes );
 
 $t_project_id = helper_get_current_project();
 ?>
-    <div class="col-md-7 col-xs-12">
+<div class="col-md-7 col-xs-12">
 
-        <?php
-        $t_number_of_boxes = count ( $t_boxes );
-        $t_boxes_position = config_get( 'my_view_boxes_fixed_position' );
-        $t_counter = 0;
+<?php
+$t_number_of_boxes = count ( $t_boxes );
+$t_boxes_position = config_get( 'my_view_boxes_fixed_position' );
+$t_counter = 0;
 
-        define( 'MY_VIEW_INC_ALLOW', true );
+define( 'MY_VIEW_INC_ALLOW', true );
 
-        while (list ($t_box_title, $t_box_display) = each ($t_boxes)) {
-            # don't display bugs that are set as 0
-            if ($t_box_display == 0) {
-                $t_number_of_boxes = $t_number_of_boxes - 1;
-            }
+while (list ($t_box_title, $t_box_display) = each ($t_boxes)) {
+		# don't display bugs that are set as 0
+	if ($t_box_display == 0) {
+		$t_number_of_boxes = $t_number_of_boxes - 1;
+	}
+		# don't display "Assigned to Me" bugs to users that bugs can't be assigned to
+	else if(
+		$t_box_title == 'assigned'
+		&&  ( current_user_is_anonymous()
+			|| !access_has_project_level( config_get( 'handle_bug_threshold' ), $t_project_id, $t_current_user_id )
+		)
+	) {
+		$t_number_of_boxes = $t_number_of_boxes - 1;
+	}
+		# don't display "Monitored by Me" bugs to users that can't monitor bugs
+	else if( $t_box_title == 'monitored' && ( current_user_is_anonymous() OR !access_has_project_level( config_get( 'monitor_bug_threshold' ), $t_project_id, $t_current_user_id ) ) ) {
+		$t_number_of_boxes = $t_number_of_boxes - 1;
+	}
+		# don't display "Reported by Me" bugs to users that can't report bugs
+	else if( in_array( $t_box_title, array( 'reported', 'feedback', 'verify' ) ) &&
+		( current_user_is_anonymous() OR !access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $t_current_user_id ) ) ) {
+		$t_number_of_boxes = $t_number_of_boxes - 1;
+			}
 
-            # don't display "Assigned to Me" bugs to users that bugs can't be assigned to
-            else if(
-                $t_box_title == 'assigned'
-                &&  ( current_user_is_anonymous()
-                    || !access_has_project_level( config_get( 'handle_bug_threshold' ), $t_project_id, $t_current_user_id )
-                )
-            ) {
-                $t_number_of_boxes = $t_number_of_boxes - 1;
-            }
+			# display the box
+	else {
+		include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
+		echo '<div class="space-10"></div>';
+	}
+}
+?>
+</div>
 
-            # don't display "Monitored by Me" bugs to users that can't monitor bugs
-            else if( $t_box_title == 'monitored' && ( current_user_is_anonymous() OR !access_has_project_level( config_get( 'monitor_bug_threshold' ), $t_project_id, $t_current_user_id ) ) ) {
-                $t_number_of_boxes = $t_number_of_boxes - 1;
-            }
-
-            # don't display "Reported by Me" bugs to users that can't report bugs
-            else if( in_array( $t_box_title, array( 'reported', 'feedback', 'verify' ) ) &&
-                ( current_user_is_anonymous() OR !access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $t_current_user_id ) ) ) {
-                $t_number_of_boxes = $t_number_of_boxes - 1;
-            }
-
-            # display the box
-            else {
-                include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'my_view_inc.php' );
-                echo '<div class="space-10"></div>';
-            }
-        }
-        ?>
-    </div>
-
-    <div class="col-md-5 col-xs-12">
-        <?php  include( $g_core_path . 'timeline_inc.php' ); ?>
-        <div class="space-10"></div>
-    </div>
+<div class="col-md-5 col-xs-12">
+	<?php  include( $g_core_path . 'timeline_inc.php' ); ?>
+	<div class="space-10"></div>
+</div>
 <?php
 layout_page_end();

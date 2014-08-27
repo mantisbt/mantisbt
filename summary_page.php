@@ -82,30 +82,30 @@ $t_bug_id       = 0;
 $t_largest_diff = 0;
 $t_total_time   = 0;
 while( $t_row = db_fetch_array( $t_result ) ) {
-    $t_bug_count++;
-    $t_date_submitted = $t_row['date_submitted'];
-    $t_id = $t_row['id'];
-    $t_status = $t_row['status'];
-    if( $t_row['hist_update'] !== null ) {
-        $t_last_updated   = $t_row['hist_update'];
-    } else {
-        $t_last_updated   = $t_row['last_updated'];
-    }
+	$t_bug_count++;
+	$t_date_submitted = $t_row['date_submitted'];
+	$t_id = $t_row['id'];
+	$t_status = $t_row['status'];
+	if( $t_row['hist_update'] !== null ) {
+		$t_last_updated   = $t_row['hist_update'];
+	} else {
+		$t_last_updated   = $t_row['last_updated'];
+	}
 
-    if( $t_last_updated < $t_date_submitted ) {
-        $t_last_updated   = 0;
-        $t_date_submitted = 0;
-    }
+	if( $t_last_updated < $t_date_submitted ) {
+		$t_last_updated   = 0;
+		$t_date_submitted = 0;
+	}
 
-    $t_diff = $t_last_updated - $t_date_submitted;
-    $t_total_time = $t_total_time + $t_diff;
-    if( $t_diff > $t_largest_diff ) {
-        $t_largest_diff = $t_diff;
-        $t_bug_id = $t_row['id'];
-    }
+	$t_diff = $t_last_updated - $t_date_submitted;
+	$t_total_time = $t_total_time + $t_diff;
+	if( $t_diff > $t_largest_diff ) {
+		$t_largest_diff = $t_diff;
+		$t_bug_id = $t_row['id'];
+	}
 }
 if( $t_bug_count < 1 ) {
-    $t_bug_count = 1;
+	$t_bug_count = 1;
 }
 $t_average_time 	= $t_total_time / $t_bug_count;
 
@@ -117,9 +117,9 @@ $t_orct_arr = preg_split( '/[\)\/\(]/', lang_get( 'orct' ), -1, PREG_SPLIT_NO_EM
 
 $t_orcttab = '';
 foreach ( $t_orct_arr as $t_orct_s ) {
-    $t_orcttab .= '<td>';
-    $t_orcttab .= $t_orct_s;
-    $t_orcttab .= '</td>';
+	$t_orcttab .= '<td>';
+	$t_orcttab .= $t_orct_s;
+	$t_orcttab .= '</td>';
 }
 
 layout_page_header( lang_get( 'summary_link' ) );
@@ -133,291 +133,291 @@ print_summary_menu( 'summary_page.php' );
 echo '<div class="space-10"></div>';
 print_summary_submenu(); ?>
 
-    <div class="col-md-12 col-xs-12">
-    <div class="space-10"></div>
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
 
-    <div class="widget-box widget-color-blue2">
-    <div class="widget-header widget-header-small">
-        <h4 class="widget-title lighter">
-            <i class="ace-icon fa fa-bar-chart-o"></i>
-            <?php echo lang_get('summary_title') ?>
-        </h4>
-    </div>
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-bar-chart-o"></i>
+		<?php echo lang_get('summary_title') ?>
+	</h4>
+</div>
 
-    <div class="widget-body">
-    <div class="widget-main no-padding">
+<div class="widget-body">
+<div class="widget-main no-padding">
 
 
-    <!-- LEFT COLUMN -->
-    <div class="col-md-6 col-xs-12">
+<!-- LEFT COLUMN -->
+<div class="col-md-6 col-xs-12">
 
-        <?php if( 1 < count( $t_project_ids ) ) { ?>
-            <!-- BY PROJECT -->
-            <div class="space-10"></div>
-            <div class="widget-box table-responsive">
-                <table class="table table-hover table-bordered table-condensed table-striped">
-                    <thead>
-                    <tr>
-                        <th><?php echo lang_get( 'by_project' ) ?></th>
-                        <?php echo $t_orcttab ?>
-                    </tr>
-                    </thead>
-                    <?php summary_print_by_project(); ?>
-                </table>
-            </div>
-        <?php } ?>
+	<?php if( 1 < count( $t_project_ids ) ) { ?>
+	<!-- BY PROJECT -->
+	<div class="space-10"></div>
+	<div class="widget-box table-responsive">
+		<table class="table table-hover table-bordered table-condensed table-striped">
+		<thead>
+			<tr>
+				<th><?php echo lang_get( 'by_project' ) ?></th>
+				<?php echo $t_orcttab ?>
+			</tr>
+		</thead>
+		<?php summary_print_by_project(); ?>
+	</table>
+		</div>
+	<?php } ?>
 
-        <!-- BY STATUS -->
-        <div class="space-10"></div>
-        <div class="widget-box table-responsive">
-            <table class="table table-hover table-bordered table-condensed table-striped">
-                <thead>
-                <tr>
-                    <th><?php echo lang_get( 'by_status' ) ?></th>
-                    <?php echo $t_orcttab ?>
-                </tr>
-                </thead>
-                <?php summary_print_by_enum( 'status' ) ?>
-            </table>
-        </div>
+	<!-- BY STATUS -->
+	<div class="space-10"></div>
+	<div class="widget-box table-responsive">
+		<table class="table table-hover table-bordered table-condensed table-striped">
+		<thead>
+			<tr>
+				<th><?php echo lang_get( 'by_status' ) ?></th>
+				<?php echo $t_orcttab ?>
+			</tr>
+		</thead>
+		<?php summary_print_by_enum( 'status' ) ?>
+	</table>
+	</div>
 
-        <!-- BY SEVERITY -->
-        <div class="space-10"></div>
-        <div class="widget-box table-responsive">
-            <table class="table table-hover table-bordered table-condensed table-striped">
-                <thead>
-                <tr>
-                    <th><?php echo lang_get( 'by_category' ) ?></th>
-                    <?php echo $t_orcttab ?>
-                </tr>
-                </thead>
-                <?php summary_print_by_enum( 'severity' ) ?>
-            </table>
-        </div>
+	<!-- BY SEVERITY -->
+	<div class="space-10"></div>
+	<div class="widget-box table-responsive">
+		<table class="table table-hover table-bordered table-condensed table-striped">
+		<thead>
+			<tr>
+				<th><?php echo lang_get( 'by_category' ) ?></th>
+				<?php echo $t_orcttab ?>
+			</tr>
+		</thead>
+		<?php summary_print_by_enum( 'severity' ) ?>
+	</table>
+	</div>
 
-        <!-- BY CATEGORY -->
-        <div class="space-10"></div>
-        <div class="widget-box table-responsive">
-            <table class="table table-hover table-bordered table-condensed table-striped">
-                <thead>
-                <tr>
-                    <th><?php echo lang_get( 'by_severity' ) ?></th>
-                    <?php echo $t_orcttab ?>
-                </tr>
-                </thead>
-                <?php summary_print_by_category() ?>
-            </table>
-        </div>
+	<!-- BY CATEGORY -->
+	<div class="space-10"></div>
+	<div class="widget-box table-responsive">
+		<table class="table table-hover table-bordered table-condensed table-striped">
+		<thead>
+			<tr>
+				<th><?php echo lang_get( 'by_severity' ) ?></th>
+				<?php echo $t_orcttab ?>
+			</tr>
+		</thead>
+		<?php summary_print_by_category() ?>
+	</table>
+	</div>
 
-        <!-- TIME STATS -->
-        <div class="space-10"></div>
-        <div class="widget-box table-responsive">
-            <table class="table table-hover table-bordered table-condensed table-striped">
-                <thead>
-                <tr>
-                    <th colspan="2"><?php echo lang_get( 'time_stats' ) ?></th>
-                </tr>
-                </thead>
-                <tr>
-                    <td><?php echo lang_get( 'longest_open_bug' ) ?></td>
-                    <td><?php
-                        if( $t_bug_id > 0 ) {
-                            print_bug_link( $t_bug_id );
-                        }
-                        ?></td>
-                </tr>
-                <tr>
-                    <td><?php echo lang_get( 'longest_open' ) ?></td>
-                    <td><?php echo $t_largest_diff ?></td>
-                </tr>
-                <tr>
-                    <td><?php echo lang_get( 'average_time' ) ?></td>
-                    <td><?php echo $t_average_time ?></td>
-                </tr>
-                <tr>
-                    <td><?php echo lang_get( 'total_time' ) ?></td>
-                    <td><?php echo $t_total_time ?></td>
-                </tr>
-            </table>
-        </div>
+	<!-- TIME STATS -->
+	<div class="space-10"></div>
+	<div class="widget-box table-responsive">
+		<table class="table table-hover table-bordered table-condensed table-striped">
+		<thead>
+			<tr>
+				<th colspan="2"><?php echo lang_get( 'time_stats' ) ?></th>
+			</tr>
+		</thead>
+		<tr>
+			<td><?php echo lang_get( 'longest_open_bug' ) ?></td>
+			<td><?php
+				if( $t_bug_id > 0 ) {
+					print_bug_link( $t_bug_id );
+				}
+			?></td>
+		</tr>
+		<tr>
+			<td><?php echo lang_get( 'longest_open' ) ?></td>
+			<td><?php echo $t_largest_diff ?></td>
+		</tr>
+		<tr>
+			<td><?php echo lang_get( 'average_time' ) ?></td>
+			<td><?php echo $t_average_time ?></td>
+		</tr>
+		<tr>
+			<td><?php echo lang_get( 'total_time' ) ?></td>
+			<td><?php echo $t_total_time ?></td>
+		</tr>
+	</table>
+	</div>
 
-        <!-- DEVELOPER STATS -->
-        <div class="space-10"></div>
-        <div class="widget-box table-responsive">
-            <table class="table table-hover table-bordered table-condensed table-striped">
-                <thead>
-                <tr>
-                    <th><?php echo lang_get( 'developer_stats' ) ?></th>
-                    <?php echo $t_orcttab ?>
-                </tr>
-                </thead>
-                <?php summary_print_by_developer() ?>
-            </table>
-        </div>
-    </div>
+	<!-- DEVELOPER STATS -->
+	<div class="space-10"></div>
+	<div class="widget-box table-responsive">
+		<table class="table table-hover table-bordered table-condensed table-striped">
+		<thead>
+			<tr>
+				<th><?php echo lang_get( 'developer_stats' ) ?></th>
+				<?php echo $t_orcttab ?>
+			</tr>
+		</thead>
+		<?php summary_print_by_developer() ?>
+	</table>
+</div>
+</div>
 
-    <!-- RIGHT COLUMN -->
-    <div class="col-md-6 col-xs-12">
+<!-- RIGHT COLUMN -->
+<div class="col-md-6 col-xs-12">
 
-        <!-- DEVELOPER STATS -->
-        <div class="space-10"></div>
-        <div class="widget-box table-responsive">
-            <table class="table table-hover table-bordered table-condensed table-striped">
-                <thead>
-                <tr>
-                    <th><?php echo lang_get( 'by_date' ) ?></th>
-                    <td><?php echo lang_get( 'opened' ); ?></td>
-                    <td><?php echo lang_get( 'resolved' ); ?></td>
-                    <td><?php echo lang_get( 'balance' ); ?></td>
-                </tr>
-                </thead>
-                <?php summary_print_by_date( config_get( 'date_partitions' ) ) ?>
-            </table>
-        </div>
+	<!-- DEVELOPER STATS -->
+	<div class="space-10"></div>
+	<div class="widget-box table-responsive">
+		<table class="table table-hover table-bordered table-condensed table-striped">
+		<thead>
+			<tr>
+				<th><?php echo lang_get( 'by_date' ) ?></th>
+				<td><?php echo lang_get( 'opened' ); ?></td>
+				<td><?php echo lang_get( 'resolved' ); ?></td>
+				<td><?php echo lang_get( 'balance' ); ?></td>
+			</tr>
+		</thead>
+		<?php summary_print_by_date( config_get( 'date_partitions' ) ) ?>
+	</table>
+	</div>
 
-        <!-- MOST ACTIVE -->
-        <div class="space-10"></div>
-        <div class="widget-box table-responsive">
-            <table class="table table-hover table-bordered table-condensed table-striped">
-                <thead>
-                <tr>
-                    <th><?php echo lang_get( 'most_active' ) ?></th>
-                    <td width="14%"><?php echo lang_get( 'score' ); ?></td>
-                </tr>
-                </thead>
-                <?php summary_print_by_activity() ?>
-            </table>
-        </div>
+	<!-- MOST ACTIVE -->
+	<div class="space-10"></div>
+	<div class="widget-box table-responsive">
+		<table class="table table-hover table-bordered table-condensed table-striped">
+		<thead>
+			<tr>
+				<th><?php echo lang_get( 'most_active' ) ?></th>
+				<td width="14%"><?php echo lang_get( 'score' ); ?></td>
+			</tr>
+		</thead>
+		<?php summary_print_by_activity() ?>
+	</table>
+	</div>
 
-        <!-- LONGEST OPEN -->
-        <div class="space-10"></div>
-        <div class="widget-box table-responsive">
-            <table class="table table-hover table-bordered table-condensed table-striped">
-                <thead>
-                <tr>
-                    <th><?php echo lang_get( 'longest_open' ) ?></th>
-                    <td width="14%"><?php echo lang_get( 'days' ); ?></td>
-                </tr>
-                </thead>
-                <?php summary_print_by_age() ?>
-            </table>
-        </div>
+	<!-- LONGEST OPEN -->
+	<div class="space-10"></div>
+	<div class="widget-box table-responsive">
+		<table class="table table-hover table-bordered table-condensed table-striped">
+		<thead>
+			<tr>
+				<th><?php echo lang_get( 'longest_open' ) ?></th>
+				<td width="14%"><?php echo lang_get( 'days' ); ?></td>
+			</tr>
+		</thead>
+		<?php summary_print_by_age() ?>
+	</table>
+	</div>
 
-        <!-- BY RESOLUTION -->
-        <div class="space-10"></div>
-        <div class="widget-box table-responsive">
-            <table class="table table-hover table-bordered table-condensed table-striped">
-                <thead>
-                <tr>
-                    <th><?php echo lang_get( 'by_resolution' ) ?></th>
-                    <?php echo $t_orcttab ?>
-                </tr>
-                </thead>
-                <?php summary_print_by_enum( 'resolution' ) ?>
-            </table>
-        </div>
+	<!-- BY RESOLUTION -->
+	<div class="space-10"></div>
+	<div class="widget-box table-responsive">
+		<table class="table table-hover table-bordered table-condensed table-striped">
+		<thead>
+			<tr>
+				<th><?php echo lang_get( 'by_resolution' ) ?></th>
+				<?php echo $t_orcttab ?>
+			</tr>
+		</thead>
+		<?php summary_print_by_enum( 'resolution' ) ?>
+	</table>
+	</div>
 
-        <!-- BY PRIORITY -->
-        <div class="space-10"></div>
-        <div class="widget-box table-responsive">
-            <table class="table table-hover table-bordered table-condensed table-striped">
-                <thead>
-                <tr>
-                    <th><?php echo lang_get( 'by_priority' ) ?></th>
-                    <?php echo $t_orcttab ?>
-                </tr>
-                </thead>
-                <?php summary_print_by_enum( 'priority' ) ?>
-            </table>
-        </div>
+	<!-- BY PRIORITY -->
+	<div class="space-10"></div>
+	<div class="widget-box table-responsive">
+		<table class="table table-hover table-bordered table-condensed table-striped">
+		<thead>
+			<tr>
+				<th><?php echo lang_get( 'by_priority' ) ?></th>
+				<?php echo $t_orcttab ?>
+			</tr>
+		</thead>
+		<?php summary_print_by_enum( 'priority' ) ?>
+	</table>
+	</div>
 
-        <!-- REPORTER STATS -->
-        <div class="space-10"></div>
-        <div class="widget-box table-responsive">
-            <table class="table table-hover table-bordered table-condensed table-striped">
-                <thead>
-                <tr>
-                    <th><?php echo lang_get( 'reporter_stats' ) ?></th>
-                    <?php echo $t_orcttab ?>
-                </tr>
-                </thead>
-                <?php summary_print_by_reporter() ?>
-            </table>
-        </div>
+	<!-- REPORTER STATS -->
+	<div class="space-10"></div>
+	<div class="widget-box table-responsive">
+		<table class="table table-hover table-bordered table-condensed table-striped">
+		<thead>
+			<tr>
+				<th><?php echo lang_get( 'reporter_stats' ) ?></th>
+				<?php echo $t_orcttab ?>
+			</tr>
+		</thead>
+		<?php summary_print_by_reporter() ?>
+	</table>
+	</div>
 
-        <!-- REPORTER EFFECTIVENESS -->
-        <div class="space-10"></div>
-        <div class="widget-box table-responsive">
-            <table class="table table-hover table-bordered table-condensed table-striped">
-                <thead>
-                <tr>
-                    <th><?php echo lang_get( 'reporter_effectiveness' ) ?></th>
-                    <td><?php echo lang_get( 'severity' ); ?></td>
-                    <td><?php echo lang_get( 'errors' ); ?></td>
-                    <td><?php echo lang_get( 'total' ); ?></td>
-                </tr>
-                </thead>
-                <?php summary_print_reporter_effectiveness( config_get( 'severity_enum_string' ), config_get( 'resolution_enum_string' ) ) ?>
-            </table>
-        </div>
+	<!-- REPORTER EFFECTIVENESS -->
+	<div class="space-10"></div>
+	<div class="widget-box table-responsive">
+		<table class="table table-hover table-bordered table-condensed table-striped">
+		<thead>
+			<tr>
+				<th><?php echo lang_get( 'reporter_effectiveness' ) ?></th>
+				<td><?php echo lang_get( 'severity' ); ?></td>
+				<td><?php echo lang_get( 'errors' ); ?></td>
+				<td><?php echo lang_get( 'total' ); ?></td>
+			</tr>
+		</thead>
+		<?php summary_print_reporter_effectiveness( config_get( 'severity_enum_string' ), config_get( 'resolution_enum_string' ) ) ?>
+	</table>
+	</div>
 
-    </div>
+</div>
 
-    <!-- BOTTOM -->
-    <div class="col-md-12 col-xs-12">
+<!-- BOTTOM -->
+<div class="col-md-12 col-xs-12">
 
-        <!-- REPORTER BY RESOLUTION -->
-        <div class="space-10"></div>
-        <div class="widget-box table-responsive">
-            <table class="table table-hover table-bordered table-condensed table-striped">
-                <thead>
-                <tr>
-                    <th><?php echo lang_get( 'reporter_by_resolution' ) ?></th>
-                    <?php
-                    $t_resolutions = MantisEnum::getValues( config_get( 'resolution_enum_string' ) );
+	<!-- REPORTER BY RESOLUTION -->
+	<div class="space-10"></div>
+	<div class="widget-box table-responsive">
+		<table class="table table-hover table-bordered table-condensed table-striped">
+		<thead>
+			<tr>
+				<th><?php echo lang_get( 'reporter_by_resolution' ) ?></th>
+				<?php
+					$t_resolutions = MantisEnum::getValues( config_get( 'resolution_enum_string' ) );
 
-                    foreach ( $t_resolutions as $t_resolution ) {
-                        echo '<td>', get_enum_element( 'resolution', $t_resolution ), "</td>\n";
-                    }
+					foreach ( $t_resolutions as $t_resolution ) {
+						echo '<td>', get_enum_element( 'resolution', $t_resolution ), "</td>\n";
+					}
 
-                    echo '<td>', lang_get( 'percentage_errors' ), "</td>\n";
-                    ?>
-                </tr>
-                </thead>
-                <?php summary_print_reporter_resolution( config_get( 'resolution_enum_string' ) ) ?>
-            </table>
-        </div>
+					echo '<td>', lang_get( 'percentage_errors' ), "</td>\n";
+				?>
+			</tr>
+		</thead>
+		<?php summary_print_reporter_resolution( config_get( 'resolution_enum_string' ) ) ?>
+	</table>
+	</div>
 
-        <!-- DEVELOPER BY RESOLUTION -->
-        <div class="space-10"></div>
-        <div class="widget-box table-responsive">
-            <table class="table table-hover table-bordered table-condensed table-striped">
-                <thead>
-                <tr>
-                    <th><?php echo lang_get( 'developer_by_resolution' ) ?></th>
-                    <?php
-                    $t_resolutions = MantisEnum::getValues( config_get( 'resolution_enum_string' ) );
+	<!-- DEVELOPER BY RESOLUTION -->
+	<div class="space-10"></div>
+	<div class="widget-box table-responsive">
+		<table class="table table-hover table-bordered table-condensed table-striped">
+		<thead>
+			<tr>
+				<th><?php echo lang_get( 'developer_by_resolution' ) ?></th>
+				<?php
+					$t_resolutions = MantisEnum::getValues( config_get( 'resolution_enum_string' ) );
 
-                    foreach ( $t_resolutions as $t_resolution ) {
-                        echo '<td>', get_enum_element( 'resolution', $t_resolution ), "</td>\n";
-                    }
+					foreach ( $t_resolutions as $t_resolution ) {
+						echo '<td>', get_enum_element( 'resolution', $t_resolution ), "</td>\n";
+					}
 
-                    echo '<td>', lang_get( 'percentage_fixed' ), "</td>\n";
-                    ?>
-                </tr>
-                </thead>
-                <?php summary_print_developer_resolution( config_get( 'resolution_enum_string' ) ) ?>
-            </table>
-        </div>
+					echo '<td>', lang_get( 'percentage_fixed' ), "</td>\n";
+				?>
+			</tr>
+		</thead>
+		<?php summary_print_developer_resolution( config_get( 'resolution_enum_string' ) ) ?>
+	</table>
+	</div>
 
-    </div>
+</div>
 
-    </div>
-    </div>
-    <div class="clearfix"></div>
-    <div class="space-10"></div>
-    </div>
-    </div>
+</div>
+</div>
+<div class="clearfix"></div>
+<div class="space-10"></div>
+</div>
+</div>
 
 <?php
 layout_page_end();

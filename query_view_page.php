@@ -64,70 +64,67 @@ layout_page_begin();
 
 $t_rss_enabled = config_get( 'rss_enabled' );
 ?>
-    <div class="col-md-12 col-xs-12">
-        <div class="widget-box widget-color-blue2">
-            <div class="widget-header widget-header-small">
-                <h4 class="widget-title lighter">
-                    <i class="ace-icon fa fa-filter"></i>
-                    <?php echo lang_get( 'open_queries' ) ?>
-                </h4>
-            </div>
+<div class="col-md-12 col-xs-12">
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+<h4 class="widget-title lighter">
+<i class="ace-icon fa fa-filter"></i>
+<?php echo lang_get( 'open_queries' ) ?>
+</h4>
+</div>
 
-            <div class="widget-body">
-                <div class="widget-main no-padding">
+<div class="widget-body">
+<div class="widget-main no-padding">
 
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-condensed table-striped">
+<div class="table-responsive">
+<table class="table table-bordered table-condensed table-striped">
+<?php
+$t_column_count = 0;
+$t_max_column_count = 2;
 
-                            <?php
-                            $t_column_count = 0;
-                            $t_max_column_count = 2;
+foreach( $t_query_arr as $t_id => $t_name ) {
+	if( $t_column_count == 0 ) {
+		print '<tr>';
+	}
 
-                            foreach( $t_query_arr as $t_id => $t_name ) {
-                                if( $t_column_count == 0 ) {
-                                    print '<tr>';
-                                }
+	print '<td>';
 
-                                print '<td>';
+	if( OFF != $t_rss_enabled ) {
+		# Use the "new" RSS link style.
+		print_rss( rss_get_issues_feed_url( null, null, $t_id ), lang_get( 'rss' ) );
+		echo ' ';
+	}
 
-                                if( OFF != $t_rss_enabled ) {
-                                    # Use the "new" RSS link style.
-                                    print_rss( rss_get_issues_feed_url( null, null, $t_id ), lang_get( 'rss' ) );
-                                    echo ' ';
-                                }
+	$t_query_id = (int)$t_id;
+	print_link( "view_all_set.php?type=3&source_query_id=$t_query_id", $t_name );
 
+	if( filter_db_can_delete_filter( $t_id ) ) {
+		echo ' ';
+		print_form_button( "query_delete_page.php?source_query_id=$t_query_id", lang_get( 'delete_query' ) );
+	}
 
-                                $t_query_id = (int)$t_id;
-                                print_link( "view_all_set.php?type=3&source_query_id=$t_query_id", $t_name );
+	print '</td>';
 
-                                if( filter_db_can_delete_filter( $t_id ) ) {
-                                    echo ' ';
-                                    print_form_button( "query_delete_page.php?source_query_id=$t_query_id", lang_get( 'delete_query' ) );
-                                }
+	$t_column_count++;
+	if( $t_column_count == $t_max_column_count ) {
+		print '</tr>';
+		$t_column_count = 0;
+	}
+}
 
-                                print '</td>';
-
-                                $t_column_count++;
-                                if( $t_column_count == $t_max_column_count ) {
-                                    print '</tr>';
-                                    $t_column_count = 0;
-                                }
-                            }
-
-                            # Tidy up this row
-                            if( ( $t_column_count > 0 ) && ( $t_column_count < $t_max_column_count ) ) {
-                                for ( $i = $t_column_count; $i < $t_max_column_count; $i++ ) {
-                                    print '<td>&#160;</td>';
-                                }
-                                print '</tr>';
-                            }
-                            ?>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+# Tidy up this row
+if( ( $t_column_count > 0 ) && ( $t_column_count < $t_max_column_count ) ) {
+	for ( $i = $t_column_count; $i < $t_max_column_count; $i++ ) {
+		print '<td>&#160;</td>';
+	}
+	print '</tr>';
+}
+?>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
 <?php
 layout_page_end();

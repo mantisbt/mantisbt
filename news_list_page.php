@@ -54,54 +54,54 @@ layout_page_header();
 layout_page_begin( 'main_page.php' );
 ?>
 
-    <div class="col-md-12 col-xs-12">
-        <div class="widget-box widget-color-blue2">
-            <div class="widget-header widget-header-small">
-                <h4 class="widget-title lighter">
-                    <i class="ace-icon fa fa-archive"></i>
-                    <?php echo lang_get( 'archives' ) ?>
-                </h4>
-            </div>
+<div class="col-md-12 col-xs-12">
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-archive"></i>
+		<?php echo lang_get( 'archives' ) ?>
+	</h4>
+</div>
 
-            <div class="widget-body">
-                <div class="widget-main">
+<div class="widget-body">
+	<div class="widget-main">
 
-                    <?php
-                    # Select the news posts
-                    $t_rows = news_get_rows( helper_get_current_project() );
-                    $t_count = count( $t_rows );
+<?php
+# Select the news posts
+$t_rows = news_get_rows( helper_get_current_project() );
+$t_count = count( $t_rows );
 
-                    if( $t_count > 0 ) { ?>
-                        <?php
-                        # Loop through results
-                        for( $i=0; $i < $t_count; $i++ ) {
-                            extract( $t_rows[$i], EXTR_PREFIX_ALL, 'v' );
-                            if( VS_PRIVATE == $v_view_state && !access_has_project_level( config_get( 'private_news_threshold' ), $v_project_id ) ) {
-                                continue;
-                            }
+if( $t_count > 0 ) { ?>
+	<?php
+	# Loop through results
+	for( $i=0; $i < $t_count; $i++ ) {
+		extract( $t_rows[$i], EXTR_PREFIX_ALL, 'v' );
+		if( VS_PRIVATE == $v_view_state && !access_has_project_level( config_get( 'private_news_threshold' ), $v_project_id ) ) {
+			continue;
+		}
 
-                            $v_headline 	= string_display( $v_headline );
-                            $v_date_posted 	= date( config_get( 'complete_date_format' ), $v_date_posted ); ?>
-                            <p>
-                            <i class="fa fa-clock-o"></i> <span class="small"> <?php echo $v_date_posted; ?> </span>
-                            <a href="news_view_page.php?news_id=<?php echo $v_id; ?>"><?php echo $v_headline; ?></a>
-                            &#160;&#160;&#160;&#160;
-                            <i class="fa fa-edit"></i> <?php echo prepare_user_name( $v_poster_id ); ?><?php
-                            if( 1 == $v_announcement ) { ?>
-                                <?php echo lang_get( 'announcement' ); ?><?php
-                            }
-                            if( VS_PRIVATE == $v_view_state ) { ?>
-                                <div class="label label-info"><?php echo lang_get( 'private' ); ?></div><?php
-                            } ?>
-                            </p><?php
-                        }  	# end for loop ?>
-                    <?php
-                    }
-                    ?>
-                </div>
-            </div>
-        </div>
-    </div>
+		$v_headline 	= string_display( $v_headline );
+		$v_date_posted 	= date( config_get( 'complete_date_format' ), $v_date_posted ); ?>
+		<p>
+			<i class="fa fa-clock-o"></i> <span class="small"> <?php echo $v_date_posted; ?> </span>
+			<a href="news_view_page.php?news_id=<?php echo $v_id; ?>"><?php echo $v_headline; ?></a>
+			&#160;&#160;&#160;&#160;
+			<i class="fa fa-edit"></i> <?php echo prepare_user_name( $v_poster_id ); ?><?php
+			if( 1 == $v_announcement ) { ?>
+				<?php echo lang_get( 'announcement' ); ?><?php
+			}
+			if( VS_PRIVATE == $v_view_state ) { ?>
+				<div class="label label-info"><?php echo lang_get( 'private' ); ?></div><?php
+			} ?>
+		</p><?php
+	}  	# end for loop ?>
+<?php
+}
+?>
+	</div>
+</div>
+</div>
+</div>
 
 <?php
 layout_page_end();

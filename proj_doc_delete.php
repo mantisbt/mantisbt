@@ -53,7 +53,7 @@ form_security_validate( 'proj_doc_delete' );
 
 # Check if project documentation feature is enabled.
 if( OFF == config_get( 'enable_project_documentation' ) ) {
-    access_denied();
+	access_denied();
 }
 
 $f_file_id = gpc_get_int( 'file_id' );
@@ -69,8 +69,8 @@ $t_title = db_result( $t_result );
 
 # Confirm with the user
 helper_ensure_confirmed( lang_get( 'confirm_file_delete_msg' ) .
-    '<br/>' . lang_get( 'filename_label' ) . lang_get( 'word_separator' ) . string_display( $t_title ),
-    lang_get( 'file_delete_button' ) );
+	'<br/>' . lang_get( 'filename_label' ) . lang_get( 'word_separator' ) . string_display( $t_title ),
+	lang_get( 'file_delete_button' ) );
 
 file_delete( $f_file_id, 'project' );
 

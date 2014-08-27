@@ -98,21 +98,21 @@ if( 0 < $f_tag_select && tag_exists( $f_tag_select ) ) {
 if( count( $t_tags_failed ) > 0 ) {
     layout_page_header( lang_get( 'tag_attach_long' ) . ' ' . bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
     layout_page_begin();
-    ?>
-    <br/>
-    <table class="width75">
-        <tr>
-            <td colspan="2"><?php echo lang_get( 'tag_attach_failed' ) ?></td>
-        </tr>
-        <tr class="spacer"><td colspan="2"></td></tr>
-        <?php
-        $t_tag_string = '';
-        foreach( $t_tags_attach as $t_tag_row ) {
-            if( !is_blank( $t_tag_string ) ) {
-                $t_tag_string .= config_get( 'tag_separator' );
-            }
-            $t_tag_string .= $t_tag_row['name'];
-        }
+?>
+<br/>
+<table class="width75">
+	<tr>
+	<td colspan="2"><?php echo lang_get( 'tag_attach_failed' ) ?></td>
+	</tr>
+	<tr class="spacer"><td colspan="2"></td></tr>
+<?php
+	$t_tag_string = '';
+	foreach( $t_tags_attach as $t_tag_row ) {
+		if( !is_blank( $t_tag_string ) ) {
+			$t_tag_string .= config_get( 'tag_separator' );
+		}
+		$t_tag_string .= $t_tag_row['name'];
+	}
 
 	foreach( $t_tags_failed as $t_tag_row ) {
 		echo '<tr>';
