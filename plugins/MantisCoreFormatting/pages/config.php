@@ -33,98 +33,84 @@ print_manage_menu( 'manage_plugin_page.php' );
 
 ?>
 
-    <div class="col-md-12 col-xs-12">
-        <div class="space-10"></div>
-        <div class="form-container" >
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
+<div class="form-container" >
 
-            <form action="<?php echo plugin_page( 'config_edit' )?>" method="post">
-                <?php echo form_security_field( 'plugin_format_config_edit' ) ?>
+<form action="<?php echo plugin_page( 'config_edit' )?>" method="post">
+<?php echo form_security_field( 'plugin_format_config_edit' ) ?>
 
-                <div class="widget-box widget-color-blue2">
-                    <div class="widget-header widget-header-small">
-                        <h4 class="widget-title lighter">
-                            <i class="ace-icon fa fa-text-width"></i>
-                            <?php echo lang_get( 'plugin_format_title' ) . ': ' . lang_get( 'plugin_format_config' )?>
-                        </h4>
-                    </div>
-                    <div class="widget-body">
-                        <div class="widget-main no-padding">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-condensed table-striped">
-                                    <tr>
-                                        <th class="category width-40">
-                                            <?php echo lang_get( 'plugin_format_process_text' )?>
-                                            <br /><span class="small"><?php echo lang_get( 'plugin_format_process_text_warning_notice' )?></span>
-                                        </th>
-                                        <td class="center" width="20%">
-                                            <label>
-                                                <input type="radio" class="ace" name="process_text" value="1" <?php echo( ON == plugin_config_get( 'process_text' ) ) ? 'checked="checked" ' : ''?>/>
-                                                <span class="lbl"> <?php echo lang_get( 'plugin_format_enabled' )?> </span>
-                                            </label>
-                                        </td>
-                                        <td class="center" width="20%">
-                                            <label>
-                                                <input type="radio" class="ace" name="process_text" value="0" <?php echo( OFF == plugin_config_get( 'process_text' ) ) ? 'checked="checked" ' : ''?>/>
-                                                <span class="lbl"> <?php echo lang_get( 'plugin_format_disabled' )?> </span>
-                                            </label>
-                                        </td>
-                                    </tr>
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-text-width"></i>
+		<?php echo lang_get( 'plugin_format_title' ) . ': ' . lang_get( 'plugin_format_config' )?>
+	</h4>
+</div>
+<div class="widget-body">
+<div class="widget-main no-padding">
+<div class="table-responsive">
+<table class="table table-bordered table-condensed table-striped">
+<tr>
+	<th class="category width-40">
+		<?php echo lang_get( 'plugin_format_process_text' )?>
+		<br /><span class="small"><?php echo lang_get( 'plugin_format_process_text_warning_notice' )?></span>
+	</th>
+	<td class="center" width="20%">
+		<label><input type="radio" class="ace" name="process_text" value="1" <?php echo( ON == plugin_config_get( 'process_text' ) ) ? 'checked="checked" ' : ''?>/>
+			<span class="lbl"> <?php echo lang_get( 'plugin_format_enabled' )?> </span></label>
+	</td>
+	<td class="center" width="20%">
+		<label><input type="radio" class="ace" name="process_text" value="0" <?php echo( OFF == plugin_config_get( 'process_text' ) ) ? 'checked="checked" ' : ''?>/>
+			<span class="lbl"> <?php echo lang_get( 'plugin_format_disabled' )?> </span></label>
+	</td>
+</tr>
 
-                                    <tr>
-                                        <th class="category width-40">
-                                            <?php echo lang_get( 'plugin_format_process_urls' )?>
-                                        </th>
-                                        <td class="center">
-                                            <label>
-                                                <input type="radio" class="ace" name="process_urls" value="1" <?php echo( ON == plugin_config_get( 'process_urls' ) ) ? 'checked="checked" ' : ''?>/>
-                                                <span class="lbl"> <?php echo lang_get( 'plugin_format_enabled' )?> </span>
-                                            </label>
-                                        </td>
-                                        <td class="center">
-                                            <label>
-                                                <input type="radio" class="ace" name="process_urls" value="0" <?php echo( OFF == plugin_config_get( 'process_urls' ) ) ? 'checked="checked" ' : ''?>/>
-                                                <span class="lbl"> <?php echo lang_get( 'plugin_format_disabled' )?> </span>
-                                            </label>
-                                        </td>
-                                    </tr>
+<tr>
+	<th class="category width-40">
+		<?php echo lang_get( 'plugin_format_process_urls' )?>
+	</th>
+	<td class="center">
+		<label><input type="radio" class="ace" name="process_urls" value="1" <?php echo( ON == plugin_config_get( 'process_urls' ) ) ? 'checked="checked" ' : ''?>/>
+			<span class="lbl"> <?php echo lang_get( 'plugin_format_enabled' )?> </span></label>
+	</td>
+	<td class="center">
+		<label><input type="radio" class="ace" name="process_urls" value="0" <?php echo( OFF == plugin_config_get( 'process_urls' ) ) ? 'checked="checked" ' : ''?>/>
+			<span class="lbl"> <?php echo lang_get( 'plugin_format_disabled' )?> </span></label>
+	</td>
+</tr>
 
-                                    <tr>
-                                        <th class="category width-40">
-                                            <?php echo lang_get( 'plugin_format_process_buglinks' )?>
-                                            <br />
-                                        <span class="small"><?php
-                                            printf(
-                                                lang_get( 'plugin_format_process_buglinks_info' ),
-                                                config_get( 'bug_link_tag' ),
-                                                config_get( 'bugnote_link_tag' )
-                                            );
-                                            ?>
-                                        </span>
-                                        </th>
-                                        <td class="center">
-                                            <label>
-                                                <input type="radio" class="ace" name="process_buglinks" value="1" <?php echo( ON == plugin_config_get( 'process_buglinks' ) ) ? 'checked="checked" ' : ''?>/>
-                                                <span class="lbl"> <?php echo lang_get( 'plugin_format_enabled' )?> </span>
-                                            </label>
-                                        </td>
-                                        <td class="center">
-                                            <label>
-                                                <input type="radio" class="ace" name="process_buglinks" value="0" <?php echo( OFF == plugin_config_get( 'process_buglinks' ) ) ? 'checked="checked" ' : ''?>/>
-                                                <span class="lbl"> <?php echo lang_get( 'plugin_format_disabled' )?> </span>
-                                            </label>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="widget-toolbox padding-8 clearfix">
-                            <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'change_configuration' )?>" />
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+<tr>
+	<th class="category width-40">
+		<?php echo lang_get( 'plugin_format_process_buglinks' )?>
+		<br />
+		<span class="small"><?php
+			printf( lang_get( 'plugin_format_process_buglinks_info' ),
+				config_get( 'bug_link_tag' ), config_get( 'bugnote_link_tag' ) );
+		?>
+		</span>
+	</th>
+	<td class="center">
+		<label><input type="radio" class="ace" name="process_buglinks" value="1" <?php echo( ON == plugin_config_get( 'process_buglinks' ) ) ? 'checked="checked" ' : ''?>/>
+			<span class="lbl"> <?php echo lang_get( 'plugin_format_enabled' )?> </span></label>
+	</td>
+	<td class="center">
+		<label><input type="radio" class="ace" name="process_buglinks" value="0" <?php echo( OFF == plugin_config_get( 'process_buglinks' ) ) ? 'checked="checked" ' : ''?>/>
+			<span class="lbl"> <?php echo lang_get( 'plugin_format_disabled' )?> </span></label>
+	</td>
+</tr>
+
+</table>
+</div>
+</div>
+	<div class="widget-toolbox padding-8 clearfix">
+		<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'change_configuration' )?>" />
+	</div>
+</div>
+</div>
+</form>
+</div>
+</div>
 
 <?php
 layout_page_end();

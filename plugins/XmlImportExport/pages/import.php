@@ -45,105 +45,105 @@ if( ALL_PROJECTS == $t_project_id ) {
 
 ?>
 
-    <div class="col-md-12 col-xs-12">
-        <div class="space-10"></div>
-        <div class="form-container" >
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
+<div class="form-container" >
 
-            <form name="file_upload" method="post" enctype="multipart/form-data" action="<?php echo plugin_page( 'import_action' )?>">
-                <?php echo form_security_field( 'plugin_xml_import_action' ) ?>
+<form name="file_upload" method="post" enctype="multipart/form-data" action="<?php echo plugin_page( 'import_action' )?>">
+<?php echo form_security_field( 'plugin_xml_import_action' ) ?>
 
-                <input type="hidden" name="project_id" value="<?php echo $t_project_id;?>" />
+<input type="hidden" name="project_id" value="<?php echo $t_project_id;?>" />
 
-                <div class="widget-box widget-color-blue2">
-                    <div class="widget-header widget-header-small">
-                        <h4 class="widget-title lighter">
-                            <i class="ace-icon fa fa-upload"></i>
-                            <?php
-                            printf(
-                                plugin_lang_get( 'importing_in_project' ),
-                                string_display( project_get_field( $t_project_id, 'name' ) )
-                            );
-                            ?>
-                        </h4>
-                    </div>
-                    <div class="widget-body">
-                        <div class="widget-main no-padding">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-condensed table-striped">
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+<h4 class="widget-title lighter">
+<i class="ace-icon fa fa-upload"></i>
+<?php
+	printf(
+		plugin_lang_get( 'importing_in_project' ),
+		string_display( project_get_field( $t_project_id, 'name' ) )
+	);
+?>
+</h4>
+</div>
+<div class="widget-body">
+<div class="widget-main no-padding">
+	<div class="table-responsive">
+<table class="table table-bordered table-condensed table-striped">
 
-                                    <tr>
-                                        <th class="category" width="25%">
-                                            <?php echo lang_get( 'select_file' )?><br />
-                                            <?php echo '<span class="small">(' . lang_get( 'max_file_size_label' ) . ' ' . number_format( $t_max_file_size / 1000 ) . 'k)</span>'?>
-                                        </th>
-                                        <td width="85%">
-                                            <input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size?>" />
-                                            <input type="hidden" name="step" value="1" />
-                                            <input name="file" type="file" size="40" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="bold" colspan="2">
-                                            <?php
-                                            echo plugin_lang_get( 'import_options' );
-                                            ?>
-                                        </td>
-                                    </tr>
+<tr>
+	<th class="category" width="25%">
+		<?php echo lang_get( 'select_file' )?><br />
+		<?php echo '<span class="small">(' . lang_get( 'max_file_size_label' ) . ' ' . number_format( $t_max_file_size / 1000 ) . 'k)</span>'?>
+	</th>
+	<td width="85%">
+		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size?>" />
+		<input type="hidden" name="step" value="1" />
+		<input name="file" type="file" size="40" />
+	</td>
+</tr>
+<tr>
+	<td class="bold" colspan="2">
+<?php
+	echo plugin_lang_get( 'import_options' );
+?>
+	</td>
+</tr>
 
-                                    <tr>
-                                        <th class="category" width="25%">
-                                            <?php echo plugin_lang_get( 'cross_references' );?>
-                                        </th>
-                                        <td>
-                                            <?php echo plugin_lang_get( 'default_strategy' );?>
-                                            <select class="input-sm" name="strategy">
-                                                <option value="renumber" title="<?php echo plugin_lang_get( 'renumber_desc' );?>">
-                                                    <?php echo plugin_lang_get( 'renumber' );?></option>
-                                                <option value="link" title="<?php echo plugin_lang_get( 'link_desc' );?>">
-                                                    <?php echo plugin_lang_get( 'link' );?></option>
-                                                <option value="disable" title="<?php echo plugin_lang_get( 'disable_desc' );?>">
-                                                    <?php echo plugin_lang_get( 'disable' );?></option>
-                                            </select>
-                                            <br><br>
+<tr>
+	<th class="category" width="25%">
+		<?php echo plugin_lang_get( 'cross_references' );?>
+	</th>
+	<td>
+		<?php echo plugin_lang_get( 'default_strategy' );?>
+		<select class="input-sm" name="strategy">
+			<option value="renumber" title="<?php echo plugin_lang_get( 'renumber_desc' );?>">
+			<?php echo plugin_lang_get( 'renumber' );?></option>
+			<option value="link" title="<?php echo plugin_lang_get( 'link_desc' );?>">
+			<?php echo plugin_lang_get( 'link' );?></option>
+			<option value="disable" title="<?php echo plugin_lang_get( 'disable_desc' );?>">
+			<?php echo plugin_lang_get( 'disable' );?></option>
+		</select>
+		<br><br>
 
-                                            <?php echo plugin_lang_get( 'fallback' );?>
-                                            <select class="input-sm" name="fallback">
-                                                <option value="link" title="<?php echo plugin_lang_get( 'link_desc' );?>">
-                                                    <?php echo plugin_lang_get( 'link' );?></option>
-                                                <option value="disable" title="<?php echo plugin_lang_get( 'disable_desc' );?>">
-                                                    <?php echo plugin_lang_get( 'disable' );?></option>
-                                            </select>
-                                        </td>
-                                    </tr>
+		<?php echo plugin_lang_get( 'fallback' );?>
+		<select class="input-sm" name="fallback">
+			<option value="link" title="<?php echo plugin_lang_get( 'link_desc' );?>">
+			<?php echo plugin_lang_get( 'link' );?></option>
+			<option value="disable" title="<?php echo plugin_lang_get( 'disable_desc' );?>">
+			<?php echo plugin_lang_get( 'disable' );?></option>
+		</select>
+	</td>
+</tr>
 
-                                    <tr>
-                                        <th class="category" width="25%">
-                                            <?php echo lang_get( 'categories' );?>
-                                        </th>
-                                        <td>
-                                            <label for="keepcategory">
-                                                <input type="checkbox" class="ace" checked="checked" id="keepcategory" name="keepcategory" />
-                                                <span class="lbl"> <?php echo plugin_lang_get( 'keep_same_category' );?> </span>
-                                            </label>
-                                            <br><br>
+<tr>
+	<th class="category" width="25%">
+		<?php echo lang_get( 'categories' );?>
+	</th>
+	<td>
+		<label for="keepcategory">
+		<input type="checkbox" class="ace" checked="checked" id="keepcategory" name="keepcategory" />
+		<span class="lbl"> <?php echo plugin_lang_get( 'keep_same_category' );?> </span>
+		</label>
+		<br><br>
 
-                                            <?php echo plugin_lang_get( 'fallback_category' );?>
-                                            <select class="input-sm" name="defaultcategory">
-                                                <?php print_category_option_list( );?>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="widget-toolbox padding-8 clearfix">
-                            <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'upload_file_button' )?>" />
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+		<?php echo plugin_lang_get( 'fallback_category' );?>
+		<select class="input-sm" name="defaultcategory">
+			<?php print_category_option_list( );?>
+		</select>
+	</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="widget-toolbox padding-8 clearfix">
+	<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'upload_file_button' )?>" />
+</div>
+</div>
+</div>
+</form>
+</div>
+</div>
 
 <?php
 layout_page_end();

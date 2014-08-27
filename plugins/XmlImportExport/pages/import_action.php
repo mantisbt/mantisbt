@@ -50,16 +50,16 @@ print_manage_menu( 'manage_plugin_page.php' );
 
 ?>
 
-    <div class="col-md-12 col-xs-12">
-        <div class="space-10"></div>
-        <pre>
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
+<pre>
 
-        <?php
-        $t_importer->import( );
-        ?>
+<?php
+$t_importer->import( );
+?>
 
-        </pre>
-    </div>
+</pre>
+</div>
 
 <?php
 layout_page_end();
