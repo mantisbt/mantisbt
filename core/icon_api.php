@@ -87,7 +87,7 @@ function print_sort_icon( $p_dir, $p_sort_by, $p_field ) {
 	if( ( 'DESC' == $p_dir ) || ( DESCENDING == $p_dir ) ) {
 		$t_dir = DESCENDING;
 	} else {
-    	echo '&#160;<i class="fa fa-caret-up fa-lg blue"></i>';
+		echo '&#160;<i class="fa fa-caret-up fa-lg blue"></i>';
 	}
 }
 

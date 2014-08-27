@@ -96,26 +96,26 @@ require_api( 'version_api.php' );
  * @return boolean
  */
 function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_absolute = false ) {
-    if( ON == config_get_global( 'stop_on_errors' ) && error_handled() ) {
-        return false;
-    }
+	if( ON == config_get_global( 'stop_on_errors' ) && error_handled() ) {
+		return false;
+	}
 
-    # validate the url as part of this site before continuing
-    if( $p_absolute ) {
-        if( $p_sanitize ) {
-            $t_url = string_sanitize_url( $p_url );
-        } else {
-            $t_url = $p_url;
-        }
-    } else {
-        if( $p_sanitize ) {
-            $t_url = string_sanitize_url( $p_url, true );
-        } else {
-            $t_url = config_get( 'path' ) . $p_url;
-        }
-    }
+	# validate the url as part of this site before continuing
+	if( $p_absolute ) {
+		if( $p_sanitize ) {
+			$t_url = string_sanitize_url( $p_url );
+		} else {
+			$t_url = $p_url;
+		}
+	} else {
+		if( $p_sanitize ) {
+			$t_url = string_sanitize_url( $p_url, true );
+		} else {
+			$t_url = config_get( 'path' ) . $p_url;
+		}
+	}
 
-    $t_url = string_prepare_header( $t_url );
+	$t_url = string_prepare_header( $t_url );
 
 	# don't send more headers if they have already been sent
 	if( !headers_sent() ) {
@@ -194,15 +194,15 @@ function print_avatar( $p_user_id, $p_size = 80 ) {
 		return;
 	}
 
-    if( access_has_project_level( config_get( 'show_avatar_threshold' ), null, $p_user_id ) ) {
-        $t_avatar = user_get_avatar( $p_user_id, $p_size );
-        if( !empty( $t_avatar ) ) {
-            $t_avatar_url = htmlspecialchars( $t_avatar[0] );
-            $t_width = $t_avatar[1];
-            $t_height = $t_avatar[2];
-            echo '<a rel="nofollow" href="http://site.gravatar.com"><img class="avatar pull-right" src="' . $t_avatar_url . '" alt="User avatar" width="' . $t_width . '" height="' . $t_height . '" /></a>';
-        }
-    }
+	if( access_has_project_level( config_get( 'show_avatar_threshold' ), null, $p_user_id ) ) {
+		$t_avatar = user_get_avatar( $p_user_id, $p_size );
+		if( !empty( $t_avatar ) ) {
+			$t_avatar_url = htmlspecialchars( $t_avatar[0] );
+			$t_width = $t_avatar[1];
+			$t_height = $t_avatar[2];
+			echo '<a rel="nofollow" href="http://site.gravatar.com"><img class="avatar pull-right" src="' . $t_avatar_url . '" alt="User avatar" width="' . $t_width . '" height="' . $t_height . '" /></a>';
+		}
+	}
 }
 
 /**
@@ -227,15 +227,15 @@ function print_user_with_subject( $p_user_id, $p_bug_id ) {
 		return;
 	}
 
-    $t_username = user_get_name( $p_user_id );
-    if( user_exists( $p_user_id ) && user_get_field( $p_user_id, 'enabled' ) ) {
-        $t_email = user_get_email( $p_user_id );
-        print_email_link_with_subject( $t_email, $t_username, $p_bug_id );
-    } else {
-        echo '<span class="user" style="text-decoration: line-through">';
-        echo $t_username;
-        echo '</span>';
-    }
+	$t_username = user_get_name( $p_user_id );
+	if( user_exists( $p_user_id ) && user_get_field( $p_user_id, 'enabled' ) ) {
+		$t_email = user_get_email( $p_user_id );
+		print_email_link_with_subject( $t_email, $t_username, $p_bug_id );
+	} else {
+		echo '<span class="user" style="text-decoration: line-through">';
+		echo $t_username;
+		echo '</span>';
+	}
 }
 
 /**
@@ -246,7 +246,7 @@ function print_user_with_subject( $p_user_id, $p_bug_id ) {
  * @return void
  */
 function print_email_input( $p_field_name, $p_email ) {
-    echo '<input class="input-sm" id="email-field" type="text" name="' . string_attribute( $p_field_name ) . '" size="32" maxlength="64" value="' . string_attribute( $p_email ) . '" />';
+	echo '<input class="input-sm" id="email-field" type="text" name="' . string_attribute( $p_field_name ) . '" size="32" maxlength="64" value="' . string_attribute( $p_email ) . '" />';
 }
 
 /**
@@ -256,7 +256,7 @@ function print_email_input( $p_field_name, $p_email ) {
  * @return void
  */
 function print_captcha_input( $p_field_name ) {
-    echo '<input class="input-sm" id="captcha-field" type="text" name="' . $p_field_name . '" size="6" maxlength="6" value="" />';
+	echo '<input class="input-sm" id="captcha-field" type="text" name="' . $p_field_name . '" size="6" maxlength="6" value="" />';
 }
 
 /**
@@ -268,62 +268,62 @@ function print_captcha_input( $p_field_name ) {
  * @return void
  */
 function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = ANYBODY ) {
-    $t_current_user = auth_get_current_user_id();
+	$t_current_user = auth_get_current_user_id();
 
-    if( null === $p_project_id ) {
-        $p_project_id = helper_get_current_project();
-    }
+	if( null === $p_project_id ) {
+		$p_project_id = helper_get_current_project();
+	}
 
-    if( $p_project_id === ALL_PROJECTS ) {
-        $t_projects = user_get_accessible_projects( $t_current_user );
+	if( $p_project_id === ALL_PROJECTS ) {
+		$t_projects = user_get_accessible_projects( $t_current_user );
 
-        # Get list of users having access level for all accessible projects
-        $t_users = array();
-        foreach( $t_projects as $t_project_id ) {
-            $t_project_users_list = project_get_all_user_rows( $t_project_id, $p_access );
-            # Do a 'smart' merge of the project's user list, into an
-            # associative array (to remove duplicates)
-            # Use a while loop for better performance
-            $i = 0;
-            while( isset( $t_project_users_list[$i] ) ) {
-                $t_users[$t_project_users_list[$i]['id']] = $t_project_users_list[$i];
-                $i++;
-            }
-            unset( $t_project_users_list );
-        }
-        unset( $t_projects );
-    } else {
-        $t_users = project_get_all_user_rows( $p_project_id, $p_access );
-    }
+		# Get list of users having access level for all accessible projects
+		$t_users = array();
+		foreach( $t_projects as $t_project_id ) {
+			$t_project_users_list = project_get_all_user_rows( $t_project_id, $p_access );
+			# Do a 'smart' merge of the project's user list, into an
+			# associative array (to remove duplicates)
+			# Use a while loop for better performance
+			$i = 0;
+			while( isset( $t_project_users_list[$i] ) ) {
+				$t_users[$t_project_users_list[$i]['id']] = $t_project_users_list[$i];
+				$i++;
+			}
+			unset( $t_project_users_list );
+		}
+		unset( $t_projects );
+	} else {
+		$t_users = project_get_all_user_rows( $p_project_id, $p_access );
+	}
 
-    $t_display = array();
-    $t_sort = array();
-    $t_show_realname = ( ON == config_get( 'show_realname' ) );
-    $t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
-    foreach( $t_users as $t_key => $t_user ) {
-        $t_user_name = string_attribute( $t_user['username'] );
-        $t_sort_name = utf8_strtolower( $t_user_name );
-        if( $t_show_realname && ( $t_user['realname'] <> '' ) ) {
-            $t_user_name = string_attribute( $t_user['realname'] );
-            if( $t_sort_by_last_name ) {
-                $t_sort_name_bits = explode( ' ', utf8_strtolower( $t_user_name ), 2 );
-                $t_sort_name = ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
-            } else {
-                $t_sort_name = utf8_strtolower( $t_user_name );
-            }
-        }
-        $t_display[] = $t_user_name;
-        $t_sort[] = $t_sort_name;
-    }
-    array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
-    unset( $t_sort );
-    $t_count = count( $t_users );
-    for( $i = 0;$i < $t_count;$i++ ) {
-        $t_row = $t_users[$i];
-        echo '<option value="' . $t_row['id'] . '" ';
-        check_selected( $p_user_id, (int)$t_row['id'] );
-        echo '>' . $t_display[$i] . '</option>';
-    }
+	$t_display = array();
+	$t_sort = array();
+	$t_show_realname = ( ON == config_get( 'show_realname' ) );
+	$t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
+	foreach( $t_users as $t_key => $t_user ) {
+		$t_user_name = string_attribute( $t_user['username'] );
+		$t_sort_name = utf8_strtolower( $t_user_name );
+		if( $t_show_realname && ( $t_user['realname'] <> '' ) ) {
+			$t_user_name = string_attribute( $t_user['realname'] );
+			if( $t_sort_by_last_name ) {
+				$t_sort_name_bits = explode( ' ', utf8_strtolower( $t_user_name ), 2 );
+				$t_sort_name = ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
+			} else {
+				$t_sort_name = utf8_strtolower( $t_user_name );
+			}
+		}
+		$t_display[] = $t_user_name;
+		$t_sort[] = $t_sort_name;
+	}
+	array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users, $t_display );
+	unset( $t_sort );
+	$t_count = count( $t_users );
+	for( $i = 0;$i < $t_count;$i++ ) {
+		$t_row = $t_users[$i];
+		echo '<option value="' . $t_row['id'] . '" ';
+		check_selected( $p_user_id, (int)$t_row['id'] );
+		echo '>' . $t_display[$i] . '</option>';
+	}
 }
 
 /**
@@ -341,7 +341,7 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
  * @return void
  */
 function print_reporter_option_list( $p_user_id, $p_project_id = null ) {
-    print_user_option_list( $p_user_id, $p_project_id, config_get( 'report_bug_threshold' ) );
+	print_user_option_list( $p_user_id, $p_project_id, config_get( 'report_bug_threshold' ) );
 }
 
 /**
@@ -351,17 +351,16 @@ function print_reporter_option_list( $p_user_id, $p_project_id = null ) {
  * @return boolean
  */
 function print_tag_attach_form( $p_bug_id, $p_string = '' ) {
-    ?>
-
-    <form method="post" action="tag_attach.php" class="form-inline">
-        <?php echo form_security_field( 'tag_attach' )?>
-        <label class="inline small"><?php echo sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) )?></label>
-        <input type="hidden" name="bug_id" value="<?php echo $p_bug_id?>" class="input-sm" />
-        <?php print_tag_input( $p_bug_id, $p_string ); ?>
-        <input type="submit" value="<?php echo lang_get( 'tag_attach' )?>" class="btn btn-primary btn-sm btn-white btn-round" />
-    </form>
-    <?php
-    return true;
+?>
+	<form method="post" action="tag_attach.php" class="form-inline">
+		<?php echo form_security_field( 'tag_attach' )?>
+		<label class="inline small"><?php echo sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) )?></label>
+		<input type="hidden" name="bug_id" value="<?php echo $p_bug_id?>" class="input-sm" />
+		<?php print_tag_input( $p_bug_id, $p_string ); ?>
+		<input type="submit" value="<?php echo lang_get( 'tag_attach' )?>" class="btn btn-primary btn-sm btn-white btn-round" />
+	</form>
+<?php
+	return true;
 }
 
 /**
@@ -371,12 +370,12 @@ function print_tag_attach_form( $p_bug_id, $p_string = '' ) {
  * @return void
  */
 function print_tag_input( $p_bug_id = 0, $p_string = '' ) {
-    ?>
-    <input type="hidden" id="tag_separator" value="<?php echo config_get( 'tag_separator' )?>" />
-    <input type="text" name="tag_string" id="tag_string" class="input-sm" size="40" value="<?php echo string_attribute( $p_string )?>" />
-    <select class="input-sm" <?php echo helper_get_tab_index()?> name="tag_select" id="tag_select" class="input-sm">
-        <?php print_tag_option_list( $p_bug_id );?>
-    </select>
+?>
+	<input type="hidden" id="tag_separator" value="<?php echo config_get( 'tag_separator' )?>" />
+	<input type="text" name="tag_string" id="tag_string" class="input-sm" size="40" value="<?php echo string_attribute( $p_string )?>" />
+	<select class="input-sm" <?php echo helper_get_tab_index()?> name="tag_select" id="tag_select" class="input-sm">
+		<?php print_tag_option_list( $p_bug_id );?>
+	</select>
 <?php
 }
 
@@ -387,16 +386,16 @@ function print_tag_input( $p_bug_id = 0, $p_string = '' ) {
  * @return void
  */
 function print_tag_option_list( $p_bug_id = 0 ) {
-    $t_rows = tag_get_candidates_for_bug( $p_bug_id );
+	$t_rows = tag_get_candidates_for_bug( $p_bug_id );
 
-    echo '<option value="0">', string_html_specialchars( lang_get( 'tag_existing' ) ), '</option>';
-    foreach ( $t_rows as $t_row ) {
-        $t_string = $t_row['name'];
-        if( !empty( $t_row['description'] ) ) {
-            $t_string .= ' - ' . utf8_substr( $t_row['description'], 0, 20 );
-        }
-        echo '<option value="', $t_row['id'], '" title="', string_attribute( $t_row['name'] ), '">', string_attribute( $t_string ), '</option>';
-    }
+	echo '<option value="0">', string_html_specialchars( lang_get( 'tag_existing' ) ), '</option>';
+	foreach ( $t_rows as $t_row ) {
+		$t_string = $t_row['name'];
+		if( !empty( $t_row['description'] ) ) {
+			$t_string .= ' - ' . utf8_substr( $t_row['description'], 0, 20 );
+		}
+		echo '<option value="', $t_row['id'], '" title="', string_attribute( $t_row['name'] ), '">', string_attribute( $t_string ), '</option>';
+	}
 }
 
 /**
@@ -404,9 +403,9 @@ function print_tag_option_list( $p_bug_id = 0 ) {
  * @return void
  */
 function print_news_item_option_list() {
-    $t_mantis_news_table = db_get_table( 'news' );
+	$t_mantis_news_table = db_get_table( 'news' );
 
-    $t_project_id = helper_get_current_project();
+	$t_project_id = helper_get_current_project();
 
 	$t_global = access_has_global_level( config_get_global( 'admin_site_threshold' ) );
 	if( $t_global ) {
@@ -461,43 +460,43 @@ function print_news_item_option_list() {
  * @return void
  */
 function print_news_entry( $p_headline, $p_body, $p_poster_id, $p_view_state, $p_announcement, $p_date_posted ) {
-    $t_headline = string_display_links( $p_headline );
-    $t_body = string_display_links( $p_body );
-    $t_date_posted = date( config_get( 'normal_date_format' ), $p_date_posted );
+	$t_headline = string_display_links( $p_headline );
+	$t_body = string_display_links( $p_body );
+	$t_date_posted = date( config_get( 'normal_date_format' ), $p_date_posted );
 
-    $t_news_css = VS_PRIVATE == $p_view_state ? 'hidden' : '';
-    ?>
+	$t_news_css = VS_PRIVATE == $p_view_state ? 'hidden' : '';
+	?>
 
-    <div class="space-10"></div>
-    <div class="widget-box widget-color-blue2">
-        <div class="widget-header widget-header-small <?php echo $t_news_css; ?>">
-            <h4 class="widget-title lighter">
-                <i class="ace-icon fa fa-edit"></i>
-                <?php echo $t_headline ?>
-            </h4>
-        </div>
+	<div class="space-10"></div>
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small <?php echo $t_news_css; ?>">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-edit"></i>
+				<?php echo $t_headline ?>
+			</h4>
+		</div>
 
-        <div class="widget-body">
-            <div class="widget-toolbox padding-8 clearfix">
-                <i class="fa fa-user"></i> <?php echo prepare_user_name( $p_poster_id ); ?>
-                &#160;&#160;&#160;&#160;
-                <i class="fa fa-clock-o"></i> <?php echo $t_date_posted; ?>
-            </div>
-            <div class="widget-main">
-                <?php
-                if( 1 == $p_announcement ) { ?>
-                    <span class="news-announcement"><?php echo lang_get( 'announcement' ); ?></span><?php
-                }
-                if( VS_PRIVATE == $p_view_state ) { ?>
-                    <span class="news-private"><?php echo lang_get( 'private' ); ?></span><?php
-                }
-                ?>
-                <p class="news-body"><?php echo $t_body; ?></p>
-            </div>
-        </div>
-    </div>
+		<div class="widget-body">
+			<div class="widget-toolbox padding-8 clearfix">
+				<i class="fa fa-user"></i> <?php echo prepare_user_name( $p_poster_id ); ?>
+				&#160;&#160;&#160;&#160;
+				<i class="fa fa-clock-o"></i> <?php echo $t_date_posted; ?>
+			</div>
+			<div class="widget-main">
+				<?php
+				if( 1 == $p_announcement ) { ?>
+					<span class="news-announcement"><?php echo lang_get( 'announcement' ); ?></span><?php
+				}
+				if( VS_PRIVATE == $p_view_state ) { ?>
+					<span class="news-private"><?php echo lang_get( 'private' ); ?></span><?php
+				}
+				?>
+				<p class="news-body"><?php echo $t_body; ?></p>
+			</div>
+		</div>
+	</div>
 
-    <?php
+	<?php
 }
 
 /**
@@ -506,14 +505,14 @@ function print_news_entry( $p_headline, $p_body, $p_poster_id, $p_view_state, $p
  * @return void
  */
 function print_news_entry_from_row( array $p_news_row ) {
-    $t_headline = $p_news_row['headline'];
-    $t_body = $p_news_row['body'];
-    $t_poster_id = $p_news_row['poster_id'];
-    $t_view_state = $p_news_row['view_state'];
-    $t_announcement = $p_news_row['announcement'];
-    $t_date_posted = $p_news_row['date_posted'];
+	$t_headline = $p_news_row['headline'];
+	$t_body = $p_news_row['body'];
+	$t_poster_id = $p_news_row['poster_id'];
+	$t_view_state = $p_news_row['view_state'];
+	$t_announcement = $p_news_row['announcement'];
+	$t_date_posted = $p_news_row['date_posted'];
 
-    print_news_entry( $t_headline, $t_body, $t_poster_id, $t_view_state, $t_announcement, $t_date_posted );
+	print_news_entry( $t_headline, $t_body, $t_poster_id, $t_view_state, $t_announcement, $t_date_posted );
 }
 
 /**
@@ -523,14 +522,14 @@ function print_news_entry_from_row( array $p_news_row ) {
  * @return void
  */
 function print_news_string_by_news_id( $p_news_id ) {
-    $t_row = news_get_row( $p_news_id );
+	$t_row = news_get_row( $p_news_id );
 
-    # only show VS_PRIVATE posts to configured threshold and above
-    if( ( VS_PRIVATE == $t_row['view_state'] ) && !access_has_project_level( config_get( 'private_news_threshold' ) ) ) {
-        return;
-    }
+	# only show VS_PRIVATE posts to configured threshold and above
+	if( ( VS_PRIVATE == $t_row['view_state'] ) && !access_has_project_level( config_get( 'private_news_threshold' ) ) ) {
+		return;
+	}
 
-    print_news_entry_from_row( $t_row );
+	print_news_entry_from_row( $t_row );
 }
 
 /**
@@ -541,11 +540,11 @@ function print_news_string_by_news_id( $p_news_id ) {
  * @return void
  */
 function print_assign_to_option_list( $p_user_id = '', $p_project_id = null, $p_threshold = null ) {
-    if( null === $p_threshold ) {
-        $p_threshold = config_get( 'handle_bug_threshold' );
-    }
+	if( null === $p_threshold ) {
+		$p_threshold = config_get( 'handle_bug_threshold' );
+	}
 
-    print_user_option_list( $p_user_id, $p_project_id, $p_threshold );
+	print_user_option_list( $p_user_id, $p_project_id, $p_threshold );
 }
 
 /**
@@ -556,11 +555,11 @@ function print_assign_to_option_list( $p_user_id = '', $p_project_id = null, $p_
  * @return void
  */
 function print_note_option_list( $p_user_id = '', $p_project_id = null, $p_threshold = null ) {
-    if( null === $p_threshold ) {
-        $p_threshold = config_get( 'add_bugnote_threshold' );
-    }
+	if( null === $p_threshold ) {
+		$p_threshold = config_get( 'add_bugnote_threshold' );
+	}
 
-    print_user_option_list( $p_user_id, $p_project_id, $p_threshold );
+	print_user_option_list( $p_user_id, $p_project_id, $p_threshold );
 }
 
 /**
@@ -574,31 +573,31 @@ function print_note_option_list( $p_user_id = '', $p_project_id = null, $p_thres
  * @return void
  */
 function print_project_option_list( $p_project_id = null, $p_include_all_projects = true, $p_filter_project_id = null, $p_trace = false, $p_can_report_only = false ) {
-    $t_user_id = auth_get_current_user_id();
-    $t_project_ids = user_get_accessible_projects( $t_user_id );
-    $t_can_report = true;
-    project_cache_array_rows( $t_project_ids );
+	$t_user_id = auth_get_current_user_id();
+	$t_project_ids = user_get_accessible_projects( $t_user_id );
+	$t_can_report = true;
+	project_cache_array_rows( $t_project_ids );
 
-    if( $p_include_all_projects && $p_filter_project_id !== ALL_PROJECTS ) {
-        echo '<option value="' . ALL_PROJECTS . '"';
-        if( $p_project_id !== null ) {
-            check_selected( $p_project_id, ALL_PROJECTS, false );
-        }
-        echo '>' . lang_get( 'all_projects' ) . '</option>' . "\n";
-    }
+	if( $p_include_all_projects && $p_filter_project_id !== ALL_PROJECTS ) {
+		echo '<option value="' . ALL_PROJECTS . '"';
+		if( $p_project_id !== null ) {
+			check_selected( $p_project_id, ALL_PROJECTS, false );
+		}
+		echo '>' . lang_get( 'all_projects' ) . '</option>' . "\n";
+	}
 
-    foreach( $t_project_ids as $t_id ) {
-        if( $p_can_report_only ) {
-            $t_report_bug_threshold = config_get( 'report_bug_threshold', null, $t_user_id, $t_id );
-            $t_can_report = access_has_project_level( $t_report_bug_threshold, $t_id, $t_user_id );
-        }
+	foreach( $t_project_ids as $t_id ) {
+		if( $p_can_report_only ) {
+			$t_report_bug_threshold = config_get( 'report_bug_threshold', null, $t_user_id, $t_id );
+			$t_can_report = access_has_project_level( $t_report_bug_threshold, $t_id, $t_user_id );
+		}
 
-        echo '<option value="' . $t_id . '"';
-        check_selected( $p_project_id, $t_id, false );
-        check_disabled( $t_id == $p_filter_project_id || !$t_can_report );
-        echo '>' . string_attribute( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
-        print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only );
-    }
+		echo '<option value="' . $t_id . '"';
+		check_selected( $p_project_id, $t_id, false );
+		check_disabled( $t_id == $p_filter_project_id || !$t_can_report );
+		echo '>' . string_attribute( project_get_field( $t_id, 'name' ) ) . '</option>' . "\n";
+		print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only );
+	}
 }
 
 /**
@@ -612,16 +611,16 @@ function print_project_option_list( $p_project_id = null, $p_include_all_project
  * @return void
  */
 function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_filter_project_id = null, $p_trace = false, $p_can_report_only = false, array $p_parents = array() ) {
-    array_push( $p_parents, $p_parent_id );
-    $t_user_id = auth_get_current_user_id();
-    $t_project_ids = user_get_accessible_subprojects( $t_user_id, $p_parent_id );
-    $t_can_report = true;
+	array_push( $p_parents, $p_parent_id );
+	$t_user_id = auth_get_current_user_id();
+	$t_project_ids = user_get_accessible_subprojects( $t_user_id, $p_parent_id );
+	$t_can_report = true;
 
-    foreach( $t_project_ids as $t_id ) {
-        if( $p_can_report_only ) {
-            $t_report_bug_threshold = config_get( 'report_bug_threshold', null, $t_user_id, $t_id );
-            $t_can_report = access_has_project_level( $t_report_bug_threshold, $t_id, $t_user_id );
-        }
+	foreach( $t_project_ids as $t_id ) {
+		if( $p_can_report_only ) {
+			$t_report_bug_threshold = config_get( 'report_bug_threshold', null, $t_user_id, $t_id );
+			$t_can_report = access_has_project_level( $t_report_bug_threshold, $t_id, $t_user_id );
+		}
 
 		if( $p_trace ) {
 			$t_full_id = join( $p_parents, ';' ) . ';' . $t_id;
@@ -629,16 +628,16 @@ function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_fi
 			$t_full_id = $t_id;
 		}
 
-        echo '<option value="' . $t_full_id . '"';
-        check_selected( $p_project_id, $t_full_id, false );
-        check_disabled( $t_id == $p_filter_project_id || !$t_can_report );
-        echo '>'
-            . str_repeat( '&#160;', count( $p_parents ) )
-            . str_repeat( '&raquo;', count( $p_parents ) ) . ' '
-            . string_attribute( project_get_field( $t_id, 'name' ) )
-            . '</option>' . "\n";
-        print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only, $p_parents );
-    }
+		echo '<option value="' . $t_full_id . '"';
+		check_selected( $p_project_id, $t_full_id, false );
+		check_disabled( $t_id == $p_filter_project_id || !$t_can_report );
+		echo '>'
+			. str_repeat( '&#160;', count( $p_parents ) )
+			. str_repeat( '&raquo;', count( $p_parents ) ) . ' '
+			. string_attribute( project_get_field( $t_id, 'name' ) )
+			. '</option>' . "\n";
+		print_subproject_option_list( $t_id, $p_project_id, $p_filter_project_id, $p_trace, $p_can_report_only, $p_parents );
+	}
 }
 
 /**
@@ -649,15 +648,15 @@ function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_fi
  * @return void
  */
 function print_profile_option_list( $p_user_id, $p_select_id = '', array $p_profiles = null ) {
-    if( '' === $p_select_id ) {
-        $p_select_id = profile_get_default( $p_user_id );
-    }
-    if( $p_profiles != null ) {
-        $t_profiles = $p_profiles;
-    } else {
-        $t_profiles = profile_get_all_for_user( $p_user_id );
-    }
-    print_profile_option_list_from_profiles( $t_profiles, $p_select_id );
+	if( '' === $p_select_id ) {
+		$p_select_id = profile_get_default( $p_user_id );
+	}
+	if( $p_profiles != null ) {
+		$t_profiles = $p_profiles;
+	} else {
+		$t_profiles = profile_get_all_for_user( $p_user_id );
+	}
+	print_profile_option_list_from_profiles( $t_profiles, $p_select_id );
 }
 
 /**
@@ -668,15 +667,15 @@ function print_profile_option_list( $p_user_id, $p_select_id = '', array $p_prof
  * @return void
  */
 function print_profile_option_list_for_project( $p_project_id, $p_select_id = '', array $p_profiles = null ) {
-    if( '' === $p_select_id ) {
-        $p_select_id = profile_get_default( auth_get_current_user_id() );
-    }
-    if( $p_profiles != null ) {
-        $t_profiles = $p_profiles;
-    } else {
-        $t_profiles = profile_get_all_for_project( $p_project_id );
-    }
-    print_profile_option_list_from_profiles( $t_profiles, $p_select_id );
+	if( '' === $p_select_id ) {
+		$p_select_id = profile_get_default( auth_get_current_user_id() );
+	}
+	if( $p_profiles != null ) {
+		$t_profiles = $p_profiles;
+	} else {
+		$t_profiles = profile_get_all_for_project( $p_project_id );
+	}
+	print_profile_option_list_from_profiles( $t_profiles, $p_select_id );
 }
 
 /**
@@ -687,20 +686,20 @@ function print_profile_option_list_for_project( $p_project_id, $p_select_id = ''
  * @return void
  */
 function print_profile_option_list_from_profiles( array $p_profiles, $p_select_id ) {
-    echo '<option value="">' . lang_get( 'select_option' ) . '</option>';
-    foreach( $p_profiles as $t_profile ) {
-        extract( $t_profile, EXTR_PREFIX_ALL, 'v' );
+	echo '<option value="">' . lang_get( 'select_option' ) . '</option>';
+	foreach( $p_profiles as $t_profile ) {
+		extract( $t_profile, EXTR_PREFIX_ALL, 'v' );
 
-        $t_platform = string_attribute( $t_profile['platform'] );
-        $t_os = string_attribute( $t_profile['os'] );
-        $t_os_build = string_attribute( $t_profile['os_build'] );
+		$t_platform = string_attribute( $t_profile['platform'] );
+		$t_os = string_attribute( $t_profile['os'] );
+		$t_os_build = string_attribute( $t_profile['os_build'] );
 
-        echo '<option value="' . $t_profile['id'] . '"';
-        if( $p_select_id !== false ) {
-            check_selected( $p_select_id, (int)$t_profile['id'] );
-        }
-        echo '>' . $t_platform . ' ' . $t_os . ' ' . $t_os_build . '</option>';
-    }
+		echo '<option value="' . $t_profile['id'] . '"';
+		if( $p_select_id !== false ) {
+			check_selected( $p_select_id, (int)$t_profile['id'] );
+		}
+		echo '>' . $t_platform . ' ' . $t_os . ' ' . $t_os_build . '</option>';
+	}
 }
 
 /**
@@ -990,26 +989,26 @@ function get_status_option_list( $p_user_auth = 0, $p_current_value = 0, $p_show
  * @return void
  */
 function print_status_option_list( $p_select_label, $p_current_value = 0, $p_allow_close = false, $p_project_id = ALL_PROJECTS ) {
-    $t_current_auth = access_get_project_level( $p_project_id );
+	$t_current_auth = access_get_project_level( $p_project_id );
 
-    $t_enum_list = get_status_option_list( $t_current_auth, $p_current_value, true, $p_allow_close, $p_project_id );
+	$t_enum_list = get_status_option_list( $t_current_auth, $p_current_value, true, $p_allow_close, $p_project_id );
 
-    if( count( $t_enum_list ) > 1 ) {
-        # resort the list into ascending order
-        ksort( $t_enum_list );
-        reset( $t_enum_list );
-        echo '<select class="input-sm" ' . helper_get_tab_index() . ' id="' . $p_select_label . '" name="' . $p_select_label . '">';
-        foreach( $t_enum_list as $t_key => $t_val ) {
-            echo '<option value="' . $t_key . '"';
-            check_selected( $t_key, $p_current_value );
-            echo '>' . string_html_specialchars( $t_val ) . '</option>';
-        }
-        echo '</select>';
-    } else if( count( $t_enum_list ) == 1 ) {
-        echo array_pop( $t_enum_list );
-    } else {
-        echo MantisEnum::getLabel( lang_get( 'status_enum_string' ), $p_current_value );
-    }
+	if( count( $t_enum_list ) > 1 ) {
+		# resort the list into ascending order
+		ksort( $t_enum_list );
+		reset( $t_enum_list );
+		echo '<select class="input-sm" ' . helper_get_tab_index() . ' id="' . $p_select_label . '" name="' . $p_select_label . '">';
+		foreach( $t_enum_list as $t_key => $t_val ) {
+			echo '<option value="' . $t_key . '"';
+			check_selected( $t_key, $p_current_value );
+			echo '>' . string_html_specialchars( $t_val ) . '</option>';
+		}
+		echo '</select>';
+	} else if( count( $t_enum_list ) == 1 ) {
+		echo array_pop( $t_enum_list );
+	} else {
+		echo MantisEnum::getLabel( lang_get( 'status_enum_string' ), $p_current_value );
+	}
 }
 
 /**
@@ -1321,8 +1320,8 @@ function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_s
 		$t_dir = 'ASC';
 	}
 
-    $t_field = rawurlencode( $p_field );
-    print_link( $p_page . '?sort=' . $t_field . '&dir=' . $t_dir . '&save=1&hideinactive=' . $p_hide_inactive . '&showdisabled=' . $p_show_disabled . '&filter=' . $p_filter,
+	$t_field = rawurlencode( $p_field );
+	print_link( $p_page . '?sort=' . $t_field . '&dir=' . $t_dir . '&save=1&hideinactive=' . $p_hide_inactive . '&showdisabled=' . $p_show_disabled . '&filter=' . $p_filter,
         $p_string, false, $p_class );
 }
 
@@ -1369,30 +1368,30 @@ function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $
  * @return void
  */
 function print_form_button( $p_action_page, $p_label, $p_args_to_post = null, $p_security_token = null, $p_class = '' ) {
-    $t_form_name = explode( '.php', $p_action_page, 2 );
-    # TODO: ensure all uses of print_button supply arguments via $p_args_to_post (POST)
-    # instead of via $p_action_page (GET). Then only add the CSRF form token if
-    # arguments are being sent via the POST method.
-    echo '<form method="post" action="', htmlspecialchars( $p_action_page ), '" class="form-inline">';
-    echo '<fieldset>';
-    if( $p_security_token !== OFF ) {
-        echo form_security_field( $t_form_name[0], $p_security_token );
-    }
-    if( $p_class !== '') {
-        echo '<input type="submit" class="' . $p_class . '" value="', $p_label, '" />';
-    } else {
-        echo '<input type="submit" class="btn btn-primary btn-xs btn-white btn-round" value="', $p_label, '" />';
-    }
+	$t_form_name = explode( '.php', $p_action_page, 2 );
+	# TODO: ensure all uses of print_button supply arguments via $p_args_to_post (POST)
+	# instead of via $p_action_page (GET). Then only add the CSRF form token if
+	# arguments are being sent via the POST method.
+	echo '<form method="post" action="', htmlspecialchars( $p_action_page ), '" class="form-inline">';
+	echo '<fieldset>';
+	if( $p_security_token !== OFF ) {
+		echo form_security_field( $t_form_name[0], $p_security_token );
+	}
+	if( $p_class !== '') {
+		echo '<input type="submit" class="' . $p_class . '" value="', $p_label, '" />';
+	} else {
+		echo '<input type="submit" class="btn btn-primary btn-xs btn-white btn-round" value="', $p_label, '" />';
+	}
 
-    if( $p_args_to_post !== null ) {
-        foreach( $p_args_to_post as $t_var => $t_value ) {
-            echo '<input type="hidden" name="' . $t_var .
-                '" value="' . htmlentities( $t_value ) . '" />';
-        }
-    }
+	if( $p_args_to_post !== null ) {
+		foreach( $p_args_to_post as $t_var => $t_value ) {
+			echo '<input type="hidden" name="' . $t_var .
+				'" value="' . htmlentities( $t_value ) . '" />';
+		}
+	}
 
-    echo '</fieldset>';
-    echo '</form>';
+	echo '</fieldset>';
+	echo '</form>';
 }
 
 /**
@@ -1401,7 +1400,7 @@ function print_form_button( $p_action_page, $p_label, $p_args_to_post = null, $p
  * @return void
  */
 function print_bracket_link_prepared( $p_link ) {
-    echo '<span class="bracket-link">[&#160;' . $p_link . '&#160;]</span> ';
+	echo '<span class="bracket-link">[&#160;' . $p_link . '&#160;]</span> ';
 }
 
 /**
@@ -1415,13 +1414,13 @@ function print_bracket_link_prepared( $p_link ) {
  * @return void
  */
 function print_bracket_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' ) {
-    echo '<span class="bracket-link';
-    if( $p_class !== '' ) {
-        echo ' bracket-link-',$p_class; # prefix on a container allows styling of whole link, including brackets
-    }
-    echo '">[&#160;';
-    print_link( $p_link, $p_url_text, $p_new_window, $p_class );
-    echo '&#160;]</span> ';
+	echo '<span class="bracket-link';
+	if( $p_class !== '' ) {
+		echo ' bracket-link-',$p_class; # prefix on a container allows styling of whole link, including brackets
+	}
+	echo '">[&#160;';
+	print_link( $p_link, $p_url_text, $p_new_window, $p_class );
+	echo '&#160;]</span> ';
 }
 
 /**
@@ -1505,7 +1504,7 @@ function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur
 		}
         echo ' </li>';
 	} else {
-        echo '<li class="disabled pull-right"><a>' . $p_text . '</a></li>';
+		echo '<li class="disabled pull-right"><a>' . $p_text . '</a></li>';
 	}
 }
 
@@ -1519,70 +1518,70 @@ function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur
  * @return void
  */
 function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter_id = 0 ) {
-    $t_items = array();
+	$t_items = array();
 
-    # Check if we have more than one page,
-    #  otherwise return without doing anything.
+	# Check if we have more than one page,
+	#  otherwise return without doing anything.
 
-    if( $p_end - $p_start < 1 ) {
-        return;
-    }
+	if( $p_end - $p_start < 1 ) {
+		return;
+	}
 
-    # Get localized strings
-    $t_first = lang_get( 'first' );
-    $t_last = lang_get( 'last' );
-    $t_prev = lang_get( 'prev' );
-    $t_next = lang_get( 'next' );
+	# Get localized strings
+	$t_first = lang_get( 'first' );
+	$t_last = lang_get( 'last' );
+	$t_prev = lang_get( 'prev' );
+	$t_next = lang_get( 'next' );
 
-    $t_page_links = 10;
+	$t_page_links = 10;
 
-    print( '<ul class="pagination small no-margin"> ' );
+	print( '<ul class="pagination small no-margin"> ' );
 
-    # Next and Last links
-    print_page_link( $p_page, $t_last, $p_end, $p_current, $p_temp_filter_id );
-    if( $p_current < $p_end ) {
-        print_page_link( $p_page, $t_next, $p_current + 1, $p_current, $p_temp_filter_id );
-    } else {
-        print_page_link( $p_page, $t_next, null, null, $p_temp_filter_id );
-    }
+	# Next and Last links
+	print_page_link( $p_page, $t_last, $p_end, $p_current, $p_temp_filter_id );
+	if( $p_current < $p_end ) {
+		print_page_link( $p_page, $t_next, $p_current + 1, $p_current, $p_temp_filter_id );
+	} else {
+		print_page_link( $p_page, $t_next, null, null, $p_temp_filter_id );
+	}
 
-    # Page numbers ...
+	# Page numbers ...
 
-    $t_first_page = max( $p_start, $p_current - $t_page_links / 2 );
-    $t_first_page = min( $t_first_page, $p_end - $t_page_links );
-    $t_first_page = max( $t_first_page, $p_start );
+	$t_first_page = max( $p_start, $p_current - $t_page_links / 2 );
+	$t_first_page = min( $t_first_page, $p_end - $t_page_links );
+	$t_first_page = max( $t_first_page, $p_start );
 
-    $t_last_page = $t_first_page + $t_page_links;
-    $t_last_page = min( $t_last_page, $p_end );
+	$t_last_page = $t_first_page + $t_page_links;
+	$t_last_page = min( $t_last_page, $p_end );
 
-    if( $t_last_page < $p_end ) {
-        print( '<li class="pull-right"><a> ... </a></li>' );
-    }
+	if( $t_last_page < $p_end ) {
+		print( '<li class="pull-right"><a> ... </a></li>' );
+	}
 
-    for( $i = $t_last_page;$i >= $t_first_page;$i-- ) {
-        if( $i == $p_current ) {
-            array_push( $t_items, '<li class="active pull-right"><a>' . $i . '</a></li>' );
-        } else {
-            $t_delimiter = ( strpos( $p_page, '?' ) ? '&' : '?' ) ;
-            if( $p_temp_filter_id !== 0 ) {
-                array_push( $t_items, '<li class="pull-right"><a href="' . $p_page . $t_delimiter . 'filter=' . $p_temp_filter_id . '&amp;page_number=' . $i . '">' . $i . '</a></li>' );
-            } else {
-                array_push( $t_items, '<li class="pull-right"><a href="' . $p_page . $t_delimiter . 'page_number=' . $i . '">' . $i . '</a></li>' );
-            }
-        }
-    }
-    echo implode( '&#160;', $t_items );
+	for( $i = $t_last_page;$i >= $t_first_page;$i-- ) {
+		if( $i == $p_current ) {
+			array_push( $t_items, '<li class="active pull-right"><a>' . $i . '</a></li>' );
+		} else {
+			$t_delimiter = ( strpos( $p_page, '?' ) ? '&' : '?' ) ;
+			if( $p_temp_filter_id !== 0 ) {
+				array_push( $t_items, '<li class="pull-right"><a href="' . $p_page . $t_delimiter . 'filter=' . $p_temp_filter_id . '&amp;page_number=' . $i . '">' . $i . '</a></li>' );
+			} else {
+				array_push( $t_items, '<li class="pull-right"><a href="' . $p_page . $t_delimiter . 'page_number=' . $i . '">' . $i . '</a></li>' );
+			}
+		}
+	}
+	echo implode( '&#160;', $t_items );
 
-    if( $t_first_page > 1 ) {
-        print( '<li class="pull-right"><a> ... </a></li>' );
-    }
+	if( $t_first_page > 1 ) {
+		print( '<li class="pull-right"><a> ... </a></li>' );
+	}
 
 
-    # First and previous links
-    print_page_link( $p_page, $t_prev, $p_current - 1, $p_current, $p_temp_filter_id );
-    print_page_link( $p_page, $t_first, 1, $p_current, $p_temp_filter_id );
+	# First and previous links
+	print_page_link( $p_page, $t_prev, $p_current - 1, $p_current, $p_temp_filter_id );
+	print_page_link( $p_page, $t_first, 1, $p_current, $p_temp_filter_id );
 
-    print( ' </ul>' );
+	print( ' </ul>' );
 }
 
 /**
@@ -1593,7 +1592,7 @@ function print_page_links( $p_page, $p_start, $p_end, $p_current, $p_temp_filter
  * @return void
  */
 function print_email_link( $p_email, $p_text ) {
-    echo get_email_link( $p_email, $p_text );
+	echo get_email_link( $p_email, $p_text );
 }
 
 /**
@@ -1604,7 +1603,7 @@ function print_email_link( $p_email, $p_text ) {
  * @return string
  */
 function get_email_link( $p_email, $p_text ) {
-    return prepare_email_link( $p_email, $p_text );
+	return prepare_email_link( $p_email, $p_text );
 }
 
 /**
@@ -1616,8 +1615,8 @@ function get_email_link( $p_email, $p_text ) {
  * @return void
  */
 function print_email_link_with_subject( $p_email, $p_text, $p_bug_id ) {
-    $t_subject = email_build_subject( $p_bug_id );
-    echo get_email_link_with_subject( $p_email, $p_text, $t_subject );
+	$t_subject = email_build_subject( $p_bug_id );
+	echo get_email_link_with_subject( $p_email, $p_text, $t_subject );
 }
 
 /**
@@ -1630,9 +1629,9 @@ function print_email_link_with_subject( $p_email, $p_text, $p_bug_id ) {
  * @return string
  */
 function get_email_link_with_subject( $p_email, $p_text, $p_subject ) {
-    if( !access_has_project_level( config_get( 'show_user_email_threshold' ) ) ) {
-        return $p_text;
-    }
+	if( !access_has_project_level( config_get( 'show_user_email_threshold' ) ) ) {
+		return $p_text;
+	}
 
 	# If we apply string_url() to the whole mailto: link then the @
 	# gets turned into a %40 and you can't right click in browsers to
@@ -1694,9 +1693,9 @@ function print_hidden_input( $p_field_key, $p_field_val ) {
  * @return void
  */
 function print_documentation_link( $p_a_name = '' ) {
-    echo lang_get( $p_a_name ) . "\n";
-    # @todo Disable documentation links for now.  May be re-enabled if linked to new manual.
-    # echo "<a href=\"doc/documentation.html#$p_a_name\" target=\"_info\">[?]</a>";
+	echo lang_get( $p_a_name ) . "\n";
+	# @todo Disable documentation links for now.  May be re-enabled if linked to new manual.
+	# echo "<a href=\"doc/documentation.html#$p_a_name\" target=\"_info\">[?]</a>";
 }
 
 /**
@@ -1704,12 +1703,12 @@ function print_documentation_link( $p_a_name = '' ) {
  * @return void
  */
 function print_signup_link() {
-    if( ( ON == config_get_global( 'allow_signup' ) ) &&
-        ( LDAP != config_get_global( 'login_method' ) ) &&
-        ( ON == config_get( 'enable_email_notification' ) )
-    ) {
-        print_bracket_link( 'signup_page.php', lang_get( 'signup_link' ) );
-    }
+	if( ( ON == config_get_global( 'allow_signup' ) ) &&
+		 ( LDAP != config_get_global( 'login_method' ) ) &&
+		 ( ON == config_get( 'enable_email_notification' ) )
+	   ) {
+		print_bracket_link( 'signup_page.php', lang_get( 'signup_link' ) );
+	}
 }
 
 /**
@@ -1717,7 +1716,7 @@ function print_signup_link() {
  * @return void
  */
 function print_login_link() {
-    print_bracket_link( 'login_page.php', lang_get( 'login_title' ) );
+	print_bracket_link( 'login_page.php', lang_get( 'login_title' ) );
 }
 
 /**
@@ -1725,13 +1724,13 @@ function print_login_link() {
  * @return void
  */
 function print_lost_password_link() {
-    # lost password feature disabled or reset password via email disabled -> stop here!
-    if( ( LDAP != config_get_global( 'login_method' ) ) &&
-        ( ON == config_get( 'lost_password_feature' ) ) &&
-        ( ON == config_get( 'send_reset_password' ) ) &&
-        ( ON == config_get( 'enable_email_notification' ) ) ) {
-        print_bracket_link( 'lost_pwd_page.php', lang_get( 'lost_password_link' ) );
-    }
+	# lost password feature disabled or reset password via email disabled -> stop here!
+	if( ( LDAP != config_get_global( 'login_method' ) ) &&
+		 ( ON == config_get( 'lost_password_feature' ) ) &&
+		 ( ON == config_get( 'send_reset_password' ) ) &&
+		 ( ON == config_get( 'enable_email_notification' ) ) ) {
+		print_bracket_link( 'lost_pwd_page.php', lang_get( 'lost_password_link' ) );
+	}
 }
 
 /**
@@ -1741,8 +1740,8 @@ function print_lost_password_link() {
  * @return void
  */
 function print_file_icon( $p_filename ) {
-    $t_icon = file_get_icon_url( $p_filename );
-    echo '<img src="' . string_attribute( $t_icon['url'] ) . '" alt="' . string_attribute( $t_icon['alt'] ) . ' file icon" width="16" height="16" />';
+	$t_icon = file_get_icon_url( $p_filename );
+	echo '<img src="' . string_attribute( $t_icon['url'] ) . '" alt="' . string_attribute( $t_icon['alt'] ) . ' file icon" width="16" height="16" />';
 }
 
 /**
@@ -1753,8 +1752,8 @@ function print_file_icon( $p_filename ) {
  * @return void
  */
 function print_rss( $p_feed_url, $p_title = '' ) {
-    $t_path = config_get( 'path' );
-    echo '<a class="rss" rel="alternate" href="', htmlspecialchars( $p_feed_url ), '" title="', $p_title, '"><img src="', $t_path, '/images/', 'rss.png" width="16" height="16" alt="', $p_title, '" /></a>';
+	$t_path = config_get( 'path' );
+	echo '<a class="rss" rel="alternate" href="', htmlspecialchars( $p_feed_url ), '" title="', $p_title, '"><img src="', $t_path, '/images/', 'rss.png" width="16" height="16" alt="', $p_title, '" /></a>';
 }
 
 /**
@@ -1762,29 +1761,29 @@ function print_rss( $p_feed_url, $p_title = '' ) {
  * @return void
  */
 function print_recently_visited() {
-    if( !last_visited_enabled() ) {
-        return;
-    }
+	if( !last_visited_enabled() ) {
+		return;
+	}
 
-    $t_ids = last_visited_get_array();
+	$t_ids = last_visited_get_array();
 
-    if( count( $t_ids ) == 0 ) {
-        return;
-    }
+	if( count( $t_ids ) == 0 ) {
+		return;
+	}
 
-    echo '<div class="recently-visited">' . lang_get( 'recently_visited' ) . ': ';
-    $t_first = true;
+	echo '<div class="recently-visited">' . lang_get( 'recently_visited' ) . ': ';
+	$t_first = true;
 
-    foreach( $t_ids as $t_id ) {
-        if( !$t_first ) {
-            echo ', ';
-        } else {
-            $t_first = false;
-        }
+	foreach( $t_ids as $t_id ) {
+		if( !$t_first ) {
+			echo ', ';
+		} else {
+			$t_first = false;
+		}
 
-        echo string_get_bug_view_link( $t_id );
-    }
-    echo '</div>';
+		echo string_get_bug_view_link( $t_id );
+	}
+	echo '</div>';
 }
 
 /**
@@ -1880,36 +1879,36 @@ function print_bug_attachment( array $p_attachment ) {
  * @return void
  */
 function print_bug_attachment_header( array $p_attachment ) {
-    echo "\n";
-    if( $p_attachment['exists'] ) {
-        if( $p_attachment['can_download'] ) {
-            echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '">';
-        }
-        print_file_icon( $p_attachment['display_name'] );
-        if( $p_attachment['can_download'] ) {
-            echo '</a>';
-        }
-        echo lang_get( 'word_separator' );
-        if( $p_attachment['can_download'] ) {
-            echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '">';
-        }
-        echo string_display_line( $p_attachment['display_name'] );
-        if( $p_attachment['can_download'] ) {
-            echo '</a>';
-        }
-        echo lang_get( 'word_separator' ) . '(' . number_format( $p_attachment['size'] ) . lang_get( 'word_separator' ) . lang_get( 'bytes' ) . ')';
-        echo lang_get( 'word_separator' ) . '<span class="italic">' . date( config_get( 'normal_date_format' ), $p_attachment['date_added'] ) . '</span>';
-        event_signal( 'EVENT_VIEW_BUG_ATTACHMENT', array( $p_attachment ) );
-    } else {
-        print_file_icon( $p_attachment['display_name'] );
-        echo lang_get( 'word_separator' ) . '<s>' . string_display_line( $p_attachment['display_name'] ) . '</s>' . lang_get( 'word_separator' ) . '(' . lang_get( 'attachment_missing' ) . ')';
-    }
+	echo "\n";
+	if( $p_attachment['exists'] ) {
+		if( $p_attachment['can_download'] ) {
+			echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '">';
+		}
+		print_file_icon( $p_attachment['display_name'] );
+		if( $p_attachment['can_download'] ) {
+			echo '</a>';
+		}
+		echo lang_get( 'word_separator' );
+		if( $p_attachment['can_download'] ) {
+			echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '">';
+		}
+		echo string_display_line( $p_attachment['display_name'] );
+		if( $p_attachment['can_download'] ) {
+			echo '</a>';
+		}
+		echo lang_get( 'word_separator' ) . '(' . number_format( $p_attachment['size'] ) . lang_get( 'word_separator' ) . lang_get( 'bytes' ) . ')';
+		echo lang_get( 'word_separator' ) . '<span class="italic">' . date( config_get( 'normal_date_format' ), $p_attachment['date_added'] ) . '</span>';
+		event_signal( 'EVENT_VIEW_BUG_ATTACHMENT', array( $p_attachment ) );
+	} else {
+		print_file_icon( $p_attachment['display_name'] );
+		echo lang_get( 'word_separator' ) . '<s>' . string_display_line( $p_attachment['display_name'] ) . '</s>' . lang_get( 'word_separator' ) . '(' . lang_get( 'attachment_missing' ) . ')';
+	}
 
-    if( $p_attachment['can_delete'] ) {
-        echo lang_get( 'word_separator' ) . '&#160;&#160;';
-        print_button( 'bug_file_delete.php?file_id=' . $p_attachment['id'] . form_security_param( 'bug_file_delete' ),
-            lang_get( 'delete_link' ), 'btn-xs' );
-    }
+	if( $p_attachment['can_delete'] ) {
+		echo lang_get( 'word_separator' ) . '&#160;&#160;';
+		print_button( 'bug_file_delete.php?file_id=' . $p_attachment['id'] . form_security_param( 'bug_file_delete' ),
+			lang_get( 'delete_link' ), 'btn-xs' );
+	}
 }
 
 /**
@@ -2017,9 +2016,9 @@ function get_filesize_info( $p_size, $p_unit ) {
  * @return void
  */
 function print_max_filesize( $p_size, $p_divider = 1000, $p_unit = 'kb' ) {
-    echo '<span class="small" title="' . get_filesize_info( $p_size, lang_get( 'bytes' ) ) . '">';
-    echo lang_get( 'max_file_size_label' )
-        . lang_get( 'word_separator' )
-        . get_filesize_info( $p_size / $p_divider, lang_get( $p_unit ) );
-    echo '</span>';
+	echo '<span class="small" title="' . get_filesize_info( $p_size, lang_get( 'bytes' ) ) . '">';
+	echo lang_get( 'max_file_size_label' )
+		. lang_get( 'word_separator' )
+		. get_filesize_info( $p_size / $p_divider, lang_get( $p_unit ) );
+	echo '</span>';
 }

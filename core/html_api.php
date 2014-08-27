@@ -136,8 +136,8 @@ function html_javascript_link( $p_filename ) {
  * @return void
  */
 function html_begin() {
-    echo '<!DOCTYPE html>', "\n";
-    echo '<html>', "\n";
+	echo '<!DOCTYPE html>', "\n";
+	echo '<html>', "\n";
 }
 
 /**
@@ -145,7 +145,7 @@ function html_begin() {
  * @return void
  */
 function html_head_begin() {
-    echo '<head>', "\n";
+	echo '<head>', "\n";
 }
 
 /**
@@ -153,7 +153,7 @@ function html_head_begin() {
  * @return void
  */
 function html_content_type() {
-    echo "\t", '<meta http-equiv="Content-type" content="text/html; charset=utf-8" />', "\n";
+	echo "\t", '<meta http-equiv="Content-type" content="text/html; charset=utf-8" />', "\n";
 }
 
 /**
@@ -162,19 +162,19 @@ function html_content_type() {
  * @return void
  */
 function html_title( $p_page_title = null ) {
-    $t_page_title = string_html_specialchars( $p_page_title );
-    $t_title = string_html_specialchars( config_get( 'window_title' ) );
-    echo "\t", '<title>';
-    if( empty( $t_page_title ) ) {
-        echo $t_title;
-    } else {
-        if( empty( $t_title ) ) {
-            echo $t_page_title;
-        } else {
-            echo $t_page_title . ' - ' . $t_title;
-        }
-    }
-    echo '</title>', "\n";
+	$t_page_title = string_html_specialchars( $p_page_title );
+	$t_title = string_html_specialchars( config_get( 'window_title' ) );
+	echo "\t", '<title>';
+	if( empty( $t_page_title ) ) {
+		echo $t_title;
+	} else {
+		if( empty( $t_title ) ) {
+			echo $t_page_title;
+		} else {
+			echo $t_page_title . ' - ' . $t_title;
+		}
+	}
+	echo '</title>', "\n";
 }
 
 /**
@@ -183,8 +183,8 @@ function html_title( $p_page_title = null ) {
  * @return void
  */
 function require_css( $p_stylesheet_path ) {
-    global $g_stylesheets_included;
-    $g_stylesheets_included[$p_stylesheet_path] = $p_stylesheet_path;
+	global $g_stylesheets_included;
+	$g_stylesheets_included[$p_stylesheet_path] = $p_stylesheet_path;
 }
 
 /**
@@ -192,17 +192,17 @@ function require_css( $p_stylesheet_path ) {
  * @return void
  */
 function html_css() {
-    global $g_stylesheets_included;
-    html_css_link( config_get( 'css_include_file' ) );
-    html_css_link( 'jquery-ui.min.css' );
-    html_css_link( 'common_config.php' );
-    # Add right-to-left css if needed
-    if( lang_get( 'directionality' ) == 'rtl' ) {
-        html_css_link( config_get( 'css_rtl_include_file' ) );
-    }
-    foreach( $g_stylesheets_included as $t_stylesheet_path ) {
-        html_css_link( $t_stylesheet_path );
-    }
+	global $g_stylesheets_included;
+	html_css_link( config_get( 'css_include_file' ) );
+	html_css_link( 'jquery-ui.min.css' );
+	html_css_link( 'common_config.php' );
+	# Add right-to-left css if needed
+	if( lang_get( 'directionality' ) == 'rtl' ) {
+		html_css_link( config_get( 'css_rtl_include_file' ) );
+	}
+	foreach( $g_stylesheets_included as $t_stylesheet_path ) {
+		html_css_link( $t_stylesheet_path );
+	}
 }
 
 /**
@@ -211,7 +211,7 @@ function html_css() {
  * @return void
  */
 function html_css_link( $p_filename ) {
-    echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( helper_mantis_url( 'css/' . $p_filename ), true ), '" />' . "\n";
+	echo "\t", '<link rel="stylesheet" type="text/css" href="', string_sanitize_url( helper_mantis_url( 'css/' . $p_filename ), true ), '" />' . "\n";
 }
 
 
@@ -227,27 +227,27 @@ function html_css_link( $p_filename ) {
  * @return boolean
  */
 function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
-    if( ON == config_get_global( 'stop_on_errors' ) && error_handled() ) {
-        return false;
-    }
+	if( ON == config_get_global( 'stop_on_errors' ) && error_handled() ) {
+		return false;
+	}
 
-    if( null === $p_time ) {
-        $p_time = current_user_get_pref( 'redirect_delay' );
-    }
+	if( null === $p_time ) {
+		$p_time = current_user_get_pref( 'redirect_delay' );
+	}
 
-    $t_url = config_get( 'path' );
-    if( $p_sanitize ) {
-        $t_url .= string_sanitize_url( $p_url );
-    } else {
-        $t_url .= $p_url;
-    }
+	$t_url = config_get( 'path' );
+	if( $p_sanitize ) {
+		$t_url .= string_sanitize_url( $p_url );
+	} else {
+		$t_url .= $p_url;
+	}
 
-    $t_url = htmlspecialchars( $t_url );
+	$t_url = htmlspecialchars( $t_url );
 
-    echo "\t<meta http-equiv=\"Refresh\" content=\"$p_time;URL=$t_url\" />\n";
+	echo "\t<meta http-equiv=\"Refresh\" content=\"$p_time;URL=$t_url\" />\n";
 	echo "\t" . '<meta http-equiv="Refresh" content="' . $p_time . ';URL=' . $t_url . '" />' . "\n";
 
-    return true;
+	return true;
 }
 
 /**
@@ -256,8 +256,8 @@ function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
  * @return void
  */
 function require_js( $p_script_path ) {
-    global $g_scripts_included;
-    $g_scripts_included[$p_script_path] = $p_script_path;
+	global $g_scripts_included;
+	$g_scripts_included[$p_script_path] = $p_script_path;
 }
 
 /**
@@ -265,18 +265,18 @@ function require_js( $p_script_path ) {
  * @return void
  */
 function html_head_javascript() {
-    if( config_get( 'use_javascript' ) ) {
-        global $g_scripts_included;
-        echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_config.php' ) . '"></script>' . "\n";
-        echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
-        html_javascript_link( 'jquery.min.js' );
-        html_javascript_link( 'jquery-ui.min.js' );
-        layout_head_javascript();
-        html_javascript_link( 'common.js' );
-        foreach ( $g_scripts_included as $t_script_path ) {
-            html_javascript_link( $t_script_path );
-        }
-    }
+	if( config_get( 'use_javascript' ) ) {
+		global $g_scripts_included;
+		echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_config.php' ) . '"></script>' . "\n";
+		echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
+		html_javascript_link( 'jquery.min.js' );
+		html_javascript_link( 'jquery-ui.min.js' );
+		layout_head_javascript();
+		html_javascript_link( 'common.js' );
+		foreach ( $g_scripts_included as $t_script_path ) {
+			html_javascript_link( $t_script_path );
+		}
+	}
 }
 
 /**
@@ -284,7 +284,7 @@ function html_head_javascript() {
  * @return void
  */
 function html_head_end() {
-    echo '</head>', "\n";
+	echo '</head>', "\n";
 }
 
 /**
@@ -292,7 +292,7 @@ function html_head_end() {
  * @return void
  */
 function html_body_begin() {
-    echo '<body>', "\n";
+	echo '<body>', "\n";
 }
 
 /**
@@ -300,37 +300,37 @@ function html_body_begin() {
  * @return void
  */
 function html_top_banner() {
-    $t_page = config_get( 'top_include_page' );
-    $t_logo_image = config_get( 'logo_image' );
-    $t_logo_url = config_get( 'logo_url' );
+	$t_page = config_get( 'top_include_page' );
+	$t_logo_image = config_get( 'logo_image' );
+	$t_logo_url = config_get( 'logo_url' );
 
-    if( is_blank( $t_logo_image ) ) {
-        $t_show_logo = false;
-    } else {
-        $t_show_logo = true;
-        if( is_blank( $t_logo_url ) ) {
-            $t_show_url = false;
-        } else {
-            $t_show_url = true;
-        }
-    }
+	if( is_blank( $t_logo_image ) ) {
+		$t_show_logo = false;
+	} else {
+		$t_show_logo = true;
+		if( is_blank( $t_logo_url ) ) {
+			$t_show_url = false;
+		} else {
+			$t_show_url = true;
+		}
+	}
 
-    if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
-        include( $t_page );
-    } else if( $t_show_logo ) {
-        echo '<div id="banner">';
-        if( $t_show_url ) {
-            echo '<a id="logo-link" href="', config_get( 'logo_url' ), '">';
-        }
-        $t_alternate_text = string_html_specialchars( config_get( 'window_title' ) );
-        echo '<img id="logo-image" alt="', $t_alternate_text, '" src="' . helper_mantis_url( $t_logo_image ) . '" />';
-        if( $t_show_url ) {
-            echo '</a>';
-        }
-        echo '</div>';
-    }
+	if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
+		include( $t_page );
+	} else if( $t_show_logo ) {
+		echo '<div id="banner">';
+		if( $t_show_url ) {
+			echo '<a id="logo-link" href="', config_get( 'logo_url' ), '">';
+		}
+		$t_alternate_text = string_html_specialchars( config_get( 'window_title' ) );
+		echo '<img id="logo-image" alt="', $t_alternate_text, '" src="' . helper_mantis_url( $t_logo_image ) . '" />';
+		if( $t_show_url ) {
+			echo '</a>';
+		}
+		echo '</div>';
+	}
 
-    event_signal( 'EVENT_LAYOUT_PAGE_HEADER' );
+	event_signal( 'EVENT_LAYOUT_PAGE_HEADER' );
 }
 
 /**
@@ -340,17 +340,17 @@ function html_top_banner() {
  * @return void
  */
 function html_operation_successful( $p_redirect_url, $p_message = '' ) {
-    echo '<div class="col-md-12 col-xs-12">';
-    echo '<div class="space-0"></div>';
-    echo '<div class="alert alert-success center">';
+	echo '<div class="col-md-12 col-xs-12">';
+	echo '<div class="space-0"></div>';
+	echo '<div class="alert alert-success center">';
 
-    if( !is_blank( $p_message ) ) {
-        echo $p_message . '<br />';
-    }
+	if( !is_blank( $p_message ) ) {
+		echo $p_message . '<br />';
+	}
 
-    echo '<p class="bold bigger-110">' . lang_get( 'operation_successful' ).'</p><br />';
-    print_button( $p_redirect_url, lang_get( 'proceed' ) );
-    echo '</div></div>';
+	echo '<p class="bold bigger-110">' . lang_get( 'operation_successful' ).'</p><br />';
+	print_button( $p_redirect_url, lang_get( 'proceed' ) );
+	echo '</div></div>';
 }
 
 /**
@@ -358,7 +358,7 @@ function html_operation_successful( $p_redirect_url, $p_message = '' ) {
  * @return void
  */
 function html_body_end() {
-    echo '</body>', "\n";
+	echo '</body>', "\n";
 }
 
 /**
@@ -366,16 +366,16 @@ function html_body_end() {
  * @return void
  */
 function html_end() {
-    global $g_email_stored;
+	global $g_email_stored;
 
-    echo '</html>', "\n";
+	echo '</html>', "\n";
 
-    if( $g_email_stored == true ) {
-        if( function_exists( 'fastcgi_finish_request' ) ) {
-            fastcgi_finish_request();
-        }
-        email_send_all();
-    }
+	if( $g_email_stored == true ) {
+		if( function_exists( 'fastcgi_finish_request' ) ) {
+			fastcgi_finish_request();
+		}
+		email_send_all();
+	}
 }
 
 /**
@@ -384,19 +384,19 @@ function html_end() {
  * @return array
  */
 function prepare_custom_menu_options( $p_config ) {
-    $t_custom_menu_options = config_get( $p_config );
-    $t_options = array();
+	$t_custom_menu_options = config_get( $p_config );
+	$t_options = array();
 
-    foreach( $t_custom_menu_options as $t_custom_option ) {
-        $t_access_level = $t_custom_option[1];
-        if( access_has_project_level( $t_access_level ) ) {
-            $t_caption = string_html_specialchars( lang_get_defaulted( $t_custom_option[0] ) );
-            $t_link = string_attribute( $t_custom_option[2] );
-            $t_options[] = '<a href="' . $t_link . '">' . $t_caption . '</a>';
-        }
-    }
+	foreach( $t_custom_menu_options as $t_custom_option ) {
+		$t_access_level = $t_custom_option[1];
+		if( access_has_project_level( $t_access_level ) ) {
+			$t_caption = string_html_specialchars( lang_get_defaulted( $t_custom_option[0] ) );
+			$t_link = string_attribute( $t_custom_option[2] );
+			$t_options[] = '<a href="' . $t_link . '">' . $t_caption . '</a>';
+		}
+	}
 
-    return $t_options;
+	return $t_options;
 }
 
 /**
@@ -404,31 +404,31 @@ function prepare_custom_menu_options( $p_config ) {
  * @return void
  */
 function print_project_menu_bar() {
-    $t_project_ids = current_user_get_accessible_projects();
-    $t_current_project_id = helper_get_current_project();
+	$t_project_ids = current_user_get_accessible_projects();
+	$t_current_project_id = helper_get_current_project();
 
-    echo '<ul class="nav nav-tabs padding-18">' . "\n";
+	echo '<ul class="nav nav-tabs padding-18">' . "\n";
 
-    if( ALL_PROJECTS == $t_current_project_id) {
-        echo '<li class="active">' . "\n";
-    } else {
-        echo '<li>' . "\n";
-    }
-    echo '<a href="' . helper_mantis_url( 'set_project.php?project_id=' . ALL_PROJECTS ) . '">', lang_get( 'all_projects' ), '</a>' . "\n";
-    echo '</li>' . "\n";
+	if( ALL_PROJECTS == $t_current_project_id) {
+		echo '<li class="active">' . "\n";
+	} else {
+		echo '<li>' . "\n";
+	}
+	echo '<a href="' . helper_mantis_url( 'set_project.php?project_id=' . ALL_PROJECTS ) . '">', lang_get( 'all_projects' ), '</a>' . "\n";
+	echo '</li>' . "\n";
 
-    foreach( $t_project_ids as $t_id ) {
-        if( $t_id == $t_current_project_id) {
-            echo '<li class="active">' . "\n";
-        } else {
-            echo '<li>' . "\n";
-        }
-        echo '<a href="' . helper_mantis_url( 'set_project.php?project_id=' . $t_id ) . '">', string_html_specialchars( project_get_field( $t_id, 'name' ) ), '</a>' . "\n";
-        echo '</li>' . "\n";
-        print_subproject_menu_bar( $t_id, $t_id . ';' );
-    }
+	foreach( $t_project_ids as $t_id ) {
+		if( $t_id == $t_current_project_id) {
+			echo '<li class="active">' . "\n";
+		} else {
+			echo '<li>' . "\n";
+		}
+		echo '<a href="' . helper_mantis_url( 'set_project.php?project_id=' . $t_id ) . '">', string_html_specialchars( project_get_field( $t_id, 'name' ) ), '</a>' . "\n";
+		echo '</li>' . "\n";
+		print_subproject_menu_bar( $t_id, $t_id . ';' );
+	}
 
-    echo '</ul>' . "\n";
+	echo '</ul>' . "\n";
 }
 
 /**
@@ -439,13 +439,13 @@ function print_project_menu_bar() {
  * @return void
  */
 function print_subproject_menu_bar( $p_project_id, $p_parents = '' ) {
-    $t_subprojects = current_user_get_accessible_subprojects( $p_project_id );
-    $t_char = ':';
-    foreach( $t_subprojects as $t_subproject ) {
-        echo $t_char . ' <a href="' . helper_mantis_url( 'set_project.php?project_id=' . $p_parents . $t_subproject ) . '">' . string_html_specialchars( project_get_field( $t_subproject, 'name' ) ) . '</a>';
-        print_subproject_menu_bar( $t_subproject, $p_parents . $t_subproject . ';' );
-        $t_char = ',';
-    }
+	$t_subprojects = current_user_get_accessible_subprojects( $p_project_id );
+	$t_char = ':';
+	foreach( $t_subprojects as $t_subproject ) {
+		echo $t_char . ' <a href="' . helper_mantis_url( 'set_project.php?project_id=' . $p_parents . $t_subproject ) . '">' . string_html_specialchars( project_get_field( $t_subproject, 'name' ) ) . '</a>';
+		print_subproject_menu_bar( $t_subproject, $p_parents . $t_subproject . ';' );
+		$t_char = ',';
+	}
 }
 
 /**
@@ -453,29 +453,29 @@ function print_subproject_menu_bar( $p_project_id, $p_parents = '' ) {
  * @return void
  */
 function print_summary_submenu() {
-    # Plugin / Event added options
-    $t_event_menu_options = event_signal( 'EVENT_SUBMENU_SUMMARY' );
-    $t_menu_options = array();
-    foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
-        foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-            if( is_array( $t_callback_menu_options ) ) {
-                $t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-            } else {
-                if( !is_null( $t_callback_menu_options ) ) {
-                    $t_menu_options[] = $t_callback_menu_options;
-                }
-            }
-        }
-    }
+	# Plugin / Event added options
+	$t_event_menu_options = event_signal( 'EVENT_SUBMENU_SUMMARY' );
+	$t_menu_options = array();
+	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+			if( is_array( $t_callback_menu_options ) ) {
+				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
+			} else {
+				if( !is_null( $t_callback_menu_options ) ) {
+					$t_menu_options[] = $t_callback_menu_options;
+				}
+			}
+		}
+	}
 
-    echo '<div class="center">';
-    echo '<div class="btn-toolbar inline">';
-    echo '<div class="btn-group">';
-    # Plugins menu items - these are cooked links
-    foreach ( $t_menu_options as $t_menu_item ) {
-        echo $t_menu_item;
-    }
-    echo '</div></div></div>';
+	echo '<div class="center">';
+	echo '<div class="btn-toolbar inline">';
+	echo '<div class="btn-group">';
+	# Plugins menu items - these are cooked links
+	foreach ( $t_menu_options as $t_menu_item ) {
+		echo $t_menu_item;
+	}
+	echo '</div></div></div>';
 }
 
 /**
@@ -485,69 +485,69 @@ function print_summary_submenu() {
  * @return void
  */
 function print_manage_menu( $p_page = '' ) {
-    $t_pages = array();
+	$t_pages = array();
 
-    $t_pages['manage_overview_page.php'] = array( 'url'   => 'manage_overview_page.php', 'label' => '' );
-    if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
-        $t_pages['manage_user_page.php'] = array( 'url'   => 'manage_user_page.php', 'label' => 'manage_users_link' );
-    }
-    if( access_has_project_level( config_get( 'manage_project_threshold' ) ) ) {
-        $t_pages['manage_proj_page.php'] = array( 'url'   => 'manage_proj_page.php', 'label' => 'manage_projects_link' );
-    }
-    if( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
-        $t_pages['manage_tags_page.php'] = array( 'url'   => 'manage_tags_page.php', 'label' => 'manage_tags_link' );
-    }
-    if( access_has_global_level( config_get( 'manage_custom_fields_threshold' ) ) ) {
-        $t_pages['manage_custom_field_page.php'] = array( 'url'   => 'manage_custom_field_page.php', 'label' => 'manage_custom_field_link' );
-    }
-    if( access_has_global_level( config_get( 'manage_global_profile_threshold' ) ) ) {
-        $t_pages['manage_prof_menu_page.php'] = array( 'url'   => 'manage_prof_menu_page.php', 'label' => 'manage_global_profiles_link' );
-    }
-    if( access_has_global_level( config_get( 'manage_plugin_threshold' ) ) ) {
-        $t_pages['manage_plugin_page.php'] = array( 'url'   => 'manage_plugin_page.php', 'label' => 'manage_plugin_link' );
-    }
+	$t_pages['manage_overview_page.php'] = array( 'url'   => 'manage_overview_page.php', 'label' => '' );
+	if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
+		$t_pages['manage_user_page.php'] = array( 'url'   => 'manage_user_page.php', 'label' => 'manage_users_link' );
+	}
+	if( access_has_project_level( config_get( 'manage_project_threshold' ) ) ) {
+		$t_pages['manage_proj_page.php'] = array( 'url'   => 'manage_proj_page.php', 'label' => 'manage_projects_link' );
+	}
+	if( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
+		$t_pages['manage_tags_page.php'] = array( 'url'   => 'manage_tags_page.php', 'label' => 'manage_tags_link' );
+	}
+	if( access_has_global_level( config_get( 'manage_custom_fields_threshold' ) ) ) {
+		$t_pages['manage_custom_field_page.php'] = array( 'url'   => 'manage_custom_field_page.php', 'label' => 'manage_custom_field_link' );
+	}
+	if( access_has_global_level( config_get( 'manage_global_profile_threshold' ) ) ) {
+		$t_pages['manage_prof_menu_page.php'] = array( 'url'   => 'manage_prof_menu_page.php', 'label' => 'manage_global_profiles_link' );
+	}
+	if( access_has_global_level( config_get( 'manage_plugin_threshold' ) ) ) {
+		$t_pages['manage_plugin_page.php'] = array( 'url'   => 'manage_plugin_page.php', 'label' => 'manage_plugin_link' );
+	}
 
-    if( access_has_project_level( config_get( 'manage_configuration_threshold' ) ) ) {
-        if( access_has_global_level( config_get( 'view_configuration_threshold' ) ) ) {
-            $t_pages['adm_config_report.php'] = array( 'url'   => 'adm_config_report.php', 'label' => 'manage_config_link' );
-        } else {
-            $t_pages['adm_permissions_report.php'] = array( 'url'   => 'adm_permissions_report.php', 'label' => 'manage_config_link' );
-        }
-    }
+	if( access_has_project_level( config_get( 'manage_configuration_threshold' ) ) ) {
+		if( access_has_global_level( config_get( 'view_configuration_threshold' ) ) ) {
+			$t_pages['adm_config_report.php'] = array( 'url'   => 'adm_config_report.php', 'label' => 'manage_config_link' );
+		} else {
+			$t_pages['adm_permissions_report.php'] = array( 'url'   => 'adm_permissions_report.php', 'label' => 'manage_config_link' );
+		}
+	}
 
-    # Plugin / Event added options
-    $t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE' );
-    $t_menu_options = array();
-    foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
-        foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-            if( is_array( $t_callback_menu_options ) ) {
-                $t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-            } else {
-                if( !is_null( $t_callback_menu_options ) ) {
-                    $t_menu_options[] = $t_callback_menu_options;
-                }
-            }
-        }
-    }
+	# Plugin / Event added options
+	$t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE' );
+	$t_menu_options = array();
+	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+			if( is_array( $t_callback_menu_options ) ) {
+				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
+			} else {
+				if( !is_null( $t_callback_menu_options ) ) {
+					$t_menu_options[] = $t_callback_menu_options;
+				}
+			}
+		}
+	}
 
-    echo '<ul class="nav nav-tabs padding-18">' . "\n";
-    foreach( $t_pages AS $t_page ) {
-        $t_active =  $t_page['url'] == $p_page ? 'active' : '';
-        echo '<li class="' . $t_active .  '">' . "\n";
-        if( $t_page['label'] == '' ) {
-            echo '<a href="'. helper_mantis_url( $t_page['url'] ) .'"><i class="blue ace-icon fa fa-info-circle"></i> </a>';
-        } else {
-            echo '<a href="'. helper_mantis_url( $t_page['url'] ) .'">' . lang_get( $t_page['label'] ) . '</a>';
-        }
-        echo '</li>' . "\n";
-    }
+	echo '<ul class="nav nav-tabs padding-18">' . "\n";
+	foreach( $t_pages AS $t_page ) {
+		$t_active =  $t_page['url'] == $p_page ? 'active' : '';
+		echo '<li class="' . $t_active .  '">' . "\n";
+		if( $t_page['label'] == '' ) {
+			echo '<a href="'. helper_mantis_url( $t_page['url'] ) .'"><i class="blue ace-icon fa fa-info-circle"></i> </a>';
+		} else {
+			echo '<a href="'. helper_mantis_url( $t_page['url'] ) .'">' . lang_get( $t_page['label'] ) . '</a>';
+		}
+		echo '</li>' . "\n";
+	}
 
-    # Plugins menu items - these are cooked links
-    foreach( $t_menu_options as $t_menu_item ) {
-        echo '<li>', $t_menu_item, '</li>';
-    }
+	# Plugins menu items - these are cooked links
+	foreach( $t_menu_options as $t_menu_item ) {
+		echo '<li>', $t_menu_item, '</li>';
+	}
 
-    echo '</ul>' . "\n";
+	echo '</ul>' . "\n";
 }
 
 /**
@@ -556,72 +556,71 @@ function print_manage_menu( $p_page = '' ) {
  * @return void
  */
 function print_manage_config_menu( $p_page = '' ) {
-    if( !access_has_project_level( config_get( 'manage_configuration_threshold' ) ) ) {
-        return;
-    }
+	if( !access_has_project_level( config_get( 'manage_configuration_threshold' ) ) ) {
+		return;
+	}
 
-    $t_pages = array();
+	$t_pages = array();
 
-    if( access_has_global_level( config_get( 'view_configuration_threshold' ) ) ) {
-        $t_pages['adm_config_report.php'] = array( 'url'   => 'adm_config_report.php',
-            'label' => 'configuration_report' );
-    }
+	if( access_has_global_level( config_get( 'view_configuration_threshold' ) ) ) {
+		$t_pages['adm_config_report.php'] = array( 'url'   => 'adm_config_report.php',
+		                                           'label' => 'configuration_report' );
+	}
 
-    $t_pages['adm_permissions_report.php'] = array( 'url'   => 'adm_permissions_report.php',
-        'label' => 'permissions_summary_report' );
+	$t_pages['adm_permissions_report.php'] = array( 'url'   => 'adm_permissions_report.php',
+	                                                'label' => 'permissions_summary_report' );
 
-    $t_pages['manage_config_work_threshold_page.php'] = array( 'url'   => 'manage_config_work_threshold_page.php',
-        'label' => 'manage_threshold_config' );
+	$t_pages['manage_config_work_threshold_page.php'] = array( 'url'   => 'manage_config_work_threshold_page.php',
+	                                                           'label' => 'manage_threshold_config' );
 
-    $t_pages['manage_config_workflow_page.php'] = array( 'url'   => 'manage_config_workflow_page.php',
-        'label' => 'manage_workflow_config' );
+	$t_pages['manage_config_workflow_page.php'] = array( 'url'   => 'manage_config_workflow_page.php',
+	                                                     'label' => 'manage_workflow_config' );
 
-    if( config_get( 'relationship_graph_enable' ) ) {
-        $t_pages['manage_config_workflow_graph_page.php'] = array( 'url'   => 'manage_config_workflow_graph_page.php',
-            'label' => 'manage_workflow_graph' );
-    }
+	if( config_get( 'relationship_graph_enable' ) ) {
+		$t_pages['manage_config_workflow_graph_page.php'] = array( 'url'   => 'manage_config_workflow_graph_page.php',
+		                                                           'label' => 'manage_workflow_graph' );
+	}
 
-    $t_pages['manage_config_email_page.php'] = array( 'url'   => 'manage_config_email_page.php',
-        'label' => 'manage_email_config' );
+	$t_pages['manage_config_email_page.php'] = array( 'url'   => 'manage_config_email_page.php',
+	                                                  'label' => 'manage_email_config' );
 
-    $t_pages['manage_config_columns_page.php'] = array( 'url'   => 'manage_config_columns_page.php',
-        'label' => 'manage_columns_config' );
+	$t_pages['manage_config_columns_page.php'] = array( 'url'   => 'manage_config_columns_page.php',
+	                                                    'label' => 'manage_columns_config' );
 
-    # Plugin / Event added options
-    $t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE_CONFIG' );
-    $t_menu_options = array();
-    foreach ( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
-        foreach ( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-            if( is_array( $t_callback_menu_options ) ) {
-                $t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-            } else {
-                if( !is_null( $t_callback_menu_options ) ) {
-                    $t_menu_options[] = $t_callback_menu_options;
-                }
-            }
-        }
-    }
+	# Plugin / Event added options
+	$t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE_CONFIG' );
+	$t_menu_options = array();
+	foreach ( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+		foreach ( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+			if( is_array( $t_callback_menu_options ) ) {
+				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
+			} else {
+				if( !is_null( $t_callback_menu_options ) ) {
+					$t_menu_options[] = $t_callback_menu_options;
+				}
+			}
+		}
+	}
 
-    echo '<div class="space-10"></div>' . "\n";
+	echo '<div class="space-10"></div>' . "\n";
+	echo '<div class="center">' . "\n";
+	echo '<div class="btn-toolbar inline">' . "\n";
+	echo '<div class="btn-group">' . "\n";
 
-    echo '<div class="center">' . "\n";
-    echo '<div class="btn-toolbar inline">' . "\n";
-    echo '<div class="btn-group">' . "\n";
+	foreach ( $t_pages as $t_page ) {
+		$t_active =  $t_page['url'] == $p_page ? 'active' : '';
+		echo '<a class="btn btn-sm btn-white btn-primary ' . $t_active . '" href="'. helper_mantis_url( $t_page['url'] ) .'">' . "\n";
+		echo lang_get( $t_page['label'] );
+		echo '</a>' . "\n";
+	}
 
-    foreach ( $t_pages as $t_page ) {
-        $t_active =  $t_page['url'] == $p_page ? 'active' : '';
-        echo '<a class="btn btn-sm btn-white btn-primary ' . $t_active . '" href="'. helper_mantis_url( $t_page['url'] ) .'">' . "\n";
-        echo lang_get( $t_page['label'] );
-        echo '</a>' . "\n";
-    }
+	foreach ( $t_menu_options as $t_menu_item ) {
+		echo $t_menu_item;
+	}
 
-    foreach ( $t_menu_options as $t_menu_item ) {
-        echo $t_menu_item;
-    }
-
-    echo '</div>' . "\n";
-    echo '</div>' . "\n";
-    echo '</div>' . "\n";
+	echo '</div>' . "\n";
+	echo '</div>' . "\n";
+	echo '</div>' . "\n";
 }
 
 /**
@@ -630,50 +629,48 @@ function print_manage_config_menu( $p_page = '' ) {
  * @return void
  */
 function print_account_menu( $p_page = '' ) {
-    $t_pages['account_page.php'] = array( 'url'=>'account_page.php', 'label'=>'account_link' );
-    $t_pages['account_prefs_page.php'] = array( 'url'=>'account_prefs_page.php', 'label'=>'change_preferences_link' );
-    $t_pages['account_manage_columns_page.php'] = array( 'url'=>'account_manage_columns_page.php', 'label'=>'manage_columns_config' );
+	$t_pages['account_page.php'] = array( 'url'=>'account_page.php', 'label'=>'account_link' );
+	$t_pages['account_prefs_page.php'] = array( 'url'=>'account_prefs_page.php', 'label'=>'change_preferences_link' );
+	$t_pages['account_manage_columns_page.php'] = array( 'url'=>'account_manage_columns_page.php', 'label'=>'manage_columns_config' );
 
-    if( config_get( 'enable_profiles' ) == ON && access_has_project_level( config_get( 'add_profile_threshold' ) ) ) {
-        $t_pages['account_prof_menu_page.php'] = array( 'url'=>'account_prof_menu_page.php', 'label'=>'manage_profiles_link' );
-    }
+	if( config_get( 'enable_profiles' ) == ON && access_has_project_level( config_get( 'add_profile_threshold' ) ) ) {
+		$t_pages['account_prof_menu_page.php'] = array( 'url'=>'account_prof_menu_page.php', 'label'=>'manage_profiles_link' );
+	}
 
-    if( config_get( 'enable_sponsorship' ) == ON && access_has_project_level( config_get( 'view_sponsorship_total_threshold' ) ) && !current_user_is_anonymous() ) {
-        $t_pages['account_sponsor_page.php'] = array( 'url'=>'account_sponsor_page.php', 'label'=>'my_sponsorship' );
-    }
+	if( config_get( 'enable_sponsorship' ) == ON && access_has_project_level( config_get( 'view_sponsorship_total_threshold' ) ) && !current_user_is_anonymous() ) {
+		$t_pages['account_sponsor_page.php'] = array( 'url'=>'account_sponsor_page.php', 'label'=>'my_sponsorship' );
+	}
 
-    # Plugin / Event added options
-    $t_event_menu_options = event_signal( 'EVENT_MENU_ACCOUNT' );
-    $t_menu_options = array();
-    foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
-        foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-            if( is_array( $t_callback_menu_options ) ) {
-                $t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-            } else {
-                if( !is_null( $t_callback_menu_options ) ) {
-                    $t_menu_options[] = $t_callback_menu_options;
-                }
-            }
-        }
-    }
+	# Plugin / Event added options
+	$t_event_menu_options = event_signal( 'EVENT_MENU_ACCOUNT' );
+	$t_menu_options = array();
+	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+			if( is_array( $t_callback_menu_options ) ) {
+				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
+			} else {
+				if( !is_null( $t_callback_menu_options ) ) {
+					$t_menu_options[] = $t_callback_menu_options;
+				}
+			}
+		}
+	}
 
-    echo '<ul class="nav nav-tabs padding-18">' . "\n";
+	echo '<ul class="nav nav-tabs padding-18">' . "\n";
+	foreach ( $t_pages as $t_page ) {
+		$t_active =  $t_page['url'] == $p_page ? 'active' : '';
+		echo '<li class="' . $t_active . '">' . "\n";
+		echo '<a href="'. helper_mantis_url( $t_page['url'] ) .'">' . "\n";
+		echo lang_get( $t_page['label'] );
+		echo '</a>' . "\n";
+		echo '</li>' . "\n";
+	}
 
-    foreach ( $t_pages as $t_page ) {
-        $t_active =  $t_page['url'] == $p_page ? 'active' : '';
-        echo '<li class="' . $t_active . '">' . "\n";
-        echo '<a href="'. helper_mantis_url( $t_page['url'] ) .'">' . "\n";
-        echo lang_get( $t_page['label'] );
-        echo '</a>' . "\n";
-        echo '</li>' . "\n";
-    }
-
-    # Plugins menu items - these are cooked links
-    foreach ( $t_menu_options as $t_menu_item ) {
-        echo '<li>' . $t_menu_item . '</li>';
-    }
-
-    echo '</ul>' . "\n";
+	# Plugins menu items - these are cooked links
+	foreach ( $t_menu_options as $t_menu_item ) {
+		echo '<li>' . $t_menu_item . '</li>';
+	}
+	echo '</ul>' . "\n";
 }
 
 /**
@@ -682,50 +679,50 @@ function print_account_menu( $p_page = '' ) {
  * @return void
  */
 function print_doc_menu( $p_page = '' ) {
-    # User Documentation
-    $t_doc_url = config_get( 'manual_url' );
-    if( is_null( parse_url( $t_doc_url, PHP_URL_SCHEME ) ) ) {
-        # URL has no scheme, so it is relative to MantisBT root
-        if( is_blank( $t_doc_url ) ||
-            !file_exists( config_get_global( 'absolute_path' ) . $t_doc_url )
-        ) {
-            # Local documentation not available, use online docs
-            $t_doc_url = 'http://www.mantisbt.org/documentation.php';
-        } else {
-            $t_doc_url = helper_mantis_url( $t_doc_url );
-        }
-    }
+	# User Documentation
+	$t_doc_url = config_get( 'manual_url' );
+	if( is_null( parse_url( $t_doc_url, PHP_URL_SCHEME ) ) ) {
+		# URL has no scheme, so it is relative to MantisBT root
+		if( is_blank( $t_doc_url ) ||
+			!file_exists( config_get_global( 'absolute_path' ) . $t_doc_url )
+		) {
+			# Local documentation not available, use online docs
+			$t_doc_url = 'http://www.mantisbt.org/documentation.php';
+		} else {
+			$t_doc_url = helper_mantis_url( $t_doc_url );
+		}
+	}
 
-    $t_pages[$t_doc_url] = array(
-        'url'   => $t_doc_url,
-        'label' => 'user_documentation'
-    );
+	$t_pages[$t_doc_url] = array(
+		'url'   => $t_doc_url,
+		'label' => 'user_documentation'
+	);
 
-    # Project Documentation
-    $t_pages['proj_doc_page.php'] = array(
-        'url'   => helper_mantis_url( 'proj_doc_page.php' ),
-        'label' => 'project_documentation'
-    );
+	# Project Documentation
+	$t_pages['proj_doc_page.php'] = array(
+		'url'   => helper_mantis_url( 'proj_doc_page.php' ),
+		'label' => 'project_documentation'
+	);
 
-    # Add File
-    if( file_allow_project_upload() ) {
-        $t_pages['proj_doc_add_page.php'] = array(
-            'url'   => helper_mantis_url( 'proj_doc_add_page.php' ),
-            'label' => 'add_file'
-        );
-    }
+	# Add File
+	if( file_allow_project_upload() ) {
+		$t_pages['proj_doc_add_page.php'] = array(
+			'url'   => helper_mantis_url( 'proj_doc_add_page.php' ),
+			'label' => 'add_file'
+		);
+	}
 
 	echo '<ul class="nav nav-tabs padding-18">' . "\n";
 
-    foreach ( $t_pages as $key => $t_page ) {
-        $t_active =  $key == $p_page ? 'active' : '';
+	foreach ( $t_pages as $key => $t_page ) {
+		$t_active =  $key == $p_page ? 'active' : '';
 		echo '<li class="' . $t_active . '">' . "\n";
 		echo '<a href="' . $t_page['url'] . '">' . "\n";
 		echo lang_get($t_page['label']);
 
 		echo '</a>' . "\n";
 		echo '</li>' . "\n";
-    }
+	}
 
 	echo '</ul>' . "\n";
 }
@@ -736,41 +733,41 @@ function print_doc_menu( $p_page = '' ) {
  * @return void
  */
 function print_summary_menu( $p_page = '' ) {
-    # Plugin / Event added options
-    $t_event_menu_options = event_signal( 'EVENT_MENU_SUMMARY' );
-    $t_menu_options = array();
-    foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
-        foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
-            if( is_array( $t_callback_menu_options ) ) {
-                $t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
-            } else {
-                if( !is_null( $t_callback_menu_options ) ) {
-                    $t_menu_options[] = $t_callback_menu_options;
-                }
-            }
-        }
-    }
+	# Plugin / Event added options
+	$t_event_menu_options = event_signal( 'EVENT_MENU_SUMMARY' );
+	$t_menu_options = array();
+	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+			if( is_array( $t_callback_menu_options ) ) {
+				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
+			} else {
+				if( !is_null( $t_callback_menu_options ) ) {
+					$t_menu_options[] = $t_callback_menu_options;
+				}
+			}
+		}
+	}
 
-    $t_pages['print_all_bug_page.php'] = array( 'url'=>'print_all_bug_page.php', 'label'=>'print_all_bug_page_link' );
-    $t_pages['summary_page.php'] = array( 'url'=>'summary_page.php', 'label'=>'summary_link' );
+	$t_pages['print_all_bug_page.php'] = array( 'url'=>'print_all_bug_page.php', 'label'=>'print_all_bug_page_link' );
+	$t_pages['summary_page.php'] = array( 'url'=>'summary_page.php', 'label'=>'summary_link' );
 
-    echo '<ul class="nav nav-tabs padding-18">' . "\n";
+	echo '<ul class="nav nav-tabs padding-18">' . "\n";
 
-    foreach ( $t_pages as $t_page ) {
-        $t_active =  $t_page['url'] == $p_page ? 'active' : '';
-        echo '<li class="' . $t_active . '">' . "\n";
-        echo '<a href="'. helper_mantis_url( $t_page['url'] ) .'">' . "\n";
-        echo lang_get( $t_page['label'] );
-        echo '</a>' . "\n";
-        echo '</li>' . "\n";
-    }
+	foreach ( $t_pages as $t_page ) {
+		$t_active =  $t_page['url'] == $p_page ? 'active' : '';
+		echo '<li class="' . $t_active . '">' . "\n";
+		echo '<a href="'. helper_mantis_url( $t_page['url'] ) .'">' . "\n";
+		echo lang_get( $t_page['label'] );
+		echo '</a>' . "\n";
+		echo '</li>' . "\n";
+	}
 
-    # Plugins menu items - these are cooked links
-    foreach ( $t_menu_options as $t_menu_item ) {
-        echo '<li>' . $t_menu_item . '</li>';
-    }
+	# Plugins menu items - these are cooked links
+	foreach ( $t_menu_options as $t_menu_item ) {
+		echo '<li>' . $t_menu_item . '</li>';
+	}
 
-    echo '</ul>' . "\n";
+	echo '</ul>' . "\n";
 }
 
 /**
@@ -779,40 +776,40 @@ function print_summary_menu( $p_page = '' ) {
  * @return void
  */
 function print_admin_menu_bar( $p_page ) {
-    echo '<div class="space-10"></div>';
-    echo '<ul class="nav nav-tabs padding-18">' . "\n";
+	echo '<div class="space-10"></div>';
+	echo '<ul class="nav nav-tabs padding-18">' . "\n";
 
-    $t_active = 'index.php' == $p_page ? 'active' : '';
-    echo '<li class="' . $t_active . '">' . "\n";
-    echo '<a href="index.php"><i class="blue ace-icon fa fa-info-circle"></i> </a>';
-    echo '</li>' . "\n";
+	$t_active = 'index.php' == $p_page ? 'active' : '';
+	echo '<li class="' . $t_active . '">' . "\n";
+	echo '<a href="index.php"><i class="blue ace-icon fa fa-info-circle"></i> </a>';
+	echo '</li>' . "\n";
 
-    $t_active = 'system_utils.php' == $p_page ? 'active' : '';
-    echo '<li class="' . $t_active . '">' . "\n";
-    echo '<a href="system_utils.php">System Utilities</a>' . "\n";
-    echo '</li>' . "\n";
+	$t_active = 'system_utils.php' == $p_page ? 'active' : '';
+	echo '<li class="' . $t_active . '">' . "\n";
+	echo '<a href="system_utils.php">System Utilities</a>' . "\n";
+	echo '</li>' . "\n";
 
-    $t_active = 'test_icons.php' == $p_page ? 'active' : '';
-    echo '<li class="' . $t_active . '">' . "\n";
-    echo '<a href="test_icons.php">Test Icons</a></li>' . "\n";
-    echo '</li>' . "\n";
+	$t_active = 'test_icons.php' == $p_page ? 'active' : '';
+	echo '<li class="' . $t_active . '">' . "\n";
+	echo '<a href="test_icons.php">Test Icons</a></li>' . "\n";
+	echo '</li>' . "\n";
 
-    $t_active = 'test_langs.php' == $p_page ? 'active' : '';
-    echo '<li class="' . $t_active . '">' . "\n";
-    echo '<a href="test_langs.php">Test Langs</a>' . "\n";
-    echo '</li>' . "\n";
+	$t_active = 'test_langs.php' == $p_page ? 'active' : '';
+	echo '<li class="' . $t_active . '">' . "\n";
+	echo '<a href="test_langs.php">Test Langs</a>' . "\n";
+	echo '</li>' . "\n";
 
-    $t_active = 'test_email.php' == $p_page ? 'active' : '';
-    echo '<li class="' . $t_active . '">' . "\n";
-    echo '<a href="test_email.php">Test Email</a>' . "\n";
-    echo '</li>' . "\n";
+	$t_active = 'test_email.php' == $p_page ? 'active' : '';
+	echo '<li class="' . $t_active . '">' . "\n";
+	echo '<a href="test_email.php">Test Email</a>' . "\n";
+	echo '</li>' . "\n";
 
-    $t_active = 'email_queue.php' == $p_page ? 'active' : '';
-    echo '<li class="' . $t_active . '">' . "\n";
-    echo '<a href="email_queue.php">Email Queue</a>' . "\n";
-    echo '</li>' . "\n";
+	$t_active = 'email_queue.php' == $p_page ? 'active' : '';
+	echo '<li class="' . $t_active . '">' . "\n";
+	echo '<a href="email_queue.php">Email Queue</a>' . "\n";
+	echo '</li>' . "\n";
 
-    echo '</ul>' . "\n";
+	echo '</ul>' . "\n";
 }
 
 /**
@@ -824,33 +821,33 @@ function print_admin_menu_bar( $p_page ) {
  * @return void
  */
 function html_button( $p_action, $p_button_text, array $p_fields = array(), $p_method = 'post' ) {
-    $t_form_name = explode( '.php', $p_action, 2 );
-    $p_action = urlencode( $p_action );
-    $p_button_text = string_attribute( $p_button_text );
+	$t_form_name = explode( '.php', $p_action, 2 );
+	$p_action = urlencode( $p_action );
+	$p_button_text = string_attribute( $p_button_text );
 
-    if( utf8_strtolower( $p_method ) == 'get' ) {
-        $t_method = 'get';
-    } else {
-        $t_method = 'post';
-    }
+	if( utf8_strtolower( $p_method ) == 'get' ) {
+		$t_method = 'get';
+	} else {
+		$t_method = 'post';
+	}
 
-    echo '<form method="' . $t_method . '" action="' . $p_action . '" class="form-inline">' . "\n";
-    echo "\t<fieldset>";
-    # Add a CSRF token only when the form is being sent via the POST method
-    if( $t_method == 'post' ) {
-        echo form_security_field( $t_form_name[0] );
-    }
+	echo '<form method="' . $t_method . '" action="' . $p_action . '" class="form-inline">' . "\n";
+	echo "\t<fieldset>";
+	# Add a CSRF token only when the form is being sent via the POST method
+	if( $t_method == 'post' ) {
+		echo form_security_field( $t_form_name[0] );
+	}
 
-    foreach( $p_fields as $t_key => $t_val ) {
-        $t_key = string_attribute( $t_key );
-        $t_val = string_attribute( $t_val );
+	foreach( $p_fields as $t_key => $t_val ) {
+		$t_key = string_attribute( $t_key );
+		$t_val = string_attribute( $t_val );
 
-        echo "\t\t" . '<input type="hidden" name="' . $t_key . '" value="' . $t_val . '" />' . "\n";
-    }
+		echo "\t\t" . '<input type="hidden" name="' . $t_key . '" value="' . $t_val . '" />' . "\n";
+	}
 
-    echo "\t\t" . '<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="' . $p_button_text . '" />' . "\n";
-    echo "\t</fieldset>";
-    echo "</form>\n";
+	echo "\t\t" . '<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="' . $p_button_text . '" />' . "\n";
+	echo "\t</fieldset>";
+	echo "</form>\n";
 }
 
 /**
@@ -859,9 +856,9 @@ function html_button( $p_action, $p_button_text, array $p_fields = array(), $p_m
  * @return void
  */
 function html_button_bug_update( $p_bug_id ) {
-    if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
-        html_button( string_get_bug_update_page(), lang_get( 'update_bug_button' ), array( 'bug_id' => $p_bug_id ) );
-    }
+	if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
+		html_button( string_get_bug_update_page(), lang_get( 'update_bug_button' ), array( 'bug_id' => $p_bug_id ) );
+	}
 }
 
 /**
@@ -873,38 +870,38 @@ function html_button_bug_update( $p_bug_id ) {
  * @return void
  */
 function html_button_bug_change_status( BugData $p_bug ) {
-    $t_current_access = access_get_project_level( $p_bug->project_id );
+	$t_current_access = access_get_project_level( $p_bug->project_id );
 
-    # User must have rights to change status to use this button
-    if( !access_has_bug_level( config_get( 'update_bug_status_threshold' ), $p_bug->id ) ) {
-        return;
-    }
+	# User must have rights to change status to use this button
+	if( !access_has_bug_level( config_get( 'update_bug_status_threshold' ), $p_bug->id ) ) {
+		return;
+	}
 
-    $t_enum_list = get_status_option_list(
-        $t_current_access,
-        $p_bug->status,
-        false,
-        # Add close if user is bug's reporter, still has rights to report issues
-        # (to prevent users downgraded to viewers from updating issues) and
-        # reporters are allowed to close their own issues
-        (  bug_is_user_reporter( $p_bug->id, auth_get_current_user_id() )
-            && access_has_bug_level( config_get( 'report_bug_threshold' ), $p_bug->id )
-            && ON == config_get( 'allow_reporter_close' )
-        ),
-        $p_bug->project_id );
+	$t_enum_list = get_status_option_list(
+		$t_current_access,
+		$p_bug->status,
+		false,
+		# Add close if user is bug's reporter, still has rights to report issues
+		# (to prevent users downgraded to viewers from updating issues) and
+		# reporters are allowed to close their own issues
+		(  bug_is_user_reporter( $p_bug->id, auth_get_current_user_id() )
+		&& access_has_bug_level( config_get( 'report_bug_threshold' ), $p_bug->id )
+		&& ON == config_get( 'allow_reporter_close' )
+		),
+		$p_bug->project_id );
 
-    if( count( $t_enum_list ) > 0 ) {
-        # resort the list into ascending order after noting the key from the first element (the default)
-        $t_default_arr = each( $t_enum_list );
-        $t_default = $t_default_arr['key'];
-        ksort( $t_enum_list );
-        reset( $t_enum_list );
+	if( count( $t_enum_list ) > 0 ) {
+		# resort the list into ascending order after noting the key from the first element (the default)
+		$t_default_arr = each( $t_enum_list );
+		$t_default = $t_default_arr['key'];
+		ksort( $t_enum_list );
+		reset( $t_enum_list );
 
 		echo '<form method="post" action="bug_change_status_page.php" class="form-inline">';
 		# CSRF protection not required here - form does not result in modifications
 
-        $t_button_text = lang_get( 'bug_status_to_button' );
-        echo '<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="' . $t_button_text . '" />';
+		$t_button_text = lang_get( 'bug_status_to_button' );
+		echo '<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="' . $t_button_text . '" />';
 
 		echo ' <select name="new_status" class="input-sm">';
 
@@ -929,46 +926,46 @@ function html_button_bug_change_status( BugData $p_bug ) {
  * @return void
  */
 function html_button_bug_assign_to( BugData $p_bug ) {
-    # make sure status is allowed of assign would cause auto-set-status
-    # workflow implementation
-    if( ON == config_get( 'auto_set_status_to_assigned' )
-        && !bug_check_workflow( $p_bug->status, config_get( 'bug_assigned_status' ) )
-    ) {
-        return;
-    }
+	# make sure status is allowed of assign would cause auto-set-status
+	# workflow implementation
+	if( ON == config_get( 'auto_set_status_to_assigned' )
+		&& !bug_check_workflow( $p_bug->status, config_get( 'bug_assigned_status' ) )
+	) {
+		return;
+	}
 
-    # make sure current user has access to modify bugs.
-    if( !access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $p_bug->id ) ) {
-        return;
-    }
+	# make sure current user has access to modify bugs.
+	if( !access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $p_bug->id ) ) {
+		return;
+	}
 
-    $t_current_user_id = auth_get_current_user_id();
-    $t_options = array();
-    $t_default_assign_to = null;
+	$t_current_user_id = auth_get_current_user_id();
+	$t_options = array();
+	$t_default_assign_to = null;
 
-    if( ( $p_bug->handler_id != $t_current_user_id )
-        && access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug->id, $t_current_user_id )
-    ) {
-        $t_options[] = array(
-            $t_current_user_id,
-            '[' . lang_get( 'myself' ) . ']',
-        );
-        $t_default_assign_to = $t_current_user_id;
-    }
+	if( ( $p_bug->handler_id != $t_current_user_id )
+		&& access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug->id, $t_current_user_id )
+	) {
+		$t_options[] = array(
+			$t_current_user_id,
+			'[' . lang_get( 'myself' ) . ']',
+		);
+		$t_default_assign_to = $t_current_user_id;
+	}
 
-    if( ( $p_bug->handler_id != $p_bug->reporter_id )
-        && user_exists( $p_bug->reporter_id )
-        && access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug->id, $p_bug->reporter_id )
-    ) {
-        $t_options[] = array(
-            $p_bug->reporter_id,
-            '[' . lang_get( 'reporter' ) . ']',
-        );
+	if( ( $p_bug->handler_id != $p_bug->reporter_id )
+		&& user_exists( $p_bug->reporter_id )
+		&& access_has_bug_level( config_get( 'handle_bug_threshold' ), $p_bug->id, $p_bug->reporter_id )
+	) {
+		$t_options[] = array(
+			$p_bug->reporter_id,
+			'[' . lang_get( 'reporter' ) . ']',
+		);
 
-        if( $t_default_assign_to === null ) {
-            $t_default_assign_to = $p_bug->reporter_id;
-        }
-    }
+		if( $t_default_assign_to === null ) {
+			$t_default_assign_to = $p_bug->reporter_id;
+		}
+	}
 
 	echo '<form method="post" action="bug_update.php" class="form-inline">';
 	echo form_security_field( 'bug_update' );
@@ -978,29 +975,29 @@ function html_button_bug_assign_to( BugData $p_bug ) {
 
 	echo ' <select class="input-sm" name="handler_id">';
 
-    # space at beginning of line is important
+	# space at beginning of line is important
 
-    $t_already_selected = false;
+	$t_already_selected = false;
 
-    foreach( $t_options as $t_entry ) {
-        $t_id = (int)$t_entry[0];
-        $t_caption = string_attribute( $t_entry[1] );
+	foreach( $t_options as $t_entry ) {
+		$t_id = (int)$t_entry[0];
+		$t_caption = string_attribute( $t_entry[1] );
 
-        # if current user and reporter can't be selected, then select the first
-        # user in the list.
-        if( $t_default_assign_to === null ) {
-            $t_default_assign_to = $t_id;
-        }
+		# if current user and reporter can't be selected, then select the first
+		# user in the list.
+		if( $t_default_assign_to === null ) {
+			$t_default_assign_to = $t_id;
+		}
 
-        echo '<option value="' . $t_id . '" ';
+		echo '<option value="' . $t_id . '" ';
 
-        if( ( $t_id == $t_default_assign_to ) && !$t_already_selected ) {
-            check_selected( $t_id, $t_default_assign_to );
-            $t_already_selected = true;
-        }
+		if( ( $t_id == $t_default_assign_to ) && !$t_already_selected ) {
+			check_selected( $t_id, $t_default_assign_to );
+			$t_already_selected = true;
+		}
 
-        echo '>' . $t_caption . '</option>';
-    }
+		echo '>' . $t_caption . '</option>';
+	}
 
 	# allow un-assigning if already assigned.
 	if( $p_bug->handler_id != 0 ) {
@@ -1023,9 +1020,9 @@ function html_button_bug_assign_to( BugData $p_bug ) {
  * @return void
  */
 function html_button_bug_move( $p_bug_id ) {
-    if( access_has_bug_level( config_get( 'move_bug_threshold' ), $p_bug_id ) ) {
-        html_button( 'bug_actiongroup_page.php', lang_get( 'move_bug_button' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'MOVE' ) );
-    }
+	if( access_has_bug_level( config_get( 'move_bug_threshold' ), $p_bug_id ) ) {
+		html_button( 'bug_actiongroup_page.php', lang_get( 'move_bug_button' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'MOVE' ) );
+	}
 }
 
 /**
@@ -1034,9 +1031,9 @@ function html_button_bug_move( $p_bug_id ) {
  * @return void
  */
 function html_button_bug_create_child( $p_bug_id ) {
-    if( access_has_bug_level( config_get( 'report_bug_threshold' ), $p_bug_id ) ) {
-        html_button( string_get_bug_report_url(), lang_get( 'create_child_bug_button' ), array( 'm_id' => $p_bug_id ) );
-    }
+	if( access_has_bug_level( config_get( 'report_bug_threshold' ), $p_bug_id ) ) {
+		html_button( string_get_bug_report_url(), lang_get( 'create_child_bug_button' ), array( 'm_id' => $p_bug_id ) );
+	}
 }
 
 /**
@@ -1045,13 +1042,13 @@ function html_button_bug_create_child( $p_bug_id ) {
  * @return void
  */
 function html_button_bug_reopen( BugData $p_bug ) {
-    if( access_can_reopen_bug( $p_bug ) ) {
-        $t_reopen_status = config_get( 'bug_reopen_status', null, null, $p_bug->project_id );
-        html_button(
-            'bug_change_status_page.php',
-            lang_get( 'reopen_bug_button' ),
-            array( 'id' => $p_bug->id, 'new_status' => $t_reopen_status, 'reopen_flag' => ON ) );
-    }
+	if( access_can_reopen_bug( $p_bug ) ) {
+		$t_reopen_status = config_get( 'bug_reopen_status', null, null, $p_bug->project_id );
+		html_button(
+			'bug_change_status_page.php',
+			lang_get( 'reopen_bug_button' ),
+			array( 'id' => $p_bug->id, 'new_status' => $t_reopen_status, 'reopen_flag' => ON ) );
+	}
 }
 
 /**
@@ -1061,15 +1058,15 @@ function html_button_bug_reopen( BugData $p_bug ) {
  * @return void
  */
 function html_button_bug_close( BugData $p_bug ) {
-    $t_closed_status = config_get( 'bug_closed_status_threshold', null, null, $p_bug->project_id );
-    if( access_can_close_bug( $p_bug )
-        && bug_check_workflow( $p_bug->status, $t_closed_status )
-    ) {
-        html_button(
-            'bug_change_status_page.php',
-            lang_get( 'close_bug_button' ),
-            array( 'id' => $p_bug->id, 'new_status' => $t_closed_status ) );
-    }
+	$t_closed_status = config_get( 'bug_closed_status_threshold', null, null, $p_bug->project_id );
+	if( access_can_close_bug( $p_bug )
+		&& bug_check_workflow( $p_bug->status, $t_closed_status )
+	) {
+		html_button(
+			'bug_change_status_page.php',
+			lang_get( 'close_bug_button' ),
+			array( 'id' => $p_bug->id, 'new_status' => $t_closed_status ) );
+	}
 }
 
 /**
@@ -1078,9 +1075,9 @@ function html_button_bug_close( BugData $p_bug ) {
  * @return void
  */
 function html_button_bug_monitor( $p_bug_id ) {
-    if( access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_bug_id ) ) {
-        html_button( 'bug_monitor_add.php', lang_get( 'monitor_bug_button' ), array( 'bug_id' => $p_bug_id ) );
-    }
+	if( access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_bug_id ) ) {
+		html_button( 'bug_monitor_add.php', lang_get( 'monitor_bug_button' ), array( 'bug_id' => $p_bug_id ) );
+	}
 }
 
 /**
@@ -1090,7 +1087,7 @@ function html_button_bug_monitor( $p_bug_id ) {
  * @return void
  */
 function html_button_bug_unmonitor( $p_bug_id ) {
-    html_button( 'bug_monitor_delete.php', lang_get( 'unmonitor_bug_button' ), array( 'bug_id' => $p_bug_id ) );
+	html_button( 'bug_monitor_delete.php', lang_get( 'unmonitor_bug_button' ), array( 'bug_id' => $p_bug_id ) );
 }
 
 /**
@@ -1099,9 +1096,9 @@ function html_button_bug_unmonitor( $p_bug_id ) {
  * @return void
  */
 function html_button_bug_stick( $p_bug_id ) {
-    if( access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $p_bug_id ) ) {
-        html_button( 'bug_stick.php', lang_get( 'stick_bug_button' ), array( 'bug_id' => $p_bug_id, 'action' => 'stick' ) );
-    }
+	if( access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $p_bug_id ) ) {
+		html_button( 'bug_stick.php', lang_get( 'stick_bug_button' ), array( 'bug_id' => $p_bug_id, 'action' => 'stick' ) );
+	}
 }
 
 /**
@@ -1110,9 +1107,9 @@ function html_button_bug_stick( $p_bug_id ) {
  * @return void
  */
 function html_button_bug_unstick( $p_bug_id ) {
-    if( access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $p_bug_id ) ) {
-        html_button( 'bug_stick.php', lang_get( 'unstick_bug_button' ), array( 'bug_id' => $p_bug_id, 'action' => 'unstick' ) );
-    }
+	if( access_has_bug_level( config_get( 'set_bug_sticky_threshold' ), $p_bug_id ) ) {
+		html_button( 'bug_stick.php', lang_get( 'unstick_bug_button' ), array( 'bug_id' => $p_bug_id, 'action' => 'unstick' ) );
+	}
 }
 
 /**
@@ -1121,9 +1118,9 @@ function html_button_bug_unstick( $p_bug_id ) {
  * @return void
  */
 function html_button_bug_delete( $p_bug_id ) {
-    if( access_has_bug_level( config_get( 'delete_bug_threshold' ), $p_bug_id ) ) {
-        html_button( 'bug_actiongroup_page.php', lang_get( 'delete_bug_button' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'DELETE' ) );
-    }
+	if( access_has_bug_level( config_get( 'delete_bug_threshold' ), $p_bug_id ) ) {
+		html_button( 'bug_actiongroup_page.php', lang_get( 'delete_bug_button' ), array( 'bug_arr[]' => $p_bug_id, 'action' => 'DELETE' ) );
+	}
 }
 
 /**
@@ -1132,11 +1129,11 @@ function html_button_bug_delete( $p_bug_id ) {
  * @return void
  */
 function html_button_wiki( $p_bug_id ) {
-    if( config_get_global( 'wiki_enable' ) == ON ) {
-        if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
-            html_button( 'wiki.php', lang_get_defaulted( 'Wiki' ), array( 'id' => $p_bug_id, 'type' => 'issue' ), 'get' );
-        }
-    }
+	if( config_get_global( 'wiki_enable' ) == ON ) {
+		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
+			html_button( 'wiki.php', lang_get_defaulted( 'Wiki' ), array( 'id' => $p_bug_id, 'type' => 'issue' ), 'get' );
+		}
+	}
 }
 
 /**
@@ -1145,82 +1142,81 @@ function html_button_wiki( $p_bug_id ) {
  * @return void
  */
 function html_buttons_view_bug_page( $p_bug_id ) {
-    $t_readonly = bug_is_readonly( $p_bug_id );
-    $t_sticky = config_get( 'set_bug_sticky_threshold' );
+	$t_readonly = bug_is_readonly( $p_bug_id );
+	$t_sticky = config_get( 'set_bug_sticky_threshold' );
 
-    $t_bug = bug_get( $p_bug_id );
+	$t_bug = bug_get( $p_bug_id );
 
-    echo '<div class="btn-group">';
+	echo '<div class="btn-group">';
+	if( !$t_readonly ) {
+		# UPDATE button
+		echo '<div class="pull-left padding-right-8">';
+		html_button_bug_update( $p_bug_id );
+		echo '</div>';
 
-    if( !$t_readonly ) {
-        # UPDATE button
-        echo '<div class="pull-left padding-right-8">';
-        html_button_bug_update( $p_bug_id );
-        echo '</div>';
+		# ASSIGN button
+		echo '<div class="pull-left padding-right-8">';
+		html_button_bug_assign_to( $t_bug );
+		echo '</div>';
 
-        # ASSIGN button
-        echo '<div class="pull-left padding-right-8">';
-        html_button_bug_assign_to( $t_bug );
-        echo '</div>';
+		# Change status button/dropdown
+		echo '<div class="pull-left padding-right-8">';
+		html_button_bug_change_status( $t_bug );
+		echo '</div>';
+	}
 
-        # Change status button/dropdown
-        echo '<div class="pull-left padding-right-8">';
-        html_button_bug_change_status( $t_bug );
-        echo '</div>';
-    }
+	# MONITOR/UNMONITOR button
+	if( !current_user_is_anonymous() ) {
+		echo '<div class="pull-left padding-right-2">';
+		if( user_is_monitoring_bug( auth_get_current_user_id(), $p_bug_id ) ) {
+			html_button_bug_unmonitor( $p_bug_id );
+		} else {
+			html_button_bug_monitor( $p_bug_id );
+		}
+		echo '</div>';
+	}
 
-    # MONITOR/UNMONITOR button
-    if( !current_user_is_anonymous() ) {
-        echo '<div class="pull-left padding-right-2">';
-        if( user_is_monitoring_bug( auth_get_current_user_id(), $p_bug_id ) ) {
-            html_button_bug_unmonitor( $p_bug_id );
-        } else {
-            html_button_bug_monitor( $p_bug_id );
-        }
-        echo '</div>';
-    }
+	# STICK/UNSTICK button
+	if( access_has_bug_level( $t_sticky, $p_bug_id ) ) {
+		echo '<div class="pull-left padding-right-2">';
+		if( !bug_get_field( $p_bug_id, 'sticky' ) ) {
+			html_button_bug_stick( $p_bug_id );
+		} else {
+			html_button_bug_unstick( $p_bug_id );
+		}
+		echo '</div>';
+	}
 
-    # STICK/UNSTICK button
-    if( access_has_bug_level( $t_sticky, $p_bug_id ) ) {
-        echo '<div class="pull-left padding-right-2">';
-        if( !bug_get_field( $p_bug_id, 'sticky' ) ) {
-            html_button_bug_stick( $p_bug_id );
-        } else {
-            html_button_bug_unstick( $p_bug_id );
-        }
-        echo '</div>';
-    }
+	# CLONE button
+	if( !$t_readonly ) {
+		echo '<div class="pull-left padding-right-2">';
+		html_button_bug_create_child( $p_bug_id );
+		echo '</div>';
+	}
 
-    # CLONE button
-    if( !$t_readonly ) {
-        echo '<div class="pull-left padding-right-2">';
-        html_button_bug_create_child( $p_bug_id );
-        echo '</div>';
-    }
+	# REOPEN button
+	echo '<div class="pull-left padding-right-2">';
+	html_button_bug_reopen( $t_bug );
+	echo '</div>';
 
-    # REOPEN button
-    echo '<div class="pull-left padding-right-2">';
-    html_button_bug_reopen( $t_bug );
-    echo '</div>';
+	# CLOSE button
+	echo '<div class="pull-left padding-right-2">';
+	html_button_bug_close( $t_bug );
+	echo '</div>';
 
-    # CLOSE button
-    echo '<div class="pull-left padding-right-2">';
-    html_button_bug_close( $t_bug );
-    echo '</div>';
+	# MOVE button
+	echo '<div class="pull-left padding-right-2">';
+	html_button_bug_move( $p_bug_id );
+	echo '</div>';
 
-    # MOVE button
-    echo '<div class="pull-left padding-right-2">';
-    html_button_bug_move( $p_bug_id );
-    echo '</div>';
+	# DELETE button
+	echo '<div class="pull-left padding-right-2">';
+	html_button_bug_delete( $p_bug_id );
+	echo '</div>';
 
-    # DELETE button
-    echo '<div class="pull-left padding-right-2">';
-    html_button_bug_delete( $p_bug_id );
-    echo '</div>';
+	helper_call_custom_function( 'print_bug_view_page_custom_buttons', array( $p_bug_id ) );
 
-    helper_call_custom_function( 'print_bug_view_page_custom_buttons', array( $p_bug_id ) );
-
-    echo '</div>';
+	echo '</div>';
 }
 
 /**
@@ -1236,5 +1232,5 @@ function html_buttons_view_bug_page( $p_bug_id ) {
  * Build CSS including project or even user-specific colors ?
  */
 function html_get_status_css_class( $p_status, $p_user = null, $p_project = null ) {
-    return string_attribute( MantisEnum::getLabel( config_get( 'status_enum_string', null, $p_user, $p_project ), $p_status ) . '-color' );
+	return string_attribute( MantisEnum::getLabel( config_get( 'status_enum_string', null, $p_user, $p_project ), $p_status ) . '-color' );
 }

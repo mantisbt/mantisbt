@@ -723,76 +723,75 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 
     layout_page_begin();
 
-    ?>
-    <div class="col-md-12 col-xs-12">
-        <div class="space-10"></div>
-        <?php
-        if( $t_error != false ) {
-            echo '<div class="alert alert-danger">';
-            echo '<p>' . lang_get( 'reauthenticate_message' ) . ' ' . lang_get( 'login_error' ) . '</p>';
-        } else {
-            echo '<div class="alert alert-warning">';
-            echo'<p>' . lang_get( 'reauthenticate_message' ) . '</p>';
-        }
-        echo '</div>';
-        ?>
+	?>
+<div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
+<?php
+	if( $t_error != false ) {
+		echo '<div class="alert alert-danger">';
+		echo '<p>' . lang_get( 'reauthenticate_message' ) . ' ' . lang_get( 'login_error' ) . '</p>';
+	} else {
+		echo '<div class="alert alert-warning">';
+		echo'<p>' . lang_get( 'reauthenticate_message' ) . '</p>';
+	}
+	echo '</div>';
+?>
 
-        <div class="form-container">
-            <form id="reauth-form" method="post" action="">
-                <div class="widget-box widget-color-blue2">
-                    <div class="widget-header widget-header-small">
-                        <h4 class="widget-title lighter">
-                            <i class="ace-icon fa fa-lock"></i>
-                            <?php echo lang_get( 'reauthenticate_title' ) ?>
-                        </h4>
-                    </div>
+<div class="form-container">
+<form id="reauth-form" method="post" action="">
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-lock"></i>
+		<?php echo lang_get( 'reauthenticate_title' ) ?>
+	</h4>
+</div>
 
-                    <div class="widget-body">
-                        <div class="widget-main no-padding">
-                            <fieldset>
-                                <?php
-                                # CSRF protection not required here - user needs to enter password
-                                # (confirmation step) before the form is accepted.
-                                print_hidden_inputs( $_POST );
-                                print_hidden_inputs( $_GET );
-                                ?>
+<div class="widget-body">
+	<div class="widget-main no-padding">
+		<fieldset>
+		<?php
+			# CSRF protection not required here - user needs to enter password
+			# (confirmation step) before the form is accepted.
+			print_hidden_inputs( $_POST );
+			print_hidden_inputs( $_GET );
+		?>
 
-                                <input type="hidden" name="_authenticate" value="1" />
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-condensed table-striped">
-                                        <tr>
-                                            <th class="category">
-                                                <?php echo lang_get( 'username' );?>
-                                            </th>
-                                            <td>
-                                                <input id="username" type="text" disabled="disabled" class="input-sm" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" value="<?php echo string_attribute( $p_username );?>" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="category">
-                                                <?php echo lang_get( 'password' );?>
-                                            </th>
-                                            <td>
-                                                <input id="password" type="password" name="password" class="input-sm" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" class="autofocus" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div class="widget-toolbox padding-8 clearfix">
-                            <input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'login_button' );?>" />
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+			<input type="hidden" name="_authenticate" value="1" />
+			<div class="table-responsive">
+				<table class="table table-bordered table-condensed table-striped">
+					<tr>
+						<th class="category">
+							<?php echo lang_get( 'username' );?>
+						</th>
+						<td>
+							<input id="username" type="text" disabled="disabled" class="input-sm" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" value="<?php echo string_attribute( $p_username );?>" />
+						</td>
+					</tr>
+					<tr>
+						<th class="category">
+							<?php echo lang_get( 'password' );?>
+						</th>
+						<td>
+							<input id="password" type="password" name="password" class="input-sm" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" class="autofocus" />
+						</td>
+					</tr>
+				</table>
+			</div>
+		</fieldset>
+	</div>
+	<div class="widget-toolbox padding-8 clearfix">
+		<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'login_button' );?>" />
+	</div>
+</div>
+</div>
+</form>
+</div>
+</div>
 
-
-    <?php
-    layout_page_end();
-    exit;
+<?php
+	layout_page_end();
+	exit;
 }
 
 /**

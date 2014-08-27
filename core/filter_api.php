@@ -2174,7 +2174,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	if( $p_expanded ) {
 		?>
 
-        <?php
+		<?php
         $t_collapse_block = collapse_display( 'filter' );
         $t_block_css = $t_collapse_block ? 'collapsed' : '';
         $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
@@ -3465,12 +3465,12 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
     echo '<div class="btn-toolbar pull-left">';
 
 	# expanded
-    echo '<div class="form-inline">';
+	echo '<div class="form-inline">';
 	echo '<label>', lang_get( 'search' ) . '&#160', '</label>';
 	echo '<input type="text" class="input-sm" size="16" name="', FILTER_PROPERTY_SEARCH, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_SEARCH] ), '" />';
 	?>
 	<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" name="filter" value="<?php echo lang_get( 'filter_button' )?>" />
-    </div>
+	</div>
 	<?php
 
     echo '</form></div>';
@@ -3479,23 +3479,22 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	$t_stored_queries_arr = filter_db_get_available_queries();
 
 	if( access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) { ?>
-    <div class="btn-group">
+	<div class="btn-group">
 
 		<form class="form-inline pull-left" method="post" name="save_query" action="query_store_page.php">
 			<?php # CSRF protection not required here - form does not result in modifications ?>
 			<input type="submit" name="save_query_button" class="btn btn-primary btn-white btn-sm btn-round"
-                   value="<?php echo lang_get( 'save_query' )?>" />
+			   value="<?php echo lang_get( 'save_query' )?>" />
 		</form>
 	<?php
 	}
 	if( count( $t_stored_queries_arr ) > 0 ) { ?>
 
-		<form class="form-inline pull-left" method="post" name="open_queries" action="query_view_page.php">
+	<form class="form-inline pull-left" method="post" name="open_queries" action="query_view_page.php">
 			<?php # CSRF protection not required here - form does not result in modifications ?>
 			<input type="submit" name="switch_to_query_button" class="btn btn-primary btn-white btn-sm btn-round"
-                   value="<?php echo lang_get( 'open_queries' )?>" />
+			   value="<?php echo lang_get( 'open_queries' )?>" />
 		</form>
-
 		<form class="form-inline pull-left padding-left-8"  method="get" name="list_queries<?php echo $t_form_name_suffix;?>" action="view_all_set.php">
 			<?php # CSRF protection not required here - form does not result in modifications ?>
 			<input type="hidden" name="type" value="3" />
@@ -3512,17 +3511,17 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				?>
 			</select>
 			<input type="submit" name="switch_to_query_button" class="btn btn-primary btn-white btn-sm btn-round"
-                   value="<?php echo lang_get( 'use_query' )?>" />
+			   value="<?php echo lang_get( 'use_query' )?>" />
 		</form>
-	    <?php
+	<?php
 	} else { ?>
 
-        <form class="form-inline pull-left" method="get" name="reset_query" action="view_all_set.php">
-            <?php # CSRF protection not required here - form does not result in modifications ?>
-            <input type="hidden" name="type" value="3" />
-            <input type="hidden" name="source_query_id" value="-1" />
-            <input type="submit" name="reset_query_button" class="btn btn-primary btn-white btn-sm btn-round" value="<?php echo lang_get( 'reset_query' )?>" />
-        </form>
+		<form class="form-inline pull-left" method="get" name="reset_query" action="view_all_set.php">
+			<?php # CSRF protection not required here - form does not result in modifications ?>
+			<input type="hidden" name="type" value="3" />
+			<input type="hidden" name="source_query_id" value="-1" />
+			<input type="submit" name="reset_query_button" class="btn btn-primary btn-white btn-sm btn-round" value="<?php echo lang_get( 'reset_query' )?>" />
+		</form>
 	<?php
 	}
 	?>

@@ -757,7 +757,7 @@ function print_column_title_attachment_count( $p_sort, $p_dir, $p_columns_target
 	global $t_icon_path;
 	$t_attachment_count_text = lang_get( 'attachment_count' );
 	$t_attachment_count_icon = "<i class=\"fa fa-paperclip blue\" alt=\"$t_attachment_count_text\" title=\"$t_attachment_count_text\" />";
-    echo "\t" . '<th class="column-attachments">' . $t_attachment_count_icon . '</th>' . "\n";
+	echo "\t" . '<th class="column-attachments">' . $t_attachment_count_icon . '</th>' . "\n";
 }
 
 /**
@@ -1287,10 +1287,10 @@ function print_column_resolution( BugData $p_bug, $p_columns_target = COLUMNS_TA
 function print_column_status( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
     # choose color based on status
     $status_label = html_get_status_css_class( $p_bug->status, auth_get_current_user_id(), $p_bug->project_id );
-    echo '<td class="column-status">';
+	echo '<td class="column-status">';
     echo '<div class="align-left">';
     echo '<i class="fa fa-square-o fa-xlg ' . $status_label . '"></i> ';
-    printf( '<span title="%s">%s</span>',
+	printf( '<span title="%s">%s</span>',
 		get_enum_element( 'resolution', $p_bug->resolution, auth_get_current_user_id(), $p_bug->project_id ),
 		get_enum_element( 'status', $p_bug->status, auth_get_current_user_id(), $p_bug->project_id )
 	);

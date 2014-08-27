@@ -242,7 +242,7 @@ function print_date_selection_set( $p_name, $p_format, $p_date = 0, $p_default_d
 			echo '<select class="input-sm" ' . helper_get_tab_index() . ' name="' . $p_name . '_month"' . $t_disable . '>';
 			echo $t_blank_line;
 			print_month_option_list( $t_date[1] );
-            echo '</select>' . "\n";
+			echo '</select>' . "\n";
 		}
 		if( strcmp( $t_char, 'm' ) == 0 ) {
 			echo '<select class="input-sm" ' . helper_get_tab_index() . ' name="' . $p_name . '_month"' . $t_disable . '>';

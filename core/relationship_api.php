@@ -651,8 +651,8 @@ function relationship_get_details( $p_bug_id, BugRelationshipData $p_relationshi
 	if( $p_html_preview == false ) {
         # choose color based on status
         $status_label = html_get_status_css_class( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
-        $t_relationship_info_html .= '<td><a href="' . string_get_bug_view_url( $t_related_bug_id ) . '">' . string_display_line( bug_format_id( $t_related_bug_id ) ) . '</a></td>';
-        $t_relationship_info_html .= '<td><i class="fa fa-square-o fa-xlg ' . $status_label . '"></i> ';
+		$t_relationship_info_html .= '<td><a href="' . string_get_bug_view_url( $t_related_bug_id ) . '">' . string_display_line( bug_format_id( $t_related_bug_id ) ) . '</a></td>';
+		$t_relationship_info_html .= '<td><i class="fa fa-square-o fa-xlg ' . $status_label . '"></i> ';
         $t_relationship_info_html .= '<span class="issue-status" title="' . string_attribute( $t_resolution_string ) . '">' . string_display_line( $t_status_string ) . '</span></td>';
 	} else {
 		$t_relationship_info_html .= $t_td . string_display_line( bug_format_id( $t_related_bug_id ) ) . '</td>';
@@ -821,69 +821,69 @@ function relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_select_nam
  */
 function relationship_view_box( $p_bug_id ) {
 	?>
-    <div class="col-md-12 col-xs-12">
-    <div class="space-10"></div>
+	<div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
 
-    <?php
-    $t_collapse_block = collapse_display( 'relationships' );
-    $t_block_css = $t_collapse_block ? 'collapsed' : '';
-    $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
-    ?>
-    <div id="relationships" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
-    <div class="widget-header widget-header-small">
-        <h4 class="widget-title lighter">
-            <i class="ace-icon fa fa-sitemap"></i>
-            <?php echo lang_get( 'bug_relationships' ) ?>
-        </h4>
-        <div class="widget-toolbar">
-            <a data-action="collapse" href="#">
-                <i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
-            </a>
-        </div>
-    </div>
+	<?php
+	$t_collapse_block = collapse_display( 'relationships' );
+	$t_block_css = $t_collapse_block ? 'collapsed' : '';
+	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
+	?>
+	<div id="relationships" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<i class="ace-icon fa fa-sitemap"></i>
+			<?php echo lang_get( 'bug_relationships' ) ?>
+		</h4>
+		<div class="widget-toolbar">
+			<a data-action="collapse" href="#">
+				<i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
+			</a>
+		</div>
+	</div>
 
-    <div class="widget-body">
-        <div class="widget-toolbox padding-8 clearfix">
-            <?php
-            if( ON == config_get( 'relationship_graph_enable' ) ) {
-                ?>
-            <div class="btn-group pull-right">
-                <span class="small"><?php print_small_button( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=relation', lang_get( 'relation_graph' ) )?></span>
-                <span class="small"><?php print_small_button( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=dependency', lang_get( 'dependency_graph' ) )?></span>
-            </div>
-            <?php
-            }
-            ?>
-            <?php
-            # bug not read-only and user authenticated
-            if( !bug_is_readonly( $p_bug_id ) ) {
-                # user access level at least updater
-                if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
-                    ?>
-                
-                    <form method="post" action="bug_relationship_add.php" class="form-inline" >
-                        <?php echo form_security_field( 'bug_relationship_add' ) ?>
-                        <input type="hidden" name="src_bug_id" value="<?php echo $p_bug_id?>" size="4" />
+	<div class="widget-body">
+		<div class="widget-toolbox padding-8 clearfix">
+			<?php
+			if( ON == config_get( 'relationship_graph_enable' ) ) {
+				?>
+			<div class="btn-group pull-right">
+				<span class="small"><?php print_small_button( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=relation', lang_get( 'relation_graph' ) )?></span>
+				<span class="small"><?php print_small_button( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=dependency', lang_get( 'dependency_graph' ) )?></span>
+			</div>
+			<?php
+			}
+			?>
+			<?php
+			# bug not read-only and user authenticated
+			if( !bug_is_readonly( $p_bug_id ) ) {
+				# user access level at least updater
+				if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
+					?>
+
+					<form method="post" action="bug_relationship_add.php" class="form-inline" >
+						<?php echo form_security_field( 'bug_relationship_add' ) ?>
+						<input type="hidden" name="src_bug_id" value="<?php echo $p_bug_id?>" size="4" />
 						<label class="inline"><?php echo lang_get( 'this_bug' ) ?>&#160;&#160;</label>
-                        <?php relationship_list_box( config_get( 'default_bug_relationship' ) )?>
-                        <input type="text" class="input-sm" name="dest_bug_id" value="" />
-                        <input type="submit" class="btn btn-primary btn-sm btn-white btn-round" name="add_relationship" value="<?php echo lang_get( 'add_new_relationship_button' )?>" />
-                    </form>
-                <?php
-                }
-            }
-            ?>
-        </div>
+						<?php relationship_list_box( config_get( 'default_bug_relationship' ) )?>
+						<input type="text" class="input-sm" name="dest_bug_id" value="" />
+						<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" name="add_relationship" value="<?php echo lang_get( 'add_new_relationship_button' )?>" />
+					</form>
+				<?php
+				}
+			}
+			?>
+		</div>
 
-        <div class="widget-main no-padding">
-            <div class="table-responsive">
-                  <?php echo relationship_get_summary_html( $p_bug_id )?>
-            </div>
-        </div>
-    </div>
-    </div>
-    </div>
+		<div class="widget-main no-padding">
+			<div class="table-responsive">
+				  <?php echo relationship_get_summary_html( $p_bug_id )?>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
 
 
-    <?php
+	<?php
 }
