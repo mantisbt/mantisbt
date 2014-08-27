@@ -34,43 +34,43 @@ print_admin_menu_bar( 'test_icons.php' );
 
 ?>
 
-    <div class="col-md-12 col-xs-12">
-        <div class="space-10"></div>
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
 
-        <div class="widget-box widget-color-blue2">
-            <div class="widget-header widget-header-small">
-                <h4 class="widget-title lighter">
-                    <i class="ace-icon fa fa-image"></i>
-                    Test Icons
-                </h4>
-            </div>
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-image"></i>
+		Test Icons
+	</h4>
+</div>
 
-            <div class="widget-body">
-                <div class="widget-main no-padding">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped table-condensed table-hover">
-                            <?php
-                            foreach( $g_file_type_icons as $t_ext => $t_filename ) {
-                                $t_file_path = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'fileicons' . DIRECTORY_SEPARATOR . $t_filename;
+<div class="widget-body">
+	<div class="widget-main no-padding">
+		<div class="table-responsive">
+			<table class="table table-bordered table-striped table-condensed table-hover">
+<?php
+foreach( $g_file_type_icons as $t_ext => $t_filename ) {
+	$t_file_path = dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'fileicons' . DIRECTORY_SEPARATOR . $t_filename;
 
-                                echo '<tr><td>';
-                                echo 'Testing icon for extension \'' . $t_ext . '\'... ' . $t_file_path . '... ';
-                                flush();
+	echo '<tr><td>';
+	echo 'Testing icon for extension \'' . $t_ext . '\'... ' . $t_file_path . '... ';
+	flush();
 
-                                if( file_exists( $t_file_path ) ) {
-                                    echo '<span class="label label-success">OK</span>';
-                                } else {
-                                    echo '<span class="label label-danger">NOT FOUND</span>';
-                                }
-                                echo '</td></tr>';
-                            }
-                            ?>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	if( file_exists( $t_file_path ) ) {
+		echo '<span class="label label-success">OK</span>';
+	} else {
+		echo '<span class="label label-danger">NOT FOUND</span>';
+	}
+	echo '</td></tr>';
+}
+?>
+			</table>
+		</div>
+	</div>
+</div>
+</div>
+</div>
 
 <?php
 layout_admin_page_end();

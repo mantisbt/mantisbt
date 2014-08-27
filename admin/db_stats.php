@@ -60,34 +60,33 @@ function helper_table_row_count( $p_table ) {
 	return $t_count;
 }
 ?>
-    <div class="col-md-12 col-xs-12">
-        <div class="space-10"></div>
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+<h4 class="widget-title lighter">
+	<i class="ace-icon fa fa-database"></i>
+	<?php echo lang_get( 'mantisbt_database_statistics' ) ?>
+</h4>
+</div>
 
-        <div class="widget-box widget-color-blue2">
-            <div class="widget-header widget-header-small">
-                <h4 class="widget-title lighter">
-                    <i class="ace-icon fa fa-database"></i>
-                    <?php echo lang_get( 'mantisbt_database_statistics' ) ?>
-                </h4>
-            </div>
-
-            <div class="widget-body">
-                <div class="widget-main no-padding">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped table-condensed table-hover">
-                            <?php
-                            foreach( db_get_table_list() as $t_table ) {
-                                if( db_table_exists( $t_table ) ) {
-                                    print_info_row( $t_table, helper_table_row_count( $t_table ) . ' records' );
-                                }
-                            }
-                            ?>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="widget-body">
+<div class="widget-main no-padding">
+<div class="table-responsive">
+<table class="table table-bordered table-striped table-condensed table-hover">
+<?php
+foreach( db_get_table_list() as $t_table ) {
+	if( db_table_exists( $t_table ) ) {
+			print_info_row( $t_table, helper_table_row_count( $t_table ) . ' records' );
+	}
+}
+?>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 <?php
 layout_admin_page_end();

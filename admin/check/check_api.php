@@ -200,7 +200,7 @@ function check_print_test_row( $p_description, $p_pass, $p_info = null ) {
 		return $p_pass;
 	}
 
-    echo "\t<tr>\n\t\t<td>$p_description";
+	echo "\t<tr>\n\t\t<td>$p_description";
 	if( $p_info !== null ) {
 		if( is_array( $p_info ) && isset( $p_info[$p_pass] ) ) {
 			echo '<br /><em>' . $p_info[$p_pass] . '</em>';

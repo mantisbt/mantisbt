@@ -37,56 +37,51 @@ print_admin_menu_bar( 'test_email.php' );
 
 ?>
 
-    <div class="col-md-12 col-xs-12">
-        <div class="space-10"></div>
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-envelope"></i>
+		Testing Email
+	</h4>
+</div>
 
-        <div class="widget-box widget-color-blue2">
-            <div class="widget-header widget-header-small">
-                <h4 class="widget-title lighter">
-                    <i class="ace-icon fa fa-envelope"></i>
-                    Testing Email
-                </h4>
-            </div>
+<div class="widget-body">
+	<div class="widget-main">
+		<p>You can test the ability for MantisBT to send email notifications with this form.  Just click "Send Mail".  If the page takes a very long time to reappear or results in an error then you will need to investigate your php/mail server settings (see PHPMailer related settings in your config/config_inc.php, if they don't exist, copy from config_defaults_inc.php).  Note that errors can also appear in the server error log.  More help can be found at the <a href="http://www.php.net/manual/en/ref.mail.php">PHP website</a> if you are using the mail() PHPMailer sending mode.</p>
+		<?php
+		if( $f_mail_test ) {
+			echo '<strong>Testing Mail</strong> - ';
 
-            <div class="widget-body">
-                <div class="widget-main">
+			# @@@ thraxisp - workaround to ensure a language is set without authenticating
+			#  will disappear when this is properly localized
+			lang_push( 'english' );
 
-                    <p>You can test the ability for MantisBT to send email notifications with this form.  Just click "Send Mail".  If the page takes a very long time to reappear or results in an error then you will need to investigate your php/mail server settings (see PHPMailer related settings in your config/config_inc.php, if they don't exist, copy from config_defaults_inc.php).  Note that errors can also appear in the server error log.  More help can be found at the <a href="http://www.php.net/manual/en/ref.mail.php">PHP website</a> if you are using the mail() PHPMailer sending mode.</p>
-                    <?php
-                    if( $f_mail_test ) {
-                        echo '<strong>Testing Mail</strong> - ';
+			$t_email_data = new EmailData;
+			$t_email_data->email = config_get_global( 'webmaster_email' );
+			$t_email_data->subject = 'Testing PHP mail() function';
+			$t_email_data->body = 'Your PHP mail settings appear to be correctly set.';
+			$t_email_data->metadata['priority'] = config_get( 'mail_priority' );
+			$t_email_data->metadata['charset'] = 'utf-8';
+			$t_result = email_send( $t_email_data );
 
-                        # @@@ thraxisp - workaround to ensure a language is set without authenticating
-                        #  will disappear when this is properly localized
-                        lang_push( 'english' );
-
-                        $t_email_data = new EmailData;
-                        $t_email_data->email = config_get_global( 'webmaster_email' );
-                        $t_email_data->subject = 'Testing PHP mail() function';
-                        $t_email_data->body = 'Your PHP mail settings appear to be correctly set.';
-                        $t_email_data->metadata['priority'] = config_get( 'mail_priority' );
-                        $t_email_data->metadata['charset'] = 'utf-8';
-                        $t_result = email_send( $t_email_data );
-
-                        if( !$t_result ) {
-                            echo ' PROBLEMS SENDING MAIL TO: ' . config_get_global( 'webmaster_email' ) . '. Please check your php/mail server settings.<br />';
-                        } else {
-                            echo ' mail() send successful.<br />';
-                        }
-                    }
-                    ?>
-
-                    <br>
-
-                    <form method="post" action="<?php echo $_SERVER['SCRIPT_NAME']?>#email">
-                        Email Address: <?php echo config_get_global( 'webmaster_email' );?><br />
-                        <input type="submit" class="btn btn-primary btn-white btn-round" value="Send Mail" name="mail_test" />
-                    </form>
-
-                </div>
-            </div>
-        </div>
-    </div>
+			if( !$t_result ) {
+				echo ' PROBLEMS SENDING MAIL TO: ' . config_get_global( 'webmaster_email' ) . '. Please check your php/mail server settings.<br />';
+			} else {
+				echo ' mail() send successful.<br />';
+			}
+		}
+?>
+		<br>
+		<form method="post" action="<?php echo $_SERVER['SCRIPT_NAME']?>#email">
+		Email Address: <?php echo config_get_global( 'webmaster_email' );?><br />
+		<input type="submit" class="btn btn-primary btn-white btn-round" value="Send Mail" name="mail_test" />
+		</form>
+	</div>
+</div>
+</div>
+</div>
 
 <?php
 layout_admin_page_end();

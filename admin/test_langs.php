@@ -57,55 +57,54 @@ layout_admin_page_begin();
 print_admin_menu_bar( 'test_langs.php' );
 ?>
 
-    <div class="col-md-12 col-xs-12">
-        <div class="space-10"></div>
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
 
-        <div class="widget-box widget-color-blue2">
-            <div class="widget-header widget-header-small">
-                <h4 class="widget-title lighter">
-                    <i class="ace-icon fa fa-text-width"></i>
-                    Test Langs
-                </h4>
-            </div>
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-text-width"></i>
+		Test Langs
+	</h4>
+</div>
 
-            <div class="widget-body">
-                <div class="widget-main no-padding">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped table-condensed table-hover">
-                            <?php
-                            # check core language files
-                            if( function_exists( 'scandir' ) ) {
-                                checklangdir( $t_mantis_dir );
-                            }
-                            else {
-                                $t_lang_files = array();
-                                foreach( $g_language_choices_arr as $t_lang ) {
-                                    if( $t_lang == 'auto' ) {
-                                        continue;
-                                    }
-                                    $t_lang_files[] = $t_lang;
-                                }
-                                asort( $t_lang_files );
-                                checklangdir( $t_mantis_dir, $t_lang_files );
-                            }
+<div class="widget-body">
+	<div class="widget-main no-padding">
+		<div class="table-responsive">
+			<table class="table table-bordered table-striped table-condensed table-hover">
+<?php
+# check core language files
+if( function_exists( 'scandir' ) ) {
+	checklangdir( $t_mantis_dir );
+} else {
+	$t_lang_files = array();
+	foreach( $g_language_choices_arr as $t_lang ) {
+		if( $t_lang == 'auto' ) {
+			continue;
+		}
+		$t_lang_files[] = $t_lang;
+	}
+	asort( $t_lang_files );
+	checklangdir( $t_mantis_dir, $t_lang_files );
+}
 
 
-                            # attempt to find plugin language files
-                            echo '<tr><td>';
-                            echo "Trying to find+check plugin language files...<br />";
-                            if( function_exists( 'scandir' ) ) {
-                                checkplugins( config_get( 'plugin_path' ) );
-                            } else {
-                                echo 'php scandir is disabled - skipping<br />';
-                            }
-                            echo '</td></tr>';
-                            ?>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+# attempt to find plugin language files
+echo '<tr><td>';
+echo "Trying to find+check plugin language files...<br />";
+if( function_exists( 'scandir' ) ) {
+	checkplugins( config_get( 'plugin_path' ) );
+} else {
+	echo 'php scandir is disabled - skipping<br />';
+}
+echo '</td></tr>';
+?>
+			</table>
+		</div>
+	</div>
+</div>
+</div>
+</div>
 
 <?php
 /**
@@ -124,7 +123,7 @@ function checkplugins( $p_path ) {
 			if( $t_plugin[0] == '.' ) {
 				continue;
 			}
-            echo '<tr><td>';
+			echo '<tr><td>';
 			echo 'Checking language files for plugin ' . $t_plugin . ':<br />';
 			checklangdir( $t_path . $t_plugin );
 		}

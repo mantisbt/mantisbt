@@ -37,43 +37,42 @@ layout_page_header( 'MantisBT Administration - Check Installation' );
 layout_admin_page_begin();
 ?>
 
-    <div class="col-md-12 col-xs-12">
-        <div class="space-10"></div>
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
 
-        <div class="page-header">
-            <h1>
-                Upgrade Installation
-                <div class="btn-group pull-right">
-                    <a class="btn btn-sm btn-primary btn-white btn-round" href="index.php">Back to Administration</a>
-                </div>
-            </h1>
-        </div>
+<div class="page-header">
+	<h1>
+		Upgrade Installation
+		<div class="btn-group pull-right">
+			<a class="btn btn-sm btn-primary btn-white btn-round" href="index.php">Back to Administration</a>
+		</div>
+	</h1>
+</div>
 
-        <div class="well">
+<div class="well">
 
-            <p><strong>WARNING:</strong> - Always backup your database data before upgrading.  For example, if you use a mysql database, From the command line you can do this with the mysqldump command.</p>
-            <p>eg:</p>
-            <p><tt>mysqldump -u[username] -p[password] [database_name] &gt; [filename]</tt></p>
-            <p>This will dump the contents of the specified database into the specified filename.</p>
-            <p>If an error occurs you can re-create your previous database by just importing your backed up database data.  You'll need to drop and recreate your database (or remove each table).</p>
-            <p><tt>mysql -u[username] -p[password] [database_name] &lt; [filename]</tt></p>
+<p><strong>WARNING:</strong> - Always backup your database data before upgrading.  For example, if you use a mysql database, From the command line you can do this with the mysqldump command.</p>
+<p>eg:</p>
+<p><tt>mysqldump -u[username] -p[password] [database_name] &gt; [filename]</tt></p>
+<p>This will dump the contents of the specified database into the specified filename.</p>
+<p>If an error occurs you can re-create your previous database by just importing your backed up database data.  You'll need to drop and recreate your database (or remove each table).</p>
+<p><tt>mysql -u[username] -p[password] [database_name] &lt; [filename]</tt></p>
+<p>Upgrades may take several minutes depending on the size of your database.</p>
 
-            <p>Upgrades may take several minutes depending on the size of your database.</p>
+</div>
 
-        </div>
+<?php
+# check to see if the new installer was used
+if( -1 != config_get( 'database_version', -1 ) ) {
+	?>
+	<p class="lead">When you have backed up your database click the link below to continue</p>
+	<a class="btn btn-primary btn-lg btn-white btn-round" href="install.php">Upgrade Now</a>
+<?php
+} else {?>
+	<p class="lead">You aware to be running an old (pre 1.1.0) release of MantisBT. To update to this release of mantis, you must first update your installation to 1.1</p>
+<?php
+}?>
 
-        <?php
-        # check to see if the new installer was used
-        if( -1 != config_get( 'database_version', -1 ) ) {
-            ?>
-            <p class="lead">When you have backed up your database click the link below to continue</p>
-            <a class="btn btn-primary btn-lg btn-white btn-round" href="install.php">Upgrade Now</a>
-        <?php
-        } else {?>
-            <p class="lead">You aware to be running an old (pre 1.1.0) release of MantisBT. To update to this release of mantis, you must first update your installation to 1.1</p>
-        <?php
-        }?>
-
-    </div>
+</div>
 <?php
 layout_admin_page_end();

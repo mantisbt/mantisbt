@@ -152,8 +152,8 @@ $t_redirect_url = 'admin/system_utils.php';
 
 # Page header, menu
 layout_page_header(
-    'MantisBT Administration - Moving Attachments',
-    empty( $t_result ) ? $t_redirect_url : null
+	'MantisBT Administration - Moving Attachments',
+	empty( $t_result ) ? $t_redirect_url : null
 );
 
 layout_admin_page_begin();
