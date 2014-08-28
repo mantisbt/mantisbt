@@ -2123,9 +2123,9 @@ function filter_cache_result( array $p_rows, array $p_id_array_lastmod ) {
  * @see filter_draw_selection_area2
  */
 function filter_draw_selection_area( $p_page_number, $p_for_screen = true ) {
-    echo '<div class="col-md-12 col-xs-12">';
+	echo '<div class="col-md-12 col-xs-12">';
 	filter_draw_selection_area2( $p_page_number, $p_for_screen, true );
-    echo '</div>';
+	echo '</div>';
 }
 
 /**
@@ -2175,51 +2175,51 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		?>
 
 		<?php
-        $t_collapse_block = collapse_display( 'filter' );
-        $t_block_css = $t_collapse_block ? 'collapsed' : '';
-        $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
-        ?>
+		$t_collapse_block = collapse_display( 'filter' );
+		$t_block_css = $t_collapse_block ? 'collapsed' : '';
+		$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
+		?>
 
-        <div id="filter" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
-        <div class="widget-header widget-header-small">
-            <h4 class="widget-title lighter">
-                <i class="ace-icon fa fa-filter"></i>
-                <?php echo lang_get( 'filters' ) ?>
-            </h4>
-            <div class="widget-toolbar">
-                <a data-action="collapse" href="#">
-                    <i class="1 ace-icon fa bigger-125 <?php echo $t_block_icon ?>"></i>
-                </a>
-            </div>
-            <div class="widget-toolbar no-border">
-                <div class="widget-menu">
-                <?php
-                $f_switch_view_link = ( config_get( 'use_javascript' ) && config_get( 'use_dynamic_filters' ) ) ? 'view_all_set.php?type=6&amp;view_type=' : 'view_filters_page.php?view_type=';
-                $t_view_filters = config_get( 'view_filters' );
-                if(( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) {
-                    if( 'advanced' == $t_view_type ) {
-                        echo '<a class="btn btn-primary btn-xs btn-white btn-round" href="',
-                        $f_switch_view_link, 'simple">', lang_get('simple_filters'), '</a>';
-                    } else {
-                        echo '<a class="btn btn-primary btn-sm btn-white btn-round" href="',
-                        $f_switch_view_link, 'advanced">', lang_get('advanced_filters'), '</a>';
-                    }
-                }
-                ?>
-                <?php
-                if( access_has_project_level( config_get( 'create_permalink_threshold' ) ) ) {
-                    echo '<a class="btn btn-xs btn-white btn-primary btn-round" href="permalink_page.php?url=', urlencode( filter_get_url( $t_filter ) ), '">';
-                    echo lang_get( 'create_filter_link' );
-                    echo '</a>';
-                } ?>
-                </div>
-            </div>
-        </div>
+		<div id="filter" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-filter"></i>
+				<?php echo lang_get( 'filters' ) ?>
+			</h4>
+			<div class="widget-toolbar">
+				<a data-action="collapse" href="#">
+					<i class="1 ace-icon fa bigger-125 <?php echo $t_block_icon ?>"></i>
+				</a>
+			</div>
+			<div class="widget-toolbar no-border">
+				<div class="widget-menu">
+				<?php
+				$f_switch_view_link = ( config_get( 'use_javascript' ) && config_get( 'use_dynamic_filters' ) ) ? 'view_all_set.php?type=6&amp;view_type=' : 'view_filters_page.php?view_type=';
+				$t_view_filters = config_get( 'view_filters' );
+				if(( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) {
+					if( 'advanced' == $t_view_type ) {
+						echo '<a class="btn btn-primary btn-xs btn-white btn-round" href="',
+						$f_switch_view_link, 'simple">', lang_get('simple_filters'), '</a>';
+					} else {
+						echo '<a class="btn btn-primary btn-sm btn-white btn-round" href="',
+						$f_switch_view_link, 'advanced">', lang_get('advanced_filters'), '</a>';
+					}
+				}
+				?>
+				<?php
+				if( access_has_project_level( config_get( 'create_permalink_threshold' ) ) ) {
+					echo '<a class="btn btn-xs btn-white btn-primary btn-round" href="permalink_page.php?url=', urlencode( filter_get_url( $t_filter ) ), '">';
+					echo lang_get( 'create_filter_link' );
+					echo '</a>';
+				} ?>
+				</div>
+			</div>
+		</div>
 
-        <div class="widget-body">
-        <div class="widget-main no-padding">
+		<div class="widget-body">
+		<div class="widget-main no-padding">
 
-        <div class="table-responsive">
+		<div class="table-responsive">
 		<table class="table table-bordered table-condensed2">
 		<?php
 		$t_custom_cols = $t_filter_cols;
@@ -3456,13 +3456,13 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<td colspan="4">&#160;</td>
 		</tr>
 	</table>
-    </div>
-    </div>
+	</div>
+	</div>
 		<?php
 	}
 
-    echo '<div class="widget-toolbox padding-8 clearfix">';
-    echo '<div class="btn-toolbar pull-left">';
+	echo '<div class="widget-toolbox padding-8 clearfix">';
+	echo '<div class="btn-toolbar pull-left">';
 
 	# expanded
 	echo '<div class="form-inline">';
@@ -3473,8 +3473,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	</div>
 	<?php
 
-    echo '</form></div>';
-    echo '<div class="btn-toolbar pull-right">';
+	echo '</form></div>';
+	echo '<div class="btn-toolbar pull-right">';
 
 	$t_stored_queries_arr = filter_db_get_available_queries();
 
@@ -3484,7 +3484,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		<form class="form-inline pull-left" method="post" name="save_query" action="query_store_page.php">
 			<?php # CSRF protection not required here - form does not result in modifications ?>
 			<input type="submit" name="save_query_button" class="btn btn-primary btn-white btn-sm btn-round"
-			   value="<?php echo lang_get( 'save_query' )?>" />
+				value="<?php echo lang_get( 'save_query' )?>" />
 		</form>
 	<?php
 	}
@@ -3511,11 +3511,10 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				?>
 			</select>
 			<input type="submit" name="switch_to_query_button" class="btn btn-primary btn-white btn-sm btn-round"
-			   value="<?php echo lang_get( 'use_query' )?>" />
+				value="<?php echo lang_get( 'use_query' )?>" />
 		</form>
 	<?php
 	} else { ?>
-
 		<form class="form-inline pull-left" method="get" name="reset_query" action="view_all_set.php">
 			<?php # CSRF protection not required here - form does not result in modifications ?>
 			<input type="hidden" name="type" value="3" />
@@ -3528,11 +3527,11 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 
 	</div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
 <?php
 }
 
@@ -3611,7 +3610,7 @@ function print_filter_user_monitor() {
 	$t_has_project_level = access_has_project_level( $t_threshold );
 
 	if( $t_has_project_level ) {
-		//print_reporter_option_list( (int)$g_filter[FILTER_PROPERTY_MONITOR_USER_ID] );
+		print_reporter_option_list( $g_filter[FILTER_PROPERTY_MONITOR_USER_ID] );
 	}
 	?>
 		</select>

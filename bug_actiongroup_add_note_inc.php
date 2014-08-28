@@ -80,7 +80,8 @@ function action_add_note_print_fields() {
 		</tr>
 
 		<!-- View Status -->
-		<tr<td>
+		<tr>
+		    <td>
 			<th class="category">
 				<?php echo lang_get( 'view_status' ) ?>
 			</th>

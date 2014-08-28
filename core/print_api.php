@@ -288,7 +288,7 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 			while( isset( $t_project_users_list[$i] ) ) {
 				$t_users[$t_project_users_list[$i]['id']] = $t_project_users_list[$i];
 				$i++;
-			}
+		}
 			unset( $t_project_users_list );
 		}
 		unset( $t_projects );
@@ -353,11 +353,11 @@ function print_reporter_option_list( $p_user_id, $p_project_id = null ) {
 function print_tag_attach_form( $p_bug_id, $p_string = '' ) {
 ?>
 	<form method="post" action="tag_attach.php" class="form-inline">
-		<?php echo form_security_field( 'tag_attach' )?>
-		<label class="inline small"><?php echo sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) )?></label>
-		<input type="hidden" name="bug_id" value="<?php echo $p_bug_id?>" class="input-sm" />
-		<?php print_tag_input( $p_bug_id, $p_string ); ?>
-		<input type="submit" value="<?php echo lang_get( 'tag_attach' )?>" class="btn btn-primary btn-sm btn-white btn-round" />
+	<?php echo form_security_field( 'tag_attach' )?>
+	<label class="inline small"><?php echo sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) )?></label>
+	<input type="hidden" name="bug_id" value="<?php echo $p_bug_id?>" class="input-sm" />
+	<?php print_tag_input( $p_bug_id, $p_string ); ?>
+	<input type="submit" value="<?php echo lang_get( 'tag_attach' )?>" class="btn btn-primary btn-sm btn-white btn-round" />
 	</form>
 <?php
 	return true;
@@ -484,19 +484,16 @@ function print_news_entry( $p_headline, $p_body, $p_poster_id, $p_view_state, $p
 			</div>
 			<div class="widget-main">
 				<?php
-				if( 1 == $p_announcement ) { ?>
-					<span class="news-announcement"><?php echo lang_get( 'announcement' ); ?></span><?php
-				}
-				if( VS_PRIVATE == $p_view_state ) { ?>
-					<span class="news-private"><?php echo lang_get( 'private' ); ?></span><?php
-				}
-				?>
+			if( 1 == $p_announcement ) { ?>
+				<span class="news-announcement"><?php echo lang_get( 'announcement' ); ?></span><?php
+			}
+			if( VS_PRIVATE == $p_view_state ) { ?>
+				<span class="news-private"><?php echo lang_get( 'private' ); ?></span><?php
+			} ?>
 				<p class="news-body"><?php echo $t_body; ?></p>
 			</div>
 		</div>
-	</div>
-
-	<?php
+	</div><?php
 }
 
 /**
@@ -1457,16 +1454,16 @@ function print_link( $p_link, $p_url_text, $p_new_window = false, $p_class = '' 
  * @return void
  */
 function print_button( $p_link, $p_url_text, $p_class = '', $p_new_window = false ) {
-    if( is_blank( $p_link ) ) {
-        echo $p_url_text;
-    } else {
-        $t_link = htmlspecialchars( $p_link );
-        if( $p_new_window === true ) {
-            echo "<a class=\"btn btn-primary btn-white btn-round $p_class\" href=\"$t_link\" target=\"_blank\">$p_url_text</a>";
-        } else {
-            echo "<a class=\"btn btn-primary btn-white btn-round $p_class\" href=\"$t_link\">$p_url_text</a>";
-        }
-    }
+	if( is_blank( $p_link ) ) {
+		echo $p_url_text;
+	} else {
+		$t_link = htmlspecialchars( $p_link );
+		if( $p_new_window === true ) {
+			echo "<a class=\"btn btn-primary btn-white btn-round $p_class\" href=\"$t_link\" target=\"_blank\">$p_url_text</a>";
+		} else {
+			echo "<a class=\"btn btn-primary btn-white btn-round $p_class\" href=\"$t_link\">$p_url_text</a>";
+		}
+	}
 }
 
 /**
@@ -1477,7 +1474,7 @@ function print_button( $p_link, $p_url_text, $p_class = '', $p_new_window = fals
  * @return void
  */
 function print_small_button( $p_link, $p_url_text, $p_new_window = false ) {
-    print_button( $p_link, $p_url_text, 'btn-sm', $p_new_window );
+	print_button( $p_link, $p_url_text, 'btn-sm', $p_new_window );
 }
 
 /**
@@ -1495,14 +1492,14 @@ function print_page_link( $p_page_url, $p_text = '', $p_page_no = 0, $p_page_cur
 	}
 
 	if( ( 0 < $p_page_no ) && ( $p_page_no != $p_page_cur ) ) {
-        echo '<li class="pull-right"> ';
+		echo '<li class="pull-right"> ';
 		$t_delimiter = ( strpos( $p_page_url, '?' ) ? '&' : '?' );
 		if( $p_temp_filter_id !== 0 ) {
 			print_link( $p_page_url . $t_delimiter . 'filter=' . $p_temp_filter_id . '&page_number=' . $p_page_no, $p_text );
 		} else {
 			print_link( $p_page_url . $t_delimiter . 'page_number=' . $p_page_no, $p_text );
 		}
-        echo ' </li>';
+		echo ' </li>';
 	} else {
 		echo '<li class="disabled pull-right"><a>' . $p_text . '</a></li>';
 	}

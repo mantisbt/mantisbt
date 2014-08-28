@@ -78,7 +78,7 @@ function print_version_header( $p_version_id ) {
 	$t_project_name = project_get_field( $t_project_id, 'name' );
 
 	$t_release_title = '<a class="white" href="changelog_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a>';
-    $t_release_title .= ' - <a class="white" href="changelog_page.php?version_id=' . $p_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
+	$t_release_title .= ' - <a class="white" href="changelog_page.php?version_id=' . $p_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
 
 	if( config_get( 'show_changelog_dates' ) ) {
 		$t_version_released = version_get_field( $p_version_id, 'released' );
@@ -93,38 +93,38 @@ function print_version_header( $p_version_id ) {
 		$t_release_date = '';
 	}
 
-    $t_block_id = 'changelog_' . $p_version_id;
-    $t_collapse_block = collapse_display( $t_block_id );
-    $t_block_css = $t_collapse_block ? 'collapsed' : '';
-    $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
+	$t_block_id = 'changelog_' . $p_version_id;
+	$t_collapse_block = collapse_display( $t_block_id );
+	$t_block_css = $t_collapse_block ? 'collapsed' : '';
+	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
-    echo '<div id="' . $t_block_id . '" class="widget-box widget-color-blue2 ' . $t_block_css . '">';
-    echo '<div class="widget-header widget-header-small">';
-    echo '<h4 class="widget-title lighter">';
-    echo '<i class="ace-icon fa fa-retweet"></i>';
-    echo $t_release_title, lang_get( 'word_separator' );
-    echo '</h4>';
-    echo '<div class="widget-toolbar">';
-    echo '<a data-action="collapse" href="#">';
-    echo '<i class="1 ace-icon fa ' . $t_block_icon . ' bigger-125"></i>';
-    echo '</a>';
-    echo '</div>';
-    echo '</div>';
+	echo '<div id="' . $t_block_id . '" class="widget-box widget-color-blue2 ' . $t_block_css . '">';
+	echo '<div class="widget-header widget-header-small">';
+	echo '<h4 class="widget-title lighter">';
+	echo '<i class="ace-icon fa fa-retweet"></i>';
+	echo $t_release_title, lang_get( 'word_separator' );
+	echo '</h4>';
+	echo '<div class="widget-toolbar">';
+	echo '<a data-action="collapse" href="#">';
+	echo '<i class="1 ace-icon fa ' . $t_block_icon . ' bigger-125"></i>';
+	echo '</a>';
+	echo '</div>';
+	echo '</div>';
 
-    echo '<div class="widget-body">';
-    echo '<div class="widget-toolbox padding-8 clearfix">';
-    echo '<div class="pull-left"><i class="fa fa-clock-o fa-lg"> </i> ' . $t_release_date . '</div>';
-    echo '<div class="btn-toolbar pull-right">';
-    echo '<a class="btn btn-xs btn-primary btn-white btn-round" ';
-    echo 'href="view_all_set.php?type=1&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id . '&' . filter_encode_field_and_value( FILTER_PROPERTY_FIXED_IN_VERSION, $t_version_name ) . '">';
-    echo lang_get( 'view_bugs_link' );
-    echo '<a class="btn btn-xs btn-primary btn-white btn-round" href="changelog_page.php?version_id=' . $p_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
-    echo '<a class="btn btn-xs btn-primary btn-white btn-round" href="changelog_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a>';
-    echo '</a>';
-    echo '</div>';
+	echo '<div class="widget-body">';
+	echo '<div class="widget-toolbox padding-8 clearfix">';
+	echo '<div class="pull-left"><i class="fa fa-clock-o fa-lg"> </i> ' . $t_release_date . '</div>';
+	echo '<div class="btn-toolbar pull-right">';
+	echo '<a class="btn btn-xs btn-primary btn-white btn-round" ';
+	echo 'href="view_all_set.php?type=1&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id . '&' . filter_encode_field_and_value( FILTER_PROPERTY_FIXED_IN_VERSION, $t_version_name ) . '">';
+	echo lang_get( 'view_bugs_link' );
+	echo '<a class="btn btn-xs btn-primary btn-white btn-round" href="changelog_page.php?version_id=' . $p_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
+	echo '<a class="btn btn-xs btn-primary btn-white btn-round" href="changelog_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a>';
+	echo '</a>';
+	echo '</div>';
 
-    echo '</div>';
-    echo '<div class="widget-main">';
+	echo '</div>';
+	echo '<div class="widget-main">';
 }
 
 /**
@@ -134,19 +134,19 @@ function print_version_header( $p_version_id ) {
  * @return null
  */
 function print_version_footer( $p_version_id, $p_issues_resolved ) {
-    $t_project_id   = version_get_field( $p_version_id, 'project_id' );
-    $t_bug_string = $p_issues_resolved == 1 ? 'bug' : 'bugs';
-    $t_version_name = version_get_field( $p_version_id, 'version' );
+	$t_project_id   = version_get_field( $p_version_id, 'project_id' );
+	$t_bug_string = $p_issues_resolved == 1 ? 'bug' : 'bugs';
+	$t_version_name = version_get_field( $p_version_id, 'version' );
 
-    echo '</div>';
-    echo '<div class="widget-toolbox padding-8 clearfix">';
-    echo ' ' . $p_issues_resolved . ' ' . lang_get( $t_bug_string ) . ' ';
-    echo '<a class="btn btn-xs btn-primary btn-white btn-round" ';
-    echo 'href="view_all_set.php?type=1&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id . '&' . filter_encode_field_and_value( FILTER_PROPERTY_FIXED_IN_VERSION, $t_version_name ) . '">';
-    echo lang_get( 'view_bugs_link' );
-    echo '</a>';
-    echo '</div></div></div>';
-    echo '<div class="space-10"></div>';
+	echo '</div>';
+	echo '<div class="widget-toolbox padding-8 clearfix">';
+	echo ' ' . $p_issues_resolved . ' ' . lang_get( $t_bug_string ) . ' ';
+	echo '<a class="btn btn-xs btn-primary btn-white btn-round" ';
+	echo 'href="view_all_set.php?type=1&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id . '&' . filter_encode_field_and_value( FILTER_PROPERTY_FIXED_IN_VERSION, $t_version_name ) . '">';
+	echo lang_get( 'view_bugs_link' );
+	echo '</a>';
+	echo '</div></div></div>';
+	echo '<div class="space-10"></div>';
 }
 
 /**
@@ -403,7 +403,7 @@ foreach( $t_project_ids as $t_project_id ) {
 	}
 }
 
-    $t_project_index++;
+	$t_project_index++;
 }
 
 if( !$t_issues_found ) {
@@ -413,8 +413,8 @@ if( !$t_issues_found ) {
 		$t_string = 'changelog_empty';
 	}
 
-    echo '<br />';
-    echo '<p class="lead">' . lang_get( $t_string ) . '</p>';
+	echo '<br />';
+	echo '<p class="lead">' . lang_get( $t_string ) . '</p>';
 }
 echo '</div>';
 layout_page_end();

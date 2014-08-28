@@ -488,13 +488,13 @@ layout_page_begin( __FILE__ );
 		<td>
 			<select <?php echo helper_get_tab_index() ?> name="status" class="input-sm">
 			<?php
-			$resolution_options = get_status_option_list(
+            $t_resolution_options = get_status_option_list(
 				access_get_project_level( $t_project_id ),
 				config_get( 'bug_submit_status' ),
 				true,
 				ON == config_get( 'allow_reporter_close' ),
 				$t_project_id );
-			foreach ( $resolution_options as $key => $value ) {
+			foreach ( $t_resolution_options as $key => $value ) {
 			?>
 				<option value="<?php echo $key ?>" <?php check_selected( $key, config_get( 'bug_submit_status' ) ); ?> >
 					<?php echo $value ?>

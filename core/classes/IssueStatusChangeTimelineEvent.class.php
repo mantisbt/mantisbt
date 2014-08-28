@@ -56,13 +56,13 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 		$t_closed = config_get( 'bug_closed_status_threshold' );
 
 		if( $this->old_status < $t_closed && $this->new_status >= $t_closed ) {
-            $t_html = $this->html_start( 'fa-power-off' );
+			$t_html = $this->html_start( 'fa-power-off' );
 			$t_string = sprintf( lang_get( 'timeline_issue_closed' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
 		} else if( $this->old_status < $t_resolved && $this->new_status >= $t_resolved ) {
-            $t_html = $this->html_start( 'fa-thumbs-o-up' );
+			$t_html = $this->html_start( 'fa-thumbs-o-up' );
 			$t_string = sprintf( lang_get( 'timeline_issue_resolved' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
 		} else if( $this->old_status >= $t_resolved && $this->new_status < $t_resolved ) {
-            $t_html = $this->html_start( 'fa-refresh' );
+			$t_html = $this->html_start( 'fa-refresh' );
 			$t_string = sprintf( lang_get( 'timeline_issue_reopened' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
 		} else {
 			return '';

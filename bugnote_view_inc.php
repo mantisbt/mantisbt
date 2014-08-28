@@ -207,7 +207,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		if( $t_bugnote_modified ) {
 			echo '<p class="no-margin small lighter"><i class="fa fa-retweet"></i> ' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . date( $t_normal_date_format, $t_bugnote->last_modified ) . '</p>';
 			$t_revision_count = bug_revision_count( $f_bug_id, REV_BUGNOTE, $t_bugnote->id );
-			if( $t_revision_count >= 1) {
+			if( $t_revision_count >= 1 ) {
 				$t_view_num_revisions_text = sprintf( lang_get( 'view_num_revisions' ), $t_revision_count );
 				echo '<p class="no-margin"><span class="small bugnote-revisions-link"><a href="bug_revision_view_page.php?bugnote_id=' . $t_bugnote->id . '">' . $t_view_num_revisions_text . '</a></span></p>';
 			}

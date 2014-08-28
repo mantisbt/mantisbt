@@ -114,7 +114,7 @@ require_api( 'lang_api.php' );
 		} else {
 			echo get_enum_element( 'project_view_state', $t_default_bugnote_view_status );
 		}
-		?>
+?>
 				</td>
 			</tr>
 <?php

@@ -95,7 +95,7 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 				?>
 			</td>
 		</tr>
-		<tr<td>
+		<tr>
 			<td class="category" width="25%">
 				<?php
 					$t_filter = array();
