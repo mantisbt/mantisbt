@@ -2147,12 +2147,10 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 	$t_view_type = $t_filter['_view_type'];
 
-	$t_trclass = '';
 	$t_action = 'view_all_set.php?f=3';
 
 	if( $p_for_screen == false ) {
 		$t_tdclass = 'print';
-		$t_trclass = '';
 		$t_action = 'view_all_set.php';
 	}
 	?>
@@ -2269,7 +2267,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		$t_dynamic_filter_expander_class = ( config_get( 'use_dynamic_filters' ) ) ? ' class="dynamic-filter-expander"' : '';
 		?>
 
-		<tr class="<?php echo $t_trclass ?>">
+		<tr>
 			<td class="small-caption category">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_REPORTER_ID . '[]';?>" id="reporter_id_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'reporter_label' )?></a>
 			</td>
@@ -2547,7 +2545,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 					echo '<td class="small-caption" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';
 				}?>
 		</tr>
-		<tr class="<?php echo $t_trclass ?>">
+		<tr>
 			<td class="small category">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_STATUS . '[]';?>" id="show_status_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'status_label' )?></a>
 			</td>
@@ -2860,7 +2858,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 		</tr>
 
-		<tr class="<?php echo $t_trclass ?>">
+		<tr>
 			<td class="small category">
 				<a href="<?php echo $t_filters_url . FILTER_PROPERTY_ISSUES_PER_PAGE;?>" id="per_page_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'show_label' )?></a>
 			</td>
@@ -2982,7 +2980,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			echo '<td class="small" colspan="' . ( $t_filter_cols - 8 ) . '">&#160;</td>';
 		}?>
 		</tr>
-		<tr class="<?php echo $t_trclass ?>">
+		<tr>
 			<td class="small category">
 				<?php if( ON == config_get( 'enable_profiles' ) ) { ?>
 					<a href="<?php echo $t_filters_url . FILTER_PROPERTY_PLATFORM;?>" id="platform_filter"<?php echo $t_dynamic_filter_expander_class ?>><?php echo lang_get( 'platform_label' )?></a>
@@ -3142,7 +3140,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			}
 			$t_links_row = "\n\t\t" . join( "\n\t\t", $t_plugin_filter_links[$i] );
 			$t_values_row = "\n\t\t" . join( "\n\t\t", $t_plugin_filter_fields[$i] );
-			echo "\n\t" . '<tr class="', $t_trclass, '">', $t_links_row, "\n\t</tr>";
+			echo "\n\t" . '<tr>', $t_links_row, "\n\t</tr>";
 			echo "\n\t" . '<tr>', $t_values_row, "\n\t</tr>\n\t";
 		}
 
@@ -3161,7 +3159,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 				for( $i = 0;$i < $t_num_fields;$i++ ) {
 					if( $t_col_idx == 0 ) {
-						$t_fields = '<tr class="' . $t_trclass . '">';
+						$t_fields = '<tr>';
 						$t_values = '<tr>';
 					}
 
