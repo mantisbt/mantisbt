@@ -285,8 +285,8 @@ $t_result = db_query_bound( $t_query, $t_param );
 
 <!-- FILTER FORM -->
 <form id="filter_form" method="post">
-<?php # CSRF protection not required here - form does not result in modifications ?>
-<input type="hidden" name="save" value="1" />
+	<?php # CSRF protection not required here - form does not result in modifications ?>
+		<input type="hidden" name="save" value="1" />
 
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
@@ -365,7 +365,6 @@ $t_result = db_query_bound( $t_query, $t_param );
 <div class="space-10"></div>
 
 <!-- CONFIGURATIONS LIST -->
-
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
