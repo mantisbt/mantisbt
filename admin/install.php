@@ -716,7 +716,6 @@ if( 3 == $t_install_state ) {
 		Installing Database
 	</h4>
 </div>
-
 <div class="widget-body">
 <div class="widget-main no-padding">
 <div class="table-responsive">
@@ -1054,15 +1053,13 @@ if( 5 == $t_install_state ) {
 	?>
 
 <div class="col-md-12 col-xs-12">
-	<div class="space-10"></div>
-
-	<div class="widget-box widget-color-blue2">
-		<div class="widget-header widget-header-small">
-			<h4 class="widget-title lighter">
-				Write Configuration File(s)
-			</h4>
-		</div>
-
+<div class="space-10"></div>
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		Write Configuration File(s)
+	</h4>
+</div>
 <div class="widget-body">
 <div class="widget-main no-padding">
 <div class="table-responsive">
@@ -1212,14 +1209,12 @@ if( 6 == $t_install_state ) {
 ?>
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
-
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
-<h4 class="widget-title lighter">
-Checking Installation...
-</h4>
+	<h4 class="widget-title lighter">
+		Checking Installation...
+	</h4>
 </div>
-
 <div class="widget-body">
 <div class="widget-main no-padding">
 <div class="table-responsive">
@@ -1337,14 +1332,12 @@ if( 7 == $t_install_state ) {
 ?>
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
-
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 		Installation Complete...
 	</h4>
 </div>
-
 <div class="widget-body">
 <div class="widget-main no-padding">
 <div class="table-responsive">
@@ -1377,14 +1370,12 @@ if( $g_failed && $t_install_state != 1 ) {
 	?>
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
-
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
 		Installation Failed...
 	</h4>
 </div>
-
 <div class="widget-body">
 <div class="widget-main no-padding">
 <div class="table-responsive">

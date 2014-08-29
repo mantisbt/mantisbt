@@ -3493,7 +3493,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	<form class="form-inline pull-left" method="post" name="open_queries" action="query_view_page.php">
 			<?php # CSRF protection not required here - form does not result in modifications ?>
 			<input type="submit" name="switch_to_query_button" class="btn btn-primary btn-white btn-sm btn-round"
-			   value="<?php echo lang_get( 'open_queries' )?>" />
+				value="<?php echo lang_get( 'open_queries' )?>" />
 		</form>
 		<form class="form-inline pull-left padding-left-8"  method="get" name="list_queries<?php echo $t_form_name_suffix;?>" action="view_all_set.php">
 			<?php # CSRF protection not required here - form does not result in modifications ?>
@@ -3587,7 +3587,7 @@ function print_filter_reporter_id() {
 		print_reporter_option_list( (int)$g_filter[FILTER_PROPERTY_REPORTER_ID] );
 	}?>
 		</select>
-	<?php
+		<?php
 }
 
 /**

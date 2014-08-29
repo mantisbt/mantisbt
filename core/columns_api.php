@@ -990,10 +990,10 @@ function print_column_selection( BugData $p_bug, $p_columns_target = COLUMNS_TAR
 		access_has_project_level( config_get( 'tag_attach_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ||
 		access_has_project_level( config_get( 'roadmap_update_threshold', null, null, $p_bug->project_id ), $p_bug->project_id ) ) {
 		$g_checkboxes_exist = true;
-    	echo '<div class="checkbox no-padding no-margin"><label>';
+		echo '<div class="checkbox no-padding no-margin"><label>';
 		printf( '<input type="checkbox" name="bug_arr[]" value="%d" class="ace" />', $p_bug->id );
-    	echo '<span class="lbl"></span>';
-    	echo '</label></div>';
+		echo '<span class="lbl"></span>';
+		echo '</label></div>';
 	} else {
 		echo '&#160;';
 	}
@@ -1198,7 +1198,7 @@ function print_column_category_id( BugData $p_bug, $p_columns_target = COLUMNS_T
 	$t_project_name = project_get_field( $p_bug->project_id, 'name' );
 
 	echo '<td class="column-category">';
-    echo '<div class="align-left">';
+	echo '<div class="align-left">';
 
 	# type project name if viewing 'all projects' or if issue is in a subproject
 	if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project() != $p_bug->project_id ) {
@@ -1208,7 +1208,7 @@ function print_column_category_id( BugData $p_bug, $p_columns_target = COLUMNS_T
 	}
 
 	echo string_display_line( category_full_name( $p_bug->category_id, false ) );
-    echo '</div>';
+	echo '</div>';
 	echo '</td>';
 }
 
@@ -1285,11 +1285,11 @@ function print_column_resolution( BugData $p_bug, $p_columns_target = COLUMNS_TA
  * @access public
  */
 function print_column_status( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-    # choose color based on status
-    $status_label = html_get_status_css_class( $p_bug->status, auth_get_current_user_id(), $p_bug->project_id );
+	# choose color based on status
+	$status_label = html_get_status_css_class( $p_bug->status, auth_get_current_user_id(), $p_bug->project_id );
 	echo '<td class="column-status">';
-    echo '<div class="align-left">';
-    echo '<i class="fa fa-square-o fa-xlg ' . $status_label . '"></i> ';
+	echo '<div class="align-left">';
+	echo '<i class="fa fa-square-o fa-xlg ' . $status_label . '"></i> ';
 	printf( '<span title="%s">%s</span>',
 		get_enum_element( 'resolution', $p_bug->resolution, auth_get_current_user_id(), $p_bug->project_id ),
 		get_enum_element( 'status', $p_bug->status, auth_get_current_user_id(), $p_bug->project_id )

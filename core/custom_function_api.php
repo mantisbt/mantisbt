@@ -111,7 +111,7 @@ function custom_function_default_changelog_print_issue( $p_issue_id, $p_issue_le
 	if( $t_bug->handler_id != 0 ) {
 		echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
 	}
-    echo '<br />';
+	echo '<br />';
 }
 
 /**
@@ -152,18 +152,18 @@ function custom_function_default_roadmap_print_issue( $p_issue_id, $p_issue_leve
 
 	$t_category = is_blank( $t_category_name ) ? '' : '<strong>[' . string_display_line( $t_category_name ) . ']</strong> ';
 
-    if( !isset( $s_status[$t_bug->status] ) ) {
-        $s_status[$t_bug->status] = get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
-    }
+	if( !isset( $s_status[$t_bug->status] ) ) {
+		$s_status[$t_bug->status] = get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
+	}
 
-    # choose color based on status
-    $status_label = html_get_status_css_class( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
-    $t_status_title = string_attribute( get_enum_element( 'status', bug_get_field( $t_bug->id, 'status' ), $t_bug->project_id ) );;
+	# choose color based on status
+	$status_label = html_get_status_css_class( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
+	$t_status_title = string_attribute( get_enum_element( 'status', bug_get_field( $t_bug->id, 'status' ), $t_bug->project_id ) );;
 
-    echo utf8_str_pad( '', $p_issue_level * 36, '&#160;' );
-    echo '<i class="fa fa-square-o fa-xlg ' . $status_label . '" title="' . $t_status_title . '"></i> ';
-    echo string_get_bug_view_link( $p_issue_id );
-    echo ': <span class="label label-light">', $t_category, '</span> ', $t_strike_start, string_display_line_links( $t_bug->summary ), $t_strike_end;
+	echo utf8_str_pad( '', $p_issue_level * 36, '&#160;' );
+	echo '<i class="fa fa-square-o fa-xlg ' . $status_label . '" title="' . $t_status_title . '"></i> ';
+	echo string_get_bug_view_link( $p_issue_id );
+	echo ': <span class="label label-light">', $t_category, '</span> ', $t_strike_start, string_display_line_links( $t_bug->summary ), $t_strike_end;
 	if( $t_bug->handler_id != 0 ) {
 		echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
 	}

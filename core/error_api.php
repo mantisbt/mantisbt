@@ -208,8 +208,8 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 				echo '<div class="space-20"></div>';
 				echo '<div class="alert alert-danger">';
 
-                echo '<p class="bold">' . $t_error_type . '</p>';
-                echo '<p>', $t_error_description, '</p>';
+				echo '<p class="bold">' . $t_error_type . '</p>';
+				echo '<p>', $t_error_description, '</p>';
 
 				echo '<div class="error-info">';
 				if( null === $g_error_proceed_url ) {

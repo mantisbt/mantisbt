@@ -37,7 +37,6 @@ print_admin_menu_bar( 'system_utils.php' );
 ?>
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
-
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 	<h4 class="widget-title lighter">
@@ -45,7 +44,6 @@ print_admin_menu_bar( 'system_utils.php' );
 		System Utilities
 	</h4>
 </div>
-
 <div class="widget-body">
 <div class="widget-main no-padding">
 <div class="table-responsive">

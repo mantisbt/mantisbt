@@ -87,8 +87,7 @@ print_manage_menu( 'manage_plugin_page.php' );
 		<span class="small"><?php
 			printf( lang_get( 'plugin_format_process_buglinks_info' ),
 				config_get( 'bug_link_tag' ), config_get( 'bugnote_link_tag' ) );
-		?>
-		</span>
+		?></span>
 	</th>
 	<td class="center">
 		<label><input type="radio" class="ace" name="process_buglinks" value="1" <?php echo( ON == plugin_config_get( 'process_buglinks' ) ) ? 'checked="checked" ' : ''?>/>
@@ -103,9 +102,9 @@ print_manage_menu( 'manage_plugin_page.php' );
 </table>
 </div>
 </div>
-	<div class="widget-toolbox padding-8 clearfix">
-		<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'change_configuration' )?>" />
-	</div>
+<div class="widget-toolbox padding-8 clearfix">
+	<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'change_configuration' )?>" />
+</div>
 </div>
 </div>
 </form>

@@ -72,7 +72,6 @@ if( -1 != config_get( 'database_version', -1 ) ) {
 	<p class="lead">You aware to be running an old (pre 1.1.0) release of MantisBT. To update to this release of mantis, you must first update your installation to 1.1</p>
 <?php
 }?>
-
 </div>
 <?php
 layout_admin_page_end();
