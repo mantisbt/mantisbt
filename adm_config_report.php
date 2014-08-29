@@ -299,9 +299,9 @@ $t_result = db_query_bound( $t_query, $t_param );
 <div class="widget-body">
 <div class="widget-main no-padding">
 	<div class="table-responsive">
-		<table class="table table-striped table-bordered table-condensed">
-			<!-- Title -->
-			<thead>
+	<table class="table table-striped table-bordered table-condensed">
+		<!-- Title -->
+		<thead>
 			<tr>
 				<th>
 					<?php echo lang_get( 'username' ); ?><br />
@@ -313,9 +313,9 @@ $t_result = db_query_bound( $t_query, $t_param );
 					<?php echo lang_get( 'configuration_option' ); ?><br />
 				</th>
 			</tr>
-			</thead>
+		</thead>
 
-			<tbody>
+		<tbody>
 			<tr>
 				<td>
 					<select name="filter_user_id" class="input-sm">
@@ -339,21 +339,21 @@ $t_result = db_query_bound( $t_query, $t_param );
 					</select>
 				</td>
 			</tr>
-			</tbody>
-		</table>
-	</div>
+		</tbody>
+	</table>
+</div>
 </div>
 <div class="widget-toolbox padding-8 clearfix">
 	<div class="btn-toolbar">
 		<div class="btn-group">
 			<input name="apply_filter_button" type="submit" class="btn btn-sm btn-primary btn-white btn-round"
-				   value="<?php echo lang_get( 'filter_button' )?>" />
+				value="<?php echo lang_get( 'filter_button' )?>" />
 
 			<input name="default_filter_button" type="submit" class="btn btn-sm btn-primary btn-white btn-round"
-				   value="<?php echo lang_get( 'default_filter' )?>" />
+				value="<?php echo lang_get( 'default_filter' )?>" />
 
 			<input name="reset_filter_button" type="submit" class="btn btn-sm btn-primary btn-white btn-round"
-				   value="<?php echo lang_get( 'reset_query' )?>" />
+				value="<?php echo lang_get( 'reset_query' )?>" />
 		</div>
 	</div>
 </div>
@@ -417,7 +417,7 @@ if( $t_read_write_access ) {
 ?>
 <td class="center">
 	<div class="btn-group inline">
-		<?php
+<?php
 		if( config_can_delete( $v_config_id ) ) {
 			# Update button (will populate edit form at page bottom)
 			echo '<div class="pull-left">';
@@ -431,8 +431,7 @@ if( $t_read_write_access ) {
 					'type'          => $v_type,
 					'value'         => $v_value,
 				),
-				OFF
-			);
+				OFF );
 			echo '</div>';
 
 			# Delete button
@@ -451,7 +450,7 @@ if( $t_read_write_access ) {
 		} else {
 			echo '&#160;';
 		}
-		?>
+?>
 	</div>
 </td>
 <?php
@@ -568,14 +567,14 @@ if( $t_read_write_access ) {
 	</div>
 
 	</div>
-                    <div class="widget-toolbox padding-4 clearfix">
-                        <input type="submit" name="config_set" class="btn btn-primary btn-white btn-round"
-                               value="<?php echo lang_get('set_configuration_option') ?>"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
+		<div class="widget-toolbox padding-4 clearfix">
+			<input type="submit" name="config_set" class="btn btn-primary btn-white btn-round"
+				value="<?php echo lang_get('set_configuration_option') ?>"/>
+		</div>
+	</div>
+	</div>
+	</div>
+</form>
 
 <?php
 } # end user can change config

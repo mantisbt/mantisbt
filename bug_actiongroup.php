@@ -324,9 +324,9 @@ form_security_purge( $t_form_name );
 $t_redirect_url = 'view_all_bug_page.php';
 
 if( count( $t_failed_ids ) > 0 ) {
-    layout_page_header();
+	layout_page_header();
 
-    layout_page_begin();
+	layout_page_begin();
 
 	echo '<div><br />';
 	echo '<table class="width75">';
@@ -339,7 +339,7 @@ if( count( $t_failed_ids ) > 0 ) {
 	print_bracket_link( $t_redirect_url, lang_get( 'proceed' ) );
 	echo '</div>';
 
-    layout_page_end();
+	layout_page_end();
 } else {
 	print_header_redirect( $t_redirect_url );
 }

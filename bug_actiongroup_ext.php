@@ -98,9 +98,9 @@ $g_project_override = null;
 form_security_purge( $t_form_name );
 
 if( count( $t_failed_ids ) > 0 ) {
-    layout_page_header();
+	layout_page_header();
 
-    layout_page_begin();
+	layout_page_begin();
 
 	echo '<div>';
 

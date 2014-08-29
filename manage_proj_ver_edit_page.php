@@ -82,7 +82,6 @@ print_manage_menu( 'manage_proj_page.php' );
 					<?php echo lang_get( 'edit_project_version_title' ) ?>
 				</h4>
 			</div>
-
 		<div class="widget-body">
 		<div class="widget-main no-padding">
 		<div class="table-responsive">
@@ -139,15 +138,14 @@ print_manage_menu( 'manage_proj_page.php' );
 			<?php event_signal( 'EVENT_MANAGE_VERSION_UPDATE_FORM', array( $t_version->id ) ); ?>
 		</fieldset>
 		</table>
-		</div>
-		</div>
-
-		<div class="widget-toolbox padding-8 clearfix">
+			</div>
+			</div>
+			<div class="widget-toolbox padding-8 clearfix">
 				<span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>
 				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_version_button' ) ?>" />
-		</div>
-		</div>
-	</div>
+			</div>
+			</div>
+			</div>
 	</form>
 </div>
 </div>

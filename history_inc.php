@@ -63,22 +63,20 @@ if( !access_has_bug_level( $t_access_level_needed, $f_bug_id ) ) {
 	$t_history = history_get_events_array( $f_bug_id );
 ?>
 <div id="history" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
-	<div class="widget-header widget-header-small">
-		<h4 class="widget-title lighter">
-			<i class="ace-icon fa fa-history"></i>
-			<?php echo lang_get( 'bug_history' ) ?>
-		</h4>
-		<div class="widget-toolbar">
-			<a data-action="collapse" href="#">
-				<i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
-			</a>
-		</div>
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-history"></i>
+		<?php echo lang_get( 'bug_history' ) ?>
+	</h4>
+	<div class="widget-toolbar">
+		<a data-action="collapse" href="#">
+			<i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
+		</a>
 	</div>
-
-	<div class="widget-body">
-		<div class="widget-main no-padding">
-
-			<div class="table-responsive">
+</div>
+<div class="widget-body">
+<div class="widget-main no-padding">
+<div class="table-responsive">
 <table class="table table-bordered table-condensed table-hover table-striped">
 	<thead>
 		<tr>
@@ -120,9 +118,9 @@ if( !access_has_bug_level( $t_access_level_needed, $f_bug_id ) ) {
 ?>
 	</tbody>
 </table>
-			</div>
-		</div>
-	</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 

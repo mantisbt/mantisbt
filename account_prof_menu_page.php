@@ -90,9 +90,8 @@ if( !$g_global_profiles ) {
 # Add Profile Form BEGIN
 ?>
 <div class="col-md-12 col-xs-12">
-    <div class="space-10"></div>
-
-    <div id="account-profile-div" class="form-container">
+<div class="space-10"></div>
+<div id="account-profile-div" class="form-container">
 	<form id="account-profile-form" method="post" action="account_prof_update.php">
 
 <div class="widget-box widget-color-blue2">
@@ -148,8 +147,8 @@ if( !$g_global_profiles ) {
 </div>
 </div>
 <div class="widget-toolbox padding-8 clearfix">
-	<span class="required pull-right"> * required</span>
-	<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get('add_profile_button') ?>"/>
+				<span class="required pull-right"> * required</span>
+				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get('add_profile_button') ?>"/>
 </div>
 </div>
 </div>
@@ -167,7 +166,6 @@ if( !$g_global_profiles ) {
 
 <div id="account-profile-update-div" class="form-container">
 	<form id="account-profile-update-form" method="post" action="account_prof_update.php">
-
 		<div class="widget-box widget-color-blue2">
 			<div class="widget-header widget-header-small">
 				<h4 class="widget-title lighter">
@@ -182,7 +180,6 @@ if( !$g_global_profiles ) {
 						<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
 			<?php  echo form_security_field( 'profile_update' )?>
-
 			<tr>
 				<td class="category">
 					<?php echo lang_get( 'edit_profile' ) ?>
@@ -194,11 +191,9 @@ if( !$g_global_profiles ) {
 					</label>
 				</td>
 			</tr>
-
 <?php
 	if( !$g_global_profiles ) {
 ?>
-
 				<tr>
 					<td class="category">
 						<?php echo lang_get( 'make_default' ) ?>

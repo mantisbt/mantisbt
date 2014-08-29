@@ -119,10 +119,10 @@ function get_capability_row( $p_caption, $p_access_level ) {
  * @return string
  */
 function get_section_end() {
-    $t_output = '</tbody></table></div> ' . "\n";
-    $t_output .= '</div></div></div></div> ' . "\n";
-    $t_output .= '<div class="space-10"></div>';
-    return $t_output;
+	$t_output = '</tbody></table></div> ' . "\n";
+	$t_output .= '</div></div></div></div> ' . "\n";
+	$t_output .= '<div class="space-10"></div>';
+	return $t_output;
 }
 
 # News

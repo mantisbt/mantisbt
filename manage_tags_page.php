@@ -110,21 +110,20 @@ print_manage_menu( 'manage_tags_page.php' );
 ?>
 
 <div class="col-md-12 col-xs-12">
-    <div class="space-10"></div>
-
-    <div class="center">
-        <div class="btn-toolbar inline">
-            <div class="btn-group">
+	<div class="space-10"></div>
+	<div class="center">
+		<div class="btn-toolbar inline">
+		<div class="btn-group">
 	<?php
 	foreach ( $t_prefix_array as $t_prefix ) {
 		$t_caption = ( $t_prefix === 'ALL' ? lang_get( 'show_all_tags' ) : $t_prefix );
 		$t_active = $t_prefix == $f_filter ? 'active' : '';
 		echo '<a class="btn btn-xs btn-white btn-primary ' . $t_active .
-			'" href="manage_tags_page.php?filter=' . $t_prefix .'">' . $t_caption . '</a>' ."\n";
+		'" href="manage_tags_page.php?filter=' . $t_prefix .'">' . $t_caption . '</a>' ."\n";
 	} ?>
 		</div>
 	</div>
-    </div>
+	</div>
 
 <div class="space-10"></div>
 
@@ -143,8 +142,8 @@ print_manage_menu( 'manage_tags_page.php' );
 				<?php print_small_button( '#tagcreate', lang_get('tag_create') ) ?>
 			</div>
 		<?php } ?>
-		<div class="widget-main no-padding">
-			<div class="table-responsive">
+	<div class="widget-main no-padding">
+	<div class="table-responsive">
 	<table class="table table-striped table-bordered table-condensed table-hover">
 		<thead>
 			<tr>
@@ -189,7 +188,7 @@ print_manage_menu( 'manage_tags_page.php' );
 
 <?php if( $t_can_edit ) { ?>
 <div class="space-10"></div>
-    <form id="manage-tags-create-form" method="post" action="tag_create.php">
+	<form id="manage-tags-create-form" method="post" action="tag_create.php">
 	<div class="widget-box widget-color-blue2">
 		<div class="widget-header widget-header-small">
 			<h4 class="widget-title lighter">
@@ -197,13 +196,12 @@ print_manage_menu( 'manage_tags_page.php' );
 				<?php echo lang_get('tag_create') ?>
 			</h4>
 		</div>
-
 		<div class="widget-body">
 			<a name="tagcreate"></a>
 			<div class="widget-main no-padding">
-				<div class="form-container">
-					<div class="table-responsive">
-						<table class="table table-bordered table-condensed table-striped">
+		<div class="form-container">
+		<div class="table-responsive">
+		<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
 			<?php echo form_security_field( 'tag_create' ); ?>
 			<tr>
@@ -224,11 +222,10 @@ print_manage_menu( 'manage_tags_page.php' );
 				</td>
 			</tr>
 		</fieldset>
-						</table>
-					</div>
-				</div>
-			</div>
-
+		</table>
+		</div>
+		</div>
+		</div>
 			<div class="widget-toolbox padding-8 clearfix">
 				<span class="required pull-right"> * required</span>
 				<input type="submit" name="config_set" class="btn btn-primary btn-sm btn-white btn-round"

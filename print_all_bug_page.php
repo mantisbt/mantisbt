@@ -108,15 +108,11 @@ $t_show_flag = gpc_get_int( 'show_flag', 0 );
 layout_page_header();
 ?>
 
-<table class="table table-condensed no-margin">
-<tr>
-<td class="bold bigger-120">
+<table class="table table-condensed no-margin"><tr><td class="bold bigger-120">
 	<div class="center">
 		<?php echo string_display( config_get( 'window_title' ) ) . ' - ' . string_display( project_get_name( $t_project_id ) ); ?>
 	</div>
-</td>
-</tr>
-</table>
+</td></tr></table>
 
 <table class="table table-striped table-bordered table-condensed no-margin">
 	<tr>

@@ -96,8 +96,8 @@ if( 0 < $f_tag_select && tag_exists( $f_tag_select ) ) {
 
 # failed to attach at least one tag
 if( count( $t_tags_failed ) > 0 ) {
-    layout_page_header( lang_get( 'tag_attach_long' ) . ' ' . bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
-    layout_page_begin();
+	layout_page_header( lang_get( 'tag_attach_long' ) . ' ' . bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
+	layout_page_begin();
 ?>
 <br/>
 <table class="width75">

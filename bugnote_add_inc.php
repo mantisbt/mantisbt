@@ -59,9 +59,9 @@ require_api( 'lang_api.php' );
 <div class="space-10"></div>
 
 <?php
-    $t_collapse_block = collapse_display( 'bugnote_add' );
-    $t_block_css = $t_collapse_block ? 'collapsed' : '';
-    $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
+	$t_collapse_block = collapse_display( 'bugnote_add' );
+	$t_block_css = $t_collapse_block ? 'collapsed' : '';
+	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 ?>
 <form name="bugnoteadd" method="post" action="bugnote_add.php">
 	<?php echo form_security_field( 'bugnote_add' ) ?>
@@ -80,11 +80,11 @@ require_api( 'lang_api.php' );
 		</div>
 
 		<div class="widget-body">
-			<div class="widget-main no-padding">
+		<div class="widget-main no-padding">
 
-				<div class="table-responsive">
+		<div class="table-responsive">
 		<table class="table table-bordered table-condensed">
-			<tbody>
+		<tbody>
 			<tr>
 				<th class="category" width="15%">
 					<?php echo lang_get( 'bugnote' ) ?>

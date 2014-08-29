@@ -81,23 +81,22 @@ if( profile_is_global( $f_profile_id ) ) {
 
 <?php # Edit Profile Form BEGIN ?>
 <div class="col-md-12 col-xs-12">
-	<div class="space-10"></div>
-	<form method="post" action="account_prof_update.php">
-		<div class="widget-box widget-color-blue2">
-			<div class="widget-header widget-header-small">
-				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-user"></i>
-					<?php echo lang_get('edit_profile_title') ?>
-				</h4>
-			</div>
-
-			<div class="widget-body">
-				<div class="widget-main no-padding">
-					<div class="table-responsive">
-						<table class="table table-striped table-bordered table-condensed">
-							<?php  echo form_security_field( 'profile_update' )?>
-							<input type="hidden" name="action" value="update" />
-							<input type="hidden" name="profile_id" value="<?php echo $v_id ?>" />
+<div class="space-10"></div>
+<form method="post" action="account_prof_update.php">
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-user"></i>
+		<?php echo lang_get('edit_profile_title') ?>
+	</h4>
+</div>
+<div class="widget-body">
+<div class="widget-main no-padding">
+<div class="table-responsive">
+	<table class="table table-striped table-bordered table-condensed">
+		<?php  echo form_security_field( 'profile_update' )?>
+		<input type="hidden" name="action" value="update" />
+		<input type="hidden" name="profile_id" value="<?php echo $v_id ?>" />
 <tr>
 	<th class="category" width="25%">
 		<span class="required">*</span><?php echo lang_get( 'platform' ) ?>
@@ -130,16 +129,16 @@ if( profile_is_global( $f_profile_id ) ) {
 		<textarea class="form-control" name="description" cols="60" rows="8"><?php echo string_textarea( $v_description ) ?></textarea>
 	</td>
 </tr>
-						</table>
-					</div>
-				</div>
-				<div class="widget-toolbox padding-8 clearfix">
-					<span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>
-					<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_profile_button' ) ?>" />
-				</div>
-			</div>
-		</div>
-	</form>
+</table>
+</div>
+</div>
+<div class="widget-toolbox padding-8 clearfix">
+	<span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>
+	<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_profile_button' ) ?>" />
+</div>
+</div>
+</div>
+</form>
 </div>
 <?php
 layout_page_end();

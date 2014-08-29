@@ -91,7 +91,7 @@ print_manage_menu( 'manage_user_page.php' );
 ?>
 
 <div class="col-md-12 col-xs-12">
-    <div class="space-10"></div>
+	<div class="space-10"></div>
 
 <!-- USER INFO -->
 <div id="edit-user-div" class="form-container">
@@ -103,14 +103,12 @@ print_manage_menu( 'manage_user_page.php' );
 					<?php echo lang_get('edit_user_title') ?>
 				</h4>
 			</div>
-
 		<div class="widget-body">
 		<div class="widget-main no-padding">
 		<div class="form-container">
 		<div class="table-responsive">
 		<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
-
 			<?php echo form_security_field( 'manage_user_update' ) ?>
 			<!-- Title -->
 			<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
@@ -126,8 +124,7 @@ print_manage_menu( 'manage_user_page.php' );
 			</tr>
 
 			<!-- Realname -->
-			<tr>
-				<?php
+			<tr><?php
 			if( $t_ldap && ON == config_get( 'use_ldap_realname' ) ) {
 				# With LDAP
 				echo '<td class="category">' . lang_get( 'realname_label' ) . '</td>';
@@ -139,21 +136,21 @@ print_manage_menu( 'manage_user_page.php' );
 				<td class="category"><?php echo lang_get( 'realname_label' ) ?></td>
 				<td><input id="edit-realname" type="text" class="input-sm" size="32" maxlength="<?php echo DB_FIELD_SIZE_REALNAME;?>" name="realname" value="<?php echo string_attribute( $t_user['realname'] ) ?>" /></td><?php
 			}
-			?>
+		?>
 			</tr>
 			<!-- Email -->
 			<tr><?php
-				if( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
+			if( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
 				# With LDAP
 				echo '<td class="category">' . lang_get( 'email_label' ) . '</td';
 				echo '<td>' . string_display_line( user_get_email( $t_user_id ) ) . '</td>';
-				} else {
+			} else {
 				# Without LDAP
 				echo '<td class="category">' . lang_get( 'email_label' ) . '</td>';
 				echo '<td>';
 				print_email_input( 'email', $t_user['email'] );
 				echo '<td>';
-				} ?>
+			} ?>
 			</tr>
 			<!-- Access Level -->
 			<tr>
@@ -279,10 +276,9 @@ if( $t_reset || $t_unlock || $t_delete ) {
 </div>
 <?php } ?>
 
-
     <div class="clearfix"></div>
 
-    <!-- PROJECT ACCESS (if permissions allow) and user is not ADMINISTRATOR -->
+<!-- PROJECT ACCESS (if permissions allow) and user is not ADMINISTRATOR -->
 <?php if( access_has_global_level( config_get( 'manage_user_threshold' ) ) &&
 	!user_is_administrator( $t_user_id ) ) {
 ?>
@@ -341,7 +337,7 @@ if( $t_reset || $t_unlock || $t_delete ) {
 	</div>
 </div>
 </div>
-    </form>
+	</form>
 <?php
 } # End of PROJECT ACCESS conditional section
 echo '</div>';

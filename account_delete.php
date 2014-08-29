@@ -99,13 +99,13 @@ layout_page_header();
 layout_page_begin();
 ?>
 
-    <div class="col-md-12 col-xs-12">
-        <div class="space-10"></div>
-        <?php
-        echo lang_get( 'account_removed_msg' ) . '<br />';
-        print_button( config_get( 'logout_redirect_page' ), lang_get( 'proceed' ));
-        ?>
-    </div>
+<div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
+<?php
+echo lang_get( 'account_removed_msg' ) . '<br />';
+print_button( config_get( 'logout_redirect_page' ), lang_get( 'proceed' ));
+?>
+</div>
 
 <?php
 layout_page_end();

@@ -242,7 +242,7 @@ if( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 	</div>
 		<form id="manage-project-subproject-add-form" method="post" action="manage_proj_subproj_add.php" class="form-inline">
 			<div class="widget-body">
-				<div class="widget-main">
+			<div class="widget-main">
 			<fieldset>
 				<?php echo form_security_field( 'manage_proj_subproj_add' ) ?>
 				<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
@@ -263,7 +263,7 @@ if( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 				</select>
 				<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_subproject' ); ?>" />
 			</fieldset>
-				</div>
+			</div>
 			</div>
 		</form>
 		</div>
@@ -273,18 +273,18 @@ if( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 <?php
 	$t_subproject_ids = current_user_get_accessible_subprojects( $f_project_id, true );
 	if( array() != $t_subproject_ids ) { ?>
-    <div class="col-md-12 col-xs-12">
-        <div class="space-10"></div>
+	<div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
 	<form id="manage-project-update-subprojects-form" action="manage_proj_update_children.php" method="post">
-		<div class="widget-box widget-color-blue2">
-			<div class="widget-header widget-header-small">
-				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-share-alt"></i>
-					<?php echo lang_get( 'subprojects' ); ?>
-				</h4>
-			</div>
-			<div class="widget-body">
-				<div class="widget-main no-padding">
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-share-alt"></i>
+				<?php echo lang_get( 'subprojects' ); ?>
+			</h4>
+		</div>
+		<div class="widget-body">
+		<div class="widget-main no-padding">
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_update_children' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
@@ -358,8 +358,8 @@ if( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 			</div>
 		</div>
 	</form>
-    </div>
-    <?php
+</div>
+<?php
 		# End of subprojects listing / update form
 } else {
 		# If there are no subprojects, clear floats to h2 overlap on div border
@@ -477,7 +477,7 @@ if( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 	</form>
 	</div>
 		<div class="widget-body">
-			<div class="widget-main no-padding">
+		<div class="widget-main no-padding">
 	<?php
 	$t_versions = version_get_all_rows( $f_project_id, null, null );
 	if( count( $t_versions ) > 0 ) { ?>
@@ -526,11 +526,12 @@ if( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 					</div>
 				</td>
 			</tr>
-		<?php
+<?php
 		} # end for loop
-		?>
+?>
 		</tbody>
-	</table></div>
+	</table>
+	</div>
 <?php
 	}
 ?>
@@ -650,7 +651,7 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
 			<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_existing_custom_field' ) ?>" />
 		</fieldset>
 	</form>
-	</div><?php
+</div><?php
 	} ?>
 </div>
 </div>
@@ -671,9 +672,9 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 	} else {
 		echo lang_get( 'private_project_msg' );
 	} ?>
-		</div>
-        </div>
-    </div>
+	</div>
+	</div>
+</div>
 
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
@@ -770,7 +771,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 ?>
 		</tbody>
 	</table>
-		</div>
+	</div>
 	</div>
 </div>
 <div class="widget-toolbox padding-8 clearfix">
@@ -806,17 +807,17 @@ if( count( $t_users ) > 0 ) { ?>
 	<div class="space-10"></div>
 	<div class="form-container">
 	<form id="manage-project-add-user-form" method="post" action="manage_proj_user_add.php">
-		<div class="widget-box widget-color-blue2">
-			<div class="widget-header widget-header-small">
-				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-user"></i>
-					<?php echo lang_get( 'add_user_title' ); ?>
-				</h4>
-			</div>
-			<div class="widget-body">
-				<div class="widget-main no-padding">
-					<div class="table-responsive">
-						<table class="table table-bordered table-condensed table-striped">
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-user"></i>
+				<?php echo lang_get( 'add_user_title' ); ?>
+			</h4>
+		</div>
+		<div class="widget-body">
+		<div class="widget-main no-padding">
+		<div class="table-responsive">
+		<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_user_add' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />

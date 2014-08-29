@@ -125,7 +125,6 @@ layout_login_page_begin();
 			</h1>
 		</a>
 		<div class="space-24 hidden-480"></div>
-
 <?php
 if( $f_error || $f_cookie_error ) {
 	echo '<div class="alert alert-danger">';
@@ -145,7 +144,6 @@ if( $f_error || $f_cookie_error ) {
 ?>
 
 <div class="position-relative">
-
 	<div class="signup-box visible widget-box no-border" id="login-box">
 		<div class="widget-body">
 			<div class="widget-main">
@@ -154,9 +152,7 @@ if( $f_error || $f_cookie_error ) {
 					<?php echo lang_get( 'login_title' ) ?>
 				</h4>
 				<div class="space-10"></div>
-
-	<!-- Login Form BEGIN -->
-
+<!-- Login Form BEGIN -->
 	<form id="login-form" method="post" action="login.php">
 		<fieldset>
 
@@ -310,7 +306,6 @@ if( ( ON == config_get_global( 'allow_signup' ) ) &&
 ?>
 <div class="clearfix"></div>
 </div>
-
 </div>
 </div>
 </div>

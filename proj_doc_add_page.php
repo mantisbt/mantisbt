@@ -60,21 +60,20 @@ print_doc_menu('proj_doc_add_page.php');
 ?>
 
 <div class="col-md-12 col-xs-12">
-	<div class="space-10"></div>
-	<div class="form-container">
-		<form method="post" enctype="multipart/form-data" action="proj_doc_add.php">
-			<?php echo form_security_field( 'proj_doc_add' ) ?>
-
-			<div class="widget-box widget-color-blue2">
-				<div class="widget-header widget-header-small">
-					<h4 class="widget-title lighter">
-						<i class="ace-icon fa fa-upload"></i>
-						<?php echo lang_get( 'upload_file_title' ) ?>
-					</h4>
-				</div>
-		<div class="widget-body">
-		<div class="widget-main no-padding">
-		<div class="table-responsive">
+<div class="space-10"></div>
+<div class="form-container">
+<form method="post" enctype="multipart/form-data" action="proj_doc_add.php">
+	<?php echo form_security_field( 'proj_doc_add' ) ?>
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-upload"></i>
+				<?php echo lang_get( 'upload_file_title' ) ?>
+			</h4>
+		</div>
+<div class="widget-body">
+<div class="widget-main no-padding">
+<div class="table-responsive">
 <table class="table table-bordered table-condensed table-striped">
 <tr>
 	<th class="category" width="25%">
@@ -109,12 +108,11 @@ print_doc_menu('proj_doc_add_page.php');
 		<div class="widget-toolbox padding-8 clearfix">
 			<span class="required pull-right"> * <?php echo lang_get('required') ?></span>
 			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get('upload_file_button') ?>"/>
-
 		</div>
 		</div>
-		</div>
-	</form>
 	</div>
+</form>
+</div>
 </div>
 
 <?php

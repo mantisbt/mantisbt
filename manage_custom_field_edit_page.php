@@ -88,7 +88,6 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			<?php echo form_security_field( 'manage_custom_field_update' ); ?>
 			<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
 			<input type="hidden" name="return" value="<?php echo $f_return ?>" />
-
 	<tr>
 		<td class="category">
 			<?php echo lang_get( 'custom_field_name' ) ?>
@@ -97,7 +96,6 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			<input type="text" id="custom-field-name" name="name" class="input-sm" size="32" maxlength="64" value="<?php echo string_attribute( $t_definition['name'] ) ?>" />
 		</td>
 	</tr>
-
 	<tr>
 		<td class="category">
 			<?php echo lang_get( 'custom_field_type' ) ?>
@@ -108,7 +106,6 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			</select>
 		</td>
 	</tr>
-
 	<tr>
 		<td class="category">
 			<?php echo lang_get( 'custom_field_possible_values' ) ?>
@@ -117,7 +114,6 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			<input type="text" id="custom-field-possible-values" name="possible_values" class="input-sm" value="<?php echo string_attribute( $t_definition['possible_values'] ) ?>" />
 		</td>
 	</tr>
-
 	<tr>
 		<td class="category">
 			<?php echo lang_get( 'custom_field_default_value' ) ?>
@@ -126,7 +122,6 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			<input type="text" id="custom-field-default-value" name="default_value" class="input-sm" size="32" maxlength="255" value="<?php echo string_attribute( $t_definition['default_value'] ) ?>" />
 		</td>
 	</tr>
-
 	<tr>
 		<td class="category">
 			<?php echo lang_get( 'custom_field_valid_regexp' ) ?>
@@ -146,7 +141,6 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			</select>
 		</td>
 	</tr>
-
 	<tr>
 		<td class="category">
 			<?php echo lang_get( 'custom_field_access_level_rw' ) ?>
@@ -155,39 +149,10 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			<select id="custom-field-access-level-rw" name="access_level_rw" class="input-sm">
 				<?php print_enum_string_option_list( 'access_levels', (int)$t_definition['access_level_rw'] ) ?>
 			</select>
-		</td>
-	</tr>
-
-	<tr>
-		<td class="category">
-			<?php echo lang_get( 'custom_field_length_min' ) ?>
-		</td>
-		<td>
-			<input type="text" id="custom-field-length-min" name="length_min" class="input-sm" size="32" maxlength="64" value="<?php echo $t_definition['length_min'] ?>" />
-		</td>
-	</tr>
-
-	<tr>
-		<td class="category">
-			<?php echo lang_get( 'custom_field_length_max' ) ?>
-		</td>
-		<td>
-			<input type="text" id="custom-field-length-max" name="length_max" class="input-sm" size="32" maxlength="64" value="<?php echo $t_definition['length_max'] ?>" />
-		</td>
-	</tr>
-
-	<tr>
-		<td class="category">
-			<?php echo lang_get( 'custom_field_filter_by' ) ?>
-		</td>
-		<td>
-			<label>
-				<input type="checkbox" class="ace" id="custom-field-filter-by" name="filter_by" checked="checked" <?php if( $t_definition['filter_by'] ) { ?>checked="checked"<?php } ?> />
 				<span class="lbl"></span>
 			</label>
 		</td>
 	</tr>
-
 	<tr>
 		<td class="category">
 			<?php echo lang_get( 'custom_field_display_report' ) ?>
@@ -199,7 +164,6 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			</label>
 		</td>
 	</tr>
-
 	<tr>
 		<td class="category">
 			<?php echo lang_get( 'custom_field_display_update' ) ?>
@@ -211,7 +175,6 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			</label>
 		</td>
 	</tr>
-
 	<tr>
 		<td class="category">
 			<?php echo lang_get( 'custom_field_display_resolved' ) ?>
@@ -223,7 +186,6 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			</label>
 		</td>
 	</tr>
-
 	<tr>
 		<td class="category">
 			<?php echo lang_get( 'custom_field_display_closed' ) ?>
@@ -235,7 +197,6 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			</label>
 		</td>
 	</tr>
-
 	<tr>
 		<td class="category">
 			<?php echo lang_get( 'custom_field_require_report' ) ?>
@@ -247,7 +208,6 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			</label>
 		</td>
 	</tr>
-
 	<tr>
 		<td class="category">
 			<?php echo lang_get( 'custom_field_require_update' ) ?>
@@ -259,7 +219,6 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			</label>
 		</td>
 	</tr>
-
 	<tr>
 		<td class="category">
 			<?php echo lang_get( 'custom_field_require_resolved' ) ?>
@@ -271,7 +230,6 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			</label>
 		</td>
 	</tr>
-
 	<tr>
 		<td class="category">
 			<?php echo lang_get( 'custom_field_require_closed' ) ?>
@@ -312,56 +270,55 @@ $t_definition = custom_field_get_definition( $f_field_id );
            * We may need to add extra checks to exclude projects from the list that the user
 		   * can't link/unlink fields from/to. */
 ?>
-
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
 	<form method="post" action="manage_custom_field_proj_add.php">
-		<div class="widget-box widget-color-blue2">
-			<div class="widget-header widget-header-small">
-				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-flask"></i>
-					<?php echo lang_get( 'link_custom_field_to_project_title' ) ?>
-				</h4>
-			</div>
+	<div class="widget-box widget-color-blue2">
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<i class="ace-icon fa fa-flask"></i>
+			<?php echo lang_get( 'link_custom_field_to_project_title' ) ?>
+		</h4>
+	</div>
 
-			<div class="widget-body">
-				<div class="widget-main no-padding">
-					<div class="form-container">
-						<div class="table-responsive">
-							<table class="table table-bordered table-condensed table-striped">
-								<fieldset>
-									<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
-									<?php echo form_security_field( 'manage_custom_field_proj_add' ); ?>
+	<div class="widget-body">
+		<div class="widget-main no-padding">
+		<div class="form-container">
+		<div class="table-responsive">
+		<table class="table table-bordered table-condensed table-striped">
+		<fieldset>
+			<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
+			<?php echo form_security_field( 'manage_custom_field_proj_add' ); ?>
 
-									<tr>
-										<td class="category">
-											<?php echo lang_get( 'projects_title_label' ) ?>
-										</td>
-										<td>
-											<select id="custom-field-project-id" name="project_id[]" class="input-sm" multiple="multiple" size="5">
-												<?php print_project_option_list( null, false ); ?>
-											</select>
-										</td>
-									</tr>
-									<tr>
-										<td class="category">
-											<?php echo lang_get( 'custom_field_sequence_label' ) ?>
-										</td>
-										<td>
-											<input type="text" id="custom-field-sequence" name="sequence" class="input-sm" value="0" />
-										</td>
-									</tr>
-								</fieldset>
-							</table>
-						</div>
-					</div>
-					<div class="widget-toolbox padding-8 clearfix">
-						<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'link_custom_field_to_project_button' ) ?>" />
-					</div>
-				</div>
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'projects_title_label' ) ?>
+				</td>
+				<td>
+					<select id="custom-field-project-id" name="project_id[]" class="input-sm" multiple="multiple" size="5">
+						<?php print_project_option_list( null, false ); ?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'custom_field_sequence_label' ) ?>
+				</td>
+				<td>
+					<input type="text" id="custom-field-sequence" name="sequence" class="input-sm" value="0" />
+				</td>
+			</tr>
+		</fieldset>
+		</table>
+		</div>
+		</div>
+			<div class="widget-toolbox padding-8 clearfix">
+				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'link_custom_field_to_project_button' ) ?>" />
 			</div>
 		</div>
+		</div>
+		</div>
 	</form>
-</div>
-<?php
+</div><?php
+
 layout_page_end();

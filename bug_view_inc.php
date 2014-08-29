@@ -102,7 +102,7 @@ compress_enable();
 
 if( $t_show_page_header ) {
 	layout_page_header( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
-    layout_page_begin( 'view_all_bug_page.php' );
+	layout_page_begin( 'view_all_bug_page.php' );
 }
 
 $t_action_button_position = config_get( 'action_button_position' );
@@ -281,8 +281,8 @@ foreach ( $t_links as $t_plugin => $t_hooks ) {
 
 # Links
 if( !is_blank( $t_history_link ) ) {
-    # History
-    print_small_button( $t_history_link, lang_get( 'bug_history' ) );
+	# History
+	print_small_button( $t_history_link, lang_get( 'bug_history' ) );
 }
 
 # Print Bug
@@ -483,8 +483,8 @@ if( $t_show_status || $t_show_resolution ) {
 		$t_status_label = html_get_status_css_class( $t_bug->status );
 
 		echo '<td class="bug-status">';
-        echo '<i class="fa fa-square-o fa-xlg ' . $t_status_label . '"></i> ';
-        echo $t_status, '</td>';
+		echo '<i class="fa fa-square-o fa-xlg ' . $t_status_label . '"></i> ';
+		echo $t_status, '</td>';
 	} else {
 		$t_spacer += 2;
 	}

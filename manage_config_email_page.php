@@ -197,20 +197,17 @@ function show_notify_threshold( $p_access, $p_action ) {
  */
 function get_section_begin_for_email( $p_section_name ) {
 	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
-
-    echo '<div class="space-10"></div>';
-
-    echo '<div class="widget-box widget-color-blue2">';
-    echo '   <div class="widget-header widget-header-small">';
-    echo '        <h4 class="widget-title lighter uppercase">';
-    echo '            <i class="ace-icon fa fa-envelope"></i>';
-    echo $p_section_name;
-    echo '       </h4>';
-    echo '   </div>';
-    echo '   <div class="widget-body">';
-    echo '   <div class="widget-main no-padding">';
-    echo '       <div class="table-responsive">';
-
+	echo '<div class="space-10"></div>';
+	echo '<div class="widget-box widget-color-blue2">';
+	echo '   <div class="widget-header widget-header-small">';
+	echo '        <h4 class="widget-title lighter uppercase">';
+	echo '            <i class="ace-icon fa fa-envelope"></i>';
+	echo $p_section_name;
+	echo '       </h4>';
+	echo '   </div>';
+	echo '   <div class="widget-body">';
+	echo '   <div class="widget-main no-padding">';
+	echo '       <div class="table-responsive">';
 	echo '<table class="table table-striped table-bordered table-condensed">' . "\n";
 	echo '<thead>' . "\n";
 	echo '<tr>' . "\n";
@@ -260,8 +257,8 @@ function get_capability_row_for_email( $p_caption, $p_message_type ) {
  */
 function get_section_end_for_email() {
 	echo '</tbody></table></div>' . "\n";
-    echo '</div></div></div> ' . "\n";
-    echo '<div class="space-10"></div>';
+	echo '</div></div></div> ' . "\n";
+	echo '<div class="space-10"></div>';
 }
 
 
@@ -339,14 +336,14 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 		$t_project_title = sprintf( lang_get( 'config_project' ), string_display( project_get_name( $t_project ) ) );
 	}
 
-    echo '<div class="well">' . "\n";
+	echo '<div class="well">' . "\n";
 	echo '<p class="bold"><i class="fa fa-info-circle"></i> ' . $t_project_title . '</p>' . "\n";
 	echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 	if( ALL_PROJECTS <> $t_project ) {
 		echo '<span style="background-color:' . $g_colour_project . '">' . lang_get( 'colour_project' ) . '</span><br />';
 	}
 	echo '<span style="background-color:' . $t_colour_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
-    echo '</div>' . "\n";
+	echo '</div>' . "\n";
 
 	get_section_begin_for_email( lang_get( 'email_notification' ) );
 #		get_capability_row_for_email( lang_get( 'email_on_new' ), 'new' );  # duplicate of status change to 'new'

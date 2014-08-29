@@ -77,24 +77,22 @@ layout_page_begin();
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
 	<form method="post" action="tag_update.php">
-
-		<div class="widget-box widget-color-blue2">
-			<div class="widget-header widget-header-small">
-				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-tag"></i>
-					<?php echo sprintf( lang_get( 'tag_update' ), $t_name ) ?>
-				</h4>
-			</div>
-
-			<div class="widget-body">
-			<div class="widget-main no-padding">
-			<div class="widget-toolbox padding-8 clearfix">
-				<?php print_button( 'tag_view_page.php?tag_id='.$f_tag_id, lang_get( 'tag_update_return' ),
-					'btn-sm pull-right' ); ?>
-			</div>
-			<div class="form-container">
-			<div class="table-responsive">
-			<table class="table table-bordered table-condensed table-striped">
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-tag"></i>
+				<?php echo sprintf( lang_get( 'tag_update' ), $t_name ) ?>
+			</h4>
+		</div>
+		<div class="widget-body">
+		<div class="widget-main no-padding">
+		<div class="widget-toolbox padding-8 clearfix">
+			<?php print_button( 'tag_view_page.php?tag_id='.$f_tag_id, lang_get( 'tag_update_return' ),
+				'btn-sm pull-right' ); ?>
+		</div>
+		<div class="form-container">
+		<div class="table-responsive">
+		<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
 			<input type="hidden" name="tag_id" value="<?php echo $f_tag_id ?>"/>
 			<?php echo form_security_field( 'tag_update' ) ?>

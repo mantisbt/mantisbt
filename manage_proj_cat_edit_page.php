@@ -80,9 +80,9 @@ print_manage_menu( 'manage_proj_page.php' );
 			</h4>
 		</div>
 		<div class="widget-body">
-			<div class="widget-main no-padding">
-				<div class="table-responsive">
-					<table class="table table-bordered table-condensed table-striped">
+		<div class="widget-main no-padding">
+		<div class="table-responsive">
+		<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
 			<?php echo form_security_field( 'manage_proj_cat_update' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>"/>
@@ -107,9 +107,9 @@ print_manage_menu( 'manage_proj_page.php' );
 				</td>
 			</tr>
 		</fieldset>
-					</table>
-				</div>
-			</div>
+		</table>
+		</div>
+		</div>
 		</div>
 		<div class="widget-toolbox padding-8 clearfix">
 			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_category_button' ) ?>" />
@@ -128,7 +128,6 @@ print_manage_menu( 'manage_proj_page.php' );
 			<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'delete_category_button' ) ?>" />
 		</fieldset>
 	</form>
-</div>
+</div><?php
 
-<?php
 layout_page_end();

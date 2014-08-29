@@ -136,24 +136,22 @@ layout_page_begin();
 
 <div class="col-md-12 col-xs-12">
 
-    <div id="bug-change-status-div" class="form-container">
-    <form id="bug-change-status-form" name="bug_change_status_form" method="post" action="bug_update.php">
+	<div id="bug-change-status-div" class="form-container">
+	<form id="bug-change-status-form" name="bug_change_status_form" method="post" action="bug_update.php">
 
 	<?php echo form_security_field( 'bug_update' ) ?>
+	<div class="widget-box widget-color-blue2">
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<?php echo lang_get( $t_status_label . '_bug_title' ) ?>
+		</h4>
+	</div>
 
-    <div class="widget-box widget-color-blue2">
-    <div class="widget-header widget-header-small">
-        <h4 class="widget-title lighter">
-            <?php echo lang_get( $t_status_label . '_bug_title' ) ?>
-        </h4>
-    </div>
+	<div class="widget-body">
+	<div class="widget-main no-padding">
 
-    <div class="widget-body">
-    <div class="widget-main no-padding">
-
-    <div class="table-responsive">
-    <table class="table table-bordered table-condensed table-striped">
-
+	<div class="table-responsive">
+	<table class="table table-bordered table-condensed table-striped">
 		<thead>
 					<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 					<input type="hidden" name="status" value="<?php echo $f_new_status ?>" />
@@ -170,7 +168,7 @@ layout_page_begin();
 $t_current_resolution = $t_bug->resolution;
 $t_bug_is_open = $t_current_resolution < $t_resolved;
 if( ( $f_new_status >= $t_resolved ) && ( ( $f_new_status < $t_closed ) || ( $t_bug_is_open ) ) ) { ?>
-	<!-- Resolution -->
+<!-- Resolution -->
 			<tr>
 				<th class="category">
 					<?php echo lang_get( 'resolution' ) ?>
@@ -400,7 +398,6 @@ if( ( $f_new_status >= $t_resolved ) ) {
 </form>
 <div class="space-10"></div>
 </div>
-
 <?php
 define( 'BUG_VIEW_INC_ALLOW', true );
 include( dirname( __FILE__ ) . '/bug_view_inc.php' );

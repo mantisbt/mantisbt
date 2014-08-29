@@ -73,19 +73,18 @@ layout_page_begin();
 
 <div class="col-md-12 col-xs-12">
 <form method="post" action="bug_reminder.php">
-	<?php echo form_security_field( 'bug_reminder' ) ?>
-	<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
-
-	<div class="widget-box widget-color-blue2">
-		<div class="widget-header widget-header-small">
-			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-envelope"></i>
-				<?php echo lang_get( 'bug_reminder' ) ?>
-			</h4>
-		</div>
-		<div class="widget-body">
-			<div class="widget-main no-padding">
-				<div class="table-responsive">
+<?php echo form_security_field( 'bug_reminder' ) ?>
+<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-envelope"></i>
+		<?php echo lang_get( 'bug_reminder' ) ?>
+	</h4>
+</div>
+<div class="widget-body">
+	<div class="widget-main no-padding">
+		<div class="table-responsive">
 <table class="table table-bordered table-condensed table-striped">
 <tr>
 	<th class="category">
@@ -117,13 +116,13 @@ layout_page_begin();
 	</td>
 </tr>
 </table>
-					</div>
-				</div>
-				<div class="widget-toolbox padding-8 clearfix">
-					<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'bug_send_button' ) ?>" />
-				</div>
-			</div>
+	</div>
 		</div>
+		<div class="widget-toolbox padding-8 clearfix">
+			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'bug_send_button' ) ?>" />
+		</div>
+	</div>
+	</div>
 	</form>
 	<div class="alert alert-info">
 		<p><i class="fa fa-info-circle fa-lg"> </i>

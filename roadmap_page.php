@@ -79,7 +79,7 @@ function print_version_header( array $p_version_row ) {
 	$t_project_name = project_get_field( $t_project_id, 'name' );
 
 	$t_release_title = '<a class="white" href="roadmap_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a>';
-    $t_release_title .= ' - <a class="white" href="roadmap_page.php?version_id=' . $t_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
+	$t_release_title .= ' - <a class="white" href="roadmap_page.php?version_id=' . $t_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
 
 	if( config_get( 'show_roadmap_dates' ) ) {
 		$t_version_timestamp = $p_version_row['date_order'];
@@ -121,7 +121,6 @@ function print_version_header( array $p_version_row ) {
 
 	echo '</div>';
 	echo '<div class="widget-main">';
-
 }
 
 /**
@@ -133,24 +132,24 @@ function print_version_header( array $p_version_row ) {
  * @return null
  */
 function print_version_footer( $p_version_row, $p_issues_resolved, $p_issues_planned, $p_progress ) {
-    $t_project_id   = $p_version_row['project_id'];
-    $t_version_id   = $p_version_row['id'];
-    $t_version_name = version_get_field( $t_version_id, 'version' );
+	$t_project_id   = $p_version_row['project_id'];
+	$t_version_id   = $p_version_row['id'];
+	$t_version_name = version_get_field( $t_version_id, 'version' );
 
-    echo '</div>';
+	echo '</div>';
 
-    if( $p_issues_planned > 0 ) {
-        echo '<div class="widget-toolbox padding-8 clearfix">';
-        echo sprintf( lang_get( 'resolved_progress' ), $p_issues_resolved, $p_issues_planned, $p_progress );
-        echo ' <a class="btn btn-xs btn-primary btn-white btn-round" ';
-        echo 'href="view_all_set.php?type=1&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id . '&' . filter_encode_field_and_value( FILTER_PROPERTY_TARGET_VERSION, $t_version_name ) . '">';
-        echo lang_get( 'view_bugs_link' );
-        echo '</a>';
-        echo '</div>';
-    }
+	if( $p_issues_planned > 0 ) {
+		echo '<div class="widget-toolbox padding-8 clearfix">';
+		echo sprintf( lang_get( 'resolved_progress' ), $p_issues_resolved, $p_issues_planned, $p_progress );
+		echo ' <a class="btn btn-xs btn-primary btn-white btn-round" ';
+		echo 'href="view_all_set.php?type=1&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id . '&' . filter_encode_field_and_value( FILTER_PROPERTY_TARGET_VERSION, $t_version_name ) . '">';
+		echo lang_get( 'view_bugs_link' );
+		echo '</a>';
+		echo '</div>';
+	}
 
-    echo '</div></div>';
-    echo '<div class="space-10"></div>';
+	echo '</div></div>';
+	echo '<div class="space-10"></div>';
 }
 
 /**

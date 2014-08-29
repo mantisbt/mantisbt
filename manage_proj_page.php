@@ -83,15 +83,13 @@ print_manage_menu( 'manage_proj_page.php' );
 
 <div class="col-md-12 col-xs-12">
     <div class="space-10"></div>
-
-<div class="widget-box widget-color-blue2">
+	<div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<i class="ace-icon fa fa-puzzle-piece"></i>
 			<?php echo lang_get( 'projects_title' ) ?>
 		</h4>
 	</div>
-
 	<div class="widget-body">
 	<div class="widget-main no-padding">
 
@@ -183,11 +181,11 @@ print_manage_menu( 'manage_proj_page.php' );
 		} ?>
 	</div>
 	</div>
-    </div>
+	</div>
 
-    <div class="space-10"></div>
+	<div class="space-10"></div>
 
-    <div id="categories" class="form-container">
+	<div id="categories" class="form-container">
 
 	<div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
@@ -196,7 +194,6 @@ print_manage_menu( 'manage_proj_page.php' );
 			<?php echo lang_get( 'global_categories' ) ?>
 		</h4>
 	</div>
-
 	<div class="widget-body">
 		<div class="widget-main no-padding">
 		<div class="table-responsive">

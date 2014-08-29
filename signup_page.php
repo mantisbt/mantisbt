@@ -63,34 +63,33 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 
 <div class="col-md-offset-3 col-md-6 col-sm-10 col-sm-offset-1">
     <div class="login-container">
-        <div class="space-12 hidden-480"></div>
-        <a href="<?php echo config_get( 'logo_url' ) ?>">
-            <h1 class="center white">
-                <img src="<?php echo helper_mantis_url( config_get( 'logo_image' ) ); ?>">
-            </h1>
-        </a>
-        <div class="space-24 hidden-480"></div>
+	<div class="space-12 hidden-480"></div>
+	<a href="<?php echo config_get( 'logo_url' ) ?>">
+		<h1 class="center white">
+			<img src="<?php echo helper_mantis_url( config_get( 'logo_image' ) ); ?>">
+		</h1>
+	</a>
+	<div class="space-24 hidden-480"></div>
 
-        <div class="position-relative">
+	<div class="position-relative">
 
-            <div class="signup-box visible widget-box no-border" id="login-box">
-                <div class="widget-body">
-                    <div class="widget-main">
-                        <h4 class="header lighter bigger">
-                            <i class="ace-icon fa fa-pencil"></i>
-                            <?php echo lang_get( 'signup_title' ) ?>
-                        </h4>
-                        <div class="space-10"></div>
+		<div class="signup-box visible widget-box no-border" id="login-box">
+			<div class="widget-body">
+				<div class="widget-main">
+					<h4 class="header lighter bigger">
+						<i class="ace-icon fa fa-pencil"></i>
+						<?php echo lang_get( 'signup_title' ) ?>
+					</h4>
+					<div class="space-10"></div>
 
 	<form id="signup-form" method="post" action="signup.php">
 		<fieldset>
-
 			<?php echo form_security_field( 'signup' ); ?>
 
 			<label for="username" class="block clearfix">
 				<span class="block input-icon input-icon-right">
 					<input id="username" name="username" type="text" placeholder="<?php echo lang_get( 'username' ) ?>"
-						   size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" class="form-control autofocus">
+						size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" class="form-control autofocus">
 					<i class="ace-icon fa fa-user"></i>
 				</span>
 			</label>
@@ -98,7 +97,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 			<label for="email-field" class="block clearfix">
 				<span class="block input-icon input-icon-right">
 					<input id="email-field" name="email" type="text" placeholder="<?php echo lang_get( 'email_label' ) ?>"
-						   size="32" maxlength="64" class="form-control">
+						size="32" maxlength="64" class="form-control">
 					<i class="ace-icon fa fa-envelope"></i>
 				</span>
 			</label>
@@ -138,7 +137,6 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 						<param name="movie" value="<?php echo $t_securimage_play; ?>" />
 					</object>
 				</span>
-
 
 <?php
 			}

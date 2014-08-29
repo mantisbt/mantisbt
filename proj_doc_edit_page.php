@@ -138,19 +138,18 @@ print_doc_menu();
 		<input name="file" type="file" size="70" />
 	</td>
 <tr>
-	</table>
+</table>
+</div>
+</div>
+	<div class="widget-toolbox padding-8 clearfix">
+		<span class="required pull-right"> * <?php echo lang_get('required') ?></span>
+		<input type="submit" class="btn btn-primary btn-white btn-round"
+			value="<?php echo lang_get('file_update_button') ?>"/>
 	</div>
-	</div>
-		<div class="widget-toolbox padding-8 clearfix">
-			<span class="required pull-right"> * <?php echo lang_get('required') ?></span>
-			<input type="submit" class="btn btn-primary btn-white btn-round"
-				   value="<?php echo lang_get('file_update_button') ?>"/>
-
-		</div>
-	</div>
-	</div>
-	</form>
-	</div>
+</div>
+</div>
+</form>
+</div>
 
 	<div class="space-10"></div>
 	<form method="post" action="proj_doc_delete.php">

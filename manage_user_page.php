@@ -270,10 +270,11 @@ $t_user_count = count( $t_users );
 		<div class="pull-left">
 			<?php print_form_button( 'manage_user_create_page.php', lang_get( 'create_new_account_link' ), null, null, 'btn btn-primary btn-white btn-round' ) ?>
 		</div>
-		<?php if( $f_filter === 'UNUSED' )
+	<?php
+		if( $f_filter === 'UNUSED' )
             print_form_button( 'manage_user_prune.php', lang_get( 'prune_accounts' ) , null, null, 'btn btn-primary btn-white btn-round' );
-        ?>
-		<div class="pull-right">
+	?>
+	<div class="pull-right">
 	<form id="manage-user-filter" method="post" action="manage_user_page.php" class="form-inline">
 		<fieldset>
 			<?php # CSRF protection not required here - form does not result in modifications ?>
@@ -282,12 +283,12 @@ $t_user_count = count( $t_users );
 			<input type="hidden" name="save" value="1" />
 			<input type="hidden" name="filter" value="<?php echo $c_filter ?>" />
 			<label class="inline">
-				<input type="checkbox" class="ace" name="hideinactive" value="1" <?php check_checked( (int)$c_hide_inactive, 1 ); ?> />
-				<span class="lbl"> <?php echo lang_get( 'hide_inactive' ) ?></span>
+			<input type="checkbox" class="ace" name="hideinactive" value="1" <?php check_checked( (int)$c_hide_inactive, 1 ); ?> />
+			<span class="lbl"> <?php echo lang_get( 'hide_inactive' ) ?></span>
 			</label>
 			<label class="inline">
-				<input type="checkbox" class="ace" name="showdisabled" value="1" <?php check_checked( (int)$c_show_disabled, 1 ); ?> />
-				<span class="lbl"> <?php echo lang_get( 'show_disabled' ) ?></span>
+			<input type="checkbox" class="ace" name="showdisabled" value="1" <?php check_checked( (int)$c_show_disabled, 1 ); ?> />
+			<span class="lbl"> <?php echo lang_get( 'show_disabled' ) ?></span>
 			</label>
 			<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'filter_button' ) ?>" />
 		</fieldset>
@@ -299,7 +300,7 @@ $t_user_count = count( $t_users );
 <div class="widget-main no-padding">
 	<div class="table-responsive">
 		<table class="table table-striped table-bordered table-condensed table-hover">
-			<thead>
+		<thead>
 			<tr>
 <?php
 	# Print column headers with sort links

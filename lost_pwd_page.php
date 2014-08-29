@@ -66,18 +66,15 @@ layout_login_page_begin();
 		</h1>
 	</a>
 	<div class="space-24 hidden-480"></div>
-
 	<div class="position-relative">
-
-		<div class="signup-box visible widget-box no-border" id="login-box">
-			<div class="widget-body">
-				<div class="widget-main">
-					<h4 class="header lighter bigger">
-						<i class="ace-icon fa fa-key"></i>
-						<?php echo lang_get( 'lost_password_title' ) ?>
-					</h4>
-					<div class="space-10"></div>
-
+	<div class="signup-box visible widget-box no-border" id="login-box">
+	<div class="widget-body">
+	<div class="widget-main">
+		<h4 class="header lighter bigger">
+			<i class="ace-icon fa fa-key"></i>
+			<?php echo lang_get( 'lost_password_title' ) ?>
+		</h4>
+		<div class="space-10"></div>
 	<form id="lost-password-form" method="post" action="lost_pwd.php">
 		<fieldset>
 			<?php
@@ -88,25 +85,21 @@ layout_login_page_begin();
 				<label for="username" class="block clearfix">
 				<span class="block input-icon input-icon-right">
 					<input id="username" name="username" type="text" placeholder="<?php echo lang_get( 'username' ) ?>"
-						   size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" class="form-control autofocus">
+						size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" class="form-control autofocus">
 					<i class="ace-icon fa fa-user"></i>
 				</span>
 				</label>
-
 				<label for="email-field" class="block clearfix">
 				<span class="block input-icon input-icon-right">
 					<input id="email-field" name="email" type="text" placeholder="<?php echo lang_get( 'email_label' ) ?>"
-						   size="32" maxlength="64" class="form-control">
+						size="32" maxlength="64" class="form-control">
 					<i class="ace-icon fa fa-envelope"></i>
 				</span>
 				</label>
-
 				<div class="space-10"></div>
 				<?php echo lang_get( 'lost_password_info' ); ?>
-
 				<div class="space-10"></div>
 				<input type="submit" class="width-40 pull-right btn btn-success btn-inverse bigger-110"  value="<?php echo lang_get( 'submit_button' ) ?>" />
-
 			<?php
 			} else {
 				echo '<div class="space-10"></div>';
@@ -116,15 +109,14 @@ layout_login_page_begin();
 			} ?>
 		</fieldset>
 	</form>
-</div>
-
-				<div class="toolbar center">
-					<a class="back-to-login-link pull-left" href="login_page.php"><?php echo lang_get( 'login_link' ); ?></a>
-					<a class="back-to-login-link pull-right" href="signup_page.php"><?php echo lang_get( 'signup_link' ); ?></a>
-					<div class="clearfix"></div>
-				</div>
-			</div>
+	</div>
+		<div class="toolbar center">
+			<a class="back-to-login-link pull-left" href="login_page.php"><?php echo lang_get( 'login_link' ); ?></a>
+			<a class="back-to-login-link pull-right" href="signup_page.php"><?php echo lang_get( 'signup_link' ); ?></a>
+			<div class="clearfix"></div>
 		</div>
+	</div>
+	</div>
 	</div>
 </div>
 

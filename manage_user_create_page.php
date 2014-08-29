@@ -68,11 +68,10 @@ print_manage_menu( 'manage_user_page.php' );
 				<?php echo lang_get( 'create_new_account_title' ) ?>
 			</h4>
 		</div>
-
 		<div class="widget-body">
-			<div class="widget-main no-padding">
-				<div class="table-responsive">
-					<table class="table table-bordered table-condensed table-striped">
+		<div class="widget-main no-padding">
+		<div class="table-responsive">
+		<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
 			<?php echo form_security_field( 'manage_user_create' ) ?>
 
@@ -83,48 +82,43 @@ print_manage_menu( 'manage_user_page.php' );
 				<td>
 					<input type="text" id="user-username" name="username" class="input-sm" size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" />
 				</td>
-			</tr>
-			<?php
+			</tr><?php
 			if( !$t_ldap || config_get( 'use_ldap_realname' ) == OFF ) { ?>
-				<tr>
-					<td class="category">
-						<?php echo lang_get( 'realname' ) ?>
-					</td>
-					<td>
-						<input type="text" id="user-realname" name="realname" class="input-sm" size="32" maxlength="<?php echo DB_FIELD_SIZE_REALNAME;?>" />
-					</td>
-				</tr>
-			<?php
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'realname' ) ?>
+				</td>
+				<td>
+					<input type="text" id="user-realname" name="realname" class="input-sm" size="32" maxlength="<?php echo DB_FIELD_SIZE_REALNAME;?>" />
+				</td>
+			</tr><?php
 			}
 			if( !$t_ldap || config_get( 'use_ldap_email' ) == OFF ) { ?>
-				<tr>
-					<td class="category">
-						<?php echo lang_get( 'email' ) ?>
-					</td>
-					<td>
-						<?php print_email_input( 'email', '' ) ?>
-					</td>
-				</tr>
-			<?php
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'email' ) ?>
+				</td>
+				<td>
+					<?php print_email_input( 'email', '' ) ?>
+				</td>
+			</tr><?php
 			}
 			if( OFF == config_get( 'send_reset_password' ) )  { ?>
-				<tr>
-					<td class="category">
-						<?php echo lang_get( 'password' ) ?>
-					</td>
-					<td>
-						<input type="password" id="user-password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" />
-					</td>
-				</tr>
-
+			<tr>
+				<td class="category">
+					<?php echo lang_get( 'password' ) ?>
+				</td>
+				<td>
+					<input type="password" id="user-password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" />
+				</td>
+			</tr>
 				<td class="category">
 					<?php echo lang_get( 'verify_password' ) ?>
 				</td>
 				<td>
 					<input type="password" id="user-verify-password" name="password_verify" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" />
 				</td>
-				</tr>
-			<?php
+			</tr><?php
 			} ?>
 			<tr>
 				<td class="category">

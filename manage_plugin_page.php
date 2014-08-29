@@ -77,24 +77,21 @@ foreach( $t_plugins as $t_basename => $t_plugin ) {
 
 if( 0 < count( $t_plugins_installed ) ) {
 ?>
-
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
-
 <div class="form-container">
 
 	<form action="manage_plugin_update.php" method="post">
 
 		<?php echo form_security_field( 'manage_plugin_update' ) ?>
 
-		<div class="widget-box widget-color-blue2">
-			<div class="widget-header widget-header-small">
-				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-cubes"></i>
-						<?php echo lang_get('plugins_installed') ?>
-				</h4>
-			</div>
-
+<div class="widget-box widget-color-blue2">
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<i class="ace-icon fa fa-cubes"></i>
+				<?php echo lang_get('plugins_installed') ?>
+		</h4>
+	</div>
 <div class="widget-body">
 <div class="widget-main no-padding">
 	<div class="table-responsive">
@@ -222,7 +219,6 @@ if( 0 < count( $t_plugins_available ) ) {
 ?>
 
 <div class="space-10"></div>
-
 <div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
@@ -233,10 +229,8 @@ if( 0 < count( $t_plugins_available ) ) {
 
 <div class="widget-body">
 	<div class="widget-main no-padding">
-
 		<div class="table-responsive">
 			<table class="table table-striped table-bordered table-condensed table-hover">
-
 		<thead>
 			<!-- Info -->
 			<tr>
@@ -309,7 +303,7 @@ if( 0 < count( $t_plugins_available ) ) {
 		}
 		echo '</td></tr>';
 	}
-	?>
+?>
 		</tbody>
 	</table>
 	</div>

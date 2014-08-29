@@ -91,17 +91,16 @@ function get_section_begin_mcwt( $p_section_name ) {
 
 	echo '<div class="space-10"></div>';
 	echo '<div class="widget-box widget-color-blue2">';
-    echo '   <div class="widget-header widget-header-small">';
-    echo '        <h4 class="widget-title lighter uppercase">';
-    echo '            <i class="ace-icon fa fa-sliders"></i>';
-    echo $p_section_name;
-    echo '       </h4>';
-    echo '   </div>';
-    echo '   <div class="widget-body">';
-    echo '   <div class="widget-main no-padding">';
-    echo '       <div class="table-responsive">';
-
-    echo '<table class="table table-striped table-bordered table-condensed">';
+	echo '   <div class="widget-header widget-header-small">';
+	echo '        <h4 class="widget-title lighter uppercase">';
+	echo '            <i class="ace-icon fa fa-sliders"></i>';
+	echo $p_section_name;
+	echo '       </h4>';
+	echo '   </div>';
+	echo '   <div class="widget-body">';
+	echo '   <div class="widget-main no-padding">';
+	echo '       <div class="table-responsive">';
+	echo '<table class="table table-striped table-bordered table-condensed">';
 	echo '<thead>';
 	echo '<tr>';
 	echo '<th class="bold" width="40%" rowspan="2">' . lang_get( 'perm_rpt_capability' ) . '</th>';
@@ -348,8 +347,8 @@ function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects
  */
 function get_section_end() {
 	echo '</tbody></table></div>' . "\n";
-    echo '</div></div></div> ' . "\n";
-    echo '<div class="space-10"></div>';
+	echo '</div></div></div> ' . "\n";
+	echo '<div class="space-10"></div>';
 }
 
 
@@ -373,7 +372,6 @@ echo '</div>' . "\n";
 
 echo "<form name=\"mail_config_action\" method=\"post\" action=\"manage_config_work_threshold_set.php\">\n";
 echo form_security_field( 'manage_config_work_threshold_set' );
-
 
 # Issues
 get_section_begin_mcwt( lang_get( 'issues' ) );

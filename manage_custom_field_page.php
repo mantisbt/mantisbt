@@ -57,7 +57,7 @@ print_manage_menu( 'manage_custom_field_page.php' );
 ?>
 
 <div class="col-md-12 col-xs-12">
-        <div class="space-10"></div>
+	<div class="space-10"></div>
 
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
@@ -66,13 +66,11 @@ print_manage_menu( 'manage_custom_field_page.php' );
 		<?php echo lang_get( 'custom_fields_setup' ) ?>
 	</h4>
 </div>
-
 <div class="widget-body">
 	<div class="widget-main no-padding">
-
-    <div class="table-responsive">
+	<div class="table-responsive">
 	<table class="table table-striped table-bordered table-condensed table-hover">
- 		<thead>
+		<thead>
 			<tr>
 				<th class="category"><?php echo lang_get( 'custom_field_name' ) ?></th>
 				<th class="category"><?php echo lang_get( 'custom_field_project_count' ) ?></th>
@@ -93,7 +91,7 @@ print_manage_menu( 'manage_custom_field_page.php' );
 				<td><?php echo get_enum_element( 'custom_field_type', $t_desc['type'] ) ?></td>
 				<td><?php echo string_display( $t_desc['possible_values'] ) ?></td>
 				<td><?php echo string_display( $t_desc['default_value'] ) ?></td>
-				</tr><?php
+			</tr><?php
 		} # Create Form END ?>
 		</tbody>
 	</table>
@@ -110,7 +108,6 @@ print_manage_menu( 'manage_custom_field_page.php' );
 </div>
 </div>
 </div>
-</div>
+</div><?php
 
-<?php
 layout_page_end();

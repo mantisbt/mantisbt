@@ -101,22 +101,20 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 ?>
 <div id="bugnotes" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 <div class="widget-header widget-header-small">
-    <h4 class="widget-title lighter">
-        <i class="ace-icon fa fa-comments"></i>
+	<h4 class="widget-title lighter">
+	<i class="ace-icon fa fa-comments"></i>
 		<?php echo lang_get( 'bug_notes_title' ) ?>
-    </h4>
-    <div class="widget-toolbar">
-        <a data-action="collapse" href="#">
-            <i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
-        </a>
-    </div>
-</div>
-
-<div class="widget-body">
-<div class="widget-main no-padding">
-
-    <div class="table-responsive">
-        <table class="table table-bordered table-condensed table-striped">
+	</h4>
+	<div class="widget-toolbar">
+		<a data-action="collapse" href="#">
+			<i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
+		</a>
+	</div>
+	</div>
+	<div class="widget-body">
+	<div class="widget-main no-padding">
+	<div class="table-responsive">
+	<table class="table table-bordered table-condensed table-striped">
 <?php
 	# no bugnotes
 	if( 0 == $t_num_notes ) {
@@ -216,7 +214,7 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		<div class="clearfix"></div>
 		<div class="space-2"></div>
 		<div class="btn-group-sm">
-			<?php
+		<?php
 			# bug must be open to be editable
 			if( !bug_is_readonly( $f_bug_id ) ) {
 

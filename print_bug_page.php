@@ -174,20 +174,20 @@ $t_fixed_in_version =
 layout_page_header( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 ?>
 
-    <table class="table table-condensed no-margin">
-        <tr>
-            <td class="bold bigger-120">
-                <div class="center">
+<table class="table table-condensed no-margin">
+<tr>
+<td class="bold bigger-120">
+	<div class="center">
 <?php
 echo $t_window_title;
 if( !is_blank( $t_project_name ) ) {
 	echo ' - ' . $t_project_name;
 }
 ?>
-                </div>
-            </td>
-        </tr>
-    </table>
+	</div>
+</td>
+</tr>
+</table>
 
 <?php
 
@@ -540,7 +540,7 @@ if( $t_show_attachments ) {
 	}
 
 	echo '</td></tr>';
-    echo '<tr class="spacer"><td colspan="6"></td></tr>';
+	echo '<tr class="spacer"><td colspan="6"></td></tr>';
 }
 echo '</table>';
 

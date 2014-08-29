@@ -68,19 +68,17 @@ layout_page_begin();
 <div id="select-project-div" class="form-container">
 	<form id="select-project-form" method="post" action="set_project.php">
 		<?php # CSRF protection not required here - form does not result in modifications ?>
-
-		<div class="widget-box widget-color-blue2">
-			<div class="widget-header widget-header-small">
-				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-puzzle-piece"></i>
-					<?php echo lang_get( 'choose_project' ) ?>
-				</h4>
-			</div>
-			<div class="widget-body">
-				<div class="widget-main no-padding">
-					<div class="table-responsive">
-						<table class="table table-bordered table-condensed table-striped">
-
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-puzzle-piece"></i>
+				<?php echo lang_get( 'choose_project' ) ?>
+			</h4>
+		</div>
+	<div class="widget-body">
+	<div class="widget-main no-padding">
+	<div class="table-responsive">
+		<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
 			<input type="hidden" name="ref" value="<?php echo string_html_specialchars( $f_ref ) ?>" />
 
@@ -106,16 +104,15 @@ layout_page_begin();
 					</label>
 				</td>
 			</tr>
-
 		</fieldset>
-						</table>
-					</div>
-				</div>
-				<div class="widget-toolbox padding-8 clearfix">
-					<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'select_project_button') ?>" />
-				</div>
+		</table>
+		</div>
+		</div>
+			<div class="widget-toolbox padding-8 clearfix">
+				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'select_project_button') ?>" />
 			</div>
 		</div>
+	</div>
 	</form>
 </div>
 </div>

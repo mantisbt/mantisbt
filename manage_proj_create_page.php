@@ -73,24 +73,23 @@ if( project_table_empty() ) {
 	<div class="space-10"></div>
 	<div id="manage-project-create-div" class="form-container">
 	<form method="post" id="manage-project-create-form" action="manage_proj_create.php">
-		<div class="widget-box widget-color-blue2">
-			<div class="widget-header widget-header-small">
-				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-puzzle-piece"></i>
-					<?php
-					if( null !== $f_parent_id ) {
-						echo lang_get( 'add_subproject_title' );
-					} else {
-						echo lang_get( 'add_project_title' );
-					} ?>
-				</h4>
-			</div>
-
-			<div class="widget-body">
-				<div class="widget-main no-padding">
-					<div class="table-responsive">
-						<table class="table table-bordered table-condensed table-striped">
-							<fieldset>
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-puzzle-piece"></i>
+				<?php
+				if( null !== $f_parent_id ) {
+					echo lang_get( 'add_subproject_title' );
+				} else {
+					echo lang_get( 'add_project_title' );
+				} ?>
+			</h4>
+		</div>
+		<div class="widget-body">
+		<div class="widget-main no-padding">
+		<div class="table-responsive">
+		<table class="table table-bordered table-condensed table-striped">
+		<fieldset>
 			<?php
 			echo form_security_field( 'manage_proj_create' );
 			if( null !== $f_parent_id ) {
@@ -185,15 +184,15 @@ if( project_table_empty() ) {
 
 			<?php event_signal( 'EVENT_MANAGE_PROJECT_CREATE_FORM' ) ?>
 		</fieldset>
-			</table>
-			</div>
-			</div>
-			</div>
-			<div class="widget-toolbox padding-8 clearfix">
-				<span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>
-				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_project_button' ) ?>" />
-			</div>
+		</table>
 		</div>
+		</div>
+		</div>
+		<div class="widget-toolbox padding-8 clearfix">
+			<span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>
+			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_project_button' ) ?>" />
+		</div>
+	</div>
 	</div>
 	</form>
 </div>

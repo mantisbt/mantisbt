@@ -115,17 +115,16 @@ layout_page_begin();
 <form method="post" action="bugnote_update.php">
 <?php echo form_security_field( 'bugnote_update' ) ?>
 <input type="hidden" name="bugnote_id" value="<?php echo $f_bugnote_id ?>" />
-
 <div class="widget-box widget-color-blue2">
-	<div class="widget-header widget-header-small">
-		<h4 class="widget-title lighter">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
 			<i class="ace-icon fa fa-comment"></i>
-			<?php echo lang_get( 'edit_bugnote_title' ) ?>
-		</h4>
+		<?php echo lang_get( 'edit_bugnote_title' ) ?>
+	</h4>
 	</div>
 	<div class="widget-body">
 		<div class="widget-main no-padding">
-			<div class="table-responsive">
+<div class="table-responsive">
 <table class="table table-bordered table-condensed table-striped">
 <tr>
 	<td class="center" colspan="2">
@@ -146,8 +145,8 @@ layout_page_begin();
 <?php event_signal( 'EVENT_BUGNOTE_EDIT_FORM', array( $t_bug_id, $f_bugnote_id ) ); ?>
 
 </table>
-			</div>
-		</div>
+	</div>
+	</div>
 		<div class="widget-toolbox padding-8 clearfix">
 			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'update_information_button' ) ?>" />
 			<?php print_button( $t_redirect_url, lang_get( 'go_back' ) ) ?>

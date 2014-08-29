@@ -164,7 +164,7 @@ print_summary_submenu(); ?>
 		</thead>
 		<?php summary_print_by_project(); ?>
 	</table>
-		</div>
+	</div>
 	<?php } ?>
 
 	<!-- BY STATUS -->

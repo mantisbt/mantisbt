@@ -64,10 +64,10 @@ layout_page_begin( 'main_page.php' );
 					<?php echo lang_get( 'add_news_title' ) ?>
 				</h4>
 			</div>
-			<div class="widget-body">
-				<div class="widget-main no-padding">
-					<div class="table-responsive">
-						<table class="table table-bordered table-condensed table-striped">
+		<div class="widget-body">
+		<div class="widget-main no-padding">
+		<div class="table-responsive">
+		<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
 			<?php echo form_security_field( 'news_add' ); ?>
 			<tr>
@@ -108,14 +108,14 @@ layout_page_begin( 'main_page.php' );
 				</td>
 			</tr>
 		</fieldset>
-						</table>
-					</div>
-				</div>
-				<div class="widget-toolbox padding-8 clearfix">
-					<span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>
-					<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'post_news_button' ) ?>" />
-				</div>
+		</table>
+		</div>
+		</div>
+			<div class="widget-toolbox padding-8 clearfix">
+				<span class="required pull-right"> * <?php echo lang_get( 'required' ) ?></span>
+				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'post_news_button' ) ?>" />
 			</div>
+		</div>
 		</div>
 	</form>
 	</div>
@@ -136,10 +136,10 @@ if( news_get_count( helper_get_current_project(), current_user_is_administrator(
 					<?php echo lang_get( 'edit_or_delete_news_title' ) ?>
 				</h4>
 			</div>
-			<div class="widget-body">
-				<div class="widget-main no-padding">
-					<div class="table-responsive">
-						<table class="table table-bordered table-condensed table-striped">
+		<div class="widget-body">
+		<div class="widget-main no-padding">
+		<div class="table-responsive">
+		<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
 			<?php echo form_security_field( 'news_delete' ); ?>
 			<tr>
@@ -175,13 +175,13 @@ if( news_get_count( helper_get_current_project(), current_user_is_administrator(
 				</td>
 			</tr>
 		</fieldset>
-						</table>
-					</div>
-				</div>
-				<div class="widget-toolbox padding-8 clearfix">
-					<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'submit_button' ) ?>" />
-				</div>
+		</table>
+		</div>
+		</div>
+			<div class="widget-toolbox padding-8 clearfix">
+				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'submit_button' ) ?>" />
 			</div>
+		</div>
 		</div>
 	</form>
 	</div>

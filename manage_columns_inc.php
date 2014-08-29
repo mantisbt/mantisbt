@@ -169,7 +169,7 @@ if( $t_account_page ) {
 	</form>
 </div>
 
-    <div class="space-10"></div>
+<div class="space-10"></div>
 
 <div id="manage-columns-copy-div" class="form-container">
 	<form id="manage-columns-copy-form" method="post" action="manage_columns_copy.php">
@@ -194,8 +194,7 @@ if( $t_account_page ) {
 <?php
 if( $t_account_page ) {
 ?>
-    <div class="space-10"></div>
-
+<div class="space-10"></div>
 <div class="form-container">
 	<form method="post" action="manage_config_columns_reset.php">
 		<fieldset>

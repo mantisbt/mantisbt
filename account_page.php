@@ -136,7 +136,7 @@ print_account_menu( 'account_page.php' );
 ?>
 
 <div class="col-md-12 col-xs-12">
-    <div class="space-10"></div>
+	<div class="space-10"></div>
 
 <div id="account-update-div" class="form-container">
 	<form id="account-update-form" method="post" action="account_update.php">
@@ -154,7 +154,6 @@ print_account_menu( 'account_page.php' );
 				<table class="table table-bordered table-condensed table-striped">
 
 		<fieldset>
-
 			<?php echo form_security_field( 'account_update' );
 
 			if( !helper_call_custom_function( 'auth_can_change_password', array() ) ) {
@@ -168,7 +167,6 @@ print_account_menu( 'account_page.php' );
 					<?php echo string_display_line( $u_username ) ?>
 				</td>
 			</tr>
-
 			<tr>
 				<td class="category">
 					<?php echo lang_get( 'password' ) ?>
@@ -176,9 +174,7 @@ print_account_menu( 'account_page.php' );
 				<td>
 					<?php echo lang_get( 'no_password_change' ) ?>
 				</td>
-			</tr>
-
-			<?php
+			</tr><?php
 			} else {
 				# Without LDAP
 				$t_show_update_button = true;
@@ -190,21 +186,20 @@ print_account_menu( 'account_page.php' );
 				<td>
 					<?php echo string_display_line( $u_username ) ?>
 				</td>
-			</tr>
-			<?php
+			</tr><?php
 			# When verifying account, set a token and don't display current password
 			if( $t_account_verification ) {
 				token_set( TOKEN_ACCOUNT_VERIFY, true, TOKEN_EXPIRY_AUTHENTICATED, $u_id );
 			} else {
 			?>
-				<tr>
-					<td class="category">
-						<span class="required"><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'current_password' ) ?>
-					</td>
-					<td>
-						<input class="input-sm" id="password-current" type="password" name="password_current" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" />
-					</td>
-				</tr>
+			<tr>
+				<td class="category">
+					<span class="required"><?php if( $t_force_pw_reset ) { ?> * <?php } ?></span> <?php echo lang_get( 'current_password' ) ?>
+				</td>
+				<td>
+					<input class="input-sm" id="password-current" type="password" name="password_current" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" />
+				</td>
+			</tr>
 			<?php
 			} ?>
 			<tr>

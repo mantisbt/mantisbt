@@ -367,26 +367,25 @@ if( $t_multiple_projects ) {
 ?>
 					</td>
 				</tr>
-			<?php
+<?php
 		}
 	}
-		?>
+?>
 		<tr class="spacer"></tr>
 		<?php bug_group_action_print_bug_list( $f_bug_arr ); ?>
 		<tr class="spacer"></tr>
 			</tbody>
 		</table>
-					</div>
-				</div>
-				<div class="widget-toolbox padding-8 clearfix">
-					<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo $t_button_title ?>" />
-				</div>
-			</div>
+		</div>
+		</div>
+		<div class="widget-toolbox padding-8 clearfix">
+			<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo $t_button_title ?>" />
+		</div>
+		</div>
 		</div>
 	</form>
 </div>
 </div>
 
 <?php
-
 bug_group_action_print_bottom();

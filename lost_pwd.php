@@ -111,8 +111,7 @@ layout_page_begin();
 ?>
 
 <div class="col-md-12 col-xs-12">
-	<div class="space-10"></div>
-
+<div class="space-10"></div>
 <table class="width50" cellspacing="1">
 <tr>
 	<td class="center">

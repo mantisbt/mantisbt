@@ -106,12 +106,12 @@ $t_row_count = count( $t_result );
 
 # Headers depending on intended output
 if( $f_type_page == 'html' ) {
-    layout_page_header();
+	layout_page_header();
 } else {
 	echo '<html xmlns:o="urn:schemas-microsoft-com:office:office"
 		xmlns:w="urn:schemas-microsoft-com:office:word"
 		xmlns="http://www.w3.org/TR/REC-html40">';
-    echo '<body>';
+	echo '<body>';
 }
 
 $f_bug_arr = explode( ',', $f_export );
@@ -431,10 +431,10 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 	</td>
 </tr>
 <?php
-# account profile description
-if( $t_bug->profile_id > 0 ) {
-	$t_profile_row = profile_get_row_direct( $t_bug->profile_id );
-	$t_profile_description = string_display( $t_profile_row['description'] );
+	# account profile description
+	if( $t_bug->profile_id > 0 ) {
+		$t_profile_row = profile_get_row_direct( $t_bug->profile_id );
+		$t_profile_description = string_display( $t_profile_row['description'] );
 
 ?>
 <tr>
@@ -555,9 +555,9 @@ $t_bugnotes = bugnote_get_all_visible_bugnotes( $t_id, $t_user_bugnote_order, $t
 
 
 <?php
-        if( $f_type_page != 'html' ) {
-            echo '<hr>';
-        }
+		if( $f_type_page != 'html' ) {
+			echo '<hr>';
+		}
 	} # end in_array
 }  # end main loop
 

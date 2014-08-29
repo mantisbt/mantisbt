@@ -58,19 +58,16 @@ print_manage_menu( 'manage_overview_page.php' );
 
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
-
 	<div class="widget-box widget-color-blue2">
-		<div class="widget-header widget-header-small">
-			<h4 class="widget-title lighter">
-				<i class="ace-icon fa fa-info"></i>
-				<?php echo lang_get('site_information') ?>
-			</h4>
-		</div>
-
-		<div class="widget-body">
-			<div class="widget-main no-padding">
-
-				<div class="table-responsive">
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<i class="ace-icon fa fa-info"></i>
+			<?php echo lang_get('site_information') ?>
+		</h4>
+	</div>
+	<div class="widget-body">
+	<div class="widget-main no-padding">
+	<div class="table-responsive">
 	<table class="table table-hover table-bordered table-condensed">
 		<tr>
 			<th class="category"><?php echo lang_get( 'mantis_version' ) ?></th>
@@ -106,9 +103,9 @@ print_manage_menu( 'manage_overview_page.php' );
 	event_signal( 'EVENT_MANAGE_OVERVIEW_INFO', array( $t_is_admin ) )
 	?>
 	</table>
-				</div>
-			</div>
-		</div>
+	</div>
+	</div>
+	</div>
 	</div>
 </div>
 <?php

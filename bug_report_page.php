@@ -233,19 +233,16 @@ layout_page_begin( __FILE__ );
 <input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
 
 <div class="widget-box widget-color-blue2">
-<div class="widget-header widget-header-small">
-	<h4 class="widget-title lighter">
-		<i class="ace-icon fa fa-edit"></i>
-		<?php echo lang_get( 'enter_report_details_title' ) ?>
-	</h4>
-</div>
-
+	<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+				<i class="ace-icon fa fa-edit"></i>
+				<?php echo lang_get( 'enter_report_details_title' ) ?>
+		</h4>
+	</div>
 <div class="widget-body">
 <div class="widget-main no-padding">
-
 <div class="table-responsive">
 <table class="table table-bordered table-condensed">
-
 <?php
 	event_signal( 'EVENT_REPORT_BUG_FORM_TOP', array( $t_project_id ) );
 
@@ -434,14 +431,14 @@ layout_page_begin( __FILE__ );
 		</td>
 	</tr>
 <?php } ?>
- <?php
+<?php
 	if( $t_show_product_version ) {
 		$t_product_version_released_mask = VERSION_RELEASED;
 
 		if( access_has_project_level( config_get( 'report_issues_for_unreleased_versions_threshold' ) ) ) {
 			$t_product_version_released_mask = VERSION_ALL;
 		}
-	?>
+?>
 	<tr>
 		<th class="category">
 			<label for="product_version"><?php echo lang_get( 'product_version' ) ?></label>
@@ -488,7 +485,7 @@ layout_page_begin( __FILE__ );
 		<td>
 			<select <?php echo helper_get_tab_index() ?> name="status" class="input-sm">
 			<?php
-            $t_resolution_options = get_status_option_list(
+			$t_resolution_options = get_status_option_list(
 				access_get_project_level( $t_project_id ),
 				config_get( 'bug_submit_status' ),
 				true,
@@ -521,7 +518,7 @@ layout_page_begin( __FILE__ );
 <?php } ?>
 
 <?php # Target Version (if permissions allow)
-if( $t_show_target_version ) { ?>
+	if( $t_show_target_version ) { ?>
 	<tr>
 		<th class="category">
 			<label for="target_version"><?php echo lang_get( 'target_version' ) ?></label>
@@ -646,10 +643,10 @@ $t_related_custom_field_ids = custom_field_get_linked_ids( $t_project_id );
 		</td>
 	</tr>
 <?php
-}
+	}
 
-# Relationship (in case of cloned bug creation...)
-if( $f_master_bug_id > 0 ) {
+	# Relationship (in case of cloned bug creation...)
+	if( $f_master_bug_id > 0 ) {
 ?>
 	<tr>
 		<th class="category">
@@ -678,9 +675,9 @@ if( $f_master_bug_id > 0 ) {
 		</td>
 	</tr>
 <?php
-}
+	}
 ?>
-<tr>
+	<tr>
 		<th class="category">
 			<?php print_documentation_link( 'report_stay' ) ?>
 		</th>
@@ -690,7 +687,7 @@ if( $f_master_bug_id > 0 ) {
 				<span class="lbl"> <?php echo lang_get( 'check_report_more_bugs' ) ?> </span>
 			</label>
 		</td>
-</tr>
+	</tr>
 </table>
 </div>
 </div>
