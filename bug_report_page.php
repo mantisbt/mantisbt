@@ -231,7 +231,6 @@ layout_page_begin( __FILE__ );
 <?php echo form_security_field( 'bug_report' ) ?>
 <input type="hidden" name="m_id" value="<?php echo $f_master_bug_id ?>" />
 <input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
-
 <div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
@@ -344,7 +343,7 @@ layout_page_begin( __FILE__ );
 			<label for="due_date"><?php print_documentation_link( 'due_date' ) ?></label>
 		</th>
 		<td>
-			<?php echo "<input " . helper_get_tab_index() . " type=\"text\" id=\"due_date\" name=\"due_date\" class=\"datetime\" size=\"20\" maxlength=\"16\" value=\"" . $t_date_to_display . "\" />" ?>
+			<?php echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetime" size="20" maxlength="16" value="' . $t_date_to_display . '" />' ?>
 		</td>
 	</tr>
 <?php } ?>
@@ -444,7 +443,7 @@ layout_page_begin( __FILE__ );
 		</td>
 	</tr>
 <?php
-}
+	}
 ?>
 <?php if( $t_show_product_build ) { ?>
 	<tr>
@@ -485,10 +484,10 @@ layout_page_begin( __FILE__ );
 				true,
 				ON == config_get( 'allow_reporter_close' ),
 				$t_project_id );
-			foreach ( $t_resolution_options as $key => $value ) {
+			foreach ( $t_resolution_options as $t_key => $t_value ) {
 			?>
-				<option value="<?php echo $key ?>" <?php check_selected( $key, config_get( 'bug_submit_status' ) ); ?> >
-					<?php echo $value ?>
+				<option value="<?php echo $t_key ?>" <?php check_selected( $t_key, config_get( 'bug_submit_status' ) ); ?> >
+					<?php echo $t_value ?>
 				</option>
 			<?php } ?>
 			</select>
@@ -563,10 +562,10 @@ layout_page_begin( __FILE__ );
 		</td>
 	</tr>
 <?php
-}
+	}
 
-$t_custom_fields_found = false;
-$t_related_custom_field_ids = custom_field_get_linked_ids( $t_project_id );
+	$t_custom_fields_found = false;
+	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_project_id );
 
 	foreach( $t_related_custom_field_ids as $t_id ) {
 		$t_def = custom_field_get_definition( $t_id );
