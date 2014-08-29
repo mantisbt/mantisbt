@@ -349,7 +349,7 @@ if( 2 == $t_install_state ) {
 		Setting Admin Username
 	</td>
 	<?php
-if( '' !== $f_admin_username ) {
+		if( '' !== $f_admin_username ) {
 		print_test_result( GOOD );
 	} else {
 		print_test_result( BAD, false, 'admin user name is blank, using database user instead' );
@@ -407,7 +407,7 @@ if( '' !== $f_admin_username ) {
 	?>
 </tr>
 <?php
-if( $f_db_exists ) {
+	if( $f_db_exists ) {
 		?>
 <tr>
 	<td>
@@ -649,7 +649,7 @@ if( !$g_database_upgrade ) {
 	);
 	foreach( $t_prefix_defaults[$t_prefix_type] as $t_key => $t_value ) {
 		echo "<tr>\n\t<td>\n";
-		echo "\t\t${t_prefix_labels[$t_key]}\n";
+		echo "\t\t" . $t_prefix_labels[$t_key] . "\n";
 		echo "\t</td>\n\t<td>\n\t\t";
 		echo '<input id="' . $t_key . '" name="' . $t_key . '" type="textbox" value="' . $f_db_table_prefix . '">';
 		echo "\n\t</td>\n</tr>\n\n";
@@ -767,8 +767,8 @@ if( 3 == $t_install_state ) {
 				}
 			} else {
 				$t_sqlarray = $t_dict->CreateDatabase( $f_database_name, array( 'mysql' => 'DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci' ) );
-				$ret = $t_dict->ExecuteSQLArray( $t_sqlarray, false );
-				if( $ret == 2 ) {
+				$t_ret = $t_dict->ExecuteSQLArray( $t_sqlarray, false );
+				if( $t_ret == 2 ) {
 					print_test_result( GOOD );
 					$t_db_open = true;
 				} else {
@@ -816,8 +816,8 @@ if( 3 == $t_install_state ) {
 			print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . db_error_msg() . ' )' );
 		}
 		$g_db->Close();
-		?>
-	</tr>
+	?>
+</tr>
 <?php
 	}
 
@@ -842,7 +842,7 @@ if( 3 == $t_install_state ) {
 			# fake out database access routines used by config_get
 		}
 		$t_last_update = config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS );
-		$lastid = count( $g_upgrade ) - 1;
+		$t_last_id = count( $g_upgrade ) - 1;
 		$i = $t_last_update + 1;
 		if( $f_log_queries ) {
 			echo '<tr><td> <span class="bigger-120">Database Creation Suppressed, SQL Queries follow</span> <pre>';
@@ -893,9 +893,9 @@ if( 3 == $t_install_state ) {
 					$t_default = is_null( $v_column_default ) ? 'NULL' : $v_column_default;
 					$t_sqlarray = $t_dict->AlterColumnSQL(
 						$v_table_name,
-						"$v_column_name L $t_null DEFAULT $t_default" );
+						$v_column_name . ' L ' . $t_null . ' DEFAULT ' . $t_default );
 					print_test(
-						'Converting column ' . $v_table_name.$v_column_name . ' to BOOLEAN',
+						'Converting column ' . $v_table_name . '.' . $v_column_name . ' to BOOLEAN',
 						2 == $t_dict->ExecuteSQLArray( $t_sqlarray, false ),
 						true,
 						print_r( $t_sqlarray, true ) );
@@ -908,7 +908,7 @@ if( 3 == $t_install_state ) {
 		}
 		# End of special processing for specific schema versions
 
-		while( ( $i <= $lastid ) && !$g_failed ) {
+		while( ( $i <= $t_last_id ) && !$g_failed ) {
 			if( !$f_log_queries ) {
 				echo '<tr><td>';
 			}
@@ -960,43 +960,43 @@ if( 3 == $t_install_state ) {
 			}
 			if( $f_log_queries ) {
 				if( $t_sql ) {
-					foreach( $t_sqlarray as $sql ) {
+					foreach( $t_sqlarray as $t_sql ) {
 						# "CREATE OR REPLACE TRIGGER" statements must end with "END;\n/" for Oracle sqlplus
-						if( $f_db_type == 'oci8' && stripos( $sql, 'CREATE OR REPLACE TRIGGER' ) === 0 ) {
-							$t_sql_end = PHP_EOL . "/";
+						if( $f_db_type == 'oci8' && stripos( $t_sql, 'CREATE OR REPLACE TRIGGER' ) === 0 ) {
+							$t_sql_end = PHP_EOL . '/';
 						} else {
-							$t_sql_end = ";";
+							$t_sql_end = ';';
 						}
-						echo htmlentities( $sql ) . $t_sql_end . PHP_EOL . PHP_EOL;
+						echo htmlentities( $t_sql ) . $t_sql_end . PHP_EOL . PHP_EOL;
 					}
 				}
 			} else {
-				echo "Schema step $i: ";
+				echo 'Schema step ' . $i . ': ';
 				if( is_null( $g_upgrade[$i][0] ) ) {
 					echo 'No operation';
-					$ret = 2;
+					$t_ret = 2;
 				} else {
-					echo $g_upgrade[$i][0] . " ( $t_target )";
+					echo $g_upgrade[$i][0] . ' ( ' . $t_target . ' )';
 					if( $t_sql ) {
-						$ret = $t_dict->ExecuteSQLArray( $t_sqlarray, false );
+						$t_ret = $t_dict->ExecuteSQLArray( $t_sqlarray, false );
 					} else {
 						if( isset( $t_sqlarray[1] ) ) {
-							$ret = call_user_func( 'install_' . $t_sqlarray[0], $t_sqlarray[1] );
+							$t_ret = call_user_func( 'install_' . $t_sqlarray[0], $t_sqlarray[1] );
 						} else {
-							$ret = call_user_func( 'install_' . $t_sqlarray[0] );
+							$t_ret = call_user_func( 'install_' . $t_sqlarray[0] );
 						}
 					}
 				}
 				echo '</td>';
-				if( $ret == 2 ) {
+				if( $t_ret == 2 ) {
 					print_test_result( GOOD );
 					config_set( 'database_version', $i );
 				} else {
-					$all_sql = '';
-					foreach ( $t_sqlarray as $single_sql ) {
-						$all_sql .= $single_sql . '<br />';
+					$t_all_sql = '';
+					foreach ( $t_sqlarray as $t_single_sql ) {
+						$t_all_sql .= $t_single_sql . '<br />';
 					}
-					print_test_result( BAD, true, $all_sql  . $g_db->ErrorMsg() );
+					print_test_result( BAD, true, $t_all_sql  . $g_db->ErrorMsg() );
 				}
 				echo '</tr>';
 			}
@@ -1004,7 +1004,7 @@ if( 3 == $t_install_state ) {
 		}
 		if( $f_log_queries ) {
 			# add a query to set the database version
-			echo 'INSERT INTO ' . db_get_table( 'config' ) . ' ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'' . $lastid . '\', 1, 90, \'database_version\', 0, 0 );' . PHP_EOL;
+			echo 'INSERT INTO ' . db_get_table( 'config' ) . ' ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'' . $t_last_id . '\', 1, 90, \'database_version\', 0, 0 );' . PHP_EOL;
 			echo '</pre><br /><p style="color:red">Your database has not been created yet. Please create the database, then install the tables and data using the information above before proceeding.</p></td></tr>';
 		}
 	}
@@ -1065,7 +1065,7 @@ if( 5 == $t_install_state ) {
 <div class="table-responsive">
 <table class="table table-bordered table-condensed">
 <tr>
-<td>
+	<td>
 <?php
 	if( !$t_config_exists ) {
 ?>
@@ -1080,7 +1080,7 @@ if( 5 == $t_install_state ) {
 <?php
 	}
 ?>
-</td>
+	</td>
 <?php
 	# Generating the config_inc.php file
 
@@ -1162,9 +1162,9 @@ if( 5 == $t_install_state ) {
 		print_test( 'Setting Cryptographic salt in config file', false, false,
 					'Unable to find a random number source for cryptographic purposes. You will need to edit ' .
 					$g_config_path . 'config_inc.php' . ' and set a value for $g_crypto_master_salt manually' );
-}
+	}
 
-if( true == $t_write_failed ) {
+	if( true == $t_write_failed ) {
 ?>
 <tr>
 	<td colspan="2">
@@ -1185,7 +1185,7 @@ if( true == $t_write_failed ) {
 	</td>
 </tr>
 <?php
-}
+	}
 ?>
 
 </table>
@@ -1219,7 +1219,6 @@ if( 6 == $t_install_state ) {
 <div class="widget-main no-padding">
 <div class="table-responsive">
 <table class="table table-bordered table-condensed">
-
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
 		<span class="title">Checking Installation...</span>
@@ -1328,8 +1327,8 @@ if( 6 == $t_install_state ) {
 # end install_state == 6
 
 if( 7 == $t_install_state ) {
-# cleanup and launch upgrade
-?>
+	# cleanup and launch upgrade
+	?>
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
 <div class="widget-box widget-color-blue2">

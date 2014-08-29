@@ -413,7 +413,7 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 				<td style="overflow-x:auto;"><?php print_config_value_as_string( $v_type, $v_value ) ?></td>
 				<td><?php echo get_enum_element( 'access_levels', $v_access_reqd ) ?></td>
 <?php
-if( $t_read_write_access ) {
+	if( $t_read_write_access ) {
 ?>
 <td class="center">
 	<div class="btn-group inline">
@@ -452,11 +452,11 @@ if( $t_read_write_access ) {
 		}
 ?>
 	</div>
-</td>
+				</td>
 <?php
-} # end if config_can_delete
+	} # end if config_can_delete
 ?>
-</tr>
+			</tr>
 <?php
 } # end while loop
 ?>
@@ -479,21 +479,21 @@ if( $t_read_write_access ) {
 
 		<!-- Title -->
 		<div class="widget-box widget-color-blue2">
-			<div class="widget-header widget-header-small">
-				<h4 class="widget-title lighter">
-					<i class="ace-icon fa fa-sliders"></i>
-					<?php echo lang_get('set_configuration_option') ?>
-				</h4>
-			</div>
+		<div class="widget-header widget-header-small">
+		<h4 class="widget-title lighter">
+			<i class="ace-icon fa fa-sliders"></i>
+			<?php echo lang_get( 'set_configuration_option' ) ?>
+			</h4>
+		</div>
 
 	<div class="widget-body">
 		<div class="widget-main no-padding">
 
-			<div id="config-edit-div" class="form-container">
-				<div class="table-responsive">
-					<table class="table table-bordered table-condensed table-striped">
-						<fieldset>
-							<?php echo form_security_field( 'adm_config_set' ) ?>
+		<div id="config-edit-div" class="form-container">
+		<div class="table-responsive">
+		<table class="table table-bordered table-condensed table-striped">
+		<fieldset>
+		<?php echo form_security_field( 'adm_config_set' ) ?>
 
 		<!-- Username -->
 		<tr>
