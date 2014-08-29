@@ -363,13 +363,9 @@ layout_page_begin( __FILE__ );
 	</tr>
 	<tr>
 		<td colspan="2" class="none">
-			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
 				<?php collapse_open( 'profile' ); collapse_icon( 'profile' ); ?>
 				<?php echo lang_get( 'or_fill_in' ); ?>
 			<table class="width100" cellspacing="0">
-					<?php } else { ?>
-						<?php echo lang_get( 'or_fill_in' ); ?>
-					<?php } ?>
 					<tr>
 						<th class="category">
 							<label for="platform"><?php echo lang_get( 'platform' ) ?></label>
@@ -423,11 +419,9 @@ layout_page_begin( __FILE__ );
 							?>
 						</td>
 					</tr>
-			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
 			</table>
 			<?php collapse_closed( 'profile' ); collapse_icon( 'profile' ); echo lang_get( 'or_fill_in' );?>
 			<?php collapse_end( 'profile' ); ?>
-		<?php } ?>
 		</td>
 	</tr>
 <?php } ?>

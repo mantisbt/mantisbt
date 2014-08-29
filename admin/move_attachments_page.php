@@ -132,8 +132,6 @@ if( count( $t_projects ) == 0 ) {
 			$t_id );
 		echo "</tr>\n";
 	}
-
-	if( ON == config_get( 'use_javascript' ) ) {
 ?>
 
 	<tr>
@@ -147,7 +145,6 @@ if( count( $t_projects ) == 0 ) {
 	</tr>
 
 <?php
-	}
 	echo form_security_field( 'move_attachments_project_select' );
 ?>
 

@@ -188,4 +188,5 @@ env_obsolete( 'MANTIS_CONFIG', 'MANTIS_CONFIG_FOLDER' );
 config_obsolete( 'show_footer_menu' );
 config_obsolete( 'status_legend_position' );
 config_obsolete( 'status_percentage_legend' );
+config_obsolete( 'use_javascript' );
 

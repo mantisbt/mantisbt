@@ -128,7 +128,7 @@ require_api( 'lang_api.php' );
 					<?php echo lang_get( 'time_tracking' ) ?>
 				</th>
 				<td>
-					<?php if( config_get( 'time_tracking_stopwatch' ) && config_get( 'use_javascript' ) ) { ?>
+					<?php if( config_get( 'time_tracking_stopwatch' ) ) { ?>
 					<input type="text" name="time_tracking" class="stopwatch_time input-sm" size="8" placeholder="hh:mm:ss" />
 					<input type="button" name="time_tracking_toggle" class="stopwatch_toggle" value="<?php echo lang_get( 'time_tracking_stopwatch_start' ) ?>" />
 					<input type="button" name="time_tracking_reset" class="stopwatch_reset" value="<?php echo lang_get( 'time_tracking_stopwatch_reset' ) ?>" />

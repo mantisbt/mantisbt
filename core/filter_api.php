@@ -2194,7 +2194,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			<div class="widget-toolbar no-border">
 				<div class="widget-menu">
 				<?php
-				$f_switch_view_link = ( config_get( 'use_javascript' ) && config_get( 'use_dynamic_filters' ) ) ? 'view_all_set.php?type=6&amp;view_type=' : 'view_filters_page.php?view_type=';
+				$f_switch_view_link = ( config_get( 'use_dynamic_filters' ) ) ? 'view_all_set.php?type=6&amp;view_type=' : 'view_filters_page.php?view_type=';
 				$t_view_filters = config_get( 'view_filters' );
 				if(( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) {
 					if( 'advanced' == $t_view_type ) {
@@ -2266,7 +2266,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			);
 		}
 
-		$t_dynamic_filter_expander_class = ( config_get( 'use_javascript' ) && config_get( 'use_dynamic_filters' ) ) ? ' class="dynamic-filter-expander"' : '';
+		$t_dynamic_filter_expander_class = ( config_get( 'use_dynamic_filters' ) ) ? ' class="dynamic-filter-expander"' : '';
 		?>
 
 		<tr class="<?php echo $t_trclass ?>">
@@ -3936,8 +3936,7 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 	# Make sure the date selection controls are enabled by default
 	# if we do not use javascript
 	$t_menu_disabled =
-		   !config_get( 'use_javascript' )
-		|| 'on' == $g_filter[FILTER_PROPERTY_FILTER_BY_DATE]
+		 'on' == $g_filter[FILTER_PROPERTY_FILTER_BY_DATE]
 		? ''
 		: ' disabled="disabled" ';
 ?>
@@ -4297,47 +4296,43 @@ function print_filter_custom_field_date( $p_field_num, $p_field_id ) {
 		$t_end_time = 0;
 	}
 
-	if( OFF == config_get( 'use_javascript' ) ) {
-		$t_start_disable = false;
-		$t_end_disable = false;
-	} else {
-		$t_start_disable = true;
-		$t_end_disable = true;
 
-		# if $g_filter['custom_fields'][$p_field_id][0] is not set (ie no filter),
-		# we will drop through the following switch and use the default values
-		# above, so no need to check if stuff is set or not.
-		switch( $g_filter['custom_fields'][$p_field_id][0] ) {
-			case CUSTOM_FIELD_DATE_ANY:
-			case CUSTOM_FIELD_DATE_NONE:
-				break;
-			case CUSTOM_FIELD_DATE_BETWEEN:
-				$t_start_disable = false;
-				$t_end_disable = false;
-				$t_start = $t_start_time;
-				$t_end = $t_end_time;
-				break;
-			case CUSTOM_FIELD_DATE_ONORBEFORE:
-				$t_start_disable = false;
-				$t_start = $t_end_time;
-				break;
-			case CUSTOM_FIELD_DATE_BEFORE:
-				$t_start_disable = false;
-				$t_start = $t_end_time;
-				break;
-			case CUSTOM_FIELD_DATE_ON:
-				$t_start_disable = false;
-				$t_start = $t_start_time;
-				break;
-			case CUSTOM_FIELD_DATE_AFTER:
-				$t_start_disable = false;
-				$t_start = $t_start_time;
-				break;
-			case CUSTOM_FIELD_DATE_ONORAFTER:
-				$t_start_disable = false;
-				$t_start = $t_start_time;
-				break;
-		}
+	$t_start_disable = true;
+	$t_end_disable = true;
+
+	# if $g_filter['custom_fields'][$p_field_id][0] is not set (ie no filter),
+	# we will drop through the following switch and use the default values
+	# above, so no need to check if stuff is set or not.
+	switch( $g_filter['custom_fields'][$p_field_id][0] ) {
+		case CUSTOM_FIELD_DATE_ANY:
+		case CUSTOM_FIELD_DATE_NONE:
+			break;
+		case CUSTOM_FIELD_DATE_BETWEEN:
+			$t_start_disable = false;
+			$t_end_disable = false;
+			$t_start = $t_start_time;
+			$t_end = $t_end_time;
+			break;
+		case CUSTOM_FIELD_DATE_ONORBEFORE:
+			$t_start_disable = false;
+			$t_start = $t_end_time;
+			break;
+		case CUSTOM_FIELD_DATE_BEFORE:
+			$t_start_disable = false;
+			$t_start = $t_end_time;
+			break;
+		case CUSTOM_FIELD_DATE_ON:
+			$t_start_disable = false;
+			$t_start = $t_start_time;
+			break;
+		case CUSTOM_FIELD_DATE_AFTER:
+			$t_start_disable = false;
+			$t_start = $t_start_time;
+			break;
+		case CUSTOM_FIELD_DATE_ONORAFTER:
+			$t_start_disable = false;
+			$t_start = $t_start_time;
+			break;
 	}
 
 	echo '<table cellspacing="0" cellpadding="0"><tr><td>' . "\n";
