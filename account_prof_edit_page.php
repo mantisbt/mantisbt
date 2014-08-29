@@ -75,7 +75,7 @@ layout_page_header();
 layout_page_begin( 'manage_overview_page.php' );
 
 if( profile_is_global( $f_profile_id ) ) {
-    print_manage_menu( 'manage_prof_menu_page.php' );
+	print_manage_menu( 'manage_prof_menu_page.php' );
 }
 ?>
 

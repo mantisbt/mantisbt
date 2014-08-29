@@ -275,7 +275,7 @@ if( $t_sponsor_count === 0 ) {
 		<td class="bold" width="10%"><?php echo lang_get( 'amount' ) ?></td>
 		<td class="bold" width="10%"><?php echo lang_get( 'status' ) ?></td>
 	</tr>
-	<?php
+<?php
 	$t_bug_list = array();
 	$t_total_owing = 0;
 	$t_total_paid = 0;

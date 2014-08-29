@@ -231,16 +231,16 @@ if( $t_multiple_projects ) {
 		echo "<input type=\"hidden\" name=\"custom_field_id\" value=\"$t_custom_field_id\" />";
 	}
 ?>
-		<div class="widget-box widget-color-blue2">
-			<div class="widget-header widget-header-small">
-				<h4 class="widget-title lighter">
-					<?php echo $t_question_title ?>
-				</h4>
-			</div>
-			<div class="widget-body">
-				<div class="widget-main no-padding">
-					<div class="table-responsive">
-						<table class="table table-bordered table-condensed table-striped">
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<?php echo $t_question_title ?>
+	</h4>
+</div>
+<div class="widget-body">
+	<div class="widget-main no-padding">
+		<div class="table-responsive">
+			<table class="table table-bordered table-condensed table-striped">
 			<tbody>
 <?php
 	if( !$t_finished ) {
@@ -266,7 +266,7 @@ if( $t_multiple_projects ) {
 		} else {
 			echo '<select name="' . $t_form . '" class="input-sm">';
 
-			switch ( $f_action ) {
+			switch( $f_action ) {
 				case 'COPY':
 				case 'MOVE':
 					print_project_option_list( null, false );
@@ -304,7 +304,7 @@ if( $t_multiple_projects ) {
 				</tr>
 <?php
 		if( isset( $t_question_title2 ) ) {
-			switch ( $f_action ) {
+			switch( $f_action ) {
 				case 'RESOLVE':
 					$t_show_product_version = ( ON == config_get( 'show_product_version' ) )
 						|| ( ( AUTO == config_get( 'show_product_version' ) )

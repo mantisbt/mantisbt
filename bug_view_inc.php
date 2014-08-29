@@ -256,7 +256,7 @@ print_small_button( '#bugnotes', lang_get( 'jump_to_bugnotes' ) );
 
 # Send Bug Reminder
 if( $t_show_reminder_link ) {
-    print_small_button( $t_bug_reminder_link, lang_get( 'bug_reminder' ) );
+	print_small_button( $t_bug_reminder_link, lang_get( 'bug_reminder' ) );
 }
 
 if( !is_blank( $t_wiki_link ) ) {
@@ -270,7 +270,7 @@ foreach ( $t_links as $t_plugin => $t_hooks ) {
 				if( is_numeric( $t_label ) ) {
 					print_bracket_link_prepared( $t_href );
 				} else {
-                    print_small_button( $t_href, $t_label );
+					print_small_button( $t_href, $t_label );
 				}
 			}
 		} else {
