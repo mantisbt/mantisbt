@@ -432,7 +432,7 @@ if( $t_show_status || $t_show_resolution ) {
 		echo '<th class="category"><label for="status">' . lang_get( 'status' ) . '</label></th>';
 
 		# choose color based on status
-        $t_status_label = html_get_status_css_class( $t_bug->status );
+		$t_status_label = html_get_status_css_class( $t_bug->status );
 
 		echo '<td class="' . $t_status_label .  '">';
 		print_status_option_list( 'status', $t_bug->status,
