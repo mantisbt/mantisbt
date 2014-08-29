@@ -96,19 +96,19 @@ class TimelineEvent {
 		return date( $t_normal_date_format, $p_timestamp );
 	}
 
-  /**
-  * Returns html string representing the beginning block of a timeline entry
-  * @return string
-  */  
+	/**
+	 * Returns html string representing the beginning block of a timeline entry
+	 * @return string
+	 */
 	public function html_start( $t_action_icon = 'fa-check') {
 		$t_avatar = user_get_avatar( $this->user_id, 40 );
-        $t_html = '<div class="profile-activity clearfix">';
-		
+		$t_html = '<div class="profile-activity clearfix">';
+
 		if( $t_avatar !== false && $t_avatar[0] != false) {
 			$t_avatar_url = $t_avatar[0];
 			$t_html .= '<img class="pull-left" src="' . $t_avatar_url . '"/>';
 		} else {
-            $t_html .= '<i class="pull-left thumbicon fa ' . $t_action_icon . ' btn-primary no-hover"></i>';
+			$t_html .= '<i class="pull-left thumbicon fa ' . $t_action_icon . ' btn-primary no-hover"></i>';
 		}
 		return $t_html;
 	}
@@ -118,8 +118,8 @@ class TimelineEvent {
 	 * @return string
 	 */
 	public function html_end() {
-        $t_html = '<div class="time"><i class="ace-icon fa fa-clock-o bigger-110"></i> ' .  $this->format_timestamp( $this->timestamp ) . '</div>';
-        $t_html .= '</div>';
-        return $t_html;
+		$t_html = '<div class="time"><i class="ace-icon fa fa-clock-o bigger-110"></i> ' .  $this->format_timestamp( $this->timestamp ) . '</div>';
+		$t_html .= '</div>';
+		return $t_html;
 	}
 }
