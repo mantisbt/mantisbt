@@ -4137,13 +4137,11 @@ function print_filter_custom_field( $p_field_id ) {
 
 	$j = array_search( $p_field_id, $t_accessible_custom_fields_ids );
 	if( $j === null || $j === false ) {
-
-		# Note: Prior to PHP 4.2.0, array_search() returns NULL on failure instead of FALSE.
 		?>
 			<span style="color:red;font-weight:bold;">
 				unknown custom filter (custom <?php echo $p_field_id;?>)
 			</span>
-			<?php
+		<?php
 	} else if( isset( $t_accessible_custom_fields_names[$j] ) ) {
 		if( $t_accessible_custom_fields_types[$j] == CUSTOM_FIELD_TYPE_DATE ) {
 			print_filter_custom_field_date( $j, $p_field_id );

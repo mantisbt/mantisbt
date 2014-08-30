@@ -622,8 +622,7 @@ function install_check_config_serialization() {
  * This ensures it is not possible to execute code during un-serialization
  */
 function install_check_token_serialization() {
-	$t_tokens_table = db_get_table( 'tokens' );
-	$query = 'SELECT * FROM ' . $t_tokens_table . ' WHERE type=1 or type=2 or type=5';
+	$query = 'SELECT * FROM {tokens} WHERE type=1 or type=2 or type=5';
 
 	$t_result = db_query_bound( $query );
 	while( $t_row = db_fetch_array( $t_result ) ) {
@@ -637,7 +636,7 @@ function install_check_token_serialization() {
 
 		$t_json_token = json_encode( $t_token );
 
-		$t_query = 'UPDATE ' . $t_tokens_table . ' SET value=' .db_param() . ' WHERE id=' .db_param();
+		$t_query = 'UPDATE {tokens} SET value=' .db_param() . ' WHERE id=' .db_param();
 		db_query_bound( $t_query, array( $t_json_token, $t_id ) );
 	}
 

@@ -112,13 +112,12 @@ print_account_menu( 'account_sponsor_page.php' );
 $t_user = auth_get_current_user_id();
 $t_resolved = config_get( 'bug_resolved_status_threshold' );
 $t_bug_table = db_get_table( 'bug' );
-$t_sponsor_table = db_get_table( 'sponsorship' );
 $t_payment = config_get( 'payment_enable', 0 );
 
 $t_project_clause = helper_project_specific_where( $t_project );
 
 $t_query = 'SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_in_version, b.status
-	FROM ' . $t_bug_table . ' b, ' . $t_sponsor_table . ' s
+	FROM ' . $t_bug_table . ' b, {sponsorship} s
 	WHERE s.user_id=' . db_param() . ' AND s.bug_id = b.id ' .
 	( $t_show_all ? '' : 'AND ( b.status < ' . db_param() . ' OR s.paid < ' . SPONSORSHIP_PAID . ')' ) . '
 	AND ' . $t_project_clause . '
@@ -233,7 +232,7 @@ if( $t_sponsor_count === 0 ) {
 <?php } # end sponsored issues
 
 $t_query = 'SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_in_version, b.status
-	FROM ' . $t_bug_table . ' b, ' . $t_sponsor_table . ' s
+	FROM ' . $t_bug_table . ' b, {sponsorship} s
 	WHERE b.handler_id=' . db_param() . ' AND s.bug_id = b.id ' .
 	( $t_show_all ? '' : 'AND ( b.status < ' . db_param() . ' OR s.paid < ' . SPONSORSHIP_PAID . ')' ) . '
 	AND ' . $t_project_clause . '

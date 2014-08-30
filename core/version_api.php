@@ -136,8 +136,7 @@ function version_cache_row( $p_version_id, $p_trigger_errors = true ) {
 		return $g_cache_versions[$c_version_id];
 	}
 
-	$t_project_version_table = db_get_table( 'project_version' );
-	$t_query = 'SELECT * FROM ' . $t_project_version_table . ' WHERE id=' . db_param();
+	$t_query = 'SELECT * FROM {project_version} WHERE id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $c_version_id ) );
 
 	$t_row = db_fetch_array( $t_result );
@@ -231,7 +230,7 @@ function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $
 
 	$t_project_version_table = db_get_table( 'project_version' );
 
-	$t_query = 'INSERT INTO ' . $t_project_version_table . '
+	$t_query = 'INSERT INTO {project_version}
 					( project_id, version, date_order, description, released, obsolete )
 				  VALUES
 					(' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
@@ -266,11 +265,10 @@ function version_update( VersionData $p_version_info ) {
 	$c_date_order = $p_version_info->date_order;
 	$c_project_id = (int)$p_version_info->project_id;
 
-	$t_project_version_table = db_get_table( 'project_version' );
 	$t_bug_table = db_get_table( 'bug' );
 	$t_history_table = db_get_table( 'bug_history' );
 
-	$t_query = 'UPDATE ' . $t_project_version_table . '
+	$t_query = 'UPDATE {project_version}
 				  SET version=' . db_param() . ',
 					description=' . db_param() . ',
 					released=' . db_param() . ',
@@ -331,10 +329,9 @@ function version_remove( $p_version_id, $p_new_version = '' ) {
 	$t_old_version = version_get_field( $p_version_id, 'version' );
 	$t_project_id = version_get_field( $p_version_id, 'project_id' );
 
-	$t_project_version_table = db_get_table( 'project_version' );
 	$t_bug_table = db_get_table( 'bug' );
 
-	$t_query = 'DELETE FROM ' . $t_project_version_table . ' WHERE id=' . db_param();
+	$t_query = 'DELETE FROM {project_version} WHERE id=' . db_param();
 	db_query_bound( $t_query, array( (int)$p_version_id ) );
 
 	$t_project_list = array( $t_project_id );
@@ -372,8 +369,7 @@ function version_remove_all( $p_project_id ) {
 	db_query_bound( $t_query, array( $c_project_id ) );
 
 	# remove the actual versions associated with the project.
-	$t_project_version_table = db_get_table( 'project_version' );
-	$t_query = 'DELETE FROM ' . $t_project_version_table . ' WHERE project_id=' . db_param();
+	$t_query = 'DELETE FROM {project_version} WHERE project_id=' . db_param();
 	db_query_bound( $t_query, array( $c_project_id ) );
 
 	return true;
@@ -402,8 +398,7 @@ function version_cache_array_rows( array $p_project_id_array ) {
 		return;
 	}
 
-	$t_project_version_table = db_get_table( 'project_version' );
-	$t_query = 'SELECT * FROM ' . $t_project_version_table . '
+	$t_query = 'SELECT * FROM {project_version}
 				  WHERE project_id IN (' . implode( ',', $c_project_id_array ) . ')
 				  ORDER BY date_order DESC';
 	$t_result = db_query_bound( $t_query );
@@ -462,11 +457,9 @@ function version_get_all_rows( $p_project_id, $p_released = null, $p_obsolete = 
 		return $t_versions;
 	}
 
-	$t_project_version_table = db_get_table( 'project_version' );
-
 	$t_project_where = version_get_project_where_clause( $p_project_id, $p_inherit );
 
-	$t_query = 'SELECT * FROM ' . $t_project_version_table . ' WHERE ' . $t_project_where;
+	$t_query = 'SELECT * FROM {project_version} WHERE ' . $t_project_where;
 
 	$t_query_params = array();
 
@@ -519,9 +512,7 @@ function version_get_all_rows_with_subs( $p_project_id, $p_released = null, $p_o
 		$t_query_params[] = db_prepare_bool( $p_obsolete );
 	}
 
-	$t_project_version_table = db_get_table( 'project_version' );
-
-	$t_query = 'SELECT * FROM ' . $t_project_version_table . '
+	$t_query = 'SELECT * FROM {project_version}
 				  WHERE ' . $t_project_where . ' ' . $t_released_where . ' ' . $t_obsolete_where . '
 				  ORDER BY date_order DESC';
 	$t_result = db_query_bound( $t_query, $t_query_params );
@@ -557,9 +548,7 @@ function version_get_id( $p_version, $p_project_id = null, $p_inherit = null ) {
 
 	$t_project_where = version_get_project_where_clause( $c_project_id, $p_inherit );
 
-	$t_project_version_table = db_get_table( 'project_version' );
-
-	$t_query = 'SELECT id FROM ' . $t_project_version_table . ' WHERE ' . $t_project_where . ' AND version=' . db_param();
+	$t_query = 'SELECT id FROM {project_version} WHERE ' . $t_project_where . ' AND version=' . db_param();
 
 	$t_result = db_query_bound( $t_query, array( $p_version ) );
 
