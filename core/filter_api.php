@@ -611,7 +611,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	if( is_array( $t_custom_fields ) && ( count( $t_custom_fields ) > 0 ) ) {
 		foreach( $t_custom_fields as $t_cfid ) {
 			if( is_array( gpc_get( 'custom_field_' . $t_cfid, null ) ) ) {
-				$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, (string)META_FILTER_ANY );
+				$f_custom_fields_data[$t_cfid] = gpc_get_string_array( 'custom_field_' . $t_cfid, array( META_FILTER_ANY ) );
 			} else {
 				$f_custom_fields_data[$t_cfid] = gpc_get_string( 'custom_field_' . $t_cfid, (string)META_FILTER_ANY );
 				$f_custom_fields_data[$t_cfid] = array(
@@ -826,7 +826,7 @@ function filter_deserialize( $p_serialized_filter ) {
 	# filter indices dynamically
 	$t_filter_array = array();
 	if( isset( $t_setting_arr[1] ) ) {
-		$t_filter_array = unserialize( $t_setting_arr[1] );
+		$t_filter_array = json_decode( $t_setting_arr[1], true );
 	} else {
 		return false;
 	}
@@ -861,7 +861,7 @@ function filter_is_cookie_valid() {
 	# filter indices dynamically
 	$t_filter_cookie_arr = array();
 	if( isset( $t_setting_arr[1] ) ) {
-		$t_filter_cookie_arr = unserialize( $t_setting_arr[1] );
+		$t_filter_cookie_arr = json_decode( $t_setting_arr[1], true );
 	} else {
 		return false;
 	}
@@ -1168,7 +1168,8 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		}
 
 		# filter out inaccessible projects.
-		if( !access_has_project_level( VIEWER, $t_pid, $t_user_id ) ) {
+		if( !project_exists( $t_pid ) || !access_has_project_level( VIEWER, $t_pid, $t_user_id ) ) {
+			log_event( LOG_FILTERING, 'Invalid or inaccessible project: ' . $t_pid );
 			continue;
 		}
 
@@ -1407,7 +1408,9 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	if( 'simple' == $t_filter['_view_type'] ) {
 		# simple filtering: if showing any, restrict by the hide status value, otherwise ignore the hide
 		$t_this_status = $t_filter[FILTER_PROPERTY_STATUS][0];
-		$t_this_hide_status = $t_filter[FILTER_PROPERTY_HIDE_STATUS][0];
+		$t_this_hide_status = isset( $t_filter[FILTER_PROPERTY_HIDE_STATUS][0] )
+			? $t_filter[FILTER_PROPERTY_HIDE_STATUS][0]
+			: null;
 
 		if( filter_field_is_any( $t_this_status ) ) {
 			foreach( $t_available_statuses as $t_this_available_status ) {
@@ -1806,7 +1809,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			if( count( $t_tags_any ) ) {
 				$t_clauses = array();
 				foreach( $t_tags_any as $t_tag_row ) {
-					array_push( $t_clauses, $t_bug_tag_table . '.tag_id = ' . $t_tag_row[id] );
+					array_push( $t_clauses, $t_bug_tag_table . '.tag_id = ' . $t_tag_row['id'] );
 				}
 				array_push( $t_where_clauses, $t_bug_table . '.id IN ( SELECT bug_id FROM ' . $t_bug_tag_table . ' WHERE ( ' . implode( ' OR ', $t_clauses ) . ') )' );
 			}
@@ -1814,7 +1817,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			if( count( $t_tags_none ) ) {
 				$t_clauses = array();
 				foreach( $t_tags_none as $t_tag_row ) {
-					array_push( $t_clauses, $t_bug_tag_table . '.tag_id = ' . $t_tag_row[id] );
+					array_push( $t_clauses, $t_bug_tag_table . '.tag_id = ' . $t_tag_row['id'] );
 				}
 				array_push( $t_where_clauses, $t_bug_table . '.id NOT IN ( SELECT bug_id FROM ' . $t_bug_tag_table . ' WHERE ( ' . implode( ' OR ', $t_clauses ) . ') )' );
 			}
@@ -2141,7 +2144,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	$t_form_name_suffix = $p_expanded ? '_open' : '_closed';
 
 	$t_filter = current_user_get_bug_filter();
-	$t_filter = filter_ensure_valid_filter( $t_filter );
+	$t_filter = filter_ensure_valid_filter( $t_filter === false ? array() : $t_filter );
 	$t_project_id = helper_get_current_project();
 	$t_page_number = (int)$p_page_number;
 

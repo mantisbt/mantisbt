@@ -201,7 +201,7 @@ function collapse_cache_token() {
 	$t_token = token_get_value( TOKEN_COLLAPSE );
 
 	if( !is_null( $t_token ) ) {
-		$t_data = unserialize( $t_token );
+		$t_data = json_decode( $t_token, true );
 	} else {
 		$t_data = array();
 	}
@@ -224,7 +224,7 @@ function collapse_cache_token() {
 		}
 
 		if( $t_update ) {
-			$t_token = serialize( $g_collapse_cache_token );
+			$t_token = json_encode( $g_collapse_cache_token );
 			token_set( TOKEN_COLLAPSE, $t_token, TOKEN_EXPIRY_COLLAPSE );
 		} else {
 			token_touch( TOKEN_COLLAPSE );

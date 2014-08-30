@@ -1272,9 +1272,9 @@ function user_get_assigned_open_bug_count( $p_user_id, $p_project_id = ALL_PROJE
 	$t_query = 'SELECT COUNT(*)
 				  FROM ' . $t_bug_table . '
 				  WHERE ' . $t_where_prj . '
-				  		status<\'$t_resolved\' AND
-				  		handler_id=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $p_user_id ) );
+						status<' . db_param() . ' AND
+						handler_id=' . db_param();
+	$t_result = db_query_bound( $t_query, array( $t_resolved, $p_user_id ) );
 
 	return db_result( $t_result );
 }
@@ -1295,9 +1295,9 @@ function user_get_reported_open_bug_count( $p_user_id, $p_project_id = ALL_PROJE
 
 	$t_query = 'SELECT COUNT(*) FROM ' . $t_bug_table . '
 				  WHERE ' . $t_where_prj . '
-						  status<\'$t_resolved\' AND
+						  status<' . db_param() . ' AND
 						  reporter_id=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $p_user_id ) );
+	$t_result = db_query_bound( $t_query, array( $t_resolved, $p_user_id ) );
 
 	return db_result( $t_result );
 }
@@ -1313,7 +1313,7 @@ function user_get_profile_row( $p_user_id, $p_profile_id ) {
 	$t_user_profile_table = db_get_table( 'user_profile' );
 	$t_query = 'SELECT * FROM ' . $t_user_profile_table . '
 				  WHERE id=' . db_param() . ' AND
-				  		user_id=' . db_param();
+						user_id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_profile_id, $p_user_id ) );
 
 	$t_row = db_fetch_array( $t_result );
@@ -1374,7 +1374,7 @@ function user_get_bug_filter( $p_user_id, $p_project_id = null ) {
 		return false;
 	}
 
-	$t_filter = unserialize( $t_cookie_detail[1] );
+	$t_filter = json_decode( $t_cookie_detail[1], true );
 
 	$t_filter = filter_ensure_valid_filter( $t_filter );
 

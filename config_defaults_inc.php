@@ -1677,6 +1677,7 @@ $g_disallowed_files = '';
  * prefix to be used for the file system names of files uploaded to projects.
  * Eg: doc-001-myprojdoc.zip
  * @global string $g_document_files_prefix
+ * @deprecated since 1.0, file names have been stored in a new format
  */
 $g_document_files_prefix = 'doc';
 
@@ -3071,7 +3072,7 @@ $g_cookie_domain = '';
  * @see $g_view_all_cookie
  * @global string $g_cookie_version
  */
-$g_cookie_version = 'v8';
+$g_cookie_version = 'v9';
 
 /**
  * Prefix for all MantisBT cookies
@@ -4041,35 +4042,44 @@ $g_show_queries_count = OFF;
 
 /**
  * Errors Display method
- * Defines what errors are displayed and how. Available options are:
- * - DISPLAY_ERROR_HALT    stop and display error message (including
+ * Defines what {@link http://php.net/errorfunc.constants errors}
+ * are displayed and how. Available options are:
+ * - DISPLAY_ERROR_HALT    Stop and display error message (including
  *                         variables and backtrace if
- *                         {@link $g_show_detailed_errors} is ON)
- * - DISPLAY_ERROR_INLINE  display 1 line error and continue execution
- * - DISPLAY_ERROR_NONE    no error displayed
+ *                         {@link $g_show_detailed_errors} is ON).
+ * - DISPLAY_ERROR_INLINE  Display a one line error and continue execution.
+ * - DISPLAY_ERROR_NONE    Suppress the error (no display). This is the default
+ *                         behavior for unspecified errors constants.
+ *
+ * The default settings are recommended for use in Production, and will only
+ * display MantisBT fatal errors, suppressing output of all other error types.
+ *
+ * Recommended config_inc.php settings for developers (these are automatically
+ * set if the server is localhost):
+ * $g_display_errors = array(
+ *     E_USER_ERROR   => DISPLAY_ERROR_HALT,
+ *     E_WARNING      => DISPLAY_ERROR_HALT,
+ *     E_ALL          => DISPLAY_ERROR_INLINE,
+ * );
  *
  * WARNING: E_USER_ERROR should always be set to DISPLAY_ERROR_HALT. Using
  * another value will cause program execution to continue, which may lead to
  * data integrity issues and/or cause MantisBT to function incorrectly.
  *
- * A developer might set this in config/config_inc.php as:
- *	$g_display_errors = array(
- *		E_WARNING      => DISPLAY_ERROR_HALT,
- *		E_NOTICE       => DISPLAY_ERROR_INLINE,
- *		E_USER_ERROR   => DISPLAY_ERROR_HALT,
- *		E_USER_WARNING => DISPLAY_ERROR_INLINE,
- *		E_USER_NOTICE  => DISPLAY_ERROR_INLINE
- *	);
- *
  * @global array $g_display_errors
  */
 $g_display_errors = array(
-	E_WARNING      => DISPLAY_ERROR_INLINE,
-	E_NOTICE       => DISPLAY_ERROR_NONE,
 	E_USER_ERROR   => DISPLAY_ERROR_HALT,
-	E_USER_WARNING => DISPLAY_ERROR_INLINE,
-	E_USER_NOTICE  => DISPLAY_ERROR_NONE
 );
+
+# Add developers defaults when server is localhost
+# Note: intentionally not using SERVER_ADDR as it's not guaranteed to exist
+if( isset( $_SERVER['SERVER_NAME'] ) && ( strcasecmp( $_SERVER['SERVER_NAME'], 'localhost' ) == 0
+ || $_SERVER['SERVER_NAME'] == '127.0.0.1'
+) ) {
+	$g_display_errors[E_WARNING] = DISPLAY_ERROR_HALT;
+	$g_display_errors[E_ALL]     = DISPLAY_ERROR_INLINE;
+}
 
 /**
  * Detailed error messages

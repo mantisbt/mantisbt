@@ -425,8 +425,28 @@ function install_stored_filter_migrate() {
 	$t_query = 'SELECT * FROM ' . $t_filters_table;
 	$t_result = db_query_bound( $t_query );
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_filter_arr = filter_deserialize( $t_row['filter_string'] );
-		foreach( $t_filter_fields as $t_old=>$t_new ) {
+		$t_setting_arr = explode( '#', $t_row['filter_string'], 2 );
+
+		if(( $t_setting_arr[0] == 'v1' ) || ( $t_setting_arr[0] == 'v2' ) || ( $t_setting_arr[0] == 'v3' ) || ( $t_setting_arr[0] == 'v4' ) ) {
+			$t_delete_query = 'DELETE FROM ' . $t_filters_table . ' WHERE id=' . db_param();
+			$t_delete_result = db_query_bound( $t_delete_query, array( $t_row['id'] ) );
+			continue;
+		}
+
+		if( isset( $t_setting_arr[1] ) ) {
+			$t_filter_arr = unserialize( $t_setting_arr[1] );
+		} else {
+			$t_delete_query = 'DELETE FROM ' . $t_filters_table . ' WHERE id=' . db_param();
+			$t_delete_result = db_query_bound( $t_delete_query, array( $t_row['id'] ) );
+			continue;
+		}
+
+		if( $t_filter_arr['_version'] != $t_cookie_version ) {
+			# if the version is not new enough, update it using defaults
+			$t_filter_arr = filter_ensure_valid_filter( $t_filter_arr );
+		}
+
+		foreach( $t_filter_fields AS $t_old=>$t_new ) {
 			if( isset( $t_filter_arr[$t_old] ) ) {
 				$t_value = $t_filter_arr[$t_old];
 				unset( $t_filter_arr[$t_old] );
@@ -436,7 +456,7 @@ function install_stored_filter_migrate() {
 			}
 		}
 
-		$t_filter_serialized = serialize( $t_filter_arr );
+		$t_filter_serialized = json_encode( $t_filter_arr );
 		$t_filter_string = $t_cookie_version . '#' . $t_filter_serialized;
 
 		$t_update_query = 'UPDATE ' . $t_filters_table . ' SET filter_string=' . db_param() . ' WHERE id=' . db_param();
@@ -561,6 +581,98 @@ function install_check_project_hierarchy() {
 			$t_query_insert = 'INSERT INTO ' . $t_project_hierarchy_table . ' (child_id, parent_id, inherit_parent) VALUES (' . db_param() . ',' . db_param() . ',' . db_param() . ')';
 			db_query_bound( $t_query_insert, array( $t_child_id, $t_parent_id, $t_inherit ) );
 		}
+	}
+
+	# Return 2 because that's what ADOdb/DataDict does when things happen properly
+	return 2;
+}
+
+/**
+ * Schema update to migrate config data from php serialization to json.
+ * This ensures it is not possible to execute code during un-serialization
+ */
+function install_check_config_serialization() {
+	$t_config_table = db_get_table( 'config' );
+	$query = 'SELECT * FROM ' . $t_config_table . ' WHERE type=3';
+
+	$t_result = db_query_bound( $query );
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$config_id = $t_row['config_id'];
+		$project_id = (int)$t_row['project_id'];
+		$user_id = (int)$t_row['user_id'];
+		$value = $t_row['value'];
+
+		$t_config = unserialize( $value );
+		if( $t_config === false ) {
+			return 1; # Fatal: invalid data found in config table
+		}
+
+		$t_json_config = json_encode( $t_config );
+
+		$t_query = 'UPDATE ' . $t_config_table . ' SET value=' .db_param() . ' WHERE config_id=' .db_param() . ' AND project_id=' .db_param() . ' AND user_id=' .db_param();
+		db_query_bound( $t_query, array( $t_json_config, $config_id, $project_id, $user_id ) );
+	}
+
+	# Return 2 because that's what ADOdb/DataDict does when things happen properly
+	return 2;
+}
+
+/**
+ * Schema update to migrate token data from php serialization to json.
+ * This ensures it is not possible to execute code during un-serialization
+ */
+function install_check_token_serialization() {
+	$t_tokens_table = db_get_table( 'tokens' );
+	$query = 'SELECT * FROM ' . $t_tokens_table . ' WHERE type=1 or type=2 or type=5';
+
+	$t_result = db_query_bound( $query );
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_id = $t_row['id'];
+		$t_value = $t_row['value'];
+
+		$t_token = unserialize( $t_value );
+		if( $t_token === false ) {
+			return 1; # Fatal: invalid data found in tokens table
+		}
+
+		$t_json_token = json_encode( $t_token );
+
+		$t_query = 'UPDATE ' . $t_tokens_table . ' SET value=' .db_param() . ' WHERE id=' .db_param();
+		db_query_bound( $t_query, array( $t_json_token, $t_id ) );
+	}
+
+	# Return 2 because that's what ADOdb/DataDict does when things happen properly
+	return 2;
+}
+
+
+/**
+ * Schema update to migrate filters  data from php serialization to json.
+ * This ensures it is not possible to execute code during un-serialization
+ */
+function install_check_filters_serialization() {
+	$t_filters_table = db_get_table( 'filters' );
+	$query = 'SELECT * FROM ' . $t_filters_table;
+
+	$t_result = db_query_bound( $query );
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_id = $t_row['id'];
+		$t_value = $t_row['filter_string'];
+
+		$t_setting_arr = explode( '#', $t_value, 2 );
+
+		$t_filter = unserialize( $t_setting_arr[1] );
+
+		if( $t_filter === false ) {
+			return 1; # Fatal: invalid data found in tokens table
+		}
+		$t_filter['_version'] = 'v9'; // bump version
+
+		$t_json_filter = json_encode( $t_filter, true );
+		$t_filter_string = 'v9' . '#' . $t_json_filter;
+
+		$t_query = 'UPDATE ' . $t_filters_table . ' SET filter_string=' .db_param() . ' WHERE id=' .db_param();
+		db_query_bound( $t_query, array( $t_filter_string, $t_id ) );
 	}
 
 	# Return 2 because that's what ADOdb/DataDict does when things happen properly

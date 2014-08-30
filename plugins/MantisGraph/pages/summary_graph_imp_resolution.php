@@ -42,46 +42,46 @@ $t_graph_width = (int)( ( $t_width - 50 ) * 0.6 );
 
 # gather the data for the graphs
 $t_metrics = enum_bug_group( lang_get( 'resolution_enum_string' ), 'resolution' );
-$t_token = token_set( TOKEN_GRAPH, serialize( $t_metrics ) );
+$t_token = token_set( TOKEN_GRAPH, json_encode( $t_metrics ) );
 
 ?>
 
-    <div class="col-md-12 col-xs-12">
-        <div class="space-10"></div>
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
 
-        <div class="widget-box widget-color-blue2">
-            <div class="widget-header widget-header-small">
-                <h4 class="widget-title lighter">
-                    <i class="ace-icon fa fa-bar-chart-o"></i>
-                    <?php echo plugin_lang_get( 'graph_imp_resolution_title' ) ?>
-                </h4>
-            </div>
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-bar-chart-o"></i>
+		<?php echo plugin_lang_get( 'graph_imp_resolution_title' ) ?>
+	</h4>
+</div>
 
-            <div class="widget-body">
-                <div class="widget-main no-padding">
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <tr>
-                                <td class="center">
-                                    <img src="<?php echo plugin_page( 'summary_graph_byresolution.php' )?>&amp;width=<?php echo $t_graph_width?>" alt="" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="center">
-                                    <img src="<?php echo plugin_page( 'summary_graph_byresolution_pct.php' )?>&amp;width=<?php echo $t_graph_width?>" alt="" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="center">
-                                    <img src="<?php echo plugin_page( 'summary_graph_byresolution_mix.php' )?>&amp;width=<?php echo $t_graph_width?>" alt="" />
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="widget-body">
+	<div class="widget-main no-padding">
+		<div class="table-responsive">
+			<table class="table table-bordered">
+				<tr>
+					<td class="center">
+						<img src="<?php echo plugin_page( 'summary_graph_byresolution.php' )?>&amp;width=<?php echo $t_graph_width?>" alt="" />
+					</td>
+				</tr>
+				<tr>
+					<td class="center">
+						<img src="<?php echo plugin_page( 'summary_graph_byresolution_pct.php' )?>&amp;width=<?php echo $t_graph_width?>" alt="" />
+					</td>
+				</tr>
+				<tr>
+					<td class="center">
+						<img src="<?php echo plugin_page( 'summary_graph_byresolution_mix.php' )?>&amp;width=<?php echo $t_graph_width?>" alt="" />
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+</div>
+</div>
 
 <?php
 layout_page_end();

@@ -174,7 +174,7 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 							$t_value = (int)$t_raw_value;
 							break;
 						case CONFIG_TYPE_COMPLEX:
-							$t_value = unserialize( $t_raw_value );
+							$t_value = json_decode( $t_raw_value, true );
 							break;
 						case CONFIG_TYPE_STRING:
 						default:
@@ -340,7 +340,7 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 	}
 	if( is_array( $p_value ) || is_object( $p_value ) ) {
 		$t_type = CONFIG_TYPE_COMPLEX;
-		$c_value = serialize( $p_value );
+		$c_value = json_encode( $p_value );
 	} else if( is_float( $p_value ) ) {
 		$t_type = CONFIG_TYPE_FLOAT;
 		$c_value = (float)$p_value;
@@ -376,7 +376,7 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 						project_id = ' . db_param() . ' AND
 						user_id = ' . db_param();
 			$t_params = array(
-				$c_value,
+				(string)$c_value,
 				$t_type,
 				(int)$p_access,
 				$p_option,
@@ -389,7 +389,7 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 					VALUES
 					(' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ',' . db_param() . ' )';
 			$t_params = array(
-				$c_value,
+				(string)$c_value,
 				$t_type,
 				(int)$p_access,
 				$p_option,

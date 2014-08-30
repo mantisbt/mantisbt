@@ -220,10 +220,10 @@ function current_user_get_bug_filter( $p_project_id = null ) {
 		if( is_numeric( $f_filter_string ) ) {
 			$t_token = token_get_value( TOKEN_FILTER );
 			if( null != $t_token ) {
-				$t_filter = unserialize( $t_token );
+				$t_filter = json_decode( $t_token, true );
 			}
 		} else {
-			$t_filter = unserialize( $f_filter_string );
+			$t_filter = json_decode( $f_filter_string, true );
 		}
 		$t_filter = filter_ensure_valid_filter( $t_filter );
 	} else if( !filter_is_cookie_valid() ) {

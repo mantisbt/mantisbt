@@ -35,7 +35,7 @@ $t_token = token_get_value( TOKEN_GRAPH );
 if( $t_token == null ) {
 	$t_metrics = enum_bug_group( lang_get( 'resolution_enum_string' ), 'resolution' );
 } else {
-	 $t_metrics = unserialize( $t_token );
+	 $t_metrics = json_decode( $t_token, true );
 }
 
 graph_group( $t_metrics, plugin_lang_get( 'by_resolution_mix' ), $f_width, $f_width * $t_ar );

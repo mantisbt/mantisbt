@@ -84,7 +84,7 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 	if( !isset( $t_filter_detail[1] ) ) {
 		return SoapObjectsFactory::newSoapFault( 'Server', 'Invalid Filter' );
 	}
-	$t_filter = unserialize( $t_filter_detail[1] );
+	$t_filter = json_decode( $t_filter_detail[1], true );
 	$t_filter = filter_ensure_valid_filter( $t_filter );
 
 	$t_result = array();
@@ -130,7 +130,7 @@ function mc_filter_get_issue_headers( $p_username, $p_password, $p_project_id, $
 	if( !isset( $t_filter_detail[1] ) ) {
 		return SoapObjectsFactory::newSoapFault( 'Server', 'Invalid Filter' );
 	}
-	$t_filter = unserialize( $t_filter_detail[1] );
+	$t_filter = json_decode( $t_filter_detail[1], true );
 	$t_filter = filter_ensure_valid_filter( $t_filter );
 
 	$t_result = array();

@@ -43,40 +43,39 @@ $t_graph_width = (int)( ( $t_width - 50 ) * 0.6 );
 
 # gather the data for the graphs
 $t_metrics = create_category_summary();
-$t_token = token_set( TOKEN_GRAPH, serialize( $t_metrics ) );
 ?>
+    
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
 
-    <div class="col-md-12 col-xs-12">
-        <div class="space-10"></div>
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-bar-chart-o"></i>
+		<?php echo plugin_lang_get( 'graph_imp_category_title' ) ?>
+	</h4>
+</div>
 
-        <div class="widget-box widget-color-blue2">
-            <div class="widget-header widget-header-small">
-                <h4 class="widget-title lighter">
-                    <i class="ace-icon fa fa-bar-chart-o"></i>
-                    <?php echo plugin_lang_get( 'graph_imp_category_title' ) ?>
-                </h4>
-            </div>
-
-            <div class="widget-body">
-                <div class="widget-main no-padding">
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <tr>
-                                <td class="center">
-                                    <img src="<?php echo plugin_page( 'summary_graph_bycategory.php' )?>&amp;width=<?php echo $t_graph_width?>" alt="" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="center">
-                                    <img src="<?php echo plugin_page( 'summary_graph_bycategory_pct.php' )?>&amp;width=<?php echo $t_graph_width?>" alt="" />
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="widget-body">
+	<div class="widget-main no-padding">
+		<div class="table-responsive">
+			<table class="table table-bordered">
+				<tr>
+					<td class="center">
+						<img src="<?php echo plugin_page( 'summary_graph_bycategory.php' )?>&amp;width=<?php echo $t_graph_width?>" alt="" />
+					</td>
+				</tr>
+				<tr>
+					<td class="center">
+						<img src="<?php echo plugin_page( 'summary_graph_bycategory_pct.php' )?>&amp;width=<?php echo $t_graph_width?>" alt="" />
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+</div>
+</div>
 
 <?php
 layout_page_end();

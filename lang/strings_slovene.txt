@@ -40,6 +40,7 @@
  *
  * @author Dbc334
  * @author Eleassar
+ * @author Wertuose
  */
 
 $s_actiongroup_menu_move = 'Prestavi';

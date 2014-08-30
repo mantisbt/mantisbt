@@ -114,34 +114,6 @@ class SoapObjectsFactory {
 }
 
 /**
- * Abstract the differences in common actions between the php5 soap extension and nusoap
- *
- * <p>As long as we decide to support both implementations we should add all non-generic
- * action code to this class.</p>
- */
-class SoapActions {
-	/**
-	 * Sends a fault to the user and immediately terminates processing
-	 *
-	 * @param string $p_error_type    Error type.
-	 * @param string $p_error_message Error message.
-	 * @throws SoapFault A SoapFault exception is generated if an error occurs.
-	 * @return void
-	 */
-	static function sendSoapFault ( $p_error_type, $p_error_message ) {
-		global $l_oServer;
-
-		if( $l_oServer ) {
-			$l_oServer->fault( $p_error_type, $p_error_message );
-			$l_oServer->send_response();
-			exit();
-		} else {
-			throw new SoapFault( $p_error_type, $p_error_message );
-		}
-	}
-}
-
-/**
  * Get the MantisConnect webservice version.
  * @return string
  */
@@ -555,7 +527,7 @@ function mci_filter_db_get_available_queries( $p_project_id = null, $p_user_id =
 		if( !isset($t_filter_detail[1]) ) {
 			continue;
 		}
-		$t_filter = unserialize( $t_filter_detail[1] );
+		$t_filter = json_decode( $t_filter_detail[1], true );
 		$t_filter = filter_ensure_valid_filter( $t_filter );
 		$t_row['url'] = filter_get_url( $t_filter );
 		$t_overall_query_arr[$t_row['name']] = $t_row;
@@ -676,7 +648,7 @@ function mc_error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context
 
 	error_log( '[mantisconnect.php] Error Type: ' . $t_error_type . ',' . "\n" . 'Error Description: ' . $t_error_description . "\n" . 'Stack Trace:' . "\n" . $t_error_stack );
 
-	SoapActions::sendSoapFault( 'Server', 'Error Type: ' . $t_error_type . ',' . "\n" . 'Error Description: ' . $t_error_description );
+	throw new SoapFault( 'Server', 'Error Type: ' . $t_error_type . ',' . "\n" . 'Error Description: ' . $t_error_description );
 }
 
 /**

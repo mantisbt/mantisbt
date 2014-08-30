@@ -113,7 +113,7 @@ function print_config_value_as_string( $p_type, $p_value, $p_for_display = true 
 			echo $t_value;
 			return;
 		case CONFIG_TYPE_COMPLEX:
-			$t_value = @unserialize( $p_value );
+			$t_value = @json_decode( $p_value, true );
 			if( $t_value === false ) {
 				$t_corrupted = true;
 			}
@@ -184,6 +184,7 @@ if( $t_filter_save ) {
 } else {
 	# Retrieve the filter from the cookie if it exists
 	$t_cookie_string = gpc_get_cookie( $t_cookie_name, null );
+
 	if( null !== $t_cookie_string ) {
 		$t_cookie_contents = explode( ':', $t_cookie_string );
 
@@ -193,6 +194,13 @@ if( $t_filter_save ) {
 
 		if( $t_filter_project_value != META_FILTER_NONE && !project_exists( $t_filter_project_value ) ) {
 			$t_filter_project_value = ALL_PROJECTS;
+		}
+
+		if(    $t_filter_config_value != META_FILTER_NONE
+			&& !is_blank( $t_filter_config_value )
+			&& @config_get_global( $t_filter_config_value ) === null
+		) {
+			$t_filter_config_value = META_FILTER_NONE;
 		}
 	}
 }

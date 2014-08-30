@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Kusavica
  * @author Rudko
  * @author Wizzard
  */
@@ -48,6 +49,6 @@ $s_plugin_format_config = 'Nastavenie';
 $s_plugin_format_process_text = 'Textové Spracovanie';
 $s_plugin_format_process_text_warning_notice = 'Nevypínajte, ak naozaj neviete, čo robíte. Vo vypnutom stave hrozia útoky typu cross site scripting (XSS).';
 $s_plugin_format_process_urls = 'URL Spracovanie';
-$s_plugin_format_process_buglinks = 'MantisBT Odkazy (Problém/Poznámka o probléme)';
+$s_plugin_format_process_buglinks = 'MantisBT - interné odkazy (Problém a poznámka o probléme)';
 $s_plugin_format_enabled = 'Zapnuté';
 $s_plugin_format_disabled = 'Vypnuté';

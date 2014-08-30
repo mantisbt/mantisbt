@@ -251,7 +251,7 @@ function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
 
 	$t_user_profile_table = db_get_table( 'user_profile' );
 
-	$t_query = 'SELECT DISTINCT $c_field
+	$t_query = 'SELECT DISTINCT ' . $c_field . '
 				  FROM ' . $t_user_profile_table . '
 				  WHERE ( user_id=' . db_param() . ' ) OR ( user_id = 0 )
 				  ORDER BY ' . $c_field;

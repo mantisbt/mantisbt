@@ -42,6 +42,7 @@
  * @author Cwlin0416
  * @author Firesueprtom
  * @author Frankou
+ * @author LNDDYL
  * @author Mark85296341
  * @author Oapbtommy
  * @author Simon Shek
@@ -347,7 +348,7 @@ $s_sponsor_hide = '隱藏已解決及已付款';
 $s_sponsor_show = '顯示全部';
 $s_payment_updated = '已更新付款資訊。';
 $s_account_updated_msg = '你的帳號已經成功更新...';
-$s_email_updated = '已成功更新 E-mail 地址';
+$s_email_updated = '已成功更新 E-mail 位址';
 $s_realname_duplicated = '已有其他使用者使用這個真實姓名';
 $s_realname_updated = '真實姓名已成功更新';
 $s_password_updated = '密碼已成功更新';
@@ -1083,7 +1084,7 @@ $s_sponsor_issue = '贊助問題';
 $s_assign_sponsored_issue = '分配被贊助的問題';
 $s_handle_sponsored_issue = '處理被贊助的問題';
 $s_others = '其他';
-$s_see_email_addresses_of_other_users = '查看其他使用者的 E-Mail 位址';
+$s_see_email_addresses_of_other_users = '檢視其他使用者的 E-Mail 位址';
 $s_send_reminders = '傳送提醒訊息';
 $s_receive_reminders = '接收提醒訊息';
 $s_add_profiles = '新增基本資料';
@@ -1188,6 +1189,20 @@ $s_month_september = '9月';
 $s_month_october = '10月';
 $s_month_november = '11月';
 $s_month_december = '12月';
+$s_timeline_issue_created = '<span class="username">%1s</span> 已建立問題 <span class="issue_id">%2s</span>';
+$s_timeline_issue_note_created = '<span class="username">%1s</span> 已說明問題 <span class="issue_id">%2s</span>';
+$s_timeline_issue_monitor = '<span class="username">%1s</span> 正在監視問題 <span class="issue_id">%2s</span>';
+$s_timeline_issue_unmonitor = '<span class="username">%1s</span> 停止監視問題 <span class="issue_id">%2s</span>';
+$s_timeline_issue_tagged = '<span class="username">%1s</span> 標記問題 <span class="issue_id">%2s</span> 為 <span class="tag_name">%3s</span>';
+$s_timeline_issue_untagged = '<span class="username">%1s</span> 已移除 <span class="tag_name">%3s</span> 自問題 <span class="issue_id">%2s</span>';
+$s_timeline_issue_resolved = '<span class="username">%1s</span> 已解決問題 <span class="issue_id">%2s</span>';
+$s_timeline_issue_closed = '<span class="username">%1s</span> 已關閉問題 <span class="issue_id">%2s</span>';
+$s_timeline_issue_reopened = '<span class="username">%1s</span> 重新開啟問題 <span class="issue_id">%2s</span>';
+$s_timeline_issue_assigned = '<span class="username">%1s</span> 指派問題 <span class="issue_id">%2s</span> 給 <span class="username">%3s</span>';
+$s_timeline_issue_assigned_to_self = '<span class="username">%1s</span> 已處理問題 <span class="issue_id">%2s</span>';
+$s_timeline_no_activity = '在時間範圍內沒有任合活動。';
+$s_timeline_title = '時間軸';
+$s_timeline_more = '更多事件...';
 $s_missing_error_string = '缺少錯誤字串：%1$s';
 $MANTIS_ERROR[ERROR_GENERIC] = '執行此動作時發生錯誤。 請將此錯誤訊息回報給您的系統管理員。';
 $MANTIS_ERROR[ERROR_SQL] = '發生 SQL 錯誤。';
@@ -1207,7 +1222,7 @@ $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = '未設定參數 "%1$s"。';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = '設定選項 "%1$s" 必須設定在 config_inc.php，不可設定在資料庫。';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = '查無字串 "%1$s"。';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = '查無說明。';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = '查無專案 \"%1$d\"。';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = '查無專案 \"%1$s\"。';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = '查無資料庫欄位 \'%1$s\'。';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = '問題處理者沒有足夠的權限處理目前狀態的問題。';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = '專案名稱已經存在，請返回並輸入其他名稱。';
@@ -1292,12 +1307,16 @@ $MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = '此問題並未附加該標籤。';
 $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = '此問題已經附加該標籤。';
 $MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = '查無相關資訊。';
 $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = '事件 "%1$s" 尚未被宣告。';
-$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = '此套件未向 MantisBT 註冊。';
-$MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = '套件已安裝。';
-$MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = '查無套件頁面。';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = '套件 "%1$s" 未向 MantisBT 註冊。';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_LOADED] = '套件 "%1$s" 未載入，請確認已滿足其相依套件。';
+$MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = '套件 "%1$s" 已安裝。';
+$MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = '套件 "%1$s" 中查無頁面 "%2$s"。';
+$MANTIS_ERROR[ERROR_PLUGIN_FILE_NOT_FOUND] = '套件 "%1$s" 中查無檔案 "%2$s"。';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = '外掛程式安裝失敗：%1$s 。';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = '升級套件資料庫結構失敗於區塊 #%1$s。';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = '您必須要先升級 "%1$s" 外掛程式，才能存取此頁面。';
+$MANTIS_ERROR[ERROR_PLUGIN_INVALID_PAGE] = '指定的套件頁面 "%1$s" 格式無效。 格式必須符合 "Plugin[/path/to]/page"。';
+$MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = '指定的套件檔案 "%1$s" 格式無效。 格式必須符合 "Plugin[/path/to]/file[.ext]"。';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = '在執行 "%2$s" 套件時發生了未知的錯誤 "%1$s"。';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = '欄位 "%1$s" 內包含重複的資料 "%2$s"。';
 $MANTIS_ERROR[ERROR_COLUMNS_INVALID] = '欄位 "%1$s" 中含有無效的欄位值 "%2$s"。';

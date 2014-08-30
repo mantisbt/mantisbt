@@ -118,7 +118,7 @@ function html_rss_link() {
 	global $g_rss_feed_url;
 
 	if( $g_rss_feed_url !== null ) {
-		echo '<link rel="alternate" type="application/rss+xml" title="RSS" href="' . string_attribute( $g_rss_feed_url ) . "\" />\n";
+		echo '<link rel="alternate" type="application/rss+xml" title="RSS" href="' . string_attribute( $g_rss_feed_url ) . '" />' . "\n";
 	}
 }
 
@@ -244,7 +244,6 @@ function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
 
 	$t_url = htmlspecialchars( $t_url );
 
-	echo "\t<meta http-equiv=\"Refresh\" content=\"$p_time;URL=$t_url\" />\n";
 	echo "\t" . '<meta http-equiv="Refresh" content="' . $p_time . ';URL=' . $t_url . '" />' . "\n";
 
 	return true;
@@ -823,14 +822,14 @@ function html_button( $p_action, $p_button_text, array $p_fields = array(), $p_m
 	$p_action = urlencode( $p_action );
 	$p_button_text = string_attribute( $p_button_text );
 
-	if( utf8_strtolower( $p_method ) == 'get' ) {
+	if( strtolower( $p_method ) == 'get' ) {
 		$t_method = 'get';
 	} else {
 		$t_method = 'post';
 	}
 
 	echo '<form method="' . $t_method . '" action="' . $p_action . '" class="form-inline">' . "\n";
-	echo "\t<fieldset>";
+	echo "\t" . '<fieldset>';
 	# Add a CSRF token only when the form is being sent via the POST method
 	if( $t_method == 'post' ) {
 		echo form_security_field( $t_form_name[0] );
@@ -844,8 +843,8 @@ function html_button( $p_action, $p_button_text, array $p_fields = array(), $p_m
 	}
 
 	echo "\t\t" . '<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="' . $p_button_text . '" />' . "\n";
-	echo "\t</fieldset>";
-	echo "</form>\n";
+	echo "\t" . '</fieldset>';
+	echo '</form>' . "\n";
 }
 
 /**

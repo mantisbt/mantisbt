@@ -34,53 +34,54 @@ layout_page_header();
 layout_page_begin( 'summary_page.php' );
 
 print_summary_menu( 'summary_page.php' );
-
 echo '<br />';
+
 print_summary_submenu();
 $t_width = plugin_config_get( 'window_width' );
 $t_graph_width = (int)( ( $t_width - 50 ) * 0.6 );
 
 # gather the data for the graphs
 $t_metrics = enum_bug_group( lang_get( 'priority_enum_string' ), 'priority' );
-$t_token = token_set( TOKEN_GRAPH, serialize( $t_metrics ) );
+$t_token = token_set( TOKEN_GRAPH, json_encode( $t_metrics ) );
 
 ?>
 
-    <div class="col-md-12 col-xs-12">
-        <div class="space-10"></div>
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
 
-        <div class="widget-box widget-color-blue2">
-            <div class="widget-header widget-header-small">
-                <h4 class="widget-title lighter">
-                    <i class="ace-icon fa fa-bar-chart-o"></i>
-                    <?php echo plugin_lang_get( 'graph_imp_priority_title' ) ?>
-                </h4>
-            </div>
+<div class="widget-box widget-color-blue2">
+<div class="widget-header widget-header-small">
+	<h4 class="widget-title lighter">
+		<i class="ace-icon fa fa-bar-chart-o"></i>
+		<?php echo plugin_lang_get( 'graph_imp_priority_title' ) ?>
+	</h4>
+</div>
 
-            <div class="widget-body">
-                <div class="widget-main no-padding">
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <tr>
-                                <td class="center">
-                                    <img src="<?php echo plugin_page( 'summary_graph_bypriority.php' ) ?>&amp;width=<?php echo $t_graph_width?>" alt="" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="center">
-                                    <img src="<?php echo plugin_page( 'summary_graph_bypriority_pct.php' ) ?>&amp;width=<?php echo $t_graph_width?>" alt="" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="center">
-                                    <img src="<?php echo plugin_page( 'summary_graph_bypriority_mix.php' ) ?>&amp;width=<?php echo $t_graph_width?>" alt="" />
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="widget-body">
+	<div class="widget-main no-padding">
+		<div class="table-responsive">
+			<table class="table table-bordered">
+				<tr>
+					<td class="center">
+						<img src="<?php echo plugin_page( 'summary_graph_bypriority.php' ) ?>&amp;width=<?php echo $t_graph_width?>" alt="" />
+					</td>
+				</tr>
+				<tr>
+					<td class="center">
+						<img src="<?php echo plugin_page( 'summary_graph_bypriority_pct.php' ) ?>&amp;width=<?php echo $t_graph_width?>" alt="" />
+					</td>
+				</tr>
+				<tr>
+					<td class="center">
+						<img src="<?php echo plugin_page( 'summary_graph_bypriority_mix.php' ) ?>&amp;width=<?php echo $t_graph_width?>" alt="" />
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+
 <?php
 layout_page_end();

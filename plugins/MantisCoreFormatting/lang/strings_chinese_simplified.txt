@@ -49,5 +49,6 @@ $s_plugin_format_process_text = '文本处理';
 $s_plugin_format_process_text_warning_notice = '要关闭，除非你真的知道你在做什么。在断开状态跨站点脚本 (XSS) 攻击的可能。';
 $s_plugin_format_process_urls = 'URL 处理';
 $s_plugin_format_process_buglinks = 'MantisBT内部链接（问题与问题注释）';
+$s_plugin_format_process_buglinks_info = '您将标签<em>Issue</em>配置为“<literal>%s</literal>”，并将标签<em>Issue Note</em>配置为“<literal>%s</literal>”';
 $s_plugin_format_enabled = '开';
 $s_plugin_format_disabled = '关';

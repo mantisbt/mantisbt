@@ -205,10 +205,10 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
 	switch( $p_custom_field_type ) {
 		case CUSTOM_FIELD_TYPE_MULTILIST:
 		case CUSTOM_FIELD_TYPE_CHECKBOX:
-		    # ensure that the default is an array, if set
-		    if( ( $p_default !== null ) && !is_array( $p_default ) ) {
-		        $p_default = array( $p_default );
-		    }
+			# ensure that the default is an array, if set
+			if( ( $p_default !== null ) && !is_array( $p_default ) ) {
+				$p_default = array( $p_default );
+			}
 			$t_values = gpc_get_string_array( $p_var_name, $p_default );
 			if( is_array( $t_values ) ) {
 				return implode( '|', $t_values );
@@ -245,11 +245,11 @@ function gpc_get_custom_field( $p_var_name, $p_custom_field_type, $p_default = n
  */
 function gpc_get_string_array( $p_var_name, array $p_default = null ) {
 	# Don't pass along a default unless one was given to us
-	#  otherwise we prevent an error being triggered
+	# otherwise we prevent an error being triggered
 	$t_args = func_get_args();
 	$t_result = call_user_func_array( 'gpc_get', $t_args );
 
-	# If we the result isn't the default we were given or an array, error
+	# If the result isn't the default we were given or an array, error
 	if( !((( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
 		error_parameters( $p_var_name );
 		trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR );
@@ -276,11 +276,11 @@ function gpc_get_string_array( $p_var_name, array $p_default = null ) {
  */
 function gpc_get_int_array( $p_var_name, array $p_default = null ) {
 	# Don't pass along a default unless one was given to us
-	#  otherwise we prevent an error being triggered
+	# otherwise we prevent an error being triggered
 	$t_args = func_get_args();
 	$t_result = call_user_func_array( 'gpc_get', $t_args );
 
-	# If we the result isn't the default we were given or an array, error
+	# If the result isn't the default we were given or an array, error
 	if( !((( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
 		error_parameters( $p_var_name );
 		trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR );
@@ -303,11 +303,11 @@ function gpc_get_int_array( $p_var_name, array $p_default = null ) {
  */
 function gpc_get_bool_array( $p_var_name, array $p_default = null ) {
 	# Don't pass along a default unless one was given to us
-	#  otherwise we prevent an error being triggered
+	# otherwise we prevent an error being triggered
 	$t_args = func_get_args();
 	$t_result = call_user_func_array( 'gpc_get', $t_args );
 
-	# If we the result isn't the default we were given or an array, error
+	# If the result isn't the default we were given or an array, error
 	if( !((( 1 < func_num_args() ) && ( $t_result === $p_default ) ) || is_array( $t_result ) ) ) {
 		error_parameters( $p_var_name );
 		trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR );
