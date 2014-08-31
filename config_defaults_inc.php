@@ -3089,14 +3089,6 @@ $g_cookie_path = '/';
 $g_cookie_domain = '';
 
 /**
- * Version of the view_all_page cookie
- * It is not expected for the user to need to change this setting
- * @see $g_view_all_cookie
- * @global string $g_cookie_version
- */
-$g_cookie_version = 'v9';
-
-/**
  * Prefix for all MantisBT cookies
  * This should be an identifier which does not include spaces or periods,
  * and should be unique per MantisBT installation, especially if
@@ -4194,7 +4186,7 @@ $g_show_log_threshold = ADMINISTRATOR;
 $g_global_settings = array(
 	'global_settings', 'admin_checks', 'allow_signup', 'allow_anonymous_login',
 	'anonymous_account', 'compress_html', 'content_expire', 'allow_permanent_cookie',
-	'cookie_time_length', 'cookie_path', 'cookie_domain', 'cookie_version',
+	'cookie_time_length', 'cookie_path', 'cookie_domain',
 	'cookie_prefix', 'string_cookie', 'project_cookie', 'view_all_cookie',
 	'manage_config_cookie', 'manage_user_cookie', 'logout_cookie',
 	'bug_list_cookie', 'crypto_master_salt', 'custom_headers',

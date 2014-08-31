@@ -726,7 +726,7 @@ $g_upgrade[183] = array( 'UpdateFunction', 'correct_multiselect_custom_fields_db
 
 # Release marker: 1.2.1 - 1.2.15
 
-$g_upgrade[184] = array( 'UpdateFunction', 'stored_filter_migrate' );
+$g_upgrade[184] = array( 'UpdateFunction', 'do_nothing' );
 $g_upgrade[185] = array( 'AddColumnSQL', array( db_get_table( 'custom_field_string' ), '
 	text		XL  			NULL DEFAULT NULL ' ) );
 $g_upgrade[186] = array( 'UpdateFunction', 'update_history_long_custom_fields' );
@@ -738,6 +738,6 @@ $g_upgrade[191] = array( 'CreateIndexSQL', array('idx_project_hierarchy', db_get
 $g_upgrade[192] = array( 'CreateIndexSQL', array('idx_bug_history_date_modified', db_get_table( 'bug_history' ), 'date_modified' ) );
 $g_upgrade[193] = array( 'UpdateFunction', 'check_config_serialization', array() );
 $g_upgrade[194] = array( 'UpdateFunction', 'check_token_serialization', array() );
-$g_upgrade[195] = array( 'UpdateFunction', 'check_filters_serialization', array() );
+$g_upgrade[195] = array( 'UpdateFunction', 'stored_filter_migrate', array() );
 
 # Release marker: 1.3.0

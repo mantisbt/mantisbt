@@ -2630,21 +2630,6 @@ $g_main_menu_custom_options = array(
                 </listitem>
             </varlistentry>
             <varlistentry>
-                <term>$g_cookie_version</term>
-                <listitem>
-					<para>Version of the view_all_page cookie.</para>
-					<para>This is used as a prefix for cookies that should
-						be expired when the code is changed in a certain way.
-						The developers would increase this version when necessary,
-						which in effect will cause the creation of new cookies
-						that are compatible with the new code.
-					</para>
-					<para>It is not expected for the user to need to change this
-                        setting.
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
                 <term>$g_cookie_prefix</term>
                 <listitem>
 					<para>Prefix for all MantisBT cookies</para>
