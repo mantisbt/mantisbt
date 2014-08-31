@@ -286,7 +286,6 @@ if( db_is_mysql() ) {
 		'9.2' => '2017-09-30',
 		'9.1' => '2016-09-30',
 		'9.0' => '2015-09-30',
-		'8.4' => '2014-07-31',
 	);
 	$t_support_url = 'http://www.postgresql.org/support/versioning/';
 
