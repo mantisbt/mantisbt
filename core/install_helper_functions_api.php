@@ -491,9 +491,8 @@ function install_update_history_long_custom_fields() {
 	$t_query = 'SELECT name FROM {custom_field}';
 	$t_result = db_query_bound( $t_query );
 	while( $t_field = db_fetch_array( $t_result ) ) {
-		$t_name = $t_field['name'];
-		if( utf8_strlen( $t_name ) > 32 ) {
-			$t_custom_fields[utf8_substr( $t_name, 0, 32 )] = $t_name;
+		if( utf8_strlen( $t_field['name'] ) > 32 ) {
+			$t_custom_fields[utf8_substr( $t_field['name'], 0, 32 )] = $t_field['name'];
 		}
 	}
 	if( !isset( $t_custom_fields ) ) {
@@ -528,12 +527,12 @@ function install_update_history_long_custom_fields() {
 	# if a matching custom field exists
 	while( $t_field = db_fetch_array( $t_result ) ) {
 		# If field name's length is 32, then likely it was truncated so we try to match
-		if( utf8_strlen( $t_field[0] ) == 32 && array_key_exists( $t_field[0], $t_custom_fields ) ) {
+		if( utf8_strlen( $t_field['field_name'] ) == 32 && array_key_exists( $t_field['field_name'], $t_custom_fields ) ) {
 			# Match found, update all history records with this field name
 			$t_update_query = 'UPDATE {bug_history}
 				SET field_name = ' . db_param() . '
 				WHERE field_name = ' . db_param();
-			db_query_bound( $t_update_query, array( $t_custom_fields[$t_field[0]], $t_field[0] ) );
+			db_query_bound( $t_update_query, array( $t_custom_fields[$t_field['field_name']], $t_field['field_name'] ) );
 		}
 	}
 
