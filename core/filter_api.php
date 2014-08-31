@@ -471,12 +471,12 @@ function filter_offset( $p_page_number, $p_per_page ) {
 function filter_ensure_valid_filter( array $p_filter_arr ) {
 	# extend current filter to add information passed via POST
 	if( !isset( $p_filter_arr['_version'] ) ) {
-		$p_filter_arr['_version'] = config_get( 'cookie_version' );
+		$p_filter_arr['_version'] = FILTER_VERSION;
 	}
 	$t_cookie_vers = (int)substr( $p_filter_arr['_version'], 1 );
-	if( substr( config_get( 'cookie_version' ), 1 ) > $t_cookie_vers ) {
+	if( substr( FILTER_VERSION, 1 ) > $t_cookie_vers ) {
 		# if the version is old, update it
-		$p_filter_arr['_version'] = config_get( 'cookie_version' );
+		$p_filter_arr['_version'] = FILTER_VERSION;
 	}
 	if( !isset( $p_filter_arr['_view_type'] ) ) {
 		$p_filter_arr['_view_type'] = gpc_get_string( 'view_type', 'simple' );
@@ -830,7 +830,7 @@ function filter_deserialize( $p_serialized_filter ) {
 	} else {
 		return false;
 	}
-	if( $t_filter_array['_version'] != config_get( 'cookie_version' ) ) {
+	if( $t_filter_array['_version'] != FILTER_VERSION ) {
 		# if the version is not new enough, update it using defaults
 		return filter_ensure_valid_filter( $t_filter_array );
 	}
@@ -865,7 +865,7 @@ function filter_is_cookie_valid() {
 	} else {
 		return false;
 	}
-	if( $t_filter_cookie_arr['_version'] != config_get( 'cookie_version' ) ) {
+	if( $t_filter_cookie_arr['_version'] != FILTER_VERSION ) {
 		return false;
 	}
 

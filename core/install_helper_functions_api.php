@@ -397,6 +397,23 @@ function install_correct_multiselect_custom_fields_db_format() {
  *	field names.  This updates any filters stored in the database to use the correct
  *	keys. The 'and_not_assigned' field is no longer used as it is replaced by the meta
  *	filter None.  This removes it from all filters.
+ *
+ * Filter Versions:
+ * v1,2,3,4 - Legacy Filters that can not be migrated (not used since 2004)
+ * v5 - https://github.com/mantisbt/mantisbt/commit/eb1b93057e470e40727bc75a85f436ab35b84a74
+ * v6 - https://github.com/mantisbt/mantisbt/commit/de2e2931f993c3b6fc82781eff051f9037fdc6b5
+ * v7 - https://github.com/mantisbt/mantisbt/commit/0450981225647544083d21576dfb2bae044b3e98
+ * v8 - https://github.com/mantisbt/mantisbt/commit/5cb368796528bcb35aa3935bf431b08a29cb1e90
+ * v9 - https://github.com/mantisbt/mantisbt/commit/9dfc5fb6edb6da1e0324ceac3a27a727f2b23ba7
+ *
+ * Filters are stored within the database as vX#FILTER, where vX is a raw version string and
+ * FILTER is a serialized string in php serialization or json format.
+ *
+ * This function is used to upgrade any previous filters to the latest version, and should be
+ * updated when bouncing filter version number. Schema.php should be updated to call do_nothing
+ * for the existing filter schema update and the updated version of this function called in a
+ * new schema update step
+ *
  * @return integer
  */
 function install_stored_filter_migrate() {
@@ -405,9 +422,9 @@ function install_stored_filter_migrate() {
 
 	require_api( 'filter_api.php' );
 
-	$t_cookie_version = config_get( 'cookie_version' );
-
 	# convert filters to use the same value for the filter key and the form field
+	# Note: This list should only be updated for basic renames i.e. data + type of data remain the same
+	# before and after the rename.
 	$t_filter_fields['show_category'] = 'category_id';
 	$t_filter_fields['show_severity'] = 'severity';
 	$t_filter_fields['show_status'] = 'status';
@@ -425,27 +442,52 @@ function install_stored_filter_migrate() {
 	$t_query = 'SELECT * FROM ' . $t_filters_table;
 	$t_result = db_query_bound( $t_query );
 	while( $t_row = db_fetch_array( $t_result ) ) {
+		# Grab Filter Version and data into $t_setting_arr
 		$t_setting_arr = explode( '#', $t_row['filter_string'], 2 );
 
-		if(( $t_setting_arr[0] == 'v1' ) || ( $t_setting_arr[0] == 'v2' ) || ( $t_setting_arr[0] == 'v3' ) || ( $t_setting_arr[0] == 'v4' ) ) {
-			$t_delete_query = 'DELETE FROM ' . $t_filters_table . ' WHERE id=' . db_param();
-			$t_delete_result = db_query_bound( $t_delete_query, array( $t_row['id'] ) );
-			continue;
+		switch( $t_setting_arr[0] ) {
+			# Remove any non-upgradeable filters i.e. versions 1 to 4.
+			case 'v1':
+			case 'v2':
+			case 'v3':
+			case 'v4':
+				$t_delete_query = 'DELETE FROM ' . $t_filters_table . ' WHERE id=' . db_param();
+				$t_delete_result = db_query_bound( $t_delete_query, array( $t_row['id'] ) );
+				continue;
 		}
 
 		if( isset( $t_setting_arr[1] ) ) {
-			$t_filter_arr = unserialize( $t_setting_arr[1] );
+			switch( $t_setting_arr[0] ) {
+				# Filter versions 5 to 8 are stored in php serialized format
+				case 'v5':
+				case 'v6':
+				case 'v7':
+				case 'v8':
+					$t_filter_arr = unserialize( $t_setting_arr[1] );
+					break;
+				default:
+					$t_filter_arr = json_decode( $t_setting_arr[1] );
+			}
 		} else {
 			$t_delete_query = 'DELETE FROM ' . $t_filters_table . ' WHERE id=' . db_param();
 			$t_delete_result = db_query_bound( $t_delete_query, array( $t_row['id'] ) );
 			continue;
 		}
 
-		if( $t_filter_arr['_version'] != $t_cookie_version ) {
-			# if the version is not new enough, update it using defaults
+		# serialized or json encoded data in filter table is invalid - abort upgrade as this should not be possible
+		# so we should investigate and fix underlying data issue first if necessary
+		if( $t_filter_arr === false ) {
+			return 1; # Fatal: invalid data found in filters table
+		}
+
+		# Ff the filter version does not match the latest version, pass it through filter_ensure_valid_filter to do any updates
+		# This will set default values for filter fields
+		if( $t_filter_arr['_version'] != FILTER_VERSION ) {
 			$t_filter_arr = filter_ensure_valid_filter( $t_filter_arr );
 		}
 
+		# For any fields that are being renamed, we can now perform the rename and migrate existing data.
+		# We unset the old field when done to ensure the filter contains only current optimised data.
 		foreach( $t_filter_fields AS $t_old=>$t_new ) {
 			if( isset( $t_filter_arr[$t_old] ) ) {
 				$t_value = $t_filter_arr[$t_old];
@@ -456,8 +498,15 @@ function install_stored_filter_migrate() {
 			}
 		}
 
+		# We now have a valid filter in with updated version number (version is updated by filter_ensure_valid_filter)
+		# Check that this is the case, to before storing the updated filter values.
+		# Abort if the filter is invalid as this should not be possible
+		if( $t_filter_arr['_version'] != FILTER_VERSION ) {
+			return 1; # Fatal: invalid data found in filters table
+		}
+
 		$t_filter_serialized = json_encode( $t_filter_arr );
-		$t_filter_string = $t_cookie_version . '#' . $t_filter_serialized;
+		$t_filter_string = FILTER_VERSION . '#' . $t_filter_serialized;
 
 		$t_update_query = 'UPDATE ' . $t_filters_table . ' SET filter_string=' . db_param() . ' WHERE id=' . db_param();
 		$t_update_result = db_query_bound( $t_update_query, array( $t_filter_string, $t_row['id'] ) );
@@ -513,12 +562,14 @@ function install_update_history_long_custom_fields() {
 	}
 
 	# Build list of standard fields to filter out from history
+	# This is as per result of columns_get_standard() at the time of this schema update
 	# Fields mapping: category_id is actually logged in history as 'category'
-	$t_standard_fields = array_replace(
-		columns_get_standard( false ), # all columns
-		array( 'category_id' ),
-		array('category' )
-	);
+	$t_standard_fields = array( 'id', 'project_id', 'reporter_id', 'handler_id', 'priority', 'severity', 'eta', 'os',
+								'reproducibility', 'status', 'resolution', 'projection', 'category', 'date_submitted',
+								'last_updated', 'os_build', 'platform', 'version', 'fixed_in_version', 'target_version',
+								'build', 'view_state', 'summary', 'sponsorship_total', 'due_date', 'description',
+								'steps_to_reproduce', 'additional_information', 'attachment_count', 'bugnotes_count',
+								'selection', 'edit', 'overdue' );
 	$t_field_list = '';
 	foreach( $t_standard_fields as $t_field ) {
 		$t_field_list .= '\'' . $t_field . '\', ';
@@ -613,6 +664,9 @@ function install_check_config_serialization() {
 		db_query_bound( $t_query, array( $t_json_config, $config_id, $project_id, $user_id ) );
 	}
 
+	# flush config here as we've changed the format of the configuration table
+	config_flush_cache();
+
 	# Return 2 because that's what ADOdb/DataDict does when things happen properly
 	return 2;
 }
@@ -638,40 +692,6 @@ function install_check_token_serialization() {
 
 		$t_query = 'UPDATE {tokens} SET value=' .db_param() . ' WHERE id=' .db_param();
 		db_query_bound( $t_query, array( $t_json_token, $t_id ) );
-	}
-
-	# Return 2 because that's what ADOdb/DataDict does when things happen properly
-	return 2;
-}
-
-
-/**
- * Schema update to migrate filters  data from php serialization to json.
- * This ensures it is not possible to execute code during un-serialization
- */
-function install_check_filters_serialization() {
-	$t_filters_table = db_get_table( 'filters' );
-	$query = 'SELECT * FROM ' . $t_filters_table;
-
-	$t_result = db_query_bound( $query );
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_id = $t_row['id'];
-		$t_value = $t_row['filter_string'];
-
-		$t_setting_arr = explode( '#', $t_value, 2 );
-
-		$t_filter = unserialize( $t_setting_arr[1] );
-
-		if( $t_filter === false ) {
-			return 1; # Fatal: invalid data found in tokens table
-		}
-		$t_filter['_version'] = 'v9'; // bump version
-
-		$t_json_filter = json_encode( $t_filter, true );
-		$t_filter_string = 'v9' . '#' . $t_json_filter;
-
-		$t_query = 'UPDATE ' . $t_filters_table . ' SET filter_string=' .db_param() . ' WHERE id=' .db_param();
-		db_query_bound( $t_query, array( $t_filter_string, $t_id ) );
 	}
 
 	# Return 2 because that's what ADOdb/DataDict does when things happen properly

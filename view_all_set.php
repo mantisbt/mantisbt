@@ -436,7 +436,7 @@ if( !is_blank( $t_view_all_cookie ) ) {
 	$f_type = 1;
 }
 
-$t_cookie_version = config_get( 'cookie_version' );
+$t_cookie_version = FILTER_VERSION;
 $t_default_show_changed = config_get( 'default_show_changed' );
 
 # Clear the source query id.  Since we have entered new filter criteria.
