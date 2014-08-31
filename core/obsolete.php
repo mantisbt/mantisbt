@@ -187,3 +187,4 @@ config_obsolete( 'mc_version_when_not_found', 'webservice_version_when_not_found
 env_obsolete( 'MANTIS_CONFIG', 'MANTIS_CONFIG_FOLDER' );
 config_obsolete( 'colour_project' );
 config_obsolete( 'colour_global' );
+config_obsolete( 'content_expire' );

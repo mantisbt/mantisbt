@@ -1084,12 +1084,6 @@ $g_cookie_time_length = 30000000;
 $g_allow_permanent_cookie = ON;
 
 /**
- * minutes to wait before document is stale (in minutes)
- * @global int $g_content_expire
- */
-$g_content_expire = 0;
-
-/**
  * The time (in seconds) to allow for page execution during long processes
  *  such as upgrading your database.
  * The default value of 0 indicates that the page should be allowed to
@@ -4173,7 +4167,7 @@ $g_show_log_threshold = ADMINISTRATOR;
  */
 $g_global_settings = array(
 	'global_settings', 'admin_checks', 'allow_signup', 'allow_anonymous_login',
-	'anonymous_account', 'compress_html', 'content_expire', 'allow_permanent_cookie',
+	'anonymous_account', 'compress_html', 'allow_permanent_cookie',
 	'cookie_time_length', 'cookie_path', 'cookie_domain',
 	'cookie_prefix', 'string_cookie', 'project_cookie', 'view_all_cookie',
 	'manage_config_cookie', 'manage_user_cookie', 'logout_cookie',

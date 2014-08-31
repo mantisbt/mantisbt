@@ -1073,14 +1073,6 @@ $g_language_choices_arr = array( 'english', 'french', 'german' );
                 </listitem>
             </varlistentry>
             <varlistentry>
-                <term>$g_content_expire</term>
-                <listitem>
-                    <para>Time to wait before document is stale (in minutes). This is
-                        used in meta_inc.php. Default is 0 (expires right away).
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
                 <term>$g_long_process_timeout</term>
                 <listitem>
                     <para>This timeout is used by pages which does time consuming
