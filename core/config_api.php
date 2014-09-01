@@ -135,8 +135,7 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 			# @@ debug @@ echo 'u= '; var_dump($t_users);
 
 			if( !$g_cache_filled ) {
-				$t_config_table = db_get_table( 'config' );
-				$t_query = 'SELECT config_id, user_id, project_id, type, value, access_reqd FROM ' . $t_config_table;
+				$t_query = 'SELECT config_id, user_id, project_id, type, value, access_reqd FROM {config}';
 				$t_result = db_query_bound( $t_query );
 				while( false <> ( $t_row = db_fetch_array( $t_result ) ) ) {
 					$t_config = $t_row['config_id'];

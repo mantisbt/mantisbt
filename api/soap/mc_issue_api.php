@@ -563,9 +563,7 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 		return mci_soap_fault_login_failed();
 	}
 
-	$t_bug_table = db_get_table( 'bug' );
-
-	$t_query = 'SELECT id FROM ' . $t_bug_table . ' WHERE summary = ' . db_param();
+	$t_query = 'SELECT id FROM {bug} WHERE summary = ' . db_param();
 
 	$t_result = db_query_bound( $t_query, array( $p_summary ), 1 );
 

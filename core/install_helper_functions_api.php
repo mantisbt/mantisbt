@@ -165,17 +165,13 @@ function install_set_log_queries( $p_new_state = OFF ) {
  * @return integer
  */
 function install_category_migrate() {
-	$t_bug_table = db_get_table( 'bug' );
-	$t_category_table = db_get_table( 'category' );
-	$t_project_category_table = db_get_table( 'project_category' );
-
 	# Disable query logging even if enabled in config, due to possibility of mass spam
 	$t_log_queries = install_set_log_queries();
 
-	$t_query = 'SELECT project_id, category, user_id FROM ' . $t_project_category_table . ' ORDER BY project_id, category';
+	$t_query = 'SELECT project_id, category, user_id FROM {project_category} ORDER BY project_id, category';
 	$t_category_result = db_query_bound( $t_query );
 
-	$t_query = 'SELECT project_id, category FROM ' . $t_bug_table . ' ORDER BY project_id, category';
+	$t_query = 'SELECT project_id, category FROM {bug} ORDER BY project_id, category';
 	$t_bug_result = db_query_bound( $t_query );
 
 	$t_data = array();
@@ -203,7 +199,7 @@ function install_category_migrate() {
 		foreach( $t_categories as $t_name => $t_user_id ) {
 			$t_lower_name = utf8_strtolower( trim( $t_name ) );
 			if( !isset( $t_inserted[$t_lower_name] ) ) {
-				$t_query = 'INSERT INTO ' . $t_category_table . ' ( name, project_id, user_id ) VALUES ( ' .
+				$t_query = 'INSERT INTO {category} ( name, project_id, user_id ) VALUES ( ' .
 					db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 				db_query_bound( $t_query, array( $t_name, $t_project_id, $t_user_id ) );
 				$t_category_id = db_insert_id( $t_category_table );
@@ -212,7 +208,7 @@ function install_category_migrate() {
 				$t_category_id = $t_inserted[$t_lower_name];
 			}
 
-			$t_query = 'UPDATE ' . $t_bug_table . ' SET category_id=' . db_param() . '
+			$t_query = 'UPDATE {bug} SET category_id=' . db_param() . '
 						WHERE project_id=' . db_param() . ' AND category=' . db_param();
 			db_query_bound( $t_query, array( $t_category_id, $t_project_id, $t_name ) );
 		}
@@ -341,13 +337,10 @@ function install_correct_multiselect_custom_fields_db_format() {
 	# Disable query logging even if enabled in config, due to possibility of mass spam
 	$t_log_queries = install_set_log_queries();
 
-	$t_value_table = db_get_table( 'custom_field_string' );
-	$t_field_table = db_get_table( 'custom_field' );
-
 	# Ensure multilist and checkbox custom field values have a vertical pipe |
 	# as a prefix and suffix.
-	$t_query = 'SELECT v.field_id, v.bug_id, v.value from ' . $t_value_table . ' v
-		LEFT JOIN ' . $t_field_table . ' c
+	$t_query = 'SELECT v.field_id, v.bug_id, v.value from {custom_field_string} v
+		LEFT JOIN {custom_field} c
 		ON v.field_id = c.id
 		WHERE (c.type = ' . CUSTOM_FIELD_TYPE_MULTILIST . ' OR c.type = ' . CUSTOM_FIELD_TYPE_CHECKBOX . ")
 			AND v.value != ''
@@ -358,7 +351,7 @@ function install_correct_multiselect_custom_fields_db_format() {
 		$c_field_id = (int)$t_row['field_id'];
 		$c_bug_id = (int)$t_row['bug_id'];
 		$c_value = '|' . rtrim( ltrim( $t_row['value'], '|' ), '|' ) . '|';
-		$t_update_query = 'UPDATE ' . $t_value_table . '
+		$t_update_query = 'UPDATE {custom_field_string}
 			SET value = \'' . $c_value . '\'
 			WHERE field_id = ' . $c_field_id . '
 				AND bug_id = ' . $c_bug_id;
@@ -366,8 +359,8 @@ function install_correct_multiselect_custom_fields_db_format() {
 	}
 
 	# Remove vertical pipe | prefix and suffix from radio custom field values.
-	$t_query = 'SELECT v.field_id, v.bug_id, v.value from ' . $t_value_table . ' v
-		LEFT JOIN ' . $t_field_table . ' c
+	$t_query = 'SELECT v.field_id, v.bug_id, v.value from {custom_field_string} v
+		LEFT JOIN {custom_field} c
 		ON v.field_id = c.id
 		WHERE c.type = ' . CUSTOM_FIELD_TYPE_RADIO . "
 			AND v.value != ''
@@ -378,7 +371,7 @@ function install_correct_multiselect_custom_fields_db_format() {
 		$c_field_id = (int)$t_row['field_id'];
 		$c_bug_id = (int)$t_row['bug_id'];
 		$c_value = rtrim( ltrim( $t_row['value'], '|' ), '|' );
-		$t_update_query = 'UPDATE ' . $t_value_table . '
+		$t_update_query = 'UPDATE {custom_field_string}
 			SET value = \'' . $c_value . '\'
 			WHERE field_id = ' . $c_field_id . '
 				AND bug_id = ' . $c_bug_id;
@@ -495,8 +488,7 @@ function install_update_history_long_custom_fields() {
 	$t_log_queries = install_set_log_queries();
 
 	# Build list of custom field names longer than 32 chars for reference
-	$t_custom_field_table = db_get_table( 'custom_field' );
-	$t_query = 'SELECT name FROM ' . $t_custom_field_table;
+	$t_query = 'SELECT name FROM {custom_field}';
 	$t_result = db_query_bound( $t_query );
 	while( $t_field = db_fetch_array( $t_result ) ) {
 		if( utf8_strlen( $t_field[0] ) > 32 ) {
@@ -525,9 +517,8 @@ function install_update_history_long_custom_fields() {
 	$t_field_list = rtrim( $t_field_list, ', ' );
 
 	# Get the list of custom fields from the history table
-	$t_history_table = db_get_table( 'bug_history' );
 	$t_query = 'SELECT DISTINCT field_name
-		FROM ' . $t_history_table . '
+		FROM {bug_history}
 		WHERE type = ' . NORMAL_TYPE . '
 		AND field_name NOT IN ( ' . $t_field_list . ' )';
 	$t_result = db_query_bound( $t_query );
@@ -538,7 +529,7 @@ function install_update_history_long_custom_fields() {
 		# If field name's length is 32, then likely it was truncated so we try to match
 		if( utf8_strlen( $t_field[0] ) == 32 && array_key_exists( $t_field[0], $t_custom_fields ) ) {
 			# Match found, update all history records with this field name
-			$t_update_query = 'UPDATE ' . $t_history_table . '
+			$t_update_query = 'UPDATE {bug_history}
 				SET field_name = ' . db_param() . '
 				WHERE field_name = ' . db_param();
 			db_query_bound( $t_update_query, array( $t_custom_fields[$t_field[0]], $t_field[0] ) );
@@ -590,8 +581,7 @@ function install_check_project_hierarchy() {
  * This ensures it is not possible to execute code during un-serialization
  */
 function install_check_config_serialization() {
-	$t_config_table = db_get_table( 'config' );
-	$query = 'SELECT * FROM ' . $t_config_table . ' WHERE type=3';
+	$query = 'SELECT * FROM {config} WHERE type=3';
 
 	$t_result = db_query_bound( $query );
 	while( $t_row = db_fetch_array( $t_result ) ) {
@@ -607,7 +597,7 @@ function install_check_config_serialization() {
 
 		$t_json_config = json_encode( $t_config );
 
-		$t_query = 'UPDATE ' . $t_config_table . ' SET value=' .db_param() . ' WHERE config_id=' .db_param() . ' AND project_id=' .db_param() . ' AND user_id=' .db_param();
+		$t_query = 'UPDATE {config} SET value=' .db_param() . ' WHERE config_id=' .db_param() . ' AND project_id=' .db_param() . ' AND user_id=' .db_param();
 		db_query_bound( $t_query, array( $t_json_config, $config_id, $project_id, $user_id ) );
 	}
 

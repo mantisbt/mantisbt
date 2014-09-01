@@ -110,14 +110,12 @@ function email_queue_add( EmailData $p_email_data ) {
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	$t_email_table = db_get_table( 'email' );
-
 	$c_email = $t_email_data->email;
 	$c_subject = $t_email_data->subject;
 	$c_body = $t_email_data->body;
 	$c_metadata = serialize( $t_email_data->metadata );
 
-	$t_query = 'INSERT INTO ' . $t_email_table . '
+	$t_query = 'INSERT INTO {email}
 				    ( email, subject, body, submitted, metadata)
 				  VALUES
 				    (' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
@@ -166,9 +164,7 @@ function email_queue_row_to_object( $p_row ) {
  * @return boolean|EmailData
  */
 function email_queue_get( $p_email_id ) {
-	$t_email_table = db_get_table( 'email' );
-
-	$t_query = 'SELECT * FROM ' . $t_email_table . ' WHERE email_id=' . db_param();
+	$t_query = 'SELECT * FROM {email} WHERE email_id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_email_id ) );
 
 	$t_row = db_fetch_array( $t_result );
@@ -182,9 +178,7 @@ function email_queue_get( $p_email_id ) {
  * @return void
  */
 function email_queue_delete( $p_email_id ) {
-	$t_email_table = db_get_table( 'email' );
-
-	$t_query = 'DELETE FROM ' . $t_email_table . ' WHERE email_id=' . db_param();
+	$t_query = 'DELETE FROM {email} WHERE email_id=' . db_param();
 	db_query_bound( $t_query, array( $p_email_id ) );
 
 	log_event( LOG_EMAIL, 'message #' . $p_email_id . ' deleted from queue' );
@@ -195,9 +189,7 @@ function email_queue_delete( $p_email_id ) {
  * @return array
  */
 function email_queue_get_ids() {
-	$t_email_table = db_get_table( 'email' );
-
-	$t_query = 'SELECT email_id FROM ' . $t_email_table . ' ORDER BY email_id ASC';
+	$t_query = 'SELECT email_id FROM {email} ORDER BY email_id ASC';
 	$t_result = db_query_bound( $t_query );
 
 	$t_ids = array();

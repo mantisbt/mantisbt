@@ -62,9 +62,6 @@ if( count( $t_rows ) == 0 ) {
 	exit();
 }
 
-$t_bug_table			= db_get_table( 'bug' );
-$t_bug_hist_table			= db_get_table( 'bug_history' );
-
 $t_marker = array();
 $t_data = array();
 $t_ptr = 0;
@@ -102,8 +99,8 @@ foreach ( $t_rows as $t_row ) {
 # get the history for these bugs over the interval required to offset the data
 # type = 0 and field=status are status changes
 # type = 1 are new bugs
-$t_select = 'SELECT bug_id, type, field_name, old_value, new_value, date_modified FROM '.$t_bug_hist_table.
-	' WHERE bug_id in (' . implode( ',', $t_bug ) . ') and '.
+$t_select = 'SELECT bug_id, type, field_name, old_value, new_value, date_modified FROM {bug_history}
+	WHERE bug_id in (' . implode( ',', $t_bug ) . ') and '.
 		'( (type=' . NORMAL_TYPE . ' and field_name=\'category\') or '.
 			'(type=' . NORMAL_TYPE . ' and field_name=\'status\') or type='.NEW_BUG.' ) and '.
 			'date_modified >= ' . db_param() .

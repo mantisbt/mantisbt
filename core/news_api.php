@@ -67,8 +67,6 @@ function news_create( $p_project_id, $p_poster_id, $p_view_state, $p_announcemen
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	$t_news_table = db_get_table( 'news' );
-
 	$t_query = 'INSERT INTO {news}
 	    		  ( project_id, poster_id, date_posted, last_modified,
 	    		    view_state, announcement, headline, body )

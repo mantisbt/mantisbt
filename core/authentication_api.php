@@ -630,7 +630,7 @@ function auth_get_current_user_cookie( $p_login_anonymous = true ) {
 				if( function_exists( 'db_is_connected' ) && db_is_connected() ) {
 
 					# get anonymous information if database is available
-					$t_query = 'SELECT id, cookie_string FROM ' . db_get_table( 'user' ) . ' WHERE username = ' . db_param();
+					$t_query = 'SELECT id, cookie_string FROM {user} WHERE username = ' . db_param();
 					$t_result = db_query_bound( $t_query, array( config_get( 'anonymous_account' ) ) );
 
 					if( $t_row = db_fetch_array( $t_result ) ) {

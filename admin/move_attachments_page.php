@@ -38,8 +38,6 @@ echo '</p></div>';
 $f_file_type = gpc_get( 'type', 'bug' );
 
 function get_attachment_stats( $p_file_type, $p_in_db ) {
-	$t_bug_table = db_get_table( 'bug' );
-
 	if( $p_in_db ) {
 		$t_compare = "<> ''";
 	} else {
@@ -58,7 +56,7 @@ function get_attachment_stats( $p_file_type, $p_in_db ) {
 		default:
 			$t_query = "SELECT p.id, p.name, COUNT(f.id) stats
 				FROM {bug_file} f
-				JOIN $t_bug_table b ON b.id = f.bug_id
+				JOIN {bug} b ON b.id = f.bug_id
 				JOIN {project} p ON p.id = b.project_id
 				WHERE content $t_compare
 				GROUP BY p.id, p.name

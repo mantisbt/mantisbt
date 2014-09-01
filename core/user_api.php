@@ -366,9 +366,7 @@ function user_ensure_name_valid( $p_username ) {
  * @return boolean
  */
 function user_is_monitoring_bug( $p_user_id, $p_bug_id ) {
-	$t_bug_monitor_table = db_get_table( 'bug_monitor' );
-
-	$t_query = 'SELECT COUNT(*) FROM ' . $t_bug_monitor_table . '
+	$t_query = 'SELECT COUNT(*) FROM {bug_monitor}
 				  WHERE user_id=' . db_param() . ' AND bug_id=' . db_param();
 
 	$t_result = db_query_bound( $t_query, array( (int)$p_user_id, (int)$p_bug_id ) );
@@ -533,7 +531,6 @@ function user_create( $p_username, $p_password, $p_email = '',
 	email_ensure_valid( $p_email );
 
 	$t_cookie_string = auth_generate_unique_cookie_string();
-	$t_user_table = db_get_table( 'user' );
 
 	$t_query = 'INSERT INTO {user}
 				    ( username, email, password, date_created, last_visit,
@@ -544,6 +541,7 @@ function user_create( $p_username, $p_password, $p_email = '',
 	db_query_bound( $t_query, array( $p_username, $p_email, $t_password, db_now(), db_now(), $c_enabled, (int)$p_access_level, 0, $t_cookie_string, $p_realname ) );
 
 	# Create preferences for the user
+	$t_user_table = db_get_table( 'user' );
 	$t_user_id = db_insert_id( $t_user_table );
 
 	# Users are added with protected set to FALSE in order to be able to update
@@ -1234,9 +1232,8 @@ function user_get_assigned_open_bug_count( $p_user_id, $p_project_id = ALL_PROJE
 
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
-	$t_bug_table = db_get_table( 'bug' );
 	$t_query = 'SELECT COUNT(*)
-				  FROM ' . $t_bug_table . '
+				  FROM {bug}
 				  WHERE ' . $t_where_prj . '
 						status<' . db_param() . ' AND
 						handler_id=' . db_param();
@@ -1253,13 +1250,11 @@ function user_get_assigned_open_bug_count( $p_user_id, $p_project_id = ALL_PROJE
  * @return integer
  */
 function user_get_reported_open_bug_count( $p_user_id, $p_project_id = ALL_PROJECTS ) {
-	$t_bug_table = db_get_table( 'bug' );
-
 	$t_where_prj = helper_project_specific_where( $p_project_id, $p_user_id ) . ' AND';
 
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
 
-	$t_query = 'SELECT COUNT(*) FROM ' . $t_bug_table . '
+	$t_query = 'SELECT COUNT(*) FROM {bug}
 				  WHERE ' . $t_where_prj . '
 						  status<' . db_param() . ' AND
 						  reporter_id=' . db_param();

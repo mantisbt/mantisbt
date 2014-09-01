@@ -43,7 +43,7 @@ function move_attachments_to_db( $p_type, $p_projects ) {
 	}
 
 	# Build the SQL query based on attachment type
-	$t_file_table = db_get_table( "${p_type}_file" );
+	$t_file_table = '{' . $p_type . '_file}';
 	switch( $p_type ) {
 		case 'project':
 			$t_query = "SELECT f.*
@@ -53,11 +53,9 @@ function move_attachments_to_db( $p_type, $p_projects ) {
 				ORDER BY f.filename";
 			break;
 		case 'bug':
-			$t_bug_table = db_get_table( 'bug' );
-
 			$t_query = "SELECT f.*
 				FROM $t_file_table f
-				JOIN $t_bug_table b ON b.id = f.bug_id
+				JOIN {bug} b ON b.id = f.bug_id
 				WHERE content = ''
 				  AND b.project_id = " . db_param() . "
 				ORDER BY f.bug_id, f.filename";
@@ -167,11 +165,9 @@ function move_attachments_to_disk( $p_type, array $p_projects ) {
 				ORDER BY f.filename';
 			break;
 		case 'bug':
-			$t_bug_table = db_get_table( 'bug' );
-
 			$t_query = 'SELECT f.*
 				FROM ' . $t_file_table . ' f
-				JOIN ' . $t_bug_table . ' b ON b.id = f.bug_id
+				JOIN {bug} b ON b.id = f.bug_id
 				WHERE content <> \'\'
 				  AND b.project_id = ' . db_param() . '
 				ORDER BY f.bug_id, f.filename';

@@ -189,8 +189,6 @@ foreach( $t_project_ids as $t_project_id ) {
 	$t_user_access_level_is_reporter = ( REPORTER == access_get_project_level( $t_project_id ) );
 
 	$t_resolved = config_get( 'bug_resolved_status_threshold' );
-	$t_bug_table	= db_get_table( 'bug' );
-	$t_relation_table = db_get_table( 'bug_relationship' );
 
 	# grab version info for later use
 	$t_version_rows = version_get_all_rows( $t_project_id, null, false );
@@ -212,10 +210,10 @@ foreach( $t_project_ids as $t_project_id ) {
 		}
 
 		$t_query = 'SELECT sbt.*, dbt.fixed_in_version AS parent_version, rt.source_bug_id
-			FROM ' . $t_bug_table . ' sbt
-			LEFT JOIN ' . $t_relation_table . ' rt
+			FROM {bug} sbt
+			LEFT JOIN {bug_relationship} rt
 				ON sbt.id=rt.destination_bug_id AND rt.relationship_type=' . BUG_DEPENDANT . '
-			LEFT JOIN ' . $t_bug_table . ' dbt ON dbt.id=rt.source_bug_id
+			LEFT JOIN {bug} dbt ON dbt.id=rt.source_bug_id
 			WHERE sbt.project_id=' . db_param() . '
 			  AND sbt.fixed_in_version=' . db_param() . '
 			ORDER BY sbt.status ASC, sbt.last_updated DESC';

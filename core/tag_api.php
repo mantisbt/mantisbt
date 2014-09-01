@@ -353,14 +353,14 @@ function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
 
 	$c_date_created = db_now();
 
-	$t_tag_table = db_get_table( 'tag' );
-
 	$t_query = 'INSERT INTO {tag}
 				( user_id, name, description, date_created, date_updated )
 				VALUES
 				( ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
 
 	db_query_bound( $t_query, array( $p_user_id, trim( $p_name ), trim( $p_description ), $c_date_created, $c_date_created ) );
+
+	$t_tag_table = db_get_table( 'tag' );
 	return db_insert_id( $t_tag_table );
 }
 
@@ -445,13 +445,11 @@ function tag_delete( $p_tag_id ) {
 function tag_get_candidates_for_bug( $p_bug_id ) {
 	$t_params = array();
 	if( 0 != $p_bug_id ) {
-		$t_bug_tag_table = db_get_table( 'bug_tag' );
-
 		$t_params[] = $p_bug_id;
 
 		if( config_get_global( 'db_type' ) == 'odbc_mssql' ) {
 			$t_query = 'SELECT t.id FROM {tag} t
-					LEFT JOIN ' . $t_bug_tag_table . ' b ON t.id=b.tag_id
+					LEFT JOIN {bug_tag} b ON t.id=b.tag_id
 					WHERE b.bug_id IS NULL OR b.bug_id != ' . db_param();
 			$t_result = db_query_bound( $t_query, $t_params );
 
@@ -471,7 +469,7 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 		} else {
 			$t_query = 'SELECT id, name, description FROM {tag} WHERE id IN (
 					SELECT t.id FROM {tag} t
-					LEFT JOIN ' . $t_bug_tag_table . ' b ON t.id=b.tag_id
+					LEFT JOIN {bug_tag} b ON t.id=b.tag_id
 					WHERE b.bug_id IS NULL OR b.bug_id != ' . db_param() .
 				')';
 		}
@@ -498,8 +496,7 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
  * @return boolean True if the tag is attached
  */
 function tag_bug_is_attached( $p_tag_id, $p_bug_id ) {
-	$t_bug_tag_table = db_get_table( 'bug_tag' );
-	$t_query = 'SELECT bug_id FROM ' . $t_bug_tag_table . ' WHERE tag_id=' . db_param() . ' AND bug_id=' . db_param();
+	$t_query = 'SELECT bug_id FROM {bug_tag} WHERE tag_id=' . db_param() . ' AND bug_id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_tag_id, $p_bug_id ) );
 	return( db_result( $t_result ) !== false );
 }
@@ -511,8 +508,7 @@ function tag_bug_is_attached( $p_tag_id, $p_bug_id ) {
  * @return array Tag attachment row
  */
 function tag_bug_get_row( $p_tag_id, $p_bug_id ) {
-	$t_bug_tag_table = db_get_table( 'bug_tag' );
-	$t_query = 'SELECT * FROM ' . $t_bug_tag_table . ' WHERE tag_id=' . db_param() . ' AND bug_id=' . db_param();
+	$t_query = 'SELECT * FROM {bug_tag} WHERE tag_id=' . db_param() . ' AND bug_id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_tag_id, $p_bug_id ) );
 
 	$t_row = db_fetch_array( $t_result );
@@ -528,11 +524,9 @@ function tag_bug_get_row( $p_tag_id, $p_bug_id ) {
  * @return array Array of tag rows with attachment information
  */
 function tag_bug_get_attached( $p_bug_id ) {
-	$t_bug_tag_table = db_get_table( 'bug_tag' );
-
 	$t_query = 'SELECT t.*, b.user_id as user_attached, b.date_attached
-					FROM {tag} as t
-					LEFT JOIN ' . $t_bug_tag_table . ' as b
+					FROM {tag} t
+					LEFT JOIN {bug_tag} b
 						on t.id=b.tag_id
 					WHERE b.bug_id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_bug_id ) );
@@ -552,9 +546,7 @@ function tag_bug_get_attached( $p_bug_id ) {
  * @return array Array of bug ID's.
  */
 function tag_get_bugs_attached( $p_tag_id ) {
-	$t_bug_tag_table = db_get_table( 'bug_tag' );
-
-	$t_query = 'SELECT bug_id FROM ' . $t_bug_tag_table . ' WHERE tag_id=' . db_param();
+	$t_query = 'SELECT bug_id FROM {bug_tag} WHERE tag_id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_tag_id ) );
 
 	$t_bugs = array();
@@ -587,9 +579,7 @@ function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
 		user_ensure_exists( $p_user_id );
 	}
 
-	$t_bug_tag_table = db_get_table( 'bug_tag' );
-
-	$t_query = 'INSERT INTO ' . $t_bug_tag_table . '
+	$t_query = 'INSERT INTO {bug_tag}
 					( tag_id, bug_id, user_id, date_attached )
 					VALUES
 					( ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
@@ -632,8 +622,7 @@ function tag_bug_detach( $p_tag_id, $p_bug_id, $p_add_history = true, $p_user_id
 
 	access_ensure_bug_level( $t_detach_level, $p_bug_id, $t_user_id );
 
-	$t_bug_tag_table = db_get_table( 'bug_tag' );
-	$t_query = 'DELETE FROM ' . $t_bug_tag_table . ' WHERE tag_id=' . db_param() . ' AND bug_id=' . db_param();
+	$t_query = 'DELETE FROM {bug_tag} WHERE tag_id=' . db_param() . ' AND bug_id=' . db_param();
 	db_query_bound( $t_query, array( $p_tag_id, $p_bug_id ) );
 
 	if( $p_add_history ) {
@@ -722,9 +711,7 @@ function tag_display_attached( $p_bug_id ) {
  * @return int Number of attached bugs
  */
 function tag_stats_attached( $p_tag_id ) {
-	$t_bug_tag_table = db_get_table( 'bug_tag' );
-
-	$t_query = 'SELECT COUNT(*) FROM ' . $t_bug_tag_table . ' WHERE tag_id=' . db_param();
+	$t_query = 'SELECT COUNT(*) FROM {bug_tag} WHERE tag_id=' . db_param();
 	$t_result = db_query_bound( $t_query, array( $p_tag_id ) );
 
 	return db_result( $t_result );
@@ -740,22 +727,19 @@ function tag_stats_attached( $p_tag_id ) {
  * @return array Array of tag rows, with share count added
  */
 function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
-	$t_bug_table = db_get_table( 'bug' );
-	$t_bug_tag_table = db_get_table( 'bug_tag' );
-
 	$c_user_id = auth_get_current_user_id();
 
-	$t_subquery = 'SELECT b.id FROM ' . $t_bug_table . ' b
+	$t_subquery = 'SELECT b.id FROM {bug} b
 					LEFT JOIN {project_user_list} p
 						ON p.project_id=b.project_id AND p.user_id=' . db_param() . # 2nd Param
 					' JOIN {user} u
 						ON u.id=' . db_param() . # 3rd Param
-					' JOIN ' . $t_bug_tag_table . ' t
+					' JOIN {bug_tag} t
 						ON t.bug_id=b.id
 					WHERE ( p.access_level>b.view_state OR u.access_level>b.view_state )
 						AND t.tag_id=' . db_param(); # 4th Param
 
-	$t_query = 'SELECT * FROM ' . $t_bug_tag_table . '
+	$t_query = 'SELECT * FROM {bug_tag}
 					WHERE tag_id != ' . db_param() . # 1st Param
 						' AND bug_id IN ( ' . $t_subquery . ' ) ';
 

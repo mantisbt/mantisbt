@@ -84,8 +84,7 @@ function history_log_event_direct( $p_bug_id, $p_field_name, $p_old_value, $p_ne
 		$c_old_value = ( is_null( $p_old_value ) ? '' : (string)$p_old_value );
 		$c_new_value = ( is_null( $p_new_value ) ? '' : (string)$p_new_value );
 
-		$t_mantis_bug_history_table = db_get_table( 'bug_history' );
-		$t_query = 'INSERT INTO ' . $t_mantis_bug_history_table . '
+		$t_query = 'INSERT INTO {bug_history}
 						( user_id, bug_id, date_modified, field_name, old_value, new_value, type )
 					VALUES
 						( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
@@ -120,9 +119,7 @@ function history_log_event_special( $p_bug_id, $p_type, $p_optional = '', $p_opt
 	$c_optional2 = ( $p_optional2 );
 	$t_user_id = auth_get_current_user_id();
 
-	$t_mantis_bug_history_table = db_get_table( 'bug_history' );
-
-	$t_query = 'INSERT INTO ' . $t_mantis_bug_history_table . '
+	$t_query = 'INSERT INTO {bug_history}
 					( user_id, bug_id, date_modified, type, old_value, new_value, field_name )
 				VALUES
 					( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ',' . db_param() . ', ' . db_param() . ')';
@@ -176,8 +173,7 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 	# I give you an example. We create a child of a bug with different custom fields. In the history of the child
 	# bug we will find the line related to the relationship mixed with the custom fields (the history is creted
 	# for the new bug with the same timestamp...)
-	$t_mantis_bug_history_table = db_get_table( 'bug_history' );
-	$t_query = 'SELECT * FROM ' . $t_mantis_bug_history_table . ' WHERE bug_id=' . db_param() . '
+	$t_query = 'SELECT * FROM {bug_history} WHERE bug_id=' . db_param() . '
 				ORDER BY date_modified ' . $t_history_order . ',id';
 	$t_result = db_query_bound( $t_query, array( $p_bug_id ) );
 	$t_raw_history = array();
@@ -581,7 +577,6 @@ function history_localize_item( $p_field_name, $p_type, $p_old_value, $p_new_val
  * @return void
  */
 function history_delete( $p_bug_id ) {
-	$t_bug_history_table = db_get_table( 'bug_history' );
-	$t_query = 'DELETE FROM ' . $t_bug_history_table . ' WHERE bug_id=' . db_param();
+	$t_query = 'DELETE FROM {bug_history} WHERE bug_id=' . db_param();
 	db_query_bound( $t_query, array( $p_bug_id ) );
 }

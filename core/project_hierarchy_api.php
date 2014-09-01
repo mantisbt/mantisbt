@@ -77,8 +77,7 @@ function project_hierarchy_update( $p_child_id, $p_parent_id, $p_inherit_parent 
  * @return void
  */
 function project_hierarchy_remove( $p_child_id, $p_parent_id ) {
-	$t_query = 'DELETE FROM {project_hierarchy}
-		                WHERE child_id = ' . db_param() . '
+	$t_query = 'DELETE FROM {project_hierarchy} WHERE child_id = ' . db_param() . '
 						AND parent_id = ' . db_param();
 
 	db_query_bound( $t_query, array( $p_child_id, $p_parent_id ) );
@@ -90,8 +89,7 @@ function project_hierarchy_remove( $p_child_id, $p_parent_id ) {
  * @return void
  */
 function project_hierarchy_remove_all( $p_project_id ) {
-	$t_query = 'DELETE {project_hierarchy}
-		                WHERE child_id = ' . db_param() . '
+	$t_query = 'DELETE FROM {project_hierarchy} WHERE child_id = ' . db_param() . '
 						  OR parent_id = ' . db_param();
 
 	db_query_bound( $t_query, array( $p_project_id, $p_project_id ) );

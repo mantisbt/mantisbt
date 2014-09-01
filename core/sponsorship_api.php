@@ -331,6 +331,7 @@ function sponsorship_set( SponsorshipData $p_sponsorship ) {
 				    (' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
 
 		db_query_bound( $t_query, array( $c_bug_id, $c_user_id, $c_amount, $c_logo, $c_url, $c_now, $c_now ) );
+
 		$t_sponsorship_table = db_get_table( 'sponsorship' );
 		$t_sponsorship_id = db_insert_id( $t_sponsorship_table );
 

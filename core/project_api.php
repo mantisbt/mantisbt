@@ -332,8 +332,6 @@ function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_
 		$p_file_path = validate_project_file_path( $p_file_path );
 	}
 
-	$t_project_table = db_get_table( 'project' );
-
 	$t_query = 'INSERT INTO {project}
 					( name, status, enabled, view_state, file_path, description, inherit_global )
 				  VALUES
@@ -342,6 +340,7 @@ function project_create( $p_name, $p_description, $p_status, $p_view_state = VS_
 	db_query_bound( $t_query, array( $p_name, (int)$p_status, $c_enabled, (int)$p_view_state, $p_file_path, $p_description, $p_inherit_global ) );
 
 	# return the id of the new project
+	$t_project_table = db_get_table( 'project' );
 	return db_insert_id( $t_project_table );
 }
 

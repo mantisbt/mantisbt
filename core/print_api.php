@@ -861,7 +861,6 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
  * @return void
  */
 function print_build_option_list( $p_build = '' ) {
-	$t_bug_table = db_get_table( 'bug' );
 	$t_overall_build_arr = array();
 
 	$t_project_id = helper_get_current_project();
@@ -870,7 +869,7 @@ function print_build_option_list( $p_build = '' ) {
 
 	# Get the "found in" build list
 	$t_query = 'SELECT DISTINCT build
-				FROM ' . $t_bug_table . '
+				FROM {bug}
 				WHERE ' . $t_project_where . '
 				ORDER BY build DESC';
 	$t_result = db_query_bound( $t_query );
