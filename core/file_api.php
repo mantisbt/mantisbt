@@ -381,7 +381,7 @@ function file_delete_attachments( $p_bug_id ) {
 	}
 
 	# Delete the corresponding db records
-	$t_query = 'DELETE FROM ' . $t_bug_file_table . ' WHERE bug_id=' . db_param();
+	$t_query = 'DELETE FROM {bug_file} WHERE bug_id=' . db_param();
 	db_query_bound( $t_query, array( $p_bug_id ) );
 
 	# db_query_bound() errors on failure so:
@@ -1023,7 +1023,7 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 			}
 		}
 
-		$t_query = 'INSERT INTO ' . $t_mantis_bug_file_table . '
+		$t_query = 'INSERT INTO {bug_file} 
 							( bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content )
 							VALUES ( ' . db_param() . ',
 									 ' . db_param() . ',
