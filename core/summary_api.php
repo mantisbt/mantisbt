@@ -746,7 +746,6 @@ function summary_print_by_category() {
  */
 function summary_print_by_project( array $p_projects = array(), $p_level = 0, array $p_cache = null ) {
 	$t_mantis_bug_table = db_get_table( 'bug' );
-	$t_mantis_project_table = db_get_table( 'project' );
 
 	$t_project_id = helper_get_current_project();
 

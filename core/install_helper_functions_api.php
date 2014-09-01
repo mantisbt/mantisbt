@@ -421,14 +421,13 @@ function install_stored_filter_migrate() {
 	$t_filter_fields['and_not_assigned'] = null;
 	$t_filter_fields['sticky_issues'] = 'sticky';
 
-	$t_filters_table = db_get_table( 'filters' );
-	$t_query = 'SELECT * FROM ' . $t_filters_table;
+	$t_query = 'SELECT * FROM {filters}';
 	$t_result = db_query_bound( $t_query );
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_setting_arr = explode( '#', $t_row['filter_string'], 2 );
 
 		if(( $t_setting_arr[0] == 'v1' ) || ( $t_setting_arr[0] == 'v2' ) || ( $t_setting_arr[0] == 'v3' ) || ( $t_setting_arr[0] == 'v4' ) ) {
-			$t_delete_query = 'DELETE FROM ' . $t_filters_table . ' WHERE id=' . db_param();
+			$t_delete_query = 'DELETE FROM {filters} WHERE id=' . db_param();
 			$t_delete_result = db_query_bound( $t_delete_query, array( $t_row['id'] ) );
 			continue;
 		}
@@ -436,7 +435,7 @@ function install_stored_filter_migrate() {
 		if( isset( $t_setting_arr[1] ) ) {
 			$t_filter_arr = unserialize( $t_setting_arr[1] );
 		} else {
-			$t_delete_query = 'DELETE FROM ' . $t_filters_table . ' WHERE id=' . db_param();
+			$t_delete_query = 'DELETE FROM {filters} WHERE id=' . db_param();
 			$t_delete_result = db_query_bound( $t_delete_query, array( $t_row['id'] ) );
 			continue;
 		}
@@ -459,7 +458,7 @@ function install_stored_filter_migrate() {
 		$t_filter_serialized = json_encode( $t_filter_arr );
 		$t_filter_string = $t_cookie_version . '#' . $t_filter_serialized;
 
-		$t_update_query = 'UPDATE ' . $t_filters_table . ' SET filter_string=' . db_param() . ' WHERE id=' . db_param();
+		$t_update_query = 'UPDATE {filters} SET filter_string=' . db_param() . ' WHERE id=' . db_param();
 		$t_update_result = db_query_bound( $t_update_query, array( $t_filter_string, $t_row['id'] ) );
 	}
 
@@ -557,8 +556,7 @@ function install_update_history_long_custom_fields() {
  * @return integer
  */
 function install_check_project_hierarchy() {
-	$t_project_hierarchy_table = db_get_table( 'project_hierarchy' );
-	$t_query = 'SELECT count(child_id) as count, child_id, parent_id FROM ' . $t_project_hierarchy_table . ' GROUP BY child_id, parent_id';
+	$t_query = 'SELECT count(child_id) as count, child_id, parent_id FROM {project_hierarchy} GROUP BY child_id, parent_id';
 
 	$t_result = db_query_bound( $t_query );
 	while( $t_row = db_fetch_array( $t_result ) ) {
@@ -567,7 +565,7 @@ function install_check_project_hierarchy() {
 		$t_parent_id = (int)$t_row['parent_id'];
 
 		if( $t_count > 1 ) {
-			$t_query = 'SELECT inherit_parent, child_id, parent_id FROM ' . $t_project_hierarchy_table . ' WHERE child_id=' . db_param() . ' AND parent_id=' . db_param();
+			$t_query = 'SELECT inherit_parent, child_id, parent_id FROM {project_hierarchy} WHERE child_id=' . db_param() . ' AND parent_id=' . db_param();
 			$t_result2 = db_query_bound( $t_query, array( $t_child_id, $t_parent_id ) );
 
 			# get first result for inherit_parent, discard the rest
@@ -575,10 +573,10 @@ function install_check_project_hierarchy() {
 
 			$t_inherit = $t_row2['inherit_parent'];
 
-			$t_query_delete = 'DELETE FROM ' . $t_project_hierarchy_table . ' WHERE child_id=' . db_param() . ' AND parent_id=' . db_param();
+			$t_query_delete = 'DELETE FROM {project_hierarchy} WHERE child_id=' . db_param() . ' AND parent_id=' . db_param();
 			db_query_bound( $t_query_delete, array( $t_child_id, $t_parent_id ) );
 
-			$t_query_insert = 'INSERT INTO ' . $t_project_hierarchy_table . ' (child_id, parent_id, inherit_parent) VALUES (' . db_param() . ',' . db_param() . ',' . db_param() . ')';
+			$t_query_insert = 'INSERT INTO {project_hierarchy} (child_id, parent_id, inherit_parent) VALUES (' . db_param() . ',' . db_param() . ',' . db_param() . ')';
 			db_query_bound( $t_query_insert, array( $t_child_id, $t_parent_id, $t_inherit ) );
 		}
 	}
@@ -650,8 +648,7 @@ function install_check_token_serialization() {
  * This ensures it is not possible to execute code during un-serialization
  */
 function install_check_filters_serialization() {
-	$t_filters_table = db_get_table( 'filters' );
-	$query = 'SELECT * FROM ' . $t_filters_table;
+	$query = 'SELECT * FROM {filters}';
 
 	$t_result = db_query_bound( $query );
 	while( $t_row = db_fetch_array( $t_result ) ) {
@@ -670,7 +667,7 @@ function install_check_filters_serialization() {
 		$t_json_filter = json_encode( $t_filter, true );
 		$t_filter_string = 'v9' . '#' . $t_json_filter;
 
-		$t_query = 'UPDATE ' . $t_filters_table . ' SET filter_string=' .db_param() . ' WHERE id=' .db_param();
+		$t_query = 'UPDATE {filters} SET filter_string=' .db_param() . ' WHERE id=' .db_param();
 		db_query_bound( $t_query, array( $t_filter_string, $t_id ) );
 	}
 

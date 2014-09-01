@@ -66,10 +66,14 @@ function array_merge_recursive2( $p_array1, $p_array2 ) {
 	if( !is_array( $p_array1 ) || !is_array( $p_array2 ) ) {
 		return $p_array2;
 	}
-	foreach ( $p_array2 as $t_key2 => $t_value2 ) {
-		$p_array1[$t_key2] = array_merge_recursive2( @$p_array1[$t_key2], $t_value2 );
-	}
-	return $p_array1;
+	$t_merged_array = $p_array1;
+	foreach( $p_array2 as $t_key2 => $t_value2 ) {
+		if( array_key_exists( $t_key2, $t_merged_array ) && is_array( $t_value2 ) ) {
+			$t_merged_array[$t_key2] = array_merge_recursive2( $t_merged_array[$t_key2], $t_value2 );
+		} else {
+			$t_merged_array[$t_key2] = $t_value2;
+		}
+	return $t_merged_array;
 }
 
 /**

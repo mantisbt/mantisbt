@@ -42,7 +42,6 @@ $f_file_type = gpc_get( 'type', 'bug' );
 
 function get_attachment_stats( $p_file_type, $p_in_db ) {
 	$t_bug_table = db_get_table( 'bug' );
-	$t_project_table = db_get_table( 'project' );
 
 	if( $p_in_db ) {
 		$t_compare = "<> ''";
@@ -51,21 +50,19 @@ function get_attachment_stats( $p_file_type, $p_in_db ) {
 	}
 	switch( $p_file_type ) {
 		case 'project':
-			$t_file_table = db_get_table( 'project_file' );
 			$t_query = "SELECT p.id, p.name, COUNT(f.id) stats
-				FROM $t_file_table f
-				LEFT JOIN $t_project_table p ON p.id = f.project_id
+				FROM {project_file} f
+				LEFT JOIN {project} p ON p.id = f.project_id
 				WHERE content $t_compare
 				GROUP BY p.id, p.name
 				ORDER BY p.name";
 			break;
 		case 'bug':
 		default:
-			$t_file_table = db_get_table( 'bug_file' );
 			$t_query = "SELECT p.id, p.name, COUNT(f.id) stats
-				FROM $t_file_table f
+				FROM {bug_file} f
 				JOIN $t_bug_table b ON b.id = f.bug_id
-				JOIN $t_project_table p ON p.id = b.project_id
+				JOIN {project} p ON p.id = b.project_id
 				WHERE content $t_compare
 				GROUP BY p.id, p.name
 				ORDER BY p.name";

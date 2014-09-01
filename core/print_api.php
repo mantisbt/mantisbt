@@ -1085,12 +1085,9 @@ function print_project_user_list_option_list( $p_project_id = null ) {
  * @return void
  */
 function print_project_user_list_option_list2( $p_user_id ) {
-	$t_mantis_project_user_list_table = db_get_table( 'project_user_list' );
-	$t_mantis_project_table = db_get_table( 'project' );
-
 	$t_query = 'SELECT DISTINCT p.id, p.name
-				FROM ' . $t_mantis_project_table . ' p
-				LEFT JOIN ' . $t_mantis_project_user_list_table . ' u
+				FROM {project} p
+				LEFT JOIN {project_user_list} u
 				ON p.id=u.project_id AND u.user_id=' . db_param() . '
 				WHERE p.enabled = ' . db_param() . ' AND
 					u.user_id IS NULL
@@ -1921,8 +1918,7 @@ function print_bug_attachment_preview_text( array $p_attachment ) {
 			}
 			break;
 		case DATABASE:
-			$t_bug_file_table = db_get_table( 'bug_file' );
-			$t_query = 'SELECT * FROM ' . $t_bug_file_table . ' WHERE id=' . db_param();
+			$t_query = 'SELECT * FROM {bug_file} WHERE id=' . db_param();
 			$t_result = db_query_bound( $t_query, array( (int)$p_attachment['id'] ) );
 			$t_row = db_fetch_array( $t_result );
 			$t_content = $t_row['content'];
