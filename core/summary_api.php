@@ -566,7 +566,7 @@ function summary_print_by_reporter() {
 
 	foreach( $t_reporters as $t_reporter ) {
 		$v_reporter_id = $t_reporter;
-		$t_query = 'SELECT COUNT(id) as bugcount, status FROM ' . $t_mantis_bug_table . '
+		$t_query = 'SELECT COUNT(id) as bugcount, status FROM {bug}
 					WHERE reporter_id=' . db_param() . '
 					AND ' . $t_specific_where . '
 					GROUP BY status
