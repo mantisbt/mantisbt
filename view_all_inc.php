@@ -94,7 +94,7 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 $t_status_legend_position = config_get( 'status_legend_position' );
 
 if( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
-	html_status_legend();
+	html_highlight_legend();
 }
 ?>
 <br />
@@ -259,7 +259,7 @@ write_bug_rows( $t_rows );
 <?php
 
 if( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
-	html_status_legend();
+	html_highlight_legend();
 }
 
 # -- ====================== FILTER FORM ========================= --
