@@ -15,7 +15,7 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Generate CSS from that requires output from php for specific settings e.g. status values
+ * Generate CSS that requires output from php for specific settings e.g. status values
  *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
