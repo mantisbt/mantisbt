@@ -3089,7 +3089,7 @@ $g_reproducibility_colors = array(
  * @global array $g_reproducibility_colors
  */
 $g_resolution_colors = array(
-	'open'                => '#3465a4', # sky blue
+	'open'                => '#729fcf', # sky blue
 	'fixed'               => '#73d216', # chameleon
 	'reopened'            => '#a40000', # scarlet red
 	'unable to duplicate' => '#edd400', # butter
