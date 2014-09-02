@@ -202,10 +202,10 @@ function write_bug_rows( array $p_rows ) {
 			$t_in_stickies = false;
 		}
 
-		# choose color based on status
-		$t_status_label = html_get_highlight_css_class( $t_row, auth_get_current_user_id(), $t_row->project_id );
+		# choose color based on configured attribute
+		$t_highlight_label = html_get_highlight_css_class( $t_row, auth_get_current_user_id(), $t_row->project_id );
 
-		echo '<tr class="' . $t_status_label . '">';
+		echo '<tr class="' . $t_highlight_label . '">';
 
 		$t_column_value_function = 'print_column_value';
 		foreach( $g_columns as $t_column ) {
