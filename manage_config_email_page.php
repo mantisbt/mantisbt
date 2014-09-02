@@ -73,6 +73,7 @@ function array_merge_recursive2( $p_array1, $p_array2 ) {
 		} else {
 			$t_merged_array[$t_key2] = $t_value2;
 		}
+	}
 	return $t_merged_array;
 }
 
