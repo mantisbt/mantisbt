@@ -1860,7 +1860,10 @@ function html_get_status_css_class( $p_status, $p_user = null, $p_project = null
 	return string_attribute( MantisEnum::getLabel( config_get( 'status_enum_string', null, $p_user, $p_project ), $p_status ) . '-color' );
 }
 
-function html_get_highlight_css_class( $p_row, $p_user = null, $p_project = null ) {
+function html_get_highlight_css_class( $p_row, $p_user = null, $p_project = null, $p_attribute = null ) {
 	$highlight_attribute = config_get( 'highlight_attribute', null, $p_user, $p_project);
+	if( isset( $p_attribute ) && $p_attribute != $highlight_attribute ) {
+		return "";
+	}
 	return string_css( MantisEnum::getLabel( config_get( $highlight_attribute . '_enum_string', null, $p_user, $p_project ), $p_row->$highlight_attribute ) ) . '-color';
 }
