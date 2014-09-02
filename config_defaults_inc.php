@@ -3042,6 +3042,19 @@ $g_status_colors = array(
 );
 
 /**
+ * priority color codes, using the alternative Tango color palette
+ * @global array $g_status_colors
+ */
+$g_priority_colors = array(
+	'none'      => '#ffffff', # white
+	'low'       => '#babdb6', # aluminium
+	'normal'    => '#729fcf', # sky blue
+	'high'      => '#fce94f', # butter
+	'urgent'    => '#f57900', # orango
+	'immediate' => '#ef2929', # scarlet red
+);
+
+/**
  * The padding level when displaying project ids
  *  The bug id will be padded with 0's up to the size given
  * @global int $g_display_project_padding
