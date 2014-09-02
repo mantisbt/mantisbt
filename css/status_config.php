@@ -75,10 +75,9 @@ $t_colors = config_get( $highlight_attribute . '_colors' );
 $t_color_count = count( $t_colors );
 $t_color_width = ( $t_color_count > 0 ? ( round( 100/$t_color_count ) ) : 0 );
 $t_status_percents = auth_is_user_authenticated() ? get_percentage_by_status() : array();
-
 foreach( $t_attributes AS $t_id=>$t_label ) {
 	if( array_key_exists( $t_label, $t_colors ) ) {
-		echo ".$t_label-color { background-color: {$t_colors[$t_label]}; width: $t_color_width%; }\n";
+		echo "." . string_css($t_label) . "-color { background-color: {$t_colors[$t_label]}; width: $t_color_width%; }\n";
 	}
 //	if( array_key_exists( $t_id, $t_status_percents ) ) {
 //		echo ".$t_label-percentage { width: {$t_status_percents[$t_id]}%; }\n";
