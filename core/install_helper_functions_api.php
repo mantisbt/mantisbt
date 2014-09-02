@@ -202,7 +202,7 @@ function install_category_migrate() {
 				$t_query = 'INSERT INTO {category} ( name, project_id, user_id ) VALUES ( ' .
 					db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 				db_query_bound( $t_query, array( $t_name, $t_project_id, $t_user_id ) );
-				$t_category_id = db_insert_id( $t_category_table );
+				$t_category_id = db_insert_id( db_get_table( 'category' ) );
 				$t_inserted[$t_lower_name] = $t_category_id;
 			} else {
 				$t_category_id = $t_inserted[$t_lower_name];
