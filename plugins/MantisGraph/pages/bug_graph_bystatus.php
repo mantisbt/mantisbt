@@ -95,7 +95,7 @@ foreach ( $t_rows as $t_row ) {
 # type = 0 and field=status are status changes
 # type = 1 are new bugs
 $t_select = 'SELECT bug_id, type, old_value, new_value, date_modified FROM {bug_history}
-	' WHERE bug_id in ('. implode( ',', $t_bug ) .
+	WHERE bug_id in ('. implode( ',', $t_bug ) .
 	') and ( (type=' . NORMAL_TYPE . ' and field_name=\'status\')
 		or type=' . NEW_BUG . ' ) and date_modified >= ' . db_param() .
 	' order by date_modified DESC';
