@@ -1784,7 +1784,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			if( count( $t_tags_all ) ) {
 				$t_clauses = array();
 				foreach( $t_tags_all as $t_tag_row ) {
-					array_push( $t_clauses, '{bug}.id IN ( SELECT bug_id FROM {bug_tag} WHERE {bug_tag}.tag_id = ' . $t_tag_row[id] . ')' );
+					array_push( $t_clauses, '{bug}.id IN ( SELECT bug_id FROM {bug_tag} WHERE {bug_tag}.tag_id = ' . $t_tag_row['id'] . ')' );
 				}
 				array_push( $t_where_clauses, '(' . implode( ' AND ', $t_clauses ) . ')' );
 			}
