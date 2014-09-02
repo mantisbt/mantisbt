@@ -1129,7 +1129,7 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 							   ( note )
 							   VALUES ( ' . db_param() . ' )';
 				db_query_bound( $t_query2, array( $t_bugnote_text['note'] ) );
-				$t_bugnote_text_insert_id = db_insert_id( $t_mantis_bugnote_text_table );
+				$t_bugnote_text_insert_id = db_insert_id( db_get_table( 'bugnote_text' ) );
 			}
 
 			$t_query2 = 'INSERT INTO {bugnote}
