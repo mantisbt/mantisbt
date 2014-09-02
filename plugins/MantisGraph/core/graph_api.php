@@ -627,8 +627,7 @@ function create_bug_enum_summary( $p_enum_string, $p_enum ) {
 	$t_metrics = array();
 	$t_assoc_array = MantisEnum::getAssocArrayIndexedByValues( $p_enum_string );
 
-	$t_bug_table = db_get_table( 'bug' );
-	if( !db_field_exists( $p_enum, $t_bug_table ) ) {
+	if( !db_field_exists( $p_enum, db_get_table( 'bug' ) ) ) {
 		trigger_error( ERROR_DB_FIELD_NOT_FOUND, ERROR );
 	}
 
@@ -655,8 +654,7 @@ function enum_bug_group( $p_enum_string, $p_enum ) {
 	$t_clo_val = config_get( 'bug_closed_status_threshold' );
 	$t_specific_where = ' AND ' . helper_project_specific_where( $t_project_id, $t_user_id );
 
-	$t_bug_table = db_get_table( 'bug' );
-	if( !db_field_exists( $p_enum, $t_bug_table ) ) {
+	if( !db_field_exists( $p_enum, db_get_table( 'bug' ) ) ) {
 		trigger_error( ERROR_DB_FIELD_NOT_FOUND, ERROR );
 	}
 

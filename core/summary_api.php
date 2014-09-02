@@ -442,7 +442,6 @@ function summary_print_by_age() {
  * @return void
  */
 function summary_print_by_developer() {
-	$t_mantis_bug_table = db_get_table( 'bug' );
 	$t_project_id = helper_get_current_project();
 
 	$t_specific_where = helper_project_specific_where( $t_project_id );
@@ -451,7 +450,7 @@ function summary_print_by_developer() {
 	}
 
 	$t_query = 'SELECT COUNT(id) as bugcount, handler_id, status
-				FROM ' . $t_mantis_bug_table . '
+				FROM {bug}
 				WHERE handler_id>0 AND ' . $t_specific_where . '
 				GROUP BY handler_id, status
 				ORDER BY handler_id, status';

@@ -1053,7 +1053,6 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	log_event( LOG_FILTERING, 'START NEW FILTER QUERY' );
 
 	$t_limit_reporters = config_get( 'limit_reporters' );
-	$t_bug_relationship_table = db_get_table( 'bug_relationship' );
 	$t_report_bug_threshold = config_get( 'report_bug_threshold' );
 	$t_where_param_count = 0;
 
@@ -1734,8 +1733,8 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		$t_clauses = array();
 		$t_table_dst = 'rel_dst';
 		$t_table_src = 'rel_src';
-		array_push( $t_join_clauses, 'LEFT JOIN ' . $t_bug_relationship_table . ' ' . $t_table_dst . ' ON ' . $t_table_dst . '.destination_bug_id = {bug}.id' );
-		array_push( $t_join_clauses, 'LEFT JOIN ' . $t_bug_relationship_table . ' ' . $t_table_src . ' ON ' . $t_table_src . '.source_bug_id = {bug}.id' );
+		array_push( $t_join_clauses, 'LEFT JOIN {bug_relationship} ' . $t_table_dst . ' ON ' . $t_table_dst . '.destination_bug_id = {bug}.id' );
+		array_push( $t_join_clauses, 'LEFT JOIN {bug_relationship} ' . $t_table_src . ' ON ' . $t_table_src . '.source_bug_id = {bug}.id' );
 
 		# get reverse relationships
 		$t_where_params[] = $t_comp_type;
@@ -1781,8 +1780,6 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			if( 0 < $t_filter[FILTER_PROPERTY_TAG_SELECT] && tag_exists( $t_filter[FILTER_PROPERTY_TAG_SELECT] ) ) {
 				$t_tags_any[] = tag_get( $t_filter[FILTER_PROPERTY_TAG_SELECT] );
 			}
-
-			$t_bug_tag_table = db_get_table( 'bug_tag' );
 
 			if( count( $t_tags_all ) ) {
 				$t_clauses = array();

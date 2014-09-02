@@ -234,8 +234,7 @@ function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $
 					(' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 	db_query_bound( $t_query, array( $c_project_id, $p_version, $c_date_order, $p_description, $c_released, $c_obsolete ) );
 
-	$t_project_version_table = db_get_table( 'project_version' );
-	$t_version_id = db_insert_id( $t_project_version_table );
+	$t_version_id = db_insert_id( db_get_table( 'project_version' ) );
 
 	return $t_version_id;
 }

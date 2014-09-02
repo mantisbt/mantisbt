@@ -86,8 +86,7 @@ function config_get( $p_option, $p_default = null, $p_user = null, $p_project = 
 		# @@ debug @@ if( ! db_is_connected() ) { echo "no db "; }
 		# @@ debug @@ echo "lu table=" . ( db_table_exists( $t_config_table ) ? "yes " : "no " );
 		if( !$g_cache_db_table_exists ) {
-			$t_config_table = db_get_table( 'config' );
-			$g_cache_db_table_exists = ( true === db_is_connected() ) && db_table_exists( $t_config_table );
+			$g_cache_db_table_exists = ( true === db_is_connected() ) && db_table_exists( db_get_table( 'config' ) );
 		}
 
 		if( $g_cache_db_table_exists ) {
@@ -360,8 +359,7 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 			user_ensure_exists( $p_user );
 		}
 
-		$t_config_table = db_get_table( 'config' );
-		$t_query = 'SELECT COUNT(*) from ' . $t_config_table . '
+		$t_query = 'SELECT COUNT(*) from {config}
 				WHERE config_id = ' . db_param() . ' AND
 					project_id = ' . db_param() . ' AND
 					user_id = ' . db_param();
@@ -369,7 +367,7 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 
 		$t_params = array();
 		if( 0 < db_result( $t_result ) ) {
-			$t_set_query = 'UPDATE ' . $t_config_table . '
+			$t_set_query = 'UPDATE {config}
 					SET value=' . db_param() . ', type=' . db_param() . ', access_reqd=' . db_param() . '
 					WHERE config_id = ' . db_param() . ' AND
 						project_id = ' . db_param() . ' AND
@@ -383,7 +381,7 @@ function config_set( $p_option, $p_value, $p_user = NO_USER, $p_project = ALL_PR
 				(int)$p_user,
 			);
 		} else {
-			$t_set_query = 'INSERT INTO ' . $t_config_table . '
+			$t_set_query = 'INSERT INTO {config}
 					( value, type, access_reqd, config_id, project_id, user_id )
 					VALUES
 					(' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ',' . db_param() . ' )';
@@ -503,8 +501,7 @@ function config_delete( $p_option, $p_user = ALL_USERS, $p_project = ALL_PROJECT
 			return;
 		}
 
-		$t_config_table = db_get_table( 'config' );
-		$t_query = 'DELETE FROM ' . $t_config_table . '
+		$t_query = 'DELETE FROM {config}
 				WHERE config_id = ' . db_param() . ' AND
 					project_id=' . db_param() . ' AND
 					user_id=' . db_param();
@@ -527,8 +524,7 @@ function config_delete_for_user( $p_option, $p_user_id ) {
 	}
 
 	# Delete the corresponding bugnote texts
-	$t_config_table = db_get_table( 'config' );
-	$t_query = 'DELETE FROM ' . $t_config_table . ' WHERE config_id=' . db_param() . ' AND user_id=' . db_param();
+	$t_query = 'DELETE FROM {config} WHERE config_id=' . db_param() . ' AND user_id=' . db_param();
 	db_query_bound( $t_query, array( $p_option, $p_user_id ) );
 }
 
@@ -539,8 +535,7 @@ function config_delete_for_user( $p_option, $p_user_id ) {
  * @return void
  */
 function config_delete_project( $p_project = ALL_PROJECTS ) {
-	$t_config_table = db_get_table( 'config' );
-	$t_query = 'DELETE FROM ' . $t_config_table . ' WHERE project_id=' . db_param();
+	$t_query = 'DELETE FROM {config} WHERE project_id=' . db_param();
 	db_query_bound( $t_query, array( $p_project ) );
 
 	# flush cache here in case some of the deleted configs are in use.

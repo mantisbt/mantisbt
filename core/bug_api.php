@@ -473,8 +473,7 @@ class BugData {
 		# NOTE: this is guaranteed to be the correct one.
 		# The value LAST_INSERT_ID is stored on a per connection basis.
 
-		$t_bug_text_table = db_get_table( 'bug_text' );
-		$t_text_id = db_insert_id( $t_bug_text_table );
+		$t_text_id = db_insert_id( db_get_table( 'bug_text' ) );
 
 		# check to see if we want to assign this right off
 		$t_starting_status  = config_get( 'bug_submit_status' );
@@ -521,8 +520,7 @@ class BugData {
 
 		db_query_bound( $t_query, array( $this->project_id, $this->reporter_id, $this->handler_id, $this->duplicate_id, $this->priority, $this->severity, $this->reproducibility, $t_status, $this->resolution, $this->projection, $this->category_id, $this->date_submitted, $this->last_updated, $this->eta, $t_text_id, $this->os, $this->os_build, $this->platform, $this->version, $this->build, $this->profile_id, $this->summary, $this->view_state, $this->sponsorship_total, $this->sticky, $this->fixed_in_version, $this->target_version, $this->due_date ) );
 
-		$t_bug_table = db_get_table( 'bug' );
-		$this->id = db_insert_id( $t_bug_table );
+		$this->id = db_insert_id( db_get_table( 'bug' ) );
 
 		# log new bug
 		history_log_event_special( $this->id, NEW_BUG );
@@ -1925,7 +1923,6 @@ function bug_monitor_copy( $p_source_bug_id, $p_dest_bug_id ) {
  */
 function bug_unmonitor( $p_bug_id, $p_user_id ) {
 	# Delete monitoring record
-	$t_bug_monitor_table = db_get_table( 'bug_monitor' );
 	$t_query = 'DELETE FROM {bug_monitor} WHERE bug_id = ' . db_param();
 	$t_db_query_params[] = $p_bug_id;
 

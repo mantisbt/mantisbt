@@ -541,8 +541,7 @@ function user_create( $p_username, $p_password, $p_email = '',
 	db_query_bound( $t_query, array( $p_username, $p_email, $t_password, db_now(), db_now(), $c_enabled, (int)$p_access_level, 0, $t_cookie_string, $p_realname ) );
 
 	# Create preferences for the user
-	$t_user_table = db_get_table( 'user' );
-	$t_user_id = db_insert_id( $t_user_table );
+	$t_user_id = db_insert_id( db_get_table( 'user' ) );
 
 	# Users are added with protected set to FALSE in order to be able to update
 	# preferences.  Now set the real value of protected.

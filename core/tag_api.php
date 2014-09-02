@@ -360,8 +360,7 @@ function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
 
 	db_query_bound( $t_query, array( $p_user_id, trim( $p_name ), trim( $p_description ), $c_date_created, $c_date_created ) );
 
-	$t_tag_table = db_get_table( 'tag' );
-	return db_insert_id( $t_tag_table );
+	return db_insert_id( db_get_table( 'tag' ) );
 }
 
 /**

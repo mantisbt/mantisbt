@@ -399,8 +399,7 @@ function custom_field_create( $p_name ) {
 
 	db_query_bound( $t_query, array( $c_name, '' ) );
 
-	$t_custom_field_table = db_get_table( 'custom_field' );
-	return db_insert_id( $t_custom_field_table );
+	return db_insert_id( db_get_table( 'custom_field' ) );
 }
 
 /**

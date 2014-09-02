@@ -213,8 +213,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	db_query_bound( $t_query, array( $t_bugnote_text ) );
 
 	# retrieve bugnote text id number
-	$t_bugnote_text_table = db_get_table( 'bugnote_text' );
-	$t_bugnote_text_id = db_insert_id( $t_bugnote_text_table );
+	$t_bugnote_text_id = db_insert_id( db_get_table( 'bugnote_text' ) );
 
 	# get user information
 	if( $p_user_id === null ) {
@@ -242,8 +241,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	db_query_bound( $t_query, $t_params );
 
 	# get bugnote id
-	$t_bugnote_table = db_get_table( 'bugnote' );
-	$t_bugnote_id = db_insert_id( $t_bugnote_table );
+	$t_bugnote_id = db_insert_id( db_get_table( 'bugnote' ) );
 
 	# update bug last updated
 	if( !$p_skip_bug_update ) {

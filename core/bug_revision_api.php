@@ -69,8 +69,7 @@ function bug_revision_add( $p_bug_id, $p_user_id, $p_type, $p_value, $p_bugnote_
 			$p_bug_id, $p_bugnote_id, $p_user_id,
 			$t_timestamp, $p_type, $p_value ) );
 
-	$t_bug_rev_table = db_get_table( 'bug_revision' );
-	return db_insert_id( $t_bug_rev_table );
+	return db_insert_id( db_get_table( 'bug_revision' ) );
 }
 
 /**

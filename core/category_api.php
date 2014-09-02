@@ -137,8 +137,7 @@ function category_add( $p_project_id, $p_name ) {
 	db_query_bound( $t_query, array( $p_project_id, $p_name ) );
 
 	# db_query_bound() errors on failure so:
-	$t_category_table = db_get_table( 'category' );
-	return db_insert_id( $t_category_table );
+	return db_insert_id( db_get_table( 'category' ) );
 }
 
 /**
