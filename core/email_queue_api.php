@@ -120,7 +120,7 @@ function email_queue_add( EmailData $p_email_data ) {
 				  VALUES
 				    (' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
 	db_query_bound( $t_query, array( $c_email, $c_subject, $c_body, db_now(), $c_metadata ) );
-	$t_id = db_insert_id( $t_email_table, 'email_id' );
+	$t_id = db_insert_id( db_get_table( 'email' ), 'email_id' );
 
 	log_event( LOG_EMAIL, 'message #' . $t_id . ' queued' );
 
