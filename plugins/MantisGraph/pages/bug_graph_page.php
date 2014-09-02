@@ -30,7 +30,7 @@
  */
 
 require_once( 'core.php' );
-require_once( 'Period.php' );
+plugin_require_api( 'core/Period.php' );
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
 require_api( 'gpc_api.php' );
