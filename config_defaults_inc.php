@@ -3022,6 +3022,12 @@ $g_set_configuration_threshold = ADMINISTRATOR;
 ####################################
 
 /**
+ * an issue's attribute on which the highlight color will be based
+ * @global string $g_highlight_attribute
+ */
+$g_highlight_attribute = 'status';
+
+/**
  * status color codes, using the Tango color palette
  * @global array $g_status_colors
  */
