@@ -101,13 +101,7 @@ $t_num_notes = db_num_rows( $t_result );
 			$t_date_submitted = date( config_get( 'normal_date_format' ), $t_row['date_submitted'] );
 			$t_last_modified = date( config_get( 'normal_date_format' ), $t_row['last_modified'] );
 
-			# grab the bugnote text and id and prefix with v3_
-			$t_query = 'SELECT note, id FROM {bugnote_text} WHERE id=' . db_param();
-			$t_result2 = db_query_bound( $t_query, array( $t_row['bugnote_text_id'] ) );
-			$t_note = db_result( $t_result2, 0, 0 );
-			$t_bugnote_text_id = db_result( $t_result2, 0, 1 );
-
-			$t_note = string_display_links( $t_note );
+			$t_note = string_display_links( $t_row['note'] );
 	?>
 	<tr>
 		<td class="print-spacer" colspan="2">

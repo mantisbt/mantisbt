@@ -743,5 +743,15 @@ $g_upgrade[196] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "usern
 $g_upgrade[197] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "realname C(255) $t_notnull DEFAULT \" '' \"" ) );
 $g_upgrade[198] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "password C(64) $t_notnull DEFAULT \" '' \"" ) );
 $g_upgrade[199] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "email C(255) $t_notnull DEFAULT \" '' \"" ) );
+$g_upgrade[200] = array( 'AddColumnSQL', array( db_get_table( 'bug' ), "description XL NOTNULL" ) );
+$g_upgrade[201] = array( 'AddColumnSQL', array( db_get_table( 'bug' ), "steps_to_reproduce XL NOTNULL" ) );
+$g_upgrade[202] = array( 'AddColumnSQL', array( db_get_table( 'bug' ), "additional_information XL NOTNULL" ) );
+$g_upgrade[203] = array( 'UpdateFunction', "migrate_bug_text", array() );
+$g_upgrade[204] = array( 'DropTableSQL', array( db_get_table( 'bug_text' ) ) );
+$g_upgrade[205] = array( 'DropColumnSQL', array( db_get_table( 'bug' ), "bug_text_id" ) );
+$g_upgrade[206] = array( 'AddColumnSQL', array( db_get_table( 'bugnote' ), "note XL NOTNULL" ) );
+$g_upgrade[207] = array( 'UpdateFunction', "migrate_bugnote_text", array() );
+$g_upgrade[208] = array( 'DropTableSQL', array( db_get_table( 'bugnote_text' ) ) );
+$g_upgrade[209] = array( 'DropColumnSQL', array( db_get_table( 'bugnote' ), "bugnote_text_id" ) );
 
 # Release marker: 1.3.0

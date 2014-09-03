@@ -109,11 +109,6 @@ class BugnoteData {
 	 * Time tracking information
 	 */
 	public $time_tracking;
-
-	/**
-	 * Bugnote Text id
-	 */
-	public $bugnote_text_id;
 }
 
 /**
@@ -208,13 +203,6 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	# Event integration
 	$t_bugnote_text = event_signal( 'EVENT_BUGNOTE_DATA', $p_bugnote_text, $c_bug_id );
 
-	# insert bugnote text
-	$t_query = 'INSERT INTO {bugnote_text} ( note ) VALUES ( ' . db_param() . ' )';
-	db_query_bound( $t_query, array( $t_bugnote_text ) );
-
-	# retrieve bugnote text id number
-	$t_bugnote_text_id = db_insert_id( db_get_table( 'bugnote_text' ) );
-
 	# get user information
 	if( $p_user_id === null ) {
 		$p_user_id = auth_get_current_user_id();
@@ -229,15 +217,15 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 
 	# insert bugnote info
 	$t_query = 'INSERT INTO {bugnote}
-			(bug_id, reporter_id, bugnote_text_id, view_state, date_submitted, last_modified, note_type, note_attr, time_tracking)
+			(bug_id, reporter_id, view_state, date_submitted, last_modified, note_type, note_attr, time_tracking, note)
 		VALUES ('
 		. db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', '
 		. db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', '
 		. db_param() . ' )';
 	$t_params = array(
-		$c_bug_id, $p_user_id, $t_bugnote_text_id, $t_view_state,
+		$c_bug_id, $p_user_id, $t_view_state,
 		$c_date_submitted, $c_last_modified, $c_type, $p_attr,
-		$c_time_tracking );
+		$c_time_tracking, $t_bugnote_text );
 	db_query_bound( $t_query, $t_params );
 
 	# get bugnote id
@@ -272,15 +260,10 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
  */
 function bugnote_delete( $p_bugnote_id ) {
 	$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
-	$t_bugnote_text_id = bugnote_get_field( $p_bugnote_id, 'bugnote_text_id' );
 
 	# Remove the bugnote
 	$t_query = 'DELETE FROM {bugnote} WHERE id=' . db_param();
 	db_query_bound( $t_query, array( $p_bugnote_id ) );
-
-	# Remove the bugnote text
-	$t_query = 'DELETE FROM {bugnote_text} WHERE id=' . db_param();
-	db_query_bound( $t_query, array( $t_bugnote_text_id ) );
 
 	# log deletion of bug
 	history_log_event_special( $t_bug_id, BUGNOTE_DELETED, bugnote_format_id( $p_bugnote_id ) );
@@ -295,17 +278,6 @@ function bugnote_delete( $p_bugnote_id ) {
  * @access public
  */
 function bugnote_delete_all( $p_bug_id ) {
-	# Delete the bugnote text items
-	$t_query = 'SELECT bugnote_text_id FROM {bugnote} WHERE bug_id=' . db_param();
-	$t_result = db_query_bound( $t_query, array( (int)$p_bug_id ) );
-	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_bugnote_text_id = $t_row['bugnote_text_id'];
-
-		# Delete the corresponding bugnote texts
-		$t_query = 'DELETE FROM {bugnote_text} WHERE id=' . db_param();
-		db_query_bound( $t_query, array( $t_bugnote_text_id ) );
-	}
-
 	# Delete the corresponding bugnotes
 	$t_query = 'DELETE FROM {bugnote} WHERE bug_id=' . db_param();
 	db_query_bound( $t_query, array( (int)$p_bug_id ) );
@@ -318,11 +290,9 @@ function bugnote_delete_all( $p_bug_id ) {
  * @access public
  */
 function bugnote_get_text( $p_bugnote_id ) {
-	$t_bugnote_text_id = bugnote_get_field( $p_bugnote_id, 'bugnote_text_id' );
-
 	# grab the bugnote text
-	$t_query = 'SELECT note FROM {bugnote_text} WHERE id=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $t_bugnote_text_id ) );
+	$t_query = 'SELECT note FROM {bugnote} WHERE id=' . db_param();
+	$t_result = db_query_bound( $t_query, array( (int)$p_bugnote_id ) );
 
 	return db_result( $t_result );
 }
@@ -450,11 +420,9 @@ function bugnote_get_all_bugnotes( $p_bug_id ) {
 	if( !isset( $g_cache_bugnotes[(int)$p_bug_id] ) ) {
 		# sort by bugnote id which should be more accurate than submit date, since two bugnotes
 		# may be submitted at the same time if submitted using a script (eg: MantisConnect).
-		$t_query = 'SELECT b.*, t.note
-			          	FROM      {bugnote} b
-			          	LEFT JOIN {bugnote_text} t ON b.bugnote_text_id = t.id
-						WHERE b.bug_id=' . db_param() . '
-						ORDER BY b.id ASC';
+		$t_query = 'SELECT * FROM {bugnote} b
+						WHERE bug_id=' . db_param() . '
+						ORDER BY id ASC';
 		$t_bugnotes = array();
 
 		# BUILD bugnotes array
@@ -525,7 +493,6 @@ function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
 	}
 
 	$t_bug_id = bugnote_get_field( $p_bugnote_id, 'bug_id' );
-	$t_bugnote_text_id = bugnote_get_field( $p_bugnote_id, 'bugnote_text_id' );
 
 	# insert an 'original' revision if needed
 	if( bug_revision_count( $t_bug_id, REV_BUGNOTE, $p_bugnote_id ) < 1 ) {
@@ -534,8 +501,8 @@ function bugnote_set_text( $p_bugnote_id, $p_bugnote_text ) {
 		bug_revision_add( $t_bug_id, $t_user_id, REV_BUGNOTE, $t_old_text, $p_bugnote_id, $t_timestamp );
 	}
 
-	$t_query = 'UPDATE {bugnote_text} SET note=' . db_param() . ' WHERE id=' . db_param();
-	db_query_bound( $t_query, array( $p_bugnote_text, $t_bugnote_text_id ) );
+	$t_query = 'UPDATE {bugnote} SET note=' . db_param() . ' WHERE id=' . db_param();
+	db_query_bound( $t_query, array( $p_bugnote_text, $t_bugnote_id ) );
 
 	# updated the last_updated date
 	bugnote_date_update( $p_bugnote_id );

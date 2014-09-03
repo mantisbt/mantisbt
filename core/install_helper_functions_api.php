@@ -676,3 +676,81 @@ function InsertData( $p_table, $p_data ) {
 	$t_query = 'INSERT INTO ' . $p_table . $p_data;
 	return array( $t_query );
 }
+
+/**
+ * Schema update to migrate bug + bug text to single table
+ */
+function install_migrate_bug_text() {
+	global $g_db_log_queries;
+
+	# Disable query logging due to possibility of mass spam.
+	if ( $g_db_log_queries !== 0 ) {
+		$t_log_queries = $g_db_log_queries;
+		$g_db_log_queries = 0;
+	} else {
+		$t_log_queries = null;
+	}
+
+	$query = 'SELECT id, description, steps_to_reproduce, additional_information FROM {bug_text}';
+
+	$t_result = db_query_bound( $query );
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$text_id = (int)$t_row['id'];
+		$description = $t_row['description'];
+		$steps_to_reproduce = $t_row['steps_to_reproduce'];
+		$additional_information = $t_row['additional_information'];
+
+		$query = 'UPDATE {bug} SET description=' .db_param() . ', steps_to_reproduce=' .db_param() . 
+								', additional_information=' .db_param() . ' WHERE bug_text_id=' .db_param();
+		$t_result3 = db_query_bound( $query, array( $description, $steps_to_reproduce, $additional_information, $text_id ) );
+
+		$query = 'DELETE FROM {bug_text} WHERE id=' .db_param();
+		$t_result3 = db_query_bound( $query, array( $text_id ) );
+	}
+
+	// re-enabled query logging if we disabled it
+	if ( $t_log_queries !== null ) {
+		$g_db_log_queries = $t_log_queries;
+	}
+
+	# Return 2 because that's what ADOdb/DataDict does when things happen properly
+	return 2;
+}
+
+function install_migrate_bugnote_text() {
+	global $g_db_log_queries;
+
+	# Disable query logging due to possibility of mass spam.
+	if ( $g_db_log_queries !== 0 ) {
+		$t_log_queries = $g_db_log_queries;
+		$g_db_log_queries = 0;
+	} else {
+		$t_log_queries = null;
+	}
+
+	$query = 'SELECT id, note FROM {bugnote_text}';
+
+	$t_result = db_query_bound( $query );
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$text_id = (int)$t_row['id'];
+		$note = $t_row['note'];
+
+		$query = 'UPDATE {bugnote} SET note=' .db_param() . ' WHERE bugnote_text_id=' .db_param();
+		$t_result3 = db_query_bound( $query, array( $note, $text_id ) );
+
+		$t_done[$text_id] = $text_id;
+		if( sizeof( $t_done ) > 100 ) {
+			$query = 'DELETE FROM {bugnote_text} WHERE id IN (' .implode(',',$t_done) . ')';
+			$t_result3 = db_query_bound( $query );
+			$t_done = array();
+		}
+	}
+
+	// re-enabled query logging if we disabled it
+	if ( $t_log_queries !== null ) {
+		$g_db_log_queries = $t_log_queries;
+	}
+
+	# Return 2 because that's what ADOdb/DataDict does when things happen properly
+	return 2;
+}

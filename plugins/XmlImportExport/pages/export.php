@@ -74,7 +74,6 @@ $t_writer->writeAttribute( 'format', '1' );
 # Ignored fields, these will be skipped
 $t_ignore = array(
 	'_stats',
-	'bug_text_id',
 );
 
 # properties that we want to export are 'protected'
@@ -241,7 +240,6 @@ foreach( $t_result as $t_row ) {
 
 	# Save memory by clearing cache
 	# bug_clear_cache();
-	# bug_text_clear_cache();
 }
 
 $t_writer->endElement(); # mantis
