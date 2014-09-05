@@ -248,7 +248,7 @@ print_summary_submenu(); ?>
 		<thead>
 			<tr class="row-category2">
 				<th><?php echo lang_get( 'most_active' ) ?></th>
-				<td class="right" width="14%"><?php echo lang_get( 'score' ); ?></td>
+				<td class="right"><?php echo lang_get( 'score' ); ?></td>
 			</tr>
 		</thead>
 		<?php summary_print_by_activity() ?>
@@ -259,7 +259,7 @@ print_summary_submenu(); ?>
 		<thead>
 			<tr class="row-category2">
 				<th><?php echo lang_get( 'longest_open' ) ?></th>
-				<td class="right" width="14%"><?php echo lang_get( 'days' ); ?></td>
+				<td class="right"><?php echo lang_get( 'days' ); ?></td>
 			</tr>
 		</thead>
 		<?php summary_print_by_age() ?>

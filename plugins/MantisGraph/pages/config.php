@@ -70,7 +70,9 @@ function print_font_checked( $p_font_name ) {
 
 <br/>
 <form action="<?php echo plugin_page( 'config_edit' )?>" method="post">
+<fieldset>
 <?php echo form_security_field( 'plugin_graph_config_edit' ) ?>
+</fieldset>
 <table class="width75" cellspacing="1">
 
 <tr>

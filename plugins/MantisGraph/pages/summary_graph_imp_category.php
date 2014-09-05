@@ -51,7 +51,7 @@ $t_token = token_set( TOKEN_GRAPH, json_encode( $t_metrics ) );
 	</td>
 </tr>
 <tr>
-	<td width="100%" class="center">
+	<td class="center">
 		<img src="<?php echo plugin_page( 'summary_graph_bycategory.php' )?>&amp;width=<?php echo $t_graph_width?>" alt="" />
 	</td>
 </tr>

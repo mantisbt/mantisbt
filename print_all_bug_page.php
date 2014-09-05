@@ -120,12 +120,13 @@ html_body_begin();
 
 <form method="post" action="view_all_set.php">
 <?php # CSRF protection not required here - form does not result in modifications ?>
-<input type="hidden" name="type" value="1" />
-<input type="hidden" name="print" value="1" />
-<input type="hidden" name="offset" value="0" />
-<input type="hidden" name="<?php echo FILTER_PROPERTY_SORT_FIELD_NAME; ?>" value="<?php echo $f_sort ?>" />
-<input type="hidden" name="<?php echo FILTER_PROPERTY_SORT_DIRECTION; ?>" value="<?php echo $f_dir ?>" />
-
+<fieldset style="display: none">
+	<input type="hidden" name="type" value="1" />
+	<input type="hidden" name="print" value="1" />
+	<input type="hidden" name="offset" value="0" />
+	<input type="hidden" name="<?php echo FILTER_PROPERTY_SORT_FIELD_NAME; ?>" value="<?php echo $f_sort ?>" />
+	<input type="hidden" name="<?php echo FILTER_PROPERTY_SORT_DIRECTION; ?>" value="<?php echo $f_dir ?>" />
+</fieldset>
 <table class="width100" cellpadding="2px">
 <?php
 #<SQLI> Excel & Print export
@@ -159,8 +160,8 @@ $t_icon_path = config_get( 'icon_path' );
 	$t_search = urlencode( $f_search );
 
 	$t_icons = array(
-		array( 'print_all_bug_page_word', 'word', '', 'fileicons/doc.gif', 'Word 2000' ),
-		array( 'print_all_bug_page_word', 'html', 'target="_blank"', 'ie.gif', 'Word View' ) );
+		array( 'print_all_bug_page_word', 'word', 'fileicons/doc.gif', 'Word 2000' ),
+		array( 'print_all_bug_page_word', 'html', 'ie.gif', 'Word View' ) );
 
 	foreach ( $t_icons as $t_icon ) {
 		echo '<a href="' . $t_icon[0] . '.php?' . FILTER_PROPERTY_SEARCH. '=' . $t_search .
@@ -169,7 +170,7 @@ $t_icon_path = config_get( 'icon_path' );
 			'&amp;type_page=' . $t_icon[1] .
 			'&amp;export=' . $f_export .
 			'&amp;show_flag=' . $t_show_flag .
-			'" ' . $t_icon[2] . '>' .
+			'">' .
 			'<img src="' . $t_icon_path . $t_icon[3] . '" alt="' . $t_icon[4] . '" /></a> ';
 	}
 ?>
@@ -242,12 +243,14 @@ $t_icon_path = config_get( 'icon_path' );
 	} # isset_loop
 } # for_loop
 ?>
-<input type="hidden" name="show_flag" value="1" />
 </table>
 
-<br />
-
-<input type="submit" class="button" value="<?php echo lang_get( 'hide_button' ) ?>" />
+<fieldset style="display: none">
+	<input type="hidden" name="show_flag" value="1" />
+</fieldset>
+<p>
+	<input type="submit" class="button" value="<?php echo lang_get( 'hide_button' ) ?>" />
+</p>
 </form>
 
 <?php

@@ -196,7 +196,7 @@ function write_bug_rows( array $p_rows ) {
 		if( ( 0 == $t_row->sticky ) && $t_in_stickies ) {	# demarcate stickies, if any have been shown
 ?>
 		   <tr>
-				   <td class="left" colspan="<?php echo count( $g_columns ); ?>" bgcolor="#999999">&#160;</td>
+				   <td class="left sticky-header" colspan="<?php echo count( $g_columns ); ?>">&#160;</td>
 		   </tr>
 <?php
 			$t_in_stickies = false;

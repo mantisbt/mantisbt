@@ -50,6 +50,7 @@ td.right			{ text-align: right; }
 td.category, th.category		{ background-color: #c8c8e8; color: #000000; font-weight: bold; vertical-align : top; }
 td.category2, th.category2		{ background-color: #c8c8e8; color: #000000; vertical-align : top; }
 td.overdue			{ background-color: #ff0000; color: #000000; font-weight: bold; }
+td.sticky-header 	{ background-color: #999999; }
 td.width30			{ width: 30%; }
 td.col-1			{ background-color: #d8d8d8; color: #000000; }
 td.col-2			{ background-color: #e8e8e8; color: #000000; }
