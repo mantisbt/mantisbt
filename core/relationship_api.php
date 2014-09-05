@@ -371,8 +371,6 @@ function relationship_get_all_src( $p_src_bug_id ) {
 		$i++;
 	}
 
-	unset( $t_bug_relationship_data[$i] );
-
 	if( !empty( $t_bug_array ) ) {
 		bug_cache_array_rows( $t_bug_array );
 	}
@@ -412,7 +410,6 @@ function relationship_get_all_dest( $p_dest_bug_id ) {
 		$t_bug_array[] = $t_row['source_bug_id'];
 		$i++;
 	}
-	unset( $t_bug_relationship_data[$i] );
 
 	if( !empty( $t_bug_array ) ) {
 		bug_cache_array_rows( $t_bug_array );
