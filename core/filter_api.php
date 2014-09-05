@@ -1027,7 +1027,7 @@ function filter_get_bug_count( array $p_query_clauses ) {
 		$t_where_string .= implode( $p_query_clauses['operator'], $p_query_clauses['where'] );
 		$t_where_string .= ' ) ';
 	}
-	$t_result = db_query_bound( $t_select_string . ' ' . $t_from_string . ' ' . $t_join_string . ' ' . $t_where_string, $p_query_clauses['where_values'] );
+	$t_result = db_query( $t_select_string . ' ' . $t_from_string . ' ' . $t_join_string . ' ' . $t_where_string, $p_query_clauses['where_values'] );
 	return db_result( $t_result );
 }
 
@@ -2055,7 +2055,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		$t_where_string .= ' ) ';
 	}
 
-	$t_result = db_query_bound( $t_select_string . $t_from_string . $t_join_string . $t_where_string . $t_order_string, $t_query_clauses['where_values'], $p_per_page, $t_offset );
+	$t_result = db_query( $t_select_string . $t_from_string . $t_join_string . $t_where_string . $t_order_string, $t_query_clauses['where_values'], $p_per_page, $t_offset );
 	$t_row_count = db_num_rows( $t_result );
 
 	$t_id_array_lastmod = array();
@@ -2080,7 +2080,7 @@ function filter_cache_result( array $p_rows, array $p_id_array_lastmod ) {
 	$t_query = 'SELECT DISTINCT bug_id,MAX(last_modified) as last_modified, COUNT(last_modified) as count FROM {bugnote} ' . $t_where_string . ' GROUP BY bug_id';
 
 	# perform query
-	$t_result = db_query_bound( $t_query );
+	$t_result = db_query( $t_query );
 	$t_row_count = db_num_rows( $t_result );
 	for( $i = 0;$i < $t_row_count;$i++ ) {
 		$t_row = db_fetch_array( $t_result );
@@ -4432,7 +4432,7 @@ function filter_cache_row( $p_filter_id, $p_trigger_errors = true ) {
 	}
 
 	$t_query = 'SELECT * FROM {filters} WHERE id=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $p_filter_id ) );
+	$t_result = db_query( $t_query, array( $p_filter_id ) );
 
 	if( 0 == db_num_rows( $t_result ) ) {
 		if( $p_trigger_errors ) {
@@ -4494,7 +4494,7 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
 					WHERE user_id=' . db_param() . '
 					AND project_id=' . db_param() . '
 					AND name=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $t_user_id, $c_project_id, $p_name ) );
+	$t_result = db_query( $t_query, array( $t_user_id, $c_project_id, $p_name ) );
 
 	if( db_num_rows( $t_result ) > 0 ) {
 		$t_row = db_fetch_array( $t_result );
@@ -4503,7 +4503,7 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
 					  SET is_public=' . db_param() . ',
 						filter_string=' . db_param() . '
 					  WHERE id=' . db_param();
-		db_query_bound( $t_query, array( $p_is_public, $p_filter_string, $t_row['id'] ) );
+		db_query( $t_query, array( $p_is_public, $p_filter_string, $t_row['id'] ) );
 
 		return $t_row['id'];
 	} else {
@@ -4511,7 +4511,7 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
 						( user_id, project_id, is_public, name, filter_string )
 					  VALUES
 						( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-		db_query_bound( $t_query, array( $t_user_id, $c_project_id, $p_is_public, $p_name, $p_filter_string ) );
+		db_query( $t_query, array( $t_user_id, $c_project_id, $p_is_public, $p_name, $p_filter_string ) );
 
 		# Recall the query, we want the filter ID
 		$t_query = 'SELECT id
@@ -4519,7 +4519,7 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
 						WHERE user_id=' . db_param() . '
 						AND project_id=' . db_param() . '
 						AND name=' . db_param();
-		$t_result = db_query_bound( $t_query, array( $t_user_id, $c_project_id, $p_name ) );
+		$t_result = db_query( $t_query, array( $t_user_id, $c_project_id, $p_name ) );
 
 		if( db_num_rows( $t_result ) > 0 ) {
 			$t_row = db_fetch_array( $t_result );
@@ -4555,7 +4555,7 @@ function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
 	}
 
 	$t_query = 'SELECT * FROM {filters} WHERE id=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $c_filter_id ) );
+	$t_result = db_query( $t_query, array( $c_filter_id ) );
 
 	if( db_num_rows( $t_result ) > 0 ) {
 		$t_row = db_fetch_array( $t_result );
@@ -4601,7 +4601,7 @@ function filter_db_get_project_current( $p_project_id, $p_user_id = null ) {
 				  WHERE user_id=' . db_param() . '
 					AND project_id=' . db_param() . '
 					AND name=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $c_user_id, $c_project_id, '' ) );
+	$t_result = db_query( $t_query, array( $c_user_id, $c_project_id, '' ) );
 
 	if( db_num_rows( $t_result ) > 0 ) {
 		$t_row = db_fetch_array( $t_result );
@@ -4620,7 +4620,7 @@ function filter_db_get_name( $p_filter_id ) {
 	$c_filter_id = (int)$p_filter_id;
 
 	$t_query = 'SELECT * FROM {filters} WHERE id=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $c_filter_id ) );
+	$t_result = db_query( $t_query, array( $c_filter_id ) );
 
 	if( db_num_rows( $t_result ) > 0 ) {
 		$t_row = db_fetch_array( $t_result );
@@ -4657,7 +4657,7 @@ function filter_db_can_delete_filter( $p_filter_id ) {
 				  AND user_id=' . db_param() . '
 				  AND project_id!=' . db_param();
 
-	$t_result = db_query_bound( $t_query, array( $c_filter_id, $t_user_id, -1 ) );
+	$t_result = db_query( $t_query, array( $c_filter_id, $t_user_id, -1 ) );
 
 	if( db_num_rows( $t_result ) > 0 ) {
 		return true;
@@ -4679,7 +4679,7 @@ function filter_db_delete_filter( $p_filter_id ) {
 	}
 
 	$t_query = 'DELETE FROM {filters} WHERE id=' . db_param();
-	db_query_bound( $t_query, array( $c_filter_id ) );
+	db_query( $t_query, array( $c_filter_id ) );
 
 	return true;
 }
@@ -4692,7 +4692,7 @@ function filter_db_delete_current_filters() {
 	$t_all_id = ALL_PROJECTS;
 
 	$t_query = 'DELETE FROM {filters} WHERE project_id<=' . db_param() . ' AND name=' . db_param();
-	db_query_bound( $t_query, array( $t_all_id, '' ) );
+	db_query( $t_query, array( $t_all_id, '' ) );
 }
 
 /**
@@ -4732,7 +4732,7 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
 					AND (is_public = ' . db_param() . '
 						OR user_id = ' . db_param() . ')
 					ORDER BY is_public DESC, name ASC';
-	$t_result = db_query_bound( $t_query, array( $t_project_id, db_prepare_bool( true ), $t_user_id ) );
+	$t_result = db_query( $t_query, array( $t_project_id, db_prepare_bool( true ), $t_user_id ) );
 	$t_query_count = db_num_rows( $t_result );
 
 	for( $i = 0; $i < $t_query_count; $i++ ) {

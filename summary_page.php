@@ -73,7 +73,7 @@ $t_query = 'SELECT b.id, b.date_submitted, b.last_updated, MAX(h.date_modified) 
 		WHERE b.status >=' . db_param() . ' AND ' . $t_specific_where . '
 		GROUP BY b.id, b.status, b.date_submitted, b.last_updated
 		ORDER BY b.id ASC';
-$t_result = db_query_bound( $t_query, array( $t_resolved, $t_resolved ) );
+$t_result = db_query( $t_query, array( $t_resolved, $t_resolved ) );
 $t_bug_count = 0;
 
 $t_bug_id       = 0;

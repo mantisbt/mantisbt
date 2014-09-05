@@ -94,7 +94,7 @@ class MantisDbParam {
 
 	/**
 	 * Pops the previous value of param count from the stack
-	 * This function is called by {@see db_query_bound()} and should not need
+	 * This function is called by {@see db_query()} and should not need
 	 * to be executed directly
 	 * @return void
 	 */
@@ -151,9 +151,9 @@ function db_connect( $p_dsn, $p_hostname = null, $p_username = null, $p_password
 		if( db_is_mysql() ) {
 			# @todo Is there a way to translate any charset name to MySQL format? e.g. remote the dashes?
 			# @todo Is this needed for other databases?
-			db_query_bound( 'SET NAMES UTF8' );
+			db_query( 'SET NAMES UTF8' );
 		} else if( db_is_db2() && $p_db_schema !== null && !is_blank( $p_db_schema ) ) {
-			$t_result2 = db_query_bound( 'set schema ' . $p_db_schema );
+			$t_result2 = db_query( 'set schema ' . $p_db_schema );
 			if( $t_result2 === false ) {
 				db_error();
 				trigger_error( ERROR_DB_CONNECT_FAILED, ERROR );
@@ -309,6 +309,14 @@ function db_check_identifier_size( $p_identifier ) {
 }
 
 /**
+ * function alias for db_query() for legacy support of plugins
+ * @deprecated db_query should be used in preference to this function. This function may be removed in 2.0
+ */
+function db_query_bound() {
+  return call_user_func_array( 'db_query', func_get_args() );
+}
+
+/**
  * execute query, requires connection to be opened
  * An error will be triggered if there is a problem executing the query.
  * This will pop the database parameter stack {@see MantisDbParam} after a successful execution
@@ -321,7 +329,7 @@ function db_check_identifier_size( $p_identifier ) {
  * @param integer $p_offset    Offset query results for paging.
  * @return IteratorAggregate|boolean adodb result set or false if the query failed.
  */
-function db_query_bound( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset = -1 ) {
+function db_query( $p_query, array $p_arr_parms = null, $p_limit = -1, $p_offset = -1 ) {
 	global $g_queries_array, $g_db, $g_db_log_queries, $g_db_param;
 
 	$t_db_type = config_get_global( 'db_type' );
@@ -594,13 +602,13 @@ function db_insert_id( $p_table = null, $p_field = 'id' ) {
 			$t_query = 'SELECT currval(\'' . $p_table . '_' . $p_field . '_seq\')';
 		}
 		if( isset( $t_query ) ) {
-			$t_result = db_query_bound( $t_query );
+			$t_result = db_query( $t_query );
 			return db_result( $t_result );
 		}
 	}
 	if( db_is_mssql() ) {
 		$t_query = 'SELECT IDENT_CURRENT(\'' . $p_table . '\')';
-		$t_result = db_query_bound( $t_query );
+		$t_result = db_query( $t_query );
 		return db_result( $t_result );
 	}
 	return $g_db->Insert_ID();
@@ -737,7 +745,7 @@ function db_close() {
  * prepare a string before DB insertion
  * @param string $p_string Unprepared string.
  * @return string prepared database query string
- * @deprecated db_query_bound should be used in preference to this function. This function may be removed in 1.2.0 final
+ * @deprecated db_query should be used in preference to this function. This function may be removed in 1.2.0 final
  */
 function db_prepare_string( $p_string ) {
 	global $g_db;
@@ -783,7 +791,7 @@ function db_prepare_string( $p_string ) {
 /**
  * Prepare a binary string before DB insertion
  * Use of this function is required for some DB types, to properly encode
- * BLOB fields prior to calling db_query_bound()
+ * BLOB fields prior to calling db_query()
  * @param string $p_string Raw binary data.
  * @return string prepared database query string
  */
@@ -817,7 +825,7 @@ function db_prepare_binary_string( $p_string ) {
  * prepare a int for database insertion.
  * @param integer $p_int Integer.
  * @return integer integer
- * @deprecated db_query_bound should be used in preference to this function. This function may be removed in 1.2.0 final
+ * @deprecated db_query should be used in preference to this function. This function may be removed in 1.2.0 final
  * @todo Use/Behaviour of this function should be reviewed before 1.2.0 final
  */
 function db_prepare_int( $p_int ) {
@@ -828,7 +836,7 @@ function db_prepare_int( $p_int ) {
  * prepare a double for database insertion.
  * @param float $p_double Double.
  * @return double double
- * @deprecated db_query_bound should be used in preference to this function. This function may be removed in 1.2.0 final
+ * @deprecated db_query should be used in preference to this function. This function may be removed in 1.2.0 final
  * @todo Use/Behaviour of this function should be reviewed before 1.2.0 final
  */
 function db_prepare_double( $p_double ) {
@@ -839,7 +847,7 @@ function db_prepare_double( $p_double ) {
  * prepare a boolean for database insertion.
  * @param boolean $p_bool Boolean value.
  * @return integer integer representing boolean
- * @deprecated db_query_bound should be used in preference to this function. This function may be removed in 1.2.0 final
+ * @deprecated db_query should be used in preference to this function. This function may be removed in 1.2.0 final
  * @todo Use/Behaviour of this function should be reviewed before 1.2.0 final
  */
 function db_prepare_bool( $p_bool ) {

@@ -63,7 +63,7 @@ function get_attachment_stats( $p_file_type, $p_in_db ) {
 				ORDER BY p.name";
 			break;
 	}
-	$t_result = db_query_bound( $t_query );
+	$t_result = db_query( $t_query );
 	$t_stats = array();
 
 	while( $t_row = db_fetch_array( $t_result ) ) {

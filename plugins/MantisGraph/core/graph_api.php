@@ -633,7 +633,7 @@ function create_bug_enum_summary( $p_enum_string, $p_enum ) {
 
 	foreach ( $t_assoc_array as $t_value => $t_label ) {
 		$t_query = 'SELECT COUNT(*) FROM {bug} WHERE ' . $p_enum . '=' . db_param() . ' ' . $t_specific_where;
-		$t_result = db_query_bound( $t_query, array( $t_value ) );
+		$t_result = db_query( $t_query, array( $t_value ) );
 		$t_metrics[$t_label] = db_result( $t_result, 0 );
 	}
 
@@ -664,14 +664,14 @@ function enum_bug_group( $p_enum_string, $p_enum ) {
 		$t_query = 'SELECT COUNT(*) FROM {bug}
 					WHERE ' . $p_enum . '=' . db_param() . ' AND
 						status<' . db_param() . ' ' . $t_specific_where;
-		$t_result2 = db_query_bound( $t_query, array( $t_value, $t_res_val ) );
+		$t_result2 = db_query( $t_query, array( $t_value, $t_res_val ) );
 		$t_metrics['open'][$t_label] = db_result( $t_result2, 0, 0 );
 
 		# Calculates the number of bugs closed and puts the results in a table
 		$t_query = 'SELECT COUNT(*) FROM {bug}
 					WHERE ' . $p_enum . '=' . db_param() . ' AND
 						status>=' . db_param() . ' ' . $t_specific_where;
-		$t_result2 = db_query_bound( $t_query, array( $t_value, $t_clo_val ) );
+		$t_result2 = db_query( $t_query, array( $t_value, $t_clo_val ) );
 		$t_metrics['closed'][$t_label] = db_result( $t_result2, 0, 0 );
 
 		# Calculates the number of bugs resolved and puts the results in a table
@@ -679,7 +679,7 @@ function enum_bug_group( $p_enum_string, $p_enum ) {
 					WHERE ' . $p_enum . '=' . db_param() . ' AND
 						status>=' . db_param() . ' AND
 						status<' . db_param() . ' ' . $t_specific_where;
-		$t_result2 = db_query_bound( $t_query, array(  $t_value, $t_res_val, $t_clo_val ) );
+		$t_result2 = db_query( $t_query, array(  $t_value, $t_res_val, $t_clo_val ) );
 		$t_metrics['resolved'][$t_label] = db_result( $t_result2, 0, 0 );
 	}
 
@@ -699,7 +699,7 @@ function create_developer_summary() {
 	$t_clo_val = config_get( 'bug_closed_status_threshold' );
 
 	$t_query = 'SELECT handler_id, status FROM {bug} WHERE handler_id > 0 ' . $t_specific_where;
-	$t_result = db_query_bound( $t_query );
+	$t_result = db_query( $t_query );
 	$t_total_handled = db_num_rows( $t_result );
 
 	$t_handler_arr = array();
@@ -751,7 +751,7 @@ function create_reporter_summary() {
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
 	$t_query = 'SELECT reporter_id FROM {bug} WHERE ' . $t_specific_where;
-	$t_result = db_query_bound( $t_query );
+	$t_result = db_query( $t_query );
 	$t_total_reported = db_num_rows( $t_result );
 
 	$t_reporter_arr = array();
@@ -793,7 +793,7 @@ function create_category_summary() {
 	$t_query = 'SELECT id, name FROM {category}
 				WHERE ' . $t_specific_where . ' OR project_id=' . ALL_PROJECTS . '
 				ORDER BY name';
-	$t_result = db_query_bound( $t_query );
+	$t_result = db_query( $t_query );
 	$t_category_count = db_num_rows( $t_result );
 
 	$t_metrics = array();
@@ -802,7 +802,7 @@ function create_category_summary() {
 		$t_cat_name = $t_row['name'];
 		$t_cat_id = $t_row['id'];
 		$t_query = 'SELECT COUNT(*) FROM {bug} WHERE category_id=' . db_param() . ' AND ' . $t_specific_where;
-		$t_result2 = db_query_bound( $t_query, array( $t_cat_id ) );
+		$t_result2 = db_query( $t_query, array( $t_cat_id ) );
 		if( isset($t_metrics[$t_cat_name]) ) {
 			$t_metrics[$t_cat_name] = $t_metrics[$t_cat_name] + db_result( $t_result2, 0, 0 );
 		} else {
@@ -829,7 +829,7 @@ function create_cumulative_bydate() {
 
 	# Get all the submitted dates
 	$t_query = 'SELECT date_submitted FROM {bug} WHERE ' . $t_specific_where . ' ORDER BY date_submitted';
-	$t_result = db_query_bound( $t_query );
+	$t_result = db_query( $t_query );
 	$t_bug_count = db_num_rows( $t_result );
 
 	for( $i = 0; $i < $t_bug_count; $i++ ) {
@@ -857,7 +857,7 @@ function create_cumulative_bydate() {
 								AND {bug_history}.field_name = \'status\' )
 						OR {bug_history}.id is NULL )
 			ORDER BY {bug}.id, date_modified ASC';
-	$t_result = db_query_bound( $t_query, array( $t_res_val, (string)$t_res_val ) );
+	$t_result = db_query( $t_query, array( $t_res_val, (string)$t_res_val ) );
 	$t_bug_count = db_num_rows( $t_result );
 
 	$t_last_id = 0;

@@ -412,7 +412,7 @@ function cfdef_prepare_list_value_to_database( $p_value ) {
  */
 function cfdef_prepare_list_distinct_values( array $p_field_def ) {
 	$t_query = 'SELECT possible_values FROM {custom_field} WHERE id=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $p_field_def['id'] ) );
+	$t_result = db_query( $t_query, array( $p_field_def['id'] ) );
 
 	$t_row = db_fetch_array( $t_result );
 	if( !$t_row ) {

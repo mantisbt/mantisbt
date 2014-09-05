@@ -65,7 +65,7 @@ function move_attachments_to_db( $p_type, $p_projects ) {
 	# Process projects list
 	foreach( $p_projects as $t_project ) {
 		# Retrieve attachments for the project
-		$t_result = db_query_bound( $t_query, array( $t_project ) );
+		$t_result = db_query( $t_query, array( $t_project ) );
 
 		# Project upload path
 		$t_upload_path = project_get_field( $t_project, 'file_path' );
@@ -99,13 +99,13 @@ function move_attachments_to_db( $p_type, $p_projects ) {
 					if( db_is_oracle() ) {
 						db_update_blob( $t_file_table, 'content', $c_content, "id=" . (int)$t_row['id'] );
 						$t_query = "UPDATE $t_file_table SET folder='' WHERE id = " . db_param();
-						$t_result2 = db_query_bound( $t_query, array( (int)$t_row['id'] ) );
+						$t_result2 = db_query( $t_query, array( (int)$t_row['id'] ) );
 					} else {
 						$t_update_query = "UPDATE $t_file_table
 										SET folder = " . db_param() . ",
 										content = " . db_param() . "
 										WHERE id = " . db_param();
-						$t_result2 = db_query_bound( $t_update_query,
+						$t_result2 = db_query( $t_update_query,
 							array( '', $c_content, (int)$t_row['id'] )
 						);
 					}
@@ -176,7 +176,7 @@ function move_attachments_to_disk( $p_type, array $p_projects ) {
 	# Process projects list
 	foreach( $p_projects as $t_project ) {
 		# Retrieve attachments for the project
-		$t_result = db_query_bound( $t_query, array( $t_project ) );
+		$t_result = db_query( $t_query, array( $t_project ) );
 
 		# Project upload path
 		$t_upload_path = project_get_upload_path( $t_project );
@@ -215,7 +215,7 @@ function move_attachments_to_disk( $p_type, array $p_projects ) {
 									WHERE id = ' . db_param();
 								break;
 						}
-						$t_update_result = db_query_bound(
+						$t_update_result = db_query(
 							$t_update_query,
 							array( $t_upload_path, $t_row['id'] )
 						);

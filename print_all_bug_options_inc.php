@@ -107,7 +107,7 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 
 	# Grab the data
 	$t_query = 'SELECT print_pref FROM {user_print_pref} WHERE user_id=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $p_user_id ) );
+	$t_result = db_query( $t_query, array( $p_user_id ) );
 
 	## OOPS, No entry in the database yet.	Lets make one
 	if( 0 == db_num_rows( $t_result ) ) {
@@ -123,11 +123,11 @@ function edit_printing_prefs( $p_user_id = null, $p_error_if_protected = true, $
 				(user_id, print_pref)
 				VALUES
 				(' . db_param() . ',' . db_param() . ')';
-		db_query_bound( $t_query, array( $p_user_id, $t_default ) );
+		db_query( $t_query, array( $p_user_id, $t_default ) );
 
 		# Rerun select query
 		$t_query = 'SELECT print_pref FROM {user_print_pref} WHERE user_id=' . db_param();
-		$t_result = db_query_bound( $t_query, array( $p_user_id ) );
+		$t_result = db_query( $t_query, array( $p_user_id ) );
 	}
 
 	# putting the query result into an array with the same size as $t_fields_arr

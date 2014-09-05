@@ -565,7 +565,7 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 
 	$t_query = 'SELECT id FROM {bug} WHERE summary = ' . db_param();
 
-	$t_result = db_query_bound( $t_query, array( $p_summary ), 1 );
+	$t_result = db_query( $t_query, array( $p_summary ), 1 );
 
 	if( db_num_rows( $t_result ) == 0 ) {
 		return 0;

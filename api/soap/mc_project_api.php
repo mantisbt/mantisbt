@@ -734,7 +734,7 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		( ut.access_level = ' . db_param() . ' ) )
 		ORDER BY pt.name ASC, pft.title ASC';
 
-	$t_result = db_query_bound( $t_query, array( $t_user_id, $t_user_id, $t_pub, $t_user_id, $t_admin ) );
+	$t_result = db_query( $t_query, array( $t_user_id, $t_user_id, $t_pub, $t_user_id, $t_admin ) );
 	$t_num_files = db_num_rows( $t_result );
 
 	$t_attachments = array();

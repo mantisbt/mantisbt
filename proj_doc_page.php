@@ -102,7 +102,7 @@ $t_query = 'SELECT pft.id, pft.project_id, pft.filename, pft.filesize, pft.title
 					( ( pult.user_id = ' . db_param() . ' ) AND ( pult.access_level ' . $t_access_clause . ' ) ) OR
 					( ut.access_level >= ' . db_param() . ' ) )
 			ORDER BY pt.name ASC, pft.title ASC';
-$t_result = db_query_bound( $t_query, array( $t_user_id, $t_user_id, $t_pub, $t_user_id, $t_admin ) );
+$t_result = db_query( $t_query, array( $t_user_id, $t_user_id, $t_pub, $t_user_id, $t_admin ) );
 
 html_page_top( lang_get( 'docs_link' ) );
 ?>

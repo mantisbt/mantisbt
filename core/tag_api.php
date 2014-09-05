@@ -60,7 +60,7 @@ require_api( 'utility_api.php' );
  */
 function tag_exists( $p_tag_id ) {
 	$t_query = 'SELECT * FROM {tag} WHERE id=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $p_tag_id ) );
+	$t_result = db_query( $t_query, array( $p_tag_id ) );
 
 	return db_num_rows( $t_result ) > 0;
 }
@@ -87,7 +87,7 @@ function tag_is_unique( $p_name ) {
 	$c_name = trim( $p_name );
 
 	$t_query = 'SELECT id FROM {tag} WHERE ' . db_helper_like( 'name' );
-	$t_result = db_query_bound( $t_query, array( $c_name ) );
+	$t_result = db_query( $t_query, array( $c_name ) );
 
 	if( db_result( $t_result ) ) {
 		return false;
@@ -250,7 +250,7 @@ function tag_get_all( $p_name_filter, $p_count, $p_offset ) {
 
 	$t_query = 'SELECT * FROM {tag} ' . $t_where . ' ORDER BY name';
 
-	return db_query_bound( $t_query, $t_where_params, $p_count, $p_offset );
+	return db_query( $t_query, $t_where_params, $p_count, $p_offset );
 }
 
 /**
@@ -269,7 +269,7 @@ function tag_count( $p_name_filter ) {
 
 	$t_query = 'SELECT count(*) FROM {tag}' . $t_where;
 
-	$t_result = db_query_bound( $t_query, $t_where_params );
+	$t_result = db_query( $t_query, $t_where_params );
 	$t_row = db_fetch_array( $t_result );
 	return (int)db_result( $t_result );
 
@@ -284,7 +284,7 @@ function tag_get( $p_tag_id ) {
 	tag_ensure_exists( $p_tag_id );
 
 	$t_query = 'SELECT * FROM {tag} WHERE id=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $p_tag_id ) );
+	$t_result = db_query( $t_query, array( $p_tag_id ) );
 
 	$t_row = db_fetch_array( $t_result );
 
@@ -302,7 +302,7 @@ function tag_get( $p_tag_id ) {
  */
 function tag_get_by_name( $p_name ) {
 	$t_query = 'SELECT * FROM {tag} WHERE ' . db_helper_like( 'name' );
-	$t_result = db_query_bound( $t_query, array( $p_name ) );
+	$t_result = db_query( $t_query, array( $p_name ) );
 
 	$t_row = db_fetch_array( $t_result );
 
@@ -358,7 +358,7 @@ function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
 				VALUES
 				( ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
 
-	db_query_bound( $t_query, array( $p_user_id, trim( $p_name ), trim( $p_description ), $c_date_created, $c_date_created ) );
+	db_query( $t_query, array( $p_user_id, trim( $p_name ), trim( $p_description ), $c_date_created, $c_date_created ) );
 
 	return db_insert_id( db_get_table( 'tag' ) );
 }
@@ -400,7 +400,7 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 						description=' . db_param() . ',
 						date_updated=' . db_param() . '
 					WHERE id=' . db_param();
-	db_query_bound( $t_query, array( (int)$p_user_id, $p_name, $p_description, $c_date_updated, $p_tag_id ) );
+	db_query( $t_query, array( (int)$p_user_id, $p_name, $p_description, $c_date_updated, $p_tag_id ) );
 
 	if( $t_rename ) {
 		$t_bugs = tag_get_bugs_attached( $p_tag_id );
@@ -429,7 +429,7 @@ function tag_delete( $p_tag_id ) {
 	}
 
 	$t_query = 'DELETE FROM {tag} WHERE id=' . db_param();
-	db_query_bound( $t_query, array( $p_tag_id ) );
+	db_query( $t_query, array( $p_tag_id ) );
 
 	return true;
 }
@@ -450,7 +450,7 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 			$t_query = 'SELECT t.id FROM {tag} t
 					LEFT JOIN {bug_tag} b ON t.id=b.tag_id
 					WHERE b.bug_id IS NULL OR b.bug_id != ' . db_param();
-			$t_result = db_query_bound( $t_query, $t_params );
+			$t_result = db_query( $t_query, $t_params );
 
 			$t_params = null;
 
@@ -477,7 +477,7 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 	}
 
 	$t_query .= ' ORDER BY name ASC ';
-	$t_result = db_query_bound( $t_query, $t_params );
+	$t_result = db_query( $t_query, $t_params );
 
 	$t_results_to_return = array();
 
@@ -496,7 +496,7 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
  */
 function tag_bug_is_attached( $p_tag_id, $p_bug_id ) {
 	$t_query = 'SELECT bug_id FROM {bug_tag} WHERE tag_id=' . db_param() . ' AND bug_id=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $p_tag_id, $p_bug_id ) );
+	$t_result = db_query( $t_query, array( $p_tag_id, $p_bug_id ) );
 	return( db_result( $t_result ) !== false );
 }
 
@@ -508,7 +508,7 @@ function tag_bug_is_attached( $p_tag_id, $p_bug_id ) {
  */
 function tag_bug_get_row( $p_tag_id, $p_bug_id ) {
 	$t_query = 'SELECT * FROM {bug_tag} WHERE tag_id=' . db_param() . ' AND bug_id=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $p_tag_id, $p_bug_id ) );
+	$t_result = db_query( $t_query, array( $p_tag_id, $p_bug_id ) );
 
 	$t_row = db_fetch_array( $t_result );
 	if( !$t_row ) {
@@ -528,7 +528,7 @@ function tag_bug_get_attached( $p_bug_id ) {
 					LEFT JOIN {bug_tag} b
 						on t.id=b.tag_id
 					WHERE b.bug_id=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $p_bug_id ) );
+	$t_result = db_query( $t_query, array( $p_bug_id ) );
 
 	$t_rows = array();
 	while( $t_row = db_fetch_array( $t_result ) ) {
@@ -546,7 +546,7 @@ function tag_bug_get_attached( $p_bug_id ) {
  */
 function tag_get_bugs_attached( $p_tag_id ) {
 	$t_query = 'SELECT bug_id FROM {bug_tag} WHERE tag_id=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $p_tag_id ) );
+	$t_result = db_query( $t_query, array( $p_tag_id ) );
 
 	$t_bugs = array();
 	while( $t_row = db_fetch_array( $t_result ) ) {
@@ -582,7 +582,7 @@ function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
 					( tag_id, bug_id, user_id, date_attached )
 					VALUES
 					( ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
-	db_query_bound( $t_query, array( $p_tag_id, $p_bug_id, $p_user_id, db_now() ) );
+	db_query( $t_query, array( $p_tag_id, $p_bug_id, $p_user_id, db_now() ) );
 
 	$t_tag_name = tag_get_field( $p_tag_id, 'name' );
 	history_log_event_special( $p_bug_id, TAG_ATTACHED, $t_tag_name );
@@ -622,7 +622,7 @@ function tag_bug_detach( $p_tag_id, $p_bug_id, $p_add_history = true, $p_user_id
 	access_ensure_bug_level( $t_detach_level, $p_bug_id, $t_user_id );
 
 	$t_query = 'DELETE FROM {bug_tag} WHERE tag_id=' . db_param() . ' AND bug_id=' . db_param();
-	db_query_bound( $t_query, array( $p_tag_id, $p_bug_id ) );
+	db_query( $t_query, array( $p_tag_id, $p_bug_id ) );
 
 	if( $p_add_history ) {
 		$t_tag_name = tag_get_field( $p_tag_id, 'name' );
@@ -711,7 +711,7 @@ function tag_display_attached( $p_bug_id ) {
  */
 function tag_stats_attached( $p_tag_id ) {
 	$t_query = 'SELECT COUNT(*) FROM {bug_tag} WHERE tag_id=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $p_tag_id ) );
+	$t_result = db_query( $t_query, array( $p_tag_id ) );
 
 	return db_result( $t_result );
 }
@@ -742,7 +742,7 @@ function tag_stats_related( $p_tag_id, $p_limit = 5 ) {
 					WHERE tag_id != ' . db_param() . # 1st Param
 						' AND bug_id IN ( ' . $t_subquery . ' ) ';
 
-	$t_result = db_query_bound( $t_query, array( $p_tag_id, $c_user_id, $c_user_id, $p_tag_id ) );
+	$t_result = db_query( $t_query, array( $p_tag_id, $c_user_id, $c_user_id, $p_tag_id ) );
 
 	$t_tag_counts = array();
 	while( $t_row = db_fetch_array( $t_result ) ) {

@@ -39,7 +39,7 @@ require_api( 'history_api.php' );
  */
 function timeline_get_affected_issues( $p_start_time, $p_end_time ) {
 	$t_query = 'SELECT DISTINCT(bug_id) from {bug_history} WHERE date_modified >= ' . db_param() . ' AND date_modified < ' . db_param();
-	$t_result = db_query_bound( $t_query, array( $p_start_time, $p_end_time ) );
+	$t_result = db_query( $t_query, array( $p_start_time, $p_end_time ) );
 
 	$t_current_project = helper_get_current_project();
 
