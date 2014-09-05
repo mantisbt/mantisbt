@@ -3056,18 +3056,6 @@ $g_display_bug_padding = 7;
  */
 $g_display_bugnote_padding = 7;
 
-/**
- * colours for configuration display
- * @global string $g_colour_project
- */
-$g_colour_project = 'LightGreen';
-
-/**
- * colours for configuration display
- * @global string $g_colour_global
- */
-$g_colour_global = 'LightBlue';
-
 #############################
 # MantisBT Cookie Variables #
 #############################

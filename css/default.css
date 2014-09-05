@@ -767,3 +767,7 @@ div.timeline * div.action { position: relative; top: -43px; left: 40px; padding-
 div.timeline div.entry-no-avatar div.action { top: 0px; left: -2px; }
 
 div.timeline p { margin-left: 3px; }
+
+/* manage_config_* colors */
+.color-global		{ background-color: LightBlue; }
+.color-project		{ background-color: LightGreen; }

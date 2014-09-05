@@ -64,8 +64,6 @@ $t_show_submit = false;
 
 $g_access_levels = MantisEnum::getAssocArrayIndexedByValues( config_get( 'access_levels_enum_string' ) );
 $g_overrides = array();
-$g_color_project = config_get( 'colour_project' );
-$g_color_global = config_get( 'colour_global' );
 
 /**
  * Set overrides
@@ -348,9 +346,9 @@ if( ALL_PROJECTS == $g_project_id ) {
 echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
 echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 if( ALL_PROJECTS <> $g_project_id ) {
-	echo '<span style="background-color:' . $g_color_project . '">' . lang_get( 'colour_project' ) .'</span><br />';
+	echo '<span class="colour-project">' . lang_get( 'colour_project' ) .'</span><br />';
 }
-echo '<span style="background-color:' . $g_color_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
+echo '<span class="colour-global">' . lang_get( 'colour_global' ) . '</span></p>';
 
 echo "<form name=\"mail_config_action\" method=\"post\" action=\"manage_config_work_threshold_set.php\">\n";
 echo form_security_field( 'manage_config_work_threshold_set' );

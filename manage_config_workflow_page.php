@@ -63,9 +63,6 @@ $t_project = helper_get_current_project();
 $g_can_change_workflow = ( $g_access >= config_get_access( 'status_enum_workflow' ) );
 $g_can_change_flags = $g_can_change_workflow;
 $g_overrides = array();
-$g_colour_project = config_get( 'colour_project' );
-$g_colour_global = config_get( 'colour_global' );
-
 
 /**
  * Set overrides
@@ -91,14 +88,14 @@ function set_colour_override( $p_level_file, $p_level_global, $p_level_project )
 	global $g_colour_global, $g_colour_project;
 
 	if( $p_level_project != $p_level_global ) {
-		$t_colour = $g_colour_project;
+		$t_colour = 'colour-project';
 	} else if( $p_level_global != $p_level_file ) {
-		$t_colour = $g_colour_global;
+		$t_colour = 'colour-global';
 	} else {
 		return '';
 	}
 
-	return ' bgcolor="' . $t_colour . '" ';
+	return ' class="' . $t_colour . '" ';
 }
 
 
@@ -434,9 +431,9 @@ if( ALL_PROJECTS == $t_project ) {
 echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
 echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 if( ALL_PROJECTS <> $t_project ) {
-	echo '<span style="background-color:' . $g_colour_project . '">' . lang_get( 'colour_project' ) .'</span><br />';
+	echo '<span class="colour-project">' . lang_get( 'colour_project' ) .'</span><br />';
 }
-echo '<span style="background-color:' . $g_colour_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
+echo '<span class="colour-global">' . lang_get( 'colour_global' ) . '</span></p>';
 
 # show the settings used to derive the table
 threshold_begin( lang_get( 'workflow_thresholds' ) );
