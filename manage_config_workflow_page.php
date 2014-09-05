@@ -420,8 +420,10 @@ foreach ( $t_status_arr as $t_status => $t_status_label ) {
 	}
 }
 
-echo "<form name=\"workflow_config_action\" method=\"post\" action=\"manage_config_workflow_set.php\">\n";
+echo '<form name="workflow_config_action" method="post" action="manage_config_workflow_set.php">' . "\n";
+echo '<fieldset>';
 echo form_security_field( 'manage_config_workflow_set' );
+echo '</fieldset>';
 
 if( ALL_PROJECTS == $t_project ) {
 	$t_project_title = lang_get( 'config_all_projects' );
@@ -492,10 +494,11 @@ if( $g_can_change_flags ) {
 
 	if( 0 < count( $g_overrides ) ) {
 		echo '<div class="right"><form name="mail_config_action" method="post" action="manage_config_revert.php">' ."\n";
+		echo '<fieldset>' . "\n";
 		echo form_security_field( 'manage_config_revert' );
-		echo '<input name="revert" type="hidden" value="' . implode( ',', $g_overrides ) . '"></input>';
-		echo '<input name="project" type="hidden" value="' . $t_project . '"></input>';
-		echo '<input name="return" type="hidden" value="' . string_attribute( form_action_self() ) .'"></input>';
+		echo '<input name="revert" type="hidden" value="' . implode( ',', $g_overrides ) . '" />';
+		echo '<input name="project" type="hidden" value="' . $t_project . '" />';
+		echo '<input name="return" type="hidden" value="' . string_attribute( form_action_self() ) .'" />';
 		echo '<input type="submit" class="button" value=';
 		if( ALL_PROJECTS == $t_project ) {
 			echo lang_get( 'revert_to_system' );
@@ -503,6 +506,7 @@ if( $g_can_change_flags ) {
 			echo lang_get( 'revert_to_all_project' );
 		}
 		echo '" />' . "\n";
+		echo '</fieldset>' . "\n";
 		echo '</form></div>' . "\n";
 	}
 

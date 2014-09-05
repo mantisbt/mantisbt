@@ -1008,14 +1008,16 @@ function print_summary_submenu() {
 		}
 	}
 
-	echo '<div id="summary-submenu">';
-	echo '<ul class="menu">';
-	# Plugins menu items - these are cooked links
-	foreach ( $t_menu_options as $t_menu_item ) {
-		echo '<li>', $t_menu_item, '</li>';
+	if( sizeof( $t_menu_options ) > 0 ) {
+		echo "\t" . '<div id="summary-submenu">' . "\n";
+		echo "\t\t" . '<ul class="menu">' . "\n";
+		# Plugins menu items - these are cooked links
+		foreach ( $t_menu_options as $t_menu_item ) {
+			echo "\t\t\t" . '<li>', $t_menu_item, '</li> . "\n"';
+		}
+		echo "\t\t" . '</ul>' . "\n";
+		echo "\t" . '</div>' . "\n";
 	}
-	echo '</ul>';
-	echo '</div>';
 }
 
 /**

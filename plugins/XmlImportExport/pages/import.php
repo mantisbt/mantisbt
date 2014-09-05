@@ -45,11 +45,16 @@ if( ALL_PROJECTS == $t_project_id ) {
 
 <div class="form-container">
 <form name="file_upload" method="post" enctype="multipart/form-data" action="<?php echo plugin_page( 'import_action' )?>">
+<fieldset>
 <?php echo form_security_field( 'plugin_xml_import_action' ) ?>
-
 <input type="hidden" name="project_id" value="<?php echo $t_project_id;?>" />
+</fieldset>
 
 <table>
+<colgroup>
+	<col style="width:25%;" />
+	<col style="width:75%;" />
+</colgroup>
 <tr>
 	<td class="form-title" colspan="2">
 <?php
@@ -61,11 +66,11 @@ if( ALL_PROJECTS == $t_project_id ) {
 	</td>
 </tr>
 <tr>
-	<th class="category" width="25%">
+	<th class="category">
 		<?php echo lang_get( 'select_file' )?><br />
 		<?php echo '<span class="small">(' . lang_get( 'max_file_size_label' ) . ' ' . number_format( $t_max_file_size / 1000 ) . 'k)</span>'?>
 	</th>
-	<td width="85%">
+	<td>
 		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size?>" />
 		<input type="hidden" name="step" value="1" />
 		<input name="file" type="file" size="40" />
@@ -80,7 +85,7 @@ if( ALL_PROJECTS == $t_project_id ) {
 </tr>
 
 <tr>
-	<th class="category" width="25%">
+	<th class="category">
 		<?php echo plugin_lang_get( 'cross_references' );?>
 	</th>
 	<td>
@@ -106,7 +111,7 @@ if( ALL_PROJECTS == $t_project_id ) {
 </tr>
 
 <tr>
-	<th class="category" width="25%">
+	<th class="category">
 		<?php echo lang_get( 'categories' );?>
 	</th>
 	<td>
