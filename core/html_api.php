@@ -521,7 +521,7 @@ function html_login_info() {
 	$t_realname = current_user_get_field( 'realname' );
 
 	# Login information
-	echo '<div id="login-info">';
+	echo '<div id="login-info">' . "\n";
 	if( current_user_is_anonymous() ) {
 		$t_return_page = $_SERVER['SCRIPT_NAME'];
 		if( isset( $_SERVER['QUERY_STRING'] ) ) {
@@ -530,29 +530,29 @@ function html_login_info() {
 
 		$t_return_page = string_url( $t_return_page );
 
-		echo '<span id="logged-anon-label">' . lang_get( 'anonymous' ) . '</span>';
-		echo '<span id="login-link"><a href="' . helper_mantis_url( 'login_page.php?return=' . $t_return_page ) . '">' . lang_get( 'login_link' ) . '</a></span>';
+		echo "\t" . '<span id="logged-anon-label">' . lang_get( 'anonymous' ) . '</span>' . "\n";
+		echo "\t" . '<span id="login-link"><a href="' . helper_mantis_url( 'login_page.php?return=' . $t_return_page ) . '">' . lang_get( 'login_link' ) . '</a></span>' . "\n";
 		if( config_get_global( 'allow_signup' ) == ON ) {
-			echo '<span id="signup-link"><a href="' . helper_mantis_url( 'signup_page.php' ) . '">' . lang_get( 'signup_link' ) . '</a></span>';
+			echo "\t" . '<span id="signup-link"><a href="' . helper_mantis_url( 'signup_page.php' ) . '">' . lang_get( 'signup_link' ) . '</a></span>' . "\n";
 		}
 	} else {
-		echo '<span id="logged-in-label">' . lang_get( 'logged_in_as' ) . '</span>';
-		echo '<span id="logged-in-user">' . string_html_specialchars( $t_username ) . '</span>';
-		echo '<span id="logged-in">';
-		echo !is_blank( $t_realname ) ?  '<span id="logged-in-realname">' . string_html_specialchars( $t_realname ) . '</span>' : '';
-		echo '<span id="logged-in-accesslevel" class="' . $t_access_level . '">' . $t_access_level . '</span>';
-		echo '</span>';
+		echo "\t" . '<span id="logged-in-label">' . lang_get( 'logged_in_as' ) . '</span>' . "\n";
+		echo "\t" . '<span id="logged-in-user">' . string_html_specialchars( $t_username ) . '</span>' . "\n";
+		echo "\t" . '<span id="logged-in">';
+		echo !is_blank( $t_realname ) ?  "\t" . '<span id="logged-in-realname">' . string_html_specialchars( $t_realname ) . '</span>' . "\n" : '';
+		echo "\t" . '<span id="logged-in-accesslevel" class="' . $t_access_level . '">' . $t_access_level . '</span>' . "\n";
+		echo "\t" . '</span>' . "\n";
 	}
-	echo '</div>';
+	echo '</div>' . "\n";
 
 	# RSS feed
 	if( OFF != config_get( 'rss_enabled' ) ) {
-		echo '<div id="rss-feed">';
+		echo '<div id="rss-feed">' . "\n";
 		# Link to RSS issues feed for the selected project, including authentication details.
-		echo '<a href="' . htmlspecialchars( rss_get_issues_feed_url() ) . '">';
-		echo '<img src="' . helper_mantis_url( 'images/rss.png' ) . '" alt="' . lang_get( 'rss' ) . '" title="' . lang_get( 'rss' ) . '" />';
-		echo '</a>';
-		echo '</div>';
+		echo "\t" . '<a href="' . htmlspecialchars( rss_get_issues_feed_url() ) . '">' . "\n";
+		echo "\t" . '<img src="' . helper_mantis_url( 'images/rss.png' ) . '" alt="' . lang_get( 'rss' ) . '" title="' . lang_get( 'rss' ) . '" />' . "\n";
+		echo "\t" . '</a>' . "\n";
+		echo '</div>' . "\n";
 	}
 
 	# Project Selector (hidden if only one project visisble to user)
