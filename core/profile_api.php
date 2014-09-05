@@ -281,7 +281,7 @@ function profile_get_all_for_project( $p_project_id ) {
 				  FROM ' . $t_user_profile_table . ' up, ' . $t_bug_table . ' b
 				  WHERE ' . $t_project_where . '
 				  AND up.id = b.profile_id
-				  ORDER BY platform, os, os_build';
+				  ORDER BY up.platform, up.os, up.os_build';
 	$t_result = db_query_bound( $t_query );
 
 	$t_rows = array();
