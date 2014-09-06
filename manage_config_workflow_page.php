@@ -88,9 +88,9 @@ function set_colour_override( $p_level_file, $p_level_global, $p_level_project )
 	global $g_colour_global, $g_colour_project;
 
 	if( $p_level_project != $p_level_global ) {
-		$t_colour = 'colour-project';
+		$t_colour = 'color-project';
 	} else if( $p_level_global != $p_level_file ) {
-		$t_colour = 'colour-global';
+		$t_colour = 'color-global';
 	} else {
 		return '';
 	}
@@ -433,9 +433,9 @@ if( ALL_PROJECTS == $t_project ) {
 echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
 echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 if( ALL_PROJECTS <> $t_project ) {
-	echo '<span class="colour-project">' . lang_get( 'colour_project' ) .'</span><br />';
+	echo '<span class="color-project">' . lang_get( 'colour_project' ) .'</span><br />';
 }
-echo '<span class="colour-global">' . lang_get( 'colour_global' ) . '</span></p>';
+echo '<span class="color-global">' . lang_get( 'colour_global' ) . '</span></p>';
 
 # show the settings used to derive the table
 threshold_begin( lang_get( 'workflow_thresholds' ) );

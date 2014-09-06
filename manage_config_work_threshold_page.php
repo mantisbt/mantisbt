@@ -346,9 +346,9 @@ if( ALL_PROJECTS == $g_project_id ) {
 echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
 echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 if( ALL_PROJECTS <> $g_project_id ) {
-	echo '<span class="colour-project">' . lang_get( 'colour_project' ) .'</span><br />';
+	echo '<span class="color-project">' . lang_get( 'colour_project' ) .'</span><br />';
 }
-echo '<span class="colour-global">' . lang_get( 'colour_global' ) . '</span></p>';
+echo '<span class="color-global">' . lang_get( 'colour_global' ) . '</span></p>';
 
 echo "<form name=\"mail_config_action\" method=\"post\" action=\"manage_config_work_threshold_set.php\">\n";
 echo form_security_field( 'manage_config_work_threshold_set' );

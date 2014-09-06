@@ -117,12 +117,12 @@ function colour_notify_flag ( $p_action, $p_flag ) {
 	$t_colour = '';
 	if( $t_global >= 0 ) {
 		if( $t_global != $t_file ) {
-			$t_colour = ' class="colour-global" '; # all projects override
+			$t_colour = ' class="color-global" '; # all projects override
 		}
 	}
 	if( $t_project >= 0 ) {
 		if( $t_project != $t_global ) {
-			$t_colour = ' class="colour-project" '; # project overrides
+			$t_colour = ' class="color-project" '; # project overrides
 		}
 	}
 	return $t_colour;
@@ -166,10 +166,10 @@ function colour_threshold_flag ( $p_access, $p_action ) {
 
 	$t_colour = '';
 	if( $t_global != $t_file ) {
-		$t_colour = ' class="colour-global" '; # all projects override
+		$t_colour = ' class="color-global" '; # all projects override
 	}
 	if( $t_project != $t_global ) {
-		$t_colour = ' class="colour-project" '; # project overrides
+		$t_colour = ' class="color-project" '; # project overrides
 	}
 	return $t_colour;
 }
@@ -327,9 +327,9 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 	echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
 	echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 	if( ALL_PROJECTS <> $t_project ) {
-		echo '<span class="colour-project">' . lang_get( 'colour_project' ) . '</span><br />';
+		echo '<span class="color-project">' . lang_get( 'colour_project' ) . '</span><br />';
 	}
-	echo '<span class="colour-global">' . lang_get( 'colour_global' ) . '</span></p>';
+	echo '<span class="color-global">' . lang_get( 'colour_global' ) . '</span></p>';
 
 	get_section_begin_for_email( lang_get( 'email_notification' ) );
 #		get_capability_row_for_email( lang_get( 'email_on_new' ), 'new' );  # duplicate of status change to 'new'
