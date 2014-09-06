@@ -4431,7 +4431,9 @@ function filter_cache_row( $p_filter_id, $p_trigger_errors = true ) {
 	$t_query = 'SELECT * FROM {filters} WHERE id=' . db_param();
 	$t_result = db_query( $t_query, array( $p_filter_id ) );
 
-	if( 0 == db_num_rows( $t_result ) ) {
+	$t_row = db_fetch_array( $t_result );
+
+	if( !$t_row ) {
 		if( $p_trigger_errors ) {
 			error_parameters( $p_filter_id );
 			trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
@@ -4439,8 +4441,6 @@ function filter_cache_row( $p_filter_id, $p_trigger_errors = true ) {
 			return false;
 		}
 	}
-
-	$t_row = db_fetch_array( $t_result );
 
 	$g_cache_filter[$p_filter_id] = $t_row;
 

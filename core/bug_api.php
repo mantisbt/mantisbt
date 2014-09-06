@@ -741,7 +741,9 @@ function bug_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 	$t_query = 'SELECT * FROM {bug} WHERE id=' . db_param();
 	$t_result = db_query( $t_query, array( $c_bug_id ) );
 
-	if( 0 == db_num_rows( $t_result ) ) {
+	$t_row = db_fetch_array( $t_result );
+
+	if( !$t_row ) {
 		$g_cache_bug[$c_bug_id] = false;
 
 		if( $p_trigger_errors ) {
@@ -751,8 +753,6 @@ function bug_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 			return false;
 		}
 	}
-
-	$t_row = db_fetch_array( $t_result );
 
 	return bug_add_to_cache( $t_row );
 }
@@ -845,7 +845,9 @@ function bug_text_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 				  WHERE b.id=' . db_param() . ' AND b.bug_text_id = bt.id';
 	$t_result = db_query( $t_query, array( $c_bug_id ) );
 
-	if( 0 == db_num_rows( $t_result ) ) {
+	$t_row = db_fetch_array( $t_result );
+
+	if( !$t_row ) {
 		$g_cache_bug_text[$c_bug_id] = false;
 
 		if( $p_trigger_errors ) {
@@ -855,8 +857,6 @@ function bug_text_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 			return false;
 		}
 	}
-
-	$t_row = db_fetch_array( $t_result );
 
 	$g_cache_bug_text[$c_bug_id] = $t_row;
 
