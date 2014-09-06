@@ -413,12 +413,10 @@ function print_news_item_option_list() {
 				WHERE project_id=' . db_param() . '
 				ORDER BY date_posted DESC';
 	}
+
 	$t_result = db_query( $t_query, ($t_global == true ? array() : array( $t_project_id ) ) );
-	$t_news_count = db_num_rows( $t_result );
 
-	for( $i = 0;$i < $t_news_count;$i++ ) {
-		$t_row = db_fetch_array( $t_result );
-
+	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_headline = string_display( $t_row['headline'] );
 		$t_announcement = $t_row['announcement'];
 		$t_view_state = $t_row['view_state'];
@@ -873,10 +871,8 @@ function print_build_option_list( $p_build = '' ) {
 				WHERE ' . $t_project_where . '
 				ORDER BY build DESC';
 	$t_result = db_query( $t_query );
-	$t_option_count = db_num_rows( $t_result );
 
-	for( $i = 0;$i < $t_option_count;$i++ ) {
-		$t_row = db_fetch_array( $t_result );
+	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_overall_build_arr[] = $t_row['build'];
 	}
 
@@ -1084,8 +1080,7 @@ function print_project_user_list_option_list2( $p_user_id ) {
 				ORDER BY p.name';
 	$t_result = db_query( $t_query, array( (int)$p_user_id, true ) );
 	$t_category_count = db_num_rows( $t_result );
-	for( $i = 0;$i < $t_category_count;$i++ ) {
-		$t_row = db_fetch_array( $t_result );
+	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_project_name = string_attribute( $t_row['name'] );
 		$t_user_id = $t_row['id'];
 		echo '<option value="' . $t_user_id . '">' . $t_project_name . '</option>';

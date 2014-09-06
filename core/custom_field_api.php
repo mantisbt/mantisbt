@@ -918,11 +918,11 @@ function custom_field_get_sequence( $p_field_id, $p_project_id ) {
 						project_id=' . db_param();
 	$t_result = db_query( $t_query, array( $p_field_id, $p_project_id ), 1 );
 
-	if( 0 == db_num_rows( $t_result ) ) {
+	$t_row = db_fetch_array( $t_result );
+
+	if( !$t_row ) {
 		return false;
 	}
-
-	$t_row = db_fetch_array( $t_result );
 
 	return $t_row['sequence'];
 }
@@ -1082,18 +1082,18 @@ function custom_field_distinct_values( array $p_field_def, $p_project_id = ALL_P
 			FROM ' . $t_from . '
 			WHERE ' . $t_where1 . $t_where2 . '
 			ORDER BY cfst.value';
-
 		$t_result = db_query( $t_query, $t_params );
-		$t_row_count = db_num_rows( $t_result );
-		if( 0 == $t_row_count ) {
-			return false;
-		}
+		$t_row_count = 0;
 
-		for( $i = 0;$i < $t_row_count;$i++ ) {
-			$t_row = db_fetch_array( $t_result );
+		while( $t_row = db_fetch_array( $t_result ) ) {
+			$t_row_count++;
 			if( !is_blank( trim( $t_row['value'] ) ) ) {
 				array_push( $t_return_arr, $t_row['value'] );
 			}
+		}
+
+		if( 0 == $t_row_count ) {
+			return false;
 		}
 	}
 	return $t_return_arr;
@@ -1178,7 +1178,7 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 				  		bug_id=' . db_param();
 	$t_result = db_query( $t_query, array( $p_field_id, $p_bug_id ) );
 
-	if( db_num_rows( $t_result ) > 0 ) {
+	if( $t_row = db_fetch_array( $t_result ) ) {
 		$t_query = 'UPDATE {custom_field_string}
 					  SET ' . $t_value_field . '=' . db_param() . '
 					  WHERE field_id=' . db_param() . ' AND
@@ -1190,7 +1190,6 @@ function custom_field_set_value( $p_field_id, $p_bug_id, $p_value, $p_log_insert
 		);
 		db_query( $t_query, $t_params );
 
-		$t_row = db_fetch_array( $t_result );
 		history_log_event_direct( $p_bug_id, $t_name, custom_field_database_to_value( $t_row[$t_value_field], $t_type ), $p_value );
 	} else {
 		$t_query = 'INSERT INTO {custom_field_string}

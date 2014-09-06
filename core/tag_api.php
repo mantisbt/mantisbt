@@ -59,10 +59,10 @@ require_api( 'utility_api.php' );
  * @return boolean True if tag exists
  */
 function tag_exists( $p_tag_id ) {
-	$t_query = 'SELECT * FROM {tag} WHERE id=' . db_param();
+	$t_query = 'SELECT id FROM {tag} WHERE id=' . db_param();
 	$t_result = db_query( $t_query, array( $p_tag_id ) );
 
-	return db_num_rows( $t_result ) > 0;
+	return ( db_result( $t_result ) !== false );
 }
 
 /**

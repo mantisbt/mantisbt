@@ -700,12 +700,10 @@ function create_developer_summary() {
 
 	$t_query = 'SELECT handler_id, status FROM {bug} WHERE handler_id > 0 ' . $t_specific_where;
 	$t_result = db_query( $t_query );
-	$t_total_handled = db_num_rows( $t_result );
 
 	$t_handler_arr = array();
 	$t_handlers = array();
-	for( $i = 0;$i < $t_total_handled;$i++ ) {
-		$t_row = db_fetch_array( $t_result );
+	while( $t_row = db_fetch_array( $t_result ) ) {
 		if( !isset( $t_handler_arr[$t_row['handler_id']] ) ) {
 			$t_handler_arr[$t_row['handler_id']]['res'] = 0;
 			$t_handler_arr[$t_row['handler_id']]['open'] = 0;
@@ -752,13 +750,10 @@ function create_reporter_summary() {
 
 	$t_query = 'SELECT reporter_id FROM {bug} WHERE ' . $t_specific_where;
 	$t_result = db_query( $t_query );
-	$t_total_reported = db_num_rows( $t_result );
 
 	$t_reporter_arr = array();
 	$t_reporters = array();
-	for( $i = 0;$i < $t_total_reported;$i++ ) {
-		$t_row = db_fetch_array( $t_result );
-
+	while( $t_row = db_fetch_array( $t_result ) ) {
 		if( isset( $t_reporter_arr[$t_row['reporter_id']] ) ) {
 			$t_reporter_arr[$t_row['reporter_id']]++;
 		} else {
@@ -797,8 +792,7 @@ function create_category_summary() {
 	$t_category_count = db_num_rows( $t_result );
 
 	$t_metrics = array();
-	for( $i = 0;$i < $t_category_count;$i++ ) {
-		$t_row = db_fetch_array( $t_result );
+	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_cat_name = $t_row['name'];
 		$t_cat_id = $t_row['id'];
 		$t_query = 'SELECT COUNT(*) FROM {bug} WHERE category_id=' . db_param() . ' AND ' . $t_specific_where;
@@ -830,11 +824,8 @@ function create_cumulative_bydate() {
 	# Get all the submitted dates
 	$t_query = 'SELECT date_submitted FROM {bug} WHERE ' . $t_specific_where . ' ORDER BY date_submitted';
 	$t_result = db_query( $t_query );
-	$t_bug_count = db_num_rows( $t_result );
 
-	for( $i = 0; $i < $t_bug_count; $i++ ) {
-		$t_row = db_fetch_array( $t_result );
-
+	while( $t_row = db_fetch_array( $t_result ) ) {
 		# rationalise the timestamp to a day to reduce the amount of data
 		$t_date = $t_row['date_submitted'];
 		$t_date = (int)( $t_date / SECONDS_PER_DAY );
@@ -863,8 +854,7 @@ function create_cumulative_bydate() {
 	$t_last_id = 0;
 	$t_last_date = 0;
 
-	for( $i = 0;$i < $t_bug_count;$i++ ) {
-		$t_row = db_fetch_array( $t_result );
+	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_id = $t_row['id'];
 
 		# if h_last_updated is NULL, there were no appropriate history records

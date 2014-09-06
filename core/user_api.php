@@ -239,11 +239,7 @@ function user_is_name_unique( $p_username ) {
 	$t_query = 'SELECT username FROM {user} WHERE username=' . db_param();
 	$t_result = db_query( $t_query, array( $p_username ), 1 );
 
-	if( db_num_rows( $t_result ) > 0 ) {
-		return false;
-	} else {
-		return true;
-	}
+	return !db_result( $t_result );
 }
 
 /**

@@ -119,7 +119,9 @@ function sponsorship_cache_row( $p_sponsorship_id, $p_trigger_errors = true ) {
 	$t_query = 'SELECT * FROM {sponsorship} WHERE id=' . db_param();
 	$t_result = db_query( $t_query, array( $c_sponsorship_id ) );
 
-	if( 0 == db_num_rows( $t_result ) ) {
+	$t_row = db_fetch_array( $t_result );
+
+	if( !$t_row ) {
 		$g_cache_sponsorships[$c_sponsorship_id] = false;
 
 		if( $p_trigger_errors ) {
@@ -130,7 +132,6 @@ function sponsorship_cache_row( $p_sponsorship_id, $p_trigger_errors = true ) {
 		}
 	}
 
-	$t_row = db_fetch_array( $t_result );
 	$g_cache_sponsorships[$c_sponsorship_id] = $t_row;
 
 	return $t_row;
@@ -178,11 +179,11 @@ function sponsorship_get_id( $p_bug_id, $p_user_id = null ) {
 	$t_query = 'SELECT id FROM {sponsorship} WHERE bug_id=' . db_param() . ' AND user_id = ' . db_param();
 	$t_result = db_query( $t_query, array( (int)$p_bug_id, $c_user_id ), 1 );
 
-	if( db_num_rows( $t_result ) == 0 ) {
+	$t_row = db_fetch_array( $t_result );
+
+	if( !$t_row ) {
 		return false;
 	}
-
-	$t_row = db_fetch_array( $t_result );
 
 	return (integer)$t_row['id'];
 }
