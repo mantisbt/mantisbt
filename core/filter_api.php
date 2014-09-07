@@ -4649,7 +4649,7 @@ function filter_db_can_delete_filter( $p_filter_id ) {
 
 	$t_result = db_query( $t_query, array( $c_filter_id, $t_user_id, -1 ) );
 
-	if( db_result( $result ) > 0 ) {
+	if( db_result( $t_result ) > 0 ) {
 		return true;
 	}
 
