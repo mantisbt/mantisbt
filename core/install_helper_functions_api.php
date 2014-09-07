@@ -386,26 +386,9 @@ function install_correct_multiselect_custom_fields_db_format() {
 }
 
 /**
- *	The filters have been changed so the field names are the same as the database
- *	field names.  This updates any filters stored in the database to use the correct
- *	keys. The 'and_not_assigned' field is no longer used as it is replaced by the meta
- *	filter None.  This removes it from all filters.
- *
- * Filter Versions:
- * v1,2,3,4 - Legacy Filters that can not be migrated (not used since 2004)
- * v5 - https://github.com/mantisbt/mantisbt/commit/eb1b93057e470e40727bc75a85f436ab35b84a74
- * v6 - https://github.com/mantisbt/mantisbt/commit/de2e2931f993c3b6fc82781eff051f9037fdc6b5
- * v7 - https://github.com/mantisbt/mantisbt/commit/0450981225647544083d21576dfb2bae044b3e98
- * v8 - https://github.com/mantisbt/mantisbt/commit/5cb368796528bcb35aa3935bf431b08a29cb1e90
- * v9 - https://github.com/mantisbt/mantisbt/commit/9dfc5fb6edb6da1e0324ceac3a27a727f2b23ba7
- *
- * Filters are stored within the database as vX#FILTER, where vX is a raw version string and
- * FILTER is a serialized string in php serialization or json format.
- *
- * This function is used to upgrade any previous filters to the latest version, and should be
- * updated when bouncing filter version number. Schema.php should be updated to call do_nothing
- * for the existing filter schema update and the updated version of this function called in a
- * new schema update step
+ * This upgrade step does two things:
+ * a) it removes any old filters that can not be upgraded (v1 to v4).
+ * b) it converts storage of filters to JSON format.
  *
  * @return integer
  */
@@ -413,31 +396,14 @@ function install_stored_filter_migrate() {
 	# Disable query logging even if enabled in config, due to possibility of mass spam
 	$t_log_queries = install_set_log_queries();
 
-	require_api( 'filter_api.php' );
-
-	# convert filters to use the same value for the filter key and the form field
-	# Note: This list should only be updated for basic renames i.e. data + type of data remain the same
-	# before and after the rename.
-	$t_filter_fields['show_category'] = 'category_id';
-	$t_filter_fields['show_severity'] = 'severity';
-	$t_filter_fields['show_status'] = 'status';
-	$t_filter_fields['show_priority'] = 'priority';
-	$t_filter_fields['show_resolution'] = 'resolution';
-	$t_filter_fields['show_build'] = 'build';
-	$t_filter_fields['show_version'] = 'version';
-	$t_filter_fields['user_monitor'] = 'monitor_user_id';
-	$t_filter_fields['show_profile'] = 'profile_id';
-	$t_filter_fields['do_filter_by_date'] = 'filter_by_date';
-	$t_filter_fields['and_not_assigned'] = null;
-	$t_filter_fields['sticky_issues'] = 'sticky';
-
 	$t_query = 'SELECT * FROM {filters}';
 	$t_result = db_query( $t_query );
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		# Grab Filter Version and data into $t_setting_arr
 		$t_setting_arr = explode( '#', $t_row['filter_string'], 2 );
 
-		switch( $t_setting_arr[0] ) {
+		$t_version = $t_setting_arr[0];
+		switch( $t_version ) {
 			# Remove any non-upgradeable filters i.e. versions 1 to 4.
 			case 'v1':
 			case 'v2':
@@ -449,16 +415,14 @@ function install_stored_filter_migrate() {
 		}
 
 		if( isset( $t_setting_arr[1] ) ) {
-			switch( $t_setting_arr[0] ) {
-				# Filter versions 5 to 8 are stored in php serialized format
+			switch( $t_version ) {
+				# Filter versions 5 to 8 are stored in php serialized format and need converting to json
 				case 'v5':
 				case 'v6':
 				case 'v7':
 				case 'v8':
 					$t_filter_arr = unserialize( $t_setting_arr[1] );
 					break;
-				default:
-					$t_filter_arr = json_decode( $t_setting_arr[1] );
 			}
 		} else {
 			$t_delete_query = 'DELETE FROM {filters} WHERE id=' . db_param();
@@ -466,39 +430,8 @@ function install_stored_filter_migrate() {
 			continue;
 		}
 
-		# serialized or json encoded data in filter table is invalid - abort upgrade as this should not be possible
-		# so we should investigate and fix underlying data issue first if necessary
-		if( $t_filter_arr === false ) {
-			return 1; # Fatal: invalid data found in filters table
-		}
-
-		# Ff the filter version does not match the latest version, pass it through filter_ensure_valid_filter to do any updates
-		# This will set default values for filter fields
-		if( $t_filter_arr['_version'] != FILTER_VERSION ) {
-			$t_filter_arr = filter_ensure_valid_filter( $t_filter_arr );
-		}
-
-		# For any fields that are being renamed, we can now perform the rename and migrate existing data.
-		# We unset the old field when done to ensure the filter contains only current optimised data.
-		foreach( $t_filter_fields AS $t_old=>$t_new ) {
-			if( isset( $t_filter_arr[$t_old] ) ) {
-				$t_value = $t_filter_arr[$t_old];
-				unset( $t_filter_arr[$t_old] );
-				if( !is_null( $t_new ) ) {
-					$t_filter_arr[$t_new] = $t_value;
-				}
-			}
-		}
-
-		# We now have a valid filter in with updated version number (version is updated by filter_ensure_valid_filter)
-		# Check that this is the case, to before storing the updated filter values.
-		# Abort if the filter is invalid as this should not be possible
-		if( $t_filter_arr['_version'] != FILTER_VERSION ) {
-			return 1; # Fatal: invalid data found in filters table
-		}
-
 		$t_filter_serialized = json_encode( $t_filter_arr );
-		$t_filter_string = FILTER_VERSION . '#' . $t_filter_serialized;
+		$t_filter_string = $t_version . '#' . $t_filter_serialized;
 
 		$t_update_query = 'UPDATE {filters} SET filter_string=' . db_param() . ' WHERE id=' . db_param();
 		$t_update_result = db_query( $t_update_query, array( $t_filter_string, $t_row['id'] ) );
