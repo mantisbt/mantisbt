@@ -186,7 +186,10 @@ function html_page_top1( $p_page_title = null ) {
 	html_head_begin();
 
 	html_content_type();
-	include( config_get( 'meta_include_file' ) );
+	$t_meta = config_get_global( 'meta_include_file' );
+	if( !is_blank( $t_meta ) ) {
+		include( $t_meta );
+	}
 	global $g_robots_meta;
 	if( !is_blank( $g_robots_meta ) ) {
 		echo "\t", '<meta name="robots" content="', $g_robots_meta, '" />', "\n";

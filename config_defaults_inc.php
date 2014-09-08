@@ -3338,7 +3338,7 @@ $g_css_rtl_include_file = 'rtl.css';
  * meta tags
  * @global string $g_meta_include_file
  */
-$g_meta_include_file = '%absolute_path%meta_inc.php';
+$g_meta_include_file = '';
 
 ################
 # Redirections #
