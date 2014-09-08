@@ -81,7 +81,6 @@ foreach ( $t_versions as $t_version ) {
 	$t_version = trim( $t_version );
 	if( version_is_unique( $t_version, $f_project_id ) ) {
 		$t_version_id = version_add( $f_project_id, $t_version );
-		event_signal( 'EVENT_MANAGE_VERSION_CREATE', array( $t_version_id ) );
 	} else if( 1 == $t_version_count ) {
 		# We only error out on duplicates when a single value was
 		#  given.  If multiple values were given, we just add the
