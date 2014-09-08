@@ -68,11 +68,7 @@ require_api( 'user_api.php' );
 $t_user_id = auth_get_current_user_id();
 
 #precache access levels
-if( isset( $g_project_override ) ) {
-	access_cache_matrix_project( $g_project_override );
-} else {
-	access_cache_matrix_project( helper_get_current_project() );
-}
+access_cache_matrix_project( helper_get_current_project() );
 
 # get the bugnote data
 $t_bugnote_order = current_user_get_pref( 'bugnote_order' );
