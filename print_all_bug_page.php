@@ -105,9 +105,7 @@ columns_plugin_cache_issue_data( $t_result );
 # for export
 $t_show_flag = gpc_get_int( 'show_flag', 0 );
 
-html_page_top1();
-html_head_end();
-html_body_begin();
+html_page_top();
 ?>
 
 <table class="width100"><tr><td class="form-title">
@@ -254,5 +252,4 @@ $t_icon_path = config_get( 'icon_path' );
 </form>
 
 <?php
-html_body_end();
-html_end();
+html_page_bottom();
