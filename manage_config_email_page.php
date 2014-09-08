@@ -143,7 +143,7 @@ function show_notify_flag( $p_action, $p_flag ) {
 		$t_set = $t_flag ? 'checked="checked"' : '';
 		return '<input type="checkbox" name="flag[]" value="' . $t_flag_name. '" ' . $t_set . ' />';
 	} else {
-		return ( $t_flag ? '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />' : '&#160;' );
+		return ( $t_flag ? '<img src="images/ok.png" width="20" height="15" title="X" alt="X" />' : '&#160;' );
 	}
 }
 
@@ -190,7 +190,7 @@ function show_notify_threshold( $p_access, $p_action ) {
 		$t_set = $t_flag ? 'checked="checked"' : '';
 		return '<input type="checkbox" name="flag_threshold[]" value="' . $t_flag_name . '" ' . $t_set . ' />';
 	} else {
-		return $t_flag ? '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />' : '&#160;';
+		return $t_flag ? '<img src="images/ok.png" width="20" height="15" title="X" alt="X" />' : '&#160;';
 	}
 }
 

@@ -166,7 +166,7 @@ $(document).ready( function() {
 	});
 
 	$('input[type=text].datetime').each(function(index, element) {
-		$(this).after('<input type="image" class="button datetime" id="' + element.id + '_datetime_button' + '" src="' + config['icon_path'] + 'calendar-img.gif" />');
+		$(this).after('<input type="image" class="button datetime" id="' + element.id + '_datetime_button' + '" src="' + config['icon_path'] + 'calendar-img.png" />');
 		Calendar.setup({
 			inputField: element.id,
 			timeFormat: 24,

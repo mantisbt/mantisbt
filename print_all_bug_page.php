@@ -160,8 +160,8 @@ $t_icon_path = config_get( 'icon_path' );
 	$t_search = urlencode( $f_search );
 
 	$t_icons = array(
-		array( 'print_all_bug_page_word', 'word', 'fileicons/doc.gif', 'Word 2000' ),
-		array( 'print_all_bug_page_word', 'html', 'ie.gif', 'Word View' ) );
+		array( 'print_all_bug_page_word', 'word', 'fileicons/doc.png', 'Word 2000' ),
+		array( 'print_all_bug_page_word', 'html', 'ie.png', 'Word View' ) );
 
 	foreach ( $t_icons as $t_icon ) {
 		echo '<a href="' . $t_icon[0] . '.php?' . FILTER_PROPERTY_SEARCH. '=' . $t_search .

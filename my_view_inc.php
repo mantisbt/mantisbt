@@ -369,7 +369,7 @@ for( $i = 0;$i < $t_count; $i++ ) {
 			}
 
 			if( VS_PRIVATE == $t_bug->view_state ) {
-				echo '<img src="' . $t_icon_path . 'protected.gif" width="8" height="15" alt="' . lang_get( 'private' ) . '" />';
+				echo '<img src="' . $t_icon_path . 'protected.png" width="8" height="15" alt="' . lang_get( 'private' ) . '" />';
 			}
 			?>
 		</span>

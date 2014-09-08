@@ -66,7 +66,7 @@ $f_filter        = utf8_strtoupper( gpc_get_string( 'filter', config_get( 'defau
 $f_page_number   = gpc_get_int( 'page_number', 1 );
 
 $t_cookie_name = config_get( 'manage_users_cookie' );
-$t_lock_image = '<img src="' . config_get( 'icon_path' ) . 'protected.gif" width="8" height="15" alt="' . lang_get( 'protected' ) . '" />';
+$t_lock_image = '<img src="' . config_get( 'icon_path' ) . 'protected.png" width="8" height="15" alt="' . lang_get( 'protected' ) . '" />';
 $c_filter = '';
 
 # Clean up the form variables
