@@ -756,21 +756,10 @@ function db_prepare_string( $p_string ) {
 		case 'mssqlnative':
 		case 'odbc_mssql':
 		case 'ado_mssql':
-			if( ini_get( 'magic_quotes_sybase' ) ) {
-				return addslashes( $p_string );
-			} else {
-				ini_set( 'magic_quotes_sybase', true );
-				$t_string = addslashes( $p_string );
-				ini_set( 'magic_quotes_sybase', false );
-				return $t_string;
-			}
-
-			# just making a point with the superfluous break;s  I know it does not execute after a return  ;-)
-			break;
+			return addslashes( $p_string );
 		case 'db2':
 			$t_escaped = $g_db->qstr( $p_string, false );
 			return utf8_substr( $t_escaped, 1, utf8_strlen( $t_escaped ) - 2 );
-			break;
 		case 'mysql':
 		case 'mysqli':
 			$t_escaped = $g_db->qstr( $p_string, false );

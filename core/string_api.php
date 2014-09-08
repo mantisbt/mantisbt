@@ -465,12 +465,6 @@ function string_insert_hrefs( $p_string ) {
 		return $p_string;
 	}
 
-	$t_change_quotes = false;
-	if( ini_get_bool( 'magic_quotes_sybase' ) && function_exists( 'ini_set' ) ) {
-		$t_change_quotes = true;
-		ini_set( 'magic_quotes_sybase', false );
-	}
-
 	# Initialize static variables
 	if( is_null( $s_url_regex ) ) {
 		# URL regex
@@ -486,7 +480,7 @@ function string_insert_hrefs( $p_string ) {
 		$t_url_chars_in_brackets = "(?:${t_url_hex}|[${t_url_valid_chars}\(\)])";
 		$t_url_chars_in_parens   = "(?:${t_url_hex}|[${t_url_valid_chars}\[\]])";
 
-		$t_url_part1 = "${t_url_chars}";
+		$t_url_part1 = $t_url_chars;
 		$t_url_part2 = "(?:\(${t_url_chars_in_parens}*\)|\[${t_url_chars_in_brackets}*\]|${t_url_chars2})";
 
 		$s_url_regex = "/(${t_url_protocol}(${t_url_part1}*?${t_url_part2}+))/su";
@@ -504,9 +498,6 @@ function string_insert_hrefs( $p_string ) {
 		},
 		$p_string
 	);
-	if( $t_change_quotes ) {
-		ini_set( 'magic_quotes_sybase', true );
-	}
 
 	# Find any email addresses in the string and replace them with a clickable
 	# mailto: link, making sure that we skip processing of any existing anchor
