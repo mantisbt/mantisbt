@@ -188,3 +188,4 @@ env_obsolete( 'MANTIS_CONFIG', 'MANTIS_CONFIG_FOLDER' );
 config_obsolete( 'colour_project' );
 config_obsolete( 'colour_global' );
 config_obsolete( 'content_expire' );
+config_obsolete( 'db_schema' );

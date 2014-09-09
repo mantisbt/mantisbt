@@ -686,7 +686,6 @@ function config_is_private( $p_config_var ) {
 		case 'db_username':
 		case 'db_password':
 		case 'database_name':
-		case 'db_schema':
 		case 'db_type':
 		case 'master_crypto_salt':
 		case 'smtp_host':

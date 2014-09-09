@@ -63,12 +63,6 @@ $g_db_password			= '';
 $g_database_name		= 'bugtracker';
 
 /**
- * Database Schema Name - used in the case of db2.
- * @global string $g_db_schema
- */
-$g_db_schema			= '';
-
-/**
  * Defines the database type. Supported types are listed below;
  * the corresponding PHP extension must be enabled.
  *
@@ -79,7 +73,6 @@ $g_db_schema			= '';
  * PostgreSQL      pgsql         pgsql
  * MS SQL Server   mssqlnative   sqlsrv    experimental
  * Oracle          oci8          oci8      experimental
- * DB2             db2           ibm-db2   experimental
  *
  * @global string $g_db_type
  */
@@ -4172,7 +4165,7 @@ $g_global_settings = array(
 	'cookie_prefix', 'string_cookie', 'project_cookie', 'view_all_cookie',
 	'manage_config_cookie', 'manage_user_cookie', 'logout_cookie',
 	'bug_list_cookie', 'crypto_master_salt', 'custom_headers',
-	'database_name', 'db_username', 'db_password', 'db_schema', 'db_type',
+	'database_name', 'db_username', 'db_password', 'db_type',
 	'db_table_prefix','db_table_suffix', 'display_errors', 'form_security_validation',
 	'hostname','html_valid_tags', 'html_valid_tags_single_line', 'default_language',
 	'language_auto_map', 'fallback_language', 'login_method', 'plugins_enabled', 'session_handler',
