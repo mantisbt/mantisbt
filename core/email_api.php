@@ -84,24 +84,26 @@ $g_phpMailer = null;
 $g_email_stored = false;
 
 /**
- * Use a simple perl regex for valid email addresses.  This is not a complete regex,
- * as it does not cover quoted addresses or domain literals, but it is simple and
- * covers the vast majority of all email addresses without being overly complex.
+ * Use the HTML5 standard pattern for valid email addresses for all email handling within Mantis.
+ * The HTML5 Pattern is available at http://www.w3.org/html/wg/drafts/html/master/forms.html#e-mail-state-(type=email)
+ * and is as follows:
+ * /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+ *
+ * The Standard regex has been modified as follows for use in MantisBT:
+ * 1) Character 22 is / . This has been changed to \/ for use in PHP.
+ * if $p_inline is set to true:
+ * 2) Character 2 is ^ . This has been removed to allow for mid-string matching (in string api)
+ * 3) Character 134 is $ . This has been removed to allow for mid-string matching (in string api)
+ *
+ * @param bool $p_inline if true, excludes start/end of string from regex to allow for matching an email address within a string.
  * @return string
  */
-function email_regex_simple() {
-	static $s_email_regex = null;
-
-	if( is_null( $s_email_regex ) ) {
-		$t_recipient = '([a-z0-9!#*+\/=?^_{|}~-]+(?:\.[a-z0-9!#*+\/=?^_{|}~-]+)*)';
-
-		# a domain is one or more subdomains
-		$t_subdomain = '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
-		$t_domain    = '(' . $t_subdomain . '(?:\.' . $t_subdomain . ')*)';
-
-		$s_email_regex = '/' . $t_recipient . '\@' . $t_domain . '/i';
+function email_regex_simple($p_inline = false) {
+	if( $p_inline == true ) {
+		return "/[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*/";
+	} else {
+		return "/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/";
 	}
-	return $s_email_regex;
 }
 
 /**
@@ -115,19 +117,51 @@ function email_is_valid( $p_email ) {
 		ON == config_get( 'use_ldap_email' ) ||
 		( is_blank( $p_email ) && ON == config_get( 'allow_blank_email' ) )
 	) {
+		log_event( LOG_EMAIL, "Email Validation: Skipped for '$p_email' (Is Email validation turned OFF? LDAP Email ON or blank email?)" );
 		return true;
 	}
 
-	# check email address is a valid format
+	# check email address passes PHP's FILTER_SANITIZE_EMAIL function
 	$t_email = filter_var( $p_email, FILTER_SANITIZE_EMAIL );
-	if( PHPMailer::ValidateAddress( $t_email ) ) {
-		$t_domain = end( explode( '@', $t_email ) );
+	if( $t_email === false || $t_email != $p_email ) {
+		# either filter_var returned an error or email address contained invalid characters so return false
+		log_event( LOG_EMAIL, "Email Validation: Failed for '$p_email' (Does address contain invalid characters?)" );
+		return false;
+	}
+
+	# Check email address validates against the html5 standard email validation
+	if( preg_match( email_regex_simple(), $t_email ) ) {
+		$t_parts = explode( '@', $t_email );
+		$t_domain = end( $t_parts );
+
+		log_event( LOG_EMAIL, "Email Validation: Signalling Validation Plugins for '$p_email'" );
+		$t_result = event_signal( 'EVENT_VALIDATE_EMAIL_ADDRESS', array( $t_email, $t_domain ) );
+
+		if( $t_result === true ) {
+			log_event( LOG_EMAIL, "Email Validation: Passed for '$p_email'" );
+			return true;
+		} elseif( $t_result === false ) {
+			log_event( LOG_EMAIL, "Email Validation: Failed for '$p_email' (Plugin Validation failed)" );
+			return false;
+		}
+
+		# see if the email address is on the list of blocked domain names
+		$t_blocked_email_domains = config_get( 'blocked_email_domains' );
+		if( !empty( $t_blocked_email_domains ) ) {
+			foreach( $t_blocked_email_domains as $t_email_domain ) {
+				if( wildcard_match( $t_email_domain, $t_domain ) ) {
+					log_event( LOG_EMAIL, "Email Validation: Failed for '$p_email' (Domain is in blocked domain list)" );
+					return false; # email domain is blocked
+				}
+			}
+		}
 
 		# see if we're limited to a set of known domains
 		$t_limit_email_domains = config_get( 'limit_email_domains' );
 		if( !empty( $t_limit_email_domains ) ) {
 			foreach( $t_limit_email_domains as $t_email_domain ) {
-				if( 0 == strcasecmp( $t_email_domain, $t_domain ) ) {
+				if( wildcard_match( $t_email_domain, $t_domain ) ) {
+					log_event( LOG_EMAIL, "Email Validation: Passed for '$p_email' (Domain is in allowed domain list)" );
 					return true; # no need to check mx record details (below) if we've explicity allowed the domain
 				}
 			}
@@ -139,21 +173,26 @@ function email_is_valid( $p_email ) {
 
 			# Check for valid mx records
 			if( getmxrr( $t_domain, $t_mx ) ) {
+				log_event( LOG_EMAIL, "Email Validation: Passed for '$p_email' (MX Record Exists)" );
 				return true;
 			} else {
 				$t_host = $t_domain . '.';
 
 				# for no mx record... try dns check
 				if( checkdnsrr( $t_host, 'ANY' ) ) {
+					log_event( LOG_EMAIL, "Email Validation: Passed for '$p_email' (ANY Record Exists)" );
 					return true;
 				}
+				log_event( LOG_EMAIL, "Email Validation: Failed for '$p_email' (DNS check failed)" );
 			}
 		} else {
-			# Email format was valid but did't check for valid mx records
+			# Email format was valid but we did not check for valid mx records
+			log_event( LOG_EMAIL, "Email Validation: Passed for '$p_email' (DNS checks skipped)" );
 			return true;
 		}
 	}
 
+	log_event( LOG_EMAIL, "Email Validation: Failed for '$p_email' (Invalid Email Address)" );
 	# Everything failed.  The email is invalid
 	return false;
 }
@@ -166,31 +205,6 @@ function email_is_valid( $p_email ) {
 function email_ensure_valid( $p_email ) {
 	if( !email_is_valid( $p_email ) ) {
 		trigger_error( ERROR_EMAIL_INVALID, ERROR );
-	}
-}
-
-/**
- * Check if the email address is disposable
- * @param string $p_email An email address.
- * @return boolean
- */
-function email_is_disposable( $p_email ) {
-	if( !class_exists( 'DisposableEmailChecker' ) ) {
-		require_lib( 'disposable/disposable.php' );
-	}
-
-	return DisposableEmailChecker::is_disposable_email( $p_email );
-}
-
-/**
- * Check if the email address is disposable
- * trigger an ERROR if it isn't
- * @param string $p_email An email address.
- * @return void
- */
-function email_ensure_not_disposable( $p_email ) {
-	if( email_is_disposable( $p_email ) ) {
-		trigger_error( ERROR_EMAIL_DISPOSABLE, ERROR );
 	}
 }
 

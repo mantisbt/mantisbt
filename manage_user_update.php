@@ -119,7 +119,6 @@ if( $t_ldap && config_get( 'use_ldap_email' ) ) {
 } else {
 	$t_email = trim( $f_email );
 	email_ensure_valid( $t_email );
-	email_ensure_not_disposable( $t_email );
 }
 
 $c_email = $t_email;
