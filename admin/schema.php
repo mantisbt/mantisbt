@@ -743,5 +743,8 @@ $g_upgrade[196] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "usern
 $g_upgrade[197] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "realname C(255) $t_notnull DEFAULT \" '' \"" ) );
 $g_upgrade[198] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "password C(64) $t_notnull DEFAULT \" '' \"" ) );
 $g_upgrade[199] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "email C(255) $t_notnull DEFAULT \" '' \"" ) );
+$g_upgrade[200] = array( 'UpdateFunction', "check_duplicate_ids", array() );
+$g_upgrade[201] = array( 'UpdateFunction', "tidy_duplicate_id_history", array() );
+$g_upgrade[202] = array( 'DropColumnSQL', array( db_get_table( 'bug' ), "duplicate_id" ) );
 
 # Release marker: 1.3.0

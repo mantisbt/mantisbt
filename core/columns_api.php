@@ -156,9 +156,6 @@ function columns_get_standard( $p_enabled_columns_only = true ) {
 	unset( $t_columns['sticky'] );
 	unset( $t_columns['loading'] );
 
-	# legacy field
-	unset( $t_columns['duplicate_id'] );
-
 	return array_keys( $t_columns );
 }
 

@@ -95,11 +95,6 @@ class BugData {
 	protected $handler_id = 0;
 
 	/**
-	 * Duplicate ID
-	 */
-	protected $duplicate_id = 0;
-
-	/**
 	 * Priority
 	 */
 	protected $priority = NORMAL;
@@ -290,7 +285,6 @@ class BugData {
 			case 'project_id':
 			case 'reporter_id':
 			case 'handler_id':
-			case 'duplicate_id':
 			case 'priority':
 			case 'severity':
 			case 'reproducibility':
@@ -433,11 +427,6 @@ class BugData {
 			error_parameters( lang_get( 'category' ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
-
-		if( !is_blank( $this->duplicate_id ) && ( $this->duplicate_id != 0 ) && ( $this->id == $this->duplicate_id ) ) {
-			trigger_error( ERROR_BUG_DUPLICATE_SELF, ERROR );
-			# never returns
-		}
 	}
 
 	/**
@@ -501,7 +490,7 @@ class BugData {
 
 		# Insert the rest of the data
 		$t_query = 'INSERT INTO {bug}
-					    ( project_id,reporter_id, handler_id,duplicate_id,
+					    ( project_id,reporter_id, handler_id,
 					      priority,severity, reproducibility,status,
 					      resolution,projection, category_id,date_submitted,
 					      last_updated,eta, bug_text_id,
@@ -510,7 +499,7 @@ class BugData {
 					      target_version, due_date
 					    )
 					  VALUES
-					    ( ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
+					    ( ' . db_param() . ',' . db_param() . ',' . db_param() . ',
 					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
 					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
 					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
@@ -518,7 +507,7 @@ class BugData {
 					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',
 					      ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
 
-		db_query( $t_query, array( $this->project_id, $this->reporter_id, $this->handler_id, $this->duplicate_id, $this->priority, $this->severity, $this->reproducibility, $t_status, $this->resolution, $this->projection, $this->category_id, $this->date_submitted, $this->last_updated, $this->eta, $t_text_id, $this->os, $this->os_build, $this->platform, $this->version, $this->build, $this->profile_id, $this->summary, $this->view_state, $this->sponsorship_total, $this->sticky, $this->fixed_in_version, $this->target_version, $this->due_date ) );
+		db_query( $t_query, array( $this->project_id, $this->reporter_id, $this->handler_id, $this->priority, $this->severity, $this->reproducibility, $t_status, $this->resolution, $this->projection, $this->category_id, $this->date_submitted, $this->last_updated, $this->eta, $t_text_id, $this->os, $this->os_build, $this->platform, $this->version, $this->build, $this->profile_id, $this->summary, $this->view_state, $this->sponsorship_total, $this->sticky, $this->fixed_in_version, $this->target_version, $this->due_date ) );
 
 		$this->id = db_insert_id( db_get_table( 'bug' ) );
 
@@ -559,7 +548,7 @@ class BugData {
 		#  them use bug_set_field()
 		$t_query = 'UPDATE {bug}
 					SET project_id=' . db_param() . ', reporter_id=' . db_param() . ',
-						handler_id=' . db_param() . ', duplicate_id=' . db_param() . ',
+						handler_id=' . db_param() . ',
 						priority=' . db_param() . ', severity=' . db_param() . ',
 						reproducibility=' . db_param() . ', status=' . db_param() . ',
 						resolution=' . db_param() . ', projection=' . db_param() . ',
@@ -570,7 +559,7 @@ class BugData {
 
 		$t_fields = array(
 			$this->project_id, $this->reporter_id,
-			$this->handler_id, $this->duplicate_id,
+			$this->handler_id,
 			$this->priority, $this->severity,
 			$this->reproducibility, $this->status,
 			$this->resolution, $this->projection,
@@ -1077,7 +1066,6 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 	# @todo VB: Shouldn't we check if the handler in the source project is also a handler in the destination project?
 	bug_set_field( $t_new_bug_id, 'handler_id', $t_bug_data->handler_id );
 
-	bug_set_field( $t_new_bug_id, 'duplicate_id', $t_bug_data->duplicate_id );
 	bug_set_field( $t_new_bug_id, 'status', $t_bug_data->status );
 	bug_set_field( $t_new_bug_id, 'resolution', $t_bug_data->resolution );
 	bug_set_field( $t_new_bug_id, 'projection', $t_bug_data->projection );
@@ -1531,7 +1519,6 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 		case 'project_id':
 		case 'reporter_id':
 		case 'handler_id':
-		case 'duplicate_id':
 		case 'priority':
 		case 'severity':
 		case 'reproducibility':
@@ -1589,16 +1576,10 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 		bug_update_date( $p_bug_id );
 	}
 
-	# log changes except for duplicate_id which is obsolete and should be removed in
-	# MantisBT 1.3.
 	switch( $p_field_name ) {
-		case 'duplicate_id':
-			break;
-
 		case 'category_id':
 			history_log_event_direct( $p_bug_id, 'category', category_full_name( $t_current_value, false ), category_full_name( $c_value, false ) );
 			break;
-
 		default:
 			history_log_event_direct( $p_bug_id, $p_field_name, $t_current_value, $c_value );
 	}
