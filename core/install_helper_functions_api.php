@@ -749,6 +749,8 @@ function install_check_duplicate_ids() {
 		# Return 2 because that's what ADOdb/DataDict does when things happen properly
 		return 2;
 	}
+
+	return 1;
 }
 
 /**
@@ -855,4 +857,7 @@ function install_tidy_duplicate_id_history() {
 		# Return 2 because that's what ADOdb/DataDict does when things happen properly
 		return 2;
 	}
+
+	return 1;
+
 }
