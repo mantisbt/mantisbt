@@ -714,7 +714,7 @@ function InsertData( $p_table, $p_data ) {
  *   if does not exist, check we've got a history entry and then set to 0
  */
 function install_check_duplicate_ids() {
-	// check duplicate_id column in bugs table is blank
+	# check duplicate_id column in bugs table is blank
 	$t_query = "SELECT id, duplicate_id FROM {bug} WHERE duplicate_id > 0";
 
 	$t_result = db_query( $t_query );
@@ -730,7 +730,7 @@ function install_check_duplicate_ids() {
 			$query = "UPDATE {bug} SET duplicate_id=0 WHERE id=" . db_param();
 			db_query( $query, array( $bug_id ) );
 		} else {
-			// duplicate may have been deleted and only exist in history table so check history
+			# duplicate may have been deleted and only exist in history table so check history
 			$query = "SELECT id FROM {bug_history} WHERE bug_id=" . db_param() . " AND old_value=" . db_param() . " AND type=" . db_param();
 			$t_result2 = db_query($query, array( $bug_id, 0, 18 ) );
 			$result = db_result( $t_result2 );
@@ -782,15 +782,15 @@ function install_tidy_duplicate_id_history() {
 
 	$t_result = db_query( $query );
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		// Issues can not be duplicates of themselves [this was allowed in some old versions]
+		# Issues can not be duplicates of themselves [this was allowed in some old versions]
 		if( $t_row['bug_id'] == $t_row['new_value'] ) {
 			$query = "DELETE FROM {bug_history} WHERE field_name='duplicate_id' AND bug_id=" . db_param() . " and new_value=" . db_param();
 			db_query($query, array( $t_row['bug_id'], $t_row['new_value'] ) );
 			continue;
 		}
-		// there was a point in time we stored duplicate_id in history + added duplicate relationship
-		// if the duplicate still exists, it's probably OK to delete the history record - on the basis that
-		// there will be a relationship history record adding the duplicate.
+		# there was a point in time we stored duplicate_id in history + added duplicate relationship
+		# if the duplicate still exists, it's probably OK to delete the history record - on the basis that
+		# there will be a relationship history record adding the duplicate.
 		if( $t_row['new_value'] > 0 ) {
 			$query2 = "SELECT id FROM {bug_relationship} WHERE source_bug_id=" . db_param() . " AND destination_bug_id=" . db_param();
 			$t_result2 = db_query( $query2, array( $t_row['bug_id'], $t_row['new_value'] ) );
@@ -810,8 +810,8 @@ function install_tidy_duplicate_id_history() {
 		}
 	}
 
-	// 2nd pass
-	// Look for duplicate_id's that got set to 0 and see if there's a bug_history record removing the relationship
+	# 2nd pass
+	# Look for duplicate_id's that got set to 0 and see if there's a bug_history record removing the relationship
 	$query = "SELECT * FROM {bug_history} WHERE field_name='duplicate_id' AND new_value=" . db_param();
 	$t_result = db_query( $query, array( 0 ) );
 	while( $t_row = db_fetch_array( $t_result ) ) {
@@ -824,24 +824,24 @@ function install_tidy_duplicate_id_history() {
 		}
 	}
 
-	// 2nd pass..
+	# 3rd pass..
 	$query = "SELECT * FROM {bug_history} WHERE field_name='duplicate_id' AND new_value <> " . db_param() . " AND old_value <> " . db_param();
-	$t_result = db_query( $query, array( 0, 0 ) ); // removal
+	$t_result = db_query( $query, array( 0, 0 ) );
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		// look for duplicate_id's that got added then removed, and convert to relationship history for these
-		// only add relationship on the bug_id (not on relationship target, as that's what old duplicate code used to do i.e. only show up in one place)
+		# look for duplicate_id's that got added then removed, and convert to relationship history for these
+		# only add relationship on the bug_id (not on relationship target, as that's what old duplicate code used to do i.e. only show up in one place)
 
-		// insert relationship add record
+		# insert relationship add record
 		$query = "INSERT INTO {bug_history} (user_id, bug_id, field_name, old_value, new_value, type, date_modified)
 					VALUES (" . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . ") ";
 		db_query($query, array( $t_row['user_id'], $t_row['bug_id'], '', 0, $t_row['new_value'], BUG_ADD_RELATIONSHIP, $t_row['date_modified'] ) );
 
-		// insert relationship delete record
+		# insert relationship delete record
 		$query = "INSERT INTO {bug_history} (user_id, bug_id, field_name, old_value, new_value, type, date_modified)
 					VALUES (" . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . ") ";
 		db_query($query, array( $t_row['user_id'], $t_row['bug_id'], '', 0, $t_row['new_value'], BUG_DEL_RELATIONSHIP, $t_row['date_modified'] ) );
 
-		// delete duplicate_id add record
+		# delete duplicate_id add record
 		$query = "DELETE FROM {bug_history} WHERE field_name='duplicate_id' AND bug_id=" . db_param() . " and new_value=" . db_param() . " AND old_value=" . db_param();
 		db_query($query, array( $t_row['bug_id'], $t_row['new_value'], $t_row['old_value'] ) );
 
