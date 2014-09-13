@@ -778,14 +778,16 @@ function install_check_duplicate_ids() {
  * This should leave us with an empty list of bug_history duplicate id entries due to the previous migration step and this cleanup.
  */
 function install_tidy_duplicate_id_history() {
-	// Issues can not be duplicates of themselves [this was allowed in some old versions]
-	$query = "DELETE FROM {bug_history} WHERE field_name='duplicate_id' AND bug_id=new_value";
-	db_query( $query );
-
 	$query = "SELECT bug_id, new_value, old_value FROM {bug_history} WHERE field_name='duplicate_id'";
 
 	$t_result = db_query( $query );
 	while( $t_row = db_fetch_array( $t_result ) ) {
+		// Issues can not be duplicates of themselves [this was allowed in some old versions]
+		if( $t_row['bug_id'] == $t_row['new_value'] ) {
+			$query = "DELETE FROM {bug_history} WHERE field_name='duplicate_id' AND bug_id=" . db_param() . " and new_value=" . db_param();
+			db_query($query, array( $t_row['bug_id'], $t_row['new_value'] ) );
+			continue;
+		}
 		// there was a point in time we stored duplicate_id in history + added duplicate relationship
 		// if the duplicate still exists, it's probably OK to delete the history record - on the basis that
 		// there will be a relationship history record adding the duplicate.
@@ -810,8 +812,8 @@ function install_tidy_duplicate_id_history() {
 
 	// 2nd pass
 	// Look for duplicate_id's that got set to 0 and see if there's a bug_history record removing the relationship
-	$query = "SELECT * FROM {bug_history} WHERE field_name='duplicate_id' AND new_value=0";
-	$t_result = db_query( $query );
+	$query = "SELECT * FROM {bug_history} WHERE field_name='duplicate_id' AND new_value=" . db_param();
+	$t_result = db_query( $query, array( 0 ) );
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$query2 = "SELECT id from {bug_history} WHERE type=" . db_param() . " AND bug_id = " . db_param() . " AND new_value= " . db_param();
 		$t_result2 = db_query( $query2, array( BUG_DEL_RELATIONSHIP, $t_row['bug_id'], $t_row['old_value'] ) );
@@ -823,8 +825,8 @@ function install_tidy_duplicate_id_history() {
 	}
 
 	// 2nd pass..
-	$query = "SELECT * FROM {bug_history} WHERE field_name='duplicate_id' AND new_value>0 AND old_value>0";
-	$t_result = db_query( $query ); // removal
+	$query = "SELECT * FROM {bug_history} WHERE field_name='duplicate_id' AND new_value <> " . db_param() . " AND old_value <> " . db_param();
+	$t_result = db_query( $query, array( 0, 0 ) ); // removal
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		// look for duplicate_id's that got added then removed, and convert to relationship history for these
 		// only add relationship on the bug_id (not on relationship target, as that's what old duplicate code used to do i.e. only show up in one place)
