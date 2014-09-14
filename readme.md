@@ -9,7 +9,7 @@ Requirements
 ------------
 
  * MySQL 4.1.1+, PostgreSQL 8+, or other supported database
- * PHP 5.3.2+
+ * PHP 5.3.3+
  * a webserver (e.g. Apache or IIS)
 
 Installation
