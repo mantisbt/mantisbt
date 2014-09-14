@@ -68,7 +68,7 @@ $t_show = array(
 				1 => plugin_lang_get( 'show_as_table' ),
 		  );
 ?>
-		<form name="graph_form" method="post" action="<?php echo plugin_page( 'bug_graph_page.php' ); ?>">
+		<form id="graph_form" method="post" action="<?php echo plugin_page( 'bug_graph_page.php' ); ?>">
 			<table class="width100" cellspacing="1">
 
 				<tr>

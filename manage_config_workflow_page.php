@@ -417,7 +417,7 @@ foreach ( $t_status_arr as $t_status => $t_status_label ) {
 	}
 }
 
-echo '<form name="workflow_config_action" method="post" action="manage_config_workflow_set.php">' . "\n";
+echo '<form id="workflow_config_action" method="post" action="manage_config_workflow_set.php">' . "\n";
 echo '<fieldset>';
 echo form_security_field( 'manage_config_workflow_set' );
 echo '</fieldset>';
@@ -490,7 +490,7 @@ if( $g_can_change_flags ) {
 	echo '</form>' . "\n";
 
 	if( 0 < count( $g_overrides ) ) {
-		echo '<div class="right"><form name="mail_config_action" method="post" action="manage_config_revert.php">' ."\n";
+		echo '<div class="right"><form id="mail_config_action" method="post" action="manage_config_revert.php">' ."\n";
 		echo '<fieldset>' . "\n";
 		echo form_security_field( 'manage_config_revert' );
 		echo '<input name="revert" type="hidden" value="' . implode( ',', $g_overrides ) . '" />';

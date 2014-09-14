@@ -58,7 +58,7 @@ require_api( 'lang_api.php' );
 <?php
 	collapse_open( 'bugnote_add', '', 'form-container' );
 ?>
-<form name="bugnoteadd" method="post" action="bugnote_add.php">
+<form id="bugnoteadd" method="post" action="bugnote_add.php">
 	<?php echo form_security_field( 'bugnote_add' ) ?>
 	<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 	<table>

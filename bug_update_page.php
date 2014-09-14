@@ -171,8 +171,7 @@ print_recently_visited();
 ?>
 <br />
 <div id="bug-update" class="form-container">
-
-	<form name="update_bug_form" method="post" action="bug_update.php">
+	<form id="update_bug_form" method="post" action="bug_update.php">
 		<?php echo form_security_field( 'bug_update' ); ?>
 		<table>
 			<thead>

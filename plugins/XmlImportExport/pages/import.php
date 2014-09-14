@@ -43,7 +43,7 @@ if( ALL_PROJECTS == $t_project_id ) {
 ?>
 
 <div id="importexport-import-div" class="form-container">
-	<form name="file_upload" method="post" enctype="multipart/form-data" action="<?php echo plugin_page( 'import_action' )?>">
+	<form id="file_upload" method="post" enctype="multipart/form-data" action="<?php echo plugin_page( 'import_action' )?>">
 		<fieldset>
 			<legend>
 				<span>

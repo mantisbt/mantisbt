@@ -98,7 +98,7 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 
 <div align="center">
 
-<form name="move_attachments_project_select" method="post" action="move_attachments.php">
+<form id="move_attachments_project_select" method="post" action="move_attachments.php">
 <table class="width50">
 	<tr>
 		<td class="form-title" colspan="2">

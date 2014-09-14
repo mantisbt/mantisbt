@@ -98,7 +98,7 @@ if( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_
 }
 ?>
 <br />
-<form name="bug_action" method="get" action="bug_actiongroup_page.php">
+<form id="bug_action" method="get" action="bug_actiongroup_page.php">
 <?php # CSRF protection not required here - form does not result in modifications ?>
 <table id="buglist" class="width100" cellspacing="1">
 <thead>

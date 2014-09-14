@@ -206,9 +206,9 @@ function get_section_begin_for_email( $p_section_name ) {
 	echo '<table>' . "\n";
 	echo '  <thead>' . "\n";
 	echo '    <tr>' . "\n";
-	echo '      <td class="form-title-caps" colspan="' . ( count( $t_access_levels ) + 7 ) . '">' . $p_section_name . '</td></tr>' . "\n";
+	echo '      <td class="form-title-caps" colspan="' . ( count( $t_access_levels ) + 5 ) . '">' . $p_section_name . '</td></tr>' . "\n";
 	echo '    <tr class="row-category2">' . "\n";
-	echo '      <th width="30%" rowspan="2">' . lang_get( 'message' ) . '</th>';
+	echo '      <th class="width30" rowspan="2">' . lang_get( 'message' ) . '</th>';
 	echo '      <th class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'issue_reporter' ) . '&#160;</th>' . "\n";
 	echo '      <th class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'issue_handler' ) . '&#160;</th>' . "\n";
 	echo '      <th class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'users_monitoring_bug' ) . '&#160;</th>' . "\n";
@@ -312,7 +312,7 @@ echo '<br /><br />';
 if( config_get( 'enable_email_notification' ) == ON ) {
 
 	if( $g_can_change_flags  || $g_can_change_defaults ) {
-		echo "<form name=\"mail_config_action\" method=\"post\" action=\"manage_config_email_set.php\">\n";
+		echo '<form id="mail_config_action" method="post" action="manage_config_email_set.php">' . "\n";
 		echo form_security_field( 'manage_config_email_set' );
 	}
 
@@ -358,7 +358,7 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 		echo "</form>\n";
 
 		echo '<div class="right">' . "\n";
-		echo '<form name="mail_config_action" method="post" action="manage_config_revert.php">' . "\n";
+		echo '<form id="mail_config_action" method="post" action="manage_config_revert.php">' . "\n";
 		echo form_security_field( 'manage_config_revert' ) . "\n";
 		echo '<input name="revert" type="hidden" value="notify_flags,default_notify_flags" />' . "\n";
 		echo '<input name="project" type="hidden" value="' . $t_project . '" />' . "\n";
