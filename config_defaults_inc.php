@@ -3776,13 +3776,9 @@ $g_wiki_engine_url = $t_protocol . '://' . $t_host . '/%wiki_engine%/';
 ####################
 
 /**
- * Whether to show the most recently visited issues or not.  At the moment we always track them even if this flag is off.
- * @global int $g_recently_visited
- */
-$g_recently_visited = ON;
-
-/**
- * The maximum number of issues to keep in the recently visited list.
+ * This controls whether to show the most recently visited issues by the current user or not.
+ * If set to 0, this feature is disabled. Otherwise it is the maximum number of issues to
+ * keep in the recently visited list.
  * @global int $g_recently_visited_count
  */
 $g_recently_visited_count = 5;
