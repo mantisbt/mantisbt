@@ -4073,9 +4073,10 @@ $g_show_queries_count = OFF;
  * Recommended config_inc.php settings for developers (these are automatically
  * set if the server is localhost):
  * $g_display_errors = array(
- *     E_USER_ERROR   => DISPLAY_ERROR_HALT,
- *     E_WARNING      => DISPLAY_ERROR_HALT,
- *     E_ALL          => DISPLAY_ERROR_INLINE,
+ *     E_USER_ERROR        => DISPLAY_ERROR_HALT,
+ *     E_RECOVERABLE_ERROR => DISPLAY_ERROR_HALT,
+ *     E_WARNING           => DISPLAY_ERROR_HALT,
+ *     E_ALL               => DISPLAY_ERROR_INLINE,
  * );
  *
  * WARNING: E_USER_ERROR should always be set to DISPLAY_ERROR_HALT. Using
@@ -4085,7 +4086,8 @@ $g_show_queries_count = OFF;
  * @global array $g_display_errors
  */
 $g_display_errors = array(
-	E_USER_ERROR   => DISPLAY_ERROR_HALT,
+	E_USER_ERROR        => DISPLAY_ERROR_HALT,
+	E_RECOVERABLE_ERROR => DISPLAY_ERROR_HALT,
 );
 
 # Add developers defaults when server is localhost
