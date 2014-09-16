@@ -50,6 +50,10 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'relationship_graph_api.php' );
 
+require_js( 'd3.v3.min.js' );
+require_js( 'dagre-d3.min.js' );
+
+
 # If relationship graphs were made disabled, we disallow any access to
 # this script.
 
@@ -92,6 +96,7 @@ access_ensure_bug_level( VIEWER, $f_bug_id );
 compress_enable();
 
 html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
+
 ?>
 <br />
 
@@ -145,18 +150,16 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 <tr>
 	<!-- Graph -->
 	<td colspan="2">
-<?php
-	if( $t_graph_relation ) {
-		$t_graph = relgraph_generate_rel_graph( $f_bug_id );
-	} else {
-		$t_graph = relgraph_generate_dep_graph( $f_bug_id, $t_graph_horizontal );
-	}
-
-	relgraph_output_map( $t_graph, 'relationship_graph_map' );
-?>
 		<div class="center relationship-graph">
-			<img src="bug_relationship_graph_img.php?bug_id=<?php echo $f_bug_id ?>&amp;graph=<?php echo $t_graph_type ?>&amp;orientation=<?php echo $t_graph_orientation ?>"
-				border="0" usemap="#relationship_graph_map" />
+			<?php
+			if( $t_graph_relation ) {
+				$t_graph = relgraph_generate_rel_graph( $f_bug_id );
+			} else {
+				$t_graph = relgraph_generate_dep_graph( $f_bug_id, $t_graph_horizontal );
+			}
+
+			relgraph_output_image( $t_graph );
+			?>
 		</div>
 	</td>
 </tr>

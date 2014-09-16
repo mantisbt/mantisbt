@@ -48,6 +48,8 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'project_api.php' );
 require_api( 'string_api.php' );
+require_api( 'graphviz_api.php' );
+require_api( 'workflow_api.php' );
 
 auth_reauthenticate();
 
@@ -56,11 +58,28 @@ if( !config_get( 'relationship_graph_enable' ) ) {
 }
 
 html_page_top( lang_get( 'manage_workflow_graph' ) );
+html_javascript_link( 'd3.v3.min.js' );
+html_javascript_link( 'dagre-d3.min.js' );
 
 print_manage_menu( 'adm_permissions_report.php' );
 print_manage_config_menu( 'manage_config_workflow_graph_page.php' );
 
 $t_project = helper_get_current_project();
+
+$t_status_arr  = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
+
+$t_graph = new Graph();
+
+foreach ( $t_status_arr as $t_from_status => $t_from_label ) {
+	$t_graph->add_node( $t_from_status, array( 'label' => $t_from_label ) );
+	$t_enum_status = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
+	foreach ( $t_enum_status as $t_to_status_id => $t_to_status_label ) {
+		$t_graph->add_node( $t_to_status_id, array( 'label' => $t_to_status_label ) );
+		if( workflow_transition_edge_exists( $t_from_status, $t_to_status_id ) ) {
+			$t_graph->add_edge( $t_from_status, $t_to_status_id );
+		}
+	}
+}
 
 if( $t_project == ALL_PROJECTS ) {
 	$t_project_title = lang_get( 'config_all_projects' );
@@ -69,11 +88,12 @@ if( $t_project == ALL_PROJECTS ) {
 }
 ?>
 	<br />
-	<br />
 	<div class="center">
 		<p class="bold"><?php echo $t_project_title ?></p>
 		<br />
-		<img src="workflow_graph_img.php" />
+		<?php
+			$t_graph->generate();
+		?>
 	</div>
 <?php
 html_page_bottom();
