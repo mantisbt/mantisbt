@@ -31,82 +31,59 @@ print_manage_menu( );
 
 ?>
 
-<br/>
-<div class="form-container" style="width: 60%">
+<div id="formatting-config-div" class="form-container">
+	<form id="formatting-config-form" action="<?php echo plugin_page( 'config_edit' )?>" method="post">
+		<fieldset>
+			<legend><span><?php echo lang_get( 'plugin_format_title' ) . ': ' . lang_get( 'plugin_format_config' )?></span></legend>
+			<?php echo form_security_field( 'plugin_format_config_edit' ) ?>
 
-<form action="<?php echo plugin_page( 'config_edit' )?>" method="post">
-<fieldset>
-<?php echo form_security_field( 'plugin_format_config_edit' ) ?>
-</fieldset>
+			<div class="field-container">
+				<label><span><?php echo lang_get( 'plugin_format_process_text' )?>
+				<br /><span class="small"><?php echo lang_get( 'plugin_format_process_text_warning_notice' )?></span>
+				</span></label>
+				<span class="radio">
+					<label><input type="radio" name="process_text" value="1" <?php echo( ON == plugin_config_get( 'process_text' ) ) ? 'checked="checked" ' : ''?>/>
+					<?php echo lang_get( 'plugin_format_enabled' )?></label>
+					<label><input type="radio" name="process_text" value="0" <?php echo( OFF == plugin_config_get( 'process_text' ) ) ? 'checked="checked" ' : ''?>/>
+					<?php echo lang_get( 'plugin_format_disabled' )?></label>
+				</span>
+				<span class="label-style"></span>
+			</div>
 
-<table>
-+<colgroup>
-	<col style="width:60%;" />
-	<col style="width:20%;" />
-	<col style="width:20%;" />
-</colgroup>
-<tr>
-	<td class="form-title" colspan="3">
-		<?php echo lang_get( 'plugin_format_title' ) . ': ' . lang_get( 'plugin_format_config' )?>
-	</td>
-</tr>
+			<div class="field-container">
+				<label><span><?php echo lang_get( 'plugin_format_process_urls' )?></span></label>
+				<span class="radio">
+					<label><input type="radio" name="process_urls" value="1" <?php echo( ON == plugin_config_get( 'process_urls' ) ) ? 'checked="checked" ' : ''?>/>
+					<?php echo lang_get( 'plugin_format_enabled' )?></label>
+					<label><input type="radio" name="process_urls" value="0" <?php echo( OFF == plugin_config_get( 'process_urls' ) ) ? 'checked="checked" ' : ''?>/>
+					<?php echo lang_get( 'plugin_format_disabled' )?></label>
+				</span>
+				<span class="label-style"></span>
+			</div>
 
-<tr>
-	<th class="category">
-		<?php echo lang_get( 'plugin_format_process_text' )?>
-		<br /><span class="small"><?php echo lang_get( 'plugin_format_process_text_warning_notice' )?></span>
-	</th>
-	<td class="center">
-		<label><input type="radio" name="process_text" value="1" <?php echo( ON == plugin_config_get( 'process_text' ) ) ? 'checked="checked" ' : ''?>/>
-			<?php echo lang_get( 'plugin_format_enabled' )?></label>
-	</td>
-	<td class="center">
-		<label><input type="radio" name="process_text" value="0" <?php echo( OFF == plugin_config_get( 'process_text' ) ) ? 'checked="checked" ' : ''?>/>
-			<?php echo lang_get( 'plugin_format_disabled' )?></label>
-	</td>
-</tr>
+			<div class="field-container">
+				<label><span>
+				<?php echo lang_get( 'plugin_format_process_buglinks' )?>
+				<br />
+				<span class="small"><?php
+					printf( lang_get( 'plugin_format_process_buglinks_info' ),
+						config_get( 'bug_link_tag' ), config_get( 'bugnote_link_tag' ) );
+				?></span>
+				</span></label>
+				<span class="radio">
+					<label><input type="radio" name="process_buglinks" value="1" <?php echo( ON == plugin_config_get( 'process_buglinks' ) ) ? 'checked="checked" ' : ''?>/>
+					<?php echo lang_get( 'plugin_format_enabled' )?></label>
+					<label><input type="radio" name="process_buglinks" value="0" <?php echo( OFF == plugin_config_get( 'process_buglinks' ) ) ? 'checked="checked" ' : ''?>/>
+					<?php echo lang_get( 'plugin_format_disabled' )?></label>
+				</span>
+				<span class="label-style"></span>
+			</div>
 
-<tr>
-	<th class="category">
-		<?php echo lang_get( 'plugin_format_process_urls' )?>
-	</th>
-	<td class="center">
-		<label><input type="radio" name="process_urls" value="1" <?php echo( ON == plugin_config_get( 'process_urls' ) ) ? 'checked="checked" ' : ''?>/>
-			<?php echo lang_get( 'plugin_format_enabled' )?></label>
-	</td>
-	<td class="center">
-		<label><input type="radio" name="process_urls" value="0" <?php echo( OFF == plugin_config_get( 'process_urls' ) ) ? 'checked="checked" ' : ''?>/>
-			<?php echo lang_get( 'plugin_format_disabled' )?></label>
-	</td>
-</tr>
-
-<tr>
-	<th class="category">
-		<?php echo lang_get( 'plugin_format_process_buglinks' )?>
-		<br />
-		<span class="small"><?php
-			printf( lang_get( 'plugin_format_process_buglinks_info' ),
-				config_get( 'bug_link_tag' ), config_get( 'bugnote_link_tag' ) );
-		?></span>
-	</th>
-	<td class="center">
-		<label><input type="radio" name="process_buglinks" value="1" <?php echo( ON == plugin_config_get( 'process_buglinks' ) ) ? 'checked="checked" ' : ''?>/>
-			<?php echo lang_get( 'plugin_format_enabled' )?></label>
-	</td>
-	<td class="center">
-		<label><input type="radio" name="process_buglinks" value="0" <?php echo( OFF == plugin_config_get( 'process_buglinks' ) ) ? 'checked="checked" ' : ''?>/>
-			<?php echo lang_get( 'plugin_format_disabled' )?></label>
-	</td>
-</tr>
-
-</table>
-
-<div class="submit-button">
-	<input type="submit" class="button" value="<?php echo lang_get( 'change_configuration' )?>" />
-</div
-
-</form>
-
+			<span class="submit-button">
+				<input type="submit" class="button" value="<?php echo lang_get( 'change_configuration' )?>" />
+			</span>
+		</fieldset>
+	</form>
 </div>
 
 <?php
