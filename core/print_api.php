@@ -699,11 +699,15 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 		$t_project_id = $p_project_id;
 	}
 	if( config_get( 'allow_no_category' ) ) {
-		echo '<option value="0"' . check_selected( $p_category_id, 0 ) . '>';
+		echo '<option value="0"';
+		check_selected( $p_category_id, 0 );
+		echo '>';
 		echo category_full_name( 0, false ), '</option>';
 	} else {
 		if( 0 == $p_category_id ) {
-			echo '<option value="0"' . check_selected( $p_category_id, 0 ) . '>';
+			echo '<option value="0"';
+			echo check_selected( $p_category_id, 0 );
+			echo '>';
 			echo string_attribute( lang_get( 'select_option' ) ) . '</option>';
 		}
 	}
@@ -1632,7 +1636,7 @@ function print_hidden_input( $p_field_key, $p_field_val ) {
  * @return void
  */
 function print_documentation_link( $p_a_name = '' ) {
-	echo lang_get( $p_a_name ) . "\n";
+	echo lang_get( $p_a_name );
 	# @todo Disable documentation links for now.  May be re-enabled if linked to new manual.
 	# echo "<a href=\"doc/documentation.html#$p_a_name\" target=\"_info\">[?]</a>";
 }
