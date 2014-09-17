@@ -699,9 +699,9 @@ function html_footer() {
 		$t_version_suffix = ' ' . htmlentities( MANTIS_VERSION . config_get_global( 'version_suffix' ) );
 	}
 
-	echo '<address id="mantisbt-copyright">' . "\n";
-	echo '<address id="version">Powered by <a href="http://www.mantisbt.org" title="bug tracking software">MantisBT ' . $t_version_suffix . "</a></address>\n";
-	echo 'Copyright &copy;' . $t_copyright_years . ' MantisBT Team';
+	echo '<address id="mantisbt-address">' . "\n";
+	echo "\t" . 'Powered by <a href="http://www.mantisbt.org" title="bug tracking software">MantisBT ' . $t_version_suffix . "</a>\n";
+	echo '<p id="mantisbt-copyright">Copyright &copy;' . $t_copyright_years . ' MantisBT Team</p>';
 
 	# Show optional user-specified custom copyright statement
 	$t_copyright_statement = config_get( 'copyright_statement' );
