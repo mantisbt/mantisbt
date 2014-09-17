@@ -517,7 +517,6 @@ function html_top_banner() {
 function html_login_info() {
 	$t_username = current_user_get_field( 'username' );
 	$t_access_level = get_enum_element( 'access_levels', current_user_get_access_level() );
-	$t_now = date( config_get( 'complete_date_format' ) );
 	$t_realname = current_user_get_field( 'realname' );
 
 	# Login information
@@ -596,9 +595,6 @@ function html_login_info() {
 			}
 		}
 	}
-
-	# Current time
-	echo '<div id="current-time">' . $t_now . '</div>';
 }
 
 /**
