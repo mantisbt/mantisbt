@@ -110,20 +110,21 @@ function history_log_event( $p_bug_id, $p_field_name, $p_old_value ) {
  * These are special case logs (new bug, deleted bugnote, etc.)
  * @param integer $p_bug_id    The bug identifier of the bug being modified.
  * @param integer $p_type      The type of the modification.
- * @param string  $p_optional  The optional value to store in the old_value field.
- * @param string  $p_optional2 The optional value to store in the new_value field.
+ * @param string  $p_old_value The optional value to store in the old_value field.
+ * @param string  $p_new_value The optional value to store in the new_value field.
  * @return void
  */
-function history_log_event_special( $p_bug_id, $p_type, $p_optional = '', $p_optional2 = '' ) {
-	$c_optional = ( $p_optional );
-	$c_optional2 = ( $p_optional2 );
+function history_log_event_special( $p_bug_id, $p_type, $p_old_value = '', $p_new_value = '' ) {
 	$t_user_id = auth_get_current_user_id();
+
+	$c_old_value = (is_null( $p_old_value ) ? '' : $p_old_value );
+	$c_new_value = (is_null( $p_new_value ) ? '' : $p_new_value );
 
 	$t_query = 'INSERT INTO {bug_history}
 					( user_id, bug_id, date_modified, type, old_value, new_value, field_name )
 				VALUES
 					( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ',' . db_param() . ', ' . db_param() . ')';
-	db_query( $t_query, array( $t_user_id, $p_bug_id, db_now(), $p_type, $c_optional, $c_optional2, '' ) );
+	db_query( $t_query, array( $t_user_id, $p_bug_id, db_now(), $p_type, $c_old_value, $c_new_value, '' ) );
 }
 
 /**
