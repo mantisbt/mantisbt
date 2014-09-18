@@ -286,10 +286,10 @@ if( $t_multiple_projects ) {
 				case 'VIEW_STATUS':
 					print_enum_string_option_list( 'view_state', config_get( 'default_bug_view_status' ) );
 					break;
-				case 'UP_PRODUCT_VERSION':
 				case 'UP_TARGET_VERSION':
 					print_version_option_list( '', $t_project_id, VERSION_FUTURE, true, true );
 					break;
+				case 'UP_PRODUCT_VERSION':
 				case 'UP_FIXED_IN_VERSION':
 					print_version_option_list( '', $t_project_id, VERSION_ALL, true, true );
 					break;
