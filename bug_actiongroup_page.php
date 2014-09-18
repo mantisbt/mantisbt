@@ -173,6 +173,12 @@
 			$t_form					= 'view_status';
 			break;
 
+		case 'UP_PRODUCT_VERSION':
+			$t_question_title		= lang_get( 'product_version_bugs_conf_msg' );
+			$t_button_title			= lang_get( 'product_version_group_bugs_button' );
+			$t_form					= 'product_version';
+			break;
+
 		case 'UP_FIXED_IN_VERSION':
 			$t_question_title		= lang_get( 'fixed_in_version_bugs_conf_msg' );
 			$t_button_title			= lang_get( 'fixed_in_version_group_bugs_button' );
@@ -264,6 +270,7 @@ if ( !$t_finished ) {
 				case 'VIEW_STATUS':
 					print_enum_string_option_list( 'view_state', config_get( 'default_bug_view_status' ) );
 					break;
+				case 'UP_PRODUCT_VERSION':
 				case 'UP_TARGET_VERSION':
 				case 'UP_FIXED_IN_VERSION':
 					print_version_option_list( '', $t_project_id, VERSION_ALL,
