@@ -225,6 +225,7 @@
 				if ( $f_product_version === '' || version_get_id( $f_product_version, $t_project_id ) !== false ) {
 					/** @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) ); */
 					bug_set_field( $t_bug_id, 'version', $f_product_version );
+					email_generic( $t_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
 					helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
 				} else {
 					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_version' );
