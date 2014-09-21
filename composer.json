@@ -1,0 +1,40 @@
+{
+	"name": "mantisbt",
+	"description": "Mantis Bug Tracker",
+	"keywords": ["bugs", "bug tracker"],
+	"type": "mantisbt",
+	"homepage": "https://www.mantisbt.org/",
+	"license": "GPL-2.0+",
+	"authors": [
+		{
+			"name": "MantisBT Team",
+			"homepage": "https://www.mantisbt.org/"
+		}
+	],
+	"support": {
+		"issues": "https://www.mantisbt.org/bugs",
+		"forum": "https://www.mantisbt.org/support/",
+		"wiki": "https://www.mantisbt.org/",
+		"irc": "irc://irc.freenode.net/mantisbt",
+		"source": "https://www.github.com/mantisbt"
+	},
+	"require": {
+		"php": ">=5.3.2"
+	},
+	"require-dev": {
+		"ext-xsl": "*",
+        "phpunit/phpunit": "4.2.6",
+        "phpdocumentor/phpdocumentor": "2.x",
+		"phpdocumentor/template-zend": "1.x",
+		"phploc/phploc": "2.x",
+		"sebastian/phpcpd": "2.x",
+		"pear/pear_exception": "@dev",
+		"pear/versioncontrol_git": "@dev",
+		"pdepend/pdepend": "2.x",
+        "pear/HTTP_Request2": "2.2.x",
+		"squizlabs/php_codesniffer": "2.0.0RC1",
+		"phpmd/phpmd": "2.1.1",
+		"phing/phing": "2.8.2",
+		"theseer/phpdox": "0.7.0"
+    }
+}

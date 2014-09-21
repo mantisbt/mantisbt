@@ -160,3 +160,12 @@ cat <<-EOF >> $MANTIS_CONFIG
 	EOF
 
 step "Before-script execution completed successfully"
+
+sudo apt-get update -qq
+
+echo -e "\nInstalling composer packages ... "
+composer selfupdate --quiet
+composer install -o --no-progress
+
+phpenv config-add .travis.php.ini
+phpenv rehash

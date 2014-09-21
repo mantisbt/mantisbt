@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="MantisBT" default="buildsystem" basedir=".">
+	<property name="php" value="php"/>
+	<property name="passthru" value="true" />
+
+	<target name="composer">
+		<httpget url="https://getcomposer.org/composer.phar" dir="${project.basedir}" sslVerifyPeer="false" />
+		<exec executable="${php}">
+			<arg value="composer.phar"/>
+			<arg value="install"/>
+		</exec>
+	</target>
+
+	<target name="buildenv">
+		<echo>Calling phing..</echo>
+		<exec executable="vendor/bin/phing" passthru="true" >
+			<!--<arg path="${project.basedir}" />-->
+			<arg value="build2" />
+		</exec>
+	</target>
+
+	<target name="buildsystem">
+		<echo>Launching Build from local phing version ${phing.version}</echo>
+		<phingcall target="composer" />
+		<phingcall target="buildenv" />
+	</target>
+
+	<target name="build2">
+		<echo>Running Build from local phing version ${phing.version}</echo>
+		<phingcall target="build" />
+	</target>
+	<target name="build" depends="prepare,lint,phploc,pdepend,phpmd,phpcpd,phpcs-ci,phpunit,phpdox,package" />
+
+	<fileset dir="." id="fileset.deploy.id">
+		<!-- directories which should not be deployed -->
+		<exclude name="build/**"/>
+		<exclude name="doc/**"/>
+		<exclude name="docbook/**"/>
+		<exclude name="packages/**"/>
+		<exclude name="phing/**"/>
+		<exclude name="tests/**"/>
+		<exclude name="vendor/**"/>
+
+		<!-- customisations and IDE settings -->
+		<exclude name="config_inc.php"/>
+		<exclude name="custom_constant_inc.php"/>
+		<exclude name="custom_strings_inc.php"/>
+		<exclude name="custom_functions_inc.php"/>
+		<exclude name="mantis_offline.php"/>
+		<exclude name="web.config"/>
+		<exclude name=".*"/>
+		<exclude name=".settings/**"/>
+
+		<!-- git repo -->
+		<exclude name=".git/**"/>
+
+		<!-- build file -->
+		<exclude name="phing.xml"/>
+	</fileset>
+
+	<includepath classpath="phing/tasks"/>
+	<taskdef name="extractMantisBTVersion" classname="mantisbt.ExtractMantisBTVersion"/>
+
+	<target name="package">
+		<extractMantisBTVersion file="core/constant_inc.php"/>
+
+		<!-- build tar gz file -->
+		<phingcall target="-package">
+			<property name="package.extension" value="tar.gz"/>
+			<property name="package.compression" value="gzip"/>
+		</phingcall>
+
+		<!-- build zip file -->
+		<phingcall target="-package">
+			<property name="package.extension" value="zip"/>
+			<property name="package.compression" value="zip"/>
+		</phingcall>
+
+	</target>
+
+	<target name="-package">
+		<if>
+			<equals arg1="${package.compression}" arg2="zip"/>
+			<then>
+				<zip destfile="build/mantisbt-${mantisbtversion}.${package.extension}">
+					<fileset refid="fileset.deploy.id"/>
+				</zip>
+			</then>
+			<else>
+				<tar destfile="build/mantisbt-${mantisbtversion}.${package.extension}" compression="${package.compression}">
+					<fileset refid="fileset.deploy.id"/>
+				</tar>
+			</else>
+		</if>
+
+		<filehash file="build/mantisbt-${mantisbtversion}.${package.extension}" hashtype="1" />
+		<echo file="build/mantisbt-${mantisbtversion}.${package.extension}.sha1" msg="${filehashvalue}"/>
+
+		<filehash file="build/mantisbt-${mantisbtversion}.${package.extension}" hashtype="0" />
+		<echo file="build/mantisbt-${mantisbtversion}.${package.extension}.md5" msg="${filehashvalue}"/>
+	</target>
+
+	<target name="prepare" description="Prepare for build">
+		<mkdir dir="${project.basedir}/build/api"/>
+		<mkdir dir="${project.basedir}/build/code-browser"/>
+		<mkdir dir="${project.basedir}/build/coverage"/>
+		<mkdir dir="${project.basedir}/build/logs"/>
+		<mkdir dir="${project.basedir}/build/pdepend"/>
+		<mkdir dir="${project.basedir}/build/phpdox"/>
+	</target>
+
+	<target name="lint">
+		<apply executable="${php}" failonerror="true">
+			<arg value="-l" />
+			<fileset dir="${project.basedir}">
+				<include name="*.php" />
+			</fileset>
+			<fileset dir="${project.basedir}/core">
+				<include name="**/*.php" />
+			</fileset>
+			<fileset dir="${project.basedir}/plugins">
+				<include name="**/*.php" />
+			</fileset>
+		</apply>
+	</target>
+
+	<target name="phploc">
+		<exec executable="${php}" passthru="${passthru}">
+			<arg value="vendor\phploc\phploc\phploc" />
+			<arg value="--log-csv" />
+			<arg value="${project.basedir}/build/logs/phploc.csv" />
+			<arg value="--log-xml" />
+			<arg value="${project.basedir}/build/logs/phploc.xml" />
+			<arg value="--exclude" />
+			<arg value="vendor" />
+			<arg value="--exclude" />
+			<arg value="library" />
+			<arg path="${project.basedir}" />
+		</exec>
+	</target>
+
+	<target name="pdepend">
+		<exec executable="${php}" passthru="${passthru}">
+			<arg value="vendor/pdepend/pdepend/src/bin/pdepend" />
+			<arg value="--jdepend-xml=${project.basedir}/build/logs/jdepend.xml" />
+			<arg value="--jdepend-chart=${project.basedir}/build/pdepend/dependencies.svg" />
+			<arg value="--overview-pyramid=${project.basedir}/build/pdepend/overview-pyramid.svg" />
+			<arg value="--summary-xml=${project.basedir}/build/pdepend/summary.xml" />
+			<arg path="${project.basedir}/core,${project.basedir}/plugins" />
+		</exec>
+	</target>
+
+	<target name="phpmd">
+		<exec executable="${php}" passthru="${passthru}">
+			<arg value="vendor/phpmd/phpmd/src/bin/phpmd" />
+			<arg path="${project.basedir}/core" />
+			<arg value="xml" />
+			<arg value="${project.basedir}/phing/phpmd/phpmd.xml" />
+			<arg value="--reportfile" />
+			<arg value="${project.basedir}/build/logs/pmd.xml" />
+		</exec>
+	</target>
+
+	<target name="phpcs">
+		<exec executable="${php}" passthru="${passthru}">
+			<arg value="vendor/squizlabs/php_codesniffer/scripts/phpcs" />
+			<arg value="--standard=phing/codesniffer/ruleset.xml" />
+			<arg value="--extensions=php" />
+			<arg path="${project.basedir}" />
+		</exec>
+	</target>
+
+	<target name="phpcs-ci">
+		<exec executable="${php}" passthru="${passthru}">
+			<arg value="vendor/squizlabs/php_codesniffer/scripts/phpcs" />
+			<arg value="--standard=phing/codesniffer/ruleset.xml" />
+			<arg value="--report=checkstyle" />
+			<arg value="--report-file=${project.basedir}/build/logs/checkstyle.xml" />
+			<arg value="--extensions=php" />
+			<arg path="${project.basedir}" />
+		</exec>
+	</target>
+
+	<target name="phpcpd" description="Find duplicate code using PHPCPD">
+		<exec executable="${php}" passthru="${passthru}">
+			<arg value="vendor/sebastian/phpcpd/phpcpd" />
+			<arg value="--log-pmd" />
+			<arg value="${project.basedir}/build/logs/pmd-cpd.xml" />
+			<arg path="${project.basedir}/core" />
+		</exec>
+	</target>
+
+	<target name="phpunit" description="Run unit tests with PHPUnit">
+		<exec executable="${php}" passthru="${passthru}">
+			<arg value="vendor/phpunit/phpunit/phpunit" />
+			<arg path="${project.basedir}/tests" />
+		</exec>
+	</target>
+
+	<target name="phpdox">
+		<exec executable="${php}" passthru="${passthru}">
+			<arg value="vendor/theseer/phpdox/composer/bin/phpdox" />
+			<arg value="--file" />
+			<arg value="phing/phpdox/phpdox.xml" />
+		</exec>
+	</target>
+</project>
