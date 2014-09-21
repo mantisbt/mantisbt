@@ -2040,8 +2040,7 @@ $g_status_enum_workflow = array();
 ############################
 
 /**
- * Specify the filename of the magic database file. This is used by
- * PHP 5.3.0 (or earlier versions with the fileinfo PECL extension) to
+ * Specify the filename of the magic database file. This is used to
  * guess what the MIME type of a file is. Usually it is safe to leave this
  * setting as the default (blank) as PHP is usually able to find this file
  * by itself.
