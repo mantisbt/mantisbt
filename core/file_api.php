@@ -782,9 +782,6 @@ function file_allow_bug_upload( $p_bug_id = null, $p_user_id = null ) {
 		$t_reporter = bug_is_user_reporter( $p_bug_id, $p_user_id );
 	}
 
-	# @todo If we ever wanted to have a per-project setting enabling file
-	#     uploads, we'd want to check it here before exempting the reporter
-
 	if( $t_reporter && ( ON == config_get( 'allow_reporter_upload' ) ) ) {
 		return true;
 	}
