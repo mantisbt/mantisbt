@@ -171,7 +171,7 @@ $t_icon_path = config_get( 'icon_path' );
 			'&amp;export=' . $f_export .
 			'&amp;show_flag=' . $t_show_flag .
 			'">' .
-			'<img src="' . $t_icon_path . $t_icon[3] . '" alt="' . $t_icon[4] . '" /></a> ';
+			'<img src="' . $t_icon_path . $t_icon[2] . '" alt="' . $t_icon[3] . '" /></a> ';
 	}
 ?>
 	</td>
