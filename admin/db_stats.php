@@ -19,7 +19,7 @@
  *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * @copyright Copyright 2002 MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  */
 
@@ -37,10 +37,10 @@ html_page_top();
  * @return void
  */
 function print_info_row( $p_description, $p_value ) {
-	echo '<tr>';
-	echo '<th class="category">' . $p_description . '</th>';
-	echo '<td>' . $p_value . '</td>';
-	echo '</tr>';
+	echo "\t\t" . '<tr>' . "\n";
+	echo "\t\t\t" . '<td>' . $p_description . '</td>' . "\n";
+	echo "\t\t\t" .'<td>' . $p_value . '</td>' . "\n";
+	echo "\t\t" . '</tr>' . "\n";
 }
 
 /**
@@ -59,18 +59,24 @@ function helper_table_row_count( $p_table ) {
 }
 ?>
 <div class="table-container">
-<table cellspacing="1">
-<tr>
-<td class="form-title" width="30%" colspan="2"><?php echo lang_get( 'mantisbt_database_statistics' ) ?></td>
-</tr>
+	<h2><?php echo lang_get( 'mantisbt_database_statistics' ) ?></h2>
+	<table cellspacing="1">
+		<thead>
+			<tr class="row-category">
+				<th>Table Name</th>
+				<th>Record Count</th>
+			</tr>
+		<thead>
+		<tbody>
 <?php
 foreach( db_get_table_list() as $t_table ) {
 	if( db_table_exists( $t_table ) ) {
-			print_info_row( $t_table, helper_table_row_count( $t_table ) . ' records' );
+			print_info_row( $t_table, helper_table_row_count( $t_table ) );
 	}
 }
 ?>
-</table>
+		</tbody>
+	</table>
 </div>
 <?php
 
