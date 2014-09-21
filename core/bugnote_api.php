@@ -634,10 +634,11 @@ function bugnote_stats_get_events_array( $p_bug_id, $p_from, $p_to ) {
  * @param string  $p_from       Starting date (yyyy-mm-dd) inclusive, if blank, then ignored.
  * @param string  $p_to         Ending date (yyyy-mm-dd) inclusive, if blank, then ignored.
  * @param integer $p_cost       Cost.
+ * @param integer $p_user_id    Optional user id of user who added the bugnote.
  * @return array array of bugnote stats
  * @access public
  */
-function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost ) {
+function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost, $p_user_id = ALL_USERS ) {
 	$t_params = array();
 	$c_to = strtotime( $p_to ) + SECONDS_PER_DAY - 1;
 	$c_from = strtotime( $p_from );
@@ -668,12 +669,19 @@ function bugnote_stats_get_project_array( $p_project_id, $p_from, $p_to, $p_cost
 		$t_to_where = '';
 	}
 
+	if( ALL_USERS != $p_user_id ) {
+		$t_reporter_where = ' AND bn.reporter_id=' . db_param();
+		$t_params[] = $p_user_id;
+	} else {
+		$t_reporter_where = '';
+	}
+
 	$t_results = array();
 
 	$t_query = 'SELECT username, realname, summary, bn.bug_id, SUM(time_tracking) AS sum_time_tracking
 			FROM {user} u, {bugnote} bn, {bug} b
 			WHERE u.id = bn.reporter_id AND bn.time_tracking != 0 AND bn.bug_id = b.id
-			' . $t_project_where . $t_from_where . $t_to_where . '
+			' . $t_project_where . $t_from_where . $t_to_where . $t_reporter_where . '
 			GROUP BY bn.bug_id, u.username, u.realname, b.summary
 			ORDER BY bn.bug_id';
 	$t_result = db_query( $t_query, $t_params );
