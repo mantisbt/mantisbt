@@ -954,7 +954,7 @@ function custom_field_validate( $p_field_id, $p_value ) {
 	$t_default_value = $t_row['default_value'];
 
 	$t_valid = true;
-	$t_length = utf8_strlen( $p_value );
+	$t_length = mb_strlen( $p_value );
 	switch( $t_type ) {
 		case CUSTOM_FIELD_TYPE_STRING:
 			# Empty fields are valid
@@ -1046,7 +1046,7 @@ function custom_field_validate( $p_field_id, $p_value ) {
  */
 function custom_field_prepare_possible_values( $p_possible_values ) {
 	if( !is_blank( $p_possible_values ) && ( $p_possible_values[0] == '=' ) ) {
-		return helper_call_custom_function( 'enum_' . utf8_substr( $p_possible_values, 1 ), array() );
+		return helper_call_custom_function( 'enum_' . mb_substr( $p_possible_values, 1 ), array() );
 	}
 
 	return $p_possible_values;

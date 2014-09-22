@@ -55,7 +55,7 @@ access_ensure_global_level( config_get( 'tag_edit_threshold' ) );
 compress_enable();
 
 $t_can_edit = access_has_global_level( config_get( 'tag_edit_threshold' ) );
-$f_filter = utf8_strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_tag_prefix' ) ) );
+$f_filter = mb_strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_tag_prefix' ) ) );
 $f_page_number = gpc_get_int( 'page_number', 1 );
 
 # Start Index Menu

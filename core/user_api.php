@@ -325,7 +325,7 @@ function user_ensure_realname_unique( $p_username, $p_realname ) {
  */
 function user_is_name_valid( $p_username ) {
 	# The DB field is hard-coded. DB_FIELD_SIZE_USERNAME should not be modified.
-	if( utf8_strlen( $p_username ) > DB_FIELD_SIZE_USERNAME ) {
+	if( mb_strlen( $p_username ) > DB_FIELD_SIZE_USERNAME ) {
 		return false;
 	}
 
@@ -1197,10 +1197,10 @@ function user_get_unassigned_by_project_id( $p_project_id = null ) {
 		if( ( isset( $t_row['realname'] ) ) && ( $t_row['realname'] <> '' ) && $t_show_realname ) {
 			$t_user_name = string_attribute( $t_row['realname'] );
 			if( $t_sort_by_last_name ) {
-				$t_sort_name_bits = explode( ' ', utf8_strtolower( $t_user_name ), 2 );
+				$t_sort_name_bits = explode( ' ', mb_strtolower( $t_user_name ), 2 );
 				$t_sort_name = ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
 			} else {
-				$t_sort_name = utf8_strtolower( $t_user_name );
+				$t_sort_name = mb_strtolower( $t_user_name );
 			}
 		}
 		$t_display[] = $t_user_name;

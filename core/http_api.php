@@ -34,7 +34,7 @@ require_api( 'config_api.php' );
  * @return boolean True if protocol is HTTPS
  */
 function http_is_protocol_https() {
-	return !empty( $_SERVER['HTTPS'] ) && ( utf8_strtolower( $_SERVER['HTTPS'] ) != 'off' );
+	return !empty( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' );
 }
 
 /**

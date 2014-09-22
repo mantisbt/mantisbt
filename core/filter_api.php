@@ -636,7 +636,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 			$t_drop = false;
 			$t_sort = $t_sort_fields[$i];
 			if( strpos( $t_sort, 'custom_' ) === 0 ) {
-				if( false === custom_field_get_id_from_name( utf8_substr( $t_sort, utf8_strlen( 'custom_' ) ) ) ) {
+				if( false === custom_field_get_id_from_name( mb_substr( $t_sort, mb_strlen( 'custom_' ) ) ) ) {
 					$t_drop = true;
 				}
 			} else {
@@ -934,7 +934,7 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 		if( !in_array( $t_sort_fields[$i], array_slice( $t_sort_fields, $i + 1 ) ) ) {
 			# if sorting by a custom field
 			if( strpos( $c_sort, 'custom_' ) === 0 ) {
-				$t_custom_field = utf8_substr( $c_sort, utf8_strlen( 'custom_' ) );
+				$t_custom_field = mb_substr( $c_sort, mb_strlen( 'custom_' ) );
 				$t_custom_field_id = custom_field_get_id_from_name( $t_custom_field );
 				$t_def = custom_field_get_definition( $t_custom_field_id );
 				$t_value_field = ( $t_def['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ? 'text' : 'value' );
@@ -3293,12 +3293,12 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				}
 				$t_sort = $t_sort_fields[$i];
 				if( strpos( $t_sort, 'custom_' ) === 0 ) {
-					$t_field_name = string_display( lang_get_defaulted( utf8_substr( $t_sort, utf8_strlen( 'custom_' ) ) ) );
+					$t_field_name = string_display( lang_get_defaulted( mb_substr( $t_sort, mb_strlen( 'custom_' ) ) ) );
 				} else {
 					$t_field_name = string_get_field_name( $t_sort );
 				}
 
-				echo $t_field_name . ' ' . lang_get( 'bugnote_order_' . utf8_strtolower( $t_dir_fields[$i] ) );
+				echo $t_field_name . ' ' . lang_get( 'bugnote_order_' . mb_strtolower( $t_dir_fields[$i] ) );
 				echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_FIELD_NAME, '_', $i, '" value="', string_attribute( $t_sort_fields[$i] ), '" />';
 				echo '<input type="hidden" name="', FILTER_PROPERTY_SORT_DIRECTION, '_', $i, '" value="', string_attribute( $t_dir_fields[$i] ), '" />';
 			}
@@ -4137,7 +4137,7 @@ function print_filter_show_sort() {
 	for( $i = 0;$i < $t_n_fields;$i++ ) {
 		if( !in_array( $t_fields[$i], array( 'selection', 'edit', 'bugnotes_count', 'attachment_count' ) ) ) {
 			if( strpos( $t_fields[$i], 'custom_' ) === 0 ) {
-				$t_field_name = string_display( lang_get_defaulted( utf8_substr( $t_fields[$i], utf8_strlen( 'custom_' ) ) ) );
+				$t_field_name = string_display( lang_get_defaulted( mb_substr( $t_fields[$i], mb_strlen( 'custom_' ) ) ) );
 			} else {
 				$t_field_name = string_get_field_name( $t_fields[$i] );
 			}
@@ -4740,7 +4740,7 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
  * @return boolean true when under max_length (64) and false when over
  */
 function filter_name_valid_length( $p_name ) {
-	if( utf8_strlen( $p_name ) > 64 ) {
+	if( mb_strlen( $p_name ) > 64 ) {
 		return false;
 	} else {
 		return true;

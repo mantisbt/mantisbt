@@ -147,7 +147,7 @@ $t_num_notes = db_num_rows( $t_result );
 						switch( $t_row['note_type'] ) {
 							case REMINDER:
 								echo '<div class="italic">' . lang_get( 'reminder_sent_to' ) . ': ';
-								$t_note_attr = utf8_substr( $t_row['note_attr'], 1, utf8_strlen( $t_row['note_attr'] ) - 2 );
+								$t_note_attr = mb_substr( $t_row['note_attr'], 1, mb_strlen( $t_row['note_attr'] ) - 2 );
 								$t_to = array();
 								foreach ( explode( '|', $t_note_attr ) as $t_recipient ) {
 									$t_to[] = string_display_line( user_get_name( $t_recipient ) );

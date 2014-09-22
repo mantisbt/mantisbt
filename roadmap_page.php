@@ -94,7 +94,7 @@ function print_version_header( array $p_version_row ) {
 	echo '<br />';
 
 	$t_release_title_without_hyperlinks = $t_project_name . ' - ' . $t_version_name . $t_scheduled_release_date;
-	echo utf8_str_pad( '', utf8_strlen( $t_release_title_without_hyperlinks ), '=' ), '<br />';
+	echo mb_str_pad( '', mb_strlen( $t_release_title_without_hyperlinks ), '=' ), '<br />';
 }
 
 /**

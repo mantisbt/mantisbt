@@ -871,5 +871,5 @@ function project_delete_all_files( $p_project_id ) {
  */
 function project_format_id( $p_project_id ) {
 	$t_padding = config_get( 'display_project_padding' );
-	return( utf8_str_pad( $p_project_id, $t_padding, '0', STR_PAD_LEFT ) );
+	return( mb_str_pad( $p_project_id, $t_padding, '0', STR_PAD_LEFT ) );
 }

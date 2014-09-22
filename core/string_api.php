@@ -66,7 +66,7 @@ function string_preserve_spaces_at_bol( $p_string ) {
 		$t_count = 0;
 		$t_prefix = '';
 
-		$t_char = utf8_substr( $t_lines[$i], $t_count, 1 );
+		$t_char = mb_substr( $t_lines[$i], $t_count, 1 );
 		$t_spaces = 0;
 		while( ( $t_char == ' ' ) || ( $t_char == "\t" ) ) {
 			if( $t_char == ' ' ) {
@@ -78,14 +78,14 @@ function string_preserve_spaces_at_bol( $p_string ) {
 			# 1 tab = 4 spaces, can be configurable.
 
 			$t_count++;
-			$t_char = utf8_substr( $t_lines[$i], $t_count, 1 );
+			$t_char = mb_substr( $t_lines[$i], $t_count, 1 );
 		}
 
 		for( $j = 0;$j < $t_spaces;$j++ ) {
 			$t_prefix .= '&#160;';
 		}
 
-		$t_lines[$i] = $t_prefix . utf8_substr( $t_lines[$i], $t_count );
+		$t_lines[$i] = $t_prefix . mb_substr( $t_lines[$i], $t_count );
 	}
 	return implode( "\n", $t_lines );
 }
@@ -829,7 +829,7 @@ function string_shorten( $p_string, $p_max = null ) {
 		$t_max = (int)$p_max;
 	}
 
-	if( ( $t_max > 0 ) && ( utf8_strlen( $p_string ) > $t_max ) ) {
+	if( ( $t_max > 0 ) && ( mb_strlen( $p_string ) > $t_max ) ) {
 		$t_pattern = '/([\s|.|,|\-|_|\/|\?]+)/';
 		$t_bits = preg_split( $t_pattern, $p_string, -1, PREG_SPLIT_DELIM_CAPTURE );
 
@@ -838,11 +838,11 @@ function string_shorten( $p_string, $p_max = null ) {
 		$t_last_len = strlen( $t_last );
 
 		if( count( $t_bits ) == 1 ) {
-			$t_string .= utf8_substr( $t_last, 0, $t_max - 3 );
+			$t_string .= mb_substr( $t_last, 0, $t_max - 3 );
 			$t_string .= '...';
 		} else {
 			foreach( $t_bits as $t_bit ) {
-				if( ( utf8_strlen( $t_string ) + utf8_strlen( $t_bit ) + $t_last_len + 3 <= $t_max ) || ( strpos( $t_bit, '.,-/?' ) > 0 ) ) {
+				if( ( mb_strlen( $t_string ) + mb_strlen( $t_bit ) + $t_last_len + 3 <= $t_max ) || ( strpos( $t_bit, '.,-/?' ) > 0 ) ) {
 					$t_string .= $t_bit;
 				} else {
 					break;

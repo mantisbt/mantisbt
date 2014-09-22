@@ -62,7 +62,7 @@ $f_dir	         = gpc_get_string( 'dir', 'ASC' );
 $f_hide_inactive = gpc_get_bool( 'hideinactive' );
 $f_show_disabled = gpc_get_bool( 'showdisabled' );
 $f_save          = gpc_get_bool( 'save' );
-$f_filter        = utf8_strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_user_prefix' ) ) );
+$f_filter        = mb_strtoupper( gpc_get_string( 'filter', config_get( 'default_manage_user_prefix' ) ) );
 $f_page_number   = gpc_get_int( 'page_number', 1 );
 
 $t_cookie_name = config_get( 'manage_users_cookie' );

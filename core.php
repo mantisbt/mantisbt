@@ -45,8 +45,6 @@
  * @uses php_api.php
  * @uses user_pref_api.php
  * @uses wiki_api.php
- * @uses utf8/utf8.php
- * @uses utf8/str_pad.php
  */
 
 /**
@@ -163,10 +161,8 @@ function __autoload( $p_class ) {
 # Register the autoload function to make it effective immediately
 spl_autoload_register( '__autoload' );
 
-# Load UTF8-capable string functions
-define( 'UTF8', $g_library_path . 'utf8' );
-require_lib( 'utf8/utf8.php' );
-require_lib( 'utf8/str_pad.php' );
+# Set encoding to UTF-8
+mb_internal_encoding('UTF-8');
 
 # Include PHP compatibility file
 require_api( 'php_api.php' );

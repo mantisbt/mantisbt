@@ -128,13 +128,13 @@ function return_dynamic_filters_prepend_headers() {
 }
 
 $f_filter_target = gpc_get_string( 'filter_target' );
-$t_function_name = 'print_filter_' . utf8_substr( $f_filter_target, 0, -7 );
+$t_function_name = 'print_filter_' . mb_substr( $f_filter_target, 0, -7 );
 if( function_exists( $t_function_name ) ) {
 	return_dynamic_filters_prepend_headers();
 	call_user_func( $t_function_name );
-} else if( 'custom_field' == utf8_substr( $f_filter_target, 0, 12 ) ) {
+} else if( 'custom_field' == mb_substr( $f_filter_target, 0, 12 ) ) {
 	# custom function
-	$t_custom_id = utf8_substr( $f_filter_target, 13, -7 );
+	$t_custom_id = mb_substr( $f_filter_target, 13, -7 );
 	return_dynamic_filters_prepend_headers();
 	print_filter_custom_field( $t_custom_id );
 } else {

@@ -302,14 +302,14 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 	$t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
 	foreach( $t_users as $t_key => $t_user ) {
 		$t_user_name = string_attribute( $t_user['username'] );
-		$t_sort_name = utf8_strtolower( $t_user_name );
+		$t_sort_name = mb_strtolower( $t_user_name );
 		if( $t_show_realname && ( $t_user['realname'] <> '' ) ) {
 			$t_user_name = string_attribute( $t_user['realname'] );
 			if( $t_sort_by_last_name ) {
-				$t_sort_name_bits = explode( ' ', utf8_strtolower( $t_user_name ), 2 );
+				$t_sort_name_bits = explode( ' ', mb_strtolower( $t_user_name ), 2 );
 				$t_sort_name = ( isset( $t_sort_name_bits[1] ) ? $t_sort_name_bits[1] . ', ' : '' ) . $t_sort_name_bits[0];
 			} else {
-				$t_sort_name = utf8_strtolower( $t_user_name );
+				$t_sort_name = mb_strtolower( $t_user_name );
 			}
 		}
 		$t_display[] = $t_user_name;
@@ -392,7 +392,7 @@ function print_tag_option_list( $p_bug_id = 0 ) {
 	foreach ( $t_rows as $t_row ) {
 		$t_string = $t_row['name'];
 		if( !empty( $t_row['description'] ) ) {
-			$t_string .= ' - ' . utf8_substr( $t_row['description'], 0, 20 );
+			$t_string .= ' - ' . mb_substr( $t_row['description'], 0, 20 );
 		}
 		echo '<option value="', $t_row['id'], '" title="', string_attribute( $t_row['name'] ), '">', string_attribute( $t_string ), '</option>';
 	}
