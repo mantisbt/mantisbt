@@ -17,18 +17,6 @@
 /**
  * Relationship Graph API
  *
- * This uses GraphViz utilities to generate relationship graphs for
- * issues. GraphViz must be installed in order to use this feature.
- *
- * Graphviz is available at:
- * 	- http://www.graphviz.org/
- * 	- http://www.research.att.com/sw/tools/graphviz/
- *
- * Most Linux distributions already have a GraphViz package
- * conveniently available for download and install. Refer to
- * config_defaults_inc.php for how to enable this feature once
- * GraphViz is installed.
- *
  * @package CoreAPI
  * @subpackage RelationshipGraphAPI
  * @author Juliano Ravasi Ferraz <jferraz at users sourceforge net>
@@ -58,8 +46,7 @@ require_api( 'string_api.php' );
 require_api( 'utility_api.php' );
 
 /**
- * Generate a pretty bug ID string that is safe to use in the DOT language
- * defined at http://www.graphviz.org/doc/info/lang.html
+ * Generate a pretty bug ID string that is safe to use:
  * For now we allow formatted strings in these formats:
  *  - Containing only a-z, A-Z, 0-9 and _ where the first character is NOT an
  *    integer/digit.
@@ -151,23 +138,12 @@ function relgraph_generate_rel_graph( $p_bug_id ) {
 	# the graph. Now it is the matter to create a Digraph object and
 	# store the information there, along with graph formatting attributes.
 	$t_id_string = relgraph_bug_format_id( $p_bug_id );
-	$t_graph_fontname = config_get( 'relationship_graph_fontname' );
-	$t_graph_fontsize = config_get( 'relationship_graph_fontsize' );
-	$t_graph_fontpath = get_font_path();
-	$t_view_on_click = config_get( 'relationship_graph_view_on_click' );
-	$t_neato_tool = config_get( 'neato_tool' );
 
 	$t_graph_attributes = array();
 
-	if( !empty( $t_graph_fontpath ) ) {
-		$t_graph_attributes['fontpath'] = $t_graph_fontpath;
-	}
-
-	$t_graph = new Graph( $t_id_string, $t_graph_attributes, $t_neato_tool );
+	$t_graph = new Graph( $t_id_string, $t_graph_attributes );
 
 	$t_graph->set_default_node_attr( array (
-			'fontname'	=> $t_graph_fontname,
-			'fontsize'	=> $t_graph_fontsize,
 			'shape'		=> 'record',
 			'style'		=> 'filled',
 			'height'	=> '0.2',
@@ -185,11 +161,7 @@ function relgraph_generate_rel_graph( $p_bug_id ) {
 	foreach( $v_bug_list as $t_id => $t_bug ) {
 		$t_id_string = relgraph_bug_format_id( $t_id );
 
-		if( $t_view_on_click ) {
-			$t_url = string_get_bug_view_url( $t_id );
-		} else {
-			$t_url = 'bug_relationship_graph.php?bug_id=' . $t_id . '&graph=relation';
-		}
+		$t_url = 'bug_relationship_graph.php?bug_id=' . $t_id . '&graph=relation';
 
 		relgraph_add_bug_to_graph( $t_graph, $t_id_string, $t_bug, $t_url, $t_id == $p_bug_id );
 
@@ -216,6 +188,7 @@ function relgraph_generate_rel_graph( $p_bug_id ) {
 					$t_edge_style = array();
 				}
 
+				
 				$t_graph->add_edge( $t_id_string, $t_related_id, $t_edge_style );
 			}
 		}
@@ -275,17 +248,8 @@ function relgraph_generate_dep_graph( $p_bug_id, $p_horizontal = false ) {
 	# the graph. Now it is the matter to create a Digraph object and
 	# store the information there, along with graph formatting attributes.
 	$t_id_string = relgraph_bug_format_id( $p_bug_id );
-	$t_graph_fontname = config_get( 'relationship_graph_fontname' );
-	$t_graph_fontsize = config_get( 'relationship_graph_fontsize' );
-	$t_graph_fontpath = get_font_path();
-	$t_view_on_click = config_get( 'relationship_graph_view_on_click' );
-	$t_dot_tool = config_get( 'dot_tool' );
 
 	$t_graph_attributes = array();
-
-	if( !empty( $t_graph_fontpath ) ) {
-		$t_graph_attributes['fontpath'] = $t_graph_fontpath;
-	}
 
 	if( $p_horizontal ) {
 		$t_graph_attributes['rankdir'] = 'LR';
@@ -294,11 +258,9 @@ function relgraph_generate_dep_graph( $p_bug_id, $p_horizontal = false ) {
 		$t_graph_orientation = 'vertical';
 	}
 
-	$t_graph = new Digraph( $t_id_string, $t_graph_attributes, $t_dot_tool );
+	$t_graph = new Digraph( $t_id_string, $t_graph_attributes );
 
 	$t_graph->set_default_node_attr( array (
-			'fontname'	=> $t_graph_fontname,
-			'fontsize'	=> $t_graph_fontsize,
 			'shape'		=> 'record',
 			'style'		=> 'filled',
 			'height'	=> '0.2',
@@ -315,11 +277,7 @@ function relgraph_generate_dep_graph( $p_bug_id, $p_horizontal = false ) {
 	foreach( $v_bug_list as $t_related_bug_id => $t_related_bug ) {
 		$t_id_string = relgraph_bug_format_id( $t_related_bug_id );
 
-		if( $t_view_on_click ) {
-			$t_url = string_get_bug_view_url( $t_related_bug_id );
-		} else {
-			$t_url = 'bug_relationship_graph.php?bug_id=' . $t_related_bug_id . '&graph=dependency&orientation=' . $t_graph_orientation;
-		}
+		$t_url = 'bug_relationship_graph.php?bug_id=' . $t_related_bug_id . '&graph=dependency&orientation=' . $t_graph_orientation;
 
 		relgraph_add_bug_to_graph( $t_graph, $t_id_string, $t_related_bug, $t_url, $t_related_bug_id == $p_bug_id );
 
@@ -473,20 +431,7 @@ function relgraph_add_child( array &$p_bug_list, $p_bug_id ) {
  * @return void
  */
 function relgraph_output_image( Graph $p_graph ) {
-	$p_graph->output( 'png', true );
-}
-
-/**
- * Outputs an image map in XHTML format using the <map> element for the given
- * relationship graph.
- * @param Graph  $p_graph Relationship graph object generated from relgraph_generate_graph_for_bug().
- * @param string $p_name  The XHTML name attribute to apply to the containing <map> element.
- * @return void
- */
-function relgraph_output_map( Graph $p_graph, $p_name ) {
-	echo '<map name="' . $p_name . '">' . "\n";
-	$p_graph->output( 'cmapx' );
-	echo '</map>' . "\n";
+	$p_graph->generate();
 }
 
 /**
@@ -504,6 +449,7 @@ function relgraph_add_bug_to_graph( Graph &$p_graph, $p_bug_id, BugData $p_bug, 
 	$t_node_attributes['label'] = $p_bug_id;
 
 	if( $p_highlight ) {
+		$t_node_attributes['nodeclass'] = 'node-highlight';
 		$t_node_attributes['color'] = '#0000FF';
 		$t_node_attributes['style'] = 'bold, filled';
 	} else {
