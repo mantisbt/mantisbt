@@ -1204,14 +1204,19 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 		# this array is populated with project ids that the current user has full access to.
 		$t_private_and_public_project_ids = array();
+		$t_limited_projects = array();
 
 		foreach( $t_project_ids as $t_pid ) {
-			$t_access_required_to_view_private_bugs = config_get( 'private_bug_threshold', null, null, $t_pid );
-			if( access_has_project_level( $t_access_required_to_view_private_bugs, $t_pid, $t_user_id ) ) {
-				$t_private_and_public_project_ids[] = $t_pid;
+			# limit reporters to visible projects
+			if( ( ON === $t_limit_reporters ) && ( !access_has_project_level( REPORTER + 1, $t_pid, $t_user_id ) ) ) {
+				array_push( $t_limited_projects, '({bug}.project_id=' . $t_pid . ' AND ({bug}.reporter_id=' . $t_user_id . ') )' );
 			} else {
-				$t_public_only_project_ids[] = $t_pid;
-			}
+				$t_access_required_to_view_private_bugs = config_get( 'private_bug_threshold', null, null, $t_pid );
+				if( access_has_project_level( $t_access_required_to_view_private_bugs, $t_pid, $t_user_id ) ) {
+					$t_private_and_public_project_ids[] = $t_pid;
+				} else {
+					$t_public_only_project_ids[] = $t_pid;
+				}
 		}
 
 		log_event( LOG_FILTERING, 'project_ids (with public/private access) = @P' . implode( ', @P', $t_private_and_public_project_ids ) );
@@ -1246,6 +1251,15 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 			$t_project_query = '( ' . $t_public_only_query . ' OR ' . $t_private_and_public_query . ' )';
 		}
 
+		if( !empty( $t_limited_projects ) ) {
+			foreach( $t_limited_projects as $t_string ) {
+				if( $t_project_query ==  "" ) {
+					$t_project_query = " ( $t_string ) ";
+				} else {
+					$t_project_query = " ( $t_project_query OR ( $t_string ) )";
+				}
+			}
+		}
 		log_event( LOG_FILTERING, 'project query = ' . $t_project_query );
 		array_push( $t_project_where_clauses, $t_project_query );
 	}
@@ -1299,16 +1313,6 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		array_push( $t_where_clauses, $t_reporter_query );
 	} else {
 		log_event( LOG_FILTERING, 'no reporter query' );
-	}
-
-	# limit reporter
-	# @@@ thraxisp - access_has_project_level checks greater than or equal to,
-	#   this assumed that there aren't any holes above REPORTER where the limit would apply
-	#
-	if( ( ON === $t_limit_reporters ) && ( !access_has_project_level( REPORTER + 1, $t_project_id, $t_user_id ) ) ) {
-		$c_reporter_id = $c_user_id;
-		$t_where_params[] = $c_reporter_id;
-		array_push( $t_where_clauses, '({bug}.reporter_id=' . db_param() . ')' );
 	}
 
 	# handler
