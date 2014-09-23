@@ -422,9 +422,7 @@ function helper_ensure_confirmed( $p_message, $p_button_label ) {
 
 	html_page_top();
 
-	echo '<br />';
-	echo '<div class="center">';
-	echo '<hr />';
+	echo '<div class="confirm-msg center">';
 	echo "\n" . $p_message . "\n";
 
 	echo '<form method="post" action="">' . "\n";
@@ -437,7 +435,7 @@ function helper_ensure_confirmed( $p_message, $p_button_label ) {
 	echo '<br /><br /><input type="submit" class="button" value="' . $p_button_label . '" />';
 	echo "\n</form>\n";
 
-	echo '<hr /></div>' . "\n";
+	echo '</div>' . "\n";
 	html_page_bottom();
 	exit;
 }

@@ -698,6 +698,13 @@ div.important-msg ul li {
 	background-color: #fceded;
 }
 
+div.confirm-msg {
+	width: 60%;
+	margin: 2em auto;
+	border-top: 2px solid gray;
+	border-bottom: 2px solid gray;
+}
+
 ul.project-list { list-style: none; margin: .5em 0em 2em 0em; padding: 0em .5em; }
 ul.project-list li { margin: 0em; line-height: 1.25em; clear: both; min-width: 30em; }
 ul.project-list li span.access-level:before { content: ' ['; }
