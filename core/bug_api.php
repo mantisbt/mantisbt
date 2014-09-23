@@ -313,6 +313,12 @@ class BugData {
 					$p_value = strtotime( $p_value );
 				}
 				break;
+			case 'summary':
+			case 'build':
+				if ( !$this->loading ) {
+					$p_value = trim( $p_value );
+				}
+				break;
 		}
 		$this->$p_name = $p_value;
 	}
