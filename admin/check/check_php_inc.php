@@ -49,7 +49,8 @@ $t_extensions_required = array(
 	'hash',
 	'pcre',
 	'Reflection',
-	'session'
+	'session',
+	'mbstring'
 );
 
 foreach( $t_extensions_required as $t_extension ) {
