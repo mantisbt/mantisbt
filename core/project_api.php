@@ -672,7 +672,7 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 
 		$t_result = db_query( $t_query, array( $t_on ) );
 		while( $t_row = db_fetch_array( $t_result ) ) {
-			$t_users[$t_row['id']] = $t_row;
+			$t_users[(int)$t_row['id']] = $t_row;
 		}
 	}
 
@@ -694,11 +694,11 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 			}
 
 			if( $t_keep ) {
-				$t_users[$t_row['id']] = $t_row;
+				$t_users[(int)$t_row['id']] = $t_row;
 			} else {
 				# If user's overridden level is lower than required, so remove
 				#  them from the list if they were previously there
-				unset( $t_users[$t_row['id']] );
+				unset( $t_users[(int)$t_row['id']] );
 			}
 		}
 	}
