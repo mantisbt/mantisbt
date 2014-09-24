@@ -253,7 +253,7 @@ $t_num_notes = count( $t_bugnotes );
 						echo lang_get( 'reminder_sent_none' );
 					} else {
 						# If recipients list's last char is not a delimiter, it was truncated
-						$t_truncated = ( '|' != utf8_substr( $t_bugnote->note_attr, utf8_strlen( $t_bugnote->note_attr ) - 1 ) );
+						$t_truncated = ( '|' != mb_substr( $t_bugnote->note_attr, mb_strlen( $t_bugnote->note_attr ) - 1 ) );
 
 						# Build recipients list for display
 						$t_to = array();

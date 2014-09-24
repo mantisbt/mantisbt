@@ -210,7 +210,7 @@ function tag_parse_filters( $p_string ) {
 		if( !is_blank( $t_name ) && tag_name_is_valid( $t_name, $t_matches, $t_prefix ) ) {
 			$t_tag_row = tag_get_by_name( $t_matches[1] );
 			if( $t_tag_row !== false ) {
-				$t_filter = utf8_substr( $t_name, 0, 1 );
+				$t_filter = mb_substr( $t_name, 0, 1 );
 
 				if( '+' == $t_filter ) {
 					$t_tag_row['filter'] = 1;
@@ -387,7 +387,7 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 	$t_tag_name = tag_get_field( $p_tag_id, 'name' );
 
 	$t_rename = false;
-	if( utf8_strtolower( $p_name ) != utf8_strtolower( $t_tag_name ) ) {
+	if( mb_strtolower( $p_name ) != mb_strtolower( $t_tag_name ) ) {
 		tag_ensure_unique( $p_name );
 		$t_rename = true;
 	}

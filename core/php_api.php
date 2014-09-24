@@ -87,16 +87,77 @@ function php_version_at_least( $p_version_string ) {
 	return true;
 }
 
-# If mb_* not defined, define it to map to standard methods.
-if( !function_exists( 'mb_substr' ) ) {
-	/**
-	 * Map mb_substr to utf8_substr if mb extension is not found
-	 * @param string  $p_text  Text string.
-	 * @param integer $p_index Start position.
-	 * @param integer $p_size  Size.
-	 * @return string
-	 */
-	function mb_substr( $p_text, $p_index, $p_size ) {
-		return utf8_substr( $p_text, $p_index, $p_size );
+/**
+ * Define a multibyte/UTF-8 aware string padding function based on PHP's
+ * str_pad function.
+ * @param string  $p_input      Input string.
+ * @param integer $p_pad_length Padding Length - Refers to the number of grapheme's in the string.
+ * @param string  $p_pad_string Padding String.
+ * @param integer $p_pad_type   Padding Type.
+ * @return string
+ */
+function mb_str_pad($p_input, $p_pad_length, $p_pad_string = ' ', $p_pad_type = STR_PAD_RIGHT) {
+	$t_input_length = mb_strlen( $p_input );
+	if( $p_pad_length <= $t_input_length ) {
+		return $p_input;
 	}
+	$t_pad_characters_required = $p_pad_length - $t_input_length;
+	$t_pad_string_length = mb_strlen( $p_pad_string );
+	$t_padded_string = $p_input;
+	switch( $p_pad_type ) {
+		case STR_PAD_RIGHT:
+			$t_repetitions = ceil( $p_pad_length / $t_pad_string_length );
+			$t_padded_string = mb_substr( $p_input . str_repeat( $p_pad_string, $t_repetitions ), 0, $p_pad_length );
+			break;
+		case STR_PAD_LEFT:
+			$t_repetitions = ceil( $p_pad_length / $t_pad_string_length );
+			$t_padded_string = mb_substr( str_repeat( $p_pad_string, $t_repetitions ), 0, $p_pad_length ) . $p_input;
+			break;
+		case STR_PAD_BOTH:
+			$t_pad_amount_left = floor( $p_pad_length / 2 );
+			$t_pad_amount_right = ceil( $p_pad_length / 2 );
+			$t_repetitions_left = ceil( $t_pad_amount_left / $t_pad_string_length );
+			$t_repetitions_right = ceil( $t_pad_amount_right / $t_pad_string_length );
+			$t_padding_left = mb_substr( str_repeat( $p_pad_string, $t_repetitions_left ), 0, $t_pad_amount_left );
+			$t_padding_right = mb_substr( str_repeat( $p_pad_string, $t_repetitions_right ), 0, $t_pad_amount_right );
+			$t_padded_string = $t_padding_left . $p_input . $t_padding_right;
+			break;
+	}
+	return $t_padded_string;
+}
+
+/**
+ * function alias for utf8_strtoupper() for legacy support of plugins
+ * @deprecated mb_strtoupper should be used in preference to this function.
+ * @return string
+ */
+function utf8_strtoupper() {
+  return call_user_func_array( 'mb_strtoupper', func_get_args() );
+}
+
+/**
+ * function alias for utf8_strtolower() for legacy support of plugins
+ * @deprecated mb_strtolower should be used in preference to this function.
+ * @return string
+ */
+function utf8_strtolower() {
+  return call_user_func_array( 'mb_strtolower', func_get_args() );
+}
+
+/**
+ * function alias for utf8_strlen() for legacy support of plugins
+ * @deprecated mb_strlen should be used in preference to this function.
+ * @return integer
+ */
+function utf8_strlen() {
+  return call_user_func_array( 'mb_strlen', func_get_args() );
+}
+
+/**
+ * function alias for utf8_substr() for legacy support of plugins
+ * @deprecated mb_substr should be used in preference to this function.
+ * @return string
+ */
+function utf8_substr() {
+  return call_user_func_array( 'mb_substr', func_get_args() );
 }

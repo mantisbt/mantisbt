@@ -69,7 +69,7 @@ $t_old_name = $t_row['name'];
 $t_project_id = $t_row['project_id'];
 
 # check for duplicate
-if( utf8_strtolower( $f_name ) != utf8_strtolower( $t_old_name ) ) {
+if( mb_strtolower( $f_name ) != mb_strtolower( $t_old_name ) ) {
 	category_ensure_unique( $t_project_id, $f_name );
 }
 

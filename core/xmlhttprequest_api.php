@@ -49,7 +49,7 @@ require_api( 'profile_api.php' );
 function xmlhttprequest_filter_by_prefix( array $p_set, $p_prefix ) {
 	$t_matches = array();
 	foreach ( $p_set as $p_item ) {
-		if( utf8_strtolower( utf8_substr( $p_item, 0, utf8_strlen( $p_prefix ) ) ) === utf8_strtolower( $p_prefix ) ) {
+		if( mb_strtolower( mb_substr( $p_item, 0, mb_strlen( $p_prefix ) ) ) === mb_strtolower( $p_prefix ) ) {
 			$t_matches[] = $p_item;
 		}
 	}
