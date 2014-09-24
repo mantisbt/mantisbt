@@ -179,7 +179,7 @@ function filter_get_url( array $p_custom_filter ) {
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_STICKY] ) ) {
 		$t_query[] = filter_encode_field_and_value(
 			FILTER_PROPERTY_STICKY,
-			$p_custom_filter[FILTER_PROPERTY_STICKY] ? 'on' : 'off' );
+			$p_custom_filter[FILTER_PROPERTY_STICKY] );
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_VERSION] ) ) {
@@ -225,7 +225,7 @@ function filter_get_url( array $p_custom_filter ) {
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) ) {
 		$t_query[] = filter_encode_field_and_value(
 			FILTER_PROPERTY_FILTER_BY_DATE,
-			$p_custom_filter[FILTER_PROPERTY_FILTER_BY_DATE] ? 'on' : 'off' );
+			$p_custom_filter[FILTER_PROPERTY_FILTER_BY_DATE] );
 
 		# The start and end dates are only applicable if filter by date is set.
 		if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_START_DAY] ) ) {
@@ -489,6 +489,8 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	}
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_STICKY] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_STICKY] = gpc_string_to_bool( config_get( 'show_sticky_issues' ) );
+	} if( !is_bool( $p_filter_arr[FILTER_PROPERTY_STICKY] ) ) {
+		$p_filter_arr[FILTER_PROPERTY_STICKY] = gpc_string_to_bool( $p_filter_arr[FILTER_PROPERTY_STICKY] );
 	}
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_SORT_FIELD_NAME] = 'last_updated';
@@ -544,6 +546,8 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	}
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_FILTER_BY_DATE] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_FILTER_BY_DATE] = gpc_get_bool( FILTER_PROPERTY_FILTER_BY_DATE, false );
+	} if( !is_bool( $p_filter_arr[FILTER_PROPERTY_FILTER_BY_DATE] ) ) {
+		$p_filter_arr[FILTER_PROPERTY_FILTER_BY_DATE] = gpc_string_to_bool( $p_filter_arr[FILTER_PROPERTY_FILTER_BY_DATE] );
 	}
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_VIEW_STATE] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_VIEW_STATE] = gpc_get( FILTER_PROPERTY_VIEW_STATE, '' );
@@ -922,7 +926,7 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 
 	$t_plugin_columns = columns_get_plugin_columns();
 
-	if( gpc_string_to_bool( $p_filter[FILTER_PROPERTY_STICKY] ) && ( null !== $p_show_sticky ) ) {
+	if( $p_filter[FILTER_PROPERTY_STICKY] && ( null !== $p_show_sticky ) ) {
 		$p_query_clauses['order'][] = '{bug}.sticky DESC';
 	}
 
@@ -1251,7 +1255,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	}
 
 	# date filter
-	if( ( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_YEAR] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_YEAR] ) ) {
+	if( ( $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_START_YEAR] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_MONTH] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_DAY] ) && is_numeric( $t_filter[FILTER_PROPERTY_END_YEAR] ) ) {
 
 		$t_start_string = $t_filter[FILTER_PROPERTY_START_YEAR] . '-' . $t_filter[FILTER_PROPERTY_START_MONTH] . '-' . $t_filter[FILTER_PROPERTY_START_DAY] . ' 00:00:00';
 		$t_end_string = $t_filter[FILTER_PROPERTY_END_YEAR] . '-' . $t_filter[FILTER_PROPERTY_END_MONTH] . '-' . $t_filter[FILTER_PROPERTY_END_DAY] . ' 23:59:59';
@@ -2841,18 +2845,17 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 			</td>
 			<td class="small-caption" id="sticky_issues_filter_target">
 				<?php
-					$t_sticky_filter_state = gpc_string_to_bool( $t_filter[FILTER_PROPERTY_STICKY] );
-					print( $t_sticky_filter_state ? lang_get( 'yes' ) : lang_get( 'no' ) );
+					print( $t_filter[FILTER_PROPERTY_STICKY] ? lang_get( 'yes' ) : lang_get( 'no' ) );
 				?>
 				<input type="hidden" name="<?php
 					echo FILTER_PROPERTY_STICKY; ?>" value="<?php
-					echo $t_sticky_filter_state ? 'on' : 'off'; ?>" />
+					echo string_attribute( $t_filter[FILTER_PROPERTY_STICKY] ); ?>" />
 			</td>
 			<td class="small-caption" colspan="2">&#160;
 			</td>
 			<td class="small-caption" id="do_filter_by_date_filter_target">
 		<?php
-		if( 'on' == $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) {
+		if( $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) {
 			echo '<input type="hidden" name="', FILTER_PROPERTY_FILTER_BY_DATE, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] ), '" />';
 			echo '<input type="hidden" name="', FILTER_PROPERTY_START_MONTH, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_START_MONTH] ), '" />';
 			echo '<input type="hidden" name="', FILTER_PROPERTY_START_DAY, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_START_DAY] ), '" />';
@@ -3839,7 +3842,7 @@ function print_filter_view_state() {
 function print_filter_sticky_issues() {
 	global $g_filter;
 	?><!-- Show or hide sticky bugs -->
-			<input type="checkbox" name="<?php echo FILTER_PROPERTY_STICKY;?>"<?php check_checked( gpc_string_to_bool( $g_filter[FILTER_PROPERTY_STICKY] ), true );?> />
+			<input type="checkbox" name="<?php echo FILTER_PROPERTY_STICKY;?>"<?php check_checked( $g_filter[FILTER_PROPERTY_STICKY] );?> />
 		<?php
 }
 
@@ -3871,7 +3874,7 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 				<label>
 					<input type="checkbox" id="use_date_filters" name="<?php
 						echo FILTER_PROPERTY_FILTER_BY_DATE ?>"<?php
-						check_checked( gpc_string_to_bool( $g_filter[FILTER_PROPERTY_FILTER_BY_DATE] ), true ) ?> />
+						check_checked( $g_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) ?> />
 					<?php echo lang_get( 'use_date_filters' )?>
 				</label>
 			</td>
@@ -3880,7 +3883,7 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 	}
 
 	$t_menu_disabled =  '';
-	if( 'on' !== $g_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) {
+	if( $g_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) {
 		$t_menu_disabled = ' disabled="disabled" ';
 	}
 ?>

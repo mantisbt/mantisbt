@@ -320,7 +320,7 @@ $t_show_tags = access_has_global_level( config_get( 'tag_view_threshold' ) );
 		<label>
 			<input type="checkbox" id="use_date_filters"
 				name="<?php echo FILTER_PROPERTY_FILTER_BY_DATE ?>"
-				<?php check_checked( $t_filter['filter_by_date'], true ) ?>
+				<?php check_checked( $t_filter['filter_by_date'] ) ?>
 			/>
 			<?php echo lang_get( 'use_date_filters' )?>
 		</label>
