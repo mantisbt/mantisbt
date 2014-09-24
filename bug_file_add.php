@@ -51,6 +51,8 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'string_api.php' );
 
+helper_begin_long_process();
+
 $f_bug_id	= gpc_get_int( 'bug_id', -1 );
 $f_files		= gpc_get_file( 'ufile', -1 );
 
