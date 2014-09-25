@@ -735,12 +735,9 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		ORDER BY pt.name ASC, pft.title ASC';
 
 	$t_result = db_query( $t_query, array( $t_user_id, $t_user_id, $t_pub, $t_user_id, $t_admin ) );
-	$t_num_files = db_num_rows( $t_result );
 
 	$t_attachments = array();
-	for( $i = 0; $i < $t_num_files; $i++ ) {
-		$t_row = db_fetch_array( $t_result );
-
+	while ( $t_row = db_fetch_array( $t_result ) ) {
 		$t_attachment = array();
 		$t_attachment['id'] = $t_row['id'];
 		$t_attachment['filename'] = $t_row['filename'];

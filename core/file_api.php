@@ -362,20 +362,15 @@ function file_get_visible_attachments( $p_bug_id ) {
 function file_delete_attachments( $p_bug_id ) {
 	$t_method = config_get( 'file_upload_method' );
 
-	# Delete files from disk
-	$t_query = 'SELECT diskfile, filename FROM {bug_file} WHERE bug_id=' . db_param();
-	$t_result = db_query( $t_query, array( $p_bug_id ) );
-
-	$t_file_count = db_num_rows( $t_result );
-	if( 0 == $t_file_count ) {
-		return true;
-	}
-
 	if( DISK == $t_method ) {
-		for( $i = 0; $i < $t_file_count; $i++ ) {
-			$t_row = db_fetch_array( $t_result );
+		# Delete files from disk
+		$t_query = 'SELECT diskfile, filename FROM {bug_file} WHERE bug_id=' . db_param();
+		$t_result = db_query( $t_query, array( $p_bug_id ) );
 
-			$t_local_diskfile = file_normalize_attachment_path( $t_row['diskfile'], bug_get_field( $p_bug_id, 'project_id' ) );
+		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+
+		while( $t_row = db_fetch_array( $t_result ) ) {
+			$t_local_diskfile = file_normalize_attachment_path( $t_row['diskfile'], $t_project_id );
 			file_delete_local( $t_local_diskfile );
 		}
 	}
@@ -402,11 +397,7 @@ function file_delete_project_files( $p_project_id ) {
 		$t_query = 'SELECT diskfile, filename FROM {project_file} WHERE project_id=' . db_param();
 		$t_result = db_query( $t_query, array( (int)$p_project_id ) );
 
-		$t_file_count = db_num_rows( $t_result );
-
-		for( $i = 0;$i < $t_file_count;$i++ ) {
-			$t_row = db_fetch_array( $t_result );
-
+		while( $t_row = db_fetch_array( $t_result ) ) {
 			$t_local_diskfile = file_normalize_attachment_path( $t_row['diskfile'], $p_project_id );
 			file_delete_local( $t_local_diskfile );
 		}

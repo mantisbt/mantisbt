@@ -73,7 +73,12 @@ $t_query = 'SELECT * FROM {bugnote}
 		WHERE bug_id=' . db_param() . ' ' . $t_restriction . '
 		ORDER BY date_submitted ' . $t_bugnote_order;
 $t_result = db_query( $t_query, array( $c_bug_id ) );
-$t_num_notes = db_num_rows( $t_result );
+
+$t_notes = array();
+while ( $t_row = db_fetch_array( $t_result ) ) {
+	$t_notes[] = $t_row;
+}
+$t_num_notes = count( $t_notes );
 ?>
 
 <br />
@@ -95,8 +100,7 @@ $t_num_notes = db_num_rows( $t_result );
 	</tr>
 	<?php
 		for( $i=0; $i < $t_num_notes; $i++ ) {
-			# prefix all bugnote data with v3_
-			$t_row = db_fetch_array( $t_result );
+			$t_row = $t_notes[$i];
 
 			$t_date_submitted = date( config_get( 'normal_date_format' ), $t_row['date_submitted'] );
 			$t_last_modified = date( config_get( 'normal_date_format' ), $t_row['last_modified'] );

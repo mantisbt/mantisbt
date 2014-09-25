@@ -517,10 +517,10 @@ function mci_filter_db_get_available_queries( $p_project_id = null, $p_user_id =
 						OR user_id = ' . db_param() . ')
 					ORDER BY is_public DESC, name ASC';
 	$t_result = db_query( $t_query, array( $t_project_id, db_prepare_bool( true ), $t_user_id ) );
-	$t_query_count = db_num_rows( $t_result );
+	$t_queries = array();
 
-	for( $i = 0;$i < $t_query_count;$i++ ) {
-		$t_row = db_fetch_array( $t_result );
+	while ( $t_row = db_fetch_array( $t_result ) ) {
+		$t_row = $t_queries;
 
 		$t_filter_detail = explode( '#', $t_row['filter_string'], 2 );
 		if( !isset($t_filter_detail[1]) ) {

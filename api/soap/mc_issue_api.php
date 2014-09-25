@@ -567,23 +567,21 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 
 	$t_result = db_query( $t_query, array( $p_summary ), 1 );
 
-	if( db_num_rows( $t_result ) == 0 ) {
-		return 0;
-	} else {
-		while( ( $t_row = db_fetch_array( $t_result ) ) !== false ) {
-			$t_issue_id = (int)$t_row['id'];
-			$t_project_id = bug_get_field( $t_issue_id, 'project_id' );
-			$g_project_override = $t_project_id;
+	$t_issues = array();
+	while ( $t_issue = db_fetch_array( $t_result ) ) {
+		$t_issue_id = (int)$t_issue['id'];
+		$t_project_id = bug_get_field( $t_issue_id, 'project_id' );
 
-			if( mci_has_readonly_access( $t_user_id, $t_project_id ) &&
-				access_has_bug_level( VIEWER, $t_issue_id, $t_user_id ) ) {
-				return $t_issue_id;
-			}
+		$g_project_override = $t_project_id;
+
+		if( mci_has_readonly_access( $t_user_id, $t_project_id ) &&
+			access_has_bug_level( VIEWER, $t_issue_id, $t_user_id ) ) {
+			return $t_issue_id;
 		}
-
-		# no issue found that belongs to a project that the user has read access to.
-		return 0;
 	}
+
+	# no issue found that belongs to a project that the user has read access to.
+	return 0;
 }
 
 /**
