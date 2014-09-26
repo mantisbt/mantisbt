@@ -697,3 +697,167 @@ function InsertData( $p_table, $p_data ) {
 	$t_query = 'INSERT INTO ' . $p_table . $p_data;
 	return array( $t_query );
 }
+
+/**
+ * Schema update to remove legacy duplicate ID before 1.3
+ *
+ * This update is a sanity check as previous pre 1.1 update step https://github.com/mantisbt/mantisbt/commit/952768180428b32ff35a7e089cba88a9de7387c3
+ * should mean that duplicate_id field is no longer used.
+ *
+ * This schema update only exists to check that no historical bugs lead to data getting lost. It was still possible in an early release
+ * for the duplicate_id field on a bug to get updated after the conversion to relationships, due to keeping both around.
+ *
+ * Gets any bugs where a duplicate id value exists
+ * For each bug
+ *   look for a relationship record
+ *   if relationship record exists, set legacy duplicate_id field to 0
+ *   if does not exist, check we've got a history entry and then set to 0
+ */
+function install_check_duplicate_ids() {
+	# check duplicate_id column in bugs table is blank
+	$t_query = "SELECT id, duplicate_id FROM {bug} WHERE duplicate_id > 0";
+
+	$t_result = db_query( $t_query );
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$bug_id = (int)$t_row['id'];
+		$duplicate = $t_row['duplicate_id'];
+
+		$query = "SELECT id FROM {bug_relationship} WHERE source_bug_id=" . db_param() . " AND destination_bug_id=" . db_param() . " AND relationship_type=" . db_param();
+		$t_result2 = db_query($query, array( $bug_id, $duplicate, 0 ) );
+		$result = db_result( $t_result2 );
+
+		if( $result > 0 ) {
+			$query = "UPDATE {bug} SET duplicate_id=0 WHERE id=" . db_param();
+			db_query( $query, array( $bug_id ) );
+		} else {
+			# duplicate may have been deleted and only exist in history table so check history
+			$query = "SELECT id FROM {bug_history} WHERE bug_id=" . db_param() . " AND old_value=" . db_param() . " AND type=" . db_param();
+			$t_result2 = db_query($query, array( $bug_id, 0, 18 ) );
+			$result = db_result( $t_result2 );
+			if( $result > 0 ) {
+				$query = "UPDATE {bug} SET duplicate_id=0 WHERE id=" . db_param();
+				db_query( $query, array( $bug_id ) );
+			}
+		}
+	}
+
+	$query = "SELECT count(id) FROM {bug} WHERE duplicate_id > 0";
+	$t_result = db_query( $query );
+	$result = db_result( $t_result );
+
+	if( $result == 0 ) {
+		# Return 2 because that's what ADOdb/DataDict does when things happen properly
+		return 2;
+	}
+
+	return 1;
+}
+
+/**
+ * Schema update to migrate legacy duplicate ID history records before duplicate_id's removal in 1.3
+ *
+ * The previous pre 1.1 update step https://github.com/mantisbt/mantisbt/commit/952768180428b32ff35a7e089cba88a9de7387c3
+ * migrated bugs with duplicate_id's set, but did nothing to go back and migrate history information.
+ *
+ * This schema update attempts to tidy this historical history information so duplicate_id can be removed as planned.
+ *
+ * 1) Delete any bug_history entries that are incorrect duplicates - i.e. bug 1 is a duplicate of bug 1
+ * 2) Fetch any duplicate_id bug history records. For each record, check bug_relationship record exists and delete duplicate_id history record.
+ * We would have created a relationship record when converting originally
+ * 3) Similarly, check for old_value for duplicate_id's being removed
+ * 4) Check the above against bug history table for cases where relationships no longer exist
+ * The above 4 checks are effectively sanity checks on old data.
+ *
+ * This leaves a couple of cases where data needs to be migrated due to us still making use of the duplicate_id field after the original schema change
+ * and to prevent any history being lost
+ *
+ * Look for bug_history entries for duplicate id where old/new value > 0 i.e. duplicate bug id was changed.
+ * Given the previous steps should have tidied up/checked  bug.duplicate and other bug_history records, we have a case where
+ * bug history table contains duplicate id being changed from 2 to 3 for example, and no entries for this in relationship or
+ * bug_history table.
+ * In this case, to prevent data being lost we add 2 history records - a relationship add and a relationship remove record for the new duplicate id
+ *
+ * This should leave us with an empty list of bug_history duplicate id entries due to the previous migration step and this cleanup.
+ */
+function install_tidy_duplicate_id_history() {
+	$query = "SELECT bug_id, new_value, old_value FROM {bug_history} WHERE field_name='duplicate_id'";
+
+	$t_result = db_query( $query );
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		# Issues can not be duplicates of themselves [this was allowed in some old versions]
+		if( $t_row['bug_id'] == $t_row['new_value'] ) {
+			$query = "DELETE FROM {bug_history} WHERE field_name='duplicate_id' AND bug_id=" . db_param() . " and new_value=" . db_param();
+			db_query($query, array( $t_row['bug_id'], $t_row['new_value'] ) );
+			continue;
+		}
+		# there was a point in time we stored duplicate_id in history + added duplicate relationship
+		# if the duplicate still exists, it's probably OK to delete the history record - on the basis that
+		# there will be a relationship history record adding the duplicate.
+		if( $t_row['new_value'] > 0 ) {
+			$query2 = "SELECT id FROM {bug_relationship} WHERE source_bug_id=" . db_param() . " AND destination_bug_id=" . db_param();
+			$t_result2 = db_query( $query2, array( $t_row['bug_id'], $t_row['new_value'] ) );
+			$result = db_result( $t_result2 );
+			if( $result > 0 ) {
+				$query = "DELETE FROM {bug_history} WHERE field_name='duplicate_id' AND bug_id=" . db_param() . " and new_value=" . db_param();
+				db_query($query, array( $t_row['bug_id'], $t_row['new_value'] ) );
+			}
+		} else {
+			$query2 = "SELECT id FROM {bug_relationship} WHERE source_bug_id=" . db_param() . " AND destination_bug_id=" . db_param();
+			$t_result2 = db_query( $query2, array( $t_row['bug_id'], $t_row['old_value'] ) );
+			$result = db_result( $t_result2 );
+			if( $result > 0 ) {
+				$query = "DELETE FROM {bug_history} WHERE field_name='duplicate_id' AND bug_id=" . db_param() . " and new_value=0 and old_value=" . db_param();
+				db_query($query, array( $t_row['bug_id'], $t_row['old_value'] ) );
+			}
+		}
+	}
+
+	# 2nd pass
+	# Look for duplicate_id's that got set to 0 and see if there's a bug_history record removing the relationship
+	$query = "SELECT * FROM {bug_history} WHERE field_name='duplicate_id' AND new_value=" . db_param();
+	$t_result = db_query( $query, array( 0 ) );
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$query2 = "SELECT id from {bug_history} WHERE type=" . db_param() . " AND bug_id = " . db_param() . " AND new_value= " . db_param();
+		$t_result2 = db_query( $query2, array( BUG_DEL_RELATIONSHIP, $t_row['bug_id'], $t_row['old_value'] ) );
+		$t_result2 = db_result( $t_result2 );
+		if( $t_result2 > 0 ) {
+			$query = "DELETE FROM {bug_history} WHERE field_name='duplicate_id' AND bug_id=" . db_param() . " and new_value=0 and old_value=" . db_param();
+			db_query($query, array( $t_row['bug_id'], $t_row['old_value'] ) );
+		}
+	}
+
+	# 3rd pass..
+	$query = "SELECT * FROM {bug_history} WHERE field_name='duplicate_id' AND new_value <> " . db_param() . " AND old_value <> " . db_param();
+	$t_result = db_query( $query, array( 0, 0 ) );
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		# look for duplicate_id's that got added then removed, and convert to relationship history for these
+		# only add relationship on the bug_id (not on relationship target, as that's what old duplicate code used to do i.e. only show up in one place)
+
+		# insert relationship add record
+		$query = "INSERT INTO {bug_history} (user_id, bug_id, field_name, old_value, new_value, type, date_modified)
+					VALUES (" . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . ") ";
+		db_query($query, array( $t_row['user_id'], $t_row['bug_id'], '', 0, $t_row['new_value'], BUG_ADD_RELATIONSHIP, $t_row['date_modified'] ) );
+
+		# insert relationship delete record
+		$query = "INSERT INTO {bug_history} (user_id, bug_id, field_name, old_value, new_value, type, date_modified)
+					VALUES (" . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . "," . db_param() . ") ";
+		db_query($query, array( $t_row['user_id'], $t_row['bug_id'], '', 0, $t_row['new_value'], BUG_DEL_RELATIONSHIP, $t_row['date_modified'] ) );
+
+		# delete duplicate_id add record
+		$query = "DELETE FROM {bug_history} WHERE field_name='duplicate_id' AND bug_id=" . db_param() . " and new_value=" . db_param() . " AND old_value=" . db_param();
+		db_query($query, array( $t_row['bug_id'], $t_row['new_value'], $t_row['old_value'] ) );
+
+	}
+
+	$query = "SELECT count(id) FROM {bug_history} WHERE field_name='duplicate_id'";
+	$t_result = db_query( $query );
+	$t_result = db_result( $t_result );
+
+	if( $t_result == 0 ) {
+		# Return 2 because that's what ADOdb/DataDict does when things happen properly
+		return 2;
+	}
+
+	return 1;
+
+}

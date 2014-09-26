@@ -68,7 +68,6 @@ function get_field_names() {
 				'os_version',
 				'product_version',
 				'resolution',
-				'duplicate_id',
 				'summary',
 				'description',
 				'steps_to_reproduce',
