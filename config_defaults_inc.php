@@ -811,12 +811,6 @@ $g_fallback_language = 'english';
 $g_window_title = 'MantisBT';
 
 /**
- * Check for admin directory, database upgrades, etc.
- * @global int $g_admin_checks
- */
-$g_admin_checks = ON;
-
-/**
  * Favicon image
  * @global string $g_favicon_image
  */
