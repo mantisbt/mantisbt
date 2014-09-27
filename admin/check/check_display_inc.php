@@ -37,11 +37,6 @@ require_api( 'config_api.php' );
 check_print_section_header_row( 'Display' );
 
 check_print_test_row(
-	'use_dynamic_filters = ON requires use_javascript = ON',
-	!config_get_global( 'use_dynamic_filters' ) || ( config_get_global( 'use_dynamic_filters' ) && config_get_global( 'use_javascript' ) )
-);
-
-check_print_test_row(
 	'bug_link_tag is not blank/null',
 	config_get_global( 'bug_link_tag' ),
 	array( false => 'The value of the bug_link_tag option cannot be blank/null.' )

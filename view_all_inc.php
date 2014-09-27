@@ -227,7 +227,7 @@ write_bug_rows( $t_rows );
 		<td class="left" colspan="<?php echo $t_col_count; ?>">
 			<span class="floatleft">
 <?php
-		if( $g_checkboxes_exist && ON == config_get( 'use_javascript' ) ) {
+		if( $g_checkboxes_exist ) {
 			echo '<input type="checkbox" id="bug_arr_all" name="bug_arr_all" value="all" class="check_all" />';
 			echo '<label for="bug_arr_all">' . lang_get( 'select_all' ) . '</label>';
 		}

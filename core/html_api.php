@@ -430,16 +430,15 @@ function require_js( $p_script_path ) {
  * @return void
  */
 function html_head_javascript() {
-	if( config_get( 'use_javascript' ) ) {
-		global $g_scripts_included;
-		echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_config.php' ) . '"></script>' . "\n";
-		echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
-		html_javascript_link( 'jquery-1.9.1.min.js' );
-		html_javascript_link( 'jquery-ui-1.10.0.custom.min.js' );
-		html_javascript_link( 'common.js' );
-		foreach ( $g_scripts_included as $t_script_path ) {
-			html_javascript_link( $t_script_path );
-		}
+	global $g_scripts_included;
+
+	echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_config.php' ) . '"></script>' . "\n";
+	echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
+	html_javascript_link( 'jquery-1.9.1.min.js' );
+	html_javascript_link( 'jquery-ui-1.10.0.custom.min.js' );
+	html_javascript_link( 'common.js' );
+	foreach ( $g_scripts_included as $t_script_path ) {
+		html_javascript_link( $t_script_path );
 	}
 }
 

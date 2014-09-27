@@ -2343,9 +2343,7 @@ $g_main_menu_custom_options = array(
                         This method will reduce the amount of data that needs
                         to be transferred upon each page load dealing with
                         filters and thus will result in speed improvements and
-                        bandwidth reduction. This requires $g_use_javascript
-                        to be set to ON. By default, this configuration option
-                        is set to ON.
+                        bandwidth reduction.
                     </para>
                 </listitem>
             </varlistentry>
@@ -3763,7 +3761,7 @@ or
 					<term>$g_time_tracking_stopwatch</term>
 					<listitem>
 						<para>
-							Instead of a text field turning this option on places a stopwatch on the page with <guibutton>Start/Stop</guibutton> and <guibutton>Reset</guibutton> buttons next to it. You must have $g_use_javascript switched on for this to take effect. A bit gimmicky, but who cares.
+							Instead of a text field turning this option on places a stopwatch on the page with <guibutton>Start/Stop</guibutton> and <guibutton>Reset</guibutton> buttons next to it. A bit gimmicky, but who cares.
 						</para>
 					</listitem>
 				</varlistentry>
