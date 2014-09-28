@@ -285,6 +285,9 @@ function bugnote_delete( $p_bugnote_id ) {
 	# log deletion of bug
 	history_log_event_special( $t_bug_id, BUGNOTE_DELETED, bugnote_format_id( $p_bugnote_id ) );
 
+	# Event integration
+	event_signal( 'EVENT_BUGNOTE_DELETED', array( $t_bug_id, $p_bugnote_id ) );
+
 	return true;
 }
 
