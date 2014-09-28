@@ -50,7 +50,7 @@ $f_type = gpc_get_int( 'graph_type', 0 );
 $f_show_as_table = gpc_get_bool( 'show_table', false );
 
 html_page_top1( plugin_lang_get( 'graph_page' ) );
-$t_path = config_get( 'path' );
+$t_path = config_get_global( 'path' );
 html_page_top2();
 
 $t_period = new Period();
