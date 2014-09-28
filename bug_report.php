@@ -100,6 +100,10 @@ if( $t_project_id != helper_get_current_project() ) {
 
 access_ensure_project_level( config_get( 'report_bug_threshold' ) );
 
+if( isset( $_GET['posted'] ) && empty( $_FILE ) && empty( $_POST ) ) {
+	trigger_error( ERROR_FILE_TOO_BIG, ERROR );
+}
+
 $t_bug_data = new BugData;
 $t_bug_data->project_id             = $t_project_id;
 $t_bug_data->reporter_id            = auth_get_current_user_id();
@@ -129,7 +133,7 @@ if( is_blank( $t_bug_data->due_date ) ) {
 }
 
 $f_rel_type                         = gpc_get_int( 'rel_type', BUG_REL_NONE );
-$f_files                            = gpc_get_file( 'ufile', null ); # @todo (thraxisp) Note that this always returns a structure
+$f_files                            = gpc_get_file( 'ufile', null );
 $f_report_stay                      = gpc_get_bool( 'report_stay', false );
 $f_copy_notes_from_parent           = gpc_get_bool( 'copy_notes_from_parent', false );
 $f_copy_attachments_from_parent     = gpc_get_bool( 'copy_attachments_from_parent', false );
