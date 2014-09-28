@@ -372,9 +372,19 @@ function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
  * @return boolean
  */
 function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
+	$t_tag_row = tag_get( $p_tag_id );
+	$t_tag_name = $t_tag_row['name'];
+
+	if( $t_tag_name == $p_name &&
+		 $t_tag_row['description'] == $p_description &&
+		 $t_tag_row['user_id'] == $p_user_id ) {
+		# nothing has changed
+		return true;
+	}
+
 	user_ensure_exists( $p_user_id );
 
-	if( auth_get_current_user_id() == tag_get_field( $p_tag_id, 'user_id' ) ) {
+	if( auth_get_current_user_id() == $t_tag_row['user_id'] ) {
 		$t_update_level = config_get( 'tag_edit_own_threshold' );
 	} else {
 		$t_update_level = config_get( 'tag_edit_threshold' );
@@ -383,8 +393,6 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 	access_ensure_global_level( $t_update_level );
 
 	tag_ensure_name_is_valid( $p_name );
-
-	$t_tag_name = tag_get_field( $p_tag_id, 'name' );
 
 	$t_rename = false;
 	if( utf8_strtolower( $p_name ) != utf8_strtolower( $t_tag_name ) ) {

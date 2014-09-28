@@ -66,19 +66,6 @@ if( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
 $f_new_name = gpc_get_string( 'name', $t_tag_row['name'] );
 $f_new_description = gpc_get_string( 'description', $t_tag_row['description'] );
 
-$t_update = false;
-
-if( $t_tag_row['user_id'] != $f_new_user_id ) {
-	user_ensure_exists( $f_new_user_id );
-	$t_update = true;
-}
-
-if( $t_tag_row['name'] != $f_new_name ||
-	 $t_tag_row['description'] != $f_new_description ) {
-
-	$t_update = true;
-}
-
 tag_update( $f_tag_id, $f_new_name, $f_new_user_id, $f_new_description );
 
 form_security_purge( 'tag_update' );
