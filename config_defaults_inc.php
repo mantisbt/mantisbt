@@ -4193,36 +4193,105 @@ unset( $t_protocol, $t_host, $t_hosts, $t_port, $t_self, $t_path );
 # Webservice Configuration #
 ############################
 
-# Minimum global access level required to access webservice for readonly operations.
+/**
+ * Minimum global access level required to access webservice for readonly operations.
+ *
+ * @global int $g_webservice_readonly_access_level_threshold
+ */
 $g_webservice_readonly_access_level_threshold = VIEWER;
 
-# Minimum global access level required to access webservice for read/write operations.
+/**
+ * Minimum global access level required to access webservice for read/write operations.
+ *
+ * @global int $g_webservice_readwrite_access_level_threshold
+ */
 $g_webservice_readwrite_access_level_threshold = REPORTER;
 
-# Minimum global access level required to access the administrator webservices
+/**
+ * Minimum global access level required to access the administrator webservices
+ *
+ * @global int $g_webservice_admin_access_level_threshold
+ */
 $g_webservice_admin_access_level_threshold = MANAGER;
 
-# Minimum project access level required to be able to specify a reporter name when
-# adding an issue.  Otherwise, the current user is used as the reporter.  Users
-# who don't have this access level can always do another step to modify the issue
-# and specify a different name, but in this case it will be logged in the history
-# who original reported the issue.
+/**
+ * Minimum project access level required to be able to specify a reporter name when
+ * adding an issue.  Otherwise, the current user is used as the reporter.  Users
+ * who don't have this access level can always do another step to modify the issue
+ * and specify a different name, but in this case it will be logged in the history
+ * who original reported the issue.
+ *
+ * @global int $g_webservice_specify_reporter_on_add_access_level_threshold
+ */
 $g_webservice_specify_reporter_on_add_access_level_threshold = DEVELOPER;
 
-# The following enum ids are used when the webservices get enum labels that are not
-# defined in the associated MantisBT installation.  In this case, the enum id is set
-# to the value specified by the corresponding configuration option.
+/**
+ * The following enum id is used when the webservices get enum labels that are not
+ * defined in the associated MantisBT installation.  In this case, the enum id is set
+ * to the value specified by the corresponding configuration option.
+ *
+ * @global int $g_webservice_priority_enum_default_when_not_found
+ */
 $g_webservice_priority_enum_default_when_not_found = 0;
+
+/**
+ * The following enum id is used when the webservices get enum labels that are not
+ * defined in the associated MantisBT installation.  In this case, the enum id is set
+ * to the value specified by the corresponding configuration option.
+ *
+ * @global int $g_webservice_severity_enum_default_when_not_found
+ */
 $g_webservice_severity_enum_default_when_not_found = 0;
+
+/**
+ * The following enum id is used when the webservices get enum labels that are not
+ * defined in the associated MantisBT installation.  In this case, the enum id is set
+ * to the value specified by the corresponding configuration option.
+ *
+ * @global int $g_webservice_status_enum_default_when_not_found
+ */
 $g_webservice_status_enum_default_when_not_found = 0;
+
+/**
+ * The following enum id is used when the webservices get enum labels that are not
+ * defined in the associated MantisBT installation.  In this case, the enum id is set
+ * to the value specified by the corresponding configuration option.
+ *
+ * @global int $g_webservice_resolution_enum_default_when_not_found
+ */
 $g_webservice_resolution_enum_default_when_not_found = 0;
+
+/**
+ * The following enum id is used when the webservices get enum labels that are not
+ * defined in the associated MantisBT installation.  In this case, the enum id is set
+ * to the value specified by the corresponding configuration option.
+ *
+ * @global int $g_webservice_projection_enum_default_when_not_found
+ */
 $g_webservice_projection_enum_default_when_not_found = 0;
+
+/**
+ * The following enum id is used when the webservices get enum labels that are not
+ * defined in the associated MantisBT installation.  In this case, the enum id is set
+ * to the value specified by the corresponding configuration option.
+ *
+ * @global int $g_webservice_eta_enum_default_when_not_found
+ */
 $g_webservice_eta_enum_default_when_not_found = 0;
 
-# If ON and the supplied version is not found, then a SoapException will be raised.
+/**
+ * If ON and the supplied version is not found, then a SoapException will be raised.
+ *
+ * @global int $g_webservice_error_when_version_not_found
+ */
 $g_webservice_error_when_version_not_found = ON;
 
-# Default version to be used if the specified version is not found and $g_webservice_error_when_version_not_found == OFF.
-# (at the moment this value does not depend on the project).
+/**
+ * Default version to be used if the specified version is not found and
+ * $g_webservice_error_when_version_not_found == OFF.
+ * (at the moment this value does not depend on the project).
+ *
+ * @global string $g_webservice_version_when_not_found
+ */
 $g_webservice_version_when_not_found = '';
 
