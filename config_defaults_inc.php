@@ -264,7 +264,7 @@ $g_session_save_path = false;
 /**
  * Session validation
  * WARNING: Disabling this could be a potential security risk!!
- * @global int $g_session_validation
+ * @global integer $g_session_validation
  */
 $g_session_validation = ON;
 
@@ -319,7 +319,7 @@ $g_crypto_master_salt = '';
  * If ON, then $g_send_reset_password must be ON as well, and mail settings
  * must be correctly configured
  * @see $g_send_reset_password
- * @global int $g_allow_signup
+ * @global integer $g_allow_signup
  */
 $g_allow_signup			= ON;
 
@@ -328,14 +328,14 @@ $g_allow_signup			= ON;
  * When locked, it's required to reset the password (lost password)
  * Value resets to zero at each successfully login
  * Set to OFF to disable this control
- * @global int $g_max_failed_login_count
+ * @global integer $g_max_failed_login_count
  */
 $g_max_failed_login_count = OFF;
 
 /**
  * access level required to be notified when a new user has been created using
  * the "signup form"
- * @global int $g_notify_new_user_created_threshold_min
+ * @global integer $g_notify_new_user_created_threshold_min
  */
 $g_notify_new_user_created_threshold_min = ADMINISTRATOR;
 
@@ -344,13 +344,13 @@ $g_notify_new_user_created_threshold_min = ADMINISTRATOR;
  * or password reset (this requires mail settings to be correctly configured).
  * If OFF, then the Administrator will have to provide a password when
  * creating new accounts, and the password will be set to blank when reset.
- * @global int $g_send_reset_password
+ * @global integer $g_send_reset_password
  */
 $g_send_reset_password	= ON;
 
 /**
  * use captcha image to validate subscription it requires GD library installed
- * @global int $g_signup_use_captcha
+ * @global integer $g_signup_use_captcha
  */
 $g_signup_use_captcha	= ON;
 
@@ -371,7 +371,7 @@ $g_font_per_captcha	= 'arial.ttf';
 
 /**
  * Setting to disable the 'lost your password' feature.
- * @global int $g_lost_password_feature
+ * @global integer $g_lost_password_feature
  */
 $g_lost_password_feature = ON;
 
@@ -379,7 +379,7 @@ $g_lost_password_feature = ON;
  * Max. simultaneous requests of 'lost password'
  * When this value is reached, it's no longer possible to request new password
  * reset. Value resets to zero at each successfully login
- * @global int $g_max_lost_password_in_progress_count
+ * @global integer $g_max_lost_password_in_progress_count
  */
 $g_max_lost_password_in_progress_count = 3;
 
@@ -419,7 +419,7 @@ $g_return_path_email	= 'admin@example.com';
  * of the user signup process. When set to OFF, the password reset feature
  * is disabled. Additionally, notifications of administrators updating
  * accounts are not sent to users.
- * @global int $g_enable_email_notification
+ * @global integer $g_enable_email_notification
  */
 $g_enable_email_notification	= ON;
 
@@ -507,19 +507,19 @@ $g_notify_flags['monitor'] = array(
 
 /**
  * Whether user's should receive emails for their own actions
- * @global int $g_email_receive_own
+ * @global integer $g_email_receive_own
  */
 $g_email_receive_own = OFF;
 
 /**
  * set to OFF to disable email check
- * @global int $g_validate_email
+ * @global integer $g_validate_email
  */
 $g_validate_email = ON;
 
 /**
  * set to OFF to disable email check
- * @global int $g_check_mx_record
+ * @global integer $g_check_mx_record
  */
 $g_check_mx_record = OFF;
 
@@ -528,7 +528,7 @@ $g_check_mx_record = OFF;
  * note if you allow users to create their own accounts, they
  * must specify an email at that point, no matter what the value
  * of this option is.  Otherwise they would not get their passwords.
- * @global int $g_allow_blank_email
+ * @global integer $g_allow_blank_email
  */
 $g_allow_blank_email = OFF;
 
@@ -542,14 +542,14 @@ $g_limit_email_domains = array();
 
 /**
  * This specifies the access level that is needed to get the mailto: links.
- * @global int $g_show_user_email_threshold
+ * @global integer $g_show_user_email_threshold
  */
 $g_show_user_email_threshold = NOBODY;
 
 /**
  * This specifies the access level that is needed to see realnames on user view
  * page
- * @global int $g_show_user_realname_threshold
+ * @global integer $g_show_user_realname_threshold
  */
 $g_show_user_realname_threshold = NOBODY;
 
@@ -557,7 +557,7 @@ $g_show_user_realname_threshold = NOBODY;
  * If use_x_priority is set to ON, what should the value be?
  * Urgent = 1, Not Urgent = 5, Disable = 0
  * Note: some MTAs interpret X-Priority = 0 to mean 'Very Urgent'
- * @global int $g_mail_priority
+ * @global integer $g_mail_priority
  */
 $g_mail_priority = 3;
 
@@ -566,7 +566,7 @@ $g_mail_priority = 3;
  * PHPMAILER_METHOD_MAIL - mail()
  * PHPMAILER_METHOD_SENDMAIL - sendmail
  * PHPMAILER_METHOD_SMTP - SMTP
- * @global int $g_phpMailer_method
+ * @global integer $g_phpMailer_method
  */
 $g_phpMailer_method = PHPMAILER_METHOD_MAIL;
 
@@ -604,7 +604,7 @@ $g_smtp_connection_mode = '';
  * The smtp port to use.  The typical SMTP ports are 25 and 587.  The port to
  * use will depend on the SMTP server configuration and hence others may be
  * used.
- * @global int $g_smtp_port
+ * @global integer $g_smtp_port
  */
 $g_smtp_port = 25;
 
@@ -613,7 +613,7 @@ $g_smtp_port = 25;
  * cronjob should typically run every 5 minutes.  If no cronjob is used,then
  * user will have to wait for emails to be sent after performing an action
  * which triggers notifications.  This slows user performance.
- * @global int $g_email_send_using_cronjob
+ * @global integer $g_email_send_using_cronjob
  */
 $g_email_send_using_cronjob = OFF;
 
@@ -622,7 +622,7 @@ $g_email_send_using_cronjob = OFF;
  * is tested with Microsoft Outlook.  More testing for this feature + other
  * formats will be added in the future.
  * OFF, EMAIL_CATEGORY_PROJECT_CATEGORY (format: [Project] Category)
- * @global int $g_email_set_category
+ * @global integer $g_email_set_category
  */
 $g_email_set_category = OFF;
 
@@ -638,7 +638,7 @@ $g_email_separator1 = str_pad('', 70, '=');
 $g_email_separator2 = str_pad('', 70, '-');
 /**
  * email separator and padding
- * @global int $g_email_padding_length
+ * @global integer $g_email_padding_length
  */
 $g_email_padding_length	= 28;
 
@@ -648,7 +648,7 @@ $g_email_padding_length	= 28;
 
 /**
  * Set to off by default to not expose version to users
- * @global int $g_show_version
+ * @global integer $g_show_version
  */
 $g_show_version = OFF;
 
@@ -812,7 +812,7 @@ $g_window_title = 'MantisBT';
 
 /**
  * Check for admin directory, database upgrades, etc.
- * @global int $g_admin_checks
+ * @global integer $g_admin_checks
  */
 $g_admin_checks = ON;
 
@@ -838,27 +838,27 @@ $g_logo_url = '%default_home_page%';
  * Specifies whether to enable support for project documents or not.
  * This feature is deprecated and is expected to be moved to a plugin
  * in the future.
- * @global int $g_enable_project_documentation
+ * @global integer $g_enable_project_documentation
  */
 $g_enable_project_documentation = OFF;
 
 /**
  * Display another instance of the menu at the bottom.  The top menu will still
  * remain.
- * @global int $g_show_footer_menu
+ * @global integer $g_show_footer_menu
  */
 $g_show_footer_menu = OFF;
 
 /**
  * show extra menu bar with all available projects
- * @global int $g_show_project_menu_bar
+ * @global integer $g_show_project_menu_bar
  */
 $g_show_project_menu_bar = OFF;
 
 /**
  * show assigned to names
  * This is in the view all pages
- * @global int $g_show_assigned_names
+ * @global integer $g_show_assigned_names
  */
 $g_show_assigned_names = ON;
 
@@ -866,7 +866,7 @@ $g_show_assigned_names = ON;
  * show priority as icon
  * OFF: Shows priority as icon in view all bugs page
  * ON:  Shows priority as text in view all bugs page
- * @global int $g_show_priority_text
+ * @global integer $g_show_priority_text
  */
 $g_show_priority_text = OFF;
 
@@ -874,7 +874,7 @@ $g_show_priority_text = OFF;
  * Define the priority level at which a bug becomes significant. Significant
  * bugs are displayed with emphasis. Set this value to -1 to disable the
  * feature.
- * @global int $g_priority_significant_threshold
+ * @global integer $g_priority_significant_threshold
  */
 $g_priority_significant_threshold = HIGH;
 
@@ -882,7 +882,7 @@ $g_priority_significant_threshold = HIGH;
  * Define the severity level at which a bug becomes significant.
  * Significant bugs are displayed with emphasis. Set this value to -1 to
  * disable the feature.
- * @global int $g_severity_significant_threshold
+ * @global integer $g_severity_significant_threshold
  */
 $g_severity_significant_threshold = MAJOR;
 
@@ -952,14 +952,14 @@ $g_excel_columns = array (
 
 /**
  * show projects when in All Projects mode
- * @global int $g_show_bug_project_links
+ * @global integer $g_show_bug_project_links
  */
 $g_show_bug_project_links = ON;
 
 /**
  * Position of the status colour legend, can be: POSITION_*
  * see constant_inc.php. (*: TOP , BOTTOM , or BOTH)
- * @global int $g_status_legend_position
+ * @global integer $g_status_legend_position
  */
 $g_status_legend_position = STATUS_LEGEND_POSITION_BOTTOM;
 
@@ -967,21 +967,21 @@ $g_status_legend_position = STATUS_LEGEND_POSITION_BOTTOM;
  * Show a legend with percentage of bug status
  * x% of all bugs are new, y% of all bugs are assigned and so on.
  * If set to ON it will printed below the status colour legend.
- * @global int $g_status_percentage_legend
+ * @global integer $g_status_percentage_legend
  */
 $g_status_percentage_legend = OFF;
 
 /**
  * Position of the filter box, can be: POSITION_*
  * POSITION_TOP, POSITION_BOTTOM, or POSITION_NONE for none.
- * @global int $g_filter_position
+ * @global integer $g_filter_position
  */
 $g_filter_position = FILTER_POSITION_TOP;
 
 /**
  * Position of action buttons when viewing issues.
  * Can be: POSITION_TOP, POSITION_BOTTOM, or POSITION_BOTH.
- * @global int $g_action_button_position
+ * @global integer $g_action_button_position
  */
 $g_action_button_position = POSITION_BOTTOM;
 
@@ -990,7 +990,7 @@ $g_action_button_position = POSITION_BOTTOM;
  * ON forces display even if none are defined
  * OFF suppresses display
  * AUTO suppresses the display if there are no versions defined for the project
- * @global int $g_show_product_version
+ * @global integer $g_show_product_version
  */
 $g_show_product_version = AUTO;
 
@@ -999,26 +999,26 @@ $g_show_product_version = AUTO;
  * for product versions. Dates will be shown next to the product version,
  * target version and fixed in version fields. Set this threshold to NOBODY
  * to disable the feature.
- * @global int $g_show_version_dates_threshold
+ * @global integer $g_show_version_dates_threshold
  */
 $g_show_version_dates_threshold = NOBODY;
 
 /**
  * show users with their real name or not
- * @global int $g_show_realname
+ * @global integer $g_show_realname
  */
 $g_show_realname = OFF;
 
 /**
  * leave off for now
- * @global int $g_differentiate_duplicates
+ * @global integer $g_differentiate_duplicates
  */
 $g_differentiate_duplicates = OFF;
 
 /**
  * sorting for names in dropdown lists. If turned on, "Jane Doe" will be sorted
  * with the "D"s
- * @global int $g_sort_by_last_name
+ * @global integer $g_sort_by_last_name
  */
 $g_sort_by_last_name = OFF;
 
@@ -1041,26 +1041,26 @@ $g_sort_by_last_name = OFF;
  * - An URL to the default image to be used (for example,
  *   "http:/path/to/unknown.jpg" or "%path%images/no_avatar.png")
  *
- * @global int|string $g_show_avatar
+ * @global integer|string $g_show_avatar
  * @see $g_show_avatar_threshold
  */
 $g_show_avatar = OFF;
 
 /**
  * Only users above this threshold will have their avatar shown
- * @global int $g_show_avatar_threshold
+ * @global integer $g_show_avatar_threshold
  */
 $g_show_avatar_threshold = DEVELOPER;
 
 /**
  * Show release dates on changelog
- * @global int $g_show_changelog_dates
+ * @global integer $g_show_changelog_dates
  */
 $g_show_changelog_dates = ON;
 
 /**
  * Show release dates on roadmap
- * @global int $g_show_roadmap_dates
+ * @global integer $g_show_roadmap_dates
  */
 $g_show_roadmap_dates = ON;
 
@@ -1070,7 +1070,7 @@ $g_show_roadmap_dates = ON;
 
 /**
  * time for 'permanent' cookie to live in seconds (1 year)
- * @global int $g_cookie_time_length
+ * @global integer $g_cookie_time_length
  */
 $g_cookie_time_length = 30000000;
 
@@ -1079,7 +1079,7 @@ $g_cookie_time_length = 30000000;
  * Controls the display of the 'Remember my login in this browser' checkbox
  * on the login page
  * @see $g_cookie_time_length
- * @global int $g_allow_permanent_cookie
+ * @global integer $g_allow_permanent_cookie
  */
 $g_allow_permanent_cookie = ON;
 
@@ -1088,7 +1088,7 @@ $g_allow_permanent_cookie = ON;
  *  such as upgrading your database.
  * The default value of 0 indicates that the page should be allowed to
  *  execute until it is finished.
- * @global int $g_long_process_timeout
+ * @global integer $g_long_process_timeout
  */
 $g_long_process_timeout = 0;
 
@@ -1169,25 +1169,25 @@ $g_news_enabled = OFF;
  * limit by entry count or date
  * BY_LIMIT - entry limit
  * BY_DATE - by date
- * @global int $g_news_limit_method
+ * @global integer $g_news_limit_method
  */
 $g_news_limit_method = BY_LIMIT;
 
 /**
  * limit by last X entries
- * @global int $g_news_view_limit
+ * @global integer $g_news_view_limit
  */
 $g_news_view_limit = 7;
 
 /**
  * limit by days
- * @global int $g_news_view_limit_days
+ * @global integer $g_news_view_limit_days
  */
 $g_news_view_limit_days = 30;
 
 /**
  * threshold for viewing private news
- * @global int $g_private_news_threshold
+ * @global integer $g_private_news_threshold
  */
 $g_private_news_threshold = DEVELOPER;
 
@@ -1198,13 +1198,13 @@ $g_private_news_threshold = DEVELOPER;
 /**
  * signup default
  * look in constant_inc.php for values
- * @global int $g_default_new_account_access_level
+ * @global integer $g_default_new_account_access_level
  */
 $g_default_new_account_access_level = REPORTER;
 
 /**
  * Default Bug View Status (VS_PUBLIC or VS_PRIVATE)
- * @global int $g_default_bug_view_status
+ * @global integer $g_default_bug_view_status
  */
 $g_default_bug_view_status = VS_PUBLIC;
 
@@ -1222,55 +1222,55 @@ $g_default_bug_additional_info = '';
 
 /**
  * Default Bugnote View Status (VS_PUBLIC or VS_PRIVATE)
- * @global int $g_default_bugnote_view_status
+ * @global integer $g_default_bugnote_view_status
  */
 $g_default_bugnote_view_status = VS_PUBLIC;
 
 /**
  * Default bug resolution when reporting a new bug
- * @global int $g_default_bug_resolution
+ * @global integer $g_default_bug_resolution
  */
 $g_default_bug_resolution = OPEN;
 
 /**
  * Default bug severity when reporting a new bug
- * @global int $g_default_bug_severity
+ * @global integer $g_default_bug_severity
  */
 $g_default_bug_severity = MINOR;
 
 /**
  * Default bug priority when reporting a new bug
- * @global int $g_default_bug_priority
+ * @global integer $g_default_bug_priority
  */
 $g_default_bug_priority = NORMAL;
 
 /**
  * Default bug reproducibility when reporting a new bug
- * @global int $g_default_bug_reproducibility
+ * @global integer $g_default_bug_reproducibility
  */
 $g_default_bug_reproducibility = REPRODUCIBILITY_HAVENOTTRIED;
 
 /**
  * Default bug projection when reporting a new bug
- * @global int $g_default_bug_projection
+ * @global integer $g_default_bug_projection
  */
 $g_default_bug_projection = PROJECTION_NONE;
 
 /**
  * Default bug ETA when reporting a new bug
- * @global int $g_default_bug_eta
+ * @global integer $g_default_bug_eta
  */
 $g_default_bug_eta = ETA_NONE;
 
 /**
  * Default relationship between a new bug and its parent when cloning it
- * @global int $g_default_bug_relationship_clone
+ * @global integer $g_default_bug_relationship_clone
  */
 $g_default_bug_relationship_clone = BUG_REL_NONE;
 
 /**
  * Default for new bug relationships
- * @global int $g_default_bug_relationship
+ * @global integer $g_default_bug_relationship
  */
 $g_default_bug_relationship = BUG_RELATED;
 
@@ -1283,19 +1283,19 @@ $g_default_category_for_moves = 1;
 
 /**
  *
- * @global int $g_default_limit_view
+ * @global integer $g_default_limit_view
  */
 $g_default_limit_view = 50;
 
 /**
  *
- * @global int $g_default_show_changed
+ * @global integer $g_default_show_changed
  */
 $g_default_show_changed = 6;
 
 /**
  *
- * @global int $g_hide_status_default
+ * @global integer $g_hide_status_default
  */
 $g_hide_status_default = CLOSED;
 
@@ -1308,19 +1308,19 @@ $g_show_sticky_issues = ON;
 /**
  * make sure people are not refreshing too often
  * in minutes
- * @global int $g_min_refresh_delay
+ * @global integer $g_min_refresh_delay
  */
 $g_min_refresh_delay = 10;
 
 /**
  * in minutes
- * @global int $g_default_refresh_delay
+ * @global integer $g_default_refresh_delay
  */
 $g_default_refresh_delay = 30;
 
 /**
  * in seconds
- * @global int $g_default_redirect_delay
+ * @global integer $g_default_redirect_delay
  */
 $g_default_redirect_delay = 2;
 
@@ -1332,115 +1332,115 @@ $g_default_bugnote_order = 'ASC';
 
 /**
  *
- * @global int $g_default_email_on_new
+ * @global integer $g_default_email_on_new
  */
 $g_default_email_on_new = ON;
 
 /**
  *
- * @global int $g_default_email_on_assigned
+ * @global integer $g_default_email_on_assigned
  */
 $g_default_email_on_assigned = ON;
 
 /**
  *
- * @global int $g_default_email_on_feedback
+ * @global integer $g_default_email_on_feedback
  */
 $g_default_email_on_feedback = ON;
 
 /**
  *
- * @global int $g_default_email_on_resolved
+ * @global integer $g_default_email_on_resolved
  */
 $g_default_email_on_resolved = ON;
 
 /**
  *
- * @global int $g_default_email_on_closed
+ * @global integer $g_default_email_on_closed
  */
 $g_default_email_on_closed = ON;
 
 /**
  *
- * @global int $g_default_email_on_reopened
+ * @global integer $g_default_email_on_reopened
  */
 $g_default_email_on_reopened = ON;
 
 /**
  *
- * @global int $g_default_email_on_bugnote
+ * @global integer $g_default_email_on_bugnote
  */
 $g_default_email_on_bugnote = ON;
 
 /**
  * @todo Unused
- * @global int $g_default_email_on_status
+ * @global integer $g_default_email_on_status
  */
 $g_default_email_on_status = 0;
 
 /**
  * @todo Unused
- * @global int $g_default_email_on_priority
+ * @global integer $g_default_email_on_priority
  */
 $g_default_email_on_priority = 0;
 
 /**
  * 'any'
- * @global int $g_default_email_on_new_minimum_severity
+ * @global integer $g_default_email_on_new_minimum_severity
  */
 $g_default_email_on_new_minimum_severity = OFF;
 
 /**
  * 'any'
- * @global int $g_default_email_on_assigned_minimum_severity
+ * @global integer $g_default_email_on_assigned_minimum_severity
  */
 $g_default_email_on_assigned_minimum_severity = OFF;
 
 /**
  * 'any'
- * @global int $g_default_email_on_feedback_minimum_severity
+ * @global integer $g_default_email_on_feedback_minimum_severity
  */
 $g_default_email_on_feedback_minimum_severity = OFF;
 
 /**
  * 'any'
- * @global int $g_default_email_on_resolved_minimum_severity
+ * @global integer $g_default_email_on_resolved_minimum_severity
  */
 $g_default_email_on_resolved_minimum_severity = OFF;
 
 /**
  * 'any'
- * @global int $g_default_email_on_closed_minimum_severity
+ * @global integer $g_default_email_on_closed_minimum_severity
  */
 $g_default_email_on_closed_minimum_severity = OFF;
 
 /**
  * 'any'
- * @global int $g_default_email_on_reopened_minimum_severity
+ * @global integer $g_default_email_on_reopened_minimum_severity
  */
 $g_default_email_on_reopened_minimum_severity = OFF;
 
 /**
  * 'any'
- * @global int $g_default_email_on_bugnote_minimum_severity
+ * @global integer $g_default_email_on_bugnote_minimum_severity
  */
 $g_default_email_on_bugnote_minimum_severity = OFF;
 
 /**
  * 'any'
- * @global int $g_default_email_on_status_minimum_severity
+ * @global integer $g_default_email_on_status_minimum_severity
  */
 $g_default_email_on_status_minimum_severity = OFF;
 
 /**
  * @todo Unused
- * @global int $g_default_email_on_priority_minimum_severity
+ * @global integer $g_default_email_on_priority_minimum_severity
  */
 $g_default_email_on_priority_minimum_severity = OFF;
 
 /**
  *
- * @global int $g_default_email_bugnote_limit
+ * @global integer $g_default_email_bugnote_limit
  */
 $g_default_email_bugnote_limit = 0;
 
@@ -1451,7 +1451,7 @@ $g_default_email_bugnote_limit = 0;
 /**
  * how many reporters to show
  * this is useful when there are hundreds of reporters
- * @global int $g_reporter_summary_limit
+ * @global integer $g_reporter_summary_limit
  */
 $g_reporter_summary_limit = 10;
 
@@ -1465,13 +1465,13 @@ $g_date_partitions = array( 1, 2, 3, 7, 30, 60, 90, 180, 365);
 /**
  * shows project '[project] category' when 'All Projects' is selected
  * otherwise only 'category name'
- * @global int $g_summary_category_include_project
+ * @global integer $g_summary_category_include_project
  */
 $g_summary_category_include_project = OFF;
 
 /**
  * threshold for viewing summary
- * @global int $g_view_summary_threshold
+ * @global integer $g_view_summary_threshold
  */
 $g_view_summary_threshold = MANAGER;
 
@@ -1527,7 +1527,7 @@ $g_bugnote_order = 'DESC';
 /**
  * bug history visible by default when you view a bug
  * change to ON or OFF
- * @global int $g_history_default_visible
+ * @global integer $g_history_default_visible
  */
 $g_history_default_visible = ON;
 
@@ -1544,7 +1544,7 @@ $g_history_order = 'ASC';
 
 /**
  * are reminders stored as bugnotes
- * @global int $g_store_reminders
+ * @global integer $g_store_reminders
  */
 $g_store_reminders = ON;
 
@@ -1552,20 +1552,20 @@ $g_store_reminders = ON;
  * Automatically add recipients of reminders to monitor list, if they are not
  * the handler or the reporter (since they automatically get notified, if required)
  * If recipients of the reminders are below the monitor threshold, they will not be added.
- * @global int $g_reminder_recipients_monitor_bug
+ * @global integer $g_reminder_recipients_monitor_bug
  */
 $g_reminder_recipients_monitor_bug = ON;
 
 /**
  * Default Reminder View Status (VS_PUBLIC or VS_PRIVATE)
- * @global int $g_default_reminder_view_status
+ * @global integer $g_default_reminder_view_status
  */
 $g_default_reminder_view_status = VS_PUBLIC;
 
 /**
  * The minimum access level required to show up in the list of users who can receive a reminder.
  * The access level is that of the project to which the issue belongs.
- * @global int $g_reminder_receive_threshold
+ * @global integer $g_reminder_receive_threshold
  */
 $g_reminder_receive_threshold = DEVELOPER;
 
@@ -1575,7 +1575,7 @@ $g_reminder_receive_threshold = DEVELOPER;
 
 /**
  * Whether to enable/disable the whole issue sponsorship feature
- * @global int $g_enable_sponsorship
+ * @global integer $g_enable_sponsorship
  */
 $g_enable_sponsorship = OFF;
 
@@ -1588,40 +1588,40 @@ $g_sponsorship_currency = 'US$';
 /**
  * Access level threshold needed to view the total sponsorship for an issue by
  * all users.
- * @global int $g_view_sponsorship_total_threshold
+ * @global integer $g_view_sponsorship_total_threshold
  */
 $g_view_sponsorship_total_threshold = VIEWER;
 
 /**
  * Access level threshold needed to view the users sponsoring an issue and the
  * sponsorship amount for each.
- * @global int $g_view_sponsorship_details_threshold
+ * @global integer $g_view_sponsorship_details_threshold
  */
 $g_view_sponsorship_details_threshold = VIEWER;
 
 /**
  * Access level threshold needed to allow user to sponsor issues.
- * @global int $g_sponsor_threshold
+ * @global integer $g_sponsor_threshold
  */
 $g_sponsor_threshold = REPORTER;
 
 /**
  * Access level required to be able to handle sponsored issues.
- * @global int $g_handle_sponsored_bugs_threshold
+ * @global integer $g_handle_sponsored_bugs_threshold
  */
 $g_handle_sponsored_bugs_threshold = DEVELOPER;
 
 /**
  * Access level required to be able to assign a sponsored issue to a user with
  * access level greater or equal to 'handle_sponsored_bugs_threshold'.
- * @global int $g_assign_sponsored_bugs_threshold
+ * @global integer $g_assign_sponsored_bugs_threshold
  */
 $g_assign_sponsored_bugs_threshold = MANAGER;
 
 /**
  * Minimum sponsorship amount. If the user enters a value less than this, an
  * error will be prompted.
- * @global int $g_minimum_sponsorship_amount
+ * @global integer $g_minimum_sponsorship_amount
  */
 $g_minimum_sponsorship_amount = 5;
 
@@ -1638,14 +1638,14 @@ $g_minimum_sponsorship_amount = 5;
  *
  * See also: $g_upload_project_file_threshold, $g_upload_bug_file_threshold,
  *   $g_allow_reporter_upload
- * @global int $g_allow_file_upload
+ * @global integer $g_allow_file_upload
  */
 $g_allow_file_upload = ON;
 
 /**
  * Upload destination: specify actual location in project settings
  * DISK or DATABASE. FTP is now deprecated and will map to DISK.
- * @global int $g_file_upload_method
+ * @global integer $g_file_upload_method
  */
 $g_file_upload_method = DATABASE;
 
@@ -1657,20 +1657,20 @@ $g_file_upload_method = DATABASE;
  * in Windows).
  * For more details on unix style permissions:
  * http://www.perlfect.com/articles/chmod.shtml
- * @global int $g_attachments_file_permissions
+ * @global integer $g_attachments_file_permissions
  */
 $g_attachments_file_permissions = 0400;
 
 /**
  * Maximum file size that can be uploaded
  * Also check your PHP settings (default is usually 2MBs)
- * @global int $g_max_file_size
+ * @global integer $g_max_file_size
  */
 $g_max_file_size = 5000000;
 
 /**
  * Maximum number of files that can be uploaded simultaneously
- * @global int $g_file_upload_max_num
+ * @global integer $g_file_upload_max_num
  */
 $g_file_upload_max_num = 1;
 
@@ -1709,7 +1709,7 @@ $g_absolute_path_default_upload_folder = '';
  * Cherokee, Apache with mod_xsendfile and nginx. You may need to set the
  * proceeding file_download_xsendfile_header_name option to suit the server you
  * are using.
- * @global int $g_file_download_method
+ * @global integer $g_file_download_method
  */
 $g_file_download_xsendfile_enabled = OFF;
 
@@ -1731,7 +1731,7 @@ $g_file_download_xsendfile_header_name = 'X-Sendfile';
  * html tags
  * Set this flag to automatically convert www URLs and
  * email addresses into clickable links
- * @global int $g_html_make_links
+ * @global integer $g_html_make_links
  */
 $g_html_make_links = ON;
 
@@ -1754,7 +1754,7 @@ $g_html_valid_tags_single_line = 'i, b, u, em, strong';
 /**
  * maximum length of the description in a dropdown menu (for search)
  * set to 0 to disable truncations
- * @global int $g_max_dropdown_length
+ * @global integer $g_max_dropdown_length
  */
 $g_max_dropdown_length = 40;
 
@@ -1762,7 +1762,7 @@ $g_max_dropdown_length = 40;
  * This flag controls whether pre-formatted text (delimited by HTML pre tags
  * is wrapped to a maximum linelength (defaults to 100 chars in strings_api)
  * If turned off, the display may be wide when viewing the text
- * @global int $g_wrap_in_preformatted_text
+ * @global integer $g_wrap_in_preformatted_text
  */
 $g_wrap_in_preformatted_text = ON;
 
@@ -1772,13 +1772,13 @@ $g_wrap_in_preformatted_text = ON;
 
 /**
  * Horizontal Rule Size
- * @global int $g_hr_size
+ * @global integer $g_hr_size
  */
 $g_hr_size = 1;
 
 /**
  * Horizontal Rule Width
- * @global int $g_hr_width
+ * @global integer $g_hr_width
  */
 $g_hr_width = 50;
 
@@ -1792,19 +1792,19 @@ $g_hr_width = 50;
  * Note: you may not be able to easily switch encryption methods, so this
  * should be carefully chosen at install time. However, MantisBT will attempt
  * to "fall back" to older methods if possible.
- * @global int $g_login_method
+ * @global integer $g_login_method
  */
 $g_login_method = MD5;
 
 /**
  * Re-authentication required for admin areas
- * @global int $g_reauthentication
+ * @global integer $g_reauthentication
  */
 $g_reauthentication = ON;
 
 /**
  * Duration of the reauthentication timeout, in seconds
- * @global int $g_reauthentication_expiry
+ * @global integer $g_reauthentication_expiry
  */
 $g_reauthentication_expiry = TOKEN_EXPIRY_AUTHENTICATED;
 
@@ -1845,7 +1845,7 @@ $g_ldap_organization = '';
  * The LDAP Protocol Version, if 0, then the protocol version is not set.
  * For Active Directory use version 3.
  *
- * @global int $g_ldap_protocol_version
+ * @global integer $g_ldap_protocol_version
  */
 $g_ldap_protocol_version = 0;
 
@@ -1854,7 +1854,7 @@ $g_ldap_protocol_version = 0;
  * by LDAP servers or not. This maps to LDAP_OPT_REFERRALS ldap library option.
  * For Active Directory, this should be set to OFF.
  *
- * @global int $g_ldap_follow_referrals
+ * @global integer $g_ldap_follow_referrals
  */
 $g_ldap_follow_referrals = ON;
 
@@ -1891,14 +1891,14 @@ $g_ldap_realname_field = 'cn';
 /**
  * Use the realname specified in LDAP (ON) rather than the one stored in the
  * database (OFF).
- * @global int $g_use_ldap_realname
+ * @global integer $g_use_ldap_realname
  */
 $g_use_ldap_realname = OFF;
 
 /**
  * Use the email address specified in LDAP (ON) rather than the one stored
  * in the database (OFF).
- * @global int $g_use_ldap_email
+ * @global integer $g_use_ldap_email
  */
 $g_use_ldap_email = OFF;
 
@@ -1914,7 +1914,7 @@ $g_use_ldap_email = OFF;
  *        - password
  *   - Any extra fields are ignored
  * On production systems, this option should be set to ''.
- * @global int $g_ldap_simulation_file_path
+ * @global integer $g_ldap_simulation_file_path
  */
 $g_ldap_simulation_file_path = '';
 
@@ -1924,19 +1924,19 @@ $g_ldap_simulation_file_path = '';
 
 /**
  * Status to assign to the bug when submitted.
- * @global int $g_bug_submit_status
+ * @global integer $g_bug_submit_status
  */
 $g_bug_submit_status = NEW_;
 
 /**
  * Status to assign to the bug when assigned.
- * @global int $g_bug_assigned_status
+ * @global integer $g_bug_assigned_status
  */
 $g_bug_assigned_status = ASSIGNED;
 
 /**
  * Status to assign to the bug when reopened.
- * @global int $g_bug_reopen_status
+ * @global integer $g_bug_reopen_status
  */
 $g_bug_reopen_status = FEEDBACK;
 
@@ -1944,7 +1944,7 @@ $g_bug_reopen_status = FEEDBACK;
  * Status to assign to the bug when feedback is required from the issue
  * reporter. Once the reporter adds a note the status moves back from feedback
  * to $g_bug_assigned_status or $g_bug_submit_status.
- * @global int $g_bug_feedback_status
+ * @global integer $g_bug_feedback_status
  */
 $g_bug_feedback_status = FEEDBACK;
 
@@ -1959,14 +1959,14 @@ $g_reassign_on_feedback = ON;
 
 /**
  * Resolution to assign to the bug when reopened.
- * @global int $g_bug_reopen_resolution
+ * @global integer $g_bug_reopen_resolution
  */
 $g_bug_reopen_resolution = REOPENED;
 
 /**
  * Default resolution to assign to a bug when it is resolved as being a
  * duplicate of another issue.
- * @global int $g_bug_duplicate_resolution
+ * @global integer $g_bug_duplicate_resolution
  */
 $g_bug_duplicate_resolution = DUPLICATE;
 
@@ -1974,7 +1974,7 @@ $g_bug_duplicate_resolution = DUPLICATE;
  * Bug becomes readonly if its status is >= this status.  The bug becomes
  * read/write again if re-opened and its status becomes less than this
  * threshold.
- * @global int $g_bug_readonly_status_threshold
+ * @global integer $g_bug_readonly_status_threshold
  */
 $g_bug_readonly_status_threshold = RESOLVED;
 
@@ -1982,7 +1982,7 @@ $g_bug_readonly_status_threshold = RESOLVED;
  * Bug is resolved, ready to be closed or reopened.  In some custom
  * installations a bug may be considered as resolved when it is moved to a
  * custom (FIXED or TESTED) status.
- * @global int $g_bug_resolved_status_threshold
+ * @global integer $g_bug_resolved_status_threshold
  */
 $g_bug_resolved_status_threshold = RESOLVED;
 
@@ -1991,7 +1991,7 @@ $g_bug_resolved_status_threshold = RESOLVED;
  * successfully fixed by developers. Resolutions above this threshold
  * and below $g_bug_resolution_not_fixed_threshold are considered to be
  * resolved successfully.
- * @global int $g_bug_resolution_fixed_threshold
+ * @global integer $g_bug_resolution_fixed_threshold
  */
 $g_bug_resolution_fixed_threshold = FIXED;
 
@@ -1999,14 +1999,14 @@ $g_bug_resolution_fixed_threshold = FIXED;
  * Threshold resolution which denotes that a bug has been resolved without
  * being successfully fixed by developers. Resolutions above this
  * threshold are considered to be resolved in an unsuccessful way.
- * @global int $g_bug_resolution_not_fixed_threshold
+ * @global integer $g_bug_resolution_not_fixed_threshold
  */
 $g_bug_resolution_not_fixed_threshold = UNABLE_TO_DUPLICATE;
 
 /**
  * Bug is closed.  In some custom installations a bug may be considered as
  * closed when it is moved to a custom (COMPLETED or IMPLEMENTED) status.
- * @global int $g_bug_closed_status_threshold
+ * @global integer $g_bug_closed_status_threshold
  */
 $g_bug_closed_status_threshold = CLOSED;
 
@@ -2014,7 +2014,7 @@ $g_bug_closed_status_threshold = CLOSED;
  * Automatically set status to ASSIGNED whenever a bug is assigned to a person.
  * This is useful for installations where assigned status is to be used when
  * the bug is in progress, rather than just put in a person's queue.
- * @global int $g_auto_set_status_to_assigned
+ * @global integer $g_auto_set_status_to_assigned
  */
 $g_auto_set_status_to_assigned	= ON;
 
@@ -2052,7 +2052,7 @@ $g_fileinfo_magic_db_file = '';
  * Specifies the maximum size (in bytes) below which an attachment is
  * previewed in the bug view pages.
  * To disable the previewing of attachments, set max size to 0.
- * @global int $g_preview_attachments_inline_max_size
+ * @global integer $g_preview_attachments_inline_max_size
  */
 $g_preview_attachments_inline_max_size = 256 * 1024;
 
@@ -2075,21 +2075,21 @@ $g_preview_image_extensions = array(
 /**
  * Specifies the maximum width for the auto-preview feature. If no maximum
  * width should be imposed then it should be set to 0.
- * @global int $g_preview_max_width
+ * @global integer $g_preview_max_width
  */
 $g_preview_max_width = 0;
 
 /**
  * Specifies the maximum height for the auto-preview feature. If no maximum
  * height should be imposed then it should be set to 0.
- * @global int $g_preview_max_height
+ * @global integer $g_preview_max_height
  */
 $g_preview_max_height = 250;
 
 /**
  * access level needed to view bugs attachments.  View means to see the file
  * names, sizes, and timestamps of the attachments.
- * @global int $g_view_attachments_threshold
+ * @global integer $g_view_attachments_threshold
  */
 $g_view_attachments_threshold = VIEWER;
 
@@ -2103,34 +2103,34 @@ $g_inline_file_exts = 'gif,png,jpg,jpeg,bmp';
 
 /**
  * access level needed to download bug attachments
- * @global int $g_download_attachments_threshold
+ * @global integer $g_download_attachments_threshold
  */
 $g_download_attachments_threshold = VIEWER;
 
 /**
  * access level needed to delete bug attachments
- * @global int $g_delete_attachments_threshold
+ * @global integer $g_delete_attachments_threshold
  */
 $g_delete_attachments_threshold = DEVELOPER;
 
 /**
  * allow users to view attachments uploaded by themselves even if their access
  * level is below view_attachments_threshold.
- * @global int $g_allow_view_own_attachments
+ * @global integer $g_allow_view_own_attachments
  */
 $g_allow_view_own_attachments = ON;
 
 /**
  * allow users to download attachments uploaded by themselves even if their
  * access level is below download_attachments_threshold.
- * @global int $g_allow_download_own_attachments
+ * @global integer $g_allow_download_own_attachments
  */
 $g_allow_download_own_attachments = ON;
 
 /**
  * allow users to delete attachments uploaded by themselves even if their access
  * level is below delete_attachments_threshold.
- * @global int $g_allow_delete_own_attachments
+ * @global integer $g_allow_delete_own_attachments
  */
 $g_allow_delete_own_attachments = OFF;
 
@@ -2140,19 +2140,19 @@ $g_allow_delete_own_attachments = OFF;
 
 /**
  * Enable or disable usage of the ETA field.
- * @global int $g_enable_eta
+ * @global integer $g_enable_eta
  */
 $g_enable_eta = OFF;
 
 /**
  * Enable or disable usage of the Projection field.
- * @global int $g_enable_projection
+ * @global integer $g_enable_projection
  */
 $g_enable_projection = OFF;
 
 /**
  * Enable or disable usage of the Product Build field.
- * @global int $g_enable_product_build
+ * @global integer $g_enable_product_build
  */
 $g_enable_product_build = OFF;
 
@@ -2512,7 +2512,7 @@ $g_bug_change_status_page_fields = array (
 
 /**
  * access level needed to report a bug
- * @global int $g_report_bug_threshold
+ * @global integer $g_report_bug_threshold
  */
 $g_report_bug_threshold = REPORTER;
 
@@ -2520,14 +2520,14 @@ $g_report_bug_threshold = REPORTER;
  * access level needed to update bugs (i.e., the update_bug_page)
  * This controls whether the user sees the "Update Bug" button in bug_view*_page
  * and the pencil icon in view_all_bug_page
- * @global int $g_update_bug_threshold
+ * @global integer $g_update_bug_threshold
  */
 $g_update_bug_threshold = UPDATER;
 
 /**
  * Access level needed to monitor bugs.
  * Look in the constant_inc.php file if you want to set a different value.
- * @global int $g_monitor_bug_threshold
+ * @global integer $g_monitor_bug_threshold
  */
 $g_monitor_bug_threshold = REPORTER;
 
@@ -2535,7 +2535,7 @@ $g_monitor_bug_threshold = REPORTER;
  * Access level needed to add other users to the list of users monitoring
  * a bug.
  * Look in the constant_inc.php file if you want to set a different value.
- * @global int $g_monitor_add_others_bug_threshold
+ * @global integer $g_monitor_add_others_bug_threshold
  */
 $g_monitor_add_others_bug_threshold = DEVELOPER;
 
@@ -2543,20 +2543,20 @@ $g_monitor_add_others_bug_threshold = DEVELOPER;
  * Access level needed to delete other users from the list of users
  * monitoring a bug.
  * Look in the constant_inc.php file if you want to set a different value.
- * @global int $g_monitor_delete_others_bug_threshold
+ * @global integer $g_monitor_delete_others_bug_threshold
  */
 $g_monitor_delete_others_bug_threshold = DEVELOPER;
 
 /**
  * access level needed to view private bugs
  * Look in the constant_inc.php file if you want to set a different value
- * @global int $g_private_bug_threshold
+ * @global integer $g_private_bug_threshold
  */
 $g_private_bug_threshold = DEVELOPER;
 
 /**
  * access level needed to be able to be listed in the assign to field.
- * @global int $g_handle_bug_threshold
+ * @global integer $g_handle_bug_threshold
  */
 $g_handle_bug_threshold = DEVELOPER;
 
@@ -2565,41 +2565,41 @@ $g_handle_bug_threshold = DEVELOPER;
  *  the Assigned list in bug_update*_page.
  *  This allows control over who can route bugs
  * This defaults to $g_handle_bug_threshold
- * @global int $g_update_bug_assign_threshold
+ * @global integer $g_update_bug_assign_threshold
  */
 $g_update_bug_assign_threshold = '%handle_bug_threshold%';
 
 /**
  * access level needed to view private bugnotes
  * Look in the constant_inc.php file if you want to set a different value
- * @global int $g_private_bugnote_threshold
+ * @global integer $g_private_bugnote_threshold
  */
 $g_private_bugnote_threshold = DEVELOPER;
 
 /**
  * access level needed to view handler in bug reports and notification email
  * @todo yarick123: now it is implemented for notification email only
- * @global int $g_view_handler_threshold
+ * @global integer $g_view_handler_threshold
  */
 $g_view_handler_threshold = VIEWER;
 
 /**
  * access level needed to view history in bug reports and notification email
  * @todo yarick123: now it is implemented for notification email only
- * @global int $g_view_history_threshold
+ * @global integer $g_view_history_threshold
  */
 $g_view_history_threshold = VIEWER;
 
 /**
  * access level needed to send a reminder from the bug view pages
  * set to NOBODY to disable the feature
- * @global int $g_bug_reminder_threshold
+ * @global integer $g_bug_reminder_threshold
  */
 $g_bug_reminder_threshold = DEVELOPER;
 
 /**
  * Access lever required to drop bug history revisions
- * @global int $g_bug_revision_drop_threshold
+ * @global integer $g_bug_revision_drop_threshold
  */
 $g_bug_revision_drop_threshold = MANAGER;
 
@@ -2607,7 +2607,7 @@ $g_bug_revision_drop_threshold = MANAGER;
  * access level needed to upload files to the project documentation section
  * You can set this to NOBODY to prevent uploads to projects
  * See also: $g_upload_bug_file_threshold, $g_allow_file_upload
- * @global int $g_upload_project_file_threshold
+ * @global integer $g_upload_project_file_threshold
  */
 $g_upload_project_file_threshold = MANAGER;
 
@@ -2618,31 +2618,31 @@ $g_upload_project_file_threshold = MANAGER;
  *  $g_allow_reporter_upload or $g_allow_file_upload to OFF
  * See also: $g_upload_project_file_threshold, $g_allow_file_upload,
  *			$g_allow_reporter_upload
- * @global int $g_upload_bug_file_threshold
+ * @global integer $g_upload_bug_file_threshold
  */
 $g_upload_bug_file_threshold = REPORTER;
 
 /**
  * Add bugnote threshold
- * @global int $g_add_bugnote_threshold
+ * @global integer $g_add_bugnote_threshold
  */
 $g_add_bugnote_threshold = REPORTER;
 
 /**
  * Threshold at which a user can edit the bugnotes of other users
- * @global int $g_update_bugnote_threshold
+ * @global integer $g_update_bugnote_threshold
  */
 $g_update_bugnote_threshold = DEVELOPER;
 
 /**
  * Threshold needed to view project documentation
- * @global int $g_view_proj_doc_threshold
+ * @global integer $g_view_proj_doc_threshold
  */
 $g_view_proj_doc_threshold = ANYBODY;
 
 /**
  * Site manager
- * @global int $g_manage_site_threshold
+ * @global integer $g_manage_site_threshold
  */
 $g_manage_site_threshold = MANAGER;
 
@@ -2653,56 +2653,56 @@ $g_manage_site_threshold = MANAGER;
  * ABSOLUTELY KNOW WHAT YOU'RE DOING! Users at this access level have the
  * ability to damage your MantisBT installation and data within the database.
  * It is strongly advised you leave this option alone.
- * @global int $g_admin_site_threshold
+ * @global integer $g_admin_site_threshold
  */
 $g_admin_site_threshold = ADMINISTRATOR;
 
 /**
  * Threshold needed to manage a project: edit project
  * details (not to add/delete projects) ...etc.
- * @global int $g_manage_project_threshold
+ * @global integer $g_manage_project_threshold
  */
 $g_manage_project_threshold = MANAGER;
 
 /**
  * Threshold needed to add/delete/modify news
- * @global int $g_manage_news_threshold
+ * @global integer $g_manage_news_threshold
  */
 $g_manage_news_threshold = MANAGER;
 
 /**
  * Threshold required to delete a project
- * @global int $g_delete_project_threshold
+ * @global integer $g_delete_project_threshold
  */
 $g_delete_project_threshold = ADMINISTRATOR;
 
 /**
  * Threshold needed to create a new project
- * @global int $g_create_project_threshold
+ * @global integer $g_create_project_threshold
  */
 $g_create_project_threshold = ADMINISTRATOR;
 
 /**
  * Threshold needed to be automatically included in private projects
- * @global int $g_private_project_threshold
+ * @global integer $g_private_project_threshold
  */
 $g_private_project_threshold = ADMINISTRATOR;
 
 /**
  * Threshold needed to manage user access to a project
- * @global int $g_project_user_threshold
+ * @global integer $g_project_user_threshold
  */
 $g_project_user_threshold = MANAGER;
 
 /**
  * Threshold needed to manage user accounts
- * @global int $g_manage_user_threshold
+ * @global integer $g_manage_user_threshold
  */
 $g_manage_user_threshold = ADMINISTRATOR;
 
 /**
  * Delete bug threshold
- * @global int $g_delete_bug_threshold
+ * @global integer $g_delete_bug_threshold
  */
 $g_delete_bug_threshold = DEVELOPER;
 
@@ -2716,100 +2716,100 @@ $g_delete_bugnote_threshold = '%delete_bug_threshold%';
 
 /**
  * Move bug threshold
- * @global int $g_move_bug_threshold
+ * @global integer $g_move_bug_threshold
  */
 $g_move_bug_threshold = DEVELOPER;
 
 /**
  * Threshold needed to set the view status while reporting a bug or a bug note.
- * @global int $g_set_view_status_threshold
+ * @global integer $g_set_view_status_threshold
  */
 $g_set_view_status_threshold = REPORTER;
 
 /**
  * Threshold needed to update the view status while updating a bug or a bug note.
  * This threshold should be greater or equal to $g_set_view_status_threshold.
- * @global int $g_change_view_status_threshold
+ * @global integer $g_change_view_status_threshold
  */
 $g_change_view_status_threshold = UPDATER;
 
 /**
  * Threshold needed to show the list of users monitoring a bug on the bug view pages.
- * @global int $g_show_monitor_list_threshold
+ * @global integer $g_show_monitor_list_threshold
  */
 $g_show_monitor_list_threshold = DEVELOPER;
 
 /**
  * Threshold needed to be able to use stored queries
- * @global int $g_stored_query_use_threshold
+ * @global integer $g_stored_query_use_threshold
  */
 $g_stored_query_use_threshold = REPORTER;
 
 /**
  * Threshold needed to be able to create stored queries
- * @global int $g_stored_query_create_threshold
+ * @global integer $g_stored_query_create_threshold
  */
 $g_stored_query_create_threshold = DEVELOPER;
 
 /**
  * Threshold needed to be able to create shared stored queries
- * @global int $g_stored_query_create_shared_threshold
+ * @global integer $g_stored_query_create_shared_threshold
  */
 $g_stored_query_create_shared_threshold = MANAGER;
 
 /**
  * Threshold needed to update readonly bugs.  Readonly bugs are identified via
  * $g_bug_readonly_status_threshold.
- * @global int $g_update_readonly_bug_threshold
+ * @global integer $g_update_readonly_bug_threshold
  */
 $g_update_readonly_bug_threshold = MANAGER;
 
 /**
  * threshold for viewing changelog
- * @global int $g_view_changelog_threshold
+ * @global integer $g_view_changelog_threshold
  */
 $g_view_changelog_threshold = VIEWER;
 
 /**
  * threshold for viewing roadmap
- * @global int $g_roadmap_view_threshold
+ * @global integer $g_roadmap_view_threshold
  */
 $g_roadmap_view_threshold = VIEWER;
 
 /**
  * threshold for updating roadmap, target_version, etc
- * @global int $g_roadmap_update_threshold
+ * @global integer $g_roadmap_update_threshold
  */
 $g_roadmap_update_threshold = DEVELOPER;
 
 /**
  * status change thresholds
- * @global int $g_update_bug_status_threshold
+ * @global integer $g_update_bug_status_threshold
  */
 $g_update_bug_status_threshold = DEVELOPER;
 
 /**
  * access level needed to re-open bugs
- * @global int $g_reopen_bug_threshold
+ * @global integer $g_reopen_bug_threshold
  */
 $g_reopen_bug_threshold = DEVELOPER;
 
 /**
  * access level needed to assign bugs to unreleased product versions
- * @global int $g_report_issues_for_unreleased_versions_threshold
+ * @global integer $g_report_issues_for_unreleased_versions_threshold
  */
 $g_report_issues_for_unreleased_versions_threshold = DEVELOPER;
 
 /**
  * access level needed to set a bug sticky
- * @global int $g_set_bug_sticky_threshold
+ * @global integer $g_set_bug_sticky_threshold
  */
 $g_set_bug_sticky_threshold = MANAGER;
 
 /**
  * The minimum access level for someone to be a member of the development team
  * and appear on the project information page.
- * @global int $g_development_team_threshold
+ * @global integer $g_development_team_threshold
  */
 $g_development_team_threshold = DEVELOPER;
 
@@ -2830,7 +2830,7 @@ $g_set_status_threshold = array( NEW_ => REPORTER );
  * Threshold at which a user can edit his/her own bugnotes.
  * The default value is equal to the configuration setting
  * $g_update_bugnote_threshold.
- * @global int $g_bugnote_user_edit_threshold
+ * @global integer $g_bugnote_user_edit_threshold
  */
 $g_bugnote_user_edit_threshold = '%update_bugnote_threshold%';
 
@@ -2838,7 +2838,7 @@ $g_bugnote_user_edit_threshold = '%update_bugnote_threshold%';
  * Threshold at which a user can delete his/her own bugnotes.
  * The default value is equal to the configuration setting
  * $g_delete_bugnote_threshold.
- * @global int $g_bugnote_user_delete_threshold
+ * @global integer $g_bugnote_user_delete_threshold
  */
 $g_bugnote_user_delete_threshold = '%delete_bugnote_threshold%';
 
@@ -2846,48 +2846,48 @@ $g_bugnote_user_delete_threshold = '%delete_bugnote_threshold%';
  * Threshold at which a user can change the view state of his/her own bugnotes.
  * The default value is equal to the configuration setting
  * $g_change_view_status_threshold.
- * @global int $g_bugnote_user_change_view_state_threshold
+ * @global integer $g_bugnote_user_change_view_state_threshold
  */
 $g_bugnote_user_change_view_state_threshold = '%change_view_status_threshold%';
 
 /**
  * Allow a bug to have no category
- * @global int $g_allow_no_category
+ * @global integer $g_allow_no_category
  */
 $g_allow_no_category = OFF;
 
 /**
  * limit reporters. Set to ON if you wish to limit reporters to only viewing
  * bugs that they report.
- * @global int $g_limit_reporters
+ * @global integer $g_limit_reporters
  */
 $g_limit_reporters = OFF;
 
 /**
  * reporter can close. Allow reporters to close the bugs they reported, after
  * they are marked resolved.
- * @global int $g_allow_reporter_close
+ * @global integer $g_allow_reporter_close
  */
 $g_allow_reporter_close	 = OFF;
 
 /**
  * reporter can reopen. Allow reporters to reopen the bugs they reported, after
  * they are marked resolved.
- * @global int $g_allow_reporter_reopen
+ * @global integer $g_allow_reporter_reopen
  */
 $g_allow_reporter_reopen = ON;
 
 /**
  * reporter can upload
  * Allow reporters to upload attachments to bugs they reported.
- * @global int $g_allow_reporter_upload
+ * @global integer $g_allow_reporter_upload
  */
 $g_allow_reporter_upload = ON;
 
 /**
  * account delete
  * Allow users to delete their own accounts
- * @global int $g_allow_account_delete
+ * @global integer $g_allow_account_delete
  */
 $g_allow_account_delete = OFF;
 
@@ -2895,7 +2895,7 @@ $g_allow_account_delete = OFF;
  * Enable anonymous access to MantisBT. You must also specify
  * $g_anonymous_account as the account which anonymous users will browse
  * MantisBT with. The default setting is OFF.
- * @global int $g_allow_anonymous_login
+ * @global integer $g_allow_anonymous_login
  */
 $g_allow_anonymous_login = OFF;
 
@@ -2995,7 +2995,7 @@ $g_manage_configuration_threshold = MANAGER;
 
 /**
  * threshold for users to view the system configurations
- * @global int $g_view_configuration_threshold
+ * @global integer $g_view_configuration_threshold
  */
 $g_view_configuration_threshold = ADMINISTRATOR;
 
@@ -3006,7 +3006,7 @@ $g_view_configuration_threshold = ADMINISTRATOR;
  * be trusted.  This is due to the fact that such users can set configurations
  * to PHP code and hence there can be a security risk if such users are not
  * trusted.
- * @global int $g_set_configuration_threshold
+ * @global integer $g_set_configuration_threshold
  */
 $g_set_configuration_threshold = ADMINISTRATOR;
 
@@ -3031,21 +3031,21 @@ $g_status_colors = array(
 /**
  * The padding level when displaying project ids
  *  The bug id will be padded with 0's up to the size given
- * @global int $g_display_project_padding
+ * @global integer $g_display_project_padding
  */
 $g_display_project_padding = 3;
 
 /**
  * The padding level when displaying bug ids
  *  The bug id will be padded with 0's up to the size given
- * @global int $g_display_bug_padding
+ * @global integer $g_display_bug_padding
  */
 $g_display_bug_padding = 7;
 
 /**
  * The padding level when displaying bugnote ids
  *  The bugnote id will be padded with 0's up to the size given
- * @global int $g_display_bugnote_padding
+ * @global integer $g_display_bugnote_padding
  */
 $g_display_bugnote_padding = 7;
 
@@ -3128,19 +3128,19 @@ $g_bug_list_cookie = '%cookie_prefix%_BUG_LIST_COOKIE';
 
 /**
  *
- * @global int $g_filter_by_custom_fields
+ * @global integer $g_filter_by_custom_fields
  */
 $g_filter_by_custom_fields = ON;
 
 /**
  *
- * @global int $g_filter_custom_fields_per_row
+ * @global integer $g_filter_custom_fields_per_row
  */
 $g_filter_custom_fields_per_row = 8;
 
 /**
  *
- * @global int $g_view_filters
+ * @global integer $g_view_filters
  */
 $g_view_filters = SIMPLE_DEFAULT;
 
@@ -3149,14 +3149,14 @@ $g_view_filters = SIMPLE_DEFAULT;
  * form controls upon request. This method will reduce the amount of data that
  * needs to be transferred upon each page load dealing with filters and thus
  * will result in speed improvements and bandwidth reduction.
- * @global int $g_use_dynamic_filters
+ * @global integer $g_use_dynamic_filters
  */
 $g_use_dynamic_filters = ON;
 
 /**
  * The threshold required for users to be able to create permalinks.  To turn
  * off this feature use NOBODY.
- * @global int $g_create_permalink_threshold
+ * @global integer $g_create_permalink_threshold
  */
 $g_create_permalink_threshold = DEVELOPER;
 
@@ -3296,13 +3296,13 @@ $g_custom_field_type_enum_string = '0:string,1:numeric,2:float,3:enum,4:email,5:
  * users should uncomment the appropriate line in their php.ini files to load
  * the zlib DLL. You can check what extensions are loaded by running "php -m"
  * at the command line (look for 'zlib')
- * @global int $g_compress_html
+ * @global integer $g_compress_html
  */
 $g_compress_html = ON;
 
 /**
  * Use persistent database connections
- * @global int $g_use_persistent_connections
+ * @global integer $g_use_persistent_connections
  */
 $g_use_persistent_connections = OFF;
 
@@ -3391,14 +3391,14 @@ $g_custom_headers = array();
  * information is displayed. Note that this will be bypassed (and caching is
  * allowed) for the bug report pages.
  *
- * @global int $g_allow_browser_cache
+ * @global integer $g_allow_browser_cache
  */
 # $g_allow_browser_cache = ON;
 /**
  * File caching - This will allow the browser to cache downloaded files.
  * Without this set, there may be issues with IE receiving files, and launching
  * support programs.
- * @global int $g_allow_file_cache
+ * @global integer $g_allow_file_cache
  */
 # $g_allow_file_cache = ON;
 
@@ -3408,19 +3408,19 @@ $g_custom_headers = array();
 
 /**
  * Threshold needed to manage custom fields
- * @global int $g_manage_custom_fields_threshold
+ * @global integer $g_manage_custom_fields_threshold
  */
 $g_manage_custom_fields_threshold = ADMINISTRATOR;
 
 /**
  * Threshold needed to link/unlink custom field to/from a project
- * @global int $g_custom_field_link_threshold
+ * @global integer $g_custom_field_link_threshold
  */
 $g_custom_field_link_threshold = MANAGER;
 
 /**
  * Whether to start editng a custom field immediately after creating it
- * @global int $g_custom_field_edit_after_create
+ * @global integer $g_custom_field_edit_after_create
  */
 $g_custom_field_edit_after_create = ON;
 
@@ -3577,7 +3577,7 @@ $g_unread_icon_arr = array (
 
 /**
  * Number of bugs shown in each box
- * @global int $g_my_view_bug_count
+ * @global integer $g_my_view_bug_count
  */
 $g_my_view_bug_count = 10;
 
@@ -3601,7 +3601,7 @@ $g_my_view_boxes = array (
 /**
  * Toggle whether 'My View' boxes are shown in a fixed position (i.e. adjacent
  * boxes start at the same vertical position)
- * @global int $g_my_view_boxes_fixed_position
+ * @global integer $g_my_view_boxes_fixed_position
  */
 $g_my_view_boxes_fixed_position = ON;
 
@@ -3613,7 +3613,7 @@ $g_my_view_boxes_fixed_position = ON;
 /**
  * This flag enables or disables RSS syndication.  In the case where RSS
  * syndication is not used, it is recommended to set it to OFF.
- * @global int $g_rss_enabled
+ * @global integer $g_rss_enabled
  */
 $g_rss_enabled = ON;
 
@@ -3632,7 +3632,7 @@ $g_rss_enabled = ON;
  *
  * Refer to the notes near the top of core/graphviz_api.php and
  * core/relationship_graph_api.php for more information.
- * @global int $g_relationship_graph_enable
+ * @global integer $g_relationship_graph_enable
  */
 $g_relationship_graph_enable = OFF;
 
@@ -3661,7 +3661,7 @@ $g_relationship_graph_fontname = 'Arial';
 
 /**
  *
- * @global int $g_relationship_graph_fontsize
+ * @global integer $g_relationship_graph_fontsize
  */
 $g_relationship_graph_fontsize = 8;
 
@@ -3678,7 +3678,7 @@ $g_relationship_graph_orientation = 'horizontal';
  * dependency graphs are drawn to the full depth. A value of 3 is already
  * enough to show issues really unrelated to the one you are currently
  * viewing.
- * @global int $g_relationship_graph_max_depth
+ * @global integer $g_relationship_graph_max_depth
  */
 $g_relationship_graph_max_depth = 2;
 
@@ -3687,21 +3687,21 @@ $g_relationship_graph_max_depth = 2;
  * the bug view page for that issue, otherwise, will navigate to the
  * relationship graph for that issue.
  *
- * @global int $g_relationship_graph_view_on_click
+ * @global integer $g_relationship_graph_view_on_click
  */
 $g_relationship_graph_view_on_click = OFF;
 
 /**
  * Number of years in the past that custom date fields will display in
  * drop down boxes.
- * @global int $g_backward_year_count
+ * @global integer $g_backward_year_count
  */
 $g_backward_year_count = 4;
 
 /**
  * Number of years in the future that custom date fields will display in
  * drop down boxes.
- * @global int $g_forward_year_count
+ * @global integer $g_forward_year_count
  */
 $g_forward_year_count = 4;
 
@@ -3747,7 +3747,7 @@ $g_custom_group_actions = array();
 
 /**
  * Wiki Integration Enabled?
- * @global int $g_wiki_enable
+ * @global integer $g_wiki_enable
  */
 $g_wiki_enable = OFF;
 
@@ -3779,7 +3779,7 @@ $g_wiki_engine_url = $t_protocol . '://' . $t_host . '/%wiki_engine%/';
  * This controls whether to show the most recently visited issues by the current user or not.
  * If set to 0, this feature is disabled. Otherwise it is the maximum number of issues to
  * keep in the recently visited list.
- * @global int $g_recently_visited_count
+ * @global integer $g_recently_visited_count
  */
 $g_recently_visited_count = 5;
 
@@ -3789,49 +3789,49 @@ $g_recently_visited_count = 5;
 
 /**
  * String that will separate tags as entered for input
- * @global int $g_tag_separator
+ * @global integer $g_tag_separator
  */
 $g_tag_separator = ',';
 
 /**
  * Access level required to view tags attached to a bug
- * @global int $g_tag_view_threshold
+ * @global integer $g_tag_view_threshold
  */
 $g_tag_view_threshold = VIEWER;
 
 /**
  * Access level required to attach tags to a bug
- * @global int $g_tag_attach_threshold
+ * @global integer $g_tag_attach_threshold
  */
 $g_tag_attach_threshold = REPORTER;
 
 /**
  * Access level required to detach tags from a bug
- * @global int $g_tag_detach_threshold
+ * @global integer $g_tag_detach_threshold
  */
 $g_tag_detach_threshold = DEVELOPER;
 
 /**
  * Access level required to detach tags attached by the same user
- * @global int $g_tag_detach_own_threshold
+ * @global integer $g_tag_detach_own_threshold
  */
 $g_tag_detach_own_threshold = REPORTER;
 
 /**
  * Access level required to create new tags
- * @global int $g_tag_create_threshold
+ * @global integer $g_tag_create_threshold
  */
 $g_tag_create_threshold = REPORTER;
 
 /**
  * Access level required to edit tag names and descriptions
- * @global int $g_tag_edit_threshold
+ * @global integer $g_tag_edit_threshold
  */
 $g_tag_edit_threshold = DEVELOPER;
 
 /**
  * Access level required to edit descriptions by the creating user
- * @global int $g_tag_edit_own_threshold
+ * @global integer $g_tag_edit_own_threshold
  */
 $g_tag_edit_own_threshold = REPORTER;
 
@@ -3841,43 +3841,43 @@ $g_tag_edit_own_threshold = REPORTER;
 
 /**
  * Turn on Time Tracking accounting
- * @global int $g_time_tracking_enabled
+ * @global integer $g_time_tracking_enabled
  */
 $g_time_tracking_enabled = OFF;
 
 /**
  * A billing sums
- * @global int $g_time_tracking_with_billing
+ * @global integer $g_time_tracking_with_billing
  */
 $g_time_tracking_with_billing = OFF;
 
 /**
  * Stop watch to build time tracking field
- * @global int $g_time_tracking_stopwatch
+ * @global integer $g_time_tracking_stopwatch
  */
 $g_time_tracking_stopwatch = OFF;
 
 /**
  * access level required to view time tracking information
- * @global int $g_time_tracking_view_threshold
+ * @global integer $g_time_tracking_view_threshold
  */
 $g_time_tracking_view_threshold = DEVELOPER;
 
 /**
  * access level required to add/edit time tracking information
- * @global int $g_time_tracking_edit_threshold
+ * @global integer $g_time_tracking_edit_threshold
  */
 $g_time_tracking_edit_threshold = DEVELOPER;
 
 /**
  * access level required to run reports
- * @global int $g_time_tracking_reporting_threshold
+ * @global integer $g_time_tracking_reporting_threshold
  */
 $g_time_tracking_reporting_threshold = MANAGER;
 
 /**
  * allow time tracking to be recorded without a bugnote
- * @global int $g_time_tracking_without_note
+ * @global integer $g_time_tracking_without_note
  */
 $g_time_tracking_without_note = ON;
 
@@ -3887,26 +3887,26 @@ $g_time_tracking_without_note = ON;
 
 /**
  * Enable Profiles
- * @global int $g_enable_profiles
+ * @global integer $g_enable_profiles
  */
 $g_enable_profiles = ON;
 
 /**
  * Add profile threshold
- * @global int $g_add_profile_threshold
+ * @global integer $g_add_profile_threshold
  */
 $g_add_profile_threshold = REPORTER;
 
 /**
  * Threshold needed to be able to create and modify global profiles
- * @global int $g_manage_global_profile_threshold
+ * @global integer $g_manage_global_profile_threshold
  */
 $g_manage_global_profile_threshold = MANAGER;
 
 /**
  * Allows the users to enter free text when reporting/updating issues
  * for the profile related fields (i.e. platform, os, os build)
- * @global int $g_allow_freetext_in_profile_fields
+ * @global integer $g_allow_freetext_in_profile_fields
  */
 $g_allow_freetext_in_profile_fields = ON;
 
@@ -3916,7 +3916,7 @@ $g_allow_freetext_in_profile_fields = ON;
 
 /**
  * enable/disable plugins
- * @global int $g_plugins_enabled
+ * @global integer $g_plugins_enabled
  */
 $g_plugins_enabled = ON;
 
@@ -3928,7 +3928,7 @@ $g_plugin_path = $g_absolute_path . 'plugins' . DIRECTORY_SEPARATOR;
 
 /**
  * management threshold.
- * @global int $g_manage_plugin_threshold
+ * @global integer $g_manage_plugin_threshold
  */
 $g_manage_plugin_threshold = ADMINISTRATOR;
 
@@ -3971,13 +3971,13 @@ $g_plugins_force_installed = array();
 
 /**
  * threshold to update due date submitted
- * @global int $g_due_date_update_threshold
+ * @global integer $g_due_date_update_threshold
  */
 $g_due_date_update_threshold = NOBODY;
 
 /**
  * threshold to see due date
- * @global int $g_due_date_view_threshold
+ * @global integer $g_due_date_view_threshold
  */
 $g_due_date_view_threshold = NOBODY;
 
@@ -4003,14 +4003,14 @@ $g_subprojects_inherit_versions = ON;
  * Time page loads.
  * The page execution timer shows at the bottom of each page.
  *
- * @global int $g_show_timer
+ * @global integer $g_show_timer
  */
 $g_show_timer = OFF;
 
 /**
  * Show memory usage for each page load in the footer.
  *
- * @global int $g_show_memory_usage
+ * @global integer $g_show_memory_usage
  */
 $g_show_memory_usage = OFF;
 
@@ -4026,7 +4026,7 @@ $g_debug_email = '';
 /**
  * Shows the total number/unique number of queries executed to serve the page.
  *
- * @global int $g_show_queries_count
+ * @global integer $g_show_queries_count
  */
 $g_show_queries_count = OFF;
 
@@ -4080,7 +4080,7 @@ if( isset( $_SERVER['SERVER_NAME'] ) && ( strcasecmp( $_SERVER['SERVER_NAME'], '
  * WARNING: Potential security hazard.  Only turn this on when you really
  * need it for debugging
  *
- * @global int $g_show_detailed_errors
+ * @global integer $g_show_detailed_errors
  */
 $g_show_detailed_errors = OFF;
 
@@ -4092,7 +4092,7 @@ $g_show_detailed_errors = OFF;
  * allowing you to see the errors.
  * Only turn this option on when debugging
  *
- * @global int $g_stop_on_errors
+ * @global integer $g_stop_on_errors
  */
 $g_stop_on_errors = OFF;
 
@@ -4108,7 +4108,7 @@ $g_stop_on_errors = OFF;
  * {@link http://php.net/language.operators.bitwise PHP bitwise operators}
  * Refer to {@link $g_log_destination} for details on where to save the logs.
  *
- * @global int $g_log_level
+ * @global integer $g_log_level
  */
 $g_log_level = LOG_NONE;
 
@@ -4137,7 +4137,7 @@ $g_log_destination = '';
  * Note that this threshold is compared against the user's global access level,
  * rather than the one from the currently active project.
  *
- * @global int $g_show_log_threshold
+ * @global integer $g_show_log_threshold
  */
 $g_show_log_threshold = ADMINISTRATOR;
 
@@ -4181,21 +4181,21 @@ unset( $t_protocol, $t_host, $t_hosts, $t_port, $t_self, $t_path );
 /**
  * Minimum global access level required to access webservice for readonly operations.
  *
- * @global int $g_webservice_readonly_access_level_threshold
+ * @global integer $g_webservice_readonly_access_level_threshold
  */
 $g_webservice_readonly_access_level_threshold = VIEWER;
 
 /**
  * Minimum global access level required to access webservice for read/write operations.
  *
- * @global int $g_webservice_readwrite_access_level_threshold
+ * @global integer $g_webservice_readwrite_access_level_threshold
  */
 $g_webservice_readwrite_access_level_threshold = REPORTER;
 
 /**
  * Minimum global access level required to access the administrator webservices
  *
- * @global int $g_webservice_admin_access_level_threshold
+ * @global integer $g_webservice_admin_access_level_threshold
  */
 $g_webservice_admin_access_level_threshold = MANAGER;
 
@@ -4206,7 +4206,7 @@ $g_webservice_admin_access_level_threshold = MANAGER;
  * and specify a different name, but in this case it will be logged in the history
  * who original reported the issue.
  *
- * @global int $g_webservice_specify_reporter_on_add_access_level_threshold
+ * @global integer $g_webservice_specify_reporter_on_add_access_level_threshold
  */
 $g_webservice_specify_reporter_on_add_access_level_threshold = DEVELOPER;
 
@@ -4215,7 +4215,7 @@ $g_webservice_specify_reporter_on_add_access_level_threshold = DEVELOPER;
  * defined in the associated MantisBT installation.  In this case, the enum id is set
  * to the value specified by the corresponding configuration option.
  *
- * @global int $g_webservice_priority_enum_default_when_not_found
+ * @global integer $g_webservice_priority_enum_default_when_not_found
  */
 $g_webservice_priority_enum_default_when_not_found = 0;
 
@@ -4224,7 +4224,7 @@ $g_webservice_priority_enum_default_when_not_found = 0;
  * defined in the associated MantisBT installation.  In this case, the enum id is set
  * to the value specified by the corresponding configuration option.
  *
- * @global int $g_webservice_severity_enum_default_when_not_found
+ * @global integer $g_webservice_severity_enum_default_when_not_found
  */
 $g_webservice_severity_enum_default_when_not_found = 0;
 
@@ -4233,7 +4233,7 @@ $g_webservice_severity_enum_default_when_not_found = 0;
  * defined in the associated MantisBT installation.  In this case, the enum id is set
  * to the value specified by the corresponding configuration option.
  *
- * @global int $g_webservice_status_enum_default_when_not_found
+ * @global integer $g_webservice_status_enum_default_when_not_found
  */
 $g_webservice_status_enum_default_when_not_found = 0;
 
@@ -4242,7 +4242,7 @@ $g_webservice_status_enum_default_when_not_found = 0;
  * defined in the associated MantisBT installation.  In this case, the enum id is set
  * to the value specified by the corresponding configuration option.
  *
- * @global int $g_webservice_resolution_enum_default_when_not_found
+ * @global integer $g_webservice_resolution_enum_default_when_not_found
  */
 $g_webservice_resolution_enum_default_when_not_found = 0;
 
@@ -4251,7 +4251,7 @@ $g_webservice_resolution_enum_default_when_not_found = 0;
  * defined in the associated MantisBT installation.  In this case, the enum id is set
  * to the value specified by the corresponding configuration option.
  *
- * @global int $g_webservice_projection_enum_default_when_not_found
+ * @global integer $g_webservice_projection_enum_default_when_not_found
  */
 $g_webservice_projection_enum_default_when_not_found = 0;
 
@@ -4260,14 +4260,14 @@ $g_webservice_projection_enum_default_when_not_found = 0;
  * defined in the associated MantisBT installation.  In this case, the enum id is set
  * to the value specified by the corresponding configuration option.
  *
- * @global int $g_webservice_eta_enum_default_when_not_found
+ * @global integer $g_webservice_eta_enum_default_when_not_found
  */
 $g_webservice_eta_enum_default_when_not_found = 0;
 
 /**
  * If ON and the supplied version is not found, then a SoapException will be raised.
  *
- * @global int $g_webservice_error_when_version_not_found
+ * @global integer $g_webservice_error_when_version_not_found
  */
 $g_webservice_error_when_version_not_found = ON;
 
