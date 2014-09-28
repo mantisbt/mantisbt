@@ -428,10 +428,14 @@ class BugData {
 			}
 		}
 
-		# Make sure a category is set
+		# Make sure a category is set and that it is a valid category
 		if( 0 == $this->category_id && !config_get( 'allow_no_category' ) ) {
 			error_parameters( lang_get( 'category' ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		}
+
+		if( $this->category_id > 0 ) {
+			category_ensure_exists( $this->category_id );
 		}
 
 		if( !is_blank( $this->duplicate_id ) && ( $this->duplicate_id != 0 ) && ( $this->id == $this->duplicate_id ) ) {
