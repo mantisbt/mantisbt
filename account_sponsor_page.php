@@ -174,7 +174,7 @@ if( $t_sponsor_count === 0 ) {
 		# describe bug
 		$t_status = string_attribute( get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id ) );
 		$t_resolution = string_attribute( get_enum_element( 'resolution', $t_bug->resolution, auth_get_current_user_id(), $t_bug->project_id ) );
-		$t_version_id = version_get_id( $t_bug->fixed_in_version, $t_project );
+		$t_version_id = version_get_id( $t_bug->fixed_in_version, $t_bug->project_id );
 		if( ( false !== $t_version_id ) && ( VERSION_RELEASED == version_get_field( $t_version_id, 'released' ) ) ) {
 			$t_released_label = '<a title="' . lang_get( 'released' ) . '">' . $t_bug->fixed_in_version . '</a>';
 		} else {
@@ -302,7 +302,7 @@ if( $t_sponsor_count === 0 ) {
 		# describe bug
 		$t_status = string_attribute( get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id ) );
 		$t_resolution = string_attribute( get_enum_element( 'resolution', $t_bug->resolution, auth_get_current_user_id(), $t_bug->project_id ) );
-		$t_version_id = version_get_id( $t_bug->fixed_in_version, $t_project );
+		$t_version_id = version_get_id( $t_bug->fixed_in_version, $t_bug->project_id );
 		if( ( false !== $t_version_id ) && ( VERSION_RELEASED == version_get_field( $t_version_id, 'released' ) ) ) {
 			$t_released_label = '<a title="' . lang_get( 'released' ) . '">' . $t_bug->fixed_in_version . '</a>';
 		} else {
