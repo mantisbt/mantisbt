@@ -179,15 +179,17 @@ function file_can_delete_bug_attachments( $p_bug_id, $p_uploader_user_id = null 
  * @return array
  */
 function file_get_icon_url( $p_display_filename ) {
-	$t_file_type_icons = config_get( 'file_type_icons' );
-
 	$t_ext = utf8_strtolower( pathinfo( $p_display_filename, PATHINFO_EXTENSION ) );
-	if( is_blank( $t_ext ) || !isset( $t_file_type_icons[$t_ext] ) ) {
-		$t_ext = '?';
+
+	if( $t_ext == '' ) {
+		return array( 'url' => helper_mantis_url( config_get( 'icon_path' ) . 'fileicons/generic.png' ), 'alt' => '' );
 	}
 
-	$t_name = $t_file_type_icons[$t_ext];
-	return array( 'url' => config_get( 'icon_path' ) . 'fileicons/' . $t_name, 'alt' => $t_ext );
+	if( file_exists( config_get( 'icon_path' ) . '/fileicons/' . $t_ext . '.png' ) ) {
+		return array( 'url' => helper_mantis_url( config_get( 'icon_path' ) . '/fileicons/' . $t_ext . '.png' ), 'alt' => $t_ext );
+	} else {
+		return array( 'url' => helper_mantis_url( 'img_ext.php?ext=' . $t_ext ), 'alt' => $t_ext );
+	}
 }
 
 /**
@@ -691,10 +693,10 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 	$t_id_col = $p_table . '_id';
 
 	$t_query = 'INSERT INTO ' . $t_file_table . ' ( ' . $t_id_col . ', title, description, diskfile, filename, folder,
-		filesize, file_type, date_added, user_id )
+		filesize, file_type, date_added, user_id, content )
 	VALUES
 		( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() .
-		  ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
+		  ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', \'\' )';
 	db_query( $t_query, array( $t_id, $p_title, $p_desc, $t_unique_name, $t_file_name, $t_file_path,
 									 $t_file_size, $p_file['type'], $p_date_added, (int)$p_user_id ) );
 	$t_attachment_id = db_insert_id( $t_file_table );

@@ -3438,83 +3438,6 @@ $g_main_menu_custom_options = array();
 #########
 
 /**
- * Maps a file extension to a file type icon.  These icons are printed
- * next to project documents and bug attachments.
- * Note:
- * - Extensions must be in lower case
- * - All icons will be displayed as 16x16 pixels.
- * @global array $g_file_type_icons
- */
-$g_file_type_icons = array(
-	''	=> 'text.gif',
-	'7z'	=> 'zip.gif',
-	'ace'	=> 'zip.gif',
-	'arj'	=> 'zip.gif',
-	'bz2'	=> 'zip.gif',
-	'c'	=> 'cpp.gif',
-	'chm'	=> 'chm.gif',
-	'cpp'	=> 'cpp.gif',
-	'css'	=> 'css.gif',
-	'csv'	=> 'csv.gif',
-	'cxx'	=> 'cpp.gif',
-	'diff'	=> 'text.gif',
-	'doc'	=> 'doc.gif',
-	'docx'	=> 'doc.gif',
-	'dot'	=> 'doc.gif',
-	'eml'	=> 'eml.gif',
-	'htm'	=> 'html.gif',
-	'html'	=> 'html.gif',
-	'gif'	=> 'gif.gif',
-	'gz'	=> 'zip.gif',
-	'jpe'	=> 'jpg.gif',
-	'jpg'	=> 'jpg.gif',
-	'jpeg'	=> 'jpg.gif',
-	'log'	=> 'text.gif',
-	'lzh'	=> 'zip.gif',
-	'mhtml'	=> 'html.gif',
-	'mid'	=> 'mid.gif',
-	'midi'	=> 'mid.gif',
-	'mov'	=> 'mov.gif',
-	'msg'	=> 'eml.gif',
-	'one'	=> 'one.gif',
-	'patch'	=> 'text.gif',
-	'pcx'	=> 'pcx.gif',
-	'pdf'	=> 'pdf.gif',
-	'png'	=> 'png.gif',
-	'pot'	=> 'pot.gif',
-	'pps'	=> 'pps.gif',
-	'ppt'	=> 'ppt.gif',
-	'pptx'	=> 'ppt.gif',
-	'pub'	=> 'pub.gif',
-	'rar'	=> 'zip.gif',
-	'reg'	=> 'reg.gif',
-	'rtf'	=> 'doc.gif',
-	'tar'	=> 'zip.gif',
-	'tgz'	=> 'zip.gif',
-	'txt'	=> 'text.gif',
-	'uc2'	=> 'zip.gif',
-	'vsd'	=> 'vsd.gif',
-	'vsl'	=> 'vsl.gif',
-	'vss'	=> 'vsd.gif',
-	'vst'	=> 'vst.gif',
-	'vsu'	=> 'vsd.gif',
-	'vsw'	=> 'vsd.gif',
-	'vsx'	=> 'vsd.gif',
-	'vtx'	=> 'vst.gif',
-	'wav'	=> 'wav.gif',
-	'wbk'	=> 'wbk.gif',
-	'wma'	=> 'wav.gif',
-	'wmv'	=> 'mov.gif',
-	'wri'	=> 'wri.gif',
-	'xlk'	=> 'xls.gif',
-	'xls'	=> 'xls.gif',
-	'xlsx'	=> 'xls.gif',
-	'xlt'	=> 'xlt.gif',
-	'xml'	=> 'xml.gif',
-	'zip'	=> 'zip.gif',
-	'?'	=> 'generic.gif' );
-
-/**
  *
  * Content types which will be overriden when downloading files
  *
@@ -4155,7 +4078,7 @@ $g_global_settings = array(
 	'session_save_path', 'session_validation', 'show_detailed_errors', 'show_queries_count',
 	'stop_on_errors', 'version_suffix',
 	'fileinfo_magic_db_file', 'css_include_file', 'css_rtl_include_file', 'meta_include_file',
-	'file_type_icons', 'path', 'icon_path', 'short_path', 'absolute_path', 'core_path',
+	'path', 'icon_path', 'short_path', 'absolute_path', 'core_path',
 	'class_path','library_path', 'language_path', 'absolute_path_default_upload_folder',
 	'ldap_simulation_file_path', 'plugin_path', 'bottom_include_page', 'top_include_page',
 	'default_home_page', 'logout_redirect_page', 'manual_url', 'logo_url', 'wiki_engine_url',
