@@ -434,6 +434,11 @@ class BugData {
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
 		}
 
+		# Ensure that category id is a valid category
+		if( $this->category_id > 0 ) {
+			category_ensure_exists( $this->category_id );
+		}
+
 		if( !is_blank( $this->duplicate_id ) && ( $this->duplicate_id != 0 ) && ( $this->id == $this->duplicate_id ) ) {
 			trigger_error( ERROR_BUG_DUPLICATE_SELF, ERROR );
 			# never returns
