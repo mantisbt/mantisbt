@@ -665,17 +665,6 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
-                <term>$g_email_set_category</term>
-                <listitem>
-                    <para>Specify whether e-mails should be sent with the category set
-                        or not. This is tested with Microsoft Outlook. More testing for
-                        this feature + other formats will be added in the future. OFF,
-                        EMAIL_CATEGORY_PROJECT_CATEGORY (format: [Project] Category).
-                        Default is OFF.
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
                 <term>$g_email_separator1</term>
                 <listitem>
                     <para>Default is str_pad('', 70, '='); This means 70 equal

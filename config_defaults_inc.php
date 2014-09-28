@@ -618,15 +618,6 @@ $g_smtp_port = 25;
 $g_email_send_using_cronjob = OFF;
 
 /**
- * Specify whether e-mails should be sent with the category set or not. This
- * is tested with Microsoft Outlook.  More testing for this feature + other
- * formats will be added in the future.
- * OFF, EMAIL_CATEGORY_PROJECT_CATEGORY (format: [Project] Category)
- * @global integer $g_email_set_category
- */
-$g_email_set_category = OFF;
-
-/**
  * email separator and padding
  * @global string $g_email_separator1
  */

@@ -425,8 +425,6 @@ define( 'FILTER_POSITION_BOTTOM', POSITION_BOTTOM );
 define( 'FILTER_POSITION_BOTH', POSITION_BOTH );
 
 # FILTER_POSITION_TOP | FILTER_POSITION_BOTTOM (bitwise OR)
-# Flags for settings E-mail categories
-define( 'EMAIL_CATEGORY_PROJECT_CATEGORY', 1 );
 
 # Custom Field types
 define( 'CUSTOM_FIELD_TYPE_STRING', 0 );
