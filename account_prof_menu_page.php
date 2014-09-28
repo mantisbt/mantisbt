@@ -73,10 +73,6 @@ if( $g_global_profiles ) {
 html_page_top( lang_get( 'manage_profiles_link' ) );
 
 if( $g_global_profiles ) {
-	print_manage_menu( 'manage_prof_menu_page.php' );
-}
-
-if( $g_global_profiles ) {
 	$t_user_id = ALL_USERS;
 } else {
 	$t_user_id = auth_get_current_user_id();
@@ -91,11 +87,6 @@ if( $g_global_profiles ) {
 			<?php  echo form_security_field( 'profile_update' )?>
 			<input type="hidden" name="action" value="add" />
 			<input type="hidden" name="user_id" value="<?php echo $t_user_id ?>" />
-			<?php
-			if( !$g_global_profiles ) {
-				print_account_menu( 'account_prof_menu_page.php' );
-			}
-			?>
 			<div class="field-container">
 				<label for="platform" class="required"><span><?php echo lang_get( 'platform' ) ?></span></label>
 				<span class="input"><input id="platform" type="text" name="platform" size="32" maxlength="32" /></span>

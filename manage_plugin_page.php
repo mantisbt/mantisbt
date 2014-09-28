@@ -53,8 +53,6 @@ access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 
 html_page_top( lang_get( 'manage_plugin_link' ) );
 
-print_manage_menu( 'manage_plugin_page.php' );
-
 $t_plugins = plugin_find_all();
 uasort( $t_plugins,
 	function ( $p_p1, $p_p2 ) {

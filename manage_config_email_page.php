@@ -259,9 +259,6 @@ function get_section_end_for_email() {
 
 html_page_top( lang_get( 'manage_email_config' ) );
 
-print_manage_menu( 'adm_permissions_report.php' );
-print_manage_config_menu( 'manage_config_email_page.php' );
-
 $t_access = current_user_get_access_level();
 $t_project = helper_get_current_project();
 

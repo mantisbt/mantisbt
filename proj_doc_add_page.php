@@ -64,9 +64,7 @@ html_page_top();
 	<td class="form-title">
 		<?php echo lang_get( 'upload_file_title' ) ?>
 	</td>
-	<td class="right">
-		<?php print_doc_menu( 'proj_doc_add_page.php' ) ?>
-	</td>
+	<td class="right">&nbsp;</td>
 </tr>
 <tr class="row-1">
 	<th class="category" width="25%">

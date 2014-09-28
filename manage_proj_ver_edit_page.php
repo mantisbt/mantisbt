@@ -66,7 +66,7 @@ access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_versio
 
 html_page_top();
 
-print_manage_menu( 'manage_proj_ver_edit_page.php' ); ?>
+?>
 
 <div id="manage-proj-version-update-div" class="form-container">
 	<form id="manage-proj-version-update-form" method="post" action="manage_proj_ver_update.php">

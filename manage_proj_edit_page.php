@@ -86,7 +86,6 @@ $t_can_manage_users = access_has_project_level( config_get( 'project_user_thresh
 
 html_page_top( project_get_field( $f_project_id, 'name' ) );
 
-print_manage_menu( 'manage_proj_edit_page.php' );
 ?>
 
 <!-- PROJECT PROPERTIES -->

@@ -72,9 +72,6 @@ extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
 html_page_top();
 
-if( profile_is_global( $f_profile_id ) ) {
-	print_manage_menu();
-}
 ?>
 
 <?php # Edit Profile Form BEGIN ?>
@@ -89,13 +86,7 @@ if( profile_is_global( $f_profile_id ) ) {
 		<input type="hidden" name="profile_id" value="<?php echo $v_id ?>" />
 		<?php echo lang_get( 'edit_profile_title' ) ?>
 	</td>
-	<td class="right">
-		<?php
-			if( !profile_is_global( $f_profile_id ) ) {
-				print_account_menu();
-			}
-		?>
-	</td>
+	<td class="right">&nbsp;</td>
 </tr>
 <tr class="row-1">
 	<th class="category" width="25%">

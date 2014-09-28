@@ -82,11 +82,6 @@ $t_excel = implode( ', ', $t_columns );
 	<form id="manage-columns-form" method="post" action="manage_config_columns_set.php">
 		<fieldset class="has-required">
 			<legend><span><?php echo lang_get( 'manage_columns_config' ) ?></span></legend>
-			<?php
-			if( $t_account_page ) {
-				print_account_menu( 'account_manage_columns_page.php' );
-			}
-			?>
 			<?php echo form_security_field( 'manage_config_columns_set' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
 			<input type="hidden" name="form_page" value="<?php echo $t_account_page ? 'account' : 'manage'; ?>" />

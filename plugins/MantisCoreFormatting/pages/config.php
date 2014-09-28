@@ -27,8 +27,6 @@ access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 
 html_page_top( lang_get( 'plugin_format_title' ) );
 
-print_manage_menu( );
-
 ?>
 
 <div id="formatting-config-div" class="form-container">
