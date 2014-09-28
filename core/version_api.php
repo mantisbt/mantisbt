@@ -236,6 +236,8 @@ function version_add( $p_project_id, $p_version, $p_released = VERSION_FUTURE, $
 
 	$t_version_id = db_insert_id( db_get_table( 'project_version' ) );
 
+	event_signal( 'EVENT_MANAGE_VERSION_CREATE', array( $t_version_id ) );
+
 	return $t_version_id;
 }
 
