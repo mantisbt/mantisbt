@@ -1592,6 +1592,7 @@ function html_button_bug_assign_to( BugData $p_bug ) {
 
 	echo '<form method="post" action="bug_update.php">';
 	echo form_security_field( 'bug_update' );
+	echo '<input type="hidden" name="last_updated" value="' . $p_bug->last_updated . '" />';
 
 	$t_button_text = lang_get( 'bug_assign_to_button' );
 	echo '<input type="submit" class="button" value="' . $t_button_text . '" />';
