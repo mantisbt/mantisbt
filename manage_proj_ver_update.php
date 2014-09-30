@@ -72,6 +72,10 @@ if( is_blank( $f_new_version ) ) {
 }
 
 $f_new_version	= trim( $f_new_version );
+if ( !is_blank($f_date_order) ) {
+	$t_date = DateTime::createFromFormat( config_get( 'calendar_date_format' ), $f_date_order );
+	$f_date_order = $t_date->getTimestamp();
+}
 
 $t_version->version = $f_new_version;
 $t_version->description = $f_description;
