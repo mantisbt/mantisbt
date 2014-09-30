@@ -624,11 +624,9 @@ $s_show_content = 'Show Content';
 
 # html_api.php
 $s_webmaster_contact_information = 'Contact <a href="mailto:%1$s" title="Contact the webmaster via e-mail.">administrator</a> for assistance';
-$s_total_queries_executed = 'Total queries executed: %1$d';
-$s_unique_queries_executed = 'Unique queries executed: %1$d';
-$s_total_query_execution_time = 'Total query execution time: %1$s seconds';
+$s_queries_executed = 'Database queries: %1$d in %2$s seconds';
 $s_page_execution_time = 'Page execution time: %1$s seconds';
-$s_memory_usage_in_kb = 'Memory usage: %1$s KiB';
+$s_memory_usage = 'Memory usage: %1$s MiB';
 
 # log_api.php
 $s_log_page_number = 'Number';
