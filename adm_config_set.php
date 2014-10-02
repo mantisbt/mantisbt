@@ -49,7 +49,7 @@ form_security_validate( 'adm_config_set' );
 
 $f_user_id = gpc_get_int( 'user_id' );
 $f_project_id = gpc_get_int( 'project_id' );
-$f_config_option = gpc_get_string( 'config_option' );
+$f_config_option = trim( gpc_get_string( 'config_option' ) );
 $f_type = gpc_get_string( 'type' );
 $f_value = gpc_get_string( 'value' );
 
