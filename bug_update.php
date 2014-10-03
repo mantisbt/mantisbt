@@ -380,6 +380,10 @@ if( $t_bug_note->note || helper_duration_to_minutes( $t_bug_note->time_tracking 
 # Add a duplicate relationship if requested.
 if( $t_updated_bug->duplicate_id !== 0 ) {
 	relationship_add( $f_bug_id, $t_updated_bug->duplicate_id, BUG_DUPLICATE );
+
+	# update last updated timestamp for duplicate bug
+	bug_update_date( $t_updated_bug->duplicate_id );
+
 	history_log_event_special( $f_bug_id, BUG_ADD_RELATIONSHIP, BUG_DUPLICATE, $t_updated_bug->duplicate_id );
 	history_log_event_special( $t_updated_bug->duplicate_id, BUG_ADD_RELATIONSHIP, BUG_HAS_DUPLICATE, $f_bug_id );
 	if( user_exists( $t_existing_bug->reporter_id ) ) {
