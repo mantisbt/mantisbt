@@ -872,6 +872,7 @@ function string_get_field_name( $p_string ) {
 		'project_id' => 'email_project',
 		'reporter_id' => 'reporter',
 		'view_state' => 'view_status',
+		'bugnotes_count' => 'bugnote',
 	);
 
 	$t_string = $p_string;

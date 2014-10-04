@@ -625,7 +625,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	$t_fields = helper_get_columns_to_view();
 	$t_n_fields = count( $t_fields );
 	for( $i = 0;$i < $t_n_fields;$i++ ) {
-		if( isset( $t_fields[$i] ) && in_array( $t_fields[$i], array( 'selection', 'edit', 'bugnotes_count', 'attachment_count' ) ) ) {
+		if( isset( $t_fields[$i] ) && in_array( $t_fields[$i], array( 'selection', 'edit', 'attachment_count' ) ) ) {
 			unset( $t_fields[$i] );
 		}
 	}
@@ -917,6 +917,7 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 	}
 
 	$p_query_clauses['order'] = array();
+	$p_query_clauses['group'] = array();
 	$t_sort_fields = explode( ',', $p_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
 	$t_dir_fields = explode( ',', $p_filter[FILTER_PROPERTY_SORT_DIRECTION] );
 
@@ -967,7 +968,11 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 						}
 					}
 				}
-
+			# if sorting by bugnote_count
+			} else if ( $c_sort == 'bugnotes_count' ){
+				$p_query_clauses['join'][] = "LEFT JOIN {bugnote} ON {bug}.id =  {bugnote}.bug_id";
+				$p_query_clauses['group'][] = "{bug}.id";
+				$p_query_clauses['order'][] = "COUNT({bugnote}.id) $c_dir";
 			# standard column
 			} else {
 				$t_sort_col = '{bug}.' . $c_sort;
@@ -2051,6 +2056,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	$t_query_clauses = filter_unique_query_clauses( $t_query_clauses );
 	$t_select_string = 'SELECT DISTINCT ' . implode( ', ', $t_query_clauses['select'] );
 	$t_from_string = ' FROM ' . implode( ', ', $t_query_clauses['from'] );
+	$t_group_string = count( $t_query_clauses['group'] ) > 0 ? " GROUP BY " . implode( ', ', $t_query_clauses['group'] ) : '';
 	$t_order_string = ' ORDER BY ' . implode( ', ', $t_query_clauses['order'] );
 	$t_join_string = count( $t_query_clauses['join'] ) > 0 ? implode( ' ', $t_query_clauses['join'] ) : ' ';
 	$t_where_string = ' WHERE '. implode( ' AND ', $t_query_clauses['project_where'] );
@@ -2060,7 +2066,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 		$t_where_string .= ' ) ';
 	}
 
-	$t_result = db_query( $t_select_string . $t_from_string . $t_join_string . $t_where_string . $t_order_string, $t_query_clauses['where_values'], $p_per_page, $t_offset );
+	$t_result = db_query( $t_select_string . $t_from_string . $t_join_string . $t_where_string . $t_group_string . $t_order_string, $t_query_clauses['where_values'], $p_per_page, $t_offset );
 
 	$t_id_array_lastmod = array();
 	while( $t_row = db_fetch_array( $t_result ) ) {
@@ -4137,7 +4143,7 @@ function print_filter_show_sort() {
 	$t_n_fields = count( $t_fields );
 	$t_shown_fields[''] = '';
 	for( $i = 0;$i < $t_n_fields;$i++ ) {
-		if( !in_array( $t_fields[$i], array( 'selection', 'edit', 'bugnotes_count', 'attachment_count' ) ) ) {
+		if( !in_array( $t_fields[$i], array( 'selection', 'edit', 'attachment_count' ) ) ) {
 			if( strpos( $t_fields[$i], 'custom_' ) === 0 ) {
 				$t_field_name = string_display( lang_get_defaulted( utf8_substr( $t_fields[$i], utf8_strlen( 'custom_' ) ) ) );
 			} else {
