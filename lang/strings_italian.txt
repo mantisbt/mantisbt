@@ -1180,6 +1180,7 @@ $s_month_september = 'Settembre';
 $s_month_october = 'Ottobre';
 $s_month_november = 'Novembre';
 $s_month_december = 'Dicembre';
+$s_timeline_more = 'Altri eventi...';
 $s_missing_error_string = 'Manca la stringa di errore: %1$s';
 $MANTIS_ERROR[ERROR_GENERIC] = 'Si è verificato un errore nell\'esecuzione dell\'azione.  Potresti ritenere opportuno avvisare dell\'errore l\'amministratore locale.';
 $MANTIS_ERROR[ERROR_SQL] = 'È stato riscontrato un errore SQL.';

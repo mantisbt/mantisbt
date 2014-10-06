@@ -39,6 +39,7 @@
  * @file
  *
  * @author Fohanno
+ * @author Gwenn-Ael
  */
 
 $s_plugin_format_title = 'Furmadiñ MantisBT';
@@ -47,6 +48,7 @@ $s_plugin_format_config = 'Kefluniadur';
 $s_plugin_format_process_text = 'Skridtreterezh';
 $s_plugin_format_process_text_warning_notice = 'Arabat diweredekaat hep gouzout ar pezh emaoc\'h oc\'h ober. Pa vez diweredekaet e c\'hall bezañ tagadennoù « cross-site scripting » (XSS).';
 $s_plugin_format_process_urls = 'Tretañ an URL';
-$s_plugin_format_process_buglinks = 'Liammoù MantisBT (draen / notenn diwar-benn un draen)';
+$s_plugin_format_process_buglinks = 'Liammoù diabarzh MantisBT (draen / notenn diwar-benn un draen)';
+$s_plugin_format_process_buglinks_info = 'Termenañ a ra ho kefluniadur  ar valizenn <em>Issue</em> evel « <literal>%s</literal> » ha <em>Issue Note</em> evel « <literal>%s</literal> »';
 $s_plugin_format_enabled = 'Gweredekaet';
 $s_plugin_format_disabled = 'Diweredekaet';

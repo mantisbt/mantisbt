@@ -41,6 +41,7 @@
  * @author HanV
  * @author McDutchie
  * @author Siebrand
+ * @author Sjoerddebruin
  * @author Tvdm
  */
 
@@ -1187,6 +1188,7 @@ $s_month_september = 'september';
 $s_month_october = 'oktober';
 $s_month_november = 'november';
 $s_month_december = 'december';
+$s_timeline_title = 'Tijdlijn';
 $s_missing_error_string = 'Ontbrekend foutbericht: %1$s';
 $MANTIS_ERROR[ERROR_GENERIC] = 'Tijdens het uitvoeren van deze handeling is een fout opgetreden. Meld dit aan uw systeembeheerder.';
 $MANTIS_ERROR[ERROR_SQL] = 'Er is een SQL-fout opgetreden.';
