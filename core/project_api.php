@@ -665,15 +665,20 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 	}
 
 	if( $p_include_global_users ) {
-		$t_query = 'SELECT id, username, realname, access_level
-				FROM {user}
-				WHERE enabled = ' . db_param() . '
-					AND access_level ' . $t_global_access_clause;
+		static $s_global_users;
+		if( !isset( $s_global_users[$t_global_access_clause] ) ) {
+			$t_query = 'SELECT *
+					FROM {user}
+					WHERE enabled = ' . db_param() . '
+						AND access_level ' . $t_global_access_clause;
 
-		$t_result = db_query( $t_query, array( $t_on ) );
-		while( $t_row = db_fetch_array( $t_result ) ) {
-			$t_users[(int)$t_row['id']] = $t_row;
+			$t_result = db_query( $t_query, array( $t_on ) );
+			while( $t_row = db_fetch_array( $t_result ) ) {
+				user_cache_database_result( $t_row );
+				$s_global_users[$t_global_access_clause][$t_row['id']] = $t_row;
+			}
 		}
+		$t_users = $s_global_users[$t_global_access_clause];
 	}
 
 	if( $c_project_id != ALL_PROJECTS ) {
