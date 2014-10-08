@@ -218,11 +218,19 @@ if( $t_filter_user_value != META_FILTER_NONE && $t_filter_user_value != ALL_USER
 } else {
 	$t_users_list = array();
 }
+
 while( $t_row = db_fetch_array( $t_result ) ) {
 	$t_user_id = $t_row['user_id'];
+	$t_users_array[$t_row['user_id']] = $t_row['user_id'];
+}
+
+user_cache_array_rows( $t_users_array );
+
+foreach( $t_users_array as $t_user_id ) {
 	$t_users_list[$t_user_id] = user_get_name( $t_user_id );
 }
 asort( $t_users_list );
+
 # Prepend '[any]' and 'All Users' to the list
 $t_users_list = array(
 		META_FILTER_NONE => '[' . lang_get( 'any' ) . ']',
