@@ -218,7 +218,8 @@ html_page_top( lang_get( 'manage_projects_link' ) );
 			<?php echo form_security_field( 'manage_proj_cat_add' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo ALL_PROJECTS ?>" />
 			<input type="text" name="name" size="32" maxlength="128" />
-			<input type="submit" class="button" value="<?php echo lang_get( 'add_category_button' ) ?>" />
+			<input type="submit" name="add_category" class="button" value="<?php echo lang_get( 'add_category_button' ) ?>" />
+			<input type="submit" name="add_and_edit_category" class="button" value="<?php echo lang_get( 'add_and_edit_category_button' ) ?>" />
 		</fieldset>
 	</form>
 <?php } ?>
