@@ -155,6 +155,7 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 	$t_private_bugnote_threshold = config_get( 'private_bugnote_threshold' );
 	$t_private_bugnote_visible = access_has_bug_level( config_get( 'private_bugnote_threshold' ), $p_bug_id, $t_user_id );
 	$t_tag_view_threshold = config_get( 'tag_view_threshold' );
+	$t_view_attachments_threshold = config_get( 'view_attachments_threshold' );
 	$t_show_monitor_list_threshold = config_get( 'show_monitor_list_threshold' );
 	$t_show_handler_threshold = config_get( 'view_handler_threshold' );
 
@@ -216,6 +217,13 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 		// tags
 		if( $v_type == TAG_ATTACHED || $v_type == TAG_DETACHED || $v_type == TAG_RENAMED ) {
 			if( !access_has_bug_level( $t_tag_view_threshold, $p_bug_id, $t_user_id ) ) {
+				continue;
+			}
+		}
+
+		# attachments
+		if( $v_type == FILE_ADDED || $v_type == FILE_DELETED ) {
+			if( !access_has_bug_level( $t_view_attachments_threshold, $p_bug_id, $t_user_id ) ) {
 				continue;
 			}
 		}
