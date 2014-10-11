@@ -105,7 +105,6 @@ function print_version_header( $p_version_id ) {
  */
 function print_project_header_changelog ( $p_project_name ) {
 	echo '<br /><span class="pagetitle">', string_display_line( $p_project_name ), ' - ', lang_get( 'changelog' ), '</span><br />';
-	echo '<tt>';
 }
 
 $t_issues_found = false;
@@ -341,9 +340,6 @@ foreach( $t_project_ids as $t_project_id ) {
 		$t_bug_string = $t_issues_resolved == 1 ? 'bug' : 'bugs';
 		echo '<br />[' . $t_issues_resolved . ' ' . lang_get( $t_bug_string ) . ']<br />';
 
-	}
-	if( $t_project_header_printed ) {
-		echo '</tt>';
 	}
 }
 

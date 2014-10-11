@@ -88,7 +88,6 @@ function print_version_header( array $p_version_row ) {
 		$t_scheduled_release_date = '';
 	}
 
-	echo '<tt>';
 	echo '<br />', $t_release_title, $t_scheduled_release_date, lang_get( 'word_separator' );
 	print_bracket_link( 'view_all_set.php?type=1&amp;temporary=y&amp;' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id . '&amp;' . filter_encode_field_and_value( FILTER_PROPERTY_TARGET_VERSION, $t_version_name ), lang_get( 'view_bugs_link' ) );
 	echo '<br />';
@@ -359,7 +358,7 @@ foreach( $t_project_ids as $t_project_id ) {
 		if( $t_issues_planned > 0 ) {
 			echo '<br />';
 			echo sprintf( lang_get( 'resolved_progress' ), $t_issues_resolved, $t_issues_planned, $t_progress );
-			echo '<br /></tt>';
+			echo '<br />';
 		}
 	}
 }
