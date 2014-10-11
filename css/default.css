@@ -833,7 +833,6 @@ div.timeline p { margin-left: 3px; }
 	display: block;
 	line-height: 22px;
 	padding: 5px 15px;
-	text-transform: uppercase;
 }
 .nav > li:hover > a, .nav > a:hover {
 	background-color: gray;
@@ -865,7 +864,6 @@ div.timeline p { margin-left: 3px; }
 }
 .nav ul.subs > li > a {
 	margin-bottom: 10px;
-	text-transform: uppercase;
 }
 .nav ul.subs > li li {
 	float: none;
