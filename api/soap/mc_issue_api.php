@@ -1165,13 +1165,27 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
 		);
 	}
 
+	$t_reporter_id = isset( $p_note['reporter'] ) ? mci_get_user_id( $p_note['reporter'] )  : 0;
+	if( $t_reporter_id == 0 ) {
+		$t_reporter_id = $t_user_id;
+	} else {
+		if( $t_reporter_id != $t_user_id ) {
+
+			# Make sure that active user has access level required to specify a different reporter.
+			$t_specify_reporter_access_level = config_get( 'webservice_specify_reporter_on_add_access_level_threshold' );
+			if( !access_has_project_level( $t_specify_reporter_access_level, $t_project_id, $t_user_id ) ) {
+				return mci_soap_fault_access_denied( $t_user_id, "Active user does not have access level required to specify a different issue note reporter" );
+			}
+		}
+	}
+
 	$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
 
 	$t_note_type = isset( $p_note['note_type'] ) ? (int)$p_note['note_type'] : BUGNOTE;
 	$t_note_attr = isset( $p_note['note_type'] ) ? $p_note['note_attr'] : '';
 
 	log_event( LOG_WEBSERVICE, 'adding bugnote to issue \'' . $p_issue_id . '\'' );
-	return bugnote_add( $p_issue_id, $p_note['text'], mci_get_time_tracking_from_note( $p_issue_id, $p_note ), $t_view_state_id == VS_PRIVATE, $t_note_type, $t_note_attr, $t_user_id );
+	return bugnote_add( $p_issue_id, $p_note['text'], mci_get_time_tracking_from_note( $p_issue_id, $p_note ), $t_view_state_id == VS_PRIVATE, $t_note_type, $t_note_attr, $t_reporter_id );
 }
 
 /**
