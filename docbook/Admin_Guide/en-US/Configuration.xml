@@ -3811,6 +3811,13 @@ or
                     <para>Minimum global access level required to access the administrator webservices.</para>
                 </listitem>
             </varlistentry>
+            <varlistentry>
+                <term>$g_webservice_specify_reporter_on_add_access_level_threshold</term>
+                <listitem>
+                    <para>Minimum project access level required for caller to be able to
+                    specify reporter when adding issues or issue notes. Defaults to DEVELOPER.</para>
+                </listitem>
+            </varlistentry>
         </variablelist>
 
 	<section id="admin.config.soap.disable">
