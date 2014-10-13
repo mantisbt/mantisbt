@@ -98,6 +98,9 @@ function require_mantis_core() {
 # Set error reporting to the level to which Zend Framework code must comply.
 error_reporting( E_ALL | E_STRICT );
 
+# Set default timezone to avoid errors
+date_default_timezone_set( 'UTC' );
+
 # Determine the root, library, and tests directories of the framework
 # distribution.
 $g_mantisRoot = dirname( dirname( __FILE__ ) );
