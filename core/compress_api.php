@@ -24,7 +24,6 @@
  * @link http://www.mantisbt.org
  *
  * @uses constant_inc.php
- * @uses php_api.php
  * @uses utility_api.php
  */
 
