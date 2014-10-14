@@ -236,33 +236,35 @@ if( !isset( $g_login_anonymous ) ) {
 	$g_login_anonymous = true;
 }
 
-# Attempt to set the current timezone to the user's desired value
-# Note that PHP 5.1 on RHEL/CentOS doesn't support the timezone functions
-# used here so we just skip this action on RHEL/CentOS platforms.
-if( function_exists( 'timezone_identifiers_list' ) ) {
-	if( in_array( config_get_global( 'default_timezone' ), timezone_identifiers_list() ) ) {
-		# if a default timezone is set in config, set it here, else we use php.ini's value
-		# having a timezone set avoids a php warning
-		date_default_timezone_set( config_get_global( 'default_timezone' ) );
-	} else {
-		# To ensure proper detection of timezone settings issues, we must not
-		# initialize the default timezone when executing admin checks
-		if( basename( $g_short_path ) != 'check' ) {
-			config_set_global( 'default_timezone', date_default_timezone_get(), true );
-		}
+# Set the current timezone
+if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
+	# Get MantisBT default timezone
+	$t_default_timezone = config_get_global( 'default_timezone' );
+	if( !in_array( $t_default_timezone, timezone_identifiers_list() ) ) {
+		# If not valid, fallback to system timezone, or UTC if not set
+		$t_default_timezone = @date_default_timezone_get();
+		config_set_global( 'default_timezone', $t_default_timezone, true );
 	}
 
+	# Now determine current timezone according to user's preferences
 	require_api( 'authentication_api.php' );
 	if( auth_is_user_authenticated() ) {
 		require_api( 'user_pref_api.php' );
-
 		$t_user_timezone = user_pref_get_pref( auth_get_current_user_id(), 'timezone' );
-		if( !is_blank( $t_user_timezone ) ) {
-			date_default_timezone_set( $t_user_timezone );
+
+		# fallback to default timezone if not valid
+		if( in_array( $t_user_timezone, timezone_identifiers_list() ) ) {
+			$t_user_timezone = $t_default_timezone;
 		}
+	} else {
+		$t_user_timezone = $t_default_timezone;
 	}
+
+	date_default_timezone_set( $t_user_timezone );
+	unset( $t_user_timezone, $t_default_timezone );
 }
 
+# Cache current user's collapse API data
 if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 	require_api( 'collapse_api.php' );
 	collapse_cache_token();
