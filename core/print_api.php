@@ -1918,11 +1918,17 @@ function print_timezone_option_list( $p_timezone ) {
 
 	$t_identifiers = timezone_identifiers_list( DateTimeZone::ALL );
 
-	foreach ( $t_identifiers as $t_identifier ) {
-		$t_zone = explode( '/', $t_identifier );
-		if( isset( $t_zone[1] ) != '' ) {
-			$t_locations[$t_zone[0]][$t_zone[0] . '/' . $t_zone[1]] = array( str_replace( '_', ' ', $t_zone[1] ), $t_identifier );
+	foreach( $t_identifiers as $t_identifier ) {
+		$t_zone = explode( '/', $t_identifier, 2 );
+		if( isset( $t_zone[1] ) ) {
+			$t_id = $t_zone[1];
+		} else {
+			$t_id = $t_identifier;
 		}
+		$t_locations[$t_zone[0]][$t_identifier] = array(
+			str_replace( '_', ' ', $t_id ),
+			$t_identifier
+		);
 	}
 
 	foreach( $t_locations as $t_continent => $t_locations ) {
