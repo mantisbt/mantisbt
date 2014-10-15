@@ -182,6 +182,14 @@ class ImportXML {
 					$t_bug->description = str_replace( $this->source_->issuelink . $t_old_id2, $this->getReplacementString( $this->source_->issuelink, $t_old_id2 ), $t_bug->description );
 				}
 			}
+			# replace links in steps to reproduce
+			preg_match_all( $t_bug_link_regexp, $t_bug->steps_to_reproduce, $t_matches );
+			if( is_array( $t_matches[3] ) && count( $t_matches[3] ) > 0 ) {
+				$t_content_replaced = true;
+				foreach ( $t_matches[3] as $t_old_id2 ) {
+					$t_bug->steps_to_reproduce = str_replace( $this->source_->issuelink . $t_old_id2, $this->getReplacementString( $this->source_->issuelink, $t_old_id2 ), $t_bug->steps_to_reproduce );
+				}
+			}
 			# replace links in additional information
 			preg_match_all( $t_bug_link_regexp, $t_bug->additional_information, $t_matches );
 			if( is_array( $t_matches[3] ) && count( $t_matches[3] ) > 0 ) {
