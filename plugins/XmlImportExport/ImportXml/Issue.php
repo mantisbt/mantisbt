@@ -321,7 +321,7 @@ class ImportXml_Issue implements ImportXml_Interface {
 	*
 	 * @param string  $p_username      Username as imported.
 	 * @param integer $p_squash_userid Fallback userid.
-     * @return integer
+	 * @return integer
 	*/
 	private function get_user_id( $p_username, $p_squash_userid = 0 ) {
 		$t_user_id = user_get_id_by_name( $p_username );

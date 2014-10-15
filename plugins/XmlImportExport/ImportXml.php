@@ -53,7 +53,7 @@ class SourceData {
 	/**
 	 * Get url to view issue
 	 * @param integer $p_issue_id An issue identifier.
-     * @return string
+	 * @return string
 	 */
 	public function get_issue_url( $p_issue_id ) {
 		return $this->urlbase . 'view.php?id=' . $p_issue_id;
@@ -63,7 +63,7 @@ class SourceData {
 	 * Get url to view bugnote
 	 * @param integer $p_issue_id An issue identifier.
 	 * @param integer $p_note_id  A note identifier.
-     * @return string
+	 * @return string
 	 */
 	public function get_note_url( $p_issue_id, $p_note_id ) {
 		return $this->urlbase . 'view.php?id=' . $p_issue_id . '#c' . $p_note_id;
@@ -225,7 +225,7 @@ class ImportXML {
 	 *
 	 * @param string $p_oldLinkTag Old link tag.
 	 * @param string $p_oldId      Old issue identifier.
-     * @return string
+	 * @return string
 	 */
 	private function getReplacementString( $p_oldLinkTag, $p_oldId ) {
 		$t_link_tag = config_get( 'bug_link_tag' );
@@ -265,7 +265,7 @@ class ImportXML {
 	/**
 	 * Get importer object
 	 * @param string $p_element_name Name.
-     * @return ImportXml_Issue
+	 * @return ImportXml_Issue
 	 */
 	private function get_importer_object( $p_element_name ) {
 		$t_importer = null;
