@@ -96,7 +96,7 @@ class BugData {
 	protected $summary = '';
 	protected $sponsorship_total = 0;
 	protected $sticky = 0;
-	protected $due_date = 0;
+	protected $due_date = '';
 
 	# omitted:
 	# var $bug_text_id
