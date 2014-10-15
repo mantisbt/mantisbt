@@ -173,7 +173,7 @@ class ImportXML {
 			$t_bug = bug_get( $t_new_id, true );
 			$t_content_replaced = false;
 
-			$t_bug_link_regexp = '/(^|[^\w])(' . preg_quote( $this->source_->issuelink, '/' ) . ')(\d+)\b/e';
+			$t_bug_link_regexp = '/(^|[^\w])(' . preg_quote( $this->source_->issuelink, '/' ) . ')(\d+)\b/';
 			# replace links in description
 			preg_match_all( $t_bug_link_regexp, $t_bug->description, $t_matches );
 			if( is_array( $t_matches[3] ) && count( $t_matches[3] ) > 0 ) {
