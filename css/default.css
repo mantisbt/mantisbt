@@ -627,6 +627,7 @@ div.form-container .checkbox,
 div.form-container .select,
 div.form-container .textarea,
 div.form-container .input,
+div.form-container .file,
 .display-value {
 	position: relative;
 	float: left;
@@ -638,6 +639,7 @@ div.form-container .checkbox input,
 div.form-container .select select,
 div.form-container .textarea textarea,
 div.form-container .input  input,
+div.form-container .file  input,
 .display-value span {
 	max-width: 98%;
 }
