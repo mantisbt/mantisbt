@@ -176,7 +176,7 @@ class ImportXML {
 			$t_bug_link_regexp = '/(^|[^\w])(' . preg_quote( $this->source_->issuelink, '/' ) . ')(\d+)\b/e';
 			# replace links in description
 			preg_match_all( $t_bug_link_regexp, $t_bug->description, $t_matches );
-			if( is_array( $t_matches[3] && count( $t_matches[3] ) > 0 ) ) {
+			if( is_array( $t_matches[3] ) && count( $t_matches[3] ) > 0 ) {
 				$t_content_replaced = true;
 				foreach ( $t_matches[3] as $t_old_id2 ) {
 					$t_bug->description = str_replace( $this->source_->issuelink . $t_old_id2, $this->getReplacementString( $this->source_->issuelink, $t_old_id2 ), $t_bug->description );
@@ -184,7 +184,7 @@ class ImportXML {
 			}
 			# replace links in additional information
 			preg_match_all( $t_bug_link_regexp, $t_bug->additional_information, $t_matches );
-			if( is_array( $t_matches[3] && count( $t_matches[3] ) > 0 ) ) {
+			if( is_array( $t_matches[3] ) && count( $t_matches[3] ) > 0 ) {
 				$t_content_replaced = true;
 				foreach ( $t_matches[3] as $t_old_id3 ) {
 					$t_bug->additional_information = str_replace( $this->source_->issuelink . $t_old_id3, $this->getReplacementString( $this->source_->issuelink, $t_old_id3 ), $t_bug->additional_information );
