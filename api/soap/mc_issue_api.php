@@ -621,14 +621,14 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 	$t_projection_id = isset( $p_issue['projection'] ) ? mci_get_projection_id( $p_issue['projection'] ) : config_get( 'default_bug_resolution' );
 	$t_eta_id = isset( $p_issue['eta'] ) ? mci_get_eta_id( $p_issue['eta'] ) : config_get( 'default_bug_eta' );
 	$t_view_state_id = isset( $p_issue['view_state'] ) ?  mci_get_view_state_id( $p_issue['view_state'] ) : config_get( 'default_bug_view_status' );
-	$t_reporter_id = isset( $p_issue['reporter'] ) ? mci_get_user_id( $p_issue['reporter'] )  : 0;
 	$t_summary = $p_issue['summary'];
 	$t_description = $p_issue['description'];
 	$t_notes = isset( $p_issue['notes'] ) ? $p_issue['notes'] : array();
 
-	if( $t_reporter_id == 0 ) {
-		$t_reporter_id = $t_user_id;
-	} else {
+	# TODO: #17777: Add test case for mc_issue_add() and mc_issue_note_add() reporter override
+	if( isset( $p_issue['reporter'] ) ) {
+		$t_reporter_id = mci_get_user_id( $p_issue['reporter'] );
+
 		if( $t_reporter_id != $t_user_id ) {
 			# Make sure that active user has access level required to specify a different reporter.
 			$t_specify_reporter_access_level = config_get( 'webservice_specify_reporter_on_add_access_level_threshold' );
@@ -636,6 +636,8 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 				return mci_soap_fault_access_denied( $t_user_id, 'Active user does not have access level required to specify a different issue reporter' );
 			}
 		}
+	} else {
+		$t_reporter_id = $t_user_id;
 	}
 
 	if( ( $t_project_id == 0 ) || !project_exists( $t_project_id ) ) {
@@ -1165,18 +1167,19 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
 		);
 	}
 
-	$t_reporter_id = isset( $p_note['reporter'] ) ? mci_get_user_id( $p_note['reporter'] )  : 0;
-	if( $t_reporter_id == 0 ) {
-		$t_reporter_id = $t_user_id;
-	} else {
-		if( $t_reporter_id != $t_user_id ) {
+	# TODO: #17777: Add test case for mc_issue_add() and mc_issue_note_add() reporter override
+	if( isset( $p_note['reporter'] ) ) {
+		$t_reporter_id = mci_get_user_id( $p_note['reporter'] );
 
+		if( $t_reporter_id != $t_user_id ) {
 			# Make sure that active user has access level required to specify a different reporter.
 			$t_specify_reporter_access_level = config_get( 'webservice_specify_reporter_on_add_access_level_threshold' );
 			if( !access_has_project_level( $t_specify_reporter_access_level, $t_project_id, $t_user_id ) ) {
 				return mci_soap_fault_access_denied( $t_user_id, "Active user does not have access level required to specify a different issue note reporter" );
 			}
 		}
+	} else {
+		$t_reporter_id = $t_user_id;
 	}
 
 	$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
