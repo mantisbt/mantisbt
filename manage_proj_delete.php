@@ -61,6 +61,8 @@ helper_ensure_confirmed( lang_get( 'project_delete_msg' ) .
 		'<br/>' . lang_get( 'project_name_label' ) . lang_get( 'word_separator' ) . $t_project_name,
 		lang_get( 'project_delete_button' ) );
 
+event_signal( 'EVENT_MANAGE_PROJECT_DELETED', array( $f_project_id ) );
+
 project_delete( $f_project_id );
 
 form_security_purge( 'manage_proj_delete' );
