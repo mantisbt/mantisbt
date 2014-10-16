@@ -564,7 +564,7 @@ function print_extended_project_browser( $p_trace = Array(), $p_project_id = nul
 		echo 'subprojects[\'' . $t_id . '\'] = new Object();' . "\n";
 
 		$t_name = project_get_field( $t_id, 'name' );
-		$c_name = addslashes( $t_name );
+		$c_name = addslashes( str_replace( array("\r", "\n"), '', $t_name ) );
 		echo 'subprojects[\'' . $t_id . '\'][\'' . $t_id . '\'] = \'' . $c_name . '\';' . "\n";
 
 		$t_projects[$t_id] = $t_name;
