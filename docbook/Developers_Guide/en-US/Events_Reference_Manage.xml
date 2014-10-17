@@ -117,6 +117,23 @@
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.manage.project.delete">
+			<title>EVENT_MANAGE_PROJECT_DELETE (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do pre-processing of project
+					deletion. This event is triggered prior to the project
+					removal from the database.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: Project ID</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
 		<blockquote id="dev.eventref.manage.version.create">
 			<title>EVENT_MANAGE_VERSION_CREATE (Execute)</title>
 
