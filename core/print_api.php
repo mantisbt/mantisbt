@@ -1911,11 +1911,6 @@ function print_bug_attachment_preview_image( array $p_attachment ) {
  * @return void
  */
 function print_timezone_option_list( $p_timezone ) {
-	if( !function_exists( 'timezone_identifiers_list' ) ) {
-		echo "\t" . '<option value="' . $p_timezone . '" selected="selected">' . $p_timezone . '</option>' . "\n";
-		return;
-	}
-
 	$t_identifiers = timezone_identifiers_list( DateTimeZone::ALL );
 
 	foreach( $t_identifiers as $t_identifier ) {
