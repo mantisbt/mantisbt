@@ -47,13 +47,11 @@ if( $t_config_default_timezone ) {
 		)
 	);
 } else {
-	$t_php_default_timezone = ini_get( 'date.timezone' );
 	check_print_test_row(
-		'Default timezone has been specified in config_inc.php (default_timezone option) or php.ini (date.timezone directive)',
-		in_array( $t_php_default_timezone, timezone_identifiers_list() ),
+		'Default timezone has not been specified in config_inc.php (default_timezone option)',
+		false,
 		array(
-			true => 'Default timezone (specified by the date.timezone directive in php.ini) is: ' . htmlentities( $t_php_default_timezone ),
-			false => 'Invalid timezone \'' . htmlentities( $t_php_default_timezone ) . '\' specified for the date.timezone php.ini directive.'
+			false => 'Default timezone should be specified in config_inc.php.'
 		)
 	);
 }
