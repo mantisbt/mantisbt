@@ -14,6 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
+access_ensure_project_level( plugin_config_get( 'import_threshold' ) );
+
 auth_reauthenticate( );
 
 html_page_top( plugin_lang_get( 'import' ) );

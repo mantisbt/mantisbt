@@ -39,7 +39,7 @@ class XmlImportExportPlugin extends MantisPlugin {
 	function register( ) {
 		$this->name = plugin_lang_get( 'title' );
 		$this->description = plugin_lang_get( 'description' );
-		$this->page = '';
+		$this->page = "config_page";
 
 		$this->version = '1.0';
 		$this->requires = array(
@@ -54,6 +54,17 @@ class XmlImportExportPlugin extends MantisPlugin {
 	/**
 	 * Default plugin configuration.
 	 */
+	public function config() {
+		return array(
+			"import_threshold" => ADMINISTRATOR,
+			"export_threshold" => DEVELOPER,
+		);
+	}
+
+	/**
+	 * Plugin hooks
+	 * @return array
+	 */
 	function hooks( ) {
 		$hooks = array(
 			'EVENT_MENU_MANAGE' => 'import_issues_menu',
@@ -67,6 +78,9 @@ class XmlImportExportPlugin extends MantisPlugin {
 	}
 
 	function export_issues_menu( ) {
+		if( !access_has_project_level( plugin_config_get( 'export_threshold' ) ) ) {
+			return array();
+		}
 		return array( '<a href="' . plugin_page( 'export' ) . '">' . plugin_lang_get( 'export' ) . '</a>', );
 	}
 

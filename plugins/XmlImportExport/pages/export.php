@@ -20,6 +20,8 @@
 
 require_once( 'core.php' );
 
+access_ensure_project_level( plugin_config_get( 'export_threshold' ) );
+
 auth_ensure_user_authenticated( );
 helper_begin_long_process( );
 

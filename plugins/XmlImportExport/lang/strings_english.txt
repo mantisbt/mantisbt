@@ -35,7 +35,14 @@ $s_plugin_XmlImportExport_description = 'Adds XML based import and export capabi
 $s_plugin_XmlImportExport_import = 'Import issues';
 $s_plugin_XmlImportExport_export = 'XML Export';
 
+$s_plugin_XmlImportExport_config_title = 'XML Import/Export Access Levels Configuration';
+$s_plugin_XmlImportExport_import_threshold = 'Import issues';
+$s_plugin_XmlImportExport_export_threshold = 'Export issues';
+
+$s_plugin_XmlImportExport_action_update = 'Update';
+
 $s_plugin_XmlImportExport_importing_in_project = 'Importing issues in project:';
+
 $s_plugin_XmlImportExport_import_options = 'Import options';
 
 $s_plugin_XmlImportExport_cross_references = 'Cross references';
