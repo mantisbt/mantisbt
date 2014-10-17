@@ -669,7 +669,7 @@ class MantisMenu {
 				}
 
 				# doc links
-				$t_documentation_html = config_get( 'manual_url' );
+				$t_documentation_html = config_get_global( 'manual_url' );
 				$t_links['user_documentation'] = $t_documentation_html;
 				$t_links['project_documentation'] = 'proj_doc_page.php';
 				if( file_allow_project_upload() ) {

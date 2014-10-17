@@ -67,7 +67,7 @@ function lang_load( $p_lang, $p_dir = null ) {
 	}
 
 	if( $p_dir === null ) {
-		include_once( config_get( 'language_path' ) . 'strings_' . $p_lang . '.txt' );
+		include_once( config_get_global( 'language_path' ) . 'strings_' . $p_lang . '.txt' );
 	} else {
 		if( is_file( $p_dir . 'strings_' . $p_lang . '.txt' ) ) {
 			include_once( $p_dir . 'strings_' . $p_lang . '.txt' );
@@ -135,11 +135,11 @@ function lang_get_default() {
  * @return string
  */
 function lang_map_auto() {
-	$t_lang = config_get( 'fallback_language' );
+	$t_lang = config_get_global( 'fallback_language' );
 
 	if( isset( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ) {
 		$t_accept_langs = explode( ',', $_SERVER['HTTP_ACCEPT_LANGUAGE'] );
-		$t_auto_map = config_get( 'language_auto_map' );
+		$t_auto_map = config_get_global( 'language_auto_map' );
 
 		# Expand language map
 		$t_auto_map_exp = array();
@@ -211,14 +211,14 @@ function lang_push( $p_lang = null ) {
 	$t_lang = $p_lang;
 
 	if( null === $t_lang ) {
-		$t_lang = config_get( 'default_language' );
+		$t_lang = config_get_global( 'default_language' );
 	}
 
 	# don't allow 'auto' as a language to be pushed onto the stack
 	#  The results from auto are always the local user, not what the
 	#  override wants, unless this is the first language setting
 	if( ( 'auto' == $t_lang ) && ( 0 < count( $g_lang_overrides ) ) ) {
-		$t_lang = config_get( 'fallback_language' );
+		$t_lang = config_get_global( 'fallback_language' );
 	}
 
 	$g_lang_overrides[] = $t_lang;
@@ -294,7 +294,7 @@ function lang_get( $p_string, $p_lang = null ) {
 	} else {
 		$t_plugin_current = plugin_get_current();
 		if( !is_null( $t_plugin_current ) ) {
-			lang_load( $t_lang, config_get( 'plugin_path' ) . $t_plugin_current . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR );
+			lang_load( $t_lang, config_get_global( 'plugin_path' ) . $t_plugin_current . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR );
 			if( lang_exists( $p_string, $t_lang ) ) {
 				return $g_lang_strings[$t_lang][$p_string];
 			}

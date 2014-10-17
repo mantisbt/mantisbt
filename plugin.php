@@ -33,7 +33,7 @@ require_api( 'constant_inc.php' );
 require_api( 'gpc_api.php' );
 require_api( 'plugin_api.php' );
 
-$t_plugin_path = config_get( 'plugin_path' );
+$t_plugin_path = config_get_global( 'plugin_path' );
 
 $f_page = gpc_get_string( 'page' );
 

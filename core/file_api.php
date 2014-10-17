@@ -179,7 +179,7 @@ function file_can_delete_bug_attachments( $p_bug_id, $p_uploader_user_id = null 
  * @return array
  */
 function file_get_icon_url( $p_display_filename ) {
-	$t_file_type_icons = config_get( 'file_type_icons' );
+	$t_file_type_icons = config_get_global( 'file_type_icons' );
 
 	$t_ext = utf8_strtolower( pathinfo( $p_display_filename, PATHINFO_EXTENSION ) );
 	if( is_blank( $t_ext ) || !isset( $t_file_type_icons[$t_ext] ) ) {
@@ -187,7 +187,7 @@ function file_get_icon_url( $p_display_filename ) {
 	}
 
 	$t_name = $t_file_type_icons[$t_ext];
-	return array( 'url' => config_get( 'icon_path' ) . 'fileicons/' . $t_name, 'alt' => $t_ext );
+	return array( 'url' => config_get_global( 'icon_path' ) . 'fileicons/' . $t_name, 'alt' => $t_ext );
 }
 
 /**
@@ -240,7 +240,7 @@ function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
 		}
 	}
 
-	$t_path = config_get( 'absolute_path_default_upload_folder' );
+	$t_path = config_get_global( 'absolute_path_default_upload_folder' );
 	if( !is_blank( $t_path ) ) {
 		$t_diskfile = file_path_combine( $t_path, $t_basename );
 
@@ -651,11 +651,11 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 	}
 
 	if( $t_project_id == ALL_PROJECTS ) {
-		$t_file_path = config_get( 'absolute_path_default_upload_folder' );
+		$t_file_path = config_get_global( 'absolute_path_default_upload_folder' );
 	} else {
 		$t_file_path = project_get_field( $t_project_id, 'file_path' );
 		if( is_blank( $t_file_path ) ) {
-			$t_file_path = config_get( 'absolute_path_default_upload_folder' );
+			$t_file_path = config_get_global( 'absolute_path_default_upload_folder' );
 		}
 	}
 
@@ -864,7 +864,7 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 	# If finfo is available (always true for PHP >= 5.3.0) we can use it to determine the MIME type of files
 	$t_finfo_available = false;
 	if( class_exists( 'finfo' ) ) {
-		$t_info_file = config_get( 'fileinfo_magic_db_file' );
+		$t_info_file = config_get_global( 'fileinfo_magic_db_file' );
 
 		if( is_blank( $t_info_file ) ) {
 			$t_finfo = new finfo( FILEINFO_MIME );
@@ -936,12 +936,12 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 
 	$t_path_from = project_get_field( $t_project_id_from, 'file_path' );
 	if( is_blank( $t_path_from ) ) {
-		$t_path_from = config_get( 'absolute_path_default_upload_folder', null, null, $t_project_id_from );
+		$t_path_from = config_get_global( 'absolute_path_default_upload_folder' );
 	}
 	file_ensure_valid_upload_path( $t_path_from );
 	$t_path_to = project_get_field( $p_project_id_to, 'file_path' );
 	if( is_blank( $t_path_to ) ) {
-		$t_path_to = config_get( 'absolute_path_default_upload_folder', null, null, $p_project_id_to );
+		$t_path_to = config_get_global( 'absolute_path_default_upload_folder' );
 	}
 	file_ensure_valid_upload_path( $t_path_to );
 	if( $t_path_from == $t_path_to ) {

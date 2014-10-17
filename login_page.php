@@ -69,7 +69,7 @@ if( auth_is_user_authenticated() && !current_user_is_anonymous() ) {
 	if( !is_blank( $f_return ) ) {
 		print_header_redirect( $f_return, false, false, true );
 	} else {
-		print_header_redirect( config_get( 'default_home_page' ) );
+		print_header_redirect( config_get_global( 'default_home_page' ) );
 	}
 }
 
@@ -77,7 +77,7 @@ if( auth_is_user_authenticated() && !current_user_is_anonymous() ) {
 if( auth_automatic_logon_bypass_form() ) {
 	$t_uri = 'login.php';
 
-	if( ON == config_get( 'allow_anonymous_login' ) ) {
+	if( ON == config_get_global( 'allow_anonymous_login' ) ) {
 		$t_uri = 'login_anon.php';
 	}
 
@@ -146,7 +146,7 @@ if( $f_error || $f_cookie_error ) {
 			# CSRF protection not required here - form does not result in modifications
 			echo '<ul id="login-links">';
 
-			if( ON == config_get( 'allow_anonymous_login' ) ) {
+			if( ON == config_get_global( 'allow_anonymous_login' ) ) {
 				echo '<li><a href="login_anon.php?return=' . string_url( $f_return ) . '">' . lang_get( 'login_anonymously' ) . '</a></li>';
 			}
 
@@ -175,7 +175,7 @@ if( $f_error || $f_cookie_error ) {
 				<span class="input"><input id="password" type="password" name="password" size="32" maxlength="<?php echo auth_get_password_max_size(); ?>" class="<?php echo $t_password_field_autofocus ?>" /></span>
 				<span class="label-style"></span>
 			</div>
-			<?php if( ON == config_get( 'allow_permanent_cookie' ) ) { ?>
+			<?php if( ON == config_get_global( 'allow_permanent_cookie' ) ) { ?>
 			<div class="field-container">
 				<label for="remember-login"><span><?php echo lang_get( 'save_login' ) ?></span></label>
 				<span class="input"><input id="remember-login" type="checkbox" name="perm_login" <?php echo ( $f_perm_login ? 'checked="checked" ' : '' ) ?>/></span>

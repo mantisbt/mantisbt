@@ -318,7 +318,7 @@ function helper_get_current_project() {
 	}
 
 	if( $g_cache_current_project === null ) {
-		$t_cookie_name = config_get( 'project_cookie' );
+		$t_cookie_name = config_get_global( 'project_cookie' );
 
 		$t_project_id = gpc_get_cookie( $t_cookie_name, null );
 
@@ -346,7 +346,7 @@ function helper_get_current_project() {
  * @return array
  */
 function helper_get_current_project_trace() {
-	$t_cookie_name = config_get( 'project_cookie' );
+	$t_cookie_name = config_get_global( 'project_cookie' );
 
 	$t_project_id = gpc_get_cookie( $t_cookie_name, null );
 
@@ -387,7 +387,7 @@ function helper_get_current_project_trace() {
 function helper_set_current_project( $p_project_id ) {
 	global $g_cache_current_project;
 
-	$t_project_cookie_name = config_get( 'project_cookie' );
+	$t_project_cookie_name = config_get_global( 'project_cookie' );
 
 	$g_cache_current_project = $p_project_id;
 	gpc_set_cookie( $t_project_cookie_name, $p_project_id, true );
@@ -400,9 +400,9 @@ function helper_set_current_project( $p_project_id ) {
  * @return void
  */
 function helper_clear_pref_cookies() {
-	gpc_clear_cookie( config_get( 'project_cookie' ) );
-	gpc_clear_cookie( config_get( 'manage_users_cookie' ) );
-	gpc_clear_cookie( config_get( 'manage_config_cookie' ) );
+	gpc_clear_cookie( config_get_global( 'project_cookie' ) );
+	gpc_clear_cookie( config_get_global( 'manage_users_cookie' ) );
+	gpc_clear_cookie( config_get_global( 'manage_config_cookie' ) );
 }
 
 /**
@@ -590,7 +590,7 @@ function helper_log_to_page() {
  * @return boolean
  */
 function helper_show_query_count() {
-	return ON == config_get( 'show_queries_count' );
+	return ON == config_get_global( 'show_queries_count' );
 }
 
 /**

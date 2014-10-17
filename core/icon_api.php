@@ -41,7 +41,7 @@ require_api( 'utility_api.php' );
  * @access public
  */
 function icon_get_status_icon( $p_icon ) {
-	$t_icon_path = config_get( 'icon_path' );
+	$t_icon_path = config_get_global( 'icon_path' );
 	$t_status_icon_arr = config_get( 'status_icon_arr' );
 	$t_priotext = get_enum_element( 'priority', $p_icon );
 	if( isset( $t_status_icon_arr[$p_icon] ) && !is_blank( $t_status_icon_arr[$p_icon] ) ) {
@@ -76,7 +76,7 @@ function print_status_icon( $p_icon ) {
  * @access public
  */
 function print_sort_icon( $p_dir, $p_sort_by, $p_field ) {
-	$t_icon_path = config_get( 'icon_path' );
+	$t_icon_path = config_get_global( 'icon_path' );
 	$t_sort_icon_arr = config_get( 'sort_icon_arr' );
 	$t_status_icon_arr = config_get( 'status_icon_arr' );
 

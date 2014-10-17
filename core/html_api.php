@@ -387,12 +387,12 @@ function require_css( $p_stylesheet_path ) {
  */
 function html_css() {
 	global $g_stylesheets_included;
-	html_css_link( config_get( 'css_include_file' ) );
+	html_css_link( config_get_global( 'css_include_file' ) );
 	html_css_link( 'jquery-ui-1.10.0.custom.min.css' );
 	html_css_link( 'common_config.php' );
 	# Add right-to-left css if needed
 	if( lang_get( 'directionality' ) == 'rtl' ) {
-		html_css_link( config_get( 'css_rtl_include_file' ) );
+		html_css_link( config_get_global( 'css_rtl_include_file' ) );
 	}
 	foreach( $g_stylesheets_included as $t_stylesheet_path ) {
 		html_css_link( $t_stylesheet_path );
@@ -429,7 +429,7 @@ function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
 		$p_time = current_user_get_pref( 'redirect_delay' );
 	}
 
-	$t_url = config_get( 'path' );
+	$t_url = config_get_global( 'path' );
 	if( $p_sanitize ) {
 		$t_url .= string_sanitize_url( $p_url );
 	} else {
@@ -503,9 +503,9 @@ function html_body_begin() {
  * @return void
  */
 function html_top_banner() {
-	$t_page = config_get( 'top_include_page' );
+	$t_page = config_get_global( 'top_include_page' );
 	$t_logo_image = config_get( 'logo_image' );
-	$t_logo_url = config_get( 'logo_url' );
+	$t_logo_url = config_get_global( 'logo_url' );
 
 	if( is_blank( $t_logo_image ) ) {
 		$t_show_logo = false;
@@ -523,7 +523,7 @@ function html_top_banner() {
 	} else if( $t_show_logo ) {
 		echo '<div id="banner">';
 		if( $t_show_url ) {
-			echo '<a id="logo-link" href="', config_get( 'logo_url' ), '">';
+			echo '<a id="logo-link" href="', config_get_global( 'logo_url' ), '">';
 		}
 		$t_alternate_text = string_html_specialchars( config_get( 'window_title' ) );
 		echo '<img id="logo-image" alt="', $t_alternate_text, '" src="' . helper_mantis_url( $t_logo_image ) . '" />';
@@ -617,7 +617,7 @@ function html_login_info() {
 
 			# Force reload of current page, except if we got here after
 			# creating the first project
-			$t_redirect_url = str_replace( config_get( 'short_path' ), '', $_SERVER['REQUEST_URI'] );
+			$t_redirect_url = str_replace( config_get_global( 'short_path' ), '', $_SERVER['REQUEST_URI'] );
 			if( 'manage_proj_create.php' != $t_redirect_url ) {
 				html_meta_redirect( $t_redirect_url, 0, false );
 			}
@@ -633,7 +633,7 @@ function html_login_info() {
  * @return void
  */
 function html_bottom_banner() {
-	$t_page = config_get( 'bottom_include_page' );
+	$t_page = config_get_global( 'bottom_include_page' );
 
 	if( !is_blank( $t_page ) && file_exists( $t_page ) && !is_dir( $t_page ) ) {
 		include( $t_page );
@@ -723,7 +723,7 @@ function html_footer() {
 	event_signal( 'EVENT_LAYOUT_PAGE_FOOTER' );
 
 	# Print horizontal rule if any debugging statistics follow
-	if( config_get( 'show_timer' ) || config_get( 'show_memory_usage' ) || config_get( 'show_queries_count' ) ) {
+	if( config_get( 'show_timer' ) || config_get( 'show_memory_usage' ) || config_get_global( 'show_queries_count' ) ) {
 		echo "\t" . '<hr />' . "\n";
 	}
 
@@ -740,7 +740,7 @@ function html_footer() {
 	}
 
 	# Determine number of unique queries executed
-	if( config_get( 'show_queries_count' ) ) {
+	if( config_get_global( 'show_queries_count' ) ) {
 		$t_total_queries_count = count( $g_queries_array );
 		$t_unique_queries_count = 0;
 		$t_total_query_execution_time = 0;

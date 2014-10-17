@@ -104,7 +104,7 @@ if( 0 != strcasecmp( $t_old_username, $f_username )
 
 user_ensure_name_valid( $f_username );
 
-$t_ldap = ( LDAP == config_get( 'login_method' ) );
+$t_ldap = ( LDAP == config_get_global( 'login_method' ) );
 
 if( $t_ldap && config_get( 'use_ldap_realname' ) ) {
 	$t_realname = ldap_realname_from_username( $f_username );
@@ -194,7 +194,7 @@ if( $f_send_email_notification ) {
 	if( !empty( $t_changes ) ) {
 		$t_subject = '[' . config_get( 'window_title' ) . '] ' . lang_get( 'email_user_updated_subject' );
 		$t_updated_msg = lang_get( 'email_user_updated_msg' );
-		$t_message = $t_updated_msg . "\n\n" . config_get( 'path' ) . 'account_page.php' . "\n\n" . $t_changes;
+		$t_message = $t_updated_msg . "\n\n" . config_get_global( 'path' ) . 'account_page.php' . "\n\n" . $t_changes;
 
 		if( null === email_store( $t_email, $t_subject, $t_message ) ) {
 			log_event( LOG_EMAIL, 'Notification was NOT sent to ' . $f_username );

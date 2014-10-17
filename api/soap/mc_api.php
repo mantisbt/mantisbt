@@ -301,7 +301,7 @@ function mci_get_user_id( stdClass $p_user ) {
 function mci_get_user_lang( $p_user_id ) {
 	$t_lang = user_pref_get_pref( $p_user_id, 'language' );
 	if( $t_lang == 'auto' ) {
-		$t_lang = config_get( 'fallback_language' );
+		$t_lang = config_get_global( 'fallback_language' );
 	}
 	return $t_lang;
 }
@@ -408,7 +408,7 @@ function mci_sanitize_xml_string ( $p_input ) {
  * @return MantisBT URL terminated by a /.
  */
 function mci_get_mantis_path() {
-	return config_get( 'path' );
+	return config_get_global( 'path' );
 }
 
 /**

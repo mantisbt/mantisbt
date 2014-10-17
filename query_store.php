@@ -89,7 +89,7 @@ if( $f_all_projects ) {
 	$t_project_id = 0;
 }
 
-$t_filter_string = filter_db_get_filter( gpc_get_cookie( config_get( 'view_all_cookie' ), '' ) );
+$t_filter_string = filter_db_get_filter( gpc_get_cookie( config_get_global( 'view_all_cookie' ), '' ) );
 
 $t_new_row_id = filter_db_set_for_current_user( $t_project_id, $f_is_public,
 												$f_query_name, $t_filter_string );

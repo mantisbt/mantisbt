@@ -134,7 +134,7 @@ html_page_top( project_get_field( $f_project_id, 'name' ) );
 				$t_file_path = $t_row['file_path'];
 				# Don't reveal the absolute path to non-administrators for security reasons
 				if( is_blank( $t_file_path ) && current_user_is_administrator() ) {
-					$t_file_path = config_get( 'absolute_path_default_upload_folder' );
+					$t_file_path = config_get_global( 'absolute_path_default_upload_folder' );
 				}
 				?>
 				<div class="field-container">

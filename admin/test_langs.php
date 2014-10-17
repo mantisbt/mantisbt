@@ -71,7 +71,7 @@ if( function_exists( 'scandir' ) ) {
 # attempt to find plugin language files
 echo '<br />Trying to find+check plugin language files...<br />';
 if( function_exists( 'scandir' ) ) {
-	checkplugins( config_get( 'plugin_path' ) );
+	checkplugins( config_get_global( 'plugin_path' ) );
 } else {
 	echo 'php scandir is disabled - skipping<br />';
 }

@@ -76,7 +76,7 @@ if( $f_username !== null ) {
 		access_denied();
 	}
 } else {
-	if( OFF == config_get( 'allow_anonymous_login' ) ) {
+	if( OFF == config_get_global( 'allow_anonymous_login' ) ) {
 		access_denied();
 	}
 }
@@ -92,7 +92,7 @@ if( $f_sort === 'update' ) {
 	$c_sort_field = 'date_submitted';
 }
 
-$t_path = config_get( 'path' );
+$t_path = config_get_global( 'path' );
 
 # construct rss file
 
@@ -165,7 +165,7 @@ $t_project_id = $f_project_id;
 if( $f_username !== null ) {
 	$t_user_id = user_get_id_by_name( $f_username );
 } else {
-	$t_user_id = user_get_id_by_name( config_get( 'anonymous_account' ) );
+	$t_user_id = user_get_id_by_name( config_get_global( 'anonymous_account' ) );
 }
 $t_show_sticky = null;
 

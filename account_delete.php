@@ -103,7 +103,7 @@ html_page_top2a();
 <div>
 <?php
 echo lang_get( 'account_removed_msg' ) . '<br />';
-print_bracket_link( config_get( 'logout_redirect_page' ), lang_get( 'proceed' ) );
+print_bracket_link( config_get_global( 'logout_redirect_page' ), lang_get( 'proceed' ) );
 ?>
 </div>
 

@@ -62,7 +62,7 @@ auth_ensure_user_authenticated();
 $f_search		= gpc_get_string( FILTER_PROPERTY_SEARCH, false ); # @todo need a better default
 $f_offset		= gpc_get_int( 'offset', 0 );
 
-$t_cookie_value_id = gpc_get_cookie( config_get( 'view_all_cookie' ), '' );
+$t_cookie_value_id = gpc_get_cookie( config_get_global( 'view_all_cookie' ), '' );
 $t_cookie_value = filter_db_get_filter( $t_cookie_value_id );
 
 $f_highlight_changed 	= 0;
@@ -143,7 +143,7 @@ for( $i=0; $i < $t_row_count; $i++ ) {
 }
 $f_export = implode( ',', $f_bug_arr );
 
-$t_icon_path = config_get( 'icon_path' );
+$t_icon_path = config_get_global( 'icon_path' );
 ?>
 
 <tr>
