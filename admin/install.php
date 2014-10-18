@@ -249,7 +249,7 @@ if( $t_config_exists ) {
 		$g_db_connected = true;
 	}
 
-	$t_cur_version = config_get( 'database_version', -1 );
+	$t_cur_version = config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS );
 
 	if( $t_cur_version > 1 ) {
 		$g_database_upgrade = true;
