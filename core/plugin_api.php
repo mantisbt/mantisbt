@@ -1070,3 +1070,15 @@ function plugin_init( $p_basename ) {
 		return false;
 	}
 }
+
+/**
+ * Check that the event is defined in this mantis version.
+ *
+ * @global array $g_event_cache
+ * @param string $p_event_name
+ * @return boolean true if event exists
+ */
+function plugin_event_exists($p_event_name) {
+   global $g_event_cache;
+   return array_key_exists($p_event_name, $g_event_cache);
+}
