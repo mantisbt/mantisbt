@@ -249,7 +249,7 @@ function string_url( $p_string ) {
 function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	$t_url = strip_tags( urldecode( $p_url ) );
 
-	$t_path = rtrim( config_get( 'path' ), '/' );
+	$t_path = rtrim( config_get_global( 'path' ), '/' );
 	$t_short_path = rtrim( config_get( 'short_path' ), '/' );
 
 	$t_pattern = '(?:/*(?P<script>[^\?#]*))(?:\?(?P<query>[^#]*))?(?:#(?P<anchor>[^#]*))?';
@@ -697,7 +697,7 @@ function string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id ) {
  * @return string
  */
 function string_get_bugnote_view_url_with_fqdn( $p_bug_id, $p_bugnote_id, $p_user_id = null ) {
-	return config_get( 'path' ) . string_get_bug_view_url( $p_bug_id, $p_user_id ) . '#c' . $p_bugnote_id;
+	return config_get_global( 'path' ) . string_get_bug_view_url( $p_bug_id, $p_user_id ) . '#c' . $p_bugnote_id;
 }
 
 /**
@@ -709,7 +709,7 @@ function string_get_bugnote_view_url_with_fqdn( $p_bug_id, $p_bugnote_id, $p_use
  * @return string
  */
 function string_get_bug_view_url_with_fqdn( $p_bug_id, $p_user_id = null ) {
-	return config_get( 'path' ) . string_get_bug_view_url( $p_bug_id, $p_user_id );
+	return config_get_global( 'path' ) . string_get_bug_view_url( $p_bug_id, $p_user_id );
 }
 
 /**
@@ -792,8 +792,7 @@ function string_get_bug_report_page( $p_user_id = null ) {
  * @return string
  */
 function string_get_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
-	$t_path = config_get( 'path' );
-	return $t_path . 'verify.php?id=' . string_url( $p_user_id ) . '&confirm_hash=' . string_url( $p_confirm_hash );
+	return config_get_global( 'path' ) . 'verify.php?id=' . string_url( $p_user_id ) . '&confirm_hash=' . string_url( $p_confirm_hash );
 }
 
 /**
