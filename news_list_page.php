@@ -47,7 +47,7 @@ require_api( 'string_api.php' );
 
 news_ensure_enabled();
 
-access_ensure_project_level( VIEWER );
+access_ensure_project_level( config_get( 'view_bug_threshold' ) );
 
 html_page_top();
 ?>

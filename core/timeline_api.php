@@ -56,7 +56,7 @@ function timeline_get_affected_issues( $p_start_time, $p_end_time ) {
 			continue;
 		}
 
-		if( !access_has_bug_level( VIEWER, $t_issue_id ) ) {
+		if( !access_has_bug_level( config_get( 'view_bug_threshold' ), $t_issue_id ) ) {
 			continue;
 		}
 

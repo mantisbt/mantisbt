@@ -108,11 +108,13 @@ function relgraph_generate_rel_graph( $p_bug_id ) {
 			continue;
 		}
 
-		if( !access_has_bug_level( VIEWER, $t_id ) ) {
+		$t_bug = bug_get( $t_id, false );
+
+		if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_bug->project_id ), $t_id ) ) {
 			continue;
 		}
 
-		$v_bug_list[$t_id] = bug_get( $t_id, false );
+		$v_bug_list[$t_id] = $t_bug;
 
 		$t_relationships = relationship_get_all_src( $t_id );
 		foreach( $t_relationships as $t_relationship ) {
@@ -357,12 +359,14 @@ function relgraph_add_parent( array &$p_bug_list, $p_bug_id ) {
 		return false;
 	}
 
-	if( !access_has_bug_level( VIEWER, $p_bug_id ) ) {
+	$t_bug = bug_get( $p_bug_id, false );
+
+	if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_bug->project_id ), $p_bug_id ) ) {
 		return false;
 	}
 
 	# Add the issue to the list.
-	$p_bug_list[$p_bug_id] = bug_get( $p_bug_id, false );
+	$p_bug_list[$p_bug_id] = $t_bug;
 	$p_bug_list[$p_bug_id]->is_descendant = false;
 	$p_bug_list[$p_bug_id]->parents = array();
 	$p_bug_list[$p_bug_id]->children = array();
@@ -428,12 +432,14 @@ function relgraph_add_child( array &$p_bug_list, $p_bug_id ) {
 			return false;
 		}
 
-		if( !access_has_bug_level( VIEWER, $p_bug_id ) ) {
+		$t_bug = bug_get( $p_bug_id, false );
+
+		if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_bug->project_id ), $p_bug_id ) ) {
 			return false;
 		}
 
 		# Add the issue to the list.
-		$p_bug_list[$p_bug_id] = bug_get( $p_bug_id, false );
+		$p_bug_list[$p_bug_id] = $t_bug;
 		$p_bug_list[$p_bug_id]->is_descendant = true;
 		$p_bug_list[$p_bug_id]->parents = array();
 		$p_bug_list[$p_bug_id]->children = array();

@@ -395,8 +395,8 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 
 		# exclude users who don't have at least viewer access to the bug,
 		# or who can't see bugnotes if the last update included a bugnote
-		if( !access_has_bug_level( VIEWER, $p_bug_id, $t_id )
-		 || $t_bug_date == $t_bugnote_date && !access_has_bugnote_level( VIEWER, $t_bugnote_id, $t_id )
+		if( !access_has_bug_level( config_get( 'view_bug_threshold', null, $t_id, $t_bug->project_id ), $p_bug_id, $t_id )
+		 || $t_bug_date == $t_bugnote_date && !access_has_bugnote_level( config_get( 'view_bug_threshold', null, $t_id, $t_bug->project_id ), $t_bugnote_id, $t_id )
 		) {
 			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, drop @U%d (access level)', $p_bug_id, $t_id );
 			continue;

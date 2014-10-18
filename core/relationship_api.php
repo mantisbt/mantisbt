@@ -597,11 +597,13 @@ function relationship_get_details( $p_bug_id, BugRelationshipData $p_relationshi
 
 	if( $p_bug_id == $p_relationship->src_bug_id ) {
 		# root bug is in the source side, related bug in the destination side
+		$t_related_project_id = $p_relationship->dest_bug_id;
 		$t_related_bug_id = $p_relationship->dest_bug_id;
 		$t_related_project_name = project_get_name( $p_relationship->dest_project_id );
 		$t_relationship_descr = relationship_get_description_src_side( $p_relationship->type );
 	} else {
 		# root bug is in the dest side, related bug in the source side
+		$t_related_project_id = $p_relationship->src_bug_id;
 		$t_related_bug_id = $p_relationship->src_bug_id;
 		$t_related_project_name = project_get_name( $p_relationship->src_project_id );
 		$t_relationship_descr = relationship_get_description_dest_side( $p_relationship->type );
@@ -613,7 +615,7 @@ function relationship_get_details( $p_bug_id, BugRelationshipData $p_relationshi
 	}
 
 	# user can access to the related bug at least as a viewer
-	if( !access_has_bug_level( VIEWER, $t_related_bug_id ) ) {
+	if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_related_project_id ), $t_related_bug_id ) ) {
 		return '';
 	}
 

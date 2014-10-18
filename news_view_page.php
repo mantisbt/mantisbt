@@ -56,7 +56,7 @@ if( $f_news_id !== null ) {
 		access_ensure_project_level(	config_get( 'private_news_threshold' ),
 						$t_project_id );
 	} else {
-		access_ensure_project_level( VIEWER, $t_project_id );
+		access_ensure_project_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $t_project_id );
 	}
 
 	print_news_string_by_news_id( $f_news_id );

@@ -82,9 +82,11 @@ if( bug_is_readonly( $f_bug_id ) ) {
 # retrieve the destination bug of the relationship
 $t_dest_bug_id = relationship_get_linked_bug_id( $f_rel_id, $f_bug_id );
 
+$t_dest_bug = bug_get( $t_dest_bug_id, true );
+
 # user can access to the related bug at least as viewer, if it's exist...
 if( bug_exists( $t_dest_bug_id ) ) {
-	if( !access_has_bug_level( VIEWER, $t_dest_bug_id ) ) {
+	if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_dest_bug->project_id ), $t_dest_bug_id ) ) {
 		error_parameters( $t_dest_bug_id );
 		trigger_error( ERROR_RELATIONSHIP_ACCESS_LEVEL_TO_DEST_BUG_TOO_LOW, ERROR );
 	}

@@ -81,7 +81,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
-	if( !access_has_bug_level( VIEWER, $p_issue_id, $t_user_id ) ) {
+	if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $p_issue_id, $t_user_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
@@ -166,7 +166,7 @@ function mc_issue_get_history( $p_username, $p_password, $p_issue_id ) {
 	}
 	$g_project_override = $t_project_id;
 
-	if( !access_has_bug_level( VIEWER, $p_issue_id, $t_user_id ) ) {
+	if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $p_issue_id, $t_user_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
@@ -576,7 +576,7 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 			$g_project_override = $t_project_id;
 
 			if( mci_has_readonly_access( $t_user_id, $t_project_id ) &&
-				access_has_bug_level( VIEWER, $t_issue_id, $t_user_id ) ) {
+				access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $t_issue_id, $t_user_id ) ) {
 				return $t_issue_id;
 			}
 		}
@@ -1350,7 +1350,7 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, stdCl
 	}
 
 	# user can access to the related bug at least as viewer...
-	if( !access_has_bug_level( VIEWER, $t_dest_issue_id, $t_user_id ) ) {
+	if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $t_dest_issue_id, $t_user_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id, 'The issue \'' . $t_dest_issue_id . '\' requires higher access level' );
 	}
 
@@ -1421,7 +1421,7 @@ function mc_issue_relationship_delete( $p_username, $p_password, $p_issue_id, $p
 
 	# user can access to the related bug at least as viewer, if it's exist...
 	if( bug_exists( $t_dest_issue_id ) ) {
-		if( !access_has_bug_level( VIEWER, $t_dest_issue_id, $t_user_id ) ) {
+		if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $t_dest_issue_id, $t_user_id ) ) {
 			return mci_soap_fault_access_denied( $t_user_id, 'The issue \'' . $t_dest_issue_id . '\' requires higher access level.' );
 		}
 	}

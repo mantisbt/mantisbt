@@ -2516,6 +2516,12 @@ $g_report_bug_threshold = REPORTER;
 $g_update_bug_threshold = UPDATER;
 
 /**
+ * access level needed to view bugs
+ * @global integer $g_view_bug_threshold
+ */
+$g_view_bug_threshold = VIEWER;
+
+/**
  * Access level needed to monitor bugs.
  * Look in the constant_inc.php file if you want to set a different value.
  * @global integer $g_monitor_bug_threshold

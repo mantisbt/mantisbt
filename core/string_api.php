@@ -345,11 +345,13 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 	if( !isset( $g_string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] ) ) {
 		if( $p_include_anchor ) {
 			$g_string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function( '$p_array', '
-										if( bug_exists( (int)$p_array[2] ) && access_has_bug_level( VIEWER, (int)$p_array[2] ) ) {
-											return $p_array[1] . string_get_bug_view_link( (int)$p_array[2], null, ' . ( $p_detail_info ? 'true' : 'false' ) . ', ' . ( $p_fqdn ? 'true' : 'false' ) . ');
-										} else {
-											return $p_array[0];
+										if( bug_exists( (int)$p_array[2] ) ) {
+											$t_project_id = bug_get_field( (int)$p_array[2], \'project_id\' );
+											if( access_has_bug_level( config_get( \'view_bug_threshold\', null, null, $t_project_id ), (int)$p_array[2] ) ) {
+												return $p_array[1] . string_get_bug_view_link( (int)$p_array[2], null, ' . ( $p_detail_info ? 'true' : 'false' ) . ', ' . ( $p_fqdn ? 'true' : 'false' ) . ');
+											}
 										}
+										return $p_array[0];
 										' );
 		} else {
 			$g_string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function( '$p_array', '

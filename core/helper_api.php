@@ -330,7 +330,7 @@ function helper_get_current_project() {
 			$t_project_id = $t_project_id[count( $t_project_id ) - 1];
 		}
 
-		if( !project_exists( $t_project_id ) || ( 0 == project_get_field( $t_project_id, 'enabled' ) ) || !access_has_project_level( VIEWER, $t_project_id ) ) {
+		if( !project_exists( $t_project_id ) || ( 0 == project_get_field( $t_project_id, 'enabled' ) ) || !access_has_project_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $t_project_id ) ) {
 			$t_project_id = ALL_PROJECTS;
 		}
 		$g_cache_current_project = (int)$t_project_id;
@@ -370,7 +370,7 @@ function helper_get_current_project_trace() {
 		$t_bottom = $t_project_id[count( $t_project_id ) - 1];
 	}
 
-	if( !project_exists( $t_bottom ) || ( 0 == project_get_field( $t_bottom, 'enabled' ) ) || !access_has_project_level( VIEWER, $t_bottom ) ) {
+	if( !project_exists( $t_bottom ) || ( 0 == project_get_field( $t_bottom, 'enabled' ) ) || !access_has_project_level( config_get( 'view_bug_threshold', null, null, $t_bottom ), $t_bottom ) ) {
 		$t_project_id = array(
 			ALL_PROJECTS,
 		);
