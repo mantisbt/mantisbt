@@ -115,7 +115,9 @@ html_page_top( lang_get( 'docs_link' ) );
 	<td class="form-title">
 		<?php echo lang_get( 'project_documentation_title' ) ?>
 	</td>
-	<td class="right">&nbsp;</td>
+	<td class="right">
+		<?php print_doc_menu( 'proj_doc_page.php' ) ?>
+	</td>
 </tr>
 
 <tr class="row-category2">
