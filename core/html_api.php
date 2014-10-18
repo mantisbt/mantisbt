@@ -115,9 +115,6 @@ $g_robots_meta = '';
 # flag for error handler to skip header menus
 $g_error_send_page_header = true;
 
-# flag to skip submenus
-$g_skip_submenus = false;
-
 $g_stylesheets_included = array();
 $g_scripts_included = array();
 
@@ -219,7 +216,6 @@ function html_page_top1( $p_page_title = null ) {
  * @return void
  */
 function html_page_top2() {
-	global $g_skip_submenus;
 	html_page_top2a();
 
 	if( !db_is_connected() ) {
@@ -251,14 +247,10 @@ function html_page_top2() {
 		} else {
 			$t_menu->include_div = true;
 		}
+		$t_menu->ToString();
 		if( $t_menu->name == 'main' ) {
-			$t_menu->ToString();
 			print_bug_jump();
 			echo '</div>' . "\n";
-		} else {
-			if( !$g_skip_submenus ) {
-				$t_menu->ToString();
-			}
 		}
 	}
 
