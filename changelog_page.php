@@ -154,12 +154,7 @@ if( is_blank( $f_version ) ) {
 }
 
 if( ALL_PROJECTS == $t_project_id ) {
-	$t_topprojects = $t_project_ids = user_get_accessible_projects( $t_user_id );
-	foreach ( $t_topprojects as $t_project ) {
-		$t_project_ids = array_merge( $t_project_ids, user_get_all_accessible_subprojects( $t_user_id, $t_project ) );
-	}
-
-	$t_project_ids_to_check = array_unique( $t_project_ids );
+	$t_project_ids_to_check = user_get_all_accessible_projects( $t_user_id, ALL_PROJECTS );
 	$t_project_ids = array();
 
 	foreach ( $t_project_ids_to_check as $t_project_id ) {
