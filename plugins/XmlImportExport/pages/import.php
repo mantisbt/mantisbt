@@ -27,7 +27,6 @@ auth_reauthenticate( );
 html_page_top( plugin_lang_get( 'import' ) );
 
 $t_this_page = plugin_page( 'import' ); # FIXME with plugins this does not work...
-print_manage_menu( $t_this_page );
 
 $t_max_file_size = (int)min(
 	ini_get_number( 'upload_max_filesize' ),

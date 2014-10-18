@@ -93,11 +93,6 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 			<?php echo form_security_field( 'account_prefs_update' ) ?>
 			<input type="hidden" name="user_id" value="<?php echo $p_user_id ?>" />
 			<input type="hidden" name="redirect_url" value="<?php echo $t_redirect_url ?>" />
-		<?php
-			if( $p_accounts_menu ) {
-				print_account_menu( 'account_prefs_page.php' );
-			}
-		?>
 			<div class="field-container">
 				<label for="default-project-id"><span><?php echo lang_get( 'default_project' ) ?></span></label>
 				<span class="select">

@@ -85,9 +85,7 @@ html_page_top();
 		<input type="hidden" name="file_id" value="<?php echo $t_file_id ?>" />
 		<?php echo lang_get( 'upload_file_title' ) ?>
 	</td>
-	<td class="right">
-		<?php print_doc_menu() ?>
-	</td>
+	<td class="right">&nbsp;</td>
 </tr>
 <tr class="row-1">
 	<th class="category" width="20%">

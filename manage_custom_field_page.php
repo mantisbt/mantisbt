@@ -51,7 +51,6 @@ access_ensure_global_level( config_get( 'manage_custom_fields_threshold' ) );
 
 html_page_top( lang_get( 'manage_custom_field_link' ) );
 
-print_manage_menu( 'manage_custom_field_page.php' );
 ?>
 
 <div class="table-container">

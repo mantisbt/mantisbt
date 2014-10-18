@@ -63,8 +63,7 @@ access_ensure_project_level( config_get( 'manage_project_threshold' ), $t_projec
 
 html_page_top();
 
-print_manage_menu( 'manage_proj_cat_edit_page.php' ); ?>
-
+?>
 <div id="manage-proj-category-update-div" class="form-container">
 	<form id="manage-proj-category-update-form" method="post" action="manage_proj_cat_update.php">
 		<fieldset>

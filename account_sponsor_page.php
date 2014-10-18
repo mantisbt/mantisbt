@@ -100,9 +100,7 @@ $t_project = helper_get_current_project();
 	<td class="form-title">
 		<?php echo lang_get( 'my_sponsorship' ) ?>
 	</td>
-	<td class="right">
-		<?php print_account_menu( 'account_sponsor_page.php' ) ?>
-	</td>
+	<td class="right">&nbsp;</td>
 </tr>
 </table>
 <?php

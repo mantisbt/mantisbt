@@ -32,6 +32,8 @@
  * @uses config_api.php
  * @uses config_defaults_inc.php
  * @uses config_inc.php
+ * @uses config_menu_defaults_inc.php
+ * @uses config_menu_inc.php
  * @uses constant_inc.php
  * @uses crypto_api.php
  * @uses custom_constants_inc.php
@@ -83,6 +85,14 @@ $t_config_inc_found = file_exists( $g_config_path . 'config_inc.php' );
 
 if( $t_config_inc_found ) {
 	require_once( $g_config_path . 'config_inc.php' );
+}
+
+# Include default menu configuration settings
+require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config_menu_defaults_inc.php' );
+
+# config_menu_inc may not be present if this is a new install
+if( file_exists( $g_config_path . 'config_menu_inc.php' ) ) {
+	require_once( $g_config_path . 'config_menu_inc.php' );
 }
 
 

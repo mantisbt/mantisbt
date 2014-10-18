@@ -27,8 +27,6 @@ access_ensure_global_level( config_get( 'manage_plugin_threshold' ) );
 
 html_page_top( plugin_lang_get( 'title' ) );
 
-print_manage_menu( );
-
 $g_current_font_selected = array(
 	'arial' => false,
 	'verdana' => false,
