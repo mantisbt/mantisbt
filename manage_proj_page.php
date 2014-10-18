@@ -74,6 +74,9 @@ if( 'ASC' == $f_dir ) {
 
 html_page_top( lang_get( 'manage_projects_link' ) );
 
+print_manage_menu( 'manage_proj_page.php' );
+
+# Project Menu Form BEGIN
 ?>
 <div class="form-container">
 	<h2><?php echo lang_get( 'projects_title' ); ?></h2><?php

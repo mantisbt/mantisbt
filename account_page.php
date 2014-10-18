@@ -140,6 +140,7 @@ if( $t_force_pw_reset ) {
 		<fieldset <?php echo $t_force_pw_reset_html ?>>
 			<legend><span><?php echo lang_get( 'edit_account_title' ); ?></span></legend>
 			<?php echo form_security_field( 'account_update' );
+			print_account_menu( 'account_page.php' );
 
 			if( !helper_call_custom_function( 'auth_can_change_password', array() ) ) {
 				# With LDAP -->
