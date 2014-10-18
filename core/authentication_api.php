@@ -705,6 +705,7 @@ function auth_reauthenticate() {
  * @access public
  */
 function auth_reauthenticate_page( $p_user_id, $p_username ) {
+	global $g_skip_submenus;
 	$t_error = false;
 
 	if( true == gpc_get_bool( '_authenticate' ) ) {
@@ -718,6 +719,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 		}
 	}
 
+	$g_skip_submenus = true;
 	html_page_top();
 
 	?>
