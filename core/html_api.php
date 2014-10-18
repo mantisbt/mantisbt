@@ -40,13 +40,13 @@
  *       html_top_banner
  *     html_login_info
  *     (print_project_menu_bar)
- *     MantisMenu::printMenu('main')
+ *     print_menu
  *
  * ...Page content here...
  *
  * html_page_bottom
  *   html_page_bottom1
- *     (MantisMenu::printMenu('main'))
+ *     (print_menu)
  *     html_page_bottom1a
  *       html_bottom_banner
  *       html_footer
@@ -230,30 +230,7 @@ function html_page_top2() {
 			echo '<br />';
 		}
 	}
-
-	$t_menu_class = config_get( 'menu_class', 'MantisMenu' );
-	$t_page =  basename( $_SERVER['PHP_SELF'] );
-	$t_plugin_name = null;
-	if( $t_page == 'plugin.php' ) {
-		$t_page = gpc_get_string( 'page' );
-		list( $t_plugin_name, $t_page ) = explode( '/', $t_page );
-	}
-
-	$t_menus = call_user_func( array($t_menu_class, 'getMenusForPage' ), $t_page, $t_plugin_name, false );
-	foreach( $t_menus AS $t_menu ) {
-		if( $t_menu->name == 'main' ) {
-			echo '<div class="main-menu">' . "\n";
-			$t_menu->include_div = false;
-		} else {
-			$t_menu->include_div = true;
-		}
-		$t_menu->ToString();
-		if( $t_menu->name == 'main' ) {
-			print_bug_jump();
-			echo '</div>' . "\n";
-		}
-	}
-
+	print_menu();
 	echo '<div id="content">', "\n";
 	event_signal( 'EVENT_LAYOUT_CONTENT_BEGIN' );
 }
@@ -299,9 +276,7 @@ function html_page_bottom1( $p_file = null ) {
 	echo '</div>', "\n";
 	if( config_get( 'show_footer_menu' ) ) {
 		echo '<br />';
-		print_bug_jump();
-		$t_menu_class = config_get( 'menu_class', 'MantisMenu' );
-		call_user_func( array($t_menu_class, 'printMenu' ), 'main', true );
+		print_menu();
 	}
 
 	html_page_bottom1a( $p_file );
@@ -801,18 +776,179 @@ function html_end() {
 	}
 }
 
-function print_bug_jump() {
-	# Bug Jump form
-	echo '<div id="bug-jump" >';
-	echo '<form method="post" class="bug-jump-form" action="' . helper_mantis_url( 'jump_to_bug.php' ) . '">';
-	echo '<fieldset class="bug-jump">';
-	# CSRF protection not required here - form does not result in modifications
-	echo '<input type="hidden" name="bug_label" value="' . lang_get( 'issue_id' ) . '" />';
-	echo '<input type="text" name="bug_id" size="8" />&#160;';
-	echo '<input type="submit" value="' . lang_get( 'jump' ) . '" />&#160;';
-	echo '</fieldset>';
-	echo '</form>';
-	echo '</div>' . "\n";
+/**
+ * Prepare an array of additional menu options from a configuration variable
+ * @param string $p_config Configuration variable name.
+ * @return array
+ */
+function prepare_custom_menu_options( $p_config ) {
+	$t_custom_menu_options = config_get( $p_config );
+	$t_options = array();
+
+	foreach( $t_custom_menu_options as $t_custom_option ) {
+		$t_access_level = $t_custom_option[1];
+		if( access_has_project_level( $t_access_level ) ) {
+			$t_caption = string_html_specialchars( lang_get_defaulted( $t_custom_option[0] ) );
+			$t_link = string_attribute( $t_custom_option[2] );
+			$t_options[] = '<a href="' . $t_link . '">' . $t_caption . '</a>';
+		}
+	}
+
+	return $t_options;
+}
+
+/**
+ * Print the main menu
+ * @return void
+ */
+function print_menu() {
+	if( auth_is_user_authenticated() ) {
+		$t_protected = current_user_get_field( 'protected' );
+		$t_current_project = helper_get_current_project();
+
+		$t_menu_options = array();
+
+		# Main Page
+		if( config_get( 'news_enabled' ) == ON ) {
+			$t_menu_options[] = '<a href="' . helper_mantis_url( 'main_page.php' ) . '">' . lang_get( 'main_link' ) . '</a>';
+		}
+
+		# Plugin / Event added options
+		$t_event_menu_options = event_signal( 'EVENT_MENU_MAIN_FRONT' );
+		foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+			foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+				if( is_array( $t_callback_menu_options ) ) {
+					$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
+				} else {
+					if( !is_null( $t_callback_menu_options ) ) {
+						$t_menu_options[] = $t_callback_menu_options;
+					}
+				}
+			}
+		}
+
+		# My View
+		$t_menu_options[] = '<a href="' . helper_mantis_url( 'my_view_page.php">' ) . lang_get( 'my_view_link' ) . '</a>';
+
+		# View Bugs
+		$t_menu_options[] = '<a href="' . helper_mantis_url( 'view_all_bug_page.php">' ) . lang_get( 'view_bugs_link' ) . '</a>';
+
+		# Report Bugs
+		if( access_has_project_level( config_get( 'report_bug_threshold' ) ) ) {
+			$t_menu_options[] = string_get_bug_report_link();
+		}
+
+		# Changelog Page
+		if( access_has_project_level( config_get( 'view_changelog_threshold' ) ) ) {
+			$t_menu_options[] = '<a href="' . helper_mantis_url( 'changelog_page.php">' ) . lang_get( 'changelog_link' ) . '</a>';
+		}
+
+		# Roadmap Page
+		if( access_has_project_level( config_get( 'roadmap_view_threshold' ) ) ) {
+			$t_menu_options[] = '<a href="' . helper_mantis_url( 'roadmap_page.php">' ) . lang_get( 'roadmap_link' ) . '</a>';
+		}
+
+		# Summary Page
+		if( access_has_project_level( config_get( 'view_summary_threshold' ) ) ) {
+			$t_menu_options[] = '<a href="' . helper_mantis_url( 'summary_page.php">' ) . lang_get( 'summary_link' ) . '</a>';
+		}
+
+		# Project Documentation Page
+		if( ON == config_get( 'enable_project_documentation' ) ) {
+			$t_menu_options[] = '<a href="' . helper_mantis_url( 'proj_doc_page.php">' ) . lang_get( 'docs_link' ) . '</a>';
+		}
+
+		# Project Wiki
+		if( config_get_global( 'wiki_enable' ) == ON ) {
+			$t_menu_options[] = '<a href="' . helper_mantis_url( 'wiki.php?type=project&amp;id=' ) . $t_current_project . '">' . lang_get( 'wiki' ) . '</a>';
+		}
+
+		# Plugin / Event added options
+		$t_event_menu_options = event_signal( 'EVENT_MENU_MAIN' );
+		foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+			foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+				if( is_array( $t_callback_menu_options ) ) {
+					$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
+				} else {
+					if( !is_null( $t_callback_menu_options ) ) {
+						$t_menu_options[] = $t_callback_menu_options;
+					}
+				}
+			}
+		}
+
+		# Manage Users (admins) or Manage Project (managers) or Manage Custom Fields
+		if( access_has_global_level( config_get( 'manage_site_threshold' ) ) ) {
+			$t_link = helper_mantis_url( 'manage_overview_page.php' );
+			$t_menu_options[] = '<a class="manage-menu-link" href="' . $t_link . '">' . lang_get( 'manage_link' ) . '</a>';
+		} else {
+			$t_show_access = min( config_get( 'manage_user_threshold' ), config_get( 'manage_project_threshold' ), config_get( 'manage_custom_fields_threshold' ) );
+			if( access_has_global_level( $t_show_access ) || access_has_any_project( $t_show_access ) ) {
+				$t_current_project = helper_get_current_project();
+				if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
+					$t_link = helper_mantis_url( 'manage_user_page.php' );
+				} else {
+					if( access_has_project_level( config_get( 'manage_project_threshold' ), $t_current_project ) && ( $t_current_project <> ALL_PROJECTS ) ) {
+						$t_link = helper_mantis_url( 'manage_proj_edit_page.php?project_id=' ) . $t_current_project;
+					} else {
+						$t_link = helper_mantis_url( 'manage_proj_page.php' );
+					}
+				}
+				$t_menu_options[] = '<a href="' . $t_link . '">' . lang_get( 'manage_link' ) . '</a>';
+			}
+		}
+
+		# News Page
+		if( news_is_enabled() && access_has_project_level( config_get( 'manage_news_threshold' ) ) ) {
+			# Admin can edit news for All Projects (site-wide)
+			if( ALL_PROJECTS != helper_get_current_project() || current_user_is_administrator() ) {
+				$t_menu_options[] = '<a href="' . helper_mantis_url( 'news_menu_page.php">' ) . lang_get( 'edit_news_link' ) . '</a>';
+			} else {
+				$t_menu_options[] = '<a href="' . helper_mantis_url( 'login_select_proj_page.php">' ) . lang_get( 'edit_news_link' ) . '</a>';
+			}
+		}
+
+		# Account Page (only show accounts that are NOT protected)
+		if( OFF == $t_protected ) {
+			$t_menu_options[] = '<a class="account-menu-link" href="' . helper_mantis_url( 'account_page.php">' ) . lang_get( 'account_link' ) . '</a>';
+		}
+
+		# Add custom options
+		$t_custom_options = prepare_custom_menu_options( 'main_menu_custom_options' );
+		$t_menu_options = array_merge( $t_menu_options, $t_custom_options );
+
+		# Time Tracking / Billing
+		if( config_get( 'time_tracking_enabled' ) && access_has_global_level( config_get( 'time_tracking_reporting_threshold' ) ) ) {
+			$t_menu_options[] = '<a href="' . helper_mantis_url( 'billing_page.php">' ) . lang_get( 'time_tracking_billing_link' ) . '</a>';
+		}
+
+		# Logout (no if anonymously logged in)
+		if( !current_user_is_anonymous() ) {
+			$t_menu_options[] = '<a id="logout-link" href="' . helper_mantis_url( 'logout_page.php">' ) . lang_get( 'logout_link' ) . '</a>';
+		}
+
+		# Display main menu
+		echo "\n" . '<div class="main-menu">'. "\n";
+
+		# Menu items
+		echo '<ul id="menu-items">' . "\n";
+		echo "\t" . '<li>' . implode( $t_menu_options, '</li>' . "\n\t" . '<li>' ) . '</li>' . "\n";
+		echo '</ul>' . "\n";
+
+		# Bug Jump form
+		echo '<div id="bug-jump" >';
+		echo '<form method="post" class="bug-jump-form" action="' . helper_mantis_url( 'jump_to_bug.php' ) . '">';
+		echo '<fieldset class="bug-jump">';
+		# CSRF protection not required here - form does not result in modifications
+		echo '<input type="hidden" name="bug_label" value="' . lang_get( 'issue_id' ) . '" />';
+		echo '<input type="text" name="bug_id" size="8" />&#160;';
+		echo '<input type="submit" value="' . lang_get( 'jump' ) . '" />&#160;';
+		echo '</fieldset>';
+		echo '</form>';
+		echo '</div>' . "\n";
+
+		echo '</div>' . "\n";
+	}
 }
 
 /**
@@ -852,6 +988,346 @@ function print_subproject_menu_bar( $p_project_id, $p_parents = '' ) {
 		print_subproject_menu_bar( $t_subproject, $p_parents . $t_subproject . ';' );
 		$t_char = ',';
 	}
+}
+
+/**
+ * Print the menu for the graph summary section
+ * @return void
+ */
+function print_summary_submenu() {
+	# Plugin / Event added options
+	$t_event_menu_options = event_signal( 'EVENT_SUBMENU_SUMMARY' );
+	$t_menu_options = array();
+	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+			if( is_array( $t_callback_menu_options ) ) {
+				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
+			} else {
+				if( !is_null( $t_callback_menu_options ) ) {
+					$t_menu_options[] = $t_callback_menu_options;
+				}
+			}
+		}
+	}
+
+	if( sizeof( $t_menu_options ) > 0 ) {
+		echo "\t" . '<div id="summary-submenu">' . "\n";
+		echo "\t\t" . '<ul class="menu">' . "\n";
+		# Plugins menu items - these are cooked links
+		foreach ( $t_menu_options as $t_menu_item ) {
+			echo "\t\t\t" . '<li>', $t_menu_item, '</li> . "\n"';
+		}
+		echo "\t\t" . '</ul>' . "\n";
+		echo "\t" . '</div>' . "\n";
+	}
+}
+
+/**
+ * Print the menu for the manage section
+ *
+ * @param string $p_page Specifies the current page name so it's link can be disabled.
+ * @return void
+ */
+function print_manage_menu( $p_page = '' ) {
+	$t_pages = array();
+	if( access_has_global_level( config_get( 'manage_user_threshold' ) ) ) {
+		$t_pages['manage_user_page.php'] = array( 'url'   => 'manage_user_page.php', 'label' => 'manage_users_link' );
+	}
+	if( access_has_project_level( config_get( 'manage_project_threshold' ) ) ) {
+		$t_pages['manage_proj_page.php'] = array( 'url'   => 'manage_proj_page.php', 'label' => 'manage_projects_link' );
+	}
+	if( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
+		$t_pages['manage_tags_page.php'] = array( 'url'   => 'manage_tags_page.php', 'label' => 'manage_tags_link' );
+	}
+	if( access_has_global_level( config_get( 'manage_custom_fields_threshold' ) ) ) {
+		$t_pages['manage_custom_field_page.php'] = array( 'url'   => 'manage_custom_field_page.php', 'label' => 'manage_custom_field_link' );
+	}
+	if( access_has_global_level( config_get( 'manage_global_profile_threshold' ) ) ) {
+		$t_pages['manage_prof_menu_page.php'] = array( 'url'   => 'manage_prof_menu_page.php', 'label' => 'manage_global_profiles_link' );
+	}
+	if( access_has_global_level( config_get( 'manage_plugin_threshold' ) ) ) {
+		$t_pages['manage_plugin_page.php'] = array( 'url'   => 'manage_plugin_page.php', 'label' => 'manage_plugin_link' );
+	}
+
+	if( access_has_project_level( config_get( 'manage_configuration_threshold' ) ) ) {
+		if( access_has_global_level( config_get( 'view_configuration_threshold' ) ) ) {
+			$t_pages['adm_config_report.php'] = array( 'url'   => 'adm_config_report.php', 'label' => 'manage_config_link' );
+		} else {
+			$t_pages['adm_permissions_report.php'] = array( 'url'   => 'adm_permissions_report.php', 'label' => 'manage_config_link' );
+		}
+	}
+	# Remove the link from the current page
+	if( isset( $t_pages[$p_page] ) ) {
+		$t_pages[$p_page]['url'] = '';
+	}
+
+	# Plugin / Event added options
+	$t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE' );
+	$t_menu_options = array();
+	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+			if( is_array( $t_callback_menu_options ) ) {
+				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
+			} else {
+				if( !is_null( $t_callback_menu_options ) ) {
+					$t_menu_options[] = $t_callback_menu_options;
+				}
+			}
+		}
+	}
+
+	echo "\n" . '<div id="manage-menu">' . "\n";
+	echo '<ul class="menu">';
+	foreach( $t_pages as $t_page ) {
+		if( $t_page['url'] == '' ) {
+			echo '<li><span>', lang_get( $t_page['label'] ), '</span></li>';
+		} else {
+			echo '<li><a href="'. helper_mantis_url( $t_page['url'] ) .'">' . lang_get( $t_page['label'] ) . '</a></li>';
+		}
+	}
+
+	# Plugins menu items - these are cooked links
+	foreach( $t_menu_options as $t_menu_item ) {
+		echo '<li>', $t_menu_item, '</li>';
+	}
+
+	echo '</ul>';
+	echo '</div>';
+}
+
+/**
+ * Print the menu for the manage configuration section
+ * @param string $p_page Specifies the current page name so it's link can be disabled.
+ * @return void
+ */
+function print_manage_config_menu( $p_page = '' ) {
+	if( !access_has_project_level( config_get( 'manage_configuration_threshold' ) ) ) {
+		return;
+	}
+
+	$t_pages = array();
+
+	if( access_has_global_level( config_get( 'view_configuration_threshold' ) ) ) {
+		$t_pages['adm_config_report.php'] = array( 'url'   => 'adm_config_report.php',
+		                                           'label' => 'configuration_report' );
+	}
+
+	$t_pages['adm_permissions_report.php'] = array( 'url'   => 'adm_permissions_report.php',
+	                                                'label' => 'permissions_summary_report' );
+
+	$t_pages['manage_config_work_threshold_page.php'] = array( 'url'   => 'manage_config_work_threshold_page.php',
+	                                                           'label' => 'manage_threshold_config' );
+
+	$t_pages['manage_config_workflow_page.php'] = array( 'url'   => 'manage_config_workflow_page.php',
+	                                                     'label' => 'manage_workflow_config' );
+
+	if( config_get( 'relationship_graph_enable' ) ) {
+		$t_pages['manage_config_workflow_graph_page.php'] = array( 'url'   => 'manage_config_workflow_graph_page.php',
+		                                                           'label' => 'manage_workflow_graph' );
+	}
+
+	$t_pages['manage_config_email_page.php'] = array( 'url'   => 'manage_config_email_page.php',
+	                                                  'label' => 'manage_email_config' );
+
+	$t_pages['manage_config_columns_page.php'] = array( 'url'   => 'manage_config_columns_page.php',
+	                                                    'label' => 'manage_columns_config' );
+
+	# Remove the link from the current page
+	if( isset( $t_pages[$p_page] ) ) {
+		$t_pages[$p_page]['url'] = '';
+	}
+
+	# Plugin / Event added options
+	$t_event_menu_options = event_signal( 'EVENT_MENU_MANAGE_CONFIG' );
+	$t_menu_options = array();
+	foreach ( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+		foreach ( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+			if( is_array( $t_callback_menu_options ) ) {
+				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
+			} else {
+				if( !is_null( $t_callback_menu_options ) ) {
+					$t_menu_options[] = $t_callback_menu_options;
+				}
+			}
+		}
+	}
+
+	echo '<div id="manage-config-menu">';
+	echo '<ul class="menu">';
+	foreach ( $t_pages as $t_page ) {
+		if( $t_page['url'] == '' ) {
+			echo '<li><span>', lang_get( $t_page['label'] ), '</span></li>';
+		} else {
+			echo '<li><a href="'. helper_mantis_url( $t_page['url'] ) .'">' . lang_get( $t_page['label'] ) . '</a></li>';
+		}
+	}
+
+	foreach ( $t_menu_options as $t_menu_item ) {
+		echo '<li><span>', $t_menu_item, '</span></li>';
+	}
+
+	echo '</ul>';
+	echo '</div>';
+}
+
+/**
+ * Print the menu for the account section
+ * @param string $p_page Specifies the current page name so it's link can be disabled.
+ * @return void
+ */
+function print_account_menu( $p_page = '' ) {
+	$t_pages['account_page.php'] = array( 'url'=>'account_page.php', 'label'=>'account_link' );
+	$t_pages['account_prefs_page.php'] = array( 'url'=>'account_prefs_page.php', 'label'=>'change_preferences_link' );
+	$t_pages['account_manage_columns_page.php'] = array( 'url'=>'account_manage_columns_page.php', 'label'=>'manage_columns_config' );
+
+	if( config_get( 'enable_profiles' ) == ON && access_has_project_level( config_get( 'add_profile_threshold' ) ) ) {
+		$t_pages['account_prof_menu_page.php'] = array( 'url'=>'account_prof_menu_page.php', 'label'=>'manage_profiles_link' );
+	}
+
+	if( config_get( 'enable_sponsorship' ) == ON && access_has_project_level( config_get( 'view_sponsorship_total_threshold' ) ) && !current_user_is_anonymous() ) {
+		$t_pages['account_sponsor_page.php'] = array( 'url'=>'account_sponsor_page.php', 'label'=>'my_sponsorship' );
+	}
+
+	# Remove the link from the current page
+	if( isset( $t_pages[$p_page] ) ) {
+		$t_pages[$p_page]['url'] = '';
+	}
+
+	# Plugin / Event added options
+	$t_event_menu_options = event_signal( 'EVENT_MENU_ACCOUNT' );
+	$t_menu_options = array();
+	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+			if( is_array( $t_callback_menu_options ) ) {
+				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
+			} else {
+				if( !is_null( $t_callback_menu_options ) ) {
+					$t_menu_options[] = $t_callback_menu_options;
+				}
+			}
+		}
+	}
+
+	echo '<div id="account-menu">';
+	echo '<ul class="menu">';
+	foreach ( $t_pages as $t_page ) {
+		if( $t_page['url'] == '' ) {
+			echo '<li><span>', lang_get( $t_page['label'] ), '</span></li>';
+		} else {
+			echo '<li><a href="'. helper_mantis_url( $t_page['url'] ) .'">' . lang_get( $t_page['label'] ) . '</a></li>';
+		}
+	}
+
+	# Plugins menu items - these are cooked links
+	foreach ( $t_menu_options as $t_menu_item ) {
+		echo '<li>', $t_menu_item, '</li>';
+	}
+	echo '</ul>';
+	echo '</div>';
+}
+
+/**
+ * Print the menu for the documentation section
+ * @param string $p_page Specifies the current page name so it's link can be disabled.
+ * @return void
+ */
+function print_doc_menu( $p_page = '' ) {
+	# User Documentation
+	$t_doc_url = config_get( 'manual_url' );
+	if( is_null( parse_url( $t_doc_url, PHP_URL_SCHEME ) ) ) {
+		# URL has no scheme, so it is relative to MantisBT root
+		if( is_blank( $t_doc_url ) ||
+			!file_exists( config_get_global( 'absolute_path' ) . $t_doc_url )
+		) {
+			# Local documentation not available, use online docs
+			$t_doc_url = 'http://www.mantisbt.org/documentation.php';
+		} else {
+			$t_doc_url = helper_mantis_url( $t_doc_url );
+		}
+	}
+
+	$t_pages[$t_doc_url] = array(
+		'url'   => $t_doc_url,
+		'label' => 'user_documentation'
+	);
+
+	# Project Documentation
+	$t_pages['proj_doc_page.php'] = array(
+		'url'   => helper_mantis_url( 'proj_doc_page.php' ),
+		'label' => 'project_documentation'
+	);
+
+	# Add File
+	if( file_allow_project_upload() ) {
+		$t_pages['proj_doc_add_page.php'] = array(
+			'url'   => helper_mantis_url( 'proj_doc_add_page.php' ),
+			'label' => 'add_file'
+		);
+	}
+
+	# Remove the link from the current page
+	if( isset( $t_pages[$p_page] ) ) {
+		$t_pages[$p_page]['url'] = '';
+	}
+
+	echo '<div id="doc-menu">';
+	echo '<ul class="menu">';
+	foreach ( $t_pages as $t_page ) {
+		if( $t_page['url'] == '' ) {
+			echo '<li>', lang_get( $t_page['label'] ), '</li>';
+		} else {
+			echo '<li><a href="'. $t_page['url'] .'">' . lang_get( $t_page['label'] ) . '</a></li>';
+		}
+	}
+	echo '</ul>';
+	echo '</div>';
+}
+
+/**
+ * Print the menu for the summary section
+ * @param string $p_page Specifies the current page name so it's link can be disabled.
+ * @return void
+ */
+function print_summary_menu( $p_page = '' ) {
+	# Plugin / Event added options
+	$t_event_menu_options = event_signal( 'EVENT_MENU_SUMMARY' );
+	$t_menu_options = array();
+	foreach( $t_event_menu_options as $t_plugin => $t_plugin_menu_options ) {
+		foreach( $t_plugin_menu_options as $t_callback => $t_callback_menu_options ) {
+			if( is_array( $t_callback_menu_options ) ) {
+				$t_menu_options = array_merge( $t_menu_options, $t_callback_menu_options );
+			} else {
+				if( !is_null( $t_callback_menu_options ) ) {
+					$t_menu_options[] = $t_callback_menu_options;
+				}
+			}
+		}
+	}
+
+	$t_pages['print_all_bug_page.php'] = array( 'url'=>'print_all_bug_page.php', 'label'=>'print_all_bug_page_link' );
+	$t_pages['summary_page.php'] = array( 'url'=>'summary_page.php', 'label'=>'summary_link' );
+	# Remove the link from the current page
+	if( isset( $t_pages[$p_page] ) ) {
+		$t_pages[$p_page]['url'] = '';
+	}
+
+	echo '<div id="summary-menu">';
+	echo '<ul class="menu">';
+
+	foreach ( $t_pages as $t_page ) {
+		if( $t_page['url'] == '' ) {
+			echo '<li>', lang_get( $t_page['label'] ), '</li>';
+		} else {
+			echo '<li><a href="'. helper_mantis_url( $t_page['url'] ) .'">' . lang_get( $t_page['label'] ) . '</a></li>';
+		}
+	}
+
+	# Plugins menu items - these are cooked links
+	foreach ( $t_menu_options as $t_menu_item ) {
+		echo '<li>', $t_menu_item, '</li>';
+	}
+	echo '</ul>';
+	echo '</div>';
 }
 
 /**

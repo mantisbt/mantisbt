@@ -30,6 +30,9 @@ access_ensure_project_level( config_get( 'view_summary_threshold' ) );
 
 html_page_top();
 
+print_summary_menu( 'summary_page.php' );
+echo '<br />';
+print_summary_submenu();
 $t_width = plugin_config_get( 'window_width' );
 $t_graph_width = (int)( ( $t_width - 50 ) * 0.6 );
 

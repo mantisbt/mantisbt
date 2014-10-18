@@ -53,6 +53,7 @@ $t_ldap = ( LDAP == config_get( 'login_method' ) );
 
 html_page_top();
 
+print_manage_menu( 'manage_user_create_page.php' );
 ?>
 <div id="manage-user-create-div" class="form-container">
 	<form id="manage-user-create-form" method="post" action="manage_user_create.php">

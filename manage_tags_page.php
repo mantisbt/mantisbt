@@ -102,7 +102,7 @@ if( $f_page_number < 1 ) {
 $t_result = tag_get_all( $t_name_filter, $t_per_page, $t_offset ) ;
 
 html_page_top( lang_get( 'manage_tags_link' ) );
-?>
+print_manage_menu( 'manage_tags_page.php' ); ?>
 
 <div id="manage-tags-filter-menu">
 	<ul class="menu"><?php

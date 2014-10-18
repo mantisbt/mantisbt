@@ -55,6 +55,9 @@ auth_reauthenticate();
 
 html_page_top( lang_get( 'manage_threshold_config' ) );
 
+print_manage_menu( 'adm_permissions_report.php' );
+print_manage_config_menu( 'manage_config_work_threshold_page.php' );
+
 $g_user = auth_get_current_user_id();
 $g_project_id = helper_get_current_project();
 $t_show_submit = false;

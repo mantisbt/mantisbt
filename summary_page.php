@@ -123,6 +123,12 @@ foreach ( $t_orct_arr as $t_orct_s ) {
 html_page_top( lang_get( 'summary_link' ) );
 ?>
 
+<br />
+<?php
+print_summary_menu( 'summary_page.php' );
+print_summary_submenu(); ?>
+<br />
+
 <div id="summary" class="section-container">
 
 <h2><?php echo lang_get( 'summary_title' ) ?></h2>

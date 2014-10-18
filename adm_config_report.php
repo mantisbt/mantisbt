@@ -58,6 +58,9 @@ $t_read_write_access = access_has_global_level( config_get( 'set_configuration_t
 
 html_page_top( lang_get( 'configuration_report' ) );
 
+print_manage_menu( 'adm_config_report.php' );
+print_manage_config_menu( 'adm_config_report.php' );
+
 $t_config_types = array(
 	CONFIG_TYPE_DEFAULT => 'default',
 	CONFIG_TYPE_INT     => 'integer',

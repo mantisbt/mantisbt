@@ -85,6 +85,7 @@ $t_ldap = ( LDAP == config_get( 'login_method' ) );
 
 html_page_top();
 
+print_manage_menu();
 ?>
 
 <!-- USER INFO -->
