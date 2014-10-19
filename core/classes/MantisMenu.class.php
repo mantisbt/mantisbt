@@ -389,6 +389,7 @@ class MantisMenu {
 			$t_manage_config->addLink( 'configuration_report' );
 			$t_manage_config->addLink( 'permissions_summary_report' );
 			$t_manage_config->addLink( 'manage_threshold_config' );
+			$t_manage_config->addLink( 'manage_workflow_config' );
 			$t_manage_config->addLink( 'manage_workflow_graph' );
 			$t_manage_config->addLink( 'manage_email_config' );
 			$t_manage_config->addLink( 'manage_columns_config' );
