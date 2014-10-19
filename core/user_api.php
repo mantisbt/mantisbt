@@ -695,7 +695,7 @@ function user_get_id_by_name( $p_username ) {
 		return $t_user['id'];
 	}
 
-	$t_query = 'SELECT * FROM {user} WHERE username=' . db_param();
+	$t_query = 'SELECT * FROM {user} WHERE username=%s';
 	$t_result = db_query( $t_query, array( $p_username ) );
 
 	$t_row = db_fetch_array( $t_result );
