@@ -246,7 +246,7 @@ function html_page_top2() {
 	$t_menus = call_user_func( array($t_menu_class, 'getMenusForPage' ), $t_page, $t_plugin_name, false );
 	foreach( $t_menus AS $t_menu ) {
 		if( $t_menu->name == 'main' ) {
-			echo '<div class="main-menu">' . "\n";
+			echo '<div class="main-menu header-menu">' . "\n";
 			$t_menu->include_div = false;
 		} else {
 			$t_menu->include_div = true;
@@ -306,10 +306,11 @@ function html_page_bottom1( $p_file = null ) {
 	event_signal( 'EVENT_LAYOUT_CONTENT_END' );
 	echo '</div>', "\n";
 	if( config_get( 'show_footer_menu' ) ) {
-		echo '<br />';
-		print_bug_jump();
+		echo '<div class="main-menu footer-menu">' . "\n";
 		$t_menu_class = config_get( 'menu_class', 'MantisMenu' );
 		call_user_func( array($t_menu_class, 'printMenu' ), 'main', true );
+		print_bug_jump();
+		echo '</div>' . "\n";
 	}
 
 	html_page_bottom1a( $p_file );

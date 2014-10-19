@@ -782,6 +782,10 @@ div.timeline p { margin-left: 3px; }
 	background-color: #e8e8e8;
 }
 
+.footer-menu {
+	margin-top: 1em;
+}
+
 /* common and top level styles */
 .nav span {
 	display: none;
