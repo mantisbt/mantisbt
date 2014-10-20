@@ -88,7 +88,7 @@ function db_unixtimestamp( $p_date = null, $p_gmt = false ) {
  * version 51) created type "L" columns in PostgreSQL as SMALLINT, whereas later
  * versions created them as BOOLEAN.
  * @return mixed true if columns check OK
- *               error message string if errors occured
+ *               error message string if errors occurred
  *               array of invalid columns otherwise (empty if all columns check OK)
  */
 function check_pgsql_bool_columns() {
@@ -137,6 +137,36 @@ function check_pgsql_bool_columns() {
 
 	# Some columns are not BOOLEAN type, return the list
 	return $t_result->GetArray();
+}
+
+function install_mysql_innodb() {
+	global $f_db_type;
+	global $g_db_log_queries;
+
+	$t_log_queries = install_set_log_queries();
+
+	# Only applies to Mysql
+	if( $f_db_type != 'mysqli' ) {
+		#return 2;
+	}
+
+	$t_tables = db_get_table_list();
+
+	foreach( $t_tables as $t_table ) {
+		$t_query = 'SHOW TABLE STATUS WHERE name = "' . $t_table . '"';
+		$t_result = db_query_bound( $t_query, array() );
+		$t_row = db_fetch_array( $t_result );
+
+		if( strtolower( $t_row['engine'] ) === 'myisam' ) {
+			$t_query = 'ALTER TABLE ' . $t_table . ' ENGINE = InnoDB;';
+			$t_result = db_query_bound( $t_query, array() );
+		}
+	}
+
+	# Re-enable query logging if we disabled it
+	install_set_log_queries( $t_log_queries );
+
+	return 2;
 }
 
 /**
