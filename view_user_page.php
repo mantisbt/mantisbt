@@ -108,6 +108,14 @@ html_page_top();
 		</span></span>
 		<span class="label-style"></span>
 	</div>
+	<div class="field-container">
+		<span class="display-label"><span><?php echo lang_get( 'last_visit' ) ?></span></span>
+		<span class="display-value"><span>
+			<?php echo date( config_get( 'normal_date_format' ), current_user_get_field( 'last_visit' ) ) ?>
+		</span></span>
+		<span class="label-style"></span>
+	</div>
+
 	<span class="section-links">
 	<?php if( $t_can_manage ) { ?>
 			<span id="manage-user-link"><a href="<?php echo string_html_specialchars( 'manage_user_edit_page.php?user_id=' . $f_user_id ); ?>"><?php echo lang_get( 'manage_user' ); ?></a></span>
