@@ -1743,6 +1743,9 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 			# Add the new relationship
 			relationship_add( $p_bug_id, $p_duplicate_id, BUG_DUPLICATE );
 
+			# update last updated timestamp for duplicate bug
+			bug_update_date( $p_duplicate_id );
+
 			# Add log line to the history (both bugs)
 			history_log_event_special( $p_bug_id, BUG_ADD_RELATIONSHIP, BUG_DUPLICATE, $p_duplicate_id );
 			history_log_event_special( $p_duplicate_id, BUG_ADD_RELATIONSHIP, BUG_HAS_DUPLICATE, $p_bug_id );
