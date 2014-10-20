@@ -1243,7 +1243,7 @@ function bug_move( $p_bug_id, $p_target_project_id ) {
  * @access public
  */
 function bug_delete( $p_bug_id ) {
-	$c_bug_id = (int)$p_bug_id;
+	$p_bug_id = (int)$p_bug_id;
 
 	# call pre-deletion custom function
 	helper_call_custom_function( 'issue_delete_validate', array( $p_bug_id ) );
@@ -1270,11 +1270,9 @@ function bug_delete( $p_bug_id ) {
 	# Delete all sponsorships
 	sponsorship_delete_all( $p_bug_id );
 
-	# MASC RELATIONSHIP
-	# we delete relationships even if the feature is currently off.
+	# Delete any relationships
 	relationship_delete_all( $p_bug_id );
 
-	# MASC RELATIONSHIP
 	# Delete files
 	file_delete_attachments( $p_bug_id );
 
@@ -1295,7 +1293,7 @@ function bug_delete( $p_bug_id ) {
 
 	# Delete the bug entry
 	$t_query = 'DELETE FROM {bug} WHERE id=' . db_param();
-	db_query( $t_query, array( $c_bug_id ) );
+	db_query( $t_query, array( $p_bug_id ) );
 
 	bug_clear_cache( $p_bug_id );
 	bug_text_clear_cache( $p_bug_id );
