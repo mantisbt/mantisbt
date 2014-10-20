@@ -48,7 +48,7 @@ function print_info_row( $p_description, $p_value ) {
 <div id="admin-menu">
 	<ul class="menu">
 		<li><a href="check/index.php">Check your installation</a></li>
-	<?php if( count( $g_upgrade ) - 1 != config_get( 'database_version' ) ) { ?>
+	<?php if( count( $g_upgrade ) - 1 != config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS ) ) { ?>
 		<li><a href="install.php"><span class="bold">Upgrade your installation</span></a></li>
 	<?php } ?>
 		<li><a href="system_utils.php">System Utilities</a></li>
@@ -79,7 +79,7 @@ function print_info_row( $p_description, $p_value ) {
 			</td>
 		</tr>
 <?php
-	print_info_row( lang_get( 'schema_version' ), config_get( 'database_version' ) );
+	print_info_row( lang_get( 'schema_version' ), config_get( 'database_version', -1, ALL_USERS, ALL_PROJECTS ) );
 	print_info_row( lang_get( 'adodb_version' ), $g_db->Version() );
 ?>
 		<tr>
