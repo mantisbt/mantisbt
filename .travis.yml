@@ -9,7 +9,7 @@ before_script:
   - ./scripts/travis_before_script.sh
 
 script:
-  - phpunit --bootstrap ./tests/bootstrap.php ./tests/AllTests.php
+  - vendor/bin/phing build
 
 # What to build, and on which platforms
 

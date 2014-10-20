@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="MantisBT">
+	<description>The coding standard for MantisBT.</description>
+
+	<!-- Exclude third party code -->
+	<exclude-pattern>*/.git/*</exclude-pattern>
+	<exclude-pattern>*/config/*</exclude-pattern>
+	<exclude-pattern>*/library/*</exclude-pattern>
+	<exclude-pattern>*/javascript/*</exclude-pattern>
+	<exclude-pattern>*/manual/*</exclude-pattern>
+	<exclude-pattern>*/css/*</exclude-pattern>
+	<exclude-pattern>*/phing/*</exclude-pattern>
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>config_defaults_inc.php</exclude-pattern>
+	<exclude-pattern>*/tests/bootstrap.php</exclude-pattern>
+	<!--<exclude-pattern>*/tests/*</exclude-pattern>
+	<exclude-pattern>*/phing/*</exclude-pattern>-->
+
+	<!--<rule ref="Generic.Strings.UnnecessaryStringConcat" />-->
+	<rule ref="Generic.PHP.DeprecatedFunctions" />
+	<rule ref="Generic.Formatting.NoSpaceAfterCast" />
+	<!-- <rule ref="Generic.Formatting.DisallowMultipleStatements" /> BAD - would need to exlucde php opening closing blocks -->
+	<rule ref="Generic.PHP.LowerCaseKeyword" />
+	<rule ref="Generic.PHP.LowerCaseConstant" />
+	<rule ref="Generic.Functions.FunctionCallArgumentSpacing" />
+	
+	<rule ref="Generic.ControlStructures.InlineControlStructure" />
+	
+	
+	<rule ref="PSR2.ControlStructures.ControlStructureSpacing">
+	  <properties>
+   <property name="requiredSpacesAfterOpen" value="1"/>
+   <property name="requiredSpacesBeforeClose" value="1" />
+  </properties>
+  </rule>
+
+  <rule ref="Squiz.Strings.DoubleQuoteUsage" />
+  
+ <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing">
+  <properties>
+   <property name="equalsSpacing" value="1" />
+   <property name="requiredSpacesAfterOpen" value="1" />
+   <property name="requiredSpacesBeforeClose" value="1" />
+  </properties>
+ </rule>
+  
+  <rule ref="Squiz.WhiteSpace.FunctionOpeningBraceSpace" />
+  
+  <rule ref="Generic.Functions.FunctionCallArgumentSpacing" />
+  
+  <rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie" />
+  
+  <rule ref="./Mantis/Sniffs/Functions/FunctionCallArgumentSpacingSniff.php" />
+  <rule ref="./Mantis/Sniffs/NamingConventions/ValidVariableNameSniff.php" />
+  
+	<!--<rule ref="Generic.PHP.ForbiddenFunctions" />-->
+	
+	<!-- Rule 1 - General Formatting: Disallow Short opening Tag -->
+	<rule ref="Generic.PHP.DisallowShortOpenTag" />
+	
+	<!-- Rule 2 - General Formatting: use Tabs not spaces for indentation -->
+	<rule ref="Generic.WhiteSpace.DisallowSpaceIndent" />
+	
+	<!-- Rule 3 - use # symbol for comments -->
+	<rule ref="./Mantis/Sniffs/Commenting/InlineCommentSniff.php" />
+	
+	<!-- Rule 4 - PHP Doc -->
+	
+	
+	<!-- Rule 5 - Whitespace -->
+	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace" />
+	<rule ref="Generic.Files.LineEndings">
+		<!-- Use Unix new lines -->
+		<properties>
+			<property name="eolChar" value="\n"/>
+		</properties>
+	</rule>	
+	
+	
+	<rule ref="./Mantis/Sniffs/ControlStructures/ControlSignatureSniff.php" />
+
+	
+	<!-- WARNINGS -->
+	<!-- Lines can be 120 chars long, but never show errors -->
+	<!--<rule ref="Generic.Files.LineLength">
+		<properties>
+			<property name="lineLimit" value="120"/>
+			<property name="absoluteLineLimit" value="0"/>
+		</properties>
+	</rule>	-->
+	<!-- END WARNINGS -->
+	
+	<!--<rule ref="./Mantis/" />-->
+
+	
+	<!--<rule ref="Zend.Files.ClosingTag" />-->
+	
+	<rule ref="Generic.PHP.DisallowShortOpenTag" />
+	<!--<rule ref="Generic.PHP.CharacterBeforePHPOpeningTag" />-->
+	<rule ref="Zend.Files.ClosingTag" />
+	
+	<!-- Use Unix newlines -->
+	<rule ref="Generic.Files.LineEndings">
+		<properties>
+			<property name="eolChar" value="\n"/>
+		</properties>
+	</rule>	
+	<rule ref="Generic.WhiteSpace.DisallowSpaceIndent" />
+	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace" />
+	
+
+
+	<!--<rule ref="Generic.PHP.CharacterBeforePHPOpeningTag" />-->
+	<!-- Arrays -->
+	<rule ref="Squiz.Arrays.ArrayBracketSpacing" />
+
+	<!-- Classes -->
+	<!--<rule ref="../TYPO3SniffPool/Sniffs/Classes/LowercaseClassKeywordsSniff.php" />
+	<rule ref="Squiz.Classes.SelfMemberReference" />
+	<rule ref="Generic.Classes.DuplicateClassName" />-->
+
+	<!-- CodeAnalysis -->
+	<!--<rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall" />
+	<rule ref="Generic.CodeAnalysis.UnusedFunctionParameter" />
+	<rule ref="Generic.CodeAnalysis.UnconditionalIfStatement" />
+	<rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier" />
+	<rule ref="Generic.CodeAnalysis.EmptyStatement" />-->
+
+	<!-- Commenting -->
+	<rule ref="Squiz.Commenting.FunctionComment" />
+	<rule ref="Squiz.Commenting.BlockComment" />
+	<!--<rule ref="Squiz.Commenting.ClassComment" />-->
+	
+	<!--<rule ref="PEAR.Commenting.InlineComment" />
+	<rule ref="../TYPO3SniffPool/Sniffs/Commenting/DoubleSlashCommentsInNewLineSniff.php" />
+	<rule ref="../TYPO3SniffPool/Sniffs/Commenting/ClassDocCommentSniff.php" />
+	<rule ref="../TYPO3SniffPool/Sniffs/Commenting/NoAuthorAnnotationInFunctionDocCommentSniff.php" />-->
+
+	<!-- Control structures -->
+	<!--<rule ref="Generic.ControlStructures.InlineControlStructure" />
+	<rule ref="../Bit3/Sniffs/ControlStructures/ControlSignatureSniff.php" />
+	<rule ref="Squiz.ControlStructures.ElseIfDeclaration" />
+	<rule ref="../TYPO3SniffPool/Sniffs/ControlStructures/ValidBreakStatementsInSwitchesSniff.php" />
+	<rule ref="../TYPO3SniffPool/Sniffs/ControlStructures/AlignedBreakStatementSniff.php" />
+	<rule ref="../TYPO3SniffPool/Sniffs/ControlStructures/ValidDefaultStatementsInSwitchesSniff.php" />
+	<rule ref="../TYPO3SniffPool/Sniffs/ControlStructures/DisallowEachInLoopConditionSniff.php" />-->
+
+	<!-- Debug -->
+	<!--<rule ref="../TYPO3SniffPool/Sniffs/Debug/DebugCodeSniff.php" />-->
+
+	<!-- Files -->
+	<!--<rule ref="Squiz.Classes.ClassFileName" />-->
+	<!--<rule ref="Generic.Files.LineEndings" />
+	<rule ref="Generic.Files.LineLength">
+		<properties>
+			<property name="lineLimit" value="120"/>
+			<property name="absoluteLineLimit" value="150"/>
+		</properties>
+	</rule>-->
+	<!--<rule ref="../TYPO3SniffPool/Sniffs/Files/IncludingFileSniff.php" />-->
+
+	<!-- Formatting -->
+	<!--<rule ref="Generic.Formatting.DisallowMultipleStatements" />-->
+
+	<!-- Functions -->
+	<!--<rule ref="Generic.Functions.FunctionCallArgumentSpacing" />-->
+	<!--<rule ref="phing/phpcs/Bit3/Sniffs/Functions/OpeningFunctionBraceBsdAllmanModifiedSniff.php" />-->
+	<!--<rule ref="Squiz.Scope.MethodScope" />-->
+	<!-- valid function name -->
+	<!--<rule ref="phing/phpcs/Bit3/Sniffs/Scope/AlwaysReturnSniff.php" />-->
+
+	<!-- Loops -->
+
+	<!-- NamingConventions -->
+	<!--<rule ref="phing/phpcs/Bit3/Sniffs/NamingConventions/ValidVariableNameSniff.php" />
+	<rule ref="Generic.NamingConventions.ConstructorName" />
+	<rule ref="phing/phpcs/TYPO3SniffPool/Sniffs/NamingConventions/ValidFunctionNameSniff.php" />-->
+
+	<!-- Objects -->
+
+	<!-- Operators -->
+
+	<!-- PHP -->
+	<!--<rule ref="phing/phpcs/TYPO3SniffPool/Sniffs/PHP/CharacterAfterPHPClosingTagSniff.php" />
+	<rule ref="Generic.PHP.DisallowShortOpenTag" />
+	<rule ref="Squiz.PHP.NonExecutableCode" />
+	<rule ref="phing/phpcs/TYPO3SniffPool/Sniffs/PHP/DisallowMultiplePHPTagsSniff.php" />
+	<rule ref="Zend.Files.ClosingTag" />
+	<rule ref="Generic.PHP.LowerCaseConstant" />
+	<rule ref="Generic.PHP.DeprecatedFunctions" />
+	<rule ref="Squiz.PHP.Eval">
+		<exclude-pattern>*/test/*</exclude-pattern>
+	</rule>
+	<rule ref="Squiz.PHP.GlobalKeyword" />-->
+
+	<!-- Scope -->
+	<!--<rule ref="Squiz.Scope.MemberVarScope" />-->
+
+	<!-- Strings -->
+	<!--<rule ref="phing/phpcs/TYPO3SniffPool/Sniffs/Strings/UnnecessaryStringConcatSniff.php" />
+	<rule ref="Squiz.Strings.DoubleQuoteUsage" />
+	<rule ref="phing/phpcs/TYPO3SniffPool/Sniffs/Strings/ConcatenationSpacingSniff.php" />-->
+
+	<!-- Whitespace -->
+	<!--<rule ref="phing/phpcs/TYPO3SniffPool/Sniffs/WhiteSpace/DisallowSpaceIndentSniff.php" />
+	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace" />
+	<rule ref="phing/phpcs/TYPO3SniffPool/Sniffs/WhiteSpace/AssignmentArithmeticAndComparisonSpaceSniff.php" />
+	<rule ref="Squiz.WhiteSpace.SemicolonSpacing" />
+	<rule ref="phing/phpcs/TYPO3SniffPool/Sniffs/WhiteSpace/AsteriksWhitespacesSniff.php" />
+	<rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing" />-->
+</ruleset>
