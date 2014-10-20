@@ -115,7 +115,7 @@ if( $t_finfo_exists ) {
 	);
 }
 
-$t_file_type_icons = config_get( 'file_type_icons' );
+$t_file_type_icons = config_get_global( 'file_type_icons' );
 foreach( $t_file_type_icons as $t_ext => $t_filename ) {
 	$t_file_path = dirname( dirname( dirname( __FILE__ ) ) ) . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'fileicons' . DIRECTORY_SEPARATOR . $t_filename;
 

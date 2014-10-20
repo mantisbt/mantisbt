@@ -44,7 +44,7 @@ require_api( 'print_api.php' );
 require_api( 'user_api.php' );
 
 # check if at least one way to get here is enabled
-if( OFF == config_get( 'allow_signup' ) &&
+if( OFF == config_get_global( 'allow_signup' ) &&
 	OFF == config_get( 'lost_password_feature' ) &&
 	OFF == config_get( 'send_reset_password' ) ) {
 	trigger_error( ERROR_LOST_PASSWORD_NOT_ENABLED, ERROR );

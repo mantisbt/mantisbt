@@ -59,7 +59,7 @@ if( plugin_is_installed( 'MantisGraph' ) ) {
 	if( plugin_config_get( 'eczlibrary', ON ) == OFF ) {
 		$t_jpgraph_path = plugin_config_get( 'jpgraph_path' );
 		if( $t_jpgraph_path == '' ) {
-			$t_jpgraph_path = config_get( 'absolute_path' ) . 'library/jpgraph';
+			$t_jpgraph_path = config_get_global( 'absolute_path' ) . 'library/jpgraph';
 		}
 		$t_jpgraph_path .= '/jpgraph.php';
 

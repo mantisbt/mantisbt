@@ -58,7 +58,7 @@ html_page_top();
 <br />
 <div id="save-filter">
 <?php
-$t_query_to_store = filter_db_get_filter( gpc_get_cookie( config_get( 'view_all_cookie' ), '' ) );
+$t_query_to_store = filter_db_get_filter( gpc_get_cookie( config_get_global( 'view_all_cookie' ), '' ) );
 $t_query_arr = filter_db_get_available_queries();
 
 # Let's just see if any of the current filters are the

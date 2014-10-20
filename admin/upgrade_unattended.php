@@ -95,11 +95,11 @@ if( -1 == config_get( 'database_version', -1 ) ) {
 }
 
 # read control variables with defaults
-$f_hostname = gpc_get( 'hostname', config_get( 'hostname', 'localhost' ) );
-$f_db_type = gpc_get( 'db_type', config_get( 'db_type', '' ) );
-$f_database_name = gpc_get( 'database_name', config_get( 'database_name', 'bugtrack' ) );
-$f_db_username = gpc_get( 'db_username', config_get( 'db_username', '' ) );
-$f_db_password = gpc_get( 'db_password', config_get( 'db_password', '' ) );
+$f_hostname = gpc_get( 'hostname', config_get_global( 'hostname', 'localhost' ) );
+$f_db_type = gpc_get( 'db_type', config_get_global( 'db_type', '' ) );
+$f_database_name = gpc_get( 'database_name', config_get_global( 'database_name', 'bugtrack' ) );
+$f_db_username = gpc_get( 'db_username', config_get_global( 'db_username', '' ) );
+$f_db_password = gpc_get( 'db_password', config_get_global( 'db_password', '' ) );
 $f_db_exists = gpc_get_bool( 'db_exists', false );
 
 # install the tables

@@ -128,7 +128,7 @@ function auth_is_user_authenticated() {
  * @access public
  */
 function auth_prepare_username( $p_username ) {
-	switch( config_get( 'login_method' ) ) {
+	switch( config_get_global( 'login_method' ) ) {
 		case BASIC_AUTH:
 			$f_username = $_SERVER['REMOTE_USER'];
 			break;
@@ -160,7 +160,7 @@ function auth_prepare_username( $p_username ) {
  * @access public
  */
 function auth_prepare_password( $p_password ) {
-	switch( config_get( 'login_method' ) ) {
+	switch( config_get_global( 'login_method' ) ) {
 		case BASIC_AUTH:
 			$f_password = $_SERVER['PHP_AUTH_PW'];
 			break;
@@ -201,7 +201,7 @@ function auth_prepare_password( $p_password ) {
 function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
 	$t_user_id = user_get_id_by_name( $p_username );
 
-	$t_login_method = config_get( 'login_method' );
+	$t_login_method = config_get_global( 'login_method' );
 
 	if( false === $t_user_id ) {
 		if( BASIC_AUTH == $t_login_method ) {
@@ -290,9 +290,9 @@ function auth_attempt_script_login( $p_username, $p_password = null ) {
 	$t_username = $p_username;
 	$t_password = $p_password;
 
-	$t_anon_allowed = config_get( 'allow_anonymous_login' );
+	$t_anon_allowed = config_get_global( 'allow_anonymous_login' );
 	if( $t_anon_allowed == ON ) {
-		$t_anonymous_account = config_get( 'anonymous_account' );
+		$t_anonymous_account = config_get_global( 'anonymous_account' );
 	} else {
 		$t_anonymous_account = '';
 	}
@@ -362,7 +362,7 @@ function auth_logout() {
 		helper_clear_pref_cookies();
 	}
 
-	if( HTTP_AUTH == config_get( 'login_method' ) ) {
+	if( HTTP_AUTH == config_get_global( 'login_method' ) ) {
 		auth_http_set_logout_pending( true );
 	}
 
@@ -375,7 +375,7 @@ function auth_logout() {
  * @access public
  */
 function auth_automatic_logon_bypass_form() {
-	switch( config_get( 'login_method' ) ) {
+	switch( config_get_global( 'login_method' ) ) {
 		case HTTP_AUTH:
 			return true;
 	}
@@ -389,7 +389,7 @@ function auth_automatic_logon_bypass_form() {
  * @access public
  */
 function auth_get_password_max_size() {
-	switch( config_get( 'login_method' ) ) {
+	switch( config_get_global( 'login_method' ) ) {
 		# Max password size cannot be bigger than the database field
 		case PLAIN:
 		case BASIC_AUTH:
@@ -411,7 +411,7 @@ function auth_get_password_max_size() {
  * @access public
  */
 function auth_does_password_match( $p_user_id, $p_test_password ) {
-	$t_configured_login_method = config_get( 'login_method' );
+	$t_configured_login_method = config_get_global( 'login_method' );
 
 	if( LDAP == $t_configured_login_method ) {
 		return ldap_authenticate( $p_user_id, $p_test_password );
@@ -463,7 +463,7 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
  * @access public
  */
 function auth_process_plain_password( $p_password, $p_salt = null, $p_method = null ) {
-	$t_login_method = config_get( 'login_method' );
+	$t_login_method = config_get_global( 'login_method' );
 	if( $p_method !== null ) {
 		$t_login_method = $p_method;
 	}
@@ -529,7 +529,7 @@ function auth_generate_confirm_hash( $p_user_id ) {
 function auth_set_cookies( $p_user_id, $p_perm_login = false ) {
 	$t_cookie_string = user_get_field( $p_user_id, 'cookie_string' );
 
-	$t_cookie_name = config_get( 'string_cookie' );
+	$t_cookie_name = config_get_global( 'string_cookie' );
 
 	if( $p_perm_login ) {
 		# set permanent cookie (1 year)
@@ -553,8 +553,8 @@ function auth_clear_cookies() {
 
 	# clear cookie, if not logged in from script
 	if( $g_script_login_cookie == null ) {
-		$t_cookie_name = config_get( 'string_cookie' );
-		$t_cookie_path = config_get( 'cookie_path' );
+		$t_cookie_name = config_get_global( 'string_cookie' );
+		$t_cookie_path = config_get_global( 'cookie_path' );
 
 		gpc_clear_cookie( $t_cookie_name, $t_cookie_path );
 		$t_cookies_cleared = true;
@@ -620,18 +620,18 @@ function auth_get_current_user_cookie( $p_login_anonymous = true ) {
 	}
 
 	# fetch user cookie
-	$t_cookie_name = config_get( 'string_cookie' );
+	$t_cookie_name = config_get_global( 'string_cookie' );
 	$t_cookie = gpc_get_cookie( $t_cookie_name, '' );
 
 	# if cookie not found, and anonymous login enabled, use cookie of anonymous account.
 	if( is_blank( $t_cookie ) ) {
-		if( $p_login_anonymous && ON == config_get( 'allow_anonymous_login' ) ) {
+		if( $p_login_anonymous && ON == config_get_global( 'allow_anonymous_login' ) ) {
 			if( $g_cache_anonymous_user_cookie_string === null ) {
 				if( function_exists( 'db_is_connected' ) && db_is_connected() ) {
 
 					# get anonymous information if database is available
 					$t_query = 'SELECT id, cookie_string FROM {user} WHERE username = ' . db_param();
-					$t_result = db_query( $t_query, array( config_get( 'anonymous_account' ) ) );
+					$t_result = db_query( $t_query, array( config_get_global( 'anonymous_account' ) ) );
 
 					if( $t_row = db_fetch_array( $t_result ) ) {
 						$t_cookie = $t_row['cookie_string'];
@@ -673,7 +673,7 @@ function auth_set_tokens( $p_user_id ) {
  * @access public
  */
 function auth_reauthenticate() {
-	if( config_get_global( 'reauthentication' ) == OFF || BASIC_AUTH == config_get( 'login_method' ) || HTTP_AUTH == config_get( 'login_method' ) ) {
+	if( config_get_global( 'reauthentication' ) == OFF || BASIC_AUTH == config_get_global( 'login_method' ) || HTTP_AUTH == config_get_global( 'login_method' ) ) {
 		return true;
 	}
 
@@ -682,8 +682,8 @@ function auth_reauthenticate() {
 		token_touch( $t_auth_token['id'], config_get_global( 'reauthentication_expiry' ) );
 		return true;
 	} else {
-		$t_anon_account = config_get( 'anonymous_account' );
-		$t_anon_allowed = config_get( 'allow_anonymous_login' );
+		$t_anon_account = config_get_global( 'anonymous_account' );
+		$t_anon_allowed = config_get_global( 'allow_anonymous_login' );
 
 		$t_user_id = auth_get_current_user_id();
 		$t_username = user_get_field( $t_user_id, 'username' );
@@ -870,12 +870,12 @@ function auth_http_prompt() {
  * @return void
  */
 function auth_http_set_logout_pending( $p_pending ) {
-	$t_cookie_name = config_get( 'logout_cookie' );
+	$t_cookie_name = config_get_global( 'logout_cookie' );
 
 	if( $p_pending ) {
 		gpc_set_cookie( $t_cookie_name, '1', false );
 	} else {
-		$t_cookie_path = config_get( 'cookie_path' );
+		$t_cookie_path = config_get( 'global_cookie_path' );
 		gpc_clear_cookie( $t_cookie_name, $t_cookie_path );
 	}
 }
@@ -887,7 +887,7 @@ function auth_http_set_logout_pending( $p_pending ) {
  * @access public
  */
 function auth_http_is_logout_pending() {
-	$t_cookie_name = config_get( 'logout_cookie' );
+	$t_cookie_name = config_get_global( 'logout_cookie' );
 	$t_cookie = gpc_get_cookie( $t_cookie_name, '' );
 
 	return( $t_cookie > '' );

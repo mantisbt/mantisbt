@@ -87,7 +87,7 @@ $t_unique_project_ids = array_unique( $t_project_ids );
 user_cache_array_rows( $t_unique_users_handlers );
 project_cache_array_rows( $t_unique_project_ids );
 
-gpc_set_cookie( config_get( 'bug_list_cookie' ), implode( ',', $t_bugslist ) );
+gpc_set_cookie( config_get_global( 'bug_list_cookie' ), implode( ',', $t_bugslist ) );
 
 compress_enable();
 

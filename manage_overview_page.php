@@ -73,15 +73,15 @@ html_page_top( lang_get( 'manage_link' ) );
 	?>
 		<tr>
 			<th class="category"><?php echo lang_get( 'site_path' ) ?></th>
-			<td><?php echo config_get( 'absolute_path' ) ?></td>
+			<td><?php echo config_get_global( 'absolute_path' ) ?></td>
 		</tr>
 		<tr>
 			<th class="category"><?php echo lang_get( 'core_path' ) ?></th>
-			<td><?php echo config_get( 'core_path' ) ?></td>
+			<td><?php echo config_get_global( 'core_path' ) ?></td>
 		</tr>
 		<tr>
 			<th class="category"><?php echo lang_get( 'plugin_path' ) ?></th>
-			<td><?php echo config_get( 'plugin_path' ) ?></td>
+			<td><?php echo config_get_global( 'plugin_path' ) ?></td>
 		</tr>
 		<tr class="spacer">
 			<td colspan="2"></td>

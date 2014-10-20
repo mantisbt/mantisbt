@@ -122,7 +122,7 @@ function rss_get_issues_feed_url( $p_project_id = null, $p_username = null, $p_f
 	$t_user_id = user_get_id_by_name( $t_username );
 
 	if( $p_relative ) {
-		$t_url = config_get( 'path' );
+		$t_url = config_get_global( 'path' );
 	} else {
 		$t_url = '';
 	}
@@ -171,7 +171,7 @@ function rss_get_news_feed_url( $p_project_id = null, $p_username = null, $p_rel
 	if( $p_relative ) {
 		$t_rss_link = '';
 	} else {
-		$t_rss_link = config_get( 'path' );
+		$t_rss_link = config_get_global( 'path' );
 	}
 
 	$t_user_id = user_get_id_by_name( $t_username );

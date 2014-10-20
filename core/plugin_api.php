@@ -147,7 +147,7 @@ function plugin_page( $p_page, $p_redirect = false, $p_base_name = null ) {
  * @return mixed File path or false if FNF
  */
 function plugin_file_path( $p_filename, $p_base_name ) {
-	$t_file_path = config_get( 'plugin_path' );
+	$t_file_path = config_get_global( 'plugin_path' );
 	$t_file_path .= $p_base_name . DIRECTORY_SEPARATOR;
 	$t_file_path .= 'files' . DIRECTORY_SEPARATOR . $p_filename;
 

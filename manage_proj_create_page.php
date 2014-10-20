@@ -123,7 +123,7 @@ if( project_table_empty() ) {
 				$t_file_path = '';
 				# Don't reveal the absolute path to non-administrators for security reasons
 				if( current_user_is_administrator() ) {
-					$t_file_path = config_get( 'absolute_path_default_upload_folder' );
+					$t_file_path = config_get_global( 'absolute_path_default_upload_folder' );
 				}
 				?>
 				<div class="field-container">

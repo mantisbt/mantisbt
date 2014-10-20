@@ -69,7 +69,7 @@ if( !mci_is_webservice_call() ) {
 
 	header( 'Content-Type: text/xml' );
 	$t_wsdl = file_get_contents( 'mantisconnect.wsdl' );
-	$t_wsdl = str_replace( 'http://www.mantisbt.org/bugs/api/soap/mantisconnect.php', config_get( 'path' ).'api/soap/mantisconnect.php', $t_wsdl );
+	$t_wsdl = str_replace( 'http://www.mantisbt.org/bugs/api/soap/mantisconnect.php', config_get_global( 'path' ).'api/soap/mantisconnect.php', $t_wsdl );
 	echo $t_wsdl;
 	exit();
 }

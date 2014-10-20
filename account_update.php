@@ -83,7 +83,7 @@ $t_email_updated = false;
 $t_password_updated = false;
 $t_realname_updated = false;
 
-$t_ldap = ( LDAP == config_get( 'login_method' ) );
+$t_ldap = ( LDAP == config_get_global( 'login_method' ) );
 
 # Update email (but only if LDAP isn't being used)
 if( !( $t_ldap && config_get( 'use_ldap_email' ) ) ) {
