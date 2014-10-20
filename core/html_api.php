@@ -733,45 +733,45 @@ function html_footer() {
 	# Print horizontal rule if any debugging statistics follow
 	if( config_get( 'show_timer' ) || config_get( 'show_memory_usage' ) || config_get( 'show_queries_count' ) ) {
 		echo "\t" . '<hr />' . "\n";
-	}
 
-	# Print the page execution time
-	if( config_get( 'show_timer' ) ) {
-		$t_page_execution_time = sprintf( lang_get( 'page_execution_time' ), number_format( microtime( true ) - $g_request_time, 4 ) );
-		echo "\t" . '<p id="page-execution-time">' . $t_page_execution_time . '</p>' . "\n";
-	}
+		# Print the page execution time
+		if( config_get( 'show_timer' ) ) {
+			$t_page_execution_time = sprintf( lang_get( 'page_execution_time' ), number_format( microtime( true ) - $g_request_time, 4 ) );
+			echo "\t" . '<p id="page-execution-time">' . $t_page_execution_time . '</p>' . "\n";
+		}
 
-	# Print the page memory usage
-	if( config_get( 'show_memory_usage' ) ) {
-		$t_page_memory_usage = sprintf( lang_get( 'memory_usage_in_kb' ), number_format( memory_get_peak_usage() / 1024 ) );
-		echo "\t" . '<p id="page-memory-usage">' . $t_page_memory_usage . '</p>' . "\n";
-	}
+		# Print the page memory usage
+		if( config_get( 'show_memory_usage' ) ) {
+			$t_page_memory_usage = sprintf( lang_get( 'memory_usage_in_kb' ), number_format( memory_get_peak_usage() / 1024 ) );
+			echo "\t" . '<p id="page-memory-usage">' . $t_page_memory_usage . '</p>' . "\n";
+		}
 
-	# Determine number of unique queries executed
-	if( config_get( 'show_queries_count' ) ) {
-		$t_total_queries_count = count( $g_queries_array );
-		$t_unique_queries_count = 0;
-		$t_total_query_execution_time = 0;
-		$t_unique_queries = array();
-		for( $i = 0; $i < $t_total_queries_count; $i++ ) {
-			if( !in_array( $g_queries_array[$i][0], $t_unique_queries ) ) {
-				$t_unique_queries_count++;
-				$g_queries_array[$i][3] = false;
-				array_push( $t_unique_queries, $g_queries_array[$i][0] );
-			} else {
-				$g_queries_array[$i][3] = true;
+		# Determine number of unique queries executed
+		if( config_get( 'show_queries_count' ) ) {
+			$t_total_queries_count = count( $g_queries_array );
+			$t_unique_queries_count = 0;
+			$t_total_query_execution_time = 0;
+			$t_unique_queries = array();
+			for( $i = 0; $i < $t_total_queries_count; $i++ ) {
+				if( !in_array( $g_queries_array[$i][0], $t_unique_queries ) ) {
+					$t_unique_queries_count++;
+					$g_queries_array[$i][3] = false;
+					array_push( $t_unique_queries, $g_queries_array[$i][0] );
+				} else {
+					$g_queries_array[$i][3] = true;
+				}
+				$t_total_query_execution_time += $g_queries_array[$i][1];
 			}
-			$t_total_query_execution_time += $g_queries_array[$i][1];
-		}
 
-		$t_total_queries_executed = sprintf( lang_get( 'total_queries_executed' ), $t_total_queries_count );
-		echo "\t" . '<p id="total-queries-count">' . $t_total_queries_executed . '</p>' . "\n";
-		if( config_get_global( 'db_log_queries' ) ) {
-			$t_unique_queries_executed = sprintf( lang_get( 'unique_queries_executed' ), $t_unique_queries_count );
-			echo "\t" . '<p id="unique-queries-count">' . $t_unique_queries_executed . '</p>' . "\n";
+			$t_total_queries_executed = sprintf( lang_get( 'total_queries_executed' ), $t_total_queries_count );
+			echo "\t" . '<p id="total-queries-count">' . $t_total_queries_executed . '</p>' . "\n";
+			if( config_get_global( 'db_log_queries' ) ) {
+				$t_unique_queries_executed = sprintf( lang_get( 'unique_queries_executed' ), $t_unique_queries_count );
+				echo "\t" . '<p id="unique-queries-count">' . $t_unique_queries_executed . '</p>' . "\n";
+			}
+			$t_total_query_time = sprintf( lang_get( 'total_query_execution_time' ), $t_total_query_execution_time );
+			echo "\t" . '<p id="total-query-execution-time">' . $t_total_query_time . '</p>' . "\n";
 		}
-		$t_total_query_time = sprintf( lang_get( 'total_query_execution_time' ), $t_total_query_execution_time );
-		echo "\t" . '<p id="total-query-execution-time">' . $t_total_query_time . '</p>' . "\n";
 	}
 
 	# Print table of log events
@@ -788,7 +788,6 @@ function html_body_end() {
 	event_signal( 'EVENT_LAYOUT_BODY_END' );
 
 	echo '</div>', "\n";
-
 	echo '</body>', "\n";
 }
 
@@ -1290,7 +1289,7 @@ function html_button_bug_delete( $p_bug_id ) {
 function html_button_wiki( $p_bug_id ) {
 	if( config_get_global( 'wiki_enable' ) == ON ) {
 		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
-			html_button( 'wiki.php', lang_get_defaulted( 'Wiki' ), array( 'id' => $p_bug_id, 'type' => 'issue' ), 'get' );
+			html_button( 'wiki.php', lang_get( 'Wiki' ), array( 'id' => $p_bug_id, 'type' => 'issue' ), 'get' );
 		}
 	}
 }
