@@ -101,10 +101,10 @@ function custom_function_default_changelog_print_issue( $p_issue_id, $p_issue_le
 		echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
 	}
 
-	if( !isset( $s_status[$t_bug->status] ) ) {
-		$s_status[$t_bug->status] = get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
+	if( !isset( $s_status[$t_bug->project_id][$t_bug->status] ) ) {
+		$s_status[$t_bug->project_id][$t_bug->status] = get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
 	}
-	echo ' - ', $s_status[$t_bug->status], '.<br />';
+	echo ' - ', $s_status[$t_bug->project_id][$t_bug->status], '.<br />';
 }
 
 /**
@@ -151,10 +151,10 @@ function custom_function_default_roadmap_print_issue( $p_issue_id, $p_issue_leve
 		echo ' (', prepare_user_name( $t_bug->handler_id ), ')';
 	}
 
-	if( !isset( $s_status[$t_bug->status] ) ) {
-		$s_status[$t_bug->status] = get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
+	if( !isset( $s_status[$t_bug->project_id][$t_bug->status] ) ) {
+		$s_status[$t_bug->project_id][$t_bug->status] = get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
 	}
-	echo ' - ', $s_status[$t_bug->status], $t_strike_end, '.<br />';
+	echo ' - ', $s_status[$t_bug->project_id][$t_bug->status], $t_strike_end, '.<br />';
 }
 
 /**
