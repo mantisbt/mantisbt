@@ -39,6 +39,7 @@
  * @file
  *
  * @author Amire80
+ * @author Guycn2
  * @author Orentet
  * @author Rotemliss
  * @author YaronSh
@@ -59,6 +60,7 @@ $s_actiongroup_menu_update_view_status = 'עדכון מצב הצגה';
 $s_actiongroup_menu_update_category = 'עדכון קטגוריה';
 $s_actiongroup_menu_set_sticky = 'החלה או ביטול של דביקות';
 $s_actiongroup_menu_update_field = 'עדכון %1$s';
+$s_actiongroup_menu_update_product_version = 'עדכון גרסת המוצר';
 $s_actiongroup_menu_update_target_version = 'עדכון גרסת יעד';
 $s_actiongroup_menu_update_fixed_in_version = 'עדכון באיזו גרסה תוקן';
 $s_actiongroup_menu_update_product_build = 'עדכון בניית מוצר';
@@ -153,6 +155,7 @@ $s_status_bugs_conf_msg = 'בחירת מצב';
 $s_view_status_bugs_conf_msg = 'בחירת הרשאת צפייה';
 $s_category_bugs_conf_msg = 'בחירת קטגוריה';
 $s_set_sticky_bugs_conf_msg = 'האם ברצונך לשנות את מצב הדביקות של הבאגים?';
+$s_product_version_bugs_conf_msg = 'עדכון גרסת המוצר';
 $s_fixed_in_version_bugs_conf_msg = 'עדכון תוקן בגרסה ל';
 $s_target_version_bugs_conf_msg = 'עדכון גרסת יעד ל';
 $s_close_group_bugs_button = 'סגירת באגים';
@@ -166,6 +169,7 @@ $s_status_group_bugs_button = 'עדכון מצב';
 $s_category_group_bugs_button = 'עדכון קטגוריה';
 $s_view_status_group_bugs_button = 'עדכון הרשאת צפייה';
 $s_set_sticky_group_bugs_button = 'החלה או ביטול של דביקות';
+$s_product_version_group_bugs_button = 'עדכון גרסת המוצר';
 $s_fixed_in_version_group_bugs_button = 'עדכן תוקן בגרסה';
 $s_target_version_group_bugs_button = 'עדכן גרסת מטרה';
 $s_update_severity_title = 'עדכון חומרה';

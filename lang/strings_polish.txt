@@ -43,6 +43,7 @@
  * @author Chrumps
  * @author Cysioland
  * @author Debeet
+ * @author Py64
  * @author Rezonansowy
  * @author Sp5uhe
  * @author Ty221
@@ -63,6 +64,7 @@ $s_actiongroup_menu_update_view_status = 'Aktualizuj widoczność';
 $s_actiongroup_menu_update_category = 'Aktualizuj kategorię';
 $s_actiongroup_menu_set_sticky = 'Przyklej lub odklej';
 $s_actiongroup_menu_update_field = 'Aktualizuj %1$s';
+$s_actiongroup_menu_update_product_version = 'Zaktualizuj wersję produktu';
 $s_actiongroup_menu_update_target_version = 'Edytuj docelową wersję';
 $s_actiongroup_menu_update_fixed_in_version = 'Aktualizuj naprawione w wersji';
 $s_actiongroup_menu_update_product_build = 'Uaktualnij wersję produktu';
@@ -157,6 +159,7 @@ $s_status_bugs_conf_msg = 'Wybierz status zgłoszeń';
 $s_view_status_bugs_conf_msg = 'Wybierz widoczność zgłoszeń';
 $s_category_bugs_conf_msg = 'Wybierz kategorię zgłoszeń';
 $s_set_sticky_bugs_conf_msg = 'Czy jesteś pewien, że chcesz ustawić lub usunąć przyklejenie tych zgłoszeń?';
+$s_product_version_bugs_conf_msg = 'Zaktualizuj wersję produktu do';
 $s_fixed_in_version_bugs_conf_msg = 'Zaktualizuj naprawiono w wersji do';
 $s_target_version_bugs_conf_msg = 'Zaktualizuj wersję docelową do';
 $s_close_group_bugs_button = 'Zamknij zgłoszenia';
@@ -170,6 +173,7 @@ $s_status_group_bugs_button = 'Aktualizuj status';
 $s_category_group_bugs_button = 'Aktualizuj kategorię';
 $s_view_status_group_bugs_button = 'Aktualizuj widoczność';
 $s_set_sticky_group_bugs_button = 'Przyklej lub odklej';
+$s_product_version_group_bugs_button = 'Zaktualizuj wersję produktu';
 $s_fixed_in_version_group_bugs_button = 'Zaktualizuj naprawiono w wersji';
 $s_target_version_group_bugs_button = 'Zaktualizuj docelową wersję';
 $s_update_severity_title = 'Aktualizacja ważności';
@@ -923,7 +927,7 @@ $s_custom_field_type_enum_string = '0:Łańcuch znaków,1:Liczba całkowita,2:Li
 $s_confirm_used_custom_field_deletion = 'To pole jest obecnie połączone co najmniej z jednym projektem. Jeżeli je usuniesz, wszystkie wartości zostaną skasowane. Nie będzie też możliwe odzyskanie danych. Jeżeli nie chcesz usunąć tego pola, kliknij Wstecz w przeglądarce. kliknij przycisk poniżej aby kontynuwać';
 $s_confirm_custom_field_deletion = 'Czy na pewno chcesz usunąć pole niestandardowe i wszystkie powiązane z nim wartości?';
 $s_field_delete_button = 'Usuń pole';
-$s_confirm_custom_field_unlinking = 'Czy na pewno chcesz usunąć pole niestandardowe z projektu? Wartości nie zostaną usunięte tak długo jak ich pole niestandardowe nie będzie usunięte.';
+$s_confirm_custom_field_unlinking = 'Czy na pewno chcesz rozłączyć to niestandardowe pole z projektu? Wartości zostaną usunięte, tak długo aż niestandardowe pole jest nie usunięte.';
 $s_field_remove_button = 'Usuń pole';
 $s_hide_status = 'Ukryj status';
 $s_filter_closed = 'Zamknięte';

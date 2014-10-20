@@ -46,6 +46,7 @@
  * @author Hydra
  * @author Hzy980512
  * @author Liangent
+ * @author Linforest
  * @author Liuxinyu970226
  * @author Mmyangfl
  * @author PhiLiP
@@ -70,6 +71,7 @@ $s_actiongroup_menu_update_view_status = '更改查看权限';
 $s_actiongroup_menu_update_category = '更新类别';
 $s_actiongroup_menu_set_sticky = '设置/取消置顶';
 $s_actiongroup_menu_update_field = '更新%1$s';
+$s_actiongroup_menu_update_product_version = '更新产品版本';
 $s_actiongroup_menu_update_target_version = '更改目标版本';
 $s_actiongroup_menu_update_fixed_in_version = '更改修正版本';
 $s_actiongroup_menu_update_product_build = '更新产品架构';
@@ -167,6 +169,7 @@ $s_status_bugs_conf_msg = '选择问题状态';
 $s_view_status_bugs_conf_msg = '选择问题查看权限';
 $s_category_bugs_conf_msg = '选择问题类别';
 $s_set_sticky_bugs_conf_msg = '你确定要设置/取消这些问题的置顶吗？';
+$s_product_version_bugs_conf_msg = '更新产品版本至';
 $s_fixed_in_version_bugs_conf_msg = '更改修正版本为';
 $s_target_version_bugs_conf_msg = '更改目标版本为';
 $s_close_group_bugs_button = '关闭问题';
@@ -180,6 +183,7 @@ $s_status_group_bugs_button = '修改状态';
 $s_category_group_bugs_button = '更新分类';
 $s_view_status_group_bugs_button = '修改查看权限';
 $s_set_sticky_group_bugs_button = '设置/取消置顶';
+$s_product_version_group_bugs_button = '更新产品版本';
 $s_fixed_in_version_group_bugs_button = '更改修正版本';
 $s_target_version_group_bugs_button = '更改目标版本';
 $s_update_severity_title = '更新严重性';
@@ -981,7 +985,7 @@ $s_custom_field_type_enum_string = '0:字符串,1:数值,2:浮点数,3:枚举类
 $s_confirm_used_custom_field_deletion = '当前有至少一个项目链接到了这个字段，如果继续，这个字段的所有值都将被永久删除；删除操作无法恢复。如果你不想删除这个字段，请点击浏览器的“返回”按钮；点击下面的按钮继续删除。';
 $s_confirm_custom_field_deletion = '你确定要删除这个自定义字段和所有相关联的值吗？';
 $s_field_delete_button = '删除字段';
-$s_confirm_custom_field_unlinking = '您确信您要从项目移除（取消连接）此自定义字段表并删除所有关联值么？';
+$s_confirm_custom_field_unlinking = '您确信您要从项目取消连接此自定义字段？只要自定义字段本身不被删除，这些值将不会被删除。';
 $s_field_remove_button = '移除字段';
 $s_hide_status = '隐藏状态';
 $s_hide_status_label = '隐藏状态：';
