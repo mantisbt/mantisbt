@@ -247,20 +247,10 @@ if( !isset( $g_login_anonymous ) ) {
 }
 
 # Attempt to set the current timezone to the user's desired value
-# Note that PHP 5.1 on RHEL/CentOS doesn't support the timezone functions
-# used here so we just skip this action on RHEL/CentOS platforms.
-if( function_exists( 'timezone_identifiers_list' ) ) {
-	if( in_array( config_get_global( 'default_timezone' ), timezone_identifiers_list() ) ) {
-		# if a default timezone is set in config, set it here, else we use php.ini's value
-		# having a timezone set avoids a php warning
-		date_default_timezone_set( config_get_global( 'default_timezone' ) );
-	} else {
-		# To ensure proper detection of timezone settings issues, we must not
-		# initialize the default timezone when executing admin checks
-		if( basename( $g_short_path ) != 'check' ) {
-			config_set_global( 'default_timezone', date_default_timezone_get(), true );
-		}
-	}
+# To ensure proper detection of timezone settings issues, we must not
+# initialize the default timezone when executing admin checks or during installation
+if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
+	date_default_timezone_set( config_get_global( 'default_timezone' ) );
 
 	require_api( 'authentication_api.php' );
 	if( auth_is_user_authenticated() ) {

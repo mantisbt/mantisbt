@@ -1134,10 +1134,13 @@ $g_calendar_date_format = 'Y-m-d H:i';
 /**
  * Default timezone to use in MantisBT
  *
- * If this config is left blank, it will be initialized by calling function
- * {@link http://php.net/date-default-timezone-get date_default_timezone_get()}
- * to determine the default timezone.
- * Note that this function's behavior was modified in PHP 5.4.0.
+ * This configuration value is set during the initial mantis installation.
+ * The value of this config should be set to any of the PHP supported timezones.
+ *
+ * Correct configuration of this variable (after initial installation)
+ * can be confirmed by running the administration checks.
+ *
+ * Individual users can customise their own timezones under user preferences.
  *
  * @link http://php.net/timezones List of Supported Timezones
  * @global string $g_default_timezone
