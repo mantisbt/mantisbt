@@ -638,7 +638,7 @@ function print_column_title_view_state( $p_sort, $p_dir, $p_columns_target = COL
 	global $t_icon_path;
 	echo '<th class="column-view-state">';
 	$t_view_state_text = lang_get( 'view_status' );
-	$t_view_state_icon = '<img src="' . $t_icon_path . 'protected.gif" alt="' . $t_view_state_text . '" title="' . $t_view_state_text . '" />';
+	$t_view_state_icon = '<img src="' . $t_icon_path . 'protected.png" alt="' . $t_view_state_text . '" title="' . $t_view_state_text . '" />';
 	print_view_bug_sort_link( $t_view_state_icon, 'view_state', $p_sort, $p_dir, $p_columns_target );
 	print_sort_icon( $p_dir, $p_sort, 'view_state' );
 	echo '</th>';
@@ -1473,7 +1473,7 @@ function print_column_view_state( BugData $p_bug, $p_columns_target = COLUMNS_TA
 
 	if( VS_PRIVATE == $p_bug->view_state ) {
 		$t_view_state_text = lang_get( 'private' );
-		echo '<img src="' . $t_icon_path . 'protected.gif" alt="' . $t_view_state_text . '" title="' . $t_view_state_text . '" />';
+		echo '<img src="' . $t_icon_path . 'protected.png" alt="' . $t_view_state_text . '" title="' . $t_view_state_text . '" />';
 	} else {
 		echo '&#160;';
 	}

@@ -842,7 +842,7 @@ $g_language_choices_arr = array( 'english', 'french', 'german' );
             <varlistentry>
                 <term>$g_logo_image</term>
                 <listitem>
-                    <para>Path to the logo image relative to MantisBT root folder (default 'images/mantis_logo.gif').</para>
+                    <para>Path to the logo image relative to MantisBT root folder (default 'images/mantis_logo.png').</para>
                 </listitem>
             </varlistentry>
             <varlistentry>
