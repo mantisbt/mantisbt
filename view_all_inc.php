@@ -179,7 +179,7 @@ if( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_
 function write_bug_rows( array $p_rows ) {
 	global $g_columns, $g_filter;
 
-	$t_in_stickies = ( $g_filter && ( 'on' == $g_filter[FILTER_PROPERTY_STICKY] ) );
+	$t_in_stickies = ( $g_filter && $g_filter[FILTER_PROPERTY_STICKY] );
 
 	# pre-cache custom column data
 	columns_plugin_cache_issue_data( $p_rows );

@@ -99,7 +99,7 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 			<td class="category" width="25%">
 				<?php
 					$t_filter = array();
-					$t_filter[FILTER_PROPERTY_FILTER_BY_DATE] = 'on';
+					$t_filter[FILTER_PROPERTY_FILTER_BY_DATE] = true;
 					$t_filter[FILTER_PROPERTY_START_DAY] = $t_bugnote_stats_from_d;
 					$t_filter[FILTER_PROPERTY_START_MONTH] = $t_bugnote_stats_from_m;
 					$t_filter[FILTER_PROPERTY_START_YEAR] = $t_bugnote_stats_from_y;
