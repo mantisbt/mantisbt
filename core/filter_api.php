@@ -464,11 +464,51 @@ function filter_offset( $p_page_number, $p_per_page ) {
 /**
  * Make sure that our filters are entirely correct and complete (it is possible that they are not).
  * We need to do this to cover cases where we don't have complete control over the filters given.
+ *
+ * This routine updates filter version to the latest version.
+ *
+ * Filter Versions:
+ * v1,2,3,4 - Legacy Filters that can not be migrated (not used since 2004)
+ * v5 - https://github.com/mantisbt/mantisbt/commit/eb1b93057e470e40727bc75a85f436ab35b84a74
+ * v6 - https://github.com/mantisbt/mantisbt/commit/de2e2931f993c3b6fc82781eff051f9037fdc6b5
+			- store 'any' as [any] in filter definition
+ * v7 - https://github.com/mantisbt/mantisbt/commit/0450981225647544083d21576dfb2bae044b3e98
+			- add 'show_profile' filter
+ * v8 - https://github.com/mantisbt/mantisbt/commit/5cb368796528bcb35aa3935bf431b08a29cb1e90
+			- add 'project_id' filter
+ * v9 - https://github.com/mantisbt/mantisbt/commit/9dfc5fb6edb6da1e0324ceac3a27a727f2b23ba7
+			- store filter string as json enoded
  * @param array $p_filter_arr A Filter definition.
  * @return array
  * @todo function needs to be abstracted
  */
 function filter_ensure_valid_filter( array $p_filter_arr ) {
+	# convert filters to use the same value for the filter key and the form field
+	# Note: This list should only be updated for basic renames i.e. data + type of data remain the same
+	# before and after the rename.	$t_filter_fields['show_category'] = 'category_id';
+	$t_filter_fields['show_category'] = 'category_id';
+	$t_filter_fields['show_severity'] = 'severity';
+	$t_filter_fields['show_status'] = 'status';
+	$t_filter_fields['show_priority'] = 'priority';
+	$t_filter_fields['show_resolution'] = 'resolution';
+	$t_filter_fields['show_build'] = 'build';
+	$t_filter_fields['show_version'] = 'version';
+	$t_filter_fields['user_monitor'] = 'monitor_user_id';
+	$t_filter_fields['show_profile'] = 'profile_id';
+	$t_filter_fields['do_filter_by_date'] = 'filter_by_date';
+	$t_filter_fields['and_not_assigned'] = null;
+	$t_filter_fields['sticky_issues'] = 'sticky';
+
+	foreach( $t_filter_fields as $t_old=>$t_new ) {
+		if( isset( $p_filter_arr[$t_old] ) ) {
+			$t_value = $p_filter_arr[$t_old];
+			unset( $p_filter_arr[$t_old] );
+			if( !is_null( $t_new ) ) {
+				$p_filter_arr[$t_new] = $t_value;
+			}
+		}
+	}
+
 	# extend current filter to add information passed via POST
 	if( !isset( $p_filter_arr['_version'] ) ) {
 		$p_filter_arr['_version'] = FILTER_VERSION;
@@ -830,6 +870,7 @@ function filter_deserialize( $p_serialized_filter ) {
 	} else {
 		return false;
 	}
+
 	if( $t_filter_array['_version'] != FILTER_VERSION ) {
 		# if the version is not new enough, update it using defaults
 		return filter_ensure_valid_filter( $t_filter_array );
