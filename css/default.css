@@ -770,6 +770,8 @@ div.timeline p { margin-left: 3px; }
 #account-menu ul, #doc-menu ul { margin: 0 auto; padding: .25em; float: right; text-align: center; }
 #account-menu ul li, #doc-menu ul li { display: block; float: left; padding: 0; margin: 0; }
 
+#bug-jump { text-align:right; }
+
 .main-menu {
 	float: right;
 	width:100%;
@@ -778,6 +780,10 @@ div.timeline p { margin-left: 3px; }
 	position: relative;
 	border: 1px solid #333333;
 	background-color: #e8e8e8;
+}
+
+.footer-menu {
+	margin-top: 1em;
 }
 
 /* common and top level styles */
