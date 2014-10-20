@@ -512,7 +512,7 @@ function db_fetch_array( IteratorAggregate &$p_result ) {
 		static $s_array_fields;
 
 		# Oci8 returns null values for empty strings
-		if( db_is_oracle() ) {
+		if( $g_db_type == 'oci8' ) {
 			foreach( $t_row as &$t_value ) {
 				if( !isset( $t_value ) ) {
 					$t_value = '';
