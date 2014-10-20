@@ -881,7 +881,10 @@ function print_column_title_summary( $p_sort, $p_dir, $p_columns_target = COLUMN
  * @access public
  */
 function print_column_title_bugnotes_count( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<th class="column-bugnotes-count"> # </th>';
+	echo '<th class="column-bugnotes-count">';
+	print_view_bug_sort_link( '#', 'bugnotes_count', $p_sort, $p_dir, $p_columns_target );
+	print_sort_icon( $p_dir, $p_sort, 'bugnotes_count' );
+	echo '</th>';
 }
 
 /**
