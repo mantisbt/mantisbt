@@ -552,7 +552,6 @@ function html_top_banner() {
 function html_login_info() {
 	$t_username = current_user_get_field( 'username' );
 	$t_access_level = get_enum_element( 'access_levels', current_user_get_access_level() );
-	$t_now = date( config_get( 'complete_date_format' ) );
 	$t_realname = current_user_get_field( 'realname' );
 
 	# Login information
@@ -631,9 +630,6 @@ function html_login_info() {
 			}
 		}
 	}
-
-	# Current time
-	echo '<div id="current-time">' . $t_now . '</div>';
 }
 
 /**
@@ -684,22 +680,6 @@ function html_footer() {
 		user_update_last_visit( $t_user_id );
 	}
 
-	echo '<div id="footer">' . "\n";
-	echo '<hr />' . "\n";
-
-	# We don't have a button anymore, so for now we will only show the resized
-	# version of the logo when not on login page.
-	if( !is_page_name( 'login_page' ) ) {
-		echo "\t" . '<div id="powered-by-mantisbt-logo">' . "\n";
-		$t_mantisbt_logo_url = helper_mantis_url( 'images/mantis_logo.png' );
-		echo "\t\t" . '<a href="http://www.mantisbt.org"
-			title="Mantis Bug Tracker: a free and open source web based bug tracking system.">
-			<img src="' . $t_mantisbt_logo_url . '" width="102" height="35" 
-				alt="Powered by Mantis Bug Tracker: a free and open source web based bug tracking system." />
-			</a>' . "\n";
-		echo "\t" . '</div>' . "\n";
-	}
-
 	# Show MantisBT version and copyright statement
 	$t_version_suffix = '';
 	$t_copyright_years = ' 2000 - ' . date( 'Y' );
@@ -707,44 +687,45 @@ function html_footer() {
 		$t_version_suffix = ' ' . htmlentities( MANTIS_VERSION . config_get_global( 'version_suffix' ) );
 	}
 
-	echo '<address id="mantisbt-copyright">' . "\n";
-	echo '<address id="version">Powered by <a href="http://www.mantisbt.org" title="bug tracking software">MantisBT ' . $t_version_suffix . "</a></address>\n";
-	echo 'Copyright &copy;' . $t_copyright_years . ' MantisBT Team';
+	echo '<div id="footer">' . "\n";
+
+	echo "\t" . '<div id="mantisbt-address">' . "\n";
 
 	# Show optional user-specified custom copyright statement
 	$t_copyright_statement = config_get( 'copyright_statement' );
 	if( $t_copyright_statement ) {
-		echo "\t" . '<address id="user-copyright">' . $t_copyright_statement . '</address>' . "\n";
+		echo "\t\t" . '<span id="user-copyright">' . $t_copyright_statement . '</span>' . "\n";
+	} else {
+		echo "\t\t" . '<span id="mantisbt-copyright">Copyright &copy;' . $t_copyright_years . ' MantisBT Team</span>' . "\n";
 	}
 
-	echo '</address>' . "\n";
 
 	# Show contact information
 	if( !is_page_name( 'login_page' ) ) {
 		$t_webmaster_email = config_get( 'webmaster_email' );
 		if( !is_blank( $t_webmaster_email ) ) {
 			$t_webmaster_contact_information = sprintf( lang_get( 'webmaster_contact_information' ), string_html_specialchars( $t_webmaster_email ) );
-			echo "\t" . '<address id="webmaster-contact-information">' . $t_webmaster_contact_information . '</address>' . "\n";
+			echo "\t\t" . '<address id="webmaster-contact-information">' . $t_webmaster_contact_information . '</address>' . "\n";
 		}
 	}
+	echo "\t" . '</div>' . "\n";
 
-	event_signal( 'EVENT_LAYOUT_PAGE_FOOTER' );
-
-	# Print horizontal rule if any debugging statistics follow
-	if( config_get( 'show_timer' ) || config_get( 'show_memory_usage' ) || config_get( 'show_queries_count' ) ) {
-		echo "\t" . '<hr />' . "\n";
-	}
+	echo "\t" . '<div id="footer-center">' . "\n";
+	$t_now = date( config_get( 'complete_date_format' ) );
+	echo "\t\t" . '<p id="current-time">';
+	echo '<time datetime="' . date(DATE_W3C) . '">' . $t_now . '</time>';
+	echo '</p>' . "\n";
 
 	# Print the page execution time
 	if( config_get( 'show_timer' ) ) {
 		$t_page_execution_time = sprintf( lang_get( 'page_execution_time' ), number_format( microtime( true ) - $g_request_time, 4 ) );
-		echo "\t" . '<p id="page-execution-time">' . $t_page_execution_time . '</p>' . "\n";
+		echo "\t\t" . '<p id="page-execution-time">' . $t_page_execution_time . '</p>' . "\n";
 	}
 
 	# Print the page memory usage
 	if( config_get( 'show_memory_usage' ) ) {
-		$t_page_memory_usage = sprintf( lang_get( 'memory_usage_in_kb' ), number_format( memory_get_peak_usage() / 1024 ) );
-		echo "\t" . '<p id="page-memory-usage">' . $t_page_memory_usage . '</p>' . "\n";
+		$t_page_memory_usage = sprintf( lang_get( 'memory_usage_in_mb' ), number_format( memory_get_peak_usage() / 1048576, 2 ) );
+		echo "\t\t" . '<p id="page-memory-usage">' . $t_page_memory_usage . '</p>' . "\n";
 	}
 
 	# Determine number of unique queries executed
@@ -764,20 +745,35 @@ function html_footer() {
 			$t_total_query_execution_time += $g_queries_array[$i][1];
 		}
 
-		$t_total_queries_executed = sprintf( lang_get( 'total_queries_executed' ), $t_total_queries_count );
-		echo "\t" . '<p id="total-queries-count">' . $t_total_queries_executed . '</p>' . "\n";
-		if( config_get_global( 'db_log_queries' ) ) {
-			$t_unique_queries_executed = sprintf( lang_get( 'unique_queries_executed' ), $t_unique_queries_count );
-			echo "\t" . '<p id="unique-queries-count">' . $t_unique_queries_executed . '</p>' . "\n";
-		}
-		$t_total_query_time = sprintf( lang_get( 'total_query_execution_time' ), $t_total_query_execution_time );
-		echo "\t" . '<p id="total-query-execution-time">' . $t_total_query_time . '</p>' . "\n";
+		$t_total_queries_executed = sprintf( lang_get( 'queries_executed' ), $t_total_queries_count, $t_total_query_execution_time );
+		echo "\t\t" . '<p id="queries_executed">' . $t_total_queries_executed . '</p>' . "\n";
 	}
+
+	echo "\t" . '</div>' . "\n";
+
+
+
+	# We don't have a button anymore, so for now we will only show the resized
+	# version of the logo when not on login page.
+	if( !is_page_name( 'login_page' ) ) {
+		echo "\t" . '<div id="powered-by-mantisbt-logo">' . "\n";
+		$t_mantisbt_logo_url = helper_mantis_url( 'images/mantis_logo.png' );
+		echo "\t\t" . '<a href="http://www.mantisbt.org"
+			title="Mantis Bug Tracker: a free and open source web based bug tracking system.">
+			<img src="' . $t_mantisbt_logo_url . '" width="102" height="35"
+				alt="Powered by Mantis Bug Tracker: a free and open source web based bug tracking system." />
+			</a><br/>' . "\n";
+		echo "\t\t" . 'Powered by <a href="http://www.mantisbt.org" title="bug tracking software">MantisBT ' . $t_version_suffix . "</a>\n";
+		echo "\t" . '</div>' . "\n";
+	}
+
+	echo '</div>' . "\n";
+
+	event_signal( 'EVENT_LAYOUT_PAGE_FOOTER' );
 
 	# Print table of log events
 	log_print_to_page();
 
-	echo '</div>' . "\n";
 }
 
 /**
