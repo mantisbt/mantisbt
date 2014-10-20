@@ -34,7 +34,7 @@ $t_ar = plugin_config_get( 'bar_aspect' );
 
 $t_token = token_get_value( TOKEN_GRAPH );
 if( $t_token == null ) {
-	$t_metrics = create_category_summary();
+	$t_metrics = create_category_summary(20);
 } else {
 	$t_metrics = json_decode( $t_token, true );
 }

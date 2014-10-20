@@ -123,6 +123,7 @@ function graph_bar( array $p_metrics, $p_title = '', $p_graph_width = 350, $p_gr
 		$t_graph->title = $p_title;
 		$t_graph->background->color = '#FFFFFF';
 		$t_graph->options->font = $t_graph_font ;
+		$t_graph->options->font->minFontSize = 8;
 		$t_graph->options->font->maxFontSize = 12;
 		$t_graph->legend = false;
 
@@ -131,6 +132,9 @@ function graph_bar( array $p_metrics, $p_title = '', $p_graph_width = 350, $p_gr
 
 		$t_graph->xAxis->axisLabelRenderer = new ezcGraphAxisRotatedLabelRenderer();
 		$t_graph->xAxis->axisLabelRenderer->angle = 45;
+		$t_graph->xAxis->axisSpace = 0.2;
+
+		$t_graph->xAxis->labelCount = count( $t_graph->data[0] );
 
 		$t_graph->driver = new ezcGraphGdDriver();
 		# $t_graph->driver->options->supersampling = 1;
@@ -213,19 +217,29 @@ function graph_group( array $p_metrics, $p_title = '', $p_graph_width = 350, $p_
 		$t_graph = new ezcGraphBarChart();
 		$t_graph->title = $p_title;
 		$t_graph->background->color = '#FFFFFF';
-		$t_graph->options->font = $t_graph_font ;
+		$t_graph->options->font = $t_graph_font;
+		$t_graph->options->font->minFontSize = 8;
 		$t_graph->options->font->maxFontSize = 12;
-		$t_graph->legend = false;
+		$t_graph->options->stackBars = true;
+		$t_graph->legend = true;
+		$t_graph->legend->position = ezcGraph::BOTTOM;
 
+		$t_label_count = 0;
 		foreach( array( 'open', 'resolved', 'closed' ) as $t_label ) {
 			$t_graph->data[$t_label] = new ezcGraphArrayDataSet( $p_metrics[$t_label] );
+			$t_label_count = max( $t_label_count, count( $t_graph->data[$t_label] ) );
 		}
-		$t_graph->data['total'] = new ezcGraphArrayDataSet( $t_total );
+		#$t_graph->data['total'] = new ezcGraphArrayDataSet( $t_total );
+
+		#$t_label_count = max( $t_label_count, count( $t_graph->data['total'] ) );
+
+		$t_graph->xAxis->labelCount = $t_label_count;
 		# $t_graph->data['total']->displayType = ezcGraph::LINE;
 		# $t_graph->data['total']->barMargin = -20;
 		$t_graph->options->fillLines = 210;
 		$t_graph->xAxis->axisLabelRenderer = new ezcGraphAxisRotatedLabelRenderer();
 		$t_graph->xAxis->axisLabelRenderer->angle = 45;
+		$t_graph->xAxis->axisSpace = 0.2;
 
 		$t_graph->driver = new ezcGraphGdDriver();
 		# $t_graph->driver->options->supersampling = 1;
@@ -317,6 +331,7 @@ function graph_pie( array $p_metrics, $p_title = '', $p_graph_width = 500, $p_gr
 		$t_graph->title = $p_title;
 		$t_graph->background->color = '#FFFFFF';
 		$t_graph->options->font = $t_graph_font ;
+		$t_graph->options->font->minFontSize = 8;
 		$t_graph->options->font->maxFontSize = 12;
 		$t_graph->legend = false;
 
@@ -391,6 +406,9 @@ function graph_cumulative_bydate( array $p_metrics, $p_graph_width = 300, $p_gra
 
 		$t_graph->background->color = '#FFFFFF';
 
+		$t_graph->options->font->minFontSize = 8;
+		$t_graph->options->font->maxFontSize = 12;
+
 		$t_graph->xAxis = new ezcGraphChartElementNumericAxis();
 
 		$t_graph->data[0] = new ezcGraphArrayDataSet( $p_metrics[0] );
@@ -415,6 +433,7 @@ function graph_cumulative_bydate( array $p_metrics, $p_graph_width = 300, $p_gra
 		$t_graph->xAxis->labelCallback =  'graph_date_format';
 		$t_graph->xAxis->axisLabelRenderer = new ezcGraphAxisRotatedLabelRenderer();
 		$t_graph->xAxis->axisLabelRenderer->angle = -45;
+		$t_graph->xAxis->axisSpace = 0.2;
 
 		$t_graph->legend->position      = ezcGraph::BOTTOM;
 		$t_graph->legend->background    = '#FFFFFF80';
@@ -688,9 +707,10 @@ function enum_bug_group( $p_enum_string, $p_enum ) {
 
 /**
  * Create summary table of developers
+ * @param integer $p_limit Number of developers to return
  * @return array
  */
-function create_developer_summary() {
+function create_developer_summary( $p_limit = -1 ) {
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 	$t_specific_where = ' AND ' . helper_project_specific_where( $t_project_id, $t_user_id );
@@ -703,11 +723,13 @@ function create_developer_summary() {
 
 	$t_handler_arr = array();
 	$t_handlers = array();
+	$t_handler_total = array();
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		if( !isset( $t_handler_arr[$t_row['handler_id']] ) ) {
 			$t_handler_arr[$t_row['handler_id']]['res'] = 0;
 			$t_handler_arr[$t_row['handler_id']]['open'] = 0;
 			$t_handler_arr[$t_row['handler_id']]['close'] = 0;
+			$t_handler_total[$t_row['handler_id']] = 0;
 			$t_handlers[] = $t_row['handler_id'];
 		}
 		if( $t_row['status'] >= $t_res_val ) {
@@ -719,31 +741,38 @@ function create_developer_summary() {
 		} else {
 			$t_handler_arr[$t_row['handler_id']]['open']++;
 		}
+		$t_handler_total[$t_row['handler_id']]++;
 	}
 
 	if( count( $t_handler_arr ) == 0 ) {
 		return array( 'open' => array() );
 	}
 
+	arsort( $t_handler_total, SORT_DESC );
+
+	if( $p_limit > 0 ) {
+		$t_handler_total = array_slice( $t_handler_total, 0, $p_limit, true );
+	}
 	user_cache_array_rows( $t_handlers );
 
-	foreach( $t_handler_arr as $t_handler => $t_data ) {
+	foreach( $t_handler_total as $t_handler => $t_data ) {
+		$t_data = $t_handler_arr[$t_handler];
 		$t_username = user_get_name( $t_handler );
 
 		$t_metrics['open'][$t_username] = $t_data['open'];
 		$t_metrics['resolved'][$t_username] = $t_data['res'];
 		$t_metrics['closed'][$t_username] = $t_data['close'];
 	}
-	ksort( $t_metrics );
 
 	return $t_metrics;
 }
 
 /**
  * Create summary table of reporters
+ * @param integer $p_limit Number of reporters to return
  * @return array
  */
-function create_reporter_summary() {
+function create_reporter_summary( $p_limit = -1 ) {
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
@@ -758,7 +787,6 @@ function create_reporter_summary() {
 			$t_reporter_arr[$t_row['reporter_id']]++;
 		} else {
 			$t_reporter_arr[$t_row['reporter_id']] = 1;
-			$t_reporters[] = $t_row['reporter_id'];
 		}
 	}
 
@@ -766,24 +794,31 @@ function create_reporter_summary() {
 		return array();
 	}
 
-	user_cache_array_rows( $t_reporters );
+	arsort( $t_reporter_arr, SORT_DESC );
+
+	if( $p_limit > 0 ) {
+		$t_reporter_arr = array_slice( $t_reporter_arr, 0, $p_limit, true );
+	}
+
+	user_cache_array_rows( array_keys( $t_reporter_arr ) );
 
 	foreach( $t_reporter_arr as $t_reporter => $t_count ) {
 		$t_metrics[user_get_name( $t_reporter )] = $t_count;
 	}
-	ksort( $t_metrics );
 
 	return $t_metrics;
 }
 
 /**
  * Create summary table of categories
+ * @param integer $p_limit Number of categories to return
  * @return array
  */
-function create_category_summary() {
+function create_category_summary( $p_limit = -1 ) {
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
+	$t_metrics = array();
 
 	$t_query = 'SELECT id, name FROM {category}
 				WHERE ' . $t_specific_where . ' OR project_id=' . ALL_PROJECTS . '
@@ -791,19 +826,32 @@ function create_category_summary() {
 	$t_result = db_query( $t_query );
 	$t_category_count = db_num_rows( $t_result );
 
-	$t_metrics = array();
+	$t_categories = array();
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_cat_name = $t_row['name'];
-		$t_cat_id = $t_row['id'];
-		$t_query = 'SELECT COUNT(*) FROM {bug} WHERE category_id=' . db_param() . ' AND ' . $t_specific_where;
-		$t_result2 = db_query( $t_query, array( $t_cat_id ) );
+		$t_categories[(int)$t_row['id']] = $t_row['name'];
+	}
+
+	if( empty( $t_categories ) ) {
+		return array();
+	}
+
+	$t_query = 'SELECT category_id, COUNT(*) as cnt FROM {bug} WHERE category_id IN (' . implode( array_keys( $t_categories ), ',' ) . ') AND ' . $t_specific_where . ' GROUP BY category_id';
+	$t_result2 = db_query( $t_query, array() );
+	while( $t_row = db_fetch_array( $t_result2 ) ) {
+		$t_cat_name = $t_categories[(int)$t_row['category_id']];
 		if( isset($t_metrics[$t_cat_name]) ) {
-			$t_metrics[$t_cat_name] = $t_metrics[$t_cat_name] + db_result( $t_result2, 0, 0 );
+			$t_metrics[$t_cat_name] = $t_metrics[$t_cat_name] + $t_row['cnt'];
 		} else {
-			if( db_result( $t_result2, 0, 0 ) > 0 ) {
-			    $t_metrics[$t_cat_name] = db_result( $t_result2, 0, 0 );
+			if( $t_row['cnt'] > 0 ) {
+			    $t_metrics[$t_cat_name] = $t_row['cnt'];
 			}
 		}
+	}
+
+	arsort( $t_metrics, SORT_DESC );
+
+	if( $p_limit > 0 ) {
+		$t_metrics = array_slice( $t_metrics, 0, $p_limit, true );
 	}
 
 	return $t_metrics;
