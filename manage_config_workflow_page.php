@@ -82,7 +82,7 @@ function set_overrides( $p_config ) {
  * @param integer $p_level_file    Config file's access level.
  * @param integer $p_level_global  All projects' access level.
  * @param integer $p_level_project Current project's access level.
- * @return string bgcolor attribute, or '' if no color
+ * @return string class name or '' if no override.
  */
 function set_colour_override( $p_level_file, $p_level_global, $p_level_project ) {
 	global $g_colour_global, $g_colour_project;
@@ -95,7 +95,7 @@ function set_colour_override( $p_level_file, $p_level_global, $p_level_project )
 		return '';
 	}
 
-	return ' class="' . $t_colour . '" ';
+	return $t_colour;
 }
 
 
@@ -118,7 +118,7 @@ function show_flag( $p_from_status_id, $p_to_status_id ) {
 		if( $g_can_change_workflow && $t_colour != '' ) {
 			set_overrides( 'status_enum_workflow' );
 		}
-		$t_value = '<td class="center"' . $t_colour . '>';
+		$t_value = '<td class="center ' . $t_colour . '">';
 
 		$t_flag = ( 1 == $t_project );
 
@@ -195,7 +195,7 @@ function capability_row( $p_from_status ) {
 	if( $g_can_change_workflow && $t_colour != '' ) {
 		set_overrides( 'status_enum_workflow' );
 	}
-	echo "\t\t\t" . '<td class="center"' . $t_colour . '>';
+	echo "\t\t\t" . '<td class="center ' . $t_colour . '">';
 	if( $g_can_change_workflow ) {
 		echo '<select name="default_' . $p_from_status . '">';
 		print_enum_string_option_list( 'status', $t_project );
@@ -243,7 +243,7 @@ function threshold_row( $p_threshold ) {
 	global $g_access, $g_can_change_flags;
 
 	$t_file = config_get_global( $p_threshold );
-	$t_global = config_get( $p_threshold, null, null, ALL_PROJECTS );
+	$t_global = config_get( $p_threshold, null, ALL_USERS, ALL_PROJECTS );
 	$t_project = config_get( $p_threshold );
 	$t_can_change_threshold = ( $g_access >= config_get_access( $p_threshold ) );
 
@@ -254,7 +254,7 @@ function threshold_row( $p_threshold ) {
 
 	echo '<tr><td>' . lang_get( 'desc_' . $p_threshold ) . '</td>' . "\n";
 	if( $t_can_change_threshold ) {
-		echo '<td' . $t_colour . '><select name="threshold_' . $p_threshold . '">';
+		echo '<td class="center ' . $t_colour . '"><select name="threshold_' . $p_threshold . '">';
 		print_enum_string_option_list( 'status', $t_project );
 		echo '</select> </td>' . "\n";
 		echo '<td><select name="access_' . $p_threshold . '">';
@@ -302,11 +302,11 @@ function access_row() {
 	$t_enum_status = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
 
 	$t_file_new = config_get_global( 'report_bug_threshold' );
-	$t_global_new = config_get( 'report_bug_threshold', null, null, ALL_PROJECTS );
+	$t_global_new = config_get( 'report_bug_threshold', null, ALL_USERS, ALL_PROJECTS );
 	$t_project_new = config_get( 'report_bug_threshold' );
 
 	$t_file_set = config_get_global( 'set_status_threshold' );
-	$t_global_set = config_get( 'set_status_threshold', null, null, ALL_PROJECTS );
+	$t_global_set = config_get( 'set_status_threshold', null, ALL_USERS, ALL_PROJECTS );
 	$t_project_set = config_get( 'set_status_threshold' );
 
 	$t_submit_status = config_get( 'bug_submit_status' );
@@ -346,12 +346,12 @@ function access_row() {
 		}
 
 		if( $t_can_change ) {
-			echo '<td' . $t_colour . '><select name="access_change_' . $t_status . '">' . "\n";
+			echo '<td class="center ' . $t_colour . '"><select name="access_change_' . $t_status . '">' . "\n";
 			print_enum_string_option_list( 'access_levels', $t_level_project );
 			echo '</select> </td>' . "\n";
 			$g_can_change_flags = true;
 		} else {
-			echo '<td class="center"' . $t_colour . '>'
+			echo '<td class="center ' . $t_colour . '">'
 				. MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_level_project )
 				. '</td>' . "\n";
 		}
@@ -380,7 +380,7 @@ $t_all_status = explode( ',', $t_extra_enum_status );
 
 # gather all versions of the workflow
 $g_file_workflow = workflow_parse( config_get_global( 'status_enum_workflow' ) );
-$g_global_workflow = workflow_parse( config_get( 'status_enum_workflow', null, null, ALL_PROJECTS ) );
+$g_global_workflow = workflow_parse( config_get( 'status_enum_workflow', null, ALL_USERS, ALL_PROJECTS ) );
 $g_project_workflow = workflow_parse( config_get( 'status_enum_workflow' ) );
 
 # validate the project workflow
