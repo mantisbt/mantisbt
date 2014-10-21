@@ -107,25 +107,30 @@ function get_notify_flag( $p_action, $p_flag ) {
  * @param string $p_flag   Flag.
  * @return string
  */
-function colour_notify_flag ( $p_action, $p_flag ) {
+function color_notify_flag( $p_action, $p_flag ) {
 	global $g_notify_flags, $g_global_notify_flags, $g_file_notify_flags;
 
 	$t_file = isset( $g_file_notify_flags[$p_action][$p_flag] ) ? ( $g_file_notify_flags[$p_action][$p_flag] ? 1 : 0 ): -1;
 	$t_global = isset( $g_global_notify_flags[$p_action][$p_flag] ) ? ( $g_global_notify_flags[$p_action][$p_flag]  ? 1 : 0 ): -1;
 	$t_project = isset( $g_notify_flags[$p_action][$p_flag] ) ? ( $g_notify_flags[$p_action][$p_flag]  ? 1 : 0 ): -1;
 
-	$t_colour = '';
+	$t_color = ' class="center" ';
+
+	$t_effective_value = $t_file;
+
 	if( $t_global >= 0 ) {
-		if( $t_global != $t_file ) {
-			$t_colour = ' class="color-global" '; # all projects override
+		if ( $t_global != $t_effective_value ) {
+			$t_color = ' class="color-global center" '; # all projects override
 		}
+
+		$t_effective_value = $t_global;
 	}
-	if( $t_project >= 0 ) {
-		if( $t_project != $t_global ) {
-			$t_colour = ' class="color-project" '; # project overrides
-		}
+
+	if( $t_project >= 0 && $t_project != $t_effective_value ) {
+		$t_color = ' class="color-project center" '; # project overrides
 	}
-	return $t_colour;
+
+	return $t_color;
 }
 
 /**
@@ -154,7 +159,7 @@ function show_notify_flag( $p_action, $p_flag ) {
  * @param string $p_action Action.
  * @return string
  */
-function colour_threshold_flag ( $p_access, $p_action ) {
+function color_threshold_flag( $p_access, $p_action ) {
 	global $g_notify_flags, $g_global_notify_flags, $g_file_notify_flags;
 
 	$t_file = ( $p_access >= $g_file_notify_flags[$p_action]['threshold_min'] )
@@ -164,14 +169,17 @@ function colour_threshold_flag ( $p_access, $p_action ) {
 	$t_project = ( $p_access >= $g_notify_flags[$p_action]['threshold_min'] )
 					 && ( $p_access <= $g_notify_flags[$p_action]['threshold_max'] );
 
-	$t_colour = '';
+	$t_color = ' class="center" ';
+
 	if( $t_global != $t_file ) {
-		$t_colour = ' class="color-global" '; # all projects override
+		$t_color = ' class="color-global center" '; # all projects override
 	}
+
 	if( $t_project != $t_global ) {
-		$t_colour = ' class="color-project" '; # project overrides
+		$t_color = ' class="color-project center" '; # project overrides
 	}
-	return $t_colour;
+
+	return $t_color;
 }
 
 /**
@@ -236,13 +244,13 @@ function get_capability_row_for_email( $p_caption, $p_message_type ) {
 	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 
 	echo '<tr><td>' . string_display( $p_caption ) . '</td>' . "\n";
-	echo '  <td class="center"' . colour_notify_flag( $p_message_type, 'reporter' ) . '>' . show_notify_flag( $p_message_type, 'reporter' )  . '</td>' . "\n";
-	echo '  <td class="center"' . colour_notify_flag( $p_message_type, 'handler' ) . '>' . show_notify_flag( $p_message_type, 'handler' ) . '</td>' . "\n";
-	echo '  <td class="center"' . colour_notify_flag( $p_message_type, 'monitor' ) . '>' . show_notify_flag( $p_message_type, 'monitor' ) . '</td>' . "\n";
-	echo '  <td class="center"' . colour_notify_flag( $p_message_type, 'bugnotes' ) . '>' . show_notify_flag( $p_message_type, 'bugnotes' ) . '</td>' . "\n";
+	echo '  <td' . color_notify_flag( $p_message_type, 'reporter' ) . '>' . show_notify_flag( $p_message_type, 'reporter' )  . '</td>' . "\n";
+	echo '  <td' . color_notify_flag( $p_message_type, 'handler' ) . '>' . show_notify_flag( $p_message_type, 'handler' ) . '</td>' . "\n";
+	echo '  <td' . color_notify_flag( $p_message_type, 'monitor' ) . '>' . show_notify_flag( $p_message_type, 'monitor' ) . '</td>' . "\n";
+	echo '  <td' . color_notify_flag( $p_message_type, 'bugnotes' ) . '>' . show_notify_flag( $p_message_type, 'bugnotes' ) . '</td>' . "\n";
 
 	foreach( $t_access_levels as $t_access_level ) {
-		echo '  <td class="center"' . colour_threshold_flag( $t_access_level, $p_message_type ) . '>' . show_notify_threshold( $t_access_level, $p_message_type ) . '</td>' . "\n";
+		echo '  <td' . color_threshold_flag( $t_access_level, $p_message_type ) . '>' . show_notify_threshold( $t_access_level, $p_message_type ) . '</td>' . "\n";
 	}
 
 	echo '</tr>' . "\n";
@@ -279,14 +287,14 @@ foreach( $t_statuses as $t_status ) {
 }
 
 # build a composite of the status flags, exploding the defaults
-$t_global_default_notify_flags = config_get( 'default_notify_flags', null, null, ALL_PROJECTS );
+$t_global_default_notify_flags = config_get( 'default_notify_flags', null, ALL_USERS, ALL_PROJECTS );
 $g_global_notify_flags = array();
 foreach ( $t_global_default_notify_flags as $t_flag => $t_value ) {
 	foreach ( $t_actions as $t_action ) {
 		$g_global_notify_flags[$t_action][$t_flag] = $t_value;
 	}
 }
-$g_global_notify_flags = array_merge_recursive2( $g_global_notify_flags, config_get( 'notify_flags', null, null, ALL_PROJECTS ) );
+$g_global_notify_flags = array_merge_recursive2( $g_global_notify_flags, config_get( 'notify_flags', null, ALL_USERS, ALL_PROJECTS ) );
 
 $t_file_default_notify_flags = config_get_global( 'default_notify_flags' );
 $g_file_notify_flags = array();
