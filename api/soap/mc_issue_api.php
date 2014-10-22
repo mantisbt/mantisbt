@@ -657,8 +657,14 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 	#	return SoapObjectsFactory::newSoapFault( 'Client', '', "User does not have access right to report issues." );
 	#}
 
-	if( ( $t_handler_id != 0 ) && !user_exists( $t_handler_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', 'User \'' . $t_handler_id . '\' does not exist.' );
+	if( $t_handler_id != 0 ) {
+		if ( !user_exists( $t_handler_id ) ) {
+			return SoapObjectsFactory::newSoapFault( 'Client', 'User \'' . $t_handler_id . '\' does not exist.' );
+		}
+
+		if( !access_has_project_level( config_get( 'handle_bug_threshold' ), $t_project_id, $t_handler_id ) ) {
+			return mci_soap_fault_access_denied( 'User \'' . $t_handler_id . '\' does not have access right to handle issues' );
+		}
 	}
 
 	$t_category = isset( $p_issue['category'] ) ? $p_issue['category'] : null;
