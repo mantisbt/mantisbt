@@ -97,12 +97,14 @@
 					forest-wide search, use 3268 (ldap) or 3269
 					(ldaps)</para>
 
-					<para>Examples of valid URI:<literallayout>
-    ldap.example.com
-    ldap.example.com:3268
-    ldap://ldap.example.com/
-    ldaps://ldap.example.com:3269/
-</literallayout>
+					<para>Examples of valid URI:
+<programlisting>
+ldap.example.com
+ldap.example.com:3268
+ldap://ldap.example.com/
+ldaps://ldap.example.com:3269/
+</programlisting>
+
 					</para>
 				</listitem>
 			</varlistentry>
