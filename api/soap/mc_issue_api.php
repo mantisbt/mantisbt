@@ -858,10 +858,6 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 		return mci_soap_fault_access_denied( $t_user_id, 'Not enough rights to update issues' );
 	}
 
-	if( ( $t_handler_id != 0 ) && !user_exists( $t_handler_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', 'User \'' . $t_handler_id . '\' does not exist.' );
-	}
-
 	$t_category = isset( $p_issue['category'] ) ? $p_issue['category'] : null;
 
 	$t_category_id = translate_category_name_to_id( $t_category, $t_project_id );
@@ -897,7 +893,25 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	$t_bug_data = bug_get( $p_issue_id, true );
 	$t_bug_data->project_id = $t_project_id;
 	$t_bug_data->reporter_id = $t_reporter_id;
-	$t_bug_data->handler_id = $t_handler_id;
+
+	if ( $t_handler_id != $t_bug_data->handler_id ) {
+		if( !access_has_project_level( config_get( 'update_bug_assign_threshold' ), $t_project_id, $t_user_id ) ) {
+			return mci_soap_fault_access_denied( 'User \'' . $t_user_id . '\' does not have access right to assign issues' );
+		}
+
+		if( $t_handler_id != 0 ) {
+			if( !user_exists( $t_handler_id ) ) {
+				return SoapObjectsFactory::newSoapFault( 'Client', 'User \'' . $t_handler_id . '\' does not exist.' );
+			}
+
+			if( !access_has_project_level( config_get( 'handle_bug_threshold' ), $t_project_id, $t_handler_id ) ) {
+				return mci_soap_fault_access_denied( 'User \'' . $t_handler_id . '\' does not have access right to handle issues' );
+			}
+		}
+
+		$t_bug_data->handler_id = $t_handler_id;
+	}
+
 	$t_bug_data->category_id = $t_category_id;
 	$t_bug_data->summary = $t_summary;
 	$t_bug_data->description = $t_description;
