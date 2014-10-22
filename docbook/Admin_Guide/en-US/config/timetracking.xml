@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.timetracking">
+	<title>Time Tracking</title>
+
+	<variablelist>
+
+		<varlistentry>
+			<term>$g_time_tracking_enabled</term>
+			<listitem>
+				<para>
+					Turns Time Tracking features ON or OFF - Default is OFF
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_time_tracking_without_note</term>
+			<listitem>
+				<para>
+					Allow time tracking to be recorded without writing some text in the associated bugnote - Default is ON
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_time_tracking_with_billing</term>
+			<listitem>
+				<para>
+					Adds calculation links to workout how much time has been spent between a particular time frame. Currently it will allow you to enter a cost/hour and will work out some billing information. This will become more extensive in the future. Currently it is more of a proof of concept.
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_time_tracking_stopwatch</term>
+			<listitem>
+				<para>
+					Instead of a text field turning this option on places a stopwatch on the page with <guibutton>Start/Stop</guibutton> and <guibutton>Reset</guibutton> buttons next to it. A bit gimmicky, but who cares.
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_time_tracking_view_threshold</term>
+			<listitem>
+				<para>
+					Access level required to view time tracking information - Default DEVELOPER.
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_time_tracking_edit_threshold</term>
+			<listitem>
+				<para>
+					Access level required to add/edit time tracking information (If you give a user $g_time_tracking_edit_threshold you must give them $g_time_tracking_view_threshold as well) - Default DEVELOPER.
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_time_tracking_reporting_threshold</term>
+			<listitem>
+				<para>
+					Access level required to run reports (not completed yet) - Default MANAGER.
+				</para>
+			</listitem>
+		</varlistentry>
+
+	</variablelist>
+</section>

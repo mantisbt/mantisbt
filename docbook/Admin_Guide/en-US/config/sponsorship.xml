@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.sponsorship">
+	<title>Sponsorship</title>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_enable_sponsorship</term>
+			<listitem>
+				<para>enable/disable the whole issue sponsorship feature. The
+					default os OFF.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_sponsorship_currency</term>
+			<listitem>
+				<para>The currency string used for all sponsorships. The default
+					is 'US$'.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_minimum_sponsorship_amount</term>
+			<listitem>
+				<para>The minimum sponsorship amount that can be entered. If the
+					user enters a value less than this, an error will be flagged. The
+					default is 5.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_view_sponsorship_total_threshold</term>
+			<listitem>
+				<para>The access level threshold needed to view the total
+					sponsorship for an issue by all users. The default is
+					VIEWER.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_view_sponsorship_details_threshold</term>
+			<listitem>
+				<para>The access level threshold needed to view the details of the
+					sponsorship (i.e., who will donate what) for an issue by all users.
+					The default is VIEWER.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_sponsor_threshold</term>
+			<listitem>
+				<para>The access level threshold needed to allow user to sponsor
+					issues. The default is REPORTER. Note that sponsoring user must
+					have their email set in their profile.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_handle_sponsored_bugs_threshold</term>
+			<listitem>
+				<para>The access level required to be able to handle sponsored
+					issues. The default is DEVELOPER.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_assign_sponsored_bugs_threshold</term>
+			<listitem>
+				<para>The access level required to be able to assign a sponsored
+					issue to a user with access level greater or equal to
+					'handle_sponsored_bugs_threshold'. The default is MANAGER.
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+
+</section>

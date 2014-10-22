@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.date">
+	<title>Date</title>
+
+	<para>These variables control how the date is displayed (default
+		is 'US' formatting). Go to the
+		<ulink url="http://www.php.net/manual/en/function.date.php">date()</ulink>
+		function in PHP online manual for detailed instructions on date
+		formatting.
+	</para>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_short_date_format</term>
+			<listitem>
+				<para>This format is used in the bug listing pages (eg: View
+					Bugs). Default is 'm-d-y'.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_normal_date_format</term>
+			<listitem>
+				<para>This format is used in the view/update bug pages, bug notes,
+					manage section, and news section. Default is 'm-d-y H:i'.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_complete_date_format</term>
+			<listitem>
+				<para>This format is used on the top of each page (current time)
+					and the emails that are sent out. Default is 'm-d-y H:i T'.
+				</para>
+			</listitem>
+		</varlistentry>
+
+	</variablelist>
+
+</section>

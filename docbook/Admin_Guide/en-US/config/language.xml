@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.language">
+	<title>Language</title>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_default_language</term>
+			<listitem>
+				<para>This is the language used by default in MantisBT.  This may be set
+		to 'auto' where MantisBT will try to determine the language from the browser.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_language_choices_arr</term>
+			<listitem>
+				<para>This is to be set to an array of languages that are
+					available for users to choose from. The default value includes all
+					languages supported by MantisBT. The administrator can limit the
+					languages available for users to choose from by overriding this
+					value. For example, to support English, French and German include
+					the following code:
+<programlisting>
+$g_language_choices_arr = array( 'english', 'french', 'german' );
+</programlisting>
+					Of course, administrators can also add their own languages
+					by translating the strings and creating their own language files.
+					You are encouraged to share any translation work that you do with
+					the MantisBT team. This will ensure that the newly created language
+					file is maintained with future MantisBT releases.All language files
+					reside in the lang/ folder. They are all named according to the
+					following pattern: strings_&lt;language&gt;.txt.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_fallback_language</term>
+			<listitem>
+				<para>This is the language used if MantisBT cannot determine the
+					language from the browser. It defaults to 'english'.As of 0.19.0,
+					this may be set to 'auto' where MantisBT will try to determine the
+					language from the browser.
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+	<note>
+		<para>If a string does not exist in the active language, the
+			English string is used instead.
+		</para>
+	</note>
+</section>
