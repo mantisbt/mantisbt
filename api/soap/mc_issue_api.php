@@ -978,6 +978,10 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 				bugnote_add( $p_issue_id, $t_note['text'], mci_get_time_tracking_from_note( $p_issue_id, $t_note ), $t_view_state_id == VS_PRIVATE, $note_type, $note_attr, $t_user_id, FALSE );
 			}
 		}
+
+		# The issue has been cached earlier in the bug_get() call.  Flush the cache since it is
+		# now stale.  Otherwise, the email notification will be based on the cached data.
+		bugnote_clear_cache( $p_issue_id );
 	}
 
 	if ( isset ( $p_issue['tags']) && is_array ( $p_issue['tags']) ) {
