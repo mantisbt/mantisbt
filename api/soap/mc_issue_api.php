@@ -658,6 +658,10 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 	#}
 
 	if( $t_handler_id != 0 ) {
+		if( !access_has_project_level( config_get( 'update_bug_assign_threshold' ), $t_project_id, $t_user_id ) ) {
+			return mci_soap_fault_access_denied( 'User \'' . $t_user_id . '\' does not have access right to assign issues' );
+		}
+
 		if ( !user_exists( $t_handler_id ) ) {
 			return SoapObjectsFactory::newSoapFault( 'Client', 'User \'' . $t_handler_id . '\' does not exist.' );
 		}
