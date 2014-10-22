@@ -231,20 +231,39 @@ ldaps://ldap.example.com:3269/
 					ldap server with a comma-delimited text file for
 					development or testing purposes.</para>
 
-					<para>The LDAP simulation file format is as follows:
-						<literallayout>
-    One line per user
-    Each line has 4 comma-delimited fields
-        - username,
-        - realname,
-        - e-mail,
-        - password
-    Any extra fields are ignored
-</literallayout>
-					</para>
+					<para>The LDAP simulation file format is as follows:</para>
 
-					<para>On production systems, this option should be set
-					to ''. This is the default.</para>
+					<itemizedlist>
+						<listitem>
+							<para>One line per user</para>
+						</listitem>
+						<listitem>
+							<para>Each line has 4 comma-delimited fields</para>
+							<itemizedlist>
+								<listitem>
+									<para>username</para>
+								</listitem>
+								<listitem>
+									<para>realname</para>
+								</listitem>
+								<listitem>
+									<para>e-mail</para>
+								</listitem>
+								<listitem>
+									<para>password</para>
+								</listitem>
+							</itemizedlist>
+						</listitem>
+						<listitem>
+							<para>Any extra fields are ignored</para>
+						</listitem>
+					</itemizedlist>
+
+					<warning>
+						<para>On production systems, this option should be set
+							to '' (This is the default).
+						</para>
+					</warning>
 				</listitem>
 			</varlistentry>
 
