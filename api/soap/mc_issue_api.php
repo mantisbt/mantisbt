@@ -115,7 +115,9 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['sponsorship_total'] = $t_bug->sponsorship_total;
 
 	if( !empty( $t_bug->handler_id ) ) {
-		$t_issue_data['handler'] = mci_account_get_array_by_id( $t_bug->handler_id );
+		if( access_has_bug_level( config_get( 'view_handler_threshold', null, null, $t_project_id ), $p_issue_id, $t_user_id ) ) {
+			$t_issue_data['handler'] = mci_account_get_array_by_id( $t_bug->handler_id );
+		}
 	}
 
 	$t_issue_data['projection'] = mci_enum_get_array_by_id( $t_bug->projection, 'projection', $t_lang );
