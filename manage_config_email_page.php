@@ -73,6 +73,7 @@ function array_merge_recursive2( $p_array1, $p_array2 ) {
 		} else {
 			$t_merged_array[$t_key2] = $t_value2;
 		}
+	}
 	return $t_merged_array;
 }
 
@@ -107,7 +108,7 @@ function get_notify_flag( $p_action, $p_flag ) {
  * @return string
  */
 function colour_notify_flag ( $p_action, $p_flag ) {
-	global $g_notify_flags, $g_global_notify_flags, $g_file_notify_flags, $g_colour_project, $g_colour_global;
+	global $g_notify_flags, $g_global_notify_flags, $g_file_notify_flags;
 
 	$t_file = isset( $g_file_notify_flags[$p_action][$p_flag] ) ? ( $g_file_notify_flags[$p_action][$p_flag] ? 1 : 0 ): -1;
 	$t_global = isset( $g_global_notify_flags[$p_action][$p_flag] ) ? ( $g_global_notify_flags[$p_action][$p_flag]  ? 1 : 0 ): -1;
@@ -116,12 +117,12 @@ function colour_notify_flag ( $p_action, $p_flag ) {
 	$t_colour = '';
 	if( $t_global >= 0 ) {
 		if( $t_global != $t_file ) {
-			$t_colour = ' bgcolor="' . $g_colour_global . '" '; # all projects override
+			$t_colour = ' class="color-global" '; # all projects override
 		}
 	}
 	if( $t_project >= 0 ) {
 		if( $t_project != $t_global ) {
-			$t_colour = ' bgcolor="' . $g_colour_project . '" '; # project overrides
+			$t_colour = ' class="color-project" '; # project overrides
 		}
 	}
 	return $t_colour;
@@ -154,7 +155,7 @@ function show_notify_flag( $p_action, $p_flag ) {
  * @return string
  */
 function colour_threshold_flag ( $p_access, $p_action ) {
-	global $g_notify_flags, $g_global_notify_flags, $g_file_notify_flags, $g_colour_project, $g_colour_global;
+	global $g_notify_flags, $g_global_notify_flags, $g_file_notify_flags;
 
 	$t_file = ( $p_access >= $g_file_notify_flags[$p_action]['threshold_min'] )
 					 && ( $p_access <= $g_file_notify_flags[$p_action]['threshold_max'] );
@@ -165,10 +166,10 @@ function colour_threshold_flag ( $p_access, $p_action ) {
 
 	$t_colour = '';
 	if( $t_global != $t_file ) {
-		$t_colour = ' bgcolor="' . $g_colour_global . '" '; # all projects override
+		$t_colour = ' class="color-global" '; # all projects override
 	}
 	if( $t_project != $t_global ) {
-		$t_colour = ' bgcolor="' . $g_colour_project . '" '; # project overrides
+		$t_colour = ' class="color-project" '; # project overrides
 	}
 	return $t_colour;
 }
@@ -276,9 +277,6 @@ print_manage_config_menu( 'manage_config_email_page.php' );
 $t_access = current_user_get_access_level();
 $t_project = helper_get_current_project();
 
-$g_colour_project = config_get( 'colour_project' );
-$g_colour_global = config_get( 'colour_global' );
-
 # build a list of all of the actions
 $t_actions = array( 'owner', 'reopened', 'deleted', 'bugnote' );
 if( config_get( 'enable_sponsorship' ) == ON ) {
@@ -330,7 +328,7 @@ echo '<div class="space-10"></div>';
 if( config_get( 'enable_email_notification' ) == ON ) {
 
 	if( $g_can_change_flags  || $g_can_change_defaults ) {
-		echo "<form name=\"mail_config_action\" method=\"post\" action=\"manage_config_email_set.php\">\n";
+		echo '<form id="mail_config_action" method="post" action="manage_config_email_set.php">' . "\n";
 		echo form_security_field( 'manage_config_email_set' );
 	}
 
@@ -344,11 +342,11 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 	echo '<p class="bold"><i class="fa fa-info-circle"></i> ' . $t_project_title . '</p>' . "\n";
 	echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 	if( ALL_PROJECTS <> $t_project ) {
-		echo '<span style="background-color:' . $g_colour_project . '">' . lang_get( 'colour_project' ) . '</span><br />';
+		echo '<span class="color-project">' . lang_get( 'colour_project' ) . '</span><br />';
 	}
-	echo '<span style="background-color:' . $t_colour_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
+	echo '<span class="color-global">' . lang_get( 'colour_global' ) . '</span></p>';
 	echo '</div>' . "\n";
-
+	
 	get_section_begin_for_email( lang_get( 'email_notification' ) );
 #		get_capability_row_for_email( lang_get( 'email_on_new' ), 'new' );  # duplicate of status change to 'new'
 	get_capability_row_for_email( lang_get( 'email_on_assigned' ), 'owner' );

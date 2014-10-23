@@ -158,7 +158,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			}
 			# check that new handler has rights to handle the issue, and
 			#  that current user has rights to assign the issue
-			$t_threshold = access_get_status_threshold( $t_assign_status, bug_get_field( $t_bug_id, 'project_id' ) );
+			$t_threshold = access_get_status_threshold( $t_assign_status, $t_bug->project_id );
 			if( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get( 'update_bug_threshold' ) ), $t_bug_id ) ) {
 				if( access_has_bug_level( config_get( 'handle_bug_threshold' ), $t_bug_id, $f_assign ) ) {
 					if( bug_check_workflow( $t_status, $t_assign_status ) ) {
@@ -177,7 +177,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			break;
 		case 'RESOLVE':
 			$t_resolved_status = config_get( 'bug_resolved_status_threshold' );
-				if( access_has_bug_level( access_get_status_threshold( $t_resolved_status, bug_get_field( $t_bug_id, 'project_id' ) ), $t_bug_id ) ) {
+				if( access_has_bug_level( access_get_status_threshold( $t_resolved_status, $t_bug->project_id ), $t_bug_id ) ) {
 					if( ( $t_status < $t_resolved_status ) &&
 						bug_check_workflow( $t_status, $t_resolved_status ) ) {
 				$f_resolution = gpc_get_int( 'resolution' );
@@ -205,8 +205,7 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			break;
 		case 'UP_STATUS':
 			$f_status = gpc_get_int( 'status' );
-			$t_project = bug_get_field( $t_bug_id, 'project_id' );
-			if( access_has_bug_level( access_get_status_threshold( $f_status, $t_project ), $t_bug_id ) ) {
+			if( access_has_bug_level( access_get_status_threshold( $f_status, $t_bug->project_id ), $t_bug_id ) ) {
 				if( true == bug_check_workflow( $t_status, $f_status ) ) {
 					# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 					bug_set_field( $t_bug_id, 'status', $f_status );
@@ -242,12 +241,25 @@ foreach( $f_bug_arr as $t_bug_id ) {
 				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
 			}
 			break;
+		case 'UP_PRODUCT_VERSION':
+			$f_product_version = gpc_get_string( 'product_version' );
+			if( access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) ) {
+				if( $f_product_version === '' || version_get_id( $f_product_version, $t_bug->project_id ) !== false ) {
+					/** @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) ); */
+					bug_set_field( $t_bug_id, 'version', $f_product_version );
+					email_generic( $t_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
+					helper_call_custom_function( 'issue_update_notify', array( $t_bug_id ) );
+				} else {
+					$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_version' );
+				}
+			} else {
+				$t_failed_ids[$t_bug_id] = lang_get( 'bug_actiongroup_access' );
+			}
+			break;
 		case 'UP_FIXED_IN_VERSION':
 			$f_fixed_in_version = gpc_get_string( 'fixed_in_version' );
-			$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
-
 			if( access_has_bug_level( config_get( 'update_bug_threshold' ), $t_bug_id ) ) {
-				if( $f_fixed_in_version === '' || version_get_id( $f_fixed_in_version, $t_project_id ) !== false ) {
+				if( $f_fixed_in_version === '' || version_get_id( $f_fixed_in_version, $t_bug->project_id ) !== false ) {
 					# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 					bug_set_field( $t_bug_id, 'fixed_in_version', $f_fixed_in_version );
 					email_generic( $t_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
@@ -261,10 +273,8 @@ foreach( $f_bug_arr as $t_bug_id ) {
 			break;
 		case 'UP_TARGET_VERSION':
 			$f_target_version = gpc_get_string( 'target_version' );
-			$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
-
 			if( access_has_bug_level( config_get( 'roadmap_update_threshold' ), $t_bug_id ) ) {
-				if( $f_target_version === '' || version_get_id( $f_target_version, $t_project_id ) !== false ) {
+				if( $f_target_version === '' || version_get_id( $f_target_version, $t_bug->project_id ) !== false ) {
 					# @todo we need to issue a helper_call_custom_function( 'issue_update_validate', array( $t_bug_id, $t_bug_data, $f_bugnote_text ) );
 					bug_set_field( $t_bug_id, 'target_version', $f_target_version );
 					email_generic( $t_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );

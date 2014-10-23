@@ -84,6 +84,9 @@ $g_robots_meta = '';
 # flag for error handler to skip header menus
 $g_error_send_page_header = true;
 
+# flag to skip submenus
+$g_skip_submenus = false;
+
 $g_stylesheets_included = array();
 $g_scripts_included = array();
 
@@ -966,6 +969,7 @@ function html_button_bug_assign_to( BugData $p_bug ) {
 
 	echo '<form method="post" action="bug_update.php" class="form-inline">';
 	echo form_security_field( 'bug_update' );
+	echo '<input type="hidden" name="last_updated" value="' . $p_bug->last_updated . '" />';
 
 	$t_button_text = lang_get( 'bug_assign_to_button' );
 	echo '<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="' . $t_button_text . '" />';

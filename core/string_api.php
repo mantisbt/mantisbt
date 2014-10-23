@@ -345,11 +345,13 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 	if( !isset( $g_string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] ) ) {
 		if( $p_include_anchor ) {
 			$g_string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function( '$p_array', '
-										if( bug_exists( (int)$p_array[2] ) && access_has_bug_level( VIEWER, (int)$p_array[2] ) ) {
-											return $p_array[1] . string_get_bug_view_link( (int)$p_array[2], null, ' . ( $p_detail_info ? 'true' : 'false' ) . ', ' . ( $p_fqdn ? 'true' : 'false' ) . ');
-										} else {
-											return $p_array[0];
+										if( bug_exists( (int)$p_array[2] ) ) {
+											$t_project_id = bug_get_field( (int)$p_array[2], \'project_id\' );
+											if( access_has_bug_level( config_get( \'view_bug_threshold\', null, null, $t_project_id ), (int)$p_array[2] ) ) {
+												return $p_array[1] . string_get_bug_view_link( (int)$p_array[2], null, ' . ( $p_detail_info ? 'true' : 'false' ) . ', ' . ( $p_fqdn ? 'true' : 'false' ) . ');
+											}
 										}
+										return $p_array[0];
 										' );
 		} else {
 			$g_string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function( '$p_array', '
@@ -465,12 +467,6 @@ function string_insert_hrefs( $p_string ) {
 		return $p_string;
 	}
 
-	$t_change_quotes = false;
-	if( ini_get_bool( 'magic_quotes_sybase' ) && function_exists( 'ini_set' ) ) {
-		$t_change_quotes = true;
-		ini_set( 'magic_quotes_sybase', false );
-	}
-
 	# Initialize static variables
 	if( is_null( $s_url_regex ) ) {
 		# URL regex
@@ -486,7 +482,7 @@ function string_insert_hrefs( $p_string ) {
 		$t_url_chars_in_brackets = "(?:${t_url_hex}|[${t_url_valid_chars}\(\)])";
 		$t_url_chars_in_parens   = "(?:${t_url_hex}|[${t_url_valid_chars}\[\]])";
 
-		$t_url_part1 = "${t_url_chars}";
+		$t_url_part1 = $t_url_chars;
 		$t_url_part2 = "(?:\(${t_url_chars_in_parens}*\)|\[${t_url_chars_in_brackets}*\]|${t_url_chars2})";
 
 		$s_url_regex = "/(${t_url_protocol}(${t_url_part1}*?${t_url_part2}+))/su";
@@ -504,9 +500,6 @@ function string_insert_hrefs( $p_string ) {
 		},
 		$p_string
 	);
-	if( $t_change_quotes ) {
-		ini_set( 'magic_quotes_sybase', true );
-	}
 
 	# Find any email addresses in the string and replace them with a clickable
 	# mailto: link, making sure that we skip processing of any existing anchor

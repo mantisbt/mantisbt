@@ -70,8 +70,7 @@ $t_lock_image = '<i class="fa fa-lock fa-lg" alt="' . lang_get( 'protected' ) . 
 $c_filter = '';
 
 # Clean up the form variables
-$t_user_table = db_get_table( 'user' );
-if( !db_field_exists( $f_sort, $t_user_table ) ) {
+if( !db_field_exists( $f_sort, db_get_table( 'user' ) ) ) {
 	$c_sort = 'username';
 } else {
 	$c_sort = addslashes( $f_sort );
@@ -121,14 +120,12 @@ layout_page_header( lang_get( 'manage_users_link' ) );
 
 layout_page_begin( 'manage_overview_page.php' );
 
-print_manage_menu( 'manage_user_page.php' );
-
 # New Accounts Form BEGIN
 
 $t_days_old = 7 * SECONDS_PER_DAY;
 $t_query = 'SELECT COUNT(*) AS new_user_count FROM {user}
 	WHERE '.db_helper_compare_days( (string)db_now(), 'date_created', '<= ' . $t_days_old );
-$t_result = db_query_bound( $t_query );
+$t_result = db_query( $t_query );
 $t_row = db_fetch_array( $t_result );
 $t_new_user_count = $t_row['new_user_count'];
 
@@ -136,7 +133,7 @@ $t_new_user_count = $t_row['new_user_count'];
 
 $t_query = 'SELECT COUNT(*) AS unused_user_count FROM {user}
 	WHERE ( login_count = 0 ) AND ( date_created = last_visit )';
-$t_result = db_query_bound( $t_query );
+$t_result = db_query( $t_query );
 $t_row = db_fetch_array( $t_result );
 $t_unused_user_count = $t_row['unused_user_count'];
 
@@ -205,22 +202,21 @@ $t_result = '';
 if( 1 == $c_show_disabled ) {
 	$t_show_disabled_cond = '';
 } else {
-	$t_show_disabled_cond = ' AND enabled = ' . db_prepare_bool( true );
+	$t_show_disabled_cond = ' AND enabled = ' . db_param();
+	$t_where_params[] = true;
 }
 
 if( 0 == $c_hide_inactive ) {
 	$t_query = 'SELECT count(*) as user_count FROM {user} WHERE ' . $t_where . $t_show_disabled_cond;
-	$t_result = db_query_bound( $t_query, $t_where_params );
-	$t_row = db_fetch_array( $t_result );
-	$t_total_user_count = $t_row['user_count'];
 } else {
 	$t_query = 'SELECT count(*) as user_count FROM {user}
 			WHERE ' . $t_where . ' AND ' . db_helper_compare_days( '' . db_now() . '', 'last_visit', '< ' . $t_days_old )
 			. $t_show_disabled_cond;
-	$t_result = db_query_bound( $t_query, $t_where_params );
-	$t_row = db_fetch_array( $t_result );
-	$t_total_user_count = $t_row['user_count'];
 }
+
+$t_result = db_query_bound( $t_query, $t_where_params );
+$t_row = db_fetch_array( $t_result );
+$t_total_user_count = $t_row['user_count'];
 
 $t_page_count = ceil( $t_total_user_count / $p_per_page );
 if( $t_page_count < 1 ) {
@@ -240,12 +236,12 @@ if( $f_page_number < 1 ) {
 
 if( 0 == $c_hide_inactive ) {
 	$t_query = 'SELECT * FROM {user} WHERE ' . $t_where . ' ' . $t_show_disabled_cond . ' ORDER BY ' . $c_sort . ' ' . $c_dir;
-	$t_result = db_query_bound( $t_query, $t_where_params, $p_per_page, $t_offset );
+	$t_result = db_query( $t_query, $t_where_params, $p_per_page, $t_offset );
 } else {
 	$t_query = 'SELECT * FROM {user}
 			WHERE ' . $t_where . ' AND ' . db_helper_compare_days( '' . db_now() . '', 'last_visit', '< ' . $t_days_old ) . '
 			' . $t_show_disabled_cond . ' ORDER BY ' . $c_sort . ' ' . $c_dir;
-	$t_result = db_query_bound( $t_query, $t_where_params, $p_per_page, $t_offset );
+	$t_result = db_query( $t_query, $t_where_params, $p_per_page, $t_offset );
 }
 
 $t_users = array();

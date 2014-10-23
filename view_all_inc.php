@@ -92,7 +92,7 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 ?>
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
-<form name="bug_action" method="get" action="bug_actiongroup_page.php">
+<form id="bug_action" method="get" action="bug_actiongroup_page.php">
 <?php # CSRF protection not required here - form does not result in modifications ?>
 <div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
@@ -140,7 +140,7 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 			}
 		?>
 		</div>
-<div class="btn-group pull-right"><?php
+		<div class="btn-group pull-right"><?php
 			# -- Page number links --
 			$f_filter	= gpc_get_int( 'filter', 0);
 			print_page_links( 'view_all_bug_page.php', 1, $t_page_count, (int)$f_page_number, $f_filter );
@@ -169,7 +169,7 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 /**
  * Output Bug Rows
  *
- * @param array $p_rows array of bug objects
+ * @param array $p_rows An array of bug objects.
  * @return void
  */
 function write_bug_rows ( $p_rows ) {
@@ -208,7 +208,8 @@ function write_bug_rows ( $p_rows ) {
 	}
 }
 
-write_bug_rows($t_rows);
+
+write_bug_rows( $t_rows );
 # -- ====================== end of BUG LIST ========================= --
 ?>
 
@@ -219,8 +220,7 @@ write_bug_rows($t_rows);
 <div class="widget-toolbox padding-8 clearfix">
 <?php
 # -- ====================== MASS BUG MANIPULATION =================== --
-# @@@ ideally buglist-footer would be in
-# <tfoot>, but that's not possible due to global g_checkboxes_exist set via write_bug_rows()
+# @@@ ideally buglist-footer would be in <tfoot>, but that's not possible due to global g_checkboxes_exist set via write_bug_rows()
 ?>
 	<div class="form-inline pull-left">
 <?php

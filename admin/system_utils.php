@@ -48,21 +48,32 @@ print_admin_menu_bar( 'system_utils.php' );
 <div class="widget-main no-padding">
 <div class="table-responsive">
 <table class="table table-bordered table-striped table-condensed table-hover">
-	<tr>
-		<th width="70%">Description</th><th width="30%" class="center">Execute</th>
+	<thead>
+	<tr class="category">
+		<th width="70%">Description</th>
+		<th width="30%" class="center">Execute</th>
 	</tr>
-
-	<tr><td>Move attachments stored in database schema to disk files.</td><td class="center">
-	<?php html_button( 'move_attachments_page.php', 'Move Attachments to Disk', array( 'type' => 'bug' ) );?>
-	</td></tr>
-
-	<tr><td>Move project files stored in database schema to disk.</td><td class="center">
-	<?php html_button( 'move_attachments_page.php', 'Move Project Files to Disk', array( 'type' => 'project' ) );?>
-	</td></tr>
-
-	<tr><td>Show database statistics.</td><td class="center">
-	<?php html_button( 'db_stats.php', 'Display', array() );?>
-	</td></tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Move attachments stored in database schema to disk files.</td>
+			<td class="center">
+				<?php html_button( 'move_attachments_page.php', 'Move Attachments to Disk', array( 'type' => 'bug' ) );?>
+			</td>
+		</tr>
+		<tr>
+			<td>Move project files stored in database schema to disk.</td>
+			<td class="center">
+				<?php html_button( 'move_attachments_page.php', 'Move Project Files to Disk', array( 'type' => 'project' ) );?>
+			</td>
+		</tr>
+		<tr>
+			<td>Show database statistics.</td>
+			<td class="center">
+				<?php html_button( 'db_stats.php', 'Display', array() );?>
+			</td>
+		</tr>
+	</tbody>
 </table>
 </div>
 </div>

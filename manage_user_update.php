@@ -125,8 +125,8 @@ if( $t_ldap && config_get( 'use_ldap_email' ) ) {
 $c_email = $t_email;
 $c_username = $f_username;
 $c_realname = $t_realname;
-$c_protected = db_prepare_bool( $f_protected );
-$c_enabled = db_prepare_bool( $f_enabled );
+$c_protected = (bool)$f_protected;
+$c_enabled = (bool)$f_enabled;
 $c_user_id = (int)$f_user_id;
 $c_access_level = (int)$f_access_level;
 
@@ -172,7 +172,7 @@ if( $f_protected && $t_old_protected ) {
 	$t_query_params = array( $c_username, $c_email, $c_access_level, $c_enabled, $c_protected, $c_realname, $c_user_id );
 }
 
-$t_result = db_query_bound( $t_query, $t_query_params );
+$t_result = db_query( $t_query, $t_query_params );
 
 if( $f_send_email_notification ) {
 	lang_push( user_pref_get_language( $f_user_id ) );

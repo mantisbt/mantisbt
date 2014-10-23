@@ -35,14 +35,13 @@ layout_page_begin( 'summary_page.php' );
 
 print_summary_menu( 'summary_page.php' );
 
-echo '<br />';
-print_summary_submenu();
-
 $t_width = plugin_config_get( 'window_width' );
 $t_graph_width = (int)( ( $t_width - 50 ) * 0.6 );
 
 # gather the data for the graphs
 $t_metrics = create_category_summary();
+
+$t_token = token_set( TOKEN_GRAPH, json_encode( $t_metrics ) );
 ?>
     
 <div class="col-md-12 col-xs-12">

@@ -695,7 +695,6 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
-	$t_user_table = db_get_table( 'user' );
 	$t_pub = VS_PUBLIC;
 	$t_priv = VS_PRIVATE;
 	$t_admin = config_get_global( 'admin_site_threshold' );
@@ -728,14 +727,14 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		LEFT JOIN {project} pt ON pft.project_id = pt.id
 		LEFT JOIN {project_user_list} pult
 		ON pft.project_id = pult.project_id AND pult.user_id = ' . db_param() . '
-		LEFT JOIN ' . $t_user_table . ' ut ON ut.id = ' . db_param() . '
+		LEFT JOIN {user} ut ON ut.id = ' . db_param() . '
 		WHERE pft.project_id in (' . implode( ',', $t_projects ) . ') AND
 		( ( ( pt.view_state = ' . db_param() . ' OR pt.view_state is null ) AND pult.user_id is null AND ut.access_level ' . $t_access_clause . ' ) OR
 		( ( pult.user_id = ' . db_param() . ' ) AND ( pult.access_level ' . $t_access_clause . ' ) ) OR
 		( ut.access_level = ' . db_param() . ' ) )
 		ORDER BY pt.name ASC, pft.title ASC';
 
-	$t_result = db_query_bound( $t_query, array( $t_user_id, $t_user_id, $t_pub, $t_user_id, $t_admin ) );
+	$t_result = db_query( $t_query, array( $t_user_id, $t_user_id, $t_pub, $t_user_id, $t_admin ) );
 	$t_num_files = db_num_rows( $t_result );
 
 	$t_attachments = array();

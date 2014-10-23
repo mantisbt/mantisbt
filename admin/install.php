@@ -1239,7 +1239,7 @@ if( 6 == $t_install_state ) {
 	if( $t_result == true ) {
 		print_test_result( GOOD );
 	} else {
-		print_test_result( BAD, false, 'Database user doesn\'t have access to the database ( ' . db_error_msg() . ' )' );
+		print_test_result( BAD, false, 'Database user does not have access to the database ( ' . db_error_msg() . ' )' );
 	}
 
 	if( $f_db_type == 'db2' ) {
@@ -1255,14 +1255,13 @@ if( 6 == $t_install_state ) {
 		checking ability to SELECT records
 	</td>
 	<?php
-		$t_mantis_config_table = db_get_table( 'config' );
-	$t_query = "SELECT COUNT(*) FROM $t_mantis_config_table";
+	$t_query = 'SELECT COUNT(*) FROM ' . db_get_table( 'config' );
 	$t_result = @$g_db->Execute( $t_query );
 
 	if( $t_result != false ) {
 		print_test_result( GOOD );
 	} else {
-		print_test_result( BAD, true, 'Database user doesn\'t have SELECT access to the database ( ' . db_error_msg() . ' )' );
+		print_test_result( BAD, true, 'Database user does not have SELECT access to the database ( ' . db_error_msg() . ' )' );
 	}
 	?>
 </tr>
@@ -1271,13 +1270,13 @@ if( 6 == $t_install_state ) {
 		checking ability to INSERT records
 	</td>
 	<?php
-		$t_query = "INSERT INTO $t_mantis_config_table ( value, type, access_reqd, config_id, project_id, user_id ) VALUES ('test', 1, 90, 'database_test', 20, 0 )";
+		$t_query = 'INSERT INTO ' . db_get_table( 'config' ) . ' ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'test\', 1, 90, \'database_test\', 20, 0 )';
 	$t_result = @$g_db->Execute( $t_query );
 
 	if( $t_result != false ) {
 		print_test_result( GOOD );
 	} else {
-		print_test_result( BAD, true, 'Database user doesn\'t have INSERT access to the database ( ' . db_error_msg() . ' )' );
+		print_test_result( BAD, true, 'Database user does not have INSERT access to the database ( ' . db_error_msg() . ' )' );
 	}
 	?>
 </tr>
@@ -1286,13 +1285,13 @@ if( 6 == $t_install_state ) {
 		checking ability to UPDATE records
 	</td>
 	<?php
-		$t_query = "UPDATE $t_mantis_config_table SET value='test_update' WHERE config_id='database_test'";
+		$t_query = 'UPDATE ' . db_get_table( 'config' ) . ' SET value=\'test_update\' WHERE config_id=\'database_test\'';
 	$t_result = @$g_db->Execute( $t_query );
 
 	if( $t_result != false ) {
 		print_test_result( GOOD );
 	} else {
-		print_test_result( BAD, true, 'Database user doesn\'t have UPDATE access to the database ( ' . db_error_msg() . ' )' );
+		print_test_result( BAD, true, 'Database user does not have UPDATE access to the database ( ' . db_error_msg() . ' )' );
 	}
 	?>
 </tr>
@@ -1301,13 +1300,13 @@ if( 6 == $t_install_state ) {
 		checking ability to DELETE records
 	</td>
 	<?php
-		$t_query = "DELETE FROM $t_mantis_config_table WHERE config_id='database_test'";
+		$t_query = 'DELETE FROM ' . db_get_table( 'config' ) . ' WHERE config_id=\'database_test\'';
 	$t_result = @$g_db->Execute( $t_query );
 
 	if( $t_result != false ) {
 		print_test_result( GOOD );
 	} else {
-		print_test_result( BAD, true, 'Database user doesn\'t have DELETE access to the database ( ' . db_error_msg() . ' )' );
+		print_test_result( BAD, true, 'Database user does not have DELETE access to the database ( ' . db_error_msg() . ' )' );
 	}
 	?>
 </tr>

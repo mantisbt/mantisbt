@@ -75,15 +75,9 @@ layout_page_header( lang_get( 'manage_profiles_link' ) );
 layout_page_begin( 'manage_overview_page.php' );
 
 if( $g_global_profiles ) {
-	print_manage_menu( 'manage_prof_menu_page.php' );
-}
-
-if( $g_global_profiles ) {
 	$t_user_id = ALL_USERS;
 } else {
-	$t_user_id = auth_get_current_user_id();
-}
-if( !$g_global_profiles ) {
+	$t_user_id = auth_get_current_user_id();{
     print_account_menu( 'account_prof_menu_page.php' );
 }
 

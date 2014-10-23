@@ -63,7 +63,7 @@ require_api( 'lang_api.php' );
 	$t_block_css = $t_collapse_block ? 'collapsed' : '';
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 ?>
-<form name="bugnoteadd" method="post" action="bugnote_add.php">
+<form id="bugnoteadd" method="post" action="bugnote_add.php">
 	<?php echo form_security_field( 'bugnote_add' ) ?>
 	<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 	<div id="bugnote_add" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">

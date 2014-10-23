@@ -87,7 +87,7 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 	$g_project_override = $t_bug->project_id;
 }
 
-access_ensure_bug_level( VIEWER, $f_bug_id );
+access_ensure_bug_level( config_get( 'view_bug_threshold' ), $f_bug_id );
 
 compress_enable();
 

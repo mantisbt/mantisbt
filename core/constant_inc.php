@@ -22,6 +22,7 @@
  * Mantis Version
  */
 define( 'MANTIS_VERSION', '1.3.0dev' );
+define( 'FILTER_VERSION', 'v9' );
 
 # --- constants -------------------
 # magic numbers
@@ -419,8 +420,6 @@ define( 'FILTER_POSITION_BOTTOM', POSITION_BOTTOM );
 define( 'FILTER_POSITION_BOTH', POSITION_BOTH );
 
 # FILTER_POSITION_TOP | FILTER_POSITION_BOTTOM (bitwise OR)
-# Flags for settings E-mail categories
-define( 'EMAIL_CATEGORY_PROJECT_CATEGORY', 1 );
 
 # Custom Field types
 define( 'CUSTOM_FIELD_TYPE_STRING', 0 );
@@ -554,9 +553,9 @@ define( 'PHPMAILER_METHOD_SENDMAIL', 1 );
 define( 'PHPMAILER_METHOD_SMTP', 2 );
 
 # Lengths - NOTE: these may represent hard-coded values in db schema and should not be changed.
-define( 'DB_FIELD_SIZE_USERNAME', 32 );
-define( 'DB_FIELD_SIZE_REALNAME', 64 );
-define( 'DB_FIELD_SIZE_PASSWORD', 32 );
+define( 'DB_FIELD_SIZE_USERNAME', 255 );
+define( 'DB_FIELD_SIZE_REALNAME', 255 );
+define( 'DB_FIELD_SIZE_PASSWORD', 64 );
 
 # Maximum size for the user's password when storing it as a hash
 define( 'PASSWORD_MAX_SIZE_BEFORE_HASH', 1024 );

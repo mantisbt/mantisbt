@@ -32,6 +32,8 @@
  * @uses config_api.php
  * @uses config_defaults_inc.php
  * @uses config_inc.php
+ * @uses config_menu_defaults_inc.php
+ * @uses config_menu_inc.php
  * @uses constant_inc.php
  * @uses crypto_api.php
  * @uses custom_constants_inc.php
@@ -85,6 +87,14 @@ if( $t_config_inc_found ) {
 	require_once( $g_config_path . 'config_inc.php' );
 }
 
+# Include default menu configuration settings
+require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config_menu_defaults_inc.php' );
+
+# config_menu_inc may not be present if this is a new install
+if( file_exists( $g_config_path . 'config_menu_inc.php' ) ) {
+	require_once( $g_config_path . 'config_menu_inc.php' );
+}
+
 
 /**
  * Define an API inclusion function to replace require_once
@@ -96,13 +106,11 @@ function require_api( $p_api_name ) {
 	static $s_api_included;
 	global $g_core_path;
 	if( !isset( $s_api_included[$p_api_name] ) ) {
-		$t_existing_globals = get_defined_vars();
 		require_once( $g_core_path . $p_api_name );
-		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_existing_globals' => 0, 't_new_globals' => 0 ) );
+		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_new_globals' => 0 ) );
 		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
-			global $$t_global_name;
+			$GLOBALS[$t_global_name] = $t_global_value;
 		}
-		extract( $t_new_globals );
 		$s_api_included[$p_api_name] = 1;
 	}
 }
@@ -117,8 +125,6 @@ function require_lib( $p_library_name ) {
 	static $s_libraries_included;
 	global $g_library_path;
 	if( !isset( $s_libraries_included[$p_library_name] ) ) {
-		$t_existing_globals = get_defined_vars();
-
 		$t_library_file_path = $g_library_path . $p_library_name;
 		if( !file_exists( $t_library_file_path ) ) {
 			echo 'External library \'' . $t_library_file_path . '\' not found.';
@@ -126,11 +132,10 @@ function require_lib( $p_library_name ) {
 		}
 
 		require_once( $t_library_file_path );
-		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_existing_globals' => 0, 't_new_globals' => 0 ) );
+		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_new_globals' => 0 ) );
 		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
-			global $$t_global_name;
+			$GLOBALS[$t_global_name] = $t_global_value;
 		}
-		extract( $t_new_globals );
 		$s_libraries_included[$p_library_name] = 1;
 	}
 }

@@ -665,17 +665,6 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
-                <term>$g_email_set_category</term>
-                <listitem>
-                    <para>Specify whether e-mails should be sent with the category set
-                        or not. This is tested with Microsoft Outlook. More testing for
-                        this feature + other formats will be added in the future. OFF,
-                        EMAIL_CATEGORY_PROJECT_CATEGORY (format: [Project] Category).
-                        Default is OFF.
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
                 <term>$g_email_separator1</term>
                 <listitem>
                     <para>Default is str_pad('', 70, '='); This means 70 equal
@@ -1052,14 +1041,6 @@ $g_language_choices_arr = array( 'english', 'french', 'german' );
                     <para>Time to delay between page redirects (in seconds). Users can
                         override this setting in their user preferences. Default is 2
                         seconds.
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term>$g_content_expire</term>
-                <listitem>
-                    <para>Time to wait before document is stale (in minutes). This is
-                        used in meta_inc.php. Default is 0 (expires right away).
                     </para>
                 </listitem>
             </varlistentry>
@@ -2334,8 +2315,7 @@ $g_main_menu_custom_options = array(
                         This method will reduce the amount of data that needs
                         to be transferred upon each page load dealing with
                         filters and thus will result in speed improvements and
-                        bandwidth reduction. By default, this configuration option
-                        is set to ON.
+                        bandwidth reduction.
                     </para>
                 </listitem>
             </varlistentry>
@@ -2609,21 +2589,6 @@ $g_main_menu_custom_options = array(
                 <term>$g_cookie_domain</term>
                 <listitem>
 					<para>The domain that the MantisBT cookies are available to.</para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term>$g_cookie_version</term>
-                <listitem>
-					<para>Version of the view_all_page cookie.</para>
-					<para>This is used as a prefix for cookies that should
-						be expired when the code is changed in a certain way.
-						The developers would increase this version when necessary,
-						which in effect will cause the creation of new cookies
-						that are compatible with the new code.
-					</para>
-					<para>It is not expected for the user to need to change this
-                        setting.
-                    </para>
                 </listitem>
             </varlistentry>
             <varlistentry>
@@ -3827,6 +3792,13 @@ or
                 <term>$g_webservice_admin_access_level_threshold</term>
                 <listitem>
                     <para>Minimum global access level required to access the administrator webservices.</para>
+                </listitem>
+            </varlistentry>
+            <varlistentry>
+                <term>$g_webservice_specify_reporter_on_add_access_level_threshold</term>
+                <listitem>
+                    <para>Minimum project access level required for caller to be able to
+                    specify reporter when adding issues or issue notes. Defaults to DEVELOPER.</para>
                 </listitem>
             </varlistentry>
         </variablelist>

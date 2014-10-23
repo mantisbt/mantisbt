@@ -555,6 +555,44 @@ function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) 
 
 		$t_required_array = explode( ',', $p_required );
 
+		# If the plugin's minimum dependency for MantisCore is unspecified or
+		# lower than the current release (i.e. the plugin does not specifically
+		# list the current core version as supported) and the plugin does not
+		# define a maximum dependency, we add one with the current version's
+		# minor release (i.e. for 1.3.1 we would add '<1.3').
+		# The purpose of this is to avoid compatibility issues by disabling
+		# plugins which have not been updated for a new Mantis release; authors
+		# have to revise their code (if necessary), and release a new version
+		# of the plugin with updated dependencies.
+		# To indicate compatibility (e.g. with release 1.3), one can either:
+		# 1. update the minimum required version (i.e. plugin only works with
+		#    1.3; 1.2-compatible code is maintained separately):
+		#    $this->requires = array( 'MantisCore' => '1.3' );
+		# 2. add the new release as a 2nd minimum version (i.e. the plugin is
+		#    compatible with both versions):
+		#    $this->requires = array( 'MantisCore' => '1.2, 1.3' );
+		# 3. add a maximum version higher than the new release:
+		#    $this->requires = array( 'MantisCore' => '1.2, <2.0' );
+		#    Note that this may cause the plugin to face compatibility issues
+		#    if and when a version 1.4 is released.
+		if( $p_base_name == 'MantisCore' && strpos( $p_required, '<' ) === false ) {
+			$t_version_core = substr(
+				MANTIS_VERSION,
+				0,
+				strpos( MANTIS_VERSION, '.', strpos( MANTIS_VERSION, '.' ) + 1 )
+			);
+			$t_is_current_core_supported = false;
+			foreach( $t_required_array as $t_version_required ) {
+				$t_is_current_core_supported = $t_is_current_core_supported
+					|| version_compare( trim( $t_version_required ), $t_version_core, '>=' );
+			}
+			if( !$t_is_current_core_supported ) {
+				$t_required_array[] = '<' . $t_version_core;
+			}
+		}
+
+		$t_version_installed = plugin_version_array( $g_plugin_cache[$p_base_name]->version );
+
 		foreach( $t_required_array as $t_required ) {
 			$t_required = trim( $t_required );
 			$t_maximum = false;
@@ -572,10 +610,9 @@ function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) 
 				}
 			}
 
-			$t_version1 = plugin_version_array( $g_plugin_cache[$p_base_name]->version );
-			$t_version2 = plugin_version_array( $t_required );
+			$t_version_required = plugin_version_array( $t_required );
 
-			$t_check = plugin_version_check( $t_version1, $t_version2, $t_maximum );
+			$t_check = plugin_version_check( $t_version_installed, $t_version_required, $t_maximum );
 
 			if( $t_check < 1 ) {
 				return $t_check;
@@ -623,7 +660,7 @@ function plugin_is_installed( $p_basename ) {
 	}
 
 	$t_query = 'SELECT COUNT(*) FROM {plugin} WHERE basename=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $p_basename ) );
+	$t_result = db_query( $t_query, array( $p_basename ) );
 	return( 0 < db_result( $t_result ) );
 }
 
@@ -649,8 +686,8 @@ function plugin_install( MantisPlugin $p_plugin ) {
 	}
 
 	$t_query = 'INSERT INTO {plugin} ( basename, enabled )
-				VALUES ( ' . db_param() . ', \'1\' )';
-	db_query_bound( $t_query, array( $p_plugin->basename ) );
+				VALUES ( ' . db_param() . ', ' . db_param() . ' )';
+	db_query( $t_query, array( $p_plugin->basename, true ) );
 
 	if( false === ( plugin_config_get( 'schema', false ) ) ) {
 		plugin_config_set( 'schema', -1 );
@@ -764,7 +801,7 @@ function plugin_uninstall( MantisPlugin $p_plugin ) {
 	}
 
 	$t_query = 'DELETE FROM {plugin} WHERE basename=' . db_param();
-	db_query_bound( $t_query, array( $p_plugin->basename ) );
+	db_query( $t_query, array( $p_plugin->basename ) );
 
 	plugin_push_current( $p_plugin->basename );
 
@@ -920,7 +957,7 @@ function plugin_register_installed() {
 
 	# register plugins installed via the interface/database
 	$t_query = 'SELECT basename, priority, protected FROM {plugin} WHERE enabled=' . db_param() . ' ORDER BY priority DESC';
-	$t_result = db_query_bound( $t_query, array( true ) );
+	$t_result = db_query( $t_query, array( true ) );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_basename = $t_row['basename'];

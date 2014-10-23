@@ -68,10 +68,10 @@ print_manage_menu( 'manage_overview_page.php' );
 	<div class="widget-body">
 	<div class="widget-main no-padding">
 	<div class="table-responsive">
-	<table class="table table-hover table-bordered table-condensed">
+	<table id="manage-overview-table" class="table table-hover table-bordered table-condensed">
 		<tr>
 			<th class="category"><?php echo lang_get( 'mantis_version' ) ?></th>
-			<td><?php echo MANTIS_VERSION, ( $t_version_suffix ? " $t_version_suffix" : '' ) ?></td>
+			<td><?php echo MANTIS_VERSION, ( $t_version_suffix ? ' ' . $t_version_suffix : '' ) ?></td>
 		</tr>
 		<tr>
 			<th class="category"><?php echo lang_get( 'schema_version' ) ?></th>

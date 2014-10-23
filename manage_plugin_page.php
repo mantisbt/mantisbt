@@ -82,7 +82,7 @@ if( 0 < count( $t_plugins_installed ) ) {
 <div class="form-container">
 
 	<form action="manage_plugin_update.php" method="post">
-
+		<fieldset>
 		<?php echo form_security_field( 'manage_plugin_update' ) ?>
 
 <div class="widget-box widget-color-blue2">
@@ -97,15 +97,24 @@ if( 0 < count( $t_plugins_installed ) ) {
 	<div class="table-responsive">
 		<table class="table table-striped table-bordered table-condensed table-hover">
 
+		<table>
+			<colgroup>
+				<col style="width:20%" />
+				<col style="width:35%" />
+				<col style="width:20%" />
+				<col style="width:7%" />
+				<col style="width:8%" />
+				<col style="width:10%" />
+			</colgroup>
 			<thead>
 				<!-- Info -->
 				<tr>
-					<th width="20%"><?php echo lang_get( 'plugin' ) ?></th>
-					<th width="35%"><?php echo lang_get( 'plugin_description' ) ?></th>
-					<th width="20%"><?php echo lang_get( 'plugin_depends' ) ?></th>
-					<th width="7%"><?php echo lang_get( 'plugin_priority' ) ?></th>
-					<th width="8%"><?php echo lang_get( 'plugin_protected' ) ?></th>
-					<th width="10%"><?php echo lang_get( 'plugin_actions' ) ?></th>
+					<th><?php echo lang_get( 'plugin' ) ?></th>
+					<th><?php echo lang_get( 'plugin_description' ) ?></th>
+					<th><?php echo lang_get( 'plugin_depends' ) ?></th>
+					<th><?php echo lang_get( 'plugin_priority' ) ?></th>
+					<th><?php echo lang_get( 'plugin_protected' ) ?></th>
+					<th><?php echo lang_get( 'plugin_actions' ) ?></th>
 				</tr>
 			</thead>
 
@@ -140,7 +149,7 @@ foreach ( $t_plugins_installed as $t_basename => $t_plugin ) {
 	}
 
 	if( !is_blank( $t_url ) ) {
-		$t_url = '<br/>' . lang_get( 'plugin_url' ) . lang_get( 'word_separator' ) . "<a href=\"$t_url\">$t_url</a>";
+		$t_url = '<br/>' . lang_get( 'plugin_url' ) . lang_get( 'word_separator' ) . '<a href="' . $t_url . '">' . $t_url . '</a>';
 	}
 
 	$t_upgrade = plugin_needs_upgrade( $t_plugin );
@@ -231,13 +240,19 @@ if( 0 < count( $t_plugins_available ) ) {
 	<div class="widget-main no-padding">
 		<div class="table-responsive">
 			<table class="table table-striped table-bordered table-condensed table-hover">
+		<colgroup>
+			<col style="width:25%" />
+			<col style="width:45%" />
+			<col style="width:20%" />
+			<col style="width:10%" />
+		</colgroup>
 		<thead>
 			<!-- Info -->
-			<tr>
-				<td width="25%"><?php echo lang_get( 'plugin' ) ?></td>
-				<td width="45%"><?php echo lang_get( 'plugin_description' ) ?></td>
-				<td width="20%"><?php echo lang_get( 'plugin_depends' ) ?></td>
-				<td width="10%"><?php echo lang_get( 'plugin_actions' ) ?></td>
+			<tr class="row-category">
+				<td><?php echo lang_get( 'plugin' ) ?></td>
+				<td><?php echo lang_get( 'plugin_description' ) ?></td>
+				<td><?php echo lang_get( 'plugin_depends' ) ?></td>
+				<td><?php echo lang_get( 'plugin_actions' ) ?></td>
 			</tr>
 		</thead>
 

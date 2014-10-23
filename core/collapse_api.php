@@ -174,7 +174,7 @@ function collapse_display( $p_block ) {
 	global $g_collapse_cache_token;
 
 	if( !isset( $g_collapse_cache_token[$p_block] ) ) {
-		return false;
+		return true;
 	}
 
 	return( true == $g_collapse_cache_token[$p_block] );

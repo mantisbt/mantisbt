@@ -25,7 +25,7 @@
 
 require_once( 'core.php' );
 
-require_once( 'Period.php' );
+plugin_require_api( 'core/Period.php' );
 plugin_require_api( 'core/graph_api.php' );
 
 access_ensure_project_level( config_get( 'view_summary_threshold' ) );
@@ -61,9 +61,6 @@ if( count( $t_rows ) == 0 ) {
 	# no data to graph
 	exit();
 }
-
-$t_bug_table			= db_get_table( 'bug' );
-$t_bug_hist_table			= db_get_table( 'bug_history' );
 
 $t_marker = array();
 $t_data = array();
@@ -102,13 +99,13 @@ foreach ( $t_rows as $t_row ) {
 # get the history for these bugs over the interval required to offset the data
 # type = 0 and field=status are status changes
 # type = 1 are new bugs
-$t_select = 'SELECT bug_id, type, field_name, old_value, new_value, date_modified FROM '.$t_bug_hist_table.
-	' WHERE bug_id in (' . implode( ',', $t_bug ) . ') and '.
+$t_select = 'SELECT bug_id, type, field_name, old_value, new_value, date_modified FROM {bug_history}
+	WHERE bug_id in (' . implode( ',', $t_bug ) . ') and '.
 		'( (type=' . NORMAL_TYPE . ' and field_name=\'category\') or '.
 			'(type=' . NORMAL_TYPE . ' and field_name=\'status\') or type='.NEW_BUG.' ) and '.
 			'date_modified >= ' . db_param() .
 		' order by date_modified DESC';
-$t_result = db_query_bound( $t_select, array( $t_start ) );
+$t_result = db_query( $t_select, array( $t_start ) );
 $t_row = db_fetch_array( $t_result );
 
 for( $t_now = time() - $t_incr; $t_now >= $t_start; $t_now -= $t_incr ) {

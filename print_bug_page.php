@@ -88,7 +88,7 @@ if( $t_bug->project_id != $t_selected_project ) {
 	$g_project_override = $t_bug->project_id;
 }
 
-access_ensure_bug_level( VIEWER, $f_bug_id );
+access_ensure_bug_level( config_get( 'view_bug_threshold' ), $f_bug_id );
 
 $t_fields = config_get( 'bug_print_page_fields' );
 $t_fields = columns_filter_disabled( $t_fields );

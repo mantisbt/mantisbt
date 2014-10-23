@@ -38,10 +38,8 @@ require_api( 'history_api.php' );
  * @return array
  */
 function timeline_get_affected_issues( $p_start_time, $p_end_time ) {
-	$t_mantis_bug_history_table = db_get_table( 'bug_history' );
-
-	$t_query = 'SELECT DISTINCT(bug_id) from ' . $t_mantis_bug_history_table . ' WHERE date_modified >= ' . db_param() . ' AND date_modified < ' . db_param();
-	$t_result = db_query_bound( $t_query, array( $p_start_time, $p_end_time ) );
+	$t_query = 'SELECT DISTINCT(bug_id) from {bug_history} WHERE date_modified >= ' . db_param() . ' AND date_modified < ' . db_param();
+	$t_result = db_query( $t_query, array( $p_start_time, $p_end_time ) );
 
 	$t_current_project = helper_get_current_project();
 
@@ -58,7 +56,7 @@ function timeline_get_affected_issues( $p_start_time, $p_end_time ) {
 			continue;
 		}
 
-		if( !access_has_bug_level( VIEWER, $t_issue_id ) ) {
+		if( !access_has_bug_level( config_get( 'view_bug_threshold' ), $t_issue_id ) ) {
 			continue;
 		}
 

@@ -32,9 +32,6 @@ layout_page_header();
 
 layout_page_begin( 'summary_page.php' );
 
-print_summary_menu( 'summary_page.php' );
-echo '<br />';
-print_summary_submenu();
 $t_width = plugin_config_get( 'window_width' );
 $t_graph_width = (int)( ( $t_width - 50 ) * 0.6 );
 

@@ -361,7 +361,7 @@ if( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 </div>
 <?php
 		# End of subprojects listing / update form
-} else {
+	} else {
 		# If there are no subprojects, clear floats to h2 overlap on div border
 } ?>
 
@@ -445,6 +445,7 @@ if( access_has_global_level ( config_get( 'delete_project_threshold' ) ) ) { ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<input type="text" name="name" size="32" maxlength="128" class="input-sm" />
 			<input type="submit" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_category_button' ) ?>" />
+			<input type="submit" name="add_and_edit_category" class="btn btn-sm btn-primary btn-white btn-round" value="<?php echo lang_get( 'add_and_edit_category_button' ) ?>" />
 		</fieldset>
 	</form>
 </div>
@@ -739,7 +740,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 	$t_users_count = count( $t_sort );
 	$t_removable_users_exist = false;
 
-	for ( $i = 0; $i < $t_users_count; $i++ ) {
+	for( $i = 0; $i < $t_users_count; $i++ ) {
 		$t_user = $t_users[$i];
 ?>
 			<tr>

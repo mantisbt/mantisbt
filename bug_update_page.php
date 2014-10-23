@@ -81,9 +81,6 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 	# in case the current project is not the same project of the bug we are viewing...
 	# ... override the current project. This to avoid problems with categories and handlers lists etc.
 	$g_project_override = $t_bug->project_id;
-	$t_changed_project = true;
-} else {
-	$t_changed_project = false;
 }
 
 if( bug_is_readonly( $f_bug_id ) ) {
@@ -171,8 +168,7 @@ layout_page_begin();
 ?>
 <div class="col-md-12 col-xs-12">
 <div id="bug-update" class="form-container">
-
-	<form name="update_bug_form" method="post" action="bug_update.php">
+	<form id="update_bug_form" method="post" action="bug_update.php">
 		<?php echo form_security_field( 'bug_update' ); ?>
 						<input type="hidden" name="bug_id" value="<?php echo $t_bug_id ?>" />
 
@@ -294,7 +290,7 @@ if( $t_show_reporter ) {
 		# Do not allow the bug's reporter to edit the Reporter field
 		# when limit_reporters is ON
 		if( ON == config_get( 'limit_reporters' )
-		&&  !access_has_project_level( REPORTER + 1, $t_bug->project_id )
+		&&  !access_has_project_level( config_get( 'report_bug_threshold', null, null, $t_bug->project_id ) + 1, $t_bug->project_id )
 		) {
 			echo string_attribute( user_get_name( $t_bug->reporter_id ) );
 		} else {

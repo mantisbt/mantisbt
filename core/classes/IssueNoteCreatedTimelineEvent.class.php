@@ -53,7 +53,8 @@ class IssueNoteCreatedTimelineEvent extends TimelineEvent {
 			return true;
 		}
 
-		if( !access_has_bugnote_level( VIEWER, $this->issue_note_id ) ) {
+		$t_bug = bug_get( $this->issue_id, true );
+		if( !access_has_bugnote_level( config_get( 'view_bug_threshold', null, null, $t_bug->project_id ), $this->issue_note_id ) ) {
 			return true;
 		}
 

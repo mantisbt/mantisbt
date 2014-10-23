@@ -192,6 +192,11 @@ switch( $f_action ) {
 		$t_button_title			= lang_get( 'view_status_group_bugs_button' );
 		$t_form					= 'view_status';
 		break;
+	case 'UP_PRODUCT_VERSION':
+		$t_question_title		= lang_get( 'product_version_bugs_conf_msg' );
+		$t_button_title			= lang_get( 'product_version_group_bugs_button' );
+		$t_form					= 'product_version';
+		break;
 	case 'UP_FIXED_IN_VERSION':
 		$t_question_title		= lang_get( 'fixed_in_version_bugs_conf_msg' );
 		$t_button_title			= lang_get( 'fixed_in_version_group_bugs_button' );
@@ -292,6 +297,7 @@ if( $t_multiple_projects ) {
 				case 'UP_TARGET_VERSION':
 					print_version_option_list( '', $t_project_id, VERSION_FUTURE, true, true );
 					break;
+				case 'UP_PRODUCT_VERSION':
 				case 'UP_FIXED_IN_VERSION':
 					print_version_option_list( '', $t_project_id, VERSION_ALL, true, true );
 					break;

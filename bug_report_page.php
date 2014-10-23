@@ -225,9 +225,13 @@ layout_page_header( lang_get( 'report_bug_link' ) );
 
 layout_page_begin( __FILE__ );
 
+$t_form_encoding = '';
+if( $t_show_attachments ) {
+	$t_form_encoding = 'enctype="multipart/form-data"';
+}
 ?>
 <div class="col-md-12 col-xs-12">
-<form name="report_bug_form" method="post" <?php if( $t_show_attachments ) { echo 'enctype="multipart/form-data"'; } ?> action="bug_report.php">
+<form id="report_bug_form" method="post" <?php echo $t_form_encoding; ?> action="bug_report.php?posted=1">
 <?php echo form_security_field( 'bug_report' ) ?>
 <input type="hidden" name="m_id" value="<?php echo $f_master_bug_id ?>" />
 <input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />

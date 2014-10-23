@@ -37,7 +37,7 @@ print_manage_menu( 'manage_plugin_page.php' );
 <div class="space-10"></div>
 <div class="form-container" >
 
-<form action="<?php echo plugin_page( 'config_edit' )?>" method="post">
+<form id="formatting-config-form" action="<?php echo plugin_page( 'config_edit' )?>" method="post">
 <?php echo form_security_field( 'plugin_format_config_edit' ) ?>
 
 <div class="widget-box widget-color-blue2">

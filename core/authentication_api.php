@@ -586,7 +586,7 @@ function auth_generate_unique_cookie_string() {
  */
 function auth_is_cookie_string_unique( $p_cookie_string ) {
 	$t_query = 'SELECT COUNT(*) FROM {user} WHERE cookie_string=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $p_cookie_string ) );
+	$t_result = db_query( $t_query, array( $p_cookie_string ) );
 
 	$t_count = db_result( $t_result );
 
@@ -630,8 +630,8 @@ function auth_get_current_user_cookie( $p_login_anonymous = true ) {
 				if( function_exists( 'db_is_connected' ) && db_is_connected() ) {
 
 					# get anonymous information if database is available
-					$t_query = 'SELECT id, cookie_string FROM ' . db_get_table( 'user' ) . ' WHERE username = ' . db_param();
-					$t_result = db_query_bound( $t_query, array( config_get( 'anonymous_account' ) ) );
+					$t_query = 'SELECT id, cookie_string FROM {user} WHERE username = ' . db_param();
+					$t_result = db_query( $t_query, array( config_get( 'anonymous_account' ) ) );
 
 					if( $t_row = db_fetch_array( $t_result ) ) {
 						$t_cookie = $t_row['cookie_string'];
@@ -705,6 +705,7 @@ function auth_reauthenticate() {
  * @access public
  */
 function auth_reauthenticate_page( $p_user_id, $p_username ) {
+	global $g_skip_submenus;
 	$t_error = false;
 
 	if( true == gpc_get_bool( '_authenticate' ) ) {
@@ -718,6 +719,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 		}
 	}
 
+	$g_skip_submenus = true;
 	layout_page_header();
 
 	layout_page_begin();
@@ -729,10 +731,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 	if( $t_error != false ) {
 		echo '<div class="alert alert-danger">';
 		echo '<p>' . lang_get( 'reauthenticate_message' ) . ' ' . lang_get( 'login_error' ) . '</p>';
-	} else {
-		echo '<div class="alert alert-warning">';
-		echo'<p>' . lang_get( 'reauthenticate_message' ) . '</p>';
-	}
+	} 
 	echo '</div>';
 ?>
 
@@ -823,7 +822,7 @@ function auth_is_cookie_valid( $p_cookie_string ) {
 
 	# look up cookie in the database to see if it is valid
 	$t_query = 'SELECT * FROM {user} WHERE cookie_string=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $p_cookie_string ) );
+	$t_result = db_query( $t_query, array( $p_cookie_string ) );
 
 	# return true if a matching cookie was found
 	if( 1 == db_num_rows( $t_result ) ) {
@@ -856,7 +855,7 @@ function auth_get_current_user_id() {
 
 	# @todo error with an error saying they aren't logged in? Or redirect to the login page maybe?
 	$t_query = 'SELECT id FROM {user} WHERE cookie_string=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $t_cookie_string ) );
+	$t_result = db_query( $t_query, array( $t_cookie_string ) );
 
 	$t_user_id = (int)db_result( $t_result );
 

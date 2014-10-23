@@ -77,7 +77,7 @@ if( $f_manage_page && $t_dst_project_id != ALL_PROJECTS ) {
 
 # user should only be able to set columns for a project that is accessible.
 if( $t_dst_project_id != ALL_PROJECTS ) {
-	access_ensure_project_level( VIEWER, $t_dst_project_id );
+	access_ensure_project_level( config_get( 'view_bug_threshold', null, null, $t_dst_project_id ), $t_dst_project_id );
 }
 
 # Calculate the user id to set the configuration for.

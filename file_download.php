@@ -89,7 +89,7 @@ switch( $f_type ) {
 	default:
 		access_denied();
 }
-$t_result = db_query_bound( $t_query, array( $c_file_id ) );
+$t_result = db_query( $t_query, array( $c_file_id ) );
 $t_row = db_fetch_array( $t_result );
 extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 

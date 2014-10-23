@@ -52,7 +52,7 @@ require_api( 'news_api.php' );
 require_api( 'print_api.php' );
 require_api( 'rss_api.php' );
 
-access_ensure_project_level( VIEWER );
+access_ensure_project_level( config_get( 'view_bug_threshold' ) );
 
 $f_offset = gpc_get_int( 'offset', 0 );
 

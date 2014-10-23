@@ -111,19 +111,18 @@ print_account_menu( 'account_sponsor_page.php' );
 # get issues user has sponsored
 $t_user = auth_get_current_user_id();
 $t_resolved = config_get( 'bug_resolved_status_threshold' );
-$t_bug_table = db_get_table( 'bug' );
 $t_payment = config_get( 'payment_enable', 0 );
 
 $t_project_clause = helper_project_specific_where( $t_project );
 
 $t_query = 'SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_in_version, b.status
-	FROM ' . $t_bug_table . ' b, {sponsorship} s
+	FROM {bug} b, {sponsorship} s
 	WHERE s.user_id=' . db_param() . ' AND s.bug_id = b.id ' .
 	( $t_show_all ? '' : 'AND ( b.status < ' . db_param() . ' OR s.paid < ' . SPONSORSHIP_PAID . ')' ) . '
 	AND ' . $t_project_clause . '
 	ORDER BY s.paid ASC, b.project_id ASC, b.fixed_in_version ASC, b.status ASC, b.id DESC';
 
-$t_result = db_query_bound( $t_query, $t_show_all ? array( $t_user ) : array( $t_user , $t_resolved ) );
+$t_result = db_query( $t_query, $t_show_all ? array( $t_user ) : array( $t_user , $t_resolved ) );
 
 $t_sponsors = array();
 while( $t_row = db_fetch_array( $t_result ) ) {
@@ -140,6 +139,17 @@ if( $t_sponsor_count === 0 ) {
 <br />
 <div>
 <table class="width100" cellspacing="1">
+	<colgroup>
+		<col style="width:10%" />
+		<col style="width:8%" />
+		<col style="width:7%" />
+		<col style="width:10%" />
+		<col style="width:10%" />
+		<col style="width:30%" />
+		<col style="width:8%" />
+		<col style="width:7%" />
+		<col style="width:10%" />
+	</colgroup>
 	<!-- Headings -->
 	<tr>
 		<td class="bold" colspan="9">
@@ -147,15 +157,15 @@ if( $t_sponsor_count === 0 ) {
 		</td>
 	</tr>
 	<tr>
-		<td class="bold" width="10%"><?php echo lang_get( 'email_bug' ) ?></td>
-		<td class="bold" width="8%"><?php echo lang_get( 'email_project' ) ?></td>
-		<td class="bold" width="7%"><?php echo lang_get( 'fixed_in_version' ) ?></td>
-		<td class="bold" width="10%"><?php echo lang_get( 'email_status' ) ?></td>
-		<td class="bold" width="10%"><?php echo lang_get( 'email_handler' ) ?></td>
-		<td class="bold" width="30%"><?php echo lang_get( 'email_summary' ) ?></td>
-		<td class="bold" width="8%"><?php echo lang_get( 'amount' ) ?></td>
-		<td class="bold" width="7%"><?php echo lang_get( 'status' ) ?></td>
-		<td class="bold" width="10%">&#160;</td>
+		<td class="form-title"><?php echo lang_get( 'email_bug' ) ?></td>
+		<td class="form-title"><?php echo lang_get( 'email_project' ) ?></td>
+		<td class="form-title"><?php echo lang_get( 'fixed_in_version' ) ?></td>
+		<td class="form-title"><?php echo lang_get( 'email_status' ) ?></td>
+		<td class="form-title"><?php echo lang_get( 'email_handler' ) ?></td>
+		<td class="form-title"><?php echo lang_get( 'email_summary' ) ?></td>
+		<td class="form-title"><?php echo lang_get( 'amount' ) ?></td>
+		<td class="form-title"><?php echo lang_get( 'status' ) ?></td>
+		<td class="form-title">&#160;</td>
 	</tr>
 <?php
 	$t_total_owing = 0;
@@ -168,7 +178,7 @@ if( $t_sponsor_count === 0 ) {
 		# describe bug
 		$t_status = string_attribute( get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id ) );
 		$t_resolution = string_attribute( get_enum_element( 'resolution', $t_bug->resolution, auth_get_current_user_id(), $t_bug->project_id ) );
-		$t_version_id = version_get_id( $t_bug->fixed_in_version, $t_project );
+		$t_version_id = version_get_id( $t_bug->fixed_in_version, $t_bug->project_id );
 		if( ( false !== $t_version_id ) && ( VERSION_RELEASED == version_get_field( $t_version_id, 'released' ) ) ) {
 			$t_released_label = '<a title="' . lang_get( 'released' ) . '">' . $t_bug->fixed_in_version . '</a>';
 		} else {
@@ -232,13 +242,13 @@ if( $t_sponsor_count === 0 ) {
 <?php } # end sponsored issues
 
 $t_query = 'SELECT b.id as bug, s.id as sponsor, s.paid, b.project_id, b.fixed_in_version, b.status
-	FROM ' . $t_bug_table . ' b, {sponsorship} s
+	FROM {bug} b, {sponsorship} s
 	WHERE b.handler_id=' . db_param() . ' AND s.bug_id = b.id ' .
 	( $t_show_all ? '' : 'AND ( b.status < ' . db_param() . ' OR s.paid < ' . SPONSORSHIP_PAID . ')' ) . '
 	AND ' . $t_project_clause . '
 	ORDER BY s.paid ASC, b.project_id ASC, b.fixed_in_version ASC, b.status ASC, b.id DESC';
 
-$t_result = db_query_bound( $t_query, $t_show_all ? array( $t_user ) : array( $t_user , $t_resolved ) );
+$t_result = db_query( $t_query, $t_show_all ? array( $t_user ) : array( $t_user , $t_resolved ) );
 
 $t_sponsors = array();
 while( $t_row = db_fetch_array( $t_result ) ) {
@@ -257,7 +267,16 @@ if( $t_sponsor_count === 0 ) {
 <form method="post" action="account_sponsor_update.php">
 <?php echo form_security_field( 'account_sponsor_update' ) ?>
 <table class="width100" cellspacing="1">
-
+	<colgroup>
+		<col style="width:10%" />
+		<col style="width:8%" />
+		<col style="width:7%" />
+		<col style="width:10%" />
+		<col style="width:35%" />
+		<col style="width:10%" />
+		<col style="width:10%" />
+		<col style="width:10%" />
+	</colgroup>
 	<!-- Headings -->
 	<tr>
 		<td class="bold" colspan="8">
@@ -265,14 +284,14 @@ if( $t_sponsor_count === 0 ) {
 		</td>
 	</tr>
 	<tr>
-		<td class="bold" width="10%"><?php echo lang_get( 'email_bug' ) ?></td>
-		<td class="bold" width="8%"><?php echo lang_get( 'email_project' ) ?></td>
-		<td class="bold" width="7%"><?php echo lang_get( 'fixed_in_version' ) ?></td>
-		<td class="bold" width="10%"><?php echo lang_get( 'email_status' ) ?></td>
-		<td class="bold" width="35%"><?php echo lang_get( 'email_summary' ) ?></td>
-		<td class="bold" width="10%"><?php echo lang_get( 'sponsor' ) ?></td>
-		<td class="bold" width="10%"><?php echo lang_get( 'amount' ) ?></td>
-		<td class="bold" width="10%"><?php echo lang_get( 'status' ) ?></td>
+		<td class="form-title"><?php echo lang_get( 'email_bug' ) ?></td>
+		<td class="form-title"><?php echo lang_get( 'email_project' ) ?></td>
+		<td class="form-title"><?php echo lang_get( 'fixed_in_version' ) ?></td>
+		<td class="form-title"><?php echo lang_get( 'email_status' ) ?></td>
+		<td class="form-title"><?php echo lang_get( 'email_summary' ) ?></td>
+		<td class="form-title"><?php echo lang_get( 'sponsor' ) ?></td>
+		<td class="form-title"><?php echo lang_get( 'amount' ) ?></td>
+		<td class="form-title"><?php echo lang_get( 'status' ) ?></td>
 	</tr>
 <?php
 	$t_bug_list = array();
@@ -287,7 +306,7 @@ if( $t_sponsor_count === 0 ) {
 		# describe bug
 		$t_status = string_attribute( get_enum_element( 'status', $t_bug->status, auth_get_current_user_id(), $t_bug->project_id ) );
 		$t_resolution = string_attribute( get_enum_element( 'resolution', $t_bug->resolution, auth_get_current_user_id(), $t_bug->project_id ) );
-		$t_version_id = version_get_id( $t_bug->fixed_in_version, $t_project );
+		$t_version_id = version_get_id( $t_bug->fixed_in_version, $t_bug->project_id );
 		if( ( false !== $t_version_id ) && ( VERSION_RELEASED == version_get_field( $t_version_id, 'released' ) ) ) {
 			$t_released_label = '<a title="' . lang_get( 'released' ) . '">' . $t_bug->fixed_in_version . '</a>';
 		} else {
@@ -342,12 +361,12 @@ if( $t_sponsor_count === 0 ) {
 	<td class="pull-right"><?php echo sponsorship_format_amount( $t_total_paid ) ?></td>
 	<td></td>
 </tr>
-	<input type="hidden" name="buglist" value="<?php echo $t_hidden_bug_list ?>" />
 	<!-- BUTTONS -->
 	<tr>
 		<td colspan="5">&#160;</td>
 		<!-- Update Button -->
-		<td colspan="2">
+		<td colspan="3">
+			<input type="hidden" name="buglist" value="<?php echo $t_hidden_bug_list ?>" />
 			<input type="submit" class="button" value="<?php echo lang_get( 'update_sponsorship_button' ) ?>" />
 		</td>
 	</tr>

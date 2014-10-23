@@ -91,7 +91,7 @@ $t_bug = bug_get( $f_bug_id, true );
 # per-project function calls use the project ID of this bug.
 $g_project_override = $t_bug->project_id;
 
-access_ensure_bug_level( VIEWER, $f_bug_id );
+access_ensure_bug_level( config_get( 'view_bug_threshold' ), $f_bug_id );
 
 $f_history = gpc_get_bool( 'history', config_get( 'history_default_visible' ) );
 

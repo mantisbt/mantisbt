@@ -73,7 +73,7 @@ function print_font_checked( $p_font_name ) {
 <div class="col-md-12 col-xs-12">
 <div class="space-10"></div>
 <div class="form-container" >
-<form action="<?php echo plugin_page( 'config_edit' )?>" method="post">
+<form id="graph-config-form" action="<?php echo plugin_lang_get( 'title' ) . ': ' . plugin_lang_get( 'config' )?>" method="post">
 <?php echo form_security_field( 'plugin_graph_config_edit' ) ?>
 
 <div class="widget-box widget-color-blue2">
@@ -105,7 +105,7 @@ function print_font_checked( $p_font_name ) {
 	</td>
 </tr>
 
-<tr class="spacer"><td></td></tr>
+			
 
 <tr>
 	<th class="category width-40">
@@ -133,7 +133,7 @@ function print_font_checked( $p_font_name ) {
 		<input type="text" name="summary_graphs_per_row" class="input-sm" value="<?php echo plugin_config_get( 'summary_graphs_per_row' )?>" />
 	</td>
 </tr>
-
+	
 <tr>
 	<th class="category width-40">
 		<?php echo plugin_lang_get( 'font' )?>

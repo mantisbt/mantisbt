@@ -413,12 +413,10 @@ function print_news_item_option_list() {
 				WHERE project_id=' . db_param() . '
 				ORDER BY date_posted DESC';
 	}
-	$t_result = db_query_bound( $t_query, ($t_global == true ? array() : array( $t_project_id ) ) );
-	$t_news_count = db_num_rows( $t_result );
 
-	for( $i = 0;$i < $t_news_count;$i++ ) {
-		$t_row = db_fetch_array( $t_result );
+	$t_result = db_query( $t_query, ($t_global == true ? array() : array( $t_project_id ) ) );
 
+	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_headline = string_display( $t_row['headline'] );
 		$t_announcement = $t_row['announcement'];
 		$t_view_state = $t_row['view_state'];
@@ -710,11 +708,15 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 		$t_project_id = $p_project_id;
 	}
 	if( config_get( 'allow_no_category' ) ) {
-		echo '<option value="0"' . check_selected( $p_category_id, 0 ) . '>';
+		echo '<option value="0"';
+		check_selected( $p_category_id, 0 );
+		echo '>';
 		echo category_full_name( 0, false ), '</option>';
 	} else {
 		if( 0 == $p_category_id ) {
-			echo '<option value="0"' . check_selected( $p_category_id, 0 ) . '>';
+			echo '<option value="0"';
+			echo check_selected( $p_category_id, 0 );
+			echo '>';
 			echo string_attribute( lang_get( 'select_option' ) ) . '</option>';
 		}
 	}
@@ -870,7 +872,6 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
  * @return void
  */
 function print_build_option_list( $p_build = '' ) {
-	$t_bug_table = db_get_table( 'bug' );
 	$t_overall_build_arr = array();
 
 	$t_project_id = helper_get_current_project();
@@ -879,14 +880,12 @@ function print_build_option_list( $p_build = '' ) {
 
 	# Get the "found in" build list
 	$t_query = 'SELECT DISTINCT build
-				FROM ' . $t_bug_table . '
+				FROM {bug}
 				WHERE ' . $t_project_where . '
 				ORDER BY build DESC';
-	$t_result = db_query_bound( $t_query );
-	$t_option_count = db_num_rows( $t_result );
+	$t_result = db_query( $t_query );
 
-	for( $i = 0;$i < $t_option_count;$i++ ) {
-		$t_row = db_fetch_array( $t_result );
+	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_overall_build_arr[] = $t_row['build'];
 	}
 
@@ -1092,10 +1091,9 @@ function print_project_user_list_option_list2( $p_user_id ) {
 				WHERE p.enabled = ' . db_param() . ' AND
 					u.user_id IS NULL
 				ORDER BY p.name';
-	$t_result = db_query_bound( $t_query, array( (int)$p_user_id, true ) );
+	$t_result = db_query( $t_query, array( (int)$p_user_id, true ) );
 	$t_category_count = db_num_rows( $t_result );
-	for( $i = 0;$i < $t_category_count;$i++ ) {
-		$t_row = db_fetch_array( $t_result );
+	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_project_name = string_attribute( $t_row['name'] );
 		$t_user_id = $t_row['id'];
 		echo '<option value="' . $t_user_id . '">' . $t_project_name . '</option>';
@@ -1683,7 +1681,7 @@ function print_hidden_input( $p_field_key, $p_field_val ) {
  * @return void
  */
 function print_documentation_link( $p_a_name = '' ) {
-	echo lang_get( $p_a_name ) . "\n";
+	echo lang_get( $p_a_name );
 	# @todo Disable documentation links for now.  May be re-enabled if linked to new manual.
 	# echo "<a href=\"doc/documentation.html#$p_a_name\" target=\"_info\">[?]</a>";
 }
@@ -1751,10 +1749,6 @@ function print_rss( $p_feed_url, $p_title = '' ) {
  * @return void
  */
 function print_recently_visited() {
-	if( !last_visited_enabled() ) {
-		return;
-	}
-
 	$t_ids = last_visited_get_array();
 
 	if( count( $t_ids ) == 0 ) {
@@ -1919,7 +1913,7 @@ function print_bug_attachment_preview_text( array $p_attachment ) {
 			break;
 		case DATABASE:
 			$t_query = 'SELECT * FROM {bug_file} WHERE id=' . db_param();
-			$t_result = db_query_bound( $t_query, array( (int)$p_attachment['id'] ) );
+			$t_result = db_query( $t_query, array( (int)$p_attachment['id'] ) );
 			$t_row = db_fetch_array( $t_result );
 			$t_content = $t_row['content'];
 			break;

@@ -69,7 +69,7 @@ token_delete( TOKEN_GRAPH );
                                 if( 0 == ( $t_pos % $t_wide ) ) {
                                     print( "<tr>\n" );
                                 }
-                                echo '<td width="50%">';
+                                echo '<td>';
                                 printf( '<img src="%s.php&amp;width=%d" alt="" />', plugin_page( $t_graphs[$t_pos] ), $t_graph_width );
                                 echo '</td>';
                                 if( ( $t_wide - 1 ) == ( $t_pos % $t_wide ) ) {
