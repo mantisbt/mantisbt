@@ -687,6 +687,7 @@ $s_copy_to = '复制到该项目';
 $s_categories_and_version_title = '分类与版本信息';
 $s_categories = '分类';
 $s_add_category_button = '添加分类';
+$s_add_and_edit_category_button = '添加和编辑分类';
 $s_versions = '版本';
 $s_add_version_button = '添加版本';
 $s_add_and_edit_version_button = '添加并编辑版本';

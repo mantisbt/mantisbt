@@ -684,6 +684,7 @@ $s_copy_to = 'Скопировать в';
 $s_categories_and_version_title = 'Категории и версии';
 $s_categories = 'Категории';
 $s_add_category_button = 'Добавить категорию';
+$s_add_and_edit_category_button = 'Добавление и редактирование категории';
 $s_versions = 'Версии';
 $s_add_version_button = 'Добавить версию';
 $s_add_and_edit_version_button = 'Добавить и изменить версию';
