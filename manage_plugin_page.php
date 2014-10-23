@@ -97,7 +97,6 @@ if( 0 < count( $t_plugins_installed ) ) {
 	<div class="table-responsive">
 		<table class="table table-striped table-bordered table-condensed table-hover">
 
-		<table>
 			<colgroup>
 				<col style="width:20%" />
 				<col style="width:35%" />

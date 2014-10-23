@@ -409,9 +409,13 @@ function columns_ensure_valid( $p_field_name, array $p_columns_to_validate, arra
  * @return array The array of valid column names found in $p_columns.
  * @access public
  */
-function columns_remove_invalid( array $p_columns, array $p_columns_all ) {
+function columns_remove_invalid( $p_columns, array $p_columns_all ) {
 	$t_columns_all_lower = array_values( array_map( 'utf8_strtolower', $p_columns_all ) );
 	$t_columns = array();
+
+	if( ( !isset( $p_columns ) || trim( $p_columns ) === '' ) ) {
+		$p_columns = array();
+	}
 
 	foreach( $p_columns as $t_column ) {
 		if( in_array( utf8_strtolower( $t_column ), $t_columns_all_lower ) ) {

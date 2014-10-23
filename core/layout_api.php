@@ -67,9 +67,8 @@ function layout_page_header( $p_page_title = null, $p_redirect_url = null ) {
 function layout_page_header_begin( $p_page_title = null ) {
 	html_begin();
 	html_head_begin();
-
 	html_content_type();
-	include( config_get( 'meta_include_file' ) );
+
 	global $g_robots_meta;
 	if( !is_blank( $g_robots_meta ) ) {
 		echo "\t", '<meta name="robots" content="', $g_robots_meta, '" />', "\n";
@@ -295,9 +294,8 @@ function layout_body_javascript() {
 function layout_login_page_begin() {
 	html_begin();
 	html_head_begin();
-
 	html_content_type();
-	include( config_get( 'meta_include_file' ) );
+
 	global $g_robots_meta;
 	if( !is_blank( $g_robots_meta ) ) {
 		echo "\t", '<meta name="robots" content="', $g_robots_meta, '" />', "\n";

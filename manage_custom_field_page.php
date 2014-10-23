@@ -53,6 +53,8 @@ layout_page_header( lang_get( 'manage_custom_field_link' ) );
 
 layout_page_begin( 'manage_overview_page.php' );
 
+print_manage_menu( 'manage_custom_field_page.php' );
+
 ?>
 
 <div class="col-md-12 col-xs-12">

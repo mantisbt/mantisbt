@@ -272,6 +272,8 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
 					# Build recipients list for display
 					$t_to = array();
+					$t_recipients = trim( $t_bugnote->note_attr, '|' );
+
 					foreach ( explode( '|', $t_recipients ) as $t_recipient ) {
 						$t_to[] = prepare_user_name( $t_recipient );
 					}

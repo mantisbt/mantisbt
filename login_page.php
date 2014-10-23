@@ -268,7 +268,7 @@ if( config_get_global( 'admin_checks' ) == ON ) {
 	# Note: install_helper_functions_api.php required for db_null_date() function definition
 	require_api( 'install_helper_functions_api.php' );
 	require_once( 'admin' . DIRECTORY_SEPARATOR . 'schema.php' );
-	$t_upgrades_reqd = count( $upgrade ) - 1;
+	$t_upgrades_reqd = count( $g_upgrade ) - 1;
 
 	if( ( 0 < $t_db_version ) &&
 			( $t_db_version != $t_upgrades_reqd ) ) {
