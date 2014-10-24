@@ -46,7 +46,7 @@ layout_page_header( plugin_lang_get( 'import' ) );
 
 layout_page_begin( 'manage_overview_page.php' );
 
-print_manage_menu( 'manage_plugin_page.php' );
+print_manage_menu( 'manage_import_issues_page.php' );
 
 ?>
 

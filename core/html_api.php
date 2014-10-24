@@ -84,9 +84,6 @@ $g_robots_meta = '';
 # flag for error handler to skip header menus
 $g_error_send_page_header = true;
 
-# flag to skip submenus
-$g_skip_submenus = false;
-
 $g_stylesheets_included = array();
 $g_scripts_included = array();
 

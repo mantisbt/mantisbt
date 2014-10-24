@@ -31,6 +31,8 @@ layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'manage_plugin_page.php' );
 
+print_manage_menu( );
+
 $g_current_font_selected = array(
 	'arial' => false,
 	'verdana' => false,

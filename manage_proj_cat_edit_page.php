@@ -65,7 +65,7 @@ layout_page_header();
 
 layout_page_begin( 'manage_overview_page.php' );
 
-print_manage_menu( 'manage_proj_page.php' );
+print_manage_menu( 'manage_proj_cat_edit_page.php' );
 ?>
 
 <div class="col-md-12 col-xs-12" xmlns="http://www.w3.org/1999/html">

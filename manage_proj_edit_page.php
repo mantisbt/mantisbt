@@ -88,7 +88,7 @@ layout_page_header( project_get_field( $f_project_id, 'name' ) );
 
 layout_page_begin( 'manage_overview_page.php' );
 
-print_manage_menu( 'manage_proj_page.php' );
+print_manage_menu( 'manage_proj_edit_page.php' );
 ?>
 
 <!-- PROJECT PROPERTIES -->
@@ -109,6 +109,7 @@ print_manage_menu( 'manage_proj_page.php' );
 	<div class="table-responsive">
 		<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
+			<legend><span><?php echo lang_get( 'edit_project_title' ) ?></span></legend>
 			<?php echo form_security_field( 'manage_proj_update' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<tr>

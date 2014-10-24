@@ -122,6 +122,8 @@ layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'manage_user_page.php' );
 
+print_manage_menu( 'manage_user_page.php' );
+
 # New Accounts Form BEGIN
 
 $t_days_old = 7 * SECONDS_PER_DAY;

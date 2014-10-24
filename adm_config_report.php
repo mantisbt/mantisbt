@@ -62,6 +62,9 @@ layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'adm_config_report.php' );
 
+print_manage_menu( 'adm_config_report.php' );
+print_manage_config_menu( 'adm_config_report.php' );
+
 $t_config_types = array(
 	CONFIG_TYPE_DEFAULT => 'default',
 	CONFIG_TYPE_INT     => 'integer',

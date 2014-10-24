@@ -57,6 +57,8 @@ layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'manage_plugin_page.php' );
 
+print_manage_menu( 'manage_plugin_page.php' );
+
 $t_plugins = plugin_find_all();
 uasort( $t_plugins,
 	function ( $p_p1, $p_p2 ) {

@@ -274,6 +274,9 @@ layout_page_begin( 'manage_overview_page.php' );
 print_manage_menu( 'adm_config_report.php' );
 print_manage_config_menu( 'manage_config_email_page.php' );
 
+print_manage_menu( 'adm_permissions_report.php' );
+print_manage_config_menu( 'manage_config_email_page.php' );
+
 $t_access = current_user_get_access_level();
 $t_project = helper_get_current_project();
 

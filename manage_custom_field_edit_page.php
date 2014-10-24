@@ -64,6 +64,8 @@ layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'manage_custom_field_page.php' );
 
+print_manage_menu( 'manage_custom_field_edit_page.php' );
+
 $t_definition = custom_field_get_definition( $f_field_id );
 ?>
 <div class="col-md-12 col-xs-12">

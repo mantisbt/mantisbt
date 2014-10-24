@@ -31,6 +31,8 @@ layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'manage_plugin_page.php' );
 
+print_manage_menu( );
+
 ?>
 
 <div class="col-md-12 col-xs-12">
