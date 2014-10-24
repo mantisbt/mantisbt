@@ -1107,6 +1107,7 @@ $s_manage_user = 'Muokkaa käyttäjää';
 $s_install_information = 'MantisBT asennustietoa';
 $s_database_information = 'MantisBT tietokantatietoa';
 $s_path_information = 'MantisBT polkutietoa';
+$s_php_version = 'PHP:n versio';
 $s_month_january = 'tammikuu';
 $s_month_february = 'helmikuu';
 $s_month_march = 'maaliskuu';

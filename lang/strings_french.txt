@@ -693,6 +693,7 @@ $s_copy_to = 'Copier vers';
 $s_categories_and_version_title = 'Catégories et versions';
 $s_categories = 'Catégories';
 $s_add_category_button = 'Ajouter la catégorie';
+$s_add_and_edit_category_button = 'Ajouter et Modifier une catégorie';
 $s_versions = 'Versions';
 $s_add_version_button = 'Ajouter la version';
 $s_add_and_edit_version_button = 'Ajouter et modifier la version';
