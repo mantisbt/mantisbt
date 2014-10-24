@@ -599,6 +599,7 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
  * @param $p_project_id     The id of the project the issue is associated with.
  * @param $p_old_handler_id The old handler id.
  * @param $p_new_handler_id The new handler id.  0 for not assigned.
+ * @return true: access ok, otherwise: soap fault.
  */
 function mci_issue_handler_access_check( $p_user_id, $p_project_id, $p_old_handler_id, $p_new_handler_id ) {
 	if( $p_new_handler_id != 0 ) {
@@ -616,6 +617,8 @@ function mci_issue_handler_access_check( $p_user_id, $p_project_id, $p_old_handl
 			return mci_soap_fault_access_denied( 'User \'' . $p_user_id . '\' does not have access right to assign issues' );
 		}
 	}
+
+	return true;
 }
 
 /**
@@ -684,7 +687,10 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 		return mci_soap_fault_access_denied( 'User \'' . $t_user_id . '\' does not have access right to report issues' );
 	}
 
-	mci_issue_handler_access_check( $t_user_id, $t_project_id, /* old */ 0, /* new */ $t_handler_id );
+	$t_access_check_result = mci_issue_handler_access_check( $t_user_id, $t_project_id, /* old */ 0, /* new */ $t_handler_id );
+	if( $t_access_check_result !== true ) {
+		return $t_access_check_result;
+	}
 
 	$t_category = isset( $p_issue['category'] ) ? $p_issue['category'] : null;
 
@@ -913,7 +919,11 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	$t_bug_data->project_id = $t_project_id;
 	$t_bug_data->reporter_id = $t_reporter_id;
 
-	mci_issue_handler_access_check( $t_user_id, $t_project_id, /* old */ $t_bug_data->handler_id, /* new */ $t_handler_id );
+	$t_access_check_result = mci_issue_handler_access_check( $t_user_id, $t_project_id, /* old */ $t_bug_data->handler_id, /* new */ $t_handler_id );
+	if( $t_access_check_result !== true ) {
+		return $t_access_check_result;
+	}
+
 	$t_bug_data->handler_id = $t_handler_id;
 
 	$t_bug_data->category_id = $t_category_id;
