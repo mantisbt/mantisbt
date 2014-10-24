@@ -48,10 +48,9 @@ layout_page_header( lang_get( 'permissions_summary_report' ) );
 layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'adm_config_report.php' );
+
 print_manage_config_menu( 'adm_permissions_report.php' );
 
-print_manage_menu( 'adm_permissions_report.php' );
-print_manage_config_menu( 'adm_permissions_report.php' );
 
 /**
  * return html for start of administration report section

@@ -58,9 +58,7 @@ layout_page_header( lang_get( 'manage_workflow_config' ) );
 layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'adm_config_report.php' );
-print_manage_config_menu( 'manage_config_workflow_page.php' );
 
-print_manage_menu( 'adm_permissions_report.php' );
 print_manage_config_menu( 'manage_config_workflow_page.php' );
 
 $g_access = current_user_get_access_level();
@@ -476,6 +474,7 @@ if( ALL_PROJECTS <> $t_project ) {
 	echo '<span class="color-project">' . lang_get( 'colour_project' ) .'</span><br />';
 }
 echo '<span class="color-global">' . lang_get( 'colour_global' ) . '</span></p>';
+echo '</div>' . "\n";
 
 # show the settings used to derive the table
 threshold_begin( lang_get( 'workflow_thresholds' ) );

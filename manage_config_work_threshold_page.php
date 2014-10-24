@@ -58,9 +58,7 @@ layout_page_header( lang_get( 'manage_threshold_config' ) );
 layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'adm_config_report.php' );
-print_manage_config_menu( 'manage_config_work_threshold_page.php' );
 
-print_manage_menu( 'adm_permissions_report.php' );
 print_manage_config_menu( 'manage_config_work_threshold_page.php' );
 
 $g_user = auth_get_current_user_id();
@@ -369,7 +367,6 @@ if( ALL_PROJECTS <> $g_project_id ) {
 	echo '<span class="color-project">' . lang_get( 'colour_project' ) .'</span><br />';
 }
 echo '<span class="color-global">' . lang_get( 'colour_global' ) . '</span></p>';
-echo '<span style="background-color:' . $g_color_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
 echo '</div>' . "\n";
 
 echo '<form id="mail_config_action" method="post" action="manage_config_work_threshold_set.php">' . "\n";

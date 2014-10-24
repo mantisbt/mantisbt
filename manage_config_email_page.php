@@ -272,9 +272,7 @@ layout_page_header( lang_get( 'manage_email_config' ) );
 layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'adm_config_report.php' );
-print_manage_config_menu( 'manage_config_email_page.php' );
 
-print_manage_menu( 'adm_permissions_report.php' );
 print_manage_config_menu( 'manage_config_email_page.php' );
 
 $t_access = current_user_get_access_level();
