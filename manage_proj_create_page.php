@@ -57,8 +57,6 @@ layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'manage_proj_page.php' );
 
-print_manage_menu( 'manage_proj_create_page.php' );
-
 $f_parent_id = gpc_get( 'parent_id', null );
 
 if( project_table_empty() ) {

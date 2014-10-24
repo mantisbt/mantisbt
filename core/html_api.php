@@ -796,11 +796,6 @@ function print_admin_menu_bar( $p_page ) {
 	echo '<a href="test_langs.php">Test Langs</a>' . "\n";
 	echo '</li>' . "\n";
 
-	$t_active = 'test_email.php' == $p_page ? 'active' : '';
-	echo '<li class="' . $t_active . '">' . "\n";
-	echo '<a href="test_email.php">Test Email</a>' . "\n";
-	echo '</li>' . "\n";
-
 	$t_active = 'email_queue.php' == $p_page ? 'active' : '';
 	echo '<li class="' . $t_active . '">' . "\n";
 	echo '<a href="email_queue.php">Email Queue</a>' . "\n";

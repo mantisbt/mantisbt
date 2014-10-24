@@ -957,13 +957,6 @@ $g_excel_columns = array (
 $g_show_bug_project_links = ON;
 
 /**
- * Position of the status colour legend, can be: POSITION_*
- * see constant_inc.php. (*: TOP , BOTTOM , or BOTH)
- * @global integer $g_status_legend_position
- */
-$g_status_legend_position = STATUS_LEGEND_POSITION_BOTTOM;
-
-/**
  * Show a legend with percentage of bug status
  * x% of all bugs are new, y% of all bugs are assigned and so on.
  * If set to ON it will printed below the status colour legend.
