@@ -646,7 +646,11 @@ function html_footer() {
 	#  2) we don't invalidate the user cache immediately after fetching it
 	#  3) don't do this on the password verification or update page, as it causes the
 	#    verification comparison to fail
-	if( auth_is_user_authenticated() && !current_user_is_anonymous() && !( is_page_name( 'verify.php' ) || is_page_name( 'account_update.php' ) ) ) {
+	#  4) don't do that on pages that auto-refresh (View Issues page).
+	if( auth_is_user_authenticated() &&
+		!current_user_is_anonymous() &&
+		!( is_page_name( 'verify.php' ) || is_page_name( 'account_update.php' ) ) &&
+		!( isset( $_GET['refresh'] ) && $_GET['refresh'] == 'true' ) ) {
 		$t_user_id = auth_get_current_user_id();
 		user_update_last_visit( $t_user_id );
 	}
