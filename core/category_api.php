@@ -56,19 +56,8 @@ $g_category_cache = array();
  * @access public
  */
 function category_exists( $p_category_id ) {
-	global $g_category_cache;
-	if( isset( $g_category_cache[(int)$p_category_id] ) ) {
-		return true;
-	}
-
-	$t_query = 'SELECT COUNT(*) FROM {category} WHERE id=' . db_param();
-	$t_count = db_result( db_query( $t_query, array( $p_category_id ) ) );
-
-	if( 0 < $t_count ) {
-		return true;
-	} else {
-		return false;
-	}
+	$t_category_row = category_get_row( $p_category_id, /* error_if_not_exists */ false );
+	return $t_category_row !== false;
 }
 
 /**
@@ -256,10 +245,11 @@ function category_remove_all( $p_project_id, $p_new_category_id = 0 ) {
 /**
  * Return the definition row for the category
  * @param integer $p_category_id Category identifier.
+ * @param boolean $p_error_if_not_exists true: error if not exists, otherwise return false.
  * @return array An array containing category details.
  * @access public
  */
-function category_get_row( $p_category_id ) {
+function category_get_row( $p_category_id, $p_error_if_not_exists = true ) {
 	global $g_category_cache;
 
 	$p_category_id = (int)$p_category_id;
@@ -272,7 +262,11 @@ function category_get_row( $p_category_id ) {
 	$t_result = db_query( $t_query, array( $p_category_id ) );
 	$t_row = db_fetch_array( $t_result );
 	if( !$t_row ) {
-		trigger_error( ERROR_CATEGORY_NOT_FOUND, ERROR );
+		if( $p_error_if_not_exists ) {
+			trigger_error( ERROR_CATEGORY_NOT_FOUND, ERROR );
+		} else {
+			return false;
+		}
 	}
 
 	$g_category_cache[$p_category_id] = $t_row;
@@ -562,6 +556,8 @@ function category_full_name( $p_category_id, $p_show_project = true, $p_current_
 	if( 0 == $p_category_id ) {
 		# No Category
 		return lang_get( 'no_category' );
+	} else if( !category_exists( $p_category_id ) ) {
+		return '@' . $p_category_id . '@';
 	} else {
 		$t_row = category_get_row( $p_category_id );
 		$t_project_id = $t_row['project_id'];
