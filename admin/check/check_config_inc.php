@@ -95,6 +95,10 @@ check_print_test_warn_row( 'Email debugging should be OFF',
 	array( false => 'All notification e-mails will be sent to: ' . $g_debug_email )
 );
 
+check_print_test_row( 'Default move category must exists ("default_category_for_moves")',
+	category_exists( config_get( 'default_category_for_moves' ) ),
+	array( false => 'Issues moved may end up with invalid category id.' )
+);
 
 # Obsolete Settings
 require_api( 'obsolete.php' );
