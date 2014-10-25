@@ -128,10 +128,10 @@ print_successful_redirect( 'adm_config_report.php' );
  * commas and '=>' within strings are handled
  *
  * @param string  $p_value      Complex value to process.
- * @param boolean $p_trimquotes Whether to trim quotes.
+ * @param boolean $p_trim_quotes Whether to trim quotes.
  * @return parsed variable
  */
-function process_complex_value( $p_value, $p_trimquotes = false ) {
+function process_complex_value( $p_value, $p_trim_quotes = false ) {
 	static $s_regex_array = null;
 	static $s_regex_string = null;
 	static $s_regex_element = null;
@@ -192,10 +192,23 @@ function process_complex_value( $p_value, $p_trimquotes = false ) {
 		return $t_processed;
 	} else {
 		# Scalar value
-		if( $p_trimquotes ) {
-			$t_value = trim( $t_value, " \t\n\r\0\x0B\"'" );
+		$t_value = trim( $t_value, " \t\n\r\0\x0B" );
+
+		if( is_numeric( $t_value ) ) {
+			return (int)$t_value;
 		}
-		return constant_replace( $t_value );
+
+		# if has quotation marks
+		if ( strpos( $t_value, "'" ) !== false || strpos( $t_value, '"' ) !== false ) {
+			if( $p_trim_quotes  ) {
+				$t_value = trim( $t_value, "\"'" );
+			}
+		} else {
+			# Only replace constants when no quotation marks exist
+			$t_value = constant_replace( $t_value );
+		}
+
+		return $t_value;
 	}
 }
 
