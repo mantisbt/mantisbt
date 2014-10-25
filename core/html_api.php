@@ -634,6 +634,14 @@ function html_operation_successful( $p_redirect_url, $p_message = '' ) {
 }
 
 /**
+ * Checks if the current page load was triggered by auto-refresh or real activity
+ * @return bool true: auto-refresh, false: triggered by user.
+ */
+function html_is_auto_refresh() {
+	return isset( $_GET['refresh'] ) && $_GET['refresh'] == 'true';
+}
+
+/**
  * (13) Print the page footer information
  * @return void
  */
@@ -650,7 +658,7 @@ function html_footer() {
 	if( auth_is_user_authenticated() &&
 		!current_user_is_anonymous() &&
 		!( is_page_name( 'verify.php' ) || is_page_name( 'account_update.php' ) ) &&
-		!( isset( $_GET['refresh'] ) && $_GET['refresh'] == 'true' ) ) {
+		!html_is_auto_refresh() ) {
 		$t_user_id = auth_get_current_user_id();
 		user_update_last_visit( $t_user_id );
 	}
