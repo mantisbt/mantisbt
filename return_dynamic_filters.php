@@ -53,12 +53,11 @@ auth_ensure_user_authenticated();
 
 compress_enable();
 
-global $g_filter;
+$t_filter = current_user_get_bug_filter();
+filter_init( $t_filter );
+
 global $g_select_modifier;
-$g_filter = current_user_get_bug_filter();
-if( $g_filter === false ) {
-	$g_filter = filter_get_default();
-}
+
 $t_project_id = helper_get_current_project();
 $t_current_user_access_level = current_user_get_access_level();
 $t_accessible_custom_fields_ids = array();
@@ -128,7 +127,7 @@ function return_dynamic_filters_prepend_headers() {
 }
 
 $f_filter_target = gpc_get_string( 'filter_target' );
-$t_function_name = 'print_filter_' . utf8_substr( $f_filter_target, 0, -7 );
+$t_function_name = 'print_filter_' . utf8_substr( $f_filter_target, 0, -7 ); # -7 for '_filter'
 if( function_exists( $t_function_name ) ) {
 	return_dynamic_filters_prepend_headers();
 	call_user_func( $t_function_name );

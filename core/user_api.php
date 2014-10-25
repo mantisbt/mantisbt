@@ -1312,7 +1312,7 @@ function user_is_lost_password_request_allowed( $p_user_id ) {
  *
  * @param integer $p_user_id    A valid user identifier.
  * @param integer $p_project_id A valid project identifier.
- * @return array
+ * @return array The user filter, or default filter if not valid.
  */
 function user_get_bug_filter( $p_user_id, $p_project_id = null ) {
 	if( null === $p_project_id ) {
@@ -1326,7 +1326,7 @@ function user_get_bug_filter( $p_user_id, $p_project_id = null ) {
 	$t_cookie_detail = explode( '#', $t_view_all_cookie, 2 );
 
 	if( !isset( $t_cookie_detail[1] ) ) {
-		return false;
+		return filter_get_default();
 	}
 
 	$t_filter = json_decode( $t_cookie_detail[1], true );
