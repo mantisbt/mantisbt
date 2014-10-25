@@ -80,6 +80,17 @@ require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 require_api( 'version_api.php' );
 
+$g_filter = null;
+
+/**
+ * Initialize the filter API with the current filter.
+ * @param array $p_filter The filter to set as the current filter.
+ */
+function filter_init( $p_filter ) {
+	global $g_filter;
+	$g_filter = $p_filter;
+}
+
 /**
  * Allow plugins to define a set of class-based filters, and register/load
  * them here to be used by the rest of filter_api.
@@ -546,7 +557,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		$p_filter_arr[FILTER_PROPERTY_FILTER_BY_DATE] = gpc_get_bool( FILTER_PROPERTY_FILTER_BY_DATE, false );
 	}
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_VIEW_STATE] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_VIEW_STATE] = gpc_get( FILTER_PROPERTY_VIEW_STATE, '' );
+		$p_filter_arr[FILTER_PROPERTY_VIEW_STATE] = gpc_get( FILTER_PROPERTY_VIEW_STATE, META_FILTER_ANY );
 	} else if( filter_field_is_any( $p_filter_arr[FILTER_PROPERTY_VIEW_STATE] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_VIEW_STATE] = META_FILTER_ANY;
 	}
