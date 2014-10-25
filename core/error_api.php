@@ -171,7 +171,8 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 					$t_old_contents = ob_get_contents();
 					if( !error_handled() ) {
 						# Retrieve the previously output header
-						if( false !== preg_match_all( '|^(.*)(</head>.*$)|is', $t_old_contents, $t_result ) ) {
+						if( false !== preg_match_all( '|^(.*)(</head>.*$)|is', $t_old_contents, $t_result ) &&
+							isset( $t_result[1] ) && isset( $t_result[1][0] ) ) {
 							$t_old_headers = $t_result[1][0];
 							unset( $t_old_contents );
 						}
