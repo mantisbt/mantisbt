@@ -73,6 +73,7 @@ access_cache_matrix_project( helper_get_current_project() );
 # get the bugnote data
 $t_bugnote_order = current_user_get_pref( 'bugnote_order' );
 $t_bugnotes = bugnote_get_all_visible_bugnotes( $f_bug_id, $t_bugnote_order, 0, $t_user_id );
+$t_show_time_tracking = access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id );
 
 #precache users
 $t_bugnote_users = array();
@@ -132,9 +133,8 @@ $t_num_notes = count( $t_bugnotes );
 
 		$t_bugnote_id_formatted = bugnote_format_id( $t_bugnote->id );
 
-		if( 0 != $t_bugnote->time_tracking ) {
+		if( $t_bugnote->time_tracking != 0 ) {
 			$t_time_tracking_hhmm = db_minutes_to_hhmm( $t_bugnote->time_tracking );
-			$t_bugnote->note_type = TIME_TRACKING;   # for older entries that didn't set the type @@@PLR FIXME
 			$t_total_time += $t_bugnote->time_tracking;
 		} else {
 			$t_time_tracking_hhmm = '';
@@ -240,7 +240,7 @@ $t_num_notes = count( $t_bugnotes );
 		<?php
 			switch( $t_bugnote->note_type ) {
 				case REMINDER:
-					echo '<em>';
+					echo '<strong>';
 
 					# List of recipients; remove surrounding delimiters
 					$t_recipients = trim( $t_bugnote->note_attr, '|' );
@@ -262,11 +262,11 @@ $t_num_notes = count( $t_bugnotes );
 							. ( $t_truncated ? ' (' . lang_get( 'reminder_list_truncated' ) . ')' : '' );
 					}
 
-					echo '</em><br /><br />';
+					echo '</strong><br /><br />';
 					break;
 
 				case TIME_TRACKING:
-					if( access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id ) ) {
+					if( $t_show_time_tracking ) {
 						echo '<div class="time-tracked">', lang_get( 'time_tracking_time_spent' ) . ' ' . $t_time_tracking_hhmm, '</div>';
 					}
 					break;
@@ -288,7 +288,7 @@ $t_num_notes = count( $t_bugnotes );
 </table>
 <?php
 
-if( $t_total_time > 0 && access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id ) ) {
+if( $t_total_time > 0 && $t_show_time_tracking ) {
 	echo '<p class="time-tracking-total">', sprintf( lang_get( 'total_time_for_issue' ), '<span class="time-tracked">' . db_minutes_to_hhmm( $t_total_time ) . '</span>' ), '</p>';
 }
 	collapse_closed( 'bugnotes' );

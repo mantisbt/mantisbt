@@ -396,7 +396,6 @@ function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_
 	$t_user_access_level = user_get_access_level( $t_user_id, $t_project_id );
 
 	$t_all_bugnotes = bugnote_get_all_bugnotes( $p_bug_id );
-	$t_private_bugnote_threshold = config_get( 'private_bugnote_threshold' );
 
 	$t_private_bugnote_visible = access_compare_level( $t_user_access_level, config_get( 'private_bugnote_threshold' ) );
 	$t_time_tracking_visible = access_compare_level( $t_user_access_level, config_get( 'time_tracking_view_threshold' ) );
@@ -477,6 +476,11 @@ function bugnote_get_all_bugnotes( $p_bug_id ) {
 			$t_bugnote->note_type = $t_row['note_type'];
 			$t_bugnote->note_attr = $t_row['note_attr'];
 			$t_bugnote->time_tracking = $t_row['time_tracking'];
+
+			# Handle old bugnotes before setting type to time tracking
+			if ( $t_bugnote->time_tracking != 0 ) {
+				$t_bugnote->note_type = TIME_TRACKING;
+			}
 
 			$t_bugnotes[] = $t_bugnote;
 			$g_cache_bugnote[(int)$t_bugnote->id] = $t_bugnote;
