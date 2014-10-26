@@ -104,13 +104,13 @@ function set_color_override( $p_level_file, $p_level_global, $p_level_project ) 
  * @return string
  */
 function show_flag( $p_from_status_id, $p_to_status_id ) {
-	global $g_can_change_workflow, $g_overrides,
-		$t_file_workflow, $t_global_workflow, $t_project_workflow,
+	global $g_can_change_workflow,
+		$g_file_workflow, $g_global_workflow, $g_project_workflow,
 		$t_resolved_status, $t_reopen_status, $t_reopen_label;
 	if( $p_from_status_id <> $p_to_status_id ) {
-		$t_file = isset( $t_file_workflow['exit'][$p_from_status_id][$p_to_status_id] ) ? 1 : 0 ;
-		$t_global = isset( $t_global_workflow['exit'][$p_from_status_id][$p_to_status_id] ) ? 1 : 0 ;
-		$t_project = isset( $t_project_workflow['exit'][$p_from_status_id][$p_to_status_id] ) ? 1 : 0;
+		$t_file = isset( $g_file_workflow['exit'][$p_from_status_id][$p_to_status_id] ) ? 1 : 0;
+		$t_global = isset( $g_global_workflow['exit'][$p_from_status_id][$p_to_status_id] ) ? 1 : 0;
+		$t_project = isset( $g_project_workflow['exit'][$p_from_status_id][$p_to_status_id] ) ? 1 : 0;
 
 		$t_color = set_color_override( $t_file, $t_global, $t_project );
 		if( $g_can_change_workflow && $t_color != '' ) {
@@ -379,7 +379,7 @@ $t_all_status = explode( ',', $t_extra_enum_status );
 # gather all versions of the workflow
 $g_file_workflow = workflow_parse( config_get_global( 'status_enum_workflow' ) );
 $g_global_workflow = workflow_parse( config_get( 'status_enum_workflow', null, ALL_USERS, ALL_PROJECTS ) );
-$g_project_workflow = workflow_parse( config_get( 'status_enum_workflow' ) );
+$g_project_workflow = workflow_parse( config_get( 'status_enum_workflow', null, ALL_USERS, $t_project ) );
 
 # validate the project workflow
 $t_validation_result = '';
