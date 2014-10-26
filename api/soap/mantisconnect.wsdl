@@ -753,6 +753,14 @@
   <part name="config_var" type="xsd:string" /></message>
 <message name="mc_config_get_stringResponse">
   <part name="return" type="xsd:string" /></message>
+<message name="mc_config_getRequest">
+    <part name="username" type="xsd:string" />
+    <part name="password" type="xsd:string" />
+    <part name="user" type="tns:ObjectRef" />
+    <part name="project" type="tns:ObjectRef" />
+    <part name="configs" type="tns:StringArray" /></message>
+<message name="mc_config_getResponse">
+    <part name="return" type="xsd:string" /></message>
 <message name="mc_issue_checkinRequest">
   <part name="username" type="xsd:string" />
   <part name="password" type="xsd:string" />
@@ -1099,6 +1107,11 @@
     <input message="tns:mc_config_get_stringRequest"/>
     <output message="tns:mc_config_get_stringResponse"/>
   </operation>
+  <operation name="mc_config_get">
+    <documentation>Get the specified configurations for the specified user and project.</documentation>
+    <input message="tns:mc_config_get_stringRequest"/>
+    <output message="tns:mc_config_get_stringResponse"/>
+  </operation>
   <operation name="mc_issue_checkin">
     <documentation>Notifies MantisBT of a check-in for the issue with the specified id.</documentation>
     <input message="tns:mc_issue_checkinRequest"/>
@@ -1436,6 +1449,11 @@
     <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_config_get_string" style="rpc"/>
     <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
     <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="mc_config_get">
+    <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_config_get" style="rpc"/>
+      <input><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+      <output><soap:body use="encoded" namespace="http://futureware.biz/mantisconnect" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
   </operation>
   <operation name="mc_issue_checkin">
     <soap:operation soapAction="http://www.mantisbt.org/bugs/api/soap/mantisconnect.php/mc_issue_checkin" style="rpc"/>
