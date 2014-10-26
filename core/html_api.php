@@ -773,13 +773,20 @@ function print_summary_menu( $p_page = '' ) {
  * @return void
  */
 function print_admin_menu_bar( $p_page ) {
+	global $g_upgrade;
 	echo '<div class="space-10"></div>';
 	echo '<ul class="nav nav-tabs padding-18">' . "\n";
 
 	$t_active = 'index.php' == $p_page ? 'active' : '';
-	echo '<li class="' . $t_active . '">' . "\n";
+	echo '<li class="green ' . $t_active . '">' . "\n";
 	echo '<a href="index.php"><i class="blue ace-icon fa fa-info-circle"></i> </a>';
 	echo '</li>' . "\n";
+
+	if( count( $g_upgrade ) - 1 != config_get( 'database_version' ) ) {
+		echo '<li class="bold">' . "\n";
+		echo '<a class="green" href="install.php">Upgrade your installation</a>';
+		echo '</li>' . "\n";
+	}
 
 	$t_active = 'system_utils.php' == $p_page ? 'active' : '';
 	echo '<li class="' . $t_active . '">' . "\n";
