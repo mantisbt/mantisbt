@@ -422,20 +422,22 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 		MD5,
 		CRYPT,
 		PLAIN,
+		BASIC_AUTH,
 	);
+
 	foreach( $t_login_methods as $t_login_method ) {
 		# pass the stored password in as the salt
 		if( auth_process_plain_password( $p_test_password, $t_password, $t_login_method ) == $t_password ) {
-
 			# Do not support migration to PLAIN, since this would be a crazy thing to do.
 			# Also if we do, then a user will be able to login by providing the MD5 value
 			# that is copied from the database.  See #8467 for more details.
-			if( $t_configured_login_method != PLAIN && $t_login_method == PLAIN ) {
+			if( ( $t_configured_login_method != PLAIN && $t_login_method == PLAIN ) ||
+				( $t_configured_login_method != BASIC_AUTH && $t_login_method == BASIC_AUTH ) ) {
 				continue;
 			}
 
 			# Check for migration to another login method and test whether the password was encrypted
-			# with our previously insecure implemention of the CRYPT method
+			# with our previously insecure implementation of the CRYPT method
 			if( ( $t_login_method != $t_configured_login_method ) || (( CRYPT == $t_configured_login_method ) && utf8_substr( $t_password, 0, 2 ) == utf8_substr( $p_test_password, 0, 2 ) ) ) {
 				user_set_password( $p_user_id, $p_test_password, true );
 			}
