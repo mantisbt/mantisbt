@@ -618,15 +618,6 @@ $g_smtp_port = 25;
 $g_email_send_using_cronjob = OFF;
 
 /**
- * Specify whether e-mails should be sent with the category set or not. This
- * is tested with Microsoft Outlook.  More testing for this feature + other
- * formats will be added in the future.
- * OFF, EMAIL_CATEGORY_PROJECT_CATEGORY (format: [Project] Category)
- * @global integer $g_email_set_category
- */
-$g_email_set_category = OFF;
-
-/**
  * email separator and padding
  * @global string $g_email_separator1
  */
@@ -1034,7 +1025,7 @@ $g_sort_by_last_name = OFF;
  * - An URL to the default image to be used (for example,
  *   "http:/path/to/unknown.jpg" or "%path%images/no_avatar.png")
  *
- * @global int|string $g_show_avatar
+ * @global integer|string $g_show_avatar
  * @see $g_show_avatar_threshold
  */
 $g_show_avatar = OFF;
@@ -1075,12 +1066,6 @@ $g_cookie_time_length = 30000000;
  * @global integer $g_allow_permanent_cookie
  */
 $g_allow_permanent_cookie = ON;
-
-/**
- * minutes to wait before document is stale (in minutes)
- * @global integer $g_content_expire
- */
-$g_content_expire = 0;
 
 /**
  * The time (in seconds) to allow for page execution during long processes
@@ -2039,8 +2024,7 @@ $g_status_enum_workflow = array();
 ############################
 
 /**
- * Specify the filename of the magic database file. This is used by
- * PHP 5.3.0 (or earlier versions with the fileinfo PECL extension) to
+ * Specify the filename of the magic database file. This is used to
  * guess what the MIME type of a file is. Usually it is safe to leave this
  * setting as the default (blank) as PHP is usually able to find this file
  * by itself.
@@ -2523,6 +2507,12 @@ $g_report_bug_threshold = REPORTER;
  * @global integer $g_update_bug_threshold
  */
 $g_update_bug_threshold = UPDATER;
+
+/**
+ * access level needed to view bugs
+ * @global integer $g_view_bug_threshold
+ */
+$g_view_bug_threshold = VIEWER;
 
 /**
  * Access level needed to monitor bugs.
@@ -3049,18 +3039,6 @@ $g_display_bug_padding = 7;
  */
 $g_display_bugnote_padding = 7;
 
-/**
- * colours for configuration display
- * @global string $g_colour_project
- */
-$g_colour_project = 'LightGreen';
-
-/**
- * colours for configuration display
- * @global string $g_colour_global
- */
-$g_colour_global = 'LightBlue';
-
 #############################
 # MantisBT Cookie Variables #
 #############################
@@ -3080,14 +3058,6 @@ $g_cookie_path = '/';
  * @global string $g_cookie_domain
  */
 $g_cookie_domain = '';
-
-/**
- * Version of the view_all_page cookie
- * It is not expected for the user to need to change this setting
- * @see $g_view_all_cookie
- * @global string $g_cookie_version
- */
-$g_cookie_version = 'v9';
 
 /**
  * Prefix for all MantisBT cookies
@@ -3301,16 +3271,6 @@ $g_sponsorship_enum_string = '0:Unpaid,1:Requested,2:Paid';
  */
 $g_custom_field_type_enum_string = '0:string,1:numeric,2:float,3:enum,4:email,5:checkbox,6:list,7:multiselection list,8:date,9:radio,10:textarea';
 
-#################################
-# MantisBT Javascript Variables #
-#################################
-
-/**
- * allow the use of Javascript?
- * @global integer $g_use_javascript
- */
-$g_use_javascript = ON;
-
 ###############################
 # MantisBT Speed Optimisation #
 ###############################
@@ -3377,7 +3337,7 @@ $g_css_rtl_include_file = 'rtl.css';
  * meta tags
  * @global string $g_meta_include_file
  */
-$g_meta_include_file = '%absolute_path%meta_inc.php';
+$g_meta_include_file = '';
 
 ################
 # Redirections #
@@ -3806,13 +3766,9 @@ $g_wiki_engine_url = $t_protocol . '://' . $t_host . '/%wiki_engine%/';
 ####################
 
 /**
- * Whether to show the most recently visited issues or not.  At the moment we always track them even if this flag is off.
- * @global integer $g_recently_visited
- */
-$g_recently_visited = ON;
-
-/**
- * The maximum number of issues to keep in the recently visited list.
+ * This controls whether to show the most recently visited issues by the current user or not.
+ * If set to 0, this feature is disabled. Otherwise it is the maximum number of issues to
+ * keep in the recently visited list.
  * @global integer $g_recently_visited_count
  */
 $g_recently_visited_count = 5;
