@@ -638,7 +638,7 @@ function html_operation_successful( $p_redirect_url, $p_message = '' ) {
  * @return bool true: auto-refresh, false: triggered by user.
  */
 function html_is_auto_refresh() {
-	return isset( $_GET['refresh'] ) && $_GET['refresh'] == 'true';
+	return gpc_get_bool( 'refresh' );
 }
 
 /**
