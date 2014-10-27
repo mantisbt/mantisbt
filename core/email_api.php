@@ -556,11 +556,12 @@ function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, array $
 
 /**
  * Sends a generic email to the specific set of recipients.
- * @param integer $p_bug_id                  A bug identifier.
- * @param string  $p_notify_type             Notification type.
- * @param array   $p_recipients              Array of recipients (key: user id, value: email address).
- * @param integer $p_message_id              Message identifier.
- * @param array   $p_header_optional_params  Optional Parameters (default null).
+ *
+ * @param integer $p_bug_id                  A bug identifier
+ * @param string  $p_notify_type             Notification type
+ * @param array   $p_recipients              Array of recipients (key: user id, value: email address)
+ * @param integer $p_message_id              Message identifier
+ * @param array   $p_header_optional_params  Optional Parameters (default null)
  * @return void
  */
 function email_generic_to_recipients( $p_bug_id, $p_notify_type, array $p_recipients, $p_message_id = null, array $p_header_optional_params = null ) {
@@ -634,10 +635,11 @@ function email_relationship_added( $p_bug_id, $p_related_bug_id, $p_rel_type ) {
 }
 
 /**
- * Filter recipients based to remove ones that don't have access to the specified bug.
- * @param integer $p_bug_id       The bug id.
- * @param array   $p_recipients   The recipients array (key: id, value: email).
- * @return array The filtered list of recipients in same format.
+ * Filter recipients to remove ones that don't have access to the specified bug.
+ *
+ * @param integer $p_bug_id       The bug id
+ * @param array   $p_recipients   The recipients array (key: id, value: email)
+ * @return array The filtered list of recipients in same format
  * @access private
  */
 function email_filter_recipients_for_bug( $p_bug_id, array $p_recipients ) {
@@ -645,7 +647,7 @@ function email_filter_recipients_for_bug( $p_bug_id, array $p_recipients ) {
 
     $t_authorized_recipients = array();
 
-    foreach ( $p_recipients as $t_recipient_id => $t_recipient_email ) {
+    foreach( $p_recipients as $t_recipient_id => $t_recipient_email ) {
         if( access_has_bug_level( $t_view_bug_threshold, $p_bug_id, $t_recipient_id ) ) {
             $t_authorized_recipients[$t_recipient_id] = $t_recipient_email;
         }
