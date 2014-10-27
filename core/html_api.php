@@ -465,14 +465,18 @@ function print_summary_submenu() {
 		}
 	}
 
-	echo '<div class="center">';
-	echo '<div class="btn-toolbar inline">';
-	echo '<div class="btn-group">';
-	# Plugins menu items - these are cooked links
-	foreach ( $t_menu_options as $t_menu_item ) {
-		echo $t_menu_item;
+	if( count($t_menu_options) > 0 ) {
+		echo '<div class="space-10"></div>';
+		echo '<div class="center">';
+		echo '<div class="btn-toolbar inline">';
+		echo '<div class="btn-group">';
+
+		# Plugins menu items - these are cooked links
+		foreach ($t_menu_options as $t_menu_item) {
+			echo $t_menu_item;
+		}
+		echo '</div></div></div>';
 	}
-	echo '</div></div></div>';
 }
 
 /**

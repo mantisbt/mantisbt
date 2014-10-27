@@ -109,7 +109,7 @@ function set_colour_override( $p_level_file, $p_level_global, $p_level_project )
  * @return string
  */
 function show_flag( $p_from_status_id, $p_to_status_id ) {
-	global $g_can_change_workflow, $g_overrides,
+	global $g_can_change_workflow,
 		$t_file_workflow, $t_global_workflow, $t_project_workflow,
 		$t_resolved_status, $t_reopen_status, $t_reopen_label;
 	if( $p_from_status_id <> $p_to_status_id ) {
@@ -128,14 +128,14 @@ function show_flag( $p_from_status_id, $p_to_status_id ) {
 		if( $g_can_change_workflow ) {
 			$t_flag_name = $p_from_status_id . ':' . $p_to_status_id;
 			$t_set = $t_flag ? 'checked="checked"' : '';
-			$t_value .= '<input type="checkbox" name="flag[]" value="' . $t_flag_name . '" ' . $t_set . ' />';
+			$t_value .= '<label><input type="checkbox" class="ace" name="flag[]" value="' . $t_flag_name . '" ' . $t_set . ' /><span class="lbl"></span></label>';
 		} else {
-			$t_value .= $t_flag ? '<img src="images/ok.gif" width="20" height="15" title="X" alt="X" />' : '&#160;';
+			$t_value .= $t_flag ? '<i class="fa fa-check fa-lg blue"></i>' : '&#160;';
 		}
 
 		# Add 'reopened' label
 		if( $p_from_status_id >= $t_resolved_status && $p_to_status_id == $t_reopen_status ) {
-			$t_value .= '<br />(' . $t_reopen_label . ')';
+			$t_value .= '<br /><small>(' . $t_reopen_label . ')</small>';
 		}
 	} else {
 		$t_value = '<td>&#160;';

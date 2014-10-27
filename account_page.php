@@ -155,7 +155,6 @@ print_account_menu( 'account_page.php' );
 
 		<fieldset>
 			<?php echo form_security_field( 'account_update' );
-			print_account_menu( 'account_page.php' );
 
 			if( !helper_call_custom_function( 'auth_can_change_password', array() ) ) {
 				# With LDAP -->
