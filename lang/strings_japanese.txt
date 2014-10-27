@@ -44,6 +44,7 @@
  * @author Mfuji
  * @author Seiji
  * @author Shirayuki
+ * @author SkyDaisy9
  */
 
 $s_actiongroup_menu_move = '移動';
@@ -1013,7 +1014,7 @@ $s_create_child_bug_button = '複製';
 $s_bug_cloned_to = '課題複製';
 $s_bug_created_from = '課題生成の対象';
 $s_copy_from_parent = '親の課題から拡張データをコピー';
-$s_copy_notes_from_parent = 'バグコメントをコピー';
+$s_copy_notes_from_parent = '課題のノートをコピーします。';
 $s_copy_attachments_from_parent = '添付ファイルをコピー';
 $s_viewing_bug_relationship_graph_title = '関連グラフ';
 $s_viewing_bug_dependency_graph_title = '依存グラフ';
