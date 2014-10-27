@@ -634,6 +634,14 @@ function html_operation_successful( $p_redirect_url, $p_message = '' ) {
 }
 
 /**
+ * Checks if the current page load was triggered by auto-refresh or real activity
+ * @return bool true: auto-refresh, false: triggered by user.
+ */
+function html_is_auto_refresh() {
+	return gpc_get_bool( 'refresh' );
+}
+
+/**
  * (13) Print the page footer information
  * @return void
  */
@@ -646,7 +654,11 @@ function html_footer() {
 	#  2) we don't invalidate the user cache immediately after fetching it
 	#  3) don't do this on the password verification or update page, as it causes the
 	#    verification comparison to fail
-	if( auth_is_user_authenticated() && !current_user_is_anonymous() && !( is_page_name( 'verify.php' ) || is_page_name( 'account_update.php' ) ) ) {
+	#  4) don't do that on pages that auto-refresh (View Issues page).
+	if( auth_is_user_authenticated() &&
+		!current_user_is_anonymous() &&
+		!( is_page_name( 'verify.php' ) || is_page_name( 'account_update.php' ) ) &&
+		!html_is_auto_refresh() ) {
 		$t_user_id = auth_get_current_user_id();
 		user_update_last_visit( $t_user_id );
 	}
