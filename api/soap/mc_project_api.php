@@ -655,6 +655,7 @@ function mc_project_get_attachments( $p_username, $p_password, $p_project_id ) {
 		return mci_soap_fault_login_failed();
 	}
 
+	$p_project_id = (int)$p_project_id;
 	$g_project_override = $p_project_id;
 
 	# Check if project documentation feature is enabled.
