@@ -70,7 +70,7 @@ function projax_array_serialize_for_autocomplete( $p_array ) {
 	$t_matches = '<ul>';
 
 	foreach( $p_array as $t_entry ) {
-		$t_matches .= "<li>$t_entry</li>";
+		$t_matches .= '<li>' . string_attribute( $t_entry ) . '</li>';
 	}
 
 	$t_matches .= '</ul>';
