@@ -30,6 +30,18 @@ access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 
 $f_source_field_id = gpc_get_int( 'source_id' );
 $f_dest_field = gpc_get( 'dest_id' );
+
+# checks on validity
+$t_valid_fields = array(
+	'fixed_in_version',
+);
+if( !in_array( $f_dest_field, $t_valid_fields ) ) {
+	echo '<html><body>';
+	echo '<p>Invalid destination field (' . string_attribute($f_dest_field) . ') specified.</p>';
+	echo '</body></html>';
+	exit;
+}
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -53,15 +65,6 @@ $f_dest_field = gpc_get( 'dest_id' );
 <br /><br />
 
 <?php
-# checks on validity
-$t_valid_fields = array(
-	'fixed_in_version',
-);
-if( !in_array( $f_dest_field, $t_valid_fields ) ) {
-	echo '<p>Invalid destination field (' . $f_dest_field . ') specified.</p>';
-	echo '</body></html>';
-	exit;
-}
 
 # @@@ check that source and destination are compatible
 
