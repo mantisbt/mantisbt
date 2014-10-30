@@ -120,8 +120,8 @@ function file_can_view_bug_attachments( $p_bug_id, $p_uploader_user_id = null ) 
 # Check if the current user can download attachments for the specified bug.
 function file_can_download_bug_attachments( $p_bug_id, $p_uploader_user_id = null ) {
 	$t_uploaded_by_me = auth_get_current_user_id() === $p_uploader_user_id;
-	$t_can_download = access_has_bug_level( config_get( 'download_attachments_threshold' ), $p_bug_id );
-	$t_can_download = $t_can_download || ( $t_uploaded_by_me && config_get( 'allow_download_own_attachments' ) );
+	$t_can_download = access_has_bug_level( config_get( 'download_attachments_threshold', null, null, bug_get_field( $p_bug_id, 'project_id' ) ), $p_bug_id );
+	$t_can_download = $t_can_download || ( $t_uploaded_by_me && config_get( 'allow_download_own_attachments', null, null, bug_get_field( $p_bug_id, 'project_id' ) ) );
 	return $t_can_download;
 }
 
