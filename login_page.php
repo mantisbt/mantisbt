@@ -36,6 +36,11 @@
 	$f_secure_session	 = gpc_get_bool( 'secure_session', false );
 	$f_secure_session_cookie = gpc_get_cookie( config_get_global( 'cookie_prefix' ) . '_secure_session', null );
 
+	# Set username to blank if invalid to prevent possible XSS exploits
+	if( !user_is_name_valid( $f_username ) ) {
+		$f_username = '';
+	}
+
 	$t_session_validation = ( ON == config_get_global( 'session_validation' ) );
 
 	// If user is already authenticated and not anonymous
