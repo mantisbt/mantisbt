@@ -94,6 +94,11 @@
 		$t_bug_data->target_version = gpc_get_string( 'target_version', '' );
 	}
 
+	# Prevent unauthorized users setting handler when reporting issue
+	if( $t_bug_data->handler_id > 0 ) {
+		access_ensure_project_level( config_get( 'update_bug_assign_threshold' ) );
+	}
+
 	# if a profile was selected then let's use that information
 	if ( 0 != $t_bug_data->profile_id ) {
 		if ( profile_is_global( $t_bug_data->profile_id ) ) {
