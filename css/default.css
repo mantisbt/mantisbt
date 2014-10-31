@@ -101,7 +101,7 @@ tr.bugnote .time-tracked,
 
 #page-title { font-size: 12pt; font-weight: bold; text-align: center }
 
-#login-info { clear: both; position: relative; display: block; float: left; padding: 0; z-index: 100; line-height: 1em; }
+#login-info { clear: both; position: relative; display: block; float: left; padding: 2px 0; z-index: 100; line-height: 1em; }
 
 #logged-anon-label, #login-link, #signup-link { float: left; margin: .25em; padding: 0em; font-size: 1em; }
 #logged-anon-label { padding: 0 .5em; }
