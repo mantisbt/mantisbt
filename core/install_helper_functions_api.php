@@ -673,6 +673,12 @@ function install_check_token_serialization() {
 
 		$t_token = unserialize( $t_value );
 		if( $t_token === false ) {
+			# If user hits a page other than install, tokens may be created using new code.
+			$t_token = json_decode( $t_value );
+			if( $t_token !== null ) {
+				continue;
+			}
+
 			return 1; # Fatal: invalid data found in tokens table
 		}
 
