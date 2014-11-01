@@ -203,7 +203,7 @@ function current_user_get_bug_filter( $p_project_id = null ) {
 				$t_filter = unserialize( $t_token );
 			}
 		} else {
-			$t_filter = unserialize( $f_filter_string );
+			return false;
 		}
 	} else if( !filter_is_cookie_valid() ) {
 		return false;
