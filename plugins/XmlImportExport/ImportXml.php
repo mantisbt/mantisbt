@@ -102,16 +102,27 @@ class ImportXML {
 
 		echo " Done\n";
 
-		$importedIssues = $this->itemsMap_->getall( 'issue' );
-		printf( "Processing cross-references for %s issues...", count( $importedIssues ) );
-		foreach( $importedIssues as $oldId => $newId ) {
-			$bugData = bug_get( $newId, true );
+		# replace bug references
+		$t_imported_issues = $this->itemsMap_->getall( 'issue' );
+		printf( 'Processing cross-references for %s issues...', count( $t_imported_issues ) );
+		foreach( $t_imported_issues as $t_old_id => $t_new_id ) {
+			$t_bug = bug_get( $t_new_id, true );
+			$t_content_replaced = false;
+			$t_bug_link_regexp = '/(^|[^\w])(' . preg_quote( $this->source_->issuelink, '/' ) . ')(\d+)\b/';
 
-			$bugLinkRegexp = '/(^|[^\w])(' . preg_quote( $this->source_->issuelink, '/' ) . ')(\d+)\b/e';
-			$replacement = '"\\1" . $this->getReplacementString( "\\2", "\\3" )';
+			# replace links in description
+			preg_match_all( $t_bug_link_regexp, $t_bug->description, $t_matches );
+			if( is_array( $t_matches[3] ) && count( $t_matches[3] ) > 0 ) {
+				$t_content_replaced = true;
+				foreach ( $t_matches[3] as $t_old_id2 ) {
+					$t_bug->description = str_replace( $this->source_->issuelink . $t_old_id2, $this->getReplacementString( $this->source_->issuelink, $t_old_id2 ), $t_bug->description );
+				}
+			}
 
-			$bugData->description = preg_replace( $bugLinkRegexp, $replacement, $bugData->description );
-			$bugData->update( true, true );
+			if( $t_content_replaced ) {
+				# only update bug if necessary (otherwise last update date would be unnecessarily overwritten)
+				$t_bug->update( true );
+			}
 		}
 		echo " Done\n";
 	}
