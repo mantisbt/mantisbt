@@ -779,3 +779,7 @@ div.timeline p { margin-left: 3px; }
 /* manage_config_* colors */
 .color-global		{ background-color: LightBlue; }
 .color-project		{ background-color: LightGreen; }
+
+/* bug_view_inc bug action buttons */
+.details-footer      { padding: 3px 10px 2px 0; }
+.details-buttons     { float: left;  width: auto; }
