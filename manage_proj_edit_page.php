@@ -131,7 +131,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 			</div>
 			<?php
 			$g_project_override = $f_project_id;
-			if( file_is_uploading_enabled() && DATABASE !== config_get( 'file_upload_method' ) ) {
+			if( file_is_uploading_enabled() && DATABASE !== config_get( 'file_upload_method' ) && config_get( 'allow_per_project_upload_path' ) == ON ) {
 				$t_file_path = $t_row['file_path'];
 				# Don't reveal the absolute path to non-administrators for security reasons
 				if( is_blank( $t_file_path ) && current_user_is_administrator() ) {
