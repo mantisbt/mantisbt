@@ -522,6 +522,8 @@ function html_login_info() {
 	$t_now = date( config_get( 'complete_date_format' ) );
 	$t_realname = current_user_get_field( 'realname' );
 
+	echo '<div class="info-bar">' . "\n";
+
 	# Login information
 	echo '<div id="login-info">' . "\n";
 	if( current_user_is_anonymous() ) {
@@ -601,6 +603,7 @@ function html_login_info() {
 
 	# Current time
 	echo '<div id="current-time">' . $t_now . '</div>';
+	echo '</div>' . "\n";
 }
 
 /**
