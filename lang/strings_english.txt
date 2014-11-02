@@ -740,7 +740,7 @@ $s_last_visit_label = 'Last Visit:';
 $s_edit_user_link = 'Edit User';
 
 # manage_custom_field_edit_page.php
-$s_separate_lists_by = '(Separate lists by "%1$s")';
+$s_separate_list_items_by = '(separate list items by "%1$s")';
 
 # manage_config_email_page
 $s_config_all_projects = 'Note: These configurations affect all projects, unless overridden at the project level.';

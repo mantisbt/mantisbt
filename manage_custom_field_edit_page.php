@@ -89,7 +89,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			<div class="field-container">
 				<label for="custom-field-possible-values"><span><?php echo lang_get( 'custom_field_possible_values' ) ?></span></label>
 				<span class="input"><input type="text" id="custom-field-possible-values" name="possible_values" size="100" value="<?php echo string_attribute( $t_definition['possible_values'] ) ?>" />
-					<?php echo sprintf( lang_get( 'separate_lists_by' ), '|' ) ?>
+					<?php echo sprintf( lang_get( 'separate_list_items_by' ), '|' ) ?>
 				</span>
 				<span class="label-style"></span>
 			</div>
