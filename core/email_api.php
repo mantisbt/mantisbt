@@ -552,7 +552,26 @@ function email_notify_new_account( $p_username, $p_email ) {
  * @param array $p_extra_user_ids_to_email
  * @return bool
  */
-function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, $p_header_optional_params = null, $p_extra_user_ids_to_email = array() ) {
+function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, array $p_header_optional_params = null, array $p_extra_user_ids_to_email = array() ) {
+	# @todo yarick123: email_collect_recipients(...) will be completely rewritten to provide additional information such as language, user access,..
+	# @todo yarick123:sort recipients list by language to reduce switches between different languages
+	$t_recipients = email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_to_email );
+	return email_generic_to_recipients( $p_bug_id, $p_notify_type, $t_recipients, $p_message_id, $p_header_optional_params, $p_extra_user_ids_to_email );
+}
+
+/**
+ * send a generic email
+ * $p_notify_type: use check who she get notified of such event.
+ * $p_message_id: message id to be translated and included at the top of the email message.
+ * Return false if it were problems sending email * @param string
+ * @param int $p_bug_id
+ * @param string $p_notify_type
+ * @param int $p_message_id
+ * @param array $p_header_optional_params = null
+ * @param array $p_extra_user_ids_to_email
+ * @return bool
+ */
+function email_generic_to_recipients( $p_bug_id, $p_notify_type, array $p_recipients, $p_message_id = null, $p_header_optional_params = null ) {
 	$t_ok = true;
 
 	if( ON === config_get( 'enable_email_notification' ) ) {
@@ -560,15 +579,11 @@ function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, $p_head
 
 		bugnote_get_all_bugnotes( $p_bug_id );
 
-		# @todo yarick123: email_collect_recipients(...) will be completely rewritten to provide additional information such as language, user access,..
-		# @todo yarick123:sort recipients list by language to reduce switches between different languages
-		$t_recipients = email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_to_email );
-
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 
-		if( is_array( $t_recipients ) ) {
+		if( is_array( $p_recipients ) ) {
 			# send email to every recipient
-			foreach( $t_recipients as $t_user_id => $t_user_email ) {
+			foreach( $p_recipients as $t_user_id => $t_user_email ) {
 				log_event( LOG_EMAIL, sprintf( "Issue = #%d, Type = %s, Msg = '%s', User = @U%d, Email = '%s'.", $p_bug_id, $p_notify_type, $p_message_id, $t_user_id, $t_user_email ) );
 
 				# load (push) user language here as build_visible_bug_data assumes current language
@@ -623,7 +638,14 @@ function email_relationship_added( $p_bug_id, $p_related_bug_id, $p_rel_type ) {
 	if( !isset( $g_relationships[$p_rel_type] ) ) {
 		trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
 	}
-	email_generic( $p_bug_id, 'relation', $g_relationships[$p_rel_type]['#notify_added'], $t_opt );
+
+	$t_recipients = email_collect_recipients( $p_bug_id, 'relation' );
+
+	# Recipient has to have access to both bugs to get the notification.
+	$t_recipients = email_filter_recipients_for_bug( $p_bug_id, $t_recipients );
+	$t_recipients = email_filter_recipients_for_bug( $p_related_bug_id, $t_recipients );
+
+	email_generic_to_recipients( $p_bug_id, 'relation', $t_recipients, $g_relationships[$p_rel_type]['#notify_added'], $t_opt );
 }
 
 /**
@@ -642,7 +664,34 @@ function email_relationship_deleted( $p_bug_id, $p_related_bug_id, $p_rel_type )
 	if( !isset( $g_relationships[$p_rel_type] ) ) {
 		trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
 	}
-	email_generic( $p_bug_id, 'relation', $g_relationships[$p_rel_type]['#notify_deleted'], $t_opt );
+
+	$t_recipients = email_collect_recipients( $p_bug_id, 'relation' );
+
+	# Recipient has to have access to both bugs to get the notification.
+	$t_recipients = email_filter_recipients_for_bug( $p_bug_id, $t_recipients );
+	$t_recipients = email_filter_recipients_for_bug( $p_related_bug_id, $t_recipients );
+
+	email_generic_to_recipients( $p_bug_id, 'relation', $t_recipients, $g_relationships[$p_rel_type]['#notify_deleted'], $t_opt );
+}
+
+/**
+ * Filter recipients to remove ones that don't have access to the specified bug.
+ *
+ * @param integer $p_bug_id       The bug id
+ * @param array   $p_recipients   The recipients array (key: id, value: email)
+ * @return array The filtered list of recipients in same format
+ * @access private
+ */
+function email_filter_recipients_for_bug( $p_bug_id, array $p_recipients ) {
+	$t_authorized_recipients = array();
+
+	foreach( $p_recipients as $t_recipient_id => $t_recipient_email ) {
+		if( access_has_bug_level( VIEWER, $p_bug_id, $t_recipient_id ) ) {
+			$t_authorized_recipients[$t_recipient_id] = $t_recipient_email;
+		}
+	}
+
+	return $t_authorized_recipients;
 }
 
 /**
@@ -1395,6 +1444,12 @@ function email_format_attribute( $p_visible_bug_data, $attribute_id ) {
  * @return array
  */
 function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
+	# Override current user with user to construct bug data for.
+	# This is to make sure that APIs that check against current user (e.g. relationship) work correctly.
+	global $g_cache_current_user_id;
+	$t_current_user_id = $g_cache_current_user_id;
+	$g_cache_current_user_id = $p_user_id;
+
 	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 	$t_user_access_level = user_get_access_level( $p_user_id, $t_project_id );
 	$t_user_bugnote_order = user_pref_get_pref( $p_user_id, 'bugnote_order' );
@@ -1468,6 +1523,8 @@ function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 	}
 
 	$t_bug_data['relations'] = relationship_get_summary_text( $p_bug_id );
+
+	$g_cache_current_user_id = $t_current_user_id;
 
 	return $t_bug_data;
 }

@@ -235,6 +235,13 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 			}
 		}
 
+		# relationships
+		if( $v_type == BUG_ADD_RELATIONSHIP || $v_type == BUG_DEL_RELATIONSHIP || $v_type == BUG_REPLACE_RELATIONSHIP ) {
+			if( !access_has_bug_level( VIEWER, $v_new_value, $t_user_id ) ) {
+				continue;
+			}
+		}
+
 		$raw_history[$j]['date'] = $v_date_modified;
 		$raw_history[$j]['userid'] = $v_user_id;
 
