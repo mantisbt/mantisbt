@@ -121,7 +121,7 @@ if( project_table_empty() ) {
 			<?php
 
 			$g_project_override = ALL_PROJECTS;
-			if( file_is_uploading_enabled() && DATABASE !== config_get( 'file_upload_method' ) ) {
+			if( file_is_uploading_enabled() && DATABASE !== config_get( 'file_upload_method' ) && config_get( 'allow_per_project_upload_path' ) == ON ) {
 				$t_file_path = '';
 				# Don't reveal the absolute path to non-administrators for security reasons
 				if( current_user_is_administrator() ) {

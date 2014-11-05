@@ -226,7 +226,7 @@ function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
 
 	$t_expected_file_path = '';
 
-	if( $p_project_id != ALL_PROJECTS ) {
+	if( $p_project_id != ALL_PROJECTS && config_get( 'allow_per_project_upload_path' ) == ON ) {
 		$t_path = project_get_field( $p_project_id, 'file_path' );
 		if( !is_blank( $t_path ) ) {
 			$t_diskfile = file_path_combine( $t_path, $t_basename );
@@ -650,12 +650,11 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 		$p_date_added = db_now();
 	}
 
-	if( $t_project_id == ALL_PROJECTS ) {
-		$t_file_path = config_get( 'absolute_path_default_upload_folder' );
-	} else {
-		$t_file_path = project_get_field( $t_project_id, 'file_path' );
-		if( is_blank( $t_file_path ) ) {
-			$t_file_path = config_get( 'absolute_path_default_upload_folder' );
+	$t_file_path = config_get( 'absolute_path_default_upload_folder' );
+	if( $t_project_id != ALL_PROJECTS && config_get( 'allow_per_project_upload_path' ) == ON ) {
+		$t_project_file_path = project_get_field( $t_project_id, 'file_path' );
+		if ( !is_blank( $t_project_file_path ) ) {
+			$t_file_path = $t_project_file_path;
 		}
 	}
 

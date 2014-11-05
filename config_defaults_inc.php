@@ -1695,6 +1695,12 @@ $g_document_files_prefix = 'doc';
 $g_absolute_path_default_upload_folder = '';
 
 /**
+ * Allow per project upload path if the attachments are saved to DISK
+ * and the project has a path set.  Otherwise, use $g_absolute_path_default_upload_folder.
+ */
+$g_allow_per_project_upload_path = ON;
+
+/**
  * Enable support for sending files to users via a more efficient X-Sendfile
  * method. HTTP server software supporting this technique includes Lighttpd,
  * Cherokee, Apache with mod_xsendfile and nginx. You may need to set the
@@ -4165,6 +4171,7 @@ $g_global_settings = array(
 	'class_path','library_path', 'language_path', 'absolute_path_default_upload_folder',
 	'ldap_simulation_file_path', 'plugin_path', 'bottom_include_page', 'top_include_page',
 	'default_home_page', 'logout_redirect_page', 'manual_url', 'logo_url', 'wiki_engine_url',
+	'allow_per_project_upload_path',
 );
 
 # Temporary variables should not remain defined in global scope
