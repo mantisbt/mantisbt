@@ -96,7 +96,9 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['sponsorship_total'] = $t_bug->sponsorship_total;
 
 	if( !empty( $t_bug->handler_id ) ) {
-		$t_issue_data['handler'] = mci_account_get_array_by_id( $t_bug->handler_id );
+		if( access_has_bug_level( VIEWER, $p_issue_id, $t_user_id ) ) {
+			$t_issue_data['handler'] = mci_account_get_array_by_id( $t_bug->handler_id );
+		}
 	}
 
 	$t_issue_data['projection'] = mci_enum_get_array_by_id( $t_bug->projection, 'projection', $t_lang );
@@ -567,6 +569,39 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 }
 
 /**
+ * Does the actual checks when setting the issue handler.
+ * The user existence check is always done even if handler doesn't change.
+ * The handler's access level check is done even if handler doesn't change.
+ * The current user ability to assign issue access check is only done on change.
+ * This behavior would be consistent with the web UI.
+ *
+ * @param $p_user_id        The id of the logged in user.
+ * @param $p_project_id     The id of the project the issue is associated with.
+ * @param $p_old_handler_id The old handler id.
+ * @param $p_new_handler_id The new handler id.  0 for not assigned.
+ * @return true: access ok, otherwise: soap fault.
+ */
+function mci_issue_handler_access_check( $p_user_id, $p_project_id, $p_old_handler_id, $p_new_handler_id ) {
+	if( $p_new_handler_id != 0 ) {
+		if ( !user_exists( $p_new_handler_id ) ) {
+			return SoapObjectsFactory::newSoapFault( 'Client', 'User \'' . $p_new_handler_id . '\' does not exist.' );
+		}
+
+		if( !access_has_project_level( config_get( 'handle_bug_threshold' ), $p_project_id, $p_new_handler_id ) ) {
+			return mci_soap_fault_access_denied( 'User \'' . $p_new_handler_id . '\' does not have access right to handle issues' );
+		}
+	}
+
+	if( $p_old_handler_id != $p_new_handler_id ) {
+		if( !access_has_project_level( config_get( 'update_bug_assign_threshold' ), $p_project_id, $p_user_id ) ) {
+			return mci_soap_fault_access_denied( 'User \'' . $p_user_id . '\' does not have access right to assign issues' );
+		}
+	}
+
+	return true;
+}
+
+/**
  * Add an issue to the database.
  *
  * @param string $p_username  The name of the user trying to add the issue.
@@ -632,14 +667,10 @@ function mc_issue_add( $p_username, $p_password, $p_issue ) {
 		return mci_soap_fault_access_denied( "User '$t_user_id' does not have access right to report issues" );
 	}
 
-	#if ( !access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id ) ||
-	#	!access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $v_reporter ) ) {
-	#	return SoapObjectsFactory::newSoapFault( 'Client', '', "User does not have access right to report issues." );
-	#}
-
-	if(( $t_handler_id != 0 ) && !user_exists( $t_handler_id ) ) {
-		return SoapObjectsFactory::newSoapFault('Client', "User '$t_handler_id' does not exist.");
-	}
+	$t_access_check_result = mci_issue_handler_access_check( $t_user_id, $t_project_id, /* old */ 0, /* new */ $t_handler_id );
+	if( $t_access_check_result !== true ) {
+		return $t_access_check_result;
+ 	}
 
 	$t_category = isset ( $p_issue['category'] ) ? $p_issue['category'] : null;
 
@@ -819,10 +850,6 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 		return mci_soap_fault_access_denied( $t_user_id,  "Not enough rights to update issues" );
 	}
 
-	if(( $t_handler_id != 0 ) && !user_exists( $t_handler_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', "User '$t_handler_id' does not exist." );
-	}
-
 	$t_category = isset ( $p_issue['category'] ) ? $p_issue['category'] : null;
 
 	$t_category_id = translate_category_name_to_id( $t_category, $t_project_id );
@@ -858,6 +885,12 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, $p_issue ) {
 	$t_bug_data = bug_get( $p_issue_id, true );
 	$t_bug_data->project_id = $t_project_id;
 	$t_bug_data->reporter_id = $t_reporter_id;
+
+	$t_access_check_result = mci_issue_handler_access_check( $t_user_id, $t_project_id, /* old */ $t_bug_data->handler_id, /* new */ $t_handler_id );
+	if( $t_access_check_result !== true ) {
+		return $t_access_check_result;
+	}
+
 	$t_bug_data->handler_id = $t_handler_id;
 	$t_bug_data->category_id = $t_category_id;
 	$t_bug_data->summary = $t_summary;
