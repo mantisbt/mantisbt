@@ -207,7 +207,7 @@ class BugData {
 	/**
 	 * Due Date
 	 */
-	protected $due_date = 0;
+	protected $due_date = '';
 
 	/**
 	 * Profile ID
