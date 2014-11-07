@@ -45,7 +45,7 @@ class ImportXml_Mapper {
 	 * check if entry exists within array
 	 * @param mixed $p_type Type.
 	 * @param mixed $p_id   ID.
-     * @return boolean
+	 * @return boolean
 	 */
 	public function exists( $p_type, $p_id ) {
 		return array_key_exists( $p_id, $this->{$p_type} );
@@ -55,7 +55,7 @@ class ImportXml_Mapper {
 	 * get new id
 	 * @param mixed $p_type Type.
 	 * @param mixed $p_old  Old.
-     * @return mixed
+	 * @return mixed
 	 */
 	public function getNewID( $p_type, $p_old ) {
 		if( $this->exists( $p_type, $p_old ) ) {
