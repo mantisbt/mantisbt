@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.cookies">
+	<title>Cookies</title>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_cookie_path</term>
+			<listitem>
+				<para>Specifies the path under which a cookie is visible.
+				</para>
+				<para>All scripts in this directory and its sub-directories
+					will be able to access MantisBT cookies.
+				</para>
+				<para>Default value is '/'.
+					It is recommended to set this to the actual MantisBT path.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_cookie_domain</term>
+			<listitem>
+				<para>The domain that the MantisBT cookies are available to.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_cookie_prefix</term>
+			<listitem>
+				<para>Prefix for all MantisBT cookies</para>
+				<para>This should be an identifier which does not include
+					spaces or periods, and should be unique per MantisBT
+					installation, especially if $g_cookie_path is not
+					restricting the cookies' scope to the actual
+					MantisBT directory.
+				</para>
+				<para>It applies to the cookies listed below. Their actual
+					names are calculated by prepending the prefix, and
+					it is not expected for the user to need to change these.
+				</para>
+
+				<itemizedlist>
+					<listitem>
+						<para>$g_string_cookie</para>
+					</listitem>
+					<listitem>
+						<para>$g_project_cookie</para>
+					</listitem>
+					<listitem>
+						<para>$g_view_all_cookie</para>
+					</listitem>
+					<listitem>
+						<para>$g_manage_users_cookie</para>
+						<para>Stores the filter criteria for the
+							Manage Users page
+						</para>
+					</listitem>
+					<listitem>
+						<para>$g_manage_config_cookie</para>
+						<para>Stores the filter criteria for the
+							Manage Config Report page
+						</para>
+					</listitem>
+					<listitem>
+						<para>$g_logout_cookie</para>
+					</listitem>
+					<listitem>
+						<para>$g_bug_list_cookie</para>
+					</listitem>
+				</itemizedlist>
+
+			</listitem>
+		</varlistentry>
+	</variablelist>
+
+</section>

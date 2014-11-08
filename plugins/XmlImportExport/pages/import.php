@@ -22,6 +22,8 @@
  * Import XML Issues Page
  */
 
+access_ensure_project_level( plugin_config_get( 'import_threshold' ) );
+
 auth_reauthenticate( );
 
 html_page_top( plugin_lang_get( 'import' ) );
@@ -70,10 +72,10 @@ if( ALL_PROJECTS == $t_project_id ) {
 				<span class="label-style"></span>
 			</div>
 
-			<div class="field-container">
+			<h2>
 				<?php echo plugin_lang_get( 'import_options' ); ?>
-			</div>
-			
+			</h2>
+
 			<div class="field-container">
 				<label><span><?php echo plugin_lang_get( 'cross_references' );?></span></label>
 				<span class="select">

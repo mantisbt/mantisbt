@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.uploads">
+	<title>File Upload</title>
+
+	<para>MantisBT allows users to upload file attachments and
+		associate them with bugs as well as projects. Bug attachments /
+		project documents can be uploaded to the webserver or database.
+		When bugs are uploaded to the webserver they are
+		uploaded to the path that is configured in the project
+		properties. In case of problems getting the file upload feature to
+		work, check the following resources:
+		<ulink url="http://www.php.net/manual/en/features.file-upload.php">PHP
+			Manual
+		</ulink>
+		.
+	</para>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_allow_file_upload</term>
+			<listitem>
+				<para>Whether to allow/disallow uploading of attachments. Default
+					value is ON.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_file_upload_method</term>
+			<listitem>
+				<para>Specify the location for uploading attachments.
+					In case of DISK methods you need to provide the
+					webserver with write access rights to the configured upload path
+					(configured in the project) and temporary upload path (used by
+					PHP).
+				</para>
+				<para>Values: DISK or DATABASE
+				</para>
+				<para>Default: DATABASE
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_file_upload_max_num</term>
+			<listitem>
+				<para>Maximum number of files that can be uploaded simultaneously.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_max_file_size</term>
+			<listitem>
+				<para>The maximum file size to allow as an attachment.
+					You may also have to configure your php.ini file to increase the
+					execution time, memory limit, max post size, and max upload size.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_max_file_size</term>
+			<listitem>
+				<para>Maximum file size that can be uploaded. Default value is
+					about 5MB.
+					The max file upload size is also affected by the value specified in
+					php.ini. The PHP value is usually defaulted to 2MB.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_allowed_files</term>
+			<listitem>
+				<para>Files that are allowed. Separate items by commas. eg.
+					&quot;zip,bmp,gif,jpg,txt&quot; If $g_allowed_files is filled in NO other
+					file types will be allowed. If empty it will assume any files are
+					accepted that pass the $g_disallowed_files list.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_disallowed_files</term>
+			<listitem>
+				<para>Files that are not allowed. Separate items by commas. eg.
+					&quot;php,php3,phtml,html,class,java,exe,pl&quot; $g_disallowed_files takes
+					precedence over $g_allowed_files.
+					It is recommended to disable all extensions that can be executed by
+					your server.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_preview_attachments_inline_max_size</term>
+			<listitem>
+				<para>This limit applies to previewing of image / text attachments.
+					If the attachment size is smaller than the specified value, the attachment
+					is previewed with the issue details.  The previewing can be disabled
+					by setting this configuration to 0.  The default value is 256 * 1024 (256KB).
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_fileinfo_magic_db_file</term>
+			<listitem>
+				<para>Specify the filename of the magic database file.
+					This is used by PHP 5.3.0 (or earlier versions with the
+					fileinfo PECL extension) to guess what the MIME type of a
+					file is. Usually it is safe to leave this setting as the
+					default (blank) as PHP is usually able to find this file
+					by itself.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_file_download_xsendfile_enabled</term>
+			<listitem>
+				<para>Enable support for sending files to users via a more efficient
+					X-Sendfile method. HTTP server software supporting this technique
+					includes Lighttpd, Cherokee, Apache with mod_xsendfile and nginx.
+					You may need to set the proceeding file_download_xsendfile_header_name
+					option to suit the server you are using.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_file_download_xsendfile_header_name</term>
+			<listitem>
+				<para>The name of the X-Sendfile header to use. Each server tends to
+					implement this functionality in a slightly different way and thus
+					the naming conventions for the header differ between each server.
+					Lighttpd from v1.5, Apache with mod_xsendfile and Cherokee web
+					servers use X-Sendfile. nginx uses X-Accel-Redirect and Lighttpd
+					v1.4 uses X-LIGHTTPD-send-file.
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+
+</section>

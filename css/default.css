@@ -379,7 +379,6 @@ select.tainted { background-color: #ffffff; color: red; }
 
 .filter-box { margin: 0; padding: 0; font-size: .9em; }
 .filter-box table { margin: 0; padding: 0; }
-.filter-links { padding: .5em; }
 div#save-filter { text-align: center; }
 .stored-queries select { font-size: .9em; }
 #error-msg { clear: both; }
@@ -438,6 +437,12 @@ div.table-container {
 	border: 1px solid #000;
 	width: 90%; /* default width */
 }
+
+div.width100 { width: 100%; }
+div.width90 { width: 90%; }
+div.width75 { width: 74%; }
+div.width60 { width: 60%; }
+div.width50 { width: 50%; }
 
 #view-issue-details,
 #bug-update,
@@ -629,6 +634,7 @@ div.form-container .checkbox,
 div.form-container .select,
 div.form-container .textarea,
 div.form-container .input,
+div.form-container .file,
 .display-value {
 	position: relative;
 	float: left;
@@ -640,9 +646,11 @@ div.form-container .checkbox input,
 div.form-container .select select,
 div.form-container .textarea textarea,
 div.form-container .input  input,
+div.form-container .file  input,
 .display-value span {
 	max-width: 98%;
 }
+div.form-container .spacer { margin-top: .5em; clear: both; }
 .label-style {
 	position: absolute;
 	top: 0em;

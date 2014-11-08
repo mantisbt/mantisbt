@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.auth">
+	<title>Authentication</title>
+
+	<section id="admin.config.auth.global">
+		<title>Global authentication parameters</title>
+
+		<variablelist>
+			<varlistentry>
+				<term>$g_login_method</term>
+
+				<listitem>
+					<para>Specifies which method will be used to
+					authenticate. It should be one of the following values
+					(defaults to <emphasis>MD5</emphasis>):
+						<itemizedlist>
+							<listitem>
+								<para>MD5 - user's password is stored as a hash in the database</para>
+							</listitem>
+							<listitem>
+								<para>LDAP - authenticates against an LDAP (or Active Directory) server</para>
+							</listitem>
+							<listitem>
+								<para>BASIC_AUTH</para>
+							</listitem>
+							<listitem>
+								<para>HTTP_AUTH</para>
+							</listitem>
+						</itemizedlist>
+						In addition, the following deprecated values are supported for backwards-compatibility, and should no longer be used:
+						<itemizedlist>
+							<listitem>
+								<para>PLAIN - password is stored in plain, unencrypted text in the database</para>
+							</listitem>
+							<listitem>
+								<para>CRYPT</para>
+							</listitem>
+							<listitem>
+								<para>CRYPT_FULL_SALT</para>
+							</listitem>
+						</itemizedlist></para>
+
+					<para>Note: you may not be able to easily switch encryption methods, so this should be carefully chosen at install time.
+					However, MantisBT will attempt to &quot;fall back&quot; to older methods if possible.</para>
+
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>$g_reauthentication</term>
+
+				<listitem>
+					<para>Determines whether MantisBT will require the
+					user to re-authenticate before granting access to the
+					Admin areas after timeout expiration. Defaults to
+					<emphasis>ON</emphasis></para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>$g_reauthentication_expiry</term>
+
+				<listitem>
+					<para>Duration of the reauthentication timeout, in
+					seconds. Defaults to 5 minutes.</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+
+	<section id="admin.config.auth.ldap">
+		<title>LDAP authentication method parameters</title>
+
+		<para>The parameters below are only used if $g_login_method (see
+		above) is set to LDAP.</para>
+
+		<variablelist>
+			<varlistentry>
+				<term>$g_ldap_server</term>
+
+				<listitem>
+					<para>Specifies the LDAP or Active Directory server to
+					connect to, and must be provided as an URI</para>
+
+					<para>The protocol is optional, can be one of
+					<emphasis>ldap</emphasis> or
+					<emphasis>ldaps</emphasis>, and defaults to
+					<emphasis>ldap</emphasis>.</para>
+
+					<para>The port number is optional, and defaults to
+					<emphasis>389</emphasis>. If this doesn't work, try
+					using one of the following standard port numbers: 636
+					(ldaps); for Active Directory Global Catalog
+					forest-wide search, use 3268 (ldap) or 3269
+					(ldaps)</para>
+
+					<para>Examples of valid URI:
+<programlisting>
+ldap.example.com
+ldap.example.com:3268
+ldap://ldap.example.com/
+ldaps://ldap.example.com:3269/
+</programlisting>
+
+					</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>$g_ldap_root_dn</term>
+
+				<listitem>
+					<para>The root distinguished name for LDAP searches.
+					For example, &quot;dc=example, dc=com&quot;.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>$g_ldap_organization</term>
+
+				<listitem>
+					<para>LDAP search filter for the organization, for
+					example, &quot;(organizationname=*Traffic)&quot;. Defaults to
+					<emphasis>''</emphasis>.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>$g_ldap_protocol_version</term>
+
+				<listitem>
+					<para>The LDAP Protocol Version. If 0, then the
+					protocol version is not set. Defaults to
+					<emphasis>0</emphasis>.</para>
+
+					<para>For Active Directory use protocol version
+					3.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>$g_ldap_follow_referrals</term>
+
+				<listitem>
+					<para>Determines whether the LDAP library
+					automatically follows referrals returned by LDAP
+					servers or not. This maps to LDAP_OPT_REFERRALS ldap
+					library option. Defaults to
+					<emphasis>ON</emphasis>.</para>
+
+					<para>For Active Directory, this should be set to
+					OFF.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>$g_ldap_bind_dn</term>
+
+				<listitem>
+					<para>The distinguished name of the service account to
+					use for binding to the LDAP server. For example,
+					'CN=ldap,OU=Administrators,DC=example,DC=com'.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>$g_ldap_bind_passwd</term>
+
+				<listitem>
+					<para>The password for the service account used to
+					establish the connection to the LDAP server.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>$g_ldap_uid_field</term>
+
+				<listitem>
+					<para>The LDAP field for username. Defaults to
+					<emphasis>uid</emphasis>.</para>
+
+					<para>For Active Directory, set to
+					<emphasis>sAMAccountName</emphasis>.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>$g_ldap_realname_field</term>
+
+				<listitem>
+					<para>The LDAP field for the user's real name (i.e.
+					common name). Defaults to
+					<emphasis>cn</emphasis>.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>$g_use_ldap_realname</term>
+
+				<listitem>
+					<para>Use the realname specified in LDAP (ON) rather
+					than the one stored in the database (OFF). Defaults to
+					<emphasis>OFF</emphasis>.</para>
+
+					<para>Note that MantisBT will update the database with
+					the data retrieved from LDAP when ON.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>$g_use_ldap_email</term>
+
+				<listitem>
+					<para>Use the email address specified in LDAP (ON)
+					rather than the one stored in the database (OFF).
+					Defaults to <emphasis>OFF</emphasis>.</para>
+
+					<para>Note that MantisBT will update the database with
+					the data retrieved from LDAP when ON.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>$g_ldap_simulation_file_path</term>
+
+				<listitem>
+					<para>This configuration option allows replacing the
+					ldap server with a comma-delimited text file for
+					development or testing purposes.</para>
+
+					<para>The LDAP simulation file format is as follows:</para>
+
+					<itemizedlist>
+						<listitem>
+							<para>One line per user</para>
+						</listitem>
+						<listitem>
+							<para>Each line has 4 comma-delimited fields</para>
+							<itemizedlist>
+								<listitem>
+									<para>username</para>
+								</listitem>
+								<listitem>
+									<para>realname</para>
+								</listitem>
+								<listitem>
+									<para>e-mail</para>
+								</listitem>
+								<listitem>
+									<para>password</para>
+								</listitem>
+							</itemizedlist>
+						</listitem>
+						<listitem>
+							<para>Any extra fields are ignored</para>
+						</listitem>
+					</itemizedlist>
+
+					<warning>
+						<para>On production systems, this option should be set
+							to '' (This is the default).
+						</para>
+					</warning>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
+				<term>$g_ldap_port</term>
+
+				<listitem>
+					<para><emphasis>Deprecated since MantisBT release
+					1.2.0a1.</emphasis></para>
+
+					<para>The LDAP server port number should be defined as
+					part of the URI in $g_ldap_server instead (see
+					above).</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+</section>

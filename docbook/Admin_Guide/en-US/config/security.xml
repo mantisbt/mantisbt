@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.security">
+	<title>Security and Cryptography</title>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_crypto_master_salt</term>
+			<listitem>
+				<para>Master salt value used for cryptographic hashing
+					throughout MantisBT. This value must be kept secret at
+					all costs. You must generate a unique and random salt
+					value for each installation of MantisBT you control.
+					The minimum length of this string must be at least 16
+					characters.
+				</para>
+				<para>The value you select for this salt should be a long
+					string generated using a secure random number
+					generator. An example for Linux systems is:
+				</para>
+				<para>cat /dev/urandom | head -c 64 | base64</para>
+				<para>Note that the number of bits of entropy per byte of
+					output from /dev/urandom is not 8. If you're
+					particularly paranoid and don't mind waiting a long
+					time, you could use /dev/random to get much closer to
+					8 bits of entropy per byte. Moving the mouse
+					(if possible) while generating entropy via /dev/random
+					will greatly improve the speed at which /dev/random
+					produces entropy.
+				</para>
+				<para>This setting is blank by default. MantisBT will not
+					operate in this state. Hence you are forced to change
+					the value of this configuration option.
+				</para>
+				<warning>
+					<para>WARNING: This configuration option has a profound
+						impact on the security of your MantisBT
+						installation. Failure to set this configuration
+						option correctly could lead to your MantisBT
+						installation being compromised. Ensure that this
+						value remains secret. Treat it with the same
+						security that you'd treat the password to your
+						MantisDB database.
+					</para>
+				</warning>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</section>

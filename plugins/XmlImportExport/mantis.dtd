@@ -3,8 +3,8 @@
 <!-- root element <mantis>, composed by one or more <issue> elements -->
 <!ELEMENT mantis (issue+)>
 <!ATTLIST mantis
-          version CDATA #REQUIRED
-          urlbase CDATA #REQUIRED
+		  version CDATA #REQUIRED
+		  urlbase CDATA #REQUIRED
 		  issuelink CDATA #REQUIRED
 		  notelink CDATA #REQUIRED
 		  format CDATA #REQUIRED
@@ -12,37 +12,37 @@
 
 
 <!ELEMENT issue (
-		id ,
-		description ,
-		additional_information? ,
-		steps_to_reproduce? ,
-		project_id ,
-		reporter ,
-		handler? ,
-		duplicate_id? ,
-		priority? ,
-		severity? ,
-		reproducibility? ,
-		status? ,
-		resolution? ,
-		projection? ,
-		date_submitted ,
-		last_updated ,
-		eta? ,
-		os? ,
-		os_build? ,
-		platform? ,
-		version? ,
-		fixed_in_version? ,
-		target_version? ,
-		build? ,
-		profile_id? ,
-		view_state ,
-		summary ,
-		category? ,
-		sponsorship_total? ,
-		sticky?
-		)
+		  id ,
+		  description ,
+		  additional_information? ,
+		  steps_to_reproduce? ,
+		  project_id ,
+		  reporter ,
+		  handler? ,
+		  duplicate_id? ,
+		  priority? ,
+		  severity? ,
+		  reproducibility? ,
+		  status? ,
+		  resolution? ,
+		  projection? ,
+		  date_submitted ,
+		  last_updated ,
+		  eta? ,
+		  os? ,
+		  os_build? ,
+		  platform? ,
+		  version? ,
+		  fixed_in_version? ,
+		  target_version? ,
+		  build? ,
+		  profile_id? ,
+		  view_state ,
+		  summary ,
+		  category? ,
+		  sponsorship_total? ,
+		  sticky?
+	)
 >
 
 <!ELEMENT id (#PCDATA)>
@@ -52,11 +52,11 @@
 <!ELEMENT project_id (#PCDATA)>
 <!ELEMENT reporter (#PCDATA)>
 <!ATTLIST reporter
-          id (ID) #REQUIRED
+		  id (ID) #REQUIRED
 >
 <!ELEMENT handler (#PCDATA)>
 <!ATTLIST handler
-          id (ID) #REQUIRED
+		  id (ID) #REQUIRED
 >
 
 <!ELEMENT duplicate_id (#PCDATA)>
@@ -109,7 +109,7 @@
 
 <!ELEMENT category (#PCDATA)>
 <!ATTLIST category
-          id (ID) #REQUIRED
+		  id (ID) #REQUIRED
 >
 
 <!ELEMENT sponsorship_total (#PCDATA)>

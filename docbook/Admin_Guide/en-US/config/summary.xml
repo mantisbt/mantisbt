@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.summary">
+	<title>Summary</title>
+
+	<para>These are the settings that are used to configuration
+		options related to the Summary page. This page contains statistics
+		about the bugs in MantisBT.
+	</para>
+	<variablelist>
+		<varlistentry>
+			<term>$g_reporter_summary_limit</term>
+			<listitem>
+				<para>Limit how many reporters to show in the summary page. This
+					is useful when there are dozens or hundreds of reporters. The
+					default value is 10.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_date_partitions</term>
+			<listitem>
+				<para>An array of date lengths to count bugs by (in days) for the
+					summary by date. The default is to count for 1, 2, 3, 7, 30, 60,
+					90, 180, and 365.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_summary_category_include_project</term>
+			<listitem>
+				<para>Specifies whether category names should be preceded by
+					project names (eg: [Project] Category) when the summary page is
+					viewed for all projects. This is useful in the case where category
+					names are common across projects. The default is OFF.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_view_summary_threshold</term>
+			<listitem>
+				<para>Specifies the access level required to view the summary
+					page. Default is VIEWER.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_severity_multipliers</term>
+			<listitem>
+				<para>An array of multipliers which are used to determine
+					the effectiveness of reporters based on the severity of
+					bugs. Higher multipliers will result in an increase in
+					reporter effectiveness. The default multipliers are:
+					<programlisting>
+$g_severity_multipliers = array ( FEATURE =&gt; 1,
+                                  TRIVIAL =&gt; 2,
+                                  TEXT =&gt; 3,
+                                  TWEAK =&gt; 2,
+                                  MINOR =&gt; 5,
+                                  MAJOR =&gt; 8,
+                                  CRASH =&gt; 8,
+                                  BLOCK =&gt; 10 );
+</programlisting>
+					The keys of the array are severity constants from
+					constant_inc.php or from custom_constants_inc.php if
+					you have custom severities defined. The values are
+					integers, typically in the range of 0 to 10. If you
+					would like for a severity to not count towards
+					effectiveness, set the value to 0 for that severity.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_resolution_multipliers</term>
+			<listitem>
+				<para>An array of multipliers which are used to determine
+					the effectiveness of reporters based on the resolution
+					of bugs. Higher multipliers will result in a decrease
+					in reporter effectiveness. The only resolutions that
+					need to be defined here are those which match or exceed
+					$g_bug_resolution_not_fixed_threshold. The default
+					multipliers are:
+					<programlisting>
+$g_resolution_multipliers = array( UNABLE_TO_DUPLICATE =&gt; 2,
+                                   NOT_FIXABLE =&gt; 1,
+                                   DUPLICATE =&gt; 3,
+                                   NOT_A_BUG =&gt; 5,
+                                   SUSPENDED =&gt; 1,
+                                   WONT_FIX =&gt; 1 );
+</programlisting>
+					The keys of the array are resolution constants from
+					constant_inc.php or from custom_constants_inc.php if
+					you have custom resolutions defined. Resolutions not
+					included here will be assumed to have a multiplier
+					value of 0. The values are integers, typically in the
+					range of 0 to 10. If you would like for a resolution to
+					not count towards effectiveness, set the value to 0 for
+					that resolution or remove it from the array completely.
+					Note that these resolution multipliers are stacked on
+					top of the severity multipliers. Therefore by default,
+					a user reporting many duplicate bugs at severity level
+					BLOCK will be far worse off than a user reporting many
+					duplicate bugs at severity level FEATURE.
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+
+</section>
+

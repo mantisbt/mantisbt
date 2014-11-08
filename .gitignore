@@ -15,6 +15,7 @@ docbook/*/*/builddate
 docbook/*/*/build
 docbook/*/*/install
 docbook/*/tmp
+!docbook/Admin_Guide/*/config
 
 # Build output
 build/
@@ -37,7 +38,7 @@ plugins/*
 *.kdev4
 nbproject/
 
-# IIS7 
+# IIS7
 web.config
 !library/securimage/web.config
 
