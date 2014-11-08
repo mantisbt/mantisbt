@@ -965,8 +965,11 @@ function db_time_queries() {
 function db_get_table( $p_name ) {
 	if( strpos( $p_name, 'mantis_' ) === 0 ) {
 		$t_table = substr( $p_name, 7, strpos( $p_name, '_table' ) - 7 );
-		error_parameters( 'db_get_table( \'' . $p_name . '\' )', 'db_get_table( \'' . $t_table . '\' )' );
-		trigger_error( ERROR_DEPRECATED_SUPERSEDED, WARNING );
+		error_parameters(
+			__FUNCTION__ . "( '$p_name' )",
+			__FUNCTION__ . "( '$t_table' )"
+		);
+		trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
 	} else {
 		$t_table = $p_name;
 	}
