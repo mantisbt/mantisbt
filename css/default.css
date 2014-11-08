@@ -577,6 +577,7 @@ div.form-container > table > tr:nth-child(even),
 	{ background-color: #d8d8d8; }
 
 form > table > tr:last-child,
+div.table-container > table > tbody > tr > td.buttons,
 div.table-container > table > tbody > tr > td.right {
 	background-color: white;
 }
