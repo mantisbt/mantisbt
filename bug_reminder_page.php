@@ -70,11 +70,11 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 
 <?php # Send reminder Form BEGIN ?>
 <br />
-<div>
 <form method="post" action="bug_reminder.php">
 <?php echo form_security_field( 'bug_reminder' ) ?>
 <input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
-<table class="width75" cellspacing="1">
+<div class="width75 form-container">
+<table cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
 		<?php echo lang_get( 'bug_reminder' ) ?>
@@ -89,8 +89,8 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 	</th>
 </tr>
 <tr>
-	<td>
-		<select name="to[]" multiple="multiple" size="10">
+	<td class="center">
+		<select name="to[]" multiple="multiple" size="12">
 			<?php
 				$t_project_id = bug_get_field( $f_bug_id, 'project_id' );
 				$t_access_level = config_get( 'reminder_receive_threshold' );
@@ -106,7 +106,7 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 		</select>
 	</td>
 	<td class="center">
-		<textarea name="body" cols="65" rows="10"></textarea>
+		<textarea name="body" cols="85" rows="10"></textarea>
 	</td>
 </tr>
 <tr>
@@ -115,9 +115,10 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 	</td>
 </tr>
 </table>
+</div>
 </form>
-<br />
-<table class="width75" cellspacing="1">
+<div class="width75 form-container">
+<table cellspacing="1">
 <tr>
 	<td>
 		<?php
