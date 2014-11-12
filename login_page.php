@@ -300,6 +300,7 @@ if( count( $t_warnings ) > 0 ) {
 				
 <div class="toolbar center">
 
+<?php
 if( ON == config_get( 'allow_anonymous_login' ) ) {
 	echo '<a class="back-to-login-link pull-right" href="login_anon.php?return=' . string_url( $f_return ) . '">' . lang_get( 'login_anonymously' ) . '</a>';
 }

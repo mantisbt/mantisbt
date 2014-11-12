@@ -147,9 +147,9 @@ if( $t_account_page ) {
 		</fieldset>
 		</table>
 	</div>
-</div>
-<div class="widget-toolbox padding-8 clearfix">
-	<span class="required pull-right"> * required</span>
+	</div>
+	<div class="widget-toolbox padding-8 clearfix">
+		<span class="required pull-right"> * required</span>
 			<?php
 			if( $t_account_page ) {
 				if( $t_project_id == ALL_PROJECTS ) { ?>
@@ -171,7 +171,9 @@ if( $t_account_page ) {
 				} ?>
 				<?php
 			} ?>
-		</fieldset>
+	</div>
+	</div>
+	</div>
 	</form>
 </div>
 

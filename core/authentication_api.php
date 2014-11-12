@@ -743,6 +743,7 @@ function auth_reauthenticate_page( $p_user_id, $p_username ) {
 	if( $t_error != false ) {
 		echo '<div class="alert alert-danger">';
 		echo '<p>' . lang_get( 'reauthenticate_message' ) . ' ' . lang_get( 'login_error' ) . '</p>';
+		echo '</div>';
 	}
 ?>
 
