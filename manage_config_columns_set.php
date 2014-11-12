@@ -53,42 +53,40 @@ require_api( 'project_api.php' );
 
 form_security_validate( 'manage_config_columns_set' );
 
-# @@@ access_ensure_project_level( config_get( 'manage_project_threshold' ) );
-
 $f_project_id = gpc_get_int( 'project_id' );
 $f_view_issues_columns = gpc_get_string( 'view_issues_columns' );
 $f_print_issues_columns = gpc_get_string( 'print_issues_columns' );
 $f_csv_columns = gpc_get_string( 'csv_columns' );
 $f_excel_columns = gpc_get_string( 'excel_columns' );
-$f_update_columns_for_current_project = gpc_get_bool( 'update_columns_for_current_project' );
-$f_update_columns_as_my_default = gpc_get_bool( 'update_columns_as_my_default' );
-$f_update_columns_as_global_default = gpc_get_bool( 'update_columns_as_global_default' );
 $f_form_page = gpc_get_string( 'form_page' );
 
-# only admins can set global defaults.for ALL_PROJECT
-if( $f_update_columns_as_global_default && $f_project_id == ALL_PROJECTS && !current_user_is_administrator() ) {
-	access_denied();
+if( $f_project_id != ALL_PROJECTS ) {
+	project_ensure_exists( $f_project_id );
 }
 
-# only MANAGERS can set global defaults.for a project
-if( $f_update_columns_as_global_default && $f_project_id != ALL_PROJECTS ) {
-	access_ensure_project_level( MANAGER, $f_project_id );
-}
+$g_project_override = $f_project_id;
+$t_project_id = $f_project_id;
 
-# user should only be able to set columns for a project that is accessible.
-if( $f_update_columns_for_current_project && $f_project_id != ALL_PROJECTS ) {
-	access_ensure_project_level( config_get( 'view_bug_threshold', null, null, $f_project_id ), $f_project_id );
-}
+$t_account_page = $f_form_page === 'account';
 
-if( $f_update_columns_as_my_default || $f_update_columns_as_global_default ) {
-	$t_project_id = ALL_PROJECTS;
+if( $f_project_id == ALL_PROJECTS ) {
+	if( !$t_account_page ) {
+		# From manage page, only admins can set global defaults for ALL_PROJECT
+		if( !current_user_is_administrator() ) {
+			access_denied();
+		}
+	}
 } else {
-	$t_project_id = $f_project_id;
-	project_ensure_exists( $t_project_id );
+	if( $t_account_page ) {
+		access_ensure_project_level( config_get( 'view_bug_threshold' ), $f_project_id );
+	} else {
+		access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
+	}
 }
 
-# Calculate the user id to set the configuration for.
-if( $f_update_columns_as_my_default || $f_update_columns_for_current_project ) {
+# For Account Column Customization, use current user.
+# For Manage Column Customization, use no user.
+if( $t_account_page ) {
 	$t_user_id = auth_get_current_user_id();
 } else {
 	$t_user_id = NO_USER;
@@ -123,8 +121,8 @@ if( json_encode( config_get( 'excel_columns', '', $t_user_id, $t_project_id ) ) 
 
 form_security_purge( 'manage_config_columns_set' );
 
-$t_redirect_url = $f_form_page === 'account' ? 'account_manage_columns_page.php' : 'manage_config_columns_page.php';
-layout_page_header( null, $t_redirect_url );
+$t_redirect_url = $t_account_page ? 'account_manage_columns_page.php' : 'manage_config_columns_page.php';
+html_page_top( null, $t_redirect_url );
 
 layout_page_begin();
 

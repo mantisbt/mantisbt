@@ -739,6 +739,9 @@ $s_last_visit = 'Last Visit';
 $s_last_visit_label = 'Last Visit:';
 $s_edit_user_link = 'Edit User';
 
+# manage_custom_field_edit_page.php
+$s_separate_list_items_by = '(separate list items by "%1$s")';
+
 # manage_config_email_page
 $s_config_all_projects = 'Note: These configurations affect all projects, unless overridden at the project level.';
 $s_config_project = 'Note: These configurations affect only the %1$s project.';
@@ -1363,7 +1366,7 @@ $s_create_child_bug_button = 'Clone';
 $s_bug_cloned_to = 'Issue cloned';
 $s_bug_created_from = 'Issue generated from';
 $s_copy_from_parent = 'Copy extended data from parent issue';
-$s_copy_notes_from_parent = 'Copy bug notes';
+$s_copy_notes_from_parent = 'Copy issue notes';
 $s_copy_attachments_from_parent = 'Copy attachments';
 
 # Relationship Graphs

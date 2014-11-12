@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.version">
+	<title>Version</title>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_show_version</term>
+			<listitem>
+				<para>Whether to show the MantisBT version at the bottom of each
+					page or not. Default is ON.
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</section>

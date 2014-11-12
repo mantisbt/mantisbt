@@ -141,6 +141,68 @@ if( $f_error || $f_cookie_error ) {
 	}
 	echo '</div>';
 }
+
+$t_warnings = array();
+$t_upgrade_required = false;
+if( config_get_global( 'admin_checks' ) == ON ) {
+	# Generate a warning if default user administrator/root is valid.
+	$t_admin_user_id = user_get_id_by_name( 'administrator' );
+	if( $t_admin_user_id !== false ) {
+		if( user_is_enabled( $t_admin_user_id ) && auth_does_password_match( $t_admin_user_id, 'root' ) ) {
+			$t_warnings[] = lang_get( 'warning_default_administrator_account_present' );
+		}
+	}
+
+	/**
+	 * Display Warnings for enabled debugging / developer settings
+	 * @param string $p_type    Message Type.
+	 * @param string $p_setting Setting.
+	 * @param string $p_value   Value.
+	 * @return string
+	 */
+	function debug_setting_message ( $p_type, $p_setting, $p_value ) {
+		return sprintf( lang_get( 'warning_change_setting' ), $p_setting, $p_value )
+			. sprintf( lang_get( 'word_separator' ) )
+			. sprintf( lang_get( "warning_${p_type}_hazard" ) );
+	}
+
+	$t_config = 'show_detailed_errors';
+	if( config_get( $t_config ) != OFF ) {
+		$t_warnings[] = debug_setting_message( 'security', $t_config, 'OFF' );
+	}
+	$t_config = 'display_errors';
+	$t_errors = config_get_global( $t_config );
+	if( $t_errors[E_USER_ERROR] != DISPLAY_ERROR_HALT ) {
+		$t_warnings[] = debug_setting_message(
+			'integrity',
+			$t_config . '[E_USER_ERROR]',
+			DISPLAY_ERROR_HALT );
+	}
+
+	# since admin directory and db_upgrade lists are available check for missing db upgrades
+	# if db version is 0, we do not have a valid database.
+	$t_db_version = config_get( 'database_version', 0 );
+	if( $t_db_version == 0 ) {
+		$t_warnings[] = lang_get( 'error_database_no_schema_version' );
+	}
+
+	# Check for db upgrade for versions > 1.0.0 using new installer and schema
+	# Note: install_helper_functions_api.php required for db_null_date() function definition
+	require_api( 'install_helper_functions_api.php' );
+	require_once( 'admin' . DIRECTORY_SEPARATOR . 'schema.php' );
+	$t_upgrades_reqd = count( $g_upgrade ) - 1;
+
+	if( ( 0 < $t_db_version ) &&
+			( $t_db_version != $t_upgrades_reqd ) ) {
+
+		if( $t_db_version < $t_upgrades_reqd ) {
+			$t_warnings[] = lang_get( 'error_database_version_out_of_date_2' );
+			$t_upgrade_required = true;
+		} else {
+			$t_warnings[] = lang_get( 'error_code_version_out_of_date' );
+		}
+	}
+}
 ?>
 
 <div class="position-relative">
@@ -160,6 +222,11 @@ if( $f_error || $f_cookie_error ) {
 			if( !is_blank( $f_return ) ) {
 				echo '<input type="hidden" name="return" value="', string_html_specialchars( $f_return ), '" />';
 			}
+
+			if( $t_upgrade_required ) {
+				echo '<input type="hidden" name="install" value="true" />';
+			}
+
 			# CSRF protection not required here - form does not result in modifications
 			?>
 
@@ -220,79 +287,19 @@ if( $f_error || $f_cookie_error ) {
 # Do some checks to warn administrators of possible security holes.
 #
 
-if( config_get_global( 'admin_checks' ) == ON ) {
-	$t_warnings = array();
-
-	# Generate a warning if default user administrator/root is valid.
-	$t_admin_user_id = user_get_id_by_name( 'administrator' );
-	if( $t_admin_user_id !== false ) {
-		if( user_is_enabled( $t_admin_user_id ) && auth_does_password_match( $t_admin_user_id, 'root' ) ) {
-			$t_warnings[] = lang_get( 'warning_default_administrator_account_present' );
-		}
+if( count( $t_warnings ) > 0 ) {
+	echo '<div class="space-10"></div>';
+	echo '<div class="alert alert-warning">';
+	foreach( $t_warnings AS $t_warning ) {
+		echo '<p>' . $t_warning . '</p>';
 	}
-
-	/**
-	 * Display Warnings for enabled debugging / developer settings
-	 * @param string $p_type
-	 * @param string $p_setting
-	 * @param string $p_value
-	 * @return string
-	 */
-	function debug_setting_message ( $p_type, $p_setting, $p_value ) {
-		return sprintf( lang_get( 'warning_change_setting' ), $p_setting, $p_value )
-			. sprintf( lang_get( 'word_separator' ) )
-			. sprintf( lang_get( "warning_${p_type}_hazard" ) );
-	}
-
-	$t_config = 'show_detailed_errors';
-	if( config_get( $t_config ) != OFF ) {
-		$t_warnings[] = debug_setting_message( 'security', $t_config, 'OFF' );
-	}
-	$t_config = 'display_errors';
-	$t_errors = config_get_global( $t_config );
-	if( $t_errors[E_USER_ERROR] != DISPLAY_ERROR_HALT ) {
-		$t_warnings[] = debug_setting_message(
-			'integrity',
-			$t_config . '[E_USER_ERROR]',
-			DISPLAY_ERROR_HALT );
-	}
-
-	# since admin directory and db_upgrade lists are available check for missing db upgrades
-	# if db version is 0, we do not have a valid database.
-	$t_db_version = config_get( 'database_version' , 0 );
-	if( $t_db_version == 0 ) {
-		$t_warnings[] = lang_get( 'error_database_no_schema_version' );
-	}
-
-	# Check for db upgrade for versions > 1.0.0 using new installer and schema
-	# Note: install_helper_functions_api.php required for db_null_date() function definition
-	require_api( 'install_helper_functions_api.php' );
-	require_once( 'admin' . DIRECTORY_SEPARATOR . 'schema.php' );
-	$t_upgrades_reqd = count( $g_upgrade ) - 1;
-
-	if( ( 0 < $t_db_version ) &&
-			( $t_db_version != $t_upgrades_reqd ) ) {
-
-		if( $t_db_version < $t_upgrades_reqd ) {
-			$t_warnings[] = lang_get( 'error_database_version_out_of_date_2' );
-		} else {
-			$t_warnings[] = lang_get( 'error_code_version_out_of_date' );
-		}
-	}
-	if( count( $t_warnings ) > 0 ) {
-		echo '<div class="space-10"></div>';
-		echo '<div class="alert alert-warning">';
-		foreach( $t_warnings AS $t_warning ) {
-			echo '<p>' . $t_warning . '</p>';
-		}
-		echo '</div>';
-	}
-} # if 'admin_checks'
+	echo '</div>';
+}
 ?>
 </div>
-
+				
 <div class="toolbar center">
-<?php
+
 if( ON == config_get( 'allow_anonymous_login' ) ) {
 	echo '<a class="back-to-login-link pull-right" href="login_anon.php?return=' . string_url( $f_return ) . '">' . lang_get( 'login_anonymously' ) . '</a>';
 }

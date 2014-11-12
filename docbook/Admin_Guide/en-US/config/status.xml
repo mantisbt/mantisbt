@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.status">
+	<title>Status Settings</title>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_bug_submit_status</term>
+			<listitem>
+				<para>Status to assign to the bug when submitted. Default value is
+					NEW_.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_bug_assigned_status</term>
+			<listitem>
+				<para>Status to assign to the bug when assigned. Default value is
+					ASSIGNED.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_bug_reopen_status</term>
+			<listitem>
+				<para>Status to assign to the bug when reopened. Default value is
+					FEEDBACK.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_bug_feedback_status</term>
+			<listitem>
+				<para>
+					Status to assign to the bug when feedback is required from the issue reporter.
+					Once the reporter adds a note the status moves back from feedback to $g_bug_assigned_status
+					or $g_bug_submit_status based on whether the bug assigned or not.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_reassign_on_feedback</term>
+			<listitem>
+				<para>
+					When a note is added to a bug currently in $g_bug_feedback_status, and the note
+					author is the bug's reporter, this option will automatically set the bug status
+					to $g_bug_submit_status or $g_bug_assigned_status if the bug is assigned to a
+					developer.  Defaults to enabled.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_bug_reopen_resolution</term>
+			<listitem>
+				<para>Default resolution to assign to a bug when it is
+					resolved as being a duplicate of another issue.
+					Default value is DUPLICATE.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_bug_duplicate_resolution</term>
+			<listitem>
+				<para>Resolution to assign to the bug when reopened. Default value
+					is REOPENED.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_auto_set_status_to_assigned</term>
+			<listitem>
+				<para>Automatically set status to $g_bug_assigned_status whenever
+					a bug is assigned to a person. Installations where assigned status
+					is to be used when the defect is in progress, rather than just put
+					in a person's queue should set it to OFF. Default is ON.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_bug_resolved_status_threshold</term>
+			<listitem>
+				<para>Bug is resolved, ready to be closed or reopened. In some
+					custom installations a bug maybe considered as resolved when it is
+					moved to a custom (FIXED OR TESTED) status.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_bug_resolution_fixed_threshold</term>
+			<listitem>
+				<para>Threshold resolution which denotes that a bug has
+					been resolved and successfully fixed by developers.
+					Resolutions above this threshold and below
+					$g_bug_resolution_not_fixed_threshold are considered
+					to be resolved successfully. Default value is FIXED.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_bug_resolution_not_fixed_threshold</term>
+			<listitem>
+				<para>Threshold resolution which denotes that a bug has
+					been resolved without being successfully fixed by
+					developers. Resolutions above this threshold are
+					considered to be resolved in an unsuccessful way.
+					Default value is UNABLE_TO_DUPLICATE.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>
+				$g_bug_readonly_status_threshold $g_update_readonly_bug_threshold
+			</term>
+			<listitem>
+				<para>Bug becomes readonly if its status is &gt;=
+					$g_bug_readonly_status_threshold. The bug becomes read/write again
+					if re-opened and its status becomes less than this threshold. The
+					default is RESOLVED. Once the bug becomes readonly, a user with an
+					access level greater than or equal to
+					$g_update_readonly_bug_threshold can still edit the bug.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_status_enum_workflow</term>
+			<listitem>
+				<para>'status_enum_workflow' defines the workflow, and reflects a
+					simple 2-dimensional matrix. For each existing status, you define
+					which statuses you can go to from that status, e.g. from NEW_ you
+					might list statuses '10:new,20:feedback,30:acknowledged' but not
+					higher ones.The default is no workflow, where all states are
+					accessible from any others.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_report_bug_threshold</term>
+			<listitem>
+				<para>This is the access level required to open a bug. The default
+					is REPORTER.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_update_bug_threshold</term>
+			<listitem>
+				<para>This is the access level generally required to update the
+					content of a bug. The default is UPDATER.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_handle_bug_threshold</term>
+			<listitem>
+				<para>This is the access level generally required to be access
+					level needed to be listed in the assign to field. The default is
+					DEVELOPER. If a more restrictive setting can be determined from
+					$g_set_status_threshold, it will be used.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_update_bug_status_threshold $g_set_status_threshold
+			</term>
+			<listitem>
+				<para>These settings control the access level required to promote
+					a bug to a new status once the bug is
+					opened.$g_set_status_threshold is an array indexed by the status
+					value that allows a distinct setting for each status. It defaults
+					to blank.If the appropriate status is not defined above,
+					$g_update_bug_status_threshold is used instead. The default is
+					DEVELOPER.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_bugnote_user_edit_threshold</term>
+			<listitem>
+				<para>Threshold at which a user can edit his/her own
+					bugnotes. The default value is equal to the
+					configuration setting $g_update_bugnote_threshold.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_bugnote_user_delete_threshold</term>
+			<listitem>
+				<para>Threshold at which a user can delete his/her own
+					bugnotes. The default value is equal to the
+					configuration setting $g_delete_bugnote_threshold.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_bugnote_user_change_view_state_threshold</term>
+			<listitem>
+				<para>Threshold at which a user can change the view status
+					of his/her own bugnotes. The default value is equal to
+					the configuration setting $g_change_view_status_threshold.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_allow_reporter_close</term>
+			<listitem>
+				<para>If set, the bug reporter is allowed to close their own bugs,
+					regardless of their access level. The default is OFF.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_allow_reporter_reopen</term>
+			<listitem>
+				<para>If set, the bug reporter is allowed to reopen their own bugs
+					once resolved, regardless of their access level. This allows the
+					reporter to disagree with the resolution. The default is
+					ON.
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+
+	<para>See also:
+		<xref linkend="admin.customize.status"/>
+	</para>
+</section>

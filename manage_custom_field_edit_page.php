@@ -155,6 +155,28 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			</label>
 		</td>
 	</tr>
+	<div class="field-container">
+		<label for="custom-field-length-min"><span><?php echo lang_get( 'custom_field_length_min' ) ?></span></label>
+		<span class="input"><input type="text" id="custom-field-length-min" name="length_min" size="32" maxlength="64" value="<?php echo $t_definition['length_min'] ?>" /></span>
+		<span class="label-style"></span>
+	</div>
+	<div class="field-container">
+		<label for="custom-field-length-max"><span><?php echo lang_get( 'custom_field_length_max' ) ?></span></label>
+		<span class="input"><input type="text" id="custom-field-length-max" name="length_max" size="32" maxlength="64" value="<?php echo $t_definition['length_max'] ?>" /></span>
+		<span class="label-style"></span>
+	</div>
+	<div class="field-container">
+		<label for="custom-field-filter-by"><span><?php echo lang_get( 'custom_field_filter_by' ) ?></span></label>
+				<span class="checkbox">
+					<input type="checkbox" id="custom-field-filter-by" name="filter_by"
+						<?php
+						if( $t_definition['filter_by'] ) {
+							echo 'checked="checked"';
+						}
+						?> />
+				</span>
+		<span class="label-style"></span>
+	</div>
 	<tr>
 		<td class="category">
 			<?php echo lang_get( 'custom_field_display_report' ) ?>

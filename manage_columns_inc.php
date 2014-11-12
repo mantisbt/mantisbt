@@ -153,19 +153,25 @@ if( $t_account_page ) {
 			<?php
 			if( $t_account_page ) {
 				if( $t_project_id == ALL_PROJECTS ) { ?>
-					<input <?php echo helper_get_tab_index() ?> type="submit" class="btn btn-primary btn-sm btn-white btn-round" name="update_columns_as_my_default" value="<?php echo lang_get( 'update_columns_as_my_default' ) ?>" /><?php
+					<input <?php echo helper_get_tab_index() ?> type="submit" <?php echo helper_get_tab_index() ?> class="btn btn-primary btn-sm btn-white btn-round" name="update_columns_as_my_default" value="<?php echo lang_get( 'update_columns_as_my_default' ) ?>" /><?php
 				} else { ?>
-					<input <?php echo helper_get_tab_index() ?> type="submit" class="btn btn-primary btn-sm btn-white btn-round" name="update_columns_for_current_project" value="<?php echo lang_get( 'update_columns_for_current_project' ) ?>" /><?php
+					<input <?php echo helper_get_tab_index() ?> type="submit" <?php echo helper_get_tab_index() ?> class="btn btn-primary btn-sm btn-white btn-round" name="update_columns_for_current_project" value="<?php echo lang_get( 'update_columns_for_current_project' ) ?>" /><?php
 
+				}
 			}
-		}
 
-		if( $t_manage_page && current_user_is_administrator() ) { ?>
-			<input <?php echo helper_get_tab_index() ?> type="submit" class="btn btn-primary btn-sm btn-white btn-round" name="update_columns_as_global_default" value="<?php echo lang_get( 'update_columns_as_global_default' ) ?>" /><?php
-		} ?>
-			</div>
-		</div>
-	</div>
+			# All Projects: only if admin can setup global default columns.
+			# Specific Project: can set columns for that.  Switch to All Projects to set for all projects.
+			if( $t_manage_page ) { ?>
+				<?php
+				if( $t_project_id != ALL_PROJECTS ) { ?>
+					<input <?php echo helper_get_tab_index() ?> type="submit" class="btn btn-primary btn-sm btn-white btn-round" name="update_columns_as_global_default" value="<?php echo lang_get( 'update_columns_for_current_project' ) ?>" /><?php
+				} else if( current_user_is_administrator() ) { ?>
+					<input <?php echo helper_get_tab_index() ?> type="submit" class="btn btn-primary btn-sm btn-white btn-round" name="update_columns_as_global_default" value="<?php echo lang_get( 'update_columns_as_global_default' ) ?>" /><?php
+				} ?>
+				<?php
+			} ?>
+		</fieldset>
 	</form>
 </div>
 

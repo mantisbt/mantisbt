@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.myview">
+	<title>My View Settings</title>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_my_view_boxes</term>
+			<listitem>
+				<para>This is an array of values defining the order that the boxes
+					to be shown. A box that is not to be shown can have its value set
+					to 0. The default is:
+					<programlisting>
+$g_my_view_boxes = array( 'assigned' =&gt; '1',
+                          'unassigned' =&gt; '2',
+                          'reported' =&gt; '3',
+                          'resolved' =&gt; '4',
+                          'recent_mod' =&gt; '5',
+                          'monitored' =&gt; '6'
+                   );
+</programlisting>
+					If you want to change the definition, copy the default value and
+					apply the changes.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_my_view_bug_count</term>
+			<listitem>
+				<para>Number of bugs shown in each box. The default is 10.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_home_page</term>
+			<listitem>
+				<para>Default page to transfer to after Login or Set Project. The
+					default is 'my_view_page.php'. An alternative would be
+					'view_all_bugs_page.php' or 'main_page.php'.
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</section>

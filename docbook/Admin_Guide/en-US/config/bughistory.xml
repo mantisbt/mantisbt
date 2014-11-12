@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.bughistory">
+	<title>Bug History</title>
+
+	<para>Bug history is a feature where MantisBT tracks all
+		modifications that are made to bugs. These include everything
+		starting from its creation, till it is closed. For each change, the
+		bug history will record the time stamp, user who made the change,
+		field that changed, old value, and new value.
+	</para>
+	<para>Independent of the these settings, MantisBT will always track
+		the changes to a bug and add them to its history.
+	</para>
+	<variablelist>
+		<varlistentry>
+			<term>$g_history_default_visible</term>
+			<listitem>
+				<para>Make the bug history visible by default. If this option is
+					not enabled, then the user will have to click on the Bug History
+					link to see the bug history. Default is ON.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_history_order</term>
+			<listitem>
+				<para>Show bug history entries in ascending or descending order.
+					Default value is 'ASC'.
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+
+</section>

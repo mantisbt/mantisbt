@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.signup">
+	<title>Signup and Lost Password</title>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_allow_signup</term>
+			<listitem>
+				<para>Allow users to signup for their own accounts.
+				</para>
+				<para>If ON (default), then $g_send_reset_password must be ON
+					as well, and mail settings must be correctly configured
+					(see <xref linkend="admin.config.email"/>).
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_max_failed_login_count</term>
+			<listitem>
+				<para>Maximum failing login attempts before the account is locked.
+					Once locked, it's required to reset the password (lost password).
+					Value resets to zero at each successfully login.  Default is OFF.
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_notify_new_user_created_threshold_min</term>
+			<listitem>
+				<para>The minimum global access level required to be notified when a new user registers via the &quot;signup form&quot;.  To pick specific access levels that are not necessarily at the higher end of access levels, use an array of access levels.  Default is ADMINISTRATOR.
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_send_reset_password</term>
+			<listitem>
+				<para>If ON (default), users will be sent their password when
+					their account is created or password reset (this requires
+					mail settings to be correctly configured).
+				</para>
+				<para>If OFF, then the Administrator will have to provide
+					a password when creating new accounts, and the password
+					will be set to blank when reset.
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_signup_use_captcha</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_system_font_folder</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_font_per_captcha</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_lost_password_feature</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_max_lost_password_in_progress_count</term>
+			<listitem>
+				<para>TODO</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</section>

@@ -53,7 +53,7 @@ class SourceData {
 	/**
 	 * Get url to view issue
 	 * @param integer $p_issue_id An issue identifier.
-     * @return string
+	 * @return string
 	 */
 	public function get_issue_url( $p_issue_id ) {
 		return $this->urlbase . 'view.php?id=' . $p_issue_id;
@@ -63,7 +63,7 @@ class SourceData {
 	 * Get url to view bugnote
 	 * @param integer $p_issue_id An issue identifier.
 	 * @param integer $p_note_id  A note identifier.
-     * @return string
+	 * @return string
 	 */
 	public function get_note_url( $p_issue_id, $p_note_id ) {
 		return $this->urlbase . 'view.php?id=' . $p_issue_id . '#c' . $p_note_id;
@@ -166,30 +166,19 @@ class ImportXML {
 
 		echo " Done\n";
 
-		# replace references in bug description and additional information
+		# replace bug references
 		$t_imported_issues = $this->itemsMap_->getall( 'issue' );
 		printf( 'Processing cross-references for %s issues...', count( $t_imported_issues ) );
 		foreach( $t_imported_issues as $t_old_id => $t_new_id ) {
 			$t_bug = bug_get( $t_new_id, true );
-			$t_content_replaced = false;
 
-			$t_bug_link_regexp = '/(^|[^\w])(' . preg_quote( $this->source_->issuelink, '/' ) . ')(\d+)\b/e';
-			# replace links in description
-			preg_match_all( $t_bug_link_regexp, $t_bug->description, $t_matches );
-			if( is_array( $t_matches[3] && count( $t_matches[3] ) > 0 ) ) {
-				$t_content_replaced = true;
-				foreach ( $t_matches[3] as $t_old_id2 ) {
-					$t_bug->description = str_replace( $this->source_->issuelink . $t_old_id2, $this->getReplacementString( $this->source_->issuelink, $t_old_id2 ), $t_bug->description );
-				}
-			}
-			# replace links in additional information
-			preg_match_all( $t_bug_link_regexp, $t_bug->additional_information, $t_matches );
-			if( is_array( $t_matches[3] && count( $t_matches[3] ) > 0 ) ) {
-				$t_content_replaced = true;
-				foreach ( $t_matches[3] as $t_old_id3 ) {
-					$t_bug->additional_information = str_replace( $this->source_->issuelink . $t_old_id3, $this->getReplacementString( $this->source_->issuelink, $t_old_id3 ), $t_bug->additional_information );
-				}
-			}
+			# Using bitwise 'or' here to ensure the all replacements are made
+			# regardless of outcome of the previous one(s)
+			$t_content_replaced =
+				  $this->replaceLinks( $t_bug, 'description' )
+				| $this->replaceLinks( $t_bug, 'steps_to_reproduce' )
+				| $this->replaceLinks( $t_bug, 'additional_information' );
+
 			if( $t_content_replaced ) {
 				# only update bug if necessary (otherwise last update date would be unnecessarily overwritten)
 				$t_bug->update( true );
@@ -201,11 +190,44 @@ class ImportXML {
 	}
 
 	/**
+	 * Replace links in the given bug for the specified field
+	 * @param object $p_bug
+	 * @param string $p_field Field to process (one of 'description',
+	 *                        'steps_to_reproduce' or 'additional_information')
+	 * @return boolean true if replacements have been made
+	 */
+	private function replaceLinks( $p_bug, $p_field ) {
+		static $s_bug_link_regexp;
+		$t_content_replaced = false;
+
+		if( is_null( $s_bug_link_regexp ) ) {
+			$s_bug_link_regexp = '/(?:^|[^\w])'
+				. preg_quote( $this->source_->issuelink, '/' )
+				. '(\d+)\b/';
+		}
+
+		preg_match_all( $s_bug_link_regexp, $p_bug->$p_field, $t_matches );
+
+		if( is_array( $t_matches[1] ) && count( $t_matches[1] ) > 0 ) {
+			$t_content_replaced = true;
+			foreach ( $t_matches[1] as $t_old_id ) {
+				$p_bug->$p_field = str_replace(
+					$this->source_->issuelink . $t_old_id,
+					$this->getReplacementString( $this->source_->issuelink, $t_old_id ),
+					$p_bug->$p_field
+				);
+			}
+		}
+
+		return $t_content_replaced;
+	}
+
+	/**
 	 * Compute and return the new link
 	 *
 	 * @param string $p_oldLinkTag Old link tag.
 	 * @param string $p_oldId      Old issue identifier.
-     * @return string
+	 * @return string
 	 */
 	private function getReplacementString( $p_oldLinkTag, $p_oldId ) {
 		$t_link_tag = config_get( 'bug_link_tag' );
@@ -245,7 +267,7 @@ class ImportXML {
 	/**
 	 * Get importer object
 	 * @param string $p_element_name Name.
-     * @return ImportXml_Issue
+	 * @return ImportXml_Issue
 	 */
 	private function get_importer_object( $p_element_name ) {
 		$t_importer = null;

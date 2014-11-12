@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.database">
+	<title>Database</title>
+
+	<para>The database settings must be set in order for the package
+		to work properly. These settings should be provided to you by your
+		system administrator or your hosting company.
+	</para>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_hostname</term>
+			<listitem>
+				<para>Host name or connection string for Database server. The
+					default value is localhost. For MySql, this should be hostname or
+					hostname:port (e.g. localhost:3306).
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_db_username</term>
+			<listitem>
+				<para>User name to use for connecting to the database. The user
+					needs to have read/write access to the MantisBT database. The default
+					user name is &quot;root&quot;.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_db_password</term>
+			<listitem>
+				<para>Password for the specified user name. The default password
+					is empty.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_database_name</term>
+			<listitem>
+				<para>Name of database that contains MantisBT tables.  The default name is 'bugtracker'.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_db_schema</term>
+			<listitem>
+				<para>The database schema (used in case of DB2), otherwise should be left blank.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_db_type</term>
+			<listitem>
+				<para>The supported database types are listed in the table
+					below.
+				</para>
+				<para>The PHP extension corresponding to the selected type
+					must be enabled (see also <xref linkend="admin.install.requirements.software.versions"/>).
+				</para>
+
+				<informaltable>
+					<tgroup cols="4">
+						<thead>
+							<row>
+								<entry>RDBMS</entry>
+								<entry>db_type (ADOdb)</entry>
+								<entry>PHP extension</entry>
+								<entry>Comments</entry>
+							</row>
+						</thead>
+						<tbody>
+							<row>
+								<entry morerows="1" valign="middle">MySQL</entry>
+								<entry>mysqli</entry>
+								<entry>mysqli</entry>
+								<entry>default</entry>
+							</row>
+							<row>
+								<entry>mysql</entry>
+								<entry>mysql</entry>
+								<entry>Deprecated as of PHP 5.5.0</entry>
+							</row>
+							<row>
+								<entry>PostgreSQL</entry>
+								<entry>pgsql</entry>
+								<entry>pgsql</entry>
+								<entry/>
+							</row>
+							<row>
+								<entry>MS SQL Server</entry>
+								<entry>mssqlnative</entry>
+								<entry>sqlsrv</entry>
+								<entry/>
+							</row>
+							<row>
+								<entry>Oracle</entry>
+								<entry>oci8</entry>
+								<entry>oci8</entry>
+								<entry/>
+							</row>
+							<row>
+								<entry>IBM DB2</entry>
+								<entry>db2</entry>
+								<entry>db2</entry>
+								<entry>experimental</entry>
+							</row>
+						</tbody>
+					</tgroup>
+				</informaltable>
+
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</section>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.time">
+	<title>Time</title>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_cookie_time_length</term>
+			<listitem>
+				<para>Time for 'permanent' cookie to live in seconds. This is what
+					is used when a user selects &quot;save login&quot;. Default is the equivalent
+					of 1 year (30000000).
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_allow_permanent_cookie</term>
+			<listitem>
+				<para>Allow users to opt for a 'permanent' cookie when logging in.
+					Controls the display of the 'Remember my login in this browser'
+					checkbox on the login page. See $g_cookie_time_length.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_wait_time</term>
+			<listitem>
+				<para>Time to delay between page redirects (in seconds). Users can
+					override this setting in their user preferences. Default is 2
+					seconds.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_long_process_timeout</term>
+			<listitem>
+				<para>This timeout is used by pages which does time consuming
+					operations like upgrading the database. The default value of 0
+					disables timeout. Note that this timeout is specified in
+					seconds.
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+
+</section>

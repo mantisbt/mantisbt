@@ -1,5 +1,7 @@
-mantisbt - Mantis Bug Tracker (MantisBT)
-========================================
+Mantis Bug Tracker (MantisBT)
+=============================
+[![Build Status](https://travis-ci.org/mantisbt/mantisbt.svg?branch=master)](https://travis-ci.org/mantisbt/mantisbt)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/mantisbt/mantisbt?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 For complete documentation, please read the administration guide included with
 this release in the doc/<lang> directory.  The guide is available in text, PDF,

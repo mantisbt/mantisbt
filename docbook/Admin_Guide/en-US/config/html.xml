@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.html">
+	<title>HTML</title>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_html_valid_tags</term>
+			<listitem>
+				<para>This is the list of HTML tags that are allowed.Do NOT
+					include href or img tags here.Do NOT include tags that have
+					parameters (eg. )The HTML code is allowed to enter the database as
+					is. The $g_allow_href_tags does not have to be enabled to make URL
+					links. The package will automatically hyperlink properly formatted
+					URLs eg. http://blah.blah/ or
+					mailto://me@more.com/ 
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_hr_size</term>
+			<listitem>
+				<para>hr size.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_hr_width</term>
+			<listitem>
+				<para>hr width. Leave off the percentage (%) symbol.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_bottom_include_page</term>
+			<listitem>
+				<para>If this page exists it will be displayed at the bottom of
+					every page. It makes a good company branding include page.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_top_include_page</term>
+			<listitem>
+				<para>If this page exists it will be displayed at the top of every
+					page. It makes a good company branding include page.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_css_include_file</term>
+			<listitem>
+				<para>Set this to point to the CSS file of your choice.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_css_rtl_include_file</term>
+			<listitem>
+				<para>Set this to point to the RTL CSS file of your choice.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_meta_include_file</term>
+			<listitem>
+				<para>Set this to point to the META tag file of your
+					choice.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_main_menu_custom_options</term>
+			<listitem>
+				<para>This option will add custom options to the main menu. It is
+					an array of arrays listing the caption, access level required, and
+					the link to be executed. For example:
+<programlisting>
+$g_main_menu_custom_options = array(
+	array( 'My Link', MANAGER, 'my_link.php' ),
+	array( 'My Link2', ADMINISTRATOR, 'my_link2.php' ),
+);
+</programlisting>
+					Note that if the caption is found in the
+					<emphasis>Custom Strings File</emphasis>
+					(see <xref linkend="admin.customize.strings"/>)
+					it will be replaced by the corresponding translated
+					string. Options will only be added to the menu if
+					the current logged in user has the appropriate
+					access level.
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</section>

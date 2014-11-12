@@ -22,6 +22,8 @@
  * Import XML Issues Page
  */
 
+access_ensure_project_level( plugin_config_get( 'import_threshold' ) );
+
 auth_reauthenticate( );
 
 layout_page_header( plugin_lang_get( 'import' ) );

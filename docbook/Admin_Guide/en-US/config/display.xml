@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.display">
+	<title>Display</title>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_window_title</term>
+			<listitem>
+				<para>This is the browser window title (&lt;TITLE&gt;
+					tag).
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_page_title</term>
+			<listitem>
+				<para>This is a heading that is displayed in the viewing area of
+					the page.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_favicon_image</term>
+			<listitem>
+				<para>Path to the favorites icon relative to MantisBT root folder (default 'images/favicon.ico').</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_logo_image</term>
+			<listitem>
+				<para>Path to the logo image relative to MantisBT root folder (default 'images/mantis_logo.gif').</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_logo_url</term>
+			<listitem>
+				<para>The default URL to be associated with the logo.  By default this is set to $g_default_home_page (which defaults to My View page). Clicking on the logo from any page in the bug tracker will navigate to the URL specified in this configuration option.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_show_footer_menu</term>
+			<listitem>
+				<para>Show the menu at the bottom of the page as well as at the
+					top. Default value is OFF.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_show_project_menu_bar</term>
+			<listitem>
+				<para>This option specifies whether to add menu at the top of the
+					page which includes links to all the projects. The default value is
+					OFF.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_show_assigned_names</term>
+			<listitem>
+				<para>When a bug is assigned then replace the word &quot;assigned&quot; with
+					the name of the developer in parenthesis. Default is ON.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_show_priority_text</term>
+			<listitem>
+				<para>Specifies whether to show priority as text (ON) or icon
+					(OFF) in the view all bugs page. Default is OFF (icon).
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_priority_significant_threshold</term>
+			<listitem>
+				<para>Define the priority level at which a bug becomes
+					significant. Significant bugs are displayed with
+					emphasis. Set this value to -1 to disable the feature.
+					The default value is HIGH.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_severity_significant_threshold</term>
+			<listitem>
+				<para>Define the severity level at which a bug becomes
+					significant. Significant bugs are displayed with
+					emphasis. Set this value to -1 to disable the feature.
+					The default value is MAJOR.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_view_issues_page_columns</term>
+			<listitem>
+				<para>This configuration option is used to select the columns to be included in the View Issues page and in which order.  If one of the column is not accessible to the logged in user, or corresponds to a disabled feature, then it will be automatically removed from the list at runtime.  Hence, the same column list may show a different set of columns based on the logged in user, the currently selected project and enabled features (e.g. sponsorship_total is only shown if the sponsorship feature is enabled).</para>
+				<para>The supported columns are: selection, edit, id, project_id, reporter_id, handler_id, priority, reproducibility, projection, eta, resolution, fixed_in_version, view_state, os, os_build, build (for product build), platform, version, date_submitted, attachment_count, category, sponsorship_total, severity, status, last_updated, summary, bugnotes_count, description, steps_to_reproduce, additional_info.  As for custom fields they can be referenced by adding a 'custom_' to their name (e.g. xyz would be custom_xyz).</para>
+				<para>By default the following columns are selected: selection, edit, priority, id, sponsorship_total, bugnotes_count, attachment_count, category_id, severity, status, last_updated, summary.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_print_issues_page_columns</term>
+			<listitem>
+				<para>This configuration option is used to select the columns to be included in the Print Issues page and in which order.  See $g_view_issues_page_columns for more details about the supported fields.</para>
+				<para>By default the following columns are selected: selection, priority, id, sponsorship_total, bugnotes_count, attachment_count, category_id, severity, status, last_updated, summary</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_csv_columns</term>
+			<listitem>
+				<para>This configuration option is used to select the columns to be included in the CSV export and in which order.  See $g_view_issues_page_columns for more details about the supported fields.</para>
+				<para>By default the following columns are selected: id, project_id, reporter_id, handler_id, priority, severity, reproducibility, version, build, projection, category_id, date_submitted, eta, os, os_build, platform, view_state, last_updated, summary, status, resolution, fixed_in_version, duplicate_id.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_excel_columns</term>
+			<listitem>
+				<para>This configuration option is used to select the columns to be included in the CSV export and in which order.  See $g_view_issues_page_columns for more details about the supported fields.</para>
+				<para>By default the following columns are selected: id, project_id, reporter_id, handler_id, priority, severity, reproducibility, version, build, projection, category_id, date_submitted, eta, os, os_build, platform, view_state, last_updated, summary, status, resolution, fixed_in_version, duplicate_id.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_show_bug_project_links</term>
+			<listitem>
+				<para>Show project links when in All Projects mode. Default is
+					ON.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_status_legend_position</term>
+			<listitem>
+				<para>Specifies the position of the status colour legend, can be:
+					STATUS_LEGEND_POSITION_TOP or STATUS_LEGEND_POSITION_BOTTOM.
+					Default is STATUS_LEGEND_POSITION_BOTTOM.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_show_product_version</term>
+			<listitem>
+				<para>This controls display of the product version in the
+					report, view, update and print issue pages. This flag also applies
+					to other product version related fields like product build, fixed in version,
+					and target version.  Valid values are ON, OFF, and AUTO.
+					ON for always displayed, AUTO for displayed when project has versions defined, and OFF for
+					always OFF.  The default value is AUTO.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_show_version_dates_threshold</term>
+			<listitem>
+				<para>The access level threshold at which users will see
+					the date of release for product versions. Dates will
+					be shown next to the product version, target version
+					and fixed in version fields. Set this threshold to
+					NOBODY to disable the feature. Default value is NOBODY.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_show_realname</term>
+			<listitem>
+				<para>This control will replace the user's userid with their
+					realname. If it is set to ON, and the real name field has been
+					populated, the replacement will occur. It defaults to OFF.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_show_avatar</term>
+			<listitem>
+				<para>Show the user's avatar
+				</para>
+				<para>The current implementation is based on
+					<ulink url="http://www.gravatar.com">Gravatar</ulink>;
+					Users will need to register there the same email address
+					used in this MantisBT installation to have their avatar
+					shown.
+					Please note: upon registration or avatar change, it may
+					take some time for the updated gravatar images to show
+					on sites
+				</para>
+				<para>The config can be either set to OFF (avatars disabled),
+					or to a string defining the default avatar to be used
+					when none is associated with the user's email.
+					Valid values are:
+					<itemizedlist>
+						<listitem><para>OFF (default)</para>
+						</listitem>
+						<listitem><para>ON (equivalent to 'identicon')
+						</para></listitem>
+						<listitem><para>One of Gravatar's defaults
+							(mm, identicon, monsterid, wavatar, retro);
+							refer to
+							<ulink url="http://en.gravatar.com/site/implement/images/">
+								Image Requests documentation
+							</ulink>
+							for further details.
+						</para></listitem>
+						<listitem><para>An URL to the default image to be used
+							(for example, &quot;http:/path/to/unknown.jpg&quot;
+							or &quot;%path%images/no_avatar.png&quot;).
+						</para></listitem>
+					</itemizedlist>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_show_avatar_threshold</term>
+			<listitem>
+				<para>The threshold of users for which MantisBT should attempt to show the avatar (default DEVELOPER).  Note that the threshold is related to the user for whom the avatar is being shown, rather than the user who is currently logged in.</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</section>

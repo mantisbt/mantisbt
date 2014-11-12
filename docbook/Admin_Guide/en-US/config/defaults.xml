@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.defaults">
+	<title>Default Preferences</title>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_default_new_account_access_level</term>
+			<listitem>
+				<para>This is the default access level users are given when their
+					account is created by email. The default access level is REPORTER.
+					Look in constant_inc.php for other values.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_bug_view_status</term>
+			<listitem>
+				<para>The default viewing status for the new bug (VS_PUBLIC or
+					VS_PRIVATE). The default is VS_PUBLIC.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_bugnote_view_status</term>
+			<listitem>
+				<para>The default viewing status for the new bugnote (VS_PUBLIC or
+					VS_PRIVATE). The default is VS_PUBLIC.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_reminder_view_status</term>
+			<listitem>
+				<para>The default viewing status for the new reminders (VS_PUBLIC
+					or VS_PRIVATE). The default is VS_PUBLIC.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_reminder_receive_threshold</term>
+			<listitem>
+				<para>The minimum access level for a user to show up in the reminder user picker.
+				Note that this is the access level for the project for which the issue belongs.
+				The default is DEVELOPER.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_bug_resolution</term>
+			<listitem>
+				<para>The resolution for a newly created issue. The default
+					is OPEN. Look in constant_inc.php for other values.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_bug_severity</term>
+			<listitem>
+				<para>The severity for a newly created issue. The default is
+					MINOR. Look in constant_inc.php for other values.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_bug_priority</term>
+			<listitem>
+				<para>The priority for a newly created issue. The default is
+					NORMAL. Look in constant_inc.php for other values.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_bug_reproducibility</term>
+			<listitem>
+				<para>The reproducibility for a newly created issue. The
+					default is REPRODUCIBILITY_HAVENOTTRIED. Look in
+					constant_inc.php for other values.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_bug_projection</term>
+			<listitem>
+				<para>The projection for a newly created issue. The default
+					is PROJECTION_NONE. Look in constant_inc.php for other
+					values.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_bug_eta</term>
+			<listitem>
+				<para>The ETA for a newly created issue. The default is
+					ETA_NONE. Look in constant_inc.php for other values.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_category_for_moves</term>
+			<listitem>
+				<para>
+					Default global category to be used when an issue is moved from a project to another
+					that doesn't have a category with a matching name.  The default is 1 which is the &quot;General&quot;
+					category that is created in the default database.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_limit_view</term>
+			<listitem>
+				<para>Number of bugs to show in the View Bugs page. The default
+					value is 50.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_show_changed</term>
+			<listitem>
+				<para>Highlight bugs that have changed during the last N hours.
+					The default value is 6.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_hide_status_default</term>
+			<listitem>
+				<para>Controls which issues will be displayed in the View Issues
+					page. Default value is CLOSED, implying that all issues at &quot;closed&quot;
+					or higher state will not be shown.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_min_refresh_delay</term>
+			<listitem>
+				<para>This is the delay between automatic refreshes of the View
+					Issues page in minutes. Make sure refresh delay in user preferences isn't too
+					short. If a users set their preferences to be lower then it is
+					bumped back up to this minimum value. The default value is 10
+					minutes.
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+	<para>
+		These settings are used as the default values for preferences for
+		new users. Each user can override these settings through the user
+		preferences form. Default language is set to default site language
+		($g_default_language).
+	</para>
+	<variablelist>
+		<varlistentry>
+			<term>$g_default_refresh_delay</term>
+			<listitem>
+				<para>Default page refresh delay (in minutes). This is for the bug
+					listing pages. Default value is 30 minutes.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_redirect_delay</term>
+			<listitem>
+				<para>Default delay before a user is redirected to a page after
+					being prompted by a message (eg: operational successful). Default
+					value is 2 seconds.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_bugnote_order</term>
+			<listitem>
+				<para>This controls the time order in which bug notes are
+					displayed. It can be either ASC (oldest first, the default) or DESC
+					(newest first).
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_email_on_new$g_default_email_on_assigned$g_default_email_on_feedback$g_default_email_on_resolved$g_default_email_on_closed</term>
+			<listitem>
+				<para>Default user preferences to enable receiving emails when a
+					bug is set to the corresponding status. This option only has an
+					effect if users have the required access level to receive such
+					emails. Default value is ON.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_email_on_reopened</term>
+			<listitem>
+				<para>Default user preferences to enable receiving emails when
+					bugs are re-opened. Default value is ON.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_email_on_bugnote</term>
+			<listitem>
+				<para>Default user preferences to enable receiving emails when
+					bugnotes are added to bugs. Default value is ON.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_email_on_status$g_default_email_on_priority</term>
+			<listitem>
+				<para>Default user preferences to enable receiving emails when
+					status or priority is changed. Default is ON. Note that this option
+					is not implemented.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_email_on_new_minimum_severity$g_default_email_on_assigned_minimum_severity$g_default_email_on_feedback_minimum_severity$g_default_email_on_resolved_minimum_severity$g_default_email_on_closed_minimum_severity$g_default_email_on_reopened_minimum_severity$g_default_email_on_bugnote_minimum_severity</term>
+			<listitem>
+				<para>Default user preferences to enable filtering based on issue
+					severity. These correspond to the email_on_&lt;status&gt; settings.
+					Default is 'any'.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_email_on_bugnote_minimum_severity</term>
+			<listitem>
+				<para>Default user preference to enable filtering based on issue
+					severity. These corresponds to the email_on_bugnote setting.
+					Default is 'any'.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_email_on_status_minimum_severity$g_default_email_on_priority_minimum_severity</term>
+			<listitem>
+				<para>Default user preferences to enable filtering based on issue
+					severity. These correspond to the email_on_status and
+					email_on_priority settings. Default is 'any'. Note that this option
+					is not yet implemented.
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+	<para>See also:
+		<xref linkend="admin.customize.email"/>
+	</para>
+</section>

@@ -97,7 +97,15 @@ html_robots_noindex();
 layout_page_header_begin( lang_get( 'view_bugs_link' ) );
 
 if( current_user_get_pref( 'refresh_delay' ) > 0 ) {
-	html_meta_redirect( 'view_all_bug_page.php?page_number='.$f_page_number, current_user_get_pref( 'refresh_delay' )*60 );
+	$t_query = '?';
+
+	if( $f_page_number > 1 )  {
+		$t_query .= 'page_number=' . $f_page_number . '&';
+	}
+
+	$t_query .= 'refresh=true';
+
+	html_meta_redirect( 'view_all_bug_page.php' . $t_query, current_user_get_pref( 'refresh_delay' ) * 60 );
 }
 
 layout_page_header_end();

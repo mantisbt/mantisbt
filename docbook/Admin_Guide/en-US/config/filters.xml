@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.filters">
+	<title>Filters</title>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_filter_by_custom_fields</term>
+			<listitem>
+				<para>Show custom fields in the filter dialog and use these in
+					filtering. Defaults to ON.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_filter_custom_fields_per_row</term>
+			<listitem>
+				<para>The number of custom fields to display per row. The default
+					is 7. The value should be greater than or equal to 7.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_view_filters = SIMPLE_DEFAULT;</term>
+			<listitem>
+				<para>Controls the display of the filter pages. Possible values
+					are:
+					<itemizedlist>
+						<listitem>
+							<para>SIMPLE_ONLY - only simple view</para>
+						</listitem>
+						<listitem>
+							<para>ADVANCED_ONLY - only advanced view (allows multiple value
+								selections)
+							</para>
+						</listitem>
+						<listitem>
+							<para>SIMPLE_DEFAULT - defaults to simple view, but shows a
+								link for advanced
+							</para>
+						</listitem>
+						<listitem>
+							<para>ADVANCED_DEFAULT - defaults to advanced view, but shows a
+								link for simple
+							</para>
+						</listitem>
+					</itemizedlist>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_use_dynamic_filters = ON;</term>
+			<listitem>
+				<para>This switch enables the use of AJAX to dynamically
+					load and create filter form controls upon request.
+					This method will reduce the amount of data that needs
+					to be transferred upon each page load dealing with
+					filters and thus will result in speed improvements and
+					bandwidth reduction.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_create_permalink_threshold</term>
+			<listitem>
+				<para>The threshold required for users to be able to create permalinks (default DEVELOPER).  To turn this feature off use NOBODY.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_create_short_url</term>
+			<listitem>
+				<para>The service to use to create a short URL.  The %s will be replaced by the long URL.  By default http://www.tinyurl service is used to shorten URLs.</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</section>

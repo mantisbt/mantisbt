@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.tables">
+	<title>Database Tables</title>
+
+	<para>MantisBT enables users to configure a table prefix for all its
+		tables. This is useful to be able to have multiple MantisBT
+		installation in the same database. The advantage of that is for
+		users who are limited by their ISP to have one database.
+	</para>
+
+	<variablelist>
+
+		<varlistentry>
+			<term>$g_db_table_prefix</term>
+			<listitem>
+				<para>Specifies the prefix to be use for all table names. The
+					default value is 'mantis'. If you override the default prefix, make
+					sure to update doc/db_generate.sql file before generating your
+					database. The other option is to import db_generate.sql as is, then
+					rename the tables to match the new prefix.
+				</para>
+
+				<para>The prefix is used to help make sure table names are unique.
+					This is useful for users who are limited to one database.
+				</para>
+				<note><para>
+						The table name for each of the tables is stored in a variable which
+						is calculated based on this configuration option. If you change the
+						prefix you have to make sure these variables are re-calculated (by
+						adding these calculation statements to config_inc.php after
+						assigning the new prefix). An example of these variables is:
+						$g_mantis_bug_file_table
+					</para>
+				</note>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+
+</section>

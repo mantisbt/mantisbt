@@ -53,15 +53,6 @@ class Mantis_HelperTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function providerArrayTranspose() {
 		return array(
-			# null
-			array( null, null ),
-
-			# scalar
-			array( 123, 123 ),
-
-			# object
-			array( $this, $this ),
-
 			# simple array
 			array( array(123,456), array(123,456) ),
 

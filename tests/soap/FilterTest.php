@@ -41,7 +41,6 @@ class FilterTest extends SoapBase {
 	public function testGetIssuesForUserForUnassignedNoTargetUser() {
 		$t_target_user = array();
 		$t_initial_issues_count = $this->getIssuesForUser( 'assigned', $t_target_user );
-
 		$t_issue_to_add = $this->getIssueToAdd( 'FilterTest.testGetIssuesForUserForUnassignedNoTargetUser' );
 
 		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
@@ -521,7 +520,7 @@ class FilterTest extends SoapBase {
 		return $this->client->mc_project_get_issues_for_user(
 			$this->userName,
 			$this->password,
-			0,
+			$this->getProjectId(),
 			$p_filter_type,
 			$p_target_user,
 			1, # page number

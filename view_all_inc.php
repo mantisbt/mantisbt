@@ -53,11 +53,8 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
-$g_filter = current_user_get_bug_filter();
-# NOTE: this check might be better placed in current_user_get_bug_filter()
-if( $g_filter === false ) {
-	$g_filter = filter_get_default();
-}
+$t_filter = current_user_get_bug_filter();
+filter_init( $t_filter );
 
 list( $t_sort, ) = explode( ',', $g_filter['sort'] );
 list( $t_dir, ) = explode( ',', $g_filter['dir'] );
