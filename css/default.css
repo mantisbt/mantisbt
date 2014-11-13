@@ -22,14 +22,14 @@ a > img				{ border: none; }
 form				{ display: inline; }
 
 input				{}
-input.button			{}
-input.button-small		{ font-size: 1em; }
+input.button		{}
+input.button-small	{ font-size: 1em; }
 
 textarea			{}
-textarea.width100   { width: 100%; }
+textarea.width100	{ width: 100%; }
 
 select				{}
-select.width100     { width: 100%; }
+select.width100		{ width: 100%; }
 
 span				{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt; }
 span.print			{ font-size: 8pt; }
