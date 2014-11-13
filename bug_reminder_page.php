@@ -90,7 +90,7 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 </tr>
 <tr>
 	<td class="center">
-		<select name="to[]" multiple="multiple" size="12">
+		<select name="to[]" multiple="multiple" size="12" class="width100">
 			<?php
 				$t_project_id = bug_get_field( $f_bug_id, 'project_id' );
 				$t_access_level = config_get( 'reminder_receive_threshold' );
@@ -106,19 +106,17 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 		</select>
 	</td>
 	<td class="center">
-		<textarea name="body" cols="85" rows="10"></textarea>
-	</td>
-</tr>
-<tr>
-	<td class="center" colspan="2">
-		<input type="submit" class="button" value="<?php echo lang_get( 'bug_send_button' ) ?>" />
+		<textarea name="body" cols="85" rows="10" class="width100"></textarea>
 	</td>
 </tr>
 </table>
+<div class="center">
+	<input type="submit" class="button" value="<?php echo lang_get( 'bug_send_button' ) ?>" />
+</div>
 </div>
 </form>
-<div class="width75 form-container">
-<table cellspacing="1">
+<br/>
+<table class="width75" cellspacing="1">
 <tr>
 	<td>
 		<?php
@@ -133,7 +131,6 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 	</td>
 </tr>
 </table>
-</div>
 
 <br />
 <?php
