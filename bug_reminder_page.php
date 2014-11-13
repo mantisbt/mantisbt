@@ -96,7 +96,7 @@ layout_page_begin();
 </tr>
 <tr>
 	<td>
-		<select name="to[]" multiple="multiple" size="10" class="input-sm">
+		<select name="to[]" multiple="multiple" size="9" class="width-100">
 			<?php
 				$t_project_id = bug_get_field( $f_bug_id, 'project_id' );
 				$t_access_level = config_get( 'reminder_receive_threshold' );
