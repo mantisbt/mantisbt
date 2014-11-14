@@ -486,7 +486,7 @@ if( $t_read_write_access ) {
 				<label for="config-option"><span><?php echo lang_get( 'configuration_option' ) ?></span></label>
 				<span class="input">
 					<input type="text" name="config_option"
-						value="<?php echo $t_edit_option; ?>"
+						value="<?php echo string_display_line( $t_edit_option ); ?>"
 						size="64" maxlength="64" />
 				</span>
 				<span class="label-style"></span>
