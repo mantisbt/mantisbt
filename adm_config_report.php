@@ -480,7 +480,7 @@ if( $t_read_write_access ) {
 	</td>
 	<td>
 		<input type="text" name="config_option"
-			value="<?php echo $t_edit_option; ?>"
+			value="<?php echo string_attribute( $t_edit_option ); ?>"
 			size="64" maxlength="64" />
 	</td>
 </tr>
