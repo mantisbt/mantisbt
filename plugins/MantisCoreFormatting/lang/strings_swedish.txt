@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Jopparn
  * @author Lokal Profil
  * @author Tobulos1
  * @author Warrakkk
@@ -50,5 +51,6 @@ $s_plugin_format_process_text = 'Textbehandling';
 $s_plugin_format_process_text_warning_notice = 'Stäng inte av såvida du inte verkligen vet vad du gör. Cross site scripting (XSS) attacker är möjliga när avstängt.';
 $s_plugin_format_process_urls = 'URL-bearbetning';
 $s_plugin_format_process_buglinks = 'MantisBT-interna länkar (Buggar och buggkommentarer)';
+$s_plugin_format_process_buglinks_info = 'Din konfiguration definierar <em>Fråge</em>-taggen som "<literal>%s</literal>" och <em>Frågeanteckning</em>-taggen som"<literal>%s</literal>"';
 $s_plugin_format_enabled = 'På';
 $s_plugin_format_disabled = 'Av';
