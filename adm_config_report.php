@@ -138,6 +138,7 @@
 	} else {
 		# Retrieve the filter from the cookie if it exists
 		$t_cookie_string = gpc_get_cookie( $t_cookie_name, null );
+
 		if( null !== $t_cookie_string ) {
 			$t_cookie_contents = explode( ':', $t_cookie_string );
 
@@ -147,6 +148,13 @@
 
 			if( $t_filter_project_value != META_FILTER_NONE && !project_exists( $t_filter_project_value ) ) {
 				$t_filter_project_value = ALL_PROJECTS;
+			}
+
+			if(    $t_filter_config_value != META_FILTER_NONE
+			   && !is_blank( $t_filter_config_value )
+			   && @config_get_global( $t_filter_config_value ) === null
+			) {
+				$t_filter_config_value = META_FILTER_NONE;
 			}
 		}
 	}
