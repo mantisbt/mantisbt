@@ -237,7 +237,11 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 
 		# relationships
 		if( $v_type == BUG_ADD_RELATIONSHIP || $v_type == BUG_DEL_RELATIONSHIP || $v_type == BUG_REPLACE_RELATIONSHIP ) {
-			if( !access_has_bug_level( VIEWER, $v_new_value, $t_user_id ) ) {
+			$t_related_bug_id = $v_new_value;
+
+			# If bug doesn't exist, then we don't know whether to expose it or not based on the fact whether it was
+			# accessible to user or not.  This also simplifies client code that is accessing the history log.
+			if( !bug_exists( $t_related_bug_id ) || !access_has_bug_level( VIEWER, $t_related_bug_id, $t_user_id ) ) {
 				continue;
 			}
 		}
