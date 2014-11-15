@@ -1578,6 +1578,7 @@ $s_timeline_issue_closed = '<span class="username">%1s</span> closed issue <span
 $s_timeline_issue_reopened = '<span class="username">%1s</span> reopened issue <span class="issue_id">%2s</span>';
 $s_timeline_issue_assigned = '<span class="username">%1s</span> assigned issue <span class="issue_id">%2s</span> to <span class="username">%3s</span>';
 $s_timeline_issue_assigned_to_self = '<span class="username">%1s</span> picked up issue <span class="issue_id">%2s</span>';
+$s_timeline_issue_unassigned = '<span class="username">%1s</span> unassigned issue <span class="issue_id">%2s</span>';
 $s_timeline_no_activity = 'No activity within time range.';
 $s_timeline_title = 'Timeline';
 $s_timeline_more = 'More events...';
