@@ -22,8 +22,8 @@ a > img				{ border: none; }
 form				{ display: inline; }
 
 input				{}
-input.button			{}
-input.button-small		{ font-size: 1em; }
+input.button			{ border-radius: 5px; cursor: pointer; padding: 2px 10px; background-color: #ffffff }
+input.button-small		{ border-radius: 5px; cursor: pointer; padding: 2px 3px; margin:0 1px; background-color: #ffffff }
 
 textarea			{}
 select				{}
