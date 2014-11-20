@@ -151,6 +151,7 @@ $s_steps_to_reproduce_updated = 'Étapes pour reproduire mises à jour';
 $s_file_added = 'Fichier ajouté';
 $s_file_deleted = 'Fichier supprimé';
 $s_bug_deleted = 'Bogue supprimé';
+$s_data_imported = 'Données Importées';
 $s_make_private = 'Rendre privé';
 $s_make_public = 'Rendre public';
 $s_create_new_project_link = 'Créer un nouveau projet';
