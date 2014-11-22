@@ -30,6 +30,7 @@ textarea.width100	{ width: 100%; }
 
 select				{}
 select.width100		{ width: 100%; }
+select.width20		{ width: 20%; }
 
 span				{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt; }
 span.print			{ font-size: 8pt; }
