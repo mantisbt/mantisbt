@@ -344,18 +344,17 @@ $t_user_count = count( $t_users );
 		print_page_links( 'manage_user_page.php', 1, $t_page_count, (int)$f_page_number, $c_filter . $t_hide_inactive_filter . $t_show_disabled_filter . '&amp;sort=' . $c_sort . '&amp;dir=' . $c_dir );
 		?>
 	</div>
-</div>
-<div id="manage-user-edit-div" class="form-container">
+<hr>
+<div id="manage-user-edit-div">
 	<form id="manage-user-edit-form" method="get" action="manage_user_edit_page.php"<?php # CSRF protection not required here - form does not result in modifications ?>>
 		<fieldset>
-			<div class="field-container">
-				<label for="username"><span><?php echo lang_get( 'search' ) ?></span></label>
-				<span class="input"><input id="username" type="text" name="username" value="" /></span>
-				<span class="label-style"></span>
-			</div>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'manage_user' ) ?>" /></span>
+			<label for="username"><?php echo lang_get( 'search' ) ?></label>
+			<input id="username" type="text" name="username" value="" />
+			<input type="submit" class="button" value="<?php echo lang_get( 'manage_user' ) ?>" />
 		</fieldset>
 	</form>
+</div>
+
 </div>
 <?php
 html_page_bottom();
