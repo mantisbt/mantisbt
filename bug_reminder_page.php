@@ -70,11 +70,11 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 
 <?php # Send reminder Form BEGIN ?>
 <br />
-<div>
 <form method="post" action="bug_reminder.php">
 <?php echo form_security_field( 'bug_reminder' ) ?>
 <input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
-<table class="width75" cellspacing="1">
+<div class="width75 form-container">
+<table cellspacing="1">
 <tr>
 	<td class="form-title" colspan="2">
 		<?php echo lang_get( 'bug_reminder' ) ?>
@@ -84,39 +84,38 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 	<th class="category">
 		<?php echo lang_get( 'to' ) ?>
 	</th>
-	<th class="category">
-		<?php echo lang_get( 'reminder' ) ?>
-	</th>
-</tr>
-<tr>
 	<td>
-		<select name="to[]" multiple="multiple" size="10">
+		<select name="to[]" multiple="multiple" size="12" class="width20">
 			<?php
-				$t_project_id = bug_get_field( $f_bug_id, 'project_id' );
-				$t_access_level = config_get( 'reminder_receive_threshold' );
-				if( $t_bug->view_state === VS_PRIVATE ) {
-					$t_private_bug_threshold = config_get( 'private_bug_threshold' );
-					if( $t_private_bug_threshold > $t_access_level ) {
-						$t_access_level = $t_private_bug_threshold;
-					}
+			$t_project_id = bug_get_field( $f_bug_id, 'project_id' );
+			$t_access_level = config_get( 'reminder_receive_threshold' );
+			if( $t_bug->view_state === VS_PRIVATE ) {
+				$t_private_bug_threshold = config_get( 'private_bug_threshold' );
+				if( $t_private_bug_threshold > $t_access_level ) {
+					$t_access_level = $t_private_bug_threshold;
 				}
-				$t_selected_user_id = 0;
-				print_user_option_list( $t_selected_user_id, $t_project_id, $t_access_level );
+			}
+			$t_selected_user_id = 0;
+			print_user_option_list( $t_selected_user_id, $t_project_id, $t_access_level );
 			?>
 		</select>
 	</td>
-	<td class="center">
-		<textarea name="body" cols="65" rows="10"></textarea>
-	</td>
 </tr>
 <tr>
-	<td class="center" colspan="2">
-		<input type="submit" class="button" value="<?php echo lang_get( 'bug_send_button' ) ?>" />
+	<th class="category">
+		<?php echo lang_get( 'reminder' ) ?>
+	</th>
+	<td>
+		<textarea name="body" cols="85" rows="10" class="width100"></textarea>
 	</td>
 </tr>
 </table>
+<div class="center">
+	<input type="submit" class="button" value="<?php echo lang_get( 'bug_send_button' ) ?>" />
+</div>
+</div>
 </form>
-<br />
+<br/>
 <table class="width75" cellspacing="1">
 <tr>
 	<td>
@@ -132,7 +131,6 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 	</td>
 </tr>
 </table>
-</div>
 
 <br />
 <?php
