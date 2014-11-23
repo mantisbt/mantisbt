@@ -3472,24 +3472,30 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 	}
 	?>
 
-	<div id="filter-links" class="filter-links">
-		<ul>
+	<div class="filter-links">
 		<?php
-		$f_switch_view_link = ( config_get( 'use_dynamic_filters' ) ) ? 'view_all_set.php?type=6&amp;view_type=' : 'view_filters_page.php?view_type=';
-		$t_view_filters = config_get( 'view_filters' );
-		if( ( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) {
-			if( 'advanced' == $t_view_type ) {
-				echo '<li><a href="', $f_switch_view_link, 'simple">', lang_get( 'simple_filters' ), '</a></li>';
-			} else {
-				echo '<li><a href="', $f_switch_view_link, 'advanced">', lang_get( 'advanced_filters' ), '</a></li>';
-			}
+		if( access_has_project_level( config_get( 'create_permalink_threshold' ) ) ) {
+			?>
+			<form method="get" action="permalink_page.php">
+				<?php # CSRF protection not required here - form does not result in modifications ?>
+				<input type="hidden" name="url" value="<?php echo urlencode( filter_get_url( $t_filter ) ) ?>" />
+				<input type="submit" name="reset_query_button" class="button-small" value="<?php echo lang_get( 'create_filter_link' ) ?>" />
+			</form>
+			<?php
 		}
 
-		if( access_has_project_level( config_get( 'create_permalink_threshold' ) ) ) {
-			echo '<li><a href="permalink_page.php?url=', urlencode( filter_get_url( $t_filter ) ), '">', lang_get( 'create_filter_link' ), '</a></li>';
+		$t_view_filters = config_get( 'view_filters' );
+		if( ( SIMPLE_ONLY != $t_view_filters ) && ( ADVANCED_ONLY != $t_view_filters ) ) {
+			?>
+			<form method="get" action="view_all_set.php">
+				<?php # CSRF protection not required here - form does not result in modifications ?>
+				<input type="hidden" name="type" value="<?php echo config_get( 'use_dynamic_filters' ) ? '6' : '' ?>" />
+				<input type="hidden" name="view_type" value="<?php echo 'advanced' == $t_view_type ? 'simple' : 'advanced' ?>" />
+				<input type="submit" name="reset_query_button" class="button-small" value="<?php echo 'advanced' == $t_view_type ? lang_get( 'simple_filters' ) : lang_get( 'advanced_filters' ) ?>" />
+			</form>
+			<?php
 		}
 		?>
-		</ul>
 	</div>
 
 	</div>
