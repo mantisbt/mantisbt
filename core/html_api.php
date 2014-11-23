@@ -1032,7 +1032,7 @@ function print_summary_submenu() {
 		echo "\t\t" . '<ul class="menu">' . "\n";
 		# Plugins menu items - these are cooked links
 		foreach ( $t_menu_options as $t_menu_item ) {
-			echo "\t\t\t" . '<li>', $t_menu_item, '</li> . "\n"';
+			echo "\t\t\t" . '<li>', $t_menu_item, '</li>' . "\n";
 		}
 		echo "\t\t" . '</ul>' . "\n";
 		echo "\t" . '</div>' . "\n";
