@@ -155,7 +155,6 @@ tr.bugnote .time-tracked,
 
 #manage-menu { margin-top: 0.5em; }
 
-#filter-links ul,
 #manage-menu ul,
 #manage-config-menu ul,
 #summary-menu ul,
@@ -164,9 +163,7 @@ tr.bugnote .time-tracked,
 #manage-tags-filter-menu ul,
 #admin-menu ul
 	{ clear: left; float: left; list-style: none; position: relative; left: 50%; padding: 0; margin: 0; text-align: center; }
-#filter-links ul { left: 0; }
 
-#filter-links ul li,
 #manage-menu ul li,
 #manage-config-menu ul li,
 #summary-menu ul li,
@@ -175,9 +172,7 @@ tr.bugnote .time-tracked,
 #manage-tags-filter-menu ul li,
 #admin-menu ul li
 	 { display:block; float: left; list-style: none; margin: .5em 0; padding: 0 .25em; position: relative; right: 50%; }
-#filter-links ul li { right: 0; }
 
-#filter-links ul a,
 #manage-menu ul a,
 #manage-config-menu ul a,
 #summary-menu ul a,
@@ -189,7 +184,6 @@ tr.bugnote .time-tracked,
 #admin-menu ul a
 	{ text-decoration: underline; padding: 0 .25em; }
 
-#filter-links ul span,
 #manage-menu ul span,
 #manage-config-menu ul span,
 #summary-menu ul span,
@@ -206,7 +200,6 @@ tr.bugnote .time-tracked,
 #account-menu ul li, #doc-menu ul li { display: block; float: left; padding: 0; margin: 0; }
 
 /* bracket links */
-#filter-links ul li:before,
 #manage-user-link:before,
 #manage-menu ul li:before,
 #manage-config-menu ul li:before,
@@ -219,7 +212,6 @@ span.permalink:before,
 span.switch-view:before
 	{ content: "[" }
 
-#filter-links ul li:after,
 #manage-user-link:after,
 #manage-menu ul li:after,
 #manage-config-menu ul li:after,
@@ -376,7 +368,7 @@ select.tainted { background-color: #ffffff; color: red; }
 #filter_open, #filter_closed { position: relative; border: 1px solid #000; padding: 0; margin: 0; }
 #filter_open_link, #filter_closed_link { float: left; position: relative; top: 0.5em; padding: 0 .5em; margin: 0; }
 .search-box { float: left; position: relative; padding: 0; margin: 0; }
-.manage-queries, .reset-query, .save-query, .search-box, .stored-queries, .submit-query { top: .3em; }
+.filter-links, .manage-queries, .reset-query, .save-query, .search-box, .stored-queries, .submit-query { top: .3em; }
 .submit-query, .save-query {  float: left; position: relative; padding: 0 .5em; margin: 0; font-size: 1em; }
 .filter-links, .stored-queries, .manage-queries, .reset-query { float: right; position: relative; padding: 0 .5em; margin: 0; z-index: 100; }
 .save-query {  float: right; }
