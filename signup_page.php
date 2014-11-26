@@ -66,7 +66,7 @@
 <?php
 	$t_allow_passwd = helper_call_custom_function( 'auth_can_change_password', array() );
 	if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 && ( true == $t_allow_passwd ) ) {
-		session_set( CAPTCHA_KEY, mt_rand( 0,99999 ) );
+		session_set( CAPTCHA_KEY, mt_rand() );
 
 		# captcha image requires GD library and related option to ON
 ?>
