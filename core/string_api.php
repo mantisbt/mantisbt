@@ -456,7 +456,8 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 }
 
 /**
- * Detect URLs and email addresses in the string and replace them with href anchors
+ * Search email addresses and URLs for a few common protocols in the given
+ * string, and replace occurences with href anchors.
  * @param string $p_string String to be processed.
  * @return string
  */
@@ -471,8 +472,10 @@ function string_insert_hrefs( $p_string ) {
 
 	# Initialize static variables
 	if( is_null( $s_url_regex ) ) {
-		# URL regex
-		$t_url_protocol = '(?:[[:alpha:]][-+.[:alnum:]]*):\/\/';
+		# URL protocol. The regex accepts a small subset from the list of valid
+		# IANA permanent and provisional schemes defined in
+		# http://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml
+		$t_url_protocol = '(?:https?|s?ftp|file|irc[6s]?|ssh|telnet|nntp|git|svn(?:\+ssh)?|cvs):\/\/';
 
 		# %2A notation in url's
 		$t_url_hex = '%[[:digit:]A-Fa-f]{2}';
