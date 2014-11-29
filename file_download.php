@@ -192,8 +192,10 @@ if( false !== strpos( $t_content_type, 'application/x-shockwave-flash' ) ) {
 header( 'Content-Type: ' . $t_content_type );
 header( 'Content-Length: ' . $v_filesize );
 
-# For Internet Explorer 8 as per http://blogs.msdn.com/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
-# Don't let IE second guess our content-type!
+# Don't let Internet Explorer second-guess our content-type [1]
+# Also disable Flash content-type sniffing [2]
+# [1] http://blogs.msdn.com/b/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
+# [2] http://50.56.33.56/blog/?p=242
 header( 'X-Content-Type-Options: nosniff' );
 
 # dump file content to the connection.
