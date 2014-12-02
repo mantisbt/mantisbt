@@ -296,6 +296,7 @@ function file_get_visible_attachments( $p_bug_id ) {
 
 	$t_preview_text_ext = config_get( 'preview_text_extensions' );
 	$t_preview_image_ext = config_get( 'preview_image_extensions' );
+	$t_inline_file_ext = config_get( 'inline_file_extensions' );
 
 	$t_image_previewed = false;
 	for( $i = 0;$i < $t_attachments_count;$i++ ) {
@@ -345,7 +346,12 @@ function file_get_visible_attachments( $p_bug_id ) {
 			} else if( in_array( $t_ext, $t_preview_image_ext, true ) ) {
 				$t_attachment['preview'] = true;
 				$t_attachment['type'] = 'image';
+				$t_attachment['preview_url'] = $t_attachment['download_url'] . '&amp;show_inline=1' . form_security_param( 'file_show_inline' );
 			}
+		}
+
+		if ( in_array( $t_ext, $t_inline_file_ext, true ) ) {
+			$t_attachment['download_url'] .= '&amp;show_inline=1' . form_security_param( 'file_show_inline' );
 		}
 
 		$t_attachments[] = $t_attachment;
