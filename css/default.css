@@ -89,7 +89,7 @@ td.my-buglist-description	{ width: 100%; vertical-align: top; }
 /**
  * view_all_bug_page.php
  */
-#buglist td, th			{ text-align: center; }
+#buglist td, #buglist th	{ text-align: center; }
 #buglist .column-summary,
 #buglist .column-description,
 #buglist .column-steps-to-reproduce,
@@ -485,7 +485,7 @@ div.table-container table,
 div.section-container table th,
 div.form-container table th,
 div.table-container table th {
-	text-align: center;
+	text-align: left;
 }
 div#reauth-div,
 div#login-div,
