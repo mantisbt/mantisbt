@@ -20,8 +20,6 @@ Developers
 ----------
 
 Damien Regad (dregad)
-Daryn Warriner (daryn, dwarrine)
-Paul Richards (grangeway, paulr, minimoo, prichards)
 Robert Munteaunu (rombert)
 Roland Becker (atrol)
 
@@ -38,9 +36,11 @@ Ex-Developers
 -------------
 
 David Hicks (dhx)
+Daryn Warriner (daryn, dwarrine)
 Gianluca Sforna (giallu)
 Glenn Henshaw (thraxisp)
 John Reese (jreese, nuclear_eclipse)
+Paul Richards (grangeway, paulr, minimoo, prichards)
 Siebrand Mazeland (siebrand)
 
 
@@ -54,8 +54,8 @@ Kenzaburo Ito
 Paul Richards
 Glenn Henshaw
 Julian Fitzell
-John Reese
 Damien Regad
+John Reese
 David Hicks
 Siebrand Mazeland
 Jeroen Latour
@@ -105,10 +105,12 @@ Christian Weiske
 Heiko Schneider-Lange
 Markus Schneider
 Tarik Sedlarevic
+jeckyhl
 puklos
 Andreas Schopper
 Benjamin Renard
 Bill Stidham
+Bob Clough
 Brian Wrightson
 Carlos Proensa
 Cyrille Giquello
@@ -146,7 +148,6 @@ dwethell
 gcompagnon
 greenius
 hazerd
-jeckyll
 mbaranski
 petertc
 tfromm
