@@ -329,7 +329,7 @@ class DisposableEmailChecker
 	 * @param $p_email  The email address to validate.
 	 * @returns true: disposable, false: non-disposable.
 	 */
-	function is_disposable_email( $p_email ) {
+	static function is_disposable_email( $p_email ) {
 		return (
 			DisposableEmailChecker::is_forwarding_email( $p_email ) ||
 			DisposableEmailChecker::is_trash_email( $p_email ) ||
@@ -346,7 +346,7 @@ class DisposableEmailChecker
 	 * @param $p_email  The email address to check.
 	 * @returns true: disposable forwarding, false: otherwise.
 	 */
-	function is_forwarding_email( $p_email ) {
+	static function is_forwarding_email( $p_email ) {
 		$t_domain = DisposableEmailChecker::_get_domain_from_address( $p_email );
 		return in_array( $t_domain, DisposableEmailChecker::$forwarding_domains_array );
 	}
@@ -361,7 +361,7 @@ class DisposableEmailChecker
 	 * @param $p_email  The email address to check.
 	 * @returns true: disposable trash mail, false: otherwise.
 	 */
-	function is_trash_email( $p_email ) {
+	static function is_trash_email( $p_email ) {
 		$t_domain = DisposableEmailChecker::_get_domain_from_address( $p_email );
 		return in_array( $t_domain, DisposableEmailChecker::$trash_domains_array );
 	}
@@ -374,7 +374,7 @@ class DisposableEmailChecker
 	 * @param $p_email  The email address to check.
 	 * @returns true: shredded disposable email, false: otherwise.
 	 */
-	function is_shredder_email( $p_email ) {
+	static function is_shredder_email( $p_email ) {
 		$t_domain = DisposableEmailChecker::_get_domain_from_address( $p_email );
 		return in_array( $t_domain, DisposableEmailChecker::$shredder_domains_array );
 	}
@@ -388,7 +388,7 @@ class DisposableEmailChecker
 	 * @param $p_email  The email address to check.
 	 * @returns true: time bound disposable email, false: otherwise.
 	 */
-	function is_time_bound_email( $p_email ) {
+	static function is_time_bound_email( $p_email ) {
 		$t_domain = DisposableEmailChecker::_get_domain_from_address( $p_email );
 		return in_array( $t_domain, DisposableEmailChecker::$time_bound_domains_array );
 	}
@@ -460,7 +460,7 @@ class DisposableEmailChecker
 	 * @param $p_email  The email address to extra the domain from.
 	 * @returns The lower case domain or empty string if email not valid.
 	 */
-	function _get_domain_from_address( $p_email ) {
+	static function _get_domain_from_address( $p_email ) {
 		$t_domain_pos = strpos( $p_email, '@' );
 		if ( $t_domain_pos === false ) {
 			return '';
