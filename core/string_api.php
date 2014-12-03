@@ -258,7 +258,9 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	$t_type = 0;
 	if( preg_match( '@^(?P<path>' . preg_quote( $t_path, '@' ) . ')' . $t_pattern . '$@', $t_url, $t_matches ) ) {
 		$t_type = 1;
-	} else if( preg_match( '@^(?P<path>' . preg_quote( $t_short_path, '@' ) . ')' . $t_pattern . '$@', $t_url, $t_matches ) ) {
+	} else if( !empty( $t_short_path )
+			&& preg_match( '@^(?P<path>' . preg_quote( $t_short_path, '@' ) . ')' . $t_pattern . '$@', $t_url, $t_matches )
+	) {
 		$t_type = 2;
 	} else if( preg_match( '@^(?P<path>)' . $t_pattern . '$@', $t_url, $t_matches ) ) {
 		$t_type = 3;
