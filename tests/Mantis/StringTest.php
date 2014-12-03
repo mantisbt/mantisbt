@@ -47,6 +47,14 @@ class Mantis_StringTest extends PHPUnit_Framework_TestCase {
 	{
 		$a = string_sanitize_url($in, false);
 		$this->assertEquals( $out, $a );
+
+		# Since unit tests are run from command-line, with a default MantisBT
+		# config $g_short_path will be that of the phpunit binary. We also
+		# need to cover the case of Mantis being installed at the server's
+		# root (i.e. $g_short_path = '/')
+		config_set_global('short_path', '/');
+		$a = string_sanitize_url($in, false);
+		$this->assertEquals( $out, $a );
 	}
 
 	public function provider()
@@ -67,6 +75,7 @@ class Mantis_StringTest extends PHPUnit_Framework_TestCase {
 			array( 'plugin.php?page=Source/index', 'plugin.php?page=Source%2Findex'),
 			array( 'plugin.php?page=Source/list&id=1', 'plugin.php?page=Source%2Flist&id=1'),
 			array( 'plugin.php?page=Source/list&id=1#abc', 'plugin.php?page=Source%2Flist&id=1#abc'),
+			array( 'login_page.php?return=http://google.com/', 'index.php'),
 		);
 
 		/* @FIXME
