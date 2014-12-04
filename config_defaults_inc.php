@@ -2085,6 +2085,13 @@ $g_preview_max_height = 250;
 $g_view_attachments_threshold = VIEWER;
 
 /**
+ * Extensions for files that can be viewed in browser.
+ * WARNING: Enabling this for some filetypes could be a potential security risk!
+ * @global array $g_view_file_extensions
+ */
+$g_view_file_extensions = array();
+
+/**
  * access level needed to download bug attachments
  * @global integer $g_download_attachments_threshold
  */
