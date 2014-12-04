@@ -493,7 +493,7 @@ div#lost-password-div,
 div#signup-div,
 div#select-project-div {
 	width: 65%;
-    max-width: 850px;
+	max-width: 850px;
 }
 div#adm-config-div {
 	max-width: 95%;
