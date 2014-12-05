@@ -64,8 +64,6 @@ layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'manage_custom_field_page.php' );
 
-print_manage_menu( 'manage_custom_field_edit_page.php' );
-
 $t_definition = custom_field_get_definition( $f_field_id );
 ?>
 <div class="col-md-12 col-xs-12">
@@ -113,7 +111,8 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			<?php echo lang_get( 'custom_field_possible_values' ) ?>
 		</td>
 		<td>
-			<input type="text" id="custom-field-possible-values" name="possible_values" class="input-sm" value="<?php echo string_attribute( $t_definition['possible_values'] ) ?>" />
+			<input type="text" id="custom-field-possible-values" name="possible_values" class="input-sm" size="80%" value="<?php echo string_attribute( $t_definition['possible_values'] ) ?>" />
+            <small>(separate list items by "|")</small>
 		</td>
 	</tr>
 	<tr>
@@ -155,28 +154,38 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			</label>
 		</td>
 	</tr>
-	<div class="field-container">
-		<label for="custom-field-length-min"><span><?php echo lang_get( 'custom_field_length_min' ) ?></span></label>
-		<span class="input"><input type="text" id="custom-field-length-min" name="length_min" size="32" maxlength="64" value="<?php echo $t_definition['length_min'] ?>" /></span>
-		<span class="label-style"></span>
-	</div>
-	<div class="field-container">
-		<label for="custom-field-length-max"><span><?php echo lang_get( 'custom_field_length_max' ) ?></span></label>
-		<span class="input"><input type="text" id="custom-field-length-max" name="length_max" size="32" maxlength="64" value="<?php echo $t_definition['length_max'] ?>" /></span>
-		<span class="label-style"></span>
-	</div>
-	<div class="field-container">
-		<label for="custom-field-filter-by"><span><?php echo lang_get( 'custom_field_filter_by' ) ?></span></label>
-				<span class="checkbox">
-					<input type="checkbox" id="custom-field-filter-by" name="filter_by"
-						<?php
-						if( $t_definition['filter_by'] ) {
-							echo 'checked="checked"';
-						}
-						?> />
-				</span>
-		<span class="label-style"></span>
-	</div>
+    <tr>
+        <td class="category">
+            <?php echo lang_get( 'custom_field_length_min' ) ?>
+        </td>
+        <td>
+            <input type="text" id="custom-field-length-min" name="length_min" class="input-sm" size="32" maxlength="64" value="<?php echo $t_definition['length_min'] ?>" />
+        </td>
+    </tr>
+    <tr>
+        <td class="category">
+            <?php echo lang_get( 'custom_field_length_min' ) ?>
+        </td>
+        <td>
+            <input type="text" id="custom-field-length-max" name="length_max" class="input-sm" size="32" maxlength="64" value="<?php echo $t_definition['length_max'] ?>" />
+        </td>
+    </tr>
+    <tr>
+        <td class="category">
+            <?php echo lang_get( 'custom_field_filter_by' ) ?>
+        </td>
+        <td>
+            <label>
+                <input type="checkbox" class="ace" id="custom-field-filter-by" name="filter_by" value="1"
+                    <?php
+                    if( $t_definition['filter_by'] ) {
+                        echo 'checked="checked"';
+                    }
+                    ?> />
+                <span class="lbl"></span>
+            </label>
+        </td>
+    </tr>
 	<tr>
 		<td class="category">
 			<?php echo lang_get( 'custom_field_display_report' ) ?>

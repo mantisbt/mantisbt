@@ -109,7 +109,6 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 	<div class="table-responsive">
 		<table class="table table-bordered table-condensed table-striped">
 		<fieldset>
-			<legend><span><?php echo lang_get( 'edit_project_title' ) ?></span></legend>
 			<?php echo form_security_field( 'manage_proj_update' ) ?>
 			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
 			<tr>
@@ -186,7 +185,7 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 					<?php echo lang_get( 'description' ) ?>
 				</td>
 				<td>
-					<textarea class="form-control" id="project-description" name="description" cols="70" rows="5"><?php echo string_textarea( $row['description'] ) ?></textarea>
+					<textarea class="form-control" id="project-description" name="description" cols="70" rows="5"><?php echo string_textarea( $t_row['description'] ) ?></textarea>
 				</td>
 			</tr>
 

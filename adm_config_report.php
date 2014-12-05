@@ -409,7 +409,7 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 
 ?>
 <!-- Repeated Info Rows -->
-			<tr width="100%">
+			<tr>
 				<td>
 					<?php echo ($v_user_id == 0) ? lang_get( 'all_users' ) : string_display_line( user_get_name( $v_user_id ) ) ?>
 				</td>

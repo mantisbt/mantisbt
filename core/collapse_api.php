@@ -174,10 +174,10 @@ function collapse_display( $p_block ) {
 	global $g_collapse_cache_token;
 
 	if( !isset( $g_collapse_cache_token[$p_block] ) ) {
-		return true;
+		return false;
 	}
 
-	return( true == $g_collapse_cache_token[$p_block] );
+	return( false == $g_collapse_cache_token[$p_block] );
 }
 
 /**

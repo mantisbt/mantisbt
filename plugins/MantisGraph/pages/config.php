@@ -31,8 +31,6 @@ layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'manage_plugin_page.php' );
 
-print_manage_menu( );
-
 $g_current_font_selected = array(
 	'arial' => false,
 	'verdana' => false,
@@ -146,17 +144,14 @@ function print_font_checked( $p_font_name ) {
 				<input type="radio" class="ace" name="font" value="arial"<?php echo print_font_checked( 'arial' )?>/>
 				<span class="lbl"> Arial </span>
 			</label></div>
-		<br />
 		<div class="radio"><label>
 				<input type="radio" class="ace" name="font" value="verdana"<?php echo print_font_checked( 'verdana' )?>/>
 				<span class="lbl"> Verdana </span>
 			</label></div>
-		<br />
 		<div class="radio"><label>
 				<input type="radio" class="ace" name="font" value="trebuchet"<?php echo print_font_checked( 'trebuchet' )?>/>
 				<span class="lbl"> Trebuchet </span>
 			</label></div>
-		<br />
 		<div class="radio"><label>
 				<input type="radio" class="ace" name="font" value="verasans"<?php echo print_font_checked( 'verasans' )?>/>
 				<span class="lbl"> Vera Sans </span>
@@ -168,12 +163,10 @@ function print_font_checked( $p_font_name ) {
 				<input type="radio" class="ace" name="font" value="times"<?php echo print_font_checked( 'times' )?>/>
 				<span class="lbl">  Times </span>
 			</label></div>
-		<br />
 		<div class="radio"><label>
 				<input type="radio" class="ace" name="font" value="georgia"<?php echo print_font_checked( 'georgia' )?>/>
 				<span class="lbl"> Georgia </span>
 			</label></div>
-		<br />
 		<div class="radio"><label>
 				<input type="radio" class="ace" name="font" value="veraserif"<?php echo print_font_checked( 'veraserif' )?>/>
 				<span class="lbl"> Vera Serif </span>
@@ -183,7 +176,6 @@ function print_font_checked( $p_font_name ) {
 				<input type="radio" class="ace" name="font" value="courier"<?php echo print_font_checked( 'courier' )?>/>
 				<span class="lbl"> Courier </span>
 			</label></div>
-		<br />
 		<div class="radio"><label>
 				<input type="radio" class="ace" name="font" value="veramono"<?php echo print_font_checked( 'veramono' )?>/>
 				<span class="lbl"> Vera Mono </span>

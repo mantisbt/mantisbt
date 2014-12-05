@@ -119,7 +119,7 @@ print_manage_menu( 'manage_proj_ver_edit_page.php' );
 				</td>
 				<td>
 					<label>
-						<input type="checkbox" class="ace" id="proj-version-released" name="released" <?php check_checked( (int)$t_version->released, VERSION_RELEASED ); ?> />
+						<input type="checkbox" class="ace" id="proj-version-released" name="released" <?php check_checked( (boolean)$t_version->released, VERSION_RELEASED ); ?> />
 						<span class="lbl"></span>
 					</label>
 				</td>
