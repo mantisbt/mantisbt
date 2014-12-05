@@ -64,7 +64,7 @@ function collapse_open( $p_name, $p_section = '', $p_css_class = '' ) {
 	global $g_current_collapse_section, $g_open_collapse_section;
 
 	$t_block = ( is_blank( $p_section ) ? $p_name : $p_section . '_' . $p_name );
-	$t_display = collapse_display( $t_block );
+	$t_display = is_collapsed( $t_block );
 
 	# make sure no other collapse section is started
 	if( $g_current_collapse_section !== null ) {
@@ -96,7 +96,7 @@ function collapse_closed( $p_name, $p_section = '' ) {
 	global $g_current_collapse_section, $g_open_collapse_section;
 
 	$t_block = ( is_blank( $p_section ) ? $p_name : $p_section . '_' . $p_name );
-	$t_display = !collapse_display( $t_block );
+	$t_display = !is_collapsed( $t_block );
 
 	# Make sure a section is opened, and it is the same section.
 	if( $t_block !== $g_current_collapse_section ) {
@@ -148,7 +148,7 @@ function collapse_end( $p_name, $p_section = '' ) {
 	global $g_current_collapse_section, $g_open_collapse_section;
 
 	$t_block = ( is_blank( $p_section ) ? $p_name : $p_section . '_' . $p_name );
-	collapse_display( $t_block );
+	is_collapsed( $t_block );
 
 	# Make sure a section is opened, and it is the same section.
 	if( $t_block !== $g_current_collapse_section ) {
@@ -166,18 +166,18 @@ function collapse_end( $p_name, $p_section = '' ) {
 }
 
 /**
- * Determine if a block should be displayed open by default.
+ * Determine if a block should be collapsed by default.
  * @param string $p_block Collapse block.
  * @return boolean
  */
-function collapse_display( $p_block ) {
+function is_collapsed( $p_block ) {
 	global $g_collapse_cache_token;
 
 	if( !isset( $g_collapse_cache_token[$p_block] ) ) {
 		return false;
 	}
 
-	return( false == $g_collapse_cache_token[$p_block] );
+	return( true == $g_collapse_cache_token[$p_block] );
 }
 
 /**

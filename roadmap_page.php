@@ -90,7 +90,7 @@ function print_version_header( array $p_version_row ) {
 	}
 
 	$t_block_id = 'roadmap_' . $t_version_id;
-	$t_collapse_block = collapse_display( $t_block_id );
+	$t_collapse_block = is_collapsed( $t_block_id );
 	$t_block_css = $t_collapse_block ? 'collapsed' : '';
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 

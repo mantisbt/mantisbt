@@ -57,7 +57,7 @@ if( !access_has_bug_level( $t_access_level_needed, $f_bug_id ) ) {
         <div class="space-10"></div>
 
 <?php
-	$t_collapse_block = collapse_display( 'history' );
+	$t_collapse_block = is_collapsed( 'history' );
 	$t_block_css = $t_collapse_block ? 'collapsed' : '';
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	$t_history = history_get_events_array( $f_bug_id );

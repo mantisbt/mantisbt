@@ -91,7 +91,7 @@ $t_num_notes = count( $t_bugnotes );
 <div class="space-10"></div>
 
 <?php
-$t_collapse_block = collapse_display( 'bugnotes' );
+$t_collapse_block = is_collapsed( 'bugnotes' );
 $t_block_css = $t_collapse_block ? 'collapsed' : '';
 $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 

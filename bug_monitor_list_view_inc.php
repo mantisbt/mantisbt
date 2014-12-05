@@ -56,7 +56,7 @@ if( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_id
 	echo '<a id="monitors"></a>';
 	echo '<div class="space-10"></div>';
 
-	$t_collapse_block = collapse_display( 'monitoring' );
+	$t_collapse_block = is_collapsed( 'monitoring' );
 	$t_block_css = $t_collapse_block ? 'collapsed' : '';
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 ?>

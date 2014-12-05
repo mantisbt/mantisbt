@@ -52,7 +52,7 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 <div class="col-md-6 col-xs-12">
 	<div class="space-10"></div>
 <?php
-	$t_collapse_block = collapse_display( 'upload_form' );
+	$t_collapse_block = is_collapsed( 'upload_form' );
 	$t_block_css = $t_collapse_block ? 'collapsed' : '';
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );

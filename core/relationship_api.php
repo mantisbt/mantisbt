@@ -808,7 +808,7 @@ function relationship_view_box( $p_bug_id ) {
 	<div class="space-10"></div>
 
 	<?php
-	$t_collapse_block = collapse_display( 'relationships' );
+	$t_collapse_block = is_collapsed( 'relationships' );
 	$t_block_css = $t_collapse_block ? 'collapsed' : '';
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	?>

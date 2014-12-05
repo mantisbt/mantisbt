@@ -763,7 +763,7 @@ function layout_print_sidebar( $p_active_sidebar_page = null ) {
  * @return null
  */
 function layout_sidebar_begin() {
-	$t_collapse_block = collapse_display( 'sidebar' );
+	$t_collapse_block = is_collapsed( 'sidebar' );
 	$t_block_css = $t_collapse_block ? 'menu-min' : '';
 
 	echo '<div id="sidebar" class="sidebar sidebar-fixed responsive compact ' . $t_block_css . '">';
@@ -803,7 +803,7 @@ function layout_sidebar_menu( $p_page, $p_title, $p_icon, $p_active_sidebar_page
 function layout_sidebar_end() {
 	echo '</ul>';
 
-	$t_collapse_block = collapse_display( 'sidebar' );
+	$t_collapse_block = is_collapsed( 'sidebar' );
 
 	echo '<div id="sidebar" class="sidebar-toggle sidebar-collapse">';
 	if( layout_is_rtl() ) {

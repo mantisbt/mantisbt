@@ -281,7 +281,7 @@ $t_filter = array_merge( $c_filter[$t_box_title], $t_filter );
 
 $t_box_title_label = lang_get( 'my_view_title_' . $t_box_title );
 
-$t_collapse_block = collapse_display( $t_box_title_label );
+$t_collapse_block = is_collapsed( $t_box_title );
 $t_block_css = $t_collapse_block ? 'collapsed' : '';
 $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 

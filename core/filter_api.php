@@ -2170,7 +2170,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		?>
 
 		<?php
-		$t_collapse_block = collapse_display( 'filter' );
+		$t_collapse_block = is_collapsed( 'filter' );
 		$t_block_css = $t_collapse_block ? 'collapsed' : '';
 		$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		?>

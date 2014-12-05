@@ -94,7 +94,7 @@ function print_version_header( $p_version_id ) {
 	}
 
 	$t_block_id = 'changelog_' . $p_version_id;
-	$t_collapse_block = collapse_display( $t_block_id );
+	$t_collapse_block = is_collapsed( $t_block_id );
 	$t_block_css = $t_collapse_block ? 'collapsed' : '';
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 
