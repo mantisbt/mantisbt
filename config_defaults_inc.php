@@ -1451,7 +1451,7 @@
 	 * 'DATE' parameter is used to order by submission date, not by last modification date
 	 * @global string $g_bugnote_ordered_by
 	 */
-	$g_bugnote_ordered_by		= 'SUBMISSION_DATE';
+	$g_bugnote_ordered_by		= 'ID';
 
 	/*********************************
 	 * MantisBT Bug History Settings *
