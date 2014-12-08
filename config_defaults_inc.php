@@ -1447,10 +1447,11 @@
 	
 	/**
 	 * bug notes ordering
-	 * change to 'DATE' or 'ID'
+	 * change to 'SUBMISSION_DATE' 'MODIFICATION_DATE' or 'ID'
+	 * 'DATE' parameter is used to order by submission date, not by last modification date
 	 * @global string $g_bugnote_ordered_by
 	 */
-	$g_bugnote_ordered_by		= 'DATE';
+	$g_bugnote_ordered_by		= 'SUBMISSION_DATE';
 
 	/*********************************
 	 * MantisBT Bug History Settings *

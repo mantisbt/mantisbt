@@ -44,8 +44,11 @@
 	# get the bugnote data
 	$t_bugnote_order = current_user_get_pref( 'bugnote_order' );
 
-	if(config_get( 'bugnote_ordered_by' )=='DATE'){
+	if(config_get( 'bugnote_ordered_by' )=='SUBMISSION_DATE'){
 		$s_order_by = 'date_submitted';
+	}
+	if(config_get( 'bugnote_ordered_by' )=='MODIFICATION_DATE'){
+		$s_order_by = 'last_modified';
 	}
 	else if(config_get( 'bugnote_ordered_by' )=='ID'){
 		$s_order_by = 'id';
