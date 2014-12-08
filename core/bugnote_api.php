@@ -389,13 +389,61 @@ function bugnote_get_all_visible_bugnotes( $p_bug_id, $p_user_bugnote_order, $p_
 			$t_bugnotes[$t_bugnotes_found++] = $t_bugnote;
 		}
 	}
-
-	# reverse the list for users with ascending view preferences
-	if ( 'ASC' == $p_user_bugnote_order ) {
+	if(config_get( 'bugnote_ordered_by' )=='SUBMISSION_DATE'){
+		// ordered by 'date_submitted'
+		usort($t_bugnotes, "CompareNotesByDateSub");
+	}
+		
+	if(config_get( 'bugnote_ordered_by' )=='MODIFICATION_DATE'){
+		// ordered by 'last_modified'
+		usort($t_bugnotes, "CompareNotesByDateMod");
+	}
+	else if(config_get( 'bugnote_ordered_by' )=='ID'){
+		// ordered by 'id'
+		usort($t_bugnotes, "CompareNotesById");
+	}
+	//}
+	# reverse the list for users with descending view preferences
+	if ( 'DESC' == $p_user_bugnote_order ) {
 		$t_bugnotes = array_reverse( $t_bugnotes );
 	}
 
 	return $t_bugnotes;
+}
+/**
+ * user-defined comparison function used by usort when ordering bugnotes by ID
+ * @access public
+ */
+function CompareNotesById($a, $b)
+{
+	if ($a->id == $b->id) {
+        return 0;
+    }
+    return ($a->id < $b->id) ? -1 : 1;
+}
+
+/**
+ * user-defined comparison function used by usort when ordering bugnotes by SUBMISSION_DATE
+ * @access public
+ */
+function CompareNotesByDateSub($a, $b)
+{
+	if ($a->date_submitted == $b->date_submitted) {
+        return 0;
+    }
+    return ($a->date_submitted < $b->date_submitted) ? -1 : 1;
+}
+
+/**
+ * user-defined comparison function used by usort when ordering bugnotes by MODIFICATION_DATE
+ * @access public
+ */
+function CompareNotesByDateMod($a, $b)
+{
+	if ($a->last_modified == $b->last_modified) {
+        return 0;
+    }
+    return ($a->last_modified < $b->last_modified) ? -1 : 1;
 }
 
 /**
@@ -714,3 +762,4 @@ function bugnote_clear_cache( $p_bugnote_id = null ) {
 
 	return true;
 }
+
