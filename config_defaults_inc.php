@@ -1258,7 +1258,7 @@
 	 * @global string $g_default_bugnote_order
 	 */
 	$g_default_bugnote_order		= 'ASC';
-
+	
 	/**
 	 *
 	 * @global int $g_default_email_on_new
@@ -1444,6 +1444,13 @@
 	 * @global string $g_bugnote_order
 	 */
 	$g_bugnote_order		= 'DESC';
+	
+	/**
+	 * bug notes ordering
+	 * change to 'DATE' or 'ID'
+	 * @global string $g_bugnote_ordered_by
+	 */
+	$g_bugnote_ordered_by		= 'DATE';
 
 	/*********************************
 	 * MantisBT Bug History Settings *
