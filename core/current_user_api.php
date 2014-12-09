@@ -44,6 +44,30 @@ require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
+/**
+ * Sets the current user
+ *
+ * @param integer $p_user_id Id to set as current user
+ * @return Old current user id
+ * @access public
+ */
+function current_user_set( $p_user_id ) {
+	global $g_cache_current_user_id;
+	global $g_cache_current_user_pref;
+
+	if( $p_user_id == $g_cache_current_user_id ) {
+		return $p_user_id;
+	}
+
+	$t_old_current = $g_cache_current_user_id;
+	$g_cache_current_user_id = $p_user_id;
+
+	# Clear current user preferences cache
+	$g_cache_current_user_pref = array();
+
+	return $t_old_current;
+}
+
 # ## Current User API ###
 # Wrappers around the User API that pass in the logged-in user for you
 /**
