@@ -48,6 +48,7 @@
  * @author Khutuck
  * @author Korayal
  * @author Meelo
+ * @author Sayginer
  * @author Thinkfast
  * @author Trockya
  * @author Violetanka
@@ -67,6 +68,7 @@ $s_actiongroup_menu_update_view_status = 'Görünüm durumunu güncelleştir';
 $s_actiongroup_menu_update_category = 'Kategori Güncelle';
 $s_actiongroup_menu_set_sticky = 'Kalıcı olarak Ayarla/Ayarı Kaldır';
 $s_actiongroup_menu_update_field = '%1$s Güncelle';
+$s_actiongroup_menu_update_product_version = 'Ürün Sürümünü Güncelle';
 $s_actiongroup_menu_update_target_version = 'Hedef Sürümü Güncelle';
 $s_actiongroup_menu_update_fixed_in_version = 'Versiyondaki Düzeltmeleri Güncelle';
 $s_actiongroup_menu_update_product_build = 'Ürün Sürümünü Güncelle';
@@ -174,6 +176,7 @@ $s_status_group_bugs_button = 'Durumu Güncelle';
 $s_category_group_bugs_button = 'Kategori Güncelle';
 $s_view_status_group_bugs_button = 'Görünüm durumunu güncelleştir';
 $s_set_sticky_group_bugs_button = 'Kalıcı olarak Ayarla/Ayarı Kaldır';
+$s_product_version_group_bugs_button = 'Ürün Sürümünü Güncelle';
 $s_fixed_in_version_group_bugs_button = 'Versiyondaki Düzeltmeleri Güncelle';
 $s_target_version_group_bugs_button = 'Hedef Sürümü Güncelle';
 $s_update_severity_title = 'Önem düzeyi güncelleştirme';
@@ -254,6 +257,7 @@ $s_email_notification_title_for_action_monitor = '%1$s sorunu %2$s kullanıcıs�
 $s_email_reporter = 'Bildirici';
 $s_email_handler = 'İlgili';
 $s_email_project = 'Proje';
+$s_email_project_label = 'Proje:';
 $s_email_bug = 'Sorun No';
 $s_email_category = 'Kategori';
 $s_email_reproducibility = 'Tekrarlanabilirlik';

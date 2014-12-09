@@ -135,7 +135,6 @@ function show_revision( array $p_revision ) {
 	$t_by_string = sprintf( lang_get( 'revision_by' ), string_display_line( date( config_get( 'normal_date_format' ), $p_revision['timestamp'] ) ), prepare_user_name( $p_revision['user_id'] ) );
 
 ?>
-<tr class="spacer"><td><a id="revision-<?php echo $p_revision['id'] ?>"></a></td></tr>
 
 <tr>
 <th class="category"><?php echo lang_get( 'revision' ) ?></th>
@@ -146,12 +145,22 @@ function show_revision( array $p_revision ) {
 } ?>
 </tr>
 
-<tr>
-<th class="category"><?php echo $t_label ?></th>
-<td colspan="3"><?php echo string_display_links( $p_revision['value'] ) ?></td>
-</tr>
+		<tr>
+			<th class="category"><?php echo lang_get( 'revision' ) ?></th>
+			<td colspan="2"><?php echo $t_by_string ?></td>
+			<td class="center" width="5%">
+<?php
+	if( $s_can_drop ) {
+		print_bracket_link( 'bug_revision_drop.php?id=' . $p_revision['id'] . $s_drop_token, lang_get( 'revision_drop' ) );
+	}
+?>
+		</tr>
 
-	<?php
+		<tr>
+			<th class="category"><?php echo $t_label ?></th>
+			<td colspan="3"><?php echo string_display_links( $p_revision['value'] ) ?></td>
+		</tr>
+<?php
 }
 
 layout_page_header( bug_format_summary( $t_bug_id, SUMMARY_CAPTION ) );

@@ -50,7 +50,7 @@ $f_news_id		= gpc_get_int( 'news_id' );
 $f_project_id	= gpc_get_int( 'project_id' );
 $f_view_state	= gpc_get_int( 'view_state' );
 $f_headline		= gpc_get_string( 'headline' );
-$f_announcement	= gpc_get_string( 'announcement', '' );
+$f_announcement	= gpc_get_bool( 'announcement' );
 $f_body			= gpc_get_string( 'body', '' );
 
 $t_row = news_get_row( $f_news_id );

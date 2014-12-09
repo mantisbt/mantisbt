@@ -15,7 +15,7 @@ tr.spacer			{ background-color: #ffffff !important; color: #000000; height: 5px;
 /**
  * view_all_bug_page.php
  */
-#buglist td, th			{ text-align: center; }
+#buglist td, #buglist th	{ text-align: center; }
 #buglist .column-summary,
 #buglist .column-description,
 #buglist .column-steps-to-reproduce,

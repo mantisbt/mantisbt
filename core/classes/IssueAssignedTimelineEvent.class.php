@@ -64,9 +64,12 @@ class IssueAssignedTimelineEvent extends TimelineEvent {
 		if( $this->user_id == $this->handler_id ) {
 			$t_html = $this->html_start( 'fa-flag-o' );
 			$t_string = sprintf( lang_get( 'timeline_issue_assigned_to_self' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
-		} else {
+		} else if( $this->handler_id != NO_USER ) {
 			$t_html = $this->html_start( 'fa-hand-o-right' );
 			$t_string = sprintf( lang_get( 'timeline_issue_assigned' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ), user_get_name( $this->handler_id ) );
+		} else {
+            $t_html = $this->html_start( 'fa-flag-o' );
+			$t_string = sprintf( lang_get( 'timeline_issue_unassigned' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
 		}
 
 		$t_html .= '<div class="action">' . $t_string . '</div>';

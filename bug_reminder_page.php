@@ -90,24 +90,19 @@ layout_page_begin();
 	<th class="category">
 		<?php echo lang_get( 'to' ) ?>
 	</th>
-	<th class="category">
-		<?php echo lang_get( 'reminder' ) ?>
-	</th>
-</tr>
-<tr>
 	<td>
 		<select name="to[]" multiple="multiple" size="9" class="width-100">
 			<?php
-				$t_project_id = bug_get_field( $f_bug_id, 'project_id' );
-				$t_access_level = config_get( 'reminder_receive_threshold' );
-				if( $t_bug->view_state === VS_PRIVATE ) {
-					$t_private_bug_threshold = config_get( 'private_bug_threshold' );
-					if( $t_private_bug_threshold > $t_access_level ) {
-						$t_access_level = $t_private_bug_threshold;
-					}
+			$t_project_id = bug_get_field( $f_bug_id, 'project_id' );
+			$t_access_level = config_get( 'reminder_receive_threshold' );
+			if( $t_bug->view_state === VS_PRIVATE ) {
+				$t_private_bug_threshold = config_get( 'private_bug_threshold' );
+				if( $t_private_bug_threshold > $t_access_level ) {
+					$t_access_level = $t_private_bug_threshold;
 				}
-				$t_selected_user_id = 0;
-				print_user_option_list( $t_selected_user_id, $t_project_id, $t_access_level );
+			}
+			$t_selected_user_id = 0;
+			print_user_option_list( $t_selected_user_id, $t_project_id, $t_access_level );
 			?>
 		</select>
 	</td>

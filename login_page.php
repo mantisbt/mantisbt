@@ -53,13 +53,18 @@ require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 require_css( 'login.css' );
 
-$f_error		 = gpc_get_bool( 'error' );
-$f_cookie_error		 = gpc_get_bool( 'cookie_error' );
-$f_return		 = string_sanitize_url( gpc_get_string( 'return', '' ) );
-$f_username		 = gpc_get_string( 'username', '' );
-$f_perm_login		 = gpc_get_bool( 'perm_login', false );
-$f_secure_session	 = gpc_get_bool( 'secure_session', false );
+$f_error                 = gpc_get_bool( 'error' );
+$f_cookie_error          = gpc_get_bool( 'cookie_error' );
+$f_return                = string_sanitize_url( gpc_get_string( 'return', '' ) );
+$f_username              = gpc_get_string( 'username', '' );
+$f_perm_login            = gpc_get_bool( 'perm_login', false );
+$f_secure_session        = gpc_get_bool( 'secure_session', false );
 $f_secure_session_cookie = gpc_get_cookie( config_get_global( 'cookie_prefix' ) . '_secure_session', null );
+
+# Set username to blank if invalid to prevent possible XSS exploits
+if( !user_is_name_valid( $f_username ) ) {
+	$f_username = '';
+}
 
 $t_session_validation = ( ON == config_get_global( 'session_validation' ) );
 

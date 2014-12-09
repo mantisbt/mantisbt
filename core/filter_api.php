@@ -640,8 +640,20 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 			unset( $t_fields[$i] );
 		}
 	}
+
+	# Make sure array is no longer than 2 elements
 	$t_sort_fields = explode( ',', $p_filter_arr['sort'] );
+	if( count( $t_sort_fields ) > 2 ) {
+		$t_sort_fields = array_slice( $t_sort_fields, 0, 2 );
+	}
+
+	# Make sure array is no longer than 2 elements
 	$t_dir_fields = explode( ',', $p_filter_arr['dir'] );
+	if( count( $t_dir_fields ) > 2 ) {
+		$t_dir_fields = array_slice( $t_dir_fields, 0, 2 );
+	}
+
+	# Validate the max of two segments for $t_sort_fields and $t_dir_fields
 	for( $i = 0;$i < 2;$i++ ) {
 		if( isset( $t_sort_fields[$i] ) ) {
 			$t_drop = false;

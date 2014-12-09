@@ -43,6 +43,7 @@
  * @author Firesueprtom
  * @author Frankou
  * @author LNDDYL
+ * @author Liuxinyu970226
  * @author Mark85296341
  * @author Oapbtommy
  * @author Simon Shek
@@ -496,7 +497,7 @@ $s_error_database_version_out_of_date_2 = '<strong>請注意:</strong> 資料庫
 $s_error_code_version_out_of_date = '<strong>請注意:</strong> 資料庫結構已為最新版，您的程式尚為舊版，請升級您的程式以配合資料庫的使用。';
 $s_login_page_info = '歡迎使用問題追蹤系統';
 $s_login_title = '登入';
-$s_save_login = '記住我的登入資訊';
+$s_save_login = '於此瀏覽器記住我的登入資訊';
 $s_secure_session = '使用安全性工作階段連線';
 $s_secure_session_long = '僅允許來自目前 IP 位置的工作階段連線';
 $s_choose_project = '選擇專案';
@@ -722,7 +723,7 @@ $s_reset_password_button = '重設密碼';
 $s_delete_user_button = '刪除使用者';
 $s_reset_password_msg = '重設密碼會以 E-mail 寄送確認 URL。';
 $s_reset_password_msg2 = '重新設定密碼為空白。';
-$s_show_all_users = '全部使用者';
+$s_show_all_users = '全部';
 $s_users_unused = '未使用';
 $s_users_new = '新增';
 $s_account_reset_protected_msg = '帳號受保護。無法重設密碼。';
