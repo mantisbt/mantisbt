@@ -285,7 +285,7 @@ function auth_attempt_script_login( $p_username, $p_password = null ) {
 	$g_script_login_cookie = $t_user['cookie_string'];
 
 	# cache user id for future reference
-	$g_cache_current_user_id = $t_user_id;
+	current_user_set( $t_user_id );
 
 	return true;
 }
@@ -300,7 +300,7 @@ function auth_logout() {
 
 	# clear cached userid
 	user_clear_cache( $g_cache_current_user_id );
-	$g_cache_current_user_id = null;
+	current_user_set( null );
 	$g_cache_cookie_valid = null;
 
 	# clear cookies, if they were set
@@ -602,7 +602,7 @@ function auth_get_current_user_cookie( $p_login_anonymous=true ) {
 						$t_cookie = $row['cookie_string'];
 
 						$g_cache_anonymous_user_cookie_string = $t_cookie;
-						$g_cache_current_user_id = $row['id'];
+						current_user_set( $row['id'] );
 					}
 				}
 			} else {
@@ -803,7 +803,7 @@ function auth_get_current_user_id() {
 
 	if( $t_result = user_search_cache( 'cookie_string', $t_cookie_string ) ) {
 		$t_user_id = (int) $t_result['id'];
-		$g_cache_current_user_id = $t_user_id;
+		current_user_set( $t_user_id );
 		return $t_user_id;
 	}
 
@@ -824,7 +824,7 @@ function auth_get_current_user_id() {
 	}
 
 	$t_user_id = (int) db_result( $result );
-	$g_cache_current_user_id = $t_user_id;
+	current_user_set( $t_user_id );
 
 	return $t_user_id;
 }
