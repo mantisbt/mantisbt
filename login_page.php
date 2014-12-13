@@ -140,7 +140,7 @@ if( $f_error || $f_cookie_error ) {
 
 $t_warnings = array();
 $t_upgrade_required = false;
-if( config_get_global( 'admin_checks' ) == ON ) {
+if( config_get_global( 'admin_checks' ) == ON && file_exists( dirname( __FILE__ ) .'/admin' ) ) {
 	# Generate a warning if default user administrator/root is valid.
 	$t_admin_user_id = user_get_id_by_name( 'administrator' );
 	if( $t_admin_user_id !== false ) {
