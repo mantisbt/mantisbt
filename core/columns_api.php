@@ -1046,19 +1046,8 @@ function print_column_plugin( $p_column_object, BugData $p_bug, $p_columns_targe
  * @access public
  */
 function print_column_edit( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	global $t_icon_path;
-
 	echo '<td class="column-edit">';
-
-	if( !bug_is_readonly( $p_bug->id ) && access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug->id ) ) {
-		echo '<a href="' . string_get_bug_update_url( $p_bug->id ) . '">';
-		echo '<img width="16" height="16" src="' . $t_icon_path . 'update.png';
-		echo '" alt="' . lang_get( 'update_bug_button' ) . '"';
-		echo ' title="' . lang_get( 'update_bug_button' ) . '" /></a>';
-	} else {
-		echo '&#160;';
-	}
-
+	print_bug_edit_button( $p_bug->id );
 	echo '</td>';
 }
 

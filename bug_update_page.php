@@ -161,6 +161,9 @@ if( $t_show_due_date ) {
 	require_css( 'calendar-blue.css' );
 }
 
+# Don't index edit pages
+html_robots_noindex_nofollow();
+
 html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 
 print_recently_visited();

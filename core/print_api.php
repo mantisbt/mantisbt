@@ -1960,3 +1960,24 @@ function print_max_filesize( $p_size, $p_divider = 1000, $p_unit = 'kb' ) {
 		. get_filesize_info( $p_size / $p_divider, lang_get( $p_unit ) );
 	echo '</span>';
 }
+
+/**
+ * Prints the bug edit button based on access checks.
+ *
+ * @param integer $p_bug_id  The bug id.
+ * @return void
+ */
+function print_bug_edit_button( $p_bug_id ) {
+	if( !bug_is_readonly( $p_bug_id ) && access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
+		global $t_icon_path;
+
+		$t_update_bug_button_text = lang_get( 'update_bug_button' );
+
+		# Make this a hyperlink in CSS to avoid crawlers traversing links to update issue pages.
+		echo '<img class="click-url" width="16" height="16" src="' . $t_icon_path . 'update.png"';
+		echo ' alt="' . $t_update_bug_button_text . '"';
+		echo ' url="' . string_get_bug_update_url( $p_bug_id ) . '"';
+		echo ' title="' . $t_update_bug_button_text . '" />';
+	}
+}
+
