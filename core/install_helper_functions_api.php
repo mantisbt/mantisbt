@@ -458,7 +458,7 @@ function install_stored_filter_migrate() {
 					$t_filter_arr = unserialize( $t_setting_arr[1] );
 					break;
 				default:
-					$t_filter_arr = json_decode( $t_setting_arr[1] );
+					$t_filter_arr = json_decode( $t_setting_arr[1], /* assoc array */ true );
 			}
 		} else {
 			$t_delete_query = 'DELETE FROM {filters} WHERE id=' . db_param();
