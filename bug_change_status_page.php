@@ -155,6 +155,7 @@ layout_page_begin();
 		<thead>
 					<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 					<input type="hidden" name="status" value="<?php echo $f_new_status ?>" />
+                    <input type="hidden" name="last_updated" value="<?php echo $t_bug->last_updated ?>" />
 <?php
 	if( $f_new_status >= $t_resolved ) {
 		if( relationship_can_resolve_bug( $f_bug_id ) == false ) {
