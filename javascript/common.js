@@ -247,6 +247,10 @@ $(document).ready( function() {
 		}
 		$(this).val(0);
 	});
+
+	$('.click-url').bind("click", function() {
+		window.location = $(this).attr("url");
+	});
 });
 
 function setBugLabel() {
@@ -361,3 +365,4 @@ function toggleDisplay(idTag)
 {
 	setDisplay( idTag, (document.getElementById(idTag).style.display == 'none')?1:0 );
 }
+

@@ -794,3 +794,6 @@ div.timeline p { margin-left: 3px; }
 /* bug_view_inc bug action buttons */
 .details-footer      { padding: 3px 10px 2px 0; }
 .details-buttons     { float: left;  width: auto; }
+
+.click-url { cursor: pointer; }
+

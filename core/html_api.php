@@ -142,6 +142,16 @@ function html_robots_noindex() {
 }
 
 /**
+ * This method must be called before the html_page_top* methods.  It marks the page as not
+ * for indexing and informs the crawler not to follow links within it.
+ * @return void
+ */
+function html_robots_noindex_nofollow() {
+	global $g_robots_meta;
+	$g_robots_meta = 'noindex,nofollow';
+}
+
+/**
  * Prints the link that allows auto-detection of the associated feed.
  * @return void
  */

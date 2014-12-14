@@ -351,9 +351,7 @@ for( $i = 0;$i < $t_count; $i++ ) {
 
 			echo '<br />';
 
-			if( !bug_is_readonly( $t_bug->id ) && access_has_bug_level( $t_update_bug_threshold, $t_bug->id ) ) {
-				echo '<a class="edit" href="' . string_get_bug_update_url( $t_bug->id ) . '"><img src="' . $t_icon_path . 'update.png' . '" alt="' . lang_get( 'update_bug_button' ) . '" /></a>';
-			}
+			print_bug_edit_button( $t_bug->id );
 
 			if( ON == config_get( 'show_priority_text' ) ) {
 				print_formatted_priority_string( $t_bug );
