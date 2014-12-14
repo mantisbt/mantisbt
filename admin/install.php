@@ -630,6 +630,12 @@ if( !$g_database_upgrade ) {
 		echo '<input id="' . $t_key . '" name="' . $t_key . '" type="textbox" value="' . $f_db_table_prefix . '">';
 		echo "\n\t</td>\n</tr>\n\n";
 	}
+
+	# Default timezone, get PHP setting if not defined in Mantis
+	$t_tz = config_get_global( 'default_timezone' );
+	if( is_blank( $t_tz ) ) {
+		$t_tz = @date_default_timezone_get();
+	}
 ?>
 <!-- Timezone -->
 <tr>
@@ -638,7 +644,7 @@ if( !$g_database_upgrade ) {
 	</td>
 	<td>
 		<select id="timezone" name="timezone">
-			<?php print_timezone_option_list( config_get_global( 'default_timezone' ) ) ?>
+			<?php print_timezone_option_list( $t_tz ) ?>
 		</select>
 	</td>
 </tr>
