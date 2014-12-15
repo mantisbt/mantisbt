@@ -44,10 +44,20 @@
 	# get the bugnote data
 	$t_bugnote_order = current_user_get_pref( 'bugnote_order' );
 
+	if(config_get( 'bugnote_ordered_by' )=='SUBMISSION_DATE'){
+		$s_order_by = 'date_submitted';
+	}
+	if(config_get( 'bugnote_ordered_by' )=='MODIFICATION_DATE'){
+		$s_order_by = 'last_modified';
+	}
+	else if(config_get( 'bugnote_ordered_by' )=='ID'){
+		$s_order_by = 'id';
+	}
+	
 	$query = "SELECT *
 			FROM $t_bugnote_table
 			WHERE bug_id=" . db_param() . " $t_restriction
-			ORDER BY date_submitted $t_bugnote_order";
+			ORDER BY ".$s_order_by." $t_bugnote_order";
 	$result = db_query_bound($query, Array( $c_bug_id ) );
 	$num_notes = db_num_rows($result);
 ?>

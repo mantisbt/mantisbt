@@ -1444,6 +1444,13 @@
 	 * @global string $g_bugnote_order
 	 */
 	$g_bugnote_order		= 'DESC';
+	
+	/**
+	 * bug notes ordering
+	 * change to 'SUBMISSION_DATE' 'MODIFICATION_DATE' or 'ID'
+	 * @global string $g_bugnote_ordered_by
+	 */
+	$g_bugnote_ordered_by		= 'ID';
 
 	/*********************************
 	 * MantisBT Bug History Settings *
