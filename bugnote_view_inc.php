@@ -167,10 +167,10 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 ?>
 <tr class="bugnote <?php echo $t_bugnote_css ?>" id="c<?php echo $t_bugnote->id ?>">
 		<td class="category">
-		<div class="pull-right"><?php print_avatar( $t_bugnote->reporter_id ); ?>
+		<div class="pull-left padding-2"><?php print_avatar( $t_bugnote->reporter_id ); ?>
 
 		</div>
-		<div class="pull-left">
+		<div class="pull-left padding-2">
 		<p class="no-margin">
 			<i class="fa fa-link grey"></i>
 			<a rel="bookmark" href="<?php echo string_get_bugnote_view_url($t_bugnote->bug_id, $t_bugnote->id) ?>" class="lighter" title="<?php echo lang_get( 'bugnote_link_title' ) ?>">
