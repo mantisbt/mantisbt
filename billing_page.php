@@ -48,8 +48,6 @@ layout_page_header( lang_get( 'time_tracking_billing_link' ) );
 layout_page_begin();
 ?>
 
-<br />
-
 <?php
 # Work break-down
 define( 'BILLING_INC_ALLOW', true );

@@ -53,10 +53,7 @@ if( OFF == config_get( 'time_tracking_enabled' ) ) {
 }
 ?>
 
-<a id="bugnotestats"></a><br />
-
 <?php
-collapse_open( 'bugnotestats' );
 
 $t_bugnote_stats_from_def = date( 'd:m:Y', $t_bug->date_submitted );
 $t_bugnote_stats_from_def_ar = explode( ':', $t_bugnote_stats_from_def );
@@ -80,45 +77,52 @@ $t_bugnote_stats_to_y = gpc_get_string( 'end_year', $t_bugnote_stats_to_def_y );
 
 $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 
+$t_collapse_block = is_collapsed( 'bugnotestats' );
+$t_block_css = $t_collapse_block ? 'collapsed' : '';
+$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
+
 # Time tracking date range input form
 # CSRF protection not required here - form does not result in modifications
 ?>
+<div class="col-md-12 col-xs-12">
+<a id="bugnotestats"></a>
+<div class="space-10"></div>
+<div id="bugnotestats" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
+
+    <div class="widget-header widget-header-small">
+        <h4 class="widget-title lighter">
+            <i class="ace-icon fa fa-clock-o"></i>
+            <?php echo lang_get( 'time_tracking' ) ?>
+        </h4>
+        <div class="widget-toolbar">
+            <a data-action="collapse" href="#">
+                <i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
+            </a>
+        </div>
+    </div>
 
 <form method="post" action="#bugnotestats">
+    <div class="widget-body">
+    <div class="widget-main">
 	<input type="hidden" name="id" value="<?php echo $f_bug_id ?>" />
-	<table class="width100" cellspacing="0">
-		<tr>
-			<td class="bold" colspan="4">
-				<?php
-					collapse_icon( 'bugnotestats' );
-					echo lang_get( 'time_tracking' )
-				?>
-			</td>
-		</tr>
-		<tr>
-			<td class="category" width="25%">
-				<?php
-					$t_filter = array();
-					$t_filter[FILTER_PROPERTY_FILTER_BY_DATE] = 'on';
-					$t_filter[FILTER_PROPERTY_START_DAY] = $t_bugnote_stats_from_d;
-					$t_filter[FILTER_PROPERTY_START_MONTH] = $t_bugnote_stats_from_m;
-					$t_filter[FILTER_PROPERTY_START_YEAR] = $t_bugnote_stats_from_y;
-					$t_filter[FILTER_PROPERTY_END_DAY] = $t_bugnote_stats_to_d;
-					$t_filter[FILTER_PROPERTY_END_MONTH] = $t_bugnote_stats_to_m;
-					$t_filter[FILTER_PROPERTY_END_YEAR] = $t_bugnote_stats_to_y;
-					print_filter_do_filter_by_date( true );
-				?>
-			</td>
-		</tr>
-		<tr>
-			<td class="center" colspan="2">
-				<input type="submit" class="button"
-					name="get_bugnote_stats_button"
-					value="<?php echo lang_get( 'time_tracking_get_info_button' ) ?>" />
-			</td>
-		</tr>
-	</table>
-</form>
+        <?php
+            $t_filter = array();
+            $t_filter[FILTER_PROPERTY_FILTER_BY_DATE] = 'on';
+            $t_filter[FILTER_PROPERTY_START_DAY] = $t_bugnote_stats_from_d;
+            $t_filter[FILTER_PROPERTY_START_MONTH] = $t_bugnote_stats_from_m;
+            $t_filter[FILTER_PROPERTY_START_YEAR] = $t_bugnote_stats_from_y;
+            $t_filter[FILTER_PROPERTY_END_DAY] = $t_bugnote_stats_to_d;
+            $t_filter[FILTER_PROPERTY_END_MONTH] = $t_bugnote_stats_to_m;
+            $t_filter[FILTER_PROPERTY_END_YEAR] = $t_bugnote_stats_to_y;
+            print_filter_do_filter_by_date( true );
+        ?>
+    </div>
+    <div class="widget-toolbox padding-8 clearfix">
+        <input type="submit" class="btn btn-primary btn-white btn-round"
+            name="get_bugnote_stats_button"
+            value="<?php echo lang_get( 'time_tracking_get_info_button' ) ?>" />
+    </div>
+
 
 <?php
 	# Print time tracking information if requested
@@ -141,8 +145,10 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 		array_multisort( $t_sort_name, $t_bugnote_stats );
 		unset( $t_sort_name );
 ?>
-<br />
-<table class="width100" cellspacing="0">
+
+<div class="space-10"></div>
+<div class="table-responsive">
+<table class="table table-bordered table-condensed table-striped">
 	<tr>
 		<td class="small-caption align-left">
 			<?php echo lang_get( $t_name_field ) ?>
@@ -178,23 +184,12 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 		</td>
 	</tr>
 </table>
+</div>
+</form>
+</div>
+</div>
 
 <?php
 	} # end if
-
-	collapse_closed( 'bugnotestats' );
 ?>
-
-<table class="width100" cellspacing="0">
-	<tr>
-		<td class="bold" colspan="4">
-			<?php
-				collapse_icon( 'bugnotestats' );
-				echo lang_get( 'time_tracking' )
-			?>
-		</td>
-	</tr>
-</table>
-
-<?php
-	collapse_end( 'bugnotestats' );
+</div>
