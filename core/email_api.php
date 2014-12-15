@@ -1315,9 +1315,7 @@ function email_format_attribute( array $p_visible_bug_data, $p_attribute_id ) {
 function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 	# Override current user with user to construct bug data for.
 	# This is to make sure that APIs that check against current user (e.g. relationship) work correctly.
-	global $g_cache_current_user_id;
-	$t_current_user_id = $g_cache_current_user_id;
-	$g_cache_current_user_id = $p_user_id;
+	$t_current_user_id = current_user_set( $p_user_id );
 
 	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 	$t_user_access_level = user_get_access_level( $p_user_id, $t_project_id );
@@ -1393,7 +1391,7 @@ function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 
 	$t_bug_data['relations'] = relationship_get_summary_text( $p_bug_id );
 
-	$g_cache_current_user_id = $t_current_user_id;
+	current_user_set( $t_current_user_id );
 
 	return $t_bug_data;
 }

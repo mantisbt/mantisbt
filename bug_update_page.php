@@ -74,6 +74,7 @@ require_api( 'version_api.php' );
 require_css( 'status_config.php' );
 
 $f_bug_id = gpc_get_int( 'bug_id' );
+$f_reporter_edit = gpc_get_bool( 'reporter_edit' );
 
 $t_bug = bug_get( $f_bug_id, true );
 
@@ -295,9 +296,20 @@ if( $t_show_reporter ) {
 		) {
 			echo string_attribute( user_get_name( $t_bug->reporter_id ) );
 		} else {
+<<<<<<< HEAD
 			echo '<select ' . helper_get_tab_index() . ' id="reporter_id" name="reporter_id" class="input-sm">';
 			print_reporter_option_list( $t_bug->reporter_id, $t_bug->project_id );
 			echo '</select>';
+=======
+			if ( $f_reporter_edit ) {
+				echo '<select ' . helper_get_tab_index() . ' id="reporter_id" name="reporter_id">';
+				print_reporter_option_list( $t_bug->reporter_id, $t_bug->project_id );
+				echo '</select>';
+			} else {
+				echo string_attribute( user_get_name( $t_bug->reporter_id ) );
+				echo ' [<a href="#reporter_edit" class="click-url" url="' . string_get_bug_update_url( $f_bug_id ) . '&amp;reporter_edit=true">' . lang_get( 'edit_link' ) . '</a>]';
+			}
+>>>>>>> 0b7e1260c56dbfbfcb606bb758642594da515cb5
 		}
 		echo '</td>';
 	} else {

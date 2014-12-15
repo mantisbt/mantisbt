@@ -118,6 +118,7 @@ declare -A query=(
 	[db_password]=$DB_PASSWORD
 	[admin_username]=$DB_USER
 	[admin_password]=$DB_PASSWORD
+	[timezone]=UTC
 )
 
 # Build http query string

@@ -10,20 +10,27 @@
 			<term>$g_default_timezone</term>
 			<listitem>
 				<para>Default timezone to use in MantisBT.
-					This must be set to one of the values specified in the
-					<ulink url="http://php.net/timezones ">
+					This configuration is normally initialized when
+					installing Mantis.
+					It should be set to one of the values specified in the
+					<ulink url="http://php.net/timezones">
 						List of Supported Timezones</ulink>.
 				</para>
-				<para>If this config is left blank (default), it will be
-					initialized by calling function
+				<para>If this config is left blank, the timezone
+					will be initialized by calling function
 					<ulink url="http://php.net/date-default-timezone-get">
-						date_default_timezone_get()</ulink>
-					to determine the default timezone.
-					With PHP &gt;= 5.3, this will result in a system warning if
-					the timezone has not been defined in
-					<ulink url="http://php.net/date.timezone">php.ini</ulink>.
-					Note that this function's behavior was modified in PHP 5.4.0.
+						date_default_timezone_get()</ulink>,
+					which will fall back to <emphasis>UTC</emphasis>
+					if unable to determine the timezone.
 				</para>
+				<para>Correct configuration of this variable can be confirmed
+					by running the administration checks.
+					Users can override the default timezone under user
+					their preferences.
+				</para>
+				<note>Note that this function's behavior was modified in
+					PHP 5.4.0.
+				</note>
 			</listitem>
 		</varlistentry>
 	</variablelist>
