@@ -429,7 +429,7 @@ function bugnote_get_all_bugnotes( $p_bug_id ) {
 			          	FROM      $t_bugnote_table b
 			          	LEFT JOIN $t_bugnote_text_table t ON b.bugnote_text_id = t.id
 						WHERE b.bug_id=" . db_param() . '
-						ORDER BY b.id ASC';
+						ORDER BY b.date_submitted ASC';
 		$t_bugnotes = array();
 
 		# BUILD bugnotes array
