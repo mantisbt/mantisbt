@@ -255,6 +255,9 @@ function gpc_get_string_array( $p_var_name, array $p_default = null ) {
 		trigger_error( ERROR_GPC_ARRAY_EXPECTED, ERROR );
 	}
 
+	if( !is_array( $t_result ) ) {
+		return $t_result;
+	}
 	$t_array = array();
 	foreach( $t_result as $t_key => $t_value ) {
 		if( $t_value === null ) {
