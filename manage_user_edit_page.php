@@ -142,14 +142,14 @@ print_manage_menu( 'manage_user_page.php' );
 			<tr><?php
 			if( $t_ldap && ON == config_get( 'use_ldap_email' ) ) {
 				# With LDAP
-				echo '<td class="category">' . lang_get( 'email_label' ) . '</td';
+				echo '<td class="category">' . lang_get( 'email_label' ) . '</td>';
 				echo '<td>' . string_display_line( user_get_email( $t_user_id ) ) . '</td>';
 			} else {
 				# Without LDAP
 				echo '<td class="category">' . lang_get( 'email_label' ) . '</td>';
 				echo '<td>';
 				print_email_input( 'email', $t_user['email'] );
-				echo '<td>';
+				echo '</td>';
 			} ?>
 			</tr>
 			<!-- Access Level -->
