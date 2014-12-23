@@ -159,7 +159,7 @@ if( $f_show_as_table ) {
 	$t_date_format = config_get( 'short_date_format' );
     echo '<div class="space-10"></div>';
     echo '<div class="table-responsive">';
-	echo '<table class="table table-striped table-bordered table-condensed">';
+	echo '<table class="table table-striped table-bordered table-condensed"><tr><td></td>';
 	if( $f_summary ) {
 		echo '<th>' . $t_label_strings[0] . '</th>';
 		echo '<th>' . $t_label_strings[1] . '</th>';
