@@ -501,7 +501,7 @@ function print_manage_menu( $p_page = '' ) {
 	if( access_has_global_level( config_get( 'manage_custom_fields_threshold' ) ) ) {
 		$t_pages['manage_custom_field_page.php'] = array( 'url'   => 'manage_custom_field_page.php', 'label' => 'manage_custom_field_link' );
 	}
-	if( access_has_global_level( config_get( 'manage_global_profile_threshold' ) ) ) {
+	if( config_get( 'enable_profiles' ) == ON && access_has_global_level( config_get( 'manage_global_profile_threshold' ) ) ) {
 		$t_pages['manage_prof_menu_page.php'] = array( 'url'   => 'manage_prof_menu_page.php', 'label' => 'manage_global_profiles_link' );
 	}
 	if( access_has_global_level( config_get( 'manage_plugin_threshold' ) ) ) {
