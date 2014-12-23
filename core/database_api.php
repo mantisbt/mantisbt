@@ -890,26 +890,26 @@ function db_helper_like( $p_field_name, $p_case_sensitive = false ) {
 }
 
 /**
- * A helper function to compare two dates against a certain number of days
- * @param string|integer $p_date1_id_or_column Column or value to compare.
- * @param string|integer $p_date2_id_or_column Column or value to compare.
- * @param string         $p_limitstring        Limit String.
- * @return string returns database query component to compare dates
+ * Compare two dates against a certain number of days
+ * 'val_or_col' parameters will be used "as is" in the query component,
+ * allowing use of a column name. To compare against a specific date,
+ * it is recommended to pass db_param() instead of a date constant.
+ * @param string  $p_val_or_col_1 Value or Column to compare.
+ * @param string  $p_operator     SQL comparison operator.
+ * @param string  $p_val_or_col_2 Value or Column to compare.
+ * @param integer $p_num_secs     Number of seconds to compare against
+ * @return string Database query component to compare dates
  * @todo Check if there is a way to do that using ADODB rather than implementing it here.
  */
-function db_helper_compare_days( $p_date1_id_or_column, $p_date2_id_or_column, $p_limitstring ) {
-	$t_db_type = config_get_global( 'db_type' );
-
-	$p_date1 = $p_date1_id_or_column;
-	$p_date2 = $p_date2_id_or_column;
-	if( is_int( $p_date1_id_or_column ) ) {
-		$p_date1 = db_param();
+function db_helper_compare_time( $p_val_or_col_1, $p_operator, $p_val_or_col_2, $p_num_secs ) {
+	if( $p_num_secs == 0 ) {
+		return "($p_val_or_col_1 $p_operator $p_val_or_col_2)";
+	} elseif( $p_num_secs > 0 ) {
+		return "($p_val_or_col_1 $p_operator $p_val_or_col_2 + $p_num_secs)";
+	} else {
+		# Invert comparison to avoid issues with unsigned integers on MySQL
+		return "($p_val_or_col_1 - $p_num_secs $p_operator $p_val_or_col_2)";
 	}
-	if( is_int( $p_date2_id_or_column ) ) {
-		$p_date2 = db_param();
-	}
-
-	return '((' . $p_date1 . ' - ' . $p_date2 .')' . $p_limitstring . ')';
 }
 
 /**

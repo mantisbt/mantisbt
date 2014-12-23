@@ -127,8 +127,8 @@ print_manage_menu( 'manage_user_page.php' );
 
 $t_days_old = 7 * SECONDS_PER_DAY;
 $t_query = 'SELECT COUNT(*) AS new_user_count FROM {user}
-	WHERE '.db_helper_compare_days( (string)db_now(), 'date_created', '<= ' . $t_days_old );
-$t_result = db_query( $t_query );
+	WHERE ' . db_helper_compare_time( db_param(), '<=', 'date_created', $t_days_old );
+$t_result = db_query( $t_query, array( db_now() ) );
 $t_row = db_fetch_array( $t_result );
 $t_new_user_count = $t_row['new_user_count'];
 
@@ -187,7 +187,8 @@ if( $f_filter === 'ALL' ) {
 } else if( $f_filter === 'UNUSED' ) {
 	$t_where = '(login_count = 0) AND ( date_created = last_visit )';
 } else if( $f_filter === 'NEW' ) {
-	$t_where = db_helper_compare_days( '' . db_now() . '', 'date_created', '<= ' . $t_days_old );
+	$t_where = db_helper_compare_time( db_param(), '<=', 'date_created', $t_days_old );
+	$t_where_params[] = db_now();
 } else {
 	$t_where_params[] = $f_filter . '%';
 	$t_where = db_helper_like( 'UPPER(username)' );
@@ -213,8 +214,9 @@ if( 0 == $c_hide_inactive ) {
 	$t_query = 'SELECT count(*) as user_count FROM {user} WHERE ' . $t_where . $t_show_disabled_cond;
 } else {
 	$t_query = 'SELECT count(*) as user_count FROM {user}
-			WHERE ' . $t_where . ' AND ' . db_helper_compare_days( '' . db_now() . '', 'last_visit', '< ' . $t_days_old )
+			WHERE ' . $t_where . ' AND ' . db_helper_compare_time( db_param(), '<', 'last_visit', $t_days_old )
 			. $t_show_disabled_cond;
+	$t_where_params[] = db_now();
 }
 
 $t_result = db_query_bound( $t_query, $t_where_params );
@@ -242,8 +244,9 @@ if( 0 == $c_hide_inactive ) {
 	$t_result = db_query( $t_query, $t_where_params, $p_per_page, $t_offset );
 } else {
 	$t_query = 'SELECT * FROM {user}
-			WHERE ' . $t_where . ' AND ' . db_helper_compare_days( '' . db_now() . '', 'last_visit', '< ' . $t_days_old ) . '
+			WHERE ' . $t_where . ' AND ' . db_helper_compare_time( db_param(), '<', 'last_visit', $t_days_old ) . '
 			' . $t_show_disabled_cond . ' ORDER BY ' . $c_sort . ' ' . $c_dir;
+	$t_where_params[] = db_now();
 	$t_result = db_query( $t_query, $t_where_params, $p_per_page, $t_offset );
 }
 
