@@ -99,8 +99,9 @@ foreach( $t_query_arr as $t_id => $t_name ) {
 	print_link( 'view_all_set.php?type=3&source_query_id=' . $t_query_id, $t_name );
 
 	if( filter_db_can_delete_filter( $t_id ) ) {
-		echo ' ';
+		echo ' <div class="pull-right">';
 		print_form_button( 'query_delete_page.php?source_query_id=' . $t_query_id, lang_get( 'delete_query' ) );
+        echo ' </div>';
 	}
 
 	print '</td>';
