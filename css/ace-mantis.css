@@ -217,6 +217,10 @@ select.input-xs option, select.form-control.input-xs option {
     padding: 0px 2px !important;
 }
 
+textarea.input-xs, select.input-xs[multiple] {
+    height: auto;
+}
+
 .scroll-bar {
     width: auto !important;
 }
