@@ -355,7 +355,7 @@ if( 2 == $t_install_state ) {
 		# due to a bug in ADODB, this call prompts warnings, hence the @
 		# the check only works on mysql if the database is open
 		$t_version_info = @$g_db->ServerInfo();
-		echo '<br /> Running ' . $f_db_type . ' version ' . $t_version_info['description'];
+		echo '<br /> Running ' . string_attribute( $f_db_type ) . ' version ' . $t_version_info['description'];
 		?>
 	</td>
 	<?php
@@ -444,7 +444,7 @@ if( !$g_database_upgrade ) {?>
 		Hostname (for Database Server)
 	</td>
 	<td>
-		<input name="hostname" type="textbox" value="<?php echo $f_hostname?>"></input>
+		<input name="hostname" type="textbox" value="<?php echo string_attribute( $f_hostname ) ?>"></input>
 	</td>
 </tr>
 <?php
@@ -456,7 +456,7 @@ if( !$g_database_upgrade ) {?>
 		Username (for Database)
 	</td>
 	<td>
-		<input name="db_username" type="textbox" value="<?php echo $f_db_username?>"></input>
+		<input name="db_username" type="textbox" value="<?php echo string_attribute( $f_db_username ) ?>"></input>
 	</td>
 </tr>
 <?php
@@ -480,7 +480,7 @@ if( !$g_database_upgrade ) {?>
 		Database name (for Database)
 	</td>
 	<td>
-		<input name="database_name" type="textbox" value="<?php echo $f_database_name?>"></input>
+		<input name="database_name" type="textbox" value="<?php echo string_attribute( $f_database_name ) ?>"></input>
 	</td>
 </tr>
 <?php
@@ -491,7 +491,7 @@ if( !$g_database_upgrade ) {?>
 		Admin Username (to <?php echo( !$g_database_upgrade ) ? 'create Database' : 'update Database'?> if required)
 	</td>
 	<td>
-		<input name="admin_username" type="textbox" value="<?php echo $f_admin_username?>"></input>
+		<input name="admin_username" type="textbox" value="<?php echo string_attribute( $f_admin_username ) ?>"></input>
 	</td>
 </tr>
 
@@ -500,7 +500,7 @@ if( !$g_database_upgrade ) {?>
 		Admin Password (to <?php echo( !$g_database_upgrade ) ? 'create Database' : 'update Database'?> if required)
 	</td>
 	<td>
-		<input name="admin_password" type="password" value="<?php echo $f_admin_password?>"></input>
+		<input name="admin_password" type="password" value="<?php echo string_attribute( $f_admin_password ) ?>"></input>
 	</td>
 </tr>
 
@@ -754,13 +754,13 @@ if( 4 == $t_install_state ) {
 	/** @todo to be written */
 	// must post data gathered to preserve it
 	?>
-		<input name="hostname" type="hidden" value="<?php echo $f_hostname?>"></input>
-		<input name="db_type" type="hidden" value="<?php echo $f_db_type?>"></input>
-		<input name="database_name" type="hidden" value="<?php echo $f_database_name?>"></input>
-		<input name="db_username" type="hidden" value="<?php echo $f_db_username?>"></input>
-		<input name="db_password" type="hidden" value="<?php echo $f_db_password?>"></input>
-		<input name="admin_username" type="hidden" value="<?php echo $f_admin_username?>"></input>
-		<input name="admin_password" type="hidden" value="<?php echo $f_admin_password?>"></input>
+		<input name="hostname" type="hidden" value="<?php echo string_attribute( $f_hostname ) ?>"></input>
+		<input name="db_type" type="hidden" value="<?php echo string_attribute( $f_db_type ) ?>"></input>
+		<input name="database_name" type="hidden" value="<?php echo string_attribute( $f_database_name ) ?>"></input>
+		<input name="db_username" type="hidden" value="<?php echo string_attribute( $f_db_username ) ?>"></input>
+		<input name="db_password" type="hidden" value="<?php echo string_attribute( $f_db_password ) ?>"></input>
+		<input name="admin_username" type="hidden" value="<?php echo string_attribute( $f_admin_username ) ?>"></input>
+		<input name="admin_password" type="hidden" value="<?php echo string_attribute( $f_admin_password ) ?>"></input>
 		<input name="log_queries" type="hidden" value="<?php echo( $f_log_queries ? 1 : 0 )?>"></input>
 		<input name="db_exists" type="hidden" value="<?php echo( $f_db_exists ? 1 : 0 )?>"></input>
 <?php
@@ -986,14 +986,14 @@ if( $g_failed ) {
 <tr>
 	<td bgcolor="#ffffff">Please correct failed checks</td>
 	<td bgcolor="#ffffff">
-		<input name="install" type="hidden" value="<?php echo $t_install_state?>"></input>
-		<input name="hostname" type="hidden" value="<?php echo $f_hostname?>"></input>
-		<input name="db_type" type="hidden" value="<?php echo $f_db_type?>"></input>
-		<input name="database_name" type="hidden" value="<?php echo $f_database_name?>"></input>
-		<input name="db_username" type="hidden" value="<?php echo $f_db_username?>"></input>
-		<input name="db_password" type="hidden" value="<?php echo $f_db_password?>"></input>
-		<input name="admin_username" type="hidden" value="<?php echo $f_admin_username?>"></input>
-		<input name="admin_password" type="hidden" value="<?php echo $f_admin_password?>"></input>
+		<input name="install" type="hidden" value="<?php echo $t_install_state ?>"></input>
+		<input name="hostname" type="hidden" value="<?php echo string_attribute( $f_hostname ) ?>"></input>
+		<input name="db_type" type="hidden" value="<?php echo string_attribute( $f_db_type ) ?>"></input>
+		<input name="database_name" type="hidden" value="<?php echo string_attribute( $f_database_name ) ?>"></input>
+		<input name="db_username" type="hidden" value="<?php echo string_attribute( $f_db_username ) ?>"></input>
+		<input name="db_password" type="hidden" value="<?php echo string_attribute( $f_db_password ) ?>"></input>
+		<input name="admin_username" type="hidden" value="<?php echo string_attribute( $f_admin_username ) ?>"></input>
+		<input name="admin_password" type="hidden" value="<?php echo string_attribute( $f_admin_password ) ?>"></input>
 		<input name="log_queries" type="hidden" value="<?php echo( $f_log_queries ? 1 : 0 )?>"></input>
 		<input name="db_exists" type="hidden" value="<?php echo( $f_db_exists ? 1 : 0 )?>"></input>
 		<input name="retry" type="submit" class="button" value="Retry"></input>
