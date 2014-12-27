@@ -39,12 +39,17 @@
  * @file
  *
  * @author Fohanno
+ * @author Gwenn-Ael
  */
 
 $s_plugin_XmlImportExport_title = 'Enporzhiañ / ezporzhiañ drein';
 $s_plugin_XmlImportExport_description = 'Ouzhpennañ barregezhioù enporzhiañ hag ezporzhiañ diazezet war XML da vMantisBT.';
 $s_plugin_XmlImportExport_import = 'Enporzhiañ drein';
 $s_plugin_XmlImportExport_export = 'Ezporzhadur XML';
+$s_plugin_XmlImportExport_config_title = 'Kefluniañ al liveoù moned enporzhiañ/ezporzhiañ XML';
+$s_plugin_XmlImportExport_import_threshold = 'Kudennoù enporzhiañ';
+$s_plugin_XmlImportExport_export_threshold = 'Kudennoù ezporzhiañ';
+$s_plugin_XmlImportExport_action_update = 'Hizivaat';
 $s_plugin_XmlImportExport_importing_in_project = 'Oc\'h enporzhiañ drein er raktres :';
 $s_plugin_XmlImportExport_import_options = 'Dibarzhioù enporzhiañ';
 $s_plugin_XmlImportExport_cross_references = 'Daveoù kroaziet';

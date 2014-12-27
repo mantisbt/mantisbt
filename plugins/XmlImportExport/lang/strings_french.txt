@@ -39,6 +39,7 @@
  * @file
  *
  * @author Dregad
+ * @author Gomoko
  * @author IAlex
  */
 
@@ -46,6 +47,10 @@ $s_plugin_XmlImportExport_title = 'Importer / Exporter des bugs';
 $s_plugin_XmlImportExport_description = 'Permet d\'importer et exporter des fichiers au format XML compatible avec MantisBT.';
 $s_plugin_XmlImportExport_import = 'Importer des bugs';
 $s_plugin_XmlImportExport_export = 'Export XML';
+$s_plugin_XmlImportExport_config_title = 'Configuration des niveaux d’accès d’import/export XML';
+$s_plugin_XmlImportExport_import_threshold = 'Problèmes d’importation';
+$s_plugin_XmlImportExport_export_threshold = 'Problèmes d’exportation';
+$s_plugin_XmlImportExport_action_update = 'Mettre à jour';
 $s_plugin_XmlImportExport_importing_in_project = 'Importer les bugs dans le projet :';
 $s_plugin_XmlImportExport_import_options = 'Options d\'importation';
 $s_plugin_XmlImportExport_cross_references = 'Références croisées';

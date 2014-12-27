@@ -46,6 +46,7 @@
  * @author Desertwaste
  * @author EugeneZelenko
  * @author Fryed-peach
+ * @author Liuxinyu970226
  * @author Lloffiwr
  * @author M42
  * @author McDutchie
@@ -54,6 +55,7 @@
  * @author Shirayuki
  * @author Siebrand
  * @author Siebrand Mazeland
+ * @author SkyDaisy9
  * @author Umherirrender
  * @author Vincent
  * @author Waldir
@@ -66,6 +68,7 @@ The only two possible values are:
 * rtl : for right-to-left scripts (eg: arabic, hebrew,...)';
 $s_actiongroup_menu_move = '{{Identical|Move}}';
 $s_actiongroup_menu_copy = '{{Identical|Copy}}';
+$s_actiongroup_menu_assign = '{{Identical|Assign}}';
 $s_actiongroup_menu_close = '{{Identical|Close}}';
 $s_actiongroup_menu_delete = '{{Identical|Delete}}';
 $s_actiongroup_menu_resolve = '{{Identical|Resolve}}';
@@ -74,6 +77,7 @@ $s_actiongroup_menu_update_view_status = 'Isto refere-se à visibilidade do bug 
 
 This refers to the bug\'s visibility (private or public).';
 $s_actiongroup_menu_update_category = '{{Identical|Update category}}';
+$s_actiongroup_menu_update_field = '{{Identical|Update}}';
 $s_actiongroup_menu_add_note = '{{Identical|Add note}}';
 $s_actiongroup_menu_attach_tags = '{{Identical|Attach tag}}';
 $s_actiongroup_error_issue_is_readonly = 'SOLO / SÓLO: El primer caso expresa soledad y no lleva tilde (Ej.: Estaba solo en el aula). El segundo caso cumple la función de adverbio, funciona como “solamente” o “únicamente” (Ej.: Puedo comer sólo frutas y verduras), y lleva tilde. El uso adverbial se acentúa para evitar ambigüedades.';
@@ -88,21 +92,29 @@ Link on bug report. See screenshot.
 
 “Excel” is the name of a program; do not translate it unless Microsoft has translated the program’s name into your language (e.g., 엑셀 in Korean).';
 $s_anonymous = '{{Identical|Anonymous}}';
+$s_assigned_projects = '{{Identical|Assigned project}}';
+$s_assigned_projects_label = '{{Identical|Assigned project}}';
 $s_print = '{{Identical|Print}}';
-$s_jump = 'Usado no contexto de escrever um nº de problema e ir para a página correspondente.';
+$s_jump = 'Usado no contexto de escrever um nº de problema e ir para a página correspondente.
+{{Identical|Jump}}';
 $s_copy_versions_from = 'No es un lugar, es un objeto al que se hace referencia. No es "desde", es "de".';
 $s_field = '{{Identical|Field}}';
 $s_bugnote = '{{Identical|Note}}';
 $s_change = '{{Identical|Change}}';
+$s_announcement = '{{Identical|Announcement}}';
 $s_bug_relationships = '{{Identical|Relationship}}';
+$s_bug_relationships_label = '{{Identical|Relationship}}';
 $s_global_categories = '{{Identical|Global category}}';
 $s_login_link = '{{Identical|Login}}';
 $s_select_option = '{{Identical|Select}}';
 $s_category_group_bugs_button = '{{Identical|Update category}}';
 $s_go_back = '{{Identical|Go back}}';
-$s_proceed = 'Message displayed after adding/editing/deleting something';
+$s_proceed = 'Message displayed after adding/editing/deleting something
+{{Identical|Proceed}}';
+$s_switch = '{{Identical|Switch}}';
 $s_prefix_for_deleted_users = '{{Identical|User}}';
 $s_administrator = '{{Identical|Administrator}}';
+$s_myself = '{{Identical|Myself}}';
 $s_new_account_username = '{{Identical|Username}}';
 $s_new_account_email = '{{Identical|E-mail}}';
 $s_email_project = '{{Identical|Project}}';
@@ -111,6 +123,7 @@ $s_email_category = '{{Identical|Category}}';
 $s_email_severity = '{{Identical|Severity}}';
 $s_email_priority = '{{Identical|Priority}}';
 $s_email_status = '{{Identical|Status}}';
+$s_email_resolution = '{{Identical|Resolution}}';
 $s_email_duplicate = '{{Identical|Duplicate}}';
 $s_email_summary = '{{Identical|Summary}}';
 $s_email_description = '{{Identical|Description}}';
@@ -125,6 +138,10 @@ $s_email = '{{Identical|E-mail}}';
 $s_email_label = '{{Identical|E-mail}}';
 $s_password = '{{Identical|Password}}';
 $s_confirm_password = '{{Identical|Confirm password}}';
+$s_current_password = '{{Identical|Current password}}';
+$s_access_level = '{{Identical|Access level}}';
+$s_access_level_label = '{{Identical|Access level}}';
+$s_minutes = '{{Identical|Minute}}';
 $s_seconds = '{{Identical|Second}}';
 $s_bugnote_order_asc = '{{Identical|Ascending}}';
 $s_bugnote_order_desc = '{{Identical|Descending}}';
@@ -141,6 +158,7 @@ $s_delete_bug_button = '{{Identical|Delete}}';
 $s_upload_file = '{{Identical|Upload file}}';
 $s_upload_files = '{{Identical|Upload file}}';
 $s_select_file = '{{Identical|Select file}}';
+$s_select_files = '{{Identical|Select file}}';
 $s_upload_file_button = '{{Identical|Upload file}}';
 $s_upload_files_button = '{{Identical|Upload file}}';
 $s_file_size_info = 'Displays file size information, where $1 is the size and $2 is the unit';
@@ -162,7 +180,10 @@ ID = Identification number of a bug.
 $s_category = '{{Identical|Category}}';
 $s_category_label = '{{Identical|Category}}';
 $s_severity = '{{Identical|Severity}}';
+$s_severity_label = '{{Identical|Severity}}';
 $s_last_update = '{{Identical|Last update}}';
+$s_reporter = '{{Identical|Reporter}}';
+$s_reporter_label = '{{Identical|Reporter}}';
 $s_priority = '{{Identical|Priority}}';
 $s_priority_label = '{{Identical|Priority}}';
 $s_status = '{{Identical|Status}}';
@@ -170,6 +191,7 @@ $s_status_label = '{{Identical|Status}}';
 $s_os = '[[File:MantisBT-bug_report_advanced_page_profile.png|150px|right]]
 See screenshots.
 [[File:MantisBT-filter.png|150px|right]]';
+$s_build = '{{Identical|Build}}';
 $s_votes = '{{Identical|Vote}}';
 $s_summary = '{{Identical|Summary}}';
 $s_description = '{{Identical|Description}}';
@@ -178,12 +200,16 @@ $s_profile_label = '{{Identical|Profile}}';
 $s_revision = '{{Identical|Revision}}';
 $s_revision_by = 'Parameters:
 * %1$s is a date
-* %2$s is a username';
+* %2$s is a username
+{{Identical|By}}';
+$s_revision_drop = '{{Identical|Drop}}';
 $s_bug_notes_title = '{{Identical|Note}}';
 $s_delete_link = '{{Identical|Delete}}';
 $s_add_bugnote_title = '{{Identical|Add note}}';
 $s_add_bugnote_button = '{{Identical|Add note}}';
 $s_bugnote_edit_link = '{{Identical|Edit}}';
+$s_log_page_number = '{{Identical|Number}}';
+$s_log_page_event = '{{Identical|Event}}';
 $s_please_report = 'Is displayed whenever an SQL error occurs.
 * $1 is a mailto: link with {{msg-mantis|s_administrator}} as link text';
 $s_click_to_login = '{{Identical|Login}}';
@@ -194,9 +220,12 @@ $s_lost_password_title = '{{Identical|Password reset}}';
 $s_lost_password_subject = '{{Identical|Password reset}}';
 $s_archives = '{{Identical|Archive}}';
 $s_site_information = '{{Identical|Site information}}';
+$s_created_user_part1 = '{{Identical|Created user}}';
 $s_create_new_account_title = '{{Identical|Create account}}';
 $s_enabled = '{{Identical|Enabled}}';
+$s_enabled_label = '{{Identical|Enabled}}';
 $s_protected = '{{Identical|Protected}}';
+$s_protected_label = '{{Identical|Protected}}';
 $s_create_user_button = '{{Identical|Create user}}';
 $s_hide_disabled = 'Should be consistent with {{msg-mantis|S show disabled}}';
 $s_filter_button = '[[File:MantisBT-filter.png|150px|right]]
@@ -218,6 +247,7 @@ $s_message = '{{Identical|Message}}';
 $s_current_status = '{{Identical|Current status}}';
 $s_workflow = '{{Identical|Workflow}}';
 $s_status_level = '{{Identical|Status}}';
+$s_access_levels = '{{Identical|Access level}}';
 $s_limit_access = '{{doc-singularthey}}';
 $s_configuration_option_type = '{{Identical|Type}}';
 $s_configuration_option_value = '{{Identical|Value}}';
@@ -231,6 +261,9 @@ $s_plugin_protected = '{{Identical|Protected}}';
 $s_plugin_update = '{{Identical|Update}}';
 $s_plugin_actions = '{{Identical|Action}}';
 $s_plugin_install = '{{Identical|Install}}';
+$s_plugin_upgrade = '{{Identical|Upgrade}}';
+$s_plugin_uninstall = '{{Identical|Uninstall}}';
+$s_plugin_key_label = '{{Identical|Key}}';
 $s_delete_category_button = '{{Identical|Delete category}}';
 $s_update_category_button = '{{Identical|Update category}}';
 $s_project_name = '{{Identical|Project name}}';
@@ -245,6 +278,7 @@ $s_version = '{{Identical|Version}}';
 $s_version_label = '{{Identical|Version}}';
 $s_timestamp = '{{Identical|Timestamp}}';
 $s_update = '{{Identical|Update}}';
+$s_unlink_link = '{{Identical|Unlink}}';
 $s_projects_title = '{{Identical|Project}}';
 $s_projects_title_label = '{{Identical|Project}}';
 $s_name = '{{Identical|Name}}';
@@ -260,6 +294,7 @@ $s_account_link = '{{Identical|My account}}';
 $s_users_link = '{{Identical|User}}';
 $s_manage_link = '{{Identical|Manage}}';
 $s_logout_link = '{{Identical|Log out}}';
+$s_my_view_title_unassigned = '{{Identical|Unassigned}}';
 $s_my_view_title_resolved = '{{Identical|Resolved}}';
 $s_body = '{{Identical|Body}}';
 $s_edit_post = '{{Identical|Edit post}}';
@@ -270,6 +305,8 @@ $s_title = '{{Identical|Title}}';
 $s_filename = '{{Identical|Filename}}';
 $s_filename_label = '{{Identical|Filename}}';
 $s_file_delete_button = '{{Identical|Delete file}}';
+$s_add_file = '{{Identical|Add file}}';
+$s_remove_user_button = '{{Identical|Remove user}}';
 $s_add_user_button = '{{Identical|Add user}}';
 $s_remove_link = '{{Identical|Remove}}';
 $s_remove_all_link = '{{Identical|Remove all}}';
@@ -291,6 +328,7 @@ $s_opened = 'Is used in summary screen for status by date: Column for newly open
 $s_resolved = '{{Identical|Resolved}}';
 $s_total = '{{Identical|Total}}';
 $s_balance = '{{Identical|Balance}}';
+$s_score = '{{Identical|Score}}';
 $s_days = '{{Identical|Day}}';
 $s_time_stats = 'Is used in summary screen as a headline for the statistic, that indicates the time from opening a ticket until its last change to the "resolved" status. Only tickets, that are in resolved status or later are considered in the statistic.';
 $s_any = '[[File:MantisBT-filter.png|150px|right]]
@@ -308,6 +346,7 @@ Column header for column of dates. See screenshot.
 {{Identical|Updated}}';
 $s_sticky = '[[File:MantisBT-filter.png|150px|right]]
 Filter label in bug report filter screen. See screenshot.';
+$s_sort_label = '{{Identical|Sort by}}';
 $s_priority_abbreviation = '{{Optional}}';
 $s_none = '{{Identical|None}}';
 $s_current = '{{Identical|Current}}';
@@ -325,6 +364,8 @@ $s_last = '[[File:MantisBT-filter.png|150px|right]]
 Page navigation link on multi-page report. See screenshot.
 
 {{Identical|Last}}';
+$s_start_date_label = '{{Identical|Start date}}';
+$s_end_date_label = '{{Identical|End date}}';
 $s_use_date_filters = '[[File:MantisBT-filter.png|150px|right]]
 Filter label in bug report filter screen. See screenshot.';
 $s_yes = '{{Identical|Yes}}';
@@ -346,6 +387,9 @@ $s_custom_field = '{{Identical|Field}}';
 $s_custom_field_label = '{{Identical|Field}}';
 $s_custom_field_name = '{{Identical|Name}}';
 $s_custom_field_type = '{{Identical|Type}}';
+$s_custom_field_valid_regexp = '{{Identical|Regular expression}}';
+$s_custom_field_sequence = '{{Identical|Sequence}}';
+$s_custom_field_sequence_label = '{{Identical|Sequence}}';
 $s_filter_closed = '{{Identical|Closed}}';
 $s_filter_resolved = '{{Identical|Resolved}}';
 $s_advanced_filters = '[[File:MantisBT-filter.png|150px|right]]
@@ -361,12 +405,18 @@ $s_add_new_relationship_button = '{{Identical|Add}}';
 $s_replace_relationship_button = '{{Identical|Replace}}';
 $s_delete_relationship_button = '{{Identical|Delete}}';
 $s_create_child_bug_button = '{{Identical|Clone}}';
+$s_copy_notes_from_parent = 'MantisBT HP:
+https://en.wikipedia.org/wiki/Mantis_Bug_Tracker
+
+To find the idea of " issue" & " note " , refer:
+https://translatewiki.net/w/i.php?title=Special%3ASearch&profile=advanced&search=Issue+note+%2Fen&fulltext=Search&ns0=1&ns6=1&ns7=1&ns4=1&ns5=1&ns1210=1&profile=advanced';
 $s_vertical = '{{Identical|Vertical}}';
 $s_view = '{{Identical|View}}';
 $s_issues = '{{Identical|Issue}}';
 $s_update_view_status = 'This is a button text for the "private/public" toggle for an issue.';
 $s_notes = '{{Identical|Note}}';
 $s_add_notes = '{{Identical|Add note}}';
+$s_news = '{{Identical|News}}';
 $s_delete_attachment_button = '{{Identical|Delete}}';
 $s_filters = '{{Identical|Filter}}';
 $s_others = '{{Identical|Other}}';
@@ -390,6 +440,7 @@ $s_tags_label = '{{Identical|Tag}}';
 $s_tag_name = '{{Identical|Name}}';
 $s_tag_creator = '{{Identical|Creator}}';
 $s_tag_created = '{{Identical|Date created}}';
+$s_tag_updated = '{{Identical|Last updated}}';
 $s_tag_statistics = '{{Identical|Usage statistics}}';
 $s_tag_attach = '{{Identical|Attach}}';
 $s_tag_attach_long = '{{Identical|Attach tag}}';
@@ -414,5 +465,16 @@ $s_month_september = '{{Identical|September}}';
 $s_month_october = '{{Identical|October}}';
 $s_month_november = '{{Identical|November}}';
 $s_month_december = '{{Identical|December}}';
+$s_timeline_issue_tagged = 'Parameters:
+* %1s - username
+* %2s - issue ID
+* %3s - tag name';
+$s_timeline_issue_untagged = 'Parameters:
+* %1s - username
+* %2s - issue ID
+* %3s - tag name';
+$s_timeline_issue_assigned_to_self = 'Parameters:
+* %1s - username
+* %2s - issue ID';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = '{{Identical|Access denied}}';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'If we need to specify the number of expected parameter in string, we just need to write something like "Lalal %2$s bububu %1$d", where 1 and 2 - the index number in argument list (actually, expected in original message)';
