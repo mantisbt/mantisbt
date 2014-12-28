@@ -1021,6 +1021,11 @@ if( 3 == $t_install_state ) {
 # database installed, get any additional information
 if( 4 == $t_install_state ) {
 
+/*
+	# 20141227 dregad Disabling this step for now, because it does not seem to
+	# be doing anything useful and can be used to retrieve system information
+	# when the admin directory has not been deleted (see #17939).
+
 	# @todo to be written
 	# must post data gathered to preserve it
 	?>
@@ -1036,6 +1041,7 @@ if( 4 == $t_install_state ) {
 <?php
 	# must post <input name="install" type="hidden" value="5">
 	# rather than the following line
+*/
 	$t_install_state++;
 }  # end install_state == 4
 
