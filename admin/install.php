@@ -147,7 +147,9 @@ switch( $t_install_state ) {
 <br /><br />
 
 <?php
-if( 0 == $t_install_state ) {
+# installation checks table header is valid both for pre-install and
+# database installation steps
+if( 0 == $t_install_state || 2 == $t_install_state ) {
 	?>
 <table width="100%" cellpadding="10" cellspacing="1">
 <tr>
@@ -337,8 +339,6 @@ print_test( 'Checking if safe mode is enabled for install script',
 if( 2 == $t_install_state ) {
 	?>
 
-<table width="100%" cellpadding="10" cellspacing="1">
-
 <!-- Checking DB support-->
 <?php
 	print_test( 'Setting Database Type', '' !== $f_db_type, true, 'database type is blank?' );
@@ -490,6 +490,7 @@ if( 2 == $t_install_state ) {
 		print_test_result( ( '' == $t_error ) && ( '' == $t_warning ), ( '' != $t_error ), $t_error . ' ' . $t_warning );
 		?>
 </tr>
+</table>
 <?php
 	}?>
 </table>
