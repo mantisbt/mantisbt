@@ -980,15 +980,24 @@ if( 6 == $t_install_state ) {
 if( 7 == $t_install_state ) {
 	# cleanup and launch upgrade
 	?>
-<p>Install was successful.</p>
-<?php if( $f_db_exists ) {?>
-<p><a href="../login_page.php">Continue</a> to log into Mantis</p>
-<?php
-	} else {?>
-<p>Please log in as the administrator and <a href="../login_page.php">create</a> your first project.
+<table width="100%" border="0" cellpadding="10" cellspacing="1">
+	<tr>
+		<td bgcolor="#e8e8e8" colspan="2">
+			<span class="title"><?php echo ( $f_db_exists ? 'Upgrade' : 'Installation' ) . ' Complete' ?></span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<?php if( $f_db_exists ) {?>
+			Please <a href="../login_page.php">log into Mantis</a>.
+			<?php } else {?>
+			Please <a href="../login_page.php">log in as the administrator</a> and create your first project.
+			<?php } ?>
+		</td>
+	</tr>
+</table>
 
 <?php
-	}
 }
 
 # end install_state == 7
