@@ -799,18 +799,19 @@ if( 5 == $t_install_state ) {
 	?>
 	</td>
 	<?php
-		$t_config = '<?php' . "\r\n";
-	$t_config .= "\t\$g_hostname = '$f_hostname';\r\n";
-	$t_config .= "\t\$g_db_type = '$f_db_type';\r\n";
-	$t_config .= "\t\$g_database_name = '$f_database_name';\r\n";
-	$t_config .= "\t\$g_db_username = '$f_db_username';\r\n";
-	$t_config .= "\t\$g_db_password = '$f_db_password';\r\n";
+	# Generating the config_inc.php file
+
+	$t_config = '<?php' . "\r\n";
+	$t_config .= "\$g_hostname = '$f_hostname';\r\n";
+	$t_config .= "\$g_db_type = '$f_db_type';\r\n";
+	$t_config .= "\$g_database_name = '$f_database_name';\r\n";
+	$t_config .= "\$g_db_username = '$f_db_username';\r\n";
+	$t_config .= "\$g_db_password = '$f_db_password';\r\n";
 
 	if( $f_db_type == 'db2' ) {
-		$t_config .= "\t\$g_db_schema = '$f_db_schema';\r\n";
+		$t_config .= "\$g_db_schema = '$f_db_schema';\r\n";
 	}
 
-	$t_config .= '?>' . "\r\n";
 	$t_write_failed = true;
 
 	if( !$t_config_exists ) {
