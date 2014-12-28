@@ -148,7 +148,7 @@ if( 0 == $t_install_state ) {
 <table width="100%" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Checking Installation...</span>
+		<span class="title">Checking Installation</span>
 	</td>
 </tr>
 <?php
@@ -512,7 +512,7 @@ if( 1 == $t_install_state ) {
 		<span class="title">
 			<?php echo
 				( $g_database_upgrade ? 'Upgrade Options' : 'Installation Options' ),
-				( $g_failed ? ': Checks Failed... ' : '' )
+				( $g_failed ? ': Checks Failed ' : '' )
 			?>
 		</span>
 	</td>
@@ -1186,7 +1186,7 @@ if( 6 == $t_install_state ) {
 <table width="100%" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Checking Installation...</span>
+		<span class="title">Checking Installation</span>
 	</td>
 </tr>
 
@@ -1290,7 +1290,7 @@ if( 7 == $t_install_state ) {
 <table width="100%" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Installation Complete...</span>
+		<span class="title">Installation Complete</span>
 	</td>
 </tr>
 <tr bgcolor="#ffffff">
@@ -1316,7 +1316,7 @@ if( $g_failed && $t_install_state != 1 ) {
 <table width="100%" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Installation Failed...</span>
+		<span class="title">Installation Failed</span>
 	</td>
 </tr>
 <tr>
