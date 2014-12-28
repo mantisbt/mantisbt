@@ -1059,20 +1059,8 @@ if( 5 == $t_install_state ) {
 
 <tr>
 	<td bgcolor="#ffffff">
-<?php
-	if( !$t_config_exists ) {
-?>
-		Creating Configuration File (config/config_inc.php)<br />
-		<span class="error-msg">
-			(if this file is not created, create it manually with the contents below)
-		</span>
-<?php
-	} else {
-?>
-		Updating Configuration File (config/config_inc.php)<br />
-<?php
-	}
-?>
+		<?php echo ( $t_config_exists ? 'Updating' : 'Creating' ); ?>
+		Configuration File (config/config_inc.php)<br />
 	</td>
 <?php
 	# Generating the config_inc.php file
@@ -1165,8 +1153,8 @@ if( 5 == $t_install_state ) {
 			<tr>
 				<td>
 					Please add the following lines to
-					'<?php echo $g_absolute_path; ?>config_inc.php'
-					before continuing to the database upgrade check:
+					<em>'<?php echo $g_absolute_path; ?>config_inc.php'</em>
+					before continuing:
 				</td>
 			</tr>
 			<tr>
