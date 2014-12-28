@@ -93,6 +93,9 @@ $t_install_state = gpc_get_int( 'install', 0 );
 		<td class="title">
 		<?php
 switch( $t_install_state ) {
+	case 7:
+		echo "Installation Complete";
+		break;
 	case 6:
 		echo "Post Installation Checks";
 		break;
@@ -113,6 +116,7 @@ switch( $t_install_state ) {
 		break;
 	case 0:
 	default:
+		$t_install_state = 0;
 		echo "Pre-Installation Check";
 		break;
 }
