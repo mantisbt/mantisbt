@@ -85,7 +85,7 @@ $t_install_state = gpc_get_int( 'install', 0 );
 <link rel="stylesheet" type="text/css" href="admin.css" />
 </head>
 <body>
-<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr class="top-bar">
 		<td class="links">
 			[ <a href="index.php">Back to Administration</a> ]
@@ -126,7 +126,7 @@ switch( $t_install_state ) {
 <?php
 if( 0 == $t_install_state ) {
 	?>
-<table width="100%" bgcolor="#222222" border="0" cellpadding="10" cellspacing="1">
+<table width="100%" border="0" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
 		<span class="title">Checking Installation...</span>
@@ -875,7 +875,7 @@ if( 6 == $t_install_state ) {
 
 	# post install checks
 	?>
-<table width="100%" bgcolor="#222222" border="0" cellpadding="10" cellspacing="1">
+<table width="100%" border="0" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
 		<span class="title">Checking Installation...</span>
@@ -995,7 +995,7 @@ if( 7 == $t_install_state ) {
 
 if( $g_failed ) {
 	?>
-<table width="100%" bgcolor="#222222" border="0" cellpadding="10" cellspacing="1">
+<table width="100%" border="0" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
 		<span class="title">Checks Failed...</span>
