@@ -128,7 +128,9 @@ switch( $t_install_state ) {
 
 <form method='POST'>
 <?php
-if( 0 == $t_install_state ) {
+# installation checks table header is valid both for pre-install and
+# database installation steps
+if( 0 == $t_install_state || 2 == $t_install_state ) {
 	?>
 <table width="100%" border="0" cellpadding="10" cellspacing="1">
 <tr>
@@ -239,7 +241,6 @@ print_test( 'Checking if safe mode is enabled for install script',
 if( 2 == $t_install_state ) {
 	?>
 
-<table width="100%" border="0" cellpadding="10" cellspacing="1">
 <!-- Setting config variables -->
 <?php print_test( 'Setting Database Hostname', '' !== $f_hostname, true, 'host name is blank' )?>
 
@@ -387,6 +388,7 @@ if( 2 == $t_install_state ) {
 		print_test_result(( '' == $t_error ) && ( '' == $t_warning ), ( '' != $t_error ), $t_error . ' ' . $t_warning );
 		?>
 </tr>
+</table>
 <?php
 	}
 	if( false == $g_failed ) {
