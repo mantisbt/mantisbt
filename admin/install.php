@@ -129,7 +129,7 @@ if( 0 == $t_install_state ) {
 <table width="100%" border="0" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Checking Installation...</span>
+		<span class="title">Checking Installation</span>
 	</td>
 </tr>
 <?php
@@ -878,7 +878,7 @@ if( 6 == $t_install_state ) {
 <table width="100%" border="0" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Checking Installation...</span>
+		<span class="title">Checking Installation</span>
 	</td>
 </tr>
 
@@ -998,7 +998,7 @@ if( $g_failed ) {
 <table width="100%" border="0" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Checks Failed...</span>
+		<span class="title">Checks Failed</span>
 	</td>
 </tr>
 <tr>
