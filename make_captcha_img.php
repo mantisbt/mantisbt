@@ -182,17 +182,12 @@
 					if($this->debug) echo "\n<br />-Captcha-Debug: Fill background with noise: (".$this->nb_noise.")";
 					for($i=0; $i < $this->nb_noise; $i++)
 					{
-						srand((double)microtime()*1000000);
 						$size	= intval(rand((int)($this->minsize / 2.3), (int)($this->maxsize / 1.7)));
-						srand((double)microtime()*1000000);
 						$angle	= intval(rand(0, 360));
-						srand((double)microtime()*1000000);
 						$x		= intval(rand(0, $this->lx));
-						srand((double)microtime()*1000000);
 						$y		= intval(rand(0, (int)($this->ly - ($size / 5))));
 						$this->random_color(160, 224);
 						$color	= $func2($image, $this->r, $this->g, $this->b);
-						srand((double)microtime()*1000000);
 						$text	= chr(intval(rand(45,250)));
 						if(count ($this->TTF_RANGE)>0){
 							@ImageTTFText($image, $size, $angle, $x, $y, $color, $this->change_TTF(), $text);
@@ -225,11 +220,8 @@
 				for($i=0, $x = intval(rand($this->minsize,$this->maxsize)); $i < $this->chars; $i++)
 				{
 					$text	= utf8_strtoupper(substr($private_key, $i, 1));
-					srand((double)microtime()*1000000);
 					$angle	= intval(rand(($this->maxrotation * -1), $this->maxrotation));
-					srand((double)microtime()*1000000);
 					$size	= intval(rand($this->minsize, $this->maxsize));
-					srand((double)microtime()*1000000);
 					$y		= intval(rand((int)($size * 1.5), (int)($this->ly - ($size / 7))));
 					$this->random_color(0, 127);
 					$color	=  $func2($image, $this->r, $this->g, $this->b);
@@ -302,11 +294,8 @@
 
 			function random_color($min,$max)
 			{
-				srand((double)microtime() * 1000000);
 				$this->r = intval(rand($min,$max));
-				srand((double)microtime() * 1000000);
 				$this->g = intval(rand($min,$max));
-				srand((double)microtime() * 1000000);
 				$this->b = intval(rand($min,$max));
 			}
 
@@ -315,7 +304,6 @@
 				if(count($this->TTF_RANGE) > 0){
 					if(is_array($this->TTF_RANGE))
 					{
-						srand((float)microtime() * 10000000);
 						$key = array_rand($this->TTF_RANGE);
 						$this->TTF_file = $this->TTF_folder.$this->TTF_RANGE[$key];
 					}
