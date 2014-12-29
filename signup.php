@@ -59,6 +59,9 @@
 		if ( $t_key != $f_captcha ) {
 			trigger_error( ERROR_SIGNUP_NOT_MATCHING_CAPTCHA, ERROR );
 		}
+
+		# Clear captcha cache
+		session_delete( CAPTCHA_IMG );
 	}
 
 	email_ensure_not_disposable( $f_email );

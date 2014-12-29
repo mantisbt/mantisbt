@@ -542,3 +542,4 @@ define( 'PASSWORD_MAX_SIZE_BEFORE_HASH', 1024 );
 define( 'SECONDS_PER_DAY', 86400 );
 
 define( 'CAPTCHA_KEY', 'captcha_key' );
+define( 'CAPTCHA_IMG', 'captcha_image' );

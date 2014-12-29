@@ -147,7 +147,7 @@
 				if($this->debug) echo "\n<br />-Captcha-Debug: Set image dimension to: (".$this->lx." x ".$this->ly.")";
 			}
 
-			function make_captcha( $private_key )
+			function generate_captcha( $private_key )
 			{
 				if($this->debug) echo "\n<br />-Captcha-Debug: Generate private key: ($private_key)";
 
@@ -221,7 +221,7 @@
 				}
 
 				// generate Text
-				if($this->debug) echo "\n<br />-Captcha-Debug: Fill forground with chars and shadows: (".$this->chars.")";
+				if($this->debug) echo "\n<br />-Captcha-Debug: Fill foreground with chars and shadows: (".$this->chars.")";
 				for($i=0, $x = intval(rand($this->minsize,$this->maxsize)); $i < $this->chars; $i++)
 				{
 					$text	= utf8_strtoupper(substr($private_key, $i, 1));
@@ -245,10 +245,42 @@
 					}
 					$x += (int)($size + ($this->minsize / 5));
 				}
-				header('Content-type: image/jpeg');
+
+				# Generate the JPEG
+				ob_start();
 				@ImageJPEG($image, null, $this->jpegquality);
+				$jpg = ob_get_contents();
+				ob_end_clean();
+
 				@ImageDestroy($image);
 				if($this->debug) echo "\n<br />-Captcha-Debug: Destroy Imagestream.";
+
+				return $jpg;
+			}
+
+			function make_captcha( $private_key )
+			{
+				# Retrieve previously image generated from session cache
+				$t_image = session_get( CAPTCHA_IMG, null );
+
+				if( is_null( $t_image ) ) {
+					$t_image = $this->generate_captcha( $private_key );
+					if( $this->debug ) {
+						echo "\n<br />-Captcha-Debug: Caching generated image.";
+					}
+					session_set( CAPTCHA_IMG, $t_image );
+				} elseif( $this->debug ) {
+					echo "\n<br />-Captcha-Debug: Retrieved image from cache.";
+				}
+
+				# Output
+				if( $this->debug ) {
+					echo "\n<br />-Captcha-Debug: Generated image (" . strlen( $t_image ) . " bytes): "
+						. '<img src="data:image/jpeg;base64,' . base64_encode( $t_image ) . '">';
+				} else {
+					header('Content-type: image/jpeg');
+					echo $t_image;
+				}
 			}
 
 			/** @private **/
