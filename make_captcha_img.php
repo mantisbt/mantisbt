@@ -182,13 +182,13 @@
 					if($this->debug) echo "\n<br />-Captcha-Debug: Fill background with noise: (".$this->nb_noise.")";
 					for($i=0; $i < $this->nb_noise; $i++)
 					{
-						$size	= intval(rand((int)($this->minsize / 2.3), (int)($this->maxsize / 1.7)));
-						$angle	= intval(rand(0, 360));
-						$x		= intval(rand(0, $this->lx));
-						$y		= intval(rand(0, (int)($this->ly - ($size / 5))));
+						$size	= intval(mt_rand((int)($this->minsize / 2.3), (int)($this->maxsize / 1.7)));
+						$angle	= intval(mt_rand(0, 360));
+						$x		= intval(mt_rand(0, $this->lx));
+						$y		= intval(mt_rand(0, (int)($this->ly - ($size / 5))));
 						$this->random_color(160, 224);
 						$color	= $func2($image, $this->r, $this->g, $this->b);
-						$text	= chr(intval(rand(45,250)));
+						$text	= chr(intval(mt_rand(45,250)));
 						if(count ($this->TTF_RANGE)>0){
 							@ImageTTFText($image, $size, $angle, $x, $y, $color, $this->change_TTF(), $text);
 						} else {
@@ -217,12 +217,12 @@
 
 				// generate Text
 				if($this->debug) echo "\n<br />-Captcha-Debug: Fill foreground with chars and shadows: (".$this->chars.")";
-				for($i=0, $x = intval(rand($this->minsize,$this->maxsize)); $i < $this->chars; $i++)
+				for($i=0, $x = intval(mt_rand($this->minsize,$this->maxsize)); $i < $this->chars; $i++)
 				{
 					$text	= utf8_strtoupper(substr($private_key, $i, 1));
-					$angle	= intval(rand(($this->maxrotation * -1), $this->maxrotation));
-					$size	= intval(rand($this->minsize, $this->maxsize));
-					$y		= intval(rand((int)($size * 1.5), (int)($this->ly - ($size / 7))));
+					$angle	= intval(mt_rand(($this->maxrotation * -1), $this->maxrotation));
+					$size	= intval(mt_rand($this->minsize, $this->maxsize));
+					$y		= intval(mt_rand((int)($size * 1.5), (int)($this->ly - ($size / 7))));
 					$this->random_color(0, 127);
 					$color	=  $func2($image, $this->r, $this->g, $this->b);
 					$this->random_color(0, 127);
@@ -231,7 +231,7 @@
 						@ImageTTFText($image, $size, $angle, $x + (int)($size / 15), $y, $shadow, $this->change_TTF(), $text);
 						@ImageTTFText($image, $size, $angle, $x, $y - (int)($size / 15), $color, $this->TTF_file, $text);
 					} else {
-						$t_font = rand(3,5);
+						$t_font = mt_rand(3,5);
 						imagestring($image,$t_font,$x + (int)($size / 15),$y-20,$text,$color);
 						imagestring($image,$t_font,$x,$y - (int)($size / 15)-20,$text,$color);
 					}
@@ -294,9 +294,9 @@
 
 			function random_color($min,$max)
 			{
-				$this->r = intval(rand($min,$max));
-				$this->g = intval(rand($min,$max));
-				$this->b = intval(rand($min,$max));
+				$this->r = intval(mt_rand($min,$max));
+				$this->g = intval(mt_rand($min,$max));
+				$this->b = intval(mt_rand($min,$max));
 			}
 
 			function change_TTF()
