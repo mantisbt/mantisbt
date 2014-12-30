@@ -284,13 +284,42 @@ print_test( 'Checking if safe mode is enabled for install script',
 	'Disable safe_mode in php.ini before proceeding' ) ?>
 
 <?php
-	print_test( 'Checking there is no config_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/config_inc.php' ), true, 'Move config_inc.php to config/config_inc.php.' );
-	print_test( 'Checking there is no custom_constants_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/custom_constants_inc.php' ), true, 'Move custom_constants_inc.php to config/custom_constants_inc.php.' );
-	print_test( 'Checking there is no custom_strings_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/custom_strings_inc.php' ), true, 'Move custom_strings_inc.php to config/custom_strings_inc.php.' );
-	print_test( 'Checking there is no custom_functions_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/custom_functions_inc.php' ), true, 'Move custom_functions_inc.php to config/custom_functions_inc.php.' );
-	print_test( 'Checking there is no custom_relationships_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/custom_relationships_inc.php' ), true, 'Move custom_relationships_inc.php to config/custom_relationships_inc.php.' );
-	print_test( 'Checking there is no mc_config_defaults_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/api/soap/mc_config_defaults_inc.php' ), true, 'Delete this file.' );
-	print_test( 'Checking there is no mc_config_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/api/soap/mc_config_inc.php' ), true, 'Move contents to config_inc.php file.' );
+	# Check for custom config files in obsolete locations
+	$t_config_files = array(
+		'config_inc.php' => 'move',
+		'custom_constants_inc.php' => 'move',
+		'custom_strings_inc.php' => 'move',
+		'custom_functions_inc.php' => 'move',
+		'custom_relationships_inc.php' => 'move',
+		'mc_config_defaults_inc.php' => 'delete',
+		'mc_config_inc.php' => 'contents',
+	);
+
+	foreach( $t_config_files as $t_file => $t_action ) {
+		$t_dir = dirname( dirname( __FILE__ ) ) . '/';
+		if( substr( $t_file, 0, 3 ) == 'mc_' ) {
+			$t_dir .= 'api/soap/';
+		}
+
+		switch( $t_action ) {
+			case 'move':
+				$t_message = "Move $t_file to config/$t_file.";
+				break;
+			case 'delete':
+				$t_message = 'Delete this file.';
+				break;
+			case 'contents':
+				$t_message = 'Move contents to config_inc.php file.';
+				break;
+		}
+
+		print_test(
+			"Checking there is no '$t_file' file in 1.2.x location.",
+			!file_exists( $t_dir . $t_file ),
+			true,
+			$t_message
+		);
+	}
 ?>
 
 </table>
