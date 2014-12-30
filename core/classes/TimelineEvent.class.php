@@ -44,15 +44,6 @@ class TimelineEvent {
 	}
 
 	/**
-	 * Whether to skip this timeline event.
-	 * This normally implements access checks for the event.
-	 * @return boolean
-	 */
-	public function skip() {
-		return false;
-	}
-
-	/**
 	 * Comparision function for ordering of timeline events.
 	 * We compare first by timestamp, then by the tie_breaker field.
 	 * @param TimelineEvent $p_other An instance of TimelineEvent to compare against.

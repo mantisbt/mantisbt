@@ -45,23 +45,6 @@ class IssueNoteCreatedTimelineEvent extends TimelineEvent {
 	}
 
 	/**
-	 * Whether to skip this event after access checks
-	 * @return boolean
-	 */
-	public function skip() {
-		if( !bugnote_exists( $this->issue_note_id ) ) {
-			return true;
-		}
-
-		$t_bug = bug_get( $this->issue_id, true );
-		if( !access_has_bugnote_level( config_get( 'view_bug_threshold', null, null, $t_bug->project_id ), $this->issue_note_id ) ) {
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
 	 * Returns html string to display
 	 * @return string
 	 */

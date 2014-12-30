@@ -162,9 +162,11 @@ function history_get_events_array( $p_bug_id, $p_user_id = null ) {
  * 'field','type','old_value','new_value'
  * @param integer $p_bug_id  A valid bug identifier.
  * @param integer $p_user_id A valid user identifier.
+ * @param integer $p_start_time The start time to filter by, or null for all.
+ * @param integer $p_end_time   The end time to filter by, or null for all.
  * @return array
  */
-function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
+function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_time = null, $p_end_time = null ) {
 	$t_history_order = config_get( 'history_order' );
 
 	$t_user_id = (( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
@@ -193,6 +195,14 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 	$j = 0;
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		extract( $t_row, EXTR_PREFIX_ALL, 'v' );
+
+		if ( $p_start_time !== null && $v_date_modified < $p_start_time ) {
+			continue;
+		}
+
+		if ( $p_end_time !== null && $v_date_modified > $p_end_time ) {
+			continue;
+		}
 
 		if( $v_type == NORMAL_TYPE ) {
 			if( !in_array( $v_field_name, $t_standard_fields ) ) {
