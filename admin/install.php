@@ -1081,15 +1081,15 @@ if( 5 == $t_install_state ) {
 	}
 
 	$t_config = '<?php' . PHP_EOL
-		. '$g_hostname               = \'' . $f_hostname . '\';' . PHP_EOL
-		. '$g_db_type                = \'' . $f_db_type . '\';' . PHP_EOL
+		. '$g_hostname               = \'' . addslashes( $f_hostname ) . '\';' . PHP_EOL
+		. '$g_db_type                = \'' . addslashes( $f_db_type ) . '\';' . PHP_EOL
 		. '$g_database_name          = \'' . addslashes( $f_database_name ) . '\';' . PHP_EOL
 		. '$g_db_username            = \'' . addslashes( $f_db_username ) . '\';' . PHP_EOL
 		. '$g_db_password            = \'' . addslashes( $f_db_password ) . '\';' . PHP_EOL;
 
 	switch( $f_db_type ) {
 		case 'db2':
-			$t_config .=  '$g_db_schema              = \'' . $f_db_schema . '\';' . PHP_EOL;
+			$t_config .=  '$g_db_schema              = \'' . addslashes( $f_db_schema ) . '\';' . PHP_EOL;
 			break;
 		default:
 			break;
@@ -1101,7 +1101,7 @@ if( 5 == $t_install_state ) {
 	foreach( $t_prefix_defaults['other'] as $t_key => $t_value ) {
 		$t_new_value = ${'f_' . $t_key};
 		if( $t_new_value != $t_value ) {
-			$t_config .= '$g_' . str_pad( $t_key, 25 ) . '= \'' . ${'f_' . $t_key} . '\';' . PHP_EOL;
+			$t_config .= '$g_' . str_pad( $t_key, 25 ) . '= \'' . addslashes( ${'f_' . $t_key} ) . '\';' . PHP_EOL;
 			$t_insert_line = true;
 		}
 	}
@@ -1110,7 +1110,7 @@ if( 5 == $t_install_state ) {
 	}
 
 	$t_config .=
-		  '$g_default_timezone       = \'' . $f_timezone . '\';' . PHP_EOL
+		  '$g_default_timezone       = \'' . addslashes( $f_timezone ) . '\';' . PHP_EOL
 		. PHP_EOL
 		. "\$g_crypto_master_salt     = '" . addslashes( $t_crypto_master_salt ) . "';" . PHP_EOL;
 
