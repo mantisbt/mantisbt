@@ -171,6 +171,7 @@ class MantisPHPSession extends MantisSession {
 		}
 
 		unset( $_SESSION[ $this->key ] );
+		session_write_close();
 	}
 }
 
