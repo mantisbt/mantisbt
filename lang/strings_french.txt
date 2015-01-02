@@ -1223,6 +1223,7 @@ $s_timeline_issue_closed = '<span class="username">%1s</span> a clôturé le pro
 $s_timeline_issue_reopened = '<span class="username">%1s</span> a réouvert le problème <span class="issue_id">%2s</span>';
 $s_timeline_issue_assigned = '<span class="username">%1s</span> a affecté le problème <span class="issue_id">%2s</span> à <span class="username">%3s</span>';
 $s_timeline_issue_assigned_to_self = '<span class="username">%1s</span> a pris en charge le problème <span class="issue_id">%2s</span>';
+$s_timeline_issue_unassigned = '<span class="username">%1s</span> problème non assigné <span class="issue_id">%2s</span>';
 $s_timeline_no_activity = 'Aucune activité dans l’intervalle de temps.';
 $s_timeline_title = 'Chronologie';
 $s_timeline_more = 'Plus d’événements…';

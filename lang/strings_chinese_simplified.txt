@@ -1215,6 +1215,7 @@ $s_timeline_issue_closed = '<span class="username">%1s</span>关闭了问题<spa
 $s_timeline_issue_reopened = '<span class="username">%1s</span>重启了问题<span class="issue_id">%2s</span>';
 $s_timeline_issue_assigned = '<span class="username">%1s</span>将问题<span class="issue_id">%2s</span>分配给<span class="username">%3s</span>';
 $s_timeline_issue_assigned_to_self = '<span class="username">%1s</span>开始解决问题<span class="issue_id">%2s</span>';
+$s_timeline_issue_unassigned = '<span class="username">%1s</span>取消分配了问题<span class="issue_id">%2s</span>';
 $s_timeline_no_activity = '指定的时间段内没有活动。';
 $s_timeline_title = '时间轴';
 $s_timeline_more = '更多事件…';

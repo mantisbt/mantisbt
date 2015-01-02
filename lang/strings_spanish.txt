@@ -1217,6 +1217,7 @@ $s_timeline_issue_closed = '<span class="username">%1s</span> cerró la incidenc
 $s_timeline_issue_reopened = '<span class="username">%1s</span> reabrió la incidencia <span class="issue_id">%2s</span>';
 $s_timeline_issue_assigned = '<span class="username">%1s</span> asignó la incidencia <span class="issue_id">%2s</span> a <span class="username">%3s</span>';
 $s_timeline_issue_assigned_to_self = '<span class="username">%1s</span> se asignó la incidencia <span class="issue_id">%2s</span>';
+$s_timeline_issue_unassigned = '<span class="username">%1s</span> desasignó la incidencia <span class="issue_id">%2s</span>';
 $s_timeline_no_activity = 'No hay actividad en el intervalo de tiempo.';
 $s_timeline_title = 'Línea de tiempo';
 $s_timeline_more = 'Más eventos...';

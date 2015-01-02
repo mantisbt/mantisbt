@@ -1208,6 +1208,7 @@ $s_timeline_issue_closed = '<span class="username">%1s</span> heeft de melding <
 $s_timeline_issue_reopened = '<span class="username">%1s</span> heeft de melding <span class="issue_id">%2s</span> heropent';
 $s_timeline_issue_assigned = '<span class="username">%1s</span> heeft de melding <span class="issue_id">%2s</span> toegewezen aan <span class="username">%3s</span>';
 $s_timeline_issue_assigned_to_self = '<span class="username">%1s</span> heeft verantwoordelijkheid genomen voor de melding <span class="issue_id">%2s</span>';
+$s_timeline_issue_unassigned = '<span class="username">%1s</span> heeft de toewijzing voor de melding <span class="issue_id">%2s</span> verwijderd';
 $s_timeline_no_activity = 'Geen activiteit in tijdsbereik';
 $s_timeline_title = 'Tijdlijn';
 $s_timeline_more = 'Meer gebeurtenissen...';

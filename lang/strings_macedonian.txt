@@ -1204,6 +1204,7 @@ $s_timeline_issue_closed = '<span class="username">%1s</span> го затвор�
 $s_timeline_issue_reopened = '<span class="username">%1s</span> повторно го отвори проблемот  <span class="issue_id">%2s</span>';
 $s_timeline_issue_assigned = '<span class="username">%1s</span> го додели проблемот  <span class="issue_id">%2s</span> на <span class="username">%3s</span>';
 $s_timeline_issue_assigned_to_self = '<span class="username">%1s</span> го презеде проблемот <span class="issue_id">%2s</span>';
+$s_timeline_issue_unassigned = '<span class="username">%1s</span> недоделен проблем <span class="issue_id">%2s</span>';
 $s_timeline_no_activity = 'Нема активности во овој временски опсег.';
 $s_timeline_title = 'Хронологија';
 $s_timeline_more = 'Уште настани...';
