@@ -268,7 +268,7 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 
 	# Check for URL's pointing to other domains
 	if( 0 == $t_type || empty( $t_matches['script'] ) ||
-		3 == $t_type && preg_match( '@(?:[^:]*)?://@', $t_url ) > 0 ) {
+		3 == $t_type && preg_match( '@(?:[^:]*)?:/*@', $t_url ) > 0 ) {
 
 		return ( $p_return_absolute ? $t_path . '/' : '' ) . 'index.php';
 	}
