@@ -180,9 +180,29 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_ti
 	# I give you an example. We create a child of a bug with different custom fields. In the history of the child
 	# bug we will find the line related to the relationship mixed with the custom fields (the history is creted
 	# for the new bug with the same timestamp...)
-	$t_query = 'SELECT * FROM {bug_history} WHERE bug_id=' . db_param() . '
-				ORDER BY date_modified ' . $t_history_order . ',id';
-	$t_result = db_query( $t_query, array( $p_bug_id ) );
+
+	$t_params = array( $p_bug_id );
+
+	$t_query = 'SELECT * FROM {bug_history} WHERE bug_id=' . db_param();
+
+	$t_where = array();
+	if ( $p_start_time !== null ) {
+		$t_where[] = 'date_modified >= ' . db_param();
+		$t_params[] = $p_start_time;
+	}
+
+	if ( $p_end_time !== null ) {
+		$t_where[] = 'date_modified < ' . db_param();
+		$t_params[] = $p_end_time;
+	}
+
+	if ( count( $t_where ) > 0 ) {
+		$t_query .= ' AND ' . implode( ' AND ', $t_where );
+	}
+
+	$t_query .= ' ORDER BY date_modified ' . $t_history_order . ',id';
+
+	$t_result = db_query( $t_query, $t_params );
 	$t_raw_history = array();
 
 	$t_private_bugnote_visible = access_has_bug_level( config_get( 'private_bugnote_threshold' ), $p_bug_id, $t_user_id );
@@ -195,14 +215,6 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_ti
 	$j = 0;
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		extract( $t_row, EXTR_PREFIX_ALL, 'v' );
-
-		if ( $p_start_time !== null && $v_date_modified < $p_start_time ) {
-			continue;
-		}
-
-		if ( $p_end_time !== null && $v_date_modified > $p_end_time ) {
-			continue;
-		}
 
 		if( $v_type == NORMAL_TYPE ) {
 			if( !in_array( $v_field_name, $t_standard_fields ) ) {
