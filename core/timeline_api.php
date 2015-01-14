@@ -78,7 +78,7 @@ function timeline_events( $p_start_time, $p_end_time ) {
 	$t_timeline_events = array();
 
 	foreach ( $t_issue_ids as $t_issue_id ) {
-		$t_history_events_array = history_get_raw_events_array( $t_issue_id );
+		$t_history_events_array = history_get_raw_events_array( $t_issue_id, null, $p_start_time, $p_end_time );
 		$t_history_events_array = array_reverse( $t_history_events_array );
 
 		foreach ( $t_history_events_array as $t_history_event ) {
@@ -159,30 +159,6 @@ function timeline_sort_events( array $p_events ) {
 	}
 
 	return $p_events;
-}
-
-/**
- * Truncate an array of events.
- * @param array   $p_events    Array of events to truncate.
- * @param integer $p_max_count Maximum number of entries to return.
- * @return array
- */
-function timeline_filter_events( array $p_events, $p_max_count ) {
-	$t_events = array();
-
-	foreach ( $p_events as $t_event ) {
-		if( $t_event->skip() ) {
-			continue;
-		}
-
-		$t_events[] = $t_event;
-
-		if( $p_max_count > 0 && count( $t_events ) >= $p_max_count ) {
-			break;
-		}
-	}
-
-	return $t_events;
 }
 
 /**
