@@ -764,28 +764,29 @@ div#summary-bottom	{ width: 99.8%; clear: both; }
  */
 
 /* timeline header styles */
-div.timeline { width: 35%; float: right; border: solid 1px #000000; margin-top: 10px; padding-left: 20px; margin-bottom: 10px; }
-div.timeline .heading { font-size: x-large; }
-div.timeline .date-range { font-size: small; padding-bottom: 20px; }
+div.timeline { width: 34%; float: right; border: solid 1px #000000; margin-top: 10px; padding: 3px 20px 15px 20px; margin-bottom: 10px; }
+div.timeline div { padding: 0; }
+div.timeline .heading { font-size: x-large; padding-top: 3px; padding-bottom: 3px; }
+div.timeline .date-range { font-size: small; }
 
 /* timeline entry styles */
-div.timeline div.entry { padding: 10px 0; }
+div.timeline div.entry { padding-top: 15px; }
+div.timeline * div { overflow: hidden; }
 div.timeline * span.tag_name { background-color: green; color: white; border-radius: 5px; padding-left: 5px; padding-right: 5px; }
 div.timeline * span.username { font-weight:bold; }
+div.timeline p { margin-bottom: 3px; }
 
 /* timeline avatar */
-div.timeline * img.avatar { float: left; padding: 5px 0; width: 32px; height: 32px; }
-div.timeline div.entry-no-avatar img.avatar { display: none; }
+div.timeline div.no-avatar { display: none; }
+div.timeline div.avatar { float: left; padding-top: 2px; margin-right: 13px; }
+div.timeline * img.avatar { float: left; margin-right: 0; }
 
 /* timeline timestamp */
-div.timeline * div.timestamp { position: relative; left: 10px; font-size: x-small; color: gray; }
-div.timeline div.entry-no-avatar div.timestamp { top: 5px; left: -2px; }
+div.timeline * div.timestamp { font-size: x-small; color: gray; }
 
 /* timeline action */
-div.timeline * div.action { position: relative; left:10px; padding-right: 50px; }
-div.timeline div.entry-no-avatar div.action { top: 0px; left: -2px; }
+div.timeline * div.action { padding-top: 3px; }
 
-div.timeline p { margin-left: 3px; }
 
 /* manage_config_* colors */
 .color-global		{ background-color: LightBlue; }
