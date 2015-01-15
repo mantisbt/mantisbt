@@ -17,11 +17,13 @@
 require_once( 'core.php' );
 require_api( 'timeline_api.php' );
 
+define( 'MAX_EVENTS', 50 );
+
 $f_days = gpc_get_int( 'days', 0 );
 $f_all = gpc_get_int( 'all', 0 );
 
-$t_end_time = time() - ( $f_days * 24 * 60 * 60 );
-$t_start_time = $t_end_time - ( 7 * 24 * 60 * 60 );
+$t_end_time = time() - ( $f_days * SECONDS_PER_DAY );
+$t_start_time = $t_end_time - ( 7 * SECONDS_PER_DAY );
 $t_events = timeline_events( $t_start_time, $t_end_time );
 
 echo '<div class="timeline">';
@@ -45,7 +47,7 @@ echo '<div class="date-range">' . date( $t_short_date_format, $t_start_time ) . 
 $t_events = timeline_sort_events( $t_events );
 
 if ( $f_all == 0 ) {
-	$t_events = array_slice( $t_events, 0, 50 );
+	$t_events = array_slice( $t_events, 0, MAX_EVENTS );
 }
 
 if( count( $t_events ) > 0 ) {
