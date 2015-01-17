@@ -85,7 +85,7 @@ $t_install_state = gpc_get_int( 'install', 0 );
 <link rel="stylesheet" type="text/css" href="admin.css" />
 </head>
 <body>
-<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr class="top-bar">
 		<td class="links">
 			[ <a href="index.php">Back to Administration</a> ]
@@ -93,6 +93,9 @@ $t_install_state = gpc_get_int( 'install', 0 );
 		<td class="title">
 		<?php
 switch( $t_install_state ) {
+	case 7:
+		echo "Installation Complete";
+		break;
 	case 6:
 		echo "Post Installation Checks";
 		break;
@@ -113,6 +116,7 @@ switch( $t_install_state ) {
 		break;
 	case 0:
 	default:
+		$t_install_state = 0;
 		echo "Pre-Installation Check";
 		break;
 }
@@ -124,12 +128,14 @@ switch( $t_install_state ) {
 
 <form method='POST'>
 <?php
-if( 0 == $t_install_state ) {
+# installation checks table header is valid both for pre-install and
+# database installation steps
+if( 0 == $t_install_state || 2 == $t_install_state ) {
 	?>
-<table width="100%" bgcolor="#222222" border="0" cellpadding="10" cellspacing="1">
+<table width="100%" border="0" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Checking Installation...</span>
+		<span class="title">Checking Installation</span>
 	</td>
 </tr>
 <?php
@@ -235,7 +241,6 @@ print_test( 'Checking if safe mode is enabled for install script',
 if( 2 == $t_install_state ) {
 	?>
 
-<table width="100%" border="0" cellpadding="10" cellspacing="1">
 <!-- Setting config variables -->
 <?php print_test( 'Setting Database Hostname', '' !== $f_hostname, true, 'host name is blank' )?>
 
@@ -383,6 +388,7 @@ if( 2 == $t_install_state ) {
 		print_test_result(( '' == $t_error ) && ( '' == $t_warning ), ( '' != $t_error ), $t_error . ' ' . $t_warning );
 		?>
 </tr>
+</table>
 <?php
 	}
 	if( false == $g_failed ) {
@@ -444,7 +450,7 @@ if( !$g_database_upgrade ) {?>
 		Hostname (for Database Server)
 	</td>
 	<td>
-		<input name="hostname" type="textbox" value="<?php echo string_attribute( $f_hostname ) ?>"></input>
+		<input name="hostname" type="textbox" value="<?php echo string_attribute( $f_hostname ) ?>">
 	</td>
 </tr>
 <?php
@@ -456,7 +462,7 @@ if( !$g_database_upgrade ) {?>
 		Username (for Database)
 	</td>
 	<td>
-		<input name="db_username" type="textbox" value="<?php echo string_attribute( $f_db_username ) ?>"></input>
+		<input name="db_username" type="textbox" value="<?php echo string_attribute( $f_db_username ) ?>">
 	</td>
 </tr>
 <?php
@@ -468,7 +474,7 @@ if( !$g_database_upgrade ) {?>
 		Password (for Database)
 	</td>
 	<td>
-		<input name="db_password" type="password" value="<?php echo( !is_blank( $f_db_password ) ? CONFIGURED_PASSWORD : "" )?>"></input>
+		<input name="db_password" type="password" value="<?php echo( !is_blank( $f_db_password ) ? CONFIGURED_PASSWORD : "" )?>">
 	</td>
 </tr>
 <?php
@@ -480,7 +486,7 @@ if( !$g_database_upgrade ) {?>
 		Database name (for Database)
 	</td>
 	<td>
-		<input name="database_name" type="textbox" value="<?php echo string_attribute( $f_database_name ) ?>"></input>
+		<input name="database_name" type="textbox" value="<?php echo string_attribute( $f_database_name ) ?>">
 	</td>
 </tr>
 <?php
@@ -491,7 +497,7 @@ if( !$g_database_upgrade ) {?>
 		Admin Username (to <?php echo( !$g_database_upgrade ) ? 'create Database' : 'update Database'?> if required)
 	</td>
 	<td>
-		<input name="admin_username" type="textbox" value="<?php echo string_attribute( $f_admin_username ) ?>"></input>
+		<input name="admin_username" type="textbox" value="<?php echo string_attribute( $f_admin_username ) ?>">
 	</td>
 </tr>
 
@@ -500,7 +506,7 @@ if( !$g_database_upgrade ) {?>
 		Admin Password (to <?php echo( !$g_database_upgrade ) ? 'create Database' : 'update Database'?> if required)
 	</td>
 	<td>
-		<input name="admin_password" type="password" value="<?php echo string_attribute( $f_admin_password ) ?>"></input>
+		<input name="admin_password" type="password" value="<?php echo string_attribute( $f_admin_password ) ?>">
 	</td>
 </tr>
 
@@ -509,7 +515,7 @@ if( !$g_database_upgrade ) {?>
 		Print SQL Queries instead of Writing to the Database
 	</td>
 	<td>
-		<input name="log_queries" type="checkbox" value="1" <?php echo( $f_log_queries ? 'checked="checked"' : '' )?>></input>
+		<input name="log_queries" type="checkbox" value="1" <?php echo( $f_log_queries ? 'checked="checked"' : '' )?>>
 	</td>
 </tr>
 
@@ -518,10 +524,10 @@ if( !$g_database_upgrade ) {?>
 		Attempt Installation
 	</td>
 	<td>
-		<input name="go" type="submit" class="button" value="Install/Upgrade Database"></input>
+		<input name="install" type="hidden" value="2">
+		<input name="go" type="submit" class="button" value="Install/Upgrade Database">
 	</td>
 </tr>
-<input name="install" type="hidden" value="2"></input>
 
 </table>
 <?php
@@ -759,17 +765,17 @@ if( 4 == $t_install_state ) {
 	# @todo to be written
 	// must post data gathered to preserve it
 	?>
-		<input name="hostname" type="hidden" value="<?php echo string_attribute( $f_hostname ) ?>"></input>
-		<input name="db_type" type="hidden" value="<?php echo string_attribute( $f_db_type ) ?>"></input>
-		<input name="database_name" type="hidden" value="<?php echo string_attribute( $f_database_name ) ?>"></input>
-		<input name="db_username" type="hidden" value="<?php echo string_attribute( $f_db_username ) ?>"></input>
-		<input name="db_password" type="hidden" value="<?php echo string_attribute( $f_db_password ) ?>"></input>
-		<input name="admin_username" type="hidden" value="<?php echo string_attribute( $f_admin_username ) ?>"></input>
-		<input name="admin_password" type="hidden" value="<?php echo string_attribute( $f_admin_password ) ?>"></input>
-		<input name="log_queries" type="hidden" value="<?php echo( $f_log_queries ? 1 : 0 )?>"></input>
-		<input name="db_exists" type="hidden" value="<?php echo( $f_db_exists ? 1 : 0 )?>"></input>
+		<input name="hostname" type="hidden" value="<?php echo string_attribute( $f_hostname ) ?>">
+		<input name="db_type" type="hidden" value="<?php echo string_attribute( $f_db_type ) ?>">
+		<input name="database_name" type="hidden" value="<?php echo string_attribute( $f_database_name ) ?>">
+		<input name="db_username" type="hidden" value="<?php echo string_attribute( $f_db_username ) ?>">
+		<input name="db_password" type="hidden" value="<?php echo string_attribute( $f_db_password ) ?>">
+		<input name="admin_username" type="hidden" value="<?php echo string_attribute( $f_admin_username ) ?>">
+		<input name="admin_password" type="hidden" value="<?php echo string_attribute( $f_admin_password ) ?>">
+		<input name="log_queries" type="hidden" value="<?php echo( $f_log_queries ? 1 : 0 )?>">
+		<input name="db_exists" type="hidden" value="<?php echo( $f_db_exists ? 1 : 0 )?>">
 <?php
-	# must post <input name="install" type="hidden" value="5"></input>
+	# must post <input name="install" type="hidden" value="5">
 	# rather than the following line
 */
 	$t_install_state++;
@@ -789,28 +795,23 @@ if( 5 == $t_install_state ) {
 
 <tr>
 	<td bgcolor="#ffffff">
-		<?php
-			if( !$t_config_exists ) {
-		echo 'Creating Configuration File (config_inc.php)<br />';
-		echo '<font color="red">(if this file is not created, create it manually with the contents below)</font>';
-	} else {
-		echo 'Updating Configuration File (config_inc.php)<br />';
-	}
-	?>
+		<?php echo ( $t_config_exists ? 'Updating' : 'Creating' )
+			. ' Configuration File (config_inc.php)'; ?>
 	</td>
 	<?php
-		$t_config = '<?php' . "\r\n";
-	$t_config .= "\t\$g_hostname = '$f_hostname';\r\n";
-	$t_config .= "\t\$g_db_type = '$f_db_type';\r\n";
-	$t_config .= "\t\$g_database_name = '$f_database_name';\r\n";
-	$t_config .= "\t\$g_db_username = '$f_db_username';\r\n";
-	$t_config .= "\t\$g_db_password = '$f_db_password';\r\n";
+	# Generating the config_inc.php file
+
+	$t_config = '<?php' . "\r\n";
+	$t_config .= "\$g_hostname = '$f_hostname';\r\n";
+	$t_config .= "\$g_db_type = '$f_db_type';\r\n";
+	$t_config .= "\$g_database_name = '$f_database_name';\r\n";
+	$t_config .= "\$g_db_username = '$f_db_username';\r\n";
+	$t_config .= "\$g_db_password = '$f_db_password';\r\n";
 
 	if( $f_db_type == 'db2' ) {
-		$t_config .= "\t\$g_db_schema = '$f_db_schema';\r\n";
+		$t_config .= "\$g_db_schema = '$f_db_schema';\r\n";
 	}
 
-	$t_config .= '?>' . "\r\n";
 	$t_write_failed = true;
 
 	if( !$t_config_exists ) {
@@ -843,9 +844,26 @@ if( 5 == $t_install_state ) {
 </tr>
 <?php
 	if( true == $t_write_failed ) {
-		echo '<tr><table width="50%" border="0" cellpadding="10" cellspacing="1" align="center">';
-		echo '<tr><td>Please add the following lines to ' . $g_absolute_path . 'config_inc.php before continuing to the database upgrade check:</td></tr>';
-		echo '<tr><td><pre>' . htmlentities( $t_config ) . '</pre></td></tr></table></tr>';
+?>
+<tr>
+	<td colspan="2">
+		<table width="50%" cellpadding="10" cellspacing="1">
+			<tr>
+				<td>
+					Please add the following lines to
+					<em>'<?php echo $g_absolute_path; ?>config_inc.php'</em>
+					before continuing:
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<pre><?php echo htmlentities( $t_config ); ?></pre>
+				</td>
+			</tr>
+		</table>
+	</td>
+</tr>
+<?php
 	}
 	?>
 
@@ -863,10 +881,10 @@ if( 6 == $t_install_state ) {
 
 	# post install checks
 	?>
-<table width="100%" bgcolor="#222222" border="0" cellpadding="10" cellspacing="1">
+<table width="100%" border="0" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Checking Installation...</span>
+		<span class="title">Checking Installation</span>
 	</td>
 </tr>
 
@@ -968,41 +986,50 @@ if( 6 == $t_install_state ) {
 if( 7 == $t_install_state ) {
 	# cleanup and launch upgrade
 	?>
-<p>Install was successful.</p>
-<?php if( $f_db_exists ) {?>
-<p><a href="../login_page.php">Continue</a> to log into Mantis</p>
-<?php
-	} else {?>
-<p>Please log in as the administrator and <a href="../login_page.php">create</a> your first project.
+<table width="100%" border="0" cellpadding="10" cellspacing="1">
+	<tr>
+		<td bgcolor="#e8e8e8" colspan="2">
+			<span class="title"><?php echo ( $f_db_exists ? 'Upgrade' : 'Installation' ) . ' Complete' ?></span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<?php if( $f_db_exists ) {?>
+			Please <a href="../login_page.php">log into Mantis</a>.
+			<?php } else {?>
+			Please <a href="../login_page.php">log in as the administrator</a> and create your first project.
+			<?php } ?>
+		</td>
+	</tr>
+</table>
 
 <?php
-	}
 }
 
 # end install_state == 7
 
 if( $g_failed ) {
 	?>
-<table width="100%" bgcolor="#222222" border="0" cellpadding="10" cellspacing="1">
+<table width="100%" border="0" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Checks Failed...</span>
+		<span class="title">Checks Failed</span>
 	</td>
 </tr>
 <tr>
 	<td bgcolor="#ffffff">Please correct failed checks</td>
 	<td bgcolor="#ffffff">
-		<input name="install" type="hidden" value="<?php echo $t_install_state ?>"></input>
-		<input name="hostname" type="hidden" value="<?php echo string_attribute( $f_hostname ) ?>"></input>
-		<input name="db_type" type="hidden" value="<?php echo string_attribute( $f_db_type ) ?>"></input>
-		<input name="database_name" type="hidden" value="<?php echo string_attribute( $f_database_name ) ?>"></input>
-		<input name="db_username" type="hidden" value="<?php echo string_attribute( $f_db_username ) ?>"></input>
-		<input name="db_password" type="hidden" value="<?php echo string_attribute( $f_db_password ) ?>"></input>
-		<input name="admin_username" type="hidden" value="<?php echo string_attribute( $f_admin_username ) ?>"></input>
-		<input name="admin_password" type="hidden" value="<?php echo string_attribute( $f_admin_password ) ?>"></input>
-		<input name="log_queries" type="hidden" value="<?php echo( $f_log_queries ? 1 : 0 )?>"></input>
-		<input name="db_exists" type="hidden" value="<?php echo( $f_db_exists ? 1 : 0 )?>"></input>
-		<input name="retry" type="submit" class="button" value="Retry"></input>
+		<input name="install" type="hidden" value="<?php echo $t_install_state ?>">
+		<input name="hostname" type="hidden" value="<?php echo string_attribute( $f_hostname ) ?>">
+		<input name="db_type" type="hidden" value="<?php echo string_attribute( $f_db_type ) ?>">
+		<input name="database_name" type="hidden" value="<?php echo string_attribute( $f_database_name ) ?>">
+		<input name="db_username" type="hidden" value="<?php echo string_attribute( $f_db_username ) ?>">
+		<input name="db_password" type="hidden" value="<?php echo string_attribute( $f_db_password ) ?>">
+		<input name="admin_username" type="hidden" value="<?php echo string_attribute( $f_admin_username ) ?>">
+		<input name="admin_password" type="hidden" value="<?php echo string_attribute( $f_admin_password ) ?>">
+		<input name="log_queries" type="hidden" value="<?php echo( $f_log_queries ? 1 : 0 )?>">
+		<input name="db_exists" type="hidden" value="<?php echo( $f_db_exists ? 1 : 0 )?>">
+		<input name="retry" type="submit" class="button" value="Retry">
 	</td>
 </tr>
 </table>
