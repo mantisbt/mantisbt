@@ -105,7 +105,7 @@ html_head_end();
 ?>
 
 <body>
-<table width="100%" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+<table width="100%" cellspacing="0" cellpadding="0">
 	<tr class="top-bar">
 		<td class="links">
 			[ <a href="index.php">Back to Administration</a> ]
@@ -113,6 +113,9 @@ html_head_end();
 		<td class="title">
 		<?php
 switch( $t_install_state ) {
+	case 7:
+		echo 'Installation Complete';
+		break;
 	case 6:
 		echo 'Post Installation Checks';
 		break;
@@ -133,6 +136,7 @@ switch( $t_install_state ) {
 		break;
 	case 0:
 	default:
+		$t_install_state = 0;
 		echo 'Pre-Installation Check';
 		break;
 }
@@ -143,12 +147,14 @@ switch( $t_install_state ) {
 <br /><br />
 
 <?php
-if( 0 == $t_install_state ) {
+# installation checks table header is valid both for pre-install and
+# database installation steps
+if( 0 == $t_install_state || 2 == $t_install_state ) {
 	?>
-<table width="100%" bgcolor="#222222" cellpadding="10" cellspacing="1">
+<table width="100%" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Checking Installation...</span>
+		<span class="title">Checking Installation</span>
 	</td>
 </tr>
 <?php
@@ -333,8 +339,6 @@ print_test( 'Checking if safe mode is enabled for install script',
 if( 2 == $t_install_state ) {
 	?>
 
-<table width="100%" cellpadding="10" cellspacing="1">
-
 <!-- Checking DB support-->
 <?php
 	print_test( 'Setting Database Type', '' !== $f_db_type, true, 'database type is blank?' );
@@ -486,6 +490,7 @@ if( 2 == $t_install_state ) {
 		print_test_result( ( '' == $t_error ) && ( '' == $t_warning ), ( '' != $t_error ), $t_error . ' ' . $t_warning );
 		?>
 </tr>
+</table>
 <?php
 	}?>
 </table>
@@ -512,7 +517,7 @@ if( 1 == $t_install_state ) {
 		<span class="title">
 			<?php echo
 				( $g_database_upgrade ? 'Upgrade Options' : 'Installation Options' ),
-				( $g_failed ? ': Checks Failed... ' : '' )
+				( $g_failed ? ': Checks Failed ' : '' )
 			?>
 		</span>
 	</td>
@@ -1059,20 +1064,8 @@ if( 5 == $t_install_state ) {
 
 <tr>
 	<td bgcolor="#ffffff">
-<?php
-	if( !$t_config_exists ) {
-?>
-		Creating Configuration File (config/config_inc.php)<br />
-		<span class="error-msg">
-			(if this file is not created, create it manually with the contents below)
-		</span>
-<?php
-	} else {
-?>
-		Updating Configuration File (config/config_inc.php)<br />
-<?php
-	}
-?>
+		<?php echo ( $t_config_exists ? 'Updating' : 'Creating' ); ?>
+		Configuration File (config/config_inc.php)<br />
 	</td>
 <?php
 	# Generating the config_inc.php file
@@ -1165,8 +1158,8 @@ if( 5 == $t_install_state ) {
 			<tr>
 				<td>
 					Please add the following lines to
-					'<?php echo $g_absolute_path; ?>config_inc.php'
-					before continuing to the database upgrade check:
+					<em>'<?php echo $g_absolute_path; ?>config_inc.php'</em>
+					before continuing:
 				</td>
 			</tr>
 			<tr>
@@ -1195,10 +1188,10 @@ if( 6 == $t_install_state ) {
 
 	# post install checks
 	?>
-<table width="100%" bgcolor="#222222" cellpadding="10" cellspacing="1">
+<table width="100%" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Checking Installation...</span>
+		<span class="title">Checking Installation</span>
 	</td>
 </tr>
 
@@ -1299,10 +1292,10 @@ if( 6 == $t_install_state ) {
 if( 7 == $t_install_state ) {
 	# cleanup and launch upgrade
 	?>
-<table width="100%" bgcolor="#222222" cellpadding="10" cellspacing="1">
+<table width="100%" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Installation Complete...</span>
+		<span class="title">Installation Complete</span>
 	</td>
 </tr>
 <tr bgcolor="#ffffff">
@@ -1325,10 +1318,10 @@ if( 7 == $t_install_state ) {
 
 if( $g_failed && $t_install_state != 1 ) {
 	?>
-<table width="100%" bgcolor="#222222" cellpadding="10" cellspacing="1">
+<table width="100%" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Installation Failed...</span>
+		<span class="title">Installation Failed</span>
 	</td>
 </tr>
 <tr>
