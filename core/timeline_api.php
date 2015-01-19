@@ -167,12 +167,12 @@ function timeline_sort_events( array $p_events ) {
  * Print for display an array of events
  * @param array $p_events   Array of events to display
  * @param int   $p_max_num  Maximum number of events to display, 0 = all
- * @return void
+ * @return int  Number of displayed events
  */
 function timeline_print_events( array $p_events, $p_max_num = 0 ) {
 	if( empty( $p_events ) ) {
 		echo '<p>' . lang_get( 'timeline_no_activity' ) . '</p>';
-		return;
+		return 0;
 	}
 
 	$i = 0;
@@ -183,5 +183,6 @@ function timeline_print_events( array $p_events, $p_max_num = 0 ) {
 		}
 		echo $t_event->html();
 	}
+	return min( $p_max_num, $i);
 }
 
