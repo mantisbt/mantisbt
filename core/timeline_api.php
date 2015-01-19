@@ -68,6 +68,7 @@ function timeline_get_affected_issues( $p_start_time, $p_end_time ) {
 
 /**
  * Get an array of timeline events
+ * Events for which the skip() method returns true will be excluded
  * @param integer $p_start_time Timestamp representing start time of the period.
  * @param integer $p_end_time   Timestamp representing end time of the period.
  * @return array
@@ -127,7 +128,8 @@ function timeline_events( $p_start_time, $p_end_time ) {
 					break;
 			}
 
-			if( $t_event != null ) {
+			# Do not include skipped events
+			if( $t_event != null && !$t_event->skip() ) {
 				$t_timeline_events[] = $t_event;
 			}
 		}
@@ -163,11 +165,22 @@ function timeline_sort_events( array $p_events ) {
 
 /**
  * Print for display an array of events
- * @param array $p_events Array of events to display.
+ * @param array $p_events   Array of events to display
+ * @param int   $p_max_num  Maximum number of events to display, 0 = all
  * @return void
  */
-function timeline_print_events( array $p_events ) {
-	foreach ( $p_events as $t_event ) {
+function timeline_print_events( array $p_events, $p_max_num = 0 ) {
+	if( empty( $p_events ) ) {
+		echo '<p>' . lang_get( 'timeline_no_activity' ) . '</p>';
+		return;
+	}
+
+	$i = 0;
+	foreach( $p_events as $t_event ) {
+		# Stop displaying events if we're reached the maximum
+		if( $p_max_num && $i++ >= $p_max_num ) {
+			break;
+		}
 		echo $t_event->html();
 	}
 }

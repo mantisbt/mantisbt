@@ -46,15 +46,7 @@ if( $t_next_days != $f_days ) {
 echo '<div class="date-range">' . date( $t_short_date_format, $t_start_time ) . ' .. ' . date( $t_short_date_format, $t_end_time ) . $t_prev_link . $t_next_link . '</div>';
 $t_events = timeline_sort_events( $t_events );
 
-if ( $f_all == 0 ) {
-	$t_events = array_slice( $t_events, 0, MAX_EVENTS );
-}
-
-if( count( $t_events ) > 0 ) {
-	timeline_print_events( $t_events );
-} else {
-	echo '<p>' . lang_get( 'timeline_no_activity' ) . '</p>';
-}
+timeline_print_events( $t_events, ( $f_all ? 0 : MAX_EVENTS ) );
 
 if( $f_all == 0 ) {
 	echo '<p>' . $t_prev_link = ' [ <a href="my_view_page.php?days=' . $f_days . '&amp;all=1">' . lang_get( 'timeline_more' ) . '</a> ]</p>';
