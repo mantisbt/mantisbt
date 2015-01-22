@@ -70,6 +70,15 @@ class TimelineEvent {
 	}
 
 	/**
+	 * Whether to skip this timeline event.
+	 * This normally implements access checks for the event.
+	 * @return boolean
+	 */
+	public function skip() {
+		return false;
+	}
+
+	/**
 	 * Returns html string to display
 	 * @return string
 	 */
