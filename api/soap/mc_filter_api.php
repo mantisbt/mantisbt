@@ -42,7 +42,7 @@ $g_soap_api_to_filter_names = array (
     'handler_id' => FILTER_PROPERTY_HANDLER_ID,
     'note_user_id' => FILTER_PROPERTY_NOTE_USER_ID,
     'resolution_id' => FILTER_PROPERTY_RESOLUTION,
-    'version' => FILTER_PROPERTY_VERSION,
+    'product_version' => FILTER_PROPERTY_VERSION,
 
     'user_monitor_id' => FILTER_PROPERTY_MONITOR_USER_ID,
     'hide_status_id' => FILTER_PROPERTY_HIDE_STATUS,

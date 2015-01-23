@@ -332,7 +332,7 @@
  </xsd:complexType>
  <xsd:complexType name="FilterCustomField">
   <xsd:all>
-   <xsd:element name="field" type="tns:ObjectRef" minOccurs="0"/>
+   <xsd:element name="field" type="tns:ObjectRef" minOccurs="1"/>
    <xsd:element name="value" type="tns:StringArray" minOccurs="1"/>
   </xsd:all>
  </xsd:complexType>

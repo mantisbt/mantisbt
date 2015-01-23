@@ -1641,6 +1641,32 @@ function mci_issue_data_as_header_array( BugData $p_issue_data ) {
 }
 
 /**
+ * Check if the bug exists and the user has a access right to read it.
+ *
+ * @param integer   $p_user_id         The user id.
+ * @param integer   $p_bug_id          The bug id.
+ * @return true if the user has access rights and the bug exists, otherwise return false
+ */
+function mci_check_access_to_bug( $p_user_id, $p_bug_id ) {
+
+    if( !bug_exists( $p_bug_id ) ) {
+        return false;
+    }
+
+    $t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+    $g_project_override = $t_project_id;
+    if( !mci_has_readonly_access( $p_user_id, $t_project_id ) ) {
+        return false;
+    }
+
+    if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $p_bug_id, $p_user_id ) ) {
+        return false;
+    }
+
+    return true;
+}
+
+/**
  * Get all issues matching the ids.
  *
  * @param string                $p_username         The name of the user trying to access the filters.
@@ -1662,19 +1688,8 @@ function mc_issues_get( $p_username, $p_password, $p_issue_ids ) {
     $t_result = array();
     foreach( $p_issue_ids as $t_id ) {
 
-        if( !bug_exists( $t_id ) ) {
-            return SoapObjectsFactory::newSoapFault( 'Client', 'Issue ' . $t_id . ' does not exist' );
-        }
-
-        $t_project_id = bug_get_field( $t_id, 'project_id' );
-        $g_project_override = $t_project_id;
-        if( !mci_has_readonly_access( $t_user_id, $t_project_id ) ) {
-            return mci_soap_fault_access_denied( $t_user_id );
-        }
-
-        if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $t_id, $t_user_id ) ) {
-            return mci_soap_fault_access_denied( $t_user_id );
-        }
+        if( mci_check_access_to_bug( $t_user_id, $t_id ) === false )
+            continue;
 
         log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $t_id . '\'' );
 
@@ -1707,19 +1722,8 @@ function mc_issues_get_header( $p_username, $p_password, $p_issue_ids ) {
     $t_result = array();
     foreach( $p_issue_ids as $t_id ) {
 
-        if( !bug_exists( $t_id ) ) {
-            return SoapObjectsFactory::newSoapFault( 'Client', 'Issue ' . $t_id . ' does not exist' );
-        }
-
-        $t_project_id = bug_get_field( $t_id, 'project_id' );
-        $g_project_override = $t_project_id;
-        if( !mci_has_readonly_access( $t_user_id, $t_project_id ) ) {
-            return mci_soap_fault_access_denied( $t_user_id );
-        }
-
-        if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $t_id, $t_user_id ) ) {
-            return mci_soap_fault_access_denied( $t_user_id );
-        }
+        if( mci_check_access_to_bug( $t_user_id, $t_id ) === false )
+            continue;
 
         log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $t_id . '\'' );
 
