@@ -1639,3 +1639,93 @@ function mci_issue_data_as_header_array( BugData $p_issue_data ) {
 
 		return $t_issue;
 }
+
+/**
+ * Get all issues matching the ids.
+ *
+ * @param string                $p_username         The name of the user trying to access the filters.
+ * @param string                $p_password         The password of the user.
+ * @param IntegerArray          $p_issue_ids        Number of issues to display per page.
+ * @return array that represents an IssueDataArray structure
+ */
+function mc_issues_get( $p_username, $p_password, $p_issue_ids ) {
+
+    global $g_project_override;
+
+    $t_user_id = mci_check_login( $p_username, $p_password );
+    if( $t_user_id === false ) {
+        return mci_soap_fault_login_failed();
+    }
+
+    $t_lang = mci_get_user_lang( $t_user_id );
+
+    $t_result = array();
+    foreach( $p_issue_ids as $t_id ) {
+
+        if( !bug_exists( $t_id ) ) {
+            return SoapObjectsFactory::newSoapFault( 'Client', 'Issue ' . $t_id . ' does not exist' );
+        }
+
+        $t_project_id = bug_get_field( $t_id, 'project_id' );
+        $g_project_override = $t_project_id;
+        if( !mci_has_readonly_access( $t_user_id, $t_project_id ) ) {
+            return mci_soap_fault_access_denied( $t_user_id );
+        }
+
+        if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $t_id, $t_user_id ) ) {
+            return mci_soap_fault_access_denied( $t_user_id );
+        }
+
+        log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $t_id . '\'' );
+
+        $t_issue_data = bug_get( $t_id, true );
+        $t_result[] = mci_issue_data_as_array( $t_issue_data, $t_user_id, $t_lang );
+    }
+
+    return $t_result;
+}
+
+/**
+ * Get all issues header matching the ids.
+ *
+ * @param string                $p_username         The name of the user trying to access the filters.
+ * @param string                $p_password         The password of the user.
+ * @param IntegerArray          $p_issue_ids        Number of issues to display per page.
+ * @return array that represents an IssueHeaderDataArray structure
+ */
+function mc_issues_get_header( $p_username, $p_password, $p_issue_ids ) {
+
+    global $g_project_override;
+
+    $t_user_id = mci_check_login( $p_username, $p_password );
+    if( $t_user_id === false ) {
+        return mci_soap_fault_login_failed();
+    }
+
+    $t_lang = mci_get_user_lang( $t_user_id );
+
+    $t_result = array();
+    foreach( $p_issue_ids as $t_id ) {
+
+        if( !bug_exists( $t_id ) ) {
+            return SoapObjectsFactory::newSoapFault( 'Client', 'Issue ' . $t_id . ' does not exist' );
+        }
+
+        $t_project_id = bug_get_field( $t_id, 'project_id' );
+        $g_project_override = $t_project_id;
+        if( !mci_has_readonly_access( $t_user_id, $t_project_id ) ) {
+            return mci_soap_fault_access_denied( $t_user_id );
+        }
+
+        if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $t_id, $t_user_id ) ) {
+            return mci_soap_fault_access_denied( $t_user_id );
+        }
+
+        log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $t_id . '\'' );
+
+        $t_issue_data = bug_get( $t_id, true );
+        $t_result[] = mci_issue_data_as_header_array( $t_issue_data, $t_user_id, $t_lang );
+    }
+
+    return $t_result;
+}

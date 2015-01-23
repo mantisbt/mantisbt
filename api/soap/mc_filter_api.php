@@ -109,6 +109,11 @@ function mc_filter_get( $p_username, $p_password, $p_project_id ) {
  * @return array that represents an IssueDataArray structure
  */
 function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filter_id, $p_page_number, $p_per_page ) {
+    $t_user_id = mci_check_login( $p_username, $p_password );
+    if( $t_user_id === false ) {
+        return mci_soap_fault_login_failed();
+    }
+    $t_lang = mci_get_user_lang( $t_user_id );
 
 	if( !mci_has_readonly_access( $t_user_id, $p_project_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
@@ -334,3 +339,30 @@ function mc_filter_search_issues( $p_username, $p_password, $p_filter_search, $p
     return $t_result;
 }
 
+/**
+ * Get all issue ids matching the custom filter.
+ *
+ * @param string                $p_username         The name of the user trying to access the filters.
+ * @param string                $p_password         The password of the user.
+ * @param FilterSearchData      $p_filter_search    The custom filter.
+ * @param integer               $p_page_number Start with the given page number (zero-based).
+ * @param integer               $p_per_page    Number of issues to display per page.
+ * @return array that represents an IntegerArray structure
+ */
+function mc_filter_search_issue_ids( $p_username, $p_password, $p_filter_search, $p_page_number, $p_per_page ) {
+
+    $t_user_id = mci_check_login( $p_username, $p_password );
+
+    if( $t_user_id === false ) {
+        return mci_soap_fault_login_failed();
+    }
+
+    $t_rows = mci_filter_search_get_rows( $t_user_id, $p_filter_search, $p_page_number, $p_per_page);
+
+    $t_result = array();
+    foreach( $t_rows as $t_issue_data ) {
+        $t_result[] = $t_issue_data->id;
+    }
+
+    return $t_result;
+}
