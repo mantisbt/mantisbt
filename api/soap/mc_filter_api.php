@@ -23,6 +23,50 @@
  * @link http://www.mantisbt.org
  */
 
+# Path to MantisBT is assumed to be the grand parent directory.  If this is not
+# the case, then this variable should be set to the MantisBT path.
+# This can not be a configuration option, then MantisConnect configuration
+# needs MantisBT to be included first to make use of the constants and possibly
+# configuration defined in MantisBT.
+
+require_api( 'filter_constants_inc.php' );
+
+// doesn't contain 'custom_fields'
+$_SOAP_API_TO_FILTER_API_NAMES = array (
+    'search' => FILTER_PROPERTY_SEARCH,
+    'category' => FILTER_PROPERTY_CATEGORY_ID,
+    'severity_id' => FILTER_PROPERTY_SEVERITY,
+    'status_id' => FILTER_PROPERTY_STATUS,
+    'priority_id' => FILTER_PROPERTY_PRIORITY,
+    'reporter_id' => FILTER_PROPERTY_REPORTER_ID,
+    'handler_id' => FILTER_PROPERTY_HANDLER_ID,
+    'project_id' => FILTER_PROPERTY_PROJECT_ID,
+    'note_user_id' => FILTER_PROPERTY_NOTE_USER_ID,
+    'resolution_id' => FILTER_PROPERTY_RESOLUTION,
+    'version' => FILTER_PROPERTY_VERSION,
+
+    'user_monitor_id' => FILTER_PROPERTY_MONITOR_USER_ID,
+    'hide_status_id' => FILTER_PROPERTY_HIDE_STATUS,
+    'sort' => FILTER_PROPERTY_SORT_FIELD_NAME,
+    'sort_direction' => FILTER_PROPERTY_SORT_DIRECTION,
+    'sticky' => FILTER_PROPERTY_STICKY,
+    'view_state' => FILTER_PROPERTY_VIEW_STATE,
+    'fixed_in_version' => FILTER_PROPERTY_FIXED_IN_VERSION,
+    'target_version' => FILTER_PROPERTY_TARGET_VERSION,
+    'platform' => FILTER_PROPERTY_PLATFORM,
+    'os' => FILTER_PROPERTY_OS,
+    'os_build' => FILTER_PROPERTY_OS_BUILD,
+    'start_day' => FILTER_PROPERTY_START_DAY,
+    'start_month' => FILTER_PROPERTY_START_MONTH,
+    'start_year' => FILTER_PROPERTY_START_YEAR,
+    'end_day' => FILTER_PROPERTY_END_DAY,
+    'end_month' => FILTER_PROPERTY_END_MONTH,
+    'end_year' => FILTER_PROPERTY_END_YEAR,
+    'tag_string' => FILTER_PROPERTY_TAG_STRING,
+    'tag_select' => FILTER_PROPERTY_TAG_SELECT,
+);
+
+
 /**
  * Get all user defined issue filters for the given project.
  *
@@ -146,4 +190,166 @@ function mc_filter_get_issue_headers( $p_username, $p_password, $p_project_id, $
 	}
 
 	return $t_result;
+}
+
+/**
+ * Get all issue headers matching the custom filter.
+ *
+ * @param string                $p_username         The name of the user trying to access the filters.
+ * @param string                $p_password         The password of the user.
+ * @param FilterSearchData      $p_filter_search    The custom filter.
+ * @return array that represents an IssueHeaderDataArray structure
+ */
+function mc_filter_search_issue_headers( $p_username, $p_password, $p_filter_search ) {
+
+    global $_SOAP_API_TO_FILTER_API_NAMES;
+
+    $t_user_id = mci_check_login( $p_username, $p_password );
+
+    if( $t_user_id === false ) {
+        return mci_soap_fault_login_failed();
+    }
+
+    // object to array
+    if( is_object($p_filter_search) ) {
+        $p_filter_search = get_object_vars($p_filter_search);
+    }
+
+    $t_project_id = $p_filter_search['project_id'];
+
+    if( !mci_has_readonly_access( $t_user_id, $t_project_id  ) ) {
+        return mci_soap_fault_access_denied( $t_user_id );
+    }
+
+    $t_filter = array( '_view_type' => 'advanced' );
+
+    // default fields
+    foreach( $_SOAP_API_TO_FILTER_API_NAMES as $t_soap_name => $t_filter_name ) {
+        if ( isset ( $p_filter_search[$t_soap_name]) ) {
+
+            $t_value = $p_filter_search[$t_soap_name];
+            error_log('Simple extraction, value is ' . print_r($t_value, true) . ' .' );
+            $t_filter[$t_filter_name] = $t_value;
+        }
+    }
+
+    // custom fields
+    if( isset ( $p_filter_search['custom_fields']) ) {
+        foreach(  $p_filter_search['custom_fields'] as $t_custom_field ) {
+
+            // object to array
+            if( is_object($t_custom_field) ) {
+                $t_custom_field = get_object_vars($t_custom_field);
+            }
+
+            // if is set custom_field's id, use it primary
+            if ( isset($t_custom_field['id']) ) {
+                $t_custom_field_id = $t_custom_field['id'];
+            }
+            else {
+                $t_custom_field_id = custom_field_get_id_from_name( $t_custom_field['name'] );
+            }
+
+            $t_value = $t_custom_field['value'];
+            error_log('custom field id ' . $t_custom_field_id . print_r($t_value, true) . ' .' );
+            $t_filter['custom_fields'][$t_custom_field_id] =  $t_value;
+        }
+    }
+
+    $t_filter = filter_ensure_valid_filter( $t_filter );
+
+    $t_result = array();
+    $t_page_number = 0;
+    $t_per_page = $p_filter_search['issues_per_page'];
+    $t_page_count = 0;
+    $t_bug_count = 0;
+    $t_rows = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count, $t_filter );
+
+    foreach( $t_rows as $t_issue_data ) {
+        $t_result[] = mci_issue_data_as_header_array( $t_issue_data );
+    }
+
+    return $t_result;
+}
+
+/**
+ * Get all issues matching the custom filter.
+ *
+ * @param string                $p_username         The name of the user trying to access the filters.
+ * @param string                $p_password         The password of the user.
+ * @param FilterSearchData      $p_filter_search    The custom filter.
+ * @return array that represents an IssueDataArray structure
+ */
+function mc_filter_search_issues( $p_username, $p_password, $p_filter_search ) {
+
+    global $_SOAP_API_TO_FILTER_API_NAMES;
+
+    $t_user_id = mci_check_login( $p_username, $p_password );
+
+    if( $t_user_id === false ) {
+        return mci_soap_fault_login_failed();
+    }
+
+    $t_lang = mci_get_user_lang( $t_user_id );
+
+    // object to array
+    if( is_object($p_filter_search) ) {
+        $p_filter_search = get_object_vars($p_filter_search);
+    }
+
+    $t_project_id = $p_filter_search['project_id'];
+
+    if( !mci_has_readonly_access( $t_user_id, $t_project_id  ) ) {
+        return mci_soap_fault_access_denied( $t_user_id );
+    }
+
+    $t_filter = array( '_view_type' => 'advanced' );
+
+    // default fields
+    foreach( $_SOAP_API_TO_FILTER_API_NAMES as $t_soap_name => $t_filter_name ) {
+        if ( isset ( $p_filter_search[$t_soap_name]) ) {
+
+            $t_value = $p_filter_search[$t_soap_name];
+            error_log('Simple extraction, value is ' . print_r($t_value, true) . ' .' );
+            $t_filter[$t_filter_name] = $t_value;
+        }
+    }
+
+    // custom fields
+    if( isset ( $p_filter_search['custom_fields']) ) {
+        foreach(  $p_filter_search['custom_fields'] as $t_custom_field ) {
+
+            // object to array
+            if( is_object($t_custom_field) ) {
+                $t_custom_field = get_object_vars($t_custom_field);
+            }
+
+            // if is set custom_field's id, use it primary
+            if ( isset($t_custom_field['id']) ) {
+                $t_custom_field_id = $t_custom_field['id'];
+            }
+            else {
+                $t_custom_field_id = custom_field_get_id_from_name( $t_custom_field['name'] );
+            }
+
+            $t_value = $t_custom_field['value'];
+            error_log('custom field id ' . $t_custom_field_id . print_r($t_value, true) . ' .' );
+            $t_filter['custom_fields'][$t_custom_field_id] =  $t_value;
+        }
+    }
+
+    $t_filter = filter_ensure_valid_filter( $t_filter );
+
+    $t_result = array();
+    $t_page_number = 0;
+    $t_per_page = $p_filter_search['issues_per_page'];
+    $t_page_count = 0;
+    $t_bug_count = 0;
+    $t_rows = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count, $t_filter );
+
+    foreach( $t_rows as $t_issue_data ) {
+        $t_result[] = mci_issue_data_as_array( $t_issue_data, $t_user_id, $t_lang );
+    }
+
+    return $t_result;
 }
