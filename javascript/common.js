@@ -222,7 +222,7 @@ $(document).ready( function() {
 	});
 
 	/* Handle custom field of date type */
-	$(document).on('change', 'select[name*=custom_field_]', function() {
+	$(document).on('change', 'select[name^=custom_field_][name$=_control]', function() {
 		var table = $(this).closest('table');
 		switch(this.value) {
 			case '2': // between
