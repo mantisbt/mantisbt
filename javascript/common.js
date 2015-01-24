@@ -256,7 +256,7 @@ $(document).ready( function() {
 				$(table).find("select[name*=_end_year]").prop('disabled', true);
 				$(table).find("select[name*=_end_month]").prop('disabled', true);
 				$(table).find("select[name*=_end_day]").prop('disabled', true);
-			break;
+				break;
 		}
 	});
 
