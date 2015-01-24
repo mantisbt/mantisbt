@@ -242,20 +242,20 @@ $(document).ready( function() {
                 $(table).find("select[name*=_start_year]").prop('disabled', false);
                 $(table).find("select[name*=_start_month]").prop('disabled', false);
                 $(table).find("select[name*=_start_day]").prop('disabled', false);
-                $(table).find("select[name*=_end_year]").prop('disabled', 'disabled');
-                $(table).find("select[name*=_end_month]").prop('disabled', 'disabled');
-                $(table).find("select[name*=_end_day]").prop('disabled', 'disabled');
+                $(table).find("select[name*=_end_year]").prop('disabled', true);
+                $(table).find("select[name*=_end_month]").prop('disabled', true);
+                $(table).find("select[name*=_end_day]").prop('disabled', true);
                 break;
 
             case '0': // any
             case '1': // none
             default:
-                $(table).find("select[name*=_start_year]").prop('disabled', 'disabled');
-                $(table).find("select[name*=_start_month]").prop('disabled', 'disabled');
-                $(table).find("select[name*=_start_day]").prop('disabled', 'disabled');
-                $(table).find("select[name*=_end_year]").prop('disabled', 'disabled');
-                $(table).find("select[name*=_end_month]").prop('disabled', 'disabled');
-                $(table).find("select[name*=_end_day]").prop('disabled', 'disabled');
+                $(table).find("select[name*=_start_year]").prop('disabled', true);
+                $(table).find("select[name*=_start_month]").prop('disabled', true);
+                $(table).find("select[name*=_start_day]").prop('disabled', true);
+                $(table).find("select[name*=_end_year]").prop('disabled', true);
+                $(table).find("select[name*=_end_month]").prop('disabled', true);
+                $(table).find("select[name*=_end_day]").prop('disabled', true);
             break;
         }
     });
