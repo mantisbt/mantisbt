@@ -145,15 +145,26 @@ function http_content_headers() {
 function http_security_headers() {
 	if( !headers_sent() ) {
 		header( 'X-Frame-Options: DENY' );
-		$t_avatar_img_allow = '';
+
+		# Define Content Security Policy
+		$t_csp = array(
+			"default-src 'self'",
+			"frame-ancestors 'none'",
+		);
+
+		# Policy for images: Allow gravatar URL
 		if( config_get_global( 'show_avatar' ) ) {
 			if( http_is_protocol_https() ) {
-				$t_avatar_img_allow = "; img-src 'self' https://secure.gravatar.com:443";
+				$t_avatar_url = 'https://secure.gravatar.com:443';
 			} else {
-				$t_avatar_img_allow = "; img-src 'self' http://www.gravatar.com:80";
+				$t_avatar_url = 'http://www.gravatar.com:80';
 			}
+			$t_csp[] = "img-src 'self' $t_avatar_url";
 		}
-		header( 'Content-Security-Policy: default-src \'self\';' . $t_avatar_img_allow . '; frame-ancestors \'none\'' );
+
+		# Set CSP header
+		header( 'Content-Security-Policy: ' . implode('; ', $t_csp) );
+
 		if( http_is_protocol_https() ) {
 			header( 'Strict-Transport-Security: max-age=7776000' );
 		}
