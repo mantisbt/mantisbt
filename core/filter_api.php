@@ -4289,21 +4289,12 @@ function print_filter_custom_field_date( $p_field_num, $p_field_id ) {
 			$t_end = $t_end_time;
 			break;
 		case CUSTOM_FIELD_DATE_ONORBEFORE:
-			$t_start_disable = false;
-			$t_start = $t_end_time;
-			break;
 		case CUSTOM_FIELD_DATE_BEFORE:
 			$t_start_disable = false;
 			$t_start = $t_end_time;
 			break;
 		case CUSTOM_FIELD_DATE_ON:
-			$t_start_disable = false;
-			$t_start = $t_start_time;
-			break;
 		case CUSTOM_FIELD_DATE_AFTER:
-			$t_start_disable = false;
-			$t_start = $t_start_time;
-			break;
 		case CUSTOM_FIELD_DATE_ONORAFTER:
 			$t_start_disable = false;
 			$t_start = $t_start_time;
