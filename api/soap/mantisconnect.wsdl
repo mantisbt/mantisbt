@@ -268,12 +268,12 @@
  </xsd:complexType>
  <xsd:complexType name="FilterSearchData">
   <xsd:all>
-   <xsd:element name="project_id" type="tns:IntegerArray" minOccurs="1"/>
+   <xsd:element name="project_id" type="tns:IntegerArray" minOccurs="0"/>
    <xsd:element name="search" type="xsd:string" minOccurs="0"/>
    <xsd:element name="category" type="tns:StringArray" minOccurs="0"/>
    <xsd:element name="severity_id" type="tns:IntegerArray" minOccurs="0"/>
    <xsd:element name="status_id" type="tns:IntegerArray" minOccurs="0"/>
-   <xsd:element name="priority_id" type="tns:StringArray" minOccurs="0"/>
+   <xsd:element name="priority_id" type="tns:IntegerArray" minOccurs="0"/>
    <xsd:element name="reporter_id" type="tns:IntegerArray" minOccurs="0"/>
    <xsd:element name="handler_id" type="tns:IntegerArray" minOccurs="0"/>
    <xsd:element name="note_user_id" type="tns:IntegerArray" minOccurs="0"/>
@@ -299,8 +299,6 @@
    <xsd:element name="tag_string" type="tns:StringArray" minOccurs="0"/>
    <xsd:element name="tag_select" type="tns:IntegerArray" minOccurs="0"/>
    <xsd:element name="custom_fields" type="tns:FilterCustomFieldArray" minOccurs="0"/>
-   <xsd:element name="page_number" type="xsd:integer" minOccurs="1"/>
-   <xsd:element name="issues_per_page" type="xsd:integer" minOccurs="1"/>
   </xsd:all>
  </xsd:complexType>
  <xsd:complexType name="FilterDataArray">
@@ -334,9 +332,8 @@
  </xsd:complexType>
  <xsd:complexType name="FilterCustomField">
   <xsd:all>
-   <xsd:element name="name" type="xsd:string" minOccurs="0"/>
-   <xsd:element name="id" type="xsd:integer" minOccurs="0"/>
-   <xsd:element name="value" type="tns:StringArray" minOccurs="0"/>
+   <xsd:element name="field" type="tns:ObjectRef" minOccurs="0"/>
+   <xsd:element name="value" type="tns:StringArray" minOccurs="1"/>
   </xsd:all>
  </xsd:complexType>
  <xsd:complexType name="FilterCustomFieldArray">
@@ -808,13 +805,17 @@
 <message name="mc_filter_search_issue_headersRequest">
   <part name="username" type="xsd:string" />
   <part name="password" type="xsd:string" />
-  <part name="filter" type="tns:FilterSearchData" /></message>
+  <part name="filter" type="tns:FilterSearchData" />
+  <part name="page_number" type="xsd:integer" />
+  <part name="per_page" type="xsd:integer" /></message>
 <message name="mc_filter_search_issue_headersResponse">
   <part name="return" type="tns:IssueHeaderDataArray" /></message>
 <message name="mc_filter_search_issuesRequest">
   <part name="username" type="xsd:string" />
   <part name="password" type="xsd:string" />
-  <part name="filter" type="tns:FilterSearchData" /></message>
+  <part name="filter" type="tns:FilterSearchData" />
+  <part name="page_number" type="xsd:integer" />
+  <part name="per_page" type="xsd:integer" /></message>
 <message name="mc_filter_search_issuesResponse">
   <part name="return" type="tns:IssueDataArray" /></message>
 <message name="mc_config_get_stringRequest">
