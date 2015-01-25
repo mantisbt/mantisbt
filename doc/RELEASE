@@ -1,6 +1,35 @@
 MantisBT Release Notes
 ======================
 
+1.2.19 Security Release (2015-01-25)
+-------------------------------------------------
+
+MantisBT 1.2.19 is a security update for the stable 1.2.x branch. All
+installations that are currently running any 1.2.x version are strongly
+advised to upgrade to this release. Download it from [3].
+
+This release resolves 5 security issues:
+
+- #17938/CVE-2014-9571: XSS in install.php
+- #17939/CVE-2014-9572: Improper Access Control in install.php
+- #17940/CVE-2014-9573: SQL Injection in manage_user_page.php
+- #17984/CVE-2014-9624: CAPTCHA bypass
+- #17997/CVE-2015-1042: URL redirection issue
+
+We would like to thank High Tech Bridge Research Lab, Alejo Popovici an
+Florent Daignière from Matta Consulting for reporting these issues, and their
+cooperation in resolving them.
+
+This release also addresses 2 regression issues introduced in 1.2.18:
+
+- #17993 prevents new users from signing up on systems using CAPTCHA.
+- #17967 which causes a PHP error when reporting issues on systems with
+  checkbox custom fields.
+
+Please refer to the changelog [1] on the MantisBT web site for complete details
+on each of these issues.
+
+
 1.2.18 Security Release (2014-12-06)
 -------------------------------------------------
 
@@ -431,6 +460,7 @@ There have also been many improvements to the codebase beyond adding features:
 
 [1] The changelog is split between multiple releases:
 
+	1.2.19     http://www.mantisbt.org/bugs/changelog_page.php?version_id=238
 	1.2.18     http://www.mantisbt.org/bugs/changelog_page.php?version_id=191
 	1.2.17     http://www.mantisbt.org/bugs/changelog_page.php?version_id=189
 	1.2.16     http://www.mantisbt.org/bugs/changelog_page.php?version_id=183
