@@ -50,6 +50,7 @@
  * @author Kropotkine 113
  * @author Lapinkiller
  * @author McDutchie
+ * @author Noe
  * @author Od1n
  * @author Peter17
  * @author Philou2024
@@ -216,7 +217,7 @@ $s_project_view_state_enum_string = '10:public,50:privé';
 $s_view_state_enum_string = '10:public,50:privé';
 $s_priority_enum_string = '10:aucune,20:basse,30:normale,40:élevée,50:urgente,60:immédiate';
 $s_severity_enum_string = '10:fonctionnalité,20:simple,30:texte,40:cosmétique,50:mineur,60:majeur,70:critique,80:bloquant';
-$s_reproducibility_enum_string = '10:toujours,30:quelques fois,50:aléatoire,70:n\'a pas essayé,90:impossible à reproduire,100:S/O';
+$s_reproducibility_enum_string = '10:toujours,30:quelques fois,50:aléatoire,70:n\'a pas essayé,90:impossible à reproduire,100:sans objet';
 $s_status_enum_string = '10:nouveau,20:commentaire,30:accepté,40:confirmé,50:affecté,80:résolu,90:fermé';
 $s_resolution_enum_string = '10:ouvert,20:résolu,30:réouvert,40:impossible à reproduire,50:impossible à corriger,60:doublon,70:pas un bogue,80:suspendu,90:ne sera pas résolu';
 $s_projection_enum_string = '10:aucun,30:cosmétique,50:correction mineure,70:correction majeure,90:reconception';
@@ -444,7 +445,7 @@ $s_duplicate_id = 'Doublon d\'ID';
 $s_os = 'OS';
 $s_os_label = 'OS :';
 $s_projection = 'Projection';
-$s_os_version = 'Version';
+$s_os_version = 'Version de l\'OS';
 $s_os_version_label = 'Version de l\'OS :';
 $s_eta = 'ETA';
 $s_product_version = 'Version du produit';

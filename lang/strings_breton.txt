@@ -1202,6 +1202,7 @@ $s_timeline_issue_closed = '<span class="username">%1s</span> en deus klozet ar 
 $s_timeline_issue_reopened = '<span class="username">%1s</span> en deus addigoret ar gudenn <span class="issue_id">%2s</span>';
 $s_timeline_issue_assigned = '<span class="username">%1s</span> en deus dezverket ar gudenn <span class="issue_id">%2s</span> gant <span class="tag_name">%3s</span>';
 $s_timeline_issue_assigned_to_self = '<span class="username">%1s</span> en deus kemeret ar gudenn e karg <span class="issue_id">%2s</span>';
+$s_timeline_issue_unassigned = '<span class="username">%1s</span> kudenn n\'eo ket bet deverket <span class="issue_id">%2s</span>';
 $s_timeline_no_activity = 'Obererezh ebet er pennad amzer.';
 $s_timeline_title = 'Kronologiezh';
 $s_timeline_more = 'Muioc\'h a zarvoudoù...';

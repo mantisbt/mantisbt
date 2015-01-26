@@ -41,12 +41,15 @@
  * @author DRIHEM
  * @author Meno25
  * @author OsamaK
+ * @author Test Create account
  */
 
 $s_plugin_XmlImportExport_title = 'استورد/صدّر قضايا';
 $s_plugin_XmlImportExport_description = 'يضيف أستيراد مبني على XML  و قدرات التصدير إلى MantisBT.';
 $s_plugin_XmlImportExport_import = 'استورد قضايا';
 $s_plugin_XmlImportExport_export = 'تصدير XML';
+$s_plugin_XmlImportExport_export_threshold = 'تصدير القضايا';
+$s_plugin_XmlImportExport_action_update = 'تحديث';
 $s_plugin_XmlImportExport_importing_in_project = 'أستيراد القضايا في المشروع:';
 $s_plugin_XmlImportExport_import_options = 'خيارات الاستيراد';
 $s_plugin_XmlImportExport_cross_references = 'تقاطع المراجع';
