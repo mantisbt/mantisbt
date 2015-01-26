@@ -1135,7 +1135,7 @@ if( 5 == $t_install_state ) {
 			( $f_db_schema != config_get( 'db_schema', '' ) ) ||
 			( $f_db_username != config_get( 'db_username', '' ) ) ||
 			( $f_db_password != config_get( 'db_password', '' ) ) ) {
-			print_test_result( BAD, false, 'file ' . $g_config_path . 'config_inc.php' . ' already exists and has different settings' );
+			print_test_result( BAD, false, 'file ' . $t_config_filename . ' already exists and has different settings' );
 		} else {
 			print_test_result( GOOD, false );
 			$t_write_failed = false;
@@ -1147,7 +1147,7 @@ if( 5 == $t_install_state ) {
 	if( $t_crypto_master_salt === null ) {
 		print_test( 'Setting Cryptographic salt in config file', false, false,
 					'Unable to find a random number source for cryptographic purposes. You will need to edit ' .
-					$g_config_path . 'config_inc.php' . ' and set a value for $g_crypto_master_salt manually' );
+					$t_config_filename . ' and set a value for $g_crypto_master_salt manually' );
 	}
 
 	if( true == $t_write_failed ) {
@@ -1158,7 +1158,7 @@ if( 5 == $t_install_state ) {
 			<tr>
 				<td>
 					Please add the following lines to
-					<em>'<?php echo $g_absolute_path; ?>config_inc.php'</em>
+					<em>'<?php echo $t_config_filename; ?>'</em>
 					before continuing:
 				</td>
 			</tr>
