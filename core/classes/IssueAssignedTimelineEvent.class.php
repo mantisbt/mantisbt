@@ -45,18 +45,6 @@ class IssueAssignedTimelineEvent extends TimelineEvent {
 	}
 
 	/**
-	 * Whether to skip this event after access checks
-	 * @return boolean
-	 */
-	function skip() {
-		if( !access_has_bug_level( config_get( 'view_handler_threshold' ), $this->issue_id ) ) {
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
 	 * Returns html string to display
 	 * @return string
 	 */

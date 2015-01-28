@@ -39,6 +39,7 @@
  * @file
  *
  * @author Changwoo
+ * @author Hong3e
  * @author 아라
  */
 
@@ -84,7 +85,7 @@ $s_plugin_MantisGraph_legend_resolved = '해결됨';
 $s_plugin_MantisGraph_legend_assigned = '할당됨';
 $s_plugin_MantisGraph_legend_total = '총계';
 $s_plugin_MantisGraph_legend_opened = '미해결';
-$s_plugin_MantisGraph_legend_closed = '폐쇄됨';
+$s_plugin_MantisGraph_legend_closed = '종료됨';
 $s_plugin_MantisGraph_legend_reported = '보고됨';
 $s_plugin_MantisGraph_cumulative = '누적';
 $s_plugin_MantisGraph_not_enough_data = '그래프를 생성하는데 정보가 부족합니다';

@@ -17,11 +17,13 @@
 require_once( 'core.php' );
 require_api( 'timeline_api.php' );
 
+define( 'MAX_EVENTS', 50 );
+
 $f_days = gpc_get_int( 'days', 0 );
 $f_all = gpc_get_int( 'all', 0 );
 
-$t_end_time = time() - ( $f_days * 24 * 60 * 60 );
-$t_start_time = $t_end_time - ( 7 * 24 * 60 * 60 );
+$t_end_time = time() - ( $f_days * SECONDS_PER_DAY );
+$t_start_time = $t_end_time - ( 7 * SECONDS_PER_DAY );
 $t_events = timeline_events( $t_start_time, $t_end_time );
 
 $t_collapse_block = is_collapsed( 'timeline' );
@@ -44,51 +46,51 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 </div>
 
 <div class="widget-body">
-	<div class="widget-toolbox">
-		<div class="btn-toolbar">
-			<?php
-			$t_short_date_format = config_get( 'short_date_format' );
-			echo '&#160;&#160;';
-			echo '<span class="label label-yellow"> ' . date( $t_short_date_format, $t_start_time ) . ' </span>';
-			echo  ' .. ';
-			echo '<span class="label label-yellow"> ' . date( $t_short_date_format, $t_end_time ) . ' </span>';
-			echo '&#160;&#160;';
+    <div class="widget-toolbox">
+        <div class="btn-toolbar">
+            <?php
+            $t_short_date_format = config_get( 'short_date_format' );
+            echo '&#160;&#160;';
+            echo '<span class="label label-yellow"> ' . date( $t_short_date_format, $t_start_time ) . ' </span>';
+            echo  ' .. ';
+            echo '<span class="label label-yellow"> ' . date( $t_short_date_format, $t_end_time ) . ' </span>';
+            echo '&#160;&#160;';
 
-			echo '<div class="btn-group">';
-			echo ' <a class="btn btn-primary btn-xs btn-white btn-round" href="my_view_page.php?days=' .
-				( $f_days + 7 ) . '">' . lang_get( 'prev' ) . '</a>';
+            echo '<div class="btn-group">';
+            echo '</div>';
 
-$t_next_days = ( $f_days - 7 ) > 0 ? $f_days - 7 : 0;
-if( $t_next_days != $f_days ) {
-	echo ' <a class="btn btn-primary btn-xs btn-white btn-round" href="my_view_page.php?days=' .
-		$t_next_days . '">' . lang_get( 'next' ) . '</a>';
-}
-			echo '</div>';
-			?>
-		</div>
-	</div>
-	<div class="widget-main no-padding">
-		<div class="profile-feed">
-<?php
-$t_events = timeline_sort_events( $t_events );
-$t_events = timeline_filter_events( $t_events, $f_all == 0 ? 50 : 0 );
+            $t_next_days = ( $f_days - 7 ) > 0 ? $f_days - 7 : 0;
+            $t_prev_link = ' <a class="btn btn-primary btn-xs btn-white btn-round" href="my_view_page.php?days=' .
+                ( $f_days + 7 ) . '">' . lang_get( 'prev' ) . '</a>';
 
-if( count( $t_events ) > 0 ) {
-	timeline_print_events( $t_events );
-} else {
-	echo '<h5>&#160;&#160;' . lang_get( 'timeline_no_activity' ) . '</h5>';
-}
-?>
-		</div>
-	</div>
-	<div class="widget-toolbox">
-		<div class="btn-toolbar">
-<?php
-if( $f_all == 0 ) {
-	echo '<a class="btn btn-primary btn-sm btn-white btn-round" href="my_view_page.php?days=' . $f_days . '&amp;all=1">' . lang_get( 'timeline_more' ) . '</a>';
-}
-?>
-		</div>
-	</div>
+            if( $t_next_days != $f_days ) {
+                $t_next_link = ' <a class="btn btn-primary btn-xs btn-white btn-round" href="my_view_page.php?days=' .
+                    $t_next_days . '">' . lang_get( 'next' ) . '</a>';
+            } else {
+                $t_next_link = '';
+            }
+            ?>
+
+        </div>
+    </div>
+    <div class="widget-main no-padding">
+        <div class="widget-toolbox">
+            <div class="btn-toolbar">
+                <?php
+                $t_events = timeline_sort_events( $t_events );
+
+                $t_num_events = timeline_print_events( $t_events, ( $f_all ? 0 : MAX_EVENTS ) );
+
+                # Don't display "More Events" link if there are no more entries to show
+                # Note: as of 2015-01-19, this does not cover the case of entries excluded
+                # by filtering (e.g. Status Change not in RESOLVED, CLOSED, REOPENED)
+                if( !$f_all && $t_num_events < count( $t_events )) {
+                    echo '<a class="btn btn-primary btn-sm btn-white btn-round" href="my_view_page.php?days=' . $f_days . '&amp;all=1">' . lang_get( 'timeline_more' ) . '</a>';
+                }
+                ?>
+            </div>
+        </div>
+    </div>
 </div>
 </div>
+

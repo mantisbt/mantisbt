@@ -282,6 +282,7 @@ if( db_is_mysql() ) {
 	# Version support information
 	$t_versions = array(
 		# Version => EOL date
+		'9.4' => '2019-12-30',
 		'9.3' => '2018-09-30',
 		'9.2' => '2017-09-30',
 		'9.1' => '2016-09-30',

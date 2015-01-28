@@ -50,6 +50,7 @@
  * @author Kropotkine 113
  * @author Lapinkiller
  * @author McDutchie
+ * @author Noe
  * @author Od1n
  * @author Peter17
  * @author Philou2024
@@ -216,7 +217,7 @@ $s_project_view_state_enum_string = '10:public,50:privé';
 $s_view_state_enum_string = '10:public,50:privé';
 $s_priority_enum_string = '10:aucune,20:basse,30:normale,40:élevée,50:urgente,60:immédiate';
 $s_severity_enum_string = '10:fonctionnalité,20:simple,30:texte,40:cosmétique,50:mineur,60:majeur,70:critique,80:bloquant';
-$s_reproducibility_enum_string = '10:toujours,30:quelques fois,50:aléatoire,70:n\'a pas essayé,90:impossible à reproduire,100:S/O';
+$s_reproducibility_enum_string = '10:toujours,30:quelques fois,50:aléatoire,70:n\'a pas essayé,90:impossible à reproduire,100:sans objet';
 $s_status_enum_string = '10:nouveau,20:commentaire,30:accepté,40:confirmé,50:affecté,80:résolu,90:fermé';
 $s_resolution_enum_string = '10:ouvert,20:résolu,30:réouvert,40:impossible à reproduire,50:impossible à corriger,60:doublon,70:pas un bogue,80:suspendu,90:ne sera pas résolu';
 $s_projection_enum_string = '10:aucun,30:cosmétique,50:correction mineure,70:correction majeure,90:reconception';
@@ -444,7 +445,7 @@ $s_duplicate_id = 'Doublon d\'ID';
 $s_os = 'OS';
 $s_os_label = 'OS :';
 $s_projection = 'Projection';
-$s_os_version = 'Version';
+$s_os_version = 'Version de l\'OS';
 $s_os_version_label = 'Version de l\'OS :';
 $s_eta = 'ETA';
 $s_product_version = 'Version du produit';
@@ -579,6 +580,7 @@ $s_date_created = 'Date de création';
 $s_last_visit = 'Dernière visite ';
 $s_last_visit_label = 'Dernière visite :';
 $s_edit_user_link = 'Modifier l\'utilisateur';
+$s_separate_list_items_by = '(liste d’éléments séparés par « %1$s »)';
 $s_config_all_projects = 'Note : ces réglages affectent tous les projets.';
 $s_config_project = 'Note : ces réglages affectent uniquement le projet %1$s.';
 $s_colour_coding = 'Codes couleurs applicables au tableau suivant :';
@@ -1048,7 +1050,7 @@ $s_create_child_bug_button = 'Cloner';
 $s_bug_cloned_to = 'Bogue dupliqué';
 $s_bug_created_from = 'Bogue généré depuis';
 $s_copy_from_parent = 'Copier les données étendues du père';
-$s_copy_notes_from_parent = 'Copier les notes';
+$s_copy_notes_from_parent = 'Copier les notes de problème';
 $s_copy_attachments_from_parent = 'Copier les pièces jointes';
 $s_viewing_bug_relationship_graph_title = 'Graphique relationnel';
 $s_viewing_bug_dependency_graph_title = 'Graphique des dépendances';
@@ -1222,6 +1224,7 @@ $s_timeline_issue_closed = '<span class="username">%1s</span> a clôturé le pro
 $s_timeline_issue_reopened = '<span class="username">%1s</span> a réouvert le problème <span class="issue_id">%2s</span>';
 $s_timeline_issue_assigned = '<span class="username">%1s</span> a affecté le problème <span class="issue_id">%2s</span> à <span class="username">%3s</span>';
 $s_timeline_issue_assigned_to_self = '<span class="username">%1s</span> a pris en charge le problème <span class="issue_id">%2s</span>';
+$s_timeline_issue_unassigned = '<span class="username">%1s</span> problème non assigné <span class="issue_id">%2s</span>';
 $s_timeline_no_activity = 'Aucune activité dans l’intervalle de temps.';
 $s_timeline_title = 'Chronologie';
 $s_timeline_more = 'Plus d’événements…';

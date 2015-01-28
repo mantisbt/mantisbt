@@ -40,6 +40,7 @@
  *
  * @author DCLXVI
  * @author Emostoyanov
+ * @author Vodnokon4e
  */
 
 $s_plugin_graph_title = 'MantisBT - Графики';
@@ -76,8 +77,8 @@ $s_plugin_MantisGraph_by_priority_pct = 'По приоритет (%)';
 $s_plugin_MantisGraph_by_severity_pct = 'По значимост (%)';
 $s_plugin_MantisGraph_by_category_pct = 'По категория (%)';
 $s_plugin_MantisGraph_by_resolution_pct = 'По резолюция (%)';
-$s_plugin_MantisGraph_by_severity_mix = 'По значимост и статус';
-$s_plugin_MantisGraph_by_priority_mix = 'По приоритет и Статут';
+$s_plugin_MantisGraph_by_severity_mix = 'По значимост и статут';
+$s_plugin_MantisGraph_by_priority_mix = 'По приоритет и статут';
 $s_plugin_MantisGraph_by_resolution_mix = 'По резолюция и статут';
 $s_plugin_MantisGraph_legend_still_open = 'Все още отворен';
 $s_plugin_MantisGraph_legend_resolved = 'Решен';

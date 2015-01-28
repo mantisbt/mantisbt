@@ -43,6 +43,7 @@
  * @author Giro720
  * @author Gusta
  * @author Hamilton Abreu
+ * @author Imperadeiro90
  * @author Imperadeiro98
  * @author Luckas
  * @author M42
@@ -452,7 +453,7 @@ $s_hide_content = 'Esconder conteúdo';
 $s_show_content = 'Mostrar conteúdo';
 $s_total_queries_executed = '%1$d queries executadas no total.';
 $s_unique_queries_executed = '%1$d queries únicas executadas.';
-$s_memory_usage_in_kb = 'utilização de memória: %1$s KB';
+$s_memory_usage_in_kb = 'Uso da memória: %1$s KiB';
 $s_log_page_time = 'Tempo de execução';
 $s_please_report = 'Por favor, relate isto ao %1$s';
 $s_click_to_login = 'Entrar';
@@ -1130,7 +1131,7 @@ $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'Opção de configuração "%1$s" n�
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'Opção de configuração "%1$s" não pode ser definida na base de dados. Deve ser definida em config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Cadeia de caracteres "%1$s" não encontrada.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Nota não encontrada.';
-$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'Projeto "%1$d" não encontrado.';
+$MANTIS_ERROR[ERROR_PROJECT_NOT_FOUND] = 'O projeto "%1$s" não foi encontrado.';
 $MANTIS_ERROR[ERROR_DB_FIELD_NOT_FOUND] = 'Campo de base de dados "%1$s" não encontrado.';
 $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'Handler de problemas não tem privilégios suficientes para tratar do problema neste estado.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Um projeto com esse nome já existe. Por favor, volte atrás e introduza um nome diferente.';
@@ -1210,9 +1211,9 @@ $MANTIS_ERROR[ERROR_TAG_NOT_ATTACHED] = 'Essa etiqueta não está associada a es
 $MANTIS_ERROR[ERROR_TAG_ALREADY_ATTACHED] = 'Essa etiqueta já está associada a esse problema.';
 $MANTIS_ERROR[ERROR_TOKEN_NOT_FOUND] = 'Não foi possível encontrar o token.';
 $MANTIS_ERROR[ERROR_EVENT_UNDECLARED] = 'Evento "%1$s" ainda não foi declarado.';
-$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'Plugin não está registado no MantisBT.';
-$MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'Plugin já está instalado.';
-$MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'Não foi encontrada a página de plugin.';
+$MANTIS_ERROR[ERROR_PLUGIN_NOT_REGISTERED] = 'O plugin "%1$s" não está registado.';
+$MANTIS_ERROR[ERROR_PLUGIN_ALREADY_INSTALLED] = 'O plugin "%1$s" já está instalado.';
+$MANTIS_ERROR[ERROR_PLUGIN_PAGE_NOT_FOUND] = 'A página "%2$s" não existe no Plugin "%1$s".';
 $MANTIS_ERROR[ERROR_PLUGIN_INSTALL_FAILED] = 'Instalação do plugin falhada:  %1$s .';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'A atualização do schema do plugin falhou no bloco #%1$s.';
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'O plugin "%1$s" precisa de ser atualizado antes de você poder aceder a esta página.';

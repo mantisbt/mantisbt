@@ -450,13 +450,14 @@ function bugnote_get_all_bugnotes( $p_bug_id ) {
 
 	# the cache should be aware of the sorting order
 	if( !isset( $g_cache_bugnotes[(int)$p_bug_id] ) ) {
-		# sort by bugnote id which should be more accurate than submit date, since two bugnotes
-		# may be submitted at the same time if submitted using a script (eg: MantisConnect).
+		# Now sorting by submit date and id (#11742). The date_submitted
+		# column is currently not indexed, but that does not seem to affect
+		# performance in a measurable way
 		$t_query = 'SELECT b.*, t.note
 			          	FROM      {bugnote} b
 			          	LEFT JOIN {bugnote_text} t ON b.bugnote_text_id = t.id
 						WHERE b.bug_id=' . db_param() . '
-						ORDER BY b.id ASC';
+						ORDER BY b.date_submitted ASC, b.id ASC';
 		$t_bugnotes = array();
 
 		# BUILD bugnotes array

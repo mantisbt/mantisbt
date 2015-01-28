@@ -41,11 +41,15 @@
  * @author Siebrand
  */
 
-$s_plugin_XmlImportExport_title = 'Meldingen importeren/exporteren';
+$s_plugin_XmlImportExport_title = 'Meldingen importeren en exporteren';
 $s_plugin_XmlImportExport_description = 'Voegt XML-gebaseerde import- en exportmogelijkheden toe aan MantisBT.';
 $s_plugin_XmlImportExport_import = 'Meldingen importeren';
 $s_plugin_XmlImportExport_export = 'XML-export';
-$s_plugin_XmlImportExport_importing_in_project = 'Bezig met het importeren van meldingen in het project:';
+$s_plugin_XmlImportExport_config_title = 'Instellingen voor toegang tot XML-import en -export';
+$s_plugin_XmlImportExport_import_threshold = 'Meldingen importeren';
+$s_plugin_XmlImportExport_export_threshold = 'Meldingen exporteren';
+$s_plugin_XmlImportExport_action_update = 'Bijwerken';
+$s_plugin_XmlImportExport_importing_in_project = 'Bezig met het importeren van meldingen in het project: "%s"';
 $s_plugin_XmlImportExport_import_options = 'Importinstellingen';
 $s_plugin_XmlImportExport_cross_references = 'Kruiskoppelingen';
 $s_plugin_XmlImportExport_default_strategy = 'Standaard conversiestrategie:';

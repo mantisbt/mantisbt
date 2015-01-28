@@ -741,7 +741,6 @@ function print_summary_menu( $p_page = '' ) {
 		}
 	}
 
-	$t_pages['print_all_bug_page.php'] = array( 'url'=>'print_all_bug_page.php', 'label'=>'print_all_bug_page_link' );
 	$t_pages['summary_page.php'] = array( 'url'=>'summary_page.php', 'label'=>'summary_link' );
 
 	echo '<ul class="nav nav-tabs padding-18">' . "\n";

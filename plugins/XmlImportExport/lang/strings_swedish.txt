@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Fader
  * @author Jopparn
  * @author Lokal Profil
  * @author Per
@@ -48,7 +49,11 @@
 $s_plugin_XmlImportExport_title = 'Importera/exportera problem';
 $s_plugin_XmlImportExport_description = 'Lägger XML-baserade import- och exportmöjligheter till MantisBT.';
 $s_plugin_XmlImportExport_import = 'Importera problem';
-$s_plugin_XmlImportExport_export = 'XML export';
+$s_plugin_XmlImportExport_export = 'XML-export';
+$s_plugin_XmlImportExport_config_title = 'Konfiguration av tillgångsnivåer för XML-import/export';
+$s_plugin_XmlImportExport_import_threshold = 'Importera problem';
+$s_plugin_XmlImportExport_export_threshold = 'Exportera problem';
+$s_plugin_XmlImportExport_action_update = 'Uppdatera';
 $s_plugin_XmlImportExport_importing_in_project = 'Importerar problem i projektet:';
 $s_plugin_XmlImportExport_import_options = 'Importalternativ';
 $s_plugin_XmlImportExport_cross_references = 'Korsreferenser';

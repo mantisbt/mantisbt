@@ -39,8 +39,10 @@
  * @file
  *
  * @author Crt
+ * @author Macofe
  */
 
+$s_plugin_MantisGraph_config = 'Asetukset';
 $s_plugin_MantisGraph_font = 'Kirjasin';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Synteesitaulukot tilan mukaan';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'Synteesitaulukot prioriteetin mukaan';

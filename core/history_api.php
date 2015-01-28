@@ -162,9 +162,11 @@ function history_get_events_array( $p_bug_id, $p_user_id = null ) {
  * 'field','type','old_value','new_value'
  * @param integer $p_bug_id  A valid bug identifier.
  * @param integer $p_user_id A valid user identifier.
+ * @param integer $p_start_time The start time to filter by, or null for all.
+ * @param integer $p_end_time   The end time to filter by, or null for all.
  * @return array
  */
-function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
+function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_time = null, $p_end_time = null ) {
 	$t_history_order = config_get( 'history_order' );
 
 	$t_user_id = (( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
@@ -178,9 +180,29 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null ) {
 	# I give you an example. We create a child of a bug with different custom fields. In the history of the child
 	# bug we will find the line related to the relationship mixed with the custom fields (the history is creted
 	# for the new bug with the same timestamp...)
-	$t_query = 'SELECT * FROM {bug_history} WHERE bug_id=' . db_param() . '
-				ORDER BY date_modified ' . $t_history_order . ',id';
-	$t_result = db_query( $t_query, array( $p_bug_id ) );
+
+	$t_params = array( $p_bug_id );
+
+	$t_query = 'SELECT * FROM {bug_history} WHERE bug_id=' . db_param();
+
+	$t_where = array();
+	if ( $p_start_time !== null ) {
+		$t_where[] = 'date_modified >= ' . db_param();
+		$t_params[] = $p_start_time;
+	}
+
+	if ( $p_end_time !== null ) {
+		$t_where[] = 'date_modified < ' . db_param();
+		$t_params[] = $p_end_time;
+	}
+
+	if ( count( $t_where ) > 0 ) {
+		$t_query .= ' AND ' . implode( ' AND ', $t_where );
+	}
+
+	$t_query .= ' ORDER BY date_modified ' . $t_history_order . ',id';
+
+	$t_result = db_query( $t_query, $t_params );
 	$t_raw_history = array();
 
 	$t_private_bugnote_visible = access_has_bug_level( config_get( 'private_bugnote_threshold' ), $p_bug_id, $t_user_id );

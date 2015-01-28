@@ -45,6 +45,7 @@
  * @author Emostoyanov
  * @author RealEnder
  * @author StanProg
+ * @author Vodnokon4e
  */
 
 $s_actiongroup_menu_move = 'Преместване';
@@ -78,7 +79,7 @@ $s_login_anonymously = 'Вход като гост';
 $s_anonymous = 'Гост';
 $s_jump_to_bugnotes = 'Преглед на бележките';
 $s_public_project_msg = 'Проектът е ПУБЛИЧЕН. Всички потребители имат достъп.';
-$s_private_project_msg = 'Проектът е ЧАСТЕН. Само администраторите и ръчно-добавените потребители имат достъп.';
+$s_private_project_msg = 'Проектът е ЧАСТЕН. Само администраторите и ръчно добавените потребители имат достъп.';
 $s_access_level_project = 'Ниво на достъп за проекта';
 $s_view_submitted_bug_link = 'Преглед на изпратения проблем %1$s';
 $s_assigned_projects = 'Възложени проекти';
@@ -115,11 +116,11 @@ $s_no_category = '(няма категория)';
 $s_global_categories = 'Глобални категории';
 $s_inherit = 'Наследени категории';
 $s_inherit_global = 'Онаследи глобалните категории';
-$s_inherit_parent = 'Онаследи Parent категории';
+$s_inherit_parent = 'Онаследи ,родителските категории';
 $s_update_subproject_inheritance = 'Обновяване на  структурата на подпроекта';
 $s_duplicate_of = 'Дубликат на';
-$s_has_duplicate = 'Съществува дубликат';
-$s_related_to = 'Отнася се до';
+$s_has_duplicate = 'съществува дубликат';
+$s_related_to = 'отнася се до';
 $s_dependant_on = 'Зависи от';
 $s_blocks = 'Производен на';
 $s_new_bug = 'Нов проблем';
@@ -280,6 +281,7 @@ $s_email_label = 'Е-поща';
 $s_password = 'Парола';
 $s_no_password_change = 'Паролата е контролирана от друга система, не може да бъде променена от тук.';
 $s_confirm_password = 'Потвърждаване на паролата';
+$s_current_password = 'Текуща парола';
 $s_access_level = 'Ниво на достъп';
 $s_access_level_label = 'Ниво на достъп';
 $s_update_user_button = 'Обновяване на профил';
@@ -462,11 +464,13 @@ $s_add_bugnote_button = 'Добавяне на бележка';
 $s_bugnote_edit_link = 'Редакция';
 $s_closed_bug_button = 'Приключване на проблем';
 $s_bugnote_updated_msg = 'Бележката е обновена успешно...';
+$s_last_edited = 'Последна редакция:';
 $s_hide_content = 'Скриване на съдържанието';
 $s_show_content = 'Показване на съдържанието';
 $s_total_queries_executed = 'Изпълнени са общо %1$d заявки.';
 $s_unique_queries_executed = 'Изпълнени са %1$d уникални заявки.';
 $s_memory_usage_in_kb = 'Използвана памет :  %1$s KB';
+$s_log_page_event = 'Събитие';
 $s_please_report = 'Моля, съобщавайте за това на% 1 $ s.';
 $s_click_to_login = 'Влизане';
 $s_warning_plain_password_authentication = 'Използвана е много лесна парола за оторизация, която може да бъде видяна от администратор.';
@@ -536,6 +540,7 @@ $s_show_disabled = 'Показване на неактивните';
 $s_manage_accounts_title = 'Управление на Профили';
 $s_date_created = 'Дата на създаване';
 $s_last_visit = 'Последно посещение';
+$s_last_visit_label = 'Последно посещение:';
 $s_edit_user_link = 'Редакция на потребител';
 $s_config_all_projects = 'Забележка: Настройките са валидни за ВСИЧКИ ПРОЕКТИ, освен ако не са въведени други настройки, които да отхвърлят началните.';
 $s_config_project = 'Забележка: Конфигурацията засяга само проект %1$s.';
@@ -572,11 +577,15 @@ $s_desc_bug_submit_status = 'Статус, задаван на нов пробл
 $s_desc_bug_reopen_status = 'Статус, задаван на отворени наново проблеми';
 $s_desc_bug_resolved_status_threshold = 'Статус, при който проблема се счита за решен';
 $s_desc_bug_closed_status_threshold = 'Статус на затворен проблем.';
+$s_access_change_access_label = 'Кой може да променя нивата за достъп:';
 $s_default_not_in_flow = 'Първоначално-зададеният статус на %1$s не е избиран в следващите статуси на %2$s. Ще бъде игнориран.';
 $s_assign_issue = 'Възлагане на проблем';
 $s_allow_reporter_close = 'Разрешение за приключване на проблема';
 $s_allow_reporter_reopen = 'Разрешение за повторно отваряне на проблема';
 $s_set_status_assigned = 'Задаване на статус при възлагане от служителя, избран за закриване на проблема';
+$s_edit_own_bugnotes = 'Редактиране на собствени бележки';
+$s_delete_others_bugnotes = 'Изтриване на чужди бележки';
+$s_delete_own_bugnotes = 'Изтриване на собствени бележки';
 $s_limit_access = 'Ограничаване достъпа на кореспондентите до техните собствени проблеми';
 $s_submit_status = 'Статус, задаван на нов проблем';
 $s_assigned_status = 'Статус, задаван на възложени от системата проблеми';

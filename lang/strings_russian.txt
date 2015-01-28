@@ -571,6 +571,7 @@ $s_date_created = 'Создана';
 $s_last_visit = 'Последний вход';
 $s_last_visit_label = 'Последний вход:';
 $s_edit_user_link = 'изменить учетную запись';
+$s_separate_list_items_by = '(отделяйте пункты списка с помощью «%1$s»)';
 $s_config_all_projects = 'Примечание: эти значения влияют на ВСЕ ПРОЕКТЫ.';
 $s_config_project = 'Примечание: эти значения влияют только на проект %1$s.';
 $s_colour_coding = 'В таблице используются следующие цветовые обозначения:';
@@ -1214,6 +1215,7 @@ $s_timeline_issue_closed = '<span class="username">%1s</span> закрыл за�
 $s_timeline_issue_reopened = '<span class="username">%1s</span> заново открыл задачу <span class="issue_id">%2s</span>';
 $s_timeline_issue_assigned = '<span class="username">%1s</span> назначил <span class="username">%3s</span> на задачу <span class="issue_id">%2s</span>';
 $s_timeline_issue_assigned_to_self = '<span class="username">%1s</span> назначил себя на задачу <span class="issue_id">%2s</span>';
+$s_timeline_issue_unassigned = '<span class="username">%1s</span> неопределённая проблема <span class="issue_id">%2s</span>';
 $s_timeline_no_activity = 'Активности за этот период не обнаружено.';
 $s_timeline_title = 'Сводка активности';
 $s_timeline_more = 'Больше событий...';
