@@ -266,7 +266,7 @@ function layout_head_javascript() {
 
 	# HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
 	echo '<!--[if lte IE 8]>';
-	html_javascript_link( 'html5shiv.js' );
+	html_javascript_link( 'html5shiv.min.js' );
 	html_javascript_link( 'respond.min.js' );
 	echo '<![endif]-->';
 	echo "\n";
