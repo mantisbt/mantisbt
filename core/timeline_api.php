@@ -171,7 +171,7 @@ function timeline_sort_events( array $p_events ) {
  */
 function timeline_print_events( array $p_events, $p_max_num = 0 ) {
 	if( empty( $p_events ) ) {
-		echo '<p>' . lang_get( 'timeline_no_activity' ) . '</p>';
+		echo '<h6 class="padding-4">' . lang_get( 'timeline_no_activity' ) . '</h6>';
 		return 0;
 	}
 
