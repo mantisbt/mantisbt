@@ -283,7 +283,6 @@ if( $t_reset || $t_unlock || $t_delete ) {
 	!user_is_administrator( $t_user_id ) ) {
 ?>
 <div class="space-10"></div>
-<form id="manage-user-project-add-form" method="post" action="manage_user_proj_add.php">
 <div class="widget-box widget-color-blue2">
 <div class="widget-header widget-header-small">
 <h4 class="widget-title lighter">
@@ -297,7 +296,7 @@ if( $t_reset || $t_unlock || $t_delete ) {
 <div class="form-container">
 <div class="table-responsive">
 	<table class="table table-bordered table-condensed table-striped">
-		<fieldset>
+
 			<?php echo form_security_field( 'manage_user_proj_add' ) ?>
 			<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
 			<tr>
@@ -306,6 +305,8 @@ if( $t_reset || $t_unlock || $t_delete ) {
 				</td>
 				<td><?php print_project_user_list( $t_user['id'] ) ?></td>
 			</tr>
+            <form id="manage-user-project-add-form" method="post" action="manage_user_proj_add.php">
+            <fieldset>
 			<tr>
 				<td class="category">
 					<?php echo lang_get( 'unassigned_projects_label' ) ?>
@@ -326,7 +327,8 @@ if( $t_reset || $t_unlock || $t_delete ) {
 					</select>
 				</td>
 			</tr>
-		</fieldset>
+		    </fieldset>
+            </form>
 	</table>
 </div>
 </div>
@@ -337,7 +339,7 @@ if( $t_reset || $t_unlock || $t_delete ) {
 	</div>
 </div>
 </div>
-	</form>
+
 <?php
 } # End of PROJECT ACCESS conditional section
 echo '</div>';
