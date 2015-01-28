@@ -296,47 +296,47 @@ if( $t_reset || $t_unlock || $t_delete ) {
 <div class="form-container">
 <div class="table-responsive">
 	<table class="table table-bordered table-condensed table-striped">
-
-			<?php echo form_security_field( 'manage_user_proj_add' ) ?>
-			<input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
-			<tr>
-				<td class="category">
-					<?php echo lang_get( 'assigned_projects_label' ) ?>
-				</td>
-				<td><?php print_project_user_list( $t_user['id'] ) ?></td>
-			</tr>
-            <form id="manage-user-project-add-form" method="post" action="manage_user_proj_add.php">
-            <fieldset>
-			<tr>
-				<td class="category">
-					<?php echo lang_get( 'unassigned_projects_label' ) ?>
-				</td>
-				<td>
-					<select id="add-user-project-id" name="project_id[]" class="input-sm" multiple="multiple" size="5">
-						<?php print_project_user_list_option_list2( $t_user['id'] ) ?>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td class="category">
-					<?php echo lang_get( 'access_level_label' ) ?>
-				</td>
-				<td>
-					<select id="add-user-project-access" name="access_level" class="input-sm">
-						<?php print_project_access_levels_option_list( (int)config_get( 'default_new_account_access_level' ) ) ?>
-					</select>
-				</td>
-			</tr>
-		    </fieldset>
-            </form>
+        <tr>
+            <td class="category">
+                <?php echo lang_get( 'assigned_projects_label' ) ?>
+            </td>
+            <td><?php print_project_user_list( $t_user['id'] ) ?></td>
+        </tr>
+        <form id="manage-user-project-add-form" method="post" action="manage_user_proj_add.php">
+        <fieldset>
+            <?php echo form_security_field( 'manage_user_proj_add' ) ?>
+            <input type="hidden" name="user_id" value="<?php echo $t_user['id'] ?>" />
+        <tr>
+            <td class="category">
+                <?php echo lang_get( 'unassigned_projects_label' ) ?>
+            </td>
+            <td>
+                <select id="add-user-project-id" name="project_id[]" class="input-sm" multiple="multiple" size="5">
+                    <?php print_project_user_list_option_list2( $t_user['id'] ) ?>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="category">
+                <?php echo lang_get( 'access_level_label' ) ?>
+            </td>
+            <td>
+                <select id="add-user-project-access" name="access_level" class="input-sm">
+                    <?php print_project_access_levels_option_list( (int)config_get( 'default_new_account_access_level' ) ) ?>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'add_user_button' ) ?>" />
+            </td>
+        </tr>
+        </fieldset>
+        </form>
 	</table>
 </div>
 </div>
 </div>
-
-	<div class="widget-toolbox padding-8 clearfix">
-		<input type="submit" class="btn btn-primary btn-sm btn-white btn-round" value="<?php echo lang_get( 'add_user_button' ) ?>" />
-	</div>
 </div>
 </div>
 
