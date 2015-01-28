@@ -285,14 +285,6 @@ function html_head_end() {
 }
 
 /**
- * Begin the <body> section
- * @return void
- */
-function html_body_begin() {
-	echo '<body>', "\n";
-}
-
-/**
  * Print a user-defined banner at the top of the page if there is one.
  * @return void
  */

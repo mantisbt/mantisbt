@@ -215,13 +215,14 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 							layout_page_begin();
 						}
 					} else {
-						echo '<html><head><title>', $t_error_type, '</title></head><body>';
-					}
+                        layout_page_header( $t_error_type );
+                    }
 				} else {
 					# Output the previously sent headers, if defined
 					if( isset( $t_old_headers ) ) {
 						echo $t_old_headers, "\n";
-						layout_page_begin();
+                        layout_page_header_end();
+                        layout_page_begin();
 					}
 				}
 
