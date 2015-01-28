@@ -1159,12 +1159,12 @@ $s_timeline_issue_created = '<span class="username">%1$s</span> създаде �
 $s_timeline_issue_note_created = '<span class="username">%1$s</span> коментира проблем <span class="issue_id">%2$s</span>';
 $s_timeline_issue_monitor = '<span class="username">%1$s</span> наблюдава проблем <span class="issue_id">%2$s</span>';
 $s_timeline_issue_unmonitor = '<span class="username">%1$s</span> спря да наблюдава проблем <span class="issue_id">%2$s</span>';
-$s_timeline_issue_tagged = '<span class="username">%1$s</span> етикетира проблем <span class="issue_id">%2$s</span> with <span class="tag_name">%3s</span>';
-$s_timeline_issue_untagged = '<span class="username">%1$s</span> отстрани <span class="tag_name">%3s</span> от проблем <span class="issue_id">%2$s</span>';
+$s_timeline_issue_tagged = '<span class="username">%1$s</span> етикетира проблем <span class="issue_id">%2$s</span> with <span class="tag_name">%3$s</span>';
+$s_timeline_issue_untagged = '<span class="username">%1$s</span> отстрани <span class="tag_name">%3$s</span> от проблем <span class="issue_id">%2$s</span>';
 $s_timeline_issue_resolved = '<span class="username">%1$s</span> реши проблем <span class="issue_id">%2$s</span>';
 $s_timeline_issue_closed = '<span class="username">%1$s</span> затвори проблем <span class="issue_id">%2$s</span>';
 $s_timeline_issue_reopened = '<span class="username">%1$s</span> отвори повторно проблем <span class="issue_id">%2$s</span>';
-$s_timeline_issue_assigned = '<span class="username">%1$s</span> възложи проблем <span class="issue_id">%2$s</span> to <span class="username">%3s</span>';
+$s_timeline_issue_assigned = '<span class="username">%1$s</span> възложи проблем <span class="issue_id">%2$s</span> to <span class="username">%3$s</span>';
 $s_timeline_issue_assigned_to_self = '<span class="username">%1$s</span> пое проблем <span class="issue_id">%2$s</span>';
 $s_timeline_no_activity = 'Няма дейност в зададения период от време.';
 $s_timeline_more = 'Още събития...';
