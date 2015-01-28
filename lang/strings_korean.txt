@@ -1141,7 +1141,7 @@ $s_month_september = '9월';
 $s_month_october = '10월';
 $s_month_november = '11월';
 $s_month_december = '12월';
-$s_timeline_issue_reopened = '<span class="username">%1s</span> 재발생된 이슈 <span class="issue_id">%2s</span>';
+$s_timeline_issue_reopened = '<span class="username">%1$s</span> 재발생된 이슈 <span class="issue_id">%2$s</span>';
 $MANTIS_ERROR[ERROR_GENERIC] = '이 동작을 수행하는 도중 오류가 발생했습니다.  시스템 관리자에게 이 오류를 보고하세요.';
 $MANTIS_ERROR[ERROR_SQL] = 'SQL 오류가 발생했습니다.';
 $MANTIS_ERROR[ERROR_REPORT] = '보고에 오류가 있습니다.';
