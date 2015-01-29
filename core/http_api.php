@@ -144,16 +144,32 @@ function http_content_headers() {
  */
 function http_security_headers() {
 	if( !headers_sent() ) {
+		# Header: X-Frame-Options
 		header( 'X-Frame-Options: DENY' );
+
+		# Header: CSP
+		$t_default_src = "default-src 'self'";
+		$t_frame_ancestors = "; frame-ancestors 'none'";
+
 		$t_avatar_img_allow = '';
 		if( config_get_global( 'show_avatar' ) ) {
 			if( http_is_protocol_https() ) {
-				$t_avatar_img_allow = "; img-src 'self' https://secure.gravatar.com:443";
+				$t_avatar_img_allow = " https://secure.gravatar.com:443";
 			} else {
-				$t_avatar_img_allow = "; img-src 'self' http://www.gravatar.com:80";
+				$t_avatar_img_allow = " http://www.gravatar.com:80";
 			}
 		}
-		header( 'Content-Security-Policy: default-src \'self\';' . $t_avatar_img_allow . '; frame-ancestors \'none\'' );
+		$t_img_src = "; img-src 'self'" . $t_avatar_img_allow;
+
+		#
+		$t_report_uri = '';
+		if( config_get_global( 'report_csp_violation' ) ) {
+			$t_report_uri = '; report-uri ./csp/csp_report.php'; // Note: This does not work from admin- or any other folder
+		}
+
+		header( 'Content-Security-Policy: ' . $t_default_src . $t_frame_ancestors . $t_img_src . $t_report_uri);
+
+		# Header: STS
 		if( http_is_protocol_https() ) {
 			header( 'Strict-Transport-Security: max-age=7776000' );
 		}
