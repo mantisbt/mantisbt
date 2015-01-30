@@ -165,7 +165,7 @@ print_summary_submenu(); ?>
 	<table>
 		<thead>
 			<tr class="row-category2">
-				<th><?php echo lang_get( 'by_category' ) ?></th>
+				<th><?php echo lang_get( 'by_severity' ) ?></th>
 				<?php echo $t_orcttab ?>
 			</tr>
 		</thead>
@@ -176,7 +176,7 @@ print_summary_submenu(); ?>
 	<table>
 		<thead>
 			<tr class="row-category2">
-				<th><?php echo lang_get( 'by_severity' ) ?></th>
+				<th><?php echo lang_get( 'by_category' ) ?></th>
 				<?php echo $t_orcttab ?>
 			</tr>
 		</thead>
