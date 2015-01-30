@@ -103,6 +103,21 @@
 		}
 	}
 
+	/**
+	 * Ensures the given config is valid
+	 * @param string $p_config Configuration name
+	 * @return string|integer Config name if valid, or META_FILTER_NONE of not
+	 */
+	function check_config_value( $p_config ) {
+		if(    $p_config != META_FILTER_NONE
+		   && !is_blank( $p_config )
+		   && is_null( @config_get_global( $p_config ) )
+		) {
+			return META_FILTER_NONE;
+		}
+		return $p_config;
+	}
+
 
 	# Get filter values
 	$t_filter_save          = gpc_get_bool( 'save' );
@@ -119,7 +134,7 @@
 	} else {
 		$t_filter_user_value    = gpc_get_int( 'filter_user_id', ALL_USERS );
 		$t_filter_project_value = gpc_get_int( 'filter_project_id', ALL_PROJECTS );
-		$t_filter_config_value  = gpc_get_string( 'filter_config_id', META_FILTER_NONE );
+		$t_filter_config_value  = check_config_value( gpc_get_string( 'filter_config_id', META_FILTER_NONE ) );
 	}
 
 	# Manage filter's persistency through cookie
@@ -144,17 +159,10 @@
 
 			$t_filter_user_value    = $t_cookie_contents[0];
 			$t_filter_project_value = $t_cookie_contents[1];
-			$t_filter_config_value  = $t_cookie_contents[2];
+			$t_filter_config_value  = check_config_value( $t_cookie_contents[2] );
 
 			if( $t_filter_project_value != META_FILTER_NONE && !project_exists( $t_filter_project_value ) ) {
 				$t_filter_project_value = ALL_PROJECTS;
-			}
-
-			if(    $t_filter_config_value != META_FILTER_NONE
-			   && !is_blank( $t_filter_config_value )
-			   && @config_get_global( $t_filter_config_value ) === null
-			) {
-				$t_filter_config_value = META_FILTER_NONE;
 			}
 		}
 	}
