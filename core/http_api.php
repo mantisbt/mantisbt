@@ -144,7 +144,10 @@ function http_content_headers() {
  */
 function http_security_headers() {
 	if( !headers_sent() ) {
+		# Header: X-Frame-Options
 		header( 'X-Frame-Options: DENY' );
+
+		# Header: CSP
 		$t_avatar_img_allow = '';
 		if( config_get_global( 'show_avatar' ) ) {
 			if( http_is_protocol_https() ) {
@@ -154,6 +157,8 @@ function http_security_headers() {
 			}
 		}
 		header( 'Content-Security-Policy: default-src \'self\';' . $t_avatar_img_allow . '; frame-ancestors \'none\'' );
+
+		# Header: STS
 		if( http_is_protocol_https() ) {
 			header( 'Strict-Transport-Security: max-age=7776000' );
 		}
