@@ -148,15 +148,20 @@ function http_security_headers() {
 		header( 'X-Frame-Options: DENY' );
 
 		# Header: CSP
+		$t_default_src = "default-src 'self'"; // First directive, so without leading semi-colon
+		$t_frame_ancestors = "; frame-ancestors 'none'";
+
 		$t_avatar_img_allow = '';
 		if( config_get_global( 'show_avatar' ) ) {
 			if( http_is_protocol_https() ) {
-				$t_avatar_img_allow = "; img-src 'self' https://secure.gravatar.com:443";
+				$t_avatar_img_allow = " https://secure.gravatar.com:443";
 			} else {
-				$t_avatar_img_allow = "; img-src 'self' http://www.gravatar.com:80";
+				$t_avatar_img_allow = " http://www.gravatar.com:80";
 			}
 		}
-		header( 'Content-Security-Policy: default-src \'self\';' . $t_avatar_img_allow . '; frame-ancestors \'none\'' );
+		$t_img_src = "; img-src 'self'" . $t_avatar_img_allow;
+
+		header( 'Content-Security-Policy: ' . $t_default_src . $t_frame_ancestors . $t_img_src);
 
 		# Header: STS
 		if( http_is_protocol_https() ) {
