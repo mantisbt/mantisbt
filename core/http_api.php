@@ -161,7 +161,12 @@ function http_security_headers() {
 		}
 		$t_img_src = "; img-src 'self'" . $t_avatar_img_allow;
 
-		header( 'Content-Security-Policy: ' . $t_default_src . $t_frame_ancestors . $t_img_src);
+		$t_report_uri = '';
+		if( config_get_global( 'report_csp_violation' ) ) {
+			$t_report_uri = '; report-uri ./csp/csp_report.php'; // Note: This does not work from admin-folder
+		}
+
+		header( 'Content-Security-Policy: ' . $t_default_src . $t_frame_ancestors . $t_img_src . $t_report_uri);
 
 		# Header: STS
 		if( http_is_protocol_https() ) {
