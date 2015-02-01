@@ -1208,6 +1208,16 @@ $g_news_view_limit_days = 30;
  */
 $g_private_news_threshold = DEVELOPER;
 
+############
+# Markdown #
+############
+
+/**
+ * Enables markdown support - once enabled all issue titles, text, and notes are formatted based on
+ * markdown syntax.  Default to OFF since it is experimental feature for now.
+ */
+$g_markdown_enabled = OFF;
+
 ################################
 # MantisBT Default Preferences #
 ################################
