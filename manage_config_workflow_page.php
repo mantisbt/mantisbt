@@ -422,7 +422,7 @@ foreach( $t_status_arr as $t_status => $t_label ) {
 	if( isset( $g_project_workflow['exit'][$t_status][$t_status] ) ) {
 		$t_validation_result .= '<tr><td>'
 						. MantisEnum::getLabel( $t_lang_enum_status, $t_status )
-						. '</td><td bgcolor="#FFED4F">' . lang_get( 'superfluous' ) . '</td></tr>';
+						. '</td><td class="alert alert-warning">' . lang_get( 'superfluous' ) . '</td></tr>';
 	}
 }
 
@@ -431,7 +431,7 @@ foreach( $t_status_arr as $t_status => $t_status_label ) {
 	if( ( 0 == count( $g_project_workflow['entry'][$t_status] ) ) && ( 0 < count( $g_project_workflow['exit'][$t_status] ) ) ) {
 		$t_validation_result .= '<tr><td>'
 						. MantisEnum::getLabel( $t_lang_enum_status, $t_status )
-						. '</td><td bgcolor="#FF0088">' . lang_get( 'unreachable' ) . '</td></tr>';
+						. '</td><td class="alert alert-danger">' . lang_get( 'unreachable' ) . '</td></tr>';
 	}
 }
 
@@ -440,7 +440,7 @@ foreach( $t_status_arr as $t_status => $t_status_label ) {
 	if( ( 0 == count( $g_project_workflow['exit'][$t_status] ) ) && ( 0 < count( $g_project_workflow['entry'][$t_status] ) ) ) {
 		$t_validation_result .= '<tr><td>'
 						. MantisEnum::getLabel( $t_lang_enum_status, $t_status )
-						. '</td><td bgcolor="#FF0088">' . lang_get( 'no_exit' ) . '</td></tr>';
+						. '</td><td class="alert alert-danger">' . lang_get( 'no_exit' ) . '</td></tr>';
 	}
 }
 
@@ -449,7 +449,7 @@ foreach ( $t_status_arr as $t_status => $t_status_label ) {
 	if( ( 0 == count( $g_project_workflow['exit'][$t_status] ) ) && ( 0 == count( $g_project_workflow['entry'][$t_status] ) ) ) {
 		$t_validation_result .= '<tr><td>'
 						. MantisEnum::getLabel( $t_lang_enum_status, $t_status )
-						. '</td><td bgcolor="#FF0088">' . lang_get( 'unreachable' ) . '<br />' . lang_get( 'no_exit' ) . '</td></tr>';
+						. '</td><td class="alert alert-danger">' . lang_get( 'unreachable' ) . '<br />' . lang_get( 'no_exit' ) . '</td></tr>';
 	}
 }
 
@@ -484,13 +484,21 @@ threshold_row( 'bug_reopen_status' );
 threshold_end();
 
 if( '' <> $t_validation_result ) {
-	echo '<table class="width100">';
-	echo '<tr><td class="bold" colspan="3">' . lang_get( 'validation' ) . '</td></tr>' . "\n";
-	echo '<tr><td class="bold width30">' . lang_get( 'status' ) . '</td>';
-	echo '<td class="bold" >' . lang_get( 'comment' ) . '</td></tr>';
-	echo "\n";
+	echo '<div class="widget-box widget-color-blue2">';
+	echo '<div class="widget-header widget-header-small">';
+	echo '	<h4 class="widget-title lighter">';
+	echo '		<i class="ace-icon fa fa-hand-o-right"></i>';
+	echo 		lang_get( 'validation' );
+	echo '	</h4>';
+	echo '</div>';
+	echo '<div class="widget-body">';
+	echo '	<div class="widget-main no-padding">';
+	echo '<div class="table-responsive">';
+	echo '<table class="table table-bordered table-condensed table-striped">';
+	echo '	<tr><td class="bold">' . lang_get( 'status' ) . '</td>';
+	echo '	<td class="bold" >' . lang_get( 'comment' ) . '</td></tr>';
 	echo $t_validation_result;
-	echo '</table><br /><br />';
+	echo '</table></div></div></div></div>';
 }
 
 # Initialization for 'reopened' label handling
