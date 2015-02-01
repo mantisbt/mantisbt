@@ -284,7 +284,8 @@ layout_admin_page_begin();
 
 ?>
 
-<div align="center">
+<div class="col-md-12 col-xs-12">
+	<div class="space-10"></div>
 
 <?php
 
@@ -294,7 +295,7 @@ if( empty( $t_moved ) ) {
 } else {
 	foreach( $t_moved as $t_row ) {
 		printf(
-			"<p class=\"bold\">Project '%s' : %d attachments %s.</p>\n",
+			"<p class=\"lead\">Project '%s' : %d attachments %s.</p>\n",
 			$t_row['name'],
 			$t_row['rows'],
 			( 0 == $t_row['failed']
@@ -303,7 +304,9 @@ if( empty( $t_moved ) ) {
 
 		if( is_array( $t_row['data'] ) ) {
 			# Display details of moved attachments
-			echo '<div><table class="width-70">', "\n",
+			echo '<div class="table-responsive">';
+			echo '<table class="table table-bordered table-condensed">';
+			echo "\n",
 				'<tr>',
 				$f_file_type == 'bug' ? '<th>Bug ID</th>' : '',
 				'<th>File</th><th>Filename</th><th>Status</th>',
@@ -318,15 +321,20 @@ if( empty( $t_moved ) ) {
 					$t_data['filename'],
 					$t_data['status'] );
 			}
-			echo '</table><br /></div>';
+			echo '</table><br />';
+			echo '</div></div>';
 		} else {
 			# No data rows - display error message
+			echo '<div class="alert alert-danger">';
 			echo '<p>' . $t_row['data'] . '</p>';
+			echo '</div>';
 		}
 		echo '<br />';
 	}
 }
 
-print_bracket_link( 'system_utils.php', 'Back to System Utilities' );
+print_button( 'system_utils.php', 'Back to System Utilities' );
+
+echo '</div>';
 
 layout_admin_page_end();
