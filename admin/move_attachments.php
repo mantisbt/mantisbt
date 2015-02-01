@@ -322,7 +322,7 @@ if( empty( $t_moved ) ) {
 					$t_data['status'] );
 			}
 			echo '</table><br />';
-			echo '</div></div>';
+			echo '</div>';
 		} else {
 			# No data rows - display error message
 			echo '<div class="alert alert-danger">';
