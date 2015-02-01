@@ -119,7 +119,7 @@ function show_flag( $p_from_status_id, $p_to_status_id ) {
 		if( $g_can_change_workflow && $t_color != '' ) {
 			set_overrides( 'status_enum_workflow' );
 		}
-		$t_value = '<td class="center ' . $t_color . '">';
+		$t_value = '<td class="' . $t_color . '">';
 
 		$t_flag = ( 1 == $t_project );
 
@@ -165,7 +165,7 @@ function section_begin( $p_section_name ) {
 	echo "\t<table  class=\"table table-striped table-bordered table-condensed\">\n";
 	echo "\t\t<thead>\n";
 	echo "\t\t" . '<tr>' . "\n";
-	echo "\t\t\t" . '<th class="bold width30" rowspan="2">' . lang_get( 'current_status' ) . '</th>'. "\n";
+	echo "\t\t\t" . '<th class="bold" rowspan="2">' . lang_get( 'current_status' ) . '</th>'. "\n";
 	echo "\t\t\t" . '<th class="bold" style="text-align:center" colspan="' . ( count( $t_enum_statuses ) + 1 ) . '">'
 		. lang_get( 'next_status' ) . '</th>';
 	echo "\n\t\t" . '</tr>'. "\n";
@@ -204,7 +204,7 @@ function capability_row( $p_from_status ) {
 	if( $g_can_change_workflow && $t_color != '' ) {
 		set_overrides( 'status_enum_workflow' );
 	}
-	echo "\t\t\t" . '<td class="center ' . $t_color . '">';
+	echo "\t\t\t" . '<td class="' . $t_color . '">';
 	if( $g_can_change_workflow ) {
 		echo '<select name="default_' . $p_from_status . '" class="input-sm">';
 		print_enum_string_option_list( 'status', $t_project );
@@ -246,7 +246,7 @@ function threshold_begin( $p_section_name ) {
 	echo '<table class="table table-striped table-bordered table-condensed">';
 	echo '<thead>';
 	echo "\t" . '<tr>';
-	echo "\t\t" . '<th class="bold width30">' . lang_get( 'threshold' ) . '</th>' . "\n";
+	echo "\t\t" . '<th class="bold">' . lang_get( 'threshold' ) . '</th>' . "\n";
 	echo "\t\t" . '<th class="bold" >' . lang_get( 'status_level' ) . '</th>' . "\n";
 	echo "\t\t" . '<th class="bold" >' . lang_get( 'alter_level' ) . '</th></tr>' . "\n";
 	echo "\n";
@@ -274,7 +274,7 @@ function threshold_row( $p_threshold ) {
 
 	echo '<tr><td>' . lang_get( 'desc_' . $p_threshold ) . '</td>' . "\n";
 	if( $t_can_change_threshold ) {
-		echo '<td' . $t_color . '><select name="threshold_' . $p_threshold . '" class="input-sm">';
+		echo '<td class="' . $t_color . '"><select name="threshold_' . $p_threshold . '" class="input-sm">';
 		print_enum_string_option_list( 'status', $t_project );
 		echo '</select> </td>' . "\n";
 		echo '<td><select name="access_' . $p_threshold . '" class="input-sm">';
@@ -282,7 +282,7 @@ function threshold_row( $p_threshold ) {
 		echo '</select> </td>' . "\n";
 		$g_can_change_flags = true;
 	} else {
-		echo '<td' . $t_color . '>' . MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_project ) . '&#160;</td>' . "\n";
+		echo '<td class="' . $t_color . '">' . MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_project ) . '&#160;</td>' . "\n";
 		echo '<td>' . MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), config_get_access( $p_threshold ) ) . '&#160;</td>' . "\n";
 	}
 
@@ -344,7 +344,7 @@ function access_row() {
 
 	# Print the table rows
 	foreach( $t_enum_status as $t_status => $t_status_label ) {
-		echo "\t\t" . '<tr><td class="width30">'
+		echo "\t\t" . '<tr><td>'
 			. string_no_break( MantisEnum::getLabel( lang_get( 'status_enum_string' ), $t_status ) ) . '</td>' . "\n";
 
 		if( $t_status == $t_submit_status ) {
@@ -377,12 +377,12 @@ function access_row() {
 		}
 
 		if( $t_can_change ) {
-			echo '<td' . $t_color . '><select name="access_change_' . $t_status . '" class="input-sm">' . "\n";
+			echo '<td class="' . $t_color . '"><select name="access_change_' . $t_status . '" class="input-sm">' . "\n";
 			print_enum_string_option_list( 'access_levels', $t_level_project );
 			echo '</select> </td>' . "\n";
 			$g_can_change_flags = true;
 		} else {
-			echo '<td class="center ' . $t_color . '">'
+			echo '<td class="' . $t_color . '">'
 				. MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_level_project )
 				. '</td>' . "\n";
 		}
