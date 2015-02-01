@@ -123,7 +123,7 @@ class MantisCoreFormattingPlugin extends MantisFormattingPlugin {
 			$s_buglinks = plugin_config_get( 'process_buglinks' );
 		}
 
-		if( ON == $s_urls ) {
+		if( ON == $s_urls && !markdown_enabled() ) {
 			$t_string = string_insert_hrefs( $t_string );
 		}
 
