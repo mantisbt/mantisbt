@@ -144,10 +144,6 @@ function string_nl2br( $p_string, $p_wrap = 100 ) {
  * @return string
  */
 function string_display( $p_string ) {
-	if ( markdown_enabled() ) {
-		return markdown_text( $p_string );
-	}
-
 	$t_data = event_signal( 'EVENT_DISPLAY_TEXT', $p_string, true );
 	return $t_data;
 }
