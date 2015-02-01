@@ -185,7 +185,7 @@ print_summary_submenu(); ?>
 		<table class="table table-hover table-bordered table-condensed table-striped">
 		<thead>
 			<tr>
-				<th><?php echo lang_get( 'by_category' ) ?></th>
+				<th><?php echo lang_get( 'by_severity' ) ?></th>
 				<?php echo $t_orcttab ?>
 			</tr>
 		</thead>
@@ -199,7 +199,7 @@ print_summary_submenu(); ?>
 		<table class="table table-hover table-bordered table-condensed table-striped">
 		<thead>
 			<tr>
-				<th><?php echo lang_get( 'by_severity' ) ?></th>
+				<th><?php echo lang_get( 'by_category' ) ?></th>
 				<?php echo $t_orcttab ?>
 			</tr>
 		</thead>
