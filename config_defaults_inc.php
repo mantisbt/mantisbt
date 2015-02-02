@@ -976,6 +976,18 @@
 	$g_show_avatar_threshold = DEVELOPER;
 
 	/**
+	 * To host your own avatar site change this setting
+	 * @global string $g_show_avatar_url
+	 */
+	$g_show_avatar_url = 'http://www.gravatar.com';
+
+	/**
+	 * To host your own avatar site change this setting
+	 * @global string $g_show_avatar_url_secure
+	 */
+	$g_show_avatar_url_secure = 'https://secure.gravatar.com';
+
+	/**
 	 * Show release dates on changelog
 	 * @global int $g_show_changelog_dates
 	 */
