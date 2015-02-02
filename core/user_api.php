@@ -815,11 +815,11 @@ function user_get_avatar( $p_user_id, $p_size = 80 ) {
 
 	# Build Gravatar URL
 	if( http_is_protocol_https() ) {
-		$t_avatar_url = 'https://secure.gravatar.com/';
+		$t_avatar_url = config_get( 'show_avatar_url_secure' );
 	} else {
-		$t_avatar_url = 'http://www.gravatar.com/';
+		$t_avatar_url = config_get( 'show_avatar_url' );
 	}
-	$t_avatar_url .= "avatar/$t_email_hash?d=$t_default_avatar&r=$t_rating&s=$p_size";
+	$t_avatar_url .= "/avatar/$t_email_hash?d=$t_default_avatar&r=$t_rating&s=$p_size";
 
 	return array( $t_avatar_url, $p_size, $p_size );
 }
