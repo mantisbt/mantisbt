@@ -62,7 +62,7 @@
 	<!-- Username -->
 	<tr <?php echo helper_alternate_class() ?>>
 	<?php
-		if ( OFF != config_get( 'show_avatar' ) ) {
+		if ( OFF != config_get( 'show_avatar' ) && access_has_project_level( config_get( 'show_avatar_threshold' ), null, $p_user_id ) ) {
 			echo '<td rowspan="3">';
 			print_avatar($u_id);
 			echo '</td>';
