@@ -550,62 +550,104 @@
                     </para>
                 </listitem>
             </varlistentry>
-            <varlistentry>
-                <term>$g_phpMailer_method</term>
-                <listitem>
-                    <para>Select the method to mail by: PHPMAILER_METHOD_MAIL for use of mail() function,
-                    PHPMAILER_METHOD_SENDMAIL for sendmail (or postfix), PHPMAILER_METHOD_SMTP for SMTP.
-                    Default is PHPMAILER_METHOD_MAIL.
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term>$g_smtp_host</term>
-                <listitem>
-                    <para>This option specifies the SMTP server to submit messages to.  The SMTP
-                    server (MTA) then takes on the responsibility of delivering such messages
-                    to their final destinations.  To use the local SMTP (if available) set this
-                    to 'localhost', otherwise use the fully qualified domain name of the remote
-                    SMTP server.  Default value is 'localhost'.
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term>$g_smtp_port</term>
-                <listitem>
-                    <para>
-					The smtp port to use.  The typical SMTP ports are 25 and 587.  The port to use
-					will depend on the SMTP server configuration and hence others may be used.
-					The default is 25.
+			<varlistentry>
+				<term>$g_phpmailer_method</term>
+				<listitem>
+					<para>Select the method to send mail:
+						<itemizedlist>
+							<listitem><para>
+								<emphasis>PHPMAILER_METHOD_MAIL</emphasis>
+								for use of mail() function,
+							</para></listitem>
+							<listitem><para>
+								<emphasis>PHPMAILER_METHOD_SENDMAIL</emphasis>
+								for sendmail (or postfix),
+							</para></listitem>
+							<listitem><para>
+								<emphasis>PHPMAILER_METHOD_SMTP</emphasis>
+								for SMTP,
+							</para></listitem>
+						</itemizedlist>
+						Default is PHPMAILER_METHOD_MAIL.
 					</para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term>$g_smtp_connection_mode</term>
-                <listitem>
-                    <para>This option allows you to specify the connection mode to the SMTP server.
-                    Possible values are '', 'ssl', 'tls'.  The default value is ''.
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term>$g_smtp_username</term>
-                <listitem>
-                    <para>This option allows the use of SMTP Authentication when using
-                        a remote SMTP host with PHPMailer. If smtp_username is not '' then
-                        the username and password will be used when logging in to the SMTP
-                        server. Default is ''.
-                    </para>
-                </listitem>
-            </varlistentry>
-            <varlistentry>
-                <term>$g_smtp_password</term>
-                <listitem>
-                    <para>This is the password that is used in SMTP Authentication .
-                        Default is ''.
-                    </para>
-                </listitem>
-            </varlistentry>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>$g_smtp_host</term>
+				<listitem>
+					<para>This option specifies the SMTP server to submit messages to.
+						The SMTP server (MTA) then takes on the responsibility of delivering
+						messages to their final destinations.
+					</para>
+					<para>To use the local SMTP (if available) set this to 'localhost',
+						otherwise use the fully qualified domain name of the remote SMTP server.
+					</para>
+					<para>It can be either a single hostname, or multiple semicolon-delimited hostnames.
+						You can specify for each host a port other than the default, using format:
+						<emphasis>hostname:port</emphasis>
+						(e.g. "smtp1.example.com:25;smtp2.example.com").
+					</para>
+					<para>Hosts will be tried in the given order.
+					</para>
+					<note><para>This is only used with
+						<emphasis>PHPMAILER_METHOD_SMTP</emphasis>
+						(see $g_phpmailer_method).
+					</para></note>
+					<para>The default is 'localhost'.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>$g_smtp_port</term>
+				<listitem>
+					<para>The default SMTP port to use.
+						This can be overridden individually for specific hosts.
+						(see $g_smtp_host).
+					</para>
+					<para>Typical SMTP ports are 25 and 587.
+					</para>
+					<para>The default is 25.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>$g_smtp_connection_mode</term>
+				<listitem>
+					<para>Allow secure connection to the SMTP server. Valid values are:
+						<itemizedlist>
+							<listitem><para><emphasis>'' (empty string)</emphasis>:
+								No encryption. This is the default.
+							</para></listitem>
+							<listitem><para><emphasis>ssl</emphasis></para></listitem>
+							<listitem><para><emphasis>tls</emphasis></para></listitem>
+						</itemizedlist>
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>$g_smtp_username</term>
+				<listitem>
+					<para>SMTP Server Authentication user
+					</para>
+					<para>Allows the use of SMTP Authentication when using a remote SMTP host.
+					</para>
+					<note><para>must be set to '' (empty string) if the SMTP host
+						does not require authentication.
+					</para></note>
+					<para>Default is ''.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>$g_smtp_password</term>
+				<listitem>
+					<para>This is the password that is used in SMTP Authentication.
+						Not used when $g_smtp_username = ''
+					</para>
+					<para>Default is ''.
+					</para>
+				</listitem>
+			</varlistentry>
             <varlistentry>
                 <term>$g_email_send_using_cronjob</term>
                 <listitem>

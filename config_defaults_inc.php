@@ -503,39 +503,46 @@
 	$g_phpMailer_method		= PHPMAILER_METHOD_MAIL;
 
 	/**
-	 * This option allows you to use a remote SMTP host.  Must use the phpMailer script
-	 * One or more hosts, separated by a semicolon, can be listed.
-	 * You can also specify a different port for each host by using this
-	 * format: [hostname:port] (e.g. "smtp1.example.com:25;smtp2.example.com").
-	 * Hosts will be tried in order.
+	 * Remote SMTP Host(s)
+	 * Either a single hostname or multiple semicolon-delimited hostnames.
+	 * You can specify for each host a port other than the default, using format:
+	 * [hostname:port] (e.g. "smtp1.example.com:25;smtp2.example.com").
+	 * Hosts will be tried in the given order.
+	 * NOTE: This is only used with PHPMAILER_METHOD_SMTP.
+	 * @see $g_smtp_port
 	 * @global string $g_smtp_host
 	 */
 	$g_smtp_host			= 'localhost';
 
 	/**
-	 * These options allow you to use SMTP Authentication when you use a remote
-	 * SMTP host with phpMailer.  If smtp_username is not '' then the username
-	 * and password will be used when logging in to the SMTP server.
+	 * SMTP Server Authentication user
+	 * NOTE: must be set to '' if the SMTP host does not require authentication.
+	 * @see $g_smtp_password
 	 * @global string $g_smtp_username
 	 */
 	$g_smtp_username = '';
 
 	/**
 	 * SMTP Server Authentication password
+	 * Not used when $g_smtp_username = ''
+	 * @see $g_smtp_username
 	 * @global string $g_smtp_password
 	 */
 	$g_smtp_password = '';
 
 	/**
-	 * This control the connection mode to SMTP server. Can be 'ssl' or 'tls'
+	 * Allow secure connection to the SMTP server
+	 * Valid values are '' (no encryption), 'ssl' or 'tls'
 	 * @global string $g_smtp_connection_mode
 	 */
 	$g_smtp_connection_mode = '';
 
 	/**
-	 * The smtp port to use.  The typical SMTP ports are 25 and 587.  The port to use
-	 * will depend on the SMTP server configuration and hence others may be used.
-	 * @global int $g_smtp_port
+	 * Default SMTP port
+	 * Typical ports are 25 and 587.
+	 * This can be overridden individually for specific hosts.
+	 * @see $g_smtp_host
+	 * @global integer $g_smtp_port
 	 */
 	$g_smtp_port = 25;
 
