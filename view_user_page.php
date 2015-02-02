@@ -62,7 +62,7 @@
 	<!-- Username -->
 	<tr <?php echo helper_alternate_class() ?>>
 	<?php
-		if ( ON == config_get( 'show_avatar' ) ) {
+		if ( OFF != config_get( 'show_avatar' ) ) {
 			echo '<td rowspan="3">';
 			print_avatar($u_id);
 			echo '</td>';
