@@ -61,6 +61,13 @@
 
 	<!-- Username -->
 	<tr <?php echo helper_alternate_class() ?>>
+	<?php
+		if ( ON == config_get( 'show_avatar' ) ) {
+			echo '<td rowspan="3">';
+			print_avatar($u_id);
+			echo '</td>';
+		}
+	?>
 		<td class="category" width="25%">
 			<?php echo lang_get( 'username' ) ?>
 		</td>
