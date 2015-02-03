@@ -1,6 +1,12 @@
+# -----------------------------------------------------------------------------
+# MantisBT Travis-CI build configuration file
+# -----------------------------------------------------------------------------
+
 language: php
 
+# -----------------------------------------------------------------------------
 # Environment setup and test scripts execution
+#
 
 before_install:
   - git submodule update --init --recursive
@@ -11,7 +17,9 @@ before_script:
 script:
   - phpunit --bootstrap ./tests/bootstrap.php ./tests/AllTests.php
 
+# -----------------------------------------------------------------------------
 # What to build, and on which platforms
+#
 
 php:
   - 5.3
@@ -29,7 +37,9 @@ branches:
 matrix:
   allow_failures:
 
+# -----------------------------------------------------------------------------
 # Notifications
+#
 
 notifications:
   email:
