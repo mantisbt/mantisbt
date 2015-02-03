@@ -3,8 +3,17 @@
 # MantisBT Travis-CI before script
 # -----------------------------------------------------------------------------
 
+# We don't need any of this when building the documentation
+if [[ -n $DOCBOOK ]]
+then
+	exit
+fi
+
+# -----------------------------------------------------------------------------
 # Global variables initialization
+#
 HOSTNAME=localhost
+
 # Port 80 requires use of 'sudo' to run the PHP built-in web server, which
 # causes builds to fail due to a bug in Travis [1]so we use port 8080 instead.
 # [1] https://github.com/travis-ci/travis-ci/issues/2235
