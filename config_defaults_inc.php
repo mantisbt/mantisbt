@@ -550,7 +550,7 @@ $g_email_receive_own = OFF;
  *   standard-compliant, with this you can.
  * - EMAIL_VALIDATE_AUTO: let PHPMailer's
  *   {@link http://phpmailer.github.io/PHPMailer/classes/PHPMailer.html#method_validateAddress validateAddress()}
- *   method pick the best validation pattern. As of PHPMailer v5.2.8 on recent
+ *   method pick the best validation pattern. As of PHPMailer v5.2.9, on recent
  *   systems, this is generally the same as EMAIL_VALIDATE_RFC5322.
  * - OFF: disable email validation
  *

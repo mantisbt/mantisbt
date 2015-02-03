@@ -47,7 +47,7 @@
  * @uses user_pref_api.php
  * @uses utility_api.php
  *
- * @uses class.phpmailer.php PHPMailer library
+ * @uses PHPMailerAutoload.php PHPMailer library
  */
 
 require_api( 'access_api.php' );
@@ -74,7 +74,7 @@ require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
-require_lib( 'phpmailer' . DIRECTORY_SEPARATOR . 'class.phpmailer.php' );
+require_lib( 'phpmailer/PHPMailerAutoload.php' );
 
 # reusable object of class SMTP
 $g_phpMailer = null;

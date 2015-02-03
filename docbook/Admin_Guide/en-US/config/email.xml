@@ -177,7 +177,7 @@
 						<ulink url="http://phpmailer.github.io/PHPMailer/classes/PHPMailer.html#method_validateAddress">
 							validateAddress() method</ulink>
 						pick the best validation pattern.
-						As of PHPMailer v5.2.8 on recent systems, this is
+						As of PHPMailer v5.2.9 on recent systems, this is
 						generally the same as
 						<literal>EMAIL_VALIDATE_RFC5322</literal>.
 					</para></listitem>
