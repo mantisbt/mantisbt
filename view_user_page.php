@@ -54,26 +54,26 @@
 
 	<!-- Headings -->
 	<tr>
-		<td class="form-title">
+		<td class="form-title" colspan="0">
 			<?php echo lang_get( 'view_account_title' ) ?>
 		</td>
 	</tr>
 
 	<!-- Username -->
 	<tr <?php echo helper_alternate_class() ?>>
-	<?php
-		if ( OFF != config_get( 'show_avatar' ) && access_has_project_level( config_get( 'show_avatar_threshold' ), null, $p_user_id ) ) {
-			echo '<td rowspan="3">';
-			print_avatar($u_id);
-			echo '</td>';
-		}
-	?>
 		<td class="category" width="25%">
 			<?php echo lang_get( 'username' ) ?>
 		</td>
 		<td width="75%">
 			<?php echo string_display_line( $u_username ) ?>
 		</td>
+		<?php
+		if ( OFF != config_get( 'show_avatar' ) && access_has_project_level( config_get( 'show_avatar_threshold' ), null, $p_user_id ) ) {
+			echo '<td rowspan="3">';
+			print_avatar($u_id);
+			echo '</td>';
+		}
+		?>
 	</tr>
 
 	<!-- Email -->
