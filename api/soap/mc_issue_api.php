@@ -677,7 +677,7 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 
 	if( ( $t_project_id == 0 ) || !project_exists( $t_project_id ) ) {
 		if( $t_project_id == 0 ) {
-			return SoapObjectsFactory::newSoapFault( 'Client', "Project '" . $t_project['name'] . "' does not exist." );
+			return SoapObjectsFactory::newSoapFault( 'Client', "Project '" . $t_project->name . "' does not exist." );
 		} else {
 			return SoapObjectsFactory::newSoapFault( 'Client', "Project with id '" . $t_project_id . "' does not exist." );
 		}
