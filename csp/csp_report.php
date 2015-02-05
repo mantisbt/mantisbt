@@ -16,7 +16,7 @@ http_response_code( 204 );
 $data = file_get_contents( 'php://input' );
 // Only continue if it's valid JSON that is not just `null`, `0`, `false` or an
 // empty string, i.e. if it could be a CSP violation report.
-if ( $data = json_decode( $data ) ) {
+if ( $data = json_decode( $data, true ) ) {
 	if ( isset( $data["csp-report"] ) && (count($data) == 1) ) {
 		// removing all non-CSP-report-data
 		foreach ( $data["csp-report"] as $datafield ) {
