@@ -53,6 +53,7 @@ class IssueTagTimelineEvent extends TimelineEvent {
 	 */
 	public function html() {
 		$t_string = $this->tag ? lang_get( 'timeline_issue_tagged' ) : lang_get( 'timeline_issue_untagged' );
+		$t_tag_row = tag_get_by_name( $this->tag_name );
 
 		$t_html = $this->html_start();
 		$t_html .= '<div class="action">'
@@ -60,7 +61,7 @@ class IssueTagTimelineEvent extends TimelineEvent {
 				$t_string,
 				user_get_name( $this->user_id ),
 				string_get_bug_view_link( $this->issue_id ),
-				$this->tag_name
+				$t_tag_row ? tag_get_link( $t_tag_row ) : $this->tag_name
 			)
 			. '</div>';
 		$t_html .= $this->html_end();
