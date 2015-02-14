@@ -819,8 +819,8 @@ function custom_field_get_value( $p_field_id, $p_bug_id ) {
 				  		field_id=' . db_param();
 	$t_result = db_query( $t_query, array( $p_bug_id, $p_field_id ) );
 
-	if( $t_value = db_result( $t_result ) ) {
-		return custom_field_database_to_value( $t_value, $t_row['type'] );
+	if( db_num_rows( $t_result ) > 0 ) {
+		return custom_field_database_to_value( db_result( $t_result ), $t_row['type'] );
 	} else {
 		return null;
 	}
