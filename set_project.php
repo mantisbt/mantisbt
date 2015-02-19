@@ -84,7 +84,7 @@ if( !is_blank( $c_ref ) ) {
 
 	# Check that referrer matches our address after squashing case (case insensitive compare)
 	$t_path = rtrim( config_get( 'path' ), '/' );
-	if( preg_match( '@^(' . $t_path . ')/(?:/*([^\?#]*))(.*)?\$@', $_SERVER['HTTP_REFERER'], $t_matches ) ) {
+	if( preg_match( '@^(' . $t_path . ')/(?:/*([^\?#]*))(.*)?$@', $_SERVER['HTTP_REFERER'], $t_matches ) ) {
 		$t_referrer_page = $t_matches[2];
 		$t_param = $t_matches[3];
 
