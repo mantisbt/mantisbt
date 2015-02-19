@@ -219,6 +219,10 @@ define( 'BUG_DEPENDANT', 2 );
 define( 'BUG_BLOCKS', 3 );
 define( 'BUG_HAS_DUPLICATE', 4 );
 
+# bug update types
+define( 'BUG_UPDATE_TYPE_NORMAL', 'update' );
+define( 'BUG_UPDATE_TYPE_ASSIGN', 'assign' );
+
 # error messages
 define( 'ERROR_GENERIC', 0 );
 define( 'ERROR_SQL', 1 );
