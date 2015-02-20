@@ -38,7 +38,7 @@ $t_next_days = ( $f_days - 7 ) > 0 ? $f_days - 7 : 0;
 $t_prev_link = ' [<a href="my_view_page.php?days=' . ( $f_days + 7 ) . '">' . lang_get( 'prev' ) . '</a>]';
 
 if( $t_next_days != $f_days ) {
-	$t_next_link = ' [<a href="my_view_page.php?days=' . $t_next_days . '">' . lang_get( 'next' ) . '<a/>]';
+	$t_next_link = ' [<a href="my_view_page.php?days=' . $t_next_days . '">' . lang_get( 'next' ) . '</a>]';
 } else {
 	$t_next_link = '';
 }

@@ -772,7 +772,7 @@ div.timeline .date-range { font-size: small; }
 /* timeline entry styles */
 div.timeline div.entry { padding-top: 15px; }
 div.timeline * div { overflow: hidden; }
-div.timeline * span.tag_name { background-color: green; color: white; border-radius: 5px; padding-left: 5px; padding-right: 5px; }
+div.timeline * span.tag_name a { background-color: green; color: white; text-decoration: none; border-radius: 5px; padding-left: 5px; padding-right: 5px; }
 div.timeline * span.username { font-weight:bold; }
 div.timeline p { margin-bottom: 3px; }
 
