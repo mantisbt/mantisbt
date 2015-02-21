@@ -137,9 +137,9 @@ function http_security_headers() {
 		$t_avatar_img_allow = '';
 		if ( config_get_global( 'show_avatar' ) ) {
 			if ( http_is_protocol_https() ) {
-				$t_avatar_img_allow = "; img-src 'self' ".config_get( 'show_avatar_url_secure' ).":443";
+				$t_avatar_img_allow = "; img-src 'self' ".config_get( 'show_avatar_url' ).":443";
 			} else {
-				$t_avatar_img_allow = "; img-src 'self' "config_get( 'show_avatar_url' )":80";
+				$t_avatar_img_allow = "; img-src 'self' ".config_get( 'show_avatar_url' ).":80";
 			}
 		}
 		header( "X-Content-Security-Policy: allow 'self'; options inline-script eval-script$t_avatar_img_allow; frame-ancestors 'none'" );

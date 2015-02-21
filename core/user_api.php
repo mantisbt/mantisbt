@@ -814,11 +814,7 @@ function user_get_avatar( $p_user_id, $p_size = 80 ) {
 	$t_email_hash = md5( utf8_strtolower( trim( user_get_email( $p_user_id ) ) ) );
 
 	# Build Gravatar URL
-	if( http_is_protocol_https() ) {
-		$t_avatar_url = config_get( 'show_avatar_url_secure' );
-	} else {
-		$t_avatar_url = config_get( 'show_avatar_url' );
-	}
+	$t_avatar_url = config_get( 'show_avatar_url' );
 	$t_avatar_url .= "/avatar/$t_email_hash?d=$t_default_avatar&r=$t_rating&s=$p_size";
 
 	return array( $t_avatar_url, $p_size, $p_size );

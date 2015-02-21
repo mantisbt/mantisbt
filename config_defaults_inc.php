@@ -976,16 +976,16 @@
 	$g_show_avatar_threshold = DEVELOPER;
 
 	/**
-	 * To host your own avatar site change this setting
+	 * To host your own avatar site change this setting.
+	 * A https url is needed if MantisBT is being accessed via https
+	 * otherwise there will be warnings of unsecure content.
 	 * @global string $g_show_avatar_url
 	 */
-	$g_show_avatar_url = 'http://www.gravatar.com';
-
-	/**
-	 * To host your own avatar site change this setting
-	 * @global string $g_show_avatar_url_secure
-	 */
-	$g_show_avatar_url_secure = 'https://secure.gravatar.com';
+	if ( http_is_protocol_https() ) {
+		$g_show_avatar_url = 'https://secure.gravatar.com';
+	} else {
+		$g_show_avatar_url = 'http://www.gravatar.com';
+	}
 
 	/**
 	 * Show release dates on changelog
