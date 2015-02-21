@@ -3774,10 +3774,15 @@ $g_wiki_engine = '';
 $g_wiki_root_namespace = 'mantis';
 
 /**
- * URL under which the wiki engine is hosted.  Must be on the same server.
+ * URL under which the wiki engine is hosted.
+ * Must be on the same server as MantisBT, requires trailing '/'.
+ * By default, this is derived from the global MantisBT path ($g_path),
+ * replacing the URL's path component by the wiki engine string (i.e. if
+ * $g_path = 'http://example.com/mantis/' and $g_wiki_engine = 'dokuwiki',
+ * the wiki URL will be 'http://example.com/dokuwiki/')
  * @global string $g_wiki_engine_url
  */
-$g_wiki_engine_url = $t_protocol . '://' . $t_host . '/%wiki_engine%/';
+$g_wiki_engine_url = '';
 
 ####################
 # Recently Visited #
