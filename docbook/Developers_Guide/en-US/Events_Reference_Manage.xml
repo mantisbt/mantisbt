@@ -201,8 +201,8 @@
 				<itemizedlist>
 					<title>Parameters</title>
 					<listitem><para>&lt;Integer&gt;: Version ID</para></listitem>
-					<listitem><para>&lt;String&gt;: Version string to update issues
-					using the old version with.</para></listitem>
+					<listitem><para>&lt;String&gt;: Replacement version to set on issues
+					that are currently using the version that is about to be deleted.</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
