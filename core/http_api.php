@@ -187,3 +187,27 @@ function http_all_headers() {
 		http_custom_headers();
 	}
 }
+
+if( !function_exists( 'http_build_url' ) ) {
+/**
+ * Builds an URL from its components
+ * This is basically the reverse of parse_url(), a minimalistic implementation
+ * of pecl_http extension's http_build_url() function.
+ * @param array $p_url The URL components (as results from parse_url())
+ * @return string
+ */
+function http_build_url( array $p_url ) {
+	return
+		  ( isset( $p_url['scheme'] )   ? $p_url['scheme'] . '://' : '' )
+		. ( isset( $p_url['user'] )
+			? $p_url['user'] . ( isset( $p_url['pass'] ) ? ':' . $p_url['pass'] : '' ) .'@'
+			: ''
+		  )
+		. ( isset( $p_url['host'] )     ? $p_url['host'] : '' )
+		. ( isset( $p_url['port'] )     ? ':' . $p_url['port'] : '' )
+		. ( isset( $p_url['path'] )     ? $p_url['path'] : '' )
+		. ( isset( $p_url['query'] )    ? '?' . $p_url['query'] : '' )
+		. ( isset( $p_url['fragment'] ) ? '#' . $p_url['fragment'] : '' )
+	;
+}
+}
