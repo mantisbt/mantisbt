@@ -68,7 +68,7 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 		</h4>
 		<div class="widget-toolbar">
 			<a data-action="collapse" class="collapse-link" href="#">
-				<i class="1 ace-icon <?php echo $t_block_icon ?> fa  bigger-125"></i>
+				<i class="1 ace-icon <?php echo $t_block_icon ?> fa bigger-125"></i>
 			</a>
 		</div>
 	</div>

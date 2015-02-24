@@ -255,8 +255,8 @@ function summary_new_bug_count_by_date( $p_num_days = 1 ) {
 	}
 
 	$t_query = 'SELECT COUNT(*) FROM {bug}
-				WHERE ' . db_helper_compare_days( '' . db_now() . '', 'date_submitted', '<= ' . $c_time_length ) . ' AND ' . $t_specific_where;
-	$t_result = db_query( $t_query );
+				WHERE ' . db_helper_compare_time( db_param(), '<=', 'date_submitted', $c_time_length ) . ' AND ' . $t_specific_where;
+	$t_result = db_query( $t_query, array( db_now() ) );
 	return db_result( $t_result, 0 );
 }
 
@@ -287,9 +287,9 @@ function summary_resolved_bug_count_by_date( $p_num_days = 1 ) {
 				WHERE b.status >= ' . db_param() . '
 				AND h.old_value < ' . db_param() . '
 				AND h.new_value >= ' . db_param() . '
-				AND ' . db_helper_compare_days( '' . db_now() . '', 'date_modified', '<= ' . $c_time_length ) . '
+				AND ' . db_helper_compare_time( db_param(), '<=', 'date_modified', $c_time_length ) . '
 				AND ' . $t_specific_where;
-	$t_result = db_query( $t_query, array( $t_resolved, $t_resolved, $t_resolved ) );
+	$t_result = db_query( $t_query, array( $t_resolved, $t_resolved, $t_resolved, db_now() ) );
 	return db_result( $t_result, 0 );
 }
 

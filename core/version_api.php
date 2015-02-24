@@ -323,6 +323,8 @@ function version_update( VersionData $p_version_info ) {
 function version_remove( $p_version_id, $p_new_version = '' ) {
 	version_ensure_exists( $p_version_id );
 
+	event_signal( 'EVENT_MANAGE_VERSION_DELETE', array( $p_version_id, $p_new_version ) );
+
 	$t_old_version = version_get_field( $p_version_id, 'version' );
 	$t_project_id = version_get_field( $p_version_id, 'project_id' );
 

@@ -51,9 +51,7 @@ require_api( 'string_api.php' );
 require_api( 'utility_api.php' );
 
 ?>
-<a id="bugnotestats"></a>
 <?php
-collapse_open( 'bugnotestats' );
 
 $t_today = date( 'd:m:Y' );
 $t_date_submitted = isset( $t_bug ) ? date( 'd:m:Y', $t_bug->date_submitted ) : $t_today;
@@ -91,21 +89,31 @@ if( ON == config_get( 'time_tracking_with_billing' ) ) {
 	$t_cost_col = false;
 }
 
+$t_collapse_block = is_collapsed( 'time_tracking_stats' );
+$t_block_css = $t_collapse_block ? 'collapsed' : '';
+$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
+
 # Time tracking date range input form
 # CSRF protection not required here - form does not result in modifications
 ?>
 
 <div class="col-md-12 col-xs-12">
-<div class="widget-box widget-color-blue2">
+<div id="time_tracking_stats" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 <div class="widget-header widget-header-small">
     <h4 class="widget-title lighter">
         <i class="ace-icon fa fa-clock-o"></i>
         <?php echo lang_get( 'time_tracking' ) ?>
     </h4>
+	<div class="widget-toolbar">
+		<a data-action="collapse" href="#">
+			<i class="1 ace-icon <?php echo $t_block_icon ?> fa bigger-125"></i>
+		</a>
+	</div>
 </div>
 
+
+<div class="widget-body">
 <form method="post" action="">
-    <div class="widget-body">
     <div class="widget-main">
         <input type="hidden" name="id" value="<?php echo isset( $f_bug_id ) ? $f_bug_id : 0 ?>" />
         <?php
@@ -129,14 +137,14 @@ if( ON == config_get( 'time_tracking_with_billing' ) ) {
         }
     ?>
     </div>
-        <div class="widget-toolbox padding-8 clearfix">
-            <input type="submit" class="btn btn-primary btn-white btn-round"
-                name="get_bugnote_stats_button"
-                value="<?php echo lang_get( 'time_tracking_get_info_button' ) ?>"
-            />
-        </div>
-    </div>
+	<div class="widget-toolbox padding-8 clearfix">
+		<input type="submit" class="btn btn-primary btn-white btn-round"
+			name="get_bugnote_stats_button"
+			value="<?php echo lang_get( 'time_tracking_get_info_button' ) ?>"
+		/>
+	</div>
 </form>
+</div>
 </div>
 
 <?php
@@ -289,22 +297,8 @@ if( ON == config_get( 'time_tracking_with_billing' ) ) {
 
 <?php
 	} # end if
-	collapse_closed( 'bugnotestats' );
 ?>
 
-<div class="table-responsive">
-<table class="table table-bordered table-condensed table-striped">
-	<tr>
-		<td class="bold" colspan="4">
-			<?php
-				collapse_icon( 'bugnotestats' );
-				echo lang_get( 'time_tracking' )
-			?>
-		</td>
-	</tr>
-</table>
-</div>
 </div>
 
 <?php
-	collapse_end( 'bugnotestats' );

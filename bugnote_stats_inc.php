@@ -94,11 +94,11 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
             <i class="ace-icon fa fa-clock-o"></i>
             <?php echo lang_get( 'time_tracking' ) ?>
         </h4>
-        <div class="widget-toolbar">
-            <a data-action="collapse" href="#">
-                <i class="1 ace-icon fa <?php echo $t_block_icon ?> bigger-125"></i>
-            </a>
-        </div>
+		<div class="widget-toolbar">
+			<a data-action="collapse" class="collapse-link" href="#">
+				<i class="1 ace-icon <?php echo $t_block_icon ?> fa bigger-125"></i>
+			</a>
+		</div>
     </div>
 
 <form method="post" action="#bugnotestats">

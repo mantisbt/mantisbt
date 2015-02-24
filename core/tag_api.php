@@ -658,6 +658,20 @@ function tag_bug_detach_all( $p_bug_id, $p_add_history = true, $p_user_id = null
 }
 
 /**
+ * Builds a hyperlink to the Tag Detail page
+ * @param array $p_tag_row Tag row.
+ * @return string
+ */
+function tag_get_link( array $p_tag_row ) {
+	return sprintf(
+		'<a class="btn btn-xs btn-primary btn-white btn-round" href="tag_view_page.php?tag_id=%s" title="%s">%s</a>',
+		$p_tag_row['id'],
+		string_display_line( $p_tag_row['description'] ),
+		string_display_line( $p_tag_row['name'] )
+	);
+}
+
+/**
  * Display a tag hyperlink.
  * If a bug ID is passed, the tag link will include a detach link if the
  * user has appropriate privileges.
@@ -671,19 +685,18 @@ function tag_display_link( array $p_tag_row, $p_bug_id = 0 ) {
 		$s_security_token = htmlspecialchars( form_security_param( 'tag_detach' ) );
 	}
 
-	if( auth_get_current_user_id() == $p_tag_row['user_attached'] || auth_get_current_user_id() == $p_tag_row['user_id'] ) {
+	echo tag_get_link( $p_tag_row );
+
+	if( isset( $p_tag_row['user_attached'] ) && auth_get_current_user_id() == $p_tag_row['user_attached']
+	 || auth_get_current_user_id() == $p_tag_row['user_id']
+	) {
 		$t_detach = config_get( 'tag_detach_own_threshold' );
 	} else {
 		$t_detach = config_get( 'tag_detach_threshold' );
 	}
 
-	$t_name = string_display_line( $p_tag_row['name'] );
-	$t_description = string_display_line( $p_tag_row['description'] );
-
-	echo '<a href="tag_view_page.php?tag_id=' . $p_tag_row['id'] . '" title="' . $t_description . '">' . $t_name . '</a>';
-
 	if( $p_bug_id > 0 && access_has_bug_level( $t_detach, $p_bug_id ) ) {
-		$t_tooltip = string_html_specialchars( sprintf( lang_get( 'tag_detach' ), $t_name ) );
+		$t_tooltip = string_html_specialchars( sprintf( lang_get( 'tag_detach' ), string_display_line( $p_tag_row['name'] ) ) );
 		$t_href = 'tag_detach.php?bug_id=' . $p_bug_id . '&amp;tag_id=' . $p_tag_row['id'] . $s_security_token;
 		echo ' <a class="btn btn-xs btn-primary btn-white btn-round" title="' . $t_tooltip . '" href="' . $t_href . '">';
 		echo '<i class="fa fa-minus"></i>';

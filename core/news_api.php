@@ -287,7 +287,7 @@ function news_get_limited_rows( $p_offset, $p_project_id = null ) {
 		case 1:
 			# BY_DATE - Select the news posts
 			$t_query = 'SELECT * FROM {news} WHERE
-						( ' . db_helper_compare_days( 0, 'date_posted', '< ' . $t_news_view_limit_days ) . '
+						( ' . db_helper_compare_time( db_param(), '<', 'date_posted', $t_news_view_limit_days ) . '
 						 OR announcement = ' . db_param() . ' ) ';
 			$t_params = array(
 				db_now(),

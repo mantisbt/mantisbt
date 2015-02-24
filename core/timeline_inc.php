@@ -61,30 +61,29 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
                     ( $f_days + 7 ) . '">' . lang_get( 'prev' ) . '</a>';
 
                 $t_next_days = ( $f_days - 7 ) > 0 ? $f_days - 7 : 0;
+
                 if( $t_next_days != $f_days ) {
                     echo ' <a class="btn btn-primary btn-xs btn-white btn-round" href="my_view_page.php?days=' .
                         $t_next_days . '">' . lang_get( 'next' ) . '</a>';
                 }
-                echo '</div>';
-                ?>
-            </div>
-        </div>
-        <div class="widget-main no-padding">
-            <div class="profile-feed">
-                <?php
-                $t_events = timeline_sort_events( $t_events );
-                $t_num_events = timeline_print_events( $t_events, ( $f_all ? 0 : MAX_EVENTS ) );
-                ?>
-            </div>
-        </div>
-        <?php
-        if( $f_all == 0 && $t_num_events < count( $t_events ) ) {
-            echo '<div class="widget-toolbox">';
-            echo '<div class="btn-toolbar">';
-            echo '<a class="btn btn-primary btn-sm btn-white btn-round" href="my_view_page.php?days=' . $f_days . '&amp;all=1">' . lang_get( 'timeline_more' ) . '</a>';
-            echo '</div>';
-            echo '</div>';
-        }
-        ?>
-    </div>
-</div>
+
+            echo '</div></div></div><div class="widget-main no-padding"><div class="profile-feed">';
+
+            $t_events = timeline_sort_events( $t_events );
+
+            $t_num_events = timeline_print_events( $t_events, ( $f_all ? 0 : MAX_EVENTS ) );
+
+            echo '</div></div>';
+
+# Don't display "More Events" link if there are no more entries to show
+# Note: as of 2015-01-19, this does not cover the case of entries excluded
+# by filtering (e.g. Status Change not in RESOLVED, CLOSED, REOPENED)
+if( !$f_all && $t_num_events < count( $t_events )) {
+    echo '<div class="widget-toolbox">';
+    echo '<div class="btn-toolbar">';
+    echo '<a class="btn btn-primary btn-sm btn-white btn-round" href="my_view_page.php?days=' . $f_days . '&amp;all=1">' . lang_get( 'timeline_more' ) . '</a>';
+    echo '</div>';
+    echo '</div>';
+}
+
+echo '</div></div>';

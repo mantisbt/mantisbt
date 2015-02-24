@@ -189,6 +189,23 @@
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.manage.version.delete">
+			<title>EVENT_MANAGE_VERSION_DELETE (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to do pre-processing of version
+					deletion. This event is triggered prior to the version
+					removal from the database.
+				</para>
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: Version ID</para></listitem>
+					<listitem><para>&lt;String&gt;: Replacement version to set on issues
+					that are currently using the version that is about to be deleted.</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
 	</section>
 
 </section>

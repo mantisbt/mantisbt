@@ -50,11 +50,9 @@ if( !function_exists( 'db_null_date' ) ) {
 function installer_db_now() {
 	global $g_db;
 
-	$t_timezone = @date_default_timezone_get();
-	date_default_timezone_set( 'UTC' );
-	$t_time = $g_db->BindTimeStamp( time() );
-	@date_default_timezone_set( $t_timezone );
-	return $t_time;
+	# Timezone must not be set to UTC prior to calling BindTimestamp(), as
+	# ADOdb assumes a local timestamp and does the UTC conversion itself.
+	return $g_db->BindTimeStamp( time() );
 }
 
 # Special handling for Oracle (oci8):

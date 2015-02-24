@@ -707,6 +707,9 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 	} else {
 		$t_project_id = $p_project_id;
 	}
+
+	$t_cat_arr = category_get_all_rows( $t_project_id, null, true );
+
 	if( config_get( 'allow_no_category' ) ) {
 		echo '<option value="0"';
 		check_selected( $p_category_id, 0 );
@@ -714,14 +717,16 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 		echo category_full_name( 0, false ), '</option>';
 	} else {
 		if( 0 == $p_category_id ) {
-			echo '<option value="0"';
-			echo check_selected( $p_category_id, 0 );
-			echo '>';
-			echo string_attribute( lang_get( 'select_option' ) ) . '</option>';
+			if( count( $t_cat_arr ) == 1 ) {
+				$p_category_id = (int) $t_cat_arr[0]['id'];
+			} else {
+				echo '<option value="0"';
+				echo check_selected( $p_category_id, 0 );
+				echo '>';
+				echo string_attribute( lang_get( 'select_option' ) ) . '</option>';
+			}
 		}
 	}
-
-	$t_cat_arr = category_get_all_rows( $t_project_id, null, true );
 
 	foreach( $t_cat_arr as $t_category_row ) {
 		$t_category_id = (int)$t_category_row['id'];

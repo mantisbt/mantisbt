@@ -1,0 +1,182 @@
+<sect1 id="dev.plugins.building.source">
+	<title>Example Plugin Source Listing</title>
+
+	<para>
+		The code in this section, for the Example plugin, is available for use,
+		modification, and redistribution without any restrictions and without any
+		warranty or implied warranties.  You may use this code however you want.
+	</para>
+
+	<programlisting>
+Example/
+    Example.php
+    files/
+        foo.css
+    lang/
+        strings_english.txt
+    pages/
+        config_page.php
+        config_update.php
+        foo.php
+	</programlisting>
+
+	<sect2 id="dev.plugins.building.source.Example.php">
+		<title>Example/Example.php</title>
+
+		<programlisting><filename>Example/Example.php</filename>
+&lt;?php
+class ExamplePlugin extends MantisPlugin {
+    function register() {
+        $this->name = 'Example';    # Proper name of plugin
+        $this->description = '';    # Short description of the plugin
+        $this->page = '';           # Default plugin page
+
+        $this->version = '1.0';     # Plugin version string
+        $this->requires = array(    # Plugin dependencies, array of basename => version pairs
+            'MantisCore' => '1.2.0, &lt;= 1.2.0',  #   Should always depend on an appropriate version of MantisBT
+            );
+
+        $this->author = '';         # Author/team name
+        $this->contact = '';        # Author/team e-mail address
+        $this->url = '';            # Support webpage
+    }
+
+    function events() {
+        return array(
+            'EVENT_EXAMPLE_FOO' => EVENT_TYPE_EXECUTE,
+            'EVENT_EXAMPLE_BAR' => EVENT_TYPE_CHAIN,
+        );
+    }
+
+    function hooks() {
+        return array(
+            'EVENT_EXAMPLE_FOO' => 'foo',
+            'EVENT_EXAMPLE_BAR' => 'bar',
+        );
+    }
+
+    function config() {
+        return array(
+            'foo_or_bar' => 'foo',
+        );
+    }
+
+    function foo( $p_event ) {
+        echo 'In method foo(). ';
+    }
+
+    function bar( $p_event, $p_chained_param ) {
+        return str_replace( 'foo', 'bar', $p_chained_param );
+    }
+
+}
+		</programlisting>
+	</sect2>
+
+	<sect2 id="dev.plugins.building.source.foo.css">
+		<title>Example/files/foo.css</title>
+
+		<programlisting><filename>Example/files/foo.css</filename>
+p.foo {
+    color: red;
+}
+		</programlisting>
+	</sect2>
+
+	<sect2 id="dev.plugins.building.source.stringsenglish.txt">
+		<title>Example/lang/strings_english.txt</title>
+
+		<programlisting><filename>Example/lang/strings_english.txt</filename>
+&lt;?php
+
+$s_plugin_Example_configuration = "Configuration";
+$s_plugin_Example_foo_or_bar = "Foo or Bar?";
+$s_plugin_Example_reset = "Reset Value";
+		</programlisting>
+	</sect2>
+
+	<sect2 id="dev.plugins.building.source.configpage.php">
+		<title>Example/page/config_page.php</title>
+
+		<programlisting><filename>Example/pages/config_page.php</filename>
+&lt;?php
+
+html_page_top( plugin_lang_get( 'configuration' ) );
+$t_foo_or_bar = plugin_config_get( 'foo_or_bar' );
+
+?&gt;
+
+&lt;br/&gt;
+
+&lt;form action="&lt;?php echo plugin_page( 'config_update' ) ?&gt;" method="post"&gt;
+&lt;?php echo form_security_field( 'plugin_Example_config_update' ) ?&gt;
+&lt;table class="width60" align="center"&gt;
+
+&lt;tr&gt;
+    &lt;td class="form-title" rowspan="2"&gt;&lt;?php echo plugin_lang_get( 'configuration' ) ?&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr &lt;?php echo helper_alternate_class() ?&gt;&gt;
+    &lt;td class="category"&gt;&lt;php echo plugin_lang_get( 'foo_or_bar' ) ?&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;input name="foo_or_bar" value="&lt;?php echo string_attribute( $t_foo_or_bar ) ?&gt;"/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr &lt;?php echo helper_alternate_class() ?&gt;&gt;
+    &lt;td class="category"&gt;&lt;php echo plugin_lang_get( 'reset' ) ?&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;input type="checkbox" name="reset"/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+    &lt;td class="center" rowspan="2"&gt;&lt;input type="submit"/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;/table&gt;
+&lt;/form&gt;
+
+&lt;?php
+
+html_page_bottom();
+		</programlisting>
+	</sect2>
+
+	<sect2 id="dev.plugins.building.source.configupdate.php">
+		<title>Example/pages/config_update.php</title>
+
+		<programlisting><filename>Example/pages/config_update.php</filename>
+&lt;?php
+form_security_validate( 'plugin_Example_config_update' );
+
+$f_foo_or_bar = gpc_get_string( 'foo_or_bar' );
+$f_reset = gpc_get_bool( 'reset', false );
+
+if ( $f_reset ) {
+    plugin_config_delete( 'foo_or_bar' );
+} else {
+    if ( $f_foo_or_bar == 'foo' || $f_foo_or_bar == 'bar' ) {
+        plugin_config_set( 'foo_or_bar', $f_foo_or_bar );
+    }
+}
+
+form_security_purge( 'plugin_Example_config_update' );
+print_successful_redirect( plugin_page( 'foo', true ) );
+		</programlisting>
+	</sect2>
+
+	<sect2 id="dev.plugins.building.source.foo.php">
+		<title>Example/page/foo.php</title>
+
+		<programlisting><filename>Example/pages/foo.php</filename>
+&lt;?php
+echo '&lt;p&gt;Here is a link to &lt;a href="', plugin_page( 'foo' ), '">page foo&lt;/a&gt;.&lt;/p&gt;';
+     '&lt;link rel="stylesheet" type="text/css" href="', plugin_file( 'foo.css' ), '"/&gt;',
+     '&lt;p class="foo"&gt;';
+
+event_signal( 'EVENT_EXAMPLE_FOO' );
+
+$t_string = 'A sentence with the word "foo" in it.';
+$t_new_string = event_signal( 'EVENT_EXAMPLE_BAR', array( $t_string ) );
+
+echo $t_new_string, '&lt;/p&gt;';
+		</programlisting>
+	</sect2>
+</sect1>

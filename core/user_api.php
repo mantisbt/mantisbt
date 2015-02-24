@@ -907,7 +907,11 @@ function user_get_avatar( $p_user_id, $p_size = 80 ) {
 	$t_default_avatar = urlencode( $t_default_avatar );
 	$t_rating = 'G';
 
-	$t_email_hash = md5( strtolower( trim( user_get_email( $p_user_id ) ) ) );
+	if ( user_exists( $p_user_id ) ) {
+		$t_email_hash = md5( strtolower( trim( user_get_email( $p_user_id ) ) ) );
+	} else {
+		$t_email_hash = md5( 'generic-avatar-since-user-not-found' );
+	}
 
 	# Build Gravatar URL
 	if( http_is_protocol_https() ) {
