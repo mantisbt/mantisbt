@@ -485,7 +485,8 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		$p_filter_arr['_version'] = FILTER_VERSION;
 	}
 	$t_cookie_vers = (int)substr( $p_filter_arr['_version'], 1 );
-	if( substr( FILTER_VERSION, 1 ) > $t_cookie_vers ) {
+	$t_current_version = (int)substr( FILTER_VERSION, 1 );
+	if( $t_current_version > $t_cookie_vers ) {
 		# if the version is old, update it
 		$p_filter_arr['_version'] = FILTER_VERSION;
 	}
@@ -3925,24 +3926,23 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false ) {
 ?>
 		<table cellspacing="0" cellpadding="0">
 <?php
+	$t_menu_disabled = '';
 	if( !$p_hide_checkbox ) {
 ?>
 		<tr>
 			<td colspan="2">
 				<label>
 					<input type="checkbox" id="use_date_filters" name="<?php
-						echo FILTER_PROPERTY_FILTER_BY_DATE ?>"<?php
-						check_checked( gpc_string_to_bool( $g_filter[FILTER_PROPERTY_FILTER_BY_DATE] ), true ) ?> />
-					<?php echo lang_get( 'use_date_filters' )?>
+					echo FILTER_PROPERTY_FILTER_BY_DATE ?>"<?php
+					check_checked(gpc_string_to_bool($g_filter[FILTER_PROPERTY_FILTER_BY_DATE]), true) ?> />
+					<?php echo lang_get('use_date_filters') ?>
 				</label>
 			</td>
 		</tr>
 <?php
-	}
-
-	$t_menu_disabled =  '';
-	if( 'on' !== $g_filter[FILTER_PROPERTY_FILTER_BY_DATE] ) {
-		$t_menu_disabled = ' disabled="disabled" ';
+		if ('on' !== $g_filter[FILTER_PROPERTY_FILTER_BY_DATE]) {
+			$t_menu_disabled = ' disabled="disabled" ';
+		}
 	}
 ?>
 
@@ -4308,6 +4308,8 @@ function print_filter_custom_field_date( $p_field_num, $p_field_id ) {
 	switch( $g_filter['custom_fields'][$p_field_id][0] ) {
 		case CUSTOM_FIELD_DATE_ANY:
 		case CUSTOM_FIELD_DATE_NONE:
+            $t_start_disable = false;
+            $t_end_disable = false;
 			break;
 		case CUSTOM_FIELD_DATE_BETWEEN:
 			$t_start_disable = false;
