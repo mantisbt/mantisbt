@@ -930,6 +930,9 @@ function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
 			} else {
 				$g_plugin_cache[$t_basename] = $t_plugin;
 			}
+		} else {
+			error_parameters( $t_basename, $t_classname );
+			trigger_error( ERROR_PLUGIN_CLASS_NOT_FOUND, ERROR );
 		}
 	}
 
