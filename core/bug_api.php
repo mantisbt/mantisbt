@@ -302,7 +302,7 @@ class BugData {
 
 		# check due_date format
 		if( is_blank( $this->due_date ) ) {
-			$this_due_date = date_get_null();
+			$this->due_date = date_get_null();
 		}
 
 		$t_bug_table = db_get_table( 'mantis_bug_table' );
