@@ -1214,7 +1214,7 @@ function bug_move( $p_bug_id, $p_target_project_id ) {
 	if( $t_category_id == 0 ) {
 		# Category is required in target project, set it to default
 		if( ON != config_get( 'allow_no_category', null, null, $p_target_project_id ) ) {
-			bug_set_field( $p_bug_id, 'category_id', config_get( 'default_category_for_moves' ) );
+			bug_set_field( $p_bug_id, 'category_id', config_get( 'default_category_for_moves', null, null, $p_target_project_id ) );
 		}
 	} else {
 		# Check if the category is global, and if not attempt mapping it to the new project
@@ -1227,8 +1227,8 @@ function bug_move( $p_bug_id, $p_target_project_id ) {
 			$t_category_name = category_get_field( $t_category_id, 'name' );
 			$t_target_project_category_id = category_get_id_by_name( $t_category_name, $p_target_project_id, false );
 			if( $t_target_project_category_id === false ) {
-				# Use default category after moves, since there is no match by name.
-				$t_target_project_category_id = config_get( 'default_category_for_moves' );
+				# Use target project's default category for moves, since there is no match by name.
+				$t_target_project_category_id = config_get( 'default_category_for_moves', null, null, $p_target_project_id );
 			}
 			bug_set_field( $p_bug_id, 'category_id', $t_target_project_category_id );
 		}
