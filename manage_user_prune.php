@@ -53,14 +53,13 @@ auth_reauthenticate();
 
 access_ensure_global_level( config_get( 'manage_user_threshold' ) );
 
-$t_user_table = db_get_table( 'user' );
 
 # Delete the users who have never logged in and are older than 1 week
 $t_days_old = (int)7 * SECONDS_PER_DAY;
 
-$t_query = 'SELECT id, access_level FROM ' . $t_user_table . '
-		WHERE ( login_count = 0 ) AND ( date_created = last_visit ) AND ' . db_helper_compare_days( 0, 'date_created', '> ' . $t_days_old );
-$t_result = db_query_bound( $t_query, array( db_now() ) );
+$t_query = 'SELECT id, access_level FROM {user}
+		WHERE ( login_count = 0 ) AND ( date_created = last_visit ) AND ' . db_helper_compare_time( db_param(), '>', 'date_created', $t_days_old );
+$t_result = db_query( $t_query, array( db_now() ) );
 
 if( !$t_result ) {
 	trigger_error( ERROR_GENERIC, ERROR );

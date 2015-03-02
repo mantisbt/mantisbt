@@ -44,6 +44,30 @@ require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
+/**
+ * Sets the current user
+ *
+ * @param integer $p_user_id Id to set as current user
+ * @return Old current user id
+ * @access public
+ */
+function current_user_set( $p_user_id ) {
+	global $g_cache_current_user_id;
+	global $g_cache_current_user_pref;
+
+	if( $p_user_id == $g_cache_current_user_id ) {
+		return $p_user_id;
+	}
+
+	$t_old_current = $g_cache_current_user_id;
+	$g_cache_current_user_id = $p_user_id;
+
+	# Clear current user preferences cache
+	$g_cache_current_user_pref = array();
+
+	return $t_old_current;
+}
+
 # ## Current User API ###
 # Wrappers around the User API that pass in the logged-in user for you
 /**
@@ -209,7 +233,7 @@ function current_user_ensure_unprotected() {
  * @param integer $p_project_id Project id. This argument is only used if a 'filter' string is not passed via the web request.
  *                              The default value is null meaning return the current filter for user's current project
                                 if a filter string is not supplied.
- * @return mixed Active issue filter for current user or false if no filter is currently defined.
+ * @return array User filter, if not set, then default filter.
  * @access public
  */
 function current_user_get_bug_filter( $p_project_id = null ) {
@@ -227,7 +251,7 @@ function current_user_get_bug_filter( $p_project_id = null ) {
 		}
 		$t_filter = filter_ensure_valid_filter( $t_filter );
 	} else if( !filter_is_cookie_valid() ) {
-		return false;
+		$t_filter = filter_get_default();
 	} else {
 		$t_user_id = auth_get_current_user_id();
 		$t_filter = user_get_bug_filter( $t_user_id, $p_project_id );

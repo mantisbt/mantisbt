@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.speed">
+	<title>Speed Optimisation</title>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_compress_html</term>
+			<listitem>
+				<para>This option is used to enable buffering/compression of HTML
+					output if the user's browser supports it. Default value is ON.
+					This option will be ignored in the following scenarios:
+					<itemizedlist>
+						<listitem>
+							<para>If php.ini has zlib.output_compression
+								enabled.
+							</para>
+						</listitem>
+						<listitem>
+							<para>If php.ini has output_handler set to a
+								handler.
+							</para>
+						</listitem>
+						<listitem>
+							<para>If PHP does not include the zlib extension (PHP 4.3.0 and
+								later include zlib extension by default).
+							</para>
+						</listitem>
+					</itemizedlist>
+					You can check the loaded modules in your PHP by running &quot;php -m&quot; on
+					the command line, or by using php_info() command in a php script.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_use_persistent_connections</term>
+			<listitem>
+				<para>Use persistent database connections, setting this to ON will
+					open the database once per connection, rather than once per page.
+					There might be some scalability issues here and that is why it is
+					defaulted to OFF.
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+
+</section>

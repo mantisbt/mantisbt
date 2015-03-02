@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.email">
+	<title>Email</title>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_administrator_email</term>
+			<listitem>
+				<para>The administrator's e-mail address. This is mainly prompted
+					to the user in case of errors that might require the intervention
+					of the system administrator. For example, SQL
+					errors. sysadmin@example.com
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_webmaster_email</term>
+			<listitem>
+				<para>The webmaster's e-mail address. This address is displayed in
+					the bottom of all MantisBT
+					pages. webmaster@example.com
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_from_email</term>
+			<listitem>
+				<para>The email address to be used as the source of all emails
+					sent by MantisBT. noreply@example.com
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_return_path_email</term>
+			<listitem>
+				<para>Email address to receive bounced emails.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_enable_email_notification</term>
+			<listitem>
+				<para>Set to ON to enable email notifications, OFF to
+					disable them. Default is ON. Note that disabling
+					email notifications has no effect on emails generated
+					as part of the user signup process. When set to OFF,
+					the password reset feature is disabled. Additionally,
+					notifications of administrators updating accounts are
+					not sent to users.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_default_notify_flags</term>
+			<listitem>
+				<para>Associated with each action a list of flags to control who
+					should be notified.The default will be used if the action is not
+					included in $g_notify_flags or if the flag is not included in the
+					specific action definition. The list of actions include: new,
+					assigned, resolved, bugnote, reopened, closed, deleted,
+					feedback.The default is:
+					$g_default_notify_flags = array('reporter' =&gt; ON, 'handler'
+					=&gt; ON, 'monitor' =&gt; ON, 'bugnotes' =&gt; ON, 'explicit' =&gt; ON,
+					'threshold_min' =&gt; NOBODY, 'threshold_max' =&gt; NOBODY);
+					threshold_min and threshold_max are used to send messages to all
+					members of the project whose status is greater than or equal to
+					&quot;threshold_min&quot; and less than or equal to &quot;threshold_max&quot;. Sending
+					messages to everyone would set &quot;threshold_min&quot; to ANYBODY and
+					&quot;threshold_max to &quot;NOBODY&quot;. To send to all DEVELOPERS and above (as
+					0.17.5), use DEVELOPER and NOBODY respectively.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_notify_flags</term>
+			<listitem>
+				<para>Defines the notification flags that are different from the
+					defaults that are defined in $g_default_notify_flags. The following
+					code overrides the default by disabling notifications to bugnote
+					authors and users monitoring the bug on submitting a new bug:
+					$g_notify_flags['new'] = array('bugnotes' =&gt; OFF, 'monitor'
+					=&gt; OFF);
+					Available actions include:
+					<itemizedlist>
+						<listitem>
+							<para>'new': a new bug has been added</para>
+						</listitem>
+						<listitem>
+							<para>'reopened': the bug has been reopened</para>
+						</listitem>
+						<listitem>
+							<para>'deleted': a bug has been deleted</para>
+						</listitem>
+						<listitem>
+							<para>'owner': the bug has been assigned a new owner</para>
+						</listitem>
+						<listitem>
+							<para>'bugnote': a bugnote has been added to a bug</para>
+						</listitem>
+						<listitem>
+							<para>'sponsor': the sponsorship for the bug has changed
+								(added, deleted or updated)
+							</para>
+						</listitem>
+						<listitem>
+							<para>'relation': a relationship for the bug has changed
+								(added, deleted or updated)
+							</para>
+						</listitem>
+						<listitem>
+							<para>'monitor': a user is added to the monitor list.
+							</para>
+						</listitem>
+					</itemizedlist>
+					In addition, an action can match the bug status in
+					$g_status_enum_string. Note that spaces in the string are replaced
+					with underscores ('_') in creating the action. Thus, using the
+					defaults, 'feedback' would be a valid action.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_email_receive_own</term>
+			<listitem>
+				<para>This defines whether users should receive emails for their
+					own actions. This option is defaulted to OFF, hence, users do not
+					receive email notification for their own actions.
+					This can be a source for confusions for users upgrading from MantisBT
+					0.17.x versions, since in these versions users used to get notified
+					of their own actions.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_validate_email</term>
+			<listitem>
+				<para>Set to OFF to disable email checking. Default is ON.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_check_mx_record</term>
+			<listitem>
+				<para>Set to OFF to disable email checking. Default is
+					OFF.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_allow_blank_email</term>
+			<listitem>
+				<para>If ON, allows the user to omit an email address field.
+					If you allow users to create their own accounts, they must specify
+					an email at that point, no matter what the value of this option is.
+					Otherwise they wouldn't get their passwords.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_limit_email_domain</term>
+			<listitem>
+				<para>Only allow and send email to addresses in the given domain.
+					This is useful as a security feature and it is also useful in cases
+					like Sourceforge where its servers are only limited to send emails
+					to SourceForge email addresses in order to avoid
+					spam. $g_limit_email_domain =
+					'users.sourceforge.net';
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_show_user_email_threshold</term>
+			<listitem>
+				<para>This specifies the access level that is needed to have user
+					names hyperlinked with mailto: links. The default value is NOBODY,
+					hence, even administrators won't have this feature enabled.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_mail_priority</term>
+			<listitem>
+				<para>If use_x_priority is set to ON, what should the value be?
+					Urgent = 1, Not Urgent = 5, Disable = 0 . Default is 3
+					Some MTAs interpret X-Priority = 0 to mean 'Very Urgent'
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_phpmailer_method</term>
+			<listitem>
+				<para>Select the method to send mail:
+					<itemizedlist>
+						<listitem><para>
+							<emphasis>PHPMAILER_METHOD_MAIL</emphasis>
+							for use of mail() function,
+						</para></listitem>
+						<listitem><para>
+							<emphasis>PHPMAILER_METHOD_SENDMAIL</emphasis>
+							for sendmail (or postfix),
+						</para></listitem>
+						<listitem><para>
+							<emphasis>PHPMAILER_METHOD_SMTP</emphasis>
+							for SMTP,
+						</para></listitem>
+					</itemizedlist>
+					Default is PHPMAILER_METHOD_MAIL.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_smtp_host</term>
+			<listitem>
+				<para>This option specifies the SMTP server to submit messages to.
+					The SMTP server (MTA) then takes on the responsibility of delivering
+					messages to their final destinations.
+				</para>
+				<para>To use the local SMTP (if available) set this to 'localhost',
+					otherwise use the fully qualified domain name of the remote SMTP server.
+				</para>
+				<para>It can be either a single hostname, or multiple semicolon-delimited hostnames.
+					You can specify for each host a port other than the default, using format:
+					<emphasis>hostname:port</emphasis>
+					(e.g. "smtp1.example.com:25;smtp2.example.com").
+				</para>
+				<para>Hosts will be tried in the given order.
+				</para>
+				<note><para>This is only used with
+					<emphasis>PHPMAILER_METHOD_SMTP</emphasis>
+					(see $g_phpmailer_method).
+				</para></note>
+				<para>The default is 'localhost'.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_smtp_port</term>
+			<listitem>
+				<para>The default SMTP port to use.
+					This can be overridden individually for specific hosts.
+					(see $g_smtp_host).
+				</para>
+				<para>Typical SMTP ports are 25 and 587.
+				</para>
+				<para>The default is 25.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_smtp_connection_mode</term>
+			<listitem>
+				<para>Allow secure connection to the SMTP server. Valid values are:
+					<itemizedlist>
+						<listitem><para><emphasis>'' (empty string)</emphasis>:
+							No encryption. This is the default.
+						</para></listitem>
+						<listitem><para><emphasis>ssl</emphasis></para></listitem>
+						<listitem><para><emphasis>tls</emphasis></para></listitem>
+					</itemizedlist>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_smtp_username</term>
+			<listitem>
+				<para>SMTP Server Authentication user
+				</para>
+				<para>Allows the use of SMTP Authentication when using a remote SMTP host.
+				</para>
+				<note><para>must be set to '' (empty string) if the SMTP host
+					does not require authentication.
+				</para></note>
+				<para>Default is ''.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_smtp_password</term>
+			<listitem>
+				<para>This is the password that is used in SMTP Authentication.
+					Not used when $g_smtp_username = ''
+				</para>
+				<para>Default is ''.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_email_send_using_cronjob</term>
+			<listitem>
+				<para>Disables sending of emails as soon as an action is performed.
+		Emails are instead queued and must be sent by running
+		scripts/send_emails.php periodically. This script can only be
+		executed from the CLI, not from the web interface, for security
+		reasons.</para>
+		<para>Enabling this option can help with performance problems if large
+		numbers of emails are generated or mail delivery is slow by not
+		delaying page execution when sending emails.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_email_separator1</term>
+			<listitem>
+				<para>Default is str_pad('', 70, '='); This means 70 equal
+					signs.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_email_separator2</term>
+			<listitem>
+				<para>Default is str_pad('', 70, '-'); This means 70 minus
+					signs.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_email_padding_length</term>
+			<listitem>
+				<para>Default is 28.</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+
+	<para>MantisBT uses flags and a threshold system to generate emails on
+		events. For each new event, email is sent to:
+		<itemizedlist>
+			<listitem>
+				<para>the reporter, qualified by the notify flag 'reporter'
+					below
+				</para>
+			</listitem>
+			<listitem>
+				<para>the handler (or Assigned to), qualified by the notify
+					flag 'handler' below
+				</para>
+			</listitem>
+			<listitem>
+				<para>anyone monitoring the bug, qualified by the notify flag
+					'monitor' below
+				</para>
+			</listitem>
+			<listitem>
+				<para>anyone who has ever added a bugnote the bug, qualified by
+					the notify flag 'bugnotes' below
+				</para>
+			</listitem>
+			<listitem>
+				<para>anyone assigned to the project whose access level is
+					greater than or equal to the notify flag 'threshold_min' and less
+					than or equal to the notify flag 'threshold_max' below
+				</para>
+			</listitem>
+		</itemizedlist>
+	</para>
+
+	<para>
+		From this list, those recipients who meet the following criteria
+		are eliminated:
+		<itemizedlist>
+			<listitem>
+				<para>the originator of the change, if $g_email_receive_own is
+					OFF
+				</para>
+			</listitem>
+			<listitem>
+				<para>the recipient either no longer exists, or is
+					disabled
+				</para>
+			</listitem>
+			<listitem>
+				<para>the recipient has turned their email_on_&lt;new
+					status&gt; preference OFF
+				</para>
+			</listitem>
+			<listitem>
+				<para>the recipient has no email address entered</para>
+			</listitem>
+		</itemizedlist>
+	</para>
+</section>

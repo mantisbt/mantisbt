@@ -83,7 +83,7 @@ if( $f_username !== null ) {
 
 # Make sure that the current user has access to the selected project (if not ALL PROJECTS).
 if( $f_project_id != ALL_PROJECTS ) {
-	access_ensure_project_level( VIEWER, $f_project_id );
+	access_ensure_project_level( config_get( 'view_bug_threshold', null, null, $f_project_id ), $f_project_id );
 }
 
 if( $f_sort === 'update' ) {

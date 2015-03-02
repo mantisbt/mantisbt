@@ -99,13 +99,13 @@ html_head_begin();
 html_css_link( 'admin.css' );
 html_content_type();
 html_title( 'Administration - Installation' );
-html_javascript_link( 'jquery-1.9.1.min.js' );
+html_javascript_link( 'jquery-1.11.1.min.js' );
 html_javascript_link( 'install.js' );
 html_head_end();
 ?>
 
 <body>
-<table width="100%" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+<table width="100%" cellspacing="0" cellpadding="0">
 	<tr class="top-bar">
 		<td class="links">
 			[ <a href="index.php">Back to Administration</a> ]
@@ -113,6 +113,9 @@ html_head_end();
 		<td class="title">
 		<?php
 switch( $t_install_state ) {
+	case 7:
+		echo 'Installation Complete';
+		break;
 	case 6:
 		echo 'Post Installation Checks';
 		break;
@@ -133,6 +136,7 @@ switch( $t_install_state ) {
 		break;
 	case 0:
 	default:
+		$t_install_state = 0;
 		echo 'Pre-Installation Check';
 		break;
 }
@@ -143,12 +147,14 @@ switch( $t_install_state ) {
 <br /><br />
 
 <?php
-if( 0 == $t_install_state ) {
+# installation checks table header is valid both for pre-install and
+# database installation steps
+if( 0 == $t_install_state || 2 == $t_install_state ) {
 	?>
-<table width="100%" bgcolor="#222222" cellpadding="10" cellspacing="1">
+<table width="100%" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Checking Installation...</span>
+		<span class="title">Checking Installation</span>
 	</td>
 </tr>
 <?php
@@ -284,13 +290,42 @@ print_test( 'Checking if safe mode is enabled for install script',
 	'Disable safe_mode in php.ini before proceeding' ) ?>
 
 <?php
-	print_test( 'Checking there is no config_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/config_inc.php' ), true, 'Move config_inc.php to config/config_inc.php.' );
-	print_test( 'Checking there is no custom_constants_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/custom_constants_inc.php' ), true, 'Move custom_constants_inc.php to config/custom_constants_inc.php.' );
-	print_test( 'Checking there is no custom_strings_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/custom_strings_inc.php' ), true, 'Move custom_strings_inc.php to config/custom_strings_inc.php.' );
-	print_test( 'Checking there is no custom_functions_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/custom_functions_inc.php' ), true, 'Move custom_functions_inc.php to config/custom_functions_inc.php.' );
-	print_test( 'Checking there is no custom_relationships_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/custom_relationships_inc.php' ), true, 'Move custom_relationships_inc.php to config/custom_relationships_inc.php.' );
-	print_test( 'Checking there is no mc_config_defaults_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/api/soap/mc_config_defaults_inc.php' ), true, 'Delete this file.' );
-	print_test( 'Checking there is no mc_config_inc.php in 1.2.x location.', !file_exists( dirname( dirname( __FILE__ ) ) . '/api/soap/mc_config_inc.php' ), true, 'Move contents to config_inc.php file.' );
+	# Check for custom config files in obsolete locations
+	$t_config_files = array(
+		'config_inc.php' => 'move',
+		'custom_constants_inc.php' => 'move',
+		'custom_strings_inc.php' => 'move',
+		'custom_functions_inc.php' => 'move',
+		'custom_relationships_inc.php' => 'move',
+		'mc_config_defaults_inc.php' => 'delete',
+		'mc_config_inc.php' => 'contents',
+	);
+
+	foreach( $t_config_files as $t_file => $t_action ) {
+		$t_dir = dirname( dirname( __FILE__ ) ) . '/';
+		if( substr( $t_file, 0, 3 ) == 'mc_' ) {
+			$t_dir .= 'api/soap/';
+		}
+
+		switch( $t_action ) {
+			case 'move':
+				$t_message = "Move $t_file to config/$t_file.";
+				break;
+			case 'delete':
+				$t_message = 'Delete this file.';
+				break;
+			case 'contents':
+				$t_message = 'Move contents to config_inc.php file.';
+				break;
+		}
+
+		print_test(
+			"Checking there is no '$t_file' file in 1.2.x location.",
+			!file_exists( $t_dir . $t_file ),
+			true,
+			$t_message
+		);
+	}
 ?>
 
 </table>
@@ -303,8 +338,6 @@ print_test( 'Checking if safe mode is enabled for install script',
 # got database information, check and install
 if( 2 == $t_install_state ) {
 	?>
-
-<table width="100%" cellpadding="10" cellspacing="1">
 
 <!-- Checking DB support-->
 <?php
@@ -429,7 +462,7 @@ if( 2 == $t_install_state ) {
 	<td bgcolor="#ffffff">
 		Checking Database Server Version
 		<?php
-		echo '<br /> Running ' . $f_db_type . ' version ' . nl2br( $t_version_info['description'] );
+		echo '<br /> Running ' . string_attribute( $f_db_type ) . ' version ' . nl2br( $t_version_info['description'] );
 		?>
 	</td>
 	<?php
@@ -457,6 +490,7 @@ if( 2 == $t_install_state ) {
 		print_test_result( ( '' == $t_error ) && ( '' == $t_warning ), ( '' != $t_error ), $t_error . ' ' . $t_warning );
 		?>
 </tr>
+</table>
 <?php
 	}?>
 </table>
@@ -483,7 +517,7 @@ if( 1 == $t_install_state ) {
 		<span class="title">
 			<?php echo
 				( $g_database_upgrade ? 'Upgrade Options' : 'Installation Options' ),
-				( $g_failed ? ': Checks Failed... ' : '' )
+				( $g_failed ? ': Checks Failed ' : '' )
 			?>
 		</span>
 	</td>
@@ -552,7 +586,7 @@ if( !$g_database_upgrade ) {
 		Hostname (for Database Server)
 	</td>
 	<td>
-		<input name="hostname" type="textbox" value="<?php echo $f_hostname?>">
+		<input name="hostname" type="textbox" value="<?php echo string_attribute( $f_hostname ) ?>">
 	</td>
 </tr>
 
@@ -562,7 +596,7 @@ if( !$g_database_upgrade ) {
 		Username (for Database)
 	</td>
 	<td>
-		<input name="db_username" type="textbox" value="<?php echo $f_db_username?>">
+		<input name="db_username" type="textbox" value="<?php echo string_attribute( $f_db_username ) ?>">
 	</td>
 </tr>
 
@@ -585,7 +619,7 @@ if( !$g_database_upgrade ) {
 		Database name (for Database)
 	</td>
 	<td>
-		<input name="database_name" type="textbox" value="<?php echo $f_database_name?>">
+		<input name="database_name" type="textbox" value="<?php echo string_attribute( $f_database_name ) ?>">
 	</td>
 </tr>
 <?php
@@ -598,7 +632,7 @@ if( !$g_database_upgrade ) {
 		Admin Username (to <?php echo( !$g_database_upgrade ) ? 'create Database' : 'update Database'?> if required)
 	</td>
 	<td>
-		<input name="admin_username" type="textbox" value="<?php echo $f_admin_username?>">
+		<input name="admin_username" type="textbox" value="<?php echo string_attribute( $f_admin_username ) ?>">
 	</td>
 </tr>
 
@@ -610,7 +644,7 @@ if( !$g_database_upgrade ) {
 		<input name="admin_password" type="password" value="<?php
 			echo !is_blank( $f_admin_password ) && $f_admin_password == $f_db_password
 				? CONFIGURED_PASSWORD
-				: $f_admin_password;
+				: string_attribute( $f_admin_password );
 		?>">
 	</td>
 </tr>
@@ -630,6 +664,12 @@ if( !$g_database_upgrade ) {
 		echo '<input id="' . $t_key . '" name="' . $t_key . '" type="textbox" value="' . $f_db_table_prefix . '">';
 		echo "\n\t</td>\n</tr>\n\n";
 	}
+
+	# Default timezone, get PHP setting if not defined in Mantis
+	$t_tz = config_get_global( 'default_timezone' );
+	if( is_blank( $t_tz ) ) {
+		$t_tz = @date_default_timezone_get();
+	}
 ?>
 <!-- Timezone -->
 <tr>
@@ -638,7 +678,7 @@ if( !$g_database_upgrade ) {
 	</td>
 	<td>
 		<select id="timezone" name="timezone">
-			<?php print_timezone_option_list( config_get_global( 'default_timezone' ) ) ?>
+			<?php print_timezone_option_list( $t_tz ) ?>
 		</select>
 	</td>
 </tr>
@@ -986,27 +1026,32 @@ if( 3 == $t_install_state ) {
 # database installed, get any additional information
 if( 4 == $t_install_state ) {
 
+/*
+	# 20141227 dregad Disabling this step for now, because it does not seem to
+	# be doing anything useful and can be used to retrieve system information
+	# when the admin directory has not been deleted (see #17939).
+
 	# @todo to be written
 	# must post data gathered to preserve it
 	?>
-		<input name="hostname" type="hidden" value="<?php echo $f_hostname?>">
-		<input name="db_type" type="hidden" value="<?php echo $f_db_type?>">
-		<input name="database_name" type="hidden" value="<?php echo $f_database_name?>">
-		<input name="db_username" type="hidden" value="<?php echo $f_db_username?>">
-		<input name="db_password" type="hidden" value="<?php echo $f_db_password?>">
-		<input name="admin_username" type="hidden" value="<?php echo $f_admin_username?>">
-		<input name="admin_password" type="hidden" value="<?php echo $f_admin_password?>">
+		<input name="hostname" type="hidden" value="<?php echo string_attribute( $f_hostname ) ?>">
+		<input name="db_type" type="hidden" value="<?php echo string_attribute( $f_db_type ) ?>">
+		<input name="database_name" type="hidden" value="<?php echo string_attribute( $f_database_name ) ?>">
+		<input name="db_username" type="hidden" value="<?php echo string_attribute( $f_db_username ) ?>">
+		<input name="db_password" type="hidden" value="<?php echo string_attribute( f_db_password ) ?>">
+		<input name="admin_username" type="hidden" value="<?php echo string_attribute( $f_admin_username ) ?>">
+		<input name="admin_password" type="hidden" value="<?php echo string_attribute( $f_admin_password ) ?>">
 		<input name="log_queries" type="hidden" value="<?php echo( $f_log_queries ? 1 : 0 )?>">
 		<input name="db_exists" type="hidden" value="<?php echo( $f_db_exists ? 1 : 0 )?>">
 <?php
 	# must post <input name="install" type="hidden" value="5">
 	# rather than the following line
+*/
 	$t_install_state++;
 }  # end install_state == 4
 
 # all checks have passed, install the database
 if( 5 == $t_install_state ) {
-	$t_config_filename = $g_config_path . 'config_inc.php';
 	$t_config_exists = file_exists( $t_config_filename );
 	?>
 <table width="100%" cellpadding="10" cellspacing="1">
@@ -1018,20 +1063,8 @@ if( 5 == $t_install_state ) {
 
 <tr>
 	<td bgcolor="#ffffff">
-<?php
-	if( !$t_config_exists ) {
-?>
-		Creating Configuration File (config/config_inc.php)<br />
-		<span class="error-msg">
-			(if this file is not created, create it manually with the contents below)
-		</span>
-<?php
-	} else {
-?>
-		Updating Configuration File (config/config_inc.php)<br />
-<?php
-	}
-?>
+		<?php echo ( $t_config_exists ? 'Updating' : 'Creating' ); ?>
+		Configuration File (config/config_inc.php)<br />
 	</td>
 <?php
 	# Generating the config_inc.php file
@@ -1046,15 +1079,15 @@ if( 5 == $t_install_state ) {
 	}
 
 	$t_config = '<?php' . PHP_EOL
-		. '$g_hostname               = \'' . $f_hostname . '\';' . PHP_EOL
-		. '$g_db_type                = \'' . $f_db_type . '\';' . PHP_EOL
+		. '$g_hostname               = \'' . addslashes( $f_hostname ) . '\';' . PHP_EOL
+		. '$g_db_type                = \'' . addslashes( $f_db_type ) . '\';' . PHP_EOL
 		. '$g_database_name          = \'' . addslashes( $f_database_name ) . '\';' . PHP_EOL
 		. '$g_db_username            = \'' . addslashes( $f_db_username ) . '\';' . PHP_EOL
 		. '$g_db_password            = \'' . addslashes( $f_db_password ) . '\';' . PHP_EOL;
 
 	switch( $f_db_type ) {
 		case 'db2':
-			$t_config .=  '$g_db_schema              = \'' . $f_db_schema . '\';' . PHP_EOL;
+			$t_config .=  '$g_db_schema              = \'' . addslashes( $f_db_schema ) . '\';' . PHP_EOL;
 			break;
 		default:
 			break;
@@ -1066,7 +1099,7 @@ if( 5 == $t_install_state ) {
 	foreach( $t_prefix_defaults['other'] as $t_key => $t_value ) {
 		$t_new_value = ${'f_' . $t_key};
 		if( $t_new_value != $t_value ) {
-			$t_config .= '$g_' . str_pad( $t_key, 25 ) . '= \'' . ${'f_' . $t_key} . '\';' . PHP_EOL;
+			$t_config .= '$g_' . str_pad( $t_key, 25 ) . '= \'' . addslashes( ${'f_' . $t_key} ) . '\';' . PHP_EOL;
 			$t_insert_line = true;
 		}
 	}
@@ -1075,7 +1108,7 @@ if( 5 == $t_install_state ) {
 	}
 
 	$t_config .=
-		  '$g_default_timezone       = \'' . $f_timezone . '\';' . PHP_EOL
+		  '$g_default_timezone       = \'' . addslashes( $f_timezone ) . '\';' . PHP_EOL
 		. PHP_EOL
 		. "\$g_crypto_master_salt     = '" . addslashes( $t_crypto_master_salt ) . "';" . PHP_EOL;
 
@@ -1101,7 +1134,7 @@ if( 5 == $t_install_state ) {
 			( $f_db_schema != config_get( 'db_schema', '' ) ) ||
 			( $f_db_username != config_get( 'db_username', '' ) ) ||
 			( $f_db_password != config_get( 'db_password', '' ) ) ) {
-			print_test_result( BAD, false, 'file ' . $g_config_path . 'config_inc.php' . ' already exists and has different settings' );
+			print_test_result( BAD, false, 'file ' . $t_config_filename . ' already exists and has different settings' );
 		} else {
 			print_test_result( GOOD, false );
 			$t_write_failed = false;
@@ -1113,7 +1146,7 @@ if( 5 == $t_install_state ) {
 	if( $t_crypto_master_salt === null ) {
 		print_test( 'Setting Cryptographic salt in config file', false, false,
 					'Unable to find a random number source for cryptographic purposes. You will need to edit ' .
-					$g_config_path . 'config_inc.php' . ' and set a value for $g_crypto_master_salt manually' );
+					$t_config_filename . ' and set a value for $g_crypto_master_salt manually' );
 	}
 
 	if( true == $t_write_failed ) {
@@ -1124,8 +1157,8 @@ if( 5 == $t_install_state ) {
 			<tr>
 				<td>
 					Please add the following lines to
-					'<?php echo $g_absolute_path; ?>config_inc.php'
-					before continuing to the database upgrade check:
+					<em>'<?php echo $t_config_filename; ?>'</em>
+					before continuing:
 				</td>
 			</tr>
 			<tr>
@@ -1154,10 +1187,10 @@ if( 6 == $t_install_state ) {
 
 	# post install checks
 	?>
-<table width="100%" bgcolor="#222222" cellpadding="10" cellspacing="1">
+<table width="100%" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Checking Installation...</span>
+		<span class="title">Checking Installation</span>
 	</td>
 </tr>
 
@@ -1191,8 +1224,7 @@ if( 6 == $t_install_state ) {
 		checking ability to SELECT records
 	</td>
 	<?php
-		$t_mantis_config_table = db_get_table( 'config' );
-	$t_query = 'SELECT COUNT(*) FROM ' . $t_mantis_config_table;
+	$t_query = 'SELECT COUNT(*) FROM ' . db_get_table( 'config' );
 	$t_result = @$g_db->Execute( $t_query );
 
 	if( $t_result != false ) {
@@ -1207,7 +1239,7 @@ if( 6 == $t_install_state ) {
 		checking ability to INSERT records
 	</td>
 	<?php
-		$t_query = 'INSERT INTO ' . $t_mantis_config_table . ' ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'test\', 1, 90, \'database_test\', 20, 0 )';
+		$t_query = 'INSERT INTO ' . db_get_table( 'config' ) . ' ( value, type, access_reqd, config_id, project_id, user_id ) VALUES (\'test\', 1, 90, \'database_test\', 20, 0 )';
 	$t_result = @$g_db->Execute( $t_query );
 
 	if( $t_result != false ) {
@@ -1222,7 +1254,7 @@ if( 6 == $t_install_state ) {
 		checking ability to UPDATE records
 	</td>
 	<?php
-		$t_query = 'UPDATE ' . $t_mantis_config_table . ' SET value=\'test_update\' WHERE config_id=\'database_test\'';
+		$t_query = 'UPDATE ' . db_get_table( 'config' ) . ' SET value=\'test_update\' WHERE config_id=\'database_test\'';
 	$t_result = @$g_db->Execute( $t_query );
 
 	if( $t_result != false ) {
@@ -1237,7 +1269,7 @@ if( 6 == $t_install_state ) {
 		checking ability to DELETE records
 	</td>
 	<?php
-		$t_query = 'DELETE FROM ' . $t_mantis_config_table . ' WHERE config_id=\'database_test\'';
+		$t_query = 'DELETE FROM ' . db_get_table( 'config' ) . ' WHERE config_id=\'database_test\'';
 	$t_result = @$g_db->Execute( $t_query );
 
 	if( $t_result != false ) {
@@ -1259,10 +1291,10 @@ if( 6 == $t_install_state ) {
 if( 7 == $t_install_state ) {
 	# cleanup and launch upgrade
 	?>
-<table width="100%" bgcolor="#222222" cellpadding="10" cellspacing="1">
+<table width="100%" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Installation Complete...</span>
+		<span class="title">Installation Complete</span>
 	</td>
 </tr>
 <tr bgcolor="#ffffff">
@@ -1285,10 +1317,10 @@ if( 7 == $t_install_state ) {
 
 if( $g_failed && $t_install_state != 1 ) {
 	?>
-<table width="100%" bgcolor="#222222" cellpadding="10" cellspacing="1">
+<table width="100%" cellpadding="10" cellspacing="1">
 <tr>
 	<td bgcolor="#e8e8e8" colspan="2">
-		<span class="title">Installation Failed...</span>
+		<span class="title">Installation Failed</span>
 	</td>
 </tr>
 <tr>
@@ -1296,20 +1328,20 @@ if( $g_failed && $t_install_state != 1 ) {
 	<td bgcolor="#ffffff">
 <form method='POST'>
 		<input name="install" type="hidden" value="<?php echo $t_install_state?>">
-		<input name="hostname" type="hidden" value="<?php echo $f_hostname?>">
-		<input name="db_type" type="hidden" value="<?php echo $f_db_type?>">
-		<input name="database_name" type="hidden" value="<?php echo $f_database_name?>">
-		<input name="db_username" type="hidden" value="<?php echo $f_db_username?>">
+		<input name="hostname" type="hidden" value="<?php echo string_attribute( $f_hostname ) ?>">
+		<input name="db_type" type="hidden" value="<?php echo string_attribute( $f_db_type ) ?>">
+		<input name="database_name" type="hidden" value="<?php echo string_attribute( $f_database_name ) ?>">
+		<input name="db_username" type="hidden" value="<?php echo string_attribute( $f_db_username ) ?>">
 		<input name="db_password" type="hidden" value="<?php
 			echo !is_blank( $f_db_password ) && $t_config_exists
 				? CONFIGURED_PASSWORD
-				: $f_db_password;
+				: string_attribute( $f_db_password );
 		?>">
 		<input name="admin_username" type="hidden" value="<?php echo $f_admin_username?>">
 		<input name="admin_password" type="hidden" value="<?php
 			echo !is_blank( $f_admin_password ) && $f_admin_password == $f_db_password
 				? CONFIGURED_PASSWORD
-				: $f_admin_password;
+				: string_attribute( $f_admin_password );
 		?>">
 		<input name="log_queries" type="hidden" value="<?php echo( $f_log_queries ? 1 : 0 )?>">
 		<input name="db_exists" type="hidden" value="<?php echo( $f_db_exists ? 1 : 0 )?>">

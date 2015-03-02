@@ -38,10 +38,8 @@ require_api( 'history_api.php' );
  * @return array
  */
 function timeline_get_affected_issues( $p_start_time, $p_end_time ) {
-	$t_mantis_bug_history_table = db_get_table( 'bug_history' );
-
-	$t_query = 'SELECT DISTINCT(bug_id) from ' . $t_mantis_bug_history_table . ' WHERE date_modified >= ' . db_param() . ' AND date_modified < ' . db_param();
-	$t_result = db_query_bound( $t_query, array( $p_start_time, $p_end_time ) );
+	$t_query = 'SELECT DISTINCT(bug_id) from {bug_history} WHERE date_modified >= ' . db_param() . ' AND date_modified < ' . db_param();
+	$t_result = db_query( $t_query, array( $p_start_time, $p_end_time ) );
 
 	$t_current_project = helper_get_current_project();
 
@@ -58,7 +56,7 @@ function timeline_get_affected_issues( $p_start_time, $p_end_time ) {
 			continue;
 		}
 
-		if( !access_has_bug_level( VIEWER, $t_issue_id ) ) {
+		if( !access_has_bug_level( config_get( 'view_bug_threshold' ), $t_issue_id ) ) {
 			continue;
 		}
 
@@ -70,6 +68,7 @@ function timeline_get_affected_issues( $p_start_time, $p_end_time ) {
 
 /**
  * Get an array of timeline events
+ * Events for which the skip() method returns true will be excluded
  * @param integer $p_start_time Timestamp representing start time of the period.
  * @param integer $p_end_time   Timestamp representing end time of the period.
  * @return array
@@ -80,7 +79,7 @@ function timeline_events( $p_start_time, $p_end_time ) {
 	$t_timeline_events = array();
 
 	foreach ( $t_issue_ids as $t_issue_id ) {
-		$t_history_events_array = history_get_raw_events_array( $t_issue_id );
+		$t_history_events_array = history_get_raw_events_array( $t_issue_id, null, $p_start_time, $p_end_time );
 		$t_history_events_array = array_reverse( $t_history_events_array );
 
 		foreach ( $t_history_events_array as $t_history_event ) {
@@ -129,7 +128,8 @@ function timeline_events( $p_start_time, $p_end_time ) {
 					break;
 			}
 
-			if( $t_event != null ) {
+			# Do not include skipped events
+			if( $t_event != null && !$t_event->skip() ) {
 				$t_timeline_events[] = $t_event;
 			}
 		}
@@ -164,37 +164,25 @@ function timeline_sort_events( array $p_events ) {
 }
 
 /**
- * Truncate an array of events.
- * @param array   $p_events    Array of events to truncate.
- * @param integer $p_max_count Maximum number of entries to return.
- * @return array
+ * Print for display an array of events
+ * @param array $p_events   Array of events to display
+ * @param int   $p_max_num  Maximum number of events to display, 0 = all
+ * @return int  Number of displayed events
  */
-function timeline_filter_events( array $p_events, $p_max_count ) {
-	$t_events = array();
+function timeline_print_events( array $p_events, $p_max_num = 0 ) {
+	if( empty( $p_events ) ) {
+		echo '<p>' . lang_get( 'timeline_no_activity' ) . '</p>';
+		return 0;
+	}
 
-	foreach ( $p_events as $t_event ) {
-		if( $t_event->skip() ) {
-			continue;
-		}
-
-		$t_events[] = $t_event;
-
-		if( $p_max_count > 0 && count( $t_events ) >= $p_max_count ) {
+	$i = 0;
+	foreach( $p_events as $t_event ) {
+		# Stop displaying events if we're reached the maximum
+		if( $p_max_num && $i++ >= $p_max_num ) {
 			break;
 		}
-	}
-
-	return $t_events;
-}
-
-/**
- * Print for display an array of events
- * @param array $p_events Array of events to display.
- * @return void
- */
-function timeline_print_events( array $p_events ) {
-	foreach ( $p_events as $t_event ) {
 		echo $t_event->html();
 	}
+	return min( $p_max_num, $i);
 }
 

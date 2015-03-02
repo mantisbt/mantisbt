@@ -81,7 +81,7 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
-	if( !access_has_bug_level( VIEWER, $p_issue_id, $t_user_id ) ) {
+	if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $p_issue_id, $t_user_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
@@ -115,7 +115,9 @@ function mc_issue_get( $p_username, $p_password, $p_issue_id ) {
 	$t_issue_data['sponsorship_total'] = $t_bug->sponsorship_total;
 
 	if( !empty( $t_bug->handler_id ) ) {
-		$t_issue_data['handler'] = mci_account_get_array_by_id( $t_bug->handler_id );
+		if( access_has_bug_level( config_get( 'view_handler_threshold', null, null, $t_project_id ), $p_issue_id, $t_user_id ) ) {
+			$t_issue_data['handler'] = mci_account_get_array_by_id( $t_bug->handler_id );
+		}
 	}
 
 	$t_issue_data['projection'] = mci_enum_get_array_by_id( $t_bug->projection, 'projection', $t_lang );
@@ -166,7 +168,7 @@ function mc_issue_get_history( $p_username, $p_password, $p_issue_id ) {
 	}
 	$g_project_override = $t_project_id;
 
-	if( !access_has_bug_level( VIEWER, $p_issue_id, $t_user_id ) ) {
+	if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $p_issue_id, $t_user_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id );
 	}
 
@@ -225,12 +227,26 @@ function mci_issue_set_custom_fields( $p_issue_id, array &$p_custom_fields = nul
 		foreach( $p_custom_fields as $t_custom_field ) {
 
 			$t_custom_field = SoapObjectsFactory::unwrapObject( $t_custom_field );
+			# Verify validity of custom field specification
+			$t_msg = 'Invalid Custom field specification';
+			$t_valid_cf = isset( $t_custom_field['field'] ) && isset( $t_custom_field['value'] );
+			if( $t_valid_cf ) {
+				$t_field = get_object_vars( $t_custom_field['field'] );
+				if( ( !isset( $t_field['id'] ) || $t_field['id'] == 0 ) && !isset( $t_field['name'] ) ) {
+					$t_valid_cf = false;
+					$t_msg .= ", either 'name' or 'id' != 0 or must be given.";
+				}
+			}
+
+			if( !$t_valid_cf ) {
+				return SoapObjectsFactory::newSoapFault( 'Client', $t_msg );
+			}
 
 			# get custom field id from object ref
 			$t_custom_field_id = mci_get_custom_field_id_from_objectref( $t_custom_field['field'] );
 
 			if( $t_custom_field_id == 0 ) {
-				return SoapObjectsFactory::newSoapFault( 'Client', 'Custom field ' . $t_custom_field['field']['name'] . ' not found.' );
+				return SoapObjectsFactory::newSoapFault( 'Client', "Custom field '" . $t_field['name'] . "' not found." );
 			}
 
 			# skip if current user doesn't have login access.
@@ -563,11 +579,9 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 		return mci_soap_fault_login_failed();
 	}
 
-	$t_bug_table = db_get_table( 'bug' );
+	$t_query = 'SELECT id FROM {bug} WHERE summary = ' . db_param();
 
-	$t_query = 'SELECT id FROM ' . $t_bug_table . ' WHERE summary = ' . db_param();
-
-	$t_result = db_query_bound( $t_query, array( $p_summary ), 1 );
+	$t_result = db_query( $t_query, array( $p_summary ), 1 );
 
 	if( db_num_rows( $t_result ) == 0 ) {
 		return 0;
@@ -578,7 +592,7 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 			$g_project_override = $t_project_id;
 
 			if( mci_has_readonly_access( $t_user_id, $t_project_id ) &&
-				access_has_bug_level( VIEWER, $t_issue_id, $t_user_id ) ) {
+				access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $t_issue_id, $t_user_id ) ) {
 				return $t_issue_id;
 			}
 		}
@@ -586,6 +600,39 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
 		# no issue found that belongs to a project that the user has read access to.
 		return 0;
 	}
+}
+
+/**
+ * Does the actual checks when setting the issue handler.
+ * The user existence check is always done even if handler doesn't change.
+ * The handler's access level check is done even if handler doesn't change.
+ * The current user ability to assign issue access check is only done on change.
+ * This behavior would be consistent with the web UI.
+ *
+ * @param $p_user_id        The id of the logged in user.
+ * @param $p_project_id     The id of the project the issue is associated with.
+ * @param $p_old_handler_id The old handler id.
+ * @param $p_new_handler_id The new handler id.  0 for not assigned.
+ * @return true: access ok, otherwise: soap fault.
+ */
+function mci_issue_handler_access_check( $p_user_id, $p_project_id, $p_old_handler_id, $p_new_handler_id ) {
+	if( $p_new_handler_id != 0 ) {
+		if ( !user_exists( $p_new_handler_id ) ) {
+			return SoapObjectsFactory::newSoapFault( 'Client', 'User \'' . $p_new_handler_id . '\' does not exist.' );
+		}
+
+		if( !access_has_project_level( config_get( 'handle_bug_threshold' ), $p_project_id, $p_new_handler_id ) ) {
+			return mci_soap_fault_access_denied( 'User \'' . $p_new_handler_id . '\' does not have access right to handle issues' );
+		}
+	}
+
+	if( $p_old_handler_id != $p_new_handler_id ) {
+		if( !access_has_project_level( config_get( 'update_bug_assign_threshold' ), $p_project_id, $p_user_id ) ) {
+			return mci_soap_fault_access_denied( 'User \'' . $p_user_id . '\' does not have access right to assign issues' );
+		}
+	}
+
+	return true;
 }
 
 /**
@@ -623,14 +670,14 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 	$t_projection_id = isset( $p_issue['projection'] ) ? mci_get_projection_id( $p_issue['projection'] ) : config_get( 'default_bug_resolution' );
 	$t_eta_id = isset( $p_issue['eta'] ) ? mci_get_eta_id( $p_issue['eta'] ) : config_get( 'default_bug_eta' );
 	$t_view_state_id = isset( $p_issue['view_state'] ) ?  mci_get_view_state_id( $p_issue['view_state'] ) : config_get( 'default_bug_view_status' );
-	$t_reporter_id = isset( $p_issue['reporter'] ) ? mci_get_user_id( $p_issue['reporter'] )  : 0;
 	$t_summary = $p_issue['summary'];
 	$t_description = $p_issue['description'];
 	$t_notes = isset( $p_issue['notes'] ) ? $p_issue['notes'] : array();
 
-	if( $t_reporter_id == 0 ) {
-		$t_reporter_id = $t_user_id;
-	} else {
+	# TODO: #17777: Add test case for mc_issue_add() and mc_issue_note_add() reporter override
+	if( isset( $p_issue['reporter'] ) ) {
+		$t_reporter_id = mci_get_user_id( $p_issue['reporter'] );
+
 		if( $t_reporter_id != $t_user_id ) {
 			# Make sure that active user has access level required to specify a different reporter.
 			$t_specify_reporter_access_level = config_get( 'webservice_specify_reporter_on_add_access_level_threshold' );
@@ -638,11 +685,13 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 				return mci_soap_fault_access_denied( $t_user_id, 'Active user does not have access level required to specify a different issue reporter' );
 			}
 		}
+	} else {
+		$t_reporter_id = $t_user_id;
 	}
 
 	if( ( $t_project_id == 0 ) || !project_exists( $t_project_id ) ) {
 		if( $t_project_id == 0 ) {
-			return SoapObjectsFactory::newSoapFault( 'Client', "Project '" . $t_project['name'] . "' does not exist." );
+			return SoapObjectsFactory::newSoapFault( 'Client', "Project '" . $t_project->name . "' does not exist." );
 		} else {
 			return SoapObjectsFactory::newSoapFault( 'Client', "Project with id '" . $t_project_id . "' does not exist." );
 		}
@@ -652,13 +701,9 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 		return mci_soap_fault_access_denied( 'User \'' . $t_user_id . '\' does not have access right to report issues' );
 	}
 
-	#if( !access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id ) ||
-	#	!access_has_project_level( config_get( 'report_bug_threshold' ), $t_project_id, $v_reporter ) ) {
-	#	return SoapObjectsFactory::newSoapFault( 'Client', '', "User does not have access right to report issues." );
-	#}
-
-	if( ( $t_handler_id != 0 ) && !user_exists( $t_handler_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', 'User \'' . $t_handler_id . '\' does not exist.' );
+	$t_access_check_result = mci_issue_handler_access_check( $t_user_id, $t_project_id, /* old */ 0, /* new */ $t_handler_id );
+	if( $t_access_check_result !== true ) {
+		return $t_access_check_result;
 	}
 
 	$t_category = isset( $p_issue['category'] ) ? $p_issue['category'] : null;
@@ -852,10 +897,6 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 		return mci_soap_fault_access_denied( $t_user_id, 'Not enough rights to update issues' );
 	}
 
-	if( ( $t_handler_id != 0 ) && !user_exists( $t_handler_id ) ) {
-		return SoapObjectsFactory::newSoapFault( 'Client', 'User \'' . $t_handler_id . '\' does not exist.' );
-	}
-
 	$t_category = isset( $p_issue['category'] ) ? $p_issue['category'] : null;
 
 	$t_category_id = translate_category_name_to_id( $t_category, $t_project_id );
@@ -891,7 +932,14 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 	$t_bug_data = bug_get( $p_issue_id, true );
 	$t_bug_data->project_id = $t_project_id;
 	$t_bug_data->reporter_id = $t_reporter_id;
+
+	$t_access_check_result = mci_issue_handler_access_check( $t_user_id, $t_project_id, /* old */ $t_bug_data->handler_id, /* new */ $t_handler_id );
+	if( $t_access_check_result !== true ) {
+		return $t_access_check_result;
+	}
+
 	$t_bug_data->handler_id = $t_handler_id;
+
 	$t_bug_data->category_id = $t_category_id;
 	$t_bug_data->summary = $t_summary;
 	$t_bug_data->description = $t_description;
@@ -1030,6 +1078,10 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 				bugnote_add( $p_issue_id, $t_note['text'], mci_get_time_tracking_from_note( $p_issue_id, $t_note ), $t_view_state_id == VS_PRIVATE, $t_note_type, $t_note_attr, $t_user_id, false );
 			}
 		}
+
+		# The issue has been cached earlier in the bug_get() call.  Flush the cache since it is
+		# now stale.  Otherwise, the email notification will be based on the cached data.
+		bugnote_clear_cache( $p_issue_id );
 	}
 
 	if( isset( $p_issue['tags'] ) && is_array( $p_issue['tags'] ) ) {
@@ -1167,13 +1219,28 @@ function mc_issue_note_add( $p_username, $p_password, $p_issue_id, stdClass $p_n
 		);
 	}
 
+	# TODO: #17777: Add test case for mc_issue_add() and mc_issue_note_add() reporter override
+	if( isset( $p_note['reporter'] ) ) {
+		$t_reporter_id = mci_get_user_id( $p_note['reporter'] );
+
+		if( $t_reporter_id != $t_user_id ) {
+			# Make sure that active user has access level required to specify a different reporter.
+			$t_specify_reporter_access_level = config_get( 'webservice_specify_reporter_on_add_access_level_threshold' );
+			if( !access_has_project_level( $t_specify_reporter_access_level, $t_project_id, $t_user_id ) ) {
+				return mci_soap_fault_access_denied( $t_user_id, "Active user does not have access level required to specify a different issue note reporter" );
+			}
+		}
+	} else {
+		$t_reporter_id = $t_user_id;
+	}
+
 	$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
 
 	$t_note_type = isset( $p_note['note_type'] ) ? (int)$p_note['note_type'] : BUGNOTE;
 	$t_note_attr = isset( $p_note['note_type'] ) ? $p_note['note_attr'] : '';
 
 	log_event( LOG_WEBSERVICE, 'adding bugnote to issue \'' . $p_issue_id . '\'' );
-	return bugnote_add( $p_issue_id, $p_note['text'], mci_get_time_tracking_from_note( $p_issue_id, $p_note ), $t_view_state_id == VS_PRIVATE, $t_note_type, $t_note_attr, $t_user_id );
+	return bugnote_add( $p_issue_id, $p_note['text'], mci_get_time_tracking_from_note( $p_issue_id, $p_note ), $t_view_state_id == VS_PRIVATE, $t_note_type, $t_note_attr, $t_reporter_id );
 }
 
 /**
@@ -1352,7 +1419,7 @@ function mc_issue_relationship_add( $p_username, $p_password, $p_issue_id, stdCl
 	}
 
 	# user can access to the related bug at least as viewer...
-	if( !access_has_bug_level( VIEWER, $t_dest_issue_id, $t_user_id ) ) {
+	if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $t_dest_issue_id, $t_user_id ) ) {
 		return mci_soap_fault_access_denied( $t_user_id, 'The issue \'' . $t_dest_issue_id . '\' requires higher access level' );
 	}
 
@@ -1423,7 +1490,7 @@ function mc_issue_relationship_delete( $p_username, $p_password, $p_issue_id, $p
 
 	# user can access to the related bug at least as viewer, if it's exist...
 	if( bug_exists( $t_dest_issue_id ) ) {
-		if( !access_has_bug_level( VIEWER, $t_dest_issue_id, $t_user_id ) ) {
+		if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $t_dest_issue_id, $t_user_id ) ) {
 			return mci_soap_fault_access_denied( $t_user_id, 'The issue \'' . $t_dest_issue_id . '\' requires higher access level.' );
 		}
 	}
@@ -1585,4 +1652,98 @@ function mci_issue_data_as_header_array( BugData $p_issue_data ) {
 		$t_issue['notes_count'] = count( mci_issue_get_notes( $p_issue_data->id ) );
 
 		return $t_issue;
+}
+
+/**
+ * Check if the bug exists and the user has a access right to read it.
+ *
+ * @param integer   $p_user_id         The user id.
+ * @param integer   $p_bug_id          The bug id.
+ * @return true if the user has access rights and the bug exists, otherwise return false
+ */
+function mci_check_access_to_bug( $p_user_id, $p_bug_id ) {
+
+    if( !bug_exists( $p_bug_id ) ) {
+        return false;
+    }
+
+    $t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+    $g_project_override = $t_project_id;
+    if( !mci_has_readonly_access( $p_user_id, $t_project_id ) ) {
+        return false;
+    }
+
+    if( !access_has_bug_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $p_bug_id, $p_user_id ) ) {
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * Get all issues matching the ids.
+ *
+ * @param string                $p_username         The name of the user trying to access the filters.
+ * @param string                $p_password         The password of the user.
+ * @param IntegerArray          $p_issue_ids        Number of issues to display per page.
+ * @return array that represents an IssueDataArray structure
+ */
+function mc_issues_get( $p_username, $p_password, $p_issue_ids ) {
+
+    global $g_project_override;
+
+    $t_user_id = mci_check_login( $p_username, $p_password );
+    if( $t_user_id === false ) {
+        return mci_soap_fault_login_failed();
+    }
+
+    $t_lang = mci_get_user_lang( $t_user_id );
+
+    $t_result = array();
+    foreach( $p_issue_ids as $t_id ) {
+
+        if( mci_check_access_to_bug( $t_user_id, $t_id ) === false )
+            continue;
+
+        log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $t_id . '\'' );
+
+        $t_issue_data = bug_get( $t_id, true );
+        $t_result[] = mci_issue_data_as_array( $t_issue_data, $t_user_id, $t_lang );
+    }
+
+    return $t_result;
+}
+
+/**
+ * Get all issues header matching the ids.
+ *
+ * @param string                $p_username         The name of the user trying to access the filters.
+ * @param string                $p_password         The password of the user.
+ * @param IntegerArray          $p_issue_ids        Number of issues to display per page.
+ * @return array that represents an IssueHeaderDataArray structure
+ */
+function mc_issues_get_header( $p_username, $p_password, $p_issue_ids ) {
+
+    global $g_project_override;
+
+    $t_user_id = mci_check_login( $p_username, $p_password );
+    if( $t_user_id === false ) {
+        return mci_soap_fault_login_failed();
+    }
+
+    $t_lang = mci_get_user_lang( $t_user_id );
+
+    $t_result = array();
+    foreach( $p_issue_ids as $t_id ) {
+
+        if( mci_check_access_to_bug( $t_user_id, $t_id ) === false )
+            continue;
+
+        log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $t_id . '\'' );
+
+        $t_issue_data = bug_get( $t_id, true );
+        $t_result[] = mci_issue_data_as_header_array( $t_issue_data, $t_user_id, $t_lang );
+    }
+
+    return $t_result;
 }

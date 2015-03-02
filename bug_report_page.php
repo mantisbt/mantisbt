@@ -230,105 +230,92 @@ if( $t_show_attachments ) {
 	$t_form_encoding = 'enctype="multipart/form-data"';
 }
 ?>
-<br />
-<form name="report_bug_form" method="post" <?php echo $t_form_encoding; ?> action="bug_report.php">
-<?php echo form_security_field( 'bug_report' ) ?>
-<div class="table-container">
-<table cellspacing="1">
-	<tr>
-		<td class="form-title" colspan="2">
+<div id="report-bug-div" class="form-container">
+	<form id="report-bug-form" method="post" <?php echo $t_form_encoding; ?> action="bug_report.php?posted=1">
+		<fieldset class="has-required">
+			<legend><span><?php echo lang_get( 'enter_report_details_title' ) ?></span></legend>
+			<?php echo form_security_field( 'bug_report' ) ?>
 			<input type="hidden" name="m_id" value="<?php echo $f_master_bug_id ?>" />
 			<input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
-			<?php echo lang_get( 'enter_report_details_title' ) ?>
-		</td>
-	</tr>
-<?php
-	event_signal( 'EVENT_REPORT_BUG_FORM_TOP', array( $t_project_id ) );
 
-	if( $t_show_category ) {
-?>
-	<tr>
-		<th class="category" width="30%">
 			<?php
-			echo config_get( 'allow_no_category' ) ? '' : '<span class="required">*</span>';
-			echo '<label for="category_id">';
-			print_documentation_link( 'category' );
-			echo '</label>';
+			event_signal( 'EVENT_REPORT_BUG_FORM_TOP', array( $t_project_id ) );
+
+			if( $t_show_category ) {
 			?>
-		</th>
-		<td width="70%">
-			<?php if( $t_changed_project ) {
-				echo '[' . project_get_field( $t_bug->project_id, 'name' ) . '] ';
-			} ?>
-			<select <?php echo helper_get_tab_index() ?> id="category_id" name="category_id" class="autofocus">
-				<?php
+			<div class="field-container">
+				<label><span><?php
+					echo config_get( 'allow_no_category' ) ? '' : '<span class="required">*</span>';
+					print_documentation_link( 'category' );
+				?></span></label>
+				<span class="select">
+					<?php if( $t_changed_project ) {
+						echo '[' . project_get_field( $t_bug->project_id, 'name' ) . '] ';
+					} ?>
+						<select <?php echo helper_get_tab_index() ?> id="category_id" name="category_id" class="autofocus">
+					<?php
 					print_category_option_list( $f_category_id );
-				?>
-			</select>
-		</td>
-	</tr>
+					?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</div>
 <?php }
 
 	if( $t_show_reproducibility ) {
 ?>
-
-	<tr>
-		<th class="category">
-			<label for="reproducibility"><?php print_documentation_link( 'reproducibility' ) ?></label>
-		</th>
-		<td>
-			<select <?php echo helper_get_tab_index() ?> id="reproducibility" name="reproducibility">
-				<?php print_enum_string_option_list( 'reproducibility', $f_reproducibility ) ?>
-			</select>
-		</td>
-	</tr>
+			<div class="field-container">
+				<label><span><?php print_documentation_link( 'reproducibility' ) ?></span></label>
+				<span class="input">
+					<select <?php echo helper_get_tab_index() ?> id="reproducibility" name="reproducibility">
+						<?php print_enum_string_option_list( 'reproducibility', $f_reproducibility ) ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</div>
 <?php
 	}
 
 	if( $t_show_eta ) {
 ?>
-
-	<tr>
-		<th class="category">
-			<label for="eta"><?php print_documentation_link( 'eta' ) ?></label>
-		</th>
-		<td>
-			<select <?php echo helper_get_tab_index() ?> id="eta" name="eta">
-				<?php print_enum_string_option_list( 'eta', $f_eta ) ?>
-			</select>
-		</td>
-	</tr>
+			<div class="field-container">
+				<label><span><?php print_documentation_link( 'eta' ) ?></span></label>
+				<span class="input">
+					<select <?php echo helper_get_tab_index() ?> id="eta" name="eta">
+						<?php print_enum_string_option_list( 'eta', $f_eta ) ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</div>
 <?php
 	}
 
 	if( $t_show_severity ) {
 ?>
-	<tr>
-		<th class="category">
-			<label for="severity"><?php print_documentation_link( 'severity' ) ?></label>
-		</th>
-		<td>
-			<select <?php echo helper_get_tab_index() ?> id="severity" name="severity">
-				<?php print_enum_string_option_list( 'severity', $f_severity ) ?>
-			</select>
-		</td>
-	</tr>
+			<div class="field-container">
+				<label><span><?php print_documentation_link( 'severity' ) ?></span></label>
+				<span class="input">
+					<select <?php echo helper_get_tab_index() ?> id="severity" name="severity">
+						<?php print_enum_string_option_list( 'severity', $f_severity ) ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</div>
 <?php
 	}
 
 	if( $t_show_priority ) {
 ?>
-	<tr>
-		<th class="category">
-			<label for="priority"><?php print_documentation_link( 'priority' ) ?></label>
-		</th>
-		<td>
-			<select <?php echo helper_get_tab_index() ?> id="priority" name="priority">
-				<?php print_enum_string_option_list( 'priority', $f_priority ) ?>
-			</select>
-		</td>
-	</tr>
-<?php
+			<div class="field-container">
+				<label><span><?php print_documentation_link( 'priority' ) ?></span></label>
+				<span class="input">
+					<select <?php echo helper_get_tab_index() ?> id="priority" name="priority">
+						<?php print_enum_string_option_list( 'priority', $f_priority ) ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</div>
+	<?php
 	}
 
 	if( $t_show_due_date ) {
@@ -338,97 +325,83 @@ if( $t_show_attachments ) {
 			$t_date_to_display = date( config_get( 'calendar_date_format' ), $f_due_date );
 		}
 ?>
-	<tr>
-		<th class="category">
-			<label for="due_date"><?php print_documentation_link( 'due_date' ) ?></label>
-		</th>
-		<td>
-			<?php echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetime" size="20" maxlength="16" value="' . $t_date_to_display . '" />' ?>
-		</td>
-	</tr>
-<?php } ?>
-<?php if( $t_show_platform || $t_show_os || $t_show_os_version ) { ?>
-	<tr>
-		<th class="category">
-			<label for="profile_id"><?php echo lang_get( 'select_profile' ) ?></label>
-		</th>
-		<td>
-			<?php if( count( profile_get_all_for_user( auth_get_current_user_id() ) ) > 0 ) { ?>
-				<select <?php echo helper_get_tab_index() ?> id="profile_id" name="profile_id">
-					<?php print_profile_option_list( auth_get_current_user_id(), $f_profile_id ) ?>
-				</select>
-			<?php } ?>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2" class="none">
-			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
-				<?php collapse_open( 'profile' ); collapse_icon( 'profile' ); ?>
-				<?php echo lang_get( 'or_fill_in' ); ?>
-			<table class="width100" cellspacing="0">
-					<?php } else { ?>
-						<?php echo lang_get( 'or_fill_in' ); ?>
-					<?php } ?>
-					<tr>
-						<th class="category">
-							<label for="platform"><?php echo lang_get( 'platform' ) ?></label>
-						</th>
-						<td>
-							<?php if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) { ?>
-							<select id="platform" name="platform">
-								<option value=""></option>
-								<?php print_platform_option_list( $f_platform ); ?>
-							</select>
-							<?php
-								} else {
-									echo '<input type="text" id="platform" name="platform" class="autocomplete" size="32" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_platform ) . '" />';
-								}
-							?>
-						</td>
-					</tr>
-					<tr>
-						<th class="category">
-							<label for="os"><?php echo lang_get( 'os' ) ?></label>
-						</th>
-						<td>
-							<?php if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) { ?>
-							<select id="os" name="os">
-								<option value=""></option>
-								<?php print_os_option_list( $f_os ); ?>
-							</select>
-							<?php
-								} else {
-									echo '<input type="text" id="os" name="os" class="autocomplete" size="32" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_os ) . '" />';
-								}
-							?>
-						</td>
-					</tr>
-					<tr>
-						<th class="category">
-							<label for="os_build"><?php echo lang_get( 'os_version' ) ?></label>
-						</th>
-						<td>
-							<?php
-								if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) {
-							?>
-							<select id="os_build" name="os_build">
-								<option value=""></option>
-									<?php print_os_build_option_list( $f_os_build ); ?>
-								</select>
-							<?php
-								} else {
-									echo '<input type="text" id="os_build" name="os_build" class="autocomplete" size="16" maxlength="16" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_os_build ) . '" />';
-								}
-							?>
-						</td>
-					</tr>
-			<?php if( ON == config_get( 'use_javascript' ) ) { ?>
-			</table>
-			<?php collapse_closed( 'profile' ); collapse_icon( 'profile' ); echo lang_get( 'or_fill_in' );?>
-			<?php collapse_end( 'profile' ); ?>
+			<div class="field-container">
+				<label><span><?php print_documentation_link( 'due_date' ) ?></span></label>
+				<span class="input">
+					<?php echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetime" size="20" maxlength="16" value="' . $t_date_to_display . '" />' ?>
+				</span>
+				<span class="label-style"></span>
+			</div>
 		<?php } ?>
-		</td>
-	</tr>
+		<?php if( $t_show_platform || $t_show_os || $t_show_os_version ) { ?>
+			<div class="field-container">
+				<label><span><?php echo lang_get( 'select_profile' ) ?></span></label>
+				<span class="select">
+					<?php if( count( profile_get_all_for_user( auth_get_current_user_id() ) ) > 0 ) { ?>
+						<select <?php echo helper_get_tab_index() ?> id="profile_id" name="profile_id">
+							<?php print_profile_option_list( auth_get_current_user_id(), $f_profile_id ) ?>
+						</select>
+					<?php } ?>
+
+					<?php collapse_icon( 'profile' ); ?>
+					<?php echo lang_get( 'or_fill_in' ); ?>
+				</span>
+				<span class="label-style"></span>
+			</div>
+
+			<?php collapse_open( 'profile' ); ?>
+				<div class="field-container">
+					<label><span><?php echo lang_get( 'platform' ) ?></span></label>
+					<span class="input">
+						<?php if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) { ?>
+						<select id="platform" name="platform">
+							<option value=""></option>
+							<?php print_platform_option_list( $f_platform ); ?>
+						</select>
+						<?php
+							} else {
+								echo '<input type="text" id="platform" name="platform" class="autocomplete" size="32" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_platform ) . '" />';
+							}
+						?>
+					</span>
+					<span class="label-style"></span>
+				</div>
+				<div class="field-container">
+					<label><span><?php echo lang_get( 'os' ) ?></span></label>
+					<span class="input">
+						<?php if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) { ?>
+						<select id="os" name="os">
+							<option value=""></option>
+							<?php print_os_option_list( $f_os ); ?>
+						</select>
+						<?php
+							} else {
+								echo '<input type="text" id="os" name="os" class="autocomplete" size="32" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_os ) . '" />';
+							}
+						?>
+					</span>
+					<span class="label-style"></span>
+				</div>
+				<div class="field-container">
+					<label><span><?php echo lang_get( 'os_version' ) ?></span></label>
+					<span class="input">
+						<?php
+						if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) {
+					?>
+					<select id="os_build" name="os_build">
+						<option value=""></option>
+							<?php print_os_build_option_list( $f_os_build ); ?>
+						</select>
+					<?php
+						} else {
+							echo '<input type="text" id="os_build" name="os_build" class="autocomplete" size="16" maxlength="16" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_os_build ) . '" />';
+						}
+					?>
+					</span>
+					<span class="label-style"></span>
+				</div>
+			<?php collapse_closed( 'profile' );?>
+			<?php collapse_end( 'profile' ); ?>
 <?php } ?>
 <?php
 	if( $t_show_product_version ) {
@@ -438,135 +411,127 @@ if( $t_show_attachments ) {
 			$t_product_version_released_mask = VERSION_ALL;
 		}
 ?>
-	<tr>
-		<th class="category">
-			<label for="product_version"><?php echo lang_get( 'product_version' ) ?></label>
-		</th>
-		<td>
-			<select <?php echo helper_get_tab_index() ?> id="product_version" name="product_version">
-				<?php print_version_option_list( $f_product_version, $t_project_id, $t_product_version_released_mask ) ?>
-			</select>
-		</td>
-	</tr>
+			<div class="field-container">
+				<label><span><?php echo lang_get( 'product_version' ) ?></span></label>
+				<span class="select">
+					<select <?php echo helper_get_tab_index() ?> id="product_version" name="product_version">
+						<?php print_version_option_list( $f_product_version, $t_project_id, $t_product_version_released_mask ) ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</div>
 <?php
 	}
 ?>
 <?php if( $t_show_product_build ) { ?>
-	<tr>
-		<th class="category">
-			<label for="build"><?php echo lang_get( 'product_build' ) ?></label>
-		</th>
-		<td>
-			<input <?php echo helper_get_tab_index() ?> type="text" id="build" name="build" size="32" maxlength="32" value="<?php echo string_attribute( $f_build ) ?>" />
-		</td>
-	</tr>
+			<div class="field-container">
+				<label><span><?php echo lang_get( 'product_build' ) ?></span></label>
+				<span class="input">
+					<input <?php echo helper_get_tab_index() ?> type="text" id="build" name="build" size="32" maxlength="32" value="<?php echo string_attribute( $f_build ) ?>" />
+				</span>
+				<span class="label-style"></span>
+			</div>
 <?php } ?>
 
 <?php if( $t_show_handler ) { ?>
-	<tr>
-		<th class="category">
-			<label for="handler_id"><?php echo lang_get( 'assign_to' ) ?></label>
-		</th>
-		<td>
-			<select <?php echo helper_get_tab_index() ?> id="handler_id" name="handler_id">
-				<option value="0" selected="selected"></option>
-				<?php print_assign_to_option_list( $f_handler_id ) ?>
-			</select>
-		</td>
-	</tr>
+			<div class="field-container">
+				<label><span><?php echo lang_get( 'assign_to' ) ?></span></label>
+				<span class="select">
+					<select <?php echo helper_get_tab_index() ?> id="handler_id" name="handler_id">
+						<option value="0" selected="selected"></option>
+						<?php print_assign_to_option_list( $f_handler_id ) ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</div>
 <?php } ?>
 
 <?php if( $t_show_status ) { ?>
-	<tr>
-		<th class="category">
-			<label for="status"><?php echo lang_get( 'status' ) ?></label>
-		</th>
-		<td>
-			<select <?php echo helper_get_tab_index() ?> name="status">
-			<?php
-			$t_resolution_options = get_status_option_list(
-				access_get_project_level( $t_project_id ),
-				config_get( 'bug_submit_status' ),
-				true,
-				ON == config_get( 'allow_reporter_close' ),
-				$t_project_id );
-			foreach ( $t_resolution_options as $t_key => $t_value ) {
-			?>
-				<option value="<?php echo $t_key ?>" <?php check_selected( $t_key, config_get( 'bug_submit_status' ) ); ?> >
-					<?php echo $t_value ?>
-				</option>
-			<?php } ?>
-			</select>
-		</td>
-	</tr>
+			<div class="field-container">
+				<label><span><?php echo lang_get( 'status' ) ?></span></label>
+				<span class="select">
+					<select <?php echo helper_get_tab_index() ?> name="status">
+					<?php
+					$t_resolution_options = get_status_option_list(
+						access_get_project_level( $t_project_id ),
+						config_get( 'bug_submit_status' ),
+						true,
+						ON == config_get( 'allow_reporter_close' ),
+						$t_project_id );
+					foreach ( $t_resolution_options as $t_key => $t_value ) {
+					?>
+						<option value="<?php echo $t_key ?>" <?php check_selected( $t_key, config_get( 'bug_submit_status' ) ); ?> >
+							<?php echo $t_value ?>
+						</option>
+					<?php } ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</div>
 <?php } ?>
 
 <?php if( $t_show_resolution ) { ?>
-	<tr>
-		<th class="category">
-			<label for="resolution"><?php echo lang_get( 'resolution' ) ?></label>
-		</th>
-		<td>
-			<select <?php echo helper_get_tab_index() ?> name="resolution">
-				<?php
-				print_enum_string_option_list( 'resolution', config_get( 'default_bug_resolution' ) );
-				?>
-			</select>
-		</td>
-	</tr>
+			<div class="field-container">
+				<label><span><?php echo lang_get( 'resolution' ) ?></span></label>
+				<span class="select">
+					<select <?php echo helper_get_tab_index() ?> name="resolution">
+						<?php
+						print_enum_string_option_list( 'resolution', config_get( 'default_bug_resolution' ) );
+						?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</div>
 <?php } ?>
 
 <?php # Target Version (if permissions allow)
 	if( $t_show_target_version ) { ?>
-	<tr>
-		<th class="category">
-			<label for="target_version"><?php echo lang_get( 'target_version' ) ?></label>
-		</th>
-		<td>
-			<select <?php echo helper_get_tab_index() ?> id="target_version" name="target_version">
-				<?php print_version_option_list( '', null, VERSION_FUTURE ) ?>
-			</select>
-		</td>
-	</tr>
+			<div class="field-container">
+				<label><span><?php echo lang_get( 'target_version' ) ?></span></label>
+				<span class="select">
+					<select <?php echo helper_get_tab_index() ?> id="target_version" name="target_version">
+						<?php print_version_option_list( '', null, VERSION_FUTURE ) ?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</div>
 <?php } ?>
 <?php event_signal( 'EVENT_REPORT_BUG_FORM', array( $t_project_id ) ) ?>
-	<tr>
-		<th class="category">
-			<span class="required">*</span><label for="summary"><?php print_documentation_link( 'summary' ) ?></label>
-		</th>
-		<td>
-			<input <?php echo helper_get_tab_index() ?> type="text" id="summary" name="summary" size="105" maxlength="128" value="<?php echo string_attribute( $f_summary ) ?>" />
-		</td>
-	</tr>
-	<tr>
-		<th class="category">
-			<span class="required">*</span><label for="description"><?php print_documentation_link( 'description' ) ?></label>
-		</th>
-		<td>
-			<textarea <?php echo helper_get_tab_index() ?> id="description" name="description" cols="80" rows="10"><?php echo string_textarea( $f_description ) ?></textarea>
-		</td>
-	</tr>
+
+			<div class="field-container">
+				<label><span class="required">*</span><span><?php print_documentation_link( 'summary' ) ?></span></label>
+				<span class="input">
+					<input <?php echo helper_get_tab_index() ?> type="text" id="summary" name="summary" size="105" maxlength="128" value="<?php echo string_attribute( $f_summary ) ?>" />
+				</span>
+				<span class="label-style"></span>
+			</div>
+
+			<div class="field-container">
+				<label><span><span class="required">*</span><?php print_documentation_link( 'description' ) ?></span></label>
+				<span class="textarea">
+					<textarea <?php echo helper_get_tab_index() ?> id="description" name="description" cols="80" rows="10"><?php echo string_textarea( $f_description ) ?></textarea>
+				</span>
+				<span class="label-style"></span>
+			</div>
 
 <?php if( $t_show_steps_to_reproduce ) { ?>
-		<tr>
-			<th class="category">
-				<label for="steps_to_reproduce"><?php print_documentation_link( 'steps_to_reproduce' ) ?></label>
-			</th>
-			<td>
-				<textarea <?php echo helper_get_tab_index() ?> id="steps_to_reproduce" name="steps_to_reproduce" cols="80" rows="10"><?php echo string_textarea( $f_steps_to_reproduce ) ?></textarea>
-			</td>
-		</tr>
+			<div class="field-container">
+				<label><span><?php print_documentation_link( 'steps_to_reproduce' ) ?></span></label>
+				<span class="textarea">
+					<textarea <?php echo helper_get_tab_index() ?> id="steps_to_reproduce" name="steps_to_reproduce" cols="80" rows="10"><?php echo string_textarea( $f_steps_to_reproduce ) ?></textarea>
+				</span>
+				<span class="label-style"></span>
+			</div>
 <?php } ?>
 
 <?php if( $t_show_additional_info ) { ?>
-	<tr>
-		<th class="category">
-			<label for="additional_info"><?php print_documentation_link( 'additional_information' ) ?></label>
-		</th>
-		<td>
-			<textarea <?php echo helper_get_tab_index() ?> id="additional_info" name="additional_info" cols="80" rows="10"><?php echo string_textarea( $f_additional_info ) ?></textarea>
-		</td>
-	</tr>
+			<div class="field-container">
+				<label><span><?php print_documentation_link( 'additional_information' ) ?></span></label>
+				<span class="textarea">
+					<textarea <?php echo helper_get_tab_index() ?> id="additional_info" name="additional_info" cols="80" rows="10"><?php echo string_textarea( $f_additional_info ) ?></textarea>
+				</span>
+				<span class="label-style"></span>
+			</div>
 <?php
 	}
 
@@ -578,21 +543,24 @@ if( $t_show_attachments ) {
 		if( ( $t_def['display_report'] || $t_def['require_report']) && custom_field_has_write_access_to_project( $t_id, $t_project_id ) ) {
 			$t_custom_fields_found = true;
 ?>
-	<tr>
-		<th class="category">
-			<?php if( $t_def['require_report'] ) { ?>
-				<span class="required">*</span>
-			<?php } ?>
-			<?php if( $t_def['type'] != CUSTOM_FIELD_TYPE_RADIO && $t_def['type'] != CUSTOM_FIELD_TYPE_CHECKBOX ) { ?>
-				<label for="custom_field_<?php echo string_attribute( $t_def['id'] ) ?>"><?php echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?></label>
-			<?php } else {
-				echo string_display( lang_get_defaulted( $t_def['name'] ) );
-			} ?>
-		</th>
-		<td>
-			<?php print_custom_field_input( $t_def, ( $f_master_bug_id === 0 ) ? null : $f_master_bug_id ) ?>
-		</td>
-	</tr>
+			<div class="field-container">
+				<label>
+					<span>
+						<?php if( $t_def['require_report'] ) { ?>
+						<span class="required">*</span>
+						<?php } ?>
+						<?php if( $t_def['type'] != CUSTOM_FIELD_TYPE_RADIO && $t_def['type'] != CUSTOM_FIELD_TYPE_CHECKBOX ) { ?>
+							<label for="custom_field_<?php echo string_attribute( $t_def['id'] ) ?>"><?php echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?></label>
+						<?php } else {
+							echo string_display( lang_get_defaulted( $t_def['name'] ) );
+						} ?>
+					</span>
+				</label>
+				<span class="input">
+					<?php print_custom_field_input( $t_def, ( $f_master_bug_id === 0 ) ? null : $f_master_bug_id ) ?>
+				</span>
+				<span class="label-style"></span>
+			</div>
 <?php
 		}
 	} # foreach( $t_related_custom_field_ids as $t_id )
@@ -603,19 +571,19 @@ if( $t_show_attachments ) {
 		$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
 		$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
 ?>
-	<tr>
-		<th class="category">
-			<label for="file"><?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?></label>
-			<br />
-			<?php echo print_max_filesize( $t_max_file_size ); ?>
-		</th>
-		<td>
-			<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
+			<div class="field-container">
+				<label>
+					<span><?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?></span>
+					<br />
+					<?php echo print_max_filesize( $t_max_file_size ); ?>
+				</label>
+				<span class="input">
+					<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
 <?php
 		# Display multiple file upload fields
 		for( $i = 0; $i < $t_file_upload_max_num; $i++ ) {
 ?>
-			<input <?php echo helper_get_tab_index() ?> id="ufile[]" name="ufile[]" type="file" size="60" />
+					<input <?php echo helper_get_tab_index() ?> id="ufile[]" name="ufile[]" type="file" />
 <?php
 			if( $t_file_upload_max_num > 1 ) {
 				echo '<br />';
@@ -623,67 +591,59 @@ if( $t_show_attachments ) {
 		}
 	}
 ?>
-		</td>
-	</tr>
-
+				</span>
+				<span class="label-style"></span>
+			</div>
 <?php
 	if( $t_show_view_state ) {
 ?>
-	<tr>
-		<th class="category">
-			<?php echo lang_get( 'view_status' ) ?>
-		</th>
-		<td>
-			<label><input <?php echo helper_get_tab_index() ?> type="radio" name="view_state" value="<?php echo VS_PUBLIC ?>" <?php check_checked( $f_view_state, VS_PUBLIC ) ?> /> <?php echo lang_get( 'public' ) ?></label>
-			<label><input <?php echo helper_get_tab_index() ?> type="radio" name="view_state" value="<?php echo VS_PRIVATE ?>" <?php check_checked( $f_view_state, VS_PRIVATE ) ?> /> <?php echo lang_get( 'private' ) ?></label>
-		</td>
-	</tr>
+			<div class="field-container">
+				<label><span><?php echo lang_get( 'view_status' ) ?></span></label>
+				<span class="input">
+					<label><input <?php echo helper_get_tab_index() ?> type="radio" name="view_state" value="<?php echo VS_PUBLIC ?>" <?php check_checked( $f_view_state, VS_PUBLIC ) ?> /> <?php echo lang_get( 'public' ) ?></label>
+					<label><input <?php echo helper_get_tab_index() ?> type="radio" name="view_state" value="<?php echo VS_PRIVATE ?>" <?php check_checked( $f_view_state, VS_PRIVATE ) ?> /> <?php echo lang_get( 'private' ) ?></label>
+				</span>
+				<span class="label-style"></span>
+			</div>
 <?php
 	}
 
 	# Relationship (in case of cloned bug creation...)
 	if( $f_master_bug_id > 0 ) {
 ?>
-	<tr>
-		<th class="category">
-			<?php echo lang_get( 'relationship_with_parent' ) ?>
-		</th>
-		<td>
-			<?php relationship_list_box( config_get( 'default_bug_relationship_clone' ), 'rel_type', false, true ) ?>
-			<?php echo '<strong>' . lang_get( 'bug' ) . ' ' . bug_format_id( $f_master_bug_id ) . '</strong>' ?>
-		</td>
-	</tr>
+			<div class="field-container">
+				<label><span><?php echo lang_get( 'relationship_with_parent' ) ?></span></label>
+				<span class="input">
+					<?php relationship_list_box( config_get( 'default_bug_relationship_clone' ), 'rel_type', false, true ) ?>
+					<?php echo '<strong>' . lang_get( 'bug' ) . ' ' . bug_format_id( $f_master_bug_id ) . '</strong>' ?>
+				</span>
+				<span class="label-style"></span>
+			</div>
 
-	<tr>
-		<td class="category">
-			<?php echo lang_get( 'copy_from_parent' ) ?>
-		</td>
-		<td>
-			<label><input <?php echo helper_get_tab_index() ?> type="checkbox" id="copy_notes_from_parent" name="copy_notes_from_parent" <?php check_checked( $f_copy_notes_from_parent ) ?> /> <?php echo lang_get( 'copy_notes_from_parent' ) ?></label>
-			<label><input <?php echo helper_get_tab_index() ?> type="checkbox" id="copy_attachments_from_parent" name="copy_attachments_from_parent" <?php check_checked( $f_copy_attachments_from_parent ) ?> /> <?php echo lang_get( 'copy_attachments_from_parent' ) ?></label>
-		</td>
-	</tr>
+			<div class="field-container">
+				<label><span><?php echo lang_get( 'copy_from_parent' ) ?></span></label>
+				<span class="input">
+					<label><input <?php echo helper_get_tab_index() ?> type="checkbox" id="copy_notes_from_parent" name="copy_notes_from_parent" <?php check_checked( $f_copy_notes_from_parent ) ?> /> <?php echo lang_get( 'copy_notes_from_parent' ) ?></label>
+					<label><input <?php echo helper_get_tab_index() ?> type="checkbox" id="copy_attachments_from_parent" name="copy_attachments_from_parent" <?php check_checked( $f_copy_attachments_from_parent ) ?> /> <?php echo lang_get( 'copy_attachments_from_parent' ) ?></label>
+				</span>
+				<span class="label-style"></span>
+			</div>
 <?php
 	}
 ?>
-	<tr>
-		<th class="category">
-			<?php print_documentation_link( 'report_stay' ) ?>
-		</th>
-		<td>
-			<label><input <?php echo helper_get_tab_index() ?> type="checkbox" id="report_stay" name="report_stay" <?php check_checked( $f_report_stay ) ?> /> <?php echo lang_get( 'check_report_more_bugs' ) ?></label>
-		</td>
-	</tr>
-	<tr>
-		<td class="left">
-			<span class="required"> * <?php echo lang_get( 'required' ) ?></span>
-		</td>
-		<td class="center">
-			<input <?php echo helper_get_tab_index() ?> type="submit" class="button" value="<?php echo lang_get( 'submit_report_button' ) ?>" />
-		</td>
-	</tr>
-</table>
+			<div class="field-container">
+				<label><span><?php print_documentation_link( 'report_stay' ) ?></span></label>
+				<span class="input">
+					<label><input <?php echo helper_get_tab_index() ?> type="checkbox" id="report_stay" name="report_stay" <?php check_checked( $f_report_stay ) ?> /> <?php echo lang_get( 'check_report_more_bugs' ) ?></label>
+				</span>
+				<span class="label-style"></span>
+			</div>
+
+			<span class="submit-button">
+				<input <?php echo helper_get_tab_index() ?> type="submit" class="button" value="<?php echo lang_get( 'submit_report_button' ) ?>" />
+			</span>
+		</fieldset>
+	</form>
 </div>
-</form>
 <?php
 html_page_bottom();

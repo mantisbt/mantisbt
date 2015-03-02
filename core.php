@@ -96,13 +96,11 @@ function require_api( $p_api_name ) {
 	static $s_api_included;
 	global $g_core_path;
 	if( !isset( $s_api_included[$p_api_name] ) ) {
-		$t_existing_globals = get_defined_vars();
 		require_once( $g_core_path . $p_api_name );
-		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_existing_globals' => 0, 't_new_globals' => 0 ) );
+		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_new_globals' => 0 ) );
 		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
-			global $$t_global_name;
+			$GLOBALS[$t_global_name] = $t_global_value;
 		}
-		extract( $t_new_globals );
 		$s_api_included[$p_api_name] = 1;
 	}
 }
@@ -117,8 +115,6 @@ function require_lib( $p_library_name ) {
 	static $s_libraries_included;
 	global $g_library_path;
 	if( !isset( $s_libraries_included[$p_library_name] ) ) {
-		$t_existing_globals = get_defined_vars();
-
 		$t_library_file_path = $g_library_path . $p_library_name;
 		if( !file_exists( $t_library_file_path ) ) {
 			echo 'External library \'' . $t_library_file_path . '\' not found.';
@@ -126,11 +122,10 @@ function require_lib( $p_library_name ) {
 		}
 
 		require_once( $t_library_file_path );
-		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_existing_globals' => 0, 't_new_globals' => 0 ) );
+		$t_new_globals = array_diff_key( get_defined_vars(), $GLOBALS, array( 't_new_globals' => 0 ) );
 		foreach ( $t_new_globals as $t_global_name => $t_global_value ) {
-			global $$t_global_name;
+			$GLOBALS[$t_global_name] = $t_global_value;
 		}
-		extract( $t_new_globals );
 		$s_libraries_included[$p_library_name] = 1;
 	}
 }
@@ -241,33 +236,27 @@ if( !isset( $g_login_anonymous ) ) {
 	$g_login_anonymous = true;
 }
 
-# Attempt to set the current timezone to the user's desired value
-# Note that PHP 5.1 on RHEL/CentOS doesn't support the timezone functions
-# used here so we just skip this action on RHEL/CentOS platforms.
-if( function_exists( 'timezone_identifiers_list' ) ) {
-	if( in_array( config_get_global( 'default_timezone' ), timezone_identifiers_list() ) ) {
-		# if a default timezone is set in config, set it here, else we use php.ini's value
-		# having a timezone set avoids a php warning
-		date_default_timezone_set( config_get_global( 'default_timezone' ) );
-	} else {
-		# To ensure proper detection of timezone settings issues, we must not
-		# initialize the default timezone when executing admin checks
-		if( basename( $g_short_path ) != 'check' ) {
-			config_set_global( 'default_timezone', date_default_timezone_get(), true );
-		}
-	}
-
+# Set the current timezone
+if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 	require_api( 'authentication_api.php' );
-	if( auth_is_user_authenticated() ) {
-		require_api( 'user_pref_api.php' );
 
-		$t_user_timezone = user_pref_get_pref( auth_get_current_user_id(), 'timezone' );
-		if( !is_blank( $t_user_timezone ) ) {
-			date_default_timezone_set( $t_user_timezone );
-		}
+	# To reduce overhead, we assume that the timezone configuration is valid,
+	# i.e. it exists in timezone_identifiers_list(). If not, a PHP NOTICE will
+	# be raised. Use admin checks to validate configuration.
+	@date_default_timezone_set( config_get_global( 'default_timezone' ) );
+	$t_tz = @date_default_timezone_get();
+	config_set_global( 'default_timezone', $t_tz, true );
+
+	if( auth_is_user_authenticated() ) {
+		# Determine the current timezone according to user's preferences
+		require_api( 'user_pref_api.php' );
+		$t_tz = user_pref_get_pref( auth_get_current_user_id(), 'timezone' );
+		@date_default_timezone_set( $t_tz );
 	}
+	unset( $t_tz );
 }
 
+# Cache current user's collapse API data
 if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 	require_api( 'collapse_api.php' );
 	collapse_cache_token();

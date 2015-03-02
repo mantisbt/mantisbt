@@ -106,8 +106,7 @@ function action_update_product_build_validate( $p_bug_id ) {
  * @return null Previous validation ensures that this function doesn't fail. Therefore we can always return null to indicate no errors occurred.
  */
 function action_update_product_build_process( $p_bug_id ) {
-	$f_build = gpc_get_string( 'build' );
-	$t_build = trim( $f_build );
+	$t_build = gpc_get_string( 'build' );
 
 	bug_set_field( $p_bug_id, 'build', $t_build );
 	return null;

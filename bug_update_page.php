@@ -74,6 +74,7 @@ require_api( 'version_api.php' );
 require_css( 'status_config.php' );
 
 $f_bug_id = gpc_get_int( 'bug_id' );
+$f_reporter_edit = gpc_get_bool( 'reporter_edit' );
 
 $t_bug = bug_get( $f_bug_id, true );
 
@@ -81,9 +82,6 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 	# in case the current project is not the same project of the bug we are viewing...
 	# ... override the current project. This to avoid problems with categories and handlers lists etc.
 	$g_project_override = $t_bug->project_id;
-	$t_changed_project = true;
-} else {
-	$t_changed_project = false;
 }
 
 if( bug_is_readonly( $f_bug_id ) ) {
@@ -171,8 +169,7 @@ print_recently_visited();
 ?>
 <br />
 <div id="bug-update" class="form-container">
-
-	<form name="update_bug_form" method="post" action="bug_update.php">
+	<form id="update_bug_form" method="post" action="bug_update.php">
 		<?php echo form_security_field( 'bug_update' ); ?>
 		<table>
 			<thead>
@@ -288,13 +285,18 @@ if( $t_show_reporter ) {
 		# Do not allow the bug's reporter to edit the Reporter field
 		# when limit_reporters is ON
 		if( ON == config_get( 'limit_reporters' )
-		&&  !access_has_project_level( REPORTER + 1, $t_bug->project_id )
+		&&  !access_has_project_level( config_get( 'report_bug_threshold', null, null, $t_bug->project_id ) + 1, $t_bug->project_id )
 		) {
 			echo string_attribute( user_get_name( $t_bug->reporter_id ) );
 		} else {
-			echo '<select ' . helper_get_tab_index() . ' id="reporter_id" name="reporter_id">';
-			print_reporter_option_list( $t_bug->reporter_id, $t_bug->project_id );
-			echo '</select>';
+			if ( $f_reporter_edit ) {
+				echo '<select ' . helper_get_tab_index() . ' id="reporter_id" name="reporter_id">';
+				print_reporter_option_list( $t_bug->reporter_id, $t_bug->project_id );
+				echo '</select>';
+			} else {
+				echo string_attribute( user_get_name( $t_bug->reporter_id ) );
+				echo ' [<a href="#reporter_edit" class="click-url" url="' . string_get_bug_update_url( $f_bug_id ) . '&amp;reporter_edit=true">' . lang_get( 'edit_link' ) . '</a>]';
+			}
 		}
 		echo '</td>';
 	} else {

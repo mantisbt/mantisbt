@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.reminders">
+	<title>Reminders</title>
+
+	<para>Sending reminders is a feature where a user can notify /
+		remind other users about a bug. In the past, only selected users
+		like the managers, or developers would get notified about bugs.
+		However, these people can not invite other people (through MantisBT)
+		to look at or monitor these bugs.
+	</para>
+	<para>This feature is useful if the Manager needs to get feedback
+		from testers / requirements team about a certain bug. It avoid
+		needing this person to do this manual outside MantisBT. It also
+		records the history of such reminders.
+	</para>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_store_reminders</term>
+			<listitem>
+				<para>Specifies if reminders should be stored as bugnotes. The
+					bugnote will still reflect that it is a reminder and list the names
+					of users that got it. Default is ON.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_reminder_recipients_monitor_bug</term>
+			<listitem>
+				<para>Specifies if users who receive reminders about a bug, should
+					be automatically added to the monitor list of that bug. Default is
+					ON.
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+
+</section>

@@ -119,16 +119,23 @@ $t_excel = implode( ', ', $t_columns );
 			<?php
 			if( $t_account_page ) {
 				if( $t_project_id == ALL_PROJECTS ) { ?>
-					<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_as_my_default" value="<?php echo lang_get( 'update_columns_as_my_default' ) ?>" /></span><?php
+					<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" value="<?php echo lang_get( 'update_columns_as_my_default' ) ?>" /></span><?php
 				} else { ?>
-					<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_for_current_project" value="<?php echo lang_get( 'update_columns_for_current_project' ) ?>" /></span><?php
-
+					<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" value="<?php echo lang_get( 'update_columns_for_current_project' ) ?>" /></span><?php
+				}
 			}
-		}
 
-		if( $t_manage_page && current_user_is_administrator() ) { ?>
-			<span class="submit-button"><input <?php echo helper_get_tab_index() ?> type="submit" class="button" name="update_columns_as_global_default" value="<?php echo lang_get( 'update_columns_as_global_default' ) ?>" /></span><?php
-		} ?>
+			# All Projects: only if admin can setup global default columns.
+			# Specific Project: can set columns for that.  Switch to All Projects to set for all projects.
+			if( $t_manage_page ) { ?>
+				<div class="submit-button"><?php
+				if( $t_project_id != ALL_PROJECTS ) { ?>
+					<input <?php echo helper_get_tab_index() ?> type="submit" class="button" value="<?php echo lang_get( 'update_columns_for_current_project' ) ?>" /><?php
+				} else if( current_user_is_administrator() ) { ?>
+					<input <?php echo helper_get_tab_index() ?> type="submit" class="button" value="<?php echo lang_get( 'update_columns_as_global_default' ) ?>" /><?php
+				} ?>
+				</div><?php
+			} ?>
 		</fieldset>
 	</form>
 </div>

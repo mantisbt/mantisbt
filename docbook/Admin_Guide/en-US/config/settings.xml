@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.settings">
+	<title>Configuration Settings</title>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_global_settings</term>
+			<listitem>
+				<para>This option contains the list of regular expressions that are used to determine if it is allowed for a specific configuration option to be saved to or loaded from the database.  Configuration options that matches the regular expressions are considered global only and hence are only configurable via the config_inc.php file and defaulted by config_defaults_inc.php file.</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</section>

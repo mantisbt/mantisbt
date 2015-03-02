@@ -41,6 +41,7 @@
  * @author Asya
  * @author DCLXVI
  * @author Emostoyanov
+ * @author StanProg
  */
 
 $s_plugin_format_title = 'Форматиране в MantisBT';
@@ -49,6 +50,7 @@ $s_plugin_format_config = 'Конфигурация';
 $s_plugin_format_process_text = 'Обработка на текст';
 $s_plugin_format_process_text_warning_notice = 'Не изключвайте освен ако наистина знаете какво точно правите. В изключено състояние са възможни cross site scripting (XSS) атаки.';
 $s_plugin_format_process_urls = 'Обработка на URL';
-$s_plugin_format_process_buglinks = 'Връзки в MantisBT  ( проблем/бележка )';
+$s_plugin_format_process_buglinks = 'Вътрешни връзки на MantisBT (проблеми и бележките към тях)';
+$s_plugin_format_process_buglinks_info = 'Конфигурацията ви дефинира тага <em>Issue</em> като <literal>%s</literal>", a <em>Issue Note</em> - като "<literal>%s</literal>"';
 $s_plugin_format_enabled = 'Вкл.';
 $s_plugin_format_disabled = 'Изкл.';

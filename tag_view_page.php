@@ -111,7 +111,7 @@ html_page_top( sprintf( lang_get( 'tag_details' ), $t_name ) ); ?>
 ?>
 	<div class="field-container">
 		<span class="display-label"><span><?php echo lang_get( 'tag_related' ); ?></span></span>
-		<span class="display-value">
+		<div class="display-value">
 			<table id="related-tags" class="tag-list">
 <?php
 		foreach( $t_tags_related as $t_tag ) {
@@ -128,7 +128,7 @@ html_page_top( sprintf( lang_get( 'tag_details' ), $t_name ) ); ?>
 		}
 ?>
 			</table>
-		</span>
+		</div>
 		<span class="label-style"></span>
 	</div>
 <?php

@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.logging">
+	<title>System Logging and Debugging</title>
+
+	<para>This section describes settings which can be used to
+		troubleshoot MantisBT operations as well as assist during
+		development.
+	</para>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_show_timer</term>
+			<listitem>
+				<para>Time page loads. The page execution timer shows at the bottom of each page.</para>
+				<para>Default is OFF.</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_show_memory_usage</term>
+			<listitem>
+				<para>Show memory usage for each page load in the footer.</para>
+				<para>Default is OFF.</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_debug_email</term>
+			<listitem>
+				<para>Used for debugging e-mail notifications.
+					When it is OFF, the emails are sent normally.
+					If set to an e-mail address, all messages are sent
+					to it, with the original recipients (To, Cc, Bcc)
+					included in the message body.
+				</para>
+				<para>Default is OFF.</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_show_queries_count</term>
+			<listitem>
+				<para>Shows the total number/unique number of queries executed to
+					serve the page.
+				</para>
+				<para>Default is OFF.</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_display_errors</term>
+			<listitem>
+				<para>Errors Display Method.
+					Defines what <ulink url="http://php.net/errorfunc.constants">
+						errors</ulink>
+					are displayed and how.
+					Available options are:
+				</para>
+
+				<variablelist>
+					<varlistentry>
+						<term>DISPLAY_ERROR_HALT</term>
+						<listitem>
+							<para>Stop and display the error message
+								(including variables and backtrace if
+								<emphasis>$g_show_detailed_errors</emphasis>
+								is ON).
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>DISPLAY_ERROR_INLINE</term>
+						<listitem>
+							<para>Display a one line error and continue
+								execution.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>DISPLAY_ERROR_NONE</term>
+						<listitem>
+							<para>Suppress the error (no display).
+								This is the default behavior for unspecified
+								<ulink url="http://php.net/errorfunc.constants">
+									errors constants</ulink>.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+
+				<para>The default settings, recommended for use in Production,
+					will only display MantisBT fatal errors and suppress
+					output of all other error types:
+<programlisting>
+$g_display_errors = array(
+	E_USER_ERROR   =&gt; DISPLAY_ERROR_HALT,
+);
+</programlisting>
+				</para>
+				<para>Recommended <filename>config_inc.php</filename>
+					settings for developers:
+<programlisting>
+$g_display_errors = array(
+	E_USER_ERROR   =&gt; DISPLAY_ERROR_HALT,
+	E_WARNING      =&gt; DISPLAY_ERROR_HALT,
+	E_ALL          =&gt; DISPLAY_ERROR_INLINE,
+);
+</programlisting>
+				</para>
+				<note>
+					<para>The system automatically sets
+						<emphasis>$g_display_errors</emphasis>
+						to the above recommended development values when
+						the server's name is <emphasis>localhost</emphasis>.
+					</para>
+				</note>
+				<para>Less intrusive settings, recommended for testing purposes:
+<programlisting>
+$g_display_errors = array(
+	E_USER_ERROR   =&gt; DISPLAY_ERROR_HALT,
+	E_USER_WARNING =&gt; DISPLAY_ERROR_INLINE,
+	E_WARNING      =&gt; DISPLAY_ERROR_INLINE,
+);
+</programlisting>
+				</para>
+				<warning><para><literal>E_USER_ERROR</literal>
+					should <emphasis>always</emphasis> be set to
+					<literal>DISPLAY_ERROR_HALT</literal>.
+					Using any other value will cause program execution
+					to continue despite the error, which may lead to data
+					integrity issues and/or cause MantisBT to function
+					incorrectly.
+				</para></warning>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_show_detailed_errors</term>
+			<listitem>
+				<para>Shows a list of variables and their values
+					whenever an error is triggered.
+					Only applies to error types configured to
+					<literal>DISPLAY_ERROR_HALT</literal>
+					in <emphasis>$g_display_errors</emphasis>.
+				</para>
+				<para>Default is OFF.</para>
+				<warning><para>Setting this to ON is a potential security
+					hazard, as it can expose sensitive information.
+					Only enable this setting for debugging purposes
+					when you really need it.
+				</para></warning>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_stop_on_errors</term>
+			<listitem>
+				<para>Debug messages.
+					If this option is turned OFF, page redirects will
+					function if a non-fatal error occurs.
+					For debugging purposes, you can set this to ON so
+					that any non-fatal error will prevent page redirection,
+					allowing you to see the errors.
+				</para>
+				<para>Default is OFF.</para>
+				<note><para>This should only be turned on when debugging.
+				</para></note>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_log_level</term>
+			<listitem>
+				<para>The system logging interface is used to extract
+					detailed debugging information for the MantisBT system.
+					It can also serve as an audit trail for users' actions.
+				</para>
+				<para>This controls the type of logging information
+					recorded.
+					Refer to <emphasis>$g_log_destination</emphasis>
+					for details on where to save the logs.
+				</para>
+				<para>The available log channels are:
+				</para>
+
+				<variablelist>
+					<varlistentry>
+						<term>LOG_NONE</term>
+						<listitem>
+							<para>Disable logging</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>LOG_AJAX</term>
+						<listitem>
+							<para>logs AJAX events</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>LOG_DATABASE</term>
+						<listitem>
+							<para>logs database events and executed
+								SQL queries
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>LOG_EMAIL</term>
+						<listitem>
+							<para>logs issue id, message type and
+								recipients for all emails sent
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>LOG_EMAIL_RECIPIENT</term>
+						<listitem>
+							<para>logs the details of email recipient
+								determination.
+								Each user id is listed as well as why
+								they are added, or deleted from the
+								recipient list
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>LOG_FILTERING</term>
+						<listitem>
+							<para>logs filter operations</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>LOG_LDAP</term>
+						<listitem>
+							<para>logs the details of LDAP operations
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>LOG_WEBSERVICE</term>
+						<listitem>
+							<para>logs the details of Web Services operations (e.g. SOAP API)
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>LOG_ALL</term>
+						<listitem>
+							<para>combines all of the above log levels
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+				<para>Default is LOG_NONE.</para>
+				<note><para>Multiple log channels can be combined using
+					<ulink url="http://php.net/language.operators.bitwise">
+						PHP bitwise operators
+					</ulink>, e.g.
+<programlisting>$g_log_level = LOG_EMAIL | LOG_EMAIL_RECIPIENT;</programlisting>
+or
+<programlisting>$g_log_level = LOG_ALL &amp; ~LOG_DATABASE;</programlisting>
+				</para></note>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_log_destination</term>
+			<listitem>
+				<para>Specifies where the log data goes.
+					The following 4 options are available:
+				</para>
+
+				<variablelist>
+					<varlistentry>
+						<term>''</term>
+						<listitem>
+							<para>The empty string means
+								<ulink url="http://php.net/error_log">
+									default PHP error log settings
+								</ulink>
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>'file'</term>
+						<listitem>
+							<para>Log to a specific file, specified
+								as an absolute path, e.g.
+								<literal>'file:/var/log/mantis.log'</literal>
+								(Unix) or
+								<literal>'file:c:/temp/mantisbt.log'</literal>
+								(Windows)
+							</para>
+							<note><para>This file must be writable by the
+								web server running MantisBT.
+							</para></note>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>'firebug'</term>
+						<listitem>
+							<para>make use of Firefox
+								<ulink url="http://getfirebug.com/">
+									Firebug Add-on</ulink>.
+								If user is not running firefox, this options
+								falls back to the default php error log settings.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>'page'</term>
+						<listitem>
+							<para>Display log output at bottom of the page.
+								See also <emphasis>$g_show_log_threshold</emphasis>
+								to restrict who can see log data.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+
+				<para>Default is '' (empty string).
+				</para>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
+			<term>$g_show_log_threshold</term>
+			<listitem>
+				<para>Indicates the access level required for a user
+					to see the log output (if
+					<emphasis>$g_log_destination</emphasis> is 'page').
+				</para>
+				<para>Default is ADMINISTRATOR.</para>
+				<note><para>This threshold is compared against the user's
+					<emphasis>global access level</emphasis> rather than
+					the one from the currently active project.
+				</para></note>
+			</listitem>
+		</varlistentry>
+
+	</variablelist>
+</section>

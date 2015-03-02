@@ -31,31 +31,42 @@ access_ensure_global_level( config_get_global( 'admin_site_threshold' ) );
 html_page_top( 'MantisBT Administration - System Utilities' );
 
 ?>
-<table width="100%" cellspacing="0" cellpadding="0">
-	<tr class="top-bar">
-		<td class="links">
-			[ <a href="index.php">Back to MantisBT Administration</a> ]
-		</td>
-	</tr>
-</table>
-<br />
-<h2>System Utilities</h2>
-<table width="80%" cellpadding="10" cellspacing="1" border="1">
-	<tr class="row-category">
-		<th width="70%">Description</th><th width="30%">Execute</th>
-	</tr>
-
-	<tr class="row-1"><td>Move attachments stored between database schema and disk files.</td><td class="center">
-	<?php html_button( 'move_attachments_page.php', 'Move Attachments to Disk', array( 'type' => 'bug' ) );?>
-	</td></tr>
-
-	<tr class="row-2"><td>Move project files stored between database schema and disk.</td><td class="center">
-	<?php html_button( 'move_attachments_page.php', 'Move Project Files to Disk', array( 'type' => 'project' ) );?>
-	</td></tr>
-
-	<tr class="row-2"><td>Show database statistics.</td><td class="center">
-	<?php html_button( 'db_stats.php', 'Display', array() );?>
-	</td></tr>
-</table>
+<div class="table-container">
+	<h2>System Utilities</h2>
+	<table>
+		<thead>
+			<tr class="row-category">
+				<th>Description</th>
+				<th>Execute</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					Move attachments stored between database schema and disk files.
+				</td>
+				<td class="center">
+					<?php html_button( 'move_attachments_page.php', 'Move Attachments to Disk', array( 'type' => 'bug' ) );?>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Move project files stored between database schema and disk.
+				</td>
+				<td class="center">
+					<?php html_button( 'move_attachments_page.php', 'Move Project Files to Disk', array( 'type' => 'project' ) );?>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Show database statistics.
+				</td>
+				<td class="center">
+					<?php html_button( 'db_stats.php', 'Display', array() );?>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
 <?php
 	html_page_bottom();

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.relationship">
+	<title>Relationship Graphs</title>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_relationship_graph_enable</term>
+			<listitem>
+				<para>
+					This enables the relationship graphs feature where issues are represented by
+					nodes and relationships as links between such nodes.  Possible values are ON or OFF.
+					Default is OFF.
+				</para>
+
+				<para>
+					This feature requires installing <ulink url="http://www.research.att.com/sw/tools/graphviz/">GraphViz</ulink>
+					(all OSes except Windows) or <ulink url="http://home.so-net.net.tw/oodtsen/wingraphviz/">WinGraphviz</ulink> (only Windows).
+					Refer to the notes near the top of core/graphviz_api.php and
+					core/relationship_graph_api.php for more information.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_relationship_graph_fontname</term>
+			<listitem>
+				<para>
+					Font name and size, as required by Graphviz. If Graphviz fails to run
+					for you, you are probably using a font name that gd PHP extension can't find.
+					On Linux, try the name of the font file without the extension.  The default
+					value is 'Arial'.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_relationship_graph_fontsize</term>
+			<listitem>
+				<para>
+					Font size, default is 8.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_relationship_graph_orientation</term>
+			<listitem>
+				<para>
+					Default dependency orientation.  If you have issues with lots of children
+					or parents, leave as 'horizontal', otherwise, if you have lots of
+					&quot;chained&quot; issue dependencies, change to 'vertical'.  Default is 'horizontal'.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_relationship_graph_max_depth</term>
+			<listitem>
+				<para>
+					Max depth for relation graphs.  This only affects relationship graphs,
+					dependency graphs are drawn to the full depth.  The default value is 2.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_relationship_graph_view_on_click</term>
+			<listitem>
+				<para>
+					If set to ON, clicking on an issue on the relationship graph will open
+					the bug view page for that issue, otherwise, will navigate to the
+					relationship graph for that issue.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_dot_tool</term>
+			<listitem>
+				<para>
+					The full path for the dot tool.  The webserver must have execute
+					permission to this program in order to generate relationship graphs.
+					This configuration option is not relevant for Windows.  The default
+					value is '/usr/bin/dot'.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_neato_tool</term>
+			<listitem>
+				<para>
+					The full path for the neato tool.  The webserver must have execute
+					permission to this program in order to generate relationship graphs.
+					This configuration option is not relevant for Windows.  The default
+					value is '/usr/bin/neato'.
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</section>

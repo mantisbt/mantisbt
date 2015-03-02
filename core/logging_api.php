@@ -81,7 +81,23 @@ function log_event( $p_level, $p_msg ) {
 
 	# Is this called from another function?
 	if( isset( $t_backtrace[1] ) ) {
-		$t_caller .= ' ' . $t_backtrace[1]['function'] . '()';
+		if( $p_level == LOG_DATABASE ) {
+			if( isset( $t_backtrace[2] ) && $t_backtrace[2]['function'] == 'call_user_func_array' ) {
+				$t_caller = basename( $t_backtrace[3]['file'] );
+				$t_caller .= ':' . $t_backtrace[3]['line'];
+				$t_caller .= ' ' . $t_backtrace[3]['function'] . '()';
+			} else if( $t_backtrace[1]['function'] == 'db_query' ) {
+				$t_caller = basename( $t_backtrace[1]['file'] );
+				$t_caller .= ':' . $t_backtrace[1]['line'];
+				if( isset( $t_backtrace[2] ) ) {
+					$t_caller .= ' ' . $t_backtrace[2]['function'] . '()';
+				} else {
+					$t_caller .= ' ' . $t_backtrace[1]['function'] . '()';
+				}
+			}
+		} else {
+			$t_caller .= ' ' . $t_backtrace[1]['function'] . '()';
+		}
 	} else {
 		# or from a script directly?
 		$t_caller .= ' ' . $_SERVER['SCRIPT_NAME'];
@@ -165,6 +181,7 @@ function log_print_to_page() {
 		$t_total_queries_count = 0;
 		$t_total_event_count = count( $g_log_events );
 
+		echo "\t<hr />\n";
 		echo "\n\n<!--Mantis Debug Log Output-->";
 		if( $t_total_event_count == 0 ) {
 			echo "<!--END Mantis Debug Log Output-->\n\n";

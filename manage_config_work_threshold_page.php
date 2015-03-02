@@ -64,8 +64,6 @@ $t_show_submit = false;
 
 $g_access_levels = MantisEnum::getAssocArrayIndexedByValues( config_get( 'access_levels_enum_string' ) );
 $g_overrides = array();
-$g_color_project = config_get( 'colour_project' );
-$g_color_global = config_get( 'colour_global' );
 
 /**
  * Set overrides
@@ -114,13 +112,13 @@ function get_section_begin_mcwt( $p_section_name ) {
  * @return string HTML tag attribute for background color override
  */
 function set_color( $p_threshold, $p_file, $p_global, $p_project, $p_set_override ) {
-	global $g_color_project, $g_color_global, $g_project_id;
+	global $g_project_id;
 
-	$t_color = false;
+	$t_color = '';
 
 	# all projects override
 	if( $p_global != $p_file ) {
-		$t_color = $g_color_global;
+		$t_color = 'color-global';
 		if( $p_set_override && ALL_PROJECTS == $g_project_id ) {
 			set_overrides( $p_threshold );
 		}
@@ -128,17 +126,13 @@ function set_color( $p_threshold, $p_file, $p_global, $p_project, $p_set_overrid
 
 	# project overrides
 	if( $p_project != $p_global ) {
-		$t_color = $g_color_project;
+		$t_color = 'color-project';
 		if( $p_set_override && ALL_PROJECTS != $g_project_id ) {
 			set_overrides( $p_threshold );
 		}
 	}
 
-	if( false === $t_color ) {
-		return '';
-	}
-
-	return ' bgcolor="' . $t_color . '" ';
+	return $t_color;
 }
 
 /**
@@ -153,12 +147,12 @@ function print_who_can_change( $p_threshold, $p_can_change ) {
 	if( is_null( $s_file_access ) ) {
 		$t_file_access = config_get_global( 'admin_site_threshold' );
 	}
-	$t_global_access = config_get_access( $p_threshold, null, ALL_PROJECTS );
+	$t_global_access = config_get_access( $p_threshold, ALL_USERS, ALL_PROJECTS );
 	$t_project_access = config_get_access( $p_threshold );
 
 	$t_color = set_color( $p_threshold, $t_file_access, $t_global_access, $t_project_access, $p_can_change );
 
-	echo '<td ' . $t_color . '>';
+	echo '<td class="' . $t_color . '">';
 	if( $p_can_change ) {
 		echo '<select name="access_' . $p_threshold . '">';
 		print_enum_string_option_list( 'access_levels', $t_project_access );
@@ -191,7 +185,7 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only = fa
 		$t_file_exp = $t_file;
 	}
 
-	$t_global = config_get( $p_threshold, null, null, ALL_PROJECTS );
+	$t_global = config_get( $p_threshold, null, ALL_USERS, ALL_PROJECTS );
 	if( !is_array( $t_global ) ) {
 		$t_global_exp = array();
 		foreach( $g_access_levels as $t_access_level => $t_label ) {
@@ -240,7 +234,7 @@ function get_capability_row( $p_caption, $p_threshold, $p_all_projects_only = fa
 				$t_value = '&#160;';
 			}
 		}
-		echo '  <td class="center"' . $t_color . '>' . $t_value . "</td>\n";
+		echo '  <td class="center ' . $t_color . '">' . $t_value . "</td>\n";
 	}
 
 	print_who_can_change( $p_threshold, $t_can_change );
@@ -259,7 +253,7 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only 
 	global $g_user, $g_project_id, $t_show_submit, $g_access_levels;
 
 	$t_file = config_get_global( $p_threshold );
-	$t_global = config_get( $p_threshold, null, null, ALL_PROJECTS );
+	$t_global = config_get( $p_threshold, null, ALL_USERS, ALL_PROJECTS );
 	$t_project = config_get( $p_threshold );
 
 	$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $g_project_id, $g_user )
@@ -280,7 +274,7 @@ function get_capability_boolean( $p_caption, $p_threshold, $p_all_projects_only 
 			$t_value = '&#160;';
 		}
 	}
-	echo "\t" . '<td ' . $t_color . '>' . $t_value . '</td>' . "\n\t"
+	echo "\t" . '<td class="' . $t_color . '">' . $t_value . '</td>' . "\n\t"
 		. '<td class="left" colspan="' . ( count( $g_access_levels ) - 1 ). '"></td>';
 
 	print_who_can_change( $p_threshold, $t_can_change );
@@ -300,7 +294,7 @@ function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects
 	global $g_user, $g_project_id, $t_show_submit, $g_access_levels;
 
 	$t_file = config_get_global( $p_threshold );
-	$t_global = config_get( $p_threshold, null, null, ALL_PROJECTS );
+	$t_global = config_get( $p_threshold, null, ALL_USERS, ALL_PROJECTS );
 	$t_project = config_get( $p_threshold );
 
 	$t_can_change = access_has_project_level( config_get_access( $p_threshold ), $g_project_id, $g_user )
@@ -311,7 +305,7 @@ function get_capability_enum( $p_caption, $p_threshold, $p_enum, $p_all_projects
 
 	# Value
 	$t_color = set_color( $p_threshold, $t_file, $t_global, $t_project, $t_can_change );
-	echo "\t" . '<td class="left" colspan="3"' . $t_color . '>';
+	echo "\t" . '<td class="left ' . $t_color . '" colspan="3">';
 	if( $t_can_change ) {
 		echo '<select name="flag_' . $p_threshold . '">';
 		print_enum_string_option_list( $p_enum, config_get( $p_threshold ) );
@@ -348,11 +342,11 @@ if( ALL_PROJECTS == $g_project_id ) {
 echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
 echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 if( ALL_PROJECTS <> $g_project_id ) {
-	echo '<span style="background-color:' . $g_color_project . '">' . lang_get( 'colour_project' ) .'</span><br />';
+	echo '<span class="color-project">' . lang_get( 'colour_project' ) .'</span><br />';
 }
-echo '<span style="background-color:' . $g_color_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
+echo '<span class="color-global">' . lang_get( 'colour_global' ) . '</span></p>';
 
-echo "<form name=\"mail_config_action\" method=\"post\" action=\"manage_config_work_threshold_set.php\">\n";
+echo '<form id="mail_config_action" method="post" action="manage_config_work_threshold_set.php">' . "\n";
 echo form_security_field( 'manage_config_work_threshold_set' );
 
 # Issues
@@ -411,7 +405,7 @@ if( $t_show_submit ) {
 echo '</form>' . "\n";
 
 if( $t_show_submit && ( 0 < count( $g_overrides ) ) ) {
-	echo '<div class="right"><form name="threshold_config_action" method="post" action="manage_config_revert.php">' . "\n";
+	echo '<div class="right"><form id="threshold_config_action" method="post" action="manage_config_revert.php">' . "\n";
 	echo form_security_field( 'manage_config_revert' );
 	echo '<input name="revert" type="hidden" value="' . implode( ',', $g_overrides ) . '"></input>';
 	echo '<input name="project" type="hidden" value="' . $g_project_id . '"></input>';

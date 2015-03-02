@@ -461,10 +461,9 @@ class Digraph extends Graph {
 	 * @param string $p_name       Name of the graph.
 	 * @param array  $p_attributes Attributes.
 	 * @param string $p_tool       Graphviz tool.
-	 * @param string $p_com_module Name of the graphviz COM module.
 	 */
-	function Digraph( $p_name = 'G', array $p_attributes = array(), $p_tool = 'dot', $p_com_module = 'WinGraphviz.DOT' ) {
-		parent::Graph( $p_name, $p_attributes, $p_tool, $p_com_module );
+	function Digraph( $p_name = 'G', array $p_attributes = array(), $p_tool = 'dot' ) {
+		parent::Graph( $p_name, $p_attributes, $p_tool );
 	}
 
 	/**

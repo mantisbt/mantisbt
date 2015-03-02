@@ -187,6 +187,42 @@ function auth_prepare_password( $p_password ) {
 }
 
 /**
+ * In the case where a user is attempting to authenticate but doesn't exist.
+ * Check if the authentication provider supports auto-creation of users and
+ * whether the password matches.
+ *
+ * @param string  $p_username   A prepared username.
+ * @param string  $p_password   A prepared password.
+ * @return int|boolean user id or false in case of failure.
+ * @access private
+ */
+function auth_auto_create_user( $p_username, $p_password ) {
+	$t_login_method = config_get( 'login_method' );
+
+	if( $t_login_method == BASIC_AUTH ) {
+		$t_auto_create = true;
+	} else if( $t_login_method == LDAP && ldap_authenticate_by_username( $p_username, $p_password ) ) {
+		$t_auto_create = true;
+	} else {
+		$t_auto_create = false;
+	}
+
+	if( $t_auto_create ) {
+		# attempt to create the user
+		$t_cookie_string = user_create( $p_username, md5( $p_password ) );
+		if( $t_cookie_string === false ) {
+			# it didn't work
+			return false;
+		}
+
+		# ok, we created the user, get the row again
+		return user_get_id_by_name( $p_username );
+	}
+
+	return false;
+}
+
+/**
  * Attempt to login the user with the given password
  * If the user fails validation, false is returned
  * If the user passes validation, the cookies are set and
@@ -201,35 +237,9 @@ function auth_prepare_password( $p_password ) {
 function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
 	$t_user_id = user_get_id_by_name( $p_username );
 
-	$t_login_method = config_get( 'login_method' );
-
-	if( false === $t_user_id ) {
-		if( BASIC_AUTH == $t_login_method ) {
-			$t_auto_create = true;
-		} else if( LDAP == $t_login_method && ldap_authenticate_by_username( $p_username, $p_password ) ) {
-			$t_auto_create = true;
-		} else {
-			$t_auto_create = false;
-		}
-
-		if( $t_auto_create ) {
-			# attempt to create the user
-			$t_cookie_string = user_create( $p_username, md5( $p_password ) );
-
-			if( false === $t_cookie_string ) {
-				# it didn't work
-				return false;
-			}
-
-			# ok, we created the user, get the row again
-			$t_user_id = user_get_id_by_name( $p_username );
-
-			if( false === $t_user_id ) {
-				# uh oh, something must be really wrong
-				# @@@ trigger an error here?
-				return false;
-			}
-		} else {
+	if( $t_user_id === false ) {
+		$t_user_id = auth_auto_create_user( $p_username, $p_password );
+		if( $t_user_id === false ) {
 			return false;
 		}
 	}
@@ -310,9 +320,11 @@ function auth_attempt_script_login( $p_username, $p_password = null ) {
 	}
 
 	$t_user_id = user_get_id_by_name( $t_username );
-
-	if( false === $t_user_id ) {
-		return false;
+	if( $t_user_id === false ) {
+		$t_user_id = auth_auto_create_user( $t_username, $p_password );
+		if( $t_user_id === false ) {
+			return false;
+		}
 	}
 
 	$t_user = user_get_row( $t_user_id );
@@ -338,7 +350,7 @@ function auth_attempt_script_login( $p_username, $p_password = null ) {
 	$g_script_login_cookie = $t_user['cookie_string'];
 
 	# cache user id for future reference
-	$g_cache_current_user_id = $t_user_id;
+	current_user_set( $t_user_id );
 
 	return true;
 }
@@ -354,7 +366,7 @@ function auth_logout() {
 
 	# clear cached userid
 	user_clear_cache( $g_cache_current_user_id );
-	$g_cache_current_user_id = null;
+	current_user_set( null );
 	$g_cache_cookie_valid = null;
 
 	# clear cookies, if they were set
@@ -422,20 +434,22 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 		MD5,
 		CRYPT,
 		PLAIN,
+		BASIC_AUTH,
 	);
+
 	foreach( $t_login_methods as $t_login_method ) {
 		# pass the stored password in as the salt
 		if( auth_process_plain_password( $p_test_password, $t_password, $t_login_method ) == $t_password ) {
-
 			# Do not support migration to PLAIN, since this would be a crazy thing to do.
 			# Also if we do, then a user will be able to login by providing the MD5 value
 			# that is copied from the database.  See #8467 for more details.
-			if( $t_configured_login_method != PLAIN && $t_login_method == PLAIN ) {
+			if( ( $t_configured_login_method != PLAIN && $t_login_method == PLAIN ) ||
+				( $t_configured_login_method != BASIC_AUTH && $t_login_method == BASIC_AUTH ) ) {
 				continue;
 			}
 
 			# Check for migration to another login method and test whether the password was encrypted
-			# with our previously insecure implemention of the CRYPT method
+			# with our previously insecure implementation of the CRYPT method
 			if( ( $t_login_method != $t_configured_login_method ) || (( CRYPT == $t_configured_login_method ) && utf8_substr( $t_password, 0, 2 ) == utf8_substr( $p_test_password, 0, 2 ) ) ) {
 				user_set_password( $p_user_id, $p_test_password, true );
 			}
@@ -585,9 +599,8 @@ function auth_generate_unique_cookie_string() {
  * @access public
  */
 function auth_is_cookie_string_unique( $p_cookie_string ) {
-	$t_user_table = db_get_table( 'user' );
-	$t_query = 'SELECT COUNT(*) FROM ' . $t_user_table . ' WHERE cookie_string=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $p_cookie_string ) );
+	$t_query = 'SELECT COUNT(*) FROM {user} WHERE cookie_string=' . db_param();
+	$t_result = db_query( $t_query, array( $p_cookie_string ) );
 
 	$t_count = db_result( $t_result );
 
@@ -631,14 +644,14 @@ function auth_get_current_user_cookie( $p_login_anonymous = true ) {
 				if( function_exists( 'db_is_connected' ) && db_is_connected() ) {
 
 					# get anonymous information if database is available
-					$t_query = 'SELECT id, cookie_string FROM ' . db_get_table( 'user' ) . ' WHERE username = ' . db_param();
-					$t_result = db_query_bound( $t_query, array( config_get( 'anonymous_account' ) ) );
+					$t_query = 'SELECT id, cookie_string FROM {user} WHERE username = ' . db_param();
+					$t_result = db_query( $t_query, array( config_get( 'anonymous_account' ) ) );
 
 					if( $t_row = db_fetch_array( $t_result ) ) {
 						$t_cookie = $t_row['cookie_string'];
 
 						$g_cache_anonymous_user_cookie_string = $t_cookie;
-						$g_cache_current_user_id = $t_row['id'];
+						current_user_set( $t_row['id'] );
 					}
 				}
 			} else {
@@ -792,10 +805,8 @@ function auth_is_cookie_valid( $p_cookie_string ) {
 	}
 
 	# look up cookie in the database to see if it is valid
-	$t_user_table = db_get_table( 'user' );
-
-	$t_query = 'SELECT * FROM ' . $t_user_table . ' WHERE cookie_string=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $p_cookie_string ) );
+	$t_query = 'SELECT * FROM {user} WHERE cookie_string=' . db_param();
+	$t_result = db_query( $t_query, array( $p_cookie_string ) );
 
 	# return true if a matching cookie was found
 	if( 1 == db_num_rows( $t_result ) ) {
@@ -822,15 +833,13 @@ function auth_get_current_user_id() {
 
 	if( $t_result = user_search_cache( 'cookie_string', $t_cookie_string ) ) {
 		$t_user_id = (int)$t_result['id'];
-		$g_cache_current_user_id = $t_user_id;
+		current_user_set( $t_user_id );
 		return $t_user_id;
 	}
 
-	$t_user_table = db_get_table( 'user' );
-
 	# @todo error with an error saying they aren't logged in? Or redirect to the login page maybe?
-	$t_query = 'SELECT id FROM ' . $t_user_table . ' WHERE cookie_string=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $t_cookie_string ) );
+	$t_query = 'SELECT id FROM {user} WHERE cookie_string=' . db_param();
+	$t_result = db_query( $t_query, array( $t_cookie_string ) );
 
 	$t_user_id = (int)db_result( $t_result );
 
@@ -842,7 +851,7 @@ function auth_get_current_user_id() {
 		exit();
 	}
 
-	$g_cache_current_user_id = $t_user_id;
+	current_user_set( $t_user_id );
 
 	return $t_user_id;
 }

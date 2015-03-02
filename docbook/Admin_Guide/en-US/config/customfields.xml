@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.customfields">
+	<title>Custom Fields</title>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_manage_custom_fields_threshold</term>
+			<listitem>
+				<para>Access level needed to manage custom fields. The default is
+					ADMINISTRATOR.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_custom_field_link_threshold</term>
+			<listitem>
+				<para>Access level needed to link a custom field to a project. The
+					default is MANAGER.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$$g_custom_field_edit_after_create</term>
+			<listitem>
+				<para>This flag determines whether to start editing a custom field
+					immediately after creating it, or return to the definition list.
+					The default is ON (edit the custom field after creating).
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+
+</section>

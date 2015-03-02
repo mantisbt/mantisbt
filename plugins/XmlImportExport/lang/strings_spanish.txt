@@ -42,12 +42,17 @@
  * @author Bithunter
  * @author Crazymadlover
  * @author Locos epraix
+ * @author Macofe
  */
 
 $s_plugin_XmlImportExport_title = 'Importar/Exportar incidencias';
 $s_plugin_XmlImportExport_description = 'Añade capacidades de importación y exportación basadas en XML a MantisBT.';
 $s_plugin_XmlImportExport_import = 'Importar incidencias';
 $s_plugin_XmlImportExport_export = 'Exportar XML';
+$s_plugin_XmlImportExport_config_title = 'Configuración de niveles de acceso de importación/exportación en XML';
+$s_plugin_XmlImportExport_import_threshold = 'Importar incidencias';
+$s_plugin_XmlImportExport_export_threshold = 'Exportar incidencias';
+$s_plugin_XmlImportExport_action_update = 'Actualizar';
 $s_plugin_XmlImportExport_importing_in_project = 'Importando incidencias al proyecto:';
 $s_plugin_XmlImportExport_import_options = 'Opciones de importación';
 $s_plugin_XmlImportExport_cross_references = 'Referencias cruzadas';

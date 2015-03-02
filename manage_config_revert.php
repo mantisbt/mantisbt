@@ -78,7 +78,7 @@ if( '' != $f_revert ) {
 		lang_get( 'delete_config_button' ) );
 
 	foreach ( $t_revert_vars as $t_revert ) {
-		config_delete( $t_revert, null, $f_project_id );
+		config_delete( $t_revert, ALL_USERS, $f_project_id );
 	}
 }
 

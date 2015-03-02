@@ -282,11 +282,11 @@ if( db_is_mysql() ) {
 	# Version support information
 	$t_versions = array(
 		# Version => EOL date
+		'9.4' => '2019-12-30',
 		'9.3' => '2018-09-30',
 		'9.2' => '2017-09-30',
 		'9.1' => '2016-09-30',
 		'9.0' => '2015-09-30',
-		'8.4' => '2014-07-31',
 	);
 	$t_support_url = 'http://www.postgresql.org/support/versioning/';
 
@@ -377,7 +377,7 @@ if( db_is_mysql() ) {
 			break;
 	}
 
-	$t_result = db_query_bound( 'SHOW TABLE STATUS' );
+	$t_result = db_query( 'SHOW TABLE STATUS' );
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		if( $t_row[$t_field_comment] !== 'VIEW' &&
 		    preg_match( '/^' . $t_table_prefix_regex_safe . '.+?' . $t_table_suffix_regex_safe . '$/', $t_row[$t_field_name] )
@@ -393,7 +393,7 @@ if( db_is_mysql() ) {
 
 	foreach( db_get_table_list() as $t_table ) {
 		if( preg_match( '/^' . $t_table_prefix_regex_safe . '.+?' . $t_table_suffix_regex_safe . '$/', $t_table ) ) {
-			$t_result = db_query_bound( 'SHOW FULL FIELDS FROM ' . $t_table );
+			$t_result = db_query( 'SHOW FULL FIELDS FROM ' . $t_table );
 			while( $t_row = db_fetch_array( $t_result ) ) {
 				if( $t_row[$t_field_collation] === null ) {
 					continue;

@@ -66,23 +66,17 @@ if( !access_has_bug_level( config_get( 'private_bugnote_threshold' ), $f_bug_id 
 	$t_restriction = '';
 }
 
-$t_bugnote_table		= db_get_table( 'bugnote' );
-$t_bugnote_text_table	= db_get_table( 'bugnote_text' );
 # get the bugnote data
 $t_bugnote_order = current_user_get_pref( 'bugnote_order' );
-
-$t_query = 'SELECT * FROM ' . $t_bugnote_table . '
-		WHERE bug_id=' . db_param() . ' ' . $t_restriction . '
-		ORDER BY date_submitted ' . $t_bugnote_order;
-$t_result = db_query_bound( $t_query, array( $c_bug_id ) );
-$t_num_notes = db_num_rows( $t_result );
+$t_bugnotes = bugnote_get_all_visible_bugnotes( $f_bug_id, $t_bugnote_order, 0, $t_user_id );
+$t_show_time_tracking = access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $f_bug_id );
+$t_total_time = 0;
 ?>
 
 <br />
 <table class="width100" cellspacing="1">
 	<?php
-		# no bugnotes
-		if( 0 == $t_num_notes ) {
+		if( 0 == count( $t_bugnotes ) ) {
 	?>
 	<tr>
 		<td class="print" colspan="2">
@@ -96,20 +90,18 @@ $t_num_notes = db_num_rows( $t_result );
 		</td>
 	</tr>
 	<?php
-		for( $i=0; $i < $t_num_notes; $i++ ) {
-			# prefix all bugnote data with v3_
-			$t_row = db_fetch_array( $t_result );
+		foreach( $t_bugnotes as $t_row ) {
+			$t_date_submitted = date( config_get( 'normal_date_format' ), $t_row->date_submitted );
+			$t_last_modified = date( config_get( 'normal_date_format' ), $t_row->last_modified );
 
-			$t_date_submitted = date( config_get( 'normal_date_format' ), $t_row['date_submitted'] );
-			$t_last_modified = date( config_get( 'normal_date_format' ), $t_row['last_modified'] );
+			$t_note = string_display_links( $t_row->note );
 
-			# grab the bugnote text and id and prefix with v3_
-			$t_query = 'SELECT note, id FROM ' . $t_bugnote_text_table  . ' WHERE id=' . db_param();
-			$t_result2 = db_query_bound( $t_query, array( $t_row['bugnote_text_id'] ) );
-			$t_note = db_result( $t_result2, 0, 0 );
-			$t_bugnote_text_id = db_result( $t_result2, 0, 1 );
-
-			$t_note = string_display_links( $t_note );
+			if( $t_row->note_type == TIME_TRACKING ) {
+				$t_time = db_minutes_to_hhmm( $t_row->time_tracking );
+				$t_total_time += $t_row->time_tracking;
+			} else {
+				$t_time = '';
+			}
 	?>
 	<tr>
 		<td class="print-spacer" colspan="2">
@@ -121,13 +113,13 @@ $t_num_notes = db_num_rows( $t_result );
 			<table class="hide" cellspacing="1">
 				<tr>
 					<td class="print">
-						(<?php echo bugnote_format_id( $t_row['id'] ) ?>)
+						(<?php echo bugnote_format_id( $t_row->id ) ?>)
 					</td>
 				</tr>
 				<tr>
 					<td class="print">
 						<?php
-						print_user( $t_row['reporter_id'] );
+						print_user( $t_row->reporter_id );
 						?>&#160;&#160;&#160;
 					</td>
 				</tr>
@@ -146,17 +138,26 @@ $t_num_notes = db_num_rows( $t_result );
 			<tr>
 				<td class="print">
 					<?php
-						switch( $t_row['note_type'] ) {
+						switch( $t_row->note_type ) {
 							case REMINDER:
-								echo '<div class="italic">' . lang_get( 'reminder_sent_to' ) . ': ';
-								$t_note_attr = utf8_substr( $t_row['note_attr'], 1, utf8_strlen( $t_row['note_attr'] ) - 2 );
+								echo '<p><strong>' . lang_get( 'reminder_sent_to' ) . ': ';
+								$t_note_attr = utf8_substr( $t_row->note_attr, 1, utf8_strlen( $t_row->note_attr ) - 2 );
 								$t_to = array();
 								foreach ( explode( '|', $t_note_attr ) as $t_recipient ) {
 									$t_to[] = string_display_line( user_get_name( $t_recipient ) );
 								}
-								echo implode( ', ', $t_to ) . '</div><br />';
+								echo implode( ', ', $t_to ) . '</strong></p>';
+								echo $t_note;
+								break;
+							case TIME_TRACKING:
+								if( $t_show_time_tracking ) {
+									echo '<p><strong>', lang_get( 'time_tracking_time_spent' ) . ' ' . $t_time, '</strong></p>';
+								}
+								echo $t_note;
+								break;
 							default:
 								echo $t_note;
+								break;
 						}
 					?>
 				</td>
@@ -169,3 +170,7 @@ $t_num_notes = db_num_rows( $t_result );
 		} # end else
 	?>
 </table>
+<?php
+if( $t_total_time > 0 && $t_show_time_tracking ) {
+	echo '<p align="right">', sprintf( lang_get( 'total_time_for_issue' ), '<strong>' . db_minutes_to_hhmm( $t_total_time ) . '</strong>' ), '</p>';
+}

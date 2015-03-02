@@ -50,23 +50,23 @@ People who contributed code to MantisBT, listed in reverse order of the
 number of commits authored.
 
 Victor Boctor
-Kenzaburo Ito
 Paul Richards
-Glenn Henshaw
 Damien Regad
+Kenzaburo Ito
+Glenn Henshaw
 Julian Fitzell
 David Hicks
 John Reese
 Jeroen Latour
-Robert Munteanu
 Siebrand Mazeland
+Robert Munteanu
 Gianluca Sforna
 André Eisenbach
 Daryn Warriner
+Roland Becker
 bigbadger
 Lincoln Maskey
 Marcello Scata
-Roland Becker
 Alexey Chumakov
 beerfrick
 Bastian Pfenningschmidt
@@ -80,6 +80,8 @@ ryandesign
 rufinus
 Kirill Krasnov
 David Newcomb
+Rafik Robeal
+Rasmus Lerdorf
 jhuggins
 yarick123
 jotel
@@ -97,6 +99,7 @@ vwegert
 Daniel Tschinder
 Stefan Pettersson
 Vincent Sels
+Dominik Blunk
 Giovanni Giacobbi
 Jim Hanley
 Stéphane Veyret
@@ -108,21 +111,26 @@ Alexander Menk
 Carlos Proensa
 Christian Weiske
 Dan Moore
-Dominik Blunk
 Markus Schneider
+Matt McCutchen
 Tarik Sedlarevic
+badfiles
 puklos
 Alexander Maringer
 Andreas Schopper
+Andreas Stieger
 Benjamin Renard
 Bill Stidham
+Bob Clough
 Brian Wrightson
+DKuranov
 Daniel N
 David W. Juntgen
 Dawit Ayalew
 Edward Rudd
 Florent Daigniere
 Gulacsi Tamas
+Heiko Schneider-Lange
 Henning Eiben
 Jacky Alcine
 Jacob Hoover
@@ -131,10 +139,10 @@ Karl Wiggisser
 Laszlo Kovacs
 Marcin Kłeczek
 Marco Dings
-Matt McCutchen
 MatthieuR
 Michael Lorer
 Michael Weibel
+Murray Crane
 Olivier Mengué
 Pier-Luc Duchaine
 Raul Baldner junior
@@ -143,12 +151,15 @@ Ross Nelson
 SL-Gundam
 Sebastian Kayser
 Sergio Del Franco
+The Gitter Badger
 Todd Whitesel
+cheesecracker
 cybd
 davethegr8
 dwethell
 gcompagnon
 greenius
+jeckyhl
 jeckyll
 mbaranski
 petertc

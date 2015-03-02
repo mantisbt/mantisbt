@@ -403,27 +403,20 @@ function print_tag_option_list( $p_bug_id = 0 ) {
  * @return void
  */
 function print_news_item_option_list() {
-	$t_mantis_news_table = db_get_table( 'news' );
-
 	$t_project_id = helper_get_current_project();
 
 	$t_global = access_has_global_level( config_get_global( 'admin_site_threshold' ) );
 	if( $t_global ) {
-		$t_query = 'SELECT id, headline, announcement, view_state
-				FROM ' . $t_mantis_news_table . '
-				ORDER BY date_posted DESC';
+		$t_query = 'SELECT id, headline, announcement, view_state FROM {news} ORDER BY date_posted DESC';
 	} else {
-		$t_query = 'SELECT id, headline, announcement, view_state
-				FROM ' . $t_mantis_news_table . '
+		$t_query = 'SELECT id, headline, announcement, view_state FROM {news}
 				WHERE project_id=' . db_param() . '
 				ORDER BY date_posted DESC';
 	}
-	$t_result = db_query_bound( $t_query, ($t_global == true ? array() : array( $t_project_id ) ) );
-	$t_news_count = db_num_rows( $t_result );
 
-	for( $i = 0;$i < $t_news_count;$i++ ) {
-		$t_row = db_fetch_array( $t_result );
+	$t_result = db_query( $t_query, ($t_global == true ? array() : array( $t_project_id ) ) );
 
+	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_headline = string_display( $t_row['headline'] );
 		$t_announcement = $t_row['announcement'];
 		$t_view_state = $t_row['view_state'];
@@ -705,17 +698,26 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null ) 
 	} else {
 		$t_project_id = $p_project_id;
 	}
+
+	$t_cat_arr = category_get_all_rows( $t_project_id, null, true );
+
 	if( config_get( 'allow_no_category' ) ) {
-		echo '<option value="0"' . check_selected( $p_category_id, 0 ) . '>';
+		echo '<option value="0"';
+		check_selected( $p_category_id, 0 );
+		echo '>';
 		echo category_full_name( 0, false ), '</option>';
 	} else {
 		if( 0 == $p_category_id ) {
-			echo '<option value="0"' . check_selected( $p_category_id, 0 ) . '>';
-			echo string_attribute( lang_get( 'select_option' ) ) . '</option>';
+			if( count( $t_cat_arr ) == 1 ) {
+				$p_category_id = (int) $t_cat_arr[0]['id'];
+			} else {
+				echo '<option value="0"';
+				echo check_selected( $p_category_id, 0 );
+				echo '>';
+				echo string_attribute( lang_get( 'select_option' ) ) . '</option>';
+			}
 		}
 	}
-
-	$t_cat_arr = category_get_all_rows( $t_project_id, null, true );
 
 	foreach( $t_cat_arr as $t_category_row ) {
 		$t_category_id = (int)$t_category_row['id'];
@@ -866,7 +868,6 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
  * @return void
  */
 function print_build_option_list( $p_build = '' ) {
-	$t_bug_table = db_get_table( 'bug' );
 	$t_overall_build_arr = array();
 
 	$t_project_id = helper_get_current_project();
@@ -875,14 +876,12 @@ function print_build_option_list( $p_build = '' ) {
 
 	# Get the "found in" build list
 	$t_query = 'SELECT DISTINCT build
-				FROM ' . $t_bug_table . '
+				FROM {bug}
 				WHERE ' . $t_project_where . '
 				ORDER BY build DESC';
-	$t_result = db_query_bound( $t_query );
-	$t_option_count = db_num_rows( $t_result );
+	$t_result = db_query( $t_query );
 
-	for( $i = 0;$i < $t_option_count;$i++ ) {
-		$t_row = db_fetch_array( $t_result );
+	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_overall_build_arr[] = $t_row['build'];
 	}
 
@@ -1081,20 +1080,16 @@ function print_project_user_list_option_list( $p_project_id = null ) {
  * @return void
  */
 function print_project_user_list_option_list2( $p_user_id ) {
-	$t_mantis_project_user_list_table = db_get_table( 'project_user_list' );
-	$t_mantis_project_table = db_get_table( 'project' );
-
 	$t_query = 'SELECT DISTINCT p.id, p.name
-				FROM ' . $t_mantis_project_table . ' p
-				LEFT JOIN ' . $t_mantis_project_user_list_table . ' u
+				FROM {project} p
+				LEFT JOIN {project_user_list} u
 				ON p.id=u.project_id AND u.user_id=' . db_param() . '
 				WHERE p.enabled = ' . db_param() . ' AND
 					u.user_id IS NULL
 				ORDER BY p.name';
-	$t_result = db_query_bound( $t_query, array( (int)$p_user_id, true ) );
+	$t_result = db_query( $t_query, array( (int)$p_user_id, true ) );
 	$t_category_count = db_num_rows( $t_result );
-	for( $i = 0;$i < $t_category_count;$i++ ) {
-		$t_row = db_fetch_array( $t_result );
+	while( $t_row = db_fetch_array( $t_result ) ) {
 		$t_project_name = string_attribute( $t_row['name'] );
 		$t_user_id = $t_row['id'];
 		echo '<option value="' . $t_user_id . '">' . $t_project_name . '</option>';
@@ -1646,7 +1641,7 @@ function print_hidden_input( $p_field_key, $p_field_val ) {
  * @return void
  */
 function print_documentation_link( $p_a_name = '' ) {
-	echo lang_get( $p_a_name ) . "\n";
+	echo lang_get( $p_a_name );
 	# @todo Disable documentation links for now.  May be re-enabled if linked to new manual.
 	# echo "<a href=\"doc/documentation.html#$p_a_name\" target=\"_info\">[?]</a>";
 }
@@ -1714,10 +1709,6 @@ function print_rss( $p_feed_url, $p_title = '' ) {
  * @return void
  */
 function print_recently_visited() {
-	if( !last_visited_enabled() ) {
-		return;
-	}
-
 	$t_ids = last_visited_get_array();
 
 	if( count( $t_ids ) == 0 ) {
@@ -1881,9 +1872,8 @@ function print_bug_attachment_preview_text( array $p_attachment ) {
 			}
 			break;
 		case DATABASE:
-			$t_bug_file_table = db_get_table( 'bug_file' );
-			$t_query = 'SELECT * FROM ' . $t_bug_file_table . ' WHERE id=' . db_param();
-			$t_result = db_query_bound( $t_query, array( (int)$p_attachment['id'] ) );
+			$t_query = 'SELECT * FROM {bug_file} WHERE id=' . db_param();
+			$t_result = db_query( $t_query, array( (int)$p_attachment['id'] ) );
 			$t_row = db_fetch_array( $t_result );
 			$t_content = $t_row['content'];
 			break;
@@ -1926,18 +1916,19 @@ function print_bug_attachment_preview_image( array $p_attachment ) {
  * @return void
  */
 function print_timezone_option_list( $p_timezone ) {
-	if( !function_exists( 'timezone_identifiers_list' ) ) {
-		echo "\t" . '<option value="' . $p_timezone . '" selected="selected">' . $p_timezone . '</option>' . "\n";
-		return;
-	}
-
 	$t_identifiers = timezone_identifiers_list( DateTimeZone::ALL );
 
-	foreach ( $t_identifiers as $t_identifier ) {
-		$t_zone = explode( '/', $t_identifier );
-		if( isset( $t_zone[1] ) != '' ) {
-			$t_locations[$t_zone[0]][$t_zone[0] . '/' . $t_zone[1]] = array( str_replace( '_', ' ', $t_zone[1] ), $t_identifier );
+	foreach( $t_identifiers as $t_identifier ) {
+		$t_zone = explode( '/', $t_identifier, 2 );
+		if( isset( $t_zone[1] ) ) {
+			$t_id = $t_zone[1];
+		} else {
+			$t_id = $t_identifier;
 		}
+		$t_locations[$t_zone[0]][$t_identifier] = array(
+			str_replace( '_', ' ', $t_id ),
+			$t_identifier
+		);
 	}
 
 	foreach( $t_locations as $t_continent => $t_locations ) {

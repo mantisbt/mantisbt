@@ -58,13 +58,12 @@ if( OFF == config_get( 'enable_project_documentation' ) ||
 
 $t_file_id = gpc_get_int( 'file_id' );
 
-$t_project_id = file_get_field( $f_file_id, 'project_id', 'project' );
+$t_project_id = file_get_field( $t_file_id, 'project_id', 'project' );
 
 access_ensure_project_level( config_get( 'upload_project_file_threshold' ), $t_project_id );
 
-$t_proj_file_table = db_get_table( 'project_file' );
-$t_query = 'SELECT * FROM ' . $t_proj_file_table . ' WHERE id=' . db_param();
-$t_result = db_query_bound( $t_query, array( $t_file_id ) );
+$t_query = 'SELECT * FROM {project_file} WHERE id=' . db_param();
+$t_result = db_query( $t_query, array( $t_file_id ) );
 $t_row = db_fetch_array( $t_result );
 extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
@@ -83,7 +82,7 @@ html_page_top();
 <table class="width75" cellspacing="1">
 <tr>
 	<td class="form-title">
-		<input type="hidden" name="file_id" value="<?php echo $f_file_id ?>" />
+		<input type="hidden" name="file_id" value="<?php echo $t_file_id ?>" />
 		<?php echo lang_get( 'upload_file_title' ) ?>
 	</td>
 	<td class="right">
@@ -144,7 +143,7 @@ html_page_top();
 <br />
 	<form method="post" action="proj_doc_delete.php">
 	<?php echo form_security_field( 'proj_doc_delete' ) ?>
-	<input type="hidden" name="file_id" value="<?php echo $f_file_id ?>" />
+	<input type="hidden" name="file_id" value="<?php echo $t_file_id ?>" />
 	<input type="hidden" name="title" value="<?php echo $v_title ?>" />
 	<input type="submit" class="button" value="<?php echo lang_get( 'file_delete_button' ) ?>" />
 	</form>

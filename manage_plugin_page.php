@@ -79,10 +79,18 @@ if( 0 < count( $t_plugins_installed ) ) {
 <div class="form-container">
 
 	<form action="manage_plugin_update.php" method="post">
-
+		<fieldset>
 		<?php echo form_security_field( 'manage_plugin_update' ) ?>
+		</fieldset>
 		<table>
-
+			<colgroup>
+				<col style="width:20%" />
+				<col style="width:35%" />
+				<col style="width:20%" />
+				<col style="width:7%" />
+				<col style="width:8%" />
+				<col style="width:10%" />
+			</colgroup>
 			<thead>
 				<!-- Title -->
 				<tr>
@@ -93,12 +101,12 @@ if( 0 < count( $t_plugins_installed ) ) {
 
 				<!-- Info -->
 				<tr class="row-category">
-					<th width="20%"><?php echo lang_get( 'plugin' ) ?></th>
-					<th width="35%"><?php echo lang_get( 'plugin_description' ) ?></th>
-					<th width="20%"><?php echo lang_get( 'plugin_depends' ) ?></th>
-					<th width="7%"><?php echo lang_get( 'plugin_priority' ) ?></th>
-					<th width="8%"><?php echo lang_get( 'plugin_protected' ) ?></th>
-					<th width="10%"><?php echo lang_get( 'plugin_actions' ) ?></th>
+					<th><?php echo lang_get( 'plugin' ) ?></th>
+					<th><?php echo lang_get( 'plugin_description' ) ?></th>
+					<th><?php echo lang_get( 'plugin_depends' ) ?></th>
+					<th><?php echo lang_get( 'plugin_priority' ) ?></th>
+					<th><?php echo lang_get( 'plugin_protected' ) ?></th>
+					<th><?php echo lang_get( 'plugin_actions' ) ?></th>
 				</tr>
 			</thead>
 
@@ -214,7 +222,12 @@ if( 0 < count( $t_plugins_available ) ) {
 <br/>
 <div class="table-container">
 	<table>
-
+		<colgroup>
+			<col style="width:25%" />
+			<col style="width:45%" />
+			<col style="width:20%" />
+			<col style="width:10%" />
+		</colgroup>
 		<thead>
 			<!-- Title -->
 			<tr>
@@ -225,10 +238,10 @@ if( 0 < count( $t_plugins_available ) ) {
 
 			<!-- Info -->
 			<tr class="row-category">
-				<td width="25%"><?php echo lang_get( 'plugin' ) ?></td>
-				<td width="45%"><?php echo lang_get( 'plugin_description' ) ?></td>
-				<td width="20%"><?php echo lang_get( 'plugin_depends' ) ?></td>
-				<td width="10%"><?php echo lang_get( 'plugin_actions' ) ?></td>
+				<td><?php echo lang_get( 'plugin' ) ?></td>
+				<td><?php echo lang_get( 'plugin_description' ) ?></td>
+				<td><?php echo lang_get( 'plugin_depends' ) ?></td>
+				<td><?php echo lang_get( 'plugin_actions' ) ?></td>
 			</tr>
 		</thead>
 

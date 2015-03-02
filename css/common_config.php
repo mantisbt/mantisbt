@@ -36,8 +36,8 @@ require_api( 'config_api.php' );
 header( 'Content-Type: text/css; charset=UTF-8' );
 
 /**
- * Disallow Internet Explorer from attempting to second guess the Content-Type
- * header as per http://blogs.msdn.com/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
+ * Don't let Internet Explorer second-guess our content-type, as per
+ * http://blogs.msdn.com/b/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
  */
 header( 'X-Content-Type-Options: nosniff' );
 

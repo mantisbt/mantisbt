@@ -40,6 +40,7 @@
  *
  * @author Bugoslav
  * @author Herr Mlinka
+ * @author KWiki
  */
 
 $s_all_projects = 'Svi projekti';
@@ -168,7 +169,7 @@ $s_category = 'Kategorija';
 $s_severity = 'Ozbiljnost';
 $s_reproducibility = 'Učestalost';
 $s_date_submitted = 'Datum prijave';
-$s_last_update = 'Zadnje ažuriran';
+$s_last_update = 'Posljednje ažuriranje';
 $s_reporter = 'Izvjestitelj';
 $s_assigned_to = 'Dodijeljen';
 $s_priority = 'Prioritet';

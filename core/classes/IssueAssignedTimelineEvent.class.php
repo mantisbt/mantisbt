@@ -45,26 +45,16 @@ class IssueAssignedTimelineEvent extends TimelineEvent {
 	}
 
 	/**
-	 * Whether to skip this event after access checks
-	 * @return boolean
-	 */
-	function skip() {
-		if( !access_has_bug_level( config_get( 'view_handler_threshold' ), $this->issue_id ) ) {
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
 	 * Returns html string to display
 	 * @return string
 	 */
 	public function html() {
 		if( $this->user_id == $this->handler_id ) {
 			$t_string = sprintf( lang_get( 'timeline_issue_assigned_to_self' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
-		} else {
+		} else if( $this->handler_id != NO_USER ) {
 			$t_string = sprintf( lang_get( 'timeline_issue_assigned' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ), user_get_name( $this->handler_id ) );
+		} else {
+			$t_string = sprintf( lang_get( 'timeline_issue_unassigned' ), user_get_name( $this->user_id ), string_get_bug_view_link( $this->issue_id ) );
 		}
 
 		$t_html = $this->html_start();

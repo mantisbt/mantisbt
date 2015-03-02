@@ -487,7 +487,6 @@ function translate_category_name_to_id( $p_category_name, $p_project_id ) {
  * @return array
  */
 function mci_filter_db_get_available_queries( $p_project_id = null, $p_user_id = null ) {
-	$t_filters_table = db_get_table( 'filters' );
 	$t_overall_query_arr = array();
 
 	if( null === $p_project_id ) {
@@ -510,14 +509,14 @@ function mci_filter_db_get_available_queries( $p_project_id = null, $p_user_id =
 	# Get the list of available queries. By sorting such that public queries are
 	# first, we can override any query that has the same name as a private query
 	# with that private one
-	$t_query = 'SELECT * FROM ' . $t_filters_table . '
+	$t_query = 'SELECT * FROM {filters}
 					WHERE (project_id=' . db_param() . '
 						OR project_id=0)
 					AND name!=\'\'
 					AND (is_public = ' . db_param() . '
 						OR user_id = ' . db_param() . ')
 					ORDER BY is_public DESC, name ASC';
-	$t_result = db_query_bound( $t_query, array( $t_project_id, db_prepare_bool( true ), $t_user_id ) );
+	$t_result = db_query( $t_query, array( $t_project_id, true, $t_user_id ) );
 	$t_query_count = db_num_rows( $t_result );
 
 	for( $i = 0;$i < $t_query_count;$i++ ) {

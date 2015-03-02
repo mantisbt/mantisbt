@@ -58,7 +58,7 @@ require_api( 'lang_api.php' );
 <?php
 	collapse_open( 'bugnote_add', '', 'form-container' );
 ?>
-<form name="bugnoteadd" method="post" action="bugnote_add.php">
+<form id="bugnoteadd" method="post" action="bugnote_add.php">
 	<?php echo form_security_field( 'bugnote_add' ) ?>
 	<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 	<table>
@@ -114,7 +114,7 @@ require_api( 'lang_api.php' );
 					<?php echo lang_get( 'time_tracking' ) ?>
 				</th>
 				<td>
-					<?php if( config_get( 'time_tracking_stopwatch' ) && config_get( 'use_javascript' ) ) { ?>
+					<?php if( config_get( 'time_tracking_stopwatch' ) ) { ?>
 					<input type="text" name="time_tracking" class="stopwatch_time" size="8" placeholder="hh:mm:ss" />
 					<input type="button" name="time_tracking_toggle" class="stopwatch_toggle" value="<?php echo lang_get( 'time_tracking_stopwatch_start' ) ?>" />
 					<input type="button" name="time_tracking_reset" class="stopwatch_reset" value="<?php echo lang_get( 'time_tracking_stopwatch_reset' ) ?>" />

@@ -148,6 +148,21 @@ function print_option_list_from_array( array $p_array, $p_filter_value ) {
 	}
 }
 
+/**
+ * Ensures the given config is valid
+ * @param string $p_config Configuration name
+ * @return string|integer Config name if valid, or META_FILTER_NONE of not
+ */
+function check_config_value( $p_config ) {
+	if(    $p_config != META_FILTER_NONE
+	   && !is_blank( $p_config )
+	   && is_null( @config_get_global( $p_config ) )
+	) {
+		return META_FILTER_NONE;
+	}
+	return $p_config;
+}
+
 # Get filter values
 $t_filter_save          = gpc_get_bool( 'save' );
 $t_filter_default       = gpc_get_bool( 'default_filter_button', false );
@@ -163,7 +178,7 @@ if( $t_filter_default ) {
 } else {
 	$t_filter_user_value    = gpc_get_int( 'filter_user_id', ALL_USERS );
 	$t_filter_project_value = gpc_get_int( 'filter_project_id', ALL_PROJECTS );
-	$t_filter_config_value  = gpc_get_string( 'filter_config_id', META_FILTER_NONE );
+	$t_filter_config_value  = check_config_value( gpc_get_string( 'filter_config_id', META_FILTER_NONE ) );
 }
 
 # Manage filter's persistency through cookie
@@ -188,17 +203,10 @@ if( $t_filter_save ) {
 
 		$t_filter_user_value    = $t_cookie_contents[0];
 		$t_filter_project_value = $t_cookie_contents[1];
-		$t_filter_config_value  = $t_cookie_contents[2];
+		$t_filter_config_value  = check_config_value( $t_cookie_contents[2] );
 
 		if( $t_filter_project_value != META_FILTER_NONE && !project_exists( $t_filter_project_value ) ) {
 			$t_filter_project_value = ALL_PROJECTS;
-		}
-
-		if(    $t_filter_config_value != META_FILTER_NONE
-			&& !is_blank( $t_filter_config_value )
-			&& @config_get_global( $t_filter_config_value ) === null
-		) {
-			$t_filter_config_value = META_FILTER_NONE;
 		}
 	}
 }
@@ -211,12 +219,10 @@ $t_edit_type            = gpc_get_string( 'type', CONFIG_TYPE_DEFAULT );
 $t_edit_value           = gpc_get_string( 'value', '' );
 
 # Apply filters
-$t_config_table  = db_get_table( 'config' );
-$t_project_table = db_get_table( 'project' );
 
 # Get users in db having specific configs
-$t_query = 'SELECT DISTINCT user_id FROM ' . $t_config_table . ' WHERE user_id <> ' . db_param() ;
-$t_result = db_query_bound( $t_query, array( ALL_USERS ) );
+$t_query = 'SELECT DISTINCT user_id FROM {config} WHERE user_id <> ' . db_param() ;
+$t_result = db_query( $t_query, array( ALL_USERS ) );
 if( $t_filter_user_value != META_FILTER_NONE && $t_filter_user_value != ALL_USERS ) {
 	# Make sure the filter value exists in the list
 	$t_users_list[$t_filter_user_value] = user_get_name( $t_filter_user_value );
@@ -237,11 +243,11 @@ $t_users_list = array(
 
 # Get projects in db with specific configs
 $t_query = 'SELECT DISTINCT project_id, pt.name as project_name
-	FROM ' . $t_config_table . ' as ct
-	JOIN ' . $t_project_table . ' as pt ON pt.id = ct.project_id
+	FROM {config} ct
+	JOIN {project} pt ON pt.id = ct.project_id
 	WHERE project_id!=0
 	ORDER BY project_name';
-$t_result = db_query_bound( $t_query );
+$t_result = db_query( $t_query );
 $t_projects_list[META_FILTER_NONE] = '[' . lang_get( 'any' ) . ']';
 $t_projects_list[ALL_PROJECTS] = lang_get( 'all_projects' );
 while( $t_row = db_fetch_array( $t_result ) ) {
@@ -250,8 +256,8 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 }
 
 # Get config list used in db
-$t_query = 'SELECT DISTINCT config_id FROM ' . $t_config_table . ' ORDER BY config_id';
-$t_result = db_query_bound( $t_query );
+$t_query = 'SELECT DISTINCT config_id FROM {config} ORDER BY config_id';
+$t_result = db_query( $t_query );
 $t_configs_list[META_FILTER_NONE] = '[' . lang_get( 'any' ) . ']';
 if( $t_filter_config_value != META_FILTER_NONE ) {
 	# Make sure the filter value exists in the list
@@ -282,8 +288,8 @@ if( $t_where != '' ) {
 }
 
 $t_query = 'SELECT config_id, user_id, project_id, type, value, access_reqd
-	FROM ' . $t_config_table . $t_where . ' ORDER BY user_id, project_id, config_id ';
-$t_result = db_query_bound( $t_query, $t_param );
+	FROM {config} ' . $t_where . ' ORDER BY user_id, project_id, config_id ';
+$t_result = db_query( $t_query, $t_param );
 ?>
 
 <!-- FILTER FORM -->
@@ -488,7 +494,7 @@ if( $t_read_write_access ) {
 				<label for="config-option"><span><?php echo lang_get( 'configuration_option' ) ?></span></label>
 				<span class="input">
 					<input type="text" name="config_option"
-						value="<?php echo $t_edit_option; ?>"
+						value="<?php echo string_display_line( $t_edit_option ); ?>"
 						size="64" maxlength="64" />
 				</span>
 				<span class="label-style"></span>

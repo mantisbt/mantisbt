@@ -76,16 +76,14 @@ function profile_create( $p_user_id, $p_platform, $p_os, $p_os_build, $p_descrip
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	$t_user_profile_table = db_get_table( 'user_profile' );
-
 	# Add profile
-	$t_query = 'INSERT INTO ' . $t_user_profile_table . '
+	$t_query = 'INSERT INTO {user_profile}
 				    ( user_id, platform, os, os_build, description )
 				  VALUES
 				    ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-	db_query_bound( $t_query, array( $p_user_id, $p_platform, $p_os, $p_os_build, $p_description ) );
+	db_query( $t_query, array( $p_user_id, $p_platform, $p_os, $p_os_build, $p_description ) );
 
-	return db_insert_id( $t_user_profile_table );
+	return db_insert_id( db_get_table( 'user_profile' ) );
 }
 
 /**
@@ -103,11 +101,9 @@ function profile_delete( $p_user_id, $p_profile_id ) {
 		user_ensure_unprotected( $p_user_id );
 	}
 
-	$t_user_profile_table = db_get_table( 'user_profile' );
-
 	# Delete the profile
-	$t_query = 'DELETE FROM ' . $t_user_profile_table . ' WHERE id=' . db_param() . ' AND user_id=' . db_param();
-	db_query_bound( $t_query, array( $p_profile_id, $p_user_id ) );
+	$t_query = 'DELETE FROM {user_profile} WHERE id=' . db_param() . ' AND user_id=' . db_param();
+	db_query( $t_query, array( $p_profile_id, $p_user_id ) );
 }
 
 /**
@@ -143,16 +139,14 @@ function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_bu
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
-	$t_user_profile_table = db_get_table( 'user_profile' );
-
 	# Add item
-	$t_query = 'UPDATE ' . $t_user_profile_table . '
+	$t_query = 'UPDATE {user_profile}
 				  SET platform=' . db_param() . ',
 				  	  os=' . db_param() . ',
 					  os_build=' . db_param() . ',
 					  description=' . db_param() . '
 				  WHERE id=' . db_param() . ' AND user_id=' . db_param();
-	db_query_bound( $t_query, array( $p_platform, $p_os, $p_os_build, $p_description, $p_profile_id, $p_user_id ) );
+	db_query( $t_query, array( $p_platform, $p_os, $p_os_build, $p_description, $p_profile_id, $p_user_id ) );
 }
 
 /**
@@ -162,10 +156,8 @@ function profile_update( $p_user_id, $p_profile_id, $p_platform, $p_os, $p_os_bu
  * @return array
  */
 function profile_get_row( $p_user_id, $p_profile_id ) {
-	$t_user_profile_table = db_get_table( 'user_profile' );
-
-	$t_query = 'SELECT * FROM ' . $t_user_profile_table . ' WHERE id=' . db_param() . ' AND user_id=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $p_profile_id, $p_user_id ) );
+	$t_query = 'SELECT * FROM {user_profile} WHERE id=' . db_param() . ' AND user_id=' . db_param();
+	$t_result = db_query( $t_query, array( $p_profile_id, $p_user_id ) );
 
 	return db_fetch_array( $t_result );
 }
@@ -177,10 +169,8 @@ function profile_get_row( $p_user_id, $p_profile_id ) {
  * @todo relationship of this function to profile_get_row?
  */
 function profile_get_row_direct( $p_profile_id ) {
-	$t_user_profile_table = db_get_table( 'user_profile' );
-
-	$t_query = 'SELECT * FROM ' . $t_user_profile_table . ' WHERE id=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $p_profile_id ) );
+	$t_query = 'SELECT * FROM {user_profile} WHERE id=' . db_param();
+	$t_result = db_query( $t_query, array( $p_profile_id ) );
 
 	return db_fetch_array( $t_result );
 }
@@ -192,8 +182,6 @@ function profile_get_row_direct( $p_profile_id ) {
  * @return array
  */
 function profile_get_all_rows( $p_user_id, $p_all_users = false ) {
-	$t_user_profile_table = db_get_table( 'user_profile' );
-
 	$t_query_where = 'user_id = ' . db_param();
 	$t_param[] = (int)$p_user_id;
 
@@ -202,10 +190,8 @@ function profile_get_all_rows( $p_user_id, $p_all_users = false ) {
 		$t_param[] = ALL_USERS;
 	}
 
-	$t_query = 'SELECT * FROM ' . $t_user_profile_table . '
-				  WHERE ' . $t_query_where . '
-				  ORDER BY platform, os, os_build';
-	$t_result = db_query_bound( $t_query, $t_param );
+	$t_query = 'SELECT * FROM {user_profile} WHERE ' . $t_query_where . ' ORDER BY platform, os, os_build';
+	$t_result = db_query( $t_query, $t_param );
 
 	$t_rows = array();
 
@@ -249,13 +235,11 @@ function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
 			trigger_error( ERROR_GENERIC, ERROR );
 	}
 
-	$t_user_profile_table = db_get_table( 'user_profile' );
-
 	$t_query = 'SELECT DISTINCT ' . $c_field . '
-				  FROM ' . $t_user_profile_table . '
+				  FROM {user_profile}
 				  WHERE ( user_id=' . db_param() . ' ) OR ( user_id = 0 )
 				  ORDER BY ' . $c_field;
-	$t_result = db_query_bound( $t_query, array( $c_user_id ) );
+	$t_result = db_query( $t_query, array( $c_user_id ) );
 
 	$t_rows = array();
 
@@ -274,15 +258,12 @@ function profile_get_field_all_for_user( $p_field, $p_user_id = null ) {
 function profile_get_all_for_project( $p_project_id ) {
 	$t_project_where = helper_project_specific_where( $p_project_id );
 
-	$t_bug_table = db_get_table( 'bug' );
-	$t_user_profile_table = db_get_table( 'user_profile' );
-
 	$t_query = 'SELECT DISTINCT(up.id), up.user_id, up.platform, up.os, up.os_build
-				  FROM ' . $t_user_profile_table . ' up, ' . $t_bug_table . ' b
+				  FROM {user_profile} up, {bug} b
 				  WHERE ' . $t_project_where . '
 				  AND up.id = b.profile_id
-				  ORDER BY platform, os, os_build';
-	$t_result = db_query_bound( $t_query );
+				  ORDER BY up.platform, up.os, up.os_build';
+	$t_result = db_query( $t_query );
 
 	$t_rows = array();
 
@@ -299,10 +280,8 @@ function profile_get_all_for_project( $p_project_id ) {
  * @return string
  */
 function profile_get_default( $p_user_id ) {
-	$t_mantis_user_pref_table = db_get_table( 'user_pref' );
-
-	$t_query = 'SELECT default_profile FROM ' . $t_mantis_user_pref_table . ' WHERE user_id=' . db_param();
-	$t_result = db_query_bound( $t_query, array( $p_user_id ) );
+	$t_query = 'SELECT default_profile FROM {user_pref} WHERE user_id=' . db_param();
+	$t_result = db_query( $t_query, array( $p_user_id ) );
 
 	$t_default_profile = (int)db_result( $t_result, 0, 0 );
 

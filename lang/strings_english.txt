@@ -89,6 +89,7 @@ $s_actiongroup_menu_update_view_status = 'Update View Status';
 $s_actiongroup_menu_update_category = 'Update Category';
 $s_actiongroup_menu_set_sticky = 'Set/Unset Sticky';
 $s_actiongroup_menu_update_field = 'Update %1$s';
+$s_actiongroup_menu_update_product_version = 'Update Product Version';
 $s_actiongroup_menu_update_target_version = 'Update Target Version';
 $s_actiongroup_menu_update_fixed_in_version = 'Update Fixed in Version';
 $s_actiongroup_menu_update_product_build = 'Update Product Build';
@@ -198,6 +199,7 @@ $s_status_bugs_conf_msg = 'Choose issues status';
 $s_view_status_bugs_conf_msg = 'Choose issues view status';
 $s_category_bugs_conf_msg = 'Choose issues category';
 $s_set_sticky_bugs_conf_msg = 'Are you sure you wish to set/unset these issues sticky?';
+$s_product_version_bugs_conf_msg = 'Update Product Version to';
 $s_fixed_in_version_bugs_conf_msg = 'Update Fixed in Version to';
 $s_target_version_bugs_conf_msg = 'Update Target Version to';
 $s_close_group_bugs_button = 'Close Issues';
@@ -211,6 +213,7 @@ $s_status_group_bugs_button = 'Update Status';
 $s_category_group_bugs_button = 'Update Category';
 $s_view_status_group_bugs_button = 'Update View Status';
 $s_set_sticky_group_bugs_button = 'Set/Unset Sticky';
+$s_product_version_group_bugs_button = 'Update Product Version';
 $s_fixed_in_version_group_bugs_button = 'Update Fixed in Version';
 $s_target_version_group_bugs_button = 'Update Target Version';
 $s_update_severity_title = 'Update Severity';
@@ -736,6 +739,9 @@ $s_last_visit = 'Last Visit';
 $s_last_visit_label = 'Last Visit:';
 $s_edit_user_link = 'Edit User';
 
+# manage_custom_field_edit_page.php
+$s_separate_list_items_by = '(separate list items by "%1$s")';
+
 # manage_config_email_page
 $s_config_all_projects = 'Note: These configurations affect all projects, unless overridden at the project level.';
 $s_config_project = 'Note: These configurations affect only the %1$s project.';
@@ -883,6 +889,7 @@ $s_copy_to = 'Copy To';
 $s_categories_and_version_title = 'Categories and Versions';
 $s_categories = 'Categories';
 $s_add_category_button = 'Add Category';
+$s_add_and_edit_category_button = 'Add and Edit Category';
 $s_versions = 'Versions';
 $s_add_version_button = 'Add Version';
 $s_add_and_edit_version_button = 'Add and Edit Version';
@@ -1288,7 +1295,7 @@ $s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:E
 $s_confirm_used_custom_field_deletion = 'This field is currently linked to at least one project. If you continue all values for this field will be permanently deleted. This action cannot be undone. If you do not want to delete this field, hit the Back button in your browser. To proceed, click the button below';
 $s_confirm_custom_field_deletion = 'Are you sure you want to delete this custom field and all associated values?';
 $s_field_delete_button = 'Delete Field';
-$s_confirm_custom_field_unlinking = 'Are you sure you want to remove (unlink) this custom field from the project and delete all associated values?';
+$s_confirm_custom_field_unlinking = 'Are you sure you want to unlink this custom field from the project? The values will not be deleted as long as the custom field itself is not deleted.';
 $s_field_remove_button = 'Remove Field';
 $s_hide_status = 'Hide Status';
 $s_hide_status_label = 'Hide Status:';
@@ -1359,7 +1366,7 @@ $s_create_child_bug_button = 'Clone';
 $s_bug_cloned_to = 'Issue cloned';
 $s_bug_created_from = 'Issue generated from';
 $s_copy_from_parent = 'Copy extended data from parent issue';
-$s_copy_notes_from_parent = 'Copy bug notes';
+$s_copy_notes_from_parent = 'Copy issue notes';
 $s_copy_attachments_from_parent = 'Copy attachments';
 
 # Relationship Graphs
@@ -1560,17 +1567,18 @@ $s_month_november = 'November';
 $s_month_december = 'December';
 
 # Timeline Feature Strings
-$s_timeline_issue_created = '<span class="username">%1s</span> created issue <span class="issue_id">%2s</span>';
-$s_timeline_issue_note_created = '<span class="username">%1s</span> commented on issue <span class="issue_id">%2s</span>';
-$s_timeline_issue_monitor = '<span class="username">%1s</span> is monitoring issue <span class="issue_id">%2s</span>';
-$s_timeline_issue_unmonitor = '<span class="username">%1s</span> stopped monitoring issue <span class="issue_id">%2s</span>';
-$s_timeline_issue_tagged = '<span class="username">%1s</span> tagged issue <span class="issue_id">%2s</span> with <span class="tag_name">%3s</span>';
-$s_timeline_issue_untagged = '<span class="username">%1s</span> removed <span class="tag_name">%3s</span> from issue <span class="issue_id">%2s</span>';
-$s_timeline_issue_resolved = '<span class="username">%1s</span> resolved issue <span class="issue_id">%2s</span>';
-$s_timeline_issue_closed = '<span class="username">%1s</span> closed issue <span class="issue_id">%2s</span>';
-$s_timeline_issue_reopened = '<span class="username">%1s</span> reopened issue <span class="issue_id">%2s</span>';
-$s_timeline_issue_assigned = '<span class="username">%1s</span> assigned issue <span class="issue_id">%2s</span> to <span class="username">%3s</span>';
-$s_timeline_issue_assigned_to_self = '<span class="username">%1s</span> picked up issue <span class="issue_id">%2s</span>';
+$s_timeline_issue_created = '<span class="username">%1$s</span> created issue <span class="issue_id">%2$s</span>';
+$s_timeline_issue_note_created = '<span class="username">%1$s</span> commented on issue <span class="issue_id">%2$s</span>';
+$s_timeline_issue_monitor = '<span class="username">%1$s</span> is monitoring issue <span class="issue_id">%2$s</span>';
+$s_timeline_issue_unmonitor = '<span class="username">%1$s</span> stopped monitoring issue <span class="issue_id">%2$s</span>';
+$s_timeline_issue_tagged = '<span class="username">%1$s</span> tagged issue <span class="issue_id">%2$s</span> with <span class="tag_name">%3$s</span>';
+$s_timeline_issue_untagged = '<span class="username">%1$s</span> removed tag <span class="tag_name">%3$s</span> from issue <span class="issue_id">%2$s</span>';
+$s_timeline_issue_resolved = '<span class="username">%1$s</span> resolved issue <span class="issue_id">%2$s</span>';
+$s_timeline_issue_closed = '<span class="username">%1$s</span> closed issue <span class="issue_id">%2$s</span>';
+$s_timeline_issue_reopened = '<span class="username">%1$s</span> reopened issue <span class="issue_id">%2$s</span>';
+$s_timeline_issue_assigned = '<span class="username">%1$s</span> assigned issue <span class="issue_id">%2$s</span> to <span class="username">%3$s</span>';
+$s_timeline_issue_assigned_to_self = '<span class="username">%1$s</span> picked up issue <span class="issue_id">%2$s</span>';
+$s_timeline_issue_unassigned = '<span class="username">%1$s</span> unassigned issue <span class="issue_id">%2$s</span>';
 $s_timeline_no_activity = 'No activity within time range.';
 $s_timeline_title = 'Timeline';
 $s_timeline_more = 'More events...';

@@ -81,17 +81,15 @@ $c_file_id = (integer)$f_file_id;
 $t_query = '';
 switch( $f_type ) {
 	case 'bug':
-		$t_bug_file_table = db_get_table( 'bug_file' );
-		$t_query = 'SELECT * FROM ' . $t_bug_file_table . ' WHERE id=' . db_param();
+		$t_query = 'SELECT * FROM {bug_file} WHERE id=' . db_param();
 		break;
 	case 'doc':
-		$t_project_file_table = db_get_table( 'project_file' );
-		$t_query = 'SELECT * FROM ' . $t_project_file_table . ' WHERE id=' . db_param();
+		$t_query = 'SELECT * FROM {project_file} WHERE id=' . db_param();
 		break;
 	default:
 		access_denied();
 }
-$t_result = db_query_bound( $t_query, array( $c_file_id ) );
+$t_result = db_query( $t_query, array( $c_file_id ) );
 $t_row = db_fetch_array( $t_result );
 extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
@@ -146,15 +144,10 @@ header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() ) );
 
 header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s \G\M\T', $v_date_added ) );
 
+$t_upload_method = config_get( 'file_upload_method' );
 $t_filename = file_get_display_name( $v_filename );
 
-# For Internet Explorer 8 as per http://blogs.msdn.com/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
-# Don't let IE second guess our content-type!
-header( 'X-Content-Type-Options: nosniff' );
-
-http_content_disposition_header( $t_filename, $f_show_inline );
-
-header( 'Content-Length: ' . $v_filesize );
+# Content headers
 
 # If finfo is available (always true for PHP >= 5.3.0) we can use it to determine the MIME type of files
 $t_finfo = finfo_get_if_available();
@@ -162,50 +155,54 @@ $t_finfo = finfo_get_if_available();
 $t_content_type = $v_file_type;
 
 $t_content_type_override = file_get_content_type_override( $t_filename );
+$t_file_info_type = false;
 
-# dump file content to the connection.
-switch( config_get( 'file_upload_method' ) ) {
+switch( $t_upload_method ) {
 	case DISK:
 		$t_local_disk_file = file_normalize_attachment_path( $v_diskfile, $t_project_id );
-
-		if( file_exists( $t_local_disk_file ) ) {
-			if( $t_finfo ) {
-				$t_file_info_type = $t_finfo->file( $t_local_disk_file );
-
-				if( $t_file_info_type !== false ) {
-					$t_content_type = $t_file_info_type;
-				}
-			}
-
-			if( $t_content_type_override ) {
-				$t_content_type = $t_content_type_override;
-			}
-
-			header( 'Content-Type: ' . $t_content_type );
-			if( config_get( 'file_download_xsendfile_enabled' ) ) {
-				$t_xsendfile_header_name = config_get( 'file_download_xsendfile_header_name' );
-				header( $t_xsendfile_header_name . ': ' . $t_local_disk_file );
-			} else {
-				readfile( $t_local_disk_file );
-			}
+		if( file_exists( $t_local_disk_file ) && $t_finfo ) {
+			$t_file_info_type = $t_finfo->file( $t_local_disk_file );
 		}
 		break;
 	case DATABASE:
-		if( $t_finfo ) {
+		if ( $t_finfo ) {
 			$t_file_info_type = $t_finfo->buffer( $v_content );
-
-			if( $t_file_info_type !== false ) {
-				$t_content_type = $t_file_info_type;
-			}
 		}
-
-		if( $t_content_type_override ) {
-			$t_content_type = $t_content_type_override;
-		}
-
-		header( 'Content-Type: ' . $t_content_type );
-		echo $v_content;
 		break;
 	default:
 		trigger_error( ERROR_GENERIC, ERROR );
+
+}
+
+if( $t_file_info_type !== false ) {
+	$t_content_type = $t_file_info_type;
+}
+
+if( $t_content_type_override ) {
+	$t_content_type = $t_content_type_override;
+}
+
+# Don't allow inline flash
+if( false !== strpos( $t_content_type, 'application/x-shockwave-flash' ) ) {
+	http_content_disposition_header( $t_filename );
+} else {
+	http_content_disposition_header( $t_filename, $f_show_inline );
+}
+
+header( 'Content-Type: ' . $t_content_type );
+header( 'Content-Length: ' . $v_filesize );
+
+# Don't let Internet Explorer second-guess our content-type [1]
+# Also disable Flash content-type sniffing [2]
+# [1] http://blogs.msdn.com/b/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
+# [2] http://50.56.33.56/blog/?p=242
+header( 'X-Content-Type-Options: nosniff' );
+
+# dump file content to the connection.
+switch( $t_upload_method ) {
+	case DISK:
+		readfile( $t_local_disk_file );
+		break;
+	case DATABASE:
+		echo $v_content;
 }

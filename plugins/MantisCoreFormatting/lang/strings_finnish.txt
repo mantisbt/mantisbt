@@ -39,9 +39,11 @@
  * @file
  *
  * @author Centerlink
+ * @author Macofe
  */
 
 $s_plugin_format_description = 'Virallinen tekstinkäsittely- ja muotoiluliitännäinen.';
+$s_plugin_format_config = 'Asetukset';
 $s_plugin_format_process_text = 'Tekstinkäsittely';
 $s_plugin_format_process_urls = 'Verkko-osoitteen käsittely';
 $s_plugin_format_enabled = 'Käytössä';

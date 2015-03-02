@@ -45,7 +45,7 @@ require_api( 'tokens_api.php' );
  * @access public
  */
 function last_visited_enabled() {
-	return !( OFF == config_get( 'recently_visited' ) || current_user_is_anonymous() );
+	return !( 0 == config_get( 'recently_visited_count' ) || current_user_is_anonymous() );
 }
 
 /**
@@ -84,6 +84,10 @@ function last_visited_issue( $p_issue_id, $p_user_id = null ) {
  * @access public
  */
 function last_visited_get_array( $p_user_id = null ) {
+	if( !last_visited_enabled() ) {
+		return array();
+	}
+
 	$t_value = token_get_value( TOKEN_LAST_VISITED, $p_user_id );
 
 	if( is_null( $t_value ) ) {

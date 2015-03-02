@@ -39,6 +39,7 @@
  * @file
  *
  * @author Changwoo
+ * @author Hong3e
  * @author 아라
  */
 
@@ -48,6 +49,6 @@ $s_plugin_format_config = '설정';
 $s_plugin_format_process_text = '텍스트 처리';
 $s_plugin_format_process_text_warning_notice = '잘 모르면 사용 중지하지 마십시오. 사용 중지 상태에서는 크로스 사이트 스크립팅(XSS) 공격을 받을 수 있습니다.';
 $s_plugin_format_process_urls = 'URL 처리';
-$s_plugin_format_process_buglinks = '맨티스 링크(이슈/이슈노트)';
+$s_plugin_format_process_buglinks = '맨티스 내부링크(이슈&이슈노트)';
 $s_plugin_format_enabled = '사용';
 $s_plugin_format_disabled = '끄기';

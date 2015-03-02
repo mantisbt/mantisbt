@@ -21,7 +21,8 @@
 /**
  * Mantis Version
  */
-define( 'MANTIS_VERSION', '1.3.0dev' );
+define( 'MANTIS_VERSION', '1.3.0-beta.2-dev' );
+define( 'FILTER_VERSION', 'v9' );
 
 # --- constants -------------------
 # magic numbers
@@ -42,12 +43,13 @@ define( 'CONFIGURED_PASSWORD', '______' );
 define( 'DB_MIN_VERSION_ADODB', '5.19' ); # For mssql, oracle and pgsql
 define( 'DB_MIN_VERSION_MSSQL', '9.0.0' );
 define( 'DB_MIN_VERSION_MYSQL', '5.0.8' );   # See #16584
-define( 'DB_MIN_VERSION_PGSQL', '8.4' );     # Earliest supported version as of Jan 2014
+define( 'DB_MIN_VERSION_PGSQL', '9.0' );     # Earliest supported version as of August 2014
 
 # error types
 define( 'ERROR', E_USER_ERROR );
 define( 'WARNING', E_USER_WARNING );
 define( 'NOTICE', E_USER_NOTICE );
+define( 'DEPRECATED', E_USER_DEPRECATED );
 
 # access levels
 define( 'ANYBODY', 0 );
@@ -216,6 +218,10 @@ define( 'BUG_RELATED', 1 );
 define( 'BUG_DEPENDANT', 2 );
 define( 'BUG_BLOCKS', 3 );
 define( 'BUG_HAS_DUPLICATE', 4 );
+
+# bug update types
+define( 'BUG_UPDATE_TYPE_NORMAL', 'update' );
+define( 'BUG_UPDATE_TYPE_ASSIGN', 'assign' );
 
 # error messages
 define( 'ERROR_GENERIC', 0 );
@@ -424,8 +430,6 @@ define( 'FILTER_POSITION_BOTTOM', POSITION_BOTTOM );
 define( 'FILTER_POSITION_BOTH', POSITION_BOTH );
 
 # FILTER_POSITION_TOP | FILTER_POSITION_BOTTOM (bitwise OR)
-# Flags for settings E-mail categories
-define( 'EMAIL_CATEGORY_PROJECT_CATEGORY', 1 );
 
 # Custom Field types
 define( 'CUSTOM_FIELD_TYPE_STRING', 0 );
@@ -559,9 +563,9 @@ define( 'PHPMAILER_METHOD_SENDMAIL', 1 );
 define( 'PHPMAILER_METHOD_SMTP', 2 );
 
 # Lengths - NOTE: these may represent hard-coded values in db schema and should not be changed.
-define( 'DB_FIELD_SIZE_USERNAME', 32 );
-define( 'DB_FIELD_SIZE_REALNAME', 64 );
-define( 'DB_FIELD_SIZE_PASSWORD', 32 );
+define( 'DB_FIELD_SIZE_USERNAME', 255 );
+define( 'DB_FIELD_SIZE_REALNAME', 255 );
+define( 'DB_FIELD_SIZE_PASSWORD', 64 );
 
 # Maximum size for the user's password when storing it as a hash
 define( 'PASSWORD_MAX_SIZE_BEFORE_HASH', 1024 );

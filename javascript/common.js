@@ -194,10 +194,13 @@ $(document).ready( function() {
 	$('[name=source_query_id]').change( function() {
 		$(this).parent().submit();
 	});
-	$('#project-selector').children('[name=project_id]').change( function() {
+
+	/* Project selector: auto-switch on select */
+	$('#form-set-project-id').change( function() {
 		$('#form-set-project').submit();
 	});
 	$('#project-selector').children('.button').hide();
+
 	setBugLabel();
 
 	$(document).on('click', 'input[type=checkbox]#use_date_filters', function() {
@@ -215,6 +218,45 @@ $(document).ready( function() {
 			$('div.filter-box select[name=end_year]').prop('disabled', false);
 			$('div.filter-box select[name=end_month]').prop('disabled', false);
 			$('div.filter-box select[name=end_day]').prop('disabled', false);
+		}
+	});
+
+	/* Handle custom field of date type */
+	$(document).on('change', 'select[name^=custom_field_][name$=_control]', function() {
+		var table = $(this).closest('table');
+		switch(this.value) {
+			case '2': // between
+				$(table).find("select[name*=_start_year]").prop('disabled', false);
+				$(table).find("select[name*=_start_month]").prop('disabled', false);
+				$(table).find("select[name*=_start_day]").prop('disabled', false);
+				$(table).find("select[name*=_end_year]").prop('disabled', false);
+				$(table).find("select[name*=_end_month]").prop('disabled', false);
+				$(table).find("select[name*=_end_day]").prop('disabled', false);
+				break;
+
+			case '3': // on or before
+			case '4': // before
+			case '5': // on
+			case '6': // after
+			case '7': // on or after
+				$(table).find("select[name*=_start_year]").prop('disabled', false);
+				$(table).find("select[name*=_start_month]").prop('disabled', false);
+				$(table).find("select[name*=_start_day]").prop('disabled', false);
+				$(table).find("select[name*=_end_year]").prop('disabled', true);
+				$(table).find("select[name*=_end_month]").prop('disabled', true);
+				$(table).find("select[name*=_end_day]").prop('disabled', true);
+				break;
+
+			case '0': // any
+			case '1': // none
+			default:
+				$(table).find("select[name*=_start_year]").prop('disabled', true);
+				$(table).find("select[name*=_start_month]").prop('disabled', true);
+				$(table).find("select[name*=_start_day]").prop('disabled', true);
+				$(table).find("select[name*=_end_year]").prop('disabled', true);
+				$(table).find("select[name*=_end_month]").prop('disabled', true);
+				$(table).find("select[name*=_end_day]").prop('disabled', true);
+				break;
 		}
 	});
 
@@ -243,6 +285,10 @@ $(document).ready( function() {
 			}
 		}
 		$(this).val(0);
+	});
+
+	$('a.click-url').bind("click", function() {
+		$(this).attr("href", $(this).attr("url"));
 	});
 });
 

@@ -246,15 +246,16 @@
 	users with global access ADMINISTRATOR.</para>
 
 	<para>Each feature typically has multiple access control configuration
-	options to defines what access level can do certain operations.  For
-	example, adding a note may require REPORTER access level, updating a
-	note my require DEVELOPER access level, unless the own was owned by the
-	same user and in this case REPORTER access level.  Such threshold
-	configuration options can be set to a single access level, which means
-	users with such threshold and above are authorized to do such action.
-	The other option is to specify an array of access level which indicates
-	that users with the explicitly specific thresholds are allowed to do
-	such actions.</para>
+	options to define what access level can perform the operation.  For
+	example, adding a note may require REPORTER access level, updating it
+	note may require DEVELOPER access level, unless the note was added by the
+	same user.</para>
+	
+	<para>Such threshold configuration options can be set to a single access
+	level, which means users with such threshold and above are authorized to
+	perform the action.  The other option is to specify an array of access
+	levels which indicates that users with the explicitly specific thresholds
+	are allowed to execute the actions.</para>
 
         <para>It is also worth mentioning that the access levels are defined by
 	the $g_access_levels_enum_string configuration option, and it is

@@ -23,7 +23,7 @@
 <!--
 * ====================================================================
 * wsdl-viewer.xsl
-* Version: 3.1.02
+* Version: 3.1.02-mantis.1
 *
 * URL: http://tomi.vanek.sk/xml/wsdl-viewer.xsl
 *
@@ -144,6 +144,7 @@
 * 	2007-12-23 - 3.1.01 - Terminating message by WS without interface or service definition was removed
 * 						  (seems to be a correct state)
 * 	2008-08-20 - 3.1.02 - Woden-214: Anti-recursion bypassed in xsd:choice element
+* 	2015-02-02 - 3.1.02-mantis.1 - removed unnecessary wsdl-viewer.js <script> block
 * ====================================================================
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -2253,13 +2254,6 @@ h3 {
 	        <style type="text/css">
             <xsl:value-of select="$css" disable-output-escaping="yes"/>
          </style>
-
-	        <script src="wsdl-viewer.js" type="text/javascript" language="javascript"> 
-            <xsl:comment>
-               <xsl:text>
-	// </xsl:text>
-            </xsl:comment>
-	        </script>
       </head>
    </xsl:template>
 

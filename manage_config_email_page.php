@@ -66,10 +66,15 @@ function array_merge_recursive2( $p_array1, $p_array2 ) {
 	if( !is_array( $p_array1 ) || !is_array( $p_array2 ) ) {
 		return $p_array2;
 	}
-	foreach ( $p_array2 as $t_key2 => $t_value2 ) {
-		$p_array1[$t_key2] = array_merge_recursive2( @$p_array1[$t_key2], $t_value2 );
+	$t_merged_array = $p_array1;
+	foreach( $p_array2 as $t_key2 => $t_value2 ) {
+		if( array_key_exists( $t_key2, $t_merged_array ) && is_array( $t_value2 ) ) {
+			$t_merged_array[$t_key2] = array_merge_recursive2( $t_merged_array[$t_key2], $t_value2 );
+		} else {
+			$t_merged_array[$t_key2] = $t_value2;
+		}
 	}
-	return $p_array1;
+	return $t_merged_array;
 }
 
 /**
@@ -102,25 +107,30 @@ function get_notify_flag( $p_action, $p_flag ) {
  * @param string $p_flag   Flag.
  * @return string
  */
-function colour_notify_flag ( $p_action, $p_flag ) {
-	global $g_notify_flags, $g_global_notify_flags, $g_file_notify_flags, $g_colour_project, $g_colour_global;
+function color_notify_flag( $p_action, $p_flag ) {
+	global $g_notify_flags, $g_global_notify_flags, $g_file_notify_flags;
 
 	$t_file = isset( $g_file_notify_flags[$p_action][$p_flag] ) ? ( $g_file_notify_flags[$p_action][$p_flag] ? 1 : 0 ): -1;
 	$t_global = isset( $g_global_notify_flags[$p_action][$p_flag] ) ? ( $g_global_notify_flags[$p_action][$p_flag]  ? 1 : 0 ): -1;
 	$t_project = isset( $g_notify_flags[$p_action][$p_flag] ) ? ( $g_notify_flags[$p_action][$p_flag]  ? 1 : 0 ): -1;
 
-	$t_colour = '';
+	$t_color = ' class="center" ';
+
+	$t_effective_value = $t_file;
+
 	if( $t_global >= 0 ) {
-		if( $t_global != $t_file ) {
-			$t_colour = ' bgcolor="' . $g_colour_global . '" '; # all projects override
+		if ( $t_global != $t_effective_value ) {
+			$t_color = ' class="color-global center" '; # all projects override
 		}
+
+		$t_effective_value = $t_global;
 	}
-	if( $t_project >= 0 ) {
-		if( $t_project != $t_global ) {
-			$t_colour = ' bgcolor="' . $g_colour_project . '" '; # project overrides
-		}
+
+	if( $t_project >= 0 && $t_project != $t_effective_value ) {
+		$t_color = ' class="color-project center" '; # project overrides
 	}
-	return $t_colour;
+
+	return $t_color;
 }
 
 /**
@@ -149,8 +159,8 @@ function show_notify_flag( $p_action, $p_flag ) {
  * @param string $p_action Action.
  * @return string
  */
-function colour_threshold_flag ( $p_access, $p_action ) {
-	global $g_notify_flags, $g_global_notify_flags, $g_file_notify_flags, $g_colour_project, $g_colour_global;
+function color_threshold_flag( $p_access, $p_action ) {
+	global $g_notify_flags, $g_global_notify_flags, $g_file_notify_flags;
 
 	$t_file = ( $p_access >= $g_file_notify_flags[$p_action]['threshold_min'] )
 					 && ( $p_access <= $g_file_notify_flags[$p_action]['threshold_max'] );
@@ -159,14 +169,17 @@ function colour_threshold_flag ( $p_access, $p_action ) {
 	$t_project = ( $p_access >= $g_notify_flags[$p_action]['threshold_min'] )
 					 && ( $p_access <= $g_notify_flags[$p_action]['threshold_max'] );
 
-	$t_colour = '';
+	$t_color = ' class="center" ';
+
 	if( $t_global != $t_file ) {
-		$t_colour = ' bgcolor="' . $g_colour_global . '" '; # all projects override
+		$t_color = ' class="color-global center" '; # all projects override
 	}
+
 	if( $t_project != $t_global ) {
-		$t_colour = ' bgcolor="' . $g_colour_project . '" '; # project overrides
+		$t_color = ' class="color-project center" '; # project overrides
 	}
-	return $t_colour;
+
+	return $t_color;
 }
 
 /**
@@ -201,9 +214,9 @@ function get_section_begin_for_email( $p_section_name ) {
 	echo '<table>' . "\n";
 	echo '  <thead>' . "\n";
 	echo '    <tr>' . "\n";
-	echo '      <td class="form-title-caps" colspan="' . ( count( $t_access_levels ) + 7 ) . '">' . $p_section_name . '</td></tr>' . "\n";
+	echo '      <td class="form-title-caps" colspan="' . ( count( $t_access_levels ) + 5 ) . '">' . $p_section_name . '</td></tr>' . "\n";
 	echo '    <tr class="row-category2">' . "\n";
-	echo '      <th width="30%" rowspan="2">' . lang_get( 'message' ) . '</th>';
+	echo '      <th class="width30" rowspan="2">' . lang_get( 'message' ) . '</th>';
 	echo '      <th class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'issue_reporter' ) . '&#160;</th>' . "\n";
 	echo '      <th class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'issue_handler' ) . '&#160;</th>' . "\n";
 	echo '      <th class="form-title" style="text-align:center" rowspan="2">&#160;' . lang_get( 'users_monitoring_bug' ) . '&#160;</th>' . "\n";
@@ -231,13 +244,13 @@ function get_capability_row_for_email( $p_caption, $p_message_type ) {
 	$t_access_levels = MantisEnum::getValues( config_get( 'access_levels_enum_string' ) );
 
 	echo '<tr><td>' . string_display( $p_caption ) . '</td>' . "\n";
-	echo '  <td class="center"' . colour_notify_flag( $p_message_type, 'reporter' ) . '>' . show_notify_flag( $p_message_type, 'reporter' )  . '</td>' . "\n";
-	echo '  <td class="center"' . colour_notify_flag( $p_message_type, 'handler' ) . '>' . show_notify_flag( $p_message_type, 'handler' ) . '</td>' . "\n";
-	echo '  <td class="center"' . colour_notify_flag( $p_message_type, 'monitor' ) . '>' . show_notify_flag( $p_message_type, 'monitor' ) . '</td>' . "\n";
-	echo '  <td class="center"' . colour_notify_flag( $p_message_type, 'bugnotes' ) . '>' . show_notify_flag( $p_message_type, 'bugnotes' ) . '</td>' . "\n";
+	echo '  <td' . color_notify_flag( $p_message_type, 'reporter' ) . '>' . show_notify_flag( $p_message_type, 'reporter' )  . '</td>' . "\n";
+	echo '  <td' . color_notify_flag( $p_message_type, 'handler' ) . '>' . show_notify_flag( $p_message_type, 'handler' ) . '</td>' . "\n";
+	echo '  <td' . color_notify_flag( $p_message_type, 'monitor' ) . '>' . show_notify_flag( $p_message_type, 'monitor' ) . '</td>' . "\n";
+	echo '  <td' . color_notify_flag( $p_message_type, 'bugnotes' ) . '>' . show_notify_flag( $p_message_type, 'bugnotes' ) . '</td>' . "\n";
 
 	foreach( $t_access_levels as $t_access_level ) {
-		echo '  <td class="center"' . colour_threshold_flag( $t_access_level, $p_message_type ) . '>' . show_notify_threshold( $t_access_level, $p_message_type ) . '</td>' . "\n";
+		echo '  <td' . color_threshold_flag( $t_access_level, $p_message_type ) . '>' . show_notify_threshold( $t_access_level, $p_message_type ) . '</td>' . "\n";
 	}
 
 	echo '</tr>' . "\n";
@@ -260,9 +273,6 @@ print_manage_config_menu( 'manage_config_email_page.php' );
 $t_access = current_user_get_access_level();
 $t_project = helper_get_current_project();
 
-$g_colour_project = config_get( 'colour_project' );
-$g_colour_global = config_get( 'colour_global' );
-
 # build a list of all of the actions
 $t_actions = array( 'owner', 'reopened', 'deleted', 'bugnote' );
 if( config_get( 'enable_sponsorship' ) == ON ) {
@@ -277,14 +287,14 @@ foreach( $t_statuses as $t_status ) {
 }
 
 # build a composite of the status flags, exploding the defaults
-$t_global_default_notify_flags = config_get( 'default_notify_flags', null, null, ALL_PROJECTS );
+$t_global_default_notify_flags = config_get( 'default_notify_flags', null, ALL_USERS, ALL_PROJECTS );
 $g_global_notify_flags = array();
 foreach ( $t_global_default_notify_flags as $t_flag => $t_value ) {
 	foreach ( $t_actions as $t_action ) {
 		$g_global_notify_flags[$t_action][$t_flag] = $t_value;
 	}
 }
-$g_global_notify_flags = array_merge_recursive2( $g_global_notify_flags, config_get( 'notify_flags', null, null, ALL_PROJECTS ) );
+$g_global_notify_flags = array_merge_recursive2( $g_global_notify_flags, config_get( 'notify_flags', null, ALL_USERS, ALL_PROJECTS ) );
 
 $t_file_default_notify_flags = config_get_global( 'default_notify_flags' );
 $g_file_notify_flags = array();
@@ -313,7 +323,7 @@ echo '<br /><br />';
 if( config_get( 'enable_email_notification' ) == ON ) {
 
 	if( $g_can_change_flags  || $g_can_change_defaults ) {
-		echo "<form name=\"mail_config_action\" method=\"post\" action=\"manage_config_email_set.php\">\n";
+		echo '<form id="mail_config_action" method="post" action="manage_config_email_set.php">' . "\n";
 		echo form_security_field( 'manage_config_email_set' );
 	}
 
@@ -325,9 +335,9 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 	echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
 	echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 	if( ALL_PROJECTS <> $t_project ) {
-		echo '<span style="background-color:' . $g_colour_project . '">' . lang_get( 'colour_project' ) . '</span><br />';
+		echo '<span class="color-project">' . lang_get( 'colour_project' ) . '</span><br />';
 	}
-	echo '<span style="background-color:' . $g_colour_global . '">' . lang_get( 'colour_global' ) . '</span></p>';
+	echo '<span class="color-global">' . lang_get( 'colour_global' ) . '</span></p>';
 
 	get_section_begin_for_email( lang_get( 'email_notification' ) );
 #		get_capability_row_for_email( lang_get( 'email_on_new' ), 'new' );  # duplicate of status change to 'new'
@@ -359,7 +369,7 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 		echo "</form>\n";
 
 		echo '<div class="right">' . "\n";
-		echo '<form name="mail_config_action" method="post" action="manage_config_revert.php">' . "\n";
+		echo '<form id="mail_config_action" method="post" action="manage_config_revert.php">' . "\n";
 		echo form_security_field( 'manage_config_revert' ) . "\n";
 		echo '<input name="revert" type="hidden" value="notify_flags,default_notify_flags" />' . "\n";
 		echo '<input name="project" type="hidden" value="' . $t_project . '" />' . "\n";

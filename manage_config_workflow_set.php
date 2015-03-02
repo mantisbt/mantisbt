@@ -101,6 +101,8 @@ foreach( $t_valid_thresholds as $t_threshold ) {
 	}
 }
 
+$t_enum_status = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
+
 # process the workflow by reversing the flags to a matrix and creating the appropriate string
 if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 	$f_value = gpc_get( 'flag', array() );
@@ -111,7 +113,7 @@ if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 		list( $t_from, $t_to ) = explode( ':', $t_transition );
 		$t_matrix[$t_from][$t_to] = '';
 	}
-	$t_enum_status = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
+	$t_workflow = array();
 	foreach( $t_enum_status as $t_state => $t_label ) {
 		$t_workflow_row = '';
 		$t_default = gpc_get_int( 'default_' . $t_state );

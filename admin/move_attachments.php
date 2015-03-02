@@ -43,21 +43,19 @@ function move_attachments_to_db( $p_type, $p_projects ) {
 	}
 
 	# Build the SQL query based on attachment type
-	$t_file_table = db_get_table( "${p_type}_file" );
+	$t_file_table = '{' . $p_type . '_file}';
 	switch( $p_type ) {
 		case 'project':
 			$t_query = "SELECT f.*
-				FROM $t_file_table f
+				FROM {project_file} f
 				WHERE content = ''
 				  AND f.project_id = " . db_param() . "
 				ORDER BY f.filename";
 			break;
 		case 'bug':
-			$t_bug_table = db_get_table( 'bug' );
-
 			$t_query = "SELECT f.*
-				FROM $t_file_table f
-				JOIN $t_bug_table b ON b.id = f.bug_id
+				FROM {bug_file} f
+				JOIN {bug} b ON b.id = f.bug_id
 				WHERE content = ''
 				  AND b.project_id = " . db_param() . "
 				ORDER BY f.bug_id, f.filename";
@@ -67,7 +65,7 @@ function move_attachments_to_db( $p_type, $p_projects ) {
 	# Process projects list
 	foreach( $p_projects as $t_project ) {
 		# Retrieve attachments for the project
-		$t_result = db_query_bound( $t_query, array( $t_project ) );
+		$t_result = db_query( $t_query, array( $t_project ) );
 
 		# Project upload path
 		$t_upload_path = project_get_field( $t_project, 'file_path' );
@@ -101,13 +99,13 @@ function move_attachments_to_db( $p_type, $p_projects ) {
 					if( db_is_oracle() ) {
 						db_update_blob( $t_file_table, 'content', $c_content, "id=" . (int)$t_row['id'] );
 						$t_query = "UPDATE $t_file_table SET folder='' WHERE id = " . db_param();
-						$t_result2 = db_query_bound( $t_query, array( (int)$t_row['id'] ) );
+						$t_result2 = db_query( $t_query, array( (int)$t_row['id'] ) );
 					} else {
 						$t_update_query = "UPDATE $t_file_table
 										SET folder = " . db_param() . ",
 										content = " . db_param() . "
 										WHERE id = " . db_param();
-						$t_result2 = db_query_bound( $t_update_query,
+						$t_result2 = db_query( $t_update_query,
 							array( '', $c_content, (int)$t_row['id'] )
 						);
 					}
@@ -157,21 +155,18 @@ function move_attachments_to_disk( $p_type, array $p_projects ) {
 	}
 
 	# Build the SQL query based on attachment type
-	$t_file_table = db_get_table( "${p_type}_file" );
 	switch( $p_type ) {
 		case 'project':
 			$t_query = 'SELECT f.*
-				FROM ' . $t_file_table . ' f
+				FROM {project_file} f
 				WHERE content <> \'\'
 				  AND f.project_id = ' . db_param() . '
 				ORDER BY f.filename';
 			break;
 		case 'bug':
-			$t_bug_table = db_get_table( 'bug' );
-
 			$t_query = 'SELECT f.*
-				FROM ' . $t_file_table . ' f
-				JOIN ' . $t_bug_table . ' b ON b.id = f.bug_id
+				FROM {bug_file} f
+				JOIN {bug} b ON b.id = f.bug_id
 				WHERE content <> \'\'
 				  AND b.project_id = ' . db_param() . '
 				ORDER BY f.bug_id, f.filename';
@@ -181,7 +176,7 @@ function move_attachments_to_disk( $p_type, array $p_projects ) {
 	# Process projects list
 	foreach( $p_projects as $t_project ) {
 		# Retrieve attachments for the project
-		$t_result = db_query_bound( $t_query, array( $t_project ) );
+		$t_result = db_query( $t_query, array( $t_project ) );
 
 		# Project upload path
 		$t_upload_path = project_get_upload_path( $t_project );
@@ -208,10 +203,19 @@ function move_attachments_to_disk( $p_type, array $p_projects ) {
 					if( file_put_contents( $t_disk_filename, $t_row['content'] ) ) {
 						# successful, update database
 						# @todo do we want to check the size of data transfer matches here?
-						$t_update_query = 'UPDATE ' . $t_file_table . '
-							SET folder = ' . db_param() . ', content = \'\' 
-							WHERE id = ' . db_param();
-						$t_update_result = db_query_bound(
+						switch( $p_type ) {
+							case 'project':
+								$t_update_query = 'UPDATE {project_file}
+									SET folder = ' . db_param() . ', content = \'\'
+									WHERE id = ' . db_param();
+								break;
+							case 'bug':
+								$t_update_query = 'UPDATE {bug_file}
+									SET folder = ' . db_param() . ', content = \'\'
+									WHERE id = ' . db_param();
+								break;
+						}
+						$t_update_result = db_query(
 							$t_update_query,
 							array( $t_upload_path, $t_row['id'] )
 						);

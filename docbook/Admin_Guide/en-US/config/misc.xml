@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.misc">
+	<title>Misc</title>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_user_login_valid_regex</term>
+			<listitem>
+				<para>
+					The regular expression to use when validating new user login names.
+					The default regular expression allows a-z, A-Z, 0-9, +, -, dot, space and
+					underscore.  If you change this, you may want to update the
+					ERROR_USER_NAME_INVALID string in the language files to explain
+					the rules you are using on your site.
+				</para>
+				<para>
+					See <ulink url="http://en.wikipedia.org/wiki/Regular_Expression">Wikipedia</ulink> for more
+					details about regular expressions.  For testing regular expressions, use
+					<ulink url="http://rubular.com/">Rubular</ulink>.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_monitor_bug_threshold</term>
+			<listitem>
+				<para>Access level needed to monitor bugs. The default
+					value is REPORTER.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_monitor_add_others_bug_threshold</term>
+			<listitem>
+				<para>Access level needed to add other users to the list of
+					users monitoring a bug. The default value is DEVELOPER.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_monitor_delete_others_bug_threshold</term>
+			<listitem>
+				<para>Access level needed to delete other users from the
+					list of users monitoring a bug. The default value is
+					DEVELOPER.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_limit_reporters</term>
+			<listitem>
+				<para>Limit reporters to only viewing bugs that they
+					report.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_allow_reporter_close</term>
+			<listitem>
+				<para>Allow reporters to close the bugs they reported.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_allow_bug_delete_access_level</term>
+			<listitem>
+				<para>Allow the specified access level and above to delete
+					bugs.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_bug_move_access_level</term>
+			<listitem>
+				<para>Allow the specified access level and above to move bugs
+					between projects.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_allow_account_delete</term>
+			<listitem>
+				<para>Allow users to delete their own accounts.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_allow_anonymous_login</term>
+			<listitem>
+				<para>Enable anonymous access to Mantis. You must also
+					specify $g_anonymous_account as the account which
+					anonymous users will browse Mantis with. The default
+					setting is OFF.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_anonymous_account</term>
+			<listitem>
+				<para>Define the account which anonymous users will assume
+					when using Mantis. This account is considered by Mantis
+					to be protected from modification. In other words, this
+					account can only be modified by users with an access
+					level equal to or higher than $g_manage_user_threshold.
+					Anonymous users will not be able to adjust preferences
+					or change account settings like normal users can.
+				</para>
+				<para>You will need to create a new account to use for this
+					$g_anonymous_account setting. When creating the account
+					you should specify a password, email address and so
+					forth in the same way you'd create any other account.
+					It is suggested that the access level for this account
+					be set to VIEWER or some other read only level.
+				</para>
+				<para>The anonymous user account will not receive standard
+					notifications and can not monitor issues.
+				</para>
+				<para>The default setting is blank/undefined. You only need
+					to define this setting when $g_allow_anonymous_login
+					is set to ON.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_bug_link_tag</term>
+			<listitem>
+				<para>If a number follows this tag it will create a link to a
+					bug. Default is '#'.
+					<itemizedlist>
+						<listitem>
+							<para>'#': a link would be #45</para>
+						</listitem>
+						<listitem>
+							<para>'bug:' a link would be bug:98</para>
+						</listitem>
+					</itemizedlist>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_bugnote_link_tag</term>
+			<listitem>
+				<para>If a number follows this tag it will create a link to a
+					bug note. Default is '~'.
+					<itemizedlist>
+						<listitem>
+							<para>'~': a link would be ~45</para>
+						</listitem>
+						<listitem>
+							<para>'bugnote:' a link would be bugnote:98</para>
+						</listitem>
+					</itemizedlist>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_register_globals</term>
+			<listitem>
+				<para>If your register_globals is Off then set this to OFF. Check
+					your register_globals setting in php.ini or phpinfo().
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_enable_project_documentation</term>
+			<listitem>
+				<para>Specifies whether to enable support for project documents or
+					not. Default is OFF.  This feature is deprecated and is expected
+					to be moved to a plugin in the future.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_admin_site_threshold</term>
+			<listitem>
+				<para>Threshold at which a user is considered to be a site
+					administrator. These users have the highest level of
+					access to your Mantis installation. This access level
+					is required to change key Mantis settings (such as
+					server paths) and perform other administrative duties.
+					You may need to change this value from the default of
+					ADMINISTRATOR if you have defined a new access level
+					to replace the default ADMINISTRATOR level in
+					constant_inc.php.
+				</para>
+				<warning>
+					<para>This is a potentially dangerous configuration
+						option. Users at or above this threshold value will
+						have permission to all aspects of Mantis including
+						the admin/ directory. With this access level, users
+						can damage your installation of Mantis, destroy
+						your database or have elevated access to your
+						server.
+					</para>
+					<para>DO NOT CHANGE THIS VALUE UNLESS YOU ABSOLUTELY
+						KNOW WHAT YOU'RE DOING. BE VERY CAREFUL WITH
+						CHANGING THIS CONFIGURATION VALUE FROM THE DEFAULT
+						SETTING.
+					</para>
+				</warning>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_manage_configuration_threshold</term>
+			<listitem>
+				<para>The threshold required for users to be able to manage configuration of a project.
+					This includes workflow, email notifications, columns to view, and others.  Default is MANAGER.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_view_configuration_threshold</term>
+			<listitem>
+				<para>Threshold for users to view the raw system configurations as stored in the database.
+					The default value is ADMINISTRATOR.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_set_configuration_threshold</term>
+			<listitem>
+				<para>Threshold for users to set the system configurations generically via MantisBT web interface.
+					WARNING: Users who have access to set configuration via the interface MUST be trusted.  This is due
+					to the fact that such users can set configurations to PHP code and hence there can be a security
+					risk if such users are not trusted. The default value is ADMINISTRATOR.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_csv_add_bom</term>
+			<listitem>
+				<para>Add Byte Order Mark (BOM) at the begining of the file as it helps Excel display the file in UTF-8.
+				The default value is OFF;
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</section>

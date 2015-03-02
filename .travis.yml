@@ -1,22 +1,28 @@
+# -----------------------------------------------------------------------------
+# MantisBT Travis-CI build configuration file
+# -----------------------------------------------------------------------------
+
 language: php
 
+# -----------------------------------------------------------------------------
 # Environment setup and test scripts execution
-
-before_install:
-  - git submodule update --init --recursive
+#
 
 before_script:
   - ./scripts/travis_before_script.sh
 
 script:
-  - phpunit --bootstrap ./tests/bootstrap.php ./tests/AllTests.php
+  - ./scripts/travis_script.sh
 
+# -----------------------------------------------------------------------------
 # What to build, and on which platforms
+#
 
 php:
   - 5.3
   - 5.4
   - 5.5
+  - 5.6
 
 env:
   - DB=mysql
@@ -27,9 +33,18 @@ branches:
     - master-2.0.x
 
 matrix:
+  include:
+    # Add a specific build for Documentation
+    # Note: we don't really care about the PHP version here, but we need
+    # one version to trigger the build
+    - env: DOCBOOK=1
+      php: "5.5"
+
   allow_failures:
 
+# -----------------------------------------------------------------------------
 # Notifications
+#
 
 notifications:
   email:

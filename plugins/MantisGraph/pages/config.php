@@ -68,115 +68,90 @@ function print_font_checked( $p_font_name ) {
 
 ?>
 
-<br/>
-<form action="<?php echo plugin_page( 'config_edit' )?>" method="post">
-<?php echo form_security_field( 'plugin_graph_config_edit' ) ?>
-<table class="width75" cellspacing="1">
+<div id="graph-config-div" class="form-container">
+	<form id="graph-config-form" action="<?php echo plugin_page( 'config_edit' )?>" method="post">
+		<fieldset>
+			<legend><span><?php echo plugin_lang_get( 'title' ) . ': ' . plugin_lang_get( 'config' )?></span></legend>
+			<?php echo form_security_field( 'plugin_graph_config_edit' ) ?>
 
-<tr>
-	<td class="form-title" colspan="3">
-		<?php echo plugin_lang_get( 'title' ) . ': ' . plugin_lang_get( 'config' )?>
-	</td>
-</tr>
+			<div class="field-container">
+				<label><span><?php echo plugin_lang_get( 'library' )?></span></label>
+				<span class="radio">
+					<input type="radio" id="ecz-library" name="eczlibrary" value="1" <?php echo( ON == plugin_config_get( 'eczlibrary' ) ) ? 'checked="checked" ' : ''?>/>
+					<label for="ecz-library"><?php echo plugin_lang_get( 'bundled' )?></label>
+					<input type="radio" id="jpgraph-library" name="eczlibrary" value="0" <?php echo( OFF == plugin_config_get( 'eczlibrary' ) ) ? 'checked="checked" ' : ''?>/>
+					<label for="jpgraph-library">JpGraph</label>
+				</span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container">
+				<label><span><?php echo plugin_lang_get( 'window_width' )?></span></label>
+				<span class="input">
+					<input type="text" name="window_width" value="<?php echo plugin_config_get( 'window_width' )?>" />
+				</span>
+				<span class="label-style"></span>
+			</div>
 
-<tr>
-	<th class="category">
-		<?php echo plugin_lang_get( 'library' )?>
-	</th>
-	<td class="center">
-		<label><input type="radio" name="eczlibrary" value="1" <?php echo( ON == plugin_config_get( 'eczlibrary' ) ) ? 'checked="checked" ' : ''?>/><?php echo plugin_lang_get( 'bundled' )?></label>
-	</td>
-	<td class="center">
-		<label><input type="radio" name="eczlibrary" value="0" <?php echo( OFF == plugin_config_get( 'eczlibrary' ) ) ? 'checked="checked" ' : ''?>/>JpGraph</label>
-	</td>
-</tr>
+			<div class="field-container">
+				<label><span><?php echo plugin_lang_get( 'bar_aspect' )?></span></label>
+				<span class="input">
+					<input type="text" name="bar_aspect" value="<?php echo plugin_config_get( 'bar_aspect' )?>" />
+				</span>
+				<span class="label-style"></span>
+			</div>
+			<div class="field-container">
+				<label><span><?php echo plugin_lang_get( 'summary_graphs_per_row' )?></span></label>
+				<span class="input">
+					<input type="text" name="summary_graphs_per_row" value="<?php echo plugin_config_get( 'summary_graphs_per_row' )?>" />
+				</span>
+				<span class="label-style"></span>
+			</div>
 
-<tr class="spacer"><td></td></tr>
+			<div class="field-container">
+				<label><span><?php echo plugin_lang_get( 'font' )?></span></label>
+				<span class="radio">
+					Sans-serif:<br />
+					<label><input type="radio" name="font" value="arial"<?php echo print_font_checked( 'arial' )?>/>Arial</label><br />
+					<label><input type="radio" name="font" value="verdana"<?php echo print_font_checked( 'verdana' )?>/>Verdana</label><br />
+					<label><input type="radio" name="font" value="trebuchet"<?php echo print_font_checked( 'trebuchet' )?>/>Trebuchet</label><br />
+					<label><input type="radio" name="font" value="verasans"<?php echo print_font_checked( 'verasans' )?>/>Vera Sans</label>
+					Serif:<br />
+					<label><input type="radio" name="font" value="times"<?php echo print_font_checked( 'times' )?>/>Times</label><br />
+					<label><input type="radio" name="font" value="georgia"<?php echo print_font_checked( 'georgia' )?>/>Georgia</label><br />
+					<label><input type="radio" name="font" value="veraserif"<?php echo print_font_checked( 'veraserif' )?>/>Vera Serif</label><br />
+					<br />Monospace:<br />
+					<label><input type="radio" name="font" value="courier"<?php echo print_font_checked( 'courier' )?>/>Courier</label><br />
+					<label><input type="radio" name="font" value="veramono"<?php echo print_font_checked( 'veramono' )?>/>Vera Mono</label>
+				</span>
+				<span class="label-style"></span>
+			</div>
 
-<tr>
-	<th class="category">
-		<?php echo plugin_lang_get( 'window_width' )?>
-	</th>
-	<td class="center" colspan="2">
-		<input type="text" name="window_width" value="<?php echo plugin_config_get( 'window_width' )?>" />
-	</td>
-</tr>
+			<?php if( current_user_is_administrator() ) {?>
+				<div class="field-container">
+					<label><span><?php echo plugin_lang_get( 'jpgraph_path' )?>
+					<br /><span class="small"><?php echo plugin_lang_get( 'jpgraph_path_default' )?></span>
+					</span></label>
+					<span class="input">
+						<input type="text" name="jpgraph_path" value="<?php echo plugin_config_get( 'jpgraph_path' )?>" />
+					</span>
+					<span class="label-style"></span>
+				</div>
+			<?php } ?>
 
-<tr>
-	<th class="category">
-		<?php echo plugin_lang_get( 'bar_aspect' )?>
-	</th>
-	<td class="center" colspan="2">
-		<input type="text" name="bar_aspect" value="<?php echo plugin_config_get( 'bar_aspect' )?>" />
-	</td>
-</tr>
-
-<tr>
-	<th class="category">
-		<?php echo plugin_lang_get( 'summary_graphs_per_row' )?>
-	</th>
-	<td class="center" colspan="2">
-		<input type="text" name="summary_graphs_per_row" value="<?php echo plugin_config_get( 'summary_graphs_per_row' )?>" />
-	</td>
-</tr>
-
-<tr>
-	<th class="category">
-		<?php echo plugin_lang_get( 'font' )?>
-	</th>
-	<td style="vertical-align: top">
-		Sans-serif:<br />
-		<label><input type="radio" name="font" value="arial"<?php echo print_font_checked( 'arial' )?>/>Arial</label><br />
-		<label><input type="radio" name="font" value="verdana"<?php echo print_font_checked( 'verdana' )?>/>Verdana</label><br />
-		<label><input type="radio" name="font" value="trebuchet"<?php echo print_font_checked( 'trebuchet' )?>/>Trebuchet</label><br />
-		<label><input type="radio" name="font" value="verasans"<?php echo print_font_checked( 'verasans' )?>/>Vera Sans</label>
-	</td>
-	<td style="vertical-align: top">
-		Serif:<br />
-		<label><input type="radio" name="font" value="times"<?php echo print_font_checked( 'times' )?>/>Times</label><br />
-		<label><input type="radio" name="font" value="georgia"<?php echo print_font_checked( 'georgia' )?>/>Georgia</label><br />
-		<label><input type="radio" name="font" value="veraserif"<?php echo print_font_checked( 'veraserif' )?>/>Vera Serif</label><br />
-		<br />Monospace:<br />
-		<label><input type="radio" name="font" value="courier"<?php echo print_font_checked( 'courier' )?>/>Courier</label><br />
-		<label><input type="radio" name="font" value="veramono"<?php echo print_font_checked( 'veramono' )?>/>Vera Mono</label>
-	</td>
-</tr>
-
-<tr class="spacer"><td></td></tr>
-
-<?php if( current_user_is_administrator() ) {?>
-<tr>
-	<td class="category">
-		<?php echo plugin_lang_get( 'jpgraph_path' )?>
-		<br /><span class="small"><?php echo plugin_lang_get( 'jpgraph_path_default' )?></span>
-	</td>
-	<td class="center" colspan="2">
-		<input type="text" name="jpgraph_path" value="<?php echo plugin_config_get( 'jpgraph_path' )?>" />
-	</td>
-</tr>
-<?php } ?>
-
-<tr>
-	<td class="category">
-		<?php echo plugin_lang_get( 'jpgraph_antialias' )?>
-		<br /><span class="small"><?php echo plugin_lang_get( 'jpgraph_antialias_info' )?></span>
-	</td>
-	<td class="center">
-		<label><input type="radio" name="jpgraph_antialias" value="1" <?php echo( ON == plugin_config_get( 'jpgraph_antialias' ) ) ? 'checked="checked" ' : ''?>/><?php echo plugin_lang_get( 'enabled' )?></label>
-	</td>
-	<td class="center">
-		<label><input type="radio" name="jpgraph_antialias" value="0" <?php echo( OFF == plugin_config_get( 'jpgraph_antialias' ) ) ? 'checked="checked" ' : ''?>/><?php echo plugin_lang_get( 'disabled' )?></label>
-	</td>
-</tr>
-
-<tr>
-	<td class="center" colspan="3">
-		<input type="submit" class="button" value="<?php echo lang_get( 'change_configuration' )?>" />
-	</td>
-</tr>
-
-</table>
-</form>
+			<div class="field-container">
+				<label><span><?php echo plugin_lang_get( 'jpgraph_antialias' )?>
+				<br /><span class="small"><?php echo plugin_lang_get( 'jpgraph_antialias_info' )?></span>
+				</span></label>
+				<span class="radio">
+					<label><input type="radio" name="jpgraph_antialias" value="1" <?php echo( ON == plugin_config_get( 'jpgraph_antialias' ) ) ? 'checked="checked" ' : ''?>/><?php echo plugin_lang_get( 'enabled' )?></label>
+					<label><input type="radio" name="jpgraph_antialias" value="0" <?php echo( OFF == plugin_config_get( 'jpgraph_antialias' ) ) ? 'checked="checked" ' : ''?>/><?php echo plugin_lang_get( 'disabled' )?></label>
+				</span>
+				<span class="label-style"></span>
+			</div>
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'change_configuration' )?>" /></span>
+		</fieldset>
+	</form>
+</div>
 
 <?php
 html_page_bottom();

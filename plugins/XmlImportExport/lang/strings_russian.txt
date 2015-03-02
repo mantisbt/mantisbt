@@ -40,12 +40,17 @@
  *
  * @author Eleferen
  * @author Kirill
+ * @author Okras
  */
 
 $s_plugin_XmlImportExport_title = 'Система импорта/экспорта задач в MantisBT';
 $s_plugin_XmlImportExport_description = 'Добавляет в MantisBT возможность импорта экспорта задач с использованием XML.';
 $s_plugin_XmlImportExport_import = 'Импорт задач';
 $s_plugin_XmlImportExport_export = 'экспорт в XML';
+$s_plugin_XmlImportExport_config_title = 'Настройка уровней доступа для импорта/экспорта XML';
+$s_plugin_XmlImportExport_import_threshold = 'Вопросы по импорту';
+$s_plugin_XmlImportExport_export_threshold = 'Вопросы по экспорту';
+$s_plugin_XmlImportExport_action_update = 'Обновить';
 $s_plugin_XmlImportExport_importing_in_project = 'импортировать задачи в проект:';
 $s_plugin_XmlImportExport_import_options = 'настройки импорта';
 $s_plugin_XmlImportExport_cross_references = 'Кросс-зависимость';

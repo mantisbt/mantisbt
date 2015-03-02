@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.soap">
+	<title>SOAP API</title>
+
+	<para>MantisBT exposes a SOAP API which allows remote clients to interact with MantisBT and perform many of the usual tasks, such as reporting issues, running filtered searches and retrieving attachments. The SOAP API is enabled by default and available at <literal>/api/soap/mantisconnect.php</literal> below your installation root.</para>
+	<para>A WSDL file which describes the web service is available at <literal>/api/soap/mantisconnect.php?wsdl</literal> below your installation root.</para>
+
+	<para>The following options are used to control the behaviour of the MantisBT SOAP API:</para>
+	<variablelist>
+		<varlistentry>
+			<term>$g_webservice_readonly_access_level_threshold</term>
+			<listitem>
+				<para>Minimum global access level required to access webservice for readonly operations.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_webservice_readwrite_access_level_threshold</term>
+			<listitem>
+				<para>Minimum global access level required to access webservice for read/write operations.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_webservice_admin_access_level_threshold</term>
+			<listitem>
+				<para>Minimum global access level required to access the administrator webservices.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_webservice_specify_reporter_on_add_access_level_threshold</term>
+			<listitem>
+				<para>Minimum project access level required for caller to be able to
+				specify reporter when adding issues or issue notes. Defaults to DEVELOPER.</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+
+	<section id="admin.config.soap.disable">
+		<title>Disabling the SOAP API</title>
+		<para>If you wish to temporarily disable the SOAP API it is sufficient to set the specific access thresholds to NOBODY:</para>
+		<para><literal>$g_webservice_readonly_access_level_threshold = $g_webservice_readwrite_access_level_threshold = $g_webservice_admin_access_level_threshold = NOBODY;</literal></para>
+		<para>While the SOAP API will still be accessible, it will not allow users to retrieve or modify data.</para>
+	</section>
+</section>

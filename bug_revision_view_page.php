@@ -135,23 +135,25 @@ function show_revision( array $p_revision ) {
 	$t_by_string = sprintf( lang_get( 'revision_by' ), string_display_line( date( config_get( 'normal_date_format' ), $p_revision['timestamp'] ) ), prepare_user_name( $p_revision['user_id'] ) );
 
 ?>
-<tr class="spacer"><td><a id="revision-<?php echo $p_revision['id'] ?>"></a></td></tr>
 
-<tr>
-<th class="category"><?php echo lang_get( 'revision' ) ?></th>
-<td colspan="2"><?php echo $t_by_string ?></td>
-<td class="center" width="5%">
-<?php if( $s_can_drop ) {
-	print_bracket_link( 'bug_revision_drop.php?id=' . $p_revision['id'] . $s_drop_token, lang_get( 'revision_drop' ) );
-} ?>
-</tr>
+		<tr class="spacer"><td><a id="revision-<?php echo $p_revision['id'] ?>"></a></td></tr>
 
-<tr>
-<th class="category"><?php echo $t_label ?></th>
-<td colspan="3"><?php echo string_display_links( $p_revision['value'] ) ?></td>
-</tr>
+		<tr>
+			<th class="category"><?php echo lang_get( 'revision' ) ?></th>
+			<td colspan="2"><?php echo $t_by_string ?></td>
+			<td class="center" width="5%">
+<?php
+	if( $s_can_drop ) {
+		print_bracket_link( 'bug_revision_drop.php?id=' . $p_revision['id'] . $s_drop_token, lang_get( 'revision_drop' ) );
+	}
+?>
+		</tr>
 
-	<?php
+		<tr>
+			<th class="category"><?php echo $t_label ?></th>
+			<td colspan="3"><?php echo string_display_links( $p_revision['value'] ) ?></td>
+		</tr>
+<?php
 }
 
 html_page_top( bug_format_summary( $t_bug_id, SUMMARY_CAPTION ) );
@@ -160,32 +162,29 @@ print_recently_visited();
 
 ?>
 
-<br/>
-<div class="table-container">
-<table class="width100" cellspacing="1">
 
-<tr>
-<td class="form-title" colspan="2"><?php echo lang_get( 'view_revisions' ), ': ', $t_title ?></td>
-<td class="right" colspan="2">
-<?php
-if( !$f_bug_id && !$f_bugnote_id ) {
-	print_bracket_link( '?bug_id=' . $t_bug_id, lang_get( 'all_revisions' ) );
-}
-print_bracket_link( 'view.php?id=' . $t_bug_id, lang_get( 'back_to_issue' ) );
-?>
-</td>
-</tr>
+<div id="bug-revision-div" class="table-container">
+	<h2><?php echo lang_get( 'view_revisions' ), ': ', $t_title ?></h2>
+	<div class="section-link">
+		<?php
+			if( !$f_bug_id && !$f_bugnote_id ) {
+				print_bracket_link( '?bug_id=' . $t_bug_id, lang_get( 'all_revisions' ) );
+			}
+			print_bracket_link( 'view.php?id=' . $t_bug_id, lang_get( 'back_to_issue' ) );
+		?>
+	</div>
 
-<tr>
-<th class="category" width="15%"><?php echo lang_get( 'summary' ) ?></th>
-<td colspan="3"><?php echo bug_format_summary( $t_bug_id, SUMMARY_FIELD ) ?></td>
-</tr>
-
-<?php foreach( $t_bug_revisions as $t_rev ) {
-	show_revision( $t_rev );
-} ?>
-
-</table>
+	<table>
+		<tr>
+			<th class="category" width="15%"><?php echo lang_get( 'summary' ) ?></th>
+			<td colspan="3"><?php echo bug_format_summary( $t_bug_id, SUMMARY_FIELD ) ?></td>
+		</tr>
+		<?php
+			foreach( $t_bug_revisions as $t_rev ) {
+				show_revision( $t_rev );
+			}
+		?>
+	</table>
 </div>
 
 <?php

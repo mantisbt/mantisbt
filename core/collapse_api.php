@@ -122,10 +122,6 @@ function collapse_closed( $p_name, $p_section = '' ) {
  * @return void
  */
 function collapse_icon( $p_name, $p_section = '' ) {
-	if( OFF == config_get( 'use_javascript' ) ) {
-		return;
-	}
-
 	global $g_open_collapse_section;
 
 	if( $g_open_collapse_section === true ) {
@@ -164,11 +160,7 @@ function collapse_end( $p_name, $p_section = '' ) {
 
 	$g_open_collapse_section = false;
 
-	if( ON == config_get( 'use_javascript' ) ) {
-		ob_end_flush();
-	} else {
-		ob_end_clean();
-	}
+	ob_end_flush();
 
 	$g_current_collapse_section = null;
 }
@@ -181,7 +173,7 @@ function collapse_end( $p_name, $p_section = '' ) {
 function collapse_display( $p_block ) {
 	global $g_collapse_cache_token;
 
-	if( !isset( $g_collapse_cache_token[$p_block] ) || OFF == config_get( 'use_javascript' ) ) {
+	if( !isset( $g_collapse_cache_token[$p_block] ) ) {
 		return true;
 	}
 
@@ -212,6 +204,7 @@ function collapse_cache_token() {
 		$t_data = json_decode( $t_token, true );
 	} else {
 		$t_data = array();
+		$t_data['filter'] = false;
 	}
 
 	$g_collapse_cache_token = $t_data;

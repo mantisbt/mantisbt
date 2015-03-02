@@ -100,6 +100,10 @@ if( $t_project_id != helper_get_current_project() ) {
 
 access_ensure_project_level( config_get( 'report_bug_threshold' ) );
 
+if( isset( $_GET['posted'] ) && empty( $_FILE ) && empty( $_POST ) ) {
+	trigger_error( ERROR_FILE_TOO_BIG, ERROR );
+}
+
 $t_bug_data = new BugData;
 $t_bug_data->project_id             = $t_project_id;
 $t_bug_data->reporter_id            = auth_get_current_user_id();
@@ -119,7 +123,7 @@ $t_bug_data->projection             = gpc_get_int( 'projection', config_get( 'de
 $t_bug_data->eta                    = gpc_get_int( 'eta', config_get( 'default_bug_eta' ) );
 $t_bug_data->resolution             = gpc_get_string( 'resolution', config_get( 'default_bug_resolution' ) );
 $t_bug_data->status                 = gpc_get_string( 'status', config_get( 'bug_submit_status' ) );
-$t_bug_data->summary                = trim( gpc_get_string( 'summary' ) );
+$t_bug_data->summary                = gpc_get_string( 'summary' );
 $t_bug_data->description            = gpc_get_string( 'description' );
 $t_bug_data->steps_to_reproduce     = gpc_get_string( 'steps_to_reproduce', config_get( 'default_bug_steps_to_reproduce' ) );
 $t_bug_data->additional_information = gpc_get_string( 'additional_info', config_get( 'default_bug_additional_info' ) );
@@ -129,13 +133,18 @@ if( is_blank( $t_bug_data->due_date ) ) {
 }
 
 $f_rel_type                         = gpc_get_int( 'rel_type', BUG_REL_NONE );
-$f_files                            = gpc_get_file( 'ufile', null ); # @todo (thraxisp) Note that this always returns a structure
+$f_files                            = gpc_get_file( 'ufile', null );
 $f_report_stay                      = gpc_get_bool( 'report_stay', false );
 $f_copy_notes_from_parent           = gpc_get_bool( 'copy_notes_from_parent', false );
 $f_copy_attachments_from_parent     = gpc_get_bool( 'copy_attachments_from_parent', false );
 
 if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id ) ) {
 	$t_bug_data->target_version = gpc_get_string( 'target_version', '' );
+}
+
+# Prevent unauthorized users setting handler when reporting issue
+if( $t_bug_data->handler_id > 0 ) {
+	access_ensure_project_level( config_get( 'update_bug_assign_threshold' ) );
 }
 
 # if a profile was selected then let's use that information

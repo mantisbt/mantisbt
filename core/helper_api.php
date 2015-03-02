@@ -77,6 +77,31 @@ function helper_alternate_colors( $p_index, $p_odd_color, $p_even_color ) {
 }
 
 /**
+ * alternate classes for table rows
+ * If no index is given, continue alternating based on the last index given
+ * @param int $p_index
+ * @param string $p_odd_class default: row-1
+ * @param string $p_even_class default: row-2
+ * @return string
+ */
+function helper_alternate_class( $p_index = null, $p_odd_class = 'row-1', $p_even_class = 'row-2' ) {
+	static $t_index = 1;
+
+	if( null !== $p_index ) {
+		$t_index = $p_index;
+	}
+
+	error_parameters( __FUNCTION__, 'CSS' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
+	if( 1 == $t_index++ % 2 ) {
+		return "class=\"$p_odd_class\"";
+	} else {
+		return "class=\"$p_even_class\"";
+	}
+}
+
+/**
  * Transpose a bidimensional array
  *
  * e.g. array('a'=>array('k1'=>1,'k2'=>2),'b'=>array('k1'=>3,'k2'=>4))
@@ -126,7 +151,6 @@ function get_status_color( $p_status, $p_user = null, $p_project = null ) {
  * @return array key is the status value, value is the percentage of bugs for the status
  */
 function get_percentage_by_status() {
-	$t_mantis_bug_table = db_get_table( 'bug' );
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 
@@ -134,13 +158,13 @@ function get_percentage_by_status() {
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
 
 	$t_query = 'SELECT status, COUNT(*) AS num
-				FROM ' . $t_mantis_bug_table . '
+				FROM {bug}
 				WHERE ' . $t_specific_where;
 	if( !access_has_project_level( config_get( 'private_bug_threshold' ) ) ) {
 		$t_query .= ' AND view_state < ' . VS_PRIVATE;
 	}
 	$t_query .= ' GROUP BY status';
-	$t_result = db_query_bound( $t_query );
+	$t_result = db_query( $t_query );
 
 	$t_status_count_array = array();
 
@@ -331,7 +355,7 @@ function helper_get_current_project() {
 			$t_project_id = $t_project_id[count( $t_project_id ) - 1];
 		}
 
-		if( !project_exists( $t_project_id ) || ( 0 == project_get_field( $t_project_id, 'enabled' ) ) || !access_has_project_level( VIEWER, $t_project_id ) ) {
+		if( !project_exists( $t_project_id ) || ( 0 == project_get_field( $t_project_id, 'enabled' ) ) || !access_has_project_level( config_get( 'view_bug_threshold', null, null, $t_project_id ), $t_project_id ) ) {
 			$t_project_id = ALL_PROJECTS;
 		}
 		$g_cache_current_project = (int)$t_project_id;
@@ -371,7 +395,7 @@ function helper_get_current_project_trace() {
 		$t_bottom = $t_project_id[count( $t_project_id ) - 1];
 	}
 
-	if( !project_exists( $t_bottom ) || ( 0 == project_get_field( $t_bottom, 'enabled' ) ) || !access_has_project_level( VIEWER, $t_bottom ) ) {
+	if( !project_exists( $t_bottom ) || ( 0 == project_get_field( $t_bottom, 'enabled' ) ) || !access_has_project_level( config_get( 'view_bug_threshold', null, null, $t_bottom ), $t_bottom ) ) {
 		$t_project_id = array(
 			ALL_PROJECTS,
 		);
@@ -423,9 +447,7 @@ function helper_ensure_confirmed( $p_message, $p_button_label ) {
 
 	html_page_top();
 
-	echo '<br />';
-	echo '<div class="center">';
-	echo '<hr />';
+	echo '<div class="confirm-msg center">';
 	echo "\n" . $p_message . "\n";
 
 	echo '<form method="post" action="">' . "\n";
@@ -438,7 +460,7 @@ function helper_ensure_confirmed( $p_message, $p_button_label ) {
 	echo '<br /><br /><input type="submit" class="button" value="' . $p_button_label . '" />';
 	echo "\n</form>\n";
 
-	echo '<hr /></div>' . "\n";
+	echo '</div>' . "\n";
 	html_page_bottom();
 	exit;
 }

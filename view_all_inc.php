@@ -53,11 +53,8 @@ require_api( 'html_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
-$g_filter = current_user_get_bug_filter();
-# NOTE: this check might be better placed in current_user_get_bug_filter()
-if( $g_filter === false ) {
-	$g_filter = filter_get_default();
-}
+$t_filter = current_user_get_bug_filter();
+filter_init( $t_filter );
 
 list( $t_sort, ) = explode( ',', $g_filter['sort'] );
 list( $t_dir, ) = explode( ',', $g_filter['dir'] );
@@ -98,7 +95,7 @@ if( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_
 }
 ?>
 <br />
-<form name="bug_action" method="get" action="bug_actiongroup_page.php">
+<form id="bug_action" method="get" action="bug_actiongroup_page.php">
 <?php # CSRF protection not required here - form does not result in modifications ?>
 <table id="buglist" class="width100" cellspacing="1">
 <thead>
@@ -196,7 +193,7 @@ function write_bug_rows( array $p_rows ) {
 		if( ( 0 == $t_row->sticky ) && $t_in_stickies ) {	# demarcate stickies, if any have been shown
 ?>
 		   <tr>
-				   <td class="left" colspan="<?php echo count( $g_columns ); ?>" bgcolor="#999999">&#160;</td>
+				   <td class="left sticky-header" colspan="<?php echo count( $g_columns ); ?>">&#160;</td>
 		   </tr>
 <?php
 			$t_in_stickies = false;
@@ -227,7 +224,7 @@ write_bug_rows( $t_rows );
 		<td class="left" colspan="<?php echo $t_col_count; ?>">
 			<span class="floatleft">
 <?php
-		if( $g_checkboxes_exist && ON == config_get( 'use_javascript' ) ) {
+		if( $g_checkboxes_exist ) {
 			echo '<input type="checkbox" id="bug_arr_all" name="bug_arr_all" value="all" class="check_all" />';
 			echo '<label for="bug_arr_all">' . lang_get( 'select_all' ) . '</label>';
 		}

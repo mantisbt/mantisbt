@@ -40,6 +40,7 @@
  *
  * @author Eduardo.mps
  * @author Giro720
+ * @author Webysther
  */
 
 $s_plugin_format_title = 'Formatação do MantisBT';
@@ -48,6 +49,7 @@ $s_plugin_format_config = 'Configuração';
 $s_plugin_format_process_text = 'Processamento de Texto';
 $s_plugin_format_process_text_warning_notice = 'Não desligue, a menos que você esteja tenha certeza do que está fazendo. Quando desligado, tornam-se possíveis ataques de \'\'cross site scripting\'\' (XSS).';
 $s_plugin_format_process_urls = 'Processamento de URL';
-$s_plugin_format_process_buglinks = 'Ligações do MantisBT ( Caso/Anotação )';
+$s_plugin_format_process_buglinks = 'MantisBT links internos (Problemas/Anotações)';
+$s_plugin_format_process_buglinks_info = 'Sua configuração define o <em>problema</em> marcado como "<literal>%s</literal>" e <em>notas do problema</em> marcado como "<literal>%s</literal>"';
 $s_plugin_format_enabled = 'Ligado';
 $s_plugin_format_disabled = 'Desligado';

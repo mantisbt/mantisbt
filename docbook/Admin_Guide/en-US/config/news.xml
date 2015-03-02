@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.news">
+	<title>News</title>
+
+	<para>These options are used to control the query that selects the
+		news entries to be displayed.
+	</para>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_news_enabled</term>
+			<listitem>
+				<para>Indicates whether the news feature should be enabled or disabled.
+					The default is OFF.  The news feature is deprecated in favor of
+					being moved to a plugin.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_news_limit_method</term>
+			<listitem>
+				<para>Limit the news entry that are displayed by number of entries
+					(BY_LIMIT) or by date (BY_DATE). The default is BY_LIMIT.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_news_view_limit</term>
+			<listitem>
+				<para>The limit for the number of news entries to be displayed.
+					This option is only used if $g_news_limit_method is set to
+					BY_LIMIT.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_news_view_limit_days</term>
+			<listitem>
+				<para>Specifies the number of dates after which the news are not
+					displayed. This option is only used if $g_news_limit_method is set
+					to BY_DATE.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_private_news_threshold</term>
+			<listitem>
+				<para>Specifies the access level required to view private news.
+					The default is DEVELOPER.
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</section>

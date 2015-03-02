@@ -132,8 +132,8 @@ function http_caching_headers( $p_allow_caching = false ) {
 function http_content_headers() {
 	if( !headers_sent() ) {
 		header( 'Content-Type: text/html; charset=UTF-8' );
-		# Disallow Internet Explorer from attempting to second guess the Content-Type
-		# header as per http://blogs.msdn.com/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
+		# Don't let Internet Explorer second-guess our content-type, as per
+		# http://blogs.msdn.com/b/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
 		header( 'X-Content-Type-Options: nosniff' );
 	}
 }
@@ -153,7 +153,7 @@ function http_security_headers() {
 				$t_avatar_img_allow = "; img-src 'self' http://www.gravatar.com:80";
 			}
 		}
-		header( 'X-Content-Security-Policy: allow \'self\';' . $t_avatar_img_allow . '; frame-ancestors \'none\'' );
+		header( 'Content-Security-Policy: default-src \'self\';' . $t_avatar_img_allow . '; frame-ancestors \'none\'' );
 		if( http_is_protocol_https() ) {
 			header( 'Strict-Transport-Security: max-age=7776000' );
 		}

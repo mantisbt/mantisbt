@@ -186,7 +186,10 @@ function html_page_top1( $p_page_title = null ) {
 	html_head_begin();
 
 	html_content_type();
-	include( config_get( 'meta_include_file' ) );
+	$t_meta = config_get_global( 'meta_include_file' );
+	if( !is_blank( $t_meta ) ) {
+		include( $t_meta );
+	}
 	global $g_robots_meta;
 	if( !is_blank( $g_robots_meta ) ) {
 		echo "\t", '<meta name="robots" content="', $g_robots_meta, '" />', "\n";
@@ -291,6 +294,8 @@ function html_page_bottom1a( $p_file = null ) {
 		$p_file = basename( $_SERVER['SCRIPT_NAME'] );
 	}
 
+	error_print_delayed();
+
 	html_bottom_banner();
 	html_footer();
 	html_body_end();
@@ -360,7 +365,7 @@ function require_css( $p_stylesheet_path ) {
 function html_css() {
 	global $g_stylesheets_included;
 	html_css_link( config_get( 'css_include_file' ) );
-	html_css_link( 'jquery-ui-1.10.0.custom.min.css' );
+	html_css_link( 'jquery-ui-1.11.2.min.css' );
 	html_css_link( 'common_config.php' );
 	# Add right-to-left css if needed
 	if( lang_get( 'directionality' ) == 'rtl' ) {
@@ -430,16 +435,15 @@ function require_js( $p_script_path ) {
  * @return void
  */
 function html_head_javascript() {
-	if( config_get( 'use_javascript' ) ) {
-		global $g_scripts_included;
-		echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_config.php' ) . '"></script>' . "\n";
-		echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
-		html_javascript_link( 'jquery-1.9.1.min.js' );
-		html_javascript_link( 'jquery-ui-1.10.0.custom.min.js' );
-		html_javascript_link( 'common.js' );
-		foreach ( $g_scripts_included as $t_script_path ) {
-			html_javascript_link( $t_script_path );
-		}
+	global $g_scripts_included;
+
+	echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_config.php' ) . '"></script>' . "\n";
+	echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
+	html_javascript_link( 'jquery-1.11.1.min.js' );
+	html_javascript_link( 'jquery-ui-1.11.2.min.js' );
+	html_javascript_link( 'common.js' );
+	foreach ( $g_scripts_included as $t_script_path ) {
+		html_javascript_link( $t_script_path );
 	}
 }
 
@@ -520,8 +524,10 @@ function html_login_info() {
 	$t_now = date( config_get( 'complete_date_format' ) );
 	$t_realname = current_user_get_field( 'realname' );
 
+	echo '<div class="info-bar">' . "\n";
+
 	# Login information
-	echo '<div id="login-info">';
+	echo '<div id="login-info">' . "\n";
 	if( current_user_is_anonymous() ) {
 		$t_return_page = $_SERVER['SCRIPT_NAME'];
 		if( isset( $_SERVER['QUERY_STRING'] ) ) {
@@ -530,29 +536,29 @@ function html_login_info() {
 
 		$t_return_page = string_url( $t_return_page );
 
-		echo '<span id="logged-anon-label">' . lang_get( 'anonymous' ) . '</span>';
-		echo '<span id="login-link"><a href="' . helper_mantis_url( 'login_page.php?return=' . $t_return_page ) . '">' . lang_get( 'login_link' ) . '</a></span>';
+		echo "\t" . '<span id="logged-anon-label">' . lang_get( 'anonymous' ) . '</span>' . "\n";
+		echo "\t" . '<span id="login-link"><a href="' . helper_mantis_url( 'login_page.php?return=' . $t_return_page ) . '">' . lang_get( 'login_link' ) . '</a></span>' . "\n";
 		if( config_get_global( 'allow_signup' ) == ON ) {
-			echo '<span id="signup-link"><a href="' . helper_mantis_url( 'signup_page.php' ) . '">' . lang_get( 'signup_link' ) . '</a></span>';
+			echo "\t" . '<span id="signup-link"><a href="' . helper_mantis_url( 'signup_page.php' ) . '">' . lang_get( 'signup_link' ) . '</a></span>' . "\n";
 		}
 	} else {
-		echo '<span id="logged-in-label">' . lang_get( 'logged_in_as' ) . '</span>';
-		echo '<span id="logged-in-user">' . string_html_specialchars( $t_username ) . '</span>';
-		echo '<span id="logged-in">';
-		echo !is_blank( $t_realname ) ?  '<span id="logged-in-realname">' . string_html_specialchars( $t_realname ) . '</span>' : '';
-		echo '<span id="logged-in-accesslevel" class="' . $t_access_level . '">' . $t_access_level . '</span>';
-		echo '</span>';
+		echo "\t" . '<span id="logged-in-label">' . lang_get( 'logged_in_as' ) . '</span>' . "\n";
+		echo "\t" . '<span id="logged-in-user">' . string_html_specialchars( $t_username ) . '</span>' . "\n";
+		echo "\t" . '<span id="logged-in">';
+		echo !is_blank( $t_realname ) ?  "\t" . '<span id="logged-in-realname">' . string_html_specialchars( $t_realname ) . '</span>' . "\n" : '';
+		echo "\t" . '<span id="logged-in-accesslevel" class="' . $t_access_level . '">' . $t_access_level . '</span>' . "\n";
+		echo "\t" . '</span>' . "\n";
 	}
-	echo '</div>';
+	echo '</div>' . "\n";
 
 	# RSS feed
 	if( OFF != config_get( 'rss_enabled' ) ) {
-		echo '<div id="rss-feed">';
+		echo '<div id="rss-feed">' . "\n";
 		# Link to RSS issues feed for the selected project, including authentication details.
-		echo '<a href="' . htmlspecialchars( rss_get_issues_feed_url() ) . '">';
-		echo '<img src="' . helper_mantis_url( 'images/rss.png' ) . '" alt="' . lang_get( 'rss' ) . '" title="' . lang_get( 'rss' ) . '" />';
-		echo '</a>';
-		echo '</div>';
+		echo "\t" . '<a href="' . htmlspecialchars( rss_get_issues_feed_url() ) . '">' . "\n";
+		echo "\t" . '<img src="' . helper_mantis_url( 'images/rss.png' ) . '" alt="' . lang_get( 'rss' ) . '" title="' . lang_get( 'rss' ) . '" />' . "\n";
+		echo "\t" . '</a>' . "\n";
+		echo '</div>' . "\n";
 	}
 
 	# Project Selector (hidden if only one project visisble to user)
@@ -566,7 +572,7 @@ function html_login_info() {
 	}
 
 	if( $t_show_project_selector ) {
-		echo '<div id="project-selector">';
+		echo '<div id="project-selector-div">';
 		echo '<form method="post" id="form-set-project" action="' . helper_mantis_url( 'set_project.php' ) . '">';
 		echo '<fieldset id="project-selector">';
 		# CSRF protection not required here - form does not result in modifications
@@ -599,6 +605,7 @@ function html_login_info() {
 
 	# Current time
 	echo '<div id="current-time">' . $t_now . '</div>';
+	echo '</div>' . "\n";
 }
 
 /**
@@ -632,6 +639,14 @@ function html_operation_successful( $p_redirect_url, $p_message = '' ) {
 }
 
 /**
+ * Checks if the current page load was triggered by auto-refresh or real activity
+ * @return bool true: auto-refresh, false: triggered by user.
+ */
+function html_is_auto_refresh() {
+	return gpc_get_bool( 'refresh' );
+}
+
+/**
  * (13) Print the page footer information
  * @return void
  */
@@ -644,7 +659,11 @@ function html_footer() {
 	#  2) we don't invalidate the user cache immediately after fetching it
 	#  3) don't do this on the password verification or update page, as it causes the
 	#    verification comparison to fail
-	if( auth_is_user_authenticated() && !current_user_is_anonymous() && !( is_page_name( 'verify.php' ) || is_page_name( 'account_update.php' ) ) ) {
+	#  4) don't do that on pages that auto-refresh (View Issues page).
+	if( auth_is_user_authenticated() &&
+		!current_user_is_anonymous() &&
+		!( is_page_name( 'verify.php' ) || is_page_name( 'account_update.php' ) ) &&
+		!html_is_auto_refresh() ) {
 		$t_user_id = auth_get_current_user_id();
 		user_update_last_visit( $t_user_id );
 	}
@@ -659,7 +678,7 @@ function html_footer() {
 		$t_mantisbt_logo_url = helper_mantis_url( 'images/mantis_logo.png' );
 		echo "\t\t" . '<a href="http://www.mantisbt.org"
 			title="Mantis Bug Tracker: a free and open source web based bug tracking system.">
-			<img src="' . $t_mantisbt_logo_url . '" width="102" height="35" 
+			<img src="' . $t_mantisbt_logo_url . '" width="102" height="35"
 				alt="Powered by Mantis Bug Tracker: a free and open source web based bug tracking system." />
 			</a>' . "\n";
 		echo "\t" . '</div>' . "\n";
@@ -669,7 +688,7 @@ function html_footer() {
 	$t_version_suffix = '';
 	$t_copyright_years = ' 2000 - ' . date( 'Y' );
 	if( config_get( 'show_version' ) == ON ) {
-		$t_version_suffix = ' ' . htmlentities( MANTIS_VERSION . config_get_global( 'version_suffix' ) );
+		$t_version_suffix = ' ' . htmlentities( MANTIS_VERSION . ' ' . config_get_global( 'version_suffix' ) );
 	}
 
 	echo '<address id="mantisbt-copyright">' . "\n";
@@ -1008,14 +1027,16 @@ function print_summary_submenu() {
 		}
 	}
 
-	echo '<div id="summary-submenu">';
-	echo '<ul class="menu">';
-	# Plugins menu items - these are cooked links
-	foreach ( $t_menu_options as $t_menu_item ) {
-		echo '<li>', $t_menu_item, '</li>';
+	if( sizeof( $t_menu_options ) > 0 ) {
+		echo "\t" . '<div id="summary-submenu">' . "\n";
+		echo "\t\t" . '<ul class="menu">' . "\n";
+		# Plugins menu items - these are cooked links
+		foreach ( $t_menu_options as $t_menu_item ) {
+			echo "\t\t\t" . '<li>', $t_menu_item, '</li>' . "\n";
+		}
+		echo "\t\t" . '</ul>' . "\n";
+		echo "\t" . '</div>' . "\n";
 	}
-	echo '</ul>';
-	echo '</div>';
 }
 
 /**
@@ -1038,7 +1059,7 @@ function print_manage_menu( $p_page = '' ) {
 	if( access_has_global_level( config_get( 'manage_custom_fields_threshold' ) ) ) {
 		$t_pages['manage_custom_field_page.php'] = array( 'url'   => 'manage_custom_field_page.php', 'label' => 'manage_custom_field_link' );
 	}
-	if( access_has_global_level( config_get( 'manage_global_profile_threshold' ) ) ) {
+	if( config_get( 'enable_profiles' ) == ON && access_has_global_level( config_get( 'manage_global_profile_threshold' ) ) ) {
 		$t_pages['manage_prof_menu_page.php'] = array( 'url'   => 'manage_prof_menu_page.php', 'label' => 'manage_global_profiles_link' );
 	}
 	if( access_has_global_level( config_get( 'manage_plugin_threshold' ) ) ) {
@@ -1300,7 +1321,6 @@ function print_summary_menu( $p_page = '' ) {
 		}
 	}
 
-	$t_pages['print_all_bug_page.php'] = array( 'url'=>'print_all_bug_page.php', 'label'=>'print_all_bug_page_link' );
 	$t_pages['summary_page.php'] = array( 'url'=>'summary_page.php', 'label'=>'summary_link' );
 	# Remove the link from the current page
 	if( isset( $t_pages[$p_page] ) ) {
@@ -1591,6 +1611,8 @@ function html_button_bug_assign_to( BugData $p_bug ) {
 
 	echo '<form method="post" action="bug_update.php">';
 	echo form_security_field( 'bug_update' );
+	echo '<input type="hidden" name="last_updated" value="' . $p_bug->last_updated . '" />';
+	echo '<input type="hidden" name="action_type" value="' . BUG_UPDATE_TYPE_ASSIGN . '" />';
 
 	$t_button_text = lang_get( 'bug_assign_to_button' );
 	echo '<input type="submit" class="button" value="' . $t_button_text . '" />';
@@ -1769,29 +1791,29 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 
 	$t_bug = bug_get( $p_bug_id );
 
-	echo '<table><tr class="vcenter">';
+	echo '<table><tr class="details-buttons">';
 	if( !$t_readonly ) {
 		# UPDATE button
-		echo '<td class="center">';
+		echo '<td>';
 		html_button_bug_update( $p_bug_id );
 		echo '</td>';
 
 		# ASSIGN button
-		echo '<td class="center">';
+		echo '<td>';
 		html_button_bug_assign_to( $t_bug );
 		echo '</td>';
 	}
 
 	# Change status button/dropdown
 	if( !$t_readonly ) {
-		echo '<td class="center">';
+		echo '<td>';
 		html_button_bug_change_status( $t_bug );
 		echo '</td>';
 	}
 
 	# MONITOR/UNMONITOR button
 	if( !current_user_is_anonymous() ) {
-		echo '<td class="center">';
+		echo '<td>';
 		if( user_is_monitoring_bug( auth_get_current_user_id(), $p_bug_id ) ) {
 			html_button_bug_unmonitor( $p_bug_id );
 		} else {
@@ -1802,7 +1824,7 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 
 	# STICK/UNSTICK button
 	if( access_has_bug_level( $t_sticky, $p_bug_id ) ) {
-		echo '<td class="center">';
+		echo '<td>';
 		if( !bug_get_field( $p_bug_id, 'sticky' ) ) {
 			html_button_bug_stick( $p_bug_id );
 		} else {
@@ -1813,28 +1835,28 @@ function html_buttons_view_bug_page( $p_bug_id ) {
 
 	# CLONE button
 	if( !$t_readonly ) {
-		echo '<td class="center">';
+		echo '<td>';
 		html_button_bug_create_child( $p_bug_id );
 		echo '</td>';
 	}
 
 	# REOPEN button
-	echo '<td class="center">';
+	echo '<td>';
 	html_button_bug_reopen( $t_bug );
 	echo '</td>';
 
 	# CLOSE button
-	echo '<td class="center">';
+	echo '<td>';
 	html_button_bug_close( $t_bug );
 	echo '</td>';
 
 	# MOVE button
-	echo '<td class="center">';
+	echo '<td>';
 	html_button_bug_move( $p_bug_id );
 	echo '</td>';
 
 	# DELETE button
-	echo '<td class="center">';
+	echo '<td>';
 	html_button_bug_delete( $p_bug_id );
 	echo '</td>';
 

@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Andriykopanytsia
  * @author Base
  */
 
@@ -47,6 +48,7 @@ $s_plugin_format_config = 'Налаштування';
 $s_plugin_format_process_text = 'Обробка тексту';
 $s_plugin_format_process_text_warning_notice = 'Не вимикайте, якщо Ви не впевнені в тому, що робите. У вимкненому стані можлива XSS-атака сайту.';
 $s_plugin_format_process_urls = 'Обробка URL';
-$s_plugin_format_process_buglinks = 'Посилання MantisBT ( Задачі/Коментарі )';
+$s_plugin_format_process_buglinks = 'Внутрішні посилання MantisBT (завдання/коментарі)';
+$s_plugin_format_process_buglinks_info = 'Ваша конфігурація визначає теґ <em>Issue</em> «<literal>%s</literal>», а теґ <em>Issue Note</em> - як «<literal>%s</literal>»';
 $s_plugin_format_enabled = 'вкл';
 $s_plugin_format_disabled = 'викл';
