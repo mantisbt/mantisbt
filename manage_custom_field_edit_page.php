@@ -305,53 +305,65 @@ $t_definition = custom_field_get_definition( $f_field_id );
 ?>
 <div class="col-md-12 col-xs-12">
 	<div class="space-10"></div>
-	<form method="post" action="manage_custom_field_proj_add.php">
+
 	<div class="widget-box widget-color-blue2">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
-			<i class="ace-icon fa fa-flask"></i>
+			<i class="ace-icon fa fa-link"></i>
 			<?php echo lang_get( 'link_custom_field_to_project_title' ) ?>
 		</h4>
 	</div>
 
 	<div class="widget-body">
 		<div class="widget-main no-padding">
-		<div class="form-container">
-		<div class="table-responsive">
-		<table class="table table-bordered table-condensed table-striped">
-		<fieldset>
-			<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
-			<?php echo form_security_field( 'manage_custom_field_proj_add' ); ?>
+			<div class="table-responsive">
+			<table class="table table-bordered table-condensed table-striped">
+				<tr id="custom-field-link-project">
+				<td class="category">
+					<?php echo lang_get( 'link_custom_field_to_project_title' ) ?>
+				</td>
+				<td>
+					<?php print_custom_field_projects_list( $f_field_id ); ?>
+				</td>
+				</tr>
 
-			<tr>
-				<td class="category">
-					<?php echo lang_get( 'projects_title_label' ) ?>
-				</td>
-				<td>
-					<select id="custom-field-project-id" name="project_id[]" class="input-sm" multiple="multiple" size="5">
-						<?php print_project_option_list( null, false ); ?>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td class="category">
-					<?php echo lang_get( 'custom_field_sequence_label' ) ?>
-				</td>
-				<td>
-					<input type="text" id="custom-field-sequence" name="sequence" class="input-sm" value="0" />
-				</td>
-			</tr>
-		</fieldset>
-		</table>
-		</div>
-		</div>
-			<div class="widget-toolbox padding-8 clearfix">
-				<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'link_custom_field_to_project_button' ) ?>" />
+				<form method="post" action="manage_custom_field_proj_add.php">
+				<div class="form-container">
+
+				<input type="hidden" name="field_id" value="<?php echo $f_field_id ?>" />
+				<?php echo form_security_field( 'manage_custom_field_proj_add' ); ?>
+
+				<tr>
+					<td class="category">
+						<?php echo lang_get( 'projects_title_label' ) ?>
+					</td>
+					<td>
+						<select id="custom-field-project-id" name="project_id[]" class="input-sm" multiple="multiple" size="5">
+							<?php print_project_option_list( null, false ); ?>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td class="category">
+						<?php echo lang_get( 'custom_field_sequence_label' ) ?>
+					</td>
+					<td>
+						<input type="text" id="custom-field-sequence" name="sequence" class="input-sm" value="0" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" class="no-padding">
+					<div class="widget-toolbox padding-8 clearfix">
+						<input type="submit" class="btn btn-primary btn-white btn-round" value="<?php echo lang_get( 'link_custom_field_to_project_button' ) ?>" />
+					</div>
+					</td>
+				</tr>
+				</form>
+			</table>
 			</div>
 		</div>
-		</div>
-		</div>
-	</form>
+    </div>
+    </div>
 </div><?php
 
 layout_page_end();

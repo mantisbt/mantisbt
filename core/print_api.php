@@ -1148,7 +1148,7 @@ function print_custom_field_projects_list( $p_field_id ) {
 		$t_project_name = project_get_field( $t_project_id, 'name' );
 		$t_sequence = custom_field_get_sequence( $p_field_id, $t_project_id );
 		echo '<strong>', string_display_line( $t_project_name ), '</strong>: ';
-		print_bracket_link( 'manage_proj_custom_field_remove.php?field_id=' . $c_field_id . '&project_id=' . $t_project_id . '&return=custom_field' . $t_security_token, lang_get( 'remove_link' ) );
+		print_extra_small_button( 'manage_proj_custom_field_remove.php?field_id=' . $c_field_id . '&project_id=' . $t_project_id . '&return=custom_field' . $t_security_token, lang_get( 'remove_link' ) );
 		echo '<br />- ';
 
 		$t_linked_field_ids = custom_field_get_linked_ids( $t_project_id );
@@ -1468,6 +1468,10 @@ function print_button( $p_link, $p_url_text, $p_class = '', $p_new_window = fals
  * @param boolean $p_new_window Whether to open in a new window.
  * @return void
  */
+function print_extra_small_button( $p_link, $p_url_text, $p_new_window = false ) {
+	print_button( $p_link, $p_url_text, 'btn-xs', $p_new_window );
+}
+
 function print_small_button( $p_link, $p_url_text, $p_new_window = false ) {
 	print_button( $p_link, $p_url_text, 'btn-sm', $p_new_window );
 }
