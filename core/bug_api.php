@@ -1101,18 +1101,19 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 
 	# COPY CUSTOM FIELDS
 	if( $p_copy_custom_fields ) {
-		$t_query = 'SELECT field_id, bug_id, value FROM {custom_field_string} WHERE bug_id=' . db_param();
+		$t_query = 'SELECT field_id, bug_id, value, text FROM {custom_field_string} WHERE bug_id=' . db_param();
 		$t_result = db_query( $t_query, array( $t_bug_id ) );
 
 		while( $t_bug_custom = db_fetch_array( $t_result ) ) {
 			$c_field_id = (int)$t_bug_custom['field_id'];
 			$c_new_bug_id = (int)$t_new_bug_id;
 			$c_value = $t_bug_custom['value'];
+			$c_text = $t_bug_custom['text'];
 
 			$t_query = 'INSERT INTO {custom_field_string}
-						   ( field_id, bug_id, value )
-						   VALUES (' . db_param() . ', ' . db_param() . ', ' . db_param() . ')';
-			db_query( $t_query, array( $c_field_id, $c_new_bug_id, $c_value ) );
+						   ( field_id, bug_id, value, text )
+						   VALUES (' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ')';
+			db_query( $t_query, array( $c_field_id, $c_new_bug_id, $c_value, $c_text ) );
 		}
 	}
 
