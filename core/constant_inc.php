@@ -222,6 +222,7 @@ define( 'BUG_HAS_DUPLICATE', 4 );
 # bug update types
 define( 'BUG_UPDATE_TYPE_NORMAL', 'update' );
 define( 'BUG_UPDATE_TYPE_ASSIGN', 'assign' );
+define( 'BUG_UPDATE_TYPE_CLOSE', 'close' );
 
 # error messages
 define( 'ERROR_GENERIC', 0 );

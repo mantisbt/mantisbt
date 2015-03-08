@@ -388,6 +388,7 @@ if( ( $f_new_status >= $t_resolved ) ) {
 			</tr>
 		</tbody>
 	</table>
+	<input type="hidden" name="action_type" value="<?php echo BUG_UPDATE_TYPE_CLOSE; ?>" />
 </form>
 
 </div>
