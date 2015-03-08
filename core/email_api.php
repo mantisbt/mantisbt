@@ -111,9 +111,11 @@ function email_regex_simple() {
  */
 function email_is_valid( $p_email ) {
 	# if we don't validate then just accept
+	# If blank email is allowed or current user is admin, then accept blank emails which are useful for
+	# accounts that should never receive email notifications (e.g. anonymous account)
 	if( OFF == config_get( 'validate_email' ) ||
 		ON == config_get( 'use_ldap_email' ) ||
-		( is_blank( $p_email ) && ON == config_get( 'allow_blank_email' ) )
+		( is_blank( $p_email ) && ( ON == config_get( 'allow_blank_email' ) || current_user_is_administrator() ) ) 
 	) {
 		return true;
 	}
