@@ -108,7 +108,7 @@ function set_color_override( $p_level_file, $p_level_global, $p_level_project ) 
  */
 function show_flag( $p_from_status_id, $p_to_status_id ) {
 	global $g_can_change_workflow,
-		$t_file_workflow, $t_global_workflow, $t_project_workflow,
+		$g_file_workflow, $g_global_workflow, $g_project_workflow,
 		$t_resolved_status, $t_reopen_status, $t_reopen_label;
 	if( $p_from_status_id <> $p_to_status_id ) {
 		$t_file = isset( $g_file_workflow['exit'][$p_from_status_id][$p_to_status_id] ) ? 1 : 0;
@@ -119,7 +119,7 @@ function show_flag( $p_from_status_id, $p_to_status_id ) {
 		if( $g_can_change_workflow && $t_color != '' ) {
 			set_overrides( 'status_enum_workflow' );
 		}
-		$t_value = '<td class="' . $t_color . '">';
+		$t_value = '<td class="center ' . $t_color . '">';
 
 		$t_flag = ( 1 == $t_project );
 
