@@ -337,12 +337,10 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 		case 'relation':
 		case 'monitor':
 		case 'priority': # This is never used, but exists in the database!
-			# FIXME: these notification actions are not actually implemented
+			# Issue #19459 these notification actions are not actually implemented
 			# in the database and therefore aren't adjustable on a per-user
 			# basis! The exception is 'monitor' that makes no sense being a
 			# customisable per-user preference.
-			$t_pref_field = false;
-			break;
 		default:
 			# Anything not built-in is probably going to be a status
 			$t_pref_field = 'email_on_status';
