@@ -176,7 +176,8 @@ if( $t_existing_bug->status !== $t_updated_bug->status ) {
 		     config_get( 'allow_reporter_close' ) ) {
 			$t_can_bypass_status_access_thresholds = true;
 		} else if( $t_reopen_issue &&
-		            $t_existing_bug->status < $t_closed_status &&
+		            $t_existing_bug->status >= $t_resolved_status &&
+		            $t_existing_bug->status <= $t_closed_status &&
 		            $t_existing_bug->reporter_id === auth_get_current_user_id() &&
 		            config_get( 'allow_reporter_reopen' ) ) {
 			$t_can_bypass_status_access_thresholds = true;
