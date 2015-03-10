@@ -1205,6 +1205,12 @@ $g_private_news_threshold = DEVELOPER;
 $g_default_new_account_access_level = REPORTER;
 
 /**
+ * Default Project View Status (VS_PUBLIC or VS_PRIVATE)
+ * @global integer $g_default_project_view_status
+ */
+$g_default_project_view_status = VS_PUBLIC;
+
+/**
  * Default Bug View Status (VS_PUBLIC or VS_PRIVATE)
  * @global integer $g_default_bug_view_status
  */
