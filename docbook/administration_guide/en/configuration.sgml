@@ -993,7 +993,7 @@
             <varlistentry>
                 <term>$g_show_avatar_url</term>
                 <listitem>
-                    <para>To host your own avatar site change this setting. Note that this site needs to act like gravatar api. A https url is needed if MantisBT is being accessed via https otherwise there will be warnings of unsecure content.</para>
+                    <para>To host your own avatar site set this setting. Note that this site needs to act like gravatar api. A https url is needed if MantisBT is being accessed via https otherwise there will be warnings of unsecure content.</para>
                 </listitem>
             </varlistentry>
         </variablelist>
