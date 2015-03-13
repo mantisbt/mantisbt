@@ -815,7 +815,7 @@ function user_get_avatar( $p_user_id, $p_size = 80 ) {
 
 	# Build Gravatar URL
 	$t_avatar_url = config_get( 'show_avatar_url' );
-	if (empty($t_avatar_url))
+	if ( empty( $t_avatar_url ) ) {
 		if ( http_is_protocol_https() ) {
 			$t_avatar_url = 'https://secure.gravatar.com';
 		} else {
