@@ -177,7 +177,11 @@ while( ( $i <= $t_last_id ) && !$g_failed ) {
 		print_test_result( GOOD );
 		config_set( 'database_version', $i );
 	} else {
-		print_test_result( BAD, true, $t_sqlarray[0] . '<br />' . $g_db->ErrorMsg() );
+		$t_msg = $t_sqlarray[0];
+		if( !is_blank( $g_db->ErrorMsg() ) ) {
+			$t_msg .= "\n" . $g_db->ErrorMsg();
+		}
+		print_test_result( BAD, true, $t_msg );
 	}
 
 	$i++;
