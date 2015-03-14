@@ -59,9 +59,9 @@ function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
 	if( BAD == $p_result ) {
 		if( $p_hard_fail ) {
 			$g_failed = true;
-			echo ' - ERROR: ';
+			echo '- ERROR: ';
 		} else {
-			echo ' - WARNING: ';
+			echo '- WARNING: ';
 		}
 		if( '' != $p_message ) {
 			echo $p_message;
@@ -69,7 +69,7 @@ function print_test_result( $p_result, $p_hard_fail = true, $p_message = '' ) {
 	}
 
 	if( GOOD == $p_result ) {
-		echo ' - GOOD';
+		echo '- GOOD';
 	}
 	echo "\n";
 }
@@ -162,7 +162,7 @@ while( ( $i <= $t_last_id ) && !$g_failed ) {
 		}
 	}
 
-	echo 'Schema ' . $g_upgrade[$i][0] . ' ( ' . $t_target . ' ) ';
+	echo 'Schema step ' . $i . ': ' . $g_upgrade[$i][0] . ' ( ' . $t_target . ' ) ';
 	if( $t_sql ) {
 		$t_ret = $t_dict->ExecuteSQLArray( $t_sqlarray, false );
 	} else {
