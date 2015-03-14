@@ -998,7 +998,9 @@ if( 3 == $t_install_state ) {
 				} else {
 					$t_all_sql = '';
 					foreach ( $t_sqlarray as $t_single_sql ) {
-						$t_all_sql .= $t_single_sql . '<br />';
+						if( !empty( $t_single_sql ) ) {
+							$t_all_sql .= $t_single_sql . '<br />';
+						}
 					}
 					print_test_result( BAD, true, $t_all_sql  . $g_db->ErrorMsg() );
 				}
