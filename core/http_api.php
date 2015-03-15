@@ -162,6 +162,12 @@ function http_security_headers() {
 			$t_csp[] = "img-src 'self' $t_avatar_url";
 		}
 
+		# Relaxing policy for roadmap page to allow inline styles
+		# This is a workaround to fix the broken progress bars (see #19501)
+		if( 'roadmap_page.php' == basename( $_SERVER['SCRIPT_NAME'] ) ) {
+			$t_csp[] = "style-src 'self' 'unsafe-inline'";
+		}
+
 		# Set CSP header
 		header( 'Content-Security-Policy: ' . implode('; ', $t_csp) );
 
