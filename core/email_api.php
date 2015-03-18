@@ -901,7 +901,7 @@ function email_send( EmailData $p_email_data ) {
 	}
 
 	$t_mail->IsHTML( false );              # set email format to plain text
-	$t_mail->WordWrap = 80;              # set word wrap to 50 characters
+	$t_mail->WordWrap = 80;              # set word wrap to 80 characters
 	$t_mail->Priority = $t_email_data->metadata['priority'];  # Urgent = 1, Not Urgent = 5, Disable = 0
 	$t_mail->CharSet = $t_email_data->metadata['charset'];
 	$t_mail->Host = config_get( 'smtp_host' );
