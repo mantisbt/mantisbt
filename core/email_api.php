@@ -111,9 +111,11 @@ function email_regex_simple() {
  */
 function email_is_valid( $p_email ) {
 	# if we don't validate then just accept
+	# If blank email is allowed or current user is admin, then accept blank emails which are useful for
+	# accounts that should never receive email notifications (e.g. anonymous account)
 	if( OFF == config_get( 'validate_email' ) ||
 		ON == config_get( 'use_ldap_email' ) ||
-		( is_blank( $p_email ) && ON == config_get( 'allow_blank_email' ) )
+		( is_blank( $p_email ) && ( ON == config_get( 'allow_blank_email' ) || current_user_is_administrator() ) ) 
 	) {
 		return true;
 	}
@@ -337,12 +339,10 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 		case 'relation':
 		case 'monitor':
 		case 'priority': # This is never used, but exists in the database!
-			# FIXME: these notification actions are not actually implemented
+			# Issue #19459 these notification actions are not actually implemented
 			# in the database and therefore aren't adjustable on a per-user
 			# basis! The exception is 'monitor' that makes no sense being a
 			# customisable per-user preference.
-			$t_pref_field = false;
-			break;
 		default:
 			# Anything not built-in is probably going to be a status
 			$t_pref_field = 'email_on_status';
@@ -901,7 +901,7 @@ function email_send( EmailData $p_email_data ) {
 	}
 
 	$t_mail->IsHTML( false );              # set email format to plain text
-	$t_mail->WordWrap = 80;              # set word wrap to 50 characters
+	$t_mail->WordWrap = 80;              # set word wrap to 80 characters
 	$t_mail->Priority = $t_email_data->metadata['priority'];  # Urgent = 1, Not Urgent = 5, Disable = 0
 	$t_mail->CharSet = $t_email_data->metadata['charset'];
 	$t_mail->Host = config_get( 'smtp_host' );
