@@ -212,7 +212,12 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 					if( $t_html_api ) {
 						layout_page_header();
 						if( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected == true ) {
-							layout_page_begin();
+							if( auth_is_user_authenticated() ) {
+								layout_page_begin();
+							} else {
+								layout_navbar();
+								layout_main_container_begin();
+							}
 						}
 					} else {
                         layout_page_header( $t_error_type );
@@ -263,7 +268,12 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 
 				if( $t_html_api ) {
 					if( $p_error != ERROR_DB_QUERY_FAILED && $t_db_connected == true ) {
-						layout_page_end();
+						if( auth_is_user_authenticated() ) {
+							layout_page_end();
+						} else {
+							layout_main_container_end();
+							layout_footer();
+						}
 					} else {
 						html_body_end();
 						html_end();

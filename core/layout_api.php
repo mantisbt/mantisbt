@@ -345,7 +345,7 @@ function layout_login_page_end() {
  * @return null
  */
 function layout_navbar() {
-	$t_logo_url = config_get( 'logo_url' );
+	$t_logo_url = config_get('logo_url');
 
 	echo '<div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top">';
 
@@ -354,14 +354,16 @@ function layout_navbar() {
 	echo '<div class="navbar-header pull-left">';
 	echo '<a href="' . $t_logo_url . '" class="navbar-brand">';
 	echo '<span class="smaller-75"> ';
-	echo config_get( 'window_title' );
+	echo config_get('window_title');
 	echo ' </span>';
 	echo '</a>';
 
-	$t_toggle_class = (OFF == config_get( 'show_avatar' ) ? 'navbar-toggle' : 'navbar-toggle-img');
+	$t_toggle_class = (OFF == config_get('show_avatar') ? 'navbar-toggle' : 'navbar-toggle-img');
 	echo '<button type="button" class="navbar-toggle ' . $t_toggle_class . ' collapsed pull-right" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">';
 	echo '<span class="sr-only">Toggle user menu</span>';
-	layout_navbar_user_avatar();
+	if (auth_is_user_authenticated()) {
+		layout_navbar_user_avatar();
+	}
 	echo '</button>';
 
 	echo '<button type="button" class="small navbar-toggle menu-toggler pull-right grey" id="menu-toggler">';
@@ -376,9 +378,11 @@ function layout_navbar() {
 	echo '<div class="hidden-xs">';
 	echo '<div class="navbar-buttons navbar-header pull-right navbar-collapse collapse">';
 	echo '<ul class="nav ace-nav">';
-	layout_navbar_projects_menu();
-	# user buttons such as messages, notifications and user menu
-	layout_navbar_user_menu();
+	if (auth_is_user_authenticated()) {
+		layout_navbar_projects_menu();
+		# user buttons such as messages, notifications and user menu
+		layout_navbar_user_menu();
+	}
 	echo '</ul>';
 	echo '</div>';
 	echo '</div>';
@@ -387,8 +391,10 @@ function layout_navbar() {
 	echo '<div class="hidden-sm hidden-md hidden-lg">';
 	echo '<nav class="navbar-menu pull-left navbar-collapse collapse" role="navigation" style="height: auto;">';
 	echo '<ul class="nav navbar-nav">';
-	layout_navbar_user_menu( false );
-	layout_navbar_projects_menu();
+	if (auth_is_user_authenticated()) {
+		layout_navbar_user_menu(false);
+		layout_navbar_projects_menu();
+	}
 	echo '</ul>';
 	echo '</div>';
 	echo '</div>';
