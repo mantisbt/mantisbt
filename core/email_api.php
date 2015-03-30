@@ -1395,3 +1395,51 @@ function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 
 	return $t_bug_data;
 }
+
+/**
+ * Registers shutdown function to send queued emails after script execution
+ * @return void
+ */
+function email_shutdown_function_register() {
+	$t_register = false;
+	if( php_sapi_name() == 'cli' ) {
+		# Skip processing for predefined scripts
+		switch( basename( $_SERVER['SCRIPT_NAME'] ) ) {
+			case 'send_emails.php':
+				break;
+			default:
+				$t_register = true;
+		}
+	} else {
+		# Define shutdown function registration time with an arbitrary delay
+		# to prevent concurrent calls when multiple, parallel http requests
+		# are sent by a single user action
+		$t_now = time();
+		$t_registration_time = session_get_int( 'email_shutdown_function_set', $t_now) ;
+
+		if( $t_registration_time <= $t_now  ) {
+			$t_register = true;
+			# 5 seconds delay until the next registration
+			session_set( 'email_shutdown_function_set', $t_now + 5 );
+		}
+	}
+
+	if( $t_register ) {
+		log_event( LOG_EMAIL, 'Registering shutdown function for ' . $_SERVER['SCRIPT_NAME'] );
+		register_shutdown_function( 'email_shutdown_function' );
+	}
+}
+
+/**
+ * The email sending shutdown function
+ * @return void
+ */
+function email_shutdown_function() {
+	global $g_email_stored;
+
+	log_event( LOG_EMAIL, 'Shutdown function called' );
+
+	if( $g_email_stored ) {
+		email_send_all();
+	}
+}

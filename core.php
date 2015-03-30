@@ -220,6 +220,11 @@ if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 	}
 }
 
+# Register shutdown function when processing emails synchronously
+if( OFF == config_get( 'email_send_using_cronjob' ) ) {
+	email_shutdown_function_register();
+}
+
 # Initialise plugins
 if( !defined( 'PLUGINS_DISABLED' ) && !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 	require_api( 'plugin_api.php' );
