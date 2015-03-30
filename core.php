@@ -177,7 +177,7 @@ if( !php_version_at_least( PHP_MIN_VERSION ) ) {
 # that an error has occurred)
 if( ( $t_output = ob_get_contents() ) != '' ) {
 	echo 'Possible Whitespace/Error in Configuration File - Aborting. Output so far follows:<br />';
-	echo var_dump( $t_output );
+	var_dump( $t_output );
 	die;
 }
 unset( $t_output );
