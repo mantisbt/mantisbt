@@ -2791,6 +2791,12 @@ $g_view_changelog_threshold = VIEWER;
 $g_roadmap_view_threshold = VIEWER;
 
 /**
+ * threshold for viewing timeline
+ * @global integer $g_view_timeline_threshold
+ */
+$g_view_timeline_threshold = VIEWER;
+
+/**
  * threshold for updating roadmap, target_version, etc
  * @global integer $g_roadmap_update_threshold
  */
