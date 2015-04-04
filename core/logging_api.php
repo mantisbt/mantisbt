@@ -169,9 +169,9 @@ function log_event( $p_level, $p_msg ) {
  */
 function log_print_to_page() {
 	if( config_get_global( 'log_destination' ) === 'page' && auth_is_user_authenticated() && access_has_global_level( config_get( 'show_log_threshold' ) ) ) {
-		global $g_log_events, $g_log_levels, $g_email_stored;
+		global $g_log_events, $g_log_levels, $g_email_shutdown_processing;
 
-		if( $g_email_stored ) {
+		if( $g_email_shutdown_processing ) {
 			email_send_all();
 		}
 

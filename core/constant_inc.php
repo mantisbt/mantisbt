@@ -563,6 +563,11 @@ define( 'PHPMAILER_METHOD_MAIL', 0 );
 define( 'PHPMAILER_METHOD_SENDMAIL', 1 );
 define( 'PHPMAILER_METHOD_SMTP', 2 );
 
+# Binary flag values for $g_email_shutdown_processing
+define( 'EMAIL_SHUTDOWN_SKIP', 0 );
+define( 'EMAIL_SHUTDOWN_GENERATED', 1 );
+define( 'EMAIL_SHUTDOWN_FORCE', 2 );
+
 # Lengths - NOTE: these may represent hard-coded values in db schema and should not be changed.
 define( 'DB_FIELD_SIZE_USERNAME', 255 );
 define( 'DB_FIELD_SIZE_REALNAME', 255 );
