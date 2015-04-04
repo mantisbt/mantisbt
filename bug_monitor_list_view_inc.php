@@ -66,7 +66,7 @@ if( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_id
 	</td>
 </tr>
 <tr class="row-1">
-	<th class="category" width="15%">
+	<th class="category monitor_list">
 		<?php echo lang_get( 'monitoring_user_list' ); ?>
 	</th>
 	<td>
