@@ -91,24 +91,19 @@ $g_phpMailer = null;
 $g_email_shutdown_processing = EMAIL_SHUTDOWN_SKIP;
 
 /**
- * Use a simple perl regex for valid email addresses.  This is not a complete regex,
- * as it does not cover quoted addresses or domain literals, but it is simple and
- * covers the vast majority of all email addresses without being overly complex.
+ * Regex for valid email addresses
+ * @see string_insert_hrefs()
+ *
+ * Uses the standard HTML5 pattern defined in
+ * {@link http://www.w3.org/TR/html5/forms.html#valid-e-mail-address}
+ * Note: the original regex from the spec has been modified to
+ * - escape the '/' in the first character class definition
+ * - remove the '^' and '$' anchors to allow matching anywhere in a string
+ *
  * @return string
  */
 function email_regex_simple() {
-	static $s_email_regex = null;
-
-	if( is_null( $s_email_regex ) ) {
-		$t_recipient = '([a-z0-9!#*+\/=?^_{|}~-]+(?:\.[a-z0-9!#*+\/=?^_{|}~-]+)*)';
-
-		# a domain is one or more subdomains
-		$t_subdomain = '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
-		$t_domain    = '(' . $t_subdomain . '(?:\.' . $t_subdomain . ')*)';
-
-		$s_email_regex = '/' . $t_recipient . '\@' . $t_domain . '/i';
-	}
-	return $s_email_regex;
+	return "/[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*/";
 }
 
 /**
