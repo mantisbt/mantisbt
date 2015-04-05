@@ -82,10 +82,3 @@ $t_server = new SoapServer( 'mantisconnect.wsdl',
 
 $t_server->addFunction( SOAP_FUNCTIONS_ALL );
 $t_server->handle();
-
-if( $g_email_stored ) {
-	if( function_exists( 'fastcgi_finish_request' ) ) {
-		fastcgi_finish_request();
-	}
-	email_send_all();
-}

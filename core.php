@@ -220,6 +220,9 @@ if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 	}
 }
 
+# Register global shutdown function
+shutdown_functions_register();
+
 # Initialise plugins
 if( !defined( 'PLUGINS_DISABLED' ) && !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 	require_api( 'plugin_api.php' );

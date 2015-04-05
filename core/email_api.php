@@ -79,9 +79,16 @@ require_lib( 'phpmailer' . DIRECTORY_SEPARATOR . 'class.phpmailer.php' );
 # reusable object of class SMTP
 $g_phpMailer = null;
 
-# Indicates whether any emails are currently stored for process during this request.
-# Note: This is only used if not sending emails via cron job
-$g_email_stored = false;
+/**
+ * Indicates how generated emails will be processed by the shutdown function
+ * at the end of the current request's execution; this is a binary flag:
+ * - EMAIL_SHUTDOWN_SKIP       Initial state: do nothing (no generated emails)
+ * - EMAIL_SHUTDOWN_GENERATED  Emails will be sent, unless $g_email_send_using_cronjob is ON
+ * - EMAIL_SHUTDOWN_FORCE      All queued emails will be sent regardless of cronjob settings
+ * @see email_shutdown_function()
+ * @global $g_email_shutdown_processing
+ */
+$g_email_shutdown_processing = EMAIL_SHUTDOWN_SKIP;
 
 /**
  * Use a simple perl regex for valid email addresses.  This is not a complete regex,
@@ -468,7 +475,7 @@ function email_signup( $p_user_id, $p_password, $p_confirm_hash, $p_admin_name =
 	# Send signup email regardless of mail notification pref
 	# or else users won't be able to sign up
 	if( !is_blank( $t_email ) ) {
-		email_store( $t_email, $t_subject, $t_message );
+		email_store( $t_email, $t_subject, $t_message, null, true );
 		log_event( LOG_EMAIL, 'Signup Email = %s, Hash = %s, User = @U%d', $t_email, $p_confirm_hash, $p_user_id );
 	}
 
@@ -500,7 +507,7 @@ function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
 	# Send password reset regardless of mail notification preferences
 	# or else users won't be able to receive their reset passwords
 	if( !is_blank( $t_email ) ) {
-		email_store( $t_email, $t_subject, $t_message );
+		email_store( $t_email, $t_subject, $t_message, null, true );
 		log_event( LOG_EMAIL, 'Password reset for user @U%d sent to %s', $p_user_id, $t_email );
 	}
 
@@ -734,14 +741,16 @@ function email_relationship_child_resolved_closed( $p_bug_id, $p_message_id ) {
 /**
  * Store email in queue for sending
  *
- * @param string $p_recipient Email recipient address.
- * @param string $p_subject   Subject of email message.
- * @param string $p_message   Body text of email message.
- * @param array  $p_headers   Array of additional headers to send with the email.
+ * @param string  $p_recipient Email recipient address.
+ * @param string  $p_subject   Subject of email message.
+ * @param string  $p_message   Body text of email message.
+ * @param array   $p_headers   Array of additional headers to send with the email.
+ * @param boolean $p_force     True to force sending of emails in shutdown function,
+ *                             even when using cronjob
  * @return integer|null
  */
-function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = null ) {
-	global $g_email_stored;
+function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = null, $p_force = false ) {
+	global $g_email_shutdown_processing;
 
 	$t_recipient = trim( $p_recipient );
 	$t_subject = string_email( trim( $p_subject ) );
@@ -778,7 +787,11 @@ function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = n
 
 	$t_email_id = email_queue_add( $t_email_data );
 
-	$g_email_stored = true;
+	# Set the email processing flag for the shutdown function
+	$g_email_shutdown_processing |= EMAIL_SHUTDOWN_GENERATED;
+	if( $p_force ) {
+		$g_email_shutdown_processing |= EMAIL_SHUTDOWN_FORCE;
+	}
 
 	return $t_email_id;
 }
@@ -1394,4 +1407,36 @@ function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 	current_user_set( $t_current_user_id );
 
 	return $t_bug_data;
+}
+
+/**
+ * The email sending shutdown function
+ * Will send any queued emails, except when $g_email_send_using_cronjob = ON.
+ * If $g_email_shutdown_processing EMAIL_SHUTDOWN_FORCE flag is set, emails
+ * will be sent regardless of cronjob setting.
+ * @return void
+ */
+function email_shutdown_function() {
+	global $g_email_shutdown_processing;
+
+	# Nothing to do if
+	# - no emails have been generated in the current request
+	# - system is configured to use cron job (unless processing is forced)
+	if(    $g_email_shutdown_processing == EMAIL_SHUTDOWN_SKIP
+		|| (   !( $g_email_shutdown_processing & EMAIL_SHUTDOWN_FORCE )
+			&& config_get( 'email_send_using_cronjob' )
+		   )
+	) {
+		return;
+	}
+
+	$t_msg ='Shutdown function called for ' . $_SERVER['SCRIPT_NAME'];
+	if( $g_email_shutdown_processing & EMAIL_SHUTDOWN_FORCE ) {
+		$t_msg .= ' (email processing forced)';
+	}
+	log_event( LOG_EMAIL, $t_msg );
+
+	if( $g_email_shutdown_processing ) {
+		email_send_all();
+	}
 }
