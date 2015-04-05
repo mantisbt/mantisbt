@@ -288,7 +288,7 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 			while( isset( $t_project_users_list[$i] ) ) {
 				$t_users[$t_project_users_list[$i]['id']] = $t_project_users_list[$i];
 				$i++;
-		}
+			}
 			unset( $t_project_users_list );
 		}
 		unset( $t_projects );
