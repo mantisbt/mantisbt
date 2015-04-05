@@ -35,7 +35,7 @@
 					the value of this configuration option.
 				</para>
 				<warning>
-					<para>WARNING: This configuration option has a profound
+					<para>This configuration option has a profound
 						impact on the security of your MantisBT
 						installation. Failure to set this configuration
 						option correctly could lead to your MantisBT

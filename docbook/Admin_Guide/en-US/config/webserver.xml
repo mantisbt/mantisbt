@@ -35,7 +35,10 @@
 			<listitem>
 				<para>Use Session validation (defaults to <emphasis>ON</emphasis>)
 				</para>
-				<para><emphasis>WARNING: Disabling this could be a potential security risk</emphasis></para>
+				<warning>
+					<para>Disabling this could be a potential security risk !
+					</para>
+				</warning>
 			</listitem>
 		</varlistentry>
 
@@ -48,8 +51,11 @@
 				Some proxy servers may not correctly work with this option enabled
 				because they cache pages incorrectly.
 				</para>
-				<para><emphasis>WARNING: Disabling this option is a security risk,
-				it is strongly recommended to leave it ON</emphasis></para>
+				<warning>
+					<para>Disabling this option is a security risk,
+						it is strongly recommended to leave it ON
+					</para>
+				</warning>
 			</listitem>
 		</varlistentry>
 

@@ -619,10 +619,14 @@ tar -xf <emphasis>filename.tar</emphasis>
 			as a starting point.
 		</para>
 
-		<para>WARNING: you should never edit the
-			<emphasis>config_defaults_inc.php</emphasis> file
-			directly, as it could cause issues with future upgrades.
-		</para>
+		<warning>
+			<para>you should never edit the
+				<emphasis>config_defaults_inc.php</emphasis> file
+				directly, as it could cause issues with future upgrades.
+				Always store your custom configuration in your own
+				<emphasis>config_inc.php</emphasis> file.
+			</para>
+		</warning>
 
 	</section>
 
