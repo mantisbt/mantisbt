@@ -57,7 +57,9 @@
 					string generated using a secure random number
 					generator. An example for Linux systems is:
 				</para>
-				<para>cat /dev/urandom | head -c 64 | base64</para>
+<programlisting>
+cat /dev/urandom | head -c 64 | base64
+</programlisting>
 				<para>Note that the number of bits of entropy per byte of
 					output from /dev/urandom is not 8. If you're
 					particularly paranoid and don't mind waiting a long
