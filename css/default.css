@@ -26,11 +26,7 @@ input.button		{}
 input.button-small	{ font-size: 1em; }
 
 textarea			{}
-textarea.width100	{ width: 100%; }
-
 select				{}
-select.width100		{ width: 100%; }
-select.width20		{ width: 20%; }
 
 span				{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt; }
 span.print			{ font-size: 8pt; }
@@ -449,7 +445,8 @@ div.width50 { width: 50%; }
 #history_open table 	{ border-spacing: 0; }
 
 #bug-change-status-div,
-#action-group-div
+#action-group-div,
+#send-reminder-div
 	{ width: 75%; }
 #action-group-issues-div
 	{ width: 75%; margin: 0 auto; }
@@ -650,6 +647,10 @@ div.form-container .file  input,
 .display-value span {
 	max-width: 98%;
 }
+div.form-container .textarea #reminder {
+	width: 100%;
+}
+
 div.form-container .spacer { margin-top: .5em; clear: both; }
 div.form-container .info-text {
 	clear: both;

@@ -70,67 +70,70 @@ html_page_top( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 
 <?php # Send reminder Form BEGIN ?>
 <br />
-<form method="post" action="bug_reminder.php">
-<?php echo form_security_field( 'bug_reminder' ) ?>
-<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
-<div class="width75 form-container">
-<table cellspacing="1">
-<tr>
-	<td class="form-title" colspan="2">
-		<?php echo lang_get( 'bug_reminder' ) ?>
-	</td>
-</tr>
-<tr>
-	<th class="category">
-		<?php echo lang_get( 'to' ) ?>
-	</th>
-	<td>
-		<select name="to[]" multiple="multiple" size="12" class="width20">
-			<?php
-			$t_project_id = bug_get_field( $f_bug_id, 'project_id' );
-			$t_access_level = config_get( 'reminder_receive_threshold' );
-			if( $t_bug->view_state === VS_PRIVATE ) {
-				$t_private_bug_threshold = config_get( 'private_bug_threshold' );
-				if( $t_private_bug_threshold > $t_access_level ) {
-					$t_access_level = $t_private_bug_threshold;
-				}
-			}
-			$t_selected_user_id = 0;
-			print_user_option_list( $t_selected_user_id, $t_project_id, $t_access_level );
-			?>
-		</select>
-	</td>
-</tr>
-<tr>
-	<th class="category">
-		<?php echo lang_get( 'reminder' ) ?>
-	</th>
-	<td>
-		<textarea name="body" cols="85" rows="10" class="width100"></textarea>
-	</td>
-</tr>
-</table>
-<div class="center">
-	<input type="submit" class="button" value="<?php echo lang_get( 'bug_send_button' ) ?>" />
+
+<div id="send-reminder-div" class="form-container">
+	<form method="post" action="bug_reminder.php">
+		<fieldset>
+			<legend>
+				<span><?php echo lang_get( 'bug_reminder' ) ?></span>
+			</legend>
+
+			<?php echo form_security_field( 'bug_reminder' ) ?>
+
+			<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
+
+			<div class="field-container">
+				<label for="recipient">
+					<span><?php echo lang_get( 'to' ) ?></span>
+				</label>
+				<span class="select">
+					<select id="recipient" name="to[]" multiple="multiple" size="12">
+<?php
+	$t_project_id = bug_get_field( $f_bug_id, 'project_id' );
+	$t_access_level = config_get( 'reminder_receive_threshold' );
+	if( $t_bug->view_state === VS_PRIVATE ) {
+		$t_private_bug_threshold = config_get( 'private_bug_threshold' );
+		if( $t_private_bug_threshold > $t_access_level ) {
+			$t_access_level = $t_private_bug_threshold;
+		}
+	}
+	$t_selected_user_id = 0;
+	print_user_option_list( $t_selected_user_id, $t_project_id, $t_access_level );
+?>
+					</select>
+				</span>
+				<span class="label-style"></span>
+			</div>
+
+			<div class="field-container">
+				<label for="reminder">
+					<span><?php echo lang_get( 'reminder' ) ?></span>
+				</label>
+				<span class="textarea">
+					<textarea id="reminder" name="body" cols="85" rows="10"></textarea>
+				</span>
+				<span class="label-style"></span>
+			</div>
+
+			<span class="info-text">
+<?php
+	echo lang_get( 'reminder_explain' ) . ' ';
+	if( ON == config_get( 'reminder_recipients_monitor_bug' ) ) {
+		echo lang_get( 'reminder_monitor' ) . ' ';
+	}
+	if( ON == config_get( 'store_reminders' ) ) {
+		echo lang_get( 'reminder_store' );
+	}
+?>
+			</span>
+
+			<span class="submit-button">
+				<input type="submit" class="button" value="<?php echo lang_get( 'bug_send_button' ) ?>" />
+			</span>
+
+		</fieldset>
+	</form>
 </div>
-</div>
-</form>
-<br/>
-<table class="width75" cellspacing="1">
-<tr>
-	<td>
-		<?php
-			echo lang_get( 'reminder_explain' ) . ' ';
-			if( ON == config_get( 'reminder_recipients_monitor_bug' ) ) {
-				echo lang_get( 'reminder_monitor' ) . ' ';
-			}
-			if( ON == config_get( 'store_reminders' ) ) {
-				echo lang_get( 'reminder_store' );
-			}
-		?>
-	</td>
-</tr>
-</table>
 
 <br />
 <?php
@@ -142,4 +145,4 @@ $t_mantis_dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 $t_file = __FILE__;
 
 define( 'BUG_VIEW_INC_ALLOW', true );
-include( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'bug_view_inc.php' );
+include( $t_mantis_dir . 'bug_view_inc.php' );
