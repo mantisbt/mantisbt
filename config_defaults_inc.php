@@ -3384,13 +3384,20 @@ $g_logout_redirect_page = 'login_page.php';
 ###########
 
 /**
- * An array of headers to be sent with each page.
+ * An array of custom headers to be sent with each page.
+ *
  * For example, to allow your MantisBT installation to be viewed in a frame in
  * IE6 when the frameset is not at the same hostname as the MantisBT install,
  * you need to add a P3P header. You could try something like
  * 'P3P: CP="CUR ADM"' in your config file, but make sure to check that the
  * your policy actually matches with what you are promising. See
  * http://msdn.microsoft.com/en-us/library/ms537343.aspx for more information.
+ *
+ * Even though this is not recommended, you could use this setting to disable
+ * previously sent headers. For example, assuming you didn't want to benefit
+ * from Content Security Policy, you could add 'Content-Security-Policy:' to
+ * the array.
+ *
  * @global array $g_custom_headers
  */
 $g_custom_headers = array();

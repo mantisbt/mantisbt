@@ -7,6 +7,43 @@
 
 	<variablelist>
 		<varlistentry>
+			<term>Content Security Policy</term>
+			<listitem>
+				<para>Amongst other things, MantisBT relies on
+					<ulink url="http://en.wikipedia.org/wiki/Content_Security_Policy">
+						Content Security Policy</ulink> (CSP), which is a
+					<ulink url="http://www.w3.org/TR/CSP/">
+						W3C candidate recommendation</ulink>
+					improving the system's security against
+					<ulink url="http://en.wikipedia.org/wiki/Cross-site_scripting">
+						cross-site scripting (XSS)</ulink>
+					and other, similar types of attacks.
+					It is  currently supported in
+					<ulink url="http://caniuse.com/#feat=contentsecuritypolicy">
+						recent versions of many browsers</ulink>.
+				</para>
+				<note>
+					<para>CSP may cause issues in certain situations (e.g.
+						during development), or when using plugins relying on
+						externally hosted resources such as images or scripts.
+					</para>
+				</note>
+				<para>MantisBT currently does not provide any mechanism for
+					plugins to notify the Core of 'safe' external domains.
+					Because of that, even though it is not recommended for
+					obvious security reasons, you may wish to disable CSP.
+					You can do so by specifying a <emphasis>Custom Header</emphasis>
+					in your <literal>config_inc.php</literal> file
+					(see <xref linkend="admin.config.webserver" />).
+				</para>
+				<warning>
+					<para>Disabling Content Security Policy is a security risk !
+					</para>
+				</warning>
+			</listitem>
+		</varlistentry>
+
+		<varlistentry>
 			<term>$g_crypto_master_salt</term>
 			<listitem>
 				<para>Master salt value used for cryptographic hashing
