@@ -296,6 +296,11 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 		$t_users = project_get_all_user_rows( $p_project_id, $p_access );
 	}
 
+	# Ensure the specified user exists in the array
+	if( $p_user_id != NO_USER && !array_key_exists( $p_user_id, $t_users ) ) {
+		$t_users[$p_user_id] = user_get_row( $p_user_id );
+	}
+
 	$t_display = array();
 	$t_sort = array();
 	$t_show_realname = ( ON == config_get( 'show_realname' ) );
