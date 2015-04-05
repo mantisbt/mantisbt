@@ -788,10 +788,9 @@ function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = n
 	$t_email_id = email_queue_add( $t_email_data );
 
 	# Set the email processing flag for the shutdown function
+	$g_email_shutdown_processing |= EMAIL_SHUTDOWN_GENERATED;
 	if( $p_force ) {
 		$g_email_shutdown_processing |= EMAIL_SHUTDOWN_FORCE;
-	} else {
-		$g_email_shutdown_processing |= EMAIL_SHUTDOWN_GENERATED;
 	}
 
 	return $t_email_id;
