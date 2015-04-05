@@ -136,13 +136,13 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 <?php
 			}
 			if( !$t_allow_passwd_change ) {
-				echo '<span id="no-password-msg">';
+				echo '<span class="info-text">';
 				echo lang_get( 'no_password_request' );
 				echo '</span>';
 			}
 ?>
 
-			<span id="signup-info"><?php echo lang_get( 'signup_info' ); ?></span>
+			<span class="info-text"><?php echo lang_get( 'signup_info' ); ?></span>
 
 			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'signup_button' ) ?>" /></span>
 		</fieldset>

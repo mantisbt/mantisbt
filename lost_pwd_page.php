@@ -80,10 +80,10 @@ html_page_top2a();
 				<span class="input"><?php print_email_input( 'email', '' ) ?></span>
 				<span class="label-style"></span>
 			</div>
-			<span id="lost-password-msg"><?php echo lang_get( 'lost_password_info' ); ?></span>
+			<span class="info-text"><?php echo lang_get( 'lost_password_info' ); ?></span>
 			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'submit_button' ) ?>" /></span><?php
 			} else {
-				echo '<span id="no-password-msg">';
+				echo '<span class="info-text">';
 				echo lang_get( 'no_password_request' );
 				echo '</span>';
 			} ?>

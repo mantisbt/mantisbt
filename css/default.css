@@ -651,6 +651,12 @@ div.form-container .file  input,
 	max-width: 98%;
 }
 div.form-container .spacer { margin-top: .5em; clear: both; }
+div.form-container .info-text {
+	clear: both;
+	display: block;
+	padding: 1em;
+}
+
 .label-style {
 	position: absolute;
 	top: 0em;
