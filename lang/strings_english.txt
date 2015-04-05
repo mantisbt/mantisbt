@@ -1114,13 +1114,13 @@ $s_valid_project_msg = 'You must choose a valid project.';
 
 # signup.php
 $s_signup_done_title = 'Account registration processed.';
-$s_password_emailed_msg = 'Congratulations. You have registered successfully. You are now being sent a confirmation e-mail to verify your e-mail address. Visiting the link sent to you in this e-mail will activate your account.';
-$s_no_reponse_msg = 'You will have seven days to complete the account confirmation process; if you fail to complete account confirmation within seven days, this newly-registered account may be purged.';
+$s_password_emailed_msg = 'Congratulations, you have registered successfully ! You are now being sent a confirmation e-mail to verify your e-mail address. Visiting the link sent to you in this e-mail will activate your account.';
+$s_no_reponse_msg = 'You have seven days to complete the account confirmation process; if you fail to do so within this period, the newly-registered account may be purged.';
 
 # signup_page.php
 $s_signup_captcha_request_label = 'Enter the code as it is shown in the box on the right:';
 $s_signup_captcha_refresh = 'Generate a new code';
-$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation e-mail to the e-mail address you specified.<br />Using the confirmation e-mail, you will be able to activate your account. If you fail to activate your account within seven days, it will be purged.<br />You must specify a valid e-mail address in order to receive the account confirmation e-mail.';
+$s_signup_info = 'On completion of this form and verification of your answers, you will be sent a confirmation message to the e-mail address you specified.<br />Using the link provided in the e-mail, you will be able to activate your account. If you fail to do so within seven days, it may be purged.<br />You must specify a valid e-mail address in order to receive the account confirmation e-mail.';
 $s_signup_title = 'Signup';
 $s_signup_button = 'Signup';
 $s_no_password_request = 'Your password is managed by another system. Please contact your system administrator.';
