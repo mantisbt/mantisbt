@@ -2792,9 +2792,9 @@ $g_roadmap_view_threshold = VIEWER;
 
 /**
  * threshold for viewing timeline
- * @global integer $g_view_timeline_threshold
+ * @global integer $g_timeline_view_threshold
  */
-$g_view_timeline_threshold = VIEWER;
+$g_timeline_view_threshold = VIEWER;
 
 /**
  * threshold for updating roadmap, target_version, etc

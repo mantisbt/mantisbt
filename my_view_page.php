@@ -103,7 +103,7 @@ if( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_
 <div>
 
 <?php
-if( access_has_project_level( config_get( 'view_timeline_threshold' ) ) ) {
+if( access_has_project_level( config_get( 'timeline_view_threshold' ) ) ) {
 	include( $g_core_path . 'timeline_inc.php' );
 }
 ?>
