@@ -58,7 +58,7 @@ require_api( 'lang_api.php' );
 <?php
 	collapse_open( 'bugnote_add', '', 'form-container' );
 ?>
-<form id="bugnoteadd" method="post" action="bugnote_add.php">
+<form id="bugnoteadd" method="post" action="bugnote_add.php" enctype="multipart/form-data">
 	<?php echo form_security_field( 'bugnote_add' ) ?>
 	<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 	<table>
@@ -125,6 +125,34 @@ require_api( 'lang_api.php' );
 			</tr>
 <?php
 		}
+	}
+
+	if( file_allow_bug_upload( $f_bug_id ) ) {
+		$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
+		$t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_number( 'post_max_size' ), config_get( 'max_file_size' ) );
+?>
+			<tr>
+				<th class="category">
+					<?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?>
+					<br />
+					<?php print_max_filesize( $t_max_file_size ); ?>
+				</th>
+				<td>
+					<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
+					<?php
+					# Display multiple file upload fields
+					for( $i = 0; $i < $t_file_upload_max_num; $i++ ) {
+						?>
+						<input id="ufile[]" name="ufile[]" type="file" size="50" />
+						<?php
+						if( $t_file_upload_max_num > 1 ) {
+							echo '<br />';
+						}
+					}
+					?>
+				</td>
+			</tr>
+<?php
 	}
 
 	event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $f_bug_id ) );
