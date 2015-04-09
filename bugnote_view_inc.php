@@ -172,31 +172,35 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 		</div>
 		<div class="pull-left padding-2">
 		<p class="no-margin">
+			<?php
+			if( user_exists( $t_bugnote->reporter_id ) ) {
+				$t_access_level = access_get_project_level( null, (int)$t_bugnote->reporter_id );
+				# Only display access level when higher than 0 (ANYBODY)
+				if( $t_access_level > ANYBODY ) {
+					$t_label = layout_is_rtl() ? 'arrowed-right' : 'arrowed-in-right';
+					echo '<span class="label label-sm label-default ' . $t_label . '">', get_enum_element( 'access_levels', $t_access_level ), '</span>';
+				}
+			}
+			?>
+			&#160;
 			<i class="fa fa-link grey"></i>
 			<a rel="bookmark" href="<?php echo string_get_bugnote_view_url($t_bugnote->bug_id, $t_bugnote->id) ?>" class="lighter" title="<?php echo lang_get( 'bugnote_link_title' ) ?>">
 				<?php echo htmlentities( config_get_global( 'bugnote_link_tag' ) ) . $t_bugnote_id_formatted ?>
 			</a>
-			<?php if( VS_PRIVATE == $t_bugnote->view_state ) { ?>
-				<i class="fa fa-eye red"></i> <?php echo lang_get( 'private' ) ?>
-			<?php } ?>
 		</p>
 		<p class="no-margin">
 		<?php
 			echo '<i class="fa fa-user grey"></i> ';
 			print_user( $t_bugnote->reporter_id );
 		?>
-		<?php
-			if( user_exists( $t_bugnote->reporter_id ) ) {
-				$t_access_level = access_get_project_level( null, (int)$t_bugnote->reporter_id );
-				# Only display access level when higher than 0 (ANYBODY)
-				if( $t_access_level > ANYBODY ) {
-					$t_label = layout_is_rtl() ? 'arrowed-right' : 'arrowed';
-					echo '<span class="label label-sm label-default ' . $t_label . '">', get_enum_element( 'access_levels', $t_access_level ), '</span>';
-				}
-			}
-		?>
 		</p>
-		<p class="no-margin small lighter"><i class="fa fa-clock-o grey"></i> <?php echo date( $t_normal_date_format, $t_bugnote->date_submitted ); ?></p>
+		<p class="no-margin small lighter">
+			<i class="fa fa-clock-o grey"></i> <?php echo date( $t_normal_date_format, $t_bugnote->date_submitted ); ?>
+			<?php if( VS_PRIVATE == $t_bugnote->view_state ) { ?>
+				&#160;&#160;
+				<i class="fa fa-eye red"></i> <?php echo lang_get( 'private' ) ?>
+			<?php } ?>
+		</p>
 		<?php
 		if( $t_bugnote_modified ) {
 			echo '<p class="no-margin small lighter"><i class="fa fa-retweet"></i> ' . lang_get( 'last_edited') . lang_get( 'word_separator' ) . date( $t_normal_date_format, $t_bugnote->last_modified ) . '</p>';
