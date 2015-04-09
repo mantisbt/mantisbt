@@ -84,15 +84,14 @@ layout_login_page_begin();
 			if( $t_allow_passwd ) { ?>
 				<label for="username" class="block clearfix">
 				<span class="block input-icon input-icon-right">
-					<input id="username" name="username" type="text" placeholder="<?php echo lang_get( 'username' ) ?>"
+					<input id="username" name="username" type="text"
 						size="32" maxlength="<?php echo DB_FIELD_SIZE_USERNAME;?>" class="form-control autofocus">
 					<i class="ace-icon fa fa-user"></i>
 				</span>
 				</label>
 				<label for="email-field" class="block clearfix">
 				<span class="block input-icon input-icon-right">
-					<input id="email-field" name="email" type="text" placeholder="<?php echo lang_get( 'email_label' ) ?>"
-						size="32" maxlength="64" class="form-control">
+					<?php print_email_input( 'email', 'form-control' ) ?>
 					<i class="ace-icon fa fa-envelope"></i>
 				</span>
 				</label>

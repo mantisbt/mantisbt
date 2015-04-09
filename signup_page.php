@@ -103,20 +103,21 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 			</label>
 
 <?php
-			$t_allow_passwd_change = helper_call_custom_function( 'auth_can_change_password', array() );
-			# captcha image requires GD library and related option to ON
-			if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 && $t_allow_passwd_change ) {
-				$t_securimage_path = 'library/securimage';
-				$t_securimage_show = "$t_securimage_path/securimage_show.php";
-				$t_securimage_play = $t_securimage_path . '/securimage_play.swf?'
-					. http_build_query( array(
-						'audio_file' => $t_securimage_path . '/securimage_play.php',
-						'bgColor1=' => '#fff',
-						'bgColor2=' => '#fff',
-						'iconColor=' => '#777',
-						'borderWidth=' => 1,
-						'borderColor=' => '#000',
-					) );
+	$t_allow_passwd_change = helper_call_custom_function( 'auth_can_change_password', array() );
+
+	# captcha image requires GD library and related option to ON
+	if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 && $t_allow_passwd_change ) {
+		$t_securimage_path = 'library/securimage';
+		$t_securimage_show = $t_securimage_path . '/securimage_show.php';
+		$t_securimage_play = $t_securimage_path . '/securimage_play.swf?'
+			. http_build_query( array(
+				'audio_file' => $t_securimage_path . '/securimage_play.php',
+				'bgColor1=' => '#fff',
+				'bgColor2=' => '#fff',
+				'iconColor=' => '#777',
+				'borderWidth=' => 1,
+				'borderColor=' => '#000',
+			) );
 ?>
 
 				<label for="captcha-field" class="block clearfix">

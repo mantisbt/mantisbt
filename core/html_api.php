@@ -355,15 +355,10 @@ function html_body_end() {
  * @return void
  */
 function html_end() {
-	global $g_email_stored;
-
 	echo '</html>', "\n";
 
-	if( $g_email_stored == true ) {
-		if( function_exists( 'fastcgi_finish_request' ) ) {
-			fastcgi_finish_request();
-		}
-		email_send_all();
+	if( function_exists( 'fastcgi_finish_request' ) ) {
+		fastcgi_finish_request();
 	}
 }
 

@@ -218,11 +218,18 @@
 		<varlistentry>
 			<term>$g_set_configuration_threshold</term>
 			<listitem>
-				<para>Threshold for users to set the system configurations generically via MantisBT web interface.
-					WARNING: Users who have access to set configuration via the interface MUST be trusted.  This is due
-					to the fact that such users can set configurations to PHP code and hence there can be a security
-					risk if such users are not trusted. The default value is ADMINISTRATOR.
+				<para>Threshold for users to set the system configurations
+					generically via MantisBT web interface.
+					The default value is ADMINISTRATOR.
 				</para>
+				<warning>
+					<para>Users who have access to set configuration via the
+						interface MUST be trusted. This is due to the fact that
+						these users can leverage the interface to
+						<emphasis>inject PHP code</emphasis> into the system,
+						which is a potential security risk.
+					</para>
+				</warning>
 			</listitem>
 		</varlistentry>
 		<varlistentry>

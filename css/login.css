@@ -19,11 +19,6 @@ span.captcha-image {
 	margin: 0em 0em 0em 1em;
 	padding: 0em;
 }
-span#no-password-msg, #signup-info, #lost-password-msg {
-	clear: both;
-	display: block;
-	padding: 1em;
-}
 #login-links,
 #captcha-refresh {
 	list-style: none;
