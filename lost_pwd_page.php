@@ -91,7 +91,8 @@ layout_login_page_begin();
 				</label>
 				<label for="email-field" class="block clearfix">
 				<span class="block input-icon input-icon-right">
-					<?php print_email_input( 'email', 'form-control' ) ?>
+					<input id="email-field" name="email" type="text"
+						   size="32" maxlength="64" class="form-control">
 					<i class="ace-icon fa fa-envelope"></i>
 				</span>
 				</label>
