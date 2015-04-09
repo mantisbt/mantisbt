@@ -168,9 +168,21 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 <tr class="bugnote <?php echo $t_bugnote_css ?>" id="c<?php echo $t_bugnote->id ?>">
 		<td class="category">
 		<div class="pull-left padding-2"><?php print_avatar( $t_bugnote->reporter_id ); ?>
-
 		</div>
 		<div class="pull-left padding-2">
+		<p class="no-margin">
+			<?php
+			echo '<i class="fa fa-user grey"></i> ';
+			print_user( $t_bugnote->reporter_id );
+			?>
+		</p>
+		<p class="no-margin small lighter">
+			<i class="fa fa-clock-o grey"></i> <?php echo date( $t_normal_date_format, $t_bugnote->date_submitted ); ?>
+			<?php if( VS_PRIVATE == $t_bugnote->view_state ) { ?>
+				&#160;&#160;
+				<i class="fa fa-eye red"></i> <?php echo lang_get( 'private' ) ?>
+			<?php } ?>
+		</p>
 		<p class="no-margin">
 			<?php
 			if( user_exists( $t_bugnote->reporter_id ) ) {
@@ -187,19 +199,6 @@ $t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 			<a rel="bookmark" href="<?php echo string_get_bugnote_view_url($t_bugnote->bug_id, $t_bugnote->id) ?>" class="lighter" title="<?php echo lang_get( 'bugnote_link_title' ) ?>">
 				<?php echo htmlentities( config_get_global( 'bugnote_link_tag' ) ) . $t_bugnote_id_formatted ?>
 			</a>
-		</p>
-		<p class="no-margin">
-		<?php
-			echo '<i class="fa fa-user grey"></i> ';
-			print_user( $t_bugnote->reporter_id );
-		?>
-		</p>
-		<p class="no-margin small lighter">
-			<i class="fa fa-clock-o grey"></i> <?php echo date( $t_normal_date_format, $t_bugnote->date_submitted ); ?>
-			<?php if( VS_PRIVATE == $t_bugnote->view_state ) { ?>
-				&#160;&#160;
-				<i class="fa fa-eye red"></i> <?php echo lang_get( 'private' ) ?>
-			<?php } ?>
 		</p>
 		<?php
 		if( $t_bugnote_modified ) {
