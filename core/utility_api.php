@@ -169,8 +169,12 @@ function multi_sort( array $p_array, $p_key, $p_direction = ASCENDING ) {
 
 	# Security measure: see http://www.mantisbt.org/bugs/view.php?id=9704 for details
 	if( array_key_exists( $p_key, current( $p_array ) ) ) {
-		$t_function = create_function( '$a, $b', 'return ' . $t_factor . ' * strnatcasecmp( $a[\'' . $p_key . '\'], $b[\'' . $p_key . '\'] );' );
-		uasort( $p_array, $t_function );
+		uasort(
+			$p_array,
+			function( $a, $b ) use( $t_factor, $p_key ) {
+				return $t_factor * strnatcasecmp( $a[$p_key], $b[$p_key] );
+			}
+		);
 	} else {
 		trigger_error( ERROR_INVALID_SORT_FIELD, ERROR );
 	}
