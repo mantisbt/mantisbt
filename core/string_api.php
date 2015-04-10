@@ -446,11 +446,6 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 		} else {
 			$s_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
 				function( $p_array ) {
-					# We might as well create the link here even if the bug
-					# doesnt exist.  In the case above we dont want to do
-					# the summary lookup on a non-existant bug.  But here, we
-					# can create the link and by the time it is clicked on, the
-					# bug may exist.
 					$t_bug_id = bugnote_get_field( (int)$p_array[2], 'bug_id' );
 					if( bug_exists( $t_bug_id ) ) {
 						return $p_array[1] .
