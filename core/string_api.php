@@ -359,12 +359,12 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 										' );
 		} else {
 			$string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function( '$p_array', '
-										# We might as well create the link here even if the bug
-										#  doesnt exist.  In the case above we dont want to do
-										#  the summary lookup on a non-existant bug.  But here, we
-										#  can create the link and by the time it is clicked on, the
-										#  bug may exist.
-										return $p_array[1] . string_get_bug_view_url_with_fqdn( (int)$p_array[2], null );
+										if( bug_exists( (int)$p_array[2] ) ) {
+											# Create link regardless of user\'s access to the bug
+											return $p_array[1] .
+												string_get_bug_view_url_with_fqdn( (int)$p_array[2], null );
+										}
+										return $p_array[0];
 										' );
 		}
 	}
