@@ -447,7 +447,7 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 			$s_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
 				function( $p_array ) {
 					$t_bug_id = bugnote_get_field( (int)$p_array[2], 'bug_id' );
-					if( bug_exists( $t_bug_id ) ) {
+					if( $t_bug_id && bug_exists( $t_bug_id ) ) {
 						return $p_array[1] .
 							string_get_bugnote_view_url_with_fqdn( $t_bug_id, (int)$p_array[2], null );
 					} else {
