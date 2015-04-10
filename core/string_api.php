@@ -377,7 +377,11 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 		}
 	}
 
-	$p_string = preg_replace_callback( '/(^|[^\w&])' . preg_quote( $t_tag, '/' ) . '(\d+)\b/', $g_string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn], $p_string );
+	$p_string = preg_replace_callback(
+		'/(^|[^\w&])' . preg_quote( $t_tag, '/' ) . '(\d+)\b/',
+		$g_string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn],
+		$p_string
+	);
 	return $p_string;
 }
 
@@ -461,7 +465,11 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 				}; # end of bugnote link callback closure
 		}
 	}
-	$p_string = preg_replace_callback( '/(^|[^\w])' . preg_quote( $t_tag, '/' ) . '(\d+)\b/', $g_string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn], $p_string );
+	$p_string = preg_replace_callback(
+		'/(^|[^\w])' . preg_quote( $t_tag, '/' ) . '(\d+)\b/',
+		$g_string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn],
+		$p_string
+	);
 	return $p_string;
 }
 
