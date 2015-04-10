@@ -313,8 +313,6 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	}
 }
 
-$g_string_process_bug_link_callback = array();
-
 /**
  * Process $p_string, looking for bug ID references and creating bug view
  * links for them.
@@ -335,7 +333,7 @@ $g_string_process_bug_link_callback = array();
  * @return string
  */
 function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail_info = true, $p_fqdn = false ) {
-	global $g_string_process_bug_link_callback;
+	static $s_bug_link_callback = array();
 
 	$t_tag = config_get( 'bug_link_tag' );
 
@@ -344,9 +342,9 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 		return $p_string;
 	}
 
-	if( !isset( $g_string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] ) ) {
+	if( !isset( $s_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] ) ) {
 		if( $p_include_anchor ) {
-			$g_string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
+			$s_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
 				function( $p_array ) use( $p_detail_info, $p_fqdn ) {
 					if( bug_exists( (int)$p_array[2] ) ) {
 						$t_project_id = bug_get_field( (int)$p_array[2], 'project_id' );
@@ -364,7 +362,7 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 					return $p_array[0];
 				}; # end of bug link callback closure
 		} else {
-			$g_string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
+			$s_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
 				function( $p_array ) {
 					# We might as well create the link here even if the bug
 					# doesnt exist.  In the case above we dont want to do
@@ -379,13 +377,11 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 
 	$p_string = preg_replace_callback(
 		'/(^|[^\w&])' . preg_quote( $t_tag, '/' ) . '(\d+)\b/',
-		$g_string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn],
+		$s_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn],
 		$p_string
 	);
 	return $p_string;
 }
-
-$g_string_process_bugnote_link_callback = array();
 
 /**
  * Process $p_string, looking for bugnote ID references and creating bug view
@@ -407,7 +403,8 @@ $g_string_process_bugnote_link_callback = array();
  * @return string
  */
 function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_detail_info = true, $p_fqdn = false ) {
-	global $g_string_process_bugnote_link_callback;
+	static $s_bugnote_link_callback = array();
+
 	$t_tag = config_get( 'bugnote_link_tag' );
 
 	# bail if the link tag is blank
@@ -415,9 +412,9 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 		return $p_string;
 	}
 
-	if( !isset( $g_string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] ) ) {
+	if( !isset( $s_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] ) ) {
 		if( $p_include_anchor ) {
-			$g_string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
+			$s_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
 				function( $p_array ) use( $p_detail_info, $p_fqdn ) {
 					global $g_project_override;
 					if( bugnote_exists( (int)$p_array[2] ) ) {
@@ -448,7 +445,7 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 					return $p_array[0];
 				}; # end of bugnote link callback closure
 		} else {
-			$g_string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
+			$s_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
 				function( $p_array ) {
 					# We might as well create the link here even if the bug
 					# doesnt exist.  In the case above we dont want to do
@@ -467,7 +464,7 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 	}
 	$p_string = preg_replace_callback(
 		'/(^|[^\w])' . preg_quote( $t_tag, '/' ) . '(\d+)\b/',
-		$g_string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn],
+		$s_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn],
 		$p_string
 	);
 	return $p_string;
