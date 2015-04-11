@@ -58,6 +58,8 @@ $f_return	= strip_tags( gpc_get_string( 'return', 'manage_custom_field_page.php'
 
 custom_field_ensure_exists( $f_field_id );
 
+require_js( 'manage_custom_field_edit_page.js' );
+
 html_page_top();
 
 print_manage_menu( 'manage_custom_field_edit_page.php' );
@@ -95,7 +97,12 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			</div>
 			<div class="field-container">
 				<label for="custom-field-default-value"><span><?php echo lang_get( 'custom_field_default_value' ) ?></span></label>
-				<span class="input"><input type="text" id="custom-field-default-value" name="default_value" size="32" maxlength="255" value="<?php echo string_attribute( $t_definition['default_value'] ) ?>" /></span>
+				<span class="input">
+					<input type="text" id="custom-field-default-value" name="default_value" size="32" maxlength="255" value="<?php echo string_attribute( $t_definition['default_value'] ) ?>" />
+				</span>
+				<span class="textarea">
+					<textarea disabled="disabled" id="custom-field-default-value-textarea" name="default_value" cols="80" rows="10"><?php echo string_attribute( $t_definition['default_value'] ) ?></textarea>
+				</span>
 				<span class="label-style"></span>
 			</div>
 			<div class="field-container">
