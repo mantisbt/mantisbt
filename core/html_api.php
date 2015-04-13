@@ -855,7 +855,7 @@ function print_menu() {
 		$t_menu_options = array_merge( $t_menu_options, $t_custom_options );
 
 		# Time Tracking / Billing
-		if( config_get( 'time_tracking_enabled' ) && access_has_global_level( config_get( 'time_tracking_reporting_threshold' ) ) ) {
+		if( config_get( 'time_tracking_enabled' ) && access_has_project_level( config_get( 'time_tracking_reporting_threshold' ) ) ) {
 			$t_menu_options[] = '<a href="' . helper_mantis_url( 'billing_page.php">' ) . lang_get( 'time_tracking_billing_link' ) . '</a>';
 		}
 
