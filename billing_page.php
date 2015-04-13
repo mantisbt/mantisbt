@@ -41,7 +41,7 @@ if( !config_get( 'time_tracking_enabled' ) ) {
 	trigger_error( ERROR_ACCESS_DENIED, ERROR );
 }
 
-access_ensure_global_level( config_get( 'time_tracking_reporting_threshold' ) );
+access_ensure_project_level( config_get( 'time_tracking_reporting_threshold' ) );
 
 html_page_top( lang_get( 'time_tracking_billing_link' ) );
 ?>
