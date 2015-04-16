@@ -136,9 +136,8 @@ function email_is_valid( $p_email ) {
 
 	# check email address is a valid format
 	log_event( LOG_EMAIL, "Validating address '$p_email' with method '$t_method'" );
-	$t_email = filter_var( $p_email, FILTER_SANITIZE_EMAIL );
-	if( PHPMailer::ValidateAddress( $t_email, $t_method ) ) {
-		$t_domain = substr( $t_email, strpos( $t_email, '@' ) + 1 );
+	if( PHPMailer::ValidateAddress( $p_email, $t_method ) ) {
+		$t_domain = substr( $p_email, strpos( $p_email, '@' ) + 1 );
 
 		# see if we're limited to a set of known domains
 		$t_limit_email_domains = config_get( 'limit_email_domains' );
