@@ -569,12 +569,6 @@ define( 'EMAIL_SHUTDOWN_SKIP', 0 );
 define( 'EMAIL_SHUTDOWN_GENERATED', 1 );
 define( 'EMAIL_SHUTDOWN_FORCE', 2 );
 
-# Email address validation types
-define( 'EMAIL_VALIDATE_PHP', 1 );
-define( 'EMAIL_VALIDATE_AUTO', 2 );
-define( 'EMAIL_VALIDATE_RFC5322', 3 );
-define( 'EMAIL_VALIDATE_HTML5', 4 );
-
 # Lengths - NOTE: these may represent hard-coded values in db schema and should not be changed.
 define( 'DB_FIELD_SIZE_USERNAME', 255 );
 define( 'DB_FIELD_SIZE_REALNAME', 255 );

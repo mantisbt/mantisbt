@@ -93,7 +93,8 @@ $g_email_shutdown_processing = EMAIL_SHUTDOWN_SKIP;
 /**
  * Regex for valid email addresses
  * @see string_insert_hrefs()
- *
+ * This pattern is consistent with email addresses validation logic
+ * @see $g_validate_email
  * Uses the standard HTML5 pattern defined in
  * {@link http://www.w3.org/TR/html5/forms.html#valid-e-mail-address}
  * Note: the original regex from the spec has been modified to
@@ -125,12 +126,13 @@ function email_is_valid( $p_email ) {
 	}
 
 	# E-mail validation method
-	switch( $t_validate_email ) {
-		case EMAIL_VALIDATE_HTML5:   $t_method = 'html5'; break;
-		case EMAIL_VALIDATE_PHP:     $t_method = 'php';   break;
-		case EMAIL_VALIDATE_RFC5322: $t_method = 'pcre8'; break;
-		default:                     $t_method = 'auto';  break;
-	}
+	# Note: PHPMailer offers alternative validation methods.
+	# It was decided in PR 172 (https://github.com/mantisbt/mantisbt/pull/172)
+	# to just default to HTML5 without over-complicating things for end users
+	# by offering a potentially confusing choice between the different methods.
+	# Refer to PHPMailer documentation for ValidateAddress method for details.
+	# @link https://github.com/PHPMailer/PHPMailer/blob/v5.2.9/class.phpmailer.php#L863
+	$t_method = 'html5';
 
 	# check email address is a valid format
 	log_event( LOG_EMAIL, "Validating address '$p_email' with method '$t_method'" );

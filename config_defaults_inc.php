@@ -532,31 +532,11 @@ $g_email_receive_own = OFF;
 /**
  * Email addresses validation
  *
- * Determines if and how email addresses are validated. Possible values for
- * this config are:
- * - EMAIL_VALIDATE_HTML5 (default): validate using the pattern given by the
+ * Determines whether email addresses are validated.
+ * - When ON (default), validation is performed using the pattern given by the
  *   HTML5 specification for 'email' type form input elements
  *   {@link http://www.w3.org/TR/html5/forms.html#valid-e-mail-address}
- *   This is the more versatile and standard option, which should be used in
- *   most situations.
- * - EMAIL_VALIDATE_PHP: validate using PHP's built-in method (see
- *   {@link http://php.net/filter_var} with FILTER_SANITIZE_EMAIL filter
- *   {@link http://php.net/filter.filters.validate}
- *   This considers addresses like 'user@domain' (i.e. without a top-level
- *   domain) as invalid.
- * - EMAIL_VALIDATE_RFC5322: validate using a fully RFC5322-compliant regex
- *   (see {@link http://squiloople.com/2009/12/20/email-address-validation/}.
- *   This probably overkill in most scenarios, but if you need to be fully
- *   standard-compliant, with this you can.
- * - EMAIL_VALIDATE_AUTO: let PHPMailer's
- *   {@link http://phpmailer.github.io/PHPMailer/classes/PHPMailer.html#method_validateAddress validateAddress()}
- *   method pick the best validation pattern. As of PHPMailer v5.2.9, on recent
- *   systems, this is generally the same as EMAIL_VALIDATE_RFC5322.
- * - OFF: disable email validation
- *
- * With internet-facing installations, it is strongly advised to use either
- * the default HTML5 (recommended) or PHP methods (if you don't need to handle
- * email addresses without a top-level domain).
+ * - When OFF, validation is disabled.
  *
  * NOTE: Regardless of how this option is set, validation is never performed
  * when using LDAP email (i.e. when $g_use_ldap_email = ON), as we assume that
@@ -565,7 +545,7 @@ $g_email_receive_own = OFF;
  *
  * @global integer $g_validate_email
  */
-$g_validate_email = EMAIL_VALIDATE_HTML5;
+$g_validate_email = ON;
 
 /**
  * set to OFF to disable email check
