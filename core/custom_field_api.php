@@ -1304,7 +1304,30 @@ function string_custom_field_value( array $p_def, $p_field_id, $p_bug_id ) {
  * @access public
  */
 function print_custom_field_value( array $p_def, $p_field_id, $p_bug_id ) {
-	echo string_custom_field_value( $p_def, $p_field_id, $p_bug_id );
+	$f_icon_set = get_icon_set_for_field($p_def["name"]);
+	$f_print_value = "";
+	if($f_icon_set->icon_set_exists){
+		$f_icon_path = config_get( 'icon_path' );
+		$f_custom_field_value = custom_field_get_value( $p_field_id, $p_bug_id );
+		$f_print_value .= '<img src="' . $f_icon_path . $f_icon_set->icon_array[$f_custom_field_value] . '" alt="" title="' . $f_custom_field_value . '" />';
+	}
+	if(!$f_icon_set->icon_set_exists || (array_key_exists("ShowText", $f_icon_set->icon_array) && $f_icon_set->icon_array["ShowText"] == ON)) {
+		$f_print_value .= string_custom_field_value( $p_def, $p_field_id, $p_bug_id );
+	}
+	echo $f_print_value;
+}
+
+/**
+ * Check if an icon set is defined for the given parameter
+ * @param String $p_name The name of the field to look up
+ * @return mixed stdClass with the values icon_set_exists (True if icon set exists) and icon_array (the array with the icons)
+ */
+function get_icon_set_for_field($p_name){
+	$f_custom_status_icon_arr = config_get("custom_status_icon_arr", array());
+	$f_return = new stdClass;
+	$f_return->icon_set_exists = array_key_exists($p_name, $f_custom_status_icon_arr);
+	$f_return->icon_array = $f_custom_status_icon_arr[$p_name];
+	return $f_return;
 }
 
 /**
