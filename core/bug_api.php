@@ -462,7 +462,7 @@ class BugData {
 	function create() {
 		self::validate( true );
 
-		spam_check();
+		antispam_check();
 
 		# check due_date format
 		if( is_blank( $this->due_date ) ) {

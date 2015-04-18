@@ -189,7 +189,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	$c_date_submitted = $p_date_submitted <= 0 ? db_now() : (int)$p_date_submitted;
 	$c_last_modified = $p_last_modified <= 0 ? db_now() : (int)$p_last_modified;
 
-	spam_check();
+	antispam_check();
 
 	if( REMINDER !== $p_type ) {
 		# Check if this is a time-tracking note

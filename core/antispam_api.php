@@ -35,7 +35,7 @@ require_api( 'history_api.php' );
  * user is determined to demonstrate spammy behavior, this method will trigger an
  * error and exit the script.
  */
-function spam_check() {
+function antispam_check() {
 	if( OFF == config_get_global( 'allow_signup' ) ) {
 		return;
 	}
