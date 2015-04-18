@@ -11,7 +11,7 @@ ezc             | ez Components   | 2009.2.1  | unpatched
 phpmailer       | PHPMailer       | 5.2.6     | unpatched [1]
 rssbuilder      | RSSBuilder      | 2.2.1     | patched [2]
 utf8            | phputf8         | 0.5       | unpatched
-securimage      | PHP Captcha     | 3.5.1     | unpatched [1]
+securimage      | PHP Captcha     | 3.5.4     | unpatched [1]
 -------------------------------------------------------------------
 
 [1] Library is tracked as a GIT submodule; refer to the corresponding
