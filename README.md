@@ -8,8 +8,6 @@ before a php solution might be used.
 This fork is aimed to maintain versions of mantisbt, 
 compatible with the pagesperso.free.fr free hosting service.
 
-benoit.rolland@free.fr
-
 -------------------------------------------------------------------------------
 MantisBT - a php based bugtracking system
 Copyright (C) 2000-2002  Kenzaburo Ito - kenito@300baud.org
