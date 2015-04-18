@@ -23,7 +23,7 @@ securimage      | PHP Captcha     | 3.5.1     | unpatched [1]
 Upstream projects
 ==================
 adodb       -  http://adodb.sourceforge.net/  https://github.com/ADOdb/ADOdb
-disposable  -  http://github.com/vboctor/disposable_email_checker/tree/master
+disposable  -  http://github.com/vboctor/disposable_email_checker
 ezc         -  http://ezcomponents.org/
 phpmailer   -  https://github.com/PHPMailer/PHPMailer
 rssbuilder  -  http://code.google.com/p/flaimo-php/
