@@ -47,7 +47,7 @@
  * @uses user_pref_api.php
  * @uses utility_api.php
  *
- * @uses class.phpmailer.php PHPMailer library
+ * @uses PHPMailerAutoload.php PHPMailer library
  */
 
 require_api( 'access_api.php' );
@@ -74,7 +74,7 @@ require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
-require_lib( 'phpmailer' . DIRECTORY_SEPARATOR . 'class.phpmailer.php' );
+require_lib( 'phpmailer/PHPMailerAutoload.php' );
 
 # reusable object of class SMTP
 $g_phpMailer = null;
@@ -91,24 +91,20 @@ $g_phpMailer = null;
 $g_email_shutdown_processing = EMAIL_SHUTDOWN_SKIP;
 
 /**
- * Use a simple perl regex for valid email addresses.  This is not a complete regex,
- * as it does not cover quoted addresses or domain literals, but it is simple and
- * covers the vast majority of all email addresses without being overly complex.
+ * Regex for valid email addresses
+ * @see string_insert_hrefs()
+ * This pattern is consistent with email addresses validation logic
+ * @see $g_validate_email
+ * Uses the standard HTML5 pattern defined in
+ * {@link http://www.w3.org/TR/html5/forms.html#valid-e-mail-address}
+ * Note: the original regex from the spec has been modified to
+ * - escape the '/' in the first character class definition
+ * - remove the '^' and '$' anchors to allow matching anywhere in a string
+ *
  * @return string
  */
 function email_regex_simple() {
-	static $s_email_regex = null;
-
-	if( is_null( $s_email_regex ) ) {
-		$t_recipient = '([a-z0-9!#*+\/=?^_{|}~-]+(?:\.[a-z0-9!#*+\/=?^_{|}~-]+)*)';
-
-		# a domain is one or more subdomains
-		$t_subdomain = '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
-		$t_domain    = '(' . $t_subdomain . '(?:\.' . $t_subdomain . ')*)';
-
-		$s_email_regex = '/' . $t_recipient . '\@' . $t_domain . '/i';
-	}
-	return $s_email_regex;
+	return "/[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*/";
 }
 
 /**
@@ -117,20 +113,31 @@ function email_regex_simple() {
  * @return boolean
  */
 function email_is_valid( $p_email ) {
+	$t_validate_email = config_get( 'validate_email' );
+
 	# if we don't validate then just accept
 	# If blank email is allowed or current user is admin, then accept blank emails which are useful for
 	# accounts that should never receive email notifications (e.g. anonymous account)
-	if( OFF == config_get( 'validate_email' ) ||
+	if( OFF == $t_validate_email ||
 		ON == config_get( 'use_ldap_email' ) ||
 		( is_blank( $p_email ) && ( ON == config_get( 'allow_blank_email' ) || current_user_is_administrator() ) )
 	) {
 		return true;
 	}
 
+	# E-mail validation method
+	# Note: PHPMailer offers alternative validation methods.
+	# It was decided in PR 172 (https://github.com/mantisbt/mantisbt/pull/172)
+	# to just default to HTML5 without over-complicating things for end users
+	# by offering a potentially confusing choice between the different methods.
+	# Refer to PHPMailer documentation for ValidateAddress method for details.
+	# @link https://github.com/PHPMailer/PHPMailer/blob/v5.2.9/class.phpmailer.php#L863
+	$t_method = 'html5';
+
 	# check email address is a valid format
-	$t_email = filter_var( $p_email, FILTER_SANITIZE_EMAIL );
-	if( PHPMailer::ValidateAddress( $t_email ) ) {
-		$t_domain = substr( $t_email, strpos( $t_email, '@' ) + 1 );
+	log_event( LOG_EMAIL, "Validating address '$p_email' with method '$t_method'" );
+	if( PHPMailer::ValidateAddress( $p_email, $t_method ) ) {
+		$t_domain = substr( $p_email, strpos( $p_email, '@' ) + 1 );
 
 		# see if we're limited to a set of known domains
 		$t_limit_email_domains = config_get( 'limit_email_domains' );
@@ -140,6 +147,7 @@ function email_is_valid( $p_email ) {
 					return true; # no need to check mx record details (below) if we've explicity allowed the domain
 				}
 			}
+			log_event( LOG_EMAIL, "failed - not in limited domains list '$t_limit_email_domains'" );
 			return false;
 		}
 
@@ -156,11 +164,14 @@ function email_is_valid( $p_email ) {
 				if( checkdnsrr( $t_host, 'ANY' ) ) {
 					return true;
 				}
+				log_event( LOG_EMAIL, "failed - mx/dns record check" );
 			}
 		} else {
-			# Email format was valid but did't check for valid mx records
+			# Email format was valid but didn't check for valid mx records
 			return true;
 		}
+	} else {
+		log_event( LOG_EMAIL, "failed - invalid address" );
 	}
 
 	# Everything failed.  The email is invalid

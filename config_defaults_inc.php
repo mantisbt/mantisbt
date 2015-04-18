@@ -530,7 +530,19 @@ $g_notify_flags['monitor'] = array(
 $g_email_receive_own = OFF;
 
 /**
- * set to OFF to disable email check
+ * Email addresses validation
+ *
+ * Determines whether email addresses are validated.
+ * - When ON (default), validation is performed using the pattern given by the
+ *   HTML5 specification for 'email' type form input elements
+ *   {@link http://www.w3.org/TR/html5/forms.html#valid-e-mail-address}
+ * - When OFF, validation is disabled.
+ *
+ * NOTE: Regardless of how this option is set, validation is never performed
+ * when using LDAP email (i.e. when $g_use_ldap_email = ON), as we assume that
+ * it is handled by the directory.
+ * @see $g_use_ldap_email
+ *
  * @global integer $g_validate_email
  */
 $g_validate_email = ON;
