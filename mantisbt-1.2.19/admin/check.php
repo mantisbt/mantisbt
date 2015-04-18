@@ -385,9 +385,9 @@ print_test_row(
 		. '($g_default_timezone) or php.ini (date.timezone)'
 );
 if( $t_timezone_set ) {
-	$t_timezone_valid = in_array( $t_timezone, timezone_identifiers_list() );
 	$t_msg = "Checking if the specified timezone is valid";
 	if( function_exists( 'timezone_identifiers_list' ) ) {
+		$t_timezone_valid = in_array( $t_timezone, timezone_identifiers_list() );
 		if( !$t_timezone_valid ) {
 			$t_timezone = "'$t_timezone' is not in the "
 				. ' <a href="http://php.net/timezones">List of Supported Timezones</a>';
