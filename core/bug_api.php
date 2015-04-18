@@ -48,6 +48,7 @@
  */
 
 require_api( 'access_api.php' );
+require_api( 'antispam_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bugnote_api.php' );
 require_api( 'bug_revision_api.php' );
@@ -460,6 +461,8 @@ class BugData {
 	 */
 	function create() {
 		self::validate( true );
+
+		spam_check();
 
 		# check due_date format
 		if( is_blank( $this->due_date ) ) {

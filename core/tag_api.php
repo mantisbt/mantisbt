@@ -572,6 +572,8 @@ function tag_get_bugs_attached( $p_tag_id ) {
  * @return boolean
  */
 function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
+	spam_check();
+
 	access_ensure_bug_level( config_get( 'tag_attach_threshold' ), $p_bug_id, $p_user_id );
 
 	tag_ensure_exists( $p_tag_id );

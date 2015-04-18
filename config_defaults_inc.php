@@ -383,6 +383,24 @@ $g_lost_password_feature = ON;
  */
 $g_max_lost_password_in_progress_count = 3;
 
+#############
+# Anti-Spam #
+#############
+
+/**
+ * Max number of events to allow for users with default access level when signup is enabled.
+ * Use 0 for no limit.
+ * @var integer
+ * @see $g_default_new_account_access_level
+ */
+$g_antispam_max_event_count = 10;
+
+/**
+ * Time window to enforce max events within.  Default is 3600 seconds (1 hour).
+ * @var integer
+ */
+$g_antispam_time_window_in_seconds = 3600;
+
 ###########################
 # MantisBT Email Settings #
 ###########################
