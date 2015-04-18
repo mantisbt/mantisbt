@@ -24,6 +24,7 @@
  * @link http://www.mantisbt.org
  *
  * @uses access_api.php
+ * @uses antispam_api.php
  * @uses authentication_api.php
  * @uses bugnote_api.php
  * @uses bug_revision_api.php

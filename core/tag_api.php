@@ -25,6 +25,7 @@
  * @link http://www.mantisbt.org
  *
  * @uses access_api.php
+ * @uses antispam_api.php
  * @uses authentication_api.php
  * @uses bug_api.php
  * @uses config_api.php
@@ -40,6 +41,7 @@
  */
 
 require_api( 'access_api.php' );
+require_api( 'antispam_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'config_api.php' );
