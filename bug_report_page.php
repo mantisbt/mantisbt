@@ -362,66 +362,62 @@ if( $t_show_attachments ) {
 					<?php print_profile_option_list( auth_get_current_user_id(), $f_profile_id ) ?>
 				</select>
 			<?php } ?>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2" class="none">
-				<?php collapse_open( 'profile' ); collapse_icon( 'profile' ); ?>
-				<?php echo lang_get( 'or_fill_in' ); ?>
+			<?php collapse_open( 'profile' ); collapse_icon( 'profile' ); ?>
+			<?php echo lang_get( 'or_fill_in' ); ?>
 			<table class="width100" cellspacing="0">
-					<tr>
-						<th class="category">
-							<label for="platform"><?php echo lang_get( 'platform' ) ?></label>
-						</th>
-						<td>
-							<?php if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) { ?>
-							<select id="platform" name="platform" class="input-sm">
-								<option value=""></option>
-								<?php print_platform_option_list( $f_platform ); ?>
+				<tr>
+					<th class="category">
+						<label for="platform"><?php echo lang_get( 'platform' ) ?></label>
+					</th>
+					<td>
+						<?php if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) { ?>
+						<select id="platform" name="platform" class="input-sm">
+							<option value=""></option>
+							<?php print_platform_option_list( $f_platform ); ?>
+						</select>
+						<?php
+							} else {
+								echo '<input type="text" id="platform" name="platform" class="autocomplete input-sm" size="32" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_platform ) . '" />';
+							}
+						?>
+					</td>
+				</tr>
+				<tr>
+					<th class="category">
+						<label for="os"><?php echo lang_get( 'os' ) ?></label>
+					</th>
+					<td>
+						<?php if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) { ?>
+						<select id="os" name="os" class="input-sm">
+							<option value=""></option>
+							<?php print_os_option_list( $f_os ); ?>
+						</select>
+						<?php
+							} else {
+								echo '<input type="text" id="os" name="os" class="autocomplete input-sm" size="32" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_os ) . '" />';
+							}
+						?>
+					</td>
+				</tr>
+				<tr>
+					<th class="category">
+						<label for="os_build"><?php echo lang_get( 'os_version' ) ?></label>
+					</th>
+					<td>
+						<?php
+							if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) {
+						?>
+						<select id="os_build" name="os_build" class="input-sm">
+							<option value=""></option>
+								<?php print_os_build_option_list( $f_os_build ); ?>
 							</select>
-							<?php
-								} else {
-									echo '<input type="text" id="platform" name="platform" class="autocomplete input-sm" size="32" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_platform ) . '" />';
-								}
-							?>
-						</td>
-					</tr>
-					<tr>
-						<th class="category">
-							<label for="os"><?php echo lang_get( 'os' ) ?></label>
-						</th>
-						<td>
-							<?php if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) { ?>
-							<select id="os" name="os" class="input-sm">
-								<option value=""></option>
-								<?php print_os_option_list( $f_os ); ?>
-							</select>
-							<?php
-								} else {
-									echo '<input type="text" id="os" name="os" class="autocomplete input-sm" size="32" maxlength="32" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_os ) . '" />';
-								}
-							?>
-						</td>
-					</tr>
-					<tr>
-						<th class="category">
-							<label for="os_build"><?php echo lang_get( 'os_version' ) ?></label>
-						</th>
-						<td>
-							<?php
-								if( config_get( 'allow_freetext_in_profile_fields' ) == OFF ) {
-							?>
-							<select id="os_build" name="os_build" class="input-sm">
-								<option value=""></option>
-									<?php print_os_build_option_list( $f_os_build ); ?>
-								</select>
-							<?php
-								} else {
-									echo '<input type="text" id="os_build" name="os_build" class="autocomplete input-sm" size="16" maxlength="16" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_os_build ) . '" />';
-								}
-							?>
-						</td>
-					</tr>
+						<?php
+							} else {
+								echo '<input type="text" id="os_build" name="os_build" class="autocomplete input-sm" size="16" maxlength="16" tabindex="' . helper_get_tab_index_value() . '" value="' . string_attribute( $f_os_build ) . '" />';
+							}
+						?>
+					</td>
+				</tr>
 			</table>
 			<?php collapse_closed( 'profile' ); collapse_icon( 'profile' ); echo lang_get( 'or_fill_in' );?>
 			<?php collapse_end( 'profile' ); ?>
