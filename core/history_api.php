@@ -157,6 +157,25 @@ function history_get_events_array( $p_bug_id, $p_user_id = null ) {
 }
 
 /**
+ * Counts the number of changes done by the specified user within specified time window.
+ * @param  integer $p_duration_in_seconds The time window in seconds.
+ * @param  [type]  $p_user_id             The user id or null for logged in user.
+ * @return integer The number of changes done by user in the specified time window.
+ */
+function history_count_user_recent_events( $p_duration_in_seconds, $p_user_id = null ) {
+	$t_user_id = ( ( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
+
+	$t_params = array( db_now() - $p_duration_in_seconds, $t_user_id );
+
+	$t_query = 'SELECT count(*) as event_count FROM {bug_history} WHERE date_modified > ' . db_param() .
+				' AND user_id = ' . db_param();
+	$t_result = db_query( $t_query, $t_params );
+
+	$t_row = db_fetch_array( $t_result );
+	return $t_row['event_count'];
+}
+
+/**
  * Retrieves the raw history events for the specified bug id and returns it in an array
  * The array is indexed from 0 to N-1.  The second dimension is: 'date', 'userid', 'username',
  * 'field','type','old_value','new_value'

@@ -120,7 +120,15 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 		case E_NOTICE:
 			$t_error_type = 'SYSTEM NOTICE';
 			break;
+		case E_STRICT:
+			$t_error_type = 'STRICT NOTICE';
+			break;
+		case E_RECOVERABLE_ERROR:
+			# This should generally be considered fatal (like E_ERROR)
+			$t_error_type = 'SYSTEM ERROR';
+			break;
 		case E_DEPRECATED:
+		case E_USER_DEPRECATED:
 			$t_error_type = 'DEPRECATED';
 			break;
 		case E_USER_ERROR:

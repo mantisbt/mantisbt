@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.antispam">
+	<title>Anti-Spam Configuration</title>
+
+	<variablelist>
+		<varlistentry>
+			<term>$g_antispam_max_event_count</term>
+			<listitem>
+				<para> Max number of events to allow for users with default access level (see $g_default_new_account_access_level) when signup is enabled.
+					Use 0 for no limit.  Default is 10.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_antispam_time_window_in_seconds</term>
+			<listitem>
+				<para>Time window to enforce max events within.  Default is 3600 seconds (1 hour).
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</section>

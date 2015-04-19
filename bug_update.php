@@ -270,7 +270,9 @@ foreach ( $t_related_custom_field_ids as $t_cf_id ) {
 	$t_cf_def = custom_field_get_definition( $t_cf_id );
 
 	if( !gpc_isset_custom_field( $t_cf_id, $t_cf_def['type'] ) ) {
-		if( $t_cf_def[$t_cf_require_check] && $f_update_type == BUG_UPDATE_TYPE_NORMAL ) {
+		if( $t_cf_def[$t_cf_require_check] &&
+			$f_update_type == BUG_UPDATE_TYPE_NORMAL &&
+			custom_field_has_write_access( $t_cf_id, $f_bug_id ) ) {
 			# A value for the custom field was expected however
 			# no value was given by the user.
 			error_parameters( lang_get_defaulted( custom_field_get_field( $t_cf_id, 'name' ) ) );

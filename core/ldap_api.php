@@ -64,8 +64,17 @@ function ldap_connect_bind( $p_binddn = '', $p_password = '' ) {
 	$t_ds = @ldap_connect( $t_ldap_server );
 	if( $t_ds !== false && $t_ds > 0 ) {
 		log_event( LOG_LDAP, 'Connection accepted by LDAP server' );
-		$t_protocol_version = config_get( 'ldap_protocol_version' );
 
+		$t_network_timeout = config_get( 'ldap_network_timeout' );
+		if( $t_network_timeout > 0 ) {
+			log_event( LOG_LDAP, "Setting LDAP network timeout to " . $t_network_timeout );
+			$t_result = @ldap_set_option( $t_ds, LDAP_OPT_NETWORK_TIMEOUT, $t_network_timeout );
+			if( !$t_result ) {
+				ldap_log_error( $t_ds );
+			}
+		}
+
+		$t_protocol_version = config_get( 'ldap_protocol_version' );
 		if( $t_protocol_version > 0 ) {
 			log_event( LOG_LDAP, 'Setting LDAP protocol version to ' . $t_protocol_version );
 			$t_result = @ldap_set_option( $t_ds, LDAP_OPT_PROTOCOL_VERSION, $t_protocol_version );

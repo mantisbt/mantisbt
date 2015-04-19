@@ -601,7 +601,7 @@ function project_get_local_user_rows( $p_project_id ) {
  * @param integer $p_project_id           A project identifier.
  * @param integer $p_access_level         Access level.
  * @param boolean $p_include_global_users Whether to include global users.
- * @return array
+ * @return array List of users, array key is user ID
  */
 function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_level = ANYBODY, $p_include_global_users = true ) {
 	$c_project_id = (int)$p_project_id;
@@ -707,7 +707,7 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 
 	user_cache_array_rows( array_keys( $t_users ) );
 
-	return array_values( $t_users );
+	return $t_users;
 }
 
 /**

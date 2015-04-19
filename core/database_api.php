@@ -683,6 +683,13 @@ function db_index_exists( $p_table_name, $p_index_name ) {
  */
 function db_field_exists( $p_field_name, $p_table_name ) {
 	$t_columns = db_field_names( $p_table_name );
+
+	# ADOdb oci8 driver works with uppercase column names, and as of 5.19 does
+	# not provide a way to force them to lowercase
+	if( db_is_oracle() ) {
+		$p_field_name = strtoupper( $p_field_name );
+	}
+
 	return in_array( $p_field_name, $t_columns );
 }
 

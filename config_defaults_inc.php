@@ -383,6 +383,24 @@ $g_lost_password_feature = ON;
  */
 $g_max_lost_password_in_progress_count = 3;
 
+#############
+# Anti-Spam #
+#############
+
+/**
+ * Max number of events to allow for users with default access level when signup is enabled.
+ * Use 0 for no limit.
+ * @var integer
+ * @see $g_default_new_account_access_level
+ */
+$g_antispam_max_event_count = 10;
+
+/**
+ * Time window to enforce max events within.  Default is 3600 seconds (1 hour).
+ * @var integer
+ */
+$g_antispam_time_window_in_seconds = 3600;
+
 ###########################
 # MantisBT Email Settings #
 ###########################
@@ -512,7 +530,19 @@ $g_notify_flags['monitor'] = array(
 $g_email_receive_own = OFF;
 
 /**
- * set to OFF to disable email check
+ * Email addresses validation
+ *
+ * Determines whether email addresses are validated.
+ * - When ON (default), validation is performed using the pattern given by the
+ *   HTML5 specification for 'email' type form input elements
+ *   {@link http://www.w3.org/TR/html5/forms.html#valid-e-mail-address}
+ * - When OFF, validation is disabled.
+ *
+ * NOTE: Regardless of how this option is set, validation is never performed
+ * when using LDAP email (i.e. when $g_use_ldap_email = ON), as we assume that
+ * it is handled by the directory.
+ * @see $g_use_ldap_email
+ *
  * @global integer $g_validate_email
  */
 $g_validate_email = ON;
@@ -1849,6 +1879,17 @@ $g_ldap_organization = '';
  * @global integer $g_ldap_protocol_version
  */
 $g_ldap_protocol_version = 0;
+
+/**
+ * Duration of the timeout for TCP connection to the LDAP server (in seconds).
+ * Set this to a low value when the hostname defined in $g_ldap_server resolves
+ * to multiple IP addresses, allowing rapid failover to the next available LDAP
+ * server.
+ * Defaults to 0 (infinite)
+ *
+ * @global int $g_ldap_network_timeout
+ */
+$g_ldap_network_timeout = 0;
 
 /**
  * Determines whether the LDAP library automatically follows referrals returned
@@ -4066,9 +4107,10 @@ $g_show_queries_count = OFF;
  * Recommended config_inc.php settings for developers (these are automatically
  * set if the server is localhost):
  * $g_display_errors = array(
- *     E_USER_ERROR   => DISPLAY_ERROR_HALT,
- *     E_WARNING      => DISPLAY_ERROR_HALT,
- *     E_ALL          => DISPLAY_ERROR_INLINE,
+ *     E_USER_ERROR        => DISPLAY_ERROR_HALT,
+ *     E_RECOVERABLE_ERROR => DISPLAY_ERROR_HALT,
+ *     E_WARNING           => DISPLAY_ERROR_HALT,
+ *     E_ALL               => DISPLAY_ERROR_INLINE,
  * );
  *
  * WARNING: E_USER_ERROR should always be set to DISPLAY_ERROR_HALT. Using
@@ -4078,7 +4120,8 @@ $g_show_queries_count = OFF;
  * @global array $g_display_errors
  */
 $g_display_errors = array(
-	E_USER_ERROR   => DISPLAY_ERROR_HALT,
+	E_USER_ERROR        => DISPLAY_ERROR_HALT,
+	E_RECOVERABLE_ERROR => DISPLAY_ERROR_HALT,
 );
 
 # Add developers defaults when server is localhost
