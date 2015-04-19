@@ -122,7 +122,12 @@ $t_definition = custom_field_get_definition( $f_field_id );
 			<?php echo lang_get( 'custom_field_default_value' ) ?>
 		</td>
 		<td>
-			<input type="text" id="custom-field-default-value" name="default_value" class="input-sm" size="32" maxlength="255" value="<?php echo string_attribute( $t_definition['default_value'] ) ?>" />
+			<div class="input">
+				<input type="text" id="custom-field-default-value" name="default_value" class="input-sm" size="32" maxlength="255" value="<?php echo string_attribute( $t_definition['default_value'] ) ?>" />
+			</div>
+			<div class="textarea">
+				<textarea disabled="disabled" id="custom-field-default-value-textarea" name="default_value" class="form-control" cols="80" rows="10"><?php echo string_attribute( $t_definition['default_value'] ) ?></textarea>
+			</div>
 		</td>
 	</tr>
 	<tr>

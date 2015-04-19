@@ -22,13 +22,11 @@
 $(document).ready(function() {
   $('#custom-field-type').on('change', function() {
     if($(this).val() == 10) {  // 10: CUSTOM_FIELD_TYPE_TEXTAREA
-      $('#custom-field-possible-values').closest('.field-container').hide();
       $('#custom-field-default-value').closest('.input').hide();
       $('#custom-field-default-value').attr('disabled', 'disabled');
       $('#custom-field-default-value-textarea').closest('.textarea').show();
       $('#custom-field-default-value-textarea').removeAttr('disabled');
     } else {
-      $('#custom-field-possible-values').closest('.field-container').show();
       $('#custom-field-default-value-textarea').closest('.textarea').hide();
       $('#custom-field-default-value-textarea').attr('disabled', 'disabled');
       $('#custom-field-default-value').closest('.input').show();
