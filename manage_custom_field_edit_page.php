@@ -114,7 +114,7 @@ $t_definition = custom_field_get_definition( $f_field_id );
 		</td>
 		<td>
 			<input type="text" id="custom-field-possible-values" name="possible_values" class="input-sm" size="80%" value="<?php echo string_attribute( $t_definition['possible_values'] ) ?>" />
-            <small>(separate list items by "|")</small>
+            <small><?php echo sprintf( lang_get( 'separate_list_items_by' ), '|' ) ?></small>
 		</td>
 	</tr>
 	<tr>
