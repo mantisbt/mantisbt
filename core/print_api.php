@@ -262,9 +262,9 @@ function print_captcha_input( $p_field_name ) {
 /**
  * This populates an option list with the appropriate users by access level
  * @todo from print_reporter_option_list
- * @param integer $p_user_id    A user identifier.
- * @param integer $p_project_id A project identifier.
- * @param integer $p_access     An access level.
+ * @param integer|array $p_user_id    A user identifier or a list of them.
+ * @param integer       $p_project_id A project identifier.
+ * @param integer       $p_access     An access level.
  * @return void
  */
 function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = ANYBODY ) {
@@ -296,8 +296,13 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 		$t_users = project_get_all_user_rows( $p_project_id, $p_access );
 	}
 
-	# Ensure the specified user exists in the array
-	if( $p_user_id != NO_USER && !array_key_exists( $p_user_id, $t_users ) ) {
+	# Add the specified user ID to the list
+	# If we have an array of user IDs, then we've been called from a filter
+	# so don't add anything
+	if( !is_array( $p_user_id ) &&
+		$p_user_id != NO_USER &&
+		!array_key_exists( $p_user_id, $t_users )
+	) {
 		$t_users[$p_user_id] = user_get_row( $p_user_id );
 	}
 
