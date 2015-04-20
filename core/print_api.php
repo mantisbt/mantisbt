@@ -283,12 +283,10 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 			$t_project_users_list = project_get_all_user_rows( $t_project_id, $p_access );
 			# Do a 'smart' merge of the project's user list, into an
 			# associative array (to remove duplicates)
-			# Use a while loop for better performance
-			$i = 0;
-			while( isset( $t_project_users_list[$i] ) ) {
-				$t_users[$t_project_users_list[$i]['id']] = $t_project_users_list[$i];
-				$i++;
+			foreach( $t_project_users_list as $t_id => $t_user ) {
+				$t_users[$t_id] = $t_user;
 			}
+			# Clear the array to release memory
 			unset( $t_project_users_list );
 		}
 		unset( $t_projects );
