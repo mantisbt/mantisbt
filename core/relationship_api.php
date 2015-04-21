@@ -811,7 +811,7 @@ function relationship_view_box( $p_bug_id ) {
 <?php collapse_open( 'relationships' );?>
 <table class="width100" cellspacing="1">
 <tr class="row-2">
-	<td width="15%" class="form-title" colspan="2">
+	<td class="form-title relationships" colspan="2">
 		<?php
 			collapse_icon( 'relationships' );
 	echo lang_get( 'bug_relationships' );
@@ -831,7 +831,7 @@ function relationship_view_box( $p_bug_id ) {
 		if( access_has_bug_level( config_get( 'update_bug_threshold' ), $p_bug_id ) ) {
 			?>
 <tr class="row-1">
-	<th class="category" width="15%"><?php echo lang_get( 'add_new_relationship' )?></th>
+	<th class="category relationship"><?php echo lang_get( 'add_new_relationship' )?></th>
 	<td><?php echo lang_get( 'this_bug' )?>
 		<form method="post" action="bug_relationship_add.php">
 		<?php echo form_security_field( 'bug_relationship_add' ) ?>

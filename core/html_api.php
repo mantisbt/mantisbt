@@ -1536,7 +1536,7 @@ function html_button_bug_change_status( BugData $p_bug ) {
 
 		echo '<form method="post" action="bug_change_status_page.php">';
 		# CSRF protection not required here - form does not result in modifications
-
+		echo "\t<fieldset>";
 		$t_button_text = lang_get( 'bug_status_to_button' );
 		echo '<input type="submit" class="button" value="' . $t_button_text . '" />';
 
@@ -1552,7 +1552,7 @@ function html_button_bug_change_status( BugData $p_bug ) {
 
 		$t_bug_id = string_attribute( $p_bug->id );
 		echo '<input type="hidden" name="id" value="' . $t_bug_id . '" />' . "\n";
-
+		echo "\t</fieldset>";
 		echo '</form>' . "\n";
 	}
 }
@@ -1605,6 +1605,7 @@ function html_button_bug_assign_to( BugData $p_bug ) {
 	}
 
 	echo '<form method="post" action="bug_update.php">';
+	echo "\t<fieldset>";
 	echo form_security_field( 'bug_update' );
 	echo '<input type="hidden" name="last_updated" value="' . $p_bug->last_updated . '" />';
 	echo '<input type="hidden" name="action_type" value="' . BUG_UPDATE_TYPE_ASSIGN . '" />';
@@ -1649,7 +1650,7 @@ function html_button_bug_assign_to( BugData $p_bug ) {
 
 	$t_bug_id = string_attribute( $p_bug->id );
 	echo '<input type="hidden" name="bug_id" value="' . $t_bug_id . '" />' . "\n";
-
+	echo "\t</fieldset>";
 	echo '</form>' . "\n";
 }
 

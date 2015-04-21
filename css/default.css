@@ -56,6 +56,11 @@ td.col-1			{ background-color: #d8d8d8; color: #000000; }
 td.col-2			{ background-color: #e8e8e8; color: #000000; }
 td.form-title		{ background-color: #ffffff; color: #000000; font-weight: bold; text-align: left; }
 td.form-title-caps	{ background-color: #ffffff; color: #000000; font-weight: bold; text-align: left; text-transform: uppercase; }
+td.relationship, td.relationship { width: 15%; }
+th.monitor_list		{ width: 15%; }
+th.bugnote_text_title	{ width: 25%; }
+td.bugnote_text		{ width: 75%; }
+
 td.nopad			{ padding: 0px; }
 td.small-caption, th.small-caption	{ font-size: 8pt; }
 td.print			{ font-size: 8pt; text-align: left; padding: 2px; }
