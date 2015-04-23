@@ -223,6 +223,8 @@ define( 'BUG_HAS_DUPLICATE', 4 );
 define( 'BUG_UPDATE_TYPE_NORMAL', 'update' );
 define( 'BUG_UPDATE_TYPE_ASSIGN', 'assign' );
 define( 'BUG_UPDATE_TYPE_CLOSE', 'close' );
+define( 'BUG_UPDATE_TYPE_REOPEN', 'reopen' );
+define( 'BUG_UPDATE_TYPE_CHANGE_STATUS', 'change_status' );
 
 # error messages
 define( 'ERROR_GENERIC', 0 );

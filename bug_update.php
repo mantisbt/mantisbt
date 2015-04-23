@@ -67,27 +67,10 @@ $f_bug_id = gpc_get_int( 'bug_id' );
 $t_existing_bug = bug_get( $f_bug_id, true );
 $f_update_type = gpc_get_string( 'action_type', BUG_UPDATE_TYPE_NORMAL );
 
+$t_current_user_id = auth_get_current_user_id();
+
 if( helper_get_current_project() !== $t_existing_bug->project_id ) {
 	$g_project_override = $t_existing_bug->project_id;
-}
-
-$t_reporter_closing =
-	( $f_update_type == BUG_UPDATE_TYPE_CLOSE ) &&
-	bug_is_user_reporter( $f_bug_id, auth_get_current_user_id() ) &&
-	config_get( 'allow_reporter_close' ) == ON;
-
-if ( !$t_reporter_closing ) {
-	# Ensure that the user has permission to update bugs. This check also factors
-	# in whether the user has permission to view private bugs. The
-	# $g_limit_reporters option is also taken into consideration.
-	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
-
-	# Check if the bug is in a read-only state and whether the current user has
-	# permission to update read-only bugs.
-	if( bug_is_readonly( $f_bug_id ) ) {
-		error_parameters( $f_bug_id );
-		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
-	}
 }
 
 $t_updated_bug = clone $t_existing_bug;
@@ -155,6 +138,30 @@ if( $t_existing_bug->status < $t_resolved_status &&
 	$t_reopen_issue = true;
 }
 
+$t_reporter_closing =
+	( $f_update_type == BUG_UPDATE_TYPE_CLOSE ) &&
+	bug_is_user_reporter( $f_bug_id, $t_current_user_id ) &&
+	access_can_close_bug( $t_existing_bug, $t_current_user_id );
+
+$t_reporter_reopening =
+	( ( $f_update_type == BUG_UPDATE_TYPE_REOPEN ) || $t_reopen_issue ) &&
+	bug_is_user_reporter( $f_bug_id, $t_current_user_id ) &&
+	access_can_reopen_bug( $t_existing_bug, $t_current_user_id );
+
+if ( !$t_reporter_reopening && !$t_reporter_closing ) {
+	# Ensure that the user has permission to update bugs. This check also factors
+	# in whether the user has permission to view private bugs. The
+	# $g_limit_reporters option is also taken into consideration.
+	access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
+
+	# Check if the bug is in a read-only state and whether the current user has
+	# permission to update read-only bugs.
+	if( bug_is_readonly( $f_bug_id ) ) {
+		error_parameters( $f_bug_id );
+		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+	}
+}
+
 # If resolving or closing, ensure that all dependant issues have been resolved.
 if( ( $t_resolve_issue || $t_close_issue ) &&
 	 !relationship_can_resolve_bug( $f_bug_id ) ) {
@@ -172,13 +179,13 @@ if( $t_existing_bug->status !== $t_updated_bug->status ) {
 		$t_can_bypass_status_access_thresholds = false;
 		if( $t_close_issue &&
 		     $t_existing_bug->status >= $t_resolved_status &&
-		     $t_existing_bug->reporter_id === auth_get_current_user_id() &&
+		     $t_existing_bug->reporter_id === $t_current_user_id &&
 		     config_get( 'allow_reporter_close' ) ) {
 			$t_can_bypass_status_access_thresholds = true;
 		} else if( $t_reopen_issue &&
 		            $t_existing_bug->status >= $t_resolved_status &&
 		            $t_existing_bug->status <= $t_closed_status &&
-		            $t_existing_bug->reporter_id === auth_get_current_user_id() &&
+		            $t_existing_bug->reporter_id === $t_current_user_id &&
 		            config_get( 'allow_reporter_reopen' ) ) {
 			$t_can_bypass_status_access_thresholds = true;
 		}
@@ -346,8 +353,8 @@ if( $t_bug_note->note &&
 	 config_get( 'reassign_on_feedback' ) &&
 	 $t_existing_bug->status === config_get( 'bug_feedback_status' ) &&
 	 $t_updated_bug->status !== $t_existing_bug->status &&
-	 $t_updated_bug->handler_id !== auth_get_current_user_id() &&
-	 $t_updated_bug->reporter_id === auth_get_current_user_id() ) {
+	 $t_updated_bug->handler_id !== $t_current_user_id &&
+	 $t_updated_bug->reporter_id === $t_current_user_id ) {
 	if( $t_updated_bug->handler_id !== NO_USER ) {
 		$t_updated_bug->status = config_get( 'bug_assigned_status' );
 	} else {
