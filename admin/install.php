@@ -188,7 +188,8 @@ if( $t_config_exists && $t_install_state <= 1 ) {
 	$f_timezone               = config_get( 'default_timezone', '' );
 
 	# Set default prefix/suffix form variables ($f_db_table_XXX)
-	foreach( $t_prefix_defaults['other'] as $t_key => $t_value ) {
+	$t_prefix_type = 'other';
+	foreach( $t_prefix_defaults[$t_prefix_type] as $t_key => $t_value ) {
 		${'f_' . $t_key} = $t_value;
 	}
 } else {
