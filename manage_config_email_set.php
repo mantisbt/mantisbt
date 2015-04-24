@@ -132,6 +132,12 @@ if( $t_can_change_defaults ) {
 			$t_default_min = $t_thresholds_min[$t_action];
 		}
 	}
+
+	# We may end up with min = 100, max = 0 - make it 100, 100.
+	if( $t_default_max < $t_default_min ) {
+		$t_default_max = $t_default_min;
+	}
+
 	$t_default_flags['threshold_min'] = $t_default_min;
 	$t_default_flags['threshold_max'] = $t_default_max;
 
