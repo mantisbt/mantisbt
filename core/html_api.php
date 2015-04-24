@@ -1138,8 +1138,10 @@ function print_manage_config_menu( $p_page = '' ) {
 		                                                           'label' => 'manage_workflow_graph' );
 	}
 
-	$t_pages['manage_config_email_page.php'] = array( 'url'   => 'manage_config_email_page.php',
-	                                                  'label' => 'manage_email_config' );
+	if( config_get( 'enable_email_notification' ) == ON ) {
+		$t_pages['manage_config_email_page.php'] = array( 'url'   => 'manage_config_email_page.php',
+		                                                  'label' => 'manage_email_config' );
+	}
 
 	$t_pages['manage_config_columns_page.php'] = array( 'url'   => 'manage_config_columns_page.php',
 	                                                    'label' => 'manage_columns_config' );
