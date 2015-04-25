@@ -777,7 +777,7 @@ function relationship_get_summary_text( $p_bug_id ) {
 function relationship_list_box( $p_default_rel_type = BUG_REL_ANY, $p_select_name = 'rel_type', $p_include_any = false, $p_include_none = false ) {
 	global $g_relationships;
 	?>
-<select class="input-xs" name="<?php echo $p_select_name?>">
+<select class="input-sm" name="<?php echo $p_select_name?>">
 <?php if( $p_include_any ) {?>
 <option value="<?php echo BUG_REL_ANY ?>" <?php echo( $p_default_rel_type == BUG_REL_ANY ? ' selected="selected"' : '' )?>>[<?php echo lang_get( 'any' )?>]</option>
 <?php
