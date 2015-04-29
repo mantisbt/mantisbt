@@ -1842,7 +1842,7 @@ function print_bug_attachment( array $p_attachment ) {
  */
 function print_bug_attachment_header( array $p_attachment ) {
 	echo "\n";
-	if( false && $p_attachment['exists'] ) {
+	if( $p_attachment['exists'] ) {
 		if( $p_attachment['can_download'] ) {
 			echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '">';
 		}
