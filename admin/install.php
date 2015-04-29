@@ -424,6 +424,7 @@ if( 2 == $t_install_state ) {
 		$t_version_info = @$g_db->ServerInfo();
 	} else {
 		print_test_result( BAD, true, 'Does administrative user have access to the database? ( ' . db_error_msg() . ' )' );
+		$t_version_info = null;
 	}
 	?>
 </tr>
@@ -462,11 +463,14 @@ if( 2 == $t_install_state ) {
 <tr>
 	<td bgcolor="#ffffff">
 		Checking Database Server Version
-		<?php
-		echo '<br /> Running ' . string_attribute( $f_db_type ) . ' version ' . nl2br( $t_version_info['description'] );
-		?>
+<?php
+		if( isset( $t_version_info['description'] ) ) {
+			echo '<br /> Running ' . string_attribute( $f_db_type )
+				. ' version ' . nl2br( $t_version_info['description'] );
+		}
+?>
 	</td>
-	<?php
+<?php
 		$t_warning = '';
 		$t_error = '';
 		switch( $f_db_type ) {
@@ -488,8 +492,16 @@ if( 2 == $t_install_state ) {
 				break;
 		}
 
-		print_test_result( ( '' == $t_error ) && ( '' == $t_warning ), ( '' != $t_error ), $t_error . ' ' . $t_warning );
-		?>
+		if( is_null( $t_version_info ) ) {
+			$t_warning = "Unable to determine '$f_db_type' version. ($t_error).";
+			$t_error = '';
+		}
+		print_test_result(
+			( '' == $t_error ) && ( '' == $t_warning ),
+			( '' != $t_error ),
+			$t_error . ' ' . $t_warning
+		);
+?>
 </tr>
 </table>
 <?php
