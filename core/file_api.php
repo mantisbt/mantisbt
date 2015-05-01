@@ -641,8 +641,19 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 		trigger_error( ERROR_FILE_NOT_ALLOWED, ERROR );
 	}
 
-	if( !file_is_name_unique( $t_file_name, $p_bug_id ) ) {
-		trigger_error( ERROR_FILE_DUPLICATE, ERROR );
+	$t_org_filename = $t_file_name;
+	$t_suffix_id = 1;
+
+	while( !file_is_name_unique( $t_file_name, $p_bug_id ) ) {
+		$t_suffix_id++;
+
+		$t_dot_index = strripos( $t_org_filename, '.' );
+		if( $t_dot_index === false ) {
+			$t_file_name = $t_org_filename . '-' . $t_suffix_id;
+		} else {
+			$t_extension = substr( $t_org_filename, $t_dot_index, strlen( $t_org_filename ) - $t_dot_index );
+			$t_file_name = substr( $t_org_filename, 0, $t_dot_index ) . '-' . $t_suffix_id . $t_extension;
+		}
 	}
 
 	antispam_check();
