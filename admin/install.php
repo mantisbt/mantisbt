@@ -99,7 +99,7 @@ html_head_begin();
 html_css_link( 'admin.css' );
 html_content_type();
 html_title( 'Administration - Installation' );
-html_javascript_link( 'jquery-1.11.1.min.js' );
+html_javascript_link( 'jquery-1.11.3.min.js' );
 html_javascript_link( 'install.js' );
 html_head_end();
 ?>
