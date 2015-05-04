@@ -31,7 +31,6 @@
  *     html_title
  *     html_css
  *     html_rss_link
- *     html_head_javascript
  *   (html_meta_redirect)
  *   html_page_top2
  *     html_page_top2a
@@ -207,8 +206,6 @@ function html_page_top1( $p_page_title = null ) {
 	# Advertise the availability of the browser search plug-ins.
 	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Text Search" href="' . string_sanitize_url( 'browser_search_plugin.php?type=text', true ) . '" />' . "\n";
 	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Issue Id" href="' . string_sanitize_url( 'browser_search_plugin.php?type=id', true ) . '" />' . "\n";
-
-	html_head_javascript();
 }
 
 /**
@@ -430,25 +427,9 @@ function require_js( $p_script_path ) {
 	$g_scripts_included[$p_script_path] = $p_script_path;
 }
 
-/**
- * (6a) Javascript...
- * @return void
- */
-function html_head_javascript() {
-	global $g_scripts_included;
-
-	echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_config.php' ) . '"></script>' . "\n";
-	echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
-	html_javascript_link( 'jquery-1.11.3.min.js' );
-	html_javascript_link( 'jquery-ui-1.11.4.min.js' );
-	html_javascript_link( 'common.js' );
-	foreach ( $g_scripts_included as $t_script_path ) {
-		html_javascript_link( $t_script_path );
-	}
-}
 
 /**
- * (7) End the <head> section
+ * (6) End the <head> section
  * @return void
  */
 function html_head_end() {
@@ -458,7 +439,7 @@ function html_head_end() {
 }
 
 /**
- * (8) Begin the <body> section
+ * (7) Begin the <body> section
  * @return void
  */
 function html_body_begin() {
@@ -476,7 +457,7 @@ function html_body_begin() {
 }
 
 /**
- * (9) Print a user-defined banner at the top of the page if there is one.
+ * (8) Print a user-defined banner at the top of the page if there is one.
  * @return void
  */
 function html_top_banner() {
@@ -514,7 +495,7 @@ function html_top_banner() {
 }
 
 /**
- * (10) Print the user's account information
+ * (9) Print the user's account information
  * Also print the select box where users can switch projects
  * @return void
  */
@@ -609,7 +590,7 @@ function html_login_info() {
 }
 
 /**
- * (11) Print a user-defined banner at the bottom of the page if there is one.
+ * (10) Print a user-defined banner at the bottom of the page if there is one.
  * @return void
  */
 function html_bottom_banner() {
@@ -647,7 +628,7 @@ function html_is_auto_refresh() {
 }
 
 /**
- * (13) Print the page footer information
+ * (11) Print the page footer information
  * @return void
  */
 function html_footer() {
@@ -765,10 +746,21 @@ function html_footer() {
 }
 
 /**
- * (14) End the <body> section
+ * (12) End the <body> section
  * @return void
  */
 function html_body_end() {
+	global $g_scripts_included;
+
+	echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_config.php' ) . '"></script>' . "\n";
+	echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
+	html_javascript_link( 'jquery-1.11.3.min.js' );
+	html_javascript_link( 'jquery-ui-1.11.4.min.js' );
+	html_javascript_link( 'common.js' );
+	foreach ( $g_scripts_included as $t_script_path ) {
+		html_javascript_link( $t_script_path );
+	}
+
 	event_signal( 'EVENT_LAYOUT_BODY_END' );
 
 	echo '</div>', "\n";
@@ -777,7 +769,7 @@ function html_body_end() {
 }
 
 /**
- * (15) Print the closing <html> tag
+ * (13) Print the closing <html> tag
  * @return void
  */
 function html_end() {
