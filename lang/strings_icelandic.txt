@@ -39,6 +39,7 @@
  * @file
  *
  * @author Snævar
+ * @author Sveinn í Felli
  */
 
 $s_actiongroup_menu_move = 'Færa';
@@ -872,7 +873,7 @@ $MANTIS_ERROR[ERROR_GPC_ARRAY_UNEXPECTED] = 'Búist var við streng en fylki kom
 $MANTIS_ERROR[ERROR_GPC_NOT_NUMBER] = 'Búist var við tölu fyrir %1$s.';
 $MANTIS_ERROR[ERROR_BUG_NOT_FOUND] = 'Verkbeiðni %1$d finnst ekki.';
 $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Sía %1$s finnst ekki.';
-$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Sían sem þú ert að reyna að nota er of gömul til að vera uppfærð, endurskapaðu hana';
+$MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Sían sem þú ert að reyna að nota er of gömul til að vera uppfærð, endurgerðu hana frekar.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Ógilt tölvupóstfang.';
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Sniðið finnst ekki.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'Upphlaðning þessarar skráartegundar er ekki heimil.';
