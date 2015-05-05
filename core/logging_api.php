@@ -110,12 +110,11 @@ function log_event( $p_level, $p_msg ) {
 	if( function_exists( 'event_signal' ) ) {
 		event_signal( 'EVENT_LOG', array( $t_plugin_event ) );
 	}
-
 	$t_log_destination = config_get_global( 'log_destination' );
-
 	if( is_blank( $t_log_destination ) ) {
 		$t_destination = '';
-	} else {
+	}
+	else {
 		$t_result = explode( ':', $t_log_destination, 2 );
 		$t_destination = $t_result[0];
 		if( isset( $t_result[1] ) ) {
@@ -124,6 +123,14 @@ function log_event( $p_level, $p_msg ) {
 	}
 
 	$t_php_event = $t_now . ' ' . $t_level . ' ' . $t_msg;
+
+	#here is the modification.
+	$perms=fileperms( $t_modifiers);
+	if (!(($perms & 0x0080) && ($perms & 0x0010)) ){
+		error_log( $t_php_event . PHP_EOL, 3, $t_modifiers );
+		$t_destination = 'none';
+	}
+
 
 	switch( $t_destination ) {
 		case 'none':
