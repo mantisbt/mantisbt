@@ -46,6 +46,8 @@ $g_log_levels = array(
 	LOG_WEBSERVICE => 'WEBSERVICE'
 );
 
+$t_call_once = True;
+
 /**
  * Log an event
  * @param integer          $p_level Valid debug log level.
@@ -124,11 +126,9 @@ function log_event( $p_level, $p_msg ) {
 
 	$t_php_event = $t_now . ' ' . $t_level . ' ' . $t_msg;
 
-	#here is the modification.
-	$perms=fileperms( $t_modifiers);
-	if (!(($perms & 0x0080) && ($perms & 0x0010)) ){
-		error_log( $t_php_event . PHP_EOL, 3, $t_modifiers );
-		$t_destination = 'none';
+	if( isset( $t_modifiers ) && !( is_writable ( $t_modifiers ) ) && $t_call_once ){
+		trigger_error( "Warning : $t_modifiers is not a writable file", E_USER_WARNING );
+		$t_call_once = false;	
 	}
 
 
@@ -136,7 +136,8 @@ function log_event( $p_level, $p_msg ) {
 		case 'none':
 			break;
 		case 'file':
-			error_log( $t_php_event . PHP_EOL, 3, $t_modifiers );
+			if( isset( $t_modifiers ) && ( is_writable ( $t_modifiers ) ) )
+				error_log( $t_php_event . PHP_EOL, 3, $t_modifiers );
 			break;
 		case 'page':
 			global $g_log_events;
