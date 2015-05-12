@@ -440,7 +440,11 @@ if( $t_show_priority || $t_show_severity || $t_show_reproducibility ) {
 	# Priority
 	if( $t_show_priority ) {
 		echo '<th class="bug-priority category">', lang_get( 'priority' ), '</th>';
-		echo '<td class="bug-priority">', $t_priority, '</td>';
+		
+		# choose color based on configured attribute
+		$t_highlight_label = html_get_highlight_css_class( $t_bug, null, null, 'priority' );
+		
+		echo '<td class="bug-priority ', $t_highlight_label, '">', $t_priority, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
@@ -448,7 +452,11 @@ if( $t_show_priority || $t_show_severity || $t_show_reproducibility ) {
 	# Severity
 	if( $t_show_severity ) {
 		echo '<th class="bug-severity category">', lang_get( 'severity' ), '</th>';
-		echo '<td class="bug-severity">', $t_severity, '</td>';
+		
+		# choose color based on configured attribute
+		$t_highlight_label = html_get_highlight_css_class( $t_bug, null, null, 'severity' );
+		
+		echo '<td class="bug-severity ', $t_highlight_label, '">', $t_severity, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
@@ -456,7 +464,11 @@ if( $t_show_priority || $t_show_severity || $t_show_reproducibility ) {
 	# Reproducibility
 	if( $t_show_reproducibility ) {
 		echo '<th class="bug-reproducibility category">', lang_get( 'reproducibility' ), '</th>';
-		echo '<td class="bug-reproducibility">', $t_reproducibility, '</td>';
+		
+		# choose color based on configured attribute
+		$t_highlight_label = html_get_highlight_css_class( $t_bug, null, null, 'reproducibility' );
+		
+		echo '<td class="bug-reproducibility ', $t_highlight_label, '">', $t_reproducibility, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
@@ -482,10 +494,10 @@ if( $t_show_status || $t_show_resolution ) {
 	if( $t_show_status ) {
 		echo '<th class="bug-status category">', lang_get( 'status' ), '</th>';
 
-		# choose color based on status
-		$t_status_label = html_get_status_css_class( $t_bug->status );
+		# choose color based on configured attribute
+		$t_highlight_label = html_get_highlight_css_class( $t_bug, null, null, 'status' );
 
-		echo '<td class="bug-status ', $t_status_label, '">', $t_status, '</td>';
+		echo '<td class="bug-status ', $t_highlight_label, '">', $t_status, '</td>';
 	} else {
 		$t_spacer += 2;
 	}
@@ -493,7 +505,11 @@ if( $t_show_status || $t_show_resolution ) {
 	# Resolution
 	if( $t_show_resolution ) {
 		echo '<th class="bug-resolution category">', lang_get( 'resolution' ), '</th>';
-		echo '<td class="bug-resolution">', $t_resolution, '</td>';
+		
+		# choose color based on configured attribute
+		$t_highlight_label = html_get_highlight_css_class( $t_bug, null, null, 'resolution' );
+		
+		echo '<td class="bug-resolution ', $t_highlight_label, '">', $t_resolution, '</td>';
 	} else {
 		$t_spacer += 2;
 	}

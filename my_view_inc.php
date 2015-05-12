@@ -320,8 +320,8 @@ for( $i = 0;$i < $t_count; $i++ ) {
 	$t_summary = string_display_line_links( $t_bug->summary );
 	$t_last_updated = date( config_get( 'normal_date_format' ), $t_bug->last_updated );
 
-	# choose color based on status
-	$t_status_label = html_get_status_css_class( $t_bug->status, auth_get_current_user_id(), $t_bug->project_id );
+	# choose color based on configured attribute
+	$t_highlight_label = html_get_highlight_css_class( $t_bug, auth_get_current_user_id(), $t_bug->project_id );
 
 	# Check for attachments
 	$t_attachment_count = 0;
@@ -341,7 +341,7 @@ for( $i = 0;$i < $t_count; $i++ ) {
 	}
 	?>
 
-<tr class="my-buglist-bug <?php echo $t_bug_class?> <?php echo $t_status_label; ?>">
+<tr class="my-buglist-bug <?php echo $t_bug_class?> <?php echo $t_highlight_label; ?>">
 	<?php
 	# -- Bug ID and details link + Pencil shortcut --?>
 	<td class="center nowrap my-buglist-id">

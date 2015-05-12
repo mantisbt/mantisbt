@@ -91,7 +91,7 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 $t_status_legend_position = config_get( 'status_legend_position' );
 
 if( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
-	html_status_legend();
+	html_highlight_legend();
 }
 ?>
 <br />
@@ -199,10 +199,10 @@ function write_bug_rows( array $p_rows ) {
 			$t_in_stickies = false;
 		}
 
-		# choose color based on status
-		$t_status_label = html_get_status_css_class( $t_row->status, auth_get_current_user_id(), $t_row->project_id );
+		# choose color based on configured attribute
+		$t_highlight_label = html_get_highlight_css_class( $t_row, auth_get_current_user_id(), $t_row->project_id );
 
-		echo '<tr class="' . $t_status_label . '">';
+		echo '<tr class="' . $t_highlight_label . '">';
 
 		$t_column_value_function = 'print_column_value';
 		foreach( $g_columns as $t_column ) {
@@ -256,7 +256,7 @@ write_bug_rows( $t_rows );
 <?php
 
 if( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
-	html_status_legend();
+	html_highlight_legend();
 }
 
 # -- ====================== FILTER FORM ========================= --

@@ -1347,8 +1347,9 @@ function print_summary_menu( $p_page = '' ) {
  * Print the color legend for the status colors
  * @return void
  */
-function html_status_legend() {
-	# Don't show the legend if only one status is selected by the current filter
+function html_highlight_legend() {
+	# Don't show the legend if only one value is selected by the current filter
+	$t_highlight_attr = config_get( 'highlight_attribute' );
 	$t_current_filter = current_user_get_bug_filter();
 	if( $t_current_filter === false ) {
 		$t_current_filter = filter_get_default();
@@ -1360,40 +1361,40 @@ function html_status_legend() {
 		}
 	}
 
-	$t_status_array = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
-	$t_status_names = MantisEnum::getAssocArrayIndexedByValues( lang_get( 'status_enum_string' ) );
+	$t_value_array = MantisEnum::getAssocArrayIndexedByValues( config_get( $t_highlight_attr . '_enum_string' ) );
+	$t_value_names = MantisEnum::getAssocArrayIndexedByValues( lang_get( $t_highlight_attr . '_enum_string' ) );
 
 	# read through the list and eliminate unused ones for the selected project
-	# assumes that all status are are in the enum array
-	$t_workflow = config_get( 'status_enum_workflow' );
+	# assumes that all values are in the enum array
+	$t_workflow = config_get( $t_highlight_attr . '_enum_workflow' );
 	if( !empty( $t_workflow ) ) {
-		foreach( $t_status_array as $t_status => $t_name ) {
-			if( !isset( $t_workflow[$t_status] ) ) {
+		foreach( $t_value_array as $t_value => $t_name ) {
+			if( !isset( $t_workflow[$t_value] ) ) {
 
 				# drop elements that are not in the workflow
-				unset( $t_status_array[$t_status] );
+				unset( $t_value_array[$t_value] );
 			}
 		}
 	}
 
-	# Remove status values that won't appear as a result of the current filter
-	foreach( $t_status_array as $t_status => $t_name ) {
+	# Remove values that won't appear as a result of the current filter
+	/* foreach( $t_value_array as $t_value => $t_name ) {
 		if( $t_simple_filter ) {
 			if( !filter_field_is_none( $t_current_filter[FILTER_PROPERTY_HIDE_STATUS][0] ) &&
-				$t_status >= $t_current_filter[FILTER_PROPERTY_HIDE_STATUS][0] ) {
-				unset( $t_status_array[$t_status] );
+				$t_value >= $t_current_filter[FILTER_PROPERTY_HIDE_STATUS][0] ) {
+				unset( $t_value_array[$t_value] );
 			}
 		} else {
 			if( !in_array( META_FILTER_ANY, $t_current_filter[FILTER_PROPERTY_STATUS] ) &&
-				!in_array( $t_status, $t_current_filter[FILTER_PROPERTY_STATUS] ) ) {
-				unset( $t_status_array[$t_status] );
+				!in_array( $t_value, $t_current_filter[FILTER_PROPERTY_STATUS] ) ) {
+				unset( $t_value_array[$t_status] );
 			}
 		}
-	}
+	} */
 
 	# If there aren't at least two statuses showable by the current filter,
 	# don't draw the status bar
-	if( count( $t_status_array ) <= 1 ) {
+	if( count( $t_value_array ) <= 1 ) {
 		return;
 	}
 
@@ -1402,12 +1403,12 @@ function html_status_legend() {
 	echo '<tr>';
 
 	# draw the status bar
-	$t_status_enum_string = config_get( 'status_enum_string' );
-	foreach( $t_status_array as $t_status => $t_name ) {
-		$t_val = isset( $t_status_names[$t_status] ) ? $t_status_names[$t_status] : $t_status_array[$t_status];
-		$t_status_label = MantisEnum::getLabel( $t_status_enum_string, $t_status );
+	$t_attribute_enum_string = config_get( $t_highlight_attr . '_enum_string' );
+	foreach( $t_value_array as $t_value => $t_name ) {
+		$t_val = isset( $t_value_names[$t_value] ) ? $t_value_names[$t_value] : $t_value_array[$t_value];
+		$t_value_label = MantisEnum::getLabel( $t_attribute_enum_string, $t_value );
 
-		echo '<td class="small-caption ' . $t_status_label . '-color">' . $t_val . '</td>';
+		echo '<td class="small-caption ' . string_css( $t_value_label ) . '-color">' . $t_val . '</td>';
 	}
 
 	echo '</tr>';
@@ -1877,4 +1878,12 @@ function html_buttons_view_bug_page( $p_bug_id ) {
  */
 function html_get_status_css_class( $p_status, $p_user = null, $p_project = null ) {
 	return string_attribute( MantisEnum::getLabel( config_get( 'status_enum_string', null, $p_user, $p_project ), $p_status ) . '-color' );
+}
+
+function html_get_highlight_css_class( $p_row, $p_user = null, $p_project = null, $p_attribute = null ) {
+	$highlight_attribute = config_get( 'highlight_attribute', null, $p_user, $p_project);
+	if( isset( $p_attribute ) && $p_attribute != $highlight_attribute ) {
+		return "";
+	}
+	return string_css( MantisEnum::getLabel( config_get( $highlight_attribute . '_enum_string', null, $p_user, $p_project ), $p_row->$highlight_attribute ) ) . '-color';
 }

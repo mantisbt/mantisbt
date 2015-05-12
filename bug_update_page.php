@@ -379,7 +379,16 @@ if( $t_show_priority || $t_show_severity || $t_show_reproducibility ) {
 	if( $t_show_priority ) {
 		# Priority
 		echo '<th class="category"><label for="priority">' . lang_get( 'priority' ) . '</label></th>';
-		echo '<td><select ' . helper_get_tab_index() . ' id="priority" name="priority">';
+		
+		# choose color based on configured attribute
+		$t_highlight_label = html_get_highlight_css_class( $t_bug, null, null, 'priority' );
+
+		if( $t_highlight_label != "" ) {
+			echo '<td class="' . $t_highlight_label .  '">';
+		} else {
+			echo '<td>';
+		}
+		echo '<select ' . helper_get_tab_index() . ' id="priority" name="priority">';
 		print_enum_string_option_list( 'priority', $t_bug->priority );
 		echo '</select></td>';
 	} else {
@@ -389,7 +398,16 @@ if( $t_show_priority || $t_show_severity || $t_show_reproducibility ) {
 	if( $t_show_severity ) {
 		# Severity
 		echo '<th class="category"><label for="severity">' . lang_get( 'severity' ) . '</label></th>';
-		echo '<td><select ' . helper_get_tab_index() . ' id="severity" name="severity">';
+		
+		# choose color based on configured attribute
+		$t_highlight_label = html_get_highlight_css_class( $t_bug, null, null, 'severity' );
+
+		if( $t_highlight_label != "" ) {
+			echo '<td class="' . $t_highlight_label .  '">';
+		} else {
+			echo '<td>';
+		}
+		echo '<select ' . helper_get_tab_index() . ' id="severity" name="severity">';
 		print_enum_string_option_list( 'severity', $t_bug->severity );
 		echo '</select></td>';
 	} else {
@@ -399,7 +417,16 @@ if( $t_show_priority || $t_show_severity || $t_show_reproducibility ) {
 	if( $t_show_reproducibility ) {
 		# Reproducibility
 		echo '<th class="category"><label for="reproducibility">' . lang_get( 'reproducibility' ) . '</label></th>';
-		echo '<td><select ' . helper_get_tab_index() . ' id="reproducibility" name="reproducibility">';
+		
+		# choose color based on configured attribute
+		$t_highlight_label = html_get_highlight_css_class( $t_bug, null, null, 'reproducibility' );
+
+		if( $t_highlight_label != "" ) {
+			echo '<td class="' . $t_highlight_label .  '">';
+		} else {
+			echo '<td>';
+		}
+		echo '<select ' . helper_get_tab_index() . ' id="reproducibility" name="reproducibility">';
 		print_enum_string_option_list( 'reproducibility', $t_bug->reproducibility );
 		echo '</select></td>';
 	} else {
@@ -427,10 +454,14 @@ if( $t_show_status || $t_show_resolution ) {
 		# Status
 		echo '<th class="category"><label for="status">' . lang_get( 'status' ) . '</label></th>';
 
-		# choose color based on status
-		$t_status_label = html_get_status_css_class( $t_bug->status );
+		# choose color based on configured attribute
+		$t_highlight_label = html_get_highlight_css_class( $t_bug, null, null, 'status' );
 
-		echo '<td class="' . $t_status_label .  '">';
+		if( $t_highlight_label != "" ) {
+			echo '<td class="' . $t_highlight_label .  '">';
+		} else {
+			echo '<td>';
+		}
 		print_status_option_list( 'status', $t_bug->status,
 			access_can_close_bug( $t_bug ),
 			$t_bug->project_id );
@@ -442,7 +473,16 @@ if( $t_show_status || $t_show_resolution ) {
 	if( $t_show_resolution ) {
 		# Resolution
 		echo '<th class="category"><label for="resolution">' . lang_get( 'resolution' ) . '</label></th>';
-		echo '<td><select ' . helper_get_tab_index() . ' id="resolution" name="resolution">';
+		
+		# choose color based on configured attribute
+		$t_highlight_label = html_get_highlight_css_class( $t_bug, null, null, 'resolution' );
+
+		if( $t_highlight_label != "" ) {
+			echo '<td class="' . $t_highlight_label .  '">';
+		} else {
+			echo '<td>';
+		}
+		echo '<select ' . helper_get_tab_index() . ' id="resolution" name="resolution">';
 		print_enum_string_option_list( 'resolution', $t_bug->resolution );
 		echo '</select></td>';
 	} else {

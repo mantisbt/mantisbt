@@ -231,6 +231,10 @@ function string_attribute( $p_string ) {
 	return string_html_specialchars( $p_string );
 }
 
+function string_css( $p_string ) {
+	return preg_replace( "/[^a-zA-Z0-9]/", "", $p_string );
+}
+
 /**
  * Process a string for inclusion in a URL as a GET parameter
  * @param string $p_string String to be processed.

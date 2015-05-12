@@ -3070,6 +3070,12 @@ $g_set_configuration_threshold = ADMINISTRATOR;
 ####################################
 
 /**
+ * an issue's attribute on which the highlight color will be based
+ * @global string $g_highlight_attribute
+ */
+$g_highlight_attribute = 'status';
+
+/**
  * status color codes, using the Tango color palette
  * @global array $g_status_colors
  */
@@ -3081,6 +3087,65 @@ $g_status_colors = array(
 	'assigned'     => '#c2dfff', # blue   (sky blue    #729fcf)
 	'resolved'     => '#d2f5b0', # green  (chameleon   #8ae234)
 	'closed'       => '#c9ccc4'  # grey   (aluminum    #babdb6)
+);
+
+/**
+ * priority color codes, using the Tango color palette
+ * @global array $g_priority_colors
+ */
+$g_priority_colors = array(
+	'none'      => '#ffffff', # white
+	'low'       => '#babdb6', # aluminium
+	'normal'    => '#729fcf', # sky blue
+	'high'      => '#fce94f', # butter
+	'urgent'    => '#f57900', # orange
+	'immediate' => '#a40000', # scarlet red
+);
+
+/**
+ * severity color codes, using the Tango color palette
+ * @global array $g_severity_colors
+ */
+$g_severity_colors = array(
+	'feature' => '#8ae234', # chameleon
+	'trivial' => '#babdb6', # aluminium
+	'text'    => '#ffffff', # white
+	'tweak'   => '#729fcf', # sky blue
+	'minor'   => '#fce94f', # butter
+	'major'   => '#f57900', # orange
+	'crash'   => '#75507b', # plum
+	'block'   => '#a40000', # scarlet red
+);
+
+/**
+ * reproducibility color codes, using the Tango color palette
+ * @global array $g_reproducibility_colors
+ */
+$g_reproducibility_colors = array(
+	'always'              => '#8ae234', # chameleon
+	'sometimes'           => '#fce94f', # butter
+	'random'              => '#f57900', # orange
+	'have not tried'      => '#babdb6', # aluminium
+	'unable to duplicate' => '#75507b', # plum
+	'N/A'                 => '#ffffff', # white
+);
+
+//10:open,20:fixed,30:reopened,40:unable to duplicate,50:not fixable,60:duplicate,70:not a bug,80:suspended,90:wont fix';
+
+/**
+ * reproducibility color codes, using the Tango color palette
+ * @global array $g_reproducibility_colors
+ */
+$g_resolution_colors = array(
+	'open'                => '#729fcf', # sky blue
+	'fixed'               => '#73d216', # chameleon
+	'reopened'            => '#a40000', # scarlet red
+	'unable to duplicate' => '#edd400', # butter
+	'not fixable'         => '#f57900', # orange
+	'duplicate'           => '#babdb6', # aluminium
+	'not a bug'           => '#ffffff', # white
+	'suspended'           => '#c17d11', # chocolate
+	'wont fix'            => '#ad7fa8', # plum
 );
 
 /**
