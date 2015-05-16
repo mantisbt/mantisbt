@@ -514,7 +514,7 @@ $s_selected_project = 'Ußjewählt Projäk';
 $s_valid_project_msg = 'Do moß e jöltesh Projäk ußwähle.';
 $s_signup_done_title = 'De Aanmeldung als Metmaacher es jemaat.';
 $s_password_emailed_msg = 'Mer jrattoleere. Do häs Desch jäz aanjemelldt als ene Metmaacher. Do kriß jäz en <i lang="en">e-mail</i> zohjescheck, öm ze sinn, dat Ding <i lang="en">e-mail</i>-Addräß reschtesch jetipp es un et deiht. Doh shteiht ene Lengk dren. Dämm nohzejonn, schalldt Ding Aanmeldung endjöltesch frei.';
-$s_no_reponse_msg = 'Do häs sibbe Dääch, öm Ding Aanmeldung endjöltesch ze beschtääteje. Wann De dat nit deihs, künnt Ding neu Aanmeldung widder opjehovve wääde.';
+$s_no_reponse_msg = 'Do häs sibbe Dääch, öm Ding Aanmeldung endjöltesch ze beschtääteje. Wann De dat nit deihs, künnt Ding neuje Aanmeldong widder opjehovve wääde.';
 $s_signup_info = 'Wann De dat Fommulaa heh kumplätt ußjeföllt has, un Ding Antwoote jeprööf sin, kriß De en <i lang="en">e-mail</i> jescheck, zom Beschtäätejje, aan di <i lang="en">e-mail</i>-Addräß, di De aanjejovve häs.<br />Met dä <i lang="en">e-mail</i> kanns De Ding Aanmeldung endjöltesch maache. Wann De dat nit ennerhallef vun sibbe Dääsch deihs, weed se widder fott jemaat.<br />Do moß en jöltejje Adräß för Ding <i lang="en">e-mail</i> aanjävve, domet dat all fluppe kann.';
 $s_signup_title = 'Aanmälde';
 $s_signup_button = 'Aanmälde';
