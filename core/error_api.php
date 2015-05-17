@@ -128,7 +128,6 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 			$t_error_type = 'SYSTEM ERROR';
 			break;
 		case E_DEPRECATED:
-		case E_USER_DEPRECATED:
 			$t_error_type = 'DEPRECATED';
 			break;
 		case E_USER_ERROR:
