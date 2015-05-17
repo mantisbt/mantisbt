@@ -90,7 +90,7 @@ function bug_group_action_print_bottom() {
 function bug_group_action_print_bug_list( array $p_bug_ids_array ) {
 	$t_legend_position = config_get( 'status_legend_position' );
 
-	if( STATUS_LEGEND_POSITION_TOP == $t_legend_position ) {
+	if( ( $t_legend_position & STATUS_LEGEND_POSITION_TOP ) == STATUS_LEGEND_POSITION_TOP ) {
 		html_status_legend();
 		echo '<br />';
 	}
@@ -115,7 +115,7 @@ function bug_group_action_print_bug_list( array $p_bug_ids_array ) {
 	echo '</table>';
 	echo '</div>';
 
-	if( STATUS_LEGEND_POSITION_BOTTOM == $t_legend_position ) {
+	if( ( $t_legend_position & STATUS_LEGEND_POSITION_BOTTOM ) == STATUS_LEGEND_POSITION_BOTTOM) {
 		echo '<br />';
 		html_status_legend();
 	}

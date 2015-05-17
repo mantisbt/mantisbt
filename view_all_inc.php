@@ -88,9 +88,9 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 
 # -- ====================== BUG LIST ============================ --
 
-$t_status_legend_position = config_get( 'status_legend_position' );
+$t_legend_position = config_get( 'status_legend_position' );
 
-if( $t_status_legend_position == STATUS_LEGEND_POSITION_TOP || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
+if( ( $t_legend_position & STATUS_LEGEND_POSITION_TOP ) == STATUS_LEGEND_POSITION_TOP ) {
 	html_status_legend();
 }
 ?>
@@ -255,7 +255,7 @@ write_bug_rows( $t_rows );
 
 <?php
 
-if( $t_status_legend_position == STATUS_LEGEND_POSITION_BOTTOM || $t_status_legend_position == STATUS_LEGEND_POSITION_BOTH ) {
+if( ( $t_legend_position & STATUS_LEGEND_POSITION_BOTTOM ) == STATUS_LEGEND_POSITION_BOTTOM ) {
 	html_status_legend();
 }
 
