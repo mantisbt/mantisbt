@@ -53,9 +53,11 @@ $g_db_connected = false;
 # @global bool $g_db_log_queries
 $g_db_log_queries = ( 0 != ( config_get_global( 'log_level' ) & LOG_DATABASE ) );
 
-# set adodb fetch mode
+# set adodb to associative fetch mode with lowercase column names
 # @global bool $ADODB_FETCH_MODE
+global $ADODB_FETCH_MODE;
 $ADODB_FETCH_MODE = ADODB_FETCH_ASSOC;
+define( 'ADODB_ASSOC_CASE', ADODB_ASSOC_CASE_LOWER );
 
 /**
  * Mantis Database Parameters Count class
