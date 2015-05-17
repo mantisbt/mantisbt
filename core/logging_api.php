@@ -46,7 +46,7 @@ $g_log_levels = array(
 	LOG_WEBSERVICE => 'WEBSERVICE'
 );
 
-$t_call_once = True;
+$s_check_log_writable = true;
 
 /**
  * Log an event
@@ -111,12 +111,12 @@ function log_event( $p_level, $p_msg ) {
 	$t_plugin_event = '[' . $t_level . '] ' . $t_msg;
 	if( function_exists( 'event_signal' ) ) {
 		event_signal( 'EVENT_LOG', array( $t_plugin_event ) );
+
 	}
 	$t_log_destination = config_get_global( 'log_destination' );
 	if( is_blank( $t_log_destination ) ) {
 		$t_destination = '';
-	}
-	else {
+	} else {
 		$t_result = explode( ':', $t_log_destination, 2 );
 		$t_destination = $t_result[0];
 		if( isset( $t_result[1] ) ) {
@@ -126,18 +126,18 @@ function log_event( $p_level, $p_msg ) {
 
 	$t_php_event = $t_now . ' ' . $t_level . ' ' . $t_msg;
 
-	if( isset( $t_modifiers ) && !( is_writable ( $t_modifiers ) ) && $t_call_once ){
-		trigger_error( "Warning : $t_modifiers is not a writable file", E_USER_WARNING );
-		$t_call_once = false;	
-	}
-
 
 	switch( $t_destination ) {
 		case 'none':
 			break;
 		case 'file':
-			if( isset( $t_modifiers ) && ( is_writable ( $t_modifiers ) ) )
+			if( $s_check_log_writable && isset( $t_modifiers ) && !( is_writable ( $t_modifiers ) ) ){
+				trigger_error( "Warning : $t_modifiers is not a writable file", E_USER_WARNING );
+				$s_check_log_writable = false;	
+			}
+			if( isset( $t_modifiers ) && ( is_writable ( $t_modifiers ) ) ){
 				error_log( $t_php_event . PHP_EOL, 3, $t_modifiers );
+			}
 			break;
 		case 'page':
 			global $g_log_events;
