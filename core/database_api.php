@@ -506,45 +506,25 @@ function db_fetch_array( IteratorAggregate &$p_result ) {
 		return false;
 	}
 
-	# mysql obeys FETCH_MODE_BOTH, hence ->fields works, other drivers do not support this
-	if( $g_db_type == 'mysql' || $g_db_type == 'odbc_mssql'  || $g_db_type == 'mssqlnative' ) {
-		$t_array = $p_result->fields;
-		$p_result->MoveNext();
-		return $t_array;
-	} else {
-		$t_row = $p_result->GetRowAssoc( ADODB_ASSOC_CASE_LOWER );
-		static $s_array_result;
-		static $s_array_fields;
+	# Retrieve the fields from the recordset
+	$t_row = $p_result->fields;
 
-		# Oci8 returns null values for empty strings
-		if( db_is_oracle() ) {
-			foreach( $t_row as &$t_value ) {
-				if( !isset( $t_value ) ) {
-					$t_value = '';
-				}
-			}
+	# Additional handling for specific RDBMS
+	if( db_is_pgsql() ) {
+		# pgsql's boolean fields are stored as 't' or 'f' and must be converted
+		static $s_current_result = null, $s_convert_needed;
+
+		if( $s_current_result != $p_result ) {
+			# Processing a new query
+			$s_current_result = $p_result;
+			$s_convert_needed = false;
+		} elseif( !$s_convert_needed ) {
+			# No conversion needed, return the row as-is
+			$p_result->MoveNext();
+			return $t_row;
 		}
 
-		if( $s_array_result != $p_result ) {
-			# new query
-			$s_array_result = $p_result;
-			$s_array_fields = null;
-		} else {
-			if( $s_array_fields === null ) {
-				$p_result->MoveNext();
-				return $t_row;
-			}
-		}
-
-		$t_convert = false;
-		$t_fieldcount = $p_result->FieldCount();
-		for( $i = 0; $i < $t_fieldcount; $i++ ) {
-			if( isset( $s_array_fields[$i] ) ) {
-				$t_field = $s_array_fields[$i];
-			} else {
-				$t_field = $p_result->FetchField( $i );
-				$s_array_fields[$i] = $t_field;
-			}
+		foreach( $p_result->FieldTypesArray() as $t_field ) {
 			switch( $t_field->type ) {
 				case 'bool':
 					switch( $t_row[$t_field->name] ) {
@@ -555,19 +535,22 @@ function db_fetch_array( IteratorAggregate &$p_result ) {
 							$t_row[$t_field->name] = true;
 							break;
 					}
-					$t_convert= true;
-					break;
-				default :
+					$s_convert_needed = true;
 					break;
 			}
 		}
 
-		if( $t_convert == false ) {
-			$s_array_fields = null;
+	} elseif( db_is_oracle() ) {
+		# oci8 returns null values for empty strings, convert them back
+		foreach( $t_row as &$t_value ) {
+			if( !isset( $t_value ) ) {
+				$t_value = '';
+			}
 		}
-		$p_result->MoveNext();
-		return $t_row;
 	}
+
+	$p_result->MoveNext();
+	return $t_row;
 }
 
 /**
