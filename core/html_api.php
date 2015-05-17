@@ -1345,18 +1345,22 @@ function print_summary_menu( $p_page = '' ) {
 
 /**
  * Print the color legend for the status colors
+ * @param bool $p_restrict_by_filter If true, only display status visible in current filter
  * @return void
  */
-function html_status_legend() {
-	# Don't show the legend if only one status is selected by the current filter
-	$t_current_filter = current_user_get_bug_filter();
-	if( $t_current_filter === false ) {
-		$t_current_filter = filter_get_default();
-	}
-	$t_simple_filter = $t_current_filter['_view_type'] == 'simple';
-	if( $t_simple_filter ) {
-		if( !filter_field_is_any( $t_current_filter[FILTER_PROPERTY_STATUS][0] ) ) {
-			return;
+function html_status_legend( $p_restrict_by_filter = false ) {
+
+	if( $p_restrict_by_filter ) {
+		# Don't show the legend if only one status is selected by the current filter
+		$t_current_filter = current_user_get_bug_filter();
+		if( $t_current_filter === false ) {
+			$t_current_filter = filter_get_default();
+		}
+		$t_simple_filter = $t_current_filter['_view_type'] == 'simple';
+		if( $t_simple_filter ) {
+			if( !filter_field_is_any( $t_current_filter[FILTER_PROPERTY_STATUS][0] ) ) {
+				return;
+			}
 		}
 	}
 
@@ -1376,25 +1380,27 @@ function html_status_legend() {
 		}
 	}
 
-	# Remove status values that won't appear as a result of the current filter
-	foreach( $t_status_array as $t_status => $t_name ) {
-		if( $t_simple_filter ) {
-			if( !filter_field_is_none( $t_current_filter[FILTER_PROPERTY_HIDE_STATUS][0] ) &&
-				$t_status >= $t_current_filter[FILTER_PROPERTY_HIDE_STATUS][0] ) {
-				unset( $t_status_array[$t_status] );
-			}
-		} else {
-			if( !in_array( META_FILTER_ANY, $t_current_filter[FILTER_PROPERTY_STATUS] ) &&
-				!in_array( $t_status, $t_current_filter[FILTER_PROPERTY_STATUS] ) ) {
-				unset( $t_status_array[$t_status] );
+	if( $p_restrict_by_filter ) {
+		# Remove status values that won't appear as a result of the current filter
+		foreach( $t_status_array as $t_status => $t_name ) {
+			if( $t_simple_filter ) {
+				if( !filter_field_is_none( $t_current_filter[FILTER_PROPERTY_HIDE_STATUS][0] ) &&
+					$t_status >= $t_current_filter[FILTER_PROPERTY_HIDE_STATUS][0] ) {
+					unset( $t_status_array[$t_status] );
+				}
+			} else {
+				if( !in_array( META_FILTER_ANY, $t_current_filter[FILTER_PROPERTY_STATUS] ) &&
+					!in_array( $t_status, $t_current_filter[FILTER_PROPERTY_STATUS] ) ) {
+					unset( $t_status_array[$t_status] );
+				}
 			}
 		}
-	}
 
-	# If there aren't at least two statuses showable by the current filter,
-	# don't draw the status bar
-	if( count( $t_status_array ) <= 1 ) {
-		return;
+		# If there aren't at least two statuses showable by the current filter,
+		# don't draw the status bar
+		if( count( $t_status_array ) <= 1 ) {
+			return;
+		}
 	}
 
 	echo '<br />';
