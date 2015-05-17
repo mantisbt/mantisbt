@@ -55,7 +55,7 @@ $s_check_log_writable = true;
  * @return void
  */
 function log_event( $p_level, $p_msg ) {
-	global $g_log_levels;
+	global $g_log_levels, ;
 
 	# check to see if logging is enabled
 	$t_sys_log = config_get_global( 'log_level' );
@@ -132,7 +132,7 @@ function log_event( $p_level, $p_msg ) {
 			break;
 		case 'file':
 			if( $s_check_log_writable && isset( $t_modifiers ) && !( is_writable ( $t_modifiers ) ) ){
-				trigger_error( "Warning : $t_modifiers is not a writable file", E_USER_WARNING );
+				trigger_error( sprintf( lang_get('warning_log_not_writable'), $t_modifiers ) );
 				$s_check_log_writable = false;	
 			}
 			if( isset( $t_modifiers ) && ( is_writable ( $t_modifiers ) ) ){
