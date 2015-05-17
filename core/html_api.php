@@ -1344,11 +1344,12 @@ function print_summary_menu( $p_page = '' ) {
 }
 
 /**
- * Print the color legend for the status colors
+ * Print the color legend for the status colors at the requested position
+ * @param int  $p_display_position   STATUS_LEGEND_POSITION_TOP or STATUS_LEGEND_POSITION_BOTTOM
  * @param bool $p_restrict_by_filter If true, only display status visible in current filter
  * @return void
  */
-function html_status_legend( $p_restrict_by_filter = false ) {
+function html_status_legend( $p_display_position, $p_restrict_by_filter = false ) {
 
 	if( $p_restrict_by_filter ) {
 		# Don't show the legend if only one status is selected by the current filter
@@ -1403,23 +1404,31 @@ function html_status_legend( $p_restrict_by_filter = false ) {
 		}
 	}
 
-	echo '<br />';
-	echo '<table class="status-legend width100" cellspacing="1">';
-	echo '<tr>';
+	# Display the legend
+	$t_legend_position = config_get( 'status_legend_position' ) & $p_display_position;
 
-	# draw the status bar
-	$t_status_enum_string = config_get( 'status_enum_string' );
-	foreach( $t_status_array as $t_status => $t_name ) {
-		$t_val = isset( $t_status_names[$t_status] ) ? $t_status_names[$t_status] : $t_status_array[$t_status];
-		$t_status_label = MantisEnum::getLabel( $t_status_enum_string, $t_status );
+	if( STATUS_LEGEND_POSITION_NONE != $t_legend_position ) {
+		echo '<br />';
+		echo '<table class="status-legend width100" cellspacing="1">';
+		echo '<tr>';
 
-		echo '<td class="small-caption ' . $t_status_label . '-color">' . $t_val . '</td>';
+		# draw the status bar
+		$t_status_enum_string = config_get( 'status_enum_string' );
+		foreach( $t_status_array as $t_status => $t_name ) {
+			$t_val = isset( $t_status_names[$t_status] ) ? $t_status_names[$t_status] : $t_status_array[$t_status];
+			$t_status_label = MantisEnum::getLabel( $t_status_enum_string, $t_status );
+
+			echo '<td class="small-caption ' . $t_status_label . '-color">' . $t_val . '</td>';
+		}
+
+		echo '</tr>';
+		echo '</table>';
+		if( ON == config_get( 'status_percentage_legend' ) ) {
+			html_status_percentage_legend();
+		}
 	}
-
-	echo '</tr>';
-	echo '</table>';
-	if( ON == config_get( 'status_percentage_legend' ) ) {
-		html_status_percentage_legend();
+	if( STATUS_LEGEND_POSITION_TOP == $t_legend_position ) {
+		echo '<br />';
 	}
 }
 

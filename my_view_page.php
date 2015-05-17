@@ -91,14 +91,7 @@ $t_project_id = helper_get_current_project();
 ?>
 
 <div>
-<?php
-$t_legend_position = config_get( 'status_legend_position' );
-
-if( ( $t_legend_position & STATUS_LEGEND_POSITION_TOP ) == STATUS_LEGEND_POSITION_TOP ) {
-	html_status_legend();
-	echo '<br />';
-}
-?>
+<?php html_status_legend( STATUS_LEGEND_POSITION_TOP ); ?>
 
 <div>
 <?php include( $g_core_path . 'timeline_inc.php' ); ?>
@@ -182,10 +175,6 @@ if( ON == $t_boxes_position && $t_counter == $t_number_of_boxes && 1 == $t_count
 </div>
 
 <?php
-if( ( $t_legend_position & STATUS_LEGEND_POSITION_BOTTOM ) == STATUS_LEGEND_POSITION_BOTTOM ) {
-	html_status_legend();
-}
-?>
+html_status_legend( STATUS_LEGEND_POSITION_BOTTOM );
 
-<?php
 html_page_bottom();

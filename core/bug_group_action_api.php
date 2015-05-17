@@ -88,12 +88,7 @@ function bug_group_action_print_bottom() {
  * @return void
  */
 function bug_group_action_print_bug_list( array $p_bug_ids_array ) {
-	$t_legend_position = config_get( 'status_legend_position' );
-
-	if( ( $t_legend_position & STATUS_LEGEND_POSITION_TOP ) == STATUS_LEGEND_POSITION_TOP ) {
-		html_status_legend();
-		echo '<br />';
-	}
+	html_status_legend( STATUS_LEGEND_POSITION_TOP );
 
 	echo '<div id="action-group-issues-div">';
 	echo '<table>';
@@ -115,10 +110,7 @@ function bug_group_action_print_bug_list( array $p_bug_ids_array ) {
 	echo '</table>';
 	echo '</div>';
 
-	if( ( $t_legend_position & STATUS_LEGEND_POSITION_BOTTOM ) == STATUS_LEGEND_POSITION_BOTTOM) {
-		echo '<br />';
-		html_status_legend();
-	}
+	html_status_legend( STATUS_LEGEND_POSITION_BOTTOM );
 }
 
 /**

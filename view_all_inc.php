@@ -87,12 +87,8 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 
 
 # -- ====================== BUG LIST ============================ --
+html_status_legend( STATUS_LEGEND_POSITION_TOP, true );
 
-$t_legend_position = config_get( 'status_legend_position' );
-
-if( ( $t_legend_position & STATUS_LEGEND_POSITION_TOP ) == STATUS_LEGEND_POSITION_TOP ) {
-	html_status_legend( true );
-}
 ?>
 <br />
 <form id="bug_action" method="get" action="bug_actiongroup_page.php">
@@ -254,10 +250,7 @@ write_bug_rows( $t_rows );
 </form>
 
 <?php
-
-if( ( $t_legend_position & STATUS_LEGEND_POSITION_BOTTOM ) == STATUS_LEGEND_POSITION_BOTTOM ) {
-	html_status_legend( true );
-}
+html_status_legend( STATUS_LEGEND_POSITION_BOTTOM, true );
 
 # -- ====================== FILTER FORM ========================= --
 if( ( $t_filter_position & FILTER_POSITION_BOTTOM ) == FILTER_POSITION_BOTTOM ) {
