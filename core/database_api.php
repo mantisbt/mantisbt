@@ -313,7 +313,10 @@ function db_check_identifier_size( $p_identifier ) {
  * @deprecated db_query should be used in preference to this function. This function may be removed in 2.0
  */
 function db_query_bound() {
-  return call_user_func_array( 'db_query', func_get_args() );
+	error_parameters( __FUNCTION__ . '()', 'db_query()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
+	return call_user_func_array( 'db_query', func_get_args() );
 }
 
 /**
