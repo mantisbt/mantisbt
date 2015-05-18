@@ -46,7 +46,6 @@ $g_log_levels = array(
 	LOG_WEBSERVICE => 'WEBSERVICE'
 );
 
-$s_check_log_writable = true;
 
 /**
  * Log an event
@@ -55,7 +54,7 @@ $s_check_log_writable = true;
  * @return void
  */
 function log_event( $p_level, $p_msg ) {
-	global $g_log_levels, ;
+	global $g_log_levels;
 
 	# check to see if logging is enabled
 	$t_sys_log = config_get_global( 'log_level' );
@@ -125,18 +124,22 @@ function log_event( $p_level, $p_msg ) {
 	}
 
 	$t_php_event = $t_now . ' ' . $t_level . ' ' . $t_msg;
+	$s_check_log_writable = true;
 
 
 	switch( $t_destination ) {
 		case 'none':
 			break;
 		case 'file':
-			if( $s_check_log_writable && isset( $t_modifiers ) && !( is_writable ( $t_modifiers ) ) ){
-				trigger_error( sprintf( lang_get('warning_log_not_writable'), $t_modifiers ) );
-				$s_check_log_writable = false;	
-			}
-			if( isset( $t_modifiers ) && ( is_writable ( $t_modifiers ) ) ){
-				error_log( $t_php_event . PHP_EOL, 3, $t_modifiers );
+			if( isset( $t_modifiers ) ) {
+				$t_is_writable = ( is_writable( $t_modifiers ) );
+				if( $s_check_log_writable && !$t_is_writable ) {
+					trigger_error( sprintf( lang_get('warning_log_not_writable'), $t_modifiers ) );
+					$s_check_log_writable = false;	
+				}
+				if( $t_is_writable ){
+					error_log( $t_php_event . PHP_EOL, 3, $t_modifiers );
+				}
 			}
 			break;
 		case 'page':
