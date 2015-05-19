@@ -1344,19 +1344,24 @@ function print_summary_menu( $p_page = '' ) {
 }
 
 /**
- * Print the color legend for the status colors
+ * Print the color legend for the status colors at the requested position
+ * @param int  $p_display_position   STATUS_LEGEND_POSITION_TOP or STATUS_LEGEND_POSITION_BOTTOM
+ * @param bool $p_restrict_by_filter If true, only display status visible in current filter
  * @return void
  */
-function html_status_legend() {
-	# Don't show the legend if only one status is selected by the current filter
-	$t_current_filter = current_user_get_bug_filter();
-	if( $t_current_filter === false ) {
-		$t_current_filter = filter_get_default();
-	}
-	$t_simple_filter = $t_current_filter['_view_type'] == 'simple';
-	if( $t_simple_filter ) {
-		if( !filter_field_is_any( $t_current_filter[FILTER_PROPERTY_STATUS][0] ) ) {
-			return;
+function html_status_legend( $p_display_position, $p_restrict_by_filter = false ) {
+
+	if( $p_restrict_by_filter ) {
+		# Don't show the legend if only one status is selected by the current filter
+		$t_current_filter = current_user_get_bug_filter();
+		if( $t_current_filter === false ) {
+			$t_current_filter = filter_get_default();
+		}
+		$t_simple_filter = $t_current_filter['_view_type'] == 'simple';
+		if( $t_simple_filter ) {
+			if( !filter_field_is_any( $t_current_filter[FILTER_PROPERTY_STATUS][0] ) ) {
+				return;
+			}
 		}
 	}
 
@@ -1376,44 +1381,54 @@ function html_status_legend() {
 		}
 	}
 
-	# Remove status values that won't appear as a result of the current filter
-	foreach( $t_status_array as $t_status => $t_name ) {
-		if( $t_simple_filter ) {
-			if( !filter_field_is_none( $t_current_filter[FILTER_PROPERTY_HIDE_STATUS][0] ) &&
-				$t_status >= $t_current_filter[FILTER_PROPERTY_HIDE_STATUS][0] ) {
-				unset( $t_status_array[$t_status] );
+	if( $p_restrict_by_filter ) {
+		# Remove status values that won't appear as a result of the current filter
+		foreach( $t_status_array as $t_status => $t_name ) {
+			if( $t_simple_filter ) {
+				if( !filter_field_is_none( $t_current_filter[FILTER_PROPERTY_HIDE_STATUS][0] ) &&
+					$t_status >= $t_current_filter[FILTER_PROPERTY_HIDE_STATUS][0] ) {
+					unset( $t_status_array[$t_status] );
+				}
+			} else {
+				if( !in_array( META_FILTER_ANY, $t_current_filter[FILTER_PROPERTY_STATUS] ) &&
+					!in_array( $t_status, $t_current_filter[FILTER_PROPERTY_STATUS] ) ) {
+					unset( $t_status_array[$t_status] );
+				}
 			}
-		} else {
-			if( !in_array( META_FILTER_ANY, $t_current_filter[FILTER_PROPERTY_STATUS] ) &&
-				!in_array( $t_status, $t_current_filter[FILTER_PROPERTY_STATUS] ) ) {
-				unset( $t_status_array[$t_status] );
-			}
+		}
+
+		# If there aren't at least two statuses showable by the current filter,
+		# don't draw the status bar
+		if( count( $t_status_array ) <= 1 ) {
+			return;
 		}
 	}
 
-	# If there aren't at least two statuses showable by the current filter,
-	# don't draw the status bar
-	if( count( $t_status_array ) <= 1 ) {
-		return;
+	# Display the legend
+	$t_legend_position = config_get( 'status_legend_position' ) & $p_display_position;
+
+	if( STATUS_LEGEND_POSITION_NONE != $t_legend_position ) {
+		echo '<br />';
+		echo '<table class="status-legend width100" cellspacing="1">';
+		echo '<tr>';
+
+		# draw the status bar
+		$t_status_enum_string = config_get( 'status_enum_string' );
+		foreach( $t_status_array as $t_status => $t_name ) {
+			$t_val = isset( $t_status_names[$t_status] ) ? $t_status_names[$t_status] : $t_status_array[$t_status];
+			$t_status_label = MantisEnum::getLabel( $t_status_enum_string, $t_status );
+
+			echo '<td class="small-caption ' . $t_status_label . '-color">' . $t_val . '</td>';
+		}
+
+		echo '</tr>';
+		echo '</table>';
+		if( ON == config_get( 'status_percentage_legend' ) ) {
+			html_status_percentage_legend();
+		}
 	}
-
-	echo '<br />';
-	echo '<table class="status-legend width100" cellspacing="1">';
-	echo '<tr>';
-
-	# draw the status bar
-	$t_status_enum_string = config_get( 'status_enum_string' );
-	foreach( $t_status_array as $t_status => $t_name ) {
-		$t_val = isset( $t_status_names[$t_status] ) ? $t_status_names[$t_status] : $t_status_array[$t_status];
-		$t_status_label = MantisEnum::getLabel( $t_status_enum_string, $t_status );
-
-		echo '<td class="small-caption ' . $t_status_label . '-color">' . $t_val . '</td>';
-	}
-
-	echo '</tr>';
-	echo '</table>';
-	if( ON == config_get( 'status_percentage_legend' ) ) {
-		html_status_percentage_legend();
+	if( STATUS_LEGEND_POSITION_TOP == $t_legend_position ) {
+		echo '<br />';
 	}
 }
 

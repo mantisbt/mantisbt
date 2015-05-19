@@ -984,8 +984,12 @@ $g_excel_columns = array (
 $g_show_bug_project_links = ON;
 
 /**
- * Position of the status colour legend, can be: POSITION_*
- * see constant_inc.php. (*: TOP , BOTTOM , or BOTH)
+ * Position of the status color legend
+ * Allowed values are:
+ * - STATUS_LEGEND_POSITION_NONE - do not display the legend at all
+ * - STATUS_LEGEND_POSITION_TOP
+ * - STATUS_LEGEND_POSITION_BOTTOM (default)
+ * - STATUS_LEGEND_POSITION_BOTH
  * @global integer $g_status_legend_position
  */
 $g_status_legend_position = STATUS_LEGEND_POSITION_BOTTOM;
