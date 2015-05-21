@@ -69,9 +69,9 @@ print_admin_menu_bar( 'test_langs.php' );
 </div>
 
 <div class="widget-body">
-<div class="widget-main no-padding">
+<div class="widget-main">
 <div class="table-responsive">
-	<table class="table table-bordered table-striped table-condensed table-hover">
+	<table>
 <?php
 # check core language files
 if( function_exists( 'scandir' ) ) {

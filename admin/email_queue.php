@@ -144,15 +144,15 @@ if( count( $t_ids ) > 0 ) {
 	echo '</div>';
 	echo '</div>';
 } else {
-	echo '<p class="lead">Email Queue Empty</div>';
+	echo '<p class="lead">Email Queue Empty</p>';
 }
 ?>
-</div>
-	<br /><hr /><br />
-	<div id="test-email-div" class="form-container">
+	<div class="widget-box widget-color-blue2">
+	<div class="widget-body">
+	<div class="widget-main">
 		<form method="post" action="<?php echo $_SERVER['SCRIPT_NAME']?>">
 			<fieldset>
-				<span class="title">Testing Email</span>
+				<h4>Testing Email</h4>
 				<p>You can test the ability for MantisBT to send email notifications
 					with this form. Just click "Send Mail". If the page takes a very
 					long time to reappear or results in an error then you will need to
@@ -166,9 +166,12 @@ if( count( $t_ids ) > 0 ) {
 				<p>
 					Email Address: <?php echo config_get_global( 'webmaster_email' );?>
 				</p>
-				<input type="submit" value="Send Mail" name="mail_test" />
+				<input type="submit" value="Send Mail" name="mail_test" class="btn btn-primary btn-white btn-round" />
 			</fieldset>
 		</form>
 	</div>
+	</div></div></div>
+
+</div>
 <?php
 layout_admin_page_end();
