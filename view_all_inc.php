@@ -85,6 +85,7 @@ if( ( $t_filter_position & FILTER_POSITION_TOP ) == FILTER_POSITION_TOP ) {
 
 
 # -- ====================== BUG LIST ============================ --
+html_status_legend( STATUS_LEGEND_POSITION_TOP, true );
 
 ?>
 <div class="col-md-12 col-xs-12">

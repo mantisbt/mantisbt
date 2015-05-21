@@ -40,12 +40,17 @@
  *
  * @author EugeneZelenko
  * @author Jim-by
+ * @author Red Winged Duck
  */
 
 $s_plugin_XmlImportExport_title = 'Імпарт/Экспарт праблемаў';
 $s_plugin_XmlImportExport_description = 'Дадае ў MantisBT магчымасьць імпарту і экспарту у фармат XML.';
 $s_plugin_XmlImportExport_import = 'Імпарт праблемаў';
 $s_plugin_XmlImportExport_export = 'Экспарт у фармат XML';
+$s_plugin_XmlImportExport_config_title = 'Канфігурацыя ўзроўняў доступу для XML-імпарту/экспарту';
+$s_plugin_XmlImportExport_import_threshold = 'Імпарт праблемаў';
+$s_plugin_XmlImportExport_export_threshold = 'Экспарт праблемаў';
+$s_plugin_XmlImportExport_action_update = 'Абнавіць';
 $s_plugin_XmlImportExport_importing_in_project = 'Імпартаваньне праблемаў у праект:';
 $s_plugin_XmlImportExport_import_options = 'Налады імпарту';
 $s_plugin_XmlImportExport_cross_references = 'Узаемныя спасылкі';

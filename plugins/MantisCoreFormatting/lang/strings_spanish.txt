@@ -39,6 +39,7 @@
  * @file
  *
  * @author Bithunter
+ * @author Fitoschido
  * @author Locos epraix
  */
 
@@ -51,4 +52,4 @@ $s_plugin_format_process_urls = 'Procesamiento de URL';
 $s_plugin_format_process_buglinks = 'Enlaces internos MantisBT (Incidencias/Notas)';
 $s_plugin_format_process_buglinks_info = 'Su configuración define las etiquedas de la siguiente forma: <em>Incidencia</em> como "<literal>%s</literal>" y <em>Nota</em> como "<literal>%s</literal>"';
 $s_plugin_format_enabled = 'Habilitado';
-$s_plugin_format_disabled = 'Deshabilitado';
+$s_plugin_format_disabled = 'Desactivado';

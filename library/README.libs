@@ -6,8 +6,10 @@ The version and status of each is summarized below:
 directory       | project         | version   | status
 -------------------------------------------------------------------
 adodb           | adodb           | v5.19     | patched [1][3]
-disposable      | disposable      | 1.1.0     | unpatched
-ezc             | ez Components   | 2009.2.1  | unpatched
+disposable      | disposable      | 2.0.0 [4] | unpatched [1]
+ezc             | Zeta Components |           |
+  /Base         | Zeta Base       | 1.9       | unpatched [1]
+  /Graph        | Zeta Graph      | 1.5.2     | unpatched [1]
 phpmailer       | PHPMailer       | 5.2.9     | unpatched [1]
 rssbuilder      | RSSBuilder      | 2.2.1     | patched [2]
 utf8            | phputf8         | 0.5       | unpatched
@@ -18,13 +20,16 @@ securimage      | PHP Captcha     | 3.5.4     | unpatched [1]
     repository for details
 [2] removed __autoload function
 [3] fixed PHP notice, cherry-picked commit from upstream master branch
+[4] The bundled version is actually a few commits ahead of 2.0.0 and is not an
+    "official" release, but we use it anyway to benefit from the latest updates
+    to the filter data files.
 
 
 Upstream projects
 ==================
 adodb       -  http://adodb.sourceforge.net/  https://github.com/ADOdb/ADOdb
 disposable  -  http://github.com/vboctor/disposable_email_checker
-ezc         -  http://ezcomponents.org/
+ezc         -  http://zetacomponents.org/  https://github.com/zetacomponents
 phpmailer   -  https://github.com/PHPMailer/PHPMailer
 rssbuilder  -  http://code.google.com/p/flaimo-php/
 utf8        -  http://sourceforge.net/projects/phputf8

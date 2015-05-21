@@ -97,10 +97,9 @@ function bug_group_action_print_bug_list( array $p_bug_ids_array ) {
 
 	foreach( $p_bug_ids_array as $t_bug_id ) {
 		# choose color based on status
-		$status_label = html_get_status_css_class( bug_get_field( $t_bug_id, 'status' ), auth_get_current_user_id(), bug_get_field( $t_bug_id, 'project_id' ) );
-		$t_lead = '<i class="fa fa-square-o fa-xlg ' . $status_label . '"></i> ';
-		$t_lead .= ' ' . string_get_bug_view_link( $t_bug_id );
-		echo sprintf( "<tr> <td>%s</td> <td>%s</td> </tr>\n", $t_lead, string_attribute( bug_get_field( $t_bug_id, 'summary' ) ) );
+		$t_status_label = html_get_status_css_class( bug_get_field( $t_bug_id, 'status' ), auth_get_current_user_id(), bug_get_field( $t_bug_id, 'project_id' ) );
+
+		echo sprintf( "<tr class=\"%s\"> <td>%s</td> <td>%s</td> </tr>\n", $t_status_label, string_get_bug_view_link( $t_bug_id ), string_attribute( bug_get_field( $t_bug_id, 'summary' ) ) );
 	}
 }
 

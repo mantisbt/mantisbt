@@ -963,7 +963,9 @@ function filter_get_query_sort_data( array &$p_filter, $p_show_sticky, array $p_
 				$t_def = custom_field_get_definition( $t_custom_field_id );
 				$t_value_field = ( $t_def['type'] == CUSTOM_FIELD_TYPE_TEXTAREA ? 'text' : 'value' );
 				$c_cf_alias = 'custom_field_' . $t_custom_field_id;
-				$t_cf_table_alias = '{custom_field_string}_' . $t_custom_field_id;
+
+				# Distinguish filter table aliases from sort table aliases (see #19670)
+				$t_cf_table_alias = 'cf_sort_' . $t_custom_field_id;
 				$t_cf_select = $t_cf_table_alias . '.' . $t_value_field . ' ' . $c_cf_alias;
 
 				# check to be sure this field wasn't already added to the query.

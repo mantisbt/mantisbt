@@ -1,12 +1,24 @@
 [submodule "library/adodb"]
 	path = library/adodb
 	url = https://github.com/mantisbt/ADOdb.git
+	branch = mantis-1.3
 [submodule "library/phpmailer"]
 	path = library/phpmailer
 	url = https://github.com/mantisbt/PHPMailer
+	branch = mantis
 [submodule "library/disposable"]
 	path = library/disposable
 	url = https://github.com/mantisbt/disposable_email_checker
+	branch = mantisbt
 [submodule "library/securimage"]
 	path = library/securimage
 	url = https://github.com/mantisbt/securimage.git
+	branch = mantis
+[submodule "library/ezc/Base"]
+	path = library/ezc/Base
+	url = https://github.com/mantisbt/ZetaBase.git
+	branch = mantis
+[submodule "library/ezc/Graph"]
+	path = library/ezc/Graph
+	url = https://github.com/mantisbt/ZetaGraph.git
+	branch = mantis

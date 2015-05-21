@@ -30,7 +30,7 @@
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Galician (galego)
+/** Basque (euskara)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -38,29 +38,10 @@
  * @ingroup Language
  * @file
  *
- * @author Elisardojm
- * @author Toliño
+ * @author Arraintxo
  */
 
-$s_plugin_XmlImportExport_title = 'Importar/Exportar os problemas';
-$s_plugin_XmlImportExport_description = 'Engádelle a MantisBT capacidades de importación e exportación baseadas en XML.';
-$s_plugin_XmlImportExport_import = 'Importar os problemas';
-$s_plugin_XmlImportExport_export = 'Exportar en XML';
-$s_plugin_XmlImportExport_config_title = 'Configuración de niveis de acceso de importación/exportación en XML';
-$s_plugin_XmlImportExport_import_threshold = 'Importar incidencias';
-$s_plugin_XmlImportExport_export_threshold = 'Exportar incidencias';
-$s_plugin_XmlImportExport_action_update = 'Actualizar';
-$s_plugin_XmlImportExport_importing_in_project = 'Importar os problemas no proxecto:';
-$s_plugin_XmlImportExport_import_options = 'Opcións de importación';
-$s_plugin_XmlImportExport_cross_references = 'Referencias cruzadas';
-$s_plugin_XmlImportExport_default_strategy = 'Estratexia de conversión por defecto:';
-$s_plugin_XmlImportExport_renumber = 'Renumerar';
-$s_plugin_XmlImportExport_renumber_desc = 'Intente converter as referencias á nova numeración';
-$s_plugin_XmlImportExport_link = 'Ligazón';
-$s_plugin_XmlImportExport_link_desc = 'Converter nunha ligazón cara ao elemento orixinal';
-$s_plugin_XmlImportExport_disable = 'Desactivar';
-$s_plugin_XmlImportExport_disable_desc = 'Deshabilitar a ligazón';
-$s_plugin_XmlImportExport_fallback = 'Estratexia do modo de emerxencia (cando "Renumerar" non é aplicable):';
-$s_plugin_XmlImportExport_fallback_category = 'Categoría do modo de emerxencia:';
-$s_plugin_XmlImportExport_keep_same_category = 'Intentar manter a mesma categoría';
-$s_plugin_XmlImportExport_error_no_xml = 'non se poden atopar as extensións xmlreader e xmlwriter';
+$s_plugin_format_title = 'MantisBT Formatua';
+$s_plugin_format_description = 'Testu prozesatzaile eta formatu plugin ofiziala.';
+$s_plugin_format_config = 'Konfigurazioa';
+$s_plugin_format_process_buglinks_info = 'Zure konfigurazioak <em>Arazoa</em> etiketa "<literal>%s</literal>" moduan definitzen du eta <em>Arazo Oharra</em> etiketa "<literal>%s</literal>" moduan';

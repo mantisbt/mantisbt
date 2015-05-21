@@ -223,6 +223,8 @@ define( 'BUG_HAS_DUPLICATE', 4 );
 define( 'BUG_UPDATE_TYPE_NORMAL', 'update' );
 define( 'BUG_UPDATE_TYPE_ASSIGN', 'assign' );
 define( 'BUG_UPDATE_TYPE_CLOSE', 'close' );
+define( 'BUG_UPDATE_TYPE_REOPEN', 'reopen' );
+define( 'BUG_UPDATE_TYPE_CHANGE_STATUS', 'change_status' );
 
 # error messages
 define( 'ERROR_GENERIC', 0 );
@@ -418,15 +420,13 @@ define( 'ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS', 2901 );
 define( 'POSITION_NONE', 0 );
 define( 'POSITION_TOP', 1 );
 define( 'POSITION_BOTTOM', 2 );
-define( 'POSITION_BOTH', 3 );
+define( 'POSITION_BOTH', 3 ); # POSITION_TOP | POSITION_BOTTOM (bitwise OR)
 
 # Filter Position
 define( 'FILTER_POSITION_NONE', POSITION_NONE );
 define( 'FILTER_POSITION_TOP', POSITION_TOP );
 define( 'FILTER_POSITION_BOTTOM', POSITION_BOTTOM );
 define( 'FILTER_POSITION_BOTH', POSITION_BOTH );
-
-# FILTER_POSITION_TOP | FILTER_POSITION_BOTTOM (bitwise OR)
 
 # Custom Field types
 define( 'CUSTOM_FIELD_TYPE_STRING', 0 );
