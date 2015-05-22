@@ -300,7 +300,7 @@ function html_page_bottom1a( $p_file = null ) {
 }
 
 /**
- * (1) Print the document type and the opening <html> tag
+ * Print the document type and the opening <html> tag
  * @return void
  */
 function html_begin() {
@@ -309,7 +309,7 @@ function html_begin() {
 }
 
 /**
- * (2) Begin the <head> section
+ * Begin the <head> section
  * @return void
  */
 function html_head_begin() {
@@ -317,7 +317,7 @@ function html_head_begin() {
 }
 
 /**
- * (3) Print the content-type
+ * Print the content-type
  * @return void
  */
 function html_content_type() {
@@ -325,7 +325,7 @@ function html_content_type() {
 }
 
 /**
- * (4) Print the window title
+ * Print the window title
  * @param string $p_page_title Window title.
  * @return void
  */
@@ -356,7 +356,7 @@ function require_css( $p_stylesheet_path ) {
 }
 
 /**
- * (5) Print the link to include the CSS file
+ * Print the link to include the CSS file
  * @return void
  */
 function html_css() {
@@ -384,7 +384,7 @@ function html_css_link( $p_filename ) {
 
 
 /**
- * (6) Print an HTML meta tag to redirect to another page
+ * Print an HTML meta tag to redirect to another page
  * This function is optional and may be called by pages that need a redirect.
  * $p_time is the number of seconds to wait before redirecting.
  * If we have handled any errors on this page return false and don't redirect.
@@ -429,7 +429,7 @@ function require_js( $p_script_path ) {
 
 
 /**
- * (6) End the <head> section
+ * End the <head> section
  * @return void
  */
 function html_head_end() {
@@ -439,7 +439,7 @@ function html_head_end() {
 }
 
 /**
- * (7) Begin the <body> section
+ * Begin the <body> section
  * @return void
  */
 function html_body_begin() {
@@ -457,7 +457,7 @@ function html_body_begin() {
 }
 
 /**
- * (8) Print a user-defined banner at the top of the page if there is one.
+ * Print a user-defined banner at the top of the page if there is one.
  * @return void
  */
 function html_top_banner() {
@@ -495,7 +495,7 @@ function html_top_banner() {
 }
 
 /**
- * (9) Print the user's account information
+ * Print the user's account information
  * Also print the select box where users can switch projects
  * @return void
  */
@@ -590,7 +590,7 @@ function html_login_info() {
 }
 
 /**
- * (10) Print a user-defined banner at the bottom of the page if there is one.
+ * Print a user-defined banner at the bottom of the page if there is one.
  * @return void
  */
 function html_bottom_banner() {
@@ -628,7 +628,7 @@ function html_is_auto_refresh() {
 }
 
 /**
- * (11) Print the page footer information
+ * Print the page footer information
  * @return void
  */
 function html_footer() {
@@ -746,11 +746,13 @@ function html_footer() {
 }
 
 /**
- * (12) End the <body> section
+ * End the <body> section
  * @return void
  */
 function html_body_end() {
 	global $g_scripts_included;
+
+	event_signal( 'EVENT_LAYOUT_BODY_END' );
 
 	echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_config.php' ) . '"></script>' . "\n";
 	echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
@@ -761,15 +763,13 @@ function html_body_end() {
 		html_javascript_link( $t_script_path );
 	}
 
-	event_signal( 'EVENT_LAYOUT_BODY_END' );
-
 	echo '</div>', "\n";
 
 	echo '</body>', "\n";
 }
 
 /**
- * (13) Print the closing <html> tag
+ * Print the closing <html> tag
  * @return void
  */
 function html_end() {
