@@ -78,7 +78,7 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 }
 
 $f_new_status = gpc_get_int( 'new_status' );
-$f_reopen_flag = gpc_get_int( 'reopen_flag', OFF );
+$f_change_type = gpc_get_string( 'change_type', BUG_UPDATE_TYPE_CHANGE_STATUS );
 
 $t_reopen = config_get( 'bug_reopen_status', null, null, $t_bug->project_id );
 $t_resolved = config_get( 'bug_resolved_status_threshold', null, null, $t_bug->project_id );
@@ -86,7 +86,7 @@ $t_closed = config_get( 'bug_closed_status_threshold', null, null, $t_bug->proje
 $t_current_user_id = auth_get_current_user_id();
 
 # Ensure user has proper access level before proceeding
-if( $f_new_status == $t_reopen && $f_reopen_flag ) {
+if( $f_new_status == $t_reopen && $f_change_type == BUG_UPDATE_TYPE_REOPEN ) {
 	access_ensure_can_reopen_bug( $t_bug, $t_current_user_id );
 } else if( $f_new_status == $t_closed ) {
 	access_ensure_can_close_bug( $t_bug, $t_current_user_id );
@@ -327,7 +327,7 @@ if( ( $f_new_status >= $t_resolved ) ) {
 }
 ?>
 <?php event_signal( 'EVENT_UPDATE_BUG_STATUS_FORM', array( $f_bug_id ) ); ?>
-<?php if( ON == $f_reopen_flag ) { ?>
+<?php if( $f_change_type == BUG_UPDATE_TYPE_REOPEN ) { ?>
 <!-- Bug was re-opened -->
 <?php
 	printf( '	<input type="hidden" name="resolution" value="%s" />' . "\n", config_get( 'bug_reopen_resolution' ) );
@@ -388,6 +388,7 @@ if( ( $f_new_status >= $t_resolved ) ) {
 			</tr>
 		</tbody>
 	</table>
+	<input type="hidden" name="action_type" value="<?php echo $f_change_type; ?>" />
 </form>
 
 </div>

@@ -136,7 +136,22 @@
 		<varlistentry>
 			<term>$g_validate_email</term>
 			<listitem>
-				<para>Set to OFF to disable email checking. Default is ON.</para>
+				<para>Determines whether email addresses are validated.
+				</para>
+				<para>When ON (default), validation is performed using the
+					pattern given by the
+					<ulink url="http://www.w3.org/TR/html5/forms.html#valid-e-mail-address">
+						HTML5 specification for <emphasis>email</emphasis>
+						type form input elements</ulink>.
+					When OFF, validation is disabled.
+				</para>
+				<note><para>
+					Regardless of how this option is set, validation is
+					never performed when using LDAP email
+					(i.e. when $g_use_ldap_email = ON,
+					see <xref linkend="admin.config.auth.ldap" />),
+					as we assume that it is handled by the directory.
+				</para></note>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
@@ -154,6 +169,11 @@
 					If you allow users to create their own accounts, they must specify
 					an email at that point, no matter what the value of this option is.
 					Otherwise they wouldn't get their passwords.
+				</para>
+				<para>
+					Administrators are able to bypass this check to enable them to create
+					special accounts like anonymous access and other service accounts that
+					don't need notifications.
 				</para>
 			</listitem>
 		</varlistentry>

@@ -177,7 +177,7 @@ if( !php_version_at_least( PHP_MIN_VERSION ) ) {
 # that an error has occurred)
 if( ( $t_output = ob_get_contents() ) != '' ) {
 	echo 'Possible Whitespace/Error in Configuration File - Aborting. Output so far follows:<br />';
-	echo var_dump( $t_output );
+	var_dump( $t_output );
 	die;
 }
 unset( $t_output );
@@ -219,6 +219,9 @@ if( !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {
 		db_connect( config_get_global( 'dsn', false ), $g_hostname, $g_db_username, $g_db_password, $g_database_name, config_get_global( 'db_schema' ), true );
 	}
 }
+
+# Register global shutdown function
+shutdown_functions_register();
 
 # Initialise plugins
 if( !defined( 'PLUGINS_DISABLED' ) && !defined( 'MANTIS_MAINTENANCE_MODE' ) ) {

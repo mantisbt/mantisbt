@@ -21,7 +21,7 @@
 /**
  * Mantis Version
  */
-define( 'MANTIS_VERSION', '1.3.0-beta.2-dev' );
+define( 'MANTIS_VERSION', '1.3.0-rc1-dev' );
 define( 'FILTER_VERSION', 'v9' );
 
 # --- constants -------------------
@@ -222,6 +222,9 @@ define( 'BUG_HAS_DUPLICATE', 4 );
 # bug update types
 define( 'BUG_UPDATE_TYPE_NORMAL', 'update' );
 define( 'BUG_UPDATE_TYPE_ASSIGN', 'assign' );
+define( 'BUG_UPDATE_TYPE_CLOSE', 'close' );
+define( 'BUG_UPDATE_TYPE_REOPEN', 'reopen' );
+define( 'BUG_UPDATE_TYPE_CHANGE_STATUS', 'change_status' );
 
 # error messages
 define( 'ERROR_GENERIC', 0 );
@@ -245,6 +248,7 @@ define( 'ERROR_DEPRECATED_SUPERSEDED', 23 );
 define( 'ERROR_INVALID_RESOLUTION', 24 );
 define( 'ERROR_DISPLAY_USER_ERROR_INLINE', 25 );
 define( 'ERROR_TYPE_MISMATCH', 26 );
+define( 'ERROR_SPAM_SUSPECTED', 27 );
 
 # ERROR_CONFIG_*
 define( 'ERROR_CONFIG_OPT_NOT_FOUND', 100 );
@@ -416,9 +420,10 @@ define( 'ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS', 2901 );
 define( 'POSITION_NONE', 0 );
 define( 'POSITION_TOP', 1 );
 define( 'POSITION_BOTTOM', 2 );
-define( 'POSITION_BOTH', 3 );
+define( 'POSITION_BOTH', 3 ); # POSITION_TOP | POSITION_BOTTOM (bitwise OR)
 
 # Status Legend Position
+define( 'STATUS_LEGEND_POSITION_NONE', POSITION_NONE );
 define( 'STATUS_LEGEND_POSITION_TOP', POSITION_TOP );
 define( 'STATUS_LEGEND_POSITION_BOTTOM', POSITION_BOTTOM );
 define( 'STATUS_LEGEND_POSITION_BOTH', POSITION_BOTH );
@@ -428,8 +433,6 @@ define( 'FILTER_POSITION_NONE', POSITION_NONE );
 define( 'FILTER_POSITION_TOP', POSITION_TOP );
 define( 'FILTER_POSITION_BOTTOM', POSITION_BOTTOM );
 define( 'FILTER_POSITION_BOTH', POSITION_BOTH );
-
-# FILTER_POSITION_TOP | FILTER_POSITION_BOTTOM (bitwise OR)
 
 # Custom Field types
 define( 'CUSTOM_FIELD_TYPE_STRING', 0 );
@@ -561,6 +564,11 @@ define( 'TIMELINE_FIXED', 2 );
 define( 'PHPMAILER_METHOD_MAIL', 0 );
 define( 'PHPMAILER_METHOD_SENDMAIL', 1 );
 define( 'PHPMAILER_METHOD_SMTP', 2 );
+
+# Binary flag values for $g_email_shutdown_processing
+define( 'EMAIL_SHUTDOWN_SKIP', 0 );
+define( 'EMAIL_SHUTDOWN_GENERATED', 1 );
+define( 'EMAIL_SHUTDOWN_FORCE', 2 );
 
 # Lengths - NOTE: these may represent hard-coded values in db schema and should not be changed.
 define( 'DB_FIELD_SIZE_USERNAME', 255 );

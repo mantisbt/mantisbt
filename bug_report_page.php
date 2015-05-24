@@ -575,7 +575,7 @@ if( $t_show_attachments ) {
 				<label>
 					<span><?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?></span>
 					<br />
-					<?php echo print_max_filesize( $t_max_file_size ); ?>
+					<?php print_max_filesize( $t_max_file_size ); ?>
 				</label>
 				<span class="input">
 					<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />

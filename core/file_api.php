@@ -24,6 +24,7 @@
  * @link http://www.mantisbt.org
  *
  * @uses access_api.php
+ * @uses antispam_api.php
  * @uses authentication_api.php
  * @uses bug_api.php
  * @uses config_api.php
@@ -37,6 +38,7 @@
  */
 
 require_api( 'access_api.php' );
+require_api( 'antispam_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'config_api.php' );
@@ -49,6 +51,26 @@ require_api( 'project_api.php' );
 require_api( 'utility_api.php' );
 
 $g_cache_file_count = array();
+
+/**
+ * Processes the post files from a form by adding them to the specified
+ * issue.
+ * 
+ * @param int $p_bug_id    The bug id.
+ * @param array $p_files   The array of files, if null, then do nothing.
+ */
+function file_process_posted_files_for_bug( $p_bug_id, $p_files ) {
+	if( $p_files === null ) {
+		return;
+	}
+
+	$t_files = helper_array_transpose( $p_files );
+	foreach( $t_files as $t_file ) {
+		if( !empty( $t_file['name'] ) ) {
+			file_add( $p_bug_id, $t_file, 'bug' );
+		}
+	}
+}
 
 /**
  * Gets the filename without the bug id prefix.
@@ -619,9 +641,22 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 		trigger_error( ERROR_FILE_NOT_ALLOWED, ERROR );
 	}
 
-	if( !file_is_name_unique( $t_file_name, $p_bug_id ) ) {
-		trigger_error( ERROR_FILE_DUPLICATE, ERROR );
+	$t_org_filename = $t_file_name;
+	$t_suffix_id = 1;
+
+	while( !file_is_name_unique( $t_file_name, $p_bug_id ) ) {
+		$t_suffix_id++;
+
+		$t_dot_index = strripos( $t_org_filename, '.' );
+		if( $t_dot_index === false ) {
+			$t_file_name = $t_org_filename . '-' . $t_suffix_id;
+		} else {
+			$t_extension = substr( $t_org_filename, $t_dot_index, strlen( $t_org_filename ) - $t_dot_index );
+			$t_file_name = substr( $t_org_filename, 0, $t_dot_index ) . '-' . $t_suffix_id . $t_extension;
+		}
 	}
+
+	antispam_check();
 
 	$t_file_size = filesize( $t_tmp_file );
 	if( 0 == $t_file_size ) {

@@ -145,15 +145,32 @@ function http_content_headers() {
 function http_security_headers() {
 	if( !headers_sent() ) {
 		header( 'X-Frame-Options: DENY' );
-		$t_avatar_img_allow = '';
+
+		# Define Content Security Policy
+		$t_csp = array(
+			"default-src 'self'",
+			"frame-ancestors 'none'",
+		);
+
+		# Policy for images: Allow gravatar URL
 		if( config_get_global( 'show_avatar' ) ) {
 			if( http_is_protocol_https() ) {
-				$t_avatar_img_allow = "; img-src 'self' https://secure.gravatar.com:443";
+				$t_avatar_url = 'https://secure.gravatar.com:443';
 			} else {
-				$t_avatar_img_allow = "; img-src 'self' http://www.gravatar.com:80";
+				$t_avatar_url = 'http://www.gravatar.com:80';
 			}
+			$t_csp[] = "img-src 'self' $t_avatar_url";
 		}
-		header( 'Content-Security-Policy: default-src \'self\';' . $t_avatar_img_allow . '; frame-ancestors \'none\'' );
+
+		# Relaxing policy for roadmap page to allow inline styles
+		# This is a workaround to fix the broken progress bars (see #19501)
+		if( 'roadmap_page.php' == basename( $_SERVER['SCRIPT_NAME'] ) ) {
+			$t_csp[] = "style-src 'self' 'unsafe-inline'";
+		}
+
+		# Set CSP header
+		header( 'Content-Security-Policy: ' . implode('; ', $t_csp) );
+
 		if( http_is_protocol_https() ) {
 			header( 'Strict-Transport-Security: max-age=7776000' );
 		}
@@ -186,4 +203,28 @@ function http_all_headers() {
 		http_security_headers();
 		http_custom_headers();
 	}
+}
+
+if( !function_exists( 'http_build_url' ) ) {
+/**
+ * Builds an URL from its components
+ * This is basically the reverse of parse_url(), a minimalistic implementation
+ * of pecl_http extension's http_build_url() function.
+ * @param array $p_url The URL components (as results from parse_url())
+ * @return string
+ */
+function http_build_url( array $p_url ) {
+	return
+		  ( isset( $p_url['scheme'] )   ? $p_url['scheme'] . '://' : '' )
+		. ( isset( $p_url['user'] )
+			? $p_url['user'] . ( isset( $p_url['pass'] ) ? ':' . $p_url['pass'] : '' ) .'@'
+			: ''
+		  )
+		. ( isset( $p_url['host'] )     ? $p_url['host'] : '' )
+		. ( isset( $p_url['port'] )     ? ':' . $p_url['port'] : '' )
+		. ( isset( $p_url['path'] )     ? $p_url['path'] : '' )
+		. ( isset( $p_url['query'] )    ? '?' . $p_url['query'] : '' )
+		. ( isset( $p_url['fragment'] ) ? '#' . $p_url['fragment'] : '' )
+	;
+}
 }

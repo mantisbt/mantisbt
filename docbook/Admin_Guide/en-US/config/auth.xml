@@ -142,6 +142,21 @@ ldaps://ldap.example.com:3269/
 			</varlistentry>
 
 			<varlistentry>
+				<term>$g_ldap_network_timeout</term>
+
+				<listitem>
+					<para>Duration of the timeout for TCP connection to the
+					LDAP server (in seconds). Defaults to
+					<emphasis>0</emphasis> (infinite).</para>
+
+					<para>Set this to a low value when the hostname defined
+					in $g_ldap_server resolves to multiple IP addresses,
+					allowing rapid failover to the next available LDAP
+					server.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
 				<term>$g_ldap_follow_referrals</term>
 
 				<listitem>

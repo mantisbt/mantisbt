@@ -41,6 +41,9 @@ $g_db_password   = '';
 $g_database_name = 'bugtracker';
 $g_db_type       = 'mysqli';
 
+# --- Security ---
+$g_crypto_master_salt = '';	#  Random string of at least 16 chars, unique to the installation
+
 # --- Anonymous Access / Signup ---
 $g_allow_signup				= ON;
 $g_allow_anonymous_login	= OFF;

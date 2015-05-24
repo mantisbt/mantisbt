@@ -40,12 +40,17 @@
  *
  * @author Cwlin0416
  * @author Mark85296341
+ * @author Wehwei
  */
 
 $s_plugin_XmlImportExport_title = '匯入/匯出問題';
 $s_plugin_XmlImportExport_description = '開啟 MantisBT XML 匯入/匯出功能。';
 $s_plugin_XmlImportExport_import = '匯入問題';
 $s_plugin_XmlImportExport_export = 'XML 匯出';
+$s_plugin_XmlImportExport_config_title = 'XML 匯入/匯出存取等級設定';
+$s_plugin_XmlImportExport_import_threshold = '匯入問題';
+$s_plugin_XmlImportExport_export_threshold = '匯入問題';
+$s_plugin_XmlImportExport_action_update = '更新';
 $s_plugin_XmlImportExport_importing_in_project = '匯入問題到專案:';
 $s_plugin_XmlImportExport_import_options = '匯入選項';
 $s_plugin_XmlImportExport_cross_references = '交叉參照';

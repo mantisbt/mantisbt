@@ -40,8 +40,10 @@
  *
  * @author Centerlink
  * @author Macofe
+ * @author Silvonen
  */
 
+$s_plugin_format_title = 'MantisBT-muotoilu';
 $s_plugin_format_description = 'Virallinen tekstinkäsittely- ja muotoiluliitännäinen.';
 $s_plugin_format_config = 'Asetukset';
 $s_plugin_format_process_text = 'Tekstinkäsittely';

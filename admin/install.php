@@ -99,7 +99,7 @@ html_head_begin();
 html_css_link( 'admin.css' );
 html_content_type();
 html_title( 'Administration - Installation' );
-html_javascript_link( 'jquery-1.11.1.min.js' );
+html_javascript_link( 'jquery-1.11.3.min.js' );
 html_javascript_link( 'install.js' );
 html_head_end();
 ?>
@@ -188,7 +188,8 @@ if( $t_config_exists && $t_install_state <= 1 ) {
 	$f_timezone               = config_get( 'default_timezone', '' );
 
 	# Set default prefix/suffix form variables ($f_db_table_XXX)
-	foreach( $t_prefix_defaults['other'] as $t_key => $t_value ) {
+	$t_prefix_type = 'other';
+	foreach( $t_prefix_defaults[$t_prefix_type] as $t_key => $t_value ) {
 		${'f_' . $t_key} = $t_value;
 	}
 } else {
@@ -423,6 +424,7 @@ if( 2 == $t_install_state ) {
 		$t_version_info = @$g_db->ServerInfo();
 	} else {
 		print_test_result( BAD, true, 'Does administrative user have access to the database? ( ' . db_error_msg() . ' )' );
+		$t_version_info = null;
 	}
 	?>
 </tr>
@@ -461,11 +463,14 @@ if( 2 == $t_install_state ) {
 <tr>
 	<td bgcolor="#ffffff">
 		Checking Database Server Version
-		<?php
-		echo '<br /> Running ' . string_attribute( $f_db_type ) . ' version ' . nl2br( $t_version_info['description'] );
-		?>
+<?php
+		if( isset( $t_version_info['description'] ) ) {
+			echo '<br /> Running ' . string_attribute( $f_db_type )
+				. ' version ' . nl2br( $t_version_info['description'] );
+		}
+?>
 	</td>
-	<?php
+<?php
 		$t_warning = '';
 		$t_error = '';
 		switch( $f_db_type ) {
@@ -487,8 +492,16 @@ if( 2 == $t_install_state ) {
 				break;
 		}
 
-		print_test_result( ( '' == $t_error ) && ( '' == $t_warning ), ( '' != $t_error ), $t_error . ' ' . $t_warning );
-		?>
+		if( is_null( $t_version_info ) ) {
+			$t_warning = "Unable to determine '$f_db_type' version. ($t_error).";
+			$t_error = '';
+		}
+		print_test_result(
+			( '' == $t_error ) && ( '' == $t_warning ),
+			( '' != $t_error ),
+			$t_error . ' ' . $t_warning
+		);
+?>
 </tr>
 </table>
 <?php
@@ -998,7 +1011,9 @@ if( 3 == $t_install_state ) {
 				} else {
 					$t_all_sql = '';
 					foreach ( $t_sqlarray as $t_single_sql ) {
-						$t_all_sql .= $t_single_sql . '<br />';
+						if( !empty( $t_single_sql ) ) {
+							$t_all_sql .= $t_single_sql . '<br />';
+						}
 					}
 					print_test_result( BAD, true, $t_all_sql  . $g_db->ErrorMsg() );
 				}

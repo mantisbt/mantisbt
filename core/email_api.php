@@ -47,7 +47,7 @@
  * @uses user_pref_api.php
  * @uses utility_api.php
  *
- * @uses class.phpmailer.php PHPMailer library
+ * @uses PHPMailerAutoload.php PHPMailer library
  */
 
 require_api( 'access_api.php' );
@@ -74,34 +74,37 @@ require_api( 'user_api.php' );
 require_api( 'user_pref_api.php' );
 require_api( 'utility_api.php' );
 
-require_lib( 'phpmailer' . DIRECTORY_SEPARATOR . 'class.phpmailer.php' );
+require_lib( 'phpmailer/PHPMailerAutoload.php' );
 
 # reusable object of class SMTP
 $g_phpMailer = null;
 
-# Indicates whether any emails are currently stored for process during this request.
-# Note: This is only used if not sending emails via cron job
-$g_email_stored = false;
+/**
+ * Indicates how generated emails will be processed by the shutdown function
+ * at the end of the current request's execution; this is a binary flag:
+ * - EMAIL_SHUTDOWN_SKIP       Initial state: do nothing (no generated emails)
+ * - EMAIL_SHUTDOWN_GENERATED  Emails will be sent, unless $g_email_send_using_cronjob is ON
+ * - EMAIL_SHUTDOWN_FORCE      All queued emails will be sent regardless of cronjob settings
+ * @see email_shutdown_function()
+ * @global $g_email_shutdown_processing
+ */
+$g_email_shutdown_processing = EMAIL_SHUTDOWN_SKIP;
 
 /**
- * Use a simple perl regex for valid email addresses.  This is not a complete regex,
- * as it does not cover quoted addresses or domain literals, but it is simple and
- * covers the vast majority of all email addresses without being overly complex.
+ * Regex for valid email addresses
+ * @see string_insert_hrefs()
+ * This pattern is consistent with email addresses validation logic
+ * @see $g_validate_email
+ * Uses the standard HTML5 pattern defined in
+ * {@link http://www.w3.org/TR/html5/forms.html#valid-e-mail-address}
+ * Note: the original regex from the spec has been modified to
+ * - escape the '/' in the first character class definition
+ * - remove the '^' and '$' anchors to allow matching anywhere in a string
+ *
  * @return string
  */
 function email_regex_simple() {
-	static $s_email_regex = null;
-
-	if( is_null( $s_email_regex ) ) {
-		$t_recipient = '([a-z0-9!#*+\/=?^_{|}~-]+(?:\.[a-z0-9!#*+\/=?^_{|}~-]+)*)';
-
-		# a domain is one or more subdomains
-		$t_subdomain = '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
-		$t_domain    = '(' . $t_subdomain . '(?:\.' . $t_subdomain . ')*)';
-
-		$s_email_regex = '/' . $t_recipient . '\@' . $t_domain . '/i';
-	}
-	return $s_email_regex;
+	return "/[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*/";
 }
 
 /**
@@ -110,18 +113,31 @@ function email_regex_simple() {
  * @return boolean
  */
 function email_is_valid( $p_email ) {
+	$t_validate_email = config_get( 'validate_email' );
+
 	# if we don't validate then just accept
-	if( OFF == config_get( 'validate_email' ) ||
+	# If blank email is allowed or current user is admin, then accept blank emails which are useful for
+	# accounts that should never receive email notifications (e.g. anonymous account)
+	if( OFF == $t_validate_email ||
 		ON == config_get( 'use_ldap_email' ) ||
-		( is_blank( $p_email ) && ON == config_get( 'allow_blank_email' ) )
+		( is_blank( $p_email ) && ( ON == config_get( 'allow_blank_email' ) || current_user_is_administrator() ) )
 	) {
 		return true;
 	}
 
+	# E-mail validation method
+	# Note: PHPMailer offers alternative validation methods.
+	# It was decided in PR 172 (https://github.com/mantisbt/mantisbt/pull/172)
+	# to just default to HTML5 without over-complicating things for end users
+	# by offering a potentially confusing choice between the different methods.
+	# Refer to PHPMailer documentation for ValidateAddress method for details.
+	# @link https://github.com/PHPMailer/PHPMailer/blob/v5.2.9/class.phpmailer.php#L863
+	$t_method = 'html5';
+
 	# check email address is a valid format
-	$t_email = filter_var( $p_email, FILTER_SANITIZE_EMAIL );
-	if( PHPMailer::ValidateAddress( $t_email ) ) {
-		$t_domain = substr( $t_email, strpos( $t_email, '@' ) + 1 );
+	log_event( LOG_EMAIL, "Validating address '$p_email' with method '$t_method'" );
+	if( PHPMailer::ValidateAddress( $p_email, $t_method ) ) {
+		$t_domain = substr( $p_email, strpos( $p_email, '@' ) + 1 );
 
 		# see if we're limited to a set of known domains
 		$t_limit_email_domains = config_get( 'limit_email_domains' );
@@ -131,6 +147,7 @@ function email_is_valid( $p_email ) {
 					return true; # no need to check mx record details (below) if we've explicity allowed the domain
 				}
 			}
+			log_event( LOG_EMAIL, "failed - not in limited domains list '$t_limit_email_domains'" );
 			return false;
 		}
 
@@ -147,11 +164,14 @@ function email_is_valid( $p_email ) {
 				if( checkdnsrr( $t_host, 'ANY' ) ) {
 					return true;
 				}
+				log_event( LOG_EMAIL, "failed - mx/dns record check" );
 			}
 		} else {
-			# Email format was valid but did't check for valid mx records
+			# Email format was valid but didn't check for valid mx records
 			return true;
 		}
+	} else {
+		log_event( LOG_EMAIL, "failed - invalid address" );
 	}
 
 	# Everything failed.  The email is invalid
@@ -337,12 +357,10 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 		case 'relation':
 		case 'monitor':
 		case 'priority': # This is never used, but exists in the database!
-			# FIXME: these notification actions are not actually implemented
+			# Issue #19459 these notification actions are not actually implemented
 			# in the database and therefore aren't adjustable on a per-user
 			# basis! The exception is 'monitor' that makes no sense being a
 			# customisable per-user preference.
-			$t_pref_field = false;
-			break;
 		default:
 			# Anything not built-in is probably going to be a status
 			$t_pref_field = 'email_on_status';
@@ -468,7 +486,7 @@ function email_signup( $p_user_id, $p_password, $p_confirm_hash, $p_admin_name =
 	# Send signup email regardless of mail notification pref
 	# or else users won't be able to sign up
 	if( !is_blank( $t_email ) ) {
-		email_store( $t_email, $t_subject, $t_message );
+		email_store( $t_email, $t_subject, $t_message, null, true );
 		log_event( LOG_EMAIL, 'Signup Email = %s, Hash = %s, User = @U%d', $t_email, $p_confirm_hash, $p_user_id );
 	}
 
@@ -500,7 +518,7 @@ function email_send_confirm_hash_url( $p_user_id, $p_confirm_hash ) {
 	# Send password reset regardless of mail notification preferences
 	# or else users won't be able to receive their reset passwords
 	if( !is_blank( $t_email ) ) {
-		email_store( $t_email, $t_subject, $t_message );
+		email_store( $t_email, $t_subject, $t_message, null, true );
 		log_event( LOG_EMAIL, 'Password reset for user @U%d sent to %s', $p_user_id, $t_email );
 	}
 
@@ -734,14 +752,16 @@ function email_relationship_child_resolved_closed( $p_bug_id, $p_message_id ) {
 /**
  * Store email in queue for sending
  *
- * @param string $p_recipient Email recipient address.
- * @param string $p_subject   Subject of email message.
- * @param string $p_message   Body text of email message.
- * @param array  $p_headers   Array of additional headers to send with the email.
+ * @param string  $p_recipient Email recipient address.
+ * @param string  $p_subject   Subject of email message.
+ * @param string  $p_message   Body text of email message.
+ * @param array   $p_headers   Array of additional headers to send with the email.
+ * @param boolean $p_force     True to force sending of emails in shutdown function,
+ *                             even when using cronjob
  * @return integer|null
  */
-function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = null ) {
-	global $g_email_stored;
+function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = null, $p_force = false ) {
+	global $g_email_shutdown_processing;
 
 	$t_recipient = trim( $p_recipient );
 	$t_subject = string_email( trim( $p_subject ) );
@@ -778,7 +798,11 @@ function email_store( $p_recipient, $p_subject, $p_message, array $p_headers = n
 
 	$t_email_id = email_queue_add( $t_email_data );
 
-	$g_email_stored = true;
+	# Set the email processing flag for the shutdown function
+	$g_email_shutdown_processing |= EMAIL_SHUTDOWN_GENERATED;
+	if( $p_force ) {
+		$g_email_shutdown_processing |= EMAIL_SHUTDOWN_FORCE;
+	}
 
 	return $t_email_id;
 }
@@ -901,7 +925,7 @@ function email_send( EmailData $p_email_data ) {
 	}
 
 	$t_mail->IsHTML( false );              # set email format to plain text
-	$t_mail->WordWrap = 80;              # set word wrap to 50 characters
+	$t_mail->WordWrap = 80;              # set word wrap to 80 characters
 	$t_mail->Priority = $t_email_data->metadata['priority'];  # Urgent = 1, Not Urgent = 5, Disable = 0
 	$t_mail->CharSet = $t_email_data->metadata['charset'];
 	$t_mail->Host = config_get( 'smtp_host' );
@@ -1394,4 +1418,36 @@ function email_build_visible_bug_data( $p_user_id, $p_bug_id, $p_message_id ) {
 	current_user_set( $t_current_user_id );
 
 	return $t_bug_data;
+}
+
+/**
+ * The email sending shutdown function
+ * Will send any queued emails, except when $g_email_send_using_cronjob = ON.
+ * If $g_email_shutdown_processing EMAIL_SHUTDOWN_FORCE flag is set, emails
+ * will be sent regardless of cronjob setting.
+ * @return void
+ */
+function email_shutdown_function() {
+	global $g_email_shutdown_processing;
+
+	# Nothing to do if
+	# - no emails have been generated in the current request
+	# - system is configured to use cron job (unless processing is forced)
+	if(    $g_email_shutdown_processing == EMAIL_SHUTDOWN_SKIP
+		|| (   !( $g_email_shutdown_processing & EMAIL_SHUTDOWN_FORCE )
+			&& config_get( 'email_send_using_cronjob' )
+		   )
+	) {
+		return;
+	}
+
+	$t_msg ='Shutdown function called for ' . $_SERVER['SCRIPT_NAME'];
+	if( $g_email_shutdown_processing & EMAIL_SHUTDOWN_FORCE ) {
+		$t_msg .= ' (email processing forced)';
+	}
+	log_event( LOG_EMAIL, $t_msg );
+
+	if( $g_email_shutdown_processing ) {
+		email_send_all();
+	}
 }

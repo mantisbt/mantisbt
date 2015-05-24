@@ -683,3 +683,12 @@ function helper_duration_to_minutes( $p_hhmm ) {
 
 	return (int)$t_min;
 }
+
+/**
+ * Global shutdown functions registration
+ * Registers shutdown functions
+ * @return void
+ */
+function shutdown_functions_register() {
+	register_shutdown_function( 'email_shutdown_function' );
+}

@@ -313,8 +313,6 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	}
 }
 
-$g_string_process_bug_link_callback = array();
-
 /**
  * Process $p_string, looking for bug ID references and creating bug view
  * links for them.
@@ -335,7 +333,7 @@ $g_string_process_bug_link_callback = array();
  * @return string
  */
 function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail_info = true, $p_fqdn = false ) {
-	global $g_string_process_bug_link_callback;
+	static $s_bug_link_callback = array();
 
 	$t_tag = config_get( 'bug_link_tag' );
 
@@ -344,34 +342,45 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 		return $p_string;
 	}
 
-	if( !isset( $g_string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] ) ) {
+	if( !isset( $s_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] ) ) {
 		if( $p_include_anchor ) {
-			$g_string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function( '$p_array', '
-										if( bug_exists( (int)$p_array[2] ) ) {
-											$t_project_id = bug_get_field( (int)$p_array[2], \'project_id\' );
-											if( access_has_bug_level( config_get( \'view_bug_threshold\', null, null, $t_project_id ), (int)$p_array[2] ) ) {
-												return $p_array[1] . string_get_bug_view_link( (int)$p_array[2], null, ' . ( $p_detail_info ? 'true' : 'false' ) . ', ' . ( $p_fqdn ? 'true' : 'false' ) . ');
-											}
-										}
-										return $p_array[0];
-										' );
+			$s_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
+				function( $p_array ) use( $p_detail_info, $p_fqdn ) {
+					if( bug_exists( (int)$p_array[2] ) ) {
+						$t_project_id = bug_get_field( (int)$p_array[2], 'project_id' );
+						$t_view_bug_threshold = config_get( 'view_bug_threshold', null, null, $t_project_id );
+						if( access_has_bug_level( $t_view_bug_threshold, (int)$p_array[2] ) ) {
+							return $p_array[1] .
+								string_get_bug_view_link(
+									(int)$p_array[2],
+									null,
+									(boolean)$p_detail_info,
+									(boolean)$p_fqdn
+								);
+						}
+					}
+					return $p_array[0];
+				}; # end of bug link callback closure
 		} else {
-			$g_string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] = create_function( '$p_array', '
-										# We might as well create the link here even if the bug
-										#  doesnt exist.  In the case above we dont want to do
-										#  the summary lookup on a non-existant bug.  But here, we
-										#  can create the link and by the time it is clicked on, the
-										#  bug may exist.
-										return $p_array[1] . string_get_bug_view_url_with_fqdn( (int)$p_array[2], null );
-										' );
+			$s_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
+				function( $p_array ) {
+					if( bug_exists( (int)$p_array[2] ) ) {
+						# Create link regardless of user's access to the bug
+						return $p_array[1] .
+							string_get_bug_view_url_with_fqdn( (int)$p_array[2], null );
+					}
+					return $p_array[0];
+				}; # end of bug link callback closure
 		}
 	}
 
-	$p_string = preg_replace_callback( '/(^|[^\w&])' . preg_quote( $t_tag, '/' ) . '(\d+)\b/', $g_string_process_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn], $p_string );
+	$p_string = preg_replace_callback(
+		'/(^|[^\w&])' . preg_quote( $t_tag, '/' ) . '(\d+)\b/',
+		$s_bug_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn],
+		$p_string
+	);
 	return $p_string;
 }
-
-$g_string_process_bugnote_link_callback = array();
 
 /**
  * Process $p_string, looking for bugnote ID references and creating bug view
@@ -393,7 +402,8 @@ $g_string_process_bugnote_link_callback = array();
  * @return string
  */
 function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_detail_info = true, $p_fqdn = false ) {
-	global $g_string_process_bugnote_link_callback;
+	static $s_bugnote_link_callback = array();
+
 	$t_tag = config_get( 'bugnote_link_tag' );
 
 	# bail if the link tag is blank
@@ -401,22 +411,22 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 		return $p_string;
 	}
 
-	if( !isset( $g_string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] ) ) {
+	if( !isset( $s_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] ) ) {
 		if( $p_include_anchor ) {
-			$g_string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
-				create_function( '$p_array',
-					'
+			$s_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
+				function( $p_array ) use( $p_detail_info, $p_fqdn ) {
+					global $g_project_override;
 					if( bugnote_exists( (int)$p_array[2] ) ) {
-						$t_bug_id = bugnote_get_field( (int)$p_array[2], \'bug_id\' );
+						$t_bug_id = bugnote_get_field( (int)$p_array[2], 'bug_id' );
 						if( bug_exists( $t_bug_id ) ) {
-							$g_project_override = bug_get_field( $t_bug_id, \'project_id\' );
+							$g_project_override = bug_get_field( $t_bug_id, 'project_id' );
 							if(   access_compare_level(
 										user_get_access_level( auth_get_current_user_id(),
-										bug_get_field( $t_bug_id, \'project_id\' ) ),
-										config_get( \'private_bugnote_threshold\' )
+										bug_get_field( $t_bug_id, 'project_id' ) ),
+										config_get( 'private_bugnote_threshold' )
 								   )
-								|| bugnote_get_field( (int)$p_array[2], \'reporter_id\' ) == auth_get_current_user_id()
-								|| bugnote_get_field( (int)$p_array[2], \'view_state\' ) == VS_PUBLIC
+								|| bugnote_get_field( (int)$p_array[2], 'reporter_id' ) == auth_get_current_user_id()
+								|| bugnote_get_field( (int)$p_array[2], 'view_state' ) == VS_PUBLIC
 							) {
 								$g_project_override = null;
 								return $p_array[1] .
@@ -424,34 +434,33 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 										$t_bug_id,
 										(int)$p_array[2],
 										null,
-										' . ( $p_detail_info ? 'true' : 'false' ) . ', ' . ( $p_fqdn ? 'true' : 'false' ) . '
+										(boolean)$p_detail_info,
+										(boolean)$p_fqdn
 									);
 							}
 							$g_project_override = null;
 						}
 					}
 					return $p_array[0];
-					' );
+				}; # end of bugnote link callback closure
 		} else {
-			$g_string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
-				create_function(
-					'$p_array',
-					'
-					# We might as well create the link here even if the bug
-					#  doesnt exist.  In the case above we dont want to do
-					#  the summary lookup on a non-existant bug.  But here, we
-					#  can create the link and by the time it is clicked on, the
-					#  bug may exist.
-					$t_bug_id = bugnote_get_field( (int)$p_array[2], \'bug_id\' );
-					if( bug_exists( $t_bug_id ) ) {
-						return $p_array[1] . string_get_bugnote_view_url_with_fqdn( $t_bug_id, (int)$p_array[2], null );
+			$s_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn] =
+				function( $p_array ) {
+					$t_bug_id = bugnote_get_field( (int)$p_array[2], 'bug_id' );
+					if( $t_bug_id && bug_exists( $t_bug_id ) ) {
+						return $p_array[1] .
+							string_get_bugnote_view_url_with_fqdn( $t_bug_id, (int)$p_array[2], null );
 					} else {
 						return $p_array[0];
 					}
-					' );
+				}; # end of bugnote link callback closure
 		}
 	}
-	$p_string = preg_replace_callback( '/(^|[^\w])' . preg_quote( $t_tag, '/' ) . '(\d+)\b/', $g_string_process_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn], $p_string );
+	$p_string = preg_replace_callback(
+		'/(^|[^\w])' . preg_quote( $t_tag, '/' ) . '(\d+)\b/',
+		$s_bugnote_link_callback[$p_include_anchor][$p_detail_info][$p_fqdn],
+		$p_string
+	);
 	return $p_string;
 }
 

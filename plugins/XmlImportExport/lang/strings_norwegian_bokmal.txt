@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Kingu
  * @author Nghtwlkr
  */
 
@@ -45,6 +46,10 @@ $s_plugin_XmlImportExport_title = 'Importer/eksporter problemer';
 $s_plugin_XmlImportExport_description = 'Legger til XML-baserte importerings- og eksporteringsevner til MantisBT.';
 $s_plugin_XmlImportExport_import = 'Importer problemer';
 $s_plugin_XmlImportExport_export = 'XML-eksport';
+$s_plugin_XmlImportExport_config_title = 'Oppsett av tilgangsnivåer for XML-import/export';
+$s_plugin_XmlImportExport_import_threshold = 'Importer saker';
+$s_plugin_XmlImportExport_export_threshold = 'Exporter saker';
+$s_plugin_XmlImportExport_action_update = 'Oppdater';
 $s_plugin_XmlImportExport_importing_in_project = 'Importerer problemer i prosjektet:';
 $s_plugin_XmlImportExport_import_options = 'Importer valg';
 $s_plugin_XmlImportExport_cross_references = 'Kryssreferanser';

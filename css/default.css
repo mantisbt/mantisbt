@@ -26,11 +26,7 @@ input.button		{}
 input.button-small	{ font-size: 1em; }
 
 textarea			{}
-textarea.width100	{ width: 100%; }
-
 select				{}
-select.width100		{ width: 100%; }
-select.width20		{ width: 20%; }
 
 span				{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt; }
 span.print			{ font-size: 8pt; }
@@ -334,6 +330,8 @@ div.quick-summary-right	{ width: 49%; padding: 2px; text-align: right; float: ri
 	border-radius: 5px;
 }
 
+/* Roadmap */
+tt > .strike				{ font-family: monospace; }
 .progress400				{ position: relative; width: 400px; border: 1px solid #d7d7d7; margin-top: 1em; margin-bottom: 1em; padding: 1px; }
 .progress400 .bar			{ display: block; position: relative; background: #6bba70; text-align: center; font-weight: normal; color: #333; height: 2em; line-height: 2em; }
 
@@ -449,7 +447,8 @@ div.width50 { width: 50%; }
 #history_open table 	{ border-spacing: 0; }
 
 #bug-change-status-div,
-#action-group-div
+#action-group-div,
+#send-reminder-div
 	{ width: 75%; }
 #action-group-issues-div
 	{ width: 75%; margin: 0 auto; }
@@ -650,7 +649,17 @@ div.form-container .file  input,
 .display-value span {
 	max-width: 98%;
 }
+div.form-container .textarea #reminder {
+	width: 100%;
+}
+
 div.form-container .spacer { margin-top: .5em; clear: both; }
+div.form-container .info-text {
+	clear: both;
+	display: block;
+	padding: 1em;
+}
+
 .label-style {
 	position: absolute;
 	top: 0em;

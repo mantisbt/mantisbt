@@ -28,6 +28,7 @@
  * @uses bugnote_api.php
  * @uses config_api.php
  * @uses constant_inc.php
+ * @uses file_api.php
  * @uses error_api.php
  * @uses form_api.php
  * @uses gpc_api.php
@@ -42,6 +43,7 @@ require_api( 'bug_api.php' );
 require_api( 'bugnote_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
+require_api( 'file_api.php' );
 require_api( 'error_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
@@ -55,6 +57,7 @@ $f_bug_id		= gpc_get_int( 'bug_id' );
 $f_private		= gpc_get_bool( 'private' );
 $f_time_tracking	= gpc_get_string( 'time_tracking', '0:00' );
 $f_bugnote_text	= trim( gpc_get_string( 'bugnote_text', '' ) );
+$f_files		= gpc_get_file( 'ufile', null );
 
 $t_bug = bug_get( $f_bug_id, true );
 if( $t_bug->project_id != helper_get_current_project() ) {
@@ -72,6 +75,15 @@ access_ensure_bug_level( config_get( 'add_bugnote_threshold' ), $t_bug->id );
 
 if( $f_private ) {
 	access_ensure_bug_level( config_get( 'set_view_status_threshold' ), $t_bug->id );
+}
+
+# Handle the file upload
+if( $f_files !== null ) {
+	if( !file_allow_bug_upload( $f_bug_id ) ) {
+		access_denied();
+	}
+
+	file_process_posted_files_for_bug( $f_bug_id, $f_files );
 }
 
 # We always set the note time to BUGNOTE, and the API will overwrite it with TIME_TRACKING

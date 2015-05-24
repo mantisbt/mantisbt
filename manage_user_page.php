@@ -219,7 +219,7 @@ if( 0 == $c_hide_inactive ) {
 	$t_where_params[] = db_now();
 }
 
-$t_result = db_query_bound( $t_query, $t_where_params );
+$t_result = db_query( $t_query, $t_where_params );
 $t_row = db_fetch_array( $t_result );
 $t_total_user_count = $t_row['user_count'];
 

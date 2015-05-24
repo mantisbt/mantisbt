@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Elisardojm
  * @author Toliño
  */
 
@@ -45,6 +46,10 @@ $s_plugin_XmlImportExport_title = 'Importar/Exportar os problemas';
 $s_plugin_XmlImportExport_description = 'Engádelle a MantisBT capacidades de importación e exportación baseadas en XML.';
 $s_plugin_XmlImportExport_import = 'Importar os problemas';
 $s_plugin_XmlImportExport_export = 'Exportar en XML';
+$s_plugin_XmlImportExport_config_title = 'Configuración de niveis de acceso de importación/exportación en XML';
+$s_plugin_XmlImportExport_import_threshold = 'Importar incidencias';
+$s_plugin_XmlImportExport_export_threshold = 'Exportar incidencias';
+$s_plugin_XmlImportExport_action_update = 'Actualizar';
 $s_plugin_XmlImportExport_importing_in_project = 'Importar os problemas no proxecto:';
 $s_plugin_XmlImportExport_import_options = 'Opcións de importación';
 $s_plugin_XmlImportExport_cross_references = 'Referencias cruzadas';

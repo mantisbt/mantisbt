@@ -49,6 +49,7 @@
  * @author Imre
  * @author KarlReichert
  * @author Kghbln
+ * @author Luke081515
  * @author Manuae
  * @author Melancholie
  * @author Metalhead64
@@ -91,8 +92,8 @@ $s_excel_export = 'Excel-Export';
 $s_login_anonymously = 'Anonym anmelden';
 $s_anonymous = 'anonym';
 $s_jump_to_bugnotes = 'Zu Notizen wechseln';
-$s_public_project_msg = 'Dieses Projekt ist ÖFFENTLICH. Alle Benutzer haben Zugang zu diesem Projekt.';
-$s_private_project_msg = 'Dieses Projekt ist PRIVAT. Nur Administratoren und berechtigte Benutzer haben Zugang.';
+$s_public_project_msg = 'Dieses Projekt ist öffentlich. Alle Benutzer haben Zugang zu diesem Projekt.';
+$s_private_project_msg = 'Dieses Projekt ist privat. Nur Administratoren und berechtigte Benutzer haben Zugang.';
 $s_access_level_project = 'Projekt Zugangsstufe';
 $s_view_submitted_bug_link = 'Zeige erfassten Eintrag %1$s';
 $s_assigned_projects = 'Zugewiesene Projekte';
@@ -412,8 +413,8 @@ $s_reminder_sent_none = 'Es konnten keine Erinnerungen gesendet werden';
 $s_reminder_list_truncated = 'Die Liste der Empfänger wurde gekürzt.';
 $s_bug_send_button = 'Absenden';
 $s_reminder = 'Erinnerung';
-$s_reminder_explain = 'Diese Notiz wird an die aufgeführten Empfänger gesandt, um eine Rückmeldung zu diesem Eintrag anzufordern.';
-$s_reminder_monitor = 'Diese Empfänger beginnen auch, den Eintrag zu beobachten. Sie können sich abmelden mit Klick auf den „Beobachtung beenden“-Knopf.';
+$s_reminder_explain = 'Diese Notiz wird an die ausgewählten Empfänger gesandt, um eine Rückmeldung zu diesem Eintrag anzufordern.';
+$s_reminder_monitor = 'Diese Empfänger beginnen auch, den Eintrag zu beobachten; sie können sich abmelden mit Klick auf den Knopf „Beobachtung beenden“.';
 $s_reminder_store = 'Diese Notiz wird mit dem Eintrag abgespeichert.';
 $s_confirm_sponsorship = 'Bitte bestätigen Sie, dass Sie den Eintrag %1$d mit %2$s sponsern möchten.';
 $s_stick_bug_button = 'Fixierung setzen';
@@ -840,10 +841,10 @@ $s_selected_project = 'Gewähltes Projekt';
 $s_valid_project_msg = 'Es muss ein Projekt ausgewählt werden';
 $s_signup_done_title = 'Konto-Registrierung ausgeführt';
 $s_password_emailed_msg = 'Gratulation. Sie haben sich erfolgreich registriert. Ihnen wird jetzt eine Bestätigungs-E-Mail geschickt um Ihre E-Mail-Adresse zu überprüfen. Nachdem Sie den Link in der E-Mail besucht haben, ist Ihr Konto freigeschaltet.';
-$s_no_reponse_msg = 'Sie haben sieben Tage um die Kontobestätigung auszuführen. Wenn sie die Kontobestätigung nicht innerhalb von sieben Tagen ausführen, wird das neu registrierte Konto entfernt.';
+$s_no_reponse_msg = 'Sie haben sieben Tage, um die Kontobestätigung abzuschließen. Falls Sie diese innerhalb dieser Periode nicht ausführen, wird das neu registrierte Konto gelöscht.';
 $s_signup_captcha_request_label = 'Geben Sie den Code ein, den Sie im Rahmen auf der rechten Seite sehen:';
 $s_signup_captcha_refresh = 'Einen neuen Code erzeugen';
-$s_signup_info = 'Nach dem Abschicken dieses Formulars und der Überprüfung Ihrer Antworten wird Ihnen einen Bestätigungs-E-Mail an die angegebene Adresse geschickt.<br />Benutzen Sie diese E-Mail, um Ihr Konto zu aktivieren. Wenn Sie Ihr Konto nicht innerhalb von sieben Tagen freischalten, wird das Konto entfernt.<br />Sie müssen eine gültige E-Mail-Adresse angeben, um die Bestätigungs-E-Mail zu erhalten.';
+$s_signup_info = 'Nach dem Abschicken dieses Formulars und der Überprüfung Ihrer Antworten wird Ihnen eine Bestätigungsnachricht an die angegebene Adresse geschickt.<br />Benutzen Sie den Link, der in der E-Mail angegeben ist, um Ihr Konto zu aktivieren. Falls Sie dies nicht innerhalb von sieben Tagen ausführen, kann das Konto gelöscht werden.<br />Sie müssen eine gültige E-Mail-Adresse angeben, um die Bestätigungs-E-Mail zu erhalten.';
 $s_signup_title = 'Anmeldung';
 $s_signup_button = 'Anmelden';
 $s_no_password_request = 'Ihr Passwort wird von einem anderen System verwaltet. Nehmen Sie Kontakt mit Ihrem Administrator auf.';
@@ -1357,3 +1358,4 @@ $MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = 'Veraltete Funktionalität „%1$s�
 $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'Warnung: Das System ist so konfiguriert, dass es MantisBT-Fehler (E_USER_ERROR) „inline“ anzeigt. Das Programm wird weiterhin ausgeführt; dies kann zu System-/Daten-Integritätsproblemen führen.';
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Datentyp stimmt nicht überein. Aktivieren Sie detaillierte Fehlermeldungen für weitere Informationen.';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Dieses Problem wurde von einem anderen Benutzer aktualisiert. Bitte zum Eintrag zurückkehren und die Änderungen erneut übermitteln.';
+$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Sie haben die erlaubte Aktivitätsgrenze von %d Ereignissen innerhalb der letzten %d Sekunden erreicht; Ihre Aktion wurde blockiert, um Spam zu verhindern, bitte versuchen Sie es später.';

@@ -25,6 +25,7 @@
  * @link http://www.mantisbt.org
  *
  * @uses access_api.php
+ * @uses antispam_api.php
  * @uses authentication_api.php
  * @uses bug_api.php
  * @uses config_api.php
@@ -40,6 +41,7 @@
  */
 
 require_api( 'access_api.php' );
+require_api( 'antispam_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'config_api.php' );
@@ -572,6 +574,8 @@ function tag_get_bugs_attached( $p_tag_id ) {
  * @return boolean
  */
 function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
+	antispam_check();
+
 	access_ensure_bug_level( config_get( 'tag_attach_threshold' ), $p_bug_id, $p_user_id );
 
 	tag_ensure_exists( $p_tag_id );

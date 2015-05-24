@@ -40,6 +40,7 @@
  *
  * @author EugeneZelenko
  * @author Jim-by
+ * @author Red Winged Duck
  */
 
 $s_plugin_format_title = 'Фарматаваньне MantisBT';
@@ -48,6 +49,7 @@ $s_plugin_format_config = 'Канфігурацыя';
 $s_plugin_format_process_text = 'Апрацоўка тэксту';
 $s_plugin_format_process_text_warning_notice = 'Не выключайце, калі Вы сапраўды не ўпэўнены ў тым што Вы робіце. У выключаным стане ўзьнікае верагоднасьць XSS-атакі на сайт.';
 $s_plugin_format_process_urls = 'Апрацоўка URL-адрасоў';
-$s_plugin_format_process_buglinks = 'Спасылкі MantisBT (вынікі/камэнтары)';
+$s_plugin_format_process_buglinks = 'Унутраныя спасылкі MantisBT (праблемы і камэнтары)';
+$s_plugin_format_process_buglinks_info = 'Вашая канфігурацыя вызначае метку <em>Issue</em> як «<literal>%s</literal>», а метку <em>Issue Note</em> як «<literal>%s</literal>»';
 $s_plugin_format_enabled = 'Уключанае';
 $s_plugin_format_disabled = 'Выключанае';

@@ -49,31 +49,46 @@ function wiki_enabled() {
  * @access public
  */
 function wiki_init() {
-	if( wiki_enabled() ) {
+	if( !wiki_enabled() ) {
+		return;
+	}
 
-		# handle legacy style wiki integration
-		require_once( config_get_global( 'class_path' ) . 'MantisCoreWikiPlugin.class.php' );
-		switch( config_get_global( 'wiki_engine' ) ) {
-			case 'dokuwiki':
-				plugin_child( 'MantisCoreDokuwiki' );
-				break;
-			case 'mediawiki':
-				plugin_child( 'MantisCoreMediaWiki' );
-				break;
-			case 'twiki':
-				plugin_child( 'MantisCoreTwiki' );
-				break;
-			case 'WikkaWiki':
-				plugin_child( 'MantisCoreWikkaWiki' );
-				break;
-			case 'xwiki':
-				plugin_child( 'MantisCoreXwiki' );
-				break;
-		}
+	$t_wiki_engine = config_get_global( 'wiki_engine' );
 
-		if( is_null( event_signal( 'EVENT_WIKI_INIT' ) ) ) {
-			config_set_global( 'wiki_enable', OFF );
-		}
+	if( is_blank( config_get_global( 'wiki_engine_url' ) ) ) {
+		# Build default Wiki URL root based on MantisBT path
+		$t_url = parse_url( config_get_global( 'path' ) );
+
+		# Remove unwanted components and set path to Wiki engine name
+		unset( $t_url['query'], $t_url['fragment'] );
+		$t_url['path'] = '/' . $t_wiki_engine . '/';
+
+		$t_url = http_build_url( $t_url );
+		config_set_global( 'wiki_engine_url', $t_url );
+	}
+
+	# handle legacy style wiki integration
+	require_once( config_get_global( 'class_path' ) . 'MantisCoreWikiPlugin.class.php' );
+	switch( $t_wiki_engine ) {
+		case 'dokuwiki':
+			plugin_child( 'MantisCoreDokuwiki' );
+			break;
+		case 'mediawiki':
+			plugin_child( 'MantisCoreMediaWiki' );
+			break;
+		case 'twiki':
+			plugin_child( 'MantisCoreTwiki' );
+			break;
+		case 'WikkaWiki':
+			plugin_child( 'MantisCoreWikkaWiki' );
+			break;
+		case 'xwiki':
+			plugin_child( 'MantisCoreXwiki' );
+			break;
+	}
+
+	if( is_null( event_signal( 'EVENT_WIKI_INIT' ) ) ) {
+		config_set_global( 'wiki_enable', OFF );
 	}
 }
 

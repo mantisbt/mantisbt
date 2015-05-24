@@ -37,9 +37,11 @@
 	<xi:include href="config/customfields.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	<xi:include href="config/myview.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	<xi:include href="config/relationship.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+	<xi:include href="config/wiki.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	<xi:include href="config/subprojects.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	<xi:include href="config/fields.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	<xi:include href="config/logging.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	<xi:include href="config/timetracking.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	<xi:include href="config/soap.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+	<xi:include href="config/antispam.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 </chapter>

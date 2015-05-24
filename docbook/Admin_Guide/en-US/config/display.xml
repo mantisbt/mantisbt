@@ -133,10 +133,26 @@
 		<varlistentry>
 			<term>$g_status_legend_position</term>
 			<listitem>
-				<para>Specifies the position of the status colour legend, can be:
-					STATUS_LEGEND_POSITION_TOP or STATUS_LEGEND_POSITION_BOTTOM.
-					Default is STATUS_LEGEND_POSITION_BOTTOM.
-				</para>
+				<para>Specifies the position of the status color legend</para>
+				<para>Possible values are:</para>
+				<itemizedlist>
+					<listitem><para>
+						<emphasis>STATUS_LEGEND_POSITION_NONE</emphasis>:
+						do not display the legend at all.
+					</para></listitem>
+					<listitem><para>
+						<emphasis>STATUS_LEGEND_POSITION_TOP</emphasis>:
+						display the legend at the top.
+					</para></listitem>
+					<listitem><para>
+						<emphasis>STATUS_LEGEND_POSITION_BOTTOM</emphasis>:
+						display the legend at the bottom. This is the default.
+					</para></listitem>
+					<listitem><para>
+						<emphasis>STATUS_LEGEND_POSITION_BOTH</emphasis>:
+						display the legend both at the top and the bottom.
+					</para></listitem>
+				</itemizedlist>
 			</listitem>
 		</varlistentry>
 		<varlistentry>

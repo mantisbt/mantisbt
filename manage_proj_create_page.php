@@ -113,7 +113,7 @@ if( project_table_empty() ) {
 				<label for="project-view-state"><span><?php echo lang_get( 'view_status' ) ?></span></label>
 				<span class="select">
 					<select id="project-view-state" name="view_state">
-						<?php print_enum_string_option_list( 'view_state' ) ?>
+						<?php print_enum_string_option_list( 'view_state', config_get( 'default_project_view_status', null, ALL_USERS, ALL_PROJECTS ) ) ?>
 					</select>
 				</span>
 				<span class="label-style"></span>

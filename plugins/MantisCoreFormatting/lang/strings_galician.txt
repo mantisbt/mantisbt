@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author Elisardojm
  * @author Toliño
  */
 
@@ -47,6 +48,7 @@ $s_plugin_format_config = 'Configuración';
 $s_plugin_format_process_text = 'Procesamento de texto';
 $s_plugin_format_process_text_warning_notice = 'Non desactive isto a menos que realmente saiba o que está a facer. No estado desactivado, é posible que haxa ataques á escritura (XSS) da páxina.';
 $s_plugin_format_process_urls = 'Procesamento de URL';
-$s_plugin_format_process_buglinks = 'Ligazóns de MantisBT (problema/notas do problema)';
+$s_plugin_format_process_buglinks = 'Ligazóns internas de MantisBT (incidencias e notas de incidencias)';
+$s_plugin_format_process_buglinks_info = 'A súa configuración define as etiquetas da seguinte forma: <em>Incidencia</em> como "<literal>%s</literal>" e <em>Nota</em> como "<literal>%s</literal>"';
 $s_plugin_format_enabled = 'Activado';
 $s_plugin_format_disabled = 'Desactivado';

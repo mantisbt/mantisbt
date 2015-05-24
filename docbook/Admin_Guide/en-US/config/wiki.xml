@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+ <!ENTITY % BOOK_ENTITIES SYSTEM "Admin_Guide.ent">
+]>
+<section id="admin.config.wiki">
+	<title>Wiki Integration</title>
+
+	<para>
+	</para>
+	<variablelist>
+		<varlistentry>
+			<term>$g_wiki_enable</term>
+			<listitem>
+				<para>Set to ON to enable Wiki integration. Defaults to OFF.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_wiki_engine</term>
+			<listitem>
+				<para>The following Wiki Engine values are supported:
+					<itemizedlist>
+						<listitem><para>
+							<emphasis>dokuwiki</emphasis>:
+							<ulink url="https://www.dokuwiki.org/">DokuWiki</ulink>
+						</para></listitem>
+						<listitem><para>
+							<emphasis>mediawiki</emphasis>:
+							<ulink url="https://www.mediawiki.org/">MediaWiki</ulink>
+						</para></listitem>
+						<listitem><para>
+							<emphasis>twiki</emphasis>:
+							<ulink url="http://twiki.org/">TWiki</ulink>
+						</para></listitem>
+						<listitem><para>
+							<emphasis>wikka</emphasis>:
+							<ulink url="http://wikkawiki.org/">WikkaWiki</ulink>
+						</para></listitem>
+						<listitem><para>
+							<emphasis>xwiki</emphasis>:
+							<ulink url="http://www.xwiki.org/">XWiki</ulink>
+						</para></listitem>
+					</itemizedlist>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_wiki_root_namespace</term>
+			<listitem>
+				<para>Wiki namespace to be used as root for all pages relating
+					to this MantisBT installation.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>$g_wiki_engine_url</term>
+			<listitem>
+				<para>URL under which the wiki engine is hosted.
+				</para>
+				<para>Must be on the same server as MantisBT,
+					requires a trailing '/'.
+				</para>
+				<para>If left empty (default), the URL is derived from the
+					global MantisBT path
+					($g_path, see <xref linkend="admin.config.path" />),
+					replacing the URL's path component by the wiki engine string
+					(i.e. if $g_path = 'http://example.com/mantis/' and
+					$g_wiki_engine = 'dokuwiki', the wiki URL will be
+					'http://example.com/dokuwiki/').
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</section>

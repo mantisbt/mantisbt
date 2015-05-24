@@ -313,7 +313,10 @@ function db_check_identifier_size( $p_identifier ) {
  * @deprecated db_query should be used in preference to this function. This function may be removed in 2.0
  */
 function db_query_bound() {
-  return call_user_func_array( 'db_query', func_get_args() );
+	error_parameters( __FUNCTION__ . '()', 'db_query()' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+
+	return call_user_func_array( 'db_query', func_get_args() );
 }
 
 /**
@@ -683,6 +686,13 @@ function db_index_exists( $p_table_name, $p_index_name ) {
  */
 function db_field_exists( $p_field_name, $p_table_name ) {
 	$t_columns = db_field_names( $p_table_name );
+
+	# ADOdb oci8 driver works with uppercase column names, and as of 5.19 does
+	# not provide a way to force them to lowercase
+	if( db_is_oracle() ) {
+		$p_field_name = strtoupper( $p_field_name );
+	}
+
 	return in_array( $p_field_name, $t_columns );
 }
 
