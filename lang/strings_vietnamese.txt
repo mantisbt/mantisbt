@@ -41,6 +41,7 @@
  * @author 9pagod
  * @author Baonguyen21022003
  * @author Duongnvm
+ * @author KhangND
  * @author Max20091
  * @author Minh Nguyen
  * @author Trần Nguyễn Minh Huy
@@ -384,8 +385,8 @@ $s_reminder_sent_none = 'Không có lời nhắc nào có thể gửi';
 $s_reminder_list_truncated = 'danh sách người nhận cắt ngắn';
 $s_bug_send_button = 'Gửi';
 $s_reminder = 'Nhắc nhở';
-$s_reminder_explain = 'Đây là ghi chú sẽ được gửi đến các người nhận được liệt kê yêu cầu phản hồi về issue này';
-$s_reminder_monitor = 'Những người nhận cũng sẽ bắt đầu theo dõi vấn đề này. Họ có thể bỏ đăng ký sử dụng nút Unmonitor';
+$s_reminder_explain = 'Ghi chú này sẽ được gửi đến những người nhận đã chọn, yêu cầu phản hồi về vấn đề này.';
+$s_reminder_monitor = 'Những người nhận cũng sẽ bắt đầu giám sát vấn đề này, họ có thể bỏ đăng ký bằng cách dùng nút "Kết thúc giám sát".';
 $s_reminder_store = 'Đây là ghi chú sẽ được lưu trữ với issue';
 $s_confirm_sponsorship = 'Xin vui lòng xác nhận bạn muốn tài trợ cho issue %1$d for %2$s.';
 $s_stick_bug_button = 'Stick';
@@ -762,7 +763,7 @@ $s_selected_project = 'Chọn dự án';
 $s_valid_project_msg = 'Bạn phải chọn một dự án hợp lệ.';
 $s_signup_done_title = 'Đăng ký tài khoản xử lý.';
 $s_password_emailed_msg = 'Xin chúc mừng. Bạn đã đăng ký thành công. Bạn đã được gửi một xác nhận e-mail để xác minh e-mail của bạn địa chỉ. Truy cập vào liên kết gửi đến cho bạn trong thư điện tử sẽ kích hoạt tài khoản của bạn.';
-$s_no_reponse_msg = 'Bạn sẽ có bảy ngày để hoàn tất quá trình xác nhận tài khoản, nếu bạn không hoàn thành xác nhận tài khoản trong thời hạn bảy ngày, tài khoản này đăng ký mới có thể được thanh lọc.';
+$s_no_reponse_msg = 'Bạn có 7 ngày để hoàn tất quá trình xác nhận tài khoản; nếu bạn không hoàn tất trong thời hạn này, tài khoản vừa đăng kí có thể bị thanh lọc.';
 $s_signup_info = 'Sau khi hoàn thành mẫu đơn này và xác minh các câu trả lời của bạn, bạn sẽ nhận được một xác nhận e-mail tới địa chỉ e-mail mà bạn chỉ định. <br /> Sử dụng xác nhận các e-mail, bạn sẽ có thể kích hoạt tài khoản của bạn. Nếu bạn không kích hoạt tài khoản của bạn trong thời hạn bảy ngày, nó sẽ được thanh lọc. <br /> Bạn phải chỉ định một địa chỉ e-mail hợp lệ để nhận được xác nhận tài khoản e-mail.';
 $s_signup_title = 'Đăng ký';
 $s_signup_button = 'Đăng ký';

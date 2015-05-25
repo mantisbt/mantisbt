@@ -39,6 +39,7 @@
  * @file
  *
  * @author HanV
+ * @author Hansmuller
  * @author McDutchie
  * @author MedShot
  * @author Robin0van0der0vliet
@@ -399,7 +400,7 @@ $s_reminder_list_truncated = 'de lijst met ontvangers is ingekort';
 $s_bug_send_button = 'Verzenden';
 $s_reminder = 'Herinnering';
 $s_reminder_explain = 'Deze herinnering wordt verzonden naar geselecteerde ontvangers met de vraag om terugkoppeling over deze melding.';
-$s_reminder_monitor = 'Deze ontvangers volgen deze melding automatisch. Met de knop "Volgen stoppen" wordt dit uitgeschakeld.';
+$s_reminder_monitor = 'Deze ontvangers gaan de melding automatisch volgen. Met de knop "Volgen stoppen" wordt dit uitgeschakeld.';
 $s_reminder_store = 'Deze herinnering wordt opgeslagen bij de melding.';
 $s_confirm_sponsorship = 'Bevestig dat u melding %1$d wilt sponsoren voor %2$s.';
 $s_stick_bug_button = 'Sticky';
@@ -829,7 +830,7 @@ $s_password_emailed_msg = 'Gefeliciteerd. Uw registratie is verwerkt. U ontvangt
 $s_no_reponse_msg = 'U hebt zeven dagen om het registratieproces af te ronden. Wanneer u dit niet doet binnen deze periode, kan de nieuwe gebruiker verwijderd worden.';
 $s_signup_captcha_request_label = 'Voer de code in zoals deze rechts in beeld weergegeven wordt:';
 $s_signup_captcha_refresh = 'Nieuwe code aanmaken';
-$s_signup_info = 'Wanneer dit formulier is ingevuld en opgestuurd, wordt een bevestiging naar het door u opgegeven e-mailadres verzonden.<br />Door de koppeling in deze e-mail te volgen, kunt u uw gebruiker activeren. U hebt zeven dagen de tijd om de registratie af te ronden. Wanneer u dit niet doet, kan de nieuwe gebruiker verwijderd worden.<br />U moet een geldig e-mailadres opgeven om de bevestiging te kunnen ontvangen.';
+$s_signup_info = 'Wanneer dit formulier is ingevuld en opgestuurd, wordt een bevestiging naar het door u opgegeven e-mailadres verzonden.<br />Door de koppeling in deze e-mail te volgen, kunt u uw account activeren. U hebt zeven dagen de tijd om de registratie af te ronden. Wanneer u dit niet doet, kan de nieuwe gebruiker verwijderd worden.<br />U moet een geldig e-mailadres opgeven om de bevestiging te kunnen ontvangen.';
 $s_signup_title = 'Registreren';
 $s_signup_button = 'Registreren';
 $s_no_password_request = 'Uw wachtwoord wordt door een ander systeem beheerd. Neem contact op met de systeembeheerder.';

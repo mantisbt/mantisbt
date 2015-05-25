@@ -167,7 +167,7 @@ $s_bugnote_date = 'Dattum vun dä Notiz';
 $s_bugnote_description = 'Wi di Notiz beschrevve es';
 $s_error_no_proceed = 'Nämm dä „Retuur“-Knopp vun Dingem Brauser un jang en Sigg zerök.
 Doh kanns De repareeere, wat jraadt verkeht woor, udder en annder Akßjuhn nämme. Natöörlesch kanns De och över et Mennü janz jet andersch donn jonn.';
-$s_login_error = 'Dinge Zohjang heh künnt afjeschalldt sin, udder jeshperrt, udder Dinge Name als Medmaacher, udder Ding Paßwoot es verkeeht ennjejovve.';
+$s_login_error = 'Dinge Zohjang heh künnt afjeschalldt sin, udder jeschpächt, udder Dinge Nahme als Metmaacher, udder Ding Paßwoot es verkeeht ennjejovve.';
 $s_login_cookies_disabled = 'Dinge Web_Brauser kann udder well met <i lang="en">cookies</i> net ömjonn.';
 $s_go_back = 'Jangk retuur';
 $s_proceed = 'Wiggerjonn!';
