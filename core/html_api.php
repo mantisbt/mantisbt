@@ -780,55 +780,27 @@ function print_admin_menu_bar( $p_page ) {
 		echo '</li>' . "\n";
 	}
 
-	if( $p_restrict_by_filter ) {
-		# Remove status values that won't appear as a result of the current filter
-		foreach( $t_status_array as $t_status => $t_name ) {
-			if( $t_simple_filter ) {
-				if( !filter_field_is_none( $t_current_filter[FILTER_PROPERTY_HIDE_STATUS][0] ) &&
-					$t_status >= $t_current_filter[FILTER_PROPERTY_HIDE_STATUS][0] ) {
-					unset( $t_status_array[$t_status] );
-				}
-			} else {
-				if( !in_array( META_FILTER_ANY, $t_current_filter[FILTER_PROPERTY_STATUS] ) &&
-					!in_array( $t_status, $t_current_filter[FILTER_PROPERTY_STATUS] ) ) {
-					unset( $t_status_array[$t_status] );
-				}
-			}
-		}
+	$t_active = 'system_utils.php' == $p_page ? 'active' : '';
+	echo '<li class="' . $t_active . '">' . "\n";
+	echo '<a href="system_utils.php">System Utilities</a>' . "\n";
+	echo '</li>' . "\n";
 
-		# If there aren't at least two statuses showable by the current filter,
-		# don't draw the status bar
-		if( count( $t_status_array ) <= 1 ) {
-			return;
-		}
-	}
+	$t_active = 'test_icons.php' == $p_page ? 'active' : '';
+	echo '<li class="' . $t_active . '">' . "\n";
+	echo '<a href="test_icons.php">Test Icons</a></li>' . "\n";
+	echo '</li>' . "\n";
 
-	# Display the legend
-	$t_legend_position = config_get( 'status_legend_position' ) & $p_display_position;
+	$t_active = 'test_langs.php' == $p_page ? 'active' : '';
+	echo '<li class="' . $t_active . '">' . "\n";
+	echo '<a href="test_langs.php">Test Langs</a>' . "\n";
+	echo '</li>' . "\n";
 
-	if( STATUS_LEGEND_POSITION_NONE != $t_legend_position ) {
-		echo '<br />';
-		echo '<table class="status-legend width100" cellspacing="1">';
-		echo '<tr>';
+	$t_active = 'email_queue.php' == $p_page ? 'active' : '';
+	echo '<li class="' . $t_active . '">' . "\n";
+	echo '<a href="email_queue.php">Email Queue</a>' . "\n";
+	echo '</li>' . "\n";
 
-		# draw the status bar
-		$t_status_enum_string = config_get( 'status_enum_string' );
-		foreach( $t_status_array as $t_status => $t_name ) {
-			$t_val = isset( $t_status_names[$t_status] ) ? $t_status_names[$t_status] : $t_status_array[$t_status];
-			$t_status_label = MantisEnum::getLabel( $t_status_enum_string, $t_status );
-
-			echo '<td class="small-caption ' . $t_status_label . '-color">' . $t_val . '</td>';
-		}
-
-		echo '</tr>';
-		echo '</table>';
-		if( ON == config_get( 'status_percentage_legend' ) ) {
-			html_status_percentage_legend();
-		}
-	}
-	if( STATUS_LEGEND_POSITION_TOP == $t_legend_position ) {
-		echo '<br />';
-	}
+	echo '</ul>' . "\n";
 }
 
 /**
