@@ -113,6 +113,7 @@ function log_event( $p_level, $p_msg ) {
 
 	}
 	$t_log_destination = config_get_global( 'log_destination' );
+
 	if( is_blank( $t_log_destination ) ) {
 		$t_destination = '';
 	} else {
