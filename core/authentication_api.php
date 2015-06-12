@@ -185,7 +185,14 @@ function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
 		if ( BASIC_AUTH == $t_login_method ) {
 			$t_auto_create = true;
 		} else if ( LDAP == $t_login_method && ldap_authenticate_by_username( $p_username, $p_password ) ) {
-			$t_auto_create = true;
+            $t_auto_create = true;
+        } else if( AUTH_PLUGIN == $t_login_method){
+            $p_userdata = array(
+                'username' => $p_username,
+                'password' => $p_password,
+            );
+
+            $t_auto_create = event_signal('EVENT_AUTH_AUTHENTIFICATE_BY_USERNAME', $p_userdata);
 		} else {
 			$t_auto_create = false;
 		}
@@ -341,6 +348,8 @@ function auth_get_password_max_size() {
 		case BASIC_AUTH:
 		case HTTP_AUTH:
 			return DB_FIELD_SIZE_PASSWORD;
+        case AUTH_PLUGIN:
+            return event_signal('EVENT_AUTH_GET_PASSWORD_MAX_SIZE');
 
 		# All other cases, i.e. password is stored as a hash
 		default:
@@ -362,6 +371,14 @@ function auth_does_password_match( $p_user_id, $p_test_password ) {
 	if( LDAP == $t_configured_login_method ) {
 		return ldap_authenticate( $p_user_id, $p_test_password );
 	}
+
+    if( AUTH_PLUGIN == $t_configured_login_method ) {
+        $userData = array(
+            'user_id' => $p_user_id,
+            'test_password' => $p_test_password,
+        );
+        return event_signal( 'EVENT_AUTH_DOES_PASSWORD_MATCH', $userData );
+    }
 
 	$t_password = user_get_field( $p_user_id, 'password' );
 	$t_login_methods = Array(
