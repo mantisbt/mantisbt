@@ -180,6 +180,85 @@ if ( access_has_bug_level( config_get( 'update_bug_assign_threshold', config_get
 </tr>
 <?php } ?>
 
+<!-- display specific fields on status update, according to $g_display_on_status_enum_string parameter -->
+<?php
+$t_display_on_status_enum_string = config_get( 'display_on_status_update_enum_string' );
+
+if ( !bug_is_readonly( $f_bug_id ) && access_has_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id ) ) {
+	
+	$t_display_target_enum_statuses = MantisEnum::getAssocArrayIndexedByValues( $t_display_on_status_enum_string['target_version'] );
+	if ($t_display_target_enum_statuses[$f_new_status] !=''){ // new bug status value is listed in config as status where the target version must be asked
+		if (   version_should_show_product_version( $t_bug->project_id ) ) {
+?>
+<!-- Target Version -->
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo lang_get( 'target_version' ) ?> 
+	</td>
+	<td>
+		<select name="target_version">
+		<?php print_version_option_list( $t_bug->target_version, $t_bug->project_id, VERSION_FUTURE, true, false) ?>
+		</select>
+	</td>
+</tr>
+<?php
+		}
+	}
+
+	$t_display_priority_enum_statuses = MantisEnum::getAssocArrayIndexedByValues( $t_display_on_status_enum_string['priority'] );
+	if ($t_display_priority_enum_statuses[$f_new_status] !=''){ // new bug status value is listed in config as status where the priority must be asked
+?>
+<!--  priority -->
+
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo lang_get( 'priority' ) ?>
+	</td>
+	<td>
+		<select name="priority">
+		<?php print_enum_string_option_list( 'priority', $t_bug->priority ) ?>
+		</select>
+	</td>
+</tr>
+<?php
+	}
+	$t_display_severity_enum_statuses = MantisEnum::getAssocArrayIndexedByValues( $t_display_on_status_enum_string['severity'] );
+	if ($t_display_severity_enum_statuses[$f_new_status] !=''){ // new bug status value is listed in config as status where the severity must be asked
+?>
+<!--  severity -->
+
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo lang_get( 'severity' ) ?> 
+	</td>
+	<td>
+		<select name="severity">
+		<?php print_enum_string_option_list( 'severity', $t_bug->severity ) ?>
+		</select>
+	</td>
+</tr>
+<?php
+	}
+	$t_display_reproducibility_enum_statuses = MantisEnum::getAssocArrayIndexedByValues( $t_display_on_status_enum_string['reproducibility'] );
+	if ($t_display_reproducibility_enum_statuses[$f_new_status] !=''){ // new bug status value is listed in config as status where the severity must be asked
+?>
+<!--  reproducibility -->
+
+<tr <?php echo helper_alternate_class() ?>>
+	<td class="category">
+		<?php echo lang_get( 'reproducibility' ) ?> 
+	</td>
+	<td>
+		<select name="reproducibility">
+		<?php print_enum_string_option_list( 'reproducibility', $t_bug->reproducibility ) ?>
+		</select>
+	</td>
+</tr>
+<?php
+	}
+}
+?>
+
 <?php if ( $t_can_update_due_date ) {
 	$t_date_to_display = '';
 	if ( !date_is_null( $t_bug->due_date ) ) {
