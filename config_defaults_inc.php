@@ -3044,6 +3044,15 @@
 	$g_status_enum_string				= '10:new,20:feedback,30:acknowledged,40:confirmed,50:assigned,80:resolved,90:closed';
 
 	/**
+	* status enum when the information has to be asked during a bug update
+	* @global enum $g_display_on_status_update_enum_string
+	*/
+	$g_display_on_status_update_enum_string['target_version'] = '40:confirmed';
+	$g_display_on_status_update_enum_string['priority'] = '30:acknowledged,40:confirmed';
+	$g_display_on_status_update_enum_string['severity'] = '30:acknowledged,40:confirmed';
+	$g_display_on_status_update_enum_string['reproducibility'] = '30:acknowledged';
+	
+	/**
 	 * @@@ for documentation, the values in this list are also used to define variables in the language files
 	 *  (e.g., $s_new_bug_title referenced in bug_change_status_page.php )
 	 * Embedded spaces are converted to underscores (e.g., "working on" references $s_working_on_bug_title).
