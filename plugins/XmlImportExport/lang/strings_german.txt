@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -44,7 +44,7 @@
  */
 
 $s_plugin_XmlImportExport_title = 'Import/Export Einträge';
-$s_plugin_XmlImportExport_description = 'Ergänzt MantisBT um eine XML-basierende Import- und Export-Funktion.';
+$s_plugin_XmlImportExport_description = 'Erweitert MantisBT um eine XML-basierende Import- und Export-Funktion.';
 $s_plugin_XmlImportExport_import = 'Einträge importieren';
 $s_plugin_XmlImportExport_export = 'XML-Export';
 $s_plugin_XmlImportExport_config_title = 'Konfiguration der XML-Import-/Export-Zugriffslevel';

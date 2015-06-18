@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -252,7 +252,7 @@ $s_account_protected_msg = 'Zohjang jeschöz. Mer künne kei Enshtellunge änder
 $s_account_removed_msg = 'Dinge Zohjang es Der fott jenumme{{int:ellipsis}}';
 $s_confirm_delete_msg = 'Bes De sescher, dat De Dinge Zohjang quit han wells?';
 $s_delete_account_button = 'Donn dä Zohjang ophävve';
-$s_manage_profiles_link = 'Profile';
+$s_manage_profiles_link = 'Profihle';
 $s_change_preferences_link = 'Enshtellunge ändere';
 $s_edit_account_title = 'Zohjang ändere';
 $s_username = 'Metmaacher_Nahme';
@@ -291,22 +291,22 @@ $s_reset_prefs_button = 'Enshtellunge retuur säze';
 $s_timezone = 'Ziggzohn';
 $s_prefs_reset_msg = 'De Enshtellunge sin zeröck jesaz&nbsp;…';
 $s_prefs_updated_msg = 'De Enshtellunge sin om neue Shtand&nbsp;…';
-$s_profile_added_msg = 'Et Profil es dobei jedonn ...';
-$s_profile_deleted_msg = 'Dat Profil es fott ...';
-$s_edit_profile_title = 'Et Profil ändere';
+$s_profile_added_msg = 'Et Profihl es dobei jedonn ...';
+$s_profile_deleted_msg = 'Dat Profihl es fott ...';
+$s_edit_profile_title = 'Et Profihl änndere';
 $s_platform = 'Rääschnerzoot';
 $s_additional_description = 'Zohsäzlejje Enfommazjuhne';
-$s_update_profile_button = 'Donn dat Profil op der neue Shtand bränge';
+$s_update_profile_button = 'Donn dat Profihl op der neue Schtand bränge';
 $s_profile_defaulted_msg = 'Et Shtandatt_Profil is om neue Shtand ...';
-$s_add_profile_title = 'E Profil dobei donn';
-$s_add_profile_button = 'Profil dobei donn';
-$s_edit_or_delete_profiles_title = 'E Profil ändere udder fott schmiiße';
-$s_edit_profile = 'Et Profil ändere';
+$s_add_profile_title = 'E Profihl dobei donn';
+$s_add_profile_button = 'Profihl dobei donn';
+$s_edit_or_delete_profiles_title = 'Profihle änndere udder fott schmiiße';
+$s_edit_profile = 'Et Profihl änndere';
 $s_make_default = 'Zom Shtandatt maache';
-$s_delete_profile = 'Dat Profil fott schmiiße';
-$s_select_profile = 'Dat Profil ußsöhke';
+$s_delete_profile = 'Dat Profihl fott schmiiße';
+$s_select_profile = 'Dat Profihl ußsöhke';
 $s_submit_button = 'Lohß Jonn!';
-$s_profile_updated_msg = 'Dat Profil es op der neue Shtand jebraat&nbsp;...';
+$s_profile_updated_msg = 'Dat Profihl es op der neue Schtand jebraat&nbsp;...';
 $s_my_sponsorship = 'Ming eije Shponserschaffte';
 $s_update_sponsorship_button = 'Et Bezahle Ändere';
 $s_no_sponsored = 'Nix jefonge, wat jeshponsert wöhr un aan Üsch zohjedeilt.';
@@ -382,8 +382,8 @@ $s_target_version = 'Jeplaant för de Version';
 $s_votes = 'Schtemme';
 $s_summary = 'Zosammefaßong';
 $s_update_information_button = 'Lohß Jonn!';
-$s_profile = 'Profil';
-$s_updating_bug_simple_title = 'Aanjaabe övver di Aanjelääjheit op ene neue Shtand bränge';
+$s_profile = 'Profihl';
+$s_updating_bug_simple_title = 'Aanjahbe övver di Aanjelääjheit obb ene neue Schtand bränge';
 $s_view_revisions = 'Versione aankike';
 $s_revision = 'Väsjohn';
 $s_revision_by = 'vum %2$s aam %1$s';
@@ -699,7 +699,7 @@ $s_view_sponsorship_total = 'Aanloore, wat insjesamp för de Shponserschaff em P
 $s_sponsor_issue = 'Shponsor för di Saach';
 $s_others = '<span style="text-transform:uppercase">Sönß</span>';
 $s_see_email_addresses_of_other_users = 'Anderlücks Addräße vun de <i lang="en">e-mail</i> sinn';
-$s_add_profiles = 'Profile dobei donn';
+$s_add_profiles = 'Profihle dobei donn';
 $s_notify_of_new_user_created = 'Nohreesch övver neu aanjelaate Metmaacher';
 $s_email_notification = 'Nohreesch als <i lang="en">e-mail</i>';
 $s_status_changed_to = 'Änderong vum Zohschtand op';
@@ -790,7 +790,7 @@ $MANTIS_ERROR[ERROR_NO_FILE_SPECIFIED] = 'Kein Dattei aanjejovve.';
 $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Di Zoot Dattei es nit zohjelohße.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Dat Verzeijshneß jidd_et nit. Loor donoh en de Enshtellunge för et Projäk.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'E Projäk met däm Name jidd_et ald.';
-$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'De nüüdejje Aanjab „%1$s“ es nit jemaat. Donn ens Ding Enjaabe nohloore.';
+$MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'De nühdeje Aanjab „%1$s“ es nit jemaat. Donn ens Ding Ennjahbe nohloore.';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Heh dä Zohjang es extra jeschöz. Do kanns De nix met maache, bes dat dä Schoz wider opjehovve es.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Zohjreff afjeleehnt.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Et Datei_Huhlaade es donävve jejange. <i lang="en">MantisBT</i> kann dat Denge nit lässe. Donn de Enshtällunge för dat Projäk nohloore.';
@@ -820,7 +820,7 @@ $MANTIS_ERROR[ERROR_FILTER_NOT_FOUND] = 'Ene Felter %1$s ham_mer nit jefonge.';
 $MANTIS_ERROR[ERROR_FILTER_TOO_OLD] = 'Dä Felter, dä De bruche wells, es täschnesch övverhollt un kann nit mieh op ene neue Shtand jebraat wääde. Bes esu joot, un donn dä eijfaach neu aanlääje.';
 $MANTIS_ERROR[ERROR_EMAIL_INVALID] = 'Kapodde Addräß för de <i lang="en">e-mail</i>.';
 $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Adräße för <i lang="en">e-mail</i>, di mer jlish widder fottshmiiß, udder su udder esu nur eijmohl bruche kann, sin nit johjelohße';
-$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profil nit jefonge.';
+$MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profihl nit jefonge.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'Di Zoot Dattei es för et Huhlaade nit zohjelohße.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Di Dattei es dubbelt. Beß esu joot, un donn di Dattei eetß fottschmiiße.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Dä Pat för de Dattei huhzelaade wohr verkieht. Dat Verzeijschneß fäählt, udder uns Webßööver kunnt nit dren schriive.';
@@ -857,7 +857,8 @@ $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Schponsorschaff (%1$s) es ong
 $MANTIS_ERROR[ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW] = 'Wä et maache mööt es ävver nit berääschtesh, öm jeshponserte Aanjelääjeheite ze beärbeide.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_ASSIGNER_ACCESS_LEVEL_TOO_LOW] = 'Zohjang nit zohjelohße, weil mer, öm jeshponserte Aanjelääjeheite zohzewiese, e hüüter Zohjangsrääsch bruch.
 ';
-$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Dä Shponser hät kei Addräß för sing <i lang="en">e-mail</i> aanjejovve. Beß esu joot un donn Ding Profil aanpaße.';
+$MANTIS_ERROR[ERROR_SPONSORSHIP_SPONSOR_NO_EMAIL] = 'Dä Schponser hät kein Addräß för de
+<i lang="en" xml:lang="en" dir="ltr" title="„de eläktrohnesche Poß“">e-mail</i> aanjejovve. Beß esu johd un donn Ding Profihl aanpaße.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_INVALID] = 'För di Enshtellung „%1$s“ es dä onjöltijje Wäät „%2$s“ ußjesöhk.';
 $MANTIS_ERROR[ERROR_BUG_READ_ONLY_ACTION_DENIED] = 'Di Aanjelääjeheit „%1$d“ es bloß för ze Lässe, dröm jeiht dat nit ze maache.';
 $MANTIS_ERROR[ERROR_RELATIONSHIP_ALREADY_EXISTS] = 'Di zwei Aanjelääjeheite han ald ene Bezoch.';
@@ -867,7 +868,7 @@ $MANTIS_ERROR[ERROR_RELATIONSHIP_SAME_BUG] = 'En Aanjelääjeheit kam_mer nit op
 $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Dä Kood_Schlößel för et Beschtääteje paß nit. Versöhk et norr_ens.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Dat Verfahre för verjäße Paßwööt es em Momang nit ze han.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Do moß en Adräß för de <i lang="en">e-mail</i> aanjävve, öm dat Paßwoot neu ze säze.';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Di Aanjaabe paße op keine Metmaacher!';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Di Aanjahbe paße op keine Metmaacher!';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Dä <i lang="en">URL</i> för zom Beschtäätejje es verkeht udder wohd ald jebruch. Donn widder enlogge.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'De jrühßte zohjelohße Aanzahl unjedonne Aanfroore es jez ungerwähß. Bes esu joht un donn med enem Administrator Kuntak opnämme.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = '!FUZZY!!Dat wööd ene Krengel en dä subprojecte ier hierarchy erenn bränge.';
