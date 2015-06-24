@@ -78,6 +78,10 @@
 	}
 	$result = db_query_bound( $query, Array( $c_file_id ) );
 	$row = db_fetch_array( $result );
+	if( false === $t_row ) {
+		# Attachment not found
+		trigger_error( ERROR_GENERIC, ERROR );
+	}
 	extract( $row, EXTR_PREFIX_ALL, 'v' );
 
 	if ( $f_type == 'bug' ) {
