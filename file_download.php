@@ -91,6 +91,10 @@ switch( $f_type ) {
 }
 $t_result = db_query( $t_query, array( $c_file_id ) );
 $t_row = db_fetch_array( $t_result );
+if( false === $t_row ) {
+	# Attachment not found
+	trigger_error( ERROR_GENERIC, ERROR );
+}
 extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
 if( $f_type == 'bug' ) {
