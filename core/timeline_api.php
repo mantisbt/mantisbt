@@ -32,41 +32,6 @@ require_api( 'bug_api.php' );
 require_api( 'history_api.php' );
 
 /**
- * Get list of affected issues between a given time period
- * @param integer $p_start_time Timestamp representing start time of the period.
- * @param integer $p_end_time   Timestamp representing end time of the period.
- * @return array
- */
-function timeline_get_affected_issues( $p_start_time, $p_end_time ) {
-	$t_query = 'SELECT DISTINCT(bug_id) from {bug_history} WHERE date_modified >= ' . db_param() . ' AND date_modified < ' . db_param();
-	$t_result = db_query( $t_query, array( $p_start_time, $p_end_time ) );
-
-	$t_current_project = helper_get_current_project();
-
-	$t_all_issue_ids = array();
-	while( ( $t_row = db_fetch_array( $t_result ) ) !== false ) {
-		$t_all_issue_ids[] = $t_row['bug_id'];
-	}
-
-	bug_cache_array_rows( $t_all_issue_ids );
-
-	$t_issue_ids = array();
-	foreach( $t_all_issue_ids as $t_issue_id ) {
-		if( $t_current_project != ALL_PROJECTS && $t_current_project != bug_get_field( $t_issue_id, 'project_id' ) ) {
-			continue;
-		}
-
-		if( !access_has_bug_level( config_get( 'view_bug_threshold' ), $t_issue_id ) ) {
-			continue;
-		}
-
-		$t_issue_ids[] = $t_issue_id;
-	}
-
-	return $t_issue_ids;
-}
-
-/**
  * Get an array of timeline events
  * Events for which the skip() method returns true will be excluded
  * @param integer $p_start_time Timestamp representing start time of the period.
@@ -74,23 +39,16 @@ function timeline_get_affected_issues( $p_start_time, $p_end_time ) {
  * @return array
  */
 function timeline_events( $p_start_time, $p_end_time ) {
-	$t_issue_ids = timeline_get_affected_issues( $p_start_time, $p_end_time );
-
 	$t_timeline_events = array();
 
-	foreach ( $t_issue_ids as $t_issue_id ) {
-		$t_history_events_array = history_get_raw_events_array( $t_issue_id, null, $p_start_time, $p_end_time );
+		$t_history_events_array = history_get_raw_events_array( null, null, $p_start_time, $p_end_time );
 		$t_history_events_array = array_reverse( $t_history_events_array );
 
 		foreach ( $t_history_events_array as $t_history_event ) {
-			if( $t_history_event['date'] < $p_start_time ||
-				 $t_history_event['date'] >= $p_end_time ) {
-				continue;
-			}
-
 			$t_event = null;
 			$t_user_id = $t_history_event['userid'];
 			$t_timestamp = $t_history_event['date'];
+			$t_issue_id = $t_history_event['bug_id'];
 
 			switch( $t_history_event['type'] ) {
 				case NEW_BUG:
@@ -133,7 +91,6 @@ function timeline_events( $p_start_time, $p_end_time ) {
 				$t_timeline_events[] = $t_event;
 			}
 		}
-	}
 
 	return $t_timeline_events;
 }
