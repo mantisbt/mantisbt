@@ -179,7 +179,8 @@ function history_count_user_recent_events( $p_duration_in_seconds, $p_user_id = 
  * Retrieves the raw history events for the specified bug id and returns it in an array
  * The array is indexed from 0 to N-1.  The second dimension is: 'date', 'userid', 'username',
  * 'field','type','old_value','new_value'
- * @param integer $p_bug_id  A valid bug identifier.
+ * @param integer $p_bug_id  A valid bug identifier or null to not filter by bug.  If no bug id is specified,
+ *                           then returned array will have a field for bug_id, otherwise it won't.
  * @param integer $p_user_id A valid user identifier.
  * @param integer $p_start_time The start time to filter by, or null for all.
  * @param integer $p_end_time   The end time to filter by, or null for all.
@@ -200,11 +201,15 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_ti
 	# bug we will find the line related to the relationship mixed with the custom fields (the history is creted
 	# for the new bug with the same timestamp...)
 
-	$t_params = array( $p_bug_id );
-
-	$t_query = 'SELECT * FROM {bug_history} WHERE bug_id=' . db_param();
-
+	$t_query = 'SELECT * FROM {bug_history}';
+	$t_params = array();
 	$t_where = array();
+
+	if ( $p_bug_id !== null ) {
+		$t_where[] = 'bug_id=' . db_param();
+		$t_params = array( $p_bug_id );
+	}
+
 	if ( $p_start_time !== null ) {
 		$t_where[] = 'date_modified >= ' . db_param();
 		$t_params[] = $p_start_time;
@@ -216,7 +221,7 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_ti
 	}
 
 	if ( count( $t_where ) > 0 ) {
-		$t_query .= ' AND ' . implode( ' AND ', $t_where );
+		$t_query .= ' WHERE ' . implode( ' AND ', $t_where );
 	}
 
 	$t_query .= ' ORDER BY date_modified ' . $t_history_order . ',id';
@@ -224,7 +229,7 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_ti
 	$t_result = db_query( $t_query, $t_params );
 	$t_raw_history = array();
 
-	$t_private_bugnote_visible = access_has_bug_level( config_get( 'private_bugnote_threshold' ), $p_bug_id, $t_user_id );
+	$t_private_bugnote_threshold = config_get( 'private_bugnote_threshold' );
 	$t_tag_view_threshold = config_get( 'tag_view_threshold' );
 	$t_view_attachments_threshold = config_get( 'view_attachments_threshold' );
 	$t_show_monitor_list_threshold = config_get( 'show_monitor_list_threshold' );
@@ -239,20 +244,20 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_ti
 			if( !in_array( $v_field_name, $t_standard_fields ) ) {
 				# check that the item should be visible to the user
 				$t_field_id = custom_field_get_id_from_name( $v_field_name );
-				if( false !== $t_field_id && !custom_field_has_read_access( $t_field_id, $p_bug_id, $t_user_id ) ) {
+				if( false !== $t_field_id && !custom_field_has_read_access( $t_field_id, $v_bug_id, $t_user_id ) ) {
 					continue;
 				}
 			}
 
-			if( ( $v_field_name == 'target_version' ) && !access_has_bug_level( $t_roadmap_view_access_level, $p_bug_id, $t_user_id ) ) {
+			if( ( $v_field_name == 'target_version' ) && !access_has_bug_level( $t_roadmap_view_access_level, $v_bug_id, $t_user_id ) ) {
 				continue;
 			}
 
-			if( ( $v_field_name == 'due_date' ) && !access_has_bug_level( $t_due_date_view_threshold, $p_bug_id, $t_user_id ) ) {
+			if( ( $v_field_name == 'due_date' ) && !access_has_bug_level( $t_due_date_view_threshold, $v_bug_id, $t_user_id ) ) {
 				continue;
 			}
 
-			if( ( $v_field_name == 'handler_id' ) && !access_has_bug_level( $t_show_handler_threshold, $p_bug_id, $t_user_id ) ) {
+			if( ( $v_field_name == 'handler_id' ) && !access_has_bug_level( $t_show_handler_threshold, $v_bug_id, $t_user_id ) ) {
 				continue;
 			}
 		}
@@ -261,13 +266,13 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_ti
 		if( $t_user_id != $v_user_id ) {
 			# bypass if user originated note
 			if( ( $v_type == BUGNOTE_ADDED ) || ( $v_type == BUGNOTE_UPDATED ) || ( $v_type == BUGNOTE_DELETED ) ) {
-				if( !$t_private_bugnote_visible && ( bugnote_get_field( $v_old_value, 'view_state' ) == VS_PRIVATE ) ) {
+				if( !access_has_bug_level( $t_private_bugnote_threshold, $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_old_value, 'view_state' ) == VS_PRIVATE ) ) {
 					continue;
 				}
 			}
 
 			if( $v_type == BUGNOTE_STATE_CHANGED ) {
-				if( !$t_private_bugnote_visible && ( bugnote_get_field( $v_new_value, 'view_state' ) == VS_PRIVATE ) ) {
+				if( !access_has_bug_level( $t_private_bugnote_threshold, $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_new_value, 'view_state' ) == VS_PRIVATE ) ) {
 					continue;
 				}
 			}
@@ -275,21 +280,21 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_ti
 
 		# tags
 		if( $v_type == TAG_ATTACHED || $v_type == TAG_DETACHED || $v_type == TAG_RENAMED ) {
-			if( !access_has_bug_level( $t_tag_view_threshold, $p_bug_id, $t_user_id ) ) {
+			if( !access_has_bug_level( $t_tag_view_threshold, $v_bug_id, $t_user_id ) ) {
 				continue;
 			}
 		}
 
 		# attachments
 		if( $v_type == FILE_ADDED || $v_type == FILE_DELETED ) {
-			if( !access_has_bug_level( $t_view_attachments_threshold, $p_bug_id, $t_user_id ) ) {
+			if( !access_has_bug_level( $t_view_attachments_threshold, $v_bug_id, $t_user_id ) ) {
 				continue;
 			}
 		}
 
 		# monitoring
 		if( $v_type == BUG_MONITOR || $v_type == BUG_UNMONITOR ) {
-			if( !access_has_bug_level( $t_show_monitor_list_threshold, $p_bug_id, $t_user_id ) ) {
+			if( !access_has_bug_level( $t_show_monitor_list_threshold, $v_bug_id, $t_user_id ) ) {
 				continue;
 			}
 		}
@@ -303,6 +308,11 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_ti
 			if( !bug_exists( $t_related_bug_id ) || !access_has_bug_level( config_get( 'view_bug_threshold' ), $t_related_bug_id, $t_user_id ) ) {
 				continue;
 			}
+		}
+
+		# if history is not scoped to a single bug, then include the bug id in the returned array for each element.
+		if ( $p_bug_id === null ) {
+			$t_raw_history[$j]['bug_id'] = $v_bug_id;
 		}
 
 		$t_raw_history[$j]['date'] = $v_date_modified;
