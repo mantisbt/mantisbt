@@ -234,11 +234,23 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_ti
 	$t_view_attachments_threshold = config_get( 'view_attachments_threshold' );
 	$t_show_monitor_list_threshold = config_get( 'show_monitor_list_threshold' );
 	$t_show_handler_threshold = config_get( 'view_handler_threshold' );
+	$t_bug_visible = array();
 
 	$t_standard_fields = columns_get_standard();
 	$j = 0;
 	while( $t_row = db_fetch_array( $t_result ) ) {
 		extract( $t_row, EXTR_PREFIX_ALL, 'v' );
+
+		# if no specific bug id specified, check access level for the bug associated with current row.
+		if ( $p_bug_id === null ) {
+			if ( !isset( $t_bug_visible[$v_bug_id] ) ) {
+				$t_bug_visible[$v_bug_id] = access_has_bug_level( VIEWER, $v_bug_id );
+			}
+
+			if ( !$t_bug_visible[$v_bug_id] ) {
+				continue;
+			}
+		}
 
 		if( $v_type == NORMAL_TYPE ) {
 			if( !in_array( $v_field_name, $t_standard_fields ) ) {
