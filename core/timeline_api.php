@@ -36,13 +36,15 @@ require_api( 'history_api.php' );
  * Events for which the skip() method returns true will be excluded
  * @param integer $p_start_time Timestamp representing start time of the period.
  * @param integer $p_end_time   Timestamp representing end time of the period.
+ * @param integer $p_max_events The maximum number of events to return or 0 for unlimited.
  * @return array
  */
-function timeline_events( $p_start_time, $p_end_time ) {
+function timeline_events( $p_start_time, $p_end_time, $p_max_events ) {
 	$t_timeline_events = array();
 
 		$t_history_events_array = history_get_raw_events_array( null, null, $p_start_time, $p_end_time );
 		$t_history_events_array = array_reverse( $t_history_events_array );
+		$t_count = 0;
 
 		foreach ( $t_history_events_array as $t_history_event ) {
 			$t_event = null;
@@ -89,6 +91,11 @@ function timeline_events( $p_start_time, $p_end_time ) {
 			# Do not include skipped events
 			if( $t_event != null && !$t_event->skip() ) {
 				$t_timeline_events[] = $t_event;
+				$t_count++;
+
+				if ( $p_max_events > 0 && $t_count >= $p_max_events ) {
+					break;
+				}
 			}
 		}
 
@@ -96,50 +103,17 @@ function timeline_events( $p_start_time, $p_end_time ) {
 }
 
 /**
- * Sort an array of timeline events
- * @param array $p_events Array of events being sorted.
- * @return array Sorted array of events.
- */
-function timeline_sort_events( array $p_events ) {
-	$t_count = count( $p_events );
-	$t_stable = false;
-
-	while( !$t_stable ) {
-		$t_stable = true;
-
-		for( $i = 0; $i < $t_count - 1; ++$i ) {
-			if( $p_events[$i]->compare( $p_events[$i+1] ) < 0 ) {
-				$t_temp = $p_events[$i];
-				$p_events[$i] = $p_events[$i+1];
-				$p_events[$i+1] = $t_temp;
-				$t_stable = false;
-			}
-		}
-	}
-
-	return $p_events;
-}
-
-/**
  * Print for display an array of events
  * @param array $p_events   Array of events to display
- * @param int   $p_max_num  Maximum number of events to display, 0 = all
- * @return int  Number of displayed events
  */
-function timeline_print_events( array $p_events, $p_max_num = 0 ) {
+function timeline_print_events( array $p_events ) {
 	if( empty( $p_events ) ) {
 		echo '<p>' . lang_get( 'timeline_no_activity' ) . '</p>';
 		return 0;
 	}
 
-	$i = 0;
 	foreach( $p_events as $t_event ) {
-		# Stop displaying events if we're reached the maximum
-		if( $p_max_num && $i++ >= $p_max_num ) {
-			break;
-		}
 		echo $t_event->html();
 	}
-	return min( $p_max_num, $i);
 }
 
