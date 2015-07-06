@@ -42,8 +42,7 @@ require_api( 'history_api.php' );
 function timeline_events( $p_start_time, $p_end_time, $p_max_events ) {
 	$t_timeline_events = array();
 
-		$t_history_events_array = history_get_raw_events_array( null, null, $p_start_time, $p_end_time );
-		$t_history_events_array = array_reverse( $t_history_events_array );
+		$t_history_events_array = history_get_raw_events_array( null, null, $p_start_time, $p_end_time, $p_max_events, 'DESC' );
 		$t_count = 0;
 
 		foreach ( $t_history_events_array as $t_history_event ) {

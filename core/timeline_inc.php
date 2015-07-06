@@ -46,10 +46,8 @@ echo '<div class="date-range">' . date( $t_short_date_format, $t_start_time ) . 
 
 timeline_print_events( $t_events );
 
-# Don't display "More Events" link if there are no more entries to show
-# Note: as of 2015-01-19, this does not cover the case of entries excluded
-# by filtering (e.g. Status Change not in RESOLVED, CLOSED, REOPENED)
-if( !$f_all && count( $t_events ) == $t_max_events ) {
+# We will compromise accuracy of more link and showing exactly N without clicking more in favor or reducing load.
+if( !$f_all ) {
 	echo '<p>' . $t_prev_link = ' [ <a href="my_view_page.php?days=' . $f_days . '&amp;all=1">' . lang_get( 'timeline_more' ) . '</a> ]</p>';
 }
 

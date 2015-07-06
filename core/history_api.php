@@ -184,10 +184,15 @@ function history_count_user_recent_events( $p_duration_in_seconds, $p_user_id = 
  * @param integer $p_user_id A valid user identifier.
  * @param integer $p_start_time The start time to filter by, or null for all.
  * @param integer $p_end_time   The end time to filter by, or null for all.
+ * @param integer $p_max_events The maximum number of events to return or null/0 for all.
  * @return array
  */
-function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_time = null, $p_end_time = null ) {
-	$t_history_order = config_get( 'history_order' );
+function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_time = null, $p_end_time = null, $p_max_events = null, $p_sort_order = null ) {
+	if ( $p_sort_order === null ) {
+		$t_history_order = config_get( 'history_order' );
+	} else {
+		$t_history_order = $p_sort_order;
+	}
 
 	$t_user_id = (( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
 
@@ -339,6 +344,10 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_ti
 		$t_raw_history[$j]['new_value'] = $v_new_value;
 
 		$j++;
+
+		if ( $p_max_events !== null && $p_max_events !== 0 && $j >= $p_max_events ) {
+			break;
+		}
 	}
 
 	# end for loop
