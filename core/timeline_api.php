@@ -42,10 +42,10 @@ require_api( 'history_api.php' );
 function timeline_events( $p_start_time, $p_end_time, $p_max_events ) {
 	$t_timeline_events = array();
 
-		$t_history_events_array = history_get_raw_events_array( null, null, $p_start_time, $p_end_time, $p_max_events, 'DESC' );
-		$t_count = 0;
+	$t_result = history_get_range_result( /* $p_bug_id */ null, $p_start_time, $p_end_time, 'DESC' );
+	$t_count = 0;
 
-		foreach ( $t_history_events_array as $t_history_event ) {
+	while ( $t_history_event = history_get_event_from_row( $t_result, /* $p_user_id */ auth_get_current_user_id(), /* $p_check_access_to_issue */ true ) ) {
 			$t_event = null;
 			$t_user_id = $t_history_event['userid'];
 			$t_timestamp = $t_history_event['date'];
@@ -96,7 +96,7 @@ function timeline_events( $p_start_time, $p_end_time, $p_max_events ) {
 					break;
 				}
 			}
-		}
+	}
 
 	return $t_timeline_events;
 }

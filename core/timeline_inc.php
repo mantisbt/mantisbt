@@ -17,9 +17,11 @@
 require_once( 'core.php' );
 require_api( 'timeline_api.php' );
 
+define( 'MAX_EVENTS', 50 );
+
 $f_days = gpc_get_int( 'days', 0 );
 $f_all = gpc_get_int( 'all', 0 );
-$t_max_events = $f_all ? 0 : 50;
+$t_max_events = $f_all ? 0 : MAX_EVENTS + 1;
 
 $t_end_time = time() - ( $f_days * SECONDS_PER_DAY );
 $t_start_time = $t_end_time - ( 7 * SECONDS_PER_DAY );
@@ -44,12 +46,12 @@ if( $t_next_days != $f_days ) {
 
 echo '<div class="date-range">' . date( $t_short_date_format, $t_start_time ) . ' .. ' . date( $t_short_date_format, $t_end_time ) . $t_prev_link . $t_next_link . '</div>';
 
-timeline_print_events( $t_events );
-
-# We will compromise accuracy of more link and showing exactly N without clicking more in favor or
-# reducing load.
-if( !$f_all ) {
+if( !$f_all && count( $t_events ) > MAX_EVENTS ) {
+	$t_events = array_slice( $t_events, 0, MAX_EVENTS );
+	timeline_print_events( $t_events );
 	echo '<p>' . $t_prev_link = ' [ <a href="my_view_page.php?days=' . $f_days . '&amp;all=1">' . lang_get( 'timeline_more' ) . '</a> ]</p>';
+} else {
+	timeline_print_events( $t_events );
 }
 
 echo '</div>';
