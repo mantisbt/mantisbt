@@ -46,56 +46,56 @@ function timeline_events( $p_start_time, $p_end_time, $p_max_events ) {
 	$t_count = 0;
 
 	while ( $t_history_event = history_get_event_from_row( $t_result, /* $p_user_id */ auth_get_current_user_id(), /* $p_check_access_to_issue */ true ) ) {
-			$t_event = null;
-			$t_user_id = $t_history_event['userid'];
-			$t_timestamp = $t_history_event['date'];
-			$t_issue_id = $t_history_event['bug_id'];
+		$t_event = null;
+		$t_user_id = $t_history_event['userid'];
+		$t_timestamp = $t_history_event['date'];
+		$t_issue_id = $t_history_event['bug_id'];
 
-			switch( $t_history_event['type'] ) {
-				case NEW_BUG:
-					$t_event = new IssueCreatedTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id );
-					break;
-				case BUGNOTE_ADDED:
-					$t_bugnote_id = $t_history_event['old_value'];
-					$t_event = new IssueNoteCreatedTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, $t_bugnote_id );
-					break;
-				case BUG_MONITOR:
-					# Skip monitors added for others due to reminders, only add monitor events where added
-					# user is the same as the logged in user.
-					if( (int)$t_history_event['old_value'] == (int)$t_history_event['userid'] ) {
-						$t_event = new IssueMonitorTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, true );
-					}
-					break;
-				case BUG_UNMONITOR:
-					$t_event = new IssueMonitorTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, false );
-					break;
-				case TAG_ATTACHED:
-					$t_event = new IssueTagTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, $t_history_event['old_value'], true );
-					break;
-				case TAG_DETACHED:
-					$t_event = new IssueTagTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, $t_history_event['old_value'], false );
-					break;
-				case NORMAL_TYPE:
-					switch( $t_history_event['field'] ) {
-						case 'status':
-							$t_event = new IssueStatusChangeTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, $t_history_event['old_value'], $t_history_event['new_value'] );
-							break;
-						case 'handler_id':
-							$t_event = new IssueAssignedTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, $t_history_event['new_value'] );
-							break;
-					}
-					break;
-			}
-
-			# Do not include skipped events
-			if( $t_event != null && !$t_event->skip() ) {
-				$t_timeline_events[] = $t_event;
-				$t_count++;
-
-				if ( $p_max_events > 0 && $t_count >= $p_max_events ) {
-					break;
+		switch( $t_history_event['type'] ) {
+			case NEW_BUG:
+				$t_event = new IssueCreatedTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id );
+				break;
+			case BUGNOTE_ADDED:
+				$t_bugnote_id = $t_history_event['old_value'];
+				$t_event = new IssueNoteCreatedTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, $t_bugnote_id );
+				break;
+			case BUG_MONITOR:
+				# Skip monitors added for others due to reminders, only add monitor events where added
+				# user is the same as the logged in user.
+				if( (int)$t_history_event['old_value'] == (int)$t_history_event['userid'] ) {
+					$t_event = new IssueMonitorTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, true );
 				}
+				break;
+			case BUG_UNMONITOR:
+				$t_event = new IssueMonitorTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, false );
+				break;
+			case TAG_ATTACHED:
+				$t_event = new IssueTagTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, $t_history_event['old_value'], true );
+				break;
+			case TAG_DETACHED:
+				$t_event = new IssueTagTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, $t_history_event['old_value'], false );
+				break;
+			case NORMAL_TYPE:
+				switch( $t_history_event['field'] ) {
+					case 'status':
+						$t_event = new IssueStatusChangeTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, $t_history_event['old_value'], $t_history_event['new_value'] );
+						break;
+					case 'handler_id':
+						$t_event = new IssueAssignedTimelineEvent( $t_timestamp, $t_user_id, $t_issue_id, $t_history_event['new_value'] );
+						break;
+				}
+				break;
+		}
+
+		# Do not include skipped events
+		if( $t_event != null && !$t_event->skip() ) {
+			$t_timeline_events[] = $t_event;
+			$t_count++;
+
+			if ( $p_max_events > 0 && $t_count >= $p_max_events ) {
+				break;
 			}
+		}
 	}
 
 	return $t_timeline_events;
