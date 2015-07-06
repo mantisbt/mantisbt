@@ -185,6 +185,8 @@ function history_count_user_recent_events( $p_duration_in_seconds, $p_user_id = 
  * @param integer $p_start_time The start time to filter by, or null for all.
  * @param integer $p_end_time   The end time to filter by, or null for all.
  * @param integer $p_max_events The maximum number of events to return or null/0 for all.
+ * @param integer $p_sort_order The sort order ASC, DESC, or null to use default ordering
+ *                              as per config.
  * @return array
  */
 function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_time = null, $p_end_time = null, $p_max_events = null, $p_sort_order = null ) {
@@ -327,7 +329,8 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_ti
 			}
 		}
 
-		# if history is not scoped to a single bug, then include the bug id in the returned array for each element.
+		# if history is not scoped to a single bug, then include the bug id in the returned array
+		# for each element.
 		if ( $p_bug_id === null ) {
 			$t_raw_history[$j]['bug_id'] = $v_bug_id;
 		}
