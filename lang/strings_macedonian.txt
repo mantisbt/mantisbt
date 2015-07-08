@@ -1253,6 +1253,7 @@ $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Оваа податотека е дупл
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Неважечки пат за подигање. Директориумот или не постои, или е недостапен за записи од семрежен опслужувач.';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Нема подигната податотека. Вратете се и одберете податотека пред да зачувате.';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Подигнатата податотека не може да се премести во складишниот директориум. Директориумот или не постои, или е недостапен за записи од семрежниот опслужувач.';
+$MANTIS_ERROR[ERROR_FILE_NOT_FOUND] = 'Не го пронајдов прилогот со назнака „%1$d“.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Не можете да наведете проблем како дупликат на самиот себеси.';
 $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Преработката на проблемот не е пронајдена.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Прилагодливото поле не е пронајдено.';

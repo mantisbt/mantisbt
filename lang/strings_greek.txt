@@ -45,6 +45,7 @@
  * @author Geraki
  * @author Kongr43gpen
  * @author Omnipaedista
+ * @author Protnet
  */
 
 $s_actiongroup_menu_move = 'Μετακίνηση';
@@ -747,7 +748,7 @@ $s_add_profiles = 'Προσθήκη προφίλ';
 $s_notify_of_new_user_created = 'Ενημέρωση στην δημιουργία νέου χρήστη';
 $s_email_notification = 'Eιδοποίηση μέσω e-mail';
 $s_status_changed_to = 'Αλλαγή κατάστασης σε';
-$s_email_on_deleted = 'Email στα Διαγραμμένα';
+$s_email_on_deleted = 'Email στα Διαγεγραμμένα';
 $s_email_on_sponsorship_changed = 'Email on Sponsorship changed';
 $s_email_on_relationship_changed = 'Email on Relationship changed';
 $s_loading = 'Φόρτωση...';

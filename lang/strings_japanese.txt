@@ -45,6 +45,7 @@
  * @author Seiji
  * @author Shirayuki
  * @author SkyDaisy9
+ * @author Sujiniku
  * @author 赤城。
  */
 
@@ -399,8 +400,8 @@ $s_reminder_sent_none = 'リマインダーを送信できませんでした';
 $s_reminder_list_truncated = '宛先リストが切り捨てられました';
 $s_bug_send_button = '送信';
 $s_reminder = '送信内容';
-$s_reminder_explain = 'この課題のフィードバックを要求する受取人に送信します。';
-$s_reminder_monitor = '受取人は、この課題の監視ユーザーに追加されます。監視を止める場合は、「監視終了」ボタンを押してください。';
+$s_reminder_explain = 'このノートは、選択された受取人に送信され、この課題のフィードバックを要求します。';
+$s_reminder_monitor = '受取人は、この課題の監視ユーザーに追加されます; 監視を止める場合は、「監視終了」ボタンを押してください。';
 $s_reminder_store = '送信内容は、この課題のコメントに追加されます。';
 $s_confirm_sponsorship = '課題 %1$d に、%2$s 投票してよろしいですか。';
 $s_stick_bug_button = 'Sticky を設定';
@@ -491,7 +492,7 @@ $s_warning_plain_password_authentication = '<strong>警告:</strong> 平文の�
 $s_warning_default_administrator_account_present = '<strong>警告:</strong> 既定の \'administrator\' アカウントを無効にするかパスワードを変更してください。';
 $s_warning_admin_directory_present = '<strong>警告:</strong> Admin ディレクトリを削除してください。';
 $s_warning_change_setting = '<strong>警告:</strong> "%1$s"は標準の値ではありません(%2$s)。';
-$s_error_database_no_schema_version = '<strong>エラー:</strong> データベースの構造が古い(config(databaseversion) か不正です。データベースが動作しているか確認してください。- データベースの構造のバージョンを取得できません。もし必要なら、メーリングリストにサポートを依頼してください。';
+$s_error_database_no_schema_version = '<strong>エラー:</strong> データベースの構造が古い(config(databaseversion) is0)か不正です。データベースが動作しているか確認してください。- データベースの構造のバージョンを取得できません。もし必要なら、メーリングリストにサポートを依頼してください。';
 $s_error_database_version_out_of_date_2 = '<strong>警告:</strong> データベースの構造が古いようです。ログインする前に、<a href="admin/install.php">アップグレード</a>してください。';
 $s_error_code_version_out_of_date = '<strong>警告:</strong> データベースの構造がインストールしたコードより新しいようです。コードをアップグレードしてください。';
 $s_login_page_info = 'MantisBT へようこそ。';

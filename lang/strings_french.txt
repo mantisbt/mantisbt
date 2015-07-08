@@ -1275,6 +1275,7 @@ $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Fichier dupliqué.  Supprimez d\'abord le
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Chemin de dépôt non valide.  Le répertoire n\'existe pas ou le serveur web ne peut pas y écrire';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Aucun fichier déposé. Vous êtes prié de revenir en arrière et de choisir un fichier avant de cliquer sur le bouton « Envoyer ».';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Le fichier envoyé n\'a pas pu être déplacé vers le répertoire de dépôt. Soit le répertoire n\'existe pas, soit le serveur ne peut pas y accéder.';
+$MANTIS_ERROR[ERROR_FILE_NOT_FOUND] = 'Pièce jointe avec l’id « %1$d » non trouvée.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Impossible de marquer ce bogue comme doublon de lui même.';
 $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Révision du bogue introuvable.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Champ personnalisé introuvable';

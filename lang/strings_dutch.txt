@@ -1259,6 +1259,7 @@ $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Dit bestand bestaat al. Verwijder het bes
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Ongeldig uploadpad. De map bestaat niet of de webserver heeft er geen schrijfrechten op.';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Er is geen bestand toegevoegd. Ga terug naar de vorige pagina en kies een bestand voor u "Toevoegen" kiest.';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Een toegevoegd bestand kan niet naar bestandsopslag worden verplaatst. De map bestaat niet of is niet beschrijfbaar voor de webserver.';
+$MANTIS_ERROR[ERROR_FILE_NOT_FOUND] = 'Bijlage met ID "%1$d" niet aangetroffen.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Een melding kan geen duplicaat van zichzelf zijn.';
 $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Deze versie van de melding is niet aangetroffen.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Gebruikersveld niet gevonden.';
