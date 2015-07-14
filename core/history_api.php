@@ -176,35 +176,29 @@ function history_count_user_recent_events( $p_duration_in_seconds, $p_user_id = 
 }
 
 /**
- * Retrieves the raw history events for the specified bug id and returns it in an array
- * The array is indexed from 0 to N-1.  The second dimension is: 'date', 'userid', 'username',
- * 'field','type','old_value','new_value'
- * @param integer $p_bug_id  A valid bug identifier.
- * @param integer $p_user_id A valid user identifier.
- * @param integer $p_start_time The start time to filter by, or null for all.
- * @param integer $p_end_time   The end time to filter by, or null for all.
- * @return array
+ * Creates and executes a query for the history rows matching the specified criteria.
+ * @param  integer $p_bug_id         The bug id or null for matching any bug.
+ * @param  integer $p_start_time     The start time to filter by, or null for all.
+ * @param  integer $p_end_time       The end time to filter by, or null for all.
+ * @param  string  $p_history_order  The sort order.
+ * @return database result to pass into history_get_event_from_row().
  */
-function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_time = null, $p_end_time = null ) {
-	$t_history_order = config_get( 'history_order' );
+function history_get_range_result( $p_bug_id = null, $p_start_time = null, $p_end_time = null, $p_history_order = null ) {
+	if ( $p_history_order === null ) {
+		$t_history_order = config_get( 'history_order' );
+	} else {
+		$t_history_order = $p_history_order;
+	}
 
-	$t_user_id = (( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
-
-	$t_roadmap_view_access_level = config_get( 'roadmap_view_threshold' );
-	$t_due_date_view_threshold = config_get( 'due_date_view_threshold' );
-
-	# grab history and display by date_modified then field_name
-	# @@@ by MASC I guess it's better by id then by field_name. When we have more history lines with the same
-	# date, it's better to respect the storing order otherwise we should risk to mix different information
-	# I give you an example. We create a child of a bug with different custom fields. In the history of the child
-	# bug we will find the line related to the relationship mixed with the custom fields (the history is creted
-	# for the new bug with the same timestamp...)
-
-	$t_params = array( $p_bug_id );
-
-	$t_query = 'SELECT * FROM {bug_history} WHERE bug_id=' . db_param();
-
+	$t_query = 'SELECT * FROM {bug_history}';
+	$t_params = array();
 	$t_where = array();
+
+	if ( $p_bug_id !== null ) {
+		$t_where[] = 'bug_id=' . db_param();
+		$t_params = array( $p_bug_id );
+	}
+
 	if ( $p_start_time !== null ) {
 		$t_where[] = 'date_modified >= ' . db_param();
 		$t_params[] = $p_start_time;
@@ -216,43 +210,59 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_ti
 	}
 
 	if ( count( $t_where ) > 0 ) {
-		$t_query .= ' AND ' . implode( ' AND ', $t_where );
+		$t_query .= ' WHERE ' . implode( ' AND ', $t_where );
 	}
 
 	$t_query .= ' ORDER BY date_modified ' . $t_history_order . ',id';
 
 	$t_result = db_query( $t_query, $t_params );
-	$t_raw_history = array();
 
-	$t_private_bugnote_visible = access_has_bug_level( config_get( 'private_bugnote_threshold' ), $p_bug_id, $t_user_id );
-	$t_tag_view_threshold = config_get( 'tag_view_threshold' );
-	$t_view_attachments_threshold = config_get( 'view_attachments_threshold' );
-	$t_show_monitor_list_threshold = config_get( 'show_monitor_list_threshold' );
-	$t_show_handler_threshold = config_get( 'view_handler_threshold' );
+	return $t_result;
+}
 
-	$t_standard_fields = columns_get_standard();
-	$j = 0;
-	while( $t_row = db_fetch_array( $t_result ) ) {
+/**
+ * Gets the next accessible history event for current user and specified db result.
+ * @param  string  $p_result      The database result.
+ * @param  integer $p_user_id     The user id or null for logged in user.
+ * @param  boolean $p_check_access_to_issue true: check that user has access to bugs,
+ *                                          false otherwise.
+ * @return array containing the history event or false if no more matches.
+ */
+function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_access_to_issue = true ) {
+	$t_user_id = ( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id;
+
+	while ( $t_row = db_fetch_array( $p_result ) ) {
 		extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
+		# if no specific bug id specified, check access level for the bug associated with current row.
+		if ( $p_check_access_to_issue === null ) {
+			if ( !isset( $t_bug_visible[$v_bug_id] ) ) {
+				$t_bug_visible[$v_bug_id] = access_has_bug_level( VIEWER, $v_bug_id );
+			}
+
+			if ( !$t_bug_visible[$v_bug_id] ) {
+				continue;
+			}
+		}
+
 		if( $v_type == NORMAL_TYPE ) {
-			if( !in_array( $v_field_name, $t_standard_fields ) ) {
+			if( !in_array( $v_field_name, columns_get_standard() ) ) {
 				# check that the item should be visible to the user
 				$t_field_id = custom_field_get_id_from_name( $v_field_name );
-				if( false !== $t_field_id && !custom_field_has_read_access( $t_field_id, $p_bug_id, $t_user_id ) ) {
+				if( false !== $t_field_id && !custom_field_has_read_access( $t_field_id, $v_bug_id, $t_user_id ) ) {
 					continue;
 				}
 			}
 
-			if( ( $v_field_name == 'target_version' ) && !access_has_bug_level( $t_roadmap_view_access_level, $p_bug_id, $t_user_id ) ) {
+			if( ( $v_field_name == 'target_version' ) && !access_has_bug_level( config_get( 'roadmap_view_threshold' ), $v_bug_id, $t_user_id ) ) {
 				continue;
 			}
 
-			if( ( $v_field_name == 'due_date' ) && !access_has_bug_level( $t_due_date_view_threshold, $p_bug_id, $t_user_id ) ) {
+			if( ( $v_field_name == 'due_date' ) && !access_has_bug_level( config_get( 'due_date_view_threshold' ), $v_bug_id, $t_user_id ) ) {
 				continue;
 			}
 
-			if( ( $v_field_name == 'handler_id' ) && !access_has_bug_level( $t_show_handler_threshold, $p_bug_id, $t_user_id ) ) {
+			if( ( $v_field_name == 'handler_id' ) && !access_has_bug_level( config_get( 'view_handler_threshold' ), $v_bug_id, $t_user_id ) ) {
 				continue;
 			}
 		}
@@ -261,13 +271,13 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_ti
 		if( $t_user_id != $v_user_id ) {
 			# bypass if user originated note
 			if( ( $v_type == BUGNOTE_ADDED ) || ( $v_type == BUGNOTE_UPDATED ) || ( $v_type == BUGNOTE_DELETED ) ) {
-				if( !$t_private_bugnote_visible && ( bugnote_get_field( $v_old_value, 'view_state' ) == VS_PRIVATE ) ) {
+				if( !access_has_bug_level( config_get( 'private_bugnote_threshold' ), $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_old_value, 'view_state' ) == VS_PRIVATE ) ) {
 					continue;
 				}
 			}
 
 			if( $v_type == BUGNOTE_STATE_CHANGED ) {
-				if( !$t_private_bugnote_visible && ( bugnote_get_field( $v_new_value, 'view_state' ) == VS_PRIVATE ) ) {
+				if( !access_has_bug_level( config_get( 'private_bugnote_threshold' ), $v_bug_id, $t_user_id ) && ( bugnote_get_field( $v_new_value, 'view_state' ) == VS_PRIVATE ) ) {
 					continue;
 				}
 			}
@@ -275,21 +285,21 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_ti
 
 		# tags
 		if( $v_type == TAG_ATTACHED || $v_type == TAG_DETACHED || $v_type == TAG_RENAMED ) {
-			if( !access_has_bug_level( $t_tag_view_threshold, $p_bug_id, $t_user_id ) ) {
+			if( !access_has_bug_level( config_get( 'tag_view_threshold' ), $v_bug_id, $t_user_id ) ) {
 				continue;
 			}
 		}
 
 		# attachments
 		if( $v_type == FILE_ADDED || $v_type == FILE_DELETED ) {
-			if( !access_has_bug_level( $t_view_attachments_threshold, $p_bug_id, $t_user_id ) ) {
+			if( !access_has_bug_level( config_get( 'view_attachments_threshold' ), $v_bug_id, $t_user_id ) ) {
 				continue;
 			}
 		}
 
 		# monitoring
 		if( $v_type == BUG_MONITOR || $v_type == BUG_UNMONITOR ) {
-			if( !access_has_bug_level( $t_show_monitor_list_threshold, $p_bug_id, $t_user_id ) ) {
+			if( !access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $v_bug_id, $t_user_id ) ) {
 				continue;
 			}
 		}
@@ -305,17 +315,58 @@ function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_ti
 			}
 		}
 
-		$t_raw_history[$j]['date'] = $v_date_modified;
-		$t_raw_history[$j]['userid'] = $v_user_id;
+		$t_event = array();
+		$t_event['bug_id'] = $v_bug_id;
+		$t_event['date'] = $v_date_modified;
+		$t_event['userid'] = $v_user_id;
 
 		# user_get_name handles deleted users, and username vs realname
-		$t_raw_history[$j]['username'] = user_get_name( $v_user_id );
+		$t_event['username'] = user_get_name( $v_user_id );
 
-		$t_raw_history[$j]['field'] = $v_field_name;
-		$t_raw_history[$j]['type'] = $v_type;
-		$t_raw_history[$j]['old_value'] = $v_old_value;
-		$t_raw_history[$j]['new_value'] = $v_new_value;
+		$t_event['field'] = $v_field_name;
+		$t_event['type'] = $v_type;
+		$t_event['old_value'] = $v_old_value;
+		$t_event['new_value'] = $v_new_value;
 
+		return $t_event;
+	}
+
+	return false;
+}
+
+/**
+ * Retrieves the raw history events for the specified bug id and returns it in an array
+ * The array is indexed from 0 to N-1.  The second dimension is: 'date', 'userid', 'username',
+ * 'field','type','old_value','new_value'
+ * @param integer $p_bug_id  A valid bug identifier or null to not filter by bug.  If no bug id is specified,
+ *                           then returned array will have a field for bug_id, otherwise it won't.
+ * @param integer $p_user_id A valid user identifier.
+ * @param integer $p_start_time The start time to filter by, or null for all.
+ * @param integer $p_end_time   The end time to filter by, or null for all.
+ * @return array
+ */
+function history_get_raw_events_array( $p_bug_id, $p_user_id = null, $p_start_time = null, $p_end_time = null ) {
+	$t_user_id = (( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id );
+
+	# grab history and display by date_modified then field_name
+	# @@@ by MASC I guess it's better by id then by field_name. When we have more history lines with the same
+	# date, it's better to respect the storing order otherwise we should risk to mix different information
+	# I give you an example. We create a child of a bug with different custom fields. In the history of the child
+	# bug we will find the line related to the relationship mixed with the custom fields (the history is creted
+	# for the new bug with the same timestamp...)
+
+	$t_result = history_get_range_result( $p_bug_id, $p_start_time, $p_end_time );
+
+	$t_raw_history = array();
+
+	$j = 0;
+	while( true ) {
+		$t_event = history_get_event_from_row( $t_result, $t_user_id, /* check access */ true );
+		if ( $t_event === false ) {
+			break;
+		}
+
+		$t_raw_history[$j] = $t_event;
 		$j++;
 	}
 

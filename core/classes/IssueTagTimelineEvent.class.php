@@ -40,7 +40,7 @@ class IssueTagTimelineEvent extends TimelineEvent {
 	 * @param boolean $p_tag       Whether tag was being linked or unlinked from the issue.
 	 */
 	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_tag_name, $p_tag ) {
-		parent::__construct( $p_timestamp, $p_user_id, $p_issue_id );
+		parent::__construct( $p_timestamp, $p_user_id );
 
 		$this->issue_id = $p_issue_id;
 		$this->tag_name = $p_tag_name;
