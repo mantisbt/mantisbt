@@ -1251,6 +1251,7 @@ $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Ur restr doublet eo. Dilamit ar restr da 
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Hent kargañ direizh. Pe n\'eus ket eus ar c\'havlec\'h, pe n\'eo ket ar servijer web evit skrivañ ennañ.';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'N\'eus bet karget restr ebet. Distroit, mar plij, ha dibabit ur restr a-raok pouezañ war Kargañ.';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'N\'eus ket bet gallet dilec\'hiañ ar restr karget d\'ar c\'havlec\'h stokañ. Pe n\'eus ket eus ar c\'havlec\'h, pe n\'eo ket ar servijer evit skrivañ ennañ.';
+$MANTIS_ERROR[ERROR_FILE_NOT_FOUND] = 'Restr stag gant an ID "%1$d" nann kavet.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Ne c\'hallit ket ober eus un draen un doublenn anezhañ e-unan.';
 $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'N\'eo ket bet kavet adweladenn an draen';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Ar vaezienn personelaet n\'eo ket bet kavet.';

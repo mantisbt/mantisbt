@@ -1263,6 +1263,7 @@ $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Filen finns redan.  Var god ta bort den a
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Ogiltig sökväg för skickade filer.  Katalogen finns inte eller är inte skrivbar av webservern.';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Ingen fil skickades. Gå tillbaka och välj en fil innan du trycker på Skicka.';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Filen som skickades in kunde inte flyttas till fillagringskatalogen. Katalogen finns inte eller är inte skrivbar för servern.';
+$MANTIS_ERROR[ERROR_FILE_NOT_FOUND] = 'Bilaga med id "%1$d" hittades inte.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Kan inte ange ett ärende som kopia av sig själv.';
 $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Ärenderevision hittas ej.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Det egendefinierade fältet kunde inte hittas.';
