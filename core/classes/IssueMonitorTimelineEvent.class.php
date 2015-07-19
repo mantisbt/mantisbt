@@ -38,7 +38,7 @@ class IssueMonitorTimelineEvent extends TimelineEvent {
 	 * @param boolean $p_monitor   Whether issue was being monitored or unmonitored.
 	 */
 	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_monitor ) {
-		parent::__construct( $p_timestamp, $p_user_id, $p_issue_id );
+		parent::__construct( $p_timestamp, $p_user_id );
 
 		$this->issue_id = $p_issue_id;
 		$this->monitor = $p_monitor;

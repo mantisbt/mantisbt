@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -45,6 +45,7 @@
  * @author Seiji
  * @author Shirayuki
  * @author SkyDaisy9
+ * @author Sujiniku
  * @author 赤城。
  */
 
@@ -83,11 +84,11 @@ $s_public_project_msg = '公開プロジェクトです。全ユーザーがア�
 $s_private_project_msg = '非公開プロジェクトです。管理者とプロジェクト参加者のみがアクセスできます。';
 $s_access_level_project = 'プロジェクト アクセス レベル';
 $s_view_submitted_bug_link = '登録した課題の表示 %1$s';
-$s_assigned_projects = '参加プロジェクト';
+$s_assigned_projects = '割り当て済みプロジェクト';
 $s_assigned_projects_label = '割り当て済みプロジェクト';
 $s_unassigned_projects_label = '未割り当てプロジェクト';
 $s_print = '印刷';
-$s_jump = 'ID 指定';
+$s_jump = 'ジャンプ';
 $s_copy_users = 'ユーザーをコピー';
 $s_copy_categories_from = '指定したプロジェクトからコピー';
 $s_copy_categories_to = '指定したプロジェクトにコピー';
@@ -125,16 +126,16 @@ $s_update_subproject_inheritance = 'サブプロジェクトの継承を更新';
 $s_duplicate_of = '重複先';
 $s_has_duplicate = '重複元';
 $s_related_to = '関連';
-$s_dependant_on = '子';
-$s_blocks = '親';
+$s_dependant_on = 'parent of';
+$s_blocks = 'child of';
 $s_new_bug = '新規課題';
 $s_bugnote_added = 'コメント追加';
 $s_bugnote_edited = 'コメント編集';
 $s_bugnote_deleted = 'コメント削除';
-$s_summary_updated = '概要更新';
-$s_description_updated = '詳細更新';
-$s_additional_information_updated = '追加情報更新';
-$s_steps_to_reproduce_updated = '再現方法更新';
+$s_summary_updated = '要約の更新';
+$s_description_updated = '説明の更新';
+$s_additional_information_updated = '追加情報の更新';
+$s_steps_to_reproduce_updated = '再現方法の更新';
 $s_file_added = '添付ファイル追加';
 $s_file_deleted = '添付ファイル削除';
 $s_bug_deleted = '課題削除';
@@ -267,12 +268,12 @@ $s_email_fixed_in_version = '修正済バージョン';
 $s_email_target_version = '修正予定バージョン';
 $s_email_date_submitted = '登録日';
 $s_email_last_modified = '最終更新日';
-$s_email_summary = '概要';
+$s_email_summary = '要約';
 $s_email_description = '説明';
 $s_email_additional_information = '追加情報';
 $s_email_steps_to_reproduce = '再現するための手順';
 $s_account_protected_msg = 'アカウントが保護されています。設定を変更できません...';
-$s_account_removed_msg = 'あなたのアカウントは削除済みです...';
+$s_account_removed_msg = 'あなたのアカウントは除去済みです...';
 $s_confirm_delete_msg = 'あなたのアカウントを本当に削除しますか?';
 $s_delete_account_button = 'アカウントを削除';
 $s_manage_profiles_link = 'プロフィール';
@@ -399,8 +400,8 @@ $s_reminder_sent_none = 'リマインダーを送信できませんでした';
 $s_reminder_list_truncated = '宛先リストが切り捨てられました';
 $s_bug_send_button = '送信';
 $s_reminder = '送信内容';
-$s_reminder_explain = 'この課題のフィードバックを要求する受取人に送信します。';
-$s_reminder_monitor = '受取人は、この課題の監視ユーザーに追加されます。監視を止める場合は、「監視終了」ボタンを押してください。';
+$s_reminder_explain = 'このノートは、選択された受取人に送信され、この課題のフィードバックを要求します。';
+$s_reminder_monitor = '受取人は、この課題の監視ユーザーに追加されます; 監視を止める場合は、「監視終了」ボタンを押してください。';
 $s_reminder_store = '送信内容は、この課題のコメントに追加されます。';
 $s_confirm_sponsorship = '課題 %1$d に、%2$s 投票してよろしいですか。';
 $s_stick_bug_button = 'Sticky を設定';
@@ -442,7 +443,7 @@ $s_fixed_in_version_label = '修正されたバージョン:';
 $s_target_version = '修正予定バージョン';
 $s_target_version_label = '対象バージョン:';
 $s_votes = '実装希望得票数';
-$s_summary = '概要';
+$s_summary = '要約';
 $s_description = '説明';
 $s_steps_to_reproduce = '再現方法';
 $s_update_information_button = '情報を更新';
@@ -491,7 +492,7 @@ $s_warning_plain_password_authentication = '<strong>警告:</strong> 平文の�
 $s_warning_default_administrator_account_present = '<strong>警告:</strong> 既定の \'administrator\' アカウントを無効にするかパスワードを変更してください。';
 $s_warning_admin_directory_present = '<strong>警告:</strong> Admin ディレクトリを削除してください。';
 $s_warning_change_setting = '<strong>警告:</strong> "%1$s"は標準の値ではありません(%2$s)。';
-$s_error_database_no_schema_version = '<strong>エラー:</strong> データベースの構造が古い(config(databaseversion) か不正です。データベースが動作しているか確認してください。- データベースの構造のバージョンを取得できません。もし必要なら、メーリングリストにサポートを依頼してください。';
+$s_error_database_no_schema_version = '<strong>エラー:</strong> データベースの構造が古い(config(databaseversion) is0)か不正です。データベースが動作しているか確認してください。- データベースの構造のバージョンを取得できません。もし必要なら、メーリングリストにサポートを依頼してください。';
 $s_error_database_version_out_of_date_2 = '<strong>警告:</strong> データベースの構造が古いようです。ログインする前に、<a href="admin/install.php">アップグレード</a>してください。';
 $s_error_code_version_out_of_date = '<strong>警告:</strong> データベースの構造がインストールしたコードより新しいようです。コードをアップグレードしてください。';
 $s_login_page_info = 'MantisBT へようこそ。';
@@ -826,7 +827,7 @@ $s_password_emailed_msg = 'おめでとうございます。登録に成功し�
 $s_no_reponse_msg = 'アカウント確認処理の終了まで 7 日間待ちます。もしあなたが 7 日以内に確認を行わなければ、この新しい登録アカウントは除去される場合があります。';
 $s_signup_captcha_request_label = '右側のボックスに表示されている文字列をそのまま入力してください。';
 $s_signup_captcha_refresh = '新しいコードを生成する';
-$s_signup_info = 'このフォームへの入力を完了し、入力内容を検証するとすぐに、指定したメールアドレスに確認メールをお送りします。<br />確認メールの指示に従うと、アカウントを有効にできます。7 日以内にアカウントを有効にできなかった場合は、アカウントは無効になります。<br />アカウントの確認メールを受信するために、有効なメールアドレスを指定する必要があります。';
+$s_signup_info = 'このフォームへの入力を完了し、入力内容を検証するとすぐに、指定したメールアドレスに確認メッセージをお送りします。<br />確認メールのリンクに従うと、アカウントを有効にできます。7 日以内にアカウントを有効にできなかった場合は、アカウントは無効になります。<br />アカウントの確認メールを受信するために、有効なメールアドレスを指定する必要があります。';
 $s_signup_title = 'ユーザー登録';
 $s_signup_button = 'ユーザー登録';
 $s_no_password_request = 'パスワードは他のシステムで管理されています。システム管理者に確認してください。';
@@ -976,7 +977,7 @@ $s_custom_field_type_enum_string = '0:文字列,1:整数,2:浮動小数点,3:列
 $s_confirm_used_custom_field_deletion = 'このカスタム項目は、現在1つ以上のプロジェクトで使用されています。<br />続行すると、この項目のすべての値が削除されます。削除すると元に戻せません。<br />削除したくない場合は、ブラウザーの戻るボタンで戻ってください。続行する場合は、下のボタンをクリックしてください。';
 $s_confirm_custom_field_deletion = 'このカスタム項目とすべての設定した値を本当に削除しますか?';
 $s_field_delete_button = '項目の削除';
-$s_confirm_custom_field_unlinking = 'このカスタム項目と関連づけられた値を本当にプロジェクトから削除しますか？';
+$s_confirm_custom_field_unlinking = 'このカスタム項目と関連づけられた値を本当にプロジェクトからリンク除去しますか？ カスタム項目そのものが削除されないかぎり、値は削除されません。';
 $s_field_remove_button = '項目の削除';
 $s_hide_status = 'ステータス非表示';
 $s_hide_status_label = '非表示にするステータス:';

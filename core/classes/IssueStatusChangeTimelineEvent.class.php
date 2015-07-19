@@ -50,7 +50,7 @@ class IssueStatusChangeTimelineEvent extends TimelineEvent {
 	 * @param integer $p_new_status New status value of issue.
 	 */
 	public function __construct( $p_timestamp, $p_user_id, $p_issue_id, $p_old_status, $p_new_status ) {
-		parent::__construct( $p_timestamp, $p_user_id, $p_issue_id );
+		parent::__construct( $p_timestamp, $p_user_id );
 
 		$this->issue_id = $p_issue_id;
 		$this->old_status = $p_old_status;

@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -925,7 +925,7 @@ $s_query_name_label = '过滤器名：';
 $s_query_exists = '此特定的筛选器似乎已经存在。';
 $s_query_dupe_name = '这个名称已经被另外一个筛选器使用，请选择一个不同的名称。';
 $s_query_blank_name = '没有名称就不能保存过滤器，在保存前请给当前过滤器起一个名字。';
-$s_query_name_too_long = '您不能将存储与超过 64 个字符的筛选器名称。请给此筛选器较短的名称。';
+$s_query_name_too_long = '您不能存储超过 64 个字符的过滤器名称。请为此过滤器提供一个更短的名称。';
 $s_query_store_error = '保存此筛选器时出错。';
 $s_open_queries = '管理过滤器';
 $s_query_delete_msg = '您确实要删除此筛选器吗？';
@@ -1021,7 +1021,7 @@ $s_roadmap = '路线图';
 $s_resolved_progress = '已解决 %1$d 个问题(共 %2$d 个问题)，进度(%3$d%%)。';
 $s_roadmap_empty = '没有可用路线图信息';
 $s_roadmap_empty_manager = '没有可用的线路图信息。一旦项目有版本并且问题有设置“目标版本”就会包括问题。';
-$s_http_auth_realm = 'MantisBT 问题管理系统登录';
+$s_http_auth_realm = 'MantisBT 登录';
 $s_bug = '问题';
 $s_bugs = '个问题';
 $s_add_new_relationship = '新建关联';
@@ -1264,6 +1264,7 @@ $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = '文件重复，请先删除原有的文�
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = '无效的上传路径；目录不存在或 Web 服务器不能写入该目录';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = '没有上传文件，请返回并选择要上传的文件';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = '上传的文件不能转移到文件储存目录；目录不存在或 Web 服务器不能写入该目录';
+$MANTIS_ERROR[ERROR_FILE_NOT_FOUND] = '找不到ID为“%1$d”的附件。';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = '不能将问题设置为自身的重复问题。';
 $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = '未找到问题修订';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = '没有找到自定义字段';

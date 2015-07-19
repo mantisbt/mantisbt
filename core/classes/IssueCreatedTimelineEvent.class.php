@@ -36,7 +36,7 @@ class IssueCreatedTimelineEvent extends TimelineEvent {
 	 * @param integer $p_issue_id  A issue identifier.
 	 */
 	public function __construct( $p_timestamp, $p_user_id, $p_issue_id ) {
-		parent::__construct( $p_timestamp, $p_user_id, $p_issue_id );
+		parent::__construct( $p_timestamp, $p_user_id );
 
 		$this->issue_id = $p_issue_id;
 	}

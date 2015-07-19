@@ -30,43 +30,14 @@
 class TimelineEvent {
 	protected $timestamp;
 	protected $user_id;
-	protected $tie_breaker;
 
 	/**
 	 * @param integer $p_timestamp   Timestamp representing the time the event occurred.
 	 * @param integer $p_user_id     An user identifier.
-	 * @param boolean $p_tie_breaker A value to sort events by if timestamp matches (generally issue identifier).
 	 */
-	public function __construct( $p_timestamp, $p_user_id, $p_tie_breaker ) {
+	public function __construct( $p_timestamp, $p_user_id ) {
 		$this->timestamp = $p_timestamp;
 		$this->user_id = $p_user_id;
-		$this->tie_breaker = $p_tie_breaker;
-	}
-
-	/**
-	 * Comparision function for ordering of timeline events.
-	 * We compare first by timestamp, then by the tie_breaker field.
-	 * @param TimelineEvent $p_other An instance of TimelineEvent to compare against.
-	 * @return integer
-	 */
-	public function compare( TimelineEvent $p_other ) {
-		if( $this->timestamp < $p_other->timestamp ) {
-			return -1;
-		}
-
-		if( $this->timestamp > $p_other->timestamp ) {
-			return 1;
-		}
-
-		if( $this->tie_breaker < $p_other->tie_breaker ) {
-			return -1;
-		}
-
-		if( $this->tie_breaker > $p_other->tie_breaker ) {
-			return 1;
-		}
-
-		return 0;
 	}
 
 	/**

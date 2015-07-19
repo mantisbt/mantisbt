@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -45,7 +45,7 @@ $s_plugin_graph_title = 'Manits Dijajramme';
 $s_plugin_graph_description = 'Dat offizjäjje Zohsazprojramm zom erinshtöpselle, för Dijajramme ze maache.';
 $s_plugin_MantisGraph_title = 'Manits Dijajramme';
 $s_plugin_MantisGraph_menu_advanced_summary = 'De Zosammefassung';
-$s_plugin_MantisGraph_config = 'Enschtällunge';
+$s_plugin_MantisGraph_config = 'Enschtällonge';
 $s_plugin_MantisGraph_synthesis_link = 'Zosammejesaz';
 $s_plugin_MantisGraph_status_link = 'Pro Zohshtand';
 $s_plugin_MantisGraph_priority_link = 'Pro Weshteshkeit';

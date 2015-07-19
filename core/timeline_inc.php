@@ -21,10 +21,11 @@ define( 'MAX_EVENTS', 50 );
 
 $f_days = gpc_get_int( 'days', 0 );
 $f_all = gpc_get_int( 'all', 0 );
+$t_max_events = $f_all ? 0 : MAX_EVENTS + 1;
 
 $t_end_time = time() - ( $f_days * SECONDS_PER_DAY );
 $t_start_time = $t_end_time - ( 7 * SECONDS_PER_DAY );
-$t_events = timeline_events( $t_start_time, $t_end_time );
+$t_events = timeline_events( $t_start_time, $t_end_time, $t_max_events );
 
 $t_collapse_block = is_collapsed( 'timeline' );
 $t_block_css = $t_collapse_block ? 'collapsed' : '';

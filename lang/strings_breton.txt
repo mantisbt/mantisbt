@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -395,7 +395,7 @@ $s_reminder_sent_none = 'N\'eus ket bet gallet kas kemenn derc\'hel soñ ebet';
 $s_reminder_list_truncated = 'troc\'het eo roll an degemererien';
 $s_bug_send_button = 'Kas';
 $s_reminder = 'Notenn da zerc\'hel soñj';
-$s_reminder_explain = 'Kaset e vo an notenn-mañ d\'an degemererien zo oc\'h evezhiañ an draen-mañ.';
+$s_reminder_explain = 'Kaset e vo an notenn-mañ d\'an degemererien dibabet evit goulenn o ali diwar-benn an draen-mañ.';
 $s_reminder_monitor = 'An degemererien-mañ a grogo ivez da evezhiañ an draen. Gallout a raint paouez da evezhiañ en ur implijout ar bouton « Paouez da evezhiañ ».';
 $s_reminder_store = 'Enrollet e vo an notenn-mañ gant an draen.';
 $s_confirm_sponsorship = 'Kadarnait hoc\'h eus c\'hoant da sponsorañ an draen %1$d evit %2$s, mar plij.';
@@ -825,7 +825,7 @@ $s_password_emailed_msg = 'Gourc\'hemennoù deoc\'h. Enskrivet-mat oc\'h. Brema�
 $s_no_reponse_msg = 'Seizh devezh ho po da echuiñ an argerzh da gadarnaat ar gont ; ma ne echuit ket ar c\'hadarnadur a-benn seizh devezh, e c\'hallfe ar gont krouet a-nevez bezañ distrujet.';
 $s_signup_captcha_request_label = 'Ebarzhit ar c\'hod evel m\'emañ er voest a-zehou :';
 $s_signup_captcha_refresh = 'Krouiñ ur c\'hod nevez';
-$s_signup_info = 'P\'ho po echuet leuniañ ar furmskrid-mañ ha pa vo gwiriet ho respontoù, e vo kaset deoc\'h ur postel kadarnaat d\'ar chomlec\'h postel hoc\'h eus diferet.<br/>Gallout a reot gweredekaat ho kont dre implijout ar postel kadarnaat. Ma ne weredekait ket ho kont didan seizh deiz, e vo distrujet.<br/>Ret eo deoc\'h reiñ ur chomlec\'h postel reizh evit resev ar postel da gadarnaat ar gont.';
+$s_signup_info = 'P\'ho po echuet leuniañ ar furmskrid-mañ ha pa vo gwiriet ho respontoù, e vo kaset deoc\'h ur postel kadarnaat d\'ar chomlec\'h postel hoc\'h eus diferet.<br/>Gallout a reot gweredekaat ho kont dre implijout ar postel kadarnaat. Ma ne weredekait ket ho kont dindan seizh deiz, e vo distrujet.<br/>Ret eo deoc\'h reiñ ur chomlec\'h postel reizh evit resev ar postel da gadarnaat ar gont.';
 $s_signup_title = 'En em enskrivañ';
 $s_signup_button = 'En em enskrivañ';
 $s_no_password_request = 'Meret eo ho ker-tremen gant ur reizhiad all. Kit e darempred gant merour ar reizhiad, mar plij.';
@@ -1251,6 +1251,7 @@ $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Ur restr doublet eo. Dilamit ar restr da 
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Hent kargañ direizh. Pe n\'eus ket eus ar c\'havlec\'h, pe n\'eo ket ar servijer web evit skrivañ ennañ.';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'N\'eus bet karget restr ebet. Distroit, mar plij, ha dibabit ur restr a-raok pouezañ war Kargañ.';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'N\'eus ket bet gallet dilec\'hiañ ar restr karget d\'ar c\'havlec\'h stokañ. Pe n\'eus ket eus ar c\'havlec\'h, pe n\'eo ket ar servijer evit skrivañ ennañ.';
+$MANTIS_ERROR[ERROR_FILE_NOT_FOUND] = 'Restr stag gant an ID "%1$d" nann kavet.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Ne c\'hallit ket ober eus un draen un doublenn anezhañ e-unan.';
 $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'N\'eo ket bet kavet adweladenn an draen';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Ar vaezienn personelaet n\'eo ket bet kavet.';

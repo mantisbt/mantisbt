@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -50,7 +50,7 @@ $s_plugin_XmlImportExport_import_threshold = 'Aanjelääjeheite empottehre';
 $s_plugin_XmlImportExport_export_threshold = 'Aanjelääjeheite äxpottehre';
 $s_plugin_XmlImportExport_action_update = 'Op der neuste Schtand bränge';
 $s_plugin_XmlImportExport_importing_in_project = 'Aanjelääjeheite empotteeere en dat Projäk:';
-$s_plugin_XmlImportExport_import_options = 'Enställunge för et Empotteeere';
+$s_plugin_XmlImportExport_import_options = 'Ennschtällonge för et Empottehre';
 $s_plugin_XmlImportExport_cross_references = 'Verwiese';
 $s_plugin_XmlImportExport_default_strategy = 'Shtanndatt-Shtrattejih för de Ömwandlunge:';
 $s_plugin_XmlImportExport_renumber = 'Neu nommereeere';

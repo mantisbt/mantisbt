@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -39,12 +39,14 @@
  * @file
  *
  * @author Amire80
+ * @author YaronSh
  */
 
 $s_plugin_XmlImportExport_title = 'בעיות יצוא / יבוא';
 $s_plugin_XmlImportExport_description = 'הוספת יכולות יבוא ויצוא XML למנטיס';
 $s_plugin_XmlImportExport_import = 'בעיות יצוא';
 $s_plugin_XmlImportExport_export = 'יצוא XML';
+$s_plugin_XmlImportExport_action_update = 'עדכון';
 $s_plugin_XmlImportExport_importing_in_project = 'בעיות ביבוא פרויקט:';
 $s_plugin_XmlImportExport_import_options = 'אפשרויות יבוא';
 $s_plugin_XmlImportExport_cross_references = 'הפניות צולבות';

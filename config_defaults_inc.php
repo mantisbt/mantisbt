@@ -865,6 +865,8 @@ $g_logo_url = '%default_home_page%';
  * Specifies whether to enable support for project documents or not.
  * This feature is deprecated and is expected to be moved to a plugin
  * in the future.
+ * @see $g_view_proj_doc_threshold
+ * @see $g_upload_project_file_threshold
  * @global integer $g_enable_project_documentation
  */
 $g_enable_project_documentation = OFF;
@@ -2654,7 +2656,10 @@ $g_bug_revision_drop_threshold = MANAGER;
 /**
  * access level needed to upload files to the project documentation section
  * You can set this to NOBODY to prevent uploads to projects
- * See also: $g_upload_bug_file_threshold, $g_allow_file_upload
+ * @see $g_enable_project_documentation
+ * @see $g_view_proj_doc_threshold
+ * @see $g_allow_file_upload
+ * @see $g_upload_bug_file_threshold
  * @global integer $g_upload_project_file_threshold
  */
 $g_upload_project_file_threshold = MANAGER;
@@ -2684,9 +2689,13 @@ $g_update_bugnote_threshold = DEVELOPER;
 
 /**
  * Threshold needed to view project documentation
+ * Note: setting this to ANYBODY will let any user download attachments
+ * from private projects, regardless of their being a member of it.
+ * @see $g_enable_project_documentation
+ * @see $g_upload_project_file_threshold
  * @global integer $g_view_proj_doc_threshold
  */
-$g_view_proj_doc_threshold = ANYBODY;
+$g_view_proj_doc_threshold = VIEWER;
 
 /**
  * Site manager

@@ -1632,6 +1632,7 @@ $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'This is a duplicate file. Please delete t
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Invalid upload path. Directory either does not exist or not writable to webserver.';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload.';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver.';
+$MANTIS_ERROR[ERROR_FILE_NOT_FOUND] = 'Attachment with id "%1$d" not found.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'You cannot set an issue as a duplicate of itself.';
 $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Issue revision not found.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found.';
