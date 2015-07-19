@@ -227,8 +227,8 @@ function layout_head_meta() {
  */
 function layout_head_css() {
 	# bootstrap & fontawesome
-	html_css_link( 'bootstrap.min.css' );
-	html_css_link( 'font-awesome.min.css' );
+	html_css_cdn_link( '//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' );
+	html_css_cdn_link( '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' );
 
 	# page specific plugin styles
 
@@ -261,9 +261,6 @@ function layout_head_css() {
  * @return null
  */
 function layout_head_javascript() {
-	# theme settings handler
-	html_javascript_link( 'ace-extra.min.js' );
-
 	# HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
 	echo '<!--[if lte IE 8]>';
 	html_javascript_link( 'html5shiv.min.js' );
@@ -279,9 +276,10 @@ function layout_head_javascript() {
  */
 function layout_body_javascript() {
 	# bootstrap
-	html_javascript_link( 'bootstrap.min.js' );
+	html_javascript_cdn_link( '//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js' );
 
 	# theme scripts
+	html_javascript_link( 'ace-extra.min.js' );
 	html_javascript_link( 'ace-elements.min.js' );
 	html_javascript_link( 'ace.min.js' );
 }
@@ -379,6 +377,7 @@ function layout_navbar() {
 	echo '<div class="navbar-buttons navbar-header pull-right navbar-collapse collapse">';
 	echo '<ul class="nav ace-nav">';
 	if (auth_is_user_authenticated()) {
+		# projects dropdown menu
 		layout_navbar_projects_menu();
 		# user buttons such as messages, notifications and user menu
 		layout_navbar_user_menu();
@@ -460,6 +459,7 @@ function layout_navbar_user_menu( $p_show_avatar = true ) {
 	echo '</ul>';
 	echo '</li>';
 }
+
 
 /**
  * Print navbar projects menu at the top right of the page
