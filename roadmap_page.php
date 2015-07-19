@@ -84,7 +84,7 @@ function print_version_header( array $p_version_row ) {
 	if( config_get( 'show_roadmap_dates' ) ) {
 		$t_version_timestamp = $p_version_row['date_order'];
 
-		$t_scheduled_release_date = ' (' . lang_get( 'scheduled_release' ) . ' ' . string_display_line( date( config_get( 'short_date_format' ), $t_version_timestamp ) ) . ')';
+		$t_scheduled_release_date = lang_get( 'scheduled_release' ) . ' ' . string_display_line( date( config_get( 'short_date_format' ), $t_version_timestamp ) );
 	} else {
 		$t_scheduled_release_date = '';
 	}

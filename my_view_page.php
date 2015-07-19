@@ -137,6 +137,3 @@ while (list ($t_box_title, $t_box_display) = each ($t_boxes)) {
 </div>
 <?php
 layout_page_end();
-html_status_legend( STATUS_LEGEND_POSITION_BOTTOM );
-
-html_page_bottom();
