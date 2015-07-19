@@ -101,8 +101,7 @@ function html_set_rss_link( $p_rss_feed_url ) {
 }
 
 /**
- * This method must be called before the html_page_top* methods.  It marks the page as not
- * for indexing.
+ * This method marks the page as not for indexing by search engines
  * @return void
  */
 function html_robots_noindex() {

@@ -384,9 +384,10 @@ if( ( $f_new_status >= $t_resolved ) ) {
 <?php } ?>
 
 <?php event_signal( 'EVENT_BUGNOTE_ADD_FORM', array( $f_bug_id ) ); ?>
-		
+
 </tbody>
 </table>
+<input type="hidden" name="action_type" value="<?php echo $f_change_type; ?>" />
 
 </div>
 </div>
