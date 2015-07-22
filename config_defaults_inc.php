@@ -860,7 +860,7 @@ $g_admin_checks = ON;
  * Favicon image
  * @global string $g_favicon_image
  */
-$g_favicon_image = 'images/favicon.ico';
+$g_favicon_image = 'images/favicon';
 
 /**
  * Logo
