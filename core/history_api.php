@@ -229,6 +229,7 @@ function history_get_range_result( $p_bug_id = null, $p_start_time = null, $p_en
  * @return array containing the history event or false if no more matches.
  */
 function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_access_to_issue = true ) {
+	static $s_bug_visible = array();
 	$t_user_id = ( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id;
 	$t_project_id = helper_get_current_project();
 
@@ -240,13 +241,12 @@ function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_acce
 			continue;
 		}
 
-		# if no specific bug id specified, check access level for the bug associated with current row.
 		if( $p_check_access_to_issue ) {
-			if ( !isset( $t_bug_visible[$v_bug_id] ) ) {
-				$t_bug_visible[$v_bug_id] = access_has_bug_level( VIEWER, $v_bug_id );
+			if( !isset( $s_bug_visible[$v_bug_id] ) ) {
+				$s_bug_visible[$v_bug_id] = access_has_bug_level( VIEWER, $v_bug_id );
 			}
 
-			if ( !$t_bug_visible[$v_bug_id] ) {
+			if( !$s_bug_visible[$v_bug_id] ) {
 				continue;
 			}
 		}
