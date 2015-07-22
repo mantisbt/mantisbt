@@ -241,7 +241,7 @@ function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_acce
 		}
 
 		# if no specific bug id specified, check access level for the bug associated with current row.
-		if ( $p_check_access_to_issue === null ) {
+		if( $p_check_access_to_issue ) {
 			if ( !isset( $t_bug_visible[$v_bug_id] ) ) {
 				$t_bug_visible[$v_bug_id] = access_has_bug_level( VIEWER, $v_bug_id );
 			}
