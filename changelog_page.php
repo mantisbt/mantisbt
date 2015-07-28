@@ -35,28 +35,31 @@ require_once( 'bug_api.php' );
  * @param int $p_version_id a valid version id
  * @return null
  */
-function print_version_header( $p_version_id ) {
-	$t_project_id   = version_get_field( $p_version_id, 'project_id' );
-	$t_version_name = version_get_field( $p_version_id, 'version' );
-	$t_project_name = project_get_field( $t_project_id, 'name' );
+function print_version_header( $p_project_id, $p_version_id ) {
 
-	$t_release_title = '<a href="changelog_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a> - <a href="changelog_page.php?version_id=' . $p_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
+  $t_project_name = project_get_field( $p_project_id, 'name' );
+  if( !$p_version_id ){
+    $t_version_name = lang_get( 'version_unknown_label' );
+    $t_release_date = '';
+  }
+  else {
+    $t_version_name = version_get_field( $p_version_id, 'version' );
+  	if ( config_get( 'show_changelog_dates' ) ) {
+  		$t_version_released = version_get_field( $p_version_id, 'released' );
+  		$t_release_timestamp = version_get_field( $p_version_id, 'date_order' );
+  		if ( (bool) $t_version_released ) {
+  			$t_release_date = ' (' . lang_get('released') . ' ' . string_display_line( date( config_get( 'short_date_format' ), $t_release_timestamp ) ) . ')';
+  		} else {
+  			$t_release_date = ' (' . lang_get( 'not_released' ) . ')';
+  		}
+  	}
+    else {
+  		$t_release_date = '';
+  	}
+  }
 
-	if ( config_get( 'show_changelog_dates' ) ) {
-		$t_version_released = version_get_field( $p_version_id, 'released' );
-		$t_release_timestamp = version_get_field( $p_version_id, 'date_order' );
-
-		if ( (bool) $t_version_released ) {
-			$t_release_date = ' (' . lang_get('released') . ' ' . string_display_line( date( config_get( 'short_date_format' ), $t_release_timestamp ) ) . ')';
-		} else {
-			$t_release_date = ' (' . lang_get( 'not_released' ) . ')';
-		}
-	} else {
-		$t_release_date = '';
-	}
-
-	echo '<br />', $t_release_title, $t_release_date, lang_get( 'word_separator' ), print_bracket_link( 'view_all_set.php?type=1&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $t_project_id . '&' . filter_encode_field_and_value( FILTER_PROPERTY_FIXED_IN_VERSION, $t_version_name ), lang_get( 'view_bugs_link' ) ), '<br />';
-
+  $t_release_title = '<a href="changelog_page.php?project_id=' . $p_project_id . '">' . string_display_line( $t_project_name ) . '</a> - <a href="changelog_page.php?version_id=' . $p_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
+	echo '<br />', $t_release_title, $t_release_date, lang_get( 'word_separator' ), print_bracket_link( 'view_all_set.php?type=1&temporary=y&' . FILTER_PROPERTY_PROJECT_ID . '=' . $p_project_id . '&' . filter_encode_field_and_value( FILTER_PROPERTY_FIXED_IN_VERSION, ($p_version_id ? $t_version_name : '') ), lang_get( 'view_bugs_link' ) ), '<br />';
 	$t_release_title_without_hyperlinks = $t_project_name . ' - ' . $t_version_name . $t_release_date;
 	echo utf8_str_pad( '', utf8_strlen( $t_release_title_without_hyperlinks ), '=' ), '<br />';
 }
@@ -90,19 +93,23 @@ if ( is_blank( $f_version ) ) {
 	$f_version_id = gpc_get_int( 'version_id', -1 );
 
 	# If both version_id and project_id parameters are supplied, then version_id take precedence.
-	if ( $f_version_id == -1 ) {
+	if ( $f_version_id == 0 || $f_version_id == -1 ) {
 		if ( $f_project_id == -1 ) {
 			$t_project_id = helper_get_current_project();
-		} else {
+		}
+    else {
 			$t_project_id = $f_project_id;
 		}
-	} else {
+	}
+  else {
 		$t_project_id = version_get_field( $f_version_id, 'project_id' );
 	}
-} else {
+}
+else {
 	if ( $f_project_id == -1 ) {
 		$t_project_id = helper_get_current_project();
-	} else {
+	}
+  else {
 		$t_project_id = $f_project_id;
 	}
 
@@ -156,6 +163,19 @@ foreach( $t_project_ids as $t_project_id ) {
 	# grab version info for later use
 	$t_version_rows = version_get_all_rows( $t_project_id, /* released */ null, /* obsolete */ false );
 
+  # append dummy version for unknown version items
+  if( config_get( 'show_changelog_noversion' ) === ON ){
+    $t_version_rows[] = array(
+      'id'          => 0,
+      'project_id'  => $t_project_id,
+      'version'     => null,
+      'description' => lang_get( 'version_unknown_description' ),
+      'released'    => 0,
+      'obsolete'    => 0,
+      'date_order'  => time()
+      );
+  }
+
 	# cache category info, but ignore the results for now
 	category_get_all_rows( $t_project_id );
 
@@ -178,10 +198,15 @@ foreach( $t_project_ids as $t_project_id ) {
 				ON sbt.id=rt.destination_bug_id AND rt.relationship_type=" . BUG_DEPENDANT . "
 			LEFT JOIN $t_bug_table AS dbt ON dbt.id=rt.source_bug_id
 			WHERE sbt.project_id=" . db_param() . "
-			  AND sbt.fixed_in_version=" . db_param() . "
+			  AND sbt.fixed_in_version" . (is_null($t_version) ? "=''" : '='.db_param()) . "
 			ORDER BY sbt.status ASC, sbt.last_updated DESC";
 
-		$t_description = version_get_field( $t_version_id, 'description' );
+		if( !$t_version_id ){
+      $t_description = $t_version_row['description'];
+    }
+    else {
+      $t_description = version_get_field( $t_version_id, 'description' );
+    }
 
 		$t_first_entry = true;
 		$t_issue_ids = array();
@@ -235,7 +260,7 @@ foreach( $t_project_ids as $t_project_id ) {
 			}
 
 			if ( !$t_version_header_printed ) {
-				print_version_header( $t_version_id );
+				print_version_header( $t_project_id, $t_version_id );
 				$t_version_header_printed = true;
 			}
 

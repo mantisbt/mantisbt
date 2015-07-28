@@ -1364,6 +1364,10 @@ $s_sponsorship_process_url = '';
 $s_changelog = 'Change Log';
 $s_changelog_empty = 'No Change Log information available';
 
+# Version Unknown
+$s_version_unknown_label = 'Version Unknown';
+$s_version_unknown_description = 'Issues that have not been associated with a version.';
+
 # Roadmap
 $s_roadmap = 'Roadmap';
 $s_resolved_progress = '%1$d of %2$d issue(s) resolved. Progress (%3$d%%).';
