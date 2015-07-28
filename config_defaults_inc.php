@@ -989,6 +989,12 @@
 	$g_show_changelog_dates = ON;
 
 	/**
+	 * Show obsolete versions in the changelog list
+	 * @global int $g_changelog_show_obsolete
+	 */
+	$g_show_changelog_obsolete = OFF;
+
+	/**
 	 * Show release dates on roadmap
 	 * @global int $g_show_roadmap_dates
 	 */

@@ -154,7 +154,7 @@ foreach( $t_project_ids as $t_project_id ) {
 	$t_relation_table = db_get_table( 'mantis_bug_relationship_table' );
 
 	# grab version info for later use
-	$t_version_rows = version_get_all_rows( $t_project_id, /* released */ null, /* obsolete */ false );
+	$t_version_rows = version_get_all_rows( $t_project_id, /* released */ null, /* obsolete */ (config_get( 'show_changelog_obsolete' ) === ON ? null : false) );
 
 	# cache category info, but ignore the results for now
 	category_get_all_rows( $t_project_id );
