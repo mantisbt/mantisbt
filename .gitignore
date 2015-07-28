@@ -1,5 +1,6 @@
 # Live Environment
 .htaccess
+error_log
 
 # Config files
 config_inc.php
