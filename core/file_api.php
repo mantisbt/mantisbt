@@ -584,12 +584,11 @@ function diskfile_is_name_unique( $p_name, $p_filepath ) {
 
 	$t_query = 'SELECT count(*)
 		FROM (
-			SELECT diskfile FROM {bug_file}
+			SELECT diskfile FROM {bug_file} WHERE diskfile=' . db_param() . '
 			UNION
-			SELECT diskfile FROM {project_file}
-			) f
-		WHERE diskfile=' . db_param();
-	$t_result = db_query( $t_query, array( $c_name ) );
+			SELECT diskfile FROM {project_file} WHERE diskfile=' . db_param() . '
+			) f';
+	$t_result = db_query( $t_query, array( $c_name, $c_name) );
 	$t_count = db_result( $t_result );
 
 	return ( $t_count == 0 ) && !file_exists( $c_name );
