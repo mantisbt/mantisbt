@@ -417,10 +417,10 @@ helper_call_custom_function( 'issue_update_notify', array( $f_bug_id ) );
 
 # Send a notification of changes via email.
 if( $t_resolve_issue ) {
-	email_generic( $f_bug_id, 'resolved', 'The following issue has been RESOLVED.' );
+	email_generic( $f_bug_id, 'resolved', 'email_notification_title_for_status_bug_resolved' );
 	email_relationship_child_resolved( $f_bug_id );
 } else if( $t_close_issue ) {
-	email_generic( $f_bug_id, 'closed', 'The following issue has been CLOSED' );
+	email_generic( $f_bug_id, 'closed', 'email_notification_title_for_status_bug_closed' );
 	email_relationship_child_closed( $f_bug_id );
 } else if( $t_reopen_issue ) {
 	email_generic( $f_bug_id, 'reopened', 'email_notification_title_for_action_bug_reopened' );
