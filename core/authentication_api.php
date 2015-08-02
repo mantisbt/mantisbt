@@ -652,6 +652,11 @@ function auth_get_current_user_cookie( $p_login_anonymous = true ) {
 
 						$g_cache_anonymous_user_cookie_string = $t_cookie;
 						current_user_set( $t_row['id'] );
+
+						# Set anonymous user's cookies to ensure consistent system
+						# behavior when pages are accessed directly without prior
+						# "formal" login (i.e. via login_anon.php)
+						auth_set_cookies( $t_row['id'], false );
 					}
 				}
 			} else {
