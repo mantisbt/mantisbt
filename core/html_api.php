@@ -1062,11 +1062,10 @@ function print_manage_menu( $p_page = '' ) {
 	}
 
 	if( access_has_project_level( config_get( 'manage_configuration_threshold' ) ) ) {
-		if( access_has_global_level( config_get( 'view_configuration_threshold' ) ) ) {
-			$t_pages['adm_config_report.php'] = array( 'url'   => 'adm_config_report.php', 'label' => 'manage_config_link' );
-		} else {
-			$t_pages['adm_permissions_report.php'] = array( 'url'   => 'adm_permissions_report.php', 'label' => 'manage_config_link' );
-		}
+		$t_pages['adm_permissions_report.php'] = array(
+			'url'   => 'adm_permissions_report.php',
+			'label' => 'manage_config_link'
+		);
 	}
 	# Remove the link from the current page
 	if( isset( $t_pages[$p_page] ) ) {
@@ -1119,13 +1118,13 @@ function print_manage_config_menu( $p_page = '' ) {
 
 	$t_pages = array();
 
+	$t_pages['adm_permissions_report.php'] = array( 'url'   => 'adm_permissions_report.php',
+	                                                'label' => 'permissions_summary_report' );
+
 	if( access_has_global_level( config_get( 'view_configuration_threshold' ) ) ) {
 		$t_pages['adm_config_report.php'] = array( 'url'   => 'adm_config_report.php',
 		                                           'label' => 'configuration_report' );
 	}
-
-	$t_pages['adm_permissions_report.php'] = array( 'url'   => 'adm_permissions_report.php',
-	                                                'label' => 'permissions_summary_report' );
 
 	$t_pages['manage_config_work_threshold_page.php'] = array( 'url'   => 'manage_config_work_threshold_page.php',
 	                                                           'label' => 'manage_threshold_config' );
