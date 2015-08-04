@@ -1695,7 +1695,7 @@ function bug_close( $p_bug_id, $p_bugnote_text = '', $p_bugnote_private = false,
 
 	bug_set_field( $p_bug_id, 'status', config_get( 'bug_closed_status_threshold' ) );
 
-	email_generic( $p_bug_id, 'closed', 'The following issue has been CLOSED' );
+	email_generic( $p_bug_id, 'closed', 'email_notification_title_for_status_bug_closed' );
 	email_relationship_child_closed( $p_bug_id );
 
 	return true;
@@ -1781,7 +1781,7 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 		bug_set_field( $p_bug_id, 'handler_id', $p_handler_id );
 	}
 
-	email_generic( $p_bug_id, 'resolved', 'The following issue has been RESOLVED.' );
+	email_generic( $p_bug_id, 'resolved', 'email_notification_title_for_status_bug_resolved' );
 	email_relationship_child_resolved( $p_bug_id );
 
 	return true;

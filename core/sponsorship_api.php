@@ -411,7 +411,7 @@ function sponsorship_delete( $p_sponsorship_id ) {
 	history_log_event_special( $t_sponsorship->bug_id, BUG_DELETE_SPONSORSHIP, $t_sponsorship->user_id, $t_sponsorship->amount );
 	sponsorship_update_bug( $t_sponsorship->bug_id );
 
-	email_generic( $t_sponsorship->bug_id, 'sponsor', 'A sponsorship of the following issue was withdrawn.' );
+	email_generic( $t_sponsorship->bug_id, 'sponsor', 'email_notification_title_for_action_sponsorship_deleted' );
 }
 
 /**
