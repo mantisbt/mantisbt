@@ -262,7 +262,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 
 	# only send email if the text is not blank, otherwise, it is just recording of time without a comment.
 	if( true == $p_send_email && !is_blank( $t_bugnote_text ) ) {
-		email_generic( $p_bug_id, 'bugnote', 'email_notification_title_for_action_bugnote_submitted' );
+		email_bugnote_add( $p_bug_id );
 	}
 
 	return $t_bugnote_id;
