@@ -266,7 +266,7 @@ layout_page_begin();
 	 * display or required fields on resolve or close
 	 */
 	$t_custom_status_label = 'update'; # Don't show custom fields by default
-	if( ( $f_new_status == $t_resolved ) && ( $f_new_status < $t_closed ) ) {
+	if( ( $f_new_status >= $t_resolved ) && ( $f_new_status < $t_closed ) ) {
 		$t_custom_status_label = 'resolved';
 	}
 	if( $t_closed == $f_new_status ) {
