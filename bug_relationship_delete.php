@@ -125,8 +125,8 @@ if( bug_exists( $t_dest_bug_id ) ) {
 form_security_purge( 'bug_relationship_delete' );
 
 $f_redirect_url = gpc_get_string( 'redirect_url', '' );
-if( '' != $f_redirect_url ) {
-   print_header_redirect( $f_redirect_url );
+if( !is_blank( $f_redirect_url ) ) {
+	print_header_redirect( $f_redirect_url );
 } else {
-print_header_redirect_view( $f_bug_id );
+	print_header_redirect_view( $f_bug_id );
 }
