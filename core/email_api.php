@@ -839,6 +839,15 @@ function email_assign( $p_bug_id ) {
 }
 
 /**
+ * Send notifications when bug status is changed.
+ * @param int $p_bug_id The bug id
+ * @param string $p_new_status_label The new status label.
+ */
+function email_status_change( $p_bug_id, $p_new_status_label ) {
+	email_generic( $p_bug_id, $p_new_status_label, 'email_notification_title_for_status_bug_' . $p_new_status_label );
+}
+
+/**
  * send notices when a bug is DELETED
  * @param int $p_bug_id
  * @return null

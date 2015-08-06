@@ -430,7 +430,7 @@ if( $t_resolve_issue ) {
 } else if( $t_existing_bug->status !== $t_updated_bug->status ) {
 	$t_new_status_label = MantisEnum::getLabel( config_get( 'status_enum_string' ), $t_updated_bug->status );
 	$t_new_status_label = str_replace( ' ', '_', $t_new_status_label );
-	email_generic( $f_bug_id, $t_new_status_label, 'email_notification_title_for_status_bug_' . $t_new_status_label );
+	email_status_change( $f_bug_id, $t_new_status_label );
 } else {
 	email_bug_updated( $f_bug_id );
 }
