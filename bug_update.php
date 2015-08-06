@@ -432,7 +432,7 @@ if( $t_resolve_issue ) {
 	$t_new_status_label = str_replace( ' ', '_', $t_new_status_label );
 	email_generic( $f_bug_id, $t_new_status_label, 'email_notification_title_for_status_bug_' . $t_new_status_label );
 } else {
-	email_generic( $f_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
+	email_bug_updated( $f_bug_id );
 }
 
 form_security_purge( 'bug_update' );

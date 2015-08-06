@@ -708,8 +708,7 @@ class BugData {
 			}
 
 			# @todo handle priority change if it requires special handling
-			# generic update notification
-			email_generic( $c_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
+			email_bug_updated( $c_bug_id );
 		}
 
 		return true;

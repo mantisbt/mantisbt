@@ -786,6 +786,14 @@ function email_new_bug( $p_bug_id ) {
 }
 
 /**
+ * Send notifications for bug update.
+ * @param int $p_bug_id  The bug id.
+ */
+function email_bug_updated( $p_bug_id ) {
+	email_generic( $p_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
+}
+
+/**
  * send notices when a new bugnote
  * @param int $p_bug_id
  * @return null
