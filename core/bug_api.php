@@ -695,7 +695,7 @@ class BugData {
 		if( false == $p_bypass_mail ) {
 			# bug assigned
 			if( $t_old_data->handler_id != $this->handler_id ) {
-				email_generic( $c_bug_id, 'owner', 'email_notification_title_for_action_bug_assigned' );
+				email_assign( $c_bug_id );
 				return true;
 			}
 
