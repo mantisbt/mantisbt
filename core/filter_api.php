@@ -3487,7 +3487,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 	# expanded
 	echo '<div class="form-inline">';
-	echo '<label>', lang_get( 'search' ) . '&#160', '</label>';
+	echo '<label>', lang_get( 'search' ) . '&#160;', '</label>';
 	echo '<input type="text" class="input-sm" size="16" name="', FILTER_PROPERTY_SEARCH, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_SEARCH] ), '" />';
 	?>
 	<input type="submit" class="btn btn-primary btn-sm btn-white btn-round no-float" name="filter" value="<?php echo lang_get( 'filter_button' )?>" />

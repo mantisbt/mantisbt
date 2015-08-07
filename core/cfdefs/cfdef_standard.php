@@ -371,7 +371,7 @@ function cfdef_input_textbox( array $p_field_def, $p_custom_field_value ) {
 	} else {
 		echo ' maxlength="255"';
 	}
-	echo ' value="' . string_attribute( $p_custom_field_value ) .'"></input>';
+	echo ' value="' . string_attribute( $p_custom_field_value ) .'" />';
 }
 
 /**
