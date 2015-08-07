@@ -834,7 +834,7 @@ function email_bug_reopened( $p_bug_id ) {
  * @param int $p_bug_id
  * @return null
  */
-function email_assign( $p_bug_id ) {
+function email_bug_assigned( $p_bug_id ) {
 	email_generic( $p_bug_id, 'owner', 'email_notification_title_for_action_bug_assigned' );
 }
 

@@ -695,7 +695,7 @@ class BugData {
 		if( false == $p_bypass_mail ) {
 			# bug assigned
 			if( $t_old_data->handler_id != $this->handler_id ) {
-				email_assign( $c_bug_id );
+				email_bug_assigned( $c_bug_id );
 				return true;
 			}
 
@@ -1669,7 +1669,7 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 		bug_clear_cache( $p_bug_id );
 
 		# send assigned to email
-		email_assign( $p_bug_id );
+		email_bug_assigned( $p_bug_id );
 	}
 
 	return true;

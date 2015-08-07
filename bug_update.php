@@ -426,7 +426,7 @@ if( $t_resolve_issue ) {
 	email_bug_reopened( $f_bug_id );
 } else if( $t_existing_bug->handler_id === NO_USER &&
            $t_updated_bug->handler_id !== NO_USER ) {
-	email_assign( $f_bug_id );
+	email_bug_assigned( $f_bug_id );
 } else if( $t_existing_bug->status !== $t_updated_bug->status ) {
 	$t_new_status_label = MantisEnum::getLabel( config_get( 'status_enum_string' ), $t_updated_bug->status );
 	$t_new_status_label = str_replace( ' ', '_', $t_new_status_label );
