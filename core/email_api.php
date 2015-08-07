@@ -843,7 +843,7 @@ function email_bug_assigned( $p_bug_id ) {
  * @param int $p_bug_id The bug id
  * @param string $p_new_status_label The new status label.
  */
-function email_status_change( $p_bug_id, $p_new_status_label ) {
+function email_bug_status_changed( $p_bug_id, $p_new_status_label ) {
 	email_generic( $p_bug_id, $p_new_status_label, 'email_notification_title_for_status_bug_' . $p_new_status_label );
 }
 

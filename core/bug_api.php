@@ -703,7 +703,7 @@ class BugData {
 			if( $t_old_data->status != $this->status ) {
 				$t_status = MantisEnum::getLabel( config_get( 'status_enum_string' ), $this->status );
 				$t_status = str_replace( ' ', '_', $t_status );
-				email_status_change( $c_bug_id, $t_status );
+				email_bug_status_changed( $c_bug_id, $t_status );
 				return true;
 			}
 
