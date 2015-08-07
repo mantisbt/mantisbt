@@ -423,7 +423,7 @@ if( $t_resolve_issue ) {
 	email_close( $f_bug_id );
 	email_relationship_child_closed( $f_bug_id );
 } else if( $t_reopen_issue ) {
-	email_reopen( $f_bug_id );
+	email_bug_reopened( $f_bug_id );
 } else if( $t_existing_bug->handler_id === NO_USER &&
            $t_updated_bug->handler_id !== NO_USER ) {
 	email_assign( $f_bug_id );

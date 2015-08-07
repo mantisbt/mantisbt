@@ -1810,7 +1810,7 @@ function bug_reopen( $p_bug_id, $p_bugnote_text = '', $p_time_tracking = '0:00',
 	bug_set_field( $p_bug_id, 'status', config_get( 'bug_reopen_status' ) );
 	bug_set_field( $p_bug_id, 'resolution', config_get( 'bug_reopen_resolution' ) );
 
-	email_reopen( $p_bug_id );
+	email_bug_reopened( $p_bug_id );
 
 	return true;
 }
