@@ -157,11 +157,11 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 		</td>
 		<td>
 			<label for="bugnote-order-desc" class="inline padding-right-8">
-				<input type="radio" class="ace" id="bugnote-order-desc" name="bugnote_order" class="input-sm" value="DESC" <?php check_checked( $t_pref->bugnote_order, 'DESC' ); ?> />
+				<input type="radio" class="ace input-sm" id="bugnote-order-desc" name="bugnote_order" value="DESC" <?php check_checked( $t_pref->bugnote_order, 'DESC' ); ?> />
 				<span class="lbl"> <?php echo lang_get( 'bugnote_order_desc' ) ?> </span>
 			</label>
 			<label for="bugnote-order-asc" class="inline padding-right-8">
-				<input type="radio" class="ace" id="bugnote-order-asc" name="bugnote_order" class="input-sm" value="ASC" <?php check_checked( $t_pref->bugnote_order, 'ASC' ); ?> />
+				<input type="radio" class="ace input-sm" id="bugnote-order-asc" name="bugnote_order" value="ASC" <?php check_checked( $t_pref->bugnote_order, 'ASC' ); ?> />
 				<span class="lbl"> <?php echo lang_get( 'bugnote_order_asc' ) ?> </span>
 			</label>
 		</td>
@@ -173,7 +173,7 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 			</td>
 			<td>
 				<label class="inline">
-					<input type="checkbox" class="ace" id="email-on-new" name="email_on_new" class="input-sm" <?php check_checked( (int)$t_pref->email_on_new, ON ); ?> />
+					<input type="checkbox" class="ace input-sm" id="email-on-new" name="email_on_new" <?php check_checked( (int)$t_pref->email_on_new, ON ); ?> />
 					<span class="lbl"></span>
 				</label>
 				<label for="email-on-new-min-severity" class="email-on-severity-label"><span><?php echo lang_get( 'with_minimum_severity' ) ?></span></label>
@@ -207,7 +207,7 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 			</td>
 			<td>
 				<label class="inline">
-					<input type="checkbox" class="ace" id="email-on-feedback" name="email_on_feedback" class="input-sm" <?php check_checked( (int)$t_pref->email_on_feedback, ON ); ?> />
+					<input type="checkbox" class="ace input-sm" id="email-on-feedback" name="email_on_feedback" <?php check_checked( (int)$t_pref->email_on_feedback, ON ); ?> />
 					<span class="lbl"></span>
 				</label>
 				<label for="email-on-feedback-min-severity" class="email-on-severity-label"><span><?php echo lang_get( 'with_minimum_severity' ) ?></span></label>
@@ -224,7 +224,7 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 			</td>
 			<td>
 				<label class="inline">
-					<input type="checkbox" class="ace" id="email-on-resolved" name="email_on_resolved" class="input-sm" <?php check_checked( (int)$t_pref->email_on_resolved, ON ); ?> />
+					<input type="checkbox" class="ace input-sm" id="email-on-resolved" name="email_on_resolved" <?php check_checked( (int)$t_pref->email_on_resolved, ON ); ?> />
 					<span class="lbl"></span>
 				</label>
 				<label for="email-on-resolved-min-severity" class="email-on-severity-label"><span><?php echo lang_get( 'with_minimum_severity' ) ?></span></label>
@@ -241,7 +241,7 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 			</td>
 			<td>
 				<label class="inline">
-					<input type="checkbox" class="ace" id="email-on-closed" name="email_on_closed" class="input-sm" <?php check_checked( (int)$t_pref->email_on_closed, ON ); ?> />
+					<input type="checkbox" class="ace input-sm" id="email-on-closed" name="email_on_closed" <?php check_checked( (int)$t_pref->email_on_closed, ON ); ?> />
 					<span class="lbl"></span>
 				</label>
 				<label for="email-on-closed-min-severity" class="email-on-severity-label"><span><?php echo lang_get( 'with_minimum_severity' ) ?></span></label>
@@ -258,7 +258,7 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 			</td>
 			<td>
 				<label class="inline">
-					<input type="checkbox" class="ace" id="email-on-reopened" name="email_on_reopened" class="input-sm" <?php check_checked( (int)$t_pref->email_on_reopened, ON ); ?> />
+					<input type="checkbox" class="ace input-sm" id="email-on-reopened" name="email_on_reopened" <?php check_checked( (int)$t_pref->email_on_reopened, ON ); ?> />
 					<span class="lbl"></span>
 				</label>
 				<label for="email-on-reopened-min-severity" class="email-on-severity-label"><span><?php echo lang_get( 'with_minimum_severity' ) ?></span></label>
@@ -275,7 +275,7 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 			</td>
 			<td>
 				<label class="inline">
-					<input type="checkbox" class="ace" id="email-on-bugnote-added" name="email_on_bugnote" class="input-sm" <?php check_checked( (int)$t_pref->email_on_bugnote, ON ); ?> />
+					<input type="checkbox" class="ace input-sm" id="email-on-bugnote-added" name="email_on_bugnote" <?php check_checked( (int)$t_pref->email_on_bugnote, ON ); ?> />
 					<span class="lbl"></span>
 				</label>
 				<label for="email-on-bugnote-min-severity" class="email-on-severity-label"><span><?php echo lang_get( 'with_minimum_severity' ) ?></span></label>
@@ -292,7 +292,7 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 			</td>
 			<td>
 				<label class="inline">
-					<input type="checkbox" class="ace" id="email-on-status" name="email_on_status" class="input-sm" <?php check_checked( (int)$t_pref->email_on_status, ON ); ?> />
+					<input type="checkbox" class="ace input-sm" id="email-on-status" name="email_on_status" <?php check_checked( (int)$t_pref->email_on_status, ON ); ?> />
 					<span class="lbl"></span>
 				</label>
 				<label for="email-on-status-min-severity" class="email-on-severity-label"><span><?php echo lang_get( 'with_minimum_severity' ) ?></span></label>
@@ -309,7 +309,7 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 			</td>
 			<td>
 				<label class="inline">
-					<input type="checkbox" class="ace" id="email-on-priority-change" name="email_on_priority" class="input-sm" <?php check_checked( (int)$t_pref->email_on_priority, ON ); ?> />
+					<input type="checkbox" class="ace input-sm" id="email-on-priority-change" name="email_on_priority" <?php check_checked( (int)$t_pref->email_on_priority, ON ); ?> />
 					<span class="lbl"></span>
 				</label>
 				<label for="email-on-priority-min-severity" class="email-on-severity-label"><span><?php echo lang_get( 'with_minimum_severity' ) ?></span></label>

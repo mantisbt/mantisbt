@@ -266,7 +266,7 @@ function html_meta_redirect( $p_url, $p_time = null, $p_sanitize = true ) {
 
 	$t_url = htmlspecialchars( $t_url );
 
-	echo "\t" . '<meta http-equiv="Refresh" content="' . $p_time . ';URL=' . $t_url . '" />' . "\n";
+	echo "\t" . '<meta http-equiv="Refresh" content="' . $p_time . '; URL=' . $t_url . '" />' . "\n";
 
 	return true;
 }

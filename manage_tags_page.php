@@ -217,7 +217,7 @@ print_manage_menu( 'manage_tags_page.php' );
 					<?php echo lang_get( 'tag_description' ) ?>
 				</td>
 				<td>
-					<textarea class="form-control" id="tag-description" class="form-control" name="description" cols="80" rows="6"></textarea>
+					<textarea class="form-control" id="tag-description" name="description" cols="80" rows="6"></textarea>
 				</td>
 			</tr>
 		</fieldset>

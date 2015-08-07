@@ -103,7 +103,7 @@ function access_denied() {
 			echo '<div class="col-md-12 col-xs-12">';
 			echo '<div class="space-10"></div>';
 			echo '<div class="alert alert-danger">';
-			echo '<div class="center bigger-130">' . error_string( ERROR_ACCESS_DENIED ) . '</p>';
+			echo '<div class="center bigger-130">' . error_string( ERROR_ACCESS_DENIED ) . '</div>';
 			echo '<p class="center">';
 			print_button(
 				helper_mantis_url( config_get( 'default_home_page' ) ),
