@@ -781,7 +781,7 @@ function email_sponsorship_deleted( $p_bug_id ) {
  * @param int $p_bug_id
  * @return null
  */
-function email_new_bug( $p_bug_id ) {
+function email_bug_added( $p_bug_id ) {
 	email_generic( $p_bug_id, 'new', 'email_notification_title_for_action_bug_submitted' );
 }
 
