@@ -222,10 +222,7 @@ switch( $f_action ) {
 		trigger_error( ERROR_GENERIC, ERROR );
 }
 if( $f_action === 'UP_DUE_DATE' ) {
-    require_js( 'jscalendar/calendar.js' );
-    require_js( 'jscalendar/lang/calendar-en.js' );
-    require_js( 'jscalendar/calendar-setup.js' );
-    require_css( 'calendar-blue.css' );
+    print_datetimepicker_js();
 }
 bug_group_action_print_top();
 ?>
@@ -289,7 +286,8 @@ if( $t_multiple_projects ) {
 				}
 			}
 
-			echo '<input type="text" id="due_date" name="due_date" class="datetime" size="20" maxlength="16" value="' . $t_date_to_display . '" />';
+			echo '<input type="text" id="due_date" name="due_date" class="datetimepicker" size="20" maxlength="16" value="' . $t_date_to_display . '" />';
+			echo '<script type="text/javascript">$( ".datetimepicker" ).datetimepicker({});</script>';
 		} else {
 			echo '<select name="' . $t_form . '" class="input-sm">';
 
