@@ -208,7 +208,7 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_phpmailer_method</term>
+			<term>$g_phpMailer_method</term>
 			<listitem>
 				<para>Select the method to send mail:
 					<itemizedlist>
