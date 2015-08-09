@@ -609,10 +609,10 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
  * The current user ability to assign issue access check is only done on change.
  * This behavior would be consistent with the web UI.
  *
- * @param $p_user_id        The id of the logged in user.
- * @param $p_project_id     The id of the project the issue is associated with.
- * @param $p_old_handler_id The old handler id.
- * @param $p_new_handler_id The new handler id.  0 for not assigned.
+ * @param integer $p_user_id        The id of the logged in user.
+ * @param integer $p_project_id     The id of the project the issue is associated with.
+ * @param integer $p_old_handler_id The old handler id.
+ * @param integer $p_new_handler_id The new handler id.  0 for not assigned.
  * @return true: access ok, otherwise: soap fault.
  */
 function mci_issue_handler_access_check( $p_user_id, $p_project_id, $p_old_handler_id, $p_new_handler_id ) {
