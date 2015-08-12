@@ -55,7 +55,7 @@ $g_cache_file_count = array();
 /**
  * Processes the post files from a form by adding them to the specified
  * issue.
- * 
+ *
  * @param int $p_bug_id    The bug id.
  * @param array $p_files   The array of files, if null, then do nothing.
  */
@@ -1016,10 +1016,9 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 }
 
 /**
- *
  * Copies all attachments from the source bug to the destination bug
  *
- * <p>Does not perform history logging and does not perform access checks.</p>
+ * Does not perform history logging and does not perform access checks.
  *
  * @param integer $p_source_bug_id Source Bug.
  * @param integer $p_dest_bug_id   Destination Bug.
