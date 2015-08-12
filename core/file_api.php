@@ -1068,7 +1068,7 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 		db_query( $t_query, array(
 			$p_dest_bug_id, $t_bug_file['title'], $t_bug_file['description'],
 			$t_new_diskfile_name, $t_new_file_name, $t_file_path,
-			$t_bug_file['filesize'], $t_bug_file['file_type'], $t_bug_file['date_added'],
+			$t_bug_file['filesize'], $t_bug_file['file_type'], db_now(),
 			auth_get_current_user_id(), $t_bug_file['content']
 		) );
 	}
