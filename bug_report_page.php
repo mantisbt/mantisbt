@@ -231,7 +231,7 @@ if( $t_show_attachments ) {
 }
 ?>
 <div class="col-md-12 col-xs-12">
-<form id="report_bug_form" method="post" <?php echo $t_form_encoding; ?> action="bug_report.php?posted=1">
+<form id="report_bug_form" method="post" <?php echo $t_form_encoding; ?> action="bug_report.php?posted=1" class="dropzone-form">
 <?php echo form_security_field( 'bug_report' ) ?>
 <input type="hidden" name="m_id" value="<?php echo $f_master_bug_id ?>" />
 <input type="hidden" name="project_id" value="<?php echo $t_project_id ?>" />
@@ -242,7 +242,7 @@ if( $t_show_attachments ) {
 				<?php echo lang_get( 'enter_report_details_title' ) ?>
 		</h4>
 	</div>
-<div class="widget-body">
+<div class="widget-body dz-clickable">
 <div class="widget-main no-padding">
 <div class="table-responsive">
 <table class="table table-bordered table-condensed">
@@ -601,6 +601,15 @@ if( $t_show_attachments ) {
 		</th>
 		<td>
 			<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
+			<div class="dropzone center">
+				<div class="space-10"></div>
+				<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i><br>
+				<span class="bigger-150 grey"><?php echo lang_get( 'dropzone_default_message' ) ?></span>
+				<div class="space-10"></div>
+				<div id="dropzone-previews-box" class="dropzone-previews dz-max-files-reached"></div>
+			</div>
+			<div class="fallback">
+				<div class="dz-message" data-dz-message></div>
 <?php
 		# Display multiple file upload fields
 		for( $i = 0; $i < $t_file_upload_max_num; $i++ ) {
@@ -613,6 +622,7 @@ if( $t_show_attachments ) {
 		}
 	}
 ?>
+			</div>
 		</td>
 	</tr>
 
@@ -693,4 +703,5 @@ if( $t_show_attachments ) {
 </form>
 </div>
 <?php
+include_once( dirname( __FILE__ ) . '/fileupload_inc.php' );
 layout_page_end();

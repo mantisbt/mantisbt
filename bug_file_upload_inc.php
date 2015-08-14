@@ -57,10 +57,10 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
 ?>
-<form method="post" enctype="multipart/form-data" action="bug_file_add.php" class="form-inline">
+<form id="upload_form" method="post" enctype="multipart/form-data" action="bug_file_add.php" class="form-inline auto-dropzone-form">
 <?php echo form_security_field( 'bug_file_add' ) ?>
 
-<div id="upload_form" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
+<div class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<i class="ace-icon fa fa-upload"></i>
@@ -86,6 +86,14 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 	<td width="85%">
 		<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 		<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
+		<div class="auto-dropzone center">
+			<div class="space-10"></div>
+			<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-2x"></i>&#160;&#160;
+			<span class="bigger-170 lighter grey"><?php echo lang_get( 'dropzone_default_message' ) ?></span>
+			<div class="space-8"></div>
+			<div id="auto-dropzone-previews-box" class="dropzone-previews dz-max-files-reached"></div>
+			</div>
+		<div class="fallback">
 <?php
 	# Display multiple file upload fields
 	for( $i = 0; $i < $t_file_upload_max_num; $i++ ) {
@@ -101,6 +109,7 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 		<input type="submit" class="btn btn-primary btn-sm btn-white btn-round"
 			value="<?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file_button' : 'upload_files_button' ) ?>"
 		/>
+	</div>
 </td>
 </tr>
 </table>
@@ -111,3 +120,4 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 </form>
 </div>
 <?php
+include_once( dirname( __FILE__ ) . '/fileupload_inc.php' );

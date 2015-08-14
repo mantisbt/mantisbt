@@ -63,7 +63,7 @@ require_api( 'lang_api.php' );
 	$t_block_css = $t_collapse_block ? 'collapsed' : '';
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 ?>
-<form id="bugnoteadd" method="post" action="bugnote_add.php" enctype="multipart/form-data">
+<form id="bugnoteadd" method="post" action="bugnote_add.php" enctype="multipart/form-data" class="dz dropzone-form">
 	<?php echo form_security_field( 'bugnote_add' ) ?>
 	<input type="hidden" name="bug_id" value="<?php echo $f_bug_id ?>" />
 	<div id="bugnote_add" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
@@ -153,6 +153,14 @@ require_api( 'lang_api.php' );
 				</th>
 				<td>
 					<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
+					<div class="dropzone center">
+						<div class="space-10"></div>
+						<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i><br>
+						<span class="bigger-150 grey"><?php echo lang_get( 'dropzone_default_message' ) ?></span>
+						<div class="space-10"></div>
+						<div id="dropzone-previews-box" class="dz dropzone-previews dz-max-files-reached"></div>
+					</div>
+					<div class="fallback">
 					<?php
 					# Display multiple file upload fields
 					for( $i = 0; $i < $t_file_upload_max_num; $i++ ) {
@@ -164,6 +172,7 @@ require_api( 'lang_api.php' );
 						}
 					}
 					?>
+					</div>
 				</td>
 			</tr>
 <?php
@@ -183,4 +192,5 @@ require_api( 'lang_api.php' );
 </form>
 </div>
 <?php
+	include_once( dirname( __FILE__ ) . '/fileupload_inc.php' );
 }

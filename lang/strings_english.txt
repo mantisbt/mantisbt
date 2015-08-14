@@ -1721,3 +1721,15 @@ $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Data Type mismatch. Enable detailed error 
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'This issue has been updated by another user, please return to the issue and submit your changes again.';
 $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'You have reached the allowed activity limit of %d events within the last %d seconds; your action has been blocked to avoid spam, please try again later.';
 
+# dropzone.js - placeholders format is defined by the library
+$s_dropzone_default_message = 'Drop files here to upload (or click)';
+$s_dropzone_fallback_message = "Your browser does not support drag'n'drop file uploads.";
+$s_dropzone_fallback_text = '';
+$s_dropzone_file_too_big = "File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB.";
+$s_dropzone_invalid_file_type = "You can't upload files of this type.";
+$s_dropzone_response_error = "Server responded with {{statusCode}} code.";
+$s_dropzone_cancel_upload = 'Cancel upload';
+$s_dropzone_cancel_upload_confirmation = 'Are you sure you want to cancel this upload?';
+$s_dropzone_remove_file = 'Remove file';
+$s_dropzone_remove_file_confirmation = '';
+$s_dropzone_max_files_exceeded = 'You can not upload any more files.';

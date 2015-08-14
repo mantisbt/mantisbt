@@ -14,6 +14,7 @@ phpmailer       | PHPMailer       | 5.2.9     | unpatched [1]
 rssbuilder      | RSSBuilder      | 2.2.1     | patched [2]
 utf8            | phputf8         | 0.5       | unpatched
 securimage      | PHP Captcha     | 3.5.4     | unpatched [1]
+dropzonejs      | JS drag & drop  | 4.0.2     | unpatched
 -------------------------------------------------------------------
 
 [1] Library is tracked as a GIT submodule; refer to the corresponding
@@ -34,3 +35,4 @@ phpmailer   -  https://github.com/PHPMailer/PHPMailer
 rssbuilder  -  http://code.google.com/p/flaimo-php/
 utf8        -  http://sourceforge.net/projects/phputf8
 secureimage -  http://www.phpcaptcha.org/
+dropzonejs  -  http://www.dropzonejs.com/
