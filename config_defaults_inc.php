@@ -3410,12 +3410,20 @@ $g_css_include_file = 'default.css';
  */
 $g_css_rtl_include_file = 'rtl.css';
 
-
 /**
  * meta tags
  * @global string $g_meta_include_file
  */
 $g_meta_include_file = '';
+
+/**
+ * A flag that indicates whether to use CDN (content delivery networks) for loading
+ * javascript libraries and their associated CSS.  This improves performance for
+ * loading MantisBT pages.  This can be disabled if it is desired that MantisBT
+ * doesn't reach out outside corporate network.
+ * @global integer $g_cdn_enabled
+ */
+$g_cdn_enabled = OFF;
 
 ################
 # Redirections #
