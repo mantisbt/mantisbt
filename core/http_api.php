@@ -167,7 +167,7 @@ function http_security_headers() {
 
 		# White list the CDN urls (if enabled)
 		if ( config_get( 'cdn_enabled' ) == ON ) {
-			$t_cdn_url = 'https://ajax.googleapis.com';
+			$t_cdn_url = '//ajax.googleapis.com';
 			$t_style_src .= " $t_cdn_url";
 			$t_script_src .= " $t_cdn_url";
 		}
