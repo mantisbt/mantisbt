@@ -382,7 +382,7 @@ div.error-type { font-weight: bold; }
 div.error-description { color: red; text-align: center; margin: 1.5em; }
 div.error-info { text-align: center; margin: 1em; }
 
-.bug-attachments {
+td.bug-attachments {
 	margin: 0;
 	padding: 0;
 }

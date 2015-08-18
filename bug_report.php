@@ -283,7 +283,7 @@ helper_call_custom_function( 'issue_create_notify', array( $t_bug_id ) );
 # Allow plugins to post-process bug data with the new bug ID
 event_signal( 'EVENT_REPORT_BUG', array( $t_bug_data, $t_bug_id ) );
 
-email_generic( $t_bug_id, 'new', 'email_notification_title_for_action_bug_submitted' );
+email_bug_added( $t_bug_id );
 
 # log status and resolution changes if they differ from the default
 if( $t_bug_data->status != config_get( 'bug_submit_status' ) ) {

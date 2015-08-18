@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -46,6 +46,7 @@
  * @author Diebuche
  * @author Erdemaslancan
  * @author Exit91
+ * @author Geitost
  * @author Imre
  * @author KarlReichert
  * @author Kghbln
@@ -1272,6 +1273,7 @@ $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Dies ist eine doppelte Datei. Löschen Si
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Ungültiger Pfad, die Dateiübertragung war nicht erfolgreich. Das Verzeichnis existiert nicht oder konnte nicht beschrieben werden.';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Keine Datei übertragen. Gehen Sie zurück und wählen Sie eine Datei aus, bevor Sie auf Datei übertragen drücken';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Übertragene Datei konnte nicht in das Speicherverzeichnis verschoben werden. Verzeichnis nicht vorhanden oder vom Webserver nicht beschreibbar.';
+$MANTIS_ERROR[ERROR_FILE_NOT_FOUND] = 'Anhang mit der Kennung „%1$d“ nicht gefunden.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Sie können keinen Eintrag als Duplikat von sich selbst anlegen.';
 $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Überarbeitung des Eintrags nicht gefunden';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Benutzerdefiniertes Feld nicht gefunden.';

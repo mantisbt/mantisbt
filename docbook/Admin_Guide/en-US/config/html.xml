@@ -68,6 +68,17 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_cdn_enabled</term>
+			<listitem>
+				<para>
+					A flag that indicates whether to use CDN (content delivery networks) for loading
+					javascript libraries and their associated CSS.  This improves performance for
+					loading MantisBT pages.  This can be disabled if it is desired that MantisBT
+					doesn't reach out outside corporate network.  Default OFF.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_main_menu_custom_options</term>
 			<listitem>
 				<para>This option will add custom options to the main menu. It is

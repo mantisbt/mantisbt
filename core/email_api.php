@@ -750,6 +750,113 @@ function email_relationship_child_resolved_closed( $p_bug_id, $p_message_id ) {
 }
 
 /**
+ * send notices when a bug is sponsored
+ * @param int $p_bug_id
+ * @return null
+ */
+function email_sponsorship_added( $p_bug_id ) {
+	email_generic( $p_bug_id, 'sponsor', 'email_notification_title_for_action_sponsorship_added' );
+}
+
+/**
+ * send notices when a sponsorship is modified
+ * @param int $p_bug_id
+ * @return null
+ */
+function email_sponsorship_updated( $p_bug_id ) {
+	email_generic( $p_bug_id, 'sponsor', 'email_notification_title_for_action_sponsorship_updated' );
+}
+
+/**
+ * send notices when a sponsorship is deleted
+ * @param int $p_bug_id
+ * @return null
+ */
+function email_sponsorship_deleted( $p_bug_id ) {
+	email_generic( $p_bug_id, 'sponsor', 'email_notification_title_for_action_sponsorship_deleted' );
+}
+
+/**
+ * send notices when a new bug is added
+ * @param int $p_bug_id
+ * @return null
+ */
+function email_bug_added( $p_bug_id ) {
+	email_generic( $p_bug_id, 'new', 'email_notification_title_for_action_bug_submitted' );
+}
+
+/**
+ * Send notifications for bug update.
+ * @param int $p_bug_id  The bug id.
+ */
+function email_bug_updated( $p_bug_id ) {
+	email_generic( $p_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
+}
+
+/**
+ * send notices when a new bugnote
+ * @param int $p_bug_id
+ * @return null
+ */
+function email_bugnote_add( $p_bug_id ) {
+	email_generic( $p_bug_id, 'bugnote', 'email_notification_title_for_action_bugnote_submitted' );
+}
+
+/**
+ * send notices when a bug is RESOLVED
+ * @param int $p_bug_id
+ * @return null
+ */
+function email_resolved( $p_bug_id ) {
+	email_generic( $p_bug_id, 'resolved', 'email_notification_title_for_status_bug_resolved' );
+}
+
+/**
+ * send notices when a bug is CLOSED
+ * @param int $p_bug_id
+ * @return null
+ */
+ function email_close( $p_bug_id ) {
+	email_generic( $p_bug_id, 'closed', 'email_notification_title_for_status_bug_closed' );
+}
+
+/**
+ * send notices when a bug is REOPENED
+ * @param int $p_bug_id
+ * @return null
+ */
+function email_bug_reopened( $p_bug_id ) {
+	email_generic( $p_bug_id, 'reopened', 'email_notification_title_for_action_bug_reopened' );
+}
+
+/**
+ * send notices when a bug is ASSIGNED
+ * @param int $p_bug_id
+ * @return null
+ */
+function email_bug_assigned( $p_bug_id ) {
+	email_generic( $p_bug_id, 'owner', 'email_notification_title_for_action_bug_assigned' );
+}
+
+/**
+ * Send notifications when bug status is changed.
+ * @param int $p_bug_id The bug id
+ * @param string $p_new_status_label The new status label.
+ */
+function email_bug_status_changed( $p_bug_id, $p_new_status_label ) {
+	email_generic( $p_bug_id, $p_new_status_label, 'email_notification_title_for_status_bug_' . $p_new_status_label );
+}
+
+/**
+ * send notices when a bug is DELETED
+ * @param int $p_bug_id
+ * @return null
+ */
+function email_bug_deleted( $p_bug_id ) {
+	email_generic( $p_bug_id, 'deleted', 'email_notification_title_for_action_bug_deleted' );
+}
+
+/**
  * Store email in queue for sending
  *
  * @param string  $p_recipient Email recipient address.

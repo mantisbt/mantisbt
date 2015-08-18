@@ -162,11 +162,24 @@ function http_security_headers() {
 			$t_csp[] = "img-src 'self' $t_avatar_url";
 		}
 
+		$t_style_src = "style-src 'self'";
+		$t_script_src = "script-src 'self'";
+
+		# White list the CDN urls (if enabled)
+		if ( config_get( 'cdn_enabled' ) == ON ) {
+			$t_cdn_url = '//ajax.googleapis.com';
+			$t_style_src .= " $t_cdn_url";
+			$t_script_src .= " $t_cdn_url";
+		}
+
 		# Relaxing policy for roadmap page to allow inline styles
 		# This is a workaround to fix the broken progress bars (see #19501)
 		if( 'roadmap_page.php' == basename( $_SERVER['SCRIPT_NAME'] ) ) {
-			$t_csp[] = "style-src 'self' 'unsafe-inline'";
+			$t_style_src .= " 'unsafe-inline'";
 		}
+
+		$t_csp[] = $t_style_src;
+		$t_csp[] = $t_script_src;
 
 		# Set CSP header
 		header( 'Content-Security-Policy: ' . implode('; ', $t_csp) );

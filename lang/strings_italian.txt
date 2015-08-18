@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -811,7 +811,7 @@ $s_select_reproducibility = 'Seleziona la riproducibilità';
 $s_select_severity = 'Seleziona gravità';
 $s_or_fill_in = 'oppure completa';
 $s_assign_to = 'Assegna a';
-$s_additional_information = 'Informazioni addizionali';
+$s_additional_information = 'Ulteriori informazioni';
 $s_submit_report_button = 'Invia la segnalazione';
 $s_check_report_more_bugs = 'attiva per notificare più anomalie';
 $s_report_stay = 'Rimani sul report';
