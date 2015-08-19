@@ -367,7 +367,7 @@ function html_css() {
 	html_css_link( config_get( 'css_include_file' ) );
 
 	if ( config_get( 'cdn_enabled' ) == ON ) {
-		echo '<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/' . JQUERY_UI_VERSION . '/themes/smoothness/jquery-ui.css">' . "\n";
+		echo '<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/' . JQUERY_UI_VERSION . '/themes/smoothness/jquery-ui.css">' . "\n";
 	} else {
 		html_css_link( 'jquery-ui-' . JQUERY_UI_VERSION . '.min.css' );
 	}
@@ -447,8 +447,8 @@ function html_head_javascript() {
 	echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
 
 	if ( config_get( 'cdn_enabled' ) == ON ) {
-		echo "\t" . '<script src="//ajax.googleapis.com/ajax/libs/jquery/' . JQUERY_VERSION . '/jquery.min.js"></script>' . "\n";
-		echo "\t" . '<script src="//ajax.googleapis.com/ajax/libs/jqueryui/' . JQUERY_UI_VERSION . '/jquery-ui.min.js"></script>' . "\n";
+		echo "\t" . '<script src="https://ajax.googleapis.com/ajax/libs/jquery/' . JQUERY_VERSION . '/jquery.min.js"></script>' . "\n";
+		echo "\t" . '<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/' . JQUERY_UI_VERSION . '/jquery-ui.min.js"></script>' . "\n";
 	} else {
 		html_javascript_link( 'jquery-' . JQUERY_VERSION . '.min.js' );
 		html_javascript_link( 'jquery-ui-' . JQUERY_UI_VERSION . '.min.js' );
