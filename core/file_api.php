@@ -930,7 +930,7 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 			}
 		}
 
-		$t_query = 'INSERT INTO $t_mantis_bug_file_table (
+		$t_query = 'INSERT INTO ' . $t_mantis_bug_file_table . ' (
 				bug_id, title, description, diskfile, filename, folder,
 				filesize, file_type, date_added, user_id, content
 			)
