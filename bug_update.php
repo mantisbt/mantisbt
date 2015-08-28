@@ -276,6 +276,12 @@ $t_custom_fields_to_set = array();
 foreach ( $t_related_custom_field_ids as $t_cf_id ) {
 	$t_cf_def = custom_field_get_definition( $t_cf_id );
 
+	# if this is not a full update action and custom field is not on the form, then don't
+	# continue with code that checks access level and validates the field.
+	if ( $f_update_type != BUG_UPDATE_TYPE_NORMAL && !custom_field_is_present( $t_cf_id ) ) {
+		continue;
+	}
+
 	if( !gpc_isset_custom_field( $t_cf_id, $t_cf_def['type'] ) ) {
 		if( $t_cf_def[$t_cf_require_check] &&
 			$f_update_type == BUG_UPDATE_TYPE_NORMAL &&
@@ -284,12 +290,6 @@ foreach ( $t_related_custom_field_ids as $t_cf_id ) {
 			# no value was given by the user.
 			error_parameters( lang_get_defaulted( custom_field_get_field( $t_cf_id, 'name' ) ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
-		} else {
-			# The custom field isn't compulsory and the user did
-			# not supply a value. Therefore we can just ignore this
-			# custom field completely (ie. don't attempt to update
-			# the field).
-			continue;
 		}
 	}
 

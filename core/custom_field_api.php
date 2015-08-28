@@ -1269,9 +1269,28 @@ function print_custom_field_input( array $p_field_def, $p_bug_id = null ) {
 	global $g_custom_field_type_definition;
 	if( isset( $g_custom_field_type_definition[$p_field_def['type']]['#function_print_input'] ) ) {
 		call_user_func( $g_custom_field_type_definition[$p_field_def['type']]['#function_print_input'], $p_field_def, $t_custom_field_value );
+		print_hidden_input( custom_field_presence_field_name( $p_field_def['id'] ), '1' );
 	} else {
 		trigger_error( ERROR_CUSTOM_FIELD_INVALID_DEFINITION, ERROR );
 	}
+}
+
+/**
+ * Constructs the name of a field used as a flag to indicate that a custom field is present on the form
+ * @param integer $p_custom_field_id  The custom field id to create the field name for.
+ * @return string The field name.
+ */
+function custom_field_presence_field_name( $p_custom_field_id ) {
+	return 'custom_field_' . (int)$p_custom_field_id . '_presence';
+}
+
+/**
+ * Checks the presence of a custom field on the form.
+ * @param integer $p_custom_field_id  The custom field id to check.
+ * @return bool true when field is on form, false otherwise.
+ */
+function custom_field_is_present( $p_custom_field_id ) {
+	return gpc_isset( custom_field_presence_field_name( $p_custom_field_id ) );
 }
 
 /**
