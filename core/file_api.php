@@ -55,7 +55,7 @@ $g_cache_file_count = array();
 /**
  * Processes the post files from a form by adding them to the specified
  * issue.
- * 
+ *
  * @param int $p_bug_id    The bug id.
  * @param array $p_files   The array of files, if null, then do nothing.
  */
@@ -584,12 +584,11 @@ function diskfile_is_name_unique( $p_name, $p_filepath ) {
 
 	$t_query = 'SELECT count(*)
 		FROM (
-			SELECT diskfile FROM {bug_file}
+			SELECT diskfile FROM {bug_file} WHERE diskfile=' . db_param() . '
 			UNION
-			SELECT diskfile FROM {project_file}
-			) f
-		WHERE diskfile=' . db_param();
-	$t_result = db_query( $t_query, array( $c_name ) );
+			SELECT diskfile FROM {project_file} WHERE diskfile=' . db_param() . '
+			) f';
+	$t_result = db_query( $t_query, array( $c_name, $c_name) );
 	$t_count = db_result( $t_result );
 
 	return ( $t_count == 0 ) && !file_exists( $c_name );
@@ -1016,10 +1015,9 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 }
 
 /**
- *
  * Copies all attachments from the source bug to the destination bug
  *
- * <p>Does not perform history logging and does not perform access checks.</p>
+ * Does not perform history logging and does not perform access checks.
  *
  * @param integer $p_source_bug_id Source Bug.
  * @param integer $p_dest_bug_id   Destination Bug.
@@ -1055,19 +1053,22 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 			}
 		}
 
-		$t_query = 'INSERT INTO {bug_file} 
-							( bug_id, title, description, diskfile, filename, folder, filesize, file_type, date_added, content )
-							VALUES ( ' . db_param() . ',
-									 ' . db_param() . ',
-									 ' . db_param() . ',
-									 ' . db_param() . ',
-									 ' . db_param() . ',
-									 ' . db_param() . ',
-									 ' . db_param() . ',
-									 ' . db_param() . ',
-									 ' . db_param() . ',
-									 ' . db_param() . ');';
-		db_query( $t_query, array( $p_dest_bug_id, $t_bug_file['title'], $t_bug_file['description'], $t_new_diskfile_name, $t_new_file_name, $t_file_path, $t_bug_file['filesize'], $t_bug_file['file_type'], $t_bug_file['date_added'], $t_bug_file['content'] ) );
+		$t_query = 'INSERT INTO {bug_file} (
+				bug_id, title, description, diskfile, filename, folder,
+				filesize, file_type, date_added, user_id, content
+			)
+			VALUES ( '
+			. db_param() . ', ' . db_param() . ', ' . db_param() . ', '
+			. db_param() . ', ' . db_param() . ', ' . db_param() . ', '
+			. db_param() . ', ' . db_param() . ', ' . db_param() . ', '
+			. db_param() . ', ' . db_param() .
+			')';
+		db_query( $t_query, array(
+			$p_dest_bug_id, $t_bug_file['title'], $t_bug_file['description'],
+			$t_new_diskfile_name, $t_new_file_name, $t_file_path,
+			$t_bug_file['filesize'], $t_bug_file['file_type'], $t_bug_file['date_added'],
+			$t_bug_file['user_id'], $t_bug_file['content']
+		) );
 	}
 }
 

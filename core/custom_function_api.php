@@ -482,7 +482,7 @@ function custom_function_default_enum_released_versions() {
 }
 
 /**
- * Construct an enumeration for released versions for the current project.
+ * Construct an enumeration for future versions for the current project.
  * The enumeration will be empty if current project is ALL PROJECTS.
  * Enumerations format is: "abc|lmn|xyz"
  * To use this in a custom field type "=future_versions" in the possible values field.

@@ -7,16 +7,6 @@
 
 	<variablelist>
 		<varlistentry>
-			<term>$g_administrator_email</term>
-			<listitem>
-				<para>The administrator's e-mail address. This is mainly prompted
-					to the user in case of errors that might require the intervention
-					of the system administrator. For example, SQL
-					errors. sysadmin@example.com
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry>
 			<term>$g_webmaster_email</term>
 			<listitem>
 				<para>The webmaster's e-mail address. This address is displayed in
@@ -208,7 +198,7 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>$g_phpmailer_method</term>
+			<term>$g_phpMailer_method</term>
 			<listitem>
 				<para>Select the method to send mail:
 					<itemizedlist>

@@ -1780,7 +1780,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 	# tags
 	$c_tag_string = trim( $t_filter[FILTER_PROPERTY_TAG_STRING] );
 	$c_tag_select = trim( $t_filter[FILTER_PROPERTY_TAG_SELECT] );
-	if( is_blank( $c_tag_string ) && !is_blank( $c_tag_select ) && $c_tag_select != 0 ) {
+	if( is_blank( $c_tag_string ) && !is_blank( $c_tag_select ) && $c_tag_select != 0 && tag_exists( $c_tag_select ) ) {
 		$t_tag = tag_get( $c_tag_select );
 		$c_tag_string = $t_tag['name'];
 	}
@@ -4156,13 +4156,13 @@ function print_filter_custom_field( $p_field_id ) {
 		} else {
 			echo '<select class="input-xs" ' . $g_select_modifier . ' name="custom_field_' . $p_field_id . '[]">';
 			echo '<option value="' . META_FILTER_ANY . '"';
-			check_selected( $g_filter['custom_fields'][$p_field_id], (string)META_FILTER_ANY );
+			check_selected( $g_filter['custom_fields'][$p_field_id], META_FILTER_ANY, false );
 			echo '>[' . lang_get( 'any' ) . ']</option>';
 
 			# don't show META_FILTER_NONE for enumerated types as it's not possible for them to be blank
 			if( !in_array( $t_accessible_custom_fields_types[$j], array( CUSTOM_FIELD_TYPE_ENUM, CUSTOM_FIELD_TYPE_LIST, CUSTOM_FIELD_TYPE_MULTILIST ) ) ) {
 				echo '<option value="' . META_FILTER_NONE . '"';
-				check_selected( $g_filter['custom_fields'][$p_field_id], (string)META_FILTER_NONE );
+				check_selected( $g_filter['custom_fields'][$p_field_id], META_FILTER_NONE, false );
 				echo '>[' . lang_get( 'none' ) . ']</option>';
 			}
 			if( is_array( $t_accessible_custom_fields_values[$j] ) ) {
@@ -4171,7 +4171,7 @@ function print_filter_custom_field( $p_field_id ) {
 					if( ( strtolower( $t_item ) !== META_FILTER_ANY ) && ( strtolower( $t_item ) !== META_FILTER_NONE ) ) {
 						echo '<option value="' . string_attribute( $t_item ) . '"';
 						if( isset( $g_filter['custom_fields'][$p_field_id] ) ) {
-							check_selected( $g_filter['custom_fields'][$p_field_id], $t_item );
+							check_selected( $g_filter['custom_fields'][$p_field_id], $t_item, false );
 						}
 						echo '>' . string_attribute( string_shorten( $t_item, $t_max_length ) ) . '</option>' . "\n";
 					}

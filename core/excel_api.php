@@ -160,16 +160,21 @@ function excel_get_default_filename() {
 }
 
 /**
- * Escapes the specified column value and includes it in a Cell Xml.
+ * Escapes the specified column value and includes it in a Cell Xml as a string.
  * @param string $p_value The value.
  * @return string The Cell Xml.
  */
 function excel_prepare_string( $p_value ) {
-	$t_type = is_numeric( $p_value ) ? 'Number' : 'String';
+	return excel_get_cell( $p_value, 'String' );
+}
 
-	$t_value = str_replace( array ( '&', "\n", '<', '>'), array ( '&amp;', '&#10;', '&lt;', '&gt;' ), $p_value );
-
-	return excel_get_cell( $t_value, $t_type );
+/**
+ * Escapes the specified column value and includes it in a Cell Xml as a number.
+ * @param integer $p_value The value.
+ * @return string The Cell Xml.
+ */
+function excel_prepare_number( $p_value ) {
+	return excel_get_cell( $p_value, 'Number' );
 }
 
 /**
@@ -185,6 +190,12 @@ function excel_prepare_string( $p_value ) {
  * @return string
  */
 function excel_get_cell( $p_value, $p_type, array $p_attributes = array() ) {
+	if ( !is_int( $p_value ) ) {
+		$t_value = str_replace( array( '&', "\n", '<', '>' ), array( '&amp;', '&#10;', '&lt;', '&gt;' ), $p_value );
+	} else {
+		$t_value = $p_value;
+	}
+
 	$t_ret = '<Cell ';
 
 	foreach ( $p_attributes as $t_attribute_name => $t_attribute_value ) {
@@ -193,7 +204,7 @@ function excel_get_cell( $p_value, $p_type, array $p_attributes = array() ) {
 
 	$t_ret .= '>';
 
-	$t_ret .= '<Data ss:Type="' . $p_type . '">' . $p_value . "</Data></Cell>\n";
+	$t_ret .= '<Data ss:Type="' . $p_type . '">' . $t_value . "</Data></Cell>\n";
 
 	return $t_ret;
 }
@@ -219,7 +230,7 @@ function excel_get_columns() {
  * @return string The bug id prefixed with 0s.
  */
 function excel_format_id( BugData $p_bug ) {
-	return excel_prepare_string( bug_format_id( $p_bug->id ) );
+	return excel_prepare_number( bug_format_id( $p_bug->id ) );
 }
 
 /**
@@ -246,7 +257,7 @@ function excel_format_reporter_id( BugData $p_bug ) {
  * @return string The number of bug notes.
  */
 function excel_format_bugnotes_count( BugData $p_bug ) {
-	return excel_prepare_string( $p_bug->bugnotes_count );
+	return excel_prepare_number( $p_bug->bugnotes_count );
 }
 
 /**
@@ -485,6 +496,11 @@ function excel_format_custom_field( $p_issue_id, $p_project_id, $p_custom_field 
 
 	if( custom_field_is_linked( $t_field_id, $p_project_id ) ) {
 		$t_def = custom_field_get_definition( $t_field_id );
+
+		if ( $t_def['type'] == CUSTOM_FIELD_TYPE_NUMERIC ) {
+			return excel_prepare_number( string_custom_field_value( $t_def, $t_field_id, $p_issue_id ) );
+		}
+
 		return excel_prepare_string( string_custom_field_value( $t_def, $t_field_id, $p_issue_id ) );
 	}
 
