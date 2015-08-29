@@ -583,5 +583,7 @@ last_visited_issue( $f_bug_id );
 ?>
 
 <?php
+html_base_javascripts();
+layout_body_javascript();
 html_body_end();
 html_end();

@@ -350,16 +350,11 @@ function html_operation_successful( $p_redirect_url, $p_message = '' ) {
 }
 
 /**
- * End the <body> section
+ * Base javascript includes base files
  * @return void
  */
-function html_body_end() {
+function html_base_javascripts() {
 	global $g_scripts_included;
-
-	event_signal( 'EVENT_LAYOUT_BODY_END' );
-
-	html_javascript_link(  helper_mantis_url( 'javascript_config.php' ) );
-	html_javascript_link( helper_mantis_url( 'javascript_translations.php' ) );
 
 	if ( config_get_global( 'cdn_enabled' ) == ON ) {
 		html_javascript_cdn_link( 'https://ajax.googleapis.com/ajax/libs/jquery/' . JQUERY_VERSION . '/jquery.min.js' );
@@ -369,16 +364,28 @@ function html_body_end() {
 		html_javascript_link( 'jquery-ui-' . JQUERY_UI_VERSION . '.min.js' );
 	}
 
+	echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_config.php' ) . '"></script>' . "\n";
+	echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
+
 	html_javascript_link( 'common.js' );
 	foreach ( $g_scripts_included as $t_script_path ) {
 		html_javascript_link( $t_script_path );
 	}
+}
+
+/**
+ * End the <body> section
+ * @return void
+ */
+function html_body_end() {
+	global $g_scripts_included;
+
+	event_signal( 'EVENT_LAYOUT_BODY_END' );
 
 	echo '</div>', "\n";
 
 	echo '</body>', "\n";
 }
-
 /**
  * Print the closing <html> tag
  * @return void

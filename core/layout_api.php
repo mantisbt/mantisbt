@@ -88,8 +88,6 @@ function layout_page_header_begin( $p_page_title = null ) {
 	# Advertise the availability of the browser search plug-ins.
 	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Text Search" href="' . string_sanitize_url( 'browser_search_plugin.php?type=text', true ) . '" />' . "\n";
 	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Issue Id" href="' . string_sanitize_url( 'browser_search_plugin.php?type=id', true ) . '" />' . "\n";
-
-	html_head_javascript();
 }
 
 /**
@@ -166,6 +164,8 @@ function layout_page_end( $p_file = null ) {
 	layout_scroll_up_button();
 
 	layout_main_container_end();
+
+	html_base_javascripts();
 	layout_body_javascript();
 
 	html_body_end();
@@ -191,6 +191,8 @@ function layout_admin_page_end() {
 	layout_scroll_up_button();
 
 	layout_main_container_end();
+
+	html_base_javascripts();
 	layout_body_javascript();
 
 	html_body_end();
@@ -227,8 +229,8 @@ function layout_head_meta() {
  */
 function layout_head_css() {
 	# bootstrap & fontawesome
-	html_css_cdn_link( '//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' );
-	html_css_cdn_link( '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' );
+	html_css_cdn_link( 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' );
+	html_css_cdn_link( 'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' );
 
 	# page specific plugin styles
 
@@ -276,7 +278,7 @@ function layout_head_javascript() {
  */
 function layout_body_javascript() {
 	# bootstrap
-	html_javascript_cdn_link( '//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js' );
+	html_javascript_cdn_link( 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js' );
 
 	# theme scripts
 	html_javascript_link( 'ace-extra.min.js' );
@@ -314,8 +316,6 @@ function layout_login_page_begin() {
 	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Text Search" href="' . string_sanitize_url( 'browser_search_plugin.php?type=text', true) . '" />' . "\n";
 	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Issue Id" href="' . string_sanitize_url( 'browser_search_plugin.php?type=id', true) . '" />' . "\n";
 
-	html_head_javascript();
-
 	event_signal( 'EVENT_LAYOUT_RESOURCES' );
 	html_head_end();
 
@@ -333,6 +333,7 @@ function layout_login_page_end() {
 	echo '</div>';
 	layout_main_content_end();
 	layout_main_container_end();
+	html_base_javascripts();
 	layout_body_javascript();
 
 	echo '</body>', "\n";

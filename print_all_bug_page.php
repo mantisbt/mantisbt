@@ -246,5 +246,7 @@ $t_icon_path = config_get( 'icon_path' );
 </table>
 </form>
 <?php
+html_base_javascripts();
+layout_body_javascript();
 html_body_end();
 html_end();

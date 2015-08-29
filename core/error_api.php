@@ -282,6 +282,8 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 							layout_footer();
 						}
 					} else {
+						html_base_javascripts();
+						layout_body_javascript();
 						html_body_end();
 						html_end();
 					}
