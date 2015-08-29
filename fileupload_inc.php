@@ -32,6 +32,7 @@ html_javascript_link( 'dropzone.min.js');
 <!-- The template to display files available for download -->
 <script type="text/javascript">
 
+	Dropzone.autoDiscover = false;
 	function enableDropzone( classPrefix, autoUpload ) {
 		try {
 			var zone = new Dropzone( "." + classPrefix + "-form", {
@@ -86,7 +87,6 @@ html_javascript_link( 'dropzone.min.js');
 
 
 	$(document).ready( function() {
-		Dropzone.autoDiscover = false;
 
 		if( $( ".dropzone-form" ).length ) {
 			enableDropzone( "dropzone", false );

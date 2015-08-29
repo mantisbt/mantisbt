@@ -57,17 +57,17 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 	$t_block_icon = $t_collapse_block ? 'fa-chevron-down' : 'fa-chevron-up';
 	$t_file_upload_max_num = max( 1, config_get( 'file_upload_max_num' ) );
 ?>
-<form id="upload_form" method="post" enctype="multipart/form-data" action="bug_file_add.php" class="form-inline auto-dropzone-form">
+<form method="post" enctype="multipart/form-data" action="bug_file_add.php" class="form-inline auto-dropzone-form">
 <?php echo form_security_field( 'bug_file_add' ) ?>
 
-<div class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
+<div id="upload_form" class="widget-box widget-color-blue2 <?php echo $t_block_css ?>">
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<i class="ace-icon fa fa-upload"></i>
 			<?php echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ) ?>
 		</h4>
 		<div class="widget-toolbar">
-			<a data-action="collapse" class="collapse-link" href="#">
+			<a data-action="collapse" href="">
 				<i class="1 ace-icon <?php echo $t_block_icon ?> fa bigger-125"></i>
 			</a>
 		</div>

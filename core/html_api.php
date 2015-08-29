@@ -288,6 +288,12 @@ function require_js( $p_script_path ) {
 function html_head_end() {
 	event_signal( 'EVENT_LAYOUT_RESOURCES' );
 
+	if ( config_get_global( 'cdn_enabled' ) == ON ) {
+		html_javascript_cdn_link( 'https://ajax.googleapis.com/ajax/libs/jquery/' . JQUERY_VERSION . '/jquery.min.js' );
+	} else {
+		html_javascript_link( 'jquery-' . JQUERY_VERSION . '.min.js' );
+	}
+
 	echo '</head>', "\n";
 }
 
@@ -357,10 +363,8 @@ function html_base_javascripts() {
 	global $g_scripts_included;
 
 	if ( config_get_global( 'cdn_enabled' ) == ON ) {
-		html_javascript_cdn_link( 'https://ajax.googleapis.com/ajax/libs/jquery/' . JQUERY_VERSION . '/jquery.min.js' );
 		html_javascript_cdn_link( 'https://ajax.googleapis.com/ajax/libs/jqueryui/' . JQUERY_UI_VERSION . '/jquery-ui.min.js' );
 	} else {
-		html_javascript_link( 'jquery-' . JQUERY_VERSION . '.min.js' );
 		html_javascript_link( 'jquery-ui-' . JQUERY_UI_VERSION . '.min.js' );
 	}
 
