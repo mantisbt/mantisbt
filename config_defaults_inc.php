@@ -1685,9 +1685,9 @@ $g_file_upload_method = DATABASE;
 /**
  * Use File dropzone: enable drag and drop into a drop zone functionality for
  * file upload fields
- * @global integer $g_enable_file_dropzone
+ * @global integer $g_dropzone_enabled
  */
-$g_use_file_dropzone = ON;
+$g_dropzone_enabled = ON;
 
 /**
  * When using DISK for storing uploaded files, this setting control
