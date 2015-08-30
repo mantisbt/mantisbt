@@ -158,7 +158,7 @@
   -webkit-border-radius: 3px;
   border-radius: 3px;
   background: rgba(0,0,0,0.03);
-  padding: 23px;
+  padding: 10px;
 }
 .dropzone .dz-default.dz-message span {
   display: none;
