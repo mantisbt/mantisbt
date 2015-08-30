@@ -602,10 +602,8 @@ if( $t_show_attachments ) {
 		<td>
 			<input type="hidden" name="max_file_size" value="<?php echo $t_max_file_size ?>" />
 			<div class="dropzone center">
-				<div class="space-10"></div>
 				<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i><br>
 				<span class="bigger-150 grey"><?php echo lang_get( 'dropzone_default_message' ) ?></span>
-				<div class="space-10"></div>
 				<div id="dropzone-previews-box" class="dropzone-previews dz-max-files-reached"></div>
 			</div>
 			<div class="fallback">
