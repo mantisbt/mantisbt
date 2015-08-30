@@ -204,7 +204,7 @@ function html_css() {
 	html_css_link( config_get( 'css_include_file' ) );
 
 	if ( config_get_global( 'cdn_enabled' ) == ON ) {
-		html_css_cdn_link( 'https://ajax.googleapis.com/ajax/libs/jqueryui/' . JQUERY_UI_VERSION . '/themes/smoothness/jquery-ui.css">' );
+		html_css_cdn_link( 'https://ajax.googleapis.com/ajax/libs/jqueryui/' . JQUERY_UI_VERSION . '/themes/smoothness/jquery-ui.css' );
 	} else {
 		html_css_link( 'jquery-ui-' . JQUERY_UI_VERSION . '.min.css' );
 	}
