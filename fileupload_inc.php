@@ -36,7 +36,7 @@ html_javascript_link( 'dropzone.min.js');
 	function enableDropzone( classPrefix, autoUpload ) {
 		try {
 			var zone = new Dropzone( "." + classPrefix + "-form", {
-				forceFallback: <?php echo config_get( 'use_file_dropzone' ) ? 'false' : 'true' ?>,
+				forceFallback: <?php echo config_get( 'dropzone_enabled' ) ? 'false' : 'true' ?>,
 				paramName: "ufile",
 				autoProcessQueue: autoUpload,
 				clickable: '.' + classPrefix,
