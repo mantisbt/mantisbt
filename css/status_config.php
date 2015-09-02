@@ -77,9 +77,11 @@ $t_status_percents = auth_is_user_authenticated() ? get_percentage_by_status() :
 
 foreach( $t_statuses AS $t_id=>$t_label ) {
 	if( array_key_exists( $t_label, $t_colors ) ) {
-		echo ".$t_label-color { background-color: {$t_colors[$t_label]}; width: $t_color_width%; }\n";
+		echo '.' . html_get_css_identifier( $t_label, 'color' )
+			. " { background-color: {$t_colors[$t_label]}; width: $t_color_width%; }\n";
 	}
 	if( array_key_exists( $t_id, $t_status_percents ) ) {
-		echo ".$t_label-percentage { width: {$t_status_percents[$t_id]}%; }\n";
+		echo '.' . html_get_css_identifier( $t_label, 'percentage' )
+			. " { width: {$t_status_percents[$t_id]}%; }\n";
 	}
 }
