@@ -454,7 +454,8 @@ if( access_has_project_level( config_get( 'custom_field_link_threshold' ), $f_pr
 		foreach( $t_custom_fields as $t_field_id ) {
 			$t_desc = custom_field_get_definition( $t_field_id ); ?>
 			<tr>
-				<td><?php echo custom_field_get_display_name( $t_desc['name'] ) ?></td>
+				<td><?php echo '<a href="manage_custom_field_edit_page.php?field_id=' . $t_field_id . '">' .
+						custom_field_get_display_name( $t_desc['name'] ) . '</a>' ?></td>
 				<td class="center">
 					<form method="post" action="manage_proj_custom_field_update.php">
 						<fieldset>
