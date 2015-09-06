@@ -1431,12 +1431,9 @@ function html_status_legend( $p_display_position, $p_restrict_by_filter = false 
 		$t_status_enum_string = config_get( 'status_enum_string' );
 		foreach( $t_status_array as $t_status => $t_name ) {
 			$t_val = isset( $t_status_names[$t_status] ) ? $t_status_names[$t_status] : $t_status_array[$t_status];
-			$t_status_css = html_get_css_identifier(
-				MantisEnum::getLabel( $t_status_enum_string, $t_status ),
-				'color'
-			);
 
-			echo '<td class="small-caption ' . $t_status_css . '">' . $t_val . '</td>';
+			echo '<td class="small-caption ' . html_get_status_css_class( $t_status ) . '">'
+				. $t_val . '</td>';
 		}
 
 		echo '</tr>';
@@ -1474,10 +1471,11 @@ function html_status_percentage_legend() {
 			$t_percent = ( isset( $t_status_percents[$t_status] ) ?  $t_status_percents[$t_status] : 0 );
 
 			if( $t_percent > 0 ) {
-				$t_status_css = html_get_css_identifier(
-					MantisEnum::getLabel( $t_status_enum_string, $t_status )
-				);
-				echo '<td class="small-caption-center ' . $t_status_css . '-color ' . $t_status_css . '-percentage">' . $t_percent . '%</td>';
+				$t_class = html_get_status_css_class( $t_status );
+				echo '<td class="small-caption-center '
+					. $t_class . ' '
+					. str_replace( 'color', 'percentage', $t_class ) . '">'
+					. $t_percent . '%</td>';
 			}
 		}
 
@@ -1911,28 +1909,10 @@ function html_buttons_view_bug_page( $p_bug_id ) {
  * Build CSS including project or even user-specific colors ?
  */
 function html_get_status_css_class( $p_status, $p_user = null, $p_project = null ) {
-	$t_identifier = MantisEnum::getLabel(
-		config_get( 'status_enum_string', null, $p_user, $p_project ),
-		$p_status
-	);
-	return html_get_css_identifier( $t_identifier, 'color' );
-}
-
-/**
- * Get a CSS-friendly identifier for the given string
- * Replace all invalid characters by a dash, remove multiple consecutive dashes
- * and append the given suffix.
- * This is useful e.g. for dynamic css class names used for status colors.
- * @param string $p_string Identifier to convert
- * @param string $p_string Suffix to append at end of string
- * @return string
- */
-function html_get_css_identifier( $p_string, $p_suffix = null ) {
-	$t_string = string_attribute( strtolower ( $p_string ) );
-	$t_string = preg_replace( '/[^a-z0-9_-]/', '-', $t_string );
-	if( $p_suffix ) {
-		$t_string .= '-' . $p_suffix;
+	$t_status_enum = config_get( 'status_enum_string', null, $p_user, $p_project );
+	if( MantisEnum::hasValue( $t_status_enum, $p_status ) ) {
+		return 'status-' . $p_status . '-color';
+	} else {
+		return '';
 	}
-	$t_string = preg_replace( '/-+/', '-', trim( $t_string, '-' ) );
-	return $t_string;
 }
