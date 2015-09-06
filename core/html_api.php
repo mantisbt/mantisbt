@@ -1430,9 +1430,12 @@ function html_status_legend( $p_display_position, $p_restrict_by_filter = false 
 		# draw the status bar
 		$t_status_enum_string = config_get( 'status_enum_string' );
 		foreach( $t_status_array as $t_status => $t_name ) {
-			$t_val = isset( $t_status_names[$t_status] ) ? $t_status_names[$t_status] : $t_status_array[$t_status];
+			$t_val = isset( $t_status_names[$t_status] )
+				? $t_status_names[$t_status]
+				: $t_status_array[$t_status];
 
-			echo '<td class="small-caption ' . html_get_status_css_class( $t_status ) . '">'
+			echo '<td class="small-caption '
+				. html_get_status_css_class( $t_status ) . '">'
 				. $t_val . '</td>';
 		}
 
