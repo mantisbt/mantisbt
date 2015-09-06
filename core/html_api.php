@@ -1434,7 +1434,7 @@ function html_status_legend( $p_display_position, $p_restrict_by_filter = false 
 				? $t_status_names[$t_status]
 				: $t_status_array[$t_status];
 
-			echo '<td class="small-caption '
+			echo '<td class="small-caption status-legend-width '
 				. html_get_status_css_class( $t_status ) . '">'
 				. $t_val . '</td>';
 		}

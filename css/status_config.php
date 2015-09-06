@@ -71,8 +71,6 @@ switch( $t_referer_page ) {
 $t_status_string = config_get( 'status_enum_string' );
 $t_statuses = MantisEnum::getAssocArrayIndexedByValues( $t_status_string );
 $t_colors = config_get( 'status_colors' );
-$t_color_count = count( $t_colors );
-$t_color_width = ( $t_color_count > 0 ? ( round( 100/$t_color_count ) ) : 0 );
 $t_status_percents = auth_is_user_authenticated() ? get_percentage_by_status() : array();
 
 foreach( $t_statuses as $t_id => $t_label ) {
@@ -80,9 +78,14 @@ foreach( $t_statuses as $t_id => $t_label ) {
 
 	# Status color class
 	echo '.' . $t_css_class
-		. " { background-color: {$t_colors[$t_label]}; width: $t_color_width%; }\n";
+		. " { background-color: {$t_colors[$t_label]}; }\n";
 
 	# Status percentage width class
 	echo '.' . str_replace( 'color', 'percentage', $t_css_class )
 		. " { width: {$t_status_percents[$t_id]}%; }\n";
 }
+
+# Status legend width class
+$t_color_count = count( $t_colors );
+$t_color_width = ( $t_color_count > 0 ? ( round( 100/$t_color_count ) ) : 0 );
+echo ".status-legend-width { width: $t_color_width%; }\n";
