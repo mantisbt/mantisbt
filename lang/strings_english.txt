@@ -1188,6 +1188,7 @@ $s_recently_visited = 'Recently Visited';
 $s_priority_abbreviation = 'P';
 $s_note_user_id_label = 'Note By:';
 $s_filter_match_type = 'Match Type';
+$s_filter_match_type_label = 'Match Type:';
 $s_filter_match_all = 'All Conditions';
 $s_filter_match_any = 'Any Condition';
 
