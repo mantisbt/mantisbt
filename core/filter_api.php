@@ -3393,7 +3393,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 				<a id="match_type_filter"
 					href="<?php echo $t_filters_url . FILTER_PROPERTY_MATCH_TYPE;?>"
 					<?php echo $t_dynamic_filter_expander_class; ?>>
-					<?php echo lang_get( 'filter_match_type' )?>:
+					<?php echo lang_get( 'filter_match_type_label' )?>
 				</a>
 			</td>
 			<td class="small-caption" id="match_type_filter_target">
