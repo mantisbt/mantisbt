@@ -77,12 +77,16 @@ foreach( $t_statuses as $t_id => $t_label ) {
 	$t_css_class = html_get_status_css_class( $t_id );
 
 	# Status color class
-	echo '.' . $t_css_class
-		. " { background-color: {$t_colors[$t_label]}; }\n";
+	if( array_key_exists( $t_label, $t_colors ) ) {
+		echo '.' . $t_css_class
+			. " { background-color: {$t_colors[$t_label]}; }\n";
+	}
 
 	# Status percentage width class
-	echo '.' . str_replace( 'color', 'percentage', $t_css_class )
-		. " { width: {$t_status_percents[$t_id]}%; }\n";
+	if( array_key_exists( $t_id, $t_status_percents ) ) {
+		echo '.' . str_replace( 'color', 'percentage', $t_css_class )
+			. " { width: {$t_status_percents[$t_id]}%; }\n";
+	}
 }
 
 # Status legend width class
