@@ -39,12 +39,16 @@
  * @file
  *
  * @author Rancher
+ * @author Srdjan m
  */
 
 $s_plugin_XmlImportExport_title = 'Проблеми у увозу/извозу';
 $s_plugin_XmlImportExport_description = 'Додаје могућности увоза и извоза у XML.';
 $s_plugin_XmlImportExport_import = 'Увези проблеме';
 $s_plugin_XmlImportExport_export = 'XML извоз';
+$s_plugin_XmlImportExport_import_threshold = 'Увези проблеме';
+$s_plugin_XmlImportExport_export_threshold = 'Извези проблеме';
+$s_plugin_XmlImportExport_action_update = 'Ажурирај';
 $s_plugin_XmlImportExport_importing_in_project = 'Увожење проблема у пројекат:';
 $s_plugin_XmlImportExport_import_options = 'Поставке увоза';
 $s_plugin_XmlImportExport_cross_references = 'Упућивања';

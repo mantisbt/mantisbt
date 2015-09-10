@@ -39,6 +39,7 @@
  * @file
  *
  * @author Rancher
+ * @author Srdjan m
  */
 
 $s_plugin_format_title = 'Обликовање за MantisBT';
@@ -47,6 +48,6 @@ $s_plugin_format_config = 'Подешавање';
 $s_plugin_format_process_text = 'Обрада текста';
 $s_plugin_format_process_text_warning_notice = 'Не искључујте ако нисте сигурни шта радите. У искљученом стању, могући су међумесни напади (XSS) на мрежном месту.';
 $s_plugin_format_process_urls = 'Обрада адреса';
-$s_plugin_format_process_buglinks = 'MantisBT везе (задаци/коментари)';
+$s_plugin_format_process_buglinks = 'MantisBT унутрашње везе (Проблеми и коментари)';
 $s_plugin_format_enabled = 'Укључено';
 $s_plugin_format_disabled = 'Искључено';

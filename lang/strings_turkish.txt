@@ -47,7 +47,9 @@
  * @author Karduelis
  * @author Khutuck
  * @author Korayal
+ * @author McAang
  * @author Meelo
+ * @author Rapsar
  * @author Sayginer
  * @author Thinkfast
  * @author Trockya
@@ -667,7 +669,7 @@ $s_add_category_button = 'Kategori Ekle';
 $s_versions = 'Versiyonlar';
 $s_add_version_button = 'Versiyon Ekle';
 $s_add_and_edit_version_button = 'Ekle ve Versiyonu Düzenle';
-$s_edit_link = 'Düzenle';
+$s_edit_link = 'Değiştir';
 $s_actions = 'İşlemler';
 $s_version = 'Versiyon/Alt Versiyon';
 $s_version_label = 'Sürüm:';
@@ -755,7 +757,7 @@ $s_add_news_title = 'Haber Ekle';
 $s_post_to = 'Yayınlanacak Yer';
 $s_post_news_button = 'Haber Yayınla';
 $s_edit_or_delete_news_title = 'Haber Düzenle veya Sil';
-$s_edit_post = 'Haber Düzenle';
+$s_edit_post = 'Haber Değiştir';
 $s_delete_post = 'Haber Sil';
 $s_select_post = 'Haber Seç';
 $s_news_updated_msg = 'Haber güncellendi...';

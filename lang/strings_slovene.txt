@@ -40,10 +40,11 @@
  *
  * @author Dbc334
  * @author Eleassar
+ * @author Janezdrilc
  * @author Wertuose
  */
 
-$s_actiongroup_menu_move = 'Prestavi';
+$s_actiongroup_menu_move = 'Preimenuj';
 $s_actiongroup_menu_copy = 'Kopiraj';
 $s_actiongroup_menu_assign = 'Priredi';
 $s_actiongroup_menu_close = 'Zapri';
@@ -566,7 +567,7 @@ $s_system_profile = 'Opis sistema';
 $s_update_bug_button = 'Uredi';
 $s_bug_assign_to_button = 'Dodeli:';
 $s_reopen_bug_button = 'Ponovno odpri';
-$s_move_bug_button = 'Prestavi';
+$s_move_bug_button = 'Preimenuj';
 $s_attached_files = 'Dodane datoteke';
 $s_publish = 'Objavi';
 $s_add_user_to_monitor = 'Dodaj';

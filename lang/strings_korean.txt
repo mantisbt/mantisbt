@@ -41,6 +41,7 @@
  * @author Changwoo
  * @author Hong3e
  * @author Priviet
+ * @author Revi
  * @author Wtspout
  * @author 고기랑
  * @author 관인생략
@@ -686,7 +687,7 @@ $s_not_released = '아직 릴리스하지 않음';
 $s_scheduled_release = '릴리스 예정';
 $s_obsolete = '더 이상 사용되지 않음';
 $s_version_updated_msg = '버전 정보가 바뀌었습니다.';
-$s_account_delete_protected_msg = '계정이 보호되었습니다. 이 계정을 삭제할수 없습니다.';
+$s_account_delete_protected_msg = '계정이 보호되었습니다. 이 계정을 삭제할 수 없습니다.';
 $s_account_deleted_msg = '계정이 삭제되었습니다....';
 $s_delete_account_sure_msg = '이 계정을 삭제하시겠습니까?';
 $s_notify_user = '사용자 알림';

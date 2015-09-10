@@ -41,12 +41,14 @@
  * @author Hedda Gabler
  * @author Khutuck
  * @author Korayal
+ * @author Uğurkent
  */
 
 $s_plugin_XmlImportExport_title = 'Sorun Al/Ver';
 $s_plugin_XmlImportExport_description = 'MantisBT\'ye XML tabanlı yetenek ekler ve çıkarır.';
 $s_plugin_XmlImportExport_import = 'Alma Sorunları';
 $s_plugin_XmlImportExport_export = 'XML Ver';
+$s_plugin_XmlImportExport_action_update = 'Güncelleme';
 $s_plugin_XmlImportExport_importing_in_project = 'Projedeki Aktarma Sorunları:';
 $s_plugin_XmlImportExport_import_options = 'Alma seçenekleri';
 $s_plugin_XmlImportExport_cross_references = 'Çapraz referanslar';

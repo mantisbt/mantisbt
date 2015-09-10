@@ -42,6 +42,7 @@
  * @author Helix84
  * @author Kusavica
  * @author Mikulas1
+ * @author Rattkin
  * @author Rudko
  * @author Teslaton
  * @author Wizzard
@@ -1080,14 +1081,14 @@ $s_on_date = 'v';
 $s_on = 'v';
 $s_off = 'Vypnúť';
 $s_wiki = 'Wiki';
-$s_tags = 'Značky';
+$s_tags = 'Štítky';
 $s_tag_details = 'Detaily Značky: %1$s';
 $s_tag_id = 'ID Značky';
 $s_tag_name = 'Názov';
 $s_tag_creator = 'Tvorca';
 $s_tag_created = 'Dátum Vytvorenia';
 $s_tag_updated = 'Posledná Zmena';
-$s_tag_description = 'Popis Značky';
+$s_tag_description = 'Popis štítku';
 $s_tag_statistics = 'Štatistiky Využitia';
 $s_tag_update = 'Aktualizovať Značku: %1$s';
 $s_tag_update_return = 'Späť na Značku';

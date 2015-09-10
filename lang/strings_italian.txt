@@ -46,6 +46,8 @@
  * @author McDutchie
  * @author Nemo bis
  * @author PeppeAeco
+ * @author Purodha
+ * @author Statix64
  * @author Stefano-c
  * @author Ximo17
  */
@@ -402,7 +404,7 @@ $s_reminder_list_truncated = 'elenco destinatari troncato';
 $s_bug_send_button = 'Invia';
 $s_reminder = 'Memorandum';
 $s_reminder_explain = 'Questo memorandum verrà inviato agli utenti selezionati a cui si richiede un feedback sull\'anomalia.';
-$s_reminder_monitor = 'Questi destinatari verranno aggiunti agli utenti che tengono sotto controllo l\'anomalia.';
+$s_reminder_monitor = 'Questi destinatari verranno aggiunti agli utenti che tengono sotto controllo l\'anomalia. Essi potranno annullare l\'iscrizione utilizzando il bottone "Fine monitoraggio".';
 $s_reminder_store = 'Questo memorandum verrà memorizzato con l\'anomalia.';
 $s_confirm_sponsorship = 'Conferma di voler sponsorizzare l\'anomalia %1$d per %2$s.';
 $s_stick_bug_button = 'Evidenza';
@@ -453,6 +455,7 @@ $s_profile = 'Profilo';
 $s_profile_label = 'Profilo:';
 $s_updating_bug_simple_title = 'Aggiorna le informazioni sull\'anomalia';
 $s_view_revisions = 'Visualizza versioni';
+$s_view_num_revisions = 'Vista %1$d revisione';
 $s_revision = 'Revisione';
 $s_revision_by = '%1$s di %2$s';
 $s_revision_drop = 'Scarica';
@@ -476,8 +479,11 @@ $s_bugnote_updated_msg = 'La nota sull\'anomalia è stata aggiornata con success
 $s_last_edited = 'Ultima modifica:';
 $s_hide_content = 'Nascondi il contenuto';
 $s_show_content = 'Mostra il contenuto';
+$s_webmaster_contact_information = 'Contattare <a href="mailto:<span class=" notranslate"="" translate="no">%1$s</span>" title="Contatta il webmaster via e-mail.">amministratore</a> per assistenza';
 $s_total_queries_executed = 'Interrogazioni eseguite in totale: %1$d';
 $s_unique_queries_executed = 'Interrogazioni uniche eseguite: %1$d';
+$s_total_query_execution_time = 'Totale tempo di esecuzione della query: %1$s secondi';
+$s_page_execution_time = 'Tempo di esecuzione della pagina: %1$s secondi';
 $s_memory_usage_in_kb = 'Memoria in uso: %1$s KiB';
 $s_log_page_number = 'Numero';
 $s_log_page_time = 'Tempo di esecuzione';
@@ -489,6 +495,9 @@ $s_warning_plain_password_authentication = '<strong>Attenzione:</strong> E\' sta
 $s_warning_default_administrator_account_present = '<strong>Attenzione:</strong> Dovresti disabilitare l\'utenza \'amministratore\' di default oppure cambiarne la password.';
 $s_warning_admin_directory_present = '<strong>ATTENZIONE:</strong> La cartella Admin dovrebbe essere rimossa.';
 $s_warning_change_setting = '<strong>Attenzione:</strong> "%1$s" non è impostato al valore predefinito (%2$s).';
+$s_warning_security_hazard = 'Questo è un potenziale rischio per la sicurezza, in quanto può esporre informazioni sensibili.';
+$s_warning_integrity_hazard = 'Questo comporta che MantisBT continuerà quando si verifica un errore e ciò può portare a sistema/problemi di integrità dei dati.';
+$s_warning_debug_email = '<strong>Attenzione:</strong> "<code>debug_email</code>" non è impostato su <code>OFF</code>, tutte le e-mail di notifica sarà inviata a "%1$s".';
 $s_error_database_no_schema_version = '<strong>Errore:</strong> la struttura del database è obsoleta (config(databaseversion) è 0) o corrotta. Controlla che il database sia in esecuzione - non è possibile rintracciare la versione dello schema di database. La configurazione della tabella non ha ritornato uno schema valido di database - Per favore, richiedi supporto alla mailing list mantis-help, se necessario.';
 $s_error_database_version_out_of_date_2 = '<strong>Attenzione:</strong> La struttura di database é obsoleta. Per favore, aggiornala <a href="admin/install.php">qui</a> dopo avere effettuato l\'accesso';
 $s_error_code_version_out_of_date = ' <strong>Attenzione:</strong> La struttura di database é più recente del programma installato. Per favore, aggiorna la versione di programma.';
@@ -560,6 +569,7 @@ $s_date_created = 'Data inserimento';
 $s_last_visit = 'Ultima visita';
 $s_last_visit_label = 'Ultima visita:';
 $s_edit_user_link = 'Modifica utente';
+$s_separate_list_items_by = '(gli elementi nelle liste sono separati da "%1$s")';
 $s_config_all_projects = 'Nota: Queste configurazioni impattano TUTTI I PROGETTI, a meno che non siano specializzate dal singolo progetto.';
 $s_config_project = 'Nota: Queste configurazioni impattano SOLO il progetto %1$s.';
 $s_colour_coding = 'Nella tabella seguente, sono applicati i seguenti codici-colore:';
@@ -674,6 +684,7 @@ $s_copy_to = 'Copia su';
 $s_categories_and_version_title = 'Categorie e versioni';
 $s_categories = 'Categorie';
 $s_add_category_button = 'Nuova categoria';
+$s_add_and_edit_category_button = 'Aggiungere e Modificare Categoria';
 $s_versions = 'Versioni';
 $s_add_version_button = 'Nuova versione';
 $s_add_and_edit_version_button = 'Aggiungi e modifica versione';
@@ -819,10 +830,10 @@ $s_selected_project = 'Progetto selezionato';
 $s_valid_project_msg = 'Selezionare un progetto valido';
 $s_signup_done_title = 'Registrazione dell\'account eseguita';
 $s_password_emailed_msg = 'Congratulazioni.  Registrazione completata con successo: riceverai una email di conferma per verificare che l\'indirizzo email da te indicato è corretto. Per attivare l\'account appena creato ed impostare la password di accesso dovrai visitare l\'indirizzo URL indicato all\'interno della email.';
-$s_no_reponse_msg = 'Hai sette giorni di tempo per completare e confermare la registrazione dell\'account; non rispondendo a questo messaggio entro una settimana, il nuovo account potrebbe essere eliminato.';
+$s_no_reponse_msg = 'Hai sette giorni di tempo per completare il processo di conferma dell\'account; se non riesci a farlo all\'interno di questo periodo di tempo, i nuovi account registrati potrebbero essere eliminati.';
 $s_signup_captcha_request_label = 'Inserisci il codice come è mostrato nella casella a destra:';
 $s_signup_captcha_refresh = 'Genera un nuovo codice';
-$s_signup_info = 'Dopo aver completato il modulo di registrazione, ti verrà inviata una email di conferma all\'indirizzo email specificato.<br />L\'email conterrà le istruzioni per attivare l\'account appena creato.  Non rispondendo a questo messaggio entro una settimana, l\'account potrebbe essere eliminato.<br /><b>Occorre indicare un indirizzo email valido ed esistente per poter ricevere l\'email di conferma.</b>';
+$s_signup_info = 'Al completamento di questo form e dopo avere verificato le tue risposte, ti verrà inviato un messaggio di conferma all\'indirizzo email specificato.<br />Utilizzando il link fornito nell\'e-mail potrai attivare il tuo account. Se non effettuerai l\'attivazione entro sette giorni, l\'account potrebbe essere eliminato.<br />Devi specificare un indirizzo valido di posta elettronica per ricevere l\'email di conferma dell\'account.';
 $s_signup_title = 'Registrazione';
 $s_signup_button = 'Registrati';
 $s_no_password_request = 'La password è gestita da un altro sistema.  Contattare il proprio amministratore.';
@@ -869,6 +880,7 @@ $s_all = 'tutte';
 $s_show = 'Mostra';
 $s_show_label = 'Mostra:';
 $s_changed = 'Evidenzia modifiche (ore)';
+$s_changed_label = 'Modifiche in evidenza (ore):';
 $s_viewing_bugs_title = 'Elenco delle anomalie';
 $s_updated = 'Ultima modifica';
 $s_sticky = 'In primo piano';
@@ -1000,8 +1012,11 @@ $s_sponsorship_more_info = 'Maggiori informazioni sulla sponsorizzazione';
 $s_sponsorship_total = 'Totale sponsorizzazioni';
 $s_changelog = 'Registro modifiche';
 $s_changelog_empty = 'Il registro non contiene nessuna informazione';
+$s_changelog_empty_manager = 'Nessun registro modifiche disponibile. Le anomalie vengono riportate se i progetti hanno versioni e se le anomalie sono state risolte con "risolto in versione" impostato.';
 $s_roadmap = 'Roadmap';
 $s_resolved_progress = '%1$d di %2$d anomalie risolte (%3$d%%).';
+$s_roadmap_empty = 'Nessuna informazione sui Rilasci è disponibile';
+$s_roadmap_empty_manager = 'Nessuna informazione sui Rilasci è disponibile. Le anomalie vengono riportate se i progetti hanno versioni e se se anomalie hanno impostato "assegnata alla versione"';
 $s_http_auth_realm = 'MantisBT Login';
 $s_bug = 'anomalia';
 $s_bugs = 'anomalie';
@@ -1169,6 +1184,7 @@ $s_manage_user = 'Gestisci Utente';
 $s_install_information = 'MantisBT Informazioni d\'installazione';
 $s_database_information = 'MantisBT Informazioni del Database';
 $s_path_information = 'MantisBT Informazioni percorso';
+$s_mantisbt_database_statistics = 'Statistiche del Database MantisBT';
 $s_php_version = 'Versione PHP';
 $s_adodb_version = 'Versione ADOdb';
 $s_month_january = 'Gennaio';
