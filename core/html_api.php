@@ -757,8 +757,6 @@ function html_footer() {
 function html_body_end() {
 	global $g_scripts_included;
 
-	event_signal( 'EVENT_LAYOUT_BODY_END' );
-
 	echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_config.php' ) . '"></script>' . "\n";
 	echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
 
@@ -776,6 +774,8 @@ function html_body_end() {
 	}
 
 	echo '</div>', "\n";
+
+	event_signal( 'EVENT_LAYOUT_BODY_END' );
 
 	echo '</body>', "\n";
 }
