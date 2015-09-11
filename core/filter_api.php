@@ -567,9 +567,6 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_RELATIONSHIP_BUG] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_RELATIONSHIP_BUG] = gpc_get_int( FILTER_PROPERTY_RELATIONSHIP_BUG, 0 );
 	}
-	if( !isset( $p_filter_arr[FILTER_PROPERTY_TARGET_VERSION] ) ) {
-		$p_filter_arr[FILTER_PROPERTY_TARGET_VERSION] = (string)META_FILTER_ANY;
-	}
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_TAG_STRING] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_TAG_STRING] = gpc_get_string( FILTER_PROPERTY_TAG_STRING, '' );
 	}
@@ -713,9 +710,10 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 					$f_custom_fields_data,
 				);
 			} else {
-				$p_filter_arr[$t_multi_field_name] = array(
-					META_FILTER_ANY,
-				);
+				$t_val = META_FILTER_ANY;
+				# Ensure the filter property has the right type - see #20087
+				settype( $t_val, $t_multi_field_type );
+				$p_filter_arr[$t_multi_field_name] = array( $t_val );
 			}
 		} else {
 			if( !is_array( $p_filter_arr[$t_multi_field_name] ) ) {
@@ -732,13 +730,14 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 				if( ( $t_filter_value === 'none' ) || ( $t_filter_value === '[none]' ) ) {
 					$t_filter_value = META_FILTER_NONE;
 				}
-				if( 'string' == $t_multi_field_type ) {
-					$t_checked_array[] = $t_filter_value;
-				} else if( 'int' == $t_multi_field_type ) {
-					$t_checked_array[] = (int)$t_filter_value;
-				} else if( 'array' == $t_multi_field_type ) {
-					$t_checked_array[] = $t_filter_value;
+				# Ensure the filter property has the right type - see #20087
+				switch( $t_multi_field_type ) {
+					case 'string' :
+					case 'int' :
+						settype( $t_filter_value, $t_multi_field_type );
+						break;
 				}
+				$t_checked_array[] = $t_filter_value;
 			}
 			$p_filter_arr[$t_multi_field_name] = $t_checked_array;
 		}
