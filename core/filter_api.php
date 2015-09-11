@@ -698,6 +698,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 		FILTER_PROPERTY_TARGET_VERSION => 'string',
 		FILTER_PROPERTY_MONITOR_USER_ID => 'int',
 		FILTER_PROPERTY_PROFILE_ID => 'int',
+		FILTER_PROPERTY_MATCH_TYPE => 'int',
 	);
 	foreach( $t_multi_select_list as $t_multi_field_name => $t_multi_field_type ) {
 		if( !isset( $p_filter_arr[$t_multi_field_name] ) ) {
