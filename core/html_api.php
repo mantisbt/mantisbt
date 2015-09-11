@@ -782,6 +782,9 @@ function html_footer() {
  * @return void
  */
 function html_body_end() {
+	# Should code need to be added to this function in the future, it should be
+	# placed *above* this event, which needs to be the last thing to occur
+	# before the actual body ends (see #20084)
 	event_signal( 'EVENT_LAYOUT_BODY_END' );
 
 	echo '</div>', "\n";
