@@ -2406,7 +2406,7 @@
                 </listitem>
             </varlistentry>
             <varlistentry>
-                <term>$g_allow_bug_delete_access_level</term>
+                <term>$g_delete_bug_threshold</term>
                 <listitem>
                     <para>Allow the specified access level and above to delete
                         bugs.
