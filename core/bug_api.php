@@ -729,6 +729,10 @@ function bug_cache_database_result( array $p_bug_database_result, array $p_stats
 	global $g_cache_bug;
 
 	if( !is_array( $p_bug_database_result ) || isset( $g_cache_bug[(int)$p_bug_database_result['id']] ) ) {
+		if( null !== $p_stats ) {
+			#force store the bugnote statistics
+			return bug_add_to_cache( $p_bug_database_result, $p_stats );
+		}
 		return $g_cache_bug[(int)$p_bug_database_result['id']];
 	}
 
