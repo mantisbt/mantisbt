@@ -790,16 +790,24 @@ $g_cache_bug_text = array();
 
 /**
  * Cache a database result-set containing full contents of bug_table row.
- * @param array $p_bug_database_result Database row containing all columns from mantis_bug_table.
- * @param array $p_stats               An optional array representing bugnote statistics.
+ * $p_stats parameter is an optional array representing bugnote statistics.
+ * This parameter can be "false" if the bug has no bugnotes, so the cache can differentiate
+ * from a still not cached stats registry.
+ * @param array $p_bug_database_result  Database row containing all columns from mantis_bug_table.
+ * @param array|boolean|null $p_stats   Optional: array representing bugnote statistics, or false to store empty cache value
  * @return array returns an array representing the bug row if bug exists
  * @access public
  */
-function bug_cache_database_result( array $p_bug_database_result, array $p_stats = null ) {
+function bug_cache_database_result( array $p_bug_database_result, $p_stats = null ) {
 	global $g_cache_bug;
 
 	if( !is_array( $p_bug_database_result ) || isset( $g_cache_bug[(int)$p_bug_database_result['id']] ) ) {
-		return $g_cache_bug[(int)$p_bug_database_result['id']];
+		if( !is_null($p_stats) ) {
+			# force store the bugnote statistics
+			return bug_add_to_cache( $p_bug_database_result, $p_stats );
+		} else {
+			return $g_cache_bug[(int)$p_bug_database_result['id']];
+		}
 	}
 
 	return bug_add_to_cache( $p_bug_database_result, $p_stats );
@@ -873,13 +881,16 @@ function bug_cache_array_rows( array $p_bug_id_array ) {
 }
 
 /**
- * Inject a bug into the bug cache
+ * Inject a bug into the bug cache.
+ * $p_stats parameter is an optional array representing bugnote statistics.
+ * This parameter can be "false" if the bug has no bugnotes, so the cache can differentiate
+ * from a still not cached stats registry.
  * @param array $p_bug_row A bug row to cache.
- * @param array $p_stats   Bugnote stats to cache.
+ * @param array|boolean|null $p_stats   Array of Bugnote stats to cache, false to store empty value, null to skip
  * @return array
  * @access private
  */
-function bug_add_to_cache( array $p_bug_row, array $p_stats = null ) {
+function bug_add_to_cache( array $p_bug_row, $p_stats = null ) {
 	global $g_cache_bug;
 
 	$g_cache_bug[(int)$p_bug_row['id']] = $p_bug_row;
@@ -1624,7 +1635,7 @@ function bug_get_bugnote_stats_array( array $p_bugs_id, $p_user_id = null ) {
 		}
 		while ( $t_query_row = db_fetch_array( $t_result ) );
 	}
-	# The remaining bug ids, are those without visible notes. Save false as chached value.
+	# The remaining bug ids, are those without visible notes. Save false as cached value
 	foreach( $t_id_array as $t_id ) {
 		$t_stats[$t_id] = false;
 	}

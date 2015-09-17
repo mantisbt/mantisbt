@@ -2179,7 +2179,8 @@ function filter_cache_result( array $p_rows, array $p_id_array_lastmod ) {
 	$t_stats = bug_get_bugnote_stats_array( $p_id_array_lastmod );
 	$t_rows = array();
 	foreach( $p_rows as $t_row ) {
-		if( isset( $t_stats[$t_row['id']] ) && false !== $t_stats[$t_row['id']] ) {
+		$b = $t_stats[$t_row['id']];
+		if( array_key_exists( $t_row['id'], $t_stats ) ) {
 			$t_rows[] = bug_row_to_object( bug_cache_database_result( $t_row, $t_stats[$t_row['id']] ) );
 		} else {
 			$t_rows[] = bug_row_to_object( bug_cache_database_result( $t_row ) );
