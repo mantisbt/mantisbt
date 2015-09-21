@@ -77,6 +77,13 @@ if( !config_can_set_in_database( $f_config_option ) ) {
 	trigger_error( ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB, ERROR );
 }
 
+if( !config_can_delete( $f_config_option ) ) {
+	error_parameters( $f_config_option );
+	# @TODO define an error code for values that cant be set in DB, nor config_inc
+	trigger_error( ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB, ERROR );
+}
+
+
 # For 'default', behavior is based on the global variable's type
 if( $f_type == CONFIG_TYPE_DEFAULT ) {
 	$t_config_global_value = config_get_global( $f_config_option );
