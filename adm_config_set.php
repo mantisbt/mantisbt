@@ -66,7 +66,7 @@ if( $f_project_id != ALL_PROJECTS ) {
 
 # make sure that configuration option specified is a valid one.
 $t_not_found_value = '***CONFIG OPTION NOT FOUND***';
-if( config_get_global( $f_config_option, $t_not_found_value ) === $t_not_found_value ) {
+if( config_get( $f_config_option, $t_not_found_value ) === $t_not_found_value ) {
 	error_parameters( $f_config_option );
 	trigger_error( ERROR_CONFIG_OPT_NOT_FOUND, ERROR );
 }
