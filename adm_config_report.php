@@ -156,7 +156,7 @@ function print_option_list_from_array( array $p_array, $p_filter_value ) {
 function check_config_value( $p_config ) {
 	if(    $p_config != META_FILTER_NONE
 	   && !is_blank( $p_config )
-	   && is_null( @config_get_global( $p_config ) )
+	   && is_null( @config_get( $p_config ) )
 	) {
 		return META_FILTER_NONE;
 	}
