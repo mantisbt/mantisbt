@@ -449,6 +449,7 @@ if( $t_read_write_access ) {
 
 <!-- Config Set Form -->
 
+<?php if( config_can_delete( $t_edit_option ) ){ ?>
 <div id="config-edit-div" class="form-container">
 <form id="config_set_form" method="post" action="adm_config_set.php">
 	<fieldset>
@@ -527,6 +528,7 @@ if( $t_read_write_access ) {
 		</fieldset>
 	</form>
 </div>
+<?php } # end if config_can_delete ?>
 
 <?php
 } # end user can change config
