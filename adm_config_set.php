@@ -54,7 +54,7 @@ $f_type = gpc_get_string( 'type' );
 $f_value = gpc_get_string( 'value' );
 $f_original_user_id = gpc_get_int( 'original_user_id' );
 $f_original_project_id = gpc_get_int( 'original_project_id' );
-$f_original_edit_option = gpc_get_string( 'original_config_option' );
+$f_original_config_option = gpc_get_string( 'original_config_option' );
 $f_edit_action = gpc_get_string( 'action' );
 
 
@@ -124,9 +124,12 @@ switch( $t_type ) {
 }
 
 if( 'action_edit' === $f_edit_action ){
-	# EDIT action doesnt keep original key values if different.
-	# if key values were not modified, can delete before re-creation
-	config_delete( $f_original_edit_option, $f_original_user_id, $f_original_project_id );
+	# EDIT action doesn't keep original if key values are different.
+	if ( $f_original_config_option !== $f_config_option
+			|| $f_original_user_id !== $f_user_id
+			|| $f_original_project_id !== $f_project_id ){
+		config_delete( $f_original_config_option, $f_original_user_id, $f_original_project_id );
+		}
 }
 
 config_set( $f_config_option, $t_value, $f_user_id, $f_project_id );
