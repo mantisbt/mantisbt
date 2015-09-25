@@ -617,6 +617,7 @@ function print_subproject_option_list( $p_parent_id, $p_project_id = null, $p_fi
 	array_push( $p_parents, $p_parent_id );
 	$t_user_id = auth_get_current_user_id();
 	$t_project_ids = user_get_accessible_subprojects( $t_user_id, $p_parent_id );
+	project_cache_array_rows( $t_project_ids );
 	$t_can_report = true;
 
 	foreach( $t_project_ids as $t_id ) {
