@@ -2099,6 +2099,7 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 
 /**
  *  Cache the filter results with bugnote stats for later use
+ *  also fills bug attachment count cache
  * @param array $p_rows             Results of the filter query.
  * @param array $p_id_array_lastmod Array of bug ids.
  * @return array
@@ -2116,13 +2117,17 @@ function filter_cache_result( array $p_rows, array $p_id_array_lastmod ) {
 	}
 
 	$t_rows = array();
+	$t_bug_ids = array();
 	foreach( $p_rows as $t_row ) {
+		$t_bug_ids[] = $t_row['id'];
 		if( !isset( $t_stats[$t_row['id']] ) ) {
 			$t_rows[] = bug_row_to_object( bug_cache_database_result( $t_row ) );
 		} else {
 			$t_rows[] = bug_row_to_object( bug_cache_database_result( $t_row, $t_stats[$t_row['id']] ) );
 		}
 	}
+	#cache the attachment count for bug list
+	file_bug_attachment_count_cache( $t_bug_ids );
 	return $t_rows;
 }
 
