@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -734,7 +734,7 @@ $s_show_all_users = '全部';
 $s_users_unused = '未使用';
 $s_users_new = '新增';
 $s_account_reset_protected_msg = '帳號受保護。無法重設密碼。';
-$s_account_reset_msg = '確認訊息已寄送至選擇使用者的 E-Mail 信箱，
+$s_account_reset_msg = '確認訊息已寄送至選擇使用者的 Email 信箱，
 使用此功能，使用者將可以更改自己的密碼。';
 $s_account_reset_msg2 = '此帳號的密碼已設為空白...';
 $s_account_unlock_msg = '帳號已經取消鎖定。';
@@ -1095,7 +1095,7 @@ $s_sponsor_issue = '贊助問題';
 $s_assign_sponsored_issue = '分配被贊助的問題';
 $s_handle_sponsored_issue = '處理被贊助的問題';
 $s_others = '其他';
-$s_see_email_addresses_of_other_users = '檢視其他使用者的 E-Mail 位址';
+$s_see_email_addresses_of_other_users = '查看其他使用者的 Email 地址';
 $s_send_reminders = '傳送提醒訊息';
 $s_receive_reminders = '接收提醒訊息';
 $s_add_profiles = '新增基本資料';

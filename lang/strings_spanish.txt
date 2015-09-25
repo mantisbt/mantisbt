@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -118,13 +118,13 @@ $s_announcement = 'Anuncio';
 $s_stays_on_top = 'Siempre arriba';
 $s_bugnote_link_title = 'Acceso directo a nota';
 $s_delete_bugnote_button = 'Eliminar nota';
-$s_delete_bugnote_sure_msg = '¿Está seguro que desea eliminar esta nota?';
+$s_delete_bugnote_sure_msg = '¿Estás seguro de que quieres eliminar esta nota?';
 $s_bug_relationships = 'Relaciones';
 $s_bug_relationships_label = 'Relaciones:';
-$s_empty_password_sure_msg = 'El usuario tiene una contraseña vacía. ¿Está seguro que es lo que desea?';
+$s_empty_password_sure_msg = 'El usuario tiene una contraseña vacía. ¿Estás seguro de que quieres esto?';
 $s_empty_password_button = 'Usar contraseña en blanco';
 $s_reauthenticate_title = 'Autenticar';
-$s_reauthenticate_message = 'Está viendo una página segura, pero su sesión ha expirado. Por favor autentíquese para continuar.';
+$s_reauthenticate_message = 'Estás viendo una página segura, pero tu sesión segura ha expirado. Autentifícate para continuar.';
 $s_no_category = '(Sin categoría)';
 $s_global_categories = 'Categorías globales';
 $s_inherit = 'Heredar categorías';
@@ -895,6 +895,7 @@ $s_recently_visited = 'Visitadas recientemente';
 $s_priority_abbreviation = 'P';
 $s_note_user_id_label = 'Nota de:';
 $s_filter_match_type = 'Tipo de coincidencia';
+$s_filter_match_type_label = 'Coincidencia de tipo:';
 $s_filter_match_all = 'Todas las condiciones';
 $s_filter_match_any = 'Cualquier condición';
 $s_none = 'Ninguno';

@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -56,7 +56,7 @@ $s_actiongroup_menu_delete = 'Verwijderen';
 $s_actiongroup_menu_resolve = 'Oplossen';
 $s_actiongroup_menu_update_priority = 'Prioriteit wijzigen';
 $s_actiongroup_menu_update_status = 'Status bijwerken';
-$s_actiongroup_menu_update_severity = 'strengheid bijwerken';
+$s_actiongroup_menu_update_severity = 'Impact bijwerken';
 $s_actiongroup_menu_update_view_status = 'Zichtbaarheid wijzigen';
 $s_actiongroup_menu_update_category = 'Categorie bijwerken';
 $s_actiongroup_menu_set_sticky = 'Sticky';
@@ -67,10 +67,10 @@ $s_actiongroup_menu_update_fixed_in_version = 'Opgelost in versie bijwerken';
 $s_actiongroup_menu_update_product_build = 'Productbuild bijwerken';
 $s_actiongroup_menu_add_note = 'Notitie toevoegen';
 $s_actiongroup_menu_attach_tags = 'Tags toevoegen';
-$s_actiongroup_bugs = 'Geselecteerde Problemen';
-$s_actiongroup_error_issue_is_readonly = 'Probleem is alleen-lezen.';
+$s_actiongroup_bugs = 'Geselecteerde meldingen';
+$s_actiongroup_error_issue_is_readonly = 'Melding is alleen-lezen.';
 $s_all_projects = 'Alle projecten';
-$s_move_bugs = 'Problemen verplaatsen';
+$s_move_bugs = 'Meldingen verplaatsen';
 $s_operation_successful = 'Handeling uitgevoerd.';
 $s_date_order = 'Datumvolgorde';
 $s_print_all_bug_page_link = 'Rapporten afdrukken';
@@ -80,7 +80,7 @@ $s_login_anonymously = 'Anoniem aanmelden';
 $s_anonymous = 'Anoniem';
 $s_jump_to_bugnotes = 'Naar opmerkingen';
 $s_public_project_msg = 'Dit project is publiek. Alle gebruikers hebben toegang.';
-$s_private_project_msg = 'Dit project is privé. Alleen beheerders en handmatig toegevoegde gebruikers hebben toegang.';
+$s_private_project_msg = 'Dit project is intern. Alleen beheerders en handmatig toegevoegde gebruikers hebben toegang.';
 $s_access_level_project = 'Toegangsniveau project';
 $s_view_submitted_bug_link = 'Melding %1$s bekijken';
 $s_assigned_projects = 'Toegewezen projecten';
@@ -131,14 +131,14 @@ $s_new_bug = 'Nieuwe melding';
 $s_bugnote_added = 'Reactie toegevoegd';
 $s_bugnote_edited = 'De reactie is gewijzigd.';
 $s_bugnote_deleted = 'Reactie verwijderd';
-$s_summary_updated = 'Samenvatting Bijgewerkt';
-$s_description_updated = 'Beschrijving Bijgewerkt';
+$s_summary_updated = 'Samenvatting bijgewerkt';
+$s_description_updated = 'Beschrijving bijgewerkt';
 $s_additional_information_updated = 'Additionele gegevens gewijzigd';
 $s_steps_to_reproduce_updated = 'Stappen om te reproduceren gewijzigd';
 $s_file_added = 'Bestand toegevoegd';
 $s_file_deleted = 'Bestand verwijderd';
 $s_bug_deleted = 'Melding verwijderd';
-$s_make_private = 'Privé Maken';
+$s_make_private = 'Intern maken';
 $s_make_public = 'Publiek maken';
 $s_create_new_project_link = 'Nieuw project aanmaken';
 $s_login_link = 'Aanmelden';
@@ -173,7 +173,7 @@ $s_status_group_bugs_button = 'Status wijzigen';
 $s_category_group_bugs_button = 'Categorie wijzigen';
 $s_view_status_group_bugs_button = 'Zichtbaarheid wijzigen';
 $s_set_sticky_group_bugs_button = 'Sticky in- of uitschakelen';
-$s_product_version_group_bugs_button = 'Productversie bewerken';
+$s_product_version_group_bugs_button = 'Productversie bijwerken';
 $s_fixed_in_version_group_bugs_button = 'Opgelost in versie bijwerken';
 $s_target_version_group_bugs_button = 'Doelversie bijwerken';
 $s_update_severity_title = 'Impact bijwerken';
@@ -888,6 +888,7 @@ $s_recently_visited = 'Recent bekeken';
 $s_priority_abbreviation = 'P';
 $s_note_user_id_label = 'Opmerking van:';
 $s_filter_match_type = 'Zoektype';
+$s_filter_match_type_label = 'Zoektype:';
 $s_filter_match_all = 'Alle voorwaarden';
 $s_filter_match_any = 'Elke voorwaarde';
 $s_none = 'geen';

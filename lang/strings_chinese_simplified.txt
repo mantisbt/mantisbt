@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -739,7 +739,7 @@ $s_show_all_users = '全部';
 $s_users_unused = '未用';
 $s_users_new = '新的';
 $s_account_reset_protected_msg = '帐号受保护，不能重置密码。';
-$s_account_reset_msg = '确认邮件已经发往你的邮箱...';
+$s_account_reset_msg = '一封确认请求已发往选定用户的电子邮件地址。通过使用它，用户将可以更改他们的密码。';
 $s_account_reset_msg2 = '账号密码已经置为空...';
 $s_account_unlock_msg = '该帐户已解锁。';
 $s_manage_user_protected_msg = '帐号受保护；“用户级别”和“是否启用”信息不能修改；其他信息已成功更新。';
@@ -894,6 +894,7 @@ $s_issue_id = '问题 #';
 $s_recently_visited = '最近浏览的';
 $s_note_user_id_label = '注释自：';
 $s_filter_match_type = '匹配类型';
+$s_filter_match_type_label = '匹配类型：';
 $s_filter_match_all = '所有情况';
 $s_filter_match_any = '任何情况';
 $s_none = '无';

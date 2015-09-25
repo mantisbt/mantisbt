@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -558,6 +558,7 @@ $s_date_created = 'Data de creation';
 $s_last_visit = 'Ultime visita';
 $s_last_visit_label = 'Ultime visita:';
 $s_edit_user_link = 'Modificar usator';
+$s_separate_list_items_by = '(separa elementos de lista per "%1$s")';
 $s_config_all_projects = 'Nota: Iste configurationes affecta tote le projectos, si non supplantate al nivello de projecto.';
 $s_config_project = 'Nota: Iste configurationes affecta solmente le projecto %1$s.';
 $s_colour_coding = 'In le tabella hic infra, le sequente codice de colores es applicabile:';
@@ -878,6 +879,7 @@ $s_issue_id = 'Problema №';
 $s_recently_visited = 'Recentemente visitate';
 $s_note_user_id_label = 'Nota per:';
 $s_filter_match_type = 'Typo de correspondentia';
+$s_filter_match_type_label = 'Typo de correspondentia:';
 $s_filter_match_all = 'Tote le conditiones';
 $s_filter_match_any = 'Qualcunque condition';
 $s_none = 'nulle';
@@ -986,6 +988,7 @@ $s_monitored_by = 'Surveliate per';
 $s_monitored_by_label = 'Surveliate per:';
 $s_attachments = 'annexo(s)';
 $s_bytes = 'bytes';
+$s_kb = 'KB';
 $s_attachment_missing = 'Annexo mancante';
 $s_attachment_count = 'Numero de annexos';
 $s_view_attachments_for_issue = 'Vider %1$d annexo(s) pro le problema №%2$d';

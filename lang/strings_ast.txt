@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -531,6 +531,60 @@ $s_filter_button = 'Aplicar filtru';
 $s_default_filter = 'Filtru predetermináu';
 $s_create_filter_link = 'Crear un enllaz permanente';
 $s_create_short_link = 'Crear un enllaz curtiu';
+$s_filter_permalink = 'El siguiente ye un enllaz permanente al filtru configuráu anguaño:';
+$s_manage_users_link = 'Alministrar usuarios';
+$s_manage_projects_link = 'Alministrar proyectos';
+$s_manage_custom_field_link = 'Alministrar campos personalizaos';
+$s_manage_global_profiles_link = 'Alministrar perfiles globales';
+$s_manage_plugin_link = 'Alministrar complementos';
+$s_permissions_summary_report = 'Informe de permisos';
+$s_manage_config_link = 'Alministrar la configuración';
+$s_manage_threshold_config = 'Llendes del fluxu de trabayu';
+$s_manage_email_config = 'Avisos per corréu';
+$s_manage_workflow_config = 'Transiciones del fluxu de trabayu';
+$s_manage_workflow_graph = 'Gráfica del fluxu de trabayu';
+$s_manage_tags_link = 'Alministrar etiquetes';
+$s_create_new_account_link = 'Crear una cuenta nueva';
+$s_projects_link = 'Proyeutos';
+$s_documentation_link = 'Documentación';
+$s_new_accounts_title = 'Cuentes nueves';
+$s_1_week_title = '1 selmana';
+$s_never_logged_in_title = 'Nunca anició sesión';
+$s_prune_accounts = 'Purgar cuentes';
+$s_hide_inactive = 'Tapecer Inactives';
+$s_show_disabled = 'Amosar los desactivaos';
+$s_manage_accounts_title = 'Alministrar Cuentes';
+$s_date_created = 'Data de creación';
+$s_last_visit = 'Cabera visita';
+$s_last_visit_label = 'Cabera visita:';
+$s_edit_user_link = 'Editar usuariu';
+$s_separate_list_items_by = '(dixebrar los elementos de la llista con "%1$s")';
+$s_config_all_projects = 'Nota: Esta configuración afeuta a tolos proyectos, nun siendo que se redefina a nivel de proyectu.';
+$s_config_project = 'Nota: Esta configuración afeuta namái al proyectu %1$s';
+$s_colour_coding = 'Na tabla inferior, aplícase\'l siguiente códigu de colores:';
+$s_colour_project = 'La configuración del proyectu tien prioridá sobre les demás.';
+$s_colour_global = 'Toles configuraciones del proyectu tienen prioridá sobre la configuración predeterminada.';
+$s_issue_reporter = 'Usuariu qu\'informó de la incidencia';
+$s_issue_handler = 'Usuariu que xestiona la incidencia';
+$s_users_added_bugnote = 'Usuarios qu\'añadieron notes a la incidencia';
+$s_change_configuration = 'Actualizar la configuración';
+$s_message = 'Mensaxe';
+$s_default_notify = 'Estableciendo los marcadores de notificación predeterminaos a';
+$s_action_notify = 'Estableciendo los marcadores de notificaciones d\'aición a';
+$s_notify_defaults_change_access = 'Quién pué cambiar los valores de notificación predeterminaos';
+$s_notify_actions_change_access = 'Quién pué cambiar los valores de notificación';
+$s_revert_to_system = 'Borrar la configuración de tolos proyectos';
+$s_revert_to_all_project = 'Borrar la configuración específica de proyectu';
+$s_non_existent = 'non esistente';
+$s_current_status = 'Estáu actual';
+$s_next_status = 'Estáu siguiente';
+$s_workflow = 'Fluxu de trabayu';
+$s_workflow_thresholds = 'Llendes qu\'afeuten al fluxu de trabayu';
+$s_threshold = 'Llende';
+$s_status_level = 'Estáu';
+$s_alter_level = 'Quién pué alterar esti valor';
+$s_validation = 'Validación del fluxu de trabayu';
+$s_comment = 'Comentariu de validación';
 $MANTIS_ERROR[ERROR_GENERIC] = 'Hebo un error nel trescursu d\'esta aición. Seique quiera informar d\'esti error al so alministrador llocal.';
 $MANTIS_ERROR[ERROR_SQL] = 'Deteutóse un error SQL.';
 $MANTIS_ERROR[ERROR_REPORT] = 'Alcontróse un error nel so informe.';
