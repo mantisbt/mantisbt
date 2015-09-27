@@ -121,9 +121,9 @@ $t_num_notes = count( $t_bugnotes );
 	$t_can_delete_all_bugnotes = access_has_bug_level( config_get( 'delete_bugnote_threshold' ), $f_bug_id );
 	$t_can_change_view_state_all_bugnotes = $t_can_edit_all_bugnotes && access_has_bug_level( config_get( 'change_view_status_threshold' ), $f_bug_id );
 
-	# Pre-generate form security tokens to avoid performance issues
-	$t_security_token_state = form_security_token( 'bugnote_set_view_state' );
-	$t_security_token_delete = form_security_token( 'bugnote_delete' );
+	# Tokens for action buttons are created only once, if needed
+	$t_security_token_state = null;
+	$t_security_token_delete = null;
 
 	for( $i=0; $i < $t_num_notes; $i++ ) {
 		$t_bugnote = $t_bugnotes[$i];
@@ -228,6 +228,9 @@ $t_num_notes = count( $t_bugnotes );
 
 				# show delete button if the user is allowed to delete this bugnote
 				if( $t_can_delete_bugnote ) {
+					if ( !$t_security_token_delete ) {
+						$t_security_token_delete = form_security_token( 'bugnote_delete' );
+					}
 					print_button(
 						'bugnote_delete.php',
 						lang_get( 'delete_link' ),
@@ -237,6 +240,9 @@ $t_num_notes = count( $t_bugnotes );
 
 				# show make public or make private button if the user is allowed to change the view state of this bugnote
 				if( $t_can_change_view_state ) {
+					if ( !$t_security_token_state ) {
+						$t_security_token_state = form_security_token( 'bugnote_set_view_state' );
+					}
 					if( VS_PRIVATE == $t_bugnote->view_state ) {
 						print_button(
 							'bugnote_set_view_state.php',
