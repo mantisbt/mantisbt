@@ -1920,7 +1920,7 @@ function print_bug_attachment_preview_image( array $p_attachment ) {
 	}
 
 	$t_title = file_get_field( $p_attachment['id'], 'title' );
-	$t_image_url = $p_attachment['download_url'] . '&show_inline=1' . form_security_param( 'file_show_inline' );
+	$t_image_url = $p_attachment['preview_url'];
 
 	echo "\n<div class=\"bug-attachment-preview-image\">";
 	echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '">';
