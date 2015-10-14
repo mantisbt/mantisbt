@@ -1350,3 +1350,4 @@ $MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = 'Föråldrad funktionalitet: "%1$s"
 $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'Varning: Systemet är konfigurerat för att visa fel i MantisBT (E_USER_ERROR) inbäddade. Programkörningen kommer att fortsätta; detta kan leda till problem med system-/dataintegritet.';
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Datatyper passar inte ihop. Aktivera detaljerade felmeddelanden för ytterligare information.';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Denna fråga har uppdaterats av en annan användare, återgå till frågan och lämna in dina ändringar igen.';
+$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Du har nått gränsen för tillåten aktivitet på %d händelser inom de senaste %d sekunderna; din åtgärd har blockerats för att undvika spam. Försök igen senare.';
