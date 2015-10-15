@@ -213,6 +213,20 @@ ldaps://ldap.example.com:3269/
 			</varlistentry>
 
 			<varlistentry>
+				<term>$g_ldap_cache_passwords</term>
+
+				<listitem>
+					<para>Keep a local copy of the LDAP password (ON)
+					so we can authenticate even when LDAP is unavailable.
+					Defaults to
+					<emphasis>ON</emphasis>.</para>
+
+					<para>Note that MantisBT will update the database with
+					the data retrieved from LDAP when ON.</para>
+				</listitem>
+			</varlistentry>
+
+			<varlistentry>
 				<term>$g_use_ldap_realname</term>
 
 				<listitem>
