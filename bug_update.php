@@ -276,6 +276,7 @@ $t_custom_fields_to_set = array();
 foreach ( $t_related_custom_field_ids as $t_cf_id ) {
 	$t_cf_def = custom_field_get_definition( $t_cf_id );
 
+	# If the custom field is not set and is required, then complain!
 	if( !gpc_isset_custom_field( $t_cf_id, $t_cf_def['type'] ) ) {
 		if( $t_cf_def[$t_cf_require_check] &&
 			$f_update_type == BUG_UPDATE_TYPE_NORMAL &&
@@ -284,20 +285,19 @@ foreach ( $t_related_custom_field_ids as $t_cf_id ) {
 			# no value was given by the user.
 			error_parameters( lang_get_defaulted( custom_field_get_field( $t_cf_id, 'name' ) ) );
 			trigger_error( ERROR_EMPTY_FIELD, ERROR );
-		} else {
-			# The custom field isn't compulsory and the user did
-			# not supply a value. Therefore we can just ignore this
-			# custom field completely (ie. don't attempt to update
-			# the field).
-			continue;
 		}
+	}
+
+	# Otherwise, if not present then skip it.
+	if ( !custom_field_is_present( $t_cf_id ) ) {
+		continue;
 	}
 
 	if( !custom_field_has_write_access( $t_cf_id, $f_bug_id ) ) {
 		trigger_error( ERROR_ACCESS_DENIED, ERROR );
 	}
 
-	$t_new_custom_field_value = gpc_get_custom_field( 'custom_field_' . $t_cf_id, $t_cf_def['type'], null );
+	$t_new_custom_field_value = gpc_get_custom_field( 'custom_field_' . $t_cf_id, $t_cf_def['type'], '' );
 	$t_old_custom_field_value = custom_field_get_value( $t_cf_id, $f_bug_id );
 
 	# Validate the value of the field against current validation rules.
@@ -417,22 +417,22 @@ helper_call_custom_function( 'issue_update_notify', array( $f_bug_id ) );
 
 # Send a notification of changes via email.
 if( $t_resolve_issue ) {
-	email_generic( $f_bug_id, 'resolved', 'The following issue has been RESOLVED.' );
+	email_resolved( $f_bug_id );
 	email_relationship_child_resolved( $f_bug_id );
 } else if( $t_close_issue ) {
-	email_generic( $f_bug_id, 'closed', 'The following issue has been CLOSED' );
+	email_close( $f_bug_id );
 	email_relationship_child_closed( $f_bug_id );
 } else if( $t_reopen_issue ) {
-	email_generic( $f_bug_id, 'reopened', 'email_notification_title_for_action_bug_reopened' );
+	email_bug_reopened( $f_bug_id );
 } else if( $t_existing_bug->handler_id === NO_USER &&
-			$t_updated_bug->handler_id !== NO_USER ) {
-	email_generic( $f_bug_id, 'owner', 'email_notification_title_for_action_bug_assigned' );
+           $t_updated_bug->handler_id !== NO_USER ) {
+	email_bug_assigned( $f_bug_id );
 } else if( $t_existing_bug->status !== $t_updated_bug->status ) {
 	$t_new_status_label = MantisEnum::getLabel( config_get( 'status_enum_string' ), $t_updated_bug->status );
 	$t_new_status_label = str_replace( ' ', '_', $t_new_status_label );
-	email_generic( $f_bug_id, $t_new_status_label, 'email_notification_title_for_status_bug_' . $t_new_status_label );
+	email_bug_status_changed( $f_bug_id, $t_new_status_label );
 } else {
-	email_generic( $f_bug_id, 'updated', 'email_notification_title_for_action_bug_updated' );
+	email_bug_updated( $f_bug_id );
 }
 
 form_security_purge( 'bug_update' );

@@ -641,7 +641,7 @@ tar -xf <emphasis>filename.tar</emphasis>
 			<listitem>
 				<para>Test your configuration
 				</para>
-				<para>Load up <emphasis>admin/check.php</emphasis>
+				<para>Load up <emphasis>admin/check/index.php</emphasis>
 					to validate if everything is setup correctly.
 				</para>
 				<para>NOTE (for PHP 5.2 only):

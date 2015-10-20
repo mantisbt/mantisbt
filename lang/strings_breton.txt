@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -882,6 +882,7 @@ $s_issue_id = 'Draen niv.';
 $s_recently_visited = 'Gweladennet nevez zo';
 $s_note_user_id_label = 'Notenn gant :';
 $s_filter_match_type = 'Seurt klotadur';
+$s_filter_match_type_label = 'Seurt klotadur';
 $s_filter_match_all = 'An holl Zivizoù';
 $s_filter_match_any = 'Forzh peseurt Diviz';
 $s_none = 'hini ebet';
@@ -1338,3 +1339,4 @@ $MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = 'Arc\'hweladur dibrizet : "%1$s", i
 $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'Diwallit : Kefluniet eo ar reizhiad evit diskwel ar fazioù MantisBT (E_USER_ERROR) er memes linenn. Kendalc\'het e vo da seveniñ ar programm ;abalamour da se e c\'hallfe bezañ kudennoù yec\'hed gant ar roadennoù pe ar reizhiad.';
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Doare roadenn diembreget. Gweredekait ar c\'hemennadoù fazi dre ar munud evit gouzout hiroc\'h.';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Hizivaet eo bet ar gudenn-se gant un implijer all. Distroit d\'ar gudenn-se, mar plij, ha kinnigit ho kemmoù en-dro.';
+$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Tizhet ho peus bevenn obererezh aotreet %d darvoud e-pad an %d eilenn diwezhañ ; kaelet eo bet hoc\'h obererezh evit herzel ouzh ar strob, klaskit en-dro diwezhatoc\'h.';

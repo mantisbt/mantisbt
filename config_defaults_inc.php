@@ -714,6 +714,7 @@ $g_language_choices_arr = array(
 	'amharic',
 	'arabic',
 	'arabicegyptianspoken',
+	'asturian',
 	'belarusian_tarask',
 	'breton',
 	'bulgarian',
@@ -773,6 +774,7 @@ $g_language_auto_map = array(
 	'am' => 'amharic',
 	'ar' => 'arabic',
 	'arz' => 'arabicegyptianspoken',
+	'ast' => 'asturian',
 	'be-tarask' => 'belarusian_tarask',
 	'bg' => 'bulgarian',
 	'br' => 'breton',
@@ -3406,12 +3408,20 @@ $g_css_include_file = 'default.css';
  */
 $g_css_rtl_include_file = 'rtl.css';
 
-
 /**
  * meta tags
  * @global string $g_meta_include_file
  */
 $g_meta_include_file = '';
+
+/**
+ * A flag that indicates whether to use CDN (content delivery networks) for loading
+ * javascript libraries and their associated CSS.  This improves performance for
+ * loading MantisBT pages.  This can be disabled if it is desired that MantisBT
+ * doesn't reach out outside corporate network.
+ * @global integer $g_cdn_enabled
+ */
+$g_cdn_enabled = OFF;
 
 ################
 # Redirections #
@@ -4246,6 +4256,7 @@ $g_global_settings = array(
 	'class_path','library_path', 'language_path', 'absolute_path_default_upload_folder',
 	'ldap_simulation_file_path', 'plugin_path', 'bottom_include_page', 'top_include_page',
 	'default_home_page', 'logout_redirect_page', 'manual_url', 'logo_url', 'wiki_engine_url',
+	'cdn_enabled'
 );
 
 # Temporary variables should not remain defined in global scope

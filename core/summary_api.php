@@ -1131,15 +1131,9 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 					}
 				}
 			}
-			echo '<td>';
-			echo $t_total_severity;
-			echo '</td>';
-			echo '<td>';
-			echo $t_total_errors;
-			echo '</td>';
-			echo '<td>';
-			print( $t_total_severity - $t_total_errors );
-			echo '</td>';
+			echo '<td class="right">' . $t_total_severity . '</td>';
+			echo '<td class="right">' . $t_total_errors . '</td>';
+			printf( '<td class="right">%d</td>', $t_total_severity - $t_total_errors );
 			echo '</tr>';
 		}
 	}

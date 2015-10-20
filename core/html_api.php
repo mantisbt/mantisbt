@@ -202,7 +202,13 @@ function require_css( $p_stylesheet_path ) {
 function html_css() {
 	global $g_stylesheets_included;
 	html_css_link( config_get( 'css_include_file' ) );
-	html_css_cdn_link( '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css' );
+
+	if ( config_get_global( 'cdn_enabled' ) == ON ) {
+		echo '<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/' . JQUERY_UI_VERSION . '/themes/smoothness/jquery-ui.css">' . "\n";
+	} else {
+		html_css_link( 'jquery-ui-' . JQUERY_UI_VERSION . '.min.css' );
+	}
+
 	html_css_link( 'common_config.php' );
 	# Add right-to-left css if needed
 	if( lang_get( 'directionality' ) == 'rtl' ) {
@@ -283,8 +289,15 @@ function html_head_javascript() {
 	global $g_scripts_included;
 	echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_config.php' ) . '"></script>' . "\n";
 	echo "\t" . '<script type="text/javascript" src="' . helper_mantis_url( 'javascript_translations.php' ) . '"></script>' . "\n";
-	html_javascript_cdn_link( '//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js' );
-	html_javascript_cdn_link( '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js' );
+
+	if ( config_get_global( 'cdn_enabled' ) == ON ) {
+		echo "\t" . '<script src="https://ajax.googleapis.com/ajax/libs/jquery/' . JQUERY_VERSION . '/jquery.min.js"></script>' . "\n";
+		echo "\t" . '<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/' . JQUERY_UI_VERSION . '/jquery-ui.min.js"></script>' . "\n";
+	} else {
+		html_javascript_link( 'jquery-' . JQUERY_VERSION . '.min.js' );
+		html_javascript_link( 'jquery-ui-' . JQUERY_UI_VERSION . '.min.js' );
+	}
+
 	html_javascript_link( 'common.js' );
 	foreach ( $g_scripts_included as $t_script_path ) {
 		html_javascript_link( $t_script_path );
@@ -362,6 +375,13 @@ function html_operation_successful( $p_redirect_url, $p_message = '' ) {
  * @return void
  */
 function html_body_end() {
+	# Should code need to be added to this function in the future, it should be
+	# placed *above* this event, which needs to be the last thing to occur
+	# before the actual body ends (see #20084)
+	event_signal( 'EVENT_LAYOUT_BODY_END' );
+
+	echo '</div>', "\n";
+
 	echo '</body>', "\n";
 }
 
@@ -511,11 +531,10 @@ function print_manage_menu( $p_page = '' ) {
 	}
 
 	if( access_has_project_level( config_get( 'manage_configuration_threshold' ) ) ) {
-		if( access_has_global_level( config_get( 'view_configuration_threshold' ) ) ) {
-			$t_pages['adm_config_report.php'] = array( 'url'   => 'adm_config_report.php', 'label' => 'manage_config_link' );
-		} else {
-			$t_pages['adm_permissions_report.php'] = array( 'url'   => 'adm_permissions_report.php', 'label' => 'manage_config_link' );
-		}
+		$t_pages['adm_permissions_report.php'] = array(
+			'url'   => 'adm_permissions_report.php',
+			'label' => 'manage_config_link'
+		);
 	}
 
 	# Plugin / Event added options
@@ -565,13 +584,13 @@ function print_manage_config_menu( $p_page = '' ) {
 
 	$t_pages = array();
 
+	$t_pages['adm_permissions_report.php'] = array( 'url'   => 'adm_permissions_report.php',
+	                                                'label' => 'permissions_summary_report' );
+
 	if( access_has_global_level( config_get( 'view_configuration_threshold' ) ) ) {
 		$t_pages['adm_config_report.php'] = array( 'url'   => 'adm_config_report.php',
 		                                           'label' => 'configuration_report' );
 	}
-
-	$t_pages['adm_permissions_report.php'] = array( 'url'   => 'adm_permissions_report.php',
-	                                                'label' => 'permissions_summary_report' );
 
 	$t_pages['manage_config_work_threshold_page.php'] = array( 'url'   => 'manage_config_work_threshold_page.php',
 	                                                           'label' => 'manage_threshold_config' );
