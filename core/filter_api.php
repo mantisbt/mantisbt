@@ -3431,8 +3431,8 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 		</tr>
 
 		<!-- Match Type -->
-		<tr class="row-1">
-			<td class="small-caption category2">
+		<tr>
+			<td class="small category">
 				<a id="match_type_filter"
 					href="<?php echo $t_filters_url . FILTER_PROPERTY_MATCH_TYPE;?>"
 					<?php echo $t_dynamic_filter_expander_class; ?>>
