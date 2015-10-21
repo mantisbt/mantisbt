@@ -80,6 +80,9 @@ $(document).ready( function() {
 			context: $('#' + targetID),
 			success: function(html) {
 				$(this).html(html);
+			},
+			error: function(obj,status,error) {
+				$(this).html('<span class="error-msg">' + status + ': ' + error + '</span>');
 			}
 		});
 	});
