@@ -203,7 +203,7 @@ if( $t_top_buttons_enabled ) {
 ?>
 			<tbody>
 <?php
-event_signal( 'EVENT_UPDATE_BUG_FORM_TOP', array( $t_bug_id, true ) );
+event_signal( 'EVENT_UPDATE_BUG_FORM_TOP', array( $t_bug_id ) );
 
 if( $t_show_id || $t_show_project || $t_show_category || $t_show_view_state || $t_show_date_submitted | $t_show_last_updated ) {
 	#
@@ -634,7 +634,7 @@ if( $t_show_target_version || $t_show_fixed_in_version ) {
 	echo '</tr>';
 }
 
-event_signal( 'EVENT_UPDATE_BUG_FORM', array( $t_bug_id, true ) );
+event_signal( 'EVENT_UPDATE_BUG_FORM', array( $t_bug_id ) );
 
 # spacer
 echo '<tr class="spacer"><td colspan="6"></td></tr>';
