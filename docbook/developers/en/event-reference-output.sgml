@@ -56,6 +56,26 @@
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.output.display.email.subject">
+			<title>EVENT_DISPLAY_EMAIL_BUILD_SUBJECT (Chained)</title>
+
+			<blockquote>
+				<para>
+					This is an event to format the subject line of an email before being sent.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>String: input string for email subject</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem><para>String: modified subject string</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
 		<blockquote id="dev.eventref.output.display.formatted">
 			<title>EVENT_DISPLAY_FORMATTED (Chained)</title>
 
