@@ -30,7 +30,7 @@
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Italian (italiano)
+/** Asturian (asturianu)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -38,29 +38,16 @@
  * @ingroup Language
  * @file
  *
- * @author Beta16
- * @author Massimo itaca
+ * @author Xuacu
  */
 
-$s_plugin_XmlImportExport_title = 'Importa/Esporta anomalie';
-$s_plugin_XmlImportExport_description = 'Aggiungi a MantisBT la capacità di Importare e Esportare basata su XML.';
-$s_plugin_XmlImportExport_import = 'Importa anomalia';
-$s_plugin_XmlImportExport_export = 'Esporta XML';
-$s_plugin_XmlImportExport_config_title = 'Configurazione livelli di accesso importazione/esportazione XML';
-$s_plugin_XmlImportExport_import_threshold = 'Importa anomalie';
-$s_plugin_XmlImportExport_export_threshold = 'Esporta anomalie';
-$s_plugin_XmlImportExport_action_update = 'Aggiorna';
-$s_plugin_XmlImportExport_importing_in_project = 'Importa anomalia nel progetto:';
-$s_plugin_XmlImportExport_import_options = 'Opzioni di importazione';
-$s_plugin_XmlImportExport_cross_references = 'Riferimenti incrociati';
-$s_plugin_XmlImportExport_default_strategy = 'Strategia standard di conversione:';
-$s_plugin_XmlImportExport_renumber = 'Rinumera';
-$s_plugin_XmlImportExport_renumber_desc = 'Prova a convertire i riferimenti ad una nuova numerazione';
-$s_plugin_XmlImportExport_link = 'Collegamenti';
-$s_plugin_XmlImportExport_link_desc = 'Converte in un collegamento alla voce originale';
-$s_plugin_XmlImportExport_disable = 'Disabilita';
-$s_plugin_XmlImportExport_disable_desc = 'Disabilita il collegamento';
-$s_plugin_XmlImportExport_fallback = 'Strategia Fallback (non si applica quando "Rinumera"):';
-$s_plugin_XmlImportExport_fallback_category = 'Categoria Fallback:';
-$s_plugin_XmlImportExport_keep_same_category = 'Prova a mantenere la stessa categoria';
-$s_plugin_XmlImportExport_error_no_xml = 'impossibile trovare le estensioni xmlreader e xmlwriter';
+$s_plugin_format_title = 'Formatu de MantisBT';
+$s_plugin_format_description = 'Complementu oficial de procesamientu y formatu de testu.';
+$s_plugin_format_config = 'Configuración';
+$s_plugin_format_process_text = 'Procesamientu de testu';
+$s_plugin_format_process_text_warning_notice = 'Nun desactive esto si nun sabe realmente lo que ta faciendo. Nel estáu desactiváu, son posibles los ataques de scripts cruzaos ente sitios web (XSS).';
+$s_plugin_format_process_urls = 'Procesamientu de URL';
+$s_plugin_format_process_buglinks = 'Enllaces internos MantisBT (Incidencies y Notes d\'incidencies)';
+$s_plugin_format_process_buglinks_info = 'La to configuración define la etiqueta <em>Incidencia</em> como "<literal>%s</literal>" y la etiqueta <em>Nota</em> como "<literal>%s</literal>"';
+$s_plugin_format_enabled = 'Activáu';
+$s_plugin_format_disabled = 'Desactiváu';
