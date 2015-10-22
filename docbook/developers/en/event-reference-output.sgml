@@ -22,13 +22,13 @@
 
 				<itemizedlist>
 					<title>Parameters</title>
-					<listitem><para>String: bug ID string to be displayed</para></listitem>
-					<listitem><para>Int: bug ID number</para></listitem>
+					<listitem><para>&lt;String&gt;: bug ID string to be displayed</para></listitem>
+					<listitem><para>&lt;Integer&gt;: bug ID number</para></listitem>
 				</itemizedlist>
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>String: modified bug ID string</para></listitem>
+					<listitem><para>&lt;String&gt;: modified bug ID string</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -46,12 +46,12 @@
 
 				<itemizedlist>
 					<title>Parameters</title>
-					<listitem><para>String: input string to be displayed</para></listitem>
+					<listitem><para>&lt;String&gt;: input string to be displayed</para></listitem>
 				</itemizedlist>
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>String: modified input string</para></listitem>
+					<listitem><para>&lt;String&gt;: modified input string</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -66,12 +66,12 @@
 
 				<itemizedlist>
 					<title>Parameters</title>
-					<listitem><para>String: input string for email subject</para></listitem>
+					<listitem><para>&lt;String&gt;: input string for email subject</para></listitem>
 				</itemizedlist>
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>String: modified subject string</para></listitem>
+					<listitem><para>&lt;String&gt;: modified subject string</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -89,13 +89,13 @@
 
 				<itemizedlist>
 					<title>Parameters</title>
-					<listitem><para>String: input string to be displayed</para></listitem>
+					<listitem><para>&lt;String&gt;: input string to be displayed</para></listitem>
 				</itemizedlist>
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>String: modified input string</para></listitem>
-					<listitem><para>Boolean: multiline input string</para></listitem>
+					<listitem><para>&lt;String&gt;: modified input string</para></listitem>
+					<listitem><para>&lt;Boolean&gt;: multiline input string</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -112,13 +112,13 @@
 
 				<itemizedlist>
 					<title>Parameters</title>
-					<listitem><para>String: input string to be displayed</para></listitem>
-					<listitem><para>Boolean: multiline input string</para></listitem>
+					<listitem><para>&lt;String&gt;: input string to be displayed</para></listitem>
+					<listitem><para>&lt;Boolean&gt;: multiline input string</para></listitem>
 				</itemizedlist>
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>String: modified input string</para></listitem>
+					<listitem><para>&lt;String&gt;: modified input string</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -135,13 +135,13 @@
 
 				<itemizedlist>
 					<title>Parameters</title>
-					<listitem><para>String: input string to be displayed</para></listitem>
-					<listitem><para>Boolean: multiline input string</para></listitem>
+					<listitem><para>&lt;String&gt;: input string to be displayed</para></listitem>
+					<listitem><para>&lt;Boolean&gt;: multiline input string</para></listitem>
 				</itemizedlist>
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>String: modified input string</para></listitem>
+					<listitem><para>&lt;String&gt;: modified input string</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -166,7 +166,7 @@
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>Array: List of HTML links for the user account menu.</para></listitem>
+					<listitem><para>&lt;Array&gt;: List of HTML links for the user account menu.</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -181,7 +181,7 @@
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>Array: List of HTML links for the documents menu.</para></listitem>
+					<listitem><para>&lt;Array&gt;: List of HTML links for the documents menu.</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -196,7 +196,7 @@
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>Array: List of HTML links for the issue list menu.</para></listitem>
+					<listitem><para>&lt;Array&gt;: List of HTML links for the issue list menu.</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -216,7 +216,7 @@
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>Array: List of HTML links for the documents menu.</para></listitem>
+					<listitem><para>&lt;Array&gt;: List of HTML links for the documents menu.</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -234,7 +234,7 @@
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>Array: List of HTML links for the main menu.</para></listitem>
+					<listitem><para>&lt;Array&gt;: List of HTML links for the main menu.</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -252,7 +252,7 @@
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>Array: List of HTML links for the main menu.</para></listitem>
+					<listitem><para>&lt;Array&gt;: List of HTML links for the main menu.</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -269,7 +269,7 @@
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>Array: List of HTML links for the management menu.</para></listitem>
+					<listitem><para>&lt;Array&gt;: List of HTML links for the management menu.</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -286,7 +286,7 @@
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>Array: List of HTML links for the manage configuration menu.</para></listitem>
+					<listitem><para>&lt;Array&gt;: List of HTML links for the manage configuration menu.</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -301,7 +301,7 @@
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>Array: List of HTML links for the summary menu.</para></listitem>
+					<listitem><para>&lt;Array&gt;: List of HTML links for the summary menu.</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -329,7 +329,7 @@
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>String: HTML code to output.</para></listitem>
+					<listitem><para>&lt;String&gt;: HTML code to output.</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -345,7 +345,7 @@
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>String: HTML code to output.</para></listitem>
+					<listitem><para>&lt;String&gt;: HTML code to output.</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -360,7 +360,7 @@
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>String: HTML code to output.</para></listitem>
+					<listitem><para>&lt;String&gt;: HTML code to output.</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -375,7 +375,7 @@
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>String: HTML code to output.</para></listitem>
+					<listitem><para>&lt;String&gt;: HTML code to output.</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -391,7 +391,7 @@
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>String: HTML code to output.</para></listitem>
+					<listitem><para>&lt;String&gt;: HTML code to output.</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -407,7 +407,7 @@
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>String: HTML code to output.</para></listitem>
+					<listitem><para>&lt;String&gt;: HTML code to output.</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -423,7 +423,7 @@
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>String: HTML code to output.</para></listitem>
+					<listitem><para>&lt;String&gt;: HTML code to output.</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
@@ -443,7 +443,7 @@
 
 				<itemizedlist>
 					<title>Return Value</title>
-					<listitem><para>String: HTML code to output.</para></listitem>
+					<listitem><para>&lt;String&gt;: HTML code to output.</para></listitem>
 				</itemizedlist>
 			</blockquote>
 		</blockquote>
