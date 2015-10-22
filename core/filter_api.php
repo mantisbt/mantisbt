@@ -4491,6 +4491,7 @@ function filter_clear_cache( $p_filter_id = null ) {
 
 /**
  * Add a filter to the database for the current user
+ * Project id can be negative for "current" filters
  * @param integer $p_project_id    Project id.
  * @param boolean $p_is_public     Whether filter is public or private.
  * @param string  $p_name          Filter name.
@@ -4501,9 +4502,17 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
 	$t_user_id = auth_get_current_user_id();
 	$c_project_id = (int)$p_project_id;
 
+	#check, when filter is current, if user is anonymous
+	#if so, dont store in db, as the user id is shared for all anonymous sessions
+	#instead, use SESSION to store current filter
+	if( is_blank( $p_name ) && current_user_is_anonymous() ) {
+		filter_current_set_for_anonymous_user( $p_project_id, $p_filter_string );
+		return $p_project_id;
+	}
+
 	# check that the user can save non current filters (if required)
 	if( ( ALL_PROJECTS <= $c_project_id ) && ( !is_blank( $p_name ) ) && ( !access_has_project_level( config_get( 'stored_query_create_threshold' ) ) ) ) {
-		return -1;
+		return 0;
 	}
 
 	# ensure that we're not making this filter public if we're not allowed
@@ -4546,8 +4555,38 @@ function filter_db_set_for_current_user( $p_project_id, $p_is_public, $p_name, $
 			return $t_row['id'];
 		}
 
-		return -1;
+		return 0;
 	}
+}
+
+/**
+ * Add a current (no-named) filter to the session store
+ * This should be used for the anonymous user
+ * @param integer $p_project_id    Project id.
+ * @param string  $p_filter_string Filter string.
+ * @return void
+ */
+function filter_current_set_for_anonymous_user( $p_project_id, $p_filter_string ) {
+	$t_session_filters = session_get( 'current_filters', array() );
+	$t_session_filters[$p_project_id] = $p_filter_string;
+	session_set( 'current_filters', $t_session_filters );
+}
+
+/**
+ * Get current filter for a given project, which is stored in
+ * session data, instead of DB. This should be used for the anonymous user
+ * This function returns the filter string that is tied to the filter
+ * If no filter exists, the function returns null
+ * @param integer $p_project_id A project identifier.
+ * @return mixed
+ */
+function filter_current_get_for_anonymous_user( $p_project_id ) {
+	//@TODO add cache
+	$t_session_filters = session_get( 'current_filters', array() );
+	if( isset( $t_session_filters[$p_project_id] ) ) {
+		return $t_session_filters[$p_project_id];
+	}
+	return null;
 }
 
 /**
@@ -4574,6 +4613,12 @@ function filter_db_get_filter( $p_filter_id, $p_user_id = null ) {
 		$t_user_id = $p_user_id;
 	}
 
+	if( user_is_anonymous( $t_user_id ) && auth_get_current_user_id() == $t_user_id ){
+		$t_filter_string = filter_current_get_for_anonymous_user( $c_filter_id );
+		$g_cache_filter_db_filters[$p_filter_id] = $t_filter_string;
+		return $t_filter_string;
+	}
+	
 	$t_query = 'SELECT * FROM {filters} WHERE id=' . db_param();
 	$t_result = db_query( $t_query, array( $c_filter_id ) );
 
@@ -4611,6 +4656,13 @@ function filter_db_get_project_current( $p_project_id, $p_user_id = null ) {
 		$c_user_id = auth_get_current_user_id();
 	} else {
 		$c_user_id = (int)$p_user_id;
+	}
+	
+	#if user is anonymous, its not stored in DB
+	#return a negative id as indicator to look in session store, which is
+	#the (negative) project id to look for
+	if( user_is_anonymous( $c_user_id ) && auth_get_current_user_id() == $c_user_id ){
+		return $c_project_id;
 	}
 
 	# we store current filters for each project with a special project index
