@@ -915,13 +915,20 @@ function print_build_option_list( $p_build = '' ) {
 
 /**
  * select the proper enumeration values based on the input parameter
+ * Current value may be an integer, or an array of integers.
  * @param string  $p_enum_name Name of enumeration (eg: status).
- * @param integer $p_val       The current value.
+ * @param integer|array $p_val	The current value(s)
  * @return void
  */
 function print_enum_string_option_list( $p_enum_name, $p_val = 0 ) {
 	$t_config_var_name = $p_enum_name . '_enum_string';
 	$t_config_var_value = config_get( $t_config_var_name );
+
+	if( is_array( $p_val ) ) {
+		$t_val = $p_val;
+	} else {
+		$t_val = (int)$p_val;
+	}
 
 	$t_enum_values = MantisEnum::getValues( $t_config_var_value );
 
@@ -929,7 +936,7 @@ function print_enum_string_option_list( $p_enum_name, $p_val = 0 ) {
 		$t_elem2 = get_enum_element( $p_enum_name, $t_key );
 
 		echo '<option value="' . $t_key . '"';
-		check_selected( (int)$p_val, $t_key );
+		check_selected( $t_val, $t_key );
 		echo '>' . string_html_specialchars( $t_elem2 ) . '</option>';
 	}
 }
