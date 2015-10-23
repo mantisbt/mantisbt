@@ -110,7 +110,7 @@ function collapse_closed( $p_name, $p_section = '' ) {
 	ob_start();
 
 	$t_div_id = $t_block . '_closed';
-	echo "\n<div id=\"", $t_div_id, '"', ( $t_display ? ' class="collapse-open"' : ' class="collapse-closed"' ), '>';
+	echo "\n<div id=\"", $t_div_id, '" class="collapse-section-closed ', ( $t_display ? 'collapse-open' : 'collapse-closed' ), '">';
 }
 
 /**
