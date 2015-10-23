@@ -66,7 +66,7 @@
 
 			<blockquote>
 				<para>
-					This is an event to format the subject line of an email before being sent.
+					This is an event to format the subject line of an email before it is sent.
 				</para>
 
 				<itemizedlist>
@@ -438,12 +438,13 @@
 			<blockquote>
 				<para>
 					This event allows plugins to output HTML code immediately after the line of an attachment.
-					Recives an attachment, the array returned by the file_get_visible_attachments() function.
+					Receives the attachement data as a parameter, in the form of an attachment array from within
+					the array returned by the <function>file_get_visible_attachments()</function> function.
 				</para>
 
 				<itemizedlist>
 					<title>Parameters</title>
-					<listitem><para>&lt;Array&gt;: the attachment data</para></listitem>
+					<listitem><para>&lt;Array&gt;: the attachment data as an array (see <filename>core/file_api.php</filename>)</para></listitem>
 				</itemizedlist>
 
 				<itemizedlist>
