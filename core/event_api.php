@@ -257,8 +257,9 @@ function event_type_output( $p_event, $p_callbacks, $p_params = null ) {
  * final callback's return value will be returned to the event origin.
  * @param string Event name
  * @param array Array of callback function/plugin basename key/value pairs
- * @param string Input string
- * @return string Output string
+ * @param mixed Input data
+ * @param array  $p_params    Parameters.
+ * @return mixed Output data
  * @access public
  */
 function event_type_chain( $p_event, $p_callbacks, $p_input, $p_params ) {
