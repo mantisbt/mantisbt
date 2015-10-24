@@ -14,6 +14,12 @@
 				Any output here should be defining appropriate rows and columns for the
 				surrounding &lt;table&gt; elements.
 			</para>
+
+			<itemizedlist>
+				<title>Parameters</title>
+				<listitem><para>&lt;Boolean&gt;: whether user is administrator</para></listitem>
+			</itemizedlist>
+
 		</blockquote>
 	</blockquote>
 

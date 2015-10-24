@@ -108,6 +108,10 @@
 					This event receives the logging string as a parameter.
 				</para>
 
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;String&gt;: the logging string</para></listitem>
+				</itemizedlist>
 			</blockquote>
 		</blockquote>
 
