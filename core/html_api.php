@@ -1430,10 +1430,13 @@ function html_status_legend( $p_display_position, $p_restrict_by_filter = false 
 		# draw the status bar
 		$t_status_enum_string = config_get( 'status_enum_string' );
 		foreach( $t_status_array as $t_status => $t_name ) {
-			$t_val = isset( $t_status_names[$t_status] ) ? $t_status_names[$t_status] : $t_status_array[$t_status];
-			$t_status_label = MantisEnum::getLabel( $t_status_enum_string, $t_status );
+			$t_val = isset( $t_status_names[$t_status] )
+				? $t_status_names[$t_status]
+				: $t_status_array[$t_status];
 
-			echo '<td class="small-caption ' . $t_status_label . '-color">' . $t_val . '</td>';
+			echo '<td class="small-caption status-legend-width '
+				. html_get_status_css_class( $t_status ) . '">'
+				. $t_val . '</td>';
 		}
 
 		echo '</tr>';
@@ -1471,8 +1474,11 @@ function html_status_percentage_legend() {
 			$t_percent = ( isset( $t_status_percents[$t_status] ) ?  $t_status_percents[$t_status] : 0 );
 
 			if( $t_percent > 0 ) {
-				$t_status_label = MantisEnum::getLabel( $t_status_enum_string, $t_status );
-				echo '<td class="small-caption-center ' . $t_status_label . '-color ' . $t_status_label . '-percentage">' . $t_percent . '%</td>';
+				$t_class = html_get_status_css_class( $t_status );
+				echo '<td class="small-caption-center '
+					. $t_class . ' '
+					. str_replace( 'color', 'percentage', $t_class ) . '">'
+					. $t_percent . '%</td>';
 			}
 		}
 
@@ -1906,5 +1912,10 @@ function html_buttons_view_bug_page( $p_bug_id ) {
  * Build CSS including project or even user-specific colors ?
  */
 function html_get_status_css_class( $p_status, $p_user = null, $p_project = null ) {
-	return string_attribute( MantisEnum::getLabel( config_get( 'status_enum_string', null, $p_user, $p_project ), $p_status ) . '-color' );
+	$t_status_enum = config_get( 'status_enum_string', null, $p_user, $p_project );
+	if( MantisEnum::hasValue( $t_status_enum, $p_status ) ) {
+		return 'status-' . $p_status . '-color';
+	} else {
+		return '';
+	}
 }
