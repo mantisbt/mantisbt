@@ -140,7 +140,7 @@ if ( $tpl_top_buttons_enabled ) {
 }
 
 
-event_signal( 'EVENT_UPDATE_BUG_FORM_TOP', array( $tpl_bug_id, true ) );
+event_signal( 'EVENT_UPDATE_BUG_FORM_TOP', array( $tpl_bug_id ) );
 
 if ( $tpl_show_id || $tpl_show_project || $tpl_show_category || $tpl_show_view_state || $tpl_show_date_submitted | $tpl_show_last_updated ) {
 	#
@@ -578,7 +578,7 @@ if ( $tpl_show_target_version || $tpl_show_fixed_in_version ) {
 	echo '</tr>';
 }
 
-event_signal( 'EVENT_UPDATE_BUG_FORM', array( $tpl_bug_id, true ) );
+event_signal( 'EVENT_UPDATE_BUG_FORM', array( $tpl_bug_id ) );
 
 # spacer
 echo '<tr class="spacer"><td colspan="6"></td></tr>';
