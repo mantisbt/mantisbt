@@ -804,3 +804,8 @@ div.timeline * div.action { padding-top: 3px; }
 /* bug_view_inc bug action buttons */
 .details-footer      { padding: 3px 10px 2px 0; }
 .details-buttons     { float: left;  width: auto; }
+
+/* Hide collapsed sections for javascript disabled presentation  */
+.collapse-section-closed {
+	display: none;
+}
