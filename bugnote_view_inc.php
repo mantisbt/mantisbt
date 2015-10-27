@@ -93,10 +93,9 @@ $t_num_notes = count( $t_bugnotes );
 ?>
 <table class="bugnotes width100" cellspacing="1">
 <tr>
-	<td class="form-title" colspan="2">
-<?php
-		collapse_icon( 'bugnotes' ); ?>
-		<?php echo lang_get( 'bug_notes_title' ) ?>
+	<td class="form-title" colspan="2"><?php
+		collapse_icon( 'bugnotes' );
+		echo lang_get( 'bug_notes_title' ); ?>
 	</td>
 </tr>
 <?php
@@ -296,9 +295,9 @@ if( $t_total_time > 0 && $t_show_time_tracking ) {
 
 <table class="width100" cellspacing="1">
 <tr>
-	<td class="form-title" colspan="2">
-		<?php collapse_icon( 'bugnotes' ); ?>
-		<?php echo lang_get( 'bug_notes_title' ) ?>
+	<td class="form-title" colspan="2"><?php
+		collapse_icon( 'bugnotes' );
+		echo lang_get( 'bug_notes_title' ); ?>
 	</td>
 </tr>
 </table>

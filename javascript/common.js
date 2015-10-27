@@ -38,6 +38,7 @@ $(document).ready( function() {
 	$('.collapse-open').show();
 	$('.collapse-closed').hide();
 	$('.collapse-link')
+		.show()
 		.css('cursor', 'pointer')
 		.click( function(event) {
 			event.preventDefault();

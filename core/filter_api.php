@@ -3434,6 +3434,7 @@ function filter_draw_selection_area2( $p_page_number, $p_for_screen = true, $p_e
 
 	# expanded
 	collapse_icon( 'filter' );
+	echo '&nbsp;'; # This is a hack to ensure the div is high enough
 	echo '<div class="search-box">';
 	echo '<label>';
 	echo lang_get( 'search' ) . '&#160;';

@@ -58,12 +58,10 @@ if( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_id
 ?>
 <table class="width100" cellspacing="1">
 <tr>
-	<td class="form-title" colspan="2">
-<?php
-	collapse_icon( 'monitoring' );
-?>
-		<?php echo lang_get( 'users_monitoring_bug' ); ?>
-	</td>
+	<td class="form-title" colspan="2"><?php
+		collapse_icon( 'monitoring' );
+		echo lang_get( 'users_monitoring_bug' );
+	?></td>
 </tr>
 <tr class="row-1">
 	<th class="category" width="15%">
@@ -103,8 +101,9 @@ if( access_has_bug_level( config_get( 'show_monitor_list_threshold' ), $f_bug_id
 ?>
 <table class="width100" cellspacing="1">
 <tr>
-	<td class="form-title" colspan="2"><?php collapse_icon( 'monitoring' ); ?>
-		<?php echo lang_get( 'users_monitoring_bug' ); ?>
+	<td class="form-title" colspan="2"><?php
+		collapse_icon( 'monitoring' );
+		echo lang_get( 'users_monitoring_bug' ); ?>
 	</td>
 </tr>
 </table>

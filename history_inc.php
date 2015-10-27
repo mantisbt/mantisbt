@@ -61,10 +61,9 @@ if( !access_has_bug_level( $t_access_level_needed, $f_bug_id ) ) {
 <table>
 	<thead>
 		<tr>
-			<td class="form-title" colspan="4">
-<?php
-			collapse_icon( 'history' );
-			echo lang_get( 'bug_history' ) ?>
+			<td class="form-title" colspan="4"><?php
+				collapse_icon( 'history' );
+				echo lang_get( 'bug_history' ); ?>
 			</td>
 		</tr>
 
@@ -112,9 +111,9 @@ if( !access_has_bug_level( $t_access_level_needed, $f_bug_id ) ) {
 ?>
 <table class="width100" cellspacing="0">
 <tr>
-	<td class="form-title" colspan="4">
-	<?php	collapse_icon( 'history' );
-		echo lang_get( 'bug_history' ) ?>
+	<td class="form-title" colspan="4"><?php
+		collapse_icon( 'history' );
+		echo lang_get( 'bug_history' ); ?>
 	</td>
 </tr>
 </table>

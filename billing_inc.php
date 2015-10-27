@@ -99,11 +99,9 @@ if( ON == config_get( 'time_tracking_with_billing' ) ) {
 	<input type="hidden" name="id" value="<?php echo isset( $f_bug_id ) ? $f_bug_id : 0 ?>" />
 	<table class="width100" cellspacing="0">
 		<tr>
-			<td class="form-title" colspan="4">
-				<?php
-					collapse_icon( 'bugnotestats' );
-					echo lang_get( 'time_tracking' )
-				?>
+			<td class="form-title" colspan="4"><?php
+				collapse_icon( 'bugnotestats' );
+				echo lang_get( 'time_tracking' ); ?>
 			</td>
 		</tr>
 		<tr class="row-2">
@@ -296,11 +294,9 @@ if( ON == config_get( 'time_tracking_with_billing' ) ) {
 
 <table class="width100" cellspacing="0">
 	<tr>
-		<td class="form-title" colspan="4">
-			<?php
-				collapse_icon( 'bugnotestats' );
-				echo lang_get( 'time_tracking' )
-			?>
+		<td class="form-title" colspan="4"><?php
+			collapse_icon( 'bugnotestats' );
+			echo lang_get( 'time_tracking' ); ?>
 		</td>
 	</tr>
 </table>

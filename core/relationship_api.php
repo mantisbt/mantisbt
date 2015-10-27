@@ -811,16 +811,16 @@ function relationship_view_box( $p_bug_id ) {
 <?php collapse_open( 'relationships' );?>
 <table class="width100" cellspacing="1">
 <tr class="row-2">
-	<td width="15%" class="form-title" colspan="2">
-		<?php
-			collapse_icon( 'relationships' );
-	echo lang_get( 'bug_relationships' );
-	if( ON == config_get( 'relationship_graph_enable' ) ) {
-		?>
-		<span class="small"><?php print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=relation', lang_get( 'relation_graph' ) )?></span>
-		<span class="small"><?php print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=dependency', lang_get( 'dependency_graph' ) )?></span>
-		<?php
-	}
+	<td width="15%" class="form-title" colspan="2"><?php
+		collapse_icon( 'relationships' );
+		echo lang_get( 'bug_relationships' );
+
+		if( ON == config_get( 'relationship_graph_enable' ) ) {
+			?>
+			<span class="small"><?php print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=relation', lang_get( 'relation_graph' ) )?></span>
+			<span class="small"><?php print_bracket_link( 'bug_relationship_graph.php?bug_id=' . $p_bug_id . '&graph=dependency', lang_get( 'dependency_graph' ) )?></span>
+			<?php
+		}
 	?>
 	</td>
 </tr>
@@ -853,11 +853,9 @@ function relationship_view_box( $p_bug_id ) {
 <?php collapse_closed( 'relationships' );?>
 <table class="width100" cellspacing="1">
 <tr>
-	<td class="form-title">
-		<?php
-			collapse_icon( 'relationships' );
-	echo lang_get( 'bug_relationships' );
-	?>
+	<td class="form-title"><?php
+		collapse_icon( 'relationships' );
+		echo lang_get( 'bug_relationships' ); ?>
 	</td>
 </tr>
 </table>

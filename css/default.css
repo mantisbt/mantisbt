@@ -806,4 +806,5 @@ div.timeline * div.action { padding-top: 3px; }
 .details-buttons     { float: left;  width: auto; }
 
 /* Hide collapsed sections for javascript disabled presentation  */
-.collapse-section-closed { display: none; }
+.collapse-section-closed	{ display: none; }
+.collapse-link				{ display: none; padding-right: 0.3em; }
