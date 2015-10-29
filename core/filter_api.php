@@ -575,6 +575,8 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	}
 	if( !isset( $p_filter_arr[FILTER_PROPERTY_MATCH_TYPE] ) ) {
 		$p_filter_arr[FILTER_PROPERTY_MATCH_TYPE] = gpc_get_int( FILTER_PROPERTY_MATCH_TYPE, FILTER_MATCH_ALL );
+	} else {
+		settype( $p_filter_arr[FILTER_PROPERTY_MATCH_TYPE], 'int' );
 	}
 
 	# initialize plugin filters
