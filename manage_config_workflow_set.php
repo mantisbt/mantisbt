@@ -90,7 +90,7 @@ foreach( $t_valid_thresholds as $t_threshold ) {
 	if( $t_access >= $t_access_current ) {
 		$f_value = gpc_get( 'threshold_' . $t_threshold );
 		$t_value_current = config_get( $t_threshold );
-		$t_value_parent = config_get_parent( $t_project, 'threshold_' . $t_threshold );
+		$t_value_parent = config_get_parent( $t_project, $t_threshold );
 		$f_access = gpc_get( 'access_' . $t_threshold );
 		if( $f_value == $t_value_parent && $f_access == $t_access_current ) {
 			# If new value is equal to parent and access has not changed
