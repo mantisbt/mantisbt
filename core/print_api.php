@@ -328,7 +328,8 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 
 /**
  * This populates the reporter option list with the appropriate users
- *
+ * Parameter for user id(s) will set those values as defaulted in
+ * the select input field.
  * @todo ugly functions  need to be refactored
  * @todo This function really ought to print out all the users, I think.
  *  I just encountered a situation where a project used to be public and
