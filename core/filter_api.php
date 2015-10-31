@@ -3574,7 +3574,7 @@ function print_filter_reporter_id() {
 				check_selected( $g_filter[FILTER_PROPERTY_REPORTER_ID], META_FILTER_MYSELF );
 				echo '>[' . lang_get( 'myself' ) . ']</option>';
 			}
-		print_reporter_option_list( $g_filter[FILTER_PROPERTY_REPORTER_ID] );
+		print_reporter_option_list( $g_filter[FILTER_PROPERTY_REPORTER_ID], filter_get_included_projects() );
 	}?>
 		</select>
 		<?php
@@ -3600,7 +3600,7 @@ function print_filter_user_monitor() {
 	$t_has_project_level = access_has_project_level( $t_threshold );
 
 	if( $t_has_project_level ) {
-		print_reporter_option_list( $g_filter[FILTER_PROPERTY_MONITOR_USER_ID] );
+		print_monitor_user_option_list( $g_filter[FILTER_PROPERTY_MONITOR_USER_ID], filter_get_included_projects() );
 	}
 	?>
 		</select>
@@ -3626,7 +3626,7 @@ function print_filter_handler_id() {
 			echo '>[' . lang_get( 'myself' ) . ']</option>';
 		}
 
-		print_assign_to_option_list( $g_filter[FILTER_PROPERTY_HANDLER_ID] );
+		print_assign_to_option_list( $g_filter[FILTER_PROPERTY_HANDLER_ID], filter_get_included_projects() );
 	}?>
 		</select>
 		<?php
@@ -4046,7 +4046,7 @@ function print_filter_note_user_id() {
 				echo '>[' . lang_get( 'myself' ) . ']</option>';
 			}
 
-			print_note_option_list( $g_filter[FILTER_PROPERTY_NOTE_USER_ID] );
+			print_note_option_list( $g_filter[FILTER_PROPERTY_NOTE_USER_ID], filter_get_included_projects() );
 		}
 	?>
 	</select>
