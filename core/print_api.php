@@ -354,12 +354,23 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
  *  actually reported the bugs at the time. Maybe we could get all user
  *  who are listed as the reporter in any bug?  It would probably be a
  *  faster query actually.
- * @param integer $p_user_id    A user identifier.
- * @param integer $p_project_id A project identifier.
+ * @param integer|array $p_user_id    A user identifier, or array of users
+ * @param integer|array $p_project_id A project identifier, or array of projects
  * @return void
  */
 function print_reporter_option_list( $p_user_id, $p_project_id = null ) {
-	print_user_option_list( $p_user_id, $p_project_id, config_get( 'report_bug_threshold' ) );
+	print_user_option_list( $p_user_id, $p_project_id, 'report_bug_threshold' );
+}
+
+/**
+ * This populates the reporter option list with the appropriate users
+ * Parameter for user id(s) will set those values as defaulted in
+ * the select input field.
+ * @param integer|array $p_user_id	A user identifier, or array of users
+ * @param integer|array $p_project_id	A project identifier, or array of projects
+ */
+function print_monitor_user_option_list( $p_user_id, $p_project_id = null ) {
+	print_user_option_list( $p_user_id, $p_project_id, 'monitor_bug_threshold' );
 }
 
 /**
@@ -535,30 +546,20 @@ function print_news_string_by_news_id( $p_news_id ) {
  * Print User option list for assigned to field
  * @param integer|string $p_user_id    A user identifier.
  * @param integer        $p_project_id A project identifier.
- * @param integer        $p_threshold  An access level.
  * @return void
  */
-function print_assign_to_option_list( $p_user_id = '', $p_project_id = null, $p_threshold = null ) {
-	if( null === $p_threshold ) {
-		$p_threshold = config_get( 'handle_bug_threshold' );
-	}
-
-	print_user_option_list( $p_user_id, $p_project_id, $p_threshold );
+function print_assign_to_option_list( $p_user_id, $p_project_id = null) {
+	print_user_option_list( $p_user_id, $p_project_id, 'handle_bug_threshold' );
 }
 
 /**
  * Print User option list for bugnote filter field
- * @param integer|string $p_user_id    A user identifier.
+ * @param integer|array $p_user_id    A user identifier, or array of ids
  * @param integer        $p_project_id A project identifier.
- * @param integer        $p_threshold  An access level.
  * @return void
  */
-function print_note_option_list( $p_user_id = '', $p_project_id = null, $p_threshold = null ) {
-	if( null === $p_threshold ) {
-		$p_threshold = config_get( 'add_bugnote_threshold' );
-	}
-
-	print_user_option_list( $p_user_id, $p_project_id, $p_threshold );
+function print_note_option_list( $p_user_id, $p_project_id = null ) {
+	print_user_option_list( $p_user_id, $p_project_id, 'add_bugnote_threshold' );
 }
 
 /**
