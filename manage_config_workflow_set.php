@@ -68,6 +68,21 @@ function config_get_parent( $p_project, $p_option ) {
 	}
 }
 
+/**
+ * Retrieves the access level needed to change the configuration option in the
+ * project's parent (ALL_PROJECTS level if project, or file-level if all projects)
+ * @param integer $p_project Project.
+ * @param string  $p_option  Configuration option to retrieve.
+ * @return integer access level
+ */
+function config_get_access_parent( $p_project, $p_option ) {
+	if( $p_project == ALL_PROJECTS ) {
+		return config_get_global( 'admin_site_threshold' );
+	} else {
+		return config_get_access( $p_option, null, ALL_PROJECTS );
+	}
+}
+
 
 $t_can_change_level = min( config_get_access( 'notify_flags' ), config_get_access( 'default_notify_flags' ) );
 access_ensure_project_level( $t_can_change_level );
@@ -91,8 +106,11 @@ foreach( $t_valid_thresholds as $t_threshold ) {
 		$f_value = gpc_get( 'threshold_' . $t_threshold );
 		$t_value_current = config_get( $t_threshold );
 		$t_value_parent = config_get_parent( $t_project, $t_threshold );
+
 		$f_access = gpc_get( 'access_' . $t_threshold );
-		if( $f_value == $t_value_parent && $f_access == $t_access_current ) {
+		$t_access_parent = config_get_access_parent( $t_project, $t_threshold );
+
+		if( $f_value == $t_value_parent && $f_access == $t_access_parent ) {
 			# If new value is equal to parent and access has not changed
 			config_delete( $t_threshold, ALL_USERS, $t_project );
 		} else if( $f_value != $t_value_current || $f_access != $t_access_current ) {
