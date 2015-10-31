@@ -200,12 +200,11 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    mantisbt-announce mailing list is a very low traffic
-                    list that is used for major announcements,  typically
-                    announcements about releases.  All MantisBT users are
-                    encouraged to subscribe to this mailing list.  The
-                    average traffic should be no more than one to two posts
-                    per month.
+                    We send release announcements and important updates to users registered
+                    on our <ulink url="http://www.mantisbt.org/bugs">official bugtracker</ulink>.
+                    To get onto our mailing list, users will have to signup there and verify
+                    their email address. This same account can also be used to report, monitor,
+                    and comment on issues relating to MantisBT.
                 </para>
             </listitem>
             <listitem>
