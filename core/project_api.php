@@ -684,7 +684,6 @@ function project_get_all_user_rows_dbquery( $p_projects , $p_access_level, $p_in
 
 	$t_params = array();
 	$t_subquerys = array();
-
 	#
 	# prepare subquery for global users
 	#
@@ -696,8 +695,7 @@ function project_get_all_user_rows_dbquery( $p_projects , $p_access_level, $p_in
 		$t_global_access_clause = db_helper_in_clause( $t_access_global_users );
 		$t_subquerys[] = 'SELECT U.id, U.username, U.realname, U.access_level'
 				. ' FROM {user} U'
-				. ' WHERE U.enabled=' . db_param() . ' AND access_level ' . $t_global_access_clause;
-		$t_params[] = ON;
+				. ' WHERE U.enabled = ' . db_prepare_bool( true ) . ' AND access_level ' . $t_global_access_clause;
 		$t_params =  array_merge( $t_params, $t_access_global_users );
 	}
 	
@@ -717,9 +715,8 @@ function project_get_all_user_rows_dbquery( $p_projects , $p_access_level, $p_in
 		$t_subquerys[] = 'SELECT U.id, U.username, U.realname, P.access_level'
 			. ' FROM {project_user_list} P JOIN {user} U'
 			. ' ON ( P.user_id = U.id )'
-			. ' WHERE U.enabled=' . db_param()
+			. ' WHERE U.enabled = ' . db_prepare_bool( true )
 			. ' AND (P.project_id, P.access_level) ' . $t_access_clause;
-		$t_params[] = ON;
 		$t_params = array_merge( $t_params, $t_add_params );
 	}
 	
