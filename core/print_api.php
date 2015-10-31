@@ -301,14 +301,16 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 				'access_level' => 0
 			);
 		}
-		$t_user_rows[] = $t_row;
 	}
 	
-	$t_users = project_get_all_user_rows( $t_projects, $p_access, true, $t_user_rows );
-	
-	# If config is set to sort by last name, we have to sort the array
-	# otherwise, its already sorted by username or realname
-	if( ON == config_get( 'sort_by_last_name' ) ) {
+	# If config is set to sort by last name, we have to fetch the whole array
+	# becasue last name is not in user table, and the query cant be sorted
+	# then perform sorting based on calculated last name
+	$t_show_realname = ( ON == config_get( 'show_realname' ) );
+	$t_sort_by_last_name = ( ON == config_get( 'sort_by_last_name' ) );
+	if( $t_show_realname && $t_sort_by_last_name ) {
+		# fetch all data
+		$t_users = project_get_all_user_rows( $t_projects, $p_access, true, $t_user_rows );
 		$t_sort = array();
 		foreach( $t_users as $t_user ) {
 			# last name is already in field 'displayname'
@@ -316,14 +318,29 @@ function print_user_option_list( $p_user_id, $p_project_id = null, $p_access = A
 		}
 		array_multisort( $t_sort, SORT_ASC, SORT_STRING, $t_users);
 		unset( $t_sort );
+		# print the html options
+		foreach( $t_users as $t_row ) {
+			echo '<option value="' . $t_row['id'] . '" ';
+			check_selected( $p_user_id, (int)$t_row['id'] );
+			echo '>' . $t_row['displayname'] . '</option>';
+		}
 	}
-	
-	# print the html options
-	foreach( $t_users as $t_row ) {
-		echo '<option value="' . $t_row['id'] . '" ';
-		check_selected( $p_user_id, (int)$t_row['id'] );
-		echo '>' . $t_row['displayname'] . '</option>';
+	else {
+		# Sort is either by username, or realname, then the raw result set
+		#  is already ordered. Use query result directly to not use memory
+		$t_result= project_get_all_user_rows_dbquery( $t_projects, $p_access, true, $t_user_rows );
+		while( $t_row = db_fetch_array( $t_result ) ) {
+			# fix realname if it was empty
+			if( $t_show_realname && $t_row['realname'] == '' ){
+				$t_row['displayname'] = $t_row['username'];
+				}
+			# print the html option
+			echo '<option value="' . $t_row['id'] . '" ';
+			check_selected( $p_user_id, (int)$t_row['id'] );
+			echo '>' . $t_row['displayname'] . '</option>';
+		}
 	}
+
 }
 
 /**
