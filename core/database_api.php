@@ -881,6 +881,31 @@ function db_minutes_to_hhmm( $p_min = 0 ) {
 }
 
 /**
+ * A helper function that generates a formatted IN clause based on an array,
+ * inserting db_param() placeholders for the array values
+ * The array values are assumed to be safe to insert in a query (i.e. already cleaned).
+ * If array consist of only one value, an "equals" expression is generated.
+ * For more values, the complete "IN (..)" expression is generated
+ * @param array $p_array The array of values that will be used
+ * @return string returns a formatted sql clause
+ */
+function db_helper_in_clause( array $p_array ) {
+	if( count( $p_array ) === 1 ){
+		return ' = '.db_param() . ' ';
+	}
+	else {
+		$t_result = ' IN (';
+		$idx1 = 0;
+		foreach( $p_array as $t_val ) {
+			if( $idx1++ > 0 ) $t_result .= ',';
+			$t_result .= db_param();
+		}
+		$t_result .= ') ';
+		return $t_result;
+	}
+}
+
+/**
  * A helper function that generates a case-sensitive or case-insensitive like phrase based on the current db type.
  * The field name and value are assumed to be safe to insert in a query (i.e. already cleaned).
  * @param string  $p_field_name     The name of the field to filter on.
