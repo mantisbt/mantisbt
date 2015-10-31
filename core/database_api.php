@@ -906,6 +906,35 @@ function db_helper_in_clause( array $p_array ) {
 }
 
 /**
+ * A helper function that generates a formatted IN clause based on an array,
+ * whose elements are arrays, inserting db_param() placeholders.
+ * The array values are assumed to be safe to insert in a query (i.e. already cleaned).
+ * Input array is of form: [[a1,..,an],[b1,..,bn],..]
+ * Inner arrays should all have the same number of elements
+ * Tip: for later merging the params array, flatten a 2 dimensional
+ *		array with: call_user_func_array('array_merge', $array)
+ *		from [[a,b],[c,d]] results in [a,b,c,d]
+ * @param array $p_array The array of values that will be used
+ * @return string returns a formatted sql clause
+ */
+function db_helper_in2_clause( array $p_array ) {
+	$t_result = ' IN (';
+	$idx1 = 0;
+	foreach( $p_array as $t_set ) {
+		if( $idx1++ > 0 ) $t_result .= ',';
+		$t_result .= '(';
+		$idx2 = 0;
+		foreach( $t_set as $t_val ) {
+			if( $idx2++ > 0 ) $t_result .= ',';
+			$t_result .= db_param();
+		}
+		$t_result .= ')';
+	}
+	$t_result .= ')';
+	return $t_result;
+}
+
+/**
  * A helper function that generates a case-sensitive or case-insensitive like phrase based on the current db type.
  * The field name and value are assumed to be safe to insert in a query (i.e. already cleaned).
  * @param string  $p_field_name     The name of the field to filter on.
