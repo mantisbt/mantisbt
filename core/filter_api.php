@@ -4839,3 +4839,21 @@ function filter_create_monitored_by( $p_project_id, $p_user_id ) {
 
 	return filter_ensure_valid_filter( $t_filter );
 }
+
+function filter_get_included_projects() {
+	global $g_filter;
+
+	if( 'simple' == $g_filter['_view_type'] ) {
+		# simple filters search in current project and desdendants
+		return user_get_all_accessible_projects( auth_get_current_user_id(), helper_get_current_project() );
+	} else {
+		# advanced filters search only in specified projects
+		$t_projects = $g_filter[FILTER_PROPERTY_PROJECT_ID];
+		# if there is the meta value "current", replace with actual project id
+		$t_meta_current = array_search( META_FILTER_CURRENT, $t_projects );
+		if( false !== $t_meta_current ) {
+			$t_projects[$t_meta_current] = helper_get_current_project();
+		}
+		return $t_projects;
+	}
+}
