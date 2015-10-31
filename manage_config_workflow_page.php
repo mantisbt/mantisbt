@@ -240,13 +240,19 @@ function threshold_begin( $p_section_name ) {
 function threshold_row( $p_threshold ) {
 	global $g_access, $g_can_change_flags;
 
+	$t_can_change_threshold = ( $g_access >= config_get_access( $p_threshold ) );
+
 	$t_file = config_get_global( $p_threshold );
 	$t_global = config_get( $p_threshold, null, ALL_USERS, ALL_PROJECTS );
 	$t_project = config_get( $p_threshold );
-	$t_can_change_threshold = ( $g_access >= config_get_access( $p_threshold ) );
-
 	$t_color = set_color_override( $t_file, $t_global, $t_project );
-	if( $t_can_change_threshold && $t_color != '' ) {
+
+	$t_file_access = config_get_global( 'admin_site_threshold' );
+	$t_global_access = config_get_access( $p_threshold, ALL_USERS, ALL_PROJECTS);
+	$t_project_access = config_get_access( $p_threshold );
+	$t_color_access = set_color_override( $t_file_access, $t_global_access, $t_project_access );
+
+	if( $t_can_change_threshold && ( $t_color != '' || $t_color_access != '' ) ) {
 		set_overrides( $p_threshold );
 	}
 
@@ -255,8 +261,8 @@ function threshold_row( $p_threshold ) {
 		echo '<td class="center ' . $t_color . '"><select name="threshold_' . $p_threshold . '">';
 		print_enum_string_option_list( 'status', $t_project );
 		echo '</select> </td>' . "\n";
-		echo '<td><select name="access_' . $p_threshold . '">';
-		print_enum_string_option_list( 'access_levels', config_get_access( $p_threshold ) );
+		echo '<td class="' . $t_color_access . '"><select name="access_' . $p_threshold . '">';
+		print_enum_string_option_list( 'access_levels', $t_project_access );
 		echo '</select> </td>' . "\n";
 		$g_can_change_flags = true;
 	} else {
