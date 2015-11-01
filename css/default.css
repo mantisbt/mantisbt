@@ -588,6 +588,7 @@ div.field-container {
 	width: 100%;
 	float: left;
 	margin: 0em 0em 1px 0em;
+	outline: 1px solid #fff;
 	padding: 0em;
 }
 .field-container>.display-label,
