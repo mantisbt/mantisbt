@@ -503,7 +503,7 @@ if( $g_can_change_flags ) {
 		echo '<input name="revert" type="hidden" value="' . implode( ',', $g_overrides ) . '" />';
 		echo '<input name="project" type="hidden" value="' . $t_project . '" />';
 		echo '<input name="return" type="hidden" value="' . string_attribute( form_action_self() ) .'" />';
-		echo '<input type="submit" class="button" value=';
+		echo '<input type="submit" class="button" value="';
 		if( ALL_PROJECTS == $t_project ) {
 			echo lang_get( 'revert_to_system' );
 		} else {
