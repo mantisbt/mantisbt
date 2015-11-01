@@ -58,6 +58,10 @@ html_page_top( lang_get( 'manage_workflow_config' ) );
 print_manage_menu( 'adm_permissions_report.php' );
 print_manage_config_menu( 'manage_config_workflow_page.php' );
 
+# CSS class names for overrides color coding
+define( 'COLOR_GLOBAL', 'color-global' );
+define( 'COLOR_PROJECT', 'color-project' );
+
 $g_access = current_user_get_access_level();
 $t_project = helper_get_current_project();
 $g_can_change_workflow = ( $g_access >= config_get_access( 'status_enum_workflow' ) );
@@ -86,9 +90,9 @@ function set_overrides( $p_config ) {
  */
 function set_color_override( $p_level_file, $p_level_global, $p_level_project ) {
 	if( $p_level_project != $p_level_global ) {
-		$t_color = 'color-project';
+		$t_color = COLOR_PROJECT;
 	} else if( $p_level_global != $p_level_file ) {
-		$t_color = 'color-global';
+		$t_color = COLOR_GLOBAL;
 	} else {
 		$t_color = '';
 	}
@@ -437,9 +441,9 @@ if( ALL_PROJECTS == $t_project ) {
 echo '<p class="bold">' . $t_project_title . '</p>' . "\n";
 echo '<p>' . lang_get( 'colour_coding' ) . '<br />';
 if( ALL_PROJECTS <> $t_project ) {
-	echo '<span class="color-project">' . lang_get( 'colour_project' ) .'</span><br />';
+	echo '<span class="' . COLOR_PROJECT . '">' . lang_get( 'colour_project' ) .'</span><br />';
 }
-echo '<span class="color-global">' . lang_get( 'colour_global' ) . '</span></p>';
+echo '<span class="' . COLOR_GLOBAL . '">' . lang_get( 'colour_global' ) . '</span></p>';
 
 # show the settings used to derive the table
 threshold_begin( lang_get( 'workflow_thresholds' ) );
