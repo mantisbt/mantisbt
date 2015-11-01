@@ -70,13 +70,23 @@ $g_overrides = array();
 
 /**
  * Set overrides
- * @param string $p_config Configuration value.
+ * @param string $p_config     Configuration value.
+ * @param bool   $p_can_change True if user has access level to change config
+ * @param string $p_color      CSS class name
  * @return void
  */
-function set_overrides( $p_config ) {
+function set_overrides( $p_config, $p_can_change, $p_color ) {
 	global $g_overrides;
-	if( !in_array( $p_config, $g_overrides ) ) {
-		$g_overrides[] = $p_config;
+
+	if( !$p_can_change ) {
+		return;
+	}
+
+	$t_project = helper_get_current_project();
+	if(    $t_project == ALL_PROJECTS && $p_color == COLOR_GLOBAL
+		|| $t_project != ALL_PROJECTS && $p_color == COLOR_PROJECT
+	) {
+		$g_overrides[$p_config] = $p_config;
 	}
 }
 
@@ -117,9 +127,7 @@ function show_flag( $p_from_status_id, $p_to_status_id ) {
 		$t_project = isset( $g_project_workflow['exit'][$p_from_status_id][$p_to_status_id] ) ? 1 : 0;
 
 		$t_color = set_color_override( $t_file, $t_global, $t_project );
-		if( $g_can_change_workflow && $t_color != '' ) {
-			set_overrides( 'status_enum_workflow' );
-		}
+		set_overrides( 'status_enum_workflow', $g_can_change_workflow, $t_color );
 		$t_value = '<td class="center ' . $t_color . '">';
 
 		$t_flag = ( 1 == $t_project );
@@ -194,9 +202,8 @@ function capability_row( $p_from_status ) {
 	$t_project = isset( $g_project_workflow['default'][$p_from_status] ) ? $g_project_workflow['default'][$p_from_status] : 0;
 
 	$t_color = set_color_override( $t_file, $t_global, $t_project );
-	if( $g_can_change_workflow && $t_color != '' ) {
-		set_overrides( 'status_enum_workflow' );
-	}
+	set_overrides( 'status_enum_workflow', $g_can_change_workflow, $t_color );
+
 	echo "\t\t\t" . '<td class="center ' . $t_color . '">';
 	if( $g_can_change_workflow ) {
 		echo '<select name="default_' . $p_from_status . '">';
@@ -250,15 +257,13 @@ function threshold_row( $p_threshold ) {
 	$t_global = config_get( $p_threshold, null, ALL_USERS, ALL_PROJECTS );
 	$t_project = config_get( $p_threshold );
 	$t_color = set_color_override( $t_file, $t_global, $t_project );
+	set_overrides( $p_threshold, $t_can_change_threshold, $t_color );
 
 	$t_file_access = config_get_global( 'admin_site_threshold' );
 	$t_global_access = config_get_access( $p_threshold, ALL_USERS, ALL_PROJECTS);
 	$t_project_access = config_get_access( $p_threshold );
 	$t_color_access = set_color_override( $t_file_access, $t_global_access, $t_project_access );
-
-	if( $t_can_change_threshold && ( $t_color != '' || $t_color_access != '' ) ) {
-		set_overrides( $p_threshold );
-	}
+	set_overrides( $p_threshold, $t_can_change_threshold, $t_color_access );
 
 	echo '<tr><td>' . lang_get( 'desc_' . $p_threshold ) . '</td>' . "\n";
 	if( $t_can_change_threshold ) {
@@ -330,9 +335,7 @@ function access_row() {
 
 			$t_can_change = ( $g_access >= config_get_access( 'report_bug_threshold' ) );
 			$t_color = set_color_override( $t_file_new, $t_global_new, $t_project_new );
-			if( $t_can_change  && $t_color != '' ) {
-				set_overrides( 'report_bug_threshold' );
-			}
+			set_overrides( 'report_bug_threshold', $t_can_change, $t_color );
 		} else {
 			# Other statuses
 
@@ -348,9 +351,7 @@ function access_row() {
 
 			$t_can_change = ( $g_access >= config_get_access( 'set_status_threshold' ) );
 			$t_color = set_color_override( $t_level_file, $t_level_global, $t_level_project );
-			if( $t_can_change  && $t_color != '' ) {
-				set_overrides( 'set_status_threshold' );
-			}
+			set_overrides( 'set_status_threshold', $t_can_change, $t_color );
 		}
 
 		if( $t_can_change ) {
