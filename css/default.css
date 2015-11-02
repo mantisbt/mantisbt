@@ -671,6 +671,13 @@ div.form-container .info-text {
 	border-right: 1px solid #fff;
 	z-index: 0;
 }
+
+div.form-container .footer {
+	clear: both;
+	display: block;
+	padding: .5em;
+}
+
 .section-links,
 div.form-container .submit-button {
 	clear: both;

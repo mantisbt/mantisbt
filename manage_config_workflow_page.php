@@ -161,10 +161,9 @@ function show_flag( $p_from_status_id, $p_to_status_id ) {
 function section_begin( $p_section_name ) {
 	$t_enum_statuses = MantisEnum::getValues( config_get( 'status_enum_string' ) );
 	echo '<div class="form-container">'. "\n";
+	echo '<h2>' . $p_section_name . '</h2>' . "\n";
 	echo "\t<table>\n";
 	echo "\t\t<thead>\n";
-	echo "\t\t" . '<tr>' . "\n\t\t\t" . '<td class="form-title-caps" colspan="' . ( count( $t_enum_statuses ) + 2 ) . '">'
-		. $p_section_name . '</td>' . "\n\t\t" . '</tr>' . "\n";
 	echo "\t\t" . '<tr class="row-category2">' . "\n";
 	echo "\t\t\t" . '<th class="form-title width30" rowspan="2">' . lang_get( 'current_status' ) . '</th>'. "\n";
 	echo "\t\t\t" . '<th class="form-title" style="text-align:center" colspan="' . ( count( $t_enum_statuses ) + 1 ) . '">'
@@ -221,7 +220,19 @@ function capability_row( $p_from_status ) {
  * @return void
  */
 function section_end() {
-	echo '</tbody></table></div><br />' . "\n";
+	global $g_can_change_workflow;
+	echo '</tbody></table>' . "\n";
+
+	echo '<div class="footer">' . "\n";
+	if( $g_can_change_workflow ) {
+		echo lang_get( 'workflow_change_access_label' ) . "&nbsp;\n";
+		echo '<select name="workflow_access">' . "\n";
+		print_enum_string_option_list( 'access_levels', config_get_access( 'status_enum_workflow' ) );
+		echo "\n" . '</select>' . "\n";
+	}
+	echo '</div>' . "\n";
+
+	echo '</div><br />' . "\n";
 }
 
 /**
@@ -231,9 +242,9 @@ function section_end() {
  */
 function threshold_begin( $p_section_name ) {
 	echo '<div class="form-container">';
+	echo '<h2>' . $p_section_name . '</h2>' . "\n";
 	echo '<table>';
 	echo '<thead>';
-	echo "\t" . '<tr><td class="form-title" colspan="3">' . $p_section_name . '</td></tr>' . "\n";
 	echo "\t" . '<tr class="row-category2">';
 	echo "\t\t" . '<th class="form-title width30">' . lang_get( 'threshold' ) . '</th>' . "\n";
 	echo "\t\t" . '<th class="form-title" >' . lang_get( 'status_level' ) . '</th>' . "\n";
@@ -296,13 +307,13 @@ function threshold_end() {
  * @return void
  */
 function access_begin( $p_section_name ) {
-	echo '<div class="form-container">';
+	echo '<div class="form-container">' . "\n";
+	echo '<h2>' . $p_section_name . '</h2>' . "\n";
 	echo '<table>';
-	echo '<thead>';
-	echo "\t\t" . '<tr><td class="form-title" colspan="2">' . $p_section_name . '</td></tr>' . "\n";
+	echo '<thead>' . "\n";
 	echo "\t\t" . '<tr class="row-category2"><th class="form-title" colspan="2">' . lang_get( 'access_change' ) . '</th></tr>' . "\n";
-	echo '</thead>';
-	echo '<tbody>';
+	echo '</thead>' . "\n";
+	echo '<tbody>' . "\n";
 }
 
 /**
@@ -374,7 +385,21 @@ function access_row() {
  * @return void
  */
 function access_end() {
-	echo '</tbody></table></div><br />' . "\n";
+	global $g_access;
+
+	echo '</tbody></table>' . "\n";
+
+	echo '<div class="footer">' . "\n";
+	if( $g_access >= config_get_access( 'set_status_threshold' ) ) {
+		echo lang_get( 'access_change_access_label' ) . "&nbsp;\n";
+		echo '<select name="status_access">' . "\n\t\t";
+		print_enum_string_option_list( 'access_levels', config_get_access( 'set_status_threshold' ) );
+		echo "\n" . '</select>' . "\n";
+	}
+	echo '</div>' . "\n";
+
+	echo '</div>' . "\n";
+	echo '<br />' . "\n\n";
 }
 
 echo '<br /><br />';
@@ -454,7 +479,6 @@ if( !is_array( config_get( 'bug_submit_status' ) ) ) {
 threshold_row( 'bug_resolved_status_threshold' );
 threshold_row( 'bug_reopen_status' );
 threshold_end();
-echo '<br />';
 
 if( '' <> $t_validation_result ) {
 	echo '<table class="width100">';
@@ -478,31 +502,23 @@ foreach ( $t_status_arr as $t_from_status => $t_from_label ) {
 }
 section_end();
 
-if( $g_can_change_workflow ) {
-	echo '<p>' . lang_get( 'workflow_change_access_label' );
-	echo '<select name="workflow_access">';
-	print_enum_string_option_list( 'access_levels', config_get_access( 'status_enum_workflow' ) );
-	echo '</select> </p><br />';
-}
-
 # display the access levels required to move an issue
+echo "\n\n";
 access_begin( lang_get( 'access_levels' ) );
 access_row();
 access_end();
 
-if( $g_access >= config_get_access( 'set_status_threshold' ) ) {
-	echo '<p>' . lang_get( 'access_change_access_label' );
-	echo '<select name="status_access">';
-	print_enum_string_option_list( 'access_levels', config_get_access( 'set_status_threshold' ) );
-	echo '</select> </p><br />';
-}
-
 if( $g_can_change_flags ) {
+	echo '<div class="center">' . "\n";
 	echo '<input type="submit" class="button" value="' . lang_get( 'change_configuration' ) . '" />' . "\n";
+	echo '</div>' . "\n";
+
 	echo '</form>' . "\n";
 
 	if( 0 < count( $g_overrides ) ) {
-		echo '<div class="right"><form id="mail_config_action" method="post" action="manage_config_revert.php">' ."\n";
+		echo '<div class="form-container">';
+		echo '<div class="submit-button">' . "\n";
+		echo '<form id="mail_config_action" method="post" action="manage_config_revert.php">' ."\n";
 		echo '<fieldset>' . "\n";
 		echo form_security_field( 'manage_config_revert' );
 		echo '<input name="revert" type="hidden" value="' . implode( ',', $g_overrides ) . '" />';
@@ -516,8 +532,10 @@ if( $g_can_change_flags ) {
 		}
 		echo '" />' . "\n";
 		echo '</fieldset>' . "\n";
-		echo '</form></div>' . "\n";
+		echo '</form>' . "\n";
+		echo '</div></div>' . "\n";
 	}
+
 
 } else {
 	echo '</form>' . "\n";
