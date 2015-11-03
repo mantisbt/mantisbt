@@ -569,7 +569,7 @@ function email_generic( $p_bug_id, $p_notify_type, $p_message_id = null, array $
 	# @todo yarick123: email_collect_recipients(...) will be completely rewritten to provide additional information such as language, user access,..
 	# @todo yarick123:sort recipients list by language to reduce switches between different languages
 	$t_recipients = email_collect_recipients( $p_bug_id, $p_notify_type, $p_extra_user_ids_to_email );
-	email_generic_to_recipients( $p_bug_id, $p_notify_type, $t_recipients, $p_message_id, $p_header_optional_params, $p_extra_user_ids_to_email );
+	email_generic_to_recipients( $p_bug_id, $p_notify_type, $t_recipients, $p_message_id, $p_header_optional_params );
 }
 
 /**
