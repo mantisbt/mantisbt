@@ -709,10 +709,9 @@ function string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id ) {
  * in emails.
  * @param integer $p_bug_id     A bug identifier.
  * @param integer $p_bugnote_id A bug note identifier.
- * @param integer $p_user_id    A valid user identifier.
  * @return string
  */
-function string_get_bugnote_view_url_with_fqdn( $p_bug_id, $p_bugnote_id, $p_user_id = null ) {
+function string_get_bugnote_view_url_with_fqdn( $p_bug_id, $p_bugnote_id ) {
 	return config_get( 'path' ) . string_get_bug_view_url( $p_bug_id ) . '#c' . $p_bugnote_id;
 }
 
@@ -721,10 +720,9 @@ function string_get_bugnote_view_url_with_fqdn( $p_bug_id, $p_bugnote_id, $p_use
  * account for the user preference and site override
  * The returned url includes the fully qualified domain, hence it is suitable to be included in emails.
  * @param integer $p_bug_id  A bug identifier.
- * @param integer $p_user_id A valid user identifier.
  * @return string
  */
-function string_get_bug_view_url_with_fqdn( $p_bug_id, $p_user_id = null ) {
+function string_get_bug_view_url_with_fqdn( $p_bug_id ) {
 	return config_get( 'path' ) . string_get_bug_view_url( $p_bug_id );
 }
 
