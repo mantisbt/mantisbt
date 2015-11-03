@@ -160,6 +160,7 @@ if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 	}
 
 	# Get the parent's workflow, if not set default to all transitions
+	$t_access_parent = config_get_access_parent( $t_project, 'status_enum_workflow' );
 	$t_access_current = config_get_access( 'status_enum_workflow' );
 	$t_workflow_parent = config_get_parent( $t_project, 'status_enum_workflow' );
 	if( 0 == count( $t_workflow_parent ) ) {
@@ -174,7 +175,7 @@ if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 		}
 	}
 
-	if( $t_workflow == $t_workflow_parent && $f_access == $t_access_current ) {
+	if( $t_workflow == $t_workflow_parent && $f_access == $t_access_parent ) {
 		# If new value is equal to parent and access has not changed
 		config_delete( 'status_enum_workflow', ALL_USERS, $t_project );
 	} else if( $t_workflow != config_get( 'status_enum_workflow' ) || $f_access != $t_access_current ) {
@@ -187,6 +188,7 @@ if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 if( config_get_access( 'set_status_threshold' ) <= $t_access ) {
 	# get changes to access level to change these values
 	$f_access = gpc_get( 'status_access' );
+	$t_access_parent = config_get_access_parent( $t_project, 'set_status_threshold' );
 	$t_access_current = config_get_access( 'set_status_threshold' );
 
 	# Build access level reference arrays (parent level and current config)
@@ -227,7 +229,7 @@ if( config_get_access( 'set_status_threshold' ) <= $t_access ) {
 		}
 	}
 
-	if( $t_set_new == $t_set_parent && $f_access == $t_access_current ) {
+	if( $t_set_new == $t_set_parent && $f_access == $t_access_parent ) {
 		# If new value is equal to parent and access has not changed
 		config_delete( 'set_status_threshold', ALL_USERS, $t_project );
 	} else if( $t_set_new != $t_set_current || $f_access != $t_access_current ) {
