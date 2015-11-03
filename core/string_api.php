@@ -367,7 +367,7 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 					if( bug_exists( (int)$p_array[2] ) ) {
 						# Create link regardless of user's access to the bug
 						return $p_array[1] .
-							string_get_bug_view_url_with_fqdn( (int)$p_array[2], null );
+							string_get_bug_view_url_with_fqdn( (int)$p_array[2] );
 					}
 					return $p_array[0];
 				}; # end of bug link callback closure
