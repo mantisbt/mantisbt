@@ -572,6 +572,8 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 		$t_local_users = project_get_all_user_rows( $f_project_id, ANYBODY, false );
 	}
 
+	$t_token_remove_user = form_security_token('manage_proj_user_remove');
+
 	for( $i = 0; $i < $t_users_count; $i++ ) {
 		$t_user = $t_users[$i];
 ?>
@@ -593,7 +595,10 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 					#  from this project
 					if( $t_can_manage_users && access_has_project_level( $t_user['access_level'], $f_project_id ) ) {
 						if( !$f_show_global_users || $f_show_global_users && isset( $t_local_users[$t_user['id']]) ) {
-							print_button( 'manage_proj_user_remove.php?project_id=' . $f_project_id . '&user_id=' . $t_user['id'], lang_get( 'remove_link' ) );
+							print_button( 'manage_proj_user_remove.php',
+									lang_get( 'remove_link' ),
+									array ( 'project_id' => $f_project_id, 'user_id' => $t_user['id'] ),
+									$t_token_remove_user );
 							$t_removable_users_exist = true;
 						}
 					} ?>
@@ -615,7 +620,10 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 
 	if( $t_removable_users_exist ) {
 		echo '&#160;';
-		print_button( 'manage_proj_user_remove.php?project_id=' . $f_project_id, lang_get( 'remove_all_link' ) );
+		print_button( 'manage_proj_user_remove.php',
+				lang_get( 'remove_all_link' ),
+				array( 'project_id' => $f_project_id ),
+				$t_token_remove_user );
 	}
 
 # We want to allow people with global permissions and people with high enough
