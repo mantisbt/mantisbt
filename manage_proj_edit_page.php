@@ -619,9 +619,9 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 	# You need global or project-specific permissions to remove users
 	#  from this project
 	if( !$f_show_global_users ) {
-		print_button( 'manage_proj_edit_page.php?project_id=' . $f_project_id . '&show_global_users=true', lang_get( 'show_global_users' ) );
+		print_button( 'manage_proj_edit_page.php?project_id=' . $f_project_id . '&show_global_users=true', lang_get( 'show_global_users' ), null, OFF );
 	} else {
-		print_button( 'manage_proj_edit_page.php?project_id=' . $f_project_id, lang_get( 'hide_global_users' ) );
+		print_button( 'manage_proj_edit_page.php?project_id=' . $f_project_id, lang_get( 'hide_global_users' ), null, OFF );
 	}
 
 	if( $t_removable_users_exist ) {
