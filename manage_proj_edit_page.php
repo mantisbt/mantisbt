@@ -566,6 +566,12 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 	$t_users_count = count( $t_sort );
 	$t_removable_users_exist = false;
 
+	# If including global users, fetch here all local user to later distinguish them
+	$t_local_users = array();
+	if( $f_show_global_users ) {
+		$t_local_users = project_get_all_user_rows( $f_project_id, ANYBODY, false );
+	}
+
 	for( $i = 0; $i < $t_users_count; $i++ ) {
 		$t_user = $t_users[$i];
 ?>
@@ -586,7 +592,7 @@ event_signal( 'EVENT_MANAGE_PROJECT_PAGE', array( $f_project_id ) );
 					# You need global or project-specific permissions to remove users
 					#  from this project
 					if( $t_can_manage_users && access_has_project_level( $t_user['access_level'], $f_project_id ) ) {
-						if( project_includes_user( $f_project_id, $t_user['id'] ) ) {
+						if( !$f_show_global_users || $f_show_global_users && isset( $t_local_users[$t_user['id']]) ) {
 							print_button( 'manage_proj_user_remove.php?project_id=' . $f_project_id . '&user_id=' . $t_user['id'], lang_get( 'remove_link' ) );
 							$t_removable_users_exist = true;
 						}
