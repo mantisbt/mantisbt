@@ -536,6 +536,7 @@ function email_notify_new_account( $p_username, $p_email ) {
 	$t_threshold_users = project_get_all_user_rows( ALL_PROJECTS, $t_threshold_min );
 	$t_user_ids= array_keys( $t_threshold_users );
 	user_cache_array_rows( $t_user_ids );
+	user_pref_cache_array_rows( $t_user_ids );
 
 	foreach( $t_threshold_users as $t_user ) {
 		lang_push( user_pref_get_language( $t_user['id'] ) );
