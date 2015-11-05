@@ -650,7 +650,7 @@ function project_get_all_user_rows_dbquery( $p_projects , $p_access_level, $p_in
 	
 	foreach( $p_projects as $t_pr ) {
 		# If access level is string, its a config permission that can be different for each project
-		if( is_string( $p_access_level ) ) {
+		if( !is_numeric( $p_access_level ) ) {
 			# Get specific configuration for threshold
 			$t_config= config_get( $p_access_level, null, ALL_USERS, $t_pr );
 			if( null === $t_config ) $t_config= config_get( $p_access_level, null, ALL_USERS, ALL_PROJECTS );
