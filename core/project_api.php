@@ -803,8 +803,6 @@ function project_get_all_user_rows( $p_project_id = ALL_PROJECTS, $p_access_leve
 			}
 		}
 
-		# @TODO Probably, there is no need to cache user data. If somewhere is necessary, could be done by the caller
-		user_cache_array_rows( array_keys( $t_users ) );
 		return $t_users;
 	}
 	else {
