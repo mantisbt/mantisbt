@@ -112,7 +112,8 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 	}
 
 	# build an appropriate error string
-	$t_error_description = '\'' . $p_error . '\' in \'' . $p_file .'\' line ' . $p_line;
+	$t_error_location = 'in \'' . $p_file .'\' line ' . $p_line;
+	$t_error_description = '\'' . $p_error . '\' ' . $t_error_location;
 	switch( $p_type ) {
 		case E_WARNING:
 			$t_error_type = 'SYSTEM WARNING';
@@ -134,12 +135,13 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 			$t_error_type = 'APPLICATION ERROR #' . $p_error;
 			$t_error_description = error_string( $p_error );
 			if( $t_method == DISPLAY_ERROR_INLINE ) {
-				$t_error_description .= "\n" . error_string( ERROR_DISPLAY_USER_ERROR_INLINE );
+				$t_error_description .= ' (' . $t_error_location . ")\n"
+					. error_string( ERROR_DISPLAY_USER_ERROR_INLINE );
 			}
 			break;
 		case E_USER_WARNING:
 			$t_error_type = 'APPLICATION WARNING #' . $p_error;
-			$t_error_description = error_string( $p_error );
+			$t_error_description = error_string( $p_error ) . ' (' . $t_error_location . ')';
 			break;
 		case E_USER_NOTICE:
 			# used for debugging
@@ -168,7 +170,7 @@ function error_handler( $p_type, $p_error, $p_file, $p_line, array $p_context ) 
 			# shouldn't happen, just display the error just in case
 			$t_error_type = 'UNHANDLED ERROR TYPE (' .
 				'<a href="http://php.net/errorfunc.constants">' . $p_type. '</a>)';
-			$t_error_description = $p_error;
+			$t_error_description = $p_error . ' (' . $t_error_location . ')';
 	}
 
 	$t_error_description = nl2br( $t_error_description );
