@@ -1428,7 +1428,6 @@ function html_status_legend( $p_display_position, $p_restrict_by_filter = false 
 		echo '<tr>';
 
 		# draw the status bar
-		$t_status_enum_string = config_get( 'status_enum_string' );
 		foreach( $t_status_array as $t_status => $t_name ) {
 			$t_val = isset( $t_status_names[$t_status] )
 				? $t_status_names[$t_status]

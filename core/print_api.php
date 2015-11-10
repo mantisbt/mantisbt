@@ -854,8 +854,6 @@ function print_version_option_list( $p_version = '', $p_project_id = null, $p_re
 
 	$t_listed = array();
 	$t_max_length = config_get( 'max_dropdown_length' );
-	$t_show_version_dates = access_has_project_level( config_get( 'show_version_dates_threshold' ) );
-	$t_short_date_format = config_get( 'short_date_format' );
 
 	foreach( $t_versions as $t_version ) {
 		# If the current version is obsolete, and current version not equal to $p_version,
