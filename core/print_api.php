@@ -1216,7 +1216,7 @@ function print_plugin_priority_list( $p_priority ) {
  * @return void
  */
 function print_bug_link( $p_bug_id, $p_detail_info = true ) {
-	echo string_get_bug_view_link( $p_bug_id, null, $p_detail_info );
+	echo string_get_bug_view_link( $p_bug_id, $p_detail_info );
 }
 
 /**

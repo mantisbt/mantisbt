@@ -353,7 +353,6 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 							return $p_array[1] .
 								string_get_bug_view_link(
 									(int)$p_array[2],
-									null,
 									(boolean)$p_detail_info,
 									(boolean)$p_fqdn
 								);
@@ -609,14 +608,12 @@ function string_get_bug_page( $p_action ) {
 
 /**
  * return an href anchor that links to a bug VIEW page for the given bug
- * account for the user preference and site override
  * @param integer $p_bug_id	     A bug identifier.
- * @param integer $p_user_id     A valid user identifier.
  * @param boolean $p_detail_info Whether to include more detailed information (e.g. title attribute / project) in the returned string.
  * @param boolean $p_fqdn        Whether to return an absolute or relative link.
  * @return string
  */
-function string_get_bug_view_link( $p_bug_id, $p_user_id = null, $p_detail_info = true, $p_fqdn = false ) {
+function string_get_bug_view_link( $p_bug_id, $p_detail_info = true, $p_fqdn = false ) {
 	if( bug_exists( $p_bug_id ) ) {
 		$t_link = '<a href="';
 		if( $p_fqdn ) {
