@@ -589,15 +589,12 @@ function string_restore_valid_html_tags( $p_string, $p_multiline = true ) {
 }
 
 /**
- * return the name of a bug page for the user
- * account for the user preference and site override
+ * return the name of a bug page
  * $p_action should be something like 'view', 'update', or 'report'
- * If $p_user_id is null or not specified, use the current user
  * @param string  $p_action  A valid action being performed - currently one of view, update or report.
- * @param integer $p_user_id A valid user identifier.
  * @return string
  */
-function string_get_bug_page( $p_action, $p_user_id = null ) {
+function string_get_bug_page( $p_action ) {
 	switch( $p_action ) {
 		case 'view':
 			return 'bug_view_page.php';
@@ -733,7 +730,7 @@ function string_get_bug_view_url_with_fqdn( $p_bug_id ) {
  * @return string
  */
 function string_get_bug_view_page( $p_user_id = null ) {
-	return string_get_bug_page( 'view', $p_user_id );
+	return string_get_bug_page( 'view' );
 }
 
 /**
@@ -766,7 +763,7 @@ function string_get_bug_update_url( $p_bug_id, $p_user_id = null ) {
  * @return string
  */
 function string_get_bug_update_page( $p_user_id = null ) {
-	return string_get_bug_page( 'update', $p_user_id );
+	return string_get_bug_page( 'update' );
 }
 
 /**
@@ -796,7 +793,7 @@ function string_get_bug_report_url( $p_user_id = null ) {
  * @return string
  */
 function string_get_bug_report_page( $p_user_id = null ) {
-	return string_get_bug_page( 'report', $p_user_id );
+	return string_get_bug_page( 'report' );
 }
 
 /**
