@@ -1742,7 +1742,7 @@ function mc_issues_get_header( $p_username, $p_password, $p_issue_ids ) {
         log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $t_id . '\'' );
 
         $t_issue_data = bug_get( $t_id, true );
-        $t_result[] = mci_issue_data_as_header_array( $t_issue_data, $t_user_id, $t_lang );
+        $t_result[] = mci_issue_data_as_header_array( $t_issue_data );
     }
 
     return $t_result;
