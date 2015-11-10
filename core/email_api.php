@@ -455,12 +455,11 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 /**
  * Send password to user
  * @param integer $p_user_id      A valid user identifier.
- * @param string  $p_password     A valid password.
  * @param string  $p_confirm_hash Confirmation hash.
  * @param string  $p_admin_name   Administrator name.
  * @return void
  */
-function email_signup( $p_user_id, $p_password, $p_confirm_hash, $p_admin_name = '' ) {
+function email_signup( $p_user_id, $p_confirm_hash, $p_admin_name = '' ) {
 	if( ( OFF == config_get( 'send_reset_password' ) ) || ( OFF == config_get( 'enable_email_notification' ) ) ) {
 		return;
 	}
