@@ -1072,8 +1072,6 @@ function mc_project_get_users( $p_username, $p_password, $p_project_id, $p_acces
 		return mci_soap_fault_login_failed();
 	}
 
-	$t_users = array();
-
 	$g_project_override = $p_project_id;
 
 	$t_users = project_get_all_user_rows( $p_project_id, $p_access ); # handles ALL_PROJECTS case
