@@ -750,16 +750,14 @@ function string_get_bug_update_link( $p_bug_id, $p_user_id = null ) {
  * @return string
  */
 function string_get_bug_update_url( $p_bug_id, $p_user_id = null ) {
-	return string_get_bug_update_page( $p_user_id ) . '?bug_id=' . $p_bug_id;
+	return string_get_bug_update_page() . '?bug_id=' . $p_bug_id;
 }
 
 /**
- * return the name of a bug UPDATE page for the user
- * account for the user preference and site override
- * @param integer $p_user_id A valid user identifier.
+ * return the name of a bug UPDATE page
  * @return string
  */
-function string_get_bug_update_page( $p_user_id = null ) {
+function string_get_bug_update_page() {
 	return string_get_bug_page( 'update' );
 }
 
