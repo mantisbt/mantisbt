@@ -739,17 +739,15 @@ function string_get_bug_view_page( $p_user_id = null ) {
  */
 function string_get_bug_update_link( $p_bug_id, $p_user_id = null ) {
 	$t_summary = string_attribute( bug_get_field( $p_bug_id, 'summary' ) );
-	return '<a href="' . helper_mantis_url( string_get_bug_update_url( $p_bug_id, $p_user_id ) ) . '" title="' . $t_summary . '">' . bug_format_id( $p_bug_id ) . '</a>';
+	return '<a href="' . helper_mantis_url( string_get_bug_update_url( $p_bug_id ) ) . '" title="' . $t_summary . '">' . bug_format_id( $p_bug_id ) . '</a>';
 }
 
 /**
- * return the name and GET parameters of a bug UPDATE page for the given bug
- * account for the user preference and site override
+ * return the name and GET parameters of a bug UPDATE page
  * @param integer $p_bug_id  A bug identifier.
- * @param integer $p_user_id A valid user identifier.
  * @return string
  */
-function string_get_bug_update_url( $p_bug_id, $p_user_id = null ) {
+function string_get_bug_update_url( $p_bug_id ) {
 	return string_get_bug_update_page() . '?bug_id=' . $p_bug_id;
 }
 
