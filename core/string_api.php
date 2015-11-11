@@ -770,16 +770,14 @@ function string_get_bug_update_page( $p_user_id = null ) {
  * @return string
  */
 function string_get_bug_report_link( $p_user_id = null ) {
-	return '<a href="' . helper_mantis_url( string_get_bug_report_url( $p_user_id ) ) . '">' . lang_get( 'report_bug_link' ) . '</a>';
+	return '<a href="' . helper_mantis_url( string_get_bug_report_url() ) . '">' . lang_get( 'report_bug_link' ) . '</a>';
 }
 
 /**
- * return the name and GET parameters of a bug REPORT page for the given bug
- * account for the user preference and site override
- * @param integer $p_user_id A valid user identifier.
+ * return the name of a bug REPORT page
  * @return string
  */
-function string_get_bug_report_url( $p_user_id = null ) {
+function string_get_bug_report_url() {
 	return string_get_bug_report_page();
 }
 
