@@ -780,16 +780,14 @@ function string_get_bug_report_link( $p_user_id = null ) {
  * @return string
  */
 function string_get_bug_report_url( $p_user_id = null ) {
-	return string_get_bug_report_page( $p_user_id );
+	return string_get_bug_report_page();
 }
 
 /**
- * return the name of a bug REPORT page for the user
- * account for the user preference and site override
- * @param integer $p_user_id A valid user identifier.
+ * return the name of a bug REPORT page
  * @return string
  */
-function string_get_bug_report_page( $p_user_id = null ) {
+function string_get_bug_report_page() {
 	return string_get_bug_page( 'report' );
 }
 
