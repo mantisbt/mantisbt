@@ -721,16 +721,6 @@ function string_get_bug_view_url_with_fqdn( $p_bug_id ) {
 }
 
 /**
- * return the name of a bug VIEW page for the user
- * account for the user preference and site override
- * @param integer $p_user_id A valid user identifier.
- * @return string
- */
-function string_get_bug_view_page( $p_user_id = null ) {
-	return string_get_bug_page( 'view' );
-}
-
-/**
  * return an href anchor that links to a bug UPDATE page for the given bug
  * @param integer $p_bug_id  A bug identifier.
  * @return string
