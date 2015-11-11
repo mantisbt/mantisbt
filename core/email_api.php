@@ -601,7 +601,7 @@ function email_generic_to_recipients( $p_bug_id, $p_notify_type, array $p_recipi
 			lang_push( user_pref_get_language( $t_user_id, $t_project_id ) );
 
 			$t_visible_bug_data = email_build_visible_bug_data( $t_user_id, $p_bug_id, $p_message_id );
-			email_bug_info_to_one_user( $t_visible_bug_data, $p_message_id, $t_project_id, $t_user_id, $p_header_optional_params );
+			email_bug_info_to_one_user( $t_visible_bug_data, $p_message_id, $t_user_id, $p_header_optional_params );
 
 			lang_pop();
 		}
@@ -1225,12 +1225,11 @@ function email_bug_reminder( $p_recipients, $p_bug_id, $p_message ) {
  * return true on success
  * @param array   $p_visible_bug_data       Array of bug data information.
  * @param string  $p_message_id             A message identifier.
- * @param integer $p_project_id             A project identifier.
  * @param integer $p_user_id                A valid user identifier.
  * @param array   $p_header_optional_params Array of additional email headers.
  * @return void
  */
-function email_bug_info_to_one_user( array $p_visible_bug_data, $p_message_id, $p_project_id, $p_user_id, array $p_header_optional_params = null ) {
+function email_bug_info_to_one_user( array $p_visible_bug_data, $p_message_id, $p_user_id, array $p_header_optional_params = null ) {
 	$t_user_email = user_get_email( $p_user_id );
 
 	# check whether email should be sent
@@ -1243,7 +1242,6 @@ function email_bug_info_to_one_user( array $p_visible_bug_data, $p_message_id, $
 	$t_subject = email_build_subject( $p_visible_bug_data['email_bug'] );
 
 	# build message
-
 	$t_message = lang_get_defaulted( $p_message_id, null );
 
 	if( is_array( $p_header_optional_params ) ) {
