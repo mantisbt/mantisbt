@@ -432,7 +432,6 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 									string_get_bugnote_view_link(
 										$t_bug_id,
 										(int)$p_array[2],
-										null,
 										(boolean)$p_detail_info,
 										(boolean)$p_fqdn
 									);
@@ -643,15 +642,13 @@ function string_get_bug_view_link( $p_bug_id, $p_detail_info = true, $p_fqdn = f
 
 /**
  * return an href anchor that links to a bug VIEW page for the given bug
- * account for the user preference and site override
  * @param integer $p_bug_id      A bug identifier.
  * @param integer $p_bugnote_id  A bugnote identifier.
- * @param integer $p_user_id     A valid user identifier.
  * @param boolean $p_detail_info Whether to include more detailed information (e.g. title attribute / project) in the returned string.
  * @param boolean $p_fqdn        Whether to return an absolute or relative link.
  * @return string
  */
-function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_user_id = null, $p_detail_info = true, $p_fqdn = false ) {
+function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_detail_info = true, $p_fqdn = false ) {
 	$t_bug_id = (int)$p_bug_id;
 
 	if( bug_exists( $t_bug_id ) && bugnote_exists( $p_bugnote_id ) ) {
