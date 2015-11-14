@@ -757,14 +757,6 @@ function string_get_bug_report_link() {
  * @return string
  */
 function string_get_bug_report_url() {
-	return string_get_bug_report_page();
-}
-
-/**
- * return the name of a bug REPORT page
- * @return string
- */
-function string_get_bug_report_page() {
 	return string_get_bug_page( 'report' );
 }
 
