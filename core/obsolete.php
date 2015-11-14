@@ -191,3 +191,5 @@ config_obsolete( 'content_expire' );
 config_obsolete( 'use_javascript' );
 config_obsolete( 'recently_visited', 'recently_visited_count' );
 config_obsolete( 'email_set_category' );
+config_obsolete( 'font_per_captcha' );
+

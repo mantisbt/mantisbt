@@ -363,13 +363,6 @@ $g_signup_use_captcha	= ON;
 $g_system_font_folder	= '';
 
 /**
- * font name used to create the captcha image. i.e. arial.ttf
- * (the font file has to exist in the system_font_folder)
- * @global string $g_font_per_captcha
- */
-$g_font_per_captcha	= 'arial.ttf';
-
-/**
  * Setting to disable the 'lost your password' feature.
  * @global integer $g_lost_password_feature
  */
