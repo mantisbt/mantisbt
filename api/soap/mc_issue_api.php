@@ -1597,3 +1597,59 @@ function mci_issue_data_as_header_array( $p_issue_data ) {
 
 		return $t_issue;
 }
+
+/**
+ * Set Issue Handler
+ *
+ * @param string $p_username The name of the user trying to add the issue.
+ * @param string $p_password The password of the user.
+ * @param integer $p_issue_id 
+ * @param integer $p_handler_id 
+ * @return boolean
+ */
+function mc_issue_set_handler( $p_username, $p_password, $p_issue_id, $p_handler_id ) {
+	global $g_project_override;
+
+	$t_user_id = mci_check_login( $p_username, $p_password );
+	if( $t_user_id === false ) {
+		return mci_soap_fault_login_failed();
+	}
+
+	if( !bug_exists( $p_issue_id ) ) {
+		return SoapObjectsFactory::newSoapFault('Client', "Issue '$p_issue_id' does not exist.");
+	}
+
+	if( bug_is_readonly( $p_issue_id ) ) {
+		return SoapObjectsFactory::newSoapFault('Client', "Issue '$p_issue_id' is readonly");
+	}
+
+	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
+
+	if( !mci_has_readwrite_access( $t_user_id, $t_project_id ) ) {
+		return mci_soap_fault_access_denied( $t_user_id );
+	}
+
+	$g_project_override = $t_project_id; // ensure that helper_get_current_project() calls resolve to this project id
+
+    if( is_null($p_handler_id) && $p_handler_id <= 0) {
+		return SoapObjectsFactory::newSoapFault( 'Client', "Invalid Handler" );
+    }
+	$t_handler_id = intval($p_handler_id);
+    
+	if( !access_has_bug_level( config_get( 'update_bug_threshold' ), $p_issue_id, $t_user_id ) ) {
+		return mci_soap_fault_access_denied( $t_user_id,  "Not enough rights to update issues" );
+	}
+
+	$t_bug_data = bug_get( $p_issue_id, true );
+	$t_access_check_result = mci_issue_handler_access_check( $t_user_id, $t_project_id, /* old */ $t_bug_data->handler_id, /* new */ $t_handler_id );
+	if( $t_access_check_result !== true ) {
+		return $t_access_check_result;
+	}
+
+	$t_bug_data->handler_id = $t_handler_id;
+
+	# update the issue
+	return $t_is_success = $t_bug_data->update( /* update_extended */ true, /* bypass_email */ false);
+}
+
+
