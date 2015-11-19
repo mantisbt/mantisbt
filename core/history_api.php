@@ -213,7 +213,7 @@ function history_get_range_result( $p_bug_id = null, $p_start_time = null, $p_en
 		$t_query .= ' WHERE ' . implode( ' AND ', $t_where );
 	}
 
-	$t_query .= ' ORDER BY date_modified ' . $t_history_order . ',id';
+	$t_query .= ' ORDER BY date_modified ' . $t_history_order . ',id ' . $t_history_order;
 
 	$t_result = db_query( $t_query, $t_params );
 
