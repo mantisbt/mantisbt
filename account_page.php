@@ -86,11 +86,18 @@ current_user_ensure_unprotected();
 
 html_page_top( lang_get( 'account_link' ) );
 
+$t_user_id = auth_get_current_user_id();
+
 # extracts the user information for the currently logged in user
 # and prefixes it with u_
-$t_row = user_get_row( auth_get_current_user_id() );
+$t_row = user_get_row( $t_user_id );
 
 extract( $t_row, EXTR_PREFIX_ALL, 'u' );
+
+if ( is_blank( $u_token ) ) {
+	$u_token = auth_generate_secret_token();
+	user_set_field( $t_user_id, 'token', $u_token );
+}
 
 $t_ldap = ( LDAP == config_get( 'login_method' ) );
 
@@ -229,6 +236,15 @@ if( $t_force_pw_reset ) {
 				<span class="input"><span class="field-value"><?php echo get_enum_element( 'access_levels', current_user_get_access_level() ); ?></span></span>
 				<span class="label-style"></span>
 			</div>
+			<div class="field-container">
+				<span class="display-label">
+					<span>
+						<?php echo lang_get( 'user_token' ) . '<br />' . lang_get( 'user_token_description' ); ?>
+					</span>
+				</span>
+				<span class="input"><span class="field-value"><?php echo $u_token; ?></span></span>
+				<span class="label-style"></span>
+			</div>
 			<?php
 			$t_projects = user_get_assigned_projects( auth_get_current_user_id() );
 			if( count( $t_projects ) > 0 ) {
@@ -257,18 +273,25 @@ if( $t_force_pw_reset ) {
 		</fieldset>
 	</form>
 </div>
+
+<div class="form-container">
+	<fieldset>
+	<span class="submit-button">
+<form method="post" action="account_revoke_token.php">
+		<?php echo form_security_field( 'account_revoke_token' ) ?>
+		<input type="submit" class="button" value="<?php echo lang_get( 'revoke_token_button' ) ?>" />
+</form>
+
 <?php # check if users can't delete their own accounts
 if( ON == config_get( 'allow_account_delete' ) ) { ?>
-
-<!-- Delete Button -->
-<div class="form-container">
+	<!-- Delete Button -->
 	<form method="post" action="account_delete.php">
-		<fieldset>
 			<?php echo form_security_field( 'account_delete' ) ?>
-			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'delete_account_button' ) ?>" /></span>
-		</fieldset>
+			<input type="submit" class="button" value="<?php echo lang_get( 'delete_account_button' ) ?>" />
 	</form>
-</div>
 <?php
 }
+
+echo '</span></fieldset></div>';
+
 html_page_bottom();
