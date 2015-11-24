@@ -565,13 +565,10 @@ function db_result( $p_result, $p_index1 = 0, $p_index2 = 0 ) {
 		$p_result->Move( $p_index1 );
 		$t_result = $p_result->GetArray();
 
-		if( isset( $t_result[0][$p_index2] ) ) {
-			return $t_result[0][$p_index2];
-		}
-
-		# The numeric index doesn't exist. FETCH_MODE_ASSOC may have been used.
-		# Get 2nd dimension and make it numerically indexed
+		# Make the array numerically indexed. This is required to retrieve the
+		# column ($p_index2), since we use ADODB_FETCH_ASSOC fetch mode.
 		$t_result = array_values( $t_result[0] );
+
 		return $t_result[$p_index2];
 	}
 
