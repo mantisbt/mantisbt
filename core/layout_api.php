@@ -88,6 +88,8 @@ function layout_page_header_begin( $p_page_title = null ) {
 	# Advertise the availability of the browser search plug-ins.
 	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Text Search" href="' . string_sanitize_url( 'browser_search_plugin.php?type=text', true ) . '" />' . "\n";
 	echo "\t", '<link rel="search" type="application/opensearchdescription+xml" title="MantisBT: Issue Id" href="' . string_sanitize_url( 'browser_search_plugin.php?type=id', true ) . '" />' . "\n";
+
+	html_head_javascript();
 }
 
 /**
@@ -164,8 +166,6 @@ function layout_page_end( $p_file = null ) {
 	layout_scroll_up_button();
 
 	layout_main_container_end();
-
-	html_base_javascripts();
 	layout_body_javascript();
 
 	html_body_end();
@@ -191,8 +191,6 @@ function layout_admin_page_end() {
 	layout_scroll_up_button();
 
 	layout_main_container_end();
-
-	html_base_javascripts();
 	layout_body_javascript();
 
 	html_body_end();
@@ -342,7 +340,6 @@ function layout_login_page_end() {
 	echo '</div>';
 	layout_main_content_end();
 	layout_main_container_end();
-	html_base_javascripts();
 	layout_body_javascript();
 
 	echo '</body>', "\n";

@@ -561,7 +561,6 @@ $t_bugnotes = bugnote_get_all_visible_bugnotes( $t_id, $t_user_bugnote_order, $t
 	} # end in_array
 }  # end main loop
 
-html_base_javascripts();
 layout_body_javascript();
 html_body_end();
 html_end();
