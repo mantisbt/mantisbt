@@ -87,10 +87,8 @@ if( $t_show_sponsorships ) {
 		<td width="50" rowspan="3">
 			<img src="images/dollars.gif" alt="<?php echo lang_get( 'sponsor_verb' ) ?>" />
 		</td>
-		<td class="bold" colspan="2">
-		<?php
+		<td class="form-title" colspan="2"><?php
 			collapse_icon( 'sponsorship' );
-
 			echo lang_get( 'users_sponsoring_bug' );
 
 			$t_details_url = lang_get( 'sponsorship_process_url' );
@@ -162,8 +160,7 @@ if( $t_show_sponsorships ) {
 
 <table class="width100" cellspacing="1">
 	<tr>
-		<td class="bold">
-<?php
+		<td class="form-title"><?php
 			collapse_icon( 'sponsorship' );
 			echo lang_get( 'users_sponsoring_bug' );
 

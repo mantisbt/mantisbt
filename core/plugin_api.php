@@ -706,7 +706,7 @@ function plugin_install( MantisPlugin $p_plugin ) {
 function plugin_needs_upgrade( MantisPlugin $p_plugin ) {
 	plugin_push_current( $p_plugin->name );
 	$t_plugin_schema = $p_plugin->schema();
-	plugin_pop_current( $p_plugin->name );
+	plugin_pop_current();
 	if( is_null( $t_plugin_schema ) ) {
 		return false;
 	}

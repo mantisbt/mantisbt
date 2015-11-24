@@ -1260,5 +1260,10 @@ function html_buttons_view_bug_page( $p_bug_id ) {
  * Build CSS including project or even user-specific colors ?
  */
 function html_get_status_css_class( $p_status, $p_user = null, $p_project = null ) {
-	return string_attribute( MantisEnum::getLabel( config_get( 'status_enum_string', null, $p_user, $p_project ), $p_status ) . '-color' );
+	$t_status_enum = config_get( 'status_enum_string', null, $p_user, $p_project );
+	if( MantisEnum::hasValue( $t_status_enum, $p_status ) ) {
+		return 'status-' . $p_status . '-color';
+	} else {
+		return '';
+	}
 }

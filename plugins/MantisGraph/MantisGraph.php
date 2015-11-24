@@ -87,7 +87,7 @@ class MantisGraphPlugin extends MantisPlugin  {
 		$t_hooks = array(
 			'EVENT_MENU_SUMMARY' => 'summary_menu',
 			'EVENT_SUBMENU_SUMMARY' => 'summary_submenu',
-			'EVENT_MENU_FILTER' => 'graph_filter_menu',
+			'EVENT_MENU_FILTER' => 'graph_filter_menu'
 		);
 		return $t_hooks;
 	}
@@ -105,7 +105,11 @@ class MantisGraphPlugin extends MantisPlugin  {
 	 * @return array
 	 */
 	function graph_filter_menu() {
-		return array( '<a class="btn btn-sm btn-primary btn-white btn-round" href="' . plugin_page( 'bug_graph_page.php' ) . '">' . plugin_lang_get( 'graph_bug_page_link' ) . '</a>', );
+		if( access_has_project_level( config_get( 'view_summary_threshold' ) ) ) {
+			return array( '<a class="btn btn-sm btn-primary btn-white btn-round" href="' . plugin_page( 'bug_graph_page.php' ) . '">' . plugin_lang_get( 'graph_bug_page_link' ) . '</a>', );
+		} else {
+			return '';
+		}
 	}
 
 	/**

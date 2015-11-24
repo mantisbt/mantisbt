@@ -872,9 +872,9 @@ $MANTIS_ERROR[ERROR_EMAIL_DISPOSABLE] = 'Adräße för <i lang="en">e-mail</i>, 
 $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Profihl nit jefonge.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'Di Zoot Dattei es för et Huhlaade nit zohjelohße.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Di Dattei es dubbelt. Beß esu joot, un donn di Dattei eetß fottschmiiße.';
-$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Dä Pat för de Dattei huhzelaade wohr verkieht. Dat Verzeijschneß fäählt, udder uns Webßööver kunnt nit dren schriive.';
+$MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Dä Pat för de Dattei huhzelaade wohr verkihrt. Dat Verzeijschneß fäält, udder ons Webßööver kunnt nit dren schriive.';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Kein Dattei wohd huhjelaade, jangk retuur un söhk en Dattei uß, ih dat De „Huhlaade“ ußwählß.';
-$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'De huhjelaade Dattei kunnt nit en et Verzeijschneß för se op Duur dren ze shpeijschere jeschovve wääde. Dat Verzeijschneß fäählt, udder uns Webßööver kunnt nit dren schriive.';
+$MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Di huhjelaade Dattei kunnt nit en et Verzeijschneß för se op Duur dren ze schpeijschere jeschovve wääde. Dat Verzeijschneß fäält, udder ons Wäbßööver kunnt nit dren schrihve.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Do kanns en Aanjelääjeheit nit als e Dubbel vun sesh sellver enndraare';
 $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Dä Shtand vun dä Aanjelääjeheit ham_mer nit jefonge.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Dat selfsjemaate Daate_Feld ham_mer nit jefonge.';
