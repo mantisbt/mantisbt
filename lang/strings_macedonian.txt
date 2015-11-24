@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -883,6 +883,7 @@ $s_recently_visited = 'Неодамна посетени';
 $s_priority_abbreviation = 'П';
 $s_note_user_id_label = 'Белешка од:';
 $s_filter_match_type = 'Тип на совпаѓање';
+$s_filter_match_type_label = 'Тип на совпаѓање:';
 $s_filter_match_all = 'Сите услови';
 $s_filter_match_any = 'Било кој услов';
 $s_none = 'нема';
@@ -1206,7 +1207,7 @@ $s_timeline_issue_assigned = '<span class="username">%1$s</span> го додел
 $s_timeline_issue_assigned_to_self = '<span class="username">%1$s</span> го презеде проблемот <span class="issue_id">%2$s</span>';
 $s_timeline_issue_unassigned = '<span class="username">%1$s</span> недоделен проблем <span class="issue_id">%2$s</span>';
 $s_timeline_no_activity = 'Нема активности во овој временски опсег.';
-$s_timeline_title = 'Хронологија';
+$s_timeline_title = 'Времеслед';
 $s_timeline_more = 'Уште настани...';
 $s_missing_error_string = 'Отсутна низа за гршека: %1$s';
 $MANTIS_ERROR[ERROR_GENERIC] = 'Се појави грешка за време на ова дејство. Ви препорачуваме да ја пријавите кај вашиот месен администратор.';
@@ -1300,7 +1301,7 @@ $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'Тарабниот код з
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = 'Функцијата за изгубена лозинка е недостапна.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'Мора да наведете е-поштенска адреса за да можете да ја смените лозинката.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = 'Наведените податоци не се совпаѓаат со ниедна регистрирана сметка!';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Потврдната URL-адреса е неважечка или веќе е искористена. Регистрирајте се одново.';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = 'Потврдната URL е неважечка или веќе е искористена. Регистрирајте се одново.';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'Достигнат е максималниот дозволен број на барања во тек. Контактирајте го систем-администраторот.';
 $MANTIS_ERROR[ERROR_PROJECT_RECURSIVE_HIERARCHY] = 'Таа операција би довела до јазол во потпроектната хиерархија.';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = 'Не можете да ја отстраните или обесправите последната администраторска сметка. Ова може да се направи само ако прво создадете друга администраторска сметка.';

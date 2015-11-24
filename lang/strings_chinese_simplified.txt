@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -224,7 +224,7 @@ $s_new_account_greeting = '谢谢你注册本系统. 你的登陆帐号名称是
 $s_new_account_greeting_admincreated = '用户%1$s为你创建了用户名为"%2$s"的帐号. 请访问下面的地址以完成你的注册并设置自己的访问密码:';
 $s_new_account_username = '用户名：';
 $s_new_account_message = '如果你从未申请过注册本系统，请忽略此消息';
-$s_new_account_do_not_reply = '此邮件由系统自动生成，请勿回复';
+$s_new_account_do_not_reply = '请不要回复此消息';
 $s_new_account_email = '电子邮箱:';
 $s_new_account_IP = 'IP 地址:';
 $s_new_account_signup_msg = '已创建如下账号：';
@@ -739,7 +739,7 @@ $s_show_all_users = '全部';
 $s_users_unused = '未用';
 $s_users_new = '新的';
 $s_account_reset_protected_msg = '帐号受保护，不能重置密码。';
-$s_account_reset_msg = '确认邮件已经发往你的邮箱...';
+$s_account_reset_msg = '一封确认请求已发往选定用户的电子邮件地址。通过使用它，用户将可以更改他们的密码。';
 $s_account_reset_msg2 = '账号密码已经置为空...';
 $s_account_unlock_msg = '该帐户已解锁。';
 $s_manage_user_protected_msg = '帐号受保护；“用户级别”和“是否启用”信息不能修改；其他信息已成功更新。';
@@ -846,7 +846,7 @@ $s_save_settings_button = '保存设置';
 $s_site_settings_title = '站点设置';
 $s_system_info_link = '系统信息';
 $s_site_settings_link = '站点设置';
-$s_site_settings_updated_msg = '站点设置已经被更新。';
+$s_site_settings_updated_msg = '网站设置已更新';
 $s_summary_title = '统计报表';
 $s_summary_advanced_link = '图形报表';
 $s_by_project = '按项目';
@@ -894,6 +894,7 @@ $s_issue_id = '问题 #';
 $s_recently_visited = '最近浏览的';
 $s_note_user_id_label = '注释自：';
 $s_filter_match_type = '匹配类型';
+$s_filter_match_type_label = '匹配类型：';
 $s_filter_match_all = '所有情况';
 $s_filter_match_any = '任何情况';
 $s_none = '无';
@@ -1246,7 +1247,7 @@ $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = '项目名称无效，项目名称�
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = '用户名 "%1$s" 无法找到。';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = '用户ID "%1$d" 无法找到。';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = '浏览器储存的登录资料无效；也许你的帐号已经被删除了？';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = '没有找到帐号的配置信息';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = '找不到此用户的参数设置。';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = '没有找到新闻。';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = '密码与核证结果不匹配';
 $MANTIS_ERROR[ERROR_USER_CURRENT_PASSWORD_MISMATCH] = '当前密码不正确。';

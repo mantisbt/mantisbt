@@ -1114,10 +1114,14 @@ function custom_field_distinct_values( array $p_field_def, $p_project_id = ALL_P
  */
 function custom_field_value_to_database( $p_value, $p_type ) {
 	global $g_custom_field_type_definition;
+
+	$t_value = $p_value;
+
 	if( isset( $g_custom_field_type_definition[$p_type]['#function_value_to_database'] ) ) {
-		return call_user_func( $g_custom_field_type_definition[$p_type]['#function_value_to_database'], $p_value );
+		$t_value = call_user_func( $g_custom_field_type_definition[$p_type]['#function_value_to_database'], $p_value );
 	}
-	return $p_value;
+
+	return $t_value === null ? '' : $t_value;
 }
 
 /**

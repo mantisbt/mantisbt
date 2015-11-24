@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -904,6 +904,7 @@ $s_recently_visited = 'Visité récemment';
 $s_priority_abbreviation = 'P';
 $s_note_user_id_label = 'Note par :';
 $s_filter_match_type = 'Type de correspondance';
+$s_filter_match_type_label = 'Type de correspondance:';
 $s_filter_match_all = 'Toutes les conditions';
 $s_filter_match_any = 'N\'importe quelle condition';
 $s_none = 'aucun';

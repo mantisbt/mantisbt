@@ -30,7 +30,7 @@
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Portuguese (português)
+/** Asturian (asturianu)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -38,15 +38,28 @@
  * @ingroup Language
  * @file
  *
- * @author Hamilton Abreu
+ * @author Xuacu
  */
 
-$s_plugin_format_title = 'Formatação do MantisBT';
-$s_plugin_format_description = '\'\'Plugin\'\' oficial de processamento e formatação de texto';
-$s_plugin_format_config = 'Configuração';
-$s_plugin_format_process_text = 'Processamento de Texto';
-$s_plugin_format_process_text_warning_notice = 'Não desligue, a menos que estejo certo do que faz. Quando desligado, tornam-se possíveis ataques de \'\'cross site scripting\'\' (XSS).';
-$s_plugin_format_process_urls = 'Processamento de URL';
-$s_plugin_format_process_buglinks = 'Ligações do MantisBT ( Caso/Anotação )';
-$s_plugin_format_enabled = 'Ligado';
-$s_plugin_format_disabled = 'Desligado';
+$s_plugin_XmlImportExport_title = 'Importar/Esportar incidencies';
+$s_plugin_XmlImportExport_description = 'Amiesta a MantisBT capacidaes d\'importación y esportación basaes en XML.';
+$s_plugin_XmlImportExport_import = 'Importar incidencies';
+$s_plugin_XmlImportExport_export = 'Esportar XML';
+$s_plugin_XmlImportExport_config_title = 'Configuración de niveles d\'accesu d\'importación/esportación de XML';
+$s_plugin_XmlImportExport_import_threshold = 'Importar incidencies';
+$s_plugin_XmlImportExport_export_threshold = 'Esportar incidencies';
+$s_plugin_XmlImportExport_action_update = 'Anovar';
+$s_plugin_XmlImportExport_importing_in_project = 'Importando les incidencies nel proyeutu:';
+$s_plugin_XmlImportExport_import_options = 'Opciones d\'importación';
+$s_plugin_XmlImportExport_cross_references = 'Referencies cruciaes';
+$s_plugin_XmlImportExport_default_strategy = 'Estratexa de conversión predeterminada:';
+$s_plugin_XmlImportExport_renumber = 'Renumberar';
+$s_plugin_XmlImportExport_renumber_desc = 'Intentar convertir les referencies a la nueva numberación';
+$s_plugin_XmlImportExport_link = 'Enllaz';
+$s_plugin_XmlImportExport_link_desc = 'Convertir nun enllaz al elementu orixinal';
+$s_plugin_XmlImportExport_disable = 'Desactivar';
+$s_plugin_XmlImportExport_disable_desc = 'Desactivar l\'enllaz';
+$s_plugin_XmlImportExport_fallback = 'Estratexa alternativa (cuando nun s\'aplique "Renumberar"):';
+$s_plugin_XmlImportExport_fallback_category = 'Categoría alternativa:';
+$s_plugin_XmlImportExport_keep_same_category = 'Intentar caltener la mesma categoría';
+$s_plugin_XmlImportExport_error_no_xml = 'nun se pudieron alcontrar les estensiones xmlreader y xmlwriter';

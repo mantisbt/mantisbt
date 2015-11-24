@@ -353,7 +353,6 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 							return $p_array[1] .
 								string_get_bug_view_link(
 									(int)$p_array[2],
-									null,
 									(boolean)$p_detail_info,
 									(boolean)$p_fqdn
 								);
@@ -367,7 +366,7 @@ function string_process_bug_link( $p_string, $p_include_anchor = true, $p_detail
 					if( bug_exists( (int)$p_array[2] ) ) {
 						# Create link regardless of user's access to the bug
 						return $p_array[1] .
-							string_get_bug_view_url_with_fqdn( (int)$p_array[2], null );
+							string_get_bug_view_url_with_fqdn( (int)$p_array[2] );
 					}
 					return $p_array[0];
 				}; # end of bug link callback closure
@@ -433,7 +432,6 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 									string_get_bugnote_view_link(
 										$t_bug_id,
 										(int)$p_array[2],
-										null,
 										(boolean)$p_detail_info,
 										(boolean)$p_fqdn
 									);
@@ -449,7 +447,7 @@ function string_process_bugnote_link( $p_string, $p_include_anchor = true, $p_de
 					$t_bug_id = bugnote_get_field( (int)$p_array[2], 'bug_id' );
 					if( $t_bug_id && bug_exists( $t_bug_id ) ) {
 						return $p_array[1] .
-							string_get_bugnote_view_url_with_fqdn( $t_bug_id, (int)$p_array[2], null );
+							string_get_bugnote_view_url_with_fqdn( $t_bug_id, (int)$p_array[2] );
 					} else {
 						return $p_array[0];
 					}
@@ -589,15 +587,12 @@ function string_restore_valid_html_tags( $p_string, $p_multiline = true ) {
 }
 
 /**
- * return the name of a bug page for the user
- * account for the user preference and site override
+ * return the name of a bug page
  * $p_action should be something like 'view', 'update', or 'report'
- * If $p_user_id is null or not specified, use the current user
  * @param string  $p_action  A valid action being performed - currently one of view, update or report.
- * @param integer $p_user_id A valid user identifier.
  * @return string
  */
-function string_get_bug_page( $p_action, $p_user_id = null ) {
+function string_get_bug_page( $p_action ) {
 	switch( $p_action ) {
 		case 'view':
 			return 'bug_view_page.php';
@@ -612,14 +607,12 @@ function string_get_bug_page( $p_action, $p_user_id = null ) {
 
 /**
  * return an href anchor that links to a bug VIEW page for the given bug
- * account for the user preference and site override
  * @param integer $p_bug_id	     A bug identifier.
- * @param integer $p_user_id     A valid user identifier.
  * @param boolean $p_detail_info Whether to include more detailed information (e.g. title attribute / project) in the returned string.
  * @param boolean $p_fqdn        Whether to return an absolute or relative link.
  * @return string
  */
-function string_get_bug_view_link( $p_bug_id, $p_user_id = null, $p_detail_info = true, $p_fqdn = false ) {
+function string_get_bug_view_link( $p_bug_id, $p_detail_info = true, $p_fqdn = false ) {
 	if( bug_exists( $p_bug_id ) ) {
 		$t_link = '<a href="';
 		if( $p_fqdn ) {
@@ -627,7 +620,7 @@ function string_get_bug_view_link( $p_bug_id, $p_user_id = null, $p_detail_info 
 		} else {
 			$t_link .= config_get_global( 'short_path' );
 		}
-		$t_link .= string_get_bug_view_url( $p_bug_id, $p_user_id ) . '"';
+		$t_link .= string_get_bug_view_url( $p_bug_id ) . '"';
 		if( $p_detail_info ) {
 			$t_summary = string_attribute( bug_get_field( $p_bug_id, 'summary' ) );
 			$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
@@ -649,15 +642,13 @@ function string_get_bug_view_link( $p_bug_id, $p_user_id = null, $p_detail_info 
 
 /**
  * return an href anchor that links to a bug VIEW page for the given bug
- * account for the user preference and site override
  * @param integer $p_bug_id      A bug identifier.
  * @param integer $p_bugnote_id  A bugnote identifier.
- * @param integer $p_user_id     A valid user identifier.
  * @param boolean $p_detail_info Whether to include more detailed information (e.g. title attribute / project) in the returned string.
  * @param boolean $p_fqdn        Whether to return an absolute or relative link.
  * @return string
  */
-function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_user_id = null, $p_detail_info = true, $p_fqdn = false ) {
+function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_detail_info = true, $p_fqdn = false ) {
 	$t_bug_id = (int)$p_bug_id;
 
 	if( bug_exists( $t_bug_id ) && bugnote_exists( $p_bugnote_id ) ) {
@@ -668,7 +659,7 @@ function string_get_bugnote_view_link( $p_bug_id, $p_bugnote_id, $p_user_id = nu
 			$t_link .= config_get_global( 'short_path' );
 		}
 
-		$t_link .= string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id, $p_user_id ) . '"';
+		$t_link .= string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id ) . '"';
 		if( $p_detail_info ) {
 			$t_reporter = string_attribute( user_get_name( bugnote_get_field( $p_bugnote_id, 'reporter_id' ) ) );
 			$t_update_date = string_attribute( date( config_get( 'normal_date_format' ), ( bugnote_get_field( $p_bugnote_id, 'last_modified' ) ) ) );
@@ -709,11 +700,10 @@ function string_get_bugnote_view_url( $p_bug_id, $p_bugnote_id ) {
  * in emails.
  * @param integer $p_bug_id     A bug identifier.
  * @param integer $p_bugnote_id A bug note identifier.
- * @param integer $p_user_id    A valid user identifier.
  * @return string
  */
-function string_get_bugnote_view_url_with_fqdn( $p_bug_id, $p_bugnote_id, $p_user_id = null ) {
-	return config_get( 'path' ) . string_get_bug_view_url( $p_bug_id, $p_user_id ) . '#c' . $p_bugnote_id;
+function string_get_bugnote_view_url_with_fqdn( $p_bug_id, $p_bugnote_id ) {
+	return config_get( 'path' ) . string_get_bug_view_url( $p_bug_id ) . '#c' . $p_bugnote_id;
 }
 
 /**
@@ -721,84 +711,53 @@ function string_get_bugnote_view_url_with_fqdn( $p_bug_id, $p_bugnote_id, $p_use
  * account for the user preference and site override
  * The returned url includes the fully qualified domain, hence it is suitable to be included in emails.
  * @param integer $p_bug_id  A bug identifier.
- * @param integer $p_user_id A valid user identifier.
  * @return string
  */
-function string_get_bug_view_url_with_fqdn( $p_bug_id, $p_user_id = null ) {
-	return config_get( 'path' ) . string_get_bug_view_url( $p_bug_id, $p_user_id );
-}
-
-/**
- * return the name of a bug VIEW page for the user
- * account for the user preference and site override
- * @param integer $p_user_id A valid user identifier.
- * @return string
- */
-function string_get_bug_view_page( $p_user_id = null ) {
-	return string_get_bug_page( 'view', $p_user_id );
+function string_get_bug_view_url_with_fqdn( $p_bug_id ) {
+	return config_get( 'path' ) . string_get_bug_view_url( $p_bug_id );
 }
 
 /**
  * return an href anchor that links to a bug UPDATE page for the given bug
- * account for the user preference and site override
  * @param integer $p_bug_id  A bug identifier.
- * @param integer $p_user_id A valid user identifier.
  * @return string
  */
-function string_get_bug_update_link( $p_bug_id, $p_user_id = null ) {
+function string_get_bug_update_link( $p_bug_id ) {
 	$t_summary = string_attribute( bug_get_field( $p_bug_id, 'summary' ) );
-	return '<a href="' . helper_mantis_url( string_get_bug_update_url( $p_bug_id, $p_user_id ) ) . '" title="' . $t_summary . '">' . bug_format_id( $p_bug_id ) . '</a>';
+	return '<a href="' . helper_mantis_url( string_get_bug_update_url( $p_bug_id ) ) . '" title="' . $t_summary . '">' . bug_format_id( $p_bug_id ) . '</a>';
 }
 
 /**
- * return the name and GET parameters of a bug UPDATE page for the given bug
- * account for the user preference and site override
+ * return the name and GET parameters of a bug UPDATE page
  * @param integer $p_bug_id  A bug identifier.
- * @param integer $p_user_id A valid user identifier.
  * @return string
  */
-function string_get_bug_update_url( $p_bug_id, $p_user_id = null ) {
-	return string_get_bug_update_page( $p_user_id ) . '?bug_id=' . $p_bug_id;
+function string_get_bug_update_url( $p_bug_id ) {
+	return string_get_bug_update_page() . '?bug_id=' . $p_bug_id;
 }
 
 /**
- * return the name of a bug UPDATE page for the user
- * account for the user preference and site override
- * @param integer $p_user_id A valid user identifier.
+ * return the name of a bug UPDATE page
  * @return string
  */
-function string_get_bug_update_page( $p_user_id = null ) {
-	return string_get_bug_page( 'update', $p_user_id );
+function string_get_bug_update_page() {
+	return string_get_bug_page( 'update' );
 }
 
 /**
- * return an href anchor that links to a bug REPORT page for the given bug
- * account for the user preference and site override
- * @param integer $p_user_id A valid user identifier.
+ * return an href anchor that links to a bug REPORT page
  * @return string
  */
-function string_get_bug_report_link( $p_user_id = null ) {
-	return '<a href="' . helper_mantis_url( string_get_bug_report_url( $p_user_id ) ) . '">' . lang_get( 'report_bug_link' ) . '</a>';
+function string_get_bug_report_link() {
+	return '<a href="' . helper_mantis_url( string_get_bug_report_url() ) . '">' . lang_get( 'report_bug_link' ) . '</a>';
 }
 
 /**
- * return the name and GET parameters of a bug REPORT page for the given bug
- * account for the user preference and site override
- * @param integer $p_user_id A valid user identifier.
+ * return the name of a bug REPORT page
  * @return string
  */
-function string_get_bug_report_url( $p_user_id = null ) {
-	return string_get_bug_report_page( $p_user_id );
-}
-
-/**
- * return the name of a bug REPORT page for the user
- * account for the user preference and site override
- * @param integer $p_user_id A valid user identifier.
- * @return string
- */
-function string_get_bug_report_page( $p_user_id = null ) {
-	return string_get_bug_page( 'report', $p_user_id );
+function string_get_bug_report_url() {
+	return string_get_bug_page( 'report' );
 }
 
 /**

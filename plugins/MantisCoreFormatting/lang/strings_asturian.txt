@@ -30,7 +30,7 @@
  * ** http://www.mantisbt.org/wiki/doku.php/mantisbt:translationshowto **
  * **********************************************************************
  */
-/** Portuguese (português)
+/** Asturian (asturianu)
  * 
  * See the qqq 'language' for message documentation incl. usage of parameters
  * To improve a translation please visit http://translatewiki.net
@@ -38,15 +38,16 @@
  * @ingroup Language
  * @file
  *
- * @author Hamilton Abreu
+ * @author Xuacu
  */
 
-$s_plugin_format_title = 'Formatação do MantisBT';
-$s_plugin_format_description = '\'\'Plugin\'\' oficial de processamento e formatação de texto';
-$s_plugin_format_config = 'Configuração';
-$s_plugin_format_process_text = 'Processamento de Texto';
-$s_plugin_format_process_text_warning_notice = 'Não desligue, a menos que estejo certo do que faz. Quando desligado, tornam-se possíveis ataques de \'\'cross site scripting\'\' (XSS).';
-$s_plugin_format_process_urls = 'Processamento de URL';
-$s_plugin_format_process_buglinks = 'Ligações do MantisBT ( Caso/Anotação )';
-$s_plugin_format_enabled = 'Ligado';
-$s_plugin_format_disabled = 'Desligado';
+$s_plugin_format_title = 'Formatu de MantisBT';
+$s_plugin_format_description = 'Complementu oficial de procesamientu y formatu de testu.';
+$s_plugin_format_config = 'Configuración';
+$s_plugin_format_process_text = 'Procesamientu de testu';
+$s_plugin_format_process_text_warning_notice = 'Nun desactive esto si nun sabe realmente lo que ta faciendo. Nel estáu desactiváu, son posibles los ataques de scripts cruzaos ente sitios web (XSS).';
+$s_plugin_format_process_urls = 'Procesamientu de URL';
+$s_plugin_format_process_buglinks = 'Enllaces internos MantisBT (Incidencies y Notes d\'incidencies)';
+$s_plugin_format_process_buglinks_info = 'La to configuración define la etiqueta <em>Incidencia</em> como "<literal>%s</literal>" y la etiqueta <em>Nota</em> como "<literal>%s</literal>"';
+$s_plugin_format_enabled = 'Activáu';
+$s_plugin_format_disabled = 'Desactiváu';

@@ -669,11 +669,9 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 	if( 'bug' == $p_table ) {
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 		$t_id = (int)$p_bug_id;
-		$t_bug_id = bug_format_id( $p_bug_id );
 	} else {
 		$t_project_id = helper_get_current_project();
 		$t_id = $t_project_id;
-		$t_bug_id = 0;
 	}
 
 	if( $p_user_id === null ) {

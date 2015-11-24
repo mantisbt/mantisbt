@@ -276,12 +276,7 @@ $t_custom_fields_to_set = array();
 foreach ( $t_related_custom_field_ids as $t_cf_id ) {
 	$t_cf_def = custom_field_get_definition( $t_cf_id );
 
-	# if this is not a full update action and custom field is not on the form, then don't
-	# continue with code that checks access level and validates the field.
-	if ( $f_update_type != BUG_UPDATE_TYPE_NORMAL && !custom_field_is_present( $t_cf_id ) ) {
-		continue;
-	}
-
+	# If the custom field is not set and is required, then complain!
 	if( !gpc_isset_custom_field( $t_cf_id, $t_cf_def['type'] ) ) {
 		if( $t_cf_def[$t_cf_require_check] &&
 			$f_update_type == BUG_UPDATE_TYPE_NORMAL &&
@@ -293,11 +288,16 @@ foreach ( $t_related_custom_field_ids as $t_cf_id ) {
 		}
 	}
 
+	# Otherwise, if not present then skip it.
+	if ( !custom_field_is_present( $t_cf_id ) ) {
+		continue;
+	}
+
 	if( !custom_field_has_write_access( $t_cf_id, $f_bug_id ) ) {
 		trigger_error( ERROR_ACCESS_DENIED, ERROR );
 	}
 
-	$t_new_custom_field_value = gpc_get_custom_field( 'custom_field_' . $t_cf_id, $t_cf_def['type'], null );
+	$t_new_custom_field_value = gpc_get_custom_field( 'custom_field_' . $t_cf_id, $t_cf_def['type'], '' );
 	$t_old_custom_field_value = custom_field_get_value( $t_cf_id, $f_bug_id );
 
 	# Validate the value of the field against current validation rules.

@@ -194,4 +194,4 @@ config_obsolete( 'email_set_category' );
 config_obsolete( 'show_footer_menu' );
 config_obsolete( 'status_legend_position' );
 config_obsolete( 'status_percentage_legend' );
-
+config_obsolete( 'font_per_captcha' );

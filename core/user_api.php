@@ -548,7 +548,7 @@ function user_create( $p_username, $p_password, $p_email = '',
 	# Send notification email
 	if( !is_blank( $p_email ) ) {
 		$t_confirm_hash = auth_generate_confirm_hash( $t_user_id );
-		email_signup( $t_user_id, $p_password, $t_confirm_hash, $p_admin_name );
+		email_signup( $t_user_id, $t_confirm_hash, $p_admin_name );
 	}
 
 	return $t_cookie_string;

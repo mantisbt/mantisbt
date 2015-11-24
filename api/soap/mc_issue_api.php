@@ -391,7 +391,6 @@ function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
 function mci_issue_get_notes( $p_issue_id ) {
 	$t_user_id = auth_get_current_user_id();
 	$t_lang = mci_get_user_lang( $t_user_id );
-	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 	$t_user_bugnote_order = 'ASC'; # always get the notes in ascending order for consistency to the calling application.
 	$t_has_time_tracking_access = access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $p_issue_id );
 
@@ -1731,8 +1730,6 @@ function mc_issues_get_header( $p_username, $p_password, $p_issue_ids ) {
         return mci_soap_fault_login_failed();
     }
 
-    $t_lang = mci_get_user_lang( $t_user_id );
-
     $t_result = array();
     foreach( $p_issue_ids as $t_id ) {
 
@@ -1742,7 +1739,7 @@ function mc_issues_get_header( $p_username, $p_password, $p_issue_ids ) {
         log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $t_id . '\'' );
 
         $t_issue_data = bug_get( $t_id, true );
-        $t_result[] = mci_issue_data_as_header_array( $t_issue_data, $t_user_id, $t_lang );
+        $t_result[] = mci_issue_data_as_header_array( $t_issue_data );
     }
 
     return $t_result;
