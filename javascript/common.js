@@ -151,7 +151,7 @@ $(document).ready( function() {
 				delete this.timerID;
 			}
 		}
-	}
+	};
 	$('input[type=button].stopwatch_toggle').click(function() {
 		if (stopwatch.elapsedTime == 0) {
 			stopwatch.stop();
@@ -370,10 +370,10 @@ function SetCookie( p_cookie, p_value ) {
 }
 
 function ToggleDiv( p_div ) {
-	t_open_div = '#' + p_div + "_open";
-	t_closed_div = '#' + p_div + "_closed";
+	var t_open_div = '#' + p_div + "_open";
+	var t_closed_div = '#' + p_div + "_closed";
 
-	t_cookie = GetCookie( "collapse_settings" );
+	var t_cookie = GetCookie( "collapse_settings" );
 	if ( 1 == g_collapse_clear ) {
 		t_cookie = "";
 		g_collapse_clear = 0;
