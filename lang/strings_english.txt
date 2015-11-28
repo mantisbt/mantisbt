@@ -291,6 +291,7 @@ $s_email_notification_title_for_status_bug_resolved = 'The following issue has b
 $s_email_notification_title_for_status_bug_closed = 'The following issue has been CLOSED';
 $s_email_notification_title_for_action_bug_submitted = 'The following issue has been SUBMITTED.';
 $s_email_notification_title_for_action_bug_assigned = 'The following issue has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_unassigned = 'The following issue has been UNASSIGNED.';
 $s_email_notification_title_for_action_bug_reopened = 'The following issue has been REOPENED.';
 $s_email_notification_title_for_action_bug_deleted = 'The following issue has been DELETED.';
 $s_email_notification_title_for_action_bug_updated = 'The following issue has been UPDATED.';
