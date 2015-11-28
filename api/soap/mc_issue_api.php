@@ -1646,6 +1646,7 @@ function mc_issue_set_handler( $p_username, $p_password, $p_issue_id, $p_handler
 		return $t_access_check_result;
 	}
 
+    $t_bug_data->status = 50; 
 	$t_bug_data->handler_id = $t_handler_id;
 
 	# update the issue
