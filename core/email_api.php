@@ -1555,3 +1555,27 @@ function email_shutdown_function() {
 		email_send_all();
 	}
 }
+
+/**
+ * Get the list of supported email actions.
+ *
+ * @return array List of actions
+ */
+function email_get_actions() {
+	$t_actions = array( 'updated', 'owner', 'reopened', 'deleted', 'bugnote', 'relation' );
+
+	if( config_get( 'enable_sponsorship' ) == ON ) {
+		$t_actions[] = 'sponsor';
+	}
+
+	$t_statuses = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
+	ksort( $t_statuses );
+	reset( $t_statuses );
+
+	foreach( $t_statuses as $t_label ) {
+		$t_actions[] = $t_label;
+	}
+
+	return $t_actions;
+}
+
