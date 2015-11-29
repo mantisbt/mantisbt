@@ -49,7 +49,7 @@ unset( $t_token );
 html_page_top();
 
 echo '<div align="center">';
-echo '<br /><br />' . lang_get( 'token_to_use' ) . '<br /><br />' . string_display_line( $t_formatted_token ) . '<br /><br />';
+echo '<br /><br />' . lang_get( 'api_token_disclose_message' ) . '<br /><br />' . string_display_line( $t_formatted_token ) . '<br /><br />';
 print_bracket_link( 'api_tokens_page.php', lang_get( 'api_tokens_link' ) );
 echo '<br />';
 echo '</div>';

@@ -46,16 +46,16 @@ html_page_top( lang_get( 'api_tokens_link' ) );
 <div id="api-token-create-div" class="form-container">
 	<form id="account-create-api-token-form" method="post" action="api_token_create.php">
 		<fieldset>
-			<legend><span><?php echo lang_get( 'create_api_token_form_title' ); ?></span></legend>
+			<legend><span><?php echo lang_get( 'api_token_create_form_title' ); ?></span></legend>
 <?php echo form_security_field( 'create_api_token_form' ); ?>
 
 <div class="field-container">
-	<label for="token_name"><span><?php echo lang_get( 'token_name' ) ?></span></label>
+	<label for="token_name"><span><?php echo lang_get( 'api_token_name' ) ?></span></label>
 	<span class="input"><input id="token_name" type="text" name="token_name" size="64" maxlength="<?php echo api_token_name_max_length(); ?>" /></span>
 	<span class="label-style"></span>
 </div>
 
-<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'create_api_token_button' ) ?>" /></span>
+<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'api_token_create_button' ) ?>" /></span>
 </fieldset>
 </form>
 </div>
@@ -73,7 +73,7 @@ if ( count( $t_tokens ) > 0 ) {
 	<table>
 		<thead>
 			<tr class="row-category">
-				<th><?php echo lang_get( 'token_name' ); ?></th>
+				<th><?php echo lang_get( 'api_token_name' ); ?></th>
 				<th><?php echo lang_get( 'date_created' ); ?></th>
 				<th><?php echo lang_get( 'last_used' ); ?></th>
 				<th><?php echo lang_get( 'actions' ); ?></th>
@@ -101,7 +101,7 @@ if ( count( $t_tokens ) > 0 ) {
 						<fieldset>
 							<input id="token_id" type="hidden" name="token_id" value="<?php echo $u_id ; ?>" />
 							<input id="token_name" type="hidden" name="token_name" value="<?php echo string_attribute( $u_name ); ?>" />
-							<input type="submit" class="button" value="<?php echo lang_get( 'revoke_api_token_button' ) ?>" />
+							<input type="submit" class="button" value="<?php echo lang_get( 'api_token_revoke_button' ) ?>" />
 						</fieldset>
 					</form>
 				</td>
