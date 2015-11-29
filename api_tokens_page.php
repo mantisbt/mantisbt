@@ -69,6 +69,7 @@ if ( count( $t_tokens ) > 0 ) {
 	<div id="api-tokens-list-div" class="form-container">
 	<fieldset>
 		<legend><span><?php echo lang_get( 'api_tokens_title' ); ?></span></legend>
+	</fieldset>
 
 	<table>
 		<thead>
@@ -109,7 +110,6 @@ if ( count( $t_tokens ) > 0 ) {
 		<?php } ?>
 		</tbody>
 	</table>
-	</fieldset>
 </div>
 <?php
 }
