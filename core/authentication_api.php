@@ -295,7 +295,7 @@ function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
  * @access public
  */
 function auth_attempt_script_login( $p_username, $p_password = null ) {
-	global $g_script_login_cookie, $g_cache_current_user_id;
+	global $g_script_login_cookie;
 
 	$t_username = $p_username;
 	$t_password = $p_password;
@@ -337,7 +337,11 @@ function auth_attempt_script_login( $p_username, $p_password = null ) {
 	# validate password if supplied
 	if( null !== $t_password ) {
 		if( !auth_does_password_match( $t_user_id, $t_password ) ) {
-			return false;
+			# Check for token authentication via API
+			$t_token = user_get_field( $t_user_id, 'token' );
+			if ( is_blank( $t_token ) || $t_password != $t_token ) {
+				return false;
+			}
 		}
 	}
 
@@ -579,36 +583,54 @@ function auth_clear_cookies() {
 }
 
 /**
- * Generate a random and unique string to use as the identifier for the login
- * cookie.
- * @return string Random and unique 384bit cookie string of encoded according to the base64 with URI safe alphabet approach described in RFC4648
- * @access public
+ * Generate a random string with the specified length that is unique for the specified user field.
+ * @param string $p_field_name Field name to generate value for and check for uniqueness.
+ * @param int $p_length The length fo the generated string.
+ * @return string Random and unique string of encoded according to the base64 with URI safe alphabet
+ *                approach described in RFC4648
+ * @access private
  */
-function auth_generate_unique_cookie_string() {
+function auth_generate_unique_user_field_value( $p_field_name, $p_length ) {
 	do {
-		$t_cookie_string = crypto_generate_uri_safe_nonce( 64 );
-	} while( !auth_is_cookie_string_unique( $t_cookie_string ) );
+		$t_string = crypto_generate_uri_safe_nonce( $p_length );
+	} while( !auth_is_user_field_unique( $t_string, $p_field_name ) );
 
-	return $t_cookie_string;
+	return $t_string;
 }
 
 /**
- * Return true if the cookie login identifier is unique, false otherwise
+ * Return true if the specified field value is unique in the users table.
  * @param string $p_cookie_string Cookie string.
+ * @param string $p_field_name Field name to check for uniqueness.
  * @return boolean indicating whether cookie string is unique
- * @access public
+ * @access private
  */
-function auth_is_cookie_string_unique( $p_cookie_string ) {
-	$t_query = 'SELECT COUNT(*) FROM {user} WHERE cookie_string=' . db_param();
+function auth_is_user_field_unique( $p_cookie_string, $p_field_name = 'cookie_string' ) {
+	$t_query = 'SELECT COUNT(*) FROM {user} WHERE ' . $p_field_name . ' = ' . db_param();
 	$t_result = db_query( $t_query, array( $p_cookie_string ) );
 
 	$t_count = db_result( $t_result );
 
-	if( $t_count > 0 ) {
-		return false;
-	} else {
-		return true;
-	}
+	return ( $t_count == 0 );
+}
+
+/**
+ * Generate a random and unique string to use as the identifier for the login cookie.
+ * @return string Random and unique 384bit cookie string of encoded according to the base64 with URI safe
+ *                alphabet approach described in RFC4648
+ * @access public
+ */
+function auth_generate_unique_cookie_string() {
+	return auth_generate_unique_user_field_value( 'cookie_string', 64 );
+}
+
+/**
+ * Generates a user secret token.
+ * @return string The user token.
+ * @access public
+ */
+function auth_generate_secret_token() {
+	return auth_generate_unique_user_field_value( 'token', 40 );
 }
 
 /**

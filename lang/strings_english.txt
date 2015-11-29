@@ -361,6 +361,9 @@ $s_access_level_label = 'Access Level';
 $s_update_user_button = 'Update User';
 $s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
 $s_verify_change_password = 'You must set a password here to allow you to log in again.';
+$s_user_token = 'Secret Token';
+$s_user_token_description = '(used for API access and integrations)';
+$s_revoke_token_button = 'Revoke Token';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Account Preferences';
