@@ -68,30 +68,6 @@ function api_token_hash( $p_token ) {
 }
 
 /**
- * Format the token for readability by having it displayed in groups of 4 letters with space between them.
- * The token will be valid if supplied with or without spaces.
- *
- * @param string $p_token The token.
- * @return string The formatted token.
- * @access public
- */
-function api_token_format( $p_token ) {
-	$t_formatted_token = '';
-
-	$t_len = strlen( $p_token );
-
-	for ( $i = 0; $i < $t_len; $i++ ) {
-		if ( $i > 0 && ( $i % 4 ) == 0 ) {
-			$t_formatted_token .= ' ';
-		}
-
-		$t_formatted_token .= $p_token[$i];
-	}
-
-	return $t_formatted_token;
-}
-
-/**
  * Validate a plain token for the specified user.
  * @param integer $p_user_id The user id.
  * @param string $p_token The plain token.
