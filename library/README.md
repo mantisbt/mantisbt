@@ -1,35 +1,41 @@
-This directory contains a copy the 3rd party libraries used by MantisBT
+MantisBT external libraries
+===========================
+
+This directory contains a copy the 3rd-party libraries used by MantisBT.
 
 The version and status of each is summarized below:
 
--------------------------------------------------------------------
 directory       | project         | version   | status
--------------------------------------------------------------------
+----------------|-----------------|-----------|---------------
 adodb           | adodb           | 5.20.0    | unpatched [1]
 disposable      | disposable      | 2.0.0 [3] | unpatched [1]
 ezc             | Zeta Components |           |
-  /Base         | Zeta Base       | 1.9       | unpatched [1]
-  /Graph        | Zeta Graph      | 1.5.2     | unpatched [1]
+ezc/Base        | Zeta Base       | 1.9       | unpatched [1]
+ezc/Graph       | Zeta Graph      | 1.5.2     | unpatched [1]
 phpmailer       | PHPMailer       | 5.2.14    | unpatched [1]
 rssbuilder      | RSSBuilder      | 2.2.1     | patched [2]
 utf8            | phputf8         | 0.5       | unpatched
 securimage      | PHP Captcha     | 3.6.2     | unpatched [1]
--------------------------------------------------------------------
 
-[1] Library is tracked as a GIT submodule; refer to the corresponding
-    repository for details
-[2] removed __autoload function
-[3] The bundled version is actually a few commits ahead of 2.0.0 and is not an
-    "official" release, but we use it anyway to benefit from the latest updates
-    to the filter data files.
+**Notes**
+
+1. Library is tracked as a *GIT submodule*; refer to the corresponding
+   repository for details
+2. removed `__autoload` function
+3. The bundled version is actually a few commits ahead of 2.0.0 and is not an
+   "official" release, but we use it anyway to benefit from the latest updates
+   to the filter data files.
 
 
 Upstream projects
-==================
-adodb       -  http://adodb.sourceforge.net/  https://github.com/ADOdb/ADOdb
-disposable  -  http://github.com/vboctor/disposable_email_checker
-ezc         -  http://zetacomponents.org/  https://github.com/zetacomponents
-phpmailer   -  https://github.com/PHPMailer/PHPMailer
-rssbuilder  -  http://code.google.com/p/flaimo-php/
-utf8        -  http://sourceforge.net/projects/phputf8
-secureimage -  http://www.phpcaptcha.org/
+-----------------
+
+project     | URL
+------------|--------------------------------------------------------------------
+adodb       | http://adodb.sourceforge.net/ - https://github.com/ADOdb/ADOdb
+disposable  | http://github.com/vboctor/disposable_email_checker
+ezc         | http://zetacomponents.org/ - https://github.com/zetacomponents
+phpmailer   | https://github.com/PHPMailer/PHPMailer
+rssbuilder  | http://code.google.com/p/flaimo-php/
+utf8        | http://sourceforge.net/projects/phputf8
+secureimage | http://www.phpcaptcha.org/ - https://github.com/mantisbt/securimage
