@@ -24,10 +24,12 @@
  *
  * @uses core.php
  * @uses api_token_api.php
+ * @uses string_api.php
  */
 
 require_once( 'core.php' );
 require_api( 'api_token_api.php' );
+require_api( 'string_api.php' );
 
 form_security_validate( 'create_api_token_form' );
 
@@ -45,7 +47,7 @@ $t_token = api_token_create( $f_token_name, $t_user_id );
 html_page_top();
 
 echo '<div align="center">';
-echo '<br /><br />' . lang_get( 'token_to_use' ) . '<br /><br />' . $t_token . '<br /><br />';
+echo '<br /><br />' . lang_get( 'token_to_use' ) . '<br /><br />' . string_display_line( $t_token ) . '<br /><br />';
 print_bracket_link( 'account_page.php', lang_get( 'account_link' ) );
 echo '<br />';
 echo '</div>';
