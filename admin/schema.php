@@ -758,8 +758,8 @@ $g_upgrade[200] = array(
 			  user_id      I DEFAULT \'0\' PRIMARY,
 			  name         C(128) NOTNULL,
 			  hash         C(128) NOTNULL,
-			  date_created I UNSIGNED NOTNULL DEFAULT \'1\',
-			  date_used    I UNSIGNED NOTNULL DEFAULT \'1\''
+			  date_created I UNSIGNED NOTNULL DEFAULT \'0\',
+			  date_used    I UNSIGNED NOTNULL DEFAULT \'0\''
 		) );
 
 # Release marker: 1.3.0
