@@ -31,9 +31,10 @@ require_api( 'crypto_api.php' );
 /**
  * Create an API token
  *
- * @param $p_token_name The name (description) identifying what the token is going to be used for.
+ * @param string $p_token_name The name (description) identifying what the token is going to be used for.
  * @param integer $p_user_id The user id.
  * @return string The plain token.
+ * @access public
  */
 function api_token_create( $p_token_name, $p_user_id ) {
 	if( is_blank( $p_token_name ) ) {
@@ -57,8 +58,9 @@ function api_token_create( $p_token_name, $p_user_id ) {
 
 /**
  * Calculate the hash for the token.
- * @param $p_token The plain token.
+ * @param string $p_token The plain token.
  * @return string The one way hash for the token
+ * @access public
  */
 function api_token_hash( $p_token ) {
 	# We ignore spaces in tokens.  We inject spaces for users for readability only.
@@ -69,8 +71,9 @@ function api_token_hash( $p_token ) {
  * Format the token for readability by having it displayed in groups of 4 letters with space between them.
  * The token will be valid if supplied with or without spaces.
  *
- * @param $p_token The token.
+ * @param string $p_token The token.
  * @return string The formatted token.
+ * @access public
  */
 function api_token_format( $p_token ) {
 	$t_formatted_token = '';
@@ -90,9 +93,10 @@ function api_token_format( $p_token ) {
 
 /**
  * Validate a plain token for the specified user.
- * @param $p_user_id The user id.
- * @param $p_token The plain token.
- * @return bool true valid, false otherwise.
+ * @param integer $p_user_id The user id.
+ * @param string $p_token The plain token.
+ * @return boolean true valid, false otherwise.
+ * @access public
  */
 function api_token_validate( $p_user_id, $p_token ) {
 	$t_encrypted_token = api_token_hash( $p_token );
@@ -109,6 +113,12 @@ function api_token_validate( $p_user_id, $p_token ) {
 	return false;
 }
 
+/**
+ * Get all API tokens associated with the specified user.
+ * @param integer $p_user_id The user id.
+ * @return array Array of API token rows for owned by the user, can be empty.
+ * @access public
+ */
 function api_token_get_all( $p_user_id ) {
 	$t_query = 'SELECT * FROM {api_token} WHERE user_id=' . db_param();
 	$t_result = db_query( $t_query, array( $p_user_id ) );
@@ -125,7 +135,9 @@ function api_token_get_all( $p_user_id ) {
 /**
  * Updates the last used timestamp for the api token.
  *
- * @param $p_api_token_id The token id.
+ * @param integer $p_api_token_id The token id.
+ * @return void
+ * @access public
  */
 function api_token_touch( $p_api_token_id ) {
 	$t_date_used = db_now();
@@ -137,8 +149,10 @@ function api_token_touch( $p_api_token_id ) {
 
 /**
  * Revokes the api token with the specified id
- * @param $p_api_token_id The API token id.
- * @param $p_user_id The user id.
+ * @param integer $p_api_token_id The API token id.
+ * @param integer $p_user_id The user id.
+ * @return void
+ * @access public
  */
 function api_token_revoke( $p_api_token_id, $p_user_id ) {
 	$t_query = 'DELETE FROM {api_token} WHERE id=' . db_param() . ' AND user_id = ' . db_param();
@@ -147,7 +161,8 @@ function api_token_revoke( $p_api_token_id, $p_user_id ) {
 
 /**
  * Gets the max length for the API token name.
- * @return int Maximum length for API token name.
+ * @return integer Maximum length for API token name.
+ * @access public
  */
 function api_token_name_max_length() {
 	return 128;
