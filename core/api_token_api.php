@@ -117,6 +117,19 @@ function api_token_validate( $p_user_id, $p_token ) {
 	return false;
 }
 
+function api_token_get_all( $p_user_id ) {
+	$t_query = 'SELECT * FROM {api_token} WHERE user_id=' . db_param();
+	$t_result = db_query( $t_query, array( $p_user_id ) );
+
+	$t_rows = array();
+	while ( ( $t_row = db_fetch_array( $t_result ) ) !== false )
+	{
+		$t_rows[] = $t_row;
+	}
+
+	return $t_rows;
+}
+
 /**
  * Updates the last used timestamp for the api token.
  *
@@ -133,10 +146,17 @@ function api_token_touch( $p_api_token_id ) {
 /**
  * Revokes the api token with the specified id
  * @param $p_api_token_id The API token id.
+ * @param $p_user_id The user id or null for logged in user.
  */
-function api_token_revoke( $p_api_token_id ) {
-	$t_query = 'DELETE FROM {api_token} WHERE id=' . db_param();
-	db_query( $t_query, array( $p_api_token_id ) );
+function api_token_revoke( $p_api_token_id, $p_user_id = null ) {
+	if( $p_user_id === null ) {
+		$t_user_id = auth_get_current_user_id();
+	} else {
+		$t_user_id = (int)$p_user_id;
+	}
+
+	$t_query = 'DELETE FROM {api_token} WHERE id=' . db_param() . ' AND user_id = ' . db_param();
+	db_query( $t_query, array( $p_api_token_id, $t_user_id ) );
 }
 
 /**
