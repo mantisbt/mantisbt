@@ -337,7 +337,7 @@ function auth_attempt_script_login( $p_username, $p_password = null ) {
 	# validate password if supplied
 	if( null !== $t_password ) {
 		if( !auth_does_password_match( $t_user_id, $t_password ) ) {
-			return false;
+			return api_token_validate( $t_user_id, $t_password );
 		}
 	}
 
