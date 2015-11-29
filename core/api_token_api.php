@@ -35,7 +35,7 @@ require_api( 'crypto_api.php' );
  *
  * @param $p_token_name The name (description) identifying what the token is going to be used for.
  * @param integer $p_user_id The user id, or null for logged in user.
- * @return array associative array with 'id' for token id in the table, and 'token' for unencrypted token.
+ * @return string The plain token.
  */
 function api_token_create( $p_token_name, $p_user_id = null ) {
 	if( $p_user_id === null ) {
@@ -53,10 +53,7 @@ function api_token_create( $p_token_name, $p_user_id = null ) {
 					VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 	db_query( $t_query, array( $t_user_id, (string)$p_token_name, $t_hash, $t_date_created ) );
 
-	return array(
-		'id' => db_insert_id( db_get_table( 'api_token' ) ),
-		'token' => $t_plain_token
-	);
+	return $t_plain_token;
 }
 
 /**
@@ -111,4 +108,11 @@ function api_token_revoke( $p_api_token_id ) {
 	db_query( $t_query, array( $p_api_token_id ) );
 }
 
+/**
+ * Gets the max length for the API token name.
+ * @return int Maximum length for API token name.
+ */
+function api_token_name_max_length() {
+	return 128;
+}
 

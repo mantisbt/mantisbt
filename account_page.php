@@ -59,6 +59,7 @@
  */
 
 require_once( 'core.php' );
+require_api( 'api_token_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -257,6 +258,24 @@ if( $t_force_pw_reset ) {
 		</fieldset>
 	</form>
 </div>
+
+<div id="account-create-api-token-div" class="form-container">
+	<form id="account-create-api-token-form" method="post" action="api_token_create.php">
+		<fieldset>
+			<legend><span><?php echo lang_get( 'create_api_token_form_title' ); ?></span></legend>
+			<?php echo form_security_field( 'create_api_token_form' ); ?>
+
+			<div class="field-container">
+				<label for="token_name"><span><?php echo lang_get( 'token_name' ) ?></span></label>
+				<span class="input"><input id="token_name" type="text" name="token_name" size="64" maxlength="<?php echo api_token_name_max_length(); ?>" /></span>
+				<span class="label-style"></span>
+			</div>
+
+			<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'create_api_token_button' ) ?>" /></span>
+		</fieldset>
+	</form>
+</div>
+
 <?php # check if users can't delete their own accounts
 if( ON == config_get( 'allow_account_delete' ) ) { ?>
 

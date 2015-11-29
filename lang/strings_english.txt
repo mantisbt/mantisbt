@@ -361,6 +361,10 @@ $s_access_level_label = 'Access Level';
 $s_update_user_button = 'Update User';
 $s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
 $s_verify_change_password = 'You must set a password here to allow you to log in again.';
+$s_create_api_token_form_title = 'Create API Token';
+$s_create_api_token_button = 'Create API Token';
+$s_token_name = 'Token Name';
+$s_token_to_use = 'Token to use for accessing API.  Note that this token will only be displayed once.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Account Preferences';
