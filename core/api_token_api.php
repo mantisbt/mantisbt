@@ -23,33 +23,25 @@
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
  *
- * @uses authentication_api.php
  * @uses crypto_api.php
  */
 
-require_api( 'authentication_api.php' );
 require_api( 'crypto_api.php' );
 
 /**
  * Create an API token
  *
  * @param $p_token_name The name (description) identifying what the token is going to be used for.
- * @param integer $p_user_id The user id, or null for logged in user.
+ * @param integer $p_user_id The user id.
  * @return string The plain token.
  */
-function api_token_create( $p_token_name, $p_user_id = null ) {
+function api_token_create( $p_token_name, $p_user_id ) {
 	if( is_blank( $p_token_name ) ) {
 		error_parameters( lang_get( 'token_name' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
 	$t_token_name = trim( $p_token_name );
-
-	if( $p_user_id === null ) {
-		$t_user_id = auth_get_current_user_id();
-	} else {
-		$t_user_id = (int)$p_user_id;
-	}
 
 	$t_plain_token = crypto_generate_uri_safe_nonce( 32 );
 	$t_hash = api_token_hash( $t_plain_token );
@@ -58,7 +50,7 @@ function api_token_create( $p_token_name, $p_user_id = null ) {
 	$t_query = 'INSERT INTO {api_token}
 					( user_id, name, hash, date_created )
 					VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-	db_query( $t_query, array( $t_user_id, (string)$t_token_name, $t_hash, $t_date_created ) );
+	db_query( $t_query, array( $p_user_id, (string)$t_token_name, $t_hash, $t_date_created ) );
 
 	return $t_plain_token;
 }
@@ -146,17 +138,11 @@ function api_token_touch( $p_api_token_id ) {
 /**
  * Revokes the api token with the specified id
  * @param $p_api_token_id The API token id.
- * @param $p_user_id The user id or null for logged in user.
+ * @param $p_user_id The user id.
  */
-function api_token_revoke( $p_api_token_id, $p_user_id = null ) {
-	if( $p_user_id === null ) {
-		$t_user_id = auth_get_current_user_id();
-	} else {
-		$t_user_id = (int)$p_user_id;
-	}
-
+function api_token_revoke( $p_api_token_id, $p_user_id ) {
 	$t_query = 'DELETE FROM {api_token} WHERE id=' . db_param() . ' AND user_id = ' . db_param();
-	db_query( $t_query, array( $p_api_token_id, $t_user_id ) );
+	db_query( $t_query, array( $p_api_token_id, $p_user_id ) );
 }
 
 /**
