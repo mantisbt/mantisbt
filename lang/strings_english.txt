@@ -345,6 +345,7 @@ $s_delete_account_button = 'Delete Account';
 # account_page.php
 $s_manage_profiles_link = 'Profiles';
 $s_change_preferences_link = 'Preferences';
+$s_api_tokens_link = 'API Tokens';
 $s_edit_account_title = 'Edit Account';
 $s_username = 'Username';
 $s_username_label = 'Username';
@@ -364,7 +365,7 @@ $s_verify_change_password = 'You must set a password here to allow you to log in
 $s_create_api_token_form_title = 'Create API Token';
 $s_create_api_token_button = 'Create API Token';
 $s_token_name = 'Token Name';
-$s_token_to_use = 'Token to use for accessing API.  Note that this token will only be displayed once.';
+$s_token_to_use = 'Token to use for accessing API.  Note that this token will only be displayed once and spaces are ignored.';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Account Preferences';

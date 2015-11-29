@@ -15,8 +15,6 @@
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This page stores the reported bug
- *
  * @package MantisBT
  * @copyright Copyright 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
  * @copyright Copyright 2002  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -24,35 +22,42 @@
  *
  * @uses core.php
  * @uses api_token_api.php
- * @uses string_api.php
+ * @uses authentication_api.php
+ * @uses current_user_api.php
+ * @uses html_api.php
  */
 
 require_once( 'core.php' );
 require_api( 'api_token_api.php' );
-require_api( 'string_api.php' );
-
-form_security_validate( 'create_api_token_form' );
+require_api( 'authentication_api.php' );
+require_api( 'current_user_api.php' );
+require_api( 'html_api.php' );
 
 auth_ensure_user_authenticated();
 auth_reauthenticate();
 
-$f_token_name = gpc_get_string( 'token_name' );
+current_user_ensure_unprotected();
 
-$t_user_id = auth_get_current_user_id();
+html_page_top( lang_get( 'api_tokens_link' ) );
+?>
 
-user_ensure_unprotected( $t_user_id );
+<div id="account-create-api-token-div" class="form-container">
+	<form id="account-create-api-token-form" method="post" action="api_token_create.php">
+		<fieldset>
+			<legend><span><?php echo lang_get( 'create_api_token_form_title' ); ?></span></legend>
+<?php echo form_security_field( 'create_api_token_form' ); ?>
 
-$t_token = api_token_create( $f_token_name, $t_user_id );
-$t_formatted_token = api_token_format( $t_token );
-unset( $t_token );
+<div class="field-container">
+	<label for="token_name"><span><?php echo lang_get( 'token_name' ) ?></span></label>
+	<span class="input"><input id="token_name" type="text" name="token_name" size="64" maxlength="<?php echo api_token_name_max_length(); ?>" /></span>
+	<span class="label-style"></span>
+</div>
 
-html_page_top();
+<span class="submit-button"><input type="submit" class="button" value="<?php echo lang_get( 'create_api_token_button' ) ?>" /></span>
+</fieldset>
+</form>
+</div>
 
-echo '<div align="center">';
-echo '<br /><br />' . lang_get( 'token_to_use' ) . '<br /><br />' . string_display_line( $t_formatted_token ) . '<br /><br />';
-print_bracket_link( 'api_tokens_page.php', lang_get( 'api_tokens_link' ) );
-echo '<br />';
-echo '</div>';
-
+<?php
 html_page_bottom();
 

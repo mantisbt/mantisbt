@@ -38,20 +38,27 @@ require_api( 'crypto_api.php' );
  * @return string The plain token.
  */
 function api_token_create( $p_token_name, $p_user_id = null ) {
+	if( is_blank( $p_token_name ) ) {
+		error_parameters( lang_get( 'token_name' ) );
+		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	}
+
+	$t_token_name = trim( $p_token_name );
+
 	if( $p_user_id === null ) {
 		$t_user_id = auth_get_current_user_id();
 	} else {
 		$t_user_id = (int)$p_user_id;
 	}
 
-	$t_plain_token = crypto_generate_uri_safe_nonce( 64 );
+	$t_plain_token = crypto_generate_uri_safe_nonce( 32 );
 	$t_hash = api_token_hash( $t_plain_token );
 	$t_date_created = db_now();
 
 	$t_query = 'INSERT INTO {api_token}
 					( user_id, name, hash, date_created )
 					VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
-	db_query( $t_query, array( $t_user_id, (string)$p_token_name, $t_hash, $t_date_created ) );
+	db_query( $t_query, array( $t_user_id, (string)$t_token_name, $t_hash, $t_date_created ) );
 
 	return $t_plain_token;
 }
@@ -62,7 +69,31 @@ function api_token_create( $p_token_name, $p_user_id = null ) {
  * @return string The one way hash for the token
  */
 function api_token_hash( $p_token ) {
-	return sha1( $p_token );
+	# We ignore spaces in tokens.  We inject spaces for users for readability only.
+	return sha1( str_replace( ' ', '', $p_token ) );
+}
+
+/**
+ * Format the token for readability by having it displayed in groups of 4 letters with space between them.
+ * The token will be valid if supplied with or without spaces.
+ *
+ * @param $p_token The token.
+ * @return string The formatted token.
+ */
+function api_token_format( $p_token ) {
+	$t_formatted_token = '';
+
+	$t_len = strlen( $p_token );
+
+	for ( $i = 0; $i < $t_len; $i++ ) {
+		if ( $i > 0 && ( $i % 4 ) == 0 ) {
+			$t_formatted_token .= ' ';
+		}
+
+		$t_formatted_token .= $p_token[$i];
+	}
+
+	return $t_formatted_token;
 }
 
 /**
