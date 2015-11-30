@@ -96,7 +96,7 @@ function api_token_validate( $p_user_id, $p_token ) {
  * @access public
  */
 function api_token_get_all( $p_user_id ) {
-	$t_query = 'SELECT * FROM {api_token} WHERE user_id=' . db_param();
+	$t_query = 'SELECT * FROM {api_token} WHERE user_id=' . db_param() . ' ORDER BY date_used DESC, date_created ASC';
 	$t_result = db_query( $t_query, array( $p_user_id ) );
 
 	$t_rows = array();
