@@ -576,7 +576,9 @@ if( $t_show_attachments ) {
 		<th class="category">
 			<?php if( $t_def['require_report'] ) {?><span class="required">*</span><?php } ?>
 			<?php if( $t_def['type'] != CUSTOM_FIELD_TYPE_RADIO && $t_def['type'] != CUSTOM_FIELD_TYPE_CHECKBOX ) { ?>
-				<label for="custom_field_<?php echo string_attribute( $t_def['id'] ) ?>"><?php echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?></label>
+				<label for="custom_field_<?php echo string_attribute( $t_def['id'] ) ?>">
+					<?php echo string_display( lang_get_defaulted( $t_def['name'] ) ) ?>
+				</label>
 			<?php } else { echo string_display( lang_get_defaulted( $t_def['name'] ) ); } ?>
 		</th>
 		<td>
