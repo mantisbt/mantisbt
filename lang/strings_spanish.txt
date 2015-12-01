@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -118,13 +118,13 @@ $s_announcement = 'Anuncio';
 $s_stays_on_top = 'Siempre arriba';
 $s_bugnote_link_title = 'Acceso directo a nota';
 $s_delete_bugnote_button = 'Eliminar nota';
-$s_delete_bugnote_sure_msg = '¿Está seguro que desea eliminar esta nota?';
+$s_delete_bugnote_sure_msg = '¿Estás seguro de que quieres eliminar esta nota?';
 $s_bug_relationships = 'Relaciones';
 $s_bug_relationships_label = 'Relaciones:';
-$s_empty_password_sure_msg = 'El usuario tiene una contraseña vacía. ¿Está seguro que es lo que desea?';
+$s_empty_password_sure_msg = 'El usuario tiene una contraseña vacía. ¿Estás seguro de que quieres esto?';
 $s_empty_password_button = 'Usar contraseña en blanco';
 $s_reauthenticate_title = 'Autenticar';
-$s_reauthenticate_message = 'Está viendo una página segura, pero su sesión ha expirado. Por favor autentíquese para continuar.';
+$s_reauthenticate_message = 'Estás viendo una página segura, pero tu sesión segura ha expirado. Autentifícate para continuar.';
 $s_no_category = '(Sin categoría)';
 $s_global_categories = 'Categorías globales';
 $s_inherit = 'Heredar categorías';
@@ -230,7 +230,7 @@ $s_new_account_signup_msg = 'La siguiente cuenta ha sido creada:';
 $s_reset_request_msg = 'Si solicitó este cambio, visite la siguiente URL para cambiar su contraseña:';
 $s_reset_request_in_progress_msg = 'Si ha proporcionado un usuario y contraseña correctos recibirá un mensaje de confirmación en su dirección de correo electrónico. Cuando reciba este mensaje siga las instrucciones para cambiar la contraseña de su cuenta.';
 $s_email_notification_title_for_status_bug_new = 'La siguiente incidencia tiene ahora el estado NUEVA (nuevamente)';
-$s_email_notification_title_for_status_bug_feedback = 'La siguiente incidencia requiere MAS INFORMACIÓN (opinión).';
+$s_email_notification_title_for_status_bug_feedback = 'La siguiente incidencia requiere MÁS INFORMACIÓN (opinión).';
 $s_email_notification_title_for_status_bug_acknowledged = 'La siguiente incidencia ha sido ACEPTADA.';
 $s_email_notification_title_for_status_bug_confirmed = 'La siguiente incidencia ha sido CONFIRMADA.';
 $s_email_notification_title_for_status_bug_assigned = 'La siguiente incidencia ha sido ASIGNADA.';
@@ -479,7 +479,7 @@ $s_add_bugnote_button = 'Añadir nota';
 $s_bugnote_edit_link = 'Editar';
 $s_closed_bug_button = 'Cerrar Incidencia';
 $s_bugnote_updated_msg = 'La nota ha sido actualizada...';
-$s_last_edited = 'Ultimo editado:';
+$s_last_edited = 'Última edición:';
 $s_hide_content = 'Ocultar contenido';
 $s_show_content = 'Mostrar contenido';
 $s_webmaster_contact_information = 'Contacta con el <a href="mailto:%1$s" title="Contacto con webmaster vía correo electrónico.">administrador</a> por ayuda';
@@ -608,7 +608,7 @@ $s_access_change = 'Nivel de Acceso Mínimo para cambiar a ese Estado';
 $s_desc_bug_submit_status = 'Estado en el que se establece una Nueva Incidencia';
 $s_desc_bug_reopen_status = 'Estado en el que se establecen Incidencias Reabiertas';
 $s_desc_bug_resolved_status_threshold = 'Estado en el que una Incidencia se considera resuelta';
-$s_desc_bug_closed_status_threshold = 'Status donde un asunto es considerado cerrado';
+$s_desc_bug_closed_status_threshold = 'Estado donde un asunto se considera cerrado';
 $s_workflow_change_access_label = 'Quién puede cambiar el flujo de trabajo:';
 $s_access_change_access_label = 'Quién puede cambiar niveles de acceso:';
 $s_default_not_in_flow = 'El Estado por defecto de %1$s no está seleccionado en los siguientes Estados para %2$s. Será ignorado';
@@ -895,6 +895,7 @@ $s_recently_visited = 'Visitadas recientemente';
 $s_priority_abbreviation = 'P';
 $s_note_user_id_label = 'Nota de:';
 $s_filter_match_type = 'Tipo de coincidencia';
+$s_filter_match_type_label = 'Coincidencia de tipo:';
 $s_filter_match_all = 'Todas las condiciones';
 $s_filter_match_any = 'Cualquier condición';
 $s_none = 'Ninguno';
@@ -1165,7 +1166,7 @@ $s_time_tracking_cost_per_hour_label = 'Costo/hora:';
 $s_time_tracking_cost = 'Costo';
 $s_time_tracking_cost_label = 'Costo:';
 $s_total_time_for_issue = 'Tiempo total para la incidencia = %1$s';
-$s_time_tracking_stopwatch_start = 'Inicio';
+$s_time_tracking_stopwatch_start = 'Iniciar';
 $s_time_tracking_stopwatch_stop = 'Detener';
 $s_time_tracking_stopwatch_reset = 'Restablecer';
 $s_access_denied = 'Acceso Denegado.';
@@ -1246,7 +1247,7 @@ $MANTIS_ERROR[ERROR_HANDLER_ACCESS_TOO_LOW] = 'El gestor de incidencias no tiene
 $MANTIS_ERROR[ERROR_PROJECT_NAME_NOT_UNIQUE] = 'Ya existe un proyecto con ese nombre. Por favor, regrese y seleccione un nombre diferente.';
 $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = 'Nombre de proyecto no válido. Los nombres de proyecto no pueden estar en blanco.';
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = 'Usuario con nombre "%1$s" no encontrado.';
-$MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'Usuario con id "%1$d" no encontrado.';
+$MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = 'No se encuentra al usuario con identificador "%1$d".';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = 'La información de ingreso almacenada por su navegador es incorrecta. Quizá su cuenta ha sido borrada.';
 $MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = 'No se encontraron preferencias para este usuario.';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = 'Noticia no encontrada.';
@@ -1266,6 +1267,7 @@ $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Este archivo está duplicado.  Por favor,
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Ruta de subida no válida.  El directorio no existe o el servidor web no puede escribir en él.';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No se ha cargado ningún archivo. Por favor, vuelva atrás y seleccione un archivo antes de presionar Subir';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'El archivo subido no puede trasladarse al directorio de almacenamiento. El directorio no existe o no puede escribirse en él.';
+$MANTIS_ERROR[ERROR_FILE_NOT_FOUND] = 'No se encuentra el adjunto con identificador "%1$d".';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'No se puede establecer una incidencia como duplicada de si misma.';
 $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Revisión de la incidencia no encontrada';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Campo personalizado no encontrado';
@@ -1349,7 +1351,7 @@ $MANTIS_ERROR[ERROR_INVALID_DATE_FORMAT] = 'Formato de fecha no válido';
 $MANTIS_ERROR[ERROR_INVALID_RESOLUTION] = 'La resolución "%1$s" no está permitida para el estado "%2$s".';
 $MANTIS_ERROR[ERROR_UPDATING_TIMEZONE] = 'Imposible actualizar zona horaria.';
 $MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = 'Funcionalidad obsoleta: "%1$s"; utiliza "%2$s" en su lugar.';
-$MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'Advertencia: El sistema está configurado para mostrar errores de MantisBT (E_USER_ERROR). La ejecución del programa continuará, pero puede dar lugar a problemas de integridad del sistema o datos.';
+$MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'Advertencia: el sistema está configurado para mostrar errores de MantisBT (E_USER_ERROR). La ejecución del programa continuará, pero puede dar lugar a problemas de integridad del sistema o de datos.';
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'No coinciden los tipos de datos. Habilita los mensajes de error detallados para más información.';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Otro usuario actualizó la incidencia. Vuelva a la incidencia y envíe sus cambios de nuevo.';
 $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Has alcanzado el límite de actividad permitida de %d eventos en los últimos %d segundos; tu acción se ha bloqueado para evitar el spam. Inténtalo de nuevo más tarde.';

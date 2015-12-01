@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -50,6 +50,7 @@
  * @author Pedroca cerebral
  * @author TheGabrielZaum
  * @author Tuliouel
+ * @author Walesson
  * @author 555
  */
 
@@ -481,18 +482,26 @@ $s_bugnote_updated_msg = 'A anotação foi atualizada com sucesso...';
 $s_last_edited = 'Última edição:';
 $s_hide_content = 'Ocultar Conteúdo';
 $s_show_content = 'Mostrar Conteúdo';
+$s_webmaster_contact_information = 'Contato <a href="mailto:%1$s" title="Entre em contato com o webmaster via e-mail.">administrator</a> para assistência';
 $s_total_queries_executed = 'Total de %1$d consultas executadas.';
 $s_unique_queries_executed = '%1$d consultas únicas executadas.';
-$s_memory_usage_in_kb = 'uso de memória: %1$s KB';
+$s_total_query_execution_time = 'Tempo de execução de consulta Total:%1$s segundos';
+$s_page_execution_time = 'Tempo de execução da página:%1$s segundos';
+$s_memory_usage_in_kb = 'O uso de memória:%1$s KiB';
 $s_log_page_number = 'Número';
 $s_log_page_time = 'Tempo de execução';
+$s_log_page_caller = 'Caller';
 $s_log_page_event = 'Evento';
 $s_please_report = 'Por favor, reporte isto ao %1$s.';
 $s_click_to_login = 'Autenticar-se';
 $s_warning_plain_password_authentication = '<strong>AVISO:</strong> É utilizada a autenticação plena de senha, isto pode expor suas senhas aos administradores.';
 $s_warning_default_administrator_account_present = '<strong>AVISO:</strong> Você deve desabilitar a conta padrão \'administrador\' ou alterar sua senha.';
 $s_warning_admin_directory_present = '<strong>AVISO:</strong> Diretório Admin deve ser removido.';
-$s_error_database_no_schema_version = '<strong>ERRO:</strong> A estrutura da base de dados parece estar desatualizada (config(databaseversion) esta em 0 e não existem tabelas de antigas atualizações). Por favor verifique se a sua base de dados está rodando - não conseguimos obter a versão do schema da base de dados. A Tabela de Configuração não retornou uma versão do schema da base de dados válida - por favor, solicite suporte na lista de e-mails mantis-help caso seja necessário.';
+$s_warning_change_setting = '<strong>Aviso:</strong> "%1$s" não está definido para o valor padrão (%2$s).';
+$s_warning_security_hazard = 'Este é um risco de segurança em potencial, pois ele pode expor informações confidenciais.';
+$s_warning_integrity_hazard = 'Isto fará com que MantisBT para continuar quando ocorre erros e pode levar a problemas de integridade de sistema/dados.';
+$s_warning_debug_email = '<strong>Aviso:</strong> "<code>debug_email</code>" não está definido para <code>OFF</code>, todos os e-mails de notificação será enviada para "%1$s".';
+$s_error_database_no_schema_version = '<strong>Error:</strong> A estrutura do banco de dados parece estar desatualizado (config(databaseversion) is 0) ou corrompido. Por favor verifique se o seu banco de dados está sendo executado - não podemos recuperar a versão do esquema do banco de dados. Tabela de configuração não retornou uma versão do esquema do banco de dados válida - por favor, pedir apoio na lista de discussão mantis-ajuda, se necessário.';
 $s_error_database_version_out_of_date_2 = '<strong>AVISO:</strong> A estrutura da base de dados pode estar desatualizada. Por favor atualize <a href="admin/install.php">aqui</a> antes de entrar.';
 $s_error_code_version_out_of_date = '<strong>AVISO:</strong> A estrutura da base de dados está mais atualizada que o código instalado. Por favor atualize o código.';
 $s_login_page_info = 'Bem-vindo ao Gerenciador de Casos.';
@@ -547,6 +556,7 @@ $s_manage_config_link = 'Gerenciar Configuração';
 $s_manage_threshold_config = 'Limiares do Fluxo de Trabalho';
 $s_manage_email_config = 'Notificações por E-Mail';
 $s_manage_workflow_config = 'Transições de Fluxo de Trabalho';
+$s_manage_workflow_graph = 'Gráfico fluxo de trabalho';
 $s_manage_tags_link = 'Gerenciar Marcadores';
 $s_create_new_account_link = 'Criar nova conta';
 $s_projects_link = 'Projetos';
@@ -562,6 +572,7 @@ $s_date_created = 'Data de Criação';
 $s_last_visit = 'Última Visita';
 $s_last_visit_label = 'Última Visita:';
 $s_edit_user_link = 'Alterar Usuário';
+$s_separate_list_items_by = '(itens de lista separadas por "%1$s")';
 $s_config_all_projects = 'Nota: Estas configurações afetam TODOS OS PROJETOS.';
 $s_config_project = 'Nota: Estas configurações afetam apenas o projeto %1$s.';
 $s_colour_coding = 'Na tabela abaixo, o seguinte código de cores se aplica:';
@@ -608,6 +619,7 @@ $s_edit_others_bugnotes = 'Editar notas dos outros';
 $s_edit_own_bugnotes = 'Editar as próprias notas';
 $s_delete_others_bugnotes = 'Apagar notas dos outros';
 $s_delete_own_bugnotes = 'Apagar as próprias notas';
+$s_change_view_state_own_bugnotes = 'Mudança de estado vista próprias notas';
 $s_limit_access = 'Limitar o acesso dos relatores aos seus próprios casos';
 $s_submit_status = 'Status para o qual novos casos são ajustados';
 $s_assigned_status = 'Status para o qual casos auto-atribuídos são ajustados';
@@ -656,6 +668,7 @@ $s_delete_category_button = 'Apagar Categoria';
 $s_edit_project_category_title = 'Alterar Categoria do Projeto';
 $s_update_category_button = 'Atualizar Categoria';
 $s_category_updated_msg = 'A categoria foi atualizada com sucesso...';
+$s_create_first_project = 'Crie um projeto para ser capaz de registro de problemas.';
 $s_add_subproject_title = 'Adicionar subprojeto';
 $s_project_deleted_msg = 'O projeto foi removido com sucesso...';
 $s_project_delete_msg = 'Você tem certeza que deseja apagar este projeto e todos os relatos de casos anexados?';
@@ -674,6 +687,7 @@ $s_copy_to = 'Copiar Para';
 $s_categories_and_version_title = 'Categorias e Versões';
 $s_categories = 'Categorias';
 $s_add_category_button = 'Adicionar Categoria';
+$s_add_and_edit_category_button = 'Adicionar e editar Categoria';
 $s_versions = 'Versões';
 $s_add_version_button = 'Adicionar Versão';
 $s_add_and_edit_version_button = 'Adicionar e Alterar Versão';
@@ -819,10 +833,10 @@ $s_selected_project = 'Projeto selecionado';
 $s_valid_project_msg = 'Você deve escolher um projeto válido';
 $s_signup_done_title = 'Registro de conta processado';
 $s_password_emailed_msg = 'Parabéns. Você registrou com sucesso. Um e-mail de confirmação lhe está sendo enviado agora para verificar seu endereço de e-mail. Ao visitar o link enviado a você neste e-mail irá ativar sua conta.';
-$s_no_reponse_msg = 'Você terá sete dias para completar o processo de confirmação de conta; se você falhar em completar a confirmação de conta dentro de sete dias, esta conta recém-registrada poderá ser apagada.';
+$s_no_reponse_msg = 'Você tem sete dias para completar o processo de confirmação de conta; se você deixar de fazê-lo dentro deste período, a conta recém-registrada poderá ser purgado.';
 $s_signup_captcha_request_label = 'Digite o código como mostrado no quadro à direita:';
 $s_signup_captcha_refresh = 'Gerar um novo código';
-$s_signup_info = 'Ao completar este formulário e verificar suas respostas, um e-mail de confirmação lhe será enviado para o endereço de e-mail que você especificou.<br />Usando o e-mail de confirmação, você será capaz de ativar sua conta. Se você falhar em ativar sua conta dentro de sete dias, ela será apagada.<br />Você deve especificar um endereço de e-mail válido para poder receber o e-mail de confirmação de conta.';
+$s_signup_info = 'Após a conclusão deste formulário e verificar suas respostas, você será enviada uma mensagem de confirmação para o endereço de e-mail que você especificou. <br /> Usando o link fornecido no e-mail, você será capaz de ativar sua conta. Se você deixar de fazê-lo no prazo de sete dias, pode ser purgado. <br /> Você deve especificar um endereço de e-mail válido, a fim de receber a confirmação de conta de e-mail.';
 $s_signup_title = 'Criar Conta';
 $s_signup_button = 'Criar Conta';
 $s_no_password_request = 'Sua senha é gerenciada por outro sistema. Por favor, contate o administrador de sistemas.';
@@ -879,6 +893,7 @@ $s_issue_id = 'Caso #';
 $s_recently_visited = 'Recentemente Visitado';
 $s_note_user_id_label = 'Nota Por:';
 $s_filter_match_type = 'Tipo de correspondência';
+$s_filter_match_type_label = 'Tipo de correspondência:';
 $s_filter_match_all = 'Todas as condições';
 $s_filter_match_any = 'Qualquer Condição';
 $s_none = 'nenhum';
@@ -1001,8 +1016,11 @@ $s_sponsorship_more_info = 'Mais informações sobre o patrocínio';
 $s_sponsorship_total = 'Total Patrocinado';
 $s_changelog = 'Registro de Mudanças';
 $s_changelog_empty = 'Não há informações disponíveis sobre registros de mudanças';
+$s_changelog_empty_manager = 'Nenhuma informação Change Log disponível. Questões estão incluídas uma vez que os projetos têm versões e problemas são resolvidos com o conjunto "corrigido na versão".';
 $s_roadmap = 'Planejamento';
 $s_resolved_progress = '%1$d de %2$d caso(s) resolvidos. Progresso (%3$d%%).';
+$s_roadmap_empty = 'Nenhuma informação disponível Roadmap';
+$s_roadmap_empty_manager = 'Nenhuma informação Roteiro disponível. Questões estão incluídas uma vez que os projetos têm versões e questões têm "versão de destino" set.';
 $s_http_auth_realm = 'Login do MantisBT';
 $s_bug = 'caso';
 $s_bugs = 'casos';

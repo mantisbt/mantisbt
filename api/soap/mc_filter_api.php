@@ -274,7 +274,6 @@ function mci_filter_search_get_rows( $p_user_id, $p_filter_search, $p_page_numbe
 
     $t_filter = filter_ensure_valid_filter( $t_filter );
 
-    $t_result = array();
     $t_page_number = $p_page_number < 1 ? 1 : $p_page_number;
     $t_page_count = 0;
     $t_bug_count = 0;

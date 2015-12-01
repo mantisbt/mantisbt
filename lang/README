@@ -1,9 +1,9 @@
-All files within this directory should use UTF-8 encoding to allow for Mantis
+All files within this directory should use UTF-8 encoding to allow for MantisBT
 multilingual operation.
 
 Translations are performed on translatewiki.net at:
-http://translatewiki.net/wiki/Translating:Mantis
+https://translatewiki.net/wiki/Translating:MantisBT
 
-If you would like to help Translate Mantis to your native language, a good
-place to start is the translatewiki introduction guide located at:
-http://translatewiki.net/wiki/Translating:Intro
+If you would like to help translate MantisBT to your native language, a good
+place to start is the translatewiki.net introduction guide located at:
+https://translatewiki.net/wiki/Translating:Intro

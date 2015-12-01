@@ -391,7 +391,6 @@ function mci_issue_get_relationships( $p_issue_id, $p_user_id ) {
 function mci_issue_get_notes( $p_issue_id ) {
 	$t_user_id = auth_get_current_user_id();
 	$t_lang = mci_get_user_lang( $t_user_id );
-	$t_project_id = bug_get_field( $p_issue_id, 'project_id' );
 	$t_user_bugnote_order = 'ASC'; # always get the notes in ascending order for consistency to the calling application.
 	$t_has_time_tracking_access = access_has_bug_level( config_get( 'time_tracking_view_threshold' ), $p_issue_id );
 
@@ -609,10 +608,10 @@ function mc_issue_get_id_from_summary( $p_username, $p_password, $p_summary ) {
  * The current user ability to assign issue access check is only done on change.
  * This behavior would be consistent with the web UI.
  *
- * @param $p_user_id        The id of the logged in user.
- * @param $p_project_id     The id of the project the issue is associated with.
- * @param $p_old_handler_id The old handler id.
- * @param $p_new_handler_id The new handler id.  0 for not assigned.
+ * @param integer $p_user_id        The id of the logged in user.
+ * @param integer $p_project_id     The id of the project the issue is associated with.
+ * @param integer $p_old_handler_id The old handler id.
+ * @param integer $p_new_handler_id The new handler id.  0 for not assigned.
  * @return true: access ok, otherwise: soap fault.
  */
 function mci_issue_handler_access_check( $p_user_id, $p_project_id, $p_old_handler_id, $p_new_handler_id ) {
@@ -830,7 +829,7 @@ function mc_issue_add( $p_username, $p_password, stdClass $p_issue ) {
 		mci_tag_set_for_issue( $t_issue_id, $p_issue['tags'], $t_user_id );
 	}
 
-	email_generic( $t_issue_id, 'new', 'email_notification_title_for_action_bug_submitted' );
+	email_bug_added( $t_issue_id );
 
 	if( $t_bug_data->status != config_get( 'bug_submit_status' ) ) {
 		history_log_event( $t_issue_id, 'status', config_get( 'bug_submit_status' ) );
@@ -1731,8 +1730,6 @@ function mc_issues_get_header( $p_username, $p_password, $p_issue_ids ) {
         return mci_soap_fault_login_failed();
     }
 
-    $t_lang = mci_get_user_lang( $t_user_id );
-
     $t_result = array();
     foreach( $p_issue_ids as $t_id ) {
 
@@ -1742,7 +1739,7 @@ function mc_issues_get_header( $p_username, $p_password, $p_issue_ids ) {
         log_event( LOG_WEBSERVICE, 'getting details for issue \'' . $t_id . '\'' );
 
         $t_issue_data = bug_get( $t_id, true );
-        $t_result[] = mci_issue_data_as_header_array( $t_issue_data, $t_user_id, $t_lang );
+        $t_result[] = mci_issue_data_as_header_array( $t_issue_data );
     }
 
     return $t_result;

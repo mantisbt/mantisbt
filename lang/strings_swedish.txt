@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -403,7 +403,7 @@ $s_reminder_sent_none = 'Inga påminnelser kunde skickas';
 $s_reminder_list_truncated = 'mottagarlistan trunkerad';
 $s_bug_send_button = 'Skicka';
 $s_reminder = 'Påminnelse';
-$s_reminder_explain = 'Meddelandet kommer att skickas till mottagare som begärt återkoppling till detta ärende.';
+$s_reminder_explain = 'Detta meddelande kommer att skickas till utvalda mottagare som begärt återkoppling gällande denna fråga.';
 $s_reminder_monitor = 'Mottagarna kommer också börja bevaka ärendet. De kan sluta bevaka det genom att använda motsvarande knapp.';
 $s_reminder_store = 'Detta meddelande kommer att sparas med ärendet.';
 $s_confirm_sponsorship = 'Bekräfta att du vill sponsra ärende %1$d med %2$s.';
@@ -1263,6 +1263,7 @@ $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Filen finns redan.  Var god ta bort den a
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Ogiltig sökväg för skickade filer.  Katalogen finns inte eller är inte skrivbar av webservern.';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Ingen fil skickades. Gå tillbaka och välj en fil innan du trycker på Skicka.';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Filen som skickades in kunde inte flyttas till fillagringskatalogen. Katalogen finns inte eller är inte skrivbar för servern.';
+$MANTIS_ERROR[ERROR_FILE_NOT_FOUND] = 'Bilaga med id "%1$d" hittades inte.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'Kan inte ange ett ärende som kopia av sig själv.';
 $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Ärenderevision hittas ej.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Det egendefinierade fältet kunde inte hittas.';
@@ -1349,3 +1350,4 @@ $MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = 'Föråldrad funktionalitet: "%1$s"
 $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'Varning: Systemet är konfigurerat för att visa fel i MantisBT (E_USER_ERROR) inbäddade. Programkörningen kommer att fortsätta; detta kan leda till problem med system-/dataintegritet.';
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Datatyper passar inte ihop. Aktivera detaljerade felmeddelanden för ytterligare information.';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Denna fråga har uppdaterats av en annan användare, återgå till frågan och lämna in dina ändringar igen.';
+$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Du har nått gränsen för tillåten aktivitet på %d händelser inom de senaste %d sekunderna; din åtgärd har blockerats för att undvika spam. Försök igen senare.';

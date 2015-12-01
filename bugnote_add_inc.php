@@ -64,10 +64,9 @@ require_api( 'lang_api.php' );
 	<table>
 		<thead>
 			<tr>
-				<td class="form-title" colspan="2">
-			<?php
-				collapse_icon( 'bugnote_add' );
-				echo lang_get( 'add_bugnote_title' ) ?>
+				<td class="form-title" colspan="2"><?php
+					collapse_icon( 'bugnote_add' );
+					echo lang_get( 'add_bugnote_title' ); ?>
 				</td>
 			</tr>
 		</thead>
@@ -173,9 +172,9 @@ require_api( 'lang_api.php' );
 ?>
 <table class="width100" cellspacing="1">
 <tr>
-	<td class="form-title" colspan="2">
-	<?php	collapse_icon( 'bugnote_add' );
-		echo lang_get( 'add_bugnote_title' ) ?>
+	<td class="form-title" colspan="2"><?php
+		collapse_icon( 'bugnote_add' );
+		echo lang_get( 'add_bugnote_title' ); ?>
 	</td>
 </tr>
 </table>

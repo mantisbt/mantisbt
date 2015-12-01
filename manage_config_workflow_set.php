@@ -68,6 +68,21 @@ function config_get_parent( $p_project, $p_option ) {
 	}
 }
 
+/**
+ * Retrieves the access level needed to change the configuration option in the
+ * project's parent (ALL_PROJECTS level if project, or file-level if all projects)
+ * @param integer $p_project Project.
+ * @param string  $p_option  Configuration option to retrieve.
+ * @return integer access level
+ */
+function config_get_access_parent( $p_project, $p_option ) {
+	if( $p_project == ALL_PROJECTS ) {
+		return config_get_global( 'admin_site_threshold' );
+	} else {
+		return config_get_access( $p_option, null, ALL_PROJECTS );
+	}
+}
+
 
 $t_can_change_level = min( config_get_access( 'notify_flags' ), config_get_access( 'default_notify_flags' ) );
 access_ensure_project_level( $t_can_change_level );
@@ -90,8 +105,12 @@ foreach( $t_valid_thresholds as $t_threshold ) {
 	if( $t_access >= $t_access_current ) {
 		$f_value = gpc_get( 'threshold_' . $t_threshold );
 		$t_value_current = config_get( $t_threshold );
+		$t_value_parent = config_get_parent( $t_project, $t_threshold );
+
 		$f_access = gpc_get( 'access_' . $t_threshold );
-		if( $f_value == $t_value_current && $f_access == $t_access_current ) {
+		$t_access_parent = config_get_access_parent( $t_project, $t_threshold );
+
+		if( $f_value == $t_value_parent && $f_access == $t_access_parent ) {
 			# If new value is equal to parent and access has not changed
 			config_delete( $t_threshold, ALL_USERS, $t_project );
 		} else if( $f_value != $t_value_current || $f_access != $t_access_current ) {
@@ -141,6 +160,7 @@ if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 	}
 
 	# Get the parent's workflow, if not set default to all transitions
+	$t_access_parent = config_get_access_parent( $t_project, 'status_enum_workflow' );
 	$t_access_current = config_get_access( 'status_enum_workflow' );
 	$t_workflow_parent = config_get_parent( $t_project, 'status_enum_workflow' );
 	if( 0 == count( $t_workflow_parent ) ) {
@@ -155,7 +175,7 @@ if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 		}
 	}
 
-	if( $t_workflow == $t_workflow_parent && $f_access == $t_access_current ) {
+	if( $t_workflow == $t_workflow_parent && $f_access == $t_access_parent ) {
 		# If new value is equal to parent and access has not changed
 		config_delete( 'status_enum_workflow', ALL_USERS, $t_project );
 	} else if( $t_workflow != config_get( 'status_enum_workflow' ) || $f_access != $t_access_current ) {
@@ -165,10 +185,11 @@ if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 }
 
 # process the access level changes
-if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
+if( config_get_access( 'set_status_threshold' ) <= $t_access ) {
 	# get changes to access level to change these values
 	$f_access = gpc_get( 'status_access' );
-	$t_access_current = config_get_access( 'status_enum_workflow' );
+	$t_access_parent = config_get_access_parent( $t_project, 'set_status_threshold' );
+	$t_access_current = config_get_access( 'set_status_threshold' );
 
 	# Build access level reference arrays (parent level and current config)
 	$t_set_parent = config_get_parent( $t_project, 'set_status_threshold' );
@@ -196,7 +217,7 @@ if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 	foreach( $t_enum_status as $t_status_id => $t_status_label ) {
 		$f_level = gpc_get_int( 'access_change_' . $t_status_id );
 		if( config_get( 'bug_submit_status' ) == $t_status_id ) {
-			if( $f_level != config_get( 'report_bug_threshold' ) ) {
+			if( $f_level != $t_set_parent[$t_status_id] ) {
 				config_set( 'report_bug_threshold', (int)$f_level, ALL_USERS, $t_project, $f_access );
 			} else {
 				config_delete( 'report_bug_threshold', ALL_USERS, $t_project );
@@ -208,7 +229,7 @@ if( config_get_access( 'status_enum_workflow' ) <= $t_access ) {
 		}
 	}
 
-	if( $t_set_new == $t_set_parent && $f_access == $t_access_current ) {
+	if( $t_set_new == $t_set_parent && $f_access == $t_access_parent ) {
 		# If new value is equal to parent and access has not changed
 		config_delete( 'set_status_threshold', ALL_USERS, $t_project );
 	} else if( $t_set_new != $t_set_current || $f_access != $t_access_current ) {

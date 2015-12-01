@@ -324,7 +324,7 @@ function cfdef_input_checkbox( array $p_field_def, $p_custom_field_value ) {
 		echo '<input id="$t_input_id" ' . helper_get_tab_index() . ' type="checkbox" name="' . $t_input_name . '" value="' . string_attribute( $t_values[$i] ) . '"';
 		check_checked( $t_checked_values, $t_values[$i] );
 		echo " />\n";
-		echo '<label for="' . $t_input_id . '">"' . string_display_line( $t_values[$i] ) . '</label>' . "\n";
+		echo '<label for="' . $t_input_id . '">' . string_display_line( $t_values[$i] ) . '</label>' . "\n";
 	}
 }
 

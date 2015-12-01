@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2014  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2015  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  *
  * **********************************************************************
  * ** This file contains translations stored in translatewiki.net.     **
- * ** See http://translatewiki.net/wiki/Project:About for information  **
+ * ** See https://translatewiki.net/wiki/Project:About for information **
  * ** on copyright/license for translatewiki.net translations.         **
  * **********************************************************************
  * **                                                                  **
@@ -224,7 +224,7 @@ $s_new_account_greeting = '谢谢你注册本系统. 你的登陆帐号名称是
 $s_new_account_greeting_admincreated = '用户%1$s为你创建了用户名为"%2$s"的帐号. 请访问下面的地址以完成你的注册并设置自己的访问密码:';
 $s_new_account_username = '用户名：';
 $s_new_account_message = '如果你从未申请过注册本系统，请忽略此消息';
-$s_new_account_do_not_reply = '此邮件由系统自动生成，请勿回复';
+$s_new_account_do_not_reply = '请不要回复此消息';
 $s_new_account_email = '电子邮箱:';
 $s_new_account_IP = 'IP 地址:';
 $s_new_account_signup_msg = '已创建如下账号：';
@@ -408,7 +408,7 @@ $s_reminder_list_truncated = '收件人列表已被缩短';
 $s_bug_send_button = '发送';
 $s_reminder = '提醒';
 $s_reminder_explain = '该提醒将发送给被要求接收该问题反馈的所有收件人。';
-$s_reminder_monitor = '这些人将开始监视此问题，他们可以使用“取消监视”按钮来取消订阅。';
+$s_reminder_monitor = '这些收件人也将开始监视此问题，他们可以使用“取消监视”按钮来取消订阅。';
 $s_reminder_store = '该提醒将和问题一起储存。';
 $s_confirm_sponsorship = '请确认你要为 %1$d 号问题向 %2$s 提供资助。';
 $s_stick_bug_button = '置顶';
@@ -739,7 +739,7 @@ $s_show_all_users = '全部';
 $s_users_unused = '未用';
 $s_users_new = '新的';
 $s_account_reset_protected_msg = '帐号受保护，不能重置密码。';
-$s_account_reset_msg = '确认邮件已经发往你的邮箱...';
+$s_account_reset_msg = '一封确认请求已发往选定用户的电子邮件地址。通过使用它，用户将可以更改他们的密码。';
 $s_account_reset_msg2 = '账号密码已经置为空...';
 $s_account_unlock_msg = '该帐户已解锁。';
 $s_manage_user_protected_msg = '帐号受保护；“用户级别”和“是否启用”信息不能修改；其他信息已成功更新。';
@@ -834,10 +834,10 @@ $s_selected_project = '选择项目';
 $s_valid_project_msg = '必须选择一个有效的项目';
 $s_signup_done_title = '账号注册已处理';
 $s_password_emailed_msg = '恭喜你，你的注册已成功。为证实你的邮件地址的有效性，系统将发出确认信，请你在收到该信后访问链接以激活你的账号。';
-$s_no_reponse_msg = '你必须在7天之内激活你的账号，否则逾期该账号将被自动清除';
+$s_no_reponse_msg = '您有7天的时间来完成账号确认流程，如在此期间内未完成，新注册的账号将被清除。';
 $s_signup_captcha_request_label = '在右侧的输入框输入要显示的代码：';
 $s_signup_captcha_refresh = '生成新的代码';
-$s_signup_info = '填完此表单后，你将在你填写的邮箱里收到一封确认信。<br />通过确认信，你可以激活你的账号。如果你在7天之内不激活你的账号，系统将自动清除此账号。<br />为了你能够收到这封确认信，请务必确保你输入的邮件地址是有效的。';
+$s_signup_info = '填完此表单并确认答案后，您将在指定的邮件地址里收到一封确认信。<br />使用确认信中提供的链接，您可以激活账号。如果在7天之内未完成激活，账号将被清除。<br />为了能够收到帐号确认信，必须指定一个有效的邮件地址。';
 $s_signup_title = '注册';
 $s_signup_button = '注册';
 $s_no_password_request = '你的密码被另一个系统所管理，请联系系统管理员进行修改。';
@@ -846,7 +846,7 @@ $s_save_settings_button = '保存设置';
 $s_site_settings_title = '站点设置';
 $s_system_info_link = '系统信息';
 $s_site_settings_link = '站点设置';
-$s_site_settings_updated_msg = '站点设置已经被更新。';
+$s_site_settings_updated_msg = '网站设置已更新';
 $s_summary_title = '统计报表';
 $s_summary_advanced_link = '图形报表';
 $s_by_project = '按项目';
@@ -894,6 +894,7 @@ $s_issue_id = '问题 #';
 $s_recently_visited = '最近浏览的';
 $s_note_user_id_label = '注释自：';
 $s_filter_match_type = '匹配类型';
+$s_filter_match_type_label = '匹配类型：';
 $s_filter_match_all = '所有情况';
 $s_filter_match_any = '任何情况';
 $s_none = '无';
@@ -925,7 +926,7 @@ $s_query_name_label = '过滤器名：';
 $s_query_exists = '此特定的筛选器似乎已经存在。';
 $s_query_dupe_name = '这个名称已经被另外一个筛选器使用，请选择一个不同的名称。';
 $s_query_blank_name = '没有名称就不能保存过滤器，在保存前请给当前过滤器起一个名字。';
-$s_query_name_too_long = '您不能将存储与超过 64 个字符的筛选器名称。请给此筛选器较短的名称。';
+$s_query_name_too_long = '您不能存储超过 64 个字符的过滤器名称。请为此过滤器提供一个更短的名称。';
 $s_query_store_error = '保存此筛选器时出错。';
 $s_open_queries = '管理过滤器';
 $s_query_delete_msg = '您确实要删除此筛选器吗？';
@@ -1021,7 +1022,7 @@ $s_roadmap = '路线图';
 $s_resolved_progress = '已解决 %1$d 个问题(共 %2$d 个问题)，进度(%3$d%%)。';
 $s_roadmap_empty = '没有可用路线图信息';
 $s_roadmap_empty_manager = '没有可用的线路图信息。一旦项目有版本并且问题有设置“目标版本”就会包括问题。';
-$s_http_auth_realm = 'MantisBT 问题管理系统登录';
+$s_http_auth_realm = 'MantisBT 登录';
 $s_bug = '问题';
 $s_bugs = '个问题';
 $s_add_new_relationship = '新建关联';
@@ -1246,7 +1247,7 @@ $MANTIS_ERROR[ERROR_PROJECT_NAME_INVALID] = '项目名称无效，项目名称�
 $MANTIS_ERROR[ERROR_USER_BY_NAME_NOT_FOUND] = '用户名 "%1$s" 无法找到。';
 $MANTIS_ERROR[ERROR_USER_BY_ID_NOT_FOUND] = '用户ID "%1$d" 无法找到。';
 $MANTIS_ERROR[ERROR_AUTH_INVALID_COOKIE] = '浏览器储存的登录资料无效；也许你的帐号已经被删除了？';
-$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = '没有找到帐号的配置信息';
+$MANTIS_ERROR[ERROR_USER_PREFS_NOT_FOUND] = '找不到此用户的参数设置。';
 $MANTIS_ERROR[ERROR_NEWS_NOT_FOUND] = '没有找到新闻。';
 $MANTIS_ERROR[ERROR_USER_CREATE_PASSWORD_MISMATCH] = '密码与核证结果不匹配';
 $MANTIS_ERROR[ERROR_USER_CURRENT_PASSWORD_MISMATCH] = '当前密码不正确。';
@@ -1264,6 +1265,7 @@ $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = '文件重复，请先删除原有的文�
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = '无效的上传路径；目录不存在或 Web 服务器不能写入该目录';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = '没有上传文件，请返回并选择要上传的文件';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = '上传的文件不能转移到文件储存目录；目录不存在或 Web 服务器不能写入该目录';
+$MANTIS_ERROR[ERROR_FILE_NOT_FOUND] = '找不到ID为“%1$d”的附件。';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = '不能将问题设置为自身的重复问题。';
 $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = '未找到问题修订';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = '没有找到自定义字段';
@@ -1350,3 +1352,4 @@ $MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = '弃用功能：“%1$s”，应使
 $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = '警告：系统配置为内联显示MantisBT错误（E_USER_ERROR）。程序将继续执行；这将导致系统/数据完整性问题。';
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = '数据类型不匹配。启用详细错误消息以获取更多信息。';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = '此问题被另一用户更新，请返回问题并再次提交您的更改。';
+$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = '您已经达到了可允许的活动极限 - %d 次事件，%d 秒内；您的行为已经被阻止以防止垃圾信息，请稍候再试。';

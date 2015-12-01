@@ -20,8 +20,6 @@ Developers
 ----------
 
 Damien Regad (dregad)
-Daryn Warriner (daryn, dwarrine)
-Paul Richards (grangeway, paulr, minimoo, prichards)
 Robert Munteaunu (rombert)
 Roland Becker (atrol)
 
@@ -38,9 +36,11 @@ Ex-Developers
 -------------
 
 David Hicks (dhx)
+Daryn Warriner (daryn, dwarrine)
 Gianluca Sforna (giallu)
 Glenn Henshaw (thraxisp)
 John Reese (jreese, nuclear_eclipse)
+Paul Richards (grangeway, paulr, minimoo, prichards)
 Siebrand Mazeland (siebrand)
 
 
@@ -50,8 +50,8 @@ People who contributed code to MantisBT, listed in reverse order of the
 number of commits authored.
 
 Victor Boctor
-Paul Richards
 Damien Regad
+Paul Richards
 Kenzaburo Ito
 Glenn Henshaw
 Julian Fitzell
@@ -76,8 +76,8 @@ Martin Fuchs
 zakman
 jbrugger
 jctrosset
-ryandesign
 Rafik Robeal
+ryandesign
 rufinus
 Kirill Krasnov
 David Newcomb

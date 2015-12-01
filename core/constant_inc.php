@@ -278,6 +278,7 @@ define( 'ERROR_FILE_DUPLICATE', 502 );
 define( 'ERROR_FILE_INVALID_UPLOAD_PATH', 503 );
 define( 'ERROR_FILE_NO_UPLOAD_FAILURE', 504 );
 define( 'ERROR_FILE_MOVE_FAILED', 505 );
+define( 'ERROR_FILE_NOT_FOUND', 506 );
 
 # ERROR_BUGNOTE_*
 define( 'ERROR_BUGNOTE_NOT_FOUND', 600 );
@@ -588,4 +589,8 @@ define( 'ERROR_BUG_RESOLVED_ACTION_DENIED', 1102 ); # N/A
 define( 'LOG_SOAP', 64 );                           # LOG_WEBSERVICE
 define( 'FTP', 1 );                                 # DISK
 define( 'ERROR_FTP_CONNECT_ERROR', 16 );            # N/A
+
+# JQuery and JQuery UI
+define ( 'JQUERY_VERSION', '1.11.3' );
+define ( 'JQUERY_UI_VERSION', '1.11.4' );
 

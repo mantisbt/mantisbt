@@ -37,16 +37,21 @@ style_display = 'block';
 $(document).ready( function() {
 	$('.collapse-open').show();
 	$('.collapse-closed').hide();
-	$('.collapse-link').click( function(event) {
-		event.preventDefault();
-		var id = $(this).attr('id');
-		var t_pos = id.indexOf('_closed_link' );
-		if( t_pos == -1 ) {
-			t_pos = id.indexOf('_open_link' );
-		}
-		var t_div = id.substring(0, t_pos );
-		ToggleDiv( t_div );
-	});
+	$('.collapse-link')
+		.show()
+		.css('cursor', 'pointer')
+		.click( function(event) {
+			event.preventDefault();
+			var id = $(this).attr('id');
+			var t_pos = id.indexOf('_closed_link' );
+			if( t_pos == -1 ) {
+				t_pos = id.indexOf('_open_link' );
+			}
+			var t_div = id.substring(0, t_pos );
+			ToggleDiv( t_div );
+		});
+	// Hack to adjust spacing between collapse icon and search div
+	$('.search-box').css('padding-left', '0');
 
 	$('input[type=text].autocomplete').autocomplete({
 		source: function(request, callback) {

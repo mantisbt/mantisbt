@@ -65,13 +65,6 @@
 		</varlistentry>
 
 		<varlistentry>
-			<term>$g_font_per_captcha</term>
-			<listitem>
-				<para>TODO</para>
-			</listitem>
-		</varlistentry>
-
-		<varlistentry>
 			<term>$g_lost_password_feature</term>
 			<listitem>
 				<para>TODO</para>

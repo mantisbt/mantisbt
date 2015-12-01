@@ -53,8 +53,7 @@ $g_collapse_cache_token = null;
 
 /**
  * Marks the beginning of a collapse block's open phase.
- * This will be visible if the block is expanded, or if
- * javascript is disabled.
+ * This will be visible if the block is expanded or javascript is disabled.
  * @param string $p_name      Collapse block name.
  * @param string $p_section   Collapse block section.
  * @param string $p_css_class CSS class to apply to the div (defaults to none).
@@ -86,8 +85,8 @@ function collapse_open( $p_name, $p_section = '', $p_css_class = '' ) {
 
 /**
  * Marks the end of a collapse block's open phase and the beginning
- * of the block's closed phase.  This will only be visible if the
- * block have been collapsed and javascript is enabled.
+ * of the closed phase.
+ * This will be visible if the block is collapsed and javascript is enabled.
  * @param string $p_name    Collapse block name.
  * @param string $p_section Collapse block section.
  * @return void
@@ -107,10 +106,10 @@ function collapse_closed( $p_name, $p_section = '' ) {
 
 	$g_open_collapse_section = false;
 
-	ob_start();
-
 	$t_div_id = $t_block . '_closed';
-	echo "\n<div id=\"", $t_div_id, '"', ( $t_display ? ' class="collapse-open"' : ' class="collapse-closed"' ), '>';
+	$t_collapse_status_class = $t_display ? 'collapse-open' : 'collapse-closed';
+	echo "\n" . '<div id="', $t_div_id,
+		'" class="collapse-section-closed ' . $t_collapse_status_class . '">';
 }
 
 /**
@@ -134,12 +133,11 @@ function collapse_icon( $p_name, $p_section = '' ) {
 		$t_id = $p_name. '_closed_link';
 	}
 
-	echo '<a id="', $t_id, '" href="" class="collapse-link"><img src="images/', $t_icon, '" alt="', $t_alt, '" /></a>&#160;';
+	echo '<a id="', $t_id, '" class="collapse-link"><img src="images/', $t_icon, '" alt="', $t_alt, '" /></a>';
 }
 
 /**
  * Marks the end of a collapse block's closed phase.
- * Closed phase output is discarded if javascript is disabled.
  * @param string $p_name    Collapse block name.
  * @param string $p_section Collapse block section.
  * @return void
@@ -148,20 +146,15 @@ function collapse_end( $p_name, $p_section = '' ) {
 	global $g_current_collapse_section, $g_open_collapse_section;
 
 	$t_block = ( is_blank( $p_section ) ? $p_name : $p_section . '_' . $p_name );
-	collapse_display( $t_block );
 
 	# Make sure a section is opened, and it is the same section.
 	if( $t_block !== $g_current_collapse_section ) {
-		ob_end_clean();
 		trigger_error( ERROR_GENERIC, ERROR );
 	}
 
 	echo '</div>';
 
 	$g_open_collapse_section = false;
-
-	ob_end_flush();
-
 	$g_current_collapse_section = null;
 }
 

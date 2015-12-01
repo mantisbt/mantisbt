@@ -291,6 +291,7 @@ $s_email_notification_title_for_status_bug_resolved = 'The following issue has b
 $s_email_notification_title_for_status_bug_closed = 'The following issue has been CLOSED';
 $s_email_notification_title_for_action_bug_submitted = 'The following issue has been SUBMITTED.';
 $s_email_notification_title_for_action_bug_assigned = 'The following issue has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_unassigned = 'The following issue has been UNASSIGNED.';
 $s_email_notification_title_for_action_bug_reopened = 'The following issue has been REOPENED.';
 $s_email_notification_title_for_action_bug_deleted = 'The following issue has been DELETED.';
 $s_email_notification_title_for_action_bug_updated = 'The following issue has been UPDATED.';
@@ -1187,7 +1188,7 @@ $s_issue_id = 'Issue #';
 $s_recently_visited = 'Recently Visited';
 $s_priority_abbreviation = 'P';
 $s_note_user_id_label = 'Note By:';
-$s_filter_match_type = 'Match Type';
+$s_filter_match_type_label = 'Match Type:';
 $s_filter_match_all = 'All Conditions';
 $s_filter_match_any = 'Any Condition';
 
@@ -1286,9 +1287,9 @@ $s_custom_field_require_report = 'Required On Report';
 $s_custom_field_require_update = 'Required On Update';
 $s_custom_field_require_resolved = 'Required On Resolve';
 $s_custom_field_require_closed = 'Required On Close';
-$s_link_custom_field_to_project_title = 'Link custom field to project';
+$s_link_custom_field_to_project_title = 'Link custom field to projects';
 $s_link_custom_field_to_project_button = 'Link Custom Field';
-$s_linked_projects_label = 'Linked Projects:';
+$s_linked_projects_label = 'Linked Projects';
 $s_custom_field_sequence = 'Sequence';
 $s_custom_field_sequence_label = 'Sequence';
 $s_custom_field_type_enum_string = '0:String,1:Numeric,2:Float,3:Enumeration,4:E-mail,5:Checkbox,6:List,7:Multiselection list,8:Date,9:Radio,10:Textarea';
@@ -1378,7 +1379,7 @@ $s_vertical = 'Vertical';
 $s_horizontal = 'Horizontal';
 $s_view_issue = 'View Issue';
 
-# Pemissions report
+# Permissions report
 $s_perm_rpt_capability = 'Capability';
 $s_view = 'View';
 $s_issues = 'Issues';
@@ -1437,6 +1438,7 @@ $s_status_changed_to = 'Status changes to';
 $s_email_on_deleted = 'E-mail on Deleted';
 $s_email_on_sponsorship_changed = 'E-mail on Sponsorship changed';
 $s_email_on_relationship_changed = 'E-mail on Relationship changed';
+$s_email_on_updated = 'Email on Updated';
 
 # Dynamic filters (load filter controls via AJAX upon request)
 $s_loading = 'Loading...';
@@ -1632,6 +1634,7 @@ $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'This is a duplicate file. Please delete t
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Invalid upload path. Directory either does not exist or not writable to webserver.';
 $MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'No file was uploaded. Please go back and Choose a file before pressing Upload.';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'Uploaded file could not be moved to the file storage directory. Directory either does not exist or not writable to webserver.';
+$MANTIS_ERROR[ERROR_FILE_NOT_FOUND] = 'Attachment with id "%1$d" not found.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'You cannot set an issue as a duplicate of itself.';
 $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'Issue revision not found.';
 $MANTIS_ERROR[ERROR_CUSTOM_FIELD_NOT_FOUND] = 'Custom field not found.';

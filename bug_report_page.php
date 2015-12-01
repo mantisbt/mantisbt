@@ -337,14 +337,17 @@ if( $t_show_attachments ) {
 			<div class="field-container">
 				<label><span><?php echo lang_get( 'select_profile' ) ?></span></label>
 				<span class="select">
-					<?php if( count( profile_get_all_for_user( auth_get_current_user_id() ) ) > 0 ) { ?>
+<?php
+					if( count( profile_get_all_for_user( auth_get_current_user_id() ) ) > 0 ) { ?>
 						<select <?php echo helper_get_tab_index() ?> id="profile_id" name="profile_id">
 							<?php print_profile_option_list( auth_get_current_user_id(), $f_profile_id ) ?>
 						</select>
-					<?php } ?>
+<?php
+					}
 
-					<?php collapse_icon( 'profile' ); ?>
-					<?php echo lang_get( 'or_fill_in' ); ?>
+					collapse_icon( 'profile' );
+					echo lang_get( 'or_fill_in' );
+?>
 				</span>
 				<span class="label-style"></span>
 			</div>

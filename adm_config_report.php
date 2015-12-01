@@ -58,7 +58,7 @@ $t_read_write_access = access_has_global_level( config_get( 'set_configuration_t
 
 html_page_top( lang_get( 'configuration_report' ) );
 
-print_manage_menu( 'adm_config_report.php' );
+print_manage_menu( 'adm_permissions_report.php' );
 print_manage_config_menu( 'adm_config_report.php' );
 
 $t_config_types = array(
@@ -494,7 +494,7 @@ if( $t_read_write_access ) {
 				<label for="config-option"><span><?php echo lang_get( 'configuration_option' ) ?></span></label>
 				<span class="input">
 					<input type="text" name="config_option"
-						value="<?php echo string_display_line( $t_edit_option ); ?>"
+						value="<?php echo string_attribute( $t_edit_option ); ?>"
 						size="64" maxlength="64" />
 				</span>
 				<span class="label-style"></span>

@@ -70,7 +70,7 @@ function print_info_row( $p_description, $p_value ) {
 	} else {
 		$t_version_suffix = '';
 	}
-	print_info_row( lang_get( 'mantis_version' ), MANTIS_VERSION, $t_version_suffix );
+	print_info_row( lang_get( 'mantis_version' ), MANTIS_VERSION . $t_version_suffix );
 	print_info_row( lang_get( 'php_version' ), phpversion() );
 ?>
 		<tr>

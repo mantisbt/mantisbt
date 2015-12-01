@@ -88,11 +88,9 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 	<input type="hidden" name="id" value="<?php echo $f_bug_id ?>" />
 	<table class="width100" cellspacing="0">
 		<tr>
-			<td class="form-title" colspan="4">
-				<?php
-					collapse_icon( 'bugnotestats' );
-					echo lang_get( 'time_tracking' )
-				?>
+			<td class="form-title" colspan="4"><?php
+				collapse_icon( 'bugnotestats' );
+				echo lang_get( 'time_tracking' ); ?>
 			</td>
 		</tr>
 		<tr class="row-2">
@@ -187,11 +185,9 @@ $f_get_bugnote_stats_button = gpc_get_string( 'get_bugnote_stats_button', '' );
 
 <table class="width100" cellspacing="0">
 	<tr>
-		<td class="form-title" colspan="4">
-			<?php
-				collapse_icon( 'bugnotestats' );
-				echo lang_get( 'time_tracking' )
-			?>
+		<td class="form-title" colspan="4"><?php
+			collapse_icon( 'bugnotestats' );
+			echo lang_get( 'time_tracking' ); ?>
 		</td>
 	</tr>
 </table>

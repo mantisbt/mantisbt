@@ -53,9 +53,11 @@ $g_db_connected = false;
 # @global bool $g_db_log_queries
 $g_db_log_queries = ( 0 != ( config_get_global( 'log_level' ) & LOG_DATABASE ) );
 
-# set adodb fetch mode
+# set adodb to associative fetch mode with lowercase column names
 # @global bool $ADODB_FETCH_MODE
+global $ADODB_FETCH_MODE;
 $ADODB_FETCH_MODE = ADODB_FETCH_ASSOC;
+define( 'ADODB_ASSOC_CASE', ADODB_ASSOC_CASE_LOWER );
 
 /**
  * Mantis Database Parameters Count class
@@ -504,45 +506,25 @@ function db_fetch_array( IteratorAggregate &$p_result ) {
 		return false;
 	}
 
-	# mysql obeys FETCH_MODE_BOTH, hence ->fields works, other drivers do not support this
-	if( $g_db_type == 'mysql' || $g_db_type == 'odbc_mssql'  || $g_db_type == 'mssqlnative' ) {
-		$t_array = $p_result->fields;
-		$p_result->MoveNext();
-		return $t_array;
-	} else {
-		$t_row = $p_result->GetRowAssoc( ADODB_ASSOC_CASE_LOWER );
-		static $s_array_result;
-		static $s_array_fields;
+	# Retrieve the fields from the recordset
+	$t_row = $p_result->fields;
 
-		# Oci8 returns null values for empty strings
-		if( db_is_oracle() ) {
-			foreach( $t_row as &$t_value ) {
-				if( !isset( $t_value ) ) {
-					$t_value = '';
-				}
-			}
+	# Additional handling for specific RDBMS
+	if( db_is_pgsql() ) {
+		# pgsql's boolean fields are stored as 't' or 'f' and must be converted
+		static $s_current_result = null, $s_convert_needed;
+
+		if( $s_current_result != $p_result ) {
+			# Processing a new query
+			$s_current_result = $p_result;
+			$s_convert_needed = false;
+		} elseif( !$s_convert_needed ) {
+			# No conversion needed, return the row as-is
+			$p_result->MoveNext();
+			return $t_row;
 		}
 
-		if( $s_array_result != $p_result ) {
-			# new query
-			$s_array_result = $p_result;
-			$s_array_fields = null;
-		} else {
-			if( $s_array_fields === null ) {
-				$p_result->MoveNext();
-				return $t_row;
-			}
-		}
-
-		$t_convert = false;
-		$t_fieldcount = $p_result->FieldCount();
-		for( $i = 0; $i < $t_fieldcount; $i++ ) {
-			if( isset( $s_array_fields[$i] ) ) {
-				$t_field = $s_array_fields[$i];
-			} else {
-				$t_field = $p_result->FetchField( $i );
-				$s_array_fields[$i] = $t_field;
-			}
+		foreach( $p_result->FieldTypesArray() as $t_field ) {
 			switch( $t_field->type ) {
 				case 'bool':
 					switch( $t_row[$t_field->name] ) {
@@ -553,19 +535,22 @@ function db_fetch_array( IteratorAggregate &$p_result ) {
 							$t_row[$t_field->name] = true;
 							break;
 					}
-					$t_convert= true;
-					break;
-				default :
+					$s_convert_needed = true;
 					break;
 			}
 		}
 
-		if( $t_convert == false ) {
-			$s_array_fields = null;
+	} elseif( db_is_oracle() ) {
+		# oci8 returns null values for empty strings, convert them back
+		foreach( $t_row as &$t_value ) {
+			if( !isset( $t_value ) ) {
+				$t_value = '';
+			}
 		}
-		$p_result->MoveNext();
-		return $t_row;
 	}
+
+	$p_result->MoveNext();
+	return $t_row;
 }
 
 /**
@@ -580,13 +565,10 @@ function db_result( $p_result, $p_index1 = 0, $p_index2 = 0 ) {
 		$p_result->Move( $p_index1 );
 		$t_result = $p_result->GetArray();
 
-		if( isset( $t_result[0][$p_index2] ) ) {
-			return $t_result[0][$p_index2];
-		}
-
-		# The numeric index doesn't exist. FETCH_MODE_ASSOC may have been used.
-		# Get 2nd dimension and make it numerically indexed
+		# Make the array numerically indexed. This is required to retrieve the
+		# column ($p_index2), since we use ADODB_FETCH_ASSOC fetch mode.
 		$t_result = array_values( $t_result[0] );
+
 		return $t_result[$p_index2];
 	}
 

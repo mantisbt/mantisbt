@@ -60,11 +60,9 @@ $t_max_file_size = (int)min( ini_get_number( 'upload_max_filesize' ), ini_get_nu
 
 <table class="width100" cellspacing="1">
 <tr>
-	<td class="form-title" colspan="2">
-<?php
+	<td class="form-title" colspan="2"><?php
 		collapse_icon( 'upload_form' );
-		echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' );
-?>
+		echo lang_get( $t_file_upload_max_num == 1 ? 'upload_file' : 'upload_files' ); ?>
 	</td>
 </tr>
 <tr class="row-1">
@@ -99,10 +97,9 @@ collapse_closed( 'upload_form' );
 ?>
 <table class="width100" cellspacing="1">
 <tr>
-	<td class="form-title" colspan="2">
-		<?php
-			collapse_icon( 'upload_form' );
-			echo lang_get( 'upload_file' ) ?>
+	<td class="form-title" colspan="2"><?php
+		collapse_icon( 'upload_form' );
+		echo lang_get( 'upload_file' ); ?>
 	</td>
 </tr>
 </table>

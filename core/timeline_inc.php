@@ -21,10 +21,11 @@ define( 'MAX_EVENTS', 50 );
 
 $f_days = gpc_get_int( 'days', 0 );
 $f_all = gpc_get_int( 'all', 0 );
+$t_max_events = $f_all ? 0 : MAX_EVENTS + 1;
 
 $t_end_time = time() - ( $f_days * SECONDS_PER_DAY );
 $t_start_time = $t_end_time - ( 7 * SECONDS_PER_DAY );
-$t_events = timeline_events( $t_start_time, $t_end_time );
+$t_events = timeline_events( $t_start_time, $t_end_time, $t_max_events );
 
 echo '<div class="timeline">';
 
@@ -44,15 +45,13 @@ if( $t_next_days != $f_days ) {
 }
 
 echo '<div class="date-range">' . date( $t_short_date_format, $t_start_time ) . ' .. ' . date( $t_short_date_format, $t_end_time ) . $t_prev_link . $t_next_link . '</div>';
-$t_events = timeline_sort_events( $t_events );
 
-$t_num_events = timeline_print_events( $t_events, ( $f_all ? 0 : MAX_EVENTS ) );
-
-# Don't display "More Events" link if there are no more entries to show
-# Note: as of 2015-01-19, this does not cover the case of entries excluded
-# by filtering (e.g. Status Change not in RESOLVED, CLOSED, REOPENED)
-if( !$f_all && $t_num_events < count( $t_events )) {
+if( !$f_all && count( $t_events ) > MAX_EVENTS ) {
+	$t_events = array_slice( $t_events, 0, MAX_EVENTS );
+	timeline_print_events( $t_events );
 	echo '<p>' . $t_prev_link = ' [ <a href="my_view_page.php?days=' . $f_days . '&amp;all=1">' . lang_get( 'timeline_more' ) . '</a> ]</p>';
+} else {
+	timeline_print_events( $t_events );
 }
 
 echo '</div>';

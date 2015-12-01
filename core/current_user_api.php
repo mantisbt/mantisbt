@@ -48,7 +48,7 @@ require_api( 'utility_api.php' );
  * Sets the current user
  *
  * @param integer $p_user_id Id to set as current user
- * @return Old current user id
+ * @return integer Old current user id
  * @access public
  */
 function current_user_set( $p_user_id ) {

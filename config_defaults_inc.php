@@ -356,18 +356,11 @@ $g_signup_use_captcha	= ON;
 
 /**
  * absolute path (with trailing slash!) to folder which contains your
- * TrueType-Font files used to create the captcha image and since 0.19.3 for
- * the Relationship Graphs
+ * TrueType-Font files used for the Relationship Graphs,
+ * the Workflow Graphs and the MantisGraph plugin
  * @global string $g_system_font_folder
  */
 $g_system_font_folder	= '';
-
-/**
- * font name used to create the captcha image. i.e. arial.ttf
- * (the font file has to exist in the system_font_folder)
- * @global string $g_font_per_captcha
- */
-$g_font_per_captcha	= 'arial.ttf';
 
 /**
  * Setting to disable the 'lost your password' feature.
@@ -714,6 +707,7 @@ $g_language_choices_arr = array(
 	'amharic',
 	'arabic',
 	'arabicegyptianspoken',
+	'asturian',
 	'belarusian_tarask',
 	'breton',
 	'bulgarian',
@@ -773,6 +767,7 @@ $g_language_auto_map = array(
 	'am' => 'amharic',
 	'ar' => 'arabic',
 	'arz' => 'arabicegyptianspoken',
+	'ast' => 'asturian',
 	'be-tarask' => 'belarusian_tarask',
 	'bg' => 'bulgarian',
 	'br' => 'breton',
@@ -865,6 +860,8 @@ $g_logo_url = '%default_home_page%';
  * Specifies whether to enable support for project documents or not.
  * This feature is deprecated and is expected to be moved to a plugin
  * in the future.
+ * @see $g_view_proj_doc_threshold
+ * @see $g_upload_project_file_threshold
  * @global integer $g_enable_project_documentation
  */
 $g_enable_project_documentation = OFF;
@@ -2665,7 +2662,10 @@ $g_bug_revision_drop_threshold = MANAGER;
 /**
  * access level needed to upload files to the project documentation section
  * You can set this to NOBODY to prevent uploads to projects
- * See also: $g_upload_bug_file_threshold, $g_allow_file_upload
+ * @see $g_enable_project_documentation
+ * @see $g_view_proj_doc_threshold
+ * @see $g_allow_file_upload
+ * @see $g_upload_bug_file_threshold
  * @global integer $g_upload_project_file_threshold
  */
 $g_upload_project_file_threshold = MANAGER;
@@ -2695,9 +2695,13 @@ $g_update_bugnote_threshold = DEVELOPER;
 
 /**
  * Threshold needed to view project documentation
+ * Note: setting this to ANYBODY will let any user download attachments
+ * from private projects, regardless of their being a member of it.
+ * @see $g_enable_project_documentation
+ * @see $g_upload_project_file_threshold
  * @global integer $g_view_proj_doc_threshold
  */
-$g_view_proj_doc_threshold = ANYBODY;
+$g_view_proj_doc_threshold = VIEWER;
 
 /**
  * Site manager
@@ -3401,12 +3405,20 @@ $g_css_include_file = 'default.css';
  */
 $g_css_rtl_include_file = 'rtl.css';
 
-
 /**
  * meta tags
  * @global string $g_meta_include_file
  */
 $g_meta_include_file = '';
+
+/**
+ * A flag that indicates whether to use CDN (content delivery networks) for loading
+ * javascript libraries and their associated CSS.  This improves performance for
+ * loading MantisBT pages.  This can be disabled if it is desired that MantisBT
+ * doesn't reach out outside corporate network.
+ * @global integer $g_cdn_enabled
+ */
+$g_cdn_enabled = OFF;
 
 ################
 # Redirections #
@@ -4241,6 +4253,7 @@ $g_global_settings = array(
 	'class_path','library_path', 'language_path', 'absolute_path_default_upload_folder',
 	'ldap_simulation_file_path', 'plugin_path', 'bottom_include_page', 'top_include_page',
 	'default_home_page', 'logout_redirect_page', 'manual_url', 'logo_url', 'wiki_engine_url',
+	'cdn_enabled'
 );
 
 # Temporary variables should not remain defined in global scope
