@@ -40,11 +40,15 @@ define( 'API_TOKEN_LENGTH', 32 );
  */
 function api_token_create( $p_token_name, $p_user_id ) {
 	if( is_blank( $p_token_name ) ) {
-		error_parameters( lang_get( 'token_name' ) );
+		error_parameters( lang_get( 'api_token_name' ) );
 		trigger_error( ERROR_EMPTY_FIELD, ERROR );
 	}
 
 	$t_token_name = trim( $p_token_name );
+	if( strlen( $t_token_name ) > DB_FIELD_SIZE_API_TOKEN_NAME ) {
+		error_parameters( lang_get( 'api_token_name' ), DB_FIELD_SIZE_API_TOKEN_NAME );
+		trigger_error( ERROR_FIELD_TOO_LONG, ERROR );
+	}
 
 	$t_plain_token = crypto_generate_uri_safe_nonce( API_TOKEN_LENGTH );
 	$t_hash = api_token_hash( $t_plain_token );
@@ -65,8 +69,7 @@ function api_token_create( $p_token_name, $p_user_id ) {
  * @access public
  */
 function api_token_hash( $p_token ) {
-	# We ignore spaces in tokens.  We inject spaces for users for readability only.
-	return sha1( str_replace( ' ', '', $p_token ) );
+	return sha1( $p_token );
 }
 
 /**
@@ -149,14 +152,5 @@ function api_token_touch( $p_api_token_id ) {
 function api_token_revoke( $p_api_token_id, $p_user_id ) {
 	$t_query = 'DELETE FROM {api_token} WHERE id=' . db_param() . ' AND user_id = ' . db_param();
 	db_query( $t_query, array( $p_api_token_id, $p_user_id ) );
-}
-
-/**
- * Gets the max length for the API token name.
- * @return integer Maximum length for API token name.
- * @access public
- */
-function api_token_name_max_length() {
-	return 128;
 }
 

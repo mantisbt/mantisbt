@@ -249,6 +249,7 @@ define( 'ERROR_INVALID_RESOLUTION', 24 );
 define( 'ERROR_DISPLAY_USER_ERROR_INLINE', 25 );
 define( 'ERROR_TYPE_MISMATCH', 26 );
 define( 'ERROR_SPAM_SUSPECTED', 27 );
+define( 'ERROR_FIELD_TOO_LONG', 28 );
 
 # ERROR_CONFIG_*
 define( 'ERROR_CONFIG_OPT_NOT_FOUND', 100 );
@@ -575,6 +576,7 @@ define( 'EMAIL_SHUTDOWN_FORCE', 2 );
 define( 'DB_FIELD_SIZE_USERNAME', 255 );
 define( 'DB_FIELD_SIZE_REALNAME', 255 );
 define( 'DB_FIELD_SIZE_PASSWORD', 64 );
+define( 'DB_FIELD_SIZE_API_TOKEN_NAME', 128 );
 
 # Maximum size for the user's password when storing it as a hash
 define( 'PASSWORD_MAX_SIZE_BEFORE_HASH', 1024 );

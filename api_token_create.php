@@ -43,14 +43,24 @@ $t_user_id = auth_get_current_user_id();
 user_ensure_unprotected( $t_user_id );
 
 $t_token = api_token_create( $f_token_name, $t_user_id );
+$t_disclose_message = lang_get( 'api_token_disclose_message' );
+$t_display_once_message = lang_get( 'api_token_displayed_once' );
 
 html_page_top();
+?>
 
-echo '<div align="center">';
-echo '<br /><br />' . lang_get( 'api_token_disclose_message' ) . '<br /><br />' . string_display_line( $t_token ) . '<br /><br />';
-print_bracket_link( 'api_tokens_page.php', lang_get( 'api_tokens_link' ) );
-echo '<br />';
-echo '</div>';
+<div align="center">
+<br /><br />
+<?php echo $t_disclose_message ?>
+<br />
+<span class="important-msg"><?php echo $t_display_once_message ?></span>
+<br /><br />
+<span class="api-token"><?php echo string_display_line( $t_token ) ?></span>
+<br /><br />
+<?php echo print_bracket_link( 'api_tokens_page.php', lang_get( 'api_tokens_link' ) ) ?>
+<br />
+</div>
 
+<?php
 html_page_bottom();
 

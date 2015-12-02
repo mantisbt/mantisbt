@@ -51,7 +51,7 @@ html_page_top( lang_get( 'api_tokens_link' ) );
 
 <div class="field-container">
 	<label for="token_name"><span><?php echo lang_get( 'api_token_name' ) ?></span></label>
-	<span class="input"><input id="token_name" type="text" name="token_name" size="64" maxlength="<?php echo api_token_name_max_length(); ?>" /></span>
+	<span class="input"><input id="token_name" type="text" name="token_name" size="64" maxlength="<?php echo DB_FIELD_SIZE_API_TOKEN_NAME; ?>" /></span>
 	<span class="label-style"></span>
 </div>
 
