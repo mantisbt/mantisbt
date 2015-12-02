@@ -28,6 +28,8 @@
 
 require_api( 'crypto_api.php' );
 
+define( 'API_TOKEN_LENGTH', 32 );
+
 /**
  * Create an API token
  *
@@ -44,7 +46,7 @@ function api_token_create( $p_token_name, $p_user_id ) {
 
 	$t_token_name = trim( $p_token_name );
 
-	$t_plain_token = crypto_generate_uri_safe_nonce( 32 );
+	$t_plain_token = crypto_generate_uri_safe_nonce( API_TOKEN_LENGTH );
 	$t_hash = api_token_hash( $t_plain_token );
 	$t_date_created = db_now();
 
@@ -69,16 +71,30 @@ function api_token_hash( $p_token ) {
 
 /**
  * Validate a plain token for the specified user.
- * @param integer $p_user_id The user id.
+ * @param string $p_username The user name.
  * @param string $p_token The plain token.
- * @return boolean true valid, false otherwise.
+ * @return boolean true valid username and token, false otherwise.
  * @access public
  */
-function api_token_validate( $p_user_id, $p_token ) {
+function api_token_validate( $p_username, $p_token ) {
+	# If the supplied token doesn't look like a valid one, then fail the check w/o doing db lookups.
+	# This is likely called from code that supports both tokens and passwords.
+	if( is_blank( $p_token ) || strlen( $p_token ) != API_TOKEN_LENGTH ) {
+		return false;
+	}
+
+	$t_user_id = user_get_id_by_name( $p_username );
+
+	# If user is not found in the database, they don't have api tokens, we won't bother with worrying about
+	# auto-creation scenario here.
+	if( $t_user_id === false ) {
+		return false;
+	}
+
 	$t_encrypted_token = api_token_hash( $p_token );
 
 	$t_query = 'SELECT * FROM {api_token} WHERE user_id=' . db_param() . ' AND hash=' . db_param();
-	$t_result = db_query( $t_query, array( $p_user_id, $t_encrypted_token ) );
+	$t_result = db_query( $t_query, array( $t_user_id, $t_encrypted_token ) );
 
 	$t_row = db_fetch_array( $t_result );
 	if( $t_row ) {
