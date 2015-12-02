@@ -69,7 +69,7 @@ function api_token_create( $p_token_name, $p_user_id ) {
  * @access public
  */
 function api_token_hash( $p_token ) {
-	return sha1( $p_token );
+	return hash( 'sha256', $p_token );
 }
 
 /**
