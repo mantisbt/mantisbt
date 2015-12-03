@@ -1736,4 +1736,5 @@ $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Data Type mismatch. Enable detailed error 
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'This issue has been updated by another user, please return to the issue and submit your changes again.';
 $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'You have reached the allowed activity limit of %d events within the last %d seconds; your action has been blocked to avoid spam, please try again later.';
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Field "%1$s" must be shorter or equal to %2$d characters long.';
+$MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API token name "%s" is already being used. Please go back and select another one.';
 

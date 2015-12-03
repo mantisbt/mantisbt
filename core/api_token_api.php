@@ -50,6 +50,8 @@ function api_token_create( $p_token_name, $p_user_id ) {
 		trigger_error( ERROR_FIELD_TOO_LONG, ERROR );
 	}
 
+	api_token_name_ensure_unique( $t_token_name, $p_user_id );
+
 	$t_plain_token = crypto_generate_uri_safe_nonce( API_TOKEN_LENGTH );
 	$t_hash = api_token_hash( $t_plain_token );
 	$t_date_created = db_now();
@@ -70,6 +72,25 @@ function api_token_create( $p_token_name, $p_user_id ) {
  */
 function api_token_hash( $p_token ) {
 	return hash( 'sha256', $p_token );
+}
+
+/**
+ * Ensure that the specified token name is unique to the user, otherwise,
+ * prompt the user with an error.
+ *
+ * @param string $p_token_name The token name.
+ * @param string $p_user_id The user id.
+ */
+function api_token_name_ensure_unique( $p_token_name, $p_user_id ) {
+	$t_query = 'SELECT * FROM {api_token} WHERE user_id=' . db_param() . ' AND name=' . db_param();
+	$t_result = db_query( $t_query, array( $p_user_id, $p_token_name ) );
+
+	$t_row = db_fetch_array( $t_result );
+
+	if ( $t_row ) {
+		error_parameters( $p_token_name );
+		trigger_error( ERROR_API_TOKEN_NAME_NOT_UNIQUE, ERROR );
+	}
 }
 
 /**
