@@ -57,7 +57,7 @@ html_page_top();
 <br /><br />
 <span class="api-token"><?php echo string_display_line( $t_token ) ?></span>
 <br /><br />
-<?php echo print_bracket_link( 'api_tokens_page.php', lang_get( 'api_tokens_link' ) ) ?>
+<?php print_bracket_link( 'api_tokens_page.php', lang_get( 'api_tokens_link' ) ) ?>
 <br />
 </div>
 
