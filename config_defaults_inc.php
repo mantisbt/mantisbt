@@ -4069,6 +4069,13 @@ $g_due_date_view_threshold = NOBODY;
 ################
 
 /**
+ * Whether sub-projects feature should be enabled.  Before turning this flag OFF,
+ * make sure all sub-projects are moved to top level projects, otherwise
+ * they won't be accessible.
+ */
+$g_subprojects_enabled = ON;
+
+/**
  * Sub-projects should inherit categories from parent projects.
  */
 $g_subprojects_inherit_categories = ON;
