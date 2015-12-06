@@ -750,5 +750,19 @@ $g_upgrade[197] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "realn
 $g_upgrade[198] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "password C(64) $t_notnull DEFAULT \" '' \"" ) );
 $g_upgrade[199] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "email C(255) $t_notnull DEFAULT \" '' \"" ) );
 
-# Release marker: 1.3.0-beta.1
+# Release marker: 1.3.0-beta.3
+
+$g_upgrade[200] = array(
+		'CreateTableSQL',array( db_get_table( 'api_token' ), '
+			  id           I UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
+			  user_id      I DEFAULT \'0\',
+			  name         C(128) NOTNULL,
+			  hash         C(128) NOTNULL,
+			  date_created I UNSIGNED NOTNULL DEFAULT \'0\',
+			  date_used    I UNSIGNED NOTNULL DEFAULT \'0\''
+		) );
+$g_upgrade[201] = array( 'CreateIndexSQL',
+			array( 'idx_user_id_name', db_get_table( 'api_token' ), 'user_id, name', array( 'UNIQUE' ) )
+		);
+
 # Release marker: 1.3.0

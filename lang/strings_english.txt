@@ -362,6 +362,19 @@ $s_update_user_button = 'Update User';
 $s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
 $s_verify_change_password = 'You must set a password here to allow you to log in again.';
 
+# API tokens page
+$s_api_tokens_link = 'API Tokens';
+$s_api_token_create_form_title = 'Create API Token';
+$s_api_token_create_button = 'Create API Token';
+$s_api_token_name = 'Token Name';
+$s_api_token_disclose_message = 'Token to use for accessing API.';
+$s_api_token_displayed_once = 'Note that this token will only be displayed once.';
+$s_api_tokens_title = 'API Tokens';
+$s_api_token_revoke_button = 'Revoke';
+$s_api_token_never_used = 'Never used';
+$s_api_token_revoked = 'API token "%s" revoked.';
+$s_last_used = 'Last Used';
+
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Account Preferences';
 $s_default_project = 'Default Project';
@@ -1722,4 +1735,6 @@ $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'Warning: The system is configu
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Data Type mismatch. Enable detailed error messages for further information.';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'This issue has been updated by another user, please return to the issue and submit your changes again.';
 $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'You have reached the allowed activity limit of %d events within the last %d seconds; your action has been blocked to avoid spam, please try again later.';
+$MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Field "%1$s" must be shorter or equal to %2$d characters long.';
+$MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API token name "%s" is already being used. Please go back and select another one.';
 

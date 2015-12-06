@@ -27,6 +27,14 @@
 set_error_handler( 'mc_error_handler' );
 
 /**
+ * Webservice APIs
+ *
+ * @uses api_token_api.php
+ */
+
+require_api( 'api_token_api.php' );
+
+/**
  * A factory class that can abstract away operations that can behave differently based
  * on the underlying soap implementation.
  *
@@ -178,11 +186,21 @@ function mci_check_login( $p_username, $p_password ) {
 		return false;
 	}
 
-	# Must not pass in password, otherwise, authentication will be by-passed.
+	# Must not pass in null password, otherwise, authentication will be by-passed
+	# by auth_attempt_script_login().
 	$t_password = ( $p_password === null ) ? '' : $p_password;
 
-	if( false === auth_attempt_script_login( $p_username, $t_password ) ) {
-		return false;
+	# Validate the token
+	if( api_token_validate( $p_username, $t_password ) ) {
+		# Token is valid, then login the user without worrying about a password.
+		if( auth_attempt_script_login( $p_username, null ) === false ) {
+			return false;
+		}
+	} else {
+		# Not a valid token, validate as username + password.
+		if( auth_attempt_script_login( $p_username, $t_password ) === false ) {
+			return false;
+		}
 	}
 
 	return auth_get_current_user_id();

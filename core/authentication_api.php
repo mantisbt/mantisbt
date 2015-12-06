@@ -295,7 +295,7 @@ function auth_attempt_login( $p_username, $p_password, $p_perm_login = false ) {
  * @access public
  */
 function auth_attempt_script_login( $p_username, $p_password = null ) {
-	global $g_script_login_cookie, $g_cache_current_user_id;
+	global $g_script_login_cookie;
 
 	$t_username = $p_username;
 	$t_password = $p_password;
