@@ -750,7 +750,7 @@ $g_upgrade[197] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "realn
 $g_upgrade[198] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "password C(64) $t_notnull DEFAULT \" '' \"" ) );
 $g_upgrade[199] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "email C(255) $t_notnull DEFAULT \" '' \"" ) );
 
-# Release marker: 1.3.0-beta.3
+# Release marker: 1.3.0-beta.1 - 1.3.0-beta.3
 
 $g_upgrade[200] = array(
 		'CreateTableSQL',array( db_get_table( 'api_token' ), '
