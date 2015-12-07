@@ -728,7 +728,7 @@ $g_upgrade[183] = array( 'UpdateFunction', 'correct_multiselect_custom_fields_db
 
 # Release marker: 1.2.1 - 1.2.15
 
-$g_upgrade[184] = array( 'UpdateFunction', 'do_nothing' );
+$g_upgrade[184] = null;
 $g_upgrade[185] = array( 'AddColumnSQL', array( db_get_table( 'custom_field_string' ), '
 	text		XL  			NULL DEFAULT NULL ' ) );
 $g_upgrade[186] = array( 'UpdateFunction', 'update_history_long_custom_fields' );
