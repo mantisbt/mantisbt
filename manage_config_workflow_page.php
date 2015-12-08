@@ -232,21 +232,19 @@ function capability_row( $p_from_status ) {
  * @return void
  */
 function section_end() {
-global $g_can_change_workflow;
+	global $g_can_change_workflow;
 	echo '</tbody></table></div>' . "\n";
 	echo '</div></div></div>' . "\n";
 	echo '<div class="space-10"></div>';
 
-	echo '<div class="footer">' . "\n";
 	if( $g_can_change_workflow ) {
 		echo lang_get( 'workflow_change_access_label' ) . "&nbsp;\n";
 		echo '<select name="workflow_access">' . "\n";
 		print_enum_string_option_list( 'access_levels', config_get_access( 'status_enum_workflow' ) );
 		echo "\n" . '</select>' . "\n";
 	}
-	echo '</div>' . "\n";
 
-	echo '</div><br />' . "\n";
+	echo '<div class="space-10"></div>';
 }
 
 /**
@@ -425,17 +423,14 @@ function access_end() {
 	echo '</div></div></div>' . "\n";
 	echo '<div class="space-10"></div>';
 
-	echo '<div class="footer">' . "\n";
 	if( $g_access >= config_get_access( 'set_status_threshold' ) ) {
 		echo lang_get( 'access_change_access_label' ) . "&nbsp;\n";
 		echo '<select name="status_access">' . "\n\t\t";
 		print_enum_string_option_list( 'access_levels', config_get_access( 'set_status_threshold' ) );
 		echo "\n" . '</select>' . "\n";
 	}
-	echo '</div>' . "\n";
 
-	echo '</div>' . "\n";
-	echo '<br />' . "\n\n";
+	echo '<div class="space-10"></div>';
 }
 
 echo '<div class="space-10"></div>';
@@ -509,6 +504,7 @@ if( ALL_PROJECTS <> $t_project ) {
 	echo '<span class="' . COLOR_PROJECT . '">' . lang_get( 'colour_project' ) .'</span><br />';
 }
 echo '<span class="' . COLOR_GLOBAL . '">' . lang_get( 'colour_global' ) . '</span></p>';
+echo '</div>' . "\n";
 
 # show the settings used to derive the table
 threshold_begin( lang_get( 'workflow_thresholds' ) );
