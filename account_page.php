@@ -59,6 +59,7 @@
  */
 
 require_once( 'core.php' );
+require_api( 'api_token_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -306,6 +307,7 @@ print_account_menu( 'account_page.php' );
 
 	</form>
 </div>
+
 <?php # check if users can't delete their own accounts
 if( ON == config_get( 'allow_account_delete' ) ) { ?>
 

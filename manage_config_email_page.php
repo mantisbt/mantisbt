@@ -287,17 +287,7 @@ $t_access = current_user_get_access_level();
 $t_project = helper_get_current_project();
 
 # build a list of all of the actions
-$t_actions = array( 'owner', 'reopened', 'deleted', 'bugnote' );
-if( config_get( 'enable_sponsorship' ) == ON ) {
-	$t_actions[] = 'sponsor';
-}
-
-$t_actions[] = 'relation';
-
-$t_statuses = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
-foreach( $t_statuses as $t_status ) {
-	$t_actions[] =  $t_status;
-}
+$t_actions = email_get_actions();
 
 # build a composite of the status flags, exploding the defaults
 $t_global_default_notify_flags = config_get( 'default_notify_flags', null, ALL_USERS, ALL_PROJECTS );
@@ -358,6 +348,7 @@ if( config_get( 'enable_email_notification' ) == ON ) {
 	
 	get_section_begin_for_email( lang_get( 'email_notification' ) );
 #		get_capability_row_for_email( lang_get( 'email_on_new' ), 'new' );  # duplicate of status change to 'new'
+	get_capability_row_for_email( lang_get( 'email_on_updated' ), 'updated' );
 	get_capability_row_for_email( lang_get( 'email_on_assigned' ), 'owner' );
 	get_capability_row_for_email( lang_get( 'email_on_reopened' ), 'reopened' );
 	get_capability_row_for_email( lang_get( 'email_on_deleted' ), 'deleted' );

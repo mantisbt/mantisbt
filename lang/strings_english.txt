@@ -291,6 +291,7 @@ $s_email_notification_title_for_status_bug_resolved = 'The following issue has b
 $s_email_notification_title_for_status_bug_closed = 'The following issue has been CLOSED';
 $s_email_notification_title_for_action_bug_submitted = 'The following issue has been SUBMITTED.';
 $s_email_notification_title_for_action_bug_assigned = 'The following issue has been ASSIGNED.';
+$s_email_notification_title_for_action_bug_unassigned = 'The following issue has been UNASSIGNED.';
 $s_email_notification_title_for_action_bug_reopened = 'The following issue has been REOPENED.';
 $s_email_notification_title_for_action_bug_deleted = 'The following issue has been DELETED.';
 $s_email_notification_title_for_action_bug_updated = 'The following issue has been UPDATED.';
@@ -360,6 +361,19 @@ $s_access_level_label = 'Access Level';
 $s_update_user_button = 'Update User';
 $s_verify_warning = 'Your account information has been verified. The account confirmation message you have received is now invalid.';
 $s_verify_change_password = 'You must set a password here to allow you to log in again.';
+
+# API tokens page
+$s_api_tokens_link = 'API Tokens';
+$s_api_token_create_form_title = 'Create API Token';
+$s_api_token_create_button = 'Create API Token';
+$s_api_token_name = 'Token Name';
+$s_api_token_disclose_message = 'Token to use for accessing API.';
+$s_api_token_displayed_once = 'Note that this token will only be displayed once.';
+$s_api_tokens_title = 'API Tokens';
+$s_api_token_revoke_button = 'Revoke';
+$s_api_token_never_used = 'Never used';
+$s_api_token_revoked = 'API token "%s" revoked.';
+$s_last_used = 'Last Used';
 
 # account_prefs_page.php
 $s_default_account_preferences_title = 'Account Preferences';
@@ -1437,6 +1451,7 @@ $s_status_changed_to = 'Status changes to';
 $s_email_on_deleted = 'E-mail on Deleted';
 $s_email_on_sponsorship_changed = 'E-mail on Sponsorship changed';
 $s_email_on_relationship_changed = 'E-mail on Relationship changed';
+$s_email_on_updated = 'Email on Updated';
 
 # Dynamic filters (load filter controls via AJAX upon request)
 $s_loading = 'Loading...';
@@ -1720,6 +1735,8 @@ $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'Warning: The system is configu
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Data Type mismatch. Enable detailed error messages for further information.';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'This issue has been updated by another user, please return to the issue and submit your changes again.';
 $MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'You have reached the allowed activity limit of %d events within the last %d seconds; your action has been blocked to avoid spam, please try again later.';
+$MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Field "%1$s" must be shorter or equal to %2$d characters long.';
+$MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API token name "%s" is already being used. Please go back and select another one.';
 
 # dropzone.js - placeholders format is defined by the library
 $s_dropzone_default_message = 'Drop files here to upload (or click)';

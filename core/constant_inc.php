@@ -21,7 +21,7 @@
 /**
  * Mantis Version
  */
-define( 'MANTIS_VERSION', '1.3.0-rc1-dev' );
+define( 'MANTIS_VERSION', '1.3.0-rc.2-dev' );
 define( 'FILTER_VERSION', 'v9' );
 
 # --- constants -------------------
@@ -249,6 +249,7 @@ define( 'ERROR_INVALID_RESOLUTION', 24 );
 define( 'ERROR_DISPLAY_USER_ERROR_INLINE', 25 );
 define( 'ERROR_TYPE_MISMATCH', 26 );
 define( 'ERROR_SPAM_SUSPECTED', 27 );
+define( 'ERROR_FIELD_TOO_LONG', 28 );
 
 # ERROR_CONFIG_*
 define( 'ERROR_CONFIG_OPT_NOT_FOUND', 100 );
@@ -417,6 +418,9 @@ define( 'ERROR_FORM_TOKEN_INVALID', 2800 );
 define( 'ERROR_CRYPTO_MASTER_SALT_INVALID', 2900 );
 define( 'ERROR_CRYPTO_CAN_NOT_GENERATE_STRONG_RANDOMNESS', 2901 );
 
+# ERROR_API_TOKEN_*
+define( 'ERROR_API_TOKEN_NAME_NOT_UNIQUE', 3000 );
+
 # Generic position constants
 define( 'POSITION_NONE', 0 );
 define( 'POSITION_TOP', 1 );
@@ -569,6 +573,7 @@ define( 'EMAIL_SHUTDOWN_FORCE', 2 );
 define( 'DB_FIELD_SIZE_USERNAME', 255 );
 define( 'DB_FIELD_SIZE_REALNAME', 255 );
 define( 'DB_FIELD_SIZE_PASSWORD', 64 );
+define( 'DB_FIELD_SIZE_API_TOKEN_NAME', 128 );
 
 # Maximum size for the user's password when storing it as a hash
 define( 'PASSWORD_MAX_SIZE_BEFORE_HASH', 1024 );

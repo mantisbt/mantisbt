@@ -72,20 +72,7 @@ $t_can_change_flags = $t_access >= config_get_access( 'notify_flags' );
 $t_can_change_defaults = $t_access >= config_get_access( 'default_notify_flags' );
 
 # build a list of the possible actions and flags
-$t_valid_actions = array( 'owner', 'reopened', 'deleted', 'bugnote' );
-if( config_get( 'enable_sponsorship' ) == ON ) {
-	$t_valid_actions[] = 'sponsor';
-}
-
-$t_valid_actions[] = 'relation';
-
-$t_statuses = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
-ksort( $t_statuses );
-reset( $t_statuses );
-
-foreach( $t_statuses as $t_status => $t_label ) {
-	$t_valid_actions[] = $t_label;
-}
+$t_valid_actions = email_get_actions();
 $t_valid_flags = array( 'reporter', 'handler', 'monitor' , 'bugnotes' );
 
 # initialize the thresholds

@@ -665,6 +665,13 @@ function print_account_menu( $p_page = '' ) {
 		$t_pages['account_sponsor_page.php'] = array( 'url'=>'account_sponsor_page.php', 'label'=>'my_sponsorship' );
 	}
 
+	$t_pages['api_tokens_page.php'] = array( 'url' => 'api_tokens_page.php', 'label' => 'api_tokens_link' );
+
+	# Remove the link from the current page
+	if( isset( $t_pages[$p_page] ) ) {
+		$t_pages[$p_page]['url'] = '';
+	}
+
 	# Plugin / Event added options
 	$t_event_menu_options = event_signal( 'EVENT_MENU_ACCOUNT' );
 	$t_menu_options = array();

@@ -829,12 +829,25 @@ function email_bug_reopened( $p_bug_id ) {
 }
 
 /**
- * send notices when a bug is ASSIGNED
+ * Send notices when a bug handler is changed.
  * @param int $p_bug_id
+ * @param int $p_prev_handler_id
+ * @param int $p_new_handler_id
  * @return null
  */
-function email_bug_assigned( $p_bug_id ) {
-	email_generic( $p_bug_id, 'owner', 'email_notification_title_for_action_bug_assigned' );
+function email_owner_changed($p_bug_id, $p_prev_handler_id, $p_new_handler_id ) {
+	$t_message_id = $p_new_handler_id == NO_USER ?
+			'email_notification_title_for_action_bug_unassigned' :
+			'email_notification_title_for_action_bug_assigned';
+
+	$t_extra_user_ids_to_email = array();
+	if ( $p_prev_handler_id !== NO_USER && $p_prev_handler_id != $p_new_handler_id ) {
+		if ( email_notify_flag( 'owner', 'handler' ) == ON ) {
+			$t_extra_user_ids_to_email[] = $p_prev_handler_id;
+		}
+	}
+
+	email_generic( $p_bug_id, 'owner', $t_message_id, /* headers */ null, $t_extra_user_ids_to_email );
 }
 
 /**
@@ -1555,3 +1568,27 @@ function email_shutdown_function() {
 		email_send_all();
 	}
 }
+
+/**
+ * Get the list of supported email actions.
+ *
+ * @return array List of actions
+ */
+function email_get_actions() {
+	$t_actions = array( 'updated', 'owner', 'reopened', 'deleted', 'bugnote', 'relation' );
+
+	if( config_get( 'enable_sponsorship' ) == ON ) {
+		$t_actions[] = 'sponsor';
+	}
+
+	$t_statuses = MantisEnum::getAssocArrayIndexedByValues( config_get( 'status_enum_string' ) );
+	ksort( $t_statuses );
+	reset( $t_statuses );
+
+	foreach( $t_statuses as $t_label ) {
+		$t_actions[] = $t_label;
+	}
+
+	return $t_actions;
+}
+

@@ -693,9 +693,9 @@ class BugData {
 
 		# allow bypass if user is sending mail separately
 		if( false == $p_bypass_mail ) {
-			# bug assigned
+			# If handler changes, send out owner change email
 			if( $t_old_data->handler_id != $this->handler_id ) {
-				email_bug_assigned( $c_bug_id );
+				email_owner_changed( $c_bug_id, $t_old_data->handler_id, $this->handler_id );
 				return true;
 			}
 
@@ -1668,8 +1668,8 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 
 		bug_clear_cache( $p_bug_id );
 
-		# send assigned to email
-		email_bug_assigned( $p_bug_id );
+		# Send email for change of handler
+		email_owner_changed( $p_bug_id, $h_handler_id, $p_user_id );
 	}
 
 	return true;

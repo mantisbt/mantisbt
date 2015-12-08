@@ -728,7 +728,7 @@ $g_upgrade[183] = array( 'UpdateFunction', 'correct_multiselect_custom_fields_db
 
 # Release marker: 1.2.1 - 1.2.15
 
-$g_upgrade[184] = array( 'UpdateFunction', 'do_nothing' );
+$g_upgrade[184] = null;
 $g_upgrade[185] = array( 'AddColumnSQL', array( db_get_table( 'custom_field_string' ), '
 	text		XL  			NULL DEFAULT NULL ' ) );
 $g_upgrade[186] = array( 'UpdateFunction', 'update_history_long_custom_fields' );
@@ -750,5 +750,24 @@ $g_upgrade[197] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "realn
 $g_upgrade[198] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "password C(64) $t_notnull DEFAULT \" '' \"" ) );
 $g_upgrade[199] = array( 'AlterColumnSQL', array( db_get_table( 'user' ), "email C(255) $t_notnull DEFAULT \" '' \"" ) );
 
-# Release marker: 1.3.0-beta.1
+# Release marker: 1.3.0-beta.1 - 1.3.0-beta.3
+
+# ----------------------------------------------------------------------------
+# Schema version: 200
+#
+$g_upgrade[200] = array(
+		'CreateTableSQL',array( db_get_table( 'api_token' ), '
+			  id           I UNSIGNED NOTNULL PRIMARY AUTOINCREMENT,
+			  user_id      I DEFAULT \'0\',
+			  name         C(128) NOTNULL,
+			  hash         C(128) NOTNULL,
+			  date_created I UNSIGNED NOTNULL DEFAULT \'0\',
+			  date_used    I UNSIGNED NOTNULL DEFAULT \'0\''
+		) );
+$g_upgrade[201] = array( 'CreateIndexSQL',
+			array( 'idx_user_id_name', db_get_table( 'api_token' ), 'user_id, name', array( 'UNIQUE' ) )
+		);
+
+# Release marker: 1.3.0-rc.1
+
 # Release marker: 1.3.0
