@@ -592,12 +592,13 @@ if( $t_show_attachments ) {
 				echo '<br />';
 			}
 		}
-	}
 ?>
 				</span>
 				<span class="label-style"></span>
 			</div>
 <?php
+	}
+
 	if( $t_show_view_state ) {
 ?>
 			<div class="field-container">
