@@ -102,14 +102,20 @@ function access_denied() {
 				echo '<p>' . error_string( ERROR_ACCESS_DENIED ) . '</p>';
 				print_bracket_link( helper_mantis_url( 'login_page.php' ) . '?return=' . $t_return_page, lang_get( 'click_to_login' ) );
 				echo '<p></p>';
-				print_bracket_link( helper_mantis_url( 'main_page.php' ), lang_get( 'proceed' ) );
+				print_bracket_link(
+					helper_mantis_url( config_get( 'default_home_page' ) ),
+					lang_get( 'proceed' )
+				);
 
 				echo '</center>';
 			}
 		} else {
 			echo '<center>';
 			echo '<p>' . error_string( ERROR_ACCESS_DENIED ) . '</p>';
-			print_bracket_link( helper_mantis_url( 'main_page.php' ), lang_get( 'proceed' ) );
+			print_bracket_link(
+				helper_mantis_url( config_get( 'default_home_page' ) ),
+				lang_get( 'proceed' )
+			);
 			echo '</center>';
 		}
 	}
