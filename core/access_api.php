@@ -91,13 +91,19 @@ function access_denied() {
 				echo '<p class="center">' . error_string( ERROR_ACCESS_DENIED ) . '</p><p class="center">';
 				print_bracket_link( helper_mantis_url( 'login_page.php' ) . '?return=' . $t_return_page, lang_get( 'click_to_login' ) );
 				echo '</p><p class="center">';
-				print_bracket_link( helper_mantis_url( 'main_page.php' ), lang_get( 'proceed' ) );
+				print_bracket_link(
+					helper_mantis_url( config_get( 'default_home_page' ) ),
+					lang_get( 'proceed' )
+				);
 				echo '</p>';
 			}
 		} else {
 			echo '<p class="center">' . error_string( ERROR_ACCESS_DENIED ) . '</p>';
 			echo '<p class="center">';
-			print_bracket_link( helper_mantis_url( 'main_page.php' ), lang_get( 'proceed' ) );
+			print_bracket_link(
+				helper_mantis_url( config_get( 'default_home_page' ) ),
+				lang_get( 'proceed' )
+			);
 			echo '</p>';
 		}
 	}
