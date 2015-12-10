@@ -35,6 +35,9 @@
  * @uses utility_api.php
  */
 
+# Prevent output of HTML in the content if errors occur
+define( 'DISABLE_INLINE_ERROR_REPORTING', true );
+
 $g_bypass_headers = true; # suppress headers as we will send our own later
 define( 'COMPRESSION_DISABLED', true );
 

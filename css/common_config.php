@@ -26,6 +26,9 @@
  * @uses config_api.php
  */
 
+# Prevent output of HTML in the content if errors occur
+define( 'DISABLE_INLINE_ERROR_REPORTING', true );
+
 @require_once( dirname( dirname( __FILE__ ) ) . '/core.php' );
 require_api( 'lang_api.php' );
 require_api( 'config_api.php' );
@@ -40,6 +43,7 @@ header( 'Content-Type: text/css; charset=UTF-8' );
  * http://blogs.msdn.com/b/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
  */
 header( 'X-Content-Type-Options: nosniff' );
+$g_display_errors = null;
 
 /**
  * WARNING: DO NOT EXPOSE SENSITIVE CONFIGURATION VALUES!
