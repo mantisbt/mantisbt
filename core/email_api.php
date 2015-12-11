@@ -215,22 +215,34 @@ function email_ensure_not_disposable( $p_email ) {
 }
 
 /**
- * email_notify_flag
  * Get the value associated with the specific action and flag.
  * For example, you can get the value associated with notifying "admin"
  * on action "new", i.e. notify administrators on new bugs which can be
  * ON or OFF.
  * @param string $p_action Action.
  * @param string $p_flag   Flag.
- * @return integer
+ * @return integer 1 - enabled, 0 - disabled.
  */
 function email_notify_flag( $p_action, $p_flag ) {
+	# If flag is specified for the specific event, use that.
 	$t_notify_flags = config_get( 'notify_flags' );
-	$t_default_notify_flags = config_get( 'default_notify_flags' );
 	if( isset( $t_notify_flags[$p_action][$p_flag] ) ) {
 		return $t_notify_flags[$p_action][$p_flag];
-	} else if( isset( $t_default_notify_flags[$p_flag] ) ) {
+	}
+
+	# If not, then use the default if specified in database or global.
+	# Note that web UI may not support or specify all flags (e.g. explicit),
+	# hence, if config is retrieved from database it may not have the flag.
+	$t_default_notify_flags = config_get( 'default_notify_flags' );
+	if( isset( $t_default_notify_flags[$p_flag] ) ) {
 		return $t_default_notify_flags[$p_flag];
+	}
+
+	# If the flag is not specified so far, then force using global config which
+	# should have all flags specified.
+	$t_global_default_notify_flags = config_get_global( 'default_notify_flags' );
+	if( isset( $t_global_default_notify_flags[$p_flag] ) ) {
+		return $t_global_default_notify_flags[$p_flag];
 	}
 
 	return OFF;
