@@ -872,7 +872,6 @@ $s_issue_id = 'القضية #';
 $s_recently_visited = 'المزارة حديثا';
 $s_priority_abbreviation = 'بي';
 $s_note_user_id_label = 'ملاحظة بواسطة:';
-$s_filter_match_type = 'نوع المطابقة';
 $s_filter_match_all = 'جميع الشروط';
 $s_filter_match_any = 'أي شرط';
 $s_none = 'لا شيء';

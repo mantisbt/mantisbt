@@ -878,7 +878,6 @@ $s_sort_label = 'Ordinar per:';
 $s_issue_id = 'Problema №';
 $s_recently_visited = 'Recentemente visitate';
 $s_note_user_id_label = 'Nota per:';
-$s_filter_match_type = 'Typo de correspondentia';
 $s_filter_match_type_label = 'Typo de correspondentia:';
 $s_filter_match_all = 'Tote le conditiones';
 $s_filter_match_any = 'Qualcunque condition';

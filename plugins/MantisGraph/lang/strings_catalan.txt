@@ -41,6 +41,7 @@
  * @author Bernat
  * @author Dtamajon
  * @author Fitoschido
+ * @author Jaumeortola
  * @author Paucabot
  */
 
@@ -92,7 +93,7 @@ $s_plugin_MantisGraph_cumulative = 'Acumulat';
 $s_plugin_MantisGraph_not_enough_data = 'No hi ha  prou informació per crear el gràfic';
 $s_plugin_MantisGraph_period_none = 'Cap';
 $s_plugin_MantisGraph_period_this_week = 'Aquesta setmana';
-$s_plugin_MantisGraph_period_last_week = 'La última setmana';
+$s_plugin_MantisGraph_period_last_week = 'L\'última setmana';
 $s_plugin_MantisGraph_period_two_weeks = 'Les dues últimes setmanes';
 $s_plugin_MantisGraph_period_this_month = 'Aquest mes';
 $s_plugin_MantisGraph_period_last_month = 'L\'últim mes';

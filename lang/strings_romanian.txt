@@ -858,7 +858,6 @@ $s_updated = 'Modificat';
 $s_sticky = 'Arată problemele sticky';
 $s_issue_id = 'Problema #';
 $s_recently_visited = 'Vizitate recent';
-$s_filter_match_type = 'Tip de corespondență';
 $s_filter_match_all = 'Toate condițiile';
 $s_filter_match_any = 'Orice condiție';
 $s_none = 'nimic';

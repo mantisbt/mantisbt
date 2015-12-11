@@ -892,7 +892,6 @@ $s_sort_label = 'Ordenar por:';
 $s_issue_id = 'Caso #';
 $s_recently_visited = 'Recentemente Visitado';
 $s_note_user_id_label = 'Nota Por:';
-$s_filter_match_type = 'Tipo de correspondência';
 $s_filter_match_type_label = 'Tipo de correspondência:';
 $s_filter_match_all = 'Todas as condições';
 $s_filter_match_any = 'Qualquer Condição';

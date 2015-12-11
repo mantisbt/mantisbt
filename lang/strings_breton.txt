@@ -881,7 +881,6 @@ $s_sort_label = 'Urzhiañ dre :';
 $s_issue_id = 'Draen niv.';
 $s_recently_visited = 'Gweladennet nevez zo';
 $s_note_user_id_label = 'Notenn gant :';
-$s_filter_match_type = 'Seurt klotadur';
 $s_filter_match_type_label = 'Seurt klotadur';
 $s_filter_match_all = 'An holl Zivizoù';
 $s_filter_match_any = 'Forzh peseurt Diviz';

@@ -42,6 +42,7 @@
  * @author Hansmuller
  * @author McDutchie
  * @author MedShot
+ * @author Robin van der Vliet
  * @author Robin0van0der0vliet
  * @author Siebrand
  * @author Sjoerddebruin
@@ -887,7 +888,6 @@ $s_issue_id = 'Meldingsnr.';
 $s_recently_visited = 'Recent bekeken';
 $s_priority_abbreviation = 'P';
 $s_note_user_id_label = 'Opmerking van:';
-$s_filter_match_type = 'Zoektype';
 $s_filter_match_type_label = 'Zoektype:';
 $s_filter_match_all = 'Alle voorwaarden';
 $s_filter_match_any = 'Elke voorwaarde';
@@ -975,7 +975,7 @@ $s_custom_field_require_resolved = 'Verplicht bij oplossen';
 $s_custom_field_require_closed = 'Verplicht bij sluiten';
 $s_link_custom_field_to_project_title = 'Gebruikersveld aan project koppelen';
 $s_link_custom_field_to_project_button = 'Gebruikersveld koppelen';
-$s_linked_projects_label = 'Gekoppelde projecten:';
+$s_linked_projects_label = 'Gekoppelde projecten';
 $s_custom_field_sequence = 'Volgorde';
 $s_custom_field_sequence_label = 'Volgorde';
 $s_custom_field_type_enum_string = '0:String,1:Numeriek,2:Drijvende komma,3:Enumeratie,4:E-mailadres,5:Keuzevakje,6:Lijst,7:Meervoudige selectielijst,8:Datum,9:Keuzerondje,10:Tekstveld';

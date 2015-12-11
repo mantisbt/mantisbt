@@ -860,7 +860,6 @@ $s_sticky = 'Ragadós ügyek megjelenítése';
 $s_sort_label = 'Rendezés:';
 $s_issue_id = 'Ügy #';
 $s_recently_visited = 'Nemrég megtekintett';
-$s_filter_match_type = 'Egyezés típusa';
 $s_filter_match_all = 'Valamennyi feltétel';
 $s_filter_match_any = 'Egyik feltétel';
 $s_none = 'egyik sem';

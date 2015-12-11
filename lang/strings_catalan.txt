@@ -43,6 +43,7 @@
  * @author BroOk
  * @author Dtamajon
  * @author Fitoschido
+ * @author Jaumeortola
  * @author Martorell
  * @author Paucabot
  * @author Pitort
@@ -356,7 +357,7 @@ $s_email_updated = 'La seva adreça de correu ha estat actualitzada';
 $s_realname_duplicated = 'Aquest nom real l\'està utilitzant un altre usuari';
 $s_realname_updated = 'Nom real actualitzat correctament';
 $s_password_updated = 'Contrasenya actualitzada';
-$s_multiple_projects = 'Les incidències que ha seleccionat són de diferents projectes. Els paràmetres de sota mostren les posicions per a tots els projectes. Si és incorrecte, si us plau reintenti el canvi amb un nombre més petit d\'incidències seleccionades.';
+$s_multiple_projects = 'Les incidències que heu seleccionat són de diferents projectes. Els paràmetres de sota mostren les posicions per a tots els projectes. Si és incorrecte, reintenteu el canvi amb un nombre més petit d\'incidències seleccionades.';
 $s_new_bug_title = 'Nova incidència';
 $s_feedback_bug_title = 'Sol·licita més informació de la incidència';
 $s_acknowledged_bug_title = 'Incidència acceptada';
@@ -498,7 +499,7 @@ $s_select_project_button = 'Seleccioni Projecte';
 $s_lost_password_title = 'Restaura la contrasenya';
 $s_lost_password_done_title = 'Missatge de contrasenya enviat';
 $s_lost_password_subject = 'Restaura la contrasenya';
-$s_lost_password_info = 'Per a recuperar la seva contrasenya oblidada, si us plau completi el seu correu i contrasenya.<br /><br />Si les dades es corresponen amb un compte vàlid, rebrà un correu amb una URL especial per a canviar la contrasenya. Si us plau segueixi les instruccions que rebrà i podrà canviar la contrasenya.';
+$s_lost_password_info = 'Per a recuperar la contrasenya oblidada, doneu el nom i l\'adreça de correu del compte.<br /><br />Si les dades corresponen a un compte vàlid, rebreu un missatge amb un URL especial que conté un codi de validació per al vostre compte. Seguiu aquest enllaç per a canviar la contrasenya.';
 $s_lost_password_confirm_hash_OK = 'La seva confirmació ha estat acceptada. Si us plau canviï la seva contrasenya.';
 $s_open_and_assigned_to_me_label = 'Obert i assignat a mi:';
 $s_open_and_reported_to_me_label = 'Obert i reportat per mi:';
@@ -865,7 +866,6 @@ $s_issue_id = 'Incidència #';
 $s_recently_visited = 'Visitades Recentment';
 $s_priority_abbreviation = 'P';
 $s_note_user_id_label = 'Nota:';
-$s_filter_match_type = 'Tipus de correspondència';
 $s_filter_match_all = 'Totes les condicions';
 $s_filter_match_any = 'Qualsevol condició';
 $s_none = 'cap';
@@ -932,7 +932,7 @@ $s_custom_field = 'Camp';
 $s_custom_field_label = 'Camp:';
 $s_custom_fields_setup = 'Camps Personalitzats';
 $s_custom_field_name = 'Nom';
-$s_custom_field_project_count = 'Número de Projectes';
+$s_custom_field_project_count = 'Nombre de projectes';
 $s_custom_field_type = 'Tipus';
 $s_custom_field_possible_values = 'Valors possibles';
 $s_custom_field_default_value = 'Valor per defecte';
@@ -1181,7 +1181,7 @@ $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Accés denegat.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Ha fallat la càrrega de l\'arxiu. MantisBT no el pot llegir. Si us plau comprovi els ajustaments del projecte.';
 $MANTIS_ERROR[ERROR_FILE_TOO_BIG] = 'Ha fallat la càrrega de l\'arxiu. Possiblement la mida  de l\'arxiu és més gran del que actualment esta permès en aquesta instal·lació de PHP.';
 $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'No s\'ha trobat un paràmetre requerit (%1$s) a la pàgina.';
-$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Aquest nom de usuari està en ús. Si us plau, torni enrera i seleccioni\'n un altre.';
+$MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Aquest nom d\'usuari està en ús. Torneu enrere i seleccioneu-ne un altre.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'No es troba l\'opció de configuració \'%1$s\'.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'La opció de configuració \'%1$s\' no es pot definir a la base de dades. Ha de ser definida a config_inc.php.';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Cadena \'%1$s\' no trobada.';
@@ -1209,7 +1209,7 @@ $MANTIS_ERROR[ERROR_USER_PROFILE_NOT_FOUND] = 'Perfil no trobat.';
 $MANTIS_ERROR[ERROR_FILE_NOT_ALLOWED] = 'Tipus d\'arxiu no permès per a càrregues.';
 $MANTIS_ERROR[ERROR_FILE_DUPLICATE] = 'Aquest arxiu està duplicat.  Si us plau, elimini abans l\'arxiu original.';
 $MANTIS_ERROR[ERROR_FILE_INVALID_UPLOAD_PATH] = 'Ruta de càrrega no vàlida.  El directori no existeix o el servidor web no pot escriure-hi.';
-$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Fitxer no penjat. Si us plau feu enrera i trieu un fitxer abans de clicar Càrrega.';
+$MANTIS_ERROR[ERROR_FILE_NO_UPLOAD_FAILURE] = 'Fitxer no penjat. Tireu enrere i trieu un fitxer abans de clicar Càrrega.';
 $MANTIS_ERROR[ERROR_FILE_MOVE_FAILED] = 'El fitxer penjat no es pot moure al directori de destí. El directori o no existeix o no té permisos d\'escriptura pel webserver.';
 $MANTIS_ERROR[ERROR_BUG_DUPLICATE_SELF] = 'No es pot establir una incidència com a duplicat d\'ella mateixa.';
 $MANTIS_ERROR[ERROR_BUG_REVISION_NOT_FOUND] = 'No s\'ha trobat la revisió de l\'error.';

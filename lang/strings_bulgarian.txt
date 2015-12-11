@@ -849,7 +849,6 @@ $s_sticky = 'Неприятни проблеми';
 $s_sort_label = 'Сортиране по:';
 $s_issue_id = 'Проблем #';
 $s_recently_visited = 'Наскоро посетени';
-$s_filter_match_type = 'Тип на съвпадението';
 $s_filter_match_all = 'Всички условия';
 $s_filter_match_any = 'Всяко условие';
 $s_none = 'Няма';

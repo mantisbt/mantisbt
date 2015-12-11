@@ -43,6 +43,7 @@
  * @author Crazymadlover
  * @author Evropi
  * @author Geraki
+ * @author Glavkos
  * @author Kongr43gpen
  * @author Omnipaedista
  * @author Protnet
@@ -642,7 +643,7 @@ $s_attached_files = 'Συννημένα Αρχεία';
 $s_publish = 'Δημοσίευση';
 $s_no_users_monitoring_bug = 'Δεν υπάρχουν χρήστες να παρακολουθούν το Θέμα.';
 $s_users_monitoring_bug = 'Χρήστες που παρακολουθούν το Θέμα';
-$s_monitoring_user_list = 'Λίστα Χρηστών';
+$s_monitoring_user_list = 'Κατάλογος χρηστών';
 $s_add_custom_field_button = 'Νέο Ειδικό Πεδίο';
 $s_delete_custom_field_button = 'Διαγραφή Ειδικού Πεδίου';
 $s_delete_custom_field_everywhere = 'Διαγραφή Ειδικού Πεδίου Παντού';

@@ -811,7 +811,6 @@ $s_sticky = 'Afichar los bògues recurrents';
 $s_issue_id = 'Bòg #';
 $s_recently_visited = 'Visitqt recentament';
 $s_priority_abbreviation = 'P';
-$s_filter_match_type = 'Tipe de correspondéncia';
 $s_filter_match_all = 'Totas las condicions';
 $s_filter_match_any = 'Quina condicion que siá';
 $s_none = 'cap';
