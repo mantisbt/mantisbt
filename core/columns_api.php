@@ -159,6 +159,8 @@ function columns_get_standard( $p_enabled_columns_only = true ) {
 	# legacy field
 	unset( $t_columns['duplicate_id'] );
 
+	$t_columns['notes'] = null;
+
 	return array_keys( $t_columns );
 }
 
@@ -900,6 +902,21 @@ function print_column_title_description( $p_sort, $p_dir, $p_columns_target = CO
 }
 
 /**
+ * Print table header for notes column.
+ *
+ * @param string  $p_sort           Sort.
+ * @param string  $p_dir            Direction.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
+ * @access public
+ */
+function print_column_title_notes( $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	echo '<th class="column-notes">';
+	echo lang_get( 'bug_notes_title' );
+	echo '</th>';
+}
+
+/**
  * Print table header for column steps to reproduce
  *
  * @param string  $p_sort           Sort.
@@ -1408,6 +1425,20 @@ function print_column_description( BugData $p_bug, $p_columns_target = COLUMNS_T
 	$t_description = string_display_links( $p_bug->description );
 
 	echo '<td class="column-description">', $t_description, '</td>';
+}
+
+/**
+ * Print column content for notes column
+ *
+ * @param BugData $p_bug            BugData object.
+ * @param integer $p_columns_target See COLUMNS_TARGET_* in constant_inc.php.
+ * @return void
+ * @access public
+ */
+function print_column_notes( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
+	$t_notes = bugnote_get_all_visible_as_string( $p_bug->id, /* user_bugnote_order */ 'DESC', /* user_bugnote_limit */ 0 );
+
+	echo '<td class="column-notes">', string_display_links( $t_notes ), '</td>';
 }
 
 /**

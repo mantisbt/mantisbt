@@ -85,12 +85,14 @@ td.my-buglist-description	{ width: 100%; vertical-align: top; }
 /**
  * view_all_bug_page.php
  */
-#buglist td, #buglist th	{ text-align: center; }
+#buglist td { text-align: center; vertical-align: top; }
+#buglist th	{ text-align: center; }
 #buglist .column-summary,
 #buglist .column-description,
+#buglist .column-notes,
 #buglist .column-steps-to-reproduce,
 #buglist .column-additional-information
-	{ text-align: left; }
+	{ text-align: left; vertical-align: top; }
 
 
 tr.bugnote .bugnote-meta { background-color: #c8c8e8; color: #000000; font-weight: bold; width: 25%; line-height: 1.4; vertical-align: top; }

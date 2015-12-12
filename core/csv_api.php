@@ -344,6 +344,18 @@ function csv_format_description( BugData $p_bug ) {
 }
 
 /**
+ * Return the notes associated with the specified bug as a string.
+ *
+ * @param BugData $p_bug A BugData object.
+ * @return string The notes formatted as a string.
+ * @access public
+ */
+function csv_format_notes( BugData $p_bug ) {
+	$t_notes = bugnote_get_all_visible_as_string( $p_bug->id, /* user_bugnote_order */ 'DESC', /* user_bugnote_limit */ 0 );
+	return csv_escape_string( $t_notes );
+}
+
+/**
  * return the steps to reproduce
  * @param BugData $p_bug A BugData object.
  * @return string formatted steps to reproduce

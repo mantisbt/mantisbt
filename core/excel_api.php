@@ -463,6 +463,16 @@ function excel_format_description( BugData $p_bug ) {
 }
 
 /**
+ * Gets the formatted notes field.
+ * @param BugData $p_bug A bug object.
+ * @return string The formatted notes (multi-line).
+ */
+function excel_format_notes( BugData $p_bug ) {
+	$t_notes = bugnote_get_all_visible_as_string( $p_bug->id, /* user_bugnote_order */ 'DESC', /* user_bugnote_limit */ 0 );
+	return excel_prepare_string( $t_notes );
+}
+
+/**
  * Gets the formatted 'steps to reproduce' field.
  * @param BugData $p_bug A bug object.
  * @return string The formatted steps to reproduce (multi-line).
