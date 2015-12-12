@@ -375,18 +375,17 @@ function user_is_monitoring_bug( $p_user_id, $p_bug_id ) {
 }
 
 /**
- * return true if the user has access of ADMINISTRATOR or higher, false otherwise
+ * Check if the specified user is an enabled user with admin access level or above.
  * @param integer $p_user_id A valid user identifier.
- * @return boolean
+ * @return boolean true: admin, false: otherwise.
  */
 function user_is_administrator( $p_user_id ) {
-	$t_access_level = user_get_field( $p_user_id, 'access_level' );
-
-	if( $t_access_level >= config_get_global( 'admin_site_threshold' ) ) {
-		return true;
-	} else {
+	if( !user_is_enabled( $p_user_id ) ) {
 		return false;
 	}
+
+	$t_access_level = user_get_field( $p_user_id, 'access_level' );
+	return $t_access_level >= config_get_global( 'admin_site_threshold' );
 }
 
 /**
@@ -449,13 +448,20 @@ function user_is_enabled( $p_user_id ) {
 }
 
 /**
- * count the number of users at or greater than a specific level
+ * Count the number of users at or greater than a specific level
  *
  * @param integer $p_level Access Level to count users. The default is to include ANYBODY.
- * @return integer
+ * @param bool $p_enabled true: must be enabled, false: must be disabled, null: don't care.
+ * @return integer The number of users.
  */
-function user_count_level( $p_level = ANYBODY ) {
+function user_count_level( $p_level = ANYBODY, $p_enabled = null ) {
 	$t_query = 'SELECT COUNT(id) FROM {user} WHERE access_level>=' . db_param();
+	if( $p_enabled === true ) {
+		$t_query .= ' AND enabled = 1';
+	} else if( $p_enabled === false ) {
+		$t_query .= ' AND enabled = 0';
+	}
+
 	$t_result = db_query( $t_query, array( $p_level ) );
 
 	# Get the list of connected users
