@@ -183,7 +183,7 @@ $t_icon_path = config_get( 'icon_path' );
 
 <form method="post" action="print_all_bug_page.php">
 <?php # CSRF protection not required here - form does not result in modifications ?>
-<table class="width100" cellspacing="1" cellpadding="2px">
+<table id="buglist" class="width100" cellspacing="1" cellpadding="2px">
 <tr>
 	<td class="form-title" colspan="<?php echo $t_num_of_columns / 2 + $t_num_of_columns % 2; ?>">
 		<?php
