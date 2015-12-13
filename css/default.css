@@ -697,6 +697,8 @@ div.form-container label,
 }
 div.form-container .textarea,
 div.form-container .input,
+div.form-container .checkbox,
+div.form-container .select,
 .display-value {
 	width: 65%;
 }
