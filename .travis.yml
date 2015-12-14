@@ -8,13 +8,6 @@ language: php
 # Environment setup and test scripts execution
 #
 
-before_install:
-  # Workaround for failing PHP 5.5 builds, per https://github.com/travis-ci/travis-ci/issues/5206
-  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.5" ]]; then
-        curl -s -o $HOME/.phpenv/versions/5.5/bin/phpunit https://phar.phpunit.de/phpunit-old.phar;
-        chmod +x $HOME/.phpenv/versions/5.5/bin/phpunit;
-    fi
-
 before_script:
   - ./scripts/travis_before_script.sh
 
