@@ -279,7 +279,7 @@ foreach ( $t_related_custom_field_ids as $t_cf_id ) {
 	# If the custom field is not set and is required, then complain!
 	if( !gpc_isset_custom_field( $t_cf_id, $t_cf_def['type'] ) ) {
 		if( $t_cf_def[$t_cf_require_check] &&
-			$f_update_type == BUG_UPDATE_TYPE_NORMAL &&
+			custom_field_is_present( $t_cf_id ) &&
 			custom_field_has_write_access( $t_cf_id, $f_bug_id ) ) {
 			# A value for the custom field was expected however
 			# no value was given by the user.
