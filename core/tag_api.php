@@ -191,6 +191,68 @@ function tag_parse_string( $p_string ) {
 }
 
 /**
+ * Attaches a bunch of tags to the specified issue.
+ *
+ * @param int    $p_bug_id     The bug id.
+ * @param string $p_tag_string String of tags separated by configured separator.
+ * @param int    $p_tag_id     Tag id to add or 0 to skip.
+ * @return array|bool true for success, otherwise array of failures.  The array elements follow the tag_parse_string()
+ *                    format.
+ */
+function tag_attach_many( $p_bug_id, $p_tag_string, $p_tag_id = 0 ) {
+	# If no work, then there is no need to do access check.
+	if( $p_tag_id === 0 && is_blank( $p_tag_string ) ) {
+		return true;
+	}
+
+	access_ensure_bug_level( config_get( 'tag_attach_threshold' ), $p_bug_id );
+
+	$t_tags = tag_parse_string( $p_tag_string );
+	$t_can_create = access_has_global_level( config_get( 'tag_create_threshold' ) );
+
+	$t_tags_create = array();
+	$t_tags_attach = array();
+	$t_tags_failed = array();
+
+	foreach ( $t_tags as $t_tag_row ) {
+		if( -1 == $t_tag_row['id'] ) {
+			if( $t_can_create ) {
+				$t_tags_create[] = $t_tag_row;
+			} else {
+				$t_tags_failed[] = $t_tag_row;
+			}
+		} else if( -2 == $t_tag_row['id'] ) {
+			$t_tags_failed[] = $t_tag_row;
+		} else {
+			$t_tags_attach[] = $t_tag_row;
+		}
+	}
+
+	if( 0 < $p_tag_id && tag_exists( $p_tag_id ) ) {
+		$t_tags_attach[] = tag_get( $p_tag_id );
+	}
+
+	# failed to attach at least one tag
+	if( count( $t_tags_failed ) > 0 ) {
+		return $t_tags_failed;
+	}
+
+	foreach( $t_tags_create as $t_tag_row ) {
+		$t_tag_row['id'] = tag_create( $t_tag_row['name'] );
+		$t_tags_attach[] = $t_tag_row;
+	}
+
+	foreach( $t_tags_attach as $t_tag_row ) {
+		if( !tag_bug_is_attached( $t_tag_row['id'], $p_bug_id ) ) {
+			tag_bug_attach( $t_tag_row['id'], $p_bug_id );
+		}
+	}
+
+	event_signal( 'EVENT_TAG_ATTACHED', array( $p_bug_id, $t_tags_attach ) );
+	return true;
+}
+
+/**
  * Parse a filter string to extract existing and new tags.
  * When given a string, parses for tag names separated by configured separator,
  * then returns an array of tag rows for each tag.  Existing tags get the full

@@ -137,6 +137,8 @@ $f_files                            = gpc_get_file( 'ufile', null );
 $f_report_stay                      = gpc_get_bool( 'report_stay', false );
 $f_copy_notes_from_parent           = gpc_get_bool( 'copy_notes_from_parent', false );
 $f_copy_attachments_from_parent     = gpc_get_bool( 'copy_attachments_from_parent', false );
+$f_tag_select                       = gpc_get_int( 'tag_select' );
+$f_tag_string                       = gpc_get_string( 'tag_string' );
 
 if( access_has_project_level( config_get( 'roadmap_update_threshold' ), $t_bug_data->project_id ) ) {
 	$t_bug_data->target_version = gpc_get_string( 'target_version', '' );
@@ -303,6 +305,19 @@ if( !$f_report_stay ) {
 }
 
 html_page_top2();
+
+# Process tags
+if( !is_blank( $f_tag_string ) || $f_tag_select != 0 ) {
+	$t_result = tag_attach_many( $t_bug_id, $f_tag_string, $f_tag_select );
+	if ( $t_result !== true ) {
+		$t_tags_failed = $t_result;
+		if( count( $t_tags_failed ) > 0 ) {
+			echo '<div class="failure-msg">';
+			print_tagging_errors_table( $t_tags_failed );
+			echo '</div>';
+		}
+	}
+}
 
 echo '<div class="success-msg">';
 echo lang_get( 'operation_successful' ) . '<br />';

@@ -201,6 +201,14 @@ $t_show_os = $t_show_profiles && in_array( 'os', $t_fields );
 $t_show_os_version = $t_show_profiles && in_array( 'os_version', $t_fields );
 $t_show_resolution = in_array( 'resolution', $t_fields );
 $t_show_status = in_array( 'status', $t_fields );
+$t_show_tags =
+	in_array( 'tags', $t_fields ) &&
+	access_has_global_level( config_get( 'tag_view_threshold', /* default */ null, /* user */ null, $t_project_id ) );
+$t_can_attach_tag =
+	$t_show_tags &&
+	access_has_project_level(
+		config_get( 'tag_attach_threshold', /* default */ null, /* user */ null, $t_project_id ),
+		$t_project_id );
 
 $t_show_versions = version_should_show_product_version( $t_project_id );
 $t_show_product_version = $t_show_versions && in_array( 'product_version', $t_fields );
@@ -534,6 +542,19 @@ if( $t_show_attachments ) {
 				</span>
 				<span class="label-style"></span>
 			</div>
+<?php
+	}
+
+	# Display tags fields
+	if( $t_show_tags ) { ?>
+		<div class="field-container">
+			<label><span><?php echo lang_get( 'tag_attach_long' ) ?></span></label>
+			<span class="input">
+				<label><?php print_tag_input( '' ); ?></label>
+				</span>
+			<span class="label-style"></span>
+		</div>
+
 <?php
 	}
 

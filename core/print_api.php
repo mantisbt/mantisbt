@@ -394,6 +394,38 @@ function print_tag_input( $p_bug_id = 0, $p_string = '' ) {
 }
 
 /**
+ * Print out a list of errors for tags that failed validation or access check.
+ *
+ * @param array $p_tags_failed The array of failed tags.
+ * @return void
+ */
+function print_tagging_errors_table( $p_tags_failed ) {
+	?>
+	<div id="manage-user-div" class="form-container">
+		<h2><?php echo lang_get( 'tag_attach_failed' ) ?></h2>
+		<table><tbody>
+		<?php
+		foreach( $p_tags_failed as $t_tag_row ) {
+			echo '<tr>';
+
+			echo '<td>', string_html_specialchars( $t_tag_row['name'] ), '</td>';
+
+			if( -1 == $t_tag_row['id'] ) {
+				$t_error = lang_get( 'tag_create_denied' );
+			} else if( -2 == $t_tag_row['id'] ) {
+				$t_error = lang_get( 'tag_invalid_name' );
+			}
+
+			echo '<td>', $t_error, '</td>';
+			echo '</tr>';
+		}
+		?>
+		</tbody></table>
+	</div>
+	<?php
+}
+
+/**
  * Print the drop-down combo-box of existing tags.
  * When passed a bug ID, the option list will not contain any tags attached to the given bug.
  * @param integer $p_bug_id A bug identifier.
