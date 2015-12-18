@@ -132,7 +132,7 @@ if( $t_verify || $t_reset_password ) {
 
 $t_force_pw_reset_html = '';
 if( $t_force_pw_reset ) {
-	$t_force_pw_reset_html = ' class="has-required"';
+	$t_force_pw_reset_html = ' class="required"';
 }
 ?>
 

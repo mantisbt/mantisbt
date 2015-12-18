@@ -232,7 +232,7 @@ if( $t_show_attachments ) {
 ?>
 <div id="report-bug-div" class="form-container">
 	<form id="report-bug-form" method="post" <?php echo $t_form_encoding; ?> action="bug_report.php?posted=1">
-		<fieldset class="has-required">
+		<fieldset class="required">
 			<legend><span><?php echo lang_get( 'enter_report_details_title' ) ?></span></legend>
 			<?php echo form_security_field( 'bug_report' ) ?>
 			<input type="hidden" name="m_id" value="<?php echo $f_master_bug_id ?>" />

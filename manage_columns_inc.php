@@ -80,7 +80,7 @@ $t_excel = implode( ', ', $t_columns );
 
 <div id="manage-columns-div" class="form-container">
 	<form id="manage-columns-form" method="post" action="manage_config_columns_set.php">
-		<fieldset class="has-required">
+		<fieldset class="required">
 			<legend><span><?php echo lang_get( 'manage_columns_config' ) ?></span></legend>
 			<?php
 			if( $t_account_page ) {

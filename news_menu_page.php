@@ -54,7 +54,7 @@ html_page_top( lang_get( 'edit_news_link' ) );
 
 <div id="news-add-div" class="form-container">
 	<form id="news-add-form" method="post" action="news_add.php">
-		<fieldset class="has-required">
+		<fieldset class="required">
 			<legend><span><?php echo lang_get( 'add_news_title' ) ?></span></legend>
 			<?php echo form_security_field( 'news_add' ); ?>
 			<div class="field-container">

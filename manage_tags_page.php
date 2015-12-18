@@ -164,7 +164,7 @@ print_manage_menu( 'manage_tags_page.php' ); ?>
 <div id="manage-tags-create-div" class="form-container">
 	<a name="tagcreate" />
 	<form id="manage-tags-create-form" method="post" action="tag_create.php">
-		<fieldset class="has-required">
+		<fieldset class="required">
 			<legend><span><?php echo lang_get( 'tag_create' ) ?></span></legend>
 			<?php echo form_security_field( 'tag_create' ); ?>
 			<div class="field-container">
