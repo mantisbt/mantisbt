@@ -216,6 +216,15 @@ $g_display_errors = array(
 						</listitem>
 					</varlistentry>
 					<varlistentry>
+						<term>LOG_EMAIL_VERBOSE</term>
+						<listitem>
+							<para>
+								Enables extra logging for troubleshooting internals
+								of email queuing and sending.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
 						<term>LOG_EMAIL_RECIPIENT</term>
 						<listitem>
 							<para>logs the details of email recipient

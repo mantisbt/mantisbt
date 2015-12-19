@@ -4193,7 +4193,7 @@ $g_stop_on_errors = OFF;
  * This controls the type of logging information recorded.
  * The available log channels are:
  *
- * LOG_NONE, LOG_EMAIL, LOG_EMAIL_RECIPIENT, LOG_FILTERING,
+ * LOG_NONE, LOG_EMAIL, LOG_EMAIL_RECIPIENT, LOG_EMAIL_VERBOSE, LOG_FILTERING,
  * LOG_AJAX, LOG_LDAP, LOG_DATABASE, LOG_WEBSERVICE, LOG_ALL
  *
  * and can be combined using

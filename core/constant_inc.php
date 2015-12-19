@@ -542,6 +542,7 @@ define( 'LOG_AJAX', 8 );            # logging for AJAX / XmlHttpRequests
 define( 'LOG_LDAP', 16 );           # logging for LDAP
 define( 'LOG_DATABASE', 32 );       # logging for Database
 define( 'LOG_WEBSERVICE', 64 );     # logging for Web Service Requests
+define( 'LOG_EMAIL_VERBOSE', 128 ); # logging for verbose email internals
 
 # COLUMNS_TARGET_*
 define( 'COLUMNS_TARGET_VIEW_PAGE', 1 );
