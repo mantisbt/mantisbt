@@ -532,6 +532,7 @@ div.form-container fieldset legend {
 	font-weight: bold;
 }
 div.form-container fieldset label.required:before,
+th label.required:before,
 td label.required:before {
 	font-size: 8pt;
 	content: '* ';

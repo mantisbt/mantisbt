@@ -91,7 +91,7 @@ html_page_top();
 </tr>
 <tr class="row-1">
 	<th class="category" width="20%">
-		<span class="required">*</span><?php echo lang_get( 'title' ) ?>
+		<label class="required"><span><?php echo lang_get( 'title' ) ?></span></label>
 	</th>
 	<td width="80%">
 		<input type="text" name="title" size="70" maxlength="250" value="<?php echo $v_title ?>" />
