@@ -299,8 +299,8 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 	$t_result = db_query( $t_query, array( $p_bug_id ) );
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_user_id = $t_row['user_id'];
 		if ( $t_monitoring_enabled ) {
-			$t_user_id = $t_row['user_id'];
 			$t_recipients[$t_user_id] = true;
 			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, add @U%d (monitoring)', $p_bug_id, $t_user_id );
 		} else {
@@ -318,8 +318,8 @@ function email_collect_recipients( $p_bug_id, $p_notify_type, array $p_extra_use
 	$t_query = 'SELECT DISTINCT reporter_id FROM {bugnote} WHERE bug_id = ' . db_param();
 	$t_result = db_query( $t_query, array( $p_bug_id ) );
 	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_user_id = $t_row['reporter_id'];
 		if ( $t_notes_enabled ) {
-			$t_user_id = $t_row['reporter_id'];
 			$t_recipients[$t_user_id] = true;
 			log_event( LOG_EMAIL_RECIPIENT, 'Issue = #%d, add @U%d (note author)', $p_bug_id, $t_user_id );
 		} else {
